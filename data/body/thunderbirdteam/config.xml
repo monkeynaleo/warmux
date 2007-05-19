@@ -54,7 +54,7 @@
 <sprite name="body-normal" type="body">
 	<image file="body.png"/>
 	<anchor dx="9" dy="20"/>
-	<attached member_type="head" frame="*" dx="10" dy="3"/>
+	<attached member_type="head" frame="*" dx="9" dy="6"/>
 	<attached member_type="wingright" frame="*" dx="4" dy="16"/>
 	<attached member_type="wingleft" frame="*" dx="11" dy="17"/>
 	<attached member_type="foot-left" frame="*" dx="12" dy="36"/>
@@ -64,11 +64,11 @@
 
 <!-- ###### Head ###### -->
 <sprite name="head" type="head">
-	<image file="eyes.png"/>
-	<anchor dx="1" dy="1"/>
-	<attached member_type="nozzle" frame="*" dx="4" dy="6"/>
-	<attached member_type="hair" frame="*" dx="-1" dy="-2"/>
-	<attached member_type="helmet" frame="*" dx="4" dy="8"/>
+	<image file="nozzle.png"/>
+	<anchor dx="-1" dy="1"/>
+	<attached member_type="eyes-normal" frame="*" dx="2" dy="0"/>
+	<attached member_type="hair" frame="*" dx="-3" dy="-3"/>
+	<attached member_type="helmet" frame="*" dx="-1" dy="4"/>
 </sprite>
 
 <sprite name="nozzle" type="nozzle">
@@ -79,6 +79,25 @@
 <sprite name="hair" type="hair">
 	<image file="hair.png"/>
 	<anchor dx="4" dy="4"/>
+</sprite>
+
+
+<!-- ###### Eyes ###### -->
+<sprite name="eyes-normal" type="eyes-normal">
+	<image file="eyes.png"/>
+	<anchor dx="4" dy="3"/>
+	<attached member_type="pupil-right" frame="*" dx="3" dy="4"/>
+	<attached member_type="pupil-left" frame="*" dx="5" dy="4"/>
+</sprite>
+
+<sprite name="pupil-right" type="pupil-right" >
+	<image file="pupil.png"/>
+	<anchor dx="1" dy="1"/>
+</sprite>
+
+<sprite name="pupil-left" type="pupil-left" >
+	<image file="pupil.png"/>
+	<anchor dx="1" dy="1"/>
 </sprite>
 
 <!-- ###### Wings ###### -->
@@ -155,8 +174,10 @@
 	<member name="wingleft"/>
 	<member name="foot-left"/>
 	<member name="body-normal"/>
-	<member name="nozzle"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="hair"/>
 	<member name="foot-right"/>
 	<member name="wingright"/>
@@ -168,8 +189,10 @@
 	<member name="wingleft"/>
 	<member name="foot-left"/>
 	<member name="body-normal"/>
-	<member name="nozzle"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="hair"/>
 	<member name="foot-right"/>
 	<member name="wingright"/>
@@ -179,8 +202,10 @@
 	<member name="wingleft"/>
 	<member name="foot-left"/>
 	<member name="body-normal"/>
-	<member name="nozzle"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="hair"/>
 	<member name="foot-right"/>
 	<member name="wingright"/>
@@ -192,8 +217,10 @@
 	<member name="wingleft"/>
 	<member name="foot-left"/>
 	<member name="body-normal"/>
-	<member name="nozzle"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="hair"/>
 	<member name="helmet"/>
 	<member name="foot-right"/>
@@ -205,8 +232,10 @@
 	<member name="wingleft"/>
 	<member name="foot-left"/>
 	<member name="body-normal"/>
-	<member name="nozzle"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="hair"/>
 	<member name="foot-right"/>
 	<member name="yoyo"/>
@@ -219,8 +248,10 @@
 	<member name="wingleft"/>
 	<member name="foot-left"/>
 	<member name="body-normal"/>
-	<member name="nozzle"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="hair"/>
 	<member name="foot-right"/>
 	<member name="wingright"/>
@@ -243,8 +274,10 @@
 	<member name="wingleft"/>
 	<member name="foot-left"/>
 	<member name="body-normal"/>
-	<member name="nozzle"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="hair"/>
 	<member name="construct"/>
 	<member name="foot-right"/>
@@ -257,15 +290,16 @@
 	<member name="wingleft"/>
 	<member name="foot-left"/>
 	<member name="body-normal"/>
-	<member name="nozzle"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="hair"/>
 	<member name="construct"/>
 	<member name="foot-right"/>
 	<member name="wingright"/>
 	<member name="weapon"/>
 </clothe>
-
 
 
 
