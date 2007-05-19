@@ -75,7 +75,26 @@
 <sprite name="head" type="head">
 	<image file="head.png"/>
 	<anchor dx="7" dy="11"/>
+	<attached member_type="eyes-normal" frame="*" dx="15" dy="9"/>
 	<attached member_type="helmet" frame="*" dx="7" dy="10"/>
+</sprite>
+
+<!-- ###### Eyes ###### -->
+<sprite name="eyes-normal" type="eyes-normal">
+	<image file="eyes.png"/>
+	<anchor dx="4" dy="3"/>
+	<attached member_type="pupil-right" frame="*" dx="3" dy="4"/>
+	<attached member_type="pupil-left" frame="*" dx="5" dy="4"/>
+</sprite>
+
+<sprite name="pupil-right" type="pupil-right" >
+	<image file="pupil.png"/>
+	<anchor dx="1" dy="1"/>
+</sprite>
+
+<sprite name="pupil-left" type="pupil-left" >
+	<image file="pupil.png"/>
+	<anchor dx="1" dy="1"/>
 </sprite>
 
 <!-- ###### Arms ###### -->
@@ -184,6 +203,9 @@
 	<member name="foot-left"/>
 	<member name="body-normal"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
 	<member name="weapon"/>
@@ -199,6 +221,9 @@
 	<member name="body-normal"/>
 	<member name="jetpack-right"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="jetpack-belt"/>
 	<member name="arm-right"/>
@@ -212,6 +237,9 @@
 	<member name="jetpack-left"/>
 	<member name="body-normal"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="jetpack-belt"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
@@ -227,6 +255,9 @@
 	<member name="foot-left"/>
 	<member name="body-normal"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="construct"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
@@ -240,6 +271,9 @@
 	<member name="foot-left"/>
 	<member name="body-normal"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="construct"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
@@ -253,6 +287,9 @@
 	<member name="foot-left"/>
 	<member name="body-normal"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
 	<member name="helmet"/>
@@ -265,6 +302,9 @@
 	<member name="foot-left"/>
 	<member name="body-normal"/>
 	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="yoyo"/>
 	<member name="arm-right"/>
