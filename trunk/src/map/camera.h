@@ -32,13 +32,16 @@ class Camera : public Rectanglei
   Camera(const Camera&);
   const Camera& operator=(const Camera&);
 
-public:
-  bool auto_crop;
-
 private:
+  bool auto_crop;
   PhysicalObj* followed_object;
   bool throw_camera;
   bool follow_closely;
+
+  Point2i FreeDegrees() const;
+  Point2i NonFreeDegrees() const;
+  bool HasFixedX() const;
+  bool HasFixedY() const;
 
 public:
   Camera();
@@ -57,11 +60,6 @@ public:
   bool IsVisible(const PhysicalObj &obj);
 
   void Refresh();
-
-  bool HasFixedX() const;
-  bool HasFixedY() const;
-  Point2i FreeDegrees() const;
-  Point2i NonFreeDegrees() const;
 
   void CenterOn(const PhysicalObj &obj);
   void CenterOnFollowedObject();
