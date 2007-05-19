@@ -46,13 +46,16 @@
 #include "star.h"
 
 Particle::Particle(const std::string &name) :
-  PhysicalObj(name)
+  PhysicalObj(name),
+  on_top(true), // if true displayed on top of characters and weapons
+  m_initial_time_to_live(20),
+  m_left_time_to_live(0),
+  m_check_move_on_end_turn(false),
+  m_time_between_scale(-1),
+  m_last_refresh(Time::GetInstance()->Read()),
+  image(NULL)
 {
   SetCollisionModel(true, false, false);
-  m_initial_time_to_live = 20;
-  m_check_move_on_end_turn = false;
-  m_left_time_to_live = 0;
-  m_last_refresh = Time::GetInstance()->Read();
 }
 
 Particle::~Particle()
@@ -110,11 +113,10 @@ bool Particle::StillUseful()
 
 // ==============================================
 
-ParticleEngine::ParticleEngine(uint time)
-{
-  m_time_between_add = time ;
-  m_last_refresh = Time::GetInstance()->Read();
-}
+ParticleEngine::ParticleEngine(uint time):
+  m_last_refresh(Time::GetInstance()->Read()),
+  m_time_between_add(time)
+{}
 
 
 void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
@@ -208,7 +210,7 @@ void ParticleEngine::AddNow(const Point2i &position,
       break;
     case particle_GROUND : particle = new GroundParticle(Point2i(10,10), position);
       break;
-    case particle_AIR_HAMMER : particle = new GroundParticle(Point2i(21,18), position); 
+    case particle_AIR_HAMMER : particle = new GroundParticle(Point2i(21,18), position);
       // Half the size of the airhammer impact
       // Dirty, but we have no way to read the
       // impact size from here ...
@@ -221,7 +223,7 @@ void ParticleEngine::AddNow(const Point2i &position,
     }
 
     if (particle != NULL) {
-      
+
       if( norme == -1 )
 	tmp_norme = double(randomObj.GetLong(0, 5000))/100;
       else
@@ -316,7 +318,7 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
 }
 
 void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius, ESmokeStyle &style)
-{  
+{
   if (!sprites_loaded)
     return;
 

@@ -32,25 +32,25 @@ const uint dig_ground_time = 1000;
 ExplosiveWeaponConfig fire_cfg;
 
 FireParticle::FireParticle() :
-  Particle("fire_particle")
+  Particle("fire_particle"),
+  direction(randomObj.GetBool() ? -1 : 1),
+  creation_time(Time::GetInstance()->Read()),
+  on_ground(false),
+  oscil_delta(randomObj.GetLong(0, dig_ground_time))
 {
   SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = true;
+
   fire_cfg.damage = 1;
   fire_cfg.explosion_range = 5;
   fire_cfg.blast_range = 0;
   fire_cfg.blast_force = 0;
   fire_cfg.particle_range = 6;
-//  direction = randomSync.GetBool() ? -1 : 1;
-//  oscil_delta = randomSync.GetLong(0, dig_ground_time);
-  direction = randomObj.GetBool() ? -1 : 1;
-  oscil_delta = randomObj.GetLong(0, dig_ground_time);
-  on_ground = false;
+
   image = ParticleEngine::GetSprite(FIRE_spr);
   image->SetRotation_HotSpot(Point2i(image->GetWidth()/2,image->GetHeight()));
-  creation_time = Time::GetInstance()->Read();
-  SetSize( image->GetSize() );
+  SetSize(image->GetSize());
   SetTestRect((image->GetWidth() / 2)-1, (image->GetWidth() / 2) - 1,
       (image->GetHeight()/2)-1,1);
 }
