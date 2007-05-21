@@ -82,7 +82,8 @@ void GameInit::InitGameData_NetServer()
   Network::GetInstance()->SendAction ( &a_change_state );
 
   // Wait for all clients to be ready to play
-  while (Network::GetInstance()->state != Network::NETWORK_READY_TO_PLAY)
+  while (Network::GetInstance()->state != Network::NETWORK_READY_TO_PLAY 
+	 && Network::IsConnected())
   {
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(200);
@@ -105,7 +106,8 @@ void GameInit::InitGameData_NetClient()
   Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
 
   Network::GetInstance()->SendAction (&a_change_state);
-  while (Network::GetInstance()->state != Network::NETWORK_READY_TO_PLAY)
+  while (Network::GetInstance()->state != Network::NETWORK_READY_TO_PLAY
+	 && Network::IsConnected())
   {
     // The server is placing characters on the map
     // We can receive new team / map selection
@@ -198,6 +200,10 @@ void GameInit::InitData()
 
 void GameInit::Init()
 {
+  // Disable sound during the loading of data
+  bool enable_sound = jukebox.UseEffects();
+  jukebox.ActiveEffects(false);
+
   // Display Loading screen
   LoadingScreen::GetInstance()->DrawBackground();
   Mouse::GetInstance()->Hide();
@@ -219,6 +225,9 @@ void GameInit::Init()
 
   // First "selection" of a weapon -> fix bug 6576
   ActiveTeam().AccessWeapon().Select();
+
+  // Loading is finished, sound effects can be enabled again
+  jukebox.ActiveEffects(enable_sound);
 
   GameLoop::GetInstance()->Init();
 }
