@@ -204,10 +204,10 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v)
                                   type_size, name_size, score_size);
   statistics_box->AddWidget(biggest_traitor);
 
-  most_stupid = new ResultBox(Rectanglei(0,0,0, max_height),
+  most_clumsy = new ResultBox(Rectanglei(0,0,0, max_height),
 			      false, _("Most clumsy"), Font::FONT_BIG, Font::FONT_NORMAL,
 			      type_size, name_size, score_size);
-  statistics_box->AddWidget(most_stupid);
+  statistics_box->AddWidget(most_clumsy);
 
   widgets.AddWidget(statistics_box);
 }
@@ -286,7 +286,7 @@ void ResultsMenu::SetResult(int i)
   if (winner_box)
     winner_box->ForceRedraw();
 
-  DrawPodium(Point2i(50,300));
+  DrawPodium(Point2i(70,350));
 
   index = i;
   if (index < 0) 
@@ -336,11 +336,11 @@ void ResultsMenu::SetResult(int i)
     biggest_traitor->SetNoResult();
 
   // Most clumsy
-  player = res->getMostStupid();
+  player = res->getMostClumsy();
   if (player)
-    most_stupid->SetResult(player->GetName(), player->GetDamageStats().GetItselfDamage(), player->GetTeam().flag);
+    most_clumsy->SetResult(player->GetName(), player->GetDamageStats().GetItselfDamage(), player->GetTeam().flag);
   else
-    most_stupid->SetNoResult();
+    most_clumsy->SetNoResult();
 
   statistics_box->ForceRedraw();
 }
