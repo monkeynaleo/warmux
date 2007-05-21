@@ -37,7 +37,6 @@
 #include "tool/math_tools.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
-#include "weapon/ninja_rope.h"
 #include "weapon/launcher.h"
 
 const int Y_OBJET_MIN = -10000;
@@ -319,7 +318,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   } while (0 < lg);
 
   // Notify the weapon that there is a movement
-  // Useful for ninja for example
+  // Useful for grapple for example
   ActiveTeam().AccessWeapon().NotifyMove(collision);
 
   if ( collision == NO_COLLISION ) // Nothing more to do!

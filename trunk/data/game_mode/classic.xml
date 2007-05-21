@@ -71,7 +71,7 @@
       <lowgrav ammo="1">1</lowgrav>
       <m16 ammo="1">1</m16>
       <minelauncher ammo="2">1</minelauncher>
-      <ninjarope ammo="2">1</ninjarope>
+      <grapple ammo="2">1</grapple>
       <parachute ammo="2">1</parachute>
       <polecatlauncher ammo="1">1</polecatlauncher>
       <riot_bomb ammo="1">1</riot_bomb>
@@ -299,7 +299,7 @@
       <escape_time>2</escape_time>
     </minelauncher>
 
-    <ninjarope>
+    <grapple>
       <nb_ammo>5</nb_ammo>
       <change_weapon>1</change_weapon>
       <min_angle>0</min_angle>
@@ -307,7 +307,7 @@
       <max_rope_length>500</max_rope_length>
       <automatic_growing_speed>12</automatic_growing_speed>
       <push_force>15</push_force>
-    </ninjarope>
+    </grapple>
 
     <parachute>
       <nb_ammo>2</nb_ammo>

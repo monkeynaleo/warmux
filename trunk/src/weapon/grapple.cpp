@@ -16,10 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Ninja-rope
+ * Grapple
  *****************************************************************************/
 
-#include "ninja_rope.h"
+#include "grapple.h"
 #include <math.h>
 #include "explosion.h"
 #include "game/config.h"
@@ -77,15 +77,15 @@ bool find_first_contact_point (Point2i from, double angle, int length,
   return false ;
 }
 
-NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new NinjaRopeConfig())
+Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
 {
-  m_name = _("Ninjarope");
+  m_name = _("Grapple");
   m_category = MOVE;
   use_unit_on_first_shoot = false;
 
-  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
+  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"grapple_hook");
   m_hook_sprite->EnableRotationCache(32);
-  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjanode");
+  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"grapple_node");
 
   m_is_active = false;
   m_attaching = false;
@@ -94,7 +94,7 @@ NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new NinjaRopeCon
   delta_len = 0 ;
 }
 
-bool NinjaRope::p_Shoot()
+bool Grapple::p_Shoot()
 {
   last_broken_node_angle = 100;
 
@@ -107,7 +107,7 @@ bool NinjaRope::p_Shoot()
   return true;
 }
 
-bool NinjaRope::TryAttachRope()
+bool Grapple::TryAttachRope()
 {
   Point2i pos;
   uint length;
@@ -147,12 +147,12 @@ bool NinjaRope::TryAttachRope()
 	return false;
 
       // The rope reaches the fixation point. Let's fix it !
-      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
+      Action* a = new Action(Action::ACTION_WEAPON_GRAPPLE);
       a->Push(ATTACH_ROPE);
       a->Push(contact_point);
       ActionHandler::GetInstance()->NewAction(a);
 
-      MSG_DEBUG("ninja_rope.hook", "Creating ATTACH_ROPE Action");
+      MSG_DEBUG("grapple.hook", "Creating ATTACH_GRAPPLE Action");
       return true;
     }
 
@@ -166,7 +166,7 @@ bool NinjaRope::TryAttachRope()
   return false;
 }
 
-bool NinjaRope::TryAddNode(int CurrentSense)
+bool Grapple::TryAddNode(int CurrentSense)
 {
   int lg;
   Point2d V;
@@ -200,7 +200,7 @@ bool NinjaRope::TryAddNode(int CurrentSense)
       AttachNode(contact_point, rope_angle, CurrentSense);
 
       // Send node addition over the network
-      Action a(Action::ACTION_WEAPON_NINJAROPE);
+      Action a(Action::ACTION_WEAPON_GRAPPLE);
       a.Push(ATTACH_NODE);
       a.Push(contact_point);
       a.Push(rope_angle);
@@ -213,7 +213,7 @@ bool NinjaRope::TryAddNode(int CurrentSense)
   return false;
 }
 
-bool NinjaRope::TryBreakNode(int currentSense)
+bool Grapple::TryBreakNode(int currentSense)
 {
   bool breakNode = false;
 
@@ -266,7 +266,7 @@ bool NinjaRope::TryBreakNode(int currentSense)
       DetachNode();
 
       // Send node suppression over the network
-      Action a(Action::ACTION_WEAPON_NINJAROPE);
+      Action a(Action::ACTION_WEAPON_GRAPPLE);
       a.Push(DETACH_NODE);
       Network::GetInstance()->SendAction(&a);
     }
@@ -274,7 +274,7 @@ bool NinjaRope::TryBreakNode(int currentSense)
   return breakNode ;
 }
 
-void NinjaRope::NotifyMove(bool collision)
+void Grapple::NotifyMove(bool collision)
 {
   bool addNode = false;
   double angularSpeed;
@@ -316,7 +316,7 @@ void NinjaRope::NotifyMove(bool collision)
   while (TryBreakNode(currentSense));
 }
 
-void NinjaRope::Refresh()
+void Grapple::Refresh()
 {
   if (!m_is_active)
     return ;
@@ -331,7 +331,7 @@ void NinjaRope::Refresh()
   SendActiveCharacterInfo(true);
 }
 
-void NinjaRope::Draw()
+void Grapple::Draw()
 {
   int x, y;
   double angle, prev_angle;
@@ -400,26 +400,26 @@ void NinjaRope::Draw()
   m_hook_sprite->Draw( rope_nodes.front().pos - m_hook_sprite->GetSize()/2);
 }
 
-void NinjaRope::p_Deselect()
+void Grapple::p_Deselect()
 {
   DetachRope();
 }
 
 // force detaching rope if time is out
-void NinjaRope::SignalTurnEnd()
+void Grapple::SignalTurnEnd()
 {
   p_Deselect();
 }
 
-void NinjaRope::ActionStopUse()
+void Grapple::ActionStopUse()
 {
   DetachRope();
 }
 
 
-void NinjaRope::AttachRope(Point2i contact_point)
+void Grapple::AttachRope(Point2i contact_point)
 {
-  MSG_DEBUG("ninja_rope.hook", "** AttachRope %d,%d", contact_point.x, contact_point.y);
+  MSG_DEBUG("grapple.hook", "** AttachRope %d,%d", contact_point.x, contact_point.y);
 
   m_attaching = false;
   m_is_active = true;
@@ -456,7 +456,7 @@ void NinjaRope::AttachRope(Point2i contact_point)
   camera.SetCloseFollowing(true);
 }
 
-void NinjaRope::DetachRope()
+void Grapple::DetachRope()
 {
   ActiveCharacter().UnsetPhysFixationPoint() ;
   rope_nodes.clear();
@@ -464,7 +464,7 @@ void NinjaRope::DetachRope()
   camera.SetCloseFollowing(false);
 }
 
-void NinjaRope::AttachNode(Point2i contact_point,
+void Grapple::AttachNode(Point2i contact_point,
 			   double angle,
 			   int sense)
 {
@@ -487,17 +487,17 @@ void NinjaRope::AttachNode(Point2i contact_point,
   node.sense = sense;
   rope_nodes.push_back(node);
 
-  MSG_DEBUG("ninja_rope.node", "+ %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+  MSG_DEBUG("grapple.node", "+ %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
 }
 
-void NinjaRope::DetachNode()
+void Grapple::DetachNode()
 {
   assert(rope_nodes.size() >= 1);
 
   { // for debugging only
     rope_node_t node;
     node = rope_nodes.back();
-    MSG_DEBUG("ninja_rope.node", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+    MSG_DEBUG("grapple.node", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
   }
 
   // remove last node
@@ -517,13 +517,13 @@ void NinjaRope::DetachNode()
 
 // =========================== Moves management
 
-void NinjaRope::SetRopeSize(double length)
+void Grapple::SetRopeSize(double length)
 {
   double delta = length - ActiveCharacter().GetRopeLength();
   ActiveCharacter().ChangePhysRopeSize (delta);
 }
 
-void NinjaRope::GoUp()
+void Grapple::GoUp()
 {
   if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
     return;
@@ -535,7 +535,7 @@ void NinjaRope::GoUp()
   delta_len = 0 ;
 }
 
-void NinjaRope::GoDown()
+void Grapple::GoDown()
 {
   if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
     return;
@@ -550,14 +550,14 @@ void NinjaRope::GoDown()
   delta_len = 0 ;
 }
 
-void NinjaRope::GoRight()
+void Grapple::GoRight()
 {
   go_right = true ;
   ActiveCharacter().SetExternForce(cfg().push_force,0);
   ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
 }
 
-void NinjaRope::StopRight()
+void Grapple::StopRight()
 {
   go_right = false ;
 
@@ -567,14 +567,14 @@ void NinjaRope::StopRight()
   ActiveCharacter().SetExternForce(0,0);
 }
 
-void NinjaRope::GoLeft()
+void Grapple::GoLeft()
 {
   go_left = true ;
   ActiveCharacter().SetExternForce(-cfg().push_force,0);
   ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
 }
 
-void NinjaRope::StopLeft()
+void Grapple::StopLeft()
 {
   go_left = false ;
 
@@ -586,7 +586,7 @@ void NinjaRope::StopLeft()
 
 // =========================== Keys management
 
-void NinjaRope::HandleKeyPressed_Up()
+void Grapple::HandleKeyPressed_Up()
 {
   if (m_is_active)
     GoUp();
@@ -594,7 +594,7 @@ void NinjaRope::HandleKeyPressed_Up()
     ActiveCharacter().HandleKeyPressed_Up();
 }
 
-void NinjaRope::HandleKeyRefreshed_Up()
+void Grapple::HandleKeyRefreshed_Up()
 {
   if (m_is_active)
     GoUp();
@@ -602,13 +602,13 @@ void NinjaRope::HandleKeyRefreshed_Up()
     ActiveCharacter().HandleKeyRefreshed_Up();
 }
 
-void NinjaRope::HandleKeyReleased_Up()
+void Grapple::HandleKeyReleased_Up()
 {
   if (!m_is_active)
     ActiveCharacter().HandleKeyReleased_Up();
 }
 
-void NinjaRope::HandleKeyPressed_Down()
+void Grapple::HandleKeyPressed_Down()
 {
   if (m_is_active)
     GoDown();
@@ -616,7 +616,7 @@ void NinjaRope::HandleKeyPressed_Down()
     ActiveCharacter().HandleKeyPressed_Down();
 }
 
-void NinjaRope::HandleKeyRefreshed_Down()
+void Grapple::HandleKeyRefreshed_Down()
 {
   if (m_is_active)
     GoDown();
@@ -624,13 +624,13 @@ void NinjaRope::HandleKeyRefreshed_Down()
     ActiveCharacter().HandleKeyRefreshed_Down();
 }
 
-void NinjaRope::HandleKeyReleased_Down()
+void Grapple::HandleKeyReleased_Down()
 {
   if (!m_is_active)
     ActiveCharacter().HandleKeyReleased_Down();
 }
 
-void NinjaRope::HandleKeyPressed_MoveLeft()
+void Grapple::HandleKeyPressed_MoveLeft()
 {
   if (m_is_active)
     GoLeft();
@@ -638,13 +638,13 @@ void NinjaRope::HandleKeyPressed_MoveLeft()
     ActiveCharacter().HandleKeyPressed_MoveLeft();
 }
 
-void NinjaRope::HandleKeyRefreshed_MoveLeft()
+void Grapple::HandleKeyRefreshed_MoveLeft()
 {
   if (!m_is_active)
     ActiveCharacter().HandleKeyRefreshed_MoveLeft();
 }
 
-void NinjaRope::HandleKeyReleased_MoveLeft()
+void Grapple::HandleKeyReleased_MoveLeft()
 {
   if (m_is_active)
     StopLeft();
@@ -652,7 +652,7 @@ void NinjaRope::HandleKeyReleased_MoveLeft()
     ActiveCharacter().HandleKeyReleased_MoveLeft();
 }
 
-void NinjaRope::HandleKeyPressed_MoveRight()
+void Grapple::HandleKeyPressed_MoveRight()
 {
   if (m_is_active)
     GoRight();
@@ -660,13 +660,13 @@ void NinjaRope::HandleKeyPressed_MoveRight()
     ActiveCharacter().HandleKeyPressed_MoveRight();
 }
 
-void NinjaRope::HandleKeyRefreshed_MoveRight()
+void Grapple::HandleKeyRefreshed_MoveRight()
 {
   if (!m_is_active)
     ActiveCharacter().HandleKeyRefreshed_MoveRight();
 }
 
-void NinjaRope::HandleKeyReleased_MoveRight()
+void Grapple::HandleKeyReleased_MoveRight()
 {
   if (m_is_active)
     StopRight();
@@ -674,7 +674,7 @@ void NinjaRope::HandleKeyReleased_MoveRight()
     ActiveCharacter().HandleKeyReleased_MoveRight();
 }
 
-void NinjaRope::HandleKeyPressed_Shoot()
+void Grapple::HandleKeyPressed_Shoot()
 {
   if (m_is_active) {
     NewActionWeaponStopUse();
@@ -682,11 +682,11 @@ void NinjaRope::HandleKeyPressed_Shoot()
     NewActionWeaponShoot();
 }
 
-void NinjaRope::HandleKeyRefreshed_Shoot(){}
+void Grapple::HandleKeyRefreshed_Shoot(){}
 
-void NinjaRope::HandleKeyReleased_Shoot(){}
+void Grapple::HandleKeyReleased_Shoot(){}
 
-void NinjaRope::PrintDebugRope()
+void Grapple::PrintDebugRope()
 {
   printf("%05d %05d %03.3f\n",
 	 ActiveCharacter().GetPosition().GetX(),
@@ -704,20 +704,20 @@ void NinjaRope::PrintDebugRope()
 
 //-----------------------------------------------------------------------------
 
-NinjaRopeConfig& NinjaRope::cfg()
+GrappleConfig& Grapple::cfg()
 {
-  return static_cast<NinjaRopeConfig&>(*extra_params);
+  return static_cast<GrappleConfig&>(*extra_params);
 }
 //-----------------------------------------------------------------------------
 
-NinjaRopeConfig::NinjaRopeConfig()
+GrappleConfig::GrappleConfig()
 {
   max_rope_length = 450;
   automatic_growing_speed = 12;
   push_force = 10;
 }
 
-void NinjaRopeConfig::LoadXml(xmlpp::Element *elem)
+void GrappleConfig::LoadXml(xmlpp::Element *elem)
 {
   EmptyWeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "max_rope_length", max_rope_length);

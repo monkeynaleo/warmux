@@ -16,17 +16,17 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Ninja rope.
+ * Grapple
  *****************************************************************************/
 
-#ifndef NINJA_ROPE_H
-#define NINJA_ROPE_H
+#ifndef GRAPPLE_H
+#define GRAPPLE_H
 //-----------------------------------------------------------------------------
 #include "weapon.h"
 #include "include/base.h"
 //-----------------------------------------------------------------------------
 
-class NinjaRopeConfig : public EmptyWeaponConfig
+class GrappleConfig : public EmptyWeaponConfig
 {
  public:
   uint max_rope_length; // Max rope length in pixels
@@ -34,13 +34,13 @@ class NinjaRopeConfig : public EmptyWeaponConfig
   int push_force;
 
  public:
-  NinjaRopeConfig();
+  GrappleConfig();
   void LoadXml(xmlpp::Element *elem);
 };
 
 //-----------------------------------------------------------------------------
 
-class NinjaRope : public Weapon
+class Grapple : public Weapon
 {
   private:
     typedef struct 
@@ -86,21 +86,21 @@ class NinjaRope : public Weapon
       DETACH_NODE,
       SET_ROPE_SIZE,
       UPDATE_PLAYER_POSITION
-    } ninja_rope_movement_t;
+    } grapple_movement_t;
 
     std::list<rope_node_t> rope_nodes;
     Point2i m_fixation_point;
     bool go_left, go_right;
     double delta_len ;
 
-    NinjaRope();
+    Grapple();
     void Draw();
     virtual void NotifyMove(bool collision);
     
     virtual void ActionStopUse();
     virtual void SignalTurnEnd();
     
-    NinjaRopeConfig& cfg();
+    GrappleConfig& cfg();
 
     // Attaching and dettaching nodes rope
     // This is public because of network
@@ -138,4 +138,4 @@ class NinjaRope : public Weapon
 };
 
 //-----------------------------------------------------------------------------
-#endif /* NINJA_ROPE_H */
+#endif /* GRAPPLE_H */

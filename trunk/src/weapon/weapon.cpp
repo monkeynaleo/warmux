@@ -608,7 +608,7 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   // if max_strength = 0, no strength_bar !
   XmlReader::ReadDouble(elem, "max_strength", max_strength);
 
-  // change weapon after ? (for the ninja cord = true)
+  // change weapon after ? (for the grapple = true)
   XmlReader::ReadBool(elem, "change_weapon", m_can_change_weapon);
 
   // angle of weapon when drawing

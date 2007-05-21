@@ -254,19 +254,19 @@
   </sprite>
   <surface name="mine_impact" file="weapon/mine/mine_impact.png" />
 
-<!-- Ninja Rope ressources -->
+<!-- Grapple ressources -->
 
-  <surface name="ninjarope_ico" file="weapon/ninja_rope/ninjarope_ico.png" />
-  <surface name="ninjarope" file="weapon/ninja_rope/ninjarope.png" />
-  <position name="ninjarope" origin="hand" x="-25" y="-27" />
-  <sprite name="ninjarope">
-    <image file="weapon/ninja_rope/ninjarope.png" />
+  <surface name="grapple_ico" file="weapon/grapple/grapple_ico.png" />
+  <surface name="grapple" file="weapon/grapple/grapple.png" />
+  <position name="grapple" origin="hand" x="-25" y="-27" />
+  <sprite name="grapple">
+    <image file="weapon/grapple/grapple.png" />
   </sprite>
-  <sprite name="ninjahook">
-    <image file="weapon/ninja_rope/ninjahook.png" />
+  <sprite name="grapple_hook">
+    <image file="weapon/grapple/grapple_hook.png" />
   </sprite>
-  <sprite name="ninjanode">
-    <image file="weapon/ninja_rope/ninjanode.png" />
+  <sprite name="grapple_node">
+    <image file="weapon/grapple/grapple_node.png" />
   </sprite>
 
 <!-- Parachute ressources -->
