@@ -42,6 +42,15 @@ DamageStatistics::DamageStatistics(const DamageStatistics& adamage_stats, const 
   current_total_damage(adamage_stats.current_total_damage)
 {}
 
+void DamageStatistics::ResetDamage()
+{
+  damage_other_teams = 0;
+  damage_friendly_fire = 0;
+  damage_itself = 0;
+  max_damage = 0;
+  current_total_damage = 0;
+}
+
 void DamageStatistics::HandleMostDamage()
 {
   if (current_total_damage > max_damage)

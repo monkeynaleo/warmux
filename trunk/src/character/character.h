@@ -168,6 +168,7 @@ public:
 
   // Damage report
   const DamageStatistics& GetDamageStats() const;
+  void ResetDamageStats();
 
   // Body handling
   Body * GetBody() const;

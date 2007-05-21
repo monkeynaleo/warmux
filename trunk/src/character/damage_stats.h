@@ -22,17 +22,19 @@
 #ifndef _DAMAGE_STATS_H
 #define _DAMAGE_STATS_H
 
+#include "include/base.h"
+
 class Character;
 
 class DamageStatistics
 {
   const Character& owner;
 
-  int  damage_other_teams;
-  int  damage_friendly_fire; // damage same team but not itself
-  int  damage_itself;
-  int  max_damage;
-  int  current_total_damage;
+  uint  damage_other_teams;
+  uint  damage_friendly_fire; // damage same team but not itself
+  uint  damage_itself;
+  uint  max_damage;
+  uint  current_total_damage;
 
 public:
   DamageStatistics(const Character& _owner);
@@ -41,11 +43,12 @@ public:
 
   void MadeDamage(const int Dmg, const Character &other);
   void HandleMostDamage();
+  void ResetDamage();
 
-  int  GetMostDamage() const { return max_damage; }
-  int  GetFriendlyFireDamage() const { return damage_friendly_fire; }
-  int  GetItselfDamage() const { return damage_itself; }
-  int  GetOthersDamage() const { return damage_other_teams; }
+  uint  GetMostDamage() const { return max_damage; }
+  uint  GetFriendlyFireDamage() const { return damage_friendly_fire; }
+  uint  GetItselfDamage() const { return damage_itself; }
+  uint  GetOthersDamage() const { return damage_other_teams; }
 };
 
 #endif

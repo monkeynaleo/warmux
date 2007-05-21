@@ -252,6 +252,11 @@ const DamageStatistics& Character::GetDamageStats() const
   return damage_stats;
 }
 
+void Character::ResetDamageStats() 
+{
+  damage_stats.ResetDamage();
+}
+
 void Character::SetEnergyDelta (int delta, bool do_report)
 {
   // If already dead, do nothing
