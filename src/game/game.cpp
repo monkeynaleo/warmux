@@ -194,6 +194,7 @@ void Game::UnloadDatas()
   lst_objects.FreeMem();
   ParticleEngine::Stop();
   teams_list.UnloadGamingData();
+  jukebox.StopAll();
 }
 
 void Game::TogglePause()
