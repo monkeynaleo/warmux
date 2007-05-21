@@ -30,6 +30,7 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "interface/game_msg.h"
+#include "map/camera.h"
 #include "map/map.h"
 #include "object/objects_list.h"
 #include "team/macro.h"
@@ -84,6 +85,9 @@ void ObjMine::StartTimeout()
   if (!animation)
   {
     animation=true;
+    
+    camera.CenterOn(*this);
+    
     MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;
     MSG_DEBUG("mine", "EnableDetection : %d", attente);
@@ -105,7 +109,7 @@ void ObjMine::Detection()
 
   if (current_time < escape_time) return;
 
-  MSG_DEBUG("mine", "Escape_time is finished : %d", current_time);
+  //MSG_DEBUG("mine", "Escape_time is finished : %d", current_time);
 
   double detection_range = static_cast<MineConfig&>(cfg).detection_range;
 
@@ -119,16 +123,16 @@ void ObjMine::Detection()
       return;
     }
   }
+
   double speed_detection = static_cast<MineConfig&>(cfg).speed_detection;
   double norm, angle;
   FOR_EACH_OBJECT(obj) {
     if ((*obj) != this && !animation && GetName() != (*obj)->GetName() &&
         MeterDistance(GetCenter(), (*obj)->GetCenter()) < detection_range) {
+
       (*obj)->GetSpeed(norm, angle);
-      if(norm < speed_detection) {
-        std::string txt = Format(_("%s is next to a mine!"),
-                                 (*obj)->GetName().c_str());
-        GameMessages::GetInstance()->Add(txt);
+      if (norm < speed_detection) {
+	MSG_DEBUG("mine", "norm: %d, speed_detection: %d", norm, speed_detection); 
         StartTimeout();
         return;
       }
@@ -170,16 +174,21 @@ void ObjMine::Refresh()
       is_active = false;
       jukebox.Stop(channel);
       channel = -1;
-      if (!fake) Explosion();
-      else FakeExplosion();
-      if (launcher != NULL) launcher->SignalProjectileTimeout();
+      if (!fake) 
+	Explosion();
+      else 
+	FakeExplosion();
+
+      if (launcher != NULL) 
+	launcher->SignalProjectileTimeout();
     }
   }
 }
 
 bool ObjMine::IsImmobile() const
 {
-  if (is_active && animation) return false;
+  if (is_active && animation) 
+    return false;
   return PhysicalObj::IsImmobile();
 }
 
@@ -188,17 +197,6 @@ void ObjMine::Draw()
   image->Draw(GetPosition());
 }
 //-----------------------------------------------------------------------------
-
-MineConfig * MineConfig::singleton = NULL;
-
-MineConfig * MineConfig::GetInstance()
-{
-  if (singleton == NULL) {
-    singleton = new MineConfig();
-  }
-  return singleton;
-}
-
 //-----------------------------------------------------------------------------
 
 Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
@@ -234,6 +232,19 @@ void Mine::Add (int x, int y)
   lst_objects.AddObject (projectile);
   projectile = NULL;
   ReloadLauncher();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+MineConfig * MineConfig::singleton = NULL;
+
+MineConfig * MineConfig::GetInstance()
+{
+  if (singleton == NULL) {
+    singleton = new MineConfig();
+  }
+  return singleton;
 }
 
 MineConfig& Mine::cfg()
