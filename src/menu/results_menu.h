@@ -59,7 +59,7 @@ class ResultsMenu : public Menu
     ResultBox* most_useful;
     ResultBox* most_useless;
     ResultBox* biggest_traitor;
-    ResultBox* most_stupid;
+    ResultBox* most_clumsy;
 
     Surface podium_img;
 

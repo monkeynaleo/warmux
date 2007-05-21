@@ -44,7 +44,7 @@ private:
   const Character* mostUseful;
   const Character* mostUseless;
   const Character* biggestTraitor;
-  const Character* mostStupid;
+  const Character* mostClumsy;
 protected:
   TeamResults(const std::string& name,
 	      const Surface* team_logo,
@@ -65,7 +65,7 @@ public:
   const Character* getMostUseful() const { return mostUseful; };
   const Character* getMostUseless() const { return mostUseless; };
   const Character* getBiggestTraitor() const { return biggestTraitor; };
-  const Character* getMostStupid() const { return mostStupid; };
+  const Character* getMostClumsy() const { return mostClumsy; };
 };
 
 typedef std::vector<TeamResults*>::iterator res_iterator;
