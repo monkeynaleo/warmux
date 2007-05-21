@@ -44,7 +44,7 @@
 #include "tool/vector2.h"
 #include "weapon/construct.h"
 #include "weapon/launcher.h"
-#include "weapon/ninja_rope.h"
+#include "weapon/grapple.h"
 #include "weapon/supertux.h"
 #include "weapon/weapon.h"
 #include "weapon/weapons_list.h"
@@ -455,38 +455,38 @@ void Action_Weapon_Construction (Action *a)
   construct_weapon->SetAngle(a->PopDouble());
 }
 
-void Action_Weapon_Ninjarope (Action *a)
+void Action_Weapon_Grapple (Action *a)
 {
-  NinjaRope* ninjarope = dynamic_cast<NinjaRope*>(&(ActiveTeam().AccessWeapon()));
-  net_assert(ninjarope != NULL)
+  Grapple* grapple = dynamic_cast<Grapple*>(&(ActiveTeam().AccessWeapon()));
+  net_assert(grapple != NULL)
   {
     return;
   }
 
   int subaction = a->PopInt();
   switch (subaction) {
-  case NinjaRope::ATTACH_ROPE:
+  case Grapple::ATTACH_ROPE:
     {// attach rope
       Point2i contact_point = a->PopPoint2i();
-      ninjarope->AttachRope(contact_point);
+      grapple->AttachRope(contact_point);
     }
     break;
 
-  case NinjaRope::ATTACH_NODE: // attach node
+  case Grapple::ATTACH_NODE: // attach node
     {
       Point2i contact_point = a->PopPoint2i();
       double angle = a->PopDouble();
       int sense = a->PopInt();
-      ninjarope->AttachNode(contact_point, angle, sense);
+      grapple->AttachNode(contact_point, angle, sense);
     }
     break;
 
-  case NinjaRope::DETACH_NODE: // detach last node
-    ninjarope->DetachNode();
+  case Grapple::DETACH_NODE: // detach last node
+    grapple->DetachNode();
     break;
 
-  case NinjaRope::SET_ROPE_SIZE: // update rope size
-    ninjarope->SetRopeSize(a->PopDouble());
+  case Grapple::SET_ROPE_SIZE: // update rope size
+    grapple->SetRopeSize(a->PopDouble());
     break;
 
   default:
@@ -711,7 +711,7 @@ ActionHandler::ActionHandler():
   // Special weapon options
   Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
   Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
-  Register (Action::ACTION_WEAPON_NINJAROPE, "WEAPON_ninjarope", &Action_Weapon_Ninjarope);
+  Register (Action::ACTION_WEAPON_GRAPPLE, "WEAPON_grapple", &Action_Weapon_Grapple);
 
   // ########################################################
   Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);

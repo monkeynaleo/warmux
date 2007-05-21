@@ -94,7 +94,7 @@ WeaponsList::WeaponsList():
   m_weapons_list.push_back(new Airhammer);
   m_weapons_list.push_back(new Construct);
   m_weapons_list.push_back(new LowGrav);
-  m_weapons_list.push_back(new NinjaRope);
+  m_weapons_list.push_back(new Grapple);
   m_weapons_list.push_back(new Blowtorch);
   m_weapons_list.push_back(new Syringe);
 }

@@ -66,7 +66,7 @@ public:
     WEAPON_SUPERTUX,      WEAPON_AIR_ATTACK,  WEAPON_ANVIL, WEAPON_GNU,
     WEAPON_POLECAT,       WEAPON_BOUNCE_BALL,
 
-    WEAPON_TELEPORTATION, WEAPON_NINJA_ROPE,  WEAPON_LOWGRAV,   WEAPON_SUICIDE,
+    WEAPON_TELEPORTATION, WEAPON_GRAPPLE,  WEAPON_LOWGRAV,   WEAPON_SUICIDE,
     WEAPON_SKIP_TURN,     WEAPON_JETPACK,     WEAPON_PARACHUTE, WEAPON_AIR_HAMMER,
     WEAPON_CONSTRUCT,     WEAPON_SNIPE_RIFLE, WEAPON_BLOWTORCH, WEAPON_SYRINGE
   } Weapon_type;
@@ -115,7 +115,7 @@ protected:
   // time of the last fire
   uint m_last_fire_time;
 
-  // change weapon after ? (for the ninja cord = true)
+  // change weapon after ? (for the grapple = true)
   bool m_can_change_weapon;
 
   // Extra parameters
@@ -229,7 +229,7 @@ public:
   virtual void ChooseTarget (Point2i mouse_pos);
 
   // Notify a move. It is usefull only for weapon which have strong
-  // interactions with the physical engine such as ninja rope
+  // interactions with the physical engine such as grapple
   virtual void NotifyMove(bool collision){};
 
   // Handle a keyboard event.
