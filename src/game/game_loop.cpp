@@ -92,7 +92,7 @@ void GameLoop::Init()
 {
   fps.Reset();
   IgnorePendingInputEvents();
-  SetState(PLAYING, true);
+  SetState(END_TURN, true); // begin with a small pause
 }
 
 // ####################################################################
@@ -443,8 +443,12 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
 
   state = new_state;
 
-  if(begin_game)
+  if(begin_game) {
     action_handler->ExecActions();
+
+    FOR_ALL_CHARACTERS(team, character)
+      (*character).ResetDamageStats();
+  }
 
   Interface::GetInstance()->weapons_menu.Hide();
 
@@ -475,7 +479,7 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
     if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
      wind.ChooseRandomVal();
 
-     character_already_chosen = false;
+    character_already_chosen = false;
 
     // Prepare each character for a new turn
     FOR_ALL_LIVING_CHARACTERS(team,character)
@@ -484,7 +488,7 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
     // Select the next team
     assert (!Game::GetInstance()->IsGameFinished());
 
-    if(Network::GetInstance()->IsLocal() || Network::GetInstance()->IsServer())
+    if (Network::GetInstance()->IsLocal() || Network::GetInstance()->IsServer())
     {
       do
       {
@@ -493,13 +497,13 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
       } while (ActiveTeam().NbAliveCharacter() == 0);
 
 
-      if( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
+      if ( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
        || game_mode->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
       {
         ActiveTeam().NextCharacter();
       }
 
-      if( Network::GetInstance()->IsServer() )
+      if ( Network::GetInstance()->IsServer() )
       {
         // Tell to clients which character in the team is now playing
         Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
