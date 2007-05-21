@@ -287,8 +287,12 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
 	initialized_players->SetText(pl);
 	msg_box->NewMessage(pl, c_red);
 	if (Network::GetInstanceServer()->GetNbConnectedPlayers() - 
-	    Network::GetInstanceServer()->GetNbInitializedPlayers() == 1) {
+	    Network::GetInstanceServer()->GetNbInitializedPlayers() == 1 
+	    && Network::GetInstanceServer()->GetNbConnectedPlayers() >= 1) {
 	  msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
+	}
+	else if (Network::GetInstanceServer()->GetNbConnectedPlayers() == 1) {
+	  msg_box->NewMessage(_("You are alone :-/"), c_red);
 	}
       }
     }
