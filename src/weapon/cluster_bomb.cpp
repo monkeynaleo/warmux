@@ -55,7 +55,6 @@ void Cluster::Refresh()
 
 void Cluster::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 }
 
