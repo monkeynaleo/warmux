@@ -22,7 +22,6 @@ AC_CANONICAL_TARGET
 #AC_CONFIG_AUX_DIR([config])
 AM_INIT_AUTOMAKE([foreign 1.5])
 
-AM_MAINTAINER_MODE
 AM_GNU_GETTEXT([external])
 
 dnl ========================================================================
