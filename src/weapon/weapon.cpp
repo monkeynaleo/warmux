@@ -71,6 +71,7 @@ Weapon::Weapon(Weapon_type type,
   m_type = type;
   m_category = INVALID;
   m_id = id;
+  m_help = "";
 
   m_is_active = false;
 
@@ -398,6 +399,11 @@ bool Weapon::CanBeUsedOnClosedMap() const{
 const std::string& Weapon::GetName() const {
   assert (!m_name.empty());
   return m_name;
+}
+
+const std::string& Weapon::GetHelp() const {
+  assert (!m_help.empty());
+  return m_help;
 }
 
 const std::string& Weapon::GetID() const {

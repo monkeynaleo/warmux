@@ -106,6 +106,7 @@ ClusterLauncher::ClusterLauncher() :
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Cluster Bomb");
+  m_help = _("Timeout : Wheel mouse or Page Up/Down\nAngle : Up/Down·\nFire : keep space key pressed until the desired strength\nan ammo per turn");
   m_category = THROW;
   ignore_collision_signal = true;
   ReloadLauncher();

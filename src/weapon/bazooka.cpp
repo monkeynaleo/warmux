@@ -71,6 +71,7 @@ Bazooka::Bazooka() :
   WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
 {
   m_name = _("Bazooka");
+  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
   m_category = HEAVY;
   ReloadLauncher();
 }

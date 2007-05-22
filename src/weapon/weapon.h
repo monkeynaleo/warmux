@@ -89,6 +89,7 @@ protected:
 
   std::string m_id;
   std::string m_name;
+  std::string m_help;
   bool m_is_active;
   Sprite *m_image;
   Sprite *m_weapon_fire;
@@ -302,6 +303,7 @@ public:
   // Data access
   const std::string& GetName() const;
   const std::string& GetID() const;
+  const std::string& GetHelp() const;
   Weapon_type GetType() const;
 
   // Allows or not the character selection with mouse click (tab is allowed)
