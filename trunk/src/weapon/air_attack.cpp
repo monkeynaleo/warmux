@@ -161,6 +161,7 @@ AirAttack::AirAttack() :
   Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE)//, plane(cfg())
 {
   m_name = _("Air Attack");
+  m_help = _("attack direction : Left/Right\nBombing : left clic on target\na bombing per turn");
   m_category = HEAVY;
   mouse_character_selection = false;
   can_be_used_on_closed_map = false;

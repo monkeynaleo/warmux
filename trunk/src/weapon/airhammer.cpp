@@ -44,6 +44,7 @@ const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())
 {
   m_name = _("Airhammer");
+  m_help = _("Howto use it : keep space key pressed\nan ammo per turn");
   m_category = TOOL;
 
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");

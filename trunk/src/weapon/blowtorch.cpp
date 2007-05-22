@@ -35,6 +35,7 @@ static const uint pause_time = 200;	// milliseconds
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
   m_name = _("Blowtorch");
+  m_help = _("Howto use it : keep space key pressed\nAngle : Up/Down\nan ammo per turn");
   m_category = TOOL;
 
   new_timer = 0;
