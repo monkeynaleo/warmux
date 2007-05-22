@@ -2,7 +2,6 @@
 SET(DATA_FILES
 authors.dtd
 authors.xml
-authors.xml~
 body/beastieteam/arm-left.png
 body/beastieteam/arm-right.png
 body/beastieteam/black.png
@@ -233,11 +232,8 @@ body/workraveteam/yoyo.png
 font/DejaVuSans.ttf
 game_mode/classic_objects.xml
 game_mode/classic.xml
-game_mode/classic.xml~
 game_mode/game_mode.dtd
-game_mode/game_mode.dtd~
 game_mode/objects.dtd
-game_mode/objects.xml~
 gfx/arrow.png
 gfx/pointer.png
 gfx/rectangle.png
@@ -245,7 +241,6 @@ gfx/water_bottom.png
 gfx/water.png
 graphism.dtd
 graphism.xml
-graphism.xml~
 interface/background_interface.png
 interface/clock_background.png
 interface/clock.png
@@ -398,7 +393,6 @@ map/qingqong/preview.jpg
 map/qingqong/qingqong.png
 map/qingqong/sky.jpg
 map/random/config.xml
-map/random/config.xml~
 map/random/palm-tree.png
 map/random/preview.jpg
 map/random/sky.jpg
@@ -525,7 +519,6 @@ sound/share/menu/cancel.ogg
 sound/share/menu/clic.ogg
 sound/share/menu/ok.ogg
 sound/share/profile.xml
-sound/share/profile.xml~
 sound/share/step.ogg
 sound/share/victory.ogg
 team/beastieteam/flag.png
@@ -547,7 +540,6 @@ team/snortteam/team.xml
 team/spipteam/flag.png
 team/spipteam/flag.svg
 team/spipteam/team.xml
-team/spipteam/team.xml~
 team/team.dtd
 team/thunderbirdteam/flag.png
 team/thunderbirdteam/team.xml
@@ -661,7 +653,6 @@ weapon/supertux/superman.png
 weapon/supertux/supertux_ico.png
 weapon/supertux/supertux.png
 weapons.xml
-weapons.xml~
 weapon/syringe/syringe_ico.png
 weapon/syringe/syringe.png
 weapon/teleportation/teleportation_ico.png
