@@ -7,8 +7,8 @@ ai/ai_shoot_module.cpp
 character/body.cpp
 character/body_list.cpp
 character/character.cpp
-character/damage_stats.cpp
 character/clothe.cpp
+character/damage_stats.cpp
 character/member.cpp
 character/move.cpp
 character/movement.cpp
@@ -19,6 +19,7 @@ game/game_loop.cpp
 game/game_mode.cpp
 game/time.cpp
 graphic/color.cpp
+graphic/composite_shape.cpp
 graphic/effects.cpp
 graphic/font.cpp
 graphic/fps.cpp
@@ -150,13 +151,13 @@ weapon/disco_grenade.cpp
 weapon/dynamite.cpp
 weapon/explosion.cpp
 weapon/gnu.cpp
+weapon/grapple.cpp
 weapon/grenade.cpp
 weapon/gun.cpp
 weapon/jetpack.cpp
 weapon/launcher.cpp
 weapon/lowgrav.cpp
 weapon/mine.cpp
-weapon/ninja_rope.cpp
 weapon/parachute.cpp
 weapon/polecat.cpp
 weapon/riot_bomb.cpp

@@ -7,7 +7,7 @@ cd `dirname $0`
 # Search data files that should be installed
 echo "
 SET(DATA_FILES
-`find ../data/ -type f | grep -v "\.svn\|Makefile" | cut -c 9-`
+`find ../data/ -type f | grep -v "\.svn\|Makefile" | cut -c 9- | sort`
 )" > InstallData.cmake
 
 # Search .cpp source files
