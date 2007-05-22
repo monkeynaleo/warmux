@@ -123,8 +123,8 @@ void RandomMap::Generate()
   for(int i = 0; i < number_of_island; i++) {
     translate = AffineTransform2D::Translate(current_h_position, current_v_position);
     // Generate Island
-    GenerateIsland(Random::GetDouble(w * 0.55, w * 1.25),
-                   Random::GetDouble(h * 0.55, h * 1.25));
+    while(!GenerateIsland(Random::GetDouble(w * 0.55, w * 1.25),
+                          Random::GetDouble(h * 0.55, h * 1.25)));
     bezier_shape->ApplyTransformation(translate);
     expanded_bezier_shape->ApplyTransformation(translate);
     // Then draw it
@@ -155,16 +155,22 @@ void RandomMap::Generate()
   DrawElement();
 }
 
-void RandomMap::GenerateIsland(double width, double height)
+bool RandomMap::GenerateIsland(double width, double height)
 {
   int nb_of_point;
   double x_rand_offset, y_rand_offset, coef;
-  if(random_shape)
+  if(random_shape) {
+    random_shape = NULL;
     delete random_shape;
-  if(bezier_shape)
+  }
+  if(bezier_shape) {
+    bezier_shape = NULL;
     delete bezier_shape;
-  if(expanded_bezier_shape)
+  }
+  if(expanded_bezier_shape) {
+    expanded_bezier_shape = NULL;
     delete expanded_bezier_shape;
+  }
   // Generate a random shape
   switch(Random::GetInt(DENTED_CIRCLE, ROUNDED_RECTANGLE)) {
     case DENTED_CIRCLE:
@@ -182,6 +188,8 @@ void RandomMap::GenerateIsland(double width, double height)
       random_shape = PolygonGenerator::GenerateRandomTrapeze(width, height, x_rand_offset, y_rand_offset, coef);
       break;
   }
+  if(random_shape->GetNbOfPoint() < 4)
+    return false;
   bezier_shape = random_shape->GetBezierInterpolation(1.0, 20, 1.5);
   expanded_bezier_shape = new Polygon(*bezier_shape);
   // Expand the random, bezier shape !
@@ -189,6 +197,7 @@ void RandomMap::GenerateIsland(double width, double height)
   // Setting texture and border color
   bezier_shape->SetTexture(&texture);
   expanded_bezier_shape->SetPlaneColor(border_color);
+  return true;
 }
 
 void RandomMap::SaveMap()

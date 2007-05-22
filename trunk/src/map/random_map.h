@@ -84,7 +84,7 @@ class RandomMap {
    void SetBorderColor(const Color color);
    const bool IsOpen();
    void Generate();
-   void GenerateIsland(double width, double height);
+   bool GenerateIsland(double width, double height);
    void SaveMap();
    Surface GetRandomMap();
 };
