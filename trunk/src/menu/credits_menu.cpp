@@ -116,7 +116,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
     return;
   }
   // Use an array for this is the best solution I think, but there is perhaps a better code...
-  static char *teams[] = { "team", "contributors", "thanks" };
+  static std::string teams[] = { "team", "contributors", "thanks" };
 
   for(uint i = 0; i < (sizeof teams / sizeof* teams); ++i)
   {

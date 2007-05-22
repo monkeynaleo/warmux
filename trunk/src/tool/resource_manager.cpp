@@ -66,7 +66,7 @@ Color ResourceManager::LoadColor(const Profile *profile, const std::string resou
     Error("ResourceManager: can't find color resource \""+resource_name+"\" in profile "+profile->filename);
 
   uint chanel_color[4];
-  char * tmp[4] = { "r", "g", "b", "a" };
+  std::string tmp[4] = { "r", "g", "b", "a" };
   for(int i = 0; i < 4; i++) {
     if (!profile->doc->ReadUintAttr(elem, tmp[i], chanel_color[i]))
       Error("ResourceManager: color resource \""+resource_name+"\" has no "+tmp[i]+" field in profile "+profile->filename);
@@ -81,7 +81,7 @@ Point2i ResourceManager::LoadPoint2i(const Profile *profile, const std::string r
     Error("ResourceManager: can't find point resource \""+resource_name+"\" in profile "+profile->filename);
 
   uint point[2];
-  char * tmp[2] = { "x", "y" };
+  std::string tmp[2] = { "x", "y" };
   for(int i = 0; i < 2; i++) {
     if (!profile->doc->ReadUintAttr(elem, tmp[i], point[i]))
       Error("ResourceManager: color resource \""+resource_name+"\" has no "+tmp[i]+" field in profile "+profile->filename);
@@ -96,7 +96,7 @@ Point2d ResourceManager::LoadPoint2d(const Profile *profile, const std::string r
     Error("ResourceManager: can't find point resource \""+resource_name+"\" in profile "+profile->filename);
 
   double point[2];
-  char * tmp[2] = { "x", "y" };
+  std::string tmp[2] = { "x", "y" };
   for(int i = 0; i < 2; i++) {
     if (!profile->doc->ReadDoubleAttr(elem, tmp[i], point[i]))
       Error("ResourceManager: color resource \""+resource_name+"\" has no "+tmp[i]+" field in profile "+profile->filename);
