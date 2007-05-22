@@ -131,7 +131,7 @@ void ObjMine::Detection()
         MeterDistance(GetCenter(), (*obj)->GetCenter()) < detection_range) {
 
       (*obj)->GetSpeed(norm, angle);
-      if (norm < speed_detection) {
+      if (norm < speed_detection && norm > 0.0) {
 	MSG_DEBUG("mine", "norm: %d, speed_detection: %d", norm, speed_detection); 
         StartTimeout();
         return;
