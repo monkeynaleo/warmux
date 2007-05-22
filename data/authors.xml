@@ -464,7 +464,7 @@
       <author>
 	<nickname>lynxlynxlynx</nickname>
 	<name>Jaka KRANJC</name>
-	<description>Patch that enables cycling through characters backwards</description>
+	<description>Patch that enables cycling through characters backwards. G++ 4.2 support</description>
 	<email>svn_AT_lynxlynx_DOT_info</email>
 	<country>Slovenia</country>
       </author>

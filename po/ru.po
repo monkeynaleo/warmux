@@ -42,7 +42,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/game/game_loop.cpp:641
+#: src/game/game_loop.cpp:645
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (команда %s) погибла."
@@ -57,7 +57,7 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:620
+#: src/game/game_loop.cpp:624
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -67,12 +67,12 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:613
+#: src/game/game_loop.cpp:617
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:624
+#: src/game/game_loop.cpp:628
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -85,17 +85,17 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game_loop.cpp:635
+#: src/game/game_loop.cpp:639
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:630
+#: src/game/game_loop.cpp:634
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
 
-#: src/weapon/mine.cpp:115 src/weapon/mine.cpp:129
+#: src/weapon/mine.cpp:119
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
@@ -137,7 +137,7 @@ msgstr "(мёртв)"
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
-#: src/weapon/air_attack.cpp:161
+#: src/weapon/air_attack.cpp:163
 #, fuzzy
 msgid "Air Attack"
 msgstr "Воздушная атака"
@@ -147,7 +147,7 @@ msgid "Airhammer"
 msgstr ""
 
 #. We'll do as if NULL is for all teams
-#: src/team/results.cpp:143
+#: src/team/results.cpp:165
 #, fuzzy
 msgid "All teams"
 msgstr "Ожидание команд"
@@ -210,7 +210,7 @@ msgstr "Не удаётся открыть каталог команд (%s)!"
 msgid "Client mode"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:109
+#: src/weapon/cluster_bomb.cpp:108
 #, fuzzy
 msgid "Cluster Bomb"
 msgstr "Кассетная бомба"
@@ -245,7 +245,7 @@ msgstr "Конец игры"
 msgid "Construct"
 msgstr ""
 
-#: src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:144
 msgid "Controlled by: "
 msgstr ""
 
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Disco Grenade"
 msgstr "Граната"
 
-#: src/game/game.cpp:226
+#: src/game/game.cpp:228
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
@@ -306,7 +306,7 @@ msgstr "Ошибка при загрузке режима игры %s (файл 
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/game.cpp:182
+#: src/game/game.cpp:184
 #, c-format
 msgid ""
 "Error:\n"
@@ -349,6 +349,10 @@ msgstr "На весь экран?"
 msgid "Gnu Launcher"
 msgstr ""
 
+#: src/weapon/grapple.cpp:82
+msgid "Grapple"
+msgstr ""
+
 #: src/weapon/grenade.cpp:67
 msgid "Grenade"
 msgstr "Граната"
@@ -385,7 +389,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "Конец игры"
 
-#: src/game/game_loop.cpp:677
+#: src/game/game_loop.cpp:681
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -400,21 +404,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Энергии в начале:"
 
-#: src/game/game_init.cpp:185
+#: src/game/game_init.cpp:187
 msgid "Initialisation"
 msgstr "Инициализация"
 
-#: src/game/game_init.cpp:140
+#: src/game/game_init.cpp:142
 #, fuzzy
 msgid "Initialise map"
 msgstr "Инициализация данных"
 
-#: src/game/game_init.cpp:172
+#: src/game/game_init.cpp:174
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Инициализация команд"
 
-#: src/game/game_init.cpp:151
+#: src/game/game_init.cpp:153
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
@@ -454,7 +458,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Карту %s создал:"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:144
 msgid "Maps"
 msgstr ""
 
@@ -467,23 +471,27 @@ msgstr "Игроков в каждой команде:"
 msgid "Maximum FPS"
 msgstr ""
 
-#: src/weapon/mine.cpp:206
+#: src/weapon/mine.cpp:204
 msgid "Mine"
 msgstr "Мина"
 
-#: src/menu/results_menu.cpp:209
+#: src/menu/results_menu.cpp:208
+msgid "Most clumsy"
+msgstr ""
+
+#: src/menu/results_menu.cpp:203
 msgid "Most sold-out"
 msgstr ""
 
-#: src/menu/results_menu.cpp:199
+#: src/menu/results_menu.cpp:193
 msgid "Most useful"
 msgstr ""
 
-#: src/menu/results_menu.cpp:204
+#: src/menu/results_menu.cpp:198
 msgid "Most useless"
 msgstr ""
 
-#: src/menu/results_menu.cpp:194
+#: src/menu/results_menu.cpp:188
 msgid "Most violent"
 msgstr ""
 
@@ -495,16 +503,12 @@ msgstr "Музыка?"
 msgid "Network Game"
 msgstr "Игра по сети"
 
-#: src/network/network.cpp:141
+#: src/network/network.cpp:140
 #, fuzzy
 msgid "Network initialization"
 msgstr "Инициализация"
 
-#: src/weapon/ninja_rope.cpp:82
-msgid "Ninjarope"
-msgstr ""
-
-#: src/weapon/weapon.cpp:601
+#: src/weapon/weapon.cpp:598
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
@@ -637,7 +641,7 @@ msgstr ""
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:102
 msgid ""
-"Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
+"Some weapons are disabled, because of known bugs (grapple, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
 msgstr ""
 
@@ -651,7 +655,7 @@ msgid "Sound frequency"
 msgstr "Звуковые эффекты?"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:175
+#: src/game/game_init.cpp:177
 #, fuzzy
 msgid "Sounds"
 msgstr "Настройки звука"
@@ -676,7 +680,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:155
 msgid "Teams"
 msgstr ""
 
@@ -684,7 +688,7 @@ msgstr ""
 msgid "Teleportation"
 msgstr "Телепортация"
 
-#: src/weapon/cluster_bomb.cpp:85
+#: src/weapon/cluster_bomb.cpp:84
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
@@ -721,12 +725,11 @@ msgstr "Ракета улетела за пределы поля битвы..."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Ракета улетела за пределы поля битвы..."
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:292
 msgid "The others are waiting for you! Wake up :-)"
 msgstr ""
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/riot_bomb.cpp:50
 #, fuzzy
 msgid "The rocket has left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
@@ -786,13 +789,13 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/menu/network_menu.cpp:355
+#: src/menu/network_menu.cpp:359
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
-#. Adding label
 #. Initialization of teams' energy
-#: src/interface/weapon_menu.cpp:169 src/game/game_init.cpp:164
+#. Adding label
+#: src/game/game_init.cpp:166 src/interface/weapon_menu.cpp:169
 #, fuzzy
 msgid "Weapons"
 msgstr "Оружие:"
@@ -801,7 +804,7 @@ msgstr "Оружие:"
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:638
+#: src/game/game_loop.cpp:642
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -811,7 +814,7 @@ msgstr "Какой позор для %s - его убили из простог�
 msgid "Wind particles?"
 msgstr "Показать "
 
-#: src/menu/results_menu.cpp:148
+#: src/menu/results_menu.cpp:138
 #, fuzzy
 msgid "Winner"
 msgstr "Мина"
@@ -829,6 +832,10 @@ msgstr "Wormux версии "
 msgid "XML error during loading map '%s' :"
 msgstr "Ошибка разбора XML при загрузке карты '%s' :"
 
+#: src/menu/network_menu.cpp:295
+msgid "You are alone :-/"
+msgstr ""
+
 #: src/menu/network_menu.cpp:223
 msgid "You are alone..."
 msgstr ""
@@ -837,7 +844,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Вам нужна хотя бы одна карта!"
 
-#: src/team/teams_list.cpp:174 src/game/game_init.cpp:157
+#: src/game/game_init.cpp:159 src/team/teams_list.cpp:174
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 

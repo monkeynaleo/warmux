@@ -38,7 +38,7 @@ msgstr[0] "%i hráč je pripravený"
 msgstr[1] "%i hráči sú pripravení"
 msgstr[2] "%i hráči sú pripravení"
 
-#: src/game/game_loop.cpp:641
+#: src/game/game_loop.cpp:645
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s tím)  zomrel."
@@ -53,7 +53,7 @@ msgstr "%s <%s> aka %s od %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> od %s"
 
-#: src/game/game_loop.cpp:620
+#: src/game/game_loop.cpp:624
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s spáchal samovraždu !"
@@ -63,12 +63,12 @@ msgstr "%s spáchal samovraždu !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:613
+#: src/game/game_loop.cpp:617
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s spadol do vody."
 
-#: src/game/game_loop.cpp:624
+#: src/game/game_loop.cpp:628
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s vypadol z mapy!"
@@ -81,17 +81,17 @@ msgstr[0] "%s zvíťazil %u bodom energie!"
 msgstr[1] "%s zvíťazil %u bodmi energie! "
 msgstr[2] "%s zvíťazil %u bodmi energie! "
 
-#: src/game/game_loop.cpp:635
+#: src/game/game_loop.cpp:639
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s je psychopat, zabil člena svojho %s tímu!"
 
-#: src/game/game_loop.cpp:630
+#: src/game/game_loop.cpp:634
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mŕtvy, pretože bol nemotorný!"
 
-#: src/weapon/mine.cpp:115 src/weapon/mine.cpp:129
+#: src/weapon/mine.cpp:119
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s je veľmi blízko míny!"
@@ -133,7 +133,7 @@ msgstr "(mŕtvy)"
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
-#: src/weapon/air_attack.cpp:161
+#: src/weapon/air_attack.cpp:163
 msgid "Air Attack"
 msgstr "Letecký  útok"
 
@@ -142,7 +142,7 @@ msgid "Airhammer"
 msgstr "Vŕtačka"
 
 #. We'll do as if NULL is for all teams
-#: src/team/results.cpp:143
+#: src/team/results.cpp:165
 msgid "All teams"
 msgstr "Všetky tímy"
 
@@ -202,7 +202,7 @@ msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 msgid "Client mode"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:109
+#: src/weapon/cluster_bomb.cpp:108
 msgid "Cluster Bomb"
 msgstr "Šrapnelová Bomba"
 
@@ -231,7 +231,7 @@ msgstr "Pripojený !"
 msgid "Construct"
 msgstr "Stavať"
 
-#: src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:144
 msgid "Controlled by: "
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr "O programe"
 msgid "Disco Grenade"
 msgstr "Disco Granát"
 
-#: src/game/game.cpp:226
+#: src/game/game.cpp:228
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Skutočne chceš skončiť(A/N) ?"
 
@@ -291,7 +291,7 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Chyba počas načítavania herného módu %s (súbor %s):"
 
-#: src/game/game.cpp:182
+#: src/game/game.cpp:184
 #, c-format
 msgid ""
 "Error:\n"
@@ -332,6 +332,10 @@ msgstr "Celá obrazovka?"
 msgid "Gnu Launcher"
 msgstr "Gnu raketomet"
 
+#: src/weapon/grapple.cpp:82
+msgid "Grapple"
+msgstr ""
+
 #: src/weapon/grenade.cpp:67
 msgid "Grenade"
 msgstr "Granát"
@@ -367,7 +371,7 @@ msgstr "Hlavný veliteľ"
 msgid "Host a game"
 msgstr "Hosťuj hru"
 
-#: src/game/game_loop.cpp:677
+#: src/game/game_loop.cpp:681
 msgid "Hurry up, you are too slow !!"
 msgstr "Ponáhľaj sa, si príliš pomalý  !!"
 
@@ -383,21 +387,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Základná energia"
 
-#: src/game/game_init.cpp:185
+#: src/game/game_init.cpp:187
 msgid "Initialisation"
 msgstr "Inicializácia"
 
-#: src/game/game_init.cpp:140
+#: src/game/game_init.cpp:142
 #, fuzzy
 msgid "Initialise map"
 msgstr "Inicializácia dát"
 
-#: src/game/game_init.cpp:172
+#: src/game/game_init.cpp:174
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Inicializácia tímov"
 
-#: src/game/game_init.cpp:151
+#: src/game/game_init.cpp:153
 msgid "Initialise teams"
 msgstr "Inicializácia tímov"
 
@@ -436,7 +440,7 @@ msgstr "NízkaGravitácia"
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, je výtvor:"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:144
 msgid "Maps"
 msgstr "Mapy"
 
@@ -448,23 +452,28 @@ msgstr "Maximálny počet hráčov:"
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
-#: src/weapon/mine.cpp:206
+#: src/weapon/mine.cpp:204
 msgid "Mine"
 msgstr "Mína "
 
-#: src/menu/results_menu.cpp:209
+#: src/menu/results_menu.cpp:208
+#, fuzzy
+msgid "Most clumsy"
+msgstr "Najužitočnejší"
+
+#: src/menu/results_menu.cpp:203
 msgid "Most sold-out"
 msgstr "Najvypredávanejší"
 
-#: src/menu/results_menu.cpp:199
+#: src/menu/results_menu.cpp:193
 msgid "Most useful"
 msgstr "Najužitočnejší"
 
-#: src/menu/results_menu.cpp:204
+#: src/menu/results_menu.cpp:198
 msgid "Most useless"
 msgstr "Najneužitočnejší "
 
-#: src/menu/results_menu.cpp:194
+#: src/menu/results_menu.cpp:188
 msgid "Most violent"
 msgstr "Najnásilnejší "
 
@@ -476,16 +485,12 @@ msgstr "Hudba?"
 msgid "Network Game"
 msgstr "Sieťová hra"
 
-#: src/network/network.cpp:141
+#: src/network/network.cpp:140
 #, fuzzy
 msgid "Network initialization"
 msgstr "Inicializuje sa okolie..."
 
-#: src/weapon/ninja_rope.cpp:82
-msgid "Ninjarope"
-msgstr "Nindžalano"
-
-#: src/weapon/weapon.cpp:601
+#: src/weapon/weapon.cpp:598
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenájdený element <%s> v xml konfiguračnom súbore!"
@@ -612,8 +617,9 @@ msgstr "Sniper puška"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:102
+#, fuzzy
 msgid ""
-"Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
+"Some weapons are disabled, because of known bugs (grapple, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
 msgstr ""
 "Niektoré zbrane sú zablokované, kvôli známim chybám (nindžalano, vŕtačka, "
@@ -628,7 +634,7 @@ msgid "Sound frequency"
 msgstr "Zvuková frekvencia"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:175
+#: src/game/game_init.cpp:177
 msgid "Sounds"
 msgstr "Zvuky"
 
@@ -652,7 +658,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Syringe"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:155
 msgid "Teams"
 msgstr "Tími"
 
@@ -660,7 +666,7 @@ msgstr "Tími"
 msgid "Teleportation"
 msgstr "Teleport"
 
-#: src/weapon/cluster_bomb.cpp:85
+#: src/weapon/cluster_bomb.cpp:84
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Šrapnelová bomba opustila bojisko predtým ako mohla vybuchnúť."
 
@@ -692,12 +698,11 @@ msgstr "Disco granát opustil parket pred výbuchom"
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granát opustil bojisko pred výbuchom"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:292
 msgid "The others are waiting for you! Wake up :-)"
 msgstr ""
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa opustila bojisko.."
 
@@ -757,13 +762,13 @@ msgstr[0] "Čakaj! %i hráč nie je ešte pripravený!"
 msgstr[1] "Čakaj! %i hráči nie sú ešte pripravení!"
 msgstr[2] "Čakaj! %i hráči nie sú ešte pripravení!"
 
-#: src/menu/network_menu.cpp:355
+#: src/menu/network_menu.cpp:359
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
-#. Adding label
 #. Initialization of teams' energy
-#: src/interface/weapon_menu.cpp:169 src/game/game_init.cpp:164
+#. Adding label
+#: src/game/game_init.cpp:166 src/interface/weapon_menu.cpp:169
 msgid "Weapons"
 msgstr "Zbraňe"
 
@@ -771,7 +776,7 @@ msgstr "Zbraňe"
 msgid "Website: "
 msgstr "Web stránka: "
 
-#: src/game/game_loop.cpp:638
+#: src/game/game_loop.cpp:642
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
@@ -780,7 +785,7 @@ msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
 msgid "Wind particles?"
 msgstr "Častice vetra?"
 
-#: src/menu/results_menu.cpp:148
+#: src/menu/results_menu.cpp:138
 #, fuzzy
 msgid "Winner"
 msgstr "Mína "
@@ -798,6 +803,11 @@ msgstr "Wormux verzia"
 msgid "XML error during loading map '%s' :"
 msgstr "XML chyba počas načítavania mapy '%s' :"
 
+#: src/menu/network_menu.cpp:295
+#, fuzzy
+msgid "You are alone :-/"
+msgstr "Si sáám..."
+
 #: src/menu/network_menu.cpp:223
 msgid "You are alone..."
 msgstr "Si sáám..."
@@ -806,7 +816,7 @@ msgstr "Si sáám..."
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
-#: src/team/teams_list.cpp:174 src/game/game_init.cpp:157
+#: src/game/game_init.cpp:159 src/team/teams_list.cpp:174
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tímy !"
 
@@ -841,6 +851,9 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#~ msgid "Ninjarope"
+#~ msgstr "Nindžalano"
 
 #, fuzzy
 #~ msgid "Error while exporting file %s:"

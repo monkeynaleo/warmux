@@ -26,7 +26,7 @@
 #include "tool/resource_manager.h"
 #include "sound/jukebox.h"
 
-Menu::Menu(char * bg, t_action _actions) :
+Menu::Menu(std::string bg, t_action _actions) :
   actions(_actions)
 {
   close_menu = false ;
