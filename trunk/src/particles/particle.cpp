@@ -51,7 +51,7 @@ Particle::Particle(const std::string &name) :
   m_initial_time_to_live(20),
   m_left_time_to_live(0),
   m_check_move_on_end_turn(false),
-  m_time_between_scale(-1),
+  m_time_between_scale(0),
   m_last_refresh(Time::GetInstance()->Read()),
   image(NULL)
 {
