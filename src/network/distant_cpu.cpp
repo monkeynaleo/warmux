@@ -36,7 +36,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
   sock_lock(SDL_CreateMutex()),
   sock(new_sock),
   owned_teams(),
-  initialized(false),
+  state(DistantComputer::ERROR),
   version_checked(false),
   force_disconnect(false),
   nickname("this is not initialized")
@@ -221,13 +221,12 @@ void DistantComputer::SendChatMessage(Action* a)
   }
 }
 
-
-bool DistantComputer::IsInitialized()
+void DistantComputer::SetState(DistantComputer::state_t _state) 
 {
-  return initialized;
+  state = _state;
 }
 
-void DistantComputer::SetInitialized()
+DistantComputer::state_t DistantComputer::GetState() const
 {
-  initialized = true;
+  return state;
 }

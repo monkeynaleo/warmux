@@ -61,80 +61,46 @@
 void GameInit::InitGameData_NetServer()
 {
   Network::GetInstanceServer()->RejectIncoming();
-
+ 
   randomSync.Init();
 
   SendGameMode();
-
-  Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
-  Network::GetInstance()->SendAction ( &a_change_state );
-  Network::GetInstance()->state = Network::NETWORK_INIT_GAME;
+  
+  Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
+  Network::GetInstance()->SendNetworkState();
 
   GameMode::GetInstance()->Load();
+}
 
-  // Load maps
-  InitMap();
-
-  // Load teams
-  InitTeams();
-
-  // Tells all clients that the server is ready to play
-  Network::GetInstance()->SendAction ( &a_change_state );
-
+void GameInit::EndInitGameData_NetServer()
+{
   // Wait for all clients to be ready to play
-  while (Network::GetInstance()->state != Network::NETWORK_READY_TO_PLAY 
-	 && Network::IsConnected())
+  while (Network::IsConnected()
+	 && Network::GetInstanceServer()->GetNbReadyPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())
   {
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(200);
   }
-  Network::GetInstance()->SendAction ( &a_change_state );
-  Network::GetInstance()->state = Network::NETWORK_PLAYING;
+  
+  // Let's play !
+  Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
+  Network::GetInstance()->SendNetworkState();
 }
 
-void GameInit::InitGameData_NetClient()
+void GameInit::EndInitGameData_NetClient()
 {
-  //GameMode::GetInstance()->Load(); : done by the action handler
-
-  // Loading map
-  InitMap();
-
-  // Loading teams
-  InitTeams();
-
   // Tells server that client is ready
-  Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
-
-  Network::GetInstance()->SendAction (&a_change_state);
-  while (Network::GetInstance()->state != Network::NETWORK_READY_TO_PLAY
-	 && Network::IsConnected())
-  {
-    // The server is placing characters on the map
-    // We can receive new team / map selection
-    ActionHandler::GetInstance()->ExecActions();
-    SDL_Delay(100);
-  }
+  Network::GetInstance()->SetState(Network::NETWORK_READY_TO_PLAY);
+  Network::GetInstance()->SendNetworkState();
 
   // Waiting for other clients
-  std::cout << Network::GetInstance()->state << " : Waiting for people over the network" << std::endl;
-  while (Network::GetInstance()->state != Network::NETWORK_PLAYING)
+  std::cout << Network::GetInstance()->GetState() << " : Waiting for people over the network" << std::endl;
+  while (Network::GetInstance()->GetState() == Network::NETWORK_READY_TO_PLAY
+	 && Network::IsConnected())
   {
-    // The server waits for everybody to be ready to start
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(100);
   }
-  std::cout << Network::GetInstance()->state << " : Run game !" << std::endl;
-}
-
-void GameInit::InitGameData_Local()
-{
-  // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters
-
-  // Load the map
-  InitMap();
-
-  // Init teams
-  InitTeams();
 }
 
 void GameInit::InitMap()
@@ -190,10 +156,15 @@ void GameInit::InitData()
   // initialize gaming data
   if (Network::GetInstance()->IsServer())
     InitGameData_NetServer();
-  else if (Network::GetInstance()->IsClient())
-    InitGameData_NetClient();
-  else
-    InitGameData_Local();
+
+  // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
+  // done in action_handler for clients
+
+  // Load the map
+  InitMap();
+
+  // Init teams
+  InitTeams();
 
   InitSounds();
 }
@@ -228,6 +199,12 @@ void GameInit::Init()
 
   // Loading is finished, sound effects can be enabled again
   jukebox.ActiveEffects(enable_sound);
+
+  // Waiting for others players
+  if  (Network::GetInstance()->IsServer())
+    EndInitGameData_NetServer();
+  else if (Network::GetInstance()->IsClient())
+    EndInitGameData_NetClient();
 
   GameLoop::GetInstance()->Init();
 }
