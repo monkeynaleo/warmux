@@ -48,6 +48,7 @@ public:
   void SetMaxNumberOfPlayers(uint max_nb_players);
   const uint GetNbConnectedPlayers() const;
   const uint GetNbInitializedPlayers() const;
+  const uint GetNbReadyPlayers() const;
 };
 
 //-----------------------------------------------------------------------------

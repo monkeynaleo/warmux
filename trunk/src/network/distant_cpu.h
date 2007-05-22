@@ -35,6 +35,14 @@ class Action;
 
 class DistantComputer
 {
+ public:
+  typedef enum {
+    ERROR,
+    INITIALIZED,
+    READY
+  } state_t;
+
+ private:
   /* If you need this, implement it (correctly)*/
   DistantComputer(const DistantComputer&);
   const DistantComputer& operator=(const DistantComputer&);
@@ -44,7 +52,7 @@ class DistantComputer
   TCPsocket sock;
   std::list<std::string> owned_teams;
 
-  bool initialized;
+  DistantComputer::state_t state;
 
 public:
   bool version_checked;
@@ -63,8 +71,8 @@ public:
   void ManageTeam(Action* team);
   void SendChatMessage(Action* a);
 
-  bool IsInitialized();
-  void SetInitialized();
+  void SetState(DistantComputer::state_t _state);
+  DistantComputer::state_t GetState() const;
 };
 
 #endif

@@ -348,10 +348,11 @@ void NetworkMenu::ReceiveMsgCallback(std::string msg)
 
 void NetworkMenu::WaitingForServer()
 {
-  // warn the server that we are ready to play
-  Action a(Action::ACTION_NETWORK_CHANGE_STATE);
-  Network::GetInstance()->SendAction(&a);
-  
+  Network::GetInstance()->SetState(Network::NETWORK_MENU_OK);
+
+  // warn the server that we have validated the menu
+  Network::GetInstance()->SendNetworkState();
+
   waiting_for_server = true;
   b_ok->SetVisible(false);
   actions_buttons->ForceRedraw();
@@ -401,6 +402,6 @@ void NetworkMenu::WaitingForServer()
     Menu::Display(mousePosition);
     widgets.SetFocusOn(line_to_send_tbox);
 
-  } while (Network::GetInstance()->state != Network::NETWORK_INIT_GAME && 
+  } while (Network::GetInstance()->GetState() == Network::NETWORK_MENU_OK && 
 	   Network::GetInstance()->IsConnected());
 }

@@ -29,8 +29,8 @@ public:
 private:
   // Initialization
   static void InitGameData_NetServer();
-  static void InitGameData_NetClient();
-  static void InitGameData_Local();
+  static void EndInitGameData_NetServer();
+  static void EndInitGameData_NetClient();
 
   static void InitMap();
   static void InitTeams();

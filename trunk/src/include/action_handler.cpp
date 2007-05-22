@@ -76,24 +76,22 @@ void Action_Network_ChangeState (Action *a)
 {
   MSG_DEBUG("action_handler", "ChangeState");
 
-  if(Network::GetInstance()->IsServer())
+  if (Network::GetInstance()->IsServer())
   {
-    switch(Network::GetInstance()->state)
+    Network::network_state_t client_state = (Network::network_state_t)a->PopInt();
+    
+    switch (Network::GetInstance()->GetState())
     {
     case Network::NO_NETWORK:
-      // State is changed when server clicks on the launch game button
-
-      // One more client is ready to play
-      a->creator->SetInitialized();
+      a->creator->SetState(DistantComputer::INITIALIZED);
+      net_assert(client_state == Network::NETWORK_MENU_OK); 
       break;
 
-    case Network::NETWORK_INIT_GAME:
-      // One more client is ready to play
-      a->creator->SetInitialized();
-
-      if(Network::GetInstanceServer()->GetNbInitializedPlayers() + 1 == Network::GetInstanceServer()->GetNbConnectedPlayers())
-	Network::GetInstanceServer()->state = Network::NETWORK_READY_TO_PLAY;
+    case Network::NETWORK_LOADING_DATA:
+      a->creator->SetState(DistantComputer::READY);
+      net_assert(client_state == Network::NETWORK_READY_TO_PLAY);
       break;
+
     default:
       net_assert(false)
       {
@@ -104,19 +102,22 @@ void Action_Network_ChangeState (Action *a)
     }
   }
 
-  if(Network::GetInstance()->IsClient())
+  if (Network::GetInstance()->IsClient())
   {
-    switch(Network::GetInstance()->state)
+    Network::network_state_t server_state = (Network::network_state_t)a->PopInt();
+    
+    switch (Network::GetInstance()->GetState())
     {
-    case Network::NO_NETWORK:
-      Network::GetInstance()->state = Network::NETWORK_INIT_GAME;
+    case Network::NETWORK_MENU_OK:
+      Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
+      net_assert(server_state == Network::NETWORK_LOADING_DATA);
       break;
-    case Network::NETWORK_INIT_GAME:
-      Network::GetInstance()->state = Network::NETWORK_READY_TO_PLAY;
-      break;
+
     case Network::NETWORK_READY_TO_PLAY:
-      Network::GetInstance()->state = Network::NETWORK_PLAYING;
+      Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
+      net_assert(server_state == Network::NETWORK_PLAYING);
       break;
+
     default:
        net_assert(false)
        {

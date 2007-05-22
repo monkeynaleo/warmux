@@ -74,6 +74,7 @@ NetworkServer * Network::GetInstanceServer()
 }
 
 Network::Network():
+  state(NO_NETWORK),// useless value at beginning
   thread(NULL),
   socket_set(NULL),
   ip(),
@@ -82,7 +83,6 @@ Network::Network():
   fin(0),
 #endif
   network_menu(NULL),
-  state(NO_NETWORK),// useless value at beginning
   cpu(),
   sync_lock(false),
 #ifdef WIN32
@@ -261,7 +261,7 @@ const Network::connection_state_t Network::CheckHost(const std::string &host,
 //-----------------------------------------------------------------------------
 
 // Send Messages
-void Network::SendAction(Action* a)
+void Network::SendAction(Action* a) const
 {
   MSG_DEBUG("network.traffic","Send action %s",
 	    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
@@ -276,7 +276,7 @@ void Network::SendAction(Action* a)
   free(packet);
 }
 
-void Network::SendPacket(char* packet, int size)
+void Network::SendPacket(char* packet, int size) const
 {
 #if defined(DEBUG) && not defined(WIN32)
   if (fout != 0) {
@@ -287,9 +287,9 @@ void Network::SendPacket(char* packet, int size)
   }
 #endif
 
-  for(std::list<DistantComputer*>::iterator client = cpu.begin();
-      client != cpu.end();
-      client++)
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++)
   {
     (*client)->SendDatas(packet, size);
   }
@@ -367,4 +367,23 @@ Network::connection_state_t Network::ServerStart(const std::string& port)
     delete prev;
   }
   return error;
+}
+
+//-----------------------------------------------------------------------------
+
+void Network::SetState(Network::network_state_t _state)
+{
+  state = _state;
+}
+
+Network::network_state_t Network::GetState() const
+{
+  return state;
+}
+
+void Network::SendNetworkState() const
+{
+  Action a(Action::ACTION_NETWORK_CHANGE_STATE);
+  a.Push(state);
+  SendAction(&a);
 }

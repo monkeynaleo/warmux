@@ -221,12 +221,27 @@ const uint NetworkServer::GetNbConnectedPlayers() const
 const uint NetworkServer::GetNbInitializedPlayers() const
 {
   uint r = 0;
+
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
        client != cpu.end();
        client++) {
-    if ((*client)->IsInitialized())
+    if ((*client)->GetState() == DistantComputer::INITIALIZED)
       r++;
   }
 
+  return r;
+}
+
+const uint NetworkServer::GetNbReadyPlayers() const
+{
+  uint r = 0;
+  
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {    
+    if ((*client)->GetState() == DistantComputer::READY)
+      r++;
+  }
+  
   return r;
 }

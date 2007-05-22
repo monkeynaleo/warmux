@@ -42,7 +42,8 @@ public:
   typedef enum
     {
       NO_NETWORK,
-      NETWORK_INIT_GAME,
+      NETWORK_MENU_OK,
+      NETWORK_LOADING_DATA,
       NETWORK_READY_TO_PLAY,
       NETWORK_PLAYING
     } network_state_t;
@@ -58,6 +59,7 @@ public:
     } connection_state_t;
 
 private:
+
   Network(const Network&);
   const Network& operator=(const Network&);
   friend class DistantComputer;
@@ -68,6 +70,8 @@ private:
   static bool stop_thread;
 
 protected:
+  network_state_t state;
+
   Network(); // pattern singleton
 
   SDL_Thread* thread; // network thread, where we receive data from network
@@ -89,8 +93,6 @@ protected:
 public:
   NetworkMenu* network_menu;
 
-  network_state_t state;
-
   std::list<DistantComputer*> cpu; // list of the connected computer
   bool sync_lock;
   std::string nickname; //Clients: Send to Server at connect
@@ -111,19 +113,23 @@ public:
   const uint GetPort() const;
 
   // Action handling
-  void SendPacket(char* packet, int size);
-  virtual void SendAction(Action* action);
+  void SendPacket(char* packet, int size) const;
+  virtual void SendAction(Action* action) const;
 
   virtual void ReceiveActions() = 0;
   virtual void SendChatMessage(const std::string& txt) = 0;
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
-
 
   // Start a client
   static connection_state_t ClientStart(const std::string &host, const std::string &port);
 
   // Start a server
   static connection_state_t ServerStart(const std::string &port);
+
+  // Manage network state
+  void SetState(Network::network_state_t state);
+  Network::network_state_t GetState() const;
+  void SendNetworkState() const;
 };
 
 //-----------------------------------------------------------------------------
