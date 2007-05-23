@@ -325,16 +325,16 @@ void GameLoop::Run()
   }
 }
 
-void GameLoop::EndOfGame() 
+void GameLoop::EndOfGame()
 {
   int delay = 0;
   uint time_of_next_frame = SDL_GetTicks();
   uint previous_time_frame = 0;
-  
+
   SetState(END_TURN);
   duration = GameMode::GetInstance()->duration_exchange_player + 2;
   GameMessages::GetInstance()->Add (_("And the winner is..."));
-  
+
   while (duration >= 1 ) {
     // Refresh clock value
     RefreshClock();
@@ -344,10 +344,10 @@ void GameLoop::EndOfGame()
     } else {
       previous_time_frame = Time::GetInstance()->Read();
     }
-    
+
     // Refresh the map
     world.Refresh();
-    
+
     // try to adjust to max Frame by seconds
     time_of_next_frame += AppWormux::GetInstance()->video.GetSleepMaxFps();
     if (time_of_next_frame > SDL_GetTicks()) {
@@ -593,14 +593,8 @@ bool GameLoop::IsAnythingMoving()
   }
 
   if (!object_still_moving)
-  {
-    PhysicalObj *obj = GetMovingObject();
-    if (obj != NULL)
-    {
-      camera.FollowObject (obj, true, true);
+    if (GetMovingObject() != NULL)
       object_still_moving = true;
-    }
-  }
 
   return object_still_moving;
 }

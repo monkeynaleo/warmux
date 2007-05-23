@@ -57,7 +57,6 @@ FireParticle::FireParticle() :
 
 FireParticle::~FireParticle()
 {
-  camera.StopFollowingObj(this);
 }
 
 void FireParticle::Refresh()
