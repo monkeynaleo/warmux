@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-03-07 15:53+0100\n"
+"PO-Revision-Date: 2007-05-23 10:38+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
@@ -144,7 +144,7 @@ msgstr "Svi timovi"
 
 #: src/game/game_loop.cpp:336
 msgid "And the winner is..."
-msgstr ""
+msgstr "I pobjednik je ..."
 
 #: src/weapon/anvil.cpp:89
 msgid "Anvil"
@@ -229,7 +229,7 @@ msgstr "Izgradi"
 
 #: src/menu/results_menu.cpp:144
 msgid "Controlled by: "
-msgstr ""
+msgstr "Kontroliran od strane:"
 
 #: src/menu/main_menu.cpp:107
 msgid "Credits"
@@ -272,8 +272,7 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:253
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -305,8 +304,7 @@ msgstr "Greška: Nemoguće konektovat se na %s:%s"
 
 #: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
-msgstr ""
-"Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
+msgstr "Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
 
 #: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
@@ -333,7 +331,7 @@ msgstr "Lansiraj GNU-a"
 
 #: src/weapon/grapple.cpp:82
 msgid "Grapple"
-msgstr ""
+msgstr "Hvatanje ukoštac"
 
 #: src/weapon/grenade.cpp:67
 msgid "Grenade"
@@ -578,7 +576,7 @@ msgstr "Pokreni igru"
 
 #: src/network/chat.cpp:72
 msgid "Say: "
-msgstr ""
+msgstr "Reci:"
 
 #: src/menu/game_menu.cpp:106
 msgid "Scroll on border"
@@ -696,7 +694,7 @@ msgstr "Granata napušta bojište prije explozije"
 
 #: src/menu/network_menu.cpp:292
 msgid "The others are waiting for you! Wake up :-)"
-msgstr ""
+msgstr "Drugi te čekaju! Probudi se :)"
 
 #: src/weapon/bazooka.cpp:58 src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
@@ -716,7 +714,7 @@ msgstr[1] "Tu je samo %i tim."
 
 #: src/interface/weapon_menu.cpp:171
 msgid "Tools"
-msgstr ""
+msgstr "Alati"
 
 #: src/network/net_error_msg.cpp:37
 msgid "Unable to contact host."
@@ -747,8 +745,7 @@ msgstr ""
 msgid ""
 "WARNING!! Network is still under developement and therefore a little "
 "experimental."
-msgstr ""
-"UPOYORENJE! Mreža se i dalje razvija i tako da je poprilično experimentalna."
+msgstr "UPOYORENJE! Mreža se i dalje razvija i tako da je poprilično experimentalna."
 
 #: src/menu/network_menu.cpp:229
 #, c-format
@@ -759,7 +756,7 @@ msgstr[1] "Čekaj! %i igrač nije još spreman!"
 
 #: src/menu/network_menu.cpp:359
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr ""
+msgstr "Čekanje za server, sve što sad možeš uraditi je odustati ili chatati!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -847,70 +844,3 @@ msgstr "o Učitavam zvučne profile: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
 
-#~ msgid "Ninjarope"
-#~ msgstr "Nindža uže"
-
-#, fuzzy
-#~ msgid "Error while exporting file %s:"
-#~ msgstr "Greška tokom eksportovanja moda igre  %s (file %s):"
-
-#~ msgid "Error while loading game mode %s from memory:"
-#~ msgstr "Greška tokom učitavanja moda igre  %s iz memorije:"
-
-#~ msgid "Unexpected exception caught..."
-#~ msgstr "Neočekivani izuzetak pronađen..."
-
-#~ msgid "C++ exception caught:"
-#~ msgstr "C++ izuzetak nađen:"
-
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Nije uspio initijalizirati mrežnu biblioteku!"
-
-#~ msgid "Initialisation of TTF library failed: %s"
-#~ msgstr "Inicijalizacija TTF biblioteke nije uspjelo: %s"
-
-#~ msgid "Unable to initialize SDL library: %s"
-#~ msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
-
-#~ msgid "You need at least two teams to play: change this in 'Options menu' !"
-#~ msgstr ""
-#~ "Trebate barem dva tima da igraju: promijeni ovo u 'Menu za Opcije ' !"
-
-#~ msgid "general: "
-#~ msgstr "general:"
-
-#~ msgid " has joined the party"
-#~ msgstr "%s se pridružio partiji"
-
-#~ msgid " has left the party"
-#~ msgstr "%s je napustio partiju"
-
-#~ msgid "Find a random position for characters"
-#~ msgstr "Pronađi pozicije za likove nasumice"
-
-#~ msgid "* Couldn't initialize SDL: "
-#~ msgstr "Nije u stanju inicijalizirati SDL biblioteku: %s"
-
-#~ msgid "* Couldn't open audio: "
-#~ msgstr "Čekaj! %i igrač nije još spreman!"
-
-#~ msgid "[Music] Error : Unable to load music file: %s"
-#~ msgstr "[Music] Error : Nije u stanju da očita muzički file: %s"
-
-#~ msgid "[Music] Error : file %s does not exist"
-#~ msgstr "[Music] Error : file %s ne postoji"
-
-#~ msgid "[Music] Error : file %s not found"
-#~ msgstr "[Music] Error : file %s nije pronađen"
-
-#~ msgid "[Music] Unable to find music file: %s"
-#~ msgstr "[Music] Nije u mogućnosti da nađe muzički file: %s"
-
-#~ msgid "[Music] Unable to find profile: %s"
-#~ msgstr "[Music] Nije u mogućnosti da nađe profil: %s "
-
-#~ msgid "[Sound] Error : file %s not found"
-#~ msgstr "[Sound] Greška :  file %s nije pronađen"
-
-#~ msgid "[Sound] Error: File %s does not exist"
-#~ msgstr "[Sound] Greška: File %s ne postoji"
