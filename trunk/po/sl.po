@@ -4,14 +4,14 @@
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the Wormux package.
 #
-#  <email4marko@gmail.com>, 2007.
 # Marko Burjek <email4marko@gmail.com>, 2007.
+# Jaka Kranjc <mokovec@gmail.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "PO-Revision-Date: 2007-03-13 19:09+0100\n"
-"Last-Translator: Marko Burjek <email4marko@gmail.com>\n"
+"Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -123,9 +123,9 @@ msgstr[2] "Ekipa %s je osvojila %u %s-e!"
 msgstr[3] "Ekipa %s je osvojila %u %s!"
 
 #: src/include/action_handler.cpp:222
-#, fuzzy, c-format
+#, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "Wormux različice so različne : odjemalec=%s, strežnik=%s."
+msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
 
 #: src/menu/options_menu.cpp:130
 msgid "(current)"
@@ -155,7 +155,7 @@ msgstr "Vse ekipe"
 
 #: src/game/game_loop.cpp:336
 msgid "And the winner is..."
-msgstr ""
+msgstr "In zmagali so ..."
 
 #: src/weapon/anvil.cpp:89
 msgid "Anvil"
@@ -240,7 +240,7 @@ msgstr "Tram"
 
 #: src/menu/results_menu.cpp:144
 msgid "Controlled by: "
-msgstr ""
+msgstr "Vodja: "
 
 #: src/menu/main_menu.cpp:107
 msgid "Credits"
@@ -272,9 +272,8 @@ msgid "Error in %s:%lu"
 msgstr "Napaka v %s:%lu"
 
 #: src/team/teams_list.cpp:107 src/team/teams_list.cpp:115
-#, fuzzy
 msgid "Error loading team :"
-msgstr "Napaka pri nalaganju ekipe %s:"
+msgstr "Napaka pri nalaganju ekipe :"
 
 #: src/team/team.cpp:151
 #, c-format
@@ -345,7 +344,7 @@ msgstr "Metalec gnuja"
 
 #: src/weapon/grapple.cpp:82
 msgid "Grapple"
-msgstr ""
+msgstr "Kavelj"
 
 #: src/weapon/grenade.cpp:67
 msgid "Grenade"
@@ -374,9 +373,8 @@ msgstr "Poveljnik"
 
 #. Display player's name
 #: src/interface/interface.cpp:161
-#, fuzzy
 msgid "Head commander: "
-msgstr "Poveljnik"
+msgstr "Poveljnik: "
 
 #: src/menu/network_connection_menu.cpp:165
 msgid "Host a game"
@@ -403,14 +401,12 @@ msgid "Initialisation"
 msgstr "Inicializacija"
 
 #: src/game/game_init.cpp:142
-#, fuzzy
 msgid "Initialise map"
-msgstr "Inicializacija podatkov"
+msgstr "Inicializacija karte"
 
 #: src/game/game_init.cpp:174
-#, fuzzy
 msgid "Initialise sounds"
-msgstr "Inicializacija objektov"
+msgstr "Inicializacija zvokov"
 
 #: src/game/game_init.cpp:153
 msgid "Initialise teams"
@@ -470,9 +466,8 @@ msgid "Mine"
 msgstr "Mina"
 
 #: src/menu/results_menu.cpp:208
-#, fuzzy
 msgid "Most clumsy"
-msgstr "Najbolj uporaben"
+msgstr "Najbolj neroden"
 
 #: src/menu/results_menu.cpp:203
 msgid "Most sold-out"
@@ -499,9 +494,8 @@ msgid "Network Game"
 msgstr "Omrežna igra"
 
 #: src/network/network.cpp:140
-#, fuzzy
 msgid "Network initialization"
-msgstr "Inicializacija tal..."
+msgstr "Inicializacija omrežja"
 
 #: src/weapon/weapon.cpp:598
 #, c-format
@@ -578,7 +572,7 @@ msgstr "Osveži"
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:72
 msgid "Remote"
-msgstr "Oddaljen"
+msgstr "Oddaljeni"
 
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
@@ -594,7 +588,7 @@ msgstr "Poženi igro"
 
 #: src/network/chat.cpp:72
 msgid "Say: "
-msgstr ""
+msgstr "Reci: "
 
 #: src/menu/game_menu.cpp:106
 msgid "Scroll on border"
@@ -629,13 +623,12 @@ msgstr "Ostrostrelska puška"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:102
-#, fuzzy
 msgid ""
 "Some weapons are disabled, because of known bugs (grapple, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
 msgstr ""
-"Nekatera orožja so neaktivirana, zaradi znanih hroščev (ninja vrv, zračno "
-"kladivo, spajkalnik, brzostrelka) in zagotovo tudi dosti drugih stvari ne "
+"Nekatera orožja so zaradi znanih hroščev izključena (kavelj, zračno "
+"kladivo, varilnik, brzostrelka) in zagotovo tudi dosti drugih stvari ne "
 "deluje!"
 
 #: src/menu/options_menu.cpp:100
@@ -713,14 +706,13 @@ msgstr "Granata je zapustila bojišče preden je eksplodirala"
 
 #: src/menu/network_menu.cpp:292
 msgid "The others are waiting for you! Wake up :-)"
-msgstr ""
+msgstr "Ostali te čakajo! Zbudi se! :-)"
 
 #: src/weapon/bazooka.cpp:58 src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je zapustila bojišče..."
 
 #: src/network/net_error_msg.cpp:46
-#, fuzzy
 msgid "The server rejected the connection."
 msgstr "Strežnik je zavrnil povezavo."
 
@@ -735,7 +727,7 @@ msgstr[3] "Tukaj je samo %i ekip."
 
 #: src/interface/weapon_menu.cpp:171
 msgid "Tools"
-msgstr ""
+msgstr "Orodja"
 
 #: src/network/net_error_msg.cpp:37
 msgid "Unable to contact host."
@@ -779,7 +771,7 @@ msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 
 #: src/menu/network_menu.cpp:359
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr ""
+msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -801,9 +793,8 @@ msgid "Wind particles?"
 msgstr "Vetrni delci?"
 
 #: src/menu/results_menu.cpp:138
-#, fuzzy
 msgid "Winner"
-msgstr "Mina"
+msgstr "Zmagovalec"
 
 #: src/main.cpp:174
 msgid "Wormux launching..."
@@ -819,9 +810,8 @@ msgid "XML error during loading map '%s' :"
 msgstr "XML napaka pri nalaganju karte '%s' :"
 
 #: src/menu/network_menu.cpp:295
-#, fuzzy
 msgid "You are alone :-/"
-msgstr "Sami ste..."
+msgstr "Sami ste :-/"
 
 #: src/menu/network_menu.cpp:223
 msgid "You are alone..."
@@ -840,18 +830,16 @@ msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 
 #: src/menu/credits_menu.cpp:68
-#, fuzzy
 msgid "aka"
-msgstr " kot "
+msgstr "kot"
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "opravljeno"
 
 #: src/menu/credits_menu.cpp:72
-#, fuzzy
 msgid "from"
-msgstr " iz "
+msgstr "iz"
 
 #: src/sound/jukebox.cpp:153
 msgid "o Loading music"
@@ -867,71 +855,3 @@ msgstr "o Nalaganje zvočnega profila: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
 
-#~ msgid "Ninjarope"
-#~ msgstr "Ninja vrv"
-
-#, fuzzy
-#~ msgid "Error while exporting file %s:"
-#~ msgstr "Napaka pri izvažanju igralskega načina %s (datoteka %s):"
-
-#~ msgid "Error while loading game mode %s from memory:"
-#~ msgstr "Napaka pri nalaganju igralskega načina %s iz spomina:"
-
-#~ msgid "Unexpected exception caught..."
-#~ msgstr "Nepričakovana izjema ujeta..."
-
-#~ msgid "C++ exception caught:"
-#~ msgstr "C++ izjema ujeta:"
-
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Spodletela inicializacija internetne knjižnice!"
-
-#~ msgid "Initialisation of TTF library failed: %s"
-#~ msgstr "Inicializacija knjižnice TTF je bila neuspešna: %s"
-
-#~ msgid "Unable to initialize SDL library: %s"
-#~ msgstr "Ni bilo mogoče inicializirati knjižnjice SDL: %s"
-
-#~ msgid "You need at least two teams to play: change this in 'Options menu' !"
-#~ msgstr ""
-#~ "Potrebujete vsaj dve ekipi za igro: to lahko spremenite v meniju "
-#~ "'Možnosti' !"
-
-#~ msgid "general: "
-#~ msgstr "splošno: "
-
-#~ msgid " has joined the party"
-#~ msgstr " se je pridružil/a zabavi"
-
-#~ msgid " has left the party"
-#~ msgstr " je zapustil/a zabavo"
-
-#~ msgid "* Couldn't initialize SDL: "
-#~ msgstr "* Ni bilo mogoče inicializirati SDL: "
-
-#~ msgid "* Couldn't open audio: "
-#~ msgstr "* Ni bilo mogoče odpreti zvoka: "
-
-#~ msgid "Find a random position for characters"
-#~ msgstr "Poišči naključen položaj za člane"
-
-#~ msgid "[Music] Error : Unable to load music file: %s"
-#~ msgstr "[Glasba] Napaka : Ni bilo mogoče naložiti glasbene datoteke: %s"
-
-#~ msgid "[Music] Error : file %s does not exist"
-#~ msgstr "[Glasba] Napaka : datoteka %s ne obstaja"
-
-#~ msgid "[Music] Error : file %s not found"
-#~ msgstr "[Glasba] Napaka : datoteka %s ni bila najdena"
-
-#~ msgid "[Music] Unable to find music file: %s"
-#~ msgstr "[Glasba] Ni bilo mogoče najti glasbene datoteke: %s"
-
-#~ msgid "[Music] Unable to find profile: %s"
-#~ msgstr "[Glasba] Ni bilo mogoče najti profila: %s"
-
-#~ msgid "[Sound] Error : file %s not found"
-#~ msgstr "[Zvok] Napaka : datoteka %s ni bila najdena"
-
-#~ msgid "[Sound] Error: File %s does not exist"
-#~ msgstr "[Zvok] Napaka : Datoteka %s ne obstaja"
