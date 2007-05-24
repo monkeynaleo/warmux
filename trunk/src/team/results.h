@@ -45,6 +45,10 @@ private:
   const Character* mostUseless;
   const Character* biggestTraitor;
   const Character* mostClumsy;
+
+  static TeamResults* createTeamResults(Team* team);
+  static TeamResults* createGlobalResults();
+
 protected:
   TeamResults(const std::string& name,
 	      const Surface* team_logo,
@@ -54,8 +58,6 @@ protected:
 	      const Character* BT,
 	      const Character* MS);
 public:
-  static TeamResults* createTeamResults(Team* team);
-  static TeamResults* createGlobalResults(std::vector<TeamResults*>* list);
   static std::vector<TeamResults*>* createAllResults(void);
   static void deleteAllResults(std::vector<TeamResults*>* results_list);
 

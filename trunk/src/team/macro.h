@@ -25,43 +25,43 @@
 #include "teams_list.h"
 //-----------------------------------------------------------------------------
 
-// Boucle pour chaque equipe
-#define FOR_EACH_TEAM(equipe) \
-  for (TeamsList::iterator equipe=teams_list.playing_list.begin(), \
-       fin_pour_chaque_equipe=teams_list.playing_list.end(); \
-       equipe != fin_pour_chaque_equipe; \
-       ++equipe)
+// Boucle pour chaque team
+#define FOR_EACH_TEAM(team) \
+  for (TeamsList::iterator team=teams_list.playing_list.begin(), \
+       fin_pour_chaque_team=teams_list.playing_list.end(); \
+       team != fin_pour_chaque_team; \
+       ++team)
 
-// Boucle pour chaque ver d'une equipe (sauf les fantomes)
-#define FOR_EACH_CHARACTER(equipe,ver) \
-  for (Team::iterator ver = (*(equipe)).begin(), \
-       fin_pour_chaque_ver = (*(equipe)).end(); \
-       ver != fin_pour_chaque_ver; \
-       ++ver) \
-  if (!ver -> IsGhost())
+#define FOR_EACH_LIVING_AND_DEAD_CHARACTER(team, character) \
+  for (Team::iterator character = (*(team)).begin(), \
+       end_character = (*(team)).end(); \
+       character != end_character; \
+       ++character) \
 
-// Boucle pour chaque ver vivant d'une equipe
-#define FOR_EACH_LIVING_CHARACTER(equipe,ver) \
-  for (Team::iterator ver = (*(equipe)).begin(), \
-       fin_pour_chaque_ver_vivant = (*(equipe)).end(); \
-       ver != fin_pour_chaque_ver_vivant; \
-       ++ver) \
-  if (!ver -> IsDead())
+#define FOR_EACH_CHARACTER(team,character) \
+  FOR_EACH_LIVING_AND_DEAD_CHARACTER(team,character) \
+  if (!character -> IsGhost())
 
-// Boucle pour tous les vers (or fantomes)
-#define FOR_ALL_CHARACTERS(equipe,ver) \
-  FOR_EACH_TEAM(equipe) \
-  FOR_EACH_CHARACTER(*equipe,ver) 
+#define FOR_EACH_LIVING_CHARACTER(team,character) \
+  FOR_EACH_LIVING_AND_DEAD_CHARACTER(team,character) \
+  if (!character -> IsDead())
 
-// Boucle pour tous les vers vivants
-#define FOR_ALL_LIVING_CHARACTERS(equipe,ver) \
-  FOR_EACH_TEAM(equipe) \
-  FOR_EACH_LIVING_CHARACTER(*equipe,ver) 
+#define FOR_ALL_LIVING_AND_DEAD_CHARACTER(team, character) \
+  FOR_EACH_TEAM(team) \
+  FOR_EACH_LIVING_AND_DEAD_CHARACTER(*team,character)
 
-#define FOR_ALL_LIVING_ENEMIES(shooter,equipe,ver)	\
-  FOR_EACH_TEAM(equipe) \
-  if (!(*equipe)->IsSameAs(shooter.GetTeam()))	\
-  FOR_EACH_LIVING_CHARACTER(*equipe,ver) 
+#define FOR_ALL_CHARACTERS(team,character) \
+  FOR_EACH_TEAM(team) \
+  FOR_EACH_CHARACTER(*team,character) 
+
+#define FOR_ALL_LIVING_CHARACTERS(team,character) \
+  FOR_EACH_TEAM(team) \
+  FOR_EACH_LIVING_CHARACTER(*team,character) 
+
+#define FOR_ALL_LIVING_ENEMIES(shooter,team,character)	\
+  FOR_EACH_TEAM(team) \
+  if (!(*team)->IsSameAs(shooter.GetTeam()))	\
+  FOR_EACH_LIVING_CHARACTER(*team,character) 
 
 //-----------------------------------------------------------------------------
 #endif

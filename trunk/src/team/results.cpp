@@ -60,11 +60,7 @@ TeamResults* TeamResults::createTeamResults(Team* team)
   const Character* MostClumsy = NULL;
 
   // Search best/worst performers
-  for (Team::const_iterator player = team->begin(),
-       last_player = team->end();
-       player != last_player;
-       ++player) 
-    //FOR_EACH_CHARACTER(team, player)
+  FOR_EACH_LIVING_AND_DEAD_CHARACTER(team, player)
   {
     // Most damage in one shot
     if (player->GetDamageStats().GetMostDamage() > most_violent)
@@ -108,7 +104,7 @@ TeamResults* TeamResults::createTeamResults(Team* team)
 			 MostClumsy);
 }
 
-TeamResults* TeamResults::createGlobalResults(std::vector<TeamResults*>* list)
+TeamResults* TeamResults::createGlobalResults()
 {
   uint most_violent = 0;
   uint most_useless = 0x0FFFFFFF;
@@ -121,42 +117,37 @@ TeamResults* TeamResults::createGlobalResults(std::vector<TeamResults*>* list)
   const Character* BiggestTraitor = NULL;
   const Character* MostClumsy = NULL;
 
-  for (res_iterator result=list->begin(), last_result=list->end();
-       result != last_result;
-       ++result)
+  FOR_ALL_LIVING_AND_DEAD_CHARACTER(team, player)
   {
-    const Character* player;
     // Most damage in one shot
-    player = (*(result))->getMostViolent();
-    if(player == NULL) continue;
     if (player->GetDamageStats().GetMostDamage() > most_violent)
     {
       most_violent = player->GetDamageStats().GetMostDamage();
-      MostViolent  = player;
+      MostViolent  = &(*player);
     }
     // Most damage oplayerall to other teams
     if (player->GetDamageStats().GetOthersDamage() > most_useful)
     {
       most_useful = player->GetDamageStats().GetOthersDamage();
-      MostUseful  = player;
+      MostUseful  = &(*player); 
     }
     // Least damage oplayerall to other teams
     if (player->GetDamageStats().GetOthersDamage() < most_useless)
     {
       most_useless = player->GetDamageStats().GetOthersDamage();
-      MostUseless  = player;
+      MostUseless  = &(*player); 
     }
     // Most damage oplayerall to his own team (but not to itself)
     if (player->GetDamageStats().GetFriendlyFireDamage() > most_traitor)
     {
       most_traitor = player->GetDamageStats().GetFriendlyFireDamage();
-      BiggestTraitor  = player;
+      BiggestTraitor = &(*player);
     }
     // Most damage to itself
     if (player->GetDamageStats().GetItselfDamage() > most_traitor)
     {
       most_clumsy = player->GetDamageStats().GetItselfDamage();
-      MostClumsy  = player;
+      MostClumsy  = &(*player); 
     }
     
   }
@@ -185,7 +176,7 @@ std::vector<TeamResults*>* TeamResults::createAllResults(void)
   }
  
   // Add overall results to list
-  results = TeamResults::createGlobalResults(results_list);
+  results = TeamResults::createGlobalResults();
   results_list->insert(results_list->begin(), results);
 
   return results_list;
