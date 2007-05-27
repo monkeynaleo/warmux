@@ -107,7 +107,7 @@ class LoadSprite(saxutils.DefaultHandler):
 			rhs_angle = - math.acos( float(rhs_pos.x - self.png.get_rect().width/2) / rhs_dst)
 
 
-		if(self.png.get_rect().width/2 - rhs_pos.y < 0): rhs_angle = -rhs_angle
+		if(self.png.get_rect().height/2 - rhs_pos.y < 0): rhs_angle = -rhs_angle
 
 		rhs_angle += self.angle
 
