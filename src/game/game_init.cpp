@@ -207,5 +207,8 @@ void GameInit::Init()
     EndInitGameData_NetClient();
 
   GameLoop::GetInstance()->Init();
+  
+  // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
+  Time::GetInstance()->Reset();
 }
 
