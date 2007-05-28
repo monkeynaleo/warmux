@@ -322,6 +322,13 @@
 
     <section title="Package maintainers">
       <author>
+        <nickname>AbsintheSyringe</nickname>
+	<name>Adnan Hodzic</name>
+	<description>Prepares Wormux SlackBuilds for Slackware</description>
+	<email>AbsintheSyringe_AT_gmail_DOT_com</email>
+	<country>Bosnia</country>
+      </author>
+      <author>
 	<nickname>artefact</nickname>
 	<name>Jean PARPAILLON</name>
 	<description>Debian GNU/Linux and Ubuntu packages of Wormux 0.7. Also: Some scripts</description>
