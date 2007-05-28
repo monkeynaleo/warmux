@@ -113,7 +113,7 @@ msgid_plural "%s team has won %u %ss!"
 msgstr[0] "Отборът на %s спечели %u %s !"
 msgstr[1] "Отборът на %s спечели %u %sи !"
 
-#: src/include/action_handler.cpp:222
+#: src/include/action_handler.cpp:223
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
@@ -389,21 +389,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Начално здраве"
 
-#: src/game/game_init.cpp:187
+#: src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "Инициализация..."
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:108
 #, fuzzy
 msgid "Initialise map"
 msgstr "Инициализирам основни данни..."
 
-#: src/game/game_init.cpp:174
+#: src/game/game_init.cpp:140
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Инициализирам обектите..."
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr "Инициализирам отборите..."
 
@@ -444,7 +444,7 @@ msgstr "Ниска гравитация"
 msgid "Map %s, a creation of: "
 msgstr "Картата %s е творение на: "
 
-#: src/game/game_init.cpp:144
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr "Карти"
 
@@ -636,7 +636,7 @@ msgid "Sound frequency"
 msgstr "Честота на семплиране"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:177
+#: src/game/game_init.cpp:143
 msgid "Sounds"
 msgstr "Звуци"
 
@@ -660,7 +660,7 @@ msgstr "Супер-Tux!"
 msgid "Syringe"
 msgstr "Отрова"
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr "Отбори"
 
@@ -762,13 +762,13 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
 msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 
-#: src/menu/network_menu.cpp:359
+#: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:166 src/interface/weapon_menu.cpp:169
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:169
 msgid "Weapons"
 msgstr "Оръжия"
 
@@ -816,7 +816,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Трябва ми поне една валидна карта!"
 
-#: src/game/game_init.cpp:159 src/team/teams_list.cpp:174
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:174
 msgid "You need at least two valid teams !"
 msgstr "Трябват ми поне два валидни отбора!"
 

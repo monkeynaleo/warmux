@@ -110,7 +110,7 @@ msgid_plural "%s team has won %u %ss!"
 msgstr[0] "A equipe '%s' ganhou %u %s!"
 msgstr[1] "A equipe '%s' ganhou %u %ss!"
 
-#: src/include/action_handler.cpp:222
+#: src/include/action_handler.cpp:223
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "As versões do Wormux são diferentes : cliente=%s, servidor=%s."
@@ -390,21 +390,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energia inicial"
 
-#: src/game/game_init.cpp:187
+#: src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "Inicialização"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:108
 #, fuzzy
 msgid "Initialise map"
 msgstr "Inicializar mapa"
 
-#: src/game/game_init.cpp:174
+#: src/game/game_init.cpp:140
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Inicializar sons"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr "Inicializar equipes"
 
@@ -445,7 +445,7 @@ msgstr "Baixa gravidade"
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, uma criação de :"
 
-#: src/game/game_init.cpp:144
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr "Mapas"
 
@@ -641,7 +641,7 @@ msgid "Sound frequency"
 msgstr "Frequência do som"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:177
+#: src/game/game_init.cpp:143
 msgid "Sounds"
 msgstr "Sons"
 
@@ -665,7 +665,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringa"
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr "Equipes"
 
@@ -776,13 +776,13 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Espere! %i jogador ainda não está pronto!"
 msgstr[1] "Espere! %i jogaderes ainda não estão prontos!"
 
-#: src/menu/network_menu.cpp:359
+#: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Esperando pelo servidor, você ainda pode conversar ou cancelar!"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:166 src/interface/weapon_menu.cpp:169
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:169
 msgid "Weapons"
 msgstr "Armas:"
 
@@ -829,7 +829,7 @@ msgstr "Você está sozinho..."
 msgid "You need at least one valid map !"
 msgstr "Você precisa de pelo menos um mapa válido!"
 
-#: src/game/game_init.cpp:159 src/team/teams_list.cpp:174
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:174
 msgid "You need at least two valid teams !"
 msgstr "Você precisa de pelo menos duas equipes válidas!"
 
