@@ -382,6 +382,20 @@ void Character::DecDiseaseDuration()
   else disease_damage_per_turn = 0;
 }
 
+alive_t Character::GetLifeState() const
+{
+  return m_alive;
+}
+
+void Character::SetLifeState(alive_t state)
+{
+  if (m_alive == state) 
+    return;
+
+  std::cerr << "Force life's state of "<< GetName() << " to m_alive = " << state << std::endl;
+  m_alive = state;
+}
+
 void Character::Draw()
 {
   if (hidden) return;

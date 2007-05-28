@@ -117,6 +117,10 @@ public:
   uint GetDiseaseDuration() const;
   void DecDiseaseDuration();
 
+  // to be used by action handler
+  alive_t GetLifeState() const;
+  void SetLifeState(alive_t state);
+
   void Draw();
   void Refresh();
 

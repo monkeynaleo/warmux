@@ -349,6 +349,7 @@ void Action::StoreCharacter(uint team_no, uint char_no)
   Push((int)c->GetDirection());
   Push(c->GetAbsFiringAngle());
   Push(c->GetEnergy());
+  Push((int)c->GetLifeState());
   Push((int)c->GetDiseaseDamage());
   Push((int)c->GetDiseaseDuration());
   Push(c->GetSpeed());
@@ -374,6 +375,7 @@ void Action::RetrieveCharacter()
   c->SetDirection((Body::Direction_t)PopInt());
   c->SetFiringAngle(PopDouble());
   c->SetEnergy(PopInt());
+  c->SetLifeState((alive_t)PopInt());
   int disease_damage_per_turn = PopInt();
   int disease_duration = PopInt();
   c->SetDiseaseDamage(disease_damage_per_turn, disease_duration);
