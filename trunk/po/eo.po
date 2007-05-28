@@ -109,7 +109,7 @@ msgid_plural "%s team has won %u %ss!"
 msgstr[0] "%s teamo gajnis %u aŭtomatikan bazukon!"
 msgstr[1] "%s teamo gajnis %u aŭtomatikajn bazukojn!"
 
-#: src/include/action_handler.cpp:222
+#: src/include/action_handler.cpp:223
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -393,21 +393,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Komenca energio"
 
-#: src/game/game_init.cpp:187
+#: src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "Preparanto"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:108
 #, fuzzy
 msgid "Initialise map"
 msgstr "Preparante datumojn"
 
-#: src/game/game_init.cpp:174
+#: src/game/game_init.cpp:140
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Preparante objektojn"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
@@ -447,7 +447,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Mapo %s, far :"
 
-#: src/game/game_init.cpp:144
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr ""
 
@@ -651,7 +651,7 @@ msgid "Sound frequency"
 msgstr "Sonaj efektoj"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:177
+#: src/game/game_init.cpp:143
 #, fuzzy
 msgid "Sounds"
 msgstr "Sonaj agordoj"
@@ -676,7 +676,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr ""
 
@@ -783,13 +783,13 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/menu/network_menu.cpp:359
+#: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:166 src/interface/weapon_menu.cpp:169
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:169
 #, fuzzy
 msgid "Weapons"
 msgstr "Armilo:"
@@ -838,7 +838,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Vi bezonas almenaŭ unu taŭgan mapon!"
 
-#: src/game/game_init.cpp:159 src/team/teams_list.cpp:174
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:174
 msgid "You need at least two valid teams !"
 msgstr "Vi bezonas almenaŭ du teamojn!"
 

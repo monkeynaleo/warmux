@@ -109,7 +109,7 @@ msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/include/action_handler.cpp:222
+#: src/include/action_handler.cpp:223
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -382,21 +382,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Başlangıç enerjisi"
 
-#: src/game/game_init.cpp:187
+#: src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "Ayarlama"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:108
 #, fuzzy
 msgid "Initialise map"
 msgstr "Veriler yükleniyor"
 
-#: src/game/game_init.cpp:174
+#: src/game/game_init.cpp:140
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Nesneler yükleniyor"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
@@ -436,7 +436,7 @@ msgstr "Düşük yer çekimi"
 msgid "Map %s, a creation of: "
 msgstr "%s haritasını tasarlayan:"
 
-#: src/game/game_init.cpp:144
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr "Haritalar"
 
@@ -626,7 +626,7 @@ msgid "Sound frequency"
 msgstr "Ses frekansı"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:177
+#: src/game/game_init.cpp:143
 msgid "Sounds"
 msgstr "Sesler"
 
@@ -650,7 +650,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Şırınga"
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr "Takımlar"
 
@@ -748,13 +748,13 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 
-#: src/menu/network_menu.cpp:359
+#: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:166 src/interface/weapon_menu.cpp:169
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:169
 msgid "Weapons"
 msgstr "Silahlar"
 
@@ -801,7 +801,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game_init.cpp:159 src/team/teams_list.cpp:174
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:174
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 

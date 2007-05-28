@@ -115,7 +115,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/include/action_handler.cpp:222
+#: src/include/action_handler.cpp:223
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux verzie sú rozdielne: klient=%s, server=%s."
@@ -387,21 +387,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Základná energia"
 
-#: src/game/game_init.cpp:187
+#: src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "Inicializácia"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:108
 #, fuzzy
 msgid "Initialise map"
 msgstr "Inicializácia dát"
 
-#: src/game/game_init.cpp:174
+#: src/game/game_init.cpp:140
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Inicializácia tímov"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr "Inicializácia tímov"
 
@@ -440,7 +440,7 @@ msgstr "NízkaGravitácia"
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, je výtvor:"
 
-#: src/game/game_init.cpp:144
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr "Mapy"
 
@@ -634,7 +634,7 @@ msgid "Sound frequency"
 msgstr "Zvuková frekvencia"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:177
+#: src/game/game_init.cpp:143
 msgid "Sounds"
 msgstr "Zvuky"
 
@@ -658,7 +658,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Syringe"
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr "Tími"
 
@@ -762,13 +762,13 @@ msgstr[0] "Čakaj! %i hráč nie je ešte pripravený!"
 msgstr[1] "Čakaj! %i hráči nie sú ešte pripravení!"
 msgstr[2] "Čakaj! %i hráči nie sú ešte pripravení!"
 
-#: src/menu/network_menu.cpp:359
+#: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:166 src/interface/weapon_menu.cpp:169
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:169
 msgid "Weapons"
 msgstr "Zbraňe"
 
@@ -816,7 +816,7 @@ msgstr "Si sáám..."
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
-#: src/game/game_init.cpp:159 src/team/teams_list.cpp:174
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:174
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tímy !"
 

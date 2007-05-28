@@ -113,7 +113,7 @@ msgid_plural "%s team has won %u %ss!"
 msgstr[0] "%s-laget har vunnet %u %s !"
 msgstr[1] "%s-laget har vunnet %u %ss !"
 
-#: src/include/action_handler.cpp:222
+#: src/include/action_handler.cpp:223
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Forskjellige versjoner av Wormux : mottager=%s, tjener=%s"
@@ -386,20 +386,20 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Livspoeng ved start"
 
-#: src/game/game_init.cpp:187
+#: src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "Starter"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:108
 msgid "Initialise map"
 msgstr "Laster kart"
 
-#: src/game/game_init.cpp:174
+#: src/game/game_init.cpp:140
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Laster objekter"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr "Laster lagene"
 
@@ -438,7 +438,7 @@ msgstr "Lav gravitet"
 msgid "Map %s, a creation of: "
 msgstr "%s-kartet, er laget av :"
 
-#: src/game/game_init.cpp:144
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr "Kart"
 
@@ -631,7 +631,7 @@ msgid "Sound frequency"
 msgstr "Lydstyrke ?"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:177
+#: src/game/game_init.cpp:143
 msgid "Sounds"
 msgstr "Lyder"
 
@@ -655,7 +655,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Sprøyte"
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr "Lag"
 
@@ -761,13 +761,13 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent ! %i spiller er ikke klar enda !"
 msgstr[1] "Vent ! %i spillere er ikke klare enda !"
 
-#: src/menu/network_menu.cpp:359
+#: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:166 src/interface/weapon_menu.cpp:169
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:169
 msgid "Weapons"
 msgstr "Våpen"
 
@@ -815,7 +815,7 @@ msgstr "Du er alene..."
 msgid "You need at least one valid map !"
 msgstr "Du må ha i hvert fall ett godkjent kart !"
 
-#: src/game/game_init.cpp:159 src/team/teams_list.cpp:174
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:174
 msgid "You need at least two valid teams !"
 msgstr "Du må ha minst to godkjente lag!"
 
