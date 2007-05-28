@@ -33,7 +33,7 @@
  */
 #ifdef DEBUG
 #  define MSG_DEBUG(LEVEL, MESSAGE, ARGS...) \
-	PrintDebug( __FILE__, __PRETTY_FUNCTION__, __LINE__, LEVEL, MESSAGE, ## ARGS);
+	PrintDebug( __FILE__, __PRETTY_FUNCTION__, __LINE__, LEVEL, MESSAGE, ## ARGS)
 #else
 #  define MSG_DEBUG(LEVEL, MESSAGE, ARGS...) do {} while (0)
 #endif
