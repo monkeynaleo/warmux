@@ -17,4 +17,6 @@
 	<water>0</water>
 	<nb_mine>10</nb_mine>
 	<is_open>0</is_open>
+
+	<music_playlist>sea</music_playlist>
 </resources>

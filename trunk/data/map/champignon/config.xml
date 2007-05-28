@@ -17,4 +17,7 @@
 	<water>1</water>
 	<nb_mine>10</nb_mine>
 	<is_open>1</is_open>
+
+	<music_playlist>funfair</music_playlist>
+
 </resources>
