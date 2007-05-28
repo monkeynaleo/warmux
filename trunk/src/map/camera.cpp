@@ -43,6 +43,14 @@ Camera::Camera():
   follow_closely(false)
 {}
 
+void Camera::Reset()
+{
+  auto_crop = true;
+  followed_object = NULL;
+  throw_camera = false;
+  follow_closely = false;
+}
+
 bool Camera::HasFixedX() const{
   return (int)world.GetWidth() <= GetSizeX();
 }

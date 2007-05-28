@@ -44,8 +44,8 @@ private:
 public:
   TeamsList();
   ~TeamsList();
-  void LoadList ();
-  void NextTeam (bool begin_game);
+  void LoadList();
+  void NextTeam();
   Team& ActiveTeam();
   void LoadGamingData();
   void UnloadGamingData();

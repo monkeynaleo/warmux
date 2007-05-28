@@ -92,6 +92,13 @@ void GameLoop::Init()
 {
   fps.Reset();
   IgnorePendingInputEvents();
+  camera.Reset();
+
+  ActionHandler::GetInstance()->ExecActions();
+
+  FOR_ALL_CHARACTERS(team, character)
+    (*character).ResetDamageStats();
+
   SetState(END_TURN, true); // begin with a small pause
 }
 
@@ -434,32 +441,98 @@ ObjBox * GameLoop::GetCurrentBox() const
   return current_ObjBox;
 }
 
-void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
+// Begining of a new turn
+void GameLoop::__SetState_PLAYING()
 {
-  ActionHandler * action_handler = ActionHandler::GetInstance();
+  MSG_DEBUG("game.statechange", "Playing" );
 
+  // Center the cursor
+  Mouse::GetInstance()->CenterPointer();
+
+  // initialize counter
+  duration = GameMode::GetInstance()->duration_turn;
+  Interface::GetInstance()->UpdateTimer(duration);
+  Interface::GetInstance()->EnableDisplayTimer(true);
+  pause_seconde = Time::GetInstance()->Read();
+
+  if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
+    wind.ChooseRandomVal();
+
+  character_already_chosen = false;
+
+  // Prepare each character for a new turn
+  FOR_ALL_LIVING_CHARACTERS(team,character)
+    character->PrepareTurn();
+
+  // Select the next team
+  assert (!Game::GetInstance()->IsGameFinished());
+
+  if (Network::GetInstance()->IsLocal() || Network::GetInstance()->IsServer())
+    {
+      teams_list.NextTeam();
+
+      if ( GameMode::GetInstance()->allow_character_selection==GameMode::CHANGE_ON_END_TURN
+	   || GameMode::GetInstance()->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
+	{
+	  ActiveTeam().NextCharacter();
+	}
+
+      if ( Network::GetInstance()->IsServer() )
+	{
+	  // Tell to clients which character in the team is now playing
+	  Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
+	  playing_char.StoreActiveCharacter();
+	  Network::GetInstance()->SendAction(&playing_char);
+
+	  printf("Action_ChangeCharacter:\n");
+	  printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());
+	  printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
+	  printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
+	  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
+
+	}
+    }
+
+  camera.FollowObject (&ActiveCharacter(), true, true);
+  give_objbox = true; //hack make it so no more than one objbox per turn
+
+  // Applying Disease damage and Death mode.
+  ApplyDiseaseDamage();
+  ApplyDeathMode();
+}
+
+void GameLoop::__SetState_HAS_PLAYED()
+{
+  MSG_DEBUG("game.statechange", "Has played, now can move");
+  duration = GameMode::GetInstance()->duration_move_player;
+  pause_seconde = Time::GetInstance()->Read();
+  Interface::GetInstance()->UpdateTimer(duration);
+  CharacterCursor::GetInstance()->Hide();
+}
+
+void GameLoop::__SetState_END_TURN()
+{
+  MSG_DEBUG("game.statechange", "End of turn");
+  ActiveTeam().AccessWeapon().SignalTurnEnd();
+  CharacterCursor::GetInstance()->Hide();
+  duration = GameMode::GetInstance()->duration_exchange_player;
+  Interface::GetInstance()->UpdateTimer(duration);
+  Interface::GetInstance()->EnableDisplayTimer(false);
+  pause_seconde = Time::GetInstance()->Read();
+}
+
+void GameLoop::Really_SetState(game_loop_state_t new_state)
+{
   // already in good state, nothing to do
-  if ((state == new_state) && !begin_game) return;
-
+  if (state == new_state) return;
   state = new_state;
 
-  if(begin_game) {
-    action_handler->ExecActions();
-
-    FOR_ALL_CHARACTERS(team, character)
-      (*character).ResetDamageStats();
-  }
-
   Interface::GetInstance()->weapons_menu.Hide();
-
-  Time * global_time = Time::GetInstance();
-  GameMode * game_mode = GameMode::GetInstance();
 
   switch (state)
   {
   // Begining of a new turn:
-  case PLAYING:
-    MSG_DEBUG("game.statechange", "Playing" );
+  case PLAYING:  
 
     if (Network::GetInstance()->IsServer()) {
       // Send information about energy and position of every characters
@@ -467,93 +540,34 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
       SyncCharacters();
     }
 
-    // Center the cursor
-    Mouse::GetInstance()->CenterPointer();
-
-    // initialize counter
-    duration = game_mode->duration_turn;
-    Interface::GetInstance()->UpdateTimer(duration);
-    Interface::GetInstance()->EnableDisplayTimer(true);
-    pause_seconde = global_time->Read();
-
-    if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
-     wind.ChooseRandomVal();
-
-    character_already_chosen = false;
-
-    // Prepare each character for a new turn
-    FOR_ALL_LIVING_CHARACTERS(team,character)
-        character->PrepareTurn();
-
-    // Select the next team
-    assert (!Game::GetInstance()->IsGameFinished());
-
-    if (Network::GetInstance()->IsLocal() || Network::GetInstance()->IsServer())
-    {
-      do
-      {
-        teams_list.NextTeam (begin_game);
-        action_handler->ExecActions();
-      } while (ActiveTeam().NbAliveCharacter() == 0);
-
-
-      if ( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
-       || game_mode->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
-      {
-        ActiveTeam().NextCharacter();
-      }
-
-      if ( Network::GetInstance()->IsServer() )
-      {
-        // Tell to clients which character in the team is now playing
-        Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
-        playing_char.StoreActiveCharacter();
-        Network::GetInstance()->SendAction(&playing_char);
-
-        printf("Action_ChangeCharacter:\n");
-        printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());
-        printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
-        printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
-        printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
-
-      }
-    }
-
-    action_handler->ExecActions();
-
-//    assert (!ActiveCharacter().IsDead());
-    camera.FollowObject (&ActiveCharacter(), true, true);
-    give_objbox = true; //hack make it so no more than one objbox per turn
-
-    // Applying Disease damage and Death mode.
-    ApplyDiseaseDamage();
-    ApplyDeathMode();
-
+    __SetState_PLAYING();
     break;
 
   // The character have shooted, but can still move
   case HAS_PLAYED:
-    MSG_DEBUG("game.statechange", "Has played, now can move");
-    duration = game_mode->duration_move_player;
-    pause_seconde = global_time->Read();
-    Interface::GetInstance()->UpdateTimer(duration);
-    CharacterCursor::GetInstance()->Hide();
+    __SetState_HAS_PLAYED();
     break;
 
   // Little pause at the end of the turn
   case END_TURN:
-    MSG_DEBUG("game.statechange", "End of turn");
-    ActiveTeam().AccessWeapon().SignalTurnEnd();
-    CharacterCursor::GetInstance()->Hide();
-    duration = game_mode->duration_exchange_player;
-    Interface::GetInstance()->UpdateTimer(duration);
-    Interface::GetInstance()->EnableDisplayTimer(false);
-    pause_seconde = global_time->Read();
+    __SetState_END_TURN();
 
     if (Network::GetInstance()->IsServer())
       SyncCharacters(); // Send information about energy and position of every characters
     break;
   }
+}
+
+void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
+{
+  if (!Network::GetInstance()->IsServer() && !Network::GetInstance()->IsLocal())
+    return;
+
+  // already in good state, nothing to do
+  if ((state == new_state) && !begin_game) return;
+
+  Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE, new_state);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 PhysicalObj* GameLoop::GetMovingObject()
