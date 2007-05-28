@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-03-17 19:27+0100\n"
+"PO-Revision-Date: 2007-05-25 21:41+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -111,9 +111,9 @@ msgstr[0] "Holdet %s har fået %u %s!"
 msgstr[1] "Holdet %s har fået %u %ser!"
 
 #: src/include/action_handler.cpp:222
-#, fuzzy, c-format
+#, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "Wormux versioner er forskellige: klient=%s, server=%s"
+msgstr "%s prøver at forbinde med en anden version: klient=%s, mig=%s."
 
 #: src/menu/options_menu.cpp:130
 msgid "(current)"
@@ -143,7 +143,7 @@ msgstr "Alle hold"
 
 #: src/game/game_loop.cpp:336
 msgid "And the winner is..."
-msgstr ""
+msgstr "Og vinderen er..."
 
 #: src/weapon/anvil.cpp:89
 msgid "Anvil"
@@ -228,7 +228,7 @@ msgstr "Konstruér"
 
 #: src/menu/results_menu.cpp:144
 msgid "Controlled by: "
-msgstr ""
+msgstr "Kontrolleret af: "
 
 #: src/menu/main_menu.cpp:107
 msgid "Credits"
@@ -260,9 +260,8 @@ msgid "Error in %s:%lu"
 msgstr "Fejl i %s: %lu"
 
 #: src/team/teams_list.cpp:107 src/team/teams_list.cpp:115
-#, fuzzy
 msgid "Error loading team :"
-msgstr "Fejl under indlæsning af hold %s:"
+msgstr "Fejl under indlæsning af hold:"
 
 #: src/team/team.cpp:151
 #, c-format
@@ -271,10 +270,8 @@ msgstr "Fejl under indlæsning af holdet %ss data:"
 
 #: src/game/config.cpp:253
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
 
 #: src/game/config.cpp:169
 #, c-format
@@ -328,7 +325,7 @@ msgstr "Gnukaster"
 
 #: src/weapon/grapple.cpp:82
 msgid "Grapple"
-msgstr ""
+msgstr "Klo"
 
 #: src/weapon/grenade.cpp:67
 msgid "Grenade"
@@ -357,9 +354,8 @@ msgstr "Hovedkommandør"
 
 #. Display player's name
 #: src/interface/interface.cpp:161
-#, fuzzy
 msgid "Head commander: "
-msgstr "Hovedkommandør"
+msgstr "Hovedkommandør: "
 
 #: src/menu/network_connection_menu.cpp:165
 msgid "Host a game"
@@ -386,14 +382,12 @@ msgid "Initialisation"
 msgstr "Klargører"
 
 #: src/game/game_init.cpp:142
-#, fuzzy
 msgid "Initialise map"
-msgstr "Klargører data"
+msgstr "Klargører banen"
 
 #: src/game/game_init.cpp:174
-#, fuzzy
 msgid "Initialise sounds"
-msgstr "Klargører objekter"
+msgstr "Klargører lyde"
 
 #: src/game/game_init.cpp:153
 msgid "Initialise teams"
@@ -451,9 +445,8 @@ msgid "Mine"
 msgstr "Mine"
 
 #: src/menu/results_menu.cpp:208
-#, fuzzy
 msgid "Most clumsy"
-msgstr "Mest brugbar"
+msgstr "Mest klodset"
 
 #: src/menu/results_menu.cpp:203
 msgid "Most sold-out"
@@ -480,9 +473,8 @@ msgid "Network Game"
 msgstr "Netværksspil"
 
 #: src/network/network.cpp:140
-#, fuzzy
 msgid "Network initialization"
-msgstr "Banen klargøres..."
+msgstr "Netværksinitialisation"
 
 #: src/weapon/weapon.cpp:598
 #, c-format
@@ -575,7 +567,7 @@ msgstr "Kører spillet"
 
 #: src/network/chat.cpp:72
 msgid "Say: "
-msgstr ""
+msgstr "Sig: "
 
 #: src/menu/game_menu.cpp:106
 msgid "Scroll on border"
@@ -610,13 +602,12 @@ msgstr "Skarpskytteriffel"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:102
-#, fuzzy
 msgid ""
 "Some weapons are disabled, because of known bugs (grapple, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
 msgstr ""
-"Nogle våben er utilgængelige på grund af kendte fejl (ninjaræb, "
-"tryklufthammer, blæselampe, maskinpistol) og der er sikkert mange andre ting "
+"Nogle våben er utilgængelige på grund af kendte fejl (klo, "
+"tryklufthammer, blæselampe, maskinpistol), og der er sikkert mange andre ting "
 "som heller ikke virker!"
 
 #: src/menu/options_menu.cpp:100
@@ -694,14 +685,13 @@ msgstr "Granaten forlod slagmarken før den eksploderede"
 
 #: src/menu/network_menu.cpp:292
 msgid "The others are waiting for you! Wake up :-)"
-msgstr ""
+msgstr "De andre venter på dig! Vågn op :-)"
 
 #: src/weapon/bazooka.cpp:58 src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Raketten forlod slagmarken..."
 
 #: src/network/net_error_msg.cpp:46
-#, fuzzy
 msgid "The server rejected the connection."
 msgstr "Serveren afslog forbindelsen."
 
@@ -714,7 +704,7 @@ msgstr[1] "Der er kun %i hold."
 
 #: src/interface/weapon_menu.cpp:171
 msgid "Tools"
-msgstr ""
+msgstr "Værktøj"
 
 #: src/network/net_error_msg.cpp:37
 msgid "Unable to contact host."
@@ -758,7 +748,7 @@ msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
 #: src/menu/network_menu.cpp:359
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr ""
+msgstr "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -780,9 +770,8 @@ msgid "Wind particles?"
 msgstr "Vindpartikler?"
 
 #: src/menu/results_menu.cpp:138
-#, fuzzy
 msgid "Winner"
-msgstr "Mine"
+msgstr "Vinder"
 
 #: src/main.cpp:174
 msgid "Wormux launching..."
@@ -798,9 +787,8 @@ msgid "XML error during loading map '%s' :"
 msgstr "XML-fejl under indlæsning af bane '%s':"
 
 #: src/menu/network_menu.cpp:295
-#, fuzzy
 msgid "You are alone :-/"
-msgstr "Du er alene..."
+msgstr "Du er alene :-/"
 
 #: src/menu/network_menu.cpp:223
 msgid "You are alone..."
@@ -819,18 +807,16 @@ msgid "Your shot has missed!"
 msgstr "Du ramte ved siden af!"
 
 #: src/menu/credits_menu.cpp:68
-#, fuzzy
 msgid "aka"
-msgstr " også kendt som "
+msgstr "også kendt som"
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "færdig"
 
 #: src/menu/credits_menu.cpp:72
-#, fuzzy
 msgid "from"
-msgstr " fra "
+msgstr "fra"
 
 #: src/sound/jukebox.cpp:153
 msgid "o Loading music"
@@ -846,44 +832,3 @@ msgstr "o Indlæser lydprofilen: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
 
-#~ msgid "Ninjarope"
-#~ msgstr "Ninjaræb"
-
-#, fuzzy
-#~ msgid "Error while exporting file %s:"
-#~ msgstr "Fejl under eksportering af spilmodus %s (fil %s):"
-
-#~ msgid "Error while loading game mode %s from memory:"
-#~ msgstr "Fejl under indlæsning af spilmodus %s fra hukommelsen:"
-
-#~ msgid "Unexpected exception caught..."
-#~ msgstr "Uventet undtagelse fanget..."
-
-#~ msgid "C++ exception caught:"
-#~ msgstr "C++ undtagelse fanget:"
-
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Kan ikke klargøre netværksbiblioteket!"
-
-#~ msgid "Initialisation of TTF library failed: %s"
-#~ msgstr "Klargørelse af TTF-bibliotek fejlede: %s"
-
-#~ msgid "Unable to initialize SDL library: %s"
-#~ msgstr "Kan ikke klargøre SDL-biblioteket: %s"
-
-#~ msgid "You need at least two teams to play: change this in 'Options menu' !"
-#~ msgstr ""
-#~ "Du skal have mindst to hold for at spille; ændr dette i menupunktet "
-#~ "'Instillinger'!"
-
-#~ msgid "general: "
-#~ msgstr "generelt: "
-
-#~ msgid " has joined the party"
-#~ msgstr " deltager nu i festen"
-
-#~ msgid " has left the party"
-#~ msgstr " deltager ikke mere i festen"
-
-#~ msgid "Find a random position for characters"
-#~ msgstr "Finder en tilfældig position til krigerne"
