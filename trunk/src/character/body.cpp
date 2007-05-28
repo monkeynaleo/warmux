@@ -472,10 +472,7 @@ void Body::SetClothe(std::string name)
     play_once_clothe_sauv = NULL;
   }
   else
-  {
     MSG_DEBUG("body","Clothe not found");
-    ;
-  }
 
   assert(current_clothe != NULL);
 }
@@ -498,10 +495,7 @@ void Body::SetMovement(std::string name)
     play_once_mvt_sauv = NULL;
   }
   else
-  {
     MSG_DEBUG("body","Movement not found");
-    ;
-  }
 
   assert(current_mvt != NULL);
 }
@@ -529,10 +523,7 @@ void Body::SetClotheOnce(std::string name)
     need_rebuild = true;
   }
   else
-  {
     MSG_DEBUG("body","Clothe not found");
-    ;
-  }
 
   assert(current_clothe != NULL);
 }
@@ -560,10 +551,7 @@ void Body::SetMovementOnce(std::string name)
     need_rebuild = true;
   }
   else
-  {
     MSG_DEBUG("body","Movement not found");
-    ;
-  }
 
   assert(current_mvt != NULL);
 }
