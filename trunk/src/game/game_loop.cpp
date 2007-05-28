@@ -578,7 +578,7 @@ PhysicalObj* GameLoop::GetMovingObject()
   {
     if (!character->IsImmobile() && !character->IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "%s is not ready", character->GetName().c_str())
+      MSG_DEBUG("game.endofturn", "%s is not ready", character->GetName().c_str());
       return &(*character);
     }
   }
@@ -587,7 +587,7 @@ PhysicalObj* GameLoop::GetMovingObject()
   {
     if (!(*object)->IsImmobile())
     {
-      MSG_DEBUG("game.endofturn", "%s is moving", (*object)->GetName().c_str())
+      MSG_DEBUG("game.endofturn", "%s is moving", (*object)->GetName().c_str());
       return (*object);
     }
   }
