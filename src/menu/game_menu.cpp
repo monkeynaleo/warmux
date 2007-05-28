@@ -40,8 +40,7 @@ const uint MARGIN_BOTTOM = 70;
 const uint TEAMS_BOX_H = 170;
 const uint OPTIONS_BOX_H = 150;
 
-const uint NBR_VER_MIN = 1;
-const uint NBR_VER_MAX = 10;
+
 const uint TPS_TOUR_MIN = 10;
 const uint TPS_TOUR_MAX = 120;
 const uint TPS_FIN_TOUR_MIN = 1;
@@ -100,7 +99,7 @@ GameMenu::GameMenu() :
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
 					     stdRect,
 					     100, 5,
-					     50, 200);
+					     5, 200);
   game_options->AddWidget(opt_energy_ini);
 
   opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", stdRect);
