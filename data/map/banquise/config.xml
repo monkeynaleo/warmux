@@ -32,4 +32,6 @@
     <rebounding>true</rebounding>
     <rebound_factor>1.5</rebound_factor>
   </wind>
+
+  <music_playlist>sea</music_playlist>
 </resources>
