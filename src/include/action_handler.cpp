@@ -158,8 +158,12 @@ void Action_GameLoop_ChangeCharacter (Action *a)
 void Action_GameLoop_NextTeam (Action *a)
 {
   teams_list.SetActive (a->PopString());
-  ActiveTeam().PrepareTurn();
   assert (!ActiveCharacter().IsDead());
+}
+
+void Action_GameLoop_SetState (Action *a)
+{
+  GameLoop::GetInstance()->Really_SetState(GameLoop::game_loop_state_t(a->PopInt()));
 }
 
 // ########################################################
@@ -673,6 +677,7 @@ ActionHandler::ActionHandler():
   Register (Action::ACTION_PLAYER_PREVIOUS_CHARACTER, "PLAYER_previous_character", &Action_Player_PreviousCharacter);
   Register (Action::ACTION_GAMELOOP_CHANGE_CHARACTER, "GAMELOOP_change_character", &Action_GameLoop_ChangeCharacter);
   Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_GameLoop_NextTeam);
+  Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_GameLoop_SetState);
 
   // ########################################################
   // To be sure that rules will be the same on each computer

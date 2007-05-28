@@ -43,6 +43,9 @@ private:
 public:
   Camera();
 
+  // before beginning a game
+  void Reset();
+
   bool HasFixedX() const;
   bool HasFixedY() const;
 

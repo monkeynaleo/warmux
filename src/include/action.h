@@ -51,6 +51,7 @@ public:
     ACTION_PLAYER_PREVIOUS_CHARACTER,
     ACTION_GAMELOOP_CHANGE_CHARACTER,
     ACTION_GAMELOOP_NEXT_TEAM,
+    ACTION_GAMELOOP_SET_STATE,
 
     // ########################################################
     // To be sure that rules will be the same on each computer

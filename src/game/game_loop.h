@@ -72,6 +72,7 @@ public:
   // Read/Set State
   game_loop_state_t ReadState() const { return state; }
   void SetState(game_loop_state_t new_state, bool begin_game=false);
+  void Really_SetState(game_loop_state_t new_state); // called by the action_handler
 
   // Signal death of a player
   void SignalCharacterDeath (Character *character);
@@ -100,6 +101,10 @@ private:
   bool IsAnythingMoving();
   void ApplyDiseaseDamage();
   void ApplyDeathMode();
+
+  void __SetState_PLAYING();
+  void __SetState_HAS_PLAYED();
+  void __SetState_END_TURN();
 
   void EndOfGame();
 };

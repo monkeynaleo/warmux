@@ -22,8 +22,9 @@
 #include "teams_list.h"
 //-----------------------------------------------------------------------------
 #include "character/body_list.h"
-#include "include/action_handler.h"
+#include "include/action.h"
 #include "game/config.h"
+#include "network/network.h"
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
 #include "team_energy.h"
@@ -56,11 +57,8 @@ TeamsList::~TeamsList()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::NextTeam (bool begin_game)
+void TeamsList::NextTeam ()
 {
-  // End of turn for active team
-  if (begin_game) return;
-
   // Next team
   std::vector<Team*>::iterator it=active_team;
   do
@@ -68,7 +66,11 @@ void TeamsList::NextTeam (bool begin_game)
     ++it;
     if (it == playing_list.end()) it = playing_list.begin();
   } while ((**it).NbAliveCharacter() == 0);
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_GAMELOOP_NEXT_TEAM, (**it).GetId()));
+
+  teams_list.SetActive ((**it).GetId());
+
+  Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, (**it).GetId());
+  Network::GetInstance()->SendAction(&a);
 }
 
 //-----------------------------------------------------------------------------
@@ -535,6 +537,7 @@ void TeamsList::SetActive(const std::string &id)
     if (team.GetId() == id)
     {
       active_team = it;
+      ActiveTeam().PrepareTurn();
       return;
     }
   }
