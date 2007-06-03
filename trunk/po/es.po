@@ -1,15 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
+# Spanish translation of the Wormux Game.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# This file is distributed under the same license as the Wormux package.
+# Eduard BERMEJO <templer@iespana.es>, 2005?
+# Jean Parpaillon <artefact@altern.org>, 2006, 2007
+# Danigm ???, 2007
 msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-03-27 20:56+0100\n"
-"Last-Translator: Jean Parpaillon <artefact@altern.org>\n"
+"Last-Translator: Eduard BERMEJO <templer@iespana.es>\n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
