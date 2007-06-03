@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2006-06-16 11:36+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -38,7 +39,7 @@ msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game_loop.cpp:645
+#: src/game/game_loop.cpp:653
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (joukkue %s) kuoli."
@@ -53,7 +54,7 @@ msgstr "%s < %s > aka %s %s:stä"
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
 
-#: src/game/game_loop.cpp:624
+#: src/game/game_loop.cpp:632
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suoritti itsemurhan !"
@@ -63,12 +64,12 @@ msgstr "%s suoritti itsemurhan !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:617
+#: src/game/game_loop.cpp:625
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s sukelsi syvyyksiin."
 
-#: src/game/game_loop.cpp:628
+#: src/game/game_loop.cpp:636
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
@@ -80,12 +81,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game_loop.cpp:639
+#: src/game/game_loop.cpp:647
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/game/game_loop.cpp:634
+#: src/game/game_loop.cpp:642
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kuoli kömpelyyteensä!"
@@ -95,7 +96,7 @@ msgstr "%s kuoli kömpelyyteensä!"
 msgid "%s is next to a mine!"
 msgstr "%s on aivan miinan vieressä!"
 
-#: src/object/bonus_box.cpp:120
+#: src/object/bonus_box.cpp:124
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -106,14 +107,224 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s (joukkue %s) kuoli."
 
-#: src/object/bonus_box.cpp:114
+#: src/weapon/gnu.cpp:121
 #, fuzzy, c-format
-msgid "%s team has won %u %s!"
-msgid_plural "%s team has won %u %ss!"
+msgid "%s team has won %u Gnu!"
+msgid_plural "%s team has won %u Gnus!"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/include/action_handler.cpp:223
+#: src/weapon/air_attack.cpp:215
+#, fuzzy, c-format
+msgid "%s team has won %u air attack!"
+msgid_plural "%s team has won %u air attacks!"
+msgstr[0] "Joukkue %s voitti %u ilmaiskun."
+msgstr[1] "Joukkue %s voitti %u ilmaiskua."
+
+#: src/weapon/airhammer.cpp:172
+#, fuzzy, c-format
+msgid "%s team has won %u airhammer!"
+msgid_plural "%s team has won %u airhammers!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/anvil.cpp:87
+#, fuzzy, c-format
+msgid "%s team has won %u anvil!"
+msgid_plural "%s team has won %u anvils!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/auto_bazooka.cpp:262
+#, fuzzy, c-format
+msgid "%s team has won %u automatic bazooka!"
+msgid_plural "%s team has won %u automatic bazookas!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/baseball.cpp:92
+#, fuzzy, c-format
+msgid "%s team has won %u baseball bat!"
+msgid_plural "%s team has won %u baseball bats!"
+msgstr[0] "Joukkue %s voitti %u ilmaiskun."
+msgstr[1] "Joukkue %s voitti %u ilmaiskua."
+
+#: src/weapon/bazooka.cpp:88
+#, fuzzy, c-format
+msgid "%s team has won %u bazooka!"
+msgid_plural "%s team has won %u bazookas!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/blowtorch.cpp:142
+#, fuzzy, c-format
+msgid "%s team has won %u blowtorch!"
+msgid_plural "%s team has won %u blowtorchs!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/bounce_ball.cpp:68
+#, fuzzy, c-format
+msgid "%s team has won %u bounce ball!"
+msgid_plural "%s team has won %u bounce balls!"
+msgstr[0] "Joukkue %s voitti %u ilmaiskun."
+msgstr[1] "Joukkue %s voitti %u ilmaiskua."
+
+#: src/weapon/construct.cpp:132
+#, fuzzy, c-format
+msgid "%s team has won %u construct!"
+msgid_plural "%s team has won %u constructs!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/cluster_bomb.cpp:106
+#, fuzzy, c-format
+msgid "%s team has won %u custer bomb!"
+msgid_plural "%s team has won %u custer bombs!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/disco_grenade.cpp:100
+#, fuzzy, c-format
+msgid "%s team has won %u disco grenade!"
+msgid_plural "%s team has won %u disco grenades!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/dynamite.cpp:119
+#, fuzzy, c-format
+msgid "%s team has won %u dynamite!"
+msgid_plural "%s team has won %u dynamites!"
+msgstr[0] "Joukkue %s voitti %u dynamiittipötkön."
+msgstr[1] "Joukkue %s voitti %u dynamiittipötköä."
+
+#: src/weapon/grapple.cpp:708
+#, fuzzy, c-format
+msgid "%s team has won %u grapple!"
+msgid_plural "%s team has won %u grapples!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/grenade.cpp:64
+#, fuzzy, c-format
+msgid "%s team has won %u grenade!"
+msgid_plural "%s team has won %u grenades!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/gun.cpp:81
+#, fuzzy, c-format
+msgid "%s team has won %u gun!"
+msgid_plural "%s team has won %u guns!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/jetpack.cpp:262
+#, fuzzy, c-format
+msgid "%s team has won %u jetpack!"
+msgid_plural "%s team has won %u jetpacks!"
+msgstr[0] "Joukkue %s voitti %u ilmaiskun."
+msgstr[1] "Joukkue %s voitti %u ilmaiskua."
+
+#: src/weapon/lowgrav.cpp:87
+#, fuzzy, c-format
+msgid "%s team has won %u lowgrav!"
+msgid_plural "%s team has won %u lowgravs!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/mine.cpp:240
+#, fuzzy, c-format
+msgid "%s team has won %u mine!"
+msgid_plural "%s team has won %u mines!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/parachute.cpp:133
+#, fuzzy, c-format
+msgid "%s team has won %u parachute!"
+msgid_plural "%s team has won %u parachutes!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/polecat.cpp:134
+#, fuzzy, c-format
+msgid "%s team has won %u polecat!"
+msgid_plural "%s team has won %u polecats!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/riot_bomb.cpp:78
+#, fuzzy, c-format
+msgid "%s team has won %u riot bomb!"
+msgid_plural "%s team has won %u riot bombs!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/shotgun.cpp:111
+#, fuzzy, c-format
+msgid "%s team has won %u shotgun!"
+msgid_plural "%s team has won %u shotguns!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/snipe_rifle.cpp:211
+#, fuzzy, c-format
+msgid "%s team has won %u snipe rifle!"
+msgid_plural "%s team has won %u snipe rifles!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/submachine_gun.cpp:151
+#, fuzzy, c-format
+msgid "%s team has won %u submachine gun!"
+msgid_plural "%s team has won %u submachine guns!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/suicide.cpp:75
+#, fuzzy, c-format
+msgid "%s team has won %u suicide!"
+msgid_plural "%s team has won %u suicides!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/syringe.cpp:84
+#, fuzzy, c-format
+msgid "%s team has won %u syringe!"
+msgid_plural "%s team has won %u syringes!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/teleportation.cpp:121
+#, fuzzy, c-format
+msgid "%s team has won %u teleportation!"
+msgid_plural "%s team has won %u teleportations!"
+msgstr[0] "Joukkue %s voitti %u teleportaation."
+msgstr[1] "Joukkue %s voitti %u teleportaatiota."
+
+#: src/weapon/skip_turn.cpp:65
+#, fuzzy, c-format
+msgid "%s team has won %u turn skip!"
+msgid_plural "%s team has won %u turn skips!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/supertux.cpp:223
+#, fuzzy, c-format
+msgid "%s team has won %u tux launcher!"
+msgid_plural "%s team has won %u tux launchers!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/weapon/weapon.cpp:809
+#, fuzzy, c-format
+msgid "%s team has won %u unexpected weapon!"
+msgid_plural "%s team has won %u unexpected weapons!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/include/action_handler.cpp:227
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -141,16 +352,23 @@ msgid "Airhammer"
 msgstr ""
 
 #. We'll do as if NULL is for all teams
-#: src/team/results.cpp:165
+#: src/team/results.cpp:156
 #, fuzzy
 msgid "All teams"
 msgstr "Odota joukkueita"
 
-#: src/game/game_loop.cpp:336
+#: src/game/game_loop.cpp:343
 msgid "And the winner is..."
 msgstr ""
 
-#: src/weapon/anvil.cpp:89
+#: src/weapon/baseball.cpp:33
+msgid ""
+"Angle : Up/Down\n"
+"Fire : space key\n"
+"a hit per turn"
+msgstr ""
+
+#: src/weapon/anvil.cpp:97
 msgid "Anvil"
 msgstr ""
 
@@ -180,7 +398,7 @@ msgstr "Bazooka"
 msgid "Blowtorch"
 msgstr ""
 
-#: src/weapon/bounce_ball.cpp:70
+#: src/weapon/bounce_ball.cpp:78
 msgid "Bounce Ball"
 msgstr ""
 
@@ -188,13 +406,13 @@ msgstr ""
 msgid "Bye bye tux..."
 msgstr ""
 
-#: src/team/teams_list.cpp:472 src/team/teams_list.cpp:494
-#: src/team/teams_list.cpp:541
+#: src/team/teams_list.cpp:474 src/team/teams_list.cpp:496
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ei löydy joukkuetta %s!"
 
-#: src/team/teams_list.cpp:139 src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:141 src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
@@ -204,7 +422,7 @@ msgstr "Ei voida avata joukkue hakemistoa (%s)!"
 msgid "Client mode"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:108
+#: src/weapon/cluster_bomb.cpp:115
 #, fuzzy
 msgid "Cluster Bomb"
 msgstr "Klusteripommi"
@@ -243,7 +461,7 @@ msgstr ""
 msgid "Credits"
 msgstr "Kiitokset"
 
-#: src/weapon/disco_grenade.cpp:102
+#: src/weapon/disco_grenade.cpp:110
 #, fuzzy
 msgid "Disco Grenade"
 msgstr "Kranaatti"
@@ -252,7 +470,7 @@ msgstr "Kranaatti"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
-#: src/menu/game_menu.cpp:94
+#: src/menu/game_menu.cpp:93
 #, fuzzy
 msgid "Duration of a turn"
 msgstr "Vuoron kesto:"
@@ -261,7 +479,7 @@ msgstr "Vuoron kesto:"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game_loop.cpp:118 src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:125 src/game/game_loop.cpp:131
 msgid "END OF GAME"
 msgstr ""
 
@@ -270,7 +488,7 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Virhe kohdassa %s:%lu"
 
-#: src/team/teams_list.cpp:107 src/team/teams_list.cpp:115
+#: src/team/teams_list.cpp:109 src/team/teams_list.cpp:117
 #, fuzzy
 msgid "Error loading team :"
 msgstr "Virhe ladattessa joukkuetta %s:"
@@ -335,7 +553,7 @@ msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 msgid "Fullscreen?"
 msgstr "Kokoruutu?"
 
-#: src/weapon/gnu.cpp:122
+#: src/weapon/gnu.cpp:131
 msgid "Gnu Launcher"
 msgstr ""
 
@@ -343,7 +561,7 @@ msgstr ""
 msgid "Grapple"
 msgstr ""
 
-#: src/weapon/grenade.cpp:67
+#: src/weapon/grenade.cpp:75
 msgid "Grenade"
 msgstr "Kranaatti"
 
@@ -377,7 +595,34 @@ msgstr ""
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:681
+#: src/weapon/blowtorch.cpp:38
+msgid ""
+"Howto use it : keep space key pressed\n"
+"Angle : Up/Down\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/weapon/airhammer.cpp:47
+msgid ""
+"Howto use it : keep space key pressed\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/weapon/auto_bazooka.cpp:154
+msgid ""
+"Howto use it : left clic on target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/weapon/anvil.cpp:98
+msgid ""
+"Howto use it : left clic on target\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/game/game_loop.cpp:689
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -387,10 +632,17 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:100
+#: src/menu/game_menu.cpp:99
 #, fuzzy
 msgid "Initial energy"
 msgstr "Aloitus voimat:"
+
+#: src/weapon/bazooka.cpp:74
+msgid ""
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
 
 #: src/game/game_init.cpp:153
 msgid "Initialisation"
@@ -427,7 +679,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Lataa kartat:"
 
-#: src/team/teams_list.cpp:128
+#: src/team/teams_list.cpp:130
 msgid "Load teams:"
 msgstr "Lataa joukkueet:"
 
@@ -502,7 +754,7 @@ msgstr "Nettipeli"
 msgid "Network initialization"
 msgstr "Maaston alustus..."
 
-#: src/weapon/weapon.cpp:598
+#: src/weapon/weapon.cpp:604
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
@@ -555,7 +807,7 @@ msgstr "Näytä pelaajien voima?"
 msgid "Player's name?"
 msgstr "Näytä pelaajien nimet?"
 
-#: src/weapon/polecat.cpp:135
+#: src/weapon/polecat.cpp:144
 msgid "Polecat Launcher"
 msgstr ""
 
@@ -602,7 +854,7 @@ msgstr "Aloita peli"
 msgid "Say: "
 msgstr ""
 
-#: src/menu/game_menu.cpp:106
+#: src/menu/game_menu.cpp:105
 msgid "Scroll on border"
 msgstr ""
 
@@ -741,6 +993,22 @@ msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
 
+#: src/weapon/cluster_bomb.cpp:116
+msgid ""
+"Timeout : Wheel mouse or Page Up/Down\n"
+"Angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/weapon/bounce_ball.cpp:79
+msgid ""
+"Timeout : Wheel mouse or Page Up/Down\n"
+"Angle : Up/Down\n"
+"Fire : space key\n"
+"an ammo per turn"
+msgstr ""
+
 #: src/interface/weapon_menu.cpp:171
 msgid "Tools"
 msgstr ""
@@ -798,7 +1066,7 @@ msgstr "Ase:"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game_loop.cpp:642
+#: src/game/game_loop.cpp:650
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -838,7 +1106,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
-#: src/game/game_init.cpp:125 src/team/teams_list.cpp:174
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
@@ -850,6 +1118,13 @@ msgstr "Ammuit ohi!"
 #, fuzzy
 msgid "aka"
 msgstr "Bazooka"
+
+#: src/weapon/air_attack.cpp:164
+msgid ""
+"attack direction : Left/Right\n"
+"Bombing : left clic on target\n"
+"a bombing per turn"
+msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -935,41 +1210,12 @@ msgstr ""
 #~ msgstr[0] "%s menetti %u voimapisteen."
 #~ msgstr[1] "%s menetti %u voimapistettä."
 
-#, fuzzy
-#~ msgid "%s team has won %u Automatic Bazooka!"
-#~ msgid_plural "%s team has won %u Automatic Bazookas!"
-#~ msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
-#~ msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
-
-#, fuzzy
-#~ msgid "%s team has won %u stick of Dynamite!"
-#~ msgid_plural "%s team has won %u sticks of Dynamite!"
-#~ msgstr[0] "Joukkue %s voitti %u dynamiittipötkön."
-#~ msgstr[1] "Joukkue %s voitti %u dynamiittipötköä."
-
-#~ msgid "%s team has won %u teleportation."
-#~ msgid_plural "%s team has won %u teleportations."
-#~ msgstr[0] "Joukkue %s voitti %u teleportaation."
-#~ msgstr[1] "Joukkue %s voitti %u teleportaatiota."
-
 #~ msgid "%s team has won.\n"
 #~ msgstr "Joukkue %s voitti.\n"
 
 #, fuzzy
-#~ msgid "'%s has won %u Air Attack"
-#~ msgid_plural "'%s has won %u Air Attacks"
-#~ msgstr[0] "Joukkue %s voitti %u ilmaiskun."
-#~ msgstr[1] "Joukkue %s voitti %u ilmaiskua."
-
-#, fuzzy
 #~ msgid "'%s has won %u Anvil"
 #~ msgid_plural "'%s has won %u Anvil"
-#~ msgstr[0] "Joukkue %s voitti %u ilmaiskun."
-#~ msgstr[1] "Joukkue %s voitti %u ilmaiskua."
-
-#, fuzzy
-#~ msgid "'%s has won %u Baseball bat"
-#~ msgid_plural "'%s has won %u Baseball bats"
 #~ msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 #~ msgstr[1] "Joukkue %s voitti %u ilmaiskua."
 

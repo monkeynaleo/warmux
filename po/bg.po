@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-02-19 03:27+0100\n"
 "Last-Translator: Stefan Kachaunov <mindless@data.bg>\n"
 "Language-Team: Bulgarian <mindless@data.bg>\n"
@@ -38,7 +39,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i Spieler bereit"
 msgstr[1] "%i Spieler bereit"
 
-#: src/game/game_loop.cpp:645
+#: src/game/game_loop.cpp:653
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s от %s си го отнесе..."
@@ -53,7 +54,7 @@ msgstr "%s <%s> познат и като %s от %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> от %s"
 
-#: src/game/game_loop.cpp:624
+#: src/game/game_loop.cpp:632
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s направи жестока жертва!"
@@ -63,12 +64,12 @@ msgstr "%s направи жестока жертва!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:617
+#: src/game/game_loop.cpp:625
 #, c-format
 msgid "%s has fallen in water."
 msgstr "Добър ден за плуване а, %s ?"
 
-#: src/game/game_loop.cpp:628
+#: src/game/game_loop.cpp:636
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s умело уцели въздуха."
@@ -80,12 +81,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game_loop.cpp:639
+#: src/game/game_loop.cpp:647
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s е опасен, избива хора от отбора на %s!!!"
 
-#: src/game/game_loop.cpp:634
+#: src/game/game_loop.cpp:642
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s проявява сапьорска предпазливост..."
@@ -95,7 +96,7 @@ msgstr "%s проявява сапьорска предпазливост..."
 msgid "%s is next to a mine!"
 msgstr "%sе близко до мина!"
 
-#: src/object/bonus_box.cpp:120
+#: src/object/bonus_box.cpp:124
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Ехее, %s вече си имат безкрайни муниции за %s!"
@@ -106,14 +107,224 @@ msgstr "Ехее, %s вече си имат безкрайни муниции з
 msgid "%s team has skipped its turn."
 msgstr "Отборът на %s галантно отстъпва ход..."
 
-#: src/object/bonus_box.cpp:114
-#, c-format
-msgid "%s team has won %u %s!"
-msgid_plural "%s team has won %u %ss!"
+#: src/weapon/gnu.cpp:121
+#, fuzzy, c-format
+msgid "%s team has won %u Gnu!"
+msgid_plural "%s team has won %u Gnus!"
 msgstr[0] "Отборът на %s спечели %u %s !"
 msgstr[1] "Отборът на %s спечели %u %sи !"
 
-#: src/include/action_handler.cpp:223
+#: src/weapon/air_attack.cpp:215
+#, fuzzy, c-format
+msgid "%s team has won %u air attack!"
+msgid_plural "%s team has won %u air attacks!"
+msgstr[0] "%s hat %u Luftangriff gewonnen"
+msgstr[1] "%s hat %u Luftangriffe gewonnen"
+
+#: src/weapon/airhammer.cpp:172
+#, fuzzy, c-format
+msgid "%s team has won %u airhammer!"
+msgid_plural "%s team has won %u airhammers!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/anvil.cpp:87
+#, fuzzy, c-format
+msgid "%s team has won %u anvil!"
+msgid_plural "%s team has won %u anvils!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/auto_bazooka.cpp:262
+#, fuzzy, c-format
+msgid "%s team has won %u automatic bazooka!"
+msgid_plural "%s team has won %u automatic bazookas!"
+msgstr[0] "Mannschaft %s hat %u Lenkrakete gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Lenkraketen gewonnen!"
+
+#: src/weapon/baseball.cpp:92
+#, fuzzy, c-format
+msgid "%s team has won %u baseball bat!"
+msgid_plural "%s team has won %u baseball bats!"
+msgstr[0] "%s hat %u Baseballschläger gewonnen"
+msgstr[1] "%s hat %u Baseballschläger gewonnen"
+
+#: src/weapon/bazooka.cpp:88
+#, fuzzy, c-format
+msgid "%s team has won %u bazooka!"
+msgid_plural "%s team has won %u bazookas!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/blowtorch.cpp:142
+#, fuzzy, c-format
+msgid "%s team has won %u blowtorch!"
+msgid_plural "%s team has won %u blowtorchs!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/bounce_ball.cpp:68
+#, fuzzy, c-format
+msgid "%s team has won %u bounce ball!"
+msgid_plural "%s team has won %u bounce balls!"
+msgstr[0] "%s hat %u Baseballschläger gewonnen"
+msgstr[1] "%s hat %u Baseballschläger gewonnen"
+
+#: src/weapon/construct.cpp:132
+#, fuzzy, c-format
+msgid "%s team has won %u construct!"
+msgid_plural "%s team has won %u constructs!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/cluster_bomb.cpp:106
+#, fuzzy, c-format
+msgid "%s team has won %u custer bomb!"
+msgid_plural "%s team has won %u custer bombs!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/disco_grenade.cpp:100
+#, fuzzy, c-format
+msgid "%s team has won %u disco grenade!"
+msgid_plural "%s team has won %u disco grenades!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/dynamite.cpp:119
+#, fuzzy, c-format
+msgid "%s team has won %u dynamite!"
+msgid_plural "%s team has won %u dynamites!"
+msgstr[0] "Mannschaft %s hat %u Stange Dynamit gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Stangen Dynamit gewonnen!"
+
+#: src/weapon/grapple.cpp:708
+#, fuzzy, c-format
+msgid "%s team has won %u grapple!"
+msgid_plural "%s team has won %u grapples!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/grenade.cpp:64
+#, fuzzy, c-format
+msgid "%s team has won %u grenade!"
+msgid_plural "%s team has won %u grenades!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/gun.cpp:81
+#, fuzzy, c-format
+msgid "%s team has won %u gun!"
+msgid_plural "%s team has won %u guns!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/jetpack.cpp:262
+#, fuzzy, c-format
+msgid "%s team has won %u jetpack!"
+msgid_plural "%s team has won %u jetpacks!"
+msgstr[0] "%s hat %u Luftangriff gewonnen"
+msgstr[1] "%s hat %u Luftangriffe gewonnen"
+
+#: src/weapon/lowgrav.cpp:87
+#, fuzzy, c-format
+msgid "%s team has won %u lowgrav!"
+msgid_plural "%s team has won %u lowgravs!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/mine.cpp:240
+#, fuzzy, c-format
+msgid "%s team has won %u mine!"
+msgid_plural "%s team has won %u mines!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/parachute.cpp:133
+#, fuzzy, c-format
+msgid "%s team has won %u parachute!"
+msgid_plural "%s team has won %u parachutes!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/polecat.cpp:134
+#, fuzzy, c-format
+msgid "%s team has won %u polecat!"
+msgid_plural "%s team has won %u polecats!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/riot_bomb.cpp:78
+#, fuzzy, c-format
+msgid "%s team has won %u riot bomb!"
+msgid_plural "%s team has won %u riot bombs!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/shotgun.cpp:111
+#, fuzzy, c-format
+msgid "%s team has won %u shotgun!"
+msgid_plural "%s team has won %u shotguns!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/snipe_rifle.cpp:211
+#, fuzzy, c-format
+msgid "%s team has won %u snipe rifle!"
+msgid_plural "%s team has won %u snipe rifles!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/submachine_gun.cpp:151
+#, fuzzy, c-format
+msgid "%s team has won %u submachine gun!"
+msgid_plural "%s team has won %u submachine guns!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/suicide.cpp:75
+#, fuzzy, c-format
+msgid "%s team has won %u suicide!"
+msgid_plural "%s team has won %u suicides!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/syringe.cpp:84
+#, fuzzy, c-format
+msgid "%s team has won %u syringe!"
+msgid_plural "%s team has won %u syringes!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/teleportation.cpp:121
+#, fuzzy, c-format
+msgid "%s team has won %u teleportation!"
+msgid_plural "%s team has won %u teleportations!"
+msgstr[0] "Mannschaft %s hat %u Teleporter gewonnen."
+msgstr[1] "Mannschaft %s hat %u Teleporter gewonnen."
+
+#: src/weapon/skip_turn.cpp:65
+#, fuzzy, c-format
+msgid "%s team has won %u turn skip!"
+msgid_plural "%s team has won %u turn skips!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/supertux.cpp:223
+#, fuzzy, c-format
+msgid "%s team has won %u tux launcher!"
+msgid_plural "%s team has won %u tux launchers!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/weapon/weapon.cpp:809
+#, fuzzy, c-format
+msgid "%s team has won %u unexpected weapon!"
+msgid_plural "%s team has won %u unexpected weapons!"
+msgstr[0] "Отборът на %s спечели %u %s !"
+msgstr[1] "Отборът на %s спечели %u %sи !"
+
+#: src/include/action_handler.cpp:227
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
@@ -140,15 +351,22 @@ msgid "Airhammer"
 msgstr "Пневматичен чук"
 
 #. We'll do as if NULL is for all teams
-#: src/team/results.cpp:165
+#: src/team/results.cpp:156
 msgid "All teams"
 msgstr "Alle Mannschaften"
 
-#: src/game/game_loop.cpp:336
+#: src/game/game_loop.cpp:343
 msgid "And the winner is..."
 msgstr ""
 
-#: src/weapon/anvil.cpp:89
+#: src/weapon/baseball.cpp:33
+msgid ""
+"Angle : Up/Down\n"
+"Fire : space key\n"
+"a hit per turn"
+msgstr ""
+
+#: src/weapon/anvil.cpp:97
 msgid "Anvil"
 msgstr "Наковалня"
 
@@ -176,7 +394,7 @@ msgstr "РПГ"
 msgid "Blowtorch"
 msgstr "Горелка"
 
-#: src/weapon/bounce_ball.cpp:70
+#: src/weapon/bounce_ball.cpp:78
 msgid "Bounce Ball"
 msgstr "Супер-топче"
 
@@ -184,13 +402,13 @@ msgstr "Супер-топче"
 msgid "Bye bye tux..."
 msgstr "Tux e свободен!!!"
 
-#: src/team/teams_list.cpp:472 src/team/teams_list.cpp:494
-#: src/team/teams_list.cpp:541
+#: src/team/teams_list.cpp:474 src/team/teams_list.cpp:496
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не мога да намеря отборът на %s!"
 
-#: src/team/teams_list.cpp:139 src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:141 src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
@@ -200,7 +418,7 @@ msgstr "Не мога да отворя директорията на отбор
 msgid "Client mode"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:108
+#: src/weapon/cluster_bomb.cpp:115
 msgid "Cluster Bomb"
 msgstr "Шрапнелна граната"
 
@@ -238,7 +456,7 @@ msgstr ""
 msgid "Credits"
 msgstr "Благодарности на"
 
-#: src/weapon/disco_grenade.cpp:102
+#: src/weapon/disco_grenade.cpp:110
 msgid "Disco Grenade"
 msgstr "Диско-граната!"
 
@@ -246,7 +464,7 @@ msgstr "Диско-граната!"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Тръгваш ли си? (Y/N)"
 
-#: src/menu/game_menu.cpp:94
+#: src/menu/game_menu.cpp:93
 msgid "Duration of a turn"
 msgstr "Продължение на хода"
 
@@ -254,7 +472,7 @@ msgstr "Продължение на хода"
 msgid "Dynamite"
 msgstr "Шашка динамит"
 
-#: src/game/game_loop.cpp:118 src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:125 src/game/game_loop.cpp:131
 msgid "END OF GAME"
 msgstr ""
 
@@ -263,7 +481,7 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Грешка в %s:%lu"
 
-#: src/team/teams_list.cpp:107 src/team/teams_list.cpp:115
+#: src/team/teams_list.cpp:109 src/team/teams_list.cpp:117
 #, fuzzy
 msgid "Error loading team :"
 msgstr "Грешка при зареждането на отбора %s:"
@@ -330,7 +548,7 @@ msgstr "Не мога да намеря телата на \"%s\" отбора \"
 msgid "Fullscreen?"
 msgstr "Цял екран?"
 
-#: src/weapon/gnu.cpp:122
+#: src/weapon/gnu.cpp:131
 msgid "Gnu Launcher"
 msgstr "Антилопохвъргачка"
 
@@ -338,7 +556,7 @@ msgstr "Антилопохвъргачка"
 msgid "Grapple"
 msgstr ""
 
-#: src/weapon/grenade.cpp:67
+#: src/weapon/grenade.cpp:75
 msgid "Grenade"
 msgstr "Ръчна граната"
 
@@ -373,7 +591,34 @@ msgstr "Hauptkommandant"
 msgid "Host a game"
 msgstr "Spiel hosten"
 
-#: src/game/game_loop.cpp:681
+#: src/weapon/blowtorch.cpp:38
+msgid ""
+"Howto use it : keep space key pressed\n"
+"Angle : Up/Down\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/weapon/airhammer.cpp:47
+msgid ""
+"Howto use it : keep space key pressed\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/weapon/auto_bazooka.cpp:154
+msgid ""
+"Howto use it : left clic on target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/weapon/anvil.cpp:98
+msgid ""
+"Howto use it : left clic on target\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/game/game_loop.cpp:689
 msgid "Hurry up, you are too slow !!"
 msgstr "Хабиш време за убиване за други неща!!!"
 
@@ -385,9 +630,16 @@ msgstr ""
 "Ако намерите проблем с играта, или имате идея за това какво би я подобрила "
 "ни пишете на този адрес (на Английски):"
 
-#: src/menu/game_menu.cpp:100
+#: src/menu/game_menu.cpp:99
 msgid "Initial energy"
 msgstr "Начално здраве"
+
+#: src/weapon/bazooka.cpp:74
+msgid ""
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
 
 #: src/game/game_init.cpp:153
 msgid "Initialisation"
@@ -425,7 +677,7 @@ msgstr "Komm nach #wormux auf irc.freenode.net"
 msgid "Load maps:"
 msgstr "Карти които да заредя:"
 
-#: src/team/teams_list.cpp:128
+#: src/team/teams_list.cpp:130
 msgid "Load teams:"
 msgstr "Отбори които да заредя:"
 
@@ -495,7 +747,7 @@ msgstr "Мрежова игра"
 msgid "Network initialization"
 msgstr "Инициализирам терена..."
 
-#: src/weapon/weapon.cpp:598
+#: src/weapon/weapon.cpp:604
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Няма такъв елемент в XML-конфигурационния фаил! <%s>"
@@ -542,7 +794,7 @@ msgstr "Здраве?"
 msgid "Player's name?"
 msgstr "Името ти?"
 
-#: src/weapon/polecat.cpp:135
+#: src/weapon/polecat.cpp:144
 msgid "Polecat Launcher"
 msgstr "Скунксемет"
 
@@ -588,7 +840,7 @@ msgstr "Пусни играта"
 msgid "Say: "
 msgstr ""
 
-#: src/menu/game_menu.cpp:106
+#: src/menu/game_menu.cpp:105
 msgid "Scroll on border"
 msgstr "Скролиране от краищата на екрана"
 
@@ -719,6 +971,22 @@ msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
 
+#: src/weapon/cluster_bomb.cpp:116
+msgid ""
+"Timeout : Wheel mouse or Page Up/Down\n"
+"Angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+
+#: src/weapon/bounce_ball.cpp:79
+msgid ""
+"Timeout : Wheel mouse or Page Up/Down\n"
+"Angle : Up/Down\n"
+"Fire : space key\n"
+"an ammo per turn"
+msgstr ""
+
 #: src/interface/weapon_menu.cpp:171
 msgid "Tools"
 msgstr ""
@@ -776,7 +1044,7 @@ msgstr "Оръжия"
 msgid "Website: "
 msgstr "Страница: "
 
-#: src/game/game_loop.cpp:642
+#: src/game/game_loop.cpp:650
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr ""
@@ -816,7 +1084,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Трябва ми поне една валидна карта!"
 
-#: src/game/game_init.cpp:125 src/team/teams_list.cpp:174
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Трябват ми поне два валидни отбора!"
 
@@ -828,6 +1096,13 @@ msgstr "Не точно там..."
 #, fuzzy
 msgid "aka"
 msgstr "РПГ"
+
+#: src/weapon/air_attack.cpp:164
+msgid ""
+"attack direction : Left/Right\n"
+"Bombing : left clic on target\n"
+"a bombing per turn"
+msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -937,35 +1212,10 @@ msgstr ""
 #~ msgstr[0] "%s verliert %u Lebenspunkt."
 #~ msgstr[1] "%s verliert %u Lebenspunkte."
 
-#~ msgid "%s team has won %u Automatic Bazooka!"
-#~ msgid_plural "%s team has won %u Automatic Bazookas!"
-#~ msgstr[0] "Mannschaft %s hat %u Lenkrakete gewonnen!"
-#~ msgstr[1] "Mannschaft %s hat %u Lenkraketen gewonnen!"
-
-#~ msgid "%s team has won %u stick of Dynamite!"
-#~ msgid_plural "%s team has won %u sticks of Dynamite!"
-#~ msgstr[0] "Mannschaft %s hat %u Stange Dynamit gewonnen!"
-#~ msgstr[1] "Mannschaft %s hat %u Stangen Dynamit gewonnen!"
-
-#~ msgid "%s team has won %u teleportation."
-#~ msgid_plural "%s team has won %u teleportations."
-#~ msgstr[0] "Mannschaft %s hat %u Teleporter gewonnen."
-#~ msgstr[1] "Mannschaft %s hat %u Teleporter gewonnen."
-
-#~ msgid "'%s has won %u Air Attack"
-#~ msgid_plural "'%s has won %u Air Attacks"
-#~ msgstr[0] "%s hat %u Luftangriff gewonnen"
-#~ msgstr[1] "%s hat %u Luftangriffe gewonnen"
-
 #~ msgid "'%s has won %u Anvil"
 #~ msgid_plural "'%s has won %u Anvil"
 #~ msgstr[0] "%s hat %u Amboss gewonnen"
 #~ msgstr[1] "%s hat %u Ambosse gewonnen"
-
-#~ msgid "'%s has won %u Baseball bat"
-#~ msgid_plural "'%s has won %u Baseball bats"
-#~ msgstr[0] "%s hat %u Baseballschläger gewonnen"
-#~ msgstr[1] "%s hat %u Baseballschläger gewonnen"
 
 #~ msgid "'%s has won %u Holy grenade"
 #~ msgid_plural "'%s has won %u Holy grenades"
