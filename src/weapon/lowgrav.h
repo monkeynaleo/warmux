@@ -31,6 +31,7 @@ class LowGrav : public Weapon
     void Draw();
     void ActionStopUse();
     void HandleKeyPressed_Shoot();
+    DECLARE_GETWEAPONSTRING();
   protected:
     void Refresh();
     void p_Deselect();

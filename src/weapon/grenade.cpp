@@ -58,6 +58,14 @@ void Grenade::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
+std::string Grenade::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u grenade!",
+            "%s team has won %u grenades!",
+            items_count), TeamName, items_count);
+}
+
 //-----------------------------------------------------------------------------
 
 GrenadeLauncher::GrenadeLauncher() :

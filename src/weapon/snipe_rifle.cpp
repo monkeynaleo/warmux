@@ -204,3 +204,12 @@ void SnipeRifle::Draw()
   // Draw the laser impact
   if( targeting_something ) m_laser_image->Draw(targeted_point - (m_laser_image->GetSize()/2));
 }
+
+std::string SnipeRifle::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u snipe rifle!",
+            "%s team has won %u snipe rifles!",
+            items_count), TeamName, items_count);
+}
+

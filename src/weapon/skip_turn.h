@@ -29,6 +29,7 @@ class SkipTurn : public Weapon
 {
   public:
     SkipTurn();
+    DECLARE_GETWEAPONSTRING();
   protected:
     bool p_Shoot();
     void Refresh();

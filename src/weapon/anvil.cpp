@@ -81,6 +81,14 @@ void Anvil::PlayCollisionSound()
   jukebox.Play("share","weapon/anvil_collision");
 }
 
+std::string Anvil::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u anvil!",
+            "%s team has won %u anvils!",
+            items_count), TeamName, items_count);
+}
+
 //-----------------------------------------------------------------------------
 
 AnvilLauncher::AnvilLauncher() :

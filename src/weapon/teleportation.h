@@ -41,6 +41,7 @@ class Teleportation : public Weapon
     void Draw();
     void ChooseTarget(Point2i mouse_pos);
     WeaponConfig& cfg();
+    DECLARE_GETWEAPONSTRING();
 };
 
 #endif /* TELEPORTATION_H */

@@ -100,6 +100,13 @@ void ClusterBomb::DoExplosion()
   WeaponProjectile::DoExplosion();
 }
 
+std::string ClusterBomb::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u custer bomb!",
+            "%s team has won %u custer bombs!",
+            items_count), TeamName, items_count);
+}
 //-----------------------------------------------------------------------------
 
 ClusterLauncher::ClusterLauncher() :

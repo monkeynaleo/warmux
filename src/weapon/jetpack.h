@@ -49,6 +49,8 @@ class JetPack : public Weapon
     virtual void HandleKeyReleased_MoveRight();
     virtual void HandleKeyPressed_Shoot();
     
+    DECLARE_GETWEAPONSTRING();
+
   protected:
     void Refresh();
     void p_Select();

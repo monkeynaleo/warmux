@@ -82,6 +82,7 @@ class AirAttack : public Weapon
   public:
     AirAttack();
     virtual void ChooseTarget (Point2i mouse_pos);
+    DECLARE_GETWEAPONSTRING();
 
   private:
     AirAttackConfig& cfg();

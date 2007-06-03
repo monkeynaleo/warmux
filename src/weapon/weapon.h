@@ -306,6 +306,10 @@ public:
   const std::string& GetHelp() const;
   Weapon_type GetType() const;
 
+  // For localization purposes, each weapon needs to have its own
+  // "%s team has won %d <weapon>" function
+  virtual std::string GetWeaponWinString(const char *TeamName, uint items_count);
+
   // Allows or not the character selection with mouse click (tab is allowed)
   // This is used in weapons like the automated bazooka, where it's required
   // a target. Default is true.
@@ -324,6 +328,9 @@ private:
   const Weapon& operator=(const Weapon&);
   /*********************************************/
 };
+
+#define DECLARE_GETWEAPONSTRING() \
+std::string GetWeaponWinString(const char *TeamName, uint items_count )
 
 //-----------------------------------------------------------------------------
 #endif

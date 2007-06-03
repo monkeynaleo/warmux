@@ -78,6 +78,14 @@ void Syringe::Refresh(){
     m_is_active = false;
 }
 
+std::string Syringe::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u syringe!",
+            "%s team has won %u syringes!",
+            items_count), TeamName, items_count);
+}
+
 SyringeConfig& Syringe::cfg() {
   return static_cast<SyringeConfig&>(*extra_params);
 }

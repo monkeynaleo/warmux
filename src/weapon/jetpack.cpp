@@ -255,3 +255,12 @@ void JetPack::ActionStopUse()
 {
   p_Deselect();
 }
+
+std::string JetPack::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u jetpack!",
+            "%s team has won %u jetpacks!",
+            items_count), TeamName, items_count);
+}
+

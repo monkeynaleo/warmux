@@ -135,6 +135,8 @@ class Grapple : public Weapon
     virtual void HandleKeyReleased_Shoot();
 
     void PrintDebugRope();
+
+    DECLARE_GETWEAPONSTRING();
 };
 
 //-----------------------------------------------------------------------------

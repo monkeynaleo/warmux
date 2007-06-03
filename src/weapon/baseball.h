@@ -47,6 +47,7 @@ class Baseball : public Weapon
   public:
     Baseball();
     BaseballConfig &cfg();
+    DECLARE_GETWEAPONSTRING();
 };
 
 //-----------------------------------------------------------------------------

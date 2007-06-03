@@ -75,3 +75,11 @@ bool Gun::p_Shoot()
   return true;
 }
 
+std::string Gun::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u gun!",
+            "%s team has won %u guns!",
+            items_count), TeamName, items_count);
+}
+

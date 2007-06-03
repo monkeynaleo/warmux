@@ -50,6 +50,7 @@ class Syringe : public Weapon
   public:
     Syringe();
     SyringeConfig &cfg();
+    DECLARE_GETWEAPONSTRING();
 };
 
 //-----------------------------------------------------------------------------

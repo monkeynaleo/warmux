@@ -92,7 +92,9 @@ class Mine : public WeaponLauncher
   public:
     Mine();
     MineConfig& cfg();
-  
+
+    DECLARE_GETWEAPONSTRING();
+
 };
 
 #endif /* MINE_H */

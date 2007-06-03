@@ -53,6 +53,9 @@ class Blowtorch : public Weapon
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();
     virtual void HandleKeyReleased_Shoot();
+
+    //std::string GetWeaponWinString(const char *, uint);
+    DECLARE_GETWEAPONSTRING();
 };
 
 #endif  // __BLOWTORCH_H__

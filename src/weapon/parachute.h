@@ -53,6 +53,7 @@ class Parachute : public Weapon
     void SignalTurnEnd();
 
     ParachuteConfig& cfg();
+    DECLARE_GETWEAPONSTRING();
 };
 
 #endif /* PARACHUTE_H */

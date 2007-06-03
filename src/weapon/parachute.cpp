@@ -127,6 +127,14 @@ void Parachute::SignalTurnEnd()
   p_Deselect();
 }
 
+std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u parachute!",
+            "%s team has won %u parachutes!",
+            items_count), TeamName, items_count);
+}
+
 ParachuteConfig& Parachute::cfg() {
   return static_cast<ParachuteConfig&>(*extra_params);
 }
