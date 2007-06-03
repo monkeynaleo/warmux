@@ -193,8 +193,8 @@
       </author>
       <author>
 	<nickname>Eddy</nickname>
-	<name>Eddy PETRIŞOR </name>
-	<description>Translate Wormux in Romanian</description>
+	<name>Eddy PETRIȘOR </name>
+	<description>Translated Wormux in Romanian</description>
 	<email>eddy.petrisor_AT_gmail_DOT_com</email>
 	<country>Romania</country>
       </author>
@@ -318,6 +318,14 @@
 	<email>mindless_AT_data_DOT_bg</email>
 	<country>Bulgaria</country>
       </author>
+      <author>
+	<nickname>Ignacio</nickname>
+	<name>Ignacio Casal Quinteiro</name>
+	<description>Translated Wormux in Galician</description>
+	<email>icq_AT_cvs_DOT_gnome_DOT_org</email>
+	<country>Spain</country>
+      </author>
+      <author>
     </section>
 
     <section title="Package maintainers">
