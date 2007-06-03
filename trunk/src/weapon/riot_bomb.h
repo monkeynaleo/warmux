@@ -39,6 +39,7 @@ class RiotBomb : public WeaponLauncher
 {
  public:
   RiotBomb();
+  DECLARE_GETWEAPONSTRING();
  protected:
   WeaponProjectile * GetProjectileInstance();
 };

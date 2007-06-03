@@ -59,5 +59,6 @@ class Dynamite : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
   public:
     Dynamite();
+    DECLARE_GETWEAPONSTRING();
 };
 #endif /* DYNAMITE_H */

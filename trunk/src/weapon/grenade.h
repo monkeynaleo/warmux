@@ -37,6 +37,7 @@ public:
   Grenade(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
   void Refresh();
+  DECLARE_GETWEAPONSTRING();
 protected:
   void SignalOutOfMap();
 };

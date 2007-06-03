@@ -37,6 +37,7 @@ class Suicide : public Weapon
   public:
     Suicide();
     ExplosiveWeaponConfig &cfg();
+    DECLARE_GETWEAPONSTRING();
 };
 
 #endif /* SUICIDE_H */

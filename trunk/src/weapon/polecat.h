@@ -51,6 +51,7 @@ class Polecat : public WeaponProjectile
       WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
+  DECLARE_GETWEAPONSTRING();
 };
 
 class PolecatLauncher : public WeaponLauncher

@@ -53,6 +53,7 @@ public:
   virtual void HandleMouseWheelDown();
 
   void SetAngle(double angle); // to be used by network
+  DECLARE_GETWEAPONSTRING();
 
   WeaponConfig& cfg();
 };

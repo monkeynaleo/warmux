@@ -166,6 +166,15 @@ void Airhammer::HandleKeyReleased_Shoot()
   NewActionWeaponStopUse();
 }
 
+std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u airhammer!",
+            "%s team has won %u airhammers!",
+            items_count), TeamName, items_count);
+}
+
+
 //-----------------------------------------------------------------------------
 
 AirhammerConfig& Airhammer::cfg() {

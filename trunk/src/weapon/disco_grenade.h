@@ -40,6 +40,7 @@ class DiscoGrenade : public WeaponProjectile
     DiscoGrenade(ExplosiveWeaponConfig& cfg,
                  WeaponLauncher * p_launcher);
     void Refresh();
+    DECLARE_GETWEAPONSTRING();
   protected:
     void Explosion();
     void SignalOutOfMap();

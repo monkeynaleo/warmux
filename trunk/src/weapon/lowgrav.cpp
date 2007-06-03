@@ -80,3 +80,12 @@ void LowGrav::ActionStopUse()
 {
   UseAmmoUnit();
 }
+
+std::string LowGrav::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u lowgrav!",
+            "%s team has won %u lowgravs!",
+            items_count), TeamName, items_count);
+}
+

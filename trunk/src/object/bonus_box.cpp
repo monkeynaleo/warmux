@@ -110,11 +110,15 @@ void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
     /*this next 'if' should never be true, but I am loath to remove it just in case. */
     if(equipe.ReadNbAmmos(contents)!=INFINITE_AMMO) {
         equipe.m_nb_ammos[contents] += nbr_ammo;
-        txt << Format(ngettext(
-                "%s team has won %u %s!",
-                "%s team has won %u %ss!",
-                nbr_ammo),
-            equipe.GetName().c_str(), nbr_ammo, WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
+//        txt << Format(ngettext(
+//                "%s team has won %u %s!",
+//                "%s team has won %u %ss!",
+//                nbr_ammo),
+//            equipe.GetName().c_str(), nbr_ammo, WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
+
+        txt << WeaponsList::GetInstance()->
+                GetWeapon(contents)->
+                GetWeaponWinString(equipe.GetName().c_str(),nbr_ammo);
     }
     else {
         txt << Format(gettext("%s team already has infinite ammo for the %s!"), //this should never appear

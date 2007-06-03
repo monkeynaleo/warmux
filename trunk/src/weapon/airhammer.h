@@ -61,6 +61,8 @@ class Airhammer : public Weapon
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();
     virtual void HandleKeyReleased_Shoot();
+
+    DECLARE_GETWEAPONSTRING();
 };
 
 //-----------------------------------------------------------------------------

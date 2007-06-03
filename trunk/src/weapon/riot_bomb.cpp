@@ -71,3 +71,12 @@ WeaponProjectile * RiotBomb::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
       (new RiotBombRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
+
+std::string RiotBomb::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u riot bomb!",
+            "%s team has won %u riot bombs!",
+            items_count), TeamName, items_count);
+}
+

@@ -50,6 +50,7 @@ public:
   ClusterBomb(ClusterBombConfig& cfg,
               WeaponLauncher * p_launcher);
   void Refresh();
+  DECLARE_GETWEAPONSTRING();
 protected:
   void DoExplosion();
   void SignalOutOfMap();

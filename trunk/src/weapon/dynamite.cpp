@@ -112,3 +112,12 @@ bool Dynamite::p_Shoot ()
 
   return true;
 }
+
+std::string Dynamite::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u dynamite!",
+            "%s team has won %u dynamites!",
+            items_count), TeamName, items_count);
+}
+

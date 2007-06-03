@@ -217,6 +217,14 @@ void TuxLauncher::HandleKeyReleased_MoveLeft()
     ActiveCharacter().HandleKeyReleased_MoveLeft();
 }
 
+std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u tux launcher!",
+            "%s team has won %u tux launchers!",
+            items_count), TeamName, items_count);
+}
+
 SuperTuxWeaponConfig& TuxLauncher::cfg()
 {
   return static_cast<SuperTuxWeaponConfig&>(*extra_params);

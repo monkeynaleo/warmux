@@ -46,6 +46,7 @@ class Shotgun : public WeaponLauncher
     bool p_Shoot();
   public:
     Shotgun();
+    DECLARE_GETWEAPONSTRING();
   private:
     void ShootSound();
 };

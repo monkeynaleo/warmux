@@ -69,3 +69,11 @@ void Suicide::Refresh()
 ExplosiveWeaponConfig& Suicide::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
 
+std::string Suicide::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u suicide!",
+            "%s team has won %u suicides!",
+            items_count), TeamName, items_count);
+}
+

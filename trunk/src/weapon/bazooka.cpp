@@ -81,3 +81,12 @@ WeaponProjectile * Bazooka::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
       (new BazookaRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
+
+std::string Bazooka::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u bazooka!",
+            "%s team has won %u bazookas!",
+            items_count), TeamName, items_count);
+}
+

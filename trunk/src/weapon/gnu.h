@@ -40,6 +40,7 @@ public:
       WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
+  DECLARE_GETWEAPONSTRING();
 };
 
 class GnuLauncher : public WeaponLauncher

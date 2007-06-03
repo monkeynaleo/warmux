@@ -42,6 +42,7 @@ class Gun : public WeaponLauncher
 {
   public:
     Gun();
+    DECLARE_GETWEAPONSTRING();
   protected:
     bool p_Shoot();
     WeaponProjectile * GetProjectileInstance();

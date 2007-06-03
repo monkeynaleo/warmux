@@ -114,6 +114,15 @@ void Gnu::SignalOutOfMap()
   GameMessages::GetInstance()->Add (_("The Gnu left the battlefield before exploding"));
   WeaponProjectile::SignalOutOfMap();
 }
+
+std::string Gnu::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u Gnu!",
+            "%s team has won %u Gnus!",
+            items_count), TeamName, items_count);
+}
+
 //-----------------------------------------------------------------------------
 
 GnuLauncher::GnuLauncher() :

@@ -45,6 +45,7 @@ public:
 
   // Draw crosshair
   void Draw();
+
 };
 
 #endif /* CROSSHAIR_H */

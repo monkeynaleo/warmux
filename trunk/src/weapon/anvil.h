@@ -40,6 +40,7 @@ class Anvil : public WeaponProjectile
 
     void PlayFallSound();
     void PlayCollisionSound();
+    DECLARE_GETWEAPONSTRING();
 
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);

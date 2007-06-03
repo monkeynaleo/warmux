@@ -127,6 +127,15 @@ void Polecat::SignalOutOfMap()
   GameMessages::GetInstance()->Add (_("The Polecat left the battlefield before exploding"));
   WeaponProjectile::SignalOutOfMap();
 }
+
+std::string Polecat::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u polecat!",
+            "%s team has won %u polecats!",
+            items_count), TeamName, items_count);
+}
+
 //-----------------------------------------------------------------------------
 
 PolecatLauncher::PolecatLauncher() :

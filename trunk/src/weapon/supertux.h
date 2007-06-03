@@ -79,6 +79,7 @@ class TuxLauncher : public WeaponLauncher
     virtual void HandleKeyPressed_MoveLeft();
     virtual void HandleKeyRefreshed_MoveLeft();
     virtual void HandleKeyReleased_MoveLeft();
+    DECLARE_GETWEAPONSTRING();
 
   protected:
     WeaponProjectile * GetProjectileInstance();

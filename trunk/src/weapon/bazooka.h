@@ -38,6 +38,7 @@ class Bazooka : public WeaponLauncher
 {
  public:
   Bazooka();
+  DECLARE_GETWEAPONSTRING();
  protected:
   WeaponProjectile * GetProjectileInstance();
 };
