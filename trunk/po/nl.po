@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-03-23 15:15+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -52,6 +51,17 @@ msgstr "%s <%s> aka %s van %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> van %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Teams"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -811,11 +821,6 @@ msgstr "Persoonlijk config bestand wordt gelezen"
 msgid "Refresh"
 msgstr "Verversen"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Via netwerk"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Resolutie"
@@ -1122,6 +1127,9 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
+
+#~ msgid "Remote"
+#~ msgstr "Via netwerk"
 
 #~ msgid "Ninjarope"
 #~ msgstr "Ninja touw"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources SYSTEM "../team.dtd" []>
 <resources>
-  <name>Snort Team</name>
+  <name>Snort</name>
   <surface name="flag" file="flag.png" />
   <team>
     <character name="Snort" body="snortteam" />

@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2006-06-16 11:36+0100\n"
 "Last-Translator: Bastian Salmela <bastian.salmela@hel.fi>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -53,6 +52,17 @@ msgstr "%s < %s > aka %s %s:stä"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
+
+#: src/menu/team_box.cpp:74
+#, c-format
+msgid "%s Team"
+msgstr ""
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -830,11 +840,6 @@ msgstr ""
 
 #: src/menu/internet_menu.cpp:53
 msgid "Refresh"
-msgstr ""
-
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
 msgstr ""
 
 #: src/menu/options_menu.cpp:80

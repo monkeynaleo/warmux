@@ -6,7 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.7\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-03-07 15:07+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: sk <stryco@gmail.com>\n"
@@ -53,6 +52,17 @@ msgstr "%s <%s> aka %s od %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> od %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Tími"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -837,11 +847,6 @@ msgstr "Čítam osobný konfiguračný súbor"
 msgid "Refresh"
 msgstr "Obnovovanie"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Vzdialený"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Rozlíšenie"
@@ -1149,6 +1154,9 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#~ msgid "Remote"
+#~ msgstr "Vzdialený"
 
 #~ msgid "Ninjarope"
 #~ msgstr "Nindžalano"

@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-06-04 01:20+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
@@ -57,6 +57,17 @@ msgstr "%s <%s> cunoscut și ca %s din %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Echipe"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -565,8 +576,8 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Rachetă automată"
 
-#: src/network/net_error_msg.cpp:43
 #
+#: src/network/net_error_msg.cpp:43
 msgid "Bad socket ..."
 msgstr "Socket greșit ..."
 
@@ -679,7 +690,8 @@ msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
 #: src/game/config.cpp:253
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
@@ -767,9 +779,9 @@ msgstr "Distracție plăcută!"
 msgid "Head commander"
 msgstr "Comandant șef"
 
+#
 #. Display player's name
 #: src/interface/interface.cpp:161
-#
 msgid "Head commander: "
 msgstr "Comandant șef: "
 
@@ -1015,11 +1027,6 @@ msgstr "Se citește fișierul personal de configurare"
 msgid "Refresh"
 msgstr "Reîmprospătează"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "la distanță"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Rezoluție"
@@ -1073,9 +1080,9 @@ msgid ""
 "Some weapons are disabled, because of known bugs (grapple, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
 msgstr ""
-"Unele arme sunt dezactivate datorită unor probleme cunoscute (ghiara de agățare, "
-"ciocanul pneumatic, lampa de sudură, mitraliera semiautomată) și, mai mult ca "
-"sigur, mai sunt și alte lucruri care nu funcționează!"
+"Unele arme sunt dezactivate datorită unor probleme cunoscute (ghiara de "
+"agățare, ciocanul pneumatic, lampa de sudură, mitraliera semiautomată) și, "
+"mai mult ca sigur, mai sunt și alte lucruri care nu funcționează!"
 
 #: src/menu/options_menu.cpp:100
 msgid "Sound effects?"
@@ -1264,8 +1271,8 @@ msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
 msgid "Wind particles?"
 msgstr "Particulele de vânt?"
 
-#: src/menu/results_menu.cpp:138
 #
+#: src/menu/results_menu.cpp:138
 msgid "Winner"
 msgstr "Câștigător"
 
@@ -1302,8 +1309,8 @@ msgstr "Aveți nevoie de cel puțin două echipe valide !"
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
-#: src/menu/credits_menu.cpp:68
 #
+#: src/menu/credits_menu.cpp:68
 msgid "aka"
 msgstr "zis"
 
@@ -1321,8 +1328,8 @@ msgstr ""
 msgid "done"
 msgstr "finalizat"
 
-#: src/menu/credits_menu.cpp:72
 #
+#: src/menu/credits_menu.cpp:72
 msgid "from"
 msgstr "de la:"
 
@@ -1339,6 +1346,9 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#~ msgid "Remote"
+#~ msgstr "la distanță"
 
 #~ msgid "Ninjarope"
 #~ msgstr "Funie ninja"
@@ -2224,4 +2234,3 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
-

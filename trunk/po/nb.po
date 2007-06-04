@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb-no\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-03-07 13:15+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: \n"
@@ -53,6 +52,17 @@ msgstr "%s <%s> dit %s fra %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Lag"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -811,11 +821,6 @@ msgstr "Laster personlig konfigurasjonsfil"
 msgid "Refresh"
 msgstr "Oppdater"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Fjern"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Resolusjon"
@@ -1123,6 +1128,9 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Åpnet lyden på %d Hz %d bit"
+
+#~ msgid "Remote"
+#~ msgstr "Fjern"
 
 #~ msgid "Ninjarope"
 #~ msgstr "Ninjatau"

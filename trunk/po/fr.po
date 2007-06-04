@@ -7,30 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
-"PO-Revision-Date: 2007-06-04 09:58+0100\n"
+"POT-Creation-Date: (null)\n"
+"PO-Revision-Date: 2007-06-05 00:03+0200\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);"
 
 #: src/map/maps_list.cpp:295
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Le terrain %s est introuvable :-("
 
-#: src/menu/network_menu.cpp:116
-#: src/menu/network_menu.cpp:277
+#: src/menu/network_menu.cpp:116 src/menu/network_menu.cpp:277
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i joueur connecté"
 msgstr[1] "%i joueurs connectés"
 
-#: src/menu/network_menu.cpp:120
-#: src/menu/network_menu.cpp:285
+#: src/menu/network_menu.cpp:120 src/menu/network_menu.cpp:285
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -51,6 +49,17 @@ msgstr "%s <%s> dit %s de %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
+
+#: src/menu/team_box.cpp:74
+#, c-format
+msgid "%s Team"
+msgstr "Équipe %s"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr "Équipe %s - Distant"
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -325,7 +334,8 @@ msgstr[1] "L'équipe %s a gagné %u armes inattendues !"
 #: src/include/action_handler.cpp:227
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s a essayé de se connecter à une version différente : client=%s, serveur=%s."
+msgstr ""
+"%s a essayé de se connecter à une version différente : client=%s, serveur=%s."
 
 #: src/menu/options_menu.cpp:130
 msgid "(current)"
@@ -403,15 +413,13 @@ msgstr "Balle rebondissante"
 msgid "Bye bye tux..."
 msgstr "Adieu tux !"
 
-#: src/team/teams_list.cpp:474
-#: src/team/teams_list.cpp:496
+#: src/team/teams_list.cpp:474 src/team/teams_list.cpp:496
 #: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossible de trouver l'équipe %s !"
 
-#: src/team/teams_list.cpp:141
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:141 src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
@@ -474,8 +482,7 @@ msgstr "Durée d'un tour"
 msgid "Dynamite"
 msgstr "Dynamite"
 
-#: src/game/game_loop.cpp:125
-#: src/game/game_loop.cpp:131
+#: src/game/game_loop.cpp:125 src/game/game_loop.cpp:131
 msgid "END OF GAME"
 msgstr "FIN DU JEU"
 
@@ -484,8 +491,7 @@ msgstr "FIN DU JEU"
 msgid "Error in %s:%lu"
 msgstr "Erreur dans %s:%lu"
 
-#: src/team/teams_list.cpp:109
-#: src/team/teams_list.cpp:117
+#: src/team/teams_list.cpp:109 src/team/teams_list.cpp:117
 msgid "Error loading team :"
 msgstr "Erreur au chargement de l'équipe :"
 
@@ -496,8 +502,11 @@ msgstr "Erreur durant le chargement de l'équipe %s :"
 
 #: src/game/config.cpp:253
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Erreur lors de la création du répertoire \"%s\" : impossible de sauvegarder la configuration du jeu."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Erreur lors de la création du répertoire \"%s\" : impossible de sauvegarder "
+"la configuration du jeu."
 
 #: src/game/config.cpp:169
 #, c-format
@@ -526,11 +535,14 @@ msgstr "Impossible de se connecter à %s : %s"
 
 #: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
-msgstr "Impossible de contacter le serveur d'index pour la création d'une partie"
+msgstr ""
+"Impossible de contacter le serveur d'index pour la création d'une partie"
 
 #: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr "Impossible de contacter le serveur d'index pour rechercher une partie sur internet"
+msgstr ""
+"Impossible de contacter le serveur d'index pour rechercher une partie sur "
+"internet"
 
 #: src/menu/network_connection_menu.cpp:227
 msgid "Error: Unable to start server"
@@ -630,8 +642,12 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Dépechez-vous, vous êtes trop lent !!"
 
 #: src/main.cpp:210
-msgid "If you found a bug or have a feature request send us a email (in english, please):"
-msgstr "Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Wormux, envoyez un mail (en anglais, svp) :"
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
+msgstr ""
+"Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à "
+"Wormux, envoyez un mail (en anglais, svp) :"
 
 #: src/menu/game_menu.cpp:99
 msgid "Initial energy"
@@ -672,10 +688,10 @@ msgid "Jetpack"
 msgstr "Jetpack"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:104
-#: src/menu/network_menu.cpp:138
+#: src/menu/network_connection_menu.cpp:104 src/menu/network_menu.cpp:138
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr "Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires."
+msgstr ""
+"Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires."
 
 #: src/map/maps_list.cpp:198
 msgid "Load maps:"
@@ -750,7 +766,8 @@ msgstr "Initialisation du réseau"
 #: src/weapon/weapon.cpp:604
 #, c-format
 msgid "No element <%s> found in the xml config file!"
-msgstr "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
+msgstr ""
+"Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
 #: src/menu/results_menu.cpp:107
 msgid "Nobody!"
@@ -819,11 +836,6 @@ msgstr "Lecture du fichier de configuration personnel"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Distant"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Résolution"
@@ -873,8 +885,13 @@ msgstr "Fusil sniper"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:102
-msgid "Some weapons are disabled, because of known bugs (grapple, airhammer, blowtorch, submachine gun) and surely many other things don't work either!"
-msgstr "Certaines armes sont désactivées car elles sont à l'origine de bugs connus (corde ninja, attaque aérienne, mitrailleuse) mais il y en a sûrement d'autres !"
+msgid ""
+"Some weapons are disabled, because of known bugs (grapple, airhammer, "
+"blowtorch, submachine gun) and surely many other things don't work either!"
+msgstr ""
+"Certaines armes sont désactivées car elles sont à l'origine de bugs connus "
+"(corde ninja, attaque aérienne, mitrailleuse) mais il y en a sûrement "
+"d'autres !"
 
 #: src/menu/options_menu.cpp:100
 msgid "Sound effects?"
@@ -919,7 +936,8 @@ msgstr "Téléportation"
 
 #: src/weapon/cluster_bomb.cpp:84
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr "La grenade à fragmentation a quitté le champ de bataille avant d'exploser."
+msgstr ""
+"La grenade à fragmentation a quitté le champ de bataille avant d'exploser."
 
 #: src/weapon/gnu.cpp:114
 msgid "The Gnu left the battlefield before exploding"
@@ -953,8 +971,7 @@ msgstr "La grenade a quitté le champ de bataille avant d'exploser."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Les autres t'attendent ! Réveille-toi :-)"
 
-#: src/weapon/bazooka.cpp:58
-#: src/weapon/riot_bomb.cpp:50
+#: src/weapon/bazooka.cpp:58 src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "La roquette est partie dans un autre monde..."
 
@@ -1001,8 +1018,7 @@ msgstr "Outils"
 msgid "Unable to contact host."
 msgstr "Impossible de contacter le serveur."
 
-#: src/map/maps_list.cpp:210
-#: src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:210 src/map/maps_list.cpp:226
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des terrains (%s) !"
@@ -1016,12 +1032,20 @@ msgid "Version"
 msgstr "Version"
 
 #: src/menu/network_menu.cpp:139
-msgid "WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"
-msgstr "ATTENTION ! Les déconnexions ne sont pas gérées. Vous devez donc redémarrer Wormux après chaque déconnexion !"
+msgid ""
+"WARNING! Disconnections are not yet handled. So you have to restart Wormux "
+"after each disconnection!"
+msgstr ""
+"ATTENTION ! Les déconnexions ne sont pas gérées. Vous devez donc redémarrer "
+"Wormux après chaque déconnexion !"
 
 #: src/menu/network_connection_menu.cpp:100
-msgid "WARNING!! Network is still under developement and therefore a little experimental."
-msgstr "Attention !! Le jeu en réseau est encore en développement et est de ce fait très expérimental."
+msgid ""
+"WARNING!! Network is still under developement and therefore a little "
+"experimental."
+msgstr ""
+"Attention !! Le jeu en réseau est encore en développement et est de ce fait "
+"très expérimental."
 
 #: src/menu/network_menu.cpp:229
 #, c-format
@@ -1036,8 +1060,7 @@ msgstr "Attente du serveur, vous pouvez annuler ou discuter !"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:132
-#: src/interface/weapon_menu.cpp:169
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:169
 msgid "Weapons"
 msgstr "Armes"
 
@@ -1083,8 +1106,7 @@ msgstr "Vous voulez vraiment jouer tout seul ?!"
 msgid "You need at least one valid map !"
 msgstr "Il faut au minimum un terrain valide !"
 
-#: src/game/game_init.cpp:125
-#: src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Il faut au minimum deux équipes valides !"
 
@@ -1127,7 +1149,4 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
-#~ msgid "Ninjarope"
-#~ msgstr "Corde ninja"
 

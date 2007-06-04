@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-05-23 22:37+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -51,6 +50,17 @@ msgstr "%s <%s> aka %s aus %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> aus %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Manschaften"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -808,11 +818,6 @@ msgstr "Lese persönliche Konfigurationsdatei"
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Entfernt"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Auflösung"
@@ -1122,3 +1127,6 @@ msgstr "o Lade Sound Profil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
+
+#~ msgid "Remote"
+#~ msgstr "Entfernt"

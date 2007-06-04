@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources SYSTEM "../team.dtd" []>
 <resources>
-  <name>OOo Team</name>
+  <name>OOo</name>
   <sound_profile>flying</sound_profile>
   <surface name="flag" file="flag.png" />
   <team>

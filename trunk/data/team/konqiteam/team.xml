@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources SYSTEM "../team.dtd" []>
 <resources>
-  <name>Konqi Team</name>
+  <name>Konqi</name>
   <surface name="flag" file="flag.png" />
   <team>
     <character name="Konqui" body="konqiteam" />
