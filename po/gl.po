@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-04-11 16:36+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@cvs.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
@@ -50,6 +49,17 @@ msgstr "%s <%s> aka %s de %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Equipos"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -804,11 +814,6 @@ msgstr "Lendo o ficheiro de configuración persoal"
 msgid "Refresh"
 msgstr "Actualizar"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Remoto"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Resolución"
@@ -1107,6 +1112,9 @@ msgstr ""
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#~ msgid "Remote"
+#~ msgstr "Remoto"
 
 #~ msgid "You need at least two teams to play: change this in 'Options menu' !"
 #~ msgstr ""

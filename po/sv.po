@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-03-07 14:15+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -50,6 +49,17 @@ msgstr "%s <%s> även känd som %s från %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> från %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Lag"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -812,11 +822,6 @@ msgstr "Läser in personlig konfigurationsfil"
 msgid "Refresh"
 msgstr "Uppdatera"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Fjärr"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Upplösning"
@@ -1125,6 +1130,9 @@ msgstr "o Läser in ljudprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"
+
+#~ msgid "Remote"
+#~ msgstr "Fjärr"
 
 #~ msgid "Ninjarope"
 #~ msgstr "Ninjarep"

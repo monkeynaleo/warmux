@@ -2,7 +2,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-05-15 12:00+0200\n"
 "Last-Translator: Varga Istvan\n"
 "Language-Team: Hungarian\n"
@@ -44,6 +43,17 @@ msgstr "%s <%s>, ismertebb nevén %s a(z) %s csapatból"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a(z) %s csapatból"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Csapatok"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -832,11 +842,6 @@ msgstr "Személyes konfigurációs fájl olvasása"
 msgid "Refresh"
 msgstr "Frissítés"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Távoli"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Felbontás"
@@ -1142,6 +1147,9 @@ msgstr "Hangprofil betöltése: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Hangminõség: %d Hz, %d bit"
+
+#~ msgid "Remote"
+#~ msgstr "Távoli"
 
 #~ msgid "Ninjarope"
 #~ msgstr "Ninja-kötél"

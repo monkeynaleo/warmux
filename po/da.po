@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-06-04 20:18+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
@@ -50,6 +49,17 @@ msgstr "%s <%s> også kendt som %s fra %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Hold"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -491,8 +501,10 @@ msgstr "Fejl under indlæsning af holdet %ss data:"
 
 #: src/game/config.cpp:253
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
 
 #: src/game/config.cpp:169
 #, c-format
@@ -817,11 +829,6 @@ msgstr "Læser personlig konfigureringsfil"
 msgid "Refresh"
 msgstr "Opdater"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Fjern"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Opløsning"
@@ -1041,7 +1048,8 @@ msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
 #: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
+msgstr ""
+"Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -1135,3 +1143,5 @@ msgstr "o Indlæser lydprofilen: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
 
+#~ msgid "Remote"
+#~ msgstr "Fjern"

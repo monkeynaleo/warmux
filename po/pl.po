@@ -6,7 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-02-13 12:10+0100\n"
 "Last-Translator: Michał D. <emdek@epf.pl>\n"
 "Language-Team: Polish <pddp@debian.linux.org.pl>\n"
@@ -54,6 +53,17 @@ msgstr "%s <%s> aka %s z %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Drużyny"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -845,11 +855,6 @@ msgstr "Odczytywanie pliku konfiguracji osobistej"
 
 #: src/menu/internet_menu.cpp:53
 msgid "Refresh"
-msgstr ""
-
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
 msgstr ""
 
 #: src/menu/options_menu.cpp:80

@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-06-04 00:44+0300\n"
 "PO-Revision-Date: 2007-05-23 10:38+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -51,6 +50,17 @@ msgstr "%s <%s> aka %s iz %s"
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz %s"
+
+#: src/menu/team_box.cpp:74
+#, fuzzy, c-format
+msgid "%s Team"
+msgstr "Timovi"
+
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:72
+#, c-format
+msgid "%s Team - Remote"
+msgstr ""
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -811,11 +821,6 @@ msgstr "Čita lični konfiguracioni podatak"
 msgid "Refresh"
 msgstr "Osvježi"
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:72
-msgid "Remote"
-msgstr "Daljinski"
-
 #: src/menu/options_menu.cpp:80
 msgid "Resolution"
 msgstr "Rezolucija"
@@ -1121,3 +1126,6 @@ msgstr "o Učitavam zvučne profile: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
+
+#~ msgid "Remote"
+#~ msgstr "Daljinski"
