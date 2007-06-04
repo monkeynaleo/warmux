@@ -59,15 +59,15 @@ msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
 #: src/menu/team_box.cpp:74
-#, fuzzy, c-format
+#, c-format
 msgid "%s Team"
-msgstr "Echipe"
+msgstr "Echipa %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:72
 #, c-format
 msgid "%s Team - Remote"
-msgstr ""
+msgstr "Echipa %s - la distanță"
 
 #: src/game/game_loop.cpp:632
 #, c-format
