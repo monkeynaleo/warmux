@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2007-06-04 00:44+0300\n"
-"PO-Revision-Date: 2007-04-17 00:44+0200\n"
-"Last-Translator: Matthieu Fertré <matthieu.fertre@free.fr>\n"
+"PO-Revision-Date: 2007-06-04 09:58+0100\n"
+"Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,14 +21,16 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Le terrain %s est introuvable :-("
 
-#: src/menu/network_menu.cpp:116 src/menu/network_menu.cpp:277
+#: src/menu/network_menu.cpp:116
+#: src/menu/network_menu.cpp:277
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i joueur connecté"
 msgstr[1] "%i joueurs connectés"
 
-#: src/menu/network_menu.cpp:120 src/menu/network_menu.cpp:285
+#: src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:285
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -104,227 +106,226 @@ msgid "%s team has skipped its turn."
 msgstr "%s a sauté son tour."
 
 #: src/weapon/gnu.cpp:121
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u Gnu!"
 msgid_plural "%s team has won %u Gnus!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u Gnu !"
+msgstr[1] "L'équipe %s a gagné %u Gnus !"
 
 #: src/weapon/air_attack.cpp:215
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u attaque aérienne !"
+msgstr[1] "L'équipe %s a gagné %u attaques aériennes !"
 
 #: src/weapon/airhammer.cpp:172
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u airhammer!"
 msgid_plural "%s team has won %u airhammers!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u marteau-piqueur !"
+msgstr[1] "L'équipe %s a gagné %u marteaux-piqueurs !"
 
 #: src/weapon/anvil.cpp:87
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u anvil!"
 msgid_plural "%s team has won %u anvils!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u enclume !"
+msgstr[1] "L'équipe %s a gagné %u enclumes !"
 
 #: src/weapon/auto_bazooka.cpp:262
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u bazooka automatique !"
+msgstr[1] "L'équipe %s a gagné %u bazookas automatiques !"
 
 #: src/weapon/baseball.cpp:92
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u batte de baseball !"
+msgstr[1] "L'équipe %s a gagné %u battes de baseball !"
 
 #: src/weapon/bazooka.cpp:88
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u bazooka !"
+msgstr[1] "L'équipe %s a gagné %u bazookas !"
 
 #: src/weapon/blowtorch.cpp:142
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u blowtorch!"
 msgid_plural "%s team has won %u blowtorchs!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u chalumeau !"
+msgstr[1] "L'équipe %s a gagné %u chalumeaux !"
 
 #: src/weapon/bounce_ball.cpp:68
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u bounce ball!"
 msgid_plural "%s team has won %u bounce balls!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u balle rebondissante !"
+msgstr[1] "L'équipe %s a gagné %u balles rebondissantes !"
 
 #: src/weapon/construct.cpp:132
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u construct!"
 msgid_plural "%s team has won %u constructs!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u kit de construction !"
+msgstr[1] "L'équipe %s a gagné %u kits de construction !"
 
 #: src/weapon/cluster_bomb.cpp:106
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u custer bomb!"
 msgid_plural "%s team has won %u custer bombs!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u bombe à fragmentation !"
+msgstr[1] "L'équipe %s a gagné %u bombes à fragmentation !"
 
 #: src/weapon/disco_grenade.cpp:100
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u disco grenade!"
 msgid_plural "%s team has won %u disco grenades!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u grenade disco !"
+msgstr[1] "L'équipe %s a gagné %u grenades disco !"
 
 #: src/weapon/dynamite.cpp:119
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u dynamite !"
+msgstr[1] "L'équipe %s a gagné %u dynamites !"
 
 #: src/weapon/grapple.cpp:708
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u grappin !"
+msgstr[1] "L'équipe %s a gagné %u grappins !"
 
 #: src/weapon/grenade.cpp:64
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u grenade !"
+msgstr[1] "L'équipe %s a gagné %u grenades !"
 
 #: src/weapon/gun.cpp:81
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u fusil !"
+msgstr[1] "L'équipe %s a gagné %u fusils !"
 
 #: src/weapon/jetpack.cpp:262
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u jetpack!"
 msgid_plural "%s team has won %u jetpacks!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u jetpack !"
+msgstr[1] "L'équipe %s a gagné %u jetpacks !"
 
 #: src/weapon/lowgrav.cpp:87
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u lowgrav!"
 msgid_plural "%s team has won %u lowgravs!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u anti-gravitation !"
+msgstr[1] "L'équipe %s a gagné %u anti-gravitation !"
 
 #: src/weapon/mine.cpp:240
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u mine !"
+msgstr[1] "L'équipe %s a gagné %u mines !"
 
 #: src/weapon/parachute.cpp:133
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u parachute !"
+msgstr[1] "L'équipe %s a gagné %u parachutes !"
 
 #: src/weapon/polecat.cpp:134
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u polecat!"
 msgid_plural "%s team has won %u polecats!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u moufette !"
+msgstr[1] "L'équipe %s a gagné %u moufettes !"
 
 #: src/weapon/riot_bomb.cpp:78
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u bombe incendiaire !"
+msgstr[1] "L'équipe %s a gagné %u bombes incendiaires !"
 
 #: src/weapon/shotgun.cpp:111
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u fusil d'assaut !"
+msgstr[1] "L'équipe %s a gagné %u fusils d'assaut !"
 
 #: src/weapon/snipe_rifle.cpp:211
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle!"
 msgid_plural "%s team has won %u snipe rifles!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u fusil à lunette !"
+msgstr[1] "L'équipe %s a gagné %u fusils à lunette !"
 
 #: src/weapon/submachine_gun.cpp:151
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u M16 !"
+msgstr[1] "L'équipe %s a gagné %u M16 !"
 
 #: src/weapon/suicide.cpp:75
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u suicide !"
+msgstr[1] "L'équipe %s a gagné %u suicides !"
 
 #: src/weapon/syringe.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u seringue !"
+msgstr[1] "L'équipe %s a gagné %u seringues !"
 
 #: src/weapon/teleportation.cpp:121
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u teleportation !"
+msgstr[1] "L'équipe %s a gagné %u teleportations !"
 
 #: src/weapon/skip_turn.cpp:65
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u turn skip!"
 msgid_plural "%s team has won %u turn skips!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u passage de tour !"
+msgstr[1] "L'équipe %s a gagné %u passages de tour !"
 
 #: src/weapon/supertux.cpp:223
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u tux launcher!"
 msgid_plural "%s team has won %u tux launchers!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u lanceur de Tux !"
+msgstr[1] "L'équipe %s a gagné %u lanceurs de Tux !"
 
 #: src/weapon/weapon.cpp:809
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u unexpected weapon!"
 msgid_plural "%s team has won %u unexpected weapons!"
-msgstr[0] "L'équipe %s a gagné %u %s !"
-msgstr[1] "L'équipe %s a gagné %u %ss !"
+msgstr[0] "L'équipe %s a gagné %u arme inattendue !"
+msgstr[1] "L'équipe %s a gagné %u armes inattendues !"
 
 #: src/include/action_handler.cpp:227
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-"%s a essayé de se connecter à une version différente : client=%s, serveur=%s."
+msgstr "%s a essayé de se connecter à une version différente : client=%s, serveur=%s."
 
 #: src/menu/options_menu.cpp:130
 msgid "(current)"
@@ -354,7 +355,7 @@ msgstr "Toutes les équipes"
 
 #: src/game/game_loop.cpp:343
 msgid "And the winner is..."
-msgstr ""
+msgstr "Et le vainqueur est..."
 
 #: src/weapon/baseball.cpp:33
 msgid ""
@@ -362,6 +363,9 @@ msgid ""
 "Fire : space key\n"
 "a hit per turn"
 msgstr ""
+"Angle: Haut/Bas\n"
+"Tirer: espace\n"
+"un coup par tour"
 
 #: src/weapon/anvil.cpp:97
 msgid "Anvil"
@@ -399,13 +403,15 @@ msgstr "Balle rebondissante"
 msgid "Bye bye tux..."
 msgstr "Adieu tux !"
 
-#: src/team/teams_list.cpp:474 src/team/teams_list.cpp:496
+#: src/team/teams_list.cpp:474
+#: src/team/teams_list.cpp:496
 #: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossible de trouver l'équipe %s !"
 
-#: src/team/teams_list.cpp:141 src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:141
+#: src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
@@ -446,7 +452,7 @@ msgstr "Construction"
 
 #: src/menu/results_menu.cpp:144
 msgid "Controlled by: "
-msgstr ""
+msgstr "Contrôlé par:"
 
 #: src/menu/main_menu.cpp:107
 msgid "Credits"
@@ -468,7 +474,8 @@ msgstr "Durée d'un tour"
 msgid "Dynamite"
 msgstr "Dynamite"
 
-#: src/game/game_loop.cpp:125 src/game/game_loop.cpp:131
+#: src/game/game_loop.cpp:125
+#: src/game/game_loop.cpp:131
 msgid "END OF GAME"
 msgstr "FIN DU JEU"
 
@@ -477,10 +484,10 @@ msgstr "FIN DU JEU"
 msgid "Error in %s:%lu"
 msgstr "Erreur dans %s:%lu"
 
-#: src/team/teams_list.cpp:109 src/team/teams_list.cpp:117
-#, fuzzy
+#: src/team/teams_list.cpp:109
+#: src/team/teams_list.cpp:117
 msgid "Error loading team :"
-msgstr "Erreur durant le chargement de l'équipe %s :"
+msgstr "Erreur au chargement de l'équipe :"
 
 #: src/team/team.cpp:151
 #, c-format
@@ -489,11 +496,8 @@ msgstr "Erreur durant le chargement de l'équipe %s :"
 
 #: src/game/config.cpp:253
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Erreur lors de la création du répertoire \"%s\" : impossible de sauvegarder "
-"la configuration du jeu."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Erreur lors de la création du répertoire \"%s\" : impossible de sauvegarder la configuration du jeu."
 
 #: src/game/config.cpp:169
 #, c-format
@@ -522,14 +526,11 @@ msgstr "Impossible de se connecter à %s : %s"
 
 #: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
-msgstr ""
-"Impossible de contacter le serveur d'index pour la création d'une partie"
+msgstr "Impossible de contacter le serveur d'index pour la création d'une partie"
 
 #: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr ""
-"Impossible de contacter le serveur d'index pour rechercher une partie sur "
-"internet"
+msgstr "Impossible de contacter le serveur d'index pour rechercher une partie sur internet"
 
 #: src/menu/network_connection_menu.cpp:227
 msgid "Error: Unable to start server"
@@ -550,7 +551,7 @@ msgstr "Lance Gnu"
 
 #: src/weapon/grapple.cpp:82
 msgid "Grapple"
-msgstr ""
+msgstr "Grappin"
 
 #: src/weapon/grenade.cpp:75
 msgid "Grenade"
@@ -592,12 +593,17 @@ msgid ""
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
+"Usage: garder la touche espace enfoncée\n"
+"Angle: Haut/Bas\n"
+"une munition par tour"
 
 #: src/weapon/airhammer.cpp:47
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
 msgstr ""
+"Usage: garder la touche espace enfoncée\n"
+"une munition par tour"
 
 #: src/weapon/auto_bazooka.cpp:154
 msgid ""
@@ -606,24 +612,26 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Usage: clic gauche sur la cible\n"
+"Angle de tir initial: Haut/Bas\n"
+"Tirer: garder la touche espace enfoncée jusqu'à la puissance désirée\n"
+"une munition par tour"
 
 #: src/weapon/anvil.cpp:98
 msgid ""
 "Howto use it : left clic on target\n"
 "an ammo per turn"
 msgstr ""
+"Usage: clic gauche sur la cible\n"
+"une munition par tour"
 
 #: src/game/game_loop.cpp:689
 msgid "Hurry up, you are too slow !!"
 msgstr "Dépechez-vous, vous êtes trop lent !!"
 
 #: src/main.cpp:210
-msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
-"please):"
-msgstr ""
-"Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à "
-"Wormux, envoyez un mail (en anglais, svp) :"
+msgid "If you found a bug or have a feature request send us a email (in english, please):"
+msgstr "Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Wormux, envoyez un mail (en anglais, svp) :"
 
 #: src/menu/game_menu.cpp:99
 msgid "Initial energy"
@@ -635,6 +643,9 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Angle de tir initial: Haut/Bas\n"
+"Tirer: garder la touche espace enfoncée jusqu'à la puissance désirée\n"
+"une munition par tour"
 
 #: src/game/game_init.cpp:153
 msgid "Initialisation"
@@ -661,10 +672,10 @@ msgid "Jetpack"
 msgstr "Jetpack"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:104 src/menu/network_menu.cpp:138
+#: src/menu/network_connection_menu.cpp:104
+#: src/menu/network_menu.cpp:138
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr ""
-"Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires."
+msgstr "Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires."
 
 #: src/map/maps_list.cpp:198
 msgid "Load maps:"
@@ -705,7 +716,6 @@ msgid "Mine"
 msgstr "Mine"
 
 #: src/menu/results_menu.cpp:208
-#, fuzzy
 msgid "Most clumsy"
 msgstr "Le plus utile"
 
@@ -740,8 +750,7 @@ msgstr "Initialisation du réseau"
 #: src/weapon/weapon.cpp:604
 #, c-format
 msgid "No element <%s> found in the xml config file!"
-msgstr ""
-"Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
+msgstr "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
 #: src/menu/results_menu.cpp:107
 msgid "Nobody!"
@@ -864,14 +873,8 @@ msgstr "Fusil sniper"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:102
-#, fuzzy
-msgid ""
-"Some weapons are disabled, because of known bugs (grapple, airhammer, "
-"blowtorch, submachine gun) and surely many other things don't work either!"
-msgstr ""
-"Certaines armes sont désactivées car elles sont à l'origine de bugs connus "
-"(corde ninja, attaque aérienne, mitrailleuse) mais il y'en a sûrement "
-"d'autres !"
+msgid "Some weapons are disabled, because of known bugs (grapple, airhammer, blowtorch, submachine gun) and surely many other things don't work either!"
+msgstr "Certaines armes sont désactivées car elles sont à l'origine de bugs connus (corde ninja, attaque aérienne, mitrailleuse) mais il y en a sûrement d'autres !"
 
 #: src/menu/options_menu.cpp:100
 msgid "Sound effects?"
@@ -916,8 +919,7 @@ msgstr "Téléportation"
 
 #: src/weapon/cluster_bomb.cpp:84
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr ""
-"La grenade à fragmentation a quitté le champ de bataille avant d'exploser."
+msgstr "La grenade à fragmentation a quitté le champ de bataille avant d'exploser."
 
 #: src/weapon/gnu.cpp:114
 msgid "The Gnu left the battlefield before exploding"
@@ -949,9 +951,10 @@ msgstr "La grenade a quitté le champ de bataille avant d'exploser."
 
 #: src/menu/network_menu.cpp:292
 msgid "The others are waiting for you! Wake up :-)"
-msgstr ""
+msgstr "Les autres t'attendent ! Réveille-toi :-)"
 
-#: src/weapon/bazooka.cpp:58 src/weapon/riot_bomb.cpp:50
+#: src/weapon/bazooka.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "La roquette est partie dans un autre monde..."
 
@@ -973,6 +976,10 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Échéance: molette ou Page Suiv./Préc.\n"
+"Angle: Haut/Bas\n"
+"Tirer: garder la touche espace enfoncée jusqu'à la puissance désirée\n"
+"une munition par tour"
 
 #: src/weapon/bounce_ball.cpp:79
 msgid ""
@@ -981,6 +988,10 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
+"Échéance: molette ou Page Suiv./Préc.\n"
+"Angle: Haut/Bas\n"
+"Tirer: espace\n"
+"une munition par tour"
 
 #: src/interface/weapon_menu.cpp:171
 msgid "Tools"
@@ -990,7 +1001,8 @@ msgstr "Outils"
 msgid "Unable to contact host."
 msgstr "Impossible de contacter le serveur."
 
-#: src/map/maps_list.cpp:210 src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:210
+#: src/map/maps_list.cpp:226
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des terrains (%s) !"
@@ -1004,20 +1016,12 @@ msgid "Version"
 msgstr "Version"
 
 #: src/menu/network_menu.cpp:139
-msgid ""
-"WARNING! Disconnections are not yet handled. So you have to restart Wormux "
-"after each disconnection!"
-msgstr ""
-"ATTENTION ! Les déconnexions ne sont pas gérées. Vous devez donc redémarrer "
-"Wormux après chaque déconnexion !"
+msgid "WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"
+msgstr "ATTENTION ! Les déconnexions ne sont pas gérées. Vous devez donc redémarrer Wormux après chaque déconnexion !"
 
 #: src/menu/network_connection_menu.cpp:100
-msgid ""
-"WARNING!! Network is still under developement and therefore a little "
-"experimental."
-msgstr ""
-"Attention !! Le jeu en réseau est encore en développement et est de ce fait "
-"très expérimental."
+msgid "WARNING!! Network is still under developement and therefore a little experimental."
+msgstr "Attention !! Le jeu en réseau est encore en développement et est de ce fait très expérimental."
 
 #: src/menu/network_menu.cpp:229
 #, c-format
@@ -1028,11 +1032,12 @@ msgstr[1] "Attendez ! %i joueurs ne sont pas encore prêts !"
 
 #: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr ""
+msgstr "Attente du serveur, vous pouvez annuler ou discuter !"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:169
+#: src/game/game_init.cpp:132
+#: src/interface/weapon_menu.cpp:169
 msgid "Weapons"
 msgstr "Armes"
 
@@ -1050,9 +1055,8 @@ msgid "Wind particles?"
 msgstr "Particules du vent ?"
 
 #: src/menu/results_menu.cpp:138
-#, fuzzy
 msgid "Winner"
-msgstr "Mine"
+msgstr "Vainqueur"
 
 #: src/main.cpp:174
 msgid "Wormux launching..."
@@ -1068,9 +1072,8 @@ msgid "XML error during loading map '%s' :"
 msgstr "Erreur XML durant le chargement du terrain '%s' :"
 
 #: src/menu/network_menu.cpp:295
-#, fuzzy
 msgid "You are alone :-/"
-msgstr "Vous voulez vraiment jouer tout seul ?!"
+msgstr "T'es tout seul :-/"
 
 #: src/menu/network_menu.cpp:223
 msgid "You are alone..."
@@ -1080,7 +1083,8 @@ msgstr "Vous voulez vraiment jouer tout seul ?!"
 msgid "You need at least one valid map !"
 msgstr "Il faut au minimum un terrain valide !"
 
-#: src/game/game_init.cpp:125 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:125
+#: src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Il faut au minimum deux équipes valides !"
 
@@ -1098,6 +1102,9 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
+"Direction de l'attaque: Gauche/Droite\n"
+"Attaque: clic gauche sur la cible\n"
+"un bombardement par tour"
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -1123,3 +1130,4 @@ msgstr "o Démarrage du son à %d Hz %d bit"
 
 #~ msgid "Ninjarope"
 #~ msgstr "Corde ninja"
+
