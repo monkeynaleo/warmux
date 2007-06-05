@@ -54,7 +54,7 @@
 <sprite name="body-normal" type="body" >
 	<image file="body.png"/>
 	<anchor dx="16" dy="17"/>
-	<attached member_type="hoop" frame="*" dx="14" dy="20"/>
+	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
 	<attached member_type="head" frame="*" dx="14" dy="6"/>
 	<attached member_type="arm-right"  frame="*" dx="11" dy="12"/>
 	<attached member_type="arm-left"  frame="*" dx="16" dy="11"/>
