@@ -7,6 +7,7 @@ eo.po
 es.po
 fi.po
 fr.po
+gl.po
 hu.po
 it.po
 nl.po
