@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-06-04 20:18+0200\n"
+"PO-Revision-Date: 2007-06-06 16:53+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,15 +51,15 @@ msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
 
 #: src/menu/team_box.cpp:74
-#, fuzzy, c-format
+#, c-format
 msgid "%s Team"
-msgstr "Hold"
+msgstr "Hold %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:72
 #, c-format
 msgid "%s Team - Remote"
-msgstr ""
+msgstr "Hold %s – Fjernt"
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -237,8 +237,8 @@ msgstr[1] "Holdet %s har fået %u jetpacks!"
 #, c-format
 msgid "%s team has won %u lowgrav!"
 msgid_plural "%s team has won %u lowgravs!"
-msgstr[0] "Holdet %s har fået %u lav tyngdekraft!"
-msgstr[1] "Holdet %s har fået %u lave tyngdekræfter!"
+msgstr[0] "Holdet %s har fået %u svag tyngdekraft!"
+msgstr[1] "Holdet %s har fået %u svage tyngdekræfter!"
 
 #: src/weapon/mine.cpp:240
 #, c-format
@@ -501,10 +501,8 @@ msgstr "Fejl under indlæsning af holdet %ss data:"
 
 #: src/game/config.cpp:253
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
 
 #: src/game/config.cpp:169
 #, c-format
@@ -802,7 +800,7 @@ msgstr "Vis krigernes energi?"
 
 #: src/menu/options_menu.cpp:69
 msgid "Player's name?"
-msgstr "Vis krigernes navn?"
+msgstr "Vis krigernes navne?"
 
 #: src/weapon/polecat.cpp:144
 msgid "Polecat Launcher"
@@ -1048,8 +1046,7 @@ msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
 #: src/menu/network_menu.cpp:360
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr ""
-"Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
+msgstr "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -1143,5 +1140,3 @@ msgstr "o Indlæser lydprofilen: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
 
-#~ msgid "Remote"
-#~ msgstr "Fjern"

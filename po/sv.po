@@ -1228,6 +1228,3 @@ msgstr "o Öppnade ljud med %d Hz, %d bitar"
 #~ msgid "[Sound] Error: File %s does not exist"
 #~ msgstr "[Ljud] Fel: Filen %s finns inte"
 
-
-
-!DSPAM:46665f85256601804284693!
