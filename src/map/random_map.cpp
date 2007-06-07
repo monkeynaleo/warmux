@@ -21,6 +21,7 @@
 
 #include "random_map.h"
 #include "tool/random.h"
+#include "map/maps_list.h"
 
 MapElement::MapElement(Surface & object, Point2i & pos)
 {
@@ -202,7 +203,7 @@ bool RandomMap::GenerateIsland(double width, double height)
 
 void RandomMap::SaveMap()
 {
-  result.ImgSave("/tmp/test.png");
+  result.ImgSave(Config::GetInstance()->GetPersonalDir() + ActiveMap().ReadName() + " - last random generation.png");
 }
 
 Surface RandomMap::GetRandomMap()
