@@ -18,7 +18,6 @@
  ******************************************************************************
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
-
 #include "game.h"
 #include <iostream>
 #include <SDL.h>
