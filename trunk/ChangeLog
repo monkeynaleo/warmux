@@ -1,3 +1,13 @@
+> 2007/06/28 - 0.8beta1 release
+  - Better network game support (visible by default)
+  - Use 3826 as default network port. This number is registred by IANA for Wormux
+  - Music during the game
+  - Better result menu
+  - New maps: Bankiz, Christmas, Crystal, Green Hills, Halloween 2, Space 2
+  - Experimental random map generator
+  - Optimize water rendering
+  - Bug fixes
+
 > 2007/01/27 - 0.7.9 release
   - Music for menus
   - Some bug fixes
