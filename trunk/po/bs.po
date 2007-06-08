@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-05-23 10:38+0200\n"
+"PO-Revision-Date: 2007-06-09 01:20+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr "Timovi"
 #: src/menu/team_box.cpp:72
 #, c-format
 msgid "%s Team - Remote"
-msgstr ""
+msgstr "%s Tim - Udaljenost"
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -373,6 +373,9 @@ msgid ""
 "Fire : space key\n"
 "a hit per turn"
 msgstr ""
+"Ugao : Gore/Dole\n"
+"Pucanje: space\n"
+"udarac po redu"
 
 #: src/weapon/anvil.cpp:97
 msgid "Anvil"
@@ -500,8 +503,7 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:253
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -533,8 +535,7 @@ msgstr "Greška: Nemoguće konektovat se na %s:%s"
 
 #: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
-msgstr ""
-"Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
+msgstr "Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
 
 #: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
@@ -604,12 +605,15 @@ msgid ""
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
+"Kako koristiti : drži space\n"
+"Ugao : Gore/Dole\n"
+"municija po redu"
 
 #: src/weapon/airhammer.cpp:47
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
-msgstr ""
+msgstr "Kako korisiti : drži space<br> municija po redu"
 
 #: src/weapon/auto_bazooka.cpp:154
 msgid ""
@@ -618,12 +622,18 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Kako ga koristiti : lijevi klik na metu\n"
+"Početni ugao pucanja : Gore/Dole\n"
+"Pucaj : drži space do željene jačine udarca\n"
+"municija po redu"
 
 #: src/weapon/anvil.cpp:98
 msgid ""
 "Howto use it : left clic on target\n"
 "an ammo per turn"
 msgstr ""
+"Kako koristiti : lijevi klik na metu\n"
+"municija po redu"
 
 #: src/game/game_loop.cpp:689
 msgid "Hurry up, you are too slow !!"
@@ -645,6 +655,9 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Početni ugao pucanja : Gore/Dole\n"
+"Pucaj : drži space do željene jačine\n"
+"municija po redu"
 
 #: src/game/game_init.cpp:153
 msgid "Initialisation"
@@ -978,6 +991,10 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Timeout : Skrol miša ili Page Up/Down\n"
+"Ugao : Gore/Dole\n"
+"Pucaj : drži space do željene jačine\n"
+"municija po redu"
 
 #: src/weapon/bounce_ball.cpp:79
 msgid ""
@@ -986,6 +1003,10 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
+"Timeout : Skrol miša ili Page Up/Down\n"
+"Ugao : Gore/Dole\n"
+"Pucaj : drži space\n"
+"municija po redu"
 
 #: src/interface/weapon_menu.cpp:171
 msgid "Tools"
@@ -1020,8 +1041,7 @@ msgstr ""
 msgid ""
 "WARNING!! Network is still under developement and therefore a little "
 "experimental."
-msgstr ""
-"UPOYORENJE! Mreža se i dalje razvija i tako da je poprilično experimentalna."
+msgstr "UPOYORENJE! Mreža se i dalje razvija i tako da je poprilično experimentalna."
 
 #: src/menu/network_menu.cpp:229
 #, c-format
@@ -1103,6 +1123,9 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
+"pravac napada : Lijevo/Desno\n"
+"Borbandovanje : lijevi klik na metu\n"
+"bombardovanja po redu"
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -1127,5 +1150,3 @@ msgstr "o Učitavam zvučne profile: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
 
-#~ msgid "Remote"
-#~ msgstr "Daljinski"
