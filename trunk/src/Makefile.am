@@ -36,6 +36,7 @@ wormux_SOURCES = \
         graphic/surface.cpp graphic/surface.h \
         graphic/text.cpp graphic/text.h \
         graphic/text_list.cpp graphic/text_list.h \
+	graphic/textured_polygon.h \
         graphic/video.cpp graphic/video.h \
         gui/box.cpp gui/box.h \
         gui/button.cpp gui/button.h \
