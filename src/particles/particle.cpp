@@ -80,7 +80,7 @@ void Particle::Refresh()
 
   if (time >= m_time_between_scale) {
 
-    //assert(m_left_time_to_live > 0);
+    //ASSERT(m_left_time_to_live > 0);
     if (m_left_time_to_live <= 0) return ;
 
     m_left_time_to_live--;
@@ -174,7 +174,7 @@ void ParticleEngine::FreeMem()
 
 Sprite* ParticleEngine::GetSprite(particle_spr type)
 {
-  assert(type < particle_spr_nbr);
+  ASSERT(type < particle_spr_nbr);
   if (!sprites_loaded)
     return NULL;
 
@@ -218,7 +218,7 @@ void ParticleEngine::AddNow(const Point2i &position,
     case particle_MAGIC_STAR : particle = new MagicStarParticle();
       break;
     default : particle = NULL;
-      assert(0);
+      ASSERT(0);
       break;
     }
 

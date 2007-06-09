@@ -184,7 +184,7 @@ menu_item Main_Menu::Run ()
 
   Menu::Run();
 
-  assert( choice != menuNULL );
+  ASSERT( choice != menuNULL );
   return choice;
 }
 

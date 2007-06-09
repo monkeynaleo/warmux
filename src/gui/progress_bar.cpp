@@ -47,8 +47,8 @@ void ProgressBar::SetValueColor(Color color){
 }
 
 void ProgressBar::InitPos (uint px, uint py, uint plarg, uint phaut){
-  assert (3 <= plarg);
-  assert (3 <= phaut);
+  ASSERT (3 <= plarg);
+  ASSERT (3 <= phaut);
   x = px;
   y = py;
   larg = plarg;
@@ -65,8 +65,8 @@ void ProgressBar::InitPos (uint px, uint py, uint plarg, uint phaut){
  */
 void ProgressBar::InitVal (long pval, long pmin, long pmax,
     enum orientation porientation){
-  assert (pmin != pmax);
-  assert (pmin < pmax);
+  ASSERT (pmin != pmax);
+  ASSERT (pmin < pmax);
   val = pval;
   min = pmin;
   max = pmax;

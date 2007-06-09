@@ -225,7 +225,7 @@ void Action::Push(std::string val)
 //-------------  Retrieve datas from the action  ----------------
 int Action::PopInt()
 {
-  net_assert(var.size() > 0)
+  NET_ASSERT(var.size() > 0)
   {
     if(creator) creator->force_disconnect = true;
     return 0;
@@ -242,7 +242,7 @@ int Action::PopInt()
 
 double Action::PopDouble()
 {
-  net_assert(var.size() > 0)
+  NET_ASSERT(var.size() > 0)
   {
     if(creator) creator->force_disconnect = true;
     return 0.0;
@@ -271,7 +271,7 @@ double Action::PopDouble()
 
 std::string Action::PopString()
 {
-  net_assert(var.size() > 1)
+  NET_ASSERT(var.size() > 1)
   {
     if(creator) creator->force_disconnect = true;
     return "";
@@ -281,7 +281,7 @@ std::string Action::PopString()
 
   std::string str="";
 
-  net_assert((int)var.size() >= lenght/4)
+  NET_ASSERT((int)var.size() >= lenght/4)
   {
     if(creator) creator->force_disconnect = true;
     return "";
@@ -289,7 +289,7 @@ std::string Action::PopString()
 
   while(lenght > 0)
   {
-    net_assert(var.size() > 0)
+    NET_ASSERT(var.size() > 0)
     {
       if(creator) creator->force_disconnect = true;
       return "";

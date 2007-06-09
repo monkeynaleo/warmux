@@ -151,7 +151,7 @@ void Tile::LoadImage (Surface& terrain){
     FreeMem();
 
     InitTile(terrain.GetSize());
-    assert(nbr_cell != 0);
+    ASSERT(nbr_cell != 0);
 
     // Create the TileItem objects
     for (uint i=0; i<nbr_cell; ++i)

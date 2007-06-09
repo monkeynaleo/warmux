@@ -481,7 +481,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       Weapon::Weapon_type weapon;
       if (WeaponsList::GetInstance()->GetWeaponBySort(weapon_sort, weapon))
         {
-          assert (weapon >= Weapon::WEAPON_FIRST && weapon <= Weapon::WEAPON_LAST);
+          ASSERT (weapon >= Weapon::WEAPON_FIRST && weapon <= Weapon::WEAPON_LAST);
 	  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, weapon));
         }
     }

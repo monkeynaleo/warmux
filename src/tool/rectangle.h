@@ -220,7 +220,7 @@ template<class T> class rectangle
 				newPositionBR.y = cr.GetBottomRightPoint().y;
 
 			size = newPositionBR - position + 1 ;
-			assert( cr.Contains( *this ) );
+			ASSERT( cr.Contains( *this ) );
 		}
 
 		/**
@@ -275,10 +275,10 @@ template<class T> class rectangle
 		 * Return the point in the top left corner of the rectangle.
 		 *
 		 * If the rectangle has a size of zero, this point doesn't exist,
-		 * so the program crash with a failled assertion.
+		 * so the program crash with a failled ASSERTion.
 		 */
 		inline Vector2<T> GetTopLeftPoint() const{
-			assert( !IsSizeZero() );
+			ASSERT( !IsSizeZero() );
 			return position;
 		}
 
@@ -286,10 +286,10 @@ template<class T> class rectangle
 		 * Return the point in the top right corner of the rectangle.
 		 *
 		 * If the rectangle has a size of zero, this point doesn't exist,
-		 * so the program crash with a failled assertion.
+		 * so the program crash with a failled ASSERTion.
 		 */
 		inline Vector2<T> GetTopRightPoint() const{
-			assert( !IsSizeZero() );
+			ASSERT( !IsSizeZero() );
 			Vector2<T> r = position;
 
 			r.x += size.x - 1;
@@ -301,10 +301,10 @@ template<class T> class rectangle
 		 * Return the point in the bottom left corner of the rectangle.
 		 *
 		 * If the rectangle has a size of zero, this point doesn't exist,
-		 * so the program crash with a failled assertion.
+		 * so the program crash with a failled ASSERTion.
 		 */
 		inline Vector2<T> GetBottomLeftPoint() const{
-			assert( !IsSizeZero() );
+			ASSERT( !IsSizeZero() );
 			Vector2<T> r = position;
 
 			r.y += size.y - 1;
@@ -316,9 +316,9 @@ template<class T> class rectangle
 		 * Return the point in the top left corner of the rectangle.
 		 *
 		 * If the rectangle has a size of zero, this point doesn't exist,
-		 * so the program crash with a failled assertion. */
+		 * so the program crash with a failled ASSERTion. */
 		inline Vector2<T> GetBottomRightPoint() const{
-			assert( !IsSizeZero() );
+			ASSERT( !IsSizeZero() );
 			return position + size - 1;
 		}
 

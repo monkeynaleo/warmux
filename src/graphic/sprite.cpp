@@ -111,7 +111,7 @@ void Sprite::AddFrame(const Surface &surf, unsigned int delay){
 }
 
 void Sprite::SetSize(unsigned int w, unsigned int h){
-  assert(frame_width_pix == 0 && frame_height_pix == 0)
+  ASSERT(frame_width_pix == 0 && frame_height_pix == 0)
 	frame_width_pix = w;
 	frame_height_pix = h;
 }
@@ -155,7 +155,7 @@ unsigned int Sprite::GetFrameCount(){
 }
 
 void Sprite::SetCurrentFrame( unsigned int frame_no){
-  assert (frame_no < frames.size());
+  ASSERT (frame_no < frames.size());
   if (current_frame != frame_no) {
     cache.InvalidLastFrame();
     MSG_DEBUG("sprite", "Set current frame : %d", frame_no);
@@ -164,7 +164,7 @@ void Sprite::SetCurrentFrame( unsigned int frame_no){
 }
 
 unsigned int Sprite::GetCurrentFrame() const{
-  assert(current_frame < frames.size());
+  ASSERT(current_frame < frames.size());
   return current_frame;
 }
 
@@ -208,7 +208,7 @@ void Sprite::SetFrameSpeed(unsigned int nv_fs){
 }
 
 void Sprite::SetAlpha( float alpha){
-  assert(alpha >= 0.0 && alpha <= 1.0);
+  ASSERT(alpha >= 0.0 && alpha <= 1.0);
   if(this->alpha == alpha)
     return;
   this->alpha = alpha;
@@ -232,7 +232,7 @@ void Sprite::SetRotation_rad( double angle_rad){
 
 const double &Sprite::GetRotation_rad()
 {
-  assert(rotation_rad > -2*M_PI && rotation_rad <= 2*M_PI);
+  ASSERT(rotation_rad > -2*M_PI && rotation_rad <= 2*M_PI);
   return rotation_rad;
 }
 
@@ -275,7 +275,7 @@ void Sprite::Calculate_Rotation_Offset(Surface& tmp_surface){
     case bottom_center: rhs_pos = Point2i( surfaceWidth/2, surfaceHeight);   break;
     case bottom_right:  rhs_pos = Point2i( surfaceWidth,   surfaceHeight);   break;
     default:
-      assert(false);
+      ASSERT(false);
     }
   }
 
@@ -476,7 +476,7 @@ void Sprite::RefreshSurface()
       }
     }
   }
-  assert( !current_surface.IsNull() );
+  ASSERT( !current_surface.IsNull() );
 
   // Calculate offset of the sprite depending on hotspot rotation position :
   rotation_point.x=0;
@@ -486,7 +486,7 @@ void Sprite::RefreshSurface()
 }
 
 Surface Sprite::GetSurface() {
-  assert ( !current_surface.IsNull() );
+  ASSERT ( !current_surface.IsNull() );
   return current_surface;
 }
 

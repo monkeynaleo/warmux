@@ -53,7 +53,7 @@ void WidgetList::DelFirstWidget()
 
 void WidgetList::AddWidget(Widget* w)
 {
-  assert(w!=NULL);
+  ASSERT(w!=NULL);
   widget_list.push_back(w);
   w->SetContainer(this);
 }

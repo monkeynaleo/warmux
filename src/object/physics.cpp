@@ -197,7 +197,7 @@ void Physics::GetSpeed(double &norm, double &angle) const
       break;
 
     default:
-      assert(false);
+      ASSERT(false);
       break ;
   }
 }

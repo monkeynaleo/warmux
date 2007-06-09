@@ -112,7 +112,7 @@ void Time::Pause(){
 }
 
 void Time::Continue(){
-  assert (is_game_paused);
+  ASSERT (is_game_paused);
   is_game_paused = false;
   real_time_pause_dt += SDL_GetTicks() - real_time_pause_begin;
 }

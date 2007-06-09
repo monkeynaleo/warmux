@@ -124,7 +124,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
 void MapSelectionBox::ChangeMapDelta(int delta_index)
 {
-  assert(!display_only);
+  ASSERT(!display_only);
 
   int tmp = selected_map_index + delta_index;
 

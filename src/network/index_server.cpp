@@ -57,7 +57,7 @@ IndexServer::~IndexServer()
 Network::connection_state_t IndexServer::Connect()
 {
   MSG_DEBUG("index_server", "Connecting..");
-  assert(!connected);
+  ASSERT(!connected);
 
   if( hidden_server )
     return Network::CONNECTED;
@@ -208,7 +208,7 @@ bool IndexServer::GetServerAddress( std::string & address, int & port)
     while(nbr--)
       ++first_server;
 
-    assert(first_server != server_lst.end());
+    ASSERT(first_server != server_lst.end());
 
     current_server = first_server;
 
@@ -320,7 +320,7 @@ bool IndexServer::HandShake()
 
 void IndexServer::SendServerStatus()
 {
-  assert(Network::GetInstance()->IsServer());
+  ASSERT(Network::GetInstance()->IsServer());
 
   if(hidden_server)
     return;

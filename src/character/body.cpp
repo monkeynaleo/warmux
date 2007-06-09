@@ -237,7 +237,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
   for(;member != squel_lst.end();
        member++)
   {
-    assert( frame < mvt->frames.size() );
+    ASSERT( frame < mvt->frames.size() );
     if(mvt->frames[frame].find(member->member->type) != mvt->frames[frame].end())
     {
       // This member needs to be moved :
@@ -452,7 +452,7 @@ void Body::BuildSqueleton()
   if(squel_lst.size() == 0)
   {
     std::cerr << "Unable to find the \"body\" member in the current clothe" << std::endl;
-    assert(false);
+    ASSERT(false);
   }
 
   AddChildMembers(squel_lst.front().member);
@@ -474,7 +474,7 @@ void Body::SetClothe(std::string name)
   else
     MSG_DEBUG("body","Clothe not found");
 
-  assert(current_clothe != NULL);
+  ASSERT(current_clothe != NULL);
 }
 
 void Body::SetMovement(std::string name)
@@ -497,7 +497,7 @@ void Body::SetMovement(std::string name)
   else
     MSG_DEBUG("body","Movement not found");
 
-  assert(current_mvt != NULL);
+  ASSERT(current_mvt != NULL);
 }
 
 void Body::PlayAnimation()
@@ -525,7 +525,7 @@ void Body::SetClotheOnce(std::string name)
   else
     MSG_DEBUG("body","Clothe not found");
 
-  assert(current_clothe != NULL);
+  ASSERT(current_clothe != NULL);
 }
 
 void Body::SetMovementOnce(std::string name)
@@ -553,7 +553,7 @@ void Body::SetMovementOnce(std::string name)
   else
     MSG_DEBUG("body","Movement not found");
 
-  assert(current_mvt != NULL);
+  ASSERT(current_mvt != NULL);
 }
 
 void Body::GetTestRect(uint &l, uint&r, uint &t, uint &b)
@@ -623,7 +623,7 @@ uint Body::GetFrameCount()
 
 void Body::SetFrame(uint no)
 {
-  assert(no < current_mvt->frames.size());
+  ASSERT(no < current_mvt->frames.size());
   current_frame = no;
   need_rebuild = true;
 }

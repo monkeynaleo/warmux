@@ -20,7 +20,7 @@
 #include "spriteframe.h"
 
 SpriteFrame::SpriteFrame(const Surface& p_surface, unsigned int p_speed){
-  assert( !p_surface.IsNull() );
+  ASSERT( !p_surface.IsNull() );
   
   surface = p_surface;
   delay = p_speed;

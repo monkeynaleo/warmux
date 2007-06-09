@@ -465,7 +465,7 @@ void GameLoop::__SetState_PLAYING()
     character->PrepareTurn();
 
   // Select the next team
-  assert (!Game::GetInstance()->IsGameFinished());
+  ASSERT (!Game::GetInstance()->IsGameFinished());
 
   if (Network::GetInstance()->IsLocal() || Network::GetInstance()->IsServer())
     {

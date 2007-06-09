@@ -204,7 +204,7 @@ bool WeaponProjectile::IsImmobile() const
 // projectile explode and signal to the launcher the collision
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {
-  assert (obj != NULL);
+  ASSERT (obj != NULL);
   MSG_DEBUG ("weapon.projectile", "SignalObjectCollision");
   if (explode_colliding_character)
     Explosion();

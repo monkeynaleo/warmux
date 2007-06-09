@@ -184,7 +184,7 @@ const Character* AIShootModule::FindProximityEnemy(const Character& shooter) con
   // 	)
   //       m_nearest_enemy = &(*character);
   //   }
-  //   assert(m_nearest_enemy != NULL);
+  //   ASSERT(m_nearest_enemy != NULL);
 }
 
 bool AIShootModule::SelectProximityWeapon(const Character& enemy) const

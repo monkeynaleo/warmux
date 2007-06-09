@@ -84,16 +84,16 @@ void Action_Network_ChangeState (Action *a)
     {
     case Network::NO_NETWORK:
       a->creator->SetState(DistantComputer::INITIALIZED);
-      net_assert(client_state == Network::NETWORK_MENU_OK); 
+      NET_ASSERT(client_state == Network::NETWORK_MENU_OK); 
       break;
 
     case Network::NETWORK_LOADING_DATA:
       a->creator->SetState(DistantComputer::READY);
-      net_assert(client_state == Network::NETWORK_READY_TO_PLAY);
+      NET_ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
       break;
 
     default:
-      net_assert(false)
+      NET_ASSERT(false)
       {
 	if(a->creator) a->creator->force_disconnect = true;
 	return;
@@ -110,16 +110,16 @@ void Action_Network_ChangeState (Action *a)
     {
     case Network::NETWORK_MENU_OK:
       Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
-      net_assert(server_state == Network::NETWORK_LOADING_DATA);
+      NET_ASSERT(server_state == Network::NETWORK_LOADING_DATA);
       break;
 
     case Network::NETWORK_READY_TO_PLAY:
       Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
-      net_assert(server_state == Network::NETWORK_PLAYING);
+      NET_ASSERT(server_state == Network::NETWORK_PLAYING);
       break;
 
     default:
-       net_assert(false)
+       NET_ASSERT(false)
        {
 	 if(a->creator) a->creator->force_disconnect = true;
 	 return;
@@ -158,7 +158,7 @@ void Action_GameLoop_ChangeCharacter (Action *a)
 void Action_GameLoop_NextTeam (Action *a)
 {
   teams_list.SetActive (a->PopString());
-  assert (!ActiveCharacter().IsDead());
+  ASSERT (!ActiveCharacter().IsDead());
 }
 
 void Action_GameLoop_SetState (Action *a)
@@ -170,7 +170,7 @@ void Action_GameLoop_SetState (Action *a)
 
 void Action_Rules_SetGameMode (Action *a)
 {
-  net_assert(Network::GetInstance()->IsClient())
+  NET_ASSERT(Network::GetInstance()->IsClient())
   {
     if (a->creator)
       a->creator->force_disconnect = true;
@@ -188,7 +188,7 @@ void Action_Rules_SetGameMode (Action *a)
 
 void SendGameMode()
 {
-  assert(Network::GetInstance()->IsServer());
+  ASSERT(Network::GetInstance()->IsServer());
 
   Action a(Action::ACTION_RULES_SET_GAME_MODE);
 
@@ -219,7 +219,7 @@ void Action_Rules_SendVersion (Action *a)
 {
   if (!Network::GetInstance()->IsServer()) return;
   std::string version= a->PopString();
-  assert(a->creator != NULL);
+  ASSERT(a->creator != NULL);
 
   if (version != Constants::VERSION)
   {
@@ -327,7 +327,7 @@ void Action_Menu_DelTeam (Action *a)
 // Send information about energy and the position of every character
 void SyncCharacters()
 {
-  assert(Network::GetInstance()->IsServer());
+  ASSERT(Network::GetInstance()->IsServer());
 
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   Network::GetInstance()->SendAction(&a_begin_sync);
@@ -424,7 +424,7 @@ void Action_Weapon_SetTarget (Action *a)
 void Action_Weapon_SetTimeout (Action *a)
 {
   WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
-  net_assert(launcher != NULL)
+  NET_ASSERT(launcher != NULL)
   {
     return;
   }
@@ -433,7 +433,7 @@ void Action_Weapon_SetTimeout (Action *a)
 
 void Action_Weapon_Supertux (Action *a)
 {
-  net_assert(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX)
+  NET_ASSERT(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX)
   {
     return;
   }
@@ -452,7 +452,7 @@ void Action_Weapon_Supertux (Action *a)
 void Action_Weapon_Construction (Action *a)
 {
   Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
-  net_assert(construct_weapon != NULL)
+  NET_ASSERT(construct_weapon != NULL)
   {
     return;
   }
@@ -463,7 +463,7 @@ void Action_Weapon_Construction (Action *a)
 void Action_Weapon_Grapple (Action *a)
 {
   Grapple* grapple = dynamic_cast<Grapple*>(&(ActiveTeam().AccessWeapon()));
-  net_assert(grapple != NULL)
+  NET_ASSERT(grapple != NULL)
   {
     return;
   }
@@ -495,7 +495,7 @@ void Action_Weapon_Grapple (Action *a)
     break;
 
   default:
-    assert(false);
+    ASSERT(false);
   }
 }
 
@@ -508,25 +508,25 @@ void Action_Wind (Action *a)
 
 void Action_Network_RandomAdd (Action *a)
 {
-  assert(Network::GetInstance()->IsClient())
+  ASSERT(Network::GetInstance()->IsClient())
   randomSync.AddToTable(a->PopDouble());
 }
 
 void Action_Network_RandomClear (Action *a)
 {
-  assert(Network::GetInstance()->IsClient());
+  ASSERT(Network::GetInstance()->IsClient());
   randomSync.ClearTable();
 }
 
 void Action_Network_SyncBegin (Action *a)
 {
-  assert(!Network::GetInstance()->sync_lock);
+  ASSERT(!Network::GetInstance()->sync_lock);
   Network::GetInstance()->sync_lock = true;
 }
 
 void Action_Network_SyncEnd (Action *a)
 {
-  assert(Network::GetInstance()->sync_lock);
+  ASSERT(Network::GetInstance()->sync_lock);
   Network::GetInstance()->sync_lock = false;
 }
 
@@ -583,7 +583,7 @@ void ActionHandler::ExecActions()
   Action * a;
   std::list<Action*> to_remove;
   std::list<Action*>::iterator it;
-  assert(mutex!=NULL);
+  ASSERT(mutex!=NULL);
   for(it = queue.begin(); it != queue.end() ; ++it)
   {
     SDL_LockMutex(mutex);
@@ -609,7 +609,7 @@ void ActionHandler::ExecActions()
 
 void ActionHandler::NewAction(Action* a, bool repeat_to_network)
 {
-  assert(mutex!=NULL);
+  ASSERT(mutex!=NULL);
   SDL_LockMutex(mutex);
   //  MSG_DEBUG("action.handler","New action : %s",a.out());
   //  std::cout << "New action " << a->GetType() << std::endl ;
@@ -621,7 +621,7 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
 
 void ActionHandler::NewActionActiveCharacter(Action* a)
 {
-  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   Network::GetInstance()->SendAction(&a_begin_sync);
   SendActiveCharacterInfo();
@@ -641,7 +641,7 @@ void ActionHandler::Exec(Action *a)
 {
   MSG_DEBUG("action_handler", "Executing action %s",GetActionName(a->GetType()).c_str());
   handler_it it=handler.find(a->GetType());
-  net_assert(it != handler.end())
+  NET_ASSERT(it != handler.end())
   {
     if(a->creator) a->creator->force_disconnect = true;
     return;
@@ -651,10 +651,10 @@ void ActionHandler::Exec(Action *a)
 
 std::string ActionHandler::GetActionName (Action::Action_t action)
 {
-  assert(mutex!=NULL);
+  ASSERT(mutex!=NULL);
   SDL_LockMutex(mutex);
   name_it it=action_name.find(action);
-  assert(it != action_name.end());
+  ASSERT(it != action_name.end());
   SDL_UnlockMutex(mutex);
   return it->second;
 }

@@ -128,7 +128,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 {
   SetCollisionModel(false, true, true);
   /* body stuff */
-  assert(char_body);
+  ASSERT(char_body);
   SetBody(char_body);
 
   ResetConstants();
@@ -304,7 +304,7 @@ void Character::SetEnergy(int new_energy)
     }
   }
 
-  //assert( m_alive != DEAD );
+  //ASSERT( m_alive != DEAD );
   if(IsDead()) return;
 
   // Change energy
@@ -329,7 +329,7 @@ void Character::DisableDeathExplosion()
 
 void Character::Die()
 {
-  assert (m_alive == ALIVE || m_alive == DROWNED);
+  ASSERT (m_alive == ALIVE || m_alive == DROWNED);
 
   MSG_DEBUG("character", "Dying");
 
@@ -345,7 +345,7 @@ void Character::Die()
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
-    assert(IsDead());
+    ASSERT(IsDead());
 
     // Signal the death
     GameLoop::GetInstance()->SignalCharacterDeath (this);
@@ -611,7 +611,7 @@ void Character::Refresh()
 
   if(back_jumping)
   {
-    assert(&ActiveCharacter() == this);
+    ASSERT(&ActiveCharacter() == this);
     double rotation;
     static double speed_init = GameMode::GetInstance()->character.back_jump_strength *
        sin(GameMode::GetInstance()->character.back_jump_angle);
@@ -740,7 +740,7 @@ void Character::StopPlaying()
 // Begining of turn or changed to this character
 void Character::StartPlaying()
 {
-  assert (!IsGhost());
+  ASSERT (!IsGhost());
   SetWeaponClothe();
   ActiveTeam().crosshair.Draw();
  // SetRebounding(false);
@@ -844,7 +844,7 @@ uint Character::GetCharacterIndex()
     if( &(*it) == this)
       return index;
   }
-  assert(false);
+  ASSERT(false);
   return 0;
 }
 

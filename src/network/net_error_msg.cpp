@@ -48,7 +48,7 @@ void DispNetworkError(Network::connection_state_t err)
   case Network::CONN_TIMEOUT:
 	  msg = _("The connection timed out. Check there is no firewall in the way!");
 	  break;
-  default: assert(false);
+  default: ASSERT(false);
   }
 
   question.Set(msg, 1, 0);
