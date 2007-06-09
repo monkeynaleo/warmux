@@ -30,11 +30,13 @@ class DamageStatistics
 {
   const Character& owner;
 
-  uint  damage_other_teams;
-  uint  damage_friendly_fire; // damage same team but not itself
-  uint  damage_itself;
-  uint  max_damage;
-  uint  current_total_damage;
+  uint damage_other_teams;
+  uint damage_friendly_fire; // damage same team but not itself
+  uint damage_itself;
+  uint max_damage;
+  uint current_total_damage;
+
+  uint death_time; // if 0, not dead
 
 public:
   DamageStatistics(const Character& _owner);
@@ -45,10 +47,13 @@ public:
   void HandleMostDamage();
   void ResetDamage();
 
-  uint  GetMostDamage() const { return max_damage; }
-  uint  GetFriendlyFireDamage() const { return damage_friendly_fire; }
-  uint  GetItselfDamage() const { return damage_itself; }
-  uint  GetOthersDamage() const { return damage_other_teams; }
+  uint GetMostDamage() const { return max_damage; }
+  uint GetFriendlyFireDamage() const { return damage_friendly_fire; }
+  uint GetItselfDamage() const { return damage_itself; }
+  uint GetOthersDamage() const { return damage_other_teams; }
+
+  void SetDeathTime(uint death_time);
+  uint GetDeathTime() const;
 };
 
 #endif

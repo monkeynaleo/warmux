@@ -127,7 +127,7 @@ class Team
     TeamEnergy & GetEnergyBar();
 
   // Read the total energy of the team.
-    uint ReadEnergy();
+    uint ReadEnergy() const;
 
   // Access to data.
     const std::string& GetName() const { return m_name; }

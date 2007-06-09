@@ -37,37 +37,36 @@ private:
   TeamResults(const TeamResults&);
   const TeamResults& operator=(const TeamResults&);
 
-  //std::couple<const sting&, int> ?
-  const std::string teamName;
-  const Surface* team_logo;
+  const Team* team;
   const Character* mostViolent;
   const Character* mostUseful;
   const Character* mostUseless;
   const Character* biggestTraitor;
   const Character* mostClumsy;
+  uint death_time;
 
   static TeamResults* createTeamResults(Team* team);
   static TeamResults* createGlobalResults();
 
 protected:
-  TeamResults(const std::string& name,
-	      const Surface* team_logo,
+  TeamResults(const Team* team,
 	      const Character* MV,
 	      const Character* MUl,
 	      const Character* MUs,
 	      const Character* BT,
-	      const Character* MS);
+	      const Character* MS,
+	      uint death_time);
 public:
   static std::vector<TeamResults*>* createAllResults(void);
   static void deleteAllResults(std::vector<TeamResults*>* results_list);
 
-  const std::string& getTeamName() const { return teamName; };
-  const Surface* getTeamLogo() const {return team_logo;};
+  const Team* getTeam() const { return team; };
   const Character* getMostViolent() const { return mostViolent; };
   const Character* getMostUseful() const { return mostUseful; };
   const Character* getMostUseless() const { return mostUseless; };
   const Character* getBiggestTraitor() const { return biggestTraitor; };
   const Character* getMostClumsy() const { return mostClumsy; };
+  uint GetDeathTime() const { return death_time; }
 };
 
 typedef std::vector<TeamResults*>::iterator res_iterator;

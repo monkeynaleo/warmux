@@ -111,8 +111,36 @@ void ResultBox::SetNoResult()
   //ForceRedraw();
 }
 
+//=========================================================
 
-ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v)
+bool compareTeamResults(const TeamResults* a, const TeamResults* b)
+{
+  if (a->getTeam() == NULL)
+    return false;
+  if (b->getTeam() == NULL)
+    return true;
+
+  const Team* team_a = a->getTeam();
+  const Team* team_b = b->getTeam();
+
+  if (team_a->NbAliveCharacter() < team_b->NbAliveCharacter())
+    return false;
+  else if (team_a->NbAliveCharacter() > team_b->NbAliveCharacter())
+    return true;
+
+  // Same number of alive characters, compare left energy
+  if (team_a->ReadEnergy() < team_b->ReadEnergy())
+    return false;
+  else if (team_a->ReadEnergy() > team_b->ReadEnergy())
+    return true;
+
+  // Same energy, propably 0, compare death_time
+  return (a->GetDeathTime() > b->GetDeathTime());
+}
+
+//=========================================================
+
+ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   : Menu("menu/bg_results", vOk)
   , results(v)
   , index(-1)
@@ -218,30 +246,14 @@ ResultsMenu::~ResultsMenu()
 
 void ResultsMenu::ComputeTeamsOrder()
 {
-  first_team = NULL;
-  second_team = NULL;
-  third_team = NULL;
+  std::sort(results.begin(), results.end(), compareTeamResults);
 
-  FOR_EACH_TEAM(team)
-  {
-    if (!first_team)
-      first_team = *team;
-
-    else
-      if (
-	  ((**team).NbAliveCharacter() > (*first_team).NbAliveCharacter())
-	  || ((**team).NbAliveCharacter() > (*first_team).NbAliveCharacter()
-	      &&(**team).ReadEnergy() > (*first_team).ReadEnergy())
-	  ) {
-	third_team = second_team;
-	second_team = first_team;
-	first_team = *team;
-      } else if (!second_team) {
-	second_team = *team;
-      } else if (!third_team) {
-	third_team = *team;
-      }
-  }
+  first_team = results.at(0)->getTeam();
+  second_team = results.at(1)->getTeam();
+  if (results.size() > 3)
+    third_team = results.at(2)->getTeam();
+  else
+    third_team = NULL;
 }
 
 void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_position, 
@@ -256,7 +268,6 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_posit
   AppWormux::GetInstance()->video.window.Blit(team_character, position);
 }
 
-
 void ResultsMenu::DrawPodium(const Point2i& position)
 {
   AppWormux::GetInstance()->video.window.Blit(podium_img, position);
@@ -268,7 +279,7 @@ void ResultsMenu::DrawPodium(const Point2i& position)
     DrawTeamOnPodium(*second_team, position, Point2i(20,20));
   
   if (third_team)
-    DrawTeamOnPodium(*second_team, position, Point2i(98,42));
+    DrawTeamOnPodium(*third_team, position, Point2i(98,42));
 }
 
 void ResultsMenu::SetResult(int i)
@@ -290,18 +301,19 @@ void ResultsMenu::SetResult(int i)
 
   index = i;
   if (index < 0) 
-    index = results->size()-1;
-  else if (index > (int)results->size()-1) 
+    index = results.size()-1;
+  else if (index > (int)results.size()-1) 
     index = 0;
 
-  res = (*results).at(index);
+  res = results.at(index);
 
   //Team header
-  name = res->getTeamName();
-  if (res->getTeamLogo() == NULL) {
+  if (res->getTeam() == NULL) {
+    name = _("All teams");
     team_logo->SetNoSurface();
-  }  else  {
-    team_logo->SetSurface( *(res->getTeamLogo()) );
+  } else {
+    name = res->getTeam()->GetName()+" - "+res->getTeam()->GetPlayerName();
+    team_logo->SetSurface(res->getTeam()->flag);
   }
 
   team_name->SetText(name);

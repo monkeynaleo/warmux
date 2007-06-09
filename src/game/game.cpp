@@ -92,7 +92,7 @@ void Game::MessageEndOfGame() const
   std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-  ResultsMenu menu(results_list);
+  ResultsMenu menu(*results_list);
   menu.Run();
 
   TeamResults::deleteAllResults(results_list);

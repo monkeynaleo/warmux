@@ -28,20 +28,20 @@
 #include "macro.h"
 #include "tool/i18n.h"
 
-TeamResults::TeamResults(const std::string& name,
-			 const Surface* logo,
+TeamResults::TeamResults(const Team* _team,
                          const Character* MV,
                          const Character* MUl,
                          const Character* MUs,
                          const Character* BT,
-			 const Character* MS)
-  : teamName(name),
-    team_logo(logo),
+			 const Character* MS,
+			 uint _death_time)
+  : team(_team),
     mostViolent(MV),
     mostUseful(MUl),
     mostUseless(MUs),
     biggestTraitor(BT),
-    mostClumsy(MS)
+    mostClumsy(MS),
+    death_time(_death_time)
 {
 }
 
@@ -52,6 +52,7 @@ TeamResults* TeamResults::createTeamResults(Team* team)
   uint most_useful = 0;
   uint most_traitor = 0;
   uint most_clumsy = 0;
+  uint death_time = 0;
 
   const Character* MostViolent = NULL;
   const Character* MostUseful = NULL;
@@ -92,16 +93,21 @@ TeamResults* TeamResults::createTeamResults(Team* team)
       most_clumsy = player->GetDamageStats().GetItselfDamage();
       MostClumsy = &(*(player));
     }
+    // This player is the latest survivor ?
+    if (player->GetDamageStats().GetDeathTime() > death_time)
+    {
+      death_time = player->GetDamageStats().GetDeathTime();
+    }
     
   }
 
-  return new TeamResults(team->GetName()+" - "+team->GetPlayerName(),
-			 &team->flag,
+  return new TeamResults(team,
                          MostViolent,
                          MostUseful,
                          MostUseless,
                          BiggestTraitor,
-			 MostClumsy);
+			 MostClumsy,
+			 death_time);
 }
 
 TeamResults* TeamResults::createGlobalResults()
@@ -153,13 +159,13 @@ TeamResults* TeamResults::createGlobalResults()
   }
 
   // We'll do as if NULL is for all teams
-  return new TeamResults(_("All teams"),
-			 NULL,
+  return new TeamResults(NULL,
                          MostViolent,
                          MostUseful,
                          MostUseless,
                          BiggestTraitor,
-			 MostClumsy);
+			 MostClumsy,
+			 0);
 }
 
 std::vector<TeamResults*>* TeamResults::createAllResults(void)
