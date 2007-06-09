@@ -1,6 +1,8 @@
 SET(PO_FILES
+bg.po
 bs.po
 ca.po
+cpf.po
 da.po
 de.po
 eo.po
@@ -10,6 +12,7 @@ fr.po
 gl.po
 hu.po
 it.po
+nb.po
 nl.po
 pl.po
 pt.po
@@ -17,6 +20,7 @@ pt-BR.po
 ro.po
 ru.po
 sk.po
+sl.po
 sv.po
 tr.po
 )
