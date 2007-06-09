@@ -64,6 +64,9 @@ void DamageStatistics::HandleMostDamage()
 
 void DamageStatistics::MadeDamage(const int Dmg, const Character &other)
 {
+  if (Dmg < 0) // the character have win energy with a bonus box for instance
+    return;
+
   if (owner.GetTeam().IsSameAs(other.GetTeam()))
   {
     if (owner.IsSameAs(other))
@@ -78,4 +81,14 @@ void DamageStatistics::MadeDamage(const int Dmg, const Character &other)
   }
 
   current_total_damage += Dmg;
+}
+
+void DamageStatistics::SetDeathTime(uint _death_time)
+{
+  death_time = _death_time;
+}
+
+uint DamageStatistics::GetDeathTime() const
+{
+  return death_time;
 }

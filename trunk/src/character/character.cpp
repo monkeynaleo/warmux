@@ -349,7 +349,9 @@ void Character::Die()
 
     // Signal the death
     GameLoop::GetInstance()->SignalCharacterDeath (this);
-  }
+  }    
+
+  damage_stats.SetDeathTime(Time::GetInstance()->Read());
 }
 
 bool Character::IsDiseased() const

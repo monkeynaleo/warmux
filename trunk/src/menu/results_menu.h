@@ -35,8 +35,8 @@ class ResultsMenu : public Menu
     ResultsMenu(const ResultsMenu&);
     const ResultsMenu& operator=(const ResultsMenu&);
 
-    const std::vector<TeamResults*>* results;
-    Team *first_team, *second_team, *third_team;
+    std::vector<TeamResults*>& results;
+    const Team *first_team, *second_team, *third_team;
     int     index;
 
     // Box sizes
@@ -75,7 +75,7 @@ class ResultsMenu : public Menu
 			  const Point2i& relative_position);
     void Draw(const Point2i &mousePosition);
  public:
-    ResultsMenu(const std::vector<TeamResults*>* v);
+    ResultsMenu(std::vector<TeamResults*>& v);
     ~ResultsMenu();
 };
 

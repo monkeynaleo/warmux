@@ -161,11 +161,11 @@ void Team::InitEnergy (uint max)
   energy.Config(ReadEnergy(), max);
 }
 
-uint Team::ReadEnergy ()
+uint Team::ReadEnergy () const
 {
   uint total_energy = 0;
 
-  iterator it = characters.begin(), end = characters.end();
+  const_iterator it = characters.begin(), end = characters.end();
 
   for (; it != end; ++it) {
     if ( !(*it).IsDead() )
