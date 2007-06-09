@@ -84,12 +84,12 @@ void Action_Network_ChangeState (Action *a)
     {
     case Network::NO_NETWORK:
       a->creator->SetState(DistantComputer::INITIALIZED);
-      NET_ASSERT(client_state == Network::NETWORK_MENU_OK); 
+      ASSERT(client_state == Network::NETWORK_MENU_OK);
       break;
 
     case Network::NETWORK_LOADING_DATA:
       a->creator->SetState(DistantComputer::READY);
-      NET_ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
+      ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
       break;
 
     default:
@@ -110,12 +110,12 @@ void Action_Network_ChangeState (Action *a)
     {
     case Network::NETWORK_MENU_OK:
       Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
-      NET_ASSERT(server_state == Network::NETWORK_LOADING_DATA);
+      ASSERT(server_state == Network::NETWORK_LOADING_DATA);
       break;
 
     case Network::NETWORK_READY_TO_PLAY:
       Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
-      NET_ASSERT(server_state == Network::NETWORK_PLAYING);
+      ASSERT(server_state == Network::NETWORK_PLAYING);
       break;
 
     default:
