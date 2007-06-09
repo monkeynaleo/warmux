@@ -270,7 +270,7 @@ void Network::SendAction(Action* a) const
   char* packet;
   a->WritePacket(packet, size);
 
-  assert(packet != NULL);
+  ASSERT(packet != NULL);
   SendPacket(packet, size);
 
   free(packet);

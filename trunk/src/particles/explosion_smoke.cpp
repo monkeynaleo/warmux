@@ -52,7 +52,7 @@ void ExplosionSmoke::Refresh()
   image->Update();
 
   if (time >= m_time_between_scale) {
-    //assert(m_left_time_to_live > 0);
+    //ASSERT(m_left_time_to_live > 0);
     if (m_left_time_to_live <= 0) return ;
 
     m_left_time_to_live--;

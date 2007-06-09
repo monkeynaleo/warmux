@@ -43,7 +43,7 @@ Member::Member(xmlpp::Element *xml, Profile* res):
   if(xml == NULL)
     return;
   XmlReader::ReadStringAttr( xml, "name", name);
-  assert(name!="");
+  ASSERT(name!="");
 
   // Load the sprite
   spr = resource_manager.LoadSprite( res, name);
@@ -53,7 +53,7 @@ Member::Member(xmlpp::Element *xml, Profile* res):
 
   // Get the various option
   XmlReader::ReadStringAttr( xml, "type", type);
-  assert(type!="");
+  ASSERT(type!="");
 
   xmlpp::Element *el = XmlReader::GetMarker(xml, "anchor");
   if(el != 0)
@@ -76,7 +76,7 @@ Member::Member(xmlpp::Element *xml, Profile* res):
   for (; it != end; ++it)
   {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-    assert (elem != NULL);
+    ASSERT (elem != NULL);
     std::string att_type;
     if (!XmlReader::ReadStringAttr(elem, "member_type", att_type))
     {
@@ -158,7 +158,7 @@ void Member::RotateSprite()
 
 void Member::Draw(const Point2i & _pos, int flip_center, int direction)
 {
-  assert(name != "weapon" && type!="weapon");
+  ASSERT(name != "weapon" && type!="weapon");
 
   Point2i posi((int)pos.x, (int)pos.y);
   posi += _pos;
@@ -206,7 +206,7 @@ void Member::ApplySqueleton(Member* parent_member)
   }
   parent = parent_member;
 
-  assert(parent->name != "weapon" && parent->type != "weapon");
+  ASSERT(parent->name != "weapon" && parent->type != "weapon");
 
   // Set the position
   pos = parent->pos;

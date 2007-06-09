@@ -197,7 +197,7 @@ bool NetworkServer::AcceptIncoming()
 
 void NetworkServer::RejectIncoming()
 {
-  assert(IsServer());
+  ASSERT(IsServer());
   if (!server_socket) return;
   SDLNet_TCP_Close(server_socket);
   server_socket = NULL;

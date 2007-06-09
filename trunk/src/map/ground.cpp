@@ -47,8 +47,8 @@ void Ground::Init(){
   LoadImage ( m_image );
 
   // Check the size of the map
-  assert(Constants::MAP_MIN_SIZE <= GetSize());
-  assert(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
+  ASSERT(Constants::MAP_MIN_SIZE <= GetSize());
+  ASSERT(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
 
   // Check if the map is "opened"
   open = ActiveMap().IsOpened();
@@ -63,7 +63,7 @@ void Ground::Reset(){
 
 // Read the alpha channel of the pixel
 bool Ground::IsEmpty(const Point2i &pos) const{
-	assert( !world.IsOutsideWorldXY(pos.x, pos.y) );
+	ASSERT( !world.IsOutsideWorldXY(pos.x, pos.y) );
 
 	return GetAlpha( pos ) != 255; // IsTransparent
 }
@@ -98,7 +98,7 @@ double Ground::Tangent(int x,int y){
   if(p1.y == p2.y)
     return M_PI;
 */
-  //assert (p1.x != p2.x);
+  //ASSERT (p1.x != p2.x);
 
   /* double tangeante = atan((double)(p2.y-p1.y)/(double)(p2.x-p1.x));
 
@@ -117,8 +117,8 @@ double Ground::Tangent(int x,int y){
     {-1.1071+M_PI,	 -.78539+M_PI,  M_PI,		78539,		1.1071},
     {-.78539+M_PI,	-.46364+M_PI,	M_PI,		.46364,		.78539}};
 
-  assert(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
-  assert(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);
+  ASSERT(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
+  ASSERT(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);
 
   return table[(p2.y-p1.y)+2][(p2.x-p1.x)+2];
 }

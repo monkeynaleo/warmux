@@ -151,12 +151,12 @@ void PhysicalObj::SetSize(const Point2i &newSize){
 
 // Get objest's dimensions
 int PhysicalObj::GetWidth() const{
-  assert (m_width != 0);
+  ASSERT (m_width != 0);
   return m_width;
 }
 
 int PhysicalObj::GetHeight() const{
-  assert (m_height != 0);
+  ASSERT (m_height != 0);
   return m_height;
 }
 
@@ -493,7 +493,7 @@ void PhysicalObj::Ghost ()
 
 void PhysicalObj::Drown()
 {
-  assert (m_alive != DROWNED);
+  ASSERT (m_alive != DROWNED);
   MSG_DEBUG("physic.state", "%s - Drowned...", m_name.c_str());
   m_alive = DROWNED;
 
@@ -506,7 +506,7 @@ void PhysicalObj::Drown()
 
 void PhysicalObj::GoOutOfWater()
 {
-  assert (m_alive == DROWNED);
+  ASSERT (m_alive == DROWNED);
   MSG_DEBUG("physic.state", "%s - Go out of water!...", m_name.c_str());
   m_alive = ALIVE;
 
@@ -556,11 +556,11 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
   // Check boolean values
   {
     if (m_collides_with_characters || m_collides_with_objects)
-      assert(m_goes_through_wall == false);
+      ASSERT(m_goes_through_wall == false);
 
     if (m_goes_through_wall) {
-      assert(m_collides_with_characters == false);
-      assert(m_collides_with_objects == false);
+      ASSERT(m_collides_with_characters == false);
+      ASSERT(m_collides_with_objects == false);
     }
   }
 }
@@ -712,7 +712,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 
 bool PhysicalObj::IsInWater () const
 {
-  assert (!IsGhost());
+  ASSERT (!IsGhost());
   if (!world.water.IsActive()) return false;
   int x = BorneLong(GetCenterX(), 0, world.GetWidth()-1);
   return (int)world.water.GetHeight(x) < GetCenterY();

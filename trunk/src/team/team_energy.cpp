@@ -76,7 +76,7 @@ void TeamEnergy::Config(uint _current_energy,
 
   value = _current_energy;
   new_value = _current_energy;
-  assert(max_value != 0)
+  ASSERT(max_value != 0)
       energy_bar.InitVal(value, 0, max_value, ProgressBar::PROG_BAR_VERTICAL);
   icon = new Sprite(team->flag);
   icon->Scale(0.8,0.8);

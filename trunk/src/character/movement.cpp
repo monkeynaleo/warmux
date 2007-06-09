@@ -30,7 +30,7 @@ Movement::Movement(xmlpp::Element *xml)
   play_mode = LOOP;
   always_moving = false;
   XmlReader::ReadStringAttr( xml, "name", type);
-  assert(type!="");
+  ASSERT(type!="");
 
   speed = 15;
   XmlReader::ReadIntAttr(xml, "speed", speed);
@@ -61,7 +61,7 @@ Movement::Movement(xmlpp::Element *xml)
   for (int frame_number=0; it != end; ++it, frame_number++)
   {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-    assert (elem != NULL);
+    ASSERT (elem != NULL);
 
     xmlpp::Node::NodeList nodes2 = elem -> get_children("member");
     xmlpp::Node::NodeList::iterator

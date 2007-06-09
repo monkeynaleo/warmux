@@ -79,7 +79,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
 
 bool Team::LoadCharacters()
 {
-  assert (nb_characters <= 10);
+  ASSERT (nb_characters <= 10);
 
   std::string nomfich;
   try
@@ -187,7 +187,7 @@ TeamEnergy & Team::GetEnergyBar()
 
 void Team::SelectCharacter(uint index)
 {
-  assert(index <= characters.size());
+  ASSERT(index <= characters.size());
   ActiveCharacter().StopPlaying();
   active_character = characters.begin();
   for(uint i = 0; i < index; ++i)
@@ -196,7 +196,7 @@ void Team::SelectCharacter(uint index)
 
 void Team::NextCharacter()
 {
-  assert (0 < NbAliveCharacter());
+  ASSERT (0 < NbAliveCharacter());
   ActiveCharacter().StopPlaying();
   do
   {
@@ -218,7 +218,7 @@ void Team::NextCharacter()
 
 void Team::PreviousCharacter()
 {
-  assert (0 < NbAliveCharacter());
+  ASSERT (0 < NbAliveCharacter());
   ActiveCharacter().StopPlaying();
   do
   {
@@ -282,7 +282,7 @@ Character& Team::ActiveCharacter()
 void Team::SetWeapon (Weapon::Weapon_type type)
 {
 
-  assert (type >= Weapon::WEAPON_FIRST && type <= Weapon::WEAPON_LAST);
+  ASSERT (type >= Weapon::WEAPON_FIRST && type <= Weapon::WEAPON_LAST);
   AccessWeapon().Deselect();
   active_weapon = WeaponsList::GetInstance()->GetWeapon(type);
   AccessWeapon().Select();
@@ -300,13 +300,13 @@ int Team::ReadNbUnits() const
 
 int Team::ReadNbAmmos(const Weapon::Weapon_type &weapon_type) const
 {
-  assert((unsigned int)weapon_type < m_nb_ammos.size());
+  ASSERT((unsigned int)weapon_type < m_nb_ammos.size());
   return m_nb_ammos[weapon_type];
 }
 
 int Team::ReadNbUnits(const Weapon::Weapon_type &weapon_type) const
 {
-  assert((unsigned int)weapon_type < m_nb_units.size());
+  ASSERT((unsigned int)weapon_type < m_nb_units.size());
   return m_nb_units[weapon_type];
 }
 
@@ -332,7 +332,7 @@ Team::iterator Team::end() { return characters.end(); }
 
 Character* Team::FindByIndex(uint index)
 {
-  assert(index < characters.size());
+  ASSERT(index < characters.size());
   iterator it= characters.begin(), end=characters.end();
 
   while(index != 0 && it != characters.end())
@@ -380,7 +380,7 @@ void Team::UnloadGamingData()
 
 void Team::SetNbCharacters(uint howmany)
 {
-  assert(howmany >= 1 && howmany <= 10);
+  ASSERT(howmany >= 1 && howmany <= 10);
   nb_characters = howmany;
 }
 

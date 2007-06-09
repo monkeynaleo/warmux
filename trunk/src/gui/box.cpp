@@ -113,7 +113,7 @@ void VBox::DelFirstWidget()
 
 void VBox::AddWidget(Widget * a_widget)
 {
-  assert(a_widget != NULL);
+  ASSERT(a_widget != NULL);
 
   uint _y;
 
@@ -160,7 +160,7 @@ HBox::HBox(const Rectanglei &rect, bool _visible) : Box(rect, _visible)
 
 void HBox::AddWidget(Widget * a_widget)
 {
-  assert(a_widget != NULL);
+  ASSERT(a_widget != NULL);
 
   uint _x;
 

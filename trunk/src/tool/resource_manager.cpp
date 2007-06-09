@@ -128,7 +128,7 @@ Profile *ResourceManager::LoadXMLProfile(const std::string xml_filename, bool re
      path = base_path;
      filename = path + xml_filename;
    } else {
-     assert(xml_filename.rfind(PATH_SEPARATOR) != xml_filename.npos);
+     ASSERT(xml_filename.rfind(PATH_SEPARATOR) != xml_filename.npos);
      path = xml_filename.substr(0, xml_filename.rfind(PATH_SEPARATOR)+1);
      filename = xml_filename;
    }
@@ -251,7 +251,7 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string re
     sprite->Init(surface, frameSize, nb_frames_x, nb_frames_y);
   }
 
-  assert(sprite != NULL);
+  ASSERT(sprite != NULL);
 
   xmlpp::Element *elem = profile->doc->GetMarker(elem_sprite, "animation");
   if ( elem != NULL ) {

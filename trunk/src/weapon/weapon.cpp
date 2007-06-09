@@ -126,7 +126,7 @@ Weapon::Weapon(Weapon_type type,
     if(!XmlReader::ReadStringAttr (elem, "origin", origin_xml))
     {
       std::cerr << "No \"origin\" flag found for weapon %s" << m_id <<std::endl;
-      assert(false);
+      ASSERT(false);
     }
     if (origin_xml == "over")
       origin = weapon_origin_OVER;
@@ -136,7 +136,7 @@ Weapon::Weapon(Weapon_type type,
   else
   {
     std::cerr << "No \"position\" flag found for weapon %s" << m_id <<std::endl;
-    assert(false);
+    ASSERT(false);
   }
 
   elem = resource_manager.GetElement(weapons_res_profile, "hole", m_id);
@@ -236,7 +236,7 @@ bool Weapon::CanChangeWeapon() const
 
 void Weapon::NewActionWeaponShoot() const
 {
-  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
 
   Action* a_shoot = new Action(Action::ACTION_WEAPON_SHOOT,
 			       m_strength,
@@ -246,7 +246,7 @@ void Weapon::NewActionWeaponShoot() const
 
 void Weapon::NewActionWeaponStopUse() const
 {
-  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
 
   Action* a = new Action(Action::ACTION_WEAPON_STOP_USE);
   ActionHandler::GetInstance()->NewActionActiveCharacter(a);
@@ -341,7 +341,7 @@ void Weapon::PosXY (int &x, int &y) const
     y = ActiveCharacter().GetY()       - m_image->GetHeight()    + position.y;
   }
   else
-    assert(false);
+    ASSERT(false);
 }
 
 const Point2i Weapon::GetGunHolePosition()
@@ -366,7 +366,7 @@ void Weapon::UseAmmo()
   int *ammo = &ActiveTeam().AccessNbAmmos();
   if (*ammo != INFINITE_AMMO) (*ammo)--;
 
-  assert (*ammo >= 0 || *ammo == INFINITE_AMMO);
+  ASSERT (*ammo >= 0 || *ammo == INFINITE_AMMO);
 }
 
 bool Weapon::EnoughAmmoUnit() const
@@ -381,7 +381,7 @@ void Weapon::UseAmmoUnit()
   int *unit = &ActiveTeam().AccessNbUnits();
   (*unit)--;
 
-  assert (unit >= 0);
+  ASSERT (unit >= 0);
 }
 
 int Weapon::ReadInitialNbAmmo() const{
@@ -397,17 +397,17 @@ bool Weapon::CanBeUsedOnClosedMap() const{
 }
 
 const std::string& Weapon::GetName() const {
-  assert (!m_name.empty());
+  ASSERT (!m_name.empty());
   return m_name;
 }
 
 const std::string& Weapon::GetHelp() const {
-  assert (!m_help.empty());
+  ASSERT (!m_help.empty());
   return m_help;
 }
 
 const std::string& Weapon::GetID() const {
-  assert (!m_name.empty());
+  ASSERT (!m_name.empty());
   return m_id;
 }
 
@@ -655,7 +655,7 @@ void Weapon::SignalTurnEnd(){
 
 void Weapon::ActionStopUse()
 {
-  assert(false);
+  ASSERT(false);
 }
 
 // Handle keyboard events

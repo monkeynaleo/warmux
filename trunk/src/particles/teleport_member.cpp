@@ -35,7 +35,7 @@ TeleportMemberParticle::TeleportMemberParticle(Sprite* spr, const Point2i& posit
   image->GetScaleFactors(scale_x, scale_y);
   image->Scale(scale_x * (float)direction, scale_y);
 
-  assert(image->GetWidth() != 0 && image->GetHeight()!=0);
+  ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
   SetXY(position);
   m_left_time_to_live = 1;
 

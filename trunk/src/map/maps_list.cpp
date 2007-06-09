@@ -299,7 +299,7 @@ void MapsList::SelectMapByName (const std::string &nom)
 
 void MapsList::SelectMapByIndex (uint index)
 {
-  assert (index < lst.size());
+  ASSERT (index < lst.size());
   if (terrain_actif == (int)index)
     return;
 
@@ -313,7 +313,7 @@ int MapsList::GetActiveMapIndex ()
 
 InfoMap& MapsList::ActiveMap()
 {
-  assert (0 <= terrain_actif);
+  ASSERT (0 <= terrain_actif);
   return lst.at(terrain_actif);
 }
 

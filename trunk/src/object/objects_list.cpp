@@ -98,7 +98,7 @@ void ObjectsList::Draw()
        it != end();
        ++it)
   {
-    assert((*it) != NULL);
+    ASSERT((*it) != NULL);
 
     if (!(*it)->IsGhost())
       (*it)->Draw();

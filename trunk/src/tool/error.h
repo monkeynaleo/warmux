@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh des erreurs, exceptions, assertions, etc.
+ * Refresh des erreurs, exceptions, ASSERTions, etc.
  *****************************************************************************/
 
 #ifndef ERROR_H
@@ -33,27 +33,27 @@ void MissedAssertion (const char *filename, unsigned long line,
 void WakeUpDebugger();
 
 // Assertion (disabled in release mode)
-#undef assert
-#  define assert(COND) \
+#undef ASSERT
+#  define ASSERT(COND) \
      if (!(COND)) MissedAssertion (__FILE__, __LINE__, #COND);
 
 
 
 // Usage:
-// net_assert(COND)
+// NET_ASSERT(COND)
 // {
-//   // What to do if assertion failed
+//   // What to do if ASSERTion failed
 //   // This code is only executed during a network game
 //   // and if DEBUG isn't defined
 //   return;
 // }
 #ifdef DEBUG
-#define net_assert(COND) \
-  assert(COND); \
+#define NET_ASSERT(COND) \
+  ASSERT(COND); \
   if(false)
 #else
-#define net_assert(COND) \
-  assert(COND); \
+#define NET_ASSERT(COND) \
+  ASSERT(COND); \
   if(!(COND) && Network::GetInstance()->IsConnected())
 #endif
 

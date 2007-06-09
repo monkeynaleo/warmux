@@ -39,7 +39,7 @@ Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
   for (; it != end; ++it)
   {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-    assert (elem != NULL);
+    ASSERT (elem != NULL);
     std::string att;
     if (!XmlReader::ReadStringAttr(elem, "name", att))
     {

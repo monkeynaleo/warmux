@@ -124,7 +124,7 @@ void AIStupidEngine::Refresh()
 //       // Wait for end of turn
 //       break;
 //     default:
-//       assert(false);
+//       ASSERT(false);
 //     }
 
 }

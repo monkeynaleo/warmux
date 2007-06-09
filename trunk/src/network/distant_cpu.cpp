@@ -115,7 +115,7 @@ int DistantComputer::ReceiveDatas(char* & buf)
   }
 
   int size = (int)SDLNet_Read32(&net_size);
-  net_assert(size > 0)
+  NET_ASSERT(size > 0)
   {
     // force_disconnect = true; // hum.. in this case we will assume it's a network error
     return 0;
@@ -138,7 +138,7 @@ int DistantComputer::ReceiveDatas(char* & buf)
     {
       std::cerr << "Malformed packet" << std::endl;
       total_received = received;
-      net_assert(false)
+      NET_ASSERT(false)
       {
 	return 0;
       }
@@ -195,7 +195,7 @@ void DistantComputer::ManageTeam(Action* team)
   {
     std::list<std::string>::iterator it;
     it = find(owned_teams.begin(), owned_teams.end(), name);
-    net_assert(it != owned_teams.end())
+    NET_ASSERT(it != owned_teams.end())
     {
       force_disconnect = true;
       return;
@@ -204,7 +204,7 @@ void DistantComputer::ManageTeam(Action* team)
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, name), false);
   }
   else
-    assert(false);
+    ASSERT(false);
 }
 
 void DistantComputer::SendChatMessage(Action* a)

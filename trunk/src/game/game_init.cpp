@@ -123,7 +123,7 @@ void GameInit::InitTeams()
   // Check the number of teams
   if (teams_list.playing_list.size() < 2)
     Error(_("You need at least two valid teams !"));
-  assert (teams_list.playing_list.size() <= GameMode::GetInstance()->max_teams);
+  ASSERT (teams_list.playing_list.size() <= GameMode::GetInstance()->max_teams);
 
   // Load the teams
   teams_list.LoadGamingData();

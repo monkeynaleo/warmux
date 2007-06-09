@@ -64,11 +64,11 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
 	      obj_name.c_str(), config_file.c_str());
 
     // Load Xml configuration
-    assert(doc.Load(config_file));
+    ASSERT(doc.Load(config_file));
     elem = XmlReader::GetMarker(doc.GetRoot(), obj_name);
   }
 
-  assert(elem != NULL);
+  ASSERT(elem != NULL);
   XmlReader::ReadDouble(elem, "mass", m_mass);
   XmlReader::ReadDouble(elem, "wind_factor", m_wind_factor);
   XmlReader::ReadDouble(elem, "air_resist_factor", m_air_resist_factor);

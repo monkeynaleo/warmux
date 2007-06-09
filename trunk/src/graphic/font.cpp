@@ -181,7 +181,7 @@ Surface Font::Render(const std::string &txt, const Color &color, bool cache){
   } else
     surface = CreateSurface(txt, color);
 
-  assert( !surface.IsNull() );
+  ASSERT( !surface.IsNull() );
   return surface;
 }
 

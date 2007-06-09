@@ -30,7 +30,7 @@ BodyMemberParticle::BodyMemberParticle(Sprite* spr, const Point2i& position) :
   m_left_time_to_live = 100;
   image = new Sprite(spr->GetSurface());
   image->EnableRotationCache(32);
-  assert(image->GetWidth() != 0 && image->GetHeight()!=0);
+  ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
   SetXY(position);
 
   SetSize(image->GetSize());

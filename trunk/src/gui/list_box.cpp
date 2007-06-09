@@ -311,7 +311,7 @@ void ListBox::Sort()
 
 void ListBox::RemoveSelected()
 {
-  assert (always_one_selected == false);
+  ASSERT (always_one_selected == false);
 
   if( selected_item != -1 ){
     m_items.erase( m_items.begin() + selected_item );
@@ -321,7 +321,7 @@ void ListBox::RemoveSelected()
 
 void ListBox::Select (uint index)
 {
-  assert(index < m_items.size());
+  ASSERT(index < m_items.size());
   selected_item = index;
 }
 
@@ -342,7 +342,7 @@ void ListBox::Select(const std::string& val)
 
 void ListBox::Deselect ()
 {
-  assert (always_one_selected == false);
+  ASSERT (always_one_selected == false);
   selected_item = -1;
 }
 
@@ -353,13 +353,13 @@ int ListBox::GetSelectedItem () const
 
 const std::string& ListBox::ReadLabel () const
 {
-  assert (selected_item != -1);
+  ASSERT (selected_item != -1);
   return m_items.at(selected_item)->GetLabel();
 }
 
 const std::string& ListBox::ReadValue () const
 {
-  assert (selected_item != -1);
+  ASSERT (selected_item != -1);
   return m_items.at(selected_item)->GetValue();
 }
 
@@ -372,7 +372,7 @@ const int ListBox::ReadIntValue() const
 
 const std::string& ListBox::ReadValue (int index) const
 {
-  assert (index != -1 && index < (int)m_items.size());
+  ASSERT (index != -1 && index < (int)m_items.size());
   return m_items.at(index)->GetValue();
 }
 

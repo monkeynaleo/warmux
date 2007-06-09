@@ -77,7 +77,7 @@ void TeamsList::NextTeam ()
 
 Team& TeamsList::ActiveTeam()
 {
-  assert (active_team != playing_list.end());
+  ASSERT (active_team != playing_list.end());
   return **active_team;
 }
 
@@ -237,7 +237,7 @@ Team *TeamsList::FindByIndex (uint index)
     if (i == index)
       return (*it);
   }
-  assert (false);
+  ASSERT (false);
   return NULL;
 }
 
@@ -245,7 +245,7 @@ Team *TeamsList::FindByIndex (uint index)
 
 Team *TeamsList::FindPlayingByIndex (uint index)
 {
-  assert(index < playing_list.size());
+  ASSERT(index < playing_list.size());
   return playing_list[index];
 }
 
@@ -260,7 +260,7 @@ Team* TeamsList::FindPlayingById(const std::string &id, uint &index)
     if ((*it) -> GetId() == id)
       return *it;
   }
-  assert(false);
+  ASSERT(false);
   return NULL;
 }
 
@@ -507,7 +507,7 @@ void TeamsList::DelTeam (const std::string &id)
 {
   int pos;
   Team *equipe = FindById (id, pos);
-  assert(equipe != NULL);
+  ASSERT(equipe != NULL);
 
   selection_iterator it = find(selection.begin(),selection.end(),(uint)pos);
 

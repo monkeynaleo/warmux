@@ -170,12 +170,12 @@ void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned 
   {
     //Clamp the value to empty only the in this tile
     int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    assert( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
+    ASSERT( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
     int tile_lenght = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
-    assert( tile_lenght > 0);
-    assert( tile_start_x + tile_lenght <= CELL_SIZE.x);
+    ASSERT( tile_lenght > 0);
+    ASSERT( tile_start_x + tile_lenght <= CELL_SIZE.x);
 
-    assert(buf + tile_start_x * bpp + bpp * (tile_lenght-1) < m_surface.GetPixels() + CELL_SIZE.x * CELL_SIZE.y * bpp); //Check for overflow
+    ASSERT(buf + tile_start_x * bpp + bpp * (tile_lenght-1) < m_surface.GetPixels() + CELL_SIZE.x * CELL_SIZE.y * bpp); //Check for overflow
     memset(buf + tile_start_x * bpp, 0 , bpp * tile_lenght);
 
 /*    unsigned int* tmpbuf = (unsigned int*)(buf + tile_start_x * bpp);
@@ -191,10 +191,10 @@ void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned
   {
     //Clamp the value to empty only the in this tile
     int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    assert( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
+    ASSERT( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
     int tile_lenght = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
-    assert( tile_lenght > 0);
-    assert( tile_start_x + tile_lenght <= CELL_SIZE.x);
+    ASSERT( tile_lenght > 0);
+    ASSERT( tile_start_x + tile_lenght <= CELL_SIZE.x);
 
     buf += tile_start_x * bpp;
     while(tile_lenght--)
@@ -244,7 +244,7 @@ void TileItem_AlphaSoftware::FillWithRGB(Uint8 r, Uint8 g, Uint8 b)
 
 void TileItem_AlphaSoftware::CheckEmpty()
 {
-  assert(need_check_empty);
+  ASSERT(need_check_empty);
   unsigned char alpha;
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   alpha = last_filled_pixel[3];

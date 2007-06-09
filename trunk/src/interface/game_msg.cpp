@@ -55,7 +55,7 @@ void GameMessages::Reset(){
   iterator i;
   for( i=liste.begin(); i != liste.end(); i++){
     Message * msg = *i;
-    assert(msg); /* the message must be valid if nothing went wrong */
+    ASSERT(msg); /* the message must be valid if nothing went wrong */
     delete (msg);
     msg = NULL;
   }
@@ -98,7 +98,7 @@ void GameMessages::Add(const std::string &message){
   /* if there are too many messages, remove some of them */
   while( NBR_MSG_MAX < liste.size()) {
     Message * msg = liste.front();
-    assert(msg); /* the message must be valid if nothing went wrong */
+    ASSERT(msg); /* the message must be valid if nothing went wrong */
     liste.pop_front();
     delete msg;
   }

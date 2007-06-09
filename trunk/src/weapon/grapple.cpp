@@ -133,7 +133,7 @@ bool Grapple::TryAttachRope()
       // Give back one ammo...
       int *ammo = &ActiveTeam().AccessNbAmmos();
       if (*ammo != INFINITE_AMMO) (*ammo)++;
-      assert (*ammo > 0 || *ammo == INFINITE_AMMO);
+      ASSERT (*ammo > 0 || *ammo == INFINITE_AMMO);
 
       return false;
     }
@@ -492,7 +492,7 @@ void Grapple::AttachNode(Point2i contact_point,
 
 void Grapple::DetachNode()
 {
-  assert(rope_nodes.size() >= 1);
+  ASSERT(rope_nodes.size() >= 1);
 
   { // for debugging only
     rope_node_t node;

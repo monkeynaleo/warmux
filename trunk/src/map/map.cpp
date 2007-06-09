@@ -221,7 +221,7 @@ bool Map::HorizontalLine_IsInVacuum(int ox, int y, int width) const
 // TODO : for consistency, VerticalLine_IsInVacuum should use a 'height' as LigneH does it ...
 bool Map::VerticalLine_IsInVacuum(int x, int top, int bottom) const
 {
-  assert (top <= bottom);
+  ASSERT (top <= bottom);
 
   // Check we are still inside the world
   if (IsOutsideWorldX(x) || IsOutsideWorldYheight(top, bottom-top+1))

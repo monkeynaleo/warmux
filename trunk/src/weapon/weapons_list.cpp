@@ -187,7 +187,7 @@ Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)
 {
   weapons_list_it it;
   it = std::find_if(m_weapons_list.begin(), m_weapons_list.end(), test_weapon_type(type));
-  assert (it != m_weapons_list.end());
+  ASSERT (it != m_weapons_list.end());
   return *it;
 }
 
