@@ -33,11 +33,12 @@ class AIShootModule
   typedef enum {
     NO_STRATEGY,
     NEAR_FROM_ENEMY,
-    SHOOT_FROM_POINT
+    SHOOT_FROM_POINT,
+    SHOOT_BAZOOKA
   } strategy_t;
 
   strategy_t m_current_strategy;
-  
+
   uint m_current_time;
 
   const Character* m_enemy;
@@ -50,7 +51,7 @@ class AIShootModule
   uint m_last_shoot_time;
 
   // for shooting weapons like gun, shotgun, sniper rifle, m16, ...
-  static bool IsDirectlyShootable(const Character& shooter, 
+  static bool IsDirectlyShootable(const Character& shooter,
 				  const Character& enemy,
 				  double& shoot_angle);
 
@@ -59,9 +60,11 @@ class AIShootModule
 
   bool SelectFiringWeapon(double shoot_angle) const;
 
+  void ShootWithBazooka();
+  const Character* FindBazookaShootableEnemy(Character& shooter);
   // for proximity weapons like dynamite, mine, ...
   // TODO -> Go in ai_movment_module
-  const Character* FindProximityEnemy(const Character& shooter) const;
+  const Character *FindProximityEnemy(const Character& shooter) const;
 
   bool SelectProximityWeapon(const Character& enemy) const;
 
