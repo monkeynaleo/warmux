@@ -59,15 +59,15 @@ msgid "%s <%s> from %s"
 msgstr "%s <%s> iz <%s>"
 
 #: src/menu/team_box.cpp:74
-#, fuzzy, c-format
+#, c-format
 msgid "%s Team"
-msgstr "Ekipe"
+msgstr "Ekipa %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:72
 #, c-format
 msgid "%s Team - Remote"
-msgstr ""
+msgstr "Ekipa %s - Oddaljena"
 
 #: src/game/game_loop.cpp:632
 #, c-format
@@ -125,283 +125,283 @@ msgid "%s team has skipped its turn."
 msgstr "Ekipa %s je preskočila svojo potezo."
 
 #: src/weapon/gnu.cpp:121
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u Gnu!"
 msgid_plural "%s team has won %u Gnus!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u gnuja!"
+msgstr[1] "Ekipa %s je osvojila %u gnuja!"
+msgstr[2] "Ekipa %s je osvojila %u gnuje!"
+msgstr[3] "Ekipa %s je osvojila %u gnujev!"
 
 #: src/weapon/air_attack.cpp:215
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u zračni napad!"
+msgstr[1] "Ekipa %s je osvojila %u zračna napada!"
+msgstr[2] "Ekipa %s je osvojila %u zračne napade!"
+msgstr[3] "Ekipa %s je osvojila %u zračnih napadov!"
 
 #: src/weapon/airhammer.cpp:172
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u airhammer!"
 msgid_plural "%s team has won %u airhammers!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u pnevmatsko kladivo!"
+msgstr[1] "Ekipa %s je osvojila %u pnevmatski kladivi!"
+msgstr[2] "Ekipa %s je osvojila %u pnevmatska kladiva!"
+msgstr[3] "Ekipa %s je osvojila %u pnevmatskih kladiv!"
 
 #: src/weapon/anvil.cpp:87
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u anvil!"
 msgid_plural "%s team has won %u anvils!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u nakovalo!"
+msgstr[1] "Ekipa %s je osvojila %u nakovali!"
+msgstr[2] "Ekipa %s je osvojila %u nakovala!"
+msgstr[3] "Ekipa %s je osvojila %u nakoval!"
 
 #: src/weapon/auto_bazooka.cpp:262
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u avtomatsko bazuko!"
+msgstr[1] "Ekipa %s je osvojila %u avtomatski bazuki!"
+msgstr[2] "Ekipa %s je osvojila %u avtomatske bazuke!"
+msgstr[3] "Ekipa %s je osvojila %u avtomatskih bazuk!"
 
 #: src/weapon/baseball.cpp:92
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u kij!"
+msgstr[1] "Ekipa %s je osvojila %u kija!"
+msgstr[2] "Ekipa %s je osvojila %u kije!"
+msgstr[3] "Ekipa %s je osvojila %u kijev!"
 
 #: src/weapon/bazooka.cpp:88
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u bazuko!"
+msgstr[1] "Ekipa %s je osvojila %u bazuki!"
+msgstr[2] "Ekipa %s je osvojila %u bazuke!"
+msgstr[3] "Ekipa %s je osvojila %u bazuk!"
 
 #: src/weapon/blowtorch.cpp:142
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u blowtorch!"
 msgid_plural "%s team has won %u blowtorchs!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u varilnik!"
+msgstr[1] "Ekipa %s je osvojila %u varilnika!"
+msgstr[2] "Ekipa %s je osvojila %u varilnike!"
+msgstr[3] "Ekipa %s je osvojila %u varilnikov!"
 
 #: src/weapon/bounce_ball.cpp:68
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u bounce ball!"
 msgid_plural "%s team has won %u bounce balls!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u skokico!"
+msgstr[1] "Ekipa %s je osvojila %u skokici!"
+msgstr[2] "Ekipa %s je osvojila %u skokice!"
+msgstr[3] "Ekipa %s je osvojila %u skokic!"
 
 #: src/weapon/construct.cpp:132
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u construct!"
 msgid_plural "%s team has won %u constructs!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u tram!"
+msgstr[1] "Ekipa %s je osvojila %u trama!"
+msgstr[2] "Ekipa %s je osvojila %u trame!"
+msgstr[3] "Ekipa %s je osvojila %u tramov!"
 
 #: src/weapon/cluster_bomb.cpp:106
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u custer bomb!"
 msgid_plural "%s team has won %u custer bombs!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u kasetno bombo!"
+msgstr[1] "Ekipa %s je osvojila %u kasetni bombi!"
+msgstr[2] "Ekipa %s je osvojila %u kasetne bombe!"
+msgstr[3] "Ekipa %s je osvojila %u kasetnih bomb!"
 
 #: src/weapon/disco_grenade.cpp:100
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u disco grenade!"
 msgid_plural "%s team has won %u disco grenades!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u Disko granato!"
+msgstr[1] "Ekipa %s je osvojila %u Disko granati!"
+msgstr[2] "Ekipa %s je osvojila %u Disko granate!"
+msgstr[3] "Ekipa %s je osvojila %u Disko granat!"
 
 #: src/weapon/dynamite.cpp:119
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u dinamit!"
+msgstr[1] "Ekipa %s je osvojila %u dinamita!"
+msgstr[2] "Ekipa %s je osvojila %u dinamite!"
+msgstr[3] "Ekipa %s je osvojila %u dinamitov!"
 
 #: src/weapon/grapple.cpp:708
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u kavelj!"
+msgstr[1] "Ekipa %s je osvojila %u kavlja!"
+msgstr[2] "Ekipa %s je osvojila %u kavlje!"
+msgstr[3] "Ekipa %s je osvojila %u kavljev!"
 
 #: src/weapon/grenade.cpp:64
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u granato!"
+msgstr[1] "Ekipa %s je osvojila %u granati!"
+msgstr[2] "Ekipa %s je osvojila %u granate!"
+msgstr[3] "Ekipa %s je osvojila %u granat!"
 
 #: src/weapon/gun.cpp:81
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u pištolo!"
+msgstr[1] "Ekipa %s je osvojila %u pištoli!"
+msgstr[2] "Ekipa %s je osvojila %u pištole!"
+msgstr[3] "Ekipa %s je osvojila %u pištol!"
 
 #: src/weapon/jetpack.cpp:262
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u jetpack!"
 msgid_plural "%s team has won %u jetpacks!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u raketni nahrbtnik!"
+msgstr[1] "Ekipa %s je osvojila %u raketna nahrbtnika!"
+msgstr[2] "Ekipa %s je osvojila %u raketne nahrbtnike!"
+msgstr[3] "Ekipa %s je osvojila %u raketnih nahrbtnikov!"
 
 #: src/weapon/lowgrav.cpp:87
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u lowgrav!"
 msgid_plural "%s team has won %u lowgravs!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u zmanjševalnik gravitacije!"
+msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije!"
+msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije!"
+msgstr[3] "Ekipa %s je osvojila %u zmanjševalnikov gravitacije!"
 
 #: src/weapon/mine.cpp:240
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u mino!"
+msgstr[1] "Ekipa %s je osvojila %u mini!"
+msgstr[2] "Ekipa %s je osvojila %u mine!"
+msgstr[3] "Ekipa %s je osvojila %u min!"
 
 #: src/weapon/parachute.cpp:133
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u padalo!"
+msgstr[1] "Ekipa %s je osvojila %u padali!"
+msgstr[2] "Ekipa %s je osvojila %u padala!"
+msgstr[3] "Ekipa %s je osvojila %u padal!"
 
 #: src/weapon/polecat.cpp:134
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u polecat!"
 msgid_plural "%s team has won %u polecats!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u dihurjemet!"
+msgstr[1] "Ekipa %s je osvojila %u dihurjemeta!"
+msgstr[2] "Ekipa %s je osvojila %u dihurjemete!"
+msgstr[3] "Ekipa %s je osvojila %u dihurjemetov!"
 
 #: src/weapon/riot_bomb.cpp:78
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u kopaško granato!"
+msgstr[1] "Ekipa %s je osvojila %u kopaški granati!"
+msgstr[2] "Ekipa %s je osvojila %u kopaške granate!"
+msgstr[3] "Ekipa %s je osvojila %u kopaških granat!"
 
 #: src/weapon/shotgun.cpp:111
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u šibrovko!"
+msgstr[1] "Ekipa %s je osvojila %u šibrovki!"
+msgstr[2] "Ekipa %s je osvojila %u šibrovke!"
+msgstr[3] "Ekipa %s je osvojila %u šibrovk!"
 
 #: src/weapon/snipe_rifle.cpp:211
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle!"
 msgid_plural "%s team has won %u snipe rifles!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u ostrostrelsko puško!"
+msgstr[1] "Ekipa %s je osvojila %u ostrostrelski puški!"
+msgstr[2] "Ekipa %s je osvojila %u ostrostrelske puške!"
+msgstr[3] "Ekipa %s je osvojila %u ostrostrelskih pušk!"
 
 #: src/weapon/submachine_gun.cpp:151
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u brzostrelko!"
+msgstr[1] "Ekipa %s je osvojila %u brzostrelki!"
+msgstr[2] "Ekipa %s je osvojila %u brzostrelke!"
+msgstr[3] "Ekipa %s je osvojila %u brzostrelk!"
 
 #: src/weapon/suicide.cpp:75
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u samomor!"
+msgstr[1] "Ekipa %s je osvojila %u samomora!"
+msgstr[2] "Ekipa %s je osvojila %u samomore!"
+msgstr[3] "Ekipa %s je osvojila %u samomorov!"
 
 #: src/weapon/syringe.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u injekcijo!"
+msgstr[1] "Ekipa %s je osvojila %u injekciji!"
+msgstr[2] "Ekipa %s je osvojila %u injekcije!"
+msgstr[3] "Ekipa %s je osvojila %u injekcij!"
 
 #: src/weapon/teleportation.cpp:121
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u teleprenos!"
+msgstr[1] "Ekipa %s je osvojila %u teleprenosa!"
+msgstr[2] "Ekipa %s je osvojila %u teleprenose!"
+msgstr[3] "Ekipa %s je osvojila %u teleprenosov!"
 
 #: src/weapon/skip_turn.cpp:65
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u turn skip!"
 msgid_plural "%s team has won %u turn skips!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u Preskoči potezo!"
+msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo!"
+msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo!"
+msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo!"
 
 #: src/weapon/supertux.cpp:223
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u tux launcher!"
 msgid_plural "%s team has won %u tux launchers!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u SuperTux!"
+msgstr[1] "Ekipa %s je osvojila %u SuperTux-a!"
+msgstr[2] "Ekipa %s je osvojila %u SuperTux-e!"
+msgstr[3] "Ekipa %s je osvojila %u SuperTux-ov!"
 
 #: src/weapon/weapon.cpp:809
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u unexpected weapon!"
 msgid_plural "%s team has won %u unexpected weapons!"
-msgstr[0] "Ekipa %s je osvojila %u %s-o!"
-msgstr[1] "Ekipa %s je osvojila %u %s-i!"
-msgstr[2] "Ekipa %s je osvojila %u %s-e!"
-msgstr[3] "Ekipa %s je osvojila %u %s!"
+msgstr[0] "Ekipa %s je osvojila %u nepričakovano orožje!"
+msgstr[1] "Ekipa %s je osvojila %u nepričakovani orožji!"
+msgstr[2] "Ekipa %s je osvojila %u nepričakovana orožja!"
+msgstr[3] "Ekipa %s je osvojila %u nepričakovanih orožij!"
 
 #: src/include/action_handler.cpp:227
 #, c-format
@@ -444,6 +444,9 @@ msgid ""
 "Fire : space key\n"
 "a hit per turn"
 msgstr ""
+"Kot : Gor/Dol\n"
+"Strel : Preslednica\n"
+"en udarec na potezo"
 
 #: src/weapon/anvil.cpp:97
 msgid "Anvil"
@@ -674,12 +677,17 @@ msgid ""
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
+"Uporaba: držite preslednico\n"
+"Kot: Gor/Dol\n"
+"ena uporaba na potezo"
 
 #: src/weapon/airhammer.cpp:47
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
 msgstr ""
+"Uporaba: držite preslednico\n"
+"ena uporaba na potezo"
 
 #: src/weapon/auto_bazooka.cpp:154
 msgid ""
@@ -688,12 +696,18 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Uporaba: kliknite na tarčo\n"
+"Izstrelitveni kot: Gor/Dol\n"
+"Strel: držite preslednico dokler raketa ne doseže željene moči\n"
+"ena uporaba na potezo"
 
 #: src/weapon/anvil.cpp:98
 msgid ""
 "Howto use it : left clic on target\n"
 "an ammo per turn"
 msgstr ""
+"Uporaba: kliknite na tarčo\n"
+"ena uporaba na potezo"
 
 #: src/game/game_loop.cpp:689
 msgid "Hurry up, you are too slow !!"
@@ -717,6 +731,9 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Izstrelitveni kot: Gor/Dol\n"
+"Strel: držite preslednico dokler raketa ne doseže željene moči\n"
+"ena uporaba na potezo"
 
 #: src/game/game_init.cpp:153
 msgid "Initialisation"
@@ -764,7 +781,7 @@ msgstr "Krajevne ekipe:"
 
 #: src/weapon/lowgrav.cpp:38
 msgid "LowGrav"
-msgstr "NizkaGravitacija"
+msgstr "Zmanjševalnik gravitacije"
 
 #: src/map/map.cpp:331
 #, c-format
@@ -868,7 +885,7 @@ msgstr "Ime igralca?"
 
 #: src/weapon/polecat.cpp:144
 msgid "Polecat Launcher"
-msgstr "Metalec Dihurja"
+msgstr "Dihurjemet"
 
 #. Server port
 #: src/menu/network_connection_menu.cpp:78
@@ -1048,6 +1065,10 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Čas: miškin kolešček ali Page Up/Down\n"
+"Kot: Gor/Dol\n"
+"Strel: držite preslednico dokler bomba ne doseže željene moči\n"
+"ena uporaba na potezo"
 
 #: src/weapon/bounce_ball.cpp:79
 msgid ""
@@ -1056,6 +1077,10 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
+"Čas: miškin kolešček ali Page Up/Down\n"
+"Kot: Gor/Dol\n"
+"Strel: pritisnite preslednico\n"
+"ena uporaba na potezo"
 
 #: src/interface/weapon_menu.cpp:171
 msgid "Tools"
@@ -1171,6 +1196,9 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
+"Smer napada: Levo/Desno\n"
+"Bombardiranje: levi klik na tarčo\n"
+"eno bombardiranje na potezo"
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -1193,6 +1221,3 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
-
-#~ msgid "Remote"
-#~ msgstr "Oddaljeni"
