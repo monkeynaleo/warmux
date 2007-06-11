@@ -28,6 +28,7 @@
 #include "tool/error.h"
 #include "tool/math_tools.h"
 #include "tool/string_tools.h"
+#include "map/wind.h"
 
 #include <iostream>
 
@@ -78,7 +79,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   while (pos != arrival) {
 
     // is there a collision on the ground ??
-    if ( !world.IsInVacuum(pos.x, pos.y) ) {
+    if (!world.IsInVacuum(pos.x, pos.y)) {
       return false;
     }
 
@@ -211,9 +212,36 @@ bool AIShootModule::SelectProximityWeapon(const Character& enemy) const
   if (ActiveTeam().GetWeapon().EnoughAmmo())
     return true;
 
-
   // No proximity weapons found !
   return false;
+}
+
+void AIShootModule::ShootWithBazooka()
+{
+  if (m_current_time > m_last_shoot_time + 2 ||
+      m_last_shoot_time == 0) {
+    ActiveTeam().SetWeapon(Weapon::WEAPON_BAZOOKA);
+    double Xe = m_enemy->GetCenterX();
+    double Ye = m_enemy->GetCenterY();
+    double Xs = ActiveCharacter().GetCenterX();
+    double Ys = ActiveCharacter().GetCenterY();
+    std::cout << "Xe = " << Xe << std::endl;
+    std::cout << "Ye = " << Ye << std::endl;
+    std::cout << "Xs = " << Xs << std::endl;
+    std::cout << "Ys = " << Ys << std::endl;
+    double angle = atan(wind.GetStrength() * 75.0 /*wind factor */ /(30.0/* g */ *20 /* mass*/) );
+    double Xpe = (Xe - Xs) * cos(angle) - (Ye - Ys) * sin(angle) + Xs;
+    double Ype = (Xe - Xs) * sin(angle) + (Ye - Ys) * cos(angle) + Ys;
+    Xe = Xpe;
+    Ye = Ype;
+    double V0x = (Xe - Xs ) / 80;
+    double V0y = V0x * (Ye - (Ys))/ (Xe - Xs -V0x) - 1/2.0 * sqrt(30*30 /* g² */+ wind.GetStrength() * 75.0 *wind.GetStrength() * 75.0  /20.0 /20.0 /* W²/m²*/ )  / V0x * (Xe - Xs - V0x)/40 /* pixel per metre */;
+
+
+    std::cout << "shooting " << V0x <<" "  <<"   " << V0y << " "<< " " <<  atan(V0y/V0x) << " " <<m_enemy->GetName() << std::endl;
+    ActiveTeam().GetWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetCenterX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
+    m_last_shoot_time = m_current_time;
+  }
 }
 
 // =================================================
@@ -233,6 +261,12 @@ void AIShootModule::Shoot()
   }
 }
 
+const Character* AIShootModule::FindBazookaShootableEnemy(Character& shooter)
+{
+  FOR_ALL_LIVING_ENEMIES(shooter, team, character)
+    return &(*character);
+  return NULL;
+}
 const Character* AIShootModule::FindEnemy()
 {
   if (m_has_finished) {
@@ -276,6 +310,13 @@ const Character* AIShootModule::FindEnemy()
       return m_enemy;
     }
   }
+
+  m_enemy = FindBazookaShootableEnemy(ActiveCharacter());
+  if (m_enemy)
+    {
+      m_current_strategy = SHOOT_BAZOOKA;
+      return m_enemy;
+    }
 
   m_current_strategy = NO_STRATEGY;
   m_angle = 0;
@@ -337,6 +378,10 @@ bool AIShootModule::Refresh(uint current_time)
     Shoot();
     return false;
     break;
+
+  case SHOOT_BAZOOKA:
+    ShootWithBazooka();
+    return false;
   }
 
   return true;

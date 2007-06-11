@@ -354,7 +354,7 @@ void Team::LoadGamingData()
 
   m_nb_ammos.assign(l_weapons_list.size(), 0);
   m_nb_units.assign(l_weapons_list.size(), 0);
-	
+
   for (; itw != end ; ++itw) {
     m_nb_ammos[ (*itw)->GetType() ] = (*itw)->ReadInitialNbAmmo();
     m_nb_units[ (*itw)->GetType() ] = (*itw)->ReadInitialNbUnit();
@@ -401,7 +401,7 @@ void Team::Refresh()
 }
 
 Weapon& Team::AccessWeapon() const { return *active_weapon; }
-const Weapon& Team::GetWeapon() const { return *active_weapon; }
+Weapon& Team::GetWeapon() const { return *active_weapon; }
 Weapon::Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
 
 bool Team::IsSameAs(const Team& other) const
