@@ -100,12 +100,12 @@
   <dark_smoke>  <!-- Particle bazooka and auto-bazooka... -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
-    <air_resist_factor>1.0</air_resist_factor>
+    <air_resist_factor>0</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
   </dark_smoke>
-  
+
   <star_particle>  <!-- Particle for tux weapon -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
@@ -188,7 +188,7 @@
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
   </m16_bullet>
-  
+
   <snipe_rifle_bullet>
     <mass>2.0</mass>
     <wind_factor>0.8</wind_factor>
@@ -197,7 +197,7 @@
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
   </snipe_rifle_bullet>
-  
+
   <!-- Weapons projectiles -->
   <!-- Bazooka and automatic bazookas rockets -->
   <rocket>
@@ -298,7 +298,7 @@
     <rebounding>false</rebounding>   <!-- bouncing handled in the code  -->
     <rebound_factor>0.01</rebound_factor>
   </gnu>
-  
+
   <polecat>
     <mass>5.0</mass>
     <wind_factor>1.0</wind_factor>
@@ -307,7 +307,7 @@
     <rebounding>false</rebounding>   <!-- bouncing handled in the code  -->
     <rebound_factor>0.01</rebound_factor>
   </polecat>
-  
+
   <bounce_ball>
     <mass>2.0</mass>
     <wind_factor>1.0</wind_factor>
