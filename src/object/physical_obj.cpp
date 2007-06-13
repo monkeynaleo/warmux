@@ -335,7 +335,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     if (ContactPoint(cx, cy)) {
       ground_angle = world.ground.Tangent(cx, cy);
-      if(!isnan(ground_angle)) {
+      if(!std::isnan(ground_angle)) {
         contactPos.x = (double)cx / PIXEL_PER_METER;
         contactPos.y = (double)cy / PIXEL_PER_METER;
       } else {
