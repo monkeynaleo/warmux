@@ -36,7 +36,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
   sock_lock(SDL_CreateMutex()),
   sock(new_sock),
   owned_teams(),
-  state(DistantComputer::ERROR),
+  state(DistantComputer::STATE_ERROR),
   version_checked(false),
   force_disconnect(false),
   nickname("this is not initialized")
