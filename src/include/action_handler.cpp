@@ -83,12 +83,12 @@ void Action_Network_ChangeState (Action *a)
     switch (Network::GetInstance()->GetState())
     {
     case Network::NO_NETWORK:
-      a->creator->SetState(DistantComputer::INITIALIZED);
+      a->creator->SetState(DistantComputer::STATE_INITIALIZED);
       ASSERT(client_state == Network::NETWORK_MENU_OK);
       break;
 
     case Network::NETWORK_LOADING_DATA:
-      a->creator->SetState(DistantComputer::READY);
+      a->creator->SetState(DistantComputer::STATE_READY);
       ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
       break;
 

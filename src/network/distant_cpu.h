@@ -37,9 +37,9 @@ class DistantComputer
 {
  public:
   typedef enum {
-    ERROR,
-    INITIALIZED,
-    READY
+    STATE_ERROR,
+    STATE_INITIALIZED,
+    STATE_READY
   } state_t;
 
  private:
