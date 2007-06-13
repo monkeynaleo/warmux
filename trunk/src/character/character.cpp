@@ -675,12 +675,14 @@ void Character::SignalCollision()
   if (IsDead()) return;
 
   pause_bouge_dg = Time::GetInstance()->Read();
-  back_jumping = false;
   double norme, degat;
   Point2d speed_vector;
   GameMode * game_mode = GameMode::GetInstance();
   SetMovement("walk");
   SetMovementOnce("soft-land");
+ 
+  body->SetRotation(0.0);
+  back_jumping = false;
 
   GetSpeedXY (speed_vector);
   norme = speed_vector.Norm();
