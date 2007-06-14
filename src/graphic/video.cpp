@@ -156,22 +156,23 @@ std::list<Point2i>& Video::GetAvailableConfigs()
 }
 
 bool Video::SetConfig(const int width, const int height, const bool _fullscreen){
+  int flag = (_fullscreen) ? SDL_FULLSCREEN : 0;
   // initialize the main window
   if( window.IsNull() ||
      (width != window.GetWidth() ||
       height != window.GetHeight() ) ){
 
     window.SetSurface( SDL_SetVideoMode(width, height, 32,
-                       SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF ), false );
+                       SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF | flag), false );
 
     if( window.IsNull() ) {
-      window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE) );
+      window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE | flag) );
       std::cerr << "WARNING: Video not using hardware acceleration!" << std::endl;
     }
 
     if( window.IsNull() )
       return false;
-    fullscreen = false;
+    fullscreen = (bool)flag;
   }
 
   if(fullscreen != _fullscreen) {
