@@ -45,6 +45,7 @@
 #include "tool/string_tools.h"
 #include "tool/i18n.h"
 #include "weapon/weapons_list.h"
+#include "network/network.h"
 #ifdef USE_AUTOPACKAGE
 #  include "include/binreloc.h"
 #endif
@@ -62,6 +63,8 @@ Config * Config::GetInstance() {
 
 Config::Config():
   m_game_mode("classic"),
+  m_network_host("localhost"),
+  m_network_port(WORMUX_NETWORK_PORT),
   m_xml_loaded(),
   m_filename(),
   data_dir(),
@@ -228,10 +231,12 @@ bool Config::LoadXml(xmlpp::Element *xml)
   }
 
   //=== network ===
-  //if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
-  //{
+  if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
+  {
   //  XmlReader::ReadBool(elem, "enable_network", enable_network);
-  //}
+    XmlReader::ReadString(elem, "host", m_network_host);
+    XmlReader::ReadString(elem, "port", m_network_port);
+  }
 
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
@@ -313,8 +318,10 @@ bool Config::SaveXml()
   doc.WriteElement(sound_node, "frequency", ulong2str(jukebox.GetFrequency()));
 
   //=== Network ===
-  //xmlpp::Element *net_node = root->add_child("network");
+  xmlpp::Element *net_node = root->add_child("network");
   //doc.WriteElement(net_node, "enable_network",  ulong2str(IsNetworkActivated()));
+  doc.WriteElement(net_node, "host", m_network_host);
+  doc.WriteElement(net_node, "port", m_network_port);
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);

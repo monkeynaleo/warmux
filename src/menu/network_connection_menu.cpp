@@ -44,7 +44,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
-  
+
   Rectanglei stdRect(0, 0, 360, 64);
 
   uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
@@ -59,8 +59,8 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   previous_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_minus", false);
   next_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_plus", false);
-  action_label = new Label(_("Connect to an internet game"), 
-			   Rectanglei(0,0,250,0), 
+  action_label = new Label(_("Connect to an internet game"),
+			   Rectanglei(0,0,250,0),
 			   Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
   action_box->AddWidget(previous_action_bt);
   action_box->AddWidget(action_label);
@@ -71,13 +71,13 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   // Server address
   server_address_label = new Label(_("Server address:"), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(server_address_label);
-  server_address = new TextBox("localhost", rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  server_address = new TextBox(Config::GetInstance()->GetNetworkHost(), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(server_address);
 
   // Server port
   port_number_label = new Label(_("Port:"), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(port_number_label);
-  port_number = new TextBox(WORMUX_NETWORK_PORT, rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(port_number);
 
   // Available on internet ?
@@ -92,8 +92,8 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   // Warning about experimental networking
   msg_box = new MsgBox(Rectanglei( AppWormux::GetInstance()->video.window.GetWidth()/2 - 300,
-				   y_box+connection_box->GetSizeY() + 30, 
-				   600, 200), 
+				   y_box+connection_box->GetSizeY() + 30,
+				   600, 200),
 		       Font::FONT_SMALL, Font::FONT_NORMAL);
   widgets.AddWidget(msg_box);
 
@@ -132,7 +132,7 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 	break;
       }
       return;
-    } 
+    }
 
   if ((w == previous_action_bt) ||
       (w == action_label && (button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP)))
@@ -185,7 +185,7 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
     port_number->SetVisible(false);
     internet_server->SetVisible(false);
     break;
-  } 
+  }
 }
 
 void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
@@ -208,7 +208,7 @@ bool NetworkConnectionMenu::signal_ok()
 
     conn = index_server.Connect();
     if(conn != Network::CONNECTED)
-    {     
+    {
       DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
       goto out;
@@ -216,7 +216,7 @@ bool NetworkConnectionMenu::signal_ok()
 
     conn = Network::GetInstance()->ServerStart(port_number->GetText());
     if( conn != Network::CONNECTED)
-    {      
+    {
       DisplayError(conn);
       goto out;
     }
@@ -227,6 +227,7 @@ bool NetworkConnectionMenu::signal_ok()
       msg_box->NewMessage(_("Error: Unable to start server"), c_red);
       goto out;
     }
+
     break;
 
   case NET_CONNECT_LOCAL: // Direct connexion to a server
@@ -256,7 +257,7 @@ bool NetworkConnectionMenu::signal_ok()
     index_server.Disconnect();
 
     // we don't go back into the main menu!
-    // -> im.Run() may have connected to a host so the 
+    // -> im.Run() may have connected to a host so the
     // if(Network::GetInstance()->IsConnected()) just below will be catched and close the menu
     break;
   }
@@ -264,6 +265,10 @@ bool NetworkConnectionMenu::signal_ok()
   if (Network::GetInstance()->IsConnected()) {
     // run the network menu ! :-)
     NetworkMenu nm;
+
+    Config::GetInstance()->SetNetworkHost(server_address->GetText());
+    Config::GetInstance()->SetNetworkPort(port_number->GetText());
+
     Network::GetInstance()->network_menu = &nm;
     nm.Run();
     Network::GetInstance()->network_menu = NULL;
