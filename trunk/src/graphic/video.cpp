@@ -157,10 +157,12 @@ std::list<Point2i>& Video::GetAvailableConfigs()
 
 bool Video::SetConfig(const int width, const int height, const bool _fullscreen){
   int flag = (_fullscreen) ? SDL_FULLSCREEN : 0;
-  // initialize the main window
+
+  // update the main window if needed
   if( window.IsNull() ||
      (width != window.GetWidth() ||
-      height != window.GetHeight() ) ){
+      height != window.GetHeight() ) ||
+      fullscreen != _fullscreen){
 
     window.SetSurface( SDL_SetVideoMode(width, height, 32,
                        SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF | flag), false );
@@ -172,12 +174,8 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
 
     if( window.IsNull() )
       return false;
-    fullscreen = (bool)flag;
-  }
 
-  if(fullscreen != _fullscreen) {
-    SDL_WM_ToggleFullScreen( window.GetSurface() );
-    fullscreen = !fullscreen;
+    fullscreen = _fullscreen;
   }
 
   camera.SetSize(width, height);
