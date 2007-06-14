@@ -101,7 +101,7 @@ void Text::RenderMultiLines()
 	  (current_pos = txt.find_first_of(" ", old_pos)) != std::string::npos )
     {
       std::string tmp = txt.substr(old_pos, current_pos-old_pos);
-      if (tmp != " ") {
+      if (tmp != " " && tmp != "") {
 	tokens.push_back(tmp);
       }
       old_pos = current_pos+1;
