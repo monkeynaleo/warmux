@@ -112,7 +112,12 @@ public:
   static Config * GetInstance();
 
   bool Save();
-  inline const std::string &GetGameMode() const { return m_game_mode; };
+  inline const std::string &GetGameMode() const { return m_game_mode; }
+
+  inline const std::string &GetNetworkHost() const { return m_network_host; }
+  inline void SetNetworkHost(std::string s) { m_network_host = s; }
+  inline const std::string &GetNetworkPort() const { return m_network_port; }
+  inline void SetNetworkPort(std::string s) { m_network_port = s; }
 
 protected:
   bool LoadXml(xmlpp::Element *xml);
@@ -120,6 +125,8 @@ protected:
   std::string GetEnv(const std::string & name, const std::string &default_value);
 
   std::string m_game_mode;
+  std::string m_network_host;
+  std::string m_network_port;
   bool m_xml_loaded;
   std::string m_filename;
 
