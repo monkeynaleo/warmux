@@ -142,9 +142,9 @@ bool AIShootModule::SelectFiringWeapon(double shoot_angle) const
   case 1:
     ActiveTeam().SetWeapon(Weapon::WEAPON_SNIPE_RIFLE);
     if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-    //     case 2:
-    //       ActiveTeam().SetWeapon(Weapon::WEAPON_SUBMACHINE_GUN);
-    //       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+  case 2:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_SUBMACHINE_GUN);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
   case 3:
   default:
     ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
