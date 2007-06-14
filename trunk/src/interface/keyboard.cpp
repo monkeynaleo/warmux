@@ -47,8 +47,7 @@
 #include "weapon/weapon.h"
 #include "weapon/weapons_list.h"
 
-// Vitesse du definalement au clavier
-#define SCROLL_CLAVIER 20 // ms
+#define SCROLL_KEYBOARD 20 // ms
 
 Keyboard * Keyboard::singleton = NULL;
 
@@ -123,6 +122,36 @@ int Keyboard::GetKeyAssociatedToAction(Key_t at)
   return 0;
 }
 
+bool Keyboard::MoveCamera(const Key_t &key)
+{ 
+  bool r = true;
+
+  switch(key) {
+  case KEY_MOVE_RIGHT:
+    camera.SetXY(Point2i(SCROLL_KEYBOARD,0));
+    r = true;
+    break;
+  case KEY_MOVE_LEFT:
+    camera.SetXY(Point2i(-SCROLL_KEYBOARD,0));
+    r = true;
+    break;
+  case KEY_UP:
+    camera.SetXY(Point2i(0,-SCROLL_KEYBOARD));
+    r = true;
+    break;
+  case KEY_DOWN:
+    camera.SetXY(Point2i(0,SCROLL_KEYBOARD));
+    break;
+  default:
+    r = false;
+    break;
+  }
+  
+  if (r)
+    camera.SetAutoCrop(false);
+  
+  return r;
+}
 
 void Keyboard::HandleKeyEvent(const SDL_Event& event)
 {
@@ -171,7 +200,15 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
 
 // Handle a pressed key
 void Keyboard::HandleKeyPressed (const Key_t &key)
-{
+{  
+  SDLMod mod = SDL_GetModState();
+  if (mod & KMOD_CTRL) {
+    if (MoveCamera(key)) {
+      PressedKeys[key] = true;
+      return;
+    }
+  }
+
   // Managing keys related to character moves
   // Available only when local
   if (!ActiveTeam().IsLocal()) return;
@@ -252,8 +289,7 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
 // Handle a released key
 void Keyboard::HandleKeyReleased (const Key_t &key)
 {
-  PressedKeys[key] = false ;
-
+  PressedKeys[key] = false;
   // Here we manage only actions which are activated on KEY_RELEASED event.
 
   // hack to interrupt AI
@@ -286,7 +322,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       return;
     case KEY_TOGGLE_INTERFACE:
       Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());
-      return;
+      return;   
     default:
       break;
     }
@@ -490,11 +526,19 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
 
 // Refresh keys which are still pressed.
 void Keyboard::Refresh()
-{
+{  
+  SDLMod mod = SDL_GetModState();
+  
   //Treat KEY_REFRESH events:
-  for (int i = 0; i < 256; i++)
-    if(PressedKeys[i]) {
+  for (int i = 0; i < 256; i++) {
+
+    if (PressedKeys[i]) {
       Key_t key = static_cast<Key_t>(i);
+
+      if (mod & KMOD_CTRL) {
+	if (MoveCamera(key))
+	  return;
+      }
 
       // Managing keys related to character moves
       // Available only when local
@@ -535,4 +579,5 @@ void Keyboard::Refresh()
 	break;
       }
     }
+  }
 }

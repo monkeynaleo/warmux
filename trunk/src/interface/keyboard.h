@@ -62,6 +62,7 @@ private:
 
   std::map<int, Key_t> layout;
   bool PressedKeys[256]; // stupid default value
+  bool MoveCamera(const Key_t &key);
 
   void HandleKeyPressed (const Key_t &action_key);
   void HandleKeyReleased (const Key_t &action_key);
