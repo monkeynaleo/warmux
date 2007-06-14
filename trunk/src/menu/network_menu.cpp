@@ -335,8 +335,8 @@ void NetworkMenu::UpdateTeamCallback(std::string team_id)
 
 void NetworkMenu::ChangeMapCallback()
 {
-  ASSERT( !close_menu );
-  // Called from the action handler
+  if (close_menu)
+    return;
 
   map_box->ChangeMapCallback();
 }

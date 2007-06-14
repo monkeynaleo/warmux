@@ -140,8 +140,12 @@ void MapSelectionBox::ChangeMap(int index)
   // Callback other network players
   if(Network::GetInstance()->IsServer())
     {
+      // We need to do it here to send the right map to still not connected clients
+      // in distant_cpu::distant_cpu
+      MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
+
       ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
-					    MapsList::GetInstance()->lst[selected_map_index].ReadName()));
+							  ActiveMap().ReadName()));
     }
 
   // Set Map information
