@@ -23,6 +23,8 @@
 #include "text_box.h"
 #include "label.h"
 
+#include <iostream>
+
 TextBox::TextBox (const std::string &label, const Rectanglei &rect, 
 		  Font::font_size_t fsize, Font::font_style_t fstyle) :
   Label(label, rect, fsize, fstyle),
@@ -32,8 +34,12 @@ TextBox::TextBox (const std::string &label, const Rectanglei &rect,
 
 void TextBox::SetText(std::string const &new_txt)
 {
-  Label::SetText(new_txt);
-  cursor_pos = new_txt.size();
+  Font* font = Font::GetInstance(font_size, font_style);
+
+  if (font->GetWidth(new_txt) < GetSizeX() - 5) {
+    Label::SetText(new_txt);
+    cursor_pos = new_txt.size();
+  }
 }
 
 void TextBox::SetCursor(std::string::size_type pos)
@@ -55,6 +61,8 @@ void TextBox::SendKey(SDL_keysym key)
 {
   need_redrawing = true;
 
+  std::string::size_type old_cursor_pos = cursor_pos;
+  std::string::size_type length = GetText().size();
   std::string new_txt = GetText();
 
   if (strcmp(SDL_GetKeyName(key.sym),"backspace")==0)
@@ -66,7 +74,7 @@ void TextBox::SendKey(SDL_keysym key)
         new_txt.erase(cursor_pos, 1);
       }
       new_txt.erase(cursor_pos, 1);
-      Label::SetText(new_txt);
+      SetText(new_txt);
     }
   }
   else if(strcmp(SDL_GetKeyName(key.sym),"left")==0)
@@ -88,7 +96,7 @@ void TextBox::SendKey(SDL_keysym key)
     if(key.unicode > 0)
     {
       if(key.unicode < 0x80) { // 1 byte char
-          new_txt.insert(cursor_pos++, 1, (char)key.unicode);
+	new_txt.insert(cursor_pos++, 1, (char)key.unicode);
       }
       else if (key.unicode < 0x800) // 2 byte char
       {
@@ -102,7 +110,10 @@ void TextBox::SendKey(SDL_keysym key)
         new_txt.insert(cursor_pos++, 1, (char)((key.unicode & 0x3f) | 0x80));
       }
     }
-    Label::SetText(new_txt);
+    SetText(new_txt);
+
+    if (GetText().size() == length)
+      cursor_pos = old_cursor_pos;
   }
 }
 

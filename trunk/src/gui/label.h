@@ -36,9 +36,10 @@ class Label : public Widget{
  protected:
   Text *txt_label;
   bool hidden;
- private:
   Font::font_size_t font_size;
   Font::font_style_t font_style;
+
+ private:
   const Color& font_color;
   bool center;
   bool shadowed;
