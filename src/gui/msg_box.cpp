@@ -33,19 +33,28 @@ MsgBox::MsgBox(const Rectanglei& rect, Font::font_size_t fsize, Font::font_style
 
 void MsgBox::Flush()
 {
-  std::list<Text *>::iterator it ;
+  std::list<Text *>::const_reverse_iterator it ;
+  Text *last_visible_msg;
 
-  uint y = vmargin;
-  for (it = messages.begin(); it != messages.end(); it++) 
+  int y = vmargin;
+
+  /* find the last item that can be displayed */
+  for (it = messages.rbegin(); it != messages.rend(); ++it)
     {
       y += (*it)->GetHeight() + vmargin;
+      if (y > GetSizeY())
+        break;
+      last_visible_msg = *it;
+    }
 
-      while (int(y) > GetSizeY() && !messages.empty()) {
-	Text* tmp = messages.front();
-	y -= tmp->GetHeight() - vmargin; 
-	delete tmp;
-	messages.pop_front();
-      }
+  /* list doesn't need fflush as it doesn't fullfill the textbox */
+  if (it == messages.rend())
+    return;
+
+  while (messages.front() != last_visible_msg && !messages.empty())
+    {
+      delete (messages.front());
+      messages.pop_front();
     }
 }
 
@@ -85,7 +94,7 @@ void MsgBox::SetSizePosition(const Rectanglei &rect)
   for (it = messages.begin(); it != messages.end(); it++) {
     (*it)->SetMaxWidth(GetSizeX() - (2*hmargin));
   }
-  
+
   // Remove old messages if needed
   Flush();
 }
