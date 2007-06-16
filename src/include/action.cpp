@@ -45,6 +45,7 @@ Action::Action (Action_t type, int value) : m_type(type)
   var.clear();
   Push(value);
   m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 Action::Action (Action_t type, double value) : m_type(type)
