@@ -34,7 +34,7 @@ MsgBox::MsgBox(const Rectanglei& rect, Font::font_size_t fsize, Font::font_style
 void MsgBox::Flush()
 {
   std::list<Text *>::const_reverse_iterator it ;
-  Text *last_visible_msg;
+  Text *last_visible_msg = NULL;
 
   int y = vmargin;
 
