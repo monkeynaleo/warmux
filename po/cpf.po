@@ -93,7 +93,7 @@ msgstr[1] "Marmaille %s la gagné %u points d'vie !"
 
 #: src/game/game_loop.cpp:647
 #, c-format
-msgid "%s is a psychopath, he has killed a member of %s team!"
+msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s l'est gazé ça !! Boug là, la kine son camarades (%s) !"
 
 #: src/game/game_loop.cpp:642
