@@ -90,7 +90,7 @@ msgstr[1] "%s har fået %u point ekstra energi!"
 
 #: src/game/game_loop.cpp:647
 #, c-format
-msgid "%s is a psychopath, he has killed a member of %s team!"
+msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er en psykopat; han dræbte en fra holdet %s!"
 
 #: src/game/game_loop.cpp:642

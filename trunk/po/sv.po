@@ -82,7 +82,7 @@ msgstr[1] "%s har vunnit %u energipoäng!"
 
 #: src/game/game_loop.cpp:647
 #, c-format
-msgid "%s is a psychopath, he has killed a member of %s team!"
+msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s är en psykopat, han har dödat en medlem av %s!"
 
 # what about female names?
