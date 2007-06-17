@@ -152,7 +152,16 @@ public:
   void SetTimestamp(uint timestamp);
   uint GetTimestamp();
 
-  void WritePacket(char* & packet, int & size);
+  int  GetSize() const
+  {
+    return 4  //Size of the type;
+           + 4 //Size of the timestamp
+           + 4 //Size of the number of variable
+           + int(var.size()) * 4;
+  }
+
+  void Write(char *packet) const;
+  void WritePacket(char* & packet, int & size) const;
   Action_t GetType() const;
 protected:
   Action_t m_type;

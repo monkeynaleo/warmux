@@ -127,17 +127,8 @@ uint Action::GetTimestamp()
   return m_timestamp;
 }
 
-// Convert the action to a packet
-void Action::WritePacket(char* &packet, int & size)
+void Action::Write(char *os) const
 {
-  size = 4  //Size of the type;
-        + 4 //Size of the timestamp
-        + 4 //Size of the number of variable
-        + int(var.size()) * 4;
-
-  packet = (char*)malloc(size);
-  char* os = packet;
-
   SDLNet_Write32(m_type, os);
   os += 4;
   SDLNet_Write32(m_timestamp, os);
@@ -146,11 +137,20 @@ void Action::WritePacket(char* &packet, int & size)
   SDLNet_Write32(param_size, os);
   os += 4;
 
-  for(std::list<Uint32>::iterator val = var.begin(); val!=var.end(); val++)
+  for(std::list<Uint32>::const_iterator val = var.begin(); val!=var.end(); val++)
   {
     SDLNet_Write32(*val, os);
     os += 4;
   }
+}
+
+// Convert the action to a packet
+void Action::WritePacket(char* &packet, int & size) const
+{
+  size = GetSize();
+  packet = (char*)malloc(size);
+
+  Write(packet);
 }
 
 //-------------  Add datas to the action  ----------------
