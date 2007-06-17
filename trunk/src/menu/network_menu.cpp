@@ -204,6 +204,24 @@ bool NetworkMenu::signal_ok()
 {
   if (Network::GetInstance()->IsClient())
   {
+    // Check the user have selected a team:
+    bool found = false;
+    for(std::vector<Team*>::iterator team = teams_list.playing_list.begin();
+		    team != teams_list.playing_list.end();
+		    team++)
+    {
+      if((*team)->IsLocal())
+      {
+        found = true;
+        break;
+      }
+    }
+    if(!found)
+    {
+      msg_box->NewMessage(_("You won't be able to play before selecting a team !"));
+      return false;
+    }
+
     // Wait for the server, and stay in the menu map / team can still be changed
     WaitingForServer();
 
