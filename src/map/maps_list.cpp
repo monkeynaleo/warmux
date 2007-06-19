@@ -288,14 +288,12 @@ int MapsList::FindMapById (const std::string &id)
 
 void MapsList::SelectMapByName (const std::string &nom)
 {
-  if(nom == "")
-    return 0;
-
   int index = FindMapById (nom);
 
   if (index == -1){
     index = 0;
-    std::cout << Format(_("! Map %s not found :-("), nom.c_str()) << std::endl;
+    if(nom != "")
+      std::cout << Format(_("! Map %s not found :-("), nom.c_str()) << std::endl;
   }
   SelectMapByIndex (index);
 }
