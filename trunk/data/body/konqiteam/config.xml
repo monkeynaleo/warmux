@@ -140,7 +140,7 @@
 <sprite name="arm-right2" type="arm-right">
 	<image file="arm2.png"/>
 	<anchor dx="6" dy="0"/>
-	<attached member_type="weapon" frame="*" dx="20" dy="5"/>
+	<attached member_type="weapon" frame="*" dx="0" dy="15"/>
 </sprite>
 
 <!-- ###### Legs ###### -->
