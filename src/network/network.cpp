@@ -74,6 +74,7 @@ NetworkServer * Network::GetInstanceServer()
 }
 
 Network::Network():
+  turn_master_player(false),
   state(NO_NETWORK),// useless value at beginning
   thread(NULL),
   socket_set(NULL),
@@ -332,11 +333,9 @@ Network::connection_state_t Network::ClientStart(const std::string &host,
     singleton = prev;
     delete net;
   } else if (prev != NULL) {
-
-    // that's ok
-    AppWormux::GetInstance()->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
     delete prev;
   }
+  AppWormux::GetInstance()->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
   return error;
 }
 
@@ -386,4 +385,15 @@ void Network::SendNetworkState() const
   Action a(Action::ACTION_NETWORK_CHANGE_STATE);
   a.Push(state);
   SendAction(&a);
+}
+
+void Network::SetTurnMaster(bool master)
+{
+  MSG_DEBUG("network.turn_master", "turn_master: %d", master); 
+  turn_master_player = master;
+}
+
+bool Network::IsTurnMaster() const
+{
+  return turn_master_player;
 }

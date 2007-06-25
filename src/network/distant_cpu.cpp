@@ -76,16 +76,16 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
 
 DistantComputer::~DistantComputer()
 {
-  if(version_checked)
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAdress()));
-  if(force_disconnect)
-    std::cerr << GetAdress() << " have been kicked" << std::endl;
+  if (version_checked)
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAddress()));
+  if (force_disconnect)
+    std::cerr << GetAddress() << " have been kicked" << std::endl;
 
   SDLNet_TCP_Close(sock);
   SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
 
-  if(Network::GetInstance()->IsConnected())
-  for(std::list<std::string>::iterator team = owned_teams.begin();
+  if (Network::GetInstance()->IsConnected())
+  for (std::list<std::string>::iterator team = owned_teams.begin();
       team != owned_teams.end();
       ++team)
   {
@@ -163,7 +163,7 @@ void DistantComputer::SendDatas(char* packet, int size_tmp)
   MSG_DEBUG("network","unlocked");
 }
 
-std::string DistantComputer::GetAdress()
+std::string DistantComputer::GetAddress()
 {
   IPaddress* ip = SDLNet_TCP_GetPeerAddress(sock);
   std::string address;

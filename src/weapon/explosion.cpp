@@ -36,37 +36,12 @@
 
 Profile *weapons_res_profile = NULL;
 
-// Network explosion defined below
-void ApplyExplosion_server (const Point2i &pos,
-		     const ExplosiveWeaponConfig &config,
-		     const std::string& son,
-		     bool fire_particle,
-		     ParticleEngine::ESmokeStyle smoke);
-
-void ApplyExplosion (const Point2i &pos,
-		     const ExplosiveWeaponConfig &config,
-		     const std::string& son,
-		     bool fire_particle,
-		     ParticleEngine::ESmokeStyle smoke
-		     )
-{
-  if(Network::GetInstance()->IsLocal())
-    ApplyExplosion_common(pos, config, son, fire_particle, smoke);
-  else
-  if(Network::GetInstance()->IsServer())
-    ApplyExplosion_server(pos, config, son, fire_particle, smoke);
-  else
-  if(Network::GetInstance()->IsClient())
-    return;
-  // client receives explosion via the action handler
-}
-
 void ApplyExplosion_common (const Point2i &pos,
-		     const ExplosiveWeaponConfig &config,
-		     const std::string& son,
-		     bool fire_particle,
-		     ParticleEngine::ESmokeStyle smoke
-		     )
+			    const ExplosiveWeaponConfig &config,
+			    const std::string& son,
+			    bool fire_particle,
+			    ParticleEngine::ESmokeStyle smoke
+			    )
 {
   MSG_DEBUG("explosion", "explosion range : %i\n", config.explosion_range);
 
@@ -185,7 +160,7 @@ void ApplyExplosion_common (const Point2i &pos,
      ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
 }
 
-void ApplyExplosion_server (const Point2i &pos,
+void ApplyExplosion_master (const Point2i &pos,
 			    const ExplosiveWeaponConfig &config,
 			    const std::string& son,
 			    bool fire_particle,
@@ -219,7 +194,7 @@ void ApplyExplosion_server (const Point2i &pos,
       // If the character is in the explosion range, apply damage on it !
       if (distance <= config.explosion_range || distance < config.blast_range)
       {
-        // cliens : Place characters
+        // clients : Place characters
         a_characters_info.StoreCharacter(team_no, char_no);
       }
     }
@@ -241,4 +216,18 @@ void ApplyExplosion_server (const Point2i &pos,
   action_handler->NewAction(a);
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
   Network::GetInstance()->SendAction(&a_sync_end);
+}
+
+
+void ApplyExplosion (const Point2i &pos,
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+		     ParticleEngine::ESmokeStyle smoke
+		     )
+{
+  if (Network::GetInstance()->IsLocal())
+    ApplyExplosion_common(pos, config, son, fire_particle, smoke);
+  else if (Network::GetInstance()->IsTurnMaster())
+    ApplyExplosion_master(pos, config, son, fire_particle, smoke);
 }

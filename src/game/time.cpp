@@ -48,6 +48,7 @@ bool Time::IsGamePaused() const {
 Time::Time(){
   is_game_paused = false;
   delta_t = 20;
+  current_time = 0;
   //max_time = 0;
   real_time_game_start = 0;
   real_time_pause_dt = 0;
