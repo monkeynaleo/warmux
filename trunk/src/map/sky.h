@@ -43,7 +43,7 @@ public:
 	Sky();
 	void Init();
 	void Reset();
-	void Draw();
+	void Draw(bool redraw_all);
 	void Free();
 };
 

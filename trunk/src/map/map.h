@@ -59,9 +59,9 @@ public:
   void Reset();
   void Refresh();
   void FreeMem();
-  void Draw();
+  void Draw(bool redraw_all = false);
   void DrawWater();
-  void DrawSky();
+  void DrawSky(bool redraw_all = false);
   void DrawAuthorName();
 
   // To manage the cache mechanism

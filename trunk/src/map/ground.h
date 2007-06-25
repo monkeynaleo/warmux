@@ -38,7 +38,7 @@ private:
 public:
   Ground();
   void Init();
-  void Draw();
+  void Draw(bool redraw_all);
   void Reset();
   void Free() { FreeMem(); }
 

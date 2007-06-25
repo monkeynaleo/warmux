@@ -51,11 +51,11 @@ void Sky::Free(){
 	image.Free();
 }
 
-void Sky::Draw()
+void Sky::Draw(bool redraw_all)
 {
-  if( lastPos != camera.GetPosition() ){
-	lastPos = camera.GetPosition();
-	RedrawParticle(camera);
+  if( lastPos != camera.GetPosition() || redraw_all){
+    lastPos = camera.GetPosition();
+    RedrawParticle(camera);
     return;
   }
   

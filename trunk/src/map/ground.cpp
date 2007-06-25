@@ -227,7 +227,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   return false;
 }
 
-void Ground::Draw()
+void Ground::Draw(bool redraw_all)
 {
   CheckEmptyTiles();
   AppWormux * app = AppWormux::GetInstance();
@@ -246,7 +246,7 @@ void Ground::Draw()
     app->video.window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
   }
 
-  if( lastPos != cPos ){
+  if( lastPos != cPos || redraw_all){
     lastPos = cPos;
     DrawTile();
     return;
