@@ -129,15 +129,12 @@ bool Keyboard::MoveCamera(const Key_t &key)
   switch(key) {
   case KEY_MOVE_RIGHT:
     camera.SetXY(Point2i(SCROLL_KEYBOARD,0));
-    r = true;
     break;
   case KEY_MOVE_LEFT:
     camera.SetXY(Point2i(-SCROLL_KEYBOARD,0));
-    r = true;
     break;
   case KEY_UP:
     camera.SetXY(Point2i(0,-SCROLL_KEYBOARD));
-    r = true;
     break;
   case KEY_DOWN:
     camera.SetXY(Point2i(0,SCROLL_KEYBOARD));
