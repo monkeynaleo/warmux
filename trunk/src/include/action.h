@@ -149,8 +149,7 @@ public:
   void RetrieveCharacter();
 
   // Timestamp handling
-  void SetTimestamp(uint timestamp);
-  uint GetTimestamp();
+  uint GetTimestamp() const;
 
   int  GetSize() const
   {

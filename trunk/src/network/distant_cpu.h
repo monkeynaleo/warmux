@@ -65,7 +65,7 @@ public:
   int ReceiveDatas(char* & buf);
   void SendDatas(char* paket, int size);
 
-  std::string GetAdress();
+  std::string GetAddress();
   std::string nickname;
 
   void ManageTeam(Action* team);

@@ -68,7 +68,8 @@ private:
   static bool sdlnet_initialized;
 
   static bool stop_thread;
-
+  bool turn_master_player;
+  
 protected:
   network_state_t state;
 
@@ -130,6 +131,9 @@ public:
   void SetState(Network::network_state_t state);
   Network::network_state_t GetState() const;
   void SendNetworkState() const;
+
+  void SetTurnMaster(bool master);
+  bool IsTurnMaster() const;
 };
 
 //-----------------------------------------------------------------------------

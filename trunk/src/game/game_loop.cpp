@@ -338,6 +338,7 @@ void GameLoop::EndOfGame()
   uint time_of_next_frame = SDL_GetTicks();
   uint previous_time_frame = 0;
 
+  Network::GetInstance()->SetTurnMaster(true);
   SetState(END_TURN);
   duration = GameMode::GetInstance()->duration_exchange_player + 2;
   GameMessages::GetInstance()->Add (_("And the winner is..."));
@@ -455,7 +456,7 @@ void GameLoop::__SetState_PLAYING()
   Interface::GetInstance()->EnableDisplayTimer(true);
   pause_seconde = Time::GetInstance()->Read();
 
-  if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
+  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
     wind.ChooseRandomVal();
 
   character_already_chosen = false;
@@ -467,7 +468,7 @@ void GameLoop::__SetState_PLAYING()
   // Select the next team
   ASSERT (!Game::GetInstance()->IsGameFinished());
 
-  if (Network::GetInstance()->IsLocal() || Network::GetInstance()->IsServer())
+  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
     {
       teams_list.NextTeam();
 
@@ -477,7 +478,9 @@ void GameLoop::__SetState_PLAYING()
 	  ActiveTeam().NextCharacter();
 	}
 
-      if ( Network::GetInstance()->IsServer() )
+      camera.FollowObject (&ActiveCharacter(), true, true);
+
+      if ( Network::GetInstance()->IsTurnMaster() )
 	{
 	  // Tell to clients which character in the team is now playing
 	  Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
@@ -489,11 +492,15 @@ void GameLoop::__SetState_PLAYING()
 	  printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
 	  printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
 	  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
-
 	}
+
+      // Are we turn master for next turn ?
+      if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+	Network::GetInstance()->SetTurnMaster(true);
+      else 
+	Network::GetInstance()->SetTurnMaster(false);
     }
 
-  camera.FollowObject (&ActiveCharacter(), true, true);
   give_objbox = true; //hack make it so no more than one objbox per turn
 
   // Applying Disease damage and Death mode.
@@ -533,13 +540,6 @@ void GameLoop::Really_SetState(game_loop_state_t new_state)
   {
   // Begining of a new turn:
   case PLAYING:  
-
-    if (Network::GetInstance()->IsServer()) {
-      // Send information about energy and position of every characters
-      // A character can be hurted during the END_OF_TURN...
-      SyncCharacters();
-    }
-
     __SetState_PLAYING();
     break;
 
@@ -551,20 +551,24 @@ void GameLoop::Really_SetState(game_loop_state_t new_state)
   // Little pause at the end of the turn
   case END_TURN:
     __SetState_END_TURN();
-
-    if (Network::GetInstance()->IsServer())
-      SyncCharacters(); // Send information about energy and position of every characters
     break;
   }
 }
 
 void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
 {
-  if (!Network::GetInstance()->IsServer() && !Network::GetInstance()->IsLocal())
+  if (begin_game && Network::GetInstance()->IsServer())
+    Network::GetInstance()->SetTurnMaster(true);
+
+  if (!Network::GetInstance()->IsTurnMaster() && !Network::GetInstance()->IsLocal())
     return;
 
   // already in good state, nothing to do
   if ((state == new_state) && !begin_game) return;
+
+  // Send information about energy and position of every characters
+  if (Network::GetInstance()->IsTurnMaster())
+    SyncCharacters();
 
   Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE, new_state);
   ActionHandler::GetInstance()->NewAction(a);

@@ -31,21 +31,19 @@
 #include "tool/point.h"
 #include "tool/resource_manager.h"
 
-void ApplyExplosion (const Point2i &pos,
-		     const ExplosiveWeaponConfig &config,
-		     const std::string& son="weapon/explosion",
-		     bool fire_particle = true,
-           ParticleEngine::ESmokeStyle smoke = ParticleEngine::BigESmoke
-		     );
+void ApplyExplosion(const Point2i &pos,
+		    const ExplosiveWeaponConfig &config,
+		    const std::string& son="weapon/explosion",
+		    bool fire_particle = true,
+		    ParticleEngine::ESmokeStyle smoke = ParticleEngine::BigESmoke
+	);
 
 void ApplyExplosion_common (const Point2i &pos,
-		     const ExplosiveWeaponConfig &config,
-		     const std::string& son,
-		     bool fire_particle,
-           ParticleEngine::ESmokeStyle smoke
-		     );
-
-//void UpdateStrengthBar(double strength);
+			    const ExplosiveWeaponConfig &config,
+			    const std::string& son,
+			    bool fire_particle,
+			    ParticleEngine::ESmokeStyle smoke
+	);
 
 extern Profile *weapons_res_profile; 
 

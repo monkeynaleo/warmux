@@ -23,19 +23,29 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include "action_handler.h"
-#include "tool/debug.h"
-#include "game/time.h"
 #include "character/character.h"
+#include "game/game.h"
+#include "game/time.h"
 #include "network/distant_cpu.h"
-#include "team/teams_list.h"
 #include "network/network.h"
+#include "team/teams_list.h"
+#include "tool/debug.h"
 //-----------------------------------------------------------------------------
+
+static inline uint TimeStamp()
+{
+  if (Game::GetInstance()->IsGameLaunched())
+    return Time::GetInstance()->Read();
+
+  return 0;
+}
+
 // Action without parameter
 Action::Action (Action_t type)
 {
   var.clear();
   m_type = type;
-  m_timestamp = Time::GetInstance()->Read();
+  m_timestamp = TimeStamp();
   creator = NULL;
 }
 
@@ -44,7 +54,7 @@ Action::Action (Action_t type, int value) : m_type(type)
 {
   var.clear();
   Push(value);
-  m_timestamp = Time::GetInstance()->Read();
+  m_timestamp = TimeStamp();
   creator = NULL;
 }
 
@@ -52,7 +62,7 @@ Action::Action (Action_t type, double value) : m_type(type)
 {
   var.clear();
   Push(value);
-  m_timestamp = Time::GetInstance()->Read();
+  m_timestamp = TimeStamp();
   creator = NULL;
 }
 
@@ -60,7 +70,7 @@ Action::Action (Action_t type, const std::string& value) : m_type(type)
 {
   var.clear();
   Push(value);
-  m_timestamp = Time::GetInstance()->Read();
+  m_timestamp = TimeStamp();
   creator = NULL;
 }
 
@@ -69,7 +79,7 @@ Action::Action (Action_t type, double value1, double value2) : m_type(type)
   var.clear();
   Push(value1);
   Push(value2);
-  m_timestamp = Time::GetInstance()->Read();
+  m_timestamp = TimeStamp();
   creator = NULL;
 }
 
@@ -78,7 +88,7 @@ Action::Action (Action_t type, double value1, int value2) : m_type(type)
   var.clear();
   Push(value1);
   Push(value2);
-  m_timestamp = Time::GetInstance()->Read();
+  m_timestamp = TimeStamp();
   creator = NULL;
 }
 
@@ -117,12 +127,7 @@ bool Action::IsEmpty() const
   return var.empty();
 }
 
-void Action::SetTimestamp(uint timestamp)
-{
-  m_timestamp = timestamp;
-}
-
-uint Action::GetTimestamp()
+uint Action::GetTimestamp() const
 {
   return m_timestamp;
 }
@@ -161,7 +166,6 @@ void Action::Push(int val)
   var.push_back(tmp);
   MSG_DEBUG( "action", " (%s) Pushing int : %i",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
-
 }
 
 void Action::Push(double val)
