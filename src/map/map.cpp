@@ -149,20 +149,20 @@ void Map::MergeSprite(const Point2i pos, Sprite * spr)
   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
-void Map::DrawSky()
+void Map::DrawSky(bool redraw_all)
 {
   SwitchDrawingCache();
   SwitchDrawingCacheParticles();
 
   OptimizeCache(*to_redraw_now);
 
-  sky.Draw();
+  sky.Draw(redraw_all);
 }
 
 void Map::DrawWater()
 { water.Draw(); }
 
-void Map::Draw()
+void Map::Draw(bool redraw_all)
 {
   std::list<Rectanglei> *tmp = to_redraw;
   to_redraw_particles->clear();
@@ -173,7 +173,7 @@ void Map::Draw()
 
   OptimizeCache(*to_redraw_now);
 
-  ground.Draw();
+  ground.Draw(redraw_all);
 }
 
 bool Map::IsOutsideWorldX(int x) const{

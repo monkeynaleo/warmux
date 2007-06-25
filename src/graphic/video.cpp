@@ -23,6 +23,10 @@
 #include <SDL_endian.h>
 #include <SDL_image.h>
 #include "game/config.h"
+#ifdef WIN32
+#include "game/game.h"
+#include "map/map.h"
+#endif
 #include "tool/error.h"
 #include "tool/i18n.h"
 #include "include/app.h"
@@ -185,8 +189,16 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
 
 void Video::ToggleFullscreen()
 {
+#ifndef WIN32
   SDL_WM_ToggleFullScreen( window.GetSurface() );
   fullscreen = !fullscreen;
+#else
+  if (Game::GetInstance()->IsGameLaunched()) {
+    SetConfig(window.GetWidth(), window.GetHeight(), !fullscreen);
+    world.DrawSky(true);
+    world.Draw(true);
+  }
+#endif
 }
 
 void Video::SetWindowCaption(std::string caption){
