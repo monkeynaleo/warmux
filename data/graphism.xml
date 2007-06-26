@@ -214,7 +214,7 @@
   </sprite>
 
   <surface name="water" file="gfx/water.png" />
-  <surface name="fond_eau" file="gfx/water_bottom.png" />
+  <surface name="water_bottom" file="gfx/water_bottom.png" />
 
 </section>
 
