@@ -43,4 +43,9 @@ int Rad2Deg(double rad);
 double AbsReel (const double x);
 bool EgalZero (const double x);
 
+template <class T> T max(T a, T b)
+{
+  return a > b ? a : b;
+};
+
 #endif

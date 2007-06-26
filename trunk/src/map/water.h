@@ -40,6 +40,8 @@ private:
   int height[pattern_width];
   Surface surface;
   Surface pattern;
+  Surface bottom;
+  Surface wpattern;
 public:
   void Init();
   void Reset();
