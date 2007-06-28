@@ -61,7 +61,7 @@ void Water::Init(){
    bottom = resource_manager.LoadImage(res, "gfx/water_bottom");
    bottom.SetAlpha(0, 0);
 
-   pattern_height = surface.GetHeight() + bottom.GetHeight();
+   pattern_height = bottom.GetHeight();
 
    pattern.NewSurface(Point2i(pattern_width, pattern_height),
                       SDL_SWSURFACE|SDL_SRCALPHA, true);
