@@ -30,6 +30,11 @@
 #include "include/action.h"
 #include "include/base.h"
 //-----------------------------------------------------------------------------
+#ifdef DEBUG
+// Use this debug to store network communication to a file
+//#define LOG_NETWORK
+#endif
+
 const std::string WORMUX_NETWORK_PORT = "3826";
 const uint WORMUX_NETWORK_PORT_INT = 3826;
 
