@@ -100,7 +100,7 @@ Action::Action (const char *is, DistantComputer* _creator)
   var.clear();
   m_type = (Action_t)SDLNet_Read32(is);
   is += 4;
-  m_timestamp = (Action_t)SDLNet_Read32(is);
+  m_timestamp = (uint)SDLNet_Read32(is);
   is += 4;
   int m_lenght = SDLNet_Read32(is);
   is += 4;
