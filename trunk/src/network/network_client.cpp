@@ -36,7 +36,7 @@
 
 NetworkClient::NetworkClient()
 {
-#if defined(DEBUG) && not defined(WIN32)
+#if defined(DEBUG) && not defined(WIN32) && defined(LOG_NETWORK)
   fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
   fout = open("./network_client.out", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
 #endif
