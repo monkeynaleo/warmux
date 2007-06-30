@@ -340,6 +340,7 @@ void Character::Die()
     SetEnergy(0);
 
     jukebox.Play(GetTeam().GetSoundProfile(),"death");
+    body->SetRotation(0.0);
     SetClothe("dead");
     SetMovement("dead");
 
