@@ -378,6 +378,6 @@ void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
 void ResultsMenu::Draw(const Point2i &mousePosition)
 {
   if (index == -1)
-    SetResult(0);
+    SetResult(results.size()-1);
 }
 
