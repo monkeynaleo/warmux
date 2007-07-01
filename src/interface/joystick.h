@@ -16,26 +16,26 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Keyboard management
+ * Joystick management
  *****************************************************************************/
 
-#ifndef KEYBOARD_H
-#define KEYBOARD_H
+#ifndef JOYSTICK_H
+#define JOYSTICK_H
 //-----------------------------------------------------------------------------
 #include "interface/man_machine_interface.h"
 //-----------------------------------------------------------------------------
 
-class Keyboard : public ManMachineInterface
+class Joystick : public ManMachineInterface
 {
 private:
 
-  Keyboard();
+  Joystick();
   void SetDefaultConfig();
-  static Keyboard * singleton;
+  static Joystick * singleton;
 
 public:
-  static Keyboard * GetInstance();
+  static Joystick * GetInstance();
 };
 
 //-----------------------------------------------------------------------------
-#endif /* KEYBOARD_H */
+#endif /* JOYSTICK_H */

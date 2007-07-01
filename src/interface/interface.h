@@ -39,9 +39,10 @@ class Interface
 
 public:
   Character *character_under_cursor;
-  Weapon* weapon_under_cursor;
+  Weapon *weapon_under_cursor;
   WeaponsMenu weapons_menu;
-  Team * tmp_team;
+  Team *tmp_team;
+  Polygon * interface;
 
  private:
    /* If you need this, implement it (correctly)*/

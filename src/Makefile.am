@@ -68,8 +68,10 @@ wormux_SOURCES = \
         interface/cursor.cpp interface/cursor.h \
         interface/game_msg.cpp interface/game_msg.h \
         interface/interface.cpp interface/interface.h \
+        interface/joystick.cpp interface/joystick.h \
         interface/keyboard.cpp interface/keyboard.h \
         interface/loading_screen.cpp interface/loading_screen.h \
+        interface/man_machine_interface.cpp interface/man_machine_interface.h \
         interface/mouse.cpp interface/mouse.h \
         interface/weapon_menu.cpp interface/weapon_menu.h \
         map/camera.cpp map/camera.h \

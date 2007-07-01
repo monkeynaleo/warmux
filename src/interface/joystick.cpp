@@ -16,26 +16,32 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Keyboard management
+ * Joystick management.
  *****************************************************************************/
 
-#ifndef KEYBOARD_H
-#define KEYBOARD_H
-//-----------------------------------------------------------------------------
-#include "interface/man_machine_interface.h"
-//-----------------------------------------------------------------------------
+#include "joystick.h"
 
-class Keyboard : public ManMachineInterface
+Joystick * Joystick::singleton = NULL;
+
+Joystick * Joystick::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Joystick();
+  }
+  return singleton;
+}
+
+Joystick::Joystick() : ManMachineInterface()
 {
-private:
+  SetDefaultConfig();
 
-  Keyboard();
-  void SetDefaultConfig();
-  static Keyboard * singleton;
+  // Registring SDL event
+  RegisterEvent(SDL_JOYAXISMOTION);
+  RegisterEvent(SDL_JOYBALLMOTION);
+  RegisterEvent(SDL_JOYHATMOTION);
+  RegisterEvent(SDL_JOYBUTTONDOWN);
+  RegisterEvent(SDL_JOYBUTTONUP);
+}
 
-public:
-  static Keyboard * GetInstance();
-};
-
-//-----------------------------------------------------------------------------
-#endif /* KEYBOARD_H */
+void Joystick::SetDefaultConfig()
+{
+}
