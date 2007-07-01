@@ -214,7 +214,7 @@ void Game::DisplayPause()
 
   //Pause screen
   question.Set ("", false, 0, "interface/pause_screen");
-  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(Keyboard::KEY_PAUSE),
+  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(ManMachineInterface::KEY_PAUSE),
 		      1
 		      );
   AskQuestion(question, false);
