@@ -590,7 +590,6 @@ void Action_Explosion (Action *a)
 void ActionHandler::ExecActions()
 {
   Action * a;
-  std::list<Action*> to_remove;
   std::list<Action*>::iterator it;
   ASSERT(mutex!=NULL);
   for(it = queue.begin(); it != queue.end() ; ++it)
@@ -605,14 +604,7 @@ void ActionHandler::ExecActions()
     }
     SDL_UnlockMutex(mutex);
     Exec (a);
-    to_remove.push_back(a);
-  }
-  while(to_remove.size() != 0)
-  {
-    a = to_remove.front();
-    to_remove.pop_front();
-    queue.remove(a);
-    delete(a);
+    it = queue.erase(it);
   }
 }
 
