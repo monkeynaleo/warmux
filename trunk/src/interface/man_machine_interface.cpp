@@ -129,7 +129,7 @@ bool ManMachineInterface::MoveCamera(const Key_t &key)
 }
 
 // Handle a pressed key
-void ManMachineInterface::HandleKeyPressed (const Key_t &key)
+void ManMachineInterface::HandleKeyPressed(const Key_t &key)
 {
   SDLMod mod = SDL_GetModState();
   if (mod & KMOD_CTRL) {
@@ -217,7 +217,7 @@ void ManMachineInterface::HandleKeyPressed (const Key_t &key)
 }
 
 // Handle a released key
-void ManMachineInterface::HandleKeyReleased (const Key_t &key)
+void ManMachineInterface::HandleKeyReleased(const Key_t &key)
 {
   PressedKeys[key] = false;
   // Here we manage only actions which are activated on KEY_RELEASED event.
