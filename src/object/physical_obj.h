@@ -58,6 +58,7 @@ private:
   Point2i m_rebound_position;
 protected:
   PhysicalObj* m_overlapping_object;
+  uint m_minimum_overlapse_time;
   bool m_ignore_movements;
 
   virtual void CheckOverlapping();
@@ -130,7 +131,8 @@ public:
   void SetCollisionModel(bool goes_through_wall,
 			 bool collides_with_characters,
 			 bool collides_with_objects);
-  void SetOverlappingObject(PhysicalObj* obj);
+  void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
+  const PhysicalObj* GetOverlappingObject() const;
   virtual bool IsOverlapping(const PhysicalObj* obj) const;
 
   bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;

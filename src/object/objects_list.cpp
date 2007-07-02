@@ -85,11 +85,14 @@ void ObjectsList::Refresh()
     (*object)->UpdatePosition();
     (*object)->Refresh();
     if((*object)->IsGhost()) {
+      // Stop following this object, remove from overlapse reference then delete it.
       camera.StopFollowingObj(*object);
+      RemoveOverlappedObjectReference(*object);
       delete (*object);
-      object = lst_objects.erase(object);
-    } else
+      object = erase(object);
+    } else {
       object++;
+    }
   }
 }
 
@@ -135,3 +138,38 @@ void ObjectsList::FreeMem()
   clear();
 }
 
+//-----------------------------------------------------------------------------
+
+void ObjectsList::RemoveObject(PhysicalObj * obj)
+{
+  remove(obj);
+  RemoveOverlappedObjectReference(obj);
+}
+
+//-----------------------------------------------------------------------------
+
+void ObjectsList::AddOverlappedObject(PhysicalObj * obj)
+{
+  overlapped_objects.push_back(obj);
+}
+
+//-----------------------------------------------------------------------------
+
+void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
+{
+  for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
+    if((*it)->GetOverlappingObject() == obj) {
+      MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" in \"%s\"",
+                obj->GetName().c_str(), (*it)->GetName().c_str());
+      (*it)->SetOverlappingObject(NULL);
+      it = overlapped_objects.erase(it);
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------
+
+void ObjectsList::RemoveOverlappedObject(PhysicalObj * obj)
+{
+  overlapped_objects.remove(obj);
+}
