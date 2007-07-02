@@ -59,6 +59,16 @@ TeamsList::~TeamsList()
 
 void TeamsList::NextTeam ()
 {
+  Team* next = GetNextTeam();
+  teams_list.SetActive (next->GetId());
+  Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
+  Network::GetInstance()->SendAction(&a);
+}
+
+//-----------------------------------------------------------------------------
+
+Team* TeamsList::GetNextTeam()
+{
   // Next team
   std::vector<Team*>::iterator it=active_team;
   do
@@ -66,12 +76,9 @@ void TeamsList::NextTeam ()
     ++it;
     if (it == playing_list.end()) it = playing_list.begin();
   } while ((**it).NbAliveCharacter() == 0);
-
-  teams_list.SetActive ((**it).GetId());
-
-  Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, (**it).GetId());
-  Network::GetInstance()->SendAction(&a);
+  return (*it);
 }
+
 
 //-----------------------------------------------------------------------------
 

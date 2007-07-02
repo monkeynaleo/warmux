@@ -46,6 +46,7 @@ public:
   ~TeamsList();
   void LoadList();
   void NextTeam();
+  Team* GetNextTeam();
   Team& ActiveTeam();
   void LoadGamingData();
   void UnloadGamingData();
