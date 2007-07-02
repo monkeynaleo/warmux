@@ -84,9 +84,11 @@ void ObjectsList::Refresh()
   {
     (*object)->UpdatePosition();
     (*object)->Refresh();
-    if((*object)->IsGhost())
+    if((*object)->IsGhost()) {
+      camera.StopFollowingObj(*object);
+      delete (*object);
       object = lst_objects.erase(object);
-    else
+    } else
       object++;
   }
 }
