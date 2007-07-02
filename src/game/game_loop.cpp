@@ -144,9 +144,11 @@ void GameLoop::RefreshInput()
       Joystick::GetInstance()->HandleKeyEvent(event);
   }
 
-  // Keyboard and mouse refresh
+  // Keyboard, Joystick and mouse refresh
   Mouse::GetInstance()->Refresh();
   Keyboard::GetInstance()->Refresh();
+  if(refresh_joystick)
+    Joystick::GetInstance()->Refresh();
   AIengine::GetInstance()->Refresh();
 
   // Execute action

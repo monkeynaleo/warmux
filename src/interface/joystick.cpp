@@ -20,9 +20,6 @@
  *****************************************************************************/
 
 #include "joystick.h"
-#include "game_msg.h"
-#include <string>
-#include <sstream>
 
 Joystick * Joystick::singleton = NULL;
 
@@ -36,7 +33,9 @@ Joystick * Joystick::GetInstance() {
 Joystick::Joystick() :
   ManMachineInterface(),
   previous_x_value(0),
-  previous_y_value(0)
+  previous_y_value(0),
+  previous_x_axis(KEY_NONE),
+  previous_y_axis(KEY_NONE)
 {
   SetDefaultConfig();
 
@@ -56,6 +55,9 @@ void Joystick::SetDefaultConfig()
   SetKeyAction(i++, ManMachineInterface::KEY_HIGH_JUMP);
   SetKeyAction(i++, ManMachineInterface::KEY_BACK_JUMP);
   SetKeyAction(i++, ManMachineInterface::KEY_NEXT_CHARACTER);
+  SetKeyAction(i++, ManMachineInterface::KEY_CHANGE_WEAPON);
+  SetKeyAction(i++, ManMachineInterface::KEY_WEAPON_LESS);
+  SetKeyAction(i++, ManMachineInterface::KEY_WEAPON_MORE);
 }
 
 int Joystick::GetNumberOfJoystick()
@@ -65,7 +67,6 @@ int Joystick::GetNumberOfJoystick()
 
 void Joystick::HandleKeyEvent(const SDL_Event& event)
 {
-  std::ostringstream msg;
   // Not a registred event
   if(!IsRegistredEvent(event.type))
     return;
@@ -92,10 +93,9 @@ void Joystick::HandleKeyEvent(const SDL_Event& event)
     }
 
   if(event_type == X_AXIS_MOTION) {
-    msg << "X axis - " << event.jaxis.value;
-    GameMessages::GetInstance()->Add(msg.str());
     if(event.jaxis.value > -100 && event.jaxis.value < 100) {
-      HandleKeyReleased(previous_x_axis);
+      if(previous_x_axis != KEY_NONE)
+        HandleKeyReleased(previous_x_axis);
     } else {
       if(event.jaxis.value > 0)
         previous_x_axis = KEY_MOVE_RIGHT;
@@ -105,15 +105,14 @@ void Joystick::HandleKeyEvent(const SDL_Event& event)
     }
     return;
   } else if(event_type == Y_AXIS_MOTION) {
-    msg << "Y axis - " << event.jaxis.value;
-    GameMessages::GetInstance()->Add(msg.str());
     if(event.jaxis.value > -100 && event.jaxis.value < 100) {
-      HandleKeyReleased(previous_y_axis);
+      if(previous_y_axis != KEY_NONE)
+        HandleKeyReleased(previous_y_axis);
     } else {
       if(event.jaxis.value > 0)
-        previous_y_axis = KEY_UP;
-      else
         previous_y_axis = KEY_DOWN;
+      else
+        previous_y_axis = KEY_UP;
       HandleKeyPressed(previous_y_axis);
     }
     return;
