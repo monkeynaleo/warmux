@@ -103,13 +103,14 @@ WeaponProjectile * Dynamite::GetProjectileInstance()
 bool Dynamite::p_Shoot ()
 {
   projectile->Shoot(0);
-
   // add the character speed
   if(ActiveCharacter().GetDirection() == 1)
     projectile->SetSpeed(3.0, -M_PI_4);
   else
     projectile->SetSpeed(3.0, -3.0 * M_PI_4);
 
+  projectile = NULL;
+  ReloadLauncher();
   return true;
 }
 

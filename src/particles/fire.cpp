@@ -24,7 +24,6 @@
 #include "game/time.h"
 #include "tool/random.h"
 #include "weapon/explosion.h"
-#include "map/camera.h"
 
 const uint living_time = 5000;
 const uint dig_ground_time = 1000;
