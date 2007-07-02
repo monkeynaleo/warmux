@@ -56,6 +56,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_rebound_position(-1,-1),
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object(NULL),
+  m_minimum_overlapse_time(0),
   m_ignore_movements(false),
   m_name(name),
   m_test_left(0),
@@ -161,14 +162,33 @@ int PhysicalObj::GetHeight() const{
 }
 
 Point2i PhysicalObj::GetSize() const{
-	return Point2i(m_width, m_height);
+  return Point2i(m_width, m_height);
 }
 
-void PhysicalObj::SetOverlappingObject(PhysicalObj* obj)
+void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
 {
-  m_overlapping_object = obj;
-  MSG_DEBUG( "physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore", GetName().c_str(), obj->GetName().c_str());
+  m_minimum_overlapse_time = 0;
+  if(obj != NULL) {
+    m_overlapping_object = obj;
+    lst_objects.AddOverlappedObject(this);
+    MSG_DEBUG("physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore",
+              GetName().c_str(), obj->GetName().c_str());
+  } else {
+    if(m_overlapping_object != NULL) {
+      m_overlapping_object = NULL;
+      lst_objects.RemoveOverlappedObject(this);
+      MSG_DEBUG( "physic.overlapping", "clearing overlapping object in \"%s\"", GetName().c_str());
+    }
+    return;
+  }
+  if(timeout > 0)
+    m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
   CheckOverlapping();
+}
+
+const PhysicalObj* PhysicalObj::GetOverlappingObject() const
+{
+  return m_overlapping_object;
 }
 
 void PhysicalObj::CheckOverlapping()
@@ -180,7 +200,7 @@ void PhysicalObj::CheckOverlapping()
   if (!m_overlapping_object->GetTestRect().Intersect( GetTestRect() ))
   {
     MSG_DEBUG( "physic.overlapping", "\"%s\" just stopped overlapping with \"%s\"", GetName().c_str(), m_overlapping_object->GetName().c_str());
-    m_overlapping_object = NULL;
+    SetOverlappingObject(NULL);
   }
   else
   {
@@ -472,7 +492,7 @@ void PhysicalObj::Init()
   if (m_alive != ALIVE)
     MSG_DEBUG( "physic.state", "%s - Init.", m_name.c_str());
   m_alive = ALIVE;
-  m_overlapping_object = NULL;
+  SetOverlappingObject(NULL);
   StopMoving();
 }
 

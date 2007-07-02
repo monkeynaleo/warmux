@@ -136,7 +136,7 @@ void WeaponProjectile::Shoot(double strength)
 
   // Set the initial position.
   SetXY(launcher->GetGunHolePosition());
-  SetOverlappingObject(&ActiveCharacter());
+  SetOverlappingObject(&ActiveCharacter(), 100);
 
   // Set the initial speed.
   double angle = ActiveCharacter().GetFiringAngle();

@@ -46,26 +46,31 @@
 class ObjectsList : public std::list<PhysicalObj*>
 {
   public:
-    inline void RemoveObject(PhysicalObj * obj) { remove(obj);};
     typedef std::list<PhysicalObj*>::iterator iterator;
-
+    std::list<PhysicalObj*> overlapped_objects;
   public:
     ~ObjectsList();
     inline void AddObject(PhysicalObj * obj) { push_back(obj);};
 
-  // Call the Refresh method of all the objects
+    // Call the Refresh method of all the objects
     void Refresh();
-  // Call the Draw method of all the objects
+    // Call the Draw method of all the objects
     void Draw();
 
     bool AllReady();
 
-  // Place mines randomly on the map
+    // Place mines randomly on the map
     void PlaceMines();
-  // Place barrels randomly on the map
+    // Place barrels randomly on the map
     void PlaceBarrels();
 
     void FreeMem();
+
+    // Overlapse handling
+    inline void RemoveObject(PhysicalObj * obj);
+    void AddOverlappedObject(PhysicalObj * obj);
+    void RemoveOverlappedObjectReference(const PhysicalObj * obj);
+    void RemoveOverlappedObject(PhysicalObj * obj);
 };
 
 extern ObjectsList lst_objects;
