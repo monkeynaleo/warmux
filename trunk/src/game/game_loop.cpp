@@ -38,6 +38,7 @@
 #include "interface/game_msg.h"
 #include "interface/interface.h"
 #include "interface/keyboard.h"
+#include "interface/joystick.h"
 #include "interface/loading_screen.h"
 #include "interface/mouse.h"
 #include "map/camera.h"
@@ -117,7 +118,7 @@ void GameLoop::RefreshInput()
 {
   // Poll and treat keyboard and mouse events
   SDL_Event event;
-
+  bool refresh_joystick =  Joystick::GetInstance()->GetNumberOfJoystick() > 0;
   while(SDL_PollEvent(&event)) {
     if ( event.type == SDL_QUIT) {
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
@@ -138,6 +139,9 @@ void GameLoop::RefreshInput()
 
     // Keyboard event
     Keyboard::GetInstance()->HandleKeyEvent(event);
+    // Joystick event
+    if(refresh_joystick)
+      Joystick::GetInstance()->HandleKeyEvent(event);
   }
 
   // Keyboard and mouse refresh

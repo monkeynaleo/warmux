@@ -35,6 +35,7 @@ private:
 
 public:
   static Keyboard * GetInstance();
+  void HandleKeyEvent(const SDL_Event& event);
 };
 
 //-----------------------------------------------------------------------------

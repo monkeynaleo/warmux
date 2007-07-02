@@ -31,6 +31,7 @@
 #include "include/app.h"
 #include "interface/cursor.h"
 #include "interface/keyboard.h"
+#include "interface/joystick.h"
 #include "interface/game_msg.h"
 #include "interface/mouse.h"
 #include "map/camera.h"
@@ -117,6 +118,8 @@ void Game::Start()
   bool end = false;
   std::string err_msg;
   want_end_of_game = false;
+  Keyboard::GetInstance()->Reset();
+  Joystick::GetInstance()->Reset();
 
   try
   {
@@ -143,8 +146,9 @@ void Game::Start()
       if (!end)
       {
         world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
-	Keyboard::GetInstance()->Reset();
-	want_end_of_game = false;
+        Keyboard::GetInstance()->Reset();
+        Joystick::GetInstance()->Reset();
+        want_end_of_game = false;
       }
 
     } while (!end);

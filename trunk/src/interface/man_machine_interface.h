@@ -45,7 +45,7 @@ public:
     KEY_WEAPON_4,    KEY_WEAPON_5,                KEY_WEAPON_6,
     KEY_WEAPON_7,    KEY_WEAPON_8,                KEY_WEAPON_9,
     KEY_WEAPON_LESS, KEY_WEAPON_MORE,
-    KEY_NEXT_CHARACTER,
+    KEY_NEXT_CHARACTER, KEY_NONE
   } Key_t;
 
 protected:
@@ -54,7 +54,9 @@ protected:
   {
     KEY_PRESSED,
     KEY_RELEASED,
-    KEY_REFRESH
+    KEY_REFRESH,
+    X_AXIS_MOTION,
+    Y_AXIS_MOTION
   } Key_Event_t;
 
   ManMachineInterface();
@@ -67,14 +69,14 @@ protected:
 
   void RegisterEvent(uint8 event_type);
   bool IsRegistredEvent(uint8 event_type);
-  void HandleKeyPressed (const Key_t &action_key);
-  void HandleKeyReleased (const Key_t &action_key);
+  void HandleKeyPressed(const Key_t &action_key);
+  void HandleKeyReleased(const Key_t &action_key);
 
   void SetKeyAction(int key, Key_t at);
 
 public:
-  void HandleKeyEvent(const SDL_Event& event) ;
-  void Reset();
+  virtual void HandleKeyEvent(const SDL_Event& event) = 0;
+  virtual void Reset();
 
   // Refresh keys 
   void Refresh();
