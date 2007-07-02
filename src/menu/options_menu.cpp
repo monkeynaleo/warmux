@@ -74,7 +74,7 @@ OptionMenu::OptionMenu() :
 
   opt_max_fps = new SpinButtonBig(_("Maximum FPS"), stdRect,
 			       50, 5,
-			       20, 120);
+			       20, 50);
   bottom_graphic_options->AddWidget(opt_max_fps);
 
   lbox_video_mode = new ListBoxWithLabel(_("Resolution"), stdRect );
