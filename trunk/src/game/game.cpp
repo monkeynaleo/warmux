@@ -144,7 +144,6 @@ void Game::Start()
       {
         world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
 	Keyboard::GetInstance()->Reset();
-	ActiveCharacter().StopPlaying();
 	want_end_of_game = false;
       }
 
