@@ -28,13 +28,19 @@
 class Joystick : public ManMachineInterface
 {
 private:
-
+  int previous_x_value;
+  int previous_y_value;
+  Key_t previous_x_axis;
+  Key_t previous_y_axis;
   Joystick();
   void SetDefaultConfig();
   static Joystick * singleton;
 
 public:
   static Joystick * GetInstance();
+  int GetNumberOfJoystick();
+  void HandleKeyEvent(const SDL_Event& event);
+  void Reset();
 };
 
 //-----------------------------------------------------------------------------

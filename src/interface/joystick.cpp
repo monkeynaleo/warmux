@@ -20,6 +20,9 @@
  *****************************************************************************/
 
 #include "joystick.h"
+#include "game_msg.h"
+#include <string>
+#include <sstream>
 
 Joystick * Joystick::singleton = NULL;
 
@@ -30,7 +33,10 @@ Joystick * Joystick::GetInstance() {
   return singleton;
 }
 
-Joystick::Joystick() : ManMachineInterface()
+Joystick::Joystick() :
+  ManMachineInterface(),
+  previous_x_value(0),
+  previous_y_value(0)
 {
   SetDefaultConfig();
 
@@ -44,4 +50,97 @@ Joystick::Joystick() : ManMachineInterface()
 
 void Joystick::SetDefaultConfig()
 {
+  int i = 0;
+  SetKeyAction(i++, ManMachineInterface::KEY_SHOOT);
+  SetKeyAction(i++, ManMachineInterface::KEY_JUMP);
+  SetKeyAction(i++, ManMachineInterface::KEY_HIGH_JUMP);
+  SetKeyAction(i++, ManMachineInterface::KEY_BACK_JUMP);
+  SetKeyAction(i++, ManMachineInterface::KEY_NEXT_CHARACTER);
+}
+
+int Joystick::GetNumberOfJoystick()
+{
+  return SDL_NumJoysticks();
+}
+
+void Joystick::HandleKeyEvent(const SDL_Event& event)
+{
+  std::ostringstream msg;
+  // Not a registred event
+  if(!IsRegistredEvent(event.type))
+    return;
+
+  Key_Event_t event_type;
+  switch(event.type)
+    {
+    case SDL_JOYAXISMOTION:
+      if(event.jaxis.axis == 0) {
+        event_type = X_AXIS_MOTION;
+      } else {
+        event_type = Y_AXIS_MOTION;
+      }
+      break;
+    case SDL_JOYBUTTONDOWN:
+      event_type = KEY_PRESSED;
+      break;
+    case SDL_JOYBUTTONUP:
+      event_type = KEY_RELEASED;
+      break;
+
+    default:
+      return;
+    }
+
+  if(event_type == X_AXIS_MOTION) {
+    msg << "X axis - " << event.jaxis.value;
+    GameMessages::GetInstance()->Add(msg.str());
+    if(event.jaxis.value > -100 && event.jaxis.value < 100) {
+      HandleKeyReleased(previous_x_axis);
+    } else {
+      if(event.jaxis.value > 0)
+        previous_x_axis = KEY_MOVE_RIGHT;
+      else
+        previous_x_axis = KEY_MOVE_LEFT;
+      HandleKeyPressed(previous_x_axis);
+    }
+    return;
+  } else if(event_type == Y_AXIS_MOTION) {
+    msg << "Y axis - " << event.jaxis.value;
+    GameMessages::GetInstance()->Add(msg.str());
+    if(event.jaxis.value > -100 && event.jaxis.value < 100) {
+      HandleKeyReleased(previous_y_axis);
+    } else {
+      if(event.jaxis.value > 0)
+        previous_y_axis = KEY_UP;
+      else
+        previous_y_axis = KEY_DOWN;
+      HandleKeyPressed(previous_y_axis);
+    }
+    return;
+  }
+
+  std::map<int, Key_t>::iterator it = layout.find(event.jbutton.button);
+
+  if(it == layout.end())
+    return;
+
+  Key_t key = it->second;
+
+  if(event_type == KEY_PRESSED) {
+    HandleKeyPressed(key);
+    return;
+  }
+
+  if(event_type == KEY_RELEASED) {
+    HandleKeyReleased(key);
+    return;
+  }
+}
+
+void Joystick::Reset()
+{
+  ManMachineInterface::Reset();
+  SDL_Init(SDL_INIT_JOYSTICK);
+  SDL_JoystickEventState(SDL_ENABLE);
+  SDL_JoystickOpen(0);
 }

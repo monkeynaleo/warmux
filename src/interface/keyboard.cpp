@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "keyboard.h"
+#include "game/game_loop.h"
 
 Keyboard * Keyboard::singleton = NULL;
 
@@ -77,4 +78,48 @@ void Keyboard::SetDefaultConfig()
   SetKeyAction(SDLK_PAGEUP,    ManMachineInterface::KEY_WEAPON_MORE);
   SetKeyAction(SDLK_PAGEDOWN,  ManMachineInterface::KEY_WEAPON_LESS);
   SetKeyAction(SDLK_s,         ManMachineInterface::KEY_CHAT);
+}
+
+void Keyboard::HandleKeyEvent(const SDL_Event& event)
+{
+  // Not a registred event
+  if(!IsRegistredEvent(event.type))
+    return;
+
+  //Handle input text for Chat session in Network game
+  //While player writes, it cannot control the game.
+  if(GameLoop::GetInstance()->chatsession.CheckInput()){
+    GameLoop::GetInstance()->chatsession.HandleKey(event);
+    return;
+  }
+
+  Key_Event_t event_type;
+  switch(event.type)
+    {
+    case SDL_KEYDOWN:
+      event_type = KEY_PRESSED;
+      break;
+    case SDL_KEYUP:
+      event_type = KEY_RELEASED;
+      break;
+    default:
+      return;
+    }
+
+  std::map<int, Key_t>::iterator it = layout.find(event.key.keysym.sym);
+
+  if(it == layout.end())
+    return;
+
+  Key_t key = it->second;
+
+  if(event_type == KEY_PRESSED) {
+    HandleKeyPressed(key);
+    return;
+  }
+
+  if(event_type == KEY_RELEASED) {
+    HandleKeyReleased(key);
+    return;
+  }
 }
