@@ -30,6 +30,29 @@
 
 class Character;
 
+class TopCharacters
+{
+ public:
+  const Character* Violent;
+  uint             violence;
+  const Character* Useful;
+  uint             usefulness;
+  const Character* Useless;
+  uint             uselessness;
+  const Character* Traitor;
+  uint             treachery;
+  const Character* Clumsy;
+  uint             clumsyness;
+  const Character* Accurate;
+  double           accuracy;
+  
+  uint             death_time;
+
+  TopCharacters();
+  void rankPlayer(Team::iterator const& player);
+  void merge(const TopCharacters* other);
+};
+
 // Could be a 5-tuple
 class TeamResults
 {
@@ -38,35 +61,28 @@ private:
   const TeamResults& operator=(const TeamResults&);
 
   const Team* team;
-  const Character* mostViolent;
-  const Character* mostUseful;
-  const Character* mostUseless;
-  const Character* biggestTraitor;
-  const Character* mostClumsy;
-  uint death_time;
+  TopCharacters* top;
 
   static TeamResults* createTeamResults(Team* team);
   static TeamResults* createGlobalResults();
 
 protected:
-  TeamResults(const Team* team,
-	      const Character* MV,
-	      const Character* MUl,
-	      const Character* MUs,
-	      const Character* BT,
-	      const Character* MS,
-	      uint death_time);
+  TeamResults(const Team* team, TopCharacters *top);
+  ~TeamResults();
+	      
 public:
   static std::vector<TeamResults*>* createAllResults(void);
   static void deleteAllResults(std::vector<TeamResults*>* results_list);
 
   const Team* getTeam() const { return team; };
-  const Character* getMostViolent() const { return mostViolent; };
-  const Character* getMostUseful() const { return mostUseful; };
-  const Character* getMostUseless() const { return mostUseless; };
-  const Character* getBiggestTraitor() const { return biggestTraitor; };
-  const Character* getMostClumsy() const { return mostClumsy; };
-  uint GetDeathTime() const { return death_time; }
+  const Character* getMostViolent() const { return top->Violent; };
+  const Character* getMostUseful() const { return top->Useful; };
+  const Character* getMostUseless() const { return top->Useless; };
+  const Character* getBiggestTraitor() const { return top->Traitor; };
+  const Character* getMostClumsy() const { return top->Clumsy; };
+  const Character* getMostAccurate() const { return top->Accurate; };
+  const TopCharacters* getTopCharacters() const { return top; };
+  uint GetDeathTime() const { return top->death_time; }
 };
 
 typedef std::vector<TeamResults*>::iterator res_iterator;

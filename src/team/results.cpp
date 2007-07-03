@@ -19,7 +19,7 @@
  * Manage the end of game results of a team
  *****************************************************************************/
 
-#include <sstream>
+#include <iostream>
 #include "include/app.h"
 #include "include/constant.h"
 #include "results.h"
@@ -28,150 +28,137 @@
 #include "macro.h"
 #include "tool/i18n.h"
 
-TeamResults::TeamResults(const Team* _team,
-                         const Character* MV,
-                         const Character* MUl,
-                         const Character* MUs,
-                         const Character* BT,
-			 const Character* MS,
-			 uint _death_time)
-  : team(_team),
-    mostViolent(MV),
-    mostUseful(MUl),
-    mostUseless(MUs),
-    biggestTraitor(BT),
-    mostClumsy(MS),
-    death_time(_death_time)
+TopCharacters::TopCharacters()
+  : Violent(NULL)
+  , violence(0)
+  , Useful(NULL)
+  , usefulness(0)
+  , Useless(NULL)
+  , uselessness(0xFFFFFFFFU)
+  , Traitor(NULL)
+  , treachery(0)
+  , Clumsy(NULL)
+  , clumsyness(0)
+  , Accurate(NULL)
+  , accuracy(0.0)
+  , death_time(0)
+{}
+
+
+void TopCharacters::merge(const TopCharacters* other)
 {
+  // Most damage in one shot
+  if (other->violence > violence)
+  {
+    violence   = other->violence;
+    Violent    = other->Violent;
+  }
+  // Most damage oplayerall to other teams
+  if (other->usefulness > usefulness)
+  {
+    usefulness = other->usefulness;
+    Useful     = other->Useful;
+  }
+  // Least damage oplayerall to other teams
+  if (other->uselessness < uselessness)
+  {
+    uselessness = other->uselessness;
+    Useless     = other->Useless;
+  }
+  // Most damage oplayerall to his own team (but not itself)
+  if (other->treachery > treachery)
+  {
+    treachery   = other->treachery;
+    Traitor     = other->Traitor;
+  }
+  // Most damage to itself
+  if (other->clumsyness > clumsyness)
+  {
+    clumsyness = other->clumsyness;
+    Clumsy     = other->Clumsy;
+  }
+  // Most accurate
+  if (other->accuracy > accuracy)
+  {
+    accuracy   = other->accuracy;
+    Accurate   = other->Accurate;
+  }
+  // This player is the latest survivor ?
+  if (other->death_time > death_time)
+  {
+    death_time = other->death_time;
+  }
+}
+
+void TopCharacters::rankPlayer(Team::iterator const& player)
+{
+  TopCharacters           top;
+  const Character         *character = &(*(player));
+  DamageStatistics const& stats = player->GetDamageStats();
+
+  // Build a pseudo top from that character
+  top.Violent  = character;
+  top.Useful   = character;
+  top.Useless  = character;
+  top.Traitor  = character;
+  top.Clumsy   = character;
+  top.Accurate = character;
+  
+  top.violence    = stats.GetMostDamage();
+  top.accuracy    = stats.GetAccuracy();
+  top.usefulness  = stats.GetOthersDamage();
+  top.uselessness = stats.GetOthersDamage();
+  top.treachery   = stats.GetFriendlyFireDamage();
+  top.clumsyness  = stats.GetItselfDamage();
+  top.accuracy    = stats.GetAccuracy();
+  top.death_time  = stats.GetDeathTime();
+
+  merge(&top);
+}
+
+TeamResults::TeamResults(const Team* _team, TopCharacters* _top)
+  : team(_team)
+  , top(_top)
+{}
+
+TeamResults::~TeamResults()
+{
+  if (top)
+    delete top;
 }
 
 TeamResults* TeamResults::createTeamResults(Team* team)
 {
-  uint most_violent = 0;
-  uint most_useless = 0x0FFFFFFF;
-  uint most_useful = 0;
-  uint most_traitor = 0;
-  uint most_clumsy = 0;
-  uint death_time = 0;
-
-  const Character* MostViolent = NULL;
-  const Character* MostUseful = NULL;
-  const Character* MostUseless = NULL;
-  const Character* BiggestTraitor = NULL;
-  const Character* MostClumsy = NULL;
-
+  TopCharacters* top = new TopCharacters;
+  
   // Search best/worst performers
   FOR_EACH_LIVING_AND_DEAD_CHARACTER(team, player)
   {
-    // Most damage in one shot
-    if (player->GetDamageStats().GetMostDamage() > most_violent)
-    {
-      most_violent = player->GetDamageStats().GetMostDamage();
-      MostViolent  = &(*(player));
-    }
-    // Most damage oplayerall to other teams
-    if (player->GetDamageStats().GetOthersDamage() > most_useful)
-    {
-      most_useful = player->GetDamageStats().GetOthersDamage();
-      MostUseful  = &(*(player));
-    }
-    // Least damage oplayerall to other teams
-    if (player->GetDamageStats().GetOthersDamage() < most_useless)
-    {
-      most_useless = player->GetDamageStats().GetOthersDamage();
-      MostUseless  = &(*(player));
-    }
-    // Most damage oplayerall to his own team (but not itself)
-    if (player->GetDamageStats().GetFriendlyFireDamage() > most_traitor)
-    {
-      most_traitor = player->GetDamageStats().GetFriendlyFireDamage();
-      BiggestTraitor  = &(*(player));
-    }
-    // Most damage to itself
-    if (player->GetDamageStats().GetItselfDamage() > most_clumsy)
-    {
-      most_clumsy = player->GetDamageStats().GetItselfDamage();
-      MostClumsy = &(*(player));
-    }
-    // This player is the latest survivor ?
-    if (player->GetDamageStats().GetDeathTime() > death_time)
-    {
-      death_time = player->GetDamageStats().GetDeathTime();
-    }
-    
+    top->rankPlayer(player);
   }
 
-  return new TeamResults(team,
-                         MostViolent,
-                         MostUseful,
-                         MostUseless,
-                         BiggestTraitor,
-			 MostClumsy,
-			 death_time);
+  return new TeamResults(team, top);
 }
 
 TeamResults* TeamResults::createGlobalResults()
 {
-  uint most_violent = 0;
-  uint most_useless = 0x0FFFFFFF;
-  uint most_useful = 0;
-  uint most_traitor = 0;
-  uint most_clumsy = 0;
-  const Character* MostViolent = NULL;
-  const Character* MostUseful = NULL;
-  const Character* MostUseless = NULL;
-  const Character* BiggestTraitor = NULL;
-  const Character* MostClumsy = NULL;
+  TopCharacters* top = new TopCharacters;
 
   FOR_ALL_LIVING_AND_DEAD_CHARACTER(team, player)
   {
-    // Most damage in one shot
-    if (player->GetDamageStats().GetMostDamage() > most_violent)
-    {
-      most_violent = player->GetDamageStats().GetMostDamage();
-      MostViolent  = &(*player);
-    }
-    // Most damage oplayerall to other teams
-    if (player->GetDamageStats().GetOthersDamage() > most_useful)
-    {
-      most_useful = player->GetDamageStats().GetOthersDamage();
-      MostUseful  = &(*player); 
-    }
-    // Least damage oplayerall to other teams
-    if (player->GetDamageStats().GetOthersDamage() < most_useless)
-    {
-      most_useless = player->GetDamageStats().GetOthersDamage();
-      MostUseless  = &(*player); 
-    }
-    // Most damage oplayerall to his own team (but not to itself)
-    if (player->GetDamageStats().GetFriendlyFireDamage() > most_traitor)
-    {
-      most_traitor = player->GetDamageStats().GetFriendlyFireDamage();
-      BiggestTraitor = &(*player);
-    }
-    // Most damage to itself
-    if (player->GetDamageStats().GetItselfDamage() > most_traitor)
-    {
-      most_clumsy = player->GetDamageStats().GetItselfDamage();
-      MostClumsy  = &(*player); 
-    }
-    
+    top->rankPlayer(player);
   }
 
   // We'll do as if NULL is for all teams
-  return new TeamResults(NULL,
-                         MostViolent,
-                         MostUseful,
-                         MostUseless,
-                         BiggestTraitor,
-			 MostClumsy,
-			 0);
+  //top->death_time = 0;
+  return new TeamResults(NULL, top);
 }
 
 std::vector<TeamResults*>* TeamResults::createAllResults(void)
 {
-  TeamResults* results;
-  std::vector<TeamResults*>* results_list = new std::vector<TeamResults*>;
+  TeamResults                *results;
+  TopCharacters              *top = new TopCharacters;
+  std::vector<TeamResults*>  *results_list = new std::vector<TeamResults*>;
 
   // Build results list
   FOR_EACH_TEAM(team)
@@ -179,10 +166,12 @@ std::vector<TeamResults*>* TeamResults::createAllResults(void)
     results = TeamResults::createTeamResults(*team);
 
     results_list->push_back(results);
+
+    top->merge(results->getTopCharacters());
   }
  
   // Add overall results to list
-  results = TeamResults::createGlobalResults();
+  results = new TeamResults(NULL, top);
   results_list->insert(results_list->begin(), results);
 
   return results_list;

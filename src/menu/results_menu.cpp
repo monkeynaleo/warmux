@@ -53,7 +53,8 @@ public:
             const Point2i& score_size);
   // Hopefully no need for ~ResultBox() as it automatically
   // destroy child widgets by inheriting from HBox
-  void SetResult(const std::string& name, int score, const Surface& team_logo);
+  void SetIntResult(const std::string& name, int score, const Surface& team_logo);
+  void SetDoubleResult(const std::string& name, double score, const Surface& team_logo);
   void SetNoResult();
 };
 
@@ -86,12 +87,28 @@ ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
   AddWidget(team_picture);
 }
 
-void ResultBox::SetResult(const std::string& name, int score, const Surface& team_logo)
+void ResultBox::SetIntResult(const std::string& name, int score, const Surface& team_logo)
 {
   char buffer[16];
   std::string copy_name(name);
 
   snprintf(buffer, 16, "%i", score);
+
+  std::string score_str(buffer);
+
+  name_lbl->SetText(copy_name);
+  score_lbl->SetText(score_str);
+  team_picture->SetSurface(team_logo);
+
+  //ForceRedraw();
+}
+
+void ResultBox::SetDoubleResult(const std::string& name, double score, const Surface& team_logo)
+{
+  char buffer[16];
+  std::string copy_name(name);
+
+  snprintf(buffer, 16, "%.1f", score);
 
   std::string score_str(buffer);
 
@@ -237,6 +254,11 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
 			      type_size, name_size, score_size);
   statistics_box->AddWidget(most_clumsy);
 
+  most_accurate = new ResultBox(Rectanglei(0,0,0, max_height),
+                                false, _("Most accurate"), Font::FONT_BIG, Font::FONT_NORMAL,
+                                type_size, name_size, score_size);
+  statistics_box->AddWidget(most_accurate);
+
   widgets.AddWidget(statistics_box);
 }
 
@@ -322,37 +344,44 @@ void ResultsMenu::SetResult(int i)
   //Most violent
   player = res->getMostViolent();
   if (player)
-    most_violent->SetResult(player->GetName(), player->GetDamageStats().GetMostDamage(), player->GetTeam().flag);
+    most_violent->SetIntResult(player->GetName(), player->GetDamageStats().GetMostDamage(), player->GetTeam().flag);
   else
     most_violent->SetNoResult();
 
   //Most useful
   player = res->getMostUseful();
   if (player)
-    most_useful->SetResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().flag);
+    most_useful->SetIntResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().flag);
   else
     most_useful->SetNoResult();
 
   //Most useless
   player = res->getMostUseless();
   if (player)
-    most_useless->SetResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().flag);
+    most_useless->SetIntResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().flag);
   else
     most_useless->SetNoResult();
 
   // Biggest sold-out
   player = res->getBiggestTraitor();
   if (player)
-    biggest_traitor->SetResult(player->GetName(), player->GetDamageStats().GetFriendlyFireDamage(), player->GetTeam().flag);
+    biggest_traitor->SetIntResult(player->GetName(), player->GetDamageStats().GetFriendlyFireDamage(), player->GetTeam().flag);
   else
     biggest_traitor->SetNoResult();
 
   // Most clumsy
   player = res->getMostClumsy();
   if (player)
-    most_clumsy->SetResult(player->GetName(), player->GetDamageStats().GetItselfDamage(), player->GetTeam().flag);
+    most_clumsy->SetIntResult(player->GetName(), player->GetDamageStats().GetItselfDamage(), player->GetTeam().flag);
   else
     most_clumsy->SetNoResult();
+
+  // Most accurate
+  player = res->getMostAccurate();
+  if (player)
+    most_accurate->SetDoubleResult(player->GetName(), player->GetDamageStats().GetAccuracy(), player->GetTeam(). flag);
+  else
+    most_accurate->SetNoResult();
 
   statistics_box->ForceRedraw();
 }

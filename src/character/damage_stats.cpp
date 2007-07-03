@@ -30,7 +30,8 @@ DamageStatistics::DamageStatistics(const Character& _owner) :
   damage_friendly_fire(0),
   damage_itself(0),
   max_damage(0),
-  current_total_damage(0)
+  current_total_damage(0),
+  total_shots(0)
 {}
 
 DamageStatistics::DamageStatistics(const DamageStatistics& adamage_stats, const Character& _owner) :
@@ -49,6 +50,7 @@ void DamageStatistics::ResetDamage()
   damage_itself = 0;
   max_damage = 0;
   current_total_damage = 0;
+  total_shots = 0;
 }
 
 void DamageStatistics::HandleMostDamage()
