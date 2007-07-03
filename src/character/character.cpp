@@ -342,7 +342,7 @@ void Character::Die()
     jukebox.Play(GetTeam().GetSoundProfile(),"death");
     body->SetRotation(0.0);
     SetClothe("dead");
-    SetMovement("dead");
+    SetMovement("walk");
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
