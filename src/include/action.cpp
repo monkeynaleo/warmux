@@ -43,53 +43,40 @@ static inline uint TimeStamp()
 // Action without parameter
 Action::Action (Action_t type)
 {
-  var.clear();
-  m_type = type;
-  m_timestamp = TimeStamp();
-  creator = NULL;
+  Init(type);
 }
 
 // Action with various parameters
 Action::Action (Action_t type, int value) : m_type(type)
 {
-  var.clear();
+  Init(type);
   Push(value);
-  m_timestamp = TimeStamp();
-  creator = NULL;
 }
 
 Action::Action (Action_t type, double value) : m_type(type)
 {
-  var.clear();
+  Init(type);
   Push(value);
-  m_timestamp = TimeStamp();
-  creator = NULL;
 }
 
 Action::Action (Action_t type, const std::string& value) : m_type(type)
 {
-  var.clear();
+  Init(type);
   Push(value);
-  m_timestamp = TimeStamp();
-  creator = NULL;
 }
 
 Action::Action (Action_t type, double value1, double value2) : m_type(type)
 {
-  var.clear();
+  Init(type);
   Push(value1);
   Push(value2);
-  m_timestamp = TimeStamp();
-  creator = NULL;
 }
 
 Action::Action (Action_t type, double value1, int value2) : m_type(type)
 {
-  var.clear();
+  Init(type);
   Push(value1);
   Push(value2);
-  m_timestamp = TimeStamp();
-  creator = NULL;
 }
 
 // Build an action from a network packet
@@ -115,6 +102,14 @@ Action::Action (const char *is, DistantComputer* _creator)
 
 Action::~Action ()
 {
+}
+
+void Action::Init(Action_t type)
+{
+  m_type = type;
+  var.clear();
+  m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 Action::Action_t Action::GetType() const
