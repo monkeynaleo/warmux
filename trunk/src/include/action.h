@@ -28,7 +28,6 @@
 #include <list>
 #include "base.h"
 #include "tool/point.h"
-#include "network/distant_cpu.h"
 
 class DistantComputer;
 //-----------------------------------------------------------------------------
@@ -125,6 +124,7 @@ public:
 
   ~Action();
 
+  void Init (Action_t type);
   std::ostream& out(std::ostream &os) const;
 
   // Push / Back functions to add / retreive datas
