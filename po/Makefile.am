@@ -82,8 +82,8 @@ POTFILES = \
         src/gui/check_box.cpp \
         src/gui/check_box.h \
         src/gui/container.h \
-        src/gui/EnergyBar.cpp \
-        src/gui/EnergyBar.h \
+        src/gui/energy_bar.cpp \
+        src/gui/energy_bar.h \
         src/gui/label.cpp \
         src/gui/label.h \
         src/gui/list_box.cpp \
