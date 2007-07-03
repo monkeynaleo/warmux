@@ -19,8 +19,8 @@
  * EnergyBar.
  *****************************************************************************/
 
-#ifndef __ENERGYBAR_H__
-#define __ENERGYBAR_H__
+#ifndef ENERGY_BAR_H
+#define ENERGY_BAR_H
 
 #include "gui/progress_bar.h"
 
@@ -35,4 +35,4 @@ class EnergyBar : public ProgressBar {
     Color GetColorValue(long app_energy) const;
 };
 
-#endif
+#endif /* ENERGY_BAR_H */

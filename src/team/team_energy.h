@@ -24,7 +24,7 @@
 
 #include "graphic/text.h"
 #include "graphic/sprite.h"
-#include "gui/EnergyBar.h"
+#include "gui/energy_bar.h"
 #include "object/physical_obj.h"
 
 class Team;
