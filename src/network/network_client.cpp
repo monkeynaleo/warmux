@@ -27,7 +27,7 @@
 #include "tool/i18n.h"
 #include "distant_cpu.h"
 
-#if defined(DEBUG) && not defined(WIN32)
+#if defined(DEBUG)
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -36,9 +36,16 @@
 
 NetworkClient::NetworkClient()
 {
-#if defined(DEBUG) && not defined(WIN32) && defined(LOG_NETWORK)
-  fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
-  fout = open("./network_client.out", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
+#if defined(DEBUG) && defined(LOG_NETWORK)
+#  ifdef WIN32
+  int flags1 = O_CREAT | O_TRUNC | O_WRONLY;
+  int flags2 = S_IRUSR | S_IWUSR;
+#  else
+  int flags1 = O_CREAT | O_TRUNC | O_WRONLY | O_SYNC;
+  int flags2 = S_IRUSR | S_IWUSR | S_IRGRP;
+#  endif
+  fin = open("./network_client.in", flags1, flags2);
+  fout = open("./network_client.out", flags1, flags2);
 #endif
 }
 
@@ -93,12 +100,12 @@ void NetworkClient::ReceiveActions()
         if( packet_size == 0) // We didn't received the full packet yet
           continue;
 
-#if defined(DEBUG) && not defined(WIN32)
+#if defined(DEBUG)
 	if (fin != 0) {
 	  int tmp = 0xFFFFFFFF;
-	  write(fin, &packet_size, 4);
-	  write(fin, packet, packet_size);
-	  write(fin, &tmp, 4);
+	  _write(fin, &packet_size, 4);
+	  _write(fin, packet, packet_size);
+	  _write(fin, &tmp, 4);
 	}
 #endif
 

@@ -85,7 +85,7 @@ protected:
   IPaddress ip; // for server : store listening port
                 // for client : store server address/port
 
-#if defined(DEBUG) && not defined(WIN32)
+#if defined(DEBUG)
   int fout;
   int fin;
 #endif
