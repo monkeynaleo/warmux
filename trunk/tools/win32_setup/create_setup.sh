@@ -7,8 +7,8 @@ MAKE_NSIS=makensis
 # Path to which all others are relative
 WORMUXDIR="../.."
 
-# Path of MinGW installation
-MINGWDIR=/mingw
+# Root path for other dlls (oggvorbis, curse, ...)
+BINDIR=/mingw
 
 # Windows registry software path
 HKLM_PATH="SOFTWARE\Games\Wormux"
@@ -38,13 +38,6 @@ function pkg_path
   echo "$var"
 }
 
-## Make sure all is done
-echo "Checking make status"
-if ! (cd "$WORMUXDIR" && make 1>/dev/null 2>&1); then
-  echo "Bad return code from make; aborting"
-  exit 1
-fi
-
 if ! pkg-config --help 2>/dev/null 1>&2 ; then
   echo "pkg-config not found, aborting..."
   exit 1
@@ -53,8 +46,8 @@ fi
 # Create head
 cat > $NSIS <<EOF
 ;based on MUI Welcome/Finish Page Example Script written by Joost Verburg
-!define MUI_ICON  "${WIN_WORMUXDIR}\src\wormux.ico"
-!define MUI_UNICON  ${LOCAL_PATH}\uninstall.ico
+!define MUI_ICON  "${LOCAL_PATH}\install.ico"
+!define MUI_UNICON  "${LOCAL_PATH}\uninstall.ico"
 !define MUI_COMPONENTSPAGE_SMALLDESC
 !define MUI_LANGDLL_ALWAYSSHOW
 !include "MUI.nsh"
@@ -148,34 +141,29 @@ Section \$(TITLE_Wormux) Sec_Wormux
   File "${WIN_WORMUXDIR}\src\wormux.exe"
 EOF
 
+# Copy special libraries
+cp $BINDIR/lib/libcurl-4.dll "$DEST"
+
 # Glib (gobject, gthread, glib & gmodule)
 GLIB_PATH=$(pkg_path glib-2.0)
-cp "$GLIB_PATH/bin/libgobject"*.dll "$GLIB_PATH/bin/libgthread"*.dll	\
-   "$GLIB_PATH/bin/libglib"*.dll "$GLIB_PATH/bin/libgmodule"*.dll "$DEST"
-
-# All gettext (with iconv), jpeg and zlib stuff should be within
-# glademm install path <=> glib path
-cp "$GLIB_PATH/bin/intl.dll" "$GLIB_PATH/bin/iconv.dll"		\
-   "$GLIB_PATH/bin/jpeg62.dll" "$DEST"
+cp "$GLIB_PATH"/bin/libg{object,thread,module,lib}-2.0-0.dll "$DEST"
 
 # Other libs
 cp "$(pkg_path sigc++-2.0)/bin/libsigc"*.dll $DEST
 cp "$(pkg_path libxml-2.0)/bin/libxml2"*.dll $DEST
 cp "$(pkg_path libxml++-2.6)/bin/libxml++"*.dll $DEST
 cp "$(pkg_path glibmm-2.4)/bin/libglibmm"*.dll $DEST
-cp "$(pkg_path libpng13)/bin/libpng13.dll" $DEST
+cp "$(pkg_path libpng12)/bin/libpng12.dll" $DEST
 
 # Clean up before non-strippable files
 # WARNING Stripping some dlls corrupts them beyond use
 strip "$DEST/"*.dll "$WORMUXDIR/src/"*.exe
 
-# Files that must not be stripped (all of SDL)
+# Files that must not be stripped (all of SDL and vorbos)
 SDL_PATH=$(sdl-config --prefix)
-cp "$SDL_PATH/bin/SDL_mixer.dll" "$SDL_PATH/bin/SDL_ttf.dll"	\
-   "$SDL_PATH/bin/SDL_image.dll" "$SDL_PATH/bin/SDL.dll"	\
-   "$SDL_PATH/bin/SDL_net.dll" "$GLIB_PATH/bin/intl.dll"	\
-   "$GLIB_PATH/bin/iconv.dll" "$GLIB_PATH/bin/jpeg62.dll"	\
-   "$GLIB_PATH/bin/zlib1.dll" $DEST
+cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll	\
+   "$GLIB_PATH/bin/"{intl,iconv,zlib1,jpeg62}.dll	\
+   $BINDIR/bin/{vorbis,vorbisfile,ogg}.dll "$DEST"
 
 # Continue producing installer
 cat >> $NSIS <<EOF
