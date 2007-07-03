@@ -558,6 +558,7 @@ void Character::DoShoot()
 {
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
+  damage_stats.OneMoreShot();
   ActiveTeam().AccessWeapon().Shoot();
 }
 
