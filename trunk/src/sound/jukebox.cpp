@@ -197,7 +197,8 @@ void JukeBox::LoadMusicXML()
 
          if(!IsFileExist(line))
          {
-            line = filename.substr(0, filename.find_last_of(PATH_SEPARATOR)) + PATH_SEPARATOR + line;
+            // This line comes from an XML file, thus path separator here is "/"
+            line = filename.substr(0, filename.find_last_of("/")) + PATH_SEPARATOR + line;
             if(!IsFileExist(line))
             {
               std::cerr << "[Music] Unable to find " << line << " music file." << std::endl;
