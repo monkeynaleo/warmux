@@ -69,7 +69,7 @@ Mouse::Mouse(){
   pointer_fire_right = resource_manager.LoadImage(res, "mouse/pointer_fire_right");
   pointer_fire_left = resource_manager.LoadImage(res, "mouse/pointer_fire_left");
   current_pointer = POINTER_STANDARD;
-  delete res;
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 void Mouse::ActionLeftClic()

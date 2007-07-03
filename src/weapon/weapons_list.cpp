@@ -58,6 +58,8 @@ WeaponsList::~WeaponsList()
           delete *it;
         }
       weapon_list = NULL;
+      resource_manager.UnLoadXMLProfile(weapons_res_profile);
+      weapons_res_profile = NULL;
     }
 }
 
