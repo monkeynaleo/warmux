@@ -24,7 +24,7 @@
 
 #include <string>
 #include <SDL.h>
-#include "gui/EnergyBar.h"
+#include "gui/energy_bar.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
 #include "include/base.h"

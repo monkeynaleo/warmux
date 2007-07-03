@@ -21,7 +21,7 @@
 
 #include <iostream>
 #include <sstream>
-#include "EnergyBar.h"
+#include "energy_bar.h"
 #include "tool/resource_manager.h"
 
 static const int energy_step[EnergyBar::NB_OF_ENERGY_COLOR] = { 16, 33, 50, 67, 84, 100 };
