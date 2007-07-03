@@ -34,6 +34,7 @@ EnergyBar::EnergyBar() : ProgressBar()
     color_name << "energy_bar/energy_color_" << energy_step[i] << "_percent";
     colors_value[i] = resource_manager.LoadColor(res, color_name.str());
   }
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 Color EnergyBar::GetColorValue(long app_energy) const

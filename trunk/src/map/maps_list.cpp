@@ -60,7 +60,8 @@ bool InfoMap::Init (const std::string &map_name,
     // Load resources
     if (!IsFileExist(nomfich))
       return false;
-    res_profile = resource_manager.LoadXMLProfile( nomfich, true),
+    // FIXME: not freed
+    res_profile = resource_manager.LoadXMLProfile(nomfich, true),
     // Load preview
     preview = resource_manager.LoadImage( res_profile, "preview");
     // Load other informations
