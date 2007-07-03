@@ -54,6 +54,9 @@ class DistantComputer
 
   DistantComputer::state_t state;
 
+  int packet_size;
+  int packet_received;
+  char* packet;
 public:
   bool version_checked;
   bool force_disconnect;

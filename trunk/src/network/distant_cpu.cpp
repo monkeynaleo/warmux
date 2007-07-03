@@ -41,6 +41,9 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
   force_disconnect(false),
   nickname("this is not initialized")
 {
+  packet_size = 0;
+  packet_received = 0;
+  packet = NULL;
   SDLNet_TCP_AddSocket(Network::GetInstance()->socket_set, sock);
 
   // If we are the server, we have to tell this new computer
@@ -106,47 +109,67 @@ int DistantComputer::ReceiveDatas(char* & buf)
   SDL_LockMutex(sock_lock);
   MSG_DEBUG("network","locked");
 
-  // Firstly, we read the size of the incoming packet
-  Uint32 net_size;
-  if (SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
+  if( packet_size == 0)
   {
-    SDL_UnlockMutex(sock_lock);
-    return -1;
-  }
-
-  int size = (int)SDLNet_Read32(&net_size);
-  NET_ASSERT(size > 0)
-  {
-    // force_disconnect = true; // hum.. in this case we will assume it's a network error
-    return 0;
-  }
-
-  // Now we read the packet
-  buf = (char*)malloc(size);
-
-  int total_received = 0;
-  while (total_received != size)
-  {
-    int received = SDLNet_TCP_Recv(sock, buf + total_received, size - total_received);
-    if (received > 0)
+    // Firstly, we read the size of the incoming packet
+    Uint32 net_size;
+    if (SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
     {
-      MSG_DEBUG("network", "%i received", received);
-      total_received += received;
+      SDL_UnlockMutex(sock_lock);
+      return -1;
     }
 
-    if (received < 0)
+    packet_size = (int)SDLNet_Read32(&net_size);
+    NET_ASSERT(packet_size > 0)
+    {
+      // force_disconnect = true; // hum.. in this case we will assume it's a network error
+      return -1;
+    }
+
+    packet = (char*)malloc(packet_size);
+  }
+
+
+  int sdl_received = 0;
+  do
+  {
+    sdl_received = SDLNet_TCP_Recv(sock, packet + packet_received, packet_size - packet_received);
+    if (sdl_received > 0)
+    {
+      MSG_DEBUG("network", "%i received", sdl_received);
+      packet_received += sdl_received;
+    }
+
+    if (sdl_received < 0)
     {
       std::cerr << "Malformed packet" << std::endl;
-      total_received = received;
+      packet_received = 0;
+      packet_size = 0;
+      free(packet);
+      packet = NULL;
       NET_ASSERT(false)
       {
-	return 0;
+	return -1;
       }
     }
   }
+  while( sdl_received > 0 && packet_received != packet_size);
+
   SDL_UnlockMutex(sock_lock);
   MSG_DEBUG("network","unlocked");
-  return total_received;
+
+  if( packet_received == packet_size )
+  {
+    int size = packet_size;
+    buf = packet;
+    packet = NULL;
+    packet_size = 0;
+    packet_received = 0;
+    return size;
+  }
+
+  buf = NULL;
+  return 0;
 }
 
 void DistantComputer::SendDatas(char* packet, int size_tmp)
