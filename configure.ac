@@ -193,13 +193,20 @@ fi
 dnl === Check for PNG ==================================================
 
 AC_MSG_CHECKING(for libpng)
-if $PACKAGE_CONFIG --cflags libpng > /dev/null 2>&1 ; then
-  LIBPNG_CFLAGS=`$PACKAGE_CONFIG --cflags libpng`
-  LIBPNG_LIB=`$PACKAGE_CONFIG --libs libpng`
-  CFLAGS="$CFLAGS $LIBPNG_CFLAGS"
-  LIBS="$LIBS $LIBPNG_LIB"
-else
+for PNG in png png12 png13 dummypng; do
+  if $PACKAGE_CONFIG --exists lib$PNG > /dev/null 2>&1 ; then
+    LIBPNG_CFLAGS=`$PACKAGE_CONFIG --cflags lib$PNG`
+    LIBPNG_LIB=`$PACKAGE_CONFIG --libs lib$PNG`
+    CFLAGS="$CFLAGS $LIBPNG_CFLAGS"
+    LIBS="$LIBS $LIBPNG_LIB"
+    break
+  fi
+done
+if test "$LIBPNG_LIB" = "dummypng"; then
+  echo "Got $LIBPNG_CFLAGS $LIBPNG_LIB"
   AC_MSG_ERROR([*** libpng not found])
+else
+  AC_MSG_RESULT(lib$PNG)
 fi
 
 dnl === Check for SDL_gfx ==================================================
@@ -218,7 +225,7 @@ AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
 
 dnl === Check for SDL image, mixer, etc., libxml++, libcurl and libpng ==============
 
-AC_CHECK_LIB(png, png_error,,,)
+AC_CHECK_LIB($PNG, png_error,,,)
 AC_CHECK_LIB(curl, curl_easy_init,check_curl="yes",check_curl="no")
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
 AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
@@ -284,8 +291,8 @@ LIBCURL_LIBS=`curl-config --libs`
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
 
-LIBPNG_CFLAGS=`$PACKAGE_CONFIG libpng --cflags`
-LIBPNG_LIBS=`$PACKAGE_CONFIG libpng --libs`
+LIBPNG_CFLAGS=`$PACKAGE_CONFIG lib$PNG --cflags`
+LIBPNG_LIBS=`$PACKAGE_CONFIG lib$PNG --libs`
 
 CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGGS $LIBPNG_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGS $LIBPNG_CFLAGS"
