@@ -85,11 +85,13 @@ void NetworkClient::ReceiveActions()
       {
         // Read the size of the packet
         int packet_size = (*dst_cpu)->ReceiveDatas(packet);
-        if( packet_size <= 0)
+        if( packet_size == -1) // An error occured during the reception
 	{
           dst_cpu = CloseConnection(dst_cpu);
           continue;
-        }
+        } else
+        if( packet_size == 0) // We didn't received the full packet yet
+          continue;
 
 #if defined(DEBUG) && not defined(WIN32)
 	if (fin != 0) {
