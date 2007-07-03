@@ -32,7 +32,7 @@
 #include "tool/debug.h"
 #include "tool/i18n.h"
 
-#if defined(DEBUG) && not defined(WIN32)
+#if defined(DEBUG)
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -79,7 +79,7 @@ Network::Network():
   thread(NULL),
   socket_set(NULL),
   ip(),
-#if defined(DEBUG) && not defined(WIN32)
+#if defined(DEBUG)
   fout(0),
   fin(0),
 #endif
@@ -103,7 +103,7 @@ Network::~Network()
     SDLNet_Quit();
     sdlnet_initialized = false;
 
-#if defined(DEBUG) && not defined(WIN32)
+#if defined(DEBUG)
     if (fin != 0)
       close(fin);
     if (fout != 0)
@@ -279,7 +279,7 @@ void Network::SendAction(Action* a) const
 
 void Network::SendPacket(char* packet, int size) const
 {
-#if defined(DEBUG) && not defined(WIN32)
+#if defined(DEBUG)
   if (fout != 0) {
     int tmp = 0xFFFFFFFF;
     write(fout, &size, 4);
