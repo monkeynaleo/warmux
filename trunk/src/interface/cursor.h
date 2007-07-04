@@ -40,9 +40,8 @@ private:
 
   uint time_begin_anim;
   uint last_update;
-  PhysicalObj *obj_designe;
   int dy;
-  bool actif;
+  bool visible;
   bool want_hide;
 
   static CharacterCursor * singleton;
@@ -54,16 +53,10 @@ public:
   void Draw();
   void Refresh();
 
-  // Pointe un objet
-  void PointeObj (PhysicalObj *obj);
-
-  // Pointe un objet
   void FollowActiveCharacter ();
 
   // Hide the cursor
   void Hide();
-
-
 
 private:
   CharacterCursor();
