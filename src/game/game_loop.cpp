@@ -508,10 +508,6 @@ void GameLoop::__SetState_PLAYING()
     }
 
   give_objbox = true; //hack make it so no more than one objbox per turn
-
-  // Applying Disease damage and Death mode.
-  ApplyDiseaseDamage();
-  ApplyDeathMode();
 }
 
 void GameLoop::__SetState_HAS_PLAYED()
@@ -531,7 +527,11 @@ void GameLoop::__SetState_END_TURN()
   duration = GameMode::GetInstance()->duration_exchange_player;
   Interface::GetInstance()->UpdateTimer(duration);
   Interface::GetInstance()->EnableDisplayTimer(false);
-  pause_seconde = Time::GetInstance()->Read();
+  pause_seconde = Time::GetInstance()->Read();  
+
+  // Applying Disease damage and Death mode.
+  ApplyDiseaseDamage();
+  ApplyDeathMode();
 }
 
 void GameLoop::Really_SetState(game_loop_state_t new_state)
