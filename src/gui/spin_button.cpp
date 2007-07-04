@@ -90,8 +90,12 @@ void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   txt_label->DrawTopLeft(position);
    
-  m_minus->Draw(mousePosition, surf);
-  m_plus->Draw(mousePosition, surf);
+  if (GetValue() != m_min_value) {
+    m_minus->Draw(mousePosition, surf);
+  }
+  if (GetValue() != m_max_value) {
+    m_plus->Draw(mousePosition, surf);
+  }
 
   uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;
   txt_value->DrawCenterTop(center, position.y);
