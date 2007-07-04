@@ -537,6 +537,13 @@
 	<country>Germany</country>
       </author>
       <author>
+	<nickname>the gritche</nickname>
+	<name>David Zysman</name>
+	<description>GUI patch</description>
+	<email>thegritche_AT_gmail_DOT_com</email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>vegar</nickname>
 	<name>Vegar STORVANN</name>
 	<description>Patch for mousewheel scrolling in the gui</description>
