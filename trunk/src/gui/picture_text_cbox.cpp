@@ -21,25 +21,25 @@
 
 #include "picture_text_cbox.h"
 #include "include/app.h"
+#include "graphic/text.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
 #include "tool/resource_manager.h"
 
 PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &resource_id, 
 				 const Rectanglei &rect, bool value):
-  CheckBox(label, rect, value)
+  CheckBox(new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false), rect, value)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadImage(res, resource_id);
   resource_manager.UnLoadXMLProfile( res);
  
-  SetPosition( rect.GetPosition() );
-  SetSize( rect.GetSize() );
+  //SetPosition( rect.GetPosition() );
+  //SetSize( rect.GetSize() );
 
   SetSizeY( m_image.GetHeight() + (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).GetHeight() );
   m_value = value;
 
-  txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth (GetSizeX());
 }
 

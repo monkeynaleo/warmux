@@ -23,10 +23,11 @@
 #define CHECK_BOX_H
 
 #include "include/base.h"
-#include "graphic/text.h"
 #include "gui/widget.h"
 #include "graphic/sprite.h"
 #include <string>
+
+class Text;
 
 class CheckBox : public Widget
 {
@@ -43,6 +44,8 @@ class CheckBox : public Widget
 
  public:
   CheckBox(const std::string &label, const Rectanglei &rect, bool value = true);
+  CheckBox(Text* text, const Rectanglei &rect, bool value = true);
+  void Init(const Rectanglei &rect);
   ~CheckBox();
   void Draw(const Point2i &mousePosition, Surface& surf) const;
   Widget* Click(const Point2i &mousePosition, uint button);
