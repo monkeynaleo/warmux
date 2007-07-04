@@ -48,7 +48,7 @@ CharacterCursor * CharacterCursor::GetInstance() {
 
 CharacterCursor::CharacterCursor()
 {
-  actif = false;
+  visible = false;
   want_hide = false;
   time_begin_anim = 0;
   last_update = 0;
@@ -62,20 +62,20 @@ CharacterCursor::CharacterCursor()
 
 CharacterCursor::~CharacterCursor()
 {
-  if(image) delete image;
+  if (image) 
+    delete image;
 }
 
 // Draw cursor
 void CharacterCursor::Draw()
 {
   if (!IsDisplayed()) return;
-  if (obj_designe == NULL) return;
-  if (obj_designe -> IsGhost()) return;
+  if (ActiveCharacter().IsGhost()) return;
 
   // Draw cursor arround character
-  Point2i centre = obj_designe->GetCenter();
-  uint x = centre.x - image->GetWidth()/2;
-  uint y = obj_designe->GetY() - image->GetHeight() - y_min;
+  Point2i center = ActiveCharacter().GetCenter();
+  uint x = center.x - image->GetWidth()/2;
+  uint y = ActiveCharacter().GetY() - image->GetHeight() - y_min;
 
   image->Draw( Point2i(x, y+dy) );
 }
@@ -89,7 +89,7 @@ void CharacterCursor::Refresh()
   Time * global_time = Time::GetInstance();
 
   //The arrow is appearing:
-  if( actif && global_time->Read() < time_begin_anim + show_hide_time )
+  if( visible && global_time->Read() < time_begin_anim + show_hide_time )
   {
     dy = (int)((camera.GetPosition().y - ActiveCharacter().GetY()) * (1.0 - (global_time->Read() - time_begin_anim) / (float)show_hide_time));
     return;
@@ -99,16 +99,16 @@ void CharacterCursor::Refresh()
   if(want_hide)
   {
     if( ((global_time->Read() - (time_begin_anim + show_hide_time)) % rebound_time < rebound_time / 2)
-    &&  ((last_update                - (time_begin_anim + show_hide_time)) % rebound_time > rebound_time / 2))
+    &&  ((last_update - (time_begin_anim + show_hide_time)) % rebound_time > rebound_time / 2))
     {
       //We are at the end of the rebound
-      actif = false;
+      visible = false;
       time_begin_anim = global_time->Read();
     }
   }
 
   //The arrow is disappearing:
-  if( !actif && global_time->Read() < time_begin_anim + show_hide_time )
+  if( !visible && global_time->Read() < time_begin_anim + show_hide_time )
   {
     dy = (int)((camera.GetPosition().y - ActiveCharacter().GetY()) * ((global_time->Read() - time_begin_anim) / (float)show_hide_time));
     return;
@@ -123,33 +123,27 @@ void CharacterCursor::Refresh()
 // Hide the cursor
 void CharacterCursor::Hide()
 {
-  if(!actif) return;
+  if (!visible) return;
   want_hide = true;
 }
 
 void CharacterCursor::Reset()
 {
-  actif = false;
+  visible = false;
   want_hide = false;
-  obj_designe = NULL;
 }
 
 void CharacterCursor::FollowActiveCharacter()
 {
-  PointeObj(&ActiveCharacter());
-}
-
-void CharacterCursor::PointeObj (PhysicalObj *obj)
-{
-  if(actif && obj==obj_designe)
+  if (visible)
     return;
-  obj_designe = obj;
-  actif = true;
+  
+  visible = true;
   want_hide = false;
   time_begin_anim = Time::GetInstance()->Read();
 }
 
 // Are we displaying the arrow on the screen ?
 bool CharacterCursor::IsDisplayed() const {
-  return actif || (Time::GetInstance()->Read() < time_begin_anim + show_hide_time);
+  return visible || (Time::GetInstance()->Read() < time_begin_anim + show_hide_time);
 }
