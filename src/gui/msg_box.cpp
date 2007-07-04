@@ -31,6 +31,13 @@ MsgBox::MsgBox(const Rectanglei& rect, Font::font_size_t fsize, Font::font_style
 {
 }
 
+MsgBox::~MsgBox()
+{
+  for (std::list<Text*>::iterator t=messages.begin(); t != messages.end(); t++)
+    delete *t;
+  messages.clear();
+}
+
 void MsgBox::Flush()
 {
   std::list<Text *>::reverse_iterator it ;
