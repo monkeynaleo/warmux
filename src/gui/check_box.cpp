@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "check_box.h"
+#include "graphic/text.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
 #include "tool/resource_manager.h"
@@ -29,6 +30,20 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
   m_value(value),
   m_checked_image(NULL),
   hidden(false)
+{
+  Init(rect);
+}
+
+CheckBox::CheckBox(Text *text, const Rectanglei &rect, bool value):
+  txt_label(text),
+  m_value(value),
+  m_checked_image(NULL),
+  hidden(false)
+{
+  Init(rect);
+}
+
+void CheckBox::Init(const Rectanglei &rect)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_checked_image = resource_manager.LoadSprite( res, "menu/check");
