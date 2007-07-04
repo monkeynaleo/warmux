@@ -103,9 +103,9 @@ void NetworkClient::ReceiveActions()
 #if defined(DEBUG)
 	if (fin != 0) {
 	  int tmp = 0xFFFFFFFF;
-	  _write(fin, &packet_size, 4);
-	  _write(fin, packet, packet_size);
-	  _write(fin, &tmp, 4);
+	  write(fin, &packet_size, 4);
+	  write(fin, packet, packet_size);
+	  write(fin, &tmp, 4);
 	}
 #endif
 
