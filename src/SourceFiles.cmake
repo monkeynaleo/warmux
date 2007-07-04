@@ -37,7 +37,7 @@ gui/box.cpp
 gui/button.cpp
 gui/button_text.cpp
 gui/check_box.cpp
-gui/EnergyBar.cpp
+gui/energy_bar.cpp
 gui/label.cpp
 gui/list_box.cpp
 gui/list_box_w_label.cpp
