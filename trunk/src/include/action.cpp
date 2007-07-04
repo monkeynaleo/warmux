@@ -108,7 +108,7 @@ void Action::Init(Action_t type)
 {
   m_type = type;
   var.clear();
-  m_timestamp = Time::GetInstance()->Read();
+  m_timestamp = TimeStamp();
   creator = NULL;
 }
 
