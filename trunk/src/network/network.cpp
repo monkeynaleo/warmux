@@ -93,6 +93,7 @@ Network::Network():
 #endif
 {
   sdlnet_initialized = false;
+  ActionHandler::GetInstance()->Flush();
 }
 //-----------------------------------------------------------------------------
 

@@ -587,6 +587,19 @@ void Action_Explosion (Action *a)
 // ########################################################
 // ########################################################
 
+void ActionHandler::Flush()
+{
+  std::list<Action*>::iterator it;
+  SDL_LockMutex(mutex);
+  for (it = queue.begin(); it != queue.end() ;)
+  {
+    MSG_DEBUG("action_handler","remove action %s", GetActionName((*it)->GetType()).c_str());
+    delete *it;
+    it = queue.erase(it);
+  }
+  SDL_UnlockMutex(mutex);
+}
+
 void ActionHandler::ExecActions()
 {
   Action * a;
