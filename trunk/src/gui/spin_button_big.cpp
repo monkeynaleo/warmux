@@ -92,8 +92,12 @@ void SpinButtonBig::SetSizePosition(const Rectanglei &rect)
 
 void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  m_minus->Draw(mousePosition, surf);
-  m_plus->Draw(mousePosition, surf);
+  if(GetValue()!=m_min_value) {
+    m_minus->Draw(mousePosition, surf);
+  }
+  if(GetValue()!=m_max_value) {
+    m_plus->Draw(mousePosition, surf);
+  }
 
   uint center_x = GetPositionX() + (GetSizeX()/2);
   uint center_y = GetPositionY() + (GetSizeY()/2) - txt_label->GetHeight()/2;
