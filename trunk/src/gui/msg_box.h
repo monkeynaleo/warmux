@@ -38,6 +38,7 @@ class MsgBox : public Widget
  public:
 
   MsgBox(const Rectanglei& rect, Font::font_size_t font_size, Font::font_style_t font_style);
+  ~MsgBox();
 
   void NewMessage(const std::string& msg, const Color& color = white_color);
   
