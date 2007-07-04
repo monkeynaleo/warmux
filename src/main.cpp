@@ -85,6 +85,8 @@ int AppWormux::main(int argc, char **argv)
 	choix = main_menu.Run();
 	StatStop("Main:Menu");
 
+	ActionHandler::GetInstance()->Flush();
+	
 	switch (choix)
 	  {
 	  case menuPLAY:

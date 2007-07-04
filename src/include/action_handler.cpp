@@ -603,29 +603,23 @@ void ActionHandler::Flush()
 void ActionHandler::ExecActions()
 {
   Action * a;
-  std::list<Action*> to_remove;
   std::list<Action*>::iterator it;
   ASSERT(mutex!=NULL);
-  for(it = queue.begin(); it != queue.end() ; ++it)
+  for (it = queue.begin(); it != queue.end() ;)
   {
     SDL_LockMutex(mutex);
     a = (*it);
     //Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
     // If action is in the future, wait for next refresh
-    if(a->GetTimestamp() > Time::GetInstance()->Read()) {
+    if (a->GetTimestamp() > Time::GetInstance()->Read()) {
       SDL_UnlockMutex(mutex);
+      it++;
       continue;
     }
     SDL_UnlockMutex(mutex);
     Exec (a);
-    to_remove.push_back(a);
-  }
-  while(to_remove.size() != 0)
-  {
-    a = to_remove.front();
-    to_remove.pop_front();
-    queue.remove(a);
-    delete(a);
+    delete *it;
+    it = queue.erase(it);
   }
 }
 
