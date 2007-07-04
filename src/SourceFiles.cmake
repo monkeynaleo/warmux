@@ -59,9 +59,11 @@ include/binreloc.c
 include/constant.cpp
 interface/cursor.cpp
 interface/game_msg.cpp
+interface/joystick.cpp
 interface/interface.cpp
 interface/keyboard.cpp
 interface/loading_screen.cpp
+interface/man_machine_interface.cpp
 interface/mouse.cpp
 interface/weapon_menu.cpp
 main.cpp
