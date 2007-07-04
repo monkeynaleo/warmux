@@ -78,6 +78,9 @@ ListBox::~ListBox()
    delete m_up;
    delete m_down;
 
+   for (std::vector<ListBoxItem*>::iterator lbi=m_items.begin(); lbi!=m_items.end(); lbi++)
+     delete *lbi;
+
    m_items.clear();
 }
 
