@@ -9,9 +9,6 @@
  */
 template<class T> class Vector2
 {
-	private:
-		static const double EPS_ZERO = 0.05;
-
 	public:
 		T x, y;
 
