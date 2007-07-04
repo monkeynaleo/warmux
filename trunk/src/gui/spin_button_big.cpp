@@ -92,10 +92,10 @@ void SpinButtonBig::SetSizePosition(const Rectanglei &rect)
 
 void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  if(GetValue()!=m_min_value) {
+  if (GetValue() != m_min_value) {
     m_minus->Draw(mousePosition, surf);
   }
-  if(GetValue()!=m_max_value) {
+  if (GetValue() != m_max_value) {
     m_plus->Draw(mousePosition, surf);
   }
 
