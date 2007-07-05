@@ -30,6 +30,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>Kurosu</nickname>
+	<name>John DOE</name>
+	<description>Win32 port, lot of patchs, lot of code modifications</description>
+	<email>kurosu_AT_free_DOT_fr</email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>lodesi</nickname>
 	<name>Laurent DEFERT SIMONNEAU</name>
 	<description>Programmer and graphic artist</description>
@@ -377,13 +384,6 @@
 	<name>Julien CATALANO</name>
 	<description>Prepare RPM packages for Mandrake</description>
 	<email>julien.catalano_AT_gmail_DOT_com</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>Kurosu</nickname>
-	<name>John DOE</name>
-	<description>Make Win32 port</description>
-	<email>kurosu_AT_free_DOT_fr</email>
 	<country>France</country>
       </author>
       <author>
