@@ -67,6 +67,7 @@ echo "[+] Run autoheader"
 $AUTOHEADER || exit 1
 
 echo "[+] Run automake"
+touch config.rpath
 $AUTOMAKE --add-missing --copy || exit 1
 
 echo "[+] Run autoconf"
