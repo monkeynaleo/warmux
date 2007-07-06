@@ -27,8 +27,9 @@
 class ParachuteConfig : public WeaponConfig
 {
   public:
-    double wind_factor ;
-    double air_resist_factor ;
+     double wind_factor;
+     double air_resist_factor;
+     double force_side_displacement;
   public:
     ParachuteConfig();
     void LoadXml(xmlpp::Element *elem);
@@ -39,8 +40,9 @@ class ParachuteConfig : public WeaponConfig
 class Parachute : public Weapon
 {
   private:
-    bool open ;
-    bool closing ;
+    bool open;
+    bool closing;
+    double m_x_extern;
     Sprite* image;
   protected:
     void p_Select();
@@ -51,6 +53,12 @@ class Parachute : public Weapon
     Parachute();
     void Draw() ;
     void SignalTurnEnd();
+
+    void HandleKeyPressed_Shoot();
+    void HandleKeyPressed_MoveRight();
+    void HandleKeyReleased_MoveRight();
+    void HandleKeyPressed_MoveLeft();
+    void HandleKeyReleased_MoveLeft();
 
     ParachuteConfig& cfg();
     DECLARE_GETWEAPONSTRING();
