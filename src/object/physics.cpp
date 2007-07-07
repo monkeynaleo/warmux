@@ -537,7 +537,9 @@ void Physics::RunPhysicalEngine()
 void Physics::Rebound(Point2d contactPos, double contact_angle)
 {
   double norme, angle;
-
+  
+  MSG_DEBUG("physic.rebound", "Rebound on %s at %d,%d", typeid(*this).name(), contactPos.x, contactPos.y);
+    
   // Get norm and angle of the object speed vector.
   GetSpeed(norme, angle);
 
