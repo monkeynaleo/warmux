@@ -655,7 +655,11 @@ void ActionHandler::Register (Action::Action_t action,
 
 void ActionHandler::Exec(Action *a)
 {
-  MSG_DEBUG("action_handler", "Executing action %s",GetActionName(a->GetType()).c_str());
+#ifdef DEBUG
+  int id=rand();
+#endif
+
+  MSG_DEBUG("action_handler", "-> (%d) Executing action %s", id, GetActionName(a->GetType()).c_str());
   handler_it it=handler.find(a->GetType());
   NET_ASSERT(it != handler.end())
   {
@@ -663,6 +667,7 @@ void ActionHandler::Exec(Action *a)
     return;
   }
   (*it->second) (a);
+  MSG_DEBUG("action_handler", "<- (%d) Executing action %s", id, GetActionName(a->GetType()).c_str());
 }
 
 std::string ActionHandler::GetActionName (Action::Action_t action)

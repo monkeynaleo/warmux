@@ -261,6 +261,7 @@ void Weapon::PrepareShoot(double strength, double angle)
   StopLoading();
 
   ActiveCharacter().PrepareShoot();
+  MSG_DEBUG("weapon.shoot", "End of shoot");
 }
 
 bool Weapon::Shoot()
