@@ -539,14 +539,18 @@ void Character::BackJump()
 
 void Character::PrepareShoot()
 {
+  MSG_DEBUG("weapon.shoot", "-> begin");
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot");
-  if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
+  if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
   {
+    MSG_DEBUG("weapon.shoot", "-> call DoShoot");
     // If a movement is defined for this weapon, just shoot
     DoShoot();
+    MSG_DEBUG("weapon.shoot", "<- end of call DoShoot");
   }
   else
     prepare_shoot = true;
+  MSG_DEBUG("weapon.shoot", "<- end");
 }
 
 bool Character::IsPreparingShoot()
@@ -556,10 +560,15 @@ bool Character::IsPreparingShoot()
 
 void Character::DoShoot()
 {
+  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
+    return; // hack related to bugs 8656 and 9462
+
+  MSG_DEBUG("weapon.shoot", "-> begin");
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
   damage_stats.OneMoreShot();
   ActiveTeam().AccessWeapon().Shoot();
+  MSG_DEBUG("weapon.shoot", "<- end");
 }
 
 void Character::Refresh()
