@@ -26,7 +26,7 @@
 #include "network.h"
 #include "include/action_handler.h"
 
-const uint table_size = 128; //Number of pregerated numbers
+const uint table_size = 1024; //Number of pregerated numbers
 
 RandomSync randomSync;
 
@@ -47,7 +47,7 @@ void RandomSync::Init(){
   }
   
   //Fill the pregenerated tables:
-  for(uint i=0; i < table_size; i++)
+  for (uint i=0; i < table_size; i++)
     GenerateTable();
 }
 
@@ -76,15 +76,15 @@ void RandomSync::ClearTable()
 
 double RandomSync::GetRand()
 {
-  if(Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()) GenerateTable();
+  if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
+    GenerateTable();
 
-  // If the table is empty freeze until the server have sent something
-  while(rnd_table.size() == 0)
-  {
-    SDL_Delay(100);
-    ActionHandler::GetInstance()->ExecActions();
+  ASSERT(rnd_table.size()!=0);
+  if (rnd_table.size() == 0) {
+    Error("Random table is empty!\n");
+    exit(1);
   }
-
+  
   double nbr = rnd_table.front();
   rnd_table.pop_front();
   return nbr;
