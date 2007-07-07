@@ -254,7 +254,9 @@ void PhysicalObj::AddDamage(uint damage_points)
 // Return true if collision occured
 void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 {
-  if (IsGhost()) return;
+  if (IsGhost()) 
+    return;
+
   Point2d pos, offset;
   PhysicalObj* collided_obj = NULL;
 
@@ -265,7 +267,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   } collision_t;
   collision_t collision = NO_COLLISION;
 
-  if(IsGhost())
+  if (IsGhost())
     return;
 
   // Convert meters to pixels.
@@ -370,6 +372,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     SignalGroundCollision();
     SignalCollision();
     // Make it rebound on the ground !!
+    MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
     Rebound(contactPos, ground_angle);
     CheckRebound();
   } else if ( collision == COLLISION_ON_OBJECT ) {
@@ -397,6 +400,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     // Rebound on the object
     double contact_angle = - GetSpeedAngle();
     Point2d contactPos = pos;
+    MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
     Rebound(contactPos, contact_angle);
     CheckRebound();
   }
