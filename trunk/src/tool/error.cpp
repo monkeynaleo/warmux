@@ -77,7 +77,7 @@ std::ostream& CError::operator<< (std::ostream &os) const
 void TriggerError (const char *filename, unsigned long line, 
 		      const std::string &txt)
 {
-  std::cout << "! " 
+  std::cerr << "! " 
 	    << Format(_("Error in %s:%lu"), filename, line)
 	    << ": " << txt << std::endl;
 
