@@ -175,7 +175,7 @@ void TuxLauncher::EndOfTurn()
 
 void TuxLauncher::HandleKeyPressed_MoveRight()
 {
-  if (m_is_active)
+  if (IsInUse())
     current_tux->turn_right();
   else
     ActiveCharacter().HandleKeyPressed_MoveRight();
@@ -183,7 +183,7 @@ void TuxLauncher::HandleKeyPressed_MoveRight()
 
 void TuxLauncher::HandleKeyRefreshed_MoveRight()
 {
-  if (m_is_active)
+  if (IsInUse())
     current_tux->turn_right();
   else
     ActiveCharacter().HandleKeyRefreshed_MoveRight();
@@ -191,13 +191,13 @@ void TuxLauncher::HandleKeyRefreshed_MoveRight()
 
 void TuxLauncher::HandleKeyReleased_MoveRight()
 {
-  if (!m_is_active)
+  if (!IsInUse())
     ActiveCharacter().HandleKeyReleased_MoveRight();
 }
 
 void TuxLauncher::HandleKeyPressed_MoveLeft()
 {
-  if (m_is_active)
+  if (IsInUse())
     current_tux->turn_left();
   else
     ActiveCharacter().HandleKeyPressed_MoveLeft();
@@ -205,7 +205,7 @@ void TuxLauncher::HandleKeyPressed_MoveLeft()
 
 void TuxLauncher::HandleKeyRefreshed_MoveLeft()
 {
-  if (m_is_active)
+  if (IsInUse())
     current_tux->turn_left();
   else
     ActiveCharacter().HandleKeyRefreshed_MoveLeft();
@@ -213,7 +213,7 @@ void TuxLauncher::HandleKeyRefreshed_MoveLeft()
 
 void TuxLauncher::HandleKeyReleased_MoveLeft()
 {
-  if (!m_is_active)
+  if (!IsInUse())
     ActiveCharacter().HandleKeyReleased_MoveLeft();
 }
 

@@ -66,7 +66,7 @@ void Construct::Refresh()
 
 void Construct::Draw()
 {
-  if (!m_is_active) {
+  if (!IsInUse()) {
     Weapon::Draw();
 
     dst = Mouse::GetInstance()->GetWorldPosition();

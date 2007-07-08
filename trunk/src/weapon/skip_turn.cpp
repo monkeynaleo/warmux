@@ -53,7 +53,7 @@ bool SkipTurn::p_Shoot()
 
 void SkipTurn::Refresh()
 {
-  if (m_is_active)
+  if (IsInUse())
     m_is_active = false;
 }
 

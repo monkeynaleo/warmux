@@ -65,7 +65,7 @@ WeaponProjectile * Gun::GetProjectileInstance()
 
 bool Gun::p_Shoot()
 {
-  if (m_is_active)
+  if (IsInUse())
     return false;
 
   m_is_active = true;

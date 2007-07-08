@@ -74,7 +74,7 @@ bool Syringe::p_Shoot (){
 }
 
 void Syringe::Refresh(){
-  if (m_is_active)
+  if (IsInUse())
     m_is_active = false;
 }
 

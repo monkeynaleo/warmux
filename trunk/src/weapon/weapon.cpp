@@ -201,7 +201,7 @@ void Weapon::Deselect()
 
 void Weapon::Manage()
 {
-  if (!m_is_active)
+  if (!IsInUse())
     return ;
 
   Refresh();
@@ -463,7 +463,7 @@ void Weapon::Draw(){
 
   // Do we need to draw strength_bar ? (real draw is done by class Interface)
   // We do not draw on the network
-  if (max_strength != 0 && IsReady() && !m_is_active &&
+  if (max_strength != 0 && IsReady() && !IsInUse() &&
       (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
     weapon_strength_bar.visible = true;
 
@@ -479,12 +479,12 @@ void Weapon::Draw(){
 	break;
 
       case VISIBLE_ONLY_WHEN_ACTIVE:
-	if (!m_is_active)
+	if (!IsInUse())
 	  return ;
 	break;
 
       case VISIBLE_ONLY_WHEN_INACTIVE:
-	if (m_is_active)
+	if (IsInUse())
 	  return ;
 	break;
 
@@ -559,12 +559,12 @@ void Weapon::DrawAmmoUnits() const
   switch (m_unit_visibility) {
 
   case VISIBLE_ONLY_WHEN_ACTIVE:
-    if (!m_is_active)
+    if (!IsInUse())
       return;
     break;
 
   case VISIBLE_ONLY_WHEN_INACTIVE:
-    if (m_is_active)
+    if (IsInUse())
       return ;
     break;
 

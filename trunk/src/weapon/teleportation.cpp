@@ -71,7 +71,7 @@ bool Teleportation::p_Shoot ()
 
 void Teleportation::Refresh()
 {
-  if (!m_is_active) return;
+  if (!IsInUse()) return;
 
   double dt = Time::GetInstance()->Read() - time;
 
@@ -90,7 +90,7 @@ void Teleportation::Refresh()
 
 void Teleportation::Draw()
 {
-  if (!m_is_active)
+  if (!IsInUse())
     Weapon::Draw();
 }
 

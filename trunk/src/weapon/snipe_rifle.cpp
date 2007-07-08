@@ -73,7 +73,7 @@ WeaponProjectile * SnipeRifle::GetProjectileInstance()
 
 bool SnipeRifle::p_Shoot()
 {
-  if(m_is_active)
+  if(IsInUse())
     return false;
 
   m_is_active = true;

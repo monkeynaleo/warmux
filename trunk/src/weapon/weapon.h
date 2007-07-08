@@ -207,7 +207,7 @@ public:
   bool Shoot();
 
   // The weapon is still in use (animation for instance) ?
-  bool IsInUse() const;
+  virtual bool IsInUse() const;
 
   // the weapon is ready to use ? (is there bullets left ?)
   virtual bool IsReady() const ;

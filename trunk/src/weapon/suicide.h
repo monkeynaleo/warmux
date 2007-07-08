@@ -29,14 +29,13 @@ class Suicide : public Weapon
 {
   private:
     int sound_channel;
-    bool is_dying;
   protected:
     bool p_Shoot();
-    void p_Select();
     void Refresh();
   public:
     Suicide();
     ExplosiveWeaponConfig &cfg();
+    bool IsInUse() const;
     DECLARE_GETWEAPONSTRING();
 };
 
