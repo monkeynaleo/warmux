@@ -65,7 +65,7 @@ void LowGrav::Draw()
 
 void LowGrav::HandleKeyPressed_Shoot()
 {
-  if (!m_is_active)
+  if (!IsInUse())
     NewActionWeaponShoot();
   else
     NewActionWeaponStopUse();

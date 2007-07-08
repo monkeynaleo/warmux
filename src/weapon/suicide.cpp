@@ -35,29 +35,15 @@ Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig
   sound_channel = -1;
 }
 
-void Suicide::p_Select()
-{
-  is_dying = false;
-}
-
 bool Suicide::p_Shoot()
 {
   sound_channel = jukebox.Play ("share", "weapon/suicide");
-
-  // GameLoop::GetInstance()->interaction_enabled=false;
-  is_dying = true;
-
   return true;
 }
 
 void Suicide::Refresh()
 {
-  if (!is_dying) return;
-
-  m_is_active = sound_channel != -1 && Mix_Playing(sound_channel);
-
-  if(!m_is_active && !ActiveCharacter().IsDead())
-  {
+  if(m_last_fire_time > 0 && !Mix_Playing(sound_channel) && !ActiveCharacter().IsDead()) {
     ActiveCharacter().DisableDeathExplosion();
     ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
     ActiveCharacter().SetEnergy(0); // Die!
@@ -66,8 +52,15 @@ void Suicide::Refresh()
   }
 }
 
+bool Suicide::IsInUse() const
+{
+  return m_last_fire_time > 0 && !ActiveCharacter().IsDead();
+}
+
 ExplosiveWeaponConfig& Suicide::cfg()
-{ return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
+{
+  return static_cast<ExplosiveWeaponConfig&>(*extra_params);
+}
 
 std::string Suicide::GetWeaponWinString(const char *TeamName, uint items_count )
 {

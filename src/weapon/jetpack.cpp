@@ -56,7 +56,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
 void JetPack::Refresh()
 {
-  if (m_is_active)
+  if (IsInUse())
   {
     if (!ActiveTeam().IsLocal()) {
       return;
@@ -184,7 +184,7 @@ void JetPack::StopRight()
 
 void JetPack::HandleKeyPressed_Up()
 {
-  if (m_is_active)
+  if (IsInUse())
     GoUp();
   else
     ActiveCharacter().HandleKeyPressed_Up();
@@ -192,7 +192,7 @@ void JetPack::HandleKeyPressed_Up()
 
 void JetPack::HandleKeyReleased_Up()
 {
-  if (m_is_active)
+  if (IsInUse())
     StopUp();
   else
     ActiveCharacter().HandleKeyReleased_Up();
@@ -200,7 +200,7 @@ void JetPack::HandleKeyReleased_Up()
 
 void JetPack::HandleKeyPressed_MoveLeft()
 {
-  if (m_is_active)
+  if (IsInUse())
     GoLeft();
   else
     ActiveCharacter().HandleKeyPressed_MoveLeft();
@@ -208,7 +208,7 @@ void JetPack::HandleKeyPressed_MoveLeft()
 
 void JetPack::HandleKeyReleased_MoveLeft()
 {
-  if (m_is_active)
+  if (IsInUse())
     StopLeft();
   else
     ActiveCharacter().HandleKeyReleased_MoveLeft();
@@ -216,7 +216,7 @@ void JetPack::HandleKeyReleased_MoveLeft()
 
 void JetPack::HandleKeyPressed_MoveRight()
 {
-  if (m_is_active)
+  if (IsInUse())
     GoRight();
   else
     ActiveCharacter().HandleKeyPressed_MoveRight();
@@ -224,7 +224,7 @@ void JetPack::HandleKeyPressed_MoveRight()
 
 void JetPack::HandleKeyReleased_MoveRight()
 {
-  if (m_is_active)
+  if (IsInUse())
     StopRight();
   else
     ActiveCharacter().HandleKeyReleased_MoveRight();
@@ -232,7 +232,7 @@ void JetPack::HandleKeyReleased_MoveRight()
 
 void JetPack::HandleKeyPressed_Shoot()
 {
-  if (!m_is_active)
+  if (!IsInUse())
     NewActionWeaponShoot();
   else
     NewActionWeaponStopUse();

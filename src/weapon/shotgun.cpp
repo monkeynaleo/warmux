@@ -92,7 +92,7 @@ bool Shotgun::p_Shoot ()
 {
   missed_shots = 0;
   announce_missed_shots = false;
-  if (m_is_active)
+  if (IsInUse())
     return false;
   for(int i = 0; i < nb_bullets; i++) {
     projectile->Shoot(SHOTGUN_BUCKSHOT_SPEED);

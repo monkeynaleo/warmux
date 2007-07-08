@@ -36,7 +36,8 @@ Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
   m_weapon_fire->EnableRotationCache(32);
 }
 
-bool Baseball::p_Shoot (){
+bool Baseball::p_Shoot()
+{
 
   double angle = ActiveCharacter().GetFiringAngle();
   double rayon = 0.0;
@@ -77,12 +78,14 @@ bool Baseball::p_Shoot (){
   return true;
 }
 
-void Baseball::Refresh(){
-  if (m_is_active)
+void Baseball::Refresh()
+{
+  if (IsInUse())
     m_is_active = false;
 }
 
-BaseballConfig& Baseball::cfg() {
+BaseballConfig& Baseball::cfg()
+{
   return static_cast<BaseballConfig&>(*extra_params);
 }
 
@@ -95,12 +98,14 @@ std::string Baseball::GetWeaponWinString(const char *TeamName, uint items_count 
 }
 
 
-BaseballConfig::BaseballConfig(){
+BaseballConfig::BaseballConfig()
+{
   range =  70;
   strength = 250;
 }
 
-void BaseballConfig::LoadXml(xmlpp::Element *elem){
+void BaseballConfig::LoadXml(xmlpp::Element *elem)
+{
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
   XmlReader::ReadUint(elem, "strength", strength);
