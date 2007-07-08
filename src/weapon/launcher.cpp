@@ -370,35 +370,41 @@ void WeaponLauncher::DirectExplosion()
   ApplyExplosion (pos, cfg());
 }
 
-// Signal that a projectile explosion
-void WeaponLauncher::SignalProjectileExplosion()
+// Signal the end of a projectile for any reason possible
+void WeaponLauncher::SignalEndOfProjectile()
 {
   DecActiveProjectile();
   m_is_active = false;
 }
 
+// Signal that a projectile explosion
+void WeaponLauncher::SignalProjectileExplosion()
+{
+  SignalEndOfProjectile();
+}
+
 // Signal that a projectile fired by this weapon has hit something (ground, character etc)
 void WeaponLauncher::SignalProjectileCollision()
 {
-  m_is_active = false;
+  SignalEndOfProjectile();
 }
 
 // Signal a ghost state
 void WeaponLauncher::SignalProjectileGhostState()
 {
-  m_is_active = false;
+  SignalEndOfProjectile();
 }
 
 // Signal a projectile timeout (for exemple: grenade, disco grenade ... etc.)
 void WeaponLauncher::SignalProjectileTimeout()
 {
-  m_is_active = false;
+  SignalEndOfProjectile();
 }
 
 // Signal a projectile is drowning
 void WeaponLauncher::SignalProjectileDrowning()
 {
-  m_is_active = false;
+  SignalEndOfProjectile();
 }
 
 // Keep the total amount of active projectile

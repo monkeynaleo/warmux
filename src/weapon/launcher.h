@@ -129,6 +129,7 @@ class WeaponLauncher : public Weapon
     virtual void Draw();
 
     // Handle of projectile events
+    virtual void SignalEndOfProjectile();
     virtual void SignalProjectileExplosion();
     virtual void SignalProjectileCollision();
     virtual void SignalProjectileDrowning();

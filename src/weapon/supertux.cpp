@@ -145,6 +145,7 @@ TuxLauncher::TuxLauncher() :
 {
   m_name = _("SuperTux");
   m_category = SPECIAL;
+  current_tux = NULL;
   ReloadLauncher();
 
   // unit will be used when the supertux disappears
@@ -173,9 +174,20 @@ void TuxLauncher::EndOfTurn()
   GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
+bool TuxLauncher::IsInUse() const
+{
+  return current_tux != NULL;
+}
+
+void TuxLauncher::SignalEndOfProjectile()
+{
+  current_tux = NULL;
+}
+
+// Move right
 void TuxLauncher::HandleKeyPressed_MoveRight()
 {
-  if (IsInUse())
+  if (current_tux != NULL)
     current_tux->turn_right();
   else
     ActiveCharacter().HandleKeyPressed_MoveRight();
@@ -183,7 +195,7 @@ void TuxLauncher::HandleKeyPressed_MoveRight()
 
 void TuxLauncher::HandleKeyRefreshed_MoveRight()
 {
-  if (IsInUse())
+  if (current_tux != NULL)
     current_tux->turn_right();
   else
     ActiveCharacter().HandleKeyRefreshed_MoveRight();
@@ -191,13 +203,14 @@ void TuxLauncher::HandleKeyRefreshed_MoveRight()
 
 void TuxLauncher::HandleKeyReleased_MoveRight()
 {
-  if (!IsInUse())
+  if (current_tux == NULL)
     ActiveCharacter().HandleKeyReleased_MoveRight();
 }
 
+// Move left
 void TuxLauncher::HandleKeyPressed_MoveLeft()
 {
-  if (IsInUse())
+  if (current_tux != NULL)
     current_tux->turn_left();
   else
     ActiveCharacter().HandleKeyPressed_MoveLeft();
@@ -205,7 +218,7 @@ void TuxLauncher::HandleKeyPressed_MoveLeft()
 
 void TuxLauncher::HandleKeyRefreshed_MoveLeft()
 {
-  if (IsInUse())
+  if (current_tux != NULL)
     current_tux->turn_left();
   else
     ActiveCharacter().HandleKeyRefreshed_MoveLeft();
@@ -213,7 +226,7 @@ void TuxLauncher::HandleKeyRefreshed_MoveLeft()
 
 void TuxLauncher::HandleKeyReleased_MoveLeft()
 {
-  if (!IsInUse())
+  if (current_tux == NULL)
     ActiveCharacter().HandleKeyReleased_MoveLeft();
 }
 
