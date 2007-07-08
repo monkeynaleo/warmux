@@ -215,11 +215,10 @@ void Game::DisplayPause()
 
   jukebox.Pause();
 
-  //Pause screen
-  question.Set ("", false, 0, "interface/pause_screen");
-  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(ManMachineInterface::KEY_PAUSE),
-		      1
-		      );
+  // Pause screen
+  question.Set("", false, 0, "interface/pause_screen");
+  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(ManMachineInterface::KEY_PAUSE), 1);
+  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(ManMachineInterface::KEY_QUIT), 1);
   AskQuestion(question, false);
   jukebox.Resume();
 }
