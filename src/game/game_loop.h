@@ -74,6 +74,8 @@ public:
   void SetState(game_loop_state_t new_state, bool begin_game=false);
   void Really_SetState(game_loop_state_t new_state); // called by the action_handler
 
+  // Get remaining time to play
+  uint GetRemainingTime() const;
   // Signal death of a player
   void SignalCharacterDeath (Character *character);
 
