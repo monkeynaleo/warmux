@@ -44,7 +44,6 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
 
 void Parachute::p_Select()
 {
-  m_is_active = true;
   open = false;
   closing = false;
   image->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
@@ -53,7 +52,12 @@ void Parachute::p_Select()
 void Parachute::p_Deselect()
 {
   ActiveCharacter().ResetConstants();
-  m_is_active = false;
+}
+
+bool Parachute::IsInUse() const
+{
+  return GameLoop::GetInstance()->GetRemainingTime() > 0 &&
+         GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING;
 }
 
 bool Parachute::p_Shoot()

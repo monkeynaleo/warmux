@@ -51,8 +51,9 @@ class Parachute : public Weapon
     bool p_Shoot();
   public:
     Parachute();
-    void Draw() ;
+    void Draw();
     void SignalTurnEnd();
+    bool IsInUse() const;
 
     void HandleKeyPressed_Shoot();
     void HandleKeyPressed_MoveRight();
