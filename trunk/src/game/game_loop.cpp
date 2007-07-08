@@ -438,6 +438,11 @@ void GameLoop::RefreshClock()
     }// if
 }
 
+uint GameLoop::GetRemainingTime() const
+{
+  return duration;
+}
+
 void GameLoop::SetCurrentBox(ObjBox * current_box)
 {
   current_ObjBox = current_box;
@@ -527,7 +532,7 @@ void GameLoop::__SetState_END_TURN()
   duration = GameMode::GetInstance()->duration_exchange_player;
   Interface::GetInstance()->UpdateTimer(duration);
   Interface::GetInstance()->EnableDisplayTimer(false);
-  pause_seconde = Time::GetInstance()->Read();  
+  pause_seconde = Time::GetInstance()->Read();
 
   // Applying Disease damage and Death mode.
   ApplyDiseaseDamage();
@@ -545,7 +550,7 @@ void GameLoop::Really_SetState(game_loop_state_t new_state)
   switch (state)
   {
   // Begining of a new turn:
-  case PLAYING:  
+  case PLAYING:
     __SetState_PLAYING();
     break;
 
