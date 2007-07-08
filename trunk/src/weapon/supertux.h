@@ -71,11 +71,12 @@ class TuxLauncher : public WeaponLauncher
   public:
     TuxLauncher(); 
     void EndOfTurn(); // should be called only by SuperTux
+    bool IsInUse() const;
 
+    void SignalEndOfProjectile();
     virtual void HandleKeyPressed_MoveRight();
     virtual void HandleKeyRefreshed_MoveRight();
     virtual void HandleKeyReleased_MoveRight();
-    
     virtual void HandleKeyPressed_MoveLeft();
     virtual void HandleKeyRefreshed_MoveLeft();
     virtual void HandleKeyReleased_MoveLeft();

@@ -636,22 +636,29 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   return true;
 }
 
-bool Weapon::IsInUse() const{
+bool Weapon::IsInUse() const
+{
+  // TODO : remove m_is_active by something like :
+  // return m_last_fire_time + 1000 > Time::GetInstance()->Read();
   return m_is_active;
 }
 
-const double Weapon::ReadStrength() const{
+const double Weapon::ReadStrength() const
+{
   return m_strength;
 }
 
-bool Weapon::IsLoading() const{
+bool Weapon::IsLoading() const
+{
   return m_first_time_loading;
 }
 
-void Weapon::ChooseTarget(Point2i mouse_pos){
+void Weapon::ChooseTarget(Point2i mouse_pos)
+{
 }
 
-void Weapon::SignalTurnEnd(){
+void Weapon::SignalTurnEnd()
+{
 }
 
 void Weapon::ActionStopUse()
