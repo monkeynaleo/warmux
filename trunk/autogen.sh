@@ -67,7 +67,7 @@ echo "[+] Run autoheader"
 $AUTOHEADER || exit 1
 
 echo "[+] Run automake"
-touch config.rpath
+touch config.rpath # automake 1.10 has a bug and wants this file
 $AUTOMAKE --add-missing --copy || exit 1
 
 echo "[+] Run autoconf"
