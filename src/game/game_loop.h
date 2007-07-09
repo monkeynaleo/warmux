@@ -55,6 +55,14 @@ private:
   static GameLoop * singleton;
   GameLoop();
 
+
+  // Time to wait between 2 loops
+  int delay;
+  // Time to display the next frame
+  uint time_of_next_frame;
+  // Time to compute the next physic engine frame
+  uint time_of_next_phy_frame;
+
 public:
   static GameLoop * GetInstance();
 
@@ -108,6 +116,7 @@ private:
   void __SetState_HAS_PLAYED();
   void __SetState_END_TURN();
 
-  void EndOfGame();
+  void EndOfGameLoop();
+  void MainLoop();
 };
 #endif
