@@ -44,6 +44,12 @@ Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("air_attack_projectile", cfg, NULL)
 {
   explode_colliding_character = true;
+  falling_sound.Play("share", "weapon/aircraft_bomb_falling");
+}
+
+Obus::~Obus()
+{
+  falling_sound.Stop();
 }
 
 //-----------------------------------------------------------------------------
@@ -58,6 +64,13 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   SetSize(image->GetSize());
   obus_dx = 100;
   obus_dy = GetY() + GetHeight();
+
+  flying_sound.Play("share", "weapon/aircraft_flying");
+}
+
+Plane::~Plane()
+{
+  flying_sound.Stop();
 }
 
 void Plane::Shoot(double speed, Point2i& target)
