@@ -40,13 +40,18 @@ class AirAttackConfig : public ExplosiveWeaponConfig
 
 class Obus : public WeaponProjectile
 {
+  private:
+    SoundSample falling_sound;
   public:
     Obus(AirAttackConfig& cfg);
+    virtual ~Obus();
 };
 
 class Plane : public PhysicalObj
 {
   private:
+    SoundSample flying_sound;
+
     uint nb_dropped_bombs;
     Obus * last_dropped_bomb;
 
@@ -63,6 +68,7 @@ class Plane : public PhysicalObj
 
   public:
     Plane(AirAttackConfig& cfg);
+    virtual ~Plane();
     void Shoot(double speed, Point2i& target);
     void Draw();
     void Refresh();
