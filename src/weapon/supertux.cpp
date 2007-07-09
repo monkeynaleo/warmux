@@ -45,7 +45,6 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
   explode_colliding_character = true;
   SetSize(image->GetSize());
   SetTestRect(1, 1, 2, 2);
-  sound_channel = -1;
 }
 
 void SuperTux::Shoot(double strength)
@@ -58,7 +57,7 @@ void SuperTux::Shoot(double strength)
   last_move = global_time->Read();
   begin_time = global_time->Read();
 
-  sound_channel = jukebox.Play("share","weapon/supertux_flying", -1);
+  flying_sound.Play("share","weapon/supertux_flying", -1);
 }
 
 void SuperTux::Refresh()
@@ -109,7 +108,7 @@ void SuperTux::SignalOutOfMap()
   GameMessages::GetInstance()->Add (_("Bye bye tux..."));
   WeaponProjectile::SignalOutOfMap();
 
-  jukebox.Stop(sound_channel);
+  flying_sound.Stop();
 
   // To go further in the game loop
   static_cast<TuxLauncher *>(launcher)->EndOfTurn();
@@ -119,7 +118,7 @@ void SuperTux::Explosion()
 {
   WeaponProjectile::Explosion();
 
-  jukebox.Stop(sound_channel);
+  flying_sound.Stop();
 
   // To go further in the game loop
   static_cast<TuxLauncher *>(launcher)->EndOfTurn();

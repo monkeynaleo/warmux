@@ -36,8 +36,7 @@ class MineConfig;
 class ObjMine : public WeaponProjectile
 {
   private:
-  // channel used for sound
-    int channel;
+    SoundSample timeout_sound;
 
   // this is a fake mine ?
     bool fake;

@@ -32,18 +32,17 @@ Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig
 {
   m_name = _("Commit Suicide");
   m_category = DUEL;
-  sound_channel = -1;
 }
 
 bool Suicide::p_Shoot()
 {
-  sound_channel = jukebox.Play ("share", "weapon/suicide");
+  suicide_sound.Play ("share", "weapon/suicide");
   return true;
 }
 
 void Suicide::Refresh()
 {
-  if(m_last_fire_time > 0 && !Mix_Playing(sound_channel) && !ActiveCharacter().IsDead()) {
+  if(m_last_fire_time > 0 && !suicide_sound.IsPlaying() && !ActiveCharacter().IsDead()) {
     ActiveCharacter().DisableDeathExplosion();
     ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
     ActiveCharacter().SetEnergy(0); // Die!

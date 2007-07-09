@@ -28,7 +28,7 @@
 class Suicide : public Weapon
 {
   private:
-    int sound_channel;
+    SoundSample suicide_sound;
   protected:
     bool p_Shoot();
     void Refresh();

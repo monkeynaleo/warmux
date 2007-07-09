@@ -16,49 +16,30 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon dynamite : When fired, explode after a short laps of time. Then make a
- * big hole, eject character and made them lost energy.
- * Like a dynamite after all :)
+ * Sound Sample : stupid class that avoids to take care of channel assigned by
+ * SDL
  *****************************************************************************/
 
-#ifndef DYNAMITE_H
-#define DYNAMITE_H
+#ifndef SOUND_SAMPLE_H
+#define SOUND_SAMPLE_H
+//-----------------------------------------------------------------------------
+#include "jukebox.h"
+//-----------------------------------------------------------------------------
 
-#include "launcher.h"
-#include "graphic/sprite.h"
-#include "include/base.h"
-#include "character/character.h"
-
-class Dynamite;
-
-class DynamiteStick : public WeaponProjectile
+class SoundSample
 {
-  SoundSample timeout_sound;
+ private:
+  int channel;
 
-  public:
-    DynamiteStick(ExplosiveWeaponConfig& cfg,
-                  WeaponLauncher * p_launcher);
+ public:
+  SoundSample();
 
-    void Shoot(double strength);
-    void Refresh();
+  void Play(const std::string& category,
+	    const std::string& sample,
+	    const int loop = 1);
+  void Stop();
 
-  protected:
-    void ShootSound();
-    void SignalExplosion();
-    void SignalOutOfMap();
-    void SignalDrowning();
+  bool IsPlaying();
 };
-
-
-// L'arme dynamite
-class Dynamite : public WeaponLauncher
-{
-  protected:
-    bool p_Shoot();
-  protected:
-    WeaponProjectile * GetProjectileInstance();
-  public:
-    Dynamite();
-    DECLARE_GETWEAPONSTRING();
-};
-#endif /* DYNAMITE_H */
+//-----------------------------------------------------------------------------
+#endif

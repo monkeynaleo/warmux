@@ -30,7 +30,7 @@ class JetPack : public Weapon
     double m_x_force;
     double m_y_force;
 
-    int channel;
+    SoundSample flying_sound;
 
     // Jetpack fuel.
     uint m_last_fuel_down;

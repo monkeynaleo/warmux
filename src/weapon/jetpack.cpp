@@ -51,7 +51,6 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
   m_x_force = 0.0;
   m_y_force = 0.0;
-  channel = -1;
 }
 
 void JetPack::Refresh()
@@ -122,7 +121,7 @@ void JetPack::StartUse()
   if ( (m_x_force == 0) && (m_y_force == 0))
     {
       m_last_fuel_down = Time::GetInstance()->Read();
-      channel = jukebox.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
+      flying_sound.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
       camera.FollowObject (&ActiveCharacter(),true, true, true);
       camera.SetCloseFollowing(true);
@@ -136,9 +135,7 @@ void JetPack::StopUse()
   ActiveCharacter().SetMovement("jetpack-nofire");
   if (m_x_force == 0.0 && m_y_force == 0.0)
   {
-    if(channel != -1)
-      jukebox.Stop(channel);
-    channel = -1;
+    flying_sound.Stop();
   }
 }
 

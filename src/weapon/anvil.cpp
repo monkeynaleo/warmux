@@ -39,7 +39,6 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
              WeaponLauncher * p_launcher) :
   WeaponProjectile ("anvil", cfg, p_launcher)
 {
-  channel = -1;
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
@@ -72,12 +71,12 @@ void Anvil::Refresh()
 
 void Anvil::PlayFallSound()
 {
-  channel = jukebox.Play("share","weapon/anvil_fall", -1);
+  falling_sound.Play("share","weapon/anvil_fall", -1);
 }
 
 void Anvil::PlayCollisionSound()
 {
-  jukebox.Stop(channel);
+  falling_sound.Stop();
   jukebox.Play("share","weapon/anvil_collision");
 }
 

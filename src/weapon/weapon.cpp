@@ -98,8 +98,6 @@ Weapon::Weapon(Weapon_type type,
   m_image = NULL;
   m_weapon_fire = NULL;
 
-  channel_load = -1;
-
   if (!use_flipping && !EgalZero(min_angle - max_angle))
     use_flipping = true;
 
@@ -437,7 +435,7 @@ void Weapon::InitLoading(){
   if (max_strength == 0)
     return ;
 
-  channel_load = jukebox.Play("share","weapon/load");
+  loading_sound.Play("share","weapon/load");
 
   m_first_time_loading = Time::GetInstance()->Read();
 
@@ -449,7 +447,7 @@ void Weapon::InitLoading(){
 void Weapon::StopLoading(){
   m_first_time_loading = 0 ;
 
-  jukebox.Stop(channel_load);
+  loading_sound.Stop();
 }
 
 void Weapon::Draw(){

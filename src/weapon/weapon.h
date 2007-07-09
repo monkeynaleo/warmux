@@ -30,7 +30,7 @@
 #include "include/base.h"
 #include "particles/particle.h"
 #include "object/physical_obj.h"
-#include "sound/jukebox.h"
+#include "sound/sound_sample.h"
 #include "tool/debug.h"
 
 class Character;
@@ -139,8 +139,7 @@ protected:
   bool use_unit_on_first_shoot;
   bool can_be_used_on_closed_map;
 
-  // For sound
-  int channel_load;
+  SoundSample loading_sound;
 
 public:
   // weapon's icon
