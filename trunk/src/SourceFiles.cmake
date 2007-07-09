@@ -122,6 +122,7 @@ particles/smoke.cpp
 particles/star.cpp
 particles/teleport_member.cpp
 sound/jukebox.cpp
+sound/sound_sample.cpp
 team/results.cpp
 team/team.cpp
 team/team_energy.cpp

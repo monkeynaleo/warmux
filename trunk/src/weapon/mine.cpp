@@ -51,7 +51,6 @@ ObjMine::ObjMine(MineConfig& cfg,
 {
   m_allow_negative_y = true;
   animation = false;
-  channel = -1;
   is_active = true;
   explode_with_collision = false;
 
@@ -92,7 +91,7 @@ void ObjMine::StartTimeout()
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;
     MSG_DEBUG("mine", "EnableDetection : %d", attente);
 
-    channel = jukebox.Play("share", "weapon/mine_beep", -1);
+    timeout_sound.Play("share", "weapon/mine_beep", -1);
   }
 }
 
@@ -153,8 +152,7 @@ void ObjMine::Refresh()
   // or it's a fake mine that has already exploded!
   if (!is_active)
   {
-    jukebox.Stop(channel);
-    channel = -1;
+    timeout_sound.Stop();
     escape_time = 0;
     return;
   }
@@ -172,8 +170,7 @@ void ObjMine::Refresh()
     if (attente < Time::GetInstance()->ReadSec())
     {
       is_active = false;
-      jukebox.Stop(channel);
-      channel = -1;
+      timeout_sound.Stop();
       if (!fake) 
 	Explosion();
       else 

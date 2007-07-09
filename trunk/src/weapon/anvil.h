@@ -32,7 +32,7 @@ class Anvil : public WeaponProjectile
 {
   private:
     uint merge_time;
-    int channel;
+    SoundSample falling_sound;
   public:
     Anvil(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);

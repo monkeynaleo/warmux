@@ -39,7 +39,6 @@ DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
                              WeaponLauncher * p_launcher) :
   WeaponProjectile("dynamite_bullet", cfg, p_launcher)
 {
-  channel = -1;
   explode_with_collision = false;
 
   image->animation.SetLoopMode(false);
@@ -66,22 +65,22 @@ void DynamiteStick::Refresh()
 
 void DynamiteStick::ShootSound()
 {
-  channel = jukebox.Play("share","weapon/dynamite_fuze", -1);
+  timeout_sound.Play("share","weapon/dynamite_fuze", -1);
 }
 
 void DynamiteStick::SignalExplosion()
 {
-  jukebox.Stop(channel);
+  timeout_sound.Stop();
 }
 
 void DynamiteStick::SignalOutOfMap()
 {
-  jukebox.Stop(channel);
+  timeout_sound.Stop();
 }
 
 void DynamiteStick::SignalDrowning()
 {
-  jukebox.Stop(channel);
+  timeout_sound.Stop();
 }
 //-----------------------------------------------------------------------------
 

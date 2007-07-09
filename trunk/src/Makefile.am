@@ -130,6 +130,7 @@ wormux_SOURCES = \
         particles/star.cpp particles/star.h \
         particles/teleport_member.cpp particles/teleport_member.h \
         sound/jukebox.cpp sound/jukebox.h \
+	sound/sound_sample.cpp sound/sound_sample.h \
         team/macro.h \
         team/results.cpp team/results.h \
         team/team_config.h \

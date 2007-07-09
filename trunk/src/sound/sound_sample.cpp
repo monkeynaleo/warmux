@@ -16,49 +16,31 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon dynamite : When fired, explode after a short laps of time. Then make a
- * big hole, eject character and made them lost energy.
- * Like a dynamite after all :)
+ * Sound Sample : stupid class that avoids to take care of channel assigned by
+ * SDL
  *****************************************************************************/
 
-#ifndef DYNAMITE_H
-#define DYNAMITE_H
+#include "sound_sample.h"
 
-#include "launcher.h"
-#include "graphic/sprite.h"
-#include "include/base.h"
-#include "character/character.h"
+SoundSample::SoundSample() : channel(-1) 
+{}
 
-class Dynamite;
-
-class DynamiteStick : public WeaponProjectile
+void SoundSample::Play(const std::string& category,
+		       const std::string& sample,
+		       const int loop)
 {
-  SoundSample timeout_sound;
+  channel = jukebox.Play(category, sample, loop);
+}
 
-  public:
-    DynamiteStick(ExplosiveWeaponConfig& cfg,
-                  WeaponLauncher * p_launcher);
-
-    void Shoot(double strength);
-    void Refresh();
-
-  protected:
-    void ShootSound();
-    void SignalExplosion();
-    void SignalOutOfMap();
-    void SignalDrowning();
-};
-
-
-// L'arme dynamite
-class Dynamite : public WeaponLauncher
+void SoundSample::Stop()
 {
-  protected:
-    bool p_Shoot();
-  protected:
-    WeaponProjectile * GetProjectileInstance();
-  public:
-    Dynamite();
-    DECLARE_GETWEAPONSTRING();
-};
-#endif /* DYNAMITE_H */
+  if (channel != -1)
+    jukebox.Stop(channel);
+  channel = -1;
+}
+
+bool SoundSample::IsPlaying()
+{
+  return Mix_Playing(channel);
+}
+
