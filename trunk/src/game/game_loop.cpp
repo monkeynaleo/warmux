@@ -283,96 +283,76 @@ void GameLoop::PingClient()
 void GameLoop::Run()
 {
   // Time to wait between 2 loops
-  int delay = 0;
+  delay = 0;
   // Time to display the next frame
-  uint time_of_next_frame = 0;
+  time_of_next_frame = 0;
   // Time to display the compute next physic engine frame
-  uint time_of_next_phy_frame = 0;
+  time_of_next_phy_frame = 0;
 
   // loop until game is finished
   do
   {
-    // Refresh clock value
-    RefreshClock();
-    time_of_next_phy_frame = Time::GetInstance()->Read() + Time::GetInstance()->GetDelta();
-
-    if(Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsServer())
-      PingClient();
-    StatStart("GameLoop:RefreshInput()");
-    RefreshInput();
-    StatStop("GameLoop:RefreshInput()");
-    StatStart("GameLoop:RefreshObject()");
-    RefreshObject();
-    StatStop("GameLoop:RefreshObject()");
-
-    // Refresh the map
-    world.Refresh();
-
-    // try to adjust to max Frame by seconds
-#ifndef USE_VALGRIND
-    if (time_of_next_frame < Time::GetInstance()->ReadRealTime()) {
-      // Only display if the physic engine isn't late
-      if (time_of_next_phy_frame > Time::GetInstance()->ReadRealTime())
-      {
-#endif
-        StatStart("GameLoop:Draw()");
-        CallDraw();
-        // How many frame by seconds ?
-        fps.Refresh();
-        StatStop("GameLoop:Draw()");
-        time_of_next_frame += AppWormux::GetInstance()->video.GetSleepMaxFps();
-#ifndef USE_VALGRIND
-      }
-    }
-#endif
-
-    delay = time_of_next_phy_frame - Time::GetInstance()->ReadRealTime();
-    if (delay >= 0)
-      SDL_Delay(delay);
+    MainLoop();
   } while( !Game::GetInstance()->IsGameFinished()
 	   && !Time::GetInstance()->IsGamePaused());
 
   // the game is finished but we won't go at the results screen to fast!
   if (Game::GetInstance()->NbrRemainingTeams() <= 1) {
-    EndOfGame();
+    EndOfGameLoop();
   }
 }
 
-void GameLoop::EndOfGame()
+void GameLoop::EndOfGameLoop()
 {
-  int delay = 0;
-  uint time_of_next_frame = SDL_GetTicks();
-  uint previous_time_frame = 0;
-
   Network::GetInstance()->SetTurnMaster(true);
   SetState(END_TURN);
   duration = GameMode::GetInstance()->duration_exchange_player + 2;
   GameMessages::GetInstance()->Add (_("And the winner is..."));
 
   while (duration >= 1 ) {
-    // Refresh clock value
-    RefreshClock();
-    RefreshInput();
-    if(previous_time_frame < Time::GetInstance()->Read()) {
-      RefreshObject();
-    } else {
-      previous_time_frame = Time::GetInstance()->Read();
-    }
+    MainLoop();
+  }
+}
 
-    // Refresh the map
-    world.Refresh();
+void GameLoop::MainLoop()
+{
+  // Refresh clock value
+  RefreshClock();
+  time_of_next_phy_frame = Time::GetInstance()->Read() + Time::GetInstance()->GetDelta();
 
-    // try to adjust to max Frame by seconds
-    time_of_next_frame += AppWormux::GetInstance()->video.GetSleepMaxFps();
-    if (time_of_next_frame > SDL_GetTicks()) {
+  if(Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsServer())
+    PingClient();
+  StatStart("GameLoop:RefreshInput()");
+  RefreshInput();
+  StatStop("GameLoop:RefreshInput()");
+  StatStart("GameLoop:RefreshObject()");
+  RefreshObject();
+  StatStop("GameLoop:RefreshObject()");
+
+  // Refresh the map
+  world.Refresh();
+
+  // try to adjust to max Frame by seconds
+#ifndef USE_VALGRIND
+  if (time_of_next_frame < Time::GetInstance()->ReadRealTime()) {
+    // Only display if the physic engine isn't late
+    if (time_of_next_phy_frame > Time::GetInstance()->ReadRealTime())
+    {
+#endif
+      StatStart("GameLoop:Draw()");
       CallDraw();
       // How many frame by seconds ?
       fps.Refresh();
+      StatStop("GameLoop:Draw()");
+      time_of_next_frame += AppWormux::GetInstance()->video.GetSleepMaxFps();
+#ifndef USE_VALGRIND
     }
-    delay = time_of_next_frame - SDL_GetTicks();
-    if (delay >= 0)
-      SDL_Delay(delay);
   }
+#endif
+
+  delay = time_of_next_phy_frame - Time::GetInstance()->ReadRealTime();
+  if (delay >= 0)
+    SDL_Delay(delay);
 }
 
 void GameLoop::RefreshClock()
