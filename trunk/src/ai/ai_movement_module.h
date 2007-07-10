@@ -24,6 +24,8 @@
 #include "tool/point.h"
 #include <set>
 
+class Character;
+
 class AIMovementModule
 {
   uint m_current_time;

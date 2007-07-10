@@ -22,8 +22,11 @@
 #ifndef AI_SHOOT_MODULE_H
 #define AI_SHOOT_MODULE_H
 
-#include "character/character.h"
-#include "ai_movement_module.h"
+#include "include/base.h"
+
+// Forward declararion
+class AIMovementModule;
+class Character;
 
 class AIShootModule
 {

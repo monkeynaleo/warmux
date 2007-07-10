@@ -20,18 +20,9 @@
  *****************************************************************************/
 
 #include "ai_engine_stupid.h"
-#include "include/action_handler.h"
-#include "character/body.h"
-#include "character/move.h"
-#include "interface/game_msg.h"
 #include "game/game_loop.h"
-#include "map/map.h"
-#include "network/randomsync.h"
-#include "team/macro.h"
 #include "team/teams_list.h"
-#include "tool/error.h"
-#include "tool/math_tools.h"
-#include "tool/string_tools.h"
+#include "game/time.h"
 
 #include <iostream>
 

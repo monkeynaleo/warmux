@@ -21,10 +21,10 @@
 #ifndef AI_STUPID_ENGINE
 #define AI_STUPID_ENGINE
 
-#include "character/character.h"
-#include "game/time.h"
 #include "ai_movement_module.h"
 #include "ai_shoot_module.h"
+
+class Character;
 
 class AIStupidEngine
 {
