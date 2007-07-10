@@ -22,12 +22,14 @@
 #ifndef ACTION_HANDLER_H
 #define ACTION_HANDLER_H
 //-----------------------------------------------------------------------------
-#include <SDL_mutex.h>
 #include <map>
 #include <list>
 #include "action.h"
 #include "base.h"
 //-----------------------------------------------------------------------------
+
+// Forward declarations
+struct SDL_Mutex;
 
 class ActionHandler
 {

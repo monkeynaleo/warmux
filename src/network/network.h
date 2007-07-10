@@ -26,8 +26,6 @@
 #include <SDL_thread.h>
 #include <list>
 #include <string>
-#include "distant_cpu.h"
-#include "include/action.h"
 #include "include/base.h"
 //-----------------------------------------------------------------------------
 #ifdef DEBUG
@@ -38,6 +36,9 @@
 const std::string WORMUX_NETWORK_PORT = "3826";
 const uint WORMUX_NETWORK_PORT_INT = 3826;
 
+// Some forward declarations
+class Action;
+class DistantComputer;
 class NetworkServer;
 class NetworkMenu;
 

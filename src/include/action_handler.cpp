@@ -19,8 +19,9 @@
  * Wormux action handler.
  *****************************************************************************/
 
+#include <SDL_mutex.h>
+
 #include "action_handler.h"
-#include "action.h"
 #include "character/body.h"
 #include "character/move.h"
 #include "game/game_mode.h"
@@ -35,6 +36,7 @@
 #include "map/maps_list.h"
 #include "map/wind.h"
 #include "menu/network_menu.h"
+#include "network/distant_cpu.h"
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "network/network_server.h"
