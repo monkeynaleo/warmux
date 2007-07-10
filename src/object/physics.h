@@ -47,9 +47,9 @@ private:
   MotionType_t m_motion_type ;
   EulerVector m_pos_x;          // x0 = pos, x1 = speed, x2 = acc on the X axys
   EulerVector m_pos_y;          // x0 = pos, x1 = speed, x2 = acc on the Y axys
+  Point2d m_extern_force;  // External strength applyed to the object
 
 protected:
-  Point2d m_extern_force;  // External strength applyed to the object
   uint m_last_move;             // Time since last move
   double m_phys_width, m_phys_height;
 
