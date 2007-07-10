@@ -46,6 +46,7 @@
 #include "map/camera.h"
 #include "weapon/weapon.h"
 #include "weapon/weapons_list.h"
+#include "object/bonus_box.h"
 
 #define SCROLL_KEYBOARD 20 // pixel
 
