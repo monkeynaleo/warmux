@@ -22,7 +22,6 @@
 #define MOVEMENT_H
 #include <map>
 #include <vector>
-#include "graphic/sprite.h"
 #include "tool/point.h"
 #include "tool/xml_document.h"
 

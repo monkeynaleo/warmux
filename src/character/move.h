@@ -22,8 +22,9 @@
 #ifndef MOVE_H
 #define MOVE_H
 
-#include "character.h"
-#include "object/physical_obj.h"
+#include "include/base.h"
+
+class Character;
 
 // Pause between two movements
 const uint PAUSE_MOVEMENT=30; // ms
