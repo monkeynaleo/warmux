@@ -21,16 +21,11 @@
 
 #include <iostream>
 #include "include/action_handler.h"
-#include "character/body.h"
 #include "character/move.h"
-#include "interface/game_msg.h"
 #include "map/map.h"
-#include "team/macro.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/error.h"
-#include "tool/math_tools.h"
-#include "tool/string_tools.h"
 
 #include "ai_movement_module.h"
 
