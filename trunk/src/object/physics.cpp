@@ -371,12 +371,12 @@ void Physics::StartMoving()
   if (m_motion_type == NoMotion)
     m_motion_type = FreeFall ;
 
-  MSG_DEBUG ("physic.physic", "Start moving.");
+  MSG_DEBUG ("physic.physic", "%s starts moving.", typeid(*this).name());
 }
 
 void Physics::StopMoving()
 {
-  if (IsMoving()) MSG_DEBUG ("physic.physic", "End of a movement...");
+  if (IsMoving()) MSG_DEBUG ("physic.physic", "%s stops moving...", typeid(*this).name());
   // Always called by PhysicalObj::StopMoving
   m_pos_x.x1 = 0 ;
   m_pos_x.x2 = 0 ;
@@ -406,6 +406,8 @@ bool Physics::IsFalling() const
 // Compute the next position of the object during a pendulum motion.
 void Physics::ComputePendulumNextXY (double delta_t)
 {
+  MSG_DEBUG( "physic.pendulum", "%s: Pendulum; mass %5f", typeid(*this).name(), m_mass);
+  
   //  double l0 = 5.0 ;
 
   //  printf ("Physics::ComputePendulumNextXY - Angle %f\n", m_rope_angle.x0);
@@ -470,7 +472,14 @@ void Physics::ComputeFallNextXY (double delta_t)
 
   air_resistance_factor = AIR_RESISTANCE_FACTOR * m_air_resist_factor ;
 
-  MSG_DEBUG( "physic.fall", "Fall %s; mass %5f, weight %5f, wind %5f, air %5f", typeid(*this).name(), m_mass, weight_force,wind_force, air_resistance_factor);
+  MSG_DEBUG( "physic.fall", "%s falls; mass %5f, weight %5f, wind %5f, air %5f, delta %f", typeid(*this).name(), m_mass, weight_force,wind_force, air_resistance_factor, delta_t);
+  
+  MSG_DEBUG( "physic.fall", "%s before - x0:%d, x1:%d, x2:%d - y0:%d, y1:%d, y2:%d - delta:%f - extern_force: %f, %f", 
+	     typeid(*this).name(), 
+	     m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
+	     m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+	     delta_t,
+	     m_extern_force.x, m_extern_force.y);
 
   // Equation on X axys : m.x'' + k.x' = wind
   m_pos_x.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
@@ -480,6 +489,12 @@ void Physics::ComputeFallNextXY (double delta_t)
   m_pos_y.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
 		      weight_force + m_extern_force.y, delta_t);
 
+  MSG_DEBUG( "physic.fall", "%s after - x0:%d, x1:%d, x2:%d - y0:%d, y1:%d, y2:%d - delta:%f - extern_force: %f, %f", 
+	     typeid(*this).name(), 
+	     m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
+	     m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+	     delta_t,
+	     m_extern_force.x, m_extern_force.y);
 
     // printf ("F : Pd(%5f) EF(%5f)\n", weight_force, m_extern_force.y);
 
@@ -489,6 +504,9 @@ void Physics::ComputeFallNextXY (double delta_t)
 
 // Compute the position of the object at current time.
 Point2d Physics::ComputeNextXY(double delta_t){
+
+  MSG_DEBUG("physic.compute", "%s: delta: %f", typeid(*this).name(), delta_t);
+
   if (m_motion_type == FreeFall)
     ComputeFallNextXY(delta_t);
 
@@ -523,7 +541,11 @@ void Physics::RunPhysicalEngine()
 
     if( newPos != oldPos)  {
       // The object has moved. Notify the son class.
-      MSG_DEBUG( "physic.move", "Move %s (%f, %f) -> (%f, %f)", typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
+      MSG_DEBUG( "physic.move", "%s moves (%f, %f) -> (%f, %f) - x0:%d, x1:%d, x2:%d - y0:%d, y1:%d, y2:%d - step:%f", 
+		 typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, 
+		 m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
+		 m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+		 step_t);
       NotifyMove(oldPos, newPos);
     }
 
@@ -538,7 +560,7 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
 {
   double norme, angle;
   
-  MSG_DEBUG("physic.rebound", "Rebound on %s at %d,%d", typeid(*this).name(), contactPos.x, contactPos.y);
+  MSG_DEBUG("physic.rebound", "%s rebounds on %d,%d", typeid(*this).name(), contactPos.x, contactPos.y);
     
   // Get norm and angle of the object speed vector.
   GetSpeed(norme, angle);
