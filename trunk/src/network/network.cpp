@@ -23,9 +23,11 @@
 #include "network_local.h"
 #include "network_client.h"
 #include "network_server.h"
+#include "distant_cpu.h"
 //-----------------------------------------------------------------------------
 #include "game/game_mode.h"
 #include "game/game.h"
+#include "include/action.h"
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "include/constant.h"
