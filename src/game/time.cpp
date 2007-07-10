@@ -23,14 +23,6 @@
 #include <SDL.h>
 #include <sstream>
 #include <iomanip>
-#include <iostream>
-#include "graphic/video.h"
-#include "interface/game_msg.h"
-#include "tool/math_tools.h"
-#include "include/app.h"
-#include "network/network.h"
-#include "team/teams_list.h"
-#include "game/game_loop.h"
 
 Time * Time::singleton = NULL;
 
