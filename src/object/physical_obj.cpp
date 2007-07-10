@@ -277,6 +277,9 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   // Compute distance between old and new position.
   double lg = oldPos.Distance( newPos);
 
+  MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), distance: %f",
+	    typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, lg);
+
   if (lg == 0)
     return;
 
@@ -289,6 +292,10 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   if (m_goes_through_wall || IsInWater())
   {
+    MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), thr_wall:%d, water:%d",
+	      typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, 
+	      m_goes_through_wall, IsInWater());
+
     Point2i tmpPos( lround(newPos.x), lround(newPos.y) );
     SetXY(tmpPos);
     return;
@@ -310,6 +317,9 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       }
 
       SetXY( tmpPos );
+
+      MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) : OUTSIDE WORLD",
+		typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
       return;
     }
 
@@ -891,7 +901,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     if (ok && on_top_of_world) SetXY(position);
   } while (!ok);
 
-  MSG_DEBUG("physic.position", "Putted after  %d try", m_name.c_str(), bcl);
+  MSG_DEBUG("physic.position", "Putted after %u try", m_name.c_str(), bcl);
 
   return true;
 }
