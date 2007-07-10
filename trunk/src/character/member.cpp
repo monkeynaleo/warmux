@@ -21,10 +21,10 @@
 #include <map>
 #include <iostream>
 #include "member.h"
-#include "game/game_loop.h"
-#include "team/teams_list.h"
-#include "tool/math_tools.h"
-#include "tool/xml_document.h"
+#include "body.h"
+#include "movement.h"
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 #include "tool/string_tools.h"
 
 Member::Member(xmlpp::Element *xml, Profile* res):

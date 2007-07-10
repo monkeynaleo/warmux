@@ -23,16 +23,14 @@
 #define _CHARACTER_H
 
 #include <string>
-#include <SDL.h>
 #include "gui/energy_bar.h"
-#include "graphic/sprite.h"
-#include "graphic/text.h"
 #include "include/base.h"
 #include "object/physical_obj.h"
 #include "particles/particle.h"
 #include "body.h"
 #include "damage_stats.h"
 
+class Text;
 class Team;
 class ParticleEngine;
 

@@ -22,13 +22,13 @@
 #ifndef BODY_H
 #define BODY_H
 #include <map>
-#include "body_list.h"
-#include "clothe.h"
-#include "member.h"
+
 #include "movement.h"
 #include "tool/resource_manager.h"
 #include "tool/point.h"
 #include "tool/xml_document.h"
+
+// Forward declarations
 class Character;
 class BodyList;
 class Member;

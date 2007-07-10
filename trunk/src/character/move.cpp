@@ -21,16 +21,13 @@
 
 #include "move.h"
 #include <math.h>
-#include "body.h"
-#include "team/teams_list.h"
-#include "game/config.h"
+#include "character.h"
 #include "game/game_loop.h"
 #include "include/action_handler.h"
-#include "map/map.h"
-#include "map/camera.h"
 #include "network/network.h"
-#include "sound/jukebox.h"
+#include "team/teams_list.h"
 #include "tool/debug.h"
+
 
 // Max climbing height walking
 const int MAX_CLIMBING_HEIGHT=30;

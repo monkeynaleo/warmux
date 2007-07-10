@@ -22,16 +22,16 @@
 #define MEMBER_H
 #include <map>
 #include <vector>
-#include "body.h"
-#include "movement.h"
-#include "graphic/sprite.h"
-#include "tool/resource_manager.h"
 #include "tool/point.h"
 #include "tool/xml_document.h"
 
 typedef std::vector<Point2f> v_attached;
 
+// Forward declaration
+class Sprite;
 class c_junction; //defined in body.h
+class member_mvt; //defined in movement.h
+class Profile;
 
 class Member
 {

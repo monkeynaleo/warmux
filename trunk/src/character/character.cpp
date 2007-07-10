@@ -23,32 +23,20 @@
 #include <SDL.h>
 #include <sstream>
 #include <iostream>
-#include "body.h"
 #include "team/macro.h"
 #include "move.h"
-#include "game/game.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
 #include "game/time.h"
-#include "game/config.h"
 #include "graphic/text.h"
-#include "graphic/font.h"
 #include "include/action_handler.h"
-#include "include/app.h"
-#include "include/constant.h"
 #include "interface/interface.h"
 #include "interface/cursor.h"
 #include "map/camera.h"
-#include "map/map.h"
-#include "map/water.h"
-#include "network/network.h"
 #include "network/randomsync.h"
 #include "sound/jukebox.h"
-#include "tool/debug.h"
 #include "tool/random.h"
 #include "tool/math_tools.h"
-#include "weapon/suicide.h"
-#include "weapon/crosshair.h"
 #include "weapon/explosion.h"
 
 const uint HAUT_FONT_MIX = 13;
