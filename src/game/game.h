@@ -24,8 +24,8 @@
 #define GAME_H
 
 #include "include/base.h"
-#include "gui/question.h"
-#include "weapon/weapons_list.h"
+
+class Question;
 
 class Game
 {

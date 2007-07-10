@@ -20,6 +20,8 @@
  *****************************************************************************/
 
 #include "objbox.h"
+#include "medkit.h"
+#include "bonus_box.h"
 #include <sstream>
 #include <iostream>
 #include "game/game_mode.h"

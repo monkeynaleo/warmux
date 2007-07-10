@@ -19,34 +19,20 @@
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
 #include "game.h"
-#include <iostream>
-#include <SDL.h>
-#include <sstream>
 #include "time.h"
 #include "game_init.h"
 #include "game_loop.h"
-#include "game_mode.h"
-#include "graphic/video.h"
-#include "graphic/fps.h"
 #include "include/app.h"
-#include "interface/cursor.h"
 #include "interface/keyboard.h"
 #include "interface/joystick.h"
-#include "interface/game_msg.h"
 #include "interface/mouse.h"
-#include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "menu/results_menu.h"
-#include "network/network.h"
 #include "object/objects_list.h"
-#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/results.h"
-#include "tool/debug.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
-#include "weapon/weapons_list.h"
 
 Game * Game::singleton = NULL;
 

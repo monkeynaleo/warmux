@@ -19,21 +19,14 @@
  * Game loop : drawing and data handling
  *****************************************************************************/
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <sstream>
-#include <iostream>
 #include "game_init.h"
+#include <SDL.h>
+#include <iostream>
 #include "game_loop.h"
-#include "config.h"
 #include "game.h"
 #include "game_mode.h"
 #include "time.h"
-#include "ai/ai_engine.h"
-#include "graphic/video.h"
 #include "include/action_handler.h"
-#include "include/app.h"
-#include "include/constant.h"
 #include "interface/cursor.h"
 #include "interface/game_msg.h"
 #include "interface/interface.h"
@@ -43,20 +36,12 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
-#include "map/wind.h"
 #include "network/network.h"
 #include "network/network_server.h"
 #include "network/randomsync.h"
-#include "object/bonus_box.h"
-#include "object/medkit.h"
 #include "object/objects_list.h"
-#include "particles/particle.h"
-#include "sound/jukebox.h"
 #include "team/macro.h"
-#include "tool/debug.h"
 #include "tool/i18n.h"
-#include "tool/stats.h"
-#include "weapon/weapons_list.h"
 
 void GameInit::InitGameData_NetServer()
 {
