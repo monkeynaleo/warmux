@@ -24,6 +24,7 @@
 #include "game/config.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 
 LoadingScreen * LoadingScreen::singleton = NULL;
 

@@ -24,13 +24,11 @@
 
 #include "include/base.h"
 #include "tool/affine_transform.h"
-#include "character/character.h"
-#include "team/team.h"
-#include "weapon/weapon.h"
-#include "graphic/sprite.h"
 #include "graphic/polygon.h"
 #include <vector>
-#include <sstream>
+
+// Forward declaration
+class Weapon;
 
 class WeaponMenuItem : public PolygonItem {
   WeaponMenuItem(const WeaponMenuItem&);

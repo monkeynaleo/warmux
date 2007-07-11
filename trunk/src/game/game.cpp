@@ -18,6 +18,7 @@
  ******************************************************************************
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
+#include <iostream>
 #include "game.h"
 #include "time.h"
 #include "game_init.h"

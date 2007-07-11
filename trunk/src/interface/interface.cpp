@@ -21,25 +21,15 @@
 
 #include "interface.h"
 #include "mouse.h"
-#include <iostream>
-#include <SDL.h>
-#include <sstream>
 #include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
-#include "graphic/colors.h"
-#include "graphic/video.h"
-#include "graphic/font.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "team/teams_list.h"
 #include "team/macro.h"
-#include "tool/debug.h"
 #include "tool/string_tools.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
-#include "weapon/weapons_list.h"
 
 WeaponStrengthBar weapon_strength_bar;
 

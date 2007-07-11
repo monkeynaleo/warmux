@@ -22,13 +22,18 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 #include <vector>
-#include "weapon_menu.h"
-#include "graphic/surface.h"
-#include "graphic/sprite.h"
-#include "gui/progress_bar.h"
 #include "include/base.h"
-#include "character/character.h"
-#include "team/team.h"
+#include "weapon_menu.h"
+#include "gui/energy_bar.h"
+#include "gui/energy_bar.h"
+#include "gui/progress_bar.h"
+
+// Forward declarations
+class Character;
+class Team;
+class Text;
+class Polygon;
+class Weapon;
 
 #ifdef WIN32
 #undef interface
