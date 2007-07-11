@@ -34,6 +34,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "object/objects_list.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/debug.h"

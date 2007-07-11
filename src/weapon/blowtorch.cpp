@@ -28,6 +28,7 @@
 #include "map/map.h"
 #include "game/game_loop.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 #include "character/move.h"
 #include "character/body.h"
 #include "team/team.h"

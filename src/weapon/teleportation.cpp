@@ -31,6 +31,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "particles/teleport_member.h"
+#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 

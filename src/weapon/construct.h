@@ -24,7 +24,8 @@
 #include "weapon.h"
 #include "include/base.h"
 #include "tool/point.h"
-#include "graphic/sprite.h"
+
+class Sprite;
 
 class Construct : public Weapon
 {

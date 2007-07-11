@@ -24,9 +24,9 @@
 
 #include <SDL.h>
 #include "include/base.h"
-#include "graphic/surface.h"
-#include "object/physical_obj.h"
 #include "launcher.h"
+
+class PhysicalObj;
 
 class Anvil : public WeaponProjectile
 {

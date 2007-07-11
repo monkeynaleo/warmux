@@ -21,10 +21,11 @@
 
 #include "menu.h"
 #include "include/app.h"
-#include "tool/resource_manager.h"
-#include "sound/jukebox.h"
+#include "graphic/sprite.h"
 #include "gui/button.h"
 #include "gui/box.h"
+#include "sound/jukebox.h"
+#include "tool/resource_manager.h"
 
 Menu::Menu(std::string bg, t_action _actions) :
   actions(_actions)

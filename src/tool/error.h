@@ -29,7 +29,7 @@
 #include <string>
 
 void MissedAssertion (const char *filename, unsigned long line,
-		       const char *message);
+                      const char *message);
 void WakeUpDebugger();
 
 // Assertion (disabled in release mode)

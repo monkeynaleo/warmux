@@ -27,9 +27,9 @@
 #include "gui/progress_bar.h"
 #include "include/base.h"
 #include "particles/particle.h"
-#include "object/physical_obj.h"
 #include "sound/sound_sample.h"
 #include "tool/debug.h"
+#include <libxml++/libxml++.h>
 
 class Character;
 class Sprite;

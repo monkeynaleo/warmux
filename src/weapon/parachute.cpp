@@ -25,6 +25,7 @@
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
+#include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/physical_obj.h"

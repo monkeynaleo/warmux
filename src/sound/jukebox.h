@@ -24,12 +24,12 @@
 //-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <SDL_mixer.h>
-
 #include <vector>
 #include <map>
 #include <set>
 #include <utility>
 #include "include/base.h"
+
 //-----------------------------------------------------------------------------
 
 /* Informations about music...

@@ -27,8 +27,8 @@
 #include "gui/label.h"
 #include "gui/box.h"
 #include "gui/picture_widget.h"
-
 #include "include/app.h"
+#include "sound/jukebox.h"
 #include "team/results.h"
 #include "team/macro.h"
 #include "team/team.h"

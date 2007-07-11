@@ -21,12 +21,12 @@
 
 #ifndef AIR_ATTACK_H
 #define AIR_ATTACK_H
-#include "graphic/surface.h"
-#include "graphic/sprite.h"
+
 #include "include/base.h"
 #include "launcher.h"
 
 class AirAttack;
+class Sprite;
 
 class AirAttackConfig : public ExplosiveWeaponConfig
 { 

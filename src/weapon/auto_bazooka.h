@@ -23,9 +23,7 @@
 #define AUTO_BAZOOKA_H
 #include "launcher.h"
 #include "graphic/surface.h"
-#include "gui/progress_bar.h"
 #include "include/base.h"
-#include "object/physical_obj.h"
 
 class AutomaticBazooka;
 class AutomaticBazookaConfig;
@@ -41,7 +39,7 @@ class RPG : public WeaponProjectile
     uint m_lastrefresh;
   public:
     RPG(AutomaticBazookaConfig& cfg,
-                        WeaponLauncher * p_launcher);
+        WeaponLauncher * p_launcher);
     void Refresh();
     void Shoot(double strength);
     void SetTarget (int x,int y);

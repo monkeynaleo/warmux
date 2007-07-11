@@ -27,6 +27,7 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
+#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"

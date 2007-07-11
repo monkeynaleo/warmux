@@ -24,6 +24,7 @@
 #include <sstream>
 #include <iostream>
 #include "character/character.h"
+#include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "network/randomsync.h"
 #include "team/macro.h"

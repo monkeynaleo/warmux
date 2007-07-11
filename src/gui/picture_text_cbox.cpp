@@ -23,6 +23,7 @@
 #include "include/app.h"
 #include "graphic/text.h"
 #include "graphic/font.h"
+#include "graphic/sprite.h"
 #include "tool/resource_manager.h"
 
 PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &resource_id, 
