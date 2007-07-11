@@ -23,9 +23,12 @@
 #ifndef CHAT_H
 #define CHAT_H
 
-#include <SDL.h>
-#include "graphic/text_list.h"
-#include "network.h"
+#include <string>
+#include "SDL_events.h"
+
+// Forward declarations
+class Text;
+class TextList;
 
 class Chat
 {

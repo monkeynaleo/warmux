@@ -23,7 +23,6 @@
 #define NETWORK_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
-#include <SDL_thread.h>
 #include <list>
 #include <string>
 #include "include/base.h"
@@ -37,6 +36,7 @@ const std::string WORMUX_NETWORK_PORT = "3826";
 const uint WORMUX_NETWORK_PORT_INT = 3826;
 
 // Some forward declarations
+struct SDL_Thread;
 class Action;
 class DistantComputer;
 class NetworkServer;

@@ -31,6 +31,7 @@
 #include "include/action_handler.h"
 #include "map/camera.h"
 #include "map/map.h"
+#include "network/network.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"

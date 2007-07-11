@@ -31,6 +31,7 @@
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "menu/results_menu.h"
+#include "network/network.h"
 #include "object/objects_list.h"
 #include "team/macro.h"
 #include "team/results.h"

@@ -32,6 +32,7 @@
 #include "interface/interface.h"
 #include "interface/cursor.h"
 #include "map/camera.h"
+#include "network/network.h"
 #include "network/randomsync.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
