@@ -31,6 +31,7 @@
 #include "include/app.h"
 #include "tool/i18n.h"
 #include "tool/string_tools.h"
+#include "tool/resource_manager.h"
 
 #include <iostream>
 const uint MARGIN_TOP    = 5;

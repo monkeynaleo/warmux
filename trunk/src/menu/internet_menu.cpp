@@ -30,6 +30,7 @@
 #include "network/net_error_msg.h"
 #include "network/index_server.h"
 #include "tool/i18n.h"
+#include "tool/resource_manager.h"
 
 InternetMenu::InternetMenu() :
   Menu("menu/bg_network", vCancel)

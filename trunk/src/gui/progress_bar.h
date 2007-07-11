@@ -22,7 +22,6 @@
 #ifndef PROGRESS_BAR_H
 #define PROGRESS_BAR_H
 
-#include <SDL.h>
 #include <list>
 #include "include/base.h"
 #include "graphic/color.h"

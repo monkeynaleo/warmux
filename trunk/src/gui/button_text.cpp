@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "button_text.h"
-#include "include/app.h"
+#include "graphic/text.h"
 
 ButtonText::~ButtonText(){
   delete text;

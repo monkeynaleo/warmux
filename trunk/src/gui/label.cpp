@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "label.h"
+#include "graphic/text.h"
 
 Label::Label (const std::string &label,
 	      const Rectanglei &rect,

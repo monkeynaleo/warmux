@@ -23,10 +23,12 @@
 #define SPIN_BUTTON_H
 
 #include "include/base.h"
-#include "graphic/text.h"
+#include "graphic/colors.h"
 #include "widget.h"
-#include "button.h"
 #include <string>
+
+class Button;
+class Text;
 
 class SpinButton : public Widget
 {

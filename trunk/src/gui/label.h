@@ -23,9 +23,11 @@
 #define LABEL_H
 
 #include "include/base.h"
-#include "graphic/text.h"
 #include "gui/widget.h"
+#include "graphic/font.h"
 #include <string>
+
+class Text;
 
 class Label : public Widget{
   /* If you need this, implement it (correctly)*/

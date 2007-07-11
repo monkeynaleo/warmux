@@ -31,6 +31,7 @@
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
+#include "game/config.h"
 
 IndexServer index_server;
 

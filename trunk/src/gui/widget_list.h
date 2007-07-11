@@ -23,7 +23,6 @@
 #define WIDGET_LIST_H
 
 #include <list>
-#include <SDL_keyboard.h>
 #include "widget.h"
 #include "container.h"
 

@@ -18,12 +18,12 @@
  *****************************************************************************/
 
 #include "spin_button_picture.h"
+#include "graphic/text.h"
+#include "button.h"
 #include <sstream>
-#include <iostream>
 #include "include/app.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
-#include "graphic/font.h"
 
 SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const std::string &resource_id,
 					      const Rectanglei &rect,

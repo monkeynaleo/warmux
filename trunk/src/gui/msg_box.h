@@ -24,9 +24,11 @@
 
 #include "include/base.h"
 #include "graphic/font.h"
-#include "graphic/text.h"
+#include "tool/rectangle.h"
 #include "widget.h"
 #include <list>
+
+class Text;
 
 class MsgBox : public Widget
 {

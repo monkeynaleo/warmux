@@ -19,6 +19,7 @@
  * Wormux action handler.
  *****************************************************************************/
 
+#include <iostream>
 #include <SDL_mutex.h>
 
 #include "action_handler.h"

@@ -24,11 +24,12 @@
 #define QUESTION_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include "graphic/sprite.h"
-#include "graphic/text.h"
+#include <SDL_events.h>
 #include <string>
 #include <list>
-#include <SDL_events.h>
+
+class Text;
+class Sprite;
 
 //-----------------------------------------------------------------------------
 

@@ -22,7 +22,7 @@
 #ifndef ACTION_H
 #define ACTION_H
 //-----------------------------------------------------------------------------
-#include <SDL.h>
+#include <SDL_stdinc.h>
 #include <string>
 #include <iostream>
 #include <list>

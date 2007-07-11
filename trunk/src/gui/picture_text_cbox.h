@@ -23,6 +23,7 @@
 #define PICTURE_TEXT_CBOX_H
 
 #include "gui/check_box.h"
+#include "graphic/surface.h"
 
 class PictureTextCBox : public CheckBox
 {

@@ -18,12 +18,12 @@
  *****************************************************************************/
 
 #include "spin_button.h"
+#include "graphic/text.h"
+#include "button.h"
 #include <sstream>
-#include <iostream>
-#include "include/app.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
-#include "graphic/font.h"
+#include "button.h"
 
 SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
 			int value, int step, int min_value, int max_value,
