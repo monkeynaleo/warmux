@@ -21,6 +21,7 @@
 
 #include "picture_widget.h"
 #include "graphic/colors.h"
+#include "graphic/sprite.h"
 #include "tool/resource_manager.h"
 
 PictureWidget::PictureWidget (const Rectanglei &rect) : Widget(rect)

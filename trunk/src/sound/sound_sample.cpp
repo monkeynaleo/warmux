@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #include "sound_sample.h"
+#include "jukebox.h"
 
 SoundSample::SoundSample() : channel(-1) 
 {}

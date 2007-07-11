@@ -23,7 +23,6 @@
 #define TEAM_ENERGY_H
 
 #include "gui/energy_bar.h"
-#include "object/physical_obj.h"
 
 class Team;
 class Sprite;

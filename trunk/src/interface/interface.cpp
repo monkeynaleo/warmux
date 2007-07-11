@@ -26,6 +26,7 @@
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/text.h"
+#include "graphic/sprite.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"

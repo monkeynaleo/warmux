@@ -31,6 +31,7 @@
 #include "interface/game_msg.h"
 #include "map/map.h"
 #include "object/objects_list.h"
+#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/macro.h"
 #include "team/team.h"

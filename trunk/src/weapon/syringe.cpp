@@ -22,6 +22,7 @@
 #include "syringe.h"
 #include "character/character.h"
 #include "game/game_loop.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/point.h"

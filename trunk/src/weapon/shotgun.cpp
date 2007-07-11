@@ -22,9 +22,11 @@
 #include <sstream>
 #include "map/map.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 #include "object/objects_list.h"
 #include "interface/game_msg.h"
 #include "network/randomsync.h"
+#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"

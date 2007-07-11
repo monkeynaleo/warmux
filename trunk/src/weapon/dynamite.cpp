@@ -23,7 +23,9 @@
 
 #include "dynamite.h"
 #include "explosion.h"
+#include "character/character.h"
 #include "game/config.h"
+#include "graphic/sprite.h"
 #include "include/app.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"

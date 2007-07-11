@@ -25,6 +25,7 @@
 #include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/polygon_generator.h"
+#include "graphic/sprite.h"
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "interface/mouse.h"

@@ -29,9 +29,10 @@
 #define _RESOURCE_MANAGER_H
 
 #include <string>
-#include "xml_document.h"
-#include "graphic/sprite.h"
-#include "map/random_map.h"
+#include "graphic/surface.h"
+#include "tool/xml_document.h"
+
+class Sprite;
 
 class Profile
 {

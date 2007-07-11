@@ -33,6 +33,7 @@
 #include "game/time.h"
 #include "map/map.h"
 #include "network/randomsync.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"

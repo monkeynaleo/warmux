@@ -21,12 +21,12 @@
 
 #ifndef WEAPON_LAUNCHER_H
 #define WEAPON_LAUNCHER_H
+
 #include "weapon.h"
-#include "graphic/surface.h"
-#include "gui/progress_bar.h"
 #include "include/base.h"
 #include "object/physical_obj.h"
 
+class Sprite;
 class WeaponLauncher;
 
 class WeaponProjectile : public PhysicalObj
