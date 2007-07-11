@@ -23,6 +23,7 @@
 #include "team_config.h"
 #include "teams_list.h"
 //-----------------------------------------------------------------------------
+#include "character/character.h"
 #include "character/body_list.h"
 #include "include/action.h"
 #include "game/config.h"

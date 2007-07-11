@@ -26,6 +26,7 @@
 #include "game.h"
 #include "game_mode.h"
 #include "time.h"
+#include "character/character.h"
 #include "include/action_handler.h"
 #include "interface/cursor.h"
 #include "interface/game_msg.h"

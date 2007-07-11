@@ -23,10 +23,11 @@
 #include "map/map.h"
 #include "game/time.h"
 #include "object/objects_list.h"
-#include "team/teams_list.h"
-#include "tool/i18n.h"
 #include "interface/game_msg.h"
 #include "network/randomsync.h"
+#include "team/teams_list.h"
+#include "tool/i18n.h"
+#include "tool/resource_manager.h"
 #include "explosion.h"
 #include "shotgun.h"
 

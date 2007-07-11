@@ -22,8 +22,10 @@
 #include "fire.h"
 #include "particle.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 #include "tool/random.h"
 #include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 const uint living_time = 5000;
 const uint dig_ground_time = 1000;

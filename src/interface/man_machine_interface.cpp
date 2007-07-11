@@ -22,17 +22,19 @@
 #include "man_machine_interface.h"
 #include "cursor.h"
 #include "interface.h"
+#include "character/character.h"
 #include "ai/ai_engine_stupid.h"
-#include "include/app.h"
 #include "game/game.h"
 #include "game/game_loop.h"
 #include "game/game_mode.h"
+#include "include/app.h"
 #include "include/action_handler.h"
-#include "network/network.h"
 #include "map/camera.h"
-#include "team/teams_list.h"
-#include "weapon/weapons_list.h"
+#include "network/network.h"
 #include "object/objbox.h"
+#include "team/teams_list.h"
+#include "team/team.h"
+#include "weapon/weapons_list.h"
 
 #define SCROLL_KEYBOARD 20 // pixel
 

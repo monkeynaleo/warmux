@@ -21,6 +21,7 @@
 
 #include "team.h"
 #include "teams_list.h"
+#include "character/character.h"
 #include "character/body_list.h"
 #include "game/game.h"
 #include "game/game_mode.h"
@@ -39,6 +40,8 @@
 #include "network/network.h"
 #include <sstream>
 #include <iostream>
+#include "include/base.h"
+#include "tool/point.h"
 
 
 Team::Team (const std::string& teams_dir, const std::string& id)

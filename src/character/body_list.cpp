@@ -24,6 +24,7 @@
 #include <iostream>
 #include "body.h"
 #include "game/config.h"
+#include "tool/resource_manager.h"
 
 const std::string CONFIG_FN = "config.xml";
 

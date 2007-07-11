@@ -29,6 +29,7 @@
 #include "map/map.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
+#include "tool/resource_manager.h"
 
 const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
 

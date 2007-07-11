@@ -23,6 +23,7 @@
 #include "medkit.h"
 #include <sstream>
 #include <iostream>
+#include "character/character.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
 #include "game/time.h"
@@ -34,6 +35,7 @@
 #include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "team/macro.h"
+#include "team/team.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"

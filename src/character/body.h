@@ -24,7 +24,6 @@
 #include <map>
 
 #include "movement.h"
-#include "tool/resource_manager.h"
 #include "tool/point.h"
 #include "tool/xml_document.h"
 
@@ -33,6 +32,7 @@ class Character;
 class BodyList;
 class Member;
 class Clothe;
+class Profile;
 
 /*
  * FIXME: this class is either very useless either very badly used.

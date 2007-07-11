@@ -23,8 +23,8 @@
 #define BARREL_H
 
 #include "physical_obj.h"
-#include "graphic/sprite.h"
 
+class Sprite;
 
 class PetrolBarrel : public PhysicalObj
 {

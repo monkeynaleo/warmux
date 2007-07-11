@@ -37,6 +37,7 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
+#include "tool/resource_manager.h"
 
 const int DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
 const int DST_MIN = 80 ;  //dst_minimal between 2 nodes

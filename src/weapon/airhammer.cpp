@@ -35,6 +35,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/i18n.h"
+#include "tool/resource_manager.h"
 
 //-----------------------------------------------------------------------------
 

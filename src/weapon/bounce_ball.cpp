@@ -23,16 +23,16 @@
 #include "bounce_ball.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
-#include "tool/debug.h"
 #include "game/time.h"
-#include "team/teams_list.h"
-#include "graphic/video.h"
-#include "tool/math_tools.h"
-#include "map/camera.h"
-#include "weapon/explosion.h"
+#include "graphic/sprite.h"
 #include "interface/game_msg.h"
-#include "tool/i18n.h"
+#include "map/camera.h"
 #include "object/objects_list.h"
+#include "team/teams_list.h"
+#include "tool/debug.h"
+#include "tool/i18n.h"
+#include "tool/math_tools.h"
+#include "weapon/explosion.h"
 //-----------------------------------------------------------------------------
 
 BounceBall::BounceBall(ExplosiveWeaponConfig& cfg,

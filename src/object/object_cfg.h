@@ -22,8 +22,7 @@
 #ifndef OBJECT_CFG_H
 #define OBJECT_CFG_H
 //-----------------------------------------------------------------------------
-#include "include/base.h"
-#include "tool/xml_document.h"
+#include <string>
 //-----------------------------------------------------------------------------
 
 class ObjectConfig

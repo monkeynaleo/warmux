@@ -22,12 +22,13 @@
 #ifndef BONUS_BOX_H
 #define BONUS_BOX_H
 //-----------------------------------------------------------------------------
-#include <SDL.h>
 #include "include/base.h"
+#include "weapon/weapon.h"
 #include "objbox.h"
-#include "object/physical_obj.h"
-#include "team/team.h"
-#include "weapon/weapons_list.h"
+
+// Forward declarations
+class Character;
+class Weapon;
 //-----------------------------------------------------------------------------
 
 class BonusBox : public ObjBox

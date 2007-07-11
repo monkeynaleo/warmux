@@ -21,9 +21,11 @@
 
 #include "interface.h"
 #include "mouse.h"
+#include "character/character.h"
 #include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
+#include "graphic/text.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"

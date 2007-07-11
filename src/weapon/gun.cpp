@@ -20,18 +20,17 @@
  * if we hit a character.
  *****************************************************************************/
 
-#include "weapon/gun.h"
+#include "gun.h"
+#include "explosion.h"
 #include <sstream>
 #include "map/map.h"
 #include "game/time.h"
+#include "interface/game_msg.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
-#include "interface/game_msg.h"
-#include "interface/game_msg.h"
-#include "weapon/gun.h"
 #include "tool/math_tools.h"
-#include "weapon/explosion.h"
+#include "tool/resource_manager.h"
 
 const uint GUN_BULLET_SPEED = 20;
 

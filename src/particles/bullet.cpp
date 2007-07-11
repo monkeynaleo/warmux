@@ -22,6 +22,8 @@
 #include "bullet.h"
 #include "particle.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
+
 const int BULLET_PARTICLE_FADE_TIME = 2000;
 
 BulletParticle::BulletParticle() :

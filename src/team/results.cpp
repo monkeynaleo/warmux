@@ -90,19 +90,18 @@ void TopCharacters::merge(const TopCharacters* other)
   }
 }
 
-void TopCharacters::rankPlayer(Team::iterator const& player)
+void TopCharacters::rankPlayer(const Character *player)
 {
   TopCharacters           top;
-  const Character         *character = &(*(player));
   DamageStatistics const& stats = player->GetDamageStats();
 
-  // Build a pseudo top from that character
-  top.Violent  = character;
-  top.Useful   = character;
-  top.Useless  = character;
-  top.Traitor  = character;
-  top.Clumsy   = character;
-  top.Accurate = character;
+  // Build a pseudo top from that player
+  top.Violent  = player;
+  top.Useful   = player;
+  top.Useless  = player;
+  top.Traitor  = player;
+  top.Clumsy   = player;
+  top.Accurate = player;
   
   top.violence    = stats.GetMostDamage();
   top.accuracy    = stats.GetAccuracy();
@@ -134,7 +133,7 @@ TeamResults* TeamResults::createTeamResults(Team* team)
   // Search best/worst performers
   FOR_EACH_LIVING_AND_DEAD_CHARACTER(team, player)
   {
-    top->rankPlayer(player);
+    top->rankPlayer(&(*(player)));
   }
 
   return new TeamResults(team, top);
@@ -146,7 +145,7 @@ TeamResults* TeamResults::createGlobalResults()
 
   FOR_ALL_LIVING_AND_DEAD_CHARACTER(team, player)
   {
-    top->rankPlayer(player);
+    top->rankPlayer(&(*(player)));
   }
 
   // We'll do as if NULL is for all teams
