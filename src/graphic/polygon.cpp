@@ -20,6 +20,8 @@
  *****************************************************************************/
 
 #include "polygon.h"
+#include "tool/affine_transform.h"
+#include "sprite.h"
 #include "tool/random.h"
 #include "include/app.h"
 #include "map/map.h"

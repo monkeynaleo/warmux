@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "character.h"
-#include <SDL.h>
 #include <sstream>
 #include <iostream>
 #include "team/macro.h"

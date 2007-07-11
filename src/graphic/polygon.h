@@ -23,10 +23,13 @@
 #define POLYGON_H
 
 #include <vector>
-#include "tool/affine_transform.h"
-#include "surface.h"
-#include "sprite.h"
+#include <SDL_stdinc.h> // For Sint16
+#include "tool/point.h"
+#include "tool/rectangle.h"
 
+// Forward declarations
+class Color;
+class AffineTransform2D;
 class Surface;
 class Sprite;
 

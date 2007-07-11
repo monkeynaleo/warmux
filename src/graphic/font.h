@@ -26,6 +26,7 @@
 #include "colors.h"
 #include "surface.h"
 
+// Forward declarations
 class GameLoop;
 
 class Font

@@ -24,8 +24,9 @@
 #ifndef TEXT_LIST_H
 #define TEXT_LIST_H
 
-#include "text.h"
 #include <list>
+
+class Text;
 
 class TextList{
  public:

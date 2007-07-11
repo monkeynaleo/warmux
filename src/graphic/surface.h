@@ -22,13 +22,14 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
-#include <SDL.h>
 #include <string>
 #include <list>
 #include "color.h"
 #include "include/base.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
+
+struct SDL_Surface;
 
 class Surface
 {

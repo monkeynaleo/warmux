@@ -27,10 +27,12 @@
 
 #include <SDL.h>
 #include <vector>
-#include "spriteframe.h"
+#include "include/base.h"
 #include "spritecache.h"
 #include "spriteanimation.h"
-#include "include/base.h"
+
+// Forward declarations
+class SpriteFrame;
 
 typedef enum {
   top_left,

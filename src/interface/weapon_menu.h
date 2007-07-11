@@ -23,6 +23,7 @@
 #define WEAPON_MENU_H
 
 #include "include/base.h"
+#include "tool/affine_transform.h"
 #include "character/character.h"
 #include "team/team.h"
 #include "weapon/weapon.h"

@@ -20,7 +20,6 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
-#include <SDL.h>
 #include <string>
 #include <list>
 #include "surface.h"
