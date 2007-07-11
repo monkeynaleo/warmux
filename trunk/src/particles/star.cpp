@@ -21,6 +21,7 @@
 
 #include "particle.h"
 #include "star.h"
+#include "graphic/sprite.h"
 
 StarParticle::StarParticle() :
   Particle("star_particle")

@@ -35,6 +35,10 @@
 #include "team/team.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
+#include "weapon.h"
+#include "object/physical_obj.h"
+#include "graphic/surface.h"
+#include "tool/resource_manager.h"
 
 Profile *weapons_res_profile = NULL;
 

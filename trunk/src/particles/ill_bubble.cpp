@@ -23,6 +23,7 @@
 #include "ill_bubble.h"
 #include "explosion_smoke.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 #include "tool/random.h"
 
 // Vibration period of the bubble

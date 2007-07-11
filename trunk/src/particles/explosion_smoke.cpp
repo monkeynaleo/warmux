@@ -23,6 +23,7 @@
 #include "explosion_smoke.h"
 #include "particle.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 #include "tool/random.h"
 
 ExplosionSmoke::ExplosionSmoke(const uint size_init) :

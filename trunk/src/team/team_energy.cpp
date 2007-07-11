@@ -26,6 +26,7 @@
 #include "map/map.h"
 #include "game/time.h"
 #include "graphic/text.h"
+#include "graphic/sprite.h"
 #include "team.h"
 #include "teams_list.h"
 #include "include/app.h"

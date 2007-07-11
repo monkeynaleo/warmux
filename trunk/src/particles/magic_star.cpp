@@ -24,6 +24,7 @@
 #include "particle.h"
 #include "tool/random.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 
 MagicStarParticle::MagicStarParticle() :
   Particle("magic_star_particle")

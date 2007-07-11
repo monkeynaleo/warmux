@@ -22,12 +22,12 @@
 #ifndef TEAM_ENERGY_H
 #define TEAM_ENERGY_H
 
-#include "graphic/text.h"
-#include "graphic/sprite.h"
 #include "gui/energy_bar.h"
 #include "object/physical_obj.h"
 
 class Team;
+class Sprite;
+class Text;
 
 typedef enum {
   // Energy bar are waiting for a new change

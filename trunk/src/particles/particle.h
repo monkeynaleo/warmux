@@ -21,11 +21,14 @@
 
 #ifndef PARTICLE_H
 #define PARTICLE_H
+
+#include <list>
 #include "object/physical_obj.h"
-#include "graphic/sprite.h"
-#include "graphic/surface.h"
 #include "include/base.h"
-#include "weapon/weapon_cfg.h"
+
+// Forward declarations
+class Sprite;
+class Surface;
 
 typedef enum {
   particle_DARK_SMOKE,

@@ -22,6 +22,7 @@
 #include "map.h"
 #include "object/physical_obj.h"
 #include "graphic/surface.h"
+#include "graphic/sprite.h"
 #include "graphic/text.h"
 #include "camera.h"
 #include "maps_list.h"

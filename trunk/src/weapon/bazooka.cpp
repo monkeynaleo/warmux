@@ -23,7 +23,7 @@
 #include "explosion.h"
 #include "game/config.h"
 #include "game/time.h"
-#include "graphic/video.h"
+#include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"

@@ -22,31 +22,21 @@
 
 #include "weapon.h"
 #include <SDL.h>
-#include <SDL_rotozoom.h>
-#include <SDL_gfxPrimitives.h>
-#include <iostream>
 #include <sstream>
-#include "explosion.h"
-#include "character/move.h"
+#include "character/character.h"
 #include "game/time.h"
 #include "game/game_loop.h"
-#include "graphic/video.h"
-#include "graphic/sprite.h"
-#include "gui/progress_bar.h"
+#include "graphic/text.h"
 #include "include/app.h"
 #include "include/action_handler.h"
-#include "graphic/font.h"
-#include "interface/interface.h"
 #include "map/camera.h"
-#include "object/objects_list.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/math_tools.h"
-#include "tool/point.h"
 #include "tool/resource_manager.h"
-#include "tool/xml_document.h"
+
+extern Profile *weapons_res_profile;
 
 const int INFINITE_AMMO = -1;
 const uint MAX_TIME_LOADING = 2000;

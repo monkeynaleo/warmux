@@ -22,20 +22,15 @@
 #ifndef MINE_H
 #define MINE_H
 
-#include <SDL.h>
 #include "launcher.h"
-#include "graphic/surface.h"
-#include "graphic/sprite.h"
 #include "include/base.h"
-#include "object/physical_obj.h"
-#include "character/character.h"
 
 class Mine;
 class MineConfig;
 
 class ObjMine : public WeaponProjectile
 {
-  private:
+private:
     SoundSample timeout_sound;
 
   // this is a fake mine ?

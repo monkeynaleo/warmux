@@ -23,13 +23,11 @@
 #define WEAPON_TOOLS_H
 
 #include <SDL.h>
-#include "weapon.h"
-#include "graphic/surface.h"
-#include "include/base.h"
-#include "object/physical_obj.h"
 #include "particles/particle.h"
 #include "tool/point.h"
-#include "tool/resource_manager.h"
+
+class Profile;
+class ExplosiveWeaponConfig;
 
 void ApplyExplosion(const Point2i &pos,
 		    const ExplosiveWeaponConfig &config,

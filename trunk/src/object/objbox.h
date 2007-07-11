@@ -22,10 +22,12 @@
 #ifndef OBJBOX_H
 #define OBJBOX_H
 //-----------------------------------------------------------------------------
-#include <SDL.h>
-#include "include/base.h"
-#include "team/team.h"
 #include "object/physical_obj.h"
+#include "tool/xml_document.h"
+
+class Team;
+class Character;
+class Sprite;
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {

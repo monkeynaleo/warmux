@@ -23,6 +23,7 @@
 #include "particle.h"
 #include "tool/random.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 #include "map/camera.h"
 
 TeleportMemberParticle::TeleportMemberParticle(Sprite* spr, const Point2i& position, const Point2i& dest, int direction) :

@@ -23,6 +23,7 @@
 
 #include "cursor.h"
 #include "interface.h"
+#include "character/character.h"
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
@@ -35,6 +36,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/point.h"
+#include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 
 // mouse scroll speed

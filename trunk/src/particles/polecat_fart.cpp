@@ -23,6 +23,7 @@
 #include "particle.h"
 #include "character/character.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 
 PolecatFart::PolecatFart() :
   Particle("polecat_fart_particle")

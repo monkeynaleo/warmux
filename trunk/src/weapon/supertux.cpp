@@ -25,7 +25,7 @@
 #include "game/config.h"
 #include "game/game_loop.h"
 #include "game/time.h"
-#include "graphic/video.h"
+#include "graphic/sprite.h"
 #include "include/action_handler.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"

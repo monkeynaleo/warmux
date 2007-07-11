@@ -21,6 +21,7 @@
 
 #include "body_member.h"
 #include "particle.h"
+#include "graphic/sprite.h"
 #include "tool/random.h"
 
 BodyMemberParticle::BodyMemberParticle(Sprite* spr, const Point2i& position) :

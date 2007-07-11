@@ -23,22 +23,14 @@
 #include "bonus_box.h"
 #include <sstream>
 #include <iostream>
-#include <math.h>
-#include "game/game_mode.h"
-#include "game/game_loop.h"
-#include "game/time.h"
-#include "graphic/sprite.h"
-#include "include/app.h"
+#include "character/character.h"
 #include "interface/game_msg.h"
-#include "map/camera.h"
-#include "map/map.h"
 #include "network/randomsync.h"
-#include "object/objects_list.h"
 #include "team/macro.h"
-#include "tool/debug.h"
+#include "team/team.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
-#include "weapon/explosion.h"
+//#include "weapon/explosion.h"
 #include "weapon/weapons_list.h"
 
 const uint SPEED = 5; // meter / seconde

@@ -39,6 +39,7 @@
 #include "tool/debug.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
+#include "tool/resource_manager.h"
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG

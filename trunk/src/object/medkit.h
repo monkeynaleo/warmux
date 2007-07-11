@@ -22,11 +22,12 @@
 #ifndef MEDKIT_H
 #define MEDKIT_H
 //-----------------------------------------------------------------------------
-#include <SDL.h>
 #include "include/base.h"
 #include "objbox.h"
-#include "object/physical_obj.h"
-#include "team/team.h"
+//#include "object/physical_obj.h"
+
+class Team;
+class Character;
 //-----------------------------------------------------------------------------
 
 class Medkit : public ObjBox//public PhysicalObj

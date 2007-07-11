@@ -26,16 +26,11 @@
 #include <vector>
 #include <string>
 #include "team_energy.h"
-#include "character/character.h"
 #include "graphic/surface.h"
-#include "include/base.h"
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"
-#include "tool/point.h"
-#include "tool/resource_manager.h"
 
 class Character;
-class Weapon;
 
 typedef enum {
   TEAM_human_local,

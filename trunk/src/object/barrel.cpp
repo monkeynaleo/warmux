@@ -23,6 +23,7 @@
 #include "objects_list.h"
 #include "physical_obj.h"
 #include "game/game_mode.h"
+#include "graphic/sprite.h"
 #include "particles/particle.h"
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"

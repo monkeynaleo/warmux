@@ -24,8 +24,6 @@
 #define WEAPON_H
 #include <string>
 #include "weapon_cfg.h"
-#include "graphic/surface.h"
-#include "graphic/sprite.h"
 #include "gui/progress_bar.h"
 #include "include/base.h"
 #include "particles/particle.h"
@@ -34,6 +32,7 @@
 #include "tool/debug.h"
 
 class Character;
+class Sprite;
 
 // Infinite ammos constant
 extern const int INFINITE_AMMO;

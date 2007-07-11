@@ -28,6 +28,7 @@
 #include "physical_obj.h"
 #include "physics.h"
 #include "objects_list.h"
+#include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "map/map.h"

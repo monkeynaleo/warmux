@@ -27,11 +27,12 @@
 #include "game/game_loop.h"
 #include "game/time.h"
 #include "interface/interface.h"
-#include "object/objects_list.h"
 #include "map/camera.h"
+#include "map/maps_list.h"
+#include "object/objects_list.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "map/maps_list.h"
+#include "tool/resource_manager.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------

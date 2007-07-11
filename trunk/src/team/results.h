@@ -26,9 +26,8 @@
 #include <map>
 #include <string>
 
-#include "team.h"
-
 class Character;
+class Team;
 
 class TopCharacters
 {
@@ -49,7 +48,7 @@ class TopCharacters
   uint             death_time;
 
   TopCharacters();
-  void rankPlayer(Team::iterator const& player);
+  void rankPlayer(const Character *player);
   void merge(const TopCharacters* other);
 };
 
