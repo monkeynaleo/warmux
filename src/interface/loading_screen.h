@@ -22,9 +22,12 @@
 #ifndef LOADING_SCREEN_H
 #define LOADING_SCREEN_H
 
+#include "include/base.h"
 #include <string>
-#include "graphic/sprite.h"
-#include "tool/resource_manager.h"
+
+// Forwar declarations
+class Profile;
+class Sprite;
 
 class LoadingScreen
 {

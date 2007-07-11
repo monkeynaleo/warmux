@@ -20,28 +20,16 @@
  *****************************************************************************/
 
 #include "weapon_menu.h"
-#include "weapon/weapons_list.h"
-
 #include <sstream>
-#include <math.h>
 #include "interface.h"
-#include "graphic/video.h"
 #include "graphic/font.h"
 #include "game/time.h"
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "interface/mouse.h"
-#include "map/camera.h"
-#include "map/map.h"
 #include "map/maps_list.h"
-#include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/point.h"
-#include "tool/rectangle.h"
-#include "tool/string_tools.h"
-#include "tool/resource_manager.h"
 #include "tool/i18n.h"
-#include "graphic/sprite.h"
 #include "weapon/weapon.h"
 #include "weapon/weapons_list.h"
 

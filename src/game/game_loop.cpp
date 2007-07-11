@@ -27,6 +27,7 @@
 #include "time.h"
 #include "ai/ai_engine.h"
 #include "include/action_handler.h"
+#include "include/app.h"
 #include "interface/cursor.h"
 #include "interface/game_msg.h"
 #include "interface/interface.h"

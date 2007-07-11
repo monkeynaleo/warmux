@@ -22,10 +22,7 @@
 #include "game_msg.h"
 #include <iostream>
 #include "game/time.h"
-#include "graphic/video.h"
-#include "graphic/font.h"
 #include "include/app.h"
-#include "game_msg.h"
 
 // Hauteur de la police de caractere "mini"
 #define HAUT_POLICE_MINI 12 // pixels

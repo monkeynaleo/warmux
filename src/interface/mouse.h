@@ -22,11 +22,12 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
-#include <SDL.h>
 #include "graphic/surface.h"
-#include "include/app.h"
 #include "include/base.h"
 #include "tool/point.h"
+
+// Forward declarations
+struct SDL_event;
 
 class Mouse
 {

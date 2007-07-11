@@ -23,8 +23,8 @@
 #define MAN_MACHINE_INTERFACE_H
 //-----------------------------------------------------------------------------
 #include <map>
-#include <SDL.h>
-#include "include/action.h"
+#include <list>
+#include <SDL_events.h>
 #include "include/base.h"
 //-----------------------------------------------------------------------------
 

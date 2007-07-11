@@ -19,6 +19,7 @@
  * Joystick management.
  *****************************************************************************/
 
+#include <SDL.h>
 #include "joystick.h"
 
 Joystick * Joystick::singleton = NULL;
