@@ -27,6 +27,7 @@
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "menu/network_menu.h"
+#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"

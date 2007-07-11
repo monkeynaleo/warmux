@@ -25,19 +25,17 @@
 #include "network_menu.h"
 #include "internet_menu.h"
 
-#include "game/game.h"
 #include "game/config.h"
-#include "game/game_mode.h"
-#include "graphic/video.h"
-#include "graphic/font.h"
-#include "map/maps_list.h"
+#include "gui/button.h"
+#include "gui/box.h"
+#include "gui/check_box.h"
+#include "gui/msg_box.h"
+#include "gui/text_box.h"
+#include "include/app.h"
 #include "network/net_error_msg.h"
 #include "network/index_server.h"
-#include "include/app.h"
-#include "include/action_handler.h"
-#include "team/teams_list.h"
 #include "tool/i18n.h"
-#include "tool/string_tools.h"
+#include "tool/resource_manager.h"
 
 NetworkConnectionMenu::NetworkConnectionMenu() :
   Menu("menu/bg_network", vOkCancel)

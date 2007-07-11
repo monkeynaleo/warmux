@@ -21,14 +21,16 @@
 #define _TILE_H
 
 #include <vector>
-#include "tileitem.h"
-#include "graphic/surface.h"
-#include "graphic/sprite.h"
+#include "tool/point.h"
 #include "tool/rectangle.h"
+
+// Forward declarations
+class Surface;
+class Sprite;
+class TileItem;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
-class TileItem;
 
 class Tile : public Rectanglei{
 public:

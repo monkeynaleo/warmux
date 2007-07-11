@@ -20,8 +20,9 @@
  *****************************************************************************/
 
 #include "maps_list.h"
-#include "map.h"
 #include "game/config.h"
+#include "graphic/surface.h"
+#include "tool/resource_manager.h"
 #include "tool/debug.h"
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
@@ -30,6 +31,8 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #endif
+
+extern const uint MAX_WIND_OBJECTS;
 
 InfoMap::InfoMap ()
 {

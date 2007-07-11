@@ -26,14 +26,14 @@
 #include "game/game.h"
 #include "game/config.h"
 #include "game/game_mode.h"
-#include "graphic/video.h"
-#include "graphic/font.h"
+#include "gui/null_widget.h"
+#include "gui/picture_text_cbox.h"
+#include "gui/picture_widget.h"
+#include "gui/spin_button_picture.h"
 #include "include/app.h"
 #include "tool/i18n.h"
-#include "tool/string_tools.h"
 #include "tool/resource_manager.h"
 
-#include <iostream>
 const uint MARGIN_TOP    = 5;
 const uint MARGIN_SIDE   = 5;
 const uint MARGIN_BOTTOM = 70;

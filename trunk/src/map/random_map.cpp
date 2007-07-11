@@ -20,9 +20,12 @@
  *****************************************************************************/
 
 #include "random_map.h"
-#include "tool/random.h"
+#include "game/config.h"
+#include "graphic/polygon_generator.h"
 #include "map/maps_list.h"
 #include "tool/affine_transform.h"
+#include "tool/random.h"
+#include "tool/resource_manager.h"
 
 MapElement::MapElement(Surface & object, Point2i & pos)
 {

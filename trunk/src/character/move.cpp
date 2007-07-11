@@ -25,6 +25,7 @@
 #include "game/game_loop.h"
 #include "include/action_handler.h"
 #include "network/network.h"
+#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 

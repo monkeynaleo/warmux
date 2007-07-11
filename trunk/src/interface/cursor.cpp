@@ -20,12 +20,13 @@
  *****************************************************************************/
 
 #include "cursor.h"
+#include "character/character.h"
 #include "game/time.h"
 #include "graphic/effects.h"
+#include "graphic/sprite.h"
 #include "map/camera.h"
 #include "team/teams_list.h" // ActiveCharacter()
 #include "tool/resource_manager.h"
-#include "graphic/sprite.h"
 
 const uint show_hide_time = 200; //time to show and hide the arrow
 const uint y_min = 20; //number of pixels between the bottom of the arrow and the top of the sprite

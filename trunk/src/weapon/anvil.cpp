@@ -20,8 +20,10 @@
  *****************************************************************************/
 
 #include "anvil.h"
+#include "explosion.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
+#include "character/character.h"
 #include "game/time.h"
 #include "graphic/video.h"
 #include "interface/game_msg.h"
@@ -32,7 +34,6 @@
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/math_tools.h"
-#include "weapon/explosion.h"
 //-----------------------------------------------------------------------------
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,

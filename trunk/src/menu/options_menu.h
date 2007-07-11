@@ -23,8 +23,10 @@
 #define OPTIONS_MENU_H
 
 #include "menu.h"
-#include "include/base.h"
-#include "graphic/font.h"
+
+class ListBox;
+class CheckBox;
+class SpinButtonBig;
 
 class OptionMenu : public Menu
 {

@@ -20,9 +20,11 @@
  *****************************************************************************/
 
 #include "baseball.h"
+#include "character/character.h"
 #include "game/game_loop.h"
 #include "map/camera.h"
 #include "team/macro.h"
+#include "team/team.h"
 #include "tool/point.h"
 #include "tool/i18n.h"
 #include "explosion.h"

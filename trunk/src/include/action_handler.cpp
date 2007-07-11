@@ -23,6 +23,7 @@
 #include <SDL_mutex.h>
 
 #include "action_handler.h"
+#include "character/character.h"
 #include "character/body.h"
 #include "character/move.h"
 #include "game/game_mode.h"
@@ -42,6 +43,8 @@
 #include "network/network.h"
 #include "network/network_server.h"
 #include "team/macro.h"
+#include "team/team.h"
+#include "team/team_config.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/vector2.h"

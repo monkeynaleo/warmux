@@ -22,6 +22,7 @@
 #include "gnu.h"
 #include <sstream>
 #include "explosion.h"
+#include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/video.h"

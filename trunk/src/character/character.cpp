@@ -19,11 +19,11 @@
  * Refresh d'un ver de terre.
  *****************************************************************************/
 
-#include "character.h"
 #include <sstream>
 #include <iostream>
-#include "team/macro.h"
+#include "character.h"
 #include "move.h"
+#include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
 #include "game/time.h"
@@ -34,6 +34,8 @@
 #include "map/camera.h"
 #include "network/randomsync.h"
 #include "sound/jukebox.h"
+#include "team/team.h"
+#include "team/macro.h"
 #include "tool/random.h"
 #include "tool/math_tools.h"
 #include "weapon/explosion.h"

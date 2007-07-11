@@ -23,8 +23,6 @@
 #define GUI_BOX_H
 
 #include "widget_list.h"
-#include <list>
-#include "tool/point.h"
 
 class Box : public WidgetList
 {

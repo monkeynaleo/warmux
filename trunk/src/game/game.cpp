@@ -23,6 +23,7 @@
 #include "time.h"
 #include "game_init.h"
 #include "game_loop.h"
+#include "gui/question.h"
 #include "include/app.h"
 #include "interface/keyboard.h"
 #include "interface/joystick.h"

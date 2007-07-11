@@ -40,7 +40,9 @@
 #include "network/network_server.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
+#include "team/team.h"
 #include "tool/i18n.h"
 
 void GameInit::InitGameData_NetServer()

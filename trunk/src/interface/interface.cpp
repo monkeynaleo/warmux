@@ -28,8 +28,11 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "team/macro.h"
+#include "team/team.h"
+#include "tool/resource_manager.h"
 #include "tool/string_tools.h"
 #include "tool/i18n.h"
+#include "weapon/weapon.h"
 
 WeaponStrengthBar weapon_strength_bar;
 

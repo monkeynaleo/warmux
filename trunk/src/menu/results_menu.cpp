@@ -22,6 +22,12 @@
 #include "results_menu.h"
 
 #include "character/character.h"
+#include "graphic/sprite.h"
+#include "gui/button.h"
+#include "gui/label.h"
+#include "gui/box.h"
+#include "gui/picture_widget.h"
+
 #include "include/app.h"
 #include "team/results.h"
 #include "team/macro.h"

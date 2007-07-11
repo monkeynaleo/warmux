@@ -30,6 +30,7 @@
 #include "object/objects_list.h"
 #include "map/camera.h"
 #include "team/macro.h"
+#include "team/team.h"
 #include "map/maps_list.h"
 //-----------------------------------------------------------------------------
 

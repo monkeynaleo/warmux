@@ -21,6 +21,7 @@
 
 #include "supertux.h"
 #include "explosion.h"
+#include "character/character.h"
 #include "game/config.h"
 #include "game/game_loop.h"
 #include "game/time.h"
@@ -31,6 +32,7 @@
 #include "network/network.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
+#include "team/team.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
 

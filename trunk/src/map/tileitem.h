@@ -20,6 +20,7 @@
 #ifndef TILEITEM_H
 #define TILEITEM_H
 
+#include "tool/point.h"
 #include "graphic/surface.h"
 
 const Point2i CELL_SIZE(64, 64);

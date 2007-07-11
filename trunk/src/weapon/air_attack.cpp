@@ -21,6 +21,7 @@
 
 #include "air_attack.h"
 #include <sstream>
+#include "character/character.h"
 #include "game/game_loop.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"

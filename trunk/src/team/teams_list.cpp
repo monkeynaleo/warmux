@@ -19,6 +19,8 @@
  * Team handling
  *****************************************************************************/
 
+#include "team.h"
+#include "team_config.h"
 #include "teams_list.h"
 //-----------------------------------------------------------------------------
 #include "character/body_list.h"

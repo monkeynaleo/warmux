@@ -23,15 +23,11 @@
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 
-#include "include/base.h"
-#include "graphic/fps.h"
-#include "graphic/surface.h"
-#include "gui/widget_list.h"
-#include "gui/button_text.h"
-#include "gui/picture_widget.h"
-#include "menu/menu.h"
-#include <SDL.h>
-#include <vector>
+#include "menu.h"
+
+// Forward declarations
+class Text;
+class ButtonText;
 
 typedef enum
 {

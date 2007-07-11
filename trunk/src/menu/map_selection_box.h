@@ -23,9 +23,14 @@
 #define MAP_SELECTION_BOX_H
 
 #include "gui/box.h"
-#include "gui/button.h"
-#include "gui/label.h"
-#include "gui/picture_widget.h"
+#include "include/base.h"
+#include "tool/point.h"
+#include "tool/rectangle.h"
+
+// Forward declarations
+class Button;
+class Label;
+class PictureWidget;
 
 class MapSelectionBox : public HBox
 {

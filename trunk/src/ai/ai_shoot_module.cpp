@@ -20,14 +20,16 @@
  *****************************************************************************/
 
 #include "ai_shoot_module.h"
+#include "ai_movement_module.h"
 #include "character/character.h"
 #include "interface/game_msg.h"
 #include "map/map.h"
-#include "network/randomsync.h"
-#include "team/macro.h"
-#include "tool/math_tools.h"
 #include "map/wind.h"
-#include "ai_movement_module.h"
+#include "network/randomsync.h"
+#include "team/team.h"
+#include "team/macro.h"
+#include "team/teams_list.h"
+#include "tool/math_tools.h"
 
 #include <iostream>
 

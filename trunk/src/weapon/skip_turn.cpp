@@ -21,9 +21,11 @@
 
 #include "skip_turn.h"
 //-----------------------------------------------------------------------------
+#include "character/character.h"
 #include "game/game_loop.h"
 #include "interface/game_msg.h"
 #include "team/teams_list.h"
+#include "team/team.h"
 #include "tool/i18n.h"
 //-----------------------------------------------------------------------------
 

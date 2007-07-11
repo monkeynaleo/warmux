@@ -23,8 +23,8 @@
 #define WATER_H
 
 #include <vector>
-#include "graphic/surface.h"
 #include "include/base.h"
+#include "graphic/surface.h"
 
 const uint WATER_INITIAL_HEIGHT = 100;
 #define pattern_width 180

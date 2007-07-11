@@ -23,10 +23,12 @@
 #define GAME_MENU_H
 
 #include "menu.h"
-#include "map_selection_box.h"
-#include "teams_selection_box.h"
-#include "include/base.h"
-#include "graphic/font.h"
+
+// Forward declarations
+class TeamsSelectionBox;
+class MapSelectionBox;
+class SpinButtonWithPicture;
+class CheckBox;
 
 class GameMenu : public Menu
 {

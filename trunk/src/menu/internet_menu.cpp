@@ -23,10 +23,12 @@
 
 #include "internet_menu.h"
 
-#include "menu.h"
 #include "include/app.h"
+#include "gui/button.h"
+#include "gui/label.h"
+#include "gui/box.h"
 #include "gui/button_text.h"
-#include "network/network.h"
+#include "gui/list_box.h"
 #include "network/net_error_msg.h"
 #include "network/index_server.h"
 #include "tool/i18n.h"
