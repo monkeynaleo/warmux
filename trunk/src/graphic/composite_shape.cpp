@@ -20,6 +20,9 @@
  *****************************************************************************/
 
 #include "composite_shape.h"
+#include "../tool/affine_transform.h"
+#include "surface.h"
+#include "polygon.h"
 #include "../include/app.h"
 #include "../map/map.h"
 

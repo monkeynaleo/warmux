@@ -21,15 +21,11 @@
 
 #include "surface.h"
 #include <SDL.h>
-#include <SDL_endian.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
 #include <png.h>
-#include "tool/debug.h"
-#include "tool/error.h"
 #include "tool/i18n.h"
-#include "include/base.h"
 
 /* texturedPolygon import from SDL_gfx v2.0.15 */
 #if (SDL_GFXPRIMITIVES_MAJOR == 2) && (SDL_GFXPRIMITIVES_MINOR == 0) && (SDL_GFXPRIMITIVES_MICRO < 14)

@@ -17,17 +17,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#include <exception>
-#include <SDL_image.h>
-#include <SDL_video.h>
 #include <iostream>
-#include <string>
 #include "font.h"
-#include "colors.h"
 #include "game/config.h"
 #include "include/app.h"
 #include "map/map.h"
-#include "tool/error.h"
 #include "tool/file_tools.h"
 
 Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};

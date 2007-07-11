@@ -20,11 +20,6 @@
  *****************************************************************************/
 
 #include "fps.h"
-#include <SDL.h>
-#include <sstream>
-#include <iomanip>
-#include "colors.h"
-#include "video.h"
 #include "text.h"
 #include "include/app.h"
 #include "tool/i18n.h"

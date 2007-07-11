@@ -23,7 +23,8 @@
 #define FPS_H
 
 #include <list>
-#include "text.h"
+
+class Text;
 
 class FramePerSecond
 {

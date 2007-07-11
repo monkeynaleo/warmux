@@ -33,6 +33,7 @@
 #include "map/map.h"
 #include "tool/rectangle.h"
 #include "tool/debug.h"
+#include "spriteframe.h"
 
 #define BUGGY_SDLGFX
 

@@ -22,7 +22,6 @@
 #ifndef COLORS_H
 #define COLORS_H
 
-#include <SDL_video.h>
 #include "color.h"
 
 // Greyscale

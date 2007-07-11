@@ -18,18 +18,14 @@
  *****************************************************************************/
 
 #include "video.h"
-#include <string>
 #include <iostream>
-#include <SDL_endian.h>
 #include <SDL_image.h>
 #include "game/config.h"
 #ifdef WIN32
 #include "game/game.h"
 #include "map/map.h"
 #endif
-#include "tool/error.h"
 #include "tool/i18n.h"
-#include "include/app.h"
 #include "include/constant.h"
 #include "map/camera.h"
 
