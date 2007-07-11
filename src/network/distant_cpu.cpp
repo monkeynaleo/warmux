@@ -21,9 +21,10 @@
 
 #include "distant_cpu.h"
 //-----------------------------------------------------------------------------
-#include <SDL_net.h>
+#include <SDL_mutex.h>
 #include <SDL_thread.h>
 #include "network.h"
+#include "include/action.h"
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "menu/network_menu.h"

@@ -19,6 +19,7 @@
  * Network layer for Wormux.
  *****************************************************************************/
 
+#include <SDL_thread.h>
 #include "network.h"
 #include "network_local.h"
 #include "network_client.h"

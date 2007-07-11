@@ -37,6 +37,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/wind.h"
+#include "network/network.h"
 #include "object/objects_list.h"
 #include "team/macro.h"
 #include "tool/i18n.h"

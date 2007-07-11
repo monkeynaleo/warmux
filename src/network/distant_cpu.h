@@ -23,14 +23,12 @@
 #define DISTANT_CPU_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
-#include <SDL_thread.h>
-#include <SDL_mutex.h>
 #include "include/base.h"
 #include <list>
 #include <string>
-#include "include/action.h"
 //-----------------------------------------------------------------------------
 
+struct SDL_mutex;
 class Action;
 
 class DistantComputer
