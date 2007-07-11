@@ -22,6 +22,7 @@
 #include "grapple.h"
 #include <math.h>
 #include "explosion.h"
+#include "character/character.h"
 #include "game/config.h"
 #include "game/game.h"
 #include "game/game_loop.h"
@@ -31,6 +32,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "sound/jukebox.h"
+#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"

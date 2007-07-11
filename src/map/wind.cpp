@@ -32,6 +32,10 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "interface/interface.h"
+#include <SDL.h>
+#include "game/config.h"
+#include "graphic/sprite.h"
+#include "gui/progress_bar.h"
 
 const uint MAX_WIND_OBJECTS = 200;
 const uint BARRE_LARG = 80;
@@ -100,6 +104,12 @@ WindParticle::WindParticle(std::string &xml_file, float scale) :
       flipped->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
     }
   }
+}
+
+WindParticle::~WindParticle()
+{
+  delete sprite;
+  if(flipped) delete flipped;
 }
 
 void WindParticle::Refresh()

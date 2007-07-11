@@ -18,6 +18,9 @@
  *****************************************************************************/
 
 #include "tile.h"
+#include "tileitem.h"
+#include "graphic/surface.h"
+#include "graphic/sprite.h"
 #include "include/app.h"
 #include "map/camera.h"
 

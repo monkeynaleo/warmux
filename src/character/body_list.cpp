@@ -23,6 +23,7 @@
 #include <string>
 #include <iostream>
 #include "body.h"
+#include "game/config.h"
 
 const std::string CONFIG_FN = "config.xml";
 

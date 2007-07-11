@@ -20,9 +20,17 @@
  *****************************************************************************/
 
 #include "network_teams_selection_box.h"
+#include "team_box.h"
+#include "gui/label.h"
+#include "gui/picture_widget.h"
+#include "gui/spin_button.h"
+#include "gui/spin_button_big.h"
+#include "gui/text_box.h"
 #include "include/action_handler.h"
 #include "team/teams_list.h"
+#include "team/team.h"
 #include "tool/i18n.h"
+
 
 NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
 {

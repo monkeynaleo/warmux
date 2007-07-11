@@ -22,17 +22,14 @@
 #ifndef NETWORK_MENU_H
 #define NETWORK_MENU_H
 
-#include <list>
 #include "menu.h"
-#include "network_teams_selection_box.h"
-#include "map_selection_box.h"
-#include "include/base.h"
-#include "graphic/font.h"
-#include "gui/button_text.h"
-#include "gui/msg_box.h"
-#include "gui/text_box.h"
 
 class Team;
+class SpinButton;
+class NetworkTeamsSelectionBox;
+class MsgBox;
+class MapSelectionBox;
+class TextBox;
 
 class NetworkMenu : public Menu
 {

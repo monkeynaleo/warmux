@@ -25,12 +25,13 @@
 
 #include <list>
 #include "menu.h"
-#include "include/base.h"
-#include "graphic/font.h"
-#include "gui/button_text.h"
-#include "gui/msg_box.h"
-#include "gui/text_box.h"
 #include "network/network.h"
+
+// Forward declarations
+class TextBox;
+class VBox;
+class MsgBox;
+class CheckBox;
 
 class NetworkConnectionMenu : public Menu
 {

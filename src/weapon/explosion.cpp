@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "explosion.h"
+#include "character/character.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/action_handler.h"
@@ -31,6 +32,7 @@
 #include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
+#include "team/team.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
 

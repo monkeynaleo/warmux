@@ -33,13 +33,16 @@
 #endif
 #include "include/app.h"
 #include "include/constant.h"
+#include "network/network.h"
+#include "object/object_cfg.h"
 #include "sound/jukebox.h"
+#include "team/team.h"
 #include "team/teams_list.h"
+#include "team/team_config.h"
+#include "tool/resource_manager.h"
 #include "tool/file_tools.h"
 #include "tool/string_tools.h"
 #include "tool/i18n.h"
-#include "network/network.h"
-#include "team/team_config.h"
 #ifdef USE_AUTOPACKAGE
 #  include "include/binreloc.h"
 #endif

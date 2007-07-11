@@ -23,6 +23,7 @@
 
 #include "cursor.h"
 #include "interface.h"
+#include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
 #include "game/time.h"
@@ -32,6 +33,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "team/macro.h"
+#include "team/team.h"
 #include "tool/point.h"
 #include "weapon/weapon.h"
 

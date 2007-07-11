@@ -23,14 +23,11 @@
 #define TEAMS_SELECTION_BOX_H
 
 #include <vector>
-
 #include "gui/box.h"
-#include "gui/label.h"
-#include "gui/picture_widget.h"
-#include "gui/spin_button.h"
-#include "gui/spin_button_big.h"
-#include "gui/text_box.h"
-#include "team_box.h"
+
+// Forward declarations
+class SpinButtonBig;
+class TeamBox;
 
 const uint MAX_NB_TEAMS=4;
 

@@ -20,9 +20,10 @@
  *****************************************************************************/
 
 #include "ai_engine_stupid.h"
+#include "character/character.h"
 #include "game/game_loop.h"
-#include "team/teams_list.h"
 #include "game/time.h"
+#include "team/teams_list.h"
 
 #include <iostream>
 

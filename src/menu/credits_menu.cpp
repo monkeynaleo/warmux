@@ -24,6 +24,8 @@
 #include <sstream>
 #include <iostream>
 #include "game/config.h"
+#include "graphic/font.h"
+#include "gui/list_box.h"
 #include "tool/i18n.h"
 #include "include/app.h"
 //-----------------------------------------------------------------------------

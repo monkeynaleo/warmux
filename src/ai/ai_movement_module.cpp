@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include "include/action_handler.h"
+#include "character/character.h"
 #include "character/move.h"
 #include "map/map.h"
 #include "team/teams_list.h"

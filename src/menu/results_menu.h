@@ -22,12 +22,14 @@
 #ifndef RESULTS_MENU_H
 #define RESULTS_MENU_H
 
+#include <vector>
+#include "graphic/surface.h"
 #include "menu.h"
-#include "include/base.h"
-#include "graphic/font.h"
-#include "team/results.h"
 
 class ResultBox;
+class PictureWidget;
+class TeamResults;
+class Team;
 
 class ResultsMenu : public Menu
 {

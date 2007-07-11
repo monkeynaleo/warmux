@@ -21,6 +21,7 @@
 
 #include "lowgrav.h"
 #include "explosion.h"
+#include "character/character.h"
 #include "game/game.h"
 #include "game/game_loop.h"
 #include "object/physical_obj.h"

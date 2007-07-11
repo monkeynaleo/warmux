@@ -21,6 +21,7 @@
 
 #include "auto_bazooka.h"
 #include "explosion.h"
+#include "character/character.h"
 #include "game/time.h"
 #include "graphic/video.h"
 #include "include/app.h"
@@ -29,6 +30,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/wind.h"
+#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"

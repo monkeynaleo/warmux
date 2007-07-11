@@ -21,18 +21,13 @@
  *****************************************************************************/
 
 #include "main_menu.h"
-#include <string>
+#include "gui/button_text.h"
 #include "game/config.h"
-#include "game/time.h"
-#include "graphic/effects.h"
-#include "graphic/font.h"
-#include "graphic/fps.h"
 #include "graphic/text.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
 #include "tool/i18n.h"
-#include "tool/file_tools.h"
 #include "tool/resource_manager.h"
 
 #ifndef WIN32

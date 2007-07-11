@@ -22,14 +22,15 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "include/base.h"
 #include "ground.h"
 #include "sky.h"
 #include "water.h"
-#include "graphic/surface.h"
-#include "graphic/sprite.h"
-#include "graphic/text.h"
-#include "include/base.h"
-#include "object/physical_obj.h"
+
+// Forward declarations
+class Text;
+class Surface;
+class PhysicalObj;
 
 extern const uint MAX_WIND_OBJECTS;
 

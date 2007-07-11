@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "teleportation.h"
+#include "character/character.h"
 #include "character/body.h"
 #include "game/game_loop.h"
 #include "game/game_mode.h"

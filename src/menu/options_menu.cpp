@@ -26,10 +26,23 @@
 #include "game/config.h"
 #include "graphic/video.h"
 #include "graphic/font.h"
+#include "graphic/sprite.h"
+#include "gui/button.h"
+#include "gui/label.h"
+#include "gui/box.h"
+#include "gui/list_box.h"
+#include "gui/check_box.h"
+#include "gui/picture_widget.h"
+#include "gui/picture_text_cbox.h"
+#include "gui/spin_button_big.h"
+#include "gui/list_box_w_label.h"
+
 #include "map/maps_list.h"
+#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/string_tools.h"
+#include "tool/resource_manager.h"
 #include <sstream>
 
 const uint SOUND_X = 30;

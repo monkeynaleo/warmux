@@ -22,22 +22,15 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "graphic/sprite.h"
-#include "gui/button.h"
-#include "gui/list_box.h"
-#include "gui/list_box_w_label.h"
-#include "gui/check_box.h"
-#include "gui/spin_button.h"
-#include "gui/spin_button_big.h"
-#include "gui/spin_button_picture.h"
-#include "gui/box.h"
-#include "gui/question.h"
-#include "gui/label.h"
-#include "gui/null_widget.h"
-#include "gui/picture_widget.h"
-#include "gui/picture_text_cbox.h"
-#include "gui/container.h"
-#include "gui/text_box.h"
+#include "gui/widget_list.h"
+
+// Forward declarations
+class Button;
+class Label;
+class Box;
+class HBox;
+class Sprite;
+
 
 typedef enum {
   vOkCancel,

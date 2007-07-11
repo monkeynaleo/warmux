@@ -22,7 +22,6 @@
 #ifndef SKY_H
 #define SKY_H
 
-#include "tile.h"
 #include <list>
 #include "graphic/surface.h"
 #include "include/base.h"

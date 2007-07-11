@@ -23,9 +23,12 @@
 #ifndef INTERNET_MENU_H
 #define INTERNET_MENU_H
 
-#include <list>
 #include "menu.h"
-#include "gui/button_text.h"
+
+// Forward declarations
+class ButtonText;
+class VBox;
+class ListBox;
 
 class InternetMenu : public Menu
 {

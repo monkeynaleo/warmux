@@ -21,13 +21,12 @@
 
 #include "camera.h"
 #include "map.h"
-#include "maps_list.h"
 #include "wind.h"
 #include "include/app.h"
 #include "interface/mouse.h"
+#include "object/physical_obj.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
-#include "tool/rectangle.h"
 #include "tool/math_tools.h"
 #include "game/game.h"
 

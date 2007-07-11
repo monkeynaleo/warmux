@@ -24,6 +24,7 @@
 #include <sstream>
 
 #include "explosion.h"
+#include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/video.h"
@@ -33,6 +34,7 @@
 #include "map/camera.h"
 #include "object/objects_list.h"
 #include "team/macro.h"
+#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"

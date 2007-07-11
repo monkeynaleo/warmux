@@ -22,14 +22,13 @@
 #ifndef WIND_H
 #define WIND_H
 
-#include <SDL.h>
 #include <list>
-#include "game/config.h"
-#include "graphic/sprite.h"
-#include "gui/progress_bar.h"
 #include "include/base.h"
 #include "object/physical_obj.h"
 #include "tool/xml_document.h"
+
+// Forward declarations
+class Sprite;
 
 class WindParticle : public PhysicalObj
 {
@@ -43,7 +42,7 @@ public:
 
 public:
   WindParticle(std::string& xml_file, float scale);
-  ~WindParticle() { delete sprite; if(flipped) delete flipped;};
+  ~WindParticle();
   void Draw();
   void Refresh();
 };

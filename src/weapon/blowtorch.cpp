@@ -19,16 +19,19 @@
  * Blowtorch - burns holes into walls
  *****************************************************************************/
 
-#include "weapon/blowtorch.h"
+#include "blowtorch.h"
+#include "explosion.h"
+
+#include "character/character.h"
 #include "include/action_handler.h"
 #include "tool/i18n.h"
 #include "map/map.h"
-#include "team/teams_list.h"
 #include "game/game_loop.h"
 #include "game/time.h"
 #include "character/move.h"
 #include "character/body.h"
-#include "explosion.h"
+#include "team/team.h"
+#include "team/teams_list.h"
 
 static const uint pause_time = 200;	// milliseconds
 

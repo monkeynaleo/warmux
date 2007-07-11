@@ -22,6 +22,7 @@
 #include "snipe_rifle.h"
 #include <sstream>
 #include "explosion.h"
+#include "character/character.h"
 #include "game/time.h"
 #include "interface/game_msg.h"
 #include "map/map.h"

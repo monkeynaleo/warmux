@@ -22,10 +22,14 @@
 #ifndef TEAMS_LIST_H
 #define TEAMS_LIST_H
 //-----------------------------------------------------------------------------
-#include "team.h"
-#include "team_config.h"
 #include <list>
+#include <vector>
 //-----------------------------------------------------------------------------
+
+// Forward declarations
+class Team;
+class ConfigTeam;
+class Character;
 
 class TeamsList
 {
