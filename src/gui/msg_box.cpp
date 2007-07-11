@@ -19,8 +19,7 @@
  * Message Box
  *****************************************************************************/
 
-#include "tool/rectangle.h"
-#include "widget.h"
+#include "graphic/text.h"
 #include "msg_box.h"
 
 const uint vmargin = 5;

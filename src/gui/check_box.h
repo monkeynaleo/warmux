@@ -24,9 +24,9 @@
 
 #include "include/base.h"
 #include "gui/widget.h"
-#include "graphic/sprite.h"
 #include <string>
 
+class Sprite;
 class Text;
 
 class CheckBox : public Widget

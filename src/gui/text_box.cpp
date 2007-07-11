@@ -19,11 +19,8 @@
  * Text box widget
  *****************************************************************************/
 
-#include "include/app.h"
 #include "text_box.h"
-#include "label.h"
-
-#include <iostream>
+#include "graphic/text.h"
 
 TextBox::TextBox (const std::string &label, const Rectanglei &rect, 
 		  Font::font_size_t fsize, Font::font_style_t fstyle) :

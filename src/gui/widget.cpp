@@ -19,8 +19,9 @@
  * Widget
  *****************************************************************************/
 
+
 #include "widget.h"
-#include "tool/point.h"
+#include "container.h"
 
 Widget::Widget():
   Rectanglei(),

@@ -19,10 +19,9 @@
  * Vertical or Horizontal Box
  *****************************************************************************/
 
-#include <SDL_gfxPrimitives.h>
 #include "box.h"
+#include "graphic/surface.h"
 #include "graphic/colors.h"
-#include "include/app.h"
 
 Box::Box(const Rectanglei &rect, bool _visible) : WidgetList( rect )
 {

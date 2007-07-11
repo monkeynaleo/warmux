@@ -29,7 +29,7 @@
 //-----------------------------------------------------------------------------
 
 // Forward declarations
-struct SDL_Mutex;
+struct SDL_mutex;
 
 class ActionHandler
 {

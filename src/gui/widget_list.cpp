@@ -19,8 +19,6 @@
  * Widget list : store all widgets displayed on one screen
  * It is a fake widget.
  *****************************************************************************/
-#include "include/app.h"
-#include "graphic/colors.h"
 #include "widget_list.h"
 #include "widget.h"
 #include <iostream>

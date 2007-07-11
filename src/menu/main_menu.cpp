@@ -27,6 +27,7 @@
 #include "graphic/effects.h"
 #include "graphic/font.h"
 #include "graphic/fps.h"
+#include "graphic/text.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"

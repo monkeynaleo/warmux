@@ -23,7 +23,9 @@
 #define BUTTON_TEXT_H
 
 #include "button.h"
-#include "graphic/text.h"
+#include "graphic/font.h"
+
+class Text;
 
 class ButtonText : public Button
 {

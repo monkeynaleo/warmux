@@ -24,6 +24,8 @@
 
 #include "widget.h"
 
+class Surface;
+
 class NullWidget : public Widget
 {
  public:

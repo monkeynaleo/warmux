@@ -22,7 +22,9 @@
 #ifndef CONTAINER_WIDGET_H
 #define CONTAINER_WIDGET_H
 
-#include "graphic/surface.h"
+#include "tool/rectangle.h"
+
+class Surface;
 
 class Container
 {

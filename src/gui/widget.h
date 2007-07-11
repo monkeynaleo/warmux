@@ -27,7 +27,8 @@
 #include "tool/rectangle.h"
 #include "tool/point.h"
 
-#include "container.h"
+class Container;
+class Surface;
 
 class Widget : public Rectanglei
 {

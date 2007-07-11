@@ -24,11 +24,11 @@
 
 #include <string>
 #include <vector>
-#include <SDL.h>
 #include "widget.h"
-#include "button.h"
 #include "label.h"
 #include "include/base.h"
+
+class Button;
 
 class ListBoxItem : public Label
 {

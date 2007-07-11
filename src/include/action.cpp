@@ -23,11 +23,9 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include "action_handler.h"
-#include "character/character.h"
 #include "game/game.h"
 #include "game/time.h"
 #include "network/distant_cpu.h"
-#include "network/network.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 //-----------------------------------------------------------------------------

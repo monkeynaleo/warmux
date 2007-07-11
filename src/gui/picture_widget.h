@@ -22,9 +22,11 @@
 #ifndef PICTURE_WIDGET_H
 #define PICTURE_WIDGET_H
 
-#include "graphic/sprite.h"
 #include "widget.h"
 #include <string>
+
+class Sprite;
+class Surface;
 
 class PictureWidget : public Widget
 {
