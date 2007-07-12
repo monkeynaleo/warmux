@@ -509,6 +509,14 @@
 	<email>phhusson_AT_free_DOT_fr</email>
       </author>
       <author>
+	<nickname>paxed</nickname>
+	<name>Pasi Kallinen</name>
+	<description>Improve the ground generator</description>
+	<website>http://bilious.homelinux.org/</website>
+	<email>paxed@alt.org</email>
+	<country>Finland</country>
+      </author>
+      <author>
 	<nickname>Progs</nickname>
 	<name>Romain BIGNON</name>
 	<description>Developer</description>
