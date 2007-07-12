@@ -39,7 +39,7 @@ NetworkServer::NetworkServer()
 {
 #if defined(DEBUG) && defined(LOG_NETWORK)
 #  ifdef WIN32
-  int flags1 = O_CREAT | O_TRUNC | O_WRONLY;
+  int flags1 = O_CREAT | O_TRUNC | O_WRONLY | O_BINARY;
   int flags2 = S_IRUSR | S_IWUSR;
 #  else
   int flags1 = O_CREAT | O_TRUNC | O_WRONLY | O_SYNC;
