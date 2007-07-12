@@ -29,6 +29,8 @@ class PictureTextCBox : public CheckBox
 {
  private:
   Surface m_image;
+  Surface m_enabled;
+  Surface m_disabled;
    
  public:
   PictureTextCBox(const std::string &label, const std::string &resource_id, const Rectanglei &rect, bool value = true);
