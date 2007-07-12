@@ -32,6 +32,8 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadImage(res, resource_id);
+  m_enabled = resource_manager.LoadImage(res, "menu/enabled");
+  m_disabled = resource_manager.LoadImage(res, "menu/disabled");
   resource_manager.UnLoadXMLProfile( res);
  
   //SetPosition( rect.GetPosition() );
@@ -45,25 +47,31 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
 
 void PictureTextCBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
+  Surface video_window = AppWormux::GetInstance()->video.window;
+
   if (!hidden)
     {
       // center the image
       uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth() - 20)/2 ;
       uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
       
-      AppWormux::GetInstance()->video.window.Blit(m_image, Point2i(tmp_x, tmp_y));
+      video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
       
       txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2, 
 				GetPositionY() + GetSizeY() - txt_label->GetHeight() );
       
       if (m_value)
-	m_checked_image->SetCurrentFrame(0);
-      else 
-	m_checked_image->SetCurrentFrame(1);
-      
-      m_checked_image->Blit(surf, 
-			    GetPositionX() + GetSizeX() - 16, 
-			    GetPositionY() + (GetSizeY()-16)/2 );
+	{
+	  uint enabled_x = GetPositionX() + (GetSizeX() - m_enabled.GetWidth() - 20)/2 ;
+	  uint enabled_y = GetPositionY() + (GetSizeY() - m_enabled.GetHeight() - txt_label->GetHeight() - 5) /2;
+	  video_window.Blit(m_enabled, Point2i(enabled_x, enabled_y));
+	}
+      else
+	{
+	  uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled.GetWidth() - 20)/2 ;
+	  uint disabled_y = GetPositionY() + (GetSizeY() - m_disabled.GetHeight() - txt_label->GetHeight() - 5) /2;
+	  video_window.Blit(m_disabled, Point2i(disabled_x, disabled_y));
+	}
     }
 }
 
