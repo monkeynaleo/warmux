@@ -112,51 +112,39 @@ const bool RandomMap::IsOpen()
 void RandomMap::Generate()
 {
   srand(time(NULL));
-  // Computing number of island
-  number_of_island = Random::GetInt(2, 4);
-  // is_open = (Random::GetInt(0, 10) > 8); // Open ?
-  is_open = true;
-  // Initializing ground generator
-  double h = height / number_of_island;
-  double w = width / number_of_island;
-  double current_h_position = (width / 2.0) + Random::GetDouble(-w / 2, w / 2);
-  double current_v_position = (height / 2.0) + Random::GetDouble(-h / 2, h / 2);
-  double x_direction = 1.0;
-  double y_direction = 1.0;
-  AffineTransform2D translate;
+
+  double minhei = height / Random::GetDouble(7, 5);
+  double maxhei = height / Random::GetDouble(1.5, 4);
+
+  double current_y_pos = height - Random::GetDouble(minhei, maxhei);
+  int num_of_points = Random::GetInt(5,20);
+
   result.Fill(0);
-  for(int i = 0; i < number_of_island; i++) {
-    translate = AffineTransform2D::Translate(current_h_position, current_v_position);
-    // Generate Island
-    while(!GenerateIsland(Random::GetDouble(w * 0.55, w * 1.25),
-                          Random::GetDouble(h * 0.55, h * 1.25)));
-    bezier_shape->ApplyTransformation(translate);
-    expanded_bezier_shape->ApplyTransformation(translate);
-    // Then draw it
-    expanded_bezier_shape->Draw(&result);
-    bezier_shape->Draw(&result);
-    // compute a new position
-    current_h_position += x_direction * Random::GetDouble(w * 0.75, w * 1.25);
-    current_v_position += y_direction * Random::GetDouble(h * 0.75, h * 1.25);
-    if(current_h_position > width) {
-      x_direction = -x_direction;
-      current_h_position = width - (current_h_position - width);
-    } else if(current_h_position < 0) {
-      x_direction = -x_direction;
-      current_h_position = -current_h_position;
-    }
-    if(current_v_position > height) {
-      y_direction = -y_direction;
-      current_v_position = height - (current_v_position - height);
-    } else if(current_v_position < 0) {
-      y_direction = -y_direction;
-      current_v_position = -current_v_position;
-    }
-    Point2d pos = bezier_shape->GetRandomUpperPoint();
-    AddElement(element, translate * Point2i((int)pos.x, (int)pos.y));
+
+  Polygon *tmp = new Polygon();
+
+  // +10 so it's outside the screen
+  tmp->AddPoint(Point2d(-10, height+10));
+
+  for (int i = 2; i < num_of_points-1; i++) {
+      current_y_pos = height - Random::GetDouble(minhei, maxhei);
+      double current_x_pos = (((double)i / (double) num_of_points) * (double)width);
+      tmp->AddPoint( Point2d(current_x_pos,  current_y_pos));
+      if (Random::GetInt(0,100) < 20) {
+	  // +20 hardcoded, yucky.
+	  AddElement(element, Point2i((int)current_x_pos, (int)(current_y_pos+20.0)));
+      }
   }
-  AddElement(element, Point2i(width / 2, height / 2));
-  AddElement(element, Point2i(-20, 0));
+
+  tmp->AddPoint(Point2d(width+10, height+10));
+  tmp->AddPoint(Point2d(width/2, height+10));
+
+  bezier_shape = tmp->GetBezierInterpolation(1.0, 30, 0.3);
+
+  bezier_shape->SetTexture(&texture);
+  bezier_shape->SetPlaneColor(border_color);
+  bezier_shape->Draw(&result);
+
   DrawElement();
 }
 
