@@ -52,6 +52,8 @@ void WakeUpDebugger();
   ASSERT(COND); \
   if(false)
 #else
+#include "network/network.h"
+
 #define NET_ASSERT(COND) \
   ASSERT(COND); \
   if(!(COND) && Network::GetInstance()->IsConnected())
