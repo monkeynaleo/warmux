@@ -29,6 +29,14 @@
 // Forward declarations
 class Profile;
 class Polygon;
+class Sprite;
+
+class RandomSpriteList : public std::vector<Sprite *> {
+ public:
+   void AddElement(Sprite *element);
+   Sprite * GetRandomElement();
+   ~RandomSpriteList();
+};
 
 class MapElement {
  protected:
@@ -47,10 +55,14 @@ class RandomMap {
   /*********************************************/
 
   enum {
+    SINGLE_ISLAND,
+    DEFAULT
+  } island_type;
+  enum {
     DENTED_CIRCLE,
     DENTED_TRAPEZE,
     ROUNDED_RECTANGLE,
-  } island_type;
+  } shape_type;
  protected:
    double border_size;
    bool is_open;
@@ -70,6 +82,8 @@ class RandomMap {
    Surface texture;
    Surface element;
 
+   // Internal random element vector
+   RandomSpriteList random_sprite_list;
    std::vector<MapElement> element_list;
 
  public:

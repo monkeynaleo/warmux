@@ -60,28 +60,31 @@ class PolygonItem {
   /*********************************************/
 
  public:
-  typedef enum { TOP,  V_CENTERED, BOTTOM } V_align;
   typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
+  typedef enum { TOP,  V_CENTERED, BOTTOM } V_align;
  protected:
   Point2d position;
   Point2d transformed_position;
   Sprite * item;
-  V_align v_align;
   H_align h_align;
+  V_align v_align;
  protected:
   virtual Point2i GetOffsetAlignment() const;
  public:
   PolygonItem();
+  PolygonItem(PolygonItem * item);
   PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
   virtual ~PolygonItem();
   void SetPosition(const Point2d & pos);
   void SetAlignment(H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
+  const H_align GetHAlign() const { return h_align; }
+  const V_align GetVAlign() const { return v_align; }
   const Point2d & GetPosition() const;
   const Point2d & GetTransformedPosition() const;
   Point2i GetIntTransformedPosition() const;
   virtual bool Contains(const Point2d & p) const;
   void SetSprite(Sprite * sprite);
-  const Sprite * GetSprite();
+  Sprite * GetSprite();
   virtual void ApplyTransformation(const AffineTransform2D & trans);
   virtual void Draw(Surface * dest);
 };
@@ -110,7 +113,7 @@ class Polygon {
  public:
   Polygon();
   Polygon(const std::vector<Point2d> shape);
-  Polygon(const Polygon & poly);
+  Polygon(Polygon & poly);
   virtual ~Polygon();
   // Point handling
   void AddPoint(const Point2d & p);
