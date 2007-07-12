@@ -83,6 +83,15 @@ PolygonItem::PolygonItem()
   SetAlignment(H_CENTERED, V_CENTERED);
 }
 
+PolygonItem::PolygonItem(PolygonItem * item)
+{
+  transformed_position = item->transformed_position;
+  position = item->position;
+  SetPosition(item->GetPosition());
+  SetSprite(new Sprite(*(item->GetSprite())));
+  SetAlignment(item->h_align, item->v_align);
+}
+
 PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)
 {
   SetPosition(pos);
@@ -92,6 +101,7 @@ PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a, V_al
 
 PolygonItem::~PolygonItem()
 {
+  delete(item);
 }
 
 void PolygonItem::SetPosition(const Point2d & pos)
@@ -125,7 +135,7 @@ void PolygonItem::SetSprite(Sprite * sprite)
   item = sprite;
 }
 
-const Sprite * PolygonItem::GetSprite()
+Sprite * PolygonItem::GetSprite()
 {
   return item;
 }
@@ -179,7 +189,7 @@ Polygon::Polygon(const std::vector<Point2d> shape)
   shape_buffer->SetSize(original_shape.size());
 }
 
-Polygon::Polygon(const Polygon & poly)
+Polygon::Polygon(Polygon & poly)
 {
   Init();
   texture = poly.texture;
@@ -191,6 +201,9 @@ Polygon::Polygon(const Polygon & poly)
   }
   transformed_shape = original_shape = poly.original_shape;
   shape_buffer->SetSize(original_shape.size());
+  for(std::vector<PolygonItem *>::iterator elt = poly.items.begin(); elt != poly.items.end(); elt++) {
+    AddItem((*elt)->GetSprite(), (*elt)->GetPosition(), (*elt)->GetHAlign(), (*elt)->GetVAlign());
+  }
 }
 
 Polygon::~Polygon()
@@ -535,6 +548,9 @@ Polygon * Polygon::GetBezierInterpolation(double smooth_value, int num_steps, do
     }
 
     shape->AddBezierCurve(p1, v1, v2, p2, num_steps, false);
+  }
+  for(std::vector<PolygonItem *>::iterator elt = items.begin(); elt != items.end(); elt++) {
+    shape->AddItem((*elt)->GetSprite(), (*elt)->GetPosition(), (*elt)->GetHAlign(), (*elt)->GetVAlign());
   }
   return shape;
 }

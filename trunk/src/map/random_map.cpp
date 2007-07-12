@@ -22,10 +22,29 @@
 #include "random_map.h"
 #include "game/config.h"
 #include "graphic/polygon_generator.h"
+#include "graphic/sprite.h"
 #include "map/maps_list.h"
 #include "tool/affine_transform.h"
 #include "tool/random.h"
 #include "tool/resource_manager.h"
+#include "tool/debug.h"
+
+void RandomSpriteList::AddElement(Sprite * element)
+{
+  push_back(element);
+}
+
+Sprite * RandomSpriteList::GetRandomElement()
+{
+  return (*this)[Random::GetInt(0, size() - 1)];
+}
+
+RandomSpriteList::~RandomSpriteList()
+{
+  for(iterator elt = begin(); elt != end(); elt++) {
+    delete((*elt));
+  }
+}
 
 MapElement::MapElement(Surface & object, Point2i & pos)
 {
@@ -55,7 +74,7 @@ RandomMap::RandomMap(Profile *profile, const int width, const int height)
   // Loading resources
   border_color = resource_manager.LoadColor(profile, "border_color");
   texture = resource_manager.LoadImage(profile, "texture");
-  element = resource_manager.LoadImage(profile, "element");
+  random_sprite_list.AddElement(new Sprite(resource_manager.LoadImage(profile, "element")));
   element_list.clear();
 }
 
@@ -87,8 +106,7 @@ void RandomMap::AddElement(Surface & object, Point2i position)
 
 void RandomMap::DrawElement()
 {
-  std::vector<MapElement>::iterator elt;
-  for(elt = element_list.begin(); elt != element_list.end(); elt++) {
+  for(std::vector<MapElement>::iterator elt = element_list.begin(); elt != element_list.end(); elt++) {
     Surface & tmp = elt->GetElement();
     result.MergeSurface(tmp, elt->GetPosition() - Point2i((int)(tmp.GetWidth() / 2.0), tmp.GetHeight()));
   }
@@ -117,32 +135,46 @@ void RandomMap::Generate()
   double maxhei = height / Random::GetDouble(1.5, 4);
 
   double current_y_pos = height - Random::GetDouble(minhei, maxhei);
-  int num_of_points = Random::GetInt(5,20);
+  int num_of_points = Random::GetInt(5, 20);
 
   result.Fill(0);
 
   Polygon *tmp = new Polygon();
 
   // +10 so it's outside the screen
-  tmp->AddPoint(Point2d(-10, height+10));
+  tmp->AddPoint(Point2d(-10, height + 10));
 
-  for (int i = 2; i < num_of_points-1; i++) {
-      current_y_pos = height - Random::GetDouble(minhei, maxhei);
-      double current_x_pos = (((double)i / (double) num_of_points) * (double)width);
-      tmp->AddPoint( Point2d(current_x_pos,  current_y_pos));
-      if (Random::GetInt(0,100) < 20) {
-	  // +20 hardcoded, yucky.
-	  AddElement(element, Point2i((int)current_x_pos, (int)(current_y_pos+20.0)));
+  for (int i = 1; i < num_of_points - 1; i++) {
+    current_y_pos = height - Random::GetDouble(minhei, maxhei);
+    double current_x_pos = (((double)i / (double) num_of_points) * (double)width);
+    tmp->AddPoint(Point2d(current_x_pos, current_y_pos));
+    if (Random::GetInt(0, 5) < 1) {
+      Sprite * random_element = random_sprite_list.GetRandomElement();
+      if(random_element != NULL) {
+        Point2d position((int)current_x_pos, (int)(current_y_pos + 20.0));
+        tmp->AddItem(random_element, position, PolygonItem::H_CENTERED, PolygonItem::BOTTOM);
+        MSG_DEBUG("ground_generator.element", "Add an element in (x = %f, y = %f)", position.GetX(), position.GetY());
       }
+    }
   }
 
   tmp->AddPoint(Point2d(width+10, height+10));
   tmp->AddPoint(Point2d(width/2, height+10));
 
+  // Get bezier interpolation
   bezier_shape = tmp->GetBezierInterpolation(1.0, 30, 0.3);
 
+  // Expand
+  expanded_bezier_shape = new Polygon(*bezier_shape);
+  expanded_bezier_shape->Expand(-5.0);
+
+  // Set color, texture etc.
   bezier_shape->SetTexture(&texture);
   bezier_shape->SetPlaneColor(border_color);
+  expanded_bezier_shape->SetPlaneColor(border_color);
+
+  // Then draw it
+  expanded_bezier_shape->Draw(&result);
   bezier_shape->Draw(&result);
 
   DrawElement();
