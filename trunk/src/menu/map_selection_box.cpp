@@ -151,12 +151,12 @@ void MapSelectionBox::ChangeMap(int index)
       MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
 
       ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
-							  ActiveMap().ReadName()));
+							  ActiveMap().GetRawName()));
     }
 
   // Set Map information
   map_preview_selected->SetSurface(MapsList::GetInstance()->lst[selected_map_index].ReadPreview(), true);
-  map_name_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadName());
+  map_name_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadFullMapName());
   map_author_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadAuthorInfo());
 
   // Set previews
@@ -217,7 +217,7 @@ void MapSelectionBox::ValidMapSelection()
 
   /* The player chose a map, save it in the main config so that this will be
    * the defaut map at next load of the game */
-  Config::GetInstance()->SetMapName(MapsList::GetInstance()->lst[selected_map_index].ReadName());
+  Config::GetInstance()->SetMapName(MapsList::GetInstance()->lst[selected_map_index].GetRawName());
 }
 
 void MapSelectionBox::ChangeMapCallback()
