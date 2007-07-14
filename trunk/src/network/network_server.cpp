@@ -112,7 +112,7 @@ void NetworkServer::ReceiveActions()
         if (packet_size == 0) // We didn't receive the full packet yet
           continue;
 
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
 	if (fin != 0) {
 	  int tmp = 0xFFFFFFFF;
 	  write(fin, &packet_size, 4);
