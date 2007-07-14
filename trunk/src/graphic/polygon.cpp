@@ -101,7 +101,7 @@ PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a, V_al
 
 PolygonItem::~PolygonItem()
 {
-  delete(item);
+  // delete(item);
 }
 
 void PolygonItem::SetPosition(const Point2d & pos)
@@ -395,11 +395,12 @@ std::vector<PolygonItem *> Polygon::GetItem() const
   return items;
 }
 
-void Polygon::ClearItem()
+void Polygon::ClearItem(bool free_mem)
 {
   for(std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {
-    delete (*item);
+    if(free_mem)
+      delete (*item);
   }
   items.clear();
 }

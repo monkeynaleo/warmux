@@ -80,7 +80,6 @@ RandomMap::RandomMap(Profile *profile, const int width, const int height)
   // Loading resources
   border_color = resource_manager.LoadColor(profile, "border_color");
   texture = resource_manager.LoadImage(profile, "texture");
-  XmlReader::ReadUint(profile->doc->GetRoot(), "nb_element", number_of_element);
   for(uint i = 0; i < number_of_element; i++) {
     std::stringstream ss;
     ss << "element_" << (i + 1);
@@ -186,7 +185,7 @@ void RandomMap::Generate()
   bezier_shape->SetPlaneColor(border_color);
   expanded_bezier_shape->SetPlaneColor(border_color);
 
-  expanded_bezier_shape->ClearItem();
+  // expanded_bezier_shape->ClearItem();
   // bezier_shape->ClearItem();
   // Then draw it
   expanded_bezier_shape->Draw(&result);
