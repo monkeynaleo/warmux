@@ -45,6 +45,7 @@ private:
 
   bool is_opened;
   bool use_water;
+  bool is_basic_info_loaded;
   bool is_data_loaded;
   bool random;
 
@@ -55,6 +56,7 @@ private:
 
 public:
   std::string m_directory;
+  std::string m_map_name;
   struct s_wind
   {
     uint nb_sprite;
@@ -66,22 +68,24 @@ public:
 public:
   InfoMap ();
   bool Init(const std::string &nom, const std::string &repertoire);
+  bool LoadBasicInfo();
   void FreeData();
 
-  const std::string& ReadName() const { return name; }
-  const std::string& ReadAuthorInfo() const { return author_info; }
-  const std::string& ReadMusicPlaylist() const { return music_playlist; }
+  const std::string& GetRawName() const;
+  const std::string& ReadFullMapName();
+  const std::string& ReadAuthorInfo();
+  const std::string& ReadMusicPlaylist();
 
   Surface ReadImgGround();
   Surface ReadImgSky();
-  const Surface& ReadPreview() const { return preview; }
+  const Surface& ReadPreview();
 
-  uint GetNbBarrel() const { return nb_barrel; }
-  uint GetNbMine() const { return nb_mine; }
-  const Profile * const ResProfile() const { return res_profile; }
+  uint GetNbBarrel();
+  uint GetNbMine();
+  const Profile * const ResProfile() const;
 
-  bool IsOpened() const { return is_opened; }
-  bool UseWater() const { return use_water; }
+  bool IsOpened();
+  bool UseWater();
 
 };
 

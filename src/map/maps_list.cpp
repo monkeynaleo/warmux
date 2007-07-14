@@ -37,6 +37,7 @@ extern const uint MAX_WIND_OBJECTS;
 InfoMap::InfoMap ()
 {
   is_data_loaded = false;
+  is_basic_info_loaded = false;
   nb_mine = 4;
   nb_barrel = 4;
   wind.nb_sprite = 0;
@@ -49,13 +50,19 @@ InfoMap::InfoMap ()
 bool InfoMap::Init (const std::string &map_name,
                     const std::string &directory)
 {
-  std::string nomfich;
-
   m_directory = directory;
-
+  m_map_name = map_name;
   res_profile = NULL;
   is_data_loaded = false;
+  is_basic_info_loaded = false;
+  return true;
+}
 
+bool InfoMap::LoadBasicInfo()
+{
+  if(is_basic_info_loaded)
+    return true;
+  std::string nomfich;
   try
   {
     nomfich = m_directory+"config.xml";
@@ -69,21 +76,80 @@ bool InfoMap::Init (const std::string &map_name,
     preview = resource_manager.LoadImage( res_profile, "preview");
     // Load other informations
     XmlReader doc;
+    is_basic_info_loaded = true;
     if (!doc.Load(nomfich)) return false;
     if (!ProcessXmlData(doc.GetRoot())) return false;
   }
   catch (const xmlpp::exception &e)
   {
     std::cout << std::endl
-              << Format(_("XML error during loading map '%s' :"), map_name.c_str())
+              << Format(_("XML error during loading map '%s' :"), m_map_name.c_str())
               << std::endl
               << e.what() << std::endl;
     return false;
   }
 
-  MSG_DEBUG("map.load", "Map loaded: %s", map_name.c_str());
+  MSG_DEBUG("map.load", "Map loaded: %s", m_map_name.c_str());
 
   return true;
+}
+
+const std::string& InfoMap::GetRawName() const
+{
+  return m_map_name;
+}
+
+const std::string& InfoMap::ReadFullMapName()
+{
+  LoadBasicInfo();
+  return name;
+}
+
+const std::string& InfoMap::ReadAuthorInfo()
+{
+  LoadBasicInfo();
+  return author_info;
+}
+
+const std::string& InfoMap::ReadMusicPlaylist()
+{
+  LoadBasicInfo();
+  return music_playlist;
+}
+
+const Surface& InfoMap::ReadPreview()
+{
+  LoadBasicInfo();
+  return preview;
+}
+
+uint InfoMap::GetNbBarrel()
+{
+  LoadBasicInfo();
+  return nb_barrel;
+}
+
+uint InfoMap::GetNbMine()
+{
+  LoadBasicInfo();
+  return nb_mine;
+}
+
+const Profile * const InfoMap::ResProfile() const
+{
+  return res_profile;
+}
+
+bool InfoMap::IsOpened()
+{
+  LoadBasicInfo();
+  return is_opened;
+}
+
+bool InfoMap::UseWater()
+{
+  LoadBasicInfo();
+  return use_water;
 }
 
 bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
@@ -160,7 +226,6 @@ void InfoMap::LoadData()
     img_ground = resource_manager.LoadImage(res_profile, "map");
   } else {
     img_ground = resource_manager.GenerateMap(res_profile, img_sky.GetWidth(), img_sky.GetHeight());
-    //img_ground.ImgSave("/tmp/generate_" + name + ".png");
   }
 }
 
@@ -173,12 +238,14 @@ void InfoMap::FreeData()
 
 Surface InfoMap::ReadImgGround()
 {
+  LoadBasicInfo();
   LoadData();
   return img_ground;
 }
 
 Surface InfoMap::ReadImgSky()
 {
+  LoadBasicInfo();
   LoadData();
   return img_sky;
 }
@@ -285,7 +352,7 @@ int MapsList::FindMapById (const std::string &id)
     fin_terrain=lst.end();
   uint i=0;
   for (; i < lst.size(); ++i)
-    if (lst[i].ReadName() == id)
+    if (lst[i].GetRawName() == id)
       return i;
   return -1;
 }
@@ -329,6 +396,6 @@ InfoMap& ActiveMap()
 
 bool compareMaps(const InfoMap& a, const InfoMap& b)
 {
-  return a.ReadName() < b.ReadName();
+  return a.GetRawName() < b.GetRawName();
 }
 
