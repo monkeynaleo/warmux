@@ -244,7 +244,7 @@ void WeaponsMenu::RefreshWeaponList()
   for(; item != items.end(); item++) {
     delete (*item);
   }
-  weapons_menu->ClearItem();
+  weapons_menu->ClearItem(false);
   weapons_menu->AddItem(tmp);
   // Tools menu
   items = tools_menu->GetItem();
@@ -253,7 +253,7 @@ void WeaponsMenu::RefreshWeaponList()
   for(; item != items.end(); item++) {
     delete (*item);
   }
-  tools_menu->ClearItem();
+  tools_menu->ClearItem(false);
   tools_menu->AddItem(tmp);
   // Reinserting weapon
   WeaponsList *weapons_list = WeaponsList::GetInstance();

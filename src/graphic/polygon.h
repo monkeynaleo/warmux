@@ -187,7 +187,7 @@ class Polygon {
   void AddItem(PolygonItem * item);
   void DelItem(int index);
   std::vector<PolygonItem *> GetItem() const;
-  void ClearItem();
+  void ClearItem(bool free_mem = true);
 };
 
 #endif /* POLYGON_H */
