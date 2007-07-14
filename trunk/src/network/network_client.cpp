@@ -21,6 +21,7 @@
 
 #include "network_client.h"
 //-----------------------------------------------------------------------------
+#include <SDL_thread.h>
 #include "include/action_handler.h"
 #include "game/game_mode.h"
 #include "tool/debug.h"
@@ -36,7 +37,7 @@
 
 NetworkClient::NetworkClient()
 {
-#if defined(DEBUG) && defined(LOG_NETWORK)
+#ifdef LOG_NETWORK
 #  ifdef WIN32
   int flags1 = O_CREAT | O_TRUNC | O_WRONLY | O_BINARY;
   int flags2 = S_IRUSR | S_IWUSR;
@@ -100,7 +101,7 @@ void NetworkClient::ReceiveActions()
         if( packet_size == 0) // We didn't received the full packet yet
           continue;
 
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
 	if (fin != 0) {
 	  int tmp = 0xFFFFFFFF;
 	  write(fin, &packet_size, 4);
@@ -111,7 +112,7 @@ void NetworkClient::ReceiveActions()
 
         Action* a = new Action(packet, (*dst_cpu));
         MSG_DEBUG("network.traffic","Received action %s",
-                ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+                  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
 	switch (a->GetType()) {
 	case Action::ACTION_NICKNAME: 

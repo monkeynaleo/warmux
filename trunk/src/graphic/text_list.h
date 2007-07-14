@@ -25,6 +25,7 @@
 #define TEXT_LIST_H
 
 #include <list>
+#include "include/base.h"
 
 class Text;
 

@@ -86,7 +86,7 @@ protected:
   IPaddress ip; // for server : store listening port
                 // for client : store server address/port
 
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
   int fout;
   int fin;
 #endif
