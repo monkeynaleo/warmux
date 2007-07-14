@@ -85,7 +85,7 @@ Network::Network():
   thread(NULL),
   socket_set(NULL),
   ip(),
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
   fout(0),
   fin(0),
 #endif
@@ -109,7 +109,7 @@ Network::~Network()
     SDLNet_Quit();
     sdlnet_initialized = false;
 
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
     if (fin != 0)
       close(fin);
     if (fout != 0)
@@ -285,7 +285,7 @@ void Network::SendAction(Action* a) const
 
 void Network::SendPacket(char* packet, int size) const
 {
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
   if (fout != 0) {
     int tmp = 0xFFFFFFFF;
     write(fout, &size, 4);

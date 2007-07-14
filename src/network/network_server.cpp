@@ -21,13 +21,14 @@
 
 #include "network_server.h"
 //-----------------------------------------------------------------------------
+#include <SDL_thread.h>
 #include "include/action_handler.h"
 #include "game/game_mode.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "distant_cpu.h"
 
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -37,7 +38,7 @@
 
 NetworkServer::NetworkServer()
 {
-#if defined(DEBUG) && defined(LOG_NETWORK)
+#ifdef LOG_NETWORK
 #  ifdef WIN32
   int flags1 = O_CREAT | O_TRUNC | O_WRONLY | O_BINARY;
   int flags2 = S_IRUSR | S_IWUSR;
