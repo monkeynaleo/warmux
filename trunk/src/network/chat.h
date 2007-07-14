@@ -24,7 +24,8 @@
 #define CHAT_H
 
 #include <string>
-#include "SDL_events.h"
+#include <SDL_events.h>
+#include "include/base.h"
 
 // Forward declarations
 class Text;
