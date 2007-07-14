@@ -580,8 +580,8 @@ void Action_Explosion (Action *a)
   config.explosion_range = a->PopInt();
   config.particle_range = a->PopInt();
   config.damage = a->PopInt();
-  config.blast_range = a->PopDouble();
-  config.blast_force = a->PopDouble();
+  config.blast_range = a->PopInt();
+  config.blast_force = a->PopInt();
   std::string son = a->PopString();
   bool fire_particle = a->PopInt();
   ParticleEngine::ESmokeStyle smoke = (ParticleEngine::ESmokeStyle)a->PopInt();

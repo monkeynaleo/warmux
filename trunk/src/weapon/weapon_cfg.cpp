@@ -55,8 +55,8 @@ void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem)
   XmlReader::ReadBool(elem, "allow_change_timeout", allow_change_timeout);
   XmlReader::ReadUint(elem, "explosion_range", explosion_range);
   XmlReader::ReadUint(elem, "particle_range", particle_range);
-  XmlReader::ReadDouble(elem, "blast_range", blast_range);
-  XmlReader::ReadDouble(elem, "blast_force", blast_force);
+  XmlReader::ReadUint(elem, "blast_range", blast_range);
+  XmlReader::ReadUint(elem, "blast_force", blast_force);
 }
 
 //-----------------------------------------------------------------------------

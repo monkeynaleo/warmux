@@ -67,7 +67,8 @@ void ApplyExplosion_common (const Point2i &pos,
 #endif
 
   // Make a hole in the ground
-  world.Dig(pos, config.explosion_range);
+  if(config.explosion_range != 0)
+    world.Dig(pos, config.explosion_range);
 
   // Play a sound
   jukebox.Play("share", son);
@@ -86,7 +87,12 @@ void ApplyExplosion_common (const Point2i &pos,
     if (distance <= config.explosion_range)
     {
       MSG_DEBUG("explosion", "\n*Character %s : distance= %f", ver->GetName().c_str(), distance);
-      double dmg = cos(M_PI_2 * distance / config.explosion_range);
+      double dmg;
+      if( config.explosion_range != 0)
+        dmg = cos(M_PI_2 * distance / (float)config.explosion_range);
+      else
+        dmg = cos(M_PI_2 * distance);
+
       dmg *= config.damage;
       MSG_DEBUG("explosion", "hit_point_loss energy= %i", ver->GetName().c_str(), dmg);
       ver -> SetEnergyDelta (-(int)dmg);
@@ -95,8 +101,12 @@ void ApplyExplosion_common (const Point2i &pos,
     // If the character is in the blast range, apply the blast on it !
     if (distance <= config.blast_range)
     {
-      double angle;
-      double force = cos(M_PI_2 * distance / config.blast_range);
+      double angle, force;
+      if(config.blast_range != 0)
+        force = cos(M_PI_2 * distance / (float)config.blast_range);
+      else
+        force = cos(M_PI_2 * distance);
+
       force *= config.blast_force;
 
       if ( force > highest_force )
@@ -116,6 +126,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
 
       MSG_DEBUG("explosion", "force = %f", force);
+      ASSERT(ver->GetMass() != 0);
       ver->AddSpeed (force / ver->GetMass(), angle);
       ver->SignalExplosion();
     }
@@ -134,17 +145,25 @@ void ApplyExplosion_common (const Point2i &pos,
        if(distance < 1.0)
          distance = 1.0;
 
-       if (distance <= config.explosion_range)
+       if (distance <= (float)config.explosion_range)
        {
-         double dmg = cos(M_PI_2 * distance / config.explosion_range);
+         double dmg;
+         if ( config.explosion_range != 0)
+           dmg = cos(M_PI_2 * distance / config.explosion_range);
+         else
+           dmg = cos(M_PI_2 * distance);
+
          dmg *= config.damage;
          obj->AddDamage (config.damage);
        }
 
-       if (distance <= config.blast_range)
+       if (distance <= (float)config.blast_range)
        {
-         double angle;
-         double force = cos(M_PI_2 * distance / config.blast_range);
+         double angle, force;
+         if( config.blast_range != 0)
+           force = cos(M_PI_2 * distance / (float)config.blast_range);
+         else
+           force = cos(M_PI_2 * distance);
          force *= config.blast_force;
 
          if (!EgalZero(distance))
@@ -154,6 +173,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
          if(fastest_character != NULL)
            camera.FollowObject (obj, true, true);
+         ASSERT( obj->GetMass() != 0.0);
          obj->AddSpeed (force / obj->GetMass(), angle);
        }
      }
@@ -213,8 +233,8 @@ void ApplyExplosion_master (const Point2i &pos,
   a->Push((int)config.explosion_range);
   a->Push((int)config.particle_range);
   a->Push((int)config.damage);
-  a->Push(config.blast_range);
-  a->Push(config.blast_force);
+  a->Push((int)config.blast_range);
+  a->Push((int)config.blast_force);
   a->Push(son);
   a->Push(fire_particle);
   a->Push(smoke);
