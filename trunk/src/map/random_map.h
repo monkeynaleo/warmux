@@ -31,11 +31,11 @@ class Profile;
 class Polygon;
 class Sprite;
 
-class RandomSpriteList : public std::vector<Sprite *> {
+class RandomElementList : public std::vector<Surface *> {
  public:
-   void AddElement(Sprite *element);
-   Sprite * GetRandomElement();
-   ~RandomSpriteList();
+   void AddElement(const Surface *element);
+   Surface * GetRandomElement();
+   ~RandomElementList();
 };
 
 class MapElement {
@@ -81,9 +81,10 @@ class RandomMap {
    Color border_color;
    Surface texture;
    Surface element;
+   uint number_of_element;
 
    // Internal random element vector
-   RandomSpriteList random_sprite_list;
+   RandomElementList random_element_list;
    std::vector<MapElement> element_list;
 
  public:
@@ -92,7 +93,7 @@ class RandomMap {
    const Point2i GetSize();
    const int GetWidth();
    const int GetHeight();
-   void AddElement(Surface & object, Point2i position);
+   void AddElement(Surface * object, Point2i position);
    void DrawElement();
    void SetBorderSize(const double border);
    void SetBorderColor(const Color color);

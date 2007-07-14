@@ -95,7 +95,7 @@ PolygonItem::PolygonItem(PolygonItem * item)
 PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)
 {
   SetPosition(pos);
-  SetSprite(sprite);
+  SetSprite(new Sprite(*sprite));
   SetAlignment(h_a, v_a);
 }
 
@@ -208,10 +208,7 @@ Polygon::Polygon(Polygon & poly)
 
 Polygon::~Polygon()
 {
-  for(std::vector<PolygonItem *>::iterator item = items.begin();
-      item != items.end(); item++) {
-    delete (*item);
-  }
+  ClearItem();
   if (texture)
     delete texture;
   if (border_color)
@@ -400,6 +397,10 @@ std::vector<PolygonItem *> Polygon::GetItem() const
 
 void Polygon::ClearItem()
 {
+  for(std::vector<PolygonItem *>::iterator item = items.begin();
+      item != items.end(); item++) {
+    delete (*item);
+  }
   items.clear();
 }
 
