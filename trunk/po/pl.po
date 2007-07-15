@@ -1,6 +1,7 @@
 # translation of wormux.po to
 # Bartosz Feński aka fEnIo <fenio@debian.org>, 2004-2005.
 # Paweł Dyda <pawel.dyda@gazeta.pl>, 2007.
+# Michał D. <emdek@epf.pl>, 2007.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 msgid ""
