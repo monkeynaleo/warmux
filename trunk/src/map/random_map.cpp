@@ -37,6 +37,8 @@ void RandomElementList::AddElement(const Surface * element)
 
 Surface * RandomElementList::GetRandomElement()
 {
+  if(size() == 0)
+    return NULL;
   return (*this)[Random::GetInt(0, size() - 1)];
 }
 
