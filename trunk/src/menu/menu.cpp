@@ -200,8 +200,8 @@ void Menu::Display(const Point2i& mousePosition)
 
   // to limit CPU
   delay = SDL_GetTicks()-start;   
-  if (delay < 200)
-    sleep_fps = 200 - delay;
+  if (delay < AppWormux::GetInstance()->video.GetSleepMaxFps())
+    sleep_fps = AppWormux::GetInstance()->video.GetSleepMaxFps() - delay;
   else
     sleep_fps = 0;
   SDL_Delay(sleep_fps);
