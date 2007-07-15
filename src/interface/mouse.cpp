@@ -103,9 +103,16 @@ void Mouse::ActionLeftClic()
       }
     }
 
-    if( character_found ){
+    if (character_found) {
+      Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
+      next_character->StoreActiveCharacter();
+
       while ( &(*it) != &ActiveCharacter() )
 	ActiveTeam().NextCharacter ();
+
+      next_character->StoreActiveCharacter();
+      ActionHandler::GetInstance()->NewAction(next_character);
+
       return;
     }
 
