@@ -35,8 +35,8 @@ PolygonBuffer::PolygonBuffer()
 {
   // Start with at least 32 points buffer
   array_size = 32;
-  vx = new Sint16[array_size];
-  vy = new Sint16[array_size];
+  vx = new int16_t[array_size];
+  vy = new int16_t[array_size];
   buffer_size = 0;
 }
 
@@ -56,13 +56,13 @@ void PolygonBuffer::SetSize(const int size)
   if(array_size > size) {
     buffer_size = size;
   } else {
-    Sint16 * tmp_vx = vx;
-    Sint16 * tmp_vy = vy;
+    int16_t * tmp_vx = vx;
+    int16_t * tmp_vy = vy;
     // double the buffer size (64, 128, 256, 512)
     // to avoid call of delete/new at each new point
     array_size = (array_size * 2 > size ? array_size * 2 : size);
-    vx = new Sint16[array_size];
-    vy = new Sint16[array_size];
+    vx = new int16_t[array_size];
+    vy = new int16_t[array_size];
     for(int i = 0; i < buffer_size; i++) {
       vx[i] = tmp_vx[i];
       vy[i] = tmp_vy[i];

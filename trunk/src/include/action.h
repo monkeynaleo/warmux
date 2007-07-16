@@ -22,7 +22,6 @@
 #ifndef ACTION_H
 #define ACTION_H
 //-----------------------------------------------------------------------------
-#include <SDL_stdinc.h>
 #include <string>
 #include <iostream>
 #include <list>
@@ -35,7 +34,7 @@ class DistantComputer;
 class Action
 {
 private:
-  std::list<Uint32> var;
+  std::list<uint32_t> var;
   Action(const Action& an_action);
   const Action& operator=(const Action&);
 public:
