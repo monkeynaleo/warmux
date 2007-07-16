@@ -96,7 +96,7 @@ public:
   uint GetSoundFrequency() const;
   void SetSoundFrequency(const uint freq);
 
-  std::list<struct ConfigTeam> & AccessTeamList();
+  std::list<class ConfigTeam> & AccessTeamList();
   const std::string & GetMapName() const;
   inline void SetMapName(const std::string& new_name)
   { map_name = new_name; }
@@ -132,7 +132,7 @@ protected:
 
   std::string data_dir, locale_dir, personal_dir;
 
-  std::list<struct ConfigTeam> teams;
+  std::list<class ConfigTeam> teams;
   std::string map_name;
   // Game settings
   bool display_energy_character;
