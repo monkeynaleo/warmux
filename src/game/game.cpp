@@ -223,7 +223,7 @@ bool Game::DisplayQuit()
   {
     /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
     /* Let's find out what the user would like to press ... */
-    char *key_x_ptr = strchr (msg, '/');
+    const char *key_x_ptr = strchr (msg, '/');
     char key_x;
     if (key_x_ptr && key_x_ptr > msg) /* it's there and it's not the first char */
       key_x = tolower(key_x_ptr[-1]);
