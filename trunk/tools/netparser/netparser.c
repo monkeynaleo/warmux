@@ -228,7 +228,7 @@ action_t actions[] = {
     { "ACTION_NETWORK_SYNC_END", NULL },
     { "ACTION_EXPLOSION",
       "[Position]P[Explosion range]I[Particle range]I[Damage]I"
-      "[Blast range]F[Blast force]F[Sound]S"
+      "[Blast range]U[Blast force]U[Sound]S"
     },
     { "ACTION_WIND", "[Vector]I" },
     { "ACTION_NETWORK_PING", NULL },
@@ -241,12 +241,27 @@ action_t actions[] = {
 };
 #define  UNDEF     (sizeof(actions)/sizeof(action_t))-1
 
+void printhelp() { printf("Syntax: netparser <network dump file>\n"); exit(0); }
+
 int main(int argc, char *argv[])
 {
     int         count     = 0;
-    FILE        *rec      = fopen((argc==2) ? argv[1] : "network_client.out", "rb");
+    FILE        *rec;
     int         size      = 1024;
     char        *buffer   = malloc(size);
+
+    if (argc != 2)
+    {
+         fprintf(stderr, "Invalid command-line\n");
+         printhelp();
+    }
+
+    if ((rec = fopen(argv[1], "rb")) == NULL)
+    {
+         fprintf(stderr, "Couldn't open for reading '%s'\n", argv[1]);
+         printhelp();
+    }
+
 
     while (!feof(rec))
     {
