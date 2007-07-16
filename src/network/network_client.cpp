@@ -28,7 +28,7 @@
 #include "tool/i18n.h"
 #include "distant_cpu.h"
 
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
