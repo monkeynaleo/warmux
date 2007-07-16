@@ -31,12 +31,7 @@ class RandomSync{
   
   double GetRand();
   void GenerateTable();
-
-  static RandomSync * singleton;
-
 public:
-  static RandomSync * GetInstance();
-
   RandomSync();
   void Init();
   
@@ -52,5 +47,7 @@ public:
   void AddToTable(double nbr);
   void ClearTable();
 };
+
+extern RandomSync randomSync;
 
 #endif
