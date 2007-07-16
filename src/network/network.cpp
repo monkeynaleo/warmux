@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include <SDL_thread.h>
+#include <SDL_timer.h>
 #include "network.h"
 #include "network_local.h"
 #include "network_client.h"
@@ -163,12 +164,25 @@ void Network::Disconnect()
   }
 }
 
+static Uint32 sdl_thread_kill(Uint32 interval, void *param)
+{
+  SDL_KillThread((SDL_Thread*)param);
+  fprintf(stderr, "Add to kill thread 0x%p (timeout=%u ms)\n", param, interval);
+  return 0;
+}
+
+static void sdl_thread_wait_for(SDL_Thread* thread, uint timeout)
+{
+  SDL_TimerID id = SDL_AddTimer(timeout, sdl_thread_kill, thread);
+  SDL_WaitThread(thread, NULL);
+  SDL_RemoveTimer(id);
+}
+
 // Protected method for client and server
 void Network::DisconnectNetwork()
 {
   if (thread != NULL && SDL_ThreadID() != SDL_GetThreadID(thread)) {
-    SDL_WaitThread(thread, NULL);
-    printf("Network thread finished\n");
+    sdl_thread_wait_for(thread, 4000);
   }
 
   thread = NULL;
