@@ -23,7 +23,6 @@
 #define POLYGON_H
 
 #include <vector>
-#include <SDL_stdinc.h> // For Sint16
 #include "tool/point.h"
 #include "tool/rectangle.h"
 
@@ -41,8 +40,8 @@ class PolygonBuffer {
   /*********************************************/
 
  public:
-  Sint16 * vx;
-  Sint16 * vy;
+  int16_t * vx;
+  int16_t * vy;
   int buffer_size;
   int array_size;
   PolygonBuffer();

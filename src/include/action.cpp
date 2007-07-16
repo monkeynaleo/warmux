@@ -94,7 +94,7 @@ Action::Action (const char *is, DistantComputer* _creator)
 
   for(int i=0; i < m_lenght; i++)
   {
-    Uint32 val = SDLNet_Read32(is);
+    uint32_t val = SDLNet_Read32(is);
     var.push_back(val);
     is += 4;
   }
@@ -133,11 +133,11 @@ void Action::Write(char *os) const
   os += 4;
   SDLNet_Write32(m_timestamp, os);
   os += 4;
-  Uint32 param_size = (Uint32)var.size();
+  uint32_t param_size = (uint32_t)var.size();
   SDLNet_Write32(param_size, os);
   os += 4;
 
-  for(std::list<Uint32>::const_iterator val = var.begin(); val!=var.end(); val++)
+  for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++)
   {
     SDLNet_Write32(*val, os);
     os += 4;
@@ -156,7 +156,7 @@ void Action::WritePacket(char* &packet, int & size) const
 //-------------  Add datas to the action  ----------------
 void Action::Push(int val)
 {
-  Uint32 tmp;
+  uint32_t tmp;
   memcpy(&tmp, &val, 4);
   var.push_back(tmp);
   MSG_DEBUG( "action", " (%s) Pushing int : %i",
@@ -165,7 +165,7 @@ void Action::Push(int val)
 
 void Action::Push(double val)
 {
-  Uint32 tmp[2];
+  uint32_t tmp[2];
   memcpy(&tmp, &val, 8);
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   var.push_back(tmp[0]);
@@ -201,7 +201,7 @@ void Action::Push(std::string val)
   int count = val.size();
   while(count > 0)
   {
-    Uint32 tmp = 0;
+    uint32_t tmp = 0;
     // Fix-me : We are reading out of the c_str() buffer there :
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
     strncpy((char*)&tmp, ch, 4);
@@ -232,7 +232,7 @@ int Action::PopInt()
   }
 
   int val;
-  Uint32 tmp = var.front();
+  uint32_t tmp = var.front();
   memcpy(&val, &tmp, 4);
   var.pop_front();
   MSG_DEBUG( "action", " (%s) Poping int : %i",
@@ -249,7 +249,7 @@ double Action::PopDouble()
   }
 
   double val;
-  Uint32 tmp[2];
+  uint32_t tmp[2];
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   tmp[0] = var.front();
   var.pop_front();
@@ -295,7 +295,7 @@ std::string Action::PopString()
       return "";
     }
 
-    Uint32 tmp = var.front();
+    uint32_t tmp = var.front();
     var.pop_front();
     char tmp_str[5] = {0, 0, 0, 0, 0};
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
