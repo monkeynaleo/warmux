@@ -37,7 +37,7 @@ public:
   virtual void SendChatMessage(const std::string& txt);
   virtual void ReceiveActions();
 
-  std::_List_iterator<DistantComputer*> CloseConnection(std::_List_iterator<DistantComputer*>);
+  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator);
   
   // Client specific methods
   const Network::connection_state_t ClientConnect(const std::string &host, 
