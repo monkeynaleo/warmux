@@ -35,7 +35,7 @@
 #include "tool/debug.h"
 #include "tool/i18n.h"
 
-#if defined(DEBUG)
+#ifdef LOG_NETWORK
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
