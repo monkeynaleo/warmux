@@ -658,7 +658,7 @@ void GameLoop::ApplyDiseaseDamage()
 {
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     if (character->IsDiseased()) {
-      character->SetEnergyDelta(-character->GetDiseaseDamage());
+      character->SetEnergyDelta(-(int)character->GetDiseaseDamage());
       character->DecDiseaseDuration();
     }
   }
@@ -676,7 +676,7 @@ void GameLoop::ApplyDeathMode ()
       // per turn we reduce the character's health to 1
       if (static_cast<uint>(character->GetEnergy()) >
           GameMode::GetInstance()->damage_per_turn_during_death_mode)
-        character->SetEnergyDelta(-GameMode::GetInstance()->damage_per_turn_during_death_mode);
+        character->SetEnergyDelta(-(int)GameMode::GetInstance()->damage_per_turn_during_death_mode);
       else
         character->SetEnergy(1);
     }

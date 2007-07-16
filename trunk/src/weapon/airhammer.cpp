@@ -108,7 +108,7 @@ bool Airhammer::p_Shoot()
       if( character->ObjTouche(Point2i(x, y)) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        character->SetEnergyDelta(-cfg().damage);
+        character->SetEnergyDelta(-(int)cfg().damage);
         end = true;
       }
     }
