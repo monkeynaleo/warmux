@@ -556,6 +556,7 @@ void Character::DoShoot()
   MSG_DEBUG("weapon.shoot", "-> begin");
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
+  body->UpdateWeaponPosition(GetPosition());
   damage_stats.OneMoreShot();
   ActiveTeam().AccessWeapon().Shoot();
   MSG_DEBUG("weapon.shoot", "<- end");
