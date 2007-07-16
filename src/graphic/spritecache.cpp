@@ -132,7 +132,7 @@ SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
 void SpriteCache::EnableRotationCache(std::vector<SpriteFrame> &sprite_frames, unsigned int cache_size){
   //For each frame, we pre-render 'cache_size' rotated surface
   //At runtime the prerender Surface with the nearest angle to what is asked is displayed
-  ASSERT(1 < cache_size and cache_size <= 360);
+  ASSERT(1 < cache_size && cache_size <= 360);
   ASSERT(!have_lastframe_cache);
   ASSERT(!have_flipping_cache); //Always compute rotation cache before flipping cache!
   ASSERT(!have_rotation_cache);
