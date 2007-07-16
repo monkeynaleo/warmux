@@ -25,10 +25,18 @@
 #include "randomsync.h"
 #include "network.h"
 #include "include/action_handler.h"
+#include "tool/debug.h"
 
 const uint table_size = 1024; //Number of pregerated numbers
 
-RandomSync randomSync;
+RandomSync * RandomSync::singleton = NULL;
+
+RandomSync * RandomSync::GetInstance()
+{
+  if (singleton == NULL)
+    singleton = new RandomSync();
+  return singleton;
+}
 
 RandomSync::RandomSync(){
 }
@@ -39,6 +47,7 @@ void RandomSync::Init(){
 
   srand( time(NULL) );
 
+  MSG_DEBUG("network.rand", "Random table at %p cleared\n", &rnd_table);
   rnd_table.clear();
 
   if  (Network::GetInstance()->IsServer()) {
@@ -67,10 +76,13 @@ void RandomSync::GenerateTable()
 void RandomSync::AddToTable(double nbr)
 {
   rnd_table.push_back(nbr);
+  MSG_DEBUG("network.rand", "Random table at %p now has %u elements\n",
+            &rnd_table, rnd_table.size());
 }
 
 void RandomSync::ClearTable()
 {
+  MSG_DEBUG("network.rand", "Random table at %p cleared\n", &rnd_table);
   rnd_table.clear();
 }
 
@@ -79,7 +91,8 @@ double RandomSync::GetRand()
   if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
     GenerateTable();
 
-  ASSERT(rnd_table.size()!=0);
+  MSG_DEBUG("network.rand", "Random table at %p now has %u elements\n",
+            &rnd_table, rnd_table.size());
   if (rnd_table.size() == 0) {
     Error("Random table is empty!\n");
     exit(1);
