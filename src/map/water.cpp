@@ -127,6 +127,12 @@ void Water::Refresh(){
     }
   }
 
+}
+
+void Water::Draw(){
+  if (!actif)
+    return;
+
   /* Now the wave has changed, we need to build the new image pattern */
   pattern.SetAlpha(0, 0);
   pattern.Fill(0x00000000);
@@ -191,12 +197,6 @@ void Water::Refresh(){
   SDL_UnlockSurface(surface.GetSurface());
 
   pattern.SetAlpha(SDL_SRCALPHA, 0);
-}
-
-void Water::Draw(){
-  if (!actif)
-    return;
-
   int x0 = camera.GetPosition().x % pattern_width;
 
   int r = 0;
