@@ -112,7 +112,7 @@ void CharacterCursor::Refresh()
   }
 
   //The arrow is rebounding:
-  Rebound(image, dy, time_begin_anim + show_hide_time, rebound_time, -y_max - (-y_min));
+  Rebound(image, dy, time_begin_anim + show_hide_time, rebound_time, (int)y_min - (int)y_max);
 
   last_update = global_time->Read();
 }

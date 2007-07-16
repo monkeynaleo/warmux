@@ -453,7 +453,7 @@ void Character::Draw()
   body->Draw(pos);
 
    // Draw energy bar
-  int dy = -ESPACE;
+  int dy = -((int)ESPACE);
   bool est_ver_actif = (this == &ActiveCharacter());
   Config * config = Config::GetInstance();
   bool display_energy = config->GetDisplayEnergyCharacter();
