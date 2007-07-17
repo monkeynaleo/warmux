@@ -36,12 +36,19 @@
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 #include "weapon/weapons_list.h"
-
+#include "game/config.h"
 
 // Weapon menu
-const uint ICONS_DRAW_TIME = 600; // Time to display all icons (in ms)
-const uint ICON_ZOOM_TIME = 150; // Time to zoom one icon.
-const uint JELLY_TIME = 300;     // Jelly time when appearing
+const uint ICONS_DRAW_TIME = 400;       // Time to display all icons (in ms)
+const uint BLING_ICONS_DRAW_TIME = 600; // Bling bling version
+
+const uint ICON_ZOOM_TIME = 150;        // Time to zoom one icon.
+
+const uint JELLY_TIME = 0;              // Jelly time when appearing
+const uint BLING_JELLY_TIME = 300;      // Bling bling version
+
+const uint ROTATION_TIME = 0;           // Number of rotation
+const uint BLING_ROTATION_TIME = 2;     // bling bling !
 
 const double DEFAULT_ICON_SCALE = 0.7;
 const double MAX_ICON_SCALE = 1.1;
@@ -57,6 +64,7 @@ WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
 {
   SetSprite(new Sprite(weapon->GetIcon()));
   SetPosition(position);
+  SetZoomTime(ICON_ZOOM_TIME);
 }
 
 WeaponMenuItem::~WeaponMenuItem()
@@ -90,11 +98,21 @@ void WeaponMenuItem::SetZoom(bool value)
   zoom_start_time = Time::GetInstance()->Read();
 }
 
+uint WeaponMenuItem::GetZoomTime() const
+{
+  return zoom_time;
+}
+
+void WeaponMenuItem::SetZoomTime(uint time)
+{
+  zoom_time = time;
+}
+
 void WeaponMenuItem::Draw(Surface * dest)
 {
   double scale = DEFAULT_ICON_SCALE;
-  if(zoom || zoom_start_time + ICON_ZOOM_TIME > Time::GetInstance()->Read()) {
-    scale = (Time::GetInstance()->Read() - zoom_start_time) / (double)ICON_ZOOM_TIME;
+  if(zoom || zoom_start_time + GetZoomTime() > Time::GetInstance()->Read()) {
+    scale = (Time::GetInstance()->Read() - zoom_start_time) / (double)GetZoomTime();
     if(zoom) {
       scale = DEFAULT_ICON_SCALE + (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
       scale = (scale > MAX_ICON_SCALE ? MAX_ICON_SCALE : scale);
@@ -135,6 +153,9 @@ WeaponsMenu::WeaponsMenu():
   cross(NULL),
   show(false),
   motion_start_time(0),
+  icons_draw_time(ICONS_DRAW_TIME),
+  jelly_time(JELLY_TIME),
+  rotation_time(ROTATION_TIME),
   nbr_weapon_type(0),
   nb_weapon_type(new int[MAX_NUMBER_OF_WEAPON])
 {
@@ -200,10 +221,10 @@ void WeaponsMenu::Show()
 {
   ShowGameInterface();
   if(!show) {
-    if(motion_start_time + ICONS_DRAW_TIME < Time::GetInstance()->Read())
+    if(motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
       motion_start_time = Time::GetInstance()->Read();
     else
-      motion_start_time = Time::GetInstance()->Read() - (ICONS_DRAW_TIME - (Time::GetInstance()->Read() - motion_start_time));
+      motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
     show = true;
   }
 }
@@ -212,10 +233,10 @@ void WeaponsMenu::Hide()
 {
   if(show) {
     Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
-    if(motion_start_time + ICONS_DRAW_TIME < Time::GetInstance()->Read())
+    if(motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
       motion_start_time = Time::GetInstance()->Read();
     else
-      motion_start_time = Time::GetInstance()->Read() - (ICONS_DRAW_TIME - (Time::GetInstance()->Read() - motion_start_time));
+      motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
     show = false;
   }
 }
@@ -226,6 +247,45 @@ void WeaponsMenu::Reset()
   RefreshWeaponList();
   motion_start_time = 0;
   show = false;
+  if(Config::GetInstance()->IsBlingBlingInterface()) {
+    SetJellyTime(BLING_JELLY_TIME);
+    SetIconsDrawTime(BLING_ICONS_DRAW_TIME);
+    SetRotationTime(BLING_ROTATION_TIME);
+  } else {
+    SetJellyTime(JELLY_TIME);
+    SetIconsDrawTime(ICONS_DRAW_TIME);
+    SetRotationTime(ROTATION_TIME);
+  }
+}
+
+uint WeaponsMenu::GetJellyTime() const
+{
+  return jelly_time;
+}
+
+uint WeaponsMenu::GetIconsDrawTime() const
+{
+  return icons_draw_time;
+}
+
+uint WeaponsMenu::GetRotationTime() const
+{
+  return rotation_time;
+}
+
+void WeaponsMenu::SetJellyTime(uint time)
+{
+  jelly_time = time;
+}
+
+void WeaponsMenu::SetIconsDrawTime(uint time)
+{
+  icons_draw_time = time;
+}
+
+void WeaponsMenu::SetRotationTime(uint time)
+{
+  rotation_time = time;
 }
 
 void WeaponsMenu::RefreshWeaponList()
@@ -284,13 +344,13 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
   Point2i pos(AppWormux::GetInstance()->video.window.GetSize() / 2 + Point2i((int)(tools_menu->GetWidth() / 2) + 10, 0));
   Point2d end(POINT2I_2_POINT2D(pos));
   double zoom_start = 0.2, zoom_end = 1.0;
-  double angle_start = M_PI * 2.0, angle_end = 0.0;
+  double angle_start = M_PI * GetRotationTime(), angle_end = 0.0;
   // Define the animation
-  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, start, end);
-  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show,
+  position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
+  zoom.SetShrinkAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show,
                           zoom_start, zoom_start, zoom_end, zoom_end);
-  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, angle_start, angle_end);
-  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
+  rotation.SetRotationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, angle_start, angle_end);
+  shear.SetShearAnimation(motion_start_time + GetIconsDrawTime(), GetJellyTime(), Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
   return position * shear * zoom * rotation;
 }
 
@@ -301,19 +361,19 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
   Point2i pos(AppWormux::GetInstance()->video.window.GetSize() / 2 - Point2i((int)(weapons_menu->GetWidth() / 2) + 10, 0));
   Point2d end(POINT2I_2_POINT2D(pos));
   double zoom_start = 0.2, zoom_end = 1.0;
-  double angle_start = -M_PI * 2.0, angle_end = 0.0;
+  double angle_start = -M_PI * GetRotationTime(), angle_end = 0.0;
  // Define the animation
-  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, start, end);
-  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show,
+  position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
+  zoom.SetShrinkAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show,
                           zoom_start, zoom_start, zoom_end, zoom_end);
-  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, angle_start, angle_end);
-  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
+  rotation.SetRotationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, angle_start, angle_end);
+  shear.SetShearAnimation(motion_start_time + GetIconsDrawTime(), GetJellyTime(), Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
   return position * shear * zoom * rotation;
 }
 
 void WeaponsMenu::Draw()
 {
-  if(!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + ICONS_DRAW_TIME))
+  if(!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + GetIconsDrawTime()))
     return;
   // Draw weapons menu
   weapons_menu->ApplyTransformation(ComputeWeaponTransformation());

@@ -87,6 +87,9 @@ public:
 
   inline uint GetMaxFps() const { return max_fps; };
 
+  bool IsBlingBlingInterface() const;
+  void SetBlingBlingInterface(bool bling_bling);
+
   bool GetSoundMusic() const;
   void SetSoundMusic(const bool music);
 
@@ -145,6 +148,7 @@ protected:
   uint video_height;
   bool video_fullscreen;
   uint max_fps;
+  bool bling_bling_interface;
   // Sound settings
   bool sound_music;
   bool sound_effects;
