@@ -65,7 +65,7 @@ void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
   txt_label->SetMaxWidth(GetSizeX());
 }
 
-void SpinButtonWithPicture::Draw(const Point2i &mousePosition, Surface& surf) const
+void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
   // center the image on the first half
   uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/4 ;
@@ -113,7 +113,7 @@ Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button
   return NULL;
 }
 
-Widget* SpinButtonWithPicture::Click(const Point2i &mousePosition, uint button)
+Widget* SpinButtonWithPicture::Click(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   return NULL;
 }

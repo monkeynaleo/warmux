@@ -23,7 +23,7 @@
 #include <iostream>
 //-----------------------------------------------------------------------------
 
-void EmptyWeaponConfig::LoadXml(xmlpp::Element *elem) 
+void EmptyWeaponConfig::LoadXml(xmlpp::Element */*elem*/) 
 {}
 
 //-----------------------------------------------------------------------------

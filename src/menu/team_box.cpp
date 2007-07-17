@@ -136,7 +136,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* TeamBox::Click(const Point2i &mousePosition, uint button)
+Widget* TeamBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   return NULL;
 }

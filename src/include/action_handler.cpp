@@ -221,7 +221,7 @@ void SendGameMode()
   Network::GetInstance()->SendAction(&a);
 }
 
-void Action_Rules_AskVersion (Action *a)
+void Action_Rules_AskVersion (Action */*a*/)
 {
   if (!Network::GetInstance()->IsClient()) return;
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_SEND_VERSION, Constants::VERSION));
@@ -367,19 +367,19 @@ void SyncCharacters()
   Network::GetInstance()->SendAction(&a_sync_end);
 }
 
-void Action_Character_Jump (Action *a)
+void Action_Character_Jump (Action */*a*/)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
   ActiveCharacter().Jump();
 }
 
-void Action_Character_HighJump (Action *a)
+void Action_Character_HighJump (Action */*a*/)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
   ActiveCharacter().HighJump();
 }
 
-void Action_Character_BackJump (Action *a)
+void Action_Character_BackJump (Action */*a*/)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
   ActiveCharacter().BackJump();
@@ -424,7 +424,7 @@ void Action_Weapon_Shoot (Action *a)
   ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
 }
 
-void Action_Weapon_StopUse(Action *a)
+void Action_Weapon_StopUse(Action */*a*/)
 {
   ActiveTeam().AccessWeapon().ActionStopUse();
 }
@@ -527,26 +527,26 @@ void Action_Network_RandomAdd (Action *a)
   randomSync.AddToTable(a->PopDouble());
 }
 
-void Action_Network_RandomClear (Action *a)
+void Action_Network_RandomClear (Action */*a*/)
 {
   ASSERT(Network::GetInstance()->IsClient());
   randomSync.ClearTable();
 }
 
-void Action_Network_SyncBegin (Action *a)
+void Action_Network_SyncBegin (Action */*a*/)
 {
   ASSERT(!Network::GetInstance()->sync_lock);
   Network::GetInstance()->sync_lock = true;
 }
 
-void Action_Network_SyncEnd (Action *a)
+void Action_Network_SyncEnd (Action */*a*/)
 {
   ASSERT(Network::GetInstance()->sync_lock);
   Network::GetInstance()->sync_lock = false;
 }
 
 // Nothing to do here. Just for time synchronisation
-void Action_Network_Ping(Action *a)
+void Action_Network_Ping(Action */*a*/)
 {
 }
 
@@ -575,6 +575,7 @@ void Action_Network_Disconnect(Action *a)
 void Action_Explosion (Action *a)
 {
   ExplosiveWeaponConfig config;
+  MSG_DEBUG("action_handler","-> Begin");
 
   Point2i pos = a->PopPoint2i();
   config.explosion_range = a->PopInt();
@@ -587,6 +588,8 @@ void Action_Explosion (Action *a)
   ParticleEngine::ESmokeStyle smoke = (ParticleEngine::ESmokeStyle)a->PopInt();
 
   ApplyExplosion_common(pos, config, son, fire_particle, smoke);
+
+  MSG_DEBUG("action_handler","<- End");
 }
 
 // ########################################################

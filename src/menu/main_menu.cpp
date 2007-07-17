@@ -169,7 +169,7 @@ void Main_Menu::OnClickUp(const Point2i &mousePosition, int button)
   }
 }
 
-void Main_Menu::OnClick(const Point2i &mousePosition, int button)
+void Main_Menu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
 {
   // nothing to do while button is still not released
 }

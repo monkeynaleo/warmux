@@ -55,7 +55,7 @@ public:
   virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
 
   // needed to implements Widget
-  virtual void SetSizePosition(const Rectanglei &rect) {};
+  virtual void SetSizePosition(const Rectanglei &/*rect*/) {};
 
   // to add a widget
   virtual void AddWidget(Widget*);

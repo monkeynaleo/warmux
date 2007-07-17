@@ -246,6 +246,8 @@ void Physics::SetExternForceXY (Point2d vector)
 {
   bool was_moving = IsMoving();
 
+  MSG_DEBUG ("physic.physic", "%s EXTERN FORCE.", typeid(*this).name());
+
   m_extern_force.SetValues(vector);
 
   if (!was_moving && IsMoving())
@@ -474,7 +476,7 @@ void Physics::ComputeFallNextXY (double delta_t)
 
   MSG_DEBUG( "physic.fall", "%s falls; mass %5f, weight %5f, wind %5f, air %5f, delta %f", typeid(*this).name(), m_mass, weight_force,wind_force, air_resistance_factor, delta_t);
   
-  MSG_DEBUG( "physic.fall", "%s before - x0:%d, x1:%d, x2:%d - y0:%d, y1:%d, y2:%d - delta:%f - extern_force: %f, %f", 
+  MSG_DEBUG( "physic.fall", "%s before - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - delta:%f - extern_force: %f, %f", 
 	     typeid(*this).name(), 
 	     m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
 	     m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
@@ -489,7 +491,7 @@ void Physics::ComputeFallNextXY (double delta_t)
   m_pos_y.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
 		      weight_force + m_extern_force.y, delta_t);
 
-  MSG_DEBUG( "physic.fall", "%s after - x0:%d, x1:%d, x2:%d - y0:%d, y1:%d, y2:%d - delta:%f - extern_force: %f, %f", 
+  MSG_DEBUG( "physic.fall", "%s after - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - delta:%f - extern_force: %f, %f", 
 	     typeid(*this).name(), 
 	     m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
 	     m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
@@ -541,7 +543,7 @@ void Physics::RunPhysicalEngine()
 
     if( newPos != oldPos)  {
       // The object has moved. Notify the son class.
-      MSG_DEBUG( "physic.move", "%s moves (%f, %f) -> (%f, %f) - x0:%d, x1:%d, x2:%d - y0:%d, y1:%d, y2:%d - step:%f", 
+      MSG_DEBUG( "physic.move", "%s moves (%f, %f) -> (%f, %f) - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - step:%f", 
 		 typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, 
 		 m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
 		 m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
@@ -556,12 +558,10 @@ void Physics::RunPhysicalEngine()
 }
 
 /* contact_angle is the angle of the surface we are rebounding on */
-void Physics::Rebound(Point2d contactPos, double contact_angle)
+void Physics::Rebound(Point2d /*contactPos*/, double contact_angle)
 {
   double norme, angle;
   
-  MSG_DEBUG("physic.rebound", "%s rebounds on %d,%d", typeid(*this).name(), contactPos.x, contactPos.y);
-    
   // Get norm and angle of the object speed vector.
   GetSpeed(norme, angle);
 

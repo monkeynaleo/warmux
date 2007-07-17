@@ -38,7 +38,7 @@ void TileItem_AlphaSoftware::Draw(const Point2i &pos){
         pos * CELL_SIZE - camera.GetPosition());
 }
 
-void TileItem_Empty::Draw(const Point2i &pos)
+void TileItem_Empty::Draw(const Point2i &/*pos*/)
 {
 #ifdef DBG_TILE
   AppWormux::GetInstance()->video.window.FillRect(Rectanglei(pos * CELL_SIZE - camera.GetPosition(),CELL_SIZE), c_red);

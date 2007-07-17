@@ -92,7 +92,7 @@ void ObjBox::DropBox()
 }
 
 //Boxes can explode...
-void ObjBox::SignalGhostState(bool was_already_dead)
+void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {
   if(life_points > 0) return;
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);

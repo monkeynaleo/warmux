@@ -298,7 +298,7 @@ WeaponMember::~WeaponMember()
 {
 }
 
-void WeaponMember::Draw(const Point2i & _pos, int flip_center, int direction)
+void WeaponMember::Draw(const Point2i & /*_pos*/, int /*flip_center*/, int /*direction*/)
 {
   // Would be cool to display the weapon from here...
 }

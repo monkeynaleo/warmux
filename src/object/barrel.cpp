@@ -56,7 +56,7 @@ void PetrolBarrel::Refresh()
 {
 }
 
-void PetrolBarrel::SignalGhostState(bool was_already_dead)
+void PetrolBarrel::SignalGhostState(bool /*was_already_dead*/)
 {
   ParticleEngine::AddNow(GetCenter(), 20, particle_FIRE, true);
   ApplyExplosion(GetCenter(), GameMode::GetInstance()->barrel_explosion_cfg, 

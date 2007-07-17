@@ -150,7 +150,7 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
     }
 }
 
-void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
+void NetworkConnectionMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
 {
 }
 
@@ -186,7 +186,7 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
   }
 }
 
-void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
+void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/){}
 
 void NetworkConnectionMenu::DisplayError(Network::connection_state_t conn)
 {

@@ -123,7 +123,7 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
   return NULL;
 }
 
-Widget* NetworkTeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
+Widget* NetworkTeamsSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   return NULL;
 }

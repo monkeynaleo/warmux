@@ -407,12 +407,12 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
   }
 }
 
-void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
+void ResultsMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
 {
   // Do nothing if user has not released the button
 }
 
-void ResultsMenu::Draw(const Point2i &mousePosition)
+void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
 {
   if (index == -1)
     SetResult(results.size()-1);

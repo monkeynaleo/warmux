@@ -128,7 +128,7 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* TeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
+Widget* TeamsSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   return NULL;
 }

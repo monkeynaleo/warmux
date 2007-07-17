@@ -69,7 +69,7 @@ void WidgetList::Update(const Point2i &mousePosition, Surface& surf)
   lastMousePosition = mousePosition;
 }
 
-void WidgetList::Draw(const Point2i &mousePosition, Surface& surf) const
+void WidgetList::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
 }
 

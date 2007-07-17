@@ -37,7 +37,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
   /*********************************************/
 
   private:
-    virtual void ApplyBox (Team &team, Character &character){}
+    virtual void ApplyBox (Team &/*team*/, Character &/*character*/){}
 
   public:
     ObjBox(const std::string &name);
@@ -47,7 +47,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     static void Enable (bool _enable);
     static bool NewBox();
     void DropBox();
-    static void LoadXml(xmlpp::Element * object){}
+    static void LoadXml(xmlpp::Element * /*object*/){}
 
     virtual void Draw(){}
     virtual void Refresh(){}

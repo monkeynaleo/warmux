@@ -206,7 +206,7 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* MapSelectionBox::Click(const Point2i &mousePosition, uint button)
+Widget* MapSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   return NULL;
 }

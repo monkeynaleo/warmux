@@ -126,7 +126,7 @@ bool Network::ThreadToContinue()
   return !stop_thread;
 }
 
-int Network::ThreadRun(void* no_param)
+int Network::ThreadRun(void*/*no_param*/)
 {
   GetInstance()->ReceiveActions();
   Disconnect();

@@ -132,7 +132,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   return true;
 }
 
-bool AIShootModule::SelectFiringWeapon(double shoot_angle) const
+bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
 {
   // we choose between gun, sniper_rifle, shotgun and submachine gun
   uint selected = uint(randomSync.GetDouble(0.0, 3.5));

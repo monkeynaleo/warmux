@@ -27,7 +27,7 @@ NullWidget::NullWidget (const Rectanglei &rect) : Widget(rect){
 NullWidget::~NullWidget(){
 }
 
-void NullWidget::Draw(const Point2i &mousePosition, Surface& surf) const{
+void NullWidget::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const{
 }
 
 void NullWidget::SetSizePosition(const Rectanglei &rect){
