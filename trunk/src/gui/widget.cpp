@@ -27,7 +27,8 @@ Widget::Widget():
   Rectanglei(),
   ct(NULL),
   need_redrawing(true),
-  have_focus(false)
+  have_focus(false),
+  is_selected(false)
 {
 }
 
@@ -35,7 +36,8 @@ Widget::Widget(const Rectanglei &rect):
   Rectanglei(rect),
   ct(NULL),
   need_redrawing(true),
-  have_focus(false)
+  have_focus(false),
+  is_selected(false)
 {
 }
 
@@ -61,6 +63,23 @@ Widget* Widget::Click(const Point2i &/*mousePosition*/, uint /*button*/)
   return this;
 }
 
+bool Widget::IsSelected() const
+{
+  return is_selected;
+}
+
+void Widget::Select()
+{
+  is_selected = true;
+  need_redrawing = true;
+}
+
+void Widget::Unselect()
+{
+  is_selected = false;
+  need_redrawing = true;
+}
+
 void Widget::StdSetSizePosition(const Rectanglei &rect)
 {
   position = rect.GetPosition();
@@ -76,16 +95,13 @@ void Widget::Update(const Point2i &mousePosition,
 		    const Point2i &lastMousePosition,
 		    Surface& surf)
 {
-  if (
-      need_redrawing
-      || (Contains(mousePosition) && mousePosition != lastMousePosition)
-      || (Contains(lastMousePosition) && !Contains(mousePosition))
-      )
-    {
-      if (ct != NULL) ct->Redraw(*this, surf);
+  if (need_redrawing ||
+      (Contains(mousePosition) && mousePosition != lastMousePosition) ||
+      (Contains(lastMousePosition) && !Contains(mousePosition))) {
+    if (ct != NULL) ct->Redraw(*this, surf);
 
-      Draw(mousePosition, surf);
-    }
+    Draw(mousePosition, surf);
+  }
   need_redrawing = false;
 }
 

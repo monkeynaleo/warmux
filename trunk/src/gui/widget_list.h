@@ -36,6 +36,7 @@ private:
 
   Point2i lastMousePosition;
   Widget* last_clicked;
+  Widget* current_selected;
 
 protected:
   std::list<Widget*> widget_list;
@@ -59,7 +60,10 @@ public:
 
   // to add a widget
   virtual void AddWidget(Widget*);
-
+  // Navigate between widget
+  virtual void SetFocusOnNextWidget();
+  virtual void SetFocusOnPreviousWidget();
+  Widget * GetCurrentSelectedWidget() const;
   // redraw bottom layer container
   virtual void Redraw(const Rectanglei& rect, Surface& surf);
 

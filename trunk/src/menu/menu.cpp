@@ -114,6 +114,18 @@ void Menu::key_cancel()
   }
 }
 
+void Menu::key_up()
+{
+  widgets.SetFocusOnPreviousWidget();
+  RedrawMenu();
+}
+
+void Menu::key_down()
+{
+  widgets.SetFocusOnNextWidget();
+  RedrawMenu();
+}
+
 void Menu::DrawBackground()
 {
   background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
@@ -159,6 +171,12 @@ void Menu::Run ()
 	    break;
 	  case SDLK_RETURN:
 	    key_ok();
+	    break;
+	  case SDLK_UP:
+	    key_up();
+	    break;
+	  case SDLK_DOWN:
+	    key_down();
 	    break;
 	  case SDLK_F10:
 	    AppWormux::GetInstance()->video.ToggleFullscreen();

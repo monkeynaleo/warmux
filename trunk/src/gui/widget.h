@@ -42,6 +42,7 @@ class Widget : public Rectanglei
 
  public:
   bool have_focus;
+  bool is_selected;
 
   Widget();
   Widget(const Rectanglei &rect);
@@ -57,6 +58,9 @@ class Widget : public Rectanglei
   virtual void SendKey(SDL_keysym key);
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  bool IsSelected() const;
+  virtual void Select();
+  virtual void Unselect();
 
   void SetContainer(Container * _ct);
 

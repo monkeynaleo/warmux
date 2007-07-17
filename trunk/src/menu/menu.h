@@ -73,6 +73,8 @@ protected:
    virtual void mouse_cancel();
    virtual void key_ok();
    virtual void key_cancel();
+   virtual void key_up();
+   virtual void key_down();
    virtual bool signal_ok() = 0;
    virtual bool signal_cancel() = 0;
 

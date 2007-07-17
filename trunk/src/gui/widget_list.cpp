@@ -26,11 +26,13 @@
 WidgetList::WidgetList()
 {
   last_clicked = NULL;
+  current_selected = NULL;
 }
 
 WidgetList::WidgetList(const Rectanglei &rect) : Widget(rect)
 {
   last_clicked = NULL;
+  current_selected = NULL;
 }
 
 WidgetList::~WidgetList()
@@ -67,6 +69,73 @@ void WidgetList::Update(const Point2i &mousePosition, Surface& surf)
   }
 
   lastMousePosition = mousePosition;
+}
+
+void WidgetList::SetFocusOnNextWidget()
+{
+  // No widget => exit
+  if(widget_list.size() == 0) {
+    current_selected = NULL;
+    return;
+  }
+  // Previous selection ?
+  if(current_selected != NULL)
+    current_selected->Unselect();
+  else {
+    current_selected = (*widget_list.begin());
+    current_selected->Select();
+    return;
+  }
+  std::list<Widget*>::iterator w = widget_list.begin();
+  for(;  w != widget_list.end(); w++) {
+    if(current_selected == (*w))
+      break;
+  }
+  w++;
+  // The next widget is not the end ?
+  if(w != widget_list.end()) {
+    current_selected = (*w);
+  } else {
+    current_selected = (*widget_list.begin());
+  }
+  current_selected->Select();
+}
+
+void WidgetList::SetFocusOnPreviousWidget()
+{
+  Widget * previous_one = NULL;
+  // No widget => exit
+  if(widget_list.size() == 0) {
+    current_selected = NULL;
+    return;
+  }
+  // Previous selection ?
+  if(current_selected != NULL)
+    current_selected->Unselect();
+  else {
+    current_selected = (*widget_list.begin());
+    current_selected->Select();
+    return;
+  }
+  std::list<Widget*>::iterator w = widget_list.begin();
+  for(;  w != widget_list.end(); w++) {
+    if(current_selected == (*w))
+      break;
+    previous_one = (*w);
+  }
+  // The next widget is not the end ?
+  if(previous_one == NULL) {
+    w = widget_list.end(); w--;
+    current_selected = (*w);
+  } else {
+    current_selected = previous_one;
+  }
+  current_selected->Select();
+}
+
+Widget * WidgetList::GetCurrentSelectedWidget() const
+{
+  return current_selected;
 }
 
 void WidgetList::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
