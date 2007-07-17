@@ -51,9 +51,9 @@ const uint SOUND_W = 530;
 const uint SOUND_H = 170;
 
 const uint GRAPHIC_X = 30;
-const uint GRAPHIC_Y = SOUND_Y + SOUND_H + 30;
+const uint GRAPHIC_Y = SOUND_Y + SOUND_H + 20;
 const uint GRAPHIC_W = 530;
-const uint GRAPHIC_H = 290;
+const uint GRAPHIC_H = 330;
 
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
