@@ -27,6 +27,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <unistd.h>
+#include <getopt.h>
 using namespace std;
 
 #include <SDL.h>
@@ -56,6 +58,8 @@ using namespace std;
 
 #include "network/download.h"
 
+static menu_item choice = menuNULL;
+
 AppWormux *AppWormux::singleton = NULL;
 
 AppWormux *AppWormux::GetInstance()
@@ -72,25 +76,27 @@ AppWormux::AppWormux():
 {
 }
 
-int AppWormux::main(int argc, char **argv)
+int AppWormux::main(int argc, char *argv[])
 {
   bool quit = false;
 
   try
   {
-    Init(argc, argv);
+    ParseArgs(argc, argv);
+    Init();
     do
       {
 	Main_Menu main_menu;
-	menu_item choix;
 
-	StatStart("Main:Menu");
-	choix = main_menu.Run();
-	StatStop("Main:Menu");
+	if (choice == menuNULL) {
+	  StatStart("Main:Menu");
+	  choice = main_menu.Run();
+	  StatStop("Main:Menu");
+	}
 
 	ActionHandler::GetInstance()->Flush();
 	
-	switch (choix)
+	switch (choice)
 	  {
 	  case menuPLAY:
 	    {
@@ -121,6 +127,7 @@ int AppWormux::main(int argc, char **argv)
 	  default:
 	    break;
 	  }
+	choice = menuNULL;
       }
     while (!quit);
 
@@ -143,19 +150,57 @@ int AppWormux::main(int argc, char **argv)
   return 0;
 }
 
-void AppWormux::Init(int argc, char **argv)
+void AppWormux::Init()
 {
   Config::GetInstance();  // init config first, because it initializes i18n
 
   InitFonts();
   DisplayWelcomeMessage();
-  InitDebugModes(argc, argv);
 
   teams_list.LoadList();
 
   DisplayLoadingPicture();
 
-  jukebox.Init();
+  jukebox.Init();  
+
+  cout << "[ " << _("Run game") << " ]" << endl;
+}
+
+void AppWormux::ParseArgs(int argc, char* argv[])
+{
+  char c;
+  int option_index = 0;
+  struct option long_options[] =
+    {
+      {"help", 0, 0, 'h'},
+      {"version", 0, 0, 'v'},
+      {"play", 0, 0, 'p'},
+      {"network", 0, 0, 'n'},
+      {0, 0, 0, 0}
+    };
+
+  while ((c = getopt_long (argc, argv, "hvpn",
+			   long_options, &option_index)) != -1)
+    {
+      switch (c)
+	{
+	case 'h':
+	  printf("usage: %s [-h|--help] [-v|--version] [-p|--play] [-n|--network]\n", argv[0]);
+	  exit(0);
+	  break;
+	case 'v':
+	  DisplayWelcomeMessage();
+	  exit(0);
+	  break;
+	case 'p':
+	  choice = menuPLAY;
+	  break;
+	case 'n':
+	  choice = menuNETWORK;
+	  break;
+	}
+    }
+  InitDebugModes(argc, argv);
 }
 
 void AppWormux::DisplayLoadingPicture()
@@ -244,11 +289,9 @@ void AppWormux::DisplayWelcomeMessage()
   cout << "This program was compiled in DEBUG mode (development version)"
        << endl << endl;
 #endif
-
-  cout << "[ " << _("Run game") << " ]" << endl;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
   AppWormux::GetInstance()->main(argc, argv);
   delete AppWormux::GetInstance();
