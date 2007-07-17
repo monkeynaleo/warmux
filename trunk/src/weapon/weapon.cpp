@@ -642,7 +642,7 @@ bool Weapon::IsLoading() const
   return m_first_time_loading;
 }
 
-void Weapon::ChooseTarget(Point2i mouse_pos)
+void Weapon::ChooseTarget(Point2i /*mouse_pos*/)
 {
 }
 

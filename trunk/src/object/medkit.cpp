@@ -82,7 +82,7 @@ void Medkit::Refresh()
   if (!anim->IsFinished() && !parachute) anim->Update();
 }
 
-void Medkit::ApplyMedkit(Team &equipe, Character &ver) {
+void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) {
   std::ostringstream txt;
  txt << Format(ngettext(
                 "%s has won %u point of energy!",

@@ -73,7 +73,7 @@ void PictureWidget::SetNoSurface()
   spr = NULL;
 }
 
-void PictureWidget::Draw(const Point2i &mousePosition,
+void PictureWidget::Draw(const Point2i &/*mousePosition*/,
 			 Surface& surf) const
 {
   if (spr != NULL) {

@@ -168,7 +168,7 @@ bool GameMenu::signal_cancel()
   return true;
 }
 
-void GameMenu::Draw(const Point2i &mousePosition)
+void GameMenu::Draw(const Point2i &/*mousePosition*/)
 {
 
 }

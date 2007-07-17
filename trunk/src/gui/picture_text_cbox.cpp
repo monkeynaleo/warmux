@@ -45,7 +45,7 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
   txt_label->SetMaxWidth (GetSizeX());
 }
 
-void PictureTextCBox::Draw(const Point2i &mousePosition, Surface& surf) const
+void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
   Surface video_window = AppWormux::GetInstance()->video.window;
 

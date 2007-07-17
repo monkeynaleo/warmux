@@ -253,7 +253,7 @@ void WeaponProjectile::SignalOutOfMap()
 }
 
 // Implement it in subclass to randomize fire
-void WeaponProjectile::RandomizeShoot(double &angle,double &strength)
+void WeaponProjectile::RandomizeShoot(double &/*angle*/,double &/*strength*/)
 {
 }
 

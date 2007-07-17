@@ -575,7 +575,7 @@ void PhysicalObj::SignalRebound()
      jukebox.Play("share", m_rebound_sound) ;
 }
 
-void PhysicalObj::SignalObjectCollision(PhysicalObj * obj) {}
+void PhysicalObj::SignalObjectCollision(PhysicalObj * /*obj*/) {}
 
 void PhysicalObj::SignalGroundCollision() {}
 

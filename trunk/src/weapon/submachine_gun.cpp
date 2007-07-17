@@ -49,7 +49,7 @@ SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
   camera_follow_closely = false;
 }
 
-void SubMachineGunBullet::RandomizeShoot(double &angle,double &strength)
+void SubMachineGunBullet::RandomizeShoot(double &angle,double &/*strength*/)
 {
   angle += M_PI * randomSync.GetDouble(-SUBMACHINE_RANDOM_ANGLE,SUBMACHINE_RANDOM_ANGLE);
 }

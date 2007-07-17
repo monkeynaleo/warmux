@@ -63,7 +63,7 @@ CheckBox::~CheckBox()
   delete txt_label;
 }
 
-void CheckBox::Draw(const Point2i &mousePosition, Surface& surf) const
+void CheckBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
 {
   if (!hidden)
     {
@@ -78,13 +78,13 @@ void CheckBox::Draw(const Point2i &mousePosition, Surface& surf) const
     }
 }
 
-Widget* CheckBox::Click(const Point2i &mousePosition, uint button)
+Widget* CheckBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   // do nothing since user has not released the button
   return this;
 }
 
-Widget* CheckBox::ClickUp(const Point2i &mousePosition, uint button)
+Widget* CheckBox::ClickUp(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   need_redrawing = true;
   m_value = !m_value;

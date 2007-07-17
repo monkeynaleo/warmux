@@ -89,10 +89,10 @@ Action::Action (const char *is, DistantComputer* _creator)
   is += 4;
   m_timestamp = (uint)SDLNet_Read32(is);
   is += 4;
-  int m_lenght = SDLNet_Read32(is);
+  int m_length = SDLNet_Read32(is);
   is += 4;
 
-  for(int i=0; i < m_lenght; i++)
+  for(int i=0; i < m_length; i++)
   {
     uint32_t val = SDLNet_Read32(is);
     var.push_back(val);
@@ -277,17 +277,17 @@ std::string Action::PopString()
     return "";
   }
 
-  int lenght = PopInt();
+  int length = PopInt();
 
   std::string str="";
 
-  NET_ASSERT((int)var.size() >= lenght/4)
+  NET_ASSERT((int)var.size() >= length/4)
   {
     if(creator) creator->force_disconnect = true;
     return "";
   }
 
-  while(lenght > 0)
+  while(length > 0)
   {
     NET_ASSERT(var.size() > 0)
     {
@@ -301,7 +301,7 @@ std::string Action::PopString()
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
     memcpy(tmp_str, &tmp, 4);
     str += tmp_str;
-    lenght -= 4;
+    length -= 4;
 #else
     char* c_tmp_str = (char*)(&tmp_str) + 3;
     char* c_tmp = (char*)&tmp;
@@ -309,7 +309,7 @@ std::string Action::PopString()
       *(c_tmp_str--) = *(c_tmp++);
 
     str += tmp_str;
-    lenght -= 4;
+    length -= 4;
 #endif
     }
   MSG_DEBUG( "action", " (%s) Poping string : %s",

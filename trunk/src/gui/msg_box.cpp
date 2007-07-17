@@ -75,7 +75,7 @@ void MsgBox::NewMessage(const std::string &msg, const Color& color)
   ForceRedraw();
 }
 
-void MsgBox::Draw(const Point2i &mousePosition, Surface& surf) const
+void MsgBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
 {
   // Draw the border
   surf.BoxColor(*this, defaultOptionColorBox);

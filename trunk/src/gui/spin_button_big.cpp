@@ -125,7 +125,7 @@ Widget* SpinButtonBig::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* SpinButtonBig::Click(const Point2i &mousePosition, uint button)
+Widget* SpinButtonBig::Click(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   return NULL;
 }

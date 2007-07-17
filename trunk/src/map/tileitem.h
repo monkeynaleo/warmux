@@ -39,12 +39,12 @@ public:
   virtual unsigned char GetAlpha(const Point2i &pos) = 0;
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
   virtual void Dig(const Point2i &center, const uint radius) = 0;
-  virtual void MergeSprite(const Point2i &position, Surface& spr) {};
+  virtual void MergeSprite(const Point2i &/*position*/, Surface& /*spr*/) {};
   virtual Surface GetSurface() = 0;
   virtual void Draw(const Point2i &pos) = 0;
   virtual bool IsTotallyEmpty() const = 0;
 #ifdef DBG_TILE
-  virtual void FillWithRGB(Uint8 r, Uint8 g, Uint8 b) {};
+  virtual void FillWithRGB(Uint8 /*r*/, Uint8 /*g*/, Uint8 /*b*/) {};
 #endif
 };
 
@@ -54,10 +54,10 @@ public:
   TileItem_Empty () {};
   ~TileItem_Empty () {};
 
-  unsigned char GetAlpha (const Point2i &pos){return 0;};
-  void Dig(const Point2i &position, const Surface& dig){};
+  unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
+  void Dig(const Point2i &/*position*/, const Surface& /*dig*/){};
   Surface GetSurface(){return *new Surface();};
-  void Dig(const Point2i &center, const uint radius) {};
+  void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i &pos);
   bool IsTotallyEmpty() const {return true;};
 };

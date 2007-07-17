@@ -149,10 +149,6 @@ if test "x$GCC" = "xyes"; then
         GCC_FLAGS="$GCC_FLAGS -W"
     fi
 
-    dnl Skip 'unused parameter' warning
-    dnl This is needed for virtual function that do not use all parameters
-    GCC_FLAGS="$GCC_FLAGS -Wno-unused-parameter"
-
     if test "x${debug}" = "xyes"; then
         GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG"
     else

@@ -48,7 +48,7 @@ Label::~Label()
   delete txt_label;
 }
 
-void Label::Draw(const Point2i &mousePosition, Surface& surf) const
+void Label::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
   if (!hidden)
     {

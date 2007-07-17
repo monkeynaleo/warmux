@@ -229,7 +229,7 @@ public:
 
   // Notify a move. It is usefull only for weapon which have strong
   // interactions with the physical engine such as grapple
-  virtual void NotifyMove(bool collision){};
+  virtual void NotifyMove(bool /*collision*/){};
 
   // Handle a keyboard event.
 

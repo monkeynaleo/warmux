@@ -47,7 +47,7 @@ void Box::Redraw(const Rectanglei& rect,
 }
 
 void Box::Update(const Point2i &mousePosition,
-		 const Point2i &lastMousePosition,
+		 const Point2i &/*lastMousePosition*/,
 		 Surface& surf)
 {
   if (need_redrawing) {
@@ -58,7 +58,7 @@ void Box::Update(const Point2i &mousePosition,
   need_redrawing = false;
 }
 
-void Box::Draw(const Point2i &mousePosition,
+void Box::Draw(const Point2i &/*mousePosition*/,
 	       Surface& surf) const
 {
   Rectanglei rect(position, size);

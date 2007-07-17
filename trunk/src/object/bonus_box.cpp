@@ -97,7 +97,7 @@ void BonusBox::PickRandomWeapon() {
     nbr_ammo = weapon_map[weapon_num].second;
 }
 
-void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
+void BonusBox::ApplyBonus(Team &equipe, Character &/*ver*/) {
   if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
     /*this next 'if' should never be true, but I am loath to remove it just in case. */

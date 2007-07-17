@@ -181,7 +181,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
 
 }
 
-void CreditsMenu::Draw(const Point2i& mousePosition)
+void CreditsMenu::Draw(const Point2i& /*mousePosition*/)
 {
 }
 

@@ -178,7 +178,7 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
   widgets.ClickUp(mousePosition, button);
 }
 
-void OptionMenu::OnClick(const Point2i &mousePosition, int button)
+void OptionMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
 {
 
 }
@@ -233,7 +233,7 @@ bool OptionMenu::signal_cancel()
   return true;
 }
 
-void OptionMenu::Draw(const Point2i &mousePosition)
+void OptionMenu::Draw(const Point2i &/*mousePosition*/)
 {
 }
 

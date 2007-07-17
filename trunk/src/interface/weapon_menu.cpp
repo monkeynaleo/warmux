@@ -326,7 +326,7 @@ void WeaponsMenu::Draw()
     UpdateCurrentOverflyItem(tools_menu);
 }
 
-void WeaponsMenu::SetHelp(std::ostringstream msg)
+void WeaponsMenu::SetHelp(std::ostringstream /*msg*/)
 {
 }
 
@@ -352,7 +352,7 @@ Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly)
   return NULL;
 }
 
-bool WeaponsMenu::ActionClic(const Point2i &mouse_pos)
+bool WeaponsMenu::ActionClic(const Point2i &/*mouse_pos*/)
 {
   Weapon * tmp;
   if(!show)
