@@ -545,6 +545,13 @@
 	<email>sampie_AT_ariana-dsl.utu_DOT_fi</email>
       </author>
       <author>
+	<nickname>Snark</nickname>
+	<name>Julien Puydt</name>
+	<description>Patch to compile without -Wno-unused-parameter, to improve menu appearance</description>
+	<email>julien.puydt_AT_laposte_DOT_net</email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>Timo</nickname>
 	<name>Timo HORSTSCHÄFER</name>
 	<description>Riot bomb weapon</description>
