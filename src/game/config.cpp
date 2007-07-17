@@ -78,6 +78,7 @@ Config::Config():
   video_height(600),
   video_fullscreen(false),
   max_fps(0),
+  bling_bling_interface(false),
   sound_music(true),
   sound_effects(true),
   sound_frequency(44100),
@@ -208,6 +209,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
   //=== Video ===
   if ((elem = XmlReader::GetMarker(xml, "video")) != NULL)
   {
+    XmlReader::ReadBool(elem, "bling_bling_interface", bling_bling_interface);
     XmlReader::ReadUint(elem, "max_fps", max_fps);
     XmlReader::ReadBool(elem, "display_wind_particles", display_wind_particles);
     XmlReader::ReadBool(elem, "display_energy_character", display_energy_character);
@@ -294,6 +296,7 @@ bool Config::SaveXml()
   doc.WriteElement(video_node, "display_wind_particles", ulong2str(display_wind_particles));
   doc.WriteElement(video_node, "display_energy_character", ulong2str(display_energy_character));
   doc.WriteElement(video_node, "display_name_character", ulong2str(display_name_character));
+  doc.WriteElement(video_node, "bling_bling_interface", ulong2str(bling_bling_interface));
   doc.WriteElement(video_node, "default_mouse_cursor", ulong2str(default_mouse_cursor));
   doc.WriteElement(video_node, "scroll_on_border", ulong2str(scroll_on_border));
   doc.WriteElement(video_node, "width", ulong2str(app->video.window.GetWidth()));
@@ -432,6 +435,16 @@ uint Config::GetVideoHeight() const
 void Config::SetVideoHeight(const uint height)
 {
   video_height = height;
+}
+
+bool Config::IsBlingBlingInterface() const
+{
+  return bling_bling_interface;
+}
+
+void Config::SetBlingBlingInterface(bool bling_bling)
+{
+  bling_bling_interface = bling_bling;
 }
 
 bool Config::GetSoundMusic() const

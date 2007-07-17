@@ -38,6 +38,7 @@ class WeaponMenuItem : public PolygonItem {
  public:
   Weapon* weapon;
   int zoom_start_time;
+  uint zoom_time;
 
  public:
   WeaponMenuItem(Weapon * weapon, const Point2d & position);
@@ -45,6 +46,8 @@ class WeaponMenuItem : public PolygonItem {
   bool IsMouseOver();
   void SetZoom(bool value);
   void Draw(Surface * dest);
+  uint GetZoomTime() const;
+  void SetZoomTime(uint time);
   Weapon * GetWeapon() const;
 };
 
@@ -66,6 +69,9 @@ class WeaponsMenu
   bool show;
   uint motion_start_time;
   uint select_start_time;
+  uint icons_draw_time;
+  uint jelly_time;
+  uint rotation_time;
 
   int nbr_weapon_type; // number of weapon type = number of rows
   int * nb_weapon_type;
@@ -88,6 +94,12 @@ class WeaponsMenu
   Sprite * GetInfiniteSymbol() const;
   Sprite * GetCrossSymbol() const;
   Weapon * UpdateCurrentOverflyItem(Polygon * poly);
+  uint GetJellyTime() const;
+  uint GetIconsDrawTime() const;
+  uint GetRotationTime() const;
+  void SetJellyTime(uint time);
+  void SetIconsDrawTime(uint time);
+  void SetRotationTime(uint time);
 };
 
 #endif
