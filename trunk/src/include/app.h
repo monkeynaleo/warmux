@@ -35,7 +35,8 @@ private:
   static AppWormux * singleton;
 
 private:
-  void Init(int, char**);
+  void Init();
+  void ParseArgs(int argc, char* argv[]);
   void InitWindow();
   void DisplayLoadingPicture();
   void InitFonts();
@@ -46,7 +47,7 @@ private:
 public:
   static AppWormux * GetInstance();
 
-  int main( int argc, char ** argv );
+  int main(int argc, char *argv[]);
 };
 
 #endif
