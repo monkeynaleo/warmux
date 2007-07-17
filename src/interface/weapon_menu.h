@@ -62,7 +62,6 @@ class WeaponsMenu
   AffineTransform2D shear;
   AffineTransform2D rotation;
   AffineTransform2D zoom;
-  Sprite * infinite;
   Sprite * cross;
   bool show;
   uint motion_start_time;
