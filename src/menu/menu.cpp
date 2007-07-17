@@ -46,7 +46,7 @@ Menu::Menu(std::string bg, t_action _actions) :
     actions_buttons = NULL;    
   } else {
 
-    actions_buttons = new HBox( Rectanglei(x, y, 1, 40), false);
+    actions_buttons = new HBox( Rectanglei(x, y, 1, 50), false);
 
     if (actions == vOk || actions == vOkCancel) {
       b_ok = new Button( Point2i(0, 0), res, "menu/valider"); 
