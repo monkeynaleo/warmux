@@ -29,8 +29,9 @@
   <surface name="map_label" file="menu/map_label.png" />
   <surface name="mode_label" file="menu/mode_label.png" />
 
-  <surface name="enabled" file="menu/validate.png" />
-  <surface name="disabled" file="menu/cancel.png" />
+  <surface name="enabled" file="menu/enabled.png" />
+  <surface name="disabled_front" file="menu/disabled_front.png" />
+  <surface name="disabled_back" file="menu/disabled_back.png" />
 
   <!-- Sound options -->
 
