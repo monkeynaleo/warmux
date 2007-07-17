@@ -108,7 +108,7 @@ void WeaponMenuItem::Draw(Surface * dest)
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
   if(nb_bullets ==  INFINITE_AMMO) {
-    Interface::GetInstance()->GetWeaponsMenu().GetInfiniteSymbol()->Blit(*dest, tmp);
+    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", gray_color);
   } else if(nb_bullets == 0) {
     tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
     Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->Blit(*dest, tmp);
@@ -132,7 +132,6 @@ WeaponsMenu::WeaponsMenu():
   shear(),
   rotation(),
   zoom(),
-  infinite(NULL),
   cross(NULL),
   show(false),
   motion_start_time(0),
@@ -141,7 +140,6 @@ WeaponsMenu::WeaponsMenu():
 {
   // Loading value from XML
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
-  infinite = new Sprite(resource_manager.LoadImage(res, "interface/infinite"));
   cross = new Sprite(resource_manager.LoadImage(res, "interface/cross"));
   // Polygon Size
   Point2i size = resource_manager.LoadPoint2i(res, "interface/weapons_interface_size");
@@ -272,11 +270,6 @@ void WeaponsMenu::SwitchDisplay()
 bool WeaponsMenu::IsDisplayed() const
 {
   return show;
-}
-
-Sprite * WeaponsMenu::GetInfiniteSymbol() const
-{
-  return infinite;
 }
 
 Sprite * WeaponsMenu::GetCrossSymbol() const
