@@ -178,8 +178,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i pos (0, 0);
 
-  uint x = 60;
-  uint y = 60;
+  uint x = 20;
+  uint y = 20;
 
   ComputeTeamsOrder();
 
@@ -187,15 +187,18 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   if (first_team) {
     jukebox.Play("share","victory");
 
-    winner_box = new VBox(Rectanglei(x, y, 180, 0), true);
-    winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 180,1), Font::FONT_LARGE, Font::FONT_BOLD));
+    winner_box = new VBox(Rectanglei(x, y, 240, 0), true);
+    winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 240,1), Font::FONT_BIG, Font::FONT_BOLD,
+				    white_color, true));
     PictureWidget* winner_logo = new PictureWidget( Rectanglei(0,0,64,64));
     winner_logo->SetSurface(first_team->GetBigFlag());
     winner_box->AddWidget(winner_logo);
-    winner_box->AddWidget(new Label(first_team->GetName(), Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    winner_box->AddWidget(new Label(first_team->GetName(), Rectanglei(0,0, 240,1), Font::FONT_BIG, Font::FONT_NORMAL,
+				    white_color, true));
 
     std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
-    winner_box->AddWidget(new Label(tmp, Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    winner_box->AddWidget(new Label(tmp, Rectanglei(0,0, 240,1), Font::FONT_MEDIUM, Font::FONT_NORMAL,
+				    white_color, true));
     
     widgets.AddWidget(winner_box);
   }
@@ -203,7 +206,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   // Load the podium img
   podium_img = resource_manager.LoadImage(res, "menu/podium");
   
-  x+=200;
+  x+=260;
 				   
   //Team selection
   team_box = new HBox(Rectanglei(x, y, 0, max_height), true);
