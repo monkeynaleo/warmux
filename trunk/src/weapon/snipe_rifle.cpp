@@ -26,6 +26,7 @@
 #include "game/game_loop.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "interface/game_msg.h"
 #include "map/map.h"
@@ -157,7 +158,7 @@ void SnipeRifle::DrawBeam()
 {
   Point2i pos1 = laser_beam_start - camera.GetPosition();
   Point2i pos2 = targeted_point - camera.GetPosition();
-  AppWormux::GetInstance()->video.window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
+  AppWormux::GetInstance()->video->window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
 
   // Set area of the screen to be redrawn:
   // Splited into little rectangles to avoid too large area of redraw

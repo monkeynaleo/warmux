@@ -29,6 +29,7 @@
 #include "gui/box.h"
 #include "gui/button_text.h"
 #include "gui/list_box.h"
+#include "graphic/video.h"
 #include "network/net_error_msg.h"
 #include "network/index_server.h"
 #include "tool/i18n.h"
@@ -42,8 +43,8 @@ InternetMenu::InternetMenu() :
   
   Rectanglei stdRect(0, 0, 300, 64);
 
-  uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
-  uint y_box = AppWormux::GetInstance()->video.window.GetHeight()/2 - 200;
+  uint x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - stdRect.GetSizeX()/2;
+  uint y_box = AppWormux::GetInstance()->video->window.GetHeight()/2 - 200;
 
   connection_box = new VBox(Rectanglei( x_button, y_box, stdRect.GetSizeX(), 1), false);
   connection_box->SetBorder(Point2i(0,0));

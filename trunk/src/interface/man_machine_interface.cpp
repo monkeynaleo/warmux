@@ -27,6 +27,7 @@
 #include "game/game.h"
 #include "game/game_loop.h"
 #include "game/game_mode.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "include/action_handler.h"
 #include "map/camera.h"
@@ -229,7 +230,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
 	Game::GetInstance()->TogglePause();
       return;
     case KEY_FULLSCREEN:
-      AppWormux::GetInstance()->video.ToggleFullscreen();
+      AppWormux::GetInstance()->video->ToggleFullscreen();
       return;
     case KEY_CHAT:
       if(Network::IsConnected())

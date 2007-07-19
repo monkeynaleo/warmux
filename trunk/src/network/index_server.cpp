@@ -32,6 +32,7 @@
 #include "tool/i18n.h"
 #include "tool/random.h"
 #include "game/config.h"
+#include "graphic/video.h"
 
 IndexServer index_server;
 
@@ -83,7 +84,7 @@ Network::connection_state_t IndexServer::Connect()
 bool IndexServer::ConnectTo(const std::string & address, const int & port)
 {
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
-  AppWormux::GetInstance()->video.Flip();
+  AppWormux::GetInstance()->video->Flip();
 
   Network::Init(); // To get SDL_net initialized
 

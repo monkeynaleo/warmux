@@ -28,6 +28,7 @@
 #include "game/game_loop.h"
 #include "graphic/text.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "include/action_handler.h"
 #include "map/camera.h"
@@ -529,7 +530,7 @@ void Weapon::Draw(){
   }
 
   if ( m_image )
-    m_image->Blit( AppWormux::GetInstance()->video.window, Point2i(x, y) - camera.GetPosition());
+    m_image->Blit( AppWormux::GetInstance()->video->window, Point2i(x, y) - camera.GetPosition());
 }
 
 // Draw the weapon fire when firing

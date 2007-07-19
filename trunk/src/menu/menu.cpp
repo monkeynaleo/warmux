@@ -22,6 +22,7 @@
 #include "menu.h"
 #include "include/app.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/box.h"
 #include "sound/jukebox.h"
@@ -33,8 +34,8 @@ Menu::Menu(std::string bg, t_action _actions) :
   close_menu = false ;
   AppWormux * app = AppWormux::GetInstance();
 
-  uint x = app->video.window.GetWidth() / 2;
-  uint y = app->video.window.GetHeight() - 50;
+  uint x = app->video->window.GetWidth() / 2;
+  uint y = app->video->window.GetHeight() - 50;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( resource_manager.LoadImage( res, bg));
@@ -128,8 +129,8 @@ void Menu::key_down()
 
 void Menu::DrawBackground()
 {
-  background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
-  background->Blit(AppWormux::GetInstance()->video.window, 0, 0);
+  background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());
+  background->Blit(AppWormux::GetInstance()->video->window, 0, 0);
 }
 
 void Menu::Redraw(const Rectanglei& rect, Surface& surf)
@@ -184,7 +185,7 @@ void Menu::Run (bool skip_menu)
 	    key_down();
 	    break;
 	  case SDLK_F10:
-	    AppWormux::GetInstance()->video.ToggleFullscreen();
+	    AppWormux::GetInstance()->video->ToggleFullscreen();
 	    break;
 	  default:
 	    widgets.SendKey(event.key.keysym);
@@ -217,14 +218,14 @@ void Menu::Display(const Point2i& mousePosition)
   uint delay = 0;
   uint start = SDL_GetTicks();
 
-  widgets.Update(mousePosition, AppWormux::GetInstance()->video.window);
+  widgets.Update(mousePosition, AppWormux::GetInstance()->video->window);
   Draw(mousePosition);
-  AppWormux::GetInstance()->video.Flip();
+  AppWormux::GetInstance()->video->Flip();
 
   // to limit CPU
   delay = SDL_GetTicks()-start;   
-  if (delay < AppWormux::GetInstance()->video.GetSleepMaxFps())
-    sleep_fps = AppWormux::GetInstance()->video.GetSleepMaxFps() - delay;
+  if (delay < AppWormux::GetInstance()->video->GetSleepMaxFps())
+    sleep_fps = AppWormux::GetInstance()->video->GetSleepMaxFps() - delay;
   else
     sleep_fps = 0;
   SDL_Delay(sleep_fps);

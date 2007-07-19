@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;    plural=n==1 ? 0 :    n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3;    plural=n==1 ? 0 :    n%10>=2 && n%10<=4 && (n%"
+"100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: POLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -57,13 +58,13 @@ msgstr "%s <%s> znany jako %s z %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
 
-#: src/menu/team_box.cpp:78
+#: src/menu/team_box.cpp:77
 #, c-format
 msgid "%s Team"
 msgstr "Drużyna %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:76
+#: src/menu/team_box.cpp:75
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Drużyna %s - zdalna"
@@ -532,14 +533,15 @@ msgstr "Błąd w %s:%lu"
 msgid "Error loading team :"
 msgstr "Błąd podczas wczytywania drużyny:"
 
-#: src/team/team.cpp:154
+#: src/team/team.cpp:155
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Błąd wczytywania danych drużyny %s:"
 
 #: src/game/config.cpp:257
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Błąd podczas tworzenia katalogu \"%s\": nie można zachować pliku "
 "konfiguracyjnego."
@@ -585,7 +587,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Błąd: Nie można uruchomić serwera"
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Błąd: nie mogę odnaleźć skórki \"%s\" dla drużyny \"%s\"."
@@ -616,7 +618,8 @@ msgstr "Pistolet"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "Katalog domowy (zmienna środowiskowa $HOME) nie mógł zostać odnaleziony!"
+msgstr ""
+"Katalog domowy (zmienna środowiskowa $HOME) nie mógł zostać odnaleziony!"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:104
@@ -727,7 +730,8 @@ msgstr "Plecak odrzutowy"
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:102 src/menu/network_menu.cpp:149
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr "Wejdź na kanał #wormux na serwerze irc.freenode.net aby znaleźć przeciwników"
+msgstr ""
+"Wejdź na kanał #wormux na serwerze irc.freenode.net aby znaleźć przeciwników"
 
 #: src/map/maps_list.cpp:269
 msgid "Load maps:"
@@ -1098,7 +1102,8 @@ msgstr[2] "Zaczekaj! %i graczy nie jest jeszcze gotowych!"
 
 #: src/menu/network_menu.cpp:389
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr "Oczekiwanie na odpowiedź serwera, możesz tylko anulować lub z kimś pogadać!"
+msgstr ""
+"Oczekiwanie na odpowiedź serwera, możesz tylko anulować lub z kimś pogadać!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -1195,4 +1200,3 @@ msgstr "o Wczytywanie profilu dźwięków: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otworzono plik audio - %d Hz %d bit"
-

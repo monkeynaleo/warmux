@@ -23,6 +23,7 @@
 #include <SDL_endian.h>
 #include "tile.h"
 #include "game/config.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "tool/error.h"
@@ -34,14 +35,14 @@
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 void TileItem_AlphaSoftware::Draw(const Point2i &pos){
-  AppWormux::GetInstance()->video.window.Blit(GetSurface(),
+  AppWormux::GetInstance()->video->window.Blit(GetSurface(),
         pos * CELL_SIZE - camera.GetPosition());
 }
 
 void TileItem_Empty::Draw(const Point2i &/*pos*/)
 {
 #ifdef DBG_TILE
-  AppWormux::GetInstance()->video.window.FillRect(Rectanglei(pos * CELL_SIZE - camera.GetPosition(),CELL_SIZE), c_red);
+  AppWormux::GetInstance()->video->window.FillRect(Rectanglei(pos * CELL_SIZE - camera.GetPosition(),CELL_SIZE), c_red);
 #endif
 }
 // === Implemenation of TileItem_Software_ALpha ==============================

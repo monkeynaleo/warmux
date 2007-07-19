@@ -24,6 +24,7 @@
 #include "gui/button_text.h"
 #include "game/config.h"
 #include "graphic/text.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
@@ -56,9 +57,9 @@ Main_Menu::Main_Menu() :
   int button_width = 402;
   int button_height = 64;
 
-  y_scale = (double)AppWormux::GetInstance()->video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
+  y_scale = (double)AppWormux::GetInstance()->video->window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
 
-  x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - button_width/2;
+  x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - button_width/2;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
@@ -66,11 +67,11 @@ Main_Menu::Main_Menu() :
    skin_right = new Sprite( resource_manager.LoadImage(res,"main_menu/skin_2"));
 
   s_title = resource_manager.LoadImage(res,"main_menu/title");
-  title = new PictureWidget(Rectanglei(AppWormux::GetInstance()->video.window.GetWidth()/2  - s_title.GetWidth()/2 + 10, 0, 648, 168));
+  title = new PictureWidget(Rectanglei(AppWormux::GetInstance()->video->window.GetWidth()/2  - s_title.GetWidth()/2 + 10, 0, 648, 168));
   title->SetSurface(s_title); */
 
   int y = int(290 * y_scale) ;
-  const int y2 = AppWormux::GetInstance()->video.window.GetHeight() + VERSION_DY -20 - button_height;
+  const int y2 = AppWormux::GetInstance()->video->window.GetHeight() + VERSION_DY -20 - button_height;
 
   int dy = std::max((y2-y)/3, button_height);
   if(Config::GetInstance()->IsNetworkActivated())
@@ -198,7 +199,7 @@ bool Main_Menu::signal_ok()
 
 void Main_Menu::DrawBackground()
 {
-  Surface& window = AppWormux::GetInstance()->video.window;
+  Surface& window = AppWormux::GetInstance()->video->window;
 
   Menu::DrawBackground();
   // skin_left->Blit(window, 0, window.GetHeight() - skin_left->GetHeight());

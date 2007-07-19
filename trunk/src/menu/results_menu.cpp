@@ -23,6 +23,7 @@
 
 #include "character/character.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/label.h"
 #include "gui/box.h"
@@ -298,12 +299,12 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_posit
   Surface team_character(team.GetFlag());
   //team_character.Flip(); ==> Why does it not work ?
 
-  AppWormux::GetInstance()->video.window.Blit(team_character, position);
+  AppWormux::GetInstance()->video->window.Blit(team_character, position);
 }
 
 void ResultsMenu::DrawPodium(const Point2i& position)
 {
-  AppWormux::GetInstance()->video.window.Blit(podium_img, position);
+  AppWormux::GetInstance()->video->window.Blit(podium_img, position);
 
   if (first_team)
     DrawTeamOnPodium(*first_team, position, Point2i(60,8));

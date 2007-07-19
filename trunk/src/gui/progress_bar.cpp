@@ -21,6 +21,7 @@
 
 #include "progress_bar.h"
 #include <SDL.h>
+#include "graphic/video.h"
 #include "include/app.h"
 #include "map/map.h"
 #include "tool/math_tools.h"
@@ -150,7 +151,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
     image.FillRect( r_marq, it->color);
   }
   Rectanglei dst(pos.x, pos.y, larg, haut);
-  AppWormux::GetInstance()->video.window.Blit(image, pos);
+  AppWormux::GetInstance()->video->window.Blit(image, pos);
 
   world.ToRedrawOnScreen(dst);
 }

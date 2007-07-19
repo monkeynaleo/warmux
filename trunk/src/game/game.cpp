@@ -23,6 +23,7 @@
 #include "time.h"
 #include "game_init.h"
 #include "game_loop.h"
+#include "graphic/video.h"
 #include "gui/question.h"
 #include "include/app.h"
 #include "interface/keyboard.h"
@@ -136,7 +137,7 @@ void Game::Start()
 
       if (!end)
       {
-        world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
+        world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video->window.GetSize()));
         Keyboard::GetInstance()->Reset();
         Joystick::GetInstance()->Reset();
         want_end_of_game = false;

@@ -23,6 +23,7 @@
 #include "tool/affine_transform.h"
 #include "sprite.h"
 #include "tool/random.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "map/map.h"
 
@@ -689,6 +690,6 @@ void Polygon::Draw(Surface * dest)
 
 void Polygon::DrawOnScreen()
 {
-  Draw(&AppWormux::GetInstance()->video.window);
+  Draw(&AppWormux::GetInstance()->video->window);
   world.ToRedrawOnScreen(GetRectangleToRefresh());
 }

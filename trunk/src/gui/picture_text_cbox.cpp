@@ -24,6 +24,7 @@
 #include "graphic/text.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
 #include "tool/resource_manager.h"
 
 PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &resource_id, 
@@ -48,7 +49,7 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
 
 void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
-  Surface video_window = AppWormux::GetInstance()->video.window;
+  Surface video_window = AppWormux::GetInstance()->video->window;
 
   if (!hidden)
     {

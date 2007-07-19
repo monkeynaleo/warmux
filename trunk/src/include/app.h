@@ -24,12 +24,13 @@
 
 #include <string>
 #include "base.h"
-#include "graphic/video.h"
+
+class Video;
 
 class AppWormux
 {
 public:
-  Video video;
+  Video *video;
 
 private:
   static AppWormux * singleton;
@@ -46,6 +47,7 @@ private:
 
 public:
   static AppWormux * GetInstance();
+  ~AppWormux();
 
   int main(int argc, char *argv[]);
 };

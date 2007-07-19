@@ -29,7 +29,7 @@
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file
-//#define LOG_NETWORK
+#define LOG_NETWORK
 
 const std::string WORMUX_NETWORK_PORT = "3826";
 const uint WORMUX_NETWORK_PORT_INT = 3826;

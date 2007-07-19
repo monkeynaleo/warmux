@@ -23,11 +23,9 @@
 
 #include "network_teams_selection_box.h"
 #include "map_selection_box.h"
-//#include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
-//#include "graphic/video.h"
-//#include "graphic/font.h"
+#include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/label.h"
 #include "gui/msg_box.h"
@@ -36,8 +34,6 @@
 #include "gui/text_box.h"
 #include "include/action_handler.h"
 #include "include/app.h"
-//#include "include/base.h"
-//#include "map/maps_list.h"
 #include "network/index_server.h"
 #include "network/network.h"
 #include "network/network_server.h"
@@ -45,7 +41,6 @@
 #include "team/team.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
-//#include "tool/string_tools.h"
 
 const uint MARGIN_TOP    = 5;
 const uint MARGIN_SIDE   = 5;
@@ -65,7 +60,7 @@ NetworkMenu::NetworkMenu() :
   Rectanglei rectZero(0, 0, 0, 0);
   Rectanglei stdRect (0, 0, 130, 30);
 
-  Surface window = AppWormux::GetInstance()->video.window;
+  Surface window = AppWormux::GetInstance()->video->window;
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
@@ -413,7 +408,7 @@ void NetworkMenu::WaitingForServer()
 	    SendChatMsg();
 	    break;
 	  case SDLK_F10:
-	    AppWormux::GetInstance()->video.ToggleFullscreen();
+	    AppWormux::GetInstance()->video->ToggleFullscreen();
 	    break;
 	  default:
 	    widgets.SendKey(event.key.keysym);

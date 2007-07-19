@@ -26,6 +26,7 @@
 #include "internet_menu.h"
 
 #include "game/config.h"
+#include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/box.h"
 #include "gui/check_box.h"
@@ -45,8 +46,8 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   Rectanglei stdRect(0, 0, 360, 64);
 
-  uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
-  uint y_box = AppWormux::GetInstance()->video.window.GetHeight()/2 - 200;
+  uint x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - stdRect.GetSizeX()/2;
+  uint y_box = AppWormux::GetInstance()->video->window.GetHeight()/2 - 200;
 
   // Connection related widgets
   connection_box = new VBox(Rectanglei( x_button, y_box, stdRect.GetSizeX(), 1), false);
@@ -89,7 +90,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   SetAction(NET_BROWSE_INTERNET);
 
   // Warning about experimental networking
-  msg_box = new MsgBox(Rectanglei( AppWormux::GetInstance()->video.window.GetWidth()/2 - 300,
+  msg_box = new MsgBox(Rectanglei( AppWormux::GetInstance()->video->window.GetWidth()/2 - 300,
 				   y_box+connection_box->GetSizeY() + 30,
 				   600, 200),
 		       Font::FONT_SMALL, Font::FONT_NORMAL);

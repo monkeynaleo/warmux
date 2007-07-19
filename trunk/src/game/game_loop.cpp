@@ -27,6 +27,7 @@
 #include "time.h"
 #include "ai/ai_engine.h"
 #include "character/character.h"
+#include "graphic/video.h"
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "interface/cursor.h"
@@ -255,7 +256,7 @@ void GameLoop::CallDraw()
 {
   Draw();
   StatStart("GameDraw:flip()");
-  AppWormux::GetInstance()->video.Flip();
+  AppWormux::GetInstance()->video->Flip();
   StatStop("GameDraw:flip()");
 }
 
@@ -332,7 +333,7 @@ void GameLoop::MainLoop()
       // How many frame by seconds ?
       fps.Refresh();
       StatStop("GameLoop:Draw()");
-      time_of_next_frame += AppWormux::GetInstance()->video.GetSleepMaxFps();
+      time_of_next_frame += AppWormux::GetInstance()->video->GetSleepMaxFps();
 #ifndef USE_VALGRIND
     }
   }
