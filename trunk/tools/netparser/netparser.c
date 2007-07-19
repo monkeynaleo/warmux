@@ -30,14 +30,13 @@ inline double readDouble(const char *buf)
 
 char *readString(const char *in, int *len)
 {
-    uint32_t length = SDLNet_Read32(in), memlen;
+    uint32_t length = SDLNet_Read32(in);
     char     *out, *ptr;
     int      i;
     
     if (length > 1024*64 || length==0)
     {
-        printf("Suspicious string length (%08X), aborting\n",
-               length, in);
+        printf("Suspicious string length (%08X), aborting\n", length);
         len = 0;
         return NULL;
     }
@@ -67,8 +66,6 @@ typedef struct
 
 static void parse_action(const char *buf, int size, const char *param)
 {
-    const char *ptr = buf;
-    const char *cur = param;
     char       *out, name[256] = { 0, };
     static const char *(network_states[]) =
         { "No network", "Menu OK", "Loading data", "Ready to play", "Playing" };
@@ -275,7 +272,7 @@ int main(int argc, char *argv[])
         {
             if (psize > 1024*1024)
             {
-                printf("Suspicious packet size %u at %i\n", psize, ftell(rec));
+                printf("Suspicious packet size %u at %li\n", psize, ftell(rec));
                 break;
             }
 
@@ -286,7 +283,7 @@ int main(int argc, char *argv[])
         // Read whole packet
         if (fread(buffer, 1, psize, rec) != psize)
         {
-            printf("EOF met abruptly while reading action\n", ftell(rec));
+            printf("EOF at %li met abruptly while reading action\n", ftell(rec));
             break;
         }
 
@@ -295,7 +292,7 @@ int main(int argc, char *argv[])
         a     = &(actions[(type>=UNDEF) ? UNDEF : type]);
         ts    = SDLNet_Read32(buffer+4);
         len   = SDLNet_Read32(buffer+8)*4;
-        printf("Packet %i, %uB at %u: type=%s (%08X) ts=%u len=%u\n",
+        printf("Packet %i, %uB at %li: type=%s (%08X) ts=%u len=%u\n",
                count, psize, ftell(rec), a->name, type, ts, len);
 
         // Parse action body
@@ -311,12 +308,12 @@ int main(int argc, char *argv[])
         // Header check
         if (fread(&psize, 1, 4, rec) != 4)
         {
-            printf("EOF met abruptly while reading action header (%i)\n", ftell(rec));
+            printf("EOF at %li met abruptly while reading action header\n", ftell(rec));
             break;
         }
         if (psize != 0xFFFFFFFF)
         {
-            printf("Sync lost at %u: %08X\n", ftell(rec), psize);
+            printf("Sync lost at %li: %08X\n", ftell(rec), psize);
             break;
         }
 
