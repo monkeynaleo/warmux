@@ -60,6 +60,7 @@ using namespace std;
 
 static menu_item choice = menuNULL;
 static bool skip_menu = false;
+static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
 
 AppWormux *AppWormux::singleton = NULL;
 
@@ -114,7 +115,8 @@ int AppWormux::main(int argc, char *argv[])
 	  case menuNETWORK:
 	    {
 	      NetworkConnectionMenu network_connection_menu;
-	      network_connection_menu.Run();
+	      network_connection_menu.SetAction(net_action);
+	      network_connection_menu.Run(skip_menu);
 	      break;
 	    }
 	  case menuOPTIONS:
@@ -136,6 +138,7 @@ int AppWormux::main(int argc, char *argv[])
 	  }
 	choice = menuNULL;
 	skip_menu = false;
+	net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
       }
     while (!quit);
 
@@ -185,17 +188,21 @@ void AppWormux::ParseArgs(int argc, char* argv[])
       {"help", 0, 0, 'h'},
       {"version", 0, 0, 'v'},
       {"play", 0, 0, 'p'},
-      {"network", 0, 0, 'n'},
+      {"internet", 0, 0, 'i'},
+      {"client", 0, 0, 'c'},
+      {"server", 0, 0, 's'},
       {0, 0, 0, 0}
     };
 
-  while ((c = getopt_long (argc, argv, "hvpn",
+  while ((c = getopt_long (argc, argv, "hvpics",
 			   long_options, &option_index)) != -1)
     {
       switch (c)
 	{
 	case 'h':
-	  printf("usage: %s [-h|--help] [-v|--version] [-p|--play] [-n|--network] [-d debug_masks]\n", argv[0]);
+	  printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
+		 " [-i|--internet] [-s|--server] [-c|--client]"
+		 " [-d debug_masks]\n", argv[0]);
 	  exit(0);
 	  break;
 	case 'v':
@@ -206,8 +213,20 @@ void AppWormux::ParseArgs(int argc, char* argv[])
 	  choice = menuPLAY;
 	  skip_menu = true;
 	  break;
-	case 'n':
+	case 'c':
 	  choice = menuNETWORK;
+	  net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
+	  skip_menu = true;
+	  break;
+	case 's':
+	  choice = menuNETWORK;
+	  net_action = NetworkConnectionMenu::NET_HOST;
+	  skip_menu = true;
+	  break;
+	case 'i':
+	  choice = menuNETWORK;
+	  net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+	  skip_menu = true;
 	  break;
 	}
     }
