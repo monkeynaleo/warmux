@@ -28,6 +28,7 @@
 #include <iostream>
 #include "surface.h"
 #include "game/game.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -386,7 +387,7 @@ void Sprite::DrawXY(const Point2i &pos){
   if( !show )
     return;
 
-  Blit(AppWormux::GetInstance()->video.window, pos);
+  Blit(AppWormux::GetInstance()->video->window, pos);
 }
 
 void Sprite::Show() { show = true; }

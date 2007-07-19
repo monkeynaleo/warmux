@@ -22,6 +22,7 @@
 #include "game_msg.h"
 #include <iostream>
 #include "game/time.h"
+#include "graphic/video.h"
 #include "include/app.h"
 
 // Hauteur de la police de caractere "mini"
@@ -64,7 +65,7 @@ void GameMessages::Draw(){
   uint msgy = 50;
 
   for( iterator i=liste.begin(); i != liste.end(); ++i ){
-    (*i)->DrawCenterTop(AppWormux::GetInstance()->video.window.GetWidth()/2, msgy);
+    (*i)->DrawCenterTop(AppWormux::GetInstance()->video->window.GetWidth()/2, msgy);
     msgy += HAUT_POLICE_MINI + INTERLIGNE_MINI;
   }
 }

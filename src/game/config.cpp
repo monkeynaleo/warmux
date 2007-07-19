@@ -31,6 +31,7 @@
 #ifdef WIN32
 #  include <direct.h>
 #endif
+#include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "network/network.h"
@@ -291,7 +292,7 @@ bool Config::SaveXml()
   }
 
   //=== Video ===
-  AppWormux * app = AppWormux::GetInstance();
+  Video * video = AppWormux::GetInstance()->video;
   xmlpp::Element *video_node = root->add_child("video");
   doc.WriteElement(video_node, "display_wind_particles", ulong2str(display_wind_particles));
   doc.WriteElement(video_node, "display_energy_character", ulong2str(display_energy_character));
@@ -299,12 +300,12 @@ bool Config::SaveXml()
   doc.WriteElement(video_node, "bling_bling_interface", ulong2str(bling_bling_interface));
   doc.WriteElement(video_node, "default_mouse_cursor", ulong2str(default_mouse_cursor));
   doc.WriteElement(video_node, "scroll_on_border", ulong2str(scroll_on_border));
-  doc.WriteElement(video_node, "width", ulong2str(app->video.window.GetWidth()));
-  doc.WriteElement(video_node, "height", ulong2str(app->video.window.GetHeight()));
+  doc.WriteElement(video_node, "width", ulong2str(video->window.GetWidth()));
+  doc.WriteElement(video_node, "height", ulong2str(video->window.GetHeight()));
   doc.WriteElement(video_node, "full_screen",
-                   ulong2str(static_cast<uint>(app->video.IsFullScreen())) );
+                   ulong2str(static_cast<uint>(video->IsFullScreen())) );
   doc.WriteElement(video_node, "max_fps",
-                   long2str(static_cast<int>(app->video.GetMaxFps())));
+                   long2str(static_cast<int>(video->GetMaxFps())));
 
   if (transparency == ALPHA)
     doc.WriteElement(video_node, "transparency", "alpha");

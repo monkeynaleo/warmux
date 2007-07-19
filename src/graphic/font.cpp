@@ -20,6 +20,7 @@
 #include <iostream>
 #include "font.h"
 #include "game/config.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "map/map.h"
 #include "tool/file_tools.h"
@@ -117,7 +118,7 @@ void Font::SetItalic()
 }
 
 void Font::Write(const Point2i &pos, Surface &surface){
-  AppWormux::GetInstance()->video.window.Blit(surface, pos);
+  AppWormux::GetInstance()->video->window.Blit(surface, pos);
 
   // TODO: Remove this line! (and use GameFont instead of Font)
   world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );

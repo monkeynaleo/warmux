@@ -26,6 +26,7 @@
 #include "game/game.h"
 #include "game/config.h"
 #include "game/game_mode.h"
+#include "graphic/video.h"
 #include "gui/null_widget.h"
 #include "gui/picture_text_cbox.h"
 #include "gui/picture_widget.h"
@@ -59,7 +60,7 @@ GameMenu::GameMenu() :
   Rectanglei rectZero(0, 0, 0, 0);
   Rectanglei stdRect (0, 0, 130, 30);
 
-  Surface window = AppWormux::GetInstance()->video.window;
+  Surface window = AppWormux::GetInstance()->video->window;
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;

@@ -121,7 +121,7 @@ OptionMenu::OptionMenu() :
 
   /* Center the widgets */
   AppWormux * app = AppWormux::GetInstance();
-  uint center_x = app->video.window.GetWidth()/2;
+  uint center_x = app->video->window.GetWidth()/2;
 
   graphic_options->SetXY(center_x - graphic_options->GetSizeX()/2, graphic_options->GetPositionY());
   sound_options->SetXY(center_x - sound_options->GetSizeX()/2, sound_options->GetPositionY());
@@ -129,7 +129,7 @@ OptionMenu::OptionMenu() :
   // Values initialization
 
   // Get available video resolution
-  std::list<Point2i>& video_res = app->video.GetAvailableConfigs();
+  std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
   std::list<Point2i>::iterator mode;
 
   for(mode=video_res.begin(); mode!=video_res.end(); ++mode) {
@@ -138,7 +138,7 @@ OptionMenu::OptionMenu() :
       std::string text;
       ss << mode->GetX() << "x" << mode->GetY() ;
       text = ss.str();
-      if (app->video.window.GetWidth() == mode->GetX() && app->video.window.GetHeight() == mode->GetY())
+      if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
       {
           ss << " " << _("(current)");
           is_current = true;
@@ -158,11 +158,11 @@ OptionMenu::OptionMenu() :
 
   Config * config = Config::GetInstance();
 
-  opt_max_fps->SetValue (app->video.GetMaxFps());
+  opt_max_fps->SetValue (app->video->GetMaxFps());
   opt_display_wind_particles->SetValue (config->GetDisplayWindParticles());
   opt_display_energy->SetValue (config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue (config->GetDisplayNameCharacter());
-  full_screen->SetValue (app->video.IsFullScreen());
+  full_screen->SetValue (app->video->IsFullScreen());
 
 
   opt_music->SetValue( jukebox.UseMusic() );
@@ -197,15 +197,15 @@ void OptionMenu::SaveOptions()
   config->SetSoundFrequency(lbox_sound_freq->ReadIntValue());
 
   AppWormux * app = AppWormux::GetInstance();
-  app->video.SetMaxFps(opt_max_fps->GetValue());
+  app->video->SetMaxFps(opt_max_fps->GetValue());
   // Video mode
   std::string s_mode = lbox_video_mode->ReadValue();
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
-  app->video.SetConfig(w, h, full_screen->GetValue());
+  app->video->SetConfig(w, h, full_screen->GetValue());
 
-  uint x = app->video.window.GetWidth() / 2;
-  uint y = app->video.window.GetHeight() - 50;
+  uint x = app->video->window.GetWidth() / 2;
+  uint y = app->video->window.GetHeight() - 50;
 
   SetActionButtonsXY(x, y);
 

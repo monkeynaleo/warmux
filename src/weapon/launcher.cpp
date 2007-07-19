@@ -453,11 +453,11 @@ void WeaponLauncher::Draw()
   {
     Point2i p = ActiveCharacter().GetHandPosition() - camera.GetPosition();
     // Red color for the blast range (should be superior to the explosion_range)
-    AppWormux::GetInstance()->video.window.CircleColor(p.x, p.y, (int)cfg->blast_range, c_red);
+    AppWormux::GetInstance()->video->window.CircleColor(p.x, p.y, (int)cfg->blast_range, c_red);
     // Yellow color for the blast range (should be superior to the explosion_range)
-    AppWormux::GetInstance()->video.window.CircleColor(p.x, p.y, (int)cfg->explosion_range, c_black);
+    AppWormux::GetInstance()->video->window.CircleColor(p.x, p.y, (int)cfg->explosion_range, c_black);
   }
-  AppWormux::GetInstance()->video.window.CircleColor(GetGunHolePosition().x-camera.GetPositionX(), GetGunHolePosition().y-camera.GetPositionY(), 5, c_black);
+  AppWormux::GetInstance()->video->window.CircleColor(GetGunHolePosition().x-camera.GetPositionX(), GetGunHolePosition().y-camera.GetPositionY(), 5, c_black);
 #endif
 }
 

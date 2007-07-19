@@ -25,6 +25,7 @@
 #include <iostream>
 #include "game/config.h"
 #include "graphic/font.h"
+#include "graphic/video.h"
 #include "gui/list_box.h"
 #include "tool/i18n.h"
 #include "include/app.h"
@@ -84,8 +85,8 @@ CreditsMenu::CreditsMenu()  :
   Menu("credit/background", vOk)
 {
   ListBox * lbox_authors = new ListBox( Rectanglei( 30, 30,
-						    AppWormux::GetInstance()->video.window.GetWidth()-60,
-						    AppWormux::GetInstance()->video.window.GetHeight()-60-30),
+						    AppWormux::GetInstance()->video->window.GetWidth()-60,
+						    AppWormux::GetInstance()->video->window.GetHeight()-60-30),
                                         false);
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
   widgets.AddWidget(lbox_authors);

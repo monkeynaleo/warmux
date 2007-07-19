@@ -26,7 +26,7 @@
 #include "network.h"
 #include "include/action_handler.h"
 
-const uint table_size = 1024; //Number of pregerated numbers
+const uint table_size = 1; //Number of pregerated numbers
 
 RandomSync randomSync;
 

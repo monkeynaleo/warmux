@@ -24,6 +24,7 @@
 #include "weapon.h"
 #include "game/game_loop.h"
 #include "graphic/surface.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -62,6 +63,6 @@ void CrossHair::Draw()
   if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING )
     return;
   Point2i tmp = ActiveCharacter().GetHandPosition() + crosshair_position;
-  AppWormux::GetInstance()->video.window.Blit(image, tmp - camera.GetPosition());
+  AppWormux::GetInstance()->video->window.Blit(image, tmp - camera.GetPosition());
   world.ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
 }

@@ -19,6 +19,7 @@
 
 #include <iostream> //cerr
 #include "text.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "interface/interface.h"
 #include "map/map.h"
@@ -230,13 +231,13 @@ void Text::DrawTopLeft(const Point2i &position) const
     shad_rect.SetPosition(dst_rect.GetPosition() + bg_offset);
     shad_rect.SetSize(background.GetWidth(), background.GetHeight() );
     
-    app->video.window.Blit(background, shad_rect.GetPosition());
-    app->video.window.Blit(surf, dst_rect.GetPosition());
+    app->video->window.Blit(background, shad_rect.GetPosition());
+    app->video->window.Blit(surf, dst_rect.GetPosition());
 		
     world.ToRedrawOnScreen(Rectanglei(dst_rect.GetPosition(),
                                       shad_rect.GetSize() + bg_offset));
   }else{
-    app->video.window.Blit(surf, dst_rect.GetPosition());
+    app->video->window.Blit(surf, dst_rect.GetPosition());
     world.ToRedrawOnScreen(dst_rect);
   }		
 }
@@ -295,8 +296,8 @@ void DrawTmpBoxText(Font& font, Point2i pos,
   
   AppWormux * app = AppWormux::GetInstance();
 
-  app->video.window.BoxColor(rect, boxColor);
-  app->video.window.RectangleColor(rect, rectColor);  
+  app->video->window.BoxColor(rect, boxColor);
+  app->video->window.RectangleColor(rect, rectColor);  
 
   world.ToRedrawOnScreen( rect );
   

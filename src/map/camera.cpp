@@ -22,6 +22,7 @@
 #include "camera.h"
 #include "map.h"
 #include "wind.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "interface/mouse.h"
 #include "object/physical_obj.h"
@@ -73,12 +74,12 @@ void Camera::SetXYabs(int x, int y){
   if( !HasFixedX() )
     position.x = BorneLong(x, 0, world.GetWidth() - GetSizeX());
   else
-    position.x = - (app->video.window.GetWidth() - world.GetWidth())/2;
+    position.x = - (app->video->window.GetWidth() - world.GetWidth())/2;
 
   if( !HasFixedY() )
     position.y = BorneLong(y, 0, world.GetHeight()-GetSizeY());
   else
-    position.y = - (app->video.window.GetHeight() - world.GetHeight())/2;
+    position.y = - (app->video->window.GetHeight() - world.GetHeight())/2;
 
   throw_camera = true;
 }

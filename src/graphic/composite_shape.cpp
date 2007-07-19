@@ -20,11 +20,12 @@
  *****************************************************************************/
 
 #include "composite_shape.h"
-#include "../tool/affine_transform.h"
 #include "surface.h"
 #include "polygon.h"
-#include "../include/app.h"
-#include "../map/map.h"
+#include "graphic/video.h"
+#include "include/app.h"
+#include "map/map.h"
+#include "tool/affine_transform.h"
 
 CompositeShape::CompositeShape()
 {
@@ -64,7 +65,7 @@ void CompositeShape::DrawOnScreen()
   int i = 0;
   for(std::vector<Polygon *>::iterator poly = layers.begin();
       poly != layers.end(); poly++, i++) {
-    (*poly)->Draw(&AppWormux::GetInstance()->video.window);
+    (*poly)->Draw(&AppWormux::GetInstance()->video->window);
     if(i == 0) {
       min = (*poly)->GetMin();
       max = (*poly)->GetMax();

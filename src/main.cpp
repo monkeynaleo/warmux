@@ -73,8 +73,14 @@ AppWormux *AppWormux::GetInstance()
 }
 
 AppWormux::AppWormux():
-  video()
+  video(NULL)
 {
+}
+
+AppWormux::~AppWormux()
+{
+  if (video)
+    delete video;
 }
 
 int AppWormux::main(int argc, char *argv[])
@@ -154,6 +160,8 @@ int AppWormux::main(int argc, char *argv[])
 
 void AppWormux::Init()
 {
+  video = new Video();
+
   Config::GetInstance();  // init config first, because it initializes i18n
 
   InitFonts();
@@ -219,8 +227,8 @@ void AppWormux::DisplayLoadingPicture()
   Sprite loading_image = Sprite(surfaceLoading);
 
   loading_image.cache.EnableLastFrameCache();
-  loading_image.ScaleSize(video.window.GetSize());
-  loading_image.Blit(video.window, 0, 0);
+  loading_image.ScaleSize(video->window.GetSize());
+  loading_image.Blit(video->window, 0, 0);
 
   Time::GetInstance()->Reset();
 
@@ -229,13 +237,13 @@ void AppWormux::DisplayLoadingPicture()
   Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_NORMAL,
 	     true);
 
-  Point2i windowCenter = video.window.GetSize() / 2;
+  Point2i windowCenter = video->window.GetSize() / 2;
 
   text1.DrawCenter(windowCenter);
   text2.DrawCenter(windowCenter
                    + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_NORMAL)).GetHeight() + 20));
 
-  video.window.Flip();
+  video->window.Flip();
 }
 
 void AppWormux::InitFonts()

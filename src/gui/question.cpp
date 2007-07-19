@@ -22,6 +22,7 @@
 #include "question.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "interface/mouse.h"
 #include "tool/resource_manager.h"
@@ -65,12 +66,12 @@ void Question::Draw() const
 
   if(background != NULL)
   {
-    background->Blit(app->video.window,  app->video.window.GetSize() / 2 - background->GetSize() / 2);
+    background->Blit(app->video->window,  app->video->window.GetSize() / 2 - background->GetSize() / 2);
   }
   else if (text->GetText() != "")
   {
-    uint x = app->video.window.GetWidth()/2 - text->GetWidth()/2 - 10;
-    uint y = app->video.window.GetHeight()/2 - text->GetHeight()/2 - 10;
+    uint x = app->video->window.GetWidth()/2 - text->GetWidth()/2 - 10;
+    uint y = app->video->window.GetHeight()/2 - text->GetHeight()/2 - 10;
 
     Rectanglei rect(x, y, 
 		    text->GetWidth() + 20, 
@@ -78,14 +79,14 @@ void Question::Draw() const
   
     AppWormux * app = AppWormux::GetInstance();
     
-    app->video.window.BoxColor(rect, defaultColorBox);
-    app->video.window.RectangleColor(rect, defaultColorRect);
+    app->video->window.BoxColor(rect, defaultColorBox);
+    app->video->window.RectangleColor(rect, defaultColorRect);
   }
 
   if(text->GetText() != "")
   {
-    text->DrawCenter(app->video.window.GetWidth()/2, 
-		     app->video.window.GetHeight()/2);
+    text->DrawCenter(app->video->window.GetWidth()/2, 
+		     app->video->window.GetHeight()/2);
   }
 }
 
@@ -118,7 +119,7 @@ int Question::Ask ()
       SDL_Delay(50);
     }
 
-    AppWormux::GetInstance()->video.Flip();
+    AppWormux::GetInstance()->video->Flip();
   } while (!end_of_boucle);
 
   Mouse::GetInstance()->SetPointer(prev_pointer);
@@ -145,11 +146,11 @@ void Question::Set (const std::string &pmessage,
     Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
     background = new Sprite(resource_manager.LoadImage(res,bg_sprite));
     background->cache.EnableLastFrameCache();
-    background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
+    background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());
     resource_manager.UnLoadXMLProfile( res);
   }
   else
   {
-    text->SetMaxWidth(AppWormux::GetInstance()->video.window.GetWidth()/2);
+    text->SetMaxWidth(AppWormux::GetInstance()->video->window.GetWidth()/2);
   }
 }

@@ -19,6 +19,7 @@
 
 #include "spin_button_picture.h"
 #include "graphic/text.h"
+#include "graphic/video.h"
 #include "button.h"
 #include <sstream>
 #include "include/app.h"
@@ -71,7 +72,7 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/4 ;
   uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
 
-  AppWormux::GetInstance()->video.window.Blit(m_image, Point2i(tmp_x, tmp_y));
+  AppWormux::GetInstance()->video->window.Blit(m_image, Point2i(tmp_x, tmp_y));
 
   tmp_x = GetPositionX() + (3*GetSizeX()/4);
   tmp_y = GetPositionY() + (GetSizeY()/2) - txt_label->GetHeight()/2;

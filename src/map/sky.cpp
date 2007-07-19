@@ -24,6 +24,7 @@
 #include "map.h"
 #include "maps_list.h"
 #include "graphic/surface.h"
+#include "graphic/video.h"
 #include "include/app.h"
 
 // Vitesse (comprise entre 0 et 0.5)
@@ -73,7 +74,7 @@ void Sky::RedrawParticleList(std::list<Rectanglei> &list){
 void Sky::RedrawParticle(const Rectanglei &particle) const{
     Rectanglei ds(GetSkyPos() + particle.GetPosition() - camera.GetPosition() - margin, 
 		    particle.GetSize() );
-    AppWormux::GetInstance()->video.window.Blit(image, ds, particle.GetPosition() - camera.GetPosition());
+    AppWormux::GetInstance()->video->window.Blit(image, ds, particle.GetPosition() - camera.GetPosition());
 }
 
 Point2i Sky::GetSkyPos() const{

@@ -21,6 +21,7 @@
 #include "tileitem.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
 
@@ -229,7 +230,7 @@ void Tile::DrawTile_Clipped(Rectanglei worldClip) const
 				Point2i ptDest = destRect.GetPosition() - camera.GetPosition();
 				Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
 			
-                AppWormux::GetInstance()->video.window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
+                AppWormux::GetInstance()->video->window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
 			}
         }
 }
