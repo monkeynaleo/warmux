@@ -136,12 +136,12 @@ void Interface::DrawCharacterInfo()
   if (character_under_cursor == NULL) character_under_cursor = &ActiveCharacter();
 
   // Display energy bar
-  Point2i energy_bar_offset = BORDER_POSITION + Point2i(MARGIN + character_under_cursor->GetTeam().flag.GetWidth(),
-                                                        character_under_cursor->GetTeam().flag.GetHeight() / 2);
+  Point2i energy_bar_offset = BORDER_POSITION + Point2i(MARGIN + character_under_cursor->GetTeam().GetFlag().GetWidth(),
+                                                        character_under_cursor->GetTeam().GetFlag().GetHeight() / 2);
   energy_bar.DrawXY(bottom_bar_pos + energy_bar_offset);
 
   // Display team logo
-  app->video.window.Blit(character_under_cursor->GetTeam().flag, bottom_bar_pos + BORDER_POSITION);
+  app->video.window.Blit(character_under_cursor->GetTeam().GetFlag(), bottom_bar_pos + BORDER_POSITION);
 
   // Display team name
   t_team_name->Set(character_under_cursor->GetTeam().GetName());

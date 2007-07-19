@@ -3,6 +3,7 @@
 <resources>
   <name>Firefox</name>
   <surface name="flag" file="flag.png" />
+  <surface name="big_flag" file="flag64.png" />
   <team>
     <character name="Mozilla browser" body="firefoxteam" />
     <character name="Phoenix" body="firefoxteam" />
