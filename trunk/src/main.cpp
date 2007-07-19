@@ -195,7 +195,7 @@ void AppWormux::ParseArgs(int argc, char* argv[])
       {NULL,      no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hvpic:sd:",
+  while ((c = getopt_long (argc, argv, "hvpic::sd:",
 			   long_options, &option_index)) != -1)
     {
       switch (c)
