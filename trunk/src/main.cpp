@@ -59,6 +59,7 @@ using namespace std;
 #include "network/download.h"
 
 static menu_item choice = menuNULL;
+static bool skip_menu = false;
 
 AppWormux *AppWormux::singleton = NULL;
 
@@ -101,7 +102,7 @@ int AppWormux::main(int argc, char *argv[])
 	  case menuPLAY:
 	    {
 	      GameMenu game_menu;
-	      game_menu.Run();
+	      game_menu.Run(skip_menu);
 	      break;
 	    }
 	  case menuNETWORK:
@@ -128,6 +129,7 @@ int AppWormux::main(int argc, char *argv[])
 	    break;
 	  }
 	choice = menuNULL;
+	skip_menu = false;
       }
     while (!quit);
 
@@ -185,7 +187,7 @@ void AppWormux::ParseArgs(int argc, char* argv[])
       switch (c)
 	{
 	case 'h':
-	  printf("usage: %s [-h|--help] [-v|--version] [-p|--play] [-n|--network]\n", argv[0]);
+	  printf("usage: %s [-h|--help] [-v|--version] [-p|--play] [-n|--network] [-d debug_masks]\n", argv[0]);
 	  exit(0);
 	  break;
 	case 'v':
@@ -194,6 +196,7 @@ void AppWormux::ParseArgs(int argc, char* argv[])
 	  break;
 	case 'p':
 	  choice = menuPLAY;
+	  skip_menu = true;
 	  break;
 	case 'n':
 	  choice = menuNETWORK;

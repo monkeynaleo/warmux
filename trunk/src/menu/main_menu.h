@@ -36,7 +36,11 @@ typedef enum
   menuNETWORK,
   menuOPTIONS,
   menuCREDITS,
-  menuQUIT
+  menuQUIT,
+
+  noMenuPLAY,
+  noMenuNET_SERVER,
+  noMenuNET_CLIENT
 } menu_item;
 
 class Main_Menu : public Menu

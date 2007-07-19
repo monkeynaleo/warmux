@@ -53,7 +53,7 @@ public:
    Menu(std::string bg, t_action actions = vOkCancel);
    virtual ~Menu();
 
-   void Run ();
+   void Run(bool skip=false);
    virtual void Redraw(const Rectanglei& rect, Surface& surf);
    virtual void RedrawMenu();
 

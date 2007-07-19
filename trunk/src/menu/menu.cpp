@@ -143,8 +143,13 @@ void Menu::RedrawMenu()
   widgets.ForceRedraw();
 }
 
-void Menu::Run ()
+void Menu::Run (bool skip_menu)
 { 
+  if (skip_menu) {
+    signal_ok();
+    return;
+  }
+
   int x=0, y=0;
 
   close_menu = false;
