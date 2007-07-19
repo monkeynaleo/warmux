@@ -294,6 +294,16 @@ bool Polygon::IsInsidePolygon(const Point2d & p) const
   return c;
 }
 
+// we process the area size. If < 0 => clockwise else anticlokwise
+// Warning ! The polygon must be concave
+bool Polygon::IsClockWise() const
+{
+  Point2d a = original_shape[0];
+  Point2d b = original_shape[original_shape.size() / 3];
+  Point2d c = original_shape[(original_shape.size() * 2) / 3];
+  return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y) < 0;
+}
+
 // Not accurate at 100% but sufficent for the moment
 bool Polygon::IsOverlapping(const Polygon & poly) const
 {
@@ -563,9 +573,11 @@ PolygonBuffer * Polygon::GetPolygonBuffer() const
 }
 
 // expand the polygon (to draw a little border for example)
-void Polygon::Expand(const double expand_value)
+void Polygon::Expand(double expand_value)
 {
   if(original_shape.size() < 2) return;
+  if(!IsClockWise())
+    expand_value = -expand_value;
   std::vector<Point2d> tmp_shape;
   AffineTransform2D trans = AffineTransform2D::Rotate(M_PI_2);
   Point2d current, next, vector, expand;
