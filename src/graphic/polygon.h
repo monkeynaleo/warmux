@@ -125,6 +125,7 @@ class Polygon {
   // Test
   bool IsInsidePolygon(const Point2d & point) const;
   bool IsOverlapping(const Polygon & poly) const;
+  bool IsClockWise() const;
 
   // Use to randomize a construction
   Point2d GetRandomUpperPoint();
@@ -140,7 +141,7 @@ class Polygon {
                       const int num_steps, const bool add_first_point = true,
                       const bool add_last_point = true);
   Polygon * GetBezierInterpolation(double smooth_value = 1.0, int num_steps = 20, double rand = 0.0);
-  void Expand(const double expand_value);
+  void Expand(double expand_value);
 
   // Size information
   double GetWidth() const;

@@ -155,7 +155,7 @@ void RandomMap::Generate()
   Polygon *tmp = new Polygon();
 
   // +10 so it's outside the screen
-  tmp->AddPoint(Point2d(-10, height + 10));
+  tmp->AddPoint(Point2d(-100, height + 100));
 
   for (int i = 1; i < num_of_points - 1; i++) {
     current_y_pos = height - Random::GetDouble(minhei, maxhei);
@@ -172,15 +172,15 @@ void RandomMap::Generate()
     }
   }
 
-  tmp->AddPoint(Point2d(width+10, height+10));
-  tmp->AddPoint(Point2d(width/2, height+10));
+  tmp->AddPoint(Point2d(width + 100, height + 100));
+  tmp->AddPoint(Point2d(width / 2, height + 100));
 
   // Get bezier interpolation
   bezier_shape = tmp->GetBezierInterpolation(1.0, 30, Random::GetDouble(0.0, 0.5));
 
   // Expand
   expanded_bezier_shape = new Polygon(*bezier_shape);
-  expanded_bezier_shape->Expand(-border_size);
+  expanded_bezier_shape->Expand(border_size);
 
   // Set color, texture etc.
   bezier_shape->SetTexture(&texture);
