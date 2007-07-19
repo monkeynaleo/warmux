@@ -185,24 +185,25 @@ void AppWormux::ParseArgs(int argc, char* argv[])
   int option_index = 0;
   struct option long_options[] =
     {
-      {"help", 0, 0, 'h'},
-      {"version", 0, 0, 'v'},
-      {"play", 0, 0, 'p'},
-      {"internet", 0, 0, 'i'},
-      {"client", 0, 0, 'c'},
-      {"server", 0, 0, 's'},
-      {0, 0, 0, 0}
+      {"help",    no_argument,       NULL, 'h'},
+      {"version", no_argument,       NULL, 'v'},
+      {"play",    no_argument,       NULL, 'p'},
+      {"internet",no_argument,       NULL, 'i'},
+      {"client",  optional_argument, NULL, 'c'},
+      {"server",  no_argument,       NULL, 's'},
+      {"debug",   required_argument, NULL, 'd'},
+      {NULL,      no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hvpics",
+  while ((c = getopt_long (argc, argv, "hvpic:sd:",
 			   long_options, &option_index)) != -1)
     {
       switch (c)
 	{
 	case 'h':
 	  printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
-		 " [-i|--internet] [-s|--server] [-c|--client]"
-		 " [-d debug_masks]\n", argv[0]);
+		 " [-i|--internet] [-s|--server] [-c|--client [ip]]"
+		 " [-d|--debug debug_masks]\n", argv[0]);
 	  exit(0);
 	  break;
 	case 'v':
@@ -216,8 +217,16 @@ void AppWormux::ParseArgs(int argc, char* argv[])
 	case 'c':
 	  choice = menuNETWORK;
 	  net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
+          if (optarg)
+            {
+              Config::GetInstance()->SetNetworkHost(optarg);
+            }
 	  skip_menu = true;
 	  break;
+        case 'd':
+          printf("Debug: %s\n", optarg);
+          AddDebugMode(optarg);
+          break;
 	case 's':
 	  choice = menuNETWORK;
 	  net_action = NetworkConnectionMenu::NET_HOST;
@@ -230,7 +239,6 @@ void AppWormux::ParseArgs(int argc, char* argv[])
 	  break;
 	}
     }
-  InitDebugModes(argc, argv);
 }
 
 void AppWormux::DisplayLoadingPicture()

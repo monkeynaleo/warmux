@@ -72,22 +72,3 @@ void PrintDebug (const char *filename, const char *function, unsigned long line,
 void AddDebugMode( std::string mode ){
 	debugModes.push_back( mode );
 }
-
-/**
- * Parse the command line arguments to find new debug mode to use.
- * 
- * @param argc Number of arguments.
- * @param argv The arguments.
- */
-void InitDebugModes( int argc, char **argv ){
-	int i;
-
-	for( i=0; i<argc; i++ ){
-		if( strcmp(argv[i], "-d") == 0 ){
-			i = i + 1;
-			if( i == argc )
-				Error( "Usage : -d mode.truc" );
-			AddDebugMode( argv[i] );
-		}
-	}
-}
