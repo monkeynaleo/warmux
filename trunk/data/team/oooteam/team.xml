@@ -4,6 +4,7 @@
   <name>OOo</name>
   <sound_profile>flying</sound_profile>
   <surface name="flag" file="flag.png" />
+  <surface name="big_flag" file="flag64.png" />
   <team>
     <character name="OOo" body="oooteam" />
     <character name="Writer" body="oooteam" />

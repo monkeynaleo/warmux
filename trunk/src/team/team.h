@@ -54,11 +54,12 @@ class Team
 
   // Autres
     CrossHair crosshair;
-    Surface flag;
     Point2i sauve_camera;
     TeamEnergy energy;
 
   private:
+    Surface flag;
+    Surface big_flag;
     bool is_camera_saved;
     std::string m_teams_dir; // parent directory hosting the data
     std::string m_id;
@@ -129,6 +130,8 @@ class Team
     const std::string& GetId() const { return m_id; }
     const std::string& GetPlayerName() const { return m_player_name; }
     const std::string& GetSoundProfile() const { return m_sound_profile; }
+    const Surface& GetFlag() const { return flag; }
+    const Surface& GetBigFlag() const { return big_flag; }
     iterator begin();
     iterator end();
     Character* FindByIndex(uint index);

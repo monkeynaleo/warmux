@@ -3,6 +3,7 @@
 <resources>
   <name>PHP</name>
   <surface name="flag" file="flag.png" />
+  <surface name="big_flag" file="flag64.png" />
   <team>
     <character name="PHP" body="phpteam" />
     <character name="Jumbo" body="phpteam" />

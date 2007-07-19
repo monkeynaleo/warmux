@@ -3,6 +3,7 @@
 <resources>
   <name>Beastie</name>
   <surface name="flag" file="flag.png" />
+  <surface name="big_flag" file="flag64.png" />
   <team>
     <character name="Beastie" body="beastieteam" />
     <character name="FreeBSD" body="beastieteam" />

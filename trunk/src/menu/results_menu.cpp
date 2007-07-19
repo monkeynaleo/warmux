@@ -189,8 +189,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
 
     winner_box = new VBox(Rectanglei(x, y, 180, 0), true);
     winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 180,1), Font::FONT_LARGE, Font::FONT_BOLD));
-    PictureWidget* winner_logo = new PictureWidget( Rectanglei(0,0,96,96));
-    winner_logo->SetSurface(first_team->flag, true);
+    PictureWidget* winner_logo = new PictureWidget( Rectanglei(0,0,64,64));
+    winner_logo->SetSurface(first_team->GetBigFlag());
     winner_box->AddWidget(winner_logo);
     winner_box->AddWidget(new Label(first_team->GetName(), Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
 
@@ -289,10 +289,10 @@ void ResultsMenu::ComputeTeamsOrder()
 void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_position, 
 				   const Point2i& relative_position)
 {
-  Point2i flag_pos(team.flag.GetWidth()/2, team.flag.GetHeight());
+  Point2i flag_pos(team.GetFlag().GetWidth()/2, team.GetFlag().GetHeight());
   Point2i position = podium_position + relative_position - flag_pos;
 
-  Surface team_character(team.flag);
+  Surface team_character(team.GetFlag());
   //team_character.Flip(); ==> Why does it not work ?
 
   AppWormux::GetInstance()->video.window.Blit(team_character, position);
@@ -343,7 +343,7 @@ void ResultsMenu::SetResult(int i)
     team_logo->SetNoSurface();
   } else {
     name = res->getTeam()->GetName()+" - "+res->getTeam()->GetPlayerName();
-    team_logo->SetSurface(res->getTeam()->flag);
+    team_logo->SetSurface(res->getTeam()->GetFlag());
   }
 
   team_name->SetText(name);
@@ -352,42 +352,42 @@ void ResultsMenu::SetResult(int i)
   //Most violent
   player = res->getMostViolent();
   if (player)
-    most_violent->SetIntResult(player->GetName(), player->GetDamageStats().GetMostDamage(), player->GetTeam().flag);
+    most_violent->SetIntResult(player->GetName(), player->GetDamageStats().GetMostDamage(), player->GetTeam().GetFlag());
   else
     most_violent->SetNoResult();
 
   //Most useful
   player = res->getMostUseful();
   if (player)
-    most_useful->SetIntResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().flag);
+    most_useful->SetIntResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().GetFlag());
   else
     most_useful->SetNoResult();
 
   //Most useless
   player = res->getMostUseless();
   if (player)
-    most_useless->SetIntResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().flag);
+    most_useless->SetIntResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().GetFlag());
   else
     most_useless->SetNoResult();
 
   // Biggest sold-out
   player = res->getBiggestTraitor();
   if (player)
-    biggest_traitor->SetIntResult(player->GetName(), player->GetDamageStats().GetFriendlyFireDamage(), player->GetTeam().flag);
+    biggest_traitor->SetIntResult(player->GetName(), player->GetDamageStats().GetFriendlyFireDamage(), player->GetTeam().GetFlag());
   else
     biggest_traitor->SetNoResult();
 
   // Most clumsy
   player = res->getMostClumsy();
   if (player)
-    most_clumsy->SetIntResult(player->GetName(), player->GetDamageStats().GetItselfDamage(), player->GetTeam().flag);
+    most_clumsy->SetIntResult(player->GetName(), player->GetDamageStats().GetItselfDamage(), player->GetTeam().GetFlag());
   else
     most_clumsy->SetNoResult();
 
   // Most accurate
   player = res->getMostAccurate();
   if (player)
-    most_accurate->SetDoubleResult(player->GetName(), player->GetDamageStats().GetAccuracy(), player->GetTeam(). flag);
+    most_accurate->SetDoubleResult(player->GetName(), player->GetDamageStats().GetAccuracy(), player->GetTeam(). GetFlag());
   else
     most_accurate->SetNoResult();
 
