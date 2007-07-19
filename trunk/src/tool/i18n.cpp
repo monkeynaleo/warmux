@@ -29,10 +29,6 @@
 #include "game/config.h"
 
 // Package is defined by autotools
-#ifdef WIN32
-#define PACKAGE "Wormux"
-#endif
-
 #define GETTEXT_DOMAIN PACKAGE
 
 std::string Format(const char *format, ...){
