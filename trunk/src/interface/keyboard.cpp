@@ -78,6 +78,7 @@ void Keyboard::SetDefaultConfig()
   SetKeyAction(SDLK_PAGEUP,    ManMachineInterface::KEY_WEAPON_MORE);
   SetKeyAction(SDLK_PAGEDOWN,  ManMachineInterface::KEY_WEAPON_LESS);
   SetKeyAction(SDLK_s,         ManMachineInterface::KEY_CHAT);
+  SetKeyAction(SDLK_o,         ManMachineInterface::KEY_MENU_OPTIONS_FROM_GAME);
 }
 
 void Keyboard::HandleKeyEvent(const SDL_Event& event)

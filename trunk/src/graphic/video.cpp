@@ -21,10 +21,8 @@
 #include <iostream>
 #include <SDL_image.h>
 #include "game/config.h"
-#ifdef WIN32
 #include "game/game.h"
 #include "map/map.h"
-#endif
 #include "tool/i18n.h"
 #include "include/constant.h"
 #include "map/camera.h"
@@ -155,6 +153,14 @@ std::list<Point2i>& Video::GetAvailableConfigs()
   return available_configs;
 }
 
+void Video::GameFullRefreshDrawing()
+{
+  if (Game::GetInstance()->IsGameLaunched()) {
+    world.DrawSky(true);
+    world.Draw(true);
+  }
+}
+
 bool Video::SetConfig(const int width, const int height, const bool _fullscreen){
   int flag = (_fullscreen) ? SDL_FULLSCREEN : 0;
 
@@ -176,9 +182,9 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
       return false;
 
     fullscreen = _fullscreen;
+    camera.SetSize(width, height);
+    GameFullRefreshDrawing();
   }
-
-  camera.SetSize(width, height);
 
   return true;
 }
@@ -189,11 +195,8 @@ void Video::ToggleFullscreen()
   SDL_WM_ToggleFullScreen( window.GetSurface() );
   fullscreen = !fullscreen;
 #else
-  if (Game::GetInstance()->IsGameLaunched()) {
-    SetConfig(window.GetWidth(), window.GetHeight(), !fullscreen);
-    world.DrawSky(true);
-    world.Draw(true);
-  }
+  SetConfig(window.GetWidth(), window.GetHeight(), !fullscreen);
+  GameFullRefreshDrawing();
 #endif
 }
 

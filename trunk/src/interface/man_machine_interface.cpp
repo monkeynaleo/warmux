@@ -31,6 +31,7 @@
 #include "include/app.h"
 #include "include/action_handler.h"
 #include "map/camera.h"
+#include "menu/options_menu.h"
 #include "network/network.h"
 #include "object/objbox.h"
 #include "team/teams_list.h"
@@ -243,6 +244,11 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     case KEY_TOGGLE_INTERFACE:
       Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());
       return;
+    case KEY_MENU_OPTIONS_FROM_GAME: {
+      OptionMenu options_menu;
+      options_menu.Run();
+      return;
+    }
     default:
       break;
     }
