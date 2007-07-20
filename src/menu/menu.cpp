@@ -25,6 +25,7 @@
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/box.h"
+#include "interface/mouse.h"
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
 
@@ -145,12 +146,13 @@ void Menu::RedrawMenu()
 }
 
 void Menu::Run (bool skip_menu)
-{ 
+{
   if (skip_menu) {
     signal_ok();
     return;
   }
 
+  Mouse::pointer_t old_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
   int x=0, y=0;
 
   close_menu = false;
@@ -209,6 +211,8 @@ void Menu::Run (bool skip_menu)
     }
 
   } while (!close_menu);
+
+  Mouse::GetInstance()->SetPointer(old_pointer);
 }
 
 void Menu::Display(const Point2i& mousePosition)
