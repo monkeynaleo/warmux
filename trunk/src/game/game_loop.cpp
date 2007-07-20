@@ -427,9 +427,6 @@ void GameLoop::__SetState_PLAYING()
 {
   MSG_DEBUG("game.statechange", "Playing" );
 
-  // Center the cursor
-  Mouse::GetInstance()->CenterPointer();
-
   // initialize counter
   duration = GameMode::GetInstance()->duration_turn;
   Interface::GetInstance()->UpdateTimer(duration);
@@ -481,7 +478,11 @@ void GameLoop::__SetState_PLAYING()
 	Network::GetInstance()->SetTurnMaster(false);
     }
 
-  give_objbox = true; //hack make it so no more than one objbox per turn
+  give_objbox = true; //hack make it so no more than one objbox per turn  
+
+  // Center the cursor
+  Mouse::GetInstance()->CenterPointer();
+  Mouse::GetInstance()->HideUntilNextMove();
 }
 
 void GameLoop::__SetState_HAS_PLAYED()

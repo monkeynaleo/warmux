@@ -52,12 +52,17 @@ public:
 
 private:
   bool scroll_actif;
-  bool hide;
+
+  typedef enum {
+    MOUSE_HIDDEN,
+    MOUSE_VISIBLE,
+    MOUSE_HIDDEN_UNTIL_NEXT_MOVE
+  } visibility_t;
+  visibility_t visible;
   pointer_t current_pointer;
 
   Point2i savedPos;
   Point2i lastPos;
-
   static Mouse * singleton;
 
   Surface pointer_select, 
@@ -106,7 +111,7 @@ public:
   // Hide/show mouse pointer
   void Show();
   void Hide();
-  bool IsVisible() const;
+  void HideUntilNextMove();
 
   // Center the pointer on the screen
   void CenterPointer();

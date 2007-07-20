@@ -56,7 +56,7 @@ Mouse * Mouse::GetInstance() {
 
 Mouse::Mouse(){
   scroll_actif = false;
-  hide = false;
+  visible = MOUSE_VISIBLE;
   // Load the different pointers
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   pointer_select = resource_manager.LoadImage(res, "mouse/pointer_select");
@@ -247,7 +247,11 @@ void Mouse::TestCamera()
                               SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE);
 
   // Show cursor and information interface when moving mouse
-  if(lastPos != mousePos) {
+  if (lastPos != mousePos) {
+    MSG_DEBUG("mouse", "Before: %d, %d -> now: %d, %d",
+	    lastPos.GetX(), lastPos.GetY(), 
+	    mousePos.GetX(), mousePos.GetY());
+
     Show();
     Interface::GetInstance()->Show();
     lastPos = mousePos;
@@ -276,6 +280,14 @@ void Mouse::Refresh()
 {
   if (!scroll_actif)
     ChoixVerPointe();
+
+  Point2i pos = GetPosition();
+  if (visible == MOUSE_HIDDEN_UNTIL_NEXT_MOVE 
+      && lastPos != pos) {
+    MSG_DEBUG("mouse", "Show : %d, %d - %d, %d", lastPos.GetX(),
+	      lastPos.GetY(), pos.GetX(), pos.GetY() );
+    Show();
+  }
 }
 
 Point2i Mouse::GetPosition() const
@@ -444,7 +456,7 @@ void Mouse::DrawSelectPointer()
 
 void Mouse::Draw()
 {
-  if (hide)
+  if (visible != MOUSE_VISIBLE)
     return;
 
   if (current_pointer == POINTER_STANDARD)
@@ -534,22 +546,45 @@ void Mouse::Draw()
 
 void Mouse::Show()
 {
-  hide = false;
+  visible = MOUSE_VISIBLE;
 
   if (Config::GetInstance()->GetDefaultMouseCursor()) {
     SDL_ShowCursor(true); // be sure cursor is visible
   }
+
+  MSG_DEBUG("mouse", "%d, %d", GetPosition().GetX(),
+	    GetPosition().GetY() );
 }
 
 void Mouse::Hide()
 {
-  hide = true;
+  visible = MOUSE_HIDDEN;
   SDL_ShowCursor(false); // be sure cursor is invisible
+
+  MSG_DEBUG("mouse", "%d, %d", GetPosition().GetX(),
+	    GetPosition().GetY() );
+}
+
+void Mouse::HideUntilNextMove()
+{
+  visible = MOUSE_HIDDEN_UNTIL_NEXT_MOVE;
+  lastPos = GetPosition();
+  SDL_ShowCursor(false); // be sure cursor is invisible
+
+  MSG_DEBUG("mouse", "%d, %d", GetPosition().GetX(),
+	    GetPosition().GetY() );
 }
 
 // Center the pointer on the screen
 void Mouse::CenterPointer()
 {
+  MSG_DEBUG("mouse", "1) %d, %d\n", GetPosition().GetX(),
+	    GetPosition().GetY());
+
   SDL_WarpMouse(AppWormux::GetInstance()->video->window.GetWidth()/2,
 		AppWormux::GetInstance()->video->window.GetHeight()/2);
+  SDL_PumpEvents(); // force new position else GetPosition does not return new position
+
+  MSG_DEBUG("mouse", "2) %d, %d\n", GetPosition().GetX(),
+	    GetPosition().GetY());
 }
