@@ -49,7 +49,7 @@ public:
   static AppWormux * GetInstance();
   ~AppWormux();
 
-  int main(int argc, char *argv[]);
+  int Main(int argc, char *argv[]);
 };
 
 #endif
