@@ -9,13 +9,13 @@
 #endif
 
 1 VERSIONINFO
-FILEVERSION 0,7,9,0
-PRODUCTVERSION 0,7,9,0
+FILEVERSION 0,8,1,0
+PRODUCTVERSION 0,8,1,0
 FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
-FILEFLAGS 0x1L
+FILEFLAGS VS_FF_DEBUG | VS_FF_SPECIALBUILD
 #else
-FILEFLAGS 0x0L
+FILEFLAGS VS_FF_SPECIALBUILD
 #endif
 FILEOS VOS__WINDOWS32
 FILETYPE VFT_APP
@@ -34,7 +34,11 @@ FILETYPE VFT_APP
             VALUE "OriginalFilename", "wormux.exe"
             VALUE "ProductName", "wormux"
             VALUE "ProductVersion", PACKAGE_VERSION
-            VALUE "SpecialBuild", "Build date: " __DATE__ ", " __TIME__ " with compiler version " __VERSION__
+#ifdef __MINGW32__
+            VALUE "SpecialBuild", "$Revision$, build on " __DATE__ ", " __TIME__ " with compiler version " __VERSION__
+#else
+            VALUE "SpecialBuild", "$Revision$"
+#endif
         }
     }
     BLOCK "VarFileInfo"
