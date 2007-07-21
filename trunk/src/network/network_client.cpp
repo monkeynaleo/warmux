@@ -28,25 +28,21 @@
 #include "tool/i18n.h"
 #include "distant_cpu.h"
 
-#ifdef LOG_NETWORK
 #include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#ifdef LOG_NETWORK
+#  include <sys/stat.h>
+#  include <fcntl.h>
+#  ifdef WIN32
+#    include <io.h>
+#  endif
 #endif
 //-----------------------------------------------------------------------------
 
 NetworkClient::NetworkClient()
 {
 #ifdef LOG_NETWORK
-#  ifdef WIN32
-  int flags1 = O_CREAT | O_TRUNC | O_WRONLY | O_BINARY;
-  int flags2 = S_IRUSR | S_IWUSR;
-#  else
-  int flags1 = O_CREAT | O_TRUNC | O_WRONLY | O_SYNC;
-  int flags2 = S_IRUSR | S_IWUSR | S_IRGRP;
-#  endif
-  fin = open("./network_client.in", flags1, flags2);
-  fout = open("./network_client.out", flags1, flags2);
+  fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
+  fout = open("./network_client.out", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
 #endif
 }
 
