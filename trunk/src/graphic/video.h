@@ -52,7 +52,7 @@ public:
 
   bool IsFullScreen() const;
 
-  const std::list<Point2i>& GetAvailableConfigs();
+  const std::list<Point2i>& GetAvailableConfigs() const;
   bool SetConfig(int width, int height, bool fullscreen);
   void ToggleFullscreen();
 
