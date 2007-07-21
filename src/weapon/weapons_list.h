@@ -33,7 +33,7 @@ class WeaponsList
 {
 public:
   typedef std::list<Weapon*> weapons_list_type;
-  typedef std::list<Weapon*>::iterator weapons_list_it;
+  typedef std::list<Weapon*>::const_iterator weapons_list_it;
 
 private:
   static WeaponsList * weapons_list; /* list by itself */
@@ -59,7 +59,7 @@ public:
   void Refresh();
 
   // Return a list of  weapons
-  weapons_list_type& GetList();
+  const weapons_list_type& GetList() const;
   Weapon* GetWeapon(Weapon::Weapon_type type);
   bool GetWeaponBySort(Weapon::category_t num_sort, Weapon::Weapon_type &type);
 };

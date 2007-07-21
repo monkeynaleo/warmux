@@ -112,7 +112,7 @@ void WeaponsList::Refresh ()
 
 //-----------------------------------------------------------------------------
 
-WeaponsList::weapons_list_type& WeaponsList::GetList()
+const WeaponsList::weapons_list_type& WeaponsList::GetList() const
 {
   return m_weapons_list;
 }
