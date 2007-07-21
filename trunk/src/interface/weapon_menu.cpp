@@ -316,7 +316,9 @@ void WeaponsMenu::RefreshWeaponList()
   tools_menu->AddItem(tmp);
   // Reinserting weapon
   WeaponsList *weapons_list = WeaponsList::GetInstance();
-  for (WeaponsList::weapons_list_it it=weapons_list->GetList().begin(); it != weapons_list->GetList().end(); ++it)
+  for (WeaponsList::weapons_list_it it=weapons_list->GetList().begin();
+       it != weapons_list->GetList().end();
+       ++it)
     AddWeapon(*it);
 }
 
