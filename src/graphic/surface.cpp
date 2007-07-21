@@ -215,15 +215,15 @@ int Surface::SetAlpha(Uint32 flags, Uint8 alpha){
  * Lock the surface to permit direct access.
  *
  */
-int Surface::Lock() const {
-  return SDL_LockSurface(surface);
+int Surface::Lock(){
+	return SDL_LockSurface( surface );
 }
 
 /**
  * Unlock the surface.
  *
  */
-void Surface::Unlock() const{
+void Surface::Unlock(){
 	SDL_UnlockSurface( surface );
 }
 
@@ -274,7 +274,7 @@ int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &
  * @param spr
  * @param position
  */
-void Surface::MergeSurface(const Surface &spr, const Point2i &pos) {
+void Surface::MergeSurface(Surface &spr, const Point2i &pos) {
   Uint32 spr_pix, cur_pix;
   Uint8 r, g, b, a, p_r, p_g, p_b, p_a;
   double f_a, f_ca, f_pa;
