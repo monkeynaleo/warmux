@@ -95,7 +95,7 @@ public:
   bool ExportToString(std::string& mode,
 		      std::string& mode_objects) const;
 
-  XmlReader& GetXmlObjects(); // for object_cfg
+  const XmlReader& GetXmlObjects() const; // for object_cfg
 
   bool AllowCharacterSelection() const;
 

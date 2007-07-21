@@ -85,7 +85,7 @@ void Action_Network_ChangeState (Action *a)
   if (Network::GetInstance()->IsServer())
   {
     Network::network_state_t client_state = (Network::network_state_t)a->PopInt();
-    
+
     switch (Network::GetInstance()->GetState())
     {
     case Network::NO_NETWORK:
@@ -111,7 +111,7 @@ void Action_Network_ChangeState (Action *a)
   if (Network::GetInstance()->IsClient())
   {
     Network::network_state_t server_state = (Network::network_state_t)a->PopInt();
-    
+
     switch (Network::GetInstance()->GetState())
     {
     case Network::NETWORK_MENU_OK:
@@ -164,7 +164,7 @@ void Action_GameLoop_ChangeCharacter (Action *a)
 void Action_GameLoop_NextTeam (Action *a)
 {
   teams_list.SetActive (a->PopString());
-  ASSERT (!ActiveCharacter().IsDead());      
+  ASSERT (!ActiveCharacter().IsDead());
 
   // Are we turn master for next turn ?
   if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
@@ -407,7 +407,7 @@ void SendActiveCharacterInfo(bool can_be_dropped)
   uint current_time = Time::GetInstance()->Read();
 
   if (!can_be_dropped || last_time + 50 < Time::GetInstance()->Read()) {
-    last_time = current_time; 
+    last_time = current_time;
     SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
   }
 }
@@ -679,7 +679,7 @@ void ActionHandler::Exec(Action *a)
   MSG_DEBUG("action_handler", "<- (%d) Executing action %s", id, GetActionName(a->GetType()).c_str());
 }
 
-std::string ActionHandler::GetActionName (Action::Action_t action)
+const std::string &ActionHandler::GetActionName (Action::Action_t action) const
 {
   ASSERT(mutex!=NULL);
   SDL_LockMutex(mutex);

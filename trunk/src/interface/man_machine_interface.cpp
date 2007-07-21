@@ -80,9 +80,9 @@ void ManMachineInterface::SetKeyAction(int key, Key_t at)
 }
 
 // Get the key associated to an action.
-int ManMachineInterface::GetKeyAssociatedToAction(Key_t at)
+int ManMachineInterface::GetKeyAssociatedToAction(Key_t at) const
 {
-  std::map<int, Key_t>::iterator it;
+  std::map<int, Key_t>::const_iterator it;
   for (it= layout.begin(); it != layout.end(); it++) {
     if (it->second == at) {
       return it->first;
@@ -259,7 +259,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
   // Shoot when in turn
   if (key == KEY_SHOOT) {
 
-    if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN && 
+    if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN &&
 	!Network::IsConnected()) {
       ObjBox* current_box = GameLoop::GetInstance()->GetCurrentBox();
       if (current_box != NULL) {

@@ -59,7 +59,7 @@ public:
 
   void Flush();
   void ExecActions();
-  std::string GetActionName(Action::Action_t action);
+  const std::string &GetActionName(Action::Action_t action) const;
 
 private:
   ActionHandler();

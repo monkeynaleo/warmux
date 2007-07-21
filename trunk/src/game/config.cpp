@@ -133,11 +133,11 @@ Config::Config():
  * This tries to find already loaded data in the map<> config_set and actually
  * load it if it cannot be found.
  */
-const ObjectConfig &Config::GetOjectConfig(const std::string &name, const std::string &xml_config)
+const ObjectConfig &Config::GetOjectConfig(const std::string &name, const std::string &xml_config) const
 {
   ObjectConfig * objcfg;
 
-  std::map<std::string, ObjectConfig*>::iterator  it = config_set.find(name);
+  std::map<std::string, ObjectConfig*>::const_iterator  it = config_set.find(name);
   if (it == config_set.end())
     {
       objcfg = new ObjectConfig();

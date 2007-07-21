@@ -180,7 +180,7 @@ Surface Font::Render(const std::string &txt, const Color &color, bool cache){
   return surface;
 }
 
-int Font::GetWidth (const std::string &txt){
+int Font::GetWidth (const std::string &txt) const {
   int width=-1;
 
   TTF_SizeUTF8(m_font, txt.c_str(), &width, NULL);
@@ -188,11 +188,11 @@ int Font::GetWidth (const std::string &txt){
   return width;
 }
 
-int Font::GetHeight (){
+int Font::GetHeight () const {
   return TTF_FontHeight(m_font);
 }
 
-int Font::GetHeight (const std::string &str){
+int Font::GetHeight (const std::string &str) const {
   int height=-1;
 
   TTF_SizeUTF8(m_font, str.c_str(), NULL, &height);
@@ -200,7 +200,7 @@ int Font::GetHeight (const std::string &str){
   return height;
 }
 
-Point2i Font::GetSize(const std::string &txt){
+Point2i Font::GetSize(const std::string &txt) const {
 	return Point2i(GetWidth(txt), GetHeight(txt));
 }
 

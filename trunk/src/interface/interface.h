@@ -93,8 +93,8 @@ public:
    ~Interface();
 
  public:
-   static Interface * GetInstance();
-   WeaponsMenu & GetWeaponsMenu() { return weapons_menu; };
+   static Interface *GetInstance();
+   const WeaponsMenu &GetWeaponsMenu() const { return weapons_menu; };
 
    void Reset();
    void Draw();

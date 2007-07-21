@@ -66,7 +66,7 @@ void Time::Refresh(){
   /*
   TODO : Activate this condition later.
   Refresh time condition :
-  - active team is Local 
+  - active team is Local
   - current node is server and game loop is not in Playing state
   - game don't use network
   if((ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()) ||
@@ -110,15 +110,15 @@ void Time::Continue(){
   real_time_pause_dt += SDL_GetTicks() - real_time_pause_begin;
 }
 
-uint Time::ClockSec(){
+uint Time::ClockSec() const {
   return ReadSec() % 60;
 }
 
-uint Time::ClockMin(){
+uint Time::ClockMin() const {
   return ReadMin() % 60;
 }
 
-std::string Time::GetString(){
+std::string Time::GetString() const {
   std::ostringstream ss;
 
   ss << ClockMin() << ":" << std::setfill('0') << std::setw(2) << ClockSec();
