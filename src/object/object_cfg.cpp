@@ -51,16 +51,16 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
 
   if (config_file == "") {
 
-    MSG_DEBUG("game_mode", "Load %s configuration from %s\n", 
-	      obj_name.c_str(), 
+    MSG_DEBUG("game_mode", "Load %s configuration from %s\n",
+	      obj_name.c_str(),
 	      GameMode::GetInstance()->GetName().c_str());
 
-    XmlReader& ddoc = GameMode::GetInstance()->GetXmlObjects();
+    const XmlReader& ddoc = GameMode::GetInstance()->GetXmlObjects();
     elem = XmlReader::GetMarker(ddoc.GetRoot(), obj_name);
 
   } else {
-    
-    MSG_DEBUG("game_mode", "** Load %s configuration from file %s\n", 
+
+    MSG_DEBUG("game_mode", "** Load %s configuration from file %s\n",
 	      obj_name.c_str(), config_file.c_str());
 
     // Load Xml configuration

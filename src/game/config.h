@@ -56,7 +56,7 @@ public:
   static const int COLORKEY = 1;
 
   const ObjectConfig &GetOjectConfig(const std::string &name,
-                                     const std::string &xml_config);
+                                     const std::string &xml_config) const;
 
   bool GetDisplayEnergyCharacter() const;
   void SetDisplayEnergyCharacter(const bool dec);
@@ -159,11 +159,14 @@ protected:
   std::string ttf_filename;
 
   int transparency;
-  std::map<std::string, ObjectConfig *> config_set;
 
 private:
   Config();
   static Config * singleton;
   bool DoLoading(void);
+
+  /* this is mutable in order to be able to load config on fly when calling
+   * GetOjectConfig() witch is not supposed to modify the object itself */
+  mutable std::map<std::string, ObjectConfig *> config_set;
 };
 #endif

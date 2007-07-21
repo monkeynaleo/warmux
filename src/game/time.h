@@ -56,9 +56,9 @@ public:
   //void RefreshMaxTime(uint updated_max_time);
 
   // Read the clock time
-  uint ClockSec();  // ReadSec() % 60
-  uint ClockMin();  // ReadMin() % 60
-  std::string GetString();
+  uint ClockSec() const;  // ReadSec() % 60
+  uint ClockMin() const;  // ReadMin() % 60
+  std::string GetString() const;
 
   void Pause();
   void Continue();

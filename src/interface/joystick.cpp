@@ -61,7 +61,7 @@ void Joystick::SetDefaultConfig()
   SetKeyAction(i++, ManMachineInterface::KEY_WEAPON_MORE);
 }
 
-int Joystick::GetNumberOfJoystick()
+int Joystick::GetNumberOfJoystick() const
 {
   return SDL_NumJoysticks();
 }

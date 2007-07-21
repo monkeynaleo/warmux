@@ -45,7 +45,7 @@ public:
     KEY_WEAPON_4,    KEY_WEAPON_5,                KEY_WEAPON_6,
     KEY_WEAPON_7,    KEY_WEAPON_8,                KEY_WEAPON_9,
     KEY_WEAPON_LESS, KEY_WEAPON_MORE,
-    KEY_NEXT_CHARACTER, 
+    KEY_NEXT_CHARACTER,
     KEY_MENU_OPTIONS_FROM_GAME,
     KEY_NONE
   } Key_t;
@@ -80,11 +80,11 @@ public:
   virtual void HandleKeyEvent(const SDL_Event& event) = 0;
   virtual void Reset();
 
-  // Refresh keys 
+  // Refresh keys
   void Refresh();
 
   // Get the key associated to an action.
-  int GetKeyAssociatedToAction(Key_t at);
+  int GetKeyAssociatedToAction(Key_t at) const;
 };
 
 //-----------------------------------------------------------------------------

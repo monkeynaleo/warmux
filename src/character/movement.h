@@ -41,7 +41,7 @@ public:
     angle_rad = angle;
   }
   /* GetAngle returns radian values */
-  inline const double &GetAngle() { return angle_rad; }
+  inline const double &GetAngle() const { return angle_rad; }
   float alpha;
   bool follow_crosshair;
   bool follow_half_crosshair;

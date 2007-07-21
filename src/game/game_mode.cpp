@@ -304,7 +304,7 @@ bool GameMode::ExportToString(std::string& mode,
   return r;
 }
 
-XmlReader& GameMode::GetXmlObjects()
+const XmlReader& GameMode::GetXmlObjects() const
 {
   return doc_objects;
 }

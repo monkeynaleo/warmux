@@ -38,7 +38,7 @@ private:
 
 public:
   static Joystick * GetInstance();
-  int GetNumberOfJoystick();
+  int GetNumberOfJoystick() const;
   void HandleKeyEvent(const SDL_Event& event);
   void Reset();
 };
