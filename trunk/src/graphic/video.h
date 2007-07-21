@@ -43,8 +43,8 @@ public:
   Surface window;
   void SetWindowCaption(std::string caption);
   void SetMaxFps(uint max_fps);
-  uint GetMaxFps();
-  uint GetSleepMaxFps();
+  uint GetMaxFps() const;
+  uint GetSleepMaxFps() const;
 
 public:
   Video();
@@ -53,7 +53,7 @@ public:
   bool IsFullScreen() const;
 
   std::list<Point2i>& GetAvailableConfigs();
-  bool SetConfig(const int width, const int height, const bool fullscreen);
+  bool SetConfig(int width, int height, bool fullscreen);
   void ToggleFullscreen();
 
   void Flip(void);
