@@ -27,13 +27,6 @@
 #include "gui/progress_bar.h"
 #include "include/base.h"
 
-class PolecatFart : public WeaponProjectile
-{
-  public:
-    PolecatFart(ExplosiveWeaponConfig& cfg,
-                WeaponLauncher * p_launcher);
-};
-
 class Polecat : public WeaponProjectile
 {
  private:

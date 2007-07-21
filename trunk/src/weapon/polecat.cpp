@@ -37,13 +37,6 @@
 
 const uint TIME_BETWEEN_FART = 500;
 
-PolecatFart::PolecatFart(ExplosiveWeaponConfig& cfg,
-                 WeaponLauncher * p_launcher) :
-  WeaponProjectile("polecat_fart", cfg, p_launcher)
-{
-  explode_with_collision = false;
-}
-
 Polecat::Polecat(ExplosiveWeaponConfig& cfg,
                  WeaponLauncher * p_launcher) :
   WeaponProjectile("polecat", cfg, p_launcher)
