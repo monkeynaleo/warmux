@@ -29,7 +29,16 @@
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file
-#define LOG_NETWORK
+//#define LOG_NETWORK
+// Factorize some declarations for Visual C++
+#ifdef _MSC_VER
+#  define S_IRUSR _S_IREAD
+#  define S_IWUSR _S_IWRITE
+#endif
+#ifdef WIN32
+#  define S_IRGRP 0
+#  define O_SYNC  O_BINARY
+#endif
 
 const std::string WORMUX_NETWORK_PORT = "3826";
 const uint WORMUX_NETWORK_PORT_INT = 3826;

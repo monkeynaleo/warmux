@@ -37,25 +37,26 @@
 #include "tool/debug.h"
 #include "tool/i18n.h"
 
-#ifdef LOG_NETWORK
 #include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#ifdef LOG_NETWORK
+#  include <sys/stat.h>
+#  include <fcntl.h>
+#  ifdef WIN32
+#    include <io.h>
+#  endif
 #endif
-
 //-----------------------------------------------------------------------------
 
 // Standard header, only needed for the following method
-#ifndef WIN32
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <arpa/nameser.h>
-#include <resolv.h>
-#include <errno.h>
+#ifdef WIN32
+#  include <winsock.h>
 #else
-#include <winsock.h>
+#  include <sys/socket.h>
+#  include <netdb.h>
+#  include <netinet/in.h>
+#  include <arpa/nameser.h>
+#  include <resolv.h>
+#  include <errno.h>
 #endif
 
 //-----------------------------------------------------------------------------
