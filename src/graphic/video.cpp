@@ -18,6 +18,9 @@
  *****************************************************************************/
 
 #include "video.h"
+#ifdef _MSC_VER
+#  include <algorithm>
+#endif
 #include <iostream>
 #include <SDL_image.h>
 #include "game/config.h"
@@ -81,9 +84,18 @@ bool Video::IsFullScreen() const{
   return fullscreen;
 }
 
-bool CompareConfigs(const Point2i& a, const Point2i& b)
+static bool CompareConfigs(const Point2i& a, const Point2i& b)
 {
   return  (a.x >= b.x) && (a.y >= b.y);
+}
+
+void Video::AddConfigIfAbsent(int w, int h)
+{
+	Point2i p(w, h);
+
+	if ( CompareConfigs((*available_configs.begin()), p) &&
+		 find(available_configs.begin(), available_configs.end(), p) == available_configs.end() )
+		available_configs.push_back(p);
 }
 
 void Video::ComputeAvailableConfigs()
@@ -113,24 +125,12 @@ void Video::ComputeAvailableConfigs()
 
   // If biggest resolution is big enough, we propose standard resolution such as
   // 800x600, 1024x768, 1280x1024, 1600x1200
-  Point2i a(800, 600);
-  if ( CompareConfigs((*available_configs.begin()), a))
-    available_configs.push_back(a);
-  Point2i b(1024, 768);
-  if ( CompareConfigs((*available_configs.begin()), b))
-    available_configs.push_back(b);
-  Point2i c(1280, 1024);
-  if ( CompareConfigs((*available_configs.begin()), c))
-    available_configs.push_back(c);
-  Point2i d(1600, 1200);
-  if ( CompareConfigs((*available_configs.begin()), d))
-    available_configs.push_back(d);
-  Point2i e(1400, 1050);
-  if ( CompareConfigs((*available_configs.begin()), e))
-    available_configs.push_back(e);
-  Point2i f(1280, 800);
-  if ( CompareConfigs((*available_configs.begin()), f))
-    available_configs.push_back(f);
+  AddConfigIfAbsent(800, 600);
+  AddConfigIfAbsent(1024, 768);
+  AddConfigIfAbsent(1280, 800);
+  AddConfigIfAbsent(1280, 1024);
+  AddConfigIfAbsent(1600, 1200);
+  AddConfigIfAbsent(1400, 1050);
 
   // Sort the list again...
   available_configs.sort(CompareConfigs);
