@@ -290,10 +290,10 @@ MapsList::MapsList()
   if(file_search != INVALID_HANDLE_VALUE)
   {
     while (FindNextFile(file_search,&file))
-	{
-	  if(file.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY)
-	    LoadOneMap(dirname,file.cFileName);
-	}
+    {
+      if(file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+        LoadOneMap(dirname,file.cFileName);
+    }
   } else {
     Error (Format(_("Unable to open maps directory (%s)!"),
 		   dirname.c_str()));
