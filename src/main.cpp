@@ -84,7 +84,7 @@ AppWormux::~AppWormux()
     delete video;
 }
 
-int AppWormux::main(int argc, char *argv[])
+int AppWormux::Main(int argc, char *argv[])
 {
   bool quit = false;
 
@@ -331,7 +331,7 @@ void AppWormux::DisplayWelcomeMessage()
 
 int main(int argc, char *argv[])
 {
-  AppWormux::GetInstance()->main(argc, argv);
+  AppWormux::GetInstance()->Main(argc, argv);
   delete AppWormux::GetInstance();
   exit(EXIT_SUCCESS);
 }
