@@ -38,6 +38,7 @@ class Video{
   void SetWindowIcon(std::string icon);
   void InitSDL(void);
   void GameFullRefreshDrawing();
+  void AddConfigIfAbsent(int w, int h);
 
 public:
   Surface window;
