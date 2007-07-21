@@ -69,11 +69,11 @@ void Video::SetMaxFps(uint max_fps){
     m_sleep_max_fps = 0;
 }
 
-uint Video::GetMaxFps(){
+uint Video::GetMaxFps() const {
   return m_max_fps;
 }
 
-uint Video::GetSleepMaxFps(){
+uint Video::GetSleepMaxFps() const {
   return m_sleep_max_fps;
 }
 
