@@ -148,7 +148,7 @@ void Video::ComputeAvailableConfigs()
   }
 }
 
-std::list<Point2i>& Video::GetAvailableConfigs()
+const std::list<Point2i>& Video::GetAvailableConfigs()
 {
   return available_configs;
 }
