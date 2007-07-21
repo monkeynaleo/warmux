@@ -129,22 +129,24 @@ OptionMenu::OptionMenu() :
   // Values initialization
 
   // Get available video resolution
-  std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
-  std::list<Point2i>::iterator mode;
+  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
+  std::list<Point2i>::const_iterator mode;
 
-  for(mode=video_res.begin(); mode!=video_res.end(); ++mode) {
+  for (mode = video_res.begin(); mode != video_res.end(); ++mode)
+    {
       std::ostringstream ss;
       bool is_current;
       std::string text;
       ss << mode->GetX() << "x" << mode->GetY() ;
       text = ss.str();
       if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
-      {
+        {
           ss << " " << _("(current)");
           is_current = true;
-      } else {
-          is_current = false;
-      }
+        }
+      else
+        is_current = false;
+
       lbox_video_mode->AddItem(is_current, ss.str(), text);
   }
 
