@@ -78,13 +78,15 @@ public:
   void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
   int SetAlpha(Uint32 flags, Uint8 alpha);
 
-  int Lock();
-  void Unlock();
+  /* one can consider lock and unlock as not modifying the object itself and
+   * thus have the const qualifier */
+  int Lock() const;
+  void Unlock() const;
 
   int Blit(const Surface& src);
   int Blit(const Surface& src, const Point2i& dst);
   int Blit(const Surface& src, const Rectanglei& srcRect, const Point2i &dstPoint);
-  void MergeSurface(Surface &spr, const Point2i &position);
+  void MergeSurface(const Surface &spr, const Point2i &position);
 
   int SetColorKey(Uint32 flag, Uint32 key);
   int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
