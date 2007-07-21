@@ -25,6 +25,7 @@
 #include "graphic/font.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
+#include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
 PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &resource_id, 
@@ -57,13 +58,27 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
 	{
 	  uint enabled_x = GetPositionX() + (GetSizeX() - m_enabled.GetWidth() - 20)/2 ;
 	  uint enabled_y = GetPositionY() + (GetSizeY() - m_enabled.GetHeight() - txt_label->GetHeight() - 5) /2;
-	  video_window.Blit(m_enabled, Point2i(enabled_x, enabled_y));
+	  uint outside_x = max(uint(0), GetPositionX() - enabled_x);
+	  uint outside_y = max(uint(0), GetPositionY() - enabled_y);
+
+	  enabled_x+= outside_x;
+	  enabled_y+= outside_y;
+	  Rectanglei srcRect(outside_x, outside_y, m_enabled.GetWidth() - outside_x, 
+			     m_enabled.GetHeight() - outside_y);
+	  video_window.Blit(m_enabled, srcRect, Point2i(enabled_x, enabled_y));
 	}
       else
 	{
 	  uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_back.GetWidth() - 20)/2 ;
 	  uint disabled_y = GetPositionY() + (GetSizeY() - m_disabled_back.GetHeight() - txt_label->GetHeight() - 5) /2;
-	  video_window.Blit(m_disabled_back, Point2i(disabled_x, disabled_y));
+	  uint outside_x = max(uint(0), GetPositionX() - disabled_x);
+	  uint outside_y = max(uint(0), GetPositionY() - disabled_y);
+
+	  disabled_x+= outside_x;
+	  disabled_y+= outside_y;
+	  Rectanglei srcRect(outside_x, outside_y, m_disabled_back.GetWidth() - outside_x, 
+			     m_disabled_back.GetHeight() - outside_y);
+	  video_window.Blit(m_disabled_back, srcRect, Point2i(disabled_x, disabled_y));
 	}
       // center the image
       uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth() - 20)/2 ;
