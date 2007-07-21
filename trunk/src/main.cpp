@@ -29,6 +29,9 @@
 #include <iostream>
 #include <unistd.h>
 #include <getopt.h>
+#ifndef WIN32
+#include <signal.h>
+#endif
 using namespace std;
 
 #include <SDL.h>
@@ -164,6 +167,10 @@ int AppWormux::Main(int argc, char *argv[])
 void AppWormux::Init()
 {
   video = new Video();
+
+#ifndef WIN32
+  signal(SIGPIPE, SIG_IGN);
+#endif
 
   Config::GetInstance();  // init config first, because it initializes i18n
 
