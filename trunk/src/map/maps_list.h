@@ -37,6 +37,13 @@ private:
   std::string name;
   std::string author_info;
   std::string music_playlist;
+  /* FIXME make m_directory private */
+public:
+  std::string m_directory;
+
+private:
+  std::string m_map_name;
+
   Surface img_ground, img_sky;
   Surface preview;
 
@@ -55,8 +62,6 @@ private:
   void LoadData();
 
 public:
-  std::string m_directory;
-  std::string m_map_name;
   struct s_wind
   {
     uint nb_sprite;
@@ -66,8 +71,7 @@ public:
   } wind;
 
 public:
-  InfoMap ();
-  bool Init(const std::string &nom, const std::string &repertoire);
+  InfoMap(const std::string&, const std::string&);
   bool LoadBasicInfo();
   void FreeData();
 

@@ -34,28 +34,28 @@
 
 extern const uint MAX_WIND_OBJECTS;
 
-InfoMap::InfoMap ()
+InfoMap::InfoMap(const std::string &map_name,
+                 const std::string &directory):
+  name("not initialized"),
+  author_info("not initialized"),
+  music_playlist("ingame"),
+  m_directory(directory),
+  m_map_name(map_name),
+  img_ground(),
+  img_sky(),
+  preview(),
+  nb_mine(4),
+  nb_barrel(4),
+  is_opened(false),
+  use_water(false),
+  is_basic_info_loaded(false),
+  is_data_loaded(false),
+  random(false),
+  res_profile(NULL)
 {
-  is_data_loaded = false;
-  is_basic_info_loaded = false;
-  nb_mine = 4;
-  nb_barrel = 4;
   wind.nb_sprite = 0;
   wind.need_flip = false;
   wind.rotation_speed = 0;
-  random = false;
-  music_playlist = "ingame";
-}
-
-bool InfoMap::Init (const std::string &map_name,
-                    const std::string &directory)
-{
-  m_directory = directory;
-  m_map_name = map_name;
-  res_profile = NULL;
-  is_data_loaded = false;
-  is_basic_info_loaded = false;
-  return true;
 }
 
 bool InfoMap::LoadBasicInfo()
@@ -64,30 +64,31 @@ bool InfoMap::LoadBasicInfo()
     return true;
   std::string nomfich;
   try
-  {
-    nomfich = m_directory+"config.xml";
+    {
+      nomfich = m_directory + "config.xml";
 
-    // Load resources
-    if (!IsFileExist(nomfich))
-      return false;
-    // FIXME: not freed
-    res_profile = resource_manager.LoadXMLProfile(nomfich, true),
-    // Load preview
-    preview = resource_manager.LoadImage( res_profile, "preview");
-    // Load other informations
-    XmlReader doc;
-    is_basic_info_loaded = true;
-    if (!doc.Load(nomfich)) return false;
-    if (!ProcessXmlData(doc.GetRoot())) return false;
-  }
+      // Load resources
+      if (!IsFileExist(nomfich))
+        return false;
+      // FIXME: not freed
+      res_profile = resource_manager.LoadXMLProfile(nomfich, true),
+      // Load preview
+      preview = resource_manager.LoadImage( res_profile, "preview");
+      // Load other informations
+      XmlReader doc;
+      is_basic_info_loaded = true;
+      if (!doc.Load(nomfich)) return false;
+      if (!ProcessXmlData(doc.GetRoot())) return false;
+    }
+
   catch (const xmlpp::exception &e)
-  {
-    std::cout << std::endl
-              << Format(_("XML error during loading map '%s' :"), m_map_name.c_str())
-              << std::endl
-              << e.what() << std::endl;
-    return false;
-  }
+    {
+      std::cout << std::endl
+                << Format(_("XML error during loading map '%s' :"), m_map_name.c_str())
+                << std::endl
+                << e.what() << std::endl;
+      return false;
+    }
 
   MSG_DEBUG("map.load", "Map loaded: %s", m_map_name.c_str());
 
@@ -327,7 +328,7 @@ MapsList::MapsList()
 
 void MapsList::LoadOneMap (const std::string &dir, const std::string &file)
 {
-  std::string fullname = dir+file;
+  std::string fullname = dir + file;
 
 #if !defined(WIN32) || defined(__MINGW32__)
   struct stat stat_file;
@@ -336,9 +337,7 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &file)
   if (!S_ISDIR(stat_file.st_mode)) return;
 #endif
 
-  InfoMap nv_terrain;
-  bool ok = nv_terrain.Init (file, fullname + PATH_SEPARATOR);
-  if (!ok) return;
+  InfoMap nv_terrain(file, fullname + PATH_SEPARATOR);
 
   std::cout << (lst.empty()?" ":", ") << file;
   std::cout.flush();
