@@ -35,9 +35,12 @@
 #include <iostream>
 
 #if !defined(WIN32) || defined(__MINGW32__)
-#include <dirent.h>
-#include <sys/stat.h>
+#  include <dirent.h>
+#  include <sys/stat.h>
+#elif defined(_MSC_VER)
+#  include <windows.h>
 #endif
+
 //-----------------------------------------------------------------------------
 TeamsList teams_list;
 //-----------------------------------------------------------------------------
@@ -159,7 +162,7 @@ void TeamsList::LoadList()
   {
     while (FindNextFile(file_search,&file))
     {
-      if(file.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY)
+      if(file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
         LoadOneTeam(dirname,file.cFileName);
     }
   } else {
