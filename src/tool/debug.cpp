@@ -23,7 +23,12 @@
 #include <string.h>
 #include <stdarg.h>
 #include <sys/types.h>
-#include <unistd.h>
+#ifdef _MSC_VER
+#  include <process.h>
+#  define getpid _getpid
+#else
+#  include <unistd.h>
+#endif
 #include "include/base.h"
 
 /**
