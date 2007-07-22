@@ -34,12 +34,6 @@
 #include <algorithm>
 #include <iostream>
 
-#if !defined(WIN32) || defined(__MINGW32__)
-#  include <dirent.h>
-#elif defined(_MSC_VER)
-#  include <windows.h>
-#endif
-
 //-----------------------------------------------------------------------------
 TeamsList teams_list;
 //-----------------------------------------------------------------------------
@@ -136,48 +130,31 @@ void TeamsList::LoadList()
 
   std::cout << "o " << _("Load teams:");
 
+  const Config * config = Config::GetInstance();
+
   // Load Wormux teams
-  std::string dirname = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "team" + PATH_SEPARATOR;
-#if !defined(WIN32) || defined(__MINGW32__)
-  struct dirent *file;
-  DIR *dir = opendir(dirname.c_str());
-  if (dir != NULL) {
-    while ((file = readdir(dir)) != NULL)
-	{
-      LoadOneTeam (dirname, file->d_name);
-	}
-    closedir (dir);
+  std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "team" + PATH_SEPARATOR;
+  FolderSearch *f = OpenFolder(dirname);
+  if (f) {
+    const char *name;
+    while ((name = FolderSearchNext(f)) != NULL) LoadOneTeam(dirname, name);
+    CloseFolder(f);
   } else {
     Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
   }
-#else
-  std::string pattern = dirname + "*.*";
-  WIN32_FIND_DATA file;
-  HANDLE file_search;
-  file_search=FindFirstFile(pattern.c_str(),&file);
-  if(file_search != INVALID_HANDLE_VALUE)
-  {
-    while (FindNextFile(file_search,&file))
-    {
-      if(file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-        LoadOneTeam(dirname,file.cFileName);
-    }
-  } else {
-    Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
-  }
-  FindClose(file_search);
-#endif
 
   // Load personal teams
-#if !defined(WIN32) || defined(__MINGW32__)
-  dirname = Config::GetInstance()->GetPersonalDir() + PATH_SEPARATOR
-    + "team" + PATH_SEPARATOR;
-  dir = opendir(dirname.c_str());
-  if (dir != NULL) {
-    while ((file = readdir(dir)) != NULL) LoadOneTeam (dirname, file->d_name);
-    closedir (dir);
+  dirname = config->GetPersonalDir() + "team" + PATH_SEPARATOR;
+  f = OpenFolder(dirname);
+  if (f) {
+    const char *name;
+    while ((name = FolderSearchNext(f)) != NULL) LoadOneTeam(dirname, name);
+    CloseFolder(f);
+  } else {
+	  std::cerr << std::endl
+		  << Format(_("Cannot open personal teams directory (%s)!"), dirname.c_str())
+		  << std::endl;
   }
-#endif
 
   teams_list.full_list.sort(compareTeams);
 

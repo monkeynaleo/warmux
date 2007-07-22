@@ -27,12 +27,8 @@
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
 #include <iostream>
-#if !defined(WIN32) || defined(__MINGW32__)
-#  include <dirent.h>
-#elif defined(_MSC_VER)
+#ifdef _MSC_VER
 #  include <algorithm>
-#  include <windows.h>
-#  undef LoadImage  // Macro from windows.h
 #endif
 
 extern const uint MAX_WIND_OBJECTS;
@@ -272,48 +268,30 @@ MapsList::MapsList()
 
   std::cout << "o " << _("Load maps:");
 
-  Config * config = Config::GetInstance();
+  const Config * config = Config::GetInstance();
   std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "map" + PATH_SEPARATOR;
-#if !defined(WIN32) || defined(__MINGW32__)
-  DIR *dir = opendir(dirname.c_str());
-  struct dirent *file;
-  if (dir != NULL) {
-    while ((file = readdir(dir)) != NULL)
-	  LoadOneMap (dirname, file->d_name);
-    closedir (dir);
+  FolderSearch *f = OpenFolder(dirname);
+  if (f) {
+    const char *name;
+    while ((name = FolderSearchNext(f)) != NULL) LoadOneMap(dirname, name);
+    CloseFolder(f);
   } else {
-    Error (Format(_("Unable to open maps directory (%s)!"),
-		   dirname.c_str()));
+    Error (Format(_("Unable to open maps directory (%s)!"), dirname.c_str()));
   }
-#else
-  std::string pattern = dirname + "*.*";
-  WIN32_FIND_DATA file;
-  HANDLE file_search;
-  file_search=FindFirstFile(pattern.c_str(),&file);
-  if(file_search != INVALID_HANDLE_VALUE)
-  {
-    while (FindNextFile(file_search,&file))
-    {
-      if(file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-        LoadOneMap(dirname,file.cFileName);
-    }
-  } else {
-    Error (Format(_("Unable to open maps directory (%s)!"),
-		   dirname.c_str()));
-  }
-  FindClose(file_search);
-#endif
 
-#if !defined(WIN32) || defined(__MINGW32__)
   // Load personal maps
-  dirname = config->GetPersonalDir() + PATH_SEPARATOR + "map";
-  dir = opendir(dirname.c_str());
-  if (dir != NULL) {
-    while ((file = readdir(dir)) != NULL)
-      LoadOneMap (dirname, file->d_name);
-    closedir (dir);
+  dirname = config->GetPersonalDir() + "map" + PATH_SEPARATOR;
+  f = OpenFolder(dirname);
+  if (f) {
+    const char *name;
+    while ((name = FolderSearchNext(f)) != NULL) LoadOneMap(dirname, name);
+    CloseFolder(f);
+  } else {
+	std::cerr << std::endl
+		<< Format(_("Unable to open maps directory (%s)!"), dirname.c_str())
+		<< std::endl;
   }
-#endif
+
   std::cout << std::endl << std::endl;
 
   // On a au moins une carte ?
