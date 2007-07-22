@@ -40,10 +40,10 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
-const int DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
-const int DST_MIN = 80 ;  //dst_minimal between 2 nodes
+const uint DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
+const uint DST_MIN = 80 ;  //dst_minimal between 2 nodes
 
-bool find_first_contact_point (Point2i from, double angle, int length,
+bool find_first_contact_point (Point2i from, double angle, uint length,
 			       int skip, Point2i &contact_point)
 {
   Point2d posd;
@@ -173,7 +173,7 @@ bool Grapple::TryAttachRope()
 
 bool Grapple::TryAddNode(int CurrentSense)
 {
-  int lg;
+  uint lg;
   Point2d V;
   Point2i contact_point;
   double angle, rope_angle;
@@ -185,7 +185,7 @@ bool Grapple::TryAddNode(int CurrentSense)
   V.x = handPos.x - m_fixation_point.x;
   V.y = handPos.y - m_fixation_point.y;
   angle = V.ComputeAngle();
-  lg = (int)V.Norm();
+  lg = static_cast<uint>(V.Norm());
 
   if (lg < DST_MIN)
     return false;
