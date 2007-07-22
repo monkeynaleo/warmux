@@ -24,6 +24,7 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
+#include <iostream>
 #include <png.h>
 #include "tool/i18n.h"
 
@@ -75,7 +76,7 @@ Surface::Surface(const std::string &filename){
 	surface = NULL;
 	autoFree = true;
 	if( !ImgLoad(filename) )
-		Error( Format("Unable to open image file : %s", filename.c_str() ) );
+		Error( Format("Unable to open image file '%s': %s", filename.c_str(), IMG_GetError() ) );
 }
 
 /**
@@ -601,7 +602,7 @@ int Surface::ImgSave(std::string filename){
   png_write_info(png_ptr, info_ptr);
 
   Lock();
-  Uint8 tmp_line[surface->w * spr_fmt->BytesPerPixel];
+  Uint8 *tmp_line = new Uint8[surface->w * spr_fmt->BytesPerPixel]; // alloca
   for(int y = 0; y < surface->h; y++) {
     for(int x = 0; x < surface->w; x++) {
       // Retrieving a pixel of sprite to merge
@@ -619,6 +620,7 @@ int Surface::ImgSave(std::string filename){
     png_write_row(png_ptr, (Uint8 *)tmp_line);
   }
   Unlock();
+  delete[] tmp_line;
   png_write_flush(png_ptr);
   png_write_end(png_ptr, info_ptr);
   fclose(f);
