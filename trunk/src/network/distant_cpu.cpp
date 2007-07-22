@@ -19,6 +19,9 @@
  * Distant Computer handling
  *****************************************************************************/
 
+#ifdef _MSC_VER
+#  include <algorithm>  //std::find
+#endif
 #include "distant_cpu.h"
 //-----------------------------------------------------------------------------
 #include <SDL_mutex.h>

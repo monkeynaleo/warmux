@@ -23,6 +23,9 @@
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include <iostream>
+#ifdef _MSC_VER
+#  include <algorithm>  //std::transform
+#endif
 #include "game/config.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
