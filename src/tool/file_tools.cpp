@@ -61,8 +61,62 @@ std::string FileExtension (const std::string &name)
     return "";
 }
 
+#ifdef WIN32
 // Return the path to the home directory of the user
-#ifndef WIN32
+std::string GetHome (){
+  TCHAR szPath[MAX_PATH];
+
+  // "Documents and Settings\user" is CSIDL_PROFILE
+  if(SHGetSpecialFolderPath(NULL, szPath, CSIDL_APPDATA, FALSE) == TRUE)
+    return szPath;
+
+  return "";
+}
+
+#include <windows.h>
+struct _FolderSearch
+{
+  WIN32_FIND_DATA file;
+  HANDLE          file_search;
+};
+
+FolderSearch *OpenFolder(std::string dirname)
+{
+  std::string  pattern = dirname + "*.*";
+  FolderSearch *f      = new FolderSearch;
+
+  f->file_search = FindFirstFile(pattern.c_str(), &f->file);
+  if (f->file_search == INVALID_HANDLE_VALUE)
+  {
+     FindClose(f->file_search);
+     delete f;
+	 return NULL;
+  }
+
+  return f;
+}
+
+const char* FolderSearchNext(FolderSearch *f)
+{
+  while (FindNextFile(f->file_search, &f->file))
+  {
+     if (f->file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+       return f->file.cFileName;
+  }
+  return NULL;
+}
+
+void CloseFolder(FolderSearch *f)
+{
+  if (f)
+  {
+    FindClose(f->file_search);
+	delete f;
+  }
+}
+
+#else
+// Return the path to the home directory of the user
 std::string GetHome()
 {
   char *txt = getenv("HOME");
@@ -72,17 +126,41 @@ std::string GetHome()
   
   return txt;
 }
-#else
-std::string GetHome (){
-  TCHAR szPath[MAX_PATH];
 
-  // "Documents and Settings\user" is CSIDL_PROFILE
-  if(SHGetSpecialFolderPath(NULL, szPath,
-                            CSIDL_APPDATA, FALSE) == TRUE)
+#include <dirent.h>
+struct _FolderSearch
+{
+  DIR           *dir;
+  struct dirent *file;
+};
+
+FolderSearch* OpenFolder(std::string dirname)
+{
+  FolderSearch *f = new FolderSearch;
+  f->dir = opendir(dirname.c_str());
+
+  if (!f->dir)
   {
-    return szPath;
+    delete f;
+    return NULL;
   }
-  return "";
+
+  return f;
+}
+
+const char* FolderSearchNext(FolderSearch *f)
+{
+  f->file = readdir(f->dir);
+  return (f->file) ? f->file->d_name : NULL;
+}
+
+void CloseFolder(FolderSearch *f)
+{
+  if (f)
+  {
+	closedir(f->dir);
+    delete f;
+  }
 }
 #endif
 
