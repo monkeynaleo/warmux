@@ -130,7 +130,6 @@ protected:
   std::string m_game_mode;
   std::string m_network_host;
   std::string m_network_port;
-  bool m_xml_loaded;
   std::string m_filename;
 
   std::string data_dir, locale_dir, personal_dir;
