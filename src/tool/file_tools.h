@@ -26,6 +26,9 @@
 // Check if a file exists
 bool IsFileExist(const std::string &name);
 
+// Check if the folder exists
+bool IsFolderExist(const std::string &name);
+
 // Find the extension part of a filename
 std::string FileExtension(const std::string &name);
 
