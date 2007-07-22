@@ -29,6 +29,9 @@
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
 #include <sstream>
+#ifdef _MSC_VER
+#  include <time.h>
+#endif
 
 void RandomElementList::AddElement(const Surface * element)
 {
