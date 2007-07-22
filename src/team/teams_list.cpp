@@ -36,7 +36,6 @@
 
 #if !defined(WIN32) || defined(__MINGW32__)
 #  include <dirent.h>
-#  include <sys/stat.h>
 #elif defined(_MSC_VER)
 #  include <windows.h>
 #endif
@@ -96,30 +95,25 @@ Team& TeamsList::ActiveTeam()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
+void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name)
 {
   // Skip '.', '..' and hidden files
-  if (team[0] == '.') return;
+  if (team_name[0] == '.') return;
 
-#if !defined(WIN32) || defined(__MINGW32__)
   // Is it a directory ?
-  struct stat stat_file;
-  std::string filename = dir+team;
-  if (stat(filename.c_str(), &stat_file) != 0) return;
-  if (!S_ISDIR(stat_file.st_mode)) return;
-#endif
+  if (!IsFolderExist(dir+team_name)) return;
 
   // Add the team
   try {
-    full_list.push_back(new Team(dir, team));
-    std::cout << ((1<full_list.size())?", ":" ") << team;
+    full_list.push_back(new Team(dir, team_name));
+    std::cout << ((1<full_list.size())?", ":" ") << team_name;
     std::cout.flush();
   }
 
   catch (char const *error)
     {
       std::cerr << std::endl
-        << Format(_("Error loading team :")) << team <<":"<< error
+        << Format(_("Error loading team :")) << team_name <<":"<< error
         << std::endl;
       return;
     }
@@ -127,7 +121,7 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
   catch (const xmlpp::exception &e)
     {
       std::cerr << std::endl
-        << Format(_("Error loading team :")) << team << std::endl
+        << Format(_("Error loading team :")) << team_name << std::endl
         << e.what() << std::endl;
       return;
     }
@@ -148,7 +142,10 @@ void TeamsList::LoadList()
   struct dirent *file;
   DIR *dir = opendir(dirname.c_str());
   if (dir != NULL) {
-    while ((file = readdir(dir)) != NULL)  LoadOneTeam (dirname, file->d_name);
+    while ((file = readdir(dir)) != NULL)
+	{
+      LoadOneTeam (dirname, file->d_name);
+	}
     closedir (dir);
   } else {
     Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
