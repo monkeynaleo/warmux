@@ -2,6 +2,8 @@
 #define _VECTOR2_H
 
 #include <math.h>
+#undef min
+#undef max
 #define VECTOR2_EPS_ZERO (0.005)
 
 /**
