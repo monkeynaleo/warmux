@@ -31,7 +31,7 @@ public:
   NetworkClient();
   ~NetworkClient();
 
-  virtual const bool IsConnected() const { return true; }
+  //virtual const bool IsConnected() const { return true; }
   virtual const bool IsClient() const { return true; }
   
   virtual void SendChatMessage(const std::string& txt);
