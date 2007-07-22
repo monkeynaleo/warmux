@@ -200,7 +200,7 @@ void Water::Draw(){
   int x0 = camera.GetPosition().x % pattern_width;
 
   int r = 0;
-  for(int y = world.GetHeight() - hauteur_eau + height_mvt - 20;
+  for(int y = world.GetHeight() - (hauteur_eau + height_mvt) - 20;
       y < (int)camera.GetPosition().y + (int)camera.GetSize().y;
       y += pattern_height)
     {
@@ -220,8 +220,7 @@ int Water::GetHeight(int x)
   if (IsActive())
     return height[x % pattern_width]
            + world.GetHeight()
-           - hauteur_eau
-           + height_mvt;
+           - (hauteur_eau + height_mvt);
   else
     return world.GetHeight();
 }
