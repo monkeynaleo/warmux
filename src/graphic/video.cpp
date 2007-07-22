@@ -100,10 +100,6 @@ void Video::AddConfigIfAbsent(int w, int h)
 
 void Video::ComputeAvailableConfigs()
 {
-  // Add the current resolution
-  available_configs.push_back(Point2i(window.GetWidth(),
-                                      window.GetHeight()));
-
   //Generate video mode list
   SDL_Rect **modes;
 
@@ -120,19 +116,19 @@ void Video::ComputeAvailableConfigs()
     }
   }
 
-  // Sort the list
-  available_configs.sort(CompareConfigs);
+  // Add the current resolution
+  AddConfigIfAbsent(window.GetWidth(), window.GetHeight());
 
   // If biggest resolution is big enough, we propose standard resolution such as
-  // 800x600, 1024x768, 1280x1024, 1600x1200
-  AddConfigIfAbsent(800, 600);
-  AddConfigIfAbsent(1024, 768);
-  AddConfigIfAbsent(1280, 800);
-  AddConfigIfAbsent(1280, 1024);
+  // 1600x1200, 1280x1024, 1024x768, 800x600.
   AddConfigIfAbsent(1600, 1200);
   AddConfigIfAbsent(1400, 1050);
+  AddConfigIfAbsent(1280, 1024);
+  AddConfigIfAbsent(1280, 800);
+  AddConfigIfAbsent(1024, 768);
+  AddConfigIfAbsent(800, 600);
 
-  // Sort the list again...
+  // Sort the list
   available_configs.sort(CompareConfigs);
 
   // Remove double items
