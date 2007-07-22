@@ -21,7 +21,8 @@
 
 #include "tool/file_tools.h"
 #include <fstream>
-#ifdef _WIN32
+#include <sys/stat.h>
+#ifdef WIN32
    // To get SHGetSpecialFolderPath
 #  define _WIN32_IE   0x400
 #  include <shlobj.h>
@@ -38,6 +39,16 @@ bool IsFileExist(const std::string &name)
   bool exist = f;
   f.close();
   return exist;
+}
+
+// Check if the folder exists
+bool IsFolderExist(const std::string &name)
+{
+  // Is it a directory ?
+  struct stat stat_file;
+  if (stat(name.c_str(), &stat_file) != 0)
+	return false;
+  return (stat_file.st_mode & S_IFMT) == S_IFDIR;
 }
 
 // Find the extension part of a filename
