@@ -29,7 +29,6 @@
 #include <iostream>
 #if !defined(WIN32) || defined(__MINGW32__)
 #include <dirent.h>
-#include <sys/stat.h>
 #endif
 
 extern const uint MAX_WIND_OBJECTS;
@@ -326,20 +325,17 @@ MapsList::MapsList()
   SelectMapByName(Config::GetInstance()->GetMapName());
 }
 
-void MapsList::LoadOneMap (const std::string &dir, const std::string &file)
+void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
 {
-  std::string fullname = dir + file;
+  if (map_name[0] == '.') return;
 
-#if !defined(WIN32) || defined(__MINGW32__)
-  struct stat stat_file;
-  if (file[0] == '.') return;
-  if (stat(fullname.c_str(), &stat_file) != 0) return;
-  if (!S_ISDIR(stat_file.st_mode)) return;
-#endif
+  std::string fullname = dir + map_name;
+  if (!IsFolderExist(fullname))
+	  return;
 
-  InfoMap nv_terrain(file, fullname + PATH_SEPARATOR);
+  InfoMap nv_terrain(map_name, fullname + PATH_SEPARATOR);
 
-  std::cout << (lst.empty()?" ":", ") << file;
+  std::cout << (lst.empty()?" ":", ") << map_name;
   std::cout.flush();
   lst.push_back(nv_terrain);
 }
