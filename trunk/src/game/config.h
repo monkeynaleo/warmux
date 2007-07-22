@@ -123,7 +123,6 @@ public:
   inline void SetNetworkPort(std::string s) { m_network_port = s; }
 
 protected:
-  bool LoadXml(xmlpp::Element *xml);
   bool SaveXml();
   std::string GetEnv(const std::string & name, const std::string &default_value);
 
@@ -163,6 +162,7 @@ private:
   Config();
   static Config * singleton;
   bool DoLoading(void);
+  void LoadXml(xmlpp::Element *xml);
 
   /* this is mutable in order to be able to load config on fly when calling
    * GetOjectConfig() witch is not supposed to modify the object itself */
