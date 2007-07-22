@@ -36,7 +36,7 @@
 bool IsFileExist(const std::string &name)
 {
   std::ifstream f(name.c_str());
-  bool exist = f;
+  bool exist = f.good();
   f.close();
   return exist;
 }
