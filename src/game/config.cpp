@@ -156,11 +156,13 @@ bool Config::DoLoading(void)
   {
     // Load XML conf
     XmlReader doc;
+
     m_filename = personal_dir + FILENAME;
+
     if (!doc.Load(m_filename))
       return false;
-    if (!LoadXml(doc.GetRoot()))
-      return false;
+
+    LoadXml(doc.GetRoot());
   }
   catch (const xmlpp::exception &e)
   {
@@ -173,7 +175,7 @@ bool Config::DoLoading(void)
 }
 
 // Read personal config file
-bool Config::LoadXml(xmlpp::Element *xml)
+void Config::LoadXml(xmlpp::Element *xml)
 {
   std::cout << "o " << _("Reading personal config file") << std::endl;
 
@@ -237,7 +239,6 @@ bool Config::LoadXml(xmlpp::Element *xml)
 
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
-  return true;
 }
 
 bool Config::Save()
