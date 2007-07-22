@@ -282,7 +282,6 @@ bool Grapple::TryBreakNode(int currentSense)
 void Grapple::NotifyMove(bool collision)
 {
   bool addNode = false;
-  double angularSpeed;
   int currentSense;
 
   if (!IsInUse() || m_attaching)
@@ -305,8 +304,7 @@ void Grapple::NotifyMove(bool collision)
       return;
     }
 
-  angularSpeed = ActiveCharacter().GetAngularSpeed() ;
-  currentSense = (int)(angularSpeed / fabs(angularSpeed)) ;
+  currentSense = ActiveCharacter().GetAngularSpeed() >= 0 ? 1: -1;
 
   // While there is nodes to add, we add !
   while (TryAddNode(currentSense))
