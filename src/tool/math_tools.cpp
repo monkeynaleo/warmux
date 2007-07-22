@@ -85,3 +85,6 @@ bool EgalZero (const double x){
 	return AbsReel(x) <= EPS_ZERO;
 }
 
+#ifdef _MSC_VER
+double round(double a) { return floor(a + (a>=0.0 ? 0.5 : -0.5)); }
+#endif

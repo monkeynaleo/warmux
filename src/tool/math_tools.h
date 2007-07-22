@@ -43,6 +43,15 @@ int Rad2Deg(double rad);
 double AbsReel (const double x);
 bool EgalZero (const double x);
 
+#ifdef WIN32
+#  include <float.h>
+#  define isnan _isnan
+#endif
+#ifdef _MSC_VER
+double round(double a);
+#define lround(a) ((int)round(a))
+#endif
+
 template <class T> T max(T a, T b)
 {
   return a > b ? a : b;
