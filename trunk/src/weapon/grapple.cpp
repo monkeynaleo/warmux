@@ -53,8 +53,8 @@ bool find_first_contact_point (Point2i from, double angle, int length,
   x_step = cos(angle) ;
   y_step = sin(angle) ;
 
-  from.x += (int)(skip * x_step) ;
-  from.y += (int)(skip * y_step) ;
+  from.x += lround(skip * x_step) ;
+  from.y += lround(skip * y_step) ;
 
   posd.x = (double)from.x ;
   posd.y = (double)from.y ;
@@ -63,19 +63,19 @@ bool find_first_contact_point (Point2i from, double angle, int length,
 
   length -= skip;
 
-  pos2.x = from.x + (int)(length * cos(angle));
-  pos2.y = from.y + (int)(length * sin(angle));
+  pos2.x = from.x + lround(length * cos(angle));
+  pos2.y = from.y + lround(length * sin(angle));
 
   while(!world.IsOutsideWorld(contact_point) &&
-	(length > 0))
+        (length > 0))
     {
       if (!world.IsInVacuum(contact_point))
-	return true ;
+        return true ;
 
       posd.x += x_step ;
       posd.y += y_step ;
-      contact_point.x = (int)round(posd.x) ;
-      contact_point.y = (int)round(posd.y) ;
+      contact_point.x = lround(posd.x) ;
+      contact_point.y = lround(posd.y) ;
       length-- ;
     }
 
@@ -364,18 +364,18 @@ void Grapple::Draw()
   x = handPos.x;
   y = handPos.y;
 
-  quad.x1 = (int)round((double)x - 2 * cos(angle));
-  quad.y1 = (int)round((double)y + 2 * sin(angle));
-  quad.x2 = (int)round((double)x + 2 * cos(angle));
-  quad.y2 = (int)round((double)y - 2 * sin(angle));
+  quad.x1 = lround((double)x - 2 * cos(angle));
+  quad.y1 = lround((double)y + 2 * sin(angle));
+  quad.x2 = lround((double)x + 2 * cos(angle));
+  quad.y2 = lround((double)y - 2 * sin(angle));
 
   for (std::list<rope_node_t>::reverse_iterator it = rope_nodes.rbegin();
        it != rope_nodes.rend(); it++)
     {
-      quad.x3 = (int)round((double)it->pos.x + 2 * cos(angle));
-      quad.y3 = (int)round((double)it->pos.y - 2 * sin(angle));
-      quad.x4 = (int)round((double)it->pos.x - 2 * cos(angle));
-      quad.y4 = (int)round((double)it->pos.y + 2 * sin(angle));
+      quad.x3 = lround((double)it->pos.x + 2 * cos(angle));
+      quad.y3 = lround((double)it->pos.y - 2 * sin(angle));
+      quad.x4 = lround((double)it->pos.x - 2 * cos(angle));
+      quad.y4 = lround((double)it->pos.y + 2 * sin(angle));
 
       float dx = sin(angle) * (float)m_node_sprite->GetHeight();
       float dy = cos(angle) * (float)m_node_sprite->GetHeight();
