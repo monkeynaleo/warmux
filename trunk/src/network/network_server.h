@@ -33,7 +33,7 @@ public:
   NetworkServer();
   ~NetworkServer();
 
-  virtual const bool IsConnected() const { return true; }
+  //virtual const bool IsConnected() const { return true; }
   virtual const bool IsServer() const { return true; }
   
   virtual void SendChatMessage(const std::string& txt);
