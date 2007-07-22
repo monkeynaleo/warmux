@@ -86,7 +86,14 @@ double Ground::Tangent(int x,int y){
    */
   Point2i p1,p2;
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
+  {
+#ifdef _MSC_VER
+    const unsigned long nan[2] ={0xffffffff, 0x7fffffff};
+    return *( double* )nan;
+#else
     return NAN;
+#endif
+  }
 
   if(!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y))
   {
