@@ -38,4 +38,10 @@ std::string GetHome ();
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory);
 
+typedef struct _FolderSearch FolderSearch;
+
+FolderSearch *OpenFolder(std::string dirname);
+const char* FolderSearchNext(FolderSearch *f);
+void CloseFolder(FolderSearch *f);
+
 #endif
