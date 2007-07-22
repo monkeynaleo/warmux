@@ -27,7 +27,6 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <unistd.h>
 #include <getopt.h>
 #ifndef WIN32
 #include <signal.h>
