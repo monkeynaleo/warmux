@@ -20,6 +20,9 @@
  *****************************************************************************/
 
 #include "results_menu.h"
+#ifdef _MSC_VER
+#  include <algorithm>  //std::sort
+#endif
 
 #include "character/character.h"
 #include "graphic/sprite.h"
