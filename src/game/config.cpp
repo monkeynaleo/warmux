@@ -195,10 +195,7 @@ void Config::LoadXml(xmlpp::Element *xml)
     ConfigTeam one_team;
     XmlReader::ReadString(team, "id", one_team.id);
     XmlReader::ReadString(team, "player_name", one_team.player_name);
-
-    int tmp_nb_characters;
-    XmlReader::ReadInt(team, "nb_characters", tmp_nb_characters);
-    one_team.nb_characters = (uint)tmp_nb_characters;
+    XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
 
     teams.push_back(one_team);
 
