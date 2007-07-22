@@ -123,12 +123,12 @@ const Point2i PhysicalObj::GetPosition() const
 
 int PhysicalObj::GetX() const
 {
-  return (int)round(GetPhysX() * PIXEL_PER_METER);
+  return lround(GetPhysX() * PIXEL_PER_METER);
 }
 
 int PhysicalObj::GetY() const
 {
-  return (int)round(GetPhysY() * PIXEL_PER_METER);
+  return lround(GetPhysY() * PIXEL_PER_METER);
 }
 
 int PhysicalObj::GetCenterX() const
@@ -864,7 +864,8 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
       position = randomSync.GetPoint(world.GetSize() - GetSize() + 1);
     }
     SetXY(position);
-    MSG_DEBUG("physic.position", "%s - Test in %d, %d",  m_name.c_str(), position.x, position.y);
+    MSG_DEBUG("physic.position", "%s (try %u/%u) - Test in %d, %d",
+              m_name.c_str(), bcl, NB_MAX_TRY, position.x, position.y);
 
     // Check physical object is not in the ground
     ok &= !IsGhost() && world.ParanoiacRectIsInVacuum(GetTestRect())  && IsInVacuum( Point2i(0, 1) );
