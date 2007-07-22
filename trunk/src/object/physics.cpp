@@ -30,9 +30,9 @@
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "game/time.h"
+#include "map/wind.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
-#include "map/wind.h"
 
 // Physical constants
 const double STOP_REBOUND_LIMIT = 0.5 ;
@@ -571,10 +571,10 @@ void Physics::Rebound(Point2d /*contactPos*/, double contact_angle)
     {
       // Compute rebound angle.
       /* if no tangent rebound in the opposit direction */
-      if(contact_angle == NAN)
-	angle = angle + M_PI ;
+      if(isnan(contact_angle))
+        angle = angle + M_PI ;
       else
-	angle =  M_PI - angle -2.0 *  contact_angle;
+        angle =  M_PI - angle -2.0 *  contact_angle;
 
       // Apply rebound factor to the object speed.
       norme = norme * m_rebound_factor;
@@ -584,8 +584,8 @@ void Physics::Rebound(Point2d /*contactPos*/, double contact_angle)
 
       // Check if we should stop rebounding.
       if (norme < STOP_REBOUND_LIMIT){
-	StopMoving();
-	return;
+        StopMoving();
+        return;
       }
       SignalRebound();
     }
