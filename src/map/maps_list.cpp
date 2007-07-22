@@ -28,7 +28,11 @@
 #include "tool/i18n.h"
 #include <iostream>
 #if !defined(WIN32) || defined(__MINGW32__)
-#include <dirent.h>
+#  include <dirent.h>
+#elif defined(_MSC_VER)
+#  include <algorithm>
+#  include <windows.h>
+#  undef LoadImage  // Macro from windows.h
 #endif
 
 extern const uint MAX_WIND_OBJECTS;
