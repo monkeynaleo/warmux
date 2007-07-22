@@ -63,7 +63,6 @@ Config::Config():
   m_game_mode("classic"),
   m_network_host("localhost"),
   m_network_port(WORMUX_NETWORK_PORT),
-  m_xml_loaded(),
   m_filename(),
   data_dir(),
   locale_dir(),
@@ -153,7 +152,6 @@ const ObjectConfig &Config::GetOjectConfig(const std::string &name, const std::s
 
 bool Config::DoLoading(void)
 {
-  m_xml_loaded = false;
   try
   {
     // Load XML conf
@@ -163,7 +161,6 @@ bool Config::DoLoading(void)
       return false;
     if (!LoadXml(doc.GetRoot()))
       return false;
-    m_xml_loaded = true;
   }
   catch (const xmlpp::exception &e)
   {
