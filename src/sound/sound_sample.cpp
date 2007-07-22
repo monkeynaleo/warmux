@@ -42,6 +42,6 @@ void SoundSample::Stop()
 
 bool SoundSample::IsPlaying()
 {
-  return Mix_Playing(channel);
+  return Mix_Playing(channel)>0;
 }
 
