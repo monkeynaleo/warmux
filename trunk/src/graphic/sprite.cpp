@@ -45,7 +45,7 @@ Sprite::Sprite() :
   Constructor();
 }
 
-Sprite::Sprite( Surface surface ) :
+Sprite::Sprite(const Surface& surface ) :
   cache(*this),
   animation(*this)
 {
@@ -114,8 +114,9 @@ void Sprite::AddFrame(const Surface &surf, unsigned int delay){
 
 void Sprite::SetSize(unsigned int w, unsigned int h){
   ASSERT(frame_width_pix == 0 && frame_height_pix == 0)
-	frame_width_pix = w;
-	frame_height_pix = h;
+  
+  frame_width_pix = w;
+  frame_height_pix = h;
 }
 
 void Sprite::SetSize(const Point2i &size){
@@ -152,7 +153,7 @@ Point2i Sprite::GetSizeMax() const{
 	return Point2i(GetWidthMax(), GetHeightMax());
 }
 
-unsigned int Sprite::GetFrameCount(){
+unsigned int Sprite::GetFrameCount() const{
    return frames.size();
 }
 
@@ -182,11 +183,9 @@ const SpriteFrame& Sprite::GetCurrentFrameObject() const{
    return frames[current_frame];
 }
 
-void Sprite::Scale( float scale_x, float scale_y){
-   if(this->scale_x == scale_x && this->scale_y == scale_y)
-	   return;
-   this->scale_x = scale_x;
-   this->scale_y = scale_y;
+void Sprite::Scale( float _scale_x, float _scale_y){
+   this->scale_x = _scale_x;
+   this->scale_y = _scale_y;
    cache.InvalidLastFrame();
 }
 
@@ -199,9 +198,9 @@ void Sprite::ScaleSize(Point2i size){
 	ScaleSize(size.x, size.y);
 }
 
-void Sprite::GetScaleFactors( float &scale_x, float &scale_y){
-   scale_x = this->scale_x;
-   scale_y = this->scale_y;
+void Sprite::GetScaleFactors( float &_scale_x, float &_scale_y) const {
+   _scale_x = this->scale_x;
+   _scale_y = this->scale_y;
 }
 
 void Sprite::SetFrameSpeed(unsigned int nv_fs){
@@ -209,11 +208,9 @@ void Sprite::SetFrameSpeed(unsigned int nv_fs){
      frames[f].delay = nv_fs;
 }
 
-void Sprite::SetAlpha( float alpha){
-  ASSERT(alpha >= 0.0 && alpha <= 1.0);
-  if(this->alpha == alpha)
-    return;
-  this->alpha = alpha;
+void Sprite::SetAlpha( float _alpha){
+  ASSERT(_alpha >= 0.0 && _alpha <= 1.0);
+  this->alpha = _alpha;
 }
 
 float Sprite::GetAlpha(){
@@ -238,7 +235,7 @@ const double &Sprite::GetRotation_rad()
   return rotation_rad;
 }
 
-void Sprite::SetRotation_HotSpot( const Point2i new_hotspot)
+void Sprite::SetRotation_HotSpot( const Point2i& new_hotspot)
 {
   rot_hotspot = user_defined;
   rhs_pos = new_hotspot;

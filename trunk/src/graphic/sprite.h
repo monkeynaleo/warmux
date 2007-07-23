@@ -55,7 +55,7 @@ public:
 
 public:
   explicit Sprite();
-  explicit Sprite( Surface surface);
+  explicit Sprite(const Surface& surface);
   Sprite(const Sprite &other);
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
@@ -64,7 +64,7 @@ public:
   // Frame number
   unsigned int GetCurrentFrame() const;
   void SetCurrentFrame( unsigned int frame_no);
-  unsigned int GetFrameCount();
+  unsigned int GetFrameCount() const;
 
   // Size
   unsigned int GetWidth() const;
@@ -76,7 +76,7 @@ public:
   Point2i GetSize() const;
   Point2i GetSizeMax() const;
 
-  void GetScaleFactors( float &scale_x, float &scale_y);
+  void GetScaleFactors( float &_scale_x, float &_scale_y) const;
   void SetSize(unsigned int w, unsigned int h);
   void SetSize(const Point2i &size);
   void Scale( float scale_x, float scale_y);
@@ -86,7 +86,7 @@ public:
   // Rotation
   void SetRotation_rad( double angle_rad);
   const double &GetRotation_rad();
-  void SetRotation_HotSpot( const Point2i new_hotspot);
+  void SetRotation_HotSpot( const Point2i& new_hotspot);
   void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   const Point2i& GetRotationPoint() { return rotation_point; };
 
