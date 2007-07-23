@@ -54,7 +54,7 @@ void Time::Reset(){
   real_time_pause_begin = 0;
 }
 
-uint Time::ReadRealTime() {
+uint Time::ReadRealTime() const {
   return SDL_GetTicks() - real_time_game_start - real_time_pause_dt;
 }
 

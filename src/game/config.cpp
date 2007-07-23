@@ -175,7 +175,7 @@ bool Config::DoLoading(void)
 }
 
 // Read personal config file
-void Config::LoadXml(xmlpp::Element *xml)
+void Config::LoadXml(const xmlpp::Element *xml)
 {
   std::cout << "o " << _("Reading personal config file") << std::endl;
 
@@ -328,7 +328,7 @@ bool Config::SaveXml()
  * Return the value of the environment variable 'name' or
  * 'default' if not set
  */
-std::string Config::GetEnv(const std::string & name, const std::string &default_value)
+std::string Config::GetEnv(const std::string & name, const std::string &default_value) const
 {
   const char *env = std::getenv(name.c_str());
   if (env != NULL) {

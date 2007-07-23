@@ -76,7 +76,7 @@ const std::string& GameMode::GetName() const
 }
 
 // Load data options from the selected game_mode
-bool GameMode::LoadXml(xmlpp::Element *xml)
+bool GameMode::LoadXml(const xmlpp::Element *xml)
 {
   std::string txt;
   if (XmlReader::ReadString(xml, "allow_character_selection", txt))

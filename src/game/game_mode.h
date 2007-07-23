@@ -73,7 +73,7 @@ private:
 
   XmlReader doc_objects;
 
-  bool LoadXml (xmlpp::Element *xml);
+  bool LoadXml (const xmlpp::Element *xml);
   bool ExportFileToString(const std::string& filename, std::string& contents) const;
 
   std::string GetFilename() const;

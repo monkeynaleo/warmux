@@ -106,7 +106,7 @@ void GameLoop::IgnorePendingInputEvents()
   while(SDL_PollEvent(&event));
 }
 
-void GameLoop::RefreshInput()
+void GameLoop::RefreshInput() const
 {
   // Poll and treat keyboard and mouse events
   SDL_Event event;
@@ -158,7 +158,7 @@ void GameLoop::RefreshInput()
 // ####################################################################
 // ####################################################################
 
-void GameLoop::RefreshObject()
+void GameLoop::RefreshObject() const
 {
   FOR_ALL_CHARACTERS(team,character)
     character->Refresh();
@@ -420,7 +420,7 @@ void GameLoop::SetCurrentBox(ObjBox * current_box)
   current_ObjBox = current_box;
 }
 
-ObjBox * GameLoop::GetCurrentBox() const
+ObjBox * GameLoop::GetCurrentBox()
 {
   return current_ObjBox;
 }
@@ -539,7 +539,7 @@ void GameLoop::Really_SetState(game_loop_state_t new_state)
   }
 }
 
-void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
+void GameLoop::SetState(game_loop_state_t new_state, bool begin_game) const
 {
   if (begin_game && Network::GetInstance()->IsServer())
     Network::GetInstance()->SetTurnMaster(true);
@@ -558,7 +558,7 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
   ActionHandler::GetInstance()->NewAction(a);
 }
 
-PhysicalObj* GameLoop::GetMovingObject()
+PhysicalObj* GameLoop::GetMovingObject() const
 {
   if (!ActiveCharacter().IsImmobile()) return &ActiveCharacter();
 
@@ -602,7 +602,7 @@ bool GameLoop::IsAnythingMoving()
 }
 
 // Signal death of a character
-void GameLoop::SignalCharacterDeath (Character *character)
+void GameLoop::SignalCharacterDeath (const Character *character)
 {
   std::string txt;
 
@@ -652,14 +652,14 @@ void GameLoop::SignalCharacterDeath (Character *character)
 }
 
 // Signal falling or any kind of damage of a character
-void GameLoop::SignalCharacterDamage(Character *character)
+void GameLoop::SignalCharacterDamage(const Character *character)
 {
   if (character->IsActiveCharacter())
     SetState(END_TURN);
 }
 
 // Apply Disease damage
-void GameLoop::ApplyDiseaseDamage()
+void GameLoop::ApplyDiseaseDamage() const
 {
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     if (character->IsDiseased()) {
@@ -670,7 +670,7 @@ void GameLoop::ApplyDiseaseDamage()
 }
 
 // Reduce energy of each character if we are in death mode
-void GameLoop::ApplyDeathMode ()
+void GameLoop::ApplyDeathMode () const
 {
   if(Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000)
   {

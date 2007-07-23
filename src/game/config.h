@@ -124,7 +124,7 @@ public:
 
 protected:
   bool SaveXml();
-  std::string GetEnv(const std::string & name, const std::string &default_value);
+  std::string GetEnv(const std::string & name, const std::string &default_value) const;
 
   std::string m_game_mode;
   std::string m_network_host;
@@ -162,7 +162,7 @@ private:
   Config();
   static Config * singleton;
   bool DoLoading(void);
-  void LoadXml(xmlpp::Element *xml);
+  void LoadXml(const xmlpp::Element *xml);
 
   /* this is mutable in order to be able to load config on fly when calling
    * GetOjectConfig() witch is not supposed to modify the object itself */
