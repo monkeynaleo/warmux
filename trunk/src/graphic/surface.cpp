@@ -383,7 +383,7 @@ Color Surface::GetColor(Uint32 color) const
  *
  * @param color
  */
-Uint32 Surface::MapColor(Color color) const
+Uint32 Surface::MapColor(const Color& color) const
 {
   return MapRGBA(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
@@ -474,8 +474,8 @@ int Surface::AAPolygonColor(std::list<Point2i> polygon, const Color & color)
   }
   int result = aapolygonRGBA(surface, vx, vy, polygon.size(), color.GetRed(),
                              color.GetGreen(), color.GetBlue(), color.GetAlpha());
-  delete vx;
-  delete vy;
+  delete[] vx;
+  delete[] vy;
   return result;
 }
 
@@ -495,8 +495,8 @@ int Surface::FilledPolygon(std::list<Point2i> polygon, const Color & color)
   }
   int result = filledPolygonRGBA(surface, vx, vy, polygon.size(), color.GetRed(),
                                  color.GetGreen(), color.GetBlue(), color.GetAlpha());
-  delete vx;
-  delete vy;
+  delete[] vx;
+  delete[] vy;
   return result;
 }
 
@@ -515,8 +515,8 @@ int Surface::TexturedPolygon(std::list<Point2i> polygon, const Surface * texture
     vy[i] = point->y;
   }
   int result = texturedPolygon(surface, vx, vy, polygon.size(), texture->surface, 0, 0);
-  delete vx;
-  delete vy;
+  delete[] vx;
+  delete[] vy;
   return result;
 }
 
@@ -717,7 +717,7 @@ Uint32 Surface::GetPixel(int x, int y){
  * @param y
  * @param pixel
  */
-void Surface::PutPixel(int x, int y, Uint32 pixel){
+void Surface::PutPixel(int x, int y, Uint32 pixel) const {
     int bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to set */
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
