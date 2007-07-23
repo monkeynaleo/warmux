@@ -35,14 +35,14 @@ class Video{
   std::list<Point2i> available_configs;
   void ComputeAvailableConfigs();
 
-  void SetWindowIcon(std::string icon);
+  void SetWindowIcon(const std::string& icon) const;
   void InitSDL(void);
-  void GameFullRefreshDrawing();
+  void GameFullRefreshDrawing() const;
   void AddConfigIfAbsent(int w, int h);
 
 public:
   Surface window;
-  void SetWindowCaption(std::string caption);
+  void SetWindowCaption(const std::string& caption) const;
   void SetMaxFps(uint max_fps);
   uint GetMaxFps() const;
   uint GetSleepMaxFps() const;
