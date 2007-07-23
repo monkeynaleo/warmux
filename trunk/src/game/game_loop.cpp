@@ -73,6 +73,9 @@ GameLoop::GameLoop():
   current_ObjBox(NULL),
   give_objbox(true),
   fps(),
+  delay(0),
+  time_of_next_frame(0),
+  time_of_next_phy_frame(0),
   character_already_chosen(false),
   chatsession()
 { }
