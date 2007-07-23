@@ -92,7 +92,7 @@ public:
   void GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a) const;
   Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const;
   Color GetColor(Uint32 color) const;
-  Uint32 MapColor(Color color) const;
+  Uint32 MapColor(const Color& color) const;
 
   void SetClipRect(const Rectanglei &rect);
   void Flip();
@@ -121,7 +121,7 @@ public:
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
   Uint32 GetPixel(int x, int y);
-  void PutPixel(int x, int y, Uint32 pixel);
+  void PutPixel(int x, int y, Uint32 pixel) const;
 
   bool IsNull() const;
   Point2i GetSize() const;
