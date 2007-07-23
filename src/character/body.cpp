@@ -225,7 +225,7 @@ Body::~Body()
   mvt_lst.clear();
 }
 
-void Body::ResetMovement()
+void Body::ResetMovement() const
 {
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
     current_clothe->layers[layer]->ResetMovement();
@@ -307,8 +307,8 @@ void Body::ApplySqueleton()
   // Move each member following the squeleton
   std::vector<junction>::iterator member = squel_lst.begin();
   // The first member is the body, we set it to pos:
-  member->member->pos = Point2f(0,0);
-  member->member->SetAngle(0);
+  member->member->pos = Point2f(0.0, 0.0);
+  member->member->SetAngle(0.0);
   member++;
 
   for(;member != squel_lst.end();
@@ -461,7 +461,7 @@ void Body::BuildSqueleton()
   AddChildMembers(squel_lst.front().member);
 }
 
-void Body::SetClothe(std::string name)
+void Body::SetClothe(const std::string& name)
 {
   MSG_DEBUG("body", " %s use clothe %s", owner->GetName().c_str(), name.c_str());
   if(current_clothe && current_clothe->name == name) return;
@@ -480,7 +480,7 @@ void Body::SetClothe(std::string name)
   ASSERT(current_clothe != NULL);
 }
 
-void Body::SetMovement(std::string name)
+void Body::SetMovement(const std::string& name)
 {
   MSG_DEBUG("body", " %s use movement %s", owner->GetName().c_str(), name.c_str());
   if(current_mvt && current_mvt->type == name) return;
@@ -511,7 +511,7 @@ void Body::PlayAnimation()
   SetMovementOnce(name.str());
 }
 
-void Body::SetClotheOnce(std::string name)
+void Body::SetClotheOnce(const std::string& name)
 {
   MSG_DEBUG("body", " %s use clothe %s once", owner->GetName().c_str(), name.c_str());
   if(current_clothe && current_clothe->name == name) return;
@@ -531,7 +531,7 @@ void Body::SetClotheOnce(std::string name)
   ASSERT(current_clothe != NULL);
 }
 
-void Body::SetMovementOnce(std::string name)
+void Body::SetMovementOnce(const std::string& name)
 {
   MSG_DEBUG("body", " %s use movement %s once", owner->GetName().c_str(), name.c_str());
   if(current_mvt && current_mvt->type == name) return;
@@ -559,7 +559,7 @@ void Body::SetMovementOnce(std::string name)
   ASSERT(current_mvt != NULL);
 }
 
-void Body::GetTestRect(uint &l, uint&r, uint &t, uint &b)
+void Body::GetTestRect(uint &l, uint&r, uint &t, uint &b) const
 {
   if(direction == DIRECTION_RIGHT)
   {
@@ -614,12 +614,12 @@ void Body::ResetWalk()
   walk_events = 0;
 }
 
-uint Body::GetMovementDuration()
+uint Body::GetMovementDuration() const
 {
   return current_mvt->frames.size() * current_mvt->speed;
 }
 
-uint Body::GetFrameCount()
+uint Body::GetFrameCount() const
 {
   return current_mvt->frames.size();
 }
@@ -662,15 +662,15 @@ void Body::SetRotation(double angle)
   need_rebuild = true;
 }
 
-const std::string& Body::GetMovement() { return current_mvt->type; }
-const std::string& Body::GetClothe() { return current_clothe->name; }
+const std::string& Body::GetMovement() const { return current_mvt->type; }
+const std::string& Body::GetClothe() const { return current_clothe->name; }
 
-void Body::DebugState()
+void Body::DebugState() const
 {
 	MSG_DEBUG("body.state", "clothe: %s\tmovement: %s\t%i", current_clothe->name.c_str(),current_mvt->type.c_str(), current_frame);
-	MSG_DEBUG("body.state", "(played once)clothe: %s\tmovement: %s",
-			(play_once_clothe_sauv?play_once_clothe_sauv->name.c_str():"(NULL)"),
-			(play_once_mvt_sauv?play_once_mvt_sauv->type.c_str():"(NULL)"),
-			play_once_frame_sauv);
+  MSG_DEBUG("body.state", "(played once)clothe: %s\tmovement: %s",
+            (play_once_clothe_sauv?play_once_clothe_sauv->name.c_str():"(NULL)"),
+			      (play_once_mvt_sauv?play_once_mvt_sauv->type.c_str():"(NULL)"),
+			      play_once_frame_sauv);
 	MSG_DEBUG("body.state", "need rebuild = %i",need_rebuild);
 }

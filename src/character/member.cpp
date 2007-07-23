@@ -27,7 +27,7 @@
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
 
-Member::Member(xmlpp::Element *xml, Profile* res):
+Member::Member(xmlpp::Element *xml, const Profile* res):
   parent(NULL),
   angle_rad(0),
   anchor(0,0),
@@ -216,7 +216,7 @@ void Member::ApplySqueleton(Member* parent_member)
     pos = pos + parent->attached_members.find(type)->second[parent->spr->GetCurrentFrame()];
 }
 
-void Member::ApplyMovement(member_mvt &mvt, std::vector<junction>& squel_lst)
+void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& squel_lst)
 {
   // Apply the movment to the member,
   // And apply the movement accordingly to the child members
