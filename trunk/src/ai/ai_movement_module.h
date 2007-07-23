@@ -58,7 +58,7 @@ class AIMovementModule
     BACK_TO_JUMP,
     JUMPING,
     FLYING,
-    ROPING,
+    ROPING
   } movement_type_t;
 
   movement_type_t current_movement;
