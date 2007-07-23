@@ -568,7 +568,7 @@ Polygon * Polygon::GetBezierInterpolation(double smooth_value, int num_steps, do
   return shape;
 }
 
-PolygonBuffer * Polygon::GetPolygonBuffer() const
+PolygonBuffer * Polygon::GetPolygonBuffer()
 {
   return shape_buffer;
 }
@@ -581,7 +581,7 @@ void Polygon::Expand(double expand_value)
     expand_value = -expand_value;
   std::vector<Point2d> tmp_shape;
   AffineTransform2D trans = AffineTransform2D::Rotate(M_PI_2);
-  Point2d current, next, vector, expand;
+  Point2d current, next, vect, expand;
   int i, j, k;
   for(i = 0; i < (int)original_shape.size(); i++) {
     j = (i + 1) % original_shape.size();
@@ -595,9 +595,9 @@ void Polygon::Expand(double expand_value)
       next    = original_shape[j];
       k++;
     }
-    vector = trans * (next - current);
-    vector = (vector / vector.Norm()) * expand_value; // Normalize and length
-    expand = current + vector;
+    vect = trans * (next - current);
+    vect = (vect / vect.Norm()) * expand_value; // Normalize and length
+    expand = current + vect;
     tmp_shape.push_back(expand);
     shape_buffer->vx[i] = (int)expand.x;
     shape_buffer->vy[i] = (int)expand.y;

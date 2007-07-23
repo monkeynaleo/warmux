@@ -156,7 +156,7 @@ class Polygon {
   Rectanglei GetRectangleToRefresh() const;
 
   // Buffer of transformed point
-  PolygonBuffer * GetPolygonBuffer() const;
+  PolygonBuffer * GetPolygonBuffer();
 
   // Type of the polygon
   bool IsTextured() const;
