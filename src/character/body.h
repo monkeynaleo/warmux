@@ -103,7 +103,7 @@ private:
 
 public:
 
-  Body(xmlpp::Element *xml, Profile* res);
+  Body(xmlpp::Element *xml, const Profile* res);
   Body(const Body&);
   ~Body();
 
