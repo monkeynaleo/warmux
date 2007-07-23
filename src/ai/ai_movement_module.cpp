@@ -372,8 +372,8 @@ void AIMovementModule::SetDestinationPoint(Point2i _destination_point)
 bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
 					  const Character& enemy) const
 {
-  uint delta_x = abs(shooter.GetX() - enemy.GetX());
-  uint delta_y = abs(shooter.GetY() - enemy.GetY());
+  int delta_x = abs(shooter.GetX() - enemy.GetX());
+  int delta_y = abs(shooter.GetY() - enemy.GetY());
 
   if (delta_x > 300)
     return false;
@@ -381,19 +381,16 @@ bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
   if (delta_y > 100)
     return false;
 
-  if (min_reachable_x > uint(enemy.GetX()) ||
-      uint(enemy.GetX()) > max_reachable_x)
+  if (min_reachable_x>enemy.GetX() || enemy.GetX()>max_reachable_x)
     return false;
-
   return true;
 }
 
 bool AIMovementModule::IsProgressing()
 {
-  if (uint(destination_point.GetX()) > max_reachable_x ||
-      uint(destination_point.GetX()) < min_reachable_x)
+  if (destination_point.GetX()>max_reachable_x ||
+	  destination_point.GetX()<min_reachable_x)
     return false;
-
   return true;
 }
 

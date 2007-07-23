@@ -32,7 +32,6 @@ class AIMovementModule
   uint m_current_time;
 
   // ====================== Points to avoid
- private:
   std::set<Point2i> points_to_avoid;
   void UpdateListOfPointsToAvoid();
  public:
@@ -41,7 +40,7 @@ class AIMovementModule
 
   // ==================== Destination point
  private:
-  uint min_reachable_x, max_reachable_x;
+  int min_reachable_x, max_reachable_x;
   Point2i destination_point;
  public:
   void SetDestinationPoint(Point2i destination_point);
