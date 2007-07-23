@@ -118,7 +118,7 @@ void AIMovementModule::PrepareJump()
 
 void AIMovementModule::GoBackToJump()
 {
-  ASSERT(current_movement = BACK_TO_JUMP);
+  ASSERT(current_movement == BACK_TO_JUMP);
 
   MakeStep();
 
@@ -145,7 +145,7 @@ void AIMovementModule::Jump()
 
 void AIMovementModule::EndOfJump()
 {
-  ASSERT(current_movement = JUMPING);
+  ASSERT(current_movement == JUMPING);
   MSG_DEBUG("ai.move", "End of Jump!");
   //GameMessages::GetInstance()->Add("finished to jump");
 
