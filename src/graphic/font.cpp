@@ -117,7 +117,7 @@ void Font::SetItalic()
   TTF_SetFontStyle(m_font, TTF_STYLE_ITALIC);
 }
 
-void Font::Write(const Point2i &pos, Surface &surface){
+void Font::Write(const Point2i &pos, const Surface &surface){
   AppWormux::GetInstance()->video->window.Blit(surface, pos);
 
   // TODO: Remove this line! (and use GameFont instead of Font)
