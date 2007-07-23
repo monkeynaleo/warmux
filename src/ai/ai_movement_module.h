@@ -35,7 +35,7 @@ class AIMovementModule
   std::set<Point2i> points_to_avoid;
   void UpdateListOfPointsToAvoid();
  public:
-  void AddPointToAvoid(Point2i dangerous_point);
+  void AddPointToAvoid(const Point2i& dangerous_point);
   // ======================================
 
   // ==================== Destination point
@@ -43,11 +43,11 @@ class AIMovementModule
   int min_reachable_x, max_reachable_x;
   Point2i destination_point;
  public:
-  void SetDestinationPoint(Point2i destination_point);
+  void SetDestinationPoint(const Point2i& destination_point);
   bool SeemsToBeReachable(const Character& shooter, // must be ActiveCharacter()
-			  const Character& enemy) const;
+			                    const Character& enemy) const;
   bool IsProgressing();
-  bool IsArrived();
+  bool IsArrived() const;
   // ======================================
   
   // ====================== Manage movement
@@ -69,7 +69,7 @@ class AIMovementModule
   
   void InverseDirection(bool completely_blocked);
 
-  void MakeStep();
+  void MakeStep() const;
 
   void Walk();
   void StopWalking();
@@ -79,8 +79,8 @@ class AIMovementModule
   void Jump();
   void EndOfJump();
 
-  bool ObstacleHeight(int& height);
-  bool RiskGoingOutOfMap();
+  bool ObstacleHeight(int& height) const;
+  bool RiskGoingOutOfMap() const;
   // ======================================
 
  public:

@@ -39,7 +39,7 @@
 // =================================================
 // Go on !
 // =================================================
-void AIMovementModule::MakeStep()
+void AIMovementModule::MakeStep() const
 {
   if(ActiveCharacter().IsImmobile()) {
     if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
@@ -55,7 +55,7 @@ void AIMovementModule::MakeStep()
 // Return true if sure that it does not need to jump
 // or to use parachute
 // =================================================
-bool AIMovementModule::ObstacleHeight(int& height)
+bool AIMovementModule::ObstacleHeight(int& height) const
 {
   if (ComputeHeightMovement(ActiveCharacter(), height, false))
     return true;
@@ -83,7 +83,7 @@ bool AIMovementModule::ObstacleHeight(int& height)
   return false;
 }
 
-bool AIMovementModule::RiskGoingOutOfMap()
+bool AIMovementModule::RiskGoingOutOfMap() const
 {
   if ( ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT &&
        ActiveCharacter().GetX() <= 5 ) {
@@ -347,7 +347,7 @@ void AIMovementModule::UpdateListOfPointsToAvoid()
   // TODO : Refresh position of mines
 }
 
-void AIMovementModule::AddPointToAvoid(Point2i dangerous_point)
+void AIMovementModule::AddPointToAvoid(const Point2i& dangerous_point)
 {
   points_to_avoid.insert(dangerous_point);
 }
@@ -359,7 +359,7 @@ void AIMovementModule::AddPointToAvoid(Point2i dangerous_point)
 //  uint min_reachable_x, max_reachable_x;
 //  Point2i destination_point;
 
-void AIMovementModule::SetDestinationPoint(Point2i _destination_point)
+void AIMovementModule::SetDestinationPoint(const Point2i& _destination_point)
 {
   destination_point = _destination_point;
 }
@@ -395,7 +395,7 @@ bool AIMovementModule::IsProgressing()
 }
 
 
-bool AIMovementModule::IsArrived()
+bool AIMovementModule::IsArrived() const
 {
   return (ActiveCharacter().GetPosition() == destination_point);
 }

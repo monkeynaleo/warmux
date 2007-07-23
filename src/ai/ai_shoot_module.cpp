@@ -40,7 +40,7 @@
 // Try to find an enemy which is shootable by
 // weapons like gun, shotgun, m16
 // =================================================
-const Character* AIShootModule::FindShootableEnemy(Character& shooter,
+const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 						   double& shoot_angle)
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character)
@@ -262,7 +262,7 @@ void AIShootModule::Shoot()
   }
 }
 
-const Character* AIShootModule::FindBazookaShootableEnemy(Character& shooter)
+const Character* AIShootModule::FindBazookaShootableEnemy(const Character& shooter) const
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character)
     return &(*character);
@@ -326,7 +326,7 @@ const Character* AIShootModule::FindEnemy()
   return m_enemy;
 }
 
-void AIShootModule::ChooseDirection()
+void AIShootModule::ChooseDirection() const
 {
   if ( m_enemy ) {
 
