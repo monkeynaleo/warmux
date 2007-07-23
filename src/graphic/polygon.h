@@ -72,7 +72,7 @@ class PolygonItem {
  public:
   PolygonItem();
   PolygonItem(PolygonItem * item);
-  PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
+  PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
   virtual ~PolygonItem();
   void SetPosition(const Point2d & pos);
   void SetAlignment(H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
@@ -111,7 +111,7 @@ class Polygon {
   Polygon operator=(const Polygon&);
  public:
   Polygon();
-  Polygon(const std::vector<Point2d> shape);
+  Polygon(const std::vector<Point2d>& shape);
   Polygon(Polygon & poly);
   virtual ~Polygon();
   // Point handling
@@ -132,11 +132,11 @@ class Polygon {
   int GetRandomPointIndex();
 
   // Interpolation handling
-  void AddBezierCurve(const Point2d anchor1, const Point2d control1,
-                             const Point2d control2, const Point2d anchor2,
-                             const int num_steps = 20, const bool add_first_point = true,
-                             const bool add_last_point = true);
-  void AddRandomCurve(const Point2d start, const Point2d end,
+  void AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
+                      const Point2d& control2, const Point2d& anchor2,
+                      const int num_steps = 20, const bool add_first_point = true,
+                      const bool add_last_point = true);
+  void AddRandomCurve(const Point2d& start, const Point2d& end,
                       const double x_random_offset, const double y_random_offset,
                       const int num_steps, const bool add_first_point = true,
                       const bool add_last_point = true);
@@ -168,7 +168,7 @@ class Polygon {
   void SetClosed();
 
   // Texture handling
-  Surface * GetTexture() const;
+  Surface * GetTexture();
   void SetTexture(Surface * texture_surface);
   // Color handling
   void SetBorderColor(const Color & color);

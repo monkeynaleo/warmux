@@ -93,7 +93,7 @@ PolygonItem::PolygonItem(PolygonItem * item)
   SetAlignment(item->h_align, item->v_align);
 }
 
-PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)
+PolygonItem::PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)
 {
   SetPosition(pos);
   SetSprite(new Sprite(*sprite));
@@ -183,7 +183,7 @@ Polygon::Polygon()
   Init();
 }
 
-Polygon::Polygon(const std::vector<Point2d> shape)
+Polygon::Polygon(const std::vector<Point2d>& shape)
 {
   Init();
   transformed_shape = original_shape = shape;
@@ -488,8 +488,8 @@ int Polygon::GetNbOfPoint() const
 
 // And the famous Bezier curve. And this algorithme is that simple ? I'm so disappointed !
 // But now you can say to the world wormux is using Bezier curve.
-void Polygon::AddBezierCurve(const Point2d anchor1, const Point2d control1,
-                             const Point2d control2, const Point2d anchor2,
+void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
+                             const Point2d& control2, const Point2d& anchor2,
                              const int num_steps, const bool add_first_point,
                              const bool add_last_point)
 {
@@ -508,7 +508,7 @@ void Polygon::AddBezierCurve(const Point2d anchor1, const Point2d control1,
 }
 
 // Generate random point between 2 points
-void Polygon::AddRandomCurve(const Point2d start, const Point2d end,
+void Polygon::AddRandomCurve(const Point2d& start, const Point2d& end,
                              const double x_random_offset, const double y_random_offset,
                              const int num_steps, const bool add_first_point,
                              const bool add_last_point)
@@ -623,7 +623,7 @@ bool Polygon::IsBordered() const
 }
 
 // Texture handling
-Surface * Polygon::GetTexture() const
+Surface * Polygon::GetTexture()
 {
   return texture;
 }
