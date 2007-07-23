@@ -54,9 +54,9 @@ private:
   } marqueur_t;
 
  public:
-  void SetBorderColor(Color color);
-  void SetBackgroundColor(Color color);
-  void SetValueColor(Color color);
+  void SetBorderColor(const Color& color);
+  void SetBackgroundColor(const Color& color);
+  void SetValueColor(const Color& color);
  private:
   typedef std::list<marqueur_t>::iterator marqueur_it;
   typedef std::list<marqueur_t>::const_iterator marqueur_it_const;

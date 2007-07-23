@@ -41,7 +41,7 @@ class PictureWidget : public Widget
 
  public:
   PictureWidget(const Rectanglei &rect);
-  PictureWidget(const Rectanglei &rect, const std::string resource_id);
+  PictureWidget(const Rectanglei &rect, const std::string& resource_id);
   ~PictureWidget();
   void SetSurface(const Surface& s, bool enable_scaling=false);
   void SetNoSurface();

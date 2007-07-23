@@ -30,7 +30,7 @@ PictureWidget::PictureWidget (const Rectanglei &rect) : Widget(rect)
   disabled = false;
 }
 
-PictureWidget::PictureWidget (const Rectanglei &rect, std::string resource_id) : Widget(rect)
+PictureWidget::PictureWidget (const Rectanglei &rect, const std::string& resource_id) : Widget(rect)
 {
   spr = NULL;
   disabled = false;
