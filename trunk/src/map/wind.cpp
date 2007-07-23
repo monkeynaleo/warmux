@@ -28,6 +28,7 @@
 #include "include/app.h"
 #include "map/map.h"
 #include "map/maps_list.h"
+#include "tool/debug.h"
 #include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
@@ -38,15 +39,13 @@
 #include "gui/progress_bar.h"
 
 const uint MAX_WIND_OBJECTS = 200;
-const uint BARRE_LARG = 80;
-const uint BARRE_HAUT = 10;
 const double force = 5; // Max wind strength in m/(sec*sec)
 const uint bar_speed = 20;
 
 Wind wind;
 
 WindParticle::WindParticle(std::string &xml_file, float scale) :
-  PhysicalObj("wind",xml_file)
+  PhysicalObj("wind", xml_file)
 {
   SetCollisionModel(true, false, false);
 
@@ -60,8 +59,9 @@ WindParticle::WindParticle(std::string &xml_file, float scale) :
   wind_factor = GetWindFactor() ;
   wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
   SetWindFactor(wind_factor);
-  StartMoving();
   SetAirResistFactor(GetAirResistFactor() * (1.0 + randomObj.GetLong(-100, 100)/400.0));
+
+  MSG_DEBUG("wind", "Create wind particle: %s, %f, %f", xml_file.c_str(), mass, wind_factor);
 
   // Fixe test rectangle
   int dx = 0 ;
@@ -119,8 +119,6 @@ void WindParticle::Refresh()
   else
     sprite->Update();
 
-  UpdatePosition();
-
   // Rotate the sprite if needed
   if(ActiveMap().wind.rotation_speed != 0.0)
   {
@@ -159,6 +157,8 @@ void WindParticle::Refresh()
     StartMoving();
     SetXY( Point2i(x, y) );
   }
+
+  UpdatePosition();
 }
 
 void WindParticle::Draw()
@@ -178,9 +178,16 @@ Wind::Wind(){
 
 Wind::~Wind()
 {
+  RemoveAllParticles();
+}
+
+void Wind::RemoveAllParticles()
+{
   iterator it=particles.begin(), end=particles.end();
-  for (; it != end; ++it)
+  while (it != end) {
     delete (*it);
+    it = particles.erase(it);
+  }
 }
 
 void Wind::Reset(){
@@ -189,14 +196,14 @@ void Wind::Reset(){
   m_val = m_nv_val = 0;
   Interface::GetInstance()->UpdateWindIndicator(m_val);
 
-  particles.clear();
+  RemoveAllParticles();
 
   if (!Config::GetInstance()->GetDisplayWindParticles())
-    return ;
+    return;
 
   uint nb = ActiveMap().wind.nb_sprite;
 
-  if(!nb) return;
+  if (!nb) return;
 
   std::string config_file = ActiveMap().m_directory + PATH_SEPARATOR + "config.xml";
 

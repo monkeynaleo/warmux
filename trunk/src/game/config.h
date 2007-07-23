@@ -57,6 +57,7 @@ public:
 
   const ObjectConfig &GetOjectConfig(const std::string &name,
                                      const std::string &xml_config) const;
+  void RemoveAllObjectConfigs();
 
   bool GetDisplayEnergyCharacter() const;
   void SetDisplayEnergyCharacter(const bool dec);

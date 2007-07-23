@@ -149,6 +149,17 @@ const ObjectConfig &Config::GetOjectConfig(const std::string &name, const std::s
   return *objcfg;
 }
 
+void Config::RemoveAllObjectConfigs()
+{
+  std::map<std::string, ObjectConfig*>::iterator it = config_set.begin(),
+    end = config_set.end();
+
+  while (it != end) {
+    delete (it->second);
+    config_set.erase(it);
+    it = config_set.begin();
+  }
+}
 
 bool Config::DoLoading(void)
 {
