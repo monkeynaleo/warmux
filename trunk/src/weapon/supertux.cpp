@@ -164,14 +164,12 @@ bool TuxLauncher::p_Shoot ()
   current_tux = static_cast<SuperTux *>(projectile);
   bool r = WeaponLauncher::p_Shoot();
 
-  if (r) m_is_active = true;
   return r;
 }
 
 void TuxLauncher::EndOfTurn()
 {
   // To go further in the game loop
-  m_is_active = false;
   GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
