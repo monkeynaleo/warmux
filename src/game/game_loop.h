@@ -87,10 +87,10 @@ public:
   // Get remaining time to play
   uint GetRemainingTime() const;
   // Signal death of a player
-  void SignalCharacterDeath (const Character *character);
+  void SignalCharacterDeath (const Character *character) const;
 
   // Signal character damage
-  void SignalCharacterDamage(const Character *character);
+  void SignalCharacterDamage(const Character *character) const;
 
   void SetCurrentBox(ObjBox * current_box);
   ObjBox * GetCurrentBox();
@@ -105,7 +105,7 @@ private:
   void RefreshInput() const;
   void IgnorePendingInputEvents();
 
-  void PingClient();
+  void PingClient() const;
 
   void CallDraw();
 
