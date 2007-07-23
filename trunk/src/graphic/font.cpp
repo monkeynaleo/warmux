@@ -117,7 +117,7 @@ void Font::SetItalic()
   TTF_SetFontStyle(m_font, TTF_STYLE_ITALIC);
 }
 
-void Font::Write(const Point2i &pos, const Surface &surface){
+void Font::Write(const Point2i& pos, const Surface &surface) const {
   AppWormux::GetInstance()->video->window.Blit(surface, pos);
 
   // TODO: Remove this line! (and use GameFont instead of Font)
@@ -170,8 +170,8 @@ Surface Font::Render(const std::string &txt, const Color &color, bool cache){
       surface = CreateSurface(txt, color);
       surface_text_table.insert( txt_sample(txt, surface) );
     } else {
-      txt_iterator p = surface_text_table.find( txt );
-      surface = p->second;
+      txt_iterator p2 = surface_text_table.find( txt );
+      surface = p2->second;
     }
   } else
     surface = CreateSurface(txt, color);
