@@ -263,7 +263,7 @@ void GameLoop::CallDraw()
   StatStop("GameDraw:flip()");
 }
 
-void GameLoop::PingClient()
+void GameLoop::PingClient() const
 {
   Action * a = new Action(Action::ACTION_NETWORK_PING);
   ActionHandler::GetInstance()->NewAction(a);
@@ -602,7 +602,7 @@ bool GameLoop::IsAnythingMoving()
 }
 
 // Signal death of a character
-void GameLoop::SignalCharacterDeath (const Character *character)
+void GameLoop::SignalCharacterDeath (const Character *character) const
 {
   std::string txt;
 
@@ -652,7 +652,7 @@ void GameLoop::SignalCharacterDeath (const Character *character)
 }
 
 // Signal falling or any kind of damage of a character
-void GameLoop::SignalCharacterDamage(const Character *character)
+void GameLoop::SignalCharacterDamage(const Character *character) const
 {
   if (character->IsActiveCharacter())
     SetState(END_TURN);
