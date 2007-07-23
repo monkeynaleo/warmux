@@ -386,7 +386,7 @@ bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
   return true;
 }
 
-bool AIMovementModule::IsProgressing()
+bool AIMovementModule::IsProgressing() const
 {
   if (destination_point.GetX()>max_reachable_x ||
 	  destination_point.GetX()<min_reachable_x)
