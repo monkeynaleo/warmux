@@ -34,6 +34,7 @@
 #include "interface/keyboard.h"
 #include "interface/loading_screen.h"
 #include "interface/mouse.h"
+#include "game/config.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
@@ -159,6 +160,8 @@ void GameInit::InitData()
 
 void GameInit::Init()
 {
+  Config::GetInstance()->RemoveAllObjectConfigs();
+
   // Disable sound during the loading of data
   bool enable_sound = jukebox.UseEffects();
   jukebox.ActiveEffects(false);

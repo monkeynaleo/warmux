@@ -53,9 +53,10 @@ class Wind
   uint m_last_move;
   uint m_last_part_mvt;
 
-public:
+private:
   std::list<WindParticle *> particles;
   typedef std::list<WindParticle *>::iterator iterator;
+  void RemoveAllParticles();
 
 public:
   Wind();
