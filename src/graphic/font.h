@@ -49,7 +49,7 @@ private:
 
   std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
-  void Write(const Point2i &pos, const Surface &surface);
+  void Write(const Point2i &pos, const Surface &surface) const;
 
   Font(int size);
   bool Load (const std::string& filename, int size);
