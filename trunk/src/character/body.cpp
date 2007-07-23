@@ -36,7 +36,7 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-Body::Body(xmlpp::Element* xml, Profile* res):
+Body::Body(xmlpp::Element* xml, const Profile* res):
   members_lst(),
   clothes_lst(),
   mvt_lst(),
@@ -102,7 +102,7 @@ Body::Body(xmlpp::Element* xml, Profile* res):
   xmlpp::Node::NodeList::iterator it4=nodes4.begin();
   std::map<std::string, std::string> mvt_alias;
   while(it4 != nodes4.end())
-   {
+  {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it4);
     std::string mvt, corresp;
     XmlReader::ReadStringAttr( elem, "movement", mvt);
