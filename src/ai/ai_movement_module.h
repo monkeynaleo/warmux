@@ -46,7 +46,7 @@ class AIMovementModule
   void SetDestinationPoint(const Point2i& destination_point);
   bool SeemsToBeReachable(const Character& shooter, // must be ActiveCharacter()
 			                    const Character& enemy) const;
-  bool IsProgressing();
+  bool IsProgressing() const;
   bool IsArrived() const;
   // ======================================
   
