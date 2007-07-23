@@ -194,7 +194,7 @@ void Sprite::ScaleSize(int width, int height){
         float(height)/float(frame_height_pix));
 }
 
-void Sprite::ScaleSize(Point2i size){
+void Sprite::ScaleSize(const Point2i& size){
 	ScaleSize(size.x, size.y);
 }
 
@@ -213,7 +213,7 @@ void Sprite::SetAlpha( float _alpha){
   this->alpha = _alpha;
 }
 
-float Sprite::GetAlpha(){
+float Sprite::GetAlpha() const {
   return alpha;
 }
 
@@ -229,7 +229,7 @@ void Sprite::SetRotation_rad( double angle_rad){
    cache.InvalidLastFrame();
 }
 
-const double &Sprite::GetRotation_rad()
+const double &Sprite::GetRotation_rad() const
 {
   ASSERT(rotation_rad > -2*M_PI && rotation_rad <= 2*M_PI);
   return rotation_rad;
@@ -245,7 +245,7 @@ void Sprite::SetRotation_HotSpot( const Point2i& new_hotspot)
     rot_hotspot = center; // avoid using Calculate_Rotation_Offset, thus avoiding a division by zero
 }
 
-void Sprite::Calculate_Rotation_Offset(Surface& tmp_surface){
+void Sprite::Calculate_Rotation_Offset(const Surface& tmp_surface){
   const SpriteFrame& frame = GetCurrentFrameObject();
   const Surface &surface = frame.surface;
   // Calculate offset of the depending on hotspot rotation position :
@@ -484,7 +484,7 @@ void Sprite::RefreshSurface()
     Calculate_Rotation_Offset(current_surface);
 }
 
-Surface Sprite::GetSurface() {
+Surface Sprite::GetSurface() const {
   ASSERT ( !current_surface.IsNull() );
   return current_surface;
 }
