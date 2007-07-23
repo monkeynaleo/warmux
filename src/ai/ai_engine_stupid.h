@@ -24,8 +24,6 @@
 #include "ai_movement_module.h"
 #include "ai_shoot_module.h"
 
-class Character;
-
 class AIStupidEngine
 {
  private:
@@ -46,7 +44,6 @@ class AIStupidEngine
 
   uint m_current_time;
 
- private:
   void BeginTurn();
 
   void ChooseDirection();

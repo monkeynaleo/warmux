@@ -192,7 +192,7 @@ const Character* AIShootModule::FindProximityEnemy(const Character& shooter) con
 bool AIShootModule::SelectProximityWeapon(const Character& enemy) const
 {
   // selecting between dynamite, mine taking care of enemy life points
-  uint life_points = enemy.GetEnergy();
+  int life_points = enemy.GetEnergy();
 
 //  TODO : baseball:
 //   if (IsNearWater(ActivePlayer(), enemy)) {
@@ -363,14 +363,14 @@ bool AIShootModule::Refresh(uint current_time)
     // We are near enough of an enemy (perhaps not the first one we have choosen)
     FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
       if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
-	   abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
-      //if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 50) {
-	if (&(*character) != m_enemy) {
-	  GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
+	         abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
+        //if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 50) {
+	      if (&(*character) != m_enemy) {
+	        GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
 					   + (*character).GetName());
-	}
- 	m_enemy = &(*character);
- 	Shoot();
+	      }
+ 	      m_enemy = &(*character);
+ 	      Shoot();
       }
     }
     break;
@@ -378,7 +378,6 @@ bool AIShootModule::Refresh(uint current_time)
   case SHOOT_FROM_POINT:
     Shoot();
     return false;
-    break;
 
   case SHOOT_BAZOOKA:
     ShootWithBazooka();
