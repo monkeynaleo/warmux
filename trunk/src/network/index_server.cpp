@@ -278,8 +278,6 @@ std::string IndexServer::ReceiveStr()
   if(size <= 0)
     return "";
 
-  char* str = new char[size+1];
-
   if(SDLNet_CheckSockets(sock_set, 5000) == 0)
     return "";
 
@@ -292,6 +290,7 @@ std::string IndexServer::ReceiveStr()
     return "";
   }
 
+  char* str = new char[size+1];
   str[size] = '\0';
 
   std::string st(str);
