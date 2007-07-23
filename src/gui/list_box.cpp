@@ -164,9 +164,9 @@ void ListBox::SetBackgroundColor(const Color & background)
   background_color = background;
 }
 
-void ListBox::SetSelectedItemColor(const Color & selected_item)
+void ListBox::SetSelectedItemColor(const Color & selected_color)
 {
-  selected_item_color = selected_item;
+  selected_item_color = selected_color;
 }
 
 void ListBox::SetDefaultItemColor(const Color & default_item)
@@ -306,7 +306,7 @@ void ListBox::AddItem (bool selected,
     Select (pos);
 }
 
-void ListBox::Sort()
+void ListBox::Sort() const
 {
   //std::sort( m_items.begin(), m_items.end(), CompareItems() );
 }

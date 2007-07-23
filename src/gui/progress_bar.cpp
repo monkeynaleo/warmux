@@ -35,15 +35,15 @@ ProgressBar::ProgressBar(){
    m_use_ref_val = false;
 }
 
-void ProgressBar::SetBorderColor(Color color){
+void ProgressBar::SetBorderColor(const Color& color){
    border_color = color;
 }
 
-void ProgressBar::SetBackgroundColor(Color color){
+void ProgressBar::SetBackgroundColor(const Color& color){
    background_color = color;
 }
 
-void ProgressBar::SetValueColor(Color color){
+void ProgressBar::SetValueColor(const Color& color){
    value_color = color;
 }
 
@@ -80,8 +80,8 @@ void ProgressBar::UpdateValue (long pval){
   val_barre = CalculeValBarre(val);
 }
 
-uint ProgressBar::CalculeVal (long val) const{
-  return BorneLong(val, min, max);
+uint ProgressBar::CalculeVal (long pval) const{
+  return BorneLong(pval, min, max);
 }
 
 uint ProgressBar::CalculeValBarre (long val) const{

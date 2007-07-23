@@ -42,7 +42,7 @@ Question::~Question()
     delete text;
 }
 
-int Question::TreatsKey (SDL_Event &event){
+int Question::TreatsKey (const SDL_Event &event){
 
   // Tests the key
   choice_iterator it=choices.begin(), end=choices.end();
@@ -77,10 +77,10 @@ void Question::Draw() const
 		    text->GetWidth() + 20, 
 		    text->GetHeight() + 20);
   
-    AppWormux * app = AppWormux::GetInstance();
+    AppWormux * appli = AppWormux::GetInstance();
     
-    app->video->window.BoxColor(rect, defaultColorBox);
-    app->video->window.RectangleColor(rect, defaultColorRect);
+    appli->video->window.BoxColor(rect, defaultColorBox);
+    appli->video->window.RectangleColor(rect, defaultColorRect);
   }
 
   if(text->GetText() != "")

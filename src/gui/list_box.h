@@ -53,7 +53,6 @@ class ListBox : public Widget
   ListBox operator=(const ListBox&);
   /*********************************************/
 
-private:
   bool always_one_selected;
 
   bool scrolling;
@@ -97,7 +96,7 @@ public:
 	       Font::font_size_t fsize = Font::FONT_SMALL,
 	       Font::font_style_t fstyle = Font::FONT_NORMAL,
 	       const Color& color = white_color);
-  void Sort();
+  void Sort() const;
 
   int MouseIsOnWhichItem(const Point2i &mousePosition) const;
 
