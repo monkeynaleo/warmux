@@ -71,7 +71,7 @@ const uint HAUT_ENERGIE = 6;
 // Delta angle used to move the crosshair
 const double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
 
-Body * Character::GetBody() const
+Body * Character::GetBody()
 {
   return body;
 }
@@ -215,7 +215,7 @@ void Character::SetDirection (Body::Direction_t nv_direction)
   m_team.crosshair.Refresh(GetFiringAngle());
 }
 
-void Character::DrawEnergyBar(int dy)
+void Character::DrawEnergyBar(int dy) const
 {
   if( IsDead() )
 	return;
@@ -543,7 +543,7 @@ void Character::PrepareShoot()
   MSG_DEBUG("weapon.shoot", "<- end");
 }
 
-bool Character::IsPreparingShoot()
+bool Character::IsPreparingShoot() const
 {
   return prepare_shoot;
 }
@@ -798,7 +798,7 @@ void Character::SetWeaponClothe()
   SetMovement("walk");
 }
 
-void Character::SetMovement(std::string name)
+void Character::SetMovement(const std::string& name)
 {
   if(IsDead()) return;
   MSG_DEBUG("body","Character %s -> SetMovement : %s",character_name.c_str(),name.c_str());
@@ -808,7 +808,7 @@ void Character::SetMovement(std::string name)
   SetTestRect(l,r,t,b);
 }
 
-void Character::SetMovementOnce(std::string name)
+void Character::SetMovementOnce(const std::string& name)
 {
   if(IsDead()) return;
   MSG_DEBUG("body","Character %s -> SetMovementOnce : %s",character_name.c_str(),name.c_str());
@@ -818,28 +818,28 @@ void Character::SetMovementOnce(std::string name)
   SetTestRect(l,r,t,b);
 }
 
-void Character::SetClothe(std::string name)
+void Character::SetClothe(const std::string& name)
 {
   if(IsDead() && name!="dead") return;
   MSG_DEBUG("body","Character %s -> SetClothe : %s",character_name.c_str(),name.c_str());
   body->SetClothe(name);
 }
 
-void Character::SetClotheOnce(std::string name)
+void Character::SetClotheOnce(const std::string& name)
 {
   if(IsDead()) return;
   MSG_DEBUG("body","Character %s -> SetClotheOnce : %s",character_name.c_str(),name.c_str());
   body->SetClotheOnce(name);
 }
 
-uint Character::GetTeamIndex()
+uint Character::GetTeamIndex() const
 {
   uint index = 0;
   teams_list.FindPlayingById( GetTeam().GetId(), index);
   return index;
 }
 
-uint Character::GetCharacterIndex()
+uint Character::GetCharacterIndex() const
 {
   uint index = 0;
   for(Team::iterator it = m_team.begin();
@@ -865,7 +865,7 @@ void Character::HandleKeyPressed_MoveRight()
   HandleKeyRefreshed_MoveRight();
 }
 
-void Character::HandleKeyRefreshed_MoveRight()
+void Character::HandleKeyRefreshed_MoveRight() const
 {
   HideGameInterface();
 
@@ -888,7 +888,7 @@ void Character::HandleKeyPressed_MoveLeft()
   HandleKeyRefreshed_MoveLeft();
 }
 
-void Character::HandleKeyRefreshed_MoveLeft()
+void Character::HandleKeyRefreshed_MoveLeft() const
 {
   HideGameInterface();
 
@@ -923,7 +923,7 @@ void Character::HandleKeyRefreshed_Up()
     }
 }
 
-void Character::HandleKeyReleased_Up(){}
+void Character::HandleKeyReleased_Up() const {}
 
 // #################### DOWN
 void Character::HandleKeyPressed_Down()
@@ -946,39 +946,39 @@ void Character::HandleKeyRefreshed_Down()
     }
 }
 
-void Character::HandleKeyReleased_Down(){}
+void Character::HandleKeyReleased_Down() const {}
 
 // #################### JUMP
 
-void Character::HandleKeyPressed_Jump()
+void Character::HandleKeyPressed_Jump() const
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_JUMP));
 }
 
-void Character::HandleKeyRefreshed_Jump(){}
+void Character::HandleKeyRefreshed_Jump() const {}
 
-void Character::HandleKeyReleased_Jump(){}
+void Character::HandleKeyReleased_Jump() const {}
 
 // #################### HIGH JUMP
-void Character::HandleKeyPressed_HighJump()
+void Character::HandleKeyPressed_HighJump() const
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
 }
 
-void Character::HandleKeyRefreshed_HighJump(){}
-void Character::HandleKeyReleased_HighJump(){}
+void Character::HandleKeyRefreshed_HighJump() const {}
+void Character::HandleKeyReleased_HighJump() const {}
 
 // #################### BACK JUMP
-void Character::HandleKeyPressed_BackJump()
+void Character::HandleKeyPressed_BackJump() const
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_BACK_JUMP));
 }
 
-void Character::HandleKeyRefreshed_BackJump(){}
-void Character::HandleKeyReleased_BackJump(){}
+void Character::HandleKeyRefreshed_BackJump() const {}
+void Character::HandleKeyReleased_BackJump() const {}

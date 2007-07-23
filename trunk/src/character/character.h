@@ -81,7 +81,7 @@ public:
   Body* body;
 
 private:
-  void DrawEnergyBar(int dy);
+  void DrawEnergyBar(int dy) const;
   void DrawName(int dy) const;
 
   void SignalDrowning();
@@ -127,7 +127,7 @@ public:
   void StopPlaying();
 
   void PrepareShoot();
-  bool IsPreparingShoot();
+  bool IsPreparingShoot() const;
   void DoShoot();
   double GetFiringAngle() const;
   double GetAbsFiringAngle() const;
@@ -158,8 +158,8 @@ public:
 
   // Team owner
   const Team& GetTeam() const;
-  uint GetTeamIndex();
-  uint GetCharacterIndex();
+  uint GetTeamIndex() const;
+  uint GetCharacterIndex() const;
 
   // Access to character info
   const std::string& GetName() const { return character_name; }
@@ -173,41 +173,41 @@ public:
   void ResetDamageStats();
 
   // Body handling
-  Body * GetBody() const;
+  Body * GetBody();
   void SetWeaponClothe();
-  void SetClothe(std::string name);
-  void SetMovement(std::string name);
-  void SetClotheOnce(std::string name);
-  void SetMovementOnce(std::string name);
+  void SetClothe(const std::string& name);
+  void SetMovement(const std::string& name);
+  void SetClotheOnce(const std::string& name);
+  void SetMovementOnce(const std::string& name);
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight();
-  void HandleKeyRefreshed_MoveRight();
+  void HandleKeyRefreshed_MoveRight() const;
   void HandleKeyReleased_MoveRight();
 
   void HandleKeyPressed_MoveLeft();
-  void HandleKeyRefreshed_MoveLeft();
+  void HandleKeyRefreshed_MoveLeft() const;
   void HandleKeyReleased_MoveLeft();
 
   void HandleKeyPressed_Up();
   void HandleKeyRefreshed_Up();
-  void HandleKeyReleased_Up();
+  void HandleKeyReleased_Up() const;
 
   void HandleKeyPressed_Down();
   void HandleKeyRefreshed_Down();
-  void HandleKeyReleased_Down();
+  void HandleKeyReleased_Down() const;
 
-  void HandleKeyPressed_Jump();
-  void HandleKeyRefreshed_Jump();
-  void HandleKeyReleased_Jump();
+  void HandleKeyPressed_Jump() const;
+  void HandleKeyRefreshed_Jump() const;
+  void HandleKeyReleased_Jump() const;
 
-  void HandleKeyPressed_HighJump();
-  void HandleKeyRefreshed_HighJump();
-  void HandleKeyReleased_HighJump();
+  void HandleKeyPressed_HighJump() const;
+  void HandleKeyRefreshed_HighJump() const;
+  void HandleKeyReleased_HighJump() const;
 
-  void HandleKeyPressed_BackJump();
-  void HandleKeyRefreshed_BackJump();
-  void HandleKeyReleased_BackJump();
+  void HandleKeyPressed_BackJump() const;
+  void HandleKeyRefreshed_BackJump() const;
+  void HandleKeyReleased_BackJump() const;
 
 };
 
