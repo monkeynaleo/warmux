@@ -34,7 +34,6 @@ class TextList{
   std::list<Text*> list;
   typedef std::list<Text*>::iterator iterator;
   
- public:
   // Constructors
   TextList();
   ~TextList();
@@ -45,7 +44,7 @@ class TextList{
   void Clear();
   int Size();
   void Draw(int x, int y, int height);
-  void DrawLine(Text* newline, int x, int y, int height);
+  void DrawLine(const Text* newline, int x, int y, int height) const;
 
 };
 

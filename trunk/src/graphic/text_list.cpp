@@ -29,6 +29,9 @@ TextList::TextList()
 
 TextList::~TextList()
 {
+  for (std::list<Text*>::iterator t=list.begin(); t!=list.end(); t++)
+     delete *t;
+
   list.clear();
 }
 
@@ -63,7 +66,7 @@ void TextList::Draw(int x, int y, int height){
   }
 }
 
-void TextList::DrawLine(Text* newline, int x, int y, int height){
+void TextList::DrawLine(const Text* newline, int x, int y, int height) const {
   int size = list.size();
 
   y += (size * height);
