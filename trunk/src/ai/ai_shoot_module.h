@@ -58,13 +58,13 @@ class AIShootModule
 				  const Character& enemy,
 				  double& shoot_angle);
 
-  static const Character* FindShootableEnemy(Character& shooter,
+  static const Character* FindShootableEnemy(const Character& shooter,
 					     double& shoot_angle);
 
   bool SelectFiringWeapon(double shoot_angle) const;
 
   void ShootWithBazooka();
-  const Character* FindBazookaShootableEnemy(Character& shooter);
+  const Character* FindBazookaShootableEnemy(const Character& shooter) const;
   // for proximity weapons like dynamite, mine, ...
   // TODO -> Go in ai_movment_module
   const Character *FindProximityEnemy(const Character& shooter) const;
@@ -72,7 +72,7 @@ class AIShootModule
   bool SelectProximityWeapon(const Character& enemy) const;
 
   // Watch the choosen enemy
-  void ChooseDirection();
+  void ChooseDirection() const;
   const Character* FindEnemy();
 
   void Shoot();

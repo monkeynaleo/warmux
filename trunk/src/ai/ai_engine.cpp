@@ -44,7 +44,7 @@ AIengine* AIengine::GetInstance()
   return singleton;
 }
 
-void AIengine::Refresh()
+void AIengine::Refresh() const
 {
   // AI does not have right to play
   if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
