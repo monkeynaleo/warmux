@@ -149,7 +149,7 @@ const std::list<Point2i>& Video::GetAvailableConfigs() const
   return available_configs;
 }
 
-void Video::GameFullRefreshDrawing()
+void Video::GameFullRefreshDrawing() const
 {
   if (Game::GetInstance()->IsGameLaunched()) {
     world.DrawSky(true);
@@ -197,11 +197,11 @@ void Video::ToggleFullscreen()
 #endif
 }
 
-void Video::SetWindowCaption(std::string caption){
+void Video::SetWindowCaption(const std::string& caption) const {
   SDL_WM_SetCaption( caption.c_str(), NULL );
 }
 
-void Video::SetWindowIcon(std::string filename){
+void Video::SetWindowIcon(const std::string& filename) const {
   SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
 }
 
