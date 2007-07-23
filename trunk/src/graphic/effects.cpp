@@ -65,12 +65,9 @@ Sprite* WaveSurface(Surface &a, unsigned int nbr_frames, unsigned int duration, 
 void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
 {
   float scale_x, scale_y;
-  int spr_w, spr_h;
   uint dt = (Time::GetInstance()->Read() - t0) % per;
 
   spr->Scale(1.0,1.0);
-  spr_w = spr->GetWidth();
-  spr_h = spr->GetHeight();
   dy = 0;
 
   //sprite at bottom:
