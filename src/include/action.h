@@ -130,7 +130,7 @@ public:
   // Work as a FIFO container, inspiteof the name of methods !
   void Push(int val);
   void Push(double val);
-  void Push(std::string val);
+  void Push(const std::string& val);
   void Push(const Point2i& val);
   void Push(const Point2d& val);
 

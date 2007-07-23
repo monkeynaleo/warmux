@@ -191,7 +191,7 @@ void Action::Push(const Point2d& val)
   Push(val.y);
 }
 
-void Action::Push(std::string val)
+void Action::Push(const std::string& val)
 {
   //Cut the string into 32bit values
   //But first, we write the size of the string:
@@ -255,13 +255,13 @@ double Action::PopDouble()
   var.pop_front();
   tmp[1] = var.front();
   var.pop_front();
-  memcpy(&val, &tmp, 8);
+  memcpy(&val, tmp, 8);
 #else
   tmp[1] = var.front();
   var.pop_front();
   tmp[0] = var.front();
   var.pop_front();
-  memcpy(&val, &tmp, 8);
+  memcpy(&val, tmp, 8);
 #endif
 
   MSG_DEBUG( "action", " (%s) Poping double : %f",
