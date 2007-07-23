@@ -244,9 +244,9 @@ bool Config::Save()
 
   // Create the directory if it doesn't exist
 #ifndef WIN32
-   if (mkdir (personal_dir.c_str(), 0750) != 0 && errno != EEXIST)
+  if (mkdir(personal_dir.c_str(), 0750) != 0 && errno != EEXIST)
 #else
-  if (_mkdir (personal_dir.c_str()) != 0 && errno != EEXIST)
+  if (_mkdir(personal_dir.c_str()) != 0 && errno != EEXIST)
 #endif
   {
     std::cerr << "o "
