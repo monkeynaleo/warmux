@@ -31,7 +31,8 @@ DamageStatistics::DamageStatistics(const Character& _owner) :
   damage_itself(0),
   max_damage(0),
   current_total_damage(0),
-  total_shots(0)
+  total_shots(0),
+  death_time(0) // If not initialized, undead ?
 {}
 
 DamageStatistics::DamageStatistics(const DamageStatistics& adamage_stats, const Character& _owner) :
@@ -40,7 +41,9 @@ DamageStatistics::DamageStatistics(const DamageStatistics& adamage_stats, const 
   damage_friendly_fire(adamage_stats.damage_friendly_fire),
   damage_itself(adamage_stats.damage_itself),
   max_damage(adamage_stats.max_damage),
-  current_total_damage(adamage_stats.current_total_damage)
+  current_total_damage(adamage_stats.current_total_damage),
+  total_shots(adamage_stats.total_shots),
+  death_time(adamage_stats.death_time) // XXX: May not be correct
 {}
 
 void DamageStatistics::ResetDamage()
