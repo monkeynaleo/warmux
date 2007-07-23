@@ -649,6 +649,7 @@ void Weapon::ChooseTarget(Point2i /*mouse_pos*/)
 
 void Weapon::SignalTurnEnd()
 {
+  StopLoading();
 }
 
 void Weapon::ActionStopUse()
