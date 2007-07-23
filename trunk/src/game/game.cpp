@@ -91,7 +91,7 @@ void Game::MessageEndOfGame() const
   TeamResults::deleteAllResults(results_list);
 }
 
-int Game::AskQuestion (Question &question, bool draw)
+int Game::AskQuestion (Question &question, bool draw) const
 {
   Time::GetInstance()->Pause();
 
@@ -182,7 +182,7 @@ void Game::Start()
   }
 }
 
-void Game::UnloadDatas()
+void Game::UnloadDatas() const
 {
   world.FreeMem();
   lst_objects.FreeMem();
@@ -191,7 +191,7 @@ void Game::UnloadDatas()
   jukebox.StopAll();
 }
 
-void Game::TogglePause()
+void Game::TogglePause() const
 {
   if(Time::GetInstance()->IsGamePaused())
     Time::GetInstance()->Continue();
@@ -199,7 +199,7 @@ void Game::TogglePause()
     Time::GetInstance()->Pause();
 }
 
-void Game::DisplayPause()
+void Game::DisplayPause() const
 {
   Question question;
   if(!Network::GetInstance()->IsLocal())
@@ -215,7 +215,7 @@ void Game::DisplayPause()
   jukebox.Resume();
 }
 
-bool Game::DisplayQuit()
+bool Game::DisplayQuit() const
 {
   Question question;
   const char *msg = _("Do you really want to quit? (Y/N)");

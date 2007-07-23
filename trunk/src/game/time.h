@@ -47,7 +47,7 @@ public:
   bool IsGamePaused() const;
 
   // Read the time of the game, excluding paused time
-  uint ReadRealTime();
+  uint ReadRealTime() const;
   uint Read() const;
   uint ReadSec() const;
   uint ReadMin() const;

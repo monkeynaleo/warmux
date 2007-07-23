@@ -38,15 +38,15 @@ private:
   Game();
   static Game * singleton;
 
-  int AskQuestion (Question &question, bool draw=true);
-  void DisplayPause();
-  bool DisplayQuit();
+  int AskQuestion (Question &question, bool draw=true) const;
+  void DisplayPause() const;
+  bool DisplayQuit() const;
 
 public:
   static Game * GetInstance();
 
   void Start();
-  void UnloadDatas();
+  void UnloadDatas() const;
 
   int NbrRemainingTeams() const;
   
@@ -57,7 +57,7 @@ public:
   void MessageLoading() const;
   void MessageEndOfGame() const;
 
-  void TogglePause();
+  void TogglePause() const;
   void UserWantEndOfGame() { want_end_of_game = true; };
 };
 #endif

@@ -81,38 +81,38 @@ public:
 
   // Read/Set State
   game_loop_state_t ReadState() const { return state; }
-  void SetState(game_loop_state_t new_state, bool begin_game=false);
+  void SetState(game_loop_state_t new_state, bool begin_game=false) const;
   void Really_SetState(game_loop_state_t new_state); // called by the action_handler
 
   // Get remaining time to play
   uint GetRemainingTime() const;
   // Signal death of a player
-  void SignalCharacterDeath (Character *character);
+  void SignalCharacterDeath (const Character *character);
 
   // Signal character damage
-  void SignalCharacterDamage(Character *character);
+  void SignalCharacterDamage(const Character *character);
 
   void SetCurrentBox(ObjBox * current_box);
-  ObjBox * GetCurrentBox() const;
+  ObjBox * GetCurrentBox();
 
 private:
 
   // Refresh all objects (position, state ...)
-  void RefreshObject();
+  void RefreshObject() const;
   void RefreshClock();
 
   // Input management (keyboard/mouse)
-  void RefreshInput();
+  void RefreshInput() const;
   void IgnorePendingInputEvents();
 
   void PingClient();
 
   void CallDraw();
 
-  PhysicalObj* GetMovingObject();
+  PhysicalObj* GetMovingObject() const;
   bool IsAnythingMoving();
-  void ApplyDiseaseDamage();
-  void ApplyDeathMode();
+  void ApplyDiseaseDamage() const;
+  void ApplyDeathMode() const;
 
   void __SetState_PLAYING();
   void __SetState_HAS_PLAYED();
