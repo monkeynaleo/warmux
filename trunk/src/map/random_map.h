@@ -43,7 +43,7 @@ class MapElement {
    Surface element;
    Point2i position;
  public:
-   MapElement(Surface & object, Point2i & position);
+   MapElement(const Surface & object, const Point2i & position);
    Surface & GetElement();
    Point2i & GetPosition();
 };
@@ -90,18 +90,18 @@ class RandomMap {
  public:
    RandomMap(Profile *profile, const int width, const int height);
    void SetSize(const int width, const int height);
-   const Point2i GetSize();
-   const int GetWidth();
-   const int GetHeight();
+   const Point2i GetSize() const;
+   const int GetWidth() const;
+   const int GetHeight() const;
    void AddElement(Surface * object, Point2i position);
    void DrawElement();
    void SetBorderSize(const double border);
-   void SetBorderColor(const Color color);
-   const bool IsOpen();
+   void SetBorderColor(const Color& color);
+   const bool IsOpen() const;
    void Generate();
    bool GenerateIsland(double width, double height);
    void SaveMap();
-   Surface GetRandomMap();
+   Surface GetRandomMap() const;
 };
 
 #endif /* RANDOM_MAP_H */

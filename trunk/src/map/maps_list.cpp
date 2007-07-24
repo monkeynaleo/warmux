@@ -152,7 +152,7 @@ bool InfoMap::UseWater()
   return use_water;
 }
 
-bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
+bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
 {
   XmlReader::ReadBool(xml, "random", random);
   // Read author informations
@@ -355,7 +355,7 @@ void MapsList::SelectMapByIndex (uint index)
   terrain_actif = index;
 }
 
-int MapsList::GetActiveMapIndex ()
+int MapsList::GetActiveMapIndex () const
 {
   return terrain_actif;
 }

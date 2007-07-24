@@ -95,7 +95,7 @@ void Map::FreeMem()
   to_redraw_particles_now->clear();
 }
 
-void Map::ToRedrawOnMap(Rectanglei r)
+void Map::ToRedrawOnMap(const Rectanglei& r)
 {
   to_redraw->push_back(r);
 }
@@ -122,26 +122,26 @@ void Map::SwitchDrawingCacheParticles()
   to_redraw_particles->clear();
 }
 
-void Map::Dig(const Point2i position, const Surface& surface)
+void Map::Dig(const Point2i& position, const Surface& surface)
 {
    ground.Dig (position, surface);
    to_redraw->push_back(Rectanglei(position, surface.GetSize()));
 }
 
-void Map::Dig(const Point2i center, const uint radius)
+void Map::Dig(const Point2i& center, const uint radius)
 {
    ground.Dig (center, radius);
    to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE)
                                       , Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
-void Map::PutSprite(const Point2i pos, Sprite* spr)
+void Map::PutSprite(const Point2i& pos, Sprite* spr)
 {
    ground.PutSprite (pos, spr);
    to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
-void Map::MergeSprite(const Point2i pos, Sprite * spr)
+void Map::MergeSprite(const Point2i& pos, const Sprite * spr)
 {
   Surface tmp = spr->GetSurface();
   ground.MergeSprite (pos, tmp);
@@ -343,7 +343,7 @@ bool CompareRectangle(const Rectanglei& a, const Rectanglei& b)
   return ( a.GetTopLeftPoint() <= b.GetTopLeftPoint() );
 }
 
-void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache)
+void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
 {
   rectangleCache.sort(CompareRectangle);
 

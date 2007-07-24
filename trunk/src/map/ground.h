@@ -30,7 +30,7 @@ class Ground : public Tile
 private:
   bool open;
   bool PointContigu(int x,int y, int & p_x,int & p_y,
-                    int pas_bon_x,int pas_bon_y);
+                    int pas_bon_x,int pas_bon_y) const;
   Point2i lastPos;
 
   static float table[5][5];
@@ -51,7 +51,7 @@ public:
   //returns the angle formed by the ground tangent au terrain
   double Tangent(int x,int y);
 
-  void RedrawParticleList(std::list<Rectanglei> &list);
+  void RedrawParticleList(std::list<Rectanglei> &list) const;
 };
 
 #endif

@@ -132,7 +132,7 @@ double Ground::Tangent(int x,int y){
 }
 
 bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
-                           int bad_x,int bad_y)
+                           int bad_x,int bad_y) const
 {
   //Look for a pixel around (x,y) that is at the edge of the ground
   //and vaccum
@@ -269,7 +269,7 @@ void Ground::Draw(bool redraw_all)
   RedrawParticleList(*world.to_redraw_particles);
 }
 
-void Ground::RedrawParticleList(std::list<Rectanglei> &list){
+void Ground::RedrawParticleList(std::list<Rectanglei> &list) const {
 	std::list<Rectanglei>::iterator it;
 
 	for( it = list.begin(); it != list.end(); ++it )
