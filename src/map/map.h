@@ -66,7 +66,7 @@ public:
   void DrawAuthorName();
 
   // To manage the cache mechanism
-  void ToRedrawOnMap(Rectanglei r);
+  void ToRedrawOnMap(const Rectanglei& r);
   void ToRedrawOnScreen(Rectanglei r);
 
   // Are we in the world or in vacuum ?
@@ -94,14 +94,14 @@ public:
   bool IsOpen() const { return ground.IsOpen(); }
 
   // Dig the map using a picture
-  void Dig(const Point2i position, const Surface& alpha_sur);
+  void Dig(const Point2i& position, const Surface& alpha_sur);
   // Dig a circle hole in the map
-  void Dig(const Point2i center, const uint radius);
+  void Dig(const Point2i& center, const uint radius);
 
   // Insert a sprite into the ground
-  void PutSprite(const Point2i pos, Sprite* spr);
+  void PutSprite(const Point2i& pos, Sprite* spr);
   // Merge a sprite into the ground
-  void MergeSprite(const Point2i pos, Sprite* spr);
+  void MergeSprite(const Point2i& pos, const Sprite* spr);
 
   int GetWidth() const { return ground.GetSizeX(); }
   int GetHeight() const { return ground.GetSizeY(); }
@@ -114,7 +114,7 @@ public:
 
   void SwitchDrawingCache();
   void SwitchDrawingCacheParticles();
-  void OptimizeCache(std::list<Rectanglei>& rectangleCache);
+  void OptimizeCache(std::list<Rectanglei>& rectangleCache) const;
 };
 
 extern Map world;

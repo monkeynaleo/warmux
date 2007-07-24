@@ -58,7 +58,7 @@ private:
 
   Profile *res_profile;
 
-  bool ProcessXmlData(xmlpp::Element *xml);
+  bool ProcessXmlData(const xmlpp::Element *xml);
   void LoadData();
 
 public:
@@ -115,7 +115,7 @@ public:
   int FindMapById (const std::string &id);
   void SelectMapByName (const std::string &nom);
   void SelectMapByIndex (uint index);
-  int GetActiveMapIndex ();
+  int GetActiveMapIndex () const;
   InfoMap& ActiveMap();
 };
 

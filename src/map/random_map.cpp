@@ -52,7 +52,7 @@ RandomElementList::~RandomElementList()
   }
 }
 
-MapElement::MapElement(Surface & object, Point2i & pos)
+MapElement::MapElement(const Surface & object, const Point2i & pos)
 {
   element = object;
   position = pos;
@@ -100,17 +100,17 @@ void RandomMap::SetSize(const int width, const int height)
   this->height = height;
 }
 
-const Point2i RandomMap::GetSize()
+const Point2i RandomMap::GetSize() const
 {
   return Point2i(width, height);
 }
 
-const int RandomMap::GetWidth()
+const int RandomMap::GetWidth() const
 {
   return width;
 }
 
-const int RandomMap::GetHeight()
+const int RandomMap::GetHeight() const
 {
   return height;
 }
@@ -133,12 +133,12 @@ void RandomMap::SetBorderSize(const double border)
   border_size = border;
 }
 
-void RandomMap::SetBorderColor(const Color color)
+void RandomMap::SetBorderColor(const Color& color)
 {
   border_color = color;
 }
 
-const bool RandomMap::IsOpen()
+const bool RandomMap::IsOpen() const
 {
   return is_open;
 }
@@ -248,7 +248,7 @@ void RandomMap::SaveMap()
   result.ImgSave(Config::GetInstance()->GetPersonalDir() + ActiveMap().ReadFullMapName() + " - last random generation.png");
 }
 
-Surface RandomMap::GetRandomMap()
+Surface RandomMap::GetRandomMap() const
 {
   return result;
 }
