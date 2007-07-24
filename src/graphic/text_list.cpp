@@ -43,7 +43,7 @@ void TextList::AddText(const std::string &txt, uint maxlines){
     list.pop_front();
 }
 
-int TextList::Size(){
+int TextList::Size() const {
   return list.size();
 }
 
