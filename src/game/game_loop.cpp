@@ -100,7 +100,7 @@ void GameLoop::Init()
 
 // ignore all pending events
 // useful after loading screen
-void GameLoop::IgnorePendingInputEvents()
+void GameLoop::IgnorePendingInputEvents() const
 {
   SDL_Event event;
   while(SDL_PollEvent(&event));
@@ -583,7 +583,7 @@ PhysicalObj* GameLoop::GetMovingObject() const
   return ParticleEngine::IsSomethingMoving();
 }
 
-bool GameLoop::IsAnythingMoving()
+bool GameLoop::IsAnythingMoving() const
 {
   // Is the weapon still active or an object still moving ??
   bool object_still_moving = false;

@@ -103,14 +103,14 @@ private:
 
   // Input management (keyboard/mouse)
   void RefreshInput() const;
-  void IgnorePendingInputEvents();
+  void IgnorePendingInputEvents() const;
 
   void PingClient() const;
 
   void CallDraw();
 
   PhysicalObj* GetMovingObject() const;
-  bool IsAnythingMoving();
+  bool IsAnythingMoving() const;
   void ApplyDiseaseDamage() const;
   void ApplyDeathMode() const;
 
