@@ -36,6 +36,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
   m_image = resource_manager.LoadImage(res, resource_id);
   m_full_circle = resource_manager.LoadImage(res, "menu/full_circle");
+  m_full_circle_border = resource_manager.LoadImage(res, "menu/full_circle_border");
   m_partial_circle_color = resource_manager.LoadColor(res, "menu/partial_circle_color");
   resource_manager.UnLoadXMLProfile( res); 
 
@@ -99,7 +100,12 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
 
   video_window.FilledPolygon (points, m_partial_circle_color);
 
-  // 3. finally let's put the image
+  // 3. then draw the full circle border
+  uint tmp_circle_border_x = GetPositionX() + (GetSizeX() - m_full_circle_border.GetWidth())/4 ;
+  uint tmp_circle_border_y = GetPositionY() + (GetSizeY() - m_full_circle_border.GetHeight() - txt_label->GetHeight() - 5) /2;
+  video_window.Blit(m_full_circle_border, Point2i(tmp_circle_border_x, tmp_circle_border_y));
+
+  // 4. finally let's put the image
   uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/4 ;
   uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
 

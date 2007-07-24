@@ -40,6 +40,7 @@ class SpinButtonWithPicture : public Widget
 
   Surface m_image;
   Surface m_full_circle;
+  Surface m_full_circle_border;
   Color m_partial_circle_color;
 
  protected:
