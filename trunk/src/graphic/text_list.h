@@ -42,7 +42,7 @@ class TextList{
   void AddText(const std::string &txt, uint maxlines);
   void DeleteLine();
   void Clear();
-  int Size();
+  int Size() const;
   void Draw(int x, int y, int height);
   void DrawLine(const Text* newline, int x, int y, int height) const;
 
