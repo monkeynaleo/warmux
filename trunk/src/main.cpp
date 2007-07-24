@@ -35,7 +35,6 @@ using namespace std;
 
 #include <SDL.h>
 #include "game/config.h"
-#include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "graphic/font.h"
@@ -50,6 +49,7 @@ using namespace std;
 #include "menu/network_connection_menu.h"
 #include "menu/network_menu.h"
 #include "menu/options_menu.h"
+#include "network/download.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team_config.h"
@@ -58,7 +58,6 @@ using namespace std;
 #include "tool/random.h"
 #include "tool/stats.h"
 
-#include "network/download.h"
 
 static menu_item choice = menuNULL;
 static bool skip_menu = false;
@@ -279,7 +278,7 @@ void AppWormux::DisplayLoadingPicture()
   video->window.Flip();
 }
 
-void AppWormux::InitFonts()
+void AppWormux::InitFonts() const
 {
   if (TTF_Init() == -1) {
     Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
@@ -287,7 +286,7 @@ void AppWormux::InitFonts()
   }
 }
 
-void AppWormux::End()
+void AppWormux::End() const
 {
   cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
 
@@ -306,7 +305,7 @@ void AppWormux::End()
     << " " << Constants::EMAIL << endl;
 }
 
-void AppWormux::DisplayWelcomeMessage()
+void AppWormux::DisplayWelcomeMessage() const
 {
   cout << "=== " << _("Wormux version ") << Constants::VERSION << endl;
   cout << "=== " << _("Authors:") << ' ';
