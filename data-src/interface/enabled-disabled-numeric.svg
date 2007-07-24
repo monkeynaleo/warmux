@@ -14,14 +14,14 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.45"
-   sodipodi:docbase="/home/yekcim/Desktop"
+   sodipodi:docbase="/home/yekcim/Dev/wormux/data-src/interface"
    sodipodi:docname="enabled-disabled-numeric.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="C:\Documents and Settings\user\Bureau\dessin-3.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
    version="1.0"
-   sodipodi:modified="true">
+   sodipodi:modified="TRUE">
   <defs
      id="defs4">
     <linearGradient
@@ -300,9 +300,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4342857"
-     inkscape:cx="125"
-     inkscape:cy="175"
+     inkscape:zoom="5.7371428"
+     inkscape:cx="130.30645"
+     inkscape:cy="138.21145"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1270"
@@ -494,20 +494,18 @@
          style="opacity:0;color:#000000;fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.33844364;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:47.70000001;stroke-opacity:0;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
-       id="g3402"
-       inkscape:export-filename="./g3402.png"
+       id="g3207"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       transform="translate(13.285693,16.08395)">
+       inkscape:export-ydpi="90">
       <path
          sodipodi:nodetypes="cccc"
          id="path2406"
-         d="M 752.5301,423.99294 L 717.18935,463.21911 M 724.63667,469.90116 L 759.98323,430.70499"
-         style="color:#000000;fill:#b20606;fill-opacity:1;fill-rule:nonzero;stroke:#e7e7e7;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         d="M 765.81579,440.07689 L 730.47504,479.30306 M 737.92236,485.98511 L 773.26892,446.78894"
+         style="color:#000000;fill:#b20606;fill-opacity:1;fill-rule:nonzero;stroke:#e7e7e7;stroke-width:2.7;stroke-linecap:butt;stroke-linejoin:miter;marker:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
       <path
          sodipodi:nodetypes="ccccc"
          id="path2408"
-         d="M 757.37878,418.62936 L 712.49226,468.06497 C 712.63152,468.73937 719.38425,474.27353 720.36868,474.6612 L 764.83191,425.34141 C 765.17402,425.00038 758.0892,418.05207 757.37878,418.62936 z "
+         d="M 770.66447,434.71331 L 725.77795,484.14892 C 725.91721,484.82332 732.66994,490.35748 733.65437,490.74515 L 778.1176,441.42536 C 778.45971,441.08433 771.37489,434.13602 770.66447,434.71331 z "
          style="color:#000000;fill:#b20606;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8.74144936;stroke-linecap:butt;stroke-linejoin:miter;marker:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
