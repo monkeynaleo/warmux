@@ -284,13 +284,14 @@ std::string IndexServer::ReceiveStr()
   if(!SDLNet_SocketReady(socket))
     return "";
 
+  char* str = new char[size+1];
   if( SDLNet_TCP_Recv(socket, str, size) < 1 )
   {
+    delete[] str;
     Disconnect();
     return "";
   }
 
-  char* str = new char[size+1];
   str[size] = '\0';
 
   std::string st(str);
