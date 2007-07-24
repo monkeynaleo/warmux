@@ -48,11 +48,16 @@ GameMessages * GameMessages::GetInstance() {
 GameMessages::GameMessages() {
 }
 
+GameMessages::~GameMessages()
+{
+  Reset();
+}
+
 // Clean up the message list
 void GameMessages::Reset(){
-  iterator i;
-  for( i=liste.begin(); i != liste.end(); i++){
-    Message * msg = *i;
+  std::list<Message *>::iterator it;
+  for( it=liste.begin(); it != liste.end(); it++){
+    Message * msg = *it;
     ASSERT(msg); /* the message must be valid if nothing went wrong */
     delete (msg);
     msg = NULL;
