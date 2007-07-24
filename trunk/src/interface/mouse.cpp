@@ -132,17 +132,17 @@ void Mouse::ActionLeftClic() const
 }
 
 
-void Mouse::ActionRightClic()
+void Mouse::ActionRightClic() const
 {
   Interface::GetInstance()->weapons_menu.SwitchDisplay();
 }
 
-void Mouse::ActionWheelUp()
+void Mouse::ActionWheelUp() const
 {
   ActiveTeam().AccessWeapon().HandleMouseWheelUp();
 }
 
-void Mouse::ActionWheelDown()
+void Mouse::ActionWheelDown() const
 {
   ActiveTeam().AccessWeapon().HandleMouseWheelDown();
 }
@@ -181,7 +181,7 @@ bool Mouse::HandleClic (const SDL_Event& event)
   return true;
 }
 
-void Mouse::ChoixVerPointe()
+void Mouse::ChoixVerPointe() const
 {
   if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
     return;
