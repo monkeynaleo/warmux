@@ -184,7 +184,7 @@ void AppWormux::Init()
   cout << "[ " << _("Run game") << " ]" << endl;
 }
 
-void AppWormux::ParseArgs(int argc, char* argv[])
+void AppWormux::ParseArgs(int argc, char* argv[]) const
 {
   char c;
   int option_index = 0;
