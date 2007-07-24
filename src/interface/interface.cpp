@@ -407,7 +407,7 @@ void Interface::UpdateWindIndicator(int wind_value)
   wind_bar.UpdateValue(wind_value);
 }
 
-void AbsoluteDraw(const Surface &s, Point2i pos)
+void AbsoluteDraw(const Surface &s, const Point2i& pos)
 {
   Rectanglei rectSurface(pos, s.GetSize());
 
