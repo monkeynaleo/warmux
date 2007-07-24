@@ -151,10 +151,12 @@ void WindParticle::Refresh()
 
   m_alive = ALIVE;
 
-  if(x!=GetX() || y!=GetY())
+  if (m_alive != ALIVE || x!=GetX() || y!=GetY())
   {
+    m_alive = ALIVE;
     StartMoving();
     SetXY( Point2i(x, y) );
+    MSG_DEBUG("wind", "new position %d, %d - mass %f, wind_factor %f\n", x, y, GetMass(), GetWindFactor());
   }
 
   UpdatePosition();
