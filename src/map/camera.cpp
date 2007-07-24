@@ -174,7 +174,7 @@ void Camera::Refresh(){
     AutoCrop();
 }
 
-void Camera::FollowObject(PhysicalObj *obj, bool follow, bool center_on, bool force_center_on_object){
+void Camera::FollowObject(const PhysicalObj *obj, bool follow, bool center_on, bool force_center_on_object){
   MSG_DEBUG( "camera.tracking", "Following object %s, center_on=%d, follow=%d", obj->GetName().c_str(), center_on, follow);
   if ((center_on) && (followed_object != obj ||
                       !IsVisible(*obj) || force_center_on_object))
@@ -188,7 +188,7 @@ void Camera::FollowObject(PhysicalObj *obj, bool follow, bool center_on, bool fo
   followed_object = obj;
 }
 
-void Camera::StopFollowingObj(PhysicalObj* obj){
+void Camera::StopFollowingObj(const PhysicalObj* obj){
   if(Game::GetInstance()->IsGameFinished())
     return;
 
@@ -196,7 +196,7 @@ void Camera::StopFollowingObj(PhysicalObj* obj){
     FollowObject((PhysicalObj*)&ActiveCharacter(), true, true, true);
 }
 
-bool Camera::IsVisible(const PhysicalObj &obj){
+bool Camera::IsVisible(const PhysicalObj &obj) const {
    return Intersect( obj.GetRect() );
 }
 
