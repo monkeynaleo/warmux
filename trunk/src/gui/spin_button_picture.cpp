@@ -35,6 +35,8 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
   m_image = resource_manager.LoadImage(res, resource_id);
+  m_full_circle = resource_manager.LoadImage(res, "menu/full_circle");
+  m_partial_circle_color = resource_manager.LoadColor(res, "menu/partial_circle_color");
   resource_manager.UnLoadXMLProfile( res); 
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
@@ -68,11 +70,40 @@ void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
 
 void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
-  // center the image on the first half
+  Surface video_window = AppWormux::GetInstance()->video->window;
+
+  //  the computed positions are to center on the image part of the widget
+
+  // 1. first draw the full circle
+  uint tmp_circle_x = GetPositionX() + (GetSizeX() - m_full_circle.GetWidth())/4 ;
+  uint tmp_circle_y = GetPositionY() + (GetSizeY() - m_full_circle.GetHeight() - txt_label->GetHeight() - 5) /2;
+  video_window.Blit(m_full_circle, Point2i(tmp_circle_x, tmp_circle_y));
+
+  // 2. then draw the partial circle
+  uint center_x = GetPositionX() + (GetSizeX() + m_full_circle.GetWidth())/4 ;
+  uint center_y = GetPositionY() + (GetSizeY() - txt_label->GetHeight() - 5) /2;
+  static uint small_r = 25;
+  static uint big_r = 35;
+  double max_angle = 2*M_PI*(m_value-m_min_value)/(m_max_value-m_min_value);
+  double delta_angle = M_PI/100; // magic... ajust if not good
+  long num = static_cast<long> (max_angle / delta_angle) + 1;
+  std::list<Point2i> points;
+
+  for (long ii = 0; ii <= num ; ii++)
+    points.push_back (Point2i (static_cast<int>(center_x + big_r * sin (ii * delta_angle)),
+			       static_cast<int>(center_y - big_r * cos (ii * delta_angle))));
+
+  for (long ii = num; ii >= 0; ii--)
+    points.push_back (Point2i (static_cast<int>(center_x + small_r * sin (ii * delta_angle)),
+			       static_cast<int>(center_y - small_r * cos (ii * delta_angle))));
+
+  video_window.FilledPolygon (points, m_partial_circle_color);
+
+  // 3. finally let's put the image
   uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/4 ;
   uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
 
-  AppWormux::GetInstance()->video->window.Blit(m_image, Point2i(tmp_x, tmp_y));
+  video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
 
   tmp_x = GetPositionX() + (3*GetSizeX()/4);
   tmp_y = GetPositionY() + (GetSizeY()/2) - txt_label->GetHeight()/2;
