@@ -88,9 +88,9 @@ private:
   const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 
   void ActionLeftClic() const;
-  void ActionRightClic();
-  void ActionWheelDown();
-  void ActionWheelUp();
+  void ActionRightClic() const;
+  void ActionWheelDown() const;
+  void ActionWheelUp() const;
 public:
 
   static Mouse * GetInstance();
@@ -99,7 +99,7 @@ public:
 
   void Refresh();
   void TestCamera();
-  void ChoixVerPointe();
+  void ChoixVerPointe() const;
 
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
