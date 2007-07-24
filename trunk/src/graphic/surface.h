@@ -115,12 +115,12 @@ public:
   int FillRect(const Rectanglei &dstRect, Uint32 color) const;
   int FillRect(const Rectanglei &dstRect, const Color &color) const;
 
-  int ImgLoad(std::string filename);
-  int ImgSave(std::string filename);
+  int ImgLoad(const std::string& filename);
+  int ImgSave(const std::string& filename);
   Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
-  Uint32 GetPixel(int x, int y);
+  Uint32 GetPixel(int x, int y) const;
   void PutPixel(int x, int y, Uint32 pixel) const;
 
   bool IsNull() const;
