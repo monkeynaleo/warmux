@@ -71,7 +71,7 @@ public:
   bool need_check_empty;
   bool need_delete;
 
-TileItem_AlphaSoftware(const Point2i &size);
+  TileItem_AlphaSoftware(const Point2i &size);
   ~TileItem_AlphaSoftware();
 
   unsigned char GetAlpha(const Point2i &pos);
@@ -88,14 +88,14 @@ TileItem_AlphaSoftware(const Point2i &size);
 
 private:
   TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
-  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos);
-  unsigned char GetAlpha_Index0(const Point2i &pos);
-  inline unsigned char GetAlpha_Index3(const Point2i &pos);
-  inline unsigned char GetAlpha_Generic(const Point2i &pos);
+  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos) const;
+  unsigned char GetAlpha_Index0(const Point2i &pos) const;
+  inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
+  inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
   Surface GetSurface();
 
-  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp);
-  void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp);
+  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
+  void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
 
   Point2i m_size;
   Surface m_surface;

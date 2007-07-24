@@ -43,7 +43,7 @@ public:
   void Dig(const Point2i &center, const uint radius);
 
   // Insert a sprite into the ground
-  void PutSprite(const Point2i pos, Sprite* spr);
+  void PutSprite(const Point2i& pos, const Sprite* spr);
   // Merge a sprite into map (using alpha information)
   void MergeSprite(const Point2i &position, Surface & provider);
 
@@ -62,7 +62,7 @@ public:
   void DrawTile_Clipped(Rectanglei clip_rectangle) const;
 
   // Return a surface of the ground inside the rect
-  Surface GetPart(Rectanglei& rec);
+  Surface GetPart(const Rectanglei& rec);
 
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();

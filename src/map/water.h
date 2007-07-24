@@ -48,7 +48,7 @@ public:
   void Free();
   void Refresh();
   void Draw();
-  bool IsActive();
+  bool IsActive() const { return actif; }
   int GetHeight(int x);
 };
 #endif

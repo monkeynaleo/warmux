@@ -25,7 +25,6 @@
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
-#include "include/app.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "tool/debug.h"
@@ -44,7 +43,7 @@ const uint bar_speed = 20;
 
 Wind wind;
 
-WindParticle::WindParticle(std::string &xml_file, float scale) :
+WindParticle::WindParticle(const std::string &xml_file, float scale) :
   PhysicalObj("wind", xml_file)
 {
   SetCollisionModel(true, false, false);
@@ -218,7 +217,7 @@ double Wind::GetStrength() const{
   return m_nv_val * force / 100.0;
 }
 
-void Wind::ChooseRandomVal(){
+void Wind::ChooseRandomVal() const{
   int val = randomObj.GetLong(-100, 100);
   ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_WIND, val));
 }
