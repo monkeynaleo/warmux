@@ -34,7 +34,7 @@ private:
 	Point2i lastPos;
 	Point2i tstVect;
 	Point2i margin;
-	void RedrawParticleList(std::list<Rectanglei> &list);
+	void RedrawParticleList(std::list<Rectanglei> &list) const;
 	void RedrawParticle(const Rectanglei &particle) const;
 	Point2i GetSkyPos() const;
 

@@ -83,15 +83,15 @@ unsigned char TileItem_AlphaSoftware::GetAlpha(const Point2i &pos){
     return (this->*_GetAlpha)(pos);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const Point2i &pos){
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const Point2i &pos) const {
     return *(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x * 4 + 0);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const Point2i &pos){
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const Point2i &pos) const {
     return *(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x * 4 + 3);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos){
+unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos) const {
     unsigned char r, g, b, a;
 
     Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x*m_surface.GetBytesPerPixel()); 
@@ -165,7 +165,7 @@ void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
   m_surface.MergeSurface(spr, position);
 }
 
-void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp)
+void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const
 {
   if( start_x < CELL_SIZE.x && end_x >= 0)
   {
@@ -186,7 +186,7 @@ void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned 
   }
 }
 
-void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp)
+void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const
 {
   if( start_x < CELL_SIZE.x && end_x >= 0)
   {

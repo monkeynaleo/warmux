@@ -89,7 +89,7 @@ void Tile::Dig(const Point2i &center, const uint radius){
         }
 }
 
-void Tile::PutSprite(const Point2i pos, Sprite* spr)
+void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
 {
   Rectanglei rec = Rectanglei(pos, spr->GetSizeMax());
   Point2i firstCell = Clamp(pos/CELL_SIZE);
@@ -162,7 +162,7 @@ void Tile::LoadImage (Surface& terrain){
        item.push_back ( new TileItem_AlphaSoftware(CELL_SIZE) );
 
     // Fill the TileItem objects
-	Point2i i;
+    Point2i i;
     for( i.y = 0; i.y < nbCells.y; i.y++ )
         for( i.x = 0; i.x < nbCells.x; i.x++ ){
             int piece = i.y * nbCells.x + i.x;
@@ -230,12 +230,12 @@ void Tile::DrawTile_Clipped(Rectanglei worldClip) const
 				Point2i ptDest = destRect.GetPosition() - camera.GetPosition();
 				Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
 			
-                AppWormux::GetInstance()->video->window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
+                                AppWormux::GetInstance()->video->window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
 			}
         }
 }
 
-Surface Tile::GetPart(Rectanglei& rec)
+Surface Tile::GetPart(const Rectanglei& rec)
 {
   Surface part(rec.GetSize(), SDL_SWSURFACE|SDL_SRCALPHA, true);
   part.SetAlpha(0,0);
@@ -283,7 +283,7 @@ void Tile::CheckEmptyTiles()
     if(t->need_check_empty)
       t->CheckEmpty();
     if(t->need_delete)
-   {
+    {
       // no need to display this tile as it can be deleted!
 #ifdef DBG_TILE
      printf("Deleting tile %i\n",i);

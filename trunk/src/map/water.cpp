@@ -224,9 +224,3 @@ int Water::GetHeight(int x)
   else
     return world.GetHeight();
 }
-
-bool Water::IsActive()
-{
-  return actif;
-}
-

@@ -41,7 +41,7 @@ public:
   Sprite *flipped;
 
 public:
-  WindParticle(std::string& xml_file, float scale);
+  WindParticle(const std::string& xml_file, float scale);
   ~WindParticle();
   void Draw();
   void Refresh();
@@ -62,7 +62,7 @@ public:
   Wind();
   ~Wind();
   double GetStrength() const;
-  void ChooseRandomVal();
+  void ChooseRandomVal() const;
   void SetVal (long val);
   void Refresh();
   void Reset();
