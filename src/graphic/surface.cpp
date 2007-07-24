@@ -458,6 +458,20 @@ int Surface::CircleColor(const uint &x, const uint &y, const uint &rad, const Co
   return circleRGBA( surface, x, y, rad, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
+int Surface::FilledCircleColor(const uint &x, const uint &y, const uint &rad, const Color &color){
+  return filledCircleRGBA( surface, x, y, rad, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+}
+
+int Surface::PieColor(const uint &x, const uint &y, const uint &rad, const int &start, const int &end, const Color &color)
+{
+  return pieRGBA(surface, x, y, rad, start, end, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+}
+
+int Surface::FilledPieColor(const uint &x, const uint &y, const uint &rad, const int &start, const int &end, const Color &color)
+{
+  return filledPieRGBA(surface, x, y, rad, start, end, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+}
+
 int Surface::AAPolygonColor(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color){
   return aapolygonRGBA(surface, vx, vy, n, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }

@@ -103,6 +103,9 @@ public:
   int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
+  int FilledCircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
+  int PieColor(const uint &x, const uint &y, const uint &rad, const int &start, const int &end, const Color &color);
+  int FilledPieColor(const uint &x, const uint &y, const uint &rad, const int &start, const int &end, const Color &color);
   int AAPolygonColor(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color);
   int AAPolygonColor(std::list<Point2i> polygon, const Color & color);
   int FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color);
