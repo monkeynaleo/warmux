@@ -61,7 +61,7 @@ class RandomMap {
   enum {
     DENTED_CIRCLE,
     DENTED_TRAPEZE,
-    ROUNDED_RECTANGLE,
+    ROUNDED_RECTANGLE
   } shape_type;
  protected:
    double border_size;
@@ -93,7 +93,7 @@ class RandomMap {
    const Point2i GetSize() const;
    const int GetWidth() const;
    const int GetHeight() const;
-   void AddElement(Surface * object, Point2i position);
+   void AddElement(const Surface * object, const Point2i& position);
    void DrawElement();
    void SetBorderSize(const double border);
    void SetBorderColor(const Color& color);
