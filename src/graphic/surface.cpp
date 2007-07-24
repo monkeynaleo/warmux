@@ -557,7 +557,7 @@ int Surface::FillRect(const Rectanglei &dstRect, const Color &color) const{
  *
  * @param filename
  */
-int Surface::ImgLoad(std::string filename){
+int Surface::ImgLoad(const std::string& filename){
   AutoFree();
   surface = IMG_Load( filename.c_str() );
 
@@ -568,7 +568,7 @@ int Surface::ImgLoad(std::string filename){
  *
  * @param filename
  */
-int Surface::ImgSave(std::string filename){
+int Surface::ImgSave(const std::string& filename){
   FILE *f             = NULL;
   png_structp png_ptr = NULL;
   png_infop info_ptr  = NULL;
@@ -684,7 +684,7 @@ Surface Surface::DisplayFormat(){
  * @param x
  * @param y
  */
-Uint32 Surface::GetPixel(int x, int y){
+Uint32 Surface::GetPixel(int x, int y) const {
     int bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to retrieve */
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
@@ -697,11 +697,11 @@ Uint32 Surface::GetPixel(int x, int y){
         return *(Uint16 *)p;
 
     case 3:
-        if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
             return p[0] << 16 | p[1] << 8 | p[2];
-        else
+#else
             return p[0] | p[1] << 8 | p[2] << 16;
-
+#endif
     case 4:
         return *(Uint32 *)p;
 
@@ -732,15 +732,15 @@ void Surface::PutPixel(int x, int y, Uint32 pixel) const {
         break;
 
     case 3:
-        if(SDL_BYTEORDER == SDL_BIG_ENDIAN) {
-            p[0] = (pixel >> 16) & 0xff;
-            p[1] = (pixel >> 8) & 0xff;
-            p[2] = pixel & 0xff;
-        } else {
-            p[0] = pixel & 0xff;
-            p[1] = (pixel >> 8) & 0xff;
-            p[2] = (pixel >> 16) & 0xff;
-        }
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+        p[0] = (pixel >> 16) & 0xff;
+        p[1] = (pixel >> 8) & 0xff;
+        p[2] = pixel & 0xff;
+#else
+        p[0] = pixel & 0xff;
+        p[1] = (pixel >> 8) & 0xff;
+        p[2] = (pixel >> 16) & 0xff;
+#endif
         break;
 
     case 4:

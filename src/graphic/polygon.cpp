@@ -378,7 +378,7 @@ void Polygon::DeletePoint(int index)
   transformed_shape = original_shape = vector_tmp;
 }
 
-void Polygon::AddItem(Sprite * sprite, const Point2d & pos, PolygonItem::H_align h_a, PolygonItem::V_align v_a)
+void Polygon::AddItem(const Sprite * sprite, const Point2d & pos, PolygonItem::H_align h_a, PolygonItem::V_align v_a)
 {
   items.push_back(new PolygonItem(sprite, pos, h_a, v_a));
 }

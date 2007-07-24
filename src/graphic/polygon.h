@@ -181,7 +181,7 @@ class Polygon {
   void DrawOnScreen();
 
   // Item management
-  void AddItem(Sprite * sprite, const Point2d & pos,
+  void AddItem(const Sprite * sprite, const Point2d & pos,
                PolygonItem::H_align h_a = PolygonItem::H_CENTERED,
                PolygonItem::V_align v_a = PolygonItem::V_CENTERED);
   void AddItem(PolygonItem * item);
