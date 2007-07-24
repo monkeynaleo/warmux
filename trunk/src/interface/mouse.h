@@ -81,13 +81,13 @@ private:
 
   Mouse();
   pointer_t ScrollPointer() const;
-  bool DrawMovePointer();
+  bool DrawMovePointer() const;
   void ScrollCamera() const;
   void DrawSelectPointer();
 
   const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 
-  void ActionLeftClic();
+  void ActionLeftClic() const;
   void ActionRightClic();
   void ActionWheelDown();
   void ActionWheelUp();
@@ -114,7 +114,7 @@ public:
   void HideUntilNextMove();
 
   // Center the pointer on the screen
-  void CenterPointer();
+  void CenterPointer() const;
 };
 
 #endif

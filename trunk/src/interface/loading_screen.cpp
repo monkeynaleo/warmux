@@ -68,8 +68,8 @@ void LoadingScreen::DrawBackground()
   AppWormux::GetInstance()->video->Flip();
 }
 
-void LoadingScreen::StartLoading(uint nb, std::string resource,
-				 std::string label)
+void LoadingScreen::StartLoading(uint nb, const std::string& resource,
+				 const std::string& label) const
 {
   Surface image = resource_manager.LoadImage(res, "loading_screen/"+resource);
 

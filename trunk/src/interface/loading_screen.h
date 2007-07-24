@@ -44,8 +44,8 @@ class LoadingScreen
   static LoadingScreen* GetInstance();
 
   void DrawBackground();
-  void StartLoading(uint nb, std::string resource, 
-		    std::string label);
+  void StartLoading(uint nb, const std::string& resource, 
+		    const std::string& label) const;
 };
 
 #endif

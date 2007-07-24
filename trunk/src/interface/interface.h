@@ -125,7 +125,7 @@ public:
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
 };
 
-void AbsoluteDraw(const Surface& s, Point2i pos);
+void AbsoluteDraw(const Surface& s, const Point2i& pos);
 void HideGameInterface();
 void ShowGameInterface();
 

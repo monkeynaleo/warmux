@@ -91,7 +91,7 @@ int ManMachineInterface::GetKeyAssociatedToAction(Key_t at) const
   return 0;
 }
 
-bool ManMachineInterface::MoveCamera(const Key_t &key)
+bool ManMachineInterface::MoveCamera(const Key_t &key) const
 {
   bool r = true;
 

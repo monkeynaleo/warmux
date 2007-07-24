@@ -76,7 +76,7 @@ Mouse::Mouse(){
   resource_manager.UnLoadXMLProfile(res);
 }
 
-void Mouse::ActionLeftClic()
+void Mouse::ActionLeftClic() const
 {
   const Point2i pos_monde = GetWorldPosition();
 
@@ -425,7 +425,7 @@ Mouse::pointer_t Mouse::ScrollPointer() const
   return POINTER_STANDARD;
 }
 
-bool Mouse::DrawMovePointer()
+bool Mouse::DrawMovePointer() const
 {
   if (scroll_actif) {
     AppWormux::GetInstance()->video->window.Blit( pointer_move, GetPosition() );
@@ -576,7 +576,7 @@ void Mouse::HideUntilNextMove()
 }
 
 // Center the pointer on the screen
-void Mouse::CenterPointer()
+void Mouse::CenterPointer() const
 {
   MSG_DEBUG("mouse", "1) %d, %d\n", GetPosition().GetX(),
 	    GetPosition().GetY());

@@ -67,7 +67,7 @@ protected:
   std::map<int, Key_t> layout;
   std::list<uint8> registred_event;
   bool PressedKeys[256]; // stupid default value
-  bool MoveCamera(const Key_t &key);
+  bool MoveCamera(const Key_t &key) const;
 
   void RegisterEvent(uint8 event_type);
   bool IsRegistredEvent(uint8 event_type);
