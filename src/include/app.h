@@ -37,7 +37,7 @@ private:
 
 private:
   void Init();
-  void ParseArgs(int argc, char* argv[]);
+  void ParseArgs(int argc, char* argv[]) const;
   void InitWindow();
   void DisplayLoadingPicture();
   void InitFonts() const;
