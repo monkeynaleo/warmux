@@ -40,9 +40,9 @@ private:
   void ParseArgs(int argc, char* argv[]);
   void InitWindow();
   void DisplayLoadingPicture();
-  void InitFonts();
-  void End();
-  void DisplayWelcomeMessage();
+  void InitFonts() const;
+  void End() const;
+  void DisplayWelcomeMessage() const;
   AppWormux();
 
 public:
