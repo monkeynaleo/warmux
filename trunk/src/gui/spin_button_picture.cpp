@@ -51,7 +51,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", dark_gray_color, Font::FONT_LARGE, Font::FONT_NORMAL, false);
+  txt_value = new Text("", black_color, Font::FONT_LARGE, Font::FONT_BOLD, false);
   SetValue(value);
 
   m_step = step;
