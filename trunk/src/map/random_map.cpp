@@ -115,7 +115,7 @@ const int RandomMap::GetHeight() const
   return height;
 }
 
-void RandomMap::AddElement(Surface * object, Point2i position)
+void RandomMap::AddElement(const Surface * object, const Point2i& position)
 {
   element_list.push_back(MapElement(*object, position));
 }
@@ -180,6 +180,7 @@ void RandomMap::Generate()
 
   // Get bezier interpolation
   bezier_shape = tmp->GetBezierInterpolation(1.0, 30, Random::GetDouble(0.0, 0.5));
+  delete tmp;
 
   // Expand
   expanded_bezier_shape = new Polygon(*bezier_shape);
@@ -207,12 +208,12 @@ bool RandomMap::GenerateIsland(double width, double height)
     delete random_shape;
   }
   if(bezier_shape) {
-    bezier_shape = NULL;
     delete bezier_shape;
+    bezier_shape = NULL;
   }
   if(expanded_bezier_shape) {
-    expanded_bezier_shape = NULL;
     delete expanded_bezier_shape;
+    expanded_bezier_shape = NULL;
   }
   // Generate a random shape
   switch(Random::GetInt(DENTED_CIRCLE, ROUNDED_RECTANGLE)) {
