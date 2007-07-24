@@ -35,6 +35,7 @@
 
   <surface name="full_circle" file="menu/full_circle.png" />
   <color name="partial_circle_color" r="4" g="77" b="134" a="255" />
+  <surface name="full_circle_border" file="menu/full_circle_border.png" />
 
   <!-- Sound options -->
 
