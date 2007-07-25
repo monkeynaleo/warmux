@@ -81,8 +81,8 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   video_window.Blit(m_full_circle, Point2i(tmp_circle_x, tmp_circle_y));
 
   // 2. then draw the partial circle
-  uint center_x = GetPositionX() + (GetSizeX() + m_full_circle.GetWidth())/4 ;
-  uint center_y = GetPositionY() + (GetSizeY() - txt_label->GetHeight() - 5) /2;
+  uint center_x = tmp_circle_x + m_full_circle.GetWidth() / 2;
+  uint center_y = tmp_circle_y + m_full_circle.GetHeight() / 2;
   static uint small_r = 25;
   static uint big_r = 35;
   double max_angle = 2*M_PI*(m_value-m_min_value)/(m_max_value-m_min_value);
