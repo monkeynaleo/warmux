@@ -274,10 +274,10 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string re
   return sprite;
 }
 
-Surface ResourceManager::GenerateMap(Profile *profile, const int width, const int height)
+Surface ResourceManager::GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height)
 {
   RandomMap random_map(profile, width, height);
-  random_map.Generate();
+  random_map.Generate(generator);
   random_map.SaveMap();
   return random_map.GetRandomMap();
 }

@@ -143,10 +143,98 @@ const bool RandomMap::IsOpen() const
   return is_open;
 }
 
-void RandomMap::Generate()
+void RandomMap::GeneratePlatforms()
 {
-  srand(time(NULL));
+  uint minplats = 15, maxplats = 35; /* number of platforms */
+  uint minwidth = 50, maxwidth = 500; /* platform widths */
+  uint minhei = 10, maxhei = 100; /* height */
+  uint vertchance = 10; /* % chance of the platform being vertical */
+  uint elemchance = 10; /* % chance of putting down a random element on the platform */
 
+  XmlReader::ReadUint(profile->doc->GetRoot(), "nb_platforms_min", minplats);
+  XmlReader::ReadUint(profile->doc->GetRoot(), "nb_platforms_max", maxplats);
+  if (minplats < 1)
+    minplats = 1;
+  if (maxplats < minplats)
+    maxplats = minplats;
+
+  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_width_min", minwidth);
+  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_width_max", maxwidth);
+  if (minwidth < 2)
+    minwidth = 2;
+  if (maxwidth < minwidth)
+    maxwidth = minwidth;
+
+  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_height_min", minhei);
+  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_height_max", maxhei);
+  if (minhei < 2)
+    minhei = 2;
+  if (maxhei < minhei)
+    maxhei = minhei;
+
+  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_vert_chance", vertchance);
+
+  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_element_chance", elemchance);
+
+  uint nplats = Random::GetInt(minplats, maxplats);
+
+  result.Fill(0);
+
+  for (uint i = 0; i < nplats; i++) {
+    double wid = Random::GetDouble(minwidth, maxwidth);
+    double hei = Random::GetDouble(minhei, maxhei);
+    if (Random::GetInt(0,99) < (int) vertchance) {
+      double tmp = wid;
+      wid = hei;
+      hei = tmp;
+    }
+    double x = Random::GetDouble(0, (width - wid));
+    double y = Random::GetDouble(0, (height - hei));
+
+    Polygon *tmp = new Polygon();
+
+    tmp->AddPoint(Point2d(x, y));
+    tmp->AddPoint(Point2d(x+wid, y));
+    tmp->AddPoint(Point2d(x+wid, y+hei));
+    tmp->AddPoint(Point2d(x, y+hei));
+
+    if (Random::GetInt(0,99) < (int)elemchance) {
+      Surface * random_element = random_element_list.GetRandomElement();
+      int dx = Random::GetInt((int)(x+10), (int)(x+wid-10));
+      int dy = (int) (y+(minhei / 2));
+      if (random_element != NULL) {
+        Surface * tmp_surf = new Surface(random_element->GetSurface());
+        AddElement(tmp_surf, Point2i(dx, dy));
+      }
+    }
+
+    bezier_shape = tmp->GetBezierInterpolation(1.0, 30, Random::GetDouble(0.0, 0.5));
+
+    // Expand
+    expanded_bezier_shape = new Polygon(*bezier_shape);
+    expanded_bezier_shape->Expand(border_size);
+
+    // Set color, texture etc.
+    bezier_shape->SetTexture(&texture);
+    bezier_shape->SetPlaneColor(border_color);
+    expanded_bezier_shape->SetPlaneColor(border_color);
+
+    // expanded_bezier_shape->ClearItem();
+    // bezier_shape->ClearItem();
+    // Then draw it
+    expanded_bezier_shape->Draw(&result);
+    bezier_shape->Draw(&result);
+
+    tmp->SetTexture(&texture);
+    tmp->SetPlaneColor(border_color);
+
+    //  tmp->Draw(&result);
+  }
+  DrawElement();
+}
+
+void RandomMap::GenerateIsland()
+{
   double minhei = height / Random::GetDouble(7, 5);
   double maxhei = height / Random::GetDouble(1.5, 4);
 
@@ -199,49 +287,18 @@ void RandomMap::Generate()
   DrawElement();
 }
 
-bool RandomMap::GenerateIsland(double width, double height)
+void RandomMap::Generate(InfoMap::Island_type generator)
 {
-  int nb_of_point;
-  double x_rand_offset, y_rand_offset, coef;
-  if(random_shape) {
-    random_shape = NULL;
-    delete random_shape;
+  srand(time(NULL));
+  if(generator == InfoMap::RANDOM) {
+    generator = (InfoMap::Island_type) Random::GetInt(InfoMap::SINGLE_ISLAND, InfoMap::DEFAULT);
+    generator = InfoMap::PLATEFORMS;
   }
-  if(bezier_shape) {
-    delete bezier_shape;
-    bezier_shape = NULL;
+  switch (generator) {
+    case InfoMap::PLATEFORMS: GeneratePlatforms(); break;
+    case InfoMap::SINGLE_ISLAND: GenerateIsland(); break;
+    default: GenerateIsland(); break;
   }
-  if(expanded_bezier_shape) {
-    delete expanded_bezier_shape;
-    expanded_bezier_shape = NULL;
-  }
-  // Generate a random shape
-  switch(Random::GetInt(DENTED_CIRCLE, ROUNDED_RECTANGLE)) {
-    case DENTED_CIRCLE:
-      nb_of_point = Random::GetInt(5, 20);
-      x_rand_offset = width / Random::GetDouble(2.0, 15.0);
-      random_shape = PolygonGenerator::GenerateDentedCircle(width, nb_of_point, x_rand_offset);
-      break;
-    case ROUNDED_RECTANGLE:
-      random_shape = PolygonGenerator::GenerateRectangle(width, height);
-      break;
-    default: case DENTED_TRAPEZE:
-      x_rand_offset = Random::GetDouble(10.0, 15.0);
-      y_rand_offset = Random::GetDouble(10.0, 15.0);
-      coef = Random::GetSign() * Random::GetDouble(0.5, 1.0);
-      random_shape = PolygonGenerator::GenerateRandomTrapeze(width, height, x_rand_offset, y_rand_offset, coef);
-      break;
-  }
-  if(random_shape->GetNbOfPoint() < 4)
-    return false;
-  bezier_shape = random_shape->GetBezierInterpolation(1.0, 20, 1.5);
-  expanded_bezier_shape = new Polygon(*bezier_shape);
-  // Expand the random, bezier shape !
-  expanded_bezier_shape->Expand(border_size);
-  // Setting texture and border color
-  bezier_shape->SetTexture(&texture);
-  expanded_bezier_shape->SetPlaneColor(border_color);
-  return true;
 }
 
 void RandomMap::SaveMap()

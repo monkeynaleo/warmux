@@ -50,6 +50,7 @@ InfoMap::InfoMap(const std::string &map_name,
   is_basic_info_loaded(false),
   is_data_loaded(false),
   random(false),
+  island_type(RANDOM),
   res_profile(NULL)
 {
   wind.nb_sprite = 0;
@@ -225,7 +226,7 @@ void InfoMap::LoadData()
   if(!random) {
     img_ground = resource_manager.LoadImage(res_profile, "map");
   } else {
-    img_ground = resource_manager.GenerateMap(res_profile, img_sky.GetWidth(), img_sky.GetHeight());
+    img_ground = resource_manager.GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
   }
 }
 

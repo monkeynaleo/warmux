@@ -31,6 +31,13 @@
 class Profile;
 
 class InfoMap{
+ public:
+  typedef enum {
+    RANDOM,
+    SINGLE_ISLAND,
+    PLATEFORMS,
+    DEFAULT
+  } Island_type;
 
 private:
 
@@ -55,6 +62,7 @@ private:
   bool is_basic_info_loaded;
   bool is_data_loaded;
   bool random;
+  Island_type island_type;
 
   Profile *res_profile;
 
