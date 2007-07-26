@@ -36,7 +36,8 @@ private:
 
   Point2i lastMousePosition;
   Widget* last_clicked;
-  Widget* current_selected;
+  Widget* keyboard_selection;
+  Widget* mouse_selection;
 
 protected:
   std::list<Widget*> widget_list;
