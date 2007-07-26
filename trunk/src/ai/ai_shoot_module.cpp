@@ -286,7 +286,7 @@ const Character* AIShootModule::FindEnemy()
 
     m_current_strategy = NEAR_FROM_ENEMY;
 
-    GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injured "
+    GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injure "
 				     + m_enemy->GetName());
 
     if ( SelectProximityWeapon(*m_enemy) ) {
