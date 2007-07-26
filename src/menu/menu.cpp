@@ -194,6 +194,12 @@ void Menu::Run (bool skip_menu)
 	  case SDLK_DOWN:
 	    key_down();
 	    break;
+	  case SDLK_LEFT:
+	    key_left();
+	    break;
+	  case SDLK_RIGHT:
+	    key_right();
+	    break;
 	  case SDLK_F10:
 	    AppWormux::GetInstance()->video->ToggleFullscreen();
 	    break;

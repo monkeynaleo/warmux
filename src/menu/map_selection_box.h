@@ -51,10 +51,10 @@ class MapSelectionBox : public HBox
   Label *map_author_label;
   Button *bt_map_plus, *bt_map_minus;
 
+ public:
   void ChangeMapDelta(int delta_index);
   void ChangeMap(int index);
 
- public:
   MapSelectionBox(const Rectanglei &rect, bool _display_only = false);
 
   void ValidMapSelection();
