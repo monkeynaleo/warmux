@@ -156,7 +156,7 @@ void WindParticle::Refresh()
     m_alive = ALIVE;
     StartMoving();
     SetXY( Point2i(x, y) );
-    MSG_DEBUG("wind", "new position %d, %d - mass %f, wind_factor %f\n", x, y, GetMass(), GetWindFactor());
+    MSG_DEBUG("wind", "new position %d, %d - mass %f, wind_factor %f", x, y, GetMass(), GetWindFactor());
   }
 
   UpdatePosition();
@@ -253,10 +253,14 @@ void Wind::Refresh(){
 void Wind::RandomizeParticlesPos()
 {
   iterator it=particles.begin(), end=particles.end();
+
+  MSG_DEBUG("wind", "camera position: %d, %d - %d, %d", camera.GetPositionX(),
+	    camera.GetPositionX()+camera.GetSizeX(), camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY());
+
   for (; it != end; ++it)
   {
-    if(!camera.IsVisible(**it))
-      (*it)->SetXY(Point2i( randomObj.GetLong(camera.GetPositionX(), camera.GetPositionX()+camera.GetSizeX()),
-                            randomObj.GetLong(camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY())));
+    (*it)->SetXY(Point2i( randomObj.GetLong(camera.GetPositionX(), camera.GetPositionX()+camera.GetSizeX()),
+			  randomObj.GetLong(camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY())));
+    MSG_DEBUG("wind", "new particule position: %d, %d", (*it)->GetX(), (*it)->GetY());
   }
 }
