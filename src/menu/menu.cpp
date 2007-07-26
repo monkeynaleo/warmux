@@ -128,6 +128,14 @@ void Menu::key_down()
   RedrawMenu();
 }
 
+void Menu::key_left()
+{
+}
+
+void Menu::key_right()
+{
+}
+
 void Menu::DrawBackground()
 {
   background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());

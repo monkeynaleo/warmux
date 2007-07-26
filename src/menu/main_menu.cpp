@@ -40,7 +40,7 @@ const int VERSION_DY = -40;
 
 const int DEFAULT_SCREEN_HEIGHT = 768 ;
 
-Main_Menu::~Main_Menu()
+MainMenu::~MainMenu()
 {
  // delete skin_left;
  // delete skin_right;
@@ -48,7 +48,7 @@ Main_Menu::~Main_Menu()
   delete website_text;
 }
 
-Main_Menu::Main_Menu() :
+MainMenu::MainMenu() :
     Menu("main_menu/bg_main", vNo)
 {
   int x_button;
@@ -130,12 +130,12 @@ Main_Menu::Main_Menu() :
      jukebox.PlayMusic("menu");
 }
 
-void Main_Menu::button_click()
+void MainMenu::button_click()
 {
   jukebox.Play("share", "menu/clic");
 }
 
-void Main_Menu::SelectAction(Widget *w)
+void MainMenu::SelectAction(Widget *w)
 {
   if (w == play) {
     choice = menuPLAY;
@@ -155,19 +155,19 @@ void Main_Menu::SelectAction(Widget *w)
   }
 }
 
-void Main_Menu::OnClickUp(const Point2i &mousePosition, int button)
+void MainMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget* b = widgets.ClickUp(mousePosition,button);
   SelectAction(b);
   button_click();
 }
 
-void Main_Menu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
+void MainMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
 {
   // nothing to do while button is still not released
 }
 
-menu_item Main_Menu::Run ()
+menu_item MainMenu::Run ()
 {
   choice = menuNULL;
 
@@ -177,13 +177,13 @@ menu_item Main_Menu::Run ()
   return choice;
 }
 
-bool Main_Menu::signal_cancel()
+bool MainMenu::signal_cancel()
 {
   choice = menuQUIT;
   return true;
 }
 
-bool Main_Menu::signal_ok()
+bool MainMenu::signal_ok()
 {
   Widget * w = widgets.GetCurrentSelectedWidget();
   if(w != NULL) {
@@ -194,7 +194,7 @@ bool Main_Menu::signal_ok()
   return true;
 }
 
-void Main_Menu::DrawBackground()
+void MainMenu::DrawBackground()
 {
   Surface& window = AppWormux::GetInstance()->video->window;
 
@@ -210,7 +210,7 @@ void Main_Menu::DrawBackground()
 
 }
 
-void Main_Menu::Redraw(const Rectanglei& rect, Surface &window)
+void MainMenu::Redraw(const Rectanglei& rect, Surface &window)
 {
   Menu::Redraw(rect, window);
 

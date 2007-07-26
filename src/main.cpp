@@ -95,7 +95,7 @@ int AppWormux::Main(int argc, char *argv[])
     Init();
     do
       {
-	Main_Menu main_menu;
+	MainMenu main_menu;
 
 	if (choice == menuNULL) {
 	  StatStart("Main:Menu");

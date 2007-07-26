@@ -43,11 +43,11 @@ typedef enum
   noMenuNET_CLIENT
 } menu_item;
 
-class Main_Menu : public Menu
+class MainMenu : public Menu
 {
   /* If you need this, implement it (correctly) */
-  Main_Menu(const Main_Menu&);
-  Main_Menu operator=(const Main_Menu&);
+  MainMenu(const MainMenu&);
+  MainMenu operator=(const MainMenu&);
   /**********************************************/
 
   ButtonText *play, *network, *options, *infos, *quit;
@@ -58,8 +58,8 @@ class Main_Menu : public Menu
 public:
   menu_item choice;
 
-  Main_Menu();
-  ~Main_Menu();
+  MainMenu();
+  ~MainMenu();
   menu_item Run ();
 
   void Redraw(const Rectanglei& rect, Surface& surf);
