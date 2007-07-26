@@ -31,6 +31,7 @@
 #include <string>
 #include "graphic/surface.h"
 #include "tool/xml_document.h"
+#include "map/maps_list.h"
 
 class Sprite;
 
@@ -67,7 +68,7 @@ class ResourceManager
    Point2d LoadPoint2d(const Profile *profile, const std::string resource_name);
    Surface LoadImage(const Profile *profile, const std::string resource_name);
    Sprite *LoadSprite(const Profile *profile, const std::string resource_name);
-   Surface GenerateMap(Profile *profile, const int width, const int height);
+   Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height);
    xmlpp::Element * GetElement(const Profile *profile, const std::string ressource_type, const std::string ressource_name);
 
  private:

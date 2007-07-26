@@ -25,6 +25,7 @@
 #include <vector>
 #include "tool/point.h"
 #include "graphic/surface.h"
+#include "map/maps_list.h"
 
 // Forward declarations
 class Profile;
@@ -54,15 +55,11 @@ class RandomMap {
   RandomMap operator=(const RandomMap&);
   /*********************************************/
 
-  enum {
-    SINGLE_ISLAND,
-    DEFAULT
-  } island_type;
-  enum {
+  typedef enum {
     DENTED_CIRCLE,
     DENTED_TRAPEZE,
     ROUNDED_RECTANGLE
-  } shape_type;
+  } Shape_type;
  protected:
    double border_size;
    bool is_open;
@@ -98,8 +95,9 @@ class RandomMap {
    void SetBorderSize(const double border);
    void SetBorderColor(const Color& color);
    const bool IsOpen() const;
-   void Generate();
-   bool GenerateIsland(double width, double height);
+   void Generate(InfoMap::Island_type generator);
+   void GenerateIsland();
+   void GeneratePlatforms();
    void SaveMap();
    Surface GetRandomMap() const;
 };
