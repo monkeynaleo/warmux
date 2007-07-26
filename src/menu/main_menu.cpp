@@ -135,39 +135,31 @@ void Main_Menu::button_click()
   jukebox.Play("share", "menu/clic");
 }
 
+void Main_Menu::SelectAction(Widget *w)
+{
+  if (w == play) {
+    choice = menuPLAY;
+    close_menu = true;
+  } else if(w == network) {
+    choice = menuNETWORK;
+    close_menu = true;
+  } else if(w == options) {
+    choice = menuOPTIONS;
+    close_menu = true;
+  } else if(w == infos) {
+    choice = menuCREDITS;
+    close_menu = true;
+  } else if(w == quit) {
+    choice = menuQUIT;
+    close_menu = true;
+  }
+}
+
 void Main_Menu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget* b = widgets.ClickUp(mousePosition,button);
-  if (b == play)
-  {
-    choice = menuPLAY;
-    close_menu = true;
-    button_click();
-  }
-  else if(b == network && Config::GetInstance()->IsNetworkActivated())
-  {
-    choice = menuNETWORK;
-    close_menu = true;
-    button_click();
-  }
-  else if(b == options)
-  {
-    choice = menuOPTIONS;
-    close_menu = true;
-    button_click();
-  }
-  else if(b == infos)
-  {
-    choice = menuCREDITS;
-    close_menu = true;
-    button_click();
-  }
-  else if(b == quit)
-  {
-    choice = menuQUIT;
-    close_menu = true;
-    button_click();
-  }
+  SelectAction(b);
+  button_click();
 }
 
 void Main_Menu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
@@ -193,7 +185,12 @@ bool Main_Menu::signal_cancel()
 
 bool Main_Menu::signal_ok()
 {
-  choice = menuPLAY;
+  Widget * w = widgets.GetCurrentSelectedWidget();
+  if(w != NULL) {
+    SelectAction(widgets.GetCurrentSelectedWidget());
+  } else {
+    choice = menuPLAY;
+  }
   return true;
 }
 
