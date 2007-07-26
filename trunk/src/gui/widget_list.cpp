@@ -26,13 +26,15 @@
 WidgetList::WidgetList()
 {
   last_clicked = NULL;
-  current_selected = NULL;
+  keyboard_selection = NULL;
+  mouse_selection = NULL;
 }
 
 WidgetList::WidgetList(const Rectanglei &rect) : Widget(rect)
 {
   last_clicked = NULL;
-  current_selected = NULL;
+  keyboard_selection = NULL;
+  mouse_selection = NULL;
 }
 
 WidgetList::~WidgetList()
@@ -60,82 +62,96 @@ void WidgetList::AddWidget(Widget* w)
 
 void WidgetList::Update(const Point2i &mousePosition, Surface& surf)
 {
+  if(keyboard_selection != NULL && lastMousePosition != mousePosition) {
+    keyboard_selection->Unselect();
+    keyboard_selection = NULL;
+  }
   for(std::list<Widget*>::iterator w=widget_list.begin();
       w != widget_list.end();
       w++)
   {
     // Then redraw the widget
     (*w)->Update(mousePosition, lastMousePosition, surf);
+    if(lastMousePosition != mousePosition && (*w)->Contains(mousePosition)) {
+      mouse_selection = (*w);
+    }
   }
-
+  if(mouse_selection != NULL && keyboard_selection != NULL && lastMousePosition != mousePosition) {
+    keyboard_selection->Unselect();
+    keyboard_selection = NULL;
+  }
   lastMousePosition = mousePosition;
 }
 
 void WidgetList::SetFocusOnNextWidget()
 {
+  if(mouse_selection != NULL && mouse_selection->Contains(lastMousePosition))
+    return;
   // No widget => exit
   if(widget_list.size() == 0) {
-    current_selected = NULL;
+    keyboard_selection = NULL;
     return;
   }
   // Previous selection ?
-  if(current_selected != NULL)
-    current_selected->Unselect();
+  if(keyboard_selection != NULL)
+    keyboard_selection->Unselect();
   else {
-    current_selected = (*widget_list.begin());
-    current_selected->Select();
+    keyboard_selection = (*widget_list.begin());
+    keyboard_selection->Select();
     return;
   }
   std::list<Widget*>::iterator w = widget_list.begin();
   for(;  w != widget_list.end(); w++) {
-    if(current_selected == (*w))
+    if(keyboard_selection == (*w))
       break;
   }
   w++;
   // The next widget is not the end ?
   if(w != widget_list.end()) {
-    current_selected = (*w);
+    keyboard_selection = (*w);
   } else {
-    current_selected = (*widget_list.begin());
+    keyboard_selection = (*widget_list.begin());
   }
-  current_selected->Select();
+  keyboard_selection->Select();
 }
 
 void WidgetList::SetFocusOnPreviousWidget()
 {
+  if(mouse_selection != NULL && mouse_selection->Contains(lastMousePosition))
+    return;
   Widget * previous_one = NULL;
   // No widget => exit
   if(widget_list.size() == 0) {
-    current_selected = NULL;
+    keyboard_selection = NULL;
     return;
   }
   // Previous selection ?
-  if(current_selected != NULL)
-    current_selected->Unselect();
+  if(keyboard_selection != NULL)
+    keyboard_selection->Unselect();
   else {
-    current_selected = (*widget_list.begin());
-    current_selected->Select();
+    keyboard_selection = (*widget_list.begin());
+    keyboard_selection->Select();
     return;
   }
   std::list<Widget*>::iterator w = widget_list.begin();
   for(;  w != widget_list.end(); w++) {
-    if(current_selected == (*w))
+    if(keyboard_selection == (*w))
       break;
     previous_one = (*w);
   }
   // The next widget is not the end ?
   if(previous_one == NULL) {
     w = widget_list.end(); w--;
-    current_selected = (*w);
+    keyboard_selection = (*w);
   } else {
-    current_selected = previous_one;
+    keyboard_selection = previous_one;
   }
-  current_selected->Select();
+  keyboard_selection->Select();
 }
 
 Widget * WidgetList::GetCurrentSelectedWidget() const
 {
-  return current_selected;
+  return keyboard_selection;
 }
 
 void WidgetList::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
