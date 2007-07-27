@@ -586,19 +586,16 @@ PhysicalObj* GameLoop::GetMovingObject() const
 bool GameLoop::IsAnythingMoving() const
 {
   // Is the weapon still active or an object still moving ??
-  bool object_still_moving = false;
-
   if (ActiveTeam().GetWeapon().IsInUse())
   {
     MSG_DEBUG("game.endofturn", "Weapon %s is still active", ActiveTeam().GetWeapon().GetName().c_str());
-    object_still_moving = true;
+    return true;
   }
 
-  if (!object_still_moving)
-    if (GetMovingObject() != NULL)
-      object_still_moving = true;
+  if (GetMovingObject() != NULL)
+    return true;
 
-  return object_still_moving;
+  return false;
 }
 
 // Signal death of a character
