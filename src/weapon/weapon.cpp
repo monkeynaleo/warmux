@@ -43,12 +43,13 @@ extern Profile *weapons_res_profile;
 const int INFINITE_AMMO = -1;
 const uint MAX_TIME_LOADING = 2000;
 
-const uint UNIT_BOX_WIDTH = 22;
+// XXX Unused ?
+//const uint WEAPON_BOX_BUTTON_DX = 20;
+//const uint WEAPON_BOX_BUTTON_DY = 50;
+//const uint UNIT_BOX_WIDTH = 22;
 const uint UNIT_BOX_HEIGHT = 20;
 const uint UNIT_BOX_GAP = 6;
 
-const uint WEAPON_BOX_BUTTON_DX = 20;
-const uint WEAPON_BOX_BUTTON_DY = 50;
 
 const uint ANIM_DISPLAY_TIME = 400;
 

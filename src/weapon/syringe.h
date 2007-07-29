@@ -32,7 +32,6 @@ class SyringeConfig : public WeaponConfig
     uint range;
     uint damage;
     uint turns;
-  public:
     SyringeConfig();
     void LoadXml(xmlpp::Element *elem);
 };

@@ -339,7 +339,7 @@ Character* Team::FindByIndex(uint index)
   ASSERT(index < characters.size());
   iterator it= characters.begin(), end=characters.end();
 
-  while(index != 0 && it != characters.end())
+  while(index != 0 && it != end)
   {
     index--;
     it++;

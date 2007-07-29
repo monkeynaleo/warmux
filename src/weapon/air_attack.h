@@ -33,7 +33,6 @@ class AirAttackConfig : public ExplosiveWeaponConfig
   public:
     double speed;
     uint nbr_obus; 
-  public:
     AirAttackConfig();
     virtual void LoadXml(xmlpp::Element *elem);
 };

@@ -57,7 +57,6 @@ class ClusterBombConfig : public ExplosiveWeaponConfig
 { 
 public: 
   uint nb_fragments;
-public:
   ClusterBombConfig();
   virtual void LoadXml(xmlpp::Element *elem);
 };

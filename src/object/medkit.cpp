@@ -41,9 +41,10 @@
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
 
-const uint SPEED = 5; // meter / seconde
-const uint SPEED_PARACHUTE = 170; // ms par image
-const uint NB_MAX_TRY = 20;
+// XXX Unused !?
+//const uint SPEED = 5; // meter / seconde
+//const uint NB_MAX_TRY = 20;
+//const uint SPEED_PARACHUTE = 170; // ms par image
 
 Medkit::Medkit()
   : ObjBox("medkit") {

@@ -46,9 +46,10 @@ const uint MARGIN_TOP    = 5;
 const uint MARGIN_SIDE   = 5;
 const uint MARGIN_BOTTOM = 70;
 
-const uint TEAMS_W = 160;
+// XXX Not used ?
+// const uint TEAMS_W = 160;
+// const uint TEAM_LOGO_H = 48;
 const uint TEAMS_BOX_H = 180;
-const uint TEAM_LOGO_H = 48;
 const uint OPTIONS_BOX_H = 150;
 
 NetworkMenu::NetworkMenu() :

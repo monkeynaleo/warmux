@@ -30,9 +30,8 @@ class ParachuteConfig : public WeaponConfig
      double wind_factor;
      double air_resist_factor;
      double force_side_displacement;
-  public:
-    ParachuteConfig();
-    void LoadXml(xmlpp::Element *elem);
+     ParachuteConfig();
+     void LoadXml(xmlpp::Element *elem);
 };
 
 //-----------------------------------------------------------------------------

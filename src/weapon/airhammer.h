@@ -31,7 +31,6 @@ class AirhammerConfig : public WeaponConfig
   public:
     uint range;
     uint damage;
-  public:
     AirhammerConfig();
     void LoadXml(xmlpp::Element *elem);
 };

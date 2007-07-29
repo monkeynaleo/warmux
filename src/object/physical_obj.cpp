@@ -759,7 +759,7 @@ bool PhysicalObj::IsInWater () const
 void PhysicalObj::DirectFall()
 {
   while (!IsGhost() && !IsInWater() && FootsInVacuum())
-      SetY(GetY()+1);
+      SetY(GetY()+1.5);
 }
 
 bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
