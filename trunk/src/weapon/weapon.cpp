@@ -372,7 +372,7 @@ void Weapon::UseAmmoUnit()
   int *unit = &ActiveTeam().AccessNbUnits();
   (*unit)--;
 
-  ASSERT (unit >= 0);
+  ASSERT (*unit >= 0);
 }
 
 int Weapon::ReadInitialNbAmmo() const{
