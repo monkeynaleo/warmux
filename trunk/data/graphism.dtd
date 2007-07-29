@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!ELEMENT resources (section+)>
-<!ELEMENT section (surface|sprite)+>
+<!ELEMENT section (surface|sprite|color|point)+>
 <!ATTLIST section name CDATA #REQUIRED>
-
-<!ELEMENT author (name,nickname?,email?,country?,description)>
 
 <!ELEMENT surface EMPTY>
 <!ATTLIST surface name CDATA #REQUIRED file CDATA #REQUIRED>
@@ -16,4 +14,10 @@
 <!ELEMENT grid EMPTY>
 <!ATTLIST grid pos CDATA #REQUIRED size CDATA #REQUIRED array CDATA #REQUIRED>
 <!ELEMENT animation EMPTY>
-<!ATTLIST animation speed CDATA #IMPLIED loop_mode CDATA #IMPLIED >
+<!ATTLIST animation speed CDATA #IMPLIED loop_mode CDATA #IMPLIED>
+
+<!ELEMENT color EMPTY>
+<!ATTLIST color name CDATA #REQUIRED r CDATA #REQUIRED g CDATA #REQUIRED b CDATA #REQUIRED a CDATA #REQUIRED>
+
+<!ELEMENT point EMPTY>
+<!ATTLIST point name CDATA #REQUIRED x CDATA #REQUIRED y CDATA #REQUIRED>
