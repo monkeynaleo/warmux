@@ -128,8 +128,7 @@ TeamResults::~TeamResults()
 
 TeamResults* TeamResults::createTeamResults(Team* team)
 {
-  TopCharacters *top = new TopCharacters;
-  TeamResults   *res;
+  TopCharacters* top = new TopCharacters;
   
   // Search best/worst performers
   FOR_EACH_LIVING_AND_DEAD_CHARACTER(team, player)
@@ -137,15 +136,12 @@ TeamResults* TeamResults::createTeamResults(Team* team)
     top->rankPlayer(&(*(player)));
   }
 
-  res = new TeamResults(team, top);
-  delete top;
-  return res;
+  return new TeamResults(team, top);
 }
 
 TeamResults* TeamResults::createGlobalResults()
 {
-  TopCharacters *top = new TopCharacters;
-  TeamResults   *res;
+  TopCharacters* top = new TopCharacters;
 
   FOR_ALL_LIVING_AND_DEAD_CHARACTER(team, player)
   {
@@ -154,9 +150,7 @@ TeamResults* TeamResults::createGlobalResults()
 
   // We'll do as if NULL is for all teams
   //top->death_time = 0;
-  res = new TeamResults(NULL, top);
-  delete top;
-  return res;
+  return new TeamResults(NULL, top);
 }
 
 std::vector<TeamResults*>* TeamResults::createAllResults(void)
@@ -178,9 +172,7 @@ std::vector<TeamResults*>* TeamResults::createAllResults(void)
   // Add overall results to list
   results = new TeamResults(NULL, top);
   results_list->insert(results_list->begin(), results);
-  delete results;
 
-  delete top;
   return results_list;
 }
 
