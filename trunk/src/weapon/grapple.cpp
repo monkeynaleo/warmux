@@ -497,11 +497,13 @@ void Grapple::DetachNode()
 {
   ASSERT(rope_nodes.size() >= 1);
 
+#ifdef DEBUG
   { // for debugging only
     rope_node_t node;
     node = rope_nodes.back();
     MSG_DEBUG("grapple.node", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
   }
+#endif
 
   // remove last node
   rope_nodes.pop_back();
