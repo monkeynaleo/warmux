@@ -35,9 +35,9 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
   m_image = resource_manager.LoadImage(res, resource_id);
-  m_full_circle = resource_manager.LoadImage(res, "menu/full_circle");
-  m_full_circle_border = resource_manager.LoadImage(res, "menu/full_circle_border");
-  m_partial_circle_color = resource_manager.LoadColor(res, "menu/partial_circle_color");
+  m_annulus_background = resource_manager.LoadImage(res, "menu/annulus_background");
+  m_annulus_foreground = resource_manager.LoadImage(res, "menu/annulus_foreground");
+  m_progress_color = resource_manager.LoadColor(res, "menu/annulus_progress_color");
   resource_manager.UnLoadXMLProfile( res); 
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
@@ -75,20 +75,20 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
 
   //  the computed positions are to center on the image part of the widget
 
-  // 1. first draw the full circle
-  uint tmp_circle_x = GetPositionX() + (GetSizeX() - m_full_circle.GetWidth())/4 ;
-  uint tmp_circle_y = GetPositionY() + (GetSizeY() - m_full_circle.GetHeight() - txt_label->GetHeight() - 5) /2;
-  video_window.Blit(m_full_circle, Point2i(tmp_circle_x, tmp_circle_y));
+  // 1. first draw the annulus background
+  uint tmp_back_x = GetPositionX() + (GetSizeX() - m_annulus_background.GetWidth())/4 ;
+  uint tmp_back_y = GetPositionY() + (GetSizeY() - m_annulus_background.GetHeight() - txt_label->GetHeight() - 5) /2;
+  video_window.Blit(m_annulus_background, Point2i(tmp_back_x, tmp_back_y));
 
-  // 2. then draw the partial circle
+  // 2. then draw the progress annulus
   static uint small_r = 25;
   static uint big_r = 35;
-  static double min_angle = 0;
-  static double max_angle = 2*M_PI;
+  static double min_angle = -2.65;
+  static double max_angle = 2.6;
   static double delta_angle = M_PI/100; // magic... ajust if not good
   double angle = (max_angle - min_angle) * (m_value - m_min_value) / (m_max_value - m_min_value);
-  uint center_x = tmp_circle_x + m_full_circle.GetWidth() / 2;
-  uint center_y = tmp_circle_y + m_full_circle.GetHeight() / 2;
+  uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
+  uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
   long num = static_cast<long> (angle / delta_angle) + 1;
   std::list<Point2i> points;
 
@@ -100,12 +100,12 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
     points.push_back (Point2i (static_cast<int>(center_x + small_r * sin (min_angle + ii * delta_angle)),
 			       static_cast<int>(center_y - small_r * cos (min_angle + ii * delta_angle))));
 
-  video_window.FilledPolygon (points, m_partial_circle_color);
+  video_window.FilledPolygon (points, m_progress_color);
 
-  // 3. then draw the full circle border
-  uint tmp_circle_border_x = GetPositionX() + (GetSizeX() - m_full_circle_border.GetWidth())/4 ;
-  uint tmp_circle_border_y = GetPositionY() + (GetSizeY() - m_full_circle_border.GetHeight() - txt_label->GetHeight() - 5) /2;
-  video_window.Blit(m_full_circle_border, Point2i(tmp_circle_border_x, tmp_circle_border_y));
+  // 3. then draw the annulus foreground
+  uint tmp_fore_x = GetPositionX() + (GetSizeX() - m_annulus_foreground.GetWidth())/4 ;
+  uint tmp_fore_y = GetPositionY() + (GetSizeY() - m_annulus_foreground.GetHeight() - txt_label->GetHeight() - 5) /2;
+  video_window.Blit(m_annulus_foreground, Point2i(tmp_fore_x, tmp_fore_y));
 
   // 4. finally let's put the image
   uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/4 ;
