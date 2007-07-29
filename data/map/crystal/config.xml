@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources SYSTEM "../map.dtd" []>
 <resources>
   <author>
     <name>C. Schalkwijk</name>
     <nickname>Papa.Coen</nickname>
-    <country>The Netherlands</country>
     <email>Papa.Coen@gmail.com</email>
+    <country>The Netherlands</country>
   </author>
 
   <surface name="sky" file="sky.jpg" />
