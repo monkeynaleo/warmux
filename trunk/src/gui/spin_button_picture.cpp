@@ -81,22 +81,24 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   video_window.Blit(m_full_circle, Point2i(tmp_circle_x, tmp_circle_y));
 
   // 2. then draw the partial circle
-  uint center_x = tmp_circle_x + m_full_circle.GetWidth() / 2;
-  uint center_y = tmp_circle_y + m_full_circle.GetHeight() / 2;
   static uint small_r = 25;
   static uint big_r = 35;
-  double max_angle = 2*M_PI*(m_value-m_min_value)/(m_max_value-m_min_value);
-  double delta_angle = M_PI/100; // magic... ajust if not good
-  long num = static_cast<long> (max_angle / delta_angle) + 1;
+  static double min_angle = 0;
+  static double max_angle = 2*M_PI;
+  static double delta_angle = M_PI/100; // magic... ajust if not good
+  double angle = (max_angle - min_angle) * (m_value - m_min_value) / (m_max_value - m_min_value);
+  uint center_x = tmp_circle_x + m_full_circle.GetWidth() / 2;
+  uint center_y = tmp_circle_y + m_full_circle.GetHeight() / 2;
+  long num = static_cast<long> (angle / delta_angle) + 1;
   std::list<Point2i> points;
 
   for (long ii = 0; ii <= num ; ii++)
-    points.push_back (Point2i (static_cast<int>(center_x + big_r * sin (ii * delta_angle)),
-			       static_cast<int>(center_y - big_r * cos (ii * delta_angle))));
+    points.push_back (Point2i (static_cast<int>(center_x + big_r * sin (min_angle + ii * delta_angle)),
+			       static_cast<int>(center_y - big_r * cos (min_angle + ii * delta_angle))));
 
   for (long ii = num; ii >= 0; ii--)
-    points.push_back (Point2i (static_cast<int>(center_x + small_r * sin (ii * delta_angle)),
-			       static_cast<int>(center_y - small_r * cos (ii * delta_angle))));
+    points.push_back (Point2i (static_cast<int>(center_x + small_r * sin (min_angle + ii * delta_angle)),
+			       static_cast<int>(center_y - small_r * cos (min_angle + ii * delta_angle))));
 
   video_window.FilledPolygon (points, m_partial_circle_color);
 
