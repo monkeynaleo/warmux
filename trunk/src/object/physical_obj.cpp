@@ -123,12 +123,12 @@ const Point2i PhysicalObj::GetPosition() const
 
 int PhysicalObj::GetX() const
 {
-  return lround(GetPhysX() * PIXEL_PER_METER);
+  return (int)round(GetPhysX() * PIXEL_PER_METER);
 }
 
 int PhysicalObj::GetY() const
 {
-  return lround(GetPhysY() * PIXEL_PER_METER);
+  return (int)round(GetPhysY() * PIXEL_PER_METER);
 }
 
 int PhysicalObj::GetCenterX() const
