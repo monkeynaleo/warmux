@@ -39,8 +39,8 @@
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 
-// mouse scroll speed
-const uint SCROLL_MOUSE = 20;
+// XXX Unused mouse scroll speed
+// const uint SCROLL_MOUSE = 20;
 
 // size of the sensitive area use to scroll the map with mouse
 const uint SENSIT_SCROLL_MOUSE = 40;
@@ -213,7 +213,8 @@ void Mouse::ChoixVerPointe() const
 
 void Mouse::ScrollCamera() const
 {
-  bool scroll = false;
+  // XXX Not used
+  // bool scroll = false;
 
   Point2i mousePos = GetPosition();
   Point2i winSize = AppWormux::GetInstance()->video->window.GetSize();
@@ -226,14 +227,16 @@ void Mouse::ScrollCamera() const
   if( !tstVector.IsNull() ){
     camera.SetXY( tstVector * (mousePos - (sensitZone * coef))/2 );
     camera.SetAutoCrop(false);
-    scroll = true;
+    // XXX Not used
+    // scroll = true;
   }
 
   tstVector = winSize.inf(mousePos + sensitZone);
   if( !tstVector.IsNull() ){
     camera.SetXY( tstVector * (mousePos + (sensitZone * coef) - winSize)/2 );
     camera.SetAutoCrop(false);
-    scroll = true;
+    // XXX Not used
+    //scroll = true;
   }
 
 }

@@ -45,8 +45,9 @@ const uint OPTIONS_BOX_H = 150;
 
 const uint TPS_TOUR_MIN = 10;
 const uint TPS_TOUR_MAX = 120;
-const uint TPS_FIN_TOUR_MIN = 1;
-const uint TPS_FIN_TOUR_MAX = 10;
+// XXX Not used !?
+// const uint TPS_FIN_TOUR_MIN = 1;
+// const uint TPS_FIN_TOUR_MAX = 10;
 
 
 

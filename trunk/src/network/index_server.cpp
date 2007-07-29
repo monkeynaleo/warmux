@@ -167,11 +167,10 @@ bool IndexServer::GetServerList()
 
   /*char * line = NULL;
   size_t len = 0;*/
-  ssize_t read;
   std::string line;
 
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
-  while ((read = getline(line, fin)) >= 0)
+  while (getline(line, fin) >= 0)
   {
     if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
       continue;

@@ -40,7 +40,8 @@ const uint FORCE_X_MAX = 0;
 const uint FORCE_Y_MIN = 1;
 const uint FORCE_Y_MAX = 40;
 
-const double OBUS_SPEED = 7 ;
+// XXX Unused ?
+//const double OBUS_SPEED = 7 ;
 
 Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("air_attack_projectile", cfg, NULL)

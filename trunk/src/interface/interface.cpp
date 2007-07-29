@@ -90,8 +90,9 @@ Interface::Interface()
 
   Color text_color = resource_manager.LoadColor(res, "interface/text_color");
   Color energy_text_color = resource_manager.LoadColor(res, "interface/energy_text_color");
-  Color turn_timer_text_color = resource_manager.LoadColor(res, "interface/turn_timer_text_color");
-  Color global_clock_text_color = resource_manager.LoadColor(res, "interface/global_clock_text_color");
+  // XXX Unused !?
+  // Color turn_timer_text_color = resource_manager.LoadColor(res, "interface/turn_timer_text_color");
+  // Color global_clock_text_color = resource_manager.LoadColor(res, "interface/global_clock_text_color");
 
   global_timer = new Text(ulong2str(0), gray_color, Font::FONT_BIG, Font::FONT_NORMAL, false);
   timer = new Text(ulong2str(0), black_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
@@ -131,7 +132,8 @@ void Interface::Reset()
 void Interface::DrawCharacterInfo()
 {
   AppWormux * app = AppWormux::GetInstance();
-  Point2i pos = (app->video->window.GetSize() - GetSize()) * Point2d(0.5, 1);
+  // XXX Not used !?
+  // Point2i pos = (app->video->window.GetSize() - GetSize()) * Point2d(0.5, 1);
 
   // Get the character
   if (character_under_cursor == NULL) character_under_cursor = &ActiveCharacter();

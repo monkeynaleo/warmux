@@ -53,7 +53,6 @@ class Dynamite : public WeaponLauncher
 {
   protected:
     bool p_Shoot();
-  protected:
     WeaponProjectile * GetProjectileInstance();
   public:
     Dynamite();

@@ -325,9 +325,9 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
 
 int MapsList::FindMapById (const std::string &id)
 {
-  iterator
-    terrain=lst.begin(),
-    fin_terrain=lst.end();
+  // XXX Not used !?
+  //iterator terrain=lst.begin(), fin_terrain=lst.end();
+
   uint i=0;
   for (; i < lst.size(); ++i)
     if (lst[i].GetRawName() == id)

@@ -34,7 +34,8 @@
 const uint BAR_WIDTH = 13;
 const uint BAR_SPACING = 30;
 const uint BAR_HEIGHT = 50;
-const uint SPACING = 3;
+// XXX Not used
+//const uint SPACING = 3;
 
 const uchar ALPHA = 127;
 const uchar BACK_ALPHA = 0;

@@ -34,9 +34,10 @@
 //#include "weapon/explosion.h"
 #include "weapon/weapons_list.h"
 
-const uint SPEED = 5; // meter / seconde
-const uint SPEED_PARACHUTE = 170; // ms per frame
-const uint NB_MAX_TRY = 20;
+// XXX Unused !?
+//const uint SPEED_PARACHUTE = 170; // ms per frame
+//const uint NB_MAX_TRY = 20;
+//const uint SPEED = 5; // meter / seconde
 
 BonusBox::BonusBox():
   ObjBox("bonus_box"),

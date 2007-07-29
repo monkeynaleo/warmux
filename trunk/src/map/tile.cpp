@@ -58,17 +58,18 @@ Point2i Tile::Clamp(const Point2i &v) const{
 }
 
 void Tile::Dig(const Point2i &position, const Surface& dig){
-   Rectanglei rect = Rectanglei(position, dig.GetSize());
-	Point2i firstCell = Clamp(position/CELL_SIZE);
-	Point2i lastCell = Clamp((position + dig.GetSize())/CELL_SIZE);
-	Point2i c;
+   // XXX Not used !?
+   // Rectanglei rect = Rectanglei(position, dig.GetSize());
+   Point2i firstCell = Clamp(position/CELL_SIZE);
+   Point2i lastCell = Clamp((position + dig.GetSize())/CELL_SIZE);
+   Point2i c;
 
-    for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
-        for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
-            Point2i offset = position - c * CELL_SIZE;
+   for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+      for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
+         Point2i offset = position - c * CELL_SIZE;
 
-            item[c.y*nbCells.x + c.x]->Dig(offset, dig);
-        }
+         item[c.y*nbCells.x + c.x]->Dig(offset, dig);
+      }
 }
 
 void Tile::Dig(const Point2i &center, const uint radius){  
@@ -77,16 +78,17 @@ void Tile::Dig(const Point2i &center, const uint radius){
    Point2i position = center - Point2i(radius + EXPLOSION_BORDER_SIZE,
                                        radius + EXPLOSION_BORDER_SIZE);
 
-   Rectanglei rect = Rectanglei(position, size);
-	Point2i firstCell = Clamp(position/CELL_SIZE);
-	Point2i lastCell = Clamp((position+size)/CELL_SIZE);
-	Point2i c;
+   // XXX Not used !?
+   // Rectanglei rect = Rectanglei(position, size);
+   Point2i firstCell = Clamp(position/CELL_SIZE);
+   Point2i lastCell = Clamp((position+size)/CELL_SIZE);
+   Point2i c;
 
-    for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
-    for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
-            Point2i offset = center - c * CELL_SIZE;
-            item[c.y*nbCells.x + c.x]->Dig(offset, radius);
-        }
+   for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+   for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
+      Point2i offset = center - c * CELL_SIZE;
+      item[c.y*nbCells.x + c.x]->Dig(offset, radius);
+   }
 }
 
 void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
@@ -133,7 +135,8 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
 }
 
 void Tile::MergeSprite(const Point2i &position, Surface& surf){
-  Rectanglei rect = Rectanglei(position, surf.GetSize());
+  // XXX Not used !?
+  //Rectanglei rect = Rectanglei(position, surf.GetSize());
   Point2i firstCell = Clamp(position/CELL_SIZE);
   Point2i lastCell = Clamp((position + surf.GetSize())/CELL_SIZE);
   Point2i c;
@@ -151,6 +154,7 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf){
       item[c.y*nbCells.x + c.x]->MergeSprite(offset, surf);
     }
 }
+
 void Tile::LoadImage (Surface& terrain){
     FreeMem();
 

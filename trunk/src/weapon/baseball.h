@@ -31,7 +31,6 @@ class BaseballConfig : public WeaponConfig
   public:
     uint range;
     uint strength;
-  public:
     BaseballConfig();
     void LoadXml(xmlpp::Element *elem);
 };

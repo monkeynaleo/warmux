@@ -42,7 +42,6 @@ class SubMachineGunBullet : public WeaponBullet
 class SubMachineGun : public WeaponLauncher
 {
     ParticleEngine particle;
-  private:
     void RepeatShoot();
   protected:
     WeaponProjectile * GetProjectileInstance();

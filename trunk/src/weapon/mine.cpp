@@ -46,7 +46,8 @@
 #undef LoadImage
 #endif
 
-const double DEPART_FONCTIONNEMENT = 5;
+// XXX Not used
+//const double DEPART_FONCTIONNEMENT = 5;
 
 ObjMine::ObjMine(MineConfig& cfg,
                  WeaponLauncher * p_launcher) :

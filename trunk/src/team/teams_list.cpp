@@ -279,11 +279,9 @@ void TeamsList::InitEnergy()
 
   // Init each team's energy bar
   it=playing_list.begin();
-  uint i = 0;
   for (; it != fin; ++it)
   {
     (**it).InitEnergy (max);
-    ++i;
   }
 
   // Initial ranking
