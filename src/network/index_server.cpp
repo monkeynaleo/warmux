@@ -156,7 +156,7 @@ bool IndexServer::GetServerList()
   // Download the list of user
   const std::string server_file = Config::GetInstance()->GetPersonalDir() + "server_list";
 
-  if( !downloader.Get(server_list_url.c_str(), server_file.c_str()) )
+  if( !Downloader::GetInstance()->Get(server_list_url.c_str(), server_file.c_str()) )
     return false;
 
   // Parse the file
