@@ -205,6 +205,8 @@ bool AirAttack::p_Shoot ()
 
   Plane* plane = new Plane(cfg());
   plane->Shoot(cfg().speed, target);
+  delete plane;
+
   return true;
 }
 
