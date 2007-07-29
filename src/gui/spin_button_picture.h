@@ -39,9 +39,9 @@ class SpinButtonWithPicture : public Widget
   /*********************************************/
 
   Surface m_image;
-  Surface m_full_circle;
-  Surface m_full_circle_border;
-  Color m_partial_circle_color;
+  Surface m_annulus_background;
+  Surface m_annulus_foreground;
+  Color m_progress_color;
 
  protected:
   Text *txt_label, *txt_value;

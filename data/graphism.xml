@@ -33,9 +33,9 @@
   <surface name="disabled_front" file="menu/disabled_front.png" />
   <surface name="disabled_back" file="menu/disabled_back.png" />
 
-  <surface name="full_circle" file="menu/full_circle.png" />
-  <color name="partial_circle_color" r="4" g="77" b="134" a="255" />
-  <surface name="full_circle_border" file="menu/full_circle_border.png" />
+  <surface name="annulus_background" file="menu/annulus_background.png" />
+  <surface name="annulus_foreground" file="menu/annulus_foreground.png" />
+  <color name="annulus_progress_color" r="4" g="77" b="134" a="255" />
 
   <!-- Sound options -->
 
