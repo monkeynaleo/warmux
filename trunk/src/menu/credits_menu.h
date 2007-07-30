@@ -30,7 +30,7 @@ class ListBox;
 class CreditsMenu : public Menu
 {
  private:
-  void PrepareAuthorsList(ListBox *lbox_authors);
+  void PrepareAuthorsList(ListBox *lbox_authors) const;
   
   bool signal_ok();
   bool signal_cancel();   

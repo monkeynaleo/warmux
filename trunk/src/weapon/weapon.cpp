@@ -180,7 +180,7 @@ void Weapon::Select()
   double val = ActiveCharacter().previous_strength;
   weapon_strength_bar.ResetTag();
   if (0 < val && val < max_strength)
-  weapon_strength_bar.AddTag (uint(val*100), primary_red_color);
+    weapon_strength_bar.AddTag (uint(val*100), primary_red_color);
 }
 
 void Weapon::Deselect()
@@ -336,7 +336,7 @@ void Weapon::PosXY (int &x, int &y) const
     ASSERT(false);
 }
 
-const Point2i Weapon::GetGunHolePosition()
+const Point2i Weapon::GetGunHolePosition() const
 {
   const Point2i &pos = ActiveCharacter().GetHandPosition();
   Point2i hole(pos +  hole_delta);
@@ -352,7 +352,7 @@ bool Weapon::EnoughAmmo() const
   return ((ammo == INFINITE_AMMO) || (0 < ammo));
 }
 
-void Weapon::UseAmmo()
+void Weapon::UseAmmo() const
 {
   // Use one ammo...
   int *ammo = &ActiveTeam().AccessNbAmmos();
@@ -367,7 +367,7 @@ bool Weapon::EnoughAmmoUnit() const
   return (unit > 0);
 }
 
-void Weapon::UseAmmoUnit()
+void Weapon::UseAmmoUnit() const
 {
   // Use one ammo unit.
   int *unit = &ActiveTeam().AccessNbUnits();
@@ -588,7 +588,7 @@ Sprite & Weapon::GetIcon() const
   return *icon;
 }
 
-bool Weapon::LoadXml(xmlpp::Element * weapon)
+bool Weapon::LoadXml(const xmlpp::Element * weapon)
 {
   xmlpp::Element *elem = XmlReader::GetMarker(weapon, m_id);
   if (elem == NULL)

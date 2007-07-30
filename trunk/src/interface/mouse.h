@@ -83,7 +83,7 @@ private:
   pointer_t ScrollPointer() const;
   bool DrawMovePointer() const;
   void ScrollCamera() const;
-  void DrawSelectPointer();
+  void DrawSelectPointer() const;
 
   const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 
@@ -95,7 +95,7 @@ public:
 
   static Mouse * GetInstance();
 
-  bool HandleClic (const SDL_Event& event);
+  bool HandleClic (const SDL_Event& event) const;
 
   void Refresh();
   void TestCamera();
@@ -106,7 +106,7 @@ public:
 
   // Choose the pointer
   pointer_t SetPointer(pointer_t pointer);
-  void Draw();
+  void Draw() const;
 
   // Hide/show mouse pointer
   void Show();

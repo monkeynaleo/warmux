@@ -278,7 +278,7 @@ void Team::PrepareTurn()
   }
 }
 
-Character& Team::ActiveCharacter()
+Character& Team::ActiveCharacter() const
 {
   return (*active_character);
 }

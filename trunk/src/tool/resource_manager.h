@@ -57,19 +57,19 @@ class ResourceManager
    ResourceManager();
    ~ResourceManager();
 
-   void AddDataPath(std::string base_path);
-   Surface LoadImage(const std::string ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0);
+   void AddDataPath(const std::string& base_path);
+   Surface LoadImage(const std::string& ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0) const;
 
-   Profile *LoadXMLProfile(const std::string xml_filename, bool relative_path);
-   void UnLoadXMLProfile(Profile *profile);
+   Profile *LoadXMLProfile(const std::string& xml_filename, bool relative_path) const;
+   void UnLoadXMLProfile(Profile *profile) const;
 
-   Color LoadColor(const Profile *profile, const std::string resource_name);
-   Point2i LoadPoint2i(const Profile *profile, const std::string resource_name);
-   Point2d LoadPoint2d(const Profile *profile, const std::string resource_name);
-   Surface LoadImage(const Profile *profile, const std::string resource_name);
-   Sprite *LoadSprite(const Profile *profile, const std::string resource_name);
-   Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height);
-   xmlpp::Element * GetElement(const Profile *profile, const std::string ressource_type, const std::string ressource_name);
+   Color LoadColor(const Profile *profile, const std::string& resource_name) const;
+   Point2i LoadPoint2i(const Profile *profile, const std::string& resource_name) const;
+   Point2d LoadPoint2d(const Profile *profile, const std::string& resource_name) const;
+   Surface LoadImage(const Profile *profile, const std::string& resource_name) const;
+   Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
+   Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height) const;
+   xmlpp::Element * GetElement(const Profile *profile, const std::string& ressource_type, const std::string& ressource_name) const;
 
  private:
    std::string base_path;

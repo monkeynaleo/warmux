@@ -49,6 +49,6 @@ public:
   void Refresh();
   void Draw();
   bool IsActive() const { return actif; }
-  int GetHeight(int x);
+  int GetHeight(int x) const;
 };
 #endif

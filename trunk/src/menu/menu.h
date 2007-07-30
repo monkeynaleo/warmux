@@ -50,7 +50,7 @@ public:
    WidgetList widgets;
    const t_action actions;
 
-   Menu(std::string bg, t_action actions = vOkCancel);
+   Menu(const std::string& bg, t_action actions = vOkCancel);
    virtual ~Menu();
 
    void Run(bool skip=false);

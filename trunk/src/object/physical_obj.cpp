@@ -618,7 +618,7 @@ void PhysicalObj::CheckRebound()
   m_rebound_position = GetPosition();
 }
 
-bool PhysicalObj::IsOutsideWorldXY(Point2i position) const{
+bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
@@ -762,7 +762,7 @@ void PhysicalObj::DirectFall()
       SetY(GetY()+1.0+0.5); // 1.5 instead of 1.0 to make sure rounding yields a different number
 }
 
-bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
+bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
 {
   int x1, x2, y1, y2;
 

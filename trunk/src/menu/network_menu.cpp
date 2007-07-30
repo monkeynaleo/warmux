@@ -331,7 +331,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
   action_handler->ExecActions();
 }
 
-void NetworkMenu::DelTeamCallback(std::string team_id)
+void NetworkMenu::DelTeamCallback(const std::string& team_id)
 {
   if( close_menu )
     return;
@@ -340,7 +340,7 @@ void NetworkMenu::DelTeamCallback(std::string team_id)
   team_box->DelTeamCallback(team_id);
 }
 
-void NetworkMenu::AddTeamCallback(std::string team_id)
+void NetworkMenu::AddTeamCallback(const std::string& team_id)
 {
   if ( close_menu )
     return;
@@ -349,7 +349,7 @@ void NetworkMenu::AddTeamCallback(std::string team_id)
   msg_box->NewMessage(team_id + " selected");
 }
 
-void NetworkMenu::UpdateTeamCallback(std::string team_id)
+void NetworkMenu::UpdateTeamCallback(const std::string& team_id)
 {
   if ( close_menu )
     return;
@@ -366,7 +366,7 @@ void NetworkMenu::ChangeMapCallback()
   map_box->ChangeMapCallback();
 }
 
-void NetworkMenu::ReceiveMsgCallback(std::string msg)
+void NetworkMenu::ReceiveMsgCallback(const std::string& msg)
 {
   msg_box->NewMessage(msg);
 }

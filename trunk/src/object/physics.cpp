@@ -242,7 +242,7 @@ void Physics::SetExternForce (double length, double angle)
   SetExternForceXY(vector);
 }
 
-void Physics::SetExternForceXY (Point2d vector)
+void Physics::SetExternForceXY (const Point2d& vector)
 {
   bool was_moving = IsMoving();
 

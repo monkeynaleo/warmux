@@ -451,7 +451,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
 }
 
 // Refresh keys which are still pressed.
-void ManMachineInterface::Refresh()
+void ManMachineInterface::Refresh() const
 {
   SDLMod mod = SDL_GetModState();
 

@@ -99,7 +99,7 @@ public:
   void Dig(const Point2i& center, const uint radius);
 
   // Insert a sprite into the ground
-  void PutSprite(const Point2i& pos, Sprite* spr);
+  void PutSprite(const Point2i& pos, const Sprite* spr);
   // Merge a sprite into the ground
   void MergeSprite(const Point2i& pos, const Sprite* spr);
 

@@ -135,7 +135,7 @@ void Map::Dig(const Point2i& center, const uint radius)
                                       , Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
-void Map::PutSprite(const Point2i& pos, Sprite* spr)
+void Map::PutSprite(const Point2i& pos, const Sprite* spr)
 {
    ground.PutSprite (pos, spr);
    to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));

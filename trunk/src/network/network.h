@@ -99,7 +99,7 @@ protected:
   int fin;
 #endif
 
-  bool ThreadToContinue();
+  bool ThreadToContinue() const;
   static int ThreadRun(void* no_param);
 
   void DisconnectNetwork();

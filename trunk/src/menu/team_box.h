@@ -48,7 +48,7 @@ class TeamBox : public HBox
   SpinButton * nb_characters;
 
  public:
-  TeamBox(std::string player_name, const Rectanglei &rect);
+  TeamBox(const std::string& player_name, const Rectanglei &rect);
 
   void SetTeam(Team& _team, bool read_team_values=false);
   void ClearTeam();

@@ -180,9 +180,9 @@ public:
   Sprite & GetIcon() const;
   // Manage the numbers of ammunitions
   bool EnoughAmmo() const;
-  void UseAmmo();
+  void UseAmmo() const;
   bool EnoughAmmoUnit() const;
-  void UseAmmoUnit();
+  void UseAmmoUnit() const;
   int ReadInitialNbAmmo() const;
   int ReadInitialNbUnit() const;
 
@@ -222,7 +222,7 @@ public:
   // update strength (so the strength bar can be updated)
   virtual void UpdateStrength();
 
-  const Point2i GetGunHolePosition();
+  const Point2i GetGunHolePosition() const;
 
   // Choose a target.
   virtual void ChooseTarget (Point2i mouse_pos);
@@ -293,7 +293,7 @@ public:
 
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
-  bool LoadXml(xmlpp::Element * weapon);
+  bool LoadXml(const xmlpp::Element * weapon);
 
   // return the strength of the weapon
   const double ReadStrength() const;
@@ -328,7 +328,7 @@ private:
 };
 
 #define DECLARE_GETWEAPONSTRING() \
-std::string GetWeaponWinString(const char *TeamName, uint items_count )
+std::string GetWeaponWinString(const char *TeamName, uint items_count ) const
 
 //-----------------------------------------------------------------------------
 #endif

@@ -393,7 +393,7 @@ void WeaponsMenu::SetHelp(std::ostringstream /*msg*/)
 {
 }
 
-Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly)
+Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)
 {
   std::vector<PolygonItem *> items = poly->GetItem();
   WeaponMenuItem * tmp;

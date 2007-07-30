@@ -93,7 +93,7 @@ class WeaponsMenu
   bool ActionClic(const Point2i &mouse_pos);
   Sprite * GetInfiniteSymbol() const;
   Sprite * GetCrossSymbol() const;
-  Weapon * UpdateCurrentOverflyItem(Polygon * poly);
+  Weapon * UpdateCurrentOverflyItem(const Polygon * poly);
   uint GetJellyTime() const;
   uint GetIconsDrawTime() const;
   uint GetRotationTime() const;

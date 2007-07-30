@@ -94,7 +94,7 @@ BaseballConfig& Baseball::cfg()
   return static_cast<BaseballConfig&>(*extra_params);
 }
 
-std::string Baseball::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string Baseball::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u baseball bat!",

@@ -70,9 +70,8 @@ class AutomaticBazooka : public WeaponLauncher
     void p_Select(); 
     void p_Deselect();
 
-    void DrawTarget();
+    void DrawTarget() const;
 
-  protected:
     WeaponProjectile * GetProjectileInstance();
 };
 

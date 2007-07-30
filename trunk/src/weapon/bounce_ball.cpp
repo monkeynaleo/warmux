@@ -62,7 +62,7 @@ void BounceBall::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-std::string BounceBall::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string BounceBall::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u bounce ball!",

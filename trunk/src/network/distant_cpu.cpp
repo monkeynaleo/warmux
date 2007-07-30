@@ -104,7 +104,7 @@ DistantComputer::~DistantComputer()
   SDL_DestroyMutex(sock_lock);
 }
 
-bool DistantComputer::SocketReady()
+bool DistantComputer::SocketReady() const
 {
   return SDLNet_SocketReady(sock);
 }
@@ -235,7 +235,7 @@ void DistantComputer::ManageTeam(Action* team)
     ASSERT(false);
 }
 
-void DistantComputer::SendChatMessage(Action* a)
+void DistantComputer::SendChatMessage(Action* a) const
 {
   std::string txt = a->PopString();
   if (txt == "") return;

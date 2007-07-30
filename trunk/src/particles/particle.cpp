@@ -106,7 +106,7 @@ void Particle::Refresh()
   }
 }
 
-bool Particle::StillUseful()
+bool Particle::StillUseful() const
 {
   return (m_left_time_to_live > 0);
 }
@@ -317,7 +317,7 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   }
 }
 
-void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius, ESmokeStyle &style)
+void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius, const ESmokeStyle &style)
 {
   if (!sprites_loaded)
     return;

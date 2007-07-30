@@ -122,7 +122,7 @@ void Polecat::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-std::string Polecat::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string Polecat::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u polecat!",

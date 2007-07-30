@@ -95,7 +95,7 @@ void DiscoGrenade::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-std::string DiscoGrenade::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string DiscoGrenade::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u disco grenade!",

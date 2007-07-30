@@ -20,6 +20,8 @@
  *****************************************************************************/
 
 #include <curl/curl.h>
+#include "include/base.h"
+#include "tool/error.h"
 #include "download.h"
 
 Downloader * Downloader::singleton = NULL;
@@ -51,6 +53,7 @@ size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
 bool Downloader::Get(const char* url, const char* save_as)
 {
   FILE* fd = fopen( save_as, "w");
+  ASSERT(fd);
   curl_easy_setopt(curl, CURLOPT_FILE, fd);
   curl_easy_setopt(curl, CURLOPT_URL, url);
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);

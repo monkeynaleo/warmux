@@ -76,7 +76,7 @@ Plane::~Plane()
   flying_sound.Stop();
 }
 
-void Plane::Shoot(double speed, Point2i& target)
+void Plane::Shoot(double speed, const Point2i& target)
 {
   nb_dropped_bombs = 0;
   last_dropped_bomb = NULL;
@@ -227,7 +227,7 @@ AirAttackConfig& AirAttack::cfg()
   return static_cast<AirAttackConfig&>(*extra_params);
 }
 
-std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u air attack!",

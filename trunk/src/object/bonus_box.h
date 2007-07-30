@@ -46,7 +46,7 @@ class BonusBox : public ObjBox
     void PickRandomWeapon();
   public:
     BonusBox();
-    static void LoadXml(xmlpp::Element * object);
+    static void LoadXml(const xmlpp::Element * object);
 
     void Draw();
     void Refresh();

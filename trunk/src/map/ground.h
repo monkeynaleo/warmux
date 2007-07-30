@@ -49,7 +49,7 @@ public:
   bool IsOpen() const { return open; }
 
   //returns the angle formed by the ground tangent au terrain
-  double Tangent(int x,int y);
+  double Tangent(int x,int y) const ;
 
   void RedrawParticleList(std::list<Rectanglei> &list) const;
 };

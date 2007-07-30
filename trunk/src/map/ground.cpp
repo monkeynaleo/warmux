@@ -76,7 +76,7 @@ bool Ground::IsEmpty(const Point2i &pos) const{
  * returns -1.0 if no tangent was found (pixel (x,y) does not touch any
  * other piece of ground
  */
-double Ground::Tangent(int x,int y){
+double Ground::Tangent(int x,int y) const {
   //Approximation : returns the chord instead of the tangent to the ground
 
   /* We try to find 2 points on the ground on each side of (x,y)

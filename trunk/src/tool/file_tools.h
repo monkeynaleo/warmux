@@ -40,7 +40,7 @@ std::string TranslateDirectory(const std::string &directory);
 
 typedef struct _FolderSearch FolderSearch;
 
-FolderSearch *OpenFolder(std::string dirname);
+FolderSearch *OpenFolder(const std::string& dirname);
 const char* FolderSearchNext(FolderSearch *f);
 void CloseFolder(FolderSearch *f);
 

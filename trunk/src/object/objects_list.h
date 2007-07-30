@@ -57,7 +57,7 @@ class ObjectsList : public std::list<PhysicalObj*>
     // Call the Draw method of all the objects
     void Draw();
 
-    bool AllReady();
+    bool AllReady() const;
 
     // Place mines randomly on the map
     void PlaceMines();

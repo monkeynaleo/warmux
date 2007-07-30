@@ -40,6 +40,6 @@
 
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...);
-void AddDebugMode( std::string mode );
+void AddDebugMode(const std::string& mode);
 
 #endif

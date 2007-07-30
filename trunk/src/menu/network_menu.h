@@ -71,12 +71,12 @@ public:
   NetworkMenu();
   ~NetworkMenu();
 
-  void AddTeamCallback(std::string team_id);
-  void UpdateTeamCallback(std::string team_id);
-  void DelTeamCallback(std::string team_id);
+  void AddTeamCallback(const std::string& team_id);
+  void UpdateTeamCallback(const std::string& team_id);
+  void DelTeamCallback(const std::string& team_id);
   void ChangeMapCallback();
 
-  void ReceiveMsgCallback(std::string msg);
+  void ReceiveMsgCallback(const std::string& msg);
 };
 
 #endif

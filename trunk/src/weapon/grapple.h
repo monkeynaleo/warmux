@@ -104,14 +104,14 @@ class Grapple : public Weapon
 
     // Attaching and dettaching nodes rope
     // This is public because of network
-    void AttachRope(Point2i contact_point);
+    void AttachRope(const Point2i& contact_point);
     void DetachRope();
 
-    void AttachNode(Point2i contact_point, 
+    void AttachNode(const Point2i& contact_point, 
 		    double angle, 
 		    int sense);
     void DetachNode();
-    void SetRopeSize(double length);
+    void SetRopeSize(double length) const;
 
     // Keys management
     virtual void HandleKeyPressed_Up();

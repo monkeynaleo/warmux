@@ -147,7 +147,7 @@ public:
   bool IsInWater() const;
 
   // The object is outside of the world
-  bool IsOutsideWorldXY(Point2i position) const;
+  bool IsOutsideWorldXY(const Point2i& position) const;
   bool IsOutsideWorld(const Point2i &offset = Point2i(0,0)) const; // Relative to current position
 
   // Refresh datas
@@ -187,7 +187,7 @@ protected:
 
 private:
   //Retrun the position of the point of contact of the obj on the ground
-  bool ContactPoint (int &x, int &y);
+  bool ContactPoint (int &x, int &y) const;
 
   void NotifyMove(Point2d oldPos, Point2d newPos);
 

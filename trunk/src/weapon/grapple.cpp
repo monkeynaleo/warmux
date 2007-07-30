@@ -420,7 +420,7 @@ void Grapple::ActionStopUse()
 }
 
 
-void Grapple::AttachRope(Point2i contact_point)
+void Grapple::AttachRope(const Point2i& contact_point)
 {
   MSG_DEBUG("grapple.hook", "** AttachRope %d,%d", contact_point.x, contact_point.y);
 
@@ -467,9 +467,9 @@ void Grapple::DetachRope()
   camera.SetCloseFollowing(false);
 }
 
-void Grapple::AttachNode(Point2i contact_point,
-			   double angle,
-			   int sense)
+void Grapple::AttachNode(const Point2i& contact_point,
+                         double angle,
+                         int sense)
 {
   Point2i handPos = ActiveCharacter().GetHandPosition();
 
@@ -522,7 +522,7 @@ void Grapple::DetachNode()
 
 // =========================== Moves management
 
-void Grapple::SetRopeSize(double length)
+void Grapple::SetRopeSize(double length) const
 {
   double delta = length - ActiveCharacter().GetRopeLength();
   ActiveCharacter().ChangePhysRopeSize (delta);
@@ -707,7 +707,7 @@ void Grapple::PrintDebugRope()
   }
 }
 
-std::string Grapple::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string Grapple::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u grapple!",

@@ -29,7 +29,7 @@
 #include "team/team.h"
 #include "tool/i18n.h"
 
-TeamBox::TeamBox(std::string _player_name, const Rectanglei& rect) : 
+TeamBox::TeamBox(const std::string& _player_name, const Rectanglei& rect) : 
   HBox(rect, false)
 {
   associated_team=NULL;

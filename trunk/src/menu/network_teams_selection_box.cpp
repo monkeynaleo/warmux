@@ -273,7 +273,7 @@ void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team, bool remove_prev
   ActionHandler::GetInstance()->ExecActions();
 }
 
-void NetworkTeamsSelectionBox::AddTeamCallback(std::string team_id)
+void NetworkTeamsSelectionBox::AddTeamCallback(const std::string& team_id)
 {
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() == NULL) {
@@ -296,7 +296,7 @@ void NetworkTeamsSelectionBox::AddTeamCallback(std::string team_id)
   local_teams_nb->SetValue(nb_local_teams);
 }
 
-void NetworkTeamsSelectionBox::UpdateTeamCallback(std::string team_id)
+void NetworkTeamsSelectionBox::UpdateTeamCallback(const std::string& team_id)
 {
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() != NULL &&
@@ -311,7 +311,7 @@ void NetworkTeamsSelectionBox::UpdateTeamCallback(std::string team_id)
   }  
 }
 
-void NetworkTeamsSelectionBox::DelTeamCallback(std::string team_id)
+void NetworkTeamsSelectionBox::DelTeamCallback(const std::string& team_id)
 {
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() != NULL && 

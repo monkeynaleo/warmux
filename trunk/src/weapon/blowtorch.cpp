@@ -141,7 +141,7 @@ void BlowtorchConfig::LoadXml(xmlpp::Element* elem)
   XmlReader::ReadUint(elem, "range", range);
 }
 
-std::string Blowtorch::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string Blowtorch::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u blowtorch!",

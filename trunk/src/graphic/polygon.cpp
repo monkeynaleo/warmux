@@ -221,6 +221,7 @@ Polygon::~Polygon()
   texture = NULL;
 }
 
+// Only called by constructor, so setting pointer values is valid
 void Polygon::Init()
 {
   is_closed = true;

@@ -43,7 +43,7 @@ CrossHair::CrossHair()
   resource_manager.UnLoadXMLProfile(res);
 }
 
-void CrossHair::Reset()
+void CrossHair::Reset() const
 {
   ActiveCharacter().SetFiringAngle(0.0);
 }
@@ -54,7 +54,7 @@ void CrossHair::Refresh(double angle)
   crosshair_position = Point2i(RAY, RAY) * Point2d(cos(angle), sin(angle)) - image.GetSize() / 2;
 }
 
-void CrossHair::Draw()
+void CrossHair::Draw() const
 {
   if( !enable )
     return;

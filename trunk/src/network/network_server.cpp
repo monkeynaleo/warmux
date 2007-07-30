@@ -133,8 +133,8 @@ void NetworkServer::ReceiveActions()
 		(*client)->SendDatas(packet, packet_size);
 	      }
 	
-           ActionHandler::GetInstance()->NewAction(a, false);
-           free(packet);
+        ActionHandler::GetInstance()->NewAction(a, false);
+        free(packet);
       }
     }
   }
