@@ -34,6 +34,7 @@
 #include "map/camera.h"
 #include "network/network.h"
 #include "network/randomsync.h"
+#include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/macro.h"
@@ -113,7 +114,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   lost_energy(0),
   hidden(false),
   channel_step(-1),
-  bubble_engine(500),
+  bubble_engine(new ParticleEngine(500)),
   previous_strength(0),
   body(NULL)
 {
@@ -165,7 +166,7 @@ Character::Character (const Character& acharacter) :
   lost_energy(acharacter.lost_energy),
   hidden(acharacter.hidden),
   channel_step(acharacter.channel_step),
-  bubble_engine(250),
+  bubble_engine(new ParticleEngine(250)),
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
@@ -182,8 +183,11 @@ Character::~Character()
     delete body;
   if(name_text)
     delete name_text;
-  body      = NULL;
-  name_text = NULL;
+  if(bubble_engine)
+    delete bubble_engine;
+  body          = NULL;
+  name_text     = NULL;
+  bubble_engine = NULL;
 }
 
 void Character::SignalDrowning()
@@ -575,7 +579,7 @@ void Character::Refresh()
     Point2i bubble_pos = GetPosition();
     if(GetDirection() == Body::DIRECTION_LEFT)
       bubble_pos.x += GetWidth();
-    bubble_engine.AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
+    bubble_engine->AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
                               - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
   }
 
