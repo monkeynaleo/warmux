@@ -23,6 +23,7 @@
 #include <iostream>
 #include "character.h"
 #include "move.h"
+#include "damage_stats.h"
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
@@ -103,7 +104,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   firing_angle(0),
   disease_damage_per_turn(0),
   disease_duration(0),
-  damage_stats(*this),
+  damage_stats(new DamageStatistics(*this)),
   energy_bar(),
   survivals(0),
   name_text(NULL),
@@ -155,7 +156,7 @@ Character::Character (const Character& acharacter) :
   firing_angle(acharacter.firing_angle),
   disease_damage_per_turn(acharacter.disease_damage_per_turn),
   disease_duration(acharacter.disease_duration),
-  damage_stats(acharacter.damage_stats, *this),
+  damage_stats(new DamageStatistics(*acharacter.damage_stats, *this)),
   energy_bar(acharacter.energy_bar),
   survivals(acharacter.survivals),
   name_text(NULL),
@@ -203,7 +204,7 @@ void Character::SignalDrowning()
 void Character::SignalGhostState (bool was_dead)
 {
   // Report to damage performer this character lost all of its energy
-  ActiveCharacter().damage_stats.MadeDamage(GetEnergy(), *this);
+  ActiveCharacter().damage_stats->MadeDamage(GetEnergy(), *this);
 
   MSG_DEBUG("character", "ghost");
 
@@ -242,14 +243,14 @@ void Character::DrawName (int dy) const
   }
 }
 
-const DamageStatistics& Character::GetDamageStats() const
+const DamageStatistics* Character::GetDamageStats() const
 {
   return damage_stats;
 }
 
 void Character::ResetDamageStats() 
 {
-  damage_stats.ResetDamage();
+  damage_stats->ResetDamage();
 }
 
 void Character::SetEnergyDelta (int delta, bool do_report)
@@ -259,7 +260,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
 
   // Report damage to damage performer
   if (do_report)
-    ActiveCharacter().damage_stats.MadeDamage(-delta, *this);
+    ActiveCharacter().damage_stats->MadeDamage(-delta, *this);
 
   uint saved_life_points = GetEnergy();
 
@@ -347,7 +348,7 @@ void Character::Die()
     GameLoop::GetInstance()->SignalCharacterDeath (this);
   }    
 
-  damage_stats.SetDeathTime(Time::GetInstance()->Read());
+  damage_stats->SetDeathTime(Time::GetInstance()->Read());
 }
 
 bool Character::IsDiseased() const
@@ -562,7 +563,7 @@ void Character::DoShoot()
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
   body->UpdateWeaponPosition(GetPosition());
-  damage_stats.OneMoreShot();
+  damage_stats->OneMoreShot();
   ActiveTeam().AccessWeapon().Shoot();
   MSG_DEBUG("weapon.shoot", "<- end");
 }
@@ -633,7 +634,7 @@ void Character::Refresh()
 // Prepare a new turn
 void Character::PrepareTurn()
 {
-  damage_stats.HandleMostDamage();
+  damage_stats->HandleMostDamage();
   lost_energy = 0;
   pause_bouge_dg = Time::GetInstance()->Read();
 }
