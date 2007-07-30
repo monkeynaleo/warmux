@@ -26,17 +26,7 @@
 #include "weapon.h"
 //-----------------------------------------------------------------------------
 
-class SyringeConfig : public WeaponConfig
-{
-  public:
-    uint range;
-    uint damage;
-    uint turns;
-    SyringeConfig();
-    void LoadXml(xmlpp::Element *elem);
-};
-
-//-----------------------------------------------------------------------------
+class SyringeConfig;
 
 class Syringe : public Weapon
 {
