@@ -24,11 +24,12 @@
 #include <iostream>
 #include "config.h"
 #include "game_loop.h"
-#include "tool/file_tools.h"
-#include "tool/i18n.h"
-#include "weapon/weapons_list.h"
 #include "object/medkit.h"
 #include "object/bonus_box.h"
+#include "tool/file_tools.h"
+#include "tool/i18n.h"
+#include "tool/xml_document.h"
+#include "weapon/weapons_list.h"
 
 GameMode * GameMode::singleton = NULL;
 
@@ -56,7 +57,7 @@ GameMode::GameMode():
   character(),
   allow_character_selection(BEFORE_FIRST_ACTION_AND_END_TURN),
   m_current("classic"),
-  doc_objects()
+  doc_objects(new XmlReader)
 {
   character.init_energy = 100; /* overwritten when reading XML */
   character.max_energy = 100; /* overwritten when reading XML */
@@ -68,6 +69,11 @@ GameMode::GameMode():
   character.super_jump_angle = -80;
   character.back_jump_strength = 9;
   character.back_jump_angle = -100;
+}
+
+GameMode::~GameMode()
+{
+  delete doc_objects;
 }
 
 const std::string& GameMode::GetName() const
@@ -201,7 +207,7 @@ bool GameMode::Load(void)
       return false;
     }
 
-    if(!doc_objects.Load(fullname))
+    if(!doc_objects->Load(fullname))
       return false;
     MSG_DEBUG("game_mode", "successful loading of %s\n", fullname.c_str());
 
@@ -245,7 +251,7 @@ bool GameMode::LoadFromString(const std::string& game_mode_name,
 
   try
   {
-    if(!doc_objects.LoadFromString(game_mode_objects_contents))
+    if(!doc_objects->LoadFromString(game_mode_objects_contents))
       return false;
 
     XmlReader doc;
@@ -304,7 +310,7 @@ bool GameMode::ExportToString(std::string& mode,
   return r;
 }
 
-const XmlReader& GameMode::GetXmlObjects() const
+const XmlReader* GameMode::GetXmlObjects() const
 {
   return doc_objects;
 }

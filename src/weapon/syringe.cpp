@@ -27,6 +27,7 @@
 #include "team/team.h"
 #include "tool/point.h"
 #include "tool/i18n.h"
+#include "tool/xml_document.h"
 #include "explosion.h"
 
 Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())

@@ -21,6 +21,7 @@
 
 #include "weapon_cfg.h"
 #include <iostream>
+#include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
 void EmptyWeaponConfig::LoadXml(xmlpp::Element */*elem*/) 

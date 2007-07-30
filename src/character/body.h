@@ -25,7 +25,6 @@
 
 #include "movement.h"
 #include "tool/point.h"
-#include "tool/xml_document.h"
 
 // Forward declarations
 class Character;
@@ -33,6 +32,10 @@ class BodyList;
 class Member;
 class Clothe;
 class Profile;
+namespace xmlpp
+{
+  class Element;
+}
 
 /*
  * FIXME: this class is either very useless either very badly used.

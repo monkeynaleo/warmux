@@ -23,7 +23,11 @@
 #define WEAPON_CONFIGURATION_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include "tool/xml_document.h"
+namespace xmlpp
+{
+  class Element;
+}
+
 //-----------------------------------------------------------------------------
 
 class EmptyWeaponConfig

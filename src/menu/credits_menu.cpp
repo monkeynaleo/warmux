@@ -30,8 +30,9 @@
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "gui/list_box.h"
-#include "tool/i18n.h"
 #include "include/app.h"
+#include "tool/i18n.h"
+#include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
 class Author

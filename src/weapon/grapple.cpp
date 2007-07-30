@@ -39,6 +39,7 @@
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+#include "tool/xml_document.h"
 
 const uint DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
 const uint DST_MIN = 80 ;  //dst_minimal between 2 nodes

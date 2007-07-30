@@ -33,6 +33,7 @@
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+#include "tool/xml_document.h"
 #include "weapon/explosion.h"
 
 const int FORCE_X_MIN = -50;

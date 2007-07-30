@@ -39,6 +39,7 @@
 #include "team/macro.h"
 #include "tool/random.h"
 #include "tool/math_tools.h"
+#include "tool/xml_document.h"
 #include "weapon/explosion.h"
 
 const uint HAUT_FONT_MIX = 13;

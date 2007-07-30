@@ -36,6 +36,7 @@
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+#include "tool/xml_document.h"
 #include "object/objects_list.h"
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {

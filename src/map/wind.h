@@ -25,10 +25,13 @@
 #include <list>
 #include "include/base.h"
 #include "object/physical_obj.h"
-#include "tool/xml_document.h"
 
 // Forward declarations
 class Sprite;
+namespace xmlpp
+{
+  class Element;
+}
 
 class WindParticle : public PhysicalObj
 {

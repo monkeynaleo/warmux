@@ -32,10 +32,15 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <string>
+#include <map>
 #include "include/base.h"
-#include "tool/xml_document.h"
 
+// Forward declarations
 class ObjectConfig;
+namespace xmlpp
+{
+  class Element;
+}
 
 //-----------------------------------------------------------------------------
 #ifdef WIN32

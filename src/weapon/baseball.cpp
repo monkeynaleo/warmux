@@ -30,6 +30,7 @@
 #include "tool/point.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+#include "tool/xml_document.h"
 #include "explosion.h"
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())

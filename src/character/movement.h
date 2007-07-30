@@ -22,8 +22,14 @@
 #define MOVEMENT_H
 #include <map>
 #include <vector>
+#include "include/base.h"
 #include "tool/point.h"
-#include "tool/xml_document.h"
+
+// Forward declaration
+namespace xmlpp
+{
+  class Element;
+}
 
 class member_mvt
 {  // Position of a member relative to its superior one
