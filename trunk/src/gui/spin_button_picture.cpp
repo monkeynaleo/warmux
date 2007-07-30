@@ -51,7 +51,8 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_value_black = new Text("", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_value_white = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   SetValue(value);
 
   m_step = step;
@@ -60,7 +61,8 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
 SpinButtonWithPicture::~SpinButtonWithPicture ()
 {
   delete txt_label;
-  delete txt_value;
+  delete txt_value_black;
+  delete txt_value_white;
 }
 
 void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
@@ -118,7 +120,8 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   tmp_y = center_y + small_r - 3;
   uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
 
-  txt_value->DrawCenterTop(tmp_x, tmp_y - value_h/2);
+  txt_value_black->DrawCenterTop(tmp_x + 1, tmp_y + 1 - value_h/2);
+  txt_value_white->DrawCenterTop(tmp_x, tmp_y - value_h/2);
 
   // 6. and finally the label image
   txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2, 
@@ -172,7 +175,8 @@ void SpinButtonWithPicture::SetValue(int value)
   value_s << m_value ;
 
   std::string s(value_s.str());
-  txt_value->Set(s);
+  txt_value_black->Set(s);
+  txt_value_white->Set(s);
 
   ForceRedraw();
 }

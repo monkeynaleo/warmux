@@ -44,7 +44,7 @@ class SpinButtonWithPicture : public Widget
   Color m_progress_color;
 
  protected:
-  Text *txt_label, *txt_value;
+  Text *txt_label, *txt_value_white, *txt_value_black;
 
   int m_value;
   int m_min_value, m_max_value, m_step;
