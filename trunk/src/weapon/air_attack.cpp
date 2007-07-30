@@ -206,7 +206,8 @@ bool AirAttack::p_Shoot ()
 
   Plane* plane = new Plane(cfg());
   plane->Shoot(cfg().speed, target);
-  delete plane;
+  // The plane instance is in fact added to an objects list,
+  // which will delete it for us when needed.
 
   return true;
 }
