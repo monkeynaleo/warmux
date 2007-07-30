@@ -19,6 +19,7 @@
  * Text box widget
  *****************************************************************************/
 
+#include <SDL_keyboard.h>
 #include "text_box.h"
 #include "graphic/text.h"
 
@@ -54,7 +55,7 @@ void TextBox::SetCursor(std::string::size_type pos)
 TextBox::~TextBox(){
 }
 
-void TextBox::SendKey(SDL_keysym key)
+void TextBox::SendKey(const SDL_keysym& key)
 {
   need_redrawing = true;
 

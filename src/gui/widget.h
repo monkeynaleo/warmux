@@ -22,13 +22,13 @@
 #ifndef GUI_WIDGET_H
 #define GUI_WIDGET_H
 
-#include <SDL_keyboard.h>
 #include "include/base.h"
 #include "tool/rectangle.h"
 #include "tool/point.h"
 
 class Container;
 class Surface;
+struct SDL_keysym;
 
 class Widget : public Rectanglei
 {
@@ -55,7 +55,7 @@ class Widget : public Rectanglei
 		    Surface& surf) const = 0;
   virtual void ForceRedraw(); // set need_redrawing to true; -- virtual for widget_list
 
-  virtual void SendKey(SDL_keysym key);
+  virtual void SendKey(const SDL_keysym&) { };
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
   bool IsSelected() const;
