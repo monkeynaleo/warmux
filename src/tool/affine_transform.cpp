@@ -35,7 +35,7 @@ void AffineTransform2D::Init()
   w1 = 0; w2 = 0; wt = 1;
 }
 
-void AffineTransform2D::Set(AffineTransform2D &mat)
+void AffineTransform2D::Set(const AffineTransform2D &mat)
 {
   x1 = mat.x1;
   x2 = mat.x2;
@@ -182,7 +182,7 @@ AffineTransform2D AffineTransform2D::operator*(const AffineTransform2D &mat) con
   return tmp;
 }
 
-Point2i AffineTransform2D::operator*(Point2i p) const
+Point2i AffineTransform2D::operator*(const Point2i& p) const
 {
   Point2i tmp;
   tmp.x = (int)(x1 * (double)p.x + x2 * (double)p.y + xt);
@@ -190,7 +190,7 @@ Point2i AffineTransform2D::operator*(Point2i p) const
   return tmp;
 }
 
-Point2d AffineTransform2D::operator*(Point2d p) const
+Point2d AffineTransform2D::operator*(const Point2d& p) const
 {
   Point2d tmp;
   tmp.x = (double)(x1 * (double)p.x + x2 * (double)p.y + xt);

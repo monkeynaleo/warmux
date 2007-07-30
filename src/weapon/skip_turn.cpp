@@ -62,7 +62,7 @@ void SkipTurn::Refresh()
 
 //-----------------------------------------------------------------------------
 
-std::string SkipTurn::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string SkipTurn::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u turn skip!",

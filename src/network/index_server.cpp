@@ -233,7 +233,7 @@ void IndexServer::Send(const int& nbr)
 {
   char packet[4];
   // this is not cute, but we don't want an int -> uint conversion here
-  Uint32 u_nbr = *((Uint32*)&nbr);
+  Uint32 u_nbr = *((const Uint32*)&nbr);
 
   SDLNet_Write32(u_nbr, packet);
   SDLNet_TCP_Send(socket, packet, sizeof(packet));

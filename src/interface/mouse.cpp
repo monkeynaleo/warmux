@@ -147,7 +147,7 @@ void Mouse::ActionWheelDown() const
   ActiveTeam().AccessWeapon().HandleMouseWheelDown();
 }
 
-bool Mouse::HandleClic (const SDL_Event& event)
+bool Mouse::HandleClic (const SDL_Event& event) const
 {
   if ( event.type != SDL_MOUSEBUTTONDOWN &&
        event.type != SDL_MOUSEBUTTONUP ) {
@@ -449,7 +449,7 @@ bool Mouse::DrawMovePointer() const
   return false;
 }
 
-void Mouse::DrawSelectPointer()
+void Mouse::DrawSelectPointer() const
 {
   AppWormux::GetInstance()->video->window.Blit( pointer_select,
 					       Point2i(GetPosition().x-3, GetPosition().y-2) );
@@ -457,7 +457,7 @@ void Mouse::DrawSelectPointer()
 				    pointer_select.GetWidth(), pointer_select.GetHeight()));
 }
 
-void Mouse::Draw()
+void Mouse::Draw() const
 {
   if (visible != MOUSE_VISIBLE)
     return;

@@ -80,7 +80,7 @@ struct _FolderSearch
   HANDLE          file_search;
 };
 
-FolderSearch *OpenFolder(std::string dirname)
+FolderSearch *OpenFolder(const std::string& dirname)
 {
   std::string  pattern = dirname + "*.*";
   FolderSearch *f      = new FolderSearch;
@@ -134,7 +134,7 @@ struct _FolderSearch
   struct dirent *file;
 };
 
-FolderSearch* OpenFolder(std::string dirname)
+FolderSearch* OpenFolder(const std::string& dirname)
 {
   FolderSearch *f = new FolderSearch;
   f->dir = opendir(dirname.c_str());

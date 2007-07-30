@@ -102,7 +102,7 @@ private:
   static void EndChunk(int channel);
   static void EndMusic();
 
-  bool PlayMusicSample(std::vector<std::string>::const_iterator file);
+  bool PlayMusicSample(const std::vector<std::string>::const_iterator& file);
 
 public:
   JukeBox();
@@ -113,8 +113,8 @@ public:
   bool UseEffects() const {return m_config.effects;};
   int GetFrequency() const {return m_config.frequency;};
   int HowManyChannels() const {return m_config.channels;};
-  void Pause();
-  void Resume();
+  void Pause() const;
+  void Resume() const;
 
   void ActiveMusic (bool on);
   void ActiveEffects (bool on) {m_config.effects = on;};
@@ -148,9 +148,9 @@ public:
 	   const std::string& sample,
 	   const int loop = 1);
 
-  int Stop(int channel);
+  int Stop(int channel) const;
 
-  int StopAll();
+  int StopAll() const;
 
 private:
   /**

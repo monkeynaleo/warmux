@@ -105,7 +105,7 @@ WeaponsList::WeaponsList():
 
 //-----------------------------------------------------------------------------
 
-void WeaponsList::Refresh ()
+void WeaponsList::Refresh () const
 {
   ActiveTeam().AccessWeapon().Manage();
 }

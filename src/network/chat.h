@@ -51,7 +51,7 @@ class Chat
   ~Chat();
   void Show();
   void ShowInput();
-  bool CheckInput();
+  bool CheckInput() const;
   void Reset();
   void NewMessage(const std::string& msg);
   void HandleKey(const SDL_Event& event);

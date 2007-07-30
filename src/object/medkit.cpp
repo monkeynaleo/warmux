@@ -83,7 +83,7 @@ void Medkit::Refresh()
   if (!anim->IsFinished() && !parachute) anim->Update();
 }
 
-void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) {
+void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) const {
   std::ostringstream txt;
  txt << Format(ngettext(
                 "%s has won %u point of energy!",
@@ -99,7 +99,7 @@ void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) {
 // Static methods
 int Medkit::nbr_health = 24;
 
-void Medkit::LoadXml(xmlpp::Element * object)
+void Medkit::LoadXml(const xmlpp::Element * object)
 {
   XmlReader::ReadInt(object,"life_points",start_life_points);
   XmlReader::ReadInt(object,"energy_boost",nbr_health);

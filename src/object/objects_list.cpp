@@ -111,7 +111,7 @@ void ObjectsList::Draw()
 }
 
 //-----------------------------------------------------------------------------
-bool ObjectsList::AllReady()
+bool ObjectsList::AllReady() const
 {
   FOR_EACH_OBJECT(object)
   {

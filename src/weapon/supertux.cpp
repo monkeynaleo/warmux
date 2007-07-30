@@ -167,7 +167,7 @@ bool TuxLauncher::p_Shoot ()
   return r;
 }
 
-void TuxLauncher::EndOfTurn()
+void TuxLauncher::EndOfTurn() const
 {
   // To go further in the game loop
   GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
@@ -229,7 +229,7 @@ void TuxLauncher::HandleKeyReleased_MoveLeft()
     ActiveCharacter().HandleKeyReleased_MoveLeft();
 }
 
-std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u tux launcher!",

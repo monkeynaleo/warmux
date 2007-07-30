@@ -41,12 +41,12 @@ JukeBox::JukeBox()
   m_config.channels = 2; // stereo
 }
 
-void JukeBox::Pause()
+void JukeBox::Pause() const
 {
   Mix_Pause(-1);
 }
 
-void JukeBox::Resume()
+void JukeBox::Resume() const
 {
   Mix_Resume(-1);
 }
@@ -289,7 +289,7 @@ bool JukeBox::PlayMusic(const std::string& type)
   return (j < 10);
 }
 
-bool JukeBox::PlayMusicSample(std::vector<std::string>::const_iterator file_it)
+bool JukeBox::PlayMusicSample(const std::vector<std::string>::const_iterator& file_it)
 {
    if(!UseMusic() || !m_init) return false;
 
@@ -402,14 +402,14 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
   return -1;
 }
 
-int JukeBox::Stop (int channel)
+int JukeBox::Stop (int channel) const
 {
   if(!m_config.music && !m_config.effects) return 0;
   if (channel == -1) return 0;
   return Mix_HaltChannel(channel);
 }
 
-int JukeBox::StopAll()
+int JukeBox::StopAll() const
 {
   if (!m_config.music && !m_config.effects) return 0;
 

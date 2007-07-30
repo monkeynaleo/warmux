@@ -54,9 +54,9 @@ public:
   void Init();
   static WeaponsList * GetInstance();
 
-  // Refresh des armes
-  // Retourne true si c'est la fin d'un tour
-  void Refresh();
+  // Weapon refresh
+  // Return true if end of turn
+  void Refresh() const;
 
   // Return a list of  weapons
   const weapons_list_type& GetList() const;

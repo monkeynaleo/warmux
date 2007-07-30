@@ -38,13 +38,13 @@ private:
 public:
   CrossHair();
 
-  void Reset();
+  void Reset() const;
 
   // Refresh crosshair angle
   void Refresh(double angle);
 
   // Draw crosshair
-  void Draw();
+  void Draw() const;
 
 };
 

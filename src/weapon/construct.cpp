@@ -105,7 +105,7 @@ void Construct::HandleMouseWheelDown()
   Down();
 }
 
-void Construct::Up()
+void Construct::Up() const
 {
   double new_angle = angle + DELTA_ANGLE;
 
@@ -113,7 +113,7 @@ void Construct::Up()
   ActionHandler::GetInstance()->NewAction(a);
 }
 
-void Construct::Down()
+void Construct::Down() const
 {
   double new_angle = angle - DELTA_ANGLE;
 
@@ -129,7 +129,7 @@ void Construct::SetAngle(double _angle)
 WeaponConfig& Construct::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
 
-std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u construct!",

@@ -41,7 +41,7 @@ class Medkit : public ObjBox//public PhysicalObj
     //Sprite *anim;
 
   private:
-    void ApplyMedkit (Team &team, Character &character);
+    void ApplyMedkit (Team &team, Character &character) const;
   public:
     Medkit();
     //~Medkit();
@@ -50,7 +50,7 @@ class Medkit : public ObjBox//public PhysicalObj
     //static void Enable (bool _enable);
     //static bool NewMedkit();
     //void DropMedkit();
-    static void LoadXml(xmlpp::Element * object);
+    static void LoadXml(const xmlpp::Element * object);
 
     void Draw();
     void Refresh();

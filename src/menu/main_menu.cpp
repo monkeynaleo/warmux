@@ -130,7 +130,7 @@ MainMenu::MainMenu() :
      jukebox.PlayMusic("menu");
 }
 
-void MainMenu::button_click()
+void MainMenu::button_click() const
 {
   jukebox.Play("share", "menu/clic");
 }

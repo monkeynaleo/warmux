@@ -83,9 +83,9 @@ class Particle : public PhysicalObj
   virtual void Draw();
   virtual void Refresh();
   void SetOnTop(bool b) { on_top = b; }
-  bool IsOnTop() { return on_top; }
-  bool StillUseful();
-  const bool CheckOnEndTurn() { return m_check_move_on_end_turn; }
+  bool IsOnTop() const { return on_top; }
+  bool StillUseful() const;
+  const bool CheckOnEndTurn() const { return m_check_move_on_end_turn; }
 };
 
 class ParticleEngine
@@ -119,7 +119,7 @@ class ParticleEngine
   static void AddNow(Particle* particle);
 
   enum ESmokeStyle { NoESmoke, LittleESmoke, BigESmoke }; // Style of smoke explosion (quantitie of smoke)
-  static void AddExplosionSmoke(const Point2i &pos, const uint &radius, ESmokeStyle &style);
+  static void AddExplosionSmoke(const Point2i &pos, const uint &radius, const ESmokeStyle &style);
 
   static void Refresh();
   static void Draw(bool upper);

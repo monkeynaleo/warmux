@@ -62,7 +62,7 @@ public:
   DistantComputer(TCPsocket new_sock);
   ~DistantComputer();
 
-  bool SocketReady();
+  bool SocketReady() const;
   int ReceiveDatas(char* & buf);
   void SendDatas(char* paket, int size);
 
@@ -70,7 +70,7 @@ public:
   std::string nickname;
 
   void ManageTeam(Action* team);
-  void SendChatMessage(Action* a);
+  void SendChatMessage(Action* a) const;
 
   void SetState(DistantComputer::state_t _state);
   DistantComputer::state_t GetState() const;

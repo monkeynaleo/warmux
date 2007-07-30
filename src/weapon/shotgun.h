@@ -48,7 +48,7 @@ class Shotgun : public WeaponLauncher
     Shotgun();
     DECLARE_GETWEAPONSTRING();
   private:
-    void ShootSound();
+    void ShootSound() const;
 };
 
 #endif /* SHOTGUN_H */

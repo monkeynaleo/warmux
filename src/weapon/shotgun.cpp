@@ -79,7 +79,7 @@ WeaponProjectile * Shotgun::GetProjectileInstance()
       (new ShotgunBuckshot(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-void Shotgun::ShootSound()
+void Shotgun::ShootSound() const
 {
   jukebox.Play("share", "weapon/shotgun");
 }
@@ -108,7 +108,7 @@ bool Shotgun::p_Shoot ()
   return true;
 }
 
-std::string Shotgun::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string Shotgun::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u shotgun!",

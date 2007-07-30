@@ -123,7 +123,7 @@ Network::~Network()
 
 //-----------------------------------------------------------------------------
 
-bool Network::ThreadToContinue()
+bool Network::ThreadToContinue() const
 {
   return !stop_thread;
 }

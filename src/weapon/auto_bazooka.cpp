@@ -223,7 +223,7 @@ void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
   static_cast<RPG *>(projectile)->SetTarget(m_target.pos.x, m_target.pos.y);
 }
 
-void AutomaticBazooka::DrawTarget()
+void AutomaticBazooka::DrawTarget() const
 {
   if( !m_target.selected ) return;
 
@@ -260,7 +260,7 @@ void AutomaticBazookaConfig::LoadXml(xmlpp::Element *elem) {
     XmlReader::ReadDouble(elem, "rocket_force", rocket_force);
 }
 
-std::string AutomaticBazooka::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string AutomaticBazooka::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u automatic bazooka!",

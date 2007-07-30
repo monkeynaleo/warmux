@@ -63,7 +63,7 @@ class WeaponProjectile : public PhysicalObj
     void SetTimeOut(int timeout);
     int GetTotalTimeout() const;
     void ResetTimeOut();
-    bool change_timeout_allowed();
+    bool change_timeout_allowed() const;
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
     virtual void SignalGroundCollision();
@@ -118,7 +118,7 @@ class WeaponLauncher : public Weapon
     void Refresh();
   private:
     void DirectExplosion();
-    void NetworkSetTimeoutProjectile();
+    void NetworkSetTimeoutProjectile() const;
   public:
     WeaponLauncher(Weapon_type type,
                    const std::string &id,

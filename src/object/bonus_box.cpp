@@ -132,7 +132,7 @@ std::map<int,std::pair<Weapon*,int> > BonusBox::weapon_map;
   and retrieved by weapon.GetBonusProbability() and weapon.GetBonusAmmo()
   however, this is not the way that was chosen.
 */
-void BonusBox::LoadXml(xmlpp::Element * object)
+void BonusBox::LoadXml(const xmlpp::Element * object)
 {
   XmlReader::ReadInt(object,"life_points",start_life_points);
   object = XmlReader::GetMarker(object, "probability");

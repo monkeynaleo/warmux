@@ -100,7 +100,7 @@ void ClusterBomb::DoExplosion()
   WeaponProjectile::DoExplosion();
 }
 
-std::string ClusterBomb::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string ClusterBomb::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u cluster bomb!",

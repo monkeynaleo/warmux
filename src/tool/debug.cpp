@@ -74,6 +74,6 @@ void PrintDebug (const char *filename, const char *function, unsigned long line,
 /** 
  * Add a new debug mode to check.
  */
-void AddDebugMode( std::string mode ){
+void AddDebugMode(const std::string& mode ){
 	debugModes.push_back( mode );
 }

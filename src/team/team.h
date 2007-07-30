@@ -101,7 +101,7 @@ class Team
     void PrepareTurn();
 
   // Access to the character.
-    Character& ActiveCharacter();
+    Character& ActiveCharacter() const;
 
     void DrawEnergy(const Point2i& pos);
     void Refresh();

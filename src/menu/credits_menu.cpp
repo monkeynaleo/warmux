@@ -44,7 +44,7 @@ public:
   std::string description;
 
   bool Feed (const xmlpp::Node *node);
-  std::string PrettyString(bool with_email);
+  std::string PrettyString(bool with_email) const;
 };
 
 //-----------------------------------------------------------------------------
@@ -61,7 +61,7 @@ bool Author::Feed (const xmlpp::Node *node)
 
 //-----------------------------------------------------------------------------
 
-std::string Author::PrettyString(bool with_email)
+std::string Author::PrettyString(bool with_email) const
 {
    std::ostringstream ss;
    ss << "* " << name;
@@ -112,7 +112,7 @@ bool CreditsMenu::signal_cancel()
 }
 
 
-void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
+void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
 {
   std::string filename = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "authors.xml";
   XmlReader doc;

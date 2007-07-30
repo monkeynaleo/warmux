@@ -55,8 +55,8 @@ class NetworkTeamsSelectionBox : public HBox
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
 
-  void AddTeamCallback(std::string team_id);
-  void UpdateTeamCallback(std::string team_id);
-  void DelTeamCallback(std::string team_id);
+  void AddTeamCallback(const std::string& team_id);
+  void UpdateTeamCallback(const std::string& team_id);
+  void DelTeamCallback(const std::string& team_id);
 };
 #endif

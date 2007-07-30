@@ -294,7 +294,7 @@ void ResultsMenu::ComputeTeamsOrder()
 }
 
 void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_position, 
-				   const Point2i& relative_position)
+				   const Point2i& relative_position) const
 {
   Point2i flag_pos(team.GetFlag().GetWidth()/2, team.GetFlag().GetHeight());
   Point2i position = podium_position + relative_position - flag_pos;
@@ -305,7 +305,7 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_posit
   AppWormux::GetInstance()->video->window.Blit(team_character, position);
 }
 
-void ResultsMenu::DrawPodium(const Point2i& position)
+void ResultsMenu::DrawPodium(const Point2i& position) const
 {
   AppWormux::GetInstance()->video->window.Blit(podium_img, position);
 

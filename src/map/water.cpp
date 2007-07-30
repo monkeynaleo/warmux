@@ -215,7 +215,7 @@ void Water::Draw(){
     }
 }
 
-int Water::GetHeight(int x)
+int Water::GetHeight(int x) const
 {
   if (IsActive())
     return height[x % pattern_width]

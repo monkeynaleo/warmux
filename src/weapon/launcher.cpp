@@ -317,7 +317,7 @@ void WeaponProjectile::SignalTimeout()
 }
 
 //Public function which let know if changing timeout is allowed.
-bool WeaponProjectile::change_timeout_allowed()
+bool WeaponProjectile::change_timeout_allowed() const
 {
   return cfg.allow_change_timeout;
 }
@@ -544,7 +544,7 @@ void WeaponLauncher::HandleKeyReleased_More()
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::NetworkSetTimeoutProjectile()
+void WeaponLauncher::NetworkSetTimeoutProjectile() const
 {
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_SET_TIMEOUT, 
 						     projectile->m_timeout_modifier));

@@ -81,7 +81,7 @@ public:
   virtual void Reset();
 
   // Refresh keys
-  void Refresh();
+  void Refresh() const;
 
   // Get the key associated to an action.
   int GetKeyAssociatedToAction(Key_t at) const;

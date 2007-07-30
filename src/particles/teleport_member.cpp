@@ -26,7 +26,7 @@
 #include "graphic/sprite.h"
 #include "map/camera.h"
 
-TeleportMemberParticle::TeleportMemberParticle(Sprite* spr, const Point2i& position, const Point2i& dest, int direction) :
+TeleportMemberParticle::TeleportMemberParticle(const Sprite* spr, const Point2i& position, const Point2i& dest, int direction) :
   Particle("teleport_member_particle")
 {
   SetCollisionModel(true, false, false);

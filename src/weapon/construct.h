@@ -35,8 +35,8 @@ private:
   double angle;
   Point2i dst;
 
-  void Up();
-  void Down();
+  void Up() const;
+  void Down() const;
 
 protected:
   bool p_Shoot();

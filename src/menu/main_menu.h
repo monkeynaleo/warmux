@@ -75,7 +75,7 @@ private:
 
   // Main drawing function: refresh parts of screen
    void Draw(const Point2i &/*mousePosition*/) {};
-   void button_click();
+   void button_click() const;
 };
 
 #endif

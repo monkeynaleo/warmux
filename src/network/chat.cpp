@@ -76,7 +76,7 @@ void Chat::ShowInput()
   msg->DrawTopLeft(25,500);
 }
 
-bool Chat::CheckInput(){
+bool Chat::CheckInput() const {
   return check_input;
 }
 

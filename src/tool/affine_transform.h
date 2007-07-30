@@ -35,7 +35,7 @@ class AffineTransform2D {
  public:
   AffineTransform2D();
   void Init();
-  void Set(AffineTransform2D &mat);
+  void Set(const AffineTransform2D &mat);
   void SetRotation(double rad_angle);
   void SetTranslation(double trans_x, double trans_y);
   void SetTranslation(const Point2i & position);
@@ -51,8 +51,8 @@ class AffineTransform2D {
                          double shear_x_end = 0.0, double shear_y_end = 0.0);
   /* Matrix multiplication */
   AffineTransform2D operator*(const AffineTransform2D &mat) const;
-  Point2i operator*(Point2i p) const;
-  Point2d operator*(Point2d p) const;
+  Point2i operator*(const Point2i& p) const;
+  Point2d operator*(const Point2d& p) const;
   void DisplayMatrix();
   // Creation of instance
   static AffineTransform2D Rotate(double rad_angle);
