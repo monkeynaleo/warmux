@@ -55,8 +55,8 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
 	      obj_name.c_str(),
 	      GameMode::GetInstance()->GetName().c_str());
 
-    const XmlReader& ddoc = GameMode::GetInstance()->GetXmlObjects();
-    elem = XmlReader::GetMarker(ddoc.GetRoot(), obj_name);
+    const XmlReader* ddoc = GameMode::GetInstance()->GetXmlObjects();
+    elem = XmlReader::GetMarker(ddoc->GetRoot(), obj_name);
 
   } else {
 

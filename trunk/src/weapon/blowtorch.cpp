@@ -34,6 +34,7 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
+#include "tool/xml_document.h"
 
 static const uint pause_time = 200;	// milliseconds
 

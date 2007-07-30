@@ -30,6 +30,7 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
+#include "tool/xml_document.h"
 
 BazookaRocket::BazookaRocket(ExplosiveWeaponConfig& cfg,
                                  WeaponLauncher * p_launcher) :

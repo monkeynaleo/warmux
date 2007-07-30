@@ -22,9 +22,12 @@
 #define CLOTHE_H
 #include <map>
 #include "member.h"
-#include "tool/xml_document.h"
 
 class Member;
+namespace xmlpp
+{
+  class Element;
+}
 
 class Clothe
 {

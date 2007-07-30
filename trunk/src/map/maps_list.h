@@ -21,14 +21,17 @@
 
 #ifndef LST_TERRAINS_H
 #define LST_TERRAINS_H
-#include <string>
-#include <map>
+
+#include <vector>
 #include "include/base.h"
-#include "tool/xml_document.h"
 #include "graphic/surface.h"
 
 // Forward declarations
 class Profile;
+namespace xmlpp
+{
+  class Element;
+}
 
 class InfoMap{
  public:

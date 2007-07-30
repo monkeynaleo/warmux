@@ -41,6 +41,7 @@
 #include "tool/i18n.h"
 #include "network/randomsync.h"
 #include "tool/resource_manager.h"
+#include "tool/xml_document.h"
 
 // XXX Not used
 //const double DEPART_FONCTIONNEMENT = 5;

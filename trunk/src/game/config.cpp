@@ -44,6 +44,7 @@
 #include "tool/file_tools.h"
 #include "tool/string_tools.h"
 #include "tool/i18n.h"
+#include "tool/xml_document.h"
 #ifdef USE_AUTOPACKAGE
 #  include "include/binreloc.h"
 #endif

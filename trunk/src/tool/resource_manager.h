@@ -30,7 +30,6 @@
 
 #include <string>
 #include "graphic/surface.h"
-#include "tool/xml_document.h"
 #include "map/maps_list.h"
 #ifdef WIN32
    // Protects against macro definition of LoadImage when this header is included last.
@@ -38,6 +37,11 @@
 #endif
 
 class Sprite;
+namespace xmlpp
+{
+  class Element;
+}
+class XmlReader;
 
 class Profile
 {

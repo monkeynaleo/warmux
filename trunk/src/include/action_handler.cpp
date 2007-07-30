@@ -48,6 +48,7 @@
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/vector2.h"
+#include "tool/xml_document.h"
 #include "weapon/construct.h"
 #include "weapon/launcher.h"
 #include "weapon/grapple.h"

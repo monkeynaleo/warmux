@@ -23,7 +23,6 @@
 #include <map>
 #include <vector>
 #include "tool/point.h"
-#include "tool/xml_document.h"
 
 typedef std::vector<Point2f> v_attached;
 
@@ -32,6 +31,10 @@ class Sprite;
 class c_junction; //defined in body.h
 class member_mvt; //defined in movement.h
 class Profile;
+namespace xmlpp
+{
+  class Element;
+}
 
 class Member
 {

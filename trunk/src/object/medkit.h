@@ -24,7 +24,6 @@
 //-----------------------------------------------------------------------------
 #include "include/base.h"
 #include "objbox.h"
-//#include "object/physical_obj.h"
 
 class Team;
 class Character;

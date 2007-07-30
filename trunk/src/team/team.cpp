@@ -23,25 +23,26 @@
 #include "teams_list.h"
 #include "character/character.h"
 #include "character/body_list.h"
+#include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
+#include "graphic/sprite.h"
 #include "interface/cursor.h"
+#include "include/base.h"
 #include "include/constant.h"
-#include "game/config.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "weapon/weapons_list.h"
+#include "network/network.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/file_tools.h"
+#include "tool/point.h"
 #include "tool/resource_manager.h"
-#include "graphic/sprite.h"
-#include "network/network.h"
+#include "tool/xml_document.h"
+#include "weapon/weapons_list.h"
 #include <sstream>
 #include <iostream>
-#include "include/base.h"
-#include "tool/point.h"
 
 
 Team::Team (const std::string& teams_dir, const std::string& id)

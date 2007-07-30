@@ -28,6 +28,7 @@
 #include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
+#include "tool/xml_document.h"
 #include <sstream>
 #ifdef _MSC_VER
 #  include <time.h>

@@ -26,6 +26,7 @@
 #include "tool/debug.h"
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
+#include "tool/xml_document.h"
 #include <iostream>
 #ifdef _MSC_VER
 #  include <algorithm>
