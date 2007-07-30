@@ -38,7 +38,6 @@ class Video{
   void SetWindowIcon(const std::string& icon) const;
   void InitSDL(void);
   void GameFullRefreshDrawing() const;
-  void AddConfigIfAbsent(int w, int h);
 
 public:
   Surface window;
@@ -46,6 +45,7 @@ public:
   void SetMaxFps(uint max_fps);
   uint GetMaxFps() const;
   uint GetSleepMaxFps() const;
+  void AddConfigIfAbsent(int w, int h);
 
 public:
   Video();

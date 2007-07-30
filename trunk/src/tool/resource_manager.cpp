@@ -59,6 +59,28 @@ void ResourceManager::AddDataPath(const std::string& base_path)
   this->base_path = base_path;
 }
 
+int ResourceManager::LoadInt(const Profile *profile, const std::string& resource_name) const
+{
+  int tmp = 0;
+  xmlpp::Element *elem = GetElement(profile, "int", resource_name);
+  if (elem == NULL)
+    Error("ResourceManager: can't find int resource \""+resource_name+"\" in profile "+profile->filename);
+  if (!profile->doc->ReadIntAttr(elem, "value", tmp))
+    Error("ResourceManager: int resource \""+resource_name+"\" has no value field in profile "+profile->filename);
+  return tmp;
+}
+
+double ResourceManager::LoadDouble(const Profile *profile, const std::string& resource_name) const
+{
+  double tmp = 0.0;
+  xmlpp::Element *elem = GetElement(profile, "double", resource_name);
+  if (elem == NULL)
+    Error("ResourceManager: can't find double resource \""+resource_name+"\" in profile "+profile->filename);
+  if (!profile->doc->ReadDoubleAttr(elem, "value", tmp))
+    Error("ResourceManager: double resource \""+resource_name+"\" has no value field in profile "+profile->filename);
+  return tmp;
+}
+
 Color ResourceManager::LoadColor(const Profile *profile, const std::string& resource_name) const
 {
   xmlpp::Element *elem = GetElement(profile, "color", resource_name);
