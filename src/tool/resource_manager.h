@@ -72,6 +72,8 @@ class ResourceManager
    void UnLoadXMLProfile(Profile *profile) const;
 
    Color LoadColor(const Profile *profile, const std::string& resource_name) const;
+   int LoadInt(const Profile *profile, const std::string& resource_name) const;
+   double LoadDouble(const Profile *profile, const std::string& resource_name) const;
    Point2i LoadPoint2i(const Profile *profile, const std::string& resource_name) const;
    Point2d LoadPoint2d(const Profile *profile, const std::string& resource_name) const;
    Surface LoadImage(const Profile *profile, const std::string& resource_name) const;

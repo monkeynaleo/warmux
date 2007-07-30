@@ -34,6 +34,7 @@
 #include <string>
 #include <map>
 #include "include/base.h"
+#include "tool/point.h"
 
 // Forward declarations
 class ObjectConfig;
@@ -88,6 +89,7 @@ public:
   uint GetVideoHeight() const;
   void SetVideoHeight(const uint height);
 
+  std::list<Point2i> & GetResolutionAvailable() { return resolution_available; };
   inline uint GetMaxFps() const { return max_fps; };
 
   bool IsBlingBlingInterface() const;
@@ -138,18 +140,24 @@ protected:
 
   std::list<class ConfigTeam> teams;
   std::string map_name;
+
+  std::string m_default_config;
+
   // Game settings
   bool display_energy_character;
   bool display_name_character;
   bool display_wind_particles;
   bool default_mouse_cursor;
   bool scroll_on_border;
+
   // Video settings
   uint video_width;
   uint video_height;
   bool video_fullscreen;
   uint max_fps;
   bool bling_bling_interface;
+  std::list<Point2i> resolution_available;
+
   // Sound settings
   bool sound_music;
   bool sound_effects;
@@ -165,6 +173,7 @@ private:
   Config();
   static Config * singleton;
   bool DoLoading(void);
+  void LoadDefaultValue();
   void LoadXml(const xmlpp::Element *xml);
 
   /* this is mutable in order to be able to load config on fly when calling

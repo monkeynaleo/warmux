@@ -34,6 +34,7 @@
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
+#include "interface/man_machine_interface.h"
 #include "network/network.h"
 #include "object/object_cfg.h"
 #include "sound/jukebox.h"
@@ -120,6 +121,7 @@ Config::Config():
 #endif
   InitI18N(locale_dir.c_str());
 
+  LoadDefaultValue();
   DoLoading();
   std::string dir = TranslateDirectory(locale_dir);
   I18N_SetDir (dir + PATH_SEPARATOR);
@@ -184,6 +186,32 @@ bool Config::DoLoading(void)
     return false;
   }
   return true;
+}
+
+void Config::LoadDefaultValue()
+{
+  try { // Load default XML conf
+    m_default_config = GetDataDir() + PATH_SEPARATOR + "wormux_default_config.xml";
+    Profile *res = resource_manager.LoadXMLProfile(m_default_config, false);
+
+    std::cout << "o " << _("Reading default config file") << std::endl;
+    std::ostringstream section;
+    Point2i tmp;
+
+    //=== Default video value ===
+    int number_of_resolution_available = resource_manager.LoadInt(res, "default_video_mode/number_of_resolution_available");
+    for(int i = 1; i <= number_of_resolution_available; i++) {
+      tmp = Point2i(0, 0);
+      std::ostringstream section; section << "default_video_mode/" << i;
+      tmp = resource_manager.LoadPoint2i(res, section.str());
+      if(tmp.GetX() > 0 && tmp.GetY() > 0)
+        resolution_available.push_back(tmp);
+    }
+  } catch (const xmlpp::exception &e) {
+    std::cout << "o "
+        << _("Error while loading default configuration file: %s") << std::endl
+        << e.what() << std::endl;
+  }
 }
 
 // Read personal config file
