@@ -25,6 +25,7 @@
 #endif
 
 #include "character/character.h"
+#include "character/damage_stats.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "gui/button.h"
@@ -359,42 +360,42 @@ void ResultsMenu::SetResult(int i)
   //Most violent
   player = res->getMostViolent();
   if (player)
-    most_violent->SetIntResult(player->GetName(), player->GetDamageStats().GetMostDamage(), player->GetTeam().GetFlag());
+    most_violent->SetIntResult(player->GetName(), player->GetDamageStats()->GetMostDamage(), player->GetTeam().GetFlag());
   else
     most_violent->SetNoResult();
 
   //Most useful
   player = res->getMostUseful();
   if (player)
-    most_useful->SetIntResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().GetFlag());
+    most_useful->SetIntResult(player->GetName(), player->GetDamageStats()->GetOthersDamage(), player->GetTeam().GetFlag());
   else
     most_useful->SetNoResult();
 
   //Most useless
   player = res->getMostUseless();
   if (player)
-    most_useless->SetIntResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().GetFlag());
+    most_useless->SetIntResult(player->GetName(), player->GetDamageStats()->GetOthersDamage(), player->GetTeam().GetFlag());
   else
     most_useless->SetNoResult();
 
   // Biggest sold-out
   player = res->getBiggestTraitor();
   if (player)
-    biggest_traitor->SetIntResult(player->GetName(), player->GetDamageStats().GetFriendlyFireDamage(), player->GetTeam().GetFlag());
+    biggest_traitor->SetIntResult(player->GetName(), player->GetDamageStats()->GetFriendlyFireDamage(), player->GetTeam().GetFlag());
   else
     biggest_traitor->SetNoResult();
 
   // Most clumsy
   player = res->getMostClumsy();
   if (player)
-    most_clumsy->SetIntResult(player->GetName(), player->GetDamageStats().GetItselfDamage(), player->GetTeam().GetFlag());
+    most_clumsy->SetIntResult(player->GetName(), player->GetDamageStats()->GetItselfDamage(), player->GetTeam().GetFlag());
   else
     most_clumsy->SetNoResult();
 
   // Most accurate
   player = res->getMostAccurate();
   if (player)
-    most_accurate->SetDoubleResult(player->GetName(), player->GetDamageStats().GetAccuracy(), player->GetTeam(). GetFlag());
+    most_accurate->SetDoubleResult(player->GetName(), player->GetDamageStats()->GetAccuracy(), player->GetTeam(). GetFlag());
   else
     most_accurate->SetNoResult();
 

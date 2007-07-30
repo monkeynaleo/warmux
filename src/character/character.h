@@ -27,11 +27,11 @@
 #include "include/base.h"
 #include "object/physical_obj.h"
 #include "body.h"
-#include "damage_stats.h"
 
 class Text;
 class Team;
 class ParticleEngine;
+class DamageStatistics;
 
 class Character : public PhysicalObj
 {
@@ -50,7 +50,7 @@ private:
 
   uint disease_damage_per_turn;
   uint disease_duration;
-  DamageStatistics damage_stats;
+  DamageStatistics *damage_stats;
   EnergyBar energy_bar;
 
   // survived games
@@ -168,7 +168,7 @@ public:
   const Point2i & GetHandPosition() const;
 
   // Damage report
-  const DamageStatistics& GetDamageStats() const;
+  const DamageStatistics* GetDamageStats() const;
   void ResetDamageStats();
 
   // Body handling
