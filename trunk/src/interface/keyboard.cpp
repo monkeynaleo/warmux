@@ -21,6 +21,7 @@
 
 #include "keyboard.h"
 #include "game/game_loop.h"
+#include <SDL_events.h>
 
 Keyboard * Keyboard::singleton = NULL;
 
