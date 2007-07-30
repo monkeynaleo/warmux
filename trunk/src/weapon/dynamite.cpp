@@ -33,10 +33,6 @@
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
 
-#ifdef __MINGW32__
-#undef LoadImage
-#endif
-
 DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
                              WeaponLauncher * p_launcher) :
   WeaponProjectile("dynamite_bullet", cfg, p_launcher)

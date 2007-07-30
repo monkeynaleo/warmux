@@ -42,10 +42,6 @@
 #include "network/randomsync.h"
 #include "tool/resource_manager.h"
 
-#ifdef __MINGW32__
-#undef LoadImage
-#endif
-
 // XXX Not used
 //const double DEPART_FONCTIONNEMENT = 5;
 

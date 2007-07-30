@@ -37,9 +37,6 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "object/objects_list.h"
-#ifdef __MINGW32__
-#undef LoadImage
-#endif
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
   public:
