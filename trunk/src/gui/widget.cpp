@@ -45,10 +45,6 @@ Widget::~Widget()
 {
 }
 
-void Widget::SendKey(SDL_keysym /*key*/)
-{
-}
-
 Widget* Widget::ClickUp(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   need_redrawing = true;

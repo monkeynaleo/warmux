@@ -19,6 +19,7 @@
  * Widget list : store all widgets displayed on one screen
  * It is a fake widget.
  *****************************************************************************/
+#include <SDL_keyboard.h>
 #include "widget_list.h"
 #include "widget.h"
 #include <iostream>
