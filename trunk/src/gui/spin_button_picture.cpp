@@ -51,7 +51,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", black_color, Font::FONT_LARGE, Font::FONT_BOLD, false);
+  txt_value = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   SetValue(value);
 
   m_step = step;
@@ -107,19 +107,20 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   uint tmp_fore_y = GetPositionY() + (GetSizeY() - m_annulus_foreground.GetHeight() - txt_label->GetHeight() - 5) /2;
   video_window.Blit(m_annulus_foreground, Point2i(tmp_fore_x, tmp_fore_y));
 
-  // 4. finally let's put the image
-  uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/4 ;
-  uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
+  // 4. then draw the image
+  uint tmp_x = center_x - m_image.GetWidth() / 2;
+  uint tmp_y = center_y - m_image.GetHeight() / 2;
 
   video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
 
-  tmp_x = GetPositionX() + (3*GetSizeX()/4);
-  tmp_y = GetPositionY() + (GetSizeY()/2) - txt_label->GetHeight()/2;
-
-  uint value_h = Font::GetInstance(Font::FONT_HUGE)->GetHeight();
+  // 5. add in the value image
+  tmp_x = center_x;
+  tmp_y = center_y + small_r - 3;
+  uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
 
   txt_value->DrawCenterTop(tmp_x, tmp_y - value_h/2);
 
+  // 6. and finally the label image
   txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2, 
 			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 }
