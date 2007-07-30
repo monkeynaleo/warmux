@@ -23,13 +23,13 @@
 #define GAME_LOOP_H
 
 #include "include/base.h"
-#include "graphic/fps.h"
 
 // Forward declarations
 class Character;
 class ObjBox;
 class PhysicalObj;
 class Chat;
+class FramePerSecond;
 
 class GameLoop
 {
@@ -52,7 +52,7 @@ private:
   ObjBox * current_ObjBox;
   bool give_objbox;
 
-  FramePerSecond fps;
+  FramePerSecond *fps;
 
   static GameLoop * singleton;
   GameLoop();

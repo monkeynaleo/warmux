@@ -27,6 +27,7 @@
 #include "time.h"
 #include "ai/ai_engine.h"
 #include "character/character.h"
+#include "graphic/fps.h"
 #include "graphic/video.h"
 #include "include/action_handler.h"
 #include "include/app.h"
@@ -73,7 +74,7 @@ GameLoop::GameLoop():
   duration(0),
   current_ObjBox(NULL),
   give_objbox(true),
-  fps(),
+  fps(new FramePerSecond()),
   delay(0),
   time_of_next_frame(0),
   time_of_next_phy_frame(0),
@@ -85,12 +86,14 @@ GameLoop::~GameLoop()
 {
   if(chatsession)
     delete chatsession;
+  if(fps)
+    delete fps;
   chatsession = NULL;
 }
 
 void GameLoop::Init()
 {
-  fps.Reset();
+  fps->Reset();
   IgnorePendingInputEvents();
   camera.Reset();
 
@@ -236,7 +239,7 @@ void GameLoop::Draw ()
   // Draw optionals
   StatStart("GameDraw:fps_and_map_author_name");
   world.DrawAuthorName();
-  fps.Draw();
+  fps->Draw();
   StatStop("GameDraw:fps_and_map_author_name");
 
   StatStop("GameDraw:other");
@@ -254,7 +257,7 @@ void GameLoop::Draw ()
   }
 
   // Add one frame to the fps counter ;-)
-  fps.AddOneFrame();
+  fps->AddOneFrame();
 
   // Draw the mouse pointer
   StatStart("GameDraw:mouse_pointer");
@@ -341,7 +344,7 @@ void GameLoop::MainLoop()
       StatStart("GameLoop:Draw()");
       CallDraw();
       // How many frame by seconds ?
-      fps.Refresh();
+      fps->Refresh();
       StatStop("GameLoop:Draw()");
       time_of_next_frame += AppWormux::GetInstance()->video->GetSleepMaxFps();
 #ifndef USE_VALGRIND
