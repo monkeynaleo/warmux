@@ -24,12 +24,14 @@
 #define CHAT_H
 
 #include <string>
-#include <SDL_events.h>
 #include "include/base.h"
 
 // Forward declarations
 class Text;
 class TextList;
+#ifndef _SDL_events_h
+union SDL_Event;
+#endif
 
 class Chat
 {
