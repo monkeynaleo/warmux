@@ -24,12 +24,12 @@
 
 #include "include/base.h"
 #include "graphic/fps.h"
-#include "network/chat.h"
 
 // Forward declarations
 class Character;
 class ObjBox;
 class PhysicalObj;
+class Chat;
 
 class GameLoop
 {
@@ -56,7 +56,7 @@ private:
 
   static GameLoop * singleton;
   GameLoop();
-
+  ~GameLoop();
 
   // Time to wait between 2 loops
   int delay;
@@ -69,7 +69,7 @@ public:
   static GameLoop * GetInstance();
 
   bool character_already_chosen;
-  Chat chatsession;
+  Chat *chatsession;
 
   void Init();
 

@@ -33,6 +33,7 @@
 #include "include/action_handler.h"
 #include "map/camera.h"
 #include "menu/options_menu.h"
+#include "network/chat.h"
 #include "network/network.h"
 #include "object/objbox.h"
 #include "team/teams_list.h"
@@ -236,7 +237,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       return;
     case KEY_CHAT:
       if(Network::IsConnected())
-	GameLoop::GetInstance()->chatsession.ShowInput();
+	GameLoop::GetInstance()->chatsession->ShowInput();
       return;
     case KEY_CENTER:
       CharacterCursor::GetInstance()->FollowActiveCharacter();

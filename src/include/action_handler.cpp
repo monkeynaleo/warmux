@@ -32,6 +32,7 @@
 #include "game/time.h"
 #include "include/constant.h"
 #include "interface/game_msg.h"
+#include "network/chat.h"
 #include "network/network.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -259,8 +260,8 @@ void Action_ChatMessage (Action *a)
   {
     if(Game::GetInstance()->IsGameLaunched())
       //Add message to chat session in Game
-      //    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
-      GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
+      //    GameLoop::GetInstance()->chatsession->chat->AddText(a->PopString());
+      GameLoop::GetInstance()->chatsession->NewMessage(a->PopString());
     else if (Network::GetInstance()->network_menu != NULL) {
       //Network Menu
       Network::GetInstance()->network_menu->ReceiveMsgCallback(a->PopString());
