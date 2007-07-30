@@ -39,6 +39,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/wind.h"
+#include "network/chat.h"
 #include "network/network.h"
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
@@ -77,9 +78,15 @@ GameLoop::GameLoop():
   time_of_next_frame(0),
   time_of_next_phy_frame(0),
   character_already_chosen(false),
-  chatsession()
+  chatsession(new Chat())
 { }
 
+GameLoop::~GameLoop()
+{
+  if(chatsession)
+    delete chatsession;
+  chatsession = NULL;
+}
 
 void GameLoop::Init()
 {
@@ -242,7 +249,7 @@ void GameLoop::Draw ()
   // Draw MsgBox for chat network
   if(Network::GetInstance()->IsConnected()){
     StatStart("GameDraw:chatsession");
-    chatsession.Show();
+    chatsession->Show();
     StatStop("GameDraw:chatsession");
   }
 
