@@ -478,30 +478,30 @@ void ManMachineInterface::Refresh() const
 
       case KEY_MOVE_RIGHT:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight();
-	return;
+	break;
       case KEY_MOVE_LEFT:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft();
-	return;
+	break;
       case KEY_UP:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up();
-	return;
+	break;
       case KEY_DOWN:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_Down();
-	return;
+	break;
       case KEY_JUMP:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_Jump();
-	return;
+	break;
       case KEY_HIGH_JUMP:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_HighJump();
-	return;
+	break;
       case KEY_BACK_JUMP:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_BackJump();
-	return;
+	break;
       case KEY_SHOOT:
 	if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
 	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_Shoot();
 	}
-	return;
+	break;
       default:
 	break;
       }
