@@ -19,6 +19,7 @@
  * Virtual class to handle man/machine interaction
  *****************************************************************************/
 
+#include <SDL_events.h>
 #include "man_machine_interface.h"
 #include "cursor.h"
 #include "interface.h"

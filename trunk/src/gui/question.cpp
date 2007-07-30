@@ -19,6 +19,7 @@
  * Display a text during the game, waiting for input by the user
  *****************************************************************************/
 
+#include <SDL_events.h>
 #include "question.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"

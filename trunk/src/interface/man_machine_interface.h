@@ -24,9 +24,13 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
-#include <SDL_events.h>
 #include "include/base.h"
 //-----------------------------------------------------------------------------
+
+// Forward declarations
+#ifndef _SDL_events_h
+union SDL_Event;
+#endif
 
 class ManMachineInterface
 {

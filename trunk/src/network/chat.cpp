@@ -20,6 +20,7 @@
  * nefertum - Jon de Andres
  *****************************************************************************/
 
+#include <SDL_events.h>
 #include "chat.h"
 #include "graphic/text_list.h"
 #include "network.h"
