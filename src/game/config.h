@@ -38,15 +38,12 @@
 class ObjectConfig;
 
 //-----------------------------------------------------------------------------
-#if defined(WIN32) || defined(__MINGW32__)
-#define PATH_SEPARATOR "\\"
+#ifdef WIN32
+#  define PATH_SEPARATOR "\\"
 #else
-#define PATH_SEPARATOR "/"
+#  define PATH_SEPARATOR "/"
 #endif
 
-#ifdef __MINGW32__
-#undef LoadImage
-#endif
 //-----------------------------------------------------------------------------
 
 class Config
