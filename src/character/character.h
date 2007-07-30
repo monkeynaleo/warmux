@@ -26,7 +26,6 @@
 #include "gui/energy_bar.h"
 #include "include/base.h"
 #include "object/physical_obj.h"
-#include "particles/particle.h"
 #include "body.h"
 #include "damage_stats.h"
 
@@ -72,7 +71,7 @@ private:
   int channel_step;
 
   // Generates green bubbles when the character is ill
-  ParticleEngine bubble_engine;
+  ParticleEngine *bubble_engine;
 public:
 
   // Previous strength
