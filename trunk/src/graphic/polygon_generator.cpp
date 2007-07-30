@@ -144,3 +144,40 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const doub
                       x_rand_offset, y_rand_offset, number_of_side_point, false, false);
   return tmp;
 }
+
+Polygon * PolygonGenerator::GeneratePie(double diameter, int nb_point, double angle, double angle_offset)
+{
+  Polygon * tmp = new Polygon();
+  AffineTransform2D trans = AffineTransform2D();
+  Point2d top;
+  for(int i = 0; i < nb_point; i++) {
+    top = Point2d(0.0, diameter / 2.0);
+    trans.SetRotation(angle_offset + ((i * angle) / nb_point));
+    tmp->AddPoint(trans * top);
+  }
+  if(angle < 2 * M_PI)
+    tmp->AddPoint(Point2d(0.0, 0.0));
+  return tmp;
+}
+
+Polygon * PolygonGenerator::GeneratePartialTorus(double diameter, double min_diameter, int nb_point, double angle, double angle_offset)
+{
+  if(diameter < min_diameter) {
+    double tmp = diameter;
+    diameter = min_diameter;
+    min_diameter = tmp;
+  }
+  Polygon * tmp = new Polygon();
+  AffineTransform2D trans = AffineTransform2D();
+  Point2d top = Point2d(0.0, diameter / 2.0);
+  for(int i = 0; i < nb_point; i++) {
+    trans.SetRotation(angle_offset + ((i * angle) / (nb_point - 1)));
+    tmp->AddPoint(trans * top);
+  }
+  top = Point2d(0.0, min_diameter / 2.0);
+  for(int i = nb_point - 1; i >= 0; i--) {
+    trans.SetRotation(angle_offset + ((i * angle) / (nb_point - 1)));
+    tmp->AddPoint(trans * top);
+  }
+  return tmp;
+}

@@ -38,6 +38,9 @@ class PolygonGenerator {
    static Polygon * GenerateRandomTrapeze(const double width, const double height,
                                           const double x_rand_offset, const double y_rand_offset,
                                           const double coef);
+   static Polygon * GeneratePie(double diameter, int nb_point, double angle, double angle_offset = 0.0);
+   static Polygon * GeneratePartialTorus(double diameter, double min_diameter, int nb_point,
+                                         double angle, double angle_offset = 0.0);
 };
 
 #endif /* POLYGON_GENERATOR_H */

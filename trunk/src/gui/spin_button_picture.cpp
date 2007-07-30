@@ -25,6 +25,8 @@
 #include "include/app.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
+#include "graphic/polygon_generator.h"
+#include "tool/affine_transform.h"
 
 SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const std::string &resource_id,
 					      const Rectanglei &rect,
@@ -85,24 +87,15 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   // 2. then draw the progress annulus
   static uint small_r = 25;
   static uint big_r = 35;
-  static double min_angle = -2.65;
-  static double max_angle = 2.6;
-  static double delta_angle = M_PI/100; // magic... ajust if not good
-  double angle = (max_angle - min_angle) * (m_value - m_min_value) / (m_max_value - m_min_value);
+  static double open_angle_value = 0.96; // 55 °
   uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
   uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
-  long num = static_cast<long> (angle / delta_angle) + 1;
-  std::list<Point2i> points;
-
-  for (long ii = 0; ii <= num ; ii++)
-    points.push_back (Point2i (static_cast<int>(center_x + big_r * sin (min_angle + ii * delta_angle)),
-			       static_cast<int>(center_y - big_r * cos (min_angle + ii * delta_angle))));
-
-  for (long ii = num; ii >= 0; ii--)
-    points.push_back (Point2i (static_cast<int>(center_x + small_r * sin (min_angle + ii * delta_angle)),
-			       static_cast<int>(center_y - small_r * cos (min_angle + ii * delta_angle))));
-
-  video_window.FilledPolygon (points, m_progress_color);
+  double angle = (2 * M_PI - open_angle_value) * (m_value - m_min_value) / (m_max_value - m_min_value);
+  Polygon *tmp = PolygonGenerator::GeneratePartialTorus(big_r * 2, small_r * 2, 100, angle, open_angle_value / 2.0);
+  tmp->SetPlaneColor(m_progress_color);
+  tmp->ApplyTransformation(AffineTransform2D::Translate(center_x, center_y));
+  tmp->Draw(&video_window);
+  delete(tmp);
 
   // 3. then draw the annulus foreground
   uint tmp_fore_x = GetPositionX() + (GetSizeX() - m_annulus_foreground.GetWidth())/4 ;
