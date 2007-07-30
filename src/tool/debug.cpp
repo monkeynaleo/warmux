@@ -62,9 +62,9 @@ void PrintDebug (const char *filename, const char *function, unsigned long line,
 			int pid = (int)getpid();
 
 			fprintf(stderr, "%i|%s:%s:%ld| %s : ", pid, filename, function, line, level);
-	        va_start(argp, message);
-	        vfprintf(stderr, message, argp);
-	        va_end(argp);
+                        va_start(argp, message);
+                        vfprintf(stderr, message, argp);
+                        va_end(argp);
 			fprintf(stderr, "\n");
 			return;
 		}
