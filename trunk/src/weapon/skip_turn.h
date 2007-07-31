@@ -30,6 +30,7 @@ class SkipTurn : public Weapon
   public:
     SkipTurn();
     DECLARE_GETWEAPONSTRING();
+    bool IsInUse() const;
   protected:
     bool p_Shoot();
     void Refresh();

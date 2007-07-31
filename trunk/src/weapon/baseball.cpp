@@ -22,6 +22,7 @@
 #include "baseball.h"
 #include "character/character.h"
 #include "game/game_loop.h"
+#include "game/time.h"
 #include "graphic/sprite.h"
 #include "map/camera.h"
 #include "sound/jukebox.h"
@@ -86,8 +87,11 @@ bool Baseball::p_Shoot()
 
 void Baseball::Refresh()
 {
-  if (IsInUse())
-    m_is_active = false;
+}
+
+bool Baseball::IsInUse() const
+{
+  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }
 
 BaseballConfig& Baseball::cfg()

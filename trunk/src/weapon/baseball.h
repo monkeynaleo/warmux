@@ -47,6 +47,7 @@ class Baseball : public Weapon
     Baseball();
     BaseballConfig &cfg();
     DECLARE_GETWEAPONSTRING();
+    bool IsInUse() const;
 };
 
 //-----------------------------------------------------------------------------

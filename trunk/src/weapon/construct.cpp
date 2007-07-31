@@ -23,6 +23,7 @@
 #include "explosion.h"
 #include "game/game_loop.h"
 #include "game/game_mode.h"
+#include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
 #include "interface/mouse.h"
@@ -64,7 +65,6 @@ bool Construct::p_Shoot ()
 
 void Construct::Refresh()
 {
-  m_is_active = false;
 }
 
 void Construct::Draw()
@@ -137,3 +137,7 @@ std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count
             items_count), TeamName, items_count);
 }
 
+bool Construct::IsInUse() const
+{
+  return m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+}
