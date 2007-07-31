@@ -23,16 +23,15 @@
 #include <SDL_net.h>
 #include <fstream>
 #include "download.h"
+#include "game/config.h"
+#include "graphic/video.h"
 #include "index_server.h"
 #include "index_svr_msg.h"
 #include "network.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 #include "tool/random.h"
-#include "game/config.h"
-#include "graphic/video.h"
 
 IndexServer index_server;
 

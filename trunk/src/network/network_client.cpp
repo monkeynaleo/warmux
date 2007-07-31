@@ -25,7 +25,6 @@
 #include "include/action_handler.h"
 #include "game/game_mode.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 #include "distant_cpu.h"
 
 #include <sys/types.h>
@@ -141,9 +140,8 @@ void NetworkClient::ReceiveActions()
 }
 
 //-----------------------------------------------------------------------------
-
-const Network::connection_state_t NetworkClient::ClientConnect(const std::string &host, 
-							       const std::string& port)
+const Network::connection_state_t
+NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 {
   Init();
 
