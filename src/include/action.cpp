@@ -166,7 +166,7 @@ void Action::Push(int val)
 void Action::Push(double val)
 {
   uint32_t tmp[2];
-  memcpy(&tmp, &val, 8);
+  memcpy(tmp, &val, 8);
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   var.push_back(tmp[0]);
   var.push_back(tmp[1]);
