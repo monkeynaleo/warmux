@@ -130,8 +130,10 @@ bool Network::ThreadToContinue() const
 
 int Network::ThreadRun(void*/*no_param*/)
 {
+  MSG_DEBUG("network", "Thread created: %u", SDL_ThreadID());
   GetInstance()->ReceiveActions();
-  Disconnect();
+  // Not calling disconnect here seems harmless.
+  // Disconnect();
   std::cout << "Network : end of thread" << std::endl;
   return 1;
 }
@@ -173,11 +175,11 @@ static Uint32 sdl_thread_kill(Uint32 interval, void *param)
   return 0;
 }
 
-static void sdl_thread_wait_for(SDL_Thread* thread, uint timeout)
+static inline void sdl_thread_wait_for(SDL_Thread* thread, uint timeout)
 {
-  SDL_TimerID id = SDL_AddTimer(timeout, sdl_thread_kill, thread);
+  //SDL_TimerID id = SDL_AddTimer(timeout, sdl_thread_kill, thread);
   SDL_WaitThread(thread, NULL);
-  SDL_RemoveTimer(id);
+  //SDL_RemoveTimer(id);
 }
 
 // Protected method for client and server
