@@ -27,7 +27,6 @@
 #include "character/damage_stats.h"
 #include "team.h"
 #include "macro.h"
-#include "tool/i18n.h"
 
 TopCharacters::TopCharacters()
   : Violent(NULL)

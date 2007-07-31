@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include <time.h>
-#include <math.h>
 #include <stdlib.h>
 #include "randomsync.h"
 #include "network.h"

@@ -20,9 +20,7 @@
  *****************************************************************************/
 
 #include <time.h>
-#include <math.h>
 #include <stdlib.h>
-#include <assert.h>
 #include "random.h"
 
 Random randomObj;

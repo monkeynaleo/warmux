@@ -26,7 +26,6 @@
 #include "map.h"
 #include "maps_list.h"
 #include "game/time.h"
-#include "include/app.h"
 #include "interface/interface.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
