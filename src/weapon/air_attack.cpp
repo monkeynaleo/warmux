@@ -23,6 +23,7 @@
 #include <sstream>
 #include "character/character.h"
 #include "game/game_loop.h"
+#include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
 #include "interface/mouse.h"
@@ -183,11 +184,11 @@ AirAttack::AirAttack() :
   mouse_character_selection = false;
   can_be_used_on_closed_map = false;
   target_chosen = false;
+  m_time_between_each_shot = 100;
 }
 
 void AirAttack::Refresh()
 {
-  m_is_active = false;
 }
 
 void AirAttack::ChooseTarget(Point2i mouse_pos)
@@ -205,7 +206,7 @@ bool AirAttack::p_Shoot ()
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
-  Plane* plane = new Plane(cfg());
+  Plane * plane = new Plane(cfg());
   plane->Shoot(cfg().speed, target);
   // The plane instance is in fact added to an objects list,
   // which will delete it for us when needed.
@@ -216,6 +217,11 @@ bool AirAttack::p_Shoot ()
 void AirAttack::p_Select()
 {
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE);
+}
+
+bool AirAttack::IsInUse() const
+{
+  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }
 
 void AirAttack::p_Deselect()
