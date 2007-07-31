@@ -21,7 +21,6 @@
 #include <map>
 #include <iostream>
 #include "movement.h"
-#include "tool/string_tools.h"
 #include "tool/xml_document.h"
 
 Movement::Movement(xmlpp::Element *xml)

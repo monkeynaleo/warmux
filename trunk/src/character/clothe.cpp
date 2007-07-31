@@ -22,7 +22,6 @@
 #include "clothe.h"
 #include <map>
 #include <iostream>
-#include "tool/string_tools.h"
 
 Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst):
   name(),

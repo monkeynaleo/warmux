@@ -29,7 +29,6 @@
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
-#include "include/app.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
@@ -38,8 +37,8 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
-#include "tool/math_tools.h"
 #include "tool/i18n.h"
+#include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
 #ifdef DEBUG

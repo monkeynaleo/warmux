@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "move.h"
-#include <math.h>
+//#include <math.h>
 #include "character.h"
 #include "game/game_loop.h"
 #include "include/action_handler.h"
