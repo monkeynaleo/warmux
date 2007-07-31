@@ -218,30 +218,30 @@ const Network::connection_state_t Network::CheckHost(const std::string &host,
   if( ! hostinfo )
     return Network::CONN_BAD_HOST;
 
-#ifndef WIN32
-  int fd = socket(AF_INET, SOCK_STREAM, 0);
-  if( fd == -1 )
-    return Network::CONN_BAD_SOCKET;
-
-#else
+#ifdef WIN32
   SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
   if( fd == INVALID_SOCKET )
     return Network::CONN_BAD_SOCKET;
-#endif
+
+  // Set the timeout
+  int timeout = 5000; //ms
+  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
+  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeout, sizeof(timeout));
+#else
+  int fd = socket(AF_INET, SOCK_STREAM, 0);
+  if( fd == -1 )
+    return Network::CONN_BAD_SOCKET;
 
   // Set the timeout
   struct timeval timeout;
   memset(&timeout, 0, sizeof(timeout));
   timeout.tv_sec = 5; // 5seconds timeout
-#ifndef WIN32
   setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (void*)&timeout, sizeof(timeout));
   setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (void*)&timeout, sizeof(timeout));
-#else
-  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeout, sizeof(timeout));
 #endif
 
   struct sockaddr_in addr;
+  memset(&addr, 0, sizeof(addr));
   addr.sin_family = AF_INET;
 #ifndef WIN32
   addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
