@@ -53,14 +53,13 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfi
   m_category = TOOL;
 
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
-  m_last_jolt = 0;
+  m_time_between_each_shot = MIN_TIME_BETWEEN_JOLT;
 }
 
 //-----------------------------------------------------------------------------
 
 void Airhammer::p_Deselect()
 {
-  m_is_active = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -122,14 +121,11 @@ bool Airhammer::p_Shoot()
 
 void Airhammer::RepeatShoot()
 {
-  uint time = Time::GetInstance()->Read() - m_last_jolt;
-  uint tmp = Time::GetInstance()->Read();
+  uint time = Time::GetInstance()->Read() - m_last_fire_time;
 
-  if (time >= MIN_TIME_BETWEEN_JOLT)
-    {
-      NewActionWeaponShoot();
-      m_last_jolt = tmp;
-    }
+  if (time >= m_time_between_each_shot) {
+    NewActionWeaponShoot();
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -138,16 +134,9 @@ void Airhammer::Refresh()
 {
 }
 
-void Airhammer::SignalTurnEnd()
-{
-  // It's too late !
-  m_is_active = false;
-}
-
 void Airhammer::ActionStopUse()
 {
   ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
-  m_is_active = false;
   GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
@@ -165,6 +154,12 @@ void Airhammer::HandleKeyRefreshed_Shoot()
     RepeatShoot();
   }
 }
+
+bool Airhammer::IsInUse() const
+{
+  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+}
+
 
 void Airhammer::HandleKeyReleased_Shoot()
 {

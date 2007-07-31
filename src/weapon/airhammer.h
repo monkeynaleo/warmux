@@ -40,7 +40,6 @@ class AirhammerConfig : public WeaponConfig
 class Airhammer : public Weapon
 {
   private:
-    uint m_last_jolt;
     Surface impact;
     void RepeatShoot();
 
@@ -52,8 +51,7 @@ class Airhammer : public Weapon
   public:
     Airhammer();
     AirhammerConfig &cfg();
-    
-    virtual void SignalTurnEnd();
+    bool IsInUse() const;
     virtual void ActionStopUse();
 
     virtual void HandleKeyPressed_Shoot();
