@@ -159,6 +159,7 @@ Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool r
    if(!doc->Load(filename))
    {
      // TODO raise an "can't load file" exception
+     delete doc;
      Error("ResourceManager: can't load profile "+filename);
      return NULL;
    }
