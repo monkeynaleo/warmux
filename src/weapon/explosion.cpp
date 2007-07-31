@@ -154,7 +154,7 @@ void ApplyExplosion_common (const Point2i &pos,
            dmg = cos(M_PI_2 * distance);
 
          dmg *= config.damage;
-         obj->AddDamage (dmg);
+         obj->AddDamage ((int)dmg);
        }
 
        if (distance <= (float)config.blast_range)
