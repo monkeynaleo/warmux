@@ -115,6 +115,9 @@ protected:
   // time of the last fire
   uint m_last_fire_time;
 
+  // time between 2 shot
+  uint m_time_between_each_shot;
+
   // change weapon after ? (for the grapple = true)
   bool m_can_change_weapon;
 

@@ -104,7 +104,6 @@ bool Shotgun::p_Shoot ()
   }
   ShootSound();
   m_last_fire_time = Time::GetInstance()->Read();
-  m_is_active = true;
   return true;
 }
 

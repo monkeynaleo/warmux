@@ -39,7 +39,7 @@
 #include "tool/resource_manager.h"
 
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
-const double  SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
+const uint    SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
 const double  SUBMACHINE_RANDOM_ANGLE       = 0.01;
 
 SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
@@ -71,6 +71,7 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   ignore_ghost_state_signal = true;
   ignore_drowning_signal = true;
   announce_missed_shots = false;
+  m_time_between_each_shot = SUBMACHINE_TIME_BETWEEN_SHOOT;
 
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
@@ -108,28 +109,17 @@ bool SubMachineGun::p_Shoot()
   return true;
 }
 
-void SubMachineGun::p_Deselect()
-{
-  m_is_active = false;
-}
-
 // Overide regular Refresh method
 void SubMachineGun::RepeatShoot()
 {
   uint tmp = Time::GetInstance()->Read();
   uint time = tmp - m_last_fire_time;
 
-  if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
+  if (time >= m_time_between_each_shot)
     {
       NewActionWeaponShoot();
       m_last_fire_time = tmp;
     }
-}
-
-void SubMachineGun::SignalTurnEnd()
-{
-  // It's too late !
-  m_is_active = false;
 }
 
 void SubMachineGun::HandleKeyPressed_Shoot()
@@ -142,11 +132,6 @@ void SubMachineGun::HandleKeyRefreshed_Shoot()
   if (EnoughAmmoUnit()) {
     RepeatShoot();
   }
-}
-
-void SubMachineGun::HandleKeyReleased_Shoot()
-{
-  m_is_active = false;
 }
 
 std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_count ) const

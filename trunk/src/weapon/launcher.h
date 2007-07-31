@@ -140,7 +140,7 @@ class WeaponLauncher : public Weapon
     void DecActiveProjectile();
 
     virtual void IncMissedShots();
-
+    virtual bool IsInUse() const;
     // Handle mouse events
     virtual void HandleMouseWheelUp();
     virtual void HandleMouseWheelDown();
@@ -157,7 +157,7 @@ class WeaponLauncher : public Weapon
     virtual void HandleKeyReleased_Num9();
     virtual void HandleKeyReleased_Less();
     virtual void HandleKeyReleased_More();
-  
+
     WeaponProjectile* GetProjectile() { return projectile; };
     ExplosiveWeaponConfig& cfg();
 };

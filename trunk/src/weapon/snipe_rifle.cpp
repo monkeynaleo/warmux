@@ -80,7 +80,6 @@ bool SnipeRifle::p_Shoot()
   if(IsInUse())
     return false;
 
-  m_is_active = true;
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
@@ -90,7 +89,6 @@ bool SnipeRifle::p_Shoot()
 // When an explosion occurs, we compute a new targeted point
 void SnipeRifle::SignalProjectileGhostState()
 {
-  m_is_active = false;
   ReloadLauncher();
   ComputeCrossPoint(true);
 }

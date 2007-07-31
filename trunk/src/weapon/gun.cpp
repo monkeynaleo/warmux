@@ -68,7 +68,6 @@ bool Gun::p_Shoot()
   if (IsInUse())
     return false;
 
-  m_is_active = true;
   projectile->Shoot (GUN_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
