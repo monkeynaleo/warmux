@@ -36,23 +36,19 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-static const uint pause_time = 200;	// milliseconds
+static const uint MIN_TIME_BETWEEN_DIG = 200;	// milliseconds
 
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
   m_name = _("Blowtorch");
   m_help = _("Howto use it : keep space key pressed\nAngle : Up/Down\nan ammo per turn");
   m_category = TOOL;
-
-  new_timer = 0;
-  old_timer = 0;
-
+  m_time_between_each_shot = MIN_TIME_BETWEEN_DIG;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile, "blowtorch_fire"));
 }
 
 void Blowtorch::Refresh()
 {
-
 }
 
 void Blowtorch::p_Deselect()
@@ -60,12 +56,16 @@ void Blowtorch::p_Deselect()
   ActiveCharacter().body->ResetWalk();
   ActiveCharacter().body->StopWalk();
   ActiveTeam().AccessNbUnits() = 0;
-  m_is_active = false;
 }
 
 void Blowtorch::SignalTurnEnd()
 {
   p_Deselect();
+}
+
+bool Blowtorch::IsInUse() const
+{
+  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }
 
 void Blowtorch::ActionStopUse()
@@ -93,14 +93,11 @@ bool Blowtorch::p_Shoot()
 
 void Blowtorch::RepeatShoot()
 {
-  uint time = Time::GetInstance()->Read() - old_timer;
-  uint tmp = Time::GetInstance()->Read();
+  uint time = Time::GetInstance()->Read() - m_last_fire_time;
 
-  if (time >= pause_time)
-    {
-      NewActionWeaponShoot();
-      old_timer = tmp;
-    }
+  if (time >= m_time_between_each_shot) {
+    NewActionWeaponShoot();
+  }
 }
 
 void Blowtorch::HandleKeyPressed_Shoot()

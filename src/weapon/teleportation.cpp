@@ -42,6 +42,8 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
   m_name = _("Teleportation");
   m_category = MOVE;
   target_chosen = false;
+  // teleportation_anim_duration is declare in particles/teleport_member.h
+  m_time_between_each_shot = teleportation_anim_duration + 100;
 }
 
 bool Teleportation::p_Shoot ()
@@ -63,7 +65,6 @@ bool Teleportation::p_Shoot ()
 
   jukebox.Play("share", "weapon/teleport_start");
 
-  time = Time::GetInstance()->Read();
   ActiveCharacter().Hide();
   ActiveCharacter().body->MakeTeleportParticles(ActiveCharacter().GetPosition(), dst);
 
@@ -73,19 +74,12 @@ bool Teleportation::p_Shoot ()
 
 void Teleportation::Refresh()
 {
-  if (!IsInUse()) return;
-
-  double dt = Time::GetInstance()->Read() - time;
-
-  if(dt > teleportation_anim_duration)
-  {
+  if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
     camera.SetXYabs(dst - camera.GetSize()/2);
     ActiveCharacter().SetXY(dst);
-    m_is_active = false;
     ActiveCharacter().SetSpeed(0.0,0.0);
     ActiveCharacter().Show();
     jukebox.Play("share","weapon/teleport_end");
-    //    GameLoop::GetInstance()->interaction_enabled = true;
     return;
   }
 }
@@ -126,5 +120,11 @@ std::string Teleportation::GetWeaponWinString(const char *TeamName, uint items_c
 }
 
 WeaponConfig& Teleportation::cfg()
-{ return static_cast<WeaponConfig&>(*extra_params); }
+{
+  return static_cast<WeaponConfig&>(*extra_params);
+}
 
+bool Teleportation::IsInUse() const
+{
+  return m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+}

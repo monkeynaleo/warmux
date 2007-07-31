@@ -361,7 +361,7 @@ bool WeaponLauncher::p_Shoot ()
 
 bool WeaponLauncher::IsInUse() const
 {
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  return m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }
 
 bool WeaponLauncher::ReloadLauncher()

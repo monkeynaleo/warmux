@@ -29,7 +29,7 @@ class Teleportation : public Weapon
 {
   private:
     bool target_chosen;
-    uint time;
+    uint animation_duration;
     Point2i src, dst;
   protected:
     bool p_Shoot();
@@ -40,6 +40,7 @@ class Teleportation : public Weapon
     Teleportation();
     void Draw();
     void ChooseTarget(Point2i mouse_pos);
+    bool IsInUse() const;
     WeaponConfig& cfg();
     DECLARE_GETWEAPONSTRING();
 };

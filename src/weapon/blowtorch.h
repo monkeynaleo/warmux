@@ -35,8 +35,6 @@ class BlowtorchConfig : public WeaponConfig
 
 class Blowtorch : public Weapon
 {
-  private:
-    uint new_timer, old_timer;
   protected:
     bool p_Shoot();
     void p_Deselect();
@@ -53,8 +51,8 @@ class Blowtorch : public Weapon
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();
     virtual void HandleKeyReleased_Shoot();
+    bool IsInUse() const;
 
-    //std::string GetWeaponWinString(const char *, uint);
     DECLARE_GETWEAPONSTRING();
 };
 
