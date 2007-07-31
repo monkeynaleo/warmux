@@ -34,7 +34,6 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 //-----------------------------------------------------------------------------
 
 DistantComputer::DistantComputer(TCPsocket new_sock) :
