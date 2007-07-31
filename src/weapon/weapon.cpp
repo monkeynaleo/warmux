@@ -78,6 +78,7 @@ Weapon::Weapon(Weapon_type type,
   m_strength = 0;
   m_first_time_loading = 0;
   m_last_fire_time = 0;
+  m_time_between_each_shot = 400;
   m_fire_remanence_time = 100;
   max_strength = min_angle = max_angle = 0;
   use_flipping = true;

@@ -359,6 +359,11 @@ bool WeaponLauncher::p_Shoot ()
   return true;
 }
 
+bool WeaponLauncher::IsInUse() const
+{
+  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+}
+
 bool WeaponLauncher::ReloadLauncher()
 {
   if (projectile) return false;
@@ -377,7 +382,6 @@ void WeaponLauncher::DirectExplosion()
 void WeaponLauncher::SignalEndOfProjectile()
 {
   DecActiveProjectile();
-  m_is_active = false;
 }
 
 // Signal that a projectile explosion
