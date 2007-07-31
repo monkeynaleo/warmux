@@ -38,6 +38,7 @@
 
 // Forward declarations
 class ObjectConfig;
+class ConfigTeam;
 namespace xmlpp
 {
   class Element;
@@ -104,7 +105,7 @@ public:
   uint GetSoundFrequency() const;
   void SetSoundFrequency(const uint freq);
 
-  std::list<class ConfigTeam> & AccessTeamList();
+  std::list<ConfigTeam> & AccessTeamList();
   const std::string & GetMapName() const;
   inline void SetMapName(const std::string& new_name)
   { map_name = new_name; }
@@ -138,7 +139,7 @@ protected:
 
   std::string data_dir, locale_dir, personal_dir;
 
-  std::list<class ConfigTeam> teams;
+  std::list<ConfigTeam> teams;
   std::string map_name;
 
   std::string m_default_config;

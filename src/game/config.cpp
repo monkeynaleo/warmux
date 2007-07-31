@@ -393,7 +393,7 @@ std::string Config::GetPersonalDir() const
   return personal_dir;
 }
 
-std::list<class ConfigTeam> & Config::AccessTeamList()
+std::list<ConfigTeam> & Config::AccessTeamList()
 {
   return teams;
 }
