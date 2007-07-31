@@ -22,7 +22,6 @@
 #include "bazooka.h"
 #include "explosion.h"
 #include "game/config.h"
-#include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
@@ -30,7 +29,6 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
-#include "tool/xml_document.h"
 
 BazookaRocket::BazookaRocket(ExplosiveWeaponConfig& cfg,
                                  WeaponLauncher * p_launcher) :

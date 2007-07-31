@@ -35,10 +35,8 @@
 #include "include/app.h"
 #include "sound/jukebox.h"
 #include "team/results.h"
-#include "team/macro.h"
 #include "team/team.h"
 #include "tool/i18n.h"
-#include "tool/string_tools.h"
 #include "tool/resource_manager.h"
 
 #define DEF_MARGIN    16

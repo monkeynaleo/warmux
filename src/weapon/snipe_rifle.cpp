@@ -24,7 +24,6 @@
 #include "explosion.h"
 #include "character/character.h"
 #include "game/game_loop.h"
-#include "game/time.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "include/app.h"

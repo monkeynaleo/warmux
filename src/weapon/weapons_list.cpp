@@ -24,8 +24,6 @@
 #include <algorithm>
 #include "all.h"
 #include "explosion.h"
-#include "game/game_loop.h"
-#include "game/time.h"
 #include "interface/interface.h"
 #include "map/camera.h"
 #include "map/maps_list.h"

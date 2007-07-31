@@ -24,7 +24,6 @@
 #include "explosion.h"
 #include <sstream>
 #include "map/map.h"
-#include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "object/objects_list.h"

@@ -34,7 +34,6 @@
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include "interface/man_machine_interface.h"
 #include "network/network.h"
 #include "object/object_cfg.h"
 #include "sound/jukebox.h"

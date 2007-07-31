@@ -24,7 +24,6 @@
 #include <map>
 #include "game/time.h"
 #include "graphic/sprite.h"
-#include "include/app.h"
 #include "object/objects_list.h"
 #include "tool/resource_manager.h"
 #include "tool/random.h"

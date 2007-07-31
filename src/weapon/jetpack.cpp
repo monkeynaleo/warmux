@@ -26,6 +26,7 @@
 #include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
+#include "include/action_handler.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/network.h"
@@ -34,8 +35,6 @@
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/i18n.h"
-#include "character/move.h"
-#include "include/action_handler.h"
 
 const double JETPACK_FORCE = 2500.0;
 
