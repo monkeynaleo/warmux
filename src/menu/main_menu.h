@@ -67,7 +67,7 @@ public:
 protected:
    bool signal_ok();
    bool signal_cancel();
-   void SelectAction(Widget *w);
+   void SelectAction(const Widget *w);
 private:
    virtual void DrawBackground();
    void OnClick(const Point2i &mousePosition, int button);

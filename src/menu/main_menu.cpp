@@ -135,7 +135,7 @@ void MainMenu::button_click() const
   jukebox.Play("share", "menu/clic");
 }
 
-void MainMenu::SelectAction(Widget *w)
+void MainMenu::SelectAction(const Widget *w)
 {
   if (w == play) {
     choice = menuPLAY;
