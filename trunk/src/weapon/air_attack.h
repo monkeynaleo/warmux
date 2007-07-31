@@ -64,7 +64,6 @@ class Plane : public PhysicalObj
     bool OnTopOfTarget() const;
     int GetDirection() const;
     void DropBomb();
-
   public:
     Plane(AirAttackConfig& cfg);
     virtual ~Plane();
@@ -78,7 +77,6 @@ class AirAttack : public Weapon
   private:
     Point2i target;
     bool target_chosen;
-    //Plane plane;
   protected:
     bool p_Shoot();
     void p_Select();
@@ -88,7 +86,7 @@ class AirAttack : public Weapon
     AirAttack();
     virtual void ChooseTarget (Point2i mouse_pos);
     DECLARE_GETWEAPONSTRING();
-
+    bool IsInUse() const;
   private:
     AirAttackConfig& cfg();
 };
