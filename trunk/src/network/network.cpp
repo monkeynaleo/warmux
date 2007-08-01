@@ -168,14 +168,16 @@ void Network::Disconnect()
   }
 }
 
+#if 0
 static Uint32 sdl_thread_kill(Uint32 interval, void *param)
 {
   SDL_KillThread((SDL_Thread*)param);
   fprintf(stderr, "Add to kill thread 0x%p (timeout=%u ms)\n", param, interval);
   return 0;
 }
+#endif
 
-static inline void sdl_thread_wait_for(SDL_Thread* thread, uint timeout)
+static inline void sdl_thread_wait_for(SDL_Thread* thread, uint /*timeout*/)
 {
   //SDL_TimerID id = SDL_AddTimer(timeout, sdl_thread_kill, thread);
   SDL_WaitThread(thread, NULL);
