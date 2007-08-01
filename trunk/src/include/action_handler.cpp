@@ -587,8 +587,9 @@ void Action_Explosion (Action *a)
   std::string son = a->PopString();
   bool fire_particle = a->PopInt();
   ParticleEngine::ESmokeStyle smoke = (ParticleEngine::ESmokeStyle)a->PopInt();
+  std::string unique_id = a->PopString();
 
-  ApplyExplosion_common(pos, config, son, fire_particle, smoke);
+  ApplyExplosion_common(pos, config, son, fire_particle, smoke, unique_id);
 
   MSG_DEBUG("action_handler","<- End");
 }
