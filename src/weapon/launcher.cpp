@@ -26,6 +26,7 @@
 #include "explosion.h"
 #include "character/character.h"
 #include "game/config.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
@@ -90,7 +91,7 @@ void WeaponBullet::Refresh()
 void WeaponBullet::DoExplosion()
 {
   Point2i pos = GetCenter();
-  ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke);
+  ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke, GetUniqueId());
 }
 //-----------------------------------------------------------------------------
 
@@ -118,7 +119,10 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   int dy = image->GetHeight()/2-1;
   SetTestRect (dx, dx, dy, dy);
 
-  ResetTimeOut();
+  ResetTimeOut(); 
+
+  // generate a unique id for the projectile
+  m_unique_id = name + GameLoop::GetUniqueId();
 }
 
 WeaponProjectile::~WeaponProjectile()
@@ -275,7 +279,7 @@ void WeaponProjectile::SignalExplosion()
 void WeaponProjectile::DoExplosion()
 {
   Point2i pos = GetCenter();
-  ApplyExplosion (pos, cfg);
+  ApplyExplosion(pos, cfg, "weapon/explosion", true, ParticleEngine::BigESmoke, GetUniqueId());
 }
 
 void WeaponProjectile::IncrementTimeOut()

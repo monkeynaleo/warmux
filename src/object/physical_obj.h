@@ -63,8 +63,8 @@ protected:
 
   virtual void CheckOverlapping();
 
-protected:
   std::string m_name;
+  std::string m_unique_id;
 
   // Rectangle used for collision tests
   uint m_test_left, m_test_right, m_test_top, m_test_bottom;
@@ -111,6 +111,7 @@ public:
 
   //----------- Access to datas (read only) ----------
   virtual const std::string &GetName() const { return m_name; }
+  const std::string &GetUniqueId() const { return m_unique_id; }
   int GetCenterX() const;
   int GetCenterY() const;
   const Point2i GetCenter() const;

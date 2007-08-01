@@ -57,6 +57,25 @@
 //#define USE_VALGRIND
 #endif
 
+// ####################################################################
+
+uint GameLoop::last_unique_id = 0;
+
+void GameLoop::ResetUniqueIds() 
+{
+  last_unique_id = 0;
+}
+
+std::string GameLoop::GetUniqueId()
+{
+  char buffer[16];
+  snprintf(buffer, 16, "%#x", last_unique_id); 
+  last_unique_id++;
+  return std::string(buffer);
+}
+
+// ####################################################################
+
 
 GameLoop * GameLoop::singleton = NULL;
 
@@ -93,6 +112,8 @@ GameLoop::~GameLoop()
 
 void GameLoop::Init()
 {
+  ResetUniqueIds();
+
   fps->Reset();
   IgnorePendingInputEvents();
   camera.Reset();

@@ -95,7 +95,7 @@ bool RandomSync::GetBool(){
 }
 
 /**
- *  Génère un nombre entier aléatoire compris dans [min;max]
+ *  Get a random number between min and max
  */
 long RandomSync::GetLong(long min, long max){
 	return min + (long)GetDouble(max - min + 1);

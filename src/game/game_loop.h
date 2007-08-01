@@ -65,7 +65,11 @@ private:
   // Time to compute the next physic engine frame
   uint time_of_next_phy_frame;
 
+  static uint last_unique_id;
 public:
+  static std::string GetUniqueId();
+  static void ResetUniqueIds();
+
   static GameLoop * GetInstance();
 
   bool character_already_chosen;

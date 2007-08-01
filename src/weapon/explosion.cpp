@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Utilitaires pour les armes : applique une explosion en un point.
+ * Useful for weapons: explode on one point
  *****************************************************************************/
 
 #include "explosion.h"
@@ -46,7 +46,8 @@ void ApplyExplosion_common (const Point2i &pos,
 			    const ExplosiveWeaponConfig &config,
 			    const std::string& son,
 			    bool fire_particle,
-			    ParticleEngine::ESmokeStyle smoke
+			    ParticleEngine::ESmokeStyle smoke,
+			    std::string network_id
 			    )
 {
   MSG_DEBUG("explosion", "explosion range : %i\n", config.explosion_range);
@@ -139,6 +140,12 @@ void ApplyExplosion_common (const Point2i &pos,
   FOR_EACH_OBJECT(it)
    {
      PhysicalObj *obj = *it;
+
+     if (obj->GetUniqueId() == network_id) {
+       MSG_DEBUG("explosion", "!! skip blast for object %s", network_id.c_str());
+       continue; // hack to fix bug #8529
+     }
+
      if (!obj->GoesThroughWall() && !obj->IsGhost())
      {
        double distance = pos.Distance(obj->GetCenter());
@@ -190,7 +197,8 @@ void ApplyExplosion_master (const Point2i &pos,
 			    const ExplosiveWeaponConfig &config,
 			    const std::string& son,
 			    bool fire_particle,
-			    ParticleEngine::ESmokeStyle smoke
+			    ParticleEngine::ESmokeStyle smoke,
+			    std::string network_id
 			    )
 {
   ActionHandler* action_handler = ActionHandler::GetInstance();
@@ -238,6 +246,8 @@ void ApplyExplosion_master (const Point2i &pos,
   a->Push(son);
   a->Push(fire_particle);
   a->Push(smoke);
+  ASSERT(network_id.size()>0);
+  a->Push(network_id);
 
   action_handler->NewAction(a);
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
@@ -249,11 +259,12 @@ void ApplyExplosion (const Point2i &pos,
 		     const ExplosiveWeaponConfig &config,
 		     const std::string& son,
 		     bool fire_particle,
-		     ParticleEngine::ESmokeStyle smoke
+		     ParticleEngine::ESmokeStyle smoke,
+		     std::string network_id
 		     )
 {
   if (Network::GetInstance()->IsLocal())
-    ApplyExplosion_common(pos, config, son, fire_particle, smoke);
+    ApplyExplosion_common(pos, config, son, fire_particle, smoke, network_id);
   else if (Network::GetInstance()->IsTurnMaster())
-    ApplyExplosion_master(pos, config, son, fire_particle, smoke);
+    ApplyExplosion_master(pos, config, son, fire_particle, smoke, network_id);
 }
