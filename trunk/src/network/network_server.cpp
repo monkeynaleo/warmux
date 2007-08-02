@@ -150,8 +150,7 @@ Network::connection_state_t NetworkServer::ServerStart(const std::string &port)
 
   cpu.clear();
   // Convert port number (std::string port) into SDL port number format:
-  int prt;
-  sscanf(port.c_str(),"%i",&prt);
+  int prt = strtol(port.c_str(), NULL, 10);
 
   if (SDLNet_ResolveHost(&ip,NULL,(Uint16)prt) != 0)
   {

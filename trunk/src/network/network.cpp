@@ -209,40 +209,47 @@ void Network::DisconnectNetwork()
 }
 
 //-----------------------------------------------------------------------------
+#ifdef WIN32
+# define SOCKET_PARAM    char
+#else
+typedef int SOCKET;
+# define SOCKET_PARAM    void
+# define SOCKET_ERROR    (-1)
+# define closesocket(fd) close(fd)
+#endif
 
-const Network::connection_state_t Network::CheckHost(const std::string &host,
-                                                     const std::string& port) const
+const Network::connection_state_t Network::CheckHost(const std::string &host, int prt) const
 {
-  MSG_DEBUG("network", "Checking connection to %s:%s", host.c_str(), port.c_str());
-  int prt=0;
-  sscanf(port.c_str(),"%i",&prt);
+  MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 
   struct hostent* hostinfo;
   hostinfo = gethostbyname(host.c_str());
   if( ! hostinfo )
     return Network::CONN_BAD_HOST;
 
-#ifdef WIN32
   SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
   if( fd == INVALID_SOCKET )
     return Network::CONN_BAD_SOCKET;
 
   // Set the timeout
+#ifdef WIN32
   int timeout = 5000; //ms
-  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeout, sizeof(timeout));
 #else
-  int fd = socket(AF_INET, SOCK_STREAM, 0);
-  if( fd == -1 )
-    return Network::CONN_BAD_SOCKET;
-
-  // Set the timeout
   struct timeval timeout;
   memset(&timeout, 0, sizeof(timeout));
   timeout.tv_sec = 5; // 5seconds timeout
-  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (void*)&timeout, sizeof(timeout));
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (void*)&timeout, sizeof(timeout));
 #endif
+  if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
+  {
+    fprintf(stderr, "Setting receive timeout on socket failed\n");
+    return Network::CONN_BAD_SOCKET;
+  }
+
+  if (setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
+  {
+    fprintf(stderr, "Setting send timeout on socket failed\n");
+    return Network::CONN_BAD_SOCKET;
+  }
 
   struct sockaddr_in addr;
   memset(&addr, 0, sizeof(addr));
@@ -255,21 +262,9 @@ const Network::connection_state_t Network::CheckHost(const std::string &host,
 
   addr.sin_port = htons(prt);
 
-#ifndef WIN32
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == -1 )
+  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
   {
-    switch(errno)
-    {
-    case ECONNREFUSED: return Network::CONN_REJECTED;
-    case EINPROGRESS:
-    case ETIMEDOUT: return Network::CONN_TIMEOUT;
-    default: return Network::CONN_BAD_SOCKET;
-    }
-  }
-  close(fd);
-#else
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
-  {
+#ifdef WIN32
     switch(WSAGetLastError())
     {
     case WSAECONNREFUSED: return Network::CONN_REJECTED;
@@ -277,9 +272,17 @@ const Network::connection_state_t Network::CheckHost(const std::string &host,
     case WSAETIMEDOUT: return Network::CONN_TIMEOUT;
     default: return Network::CONN_BAD_SOCKET;
     }
+#else
+    switch(errno)
+    {
+    case ECONNREFUSED: return Network::CONN_REJECTED;
+    case EINPROGRESS:
+    case ETIMEDOUT: return Network::CONN_TIMEOUT;
+    default: return Network::CONN_BAD_SOCKET;
+    }
+#endif
   }
   closesocket(fd);
-#endif
   return Network::CONNECTED;
 }
 

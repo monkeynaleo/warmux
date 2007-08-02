@@ -147,15 +147,14 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
-  int prt=0;
-  sscanf(port.c_str(),"%i",&prt);
+  int prt = strtol(port.c_str(), NULL, 10);
 
-  if (CheckHost(host, port) == Network::CONN_TIMEOUT)
+  if (CheckHost(host, prt) == Network::CONN_TIMEOUT)
     return Network::CONN_TIMEOUT;
 
   if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt) == -1)
   {
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
+    fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), prt);
     return Network::CONN_BAD_HOST;
   }
 
@@ -163,7 +162,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
   if (!socket)
   {
-    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), prt);
     return Network::CONN_REJECTED;
   }
 
