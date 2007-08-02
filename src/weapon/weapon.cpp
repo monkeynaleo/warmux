@@ -323,7 +323,7 @@ void Weapon::PosXY (int &x, int &y) const
   {
     Point2i handPos = ActiveCharacter().GetHandPosition();
     y = handPos.y + position.y;
-    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT)
+    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
       x = handPos.x + position.x;
     else
       x = handPos.x - position.x - m_image->GetWidth();
@@ -541,7 +541,7 @@ void Weapon::DrawWeaponFire()
 {
   if (m_weapon_fire == NULL) return;
   Point2i size = m_weapon_fire->GetSize();
-  size.x = (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT ? 0 : size.x);
+  size.x = (ActiveCharacter().GetDirection() == DIRECTION_RIGHT ? 0 : size.x);
   size.y /= 2;
   m_weapon_fire->SetRotation_rad (ActiveCharacter().GetFiringAngle());
   m_weapon_fire->Draw( GetGunHolePosition() - size );

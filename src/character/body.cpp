@@ -25,6 +25,7 @@
 #include "character.h"
 #include "clothe.h"
 #include "member.h"
+#include "movement.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "particles/body_member.h"
@@ -575,21 +576,6 @@ void Body::GetTestRect(uint &l, uint&r, uint &t, uint &b) const
   b = current_mvt->test_bottom;
 }
 
-void Body::SetDirection(Direction_t dir)
-{
-  direction=dir;
-}
-
-const Body::Direction_t &Body::GetDirection() const
-{
-  return direction;
-}
-
-const Point2i &Body::GetHandPosition() const
-{
-  return weapon_pos;
-}
-
 void Body::StartWalk()
 {
   // walk events happens when the player hits the left/right key
@@ -609,9 +595,9 @@ void Body::StopWalk()
     SetFrame(0);
 }
 
-void Body::ResetWalk()
+bool Body::IsWalking()
 {
-  walk_events = 0;
+  return walk_events > 0 && current_mvt->type == "walk";
 }
 
 uint Body::GetMovementDuration() const

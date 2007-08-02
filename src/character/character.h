@@ -32,6 +32,8 @@ class Text;
 class Team;
 class ParticleEngine;
 class DamageStatistics;
+class Body;
+typedef enum BodyDirection BodyDirection_t;
 
 class Character : public PhysicalObj
 {
@@ -152,8 +154,8 @@ public:
   bool CanStillMoveRL (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
-  void SetDirection(Body::Direction_t direction);
-  Body::Direction_t GetDirection() const;
+  void SetDirection(BodyDirection_t direction);
+  BodyDirection_t GetDirection() const;
 
   // Team owner
   const Team& GetTeam() const;

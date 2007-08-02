@@ -121,11 +121,11 @@ void MoveActiveCharacterLeft(){
   // character is ready to move ?
   if (!ActiveCharacter().CanMoveRL()) return;
 
-  bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT);
+  bool move = (ActiveCharacter().GetDirection() == DIRECTION_LEFT);
   if (move) {
     MoveCharacter(ActiveCharacter());
   } else {
-    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
+    ActiveCharacter().SetDirection(DIRECTION_LEFT);
     ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
   }
 
@@ -140,11 +140,11 @@ void MoveActiveCharacterRight()
   // character is ready to move ?
   if (!ActiveCharacter().CanMoveRL()) return;
 
-  bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT);
+  bool move = (ActiveCharacter().GetDirection() == DIRECTION_RIGHT);
   if (move) {
     MoveCharacter(ActiveCharacter());
   } else {
-    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
+    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
   }
 

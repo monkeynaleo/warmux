@@ -152,7 +152,7 @@ void Parachute::HandleKeyPressed_Shoot()
 void Parachute::HandleKeyPressed_MoveRight()
 {
   if(open) {
-    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
+    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     m_x_extern = cfg().force_side_displacement;
   } else {
     Weapon::HandleKeyPressed_MoveRight();
@@ -170,7 +170,7 @@ void Parachute::HandleKeyReleased_MoveRight()
 void Parachute::HandleKeyPressed_MoveLeft()
 {
   if(open) {
-    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
+    ActiveCharacter().SetDirection(DIRECTION_LEFT);
     m_x_extern = -cfg().force_side_displacement;
   } else {
     Weapon::HandleKeyPressed_MoveLeft();

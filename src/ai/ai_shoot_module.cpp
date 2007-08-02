@@ -334,9 +334,9 @@ void AIShootModule::ChooseDirection() const
       return;
 
     if ( ActiveCharacter().GetCenterX() < m_enemy->GetCenterX())
-      ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
+      ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     else if ( ActiveCharacter().GetCenterX() > m_enemy->GetCenterX())
-      ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
+      ActiveCharacter().SetDirection(DIRECTION_LEFT);
     // else ActiveCharacter().GetCenterX() == m_enemy->GetCenterX()
   }
 }
@@ -400,7 +400,7 @@ void AIShootModule::BeginTurn()
   m_has_finished = false;
 
   // Choose random direction for the moment
-  ActiveCharacter().SetDirection( randomSync.GetBool()?Body::DIRECTION_LEFT:Body::DIRECTION_RIGHT );
+  ActiveCharacter().SetDirection( randomSync.GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
 }
 
 AIShootModule::AIShootModule(const AIMovementModule& to_remove) :

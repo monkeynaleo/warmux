@@ -559,7 +559,7 @@ void Grapple::GoRight()
 {
   go_right = true ;
   ActiveCharacter().SetExternForce(cfg().push_force,0);
-  ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
+  ActiveCharacter().SetDirection(DIRECTION_RIGHT);
 }
 
 void Grapple::StopRight()
@@ -576,7 +576,7 @@ void Grapple::GoLeft()
 {
   go_left = true ;
   ActiveCharacter().SetExternForce(-cfg().push_force,0);
-  ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
+  ActiveCharacter().SetDirection(DIRECTION_LEFT);
 }
 
 void Grapple::StopLeft()

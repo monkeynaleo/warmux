@@ -23,19 +23,28 @@
 #define BODY_H
 #include <map>
 
-#include "movement.h"
+#include <vector>
+#include "include/base.h"
 #include "tool/point.h"
 
 // Forward declarations
 class Character;
 class BodyList;
 class Member;
+class Movement;
 class Clothe;
 class Profile;
 namespace xmlpp
 {
   class Element;
 }
+
+enum BodyDirection
+{
+  DIRECTION_LEFT = -1,
+  DIRECTION_RIGHT = 1
+};
+typedef enum BodyDirection BodyDirection_t;
 
 /*
  * FIXME: this class is either very useless either very badly used.
@@ -57,13 +66,6 @@ class Body
   const Body& operator=(const Body&);
   /**********************************************/
 
-public:
-  typedef enum
-  {
-    DIRECTION_LEFT = -1,
-    DIRECTION_RIGHT = 1
-  } Direction_t;
-private:
   friend class BodyList;
   std::map<std::string, Member*> members_lst;
   std::map<std::string, Clothe*> clothes_lst;
@@ -91,7 +93,7 @@ private:
                                         // Order to use to build the body
                                         // First element: member to build
                                         // Secnd element: parent member
-  Body::Direction_t direction;
+  BodyDirection_t direction;
 
   int animation_number;
   bool need_rebuild;
@@ -119,7 +121,7 @@ public:
   void SetMovementOnce(const std::string& name); //play the movement only once
   void SetRotation(double angle);
   void SetFrame(uint no);
-  void SetDirection(Body::Direction_t dir);
+  void SetDirection(BodyDirection_t dir) { direction=dir; };
   inline void SetOwner(const Character* belonger) { owner = belonger; };
   void PlayAnimation();
   void Build();
@@ -128,16 +130,16 @@ public:
   const std::string& GetMovement() const;
   const std::string& GetClothe() const;
   void GetTestRect(uint &l, uint &r, uint &t, uint &b) const;
-  const Direction_t &GetDirection() const;
-  const Point2i &GetHandPosition() const;
+  const BodyDirection_t &GetDirection() const { return direction; };
+  const Point2i &GetHandPosition() const { return weapon_pos; };
   uint GetMovementDuration() const;
   uint GetFrame() const { return current_frame; };
   uint GetFrameCount() const;
 
   void StartWalk();
   void StopWalk();
-  void ResetWalk();
-  bool IsWalking() { return walk_events > 0 && current_mvt->type == "walk";};
+  void ResetWalk() { walk_events = 0; };
+  bool IsWalking();
 
   void MakeParticles(const Point2i& pos);
   void MakeTeleportParticles(const Point2i& pos, const Point2i& dst);

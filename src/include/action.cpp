@@ -23,6 +23,7 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include "action_handler.h"
+#include "character/body.h"
 #include "character/character.h"
 #include "game/game.h"
 #include "game/time.h"
@@ -364,7 +365,7 @@ void Action::RetrieveCharacter()
   int char_no = PopInt();
   Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   c->SetXY(PopPoint2i());
-  c->SetDirection((Body::Direction_t)PopInt());
+  c->SetDirection((BodyDirection_t)PopInt());
   c->SetFiringAngle(PopDouble());
   c->SetEnergy(PopInt());
   c->SetLifeState((alive_t)PopInt());

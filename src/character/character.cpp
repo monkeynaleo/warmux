@@ -21,6 +21,7 @@
 
 #include <sstream>
 #include <iostream>
+#include "body.h"
 #include "character.h"
 #include "move.h"
 #include "damage_stats.h"
@@ -87,7 +88,7 @@ void Character::SetBody(Body* char_body)
   SetClothe("normal");
   SetMovement("walk");
 
-  SetDirection(randomSync.GetBool() ? Body::DIRECTION_LEFT : Body::DIRECTION_RIGHT);
+  SetDirection(randomSync.GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
   body->SetFrame(0);
   SetSize(body->GetSize());
 }
@@ -211,7 +212,7 @@ void Character::SignalGhostState (bool was_dead)
   if (!was_dead) GameLoop::GetInstance()->SignalCharacterDeath (this);
 }
 
-void Character::SetDirection (Body::Direction_t nv_direction)
+void Character::SetDirection (BodyDirection_t nv_direction)
 {
   body->SetDirection(nv_direction);
   uint l,r,t,b;
@@ -503,7 +504,7 @@ void Character::Jump(double strength, double angle /*in radian */)
   SetMovement("jump");
 
   // Jump !
-  if (GetDirection() == Body::DIRECTION_LEFT) angle = InverseAngle(angle);
+  if (GetDirection() == DIRECTION_LEFT) angle = InverseAngle(angle);
   SetSpeed (strength, angle);
 }
 
@@ -577,7 +578,7 @@ void Character::Refresh()
   if(IsDiseased())
   {
     Point2i bubble_pos = GetPosition();
-    if(GetDirection() == Body::DIRECTION_LEFT)
+    if(GetDirection() == DIRECTION_LEFT)
       bubble_pos.x += GetWidth();
     bubble_engine->AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
                               - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
@@ -731,7 +732,7 @@ void Character::SignalExplosion()
   }
 }
 
-Body::Direction_t Character::GetDirection() const
+BodyDirection_t Character::GetDirection() const
 {
   return body->GetDirection();
 }
@@ -768,7 +769,7 @@ const Point2i & Character::GetHandPosition() const {
 }
 
 double Character::GetFiringAngle() const {
-  if (GetDirection() == Body::DIRECTION_LEFT)
+  if (GetDirection() == DIRECTION_LEFT)
     return InverseAngleRad(firing_angle);
   return firing_angle;
 }
