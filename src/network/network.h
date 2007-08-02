@@ -103,8 +103,7 @@ protected:
   static int ThreadRun(void* no_param);
 
   void DisconnectNetwork();
-  const connection_state_t CheckHost(const std::string &host,
-                                     const std::string &port) const;
+  const connection_state_t CheckHost(const std::string &host, int prt) const;
 public:
   NetworkMenu* network_menu;
 
