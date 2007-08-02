@@ -25,12 +25,12 @@
 #include "graphic/text.h"
 
 SpinButtonBig::SpinButtonBig (const std::string &label, const Rectanglei &rect,
-			      int value, int step, int min_value, int max_value)
+                              int value, int step, int min_value, int max_value)
 {
   position =  rect.GetPosition();
   size = rect.GetSize();
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
@@ -49,11 +49,11 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Rectanglei &rect,
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
   uint max_value_w = (*Font::GetInstance(Font::FONT_HUGE)).GetWidth(max_value_s.str());
-  
+
   uint margin = 5;
 
   m_plus = new Button( Point2i(position.x + size.x - 5, position.y), res, "menu/big_plus");
-  m_minus = new Button( Point2i(position.x + size.x - max_value_w - 5 - 2 * margin, position.y), res, "menu/big_minus");   
+  m_minus = new Button( Point2i(position.x + size.x - max_value_w - 5 - 2 * margin, position.y), res, "menu/big_minus");
   resource_manager.UnLoadXMLProfile( res);
   m_step = step;
 }
@@ -81,12 +81,12 @@ void SpinButtonBig::SetSizePosition(const Rectanglei &rect)
   uint center_x = GetPositionX() + GetSizeX()/2 ;
   uint center_y = GetPositionY() + GetSizeY()/2 - txt_label->GetHeight()/2;
 
-  m_minus->SetSizePosition( Rectanglei(center_x - max_value_w/2 - m_minus->GetSizeX() - 5, 
-				      center_y - m_minus->GetSizeY()/2, 
-				      m_minus->GetSizeX(), m_minus->GetSizeY()) );
+  m_minus->SetSizePosition( Rectanglei(center_x - max_value_w/2 - m_minus->GetSizeX() - 5,
+                            center_y - m_minus->GetSizeY()/2,
+                            m_minus->GetSizeX(), m_minus->GetSizeY()) );
   m_plus->SetSizePosition( Rectanglei(center_x + max_value_w/2 + 5,
-				       center_y - m_plus->GetSizeY()/2,
-				       m_plus->GetSizeX(), m_plus->GetSizeY()) );
+                           center_y - m_plus->GetSizeY()/2,
+                           m_plus->GetSizeX(), m_plus->GetSizeY()) );
 }
 
 void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
@@ -104,8 +104,8 @@ void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
 
   txt_value->DrawCenterTop(center_x, center_y - value_h/2);
 
-  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2, 
-			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
+  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2,
+                            GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 }
 
 Widget* SpinButtonBig::ClickUp(const Point2i &mousePosition, uint button)
@@ -134,9 +134,9 @@ int SpinButtonBig::GetValue() const
   return m_value;
 }
 
-void SpinButtonBig::SetValue(int value)  
+void SpinButtonBig::SetValue(int value)
 {
-  m_value = BorneLong(value, m_min_value, m_max_value);  
+  m_value = BorneLong(value, m_min_value, m_max_value);
 
   std::ostringstream value_s;
   value_s << m_value ;

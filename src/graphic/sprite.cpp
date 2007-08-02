@@ -109,18 +109,18 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 }
 
 void Sprite::AddFrame(const Surface &surf, unsigned int delay){
-	  frames.push_back( SpriteFrame(surf, delay) );
+          frames.push_back( SpriteFrame(surf, delay) );
 }
 
 void Sprite::SetSize(unsigned int w, unsigned int h){
   ASSERT(frame_width_pix == 0 && frame_height_pix == 0)
-  
+
   frame_width_pix = w;
   frame_height_pix = h;
 }
 
 void Sprite::SetSize(const Point2i &size){
-	SetSize(size.x, size.y);
+        SetSize(size.x, size.y);
 }
 
 unsigned int Sprite::GetWidth() const{
@@ -146,11 +146,11 @@ unsigned int Sprite::GetHeightMax() const{
 }
 
 Point2i Sprite::GetSize() const{
-	return Point2i(GetWidth(), GetHeight());
+        return Point2i(GetWidth(), GetHeight());
 }
 
 Point2i Sprite::GetSizeMax() const{
-	return Point2i(GetWidthMax(), GetHeightMax());
+        return Point2i(GetWidthMax(), GetHeightMax());
 }
 
 unsigned int Sprite::GetFrameCount() const{
@@ -195,7 +195,7 @@ void Sprite::ScaleSize(int width, int height){
 }
 
 void Sprite::ScaleSize(const Point2i& size){
-	ScaleSize(size.x, size.y);
+        ScaleSize(size.x, size.y);
 }
 
 void Sprite::GetScaleFactors( float &_scale_x, float &_scale_y) const {
@@ -321,16 +321,16 @@ void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y){
 }
 
 void Sprite::Blit( Surface &dest, const Point2i &pos){
-	Blit(dest, pos.GetX(), pos.GetY());
+        Blit(dest, pos.GetX(), pos.GetY());
 }
 
 void Sprite::Blit( Surface &dest, const Rectanglei &srcRect, const Point2i &destPos){
-	Blit(dest, destPos.GetX(), destPos.GetY(), srcRect.GetPositionX(), srcRect.GetPositionY(), srcRect.GetSizeX(), srcRect.GetSizeY() );
+        Blit(dest, destPos.GetX(), destPos.GetY(), srcRect.GetPositionX(), srcRect.GetPositionY(), srcRect.GetSizeX(), srcRect.GetSizeY() );
 }
 
 void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h){
   if (!show)
-	return;
+        return;
 
   RefreshSurface();
 

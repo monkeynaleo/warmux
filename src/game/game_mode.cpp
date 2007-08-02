@@ -234,7 +234,7 @@ bool GameMode::Load(void)
   {
     std::cerr << Format(_("Error while loading game mode %s (file %s):"),
                         m_current.c_str(), fullname.c_str())
-			  << std::endl << e.what() << std::endl;
+              << std::endl << e.what() << std::endl;
     return false;
   }
 
@@ -243,8 +243,8 @@ bool GameMode::Load(void)
 
 // Load the game mode from strings (probably from network)
 bool GameMode::LoadFromString(const std::string& game_mode_name,
-			      const std::string& game_mode_contents,
-			      const std::string& game_mode_objects_contents)
+                              const std::string& game_mode_contents,
+                              const std::string& game_mode_objects_contents)
 {
   m_current = game_mode_name;
   MSG_DEBUG("game_mode", "Loading %s from network: ", m_current.c_str());
@@ -263,7 +263,7 @@ bool GameMode::LoadFromString(const std::string& game_mode_name,
   catch (const xmlpp::exception &e)
   {
     Error(Format("Error while loading game mode %s from memory:\n\t%s",
-		 m_current.c_str(), e.what()));
+                 m_current.c_str(), e.what()));
     return false;
   }
 
@@ -291,14 +291,14 @@ bool GameMode::ExportFileToString(const std::string& filename, std::string& cont
   catch (const xmlpp::exception &e)
   {
     Error(Format("Error while exporting file %s:\n\t%s",
-		 fullname.c_str(), e.what()));
+                 fullname.c_str(), e.what()));
     return false;
   }
   return true;
 }
 
 bool GameMode::ExportToString(std::string& mode,
-			      std::string& mode_objects) const
+                              std::string& mode_objects) const
 {
   bool r;
 
@@ -324,11 +324,11 @@ bool GameMode::AllowCharacterSelection() const
 
   case GameMode::BEFORE_FIRST_ACTION:
   case GameMode::BEFORE_FIRST_ACTION_AND_END_TURN:
-	  return (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) && !GameLoop::GetInstance()->character_already_chosen;
+          return (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) && !GameLoop::GetInstance()->character_already_chosen;
 
   case GameMode::CHANGE_ON_END_TURN:
   case GameMode::NEVER:
-	  return false;
+          return false;
   }
 
   return true;

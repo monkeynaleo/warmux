@@ -27,10 +27,10 @@
 #include "button.h"
 
 ListBoxItem::ListBoxItem(const std::string& _label,
-			 Font::font_size_t fsize,
-			 Font::font_style_t fstyle,
-			 const std::string& _value,
-			 const Color& color) :
+                         Font::font_size_t fsize,
+                         Font::font_style_t fstyle,
+                         const std::string& _value,
+                         const Color& color) :
   Label(_label, Rectanglei(0,0,0,0), fsize, fstyle, color),
   value(_value)
 {
@@ -90,7 +90,7 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
 
   for (uint i=first_visible_item; i < m_items.size(); i++) {
     if ( m_items[i]->GetPositionY() <= mousePosition.y
-	 && m_items[i]->GetPositionY() + m_items[i]->GetSizeY() >= mousePosition.y)
+         && m_items[i]->GetPositionY() + m_items[i]->GetSizeY() >= mousePosition.y)
       return i;
   }
   return -1;
@@ -108,22 +108,22 @@ Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
      || m_items.back()->GetPositionY() + m_items.back()->GetSizeY() > GetPositionY() + GetSizeY())
     {
       if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
-	  (button == SDL_BUTTON_LEFT && m_down->Contains(mousePosition)) ){
+          (button == SDL_BUTTON_LEFT && m_down->Contains(mousePosition)) ){
 
-	// bottom button
-	if( m_items.back()->GetPositionY() + m_items.back()->GetSizeY() > GetPositionY() + GetSizeY() )
-	  first_visible_item++ ;
+        // bottom button
+        if( m_items.back()->GetPositionY() + m_items.back()->GetSizeY() > GetPositionY() + GetSizeY() )
+          first_visible_item++ ;
 
-	return this;
+        return this;
       }
       else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-	       (button == SDL_BUTTON_LEFT && m_up->Contains(mousePosition)) ){
+               (button == SDL_BUTTON_LEFT && m_up->Contains(mousePosition)) ){
 
-	// top button
-	if( first_visible_item > 0 )
-	  first_visible_item-- ;
+        // top button
+        if( first_visible_item > 0 )
+          first_visible_item-- ;
 
-	return this;
+        return this;
       }
     }
 
@@ -175,8 +175,8 @@ void ListBox::SetDefaultItemColor(const Color & default_item)
 }
 
 void ListBox::Update(const Point2i &mousePosition,
-		     const Point2i &lastMousePosition,
-		     Surface& surf)
+                     const Point2i &lastMousePosition,
+                     Surface& surf)
 {
   if (!Contains(mousePosition)) {
     scrolling = false;
@@ -192,11 +192,11 @@ void ListBox::Update(const Point2i &mousePosition,
 
       // update position of items because of scrolling
       if (scrolling &&
-	  mousePosition.y < GetPositionY() + GetSizeY() - 12 &&
-	  mousePosition.y > GetPositionY() + 12)
-	{
-	  first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20);
-	}
+          mousePosition.y < GetPositionY() + GetSizeY() - 12 &&
+          mousePosition.y > GetPositionY() + 12)
+        {
+          first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20);
+        }
 
       Draw(mousePosition, surf);
     }
@@ -221,9 +221,9 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
   for(uint i=first_visible_item; i < m_items.size(); i++){
 
     Rectanglei rect(GetPositionX() + 1,
-		    pos.GetY() + 1,
-		    GetSizeX() - 2,
-		    m_items.at(i)->GetSizeY() - 2);
+                    pos.GetY() + 1,
+                    GetSizeX() - 2,
+                    m_items.at(i)->GetSizeY() - 2);
 
     // no more place to add item
     if (draw_it && rect.GetPositionY() + rect.GetSizeY() >= GetPositionY() + GetSizeY() -2) {
@@ -236,13 +236,13 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
       if( int(i) == selected_item) {
         surf.BoxColor(rect, selected_item_color);
       } else if( i == uint(item) ) {
-	surf.BoxColor(rect, default_item_color);
+        surf.BoxColor(rect, default_item_color);
       }
     }
 
     // Really draw items
     Rectanglei rect2(pos.x, pos.y,
-		     GetSizeX()-12, m_items.at(i)->GetSizeY() - 2);
+                     GetSizeX()-12, m_items.at(i)->GetSizeY() - 2);
 
     m_items.at(i)->SetSizePosition(rect2);
     if (draw_it) {
@@ -289,11 +289,11 @@ void ListBox::SetSizePosition(const Rectanglei &rect)
 }
 
 void ListBox::AddItem (bool selected,
-		       const std::string &label,
-		       const std::string &value,
-		       Font::font_size_t fsize,
-		       Font::font_style_t fstyle,
-		       const Color& color)
+                       const std::string &label,
+                       const std::string &value,
+                       Font::font_size_t fsize,
+                       Font::font_style_t fstyle,
+                       const Color& color)
 {
   uint pos = m_items.size();
 

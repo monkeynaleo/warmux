@@ -28,13 +28,13 @@
 class RandomSync{
   //Pregenerated table of random number (mainly usefull for network)
   std::list<double> rnd_table;
-  
+
   double GetRand();
   void GenerateTable();
 public:
   RandomSync();
   void Init();
-  
+
   bool GetBool();
   double GetDouble();
   double GetDouble(double max);

@@ -91,11 +91,11 @@ static bool CompareConfigs(const Point2i& a, const Point2i& b)
 
 void Video::AddConfigIfAbsent(int w, int h)
 {
-	Point2i p(w, h);
+  Point2i p(w, h);
 
-	if ( CompareConfigs((*available_configs.begin()), p) &&
-		 find(available_configs.begin(), available_configs.end(), p) == available_configs.end() )
-		available_configs.push_back(p);
+  if ( CompareConfigs((*available_configs.begin()), p) &&
+       find(available_configs.begin(), available_configs.end(), p) == available_configs.end() )
+    available_configs.push_back(p);
 }
 
 void Video::ComputeAvailableConfigs()
@@ -119,8 +119,8 @@ void Video::ComputeAvailableConfigs()
   // Add the current resolution
   AddConfigIfAbsent(window.GetWidth(), window.GetHeight());
 
-  // If biggest resolution is big enough, we propose standard resolution such as
-  // 1600x1200, 1280x1024, 1024x768, 800x600.
+  // If biggest resolution is big enough, we propose standard resolutions
+  // such as 1600x1200, 1280x1024, 1024x768, 800x600.
   for(std::list<Point2i>::iterator res = Config::GetInstance()->GetResolutionAvailable().begin();
       res != Config::GetInstance()->GetResolutionAvailable().end();
       res++) {

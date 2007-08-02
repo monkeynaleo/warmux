@@ -94,7 +94,7 @@ unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const Point2i &pos) const
 unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos) const {
     unsigned char r, g, b, a;
 
-    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x*m_surface.GetBytesPerPixel()); 
+    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x*m_surface.GetBytesPerPixel());
     m_surface.GetRGBA(pixel, r, g, b, a);
 
     return a;
@@ -107,7 +107,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig){
     int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
     int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
 
-    for( int py = starting_y ; py < ending_y ; py++) 
+    for( int py = starting_y ; py < ending_y ; py++)
         for( int px = starting_x ; px < ending_x ; px++)
             if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
                 *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
@@ -225,7 +225,7 @@ void TileItem_AlphaSoftware::FillWithRGB(Uint8 r, Uint8 g, Uint8 b)
   int x=0, y=0;
   while(y < CELL_SIZE.y)
   {
-    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + y*m_surface.GetPitch() + x*m_surface.GetBytesPerPixel()); 
+    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + y*m_surface.GetPitch() + x*m_surface.GetBytesPerPixel());
     Uint8 tmp,a;
     m_surface.GetRGBA(pixel, tmp, tmp, tmp, a);
     if(a != SDL_ALPHA_TRANSPARENT)

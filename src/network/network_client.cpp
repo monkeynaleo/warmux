@@ -81,15 +81,15 @@ void NetworkClient::ReceiveActions()
 
     std::list<DistantComputer*>::iterator dst_cpu;
     for (dst_cpu = cpu.begin();
-	 dst_cpu != cpu.end() && ThreadToContinue();
-	 dst_cpu++)
+         dst_cpu != cpu.end() && ThreadToContinue();
+         dst_cpu++)
     {
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
         // Read the size of the packet
         int packet_size = (*dst_cpu)->ReceiveDatas(packet);
         if( packet_size == -1) // An error occured during the reception
-	{
+        {
           dst_cpu = CloseConnection(dst_cpu);
           continue;
         } else
@@ -97,43 +97,43 @@ void NetworkClient::ReceiveActions()
           continue;
 
 #ifdef LOG_NETWORK
-	if (fin != 0) {
-	  int tmp = 0xFFFFFFFF;
-	  write(fin, &packet_size, 4);
-	  write(fin, packet, packet_size);
-	  write(fin, &tmp, 4);
-	}
+        if (fin != 0) {
+          int tmp = 0xFFFFFFFF;
+          write(fin, &packet_size, 4);
+          write(fin, packet, packet_size);
+          write(fin, &tmp, 4);
+        }
 #endif
 
         Action* a = new Action(packet, (*dst_cpu));
         MSG_DEBUG("network.traffic","Received action %s",
                   ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
-	switch (a->GetType()) {
-	case Action::ACTION_NICKNAME: 
-	  {
-	    std::string nickname = a->PopString();
-	    std::cout<<"New nickname: " + nickname<< std::endl;
-	    (*dst_cpu)->nickname = nickname;
-	    delete a;
-	  }
-	  break;
+        switch (a->GetType()) {
+        case Action::ACTION_NICKNAME:
+          {
+            std::string nickname = a->PopString();
+            std::cout<<"New nickname: " + nickname<< std::endl;
+            (*dst_cpu)->nickname = nickname;
+            delete a;
+          }
+          break;
 
-	case Action::ACTION_MENU_ADD_TEAM:
-	case Action::ACTION_MENU_DEL_TEAM:
+        case Action::ACTION_MENU_ADD_TEAM:
+        case Action::ACTION_MENU_DEL_TEAM:
           (*dst_cpu)->ManageTeam(a);
           delete a;
-	  break;
+          break;
 
-	case Action::ACTION_CHAT_MESSAGE:
+        case Action::ACTION_CHAT_MESSAGE:
           (*dst_cpu)->SendChatMessage(a);
           delete a;
-	  break;
+          break;
 
-	default:
+        default:
           ActionHandler::GetInstance()->NewAction(a, false);
-	}
-	free(packet);
+        }
+        free(packet);
       }
     }
   }

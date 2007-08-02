@@ -36,12 +36,12 @@ class Box : public WidgetList
   virtual ~Box();
 
   void Update(const Point2i &mousePosition,
-	      const Point2i &lastMousePosition,
-	      Surface& surf);
+              const Point2i &lastMousePosition,
+              Surface& surf);
   void Draw(const Point2i &mousePosition,
-	    Surface& surf) const;
+            Surface& surf) const;
   void Redraw(const Rectanglei& rect,
-	      Surface& surf);
+              Surface& surf);
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
 

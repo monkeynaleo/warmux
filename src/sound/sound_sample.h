@@ -35,8 +35,8 @@ class SoundSample
   SoundSample();
 
   void Play(const std::string& category,
-	    const std::string& sample,
-	    const int loop = 1);
+            const std::string& sample,
+            const int loop = 1);
   void Stop();
 
   bool IsPlaying();

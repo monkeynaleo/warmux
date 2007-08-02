@@ -73,11 +73,11 @@ bool Baseball::p_Shoot()
       // Did we touch somebody ?
       if( ver->ObjTouche(pos_to_check) )
       {
-	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-	ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
-	ver->SetMovement("fly");
-	camera.FollowObject (&(*ver), true, true);
-	return true;
+        // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
+        ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
+        ver->SetMovement("fly");
+        camera.FollowObject (&(*ver), true, true);
+        return true;
       }
     }
   } while (!fin);

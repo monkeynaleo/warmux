@@ -74,8 +74,8 @@ class ResultsMenu : public Menu
     void OnClick(const Point2i &mousePosition, int button);
     void OnClickUp(const Point2i &mousePosition, int button);
     void DrawPodium(const Point2i &position) const;
-    void DrawTeamOnPodium(const Team& team, const Point2i& podium_position, 
-			  const Point2i& relative_position) const;
+    void DrawTeamOnPodium(const Team& team, const Point2i& podium_position,
+                          const Point2i& relative_position) const;
     void Draw(const Point2i &mousePosition);
  public:
     ResultsMenu(std::vector<TeamResults*>& v);

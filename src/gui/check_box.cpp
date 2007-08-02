@@ -70,9 +70,9 @@ void CheckBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
       txt_label->DrawTopLeft( GetPosition() );
 
       if (m_value)
-	m_checked_image->SetCurrentFrame(0);
+        m_checked_image->SetCurrentFrame(0);
       else
-	m_checked_image->SetCurrentFrame(1);
+        m_checked_image->SetCurrentFrame(1);
 
       m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
     }

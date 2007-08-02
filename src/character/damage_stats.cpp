@@ -76,7 +76,7 @@ void DamageStatistics::MadeDamage(const int Dmg, const Character &other)
   {
     if (owner.IsSameAs(other))
       damage_itself += Dmg;
-    else 
+    else
       damage_friendly_fire += Dmg;
   }
   else

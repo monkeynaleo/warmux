@@ -649,9 +649,9 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
   if(current_clothe->layers[layer]->type != "weapon")
   {
     ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->layers[layer]->spr,
-						      current_clothe->layers[layer]->GetPos()+pos,
-						      current_clothe->layers[layer]->GetPos()+dst,
-						      int(direction)));
+                                                      current_clothe->layers[layer]->GetPos()+pos,
+                                                      current_clothe->layers[layer]->GetPos()+dst,
+                                                      int(direction)));
   }
 }
 
@@ -667,10 +667,10 @@ const std::string& Body::GetClothe() const { return current_clothe->name; }
 
 void Body::DebugState() const
 {
-	MSG_DEBUG("body.state", "clothe: %s\tmovement: %s\t%i", current_clothe->name.c_str(),current_mvt->type.c_str(), current_frame);
+  MSG_DEBUG("body.state", "clothe: %s\tmovement: %s\t%i", current_clothe->name.c_str(),current_mvt->type.c_str(), current_frame);
   MSG_DEBUG("body.state", "(played once)clothe: %s\tmovement: %s",
             (play_once_clothe_sauv?play_once_clothe_sauv->name.c_str():"(NULL)"),
-			      (play_once_mvt_sauv?play_once_mvt_sauv->type.c_str():"(NULL)"),
-			      play_once_frame_sauv);
-	MSG_DEBUG("body.state", "need rebuild = %i",need_rebuild);
+            (play_once_mvt_sauv?play_once_mvt_sauv->type.c_str():"(NULL)"),
+            play_once_frame_sauv);
+  MSG_DEBUG("body.state", "need rebuild = %i",need_rebuild);
 }

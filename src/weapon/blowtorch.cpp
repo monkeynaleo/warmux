@@ -36,7 +36,7 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-static const uint MIN_TIME_BETWEEN_DIG = 200;	// milliseconds
+static const uint MIN_TIME_BETWEEN_DIG = 200;        // milliseconds
 
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {

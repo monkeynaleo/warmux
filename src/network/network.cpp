@@ -211,7 +211,7 @@ void Network::DisconnectNetwork()
 //-----------------------------------------------------------------------------
 
 const Network::connection_state_t Network::CheckHost(const std::string &host,
-						     const std::string& port) const
+                                                     const std::string& port) const
 {
   MSG_DEBUG("network", "Checking connection to %s:%s", host.c_str(), port.c_str());
   int prt=0;
@@ -291,7 +291,7 @@ const Network::connection_state_t Network::CheckHost(const std::string &host,
 void Network::SendAction(Action* a) const
 {
   MSG_DEBUG("network.traffic","Send action %s",
-	    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+            ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
   int size;
   char* packet;
@@ -341,7 +341,7 @@ const uint Network::GetPort() const
 
 // Static method
 Network::connection_state_t Network::ClientStart(const std::string &host,
-						 const std::string& port)
+                                                 const std::string& port)
 {
   NetworkClient* net = new NetworkClient();
 
@@ -415,7 +415,7 @@ void Network::SendNetworkState() const
 
 void Network::SetTurnMaster(bool master)
 {
-  MSG_DEBUG("network.turn_master", "turn_master: %d", master); 
+  MSG_DEBUG("network.turn_master", "turn_master: %d", master);
   turn_master_player = master;
 }
 

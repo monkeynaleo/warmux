@@ -45,13 +45,13 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   b_ok = NULL;
   b_cancel = NULL;
   if (actions == vNo) {
-    actions_buttons = NULL;    
+    actions_buttons = NULL;
   } else {
 
     actions_buttons = new HBox( Rectanglei(x, y, 1, 50), false);
 
     if (actions == vOk || actions == vOkCancel) {
-      b_ok = new Button( Point2i(0, 0), res, "menu/valider"); 
+      b_ok = new Button( Point2i(0, 0), res, "menu/valider");
       actions_buttons->AddWidget(b_ok);
     }
 
@@ -96,7 +96,7 @@ bool Menu::BasicOnClickUp(const Point2i &mousePosition)
     mouse_cancel();
   else
     return false;
-  
+
   return true;
 }
 
@@ -172,46 +172,46 @@ void Menu::Run (bool skip_menu)
   {
     // Poll and treat events
     SDL_Event event;
-     
+
     while (SDL_PollEvent(&event))
     {
       Point2i mousePosition(event.button.x, event.button.y);
-	   
+
       if (event.type == SDL_QUIT) {
         key_cancel();
       } else if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.sym)
-	  {
-	  case SDLK_ESCAPE:
-	    key_cancel();
-	    break;
-	  case SDLK_RETURN:
-	    key_ok();
-	    break;
-	  case SDLK_UP:
-	    key_up();
-	    break;
-	  case SDLK_DOWN:
-	    key_down();
-	    break;
-	  case SDLK_LEFT:
-	    key_left();
-	    break;
-	  case SDLK_RIGHT:
-	    key_right();
-	    break;
-	  case SDLK_F10:
-	    AppWormux::GetInstance()->video->ToggleFullscreen();
-	    break;
-	  default:
-	    widgets.SendKey(event.key.keysym);
-	    break;
-	  }
+          {
+          case SDLK_ESCAPE:
+            key_cancel();
+            break;
+          case SDLK_RETURN:
+            key_ok();
+            break;
+          case SDLK_UP:
+            key_up();
+            break;
+          case SDLK_DOWN:
+            key_down();
+            break;
+          case SDLK_LEFT:
+            key_left();
+            break;
+          case SDLK_RIGHT:
+            key_right();
+            break;
+          case SDLK_F10:
+            AppWormux::GetInstance()->video->ToggleFullscreen();
+            break;
+          default:
+            widgets.SendKey(event.key.keysym);
+            break;
+          }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
-	if (!BasicOnClickUp(mousePosition))
-	  OnClickUp(mousePosition, event.button.button);
+        if (!BasicOnClickUp(mousePosition))
+          OnClickUp(mousePosition, event.button.button);
       } else if (event.type == SDL_MOUSEBUTTONDOWN) {
-	OnClick(mousePosition, event.button.button);
+        OnClick(mousePosition, event.button.button);
       }
     }
 
@@ -220,7 +220,7 @@ void Menu::Run (bool skip_menu)
 
       SDL_GetMouseState( &x, &y );
       Point2i mousePosition(x, y);
-      
+
       Display(mousePosition);
     }
 
@@ -231,7 +231,7 @@ void Menu::Run (bool skip_menu)
 
 void Menu::Display(const Point2i& mousePosition)
 {
-  // to limit CPU  
+  // to limit CPU
   uint sleep_fps=0;
   uint delay = 0;
   uint start = SDL_GetTicks();
@@ -241,7 +241,7 @@ void Menu::Display(const Point2i& mousePosition)
   AppWormux::GetInstance()->video->Flip();
 
   // to limit CPU
-  delay = SDL_GetTicks()-start;   
+  delay = SDL_GetTicks()-start;
   if (delay < AppWormux::GetInstance()->video->GetSleepMaxFps())
     sleep_fps = AppWormux::GetInstance()->video->GetSleepMaxFps() - delay;
   else

@@ -23,8 +23,8 @@
 #include "text_box.h"
 #include "graphic/text.h"
 
-TextBox::TextBox (const std::string &label, const Rectanglei &rect, 
-		  Font::font_size_t fsize, Font::font_style_t fstyle) :
+TextBox::TextBox (const std::string &label, const Rectanglei &rect,
+                  Font::font_size_t fsize, Font::font_style_t fstyle) :
   Label(label, rect, fsize, fstyle),
   cursor_pos(label.size())
 {
@@ -94,7 +94,7 @@ void TextBox::SendKey(const SDL_keysym& key)
     if(key.unicode > 0)
     {
       if(key.unicode < 0x80) { // 1 byte char
-	new_txt.insert(cursor_pos++, 1, (char)key.unicode);
+        new_txt.insert(cursor_pos++, 1, (char)key.unicode);
       }
       else if (key.unicode < 0x800) // 2 byte char
       {
@@ -117,7 +117,7 @@ void TextBox::SendKey(const SDL_keysym& key)
 
 void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  if (!hidden) 
+  if (!hidden)
     {
       if(have_focus)
         surf.BoxColor(*this, highlightOptionColorBox);

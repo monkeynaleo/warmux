@@ -44,7 +44,7 @@ const uint DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
 const uint DST_MIN = 80 ;  //dst_minimal between 2 nodes
 
 bool find_first_contact_point (Point2i from, double angle, uint length,
-			       int skip, Point2i &contact_point)
+                               int skip, Point2i &contact_point)
 {
   Point2d posd;
   double x_step, y_step ;
@@ -149,7 +149,7 @@ bool Grapple::TryAttachRope()
   if (find_first_contact_point(pos, angle, length, 4, contact_point))
     {
       if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
-	return false;
+        return false;
 
       // The rope reaches the fixation point. Let's fix it !
       Action* a = new Action(Action::ACTION_WEAPON_GRAPPLE);
@@ -197,8 +197,8 @@ bool Grapple::TryAddNode(int CurrentSense)
       rope_angle = ActiveCharacter().GetRopeAngle() ;
 
       if ( (last_broken_node_sense * CurrentSense > 0) &&
-	   (fabs(last_broken_node_angle - rope_angle) < 0.1))
-	return false ;
+           (fabs(last_broken_node_angle - rope_angle) < 0.1))
+        return false ;
 
       // The rope has collided something...
       // Add a node on the rope and change the fixation point
@@ -233,29 +233,29 @@ bool Grapple::TryBreakNode(int currentSense)
                                         // same sense of the node.
     {
       if ( (currentAngle > 0) &&
-	   (angularSpeed > 0) &&
-	   (currentAngle > nodeAngle))
-	breakNode = true ;
+           (angularSpeed > 0) &&
+           (currentAngle > nodeAngle))
+        breakNode = true ;
 
       if ( (currentAngle > 0) &&
-	   (angularSpeed < 0) &&
-	   (currentAngle < nodeAngle))
-	breakNode = true ;
+           (angularSpeed < 0) &&
+           (currentAngle < nodeAngle))
+        breakNode = true ;
 
       if ( (currentAngle < 0) &&
-	   (angularSpeed > 0) &&
-	   (currentAngle > nodeAngle))
-	breakNode = true ;
+           (angularSpeed > 0) &&
+           (currentAngle > nodeAngle))
+        breakNode = true ;
 
       if ( (currentAngle < 0) &&
-	   (angularSpeed < 0) &&
-	   (currentAngle < nodeAngle))
-	breakNode = true ;
+           (angularSpeed < 0) &&
+           (currentAngle < nodeAngle))
+        breakNode = true ;
 
 //       if ( (currentAngle < 0) &&
-// 	   (angularSpeed > 0) &&
-// 	   (currentAngle < nodeAngle))
-// 	breakNode = true;
+//            (angularSpeed > 0) &&
+//            (currentAngle < nodeAngle))
+//         breakNode = true;
 
 
     }
@@ -295,12 +295,12 @@ void Grapple::NotifyMove(bool collision)
     {
       // Yes there has been a collision.
       if (delta_len != 0)
-	{
-	  // The character tryed to change the rope size.
-	  // There has been a collision, so we cancel the rope length change.
-	  ActiveCharacter().ChangePhysRopeSize (-delta_len);
-	  delta_len = 0;
-	}
+        {
+          // The character tryed to change the rope size.
+          // There has been a collision, so we cancel the rope length change.
+          ActiveCharacter().ChangePhysRopeSize (-delta_len);
+          delta_len = 0;
+        }
       return;
     }
 
@@ -385,10 +385,10 @@ void Grapple::Draw()
       {
         if(m_attaching)
           m_node_sprite->Draw(Point2i(quad.x1 + (int)((float) step * dx),
-				      quad.y1 - (int)((float) step * dy)));
+                                      quad.y1 - (int)((float) step * dy)));
         else
           m_node_sprite->Draw(Point2i(quad.x4 + (int)((float) step * dx),
-				      quad.y4 + (int)((float) step * dy)));
+                                      quad.y4 + (int)((float) step * dy)));
         step++;
       }
       quad.x1 = quad.x4 ;
@@ -432,13 +432,13 @@ void Grapple::AttachRope(const Point2i& contact_point)
   // The rope reaches the fixation point. Let's fix it !
   Point2i handPos = ActiveCharacter().GetHandPosition();
   Point2i pos(handPos.x - ActiveCharacter().GetX(),
-	      handPos.y - ActiveCharacter().GetY());
+              handPos.y - ActiveCharacter().GetY());
 
   ActiveCharacter().SetPhysFixationPointXY(
-					   contact_point.x / PIXEL_PER_METER,
-					   contact_point.y / PIXEL_PER_METER,
-					   (double)pos.x / PIXEL_PER_METER,
-					   (double)pos.y / PIXEL_PER_METER);
+                                           contact_point.x / PIXEL_PER_METER,
+                                           contact_point.y / PIXEL_PER_METER,
+                                           (double)pos.x / PIXEL_PER_METER,
+                                           (double)pos.y / PIXEL_PER_METER);
 
   m_fixation_point = contact_point;
 
@@ -476,12 +476,12 @@ void Grapple::AttachNode(const Point2i& contact_point,
   // The rope has collided something...
   // Add a node on the rope and change the fixation point.
   Point2i pos(handPos.x - ActiveCharacter().GetX(),
-	      handPos.y - ActiveCharacter().GetY());
+              handPos.y - ActiveCharacter().GetY());
 
   ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
-					   contact_point.y / PIXEL_PER_METER,
-					   (double)pos.x / PIXEL_PER_METER,
-					   (double)pos.y / PIXEL_PER_METER);
+                                           contact_point.y / PIXEL_PER_METER,
+                                           (double)pos.x / PIXEL_PER_METER,
+                                           (double)pos.y / PIXEL_PER_METER);
 
   m_fixation_point = contact_point;
   rope_node_t node;
@@ -515,9 +515,9 @@ void Grapple::DetachNode()
   int dy = handPos.y - ActiveCharacter().GetY();
 
   ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
-					   m_fixation_point.y / PIXEL_PER_METER,
-					   (double)dx / PIXEL_PER_METER,
-					   (double)dy / PIXEL_PER_METER);
+                                           m_fixation_point.y / PIXEL_PER_METER,
+                                           (double)dx / PIXEL_PER_METER,
+                                           (double)dy / PIXEL_PER_METER);
 }
 
 // =========================== Moves management
@@ -694,16 +694,16 @@ void Grapple::HandleKeyReleased_Shoot(){}
 void Grapple::PrintDebugRope()
 {
   printf("%05d %05d %03.3f\n",
-	 ActiveCharacter().GetPosition().GetX(),
-	 ActiveCharacter().GetPosition().GetY(),
-	 ActiveCharacter().GetRopeAngle());
+         ActiveCharacter().GetPosition().GetX(),
+         ActiveCharacter().GetPosition().GetY(),
+         ActiveCharacter().GetRopeAngle());
 
   for (std::list<rope_node_t>::iterator it = rope_nodes.begin();
        it != rope_nodes.end();
        it++) {
 
     printf("%05d %05d %03.3f %d\n", it->pos.x, it->pos.y,
-	   it->angle, it->sense);
+           it->angle, it->sense);
   }
 }
 

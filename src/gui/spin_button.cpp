@@ -26,15 +26,15 @@
 #include "button.h"
 
 SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
-			int value, int step, int min_value, int max_value,
-			const Color& color, bool _shadowed)
+                        int value, int step, int min_value, int max_value,
+                        const Color& color, bool _shadowed)
 {
   position =  rect.GetPosition();
   size = rect.GetSize();
   size.y = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
   shadowed = _shadowed;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
   txt_label = new Text(label, color, Font::FONT_SMALL, Font::FONT_NORMAL, shadowed);
   txt_label->SetMaxWidth(size.x - 30);
@@ -53,11 +53,11 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
   uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());
-  
+
   uint margin = 5;
 
   m_plus = new Button( Point2i(position.x + size.x - 5, position.y), res, "menu/plus");
-  m_minus = new Button( Point2i(position.x + size.x - max_value_w - 5 - 2 * margin, position.y), res, "menu/minus");   
+  m_minus = new Button( Point2i(position.x + size.x - max_value_w - 5 - 2 * margin, position.y), res, "menu/minus");
   resource_manager.UnLoadXMLProfile( res);
   m_step = step;
 }
@@ -77,9 +77,9 @@ void SpinButton::SetSizePosition(const Rectanglei &rect)
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
   uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());
-  
+
   uint margin = 5;
-  
+
   m_plus->SetSizePosition( Rectanglei(position.x + size.x - 5, position.y, 5, 10) );
   m_minus->SetSizePosition( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10) );
 
@@ -89,7 +89,7 @@ void SpinButton::SetSizePosition(const Rectanglei &rect)
 void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   txt_label->DrawTopLeft(position);
-   
+
   if (GetValue() != m_min_value) {
     m_minus->Draw(mousePosition, surf);
   }
@@ -110,7 +110,7 @@ Widget* SpinButton::ClickUp(const Point2i &mousePosition, uint button)
     SetValue(m_value - m_step);
     return this;
   } else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-	     (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
+             (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
     SetValue(m_value + m_step);
     return this;
   }
@@ -127,9 +127,9 @@ int SpinButton::GetValue() const
   return m_value;
 }
 
-void SpinButton::SetValue(int value)  
+void SpinButton::SetValue(int value)
 {
-  m_value = BorneLong(value, m_min_value, m_max_value);  
+  m_value = BorneLong(value, m_min_value, m_max_value);
 
   std::ostringstream value_s;
   value_s << m_value ;

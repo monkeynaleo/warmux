@@ -58,9 +58,9 @@ extern WeaponStrengthBar weapon_strength_bar;
 
 
 Weapon::Weapon(Weapon_type type,
-	       const std::string &id,
-	       EmptyWeaponConfig * params,
-	       weapon_visibility_t visibility)
+               const std::string &id,
+               EmptyWeaponConfig * params,
+               weapon_visibility_t visibility)
 {
   m_type = type;
   m_category = INVALID;
@@ -209,9 +209,9 @@ void Weapon::Manage()
       Deselect();
 
       if (m_can_change_weapon)
-	Select();
+        Select();
       else
-	game_loop->SetState(GameLoop::HAS_PLAYED);
+        game_loop->SetState(GameLoop::HAS_PLAYED);
     }
 }
 
@@ -232,8 +232,8 @@ void Weapon::NewActionWeaponShoot() const
   ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
 
   Action* a_shoot = new Action(Action::ACTION_WEAPON_SHOOT,
-			       m_strength,
-			       ActiveCharacter().GetAbsFiringAngle());
+                               m_strength,
+                               ActiveCharacter().GetAbsFiringAngle());
   ActionHandler::GetInstance()->NewActionActiveCharacter(a_shoot);
 }
 
@@ -248,7 +248,7 @@ void Weapon::NewActionWeaponStopUse() const
 void Weapon::PrepareShoot(double strength, double angle)
 {
   MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f",
-	    strength, angle);
+            strength, angle);
   ActiveCharacter().SetFiringAngle(angle);
   m_strength = strength;
   StopLoading();
@@ -280,18 +280,18 @@ bool Weapon::Shoot()
 
     if (!EnoughAmmo())
       if ( ! (ActiveTeam().ReadNbAmmos() == 0
-	      && use_unit_on_first_shoot && EnoughAmmoUnit()) )
-	return false;
+              && use_unit_on_first_shoot && EnoughAmmoUnit()) )
+        return false;
   }
 
   MSG_DEBUG("weapon.shoot", "Enough ammo");
 
   MSG_DEBUG("weapon.shoot", "%s Shooting at position:%d,%d (hand: %d,%d)",
-	    ActiveCharacter().GetName().c_str(),
-	    ActiveCharacter().GetX(),
-	    ActiveCharacter().GetY(),
-	    ActiveCharacter().GetHandPosition().GetX(),
-	    ActiveCharacter().GetHandPosition().GetY());
+            ActiveCharacter().GetName().c_str(),
+            ActiveCharacter().GetX(),
+            ActiveCharacter().GetY(),
+            ActiveCharacter().GetHandPosition().GetX(),
+            ActiveCharacter().GetHandPosition().GetY());
   ActiveCharacter().body->DebugState();
   if (!p_Shoot()) return false;
   m_last_fire_time = Time::GetInstance()->Read();
@@ -465,25 +465,25 @@ void Weapon::Draw(){
   switch (m_visibility)
     {
       case ALWAYS_VISIBLE:
-	break;
+        break;
 
       case NEVER_VISIBLE:
-	return;
-	break;
+        return;
+        break;
 
       case VISIBLE_ONLY_WHEN_ACTIVE:
-	if (!IsInUse())
-	  return ;
-	break;
+        if (!IsInUse())
+          return ;
+        break;
 
       case VISIBLE_ONLY_WHEN_INACTIVE:
-	if (IsInUse())
-	  return ;
-	break;
+        if (IsInUse())
+          return ;
+        break;
 
       default:
-	printf ("Hum... there is a problem !!!\n");
-	break;
+        printf ("Hum... there is a problem !!!\n");
+        break;
     }
 
   if(ActiveCharacter().IsGhost()
@@ -578,10 +578,10 @@ void Weapon::DrawAmmoUnits() const
     ss << ActiveTeam().ReadNbUnits();
 
     DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
-		   Point2i( ActiveCharacter().GetCenterX(),
-			    ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
-		   - camera.GetPosition(),
-		   ss.str());
+                   Point2i( ActiveCharacter().GetCenterX(),
+                            ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
+                   - camera.GetPosition(),
+                   ss.str());
   }
 }
 

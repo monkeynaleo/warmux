@@ -84,9 +84,9 @@ void ObjMine::StartTimeout()
   if (!animation)
   {
     animation=true;
-    
+
     camera.CenterOn(*this);
-    
+
     MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;
     MSG_DEBUG("mine", "EnableDetection : %d", attente);
@@ -131,7 +131,7 @@ void ObjMine::Detection()
 
       (*obj)->GetSpeed(norm, angle);
       if (norm < speed_detection && norm > 0.0) {
-	MSG_DEBUG("mine", "norm: %d, speed_detection: %d", norm, speed_detection); 
+        MSG_DEBUG("mine", "norm: %d, speed_detection: %d", norm, speed_detection);
         StartTimeout();
         return;
       }
@@ -171,20 +171,20 @@ void ObjMine::Refresh()
     {
       is_active = false;
       timeout_sound.Stop();
-      if (!fake) 
-	Explosion();
-      else 
-	FakeExplosion();
+      if (!fake)
+        Explosion();
+      else
+        FakeExplosion();
 
-      if (launcher != NULL) 
-	launcher->SignalProjectileTimeout();
+      if (launcher != NULL)
+        launcher->SignalProjectileTimeout();
     }
   }
 }
 
 bool ObjMine::IsImmobile() const
 {
-  if (is_active && animation) 
+  if (is_active && animation)
     return false;
   return PhysicalObj::IsImmobile();
 }

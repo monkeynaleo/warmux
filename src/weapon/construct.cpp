@@ -38,8 +38,8 @@ const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
 
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
-				new WeaponConfig(),
-				NEVER_VISIBLE)
+                                new WeaponConfig(),
+                                NEVER_VISIBLE)
 {
   construct_spr = resource_manager.LoadSprite( weapons_res_profile, "construct_spr");
   construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / DELTA_ANGLE));

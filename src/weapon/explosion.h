@@ -30,21 +30,21 @@ class Profile;
 class ExplosiveWeaponConfig;
 
 void ApplyExplosion(const Point2i &pos,
-		    const ExplosiveWeaponConfig &config,
-		    const std::string& son="weapon/explosion",
-		    bool fire_particle = true,
-		    ParticleEngine::ESmokeStyle smoke = ParticleEngine::BigESmoke,
-		    std::string network_id = "LOCAL" // Useful only on network : this is used to know that we should not apply blast and damage to the projectile which has created the explosion (bugfix #8529)
-	);
+                    const ExplosiveWeaponConfig &config,
+                    const std::string& son="weapon/explosion",
+                    bool fire_particle = true,
+                    ParticleEngine::ESmokeStyle smoke = ParticleEngine::BigESmoke,
+                    std::string network_id = "LOCAL" // Useful only on network : this is used to know that we should not apply blast and damage to the projectile which has created the explosion (bugfix #8529)
+                    );
 
 void ApplyExplosion_common (const Point2i &pos,
-			    const ExplosiveWeaponConfig &config,
-			    const std::string& son,
-			    bool fire_particle,
-			    ParticleEngine::ESmokeStyle smoke,
-			    std::string network_id
-	);
+                            const ExplosiveWeaponConfig &config,
+                            const std::string& son,
+                            bool fire_particle,
+                            ParticleEngine::ESmokeStyle smoke,
+                            std::string network_id
+                           );
 
-extern Profile *weapons_res_profile; 
+extern Profile *weapons_res_profile;
 
 #endif //WEAPON_TOOLS_H

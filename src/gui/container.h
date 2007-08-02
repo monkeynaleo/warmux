@@ -31,7 +31,7 @@ class Container
  public:
   virtual ~Container() {};
   virtual void Redraw(const Rectanglei& rect,
-		      Surface& surf) = 0;
+                      Surface& surf) = 0;
 };
 
 #endif

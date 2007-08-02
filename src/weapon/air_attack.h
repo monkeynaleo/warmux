@@ -29,10 +29,10 @@ class AirAttack;
 class Sprite;
 
 class AirAttackConfig : public ExplosiveWeaponConfig
-{ 
+{
   public:
     double speed;
-    uint nbr_obus; 
+    uint nbr_obus;
     AirAttackConfig();
     virtual void LoadXml(xmlpp::Element *elem);
 };

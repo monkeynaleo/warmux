@@ -29,66 +29,66 @@ Tile::Tile(){
 }
 
 void Tile::FreeMem(){
-    for (uint i=0; i<nbr_cell; ++i)
-        delete item[i];
-    nbr_cell = 0;
-    item.clear();
+  for (uint i=0; i<nbr_cell; ++i)
+    delete item[i];
+  nbr_cell = 0;
+  item.clear();
 }
 
-Tile::~Tile(){ 
-    FreeMem();
+Tile::~Tile(){
+  FreeMem();
 }
 
 void Tile::InitTile(const Point2i &pSize){
-    nbCells = pSize / CELL_SIZE;
+  nbCells = pSize / CELL_SIZE;
 
-    if( (pSize.x % CELL_SIZE.x) != 0 )
-        nbCells.x++;
+  if( (pSize.x % CELL_SIZE.x) != 0 )
+    nbCells.x++;
 
-    if( (pSize.y % CELL_SIZE.y) != 0 )
-        nbCells.y++;
+  if( (pSize.y % CELL_SIZE.y) != 0 )
+    nbCells.y++;
 
-    size = pSize;
+  size = pSize;
 
-    nbr_cell = nbCells.x * nbCells.y;
+  nbr_cell = nbCells.x * nbCells.y;
 }
 
 Point2i Tile::Clamp(const Point2i &v) const{
-	return v.clamp(Point2i(0, 0), nbCells - 1);
+        return v.clamp(Point2i(0, 0), nbCells - 1);
 }
 
 void Tile::Dig(const Point2i &position, const Surface& dig){
-   // XXX Not used !?
-   // Rectanglei rect = Rectanglei(position, dig.GetSize());
-   Point2i firstCell = Clamp(position/CELL_SIZE);
-   Point2i lastCell = Clamp((position + dig.GetSize())/CELL_SIZE);
-   Point2i c;
+  // XXX Not used !?
+  // Rectanglei rect = Rectanglei(position, dig.GetSize());
+  Point2i firstCell = Clamp(position/CELL_SIZE);
+  Point2i lastCell = Clamp((position + dig.GetSize())/CELL_SIZE);
+  Point2i c;
 
-   for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
-      for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
-         Point2i offset = position - c * CELL_SIZE;
+  for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+    for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
+      Point2i offset = position - c * CELL_SIZE;
 
-         item[c.y*nbCells.x + c.x]->Dig(offset, dig);
-      }
+      item[c.y*nbCells.x + c.x]->Dig(offset, dig);
+    }
 }
 
-void Tile::Dig(const Point2i &center, const uint radius){  
-   Point2i size = Point2i(2 * (radius + EXPLOSION_BORDER_SIZE),
-                          2 * (radius + EXPLOSION_BORDER_SIZE));
-   Point2i position = center - Point2i(radius + EXPLOSION_BORDER_SIZE,
+void Tile::Dig(const Point2i &center, const uint radius){
+  Point2i size = Point2i(2 * (radius + EXPLOSION_BORDER_SIZE),
+                         2 * (radius + EXPLOSION_BORDER_SIZE));
+  Point2i position = center - Point2i(radius + EXPLOSION_BORDER_SIZE,
                                        radius + EXPLOSION_BORDER_SIZE);
 
-   // XXX Not used !?
-   // Rectanglei rect = Rectanglei(position, size);
-   Point2i firstCell = Clamp(position/CELL_SIZE);
-   Point2i lastCell = Clamp((position+size)/CELL_SIZE);
-   Point2i c;
+  // XXX Not used !?
+  // Rectanglei rect = Rectanglei(position, size);
+  Point2i firstCell = Clamp(position/CELL_SIZE);
+  Point2i lastCell = Clamp((position+size)/CELL_SIZE);
+  Point2i c;
 
-   for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
-   for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
-      Point2i offset = center - c * CELL_SIZE;
-      item[c.y*nbCells.x + c.x]->Dig(offset, radius);
-   }
+  for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+  for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
+    Point2i offset = center - c * CELL_SIZE;
+    item[c.y*nbCells.x + c.x]->Dig(offset, radius);
+  }
 }
 
 void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
@@ -156,87 +156,87 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf){
 }
 
 void Tile::LoadImage (Surface& terrain){
-    FreeMem();
+  FreeMem();
 
-    InitTile(terrain.GetSize());
-    ASSERT(nbr_cell != 0);
+  InitTile(terrain.GetSize());
+  ASSERT(nbr_cell != 0);
 
-    // Create the TileItem objects
-    for (uint i=0; i<nbr_cell; ++i)
-       item.push_back ( new TileItem_AlphaSoftware(CELL_SIZE) );
+  // Create the TileItem objects
+  for (uint i=0; i<nbr_cell; ++i)
+    item.push_back ( new TileItem_AlphaSoftware(CELL_SIZE) );
 
-    // Fill the TileItem objects
-    Point2i i;
-    for( i.y = 0; i.y < nbCells.y; i.y++ )
-        for( i.x = 0; i.x < nbCells.x; i.x++ ){
-            int piece = i.y * nbCells.x + i.x;
-            Rectanglei sr( i * CELL_SIZE, CELL_SIZE);
+  // Fill the TileItem objects
+  Point2i i;
+  for( i.y = 0; i.y < nbCells.y; i.y++ )
+    for( i.x = 0; i.x < nbCells.x; i.x++ ){
+      int piece = i.y * nbCells.x + i.x;
+      Rectanglei sr( i * CELL_SIZE, CELL_SIZE);
 
-            terrain.SetAlpha(0, 0);
-            item[piece]->GetSurface().Blit(terrain, sr, Point2i(0, 0));
-        }
-
-    // Replace transparent tiles by TileItem_Empty tiles
-    for( uint i=0; i<nbr_cell; ++i )
-    {
-      TileItem_AlphaSoftware* t = static_cast<TileItem_AlphaSoftware*>(item[i]);
-      while(t->need_check_empty)
-        t->CheckEmpty();
-      if(t->NeedDelete())
-      {
-#ifdef DBG_TILE
-        printf("\nDeleting tile %i",i);
-#endif
-        delete item[i];
-        item[i] = (TileItem*)new TileItem_Empty;
-      }
-#ifdef DBG_TILE
-      else
-      {
-        if(i % nbCells.x % 2 == (i / nbCells.x) % 2)
-          item[i]->FillWithRGB(0, 0, 255);
-        else
-          item[i]->FillWithRGB(0, 255, 0);
-      }
-#endif
+      terrain.SetAlpha(0, 0);
+      item[piece]->GetSurface().Blit(terrain, sr, Point2i(0, 0));
     }
+
+  // Replace transparent tiles by TileItem_Empty tiles
+  for( uint i=0; i<nbr_cell; ++i )
+  {
+    TileItem_AlphaSoftware* t = static_cast<TileItem_AlphaSoftware*>(item[i]);
+    while(t->need_check_empty)
+      t->CheckEmpty();
+    if(t->NeedDelete())
+    {
+#ifdef DBG_TILE
+      printf("\nDeleting tile %i",i);
+#endif
+      delete item[i];
+      item[i] = (TileItem*)new TileItem_Empty;
+    }
+#ifdef DBG_TILE
+    else
+    {
+      if(i % nbCells.x % 2 == (i / nbCells.x) % 2)
+        item[i]->FillWithRGB(0, 0, 255);
+      else
+        item[i]->FillWithRGB(0, 255, 0);
+    }
+#endif
+  }
 }
 
 uchar Tile::GetAlpha(const Point2i &pos) const{
-	int cell = pos.y / CELL_SIZE.y * nbCells.x + pos.x / CELL_SIZE.x;
-    return item[cell]->GetAlpha(pos % CELL_SIZE);
+  int cell = pos.y / CELL_SIZE.y * nbCells.x + pos.x / CELL_SIZE.x;
+  return item[cell]->GetAlpha(pos % CELL_SIZE);
 }
 
 void Tile::DrawTile() {
-    Point2i firstCell = Clamp(camera.GetPosition() / CELL_SIZE);
-    Point2i lastCell = Clamp((camera.GetPosition() + camera.GetSize()) / CELL_SIZE);
-	Point2i i;
-    for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
-        for( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
-	  item[i.y*nbCells.x + i.x]->Draw( i );
+  Point2i firstCell = Clamp(camera.GetPosition() / CELL_SIZE);
+  Point2i lastCell = Clamp((camera.GetPosition() + camera.GetSize()) / CELL_SIZE);
+  Point2i i;
+  for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
+    for( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
+      item[i.y*nbCells.x + i.x]->Draw( i );
 }
 
 void Tile::DrawTile_Clipped(Rectanglei worldClip) const
 {
-	worldClip.SetSize( worldClip.GetSize() + 1); // mmm, y aurait t-il quelque chose qui
-	// donne des zones trops petites à redessiner ?
-    Point2i firstCell = Clamp(worldClip.GetPosition() / CELL_SIZE);
-    Point2i lastCell  = Clamp((worldClip.GetBottomRightPoint()) / CELL_SIZE);
-	Point2i c;
+  worldClip.SetSize( worldClip.GetSize() + 1); // mmm, y aurait t-il quelque chose qui
+  // donne des zones trops petites à redessiner ?
+  Point2i firstCell = Clamp(worldClip.GetPosition() / CELL_SIZE);
+  Point2i lastCell  = Clamp((worldClip.GetBottomRightPoint()) / CELL_SIZE);
+  Point2i c;
 
-    for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
-        for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
-		// For all selected items, clip source and destination blitting rectangles 
-			Rectanglei destRect(c * CELL_SIZE, CELL_SIZE);
+  for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+    for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
+      // For all selected items, clip source and destination blitting rectangles
+      Rectanglei destRect(c * CELL_SIZE, CELL_SIZE);
 
-			destRect.Clip(worldClip);
-			if( destRect.Intersect( camera ) ){
-				Point2i ptDest = destRect.GetPosition() - camera.GetPosition();
-				Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
-			
-                                AppWormux::GetInstance()->video->window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
-			}
-        }
+      destRect.Clip(worldClip);
+      if( destRect.Intersect( camera ) ){
+        Point2i ptDest = destRect.GetPosition() - camera.GetPosition();
+        Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
+
+        AppWormux::GetInstance()->video->window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest);
+      }
+    }
 }
 
 Surface Tile::GetPart(const Rectanglei& rec)
@@ -297,3 +297,4 @@ void Tile::CheckEmptyTiles()
     }
   }
 }
+

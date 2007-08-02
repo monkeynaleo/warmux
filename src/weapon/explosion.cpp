@@ -43,12 +43,12 @@
 Profile *weapons_res_profile = NULL;
 
 void ApplyExplosion_common (const Point2i &pos,
-			    const ExplosiveWeaponConfig &config,
-			    const std::string& son,
-			    bool fire_particle,
-			    ParticleEngine::ESmokeStyle smoke,
-			    std::string network_id
-			    )
+                            const ExplosiveWeaponConfig &config,
+                            const std::string& son,
+                            bool fire_particle,
+                            ParticleEngine::ESmokeStyle smoke,
+                            std::string network_id
+                            )
 {
   MSG_DEBUG("explosion", "explosion range : %i\n", config.explosion_range);
 
@@ -194,12 +194,12 @@ void ApplyExplosion_common (const Point2i &pos,
 }
 
 void ApplyExplosion_master (const Point2i &pos,
-			    const ExplosiveWeaponConfig &config,
-			    const std::string& son,
-			    bool fire_particle,
-			    ParticleEngine::ESmokeStyle smoke,
-			    std::string network_id
-			    )
+                            const ExplosiveWeaponConfig &config,
+                            const std::string& son,
+                            bool fire_particle,
+                            ParticleEngine::ESmokeStyle smoke,
+                            std::string network_id
+                            )
 {
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
@@ -256,12 +256,12 @@ void ApplyExplosion_master (const Point2i &pos,
 
 
 void ApplyExplosion (const Point2i &pos,
-		     const ExplosiveWeaponConfig &config,
-		     const std::string& son,
-		     bool fire_particle,
-		     ParticleEngine::ESmokeStyle smoke,
-		     std::string network_id
-		     )
+                     const ExplosiveWeaponConfig &config,
+                     const std::string& son,
+                     bool fire_particle,
+                     ParticleEngine::ESmokeStyle smoke,
+                     std::string network_id
+                     )
 {
   if (Network::GetInstance()->IsLocal())
     ApplyExplosion_common(pos, config, son, fire_particle, smoke, network_id);

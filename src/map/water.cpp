@@ -169,9 +169,9 @@ void Water::Draw(){
       assert(l < pattern_height);
       for (; l < pattern_height; l++)
         {
-	  memcpy((Uint8*)pattern.GetSurface()->pixels + l * pattern.GetSurface()->pitch,
-	         (Uint8*)bottom.GetSurface()->pixels + l * pattern.GetSurface()->pitch,
-	         bpp * pattern_width);
+          memcpy((Uint8*)pattern.GetSurface()->pixels + l * pattern.GetSurface()->pitch,
+                 (Uint8*)bottom.GetSurface()->pixels + l * pattern.GetSurface()->pitch,
+                 bpp * pattern_width);
         }
 
       int wave;

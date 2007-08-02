@@ -45,13 +45,13 @@ class AIMovementModule
  public:
   void SetDestinationPoint(const Point2i& destination_point);
   bool SeemsToBeReachable(const Character& shooter, // must be ActiveCharacter()
-			                    const Character& enemy) const;
+                          const Character& enemy) const;
   bool IsProgressing() const;
   bool IsArrived() const;
   // ======================================
-  
+
   // ====================== Manage movement
- private:  
+ private:
   typedef enum {
     NO_MOVEMENT,
     WALKING,
@@ -64,9 +64,9 @@ class AIMovementModule
   movement_type_t current_movement;
 
   Point2i last_position;
-  uint time_at_last_position; 
+  uint time_at_last_position;
   Point2i last_blocked_position;
-  
+
   void InverseDirection(bool completely_blocked);
 
   void MakeStep() const;

@@ -74,24 +74,24 @@ void Question::Draw() const
     uint x = app->video->window.GetWidth()/2 - text->GetWidth()/2 - 10;
     uint y = app->video->window.GetHeight()/2 - text->GetHeight()/2 - 10;
 
-    Rectanglei rect(x, y, 
-		    text->GetWidth() + 20, 
-		    text->GetHeight() + 20);
-  
+    Rectanglei rect(x, y,
+                    text->GetWidth() + 20,
+                    text->GetHeight() + 20);
+
     AppWormux * appli = AppWormux::GetInstance();
-    
+
     appli->video->window.BoxColor(rect, defaultColorBox);
     appli->video->window.RectangleColor(rect, defaultColorRect);
   }
 
   if(text->GetText() != "")
   {
-    text->DrawCenter(app->video->window.GetWidth()/2, 
-		     app->video->window.GetHeight()/2);
+    text->DrawCenter(app->video->window.GetWidth()/2,
+                     app->video->window.GetHeight()/2);
   }
 }
 
-int Question::Ask () 
+int Question::Ask ()
 {
   SDL_Event event;
 
@@ -103,15 +103,15 @@ int Question::Ask ()
   do{
     while( SDL_PollEvent( &event) ){
       if ( (event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN) &&
-          default_choice.active ){
-	answer = default_choice.value;
-	end_of_boucle = true;
+           default_choice.active ){
+        answer = default_choice.value;
+        end_of_boucle = true;
       }
 
       if (event.type == SDL_KEYUP) {
-	answer = TreatsKey(event);
-	if (answer != -1) 
-	  end_of_boucle = true;
+        answer = TreatsKey(event);
+        if (answer != -1)
+          end_of_boucle = true;
       }
     } // SDL_PollEvent
 
@@ -129,7 +129,7 @@ int Question::Ask ()
 }
 
 void Question::Set (const std::string &pmessage,
-		    bool default_active, int default_value,const std::string& bg_sprite)
+                    bool default_active, int default_value,const std::string& bg_sprite)
 {
   text = new Text(pmessage, white_color, Font::FONT_BIG, Font::FONT_NORMAL);
 

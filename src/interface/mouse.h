@@ -65,8 +65,8 @@ private:
   Point2i lastPos;
   static Mouse * singleton;
 
-  Surface pointer_select, 
-    pointer_move, 
+  Surface pointer_select,
+    pointer_move,
     pointer_arrow_up,
     pointer_arrow_up_right,
     pointer_arrow_up_left,

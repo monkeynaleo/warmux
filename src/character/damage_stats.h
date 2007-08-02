@@ -42,7 +42,7 @@ class DamageStatistics
 public:
   DamageStatistics(const Character& _owner);
   DamageStatistics(const DamageStatistics& adamage_stats,
-		   const Character& _owner);
+                   const Character& _owner);
 
   void OneMoreShot() { total_shots++; }
   void MadeDamage(const int Dmg, const Character &other);

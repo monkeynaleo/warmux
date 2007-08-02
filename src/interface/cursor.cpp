@@ -59,7 +59,7 @@ CharacterCursor::CharacterCursor()
 
 CharacterCursor::~CharacterCursor()
 {
-  if (image) 
+  if (image)
     delete image;
 }
 
@@ -134,7 +134,7 @@ void CharacterCursor::FollowActiveCharacter()
 {
   if (visible)
     return;
-  
+
   visible = true;
   want_hide = false;
   time_begin_anim = Time::GetInstance()->Read();

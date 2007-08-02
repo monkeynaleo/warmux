@@ -95,51 +95,51 @@ int AppWormux::Main(int argc, char *argv[])
     Init();
     do
       {
-	MainMenu main_menu;
+        MainMenu main_menu;
 
-	if (choice == menuNULL) {
-	  StatStart("Main:Menu");
-	  choice = main_menu.Run();
-	  StatStop("Main:Menu");
-	}
+        if (choice == menuNULL) {
+          StatStart("Main:Menu");
+          choice = main_menu.Run();
+          StatStop("Main:Menu");
+        }
 
-	ActionHandler::GetInstance()->Flush();
-	
-	switch (choice)
-	  {
-	  case menuPLAY:
-	    {
-	      GameMenu game_menu;
-	      game_menu.Run(skip_menu);
-	      break;
-	    }
-	  case menuNETWORK:
-	    {
-	      NetworkConnectionMenu network_connection_menu;
-	      network_connection_menu.SetAction(net_action);
-	      network_connection_menu.Run(skip_menu);
-	      break;
-	    }
-	  case menuOPTIONS:
-	    {
-	      OptionMenu options_menu;
-	      options_menu.Run();
-	      break;
-	    }
-	  case menuCREDITS:
-	    {
-	      CreditsMenu credits_menu;
-	      credits_menu.Run();
-	      break;
-	    }
-	  case menuQUIT:
-	    quit = true;
-	  default:
-	    break;
-	  }
-	choice = menuNULL;
-	skip_menu = false;
-	net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+        ActionHandler::GetInstance()->Flush();
+
+        switch (choice)
+          {
+          case menuPLAY:
+            {
+              GameMenu game_menu;
+              game_menu.Run(skip_menu);
+              break;
+            }
+          case menuNETWORK:
+            {
+              NetworkConnectionMenu network_connection_menu;
+              network_connection_menu.SetAction(net_action);
+              network_connection_menu.Run(skip_menu);
+              break;
+            }
+          case menuOPTIONS:
+            {
+              OptionMenu options_menu;
+              options_menu.Run();
+              break;
+            }
+          case menuCREDITS:
+            {
+              CreditsMenu credits_menu;
+              credits_menu.Run();
+              break;
+            }
+          case menuQUIT:
+            quit = true;
+          default:
+            break;
+          }
+        choice = menuNULL;
+        skip_menu = false;
+        net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
       }
     while (!quit);
 
@@ -179,7 +179,7 @@ void AppWormux::Init()
 
   DisplayLoadingPicture();
 
-  jukebox.Init();  
+  jukebox.Init();
 
   cout << "[ " << _("Run game") << " ]" << endl;
 }
@@ -201,48 +201,48 @@ void AppWormux::ParseArgs(int argc, char * argv[]) const
     };
 
   while ((c = getopt_long (argc, argv, "hvpic::sd:",
-			   long_options, &option_index)) != -1)
+                           long_options, &option_index)) != -1)
     {
       switch (c)
-	{
-	case 'h':
-	  printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
-		 " [-i|--internet] [-s|--server] [-c|--client [ip]]"
-		 " [-d|--debug debug_masks]\n", argv[0]);
-	  exit(0);
-	  break;
-	case 'v':
-	  DisplayWelcomeMessage();
-	  exit(0);
-	  break;
-	case 'p':
-	  choice = menuPLAY;
-	  skip_menu = true;
-	  break;
-	case 'c':
-	  choice = menuNETWORK;
-	  net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
+        {
+        case 'h':
+          printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
+                 " [-i|--internet] [-s|--server] [-c|--client [ip]]"
+                 " [-d|--debug debug_masks]\n", argv[0]);
+          exit(0);
+          break;
+        case 'v':
+          DisplayWelcomeMessage();
+          exit(0);
+          break;
+        case 'p':
+          choice = menuPLAY;
+          skip_menu = true;
+          break;
+        case 'c':
+          choice = menuNETWORK;
+          net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
           if (optarg)
             {
               Config::GetInstance()->SetNetworkHost(optarg);
             }
-	  skip_menu = true;
-	  break;
+          skip_menu = true;
+          break;
         case 'd':
           printf("Debug: %s\n", optarg);
           AddDebugMode(optarg);
           break;
-	case 's':
-	  choice = menuNETWORK;
-	  net_action = NetworkConnectionMenu::NET_HOST;
-	  skip_menu = true;
-	  break;
-	case 'i':
-	  choice = menuNETWORK;
-	  net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
-	  skip_menu = true;
-	  break;
-	}
+        case 's':
+          choice = menuNETWORK;
+          net_action = NetworkConnectionMenu::NET_HOST;
+          skip_menu = true;
+          break;
+        case 'i':
+          choice = menuNETWORK;
+          net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+          skip_menu = true;
+          break;
+        }
     }
 }
 
@@ -265,9 +265,9 @@ void AppWormux::DisplayLoadingPicture()
   Time::GetInstance()->Reset();
 
   Text text1(_("Wormux launching..."), white_color,
-	     Font::FONT_HUGE, Font::FONT_NORMAL, true);
+             Font::FONT_HUGE, Font::FONT_NORMAL, true);
   Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_NORMAL,
-	     true);
+             true);
 
   Point2i windowCenter = video->window.GetSize() / 2;
 
@@ -301,7 +301,7 @@ void AppWormux::End() const
   SaveStatToXML("stats.xml");
 #endif
   cout << "o " << _("If you found a bug or have a feature request "
-			 "send us a email (in english, please):")
+                    "send us a email (in english, please):")
     << " " << Constants::EMAIL << endl;
 }
 
@@ -313,7 +313,7 @@ void AppWormux::DisplayWelcomeMessage() const
        fin = Constants::AUTHORS.end(); it != fin; ++it)
     {
       if (it != Constants::AUTHORS.begin())
-	cout << ", ";
+        cout << ", ";
       cout << *it;
     }
   cout << endl

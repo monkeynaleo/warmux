@@ -260,7 +260,7 @@ void XmlWriter::WriteElement(xmlpp::Element *x,
 }
 
 void XmlWriter::WriteComment(xmlpp::Element *x,
-			     const std::string& comment)
+                             const std::string& comment)
 {
   x->add_child_comment(comment);
   m_save = false;

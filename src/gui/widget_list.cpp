@@ -184,7 +184,7 @@ Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
       Widget* child = (*w)->ClickUp(mousePosition,button);
       if(child != NULL)
       {
-	SetFocusOn(child);
+        SetFocusOn(child);
         return child;
       }
     }

@@ -45,7 +45,7 @@ class SpinButtonBig : public Widget
 
  public:
   SpinButtonBig(const std::string &label, const Rectanglei &rect,
-		int value=0, int step=1, int min_value=-1, int max_value=-1);
+                int value=0, int step=1, int min_value=-1, int max_value=-1);
   virtual ~SpinButtonBig();
 
   void SetSizePosition(const Rectanglei &rect);

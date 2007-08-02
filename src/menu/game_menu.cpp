@@ -72,7 +72,7 @@ GameMenu::GameMenu() :
   // ##  TEAM SELECTION
   // ################################################
   team_box = new TeamsSelectionBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP,
-					      mainBoxWidth, TEAMS_BOX_H));
+                                              mainBoxWidth, TEAMS_BOX_H));
 
   widgets.AddWidget(team_box);
 
@@ -80,7 +80,7 @@ GameMenu::GameMenu() :
   // ##  MAP SELECTION
   // ################################################
   map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-					    mainBoxWidth, mapBoxHeight));
+                                            mainBoxWidth, mapBoxHeight));
 
   widgets.AddWidget(map_box);
 
@@ -88,21 +88,21 @@ GameMenu::GameMenu() :
   // ##  GAME OPTIONS
   // ################################################
   game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
-					    mainBoxWidth/2, OPTIONS_BOX_H), true);
+                                      mainBoxWidth/2, OPTIONS_BOX_H), true);
   game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
 
   game_options->SetMargin(50);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
-						stdRect,
-						TPS_TOUR_MIN, 5,
-						TPS_TOUR_MIN, TPS_TOUR_MAX);
+                                                stdRect,
+                                                TPS_TOUR_MIN, 5,
+                                                TPS_TOUR_MIN, TPS_TOUR_MAX);
   game_options->AddWidget(opt_duration_turn);
 
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
-					     stdRect,
-					     100, 5,
-					     5, 200);
+                                             stdRect,
+                                             100, 5,
+                                             5, 200);
   game_options->AddWidget(opt_energy_ini);
 
   opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", stdRect);

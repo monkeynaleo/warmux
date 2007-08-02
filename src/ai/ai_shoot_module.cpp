@@ -41,7 +41,7 @@
 // weapons like gun, shotgun, m16
 // =================================================
 const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
-						   double& shoot_angle)
+                                                   double& shoot_angle)
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character)
   {
@@ -65,8 +65,8 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 // and not from the gun hole
 // =================================================
 bool AIShootModule::IsDirectlyShootable(const Character& shooter,
-					const Character& enemy,
-					double& shoot_angle)
+                                        const Character& enemy,
+                                        double& shoot_angle)
 {
   Point2i pos = shooter.GetCenter();
   Point2i arrival = enemy.GetCenter();
@@ -92,10 +92,10 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
     // is there a collision with another character ?
     FOR_ALL_CHARACTERS(team, other_character) {
       if ( &(*other_character) != &shooter
-	   && &(*other_character) != &enemy ) {
+           && &(*other_character) != &enemy ) {
 
-	if ( other_character->GetTestRect().Contains(pos) )
-	  return false;
+        if ( other_character->GetTestRect().Contains(pos) )
+          return false;
 
       }
     }
@@ -109,14 +109,14 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
     if (abs(diff_x) > abs(diff_y)) {
       if (pos.x < arrival.x)
-	delta_pos.x = 1;   //Increment x
+        delta_pos.x = 1;   //Increment x
       else
-	delta_pos.x = -1;
+        delta_pos.x = -1;
     } else {
       if (pos.y < arrival.y)
-	delta_pos.y = 1;
+        delta_pos.y = 1;
       else
-	delta_pos.y = -1;
+        delta_pos.y = -1;
     }
 
     pos += delta_pos;
@@ -153,7 +153,7 @@ bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
 
   // Check the angle
   double angle = BorneDouble(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
-			     - (ActiveTeam().GetWeapon().GetMinAngle()) );
+                             - (ActiveTeam().GetWeapon().GetMinAngle()) );
 
   if (AbsReel(angle-m_angle) > 0.08726/* 5 degree */) {
     // angle is too wide for the weapon
@@ -181,9 +181,9 @@ const Character* AIShootModule::FindProximityEnemy(const Character& shooter) con
   }
   return NULL;
   //     if (m_nearest_enemy == NULL
-  // 	|| ( character->GetCenter().Distance( ActiveCharacter().GetCenter()) <
-  // 	     m_nearest_enemy->GetCenter().Distance( ActiveCharacter().GetCenter()))
-  // 	)
+  //         || ( character->GetCenter().Distance( ActiveCharacter().GetCenter()) <
+  //              m_nearest_enemy->GetCenter().Distance( ActiveCharacter().GetCenter()))
+  //         )
   //       m_nearest_enemy = &(*character);
   //   }
   //   ASSERT(m_nearest_enemy != NULL);
@@ -287,7 +287,7 @@ const Character* AIShootModule::FindEnemy()
     m_current_strategy = NEAR_FROM_ENEMY;
 
     GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injure "
-				     + m_enemy->GetName());
+                                     + m_enemy->GetName());
 
     if ( SelectProximityWeapon(*m_enemy) ) {
       m_angle = 0;
@@ -303,7 +303,7 @@ const Character* AIShootModule::FindEnemy()
     m_current_strategy = SHOOT_FROM_POINT;
 
     GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" will shoot "
-				     + m_enemy->GetName());
+                                     + m_enemy->GetName());
 
     // we choose between gun, sniper_rifle, shotgun and submachine gun
     if ( SelectFiringWeapon(m_angle) ) {
@@ -363,14 +363,14 @@ bool AIShootModule::Refresh(uint current_time)
     // We are near enough of an enemy (perhaps not the first one we have choosen)
     FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
       if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
-	         abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
+                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
         //if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 50) {
-	      if (&(*character) != m_enemy) {
-	        GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
-					   + (*character).GetName());
-	      }
- 	      m_enemy = &(*character);
- 	      Shoot();
+              if (&(*character) != m_enemy) {
+                GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
+                                                 + (*character).GetName());
+              }
+               m_enemy = &(*character);
+               Shoot();
       }
     }
     break;

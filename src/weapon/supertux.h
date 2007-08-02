@@ -69,7 +69,7 @@ class TuxLauncher : public WeaponLauncher
   private:
     SuperTux * current_tux;
   public:
-    TuxLauncher(); 
+    TuxLauncher();
     void EndOfTurn() const; // should be called only by SuperTux
     bool IsInUse() const;
 

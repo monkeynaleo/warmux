@@ -37,10 +37,10 @@ private:
 
 public:
   ListBoxItem(const std::string& _label,
-	      Font::font_size_t font_size,
-	      Font::font_style_t font_style,
-	      const std::string& value,
-	      const Color& color = white_color);
+              Font::font_size_t font_size,
+              Font::font_style_t font_style,
+              const std::string& value,
+              const Color& color = white_color);
 
   const std::string& GetLabel() const;
   const std::string& GetValue() const;
@@ -84,18 +84,18 @@ public:
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
   void Update(const Point2i &mousePosition,
-	      const Point2i &lastMousePosition,
-	      Surface& surf);
+              const Point2i &lastMousePosition,
+              Surface& surf);
 
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
   void AddItem(bool selected, const std::string &label,
-	       const std::string &value,
-	       Font::font_size_t fsize = Font::FONT_SMALL,
-	       Font::font_style_t fstyle = Font::FONT_NORMAL,
-	       const Color& color = white_color);
+               const std::string &value,
+               Font::font_size_t fsize = Font::FONT_SMALL,
+               Font::font_style_t fstyle = Font::FONT_NORMAL,
+               const Color& color = white_color);
   void Sort() const;
 
   int MouseIsOnWhichItem(const Point2i &mousePosition) const;

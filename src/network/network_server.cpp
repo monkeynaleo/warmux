@@ -71,31 +71,31 @@ void NetworkServer::ReceiveActions()
 
     while (SDLNet_CheckSockets(socket_set, 100) == 0 && ThreadToContinue()) //Loop while nothing is received
       if (server_socket)
-	{
-	  // Check for an incoming connection
-	  TCPsocket incoming;
-	  incoming = SDLNet_TCP_Accept(server_socket);
-	  if (incoming)
-	    {
-	      cpu.push_back(new DistantComputer(incoming));
-	      printf("New client connected\n");
-	      if (GetNbConnectedPlayers() >= max_nb_players)
-		RejectIncoming();
-	    }
-	  SDL_Delay(100);
-	}
+      {
+        // Check for an incoming connection
+        TCPsocket incoming;
+        incoming = SDLNet_TCP_Accept(server_socket);
+        if (incoming)
+        {
+          cpu.push_back(new DistantComputer(incoming));
+          printf("New client connected\n");
+          if (GetNbConnectedPlayers() >= max_nb_players)
+            RejectIncoming();
+        }
+        SDL_Delay(100);
+      }
 
     std::list<DistantComputer*>::iterator dst_cpu;
     for (dst_cpu = cpu.begin();
-	 dst_cpu != cpu.end() && ThreadToContinue();
-	 dst_cpu++)
+         dst_cpu != cpu.end() && ThreadToContinue();
+         dst_cpu++)
     {
       if((*dst_cpu)->force_disconnect)
       {
         dst_cpu = CloseConnection(dst_cpu);
         continue;
       }
-        
+
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
         // Read the size of the packet
@@ -108,30 +108,30 @@ void NetworkServer::ReceiveActions()
           continue;
 
 #ifdef LOG_NETWORK
-	if (fin != 0) {
-	  int tmp = 0xFFFFFFFF;
-	  write(fin, &packet_size, 4);
-	  write(fin, packet, packet_size);
-	  write(fin, &tmp, 4);
-	}
+        if (fin != 0) {
+          int tmp = 0xFFFFFFFF;
+          write(fin, &packet_size, 4);
+          write(fin, packet, packet_size);
+          write(fin, &tmp, 4);
+        }
 #endif
 
         Action* a = new Action(packet, (*dst_cpu));
         MSG_DEBUG("network.traffic","Received action %s",
-		  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+                        ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
         // Repeat the packet to other clients:
         if (a->GetType() != Action::ACTION_RULES_SEND_VERSION
-	    && a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
-	    && a->GetType() != Action::ACTION_CHAT_MESSAGE)
-	  for (std::list<DistantComputer*>::iterator client = cpu.begin();
-	       client != cpu.end();
-	       client++)
-	    if (client != dst_cpu)
-	      {
-		(*client)->SendDatas(packet, packet_size);
-	      }
-	
+            && a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
+            && a->GetType() != Action::ACTION_CHAT_MESSAGE)
+          for (std::list<DistantComputer*>::iterator client = cpu.begin();
+               client != cpu.end();
+               client++)
+            if (client != dst_cpu)
+            {
+              (*client)->SendDatas(packet, packet_size);
+                  }
+
         ActionHandler::GetInstance()->NewAction(a, false);
         free(packet);
       }
@@ -168,10 +168,12 @@ Network::connection_state_t NetworkServer::ServerStart(const std::string &port)
   printf("\nConnected\n");
   socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
+  printf("Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
   return Network::CONNECTED;
 }
 
-std::list<DistantComputer*>::iterator NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
+std::list<DistantComputer*>::iterator
+NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
   printf("Client disconnected\n");
   delete *closed;
@@ -240,13 +242,13 @@ const uint NetworkServer::GetNbInitializedPlayers() const
 const uint NetworkServer::GetNbReadyPlayers() const
 {
   uint r = 0;
-  
+
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
        client != cpu.end();
-       client++) {    
+       client++) {
     if ((*client)->GetState() == DistantComputer::STATE_READY)
       r++;
   }
-  
+
   return r;
 }

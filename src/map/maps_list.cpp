@@ -289,9 +289,9 @@ MapsList::MapsList()
     while ((name = FolderSearchNext(f)) != NULL) LoadOneMap(dirname, name);
     CloseFolder(f);
   } else {
-	std::cerr << std::endl
-		<< Format(_("Unable to open maps directory (%s)!"), dirname.c_str())
-		<< std::endl;
+        std::cerr << std::endl
+          << Format(_("Unable to open maps directory (%s)!"), dirname.c_str())
+          << std::endl;
   }
 
   std::cout << std::endl << std::endl;
@@ -315,7 +315,7 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
 
   std::string fullname = dir + map_name;
   if (!IsFolderExist(fullname))
-	  return;
+          return;
 
   InfoMap nv_terrain(map_name, fullname + PATH_SEPARATOR);
 

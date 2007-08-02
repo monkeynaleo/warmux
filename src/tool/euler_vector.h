@@ -21,14 +21,14 @@
 #define EULER_VECTOR_H
 
 class EulerVector{
-	public:
-		double x0, x1, x2;
+  public:
+    double x0, x1, x2;
 
-		EulerVector() :
+    EulerVector() :
                   x0(0.0), x1(0.0), x2(0.0)
                 { };
-		void Clear();
-		void ComputeOneEulerStep(double a, double b, double c, double d, double dt);
+    void Clear();
+    void ComputeOneEulerStep(double a, double b, double c, double d, double dt);
 };
 
 #endif

@@ -130,8 +130,8 @@ public:
 
   // Collision management
   void SetCollisionModel(bool goes_through_wall,
-			 bool collides_with_characters,
-			 bool collides_with_objects);
+                         bool collides_with_characters,
+                         bool collides_with_objects);
   void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
   const PhysicalObj* GetOverlappingObject() const;
   virtual bool IsOverlapping(const PhysicalObj* obj) const;

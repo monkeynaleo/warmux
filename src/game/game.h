@@ -49,7 +49,7 @@ public:
   void UnloadDatas() const;
 
   int NbrRemainingTeams() const;
-  
+
   bool IsGameFinished() const;
   bool IsGamePaused() const;
   bool IsGameLaunched() const;

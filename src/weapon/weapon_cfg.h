@@ -40,8 +40,8 @@ public:
 //-----------------------------------------------------------------------------
 
 class WeaponConfig : public EmptyWeaponConfig
-{ 
-public: 
+{
+public:
   uint damage;
 public:
   WeaponConfig();
@@ -57,15 +57,15 @@ public:
   uint timeout;
   bool allow_change_timeout;
   uint blast_range ;
-  uint blast_force ;  
+  uint blast_force ;
   uint explosion_range;
   uint particle_range;
 public:
   ExplosiveWeaponConfig();
   virtual ~ExplosiveWeaponConfig() {};
    virtual void LoadXml(xmlpp::Element *elem);
-   
-   
+
+
 };
 
 //-----------------------------------------------------------------------------

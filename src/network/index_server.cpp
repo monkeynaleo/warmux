@@ -138,11 +138,11 @@ void IndexServer::Disconnect()
 
 static ssize_t getline(std::string& line, std::ifstream& file)
 {
-	line.clear();
-	std::getline(file, line);
-	if(file.eof())
-		return -1;
-	return line.size();
+  line.clear();
+  std::getline(file, line);
+  if(file.eof())
+    return -1;
+  return line.size();
 }
 
 bool IndexServer::GetServerList()
@@ -162,7 +162,7 @@ bool IndexServer::GetServerList()
   std::ifstream fin;
   fin.open(server_file.c_str(), std::ios::in);
   if(!fin)
-  	return false;
+          return false;
 
   /*char * line = NULL;
   size_t len = 0;*/

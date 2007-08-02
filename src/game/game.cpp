@@ -152,7 +152,7 @@ void Game::Start()
   }
 
   jukebox.StopAll();
-  
+
   if (!err)
   // * When debug is disabled : only show the result menu if game
   // have 'regularly' finished (only one survivor or timeout reached)

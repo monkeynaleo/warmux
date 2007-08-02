@@ -36,7 +36,7 @@ class Medkit : public ObjBox//public PhysicalObj
     static int nbr_health;
     //static int start_life_points;
 
-    //bool parachute; 
+    //bool parachute;
     //Sprite *anim;
 
   private:

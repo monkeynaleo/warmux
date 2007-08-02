@@ -72,7 +72,7 @@ NetworkMenu::NetworkMenu() :
   // ##  TEAM SELECTION
   // ################################################
   team_box = new NetworkTeamsSelectionBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP,
-					      mainBoxWidth, TEAMS_BOX_H));
+                                              mainBoxWidth, TEAMS_BOX_H));
   widgets.AddWidget(team_box);
 
   // ################################################
@@ -80,11 +80,11 @@ NetworkMenu::NetworkMenu() :
   // ################################################
   if(Network::GetInstance()->IsServer()) {
     map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-					      mainBoxWidth, mapBoxHeight));
+                                              mainBoxWidth, mapBoxHeight));
   } else {
     map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-					      mainBoxWidth, mapBoxHeight),
-				   true);
+                                              mainBoxWidth, mapBoxHeight),
+                                   true);
   }
   widgets.AddWidget(map_box);
 
@@ -93,7 +93,7 @@ NetworkMenu::NetworkMenu() :
   // ################################################
 
   options_box = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
-				     mainBoxWidth, OPTIONS_BOX_H), true);
+                                     mainBoxWidth, OPTIONS_BOX_H), true);
   options_box->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
 
   Box* tmp_box = new VBox( Rectanglei(0,0, 200,0), false);
@@ -115,17 +115,17 @@ NetworkMenu::NetworkMenu() :
     tmp_box->AddWidget(mode);
 
     player_number = new SpinButton(_("Max number of players:"), rectZero,
-				   GameMode::GetInstance()->max_teams, 1, 2,
-				   GameMode::GetInstance()->max_teams);
+                                   GameMode::GetInstance()->max_teams, 1, 2,
+                                   GameMode::GetInstance()->max_teams);
 
     tmp_box->AddWidget(player_number);
 
     connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
-				rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
+                                rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(connected_players);
 
     initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-				    rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
+                                    rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(initialized_players);
   }
 
@@ -136,9 +136,9 @@ NetworkMenu::NetworkMenu() :
   // ##  CHAT BOX
   // ################################################
   VBox* chat_box = new VBox(Rectanglei(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
-				       options_box->GetPositionY(),
-				       mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE,
-				       OPTIONS_BOX_H), false);
+                                       options_box->GetPositionY(),
+                                       mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE,
+                                       OPTIONS_BOX_H), false);
   chat_box->SetBorder(Point2i(0,0));
 
   msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
@@ -151,8 +151,8 @@ NetworkMenu::NetworkMenu() :
   tmp2_box->SetMargin(4);
   tmp2_box->SetBorder(Point2i(0,0));
   line_to_send_tbox = new TextBox(" ",
-				  Rectanglei(0, 0, chat_box->GetSizeX()-20, 0),
-				  Font::FONT_SMALL, Font::FONT_NORMAL);
+                                  Rectanglei(0, 0, chat_box->GetSizeX()-20, 0),
+                                  Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp2_box->AddWidget(line_to_send_tbox);
 
   send_txt_bt = new Button(Point2i(0,0), res, "menu/send_txt", true);
@@ -214,8 +214,8 @@ bool NetworkMenu::signal_ok()
     // Check the user have selected a team:
     bool found = false;
     for(std::vector<Team*>::iterator team = teams_list.playing_list.begin();
-		    team != teams_list.playing_list.end();
-		    team++)
+                    team != teams_list.playing_list.end();
+                    team++)
     {
       if((*team)->IsLocal())
       {
@@ -232,15 +232,15 @@ bool NetworkMenu::signal_ok()
     // Wait for the server, and stay in the menu map / team can still be changed
     WaitingForServer();
 
-  } 
+  }
   else if (Network::GetInstance()->IsServer())
   {
     if (teams_list.playing_list.size() <= 1)
     {
       msg_box->NewMessage(Format(ngettext("There is only %i team.",
-					  "There are only %i teams.",
-					  teams_list.playing_list.size()),
-				 teams_list.playing_list.size()), c_red);
+                                          "There are only %i teams.",
+                                          teams_list.playing_list.size()),
+                                 teams_list.playing_list.size()), c_red);
       return false;
     }
     if (Network::GetInstanceServer()->GetNbConnectedPlayers() <= 1)
@@ -301,7 +301,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
       int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers();
       std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
       if(connected_players->GetText() != pl)
-	connected_players->SetText(pl);
+        connected_players->SetText(pl);
     }
 
     if (initialized_players != NULL) {
@@ -309,16 +309,16 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
       int nbr = Network::GetInstanceServer()->GetNbInitializedPlayers();
       std::string pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
       if (initialized_players->GetText() != pl) {
-	initialized_players->SetText(pl);
-	msg_box->NewMessage(pl, c_red);
-	if (Network::GetInstanceServer()->GetNbConnectedPlayers() - 
-	    Network::GetInstanceServer()->GetNbInitializedPlayers() == 1 
-	    && Network::GetInstanceServer()->GetNbConnectedPlayers() >= 1) {
-	  msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
-	}
-	else if (Network::GetInstanceServer()->GetNbConnectedPlayers() == 1) {
-	  msg_box->NewMessage(_("You are alone :-/"), c_red);
-	}
+        initialized_players->SetText(pl);
+        msg_box->NewMessage(pl, c_red);
+        if (Network::GetInstanceServer()->GetNbConnectedPlayers() -
+            Network::GetInstanceServer()->GetNbInitializedPlayers() == 1
+            && Network::GetInstanceServer()->GetNbConnectedPlayers() >= 1) {
+          msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
+        }
+        else if (Network::GetInstanceServer()->GetNbConnectedPlayers() == 1) {
+          msg_box->NewMessage(_("You are alone :-/"), c_red);
+        }
       }
     }
 
@@ -392,41 +392,41 @@ void NetworkMenu::WaitingForServer()
   {
     // Poll and treat events
     SDL_Event event;
-     
+
     while (SDL_PollEvent(&event))
     {
       Point2i mousePosition(event.button.x, event.button.y);
-	   
+
       if (event.type == SDL_QUIT) {
-	Menu::mouse_cancel();
+        Menu::mouse_cancel();
       } else if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.sym)
-	  {
-	  case SDLK_ESCAPE:
-	    Menu::mouse_cancel();
-	    break;
-	  case SDLK_RETURN:
-	    SendChatMsg();
-	    break;
-	  case SDLK_F10:
-	    AppWormux::GetInstance()->video->ToggleFullscreen();
-	    break;
-	  default:
-	    widgets.SendKey(event.key.keysym);
-	    break;
-	  }
+          {
+          case SDLK_ESCAPE:
+            Menu::mouse_cancel();
+            break;
+          case SDLK_RETURN:
+            SendChatMsg();
+            break;
+          case SDLK_F10:
+            AppWormux::GetInstance()->video->ToggleFullscreen();
+            break;
+          default:
+            widgets.SendKey(event.key.keysym);
+            break;
+          }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
-	if (b_cancel->Contains(mousePosition))
-	  Menu::mouse_cancel();
-	
-	if (send_txt_bt->Contains(mousePosition))
-	  SendChatMsg();
+        if (b_cancel->Contains(mousePosition))
+          Menu::mouse_cancel();
+
+        if (send_txt_bt->Contains(mousePosition))
+          SendChatMsg();
       }
-    } 
+    }
 
     Menu::Display(mousePosition);
     widgets.SetFocusOn(line_to_send_tbox);
 
-  } while (Network::GetInstance()->GetState() == Network::NETWORK_MENU_OK && 
-	   Network::GetInstance()->IsConnected());
+  } while (Network::GetInstance()->GetState() == Network::NETWORK_MENU_OK &&
+           Network::GetInstance()->IsConnected());
 }

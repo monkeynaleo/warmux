@@ -43,7 +43,7 @@ class GrappleConfig : public EmptyWeaponConfig
 class Grapple : public Weapon
 {
   private:
-    typedef struct 
+    typedef struct
     {
       Point2i pos;
       double angle;
@@ -96,10 +96,10 @@ class Grapple : public Weapon
     Grapple();
     void Draw();
     virtual void NotifyMove(bool collision);
-    
+
     virtual void ActionStopUse();
     virtual void SignalTurnEnd();
-    
+
     GrappleConfig& cfg();
 
     // Attaching and dettaching nodes rope
@@ -107,8 +107,8 @@ class Grapple : public Weapon
     void AttachRope(const Point2i& contact_point);
     void DetachRope();
 
-    void AttachNode(const Point2i& contact_point, 
-		    double angle, 
+    void AttachNode(const Point2i& contact_point,
+		    double angle,
 		    int sense);
     void DetachNode();
     void SetRopeSize(double length) const;
@@ -117,7 +117,7 @@ class Grapple : public Weapon
     virtual void HandleKeyPressed_Up();
     virtual void HandleKeyRefreshed_Up();
     virtual void HandleKeyReleased_Up();
-    
+
     virtual void HandleKeyPressed_Down();
     virtual void HandleKeyRefreshed_Down();
     virtual void HandleKeyReleased_Down();
@@ -125,7 +125,7 @@ class Grapple : public Weapon
     virtual void HandleKeyPressed_MoveRight();
     virtual void HandleKeyRefreshed_MoveRight();
     virtual void HandleKeyReleased_MoveRight();
-    
+
     virtual void HandleKeyPressed_MoveLeft();
     virtual void HandleKeyRefreshed_MoveLeft();
     virtual void HandleKeyReleased_MoveLeft();

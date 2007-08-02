@@ -94,11 +94,11 @@ public:
   // mode: xml text of data/game_mode/<mode>.xml
   // mode_objects: xml text of data/game_mode/<mode>_objects.xml
   bool LoadFromString(const std::string& game_mode_name,
-		      const std::string& mode,
-		      const std::string& mode_objects);
+                      const std::string& mode,
+                      const std::string& mode_objects);
 
   bool ExportToString(std::string& mode,
-		      std::string& mode_objects) const;
+                      std::string& mode_objects) const;
 
   const XmlReader* GetXmlObjects() const; // for object_cfg
 

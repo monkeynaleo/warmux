@@ -18,8 +18,8 @@
  ******************************************************************************
  * Fake Network layer for Wormux.
  *****************************************************************************/
- 
-#include "network_local.h" 
+
+#include "network_local.h"
 
 NetworkLocal::~NetworkLocal() {}
 

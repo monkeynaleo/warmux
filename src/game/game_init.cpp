@@ -50,11 +50,11 @@
 void GameInit::InitGameData_NetServer()
 {
   Network::GetInstanceServer()->RejectIncoming();
- 
+
   randomSync.Init();
 
   SendGameMode();
-  
+
   Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
   Network::GetInstance()->SendNetworkState();
 
@@ -65,12 +65,12 @@ void GameInit::EndInitGameData_NetServer()
 {
   // Wait for all clients to be ready to play
   while (Network::IsConnected()
-	 && Network::GetInstanceServer()->GetNbReadyPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())
+         && Network::GetInstanceServer()->GetNbReadyPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())
   {
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(200);
   }
-  
+
   // Let's play !
   Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
   Network::GetInstance()->SendNetworkState();
@@ -85,7 +85,7 @@ void GameInit::EndInitGameData_NetClient()
   // Waiting for other clients
   std::cout << Network::GetInstance()->GetState() << " : Waiting for people over the network" << std::endl;
   while (Network::GetInstance()->GetState() == Network::NETWORK_READY_TO_PLAY
-	 && Network::IsConnected())
+         && Network::IsConnected())
   {
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(100);
@@ -198,7 +198,7 @@ void GameInit::Init()
     EndInitGameData_NetClient();
 
   GameLoop::GetInstance()->Init();
-  
+
   // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
   Time::GetInstance()->Reset();
 
@@ -206,9 +206,9 @@ void GameInit::Init()
   Team* team = teams_list.GetNextTeam();
   Character* first_to_play;
   if(team->GetNbCharacters() > 1)
-	first_to_play = team->FindByIndex(1);
+        first_to_play = team->FindByIndex(1);
   else
-	first_to_play = team->FindByIndex(0);
+        first_to_play = team->FindByIndex(0);
   camera.FollowObject(first_to_play, true, true, true);
 }
 
