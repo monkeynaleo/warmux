@@ -353,7 +353,7 @@ const Surface& Mouse::GetSurfaceFromPointer(pointer_t pointer) const
   case POINTER_AIM:
     return pointer_aim;
   case POINTER_FIRE:
-    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT)
+    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
       return pointer_fire_left; // left hand to shoot on the right
     else
       return pointer_fire_right;
@@ -502,7 +502,7 @@ void Mouse::Draw() const
       // Fire pointer (used by air attack)
     case POINTER_FIRE:
       if(ActiveTeam().IsLocal()) {
-        if (ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT) {
+        if (ActiveCharacter().GetDirection() == DIRECTION_LEFT) {
           // right hand to shoot on the left
           AppWormux::GetInstance()->video->window.Blit( pointer_fire_right,
                                                        Point2i(GetPosition().x-7, GetPosition().y-9 ));

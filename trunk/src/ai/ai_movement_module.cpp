@@ -42,7 +42,7 @@
 void AIMovementModule::MakeStep() const
 {
   if(ActiveCharacter().IsImmobile()) {
-    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
+    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
       MoveActiveCharacterRight();
     }  else {
       MoveActiveCharacterLeft();
@@ -85,10 +85,10 @@ bool AIMovementModule::ObstacleHeight(int& height) const
 
 bool AIMovementModule::RiskGoingOutOfMap() const
 {
-  if ( ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT &&
+  if ( ActiveCharacter().GetDirection() == DIRECTION_LEFT &&
        ActiveCharacter().GetX() <= 5 ) {
     return true;
-  } else if ( ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT &&
+  } else if ( ActiveCharacter().GetDirection() == DIRECTION_RIGHT &&
               world.GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
     return true;
   }
@@ -152,7 +152,7 @@ void AIMovementModule::EndOfJump()
   if ( last_position.GetX() == ActiveCharacter().GetPosition().GetX() ) {
     // we have not moved since last movement
 
-    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
+    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
       max_reachable_x = ActiveCharacter().GetPosition().GetX();
     } else {
       min_reachable_x = ActiveCharacter().GetPosition().GetX();
@@ -248,15 +248,15 @@ void AIMovementModule::InverseDirection(bool completely_blocked)
 {
   MSG_DEBUG("ai.move", "Inverse direction");
 
-  if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
+  if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
 
-    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
+    ActiveCharacter().SetDirection(DIRECTION_LEFT);
     if (completely_blocked)
       max_reachable_x = ActiveCharacter().GetPosition().GetX();
 
   } else {
 
-    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
+    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     if (completely_blocked)
       min_reachable_x = ActiveCharacter().GetPosition().GetX();
 

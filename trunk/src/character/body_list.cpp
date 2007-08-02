@@ -23,6 +23,7 @@
 #include <string>
 #include <iostream>
 #include "body.h"
+#include "movement.h"
 #include "game/config.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
