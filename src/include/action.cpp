@@ -205,18 +205,15 @@ void Action::Push(const std::string& val)
     // Fix-me : We are reading out of the c_str() buffer there :
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
     strncpy((char*)&tmp, ch, 4);
-    var.push_back(tmp);
     ch += 4;
-    count -= 4;
 #else
     char* c_tmp = (char*)&tmp;
     c_tmp +=3;
     for(int i=0; i < 4; i++)
       *(c_tmp--) = *(ch++);
-
+#endif
     var.push_back(tmp);
     count -= 4;
-#endif
   }
   MSG_DEBUG( "action", " (%s) Pushing string : %s",
   ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val.c_str());
@@ -254,15 +251,13 @@ double Action::PopDouble()
   tmp[0] = var.front();
   var.pop_front();
   tmp[1] = var.front();
-  var.pop_front();
-  memcpy(&val, tmp, 8);
 #else
   tmp[1] = var.front();
   var.pop_front();
   tmp[0] = var.front();
+#endif
   var.pop_front();
   memcpy(&val, tmp, 8);
-#endif
 
   MSG_DEBUG( "action", " (%s) Poping double : %f",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
@@ -300,18 +295,15 @@ std::string Action::PopString()
     char tmp_str[5] = {0, 0, 0, 0, 0};
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
     memcpy(tmp_str, &tmp, 4);
-    str += tmp_str;
-    length -= 4;
 #else
     char* c_tmp_str = (char*)(&tmp_str) + 3;
     char* c_tmp = (char*)&tmp;
     for(int i=0; i < 4; i++)
       *(c_tmp_str--) = *(c_tmp++);
-
+#endif
     str += tmp_str;
     length -= 4;
-#endif
-    }
+  }
   MSG_DEBUG( "action", " (%s) Poping string : %s",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), str.c_str());
   return str;
