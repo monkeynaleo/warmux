@@ -93,13 +93,13 @@ bool Font::Load (const std::string& filename, int size) {
   bool ok = false;
 
   if( IsFileExist(filename) ){
-      m_font = TTF_OpenFont(filename.c_str(), size);
-      ok = (m_font != NULL);
+    m_font = TTF_OpenFont(filename.c_str(), size);
+    ok = (m_font != NULL);
   }
 
   if( !ok ){
-      std::cout << "Error: Font " << filename << " can't be found!" << std::endl;
-      return false;
+    std::cout << "Error: Font " << filename << " can't be found!" << std::endl;
+    return false;
   }
 
   TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
@@ -124,33 +124,34 @@ void Font::Write(const Point2i& pos, const Surface &surface) const {
   world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
 }
 
-void Font::WriteLeft(const Point2i &pos, const std::string &txt,  const Color &color){
+void Font::WriteLeft(const Point2i &pos, const std::string &txt,
+                     const Color &color){
   Surface surface(Render(txt, color, true));
   Write(pos, surface);
 }
 
 void Font::WriteLeftBottom(const Point2i &pos, const std::string &txt,
-			     const Color &color){
+                           const Color &color){
   Surface surface(Render(txt, color, true));
   Write(pos - Point2i(0, surface.GetHeight()), surface);
 }
 
 void Font::WriteRight(const Point2i &pos, const std::string &txt,
-		        const Color &color){
+                      const Color &color){
   Surface surface(Render(txt, color, true));
   Write(pos - Point2i(surface.GetWidth(), 0), surface);
 }
 
 void Font::WriteCenter (const Point2i &pos, const std::string &txt,
-			 const Color &color){
+                        const Color &color){
   Surface surface(Render(txt, color, true));
   Write(pos - Point2i(surface.GetWidth()/2, surface.GetHeight()), surface);
 }
 
 void Font::WriteCenterTop(const Point2i &pos, const std::string &txt,
-		const Color &color){
-	Surface surface(Render(txt, color, true));
-	Write(pos - Point2i(surface.GetWidth()/2, 0), surface);
+                          const Color &color){
+  Surface surface(Render(txt, color, true));
+  Write(pos - Point2i(surface.GetWidth()/2, 0), surface);
 }
 
 Surface Font::CreateSurface(const std::string &txt, const Color &color){
@@ -201,10 +202,11 @@ int Font::GetHeight (const std::string &str) const {
 }
 
 Point2i Font::GetSize(const std::string &txt) const {
-	return Point2i(GetWidth(txt), GetHeight(txt));
+  return Point2i(GetWidth(txt), GetHeight(txt));
 }
 
-Surface Font::GenerateSurface(const std::string &txt, const Color &color, font_size_t font_size, font_style_t font_style)
+Surface Font::GenerateSurface(const std::string &txt, const Color &color,
+                              font_size_t font_size, font_style_t font_style)
 {
   return Surface(Font::GetInstance(font_size, font_style)->CreateSurface(txt, color));
 }

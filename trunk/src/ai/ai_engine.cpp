@@ -30,7 +30,7 @@
 
 
 AIengine * AIengine::singleton = NULL;
-  
+
 AIengine::AIengine()
 {
   std::cout << "o Artificial Intelligence engine initialization" << std::endl;
@@ -53,5 +53,5 @@ void AIengine::Refresh() const
   if (ActiveCharacter().GetTeam().IsLocalAI()) {
     AIStupidEngine::GetInstance()->Refresh();
   }
-  
+
 }

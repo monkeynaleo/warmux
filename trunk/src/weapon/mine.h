@@ -61,10 +61,10 @@ private:
 };
 
 class MineConfig : public ExplosiveWeaponConfig
-{ 
+{
   private:
     static MineConfig * singleton;
-  public: 
+  public:
     uint escape_time;
     double detection_range;
     double speed_detection;

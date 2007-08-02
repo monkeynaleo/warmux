@@ -61,7 +61,7 @@
 
 uint GameLoop::last_unique_id = 0;
 
-void GameLoop::ResetUniqueIds() 
+void GameLoop::ResetUniqueIds()
 {
   last_unique_id = 0;
 }
@@ -69,7 +69,7 @@ void GameLoop::ResetUniqueIds()
 std::string GameLoop::GetUniqueId()
 {
   char buffer[16];
-  snprintf(buffer, 16, "%#x", last_unique_id); 
+  snprintf(buffer, 16, "%#x", last_unique_id);
   last_unique_id++;
   return std::string(buffer);
 }
@@ -317,7 +317,7 @@ void GameLoop::Run()
   {
     MainLoop();
   } while( !Game::GetInstance()->IsGameFinished()
-	   && !Time::GetInstance()->IsGamePaused());
+           && !Time::GetInstance()->IsGamePaused());
 
   // the game is finished but we won't go at the results screen to fast!
   if (Game::GetInstance()->NbrRemainingTeams() <= 1) {
@@ -413,24 +413,24 @@ void GameLoop::RefreshClock()
         if (duration <= 1) {
 
           if (IsAnythingMoving()) {
-	    duration = 1;
-	    // Hack to be sure that nothing is moving since enough time
-	    // it avoids giving hand to another team during the end of an explosion for example
-	    break;
-	  }
+            duration = 1;
+            // Hack to be sure that nothing is moving since enough time
+            // it avoids giving hand to another team during the end of an explosion for example
+            break;
+          }
 
-	  if (Game::GetInstance()->IsGameFinished()) {
-	    duration--;
-	    break;
-	  }
+          if (Game::GetInstance()->IsGameFinished()) {
+            duration--;
+            break;
+          }
 
           if (give_objbox && ObjBox::NewBox()) {
             give_objbox = false;
-	    break;
+            break;
           }
-	  else {
-	    ActiveTeam().AccessWeapon().Deselect();
-	    SetState(PLAYING);
+          else {
+            ActiveTeam().AccessWeapon().Deselect();
+            SetState(PLAYING);
             break;
           }
         } else {
@@ -484,35 +484,35 @@ void GameLoop::__SetState_PLAYING()
       teams_list.NextTeam();
 
       if ( GameMode::GetInstance()->allow_character_selection==GameMode::CHANGE_ON_END_TURN
-	   || GameMode::GetInstance()->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
-	{
-	  ActiveTeam().NextCharacter();
-	}
+           || GameMode::GetInstance()->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
+        {
+          ActiveTeam().NextCharacter();
+        }
 
       camera.FollowObject (&ActiveCharacter(), true, true);
 
       if ( Network::GetInstance()->IsTurnMaster() )
-	{
-	  // Tell to clients which character in the team is now playing
-	  Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
-	  playing_char.StoreActiveCharacter();
-	  Network::GetInstance()->SendAction(&playing_char);
+        {
+          // Tell to clients which character in the team is now playing
+          Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
+          playing_char.StoreActiveCharacter();
+          Network::GetInstance()->SendAction(&playing_char);
 
-	  printf("Action_ChangeCharacter:\n");
-	  printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());
-	  printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
-	  printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
-	  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
-	}
+          printf("Action_ChangeCharacter:\n");
+          printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());
+          printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
+          printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
+          printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
+        }
 
       // Are we turn master for next turn ?
       if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-	Network::GetInstance()->SetTurnMaster(true);
-      else 
-	Network::GetInstance()->SetTurnMaster(false);
+        Network::GetInstance()->SetTurnMaster(true);
+      else
+        Network::GetInstance()->SetTurnMaster(false);
     }
 
-  give_objbox = true; //hack make it so no more than one objbox per turn  
+  give_objbox = true; //hack make it so no more than one objbox per turn
 
   // Center the cursor
   Mouse::GetInstance()->CenterPointer();

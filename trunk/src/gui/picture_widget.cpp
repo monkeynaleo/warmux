@@ -37,7 +37,7 @@ PictureWidget::PictureWidget (const Rectanglei &rect, const std::string& resourc
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   Surface tmp = resource_manager.LoadImage(res, resource_id);
-  SetSurface(tmp, false);  
+  SetSurface(tmp, false);
   resource_manager.UnLoadXMLProfile( res);
 }
 
@@ -57,8 +57,8 @@ void PictureWidget::SetSurface(const Surface& s, bool enable_scaling)
   spr = new Sprite(s);
   if (enable_scaling) {
     float scale = std::min( float(GetSizeY())/spr->GetHeight(),
-			    float(GetSizeX())/spr->GetWidth() ) ;
-  
+                            float(GetSizeX())/spr->GetWidth() ) ;
+
     spr->Scale (scale, scale);
   }
 }
@@ -74,7 +74,7 @@ void PictureWidget::SetNoSurface()
 }
 
 void PictureWidget::Draw(const Point2i &/*mousePosition*/,
-			 Surface& surf) const
+                         Surface& surf) const
 {
   if (spr != NULL) {
     int x = GetPositionX() + ( GetSizeX()/2 ) - (spr->GetWidth()/2);
@@ -85,7 +85,7 @@ void PictureWidget::Draw(const Point2i &/*mousePosition*/,
     // Draw a transparency mask
     if (disabled) {
       surf.BoxColor(Rectanglei(x,y,spr->GetWidth(),spr->GetHeight()),
-		    defaultOptionColorBox);
+                    defaultOptionColorBox);
     }
   }
 }

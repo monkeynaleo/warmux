@@ -39,11 +39,11 @@ private:
 
 public:
   ButtonText(const Point2i& _position,
-	     const Profile *res_profile,
-	     const std::string& resource_id,
-	     const std::string &new_text,
-	     Font::font_size_t font_size,
-	     Font::font_style_t font_style);
+             const Profile *res_profile,
+             const std::string& resource_id,
+             const std::string &new_text,
+             Font::font_size_t font_size,
+             Font::font_style_t font_style);
   ~ButtonText();
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;

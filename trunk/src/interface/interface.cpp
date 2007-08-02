@@ -210,7 +210,7 @@ void Interface::DrawWeaponInfo() const
 void Interface::DrawTimeInfo() const
 {
   AppWormux * app = AppWormux::GetInstance();
-  Point2i turn_time_pos = (app->video->window.GetSize() - clock_background.GetSize()) * Point2d(0.5, 1) + 
+  Point2i turn_time_pos = (app->video->window.GetSize() - clock_background.GetSize()) * Point2d(0.5, 1) +
       Point2i(0, - GetHeight() + clock_background.GetHeight());
   Rectanglei dr(turn_time_pos, clock_background.GetSize());
 

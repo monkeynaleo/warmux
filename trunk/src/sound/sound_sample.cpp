@@ -23,12 +23,12 @@
 #include "sound_sample.h"
 #include "jukebox.h"
 
-SoundSample::SoundSample() : channel(-1) 
+SoundSample::SoundSample() : channel(-1)
 {}
 
 void SoundSample::Play(const std::string& category,
-		       const std::string& sample,
-		       const int loop)
+                       const std::string& sample,
+                       const int loop)
 {
   channel = jukebox.Play(category, sample, loop);
 }

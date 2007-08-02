@@ -56,9 +56,9 @@ private:
   PictureWidget *team_picture;
 public:
   ResultBox(const Rectanglei &rect, bool _visible,
-            const char* type_name, 
-	    Font::font_size_t font_size,
-	    Font::font_style_t font_style,
+            const char* type_name,
+            Font::font_size_t font_size,
+            Font::font_style_t font_style,
             const Point2i& type_size,
             const Point2i& name_size,
             const Point2i& score_size);
@@ -70,9 +70,9 @@ public:
 };
 
 ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
-                     const char *type_name, 
-		     Font::font_size_t font_size,
-		     Font::font_style_t font_style,
+                     const char *type_name,
+                     Font::font_size_t font_size,
+                     Font::font_style_t font_style,
                      const Point2i& type_size,
                      const Point2i& name_size,
                      const Point2i& score_size)
@@ -192,25 +192,25 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
 
     winner_box = new VBox(Rectanglei(x, y, 240, 0), true);
     winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 240,1), Font::FONT_BIG, Font::FONT_BOLD,
-				    white_color, true));
+                                    white_color, true));
     PictureWidget* winner_logo = new PictureWidget( Rectanglei(0,0,64,64));
     winner_logo->SetSurface(first_team->GetBigFlag());
     winner_box->AddWidget(winner_logo);
     winner_box->AddWidget(new Label(first_team->GetName(), Rectanglei(0,0, 240,1), Font::FONT_BIG, Font::FONT_NORMAL,
-				    white_color, true));
+                                    white_color, true));
 
     std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
     winner_box->AddWidget(new Label(tmp, Rectanglei(0,0, 240,1), Font::FONT_MEDIUM, Font::FONT_NORMAL,
-				    white_color, true));
-    
+                                    white_color, true));
+
     widgets.AddWidget(winner_box);
   }
 
   // Load the podium img
   podium_img = resource_manager.LoadImage(res, "menu/podium");
-  
+
   x+=260;
-				   
+
   //Team selection
   team_box = new HBox(Rectanglei(x, y, 0, max_height), true);
   team_box->SetMargin(DEF_MARGIN);
@@ -264,8 +264,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   statistics_box->AddWidget(biggest_traitor);
 
   most_clumsy = new ResultBox(Rectanglei(0,0,0, max_height),
-			      false, _("Most clumsy"), Font::FONT_BIG, Font::FONT_NORMAL,
-			      type_size, name_size, score_size);
+                              false, _("Most clumsy"), Font::FONT_BIG, Font::FONT_NORMAL,
+                              type_size, name_size, score_size);
   statistics_box->AddWidget(most_clumsy);
 
   most_accurate = new ResultBox(Rectanglei(0,0,0, max_height),
@@ -292,8 +292,8 @@ void ResultsMenu::ComputeTeamsOrder()
     third_team = NULL;
 }
 
-void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_position, 
-				   const Point2i& relative_position) const
+void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_position,
+                                   const Point2i& relative_position) const
 {
   Point2i flag_pos(team.GetFlag().GetWidth()/2, team.GetFlag().GetHeight());
   Point2i position = podium_position + relative_position - flag_pos;
@@ -313,7 +313,7 @@ void ResultsMenu::DrawPodium(const Point2i& position) const
 
   if (second_team)
     DrawTeamOnPodium(*second_team, position, Point2i(20,20));
-  
+
   if (third_team)
     DrawTeamOnPodium(*third_team, position, Point2i(98,42));
 }
@@ -336,9 +336,9 @@ void ResultsMenu::SetResult(int i)
   DrawPodium(Point2i(70,350));
 
   index = i;
-  if (index < 0) 
+  if (index < 0)
     index = results.size()-1;
-  else if (index > (int)results.size()-1) 
+  else if (index > (int)results.size()-1)
     index = 0;
 
   res = results.at(index);
@@ -404,11 +404,11 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   if (team_box->Contains(mousePosition)) {
 
-    if (button == SDL_BUTTON_WHEELDOWN || 
-	(button == SDL_BUTTON_LEFT && bt_prev_team->Contains(mousePosition)))
+    if (button == SDL_BUTTON_WHEELDOWN ||
+        (button == SDL_BUTTON_LEFT && bt_prev_team->Contains(mousePosition)))
       SetResult(index-1);
     else if (button == SDL_BUTTON_WHEELUP ||
-	     (button == SDL_BUTTON_LEFT && bt_next_team->Contains(mousePosition)))
+             (button == SDL_BUTTON_LEFT && bt_next_team->Contains(mousePosition)))
       SetResult(index+1);
   }
 }

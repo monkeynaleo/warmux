@@ -28,19 +28,21 @@
 #include "graphic/polygon_generator.h"
 #include "tool/affine_transform.h"
 
-SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const std::string &resource_id,
-					      const Rectanglei &rect,
-					      int value, int step, int min_value, int max_value)
+SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label,
+                                              const std::string &resource_id,
+                                              const Rectanglei &rect,
+                                              int value, int step,
+                                              int min_value, int max_value)
 {
   position =  rect.GetPosition();
   size = rect.GetSize();
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_image = resource_manager.LoadImage(res, resource_id);
   m_annulus_background = resource_manager.LoadImage(res, "menu/annulus_background");
   m_annulus_foreground = resource_manager.LoadImage(res, "menu/annulus_foreground");
   m_progress_color = resource_manager.LoadColor(res, "menu/annulus_progress_color");
-  resource_manager.UnLoadXMLProfile( res); 
+  resource_manager.UnLoadXMLProfile( res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
@@ -117,33 +119,33 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   txt_value_white->DrawCenterTop(tmp_x, tmp_y - value_h/2);
 
   // 6. and finally the label image
-  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2, 
-			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
+  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2,
+                            GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 }
 
 Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
-  if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {  
-    
+  if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {
+
     m_value += m_step;
     if (m_value > m_max_value) SetValue(m_min_value);
     else SetValue(m_value);
 
-  } else if (button == SDL_BUTTON_RIGHT && Contains(mousePosition)) {  
-    
+  } else if (button == SDL_BUTTON_RIGHT && Contains(mousePosition)) {
+
     m_value -= m_step;
     if (m_value < m_min_value) SetValue(m_max_value);
     else SetValue(m_value);
 
   } else if( button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition) ) {
-    
+
     SetValue(m_value - m_step);
     return this;
-    
+
   } else if( button == SDL_BUTTON_WHEELUP && Contains(mousePosition) ) {
-    
+
     SetValue(m_value + m_step);
     return this;
   }
@@ -160,9 +162,9 @@ int SpinButtonWithPicture::GetValue() const
   return m_value;
 }
 
-void SpinButtonWithPicture::SetValue(int value)  
+void SpinButtonWithPicture::SetValue(int value)
 {
-  m_value = BorneLong(value, m_min_value, m_max_value);  
+  m_value = BorneLong(value, m_min_value, m_max_value);
 
   std::ostringstream value_s;
   value_s << m_value ;

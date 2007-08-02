@@ -44,7 +44,7 @@ void RandomSync::Init(){
     Action a(Action::ACTION_NETWORK_RANDOM_CLEAR);
     Network::GetInstance()->SendAction(&a);
   }
-  
+
   //Fill the pregenerated tables:
   for (uint i=0; i < table_size; i++)
     GenerateTable();
@@ -83,7 +83,7 @@ double RandomSync::GetRand()
     Error("Random table is empty!\n");
     exit(1);
   }
-  
+
   double nbr = rnd_table.front();
   rnd_table.pop_front();
   return nbr;
@@ -98,15 +98,15 @@ bool RandomSync::GetBool(){
  *  Get a random number between min and max
  */
 long RandomSync::GetLong(long min, long max){
-	return min + (long)GetDouble(max - min + 1);
+        return min + (long)GetDouble(max - min + 1);
 }
 
 double RandomSync::GetDouble(double min, double max){
-	return min + GetDouble(max - min);
+        return min + GetDouble(max - min);
 }
 
 double RandomSync::GetDouble(double max){
-	return max * GetDouble();
+        return max * GetDouble();
 }
 
 /**
@@ -115,7 +115,7 @@ double RandomSync::GetDouble(double max){
  * @return A number between 0.0 and 1.0
  */
 double RandomSync::GetDouble(){
-	return 1.0*GetRand()/(RAND_MAX + 1.0);
+        return 1.0*GetRand()/(RAND_MAX + 1.0);
 }
 
 /**
@@ -125,13 +125,13 @@ double RandomSync::GetDouble(){
  * @return a random point.
  */
 Point2i RandomSync::GetPoint(const Rectanglei &rect){
-	Point2i topPoint = rect.GetPosition();
-	Point2i bottomPoint = rect.GetBottomRightPoint();
+        Point2i topPoint = rect.GetPosition();
+        Point2i bottomPoint = rect.GetBottomRightPoint();
 
-	return Point2i( GetLong(topPoint.x, bottomPoint.x),
-			GetLong(topPoint.y, bottomPoint.y) );
+        return Point2i( GetLong(topPoint.x, bottomPoint.x),
+                        GetLong(topPoint.y, bottomPoint.y) );
 }
 
 Point2i RandomSync::GetPoint(const Point2i &pt){
-	return Point2i( GetLong(0, pt.x - 1), GetLong(0, pt.y - 1) );
+        return Point2i( GetLong(0, pt.x - 1), GetLong(0, pt.y - 1) );
 }

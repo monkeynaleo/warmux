@@ -102,8 +102,8 @@ void Action_Network_ChangeState (Action *a)
     default:
       NET_ASSERT(false)
       {
-	if(a->creator) a->creator->force_disconnect = true;
-	return;
+        if(a->creator) a->creator->force_disconnect = true;
+        return;
       }
       break;
     }
@@ -128,8 +128,8 @@ void Action_Network_ChangeState (Action *a)
     default:
        NET_ASSERT(false)
        {
-	 if(a->creator) a->creator->force_disconnect = true;
-	 return;
+         if(a->creator) a->creator->force_disconnect = true;
+         return;
        }
     }
   }
@@ -195,8 +195,8 @@ void Action_Rules_SetGameMode (Action *a)
   std::string game_mode_objects = a->PopString();
 
   GameMode::GetInstance()->LoadFromString(game_mode_name,
-					  game_mode,
-					  game_mode_objects);
+                                          game_mode,
+                                          game_mode_objects);
 }
 
 void SendGameMode()
@@ -214,8 +214,7 @@ void SendGameMode()
   std::string game_mode;
   std::string game_mode_objects;
 
-  GameMode::GetInstance()->ExportToString(game_mode,
-					  game_mode_objects);
+  GameMode::GetInstance()->ExportToString(game_mode, game_mode_objects);
   a.Push(game_mode);
   a.Push(game_mode_objects);
 
@@ -658,7 +657,8 @@ void ActionHandler::NewActionActiveCharacter(Action* a)
 }
 
 void ActionHandler::Register (Action::Action_t action,
-		                      const std::string &name,callback_t fct)
+                              const std::string &name,
+                              callback_t fct)
 {
   handler[action] = fct;
   action_name[action] = name;

@@ -30,7 +30,7 @@ class SnipeBullet : public WeaponBullet
 {
   public:
     SnipeBullet(ExplosiveWeaponConfig& cfg,
-                WeaponLauncher * p_launcher); 
+                WeaponLauncher * p_launcher);
   protected:
     void ShootSound();
 };

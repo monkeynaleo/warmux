@@ -81,7 +81,7 @@ void Physics::SetPhysXY(double x, double y)
 }
 
 void Physics::SetPhysXY(const Point2d &position){
-	SetPhysXY(position.x, position.y);
+        SetPhysXY(position.x, position.y);
 }
 
 double Physics::GetPhysX() const
@@ -95,7 +95,7 @@ double Physics::GetPhysY() const
 }
 
 Point2d Physics::GetPos() const{
-	return Point2d( m_pos_x.x0, m_pos_y.x0);
+        return Point2d( m_pos_x.x0, m_pos_y.x0);
 }
 
 void Physics::SetPhysSize (double width, double height)
@@ -183,12 +183,12 @@ void Physics::GetSpeed(double &norm, double &angle) const
       norm = fabs(m_rope_length.x0 * m_rope_angle.x1);
 
       if (m_rope_angle.x1 > 0)
-	angle = fabs(m_rope_angle.x0) ;
+        angle = fabs(m_rope_angle.x0) ;
       else
-	angle = fabs(m_rope_angle.x0) - M_PI ;
+        angle = fabs(m_rope_angle.x0) - M_PI ;
 
       if (m_rope_angle.x0 < 0)
-	angle = -angle ;
+        angle = -angle ;
       break;
 
     case NoMotion:
@@ -261,7 +261,7 @@ Point2d Physics::GetExternForce() const
 
 // Set fixation point positions
 void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
-				     double dy)
+                                     double dy)
 {
   double fix_point_x, fix_point_y ;
   double old_length ;
@@ -296,7 +296,7 @@ void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
 
       // Convert the linear speed to angular speed.
       m_rope_angle.x1 = (m_pos_x.x1 * cos(m_rope_angle.x0) +
-			 m_pos_y.x1 * sin(m_rope_angle.x0) ) / m_rope_length.x0;
+                         m_pos_y.x1 * sin(m_rope_angle.x0) ) / m_rope_length.x0;
 
       // Reset the angular acceleration.
       m_rope_angle.x2 = 0 ;
@@ -393,23 +393,23 @@ void Physics::StopMoving()
 bool Physics::IsMoving() const
 {
   return ( (!EgalZero(m_pos_x.x1)) ||
-	   (!EgalZero(m_pos_y.x1)) ||
-	   (!m_extern_force.IsNull() ) ||
-	   (m_motion_type != NoMotion) ) ;
-//	   (m_motion_type == Pendulum) ) ;
+           (!EgalZero(m_pos_y.x1)) ||
+           (!m_extern_force.IsNull() ) ||
+           (m_motion_type != NoMotion) ) ;
+//           (m_motion_type == Pendulum) ) ;
 }
 
 bool Physics::IsFalling() const
 {
   return ( ( m_motion_type == FreeFall ) &&
-	   ( m_pos_y.x1 > 0.1) );
+           ( m_pos_y.x1 > 0.1) );
 }
 
 // Compute the next position of the object during a pendulum motion.
 void Physics::ComputePendulumNextXY (double delta_t)
 {
   MSG_DEBUG( "physic.pendulum", "%s: Pendulum; mass %5f", typeid(*this).name(), m_mass);
-  
+
   //  double l0 = 5.0 ;
 
   //  printf ("Physics::ComputePendulumNextXY - Angle %f\n", m_rope_angle.x0);
@@ -418,20 +418,20 @@ void Physics::ComputePendulumNextXY (double delta_t)
   // l" + D.l' + (k/m - a'^2).l = g.cos a + k/m . l0
 
 //   ComputeOneEulerStep(m_rope_length,
-// 		      /* a */ 1,
-// 		      /* b */ m_elasticity_damping,
-// 		      /* c */ m_rope_elasticity / m_mass - m_rope_angle.x1 * m_rope_angle.x1,
-// 		      /* d */ game_mode.gravity * cos (m_rope_angle.x0) + m_rope_elasticity/m_mass * l0,
+//                       /* a */ 1,
+//                       /* b */ m_elasticity_damping,
+//                       /* c */ m_rope_elasticity / m_mass - m_rope_angle.x1 * m_rope_angle.x1,
+//                       /* d */ game_mode.gravity * cos (m_rope_angle.x0) + m_rope_elasticity/m_mass * l0,
 //                       delta_t);
 
   // Pendulum motion equation (angle equation)
   // a'' + (D + 2.l'/l).a' = -g/l.sin a + F/l.cos a
   m_rope_angle.ComputeOneEulerStep(
-		      /* a */ 1,
-		      /* b */ m_balancing_damping + 2 * m_rope_length.x1 / m_rope_length.x0,
-		      /* c */ 0,
-		      /* d */ -GameMode::GetInstance()->gravity / m_rope_length.x0 * sin (m_rope_angle.x0)
-		              +m_extern_force.x / m_rope_length.x0 * cos (m_rope_angle.x0),
+                      /* a */ 1,
+                      /* b */ m_balancing_damping + 2 * m_rope_length.x1 / m_rope_length.x0,
+                      /* c */ 0,
+                      /* d */ -GameMode::GetInstance()->gravity / m_rope_length.x0 * sin (m_rope_angle.x0)
+                              +m_extern_force.x / m_rope_length.x0 * cos (m_rope_angle.x0),
                       delta_t);
 
   double x = m_fix_point_gnd.x - m_fix_point_dxy.x
@@ -440,7 +440,7 @@ void Physics::ComputePendulumNextXY (double delta_t)
              + m_rope_length.x0 * cos(m_rope_angle.x0);
 
   //  printf ("Physics::ComputePendulumNextXY - Angle(%f,%f,%f)\n",
-  //  	  m_rope_angle.x0, m_rope_angle.x1, m_rope_angle.x2);
+  //            m_rope_angle.x0, m_rope_angle.x1, m_rope_angle.x2);
 
   SetPhysXY(x,y);
 }
@@ -460,7 +460,7 @@ void Physics::ComputeFallNextXY (double delta_t)
   // Weight force = m * g
 
   // printf ("av : (%5f,%5f) - (%5f,%5f) - (%5f,%5f)\n", m_pos_x.x0,
-  //	  m_pos_y.x0, m_pos_x.x1, m_pos_y.x1, m_pos_x.x2, m_pos_y.x2);
+  //          m_pos_y.x0, m_pos_x.x1, m_pos_y.x1, m_pos_x.x2, m_pos_y.x2);
 
   weight_force = GameMode::GetInstance()->gravity * m_gravity_factor * m_mass ;
 
@@ -475,33 +475,33 @@ void Physics::ComputeFallNextXY (double delta_t)
   air_resistance_factor = AIR_RESISTANCE_FACTOR * m_air_resist_factor ;
 
   MSG_DEBUG( "physic.fall", "%s falls; mass %5f, weight %5f, wind %5f, air %5f, delta %f", typeid(*this).name(), m_mass, weight_force,wind_force, air_resistance_factor, delta_t);
-  
-  MSG_DEBUG( "physic.fall", "%s before - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - delta:%f - extern_force: %f, %f", 
-	     typeid(*this).name(), 
-	     m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
-	     m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-	     delta_t,
-	     m_extern_force.x, m_extern_force.y);
+
+  MSG_DEBUG( "physic.fall", "%s before - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - delta:%f - extern_force: %f, %f",
+             typeid(*this).name(),
+             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
+             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+             delta_t,
+             m_extern_force.x, m_extern_force.y);
 
   // Equation on X axys : m.x'' + k.x' = wind
   m_pos_x.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
-		      wind_force + m_extern_force.x, delta_t);
+                      wind_force + m_extern_force.x, delta_t);
 
   // Equation on Y axys : m.y'' + k.y' = m.g
   m_pos_y.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
-		      weight_force + m_extern_force.y, delta_t);
+                      weight_force + m_extern_force.y, delta_t);
 
-  MSG_DEBUG( "physic.fall", "%s after - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - delta:%f - extern_force: %f, %f", 
-	     typeid(*this).name(), 
-	     m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
-	     m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-	     delta_t,
-	     m_extern_force.x, m_extern_force.y);
+  MSG_DEBUG( "physic.fall", "%s after - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - delta:%f - extern_force: %f, %f",
+             typeid(*this).name(),
+             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
+             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+             delta_t,
+             m_extern_force.x, m_extern_force.y);
 
     // printf ("F : Pd(%5f) EF(%5f)\n", weight_force, m_extern_force.y);
 
    // printf ("ap : (%5f,%5f) - (%5f,%5f) - (%5f,%5f)\n", m_pos_x.x0,
-  //	  m_pos_y.x0, m_pos_x.x1, m_pos_y.x1, m_pos_x.x2, m_pos_y.x2);
+  //          m_pos_y.x0, m_pos_x.x1, m_pos_y.x1, m_pos_x.x2, m_pos_y.x2);
 }
 
 // Compute the position of the object at current time.
@@ -529,7 +529,7 @@ void Physics::RunPhysicalEngine()
   step_t = PHYS_DELTA_T;
 
   //  printf ("Delta_t = %f (last %f - current %f)\n", delta_t, m_last_move/1000.0,
-  //	  global_time.Read()/1000.0);
+  //          global_time.Read()/1000.0);
 
   // Compute object move for each physical engine time step.
 
@@ -543,11 +543,11 @@ void Physics::RunPhysicalEngine()
 
     if( newPos != oldPos)  {
       // The object has moved. Notify the son class.
-      MSG_DEBUG( "physic.move", "%s moves (%f, %f) -> (%f, %f) - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - step:%f", 
-		 typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, 
-		 m_pos_x.x0, m_pos_x.x1, m_pos_x.x2, 
-		 m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-		 step_t);
+      MSG_DEBUG( "physic.move", "%s moves (%f, %f) -> (%f, %f) - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - step:%f",
+                 typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
+                 m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
+                 m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+                 step_t);
       NotifyMove(oldPos, newPos);
     }
 
@@ -561,7 +561,7 @@ void Physics::RunPhysicalEngine()
 void Physics::Rebound(Point2d /*contactPos*/, double contact_angle)
 {
   double norme, angle;
-  
+
   // Get norm and angle of the object speed vector.
   GetSpeed(norme, angle);
 
@@ -610,7 +610,7 @@ void Physics::Rebound(Point2d /*contactPos*/, double contact_angle)
       angle = angle + M_PI;
 
       m_rope_angle.x1 = (norme * cos(angle) * cos(m_rope_angle.x0) +
-			 norme * sin(angle) * sin(m_rope_angle.x0) ) / m_rope_length.x0;
+                         norme * sin(angle) * sin(m_rope_angle.x0) ) / m_rope_length.x0;
 
       m_rope_angle.x2 = 0;
       m_extern_force.Clear();

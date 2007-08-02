@@ -88,8 +88,8 @@ void Widget::SetContainer( Container * _ct)
 }
 
 void Widget::Update(const Point2i &mousePosition,
-		    const Point2i &lastMousePosition,
-		    Surface& surf)
+                    const Point2i &lastMousePosition,
+                    Surface& surf)
 {
   if (need_redrawing ||
       (Contains(mousePosition) && mousePosition != lastMousePosition) ||

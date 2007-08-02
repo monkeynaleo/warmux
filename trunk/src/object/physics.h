@@ -121,7 +121,7 @@ public:
 
   // Add / Remove a fixation point.
   void SetPhysFixationPointXY(double g_x, double g_y,
-			      double dx, double dy) ;
+                              double dx, double dy) ;
   void UnsetPhysFixationPoint() ;
   void ChangePhysRopeSize(double delta) ;
 

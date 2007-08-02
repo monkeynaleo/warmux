@@ -59,8 +59,8 @@ void WakeUpDebugger();
   if(!(COND) && Network::GetInstance()->IsConnected())
 #endif
 
-void TriggerError (const char *filename, unsigned long line, 
-		      const std::string &txt);
+void TriggerError (const char *filename, unsigned long line,
+                   const std::string &txt);
 
 #define Error(txt) TriggerError(__FILE__, __LINE__, txt)
 

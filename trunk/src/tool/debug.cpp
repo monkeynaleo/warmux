@@ -45,35 +45,35 @@ std::vector<std::string> debugModes;
  * @param message
  */
 void PrintDebug (const char *filename, const char *function, unsigned long line,
-		const char *level, const char *message, ...)
+                 const char *level, const char *message, ...)
 {
-	int levelSize = strlen(level);
-	unsigned int i = 0;
+  int levelSize = strlen(level);
+  unsigned int i = 0;
 
-	for( i = 0; i < debugModes.size(); i++ ){
-		int modeSize = debugModes[i].size();
-		const char *strMode = debugModes[i].c_str();
+  for( i = 0; i < debugModes.size(); i++ ){
+    int modeSize = debugModes[i].size();
+    const char *strMode = debugModes[i].c_str();
 
-		if( strncmp(strMode, level, modeSize) == 0){
-			if( (levelSize != modeSize) && ( level[modeSize] != '.' ) && modeSize != 0)
-				continue;
-	        
-			va_list argp;
-			int pid = (int)getpid();
+    if( strncmp(strMode, level, modeSize) == 0){
+      if( (levelSize != modeSize) && ( level[modeSize] != '.' ) && modeSize != 0)
+        continue;
 
-			fprintf(stderr, "%i|%s:%s:%ld| %s : ", pid, filename, function, line, level);
-                        va_start(argp, message);
-                        vfprintf(stderr, message, argp);
-                        va_end(argp);
-			fprintf(stderr, "\n");
-			return;
-		}
-	}
+      va_list argp;
+      int pid = (int)getpid();
+
+      fprintf(stderr, "%i|%s:%s:%ld| %s : ", pid, filename, function, line, level);
+      va_start(argp, message);
+      vfprintf(stderr, message, argp);
+      va_end(argp);
+      fprintf(stderr, "\n");
+      return;
+    }
+  }
 }
 
-/** 
+/**
  * Add a new debug mode to check.
  */
 void AddDebugMode(const std::string& mode ){
-	debugModes.push_back( mode );
+  debugModes.push_back( mode );
 }

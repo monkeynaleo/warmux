@@ -151,9 +151,9 @@ void TeamsList::LoadList()
     while ((name = FolderSearchNext(f)) != NULL) LoadOneTeam(dirname, name);
     CloseFolder(f);
   } else {
-	  std::cerr << std::endl
-		  << Format(_("Cannot open personal teams directory (%s)!"), dirname.c_str())
-		  << std::endl;
+    std::cerr << std::endl
+      << Format(_("Cannot open personal teams directory (%s)!"), dirname.c_str())
+      << std::endl;
   }
 
   teams_list.full_list.sort(compareTeams);

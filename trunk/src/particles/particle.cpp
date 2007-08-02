@@ -119,8 +119,8 @@ ParticleEngine::ParticleEngine(uint time):
 
 
 void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
-				 bool upper,
-				 double angle, double norme)
+                                 bool upper,
+                                 double angle, double norme)
 {
   // time spent since last refresh (in milliseconds)
   uint time = Time::GetInstance()->Read() - m_last_refresh;
@@ -181,9 +181,9 @@ Sprite* ParticleEngine::GetSprite(particle_spr type)
 }
 
 void ParticleEngine::AddNow(const Point2i &position,
-			    uint nb_particles, particle_t type,
-			    bool upper,
-			    double angle, double norme)
+                            uint nb_particles, particle_t type,
+                            bool upper,
+                            double angle, double norme)
 {
   if (!sprites_loaded)
     return;
@@ -224,14 +224,14 @@ void ParticleEngine::AddNow(const Point2i &position,
     if (particle != NULL) {
 
       if( norme == -1 )
-	tmp_norme = double(randomObj.GetLong(0, 5000))/100;
+        tmp_norme = double(randomObj.GetLong(0, 5000))/100;
       else
-	tmp_norme = norme;
+        tmp_norme = norme;
 
       if( angle == -1 )
-	tmp_angle = - double(randomObj.GetLong(0, 3000))/1000;
+        tmp_angle = - double(randomObj.GetLong(0, 3000))/1000;
       else
-	tmp_angle = angle;
+        tmp_angle = angle;
 
       particle->SetXY(position);
       particle->SetOnTop(upper);

@@ -34,22 +34,22 @@ Sky::Sky(){
 }
 
 void Sky::Init(){
- 	// That is temporary -> image will be loaded directly without alpha chanel
-	Surface tmp_image = ActiveMap().ReadImgSky();
-	tmp_image.SetAlpha( 0, 0);
-	image = tmp_image.DisplayFormat();
+         // That is temporary -> image will be loaded directly without alpha chanel
+        Surface tmp_image = ActiveMap().ReadImgSky();
+        tmp_image.SetAlpha( 0, 0);
+        image = tmp_image.DisplayFormat();
 
-	tstVect = image.GetSize().inf( camera.GetSize() );
-	margin = tstVect * (camera.GetSize() - image.GetSize())/2;
+        tstVect = image.GetSize().inf( camera.GetSize() );
+        margin = tstVect * (camera.GetSize() - image.GetSize())/2;
 }
 
 void Sky::Reset(){
-	Init();
-	lastPos.SetValues(INT_MAX, INT_MAX);
+        Init();
+        lastPos.SetValues(INT_MAX, INT_MAX);
 }
 
 void Sky::Free(){
-	image.Free();
+        image.Free();
 }
 
 void Sky::Draw(bool redraw_all)
@@ -59,7 +59,7 @@ void Sky::Draw(bool redraw_all)
     RedrawParticle(camera);
     return;
   }
-  
+
   RedrawParticleList(*world.to_redraw_now);
   RedrawParticleList(*world.to_redraw_particles_now);
 }
@@ -68,15 +68,15 @@ void Sky::RedrawParticleList(std::list<Rectanglei> &list) const{
   std::list<Rectanglei>::iterator it;
 
   for( it = list.begin(); it != list.end(); ++it )
-	  RedrawParticle(*it);
+          RedrawParticle(*it);
 }
 
 void Sky::RedrawParticle(const Rectanglei &particle) const{
-    Rectanglei ds(GetSkyPos() + particle.GetPosition() - camera.GetPosition() - margin, 
-		    particle.GetSize() );
+    Rectanglei ds(GetSkyPos() + particle.GetPosition() - camera.GetPosition() - margin,
+                  particle.GetSize() );
     AppWormux::GetInstance()->video->window.Blit(image, ds, particle.GetPosition() - camera.GetPosition());
 }
 
 Point2i Sky::GetSkyPos() const{
-	return (Point2i(1, 1) - tstVect) * camera.GetPosition() * SKY_SPEED;
+        return (Point2i(1, 1) - tstVect) * camera.GetPosition() * SKY_SPEED;
 }

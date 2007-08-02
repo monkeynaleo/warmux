@@ -26,40 +26,42 @@
 //wave_amp is the amplitude of the wave on the left and the right side of the sprite
 //wave_per is the number of periode of the wave when it is waved at the maximum
 //used on the skin during teleportation
-Sprite* WaveSurface(Surface &a, unsigned int nbr_frames, unsigned int duration, float wave_amp, float wave_per){
-	Sprite* sprite = new Sprite;
-	Point2i newSize = a.GetSize() + Point2i(2 * (int)wave_amp, 0);
-	
-    sprite->SetSize(newSize);
-	for(unsigned int f=0; f < nbr_frames; f++){
-		Surface b(newSize, SDL_SWSURFACE|SDL_SRCALPHA );
-		b.Fill(0x00000000);
-		b.SetAlpha(SDL_SRCALPHA, 0);
-		a.Lock();
-		b.Lock();
-		for(int x = 0; x < a.GetWidth(); x++){
-			for(int y = 0; y < a.GetHeight(); y++){
-				Uint32 col = a.GetPixel(x, y);
-				Uint8 r, g, bl, al;
-				a.GetRGBA(col, r, g, bl, al);
-				col = b.MapRGBA(r, g, bl, al);
+Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
+                    unsigned int duration, float wave_amp, float wave_per){
+  Sprite* sprite = new Sprite;
+  Point2i newSize = a.GetSize() + Point2i(2 * (int)wave_amp, 0);
 
-				float t = (float)nbr_frames * sin(M_PI*(float)f/(float)nbr_frames);
-				unsigned int wave_x = (unsigned int)(x+(wave_amp*(1+sin(((float)t*wave_per*2.0*M_PI/(float)nbr_frames)*(float)y*2.0*M_PI/(float)a.GetHeight()))));
-				b.PutPixel(wave_x, y, col);
-			}
-		}
-		a.Unlock();
-		b.Unlock();	
+  sprite->SetSize(newSize);
+  for(unsigned int f=0; f < nbr_frames; f++){
+    Surface b(newSize, SDL_SWSURFACE|SDL_SRCALPHA );
+    b.Fill(0x00000000);
+    b.SetAlpha(SDL_SRCALPHA, 0);
+    a.Lock();
+    b.Lock();
+    for(int x = 0; x < a.GetWidth(); x++){
+      for(int y = 0; y < a.GetHeight(); y++){
+        Uint32 col = a.GetPixel(x, y);
+        Uint8 r, g, bl, al;
 
-		sprite->AddFrame(b, duration / nbr_frames);
-	}
-	return sprite;
+        a.GetRGBA(col, r, g, bl, al);
+        col = b.MapRGBA(r, g, bl, al);
+
+        float t = (float)nbr_frames * sin(M_PI*(float)f/(float)nbr_frames);
+        unsigned int wave_x = (unsigned int)(x+(wave_amp*(1+sin(((float)t*wave_per*2.0*M_PI/(float)nbr_frames)*(float)y*2.0*M_PI/(float)a.GetHeight()))));
+        b.PutPixel(wave_x, y, col);
+      }
+    }
+    a.Unlock();
+    b.Unlock();
+
+    sprite->AddFrame(b, duration / nbr_frames);
+  }
+  return sprite;
 }
 
 // Modify the scale of 'spr' to make it deform as if it was rebounding
-// dy return the offset that should be used to display the sprite at the good position
-// t0 time when we began to rebound
+// dy return the offset that should be used to display the sprite
+// at the good position t0 time when we began to rebound
 // per time to do one full rebound
 // dy_max offset max of the rebound ( 0 <= dy <= dy_max )
 void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
@@ -73,7 +75,7 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
   //sprite at bottom:
   if( dt < per / 4 )
   {
-    float dt2 = ((per / 4) - dt) / ((float)per / 4.0);    
+    float dt2 = ((per / 4) - dt) / ((float)per / 4.0);
     scale_y =        2.0*dt2*dt2 - 2.0*dt2 + 1.0;
     scale_x = 2.0 - (2.0*dt2*dt2 - 2.0*dt2 + 1.0);
     dy = 0;

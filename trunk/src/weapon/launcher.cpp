@@ -119,7 +119,7 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   int dy = image->GetHeight()/2-1;
   SetTestRect (dx, dx, dy, dy);
 
-  ResetTimeOut(); 
+  ResetTimeOut();
 
   // generate a unique id for the projectile
   m_unique_id = name + GameLoop::GetUniqueId();
@@ -152,10 +152,10 @@ void WeaponProjectile::Shoot(double strength)
   PutOutOfGround(angle);
 
   MSG_DEBUG("weapon.projectile", "shoot with hand position:%d,%d",
-	    ActiveCharacter().GetHandPosition().GetX(),
-	    ActiveCharacter().GetHandPosition().GetY());
+            ActiveCharacter().GetHandPosition().GetX(),
+            ActiveCharacter().GetHandPosition().GetY());
   MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f, position:%d,%d",
-	    strength, angle, GetX(), GetY());
+            strength, angle, GetX(), GetY());
 
   begin_time = Time::GetInstance()->Read();
 
@@ -553,8 +553,8 @@ void WeaponLauncher::HandleKeyReleased_More()
 
 void WeaponLauncher::NetworkSetTimeoutProjectile() const
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_SET_TIMEOUT, 
-						     projectile->m_timeout_modifier));
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_SET_TIMEOUT,
+                                                     projectile->m_timeout_modifier));
 }
 
 void WeaponLauncher::HandleMouseWheelUp()

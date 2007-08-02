@@ -83,7 +83,7 @@ private:
 
   static bool stop_thread;
   bool turn_master_player;
-  
+
 protected:
   network_state_t state;
 
@@ -104,7 +104,7 @@ protected:
 
   void DisconnectNetwork();
   const connection_state_t CheckHost(const std::string &host,
-				     const std::string &port) const;
+                                     const std::string &port) const;
 public:
   NetworkMenu* network_menu;
 

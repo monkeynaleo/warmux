@@ -201,7 +201,7 @@ void MainMenu::DrawBackground()
   Menu::DrawBackground();
   // skin_left->Blit(window, 0, window.GetHeight() - skin_left->GetHeight());
   // skin_right->Blit(window, window.GetWidth()  - skin_right->GetWidth(),
-  // 		   window.GetHeight() - skin_right->GetHeight());
+  //                  window.GetHeight() - skin_right->GetHeight());
 
   version_text->DrawCenter( window.GetWidth()/2,
                             window.GetHeight() + VERSION_DY);
@@ -218,23 +218,23 @@ void MainMenu::Redraw(const Rectanglei& rect, Surface &window)
   // but sometimes we need to redraw the skins...
 
   /*Rectanglei dest(0, window.GetHeight() - skin_left->GetHeight(),
-		  skin_left->GetWidth(), skin_left->GetHeight());
+                    skin_left->GetWidth(), skin_left->GetHeight());
   dest.Clip(rect);
 
   Rectanglei src(rect.GetPositionX() - 0,
-		 rect.GetPositionY() - (window.GetHeight() - skin_left->GetHeight()),
-		 dest.GetSizeX(), dest.GetSizeY());
+                 rect.GetPositionY() - (window.GetHeight() - skin_left->GetHeight()),
+                 dest.GetSizeX(), dest.GetSizeY());
 
   skin_left->Blit(window, src, dest.GetPosition());
 
   Rectanglei dest2(window.GetWidth()  - skin_right->GetWidth(),
-		   window.GetHeight() - skin_right->GetHeight(),
-		   skin_right->GetWidth(), skin_right->GetHeight());
+                   window.GetHeight() - skin_right->GetHeight(),
+                   skin_right->GetWidth(), skin_right->GetHeight());
   dest2.Clip(rect);
 
   Rectanglei src2(dest2.GetPositionX() - (window.GetWidth()  - skin_right->GetWidth()),
-		  dest2.GetPositionY() - (window.GetHeight() - skin_right->GetHeight()),
-		  dest2.GetSizeX(), dest2.GetSizeY());
+                  dest2.GetPositionY() - (window.GetHeight() - skin_right->GetHeight()),
+                  dest2.GetSizeX(), dest2.GetSizeY());
 
   skin_right->Blit(window, src2, dest2.GetPosition());*/
 

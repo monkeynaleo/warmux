@@ -74,7 +74,7 @@ bool AIMovementModule::ObstacleHeight(int& height) const
     // Compute exact whole size
     for (height = 15; height <= 150 ; height++){
       if ( !ActiveCharacter().IsInVacuum(Point2i(ActiveCharacter().GetDirection(), height))
-	  ||  ActiveCharacter().FootsOnFloor(y_floor+height)){
+          ||  ActiveCharacter().FootsOnFloor(y_floor+height)){
         break;
       }
     }
@@ -89,7 +89,7 @@ bool AIMovementModule::RiskGoingOutOfMap() const
        ActiveCharacter().GetX() <= 5 ) {
     return true;
   } else if ( ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT &&
-	      world.GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
+              world.GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
     return true;
   }
 
@@ -195,24 +195,24 @@ void AIMovementModule::Walk()
       last_blocked_position = ActiveCharacter().GetPosition();
 
       if (height < 0 ) {
-	// There's a barrier
+        // There's a barrier
 
-	if (height >= -80) { // we can try to jump!
-	  PrepareJump();
-	  return; // do not update position
-	} else { // it's too high!
-	  //	  GameMessages::GetInstance()->Add("It's too high!!");
-	  MSG_DEBUG("ai.move", "It's too high, we have to go back");
-	  InverseDirection(true);
-	}
+        if (height >= -80) { // we can try to jump!
+          PrepareJump();
+          return; // do not update position
+        } else { // it's too high!
+          // GameMessages::GetInstance()->Add("It's too high!!");
+          MSG_DEBUG("ai.move", "It's too high, we have to go back");
+          InverseDirection(true);
+        }
       } else {
-	// There's a hole
+        // There's a hole
 
-	if (height >= 100) { // it's too deep, go back!!
-	  MSG_DEBUG("ai.move", "It's too deep, we have to go back");
-	  //	  GameMessages::GetInstance()->Add("It's too deep!" + ulong2str(height));
-	  InverseDirection(true);
-	}
+        if (height >= 100) { // it's too deep, go back!!
+          MSG_DEBUG("ai.move", "It's too deep, we have to go back");
+          // GameMessages::GetInstance()->Add("It's too deep!" + ulong2str(height));
+          InverseDirection(true);
+        }
       }
     } else {
       // already have been blocked here...
@@ -370,7 +370,7 @@ void AIMovementModule::SetDestinationPoint(const Point2i& _destination_point)
 // This method is not perfect!!
 // =================================================
 bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
-					  const Character& enemy) const
+                                          const Character& enemy) const
 {
   int delta_x = abs(shooter.GetX() - enemy.GetX());
   int delta_y = abs(shooter.GetY() - enemy.GetY());
@@ -389,7 +389,7 @@ bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
 bool AIMovementModule::IsProgressing() const
 {
   if (destination_point.GetX()>max_reachable_x ||
-	  destination_point.GetX()<min_reachable_x)
+          destination_point.GetX()<min_reachable_x)
     return false;
   return true;
 }

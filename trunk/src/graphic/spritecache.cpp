@@ -109,14 +109,14 @@ SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
   {
     Surface new_surf = Surface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
 
-	// Disable per pixel alpha on the source surface
+        // Disable per pixel alpha on the source surface
     // in order to properly copy the alpha chanel to the destination suface
-	// see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-	other.frames[f].surface.SetAlpha( 0, 0);
-	new_surf.Blit( other.frames[f].surface, NULL, NULL);
+        // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
+        other.frames[f].surface.SetAlpha( 0, 0);
+        new_surf.Blit( other.frames[f].surface, NULL, NULL);
 
-	// re-enable the per pixel alpha in the
-	other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0);
+        // re-enable the per pixel alpha in the
+        other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0);
     frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
   }
 

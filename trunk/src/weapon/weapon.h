@@ -161,9 +161,9 @@ protected:
 
 public:
   Weapon(Weapon_type type,
-	 const std::string &id,
-	 EmptyWeaponConfig * params,
-	 weapon_visibility_t visibility = ALWAYS_VISIBLE);
+         const std::string &id,
+         EmptyWeaponConfig * params,
+         weapon_visibility_t visibility = ALWAYS_VISIBLE);
   virtual ~Weapon();
 
   // Select or deselect the weapon

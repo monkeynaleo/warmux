@@ -55,11 +55,11 @@ class AIShootModule
 
   // for shooting weapons like gun, shotgun, sniper rifle, m16, ...
   static bool IsDirectlyShootable(const Character& shooter,
-				  const Character& enemy,
-				  double& shoot_angle);
+                                  const Character& enemy,
+                                  double& shoot_angle);
 
   static const Character* FindShootableEnemy(const Character& shooter,
-					     double& shoot_angle);
+                                             double& shoot_angle);
 
   bool SelectFiringWeapon(double shoot_angle) const;
 

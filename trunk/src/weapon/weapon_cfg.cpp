@@ -24,24 +24,24 @@
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
-void EmptyWeaponConfig::LoadXml(xmlpp::Element */*elem*/) 
+void EmptyWeaponConfig::LoadXml(xmlpp::Element */*elem*/)
 {}
 
 //-----------------------------------------------------------------------------
 
-WeaponConfig::WeaponConfig() 
+WeaponConfig::WeaponConfig()
 { damage = 10; }
 
-void WeaponConfig::LoadXml(xmlpp::Element *elem) 
+void WeaponConfig::LoadXml(xmlpp::Element *elem)
 {
-  XmlReader::ReadUint(elem, "damage", damage);  
+  XmlReader::ReadUint(elem, "damage", damage);
 }
 
 //-----------------------------------------------------------------------------
 
 ExplosiveWeaponConfig::ExplosiveWeaponConfig()
 {
-  timeout = 0; 
+  timeout = 0;
   allow_change_timeout = false;
   explosion_range = 0 ;
   particle_range = explosion_range;
@@ -49,7 +49,7 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
   blast_force = 0 ;
 }
 
-void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem) 
+void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem)
 {
   WeaponConfig::LoadXml (elem);
   XmlReader::ReadUint(elem, "timeout", timeout);

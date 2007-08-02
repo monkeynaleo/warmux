@@ -67,7 +67,7 @@ class AutomaticBazooka : public WeaponLauncher
     DECLARE_GETWEAPONSTRING();
   protected:
     void Refresh();
-    void p_Select(); 
+    void p_Select();
     void p_Deselect();
 
     void DrawTarget() const;

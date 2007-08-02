@@ -36,27 +36,27 @@ void WakeUpDebugger()
   // Generate SIGTRAP
   asm ("int $0x03");
 #endif
-    
+
 #if !defined WIN32
   kill (getpid(), SIGABRT);
 #endif
 }
 
 void MissedAssertion (const char *filename, unsigned long line,
-		       const char *message)
+                      const char *message)
 {
   std::cout << std::endl;
-  std::cerr << filename << ':' << line 
-	    << ": Missed assertion \"" << message << "\"."
-	    << std::endl;
+  std::cerr << filename << ':' << line
+            << ": Missed assertion \"" << message << "\"."
+            << std::endl;
 #if defined DEBUG
   WakeUpDebugger();
   abort();
 #endif
 }
 
-CError::CError (const char *filename, unsigned long line, 
-		const std::string &txt) 
+CError::CError (const char *filename, unsigned long line,
+                const std::string &txt)
   : m_filename(filename), m_txt(txt), m_line(line)
 {}
 
@@ -74,12 +74,12 @@ std::ostream& CError::operator<< (std::ostream &os) const
   return os;
 }
 
-void TriggerError (const char *filename, unsigned long line, 
-		      const std::string &txt)
+void TriggerError (const char *filename, unsigned long line,
+                   const std::string &txt)
 {
-  std::cerr << "! " 
-	    << Format(_("Error in %s:%lu"), filename, line)
-	    << ": " << txt << std::endl;
+  std::cerr << "! "
+            << Format(_("Error in %s:%lu"), filename, line)
+            << ": " << txt << std::endl;
 
   ASSERT(false);
   throw CError (filename, line, txt);

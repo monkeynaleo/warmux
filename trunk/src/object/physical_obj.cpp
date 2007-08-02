@@ -148,7 +148,7 @@ const Point2i PhysicalObj::GetCenter() const
 
 void PhysicalObj::SetSize(const Point2i &newSize){
   if( newSize == Point2i(0, 0) )
-	  Error( "New size of (0, 0) !");
+          Error( "New size of (0, 0) !");
   m_width = newSize.x;
   m_height = newSize.y;
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
@@ -258,7 +258,7 @@ void PhysicalObj::AddDamage(uint damage_points)
 // Return true if collision occured
 void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 {
-  if (IsGhost()) 
+  if (IsGhost())
     return;
 
   Point2d pos, offset;
@@ -282,7 +282,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   double lg = oldPos.Distance( newPos);
 
   MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), distance: %f",
-	    typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, lg);
+            typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, lg);
 
   if (lg == 0)
     return;
@@ -297,8 +297,8 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   if (m_goes_through_wall || IsInWater())
   {
     MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), thr_wall:%d, water:%d",
-	      typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, 
-	      m_goes_through_wall, IsInWater());
+              typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
+              m_goes_through_wall, IsInWater());
 
     Point2i tmpPos( lround(newPos.x), lround(newPos.y) );
     SetXY(tmpPos);
@@ -323,7 +323,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       SetXY( tmpPos );
 
       MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) : OUTSIDE WORLD",
-		typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
+                typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
       return;
     }
 
@@ -584,8 +584,8 @@ void PhysicalObj::SignalCollision() {}
 void PhysicalObj::SignalOutOfMap() {}
 
 void PhysicalObj::SetCollisionModel(bool goes_through_wall,
-				    bool collides_with_characters,
-				    bool collides_with_objects)
+                                    bool collides_with_characters,
+                                    bool collides_with_objects)
 {
   m_goes_through_wall = goes_through_wall;
   m_collides_with_characters = collides_with_characters;
@@ -623,11 +623,11 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
   int y = position.y + m_test_top;
 
   if( world.IsOutsideWorldXwidth(x, GetTestWidth()) )
-	  return true;
+          return true;
   if( world.IsOutsideWorldYheight(y, GetTestHeight()) ){
     if( m_allow_negative_y )
       if( (Y_OBJET_MIN <= y) && (y + GetTestHeight() - 1 < 0) )
-		  return false;
+                  return false;
     return true;
   }
   return false;
@@ -669,7 +669,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
     return false;
 
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-		  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
+                  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
   return world.RectIsInVacuum (rect);
 }
@@ -733,7 +733,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
   int y_test = position.y + m_height - m_test_bottom;
 
   Rectanglei rect( position.x + m_test_left, y_test,
-		 m_width - m_test_right - m_test_left, 1);
+                   m_width - m_test_right - m_test_left, 1);
 
   if( m_allow_negative_y && rect.GetPositionY() < 0){
     int b = rect.GetPositionY() + rect.GetSizeY();
@@ -888,18 +888,18 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     {
       if (min_dst_with_characters == 0) {
 
-	if( ObjTouche(*ver) ) {
-	    MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*ver).m_name.c_str());
-	    ok = false;
-	}
+        if( ObjTouche(*ver) ) {
+            MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*ver).m_name.c_str());
+            ok = false;
+        }
       } else {
-	Point2i p1 = ver->GetCenter();
-	Point2i p2 = GetCenter();
-	double dst = p1.Distance( p2 );
+        Point2i p1 = ver->GetCenter();
+        Point2i p2 = GetCenter();
+        double dst = p1.Distance( p2 );
 
-	// ok this test is not perfect but quite efficient ;-)
-	// else we need to check each distance between each "corner"
-	if (dst < min_dst_with_characters) ok = false;
+        // ok this test is not perfect but quite efficient ;-)
+        // else we need to check each distance between each "corner"
+        if (dst < min_dst_with_characters) ok = false;
       }
     }
 

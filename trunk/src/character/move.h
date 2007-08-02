@@ -32,7 +32,7 @@ const uint PAUSE_MOVEMENT=30; // ms
 // Compute the height to fall or to walk on when moving horizontally
 // Return a boolean which says if movement is possible
 bool ComputeHeightMovement (Character &character, int &height,
-			    bool falling);
+                            bool falling);
 
 void MoveCharacter (Character &character);
 

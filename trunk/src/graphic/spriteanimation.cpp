@@ -18,7 +18,7 @@
  ******************************************************************************
  * Sprite animation control.
  ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
  *             Initial version
  *****************************************************************************/
 
@@ -62,17 +62,17 @@ void SpriteAnimation::Start(){
 void SpriteAnimation::SetPlayBackward(bool enable){
   if (enable)
     frame_delta = -1;
-  else 
+  else
     frame_delta = 1;
 }
 
 void SpriteAnimation::Finish() {
   finished = true;
-}  
+}
 
 void SpriteAnimation::Update(){
   if (finished) return;
-  
+
   Time * global_time = Time::GetInstance();
   if (global_time->Read() < (last_update + sprite.GetCurrentFrameObject().delay))
      return;
@@ -121,21 +121,21 @@ void SpriteAnimation::Update(){
   }
 }
 
-void SpriteAnimation::SetShowOnFinish(SpriteShowOnFinish show) { 
-  show_on_finish = show; 
+void SpriteAnimation::SetShowOnFinish(SpriteShowOnFinish show) {
+  show_on_finish = show;
   loop = false;
 }
 
-bool SpriteAnimation::IsFinished() const { 
-  return finished; 
+bool SpriteAnimation::IsFinished() const {
+  return finished;
 }
-  
-void SpriteAnimation::SetLoopMode(bool enable) { 
-  loop = enable; 
+
+void SpriteAnimation::SetLoopMode(bool enable) {
+  loop = enable;
 }
 
 void SpriteAnimation::SetPingPongMode(bool enable) {
-  pingpong = enable; 
+  pingpong = enable;
 }
 
 SpriteAnimation::SpriteShowOnFinish SpriteAnimation::GetShowOnFinish() const {

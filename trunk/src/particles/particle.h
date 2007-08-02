@@ -104,18 +104,18 @@ class ParticleEngine
  public:
   ParticleEngine(uint time=100);
   void AddPeriodic(const Point2i &position,
-		   particle_t type,
-		   bool upper,
-		   double angle=-1, double norme=-1);
+                   particle_t type,
+                   bool upper,
+                   double angle=-1, double norme=-1);
 
   static void Load();
   static void FreeMem();
   static Sprite* GetSprite(particle_spr type);
 
   static void AddNow(const Point2i &position,
-		     uint nb_particles, particle_t type,
-		     bool upper,
-		     double angle=-1, double norme=-1);
+                     uint nb_particles, particle_t type,
+                     bool upper,
+                     double angle=-1, double norme=-1);
   static void AddNow(Particle* particle);
 
   enum ESmokeStyle { NoESmoke, LittleESmoke, BigESmoke }; // Style of smoke explosion (quantitie of smoke)

@@ -32,36 +32,36 @@
 #define GETTEXT_DOMAIN PACKAGE
 
 std::string Format(const char *format, ...){
-	const int bufferSize = 256;
-	char buffer[bufferSize];
-	va_list argp;
-	std::string result;
+  const int bufferSize = 256;
+  char buffer[bufferSize];
+  va_list argp;
+  std::string result;
 
-	va_start(argp, format);
+  va_start(argp, format);
 
-	int size = vsnprintf(buffer, bufferSize, format, argp);
+  int size = vsnprintf(buffer, bufferSize, format, argp);
 
-	if( size < 0 )
-		Error( "Error formating string...");
+  if( size < 0 )
+    Error( "Error formating string...");
 
-	if( size < bufferSize)
-		result = std::string(buffer);
-	else{
-		char *bigBuffer = (char *)malloc( (size + 1) * sizeof(char) );
-		if( bigBuffer == NULL)
-			Error( "Out of memory !");
+  if( size < bufferSize)
+    result = std::string(buffer);
+  else{
+    char *bigBuffer = (char *)malloc( (size + 1) * sizeof(char) );
+    if( bigBuffer == NULL)
+      Error( "Out of memory !");
 
-		size = vsnprintf(bigBuffer, size + 1, format, argp);
-		if( size < 0 )
-			Error( "Error formating string...");
+    size = vsnprintf(bigBuffer, size + 1, format, argp);
+    if( size < 0 )
+      Error( "Error formating string...");
 
-		result = std::string(bigBuffer);
-		free(bigBuffer);
-	}
+    result = std::string(bigBuffer);
+    free(bigBuffer);
+  }
 
-	va_end(argp);
+  va_end(argp);
 
-	return result;
+  return result;
 }
 
 void I18N_SetDir(const std::string &dir){

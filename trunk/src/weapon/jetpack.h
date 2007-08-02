@@ -40,7 +40,7 @@ class JetPack : public Weapon
     void Reset();
     void SignalTurnEnd();
     void ActionStopUse();
-    
+
     virtual void HandleKeyPressed_Up();
     virtual void HandleKeyReleased_Up();
     virtual void HandleKeyPressed_MoveLeft();
@@ -48,7 +48,7 @@ class JetPack : public Weapon
     virtual void HandleKeyPressed_MoveRight();
     virtual void HandleKeyReleased_MoveRight();
     virtual void HandleKeyPressed_Shoot();
-    
+
     DECLARE_GETWEAPONSTRING();
 
   protected:

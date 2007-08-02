@@ -223,10 +223,10 @@ void Character::SetDirection (Body::Direction_t nv_direction)
 void Character::DrawEnergyBar(int dy) const
 {
   if( IsDead() )
-	return;
+        return;
 
   energy_bar.DrawXY( Point2i( GetCenterX() - energy_bar.GetWidth() / 2, GetY() + dy)
-		  - camera.GetPosition() );
+                     - camera.GetPosition() );
 }
 
 void Character::DrawName (int dy) const
@@ -247,7 +247,7 @@ const DamageStatistics* Character::GetDamageStats() const
   return damage_stats;
 }
 
-void Character::ResetDamageStats() 
+void Character::ResetDamageStats()
 {
   damage_stats->ResetDamage();
 }
@@ -345,7 +345,7 @@ void Character::Die()
 
     // Signal the death
     GameLoop::GetInstance()->SignalCharacterDeath (this);
-  }    
+  }
 
   damage_stats->SetDeathTime(Time::GetInstance()->Read());
 }
@@ -387,7 +387,7 @@ alive_t Character::GetLifeState() const
 
 void Character::SetLifeState(alive_t state)
 {
-  if (m_alive == state) 
+  if (m_alive == state)
     return;
 
   std::cerr << "Force life's state of "<< GetName() << " to m_alive = " << state << std::endl;
@@ -487,8 +487,8 @@ void Character::Draw()
     ss << lost_energy;
     dy -= HAUT_FONT_MIX;
     (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop (
-			GetPosition() - camera.GetPosition() + Point2i( GetWidth()/2, dy),
-		   	ss.str(), white_color);
+        GetPosition() - camera.GetPosition() + Point2i( GetWidth()/2, dy),
+        ss.str(), white_color);
   }
 
 }
@@ -687,7 +687,7 @@ void Character::SignalCollision()
   GameMode * game_mode = GameMode::GetInstance();
   SetMovement("walk");
   SetMovementOnce("soft-land");
- 
+
   body->SetRotation(0.0);
   back_jumping = false;
 
@@ -919,12 +919,12 @@ void Character::HandleKeyRefreshed_Up()
   if (ActiveCharacter().IsImmobile())
     {
       if (ActiveTeam().crosshair.enable)
-	{
-	  do_nothing_time = Time::GetInstance()->Read();
-	  CharacterCursor::GetInstance()->Hide();
-	  AddFiringAngle(-DELTA_CROSSHAIR);
-	  SendActiveCharacterInfo();
-	}
+        {
+          do_nothing_time = Time::GetInstance()->Read();
+          CharacterCursor::GetInstance()->Hide();
+          AddFiringAngle(-DELTA_CROSSHAIR);
+          SendActiveCharacterInfo();
+        }
     }
 }
 
@@ -942,12 +942,12 @@ void Character::HandleKeyRefreshed_Down()
   if(ActiveCharacter().IsImmobile())
     {
       if (ActiveTeam().crosshair.enable)
-	{
-	  do_nothing_time = Time::GetInstance()->Read();
-	  CharacterCursor::GetInstance()->Hide();
-	  AddFiringAngle(DELTA_CROSSHAIR);
-	  SendActiveCharacterInfo();
-	}
+        {
+          do_nothing_time = Time::GetInstance()->Read();
+          CharacterCursor::GetInstance()->Hide();
+          AddFiringAngle(DELTA_CROSSHAIR);
+          SendActiveCharacterInfo();
+        }
     }
 }
 

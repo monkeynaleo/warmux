@@ -31,16 +31,16 @@ class CreditsMenu : public Menu
 {
  private:
   void PrepareAuthorsList(ListBox *lbox_authors) const;
-  
-  bool signal_ok();
-  bool signal_cancel();   
 
-  void Draw(const Point2i &mousePosition);   
+  bool signal_ok();
+  bool signal_cancel();
+
+  void Draw(const Point2i &mousePosition);
 
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
  public:
-  CreditsMenu(); 
+  CreditsMenu();
   ~CreditsMenu();
 };
 

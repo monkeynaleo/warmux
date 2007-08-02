@@ -49,8 +49,8 @@ private:
   uint CalculeValBarre (long val) const;
 
   typedef struct s_marqueur_t{
-	  Color color;
-	  uint val;
+    Color color;
+    uint val;
   } marqueur_t;
 
  public:

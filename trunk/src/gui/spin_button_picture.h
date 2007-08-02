@@ -50,9 +50,11 @@ class SpinButtonWithPicture : public Widget
   int m_min_value, m_max_value, m_step;
 
  public:
-  SpinButtonWithPicture(const std::string &label, const std::string &resource_id,
-			const Rectanglei &rect,
-			int value=0, int step=1, int min_value=-1, int max_value=-1);
+  SpinButtonWithPicture(const std::string &label,
+                        const std::string &resource_id,
+                        const Rectanglei &rect,
+                        int value=0, int step=1,
+                        int min_value=-1, int max_value=-1);
   virtual ~SpinButtonWithPicture();
 
   void SetSizePosition(const Rectanglei &rect);

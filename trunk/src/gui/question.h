@@ -77,8 +77,8 @@ public:
   ~Question();
 
   void Set(const std::string &message,
-	   bool default_active,
-	   int default_value,
+           bool default_active,
+           int default_value,
       const std::string &bg_sprite="");
   int Ask();
   void Draw() const;

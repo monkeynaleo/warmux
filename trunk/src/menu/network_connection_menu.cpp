@@ -59,8 +59,8 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   previous_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_minus", false);
   next_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_plus", false);
   action_label = new Label(_("Connect to an internet game"),
-			   Rectanglei(0,0,250,0),
-			   Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
+                           Rectanglei(0,0,250,0),
+                           Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
   action_box->AddWidget(previous_action_bt);
   action_box->AddWidget(action_label);
   action_box->AddWidget(next_action_bt);
@@ -81,8 +81,8 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   // Available on internet ?
   internet_server = new CheckBox(_("Server available on Internet"),
-				 Rectanglei(0,0,0,0),
-				 true);
+                                 Rectanglei(0,0,0,0),
+                                 true);
   connection_box->AddWidget(internet_server);
 
   widgets.AddWidget(connection_box);
@@ -91,9 +91,9 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   // Warning about experimental networking
   msg_box = new MsgBox(Rectanglei( AppWormux::GetInstance()->video->window.GetWidth()/2 - 300,
-				   y_box+connection_box->GetSizeY() + 30,
-				   600, 200),
-		       Font::FONT_SMALL, Font::FONT_NORMAL);
+                                   y_box+connection_box->GetSizeY() + 30,
+                                   600, 200),
+                       Font::FONT_SMALL, Font::FONT_NORMAL);
   widgets.AddWidget(msg_box);
 
   msg_box->NewMessage(_("WARNING!! Network is still under developement and therefore a little experimental."), c_red);
@@ -121,14 +121,14 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
     {
       switch (current_action) {
       case NET_HOST:
-	SetAction(NET_CONNECT_LOCAL);
-	break;
+        SetAction(NET_CONNECT_LOCAL);
+        break;
       case NET_CONNECT_LOCAL:
-	SetAction(NET_BROWSE_INTERNET);
-	break;
+        SetAction(NET_BROWSE_INTERNET);
+        break;
       case NET_BROWSE_INTERNET:
-	SetAction(NET_HOST);
-	break;
+        SetAction(NET_HOST);
+        break;
       }
       return;
     }
@@ -138,14 +138,14 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
     {
       switch (current_action) {
       case NET_HOST:
-	SetAction(NET_BROWSE_INTERNET);
-	break;
+        SetAction(NET_BROWSE_INTERNET);
+        break;
       case NET_CONNECT_LOCAL:
-	SetAction(NET_HOST);
-	break;
+        SetAction(NET_HOST);
+        break;
       case NET_BROWSE_INTERNET:
-	SetAction(NET_CONNECT_LOCAL);
-	break;
+        SetAction(NET_CONNECT_LOCAL);
+        break;
       }
       return;
     }
@@ -236,8 +236,8 @@ bool NetworkConnectionMenu::signal_ok()
 
       // translators: %s:%s will expand to something like "example.org:9999"
       msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
-				 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
-			  c_red);
+                                 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
+                          c_red);
       goto out;
     }
     break;

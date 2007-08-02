@@ -145,8 +145,8 @@ public:
    * <i>loop</i>: -1 for loop forever, else number of times to play
    */
   int Play(const std::string& category,
-	   const std::string& sample,
-	   const int loop = 1);
+           const std::string& sample,
+           const int loop = 1);
 
   int Stop(int channel) const;
 

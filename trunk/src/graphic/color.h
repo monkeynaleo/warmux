@@ -26,27 +26,27 @@
 
 class Color
 {
-	private:
+  private:
 
-		Uint8 red;
-		Uint8 green;
-		Uint8 blue;
-		Uint8 alpha;
+    Uint8 red;
+    Uint8 green;
+    Uint8 blue;
+    Uint8 alpha;
 
-	public:
-		Color();
-		Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  public:
+    Color();
+    Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
-		bool operator==(const Color &color) const;
+    bool operator==(const Color &color) const;
 
-		void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
-		Uint8 GetRed() const;
-		Uint8 GetGreen() const;
-		Uint8 GetBlue() const;
-		Uint8 GetAlpha() const;
+    Uint8 GetRed() const;
+    Uint8 GetGreen() const;
+    Uint8 GetBlue() const;
+    Uint8 GetAlpha() const;
 
-		SDL_Color GetSDLColor() const;
+    SDL_Color GetSDLColor() const;
 };
 
 #endif

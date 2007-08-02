@@ -53,12 +53,12 @@ public:
   // Get alpha value of a pixel
   unsigned char GetAlpha(const Point2i &pos) const;
 
-  // Draw it (on the entire visible part) 
+  // Draw it (on the entire visible part)
   void DrawTile();
 
   // Draw a part that is inside the given clipping rectangle
   // Clipping rectangle is in World corrdinate not screen coordinates
-  // usefull to redraw only a part that is under a sprite that has moved,... 
+  // usefull to redraw only a part that is under a sprite that has moved,...
   void DrawTile_Clipped(Rectanglei clip_rectangle) const;
 
   // Return a surface of the ground inside the rect

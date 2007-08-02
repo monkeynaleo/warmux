@@ -44,7 +44,7 @@ class TopCharacters
   uint             clumsyness;
   const Character* Accurate;
   double           accuracy;
-  
+
   uint             death_time;
 
   TopCharacters();
@@ -68,7 +68,7 @@ private:
 protected:
   TeamResults(const Team* team, TopCharacters *top);
   ~TeamResults();
-	      
+
 public:
   static std::vector<TeamResults*>* createAllResults(void);
   static void deleteAllResults(std::vector<TeamResults*>* results_list);

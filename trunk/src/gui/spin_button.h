@@ -48,8 +48,8 @@ class SpinButton : public Widget
 
  public:
   SpinButton(const std::string &label, const Rectanglei &rect,
-	     int value=0, int step=1, int min_value=-1, int max_value=-1,
-	     const Color& color = white_color, bool shadowed = true);
+             int value=0, int step=1, int min_value=-1, int max_value=-1,
+             const Color& color = white_color, bool shadowed = true);
   virtual ~SpinButton();
 
   void SetSizePosition(const Rectanglei &rect);

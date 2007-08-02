@@ -45,8 +45,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   resource_manager.UnLoadXMLProfile(res);
 
-  Box * tmp_map_box = new VBox( Rectanglei(0, 0,
-					   rect.GetSizeX()-63, 0), false);
+  Box * tmp_map_box = new VBox( Rectanglei(0, 0, rect.GetSizeX()-63, 0), false);
   tmp_map_box->SetBorder( Point2i(0,0) );
   tmp_map_box->SetMargin(0);
 
@@ -65,7 +64,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   if ( uint(tmp_map_box->GetSizeX() - 20) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX())) {
     margin = (tmp_map_box->GetSizeX() - 20 -
-	      (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
+              (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
   }
 
   if (margin < 5) {
@@ -151,7 +150,7 @@ void MapSelectionBox::ChangeMap(int index)
       MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
 
       ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
-							  ActiveMap().GetRawName()));
+                                                          ActiveMap().GetRawName()));
     }
 
   // Set Map information
@@ -192,10 +191,10 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
   } else if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition)) {
     ChangeMapDelta(-2);
   } else if ((button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition))
-	     || (button == SDL_BUTTON_WHEELUP )) {
+             || (button == SDL_BUTTON_WHEELUP )) {
     ChangeMapDelta(-1);
   } else if ((button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
-	     || (button == SDL_BUTTON_WHEELDOWN)) {
+             || (button == SDL_BUTTON_WHEELDOWN)) {
     ChangeMapDelta(+1);
   } else if (button == SDL_BUTTON_LEFT && map_preview_after2->Contains(mousePosition)) {
     ChangeMapDelta(+2);

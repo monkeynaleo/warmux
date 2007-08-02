@@ -107,7 +107,7 @@ public:
                     const std::string &value);
 
   void WriteComment(xmlpp::Element *x,
-		    const std::string& comment);
+                    const std::string& comment);
 
   bool Save();
 

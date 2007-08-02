@@ -36,9 +36,9 @@ LoadingScreen::LoadingScreen()
   AppWormux * app = AppWormux::GetInstance();
 
   loading_bg = new Sprite(Surface((
-				   config->GetDataDir() + PATH_SEPARATOR
-				   + "menu" + PATH_SEPARATOR
-				   + "loading.png").c_str()));
+                                   config->GetDataDir() + PATH_SEPARATOR
+                                   + "menu" + PATH_SEPARATOR
+                                   + "loading.png").c_str()));
   loading_bg->cache.EnableLastFrameCache();
   loading_bg->ScaleSize(app->video->window.GetWidth(), app->video->window.GetHeight());
 
@@ -69,7 +69,7 @@ void LoadingScreen::DrawBackground()
 }
 
 void LoadingScreen::StartLoading(uint nb, const std::string& resource,
-				 const std::string& label) const
+                                 const std::string& label) const
 {
   Surface image = resource_manager.LoadImage(res, "loading_screen/"+resource);
 
@@ -78,9 +78,9 @@ void LoadingScreen::StartLoading(uint nb, const std::string& resource,
   int y = (AppWormux::GetInstance()->video->window.GetHeight()/2)+40;
 
   Rectanglei dest ( x+slot_margin_x,
-		    y,
-		    image.GetWidth(),
-		    image.GetHeight() );
+                    y,
+                    image.GetWidth(),
+                    image.GetHeight() );
   AppWormux::GetInstance()->video->window.Blit( image, dest.GetPosition());
 
   Font::GetInstance(Font::FONT_MEDIUM)->WriteCenter(Point2i(x+120/2, y+80), label, white_color);

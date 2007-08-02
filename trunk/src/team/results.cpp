@@ -102,7 +102,7 @@ void TopCharacters::rankPlayer(const Character *player)
   top.Traitor  = player;
   top.Clumsy   = player;
   top.Accurate = player;
-  
+
   top.violence    = stats->GetMostDamage();
   top.accuracy    = stats->GetAccuracy();
   top.usefulness  = stats->GetOthersDamage();
@@ -129,7 +129,7 @@ TeamResults::~TeamResults()
 TeamResults* TeamResults::createTeamResults(Team* team)
 {
   TopCharacters* top = new TopCharacters;
-  
+
   // Search best/worst performers
   FOR_EACH_LIVING_AND_DEAD_CHARACTER(team, player)
   {
@@ -168,7 +168,7 @@ std::vector<TeamResults*>* TeamResults::createAllResults(void)
 
     top->merge(results->getTopCharacters());
   }
- 
+
   // Add overall results to list
   results = new TeamResults(NULL, top);
   results_list->insert(results_list->begin(), results);
@@ -181,7 +181,7 @@ void TeamResults::deleteAllResults(std::vector<TeamResults*>* results_list)
   // Build results list
   for (int i=results_list->size()-1; i==0; i--)
     delete ((*results_list)[i]);
- 
+
   // Add overall results to list
   delete results_list;
 }

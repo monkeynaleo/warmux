@@ -48,7 +48,7 @@ typedef unsigned __int8  uint8;
 typedef signed __int8    sint8;
 typedef signed __int32   sint32;
 typedef long int         ssize_t;
- 
+
 typedef signed   __int16  int16_t;
 typedef unsigned __int32  uint32_t;
 #endif

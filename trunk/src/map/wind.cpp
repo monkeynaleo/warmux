@@ -255,12 +255,12 @@ void Wind::RandomizeParticlesPos()
   iterator it=particles.begin(), end=particles.end();
 
   MSG_DEBUG("wind", "camera position: %d, %d - %d, %d", camera.GetPositionX(),
-	    camera.GetPositionX()+camera.GetSizeX(), camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY());
+            camera.GetPositionX()+camera.GetSizeX(), camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY());
 
   for (; it != end; ++it)
   {
     (*it)->SetXY(Point2i( randomObj.GetLong(camera.GetPositionX(), camera.GetPositionX()+camera.GetSizeX()),
-			  randomObj.GetLong(camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY())));
+                          randomObj.GetLong(camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY())));
     MSG_DEBUG("wind", "new particule position: %d, %d", (*it)->GetX(), (*it)->GetY());
   }
 }

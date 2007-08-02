@@ -64,9 +64,9 @@ void Ground::Reset(){
 
 // Read the alpha channel of the pixel
 bool Ground::IsEmpty(const Point2i &pos) const{
-	ASSERT( !world.IsOutsideWorldXY(pos.x, pos.y) );
+        ASSERT( !world.IsOutsideWorldXY(pos.x, pos.y) );
 
-	return GetAlpha( pos ) != 255; // IsTransparent
+        return GetAlpha( pos ) != 255; // IsTransparent
 }
 
 /*
@@ -119,11 +119,11 @@ double Ground::Tangent(int x,int y) const {
 
   //calculated with a good old TI-83... using table[a][b] = atan( (a-2) / (b-2) )
   const float table[5][5] = {
-    {.78539,		.46364,		M_PI,		-.46364+M_PI,	-.78539+M_PI},
-    {1.1071,		.78539,		M_PI,		-.78539+M_PI,	-1.1071+M_PI},
-    {M_PI/2.0,		M_PI/2.0,	M_PI/2.0,	M_PI/2.0,	M_PI / 2.0},
-    {-1.1071+M_PI,	 -.78539+M_PI,  M_PI,		78539,		1.1071},
-    {-.78539+M_PI,	-.46364+M_PI,	M_PI,		.46364,		.78539}};
+    {      .78539,       .46364,     M_PI, -.46364+M_PI, -.78539+M_PI},
+    {      1.1071,       .78539,     M_PI, -.78539+M_PI, -1.1071+M_PI},
+    {    M_PI/2.0,     M_PI/2.0, M_PI/2.0,     M_PI/2.0,   M_PI / 2.0},
+    {-1.1071+M_PI, -.78539+M_PI,     M_PI,        78539,       1.1071},
+    {-.78539+M_PI, -.46364+M_PI,     M_PI,       .46364,       .78539}};
 
   ASSERT(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
   ASSERT(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);
@@ -270,8 +270,8 @@ void Ground::Draw(bool redraw_all)
 }
 
 void Ground::RedrawParticleList(std::list<Rectanglei> &list) const {
-	std::list<Rectanglei>::iterator it;
+  std::list<Rectanglei>::iterator it;
 
-	for( it = list.begin(); it != list.end(); ++it )
-		DrawTile_Clipped(*it);
+  for( it = list.begin(); it != list.end(); ++it )
+    DrawTile_Clipped(*it);
 }

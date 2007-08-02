@@ -153,7 +153,7 @@ int DistantComputer::ReceiveDatas(char* & buf)
       packet = NULL;
       NET_ASSERT(false)
       {
-	return -1;
+        return -1;
       }
     }
   }
@@ -248,7 +248,7 @@ void DistantComputer::SendChatMessage(Action* a) const
   }
 }
 
-void DistantComputer::SetState(DistantComputer::state_t _state) 
+void DistantComputer::SetState(DistantComputer::state_t _state)
 {
   state = _state;
 }

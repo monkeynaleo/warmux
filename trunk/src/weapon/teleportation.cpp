@@ -36,8 +36,8 @@
 #include "tool/i18n.h"
 
 Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
-					new WeaponConfig(),
-					VISIBLE_ONLY_WHEN_INACTIVE)
+                                        new WeaponConfig(),
+                                        VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Teleportation");
   m_category = MOVE;

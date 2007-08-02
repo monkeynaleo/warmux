@@ -46,11 +46,11 @@ T BorneTpl (const T &valeur, const T &min, const T &max){
 }
 
 long BorneLong (const long &valeur, const long &min, const long &max){
-	return BorneTpl (valeur, min, max);
+        return BorneTpl (valeur, min, max);
 }
 
 double BorneDouble (const double &valeur, const double &min, const double &max){
-	return BorneTpl (valeur, min, max);
+        return BorneTpl (valeur, min, max);
 }
 
 // Inverse un angle par rapport à l'axe vertical
@@ -78,11 +78,11 @@ double InverseAngleDeg (const double &angle){
 }
 
 double AbsReel (const double x){
-	return fabs(x);
+        return fabs(x);
 }
 
 bool EgalZero (const double x){
-	return AbsReel(x) <= EPS_ZERO;
+        return AbsReel(x) <= EPS_ZERO;
 }
 
 #ifdef _MSC_VER

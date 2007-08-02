@@ -48,12 +48,12 @@ class Label : public Widget{
 
  public:
   Label(const std::string &label,
-	const Rectanglei &rect,
-	Font::font_size_t font_size,
-	Font::font_style_t font_style,
-	const Color& color = white_color,
-	bool center = false,
-	bool shadowed = true);
+        const Rectanglei &rect,
+        Font::font_size_t font_size,
+        Font::font_style_t font_style,
+        const Color& color = white_color,
+        bool center = false,
+        bool shadowed = true);
   ~Label();
 
   void Draw (const Point2i &mousePosition, Surface& surf) const;

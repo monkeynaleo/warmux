@@ -53,19 +53,19 @@ InternetMenu::InternetMenu() :
   connection_box->AddWidget(connect_lst);
 
   refresh = new ButtonText( Point2i(0,0),
-			    res, "main_menu/button",
-			    _("Refresh"), // Refresh the list of available hosts
-			    Font::FONT_BIG, 
-			    Font::FONT_NORMAL);
+                            res, "main_menu/button",
+                            _("Refresh"), // Refresh the list of available hosts
+                            Font::FONT_BIG, 
+                            Font::FONT_NORMAL);
 
   refresh->SetSizePosition( stdRect );
   connection_box->AddWidget(refresh);
 
   connect = new ButtonText( Point2i(0,0),
-			    res, "main_menu/button",
-			    _("Connect !"),
-			    Font::FONT_BIG, 
-			    Font::FONT_NORMAL);
+                            res, "main_menu/button",
+                            _("Connect !"),
+                            Font::FONT_BIG, 
+                            Font::FONT_NORMAL);
 
   connect->SetSizePosition( stdRect );
   connection_box->AddWidget(connect);

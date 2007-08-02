@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Statistics. 
+ * Statistics.
  *****************************************************************************/
 
 #include "stats.h"
@@ -35,7 +35,7 @@ typedef uint StatTime_t;
   class StatOutputItem
   {
   public:
-    StatOutputItem(const std::string &p_function) 
+    StatOutputItem(const std::string &p_function)
       : function(p_function), total(0), min(0), max(0)
     {}
     bool operator< (const StatOutputItem& b) const
@@ -96,7 +96,7 @@ StatTime_t ComputeStat(std::list<StatOutputItem> &table)
     StatItem::time_it time = it->second.time.begin(), time_end=it->second.time.end();
     if (time != time_end)
     {
-      item.min = *time; 
+      item.min = *time;
       item.max = *time;
       for (; time != time_end; ++time)
       {
@@ -138,7 +138,7 @@ void DoSaveStatToXML(const std::string &filename,
   file.precision(2);
   for (; it != end; ++it)
   {
-    file 
+    file
       << "  <item function=\"" << it->function
       << "\" count=\"" << it->count
       << "\" total=\"" << it->total

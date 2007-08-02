@@ -131,8 +131,8 @@ void Map::Dig(const Point2i& position, const Surface& surface)
 void Map::Dig(const Point2i& center, const uint radius)
 {
    ground.Dig (center, radius);
-   to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE)
-                                      , Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
+   to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE),
+                                   Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
 void Map::PutSprite(const Point2i& pos, const Sprite* spr)
@@ -212,8 +212,8 @@ bool Map::HorizontalLine_IsInVacuum(int ox, int y, int width) const
   // Traite une ligne
 
   for (int i=0; i<width; ++i)
-	if (!IsInVacuum(ox+i, (uint)y))
-	  return false;
+    if (!IsInVacuum(ox+i, (uint)y))
+      return false;
   return true;
 }
 
@@ -289,29 +289,29 @@ bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect) const
 bool Map::IsInVacuum_top(const PhysicalObj &obj, int dx, int dy) const
 {
   return HorizontalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy,
-			     obj.GetTestRect().GetSizeX());
+                                    obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy,
+                                    obj.GetTestRect().GetSizeX());
 }
 
 bool Map::IsInVacuum_bottom(const PhysicalObj &obj, int dx, int dy) const
 {
   return HorizontalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-			     obj.GetTestRect().GetPositionY() + dy,
-			     obj.GetTestRect().GetSizeX());
+                                    obj.GetTestRect().GetPositionY() + dy,
+                                    obj.GetTestRect().GetSizeX());
 }
 
 bool Map::IsInVacuum_left(const PhysicalObj &obj, int dx, int dy) const
 {
   return VerticalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-			     obj.GetTestRect().GetPositionY() + dy,
-			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
+                                  obj.GetTestRect().GetPositionY() + dy,
+                                  obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }
 
 bool Map::IsInVacuum_right(const PhysicalObj &obj, int dx, int dy) const
 {
   return VerticalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + obj.GetTestRect().GetSizeX() + dx,
-			     obj.GetTestRect().GetPositionY() + dy,
-			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
+                                  obj.GetTestRect().GetPositionY() + dy,
+                                  obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }
 
 void Map::DrawAuthorName()
@@ -328,7 +328,7 @@ void Map::DrawAuthorName()
   if (author_info1 == NULL) {
     std::string txt;
     txt  = Format(_("Map %s, a creation of: "),
-		  ActiveMap().ReadFullMapName().c_str());
+                  ActiveMap().ReadFullMapName().c_str());
     author_info1 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
     txt = ActiveMap().ReadAuthorInfo();
     author_info2 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);

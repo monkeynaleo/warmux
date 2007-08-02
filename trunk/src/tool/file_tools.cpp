@@ -47,7 +47,7 @@ bool IsFolderExist(const std::string &name)
   // Is it a directory ?
   struct stat stat_file;
   if (stat(name.c_str(), &stat_file) != 0)
-	return false;
+        return false;
   return (stat_file.st_mode & S_IFMT) == S_IFDIR;
 }
 
@@ -90,7 +90,7 @@ FolderSearch *OpenFolder(const std::string& dirname)
   {
      FindClose(f->file_search);
      delete f;
-	 return NULL;
+         return NULL;
   }
 
   return f;
@@ -111,7 +111,7 @@ void CloseFolder(FolderSearch *f)
   if (f)
   {
     FindClose(f->file_search);
-	delete f;
+        delete f;
   }
 }
 
@@ -120,10 +120,10 @@ void CloseFolder(FolderSearch *f)
 std::string GetHome()
 {
   char *txt = getenv("HOME");
-  
-  if (txt == NULL) 
+
+  if (txt == NULL)
     Error (_("HOME directory (environment variable $HOME) could not be found!"));
-  
+
   return txt;
 }
 
@@ -158,7 +158,7 @@ void CloseFolder(FolderSearch *f)
 {
   if (f)
   {
-	closedir(f->dir);
+        closedir(f->dir);
     delete f;
   }
 }
@@ -169,7 +169,7 @@ std::string TranslateDirectory(const std::string &directory)
 {
   std::string home = GetHome();
   std::string txt = directory;
-  
+
   for (int pos = txt.length()-1;
        (pos = txt.rfind ('~', pos)) != -1;
        --pos)
