@@ -234,6 +234,7 @@ AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
 AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
 AC_CHECK_LIB([SDL_net], [SDLNet_Init],,check_sdl_net="no")
 LIBS="$LIBS -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net -lSDL_gfx"
+if test "${WIN32}" = "yes"; then LIBS="$LIBS -lwsock32 -lws2_32"; fi
 
 AC_MSG_CHECKING(for libxml++)
 
