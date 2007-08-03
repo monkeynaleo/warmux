@@ -22,9 +22,7 @@
 #ifndef POLECAT_H
 #define POLECAT_H
 
-#include "grenade.h"
-#include "weapon.h"
-#include "gui/progress_bar.h"
+#include "launcher.h"
 #include "include/base.h"
 
 class Polecat : public WeaponProjectile
@@ -38,7 +36,7 @@ class Polecat : public WeaponProjectile
   void SignalOutOfMap();
  public:
   Polecat(ExplosiveWeaponConfig& cfg,
-      WeaponLauncher * p_launcher);
+          WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
   DECLARE_GETWEAPONSTRING();

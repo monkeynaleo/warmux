@@ -22,7 +22,6 @@
 #ifndef SHOTGUN_H
 #define SHOTGUN_H
 
-#include <SDL.h>
 #include <vector>
 #include "launcher.h"
 #include "include/base.h"

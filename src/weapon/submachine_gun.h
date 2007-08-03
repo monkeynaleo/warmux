@@ -23,7 +23,6 @@
 #ifndef SUBMACHINE_GUN_H
 #define SUBMACHINE_GUN_H
 
-#include <SDL.h>
 #include <vector>
 #include "launcher.h"
 #include "include/base.h"

@@ -23,8 +23,6 @@
 #define DISCO_GRENADE_H
 
 #include "launcher.h"
-#include "graphic/surface.h"
-#include "gui/progress_bar.h"
 #include "include/base.h"
 
 class DiscoGrenadeLauncher;

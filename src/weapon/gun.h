@@ -23,7 +23,6 @@
 #ifndef GUN_H
 #define GUN_H
 
-#include <SDL.h>
 #include <vector>
 #include "launcher.h"
 #include "include/base.h"
