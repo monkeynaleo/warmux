@@ -29,10 +29,13 @@
 #include "particles/particle.h"
 #include "sound/sound_sample.h"
 #include "tool/debug.h"
-#include <libxml++/libxml++.h>
 
 class Character;
 class Sprite;
+namespace xmlpp
+{
+  class Element;
+}
 
 // Infinite ammos constant
 extern const int INFINITE_AMMO;

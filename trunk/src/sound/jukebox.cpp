@@ -19,6 +19,8 @@
  * Sound engine
  *****************************************************************************/
 
+#include <SDL.h>
+#include <SDL_mixer.h>
 #include "jukebox.h"
 
 #include <iostream>
