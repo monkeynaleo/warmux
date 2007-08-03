@@ -130,7 +130,7 @@ wormux_SOURCES = \
         particles/star.cpp particles/star.h \
         particles/teleport_member.cpp particles/teleport_member.h \
         sound/jukebox.cpp sound/jukebox.h \
-	sound/sound_sample.cpp sound/sound_sample.h \
+        sound/sound_sample.cpp sound/sound_sample.h \
         team/macro.h \
         team/results.cpp team/results.h \
         team/team_config.h \
@@ -187,7 +187,8 @@ wormux_SOURCES = \
         weapon/teleportation.cpp weapon/teleportation.h \
         weapon/weapon_cfg.cpp weapon/weapon_cfg.h \
         weapon/weapon.cpp weapon/weapon.h \
-        weapon/weapons_list.cpp weapon/weapons_list.h
+        weapon/weapons_list.cpp weapon/weapons_list.h \
+        weapon/weapon_strength_bar.h
 
 if AUTOPACKAGE
 DEFINE_AUTOPACKAGE=-DUSE_AUTOPACKAGE
