@@ -89,12 +89,12 @@
   </sprite> 
   <sprite name="big_plus">
     <image file="menu/right.png">
-      <grid pos="0,0" size="21,21" array="2,1" />
+      <grid pos="0,0" size="20,20" array="2,1" />
     </image>
   </sprite> 
   <sprite name="really_big_plus">
     <image file="menu/big_right.png">
-      <grid pos="0,0" size="42,42" array="2,1" />
+      <grid pos="0,0" size="40,40" array="2,1" />
     </image>
   </sprite> 
   <sprite name="minus">
@@ -104,12 +104,12 @@
   </sprite> 
   <sprite name="big_minus">
     <image file="menu/left.png">
-      <grid pos="0,0" size="21,21" array="2,1" />
+      <grid pos="0,0" size="20,20" array="2,1" />
     </image>
   </sprite> 
   <sprite name="really_big_minus">
     <image file="menu/big_left.png">
-      <grid pos="0,0" size="42,42" array="2,1" />
+      <grid pos="0,0" size="40,40" array="2,1" />
     </image>
   </sprite> 
   <sprite name="up">
