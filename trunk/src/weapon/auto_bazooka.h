@@ -22,18 +22,18 @@
 #ifndef AUTO_BAZOOKA_H
 #define AUTO_BAZOOKA_H
 #include "launcher.h"
-#include "graphic/surface.h"
 #include "include/base.h"
 
 class AutomaticBazooka;
 class AutomaticBazookaConfig;
+struct target_t;
 
 class RPG : public WeaponProjectile
 {
   ParticleEngine smoke_engine;
   protected:
     double angle_local;
-    Point2i m_target;
+    Point2i m_targetPoint;
     bool m_targeted;
     double m_force;
     uint m_lastrefresh;
@@ -51,13 +51,7 @@ class RPG : public WeaponProjectile
 
 class AutomaticBazooka : public WeaponLauncher
 {
-  private:
-    struct target_t
-    {
-      Point2i pos;
-      bool selected;
-      Surface image;
-    } m_target;
+  target_t       *m_target;
   public:
     AutomaticBazooka();
     void Draw ();
