@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "launcher.h"
+#include "weapon_cfg.h"
 
 #include <sstream>
 
@@ -255,11 +256,6 @@ void WeaponProjectile::SignalOutOfMap()
   MSG_DEBUG ("weapon.projectile", "SignalOutOfMap %s: %d, %d", m_name.c_str(), GetX(), GetY());
 }
 
-// Implement it in subclass to randomize fire
-void WeaponProjectile::RandomizeShoot(double &/*angle*/,double &/*strength*/)
-{
-}
-
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
 {
@@ -299,11 +295,6 @@ void WeaponProjectile::SetTimeOut(int timeout)
 {
   if (cfg.allow_change_timeout && timeout <= (int)cfg.timeout*2 && timeout >= 1)
     m_timeout_modifier = timeout - cfg.timeout ;
-}
-
-void WeaponProjectile::ResetTimeOut()
-{
-  m_timeout_modifier = 0 ;
 }
 
 int WeaponProjectile::GetTotalTimeout() const
@@ -380,58 +371,6 @@ void WeaponLauncher::DirectExplosion()
 {
   Point2i pos = ActiveCharacter().GetCenter();
   ApplyExplosion (pos, cfg());
-}
-
-// Signal the end of a projectile for any reason possible
-void WeaponLauncher::SignalEndOfProjectile()
-{
-  DecActiveProjectile();
-}
-
-// Signal that a projectile explosion
-void WeaponLauncher::SignalProjectileExplosion()
-{
-  SignalEndOfProjectile();
-}
-
-// Signal that a projectile fired by this weapon has hit something (ground, character etc)
-void WeaponLauncher::SignalProjectileCollision()
-{
-  SignalEndOfProjectile();
-}
-
-// Signal a ghost state
-void WeaponLauncher::SignalProjectileGhostState()
-{
-  SignalEndOfProjectile();
-}
-
-// Signal a projectile timeout (for exemple: grenade, disco grenade ... etc.)
-void WeaponLauncher::SignalProjectileTimeout()
-{
-  SignalEndOfProjectile();
-}
-
-// Signal a projectile is drowning
-void WeaponLauncher::SignalProjectileDrowning()
-{
-  SignalEndOfProjectile();
-}
-
-// Keep the total amount of active projectile
-void WeaponLauncher::IncActiveProjectile()
-{
-  ++nb_active_projectile;
-}
-
-void WeaponLauncher::DecActiveProjectile()
-{
-  --nb_active_projectile;
-}
-
-// Call by the object list class to refresh the weapon's state
-void WeaponLauncher::Refresh()
-{
 }
 
 void WeaponLauncher::Draw()

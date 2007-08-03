@@ -26,14 +26,7 @@
 #include "weapon.h"
 //-----------------------------------------------------------------------------
 
-class BaseballConfig : public WeaponConfig
-{
-  public:
-    uint range;
-    uint strength;
-    BaseballConfig();
-    void LoadXml(xmlpp::Element *elem);
-};
+class BaseballConfig;
 
 //-----------------------------------------------------------------------------
 

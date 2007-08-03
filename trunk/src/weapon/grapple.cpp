@@ -20,6 +20,8 @@
  *****************************************************************************/
 
 #include "grapple.h"
+#include "weapon_cfg.h"
+
 #include <math.h>
 #include "explosion.h"
 #include "character/character.h"
@@ -81,6 +83,20 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
 
   return false ;
 }
+
+class GrappleConfig : public EmptyWeaponConfig
+{
+ public:
+  uint max_rope_length; // Max rope length in pixels
+  uint automatic_growing_speed; // Pixel per 1/100 second.
+  int push_force;
+
+ public:
+  GrappleConfig();
+  void LoadXml(xmlpp::Element *elem);
+};
+
+//-----------------------------------------------------------------------------
 
 Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
 {
@@ -402,23 +418,6 @@ void Grapple::Draw()
   m_hook_sprite->SetRotation_rad(-prev_angle);
   m_hook_sprite->Draw( rope_nodes.front().pos - m_hook_sprite->GetSize()/2);
 }
-
-void Grapple::p_Deselect()
-{
-  DetachRope();
-}
-
-// force detaching rope if time is out
-void Grapple::SignalTurnEnd()
-{
-  p_Deselect();
-}
-
-void Grapple::ActionStopUse()
-{
-  DetachRope();
-}
-
 
 void Grapple::AttachRope(const Point2i& contact_point)
 {

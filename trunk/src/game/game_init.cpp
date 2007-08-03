@@ -42,6 +42,7 @@
 #include "network/network_server.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
+#include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"

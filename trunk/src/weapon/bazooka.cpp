@@ -21,6 +21,7 @@
 
 #include "bazooka.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
 #include "game/config.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
@@ -29,6 +30,17 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
+
+class BazookaRocket : public WeaponProjectile
+{
+  ParticleEngine smoke_engine;
+public:
+  BazookaRocket(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
+  void Refresh();
+protected:
+  void SignalOutOfMap();
+  void SignalDrowning();
+};
 
 BazookaRocket::BazookaRocket(ExplosiveWeaponConfig& cfg,
                                  WeaponLauncher * p_launcher) :

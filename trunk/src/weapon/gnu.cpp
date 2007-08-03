@@ -19,9 +19,11 @@
  * Weapon gnu : a gnu jump in (more or less) random directions and explodes
  *****************************************************************************/
 
-#include "gnu.h"
-#include <sstream>
 #include "explosion.h"
+#include "gnu.h"
+#include "weapon_cfg.h"
+
+#include <sstream>
 #include "character/character.h"
 #include "game/config.h"
 #include "graphic/sprite.h"
@@ -34,6 +36,22 @@
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+
+class Gnu : public WeaponProjectile
+{
+ private:
+  int m_sens;
+  int save_x, save_y;
+ protected:
+  void SignalOutOfMap();
+public:
+  Gnu(ExplosiveWeaponConfig& cfg,
+      WeaponLauncher * p_launcher);
+  void Shoot(double strength);
+  void Refresh();
+  DECLARE_GETWEAPONSTRING();
+};
+
 
 Gnu::Gnu(ExplosiveWeaponConfig& cfg,
          WeaponLauncher * p_launcher) :

@@ -21,6 +21,7 @@
 
 #include "blowtorch.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
 
 #include "character/character.h"
 #include "include/action_handler.h"
@@ -38,6 +39,15 @@
 
 static const uint MIN_TIME_BETWEEN_DIG = 200;        // milliseconds
 
+class BlowtorchConfig : public WeaponConfig
+{
+  public:
+    BlowtorchConfig();
+    virtual void LoadXml(xmlpp::Element* elem);
+
+    uint range;
+};
+
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
   m_name = _("Blowtorch");
@@ -47,20 +57,11 @@ Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConf
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile, "blowtorch_fire"));
 }
 
-void Blowtorch::Refresh()
-{
-}
-
 void Blowtorch::p_Deselect()
 {
   ActiveCharacter().body->ResetWalk();
   ActiveCharacter().body->StopWalk();
   ActiveTeam().AccessNbUnits() = 0;
-}
-
-void Blowtorch::SignalTurnEnd()
-{
-  p_Deselect();
 }
 
 bool Blowtorch::IsInUse() const
@@ -114,11 +115,6 @@ void Blowtorch::HandleKeyRefreshed_Shoot()
   if (EnoughAmmoUnit()) {
     RepeatShoot();
   }
-}
-
-void Blowtorch::HandleKeyReleased_Shoot()
-{
-  NewActionWeaponStopUse();
 }
 
 //-------------------------------------------------------------------------------------

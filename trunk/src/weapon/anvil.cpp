@@ -19,6 +19,7 @@
  * Anvil : appear in top of an enemy and crush down his head
  *****************************************************************************/
 
+#include "weapon_cfg.h"
 #include "anvil.h"
 #include "explosion.h"
 //-----------------------------------------------------------------------------
@@ -36,6 +37,25 @@
 #include "tool/i18n.h"
 #include "tool/math_tools.h"
 //-----------------------------------------------------------------------------
+
+class Anvil : public WeaponProjectile
+{
+  private:
+    uint merge_time;
+    SoundSample falling_sound;
+  public:
+    Anvil(ExplosiveWeaponConfig& cfg,
+          WeaponLauncher * p_launcher);
+    void Refresh();
+
+    void PlayFallSound();
+    void PlayCollisionSound();
+    DECLARE_GETWEAPONSTRING();
+
+  protected:
+    virtual void SignalObjectCollision(PhysicalObj * obj);
+    virtual void SignalGroundCollision();
+};
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,
              WeaponLauncher * p_launcher) :

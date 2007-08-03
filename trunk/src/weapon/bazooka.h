@@ -21,18 +21,8 @@
 
 #ifndef BAZOOKA_H
 #define BAZOOKA_H
-#include "launcher.h"
 
-class BazookaRocket : public WeaponProjectile
-{
-  ParticleEngine smoke_engine;
-public:
-  BazookaRocket(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
-  void Refresh();
-protected:
-  void SignalOutOfMap();
-  void SignalDrowning();
-};
+#include "launcher.h"
 
 class Bazooka : public WeaponLauncher
 {

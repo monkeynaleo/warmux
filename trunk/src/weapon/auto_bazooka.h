@@ -21,33 +21,12 @@
 
 #ifndef AUTO_BAZOOKA_H
 #define AUTO_BAZOOKA_H
+
 #include "launcher.h"
 #include "include/base.h"
 
-class AutomaticBazooka;
 class AutomaticBazookaConfig;
 struct target_t;
-
-class RPG : public WeaponProjectile
-{
-  ParticleEngine smoke_engine;
-  protected:
-    double angle_local;
-    Point2i m_targetPoint;
-    bool m_targeted;
-    double m_force;
-    uint m_lastrefresh;
-  public:
-    RPG(AutomaticBazookaConfig& cfg,
-        WeaponLauncher * p_launcher);
-    void Refresh();
-    void Shoot(double strength);
-    void SetTarget (int x,int y);
-
-  protected:
-    void SignalOutOfMap();
-    void SignalDrowning();
-};
 
 class AutomaticBazooka : public WeaponLauncher
 {

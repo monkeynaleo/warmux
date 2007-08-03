@@ -20,6 +20,8 @@
  *****************************************************************************/
 
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include "character/character.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"

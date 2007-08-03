@@ -23,7 +23,6 @@
 #ifndef GRENADE_H
 #define GRENADE_H
 
-#include "include/base.h"
 #include "launcher.h"
 
 // La Grenade

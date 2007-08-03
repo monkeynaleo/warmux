@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #include "bounce_ball.h"
+#include "weapon_cfg.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "graphic/sprite.h"
@@ -33,6 +34,18 @@
 #include "tool/math_tools.h"
 #include "weapon/explosion.h"
 //-----------------------------------------------------------------------------
+
+class BounceBall : public WeaponProjectile
+{
+  public:
+    BounceBall(ExplosiveWeaponConfig& cfg,
+               WeaponLauncher * p_launcher);
+    void Refresh();
+    DECLARE_GETWEAPONSTRING();
+  protected:
+    void SignalOutOfMap();
+};
+
 
 BounceBall::BounceBall(ExplosiveWeaponConfig& cfg,
                        WeaponLauncher * p_launcher) :

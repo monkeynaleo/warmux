@@ -26,19 +26,7 @@
 #include "include/base.h"
 //-----------------------------------------------------------------------------
 
-class GrappleConfig : public EmptyWeaponConfig
-{
- public:
-  uint max_rope_length; // Max rope length in pixels
-  uint automatic_growing_speed; // Pixel per 1/100 second.
-  int push_force;
-
- public:
-  GrappleConfig();
-  void LoadXml(xmlpp::Element *elem);
-};
-
-//-----------------------------------------------------------------------------
+class GrappleConfig;
 
 class Grapple : public Weapon
 {
@@ -64,7 +52,7 @@ class Grapple : public Weapon
 
   protected:
     void Refresh();
-    void p_Deselect();
+    void p_Deselect() { DetachRope(); };
     bool p_Shoot();
 
     void GoUp();
@@ -97,8 +85,9 @@ class Grapple : public Weapon
     void Draw();
     virtual void NotifyMove(bool collision);
 
-    virtual void ActionStopUse();
-    virtual void SignalTurnEnd();
+    virtual void ActionStopUse() { DetachRope(); };
+    // force detaching rope if time is out
+    virtual void SignalTurnEnd() { p_Deselect(); };
 
     GrappleConfig& cfg();
 

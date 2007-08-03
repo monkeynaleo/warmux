@@ -23,18 +23,11 @@
 #define SUPERTUX_H
 
 #include "launcher.h"
-#include "include/base.h"
-#include "object/physical_obj.h"
+#include "particles/particle.h"
 
 class TuxLauncher;
 
-class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
-{
-  public:
-    uint speed;
-    SuperTuxWeaponConfig();
-    virtual void LoadXml(xmlpp::Element *elem);
-};
+class SuperTuxWeaponConfig;
 
 class SuperTux : public WeaponProjectile
 {

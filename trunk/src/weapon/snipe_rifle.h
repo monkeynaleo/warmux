@@ -27,15 +27,6 @@
 #include "graphic/color.h"
 #include "include/base.h"
 
-class SnipeBullet : public WeaponBullet
-{
-  public:
-    SnipeBullet(ExplosiveWeaponConfig& cfg,
-                WeaponLauncher * p_launcher);
-  protected:
-    void ShootSound();
-};
-
 class SnipeRifle : public WeaponLauncher
 {
   private:

@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "baseball.h"
+#include "weapon_cfg.h"
 #include "character/character.h"
 #include "game/game_loop.h"
 #include "game/time.h"
@@ -33,6 +34,15 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "explosion.h"
+
+class BaseballConfig : public WeaponConfig
+{
+  public:
+    uint range;
+    uint strength;
+    BaseballConfig();
+    void LoadXml(xmlpp::Element *elem);
+};
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 {

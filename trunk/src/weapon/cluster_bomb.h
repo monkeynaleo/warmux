@@ -29,38 +29,6 @@
 
 class ClusterBombConfig;
 
-class Cluster : public WeaponProjectile
-{
-public:
-  Cluster(ClusterBombConfig& cfg,
-          WeaponLauncher * p_launcher);
-  void Refresh();
-  void Shoot(int n_x, int n_y);
-protected:
-  void SignalOutOfMap();
-  void DoExplosion();
-};
-
-class ClusterBomb : public WeaponProjectile
-{
-public:
-  ClusterBomb(ClusterBombConfig& cfg,
-              WeaponLauncher * p_launcher);
-  void Refresh();
-  DECLARE_GETWEAPONSTRING();
-protected:
-  void DoExplosion();
-  void SignalOutOfMap();
-};
-
-class ClusterBombConfig : public ExplosiveWeaponConfig
-{
-public:
-  uint nb_fragments;
-  ClusterBombConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
-};
-
 class ClusterLauncher : public WeaponLauncher
 {
  public:

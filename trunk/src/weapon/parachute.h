@@ -24,15 +24,8 @@
 
 #include "weapon.h"
 
-class ParachuteConfig : public WeaponConfig
-{
-  public:
-     double wind_factor;
-     double air_resist_factor;
-     double force_side_displacement;
-     ParachuteConfig();
-     void LoadXml(xmlpp::Element *elem);
-};
+class Sprite;
+class ParachuteConfig;
 
 //-----------------------------------------------------------------------------
 
@@ -51,7 +44,7 @@ class Parachute : public Weapon
   public:
     Parachute();
     void Draw();
-    void SignalTurnEnd();
+    void SignalTurnEnd() { p_Deselect(); };
     bool IsInUse() const;
 
     void HandleKeyPressed_Shoot();

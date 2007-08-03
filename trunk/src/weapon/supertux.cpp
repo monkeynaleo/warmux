@@ -21,6 +21,8 @@
 
 #include "supertux.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game_loop.h"
@@ -39,6 +41,15 @@
 
 const uint time_delta = 40;
 const uint animation_deltat = 50;
+
+class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
+{
+  public:
+    uint speed;
+    SuperTuxWeaponConfig();
+    virtual void LoadXml(xmlpp::Element *elem);
+};
+
 
 SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
                    WeaponLauncher * p_launcher) :

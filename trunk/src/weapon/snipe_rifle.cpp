@@ -20,6 +20,8 @@
  *****************************************************************************/
 
 #include "snipe_rifle.h"
+#include "weapon_cfg.h"
+
 #include <sstream>
 #include "explosion.h"
 #include "character/character.h"
@@ -40,6 +42,16 @@
 const uint SNIPE_RIFLE_BEAM_START = 5;
 const uint SNIPE_RIFLE_BULLET_SPEED = 20;
 const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
+
+class SnipeBullet : public WeaponBullet
+{
+  public:
+    SnipeBullet(ExplosiveWeaponConfig& cfg,
+                WeaponLauncher * p_launcher);
+  protected:
+    void ShootSound();
+};
+
 
 SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :

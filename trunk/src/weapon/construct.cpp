@@ -21,6 +21,8 @@
 
 #include "construct.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
@@ -63,10 +65,6 @@ bool Construct::p_Shoot ()
   return true;
 }
 
-void Construct::Refresh()
-{
-}
-
 void Construct::Draw()
 {
   if (!IsInUse()) {
@@ -85,26 +83,6 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-void Construct::HandleKeyPressed_Up()
-{
-  Up();
-}
-
-void Construct::HandleKeyPressed_Down()
-{
-  Down();
-}
-
-void Construct::HandleMouseWheelUp()
-{
-  Up();
-}
-
-void Construct::HandleMouseWheelDown()
-{
-  Down();
-}
-
 void Construct::Up() const
 {
   double new_angle = angle + DELTA_ANGLE;
@@ -119,11 +97,6 @@ void Construct::Down() const
 
   Action* a = new Action(Action::ACTION_WEAPON_CONSTRUCTION, new_angle);
   ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Construct::SetAngle(double _angle)
-{
-  angle = _angle;
 }
 
 WeaponConfig& Construct::cfg()

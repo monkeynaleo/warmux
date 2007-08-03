@@ -108,13 +108,6 @@ void WeaponsList::Refresh () const
   ActiveTeam().AccessWeapon().Manage();
 }
 
-//-----------------------------------------------------------------------------
-
-const WeaponsList::weapons_list_type& WeaponsList::GetList() const
-{
-  return m_weapons_list;
-}
-
 
 //-----------------------------------------------------------------------------
 

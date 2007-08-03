@@ -25,17 +25,6 @@
 
 #include "launcher.h"
 
-class BounceBall : public WeaponProjectile
-{
-  public:
-    BounceBall(ExplosiveWeaponConfig& cfg,
-               WeaponLauncher * p_launcher);
-    void Refresh();
-    DECLARE_GETWEAPONSTRING();
-  protected:
-    void SignalOutOfMap();
-};
-
 class BounceBallLauncher : public WeaponLauncher
 {
   protected:

@@ -22,6 +22,7 @@
 
 #include "weapon.h"
 #include "weapon_strength_bar.h"
+#include "weapon_cfg.h"
 #include <sstream>
 #include "character/character.h"
 #include "game/time.h"
@@ -144,12 +145,6 @@ Weapon::~Weapon()
   if(extra_params) delete extra_params;
   if(icon) delete icon;
 }
-
-void Weapon::p_Select ()
-{
-  m_last_fire_time = 0;
-}
-void Weapon::p_Deselect () {}
 
 void Weapon::Select()
 {
@@ -403,10 +398,6 @@ const std::string& Weapon::GetID() const {
   return m_id;
 }
 
-Weapon::Weapon_type Weapon::GetType() const {
-  return m_type;
-}
-
 void Weapon::UpdateStrength(){
   if( max_strength == 0 || m_first_time_loading == 0 )
     return ;
@@ -417,10 +408,6 @@ void Weapon::UpdateStrength(){
   m_strength = BorneDouble (val, 0.0, max_strength);
 
   weapon_strength_bar.UpdateValue ((int)(m_strength*100));
-}
-
-bool Weapon::IsReady() const{
-  return EnoughAmmo() ;
 }
 
 void Weapon::InitLoading(){
@@ -583,11 +570,6 @@ void Weapon::DrawAmmoUnits() const
   }
 }
 
-Sprite & Weapon::GetIcon() const
-{
-  return *icon;
-}
-
 bool Weapon::LoadXml(const xmlpp::Element * weapon)
 {
   xmlpp::Element *elem = XmlReader::GetMarker(weapon, m_id);
@@ -625,32 +607,6 @@ bool Weapon::LoadXml(const xmlpp::Element * weapon)
     m_image->SetRotation_HotSpot(-position);
 
   return true;
-}
-
-bool Weapon::IsInUse() const
-{
-  // TODO : remove m_is_active by something like :
-  // return m_last_fire_time + 1000 > Time::GetInstance()->Read();
-  return m_is_active;
-}
-
-const double Weapon::ReadStrength() const
-{
-  return m_strength;
-}
-
-bool Weapon::IsLoading() const
-{
-  return m_first_time_loading;
-}
-
-void Weapon::ChooseTarget(Point2i /*mouse_pos*/)
-{
-}
-
-void Weapon::SignalTurnEnd()
-{
-  StopLoading();
 }
 
 void Weapon::ActionStopUse()

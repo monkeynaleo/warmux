@@ -33,7 +33,7 @@ class SkipTurn : public Weapon
     bool IsInUse() const;
   protected:
     bool p_Shoot();
-    void Refresh();
+    void Refresh() { };
 };
 
 //-----------------------------------------------------------------------------

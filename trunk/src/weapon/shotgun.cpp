@@ -19,6 +19,10 @@
  * Shotgun. Shoot a bunch of buckshot at each fire
  *****************************************************************************/
 
+#include "explosion.h"
+#include "shotgun.h"
+#include "weapon_cfg.h"
+
 #include <sstream>
 #include "map/map.h"
 #include "game/time.h"
@@ -30,14 +34,23 @@
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
-#include "explosion.h"
-#include "shotgun.h"
 
 const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;
 const uint   SHOTGUN_EXPLOSION_RANGE = 1;
 const double SHOTGUN_RANDOM_ANGLE    = 0.02;
 const double SHOTGUN_RANDOM_STRENGTH = 2.0;
 const int nb_bullets = 4;
+
+class ShotgunBuckshot : public WeaponBullet
+{
+  public:
+    ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
+                    WeaponLauncher * p_launcher);
+    bool IsOverlapping(const PhysicalObj* obj) const;
+  protected:
+    void RandomizeShoot(double &angle,double &strength);
+};
+
 
 ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
                                  WeaponLauncher * p_launcher) :

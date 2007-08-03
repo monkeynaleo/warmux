@@ -23,8 +23,7 @@
  *****************************************************************************/
 
 #include <sstream>
-#include "explosion.h"
-#include "submachine_gun.h"
+
 #include "character/character.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
@@ -38,9 +37,24 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
+#include "explosion.h"
+#include "submachine_gun.h"
+#include "weapon_cfg.h"
+
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
 const double  SUBMACHINE_RANDOM_ANGLE       = 0.01;
+
+class SubMachineGunBullet : public WeaponBullet
+{
+  public:
+    SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
+                        WeaponLauncher * p_launcher);
+  protected:
+    void ShootSound();
+    void RandomizeShoot(double &angle,double &strength);
+};
+
 
 SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                                          WeaponLauncher * p_launcher) :

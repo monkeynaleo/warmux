@@ -22,29 +22,11 @@
 #ifndef AIR_ATTACK_H
 #define AIR_ATTACK_H
 
-#include "include/base.h"
 #include "launcher.h"
 
-class AirAttack;
+class AirAttackConfig;
 class Sprite;
-
-class AirAttackConfig : public ExplosiveWeaponConfig
-{
-  public:
-    double speed;
-    uint nbr_obus;
-    AirAttackConfig();
-    virtual void LoadXml(xmlpp::Element *elem);
-};
-
-class Obus : public WeaponProjectile
-{
-  private:
-    SoundSample falling_sound;
-  public:
-    Obus(AirAttackConfig& cfg);
-    virtual ~Obus();
-};
+class Obus;
 
 class Plane : public PhysicalObj
 {
@@ -81,7 +63,7 @@ class AirAttack : public Weapon
     bool p_Shoot();
     void p_Select();
     void p_Deselect();
-    void Refresh();
+    void Refresh() { };
   public:
     AirAttack();
     virtual void ChooseTarget (Point2i mouse_pos);

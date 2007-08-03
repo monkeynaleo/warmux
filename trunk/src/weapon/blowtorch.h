@@ -24,33 +24,26 @@
 
 #include "weapon.h"
 
-class BlowtorchConfig : public WeaponConfig
-{
-  public:
-    BlowtorchConfig();
-    virtual void LoadXml(xmlpp::Element* elem);
-
-    uint range;
-};
+class BlowtorchConfig;
 
 class Blowtorch : public Weapon
 {
   protected:
     bool p_Shoot();
     void p_Deselect();
-    void Refresh();
+    void Refresh() { };
 
     void RepeatShoot();
   public:
     Blowtorch();
     BlowtorchConfig& cfg();
 
-    virtual void SignalTurnEnd();
+    virtual void SignalTurnEnd() { p_Deselect(); };
     virtual void ActionStopUse();
 
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();
-    virtual void HandleKeyReleased_Shoot();
+    virtual void HandleKeyReleased_Shoot() { NewActionWeaponStopUse(); };
     bool IsInUse() const;
 
     DECLARE_GETWEAPONSTRING();
