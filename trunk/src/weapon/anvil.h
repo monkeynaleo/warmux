@@ -22,7 +22,6 @@
 #ifndef ANVIL_H
 #define ANVIL_H
 
-#include <SDL.h>
 #include "include/base.h"
 #include "launcher.h"
 

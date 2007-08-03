@@ -24,6 +24,7 @@
 
 #include <vector>
 #include "launcher.h"
+#include "graphic/color.h"
 #include "include/base.h"
 
 class SnipeBullet : public WeaponBullet

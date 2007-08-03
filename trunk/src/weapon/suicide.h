@@ -23,7 +23,6 @@
 #define SUICIDE_H
 
 #include "weapon.h"
-#include "graphic/surface.h"
 
 class Suicide : public Weapon
 {

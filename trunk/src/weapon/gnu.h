@@ -22,7 +22,6 @@
 #ifndef GNU_H
 #define GNU_H
 
-#include <SDL.h>
 #include "weapon/launcher.h"
 
 class GnuLauncher;

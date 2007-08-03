@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "polecat.h"
+#include "grenade.h"
 #include <sstream>
 #include "explosion.h"
 #include "character/character.h"

@@ -22,7 +22,6 @@
 #ifndef WEAPON_TOOLS_H
 #define WEAPON_TOOLS_H
 
-#include <SDL.h>
 #include "particles/particle.h"
 #include "tool/point.h"
 
