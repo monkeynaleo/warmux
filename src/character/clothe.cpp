@@ -20,6 +20,7 @@
 
 #include "tool/xml_document.h"
 #include "clothe.h"
+#include "member.h"
 #include <map>
 #include <iostream>
 

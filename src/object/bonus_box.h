@@ -22,13 +22,13 @@
 #ifndef BONUS_BOX_H
 #define BONUS_BOX_H
 //-----------------------------------------------------------------------------
+#include <map>
 #include "include/base.h"
 #include "weapon/weapon.h"
 #include "objbox.h"
 
 // Forward declarations
 class Character;
-class Weapon;
 //-----------------------------------------------------------------------------
 
 class BonusBox : public ObjBox

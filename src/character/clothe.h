@@ -21,7 +21,6 @@
 #ifndef CLOTHE_H
 #define CLOTHE_H
 #include <map>
-#include "member.h"
 
 class Member;
 namespace xmlpp

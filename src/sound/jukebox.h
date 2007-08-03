@@ -22,8 +22,6 @@
 #ifndef JUKEBOX_H
 #define JUKEBOX_H
 //-----------------------------------------------------------------------------
-#include <SDL.h>
-#include <SDL_mixer.h>
 #include <vector>
 #include <map>
 #include <set>
@@ -31,6 +29,9 @@
 #include "include/base.h"
 
 //-----------------------------------------------------------------------------
+
+struct Mix_Chunk;
+typedef struct _Mix_Music Mix_Music;
 
 /* Informations about music...
  *

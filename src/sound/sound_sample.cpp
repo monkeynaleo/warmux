@@ -20,6 +20,7 @@
  * SDL
  *****************************************************************************/
 
+#include <SDL_mixer.h>
 #include "sound_sample.h"
 #include "jukebox.h"
 
