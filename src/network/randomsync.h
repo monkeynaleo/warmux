@@ -43,9 +43,9 @@ public:
   Point2i GetPoint(const Rectanglei &rect);
   Point2i GetPoint(const Point2i &pt);
 
-  //Fill the pregenerated tables
+  //to fill the pregenerated tables
+  void SetRandMax(double rand_max);
   void AddToTable(double nbr);
-  void ClearTable();
 };
 
 extern RandomSync randomSync;

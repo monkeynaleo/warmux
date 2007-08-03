@@ -27,6 +27,8 @@
 
 const uint table_size = 1024; //Number of pregerated numbers
 
+static double NET_RAND_MAX = RAND_MAX; // client should use same RAND_MAX than server (bug network windows/linux)
+
 RandomSync randomSync;
 
 RandomSync::RandomSync(){
@@ -41,7 +43,8 @@ void RandomSync::Init(){
   rnd_table.clear();
 
   if  (Network::GetInstance()->IsServer()) {
-    Action a(Action::ACTION_NETWORK_RANDOM_CLEAR);
+    Action a(Action::ACTION_NETWORK_RANDOM_INIT);
+    a.Push(NET_RAND_MAX);
     Network::GetInstance()->SendAction(&a);
   }
 
@@ -68,8 +71,9 @@ void RandomSync::AddToTable(double nbr)
   rnd_table.push_back(nbr);
 }
 
-void RandomSync::ClearTable()
+void RandomSync::SetRandMax(double rand_max)
 {
+  NET_RAND_MAX = rand_max;
   rnd_table.clear();
 }
 
@@ -90,8 +94,8 @@ double RandomSync::GetRand()
 }
 
 bool RandomSync::GetBool(){
-  int moitie = RAND_MAX/2;
-  return (GetRand() <= moitie);
+  double middle = NET_RAND_MAX/2;
+  return (GetRand() <= middle);
 }
 
 /**
@@ -115,7 +119,7 @@ double RandomSync::GetDouble(double max){
  * @return A number between 0.0 and 1.0
  */
 double RandomSync::GetDouble(){
-        return 1.0*GetRand()/(RAND_MAX + 1.0);
+        return 1.0*GetRand()/(NET_RAND_MAX + 1.0);
 }
 
 /**
