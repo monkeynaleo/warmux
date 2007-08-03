@@ -36,7 +36,7 @@ wormux_SOURCES = \
         graphic/surface.cpp graphic/surface.h \
         graphic/text.cpp graphic/text.h \
         graphic/text_list.cpp graphic/text_list.h \
-	graphic/textured_polygon.h \
+        graphic/textured_polygon.h \
         graphic/video.cpp graphic/video.h \
         gui/box.cpp gui/box.h \
         gui/button.cpp gui/button.h \
@@ -194,21 +194,14 @@ if AUTOPACKAGE
 DEFINE_AUTOPACKAGE=-DUSE_AUTOPACKAGE
 endif
 
-AM_CXXFLAGS = -DINSTALL_DATADIR=\"@DATADIR@\" -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\" -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE) -Werror -I $(top_srcdir)/src/
-
-.PHONY: analysis
-c++-defs.lnt: Makefile
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	  -x c++ --verbose -E -dM - < /dev/null 2>tmp > c++-defs.h
-	sed '/^ \//!d;/ -dM/d;s|^ |-i|g' tmp > c++-defs.lnt
-
-# @for source in $(filter %.cpp, $?)
-
-flint: c++-defs.lnt $(wormux_SOURCES)
-	@/opt/flexelint/lin +v -i/opt/flexelint/supp/linux co.lnt $(filter %.cpp, $?)
+AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
+  -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
+  -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
 .rc.o:
 	windres -o $@ -i $<
+else
+AM_CXXFLAGS += -Werror
 endif
