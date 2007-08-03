@@ -30,7 +30,7 @@
 
 //-----------------------------------------------------------------------------
 
-typedef struct Mix_Chunk Mix_Chunk;
+typedef struct _Mix_Chunk Mix_Chunk;
 typedef struct _Mix_Music Mix_Music;
 
 /* Informations about music...
