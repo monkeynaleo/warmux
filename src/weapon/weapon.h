@@ -24,7 +24,6 @@
 #define WEAPON_H
 #include <string>
 #include "weapon_cfg.h"
-#include "gui/progress_bar.h"
 #include "include/base.h"
 #include "particles/particle.h"
 #include "sound/sound_sample.h"
@@ -45,12 +44,6 @@ extern const uint BUTTON_ICO_HEIGHT;
 
 extern const uint WEAPON_ICO_WIDTH;
 extern const uint WEAPON_ICO_HEIGHT;
-
-class WeaponStrengthBar : public ProgressBar
-{
- public:
-  bool visible ;
-} ;
 
 //-----------------------------------------------------------------------------
 

@@ -21,7 +21,7 @@
  *****************************************************************************/
 
 #include "weapon.h"
-#include <SDL.h>
+#include "weapon_strength_bar.h"
 #include <sstream>
 #include "character/character.h"
 #include "game/time.h"
@@ -51,11 +51,9 @@ const uint MAX_TIME_LOADING = 2000;
 const uint UNIT_BOX_HEIGHT = 20;
 const uint UNIT_BOX_GAP = 6;
 
-
 const uint ANIM_DISPLAY_TIME = 400;
 
 extern WeaponStrengthBar weapon_strength_bar;
-
 
 Weapon::Weapon(Weapon_type type,
                const std::string &id,

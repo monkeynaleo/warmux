@@ -37,6 +37,7 @@
 #include "tool/string_tools.h"
 #include "tool/i18n.h"
 #include "weapon/weapon.h"
+#include "weapon/weapon_strength_bar.h"
 
 WeaponStrengthBar weapon_strength_bar;
 
