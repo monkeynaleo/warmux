@@ -20,6 +20,9 @@
  *****************************************************************************/
 
 #include "air_attack.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
+
 #include <sstream>
 #include "character/character.h"
 #include "game/game_loop.h"
@@ -35,7 +38,6 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
-#include "weapon/explosion.h"
 
 const int FORCE_X_MIN = -50;
 const uint FORCE_X_MAX = 0;
@@ -44,6 +46,25 @@ const uint FORCE_Y_MAX = 40;
 
 // XXX Unused ?
 //const double OBUS_SPEED = 7 ;
+
+class AirAttackConfig : public ExplosiveWeaponConfig
+{
+  public:
+    double speed;
+    uint nbr_obus;
+    AirAttackConfig();
+    virtual void LoadXml(xmlpp::Element *elem);
+};
+
+class Obus : public WeaponProjectile
+{
+  private:
+    SoundSample falling_sound;
+  public:
+    Obus(AirAttackConfig& cfg);
+    virtual ~Obus();
+};
+
 
 Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("air_attack_projectile", cfg, NULL)
@@ -185,10 +206,6 @@ AirAttack::AirAttack() :
   can_be_used_on_closed_map = false;
   target_chosen = false;
   m_time_between_each_shot = 100;
-}
-
-void AirAttack::Refresh()
-{
 }
 
 void AirAttack::ChooseTarget(Point2i mouse_pos)

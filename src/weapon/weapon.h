@@ -23,14 +23,14 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 #include <string>
-#include "weapon_cfg.h"
 #include "include/base.h"
-#include "particles/particle.h"
 #include "sound/sound_sample.h"
 #include "tool/debug.h"
+#include "tool/point.h"
 
 class Character;
 class Sprite;
+class EmptyWeaponConfig;
 namespace xmlpp
 {
   class Element;
@@ -150,8 +150,8 @@ public:
   const category_t& Category() const { return m_category; };
 
 protected:
-  virtual void p_Select();
-  virtual void p_Deselect();
+  virtual void p_Select() { m_last_fire_time = 0; };
+  virtual void p_Deselect() { };
   virtual void Refresh() = 0;
   virtual bool p_Shoot() = 0;
 
@@ -176,7 +176,7 @@ public:
 
   void DrawAmmoUnits() const;
 
-  Sprite & GetIcon() const;
+  Sprite & GetIcon() const { return *icon; };
   // Manage the numbers of ammunitions
   bool EnoughAmmo() const;
   void UseAmmo() const;
@@ -204,16 +204,20 @@ public:
   bool Shoot();
 
   // The weapon is still in use (animation for instance) ?
-  virtual bool IsInUse() const;
+  virtual bool IsInUse() const {
+    // TODO : remove m_is_active by something like :
+    // return m_last_fire_time + 1000 > Time::GetInstance()->Read();
+   return m_is_active;
+  };
 
   // the weapon is ready to use ? (is there bullets left ?)
-  virtual bool IsReady() const ;
+  virtual bool IsReady() const { return EnoughAmmo(); };
 
   // Begin to load, to choose the strength
   virtual void InitLoading() ;
 
   // Are we loading to choose the strength
-  virtual bool IsLoading() const;
+  virtual bool IsLoading() const { return m_first_time_loading ? true : false; };
 
   // Stop loading
   virtual void StopLoading() ;
@@ -224,7 +228,7 @@ public:
   const Point2i GetGunHolePosition() const;
 
   // Choose a target.
-  virtual void ChooseTarget (Point2i mouse_pos);
+  virtual void ChooseTarget (Point2i /*mouse_pos*/) { };
 
   // Notify a move. It is usefull only for weapon which have strong
   // interactions with the physical engine such as grapple
@@ -285,7 +289,7 @@ public:
   virtual void HandleMouseWheelDown(){};
 
   // Get informed that the turn is over.
-  virtual void SignalTurnEnd();
+  virtual void SignalTurnEnd() { StopLoading(); };
 
   // Stop using this weapon (only used with lowgrav and jetpack)
   virtual void ActionStopUse();
@@ -295,13 +299,13 @@ public:
   bool LoadXml(const xmlpp::Element * weapon);
 
   // return the strength of the weapon
-  const double ReadStrength() const;
+  const double ReadStrength() const { return m_strength; };
 
   // Data access
   const std::string& GetName() const;
   const std::string& GetID() const;
   const std::string& GetHelp() const;
-  Weapon_type GetType() const;
+  Weapon_type GetType() const { return m_type; };
 
   // For localization purposes, each weapon needs to have its own
   // "%s team has won %d <weapon>" function

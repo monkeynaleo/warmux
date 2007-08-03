@@ -22,6 +22,7 @@
 #ifndef MINE_H
 #define MINE_H
 
+#include "weapon_cfg.h"
 #include "launcher.h"
 #include "include/base.h"
 

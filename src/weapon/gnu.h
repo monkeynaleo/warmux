@@ -24,24 +24,7 @@
 
 #include "weapon/launcher.h"
 
-class GnuLauncher;
-
 // The GNU
-class Gnu : public WeaponProjectile
-{
- private:
-  int m_sens;
-  int save_x, save_y;
- protected:
-  void SignalOutOfMap();
-public:
-  Gnu(ExplosiveWeaponConfig& cfg,
-      WeaponLauncher * p_launcher);
-  void Shoot(double strength);
-  void Refresh();
-  DECLARE_GETWEAPONSTRING();
-};
-
 class GnuLauncher : public WeaponLauncher
 {
 public:

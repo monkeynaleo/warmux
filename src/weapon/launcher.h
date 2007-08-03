@@ -23,11 +23,11 @@
 #define WEAPON_LAUNCHER_H
 
 #include "weapon.h"
-#include "include/base.h"
 #include "object/physical_obj.h"
 
 class Sprite;
 class WeaponLauncher;
+class ExplosiveWeaponConfig;
 
 class WeaponProjectile : public PhysicalObj
 {
@@ -54,6 +54,7 @@ class WeaponProjectile : public PhysicalObj
     virtual ~WeaponProjectile();
 
     virtual void Draw();
+    // Call by the object list class to refresh the weapon's state
     virtual void Refresh();
     virtual void Shoot(double strength);
     virtual bool IsImmobile() const;
@@ -62,7 +63,7 @@ class WeaponProjectile : public PhysicalObj
     void DecrementTimeOut();
     void SetTimeOut(int timeout);
     int GetTotalTimeout() const;
-    void ResetTimeOut();
+    void ResetTimeOut() { m_timeout_modifier = 0; };
     bool change_timeout_allowed() const;
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
@@ -76,7 +77,8 @@ class WeaponProjectile : public PhysicalObj
 
     virtual void ShootSound();
     virtual void Explosion();
-    virtual void RandomizeShoot(double &angle,double &strength);
+    // Implement it in subclass to randomize fire
+    virtual void RandomizeShoot(double &/*angle*/,double &/*strength*/) { };
     virtual void DoExplosion();
 };
 
@@ -115,7 +117,7 @@ class WeaponLauncher : public Weapon
     virtual void p_Select();
     virtual WeaponProjectile * GetProjectileInstance() = 0;
     virtual bool ReloadLauncher();
-    void Refresh();
+    void Refresh() { };
   private:
     void DirectExplosion();
     void NetworkSetTimeoutProjectile() const;
@@ -129,15 +131,22 @@ class WeaponLauncher : public Weapon
     virtual void Draw();
 
     // Handle of projectile events
-    virtual void SignalEndOfProjectile();
-    virtual void SignalProjectileExplosion();
-    virtual void SignalProjectileCollision();
-    virtual void SignalProjectileDrowning();
-    virtual void SignalProjectileGhostState();
-    virtual void SignalProjectileTimeout();
+    // Signal the end of a projectile for any reason possible
+    virtual void SignalEndOfProjectile() { DecActiveProjectile(); };
+    // Signal that a projectile explosion
+    virtual void SignalProjectileExplosion() { SignalEndOfProjectile(); };
+    // Signal that a projectile fired by this weapon has hit something (ground, character etc)
+    virtual void SignalProjectileCollision() { SignalEndOfProjectile(); };
+    // Signal a projectile is drowning
+    virtual void SignalProjectileDrowning() { SignalEndOfProjectile(); };
+    // Signal a ghost state
+    virtual void SignalProjectileGhostState() { SignalEndOfProjectile(); };
+    // Signal a projectile timeout (for exemple: grenade, disco grenade ... etc.)
+    virtual void SignalProjectileTimeout() { SignalEndOfProjectile(); };
 
-    void IncActiveProjectile();
-    void DecActiveProjectile();
+    // Keep the total amount of active projectile
+    void IncActiveProjectile() { ++nb_active_projectile; };
+    void DecActiveProjectile() { --nb_active_projectile; };
 
     virtual void IncMissedShots();
     virtual bool IsInUse() const;

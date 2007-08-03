@@ -23,6 +23,8 @@
 
 #include "dynamite.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include "character/character.h"
 #include "game/config.h"
 #include "graphic/sprite.h"
@@ -30,6 +32,24 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
+
+class DynamiteStick : public WeaponProjectile
+{
+  SoundSample timeout_sound;
+
+  public:
+    DynamiteStick(ExplosiveWeaponConfig& cfg,
+                  WeaponLauncher * p_launcher);
+
+    void Shoot(double strength);
+    void Refresh();
+
+  protected:
+    void ShootSound();
+    void SignalExplosion();
+    void SignalOutOfMap();
+    void SignalDrowning();
+};
 
 DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
                              WeaponLauncher * p_launcher) :

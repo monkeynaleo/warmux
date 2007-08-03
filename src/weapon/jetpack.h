@@ -38,8 +38,8 @@ class JetPack : public Weapon
   public:
     JetPack();
     void Reset();
-    void SignalTurnEnd();
-    void ActionStopUse();
+    void SignalTurnEnd() { p_Deselect(); };
+    void ActionStopUse() { p_Deselect(); };
 
     virtual void HandleKeyPressed_Up();
     virtual void HandleKeyReleased_Up();
@@ -60,9 +60,9 @@ class JetPack : public Weapon
     void GoUp();
     void GoLeft();
     void GoRight();
-    void StopUp();
-    void StopLeft();
-    void StopRight();
+    void StopUp() { m_y_force = 0.0; StopUse(); };
+    void StopLeft() { m_x_force = 0.0; StopUse(); };
+    void StopRight() { m_x_force = 0.0; StopUse(); };
     void StartUse();
     void StopUse();
 };

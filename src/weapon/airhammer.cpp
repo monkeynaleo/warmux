@@ -21,6 +21,8 @@
 
 #include "airhammer.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "character/character.h"
@@ -44,6 +46,16 @@
 const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 
 //-----------------------------------------------------------------------------
+
+class AirhammerConfig : public WeaponConfig
+{
+  public:
+    uint range;
+    uint damage;
+    AirhammerConfig();
+    void LoadXml(xmlpp::Element *elem);
+};
+
 //-----------------------------------------------------------------------------
 
 Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())

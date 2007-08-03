@@ -27,27 +27,6 @@
 #include "launcher.h"
 #include "include/base.h"
 
-class Dynamite;
-
-class DynamiteStick : public WeaponProjectile
-{
-  SoundSample timeout_sound;
-
-  public:
-    DynamiteStick(ExplosiveWeaponConfig& cfg,
-                  WeaponLauncher * p_launcher);
-
-    void Shoot(double strength);
-    void Refresh();
-
-  protected:
-    void ShootSound();
-    void SignalExplosion();
-    void SignalOutOfMap();
-    void SignalDrowning();
-};
-
-
 // L'arme dynamite
 class Dynamite : public WeaponLauncher
 {

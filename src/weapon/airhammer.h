@@ -27,14 +27,7 @@
 #include "weapon.h"
 //-----------------------------------------------------------------------------
 
-class AirhammerConfig : public WeaponConfig
-{
-  public:
-    uint range;
-    uint damage;
-    AirhammerConfig();
-    void LoadXml(xmlpp::Element *elem);
-};
+class AirhammerConfig;
 
 //-----------------------------------------------------------------------------
 

@@ -26,6 +26,7 @@
 #include "tool/point.h"
 
 class Sprite;
+class WeaponConfig;
 
 class Construct : public Weapon
 {
@@ -40,7 +41,7 @@ private:
 
 protected:
   bool p_Shoot();
-  void Refresh();
+  void Refresh() { };
 
 public:
   Construct();
@@ -48,12 +49,12 @@ public:
   void Draw();
   void ChooseTarget(Point2i mouse_pos);
 
-  virtual void HandleKeyPressed_Down();
-  virtual void HandleKeyPressed_Up();
-  virtual void HandleMouseWheelUp();
-  virtual void HandleMouseWheelDown();
+  virtual void HandleKeyPressed_Down() { Down(); };
+  virtual void HandleKeyPressed_Up() { Up(); };
+  virtual void HandleMouseWheelUp() { Up(); };
+  virtual void HandleMouseWheelDown() { Down(); };
 
-  void SetAngle(double angle); // to be used by network
+  void SetAngle(double _angle) { angle = _angle; }; // to be used by network
   DECLARE_GETWEAPONSTRING();
   bool IsInUse() const;
   WeaponConfig& cfg();

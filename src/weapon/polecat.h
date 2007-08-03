@@ -25,23 +25,6 @@
 #include "launcher.h"
 #include "include/base.h"
 
-class Polecat : public WeaponProjectile
-{
- private:
-  int m_sens;
-  int save_x, save_y;
-  uint last_fart_time;
-  double angle;
- protected:
-  void SignalOutOfMap();
- public:
-  Polecat(ExplosiveWeaponConfig& cfg,
-          WeaponLauncher * p_launcher);
-  void Shoot(double strength);
-  void Refresh();
-  DECLARE_GETWEAPONSTRING();
-};
-
 class PolecatLauncher : public WeaponLauncher
 {
 public:

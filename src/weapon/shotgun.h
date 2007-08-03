@@ -27,16 +27,6 @@
 #include "include/base.h"
 #include "tool/point.h"
 
-class ShotgunBuckshot : public WeaponBullet
-{
-  public:
-    ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
-                    WeaponLauncher * p_launcher);
-    bool IsOverlapping(const PhysicalObj* obj) const;
-  protected:
-    void RandomizeShoot(double &angle,double &strength);
-};
-
 class Shotgun : public WeaponLauncher
 {
   protected:

@@ -24,6 +24,8 @@
 
 #include "weapon.h"
 
+class ExplosiveWeaponConfig;
+
 class Suicide : public Weapon
 {
   private:

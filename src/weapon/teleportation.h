@@ -21,9 +21,10 @@
 
 #ifndef TELEPORTATION_H
 #define TELEPORTATION_H
+
 #include "weapon.h"
-#include "include/base.h"
-#include "tool/point.h"
+
+class WeaponConfig;
 
 class Teleportation : public Weapon
 {

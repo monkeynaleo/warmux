@@ -34,7 +34,7 @@ class Syringe : public Weapon
     bool p_Shoot();
     void Refresh();
 
-    void Draw();
+    void Draw() { Weapon::Draw(); };
 
   public:
     Syringe();

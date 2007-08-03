@@ -21,6 +21,8 @@
 
 #include "parachute.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include "character/character.h"
 #include "game/game.h"
 #include "game/game_mode.h"
@@ -35,6 +37,17 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
+
+class ParachuteConfig : public WeaponConfig
+{
+  public:
+     double wind_factor;
+     double air_resist_factor;
+     double force_side_displacement;
+     ParachuteConfig();
+     void LoadXml(xmlpp::Element *elem);
+};
+
 
 Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConfig(), NEVER_VISIBLE)
 {
@@ -122,11 +135,6 @@ void Parachute::Refresh()
   // If parachute is open => character can move a little to the left or to the right
   if(open)
     ActiveCharacter().SetExternForce(m_x_extern, 0.0);
-}
-
-void Parachute::SignalTurnEnd()
-{
-  p_Deselect();
 }
 
 std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count ) const

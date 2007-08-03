@@ -162,24 +162,6 @@ void JetPack::GoRight()
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
 }
 
-void JetPack::StopUp()
-{
-  m_y_force = 0.0 ;
-  StopUse();
-}
-
-void JetPack::StopLeft()
-{
-  m_x_force = 0.0 ;
-  StopUse();
-}
-
-void JetPack::StopRight()
-{
-  m_x_force = 0.0 ;
-  StopUse();
-}
-
 void JetPack::HandleKeyPressed_Up()
 {
   if (IsInUse())
@@ -242,16 +224,6 @@ bool JetPack::p_Shoot()
   ActiveCharacter().SetClothe("jetpack-fire");
 
   return true;
-}
-
-void JetPack::SignalTurnEnd()
-{
-  p_Deselect();
-}
-
-void JetPack::ActionStopUse()
-{
-  p_Deselect();
 }
 
 std::string JetPack::GetWeaponWinString(const char *TeamName, uint items_count ) const

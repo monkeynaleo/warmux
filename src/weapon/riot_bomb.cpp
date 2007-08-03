@@ -22,6 +22,8 @@
 
 #include "riot_bomb.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include "game/config.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
@@ -30,6 +32,18 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
+
+// Roquette du bazooka
+class RiotBombRocket : public WeaponProjectile
+{
+public:
+  RiotBombRocket(ExplosiveWeaponConfig& cfg,
+                   WeaponLauncher * p_launcher);
+  void Refresh();
+protected:
+  void SignalOutOfMap();
+  void DoExplosion();
+};
 
 RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
                                    WeaponLauncher * p_launcher) :

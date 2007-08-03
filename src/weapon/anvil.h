@@ -25,27 +25,6 @@
 #include "include/base.h"
 #include "launcher.h"
 
-class PhysicalObj;
-
-class Anvil : public WeaponProjectile
-{
-  private:
-    uint merge_time;
-    SoundSample falling_sound;
-  public:
-    Anvil(ExplosiveWeaponConfig& cfg,
-          WeaponLauncher * p_launcher);
-    void Refresh();
-
-    void PlayFallSound();
-    void PlayCollisionSound();
-    DECLARE_GETWEAPONSTRING();
-
-  protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj);
-    virtual void SignalGroundCollision();
-};
-
 class AnvilLauncher : public WeaponLauncher
 {
   private:

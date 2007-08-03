@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #include "cluster_bomb.h"
+#include "weapon_cfg.h"
 #include <sstream>
 #include <math.h>
 #include "explosion.h"
@@ -33,6 +34,38 @@
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
 #include "tool/xml_document.h"
+
+class ClusterBombConfig : public ExplosiveWeaponConfig
+{
+public:
+  uint nb_fragments;
+  ClusterBombConfig();
+  virtual void LoadXml(xmlpp::Element *elem);
+};
+
+class Cluster : public WeaponProjectile
+{
+public:
+  Cluster(ClusterBombConfig& cfg,
+          WeaponLauncher * p_launcher);
+  void Refresh();
+  void Shoot(int n_x, int n_y);
+protected:
+  void SignalOutOfMap();
+  void DoExplosion();
+};
+
+class ClusterBomb : public WeaponProjectile
+{
+public:
+  ClusterBomb(ClusterBombConfig& cfg,
+              WeaponLauncher * p_launcher);
+  void Refresh();
+  DECLARE_GETWEAPONSTRING();
+protected:
+  void DoExplosion();
+  void SignalOutOfMap();
+};
 
 Cluster::Cluster(ClusterBombConfig& cfg,
                  WeaponLauncher * p_launcher) :

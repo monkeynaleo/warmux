@@ -21,6 +21,8 @@
 
 #include "lowgrav.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include "character/character.h"
 #include "game/game.h"
 #include "game/game_loop.h"
@@ -42,10 +44,6 @@ LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",
   use_unit_on_first_shoot = false;
 }
 
-void LowGrav::Refresh()
-{
-}
-
 void LowGrav::p_Deselect()
 {
   ActiveCharacter().ResetConstants();
@@ -60,26 +58,12 @@ bool LowGrav::p_Shoot()
   return true;
 }
 
-void LowGrav::Draw()
-{
-}
-
 void LowGrav::HandleKeyPressed_Shoot()
 {
   if (!IsInUse())
     NewActionWeaponShoot();
   else
     NewActionWeaponStopUse();
-}
-
-void LowGrav::SignalTurnEnd()
-{
-  p_Deselect();
-}
-
-void LowGrav::ActionStopUse()
-{
-  UseAmmoUnit();
 }
 
 std::string LowGrav::GetWeaponWinString(const char *TeamName, uint items_count ) const

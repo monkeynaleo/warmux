@@ -21,19 +21,8 @@
 
 #ifndef RIOT_BOMB_H
 #define RIOT_BOMB_H
-#include "launcher.h"
 
-// Roquette du bazooka
-class RiotBombRocket : public WeaponProjectile
-{
-public:
-  RiotBombRocket(ExplosiveWeaponConfig& cfg,
-                   WeaponLauncher * p_launcher);
-  void Refresh();
-protected:
-  void SignalOutOfMap();
-  void DoExplosion();
-};
+#include "launcher.h"
 
 class RiotBomb : public WeaponLauncher
 {

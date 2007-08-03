@@ -20,8 +20,10 @@
  *****************************************************************************/
 
 #include "suicide.h"
-#include <iostream>
 #include "explosion.h"
+#include "weapon_cfg.h"
+
+#include <iostream>
 #include "character/character.h"
 #include "character/body.h"
 #include "game/game_loop.h"

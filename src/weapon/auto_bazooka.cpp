@@ -21,6 +21,8 @@
 
 #include "auto_bazooka.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include "character/character.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
@@ -48,6 +50,27 @@ class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
     double rocket_force;
     AutomaticBazookaConfig();
     void LoadXml(xmlpp::Element *elem);
+};
+
+class RPG : public WeaponProjectile
+{
+  ParticleEngine smoke_engine;
+  protected:
+    double angle_local;
+    Point2i m_targetPoint;
+    bool m_targeted;
+    double m_force;
+    uint m_lastrefresh;
+  public:
+    RPG(AutomaticBazookaConfig& cfg,
+        WeaponLauncher * p_launcher);
+    void Refresh();
+    void Shoot(double strength);
+    void SetTarget (int x,int y);
+
+  protected:
+    void SignalOutOfMap();
+    void SignalDrowning();
 };
 
 RPG::RPG(AutomaticBazookaConfig& cfg,

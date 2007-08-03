@@ -20,6 +20,8 @@
  *****************************************************************************/
 
 #include "disco_grenade.h"
+#include "weapon_cfg.h"
+
 #include <sstream>
 #include "explosion.h"
 #include "game/time.h"
@@ -31,6 +33,24 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
+
+// The Disco Grenade
+class DiscoGrenade : public WeaponProjectile
+{
+  protected:
+    bool have_played_music;
+
+    ParticleEngine smoke_engine;
+  public:
+    DiscoGrenade(ExplosiveWeaponConfig& cfg,
+                 WeaponLauncher * p_launcher);
+    void Refresh();
+    DECLARE_GETWEAPONSTRING();
+  protected:
+    void Explosion();
+    void SignalOutOfMap();
+};
+
 
 DiscoGrenade::DiscoGrenade(ExplosiveWeaponConfig& cfg,
                            WeaponLauncher * p_launcher) :

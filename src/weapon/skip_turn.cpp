@@ -20,6 +20,8 @@
  *****************************************************************************/
 
 #include "skip_turn.h"
+#include "weapon_cfg.h"
+
 //-----------------------------------------------------------------------------
 #include "character/character.h"
 #include "game/game_loop.h"
@@ -47,12 +49,6 @@ bool SkipTurn::p_Shoot()
                                            ActiveTeam().GetName().c_str()));
   jukebox.Play(ActiveTeam().GetSoundProfile(), "skip_turn");
   return true;
-}
-
-//-----------------------------------------------------------------------------
-
-void SkipTurn::Refresh()
-{
 }
 
 //-----------------------------------------------------------------------------

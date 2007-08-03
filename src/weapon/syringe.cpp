@@ -19,7 +19,10 @@
  * Weapon Syringe
  *****************************************************************************/
 
+#include "explosion.h"
 #include "syringe.h"
+#include "weapon_cfg.h"
+
 #include "character/character.h"
 #include "game/game_loop.h"
 #include "sound/jukebox.h"
@@ -28,7 +31,6 @@
 #include "tool/point.h"
 #include "tool/i18n.h"
 #include "tool/xml_document.h"
-#include "explosion.h"
 
 class SyringeConfig : public WeaponConfig
 {
@@ -61,10 +63,6 @@ Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())
 {
   m_name = _("Syringe");
   m_category = DUEL;
-}
-
-void Syringe::Draw() {
-  Weapon::Draw();
 }
 
 bool Syringe::p_Shoot (){

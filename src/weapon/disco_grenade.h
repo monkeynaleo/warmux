@@ -25,25 +25,6 @@
 #include "launcher.h"
 #include "include/base.h"
 
-class DiscoGrenadeLauncher;
-
-// The Disco Grenade
-class DiscoGrenade : public WeaponProjectile
-{
-  protected:
-    bool have_played_music;
-
-    ParticleEngine smoke_engine;
-  public:
-    DiscoGrenade(ExplosiveWeaponConfig& cfg,
-                 WeaponLauncher * p_launcher);
-    void Refresh();
-    DECLARE_GETWEAPONSTRING();
-  protected:
-    void Explosion();
-    void SignalOutOfMap();
-};
-
 class DiscoGrenadeLauncher : public WeaponLauncher
 {
   public:

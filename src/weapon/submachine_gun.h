@@ -23,20 +23,8 @@
 #ifndef SUBMACHINE_GUN_H
 #define SUBMACHINE_GUN_H
 
-#include <vector>
+#include "particles/particle.h"
 #include "launcher.h"
-#include "include/base.h"
-#include "tool/point.h"
-
-class SubMachineGunBullet : public WeaponBullet
-{
-  public:
-    SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
-                        WeaponLauncher * p_launcher);
-  protected:
-    void ShootSound();
-    void RandomizeShoot(double &angle,double &strength);
-};
 
 class SubMachineGun : public WeaponLauncher
 {

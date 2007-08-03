@@ -23,19 +23,8 @@
 #ifndef GUN_H
 #define GUN_H
 
-#include <vector>
 #include "launcher.h"
 #include "include/base.h"
-#include "tool/point.h"
-
-class GunBullet : public WeaponBullet
-{
-  public:
-    GunBullet(ExplosiveWeaponConfig& cfg,
-              WeaponLauncher * p_launcher);
-  protected:
-    void ShootSound();
-};
 
 class Gun : public WeaponLauncher
 {

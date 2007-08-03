@@ -22,6 +22,8 @@
 
 #include "gun.h"
 #include "explosion.h"
+#include "weapon_cfg.h"
+
 #include <sstream>
 #include "map/map.h"
 #include "graphic/sprite.h"
@@ -34,6 +36,15 @@
 #include "tool/resource_manager.h"
 
 const uint GUN_BULLET_SPEED = 20;
+
+class GunBullet : public WeaponBullet
+{
+  public:
+    GunBullet(ExplosiveWeaponConfig& cfg,
+              WeaponLauncher * p_launcher);
+  protected:
+    void ShootSound();
+};
 
 GunBullet::GunBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :
