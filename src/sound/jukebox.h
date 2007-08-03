@@ -26,12 +26,13 @@
 #include <map>
 #include <set>
 #include <utility>
+
+#include <SDL.h>
+#include <SDL_mixer.h>
+
 #include "include/base.h"
 
 //-----------------------------------------------------------------------------
-
-struct Mix_Chunk;
-typedef struct _Mix_Music Mix_Music;
 
 /* Informations about music...
  *
