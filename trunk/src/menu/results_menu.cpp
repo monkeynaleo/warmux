@@ -217,7 +217,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   team_box->SetBorder(Point2i(DEF_BORDER, DEF_BORDER));
 
   bt_prev_team = new Button(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)),
-                            res, "menu/arrow-left");
+                            res, "menu/really_big_minus");
   team_box->AddWidget(bt_prev_team);
 
   pos.SetValues(pos.GetX()+DEF_SIZE, pos.GetY());
@@ -233,7 +233,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   team_box->AddWidget(tmp_box);
   pos.SetValues(pos.GetX()+team_size.GetX(), pos.GetY());
   bt_next_team = new Button(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)),
-                            res, "menu/arrow-right");
+                            res, "menu/really_big_plus");
   team_box->AddWidget(bt_next_team);
 
   widgets.AddWidget(team_box);

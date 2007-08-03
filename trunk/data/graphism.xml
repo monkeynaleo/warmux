@@ -122,17 +122,7 @@
       <grid pos="0,0" size="10,5" array="1,2" />
     </image>
   </sprite> 
-  <sprite name="arrow-right">
-    <image file="menu/arrow-right.png">
-      <grid pos="0,0" size="58,48" array="2,1" />
-    </image>
-  </sprite> 
-  <sprite name="arrow-left">
-    <image file="menu/arrow-left.png">
-      <grid pos="0,0" size="58,48" array="2,1" />
-    </image>
-  </sprite> 
-</section>
+ </section>
 
 <section name="credit">
   <surface name="background" file="menu/background_credits.png" />
