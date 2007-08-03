@@ -228,7 +228,7 @@ const Network::connection_state_t Network::CheckHost(const std::string &host, in
     return Network::CONN_BAD_HOST;
 
   SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
-  if( fd == INVALID_SOCKET )
+  if( fd == -1 )
     return Network::CONN_BAD_SOCKET;
 
   // Set the timeout
