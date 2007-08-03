@@ -527,10 +527,10 @@ void Action_Network_RandomAdd (Action *a)
   randomSync.AddToTable(a->PopDouble());
 }
 
-void Action_Network_RandomClear (Action */*a*/)
+void Action_Network_RandomInit (Action *a)
 {
   ASSERT(Network::GetInstance()->IsClient());
-  randomSync.ClearTable();
+  randomSync.SetRandMax(a->PopDouble());
 }
 
 void Action_Network_SyncBegin (Action */*a*/)
@@ -758,8 +758,8 @@ ActionHandler::ActionHandler():
 
   Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
   Register (Action::ACTION_WIND, "wind", &Action_Wind);
-  Register (Action::ACTION_NETWORK_RANDOM_CLEAR, "NETWORK_clear_random", &Action_Network_RandomClear);
-  Register (Action::ACTION_NETWORK_RANDOM_ADD, "NETWORK_add_random", &Action_Network_RandomAdd);
+  Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
+  Register (Action::ACTION_NETWORK_RANDOM_ADD, "NETWORK_random_add", &Action_Network_RandomAdd);
   Register (Action::ACTION_NETWORK_DISCONNECT, "NETWORK_disconnect", &Action_Network_Disconnect);
   Register (Action::ACTION_NETWORK_CONNECT, "NETWORK_connect", &Action_Network_Connect);
 
