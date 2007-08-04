@@ -19,8 +19,9 @@
  * Message Box
  *****************************************************************************/
 
+#include "gui/msg_box.h"
+#include "gui/widget.h"
 #include "graphic/text.h"
-#include "msg_box.h"
 
 const uint vmargin = 5;
 const uint hmargin = 5;
