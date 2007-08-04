@@ -1,7 +1,7 @@
 // Wormux resource for win32 target
 
 #include <winver.h>
-#include "config.h"
+#include "msvc/config.h"
 #if ENABLE_NLS
 #  define IS_NLS_ENABLED "yes"
 #else
