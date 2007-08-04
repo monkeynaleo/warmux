@@ -43,10 +43,15 @@ int Rad2Deg(double rad);
 double AbsReel (const double x);
 bool EgalZero (const double x);
 
+#ifdef __APPLE__
+using namespace std;  // For isnan->std::isnan for instance
+#endif
+
 #ifdef WIN32
 #  include <float.h>
 #  define isnan _isnan
 #endif
+
 #ifdef _MSC_VER
 double round(double a);
 #define lround(a) ((int)round(a))
