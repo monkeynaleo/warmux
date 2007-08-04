@@ -19,7 +19,7 @@
  * Null widget (blank) in GUI.
  *****************************************************************************/
 
-#include "null_widget.h"
+#include "gui/null_widget.h"
 
 NullWidget::NullWidget (const Rectanglei &rect) : Widget(rect){
 }

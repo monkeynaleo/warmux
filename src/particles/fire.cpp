@@ -19,8 +19,8 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "fire.h"
-#include "particle.h"
+#include "particles/fire.h"
+#include "particles/particle.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "tool/random.h"
