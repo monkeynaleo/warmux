@@ -41,10 +41,15 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
-#define DEF_MARGIN    16
-#define DEF_BORDER    8
-#define DEF_SIZE      32
-#define USE_MOST      1
+#define DEF_MARGIN     16
+#define DEF_BORDER      8
+#define DEF_SIZE       32
+#define LINE_THICKNESS  2
+
+#define GRAPH_X        20
+#define GRAPH_Y       500
+#define GRAPH_W       400
+#define GRAPH_H       200
 
 const Point2i BorderSize(DEF_BORDER, DEF_BORDER);
 const Vector2<double> Zoom(1.7321, 1.7321);
@@ -276,6 +281,10 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   statistics_box->AddWidget(most_accurate);
 
   widgets.AddWidget(statistics_box);
+
+  // Label for graph axes
+  //widgets.AddWidget(new Label(_("Time"), Rectanglei(GRAPH_X, GRAPH_Y+8, GRAPH_W, 32),
+  //                            Font::FONT_SMALL, Font::FONT_BOLD, black_color, true, false));
 }
 
 ResultsMenu::~ResultsMenu()
@@ -333,7 +342,7 @@ void ResultsMenu::DrawTeamGraph(const Team *team,
   if (it == end)
     return;
 
-  uint sx = x+lround((*it)->GetDuration()*duration_scale),
+  int sx = x+lround((*it)->GetDuration()*duration_scale)+LINE_THICKNESS,
     sy = y-lround((*it)->GetValue()*energy_scale);
   Surface &surface = AppWormux::GetInstance()->video->window;
   MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)\n",
@@ -345,13 +354,13 @@ void ResultsMenu::DrawTeamGraph(const Team *team,
 
   do 
   {
-    uint ex = x+lround((*it)->GetDuration()*duration_scale),
+    int ex = x+lround((*it)->GetDuration()*duration_scale),
       ey = y-lround((*it)->GetValue()*energy_scale);
 
     MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)\n",
               (*it)->GetDuration(), (*it)->GetValue(), ex, ey);
-    surface.LineColor(sx, ex, sy, sy, color);
-    surface.VlineColor(ex, sy, ey, color);
+    surface.BoxColor(sx, sy, ex-sx, LINE_THICKNESS, color);
+    surface.BoxColor(ex, std::min(sy,ey), LINE_THICKNESS, abs(ey-sy), color);
 
     sx = ex;
     sy = ey;
@@ -379,8 +388,8 @@ void ResultsMenu::DrawGraph(int x, int y, int w, int h)
 
   // Draw here the graph and stuff
   Surface &surface = AppWormux::GetInstance()->video->window;
-  surface.LineColor(x, x+w, y+h, y+h, black_color);
-  surface.VlineColor(x, y, y+h, black_color);
+  surface.BoxColor(x, y, LINE_THICKNESS, h, black_color);
+  surface.BoxColor(x, y+h, w, LINE_THICKNESS, black_color);
 
   // Draw each team graph
   double energy_scale = h / (1.1*max_value);
@@ -507,5 +516,5 @@ void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
   if (index == -1)
     SetResult(results.size()-1);
   // Far from rendering properly
-  //DrawGraph(20, 520, 400, 200);
+  //DrawGraph(GRAPH_X, GRAPH_Y, GRAPH_W, GRAPH_H);
 }
