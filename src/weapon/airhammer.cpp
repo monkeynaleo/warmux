@@ -70,12 +70,6 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfi
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::p_Deselect()
-{
-}
-
-//-----------------------------------------------------------------------------
-
 bool Airhammer::p_Shoot()
 {
   jukebox.Play("share","weapon/airhammer");
@@ -142,10 +136,6 @@ void Airhammer::RepeatShoot()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::Refresh()
-{
-}
-
 void Airhammer::ActionStopUse()
 {
   ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
@@ -154,11 +144,6 @@ void Airhammer::ActionStopUse()
 
 
 //-----------------------------------------------------------------------------
-
-void Airhammer::HandleKeyPressed_Shoot()
-{
-  HandleKeyRefreshed_Shoot();
-}
 
 void Airhammer::HandleKeyRefreshed_Shoot()
 {
@@ -172,11 +157,6 @@ bool Airhammer::IsInUse() const
   return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }
 
-
-void Airhammer::HandleKeyReleased_Shoot()
-{
-  NewActionWeaponStopUse();
-}
 
 std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {

@@ -95,10 +95,6 @@ bool Baseball::p_Shoot()
   return true;
 }
 
-void Baseball::Refresh()
-{
-}
-
 bool Baseball::IsInUse() const
 {
   return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();

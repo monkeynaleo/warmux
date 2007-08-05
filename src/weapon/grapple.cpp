@@ -686,10 +686,6 @@ void Grapple::HandleKeyPressed_Shoot()
     NewActionWeaponShoot();
 }
 
-void Grapple::HandleKeyRefreshed_Shoot(){}
-
-void Grapple::HandleKeyReleased_Shoot(){}
-
 void Grapple::PrintDebugRope()
 {
   printf("%05d %05d %03.3f\n",

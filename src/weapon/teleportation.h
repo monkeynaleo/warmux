@@ -39,7 +39,7 @@ class Teleportation : public Weapon
     void Refresh();
   public:
     Teleportation();
-    void Draw();
+    void Draw() { if (!IsInUse()) Weapon::Draw(); };
     void ChooseTarget(Point2i mouse_pos);
     bool IsInUse() const;
     WeaponConfig& cfg();

@@ -182,10 +182,10 @@ public:
   void UseAmmo() const;
   bool EnoughAmmoUnit() const;
   void UseAmmoUnit() const;
-  int ReadInitialNbAmmo() const;
-  int ReadInitialNbUnit() const;
+  int ReadInitialNbAmmo() const { return m_initial_nb_ammo; };
+  int ReadInitialNbUnit() const { return m_initial_nb_unit_per_ammo; };
 
-  bool CanBeUsedOnClosedMap() const;
+  bool CanBeUsedOnClosedMap() const { return can_be_used_on_closed_map; };
   bool UseCrossHair() const { return min_angle != max_angle; };
 
   // Calculate weapon position

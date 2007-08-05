@@ -371,18 +371,6 @@ void Weapon::UseAmmoUnit() const
   ASSERT (*unit >= 0);
 }
 
-int Weapon::ReadInitialNbAmmo() const{
-  return m_initial_nb_ammo;
-}
-
-int Weapon::ReadInitialNbUnit() const{
-  return m_initial_nb_unit_per_ammo;
-}
-
-bool Weapon::CanBeUsedOnClosedMap() const{
-  return can_be_used_on_closed_map;
-}
-
 const std::string& Weapon::GetName() const {
   ASSERT (!m_name.empty());
   return m_name;

@@ -121,8 +121,8 @@ class Grapple : public Weapon
     virtual void HandleKeyReleased_MoveLeft();
 
     virtual void HandleKeyPressed_Shoot();
-    virtual void HandleKeyRefreshed_Shoot();
-    virtual void HandleKeyReleased_Shoot();
+    virtual void HandleKeyRefreshed_Shoot() { };
+    virtual void HandleKeyReleased_Shoot() { };
 
     void PrintDebugRope();
 
