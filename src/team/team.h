@@ -51,11 +51,13 @@ class Team
 
     std::vector<int> m_nb_ammos;
     std::vector<int> m_nb_units;
+    std::vector<int> m_energy;
 
-  // Autres
-    CrossHair crosshair;
-    Point2i sauve_camera;
-    TeamEnergy energy;
+    // Autres
+    CrossHair        crosshair;
+    Point2i          sauve_camera;
+    TeamEnergy       energy;
+    
 
   private:
     Surface flag;

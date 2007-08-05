@@ -49,7 +49,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   : energy(this), m_teams_dir(teams_dir), m_id(id)
 {
   std::string nomfich;
-  XmlReader doc;
+  XmlReader   doc;
 
   // Load XML
   nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";

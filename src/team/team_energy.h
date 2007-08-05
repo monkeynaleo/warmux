@@ -22,6 +22,7 @@
 #ifndef TEAM_ENERGY_H
 #define TEAM_ENERGY_H
 
+#include <vector>
 #include "gui/energy_bar.h"
 
 class Team;
@@ -42,6 +43,35 @@ typedef enum {
   EnergyStatusWait
 } energy_t;
 
+class EnergyValue : public std::pair<uint, uint>
+{
+protected:
+  friend class EnergyList;
+  EnergyValue(uint time, uint energy): std::pair<uint, uint>(time, energy) { }
+public:
+  uint GetDuration() const { return this->first; };
+  uint GetValue() const { return this->second; };
+};
+
+// Should not need to be sorted, as time of addition sorts them automatically
+class EnergyList : public std::vector<EnergyValue*>
+{
+  uint m_max_value;
+  uint m_last_value; // To remove duplicated values
+  typedef std::vector<EnergyValue*>::iterator iterator;
+protected:
+  friend class TeamEnergy;
+  void Reset();
+  void AddValue(uint value);
+  EnergyList() : m_max_value(0), m_last_value(0) { };
+  ~EnergyList() {
+    Reset();
+  };
+public:
+  typedef std::vector<EnergyValue*>::const_iterator const_iterator;
+  uint GetMaxValue() const { return m_max_value; };
+};
+
 class TeamEnergy
 {
   private :
@@ -50,31 +80,32 @@ class TeamEnergy
     TeamEnergy operator=(const TeamEnergy&);
     /**********************************************/
 
-    EnergyBar energy_bar;
+    EnergyBar   energy_bar;
     // displayed value
-    uint value;
+    uint        value;
     // team value
-    uint new_value;
+    uint        new_value;
     // initial energy
-    uint max_value;
+    uint        max_value;
 
-    Team *team;
-    Sprite *icon;
-    Text * t_team_energy;
+    Team        *team;
+    Sprite      *icon;
+    Text        *t_team_energy;
 
-    int dx;
-    int dy;
+    int         dx;
+    int         dy;
 
-    uint rank;
-    uint new_rank;
+    uint        rank;
+    uint        new_rank;
 
     std::string team_name;
 
-    uint move_start_time;
+    uint        move_start_time;
 
   public :
-    uint rank_tmp;
-    energy_t status;
+    uint        rank_tmp;
+    energy_t    status;
+    EnergyList  energy_list;
 
     TeamEnergy(Team * _team);
     ~TeamEnergy();
