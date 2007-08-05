@@ -136,11 +136,6 @@ void SubMachineGun::RepeatShoot()
     }
 }
 
-void SubMachineGun::HandleKeyPressed_Shoot()
-{
-  HandleKeyRefreshed_Shoot();
-}
-
 void SubMachineGun::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {

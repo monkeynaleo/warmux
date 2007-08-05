@@ -34,7 +34,7 @@ class Baseball : public Weapon
 {
   protected:
     bool p_Shoot();
-    void Refresh();
+    void Refresh() { };
 
   public:
     Baseball();

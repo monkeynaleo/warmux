@@ -38,9 +38,9 @@ class Airhammer : public Weapon
     void RepeatShoot();
 
   protected:
-    void p_Deselect();
+    void p_Deselect() { };
     bool p_Shoot();
-    void Refresh();
+    void Refresh() { };
 
   public:
     Airhammer();
@@ -48,9 +48,9 @@ class Airhammer : public Weapon
     bool IsInUse() const;
     virtual void ActionStopUse();
 
-    virtual void HandleKeyPressed_Shoot();
+    virtual void HandleKeyPressed_Shoot() { HandleKeyRefreshed_Shoot(); };
     virtual void HandleKeyRefreshed_Shoot();
-    virtual void HandleKeyReleased_Shoot();
+    virtual void HandleKeyReleased_Shoot() { NewActionWeaponStopUse(); };
 
     DECLARE_GETWEAPONSTRING();
 };

@@ -83,12 +83,6 @@ void Teleportation::Refresh()
   }
 }
 
-void Teleportation::Draw()
-{
-  if (!IsInUse())
-    Weapon::Draw();
-}
-
 void Teleportation::p_Select()
 {
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);

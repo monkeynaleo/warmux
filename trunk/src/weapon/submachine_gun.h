@@ -36,7 +36,7 @@ class SubMachineGun : public WeaponLauncher
     bool p_Shoot();
   public:
     SubMachineGun();
-    virtual void HandleKeyPressed_Shoot();
+    virtual void HandleKeyPressed_Shoot() { HandleKeyRefreshed_Shoot(); };
     virtual void HandleKeyRefreshed_Shoot();
     DECLARE_GETWEAPONSTRING();
 };
