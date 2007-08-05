@@ -55,7 +55,7 @@ public:
     return current_time-real_time_game_start-real_time_pause_dt;
   };
   uint ReadSec() const { return Read() / 1000; };
-  uint ReadMin() const { return Read() / 60; };
+  uint ReadMin() const { return ReadSec() / 60; };
   void Refresh();
   uint GetDelta() const { return delta_t; };
   //void RefreshMaxTime(uint updated_max_time);
