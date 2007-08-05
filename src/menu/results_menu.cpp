@@ -39,6 +39,7 @@
 #include "team/team.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
+#include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
 #define DEF_MARGIN     16
@@ -359,8 +360,8 @@ void ResultsMenu::DrawTeamGraph(const Team *team,
 
     MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)\n",
               (*it)->GetDuration(), (*it)->GetValue(), ex, ey);
-    surface.BoxColor(sx, sy, ex-sx, LINE_THICKNESS, color);
-    surface.BoxColor(ex, std::min(sy,ey), LINE_THICKNESS, abs(ey-sy), color);
+    surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
+    surface.BoxColor(Rectanglei(ex, std::min(sy,ey), LINE_THICKNESS, abs(ey-sy)), color);
 
     sx = ex;
     sy = ey;
@@ -388,8 +389,8 @@ void ResultsMenu::DrawGraph(int x, int y, int w, int h)
 
   // Draw here the graph and stuff
   Surface &surface = AppWormux::GetInstance()->video->window;
-  surface.BoxColor(x, y, LINE_THICKNESS, h, black_color);
-  surface.BoxColor(x, y+h, w, LINE_THICKNESS, black_color);
+  surface.BoxColor(Rectanglei(x, y, LINE_THICKNESS, h), black_color);
+  surface.BoxColor(Rectanglei(x, y+h, w, LINE_THICKNESS), black_color);
 
   // Draw each team graph
   double energy_scale = h / (1.1*max_value);
