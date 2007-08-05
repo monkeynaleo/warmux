@@ -328,6 +328,10 @@ template<class T> class rectangle
     inline bool IsSizeZero() const{
       return size.IsXNull() || size.IsYNull();
     }
+
+    inline bool operator==(const rectangle<T> &p2) const{
+      return size==p2.size && position==p2.position;
+    }
 };
 
 typedef rectangle<int>    Rectanglei;
