@@ -73,6 +73,11 @@ class ResultsMenu : public Menu
     void SetResult(int i);
     void OnClick(const Point2i &mousePosition, int button);
     void OnClickUp(const Point2i &mousePosition, int button);
+    void DrawTeamGraph(const Team* team,
+                       int x, int y,
+                       double energy_scale, double time_scale,
+                       const Color& color);
+    void DrawGraph(int x, int y, int w, int h);
     void DrawPodium(const Point2i &position) const;
     void DrawTeamOnPodium(const Team& team, const Point2i& podium_position,
                           const Point2i& relative_position) const;
