@@ -26,6 +26,7 @@
 
 #include "character/character.h"
 #include "character/damage_stats.h"
+#include "game/time.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "gui/button.h"
@@ -36,6 +37,7 @@
 #include "sound/jukebox.h"
 #include "team/results.h"
 #include "team/team.h"
+#include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
@@ -318,6 +320,88 @@ void ResultsMenu::DrawPodium(const Point2i& position) const
     DrawTeamOnPodium(*third_team, position, Point2i(98,42));
 }
 
+void ResultsMenu::DrawTeamGraph(const Team *team,
+                                int x, int y,
+                                double duration_scale, double energy_scale,
+                                const Color& color)
+{
+  EnergyList::const_iterator it = team->energy.energy_list.begin(),
+    end = team->energy.energy_list.end();
+
+  MSG_DEBUG("menu", "Drawing graph for team %s\n", team->GetName().c_str());
+
+  if (it == end)
+    return;
+
+  uint sx = x+lround((*it)->GetDuration()*duration_scale),
+    sy = y-lround((*it)->GetValue()*energy_scale);
+  Surface &surface = AppWormux::GetInstance()->video->window;
+  MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)\n",
+            (*it)->GetDuration(), (*it)->GetValue(), sx, sy);
+
+  ++it;
+  if (it == end)
+    return;
+
+  do 
+  {
+    uint ex = x+lround((*it)->GetDuration()*duration_scale),
+      ey = y-lround((*it)->GetValue()*energy_scale);
+
+    MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)\n",
+              (*it)->GetDuration(), (*it)->GetValue(), ex, ey);
+    surface.LineColor(sx, ex, sy, sy, color);
+    surface.VlineColor(ex, sy, ey, color);
+
+    sx = ex;
+    sy = ey;
+    ++it;
+  } while (it != end);
+}
+
+void ResultsMenu::DrawGraph(int x, int y, int w, int h)
+{
+  // Value to determine normalization
+  uint   max_value      = 0;
+  double duration_scale = w / (1.1*Time::GetInstance()->Read());
+  std::vector<TeamResults*>::const_iterator it;
+
+  for (it=results.begin(); it!=results.end(); ++it)
+  {
+    const Team* team = (*it)->getTeam();
+    if (team)
+      if (team->energy.energy_list.GetMaxValue() > max_value)
+      {
+        max_value = team->energy.energy_list.GetMaxValue();
+        MSG_DEBUG("menu", "New maximum value: %u\n", max_value);
+      }
+  }
+
+  // Draw here the graph and stuff
+  Surface &surface = AppWormux::GetInstance()->video->window;
+  surface.LineColor(x, x+w, y+h, y+h, black_color);
+  surface.VlineColor(x, y, y+h, black_color);
+
+  // Draw each team graph
+  double energy_scale = h / (1.1*max_value);
+  MSG_DEBUG("menu", "Scaling: %.1f (duration; %u) and %.1f\n",
+            duration_scale, Time::GetInstance()->ReadDuration(), energy_scale);
+#if 1
+  static const Color clist[] =
+    { white_color, primary_red_color, c_yellow, c_grey, green_color, black_color };
+  uint   current_color = 0;
+  for (it=results.begin(); it!=results.end(); ++it)
+  {
+    const Team* team = (*it)->getTeam();
+    if (team)
+    {
+      DrawTeamGraph(team, x, y+h, duration_scale, energy_scale, clist[current_color]);
+      current_color++;
+    }
+  }
+#endif
+}
+
 void ResultsMenu::SetResult(int i)
 {
   if (index == i)
@@ -422,5 +506,6 @@ void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
 {
   if (index == -1)
     SetResult(results.size()-1);
+  // Far from rendering properly
+  //DrawGraph(20, 520, 400, 200);
 }
-
