@@ -584,7 +584,7 @@ void Action_Explosion (Action *a)
   config.blast_range = a->PopInt();
   config.blast_force = a->PopInt();
   std::string son = a->PopString();
-  bool fire_particle = a->PopInt();
+  bool fire_particle = !!a->PopInt();
   ParticleEngine::ESmokeStyle smoke = (ParticleEngine::ESmokeStyle)a->PopInt();
   std::string unique_id = a->PopString();
 
