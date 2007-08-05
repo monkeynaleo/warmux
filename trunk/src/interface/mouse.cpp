@@ -76,7 +76,7 @@ Mouse::Mouse(){
   resource_manager.UnLoadXMLProfile(res);
 }
 
-void Mouse::ActionLeftClic() const
+void Mouse::ActionLeftClic(bool) const
 {
   const Point2i pos_monde = GetWorldPosition();
 
@@ -132,19 +132,19 @@ void Mouse::ActionLeftClic() const
 }
 
 
-void Mouse::ActionRightClic() const
+void Mouse::ActionRightClic(bool) const
 {
   Interface::GetInstance()->weapons_menu.SwitchDisplay();
 }
 
-void Mouse::ActionWheelUp() const
+void Mouse::ActionWheelUp(bool shift) const
 {
-  ActiveTeam().AccessWeapon().HandleMouseWheelUp();
+  ActiveTeam().AccessWeapon().HandleMouseWheelUp(shift);
 }
 
-void Mouse::ActionWheelDown() const
+void Mouse::ActionWheelDown(bool shift) const
 {
-  ActiveTeam().AccessWeapon().HandleMouseWheelDown();
+  ActiveTeam().AccessWeapon().HandleMouseWheelDown(shift);
 }
 
 bool Mouse::HandleClic (const SDL_Event& event) const
@@ -161,18 +161,19 @@ bool Mouse::HandleClic (const SDL_Event& event) const
     return true;
 
   if( event.type == SDL_MOUSEBUTTONDOWN ){
+    bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
     switch (event.button.button) {
     case SDL_BUTTON_RIGHT:
-      ActionRightClic();
+      ActionRightClic(shift);
       break;
     case SDL_BUTTON_LEFT:
-      ActionLeftClic();
+      ActionLeftClic(shift);
       break;
     case SDL_BUTTON_WHEELDOWN:
-      ActionWheelDown();
+      ActionWheelDown(shift);
       break;
     case SDL_BUTTON_WHEELUP:
-      ActionWheelUp();
+      ActionWheelUp(shift);
       break;
     default:
       break;
@@ -246,7 +247,7 @@ void Mouse::TestCamera()
   Point2i mousePos = GetPosition();
   int x,y;
   //Move camera with mouse holding Ctrl key down or with middle button of mouse
-  const bool demande_scroll = SDL_GetModState() & KMOD_CTRL |
+  const bool demande_scroll = SDL_GetModState() & KMOD_CTRL ||
                               SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE);
 
   // Show cursor and information interface when moving mouse

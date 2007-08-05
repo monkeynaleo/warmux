@@ -863,58 +863,58 @@ uint Character::GetCharacterIndex() const
 // ###################################################################
 
 // #################### MOVE_RIGHT
-void Character::HandleKeyPressed_MoveRight()
+void Character::HandleKeyPressed_MoveRight(bool shift)
 {
   BeginMovementRL(PAUSE_MOVEMENT);
   body->StartWalk();
 
-  HandleKeyRefreshed_MoveRight();
+  HandleKeyRefreshed_MoveRight(shift);
 }
 
-void Character::HandleKeyRefreshed_MoveRight() const
+void Character::HandleKeyRefreshed_MoveRight(bool shift) const
 {
   HideGameInterface();
 
   if (ActiveCharacter().IsImmobile())
-    MoveActiveCharacterRight();
+    MoveActiveCharacterRight(shift);
 }
 
-void Character::HandleKeyReleased_MoveRight()
+void Character::HandleKeyReleased_MoveRight(bool)
 {
   body->StopWalk();
   SendActiveCharacterInfo();
 }
 
 // #################### MOVE_LEFT
-void Character::HandleKeyPressed_MoveLeft()
+void Character::HandleKeyPressed_MoveLeft(bool shift)
 {
   BeginMovementRL(PAUSE_MOVEMENT);
   body->StartWalk();
 
-  HandleKeyRefreshed_MoveLeft();
+  HandleKeyRefreshed_MoveLeft(shift);
 }
 
-void Character::HandleKeyRefreshed_MoveLeft() const
+void Character::HandleKeyRefreshed_MoveLeft(bool shift) const
 {
   HideGameInterface();
 
   if (ActiveCharacter().IsImmobile())
-    MoveActiveCharacterLeft();
+    MoveActiveCharacterLeft(shift);
 }
 
-void Character::HandleKeyReleased_MoveLeft()
+void Character::HandleKeyReleased_MoveLeft(bool)
 {
   body->StopWalk();
   SendActiveCharacterInfo();
 }
 
 // #################### UP
-void Character::HandleKeyPressed_Up()
+void Character::HandleKeyPressed_Up(bool shift)
 {
-  HandleKeyRefreshed_Up();
+  HandleKeyRefreshed_Up(shift);
 }
 
-void Character::HandleKeyRefreshed_Up()
+void Character::HandleKeyRefreshed_Up(bool)
 {
   HideGameInterface();
   if (ActiveCharacter().IsImmobile())
@@ -929,15 +929,15 @@ void Character::HandleKeyRefreshed_Up()
     }
 }
 
-void Character::HandleKeyReleased_Up() const {}
+void Character::HandleKeyReleased_Up(bool) const {}
 
 // #################### DOWN
-void Character::HandleKeyPressed_Down()
+void Character::HandleKeyPressed_Down(bool shift)
 {
-  HandleKeyRefreshed_Up();
+  HandleKeyRefreshed_Up(shift);
 }
 
-void Character::HandleKeyRefreshed_Down()
+void Character::HandleKeyRefreshed_Down(bool)
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
@@ -952,39 +952,36 @@ void Character::HandleKeyRefreshed_Down()
     }
 }
 
-void Character::HandleKeyReleased_Down() const {}
+void Character::HandleKeyReleased_Down(bool) const {}
 
 // #################### JUMP
 
-void Character::HandleKeyPressed_Jump() const
+void Character::HandleKeyPressed_Jump(bool) const
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_JUMP));
 }
 
-void Character::HandleKeyRefreshed_Jump() const {}
+void Character::HandleKeyRefreshed_Jump(bool) const {}
 
-void Character::HandleKeyReleased_Jump() const {}
+void Character::HandleKeyReleased_Jump(bool) const {}
 
 // #################### HIGH JUMP
-void Character::HandleKeyPressed_HighJump() const
+void Character::HandleKeyPressed_HighJump(bool) const
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
 }
 
-void Character::HandleKeyRefreshed_HighJump() const {}
-void Character::HandleKeyReleased_HighJump() const {}
-
 // #################### BACK JUMP
-void Character::HandleKeyPressed_BackJump() const
+void Character::HandleKeyPressed_BackJump(bool) const
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_BACK_JUMP));
 }
 
-void Character::HandleKeyRefreshed_BackJump() const {}
-void Character::HandleKeyReleased_BackJump() const {}
+void Character::HandleKeyRefreshed_BackJump(bool) const {}
+void Character::HandleKeyReleased_BackJump(bool) const {}

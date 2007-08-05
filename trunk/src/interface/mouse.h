@@ -87,10 +87,10 @@ private:
 
   const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 
-  void ActionLeftClic() const;
-  void ActionRightClic() const;
-  void ActionWheelDown() const;
-  void ActionWheelUp() const;
+  void ActionLeftClic(bool shift = false) const;
+  void ActionRightClic(bool shift = false) const;
+  void ActionWheelDown(bool shift = false) const;
+  void ActionWheelUp(bool shift = false) const;
 public:
 
   static Mouse * GetInstance();

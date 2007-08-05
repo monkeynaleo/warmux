@@ -237,56 +237,56 @@ public:
   // Handle a keyboard event.
 
   // Key Shoot management
-  virtual void HandleKeyPressed_Shoot();
-  virtual void HandleKeyRefreshed_Shoot();
-  virtual void HandleKeyReleased_Shoot();
+  virtual void HandleKeyPressed_Shoot(bool shift=false);
+  virtual void HandleKeyRefreshed_Shoot(bool shift=false);
+  virtual void HandleKeyReleased_Shoot(bool shift=false);
 
   // To override standard moves of character
-  virtual void HandleKeyPressed_MoveRight();
-  virtual void HandleKeyRefreshed_MoveRight();
-  virtual void HandleKeyReleased_MoveRight();
+  virtual void HandleKeyPressed_MoveRight(bool shift=false);
+  virtual void HandleKeyRefreshed_MoveRight(bool shift=false);
+  virtual void HandleKeyReleased_MoveRight(bool shift=false);
 
-  virtual void HandleKeyPressed_MoveLeft();
-  virtual void HandleKeyRefreshed_MoveLeft();
-  virtual void HandleKeyReleased_MoveLeft();
+  virtual void HandleKeyPressed_MoveLeft(bool shift=false);
+  virtual void HandleKeyRefreshed_MoveLeft(bool shift=false);
+  virtual void HandleKeyReleased_MoveLeft(bool shift=false);
 
-  virtual void HandleKeyPressed_Up();
-  virtual void HandleKeyRefreshed_Up();
-  virtual void HandleKeyReleased_Up();
+  virtual void HandleKeyPressed_Up(bool shift=false);
+  virtual void HandleKeyRefreshed_Up(bool shift=false);
+  virtual void HandleKeyReleased_Up(bool shift=false);
 
-  virtual void HandleKeyPressed_Down();
-  virtual void HandleKeyRefreshed_Down();
-  virtual void HandleKeyReleased_Down();
+  virtual void HandleKeyPressed_Down(bool shift=false);
+  virtual void HandleKeyRefreshed_Down(bool shift=false);
+  virtual void HandleKeyReleased_Down(bool shift=false);
 
-  virtual void HandleKeyPressed_Jump();
-  virtual void HandleKeyRefreshed_Jump();
-  virtual void HandleKeyReleased_Jump();
+  virtual void HandleKeyPressed_Jump(bool shift=false);
+  virtual void HandleKeyRefreshed_Jump(bool shift=false);
+  virtual void HandleKeyReleased_Jump(bool shift=false);
 
-  virtual void HandleKeyPressed_HighJump();
-  virtual void HandleKeyRefreshed_HighJump();
-  virtual void HandleKeyReleased_HighJump();
+  virtual void HandleKeyPressed_HighJump(bool shift=false);
+  virtual void HandleKeyRefreshed_HighJump(bool shift=false);
+  virtual void HandleKeyReleased_HighJump(bool shift=false);
 
-  virtual void HandleKeyPressed_BackJump();
-  virtual void HandleKeyRefreshed_BackJump();
-  virtual void HandleKeyReleased_BackJump();
+  virtual void HandleKeyPressed_BackJump(bool shift=false);
+  virtual void HandleKeyRefreshed_BackJump(bool shift=false);
+  virtual void HandleKeyReleased_BackJump(bool shift=false);
 
   // Other keys
-  virtual void HandleKeyReleased_Num1(){};
-  virtual void HandleKeyReleased_Num2(){};
-  virtual void HandleKeyReleased_Num3(){};
-  virtual void HandleKeyReleased_Num4(){};
-  virtual void HandleKeyReleased_Num5(){};
-  virtual void HandleKeyReleased_Num6(){};
-  virtual void HandleKeyReleased_Num7(){};
-  virtual void HandleKeyReleased_Num8(){};
-  virtual void HandleKeyReleased_Num9(){};
-  virtual void HandleKeyReleased_Less(){};
-  virtual void HandleKeyReleased_More(){};
+  virtual void HandleKeyReleased_Num1(bool){};
+  virtual void HandleKeyReleased_Num2(bool){};
+  virtual void HandleKeyReleased_Num3(bool){};
+  virtual void HandleKeyReleased_Num4(bool){};
+  virtual void HandleKeyReleased_Num5(bool){};
+  virtual void HandleKeyReleased_Num6(bool){};
+  virtual void HandleKeyReleased_Num7(bool){};
+  virtual void HandleKeyReleased_Num8(bool){};
+  virtual void HandleKeyReleased_Num9(bool){};
+  virtual void HandleKeyReleased_Less(bool){};
+  virtual void HandleKeyReleased_More(bool){};
 
   // Handle a mouse event
-  virtual void HandleMouseLeftClicReleased(){};
-  virtual void HandleMouseWheelUp(){};
-  virtual void HandleMouseWheelDown(){};
+  virtual void HandleMouseLeftClicReleased(bool){};
+  virtual void HandleMouseWheelUp(bool shift=false){};
+  virtual void HandleMouseWheelDown(bool shift=false){};
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd() { StopLoading(); };

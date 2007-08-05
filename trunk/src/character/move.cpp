@@ -117,7 +117,7 @@ void MoveCharacter(Character &character)
 }
 
 // Move the active character to the left
-void MoveActiveCharacterLeft(){
+void MoveActiveCharacterLeft(bool){
   // character is ready to move ?
   if (!ActiveCharacter().CanMoveRL()) return;
 
@@ -135,7 +135,7 @@ void MoveActiveCharacterLeft(){
 }
 
 // Move the active character to the right
-void MoveActiveCharacterRight()
+void MoveActiveCharacterRight(bool)
 {
   // character is ready to move ?
   if (!ActiveCharacter().CanMoveRL()) return;
