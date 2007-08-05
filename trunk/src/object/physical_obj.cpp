@@ -355,7 +355,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   // Notify the weapon that there is a movement
   // Useful for grapple for example
-  ActiveTeam().AccessWeapon().NotifyMove(collision);
+  ActiveTeam().AccessWeapon().NotifyMove(!!collision);
 
   if ( collision == NO_COLLISION ) // Nothing more to do!
     return;
