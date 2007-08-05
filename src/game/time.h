@@ -25,39 +25,44 @@
 #include <string>
 #include "include/base.h"
 
+// XXX uint wrap-around (or at least system timer) not handled
 class Time
 {
 private:
-  uint current_time;
-  //uint max_time;
-  uint delta_t;
-  bool is_game_paused;
-  static Time * singleton;
+  uint        current_time;
+  //uint        max_time;
+  uint        delta_t;
+  bool        is_game_paused;
+  static Time *singleton;
 
-  uint real_time_game_start;
-  uint real_time_pause_dt;
-  uint real_time_pause_begin;
+  uint        real_time_game_start;
+  uint        real_time_pause_dt;
+  uint        real_time_pause_begin;
 
 private:
   Time();
 public:
-  static Time * GetInstance();
+  static Time *GetInstance();
 
   void Reset();
   bool IsGamePaused() const;
 
   // Read the time of the game, excluding paused time
   uint ReadRealTime() const;
-  uint Read() const;
-  uint ReadSec() const;
-  uint ReadMin() const;
+  uint Read() const { return current_time; };
+  uint ReadDuration() const
+  {
+    return current_time-real_time_game_start-real_time_pause_dt;
+  };
+  uint ReadSec() const { return Read() / 1000; };
+  uint ReadMin() const { return Read() / 60; };
   void Refresh();
-  uint GetDelta() const;
+  uint GetDelta() const { return delta_t; };
   //void RefreshMaxTime(uint updated_max_time);
 
   // Read the clock time
-  uint ClockSec() const;  // ReadSec() % 60
-  uint ClockMin() const;  // ReadMin() % 60
+  uint ClockSec() const { return ReadSec() % 60; };
+  uint ClockMin() const { return ReadMin() % 60; };
   std::string GetString() const;
 
   void Pause();

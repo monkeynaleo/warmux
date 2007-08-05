@@ -58,10 +58,6 @@ uint Time::ReadRealTime() const {
   return SDL_GetTicks() - real_time_game_start - real_time_pause_dt;
 }
 
-uint Time::Read() const{
-  return current_time;
-}
-
 void Time::Refresh(){
   /*
   TODO : Activate this condition later.
@@ -85,18 +81,6 @@ void Time::RefreshMaxTime(uint updated_max_time){
 }
 */
 
-uint Time::ReadSec() const{
-  return Read() / 1000;
-}
-
-uint Time::ReadMin() const{
-  return ReadSec() / 60;
-}
-
-uint Time::GetDelta() const{
-  return delta_t;
-}
-
 void Time::Pause(){
   if (is_game_paused)
     return;
@@ -108,14 +92,6 @@ void Time::Continue(){
   ASSERT (is_game_paused);
   is_game_paused = false;
   real_time_pause_dt += SDL_GetTicks() - real_time_pause_begin;
-}
-
-uint Time::ClockSec() const {
-  return ReadSec() % 60;
-}
-
-uint Time::ClockMin() const {
-  return ReadMin() % 60;
 }
 
 std::string Time::GetString() const {
