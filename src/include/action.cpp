@@ -376,7 +376,7 @@ void Action::RetrieveCharacter()
   c->SetExternForceXY(PopPoint2d());
   c->SetRopeAngle(PopDouble());
   c->SetRopeLength(PopDouble());
-  if((bool)PopInt()) { // If active characters, retrieve stored animation
+  if(PopInt()) { // If active characters, retrieve stored animation
     if(c->GetTeam().IsActiveTeam())
       ActiveTeam().SelectCharacter(char_no);
     c->SetClothe(PopString());
