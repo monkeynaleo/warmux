@@ -285,8 +285,8 @@ public:
 
   // Handle a mouse event
   virtual void HandleMouseLeftClicReleased(bool){};
-  virtual void HandleMouseWheelUp(bool shift){};
-  virtual void HandleMouseWheelDown(bool shift){};
+  virtual void HandleMouseWheelUp(bool /*shift*/){};
+  virtual void HandleMouseWheelDown(bool /*shift*/){};
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd() { StopLoading(); };
