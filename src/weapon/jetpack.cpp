@@ -162,55 +162,55 @@ void JetPack::GoRight()
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
 }
 
-void JetPack::HandleKeyPressed_Up()
+void JetPack::HandleKeyPressed_Up(bool shift)
 {
   if (IsInUse())
     GoUp();
   else
-    ActiveCharacter().HandleKeyPressed_Up();
+    ActiveCharacter().HandleKeyPressed_Up(shift);
 }
 
-void JetPack::HandleKeyReleased_Up()
+void JetPack::HandleKeyReleased_Up(bool shift)
 {
   if (IsInUse())
     StopUp();
   else
-    ActiveCharacter().HandleKeyReleased_Up();
+    ActiveCharacter().HandleKeyReleased_Up(shift);
 }
 
-void JetPack::HandleKeyPressed_MoveLeft()
+void JetPack::HandleKeyPressed_MoveLeft(bool shift)
 {
   if (IsInUse())
     GoLeft();
   else
-    ActiveCharacter().HandleKeyPressed_MoveLeft();
+    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
 }
 
-void JetPack::HandleKeyReleased_MoveLeft()
+void JetPack::HandleKeyReleased_MoveLeft(bool shift)
 {
   if (IsInUse())
     StopLeft();
   else
-    ActiveCharacter().HandleKeyReleased_MoveLeft();
+    ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
 }
 
-void JetPack::HandleKeyPressed_MoveRight()
+void JetPack::HandleKeyPressed_MoveRight(bool shift)
 {
   if (IsInUse())
     GoRight();
   else
-    ActiveCharacter().HandleKeyPressed_MoveRight();
+    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
 }
 
-void JetPack::HandleKeyReleased_MoveRight()
+void JetPack::HandleKeyReleased_MoveRight(bool shift)
 {
   if (IsInUse())
     StopRight();
   else
-    ActiveCharacter().HandleKeyReleased_MoveRight();
+    ActiveCharacter().HandleKeyReleased_MoveRight(shift);
 }
 
-void JetPack::HandleKeyPressed_Shoot()
+void JetPack::HandleKeyPressed_Shoot(bool)
 {
   if (!IsInUse())
     NewActionWeaponShoot();

@@ -590,95 +590,95 @@ void Grapple::StopLeft()
 
 // =========================== Keys management
 
-void Grapple::HandleKeyPressed_Up()
+void Grapple::HandleKeyPressed_Up(bool shift)
 {
   if (IsInUse())
     GoUp();
   else
-    ActiveCharacter().HandleKeyPressed_Up();
+    ActiveCharacter().HandleKeyPressed_Up(shift);
 }
 
-void Grapple::HandleKeyRefreshed_Up()
+void Grapple::HandleKeyRefreshed_Up(bool shift)
 {
   if (IsInUse())
     GoUp();
   else
-    ActiveCharacter().HandleKeyRefreshed_Up();
+    ActiveCharacter().HandleKeyRefreshed_Up(shift);
 }
 
-void Grapple::HandleKeyReleased_Up()
+void Grapple::HandleKeyReleased_Up(bool shift)
 {
   if (!IsInUse())
-    ActiveCharacter().HandleKeyReleased_Up();
+    ActiveCharacter().HandleKeyReleased_Up(shift);
 }
 
-void Grapple::HandleKeyPressed_Down()
+void Grapple::HandleKeyPressed_Down(bool shift)
 {
   if (IsInUse())
     GoDown();
   else
-    ActiveCharacter().HandleKeyPressed_Down();
+    ActiveCharacter().HandleKeyPressed_Down(shift);
 }
 
-void Grapple::HandleKeyRefreshed_Down()
+void Grapple::HandleKeyRefreshed_Down(bool shift)
 {
   if (IsInUse())
     GoDown();
   else
-    ActiveCharacter().HandleKeyRefreshed_Down();
+    ActiveCharacter().HandleKeyRefreshed_Down(shift);
 }
 
-void Grapple::HandleKeyReleased_Down()
+void Grapple::HandleKeyReleased_Down(bool shift)
 {
   if (!IsInUse())
-    ActiveCharacter().HandleKeyReleased_Down();
+    ActiveCharacter().HandleKeyReleased_Down(shift);
 }
 
-void Grapple::HandleKeyPressed_MoveLeft()
+void Grapple::HandleKeyPressed_MoveLeft(bool shift)
 {
   if (IsInUse())
     GoLeft();
   else
-    ActiveCharacter().HandleKeyPressed_MoveLeft();
+    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
 }
 
-void Grapple::HandleKeyRefreshed_MoveLeft()
+void Grapple::HandleKeyRefreshed_MoveLeft(bool shift)
 {
   if (!IsInUse())
-    ActiveCharacter().HandleKeyRefreshed_MoveLeft();
+    ActiveCharacter().HandleKeyRefreshed_MoveLeft(shift);
 }
 
-void Grapple::HandleKeyReleased_MoveLeft()
+void Grapple::HandleKeyReleased_MoveLeft(bool shift)
 {
   if (IsInUse())
     StopLeft();
   else
-    ActiveCharacter().HandleKeyReleased_MoveLeft();
+    ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
 }
 
-void Grapple::HandleKeyPressed_MoveRight()
+void Grapple::HandleKeyPressed_MoveRight(bool shift)
 {
   if (IsInUse())
     GoRight();
   else
-    ActiveCharacter().HandleKeyPressed_MoveRight();
+    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
 }
 
-void Grapple::HandleKeyRefreshed_MoveRight()
+void Grapple::HandleKeyRefreshed_MoveRight(bool shift)
 {
   if (!IsInUse())
-    ActiveCharacter().HandleKeyRefreshed_MoveRight();
+    ActiveCharacter().HandleKeyRefreshed_MoveRight(shift);
 }
 
-void Grapple::HandleKeyReleased_MoveRight()
+void Grapple::HandleKeyReleased_MoveRight(bool shift)
 {
   if (IsInUse())
     StopRight();
   else
-    ActiveCharacter().HandleKeyReleased_MoveRight();
+    ActiveCharacter().HandleKeyReleased_MoveRight(shift);
 }
 
-void Grapple::HandleKeyPressed_Shoot()
+void Grapple::HandleKeyPressed_Shoot(bool)
 {
   if (IsInUse()) {
     NewActionWeaponStopUse();

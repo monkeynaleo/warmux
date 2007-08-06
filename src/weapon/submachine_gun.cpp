@@ -136,7 +136,7 @@ void SubMachineGun::RepeatShoot()
     }
 }
 
-void SubMachineGun::HandleKeyRefreshed_Shoot()
+void SubMachineGun::HandleKeyRefreshed_Shoot(bool shift)
 {
   if (EnoughAmmoUnit()) {
     RepeatShoot();

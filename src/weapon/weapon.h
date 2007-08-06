@@ -237,38 +237,38 @@ public:
   // Handle a keyboard event.
 
   // Key Shoot management
-  virtual void HandleKeyPressed_Shoot(bool shift=false);
-  virtual void HandleKeyRefreshed_Shoot(bool shift=false);
-  virtual void HandleKeyReleased_Shoot(bool shift=false);
+  virtual void HandleKeyPressed_Shoot(bool shift);
+  virtual void HandleKeyRefreshed_Shoot(bool shift);
+  virtual void HandleKeyReleased_Shoot(bool shift);
 
   // To override standard moves of character
-  virtual void HandleKeyPressed_MoveRight(bool shift=false);
-  virtual void HandleKeyRefreshed_MoveRight(bool shift=false);
-  virtual void HandleKeyReleased_MoveRight(bool shift=false);
+  virtual void HandleKeyPressed_MoveRight(bool shift);
+  virtual void HandleKeyRefreshed_MoveRight(bool shift);
+  virtual void HandleKeyReleased_MoveRight(bool shift);
 
-  virtual void HandleKeyPressed_MoveLeft(bool shift=false);
-  virtual void HandleKeyRefreshed_MoveLeft(bool shift=false);
-  virtual void HandleKeyReleased_MoveLeft(bool shift=false);
+  virtual void HandleKeyPressed_MoveLeft(bool shift);
+  virtual void HandleKeyRefreshed_MoveLeft(bool shift);
+  virtual void HandleKeyReleased_MoveLeft(bool shift);
 
-  virtual void HandleKeyPressed_Up(bool shift=false);
-  virtual void HandleKeyRefreshed_Up(bool shift=false);
-  virtual void HandleKeyReleased_Up(bool shift=false);
+  virtual void HandleKeyPressed_Up(bool shift);
+  virtual void HandleKeyRefreshed_Up(bool shift);
+  virtual void HandleKeyReleased_Up(bool shift);
 
-  virtual void HandleKeyPressed_Down(bool shift=false);
-  virtual void HandleKeyRefreshed_Down(bool shift=false);
-  virtual void HandleKeyReleased_Down(bool shift=false);
+  virtual void HandleKeyPressed_Down(bool shift);
+  virtual void HandleKeyRefreshed_Down(bool shift);
+  virtual void HandleKeyReleased_Down(bool shift);
 
-  virtual void HandleKeyPressed_Jump(bool shift=false);
-  virtual void HandleKeyRefreshed_Jump(bool shift=false);
-  virtual void HandleKeyReleased_Jump(bool shift=false);
+  virtual void HandleKeyPressed_Jump(bool shift);
+  virtual void HandleKeyRefreshed_Jump(bool shift);
+  virtual void HandleKeyReleased_Jump(bool shift);
 
-  virtual void HandleKeyPressed_HighJump(bool shift=false);
-  virtual void HandleKeyRefreshed_HighJump(bool shift=false);
-  virtual void HandleKeyReleased_HighJump(bool shift=false);
+  virtual void HandleKeyPressed_HighJump(bool shift);
+  virtual void HandleKeyRefreshed_HighJump(bool shift);
+  virtual void HandleKeyReleased_HighJump(bool shift);
 
-  virtual void HandleKeyPressed_BackJump(bool shift=false);
-  virtual void HandleKeyRefreshed_BackJump(bool shift=false);
-  virtual void HandleKeyReleased_BackJump(bool shift=false);
+  virtual void HandleKeyPressed_BackJump(bool shift);
+  virtual void HandleKeyRefreshed_BackJump(bool shift);
+  virtual void HandleKeyReleased_BackJump(bool shift);
 
   // Other keys
   virtual void HandleKeyReleased_Num1(bool){};
@@ -285,8 +285,8 @@ public:
 
   // Handle a mouse event
   virtual void HandleMouseLeftClicReleased(bool){};
-  virtual void HandleMouseWheelUp(bool shift=false){};
-  virtual void HandleMouseWheelDown(bool shift=false){};
+  virtual void HandleMouseWheelUp(bool shift){};
+  virtual void HandleMouseWheelDown(bool shift){};
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd() { StopLoading(); };

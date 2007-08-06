@@ -41,13 +41,13 @@ class JetPack : public Weapon
     void SignalTurnEnd() { p_Deselect(); };
     void ActionStopUse() { p_Deselect(); };
 
-    virtual void HandleKeyPressed_Up();
-    virtual void HandleKeyReleased_Up();
-    virtual void HandleKeyPressed_MoveLeft();
-    virtual void HandleKeyReleased_MoveLeft();
-    virtual void HandleKeyPressed_MoveRight();
-    virtual void HandleKeyReleased_MoveRight();
-    virtual void HandleKeyPressed_Shoot();
+    virtual void HandleKeyPressed_Up(bool shift);
+    virtual void HandleKeyReleased_Up(bool shift);
+    virtual void HandleKeyPressed_MoveLeft(bool shift);
+    virtual void HandleKeyReleased_MoveLeft(bool shift);
+    virtual void HandleKeyPressed_MoveRight(bool shift);
+    virtual void HandleKeyReleased_MoveRight(bool shift);
+    virtual void HandleKeyPressed_Shoot(bool shift);
 
     DECLARE_GETWEAPONSTRING();
 

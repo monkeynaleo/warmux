@@ -145,7 +145,7 @@ void Airhammer::ActionStopUse()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::HandleKeyRefreshed_Shoot()
+void Airhammer::HandleKeyRefreshed_Shoot(bool)
 {
   if (EnoughAmmoUnit()) {
     RepeatShoot();

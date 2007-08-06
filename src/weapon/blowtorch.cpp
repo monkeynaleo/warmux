@@ -101,16 +101,16 @@ void Blowtorch::RepeatShoot()
   }
 }
 
-void Blowtorch::HandleKeyPressed_Shoot()
+void Blowtorch::HandleKeyPressed_Shoot(bool shift)
 {
   ActiveCharacter().BeginMovementRL(PAUSE_MOVEMENT);
   ActiveCharacter().SetRebounding(false);
   ActiveCharacter().body->StartWalk();
 
-  HandleKeyRefreshed_Shoot();
+  HandleKeyRefreshed_Shoot(shift);
 }
 
-void Blowtorch::HandleKeyRefreshed_Shoot()
+void Blowtorch::HandleKeyRefreshed_Shoot(bool)
 {
   if (EnoughAmmoUnit()) {
     RepeatShoot();
@@ -142,4 +142,3 @@ std::string Blowtorch::GetWeaponWinString(const char *TeamName, uint items_count
             "%s team has won %u blowtorchs!",
             items_count), TeamName, items_count);
 }
-

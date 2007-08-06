@@ -138,29 +138,30 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
   if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
   if (ActiveCharacter().IsDead()) return;
 
+  bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
   if (GameLoop::GetInstance()->ReadState() == GameLoop::HAS_PLAYED) {
     switch (key) {
 
     case KEY_MOVE_RIGHT:
-      ActiveCharacter().HandleKeyPressed_MoveRight();
+      ActiveCharacter().HandleKeyPressed_MoveRight(shift);
       break;
     case KEY_MOVE_LEFT:
-      ActiveCharacter().HandleKeyPressed_MoveLeft();
+      ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
       break;
     case KEY_UP:
-      ActiveCharacter().HandleKeyPressed_Up();
+      ActiveCharacter().HandleKeyPressed_Up(shift);
       break;
     case KEY_DOWN:
-      ActiveCharacter().HandleKeyPressed_Down();
+      ActiveCharacter().HandleKeyPressed_Down(shift);
       break;
     case KEY_JUMP:
-      ActiveCharacter().HandleKeyPressed_Jump();
+      ActiveCharacter().HandleKeyPressed_Jump(shift);
       break;
     case KEY_HIGH_JUMP:
-      ActiveCharacter().HandleKeyPressed_HighJump();
+      ActiveCharacter().HandleKeyPressed_HighJump(shift);
       break;
     case KEY_BACK_JUMP:
-      ActiveCharacter().HandleKeyPressed_BackJump();
+      ActiveCharacter().HandleKeyPressed_BackJump(shift);
       break;
     case KEY_SHOOT:
       // Shoot key is not accepted in HAS_PLAYED state
@@ -175,29 +176,29 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
     switch (key) {
 
     case KEY_MOVE_RIGHT:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveRight();
+      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveRight(shift);
       break;
     case KEY_MOVE_LEFT:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveLeft();
+      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveLeft(shift);
       break;
     case KEY_UP:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_Up();
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Up(shift);
       break;
     case KEY_DOWN:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_Down();
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Down(shift);
       break;
     case KEY_JUMP:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_Jump();
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Jump(shift);
       break;
     case KEY_HIGH_JUMP:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_HighJump();
+      ActiveTeam().AccessWeapon().HandleKeyPressed_HighJump(shift);
       break;
     case KEY_BACK_JUMP:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_BackJump();
+      ActiveTeam().AccessWeapon().HandleKeyPressed_BackJump(shift);
       break;
     case KEY_SHOOT:
       if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-        ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot();
+        ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot(shift);
         break;
       }
     default:
@@ -456,16 +457,13 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
 // Refresh keys which are still pressed.
 void ManMachineInterface::Refresh() const
 {
-  bool ctrl  = !!(SDL_GetModState() & KMOD_CTRL);
-  bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
-
   //Treat KEY_REFRESH events:
   for (int i = 0; i < 256; i++) {
 
     if (PressedKeys[i]) {
       Key_t key = static_cast<Key_t>(i);
 
-      if (ctrl && MoveCamera(key))
+      if (SDL_GetModState()&KMOD_CTRL && MoveCamera(key))
           return;
 
       // Managing keys related to character moves
@@ -475,6 +473,7 @@ void ManMachineInterface::Refresh() const
       if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
 
       // Movements are managed by weapons because sometimes it overrides the keys
+      bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
       switch (key) {
 
       case KEY_MOVE_RIGHT:

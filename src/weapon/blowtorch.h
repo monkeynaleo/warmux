@@ -41,9 +41,9 @@ class Blowtorch : public Weapon
     virtual void SignalTurnEnd() { p_Deselect(); };
     virtual void ActionStopUse();
 
-    virtual void HandleKeyPressed_Shoot();
-    virtual void HandleKeyRefreshed_Shoot();
-    virtual void HandleKeyReleased_Shoot() { NewActionWeaponStopUse(); };
+    virtual void HandleKeyPressed_Shoot(bool shift);
+    virtual void HandleKeyRefreshed_Shoot(bool shift);
+    virtual void HandleKeyReleased_Shoot(bool) { NewActionWeaponStopUse(); };
     bool IsInUse() const;
 
     DECLARE_GETWEAPONSTRING();

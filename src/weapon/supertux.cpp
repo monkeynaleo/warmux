@@ -196,49 +196,49 @@ void TuxLauncher::SignalEndOfProjectile()
 }
 
 // Move right
-void TuxLauncher::HandleKeyPressed_MoveRight()
+void TuxLauncher::HandleKeyPressed_MoveRight(bool shift)
 {
   if (current_tux != NULL)
     current_tux->turn_right();
   else
-    ActiveCharacter().HandleKeyPressed_MoveRight();
+    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
 }
 
-void TuxLauncher::HandleKeyRefreshed_MoveRight()
+void TuxLauncher::HandleKeyRefreshed_MoveRight(bool shift)
 {
   if (current_tux != NULL)
     current_tux->turn_right();
   else
-    ActiveCharacter().HandleKeyRefreshed_MoveRight();
+    ActiveCharacter().HandleKeyRefreshed_MoveRight(shift);
 }
 
-void TuxLauncher::HandleKeyReleased_MoveRight()
+void TuxLauncher::HandleKeyReleased_MoveRight(bool shift)
 {
   if (current_tux == NULL)
-    ActiveCharacter().HandleKeyReleased_MoveRight();
+    ActiveCharacter().HandleKeyReleased_MoveRight(shift);
 }
 
 // Move left
-void TuxLauncher::HandleKeyPressed_MoveLeft()
+void TuxLauncher::HandleKeyPressed_MoveLeft(bool shift)
 {
   if (current_tux != NULL)
     current_tux->turn_left();
   else
-    ActiveCharacter().HandleKeyPressed_MoveLeft();
+    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
 }
 
-void TuxLauncher::HandleKeyRefreshed_MoveLeft()
+void TuxLauncher::HandleKeyRefreshed_MoveLeft(bool shift)
 {
   if (current_tux != NULL)
     current_tux->turn_left();
   else
-    ActiveCharacter().HandleKeyRefreshed_MoveLeft();
+    ActiveCharacter().HandleKeyRefreshed_MoveLeft(shift);
 }
 
-void TuxLauncher::HandleKeyReleased_MoveLeft()
+void TuxLauncher::HandleKeyReleased_MoveLeft(bool shift)
 {
   if (current_tux == NULL)
-    ActiveCharacter().HandleKeyReleased_MoveLeft();
+    ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
 }
 
 std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const

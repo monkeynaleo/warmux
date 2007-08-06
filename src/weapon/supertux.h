@@ -65,12 +65,12 @@ class TuxLauncher : public WeaponLauncher
     bool IsInUse() const;
 
     void SignalEndOfProjectile();
-    virtual void HandleKeyPressed_MoveRight();
-    virtual void HandleKeyRefreshed_MoveRight();
-    virtual void HandleKeyReleased_MoveRight();
-    virtual void HandleKeyPressed_MoveLeft();
-    virtual void HandleKeyRefreshed_MoveLeft();
-    virtual void HandleKeyReleased_MoveLeft();
+    virtual void HandleKeyPressed_MoveRight(bool shift);
+    virtual void HandleKeyRefreshed_MoveRight(bool shift);
+    virtual void HandleKeyReleased_MoveRight(bool shift);
+    virtual void HandleKeyPressed_MoveLeft(bool shift);
+    virtual void HandleKeyRefreshed_MoveLeft(bool shift);
+    virtual void HandleKeyReleased_MoveLeft(bool shift);
     DECLARE_GETWEAPONSTRING();
 
   protected:

@@ -48,9 +48,9 @@ class Airhammer : public Weapon
     bool IsInUse() const;
     virtual void ActionStopUse();
 
-    virtual void HandleKeyPressed_Shoot() { HandleKeyRefreshed_Shoot(); };
-    virtual void HandleKeyRefreshed_Shoot();
-    virtual void HandleKeyReleased_Shoot() { NewActionWeaponStopUse(); };
+    virtual void HandleKeyPressed_Shoot(bool shift) { HandleKeyRefreshed_Shoot(shift); };
+    virtual void HandleKeyRefreshed_Shoot(bool shift);
+    virtual void HandleKeyReleased_Shoot(bool) { NewActionWeaponStopUse(); };
 
     DECLARE_GETWEAPONSTRING();
 };
