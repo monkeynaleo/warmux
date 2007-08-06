@@ -49,10 +49,10 @@ public:
   void Draw();
   void ChooseTarget(Point2i mouse_pos);
 
-  virtual void HandleKeyPressed_Down() { Down(); };
-  virtual void HandleKeyPressed_Up() { Up(); };
-  virtual void HandleMouseWheelUp() { Up(); };
-  virtual void HandleMouseWheelDown() { Down(); };
+  virtual void HandleKeyPressed_Down(bool) { Down(); };
+  virtual void HandleKeyPressed_Up(bool) { Up(); };
+  virtual void HandleMouseWheelUp(bool) { Up(); };
+  virtual void HandleMouseWheelDown(bool) { Down(); };
 
   void SetAngle(double _angle) { angle = _angle; }; // to be used by network
   DECLARE_GETWEAPONSTRING();

@@ -104,25 +104,25 @@ class Grapple : public Weapon
     void SetRopeSize(double length) const;
 
     // Keys management
-    virtual void HandleKeyPressed_Up();
-    virtual void HandleKeyRefreshed_Up();
-    virtual void HandleKeyReleased_Up();
+    virtual void HandleKeyPressed_Up(bool shift);
+    virtual void HandleKeyRefreshed_Up(bool shift);
+    virtual void HandleKeyReleased_Up(bool shift);
 
-    virtual void HandleKeyPressed_Down();
-    virtual void HandleKeyRefreshed_Down();
-    virtual void HandleKeyReleased_Down();
+    virtual void HandleKeyPressed_Down(bool shift);
+    virtual void HandleKeyRefreshed_Down(bool shift);
+    virtual void HandleKeyReleased_Down(bool shift);
 
-    virtual void HandleKeyPressed_MoveRight();
-    virtual void HandleKeyRefreshed_MoveRight();
-    virtual void HandleKeyReleased_MoveRight();
+    virtual void HandleKeyPressed_MoveRight(bool shift);
+    virtual void HandleKeyRefreshed_MoveRight(bool shift);
+    virtual void HandleKeyReleased_MoveRight(bool shift);
 
-    virtual void HandleKeyPressed_MoveLeft();
-    virtual void HandleKeyRefreshed_MoveLeft();
-    virtual void HandleKeyReleased_MoveLeft();
+    virtual void HandleKeyPressed_MoveLeft(bool shift);
+    virtual void HandleKeyRefreshed_MoveLeft(bool shift);
+    virtual void HandleKeyReleased_MoveLeft(bool shift);
 
-    virtual void HandleKeyPressed_Shoot();
-    virtual void HandleKeyRefreshed_Shoot() { };
-    virtual void HandleKeyReleased_Shoot() { };
+    virtual void HandleKeyPressed_Shoot(bool shift);
+    virtual void HandleKeyRefreshed_Shoot(bool) { };
+    virtual void HandleKeyReleased_Shoot(bool) { };
 
     void PrintDebugRope();
 

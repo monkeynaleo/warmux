@@ -145,7 +145,7 @@ std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count
             items_count), TeamName, items_count);
 }
 
-void Parachute::HandleKeyPressed_Shoot()
+void Parachute::HandleKeyPressed_Shoot(bool shift)
 {
   if(open) {
     image->Finish();
@@ -153,44 +153,44 @@ void Parachute::HandleKeyPressed_Shoot()
     closing = false;
     UseAmmoUnit();
   } else {
-    Weapon::HandleKeyPressed_Shoot();
+    Weapon::HandleKeyPressed_Shoot(shift);
   }
 }
 
-void Parachute::HandleKeyPressed_MoveRight()
+void Parachute::HandleKeyPressed_MoveRight(bool shift)
 {
   if(open) {
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     m_x_extern = cfg().force_side_displacement;
   } else {
-    Weapon::HandleKeyPressed_MoveRight();
+    Weapon::HandleKeyPressed_MoveRight(shift);
   }
 }
 
-void Parachute::HandleKeyReleased_MoveRight()
+void Parachute::HandleKeyReleased_MoveRight(bool shift)
 {
   if(open)
     m_x_extern = 0.0;
   else
-    Weapon::HandleKeyReleased_MoveRight();
+    Weapon::HandleKeyReleased_MoveRight(shift);
 }
 
-void Parachute::HandleKeyPressed_MoveLeft()
+void Parachute::HandleKeyPressed_MoveLeft(bool shift)
 {
   if(open) {
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
     m_x_extern = -cfg().force_side_displacement;
   } else {
-    Weapon::HandleKeyPressed_MoveLeft();
+    Weapon::HandleKeyPressed_MoveLeft(shift);
   }
 }
 
-void Parachute::HandleKeyReleased_MoveLeft()
+void Parachute::HandleKeyReleased_MoveLeft(bool shift)
 {
   if(open)
     m_x_extern = 0.0;
   else
-    Weapon::HandleKeyReleased_MoveLeft();
+    Weapon::HandleKeyReleased_MoveLeft(shift);
 }
 
 ParachuteConfig& Parachute::cfg() {

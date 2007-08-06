@@ -424,67 +424,67 @@ void WeaponLauncher::IncMissedShots()
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
 }
 
-void WeaponLauncher::HandleKeyReleased_Num1()
+void WeaponLauncher::HandleKeyReleased_Num1(bool shift)
 {
   projectile->SetTimeOut(1);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num2()
+void WeaponLauncher::HandleKeyReleased_Num2(bool shift)
 {
   projectile->SetTimeOut(2);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num3()
+void WeaponLauncher::HandleKeyReleased_Num3(bool shift)
 {
   projectile->SetTimeOut(3);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num4()
+void WeaponLauncher::HandleKeyReleased_Num4(bool shift)
 {
   projectile->SetTimeOut(4);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num5()
+void WeaponLauncher::HandleKeyReleased_Num5(bool shift)
 {
   projectile->SetTimeOut(5);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num6()
+void WeaponLauncher::HandleKeyReleased_Num6(bool shift)
 {
   projectile->SetTimeOut(6);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num7()
+void WeaponLauncher::HandleKeyReleased_Num7(bool shift)
 {
   projectile->SetTimeOut(7);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num8()
+void WeaponLauncher::HandleKeyReleased_Num8(bool shift)
 {
   projectile->SetTimeOut(8);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num9()
+void WeaponLauncher::HandleKeyReleased_Num9(bool shift)
 {
   projectile->SetTimeOut(9);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Less()
+void WeaponLauncher::HandleKeyReleased_Less(bool shift)
 {
   projectile->IncrementTimeOut();
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_More()
+void WeaponLauncher::HandleKeyReleased_More(bool shift)
 {
   projectile->DecrementTimeOut();
   NetworkSetTimeoutProjectile();
@@ -496,13 +496,13 @@ void WeaponLauncher::NetworkSetTimeoutProjectile() const
                                                      projectile->m_timeout_modifier));
 }
 
-void WeaponLauncher::HandleMouseWheelUp()
+void WeaponLauncher::HandleMouseWheelUp(bool shift)
 {
   projectile->IncrementTimeOut();
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleMouseWheelDown()
+void WeaponLauncher::HandleMouseWheelDown(bool shift)
 {
   projectile->DecrementTimeOut();
   NetworkSetTimeoutProjectile();

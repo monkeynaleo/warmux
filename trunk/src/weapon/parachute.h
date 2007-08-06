@@ -47,11 +47,11 @@ class Parachute : public Weapon
     void SignalTurnEnd() { p_Deselect(); };
     bool IsInUse() const;
 
-    void HandleKeyPressed_Shoot();
-    void HandleKeyPressed_MoveRight();
-    void HandleKeyReleased_MoveRight();
-    void HandleKeyPressed_MoveLeft();
-    void HandleKeyReleased_MoveLeft();
+    void HandleKeyPressed_Shoot(bool shift);
+    void HandleKeyPressed_MoveRight(bool shift);
+    void HandleKeyReleased_MoveRight(bool shift);
+    void HandleKeyPressed_MoveLeft(bool shift);
+    void HandleKeyReleased_MoveLeft(bool shift);
 
     ParachuteConfig& cfg();
     DECLARE_GETWEAPONSTRING();

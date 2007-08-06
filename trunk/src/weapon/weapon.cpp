@@ -689,7 +689,7 @@ void Weapon::HandleKeyReleased_Up(bool shift)
 
 void Weapon::HandleKeyPressed_Down(bool shift)
 {
-  ActiveCharacter().HandleKeyPressed_Down();
+  ActiveCharacter().HandleKeyPressed_Down(shift);
 }
 
 void Weapon::HandleKeyRefreshed_Down(bool shift)
@@ -709,7 +709,7 @@ void Weapon::HandleKeyPressed_Jump(bool shift)
 
 void Weapon::HandleKeyRefreshed_Jump(bool shift)
 {
-  ActiveCharacter().HandleKeyRefreshed_Jump();
+  ActiveCharacter().HandleKeyRefreshed_Jump(shift);
 }
 
 void Weapon::HandleKeyReleased_Jump(bool shift)

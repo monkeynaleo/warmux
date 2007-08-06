@@ -914,7 +914,7 @@ void Character::HandleKeyPressed_Up(bool shift)
   HandleKeyRefreshed_Up(shift);
 }
 
-void Character::HandleKeyRefreshed_Up(bool)
+void Character::HandleKeyRefreshed_Up(bool shift)
 {
   HideGameInterface();
   if (ActiveCharacter().IsImmobile())
@@ -923,7 +923,8 @@ void Character::HandleKeyRefreshed_Up(bool)
         {
           do_nothing_time = Time::GetInstance()->Read();
           CharacterCursor::GetInstance()->Hide();
-          AddFiringAngle(-DELTA_CROSSHAIR);
+          if (shift) AddFiringAngle(-DELTA_CROSSHAIR/10.0);
+          else       AddFiringAngle(-DELTA_CROSSHAIR);
           SendActiveCharacterInfo();
         }
     }
@@ -937,7 +938,7 @@ void Character::HandleKeyPressed_Down(bool shift)
   HandleKeyRefreshed_Up(shift);
 }
 
-void Character::HandleKeyRefreshed_Down(bool)
+void Character::HandleKeyRefreshed_Down(bool shift)
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
@@ -946,7 +947,8 @@ void Character::HandleKeyRefreshed_Down(bool)
         {
           do_nothing_time = Time::GetInstance()->Read();
           CharacterCursor::GetInstance()->Hide();
-          AddFiringAngle(DELTA_CROSSHAIR);
+          if (shift) AddFiringAngle(DELTA_CROSSHAIR/10.0);
+          else       AddFiringAngle(DELTA_CROSSHAIR);
           SendActiveCharacterInfo();
         }
     }
