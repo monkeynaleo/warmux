@@ -340,7 +340,7 @@ void Map::DrawAuthorName()
 
 bool CompareRectangle(const Rectanglei& a, const Rectanglei& b)
 {
-  return ( a.GetTopLeftPoint() <= b.GetTopLeftPoint() );
+  return ( a.GetTopLeftPoint() < b.GetTopLeftPoint() );
 }
 
 void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
