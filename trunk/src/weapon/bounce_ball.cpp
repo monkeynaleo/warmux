@@ -41,7 +41,6 @@ class BounceBall : public WeaponProjectile
     BounceBall(ExplosiveWeaponConfig& cfg,
                WeaponLauncher * p_launcher);
     void Refresh();
-    DECLARE_GETWEAPONSTRING();
   protected:
     void SignalOutOfMap();
 };
@@ -74,14 +73,6 @@ void BounceBall::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-std::string BounceBall::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u bounce ball!",
-            "%s team has won %u bounce balls!",
-            items_count), TeamName, items_count);
-}
-
 //-----------------------------------------------------------------------------
 
 BounceBallLauncher::BounceBallLauncher() :
@@ -109,3 +100,13 @@ bool BounceBallLauncher::p_Shoot ()
   ReloadLauncher();
   return true;
 }
+
+std::string BounceBallLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u bounce ball! Boing!",
+            "%s team has won %u bounce balls! Boing!",
+            items_count), TeamName, items_count);
+}
+
+

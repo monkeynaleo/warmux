@@ -30,7 +30,7 @@ class Gun : public WeaponLauncher
 {
   public:
     Gun();
-    DECLARE_GETWEAPONSTRING();
+    std::string GetWeaponWinString(const char *TeamName, uint items_count);
   protected:
     bool p_Shoot();
     WeaponProjectile * GetProjectileInstance();

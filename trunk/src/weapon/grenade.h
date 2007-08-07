@@ -32,7 +32,6 @@ public:
   Grenade(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
   void Refresh();
-  DECLARE_GETWEAPONSTRING();
 protected:
   void SignalOutOfMap();
 };
@@ -41,6 +40,7 @@ class GrenadeLauncher : public WeaponLauncher
 {
  public:
   GrenadeLauncher();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count );
  protected:
   WeaponProjectile * GetProjectileInstance();
 };

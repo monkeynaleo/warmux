@@ -104,7 +104,7 @@ void Teleportation::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-std::string Teleportation::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Teleportation::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u teleportation!",

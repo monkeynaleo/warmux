@@ -158,11 +158,11 @@ bool Airhammer::IsInUse() const
 }
 
 
-std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
-            "%s team has won %u airhammer!",
-            "%s team has won %u airhammers!",
+            "%s team has won %u airhammer! Don't make too much noise with it, thanks for your neighbours.",
+            "%s team has won %u airhammers! Don't make too much noise with them, thanks for your neighbours.",
             items_count), TeamName, items_count);
 }
 

@@ -28,7 +28,7 @@ class Bazooka : public WeaponLauncher
 {
  public:
   Bazooka();
-  DECLARE_GETWEAPONSTRING();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count );
  protected:
   WeaponProjectile * GetProjectileInstance();
 };

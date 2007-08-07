@@ -29,6 +29,7 @@ class DiscoGrenadeLauncher : public WeaponLauncher
 {
   public:
     DiscoGrenadeLauncher();
+    std::string GetWeaponWinString(const char *TeamName, uint items_count );
   protected:
     WeaponProjectile * GetProjectileInstance();
 };

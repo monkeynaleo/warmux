@@ -45,7 +45,6 @@ class DiscoGrenade : public WeaponProjectile
     DiscoGrenade(ExplosiveWeaponConfig& cfg,
                  WeaponLauncher * p_launcher);
     void Refresh();
-    DECLARE_GETWEAPONSTRING();
   protected:
     void Explosion();
     void SignalOutOfMap();
@@ -115,14 +114,6 @@ void DiscoGrenade::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-std::string DiscoGrenade::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u disco grenade!",
-            "%s team has won %u disco grenades!",
-            items_count), TeamName, items_count);
-}
-
 //-----------------------------------------------------------------------------
 
 DiscoGrenadeLauncher::DiscoGrenadeLauncher() :
@@ -140,3 +131,12 @@ WeaponProjectile * DiscoGrenadeLauncher::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
       (new DiscoGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
+std::string DiscoGrenadeLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u disco grenade! Shake your body when throwing it!",
+            "%s team has won %u disco grenades! Shake your body when throwing them!",
+            items_count), TeamName, items_count);
+}
+
+

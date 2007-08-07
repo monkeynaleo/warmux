@@ -54,7 +54,6 @@ class Polecat : public WeaponProjectile
           WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
-  DECLARE_GETWEAPONSTRING();
 };
 
 
@@ -143,14 +142,6 @@ void Polecat::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-std::string Polecat::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u polecat!",
-            "%s team has won %u polecats!",
-            items_count), TeamName, items_count);
-}
-
 //-----------------------------------------------------------------------------
 
 PolecatLauncher::PolecatLauncher() :
@@ -166,3 +157,13 @@ WeaponProjectile * PolecatLauncher::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
     (new Polecat(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
+
+std::string PolecatLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u polecat! You have you're gas mask, right ?",
+            "%s team has won %u polecats! You have you're gas mask, right ?",
+            items_count), TeamName, items_count);
+}
+
+

@@ -50,8 +50,6 @@ class Anvil : public WeaponProjectile
 
     void PlayFallSound();
     void PlayCollisionSound();
-    DECLARE_GETWEAPONSTRING();
-
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
     virtual void SignalGroundCollision();
@@ -103,14 +101,6 @@ void Anvil::PlayCollisionSound()
 {
   falling_sound.Stop();
   jukebox.Play("share","weapon/anvil_collision");
-}
-
-std::string Anvil::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u anvil!",
-            "%s team has won %u anvils!",
-            items_count), TeamName, items_count);
 }
 
 //-----------------------------------------------------------------------------
@@ -168,3 +158,13 @@ WeaponProjectile * AnvilLauncher::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
       (new Anvil(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
+
+std::string AnvilLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u anvil! Splat them all!",
+            "%s team has won %u anvils! Splat them all!",
+            items_count), TeamName, items_count);
+}
+
+

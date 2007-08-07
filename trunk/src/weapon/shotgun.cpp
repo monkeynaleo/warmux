@@ -120,7 +120,7 @@ bool Shotgun::p_Shoot ()
   return true;
 }
 
-std::string Shotgun::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Shotgun::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u shotgun!",

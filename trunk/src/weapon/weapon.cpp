@@ -746,13 +746,3 @@ void Weapon::HandleKeyReleased_BackJump(bool shift)
 {
   ActiveCharacter().HandleKeyReleased_BackJump(shift);
 }
-
-std::string Weapon::GetWeaponWinString(const char *TeamName, uint items_count )
-{
-  return Format(ngettext(
-            "%s team has won %u unexpected weapon!",
-            "%s team has won %u unexpected weapons!",
-            items_count), TeamName, items_count);
-}
-
-

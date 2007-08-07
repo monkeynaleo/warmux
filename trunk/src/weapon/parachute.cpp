@@ -137,7 +137,7 @@ void Parachute::Refresh()
     ActiveCharacter().SetExternForce(m_x_extern, 0.0);
 }
 
-std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u parachute!",

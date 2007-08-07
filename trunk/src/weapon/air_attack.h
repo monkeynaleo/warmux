@@ -66,8 +66,8 @@ class AirAttack : public Weapon
     void Refresh() { };
   public:
     AirAttack();
-    virtual void ChooseTarget (Point2i mouse_pos);
-    DECLARE_GETWEAPONSTRING();
+    void ChooseTarget (Point2i mouse_pos);
+    std::string GetWeaponWinString(const char *TeamName, uint items_count );
     bool IsInUse() const;
   private:
     AirAttackConfig& cfg();

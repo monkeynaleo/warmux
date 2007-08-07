@@ -53,11 +53,11 @@ bool SkipTurn::p_Shoot()
 
 //-----------------------------------------------------------------------------
 
-std::string SkipTurn::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string SkipTurn::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
-            "%s team has won %u turn skip!",
-            "%s team has won %u turn skips!",
+            "%s team has won %u turn skip! I know you'll love it.",
+            "%s team has won %u turn skips! I know you'll love them.",
             items_count), TeamName, items_count);
 }
 

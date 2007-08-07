@@ -46,7 +46,7 @@ class Blowtorch : public Weapon
     virtual void HandleKeyReleased_Shoot(bool) { NewActionWeaponStopUse(); };
     bool IsInUse() const;
 
-    DECLARE_GETWEAPONSTRING();
+    std::string GetWeaponWinString(const char *TeamName, uint items_count );
 };
 
 #endif  // __BLOWTORCH_H__
