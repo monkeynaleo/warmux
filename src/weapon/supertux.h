@@ -25,35 +25,9 @@
 #include "launcher.h"
 #include "particles/particle.h"
 
-class TuxLauncher;
+class SuperTux;
 
 class SuperTuxWeaponConfig;
-
-class SuperTux : public WeaponProjectile
-{
-  private:
-    ParticleEngine particle_engine;
-    double angle_rad;
-    SoundSample flying_sound;
-
-  public:
-    uint speed;
-    uint time_now;
-    uint time_next_action;
-    uint last_move;
-
-    SuperTux(SuperTuxWeaponConfig& cfg,
-             WeaponLauncher * p_launcher);
-    void Refresh();
-
-    inline void SetAngle(double angle) {angle_rad = angle;}
-    void turn_left();
-    void turn_right();
-    void Shoot(double strength);
-    virtual void Explosion();
-  protected:
-    void SignalOutOfMap();
-};
 
 class TuxLauncher : public WeaponLauncher
 {
@@ -72,6 +46,8 @@ class TuxLauncher : public WeaponLauncher
     virtual void HandleKeyRefreshed_MoveLeft(bool shift);
     virtual void HandleKeyReleased_MoveLeft(bool shift);
     DECLARE_GETWEAPONSTRING();
+
+    void RefreshFromNetwork(double angle, Point2d pos);
 
   protected:
     WeaponProjectile * GetProjectileInstance();
