@@ -37,7 +37,7 @@ class Suicide : public Weapon
     Suicide();
     ExplosiveWeaponConfig &cfg();
     bool IsInUse() const;
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 
 #endif /* SUICIDE_H */

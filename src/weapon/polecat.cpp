@@ -158,7 +158,7 @@ WeaponProjectile * PolecatLauncher::GetProjectileInstance()
     (new Polecat(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-std::string PolecatLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string PolecatLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u polecat! You have you're gas mask, right ?",

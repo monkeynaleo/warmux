@@ -38,7 +38,7 @@ class TuxLauncher : public WeaponLauncher
     void EndOfTurn() const; // should be called only by SuperTux
     bool IsInUse() const;
 
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 
     void SignalEndOfProjectile();
     void HandleKeyPressed_MoveRight(bool shift);

@@ -268,7 +268,7 @@ void TuxLauncher::HandleKeyReleased_MoveLeft(bool shift)
     ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
 }
 
-std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u tux launcher! Never seen a flying penguin?",

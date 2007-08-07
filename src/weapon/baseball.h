@@ -39,7 +39,7 @@ class Baseball : public Weapon
   public:
     Baseball();
     BaseballConfig &cfg();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
     bool IsInUse() const;
 };
 

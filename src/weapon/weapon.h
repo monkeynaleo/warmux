@@ -309,7 +309,7 @@ public:
 
   // For localization purposes, each weapon needs to have its own
   // "%s team has won %d <weapon>" function
-  virtual std::string GetWeaponWinString(const char *TeamName, uint items_count)=0;
+  virtual std::string GetWeaponWinString(const char *TeamName, uint items_count) const = 0;
 
   // Allows or not the character selection with mouse click (tab is allowed)
   // This is used in weapons like the automated bazooka, where it's required

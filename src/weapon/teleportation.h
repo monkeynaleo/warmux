@@ -43,7 +43,7 @@ class Teleportation : public Weapon
     void ChooseTarget(Point2i mouse_pos);
     bool IsInUse() const;
     WeaponConfig& cfg();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 
 #endif /* TELEPORTATION_H */

@@ -131,7 +131,7 @@ WeaponProjectile * DiscoGrenadeLauncher::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
       (new DiscoGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
-std::string DiscoGrenadeLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string DiscoGrenadeLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u disco grenade! Shake your body when throwing it!",

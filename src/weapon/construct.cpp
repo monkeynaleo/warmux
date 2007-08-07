@@ -56,7 +56,7 @@ Construct::~Construct()
   delete construct_spr;
 }
 
-std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count)
+std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
   return Format(ngettext(
             "%s team has won %u construct weapon! Don't forget your helmet.",

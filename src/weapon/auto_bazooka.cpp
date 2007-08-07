@@ -290,7 +290,7 @@ void AutomaticBazookaConfig::LoadXml(xmlpp::Element *elem) {
     XmlReader::ReadDouble(elem, "rocket_force", rocket_force);
 }
 
-std::string AutomaticBazooka::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string AutomaticBazooka::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u automatic bazooka!",

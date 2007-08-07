@@ -159,7 +159,7 @@ WeaponProjectile * AnvilLauncher::GetProjectileInstance()
       (new Anvil(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-std::string AnvilLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string AnvilLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u anvil! Splat them all!",

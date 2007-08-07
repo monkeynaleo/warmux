@@ -155,7 +155,7 @@ ClusterBombConfig& ClusterLauncher::cfg()
   return static_cast<ClusterBombConfig&>(*extra_params);
 }
 
-std::string ClusterLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string ClusterLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u cluster bomb!",

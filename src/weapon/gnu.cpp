@@ -149,7 +149,7 @@ WeaponProjectile * GnuLauncher::GetProjectileInstance()
       (new Gnu(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-std::string GnuLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string GnuLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u Gnu! Blow them all, cowboy!",

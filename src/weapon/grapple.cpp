@@ -702,7 +702,7 @@ void Grapple::PrintDebugRope()
   }
 }
 
-std::string Grapple::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string Grapple::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u grapple!",

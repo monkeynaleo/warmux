@@ -77,7 +77,7 @@ WeaponProjectile * GrenadeLauncher::GetProjectileInstance()
       (new Grenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-std::string GrenadeLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string GrenadeLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u grenade!",
