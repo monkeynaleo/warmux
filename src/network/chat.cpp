@@ -73,8 +73,8 @@ void Chat::ShowInput()
     input = new Text("", c_white);
     msg = new Text(_("Say: "), c_red);
   }
-  input->DrawTopLeft(50,500);
   msg->DrawTopLeft(25,500);
+  input->DrawTopLeft(25 + msg->GetWidth() + 5,500);
 }
 
 bool Chat::CheckInput() const {
