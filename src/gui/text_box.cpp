@@ -63,34 +63,45 @@ void TextBox::SendKey(const SDL_keysym& key)
   std::string::size_type length = GetText().size();
   std::string new_txt = GetText();
 
-  if (strcmp(SDL_GetKeyName(key.sym),"backspace")==0)
-  {
+  switch (key.sym){
+  case SDLK_BACKSPACE:
     if(cursor_pos != 0)
-    {
-      while((new_txt[--cursor_pos] & 0xc0) == 0x80)
       {
-        new_txt.erase(cursor_pos, 1);
+	while((new_txt[--cursor_pos] & 0xc0) == 0x80)
+	  {
+	    new_txt.erase(cursor_pos, 1);
+	  }
+	new_txt.erase(cursor_pos, 1);
+	SetText(new_txt);
       }
-      new_txt.erase(cursor_pos, 1);
-      SetText(new_txt);
-    }
-  }
-  else if(strcmp(SDL_GetKeyName(key.sym),"left")==0)
-  {
+    break;
+  case SDLK_LEFT:
     if(cursor_pos != 0)
-    {
-      while((new_txt[--cursor_pos] & 0xc0) == 0x80);
-    }
-  }
-  else if(strcmp(SDL_GetKeyName(key.sym),"right")==0)
-  {
+      {
+	while((new_txt[--cursor_pos] & 0xc0) == 0x80);
+      }
+    break;
+  case SDLK_RIGHT:
     if(cursor_pos < new_txt.size())
-    {
-      while((new_txt[++cursor_pos] & 0xc0) == 0x80);
-    }
-  }
-  else
-  {
+      {
+	while((new_txt[++cursor_pos] & 0xc0) == 0x80);
+      }
+    break;
+
+  case SDLK_TAB:
+  case SDLK_CLEAR:
+  case SDLK_ESCAPE:
+  case SDLK_DELETE:
+  case SDLK_UP:
+  case SDLK_DOWN:
+  case SDLK_INSERT:
+  case SDLK_HOME:
+  case SDLK_END:
+  case SDLK_PAGEUP:
+  case SDLK_PAGEDOWN:
+    break;
+
+  default:
     if(key.unicode > 0)
     {
       if(key.unicode < 0x80) { // 1 byte char
@@ -109,10 +120,11 @@ void TextBox::SendKey(const SDL_keysym& key)
       }
     }
     SetText(new_txt);
-
-    if (GetText().size() == length)
-      cursor_pos = old_cursor_pos;
+    break;
   }
+  
+  if (GetText().size() == length)
+    cursor_pos = old_cursor_pos;
 }
 
 void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
