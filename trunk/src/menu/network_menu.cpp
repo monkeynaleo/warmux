@@ -143,7 +143,6 @@ NetworkMenu::NetworkMenu() :
 
   msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
-  msg_box->NewMessage(_("WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"), c_red);
 
   chat_box->AddWidget(msg_box);
 
@@ -355,7 +354,6 @@ void NetworkMenu::UpdateTeamCallback(const std::string& team_id)
     return;
 
   team_box->UpdateTeamCallback(team_id);
-  msg_box->NewMessage(team_id + " updated");
 }
 
 void NetworkMenu::ChangeMapCallback()

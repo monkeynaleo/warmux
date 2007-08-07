@@ -54,6 +54,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Rectanglei& rect) :
   player_name = new TextBox(_player_name, Rectanglei(0,0,100,0),
                             Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp_player_box->AddWidget(player_name);
+  previous_name = " ";
 
   nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),
                                  6,1,1,10,
@@ -113,6 +114,13 @@ void TeamBox::Update(const Point2i &mousePosition,
     Redraw(*this, surf);
   }
 
+  if (associated_team != NULL && previous_name != player_name->GetText()) {
+    previous_name = player_name->GetText();
+    if (Network::GetInstance()->IsConnected()) {
+      ValidOptions();
+    }
+  }
+
   need_redrawing = false;
 }
 
@@ -125,10 +133,13 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
     if ( !associated_team->IsLocal() && !associated_team->IsLocalAI() )
       return NULL; // it's not a local team, we can't configure it !!
 
-    if (w == nb_characters || w == player_name) {
+    if (w == nb_characters) {
       if (Network::GetInstance()->IsConnected()) {
               ValidOptions();
       }
+      return w;
+    }
+    if (w == player_name) {
       return w;
     }
   }

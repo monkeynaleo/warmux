@@ -40,6 +40,7 @@ class TeamBox : public HBox
   /**********************************************/
 
   bool is_local; // local/remote team
+  std::string previous_name; // only for network
 
   Team * associated_team;
   PictureWidget *team_logo;
