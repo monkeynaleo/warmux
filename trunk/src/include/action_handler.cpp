@@ -452,16 +452,11 @@ void Action_Weapon_Supertux (Action *a)
   {
     return;
   }
-  WeaponLauncher* launcher = static_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
-  SuperTux* tux = static_cast<SuperTux*>(launcher->GetProjectile());
+  TuxLauncher* launcher = static_cast<TuxLauncher*>(&(ActiveTeam().AccessWeapon()));
 
-  double x, y;
-
-  tux->SetAngle(a->PopDouble());
-  x = a->PopDouble();
-  y = a->PopDouble();
-  tux->SetPhysXY(x, y);
-  tux->SetSpeedXY(Point2d(0,0));
+  double angle = a->PopDouble();
+  Point2d pos(a->PopPoint2d());
+  launcher->RefreshFromNetwork(angle, pos);
 }
 
 void Action_Weapon_Construction (Action *a)

@@ -49,7 +49,35 @@ class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
     SuperTuxWeaponConfig();
     virtual void LoadXml(xmlpp::Element *elem);
 };
+//-----------------------------------------------------------------------------
 
+class SuperTux : public WeaponProjectile
+{
+  private:
+    ParticleEngine particle_engine;
+    double angle_rad;
+    SoundSample flying_sound;
+
+  public:
+    uint speed;
+    uint time_now;
+    uint time_next_action;
+    uint last_move;
+
+    SuperTux(SuperTuxWeaponConfig& cfg,
+             WeaponLauncher * p_launcher);
+    void Refresh();
+
+    inline void SetAngle(double angle) {angle_rad = angle;}
+    void turn_left();
+    void turn_right();
+    void Shoot(double strength);
+    virtual void Explosion();
+  protected:
+    void SignalOutOfMap();
+};
+
+//-----------------------------------------------------------------------------
 
 SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
                    WeaponLauncher * p_launcher) :
@@ -90,8 +118,7 @@ void SuperTux::Refresh()
   {
     Action a(Action::ACTION_WEAPON_SUPERTUX);
     a.Push(angle_rad);
-    a.Push(GetPhysX());
-    a.Push(GetPhysY());
+    a.Push(GetPos());
     Network::GetInstance()->SendAction(&a);
   }
   particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
@@ -247,6 +274,13 @@ std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_cou
             "%s team has won %u tux launcher!",
             "%s team has won %u tux launchers!",
             items_count), TeamName, items_count);
+}
+
+void TuxLauncher::RefreshFromNetwork(double angle, Point2d pos)
+{
+  current_tux->SetAngle(angle);
+  current_tux->SetPhysXY(pos);
+  current_tux->SetSpeedXY(Point2d(0,0));
 }
 
 SuperTuxWeaponConfig& TuxLauncher::cfg()
