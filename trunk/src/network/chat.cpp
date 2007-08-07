@@ -126,6 +126,21 @@ void Chat::HandleKey(const SDL_Event& event)
     input->Set(txt);
     break;
 
+  case SDLK_TAB:
+  case SDLK_CLEAR:
+  case SDLK_ESCAPE:
+  case SDLK_DELETE:
+  case SDLK_UP:
+  case SDLK_DOWN:
+  case SDLK_RIGHT:
+  case SDLK_LEFT:
+  case SDLK_INSERT:
+  case SDLK_HOME:
+  case SDLK_END:
+  case SDLK_PAGEUP:
+  case SDLK_PAGEDOWN:
+    break;
+
   default:
     if (kbd_event.state == 1 && key.unicode > 0){
       if(key.unicode < 0x80) { // 1 byte char
