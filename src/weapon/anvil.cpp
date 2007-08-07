@@ -68,9 +68,12 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj)
 {
+  merge_time = Time::GetInstance()->Read() + 5000;
   if (typeid(*obj) == typeid(Character)) {
     Character * tmp = (Character *)(obj);
-    tmp -> SetEnergyDelta (-200);
+    tmp->SetEnergyDelta(-200);
+  } else {
+    obj->AddDamage(200);
   }
   PlayCollisionSound();
 }
