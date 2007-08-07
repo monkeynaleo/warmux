@@ -252,7 +252,7 @@ AirAttackConfig& AirAttack::cfg()
   return static_cast<AirAttackConfig&>(*extra_params);
 }
 
-std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u air attack!",

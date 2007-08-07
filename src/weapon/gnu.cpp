@@ -49,7 +49,6 @@ public:
       WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
-  DECLARE_GETWEAPONSTRING();
 };
 
 
@@ -134,14 +133,6 @@ void Gnu::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-std::string Gnu::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u Gnu!",
-            "%s team has won %u Gnus!",
-            items_count), TeamName, items_count);
-}
-
 //-----------------------------------------------------------------------------
 
 GnuLauncher::GnuLauncher() :
@@ -157,3 +148,13 @@ WeaponProjectile * GnuLauncher::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
       (new Gnu(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
+
+std::string GnuLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u Gnu! Blow them all, cowboy!",
+            "%s team has won %u Gnus! Blow them all, cowboy!",
+            items_count), TeamName, items_count);
+}
+
+

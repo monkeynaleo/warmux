@@ -61,7 +61,6 @@ public:
   ClusterBomb(ClusterBombConfig& cfg,
               WeaponLauncher * p_launcher);
   void Refresh();
-  DECLARE_GETWEAPONSTRING();
 protected:
   void DoExplosion();
   void SignalOutOfMap();
@@ -133,13 +132,6 @@ void ClusterBomb::DoExplosion()
   WeaponProjectile::DoExplosion();
 }
 
-std::string ClusterBomb::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u cluster bomb!",
-            "%s team has won %u cluster bombs!",
-            items_count), TeamName, items_count);
-}
 //-----------------------------------------------------------------------------
 
 ClusterLauncher::ClusterLauncher() :
@@ -163,6 +155,13 @@ ClusterBombConfig& ClusterLauncher::cfg()
   return static_cast<ClusterBombConfig&>(*extra_params);
 }
 
+std::string ClusterLauncher::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u cluster bomb!",
+            "%s team has won %u cluster bombs!",
+            items_count), TeamName, items_count);
+}
 //-----------------------------------------------------------------------------
 
 ClusterBombConfig::ClusterBombConfig() :

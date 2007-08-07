@@ -102,7 +102,7 @@ bool Syringe::p_Shoot (){
   return true;
 }
 
-std::string Syringe::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Syringe::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u syringe!",

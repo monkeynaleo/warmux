@@ -30,6 +30,7 @@ class BounceBallLauncher : public WeaponLauncher
   protected:
     bool p_Shoot ();
     WeaponProjectile * GetProjectileInstance();
+    std::string GetWeaponWinString(const char *TeamName, uint items_count );
   public:
     BounceBallLauncher();
 };

@@ -55,7 +55,7 @@ public:
   virtual void HandleMouseWheelDown(bool) { Down(); };
 
   void SetAngle(double _angle) { angle = _angle; }; // to be used by network
-  DECLARE_GETWEAPONSTRING();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count);
   bool IsInUse() const;
   WeaponConfig& cfg();
 };

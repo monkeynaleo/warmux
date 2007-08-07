@@ -38,14 +38,15 @@ class TuxLauncher : public WeaponLauncher
     void EndOfTurn() const; // should be called only by SuperTux
     bool IsInUse() const;
 
+    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+
     void SignalEndOfProjectile();
-    virtual void HandleKeyPressed_MoveRight(bool shift);
-    virtual void HandleKeyRefreshed_MoveRight(bool shift);
-    virtual void HandleKeyReleased_MoveRight(bool shift);
-    virtual void HandleKeyPressed_MoveLeft(bool shift);
-    virtual void HandleKeyRefreshed_MoveLeft(bool shift);
-    virtual void HandleKeyReleased_MoveLeft(bool shift);
-    DECLARE_GETWEAPONSTRING();
+    void HandleKeyPressed_MoveRight(bool shift);
+    void HandleKeyRefreshed_MoveRight(bool shift);
+    void HandleKeyReleased_MoveRight(bool shift);
+    void HandleKeyPressed_MoveLeft(bool shift);
+    void HandleKeyRefreshed_MoveLeft(bool shift);
+    void HandleKeyReleased_MoveLeft(bool shift);
 
     void RefreshFromNetwork(double angle, Point2d pos);
 

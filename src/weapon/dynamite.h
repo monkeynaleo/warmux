@@ -35,6 +35,6 @@ class Dynamite : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
   public:
     Dynamite();
-    DECLARE_GETWEAPONSTRING();
+    std::string GetWeaponWinString(const char *TeamName, uint items_count);
 };
 #endif /* DYNAMITE_H */

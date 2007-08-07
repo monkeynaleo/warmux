@@ -130,6 +130,8 @@ class WeaponLauncher : public Weapon
 
     virtual void Draw();
 
+    std::string GetWeaponWinString(const char *TeamName, uint items_count)=0;
+	    
     // Handle of projectile events
     // Signal the end of a projectile for any reason possible
     virtual void SignalEndOfProjectile() { DecActiveProjectile(); };

@@ -56,6 +56,14 @@ Construct::~Construct()
   delete construct_spr;
 }
 
+std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count)
+{
+  return Format(ngettext(
+            "%s team has won %u construct weapon! Don't forget your helmet.",
+            "%s team has won %u construct weapons! Don't forget your helmet.",
+            items_count), TeamName, items_count);
+}
+
 bool Construct::p_Shoot ()
 {
   if(!target_chosen)
@@ -101,14 +109,6 @@ void Construct::Down() const
 
 WeaponConfig& Construct::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
-
-std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u construct!",
-            "%s team has won %u constructs!",
-            items_count), TeamName, items_count);
-}
 
 bool Construct::IsInUse() const
 {

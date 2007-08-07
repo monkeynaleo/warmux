@@ -226,11 +226,11 @@ bool JetPack::p_Shoot()
   return true;
 }
 
-std::string JetPack::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string JetPack::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
-            "%s team has won %u jetpack!",
-            "%s team has won %u jetpacks!",
+            "%s team has won %u jetpack! Groovy!",
+            "%s team has won %u jetpacks! Groovy!",
             items_count), TeamName, items_count);
 }
 

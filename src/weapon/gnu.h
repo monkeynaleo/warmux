@@ -29,6 +29,7 @@ class GnuLauncher : public WeaponLauncher
 {
 public:
   GnuLauncher();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count);
 protected:
   WeaponProjectile * GetProjectileInstance();
 };

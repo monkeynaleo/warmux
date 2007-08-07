@@ -66,11 +66,11 @@ void LowGrav::HandleKeyPressed_Shoot(bool)
     NewActionWeaponStopUse();
 }
 
-std::string LowGrav::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string LowGrav::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
-            "%s team has won %u lowgrav!",
-            "%s team has won %u lowgravs!",
+            "%s team has won %u lowgrav! I'm Neil Armstrong!",
+            "%s team has won %u lowgravs! I'm Neil Armstrong!",
             items_count), TeamName, items_count);
 }
 

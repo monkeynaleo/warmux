@@ -46,13 +46,11 @@ class Airhammer : public Weapon
     Airhammer();
     AirhammerConfig &cfg();
     bool IsInUse() const;
-    virtual void ActionStopUse();
-
-    virtual void HandleKeyPressed_Shoot(bool shift) { HandleKeyRefreshed_Shoot(shift); };
-    virtual void HandleKeyRefreshed_Shoot(bool shift);
-    virtual void HandleKeyReleased_Shoot(bool) { NewActionWeaponStopUse(); };
-
-    DECLARE_GETWEAPONSTRING();
+    void ActionStopUse();
+    void HandleKeyPressed_Shoot(bool shift) { HandleKeyRefreshed_Shoot(shift); };
+    void HandleKeyRefreshed_Shoot(bool shift);
+    void HandleKeyReleased_Shoot(bool) { NewActionWeaponStopUse(); };
+    std::string GetWeaponWinString(const char *TeamName, uint items_count );
 };
 
 //-----------------------------------------------------------------------------
