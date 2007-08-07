@@ -49,7 +49,7 @@ class JetPack : public Weapon
     virtual void HandleKeyReleased_MoveRight(bool shift);
     virtual void HandleKeyPressed_Shoot(bool shift);
 
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 
   protected:
     void Refresh();

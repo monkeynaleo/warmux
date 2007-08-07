@@ -231,7 +231,7 @@ void Mine::Add (int x, int y)
   ReloadLauncher();
 }
 
-std::string Mine::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string Mine::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u mine!",

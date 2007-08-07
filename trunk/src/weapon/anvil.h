@@ -33,7 +33,7 @@ class AnvilLauncher : public WeaponLauncher
   public:
     AnvilLauncher();
     void ChooseTarget (Point2i mouse_pos);
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
   protected:
     WeaponProjectile * GetProjectileInstance();
     virtual bool p_Shoot();

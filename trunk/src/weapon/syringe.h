@@ -39,7 +39,7 @@ class Syringe : public Weapon
   public:
     Syringe();
     SyringeConfig &cfg();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 
 //-----------------------------------------------------------------------------

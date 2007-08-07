@@ -28,7 +28,7 @@ class RiotBomb : public WeaponLauncher
 {
  public:
   RiotBomb();
-  std::string GetWeaponWinString(const char *TeamName, uint items_count );
+  std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
  protected:
   WeaponProjectile * GetProjectileInstance();
 };

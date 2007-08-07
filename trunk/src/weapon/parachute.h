@@ -52,7 +52,7 @@ class Parachute : public Weapon
     void HandleKeyReleased_MoveRight(bool shift);
     void HandleKeyPressed_MoveLeft(bool shift);
     void HandleKeyReleased_MoveLeft(bool shift);
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 
     ParachuteConfig& cfg();
 };

@@ -67,7 +67,7 @@ class AirAttack : public Weapon
   public:
     AirAttack();
     void ChooseTarget (Point2i mouse_pos);
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
     bool IsInUse() const;
   private:
     AirAttackConfig& cfg();

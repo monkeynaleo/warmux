@@ -48,7 +48,7 @@ class SnipeRifle : public WeaponLauncher
     void SignalProjectileGhostState();
     void DrawBeam();
     void Draw();  // In order to draw the laser beam / and the contact point.
-    std::string GetWeaponWinString(const char *TeamName, uint items_count );
+    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 
 #endif /* SNIPE_RIFLE_H */

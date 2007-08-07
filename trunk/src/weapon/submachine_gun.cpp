@@ -143,7 +143,7 @@ void SubMachineGun::HandleKeyRefreshed_Shoot(bool /*shift*/)
   }
 }
 
-std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_count )
+std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
             "%s team has won %u submachine gun!",
