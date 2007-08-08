@@ -22,7 +22,7 @@
 #ifndef POLECAT_H
 #define POLECAT_H
 
-#include "launcher.h"
+#include "weapon_launcher.h"
 #include "include/base.h"
 
 class PolecatLauncher : public WeaponLauncher

@@ -171,7 +171,6 @@ wormux_SOURCES = \
         weapon/grenade.cpp weapon/grenade.h \
         weapon/gun.cpp weapon/gun.h \
         weapon/jetpack.cpp weapon/jetpack.h\
-        weapon/launcher.cpp weapon/launcher.h \
         weapon/lowgrav.cpp weapon/lowgrav.h \
         weapon/mine.cpp weapon/mine.h \
         weapon/parachute.cpp weapon/parachute.h \
@@ -187,6 +186,7 @@ wormux_SOURCES = \
         weapon/teleportation.cpp weapon/teleportation.h \
         weapon/weapon_cfg.cpp weapon/weapon_cfg.h \
         weapon/weapon.cpp weapon/weapon.h \
+        weapon/weapon_launcher.cpp weapon/weapon_launcher.h \
         weapon/weapons_list.cpp weapon/weapons_list.h \
         weapon/weapon_strength_bar.h
 

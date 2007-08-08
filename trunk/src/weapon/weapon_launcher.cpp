@@ -19,7 +19,7 @@
  * WeaponLauncher: generic weapon to launch a projectile
  *****************************************************************************/
 
-#include "launcher.h"
+#include "weapon_launcher.h"
 #include "weapon_cfg.h"
 
 #include <sstream>

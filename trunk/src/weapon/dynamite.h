@@ -24,7 +24,7 @@
 #ifndef DYNAMITE_H
 #define DYNAMITE_H
 
-#include "launcher.h"
+#include "weapon_launcher.h"
 #include "include/base.h"
 
 // L'arme dynamite

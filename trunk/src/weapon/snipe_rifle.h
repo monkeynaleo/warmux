@@ -23,7 +23,7 @@
 #define SNIPE_RIFLE_H
 
 #include <vector>
-#include "launcher.h"
+#include "weapon_launcher.h"
 #include "graphic/color.h"
 #include "include/base.h"
 

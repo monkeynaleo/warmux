@@ -22,7 +22,7 @@
 #ifndef AIR_ATTACK_H
 #define AIR_ATTACK_H
 
-#include "launcher.h"
+#include "weapon_launcher.h"
 
 class AirAttackConfig;
 class Sprite;
