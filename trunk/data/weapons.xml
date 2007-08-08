@@ -108,7 +108,6 @@
 
   <surface name="anvil_launcher" file="weapon/anvil/anvil_launcher.png" />
   <position name="anvil_launcher" origin="hand" x="0" y="-5" />
-  <hole name="anvil_launcher" dx="16" dy="1" />
   <surface name="anvil_launcher_ico" file="weapon/anvil/anvil_ico.png" />
   <surface name="anvil" file="weapon/anvil/anvil.png" />
   <sprite name="anvil">
@@ -206,7 +205,6 @@
   <surface name="gnulauncher_ico" file="weapon/gnu/gnu_ico.png" />
   <surface name="gnulauncher" file="weapon/gnu/gnulauncher.png" />
   <position name="gnulauncher" origin="hand" x="-20" y="-20" />
-  <hole name="gnulauncher" dx="47" dy="25" />
   <sprite name="gnu">
     <image file="weapon/gnu/gnu.png">
       <grid pos="0,0" size="47,38" array="4,1" />
@@ -219,7 +217,6 @@
   <surface name="polecatlauncher_ico" file="weapon/polecat/polecat_ico.png" />
   <surface name="polecatlauncher" file="weapon/polecat/polecatlauncher.png" />
   <position name="polecatlauncher" origin="hand" x="-20" y="-20" />
-  <hole name="polecatlauncher" dx="47" dy="25" />
   <sprite name="polecat_fart">
     <image file="weapon/polecat/polecat_fart.png" />
   </sprite>
@@ -297,7 +294,6 @@
   <surface name="tux_ico" file="weapon/supertux/supertux_ico.png" />
   <surface name="tux" file="weapon/supertux/supertux.png" />
   <position name="tux" origin="hand" x="-1" y="-11" />
-  <hole name="tux" dx="16" dy="23" />
   <sprite name="supertux">
     <image file="weapon/supertux/superman.png">
       <grid pos="0,0" size="23,37" array="2,1" />
