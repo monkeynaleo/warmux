@@ -102,7 +102,7 @@ void Map::ToRedrawOnMap(const Rectanglei& r)
 
 void Map::ToRedrawOnScreen(Rectanglei r)
 {
-  r.SetPosition( r.GetPosition() + camera.GetPosition() );
+  r.SetPosition( r.GetPosition() + Camera::GetInstance()->GetPosition() );
   to_redraw->push_back( r );
 }
 

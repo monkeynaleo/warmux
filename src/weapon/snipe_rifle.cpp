@@ -165,8 +165,8 @@ void SnipeRifle::p_Deselect()
 
 void SnipeRifle::DrawBeam()
 {
-  Point2i pos1 = laser_beam_start - camera.GetPosition();
-  Point2i pos2 = targeted_point - camera.GetPosition();
+  Point2i pos1 = laser_beam_start - Camera::GetInstance()->GetPosition();
+  Point2i pos2 = targeted_point - Camera::GetInstance()->GetPosition();
   AppWormux::GetInstance()->video->window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
 
   // Set area of the screen to be redrawn:

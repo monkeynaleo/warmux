@@ -506,7 +506,7 @@ void Weapon::Draw(){
   }
 
   if ( m_image )
-    m_image->Blit( AppWormux::GetInstance()->video->window, Point2i(x, y) - camera.GetPosition());
+    m_image->Blit( AppWormux::GetInstance()->video->window, Point2i(x, y) - Camera::GetInstance()->GetPosition());
 }
 
 // Draw the weapon fire when firing
@@ -553,7 +553,7 @@ void Weapon::DrawAmmoUnits() const
     DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
                    Point2i( ActiveCharacter().GetCenterX(),
                             ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
-                   - camera.GetPosition(),
+                   - Camera::GetInstance()->GetPosition(),
                    ss.str());
   }
 }

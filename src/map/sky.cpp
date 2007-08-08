@@ -39,8 +39,8 @@ void Sky::Init(){
         tmp_image.SetAlpha( 0, 0);
         image = tmp_image.DisplayFormat();
 
-        tstVect = image.GetSize().inf( camera.GetSize() );
-        margin = tstVect * (camera.GetSize() - image.GetSize())/2;
+        tstVect = image.GetSize().inf( Camera::GetInstance()->GetSize() );
+        margin = tstVect * (Camera::GetInstance()->GetSize() - image.GetSize())/2;
 }
 
 void Sky::Reset(){
@@ -54,9 +54,9 @@ void Sky::Free(){
 
 void Sky::Draw(bool redraw_all)
 {
-  if( lastPos != camera.GetPosition() || redraw_all){
-    lastPos = camera.GetPosition();
-    RedrawParticle(camera);
+  if( lastPos != Camera::GetInstance()->GetPosition() || redraw_all){
+    lastPos = Camera::GetInstance()->GetPosition();
+    RedrawParticle(*Camera::GetInstance());
     return;
   }
 
@@ -72,11 +72,11 @@ void Sky::RedrawParticleList(std::list<Rectanglei> &list) const{
 }
 
 void Sky::RedrawParticle(const Rectanglei &particle) const{
-    Rectanglei ds(GetSkyPos() + particle.GetPosition() - camera.GetPosition() - margin,
+    Rectanglei ds(GetSkyPos() + particle.GetPosition() - Camera::GetInstance()->GetPosition() - margin,
                   particle.GetSize() );
-    AppWormux::GetInstance()->video->window.Blit(image, ds, particle.GetPosition() - camera.GetPosition());
+    AppWormux::GetInstance()->video->window.Blit(image, ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
 }
 
 Point2i Sky::GetSkyPos() const{
-        return (Point2i(1, 1) - tstVect) * camera.GetPosition() * SKY_SPEED;
+        return (Point2i(1, 1) - tstVect) * Camera::GetInstance()->GetPosition() * SKY_SPEED;
 }

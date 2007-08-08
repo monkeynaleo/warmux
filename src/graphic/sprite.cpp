@@ -377,7 +377,7 @@ void Sprite::Update(){
 }
 
 void Sprite::Draw(const Point2i &pos){
-  DrawXY(pos - camera.GetPosition());
+  DrawXY(pos - Camera::GetInstance()->GetPosition());
 }
 
 void Sprite::DrawXY(const Point2i &pos){

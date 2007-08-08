@@ -63,6 +63,6 @@ void CrossHair::Draw() const
   if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING )
     return;
   Point2i tmp = ActiveCharacter().GetHandPosition() + crosshair_position;
-  AppWormux::GetInstance()->video->window.Blit(image, tmp - camera.GetPosition());
+  AppWormux::GetInstance()->video->window.Blit(image, tmp - Camera::GetInstance()->GetPosition());
   world.ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
 }

@@ -240,16 +240,16 @@ void Ground::Draw(bool redraw_all)
   CheckEmptyTiles();
   AppWormux * app = AppWormux::GetInstance();
 
-  Point2i cPos = camera.GetPosition();
+  Point2i cPos = Camera::GetInstance()->GetPosition();
   Point2i windowSize = app->video->window.GetSize();
   Point2i margin = (windowSize - GetSize())/2;
 
-  if( camera.HasFixedX() ){// ground is less wide than screen !
+  if( Camera::GetInstance()->GetInstance()->HasFixedX() ){// ground is less wide than screen !
     app->video->window.BoxColor( Rectanglei(0, 0, margin.x, windowSize.y), black_color);
     app->video->window.BoxColor( Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color);
   }
 
-  if( camera.HasFixedY() ){// ground is less wide than screen !
+  if( Camera::GetInstance()->GetInstance()->HasFixedY() ){// ground is less wide than screen !
     app->video->window.BoxColor( Rectanglei(0, 0, windowSize.x, margin.y), black_color);
     app->video->window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
   }

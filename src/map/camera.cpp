@@ -34,7 +34,15 @@
 const Point2i CAMERA_MARGIN(200, 200);
 const Point2i CAMERA_SPEED(20, 20);
 
-Camera camera;
+Camera* Camera::singleton = NULL;
+ 
+Camera * Camera::GetInstance()
+{
+  if (singleton == NULL) {
+    singleton = new Camera();
+  }
+  return singleton;
+}
 
 Camera::Camera():
   auto_crop(true),

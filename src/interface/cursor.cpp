@@ -88,7 +88,7 @@ void CharacterCursor::Refresh()
   //The arrow is appearing:
   if( visible && global_time->Read() < time_begin_anim + show_hide_time )
   {
-    dy = (int)((camera.GetPosition().y - ActiveCharacter().GetY()) * (1.0 - (global_time->Read() - time_begin_anim) / (float)show_hide_time));
+    dy = (int)((Camera::GetInstance()->GetPosition().y - ActiveCharacter().GetY()) * (1.0 - (global_time->Read() - time_begin_anim) / (float)show_hide_time));
     return;
   }
 
@@ -107,7 +107,7 @@ void CharacterCursor::Refresh()
   //The arrow is disappearing:
   if( !visible && global_time->Read() < time_begin_anim + show_hide_time )
   {
-    dy = (int)((camera.GetPosition().y - ActiveCharacter().GetY()) * ((global_time->Read() - time_begin_anim) / (float)show_hide_time));
+    dy = (int)((Camera::GetInstance()->GetPosition().y - ActiveCharacter().GetY()) * ((global_time->Read() - time_begin_anim) / (float)show_hide_time));
     return;
   }
 

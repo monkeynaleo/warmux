@@ -196,16 +196,16 @@ void Water::Draw(){
   SDL_UnlockSurface(surface.GetSurface());
 
   pattern.SetAlpha(SDL_SRCALPHA, 0);
-  int x0 = camera.GetPosition().x % pattern_width;
+  int x0 = Camera::GetInstance()->GetPosition().x % pattern_width;
 
   int r = 0;
   for(int y = world.GetHeight() - (hauteur_eau + height_mvt) - 20;
-      y < (int)camera.GetPosition().y + (int)camera.GetSize().y;
+      y < (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
       y += pattern_height)
     {
       Surface *bitmap = r ? &bottom : &pattern;
-      for(int x = camera.GetPosition().x - x0;
-          x < camera.GetPosition().x + camera.GetSize().x;
+      for(int x = Camera::GetInstance()->GetPosition().x - x0;
+          x < Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x;
           x += pattern_width)
         {
           AbsoluteDraw(*bitmap, Point2i(x, y));

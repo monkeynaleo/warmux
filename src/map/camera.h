@@ -34,6 +34,9 @@ class Camera : public Rectanglei
   const Camera& operator=(const Camera&);
 
 private:
+  static Camera * singleton;
+  Camera();
+
   bool auto_crop;
   const PhysicalObj* followed_object;
   bool throw_camera;
@@ -42,7 +45,7 @@ private:
   Point2i FreeDegrees() const;
   Point2i NonFreeDegrees() const;
 public:
-  Camera();
+  static Camera * GetInstance();
 
   // before beginning a game
   void Reset();
@@ -72,7 +75,5 @@ public:
   bool IsAutoCrop() const;
   void SetCloseFollowing(bool close);
 };
-
-extern Camera camera;
 
 #endif

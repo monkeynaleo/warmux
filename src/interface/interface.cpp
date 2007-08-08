@@ -366,7 +366,7 @@ Point2i Interface::GetSize() const
 void Interface::EnableDisplay(bool _display)
 {
   display = _display;
-  camera.CenterOnFollowedObject();
+  Camera::GetInstance()->GetInstance()->CenterOnFollowedObject();
 }
 
 void Interface::Show()
@@ -414,15 +414,15 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
 {
   Rectanglei rectSurface(pos, s.GetSize());
 
-  if( !rectSurface.Intersect(camera) )
+  if( !rectSurface.Intersect(*Camera::GetInstance()))
     return;
 
   world.ToRedrawOnMap(rectSurface);
 
-  rectSurface.Clip( camera );
+  rectSurface.Clip(*Camera::GetInstance());
 
   Rectanglei rectSource(rectSurface.GetPosition() - pos, rectSurface.GetSize());
-  Point2i ptDest = rectSurface.GetPosition() - camera.GetPosition();
+  Point2i ptDest = rectSurface.GetPosition() - Camera::GetInstance()->GetPosition();
 
   AppWormux::GetInstance()->video->window.Blit(s, rectSource, ptDest);
 }
