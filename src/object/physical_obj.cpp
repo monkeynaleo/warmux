@@ -456,8 +456,10 @@ void PhysicalObj::UpdatePosition ()
   RunPhysicalEngine();
 
   // Test if object is still inside the world
-  if( IsOutsideWorldXY(GetPosition()) )
+  if( IsOutsideWorldXY(GetPosition()) ) {
     Ghost();
+    SignalOutOfMap();
+  }
 
   if (IsGhost()) return;
 
