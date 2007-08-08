@@ -124,12 +124,12 @@ msgid "%s team has skipped its turn."
 msgstr "Drużyna %s pominęła swoją turę."
 
 #: src/weapon/gnu.cpp:155
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
-msgstr[0] "Drużyna %s zyskała %u odbijającą się kulę!"
-msgstr[1] "Drużyna %s zyskała %u odbijające się kule!"
-msgstr[2] "Drużyna %s zyskała %u odbijających się kuli!"
+msgstr[0] "Drużyna %s zyskała %u wyrzutnię Gnu! Wysadźcie ich wszystkich w powietrze!"
+msgstr[1] "Drużyna %s zyskała %u wyrzutnie Gnu! Wysadźcie ich wszystkich w powietrze!"
+msgstr[2] "Drużyna %s zyskała %u wyrzutni Gnu! Wysadźcie ich wszystkich w powietrze!"
 
 #: src/weapon/air_attack.cpp:258
 #, c-format
@@ -147,17 +147,17 @@ msgid ""
 msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them, thanks "
 "for your neighbours."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Drużyna %s zyskała %u młot pneumatyczny! Nie rób nim zbyt wiele hałasu, z troski o sąsiadów."
+msgstr[1] "Drużyna %s zyskała %u młoty pneumatyczne! Nie rób nimi zbyt wiele hałasu, z troski o sąsiadów."
+msgstr[2] "Drużyna %s zyskała %u młotów pneumatycznych! Nie rób nimi zbyt wiele hałasu, z troski o sąsiadów."
 
 #: src/weapon/anvil.cpp:160
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
-msgstr[0] "Drużyna %s zyskała %u atak powietrzny!"
-msgstr[1] "Drużyna %s zyskała %u ataki powietrzne!"
-msgstr[2] "Drużyna %s zyskała %u ataków powietrznych!"
+msgstr[0] "Drużyna %s zyskała %u kowadło! Rozpłaszczcie ich!"
+msgstr[1] "Drużyna %s zyskała %u kowadła! Rozpłaszczcie ich!"
+msgstr[2] "Drużyna %s zyskała %u kowadeł! Rozpłaszczcie ich!"
 
 #: src/weapon/auto_bazooka.cpp:296
 #, c-format
@@ -190,20 +190,20 @@ msgid ""
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Drużyna %s zyskała %u palnik! Poproś rodziców o zgodę na jego używanie, jeżeli masz mniej niż 18 lat."
+msgstr[1] "Drużyna %s zyskała %u palniki! Poproś rodziców o zgodę na ich używanie, jeżeli masz mniej niż 18 lat."
+msgstr[2] "Drużyna %s zyskała %u palników! Poproś rodziców o zgodę na ich używanie, jeżeli masz mniej niż 18 lat."
 
 #: src/weapon/bounce_ball.cpp:107
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
-msgstr[0] "Drużyna %s zyskała %u odbijającą się kulę!"
-msgstr[1] "Drużyna %s zyskała %u odbijające się kule!"
-msgstr[2] "Drużyna %s zyskała %u odbijających się kuli!"
+msgstr[0] "Drużyna %s zyskała %u odbijającą się kulę! Bęc!"
+msgstr[1] "Drużyna %s zyskała %u odbijające się kule! Bęc!"
+msgstr[2] "Drużyna %s zyskała %u odbijających się kuli! Bęc!"
 
 #: src/weapon/cluster_bomb.cpp:161
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Drużyna %s zyskała %u bombę rozpryskową!"
@@ -211,21 +211,21 @@ msgstr[1] "Drużyna %s zyskała %u bomby rozpryskowe!"
 msgstr[2] "Drużyna %s zyskała %u bomb rozpryskowych!"
 
 #: src/weapon/construct.cpp:62
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] "Drużyna %s zyskała %u konstruktor!"
-msgstr[1] "Drużyna %s zyskała %u konstruktory!"
-msgstr[2] "Drużyna %s zyskała %u konstruktorów!"
+msgstr[0] "Drużyna %s zyskała %u konstruktor! Nie zapomnijcie o kaskach ochronnych."
+msgstr[1] "Drużyna %s zyskała %u konstruktory! Nie zapomnijcie o kaskach ochronnych."
+msgstr[2] "Drużyna %s zyskała %u konstruktorów! Nie zapomnijcie o kaskach ochronnych."
 
 #: src/weapon/disco_grenade.cpp:137
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
 "%s team has won %u disco grenades! Shake your body when throwing them!"
-msgstr[0] "Drużyna %s zyskała %u granat disco!"
-msgstr[1] "Drużyna %s zyskała %u granaty disco!"
-msgstr[2] "Drużyna %s zyskała %u granatów disco!"
+msgstr[0] "Drużyna %s zyskała %u granat disco! Należy zatańczyć przed rzutem!"
+msgstr[1] "Drużyna %s zyskała %u granaty disco! Należy zatańczyć przed rzutem!"
+msgstr[2] "Drużyna %s zyskała %u granatów disco! Należy zatańczyć przed rzutem!"
 
 #: src/weapon/dynamite.cpp:135
 #, c-format
@@ -260,20 +260,20 @@ msgstr[1] "Drużyna %s zyskała %u pistolety!"
 msgstr[2] "Drużyna %s zyskała %u pistoletów!"
 
 #: src/weapon/jetpack.cpp:232
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
-msgstr[0] "Drużyna %s zyskała %u plecak odrzutowy!"
-msgstr[1] "Drużyna %s zyskała %u plecaki odrzutowe!"
-msgstr[2] "Drużyna %s zyskała %u plecaków odrzutowych!"
+msgstr[0] "Drużyna %s zyskała %u plecak odrzutowy! Super!"
+msgstr[1] "Drużyna %s zyskała %u plecaki odrzutowe! Super!"
+msgstr[2] "Drużyna %s zyskała %u plecaków odrzutowych! Super!"
 
 #: src/weapon/lowgrav.cpp:72
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] "Drużyna %s zyskała %u hełm obniżający grawitację!"
-msgstr[1] "Drużyna %s zyskała %u hełmy obniżające grawitację!"
-msgstr[2] "Drużyna %s zyskała %u hełmów obniżających grawitację!"
+msgstr[0] "Drużyna %s zyskała %u hełm obniżający grawitację! Jestem jako Neil Armstrong!"
+msgstr[1] "Drużyna %s zyskała %u hełmy obniżające grawitację! Jestem jako Neil Armstrong!"
+msgstr[2] "Drużyna %s zyskała %u hełmów obniżających grawitację! Jestem jako Neil Armstrong!"
 
 #: src/weapon/mine.cpp:237
 #, c-format
@@ -292,12 +292,12 @@ msgstr[1] "Drużyna %s zyskała %u spadochrony!"
 msgstr[2] "Drużyna %s zyskała %u spadochronów!"
 
 #: src/weapon/polecat.cpp:164
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
-msgstr[0] "Drużyna %s zyskała %u skunksa!"
-msgstr[1] "Drużyna %s zyskała %u skunksy!"
-msgstr[2] "Drużyna %s zyskała %u skunksów!"
+msgstr[0] "Drużyna %s zyskała %u skunksa! Założyć maski przeciwgazowe!"
+msgstr[1] "Drużyna %s zyskała %u skunksy! Założyć maski przeciwgazowe!"
+msgstr[2] "Drużyna %s zyskała %u skunksów! Założyć maski przeciwgazowe!"
 
 #: src/weapon/riot_bomb.cpp:91
 #, c-format
@@ -316,12 +316,12 @@ msgstr[1] "Drużyna %s zyskała %u strzelby!"
 msgstr[2] "Drużyna %s zyskała %u strzelb!"
 
 #: src/weapon/snipe_rifle.cpp:225
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
-msgstr[0] "Drużyna %s zyskała %u snajperkę!"
-msgstr[1] "Drużyna %s zyskała %u snajperki!"
-msgstr[2] "Drużyna %s zyskała %u snajperek!"
+msgstr[0] "Drużyna %s zyskała %u snajperkę! Wykrzyknijcie im to między oczy!"
+msgstr[1] "Drużyna %s zyskała %u snajperki! Wykrzyknijcie im to między oczy!"
+msgstr[2] "Drużyna %s zyskała %u snajperek! Wykrzyknijcie im to między oczy!"
 
 #: src/weapon/submachine_gun.cpp:149
 #, c-format
@@ -336,8 +336,8 @@ msgstr[2] "Drużyna %s zyskała %u erkaemów!"
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "Drużyna %s zyskała %u pas samobójcy!"
-msgstr[1] "Drużyna %s zyskała %u pasy samobójcy!"
-msgstr[2] "Drużyna %s zyskała %u pasów samobójcy!"
+msgstr[1] "Drużyna %s zyskała %u pasy samobójcy! Wykorzystajcie je wszystkie, aby dostać więcej!"
+msgstr[2] "Drużyna %s zyskała %u pasów samobójcy! Wykorzystajcie je wszystkie, aby dostać więcej!"
 
 #: src/weapon/syringe.cpp:108
 #, c-format
@@ -356,20 +356,20 @@ msgstr[1] "Drużyna %s zyskała %u teleportacje!"
 msgstr[2] "Drużyna %s zyskała %u teleportacji!"
 
 #: src/weapon/skip_turn.cpp:59
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] "Drużyna %s zyskała %u pominięcie tury!"
-msgstr[1] "Drużyna %s zyskała %u pominięcia tury!"
-msgstr[2] "Drużyna %s zyskała %u pominięć tury!"
+msgstr[0] "Drużyna %s zyskała %u pominięcie tury! Ulubiona broń, nie?"
+msgstr[1] "Drużyna %s zyskała %u pominięcia tury! Ulubiona broń, nie?"
+msgstr[2] "Drużyna %s zyskała %u pominięć tury! Ulubiona broń, nie?"
 
 #: src/weapon/supertux.cpp:274
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "Drużyna %s zyskała %u wyrzutnię tuksów!"
-msgstr[1] "Drużyna %s zyskała %u wyrzutnie tuksów!"
-msgstr[2] "Drużyna %s zyskała %u wyrzutni tuksów!"
+msgstr[0] "Drużyna %s zyskała %u wyrzutnię tuksów! Widzieliście już kiedyś latającego pingwina?"
+msgstr[1] "Drużyna %s zyskała %u wyrzutnie tuksów! Widzieliście już kiedyś latającego pingwina?"
+msgstr[2] "Drużyna %s zyskała %u wyrzutni tuksów! Widzieliście już kiedyś latającego pingwina?"
 
 #: src/include/action_handler.cpp:239
 #, c-format
@@ -387,7 +387,7 @@ msgstr "(martwy)"
 #. Display number of ammo
 #: src/interface/interface.cpp:201
 msgid "(unlimited)"
-msgstr "(nieograniczony)"
+msgstr "(bez ograniczeń)"
 
 #: src/weapon/air_attack.cpp:202
 msgid "Air Attack"
@@ -458,9 +458,9 @@ msgid "Can't find team %s!"
 msgstr "Odnalezienie drużyny %s nie powiodło się!"
 
 #: src/team/teams_list.cpp:156
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open personal teams directory (%s)!"
-msgstr "Nie można otworzyć katalogu drużyn (%s)!"
+msgstr "Nie można otworzyć dodatkowego katalogu drużyn (%s)!"
 
 #: src/team/teams_list.cpp:144
 #, c-format
@@ -557,9 +557,9 @@ msgid "Error while loading configuration file: %s"
 msgstr "Błąd podczas wczytywania pliku konfiguracyjnego %s"
 
 #: src/game/config.cpp:211
-#, fuzzy, c-format
+#, c-format
 msgid "Error while loading default configuration file: %s"
-msgstr "Błąd podczas wczytywania pliku konfiguracyjnego %s"
+msgstr "Błąd podczas wczytywania domyślnego pliku konfiguracyjnego (%s)"
 
 #: src/game/game_mode.cpp:235
 #, c-format
@@ -882,9 +882,8 @@ msgid "Quit Wormux"
 msgstr "Wyjdź z programu Wormux"
 
 #: src/game/config.cpp:196
-#, fuzzy
 msgid "Reading default config file"
-msgstr "Odczytywanie pliku konfiguracji osobistej"
+msgstr "Odczytywanie domyślnego pliku konfiguracyjnego"
 
 #: src/game/config.cpp:219
 msgid "Reading personal config file"
