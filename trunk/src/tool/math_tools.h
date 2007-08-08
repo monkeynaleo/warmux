@@ -53,8 +53,10 @@ using namespace std;  // For isnan->std::isnan for instance
 #endif
 
 #ifdef _MSC_VER
-double round(double a);
-#define lround(a) ((int)round(a))
+// MIT licensed from http://opensource.adobe.com/cmath_8hpp-source.html
+#  include <math.h>
+double inline round(double a) { return (a<0.0) ? ceil(a-0.5) : floor(a+0.5); };
+long int inline lround(double a) { return static_cast<long>(a + (a < 0.0 ? -0.5 : 0.5)); }
 #endif
 
 template <class T> T max(T a, T b)
