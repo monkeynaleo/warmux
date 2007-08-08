@@ -116,6 +116,23 @@ void PhysicalObj::SetXY(const Point2i &position)
   }
 }
 
+void PhysicalObj::SetXY(const Point2d &position)
+{
+  CheckOverlapping();
+
+  if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) )
+  {
+    SetPhysXY( position / PIXEL_PER_METER );
+    Ghost();
+    SignalOutOfMap();
+  }
+  else
+  {
+    SetPhysXY( position / PIXEL_PER_METER );
+    if( FootsInVacuum() ) StartMoving();
+  }
+}
+
 const Point2i PhysicalObj::GetPosition() const
 {
   return Point2i(GetX(), GetY());
@@ -301,8 +318,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
               typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
               m_goes_through_wall, IsInWater());
 
-    Point2i tmpPos( lround(newPos.x), lround(newPos.y) );
-    SetXY(tmpPos);
+    SetXY(newPos);
     return;
   }
 
@@ -321,7 +337,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
         break;
       }
 
-      SetXY( tmpPos );
+      SetXY( pos );
 
       MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) : OUTSIDE WORLD",
                 typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
@@ -345,7 +361,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
           collision == COLLISION_ON_GROUND ? "on ground" : "on an object");
 
       // Set the object position to the current position.
-      SetXY( Point2i( lround(pos.x - offset.x), lround(pos.y - offset.y)) );
+      SetXY(Point2d(pos.x - offset.x, pos.y - offset.y));
       break;
     }
 
@@ -538,6 +554,11 @@ void PhysicalObj::Drown()
 
   // Set the air grab to water resist factor.
   SetAirResistFactor(WATER_RESIST_FACTOR * GetAirResistFactor());
+
+  // Ensure the gravity factor is upper than 0.0
+  if (EgalZero(GetGravityFactor()))
+    SetGravityFactor(0.1);
+
   StopMoving();
   StartMoving();
   SignalDrowning();
@@ -551,7 +572,7 @@ void PhysicalObj::GoOutOfWater()
 
   // Set the air grab to normal air resist factor.
   SetAirResistFactor(m_cfg.m_air_resist_factor);
-
+  SetGravityFactor(m_cfg.m_gravity_factor);
   StartMoving();
 }
 

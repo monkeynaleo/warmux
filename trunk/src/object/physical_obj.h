@@ -93,6 +93,7 @@ public:
   void SetX (int x);
   void SetY (int y);
   void SetXY(const Point2i &position);
+  void SetXY(const Point2d &position);
   int GetX() const;
   int GetY() const;
   const Point2i GetPosition() const;
