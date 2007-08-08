@@ -910,3 +910,4 @@ void Character::HandleKeyPressed_BackJump(bool) const
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_BACK_JUMP));
 }
+
