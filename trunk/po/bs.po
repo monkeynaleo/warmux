@@ -140,7 +140,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:165
+#: src/weapon/anvil.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -377,7 +377,7 @@ msgstr ""
 "Pucanje: space\n"
 "udarac po redu"
 
-#: src/weapon/anvil.cpp:111
+#: src/weapon/anvil.cpp:106
 msgid "Anvil"
 msgstr "Nakovanj"
 
@@ -639,7 +639,7 @@ msgstr ""
 "Pucaj : drži space do željene jačine udarca\n"
 "municija po redu"
 
-#: src/weapon/anvil.cpp:112
+#: src/weapon/anvil.cpp:107
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -1127,7 +1127,7 @@ msgstr "Trebate barem dva važeća tima !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/launcher.cpp:424
+#: src/weapon/weapon_launcher.cpp:430
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 

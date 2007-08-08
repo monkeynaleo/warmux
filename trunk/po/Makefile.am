@@ -317,8 +317,6 @@ POTFILES = \
         src/weapon/gun.h \
         src/weapon/jetpack.cpp \
         src/weapon/jetpack.h \
-        src/weapon/launcher.cpp \
-        src/weapon/launcher.h \
         src/weapon/lowgrav.cpp \
         src/weapon/lowgrav.h \
         src/weapon/mine.cpp \
@@ -349,6 +347,8 @@ POTFILES = \
         src/weapon/weapon_cfg.h \
         src/weapon/weapon.cpp \
         src/weapon/weapon.h \
+        src/weapon/weapon_launcher.cpp \
+        src/weapon/weapon_launcher.h \
         src/weapon/weapons_list.cpp \
         src/weapon/weapons_list.h \
         tools/index_server/client.cpp \

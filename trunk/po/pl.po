@@ -151,7 +151,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/weapon/anvil.cpp:165
+#: src/weapon/anvil.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -415,7 +415,7 @@ msgstr ""
 "Strzał: spacja\n"
 "uderzenie na turę"
 
-#: src/weapon/anvil.cpp:111
+#: src/weapon/anvil.cpp:106
 msgid "Anvil"
 msgstr "Kowadło"
 
@@ -679,7 +679,7 @@ msgstr ""
 "Oddanie strzału: przytrzymaj spację aż do osiągnięcia pożądanej siły\n"
 "amunicji na turę"
 
-#: src/weapon/anvil.cpp:112
+#: src/weapon/anvil.cpp:107
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1168,7 +1168,7 @@ msgstr "Musisz ustawić przynajmniej dwie drużyny!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nie można rozpocząć gry przed wybraniem drużyny!"
 
-#: src/weapon/launcher.cpp:424
+#: src/weapon/weapon_launcher.cpp:430
 msgid "Your shot has missed!"
 msgstr "Pudło!"
 
