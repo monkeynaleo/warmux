@@ -136,8 +136,8 @@ void Physics::SetSpeed (double length, double angle)
 
 void Physics::SetSpeedXY (Point2d vector)
 {
-  if (EgalZero(vector.x)) vector.x = 0;
-  if (EgalZero(vector.y)) vector.y = 0;
+  if (EqualsZero(vector.x)) vector.x = 0;
+  if (EqualsZero(vector.y)) vector.y = 0;
   bool was_moving = IsMoving();
 
   m_pos_x.x1 = vector.x ;
@@ -155,8 +155,8 @@ void Physics::AddSpeed (double length, double angle)
 
 void Physics::AddSpeedXY (Point2d vector)
 {
-  if (EgalZero(vector.x)) vector.x = 0;
-  if (EgalZero(vector.y)) vector.y = 0;
+  if (EqualsZero(vector.x)) vector.x = 0;
+  if (EqualsZero(vector.y)) vector.y = 0;
   bool was_moving = IsMoving();
 
   m_pos_x.x1 += vector.x ;
@@ -392,8 +392,8 @@ void Physics::StopMoving()
 
 bool Physics::IsMoving() const
 {
-  return ( (!EgalZero(m_pos_x.x1)) ||
-           (!EgalZero(m_pos_y.x1)) ||
+  return ( (!EqualsZero(m_pos_x.x1)) ||
+           (!EqualsZero(m_pos_y.x1)) ||
            (!m_extern_force.IsNull() ) ||
            (m_motion_type != NoMotion) ) ;
 //           (m_motion_type == Pendulum) ) ;

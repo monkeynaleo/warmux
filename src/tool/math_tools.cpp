@@ -81,7 +81,7 @@ double AbsReel (const double x){
         return fabs(x);
 }
 
-bool EgalZero (const double x){
+bool EqualsZero (const double x){
         return AbsReel(x) <= EPS_ZERO;
 }
 

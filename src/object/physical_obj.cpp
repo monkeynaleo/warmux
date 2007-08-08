@@ -558,7 +558,7 @@ void PhysicalObj::Drown()
   SetAirResistFactor(WATER_RESIST_FACTOR * GetAirResistFactor());
 
   // Ensure the gravity factor is upper than 0.0
-  if (EgalZero(GetGravityFactor()))
+  if (EqualsZero(GetGravityFactor()))
     SetGravityFactor(0.1);
 
   StopMoving();
