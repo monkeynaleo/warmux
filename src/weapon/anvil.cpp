@@ -53,6 +53,8 @@ class Anvil : public WeaponProjectile
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
     virtual void SignalGroundCollision();
+    virtual void SignalOutOfMap();
+    virtual void SignalDrowning();
 };
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,
@@ -75,6 +77,16 @@ void Anvil::SignalGroundCollision()
 {
   merge_time = Time::GetInstance()->Read() + 5000;
   PlayCollisionSound();
+}
+
+void Anvil::SignalOutOfMap()
+{
+  falling_sound.Stop();
+}
+
+void Anvil::SignalDrowning()
+{
+  jukebox.Play("share","sink");
 }
 
 void Anvil::Refresh()
