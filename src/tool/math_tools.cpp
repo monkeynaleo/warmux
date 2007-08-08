@@ -84,7 +84,3 @@ double AbsoluteValue (const double x){
 bool EqualsZero (const double x){
         return AbsoluteValue(x) <= EPS_ZERO;
 }
-
-#ifdef _MSC_VER
-double round(double a) { return floor(a + (a>=0.0 ? 0.5 : -0.5)); }
-#endif
