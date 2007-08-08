@@ -243,17 +243,18 @@ const Rectanglei PhysicalObj::GetTestRect() const
                     m_height-m_test_bottom-m_test_top);
 }
 
-void PhysicalObj::AddDamage(uint damage_points)
+void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
 {
   if(life_points == -1)
     return;
-  life_points -= damage_points;
+  life_points += delta;
   if(life_points <= 0 && !IsGhost())
   {
     Ghost();
     life_points = -1;
   }
 }
+
 // Move to a point with collision test
 // Return true if collision occured
 void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)

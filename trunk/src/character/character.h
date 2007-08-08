@@ -108,7 +108,7 @@ public:
   void SignalExplosion();
 
   // Energy related
-  void SetEnergyDelta (int delta, bool do_report=true);
+  void SetEnergyDelta(int delta, bool do_report = true);
   void SetEnergy(int new_energy);
   inline const int & GetEnergy() const { return life_points;}
 
