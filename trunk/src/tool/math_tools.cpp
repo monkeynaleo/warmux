@@ -77,12 +77,12 @@ double InverseAngleDeg (const double &angle){
     return 180 - angle;
 }
 
-double AbsReel (const double x){
+double AbsoluteValue (const double x){
         return fabs(x);
 }
 
 bool EqualsZero (const double x){
-        return AbsReel(x) <= EPS_ZERO;
+        return AbsoluteValue(x) <= EPS_ZERO;
 }
 
 #ifdef _MSC_VER
