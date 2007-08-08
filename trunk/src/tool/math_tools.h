@@ -41,7 +41,7 @@ int Rad2Deg(double rad);
 
 // Valeur absolue
 double AbsReel (const double x);
-bool EgalZero (const double x);
+bool EqualsZero (const double x);
 
 #ifdef __APPLE__
 using namespace std;  // For isnan->std::isnan for instance

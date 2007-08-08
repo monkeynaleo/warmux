@@ -118,7 +118,7 @@ void ApplyExplosion_common (const Point2i &pos,
         highest_force = force;
       }
 
-      if (!EgalZero(distance))
+      if (!EqualsZero(distance))
       {
         angle  = pos.ComputeAngle(ver -> GetCenter());
         if( angle > 0 )
@@ -175,7 +175,7 @@ void ApplyExplosion_common (const Point2i &pos,
            force = cos(M_PI_2 * distance);
          force *= config.blast_force;
 
-         if (!EgalZero(distance))
+         if (!EqualsZero(distance))
            angle  = pos.ComputeAngle(obj->GetCenter());
          else
            angle = -M_PI_2;

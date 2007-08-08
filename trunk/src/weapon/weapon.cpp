@@ -92,7 +92,7 @@ Weapon::Weapon(Weapon_type type,
   m_image = NULL;
   m_weapon_fire = NULL;
 
-  if (!use_flipping && !EgalZero(min_angle - max_angle))
+  if (!use_flipping && !EqualsZero(min_angle - max_angle))
     use_flipping = true;
 
   extra_params = params;
@@ -100,7 +100,7 @@ Weapon::Weapon(Weapon_type type,
   if (m_visibility != NEVER_VISIBLE)
   {
     m_image = new Sprite( resource_manager.LoadImage(weapons_res_profile, m_id));
-    if(!EgalZero(min_angle - max_angle))
+    if(!EqualsZero(min_angle - max_angle))
       m_image->cache.EnableLastFrameCache();
   }
 
@@ -158,7 +158,7 @@ void Weapon::Select()
   ActiveCharacter().SetWeaponClothe();
 
   // is there a crosshair ?
-  if (!EgalZero(min_angle - max_angle))
+  if (!EqualsZero(min_angle - max_angle))
     ActiveTeam().crosshair.enable = true;
 
   p_Select();
@@ -469,7 +469,7 @@ void Weapon::Draw(){
   m_image->Scale(1.0,1.0);
 
   // rotate weapon if needed
-  if (!EgalZero(min_angle - max_angle))
+  if (!EqualsZero(min_angle - max_angle))
   {
     if(ActiveCharacter().GetDirection() == 1)
       m_image->SetRotation_rad (ActiveCharacter().GetFiringAngle());
@@ -490,7 +490,7 @@ void Weapon::Draw(){
   // Animate the display of the weapon:
   if( m_time_anim_begin + ANIM_DISPLAY_TIME > Time::GetInstance()->Read())
   {
-    if (!EgalZero(min_angle - max_angle))
+    if (!EqualsZero(min_angle - max_angle))
     {
       double angle = m_image->GetRotation_rad();
       angle += sin( M_PI_2 * double(Time::GetInstance()->Read() - m_time_anim_begin) /(double) ANIM_DISPLAY_TIME) * 2 * M_PI;
