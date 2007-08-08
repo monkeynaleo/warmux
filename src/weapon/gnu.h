@@ -22,7 +22,7 @@
 #ifndef GNU_H
 #define GNU_H
 
-#include "weapon/launcher.h"
+#include "weapon/weapon_launcher.h"
 
 // The GNU
 class GnuLauncher : public WeaponLauncher

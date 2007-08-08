@@ -23,7 +23,7 @@
 #ifndef BOUNCE_BALL_H
 #define BOUNCE_BALL_H
 
-#include "launcher.h"
+#include "weapon_launcher.h"
 
 class BounceBallLauncher : public WeaponLauncher
 {

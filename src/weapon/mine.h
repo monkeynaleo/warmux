@@ -23,7 +23,7 @@
 #define MINE_H
 
 #include "weapon_cfg.h"
-#include "launcher.h"
+#include "weapon_launcher.h"
 #include "include/base.h"
 
 class Mine;

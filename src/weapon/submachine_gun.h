@@ -24,7 +24,7 @@
 #define SUBMACHINE_GUN_H
 
 #include "particles/particle.h"
-#include "launcher.h"
+#include "weapon_launcher.h"
 
 class SubMachineGun : public WeaponLauncher
 {

@@ -41,7 +41,7 @@
 #include "tool/math_tools.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
-#include "weapon/launcher.h"
+#include "weapon/weapon_launcher.h"
 
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 40;

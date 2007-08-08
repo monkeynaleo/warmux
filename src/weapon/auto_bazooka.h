@@ -22,7 +22,7 @@
 #ifndef AUTO_BAZOOKA_H
 #define AUTO_BAZOOKA_H
 
-#include "launcher.h"
+#include "weapon_launcher.h"
 #include "include/base.h"
 
 class AutomaticBazookaConfig;

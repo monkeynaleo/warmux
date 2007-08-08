@@ -23,7 +23,7 @@
 #define ANVIL_H
 
 #include "include/base.h"
-#include "launcher.h"
+#include "weapon_launcher.h"
 
 class AnvilLauncher : public WeaponLauncher
 {

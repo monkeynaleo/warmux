@@ -50,7 +50,7 @@
 #include "tool/i18n.h"
 #include "tool/vector2.h"
 #include "weapon/construct.h"
-#include "weapon/launcher.h"
+#include "weapon/weapon_launcher.h"
 #include "weapon/grapple.h"
 #include "weapon/supertux.h"
 #include "weapon/weapon.h"
