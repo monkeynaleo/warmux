@@ -40,7 +40,7 @@ double Deg2Rad (int degre);
 int Rad2Deg(double rad);
 
 // Valeur absolue
-double AbsReel (const double x);
+double AbsoluteValue (const double x);
 bool EqualsZero (const double x);
 
 #ifdef __APPLE__
