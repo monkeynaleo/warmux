@@ -213,23 +213,23 @@ public:
 
   void HandleKeyPressed_Up(bool shift) { HandleKeyRefreshed_Up(shift); };
   void HandleKeyRefreshed_Up(bool shift);
-  void HandleKeyReleased_Up(bool shift) const {};
+  void HandleKeyReleased_Up(bool) const {};
 
   void HandleKeyPressed_Down(bool shift) { HandleKeyRefreshed_Down(shift); };
   void HandleKeyRefreshed_Down(bool shift);
-  void HandleKeyReleased_Down(bool shift) const {};
+  void HandleKeyReleased_Down(bool) const {};
 
   void HandleKeyPressed_Jump(bool shift) const;
-  void HandleKeyRefreshed_Jump(bool shift) const {};
-  void HandleKeyReleased_Jump(bool shift) const {};
+  void HandleKeyRefreshed_Jump(bool) const {};
+  void HandleKeyReleased_Jump(bool) const {};
 
   void HandleKeyPressed_HighJump(bool shift) const;
   void HandleKeyRefreshed_HighJump(bool) const { };
   void HandleKeyReleased_HighJump(bool) const { };
 
   void HandleKeyPressed_BackJump(bool shift) const;
-  void HandleKeyRefreshed_BackJump(bool shift) const {};
-  void HandleKeyReleased_BackJump(bool shift) const {};
+  void HandleKeyRefreshed_BackJump(bool) const {};
+  void HandleKeyReleased_BackJump(bool) const {};
 
 };
 
