@@ -1,10 +1,10 @@
 // Wormux resource for win32 target
 
 #include <winver.h>
-#ifdef _MSC_VER
-#  include "msvc/config.h"
-#else
+#ifdef __MINGW32__
 #  include "config.h"
+#else
+#  include "msvc/config.h"
 #endif
 
 #if ENABLE_NLS
