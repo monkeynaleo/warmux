@@ -35,6 +35,10 @@ class DamageStatistics;
 class Body;
 typedef enum BodyDirection BodyDirection_t;
 
+#ifdef DEBUG
+//#define DEBUG_SKIN
+#endif
+
 class Character : public PhysicalObj
 {
 private:
@@ -60,6 +64,9 @@ private:
 
   // name
   Text* name_text;
+#ifdef DEBUG_SKIN
+  Text* skin_text;
+#endif
 
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche

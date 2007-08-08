@@ -132,6 +132,10 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   else
     name_text = NULL;
 
+#ifdef DEBUG_SKIN
+    name_text = new Text(" ");
+#endif
+
   // Energy
   life_points = GameMode::GetInstance()->character.init_energy;
   energy_bar.InitVal (GameMode::GetInstance()->character.init_energy,
@@ -175,6 +179,11 @@ Character::Character (const Character& acharacter) :
     SetBody(new Body(*acharacter.body));
   if(acharacter.name_text)
     name_text = new Text(*acharacter.name_text);
+
+#ifdef DEBUG_SKIN
+    skin_text = new Text(" ");
+#endif
+
 }
 
 Character::~Character()
@@ -189,6 +198,9 @@ Character::~Character()
   body          = NULL;
   name_text     = NULL;
   bubble_engine = NULL;
+#ifdef DEBUG_SKIN
+  delete skin_text;
+#endif
 }
 
 void Character::SignalDrowning()
@@ -241,6 +253,7 @@ void Character::DrawName (int dy) const
   {
     name_text->DrawCenterTopOnMap(x,y);
   }
+
 }
 
 const DamageStatistics* Character::GetDamageStats() const
@@ -481,6 +494,13 @@ void Character::Draw()
     dy -= ESPACE;
   }
 
+#ifdef DEBUG_SKIN
+  dy -= HAUT_FONT_MIX;
+  skin_text->Set(body->GetClothe() + " " + body->GetMovement());
+  skin_text->DrawCenterTopOnMap(GetX(), GetY() - dy);
+  dy -= ESPACE;
+#endif
+
   // Draw lost energy
   if (dessine_perte)
   {
@@ -686,6 +706,7 @@ void Character::SignalCollision()
   double norme, degat;
   Point2d speed_vector;
   GameMode * game_mode = GameMode::GetInstance();
+  SetClothe("normal");
   SetMovement("walk");
   SetMovementOnce("soft-land");
 
@@ -700,6 +721,7 @@ void Character::SignalCollision()
     degat = norme * game_mode->damage_per_fall_unit;
     SetEnergyDelta (-(int)degat);
     GameLoop::GetInstance()->SignalCharacterDamage(this);
+    SetClothe("normal");
     SetMovement("walk");
     SetMovementOnce("hard-land");
   }
@@ -713,7 +735,10 @@ void Character::SignalExplosion()
   GetSpeed(n, a);
   SetRebounding(true);
   if(n > MIN_SPEED_TO_FLY)
+  {
+    SetClothe("normal");
     SetMovement("fly");
+  }
   else
   {
     SetClotheOnce("black");
