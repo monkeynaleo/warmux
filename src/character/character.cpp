@@ -74,11 +74,6 @@ const uint HAUT_ENERGIE = 6;
 // Delta angle used to move the crosshair
 const double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
 
-Body * Character::GetBody()
-{
-  return body;
-}
-
 /* FIXME This methode is really strange, all this should probably be done in
  * constructor of Body...*/
 void Character::SetBody(Body* char_body)
@@ -256,11 +251,6 @@ void Character::DrawName (int dy) const
 
 }
 
-const DamageStatistics* Character::GetDamageStats() const
-{
-  return damage_stats;
-}
-
 void Character::ResetDamageStats()
 {
   damage_stats->ResetDamage();
@@ -326,16 +316,6 @@ void Character::SetEnergy(int new_energy)
   if (GetEnergy() <= 0) Die();
 }
 
-bool Character::GotInjured() const
-{
-  return lost_energy < 0;
-}
-
-void Character::DisableDeathExplosion()
-{
-  death_explosion = false;
-}
-
 void Character::Die()
 {
   ASSERT (m_alive == ALIVE || m_alive == DROWNED);
@@ -362,41 +342,6 @@ void Character::Die()
   }
 
   damage_stats->SetDeathTime(Time::GetInstance()->Read());
-}
-
-bool Character::IsDiseased() const
-{
-  return disease_duration > 0 && !IsDead();
-}
-
-void Character::SetDiseaseDamage(const uint damage_per_turn, const uint duration)
-{
-  disease_damage_per_turn = damage_per_turn;
-  disease_duration = duration;
-}
-
-// Keep almost 1 in energy
-uint Character::GetDiseaseDamage() const
-{
-  if (disease_damage_per_turn < static_cast<uint>(GetEnergy()))
-    return disease_damage_per_turn;
-  return GetEnergy() - 1;
-}
-
-uint Character::GetDiseaseDuration() const
-{
-  return disease_duration;
-}
-
-void Character::DecDiseaseDuration()
-{
-  if (disease_duration > 0) disease_duration--;
-  else disease_damage_per_turn = 0;
-}
-
-alive_t Character::GetLifeState() const
-{
-  return m_alive;
 }
 
 void Character::SetLifeState(alive_t state)
@@ -569,11 +514,6 @@ void Character::PrepareShoot()
   MSG_DEBUG("weapon.shoot", "<- end");
 }
 
-bool Character::IsPreparingShoot() const
-{
-  return prepare_shoot;
-}
-
 void Character::DoShoot()
 {
   if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
@@ -659,20 +599,10 @@ void Character::PrepareTurn()
   pause_bouge_dg = Time::GetInstance()->Read();
 }
 
-const Team &Character::GetTeam() const
-{
-  return m_team;
-}
-
 bool Character::CanMoveRL() const
 {
   if (!IsImmobile() || IsFalling()) return false;
   return pause_bouge_dg < Time::GetInstance()->Read();
-}
-
-bool Character::CanJump() const
-{
-  return CanMoveRL();
 }
 
 void Character::BeginMovementRL(uint pause)
@@ -799,10 +729,6 @@ double Character::GetFiringAngle() const {
   return firing_angle;
 }
 
-double Character::GetAbsFiringAngle() const {
-  return firing_angle;
-}
-
 void Character::SetFiringAngle(double angle) {
   /*while(angle > 2 * M_PI)
     angle -= 2 * M_PI;
@@ -813,13 +739,6 @@ void Character::SetFiringAngle(double angle) {
   firing_angle = angle;
   m_team.crosshair.Refresh(GetFiringAngle());
 }
-
-void Character::AddFiringAngle(double angle) {
-  SetFiringAngle(firing_angle + angle);
-}
-
-void Character::Hide() { hidden = true; }
-void Character::Show() { hidden = false; }
 
 void Character::SetWeaponClothe()
 {
@@ -934,11 +853,6 @@ void Character::HandleKeyReleased_MoveLeft(bool)
 }
 
 // #################### UP
-void Character::HandleKeyPressed_Up(bool shift)
-{
-  HandleKeyRefreshed_Up(shift);
-}
-
 void Character::HandleKeyRefreshed_Up(bool shift)
 {
   HideGameInterface();
@@ -955,14 +869,7 @@ void Character::HandleKeyRefreshed_Up(bool shift)
     }
 }
 
-void Character::HandleKeyReleased_Up(bool) const {}
-
 // #################### DOWN
-void Character::HandleKeyPressed_Down(bool shift)
-{
-  HandleKeyRefreshed_Up(shift);
-}
-
 void Character::HandleKeyRefreshed_Down(bool shift)
 {
   HideGameInterface();
@@ -979,8 +886,6 @@ void Character::HandleKeyRefreshed_Down(bool shift)
     }
 }
 
-void Character::HandleKeyReleased_Down(bool) const {}
-
 // #################### JUMP
 
 void Character::HandleKeyPressed_Jump(bool) const
@@ -989,10 +894,6 @@ void Character::HandleKeyPressed_Jump(bool) const
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_JUMP));
 }
-
-void Character::HandleKeyRefreshed_Jump(bool) const {}
-
-void Character::HandleKeyReleased_Jump(bool) const {}
 
 // #################### HIGH JUMP
 void Character::HandleKeyPressed_HighJump(bool) const
@@ -1009,6 +910,3 @@ void Character::HandleKeyPressed_BackJump(bool) const
   if(ActiveCharacter().IsImmobile())
     ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_BACK_JUMP));
 }
-
-void Character::HandleKeyRefreshed_BackJump(bool) const {}
-void Character::HandleKeyReleased_BackJump(bool) const {}

@@ -187,16 +187,6 @@ void Member::Draw(const Point2i & _pos, int flip_center, int direction)
   spr->Draw(posi);
 }
 
-void Member::ResetMovement()
-{
-  pos.x = 0;
-  pos.y = 0;
-  angle_rad = 0;
-  alpha = 1.0;
-  scale.x = 1.0;
-  scale.y = 1.0;
-}
-
 void Member::ApplySqueleton(Member* parent_member)
 {
   // Place the member to shape the squeleton
@@ -279,12 +269,6 @@ void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& squel_l
   pos += mvt.pos;
   alpha *= mvt.alpha;
   scale = scale * mvt.scale;
-}
-
-const Point2i Member::GetPos()
-{
-  Point2i posi((int)pos.x, (int)pos.y);
-  return posi;
 }
 
 WeaponMember::WeaponMember() : Member(NULL, NULL)
