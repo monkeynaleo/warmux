@@ -890,10 +890,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\weapon\launcher.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\src\weapon\lowgrav.cpp"
 					>
 				</File>
@@ -951,6 +947,10 @@
 				</File>
 				<File
 					RelativePath="..\src\weapon\weapon_cfg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\weapon_launcher.cpp"
 					>
 				</File>
 				<File
@@ -1789,6 +1789,10 @@
 				</File>
 				<File
 					RelativePath="..\src\weapon\weapon_cfg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\weapon_strength_bar.h"
 					>
 				</File>
 				<File
