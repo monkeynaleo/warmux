@@ -126,10 +126,10 @@ void Plane::Shoot(double speed, const Point2i& target)
 
   SetSpeedXY (speed_vector);
 
-  camera.FollowObject(this, true, true);
+  Camera::GetInstance()->GetInstance()->FollowObject(this, true, true);
 
   lst_objects.AddObject(this);
-  camera.SetCloseFollowing(true);
+  Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
 }
 
 void Plane::DropBomb()
@@ -153,7 +153,7 @@ void Plane::DropBomb()
   nb_dropped_bombs++;
 
   if (nb_dropped_bombs == 1)
-    camera.FollowObject(instance, true, true);
+    Camera::GetInstance()->GetInstance()->FollowObject(instance, true, true);
 
 }
 
@@ -163,7 +163,7 @@ void Plane::Refresh()
   image->Update();
   // First shoot !!
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
-  //  camera.StopFollowingObj(this);
+  //  Camera::GetInstance()->GetInstance()->StopFollowingObj(this);
     DropBomb();
     m_ignore_movements = true;
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {

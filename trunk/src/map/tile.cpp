@@ -208,8 +208,8 @@ uchar Tile::GetAlpha(const Point2i &pos) const{
 }
 
 void Tile::DrawTile() {
-  Point2i firstCell = Clamp(camera.GetPosition() / CELL_SIZE);
-  Point2i lastCell = Clamp((camera.GetPosition() + camera.GetSize()) / CELL_SIZE);
+  Point2i firstCell = Clamp(Camera::GetInstance()->GetPosition() / CELL_SIZE);
+  Point2i lastCell = Clamp((Camera::GetInstance()->GetPosition() + Camera::GetInstance()->GetSize()) / CELL_SIZE);
   Point2i i;
   for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
     for( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
@@ -230,8 +230,8 @@ void Tile::DrawTile_Clipped(Rectanglei worldClip) const
       Rectanglei destRect(c * CELL_SIZE, CELL_SIZE);
 
       destRect.Clip(worldClip);
-      if( destRect.Intersect( camera ) ){
-        Point2i ptDest = destRect.GetPosition() - camera.GetPosition();
+      if( destRect.Intersect( *Camera::GetInstance() ) ){
+        Point2i ptDest = destRect.GetPosition() - Camera::GetInstance()->GetPosition();
         Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
 
         AppWormux::GetInstance()->video->window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest);

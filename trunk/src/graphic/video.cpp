@@ -177,8 +177,8 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
       return false;
 
     fullscreen = _fullscreen;
-    camera.SetSize(width, height);
-    camera.SetXY(camera.GetPosition());
+    Camera::GetInstance()->GetInstance()->SetSize(width, height);
+    Camera::GetInstance()->GetInstance()->SetXY(Camera::GetInstance()->GetPosition());
     GameFullRefreshDrawing();
   }
 

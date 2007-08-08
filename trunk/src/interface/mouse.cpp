@@ -226,16 +226,16 @@ void Mouse::ScrollCamera() const
 
   tstVector = mousePos.inf(sensitZone);
   if( !tstVector.IsNull() ){
-    camera.SetXY( tstVector * (mousePos - (sensitZone * coef))/2 );
-    camera.SetAutoCrop(false);
+    Camera::GetInstance()->GetInstance()->SetXY( tstVector * (mousePos - (sensitZone * coef))/2 );
+    Camera::GetInstance()->GetInstance()->SetAutoCrop(false);
     // XXX Not used
     // scroll = true;
   }
 
   tstVector = winSize.inf(mousePos + sensitZone);
   if( !tstVector.IsNull() ){
-    camera.SetXY( tstVector * (mousePos + (sensitZone * coef) - winSize)/2 );
-    camera.SetAutoCrop(false);
+    Camera::GetInstance()->GetInstance()->SetXY( tstVector * (mousePos + (sensitZone * coef) - winSize)/2 );
+    Camera::GetInstance()->GetInstance()->SetAutoCrop(false);
     // XXX Not used
     //scroll = true;
   }
@@ -264,8 +264,8 @@ void Mouse::TestCamera()
   if( demande_scroll ){
     if( scroll_actif ){
       Point2i offset = savedPos - mousePos;
-      camera.SetXY(offset);
-      camera.SetAutoCrop(false);
+      Camera::GetInstance()->GetInstance()->SetXY(offset);
+      Camera::GetInstance()->GetInstance()->SetAutoCrop(false);
     }else{
       scroll_actif = true;
     }
@@ -304,7 +304,7 @@ Point2i Mouse::GetPosition() const
 
 Point2i Mouse::GetWorldPosition() const
 {
-  return GetPosition() + camera.GetPosition();
+  return GetPosition() + Camera::GetInstance()->GetPosition();
 }
 
 // set the new pointer type and return the previous one
@@ -379,7 +379,7 @@ Mouse::pointer_t Mouse::ScrollPointer() const
 
   Point2i mousePos = GetPosition();
   Point2i winSize = AppWormux::GetInstance()->video->window.GetSize();
-  Point2i cameraPos = camera.GetPosition();
+  Point2i cameraPos = Camera::GetInstance()->GetPosition();
 
   // tries to go up
   if ( (mousePos.y > 0 && mousePos.y < (int)SENSIT_SCROLL_MOUSE)

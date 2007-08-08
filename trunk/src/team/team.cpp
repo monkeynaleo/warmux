@@ -211,8 +211,8 @@ void Team::NextCharacter()
   } while (ActiveCharacter().IsDead());
   ActiveCharacter().StartPlaying();
 
-  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
-  camera.FollowObject (&ActiveCharacter(),
+  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
+  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
                           !is_camera_saved, !is_camera_saved,
                           true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
@@ -233,8 +233,8 @@ void Team::PreviousCharacter()
   } while (ActiveCharacter().IsDead());
   ActiveCharacter().StartPlaying();
 
-  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
-  camera.FollowObject (&ActiveCharacter(),
+  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
+  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
                           !is_camera_saved, !is_camera_saved,
                           true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
@@ -264,8 +264,8 @@ void Team::PrepareTurn()
     NextCharacter();
   }
 
-  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
-  camera.FollowObject (&ActiveCharacter(),
+  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
+  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
                           !is_camera_saved, !is_camera_saved,
                           true);
   CharacterCursor::GetInstance()->FollowActiveCharacter();

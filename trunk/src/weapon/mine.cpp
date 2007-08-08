@@ -85,7 +85,7 @@ void ObjMine::StartTimeout()
   {
     animation=true;
 
-    camera.CenterOn(*this);
+    Camera::GetInstance()->GetInstance()->CenterOn(*this);
 
     MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;

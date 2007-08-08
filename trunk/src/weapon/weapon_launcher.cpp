@@ -160,9 +160,9 @@ void WeaponProjectile::Shoot(double strength)
   ShootSound();
 
   lst_objects.AddObject(this);
-  camera.FollowObject(this, true, true, true);
+  Camera::GetInstance()->GetInstance()->FollowObject(this, true, true, true);
   if (camera_follow_closely)
-    camera.SetCloseFollowing(true);
+    Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
 }
 
 void WeaponProjectile::ShootSound()
@@ -198,7 +198,7 @@ void WeaponProjectile::Draw()
       ss << tmp ;
       int txt_x = GetX() + GetWidth() / 2;
       int txt_y = GetY() - GetHeight();
-      (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
+      (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition(),
       ss.str(), white_color);
     }
   }
@@ -250,7 +250,7 @@ void WeaponProjectile::SignalGhostState(bool)
   MSG_DEBUG("weapon.projectile", "SignalGhostState %s: %d, %d", m_name.c_str(), GetX(), GetY());
   if (launcher != NULL && !launcher->ignore_ghost_state_signal)
     launcher->SignalProjectileGhostState();
-  camera.SetCloseFollowing(false);
+  Camera::GetInstance()->GetInstance()->SetCloseFollowing(false);
 }
 
 void WeaponProjectile::SignalOutOfMap()
@@ -393,7 +393,7 @@ void WeaponLauncher::Draw()
     ss << "s";
     int txt_x = ActiveCharacter().GetX() + ActiveCharacter().GetWidth() / 2;
     int txt_y = ActiveCharacter().GetY() - ActiveCharacter().GetHeight();
-    (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
+    (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition(),
     ss.str(), white_color);
   }
 
@@ -403,13 +403,13 @@ void WeaponLauncher::Draw()
   ExplosiveWeaponConfig* cfg = dynamic_cast<ExplosiveWeaponConfig*>(extra_params);
   if( cfg != NULL )
   {
-    Point2i p = ActiveCharacter().GetHandPosition() - camera.GetPosition();
+    Point2i p = ActiveCharacter().GetHandPosition() - Camera::GetInstance()->GetPosition();
     // Red color for the blast range (should be superior to the explosion_range)
     AppWormux::GetInstance()->video->window.CircleColor(p.x, p.y, (int)cfg->blast_range, c_red);
     // Yellow color for the blast range (should be superior to the explosion_range)
     AppWormux::GetInstance()->video->window.CircleColor(p.x, p.y, (int)cfg->explosion_range, c_black);
   }
-  AppWormux::GetInstance()->video->window.CircleColor(GetGunHolePosition().x-camera.GetPositionX(), GetGunHolePosition().y-camera.GetPositionY(), 5, c_black);
+  AppWormux::GetInstance()->video->window.CircleColor(GetGunHolePosition().x-Camera::GetInstance()->GetPositionX(), GetGunHolePosition().y-Camera::GetInstance()->GetPositionY(), 5, c_black);
 #endif
 }
 

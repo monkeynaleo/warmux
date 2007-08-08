@@ -146,20 +146,20 @@ void Action_Player_NextCharacter (Action *a)
 {
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve next character information
-  camera.FollowObject(&ActiveCharacter(), true, true);
+  Camera::GetInstance()->GetInstance()->FollowObject(&ActiveCharacter(), true, true);
 }
 
 void Action_Player_PreviousCharacter (Action *a)
 {
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve previous character's information
-  camera.FollowObject(&ActiveCharacter(), true, true);
+  Camera::GetInstance()->GetInstance()->FollowObject(&ActiveCharacter(), true, true);
 }
 
 void Action_GameLoop_ChangeCharacter (Action *a)
 {
   a->RetrieveCharacter();
-  camera.FollowObject(&ActiveCharacter(), true, true);
+  Camera::GetInstance()->GetInstance()->FollowObject(&ActiveCharacter(), true, true);
 }
 
 void Action_GameLoop_NextTeam (Action *a)

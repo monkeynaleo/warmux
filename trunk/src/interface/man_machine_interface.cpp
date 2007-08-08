@@ -99,16 +99,16 @@ bool ManMachineInterface::MoveCamera(const Key_t &key) const
 
   switch(key) {
   case KEY_MOVE_RIGHT:
-    camera.SetXY(Point2i(SCROLL_KEYBOARD, 0));
+    Camera::GetInstance()->GetInstance()->SetXY(Point2i(SCROLL_KEYBOARD, 0));
     break;
   case KEY_MOVE_LEFT:
-    camera.SetXY(Point2i(-SCROLL_KEYBOARD, 0));
+    Camera::GetInstance()->GetInstance()->SetXY(Point2i(-SCROLL_KEYBOARD, 0));
     break;
   case KEY_UP:
-    camera.SetXY(Point2i(0, -SCROLL_KEYBOARD));
+    Camera::GetInstance()->GetInstance()->SetXY(Point2i(0, -SCROLL_KEYBOARD));
     break;
   case KEY_DOWN:
-    camera.SetXY(Point2i(0, SCROLL_KEYBOARD));
+    Camera::GetInstance()->GetInstance()->SetXY(Point2i(0, SCROLL_KEYBOARD));
     break;
   default:
     r = false;
@@ -116,7 +116,7 @@ bool ManMachineInterface::MoveCamera(const Key_t &key) const
   }
 
   if (r)
-    camera.SetAutoCrop(false);
+    Camera::GetInstance()->GetInstance()->SetAutoCrop(false);
 
   return r;
 }
@@ -242,7 +242,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       return;
     case KEY_CENTER:
       CharacterCursor::GetInstance()->FollowActiveCharacter();
-      camera.FollowObject (&ActiveCharacter(), true, true, true);
+      Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(), true, true, true);
       return;
     case KEY_TOGGLE_INTERFACE:
       Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());

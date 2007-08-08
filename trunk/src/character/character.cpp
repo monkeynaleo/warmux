@@ -239,7 +239,7 @@ void Character::DrawEnergyBar(int dy) const
         return;
 
   energy_bar.DrawXY( Point2i( GetCenterX() - energy_bar.GetWidth() / 2, GetY() + dy)
-                     - camera.GetPosition() );
+                     - Camera::GetInstance()->GetPosition() );
 }
 
 void Character::DrawName (int dy) const
@@ -417,7 +417,7 @@ void Character::Draw()
 
   // Character is visible on carema? If not, just leave the function
   Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
-  if (!rect.Intersect(camera)) return;
+  if (!rect.Intersect(*Camera::GetInstance())) return;
 
   bool dessine_perte = (lost_energy != 0);
   if ((&ActiveCharacter() == this
@@ -508,7 +508,7 @@ void Character::Draw()
     ss << lost_energy;
     dy -= HAUT_FONT_MIX;
     (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop (
-        GetPosition() - camera.GetPosition() + Point2i( GetWidth()/2, dy),
+        GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy),
         ss.str(), white_color);
   }
 

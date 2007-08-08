@@ -74,7 +74,7 @@ bool Teleportation::p_Shoot ()
 void Teleportation::Refresh()
 {
   if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
-    camera.SetXYabs(dst - camera.GetSize()/2);
+    Camera::GetInstance()->GetInstance()->SetXYabs(dst - Camera::GetInstance()->GetSize()/2);
     ActiveCharacter().SetXY(dst);
     ActiveCharacter().SetSpeed(0.0,0.0);
     ActiveCharacter().Show();

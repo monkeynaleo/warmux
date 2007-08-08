@@ -117,7 +117,7 @@ void GameLoop::Init()
 
   fps->Reset();
   IgnorePendingInputEvents();
-  camera.Reset();
+  Camera::GetInstance()->GetInstance()->Reset();
 
   ActionHandler::GetInstance()->ExecActions();
 
@@ -184,7 +184,7 @@ void GameLoop::RefreshInput() const
   GameMessages::GetInstance()->Refresh();
 
   if (!Game::GetInstance()->IsGameFinished())
-    camera.Refresh();
+    Camera::GetInstance()->GetInstance()->Refresh();
 }
 
 // ####################################################################
@@ -490,7 +490,7 @@ void GameLoop::__SetState_PLAYING()
           ActiveTeam().NextCharacter();
         }
 
-      camera.FollowObject (&ActiveCharacter(), true, true);
+      Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(), true, true);
 
       if ( Network::GetInstance()->IsTurnMaster() )
         {
