@@ -138,7 +138,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:165
+#: src/weapon/anvil.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -376,7 +376,7 @@ msgstr ""
 "Tirer: espace\n"
 "un coup par tour"
 
-#: src/weapon/anvil.cpp:111
+#: src/weapon/anvil.cpp:106
 msgid "Anvil"
 msgstr "Enclume"
 
@@ -638,7 +638,7 @@ msgstr ""
 "Tirer: garder la touche espace enfoncée jusqu'à la puissance désirée\n"
 "une munition par tour"
 
-#: src/weapon/anvil.cpp:112
+#: src/weapon/anvil.cpp:107
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -1125,7 +1125,7 @@ msgstr "Il faut au minimum deux équipes valides !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vous ne pourrez jouer sans sélectionner d'équipe !"
 
-#: src/weapon/launcher.cpp:424
+#: src/weapon/weapon_launcher.cpp:430
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 

@@ -139,7 +139,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:165
+#: src/weapon/anvil.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -373,7 +373,7 @@ msgid ""
 "a hit per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:111
+#: src/weapon/anvil.cpp:106
 msgid "Anvil"
 msgstr "Bigorna"
 
@@ -636,7 +636,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:112
+#: src/weapon/anvil.cpp:107
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1124,7 +1124,7 @@ msgstr "Você precisa de pelo menos duas equipes válidas!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/launcher.cpp:424
+#: src/weapon/weapon_launcher.cpp:430
 msgid "Your shot has missed!"
 msgstr "Você errou o tiro!"
 

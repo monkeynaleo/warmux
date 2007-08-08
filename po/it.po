@@ -142,7 +142,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:165
+#: src/weapon/anvil.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -380,7 +380,7 @@ msgstr ""
 "Fuoco: Spazio\n"
 "un colpo per turno"
 
-#: src/weapon/anvil.cpp:111
+#: src/weapon/anvil.cpp:106
 msgid "Anvil"
 msgstr "Incudine"
 
@@ -642,7 +642,7 @@ msgstr ""
 "Fuoco: tieni premuto Spazio fino alla potenza voluta\n"
 "una munizione al turno"
 
-#: src/weapon/anvil.cpp:112
+#: src/weapon/anvil.cpp:107
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -1125,7 +1125,7 @@ msgstr "Hai bisogno almeno di due squadre valide !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/launcher.cpp:424
+#: src/weapon/weapon_launcher.cpp:430
 msgid "Your shot has missed!"
 msgstr "Bersaglio mancato!"
 
