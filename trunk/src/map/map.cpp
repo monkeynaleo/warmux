@@ -170,7 +170,8 @@ void Map::Draw(bool redraw_all)
   wind.DrawParticles();
   to_redraw = tmp;
 
-  OptimizeCache(*to_redraw_now);
+//  Done from DrawSky
+//  OptimizeCache(*to_redraw_now);
 
   ground.Draw(redraw_all);
 }
