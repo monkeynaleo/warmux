@@ -72,6 +72,7 @@ bool Client::HandleMsg(const std::string & str)
 			return false;
 		version = str;
 		if(str == "0.8beta1"
+		|| str == "0.8beta2"
 		|| str == "0.7.9rc1"
 		|| str == "0.7.9rc2"
                 || str == "0.7.9")
