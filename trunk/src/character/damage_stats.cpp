@@ -87,13 +87,3 @@ void DamageStatistics::MadeDamage(const int Dmg, const Character &other)
 
   current_total_damage += Dmg;
 }
-
-void DamageStatistics::SetDeathTime(uint _death_time)
-{
-  death_time = _death_time;
-}
-
-uint DamageStatistics::GetDeathTime() const
-{
-  return death_time;
-}

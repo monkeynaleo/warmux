@@ -64,11 +64,19 @@ public:
   Member(const Member& m);
   virtual void Draw(const Point2i & _pos, int flip_x, int direction);
   void RotateSprite();
-  void ResetMovement();
+  void ResetMovement()
+  {
+    pos.x = 0;
+    pos.y = 0;
+    angle_rad = 0;
+    alpha = 1.0;
+    scale.x = 1.0;
+    scale.y = 1.0;
+  }
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(const member_mvt& mvt, std::vector<class c_junction>& squel_lst);
-  const Point2i GetPos();
-  inline void SetAngle(const double &angle) { angle_rad = angle; };
+  const Point2i GetPos() { return Point2i((int)pos.x, (int)pos.y); };
+  void SetAngle(const double &angle) { angle_rad = angle; };
 };
 
 class WeaponMember : public Member

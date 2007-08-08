@@ -55,8 +55,8 @@ public:
   uint GetOthersDamage() const { return damage_other_teams; }
   double GetAccuracy() const { return (total_shots) ? damage_other_teams/(double)total_shots : 0.0; }
 
-  void SetDeathTime(uint death_time);
-  uint GetDeathTime() const;
+  void SetDeathTime(uint _death_time) { death_time = _death_time; };
+  uint GetDeathTime() const { return death_time; };
 };
 
 #endif

@@ -97,7 +97,7 @@ private:
   void SignalCollision();
   void SetBody(Body* char_body);
 
-  void AddFiringAngle(double angle);
+  void AddFiringAngle(double angle) { SetFiringAngle(firing_angle + angle); };
 
 public:
 
@@ -112,19 +112,33 @@ public:
   void SetEnergy(int new_energy);
   inline const int & GetEnergy() const { return life_points;}
 
-  bool GotInjured() const;
+  bool GotInjured() const { return lost_energy < 0; };
   void Die();
-  void DisableDeathExplosion();
+  void DisableDeathExplosion() { death_explosion = false; };
   bool IsActiveCharacter() const;
   // Disease handling
-  bool IsDiseased() const;
-  void SetDiseaseDamage(const uint damage_per_turn, const uint disease_duration);
-  uint GetDiseaseDamage() const;
-  uint GetDiseaseDuration() const;
-  void DecDiseaseDuration();
+  bool IsDiseased() const { return disease_duration > 0 && !IsDead(); };
+  void SetDiseaseDamage(const uint damage_per_turn, const uint duration)
+  {
+    disease_damage_per_turn = damage_per_turn;
+    disease_duration = duration;
+  }
+// Keep almost 1 in energy
+  uint GetDiseaseDamage() const
+  {
+    if (disease_damage_per_turn < static_cast<uint>(GetEnergy()))
+      return disease_damage_per_turn;
+    return GetEnergy() - 1;
+  }
+  uint GetDiseaseDuration() const { return disease_duration; };
+  void DecDiseaseDuration()
+  {
+    if (disease_duration > 0) disease_duration--;
+    else disease_damage_per_turn = 0;
+  }
 
   // to be used by action handler
-  alive_t GetLifeState() const;
+  alive_t GetLifeState() const { return m_alive; };
   void SetLifeState(alive_t state);
 
   void Draw();
@@ -135,20 +149,20 @@ public:
   void StopPlaying();
 
   void PrepareShoot();
-  bool IsPreparingShoot() const;
+  bool IsPreparingShoot() const { return prepare_shoot; };
   void DoShoot();
   double GetFiringAngle() const;
-  double GetAbsFiringAngle() const;
+  double GetAbsFiringAngle() const { return firing_angle; };
   void SetFiringAngle(double angle);
 
   // Show hide the Character
-  void Hide();
-  void Show();
+  void Hide() { hidden = true; };
+  void Show() { hidden = false; };
 
   // ---- Movement  -----
   // Can we move (check a timeout)
   bool CanMoveRL() const;
-  bool CanJump() const;
+  bool CanJump() const { return CanMoveRL(); };
 
   // Jumps
   void Jump(double strength, double angle);
@@ -165,7 +179,7 @@ public:
   BodyDirection_t GetDirection() const;
 
   // Team owner
-  const Team& GetTeam() const;
+  const Team& GetTeam() const { return m_team; };
   uint GetTeamIndex() const;
   uint GetCharacterIndex() const;
 
@@ -177,11 +191,11 @@ public:
   const Point2i & GetHandPosition() const;
 
   // Damage report
-  const DamageStatistics* GetDamageStats() const;
+  const DamageStatistics* GetDamageStats() const { return damage_stats; };
   void ResetDamageStats();
 
   // Body handling
-  Body * GetBody();
+  Body * GetBody() { return body; };
   void SetWeaponClothe();
   void SetClothe(const std::string& name);
   void SetMovement(const std::string& name);
@@ -197,25 +211,25 @@ public:
   void HandleKeyRefreshed_MoveLeft(bool shift) const;
   void HandleKeyReleased_MoveLeft(bool shift);
 
-  void HandleKeyPressed_Up(bool shift);
+  void HandleKeyPressed_Up(bool shift) { HandleKeyRefreshed_Up(shift); };
   void HandleKeyRefreshed_Up(bool shift);
-  void HandleKeyReleased_Up(bool shift) const;
+  void HandleKeyReleased_Up(bool shift) const {};
 
-  void HandleKeyPressed_Down(bool shift);
+  void HandleKeyPressed_Down(bool shift) { HandleKeyRefreshed_Down(shift); };
   void HandleKeyRefreshed_Down(bool shift);
-  void HandleKeyReleased_Down(bool shift) const;
+  void HandleKeyReleased_Down(bool shift) const {};
 
   void HandleKeyPressed_Jump(bool shift) const;
-  void HandleKeyRefreshed_Jump(bool shift) const;
-  void HandleKeyReleased_Jump(bool shift) const;
+  void HandleKeyRefreshed_Jump(bool shift) const {};
+  void HandleKeyReleased_Jump(bool shift) const {};
 
   void HandleKeyPressed_HighJump(bool shift) const;
   void HandleKeyRefreshed_HighJump(bool) const { };
   void HandleKeyReleased_HighJump(bool) const { };
 
   void HandleKeyPressed_BackJump(bool shift) const;
-  void HandleKeyRefreshed_BackJump(bool shift) const;
-  void HandleKeyReleased_BackJump(bool shift) const;
+  void HandleKeyRefreshed_BackJump(bool shift) const {};
+  void HandleKeyReleased_BackJump(bool shift) const {};
 
 };
 
