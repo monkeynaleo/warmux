@@ -139,11 +139,11 @@ void ObjMine::Detection()
   }
 }
 
-void ObjMine::AddDamage(uint /*damage_points*/)
+void ObjMine::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
 {
   // Don't call Explosion here, we're already in an explosion
   attente = 0;
-  animation=true;
+  animation = true;
 }
 
 void ObjMine::Refresh()

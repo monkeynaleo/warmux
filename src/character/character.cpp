@@ -266,7 +266,7 @@ void Character::ResetDamageStats()
   damage_stats->ResetDamage();
 }
 
-void Character::SetEnergyDelta (int delta, bool do_report)
+void Character::SetEnergyDelta(int delta, bool do_report)
 {
   // If already dead, do nothing
   if (IsDead()) return;

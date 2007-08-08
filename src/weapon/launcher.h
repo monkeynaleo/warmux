@@ -58,6 +58,7 @@ class WeaponProjectile : public PhysicalObj
     virtual void Refresh();
     virtual void Shoot(double strength);
     virtual bool IsImmobile() const;
+    virtual void SetEnergyDelta(int delta, bool do_report = true);
 
     void IncrementTimeOut();
     void DecrementTimeOut();

@@ -55,7 +55,7 @@ private:
     void Detection();
     virtual bool IsImmobile() const;
     // Damage handling
-    virtual void AddDamage(uint damage_points);
+    void SetEnergyDelta(int delta, bool do_report = true);
 
     void Draw();
     void Refresh();
