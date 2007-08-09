@@ -136,6 +136,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>GArik</nickname>
+	<name>Igor MURZOV</name>
+	<description>Update Russian translation</description>
+	<email>igor_AT_gplsoft_DOT_org</email>
+	<country>Russia</country>
+      </author>
+      <author>
 	<nickname>Alexandre</nickname>
 	<name>Alexandre PROKOUDINE</name>
 	<description>Translate Wormux into Russian</description>
