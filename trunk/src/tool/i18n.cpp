@@ -25,9 +25,6 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#ifdef _WIN32
-#  define putenv(a) _putenv(a)
-#endif
 #include "debug.h"
 #include "config.h"
 #include "game/config.h"
@@ -78,9 +75,13 @@ void I18N_SetDir(const std::string &dir)
 void InitI18N(const std::string &dir, const std::string &default_language)
 {
   setlocale(LC_ALL, "");
+#ifdef _WIN32
   std::string variable = "LANGUAGE=";
   variable += default_language;
-  putenv(variable.c_str());
+  _putenv(variable.c_str());
+#else
+  setenv("LANGUAGE", default_language.c_str(), 1);
+#endif
   I18N_SetDir(dir);
   textdomain(GETTEXT_DOMAIN);
 }
