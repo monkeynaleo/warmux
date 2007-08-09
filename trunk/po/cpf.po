@@ -142,7 +142,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:160
+#: src/weapon/anvil.cpp:172
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -187,7 +187,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "Le joueur %s a gagné %u batte de baseball !"
 msgstr[1] "Le joueur %s a gagné %u battes de baseball !"
 
-#: src/weapon/cluster_bomb.cpp:161
+#: src/weapon/cluster_bomb.cpp:169
 #, fuzzy, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -342,13 +342,18 @@ msgstr ""
 "Hein, oute client et serveur na point la même version de Wormux ça : client=%"
 "s, serveur=%s"
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:153
 msgid "(current)"
 msgstr "(actuel)"
 
 #: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(kapoute)"
+
+#. Setting language selection
+#: src/menu/options_menu.cpp:179
+msgid "(system language)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:201
@@ -378,7 +383,7 @@ msgid ""
 "a hit per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:106
+#: src/weapon/anvil.cpp:118
 msgid "Anvil"
 msgstr "Enclume"
 
@@ -435,7 +440,7 @@ msgstr "Gaingne pas ouvrir le répertoire des équipes (%s) !"
 msgid "Client mode"
 msgstr "Mode client"
 
-#: src/weapon/cluster_bomb.cpp:140
+#: src/weapon/cluster_bomb.cpp:148
 msgid "Cluster Bomb"
 msgstr "Grenade lé fragmenté"
 
@@ -507,7 +512,7 @@ msgstr "Pas gagné charger l'équipe %s :"
 msgid "Error loading team's data %s:"
 msgstr "Pas gagné charger l'équipe %s :"
 
-#: src/game/config.cpp:292
+#: src/game/config.cpp:296
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -562,7 +567,7 @@ msgstr "Tééé, le serveur y veut pas démarrer."
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : le skin \"%s\" pour l'équipe \"%s\" la fané ça..."
 
-#: src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Plein écran ?"
 
@@ -631,7 +636,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:107
+#: src/weapon/anvil.cpp:119
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -693,6 +698,10 @@ msgstr ""
 "ou su #wormux-fr a irc.freenode.net pou rode d'autres camarades pou jouer "
 "avec."
 
+#: src/menu/options_menu.cpp:105
+msgid "Language"
+msgstr ""
+
 #: src/map/maps_list.cpp:271
 msgid "Load maps:"
 msgstr "Terrains lé en train de charger :"
@@ -710,7 +719,7 @@ msgstr "Equipes local :"
 msgid "LowGrav"
 msgstr "Anti-gravité"
 
-#: src/map/map.cpp:330
+#: src/map/map.cpp:348
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Terrain %s, une création de :"
@@ -723,7 +732,7 @@ msgstr "Terrains"
 msgid "Max number of players:"
 msgstr "Nombre de joueurs maximum :"
 
-#: src/menu/options_menu.cpp:88
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr "Nbr. max. d'images/sec"
 
@@ -756,7 +765,7 @@ msgstr "Sa ki serve le moins"
 msgid "Most violent"
 msgstr "Le plus violent"
 
-#: src/menu/options_menu.cpp:110
+#: src/menu/options_menu.cpp:116
 msgid "Music?"
 msgstr "Musique ?"
 
@@ -768,7 +777,7 @@ msgstr "Jeu en réseau"
 msgid "Network initialization"
 msgstr "Prépare lo rézo"
 
-#: src/weapon/weapon.cpp:566
+#: src/weapon/weapon.cpp:589
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Pas trouve rien (<%s>) dans oute fichier de configuration XML !"
@@ -807,11 +816,11 @@ msgstr "Jouer"
 msgid "Player"
 msgstr "Joueur"
 
-#: src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Affiche l'énergie des joueurs ?"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Affiche le ti'nom des joueurs ?"
 
@@ -845,7 +854,7 @@ msgstr "An train'e lire oute fichier de configuration a ou même"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: src/menu/options_menu.cpp:93
+#: src/menu/options_menu.cpp:92
 msgid "Resolution"
 msgstr "Résolution"
 
@@ -905,11 +914,11 @@ msgstr ""
 "connai (ficelle tortue, attaque par le ciel, mitrailleuse), mais kiette pas, "
 "na na surement encore d'autre !"
 
-#: src/menu/options_menu.cpp:113
+#: src/menu/options_menu.cpp:119
 msgid "Sound effects?"
 msgstr "Effets sonores ?"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:122
 msgid "Sound frequency"
 msgstr "Fréquence d'échantillonage ?"
 
@@ -946,7 +955,7 @@ msgstr "Équipes"
 msgid "Teleportation"
 msgstr "Téléportation"
 
-#: src/weapon/cluster_bomb.cpp:116
+#: src/weapon/cluster_bomb.cpp:122
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 "La grenade à fragmentation la barré du champs de bataille avant lu pête."
@@ -999,7 +1008,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Na n'a que %i équipe."
 msgstr[1] "Na n'a que %i équipes."
 
-#: src/weapon/cluster_bomb.cpp:141
+#: src/weapon/cluster_bomb.cpp:149
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1071,7 +1080,8 @@ msgstr "Site internet : "
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : un simple pistolet la kine à lu !"
 
-#: src/menu/options_menu.cpp:76
+#. Various options
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Particules du vent ?"
 
@@ -1114,7 +1124,7 @@ msgstr "Il faut au minimum deux équipes correctes !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:430
+#: src/weapon/weapon_launcher.cpp:434
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 

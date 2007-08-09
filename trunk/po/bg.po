@@ -142,7 +142,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:160
+#: src/weapon/anvil.cpp:172
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -187,7 +187,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "%s hat %u Baseballschläger gewonnen"
 msgstr[1] "%s hat %u Baseballschläger gewonnen"
 
-#: src/weapon/cluster_bomb.cpp:161
+#: src/weapon/cluster_bomb.cpp:169
 #, fuzzy, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -340,13 +340,18 @@ msgstr[1] "Отборът на %s спечели %u %sи !"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:153
 msgid "(current)"
 msgstr "(на ход)"
 
 #: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(мъртъв)"
+
+#. Setting language selection
+#: src/menu/options_menu.cpp:179
+msgid "(system language)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:201
@@ -376,7 +381,7 @@ msgid ""
 "a hit per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:106
+#: src/weapon/anvil.cpp:118
 msgid "Anvil"
 msgstr "Наковалня"
 
@@ -433,7 +438,7 @@ msgstr "Не мога да отворя директорията на отбор
 msgid "Client mode"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:140
+#: src/weapon/cluster_bomb.cpp:148
 msgid "Cluster Bomb"
 msgstr "Шрапнелна граната"
 
@@ -506,7 +511,7 @@ msgstr "Грешка при зареждането на отбора %s:"
 msgid "Error loading team's data %s:"
 msgstr "Проблем при зареждането на данните за %s:"
 
-#: src/game/config.cpp:292
+#: src/game/config.cpp:296
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -564,7 +569,7 @@ msgstr "Kann Server nicht starten"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Не мога да намеря телата на \"%s\" отбора \"%s\" !"
 
-#: src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Цял екран?"
 
@@ -632,7 +637,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:107
+#: src/weapon/anvil.cpp:119
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -693,6 +698,10 @@ msgstr "Реактивна раница"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Komm nach #wormux auf irc.freenode.net"
 
+#: src/menu/options_menu.cpp:105
+msgid "Language"
+msgstr ""
+
 #: src/map/maps_list.cpp:271
 msgid "Load maps:"
 msgstr "Карти които да заредя:"
@@ -711,7 +720,7 @@ msgstr "Lade Mannschaft:"
 msgid "LowGrav"
 msgstr "Ниска гравитация"
 
-#: src/map/map.cpp:330
+#: src/map/map.cpp:348
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Картата %s е творение на: "
@@ -724,7 +733,7 @@ msgstr "Карти"
 msgid "Max number of players:"
 msgstr "Maximale Anzahl an Spielern:"
 
-#: src/menu/options_menu.cpp:88
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr "Максимални FPS"
 
@@ -758,7 +767,7 @@ msgstr "Am nutzlosesten"
 msgid "Most violent"
 msgstr "Am gewalttätigsten"
 
-#: src/menu/options_menu.cpp:110
+#: src/menu/options_menu.cpp:116
 msgid "Music?"
 msgstr "Музика?"
 
@@ -771,7 +780,7 @@ msgstr "Мрежова игра"
 msgid "Network initialization"
 msgstr "Инициализирам терена..."
 
-#: src/weapon/weapon.cpp:566
+#: src/weapon/weapon.cpp:589
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Няма такъв елемент в XML-конфигурационния фаил! <%s>"
@@ -810,11 +819,11 @@ msgstr "Играй!"
 msgid "Player"
 msgstr "Spieler"
 
-#: src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Здраве?"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Името ти?"
 
@@ -848,7 +857,7 @@ msgstr "Чета персоналния конфигурационен фаил"
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#: src/menu/options_menu.cpp:93
+#: src/menu/options_menu.cpp:92
 msgid "Resolution"
 msgstr "Разделителна способност"
 
@@ -903,11 +912,11 @@ msgid ""
 "blowtorch, submachine gun) and surely many other things don't work either!"
 msgstr ""
 
-#: src/menu/options_menu.cpp:113
+#: src/menu/options_menu.cpp:119
 msgid "Sound effects?"
 msgstr "Звукови ефекти?"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:122
 msgid "Sound frequency"
 msgstr "Честота на семплиране"
 
@@ -944,7 +953,7 @@ msgstr "Отбори"
 msgid "Teleportation"
 msgstr "Телепортация"
 
-#: src/weapon/cluster_bomb.cpp:116
+#: src/weapon/cluster_bomb.cpp:122
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Шрапнелната граната е на по-безопасно място..."
 
@@ -995,7 +1004,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/cluster_bomb.cpp:141
+#: src/weapon/cluster_bomb.cpp:149
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1067,7 +1076,8 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr ""
 "%s - човек може да умре от гъделичкане, но от патлак си е просто смешно..."
 
-#: src/menu/options_menu.cpp:76
+#. Various options
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Красотички носени от вятъра?"
 
@@ -1109,7 +1119,7 @@ msgstr "Трябват ми поне два валидни отбора!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:430
+#: src/weapon/weapon_launcher.cpp:434
 msgid "Your shot has missed!"
 msgstr "Не точно там..."
 
