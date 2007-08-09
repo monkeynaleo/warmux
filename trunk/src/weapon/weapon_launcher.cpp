@@ -149,7 +149,11 @@ void WeaponProjectile::Shoot(double strength)
   SetSpeed(strength, angle);
   PutOutOfGround(angle);
 
-  MSG_DEBUG("weapon.projectile", "shoot with hand position:%d,%d",
+  MSG_DEBUG("weapon.projectile", "shoot from position %d,%d (size %d, %d) - hand position:%d,%d",
+	    ActiveCharacter().GetX(),
+	    ActiveCharacter().GetY(),
+	    ActiveCharacter().GetWidth(),
+	    ActiveCharacter().GetHeight(),
             ActiveCharacter().GetHandPosition().GetX(),
             ActiveCharacter().GetHandPosition().GetY());
   MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f, position:%d,%d",
