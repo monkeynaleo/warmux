@@ -96,10 +96,6 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
                        Font::FONT_SMALL, Font::FONT_NORMAL);
   widgets.AddWidget(msg_box);
 
-  msg_box->NewMessage(_("WARNING!! Network is still under developement and therefore a little experimental."), c_red);
-  msg_box->NewMessage(""); // Skip a line
-  msg_box->NewMessage(_("Some weapons are disabled, because of known bugs (grapple, airhammer, blowtorch, submachine gun) and surely many other things don't work either!"));
-  msg_box->NewMessage(""); // Skip a line
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
   msg_box->NewMessage(""); // Skip a line
   msg_box->NewMessage(_("Have a good game!"));
