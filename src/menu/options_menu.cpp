@@ -129,9 +129,12 @@ OptionMenu::OptionMenu() :
   AppWormux * app = AppWormux::GetInstance();
   uint center_x = app->video->window.GetWidth()/2;
 
-  graphic_options->SetXY(center_x - graphic_options->GetSizeX()/2, graphic_options->GetPositionY());
   sound_options->SetXY(center_x - sound_options->GetSizeX()/2, sound_options->GetPositionY());
-
+  language_options->SetXY(center_x - (graphic_options->GetSizeX() + language_options->GetSizeX() + 20)/2,
+			  language_options->GetPositionY());
+  graphic_options->SetXY(language_options->GetPositionX() + language_options->GetSizeX() + 10, 
+			 graphic_options->GetPositionY());
+  
   // Values initialization
 
   // Get available video resolution
