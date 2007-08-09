@@ -29,6 +29,7 @@
 #include "gui/box.h"
 #include "gui/button_text.h"
 #include "gui/list_box.h"
+#include "gui/question.h"
 #include "graphic/video.h"
 #include "network/net_error_msg.h"
 #include "network/index_server.h"
@@ -41,7 +42,7 @@ InternetMenu::InternetMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
   
-  Rectanglei stdRect(0, 0, 300, 64);
+  Rectanglei stdRect(0, 0, 405, 64);
 
   uint x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - stdRect.GetSizeX()/2;
   uint y_box = AppWormux::GetInstance()->video->window.GetHeight()/2 - 200;
@@ -73,7 +74,7 @@ InternetMenu::InternetMenu() :
   widgets.AddWidget(connection_box);
 
   resource_manager.UnLoadXMLProfile(res);
-  RefreshList();
+  RefreshList(false);
 }
 
 InternetMenu::~InternetMenu()
@@ -85,7 +86,7 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
   Widget* w = widgets.ClickUp(mousePosition, button);  
 
   if (w == refresh)
-    RefreshList();
+    RefreshList(true);
   else
   if (w == connect && connect_lst->GetSelectedItem() != -1)
   {
@@ -108,13 +109,21 @@ void InternetMenu::OnClick(const Point2i &mousePosition, int button)
   widgets.Click(mousePosition, button); 
 }
 
-void InternetMenu::RefreshList()
+void InternetMenu::DisplayNoGameRunning()
+{
+  Question question;
+  question.Set(_("Sorry, currently, no game is waiting for players"), 1, 0);
+  question.Ask();
+  Menu::RedrawMenu();
+}
+
+void InternetMenu::RefreshList(bool warning_if_empty)
 {
   // Save the currently selected address
   int current = connect_lst->GetSelectedItem();
 
   // Empty the list:
-  while( connect_lst->Size() != 0 )
+  while (connect_lst->Size() != 0)
   {
     connect_lst->Select(0);
     connect_lst->RemoveSelected();
@@ -122,12 +131,17 @@ void InternetMenu::RefreshList()
 
   std::list<address_pair> lst = index_server.GetHostList();
 
-  for(std::list<address_pair>::iterator pair_it = lst.begin();
-      pair_it != lst.end();
-      ++pair_it)
+  if (warning_if_empty && lst.size() == 0) {
+    DisplayNoGameRunning();
+    return;
+  }
+
+  for (std::list<address_pair>::iterator pair_it = lst.begin();
+       pair_it != lst.end();
+       ++pair_it)
     connect_lst->AddItem( false, pair_it->first, pair_it->second );
 
-  if(current != -1 && connect_lst->Size() != 0)
+  if (current != -1 && connect_lst->Size() != 0)
     connect_lst->Select( current );
 }
 

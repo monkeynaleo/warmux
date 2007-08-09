@@ -40,7 +40,8 @@ class InternetMenu : public Menu
    void OnClick(const Point2i &mousePosition, int button);
    void OnClickUp(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
-   void RefreshList();
+   void RefreshList(bool warning_if_empty);
+   void DisplayNoGameRunning();
 
    bool signal_ok();
    bool signal_cancel();
