@@ -63,6 +63,8 @@ public:
                                      const std::string &xml_config) const;
   void RemoveAllObjectConfigs();
 
+  void SetLanguage(const std::string language);
+
   bool GetDisplayEnergyCharacter() const;
   void SetDisplayEnergyCharacter(const bool dec);
 
@@ -132,6 +134,7 @@ protected:
   bool SaveXml();
   std::string GetEnv(const std::string & name, const std::string &default_value) const;
 
+  std::string default_language;
   std::string m_game_mode;
   std::string m_network_host;
   std::string m_network_port;

@@ -31,7 +31,8 @@
 // Package is defined by autotools
 #define GETTEXT_DOMAIN PACKAGE
 
-std::string Format(const char *format, ...){
+std::string Format(const char *format, ...)
+{
   const int bufferSize = 256;
   char buffer[bufferSize];
   va_list argp;
@@ -41,18 +42,18 @@ std::string Format(const char *format, ...){
 
   int size = vsnprintf(buffer, bufferSize, format, argp);
 
-  if( size < 0 )
-    Error( "Error formating string...");
+  if(size < 0)
+    Error("Error formating string...");
 
-  if( size < bufferSize)
+  if(size < bufferSize) {
     result = std::string(buffer);
-  else{
-    char *bigBuffer = (char *)malloc( (size + 1) * sizeof(char) );
-    if( bigBuffer == NULL)
+  } else {
+    char *bigBuffer = (char *)malloc((size + 1) * sizeof(char));
+    if(bigBuffer == NULL)
       Error( "Out of memory !");
 
     size = vsnprintf(bigBuffer, size + 1, format, argp);
-    if( size < 0 )
+    if(size < 0)
       Error( "Error formating string...");
 
     result = std::string(bigBuffer);
@@ -64,14 +65,18 @@ std::string Format(const char *format, ...){
   return result;
 }
 
-void I18N_SetDir(const std::string &dir){
+void I18N_SetDir(const std::string &dir)
+{
   bindtextdomain(GETTEXT_DOMAIN, dir.c_str());
-  bind_textdomain_codeset (GETTEXT_DOMAIN, "UTF-8");
+  bind_textdomain_codeset(GETTEXT_DOMAIN, "UTF-8");
 }
 
-void InitI18N(const std::string &dir){
-  setlocale (LC_ALL, "");
-  I18N_SetDir (dir);
+void InitI18N(const std::string &dir, const std::string &default_language)
+{
+  setlocale(LC_ALL, "");
+  if(default_language != "")
+    setenv("LANGUAGE", default_language.c_str(), 1);
+  I18N_SetDir(dir);
   textdomain(GETTEXT_DOMAIN);
 }
 

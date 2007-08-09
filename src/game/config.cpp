@@ -61,6 +61,7 @@ Config * Config::GetInstance() {
 }
 
 Config::Config():
+  default_language(""),
   m_game_mode("classic"),
   m_network_host("localhost"),
   m_network_port(WORMUX_NETWORK_PORT),
@@ -118,12 +119,16 @@ Config::Config():
 #else
   personal_dir = GetHome() + "\\Wormux\\";
 #endif
-  InitI18N(locale_dir.c_str());
-
   LoadDefaultValue();
   DoLoading();
+}
+
+void Config::SetLanguage(const std::string language)
+{
+  default_language = language;
+  InitI18N(locale_dir.c_str(), language.c_str());
   std::string dir = TranslateDirectory(locale_dir);
-  I18N_SetDir (dir + PATH_SEPARATOR);
+  I18N_SetDir(dir + PATH_SEPARATOR);
 
   dir = TranslateDirectory(data_dir);
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
@@ -139,15 +144,13 @@ const ObjectConfig &Config::GetOjectConfig(const std::string &name, const std::s
   ObjectConfig * objcfg;
 
   std::map<std::string, ObjectConfig*>::const_iterator  it = config_set.find(name);
-  if (it == config_set.end())
-    {
-      objcfg = new ObjectConfig();
-      objcfg->LoadXml(name,xml_config);
-      config_set[name] = objcfg;
-    }
-  else
+  if (it == config_set.end()) {
+    objcfg = new ObjectConfig();
+    objcfg->LoadXml(name,xml_config);
+    config_set[name] = objcfg;
+  } else {
     objcfg = it->second;
-
+  }
   return *objcfg;
 }
 
@@ -165,8 +168,7 @@ void Config::RemoveAllObjectConfigs()
 
 bool Config::DoLoading(void)
 {
-  try
-  {
+  try {
     // Load XML conf
     XmlReader doc;
 
@@ -176,9 +178,7 @@ bool Config::DoLoading(void)
       return false;
 
     LoadXml(doc.GetRoot());
-  }
-  catch (const xmlpp::exception &e)
-  {
+  } catch (const xmlpp::exception &e) {
     std::cout << "o "
         << _("Error while loading configuration file: %s") << std::endl
         << e.what() << std::endl;
@@ -222,6 +222,10 @@ void Config::LoadXml(const xmlpp::Element *xml)
 
   //=== Map ===
   XmlReader::ReadString(xml, "map", map_name);
+
+  //=== Language ===
+  XmlReader::ReadString(xml, "default_language", default_language);
+  SetLanguage(default_language);
 
   //=== Teams ===
   elem = XmlReader::GetMarker(xml, "teams");
@@ -310,6 +314,9 @@ bool Config::SaveXml()
   //The map name is modified when the player validate its choice in the
   //map selection box.
   doc.WriteElement(root, "map", map_name);
+
+  //=== Language ==
+  doc.WriteElement(root, "default_language", default_language);
 
   //=== Teams ===
   xmlpp::Element *team_elements = root->add_child("teams");
