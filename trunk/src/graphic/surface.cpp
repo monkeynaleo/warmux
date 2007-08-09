@@ -302,9 +302,9 @@ void Surface::MergeSurface(Surface &spr, const Point2i &pos) {
       a = (Uint8)(((spr_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
       // Retreiving previous alpha value
       p_a = (Uint8)(((cur_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
-//      if(a == SDL_ALPHA_OPAQUE || (p_a == 0 && a >0)) // new pixel with no alpha or nothing on previous pixel
-//        ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
-//      else if (a > 0) { // alpha is lower => merge color with previous value
+      if(a == SDL_ALPHA_OPAQUE || (p_a == 0 && a >0)) // new pixel with no alpha or nothing on previous pixel
+        ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
+      else if (a > 0) { // alpha is lower => merge color with previous value
         f_a = (double)a / 255.0;
         f_ca = 1.0 - f_a;
         f_pa = (double)p_a / 255.0;
@@ -316,7 +316,7 @@ void Surface::MergeSurface(Surface &spr, const Point2i &pos) {
         b = (Uint8)((double)p_b * f_ca * f_pa + (double)b * f_a);
         a = (a > p_a ? a : p_a);
         ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
-//      }
+      }
     }
   }
   Unlock();
