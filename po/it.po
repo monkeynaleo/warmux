@@ -142,7 +142,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:160
+#: src/weapon/anvil.cpp:172
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -187,7 +187,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "La squadra %s ha vinto %u Pallina Rimbalzina!"
 msgstr[1] "La squadra %s ha vinto %u Palline Rimbazine!"
 
-#: src/weapon/cluster_bomb.cpp:161
+#: src/weapon/cluster_bomb.cpp:169
 #, fuzzy, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -341,13 +341,18 @@ msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 "%s cerca di connettersi con una versione differente: cliente=%s, server=%s."
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:153
 msgid "(current)"
 msgstr "(corrente)"
 
 #: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(morto)"
+
+#. Setting language selection
+#: src/menu/options_menu.cpp:179
+msgid "(system language)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:201
@@ -380,7 +385,7 @@ msgstr ""
 "Fuoco: Spazio\n"
 "un colpo per turno"
 
-#: src/weapon/anvil.cpp:106
+#: src/weapon/anvil.cpp:118
 msgid "Anvil"
 msgstr "Incudine"
 
@@ -437,7 +442,7 @@ msgstr "Impossibile aprire la directory delle squadra (%s)!"
 msgid "Client mode"
 msgstr "Modalità cliente"
 
-#: src/weapon/cluster_bomb.cpp:140
+#: src/weapon/cluster_bomb.cpp:148
 msgid "Cluster Bomb"
 msgstr "Bomba Cluster"
 
@@ -508,7 +513,7 @@ msgstr "Errore nel caricamento della squadra:"
 msgid "Error loading team's data %s:"
 msgstr "Errore nel caricamento della squadra %s :"
 
-#: src/game/config.cpp:292
+#: src/game/config.cpp:296
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -566,7 +571,7 @@ msgstr "Errore: impossibile avviare il server"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Errore: impossibile trovare l'aspetto \"%s\" per la squadra \"%s\"."
 
-#: src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Schermo intero ?"
 
@@ -642,7 +647,7 @@ msgstr ""
 "Fuoco: tieni premuto Spazio fino alla potenza voluta\n"
 "una munizione al turno"
 
-#: src/weapon/anvil.cpp:107
+#: src/weapon/anvil.cpp:119
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -706,6 +711,10 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Venite su #wormux in irc.freenode.net per trovare nuovi avversari."
 
+#: src/menu/options_menu.cpp:105
+msgid "Language"
+msgstr ""
+
 #: src/map/maps_list.cpp:271
 msgid "Load maps:"
 msgstr "Caricamento mappe :"
@@ -723,7 +732,7 @@ msgstr "Squadre in locale:"
 msgid "LowGrav"
 msgstr "Antigravità"
 
-#: src/map/map.cpp:330
+#: src/map/map.cpp:348
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mappa %s, creata da :"
@@ -736,7 +745,7 @@ msgstr "Mappa"
 msgid "Max number of players:"
 msgstr "Numero massimo di giocatori:"
 
-#: src/menu/options_menu.cpp:88
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr "Numero massimo di FPS:"
 
@@ -768,7 +777,7 @@ msgstr "Il più inutile"
 msgid "Most violent"
 msgstr "Il più violento"
 
-#: src/menu/options_menu.cpp:110
+#: src/menu/options_menu.cpp:116
 msgid "Music?"
 msgstr "Musica ?"
 
@@ -780,7 +789,7 @@ msgstr "Gioco online"
 msgid "Network initialization"
 msgstr "Inizializzazione della rete"
 
-#: src/weapon/weapon.cpp:566
+#: src/weapon/weapon.cpp:589
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nessun elemento <%s> trovato nel file di conf. xml!"
@@ -819,11 +828,11 @@ msgstr "Gioca"
 msgid "Player"
 msgstr "Giocatore"
 
-#: src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Energia giocatore:"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Nome del giocatore?"
 
@@ -857,7 +866,7 @@ msgstr "Lettura di un file di configurazione personale"
 msgid "Refresh"
 msgstr "Aggiorna"
 
-#: src/menu/options_menu.cpp:93
+#: src/menu/options_menu.cpp:92
 msgid "Resolution"
 msgstr "Risoluzione"
 
@@ -914,11 +923,11 @@ msgstr ""
 "(Corda Ninja, Fiamma Ossidrica, Mitragliatrice) e sicuramente potrebbero "
 "essercene degli altri!"
 
-#: src/menu/options_menu.cpp:113
+#: src/menu/options_menu.cpp:119
 msgid "Sound effects?"
 msgstr "Effetti sonori ?"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:122
 msgid "Sound frequency"
 msgstr "Frequenza del suono"
 
@@ -955,7 +964,7 @@ msgstr "Squadre"
 msgid "Teleportation"
 msgstr "Teletrasporto"
 
-#: src/weapon/cluster_bomb.cpp:116
+#: src/weapon/cluster_bomb.cpp:122
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "La bomba cluster ha lasciato il campo di battaglia prima di esplodere"
 
@@ -1007,7 +1016,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Questa è solo %i squadra."
 msgstr[1] "Questi sono è solo %i squadre."
 
-#: src/weapon/cluster_bomb.cpp:141
+#: src/weapon/cluster_bomb.cpp:149
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1084,7 +1093,8 @@ msgstr "Sito web: "
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Che vergogna per %s: E' stato ucciso da una semplice pistola!"
 
-#: src/menu/options_menu.cpp:76
+#. Various options
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Particelle di vento?"
 
@@ -1125,7 +1135,7 @@ msgstr "Hai bisogno almeno di due squadre valide !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:430
+#: src/weapon/weapon_launcher.cpp:434
 msgid "Your shot has missed!"
 msgstr "Bersaglio mancato!"
 
