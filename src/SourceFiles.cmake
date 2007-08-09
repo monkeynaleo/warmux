@@ -158,7 +158,7 @@ weapon/grapple.cpp
 weapon/grenade.cpp
 weapon/gun.cpp
 weapon/jetpack.cpp
-weapon/launcher.cpp
+weapon/weapon_launcher.cpp
 weapon/lowgrav.cpp
 weapon/mine.cpp
 weapon/parachute.cpp
