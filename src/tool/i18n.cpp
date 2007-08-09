@@ -74,8 +74,7 @@ void I18N_SetDir(const std::string &dir)
 void InitI18N(const std::string &dir, const std::string &default_language)
 {
   setlocale(LC_ALL, "");
-  if(default_language != "")
-    setenv("LANGUAGE", default_language.c_str(), 1);
+  setenv("LANGUAGE", default_language.c_str(), 1);
   I18N_SetDir(dir);
   textdomain(GETTEXT_DOMAIN);
 }

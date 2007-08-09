@@ -24,6 +24,7 @@
   <surface name="bg_results" file="menu/background_play.png" />
 
   <surface name="video_label" file="menu/video_label.png" />
+  <surface name="language_label" file="menu/language_label.png" />
   <surface name="audio_label" file="menu/audio_label.png" />
   <surface name="teams_label" file="menu/teams_label.png" />
   <surface name="map_label" file="menu/map_label.png" />

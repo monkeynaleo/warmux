@@ -64,6 +64,7 @@ public:
   void RemoveAllObjectConfigs();
 
   void SetLanguage(const std::string language);
+  std::string GetLanguage() const { return default_language; };
 
   bool GetDisplayEnergyCharacter() const;
   void SetDisplayEnergyCharacter(const bool dec);

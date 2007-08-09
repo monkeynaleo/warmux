@@ -58,21 +58,20 @@ const uint GRAPHIC_H = 330;
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  Rectanglei stdRect (0, 0, 140, 30);
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  Rectanglei stdRect(0, 0, 140, 30);
 
-  /* Grapic options */
-  Box * graphic_options = new HBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
+  /* Graphic options */
+  Box * graphic_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
+  graphic_options->AddWidget(new PictureWidget(Rectanglei(0, 0, 40, 136), "menu/video_label"));
 
-  graphic_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,136), "menu/video_label"));
-
-  Box * top_n_bottom_graphic_options = new VBox( Rectanglei(0, 0, GRAPHIC_W-40, GRAPHIC_H),false);
-
-  Box * top_graphic_options = new HBox ( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H/2 - 20), false);
-  Box * bottom_graphic_options = new HBox ( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H/2 - 20), false);
+  Box * top_n_bottom_graphic_options = new VBox(Rectanglei(0, 0, GRAPHIC_W - 40, GRAPHIC_H),false);
+  Box * top_graphic_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
+  Box * bottom_graphic_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
   top_graphic_options->SetMargin(25);
   bottom_graphic_options->SetMargin(25);
 
+  // Various options
   opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", stdRect);
   top_graphic_options->AddWidget(opt_display_wind_particles);
 
@@ -90,7 +89,7 @@ OptionMenu::OptionMenu() :
                                   20, 50);
   bottom_graphic_options->AddWidget(opt_max_fps);
 
-  lbox_video_mode = new ListBoxWithLabel(_("Resolution"), stdRect );
+  lbox_video_mode = new ListBoxWithLabel(_("Resolution"), stdRect);
   bottom_graphic_options->AddWidget(lbox_video_mode);
 
   top_n_bottom_graphic_options->AddWidget(top_graphic_options);
@@ -99,11 +98,18 @@ OptionMenu::OptionMenu() :
 
   widgets.AddWidget(graphic_options);
 
+  /* Language selection */
+  Box * language_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
+  language_options->AddWidget(new PictureWidget(Rectanglei(0, 0, 40, 136), "menu/language_label"));
+  widgets.AddWidget(language_options);
+  lbox_languages = new ListBoxWithLabel(_("Language"), stdRect);
+  language_options->AddWidget(lbox_languages);
+
   /* Sound options */
-  Box * sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H));
+  Box * sound_options = new HBox(Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H));
   sound_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,138), "menu/audio_label"));
 
-  Box * all_sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H-20),false);
+  Box * all_sound_options = new HBox(Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H-20),false);
   all_sound_options->SetMargin(25);
   all_sound_options->SetBorder(Point2i(10,10));
 
@@ -113,7 +119,7 @@ OptionMenu::OptionMenu() :
   opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", stdRect);
   all_sound_options->AddWidget(opt_sound_effects);
 
-  lbox_sound_freq = new ListBoxWithLabel(_("Sound frequency"), stdRect );
+  lbox_sound_freq = new ListBoxWithLabel(_("Sound frequency"), stdRect);
   all_sound_options->AddWidget(lbox_sound_freq);
 
   sound_options->AddWidget(all_sound_options);
@@ -152,23 +158,48 @@ OptionMenu::OptionMenu() :
 
   // Generate sound mode list
   uint current_freq = jukebox.GetFrequency();
-  lbox_sound_freq->AddItem (current_freq == 11025, "11 kHz", "11025");
-  lbox_sound_freq->AddItem (current_freq == 22050, "22 kHz", "22050");
-  lbox_sound_freq->AddItem (current_freq == 44100, "44 kHz", "44100");
+  lbox_sound_freq->AddItem(current_freq == 11025, "11 kHz", "11025");
+  lbox_sound_freq->AddItem(current_freq == 22050, "22 kHz", "22050");
+  lbox_sound_freq->AddItem(current_freq == 44100, "44 kHz", "44100");
 
-  resource_manager.UnLoadXMLProfile( res);
+  resource_manager.UnLoadXMLProfile(res);
 
   Config * config = Config::GetInstance();
 
-  opt_max_fps->SetValue (app->video->GetMaxFps());
-  opt_display_wind_particles->SetValue (config->GetDisplayWindParticles());
-  opt_display_energy->SetValue (config->GetDisplayEnergyCharacter());
-  opt_display_name->SetValue (config->GetDisplayNameCharacter());
-  full_screen->SetValue (app->video->IsFullScreen());
+  opt_max_fps->SetValue(app->video->GetMaxFps());
+  opt_display_wind_particles->SetValue(config->GetDisplayWindParticles());
+  opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
+  opt_display_name->SetValue(config->GetDisplayNameCharacter());
+  full_screen->SetValue(app->video->IsFullScreen());
 
+  // Setting language selection
+  lbox_languages->AddItem(config->GetLanguage() == "", _("(system language)"), "");
+  lbox_languages->AddItem(config->GetLanguage() == "bg",  "Български",    "bg");
+  lbox_languages->AddItem(config->GetLanguage() == "bs",  "Bosanski",     "bs");
+  lbox_languages->AddItem(config->GetLanguage() == "ca",  "Català",       "ca");
+  lbox_languages->AddItem(config->GetLanguage() == "cpf", "Créole",       "cpf");
+  lbox_languages->AddItem(config->GetLanguage() == "da",  "Dansk",        "da");
+  lbox_languages->AddItem(config->GetLanguage() == "de",  "Deutsch",      "de");
+  lbox_languages->AddItem(config->GetLanguage() == "eo",  "Esperanto",    "eo");
+  lbox_languages->AddItem(config->GetLanguage() == "en",  "English",      "en");
+  lbox_languages->AddItem(config->GetLanguage() == "es",  "Castellano",   "es");
+  lbox_languages->AddItem(config->GetLanguage() == "fi",  "Suomi",        "fi");
+  lbox_languages->AddItem(config->GetLanguage() == "fr",  "Français",     "fr");
+  lbox_languages->AddItem(config->GetLanguage() == "gl",  "Galego",       "gl");
+  lbox_languages->AddItem(config->GetLanguage() == "hu",  "Magyar",       "hu");
+  lbox_languages->AddItem(config->GetLanguage() == "it",  "Italiano",     "it");
+  lbox_languages->AddItem(config->GetLanguage() == "nb",  "Norsk",        "nb");
+  lbox_languages->AddItem(config->GetLanguage() == "nl",  "Nederlands",   "nl");
+  lbox_languages->AddItem(config->GetLanguage() == "pt",  "Português",    "pt");
+  lbox_languages->AddItem(config->GetLanguage() == "ro",  "Română",       "ro");
+  lbox_languages->AddItem(config->GetLanguage() == "ru",  "Pусский язык", "ru");
+  lbox_languages->AddItem(config->GetLanguage() == "sk",  "Slovenčina",   "sk");
+  lbox_languages->AddItem(config->GetLanguage() == "sl",  "Slovenščina",  "sl");
+  lbox_languages->AddItem(config->GetLanguage() == "sv",  "Svenska",      "sv");
+  lbox_languages->AddItem(config->GetLanguage() == "tr",  "Türkçe",       "tr");
 
-  opt_music->SetValue( jukebox.UseMusic() );
-  opt_sound_effects->SetValue( jukebox.UseEffects() );
+  opt_music->SetValue(jukebox.UseMusic());
+  opt_sound_effects->SetValue(jukebox.UseEffects());
 }
 
 OptionMenu::~OptionMenu()
@@ -202,6 +233,7 @@ void OptionMenu::SaveOptions()
   app->video->SetMaxFps(opt_max_fps->GetValue());
   // Video mode
   std::string s_mode = lbox_video_mode->ReadValue();
+
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
   app->video->SetConfig(w, h, full_screen->GetValue());
@@ -211,12 +243,16 @@ void OptionMenu::SaveOptions()
 
   SetActionButtonsXY(x, y);
 
+  // Language
+  std::string s_language = lbox_languages->ReadValue();
+  config->SetLanguage(s_language);
+
   // Sound
-  jukebox.ActiveMusic( opt_music->GetValue() );
-  jukebox.ActiveEffects( opt_sound_effects->GetValue() );
+  jukebox.ActiveMusic(opt_music->GetValue());
+  jukebox.ActiveEffects(opt_sound_effects->GetValue());
   std::string sfreq = lbox_sound_freq->ReadValue();
   long freq;
-  if (str2long(sfreq,freq)) jukebox.SetFrequency (freq);
+  if (str2long(sfreq,freq)) jukebox.SetFrequency(freq);
 
   jukebox.Init(); // commit modification on sound options
 
