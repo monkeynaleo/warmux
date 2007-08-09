@@ -40,6 +40,10 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
+#ifdef DEBUG
+#include "map/map.h"
+#endif
+
 extern Profile *weapons_res_profile;
 
 const int INFINITE_AMMO = -1;
@@ -507,6 +511,25 @@ void Weapon::Draw(){
 
   if ( m_image )
     m_image->Blit( AppWormux::GetInstance()->video->window, Point2i(x, y) - Camera::GetInstance()->GetPosition());
+
+#ifdef DEBUG
+  if (IsDEBUGGING("weapon")) {
+    Rectanglei rect(ActiveCharacter().GetHandPosition().GetX()-1 - Camera::GetInstance()->GetPositionX(),
+		    ActiveCharacter().GetHandPosition().GetY()-1 - Camera::GetInstance()->GetPositionY(),
+		    3,
+		    3);
+
+    world.ToRedrawOnMap(rect);
+
+    AppWormux::GetInstance()->video->window.RectangleColor(rect, c_red);
+
+    MSG_DEBUG("weapon.handposition", "Position: %d, %d - hand: %d, %d", 
+	      ActiveCharacter().GetX(),
+	      ActiveCharacter().GetY(),
+	      ActiveCharacter().GetHandPosition().GetX(),
+	      ActiveCharacter().GetHandPosition().GetY());
+  }
+#endif
 }
 
 // Draw the weapon fire when firing

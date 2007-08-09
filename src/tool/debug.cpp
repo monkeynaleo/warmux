@@ -37,6 +37,32 @@
 std::vector<std::string> debugModes;
 
 /**
+ * Check if a debug mode is in use
+ */
+bool IsDEBUGGING(const char* mode)
+{
+#ifndef DEBUG
+  return false;
+#else
+  int mSize = strlen(mode);
+  unsigned int i = 0;
+
+  for (i = 0; i < debugModes.size(); i++) {
+    int modeSize = debugModes[i].size();
+    const char *strMode = debugModes[i].c_str();
+    
+    if (strncmp(strMode, mode, modeSize) == 0) {
+      if ( (mSize != modeSize) && ( mode[modeSize] != '.' ) && modeSize != 0)
+	continue;
+      
+      return true;
+    }
+  }
+
+  return false;
+#endif
+}
+/**
  * Print a debug message if needed.
  *
  * @param filename
@@ -47,17 +73,7 @@ std::vector<std::string> debugModes;
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...)
 {
-  int levelSize = strlen(level);
-  unsigned int i = 0;
-
-  for( i = 0; i < debugModes.size(); i++ ){
-    int modeSize = debugModes[i].size();
-    const char *strMode = debugModes[i].c_str();
-
-    if( strncmp(strMode, level, modeSize) == 0){
-      if( (levelSize != modeSize) && ( level[modeSize] != '.' ) && modeSize != 0)
-        continue;
-
+  if (IsDEBUGGING(level)) {
       va_list argp;
       int pid = (int)getpid();
 
@@ -66,10 +82,10 @@ void PrintDebug (const char *filename, const char *function, unsigned long line,
       vfprintf(stderr, message, argp);
       va_end(argp);
       fprintf(stderr, "\n");
-      return;
-    }
   }
 }
+
+
 
 /**
  * Add a new debug mode to check.
