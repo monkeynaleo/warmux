@@ -39,7 +39,7 @@ std::vector<std::string> debugModes;
 /**
  * Check if a debug mode is in use
  */
-bool IsDEBUGGING(const char* mode)
+bool IsDEBUGGING(const char* /* mode */)
 {
 #ifndef DEBUG
   return false;
