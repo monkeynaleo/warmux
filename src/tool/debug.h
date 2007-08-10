@@ -42,6 +42,10 @@ void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...);
 void AddDebugMode(const std::string& mode);
 
+#ifdef DEBUG
 bool IsDEBUGGING(const char* mode);
+#else
+#define IsDEBUGGING(a) false
+#endif
 
 #endif
