@@ -39,11 +39,9 @@ std::vector<std::string> debugModes;
 /**
  * Check if a debug mode is in use
  */
-bool IsDEBUGGING(const char* /* mode */)
-{
 #ifndef DEBUG
-  return false;
-#else
+bool IsDEBUGGING(const char* mode)
+{
   int mSize = strlen(mode);
   unsigned int i = 0;
 
@@ -60,8 +58,9 @@ bool IsDEBUGGING(const char* /* mode */)
   }
 
   return false;
-#endif
 }
+#endif
+
 /**
  * Print a debug message if needed.
  *
