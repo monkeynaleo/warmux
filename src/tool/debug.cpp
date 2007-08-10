@@ -39,7 +39,7 @@ std::vector<std::string> debugModes;
 /**
  * Check if a debug mode is in use
  */
-#ifndef DEBUG
+#ifdef DEBUG
 bool IsDEBUGGING(const char* mode)
 {
   int mSize = strlen(mode);
