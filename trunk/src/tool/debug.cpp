@@ -30,6 +30,7 @@
 #  include <unistd.h>
 #endif
 #include "include/base.h"
+#include "tool/debug.h"
 
 /**
  * The debug modes in use.
