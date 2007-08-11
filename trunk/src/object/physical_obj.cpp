@@ -62,6 +62,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
   m_ignore_movements(false),
+  m_is_character(false),
   m_name(name),
   m_test_left(0),
   m_test_right(0),
@@ -733,7 +734,10 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
         if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this)
             && object->m_collides_with_objects
             && object->GetTestRect().Intersect(rect) )
-          return object;
+        {
+          if (!m_is_character || object->m_collides_with_characters)
+            return object;
+        }
       }
     }
   return NULL;

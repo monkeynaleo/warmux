@@ -60,6 +60,7 @@ protected:
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
   bool m_ignore_movements;
+  bool m_is_character;
 
   virtual void CheckOverlapping();
 
