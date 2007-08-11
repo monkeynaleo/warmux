@@ -334,11 +334,6 @@ void Interface::Draw()
   DrawSmallInterface();
 }
 
-int Interface::GetWidth() const
-{
-  return game_menu.GetWidth();
-}
-
 int Interface::GetHeight() const
 {
   if(!display) {
@@ -389,25 +384,10 @@ void Interface::Hide()
     start_hide_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_hide_display));
 }
 
-bool Interface::IsVisible() const
-{
-  return display;
-}
-
 void Interface::UpdateTimer(uint utimer)
 {
   timer->Set(ulong2str(utimer));
   remaining_turn_time = utimer;
-}
-
-void Interface::SetCurrentOverflyWeapon(Weapon * weapon)
-{
-  weapon_under_cursor = weapon;
-}
-
-void Interface::UpdateWindIndicator(int wind_value)
-{
-  wind_bar.UpdateValue(wind_value);
 }
 
 void AbsoluteDraw(const Surface &s, const Point2i& pos)

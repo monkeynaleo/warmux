@@ -54,7 +54,7 @@ public:
   virtual void SendKey(SDL_keysym key);
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
-  virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
+  virtual void Draw(const Point2i&, Surface&) const { };
 
   // needed to implements Widget
   virtual void SetSizePosition(const Rectanglei &/*rect*/) {};
@@ -64,7 +64,7 @@ public:
   // Navigate between widget
   virtual void SetFocusOnNextWidget();
   virtual void SetFocusOnPreviousWidget();
-  Widget * GetCurrentSelectedWidget() const;
+  Widget * GetCurrentSelectedWidget() const { return keyboard_selection; };
   // redraw bottom layer container
   virtual void Redraw(const Rectanglei& rect, Surface& surf);
 

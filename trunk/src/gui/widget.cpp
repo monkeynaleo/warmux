@@ -41,50 +41,10 @@ Widget::Widget(const Rectanglei &rect):
 {
 }
 
-Widget::~Widget()
-{
-}
-
-Widget* Widget::ClickUp(const Point2i &/*mousePosition*/, uint /*button*/)
-{
-  need_redrawing = true;
-
-  return this;
-}
-
-Widget* Widget::Click(const Point2i &/*mousePosition*/, uint /*button*/)
-{
-  need_redrawing = true;
-
-  return this;
-}
-
-bool Widget::IsSelected() const
-{
-  return is_selected;
-}
-
-void Widget::Select()
-{
-  is_selected = true;
-  need_redrawing = true;
-}
-
-void Widget::Unselect()
-{
-  is_selected = false;
-  need_redrawing = true;
-}
-
 void Widget::StdSetSizePosition(const Rectanglei &rect)
 {
   position = rect.GetPosition();
   size = rect.GetSize();
-}
-
-void Widget::SetContainer( Container * _ct)
-{
-  ct = _ct;
 }
 
 void Widget::Update(const Point2i &mousePosition,
@@ -100,9 +60,3 @@ void Widget::Update(const Point2i &mousePosition,
   }
   need_redrawing = false;
 }
-
-void Widget::ForceRedraw()
-{
-  need_redrawing = true;
-}
-

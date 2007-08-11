@@ -78,8 +78,8 @@ class GameMessages
   std::list<Message *> liste;
   typedef std::list<Message *>::iterator iterator;
   static GameMessages * singleton;
-  GameMessages();
-  ~GameMessages();
+  GameMessages() { };
+  ~GameMessages() { Reset(); };
 };
 
 //-----------------------------------------------------------------------------

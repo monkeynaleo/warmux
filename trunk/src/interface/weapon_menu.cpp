@@ -99,16 +99,6 @@ void WeaponMenuItem::SetZoom(bool value)
   zoom_start_time = Time::GetInstance()->Read();
 }
 
-uint WeaponMenuItem::GetZoomTime() const
-{
-  return zoom_time;
-}
-
-void WeaponMenuItem::SetZoomTime(uint time)
-{
-  zoom_time = time;
-}
-
 void WeaponMenuItem::Draw(Surface * dest)
 {
   double scale = DEFAULT_ICON_SCALE;
@@ -136,11 +126,6 @@ void WeaponMenuItem::Draw(Surface * dest)
     txt << nb_bullets;
     (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), gray_color);
   }
-}
-
-Weapon * WeaponMenuItem::GetWeapon() const
-{
-  return weapon;
 }
 
 WeaponsMenu::WeaponsMenu():
@@ -259,36 +244,6 @@ void WeaponsMenu::Reset()
   }
 }
 
-uint WeaponsMenu::GetJellyTime() const
-{
-  return jelly_time;
-}
-
-uint WeaponsMenu::GetIconsDrawTime() const
-{
-  return icons_draw_time;
-}
-
-uint WeaponsMenu::GetRotationTime() const
-{
-  return rotation_time;
-}
-
-void WeaponsMenu::SetJellyTime(uint time)
-{
-  jelly_time = time;
-}
-
-void WeaponsMenu::SetIconsDrawTime(uint time)
-{
-  icons_draw_time = time;
-}
-
-void WeaponsMenu::SetRotationTime(uint time)
-{
-  rotation_time = time;
-}
-
 void WeaponsMenu::RefreshWeaponList()
 {
   // reset number of weapon
@@ -320,24 +275,6 @@ void WeaponsMenu::RefreshWeaponList()
        it != weapons_list->GetList().end();
        ++it)
     AddWeapon(*it);
-}
-
-void WeaponsMenu::SwitchDisplay()
-{
-  if(show)
-    Hide();
-  else
-    Show();
-}
-
-bool WeaponsMenu::IsDisplayed() const
-{
-  return show;
-}
-
-Sprite * WeaponsMenu::GetCrossSymbol() const
-{
-  return cross;
 }
 
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()
@@ -387,10 +324,6 @@ void WeaponsMenu::Draw()
   // Update overfly weapon/tool
   if(UpdateCurrentOverflyItem(weapons_menu) == NULL)
     UpdateCurrentOverflyItem(tools_menu);
-}
-
-void WeaponsMenu::SetHelp(std::ostringstream /*msg*/)
-{
 }
 
 Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)

@@ -52,9 +52,6 @@ void TextBox::SetCursor(std::string::size_type pos)
   }
 }
 
-TextBox::~TextBox(){
-}
-
 void TextBox::SendKey(const SDL_keysym& key)
 {
   need_redrawing = true;

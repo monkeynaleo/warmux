@@ -54,9 +54,9 @@ private:
   } marqueur_t;
 
  public:
-  void SetBorderColor(const Color& color);
-  void SetBackgroundColor(const Color& color);
-  void SetValueColor(const Color& color);
+  void SetBorderColor(const Color& color) { border_color = color; };
+  void SetBackgroundColor(const Color& color) { background_color = color; };
+  void SetValueColor(const Color& color) { value_color = color; };
  private:
   typedef std::list<marqueur_t>::iterator marqueur_it;
   typedef std::list<marqueur_t>::const_iterator marqueur_it_const;
@@ -80,7 +80,7 @@ public:
   void SetReferenceValue (bool use, long value=0);
 
   // Draw la barre de progresssion
-  void Draw() const;
+  void Draw() const {  DrawXY( Point2i(x, y) ); };
 
   // Draw the progress bar
   void DrawXY(const Point2i &pos) const;
@@ -94,7 +94,7 @@ public:
 
   // add/remove value tag
   marqueur_it AddTag (long val, const Color& coul);
-  void ResetTag();
+  void ResetTag() { marqueur.clear(); };
 };
 
 #endif

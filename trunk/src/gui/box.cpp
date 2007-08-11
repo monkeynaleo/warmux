@@ -69,26 +69,6 @@ void Box::Draw(const Point2i &/*mousePosition*/,
   }
 }
 
-Widget* Box::Click(const Point2i &mousePosition, uint button)
-{
-  return WidgetList::Click(mousePosition, button);
-}
-
-Widget* Box::ClickUp(const Point2i &mousePosition, uint button)
-{
-  return WidgetList::ClickUp(mousePosition, button);
-}
-
-void Box::SetMargin (uint _margin)
-{
-  margin = _margin;
-}
-
-void Box::SetBorder (const Point2i &newBorder)
-{
-  border = newBorder;
-}
-
 // --------------------------------------------------
 
 VBox::VBox(const Rectanglei &rect, bool _visible) : Box(rect, _visible)

@@ -36,7 +36,7 @@ public:
           const Rectanglei &rect,
           Font::font_size_t fsize,
           Font::font_style_t fstyle);
-  ~TextBox();
+  ~TextBox() { };
 
   void SendKey(const SDL_keysym& key);
   void Draw(const Point2i &mousePosition, Surface& surf) const;

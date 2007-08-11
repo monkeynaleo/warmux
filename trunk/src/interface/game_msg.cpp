@@ -45,14 +45,6 @@ GameMessages * GameMessages::GetInstance() {
   return singleton;
 }
 
-GameMessages::GameMessages() {
-}
-
-GameMessages::~GameMessages()
-{
-  Reset();
-}
-
 // Clean up the message list
 void GameMessages::Reset(){
   std::list<Message *>::iterator it;
@@ -106,4 +98,3 @@ void GameMessages::Add(const std::string &message){
     delete msg;
   }
 }
-

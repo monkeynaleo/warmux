@@ -110,18 +110,20 @@ public:
   //inline Action_t &operator++() { ;}
 
   // Action without parameter
-  Action (Action_t type);
+  Action (Action_t type) { Init(type); };
+
   // Action with various parameter
-  Action (Action_t type, int value);
-  Action (Action_t type, double value);
+  Action (Action_t type, int value) { Init(type); Push(value); };
+  Action (Action_t type, double value) { Init(type); Push(value); };
+  Action (Action_t type, const std::string& value) { Init(type); Push(value); };
+
   Action (Action_t type, double value1, int value2);
   Action (Action_t type, double value1, double value2);
-  Action (Action_t type, const std::string& value);
 
   // Build an action from a network packet
   Action (const char* is, DistantComputer* _creator);
 
-  ~Action();
+  ~Action() { };
 
   void Init (Action_t type);
   std::ostream& out(std::ostream &os) const;
@@ -140,7 +142,7 @@ public:
   Point2i PopPoint2i();
   Point2d PopPoint2d();
 
-  bool IsEmpty() const;
+  bool IsEmpty() const { return var.empty(); };
 
   // Store character's information
   void StoreCharacter(uint team_no, uint char_no);
@@ -148,7 +150,7 @@ public:
   void RetrieveCharacter();
 
   // Timestamp handling
-  uint GetTimestamp() const;
+  uint GetTimestamp() const { return m_timestamp; };
 
   int  GetSize() const
   {
@@ -160,7 +162,7 @@ public:
 
   void Write(char *packet) const;
   void WritePacket(char* & packet, int & size) const;
-  Action_t GetType() const;
+  Action_t GetType() const { return m_type; };
 protected:
   Action_t m_type;
   uint m_timestamp;
