@@ -34,7 +34,7 @@ class Sprite;
 
 class RandomElementList : public std::vector<Surface *> {
  public:
-   void AddElement(const Surface *element);
+   void AddElement(const Surface *element) { push_back(new Surface(*element)); };
    Surface * GetRandomElement();
    ~RandomElementList();
 };
@@ -44,9 +44,9 @@ class MapElement {
    Surface element;
    Point2i position;
  public:
-   MapElement(const Surface & object, const Point2i & position);
-   Surface & GetElement();
-   Point2i & GetPosition();
+   MapElement(const Surface & obj, const Point2i & pos) { element = obj; position = pos; };
+   Surface & GetElement() { return element; };
+   Point2i & GetPosition() { return position; };
 };
 
 class RandomMap {
@@ -87,19 +87,19 @@ class RandomMap {
  public:
    RandomMap(Profile *profile, const int width, const int height);
    void SetSize(const int width, const int height);
-   const Point2i GetSize() const;
-   const int GetWidth() const;
-   const int GetHeight() const;
+   const Point2i GetSize() const { return Point2i(width, height); };
+   const int GetWidth() const { return width; };
+   const int GetHeight() const { return height; };
    void AddElement(const Surface * object, const Point2i& position);
    void DrawElement();
-   void SetBorderSize(const double border);
-   void SetBorderColor(const Color& color);
-   const bool IsOpen() const;
+   void SetBorderSize(const double border) { border_size = border; };
+   void SetBorderColor(const Color& color) { border_color = color; };
+   const bool IsOpen() const { return is_open; };
    void Generate(InfoMap::Island_type generator);
    void GenerateIsland();
    void GeneratePlatforms();
    void SaveMap();
-   Surface GetRandomMap() const;
+   Surface GetRandomMap() const { return result; };
 };
 
 #endif /* RANDOM_MAP_H */

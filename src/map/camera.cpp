@@ -67,15 +67,6 @@ bool Camera::HasFixedY() const{
   return (int)world.GetHeight() <= GetSizeY();
 }
 
-Point2i Camera::FreeDegrees() const{
-  return Point2i(HasFixedX()? 0 : 1,
-                 HasFixedY()? 0 : 1);
-}
-
-Point2i Camera::NonFreeDegrees() const{
-  return Point2i(1, 1) - FreeDegrees();
-}
-
 void Camera::SetXYabs(int x, int y){
   AppWormux * app = AppWormux::GetInstance();
 
@@ -92,20 +83,12 @@ void Camera::SetXYabs(int x, int y){
   throw_camera = true;
 }
 
-void Camera::SetXYabs(const Point2i &pos){
-  SetXYabs(pos.x, pos.y);
-}
-
 void Camera::SetXY(Point2i pos){
   pos = pos * FreeDegrees();
   if( pos.IsNull() )
     return;
 
   SetXYabs(position + pos);
-}
-
-void Camera::CenterOnFollowedObject(){
-  CenterOn(*followed_object);
 }
 
 // Center on a object
@@ -154,21 +137,6 @@ void Camera::AutoCrop(){
   dst += (pos - CAMERA_MARGIN).inf(position) * (pos - CAMERA_MARGIN - position);
 
   SetXY( dst * CAMERA_SPEED / dstMax );
-}
-
-void Camera::SetAutoCrop(bool crop)
-{
-  auto_crop = crop;
-}
-
-bool Camera::IsAutoCrop() const
-{
-  return auto_crop;
-}
-
-void Camera::SetCloseFollowing(bool close)
-{
-  follow_closely = close;
 }
 
 void Camera::Refresh(){

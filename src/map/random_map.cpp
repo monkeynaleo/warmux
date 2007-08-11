@@ -34,11 +34,6 @@
 #  include <time.h>
 #endif
 
-void RandomElementList::AddElement(const Surface * element)
-{
-  push_back(new Surface(*element));
-}
-
 Surface * RandomElementList::GetRandomElement()
 {
   if(size() == 0)
@@ -51,22 +46,6 @@ RandomElementList::~RandomElementList()
   for(iterator elt = begin(); elt != end(); elt++) {
     delete((*elt));
   }
-}
-
-MapElement::MapElement(const Surface & object, const Point2i & pos)
-{
-  element = object;
-  position = pos;
-}
-
-Surface & MapElement::GetElement()
-{
-  return element;
-}
-
-Point2i & MapElement::GetPosition()
-{
-  return position;
 }
 
 RandomMap::RandomMap(Profile *profile, const int width, const int height)
@@ -101,21 +80,6 @@ void RandomMap::SetSize(const int width, const int height)
   this->height = height;
 }
 
-const Point2i RandomMap::GetSize() const
-{
-  return Point2i(width, height);
-}
-
-const int RandomMap::GetWidth() const
-{
-  return width;
-}
-
-const int RandomMap::GetHeight() const
-{
-  return height;
-}
-
 void RandomMap::AddElement(const Surface * object, const Point2i& position)
 {
   element_list.push_back(MapElement(*object, position));
@@ -127,21 +91,6 @@ void RandomMap::DrawElement()
     Surface & tmp = elt->GetElement();
     result.MergeSurface(tmp, elt->GetPosition() - Point2i((int)(tmp.GetWidth() / 2.0), tmp.GetHeight()));
   }
-}
-
-void RandomMap::SetBorderSize(const double border)
-{
-  border_size = border;
-}
-
-void RandomMap::SetBorderColor(const Color& color)
-{
-  border_color = color;
-}
-
-const bool RandomMap::IsOpen() const
-{
-  return is_open;
 }
 
 void RandomMap::GeneratePlatforms()
@@ -305,9 +254,4 @@ void RandomMap::Generate(InfoMap::Island_type generator)
 void RandomMap::SaveMap()
 {
   result.ImgSave(Config::GetInstance()->GetPersonalDir() + ActiveMap().ReadFullMapName() + " - last random generation.png");
-}
-
-Surface RandomMap::GetRandomMap() const
-{
-  return result;
 }

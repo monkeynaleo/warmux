@@ -53,10 +53,6 @@ void Tile::InitTile(const Point2i &pSize){
   nbr_cell = nbCells.x * nbCells.y;
 }
 
-Point2i Tile::Clamp(const Point2i &v) const{
-        return v.clamp(Point2i(0, 0), nbCells - 1);
-}
-
 void Tile::Dig(const Point2i &position, const Surface& dig){
   // XXX Not used !?
   // Rectanglei rect = Rectanglei(position, dig.GetSize());

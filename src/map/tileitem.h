@@ -92,7 +92,7 @@ private:
   unsigned char GetAlpha_Index0(const Point2i &pos) const;
   inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
   inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
-  Surface GetSurface();
+  Surface GetSurface() { return m_surface; };
 
   void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
   void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;

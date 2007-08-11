@@ -96,11 +96,6 @@ void Map::FreeMem()
   to_redraw_particles_now->clear();
 }
 
-void Map::ToRedrawOnMap(const Rectanglei& r)
-{
-  to_redraw->push_back(r);
-}
-
 void Map::ToRedrawOnScreen(Rectanglei r)
 {
   r.SetPosition( r.GetPosition() + Camera::GetInstance()->GetPosition() );
@@ -175,38 +170,6 @@ void Map::Draw(bool redraw_all)
 //  OptimizeCache(*to_redraw_now);
 
   ground.Draw(redraw_all);
-}
-
-bool Map::IsOutsideWorldX(int x) const{
-  return (x < 0) || ((int)GetWidth() <= x);
-}
-
-bool Map::IsOutsideWorldY(int y) const{
-  return (y < 0) || ((int)GetHeight() <= y);
-}
-
-bool Map::IsOutsideWorldXwidth(int x, uint larg) const{
-  return (x + (int)larg - 1 < 0) || ((int)GetWidth() <= x);
-}
-
-bool Map::IsOutsideWorldYheight(int y, uint haut) const{
-  return ((y + (int)haut - 1 < 0) || ((int)GetHeight() <= y));
-}
-
-bool Map::IsOutsideWorldXY(int x, int y) const{
-  return IsOutsideWorldX(x) || IsOutsideWorldY(y);
-}
-
-bool Map::IsOutsideWorld(const Point2i &pos) const{
-  return IsOutsideWorldXY(pos.x, pos.y);
-}
-
-bool Map::IsInVacuum(int x, int y) const{
-  return ground.IsEmpty(Point2i(x, y));
-}
-
-bool Map::IsInVacuum(const Point2i& pos) const{
-  return ground.IsEmpty(pos);
 }
 
 bool Map::HorizontalLine_IsInVacuum(int ox, int y, int width) const

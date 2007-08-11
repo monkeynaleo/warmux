@@ -42,8 +42,8 @@ private:
   bool throw_camera;
   bool follow_closely;
 
-  Point2i FreeDegrees() const;
-  Point2i NonFreeDegrees() const;
+  Point2i FreeDegrees() const { return Point2i(HasFixedX()? 0 : 1, HasFixedY()? 0 : 1); };
+  Point2i NonFreeDegrees() const { return Point2i(1, 1) - FreeDegrees(); };
 public:
   static Camera * GetInstance();
 
@@ -56,7 +56,7 @@ public:
   // set camera to position
   void SetXY(Point2i pos);
   void SetXYabs(int x, int y);
-  void SetXYabs(const Point2i &pos);
+  void SetXYabs(const Point2i &pos) { SetXYabs(pos.x, pos.y); };
 
   // Auto crop on an object
   void FollowObject (const PhysicalObj *obj,
@@ -69,11 +69,11 @@ public:
   void Refresh();
 
   void CenterOn(const PhysicalObj &obj);
-  void CenterOnFollowedObject();
+  void CenterOnFollowedObject() { CenterOn(*followed_object); };
   void AutoCrop();
-  void SetAutoCrop(bool crop);
-  bool IsAutoCrop() const;
-  void SetCloseFollowing(bool close);
+  void SetAutoCrop(bool crop) { auto_crop = crop; };
+  bool IsAutoCrop() const { return auto_crop; };
+  void SetCloseFollowing(bool close) { follow_closely = close; };
 };
 
 #endif

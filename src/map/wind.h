@@ -33,6 +33,9 @@ namespace xmlpp
   class Element;
 }
 
+// Max wind strength in m/(sec*sec)
+#define WIND_STRENGTH  5.0
+
 class WindParticle : public PhysicalObj
 {
   /* You should not need this */
@@ -62,11 +65,11 @@ private:
   void RemoveAllParticles();
 
 public:
-  Wind();
-  ~Wind();
-  double GetStrength() const;
+  Wind() { m_val = m_nv_val = 0; };
+  ~Wind() { RemoveAllParticles(); };
+  double GetStrength() const { return m_nv_val * WIND_STRENGTH / 100.0; };
   void ChooseRandomVal() const;
-  void SetVal (long val);
+  void SetVal (long val) { m_nv_val = val; };
   void Refresh();
   void Reset();
   void DrawParticles();
