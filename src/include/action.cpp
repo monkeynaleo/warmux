@@ -41,39 +41,15 @@ static inline uint TimeStamp()
   return 0;
 }
 
-// Action without parameter
-Action::Action (Action_t type)
-{
-  Init(type);
-}
-
 // Action with various parameters
-Action::Action (Action_t type, int value) : m_type(type)
-{
-  Init(type);
-  Push(value);
-}
-
-Action::Action (Action_t type, double value) : m_type(type)
-{
-  Init(type);
-  Push(value);
-}
-
-Action::Action (Action_t type, const std::string& value) : m_type(type)
-{
-  Init(type);
-  Push(value);
-}
-
-Action::Action (Action_t type, double value1, double value2) : m_type(type)
+Action::Action (Action_t type, double value1, double value2)
 {
   Init(type);
   Push(value1);
   Push(value2);
 }
 
-Action::Action (Action_t type, double value1, int value2) : m_type(type)
+Action::Action (Action_t type, double value1, int value2)
 {
   Init(type);
   Push(value1);
@@ -101,31 +77,12 @@ Action::Action (const char *is, DistantComputer* _creator)
   }
 }
 
-Action::~Action ()
-{
-}
-
 void Action::Init(Action_t type)
 {
   m_type = type;
   var.clear();
   m_timestamp = TimeStamp();
   creator = NULL;
-}
-
-Action::Action_t Action::GetType() const
-{
-  return m_type;
-}
-
-bool Action::IsEmpty() const
-{
-  return var.empty();
-}
-
-uint Action::GetTimestamp() const
-{
-  return m_timestamp;
 }
 
 void Action::Write(char *os) const

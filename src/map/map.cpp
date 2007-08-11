@@ -19,6 +19,7 @@
  * Monde ou plateau de jeu.
  *****************************************************************************/
 
+#include <iostream>
 #include "map.h"
 #include "object/physical_obj.h"
 #include "graphic/surface.h"
@@ -30,8 +31,6 @@
 #include "game/time.h"
 #include "object/objbox.h"
 #include "tool/i18n.h"
-
-#define ADD_IF_NOT_CONTAINED  0
 
 const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
 
@@ -99,26 +98,13 @@ void Map::FreeMem()
 
 void Map::ToRedrawOnMap(const Rectanglei& r)
 {
-#if ADD_IF_NOT_CONTAINED
-  for (std::list<Rectanglei>::iterator it = to_redraw->begin();
-       it != to_redraw->end(); ++it)
-  {
-    if (r.Contains(*it))
-    {
-      to_redraw->erase(it);
-      to_redraw->push_back(r);
-    }
-    else if ((*it).Contains(r))
-      return;
-  }
-#endif
   to_redraw->push_back(r);
 }
 
 void Map::ToRedrawOnScreen(Rectanglei r)
 {
   r.SetPosition( r.GetPosition() + Camera::GetInstance()->GetPosition() );
-  ToRedrawOnMap(r);
+  to_redraw->push_back(r);
 }
 
 void Map::SwitchDrawingCache()
@@ -140,27 +126,27 @@ void Map::SwitchDrawingCacheParticles()
 void Map::Dig(const Point2i& position, const Surface& surface)
 {
    ground.Dig (position, surface);
-   ToRedrawOnMap(Rectanglei(position, surface.GetSize()));
+   to_redraw->push_back(Rectanglei(position, surface.GetSize()));
 }
 
 void Map::Dig(const Point2i& center, const uint radius)
 {
    ground.Dig (center, radius);
-   ToRedrawOnMap(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE),
-                            Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
+   to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE),
+                                   Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
 void Map::PutSprite(const Point2i& pos, const Sprite* spr)
 {
    ground.PutSprite (pos, spr);
-   ToRedrawOnMap(Rectanglei(pos, spr->GetSizeMax()));
+   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
 void Map::MergeSprite(const Point2i& pos, const Sprite * spr)
 {
   Surface tmp = spr->GetSurface();
   ground.MergeSprite (pos, tmp);
-  ToRedrawOnMap(Rectanglei(pos, spr->GetSizeMax()));
+  to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
 void Map::DrawSky(bool redraw_all)
@@ -168,9 +154,7 @@ void Map::DrawSky(bool redraw_all)
   SwitchDrawingCache();
   SwitchDrawingCacheParticles();
 
-#if !ADD_IF_NOT_CONTAINED
   OptimizeCache(*to_redraw_now);
-#endif
 
   sky.Draw(redraw_all);
 }

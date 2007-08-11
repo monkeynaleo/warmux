@@ -112,16 +112,16 @@ public:
    void EnableDisplay(bool _display);
    void Show();
    void Hide();
-   bool IsVisible() const;
+   bool IsVisible() const { return display; };
 
-   int GetWidth() const;
+   int GetWidth() const { return game_menu.GetWidth(); };
    int GetHeight() const;
    int GetMenuHeight() const;
    Point2i GetSize() const;
 
-   void SetCurrentOverflyWeapon(Weapon * weapon);
+   void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; };
    void UpdateTimer(uint utimer);
-   void UpdateWindIndicator(int wind_value);
+   void UpdateWindIndicator(int wind_value) { wind_bar.UpdateValue(wind_value); };
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
 };
 

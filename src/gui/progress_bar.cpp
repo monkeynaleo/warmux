@@ -35,18 +35,6 @@ ProgressBar::ProgressBar(){
    m_use_ref_val = false;
 }
 
-void ProgressBar::SetBorderColor(const Color& color){
-   border_color = color;
-}
-
-void ProgressBar::SetBackgroundColor(const Color& color){
-   background_color = color;
-}
-
-void ProgressBar::SetValueColor(const Color& color){
-   value_color = color;
-}
-
 void ProgressBar::InitPos (uint px, uint py, uint plarg, uint phaut){
   ASSERT (3 <= plarg);
   ASSERT (3 <= phaut);
@@ -89,10 +77,6 @@ uint ProgressBar::CalculeValBarre (long val) const{
     return ( CalculeVal(val) -min)*(larg-2)/(max-min);
   else
     return ( CalculeVal(val) -min)*(haut-2)/(max-min);
-}
-
-void ProgressBar::Draw() const{
-  DrawXY( Point2i(x, y) );
 }
 
 // TODO pass a Surface as parameter
@@ -165,10 +149,6 @@ ProgressBar::marqueur_it ProgressBar::AddTag (long val, const Color& color){
   marqueur.push_back (m);
 
   return --marqueur.end();
-}
-
-void ProgressBar::ResetTag(){
-  marqueur.clear();
 }
 
 void ProgressBar::SetReferenceValue (bool use, long value){

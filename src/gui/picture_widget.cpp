@@ -89,13 +89,3 @@ void PictureWidget::Draw(const Point2i &/*mousePosition*/,
     }
   }
 }
-
-void PictureWidget::SetSizePosition(const Rectanglei &rect)
-{
-  StdSetSizePosition(rect);
-}
-
-void PictureWidget::Disable()
-{
-  disabled = true;
-}

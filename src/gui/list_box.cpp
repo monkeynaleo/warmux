@@ -41,11 +41,6 @@ const std::string& ListBoxItem::GetLabel() const
   return txt_label->GetText();
 }
 
-const std::string& ListBoxItem::GetValue() const
-{
-  return value;
-}
-
 ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b):
   Widget(rect),
   always_one_selected(always_one_selected_b),
@@ -154,26 +149,6 @@ Widget* ListBox::Click(const Point2i &mousePosition, uint button)
   return this;
 }
 
-void ListBox::SetBorderColor(const Color & border)
-{
-  border_color = border;
-}
-
-void ListBox::SetBackgroundColor(const Color & background)
-{
-  background_color = background;
-}
-
-void ListBox::SetSelectedItemColor(const Color & selected_color)
-{
-  selected_item_color = selected_color;
-}
-
-void ListBox::SetDefaultItemColor(const Color & default_item)
-{
-  default_item_color = default_item;
-}
-
 void ListBox::Update(const Point2i &mousePosition,
                      const Point2i &lastMousePosition,
                      Surface& surf)
@@ -201,7 +176,6 @@ void ListBox::Update(const Point2i &mousePosition,
       Draw(mousePosition, surf);
     }
   need_redrawing = false;
-
 }
 
 void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
@@ -348,11 +322,6 @@ void ListBox::Deselect ()
   selected_item = -1;
 }
 
-int ListBox::GetSelectedItem () const
-{
-  return selected_item;
-}
-
 const std::string& ListBox::ReadLabel () const
 {
   ASSERT (selected_item != -1);
@@ -376,9 +345,4 @@ const std::string& ListBox::ReadValue (int index) const
 {
   ASSERT (index != -1 && index < (int)m_items.size());
   return m_items.at(index)->GetValue();
-}
-
-uint ListBox::Size() const
-{
-  return m_items.size();
 }

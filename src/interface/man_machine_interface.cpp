@@ -42,28 +42,10 @@
 
 #define SCROLL_KEYBOARD 20 // pixel
 
-ManMachineInterface::ManMachineInterface()
-{
-  SetDefaultConfig();
-}
-
-ManMachineInterface::~ManMachineInterface()
-{
-}
-
-void ManMachineInterface::SetDefaultConfig()
-{
-}
-
 void ManMachineInterface::Reset()
 {
   for (int i = 0; i != 256; i++)
     PressedKeys[i] = false ;
-}
-
-void ManMachineInterface::RegisterEvent(uint8 event_type)
-{
-  registred_event.push_back(event_type);
 }
 
 bool ManMachineInterface::IsRegistredEvent(uint8 event_type)
@@ -74,11 +56,6 @@ bool ManMachineInterface::IsRegistredEvent(uint8 event_type)
       return true;
   }
   return false;
-}
-
-void ManMachineInterface::SetKeyAction(int key, Key_t at)
-{
-  layout[key] = at;
 }
 
 // Get the key associated to an action.

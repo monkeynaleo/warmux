@@ -541,7 +541,7 @@ void Action_Network_SyncEnd (Action */*a*/)
 }
 
 // Nothing to do here. Just for time synchronisation
-void Action_Network_Ping(Action */*a*/)
+static void Action_Network_Ping(Action */*a*/)
 {
 }
 

@@ -150,15 +150,6 @@ void WidgetList::SetFocusOnPreviousWidget()
   keyboard_selection->Select();
 }
 
-Widget * WidgetList::GetCurrentSelectedWidget() const
-{
-  return keyboard_selection;
-}
-
-void WidgetList::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
-{
-}
-
 void WidgetList::Redraw(const Rectanglei& rect, Surface& surf)
 {
   // Redraw bottom layer

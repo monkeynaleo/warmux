@@ -117,16 +117,6 @@ Widget* SpinButton::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* SpinButton::Click(const Point2i &/*mousePosition*/, uint /*button*/)
-{
-  return NULL;
-}
-
-int SpinButton::GetValue() const
-{
-  return m_value;
-}
-
 void SpinButton::SetValue(int value)
 {
   m_value = BorneLong(value, m_min_value, m_max_value);

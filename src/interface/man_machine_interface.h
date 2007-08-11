@@ -65,20 +65,20 @@ protected:
     Y_AXIS_MOTION
   } Key_Event_t;
 
-  ManMachineInterface();
-  virtual ~ManMachineInterface();
-  virtual void SetDefaultConfig();
+  ManMachineInterface() { SetDefaultConfig(); };
+  virtual ~ManMachineInterface() { };
+  virtual void SetDefaultConfig() { };
   std::map<int, Key_t> layout;
   std::list<uint8> registred_event;
   bool PressedKeys[256]; // stupid default value
   bool MoveCamera(const Key_t &key) const;
 
-  void RegisterEvent(uint8 event_type);
+  void RegisterEvent(uint8 event_type) { registred_event.push_back(event_type); };
   bool IsRegistredEvent(uint8 event_type);
   void HandleKeyPressed(const Key_t &action_key);
   void HandleKeyReleased(const Key_t &action_key);
 
-  void SetKeyAction(int key, Key_t at);
+  void SetKeyAction(int key, Key_t at) { layout[key] = at; };
 
 public:
   virtual void HandleKeyEvent(const SDL_Event& event) = 0;

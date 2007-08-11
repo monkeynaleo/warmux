@@ -43,7 +43,7 @@ public:
               const Color& color = white_color);
 
   const std::string& GetLabel() const;
-  const std::string& GetValue() const;
+  const std::string& GetValue() const { return value; };
 };
 
 class ListBox : public Widget
@@ -74,10 +74,10 @@ protected:
   Color default_item_color;
 
 public:
-  void SetBorderColor(const Color & border);
-  void SetBackgroundColor(const Color & background);
-  void SetSelectedItemColor(const Color & selected_item);
-  void SetDefaultItemColor(const Color & default_item);
+  void SetBorderColor(const Color & border) { border_color = border; };
+  void SetBackgroundColor(const Color & background) { background_color = background; };
+  void SetSelectedItemColor(const Color & selected_item) { selected_item_color = selected_item; };
+  void SetDefaultItemColor(const Color & default_item) { default_item_color = default_item; };
 
   ListBox (const Rectanglei &rect, bool always_one_selected_b = true);
   ~ListBox();
@@ -102,7 +102,7 @@ public:
 
   void Select(uint index);
   void Select(const std::string& val);
-  int GetSelectedItem() const;
+  int GetSelectedItem() const { return selected_item; };
   void Deselect();
   void RemoveSelected();
   const std::string& ReadLabel() const;
@@ -110,7 +110,7 @@ public:
   const int ReadIntValue() const;
   const std::string& ReadValue(int index) const;
 
-  uint Size() const;
+  uint Size() const { return m_items.size(); };
 };
 
 #endif

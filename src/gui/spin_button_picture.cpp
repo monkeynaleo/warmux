@@ -152,16 +152,6 @@ Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button
   return NULL;
 }
 
-Widget* SpinButtonWithPicture::Click(const Point2i &/*mousePosition*/, uint /*button*/)
-{
-  return NULL;
-}
-
-int SpinButtonWithPicture::GetValue() const
-{
-  return m_value;
-}
-
 void SpinButtonWithPicture::SetValue(int value)
 {
   m_value = BorneLong(value, m_min_value, m_max_value);
