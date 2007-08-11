@@ -54,6 +54,7 @@ ObjBox::ObjBox(const std::string &name)
   life_points = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
+  SetCollisionModel(false, false, true);
   std::cout<<"super called"<<std::endl;
 }
 
