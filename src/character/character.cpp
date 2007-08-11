@@ -114,6 +114,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   previous_strength(0),
   body(NULL)
 {
+  m_is_character = true;
   SetCollisionModel(false, true, true);
   /* body stuff */
   ASSERT(char_body);
