@@ -468,7 +468,7 @@ void PhysicalObj::UpdatePosition ()
   // Classical object sometimes sinks in water and sometimes goes out of water!
   if ( !m_goes_through_wall )
     {
-      if ( IsInWater() && m_alive != DROWNED ) Drown();
+      if ( IsInWater() && m_alive != DROWNED && m_alive != DEAD) Drown();
       else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
     }
 
