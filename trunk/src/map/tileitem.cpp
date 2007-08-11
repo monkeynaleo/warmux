@@ -215,10 +215,6 @@ void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned
   }
 }
 
-Surface TileItem_AlphaSoftware::GetSurface(){
-    return m_surface;
-}
-
 #ifdef DBG_TILE
 void TileItem_AlphaSoftware::FillWithRGB(Uint8 r, Uint8 g, Uint8 b)
 {

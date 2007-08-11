@@ -96,64 +96,6 @@ bool InfoMap::LoadBasicInfo()
   return true;
 }
 
-const std::string& InfoMap::GetRawName() const
-{
-  return m_map_name;
-}
-
-const std::string& InfoMap::ReadFullMapName()
-{
-  LoadBasicInfo();
-  return name;
-}
-
-const std::string& InfoMap::ReadAuthorInfo()
-{
-  LoadBasicInfo();
-  return author_info;
-}
-
-const std::string& InfoMap::ReadMusicPlaylist()
-{
-  LoadBasicInfo();
-  return music_playlist;
-}
-
-const Surface& InfoMap::ReadPreview()
-{
-  LoadBasicInfo();
-  return preview;
-}
-
-uint InfoMap::GetNbBarrel()
-{
-  LoadBasicInfo();
-  return nb_barrel;
-}
-
-uint InfoMap::GetNbMine()
-{
-  LoadBasicInfo();
-  return nb_mine;
-}
-
-const Profile * const InfoMap::ResProfile() const
-{
-  return res_profile;
-}
-
-bool InfoMap::IsOpened()
-{
-  LoadBasicInfo();
-  return is_opened;
-}
-
-bool InfoMap::UseWater()
-{
-  LoadBasicInfo();
-  return use_water;
-}
-
 bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
 {
   XmlReader::ReadBool(xml, "random", random);

@@ -86,21 +86,21 @@ public:
   bool LoadBasicInfo();
   void FreeData();
 
-  const std::string& GetRawName() const;
-  const std::string& ReadFullMapName();
-  const std::string& ReadAuthorInfo();
-  const std::string& ReadMusicPlaylist();
+  const std::string& GetRawName() const { return m_map_name; };
+  const std::string& ReadFullMapName() { LoadBasicInfo(); return name; };
+  const std::string& ReadAuthorInfo() { LoadBasicInfo(); return author_info; };
+  const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; };
 
   Surface ReadImgGround();
   Surface ReadImgSky();
-  const Surface& ReadPreview();
+  const Surface& ReadPreview() { LoadBasicInfo(); return preview; };
 
-  uint GetNbBarrel();
-  uint GetNbMine();
-  const Profile * const ResProfile() const;
+  uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; };
+  uint GetNbMine() { LoadBasicInfo(); return nb_mine; };
+  const Profile * const ResProfile() const { return res_profile; };
 
-  bool IsOpened();
-  bool UseWater();
+  bool IsOpened() { LoadBasicInfo(); return is_opened; };
+  bool UseWater() { LoadBasicInfo(); return use_water; };
 
 };
 
@@ -132,6 +132,6 @@ public:
 
 InfoMap& ActiveMap();
 
-bool compareMaps(const InfoMap& a, const InfoMap& b) ;
+bool compareMaps(const InfoMap& a, const InfoMap& b);
 
 #endif

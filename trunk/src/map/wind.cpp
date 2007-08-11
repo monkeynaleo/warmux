@@ -38,7 +38,6 @@
 #include "gui/progress_bar.h"
 
 const uint MAX_WIND_OBJECTS = 200;
-const double force = 5; // Max wind strength in m/(sec*sec)
 const uint bar_speed = 20;
 
 Wind wind;
@@ -173,15 +172,6 @@ void WindParticle::Draw()
 
 //---------------------------------------------------
 
-Wind::Wind(){
-  m_val = m_nv_val = 0;
-}
-
-Wind::~Wind()
-{
-  RemoveAllParticles();
-}
-
 void Wind::RemoveAllParticles()
 {
   iterator it=particles.begin(), end=particles.end();
@@ -215,17 +205,9 @@ void Wind::Reset(){
   RandomizeParticlesPos();
 }
 
-double Wind::GetStrength() const{
-  return m_nv_val * force / 100.0;
-}
-
 void Wind::ChooseRandomVal() const{
   int val = randomObj.GetLong(-100, 100);
   ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_WIND, val));
-}
-
-void Wind::SetVal(long val){
-  m_nv_val = val;
 }
 
 void Wind::DrawParticles(){

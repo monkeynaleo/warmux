@@ -70,13 +70,13 @@ protected:
   void InitTile(const Point2i &pSize);
 
   void FreeMem();
-  Point2i Clamp(const Point2i &v) const;
+  Point2i Clamp(const Point2i &v) const { return v.clamp(Point2i(0, 0), nbCells - 1); };
 
-  // Dimension du terrain
+  // Ground dimensions
   Point2i nbCells;
   unsigned int nbr_cell;
 
-  // Canvas donnant acc� aux cellules
+  // Canvas giving access to tiles
   std::vector<TileItem *> item;
 };
 
