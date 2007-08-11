@@ -215,6 +215,7 @@ void Network::DisconnectNetwork()
 typedef int SOCKET;
 # define SOCKET_PARAM    void
 # define SOCKET_ERROR    (-1)
+# define INVALID_SOCKET  (-1)
 # define closesocket(fd) close(fd)
 #endif
 
@@ -228,7 +229,7 @@ const Network::connection_state_t Network::CheckHost(const std::string &host, in
     return Network::CONN_BAD_HOST;
 
   SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
-  if( fd == -1 )
+  if( fd == INVALID_SOCKET )
     return Network::CONN_BAD_SOCKET;
 
   // Set the timeout
