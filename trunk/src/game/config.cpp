@@ -120,7 +120,18 @@ Config::Config():
   personal_dir = GetHome() + "\\Wormux\\";
 #endif
   LoadDefaultValue();
-  DoLoading();
+
+  // Load personal config
+  std::string dir;
+  if (!DoLoading())
+  {
+    // Failed, still try to apply default config then
+    dir = TranslateDirectory(locale_dir);
+    I18N_SetDir (dir + PATH_SEPARATOR);
+  }
+
+  dir = TranslateDirectory(data_dir);
+  resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
 
 void Config::SetLanguage(const std::string language)
@@ -129,9 +140,6 @@ void Config::SetLanguage(const std::string language)
   InitI18N(locale_dir.c_str(), language.c_str());
   std::string dir = TranslateDirectory(locale_dir);
   I18N_SetDir(dir + PATH_SEPARATOR);
-
-  dir = TranslateDirectory(data_dir);
-  resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
 
 /*
