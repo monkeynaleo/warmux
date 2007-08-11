@@ -88,7 +88,7 @@ class WeaponsMenu
   void Show();
   void Hide();
   void Reset();
-  void SetHelp(const std::ostringstream& msg) const { };
+  void SetHelp(const std::ostringstream&) const { };
   bool IsDisplayed() const { return show; };
   bool ActionClic(const Point2i &mouse_pos);
   Sprite * GetInfiniteSymbol() const;
