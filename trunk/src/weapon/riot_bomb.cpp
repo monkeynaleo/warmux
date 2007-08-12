@@ -36,13 +36,14 @@
 // Roquette du bazooka
 class RiotBombRocket : public WeaponProjectile
 {
+  ParticleEngine smoke_engine;
 public:
   RiotBombRocket(ExplosiveWeaponConfig& cfg,
                    WeaponLauncher * p_launcher);
   void Refresh();
 protected:
   void SignalOutOfMap();
-  void DoExplosion();
+  void SignalDrowning();
 };
 
 RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
@@ -55,7 +56,16 @@ RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
 void RiotBombRocket::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_rad(GetSpeedAngle());
+  if(!IsDrowned())
+  {
+    image->SetRotation_rad(GetSpeedAngle());
+    smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
+                                     GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+  }
+  else
+  {
+    image->SetRotation_rad(M_PI_2);
+  }
 }
 
 void RiotBombRocket::SignalOutOfMap()
@@ -64,10 +74,10 @@ void RiotBombRocket::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-void RiotBombRocket::DoExplosion()
+void RiotBombRocket::SignalDrowning()
 {
-  Point2i pos = GetCenter();
-  ApplyExplosion (pos, cfg, "weapon/riot_bomb_exp", false, ParticleEngine::LittleESmoke);
+  smoke_engine.Stop();
+  WeaponProjectile::SignalDrowning();
 }
 //-----------------------------------------------------------------------------
 
@@ -75,6 +85,7 @@ RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
 {
   m_name = _("Riot Bomb");
+  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
   m_category = HEAVY;
   ReloadLauncher();
 }
