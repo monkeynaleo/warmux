@@ -100,7 +100,7 @@ OptionMenu::OptionMenu() :
 
   /* Language selection */
   Box * language_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
-  language_options->AddWidget(new PictureWidget(Rectanglei(0, 0, 40, 136), "menu/language_label"));
+  language_options->AddWidget(new PictureWidget(Rectanglei(0, 0, 40, 136), "menu/config_label"));
   widgets.AddWidget(language_options);
   lbox_languages = new ListBoxWithLabel(_("Language"), stdRect);
   language_options->AddWidget(lbox_languages);
