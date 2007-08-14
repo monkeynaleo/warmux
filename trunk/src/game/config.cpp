@@ -137,7 +137,7 @@ Config::Config():
 void Config::SetLanguage(const std::string language)
 {
   default_language = language;
-  InitI18N(locale_dir.c_str(), language.c_str());
+  InitI18N(locale_dir, language);
   std::string dir = TranslateDirectory(locale_dir);
   I18N_SetDir(dir + PATH_SEPARATOR);
 }
