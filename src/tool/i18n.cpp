@@ -26,7 +26,11 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "debug.h"
-#include "config.h"
+#ifdef _MSC_VER
+#  include "msvc/config.h"
+#else
+#  include "config.h"
+#endif
 #include "game/config.h"
 
 // Package is defined by autotools
@@ -68,8 +72,8 @@ std::string Format(const char *format, ...)
 
 void I18N_SetDir(const std::string &dir)
 {
-  bindtextdomain(GETTEXT_DOMAIN, dir.c_str());
-  bind_textdomain_codeset(GETTEXT_DOMAIN, "UTF-8");
+  printf("o Bind text domain to: %s\n", bindtextdomain(GETTEXT_DOMAIN, dir.c_str()));
+  printf("o Codeset: %s\n", bind_textdomain_codeset(GETTEXT_DOMAIN, "UTF-8"));
 }
 
 void InitI18N(const std::string &dir, const std::string &default_language)
@@ -83,5 +87,5 @@ void InitI18N(const std::string &dir, const std::string &default_language)
   setenv("LANGUAGE", default_language.c_str(), 1);
 #endif
   I18N_SetDir(dir);
-  textdomain(GETTEXT_DOMAIN);
+  printf("o Text domain: %s\n", textdomain(GETTEXT_DOMAIN));
 }
