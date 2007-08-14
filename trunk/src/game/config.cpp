@@ -49,6 +49,32 @@
 #  include "include/binreloc.h"
 #endif
 
+#ifdef _WIN32
+#include <windows.h>
+
+// Under windows, binary may be relocated
+static std::string GetWormuxPath()
+{
+  char  buffer[MAX_PATH];
+  DWORD size = MAX_PATH;
+#if 0
+  HKEY  hK;
+  DWORD type;
+
+  buffer[0] = 0;
+  if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "SOFTWARE\\Games\\Wormux", 0, KEY_READ, &hK) != ERROR_SUCCESS ||
+      RegQueryValueEx(hK, "Path", NULL, &type, buffer, &size) != ERROR_SUCCESS && type != REG_SZ)
+#endif
+  {
+    size = GetModuleFileName(NULL, buffer, MAX_PATH);
+    if (size<1) return std::string("");
+    char *ptr = strrchr(buffer, '\\');
+    if (ptr) ptr[0] = 0; // Mask name
+    else     return std::string("");
+  }
+  return std::string(buffer);
+}
+#endif
 
 const std::string FILENAME="config.xml";
 Config * Config::singleton = NULL;
@@ -109,9 +135,16 @@ Config::Config():
   filename     = data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf";
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
 #else
+#  ifdef _WIN32
+  std::string basepath = GetWormuxPath();
+  data_dir     = basepath + "\\data";
+  locale_dir   = basepath + "\\locale";
+  ttf_filename     = basepath + "\\data\\font\\DejaVuSans.ttf";
+#  else
   data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
+#  endif
 #endif
 
 #ifndef WIN32
@@ -126,8 +159,7 @@ Config::Config():
   if (!DoLoading())
   {
     // Failed, still try to apply default config then
-    dir = TranslateDirectory(locale_dir);
-    I18N_SetDir (dir + PATH_SEPARATOR);
+    I18N_SetDir (TranslateDirectory(locale_dir));
   }
 
   dir = TranslateDirectory(data_dir);
@@ -138,8 +170,7 @@ void Config::SetLanguage(const std::string language)
 {
   default_language = language;
   InitI18N(locale_dir, language);
-  std::string dir = TranslateDirectory(locale_dir);
-  I18N_SetDir(dir + PATH_SEPARATOR);
+  I18N_SetDir(TranslateDirectory(locale_dir));
 }
 
 /*
