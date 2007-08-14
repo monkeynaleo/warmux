@@ -50,6 +50,7 @@
   <surface name="display_wind_particles" file="menu/display_wind_particles.png" />
   <surface name="fullscreen" file="menu/fullscreen.png" />
   <surface name="scroll_on_border" file="menu/scroll_on_border.png" />  
+  <surface name="fps" file="menu/fps.png"/>
 
   <!-- Game mode options -->
 

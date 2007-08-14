@@ -34,7 +34,7 @@
 #include "gui/check_box.h"
 #include "gui/picture_widget.h"
 #include "gui/picture_text_cbox.h"
-#include "gui/spin_button_big.h"
+#include "gui/spin_button_picture.h"
 #include "gui/list_box_w_label.h"
 
 #include "map/maps_list.h"
@@ -84,10 +84,12 @@ OptionMenu::OptionMenu() :
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdRect);
   bottom_graphic_options->AddWidget(full_screen);
 
-  opt_max_fps = new SpinButtonBig(_("Maximum FPS"), stdRect,
-                                  50, 5,
-                                  20, 50);
+  opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
+                                                stdRect,
+                                                50, 5,
+                                                20, 50);
   bottom_graphic_options->AddWidget(opt_max_fps);
+
 
   lbox_video_mode = new ListBoxWithLabel(_("Resolution"), stdRect);
   bottom_graphic_options->AddWidget(lbox_video_mode);
