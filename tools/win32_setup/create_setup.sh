@@ -125,7 +125,7 @@ LangString DESC_Wormux  "Slovenian" "Wormux ${WORMUX_VERSION}"
 InstallDir "\$PROGRAMFILES\Wormux"
 ; Registry key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
-InstallDirRegKey HKLM ${HKLM_PATH} "pth"
+InstallDirRegKey HKLM ${HKLM_PATH} "Path"
 
 AutoCloseWindow false
 
@@ -197,7 +197,7 @@ EOF
 cat >> $NSIS <<EOF
 
   ; Write the installation path into the registry
-  WriteRegStr HKLM ${HKLM_PATH} "pth" "\$INSTDIR"
+  WriteRegStr HKLM ${HKLM_PATH} "Path" "\$INSTDIR"
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "DisplayName" "Wormux (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "UninstallString" '"\$INSTDIR\uninstall.exe"'
