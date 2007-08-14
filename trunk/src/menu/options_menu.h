@@ -26,7 +26,7 @@
 
 class ListBox;
 class CheckBox;
-class SpinButtonBig;
+class SpinButtonWithPicture;
 
 class OptionMenu : public Menu
 {
@@ -48,7 +48,7 @@ private:
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
    CheckBox *full_screen;
-   SpinButtonBig *opt_max_fps;
+   SpinButtonWithPicture *opt_max_fps;
 
    /* Sound options controllers */
    ListBox *lbox_sound_freq;
