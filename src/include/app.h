@@ -46,6 +46,7 @@ private:
   AppWormux();
 
 public:
+  void RefreshDisplay();
   static AppWormux * GetInstance();
   ~AppWormux();
 
