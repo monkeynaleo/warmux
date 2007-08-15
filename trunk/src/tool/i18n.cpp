@@ -33,9 +33,6 @@
 #endif
 #include "game/config.h"
 
-// Package is defined by autotools
-#define GETTEXT_DOMAIN PACKAGE
-
 std::string Format(const char *format, ...)
 {
   const int bufferSize = 256;
@@ -72,8 +69,10 @@ std::string Format(const char *format, ...)
 
 void I18N_SetDir(const std::string &dir)
 {
-  printf("o Bind text domain to: %s\n", bindtextdomain(GETTEXT_DOMAIN, dir.c_str()));
-  printf("o Codeset: %s\n", bind_textdomain_codeset(GETTEXT_DOMAIN, "UTF-8"));
+  printf("o Bind text domain to: %s\n"
+         "o Codeset: %s\n"
+         "o Text domain: %s\n",
+         bindtextdomain(PACKAGE, dir.c_str()), bind_textdomain_codeset(PACKAGE, "UTF-8"), textdomain(PACKAGE));
 }
 
 void InitI18N(const std::string &dir, const std::string &default_language)
@@ -87,5 +86,4 @@ void InitI18N(const std::string &dir, const std::string &default_language)
   setenv("LANGUAGE", default_language.c_str(), 1);
 #endif
   I18N_SetDir(dir);
-  printf("o Text domain: %s\n", textdomain(GETTEXT_DOMAIN));
 }
