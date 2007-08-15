@@ -37,7 +37,6 @@ class Video{
 
   void SetWindowIcon(const std::string& icon) const;
   void InitSDL(void);
-  void GameFullRefreshDrawing() const;
 
 public:
   Surface window;

@@ -35,6 +35,7 @@ using namespace std;
 
 #include <SDL.h>
 #include "game/config.h"
+#include "game/game.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "graphic/font.h"
@@ -42,6 +43,7 @@ using namespace std;
 #include "graphic/text.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
+#include "map/map.h"
 #include "map/maps_list.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
@@ -60,6 +62,7 @@ using namespace std;
 
 
 static menu_item choice = menuNULL;
+static Menu *menu = NULL;
 static bool skip_menu = false;
 static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
 
@@ -98,6 +101,7 @@ int AppWormux::Main(int argc, char *argv[])
         MainMenu main_menu;
 
         if (choice == menuNULL) {
+          menu = &main_menu;
           StatStart("Main:Menu");
           choice = main_menu.Run();
           StatStop("Main:Menu");
@@ -110,12 +114,14 @@ int AppWormux::Main(int argc, char *argv[])
           case menuPLAY:
             {
               GameMenu game_menu;
+              menu = &game_menu;
               game_menu.Run(skip_menu);
               break;
             }
           case menuNETWORK:
             {
               NetworkConnectionMenu network_connection_menu;
+              menu = &network_connection_menu;
               network_connection_menu.SetAction(net_action);
               network_connection_menu.Run(skip_menu);
               break;
@@ -123,12 +129,14 @@ int AppWormux::Main(int argc, char *argv[])
           case menuOPTIONS:
             {
               OptionMenu options_menu;
+              menu = &options_menu;
               options_menu.Run();
               break;
             }
           case menuCREDITS:
             {
               CreditsMenu credits_menu;
+              menu = &credits_menu;
               credits_menu.Run();
               break;
             }
@@ -137,6 +145,7 @@ int AppWormux::Main(int argc, char *argv[])
           default:
             break;
           }
+        menu = NULL;
         choice = menuNULL;
         skip_menu = false;
         net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
@@ -276,6 +285,17 @@ void AppWormux::DisplayLoadingPicture()
                    + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_NORMAL)).GetHeight() + 20));
 
   video->window.Flip();
+}
+
+void AppWormux::RefreshDisplay()
+{
+  if (Game::GetInstance()->IsGameLaunched()) {
+    world.DrawSky(true);
+    world.Draw(true);
+  }
+  else if (menu) {
+    menu->RedrawMenu();
+  }
 }
 
 void AppWormux::InitFonts() const
