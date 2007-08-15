@@ -40,14 +40,22 @@ Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
   int type = (int)ftype;
 
   if (FONT_ARRAY[ftype] == NULL) {
-    // Load the font in the different styles
-    FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
-    FONT_ARRAY_BOLD[type]->SetBold();
+    try {
+      // Load the font in the different styles
+      FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
+      FONT_ARRAY_BOLD[type]->SetBold();
 
-    FONT_ARRAY_ITALIC[type] = new Font(FONT_SIZE[type]);
-    FONT_ARRAY_ITALIC[type]->SetItalic();
+      FONT_ARRAY_ITALIC[type] = new Font(FONT_SIZE[type]);
+      FONT_ARRAY_ITALIC[type]->SetItalic();
 
-    FONT_ARRAY[type] = new Font(FONT_SIZE[type]);
+      FONT_ARRAY[type] = new Font(FONT_SIZE[type]);
+    }
+
+    catch (const std::string e)
+    {
+      std::cerr << e << std::endl;
+      exit(-1);
+    }
   }
 
   switch(fstyle) {
@@ -68,9 +76,17 @@ Font::Font(int size):
   surface_text_table(),
   m_font(NULL)
 {
-  bool ok = Load(Config::GetInstance()->GetTtfFilename(), size);
-  if( !ok )
-    Error("Error during initialisation of a font!");
+  const std::string filename = Config::GetInstance()->GetTtfFilename();
+
+  if (IsFileExist(filename))
+    {
+      m_font = TTF_OpenFont(filename.c_str(), size);
+
+      if (!m_font)
+       throw "Error: Font " + filename + " can't be found!\n";
+    }
+
+  TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
 }
 
 Font::~Font(){
@@ -87,24 +103,6 @@ Font::~Font(){
     //SDL_FreeSurface(it->second);
     surface_text_table.erase(it->first);
   }
-}
-
-bool Font::Load (const std::string& filename, int size) {
-  bool ok = false;
-
-  if( IsFileExist(filename) ){
-    m_font = TTF_OpenFont(filename.c_str(), size);
-    ok = (m_font != NULL);
-  }
-
-  if( !ok ){
-    std::cout << "Error: Font " << filename << " can't be found!" << std::endl;
-    return false;
-  }
-
-  TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
-
-  return true;
 }
 
 void Font::SetBold()

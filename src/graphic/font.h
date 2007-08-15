@@ -52,7 +52,6 @@ private:
   void Write(const Point2i &pos, const Surface &surface) const;
 
   Font(int size);
-  bool Load (const std::string& filename, int size);
 
 public:
   // Size
