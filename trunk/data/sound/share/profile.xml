@@ -24,7 +24,8 @@
   <sound sample="weapon/load" file="../../weapon/sound/load.ogg" />
   <sound sample="weapon/explosion" file="explosion.ogg" />
   <sound sample="weapon/m16" file="../../weapon/sound/m16.ogg" />
-  <sound sample="weapon/airhammer" file="../../weapon/sound/airhammer.ogg" />
+  <sound sample="weapon/airhammer" file="../../weapon/sound/airhammer_used.ogg" />
+  <sound sample="weapon/airhammer_select" file="../../weapon/sound/airhammer_selected.ogg" />
   <sound sample="weapon/anvil_fall" file="../../weapon/sound/anvil_fall.ogg" />
   <sound sample="weapon/anvil_collision" file="../../weapon/sound/anvil_collision.ogg" />
   <sound sample="weapon/supertux_flying" file="../../weapon/sound/supertux_flying.ogg" />

@@ -36,9 +36,11 @@ class Airhammer : public Weapon
   private:
     Surface impact;
     void RepeatShoot();
+    SoundSample drill_sound;
 
   protected:
-    void p_Deselect() { };
+    void p_Select();
+    void p_Deselect();
     bool p_Shoot();
     void Refresh() { };
 
@@ -50,6 +52,7 @@ class Airhammer : public Weapon
     void HandleKeyPressed_Shoot(bool shift) { HandleKeyRefreshed_Shoot(shift); };
     void HandleKeyRefreshed_Shoot(bool shift);
     void HandleKeyReleased_Shoot(bool) { NewActionWeaponStopUse(); };
+    void SignalTurnEnd() { p_Deselect(); };
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 
