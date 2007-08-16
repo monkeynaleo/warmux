@@ -72,7 +72,10 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfi
 
 bool Airhammer::p_Shoot()
 {
-  jukebox.Play("share","weapon/airhammer");
+  //if the sound isn't already playing, play it again.
+   if(!drill_sound.IsPlaying()) {
+    drill_sound.Play("share","weapon/airhammer", -1);
+  }
 
   // initiate movement ;-)
   ActiveCharacter().SetRebounding(false);
@@ -140,8 +143,13 @@ void Airhammer::ActionStopUse()
 {
   ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
   GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+  p_Deselect();
 }
 
+void Airhammer::p_Deselect()
+{
+  drill_sound.Stop();
+}
 
 //-----------------------------------------------------------------------------
 
@@ -157,12 +165,16 @@ bool Airhammer::IsInUse() const
   return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }
 
+void Airhammer::p_Select()
+{
+  jukebox.Play("share","weapon/airhammer_select");
+}
 
 std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
-            "%s team has won %u airhammer! Don't make too much noise with it, thanks for your neighbours.",
-            "%s team has won %u airhammers! Don't make too much noise with them, thanks for your neighbours.",
+            "%s team has won %u airhammer! Don't make too much noise with it! Thanks, your neighbours.",
+            "%s team has won %u airhammers! Don't make too much noise with them! Thanks, your neighbours.",
             items_count), TeamName, items_count);
 }
 
