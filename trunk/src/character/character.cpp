@@ -534,6 +534,9 @@ void Character::Refresh()
   if (IsGhost()) return;
 
   UpdatePosition ();
+
+  if (IsDead()) return;
+
   Time * global_time = Time::GetInstance();
 
   if(IsDiseased())
