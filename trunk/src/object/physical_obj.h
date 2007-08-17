@@ -91,33 +91,39 @@ public:
   //-------- Set position and size -------
 
   // Set/Get position
-  void SetX (int x);
-  void SetY (int y);
+  void SetX (int x) { SetXY( Point2i(x, GetY()) ); };
+  void SetY (int y) { SetXY( Point2i(GetX(), y) ); };
   void SetXY(const Point2i &position);
   void SetXY(const Point2d &position);
   int GetX() const;
   int GetY() const;
-  const Point2i GetPosition() const;
+  const Point2i GetPosition() const { return Point2i(GetX(), GetY()); };
 
   // Set/Get size
   void SetSize(const Point2i &newSize);
-  int GetWidth() const;
-  int GetHeight() const;
-  Point2i GetSize() const;
+  int GetWidth() const { return m_width; };
+  int GetHeight() const { return m_height; };
+  Point2i GetSize() const { return Point2i(m_width, m_height); };
 
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
-  const Rectanglei GetTestRect() const;
-  int GetTestWidth() const;
-  int GetTestHeight() const;
+  const Rectanglei GetTestRect() const
+  {
+    return Rectanglei(GetX()+m_test_left,
+                      GetY()+m_test_top,
+                      m_width-m_test_right-m_test_left,
+                      m_height-m_test_bottom-m_test_top);
+  }
+  int GetTestWidth() const { return m_width -m_test_left -m_test_right; };
+  int GetTestHeight() const { return m_height -m_test_top -m_test_bottom; };
 
   //----------- Access to datas (read only) ----------
   virtual const std::string &GetName() const { return m_name; }
   const std::string &GetUniqueId() const { return m_unique_id; }
-  int GetCenterX() const;
-  int GetCenterY() const;
-  const Point2i GetCenter() const;
-  const Rectanglei GetRect() const;
+  int GetCenterX() const { return GetX() +m_test_left +GetTestWidth()/2; };
+  int GetCenterY() const { return GetY() +m_test_top +GetTestHeight()/2; };
+  const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
+  const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), m_width, m_height); };
   bool GoesThroughWall() const { return m_goes_through_wall; }
 
   //----------- Physics related function ----------
@@ -135,15 +141,17 @@ public:
                          bool collides_with_characters,
                          bool collides_with_objects);
   void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
-  const PhysicalObj* GetOverlappingObject() const;
-  virtual bool IsOverlapping(const PhysicalObj* obj) const;
+  const PhysicalObj* GetOverlappingObject() const { return m_overlapping_object; };
+  virtual bool IsOverlapping(const PhysicalObj* obj) const { return m_overlapping_object == obj; };
 
   bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
-  bool IsInVacuum(const Point2i &offset, bool check_objects = true) const; // Relative to current position
+  // Relative to current position
+  bool IsInVacuum(const Point2i &offset, bool check_objects = true) const { return IsInVacuumXY(GetPosition() + offset, check_objects); };
   PhysicalObj* CollidedObjectXY(const Point2i & position) const;
-  PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const; // Relative to current position
+  // Relative to current position
+  PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const { return CollidedObjectXY(GetPosition() + offset); };
   bool FootsInVacuumXY(const Point2i & position) const;
-  bool FootsInVacuum() const;
+  bool FootsInVacuum() const { return FootsInVacuumXY(GetPosition()); };
 
   bool FootsOnFloor(int y) const;
 
@@ -151,7 +159,8 @@ public:
 
   // The object is outside of the world
   bool IsOutsideWorldXY(const Point2i& position) const;
-  bool IsOutsideWorld(const Point2i &offset = Point2i(0,0)) const; // Relative to current position
+  // Relative to current position
+  bool IsOutsideWorld(const Point2i &offset = Point2i(0,0)) const { return IsOutsideWorldXY( GetPosition() + offset ); };
 
   // Refresh datas
   virtual void Refresh() = 0;
@@ -168,25 +177,25 @@ public:
   void Drown();
   void GoOutOfWater(); // usefull for supertux.
 
-  virtual bool IsImmobile() const;
-  bool IsDead() const;
-  bool IsGhost() const;
-  bool IsDrowned() const;
+  virtual bool IsImmobile() const { return m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST); };
+  bool IsGhost() const { return (m_alive == GHOST); };
+  bool IsDrowned() const { return (m_alive == DROWNED); };
+  bool IsDead() const { return (IsGhost() || IsDrowned() || (m_alive == DEAD)); };
 
   // Are the two object in contact ? (uses test rectangles)
-  bool ObjTouche(const PhysicalObj &b) const;
+  bool ObjTouche(const PhysicalObj &b) const { return GetTestRect().Intersect( b.GetTestRect() ); };
 
   // Do the point p touch the object ?
-  bool ObjTouche(const Point2i &p) const;
+  bool ObjTouche(const Point2i &p) const { return  GetTestRect().Contains( p ); };
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters);
 
 protected:
   virtual void SignalRebound();
-  virtual void SignalObjectCollision(PhysicalObj * obj);
-  virtual void SignalGroundCollision();
-  virtual void SignalCollision();
-  virtual void SignalOutOfMap();
+  virtual void SignalObjectCollision(PhysicalObj *) { };
+  virtual void SignalGroundCollision() { };
+  virtual void SignalCollision() { };
+  virtual void SignalOutOfMap() { };
 
 private:
   //Retrun the position of the point of contact of the obj on the ground

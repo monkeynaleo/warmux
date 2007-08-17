@@ -33,7 +33,7 @@ class PetrolBarrel : public PhysicalObj
     PetrolBarrel();
     ~PetrolBarrel();
     void Draw();
-    void Refresh();
+    void Refresh() { };
   protected:
     void SignalGhostState(bool was_already_dead);
 };

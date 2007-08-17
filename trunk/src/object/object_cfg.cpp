@@ -40,10 +40,6 @@ ObjectConfig::ObjectConfig()
   m_mass = 1.0;
 }
 
-ObjectConfig::~ObjectConfig()
-{
-}
-
 void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &config_file)
 {
   xmlpp::Element* elem = NULL;

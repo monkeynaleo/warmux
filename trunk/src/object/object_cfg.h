@@ -47,7 +47,7 @@ public:
   double m_rebound_factor;
 
   ObjectConfig();
-  virtual ~ObjectConfig();
+  virtual ~ObjectConfig() { };
 
   void LoadXml(const std::string& obj_name, const std::string &config_file);
 };
