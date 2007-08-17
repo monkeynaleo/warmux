@@ -341,9 +341,12 @@ template<class T> class Vector2
       return IsXNull() && IsYNull();
     }
 
+    /** Transform polar coordinate */
+    static Vector2<T> FromPolarCoordinates(double norm, double angle) { return Vector2<T>(norm*cos(angle), norm*sin(angle)); }
+
     /**
      *  Compute the angle of point M in the Cartesian plane
-                 *  centered on O
+     *  centered on O
      *
      * Pour O=(0,0) :
      * - M=(10,10) -> PI/4 (0.78)
@@ -352,32 +355,22 @@ template<class T> class Vector2
      * - M=(10,-10) -> -PI/4 (-0.78)
      * - M=O -> 0
      */
-                double ComputeAngle() const{
-                  double angle;
-
-                  if( !IsZero( x ) )
-                    if( !IsZero( y ) ){
-                      angle = atan(double(y)/double(x));
-                      if( x < 0 )
-                        if( y > 0 )
-                          angle += M_PI;
-                        else
-                          angle -= M_PI;
-                    }
-                    else
-                      if( x > 0)
-                        angle = 0;
-                      else
-                        angle = M_PI;
-                  else
-                    if( y > 0 )
-                      angle = M_PI_2;
-                    else if(y < 0)
-                      angle = -M_PI_2;
-                    else
-                      angle = 0;
-
-                  return angle;
+     double ComputeAngle() const{
+       if( !IsZero( x ) )
+         if( !IsZero( y ) ){
+           double angle = atan(double(y)/double(x));
+           if( x < 0 )
+             if( y > 0 ) return angle + M_PI;
+             else        return angle - M_PI;
+           return angle;
+         }
+         else
+           return (x > 0) ? 0 : M_PI;
+       else if( y > 0 )
+         return M_PI_2;
+       else if(y < 0)
+         return -M_PI_2;
+       return 0;
     }
 
     /**
