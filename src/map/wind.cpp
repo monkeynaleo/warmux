@@ -137,16 +137,16 @@ void WindParticle::Refresh()
   int y = GetY();
 
   if(GetX() > Camera::GetInstance()->GetPositionX() + Camera::GetInstance()->GetSizeX())
-    x = Camera::GetInstance()->GetPositionX() - GetWidth() + 1;
+    x -= Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
 
-  if(GetX() + GetWidth() < Camera::GetInstance()->GetPositionX() )
-    x = Camera::GetInstance()->GetPositionX() + Camera::GetInstance()->GetSizeX() - 1;
+  if(GetX() + (int)sprite->GetWidth() < Camera::GetInstance()->GetPositionX() )
+    x += Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
 
   if(GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY())
-    y = Camera::GetInstance()->GetPositionY() - GetHeight() + 1;
+    y -= Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
 
-  if(GetY() + GetHeight() < Camera::GetInstance()->GetPositionY() )
-    y = Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY() - 1;
+  if(GetY() + (int)sprite->GetHeight() < Camera::GetInstance()->GetPositionY() )
+    y += Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
 
   m_alive = ALIVE;
 
