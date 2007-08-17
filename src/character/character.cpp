@@ -640,7 +640,11 @@ void Character::SignalCollision()
   double norme, degat;
   Point2d speed_vector;
   GameMode * game_mode = GameMode::GetInstance();
-  SetClothe("normal");
+  if(body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID()
+  && body->GetClothe() != "jetpack"
+  && body->GetClothe() != "jetpack-fire"
+  && body->GetClothe() != "helmet")
+    SetClothe("normal");
   SetMovement("walk");
   SetMovementOnce("soft-land");
 
