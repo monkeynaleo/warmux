@@ -77,11 +77,6 @@ void ObjBox::SignalCollision()
   anim->Start();
 }
 
-void ObjBox::SignalDrowning()
-{
-  SignalCollision();
-}
-
 void ObjBox::DropBox()
 {
   if(parachute) {

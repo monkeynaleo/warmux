@@ -60,80 +60,11 @@ Physics::Physics ():
 {
 }
 
-void Physics::ResetConstants()
-{
-  // Load the constants (mass, air_resistance...) into the object
-  *((ObjectConfig*)this) = m_cfg;
-}
-
-Physics::~Physics () {}
-
 //---------------------------------------------------------------------------//
 //--                         Class Parameters SET/GET                      --//
 //---------------------------------------------------------------------------//
 
-// Set / Get positions
-
-void Physics::SetPhysXY(double x, double y)
-{
-  m_pos_x.x0 = x;
-  m_pos_y.x0 = y;
-}
-
-void Physics::SetPhysXY(const Point2d &position){
-        SetPhysXY(position.x, position.y);
-}
-
-double Physics::GetPhysX() const
-{
-  return m_pos_x.x0;
-}
-
-double Physics::GetPhysY() const
-{
-  return m_pos_y.x0;
-}
-
-Point2d Physics::GetPos() const{
-        return Point2d( m_pos_x.x0, m_pos_y.x0);
-}
-
-void Physics::SetPhysSize (double width, double height)
-{
-  m_phys_width = width ;
-  m_phys_height = height ;
-}
-
-// Set positions
-void Physics::SetMass(double mass)
-{
-  m_mass = mass ;
-}
-
-// Set the wind factor
-void Physics::SetWindFactor (double factor)
-{
-  m_wind_factor = factor;
-}
-
 // Set the air resist factor
-void Physics::SetAirResistFactor (double factor)
-{
-  m_air_resist_factor = factor;
-}
-
-// Set the wind factor
-void Physics::SetGravityFactor (double factor)
-{
-  m_gravity_factor = factor;
-}
-
-void Physics::SetSpeed (double length, double angle)
-{
-  Point2d vector( length*cos(angle), length*sin(angle) );
-  SetSpeedXY(vector);
-}
-
 void Physics::SetSpeedXY (Point2d vector)
 {
   if (EqualsZero(vector.x)) vector.x = 0;
@@ -145,12 +76,6 @@ void Physics::SetSpeedXY (Point2d vector)
   m_motion_type = FreeFall ;
 
   if (!was_moving && IsMoving()) StartMoving();
-}
-
-void Physics::AddSpeed (double length, double angle)
-{
-  Point2d vector( length*cos(angle), length*sin(angle) );
-  AddSpeedXY (vector);
 }
 
 void Physics::AddSpeedXY (Point2d vector)
@@ -172,7 +97,7 @@ void Physics::GetSpeed(double &norm, double &angle) const
 
   switch (m_motion_type) {
     case FreeFall:
-      GetSpeedXY(speed);
+      speed = GetSpeedXY();
       norm = speed.Norm();
       angle = speed.ComputeAngle();
       break ;
@@ -202,46 +127,6 @@ void Physics::GetSpeed(double &norm, double &angle) const
   }
 }
 
-void Physics::GetSpeedXY(Point2d &vector) const
-{
-  if(!IsMoving())
-    {
-      vector.Clear();
-      return;
-    }
-  vector.SetValues(m_pos_x.x1, m_pos_y.x1);
-}
-
-Point2d Physics::GetSpeed() const
-{
-  Point2d tmp;
-  GetSpeedXY(tmp);
-  return tmp;
-}
-
-double Physics::GetAngularSpeed() const
-{
-  return m_rope_angle.x1 ;
-}
-
-double Physics::GetSpeedAngle() const
-{
-  double angle ;
-  Point2d speed ;
-
-  GetSpeedXY(speed);
-  angle = speed.ComputeAngle();
-
-  return angle ;
-}
-
-void Physics::SetExternForce (double length, double angle)
-{
-  Point2d vector(length*cos(angle), length*sin(angle));
-
-  SetExternForceXY(vector);
-}
-
 void Physics::SetExternForceXY (const Point2d& vector)
 {
   bool was_moving = IsMoving();
@@ -252,11 +137,6 @@ void Physics::SetExternForceXY (const Point2d& vector)
 
   if (!was_moving && IsMoving())
     StartMoving();
-}
-
-Point2d Physics::GetExternForce() const
-{
-  return m_extern_force;
 }
 
 // Set fixation point positions
@@ -341,26 +221,6 @@ void Physics::ChangePhysRopeSize(double dl)
   if (!was_moving && IsMoving()) StartMoving();
 }
 
-double Physics::GetRopeAngle() const
-{
-  return m_rope_angle.x0 ;
-}
-
-void Physics::SetRopeAngle(double angle)
-{
-  m_rope_angle.x0 = angle;
-}
-
-double Physics::GetRopeLength() const
-{
-  return m_rope_length.x0;
-}
-
-void Physics::SetRopeLength(double length)
-{
-  m_rope_length.x0 = length;
-}
-
 
 //---------------------------------------------------------------------------//
 //--                            Physical Simulation                        --//
@@ -392,17 +252,10 @@ void Physics::StopMoving()
 
 bool Physics::IsMoving() const
 {
-  return ( (!EqualsZero(m_pos_x.x1)) ||
-           (!EqualsZero(m_pos_y.x1)) ||
-           (!m_extern_force.IsNull() ) ||
-           (m_motion_type != NoMotion) ) ;
-//           (m_motion_type == Pendulum) ) ;
-}
-
-bool Physics::IsFalling() const
-{
-  return ( ( m_motion_type == FreeFall ) &&
-           ( m_pos_y.x1 > 0.1) );
+  return !EqualsZero(m_pos_x.x1)  ||
+         !EqualsZero(m_pos_y.x1)  ||
+         !m_extern_force.IsNull() ||
+         m_motion_type != NoMotion;
 }
 
 // Compute the next position of the object during a pendulum motion.
@@ -622,8 +475,3 @@ void Physics::Rebound(Point2d /*contactPos*/, double contact_angle)
   }
 
 }
-
-void Physics::SignalGhostState(bool)  {}
-void Physics::SignalDeath() {}
-void Physics::SignalDrowning() {}
-void Physics::SignalRebound() {}

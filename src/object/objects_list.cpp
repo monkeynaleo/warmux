@@ -70,11 +70,6 @@ void ObjectsList::PlaceBarrels()
 }
 
 
-ObjectsList::~ObjectsList()
-{
-  FreeMem();
-}
-
 //-----------------------------------------------------------------------------
 void ObjectsList::Refresh()
 {
@@ -140,21 +135,6 @@ void ObjectsList::FreeMem()
 
 //-----------------------------------------------------------------------------
 
-void ObjectsList::RemoveObject(PhysicalObj * obj)
-{
-  remove(obj);
-  RemoveOverlappedObjectReference(obj);
-}
-
-//-----------------------------------------------------------------------------
-
-void ObjectsList::AddOverlappedObject(PhysicalObj * obj)
-{
-  overlapped_objects.push_back(obj);
-}
-
-//-----------------------------------------------------------------------------
-
 void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
 {
   for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
@@ -165,11 +145,4 @@ void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
       it = overlapped_objects.erase(it);
     }
   }
-}
-
-//-----------------------------------------------------------------------------
-
-void ObjectsList::RemoveOverlappedObject(PhysicalObj * obj)
-{
-  overlapped_objects.remove(obj);
 }

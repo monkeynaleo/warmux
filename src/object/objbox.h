@@ -62,7 +62,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     static int start_life_points;
     // Signal Fall ending
     void SignalCollision();
-    void SignalDrowning();
+    void SignalDrowning() { SignalCollision(); };
     void SignalGhostState(bool was_already_dead);
 };
 

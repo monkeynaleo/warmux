@@ -52,10 +52,6 @@ void PetrolBarrel::Draw()
   img->Draw(GetPosition());
 }
 
-void PetrolBarrel::Refresh()
-{
-}
-
 void PetrolBarrel::SignalGhostState(bool /*was_already_dead*/)
 {
   ParticleEngine::AddNow(GetCenter(), 20, particle_FIRE, true);

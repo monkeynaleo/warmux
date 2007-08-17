@@ -90,14 +90,6 @@ PhysicalObj::~PhysicalObj ()
 //--                         Class Parameters SET/GET                      --//
 //---------------------------------------------------------------------------//
 
-void PhysicalObj::SetX (int x){
-  SetXY( Point2i(x, GetY()) );
-}
-
-void PhysicalObj::SetY (int y){
-  SetXY( Point2i(GetX(), y) );
-}
-
 void PhysicalObj::SetXY(const Point2i &position)
 {
   CheckOverlapping();
@@ -134,35 +126,8 @@ void PhysicalObj::SetXY(const Point2d &position)
   }
 }
 
-const Point2i PhysicalObj::GetPosition() const
-{
-  return Point2i(GetX(), GetY());
-}
-
-int PhysicalObj::GetX() const
-{
-  return (int)round(GetPhysX() * PIXEL_PER_METER);
-}
-
-int PhysicalObj::GetY() const
-{
-  return (int)round(GetPhysY() * PIXEL_PER_METER);
-}
-
-int PhysicalObj::GetCenterX() const
-{
-  return GetX() +m_test_left +GetTestWidth()/2;
-}
-
-int PhysicalObj::GetCenterY() const
-{
-  return GetY() +m_test_top +GetTestHeight()/2;
-}
-
-const Point2i PhysicalObj::GetCenter() const
-{
-  return Point2i(GetCenterX(), GetCenterY());
-}
+int PhysicalObj::GetX() const { return (int)round(GetPhysX() * PIXEL_PER_METER); };
+int PhysicalObj::GetY() const { return (int)round(GetPhysY() * PIXEL_PER_METER); };
 
 void PhysicalObj::SetSize(const Point2i &newSize){
   if( newSize == Point2i(0, 0) )
@@ -170,21 +135,6 @@ void PhysicalObj::SetSize(const Point2i &newSize){
   m_width = newSize.x;
   m_height = newSize.y;
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
-}
-
-// Get objest's dimensions
-int PhysicalObj::GetWidth() const{
-  ASSERT (m_width != 0);
-  return m_width;
-}
-
-int PhysicalObj::GetHeight() const{
-  ASSERT (m_height != 0);
-  return m_height;
-}
-
-Point2i PhysicalObj::GetSize() const{
-  return Point2i(m_width, m_height);
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
@@ -207,11 +157,6 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
     m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
   
   CheckOverlapping();
-}
-
-const PhysicalObj* PhysicalObj::GetOverlappingObject() const
-{
-  return m_overlapping_object;
 }
 
 void PhysicalObj::CheckOverlapping()
@@ -238,29 +183,6 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
   m_test_right = right;
   m_test_top = top;
   m_test_bottom = bottom;
-}
-
-int PhysicalObj::GetTestWidth() const
-{
-  return m_width -m_test_left -m_test_right;
-}
-
-int PhysicalObj::GetTestHeight() const
-{
-  return m_height -m_test_top -m_test_bottom;
-}
-
-const Rectanglei PhysicalObj::GetRect() const
-{
-  return Rectanglei( GetX(), GetY(), m_width, m_height);
-}
-
-const Rectanglei PhysicalObj::GetTestRect() const
-{
-  return Rectanglei(GetX()+m_test_left,
-                    GetY()+m_test_top,
-                    m_width-m_test_right-m_test_left,
-                    m_height-m_test_bottom-m_test_top);
 }
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
@@ -581,34 +503,12 @@ void PhysicalObj::GoOutOfWater()
   StartMoving();
 }
 
-bool PhysicalObj::IsImmobile() const
-{
-  return m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST);
-}
-
-bool PhysicalObj::IsDead () const
-{ return ((m_alive == GHOST) || (m_alive == DROWNED) || (m_alive == DEAD)); }
-
-bool PhysicalObj::IsGhost() const
-{ return (m_alive == GHOST); }
-
-bool PhysicalObj::IsDrowned() const
-{ return (m_alive == DROWNED); }
-
 void PhysicalObj::SignalRebound()
 {
   // TO CLEAN...
    if (!m_rebound_sound.empty())
      jukebox.Play("share", m_rebound_sound) ;
 }
-
-void PhysicalObj::SignalObjectCollision(PhysicalObj * /*obj*/) {}
-
-void PhysicalObj::SignalGroundCollision() {}
-
-void PhysicalObj::SignalCollision() {}
-
-void PhysicalObj::SignalOutOfMap() {}
 
 void PhysicalObj::SetCollisionModel(bool goes_through_wall,
                                     bool collides_with_characters,
@@ -660,11 +560,6 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
   return false;
 }
 
-bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const
-{
-  return IsOutsideWorldXY( GetPosition() + offset );
-}
-
 bool PhysicalObj::FootsOnFloor(int y) const
 {
   // If outside is empty, the object can't hit the ground !
@@ -672,16 +567,6 @@ bool PhysicalObj::FootsOnFloor(int y) const
 
   const int y_max = world.GetHeight()-m_height +m_test_bottom;
   return (y_max <= y);
-}
-
-bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
-{
-  return m_overlapping_object == obj;
-}
-
-bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_object) const
-{
-  return IsInVacuumXY(GetPosition() + offset, check_object);
 }
 
 bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
@@ -699,11 +584,6 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
                   m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
   return world.RectIsInVacuum (rect);
-}
-
-PhysicalObj* PhysicalObj::CollidedObject(const Point2i &offset) const
-{
-  return CollidedObjectXY(GetPosition() + offset);
 }
 
 PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
@@ -741,11 +621,6 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
       }
     }
   return NULL;
-}
-
-bool PhysicalObj::FootsInVacuum() const
-{
-  return FootsInVacuumXY(GetPosition());
 }
 
 bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
@@ -789,7 +664,7 @@ bool PhysicalObj::IsInWater () const
 void PhysicalObj::DirectFall()
 {
   while (!IsGhost() && !IsInWater() && FootsInVacuum())
-      SetY((int)(GetY()+1.0)); // 1.5 instead of 1.0 to make sure rounding yields a different number
+    SetY((int)(GetY()+1.0));
 }
 
 bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
@@ -852,18 +727,6 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
     }
   }
   return false;
-}
-
-// Are the two object in contact ? (uses test rectangles)
-bool PhysicalObj::ObjTouche(const PhysicalObj &b) const
-{
-  return GetTestRect().Intersect( b.GetTestRect() );
-}
-
-// Do the point p touch the object ?
-bool PhysicalObj::ObjTouche(const Point2i &p) const
-{
-   return  GetTestRect().Contains( p );
 }
 
 bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters)
