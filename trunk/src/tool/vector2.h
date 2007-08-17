@@ -281,18 +281,18 @@ template<class T> class Vector2
     }
 
     /**
-     *
+     * For T == int, this method is defined at the end of this file
      * @param p2
      */
-    inline double Distance(const Vector2<T> p2) const{
-      double distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
+    inline T Distance(const Vector2<T> p2) const{
+      T distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
       return sqrt( distPow2 );
     }
 
     /**
      *
      */
-    double Norm() const{
+    T Norm() const{
       return Distance( Vector2(0,0) );
     }
 
@@ -390,5 +390,11 @@ template<class T> class Vector2
       return veq.ComputeAngle();
     }
 };
+
+template < >
+inline int Vector2<int>::Distance(const Vector2<int> p2) const{
+ int distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
+ return (int)sqrt( (float)distPow2 );
+}
 
 #endif //_VECTOR2_H
