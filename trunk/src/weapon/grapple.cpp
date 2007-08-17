@@ -346,6 +346,7 @@ void Grapple::Refresh()
   if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
     return;
 
+  ActiveCharacter().SetMovement("ninja-rope");
   ActiveCharacter().UpdatePosition();
   SendActiveCharacterInfo(true);
 }
