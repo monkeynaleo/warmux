@@ -28,6 +28,7 @@
 #include "movement.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "interface/mouse.h"
 #include "particles/body_member.h"
 #include "particles/teleport_member.h"
 #include "team/team.h"
@@ -297,8 +298,33 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
           mb_mvt.SetAngle(mb_mvt.GetAngle() + M_PI);
       }
 
-
       member->member->ApplyMovement(mb_mvt, squel_lst);
+
+      // This movement needs to know the position of the member before
+      // being applied so it does a second ApplyMovement afterwards
+      // to be used
+      if(mb_mvt.follow_cursor)
+      {
+	member_mvt angle_mvt;
+
+	Point2i v = owner->GetPosition() + member->member->GetPos();
+	v += member->member->GetAnchorPos();
+
+	if( owner->GetDirection() == DIRECTION_LEFT)
+	{
+		v.x = 2 * (int)owner->GetPos().x + GetSize().x/2 - v.x;
+		v.x -= member->member->spr->GetWidth();
+	}
+	v = Mouse::GetInstance()->GetWorldPosition() - v;
+
+	if( v.Norm() < mb_mvt.follow_cursor_limit)
+	{
+          double angle = v.ComputeAngle(Point2i(0, 0));
+  
+          angle_mvt.SetAngle(angle * owner->GetDirection() - M_PI);
+          member->member->ApplyMovement(angle_mvt, squel_lst);
+	}
+      }
     }
   }
 }
