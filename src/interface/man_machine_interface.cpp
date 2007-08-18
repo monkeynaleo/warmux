@@ -441,7 +441,7 @@ void ManMachineInterface::Refresh() const
       Key_t key = static_cast<Key_t>(i);
 
       if (SDL_GetModState()&KMOD_CTRL && MoveCamera(key))
-          return;
+        continue;
 
       // Managing keys related to character moves
       // Available only when local
