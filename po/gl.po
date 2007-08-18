@@ -985,7 +985,7 @@ msgstr "O servido rexeitou a conexión."
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
-msgstr[0] "Hai só un equipo."
+msgstr[0] "Hai só %i equipo."
 msgstr[1] "Hai só %i equipos."
 
 #: src/weapon/cluster_bomb.cpp:149
@@ -1037,7 +1037,7 @@ msgstr ""
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] "Agarda! Un xogador todavía non está listo!"
+msgstr[0] "Agarda! %i xogador todavía non está listo!"
 msgstr[1] "Agarda! %i xogadores todavía non están listos!"
 
 #: src/menu/network_menu.cpp:383
