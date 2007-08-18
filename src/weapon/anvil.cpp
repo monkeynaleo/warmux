@@ -50,6 +50,7 @@ class Anvil : public WeaponProjectile
 
     void PlayFallSound();
     void PlayCollisionSound();
+    void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
     virtual void SignalGroundCollision();
@@ -86,13 +87,13 @@ void Anvil::SignalOutOfMap()
 
 void Anvil::SignalDrowning()
 {
-  jukebox.Play("share","sink");
+  jukebox.Play("share", "sink");
 }
 
 void Anvil::Refresh()
 {
   if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
-    world.MergeSprite(GetPosition(),image);
+    world.MergeSprite(GetPosition(), image);
     Ghost();
   } else {
     WeaponProjectile::Refresh();
@@ -101,13 +102,13 @@ void Anvil::Refresh()
 
 void Anvil::PlayFallSound()
 {
-  falling_sound.Play("share","weapon/anvil_fall", -1);
+  falling_sound.Play("share", "weapon/anvil_fall", -1);
 }
 
 void Anvil::PlayCollisionSound()
 {
   falling_sound.Stop();
-  jukebox.Play("share","weapon/anvil_collision");
+  jukebox.Play("share", "weapon/anvil_collision");
 }
 
 //-----------------------------------------------------------------------------
