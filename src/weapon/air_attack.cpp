@@ -137,8 +137,7 @@ void Plane::DropBomb()
   Obus * instance = new Obus(cfg);
   instance->SetXY(Point2i(GetX(), obus_dy) );
 
-  Point2d speed_vector;
-  GetSpeedXY(speed_vector);
+  Point2d speed_vector = GetSpeedXY();
 
   int fx = randomSync.GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
