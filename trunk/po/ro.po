@@ -31,7 +31,7 @@ msgstr "! Harta %s nu a fost găsită :-("
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
-msgstr[0] "un jucător conectat"
+msgstr[0] "%i jucător conectat"
 msgstr[1] "%i jucători conectați"
 msgstr[2] "%i de jucători conectați"
 
@@ -39,7 +39,7 @@ msgstr[2] "%i de jucători conectați"
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
-msgstr[0] "un jucător e gata"
+msgstr[0] "%i jucător e gata"
 msgstr[1] "%i jucători sunt gata"
 msgstr[2] "%i de jucători sunt gata"
 
@@ -1174,7 +1174,7 @@ msgstr "Serverul a refuzat conexiunea."
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
-msgstr[0] "Există doar o echipă."
+msgstr[0] "Există doar %i echipă."
 msgstr[1] "Există doar %i echipe."
 msgstr[2] "Există doar %i de echipe."
 
@@ -1235,7 +1235,7 @@ msgstr ""
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] "Așteaptă! un jucător nu e gata încă!"
+msgstr[0] "Așteaptă! %i jucător nu e gata încă!"
 msgstr[1] "Așteaptă! %i jucători nu sunt gata încă!"
 msgstr[2] "Așteaptă! %i de jucători nu sunt gata încă!"
 
