@@ -301,16 +301,16 @@ void Surface::MergeSurface(Surface &spr, const Point2i &pos) {
       b = (Uint8)(((spr_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
       a = (Uint8)(((spr_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
       // Retreiving previous alpha value
-      p_a = (Uint8)(((cur_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
+      p_a = (Uint8)(((cur_pix & current_fmt->Amask) >> current_fmt->Ashift) << current_fmt->Aloss);
       if(a == SDL_ALPHA_OPAQUE || (p_a == 0 && a >0)) // new pixel with no alpha or nothing on previous pixel
         ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
       else if (a > 0) { // alpha is lower => merge color with previous value
         f_a = (double)a / 255.0;
         f_ca = 1.0 - f_a;
         f_pa = (double)p_a / 255.0;
-        p_r = (Uint8)(((cur_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
-        p_g = (Uint8)(((cur_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
-        p_b = (Uint8)(((cur_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
+        p_r = (Uint8)(((cur_pix & current_fmt->Rmask) >> current_fmt->Rshift) << current_fmt->Rloss);
+        p_g = (Uint8)(((cur_pix & current_fmt->Gmask) >> current_fmt->Gshift) << current_fmt->Gloss);
+        p_b = (Uint8)(((cur_pix & current_fmt->Bmask) >> current_fmt->Bshift) << current_fmt->Bloss);
         r = (Uint8)((double)p_r * f_ca * f_pa + (double)r * f_a);
         g = (Uint8)((double)p_g * f_ca * f_pa + (double)g * f_a);
         b = (Uint8)((double)p_b * f_ca * f_pa + (double)b * f_a);
