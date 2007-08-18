@@ -17,7 +17,7 @@ HKLM_PATH="SOFTWARE\Games\Wormux"
 WORMUX_VERSION=`date +"%Y%m%d"`
 
 # Set compression and in/out
-COMPRESSION=lzma
+COMPRESSION="/solid lzma"
 DEST=tmp-wormux-win32
 NSIS="$DEST/wormux.nsi"
 
@@ -46,87 +46,118 @@ fi
 # Create head
 cat > $NSIS <<EOF
 ;based on MUI Welcome/Finish Page Example Script written by Joost Verburg
-!define MUI_ICON  "${LOCAL_PATH}\install.ico"
-!define MUI_UNICON  "${LOCAL_PATH}\uninstall.ico"
-!define MUI_COMPONENTSPAGE_SMALLDESC
-!define MUI_LANGDLL_ALWAYSSHOW
 !include "MUI.nsh"
 !include "Sections.nsh"
 !include "LogicLib.nsh"
-!include "StrFunc.nsh"
 
 Name "Wormux"
+!define WORMUX_VERSION  "${WORMUX_VERSION}"
+;Version resource
+VIProductVersion        "0.8.0.2"
+VIAddVersionKey         "FileDescription"       "Wormux Installer"
+VIAddVersionKey         "ProductName"           "Wormux"
+VIAddVersionKey         "FileVersion"           "${WORMUX_VERSION}"
+VIAddVersionKey         "ProductVersion"        "${WORMUX_VERSION}"
+VIAddVersionKey         "LegalCopyright"        "(C) 2001-2007 The Wormux Project"
 
 ;General
 OutFile "${LOCAL_PATH}\Wormux-Setup-${WORMUX_VERSION}.exe"
-SetCompressor $COMPRESSION
-
-!define MUI_LANGDLL_REGISTRY_ROOT "HKLM" 
-!define MUI_LANGDLL_REGISTRY_KEY "${HKLM_PATH}" 
-!define MUI_LANGDLL_REGISTRY_VALUENAME "lang"
+SetCompressor ${COMPRESSION}
 
 ;--------------------------------
-;Configuration
+;Modern UI Configuration
+  !define MUI_ICON                          "${LOCAL_PATH}\install.ico"
+  !define MUI_UNICON                        "${LOCAL_PATH}\uninstall.ico"
+  ; Alter License section
+  !define MUI_LICENSEPAGE_BUTTON            \$(WORMUX_BUTTON)
+  !define MUI_LICENSEPAGE_TEXT_BOTTOM       \$(WORMUX_BOTTOM_TEXT)
+  ; Language
+  !define MUI_LANGDLL_ALWAYSSHOW
+  !define MUI_LANGDLL_REGISTRY_ROOT         "HKLM"
+  !define MUI_LANGDLL_REGISTRY_KEY"         ${HKLM_PATH}"
+  !define MUI_LANGDLL_REGISTRY_VALUENAME    "lang"
+  ; Misc stuff
+  !define MUI_COMPONENTSPAGE_SMALLDESC
+  !define MUI_ABORTWARNING
+  ; Don't close dialogs, allow to check installation result
+  !define MUI_FINISHPAGE_NOAUTOCLOSE
+  !define MUI_UNFINISHPAGE_NOAUTOCLOSE
+  ;Finish Page config
+  !define MUI_FINISHPAGE_RUN                "\$INSTDIR\wormux.exe"
+  !define MUI_FINISHPAGE_RUN_NOTCHECKED
+  !define MUI_FINISHPAGE_LINK               \$(WORMUX_VISIT)
+  !define MUI_FINISHPAGE_LINK_LOCATION      "http://www.wormux.org"
 
-!insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_LICENSE \$(WormuxLicense)
-!insertmacro MUI_PAGE_DIRECTORY
-!insertmacro MUI_PAGE_INSTFILES
-!insertmacro MUI_PAGE_FINISH
+;--------------------------------
+;Pages
+  ; Install
+  !insertmacro MUI_PAGE_WELCOME
+  !insertmacro MUI_PAGE_LICENSE \$(WormuxLicense)
+  !insertmacro MUI_PAGE_COMPONENTS
+  !insertmacro MUI_PAGE_DIRECTORY
+  !insertmacro MUI_PAGE_INSTFILES
+  !insertmacro MUI_PAGE_FINISH
+  ; Uninstall
+  !insertmacro MUI_UNPAGE_WELCOME
+  !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_INSTFILES
+  !insertmacro MUI_UNPAGE_FINISH
 
-!insertmacro MUI_UNPAGE_CONFIRM
-!insertmacro MUI_UNPAGE_INSTFILES
-!insertmacro MUI_UNPAGE_FINISH
-
-!define MUI_ABORTWARNING
-
+;--------------------------------
 ;Languages
-!insertmacro MUI_LANGUAGE "English"
-LicenseLangString WormuxLicense "English" "${WIN_WORMUXDIR}\doc\license\COPYING.en.txt"
-LangString TITLE_Wormux "English" "Wormux"
-LangString DESC_Wormux  "English" "Installs the game Wormux, version ${WORMUX_VERSION}"
+  !insertmacro MUI_LANGUAGE "English"
+  LicenseLangString WormuxLicense "English" "${WIN_WORMUXDIR}\doc\license\COPYING.en.txt"
+  LangString TITLE_Wormux "English" "Wormux"
+  LangString DESC_Wormux  "English" "Installs the game Wormux, version ${WORMUX_VERSION}"
 
-!insertmacro MUI_LANGUAGE "French"
-LicenseLangString WormuxLicense "French" "${WIN_WORMUXDIR}\doc\license\COPYING.fr.txt"
-LangString TITLE_Wormux "French" "Wormux"
-LangString DESC_Wormux  "French" "Installe le jeu Wormux, en version ${WORMUX_VERSION}"
+  !insertmacro MUI_LANGUAGE "French"
+  LicenseLangString WormuxLicense "French" "${WIN_WORMUXDIR}\doc\license\COPYING.fr.txt"
+  LangString TITLE_Wormux "French" "Wormux"
+  LangString DESC_Wormux  "French" "Installe le jeu Wormux, en version ${WORMUX_VERSION}"
 
-!insertmacro MUI_LANGUAGE "German"
-LicenseLangString WormuxLicense "German" "${WIN_WORMUXDIR}\doc\license\COPYING.de.txt"
-LangString TITLE_Wormux "German" "Wormux"
-LangString DESC_Wormux  "German" "Das Spiel Wormux, Version ${WORMUX_VERSION} anbringen"
+  !insertmacro MUI_LANGUAGE "German"
+  LicenseLangString WormuxLicense "German" "${WIN_WORMUXDIR}\doc\license\COPYING.de.txt"
+  LangString TITLE_Wormux "German" "Wormux"
+  LangString DESC_Wormux  "German" "Das Spiel Wormux, Version ${WORMUX_VERSION} anbringen"
 
-!insertmacro MUI_LANGUAGE "Spanish"
-LicenseLangString WormuxLicense "Spanish" "${WIN_WORMUXDIR}\doc\license\COPYING.es.txt"
-LangString TITLE_Wormux "Spanish" "Wormux"
-LangString DESC_Wormux  "Spanish" "Instala el juego Wormux, versión ${WORMUX_VERSION}"
+  !insertmacro MUI_LANGUAGE "Spanish"
+  LicenseLangString WormuxLicense "Spanish" "${WIN_WORMUXDIR}\doc\license\COPYING.es.txt"
+  LangString TITLE_Wormux "Spanish" "Wormux"
+  LangString DESC_Wormux  "Spanish" "Instala el juego Wormux, versión ${WORMUX_VERSION}"
 
-!insertmacro MUI_LANGUAGE "Dutch"
-LicenseLangString WormuxLicense "Dutch" "${WIN_WORMUXDIR}\doc\license\COPYING.nl.txt"
-LangString TITLE_Wormux "Dutch" "Wormux"
-LangString DESC_Wormux  "Dutch" "Wormux ${WORMUX_VERSION}"
+  !insertmacro MUI_LANGUAGE "Dutch"
+  LicenseLangString WormuxLicense "Dutch" "${WIN_WORMUXDIR}\doc\license\COPYING.nl.txt"
+  LangString TITLE_Wormux "Dutch" "Wormux"
+  LangString DESC_Wormux  "Dutch" "Wormux ${WORMUX_VERSION}"
 
-!insertmacro MUI_LANGUAGE "Polish"
-LicenseLangString WormuxLicense "Polish" "${WIN_WORMUXDIR}\doc\license\COPYING.pl.txt"
-LangString TITLE_Wormux "Polish" "Wormux"
-LangString DESC_Wormux  "Polish" "Wormux ${WORMUX_VERSION}"
+  !insertmacro MUI_LANGUAGE "Polish"
+  LicenseLangString WormuxLicense "Polish" "${WIN_WORMUXDIR}\doc\license\COPYING.pl.txt"
+  LangString TITLE_Wormux "Polish" "Wormux"
+  LangString DESC_Wormux  "Polish" "Wormux ${WORMUX_VERSION}"
 
-!insertmacro MUI_LANGUAGE "Russian"
-LicenseLangString WormuxLicense "Russian" "${WIN_WORMUXDIR}\doc\license\COPYING.ru.txt"
-LangString TITLE_Wormux "Russian" "Wormux"
-LangString DESC_Wormux  "Russian" "Wormux ${WORMUX_VERSION}"
+  !insertmacro MUI_LANGUAGE "Russian"
+  LicenseLangString WormuxLicense "Russian" "${WIN_WORMUXDIR}\doc\license\COPYING.ru.txt"
+  LangString TITLE_Wormux "Russian" "Wormux"
+  LangString DESC_Wormux  "Russian" "Wormux ${WORMUX_VERSION}"
 
-!insertmacro MUI_LANGUAGE "Slovenian"
-LicenseLangString WormuxLicense "Slovenian" "${WIN_WORMUXDIR}\doc\license\COPYING.sk.txt"
-LangString TITLE_Wormux "Slovenian" "Wormux"
-LangString DESC_Wormux  "Slovenian" "Wormux ${WORMUX_VERSION}"
+  !insertmacro MUI_LANGUAGE "Slovenian"
+  LicenseLangString WormuxLicense "Slovenian" "${WIN_WORMUXDIR}\doc\license\COPYING.sk.txt"
+  LangString TITLE_Wormux "Slovenian" "Wormux"
+  LangString DESC_Wormux  "Slovenian" "Wormux ${WORMUX_VERSION}"
 
+  ;--------------------------------
+  ;Installer translations
+  !define WORMUX_DEFAULT_LANGFILE "${LOCAL_PATH}\English.nsh"
+  !include "${LOCAL_PATH}\langmacros.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "ENGLISH"  "${LOCAL_PATH}\English.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "FRENCH"   "${LOCAL_PATH}\French.nsh"
+
+;--------------------------------
 ;Folder-selection page
 InstallDir "\$PROGRAMFILES\Wormux"
 ; Registry key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
 InstallDirRegKey HKLM ${HKLM_PATH} "Path"
-
 AutoCloseWindow false
 
 ;--------------------------------
@@ -202,6 +233,7 @@ cat >> $NSIS <<EOF
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "DisplayName" "Wormux (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "UninstallString" '"\$INSTDIR\uninstall.exe"'
   WriteUninstaller "uninstall.exe"
+
   ; Shortcuts
   SetShellVarContext all
   CreateDirectory "\$SMPROGRAMS\Wormux"
@@ -214,10 +246,38 @@ cat >> $NSIS <<EOF
 SectionEnd
 
 ;--------------------------------
+;Shortcuts
+SubSection /e \$(WORMUX_SHORCUTS_TITLE) Sec_Shortcuts
+  Section /o \$(WORMUX_DESKTOP_SC_DESC) Sec_DesktopShortcut
+    SetOverwrite on
+    CreateShortCut "\$DESKTOP\WORMUX.lnk" "\$INSTDIR\wormux.exe" \
+      "" "\$INSTDIR\wormux.exe" 0
+    SetOverwrite off
+  SectionEnd
+  Section \$(WORMUX_STARTM_SC_DESC) Sec_StartMenuShortcut
+    SetOverwrite on
+    CreateDirectory "\$SMPROGRAMS\Wormux"
+    CreateShortCut "\$SMPROGRAMS\\Wormux.lnk" \
+      "\$INSTDIR\wormux.exe" "" "\$INSTDIR\wormux.exe" 0
+    SetOverwrite off
+  SectionEnd
+  Section \$(WORMUX_UNINST_SC_DESC) Sec_UninstallShortCut
+    SetOverwrite on
+    CreateShortCut  "\$SMPROGRAMS\Wormux\Uninstall.lnk" \
+      "\$INSTDIR\uninstall.exe" "" "\$INSTDIR\uninstall.exe" 0
+    SetOverwrite off
+  SectionEnd
+SubSectionEnd
+
+;--------------------------------
 ;Descriptions
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-  !insertmacro MUI_DESCRIPTION_TEXT \${Sec_Wormux} \$(DESC_Wormux)
+  !insertmacro MUI_DESCRIPTION_TEXT     \${Sec_Wormux}             \$(WORMUX_DESC)
+  !insertmacro MUI_DESCRIPTION_TEXT     \${Sec_Shortcuts}          \$(WORMUX_SHORTCUTS_DESC)
+    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_DesktopShortcut}    \$(WORMUX_DESKTOP_SC_DESC)
+    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_StartMenuShortcut}  \$(WORMUX_STARTM_SC_DESC)
+    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_UninstallShortcut}  \$(WORMUX_UNINST_SC_DESC)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;--------------------------------
@@ -232,21 +292,16 @@ Section "Uninstall"
   SetShellVarContext all
   Delete "\$SMPROGRAMS\Wormux\*.*"
   RMDir  "\$SMPROGRAMS\Wormux"
-
+  Delete "\$DESKTOP\Wormux.lnk"
   ; remove files
   RMDir /r "\$INSTDIR"
-
-  ;  !insertmacro MUI_UNFINISHHEADER
 SectionEnd
 
 Function .onInit
-
   ;Language selection
-
   !insertmacro MUI_LANGDLL_DISPLAY
-
-  SectionSetFlags \${Sec_Wormux} 17
-
+  IntOp \$R0 \${SF_RO} | \${SF_SELECTED}
+  SectionSetFlags \${Sec_Wormux} \$R0
 FunctionEnd
 
 Function un.onInit
@@ -261,4 +316,5 @@ if ! $MAKE_NSIS $NSIS; then
 fi
 
 ## Move executable to current directory and remove temporary directory
-rm -rf $NSIS $DEST
+mv $NSIS .
+rm -rf $DEST
