@@ -44,8 +44,7 @@ void BodyMemberParticle::Refresh()
 {
   m_left_time_to_live--;
   UpdatePosition();
-  Point2d speed;
-  GetSpeedXY(speed);
+  Point2d speed = GetSpeedXY();
 
   angle_rad += speed.Norm() * 20;
   angle_rad = fmod(angle_rad, 2 *M_PI);
