@@ -52,7 +52,7 @@
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="4"
-				DisableSpecificWarnings="4005;4138;4244;4267;4305;4312;4996"
+				DisableSpecificWarnings="4005;4138;4244;4267;4305;4312;4251;4996"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -65,8 +65,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib shell32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllibd.lib glibmm-2.4d.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6d.lib sigc-2.0d.lib libpng.lib $(NOINHERIT)"
-				OutputFile="$(ProjectDir)..\$(ProjectName).exe"
+				AdditionalDependencies="kernel32.lib shell32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllibd.lib glibmm-2.4d.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6d.lib sigc-2.0d.lib png.lib $(NOINHERIT)"
+				OutputFile="$(ProjectDir)..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib"
 				GenerateDebugInformation="true"
@@ -141,7 +141,7 @@
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
-				DisableSpecificWarnings="4005;4138;4244;4267;4305;4312;4996"
+				DisableSpecificWarnings="4005;4138;4244;4267;4305;4312;4251;4996"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -154,7 +154,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib shell32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllib.lib glibmm-2.4.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6.lib sigc-2.0.lib libpng.lib $(NOINHERIT)"
+				AdditionalDependencies="kernel32.lib shell32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllib.lib glibmm-2.4.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6.lib sigc-2.0.lib png.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\$(ProjectName).exe"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="msvcrtd.lib"
@@ -1830,13 +1830,23 @@
 				RelativePath="..\po\bg.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1844,13 +1854,23 @@
 				RelativePath="..\po\bs.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1858,13 +1878,23 @@
 				RelativePath="..\po\ca.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1872,13 +1902,23 @@
 				RelativePath="..\po\cpf.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1886,13 +1926,23 @@
 				RelativePath="..\po\da.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1900,13 +1950,23 @@
 				RelativePath="..\po\de.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1914,13 +1974,23 @@
 				RelativePath="..\po\eo.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1928,13 +1998,23 @@
 				RelativePath="..\po\es.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1942,13 +2022,23 @@
 				RelativePath="..\po\fi.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1956,13 +2046,23 @@
 				RelativePath="..\po\fr.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1970,13 +2070,23 @@
 				RelativePath="..\po\gl.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1984,13 +2094,23 @@
 				RelativePath="..\po\hu.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -1998,13 +2118,23 @@
 				RelativePath="..\po\it.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2012,13 +2142,23 @@
 				RelativePath="..\po\nb.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2026,13 +2166,23 @@
 				RelativePath="..\po\nl.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2040,13 +2190,23 @@
 				RelativePath="..\po\pl.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2054,13 +2214,23 @@
 				RelativePath="..\po\pt.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2068,13 +2238,23 @@
 				RelativePath="..\po\pt_BR.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2082,13 +2262,23 @@
 				RelativePath="..\po\ro.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2096,13 +2286,23 @@
 				RelativePath="..\po\ru.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2110,13 +2310,23 @@
 				RelativePath="..\po\sk.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2124,13 +2334,23 @@
 				RelativePath="..\po\sl.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2138,13 +2358,23 @@
 				RelativePath="..\po\sv.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2152,13 +2382,23 @@
 				RelativePath="..\po\tr.po"
 				>
 				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Creating $(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Creating $(InputName).gmo"
-						CommandLine="msgfmt.exe -c -o $(InputDir)$(InputName).gmo $(InputPath)"
-						Outputs="$(InputName).gmo"
+						CommandLine="msgfmt.exe -v -c -o $(InputDir)$(InputName).gmo $(InputPath)"
+						Outputs="$(InputDir)$(InputName).gmo"
 					/>
 				</FileConfiguration>
 			</File>
