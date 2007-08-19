@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * List of Text Clases. 
+ * List of Text Clases.
  * TextBox is not valid while playing game
  * nefertum - Jon de Andres
  *****************************************************************************/
@@ -38,7 +38,7 @@ TextList::~TextList()
 void TextList::AddText(const std::string &txt, uint maxlines){
   Text* new_txt = new Text(txt);
   list.push_back(new_txt);
-  
+
   if(list.size() >= maxlines)
     list.pop_front();
 }
@@ -61,7 +61,7 @@ void TextList::Draw(int x, int y, int height){
 
   for(; it!=end; it++){
     //Draw each item in the list
-    (*it)->DrawTopLeft(x, y);
+    (*it)->DrawTopLeft(Point2i(x, y));
     y+=height;
   }
 }
@@ -70,5 +70,5 @@ void TextList::DrawLine(const Text* newline, int x, int y, int height) const {
   int size = list.size();
 
   y += (size * height);
-  newline->DrawTopLeft(x, y);
+  newline->DrawTopLeft(Point2i(x, y));
 }
