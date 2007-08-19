@@ -395,6 +395,9 @@ void GameLoop::RefreshClock()
         } else {
           duration--;
           Interface::GetInstance()->UpdateTimer(duration);
+	  if (duration <= 5) {
+	    jukebox.Play("share", "time/bip");
+	  }
         }
         break;
 
