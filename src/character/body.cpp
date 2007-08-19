@@ -623,7 +623,7 @@ void Body::StopWalk()
     SetFrame(0);
 }
 
-bool Body::IsWalking()
+bool Body::IsWalking() const
 {
   return walk_events > 0 && current_mvt->type == "walk";
 }

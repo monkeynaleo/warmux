@@ -128,7 +128,7 @@ bool Airhammer::p_Shoot()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::RepeatShoot()
+void Airhammer::RepeatShoot() const
 {
   uint time = Time::GetInstance()->Read() - m_last_fire_time;
 

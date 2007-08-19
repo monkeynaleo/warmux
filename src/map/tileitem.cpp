@@ -28,7 +28,7 @@
 #include "map/camera.h"
 #include "tool/error.h"
 #include "tool/point.h"
-#include "tool/stats.h"
+//#include "tool/stats.h"
 #ifdef DBG_TILE
 #include "graphic/colors.h"
 #endif
