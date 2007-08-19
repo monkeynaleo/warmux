@@ -79,7 +79,7 @@ SetCompressor ${COMPRESSION}
   ; Misc stuff
   !define MUI_COMPONENTSPAGE_SMALLDESC
   !define MUI_ABORTWARNING
-  ; Don't close dialogs, allow to check installation result
+  ; Do not close dialogs, allow to check installation result
   !define MUI_FINISHPAGE_NOAUTOCLOSE
   !define MUI_UNFINISHPAGE_NOAUTOCLOSE
   ;Finish Page config
@@ -172,9 +172,6 @@ Section \$(TITLE_Wormux) Sec_Wormux
   File "${WIN_WORMUXDIR}\src\wormux.exe"
 EOF
 
-# Copy special libraries
-cp $BINDIR/lib/libcurl-4.dll "$DEST"
-
 # Glib (gobject, gthread, glib & gmodule)
 GLIB_PATH=$(pkg_path glib-2.0)
 cp "$GLIB_PATH"/bin/libg{object,thread,module,lib}-2.0-0.dll "$DEST"
@@ -184,17 +181,18 @@ cp "$(pkg_path sigc++-2.0)/bin/libsigc"*.dll $DEST
 cp "$(pkg_path libxml-2.0)/bin/libxml2"*.dll $DEST
 cp "$(pkg_path libxml++-2.6)/bin/libxml++"*.dll $DEST
 cp "$(pkg_path glibmm-2.4)/bin/libglibmm"*.dll $DEST
-cp "$(pkg_path libpng12)/bin/libpng12.dll" $DEST
 
 # Clean up before non-strippable files
 # WARNING Stripping some dlls corrupts them beyond use
 strip "$DEST/"*.dll "$WORMUXDIR/src/"*.exe
 
-# Files that must not be stripped (all of SDL and vorbos)
+# Files that must not be stripped (all MSVC, mainly SDL and vorbis)
 SDL_PATH=$(sdl-config --prefix)
-cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll	\
-   "$GLIB_PATH/bin/"{intl,iconv,zlib1,jpeg62}.dll	\
-   $BINDIR/bin/{vorbis,vorbisfile,ogg}.dll "$DEST"
+cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll    \
+   "$GLIB_PATH/bin/"{intl,iconv,zlib1,libpng12}.dll     \
+   "$SDL_PATH/bin/"lib{curl-4,freetype-6,png12-0}.dll   \
+   "$SDL_PATH/bin/jpeg.dll"                             \
+   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3}.dll "$DEST"
 
 # Continue producing installer
 cat >> $NSIS <<EOF
