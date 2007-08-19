@@ -78,31 +78,14 @@ AppWormux *AppWormux::GetInstance()
 }
 
 AppWormux::AppWormux():
-  video(new Video())
+  video(NULL)
 {
 }
 
 AppWormux::~AppWormux()
 {
-  /* If some stuff here throws exceptions, they must be caugth inside here.
-   * FIXME does any othe the following methodes throw ? */
-  cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
-
-  Config::GetInstance()->Save();
-  jukebox.End();
-  delete Config::GetInstance();
-  delete Time::GetInstance();
-  delete Constants::GetInstance();
-  TTF_Quit();
-
-#ifdef ENABLE_STATS
-  SaveStatToXML("stats.xml");
-#endif
-  delete video;
-
-  cout << "o " << _("If you found a bug or have a feature request "
-                    "send us a email (in english, please):")
-    << " " << Constants::EMAIL << endl;
+  if (video)
+    delete video;
 }
 
 int AppWormux::Main(int argc, char *argv[])
@@ -168,6 +151,8 @@ int AppWormux::Main(int argc, char *argv[])
         net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
       }
     while (!quit);
+
+    End();
   }
   catch(const exception & e)
   {
@@ -188,6 +173,8 @@ int AppWormux::Main(int argc, char *argv[])
 
 void AppWormux::Init()
 {
+  video = new Video();
+
 #ifndef WIN32
   signal(SIGPIPE, SIG_IGN);
 #endif
@@ -317,6 +304,25 @@ void AppWormux::InitFonts() const
     Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
     exit(1);
   }
+}
+
+void AppWormux::End() const
+{
+  cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
+
+  Config::GetInstance()->Save();
+  jukebox.End();
+  delete Config::GetInstance();
+  delete Time::GetInstance();
+  delete Constants::GetInstance();
+  TTF_Quit();
+
+#ifdef ENABLE_STATS
+  SaveStatToXML("stats.xml");
+#endif
+  cout << "o " << _("If you found a bug or have a feature request "
+                    "send us a email (in english, please):")
+    << " " << Constants::EMAIL << endl;
 }
 
 void AppWormux::DisplayWelcomeMessage() const
