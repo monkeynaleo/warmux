@@ -98,7 +98,7 @@ void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
   }
 
   uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;
-  txt_value->DrawCenterTop(center, position.y);
+  txt_value->DrawCenterTop(Point2i(center, position.y));
 }
 
 Widget* SpinButton::ClickUp(const Point2i &mousePosition, uint button)

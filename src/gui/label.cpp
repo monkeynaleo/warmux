@@ -55,7 +55,7 @@ void Label::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
       if (!center)
         txt_label->DrawTopLeft(position);
       else
-        txt_label->DrawCenterTop(position.x + size.x/2, position.y);
+        txt_label->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
     }
 }
 

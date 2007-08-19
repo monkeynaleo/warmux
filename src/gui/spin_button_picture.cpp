@@ -115,12 +115,12 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   tmp_y = center_y + small_r - 3;
   uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
 
-  txt_value_black->DrawCenterTop(tmp_x + 1, tmp_y + 1 - value_h/2);
-  txt_value_white->DrawCenterTop(tmp_x, tmp_y - value_h/2);
+  txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1 - value_h/2));
+  txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y - value_h/2));
 
   // 6. and finally the label image
-  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2,
-                            GetPositionY() + GetSizeY() - txt_label->GetHeight() );
+  txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
+                            GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
 Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)

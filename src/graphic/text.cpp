@@ -209,9 +209,9 @@ void Text::DrawTopRight (const Point2i &position) const
   DrawTopLeft(position - Point2i(surf.GetWidth(), 0));
 }
 
-void Text::DrawCenterTop (int x, int y) const
+void Text::DrawCenterTop (const Point2i &position) const
 {
-  DrawTopLeft(Point2i(x - surf.GetWidth()/2, y));
+  DrawTopLeft(position - Point2i(surf.GetWidth()/2, 0));
 }
 
 void Text::DrawTopLeft(const Point2i &position) const
