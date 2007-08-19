@@ -29,20 +29,6 @@
 class Text;
 class ButtonText;
 
-typedef enum
-{
-  menuNULL=0,
-  menuPLAY,
-  menuNETWORK,
-  menuOPTIONS,
-  menuCREDITS,
-  menuQUIT,
-
-  noMenuPLAY,
-  noMenuNET_SERVER,
-  noMenuNET_CLIENT
-} menu_item;
-
 class MainMenu : public Menu
 {
   /* If you need this, implement it (correctly) */
@@ -56,6 +42,17 @@ class MainMenu : public Menu
 
 
 public:
+  typedef enum
+  {
+    NONE = 0,
+    PLAY,
+    NETWORK,
+    OPTIONS,
+    CREDITS,
+    QUIT,
+  } menu_item;
+
+
   menu_item choice;
 
   MainMenu();

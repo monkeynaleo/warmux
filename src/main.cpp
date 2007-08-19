@@ -61,8 +61,8 @@ using namespace std;
 #include "tool/stats.h"
 
 
-static menu_item choice = menuNULL;
 static Menu *menu = NULL;
+static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
 static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
 
@@ -100,7 +100,7 @@ int AppWormux::Main(int argc, char *argv[])
       {
         MainMenu main_menu;
 
-        if (choice == menuNULL) {
+        if (choice == MainMenu::NONE) {
           menu = &main_menu;
           StatStart("Main:Menu");
           choice = main_menu.Run();
@@ -111,14 +111,14 @@ int AppWormux::Main(int argc, char *argv[])
 
         switch (choice)
           {
-          case menuPLAY:
+            case MainMenu::PLAY:
             {
               GameMenu game_menu;
               menu = &game_menu;
               game_menu.Run(skip_menu);
               break;
             }
-          case menuNETWORK:
+            case MainMenu::NETWORK:
             {
               NetworkConnectionMenu network_connection_menu;
               menu = &network_connection_menu;
@@ -126,27 +126,27 @@ int AppWormux::Main(int argc, char *argv[])
               network_connection_menu.Run(skip_menu);
               break;
             }
-          case menuOPTIONS:
+            case MainMenu::OPTIONS:
             {
               OptionMenu options_menu;
               menu = &options_menu;
               options_menu.Run();
               break;
             }
-          case menuCREDITS:
+            case MainMenu::CREDITS:
             {
               CreditsMenu credits_menu;
               menu = &credits_menu;
               credits_menu.Run();
               break;
             }
-          case menuQUIT:
+            case MainMenu::QUIT:
             quit = true;
           default:
             break;
           }
         menu = NULL;
-        choice = menuNULL;
+        choice = MainMenu::NONE;
         skip_menu = false;
         net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
       }
@@ -225,11 +225,11 @@ void AppWormux::ParseArgs(int argc, char * argv[]) const
           exit(0);
           break;
         case 'p':
-          choice = menuPLAY;
+          choice = MainMenu::PLAY;
           skip_menu = true;
           break;
         case 'c':
-          choice = menuNETWORK;
+          choice = MainMenu::NETWORK;
           net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
           if (optarg)
             {
@@ -242,12 +242,12 @@ void AppWormux::ParseArgs(int argc, char * argv[]) const
           AddDebugMode(optarg);
           break;
         case 's':
-          choice = menuNETWORK;
+          choice = MainMenu::NETWORK;
           net_action = NetworkConnectionMenu::NET_HOST;
           skip_menu = true;
           break;
         case 'i':
-          choice = menuNETWORK;
+          choice = MainMenu::NETWORK;
           net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
           skip_menu = true;
           break;

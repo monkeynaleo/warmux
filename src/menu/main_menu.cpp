@@ -138,19 +138,19 @@ void MainMenu::button_click() const
 void MainMenu::SelectAction(const Widget *w)
 {
   if (w == play) {
-    choice = menuPLAY;
+    choice = PLAY;
     close_menu = true;
   } else if(w == network) {
-    choice = menuNETWORK;
+    choice = NETWORK;
     close_menu = true;
   } else if(w == options) {
-    choice = menuOPTIONS;
+    choice = OPTIONS;
     close_menu = true;
   } else if(w == infos) {
-    choice = menuCREDITS;
+    choice = CREDITS;
     close_menu = true;
   } else if(w == quit) {
-    choice = menuQUIT;
+    choice = QUIT;
     close_menu = true;
   }
 }
@@ -167,19 +167,19 @@ void MainMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
   // nothing to do while button is still not released
 }
 
-menu_item MainMenu::Run ()
+MainMenu::menu_item MainMenu::Run ()
 {
-  choice = menuNULL;
+  choice = NONE;
 
   Menu::Run();
 
-  ASSERT( choice != menuNULL );
+  ASSERT( choice != NONE );
   return choice;
 }
 
 bool MainMenu::signal_cancel()
 {
-  choice = menuQUIT;
+  choice = QUIT;
   return true;
 }
 
@@ -189,7 +189,7 @@ bool MainMenu::signal_ok()
   if(w != NULL) {
     SelectAction(widgets.GetCurrentSelectedWidget());
   } else {
-    choice = menuPLAY;
+    choice = PLAY;
   }
   return true;
 }
