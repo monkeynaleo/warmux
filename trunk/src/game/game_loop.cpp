@@ -98,23 +98,20 @@ GameLoop::GameLoop():
   delay(0),
   time_of_next_frame(0),
   time_of_next_phy_frame(0),
-  character_already_chosen(false),
-  chatsession(new Chat())
+  character_already_chosen(false)
 { }
 
 GameLoop::~GameLoop()
 {
-  if(chatsession)
-    delete chatsession;
   if(fps)
     delete fps;
-  chatsession = NULL;
 }
 
 void GameLoop::Init()
 {
   ResetUniqueIds();
 
+  chatsession.Clear();
   fps->Reset();
   IgnorePendingInputEvents();
   Camera::GetInstance()->GetInstance()->Reset();
@@ -274,7 +271,7 @@ void GameLoop::Draw ()
   // Draw MsgBox for chat network
   if(Network::GetInstance()->IsConnected()){
     StatStart("GameDraw:chatsession");
-    chatsession->Show();
+    chatsession.Show();
     StatStop("GameDraw:chatsession");
   }
 
