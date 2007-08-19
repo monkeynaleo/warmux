@@ -203,10 +203,10 @@ void MainMenu::DrawBackground()
   // skin_right->Blit(window, window.GetWidth()  - skin_right->GetWidth(),
   //                  window.GetHeight() - skin_right->GetHeight());
 
-  version_text->DrawCenter( window.GetWidth()/2,
-                            window.GetHeight() + VERSION_DY);
-  website_text->DrawCenter( window.GetWidth()/2,
-                            window.GetHeight() + VERSION_DY/2);
+  version_text->DrawCenter( Point2i(window.GetWidth()/2,
+                            window.GetHeight() + VERSION_DY));
+  website_text->DrawCenter( Point2i(window.GetWidth()/2,
+                            window.GetHeight() + VERSION_DY/2));
 
 }
 

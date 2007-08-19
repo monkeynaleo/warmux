@@ -49,7 +49,6 @@ public:
   virtual ~Text();
 
   //Draw method using windows coordinates
-  void DrawCenter(int x, int y) const;
   void DrawCenter(const Point2i &position) const;
   void DrawTopLeft(int x, int y) const;
   void DrawTopLeft(const Point2i &position) const;
