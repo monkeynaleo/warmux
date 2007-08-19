@@ -312,16 +312,18 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
 
 	if( owner->GetDirection() == DIRECTION_LEFT)
 	{
-		v.x = 2 * (int)owner->GetPos().x + GetSize().x/2 - v.x;
-		v.x -= member->member->spr->GetWidth();
+		v.x = 2 * (int)owner->GetPosition().x + GetSize().x/2 - v.x;
+		//v.x -= member->member->spr->GetWidth();
 	}
 	v = Mouse::GetInstance()->GetWorldPosition() - v;
 
 	if( v.Norm() < mb_mvt.follow_cursor_limit)
 	{
           double angle = v.ComputeAngle(Point2i(0, 0));
+	  angle *= owner->GetDirection();
+	  angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
   
-          angle_mvt.SetAngle(angle * owner->GetDirection() - M_PI);
+          angle_mvt.SetAngle(angle);
           member->member->ApplyMovement(angle_mvt, squel_lst);
 	}
       }
