@@ -88,13 +88,12 @@ AppWormux::~AppWormux()
     delete video;
 }
 
-int AppWormux::Main(int argc, char *argv[])
+int AppWormux::Main(void)
 {
   bool quit = false;
 
   try
   {
-    ParseArgs(argc, argv);
     Init();
     do
       {
@@ -182,7 +181,6 @@ void AppWormux::Init()
   Config::GetInstance();  // init config first, because it initializes i18n
 
   InitFonts();
-  DisplayWelcomeMessage();
 
   teams_list.LoadList();
 
@@ -191,68 +189,6 @@ void AppWormux::Init()
   jukebox.Init();
 
   cout << "[ " << _("Run game") << " ]" << endl;
-}
-
-void AppWormux::ParseArgs(int argc, char * argv[]) const
-{
-  char c;
-  int option_index = 0;
-  struct option long_options[] =
-    {
-      {"help",    no_argument,       NULL, 'h'},
-      {"version", no_argument,       NULL, 'v'},
-      {"play",    no_argument,       NULL, 'p'},
-      {"internet",no_argument,       NULL, 'i'},
-      {"client",  optional_argument, NULL, 'c'},
-      {"server",  no_argument,       NULL, 's'},
-      {"debug",   required_argument, NULL, 'd'},
-      {NULL,      no_argument,       NULL,  0 }
-    };
-
-  while ((c = getopt_long (argc, argv, "hvpic::sd:",
-                           long_options, &option_index)) != -1)
-    {
-      switch (c)
-        {
-        case 'h':
-          printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
-                 " [-i|--internet] [-s|--server] [-c|--client [ip]]"
-                 " [-d|--debug debug_masks]\n", argv[0]);
-          exit(0);
-          break;
-        case 'v':
-          DisplayWelcomeMessage();
-          exit(0);
-          break;
-        case 'p':
-          choice = MainMenu::PLAY;
-          skip_menu = true;
-          break;
-        case 'c':
-          choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
-          if (optarg)
-            {
-              Config::GetInstance()->SetNetworkHost(optarg);
-            }
-          skip_menu = true;
-          break;
-        case 'd':
-          printf("Debug: %s\n", optarg);
-          AddDebugMode(optarg);
-          break;
-        case 's':
-          choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_HOST;
-          skip_menu = true;
-          break;
-        case 'i':
-          choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
-          skip_menu = true;
-          break;
-        }
-    }
 }
 
 void AppWormux::DisplayLoadingPicture()
@@ -325,14 +261,14 @@ void AppWormux::End() const
     << " " << Constants::EMAIL << endl;
 }
 
-void AppWormux::DisplayWelcomeMessage() const
+void DisplayWelcomeMessage()
 {
   cout << "=== " << _("Wormux version ") << Constants::VERSION << endl;
   cout << "=== " << _("Authors:") << ' ';
-  for (vector < string >::iterator it = Constants::AUTHORS.begin(),
-       fin = Constants::AUTHORS.end(); it != fin; ++it)
+  for (vector < string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
+       fin = Constants::GetInstance()->AUTHORS.end(); it != fin; ++it)
     {
-      if (it != Constants::AUTHORS.begin())
+      if (it != Constants::GetInstance()->AUTHORS.begin())
         cout << ", ";
       cout << *it;
     }
@@ -354,9 +290,73 @@ void AppWormux::DisplayWelcomeMessage() const
 #endif
 }
 
+void ParseArgs(int argc, char * argv[])
+{
+  char c;
+  int option_index = 0;
+  struct option long_options[] =
+    {
+      {"help",    no_argument,       NULL, 'h'},
+      {"version", no_argument,       NULL, 'v'},
+      {"play",    no_argument,       NULL, 'p'},
+      {"internet",no_argument,       NULL, 'i'},
+      {"client",  optional_argument, NULL, 'c'},
+      {"server",  no_argument,       NULL, 's'},
+      {"debug",   required_argument, NULL, 'd'},
+      {NULL,      no_argument,       NULL,  0 }
+    };
+
+  while ((c = getopt_long (argc, argv, "hvpic::sd:",
+                           long_options, &option_index)) != -1)
+    {
+      switch (c)
+        {
+        case 'h':
+          printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
+                 " [-i|--internet] [-s|--server] [-c|--client [ip]]"
+                 " [-d|--debug debug_masks]\n", argv[0]);
+          exit(0);
+          break;
+        case 'v':
+          DisplayWelcomeMessage();
+          exit(0);
+          break;
+        case 'p':
+          choice = MainMenu::PLAY;
+          skip_menu = true;
+          break;
+        case 'c':
+          choice = MainMenu::NETWORK;
+          net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
+          if (optarg)
+            {
+              Config::GetInstance()->SetNetworkHost(optarg);
+            }
+          skip_menu = true;
+          break;
+        case 'd':
+          printf("Debug: %s\n", optarg);
+          AddDebugMode(optarg);
+          break;
+        case 's':
+          choice = MainMenu::NETWORK;
+          net_action = NetworkConnectionMenu::NET_HOST;
+          skip_menu = true;
+          break;
+        case 'i':
+          choice = MainMenu::NETWORK;
+          net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+          skip_menu = true;
+          break;
+        }
+    }
+}
+
 int main(int argc, char *argv[])
 {
-  AppWormux::GetInstance()->Main(argc, argv);
+  ParseArgs(argc, argv);
+  DisplayWelcomeMessage();
+  AppWormux::GetInstance()->Main();
   delete AppWormux::GetInstance();
   exit(EXIT_SUCCESS);
 }
