@@ -4,6 +4,10 @@
   <sound sample="menu/ok" file="menu/ok.ogg" />
   <sound sample="menu/cancel" file="menu/cancel.ogg" />
   <sound sample="menu/clic" file="menu/clic.ogg" />
+  <sound sample="menu/error" file="menu/error.ogg" />
+
+  <sound sample="menu/weapon_menu_show" file="menu/weapon_menu_toggled.ogg" />
+  <sound sample="menu/weapon_menu_hide" file="menu/weapon_menu_toggled.ogg" />
 
   <sound sample="weapon/dynamite_exp"    file="../../weapon/sound/dynamite_exp.ogg" />
   <sound sample="weapon/dynamite_fuze"   file="../../weapon/sound/dynamite_fuze.ogg" />

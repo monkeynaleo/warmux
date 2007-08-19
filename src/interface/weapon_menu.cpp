@@ -35,6 +35,7 @@
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+#include "sound/jukebox.h"
 #include "weapon/weapon.h"
 #include "weapon/weapons_list.h"
 #include "game/config.h"
@@ -212,6 +213,8 @@ void WeaponsMenu::Show()
     else
       motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
     show = true;
+
+    jukebox.Play("share", "menu/weapon_menu_show");
   }
 }
 
@@ -224,6 +227,8 @@ void WeaponsMenu::Hide()
     else
       motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
     show = false;
+
+    jukebox.Play("share", "menu/weapon_menu_hide");
   }
 }
 
