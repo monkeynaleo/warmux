@@ -200,18 +200,18 @@ void Text::SetColor(const Color &new_color)
 
 void Text::DrawCenter (const Point2i &position) const
 {
-  DrawTopLeft(position.GetX() - surf.GetWidth() / 2,
-              position.GetY() - surf.GetHeight() / 2);
+  DrawTopLeft(Point2i(position.GetX() - surf.GetWidth() / 2,
+              position.GetY() - surf.GetHeight() / 2));
 }
 
 void Text::DrawTopRight (int x, int y) const
 {
-  DrawTopLeft( x - surf.GetWidth(), y);
+  DrawTopLeft(Point2i( x - surf.GetWidth(), y));
 }
 
 void Text::DrawCenterTop (int x, int y) const
 {
-  DrawTopLeft( x - surf.GetWidth()/2, y);
+  DrawTopLeft(Point2i(x - surf.GetWidth()/2, y));
 }
 
 void Text::DrawTopLeft(const Point2i &position) const
@@ -236,11 +236,6 @@ void Text::DrawTopLeft(const Point2i &position) const
     app->video->window.Blit(surf, dst_rect.GetPosition());
     world.ToRedrawOnScreen(dst_rect);
   }
-}
-
-void Text::DrawTopLeft (int x, int y) const
-{
-  DrawTopLeft( Point2i(x, y) );
 }
 
 void Text::DrawCenterOnMap (int x, int y) const

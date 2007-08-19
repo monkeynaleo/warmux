@@ -90,7 +90,8 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
   }
 
   // Draw the label
-  txt_label->DrawTopLeft( GetPositionX(), GetPositionY() + GetSizeY() - txt_label->GetHeight() );
+  txt_label->DrawTopLeft( Point2i(GetPositionX(),
+        GetPositionY() + GetSizeY() - txt_label->GetHeight() ));
 
   // buttons for listbox with more items than visible
   if (m_items.size() > local_max_visible_items){

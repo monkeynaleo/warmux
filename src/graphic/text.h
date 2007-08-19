@@ -50,7 +50,6 @@ public:
 
   //Draw method using windows coordinates
   void DrawCenter(const Point2i &position) const;
-  void DrawTopLeft(int x, int y) const;
   void DrawTopLeft(const Point2i &position) const;
   void DrawTopRight(int x, int y) const;
   void DrawCenterTop(int x, int y) const;

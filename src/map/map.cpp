@@ -299,8 +299,9 @@ void Map::DrawAuthorName()
     author_info2 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
   }
 
-  author_info1->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y);
-  author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+(*Font::GetInstance(Font::FONT_SMALL)).GetHeight());
+  /* FIXME use a real layout here... not calculated positions */
+  author_info1->DrawTopLeft(Point2i(AUTHOR_INFO_X,AUTHOR_INFO_Y));
+  author_info2->DrawTopLeft(Point2i(AUTHOR_INFO_X,AUTHOR_INFO_Y+(*Font::GetInstance(Font::FONT_SMALL)).GetHeight()));
 }
 
 bool CompareRectangle(const Rectanglei& a, const Rectanglei& b)
