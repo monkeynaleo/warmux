@@ -69,6 +69,10 @@ protected:
    /* Actions buttons  */
    HBox *actions_buttons;
 
+   void play_ok_sound();
+   void play_cancel_sound();
+   void play_error_sound();
+
    virtual void mouse_ok();
    virtual void mouse_cancel();
    virtual void key_ok();

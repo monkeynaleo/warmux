@@ -187,6 +187,7 @@ void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/){}
 
 void NetworkConnectionMenu::DisplayError(Network::connection_state_t conn)
 {
+  play_error_sound();
   DispNetworkError(conn);
   Menu::RedrawMenu();
 }
@@ -258,6 +259,8 @@ bool NetworkConnectionMenu::signal_ok()
   }
 
   if (Network::GetInstance()->IsConnected()) {
+    play_ok_sound();
+    
     // run the network menu ! :-)
     NetworkMenu nm;
 
@@ -276,6 +279,8 @@ bool NetworkConnectionMenu::signal_ok()
     // if InternetMenu was closed without making a connection menu has to be redrawn
     Menu::RedrawMenu();
     Network::Disconnect();
+
+    play_error_sound();
     goto out;
     // TODO : add error sound and dialog
   }
