@@ -92,7 +92,7 @@ bool Blowtorch::p_Shoot()
   return true;
 }
 
-void Blowtorch::RepeatShoot()
+void Blowtorch::RepeatShoot() const
 {
   uint time = Time::GetInstance()->Read() - m_last_fire_time;
 

@@ -76,7 +76,7 @@ class ResultsMenu : public Menu
     void DrawTeamGraph(const Team* team,
                        int x, int y,
                        double energy_scale, double time_scale,
-                       const Color& color);
+                       const Color& color) const;
     void DrawGraph(int x, int y, int w, int h);
     void DrawPodium(const Point2i &position) const;
     void DrawTeamOnPodium(const Team& team, const Point2i& podium_position,

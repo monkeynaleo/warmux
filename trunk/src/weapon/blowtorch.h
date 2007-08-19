@@ -33,7 +33,7 @@ class Blowtorch : public Weapon
     void p_Deselect();
     void Refresh() { };
 
-    void RepeatShoot();
+    void RepeatShoot() const ;
   public:
     Blowtorch();
     BlowtorchConfig& cfg();

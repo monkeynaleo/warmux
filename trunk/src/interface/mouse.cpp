@@ -34,7 +34,6 @@
 #include "map/map.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "team/team_config.h"
 #include "tool/point.h"
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"

@@ -139,7 +139,7 @@ public:
   void StartWalk();
   void StopWalk();
   void ResetWalk() { walk_events = 0; };
-  bool IsWalking();
+  bool IsWalking() const ;
 
   void MakeParticles(const Point2i& pos);
   void MakeTeleportParticles(const Point2i& pos, const Point2i& dst);

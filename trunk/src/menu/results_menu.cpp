@@ -333,7 +333,7 @@ void ResultsMenu::DrawPodium(const Point2i& position) const
 void ResultsMenu::DrawTeamGraph(const Team *team,
                                 int x, int y,
                                 double duration_scale, double energy_scale,
-                                const Color& color)
+                                const Color& color) const
 {
   EnergyList::const_iterator it = team->energy.energy_list.begin(),
     end = team->energy.energy_list.end();

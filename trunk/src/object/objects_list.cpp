@@ -28,7 +28,7 @@
 #include "map/maps_list.h"
 #include "map/camera.h"
 #include "tool/debug.h"
-#include "tool/random.h"
+//#include "tool/random.h"
 #include "tool/rectangle.h"
 #include "game/time.h"
 #include "weapon/mine.h"
