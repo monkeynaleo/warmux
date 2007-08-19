@@ -8,6 +8,7 @@
 
   <sound sample="menu/weapon_menu_show" file="menu/weapon_menu_toggled.ogg" />
   <sound sample="menu/weapon_menu_hide" file="menu/weapon_menu_toggled.ogg" />
+  <sound sample="change_weapon" file="menu/weapon_menu_toggled.ogg" />
 
   <sound sample="weapon/dynamite_exp"    file="../../weapon/sound/dynamite_exp.ogg" />
   <sound sample="weapon/dynamite_fuze"   file="../../weapon/sound/dynamite_fuze.ogg" />
@@ -15,6 +16,7 @@
   <sound sample="weapon/grenade_bounce"  file="../../weapon/sound/grenade_bounce.ogg" />
   <sound sample="weapon/disco_grenade_music" file="../../weapon/sound/disco_grenade_music.ogg" />
   <sound sample="weapon/disco_grenade_bounce" file="../../weapon/sound/grenade_bounce.ogg" />
+  <sound sample="weapon/gnu_bounce" file="../../weapon/sound/gnu_bounce.ogg" />
   <sound sample="weapon/gun" file="../../weapon/sound/gun.ogg" />
   <sound sample="weapon/shotgun" file="../../weapon/sound/shotgun.ogg" />
   <sound sample="weapon/ricoche1" file="../../weapon/sound/ricoche1.ogg" />
