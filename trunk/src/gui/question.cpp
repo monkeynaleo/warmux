@@ -86,8 +86,7 @@ void Question::Draw() const
 
   if(text->GetText() != "")
   {
-    text->DrawCenter(app->video->window.GetWidth()/2,
-                     app->video->window.GetHeight()/2);
+    text->DrawCenter(app->video->window.GetSize()/2);
   }
 }
 
