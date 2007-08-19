@@ -39,7 +39,6 @@ private:
   void Init();
   void InitWindow();
   void DisplayLoadingPicture();
-  void InitFonts() const;
   void End() const;
   void DisplayWelcomeMessage() const;
   AppWormux();

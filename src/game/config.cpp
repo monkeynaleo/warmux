@@ -159,7 +159,7 @@ Config::Config():
   if (!DoLoading())
   {
     // Failed, still try to apply default config then
-    I18N_SetDir (TranslateDirectory(locale_dir));
+    SetLanguage("");
   }
 
   dir = TranslateDirectory(data_dir);

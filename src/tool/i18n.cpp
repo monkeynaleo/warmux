@@ -67,7 +67,7 @@ std::string Format(const char *format, ...)
   return result;
 }
 
-void I18N_SetDir(const std::string &dir)
+static void I18N_SetDir(const std::string &dir)
 {
   printf("o Bind text domain to: %s\n"
          "o Codeset: %s\n"
