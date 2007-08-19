@@ -225,7 +225,7 @@ bool NetworkMenu::signal_ok()
     if(!found)
     {
       msg_box->NewMessage(_("You won't be able to play before selecting a team !"));
-      return false;
+      goto error;
     }
 
     // Wait for the server, and stay in the menu map / team can still be changed
@@ -240,19 +240,19 @@ bool NetworkMenu::signal_ok()
                                           "There are only %i teams.",
                                           teams_list.playing_list.size()),
                                  teams_list.playing_list.size()), c_red);
-      return false;
+      goto error;
     }
     if (Network::GetInstanceServer()->GetNbConnectedPlayers() <= 1)
     {
       msg_box->NewMessage(_("You are alone..."), c_red);
-      return false;
+      goto error;
     }
     if (Network::GetInstanceServer()->GetNbConnectedPlayers() != Network::GetInstanceServer()->GetNbInitializedPlayers()+1)
     {
       int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers() - Network::GetInstanceServer()->GetNbInitializedPlayers();
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl, c_red);
-      return false;
+      goto error;
     }
   }
 
@@ -265,12 +265,17 @@ bool NetworkMenu::signal_ok()
 
     // Starting the game :-)
     SaveOptions();
+    play_ok_sound();
     Game::GetInstance()->Start();
     Network::GetInstance()->network_menu = NULL;
   }
 
   Network::Disconnect();
   return true;
+
+ error:
+  play_error_sound();
+  return false;
 }
 
 void NetworkMenu::key_ok()

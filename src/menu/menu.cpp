@@ -72,10 +72,25 @@ Menu::~Menu()
   delete background;
 }
 
+void Menu::play_ok_sound()
+{
+  jukebox.Play("share", "menu/ok");
+}
+
+void Menu::play_cancel_sound()
+{
+  jukebox.Play("share", "menu/cancel");
+}
+
+void Menu::play_error_sound()
+{
+  jukebox.Play("share", "menu/error");
+}
+
 void Menu::mouse_ok()
 {
   if (signal_ok()) {
-    jukebox.Play("share", "menu/ok");
+    play_ok_sound();
     close_menu = true;
   }
 }
@@ -83,7 +98,7 @@ void Menu::mouse_ok()
 void Menu::mouse_cancel()
 {
   if (signal_cancel()) {
-    jukebox.Play("share", "menu/cancel");
+    play_cancel_sound();
     close_menu = true;
   }
 }
@@ -103,7 +118,7 @@ bool Menu::BasicOnClickUp(const Point2i &mousePosition)
 void Menu::key_ok()
 {
   if (signal_ok()) {
-    jukebox.Play("share", "menu/ok");
+    play_ok_sound();
     close_menu = true;
   }
 }
@@ -111,7 +126,7 @@ void Menu::key_ok()
 void Menu::key_cancel()
 {
   if (signal_cancel()) {
-    jukebox.Play("share", "menu/cancel");
+    play_cancel_sound();
     close_menu = true;
   }
 }
