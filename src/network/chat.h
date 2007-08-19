@@ -25,10 +25,10 @@
 
 #include <string>
 #include "include/base.h"
+#include "graphic/text_list.h"
 
 // Forward declarations
 class Text;
-class TextList;
 #ifndef _SDL_events_h
 union SDL_Event;
 #endif
@@ -41,7 +41,7 @@ class Chat
   const Chat& operator=(const Chat&);
   /*********************************************/
 
-  TextList* chat;
+  TextList chat;
   Text* input;
   Text* msg;
 
@@ -54,7 +54,7 @@ class Chat
   void Show();
   void ShowInput();
   bool CheckInput() const;
-  void Reset();
+  void Clear();
   void NewMessage(const std::string& msg);
   void HandleKey(const SDL_Event& event);
 };

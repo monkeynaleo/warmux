@@ -34,16 +34,13 @@ const uint YPOS=130;
 const uint MAXLINES=10; //Fidel's advise
 const uint MAXSECONDS=10;
 
-/*
- * FIXME, this class leaks memory -> input and msg are not handled...
- */
 Chat::~Chat()
 {
-  delete chat;
+  delete msg;
+  delete input;
 }
 
 Chat::Chat():
-  chat(new TextList()),
   input(NULL),
   msg(NULL),
   check_input(false),
@@ -51,16 +48,21 @@ Chat::Chat():
 {
 }
 
+void Chat::Clear()
+{
+  chat.Clear();
+}
+
 void Chat::Show()
 {
   uint now = Time::GetInstance()->ReadSec();
 
   if((now - last_time) >= MAXSECONDS){
-    chat->DeleteLine();
+    chat.DeleteLine();
     last_time = now;
   }
 
-  chat->Draw(XPOS, YPOS, HEIGHT);
+  chat.Draw(XPOS, YPOS, HEIGHT);
 
   if(check_input)
     ShowInput();
@@ -85,12 +87,12 @@ bool Chat::CheckInput() const {
 
 void Chat::NewMessage(const std::string &msg)
 {
-  if (!chat->Size()){
+  if (!chat.Size()){
     uint now = Time::GetInstance()->ReadSec();
     last_time = now;
   }
 
-  chat->AddText(msg, MAXLINES);
+  chat.AddText(msg, MAXLINES);
 }
 
 

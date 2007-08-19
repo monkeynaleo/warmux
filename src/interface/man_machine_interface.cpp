@@ -215,7 +215,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       return;
     case KEY_CHAT:
       if(Network::IsConnected())
-        GameLoop::GetInstance()->chatsession->ShowInput();
+        GameLoop::GetInstance()->chatsession.ShowInput();
       return;
     case KEY_CENTER:
       CharacterCursor::GetInstance()->FollowActiveCharacter();

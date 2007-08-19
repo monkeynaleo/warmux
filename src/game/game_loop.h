@@ -23,12 +23,12 @@
 #define GAME_LOOP_H
 
 #include "include/base.h"
+#include "network/chat.h"
 
 // Forward declarations
 class Character;
 class ObjBox;
 class PhysicalObj;
-class Chat;
 class FramePerSecond;
 
 class GameLoop
@@ -73,7 +73,7 @@ public:
   static GameLoop * GetInstance();
 
   bool character_already_chosen;
-  Chat *chatsession;
+  Chat chatsession;
 
   void Init();
 
