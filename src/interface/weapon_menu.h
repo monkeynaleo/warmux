@@ -86,7 +86,7 @@ class WeaponsMenu
   AffineTransform2D ComputeWeaponTransformation();
   AffineTransform2D ComputeToolTransformation();
   void Show();
-  void Hide();
+  void Hide(bool play_sound=true);
   void Reset();
   void SetHelp(const std::ostringstream&) const { };
   bool IsDisplayed() const { return show; };

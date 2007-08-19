@@ -399,7 +399,8 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
     return Play("default", sample, loop) ; // try with default profile
   }
 
-  MSG_DEBUG("jukebox", "Error: No sound found for sample %s/%s", category.c_str(), sample.c_str());
+  std::cerr << "Sound error: No sound found for sample" << category.c_str() 
+	    << "/" << sample.c_str() << std::endl;
   return -1;
 }
 

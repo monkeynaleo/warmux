@@ -38,6 +38,7 @@
 #include "object/objbox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
+#include "sound/jukebox.h"
 #include "weapon/weapons_list.h"
 
 #define SCROLL_KEYBOARD 20 // pixel
