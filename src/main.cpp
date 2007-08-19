@@ -78,14 +78,13 @@ AppWormux *AppWormux::GetInstance()
 }
 
 AppWormux::AppWormux():
-  video(NULL)
+  video(new Video())
 {
 }
 
 AppWormux::~AppWormux()
 {
-  if (video)
-    delete video;
+  delete video;
 }
 
 int AppWormux::Main(int argc, char *argv[])
@@ -173,8 +172,6 @@ int AppWormux::Main(int argc, char *argv[])
 
 void AppWormux::Init()
 {
-  video = new Video();
-
 #ifndef WIN32
   signal(SIGPIPE, SIG_IGN);
 #endif
