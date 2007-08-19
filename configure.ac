@@ -187,7 +187,7 @@ LIBS="$LIBS $SDL_LIBS"
 
 dnl === Check for pkg-config ===============================================
 
-AC_PATH_PROGS([PACKAGE_CONFIG], [pkg-config], [none])
+AC_PATH_PROGS([PACKAGE_CONFIG], [$host_alias-pkg-config pkg-config], [none])
 if test "x$PACKAGE_CONFIG" = "xnone"; then
   AC_MSG_ERROR([*** pkg-config, needed to check for libxml++ existence has not been found.])
 fi
@@ -211,7 +211,7 @@ else
   AC_MSG_RESULT(lib$PNG)
 fi
 
-dnl === Check for SDL_gfx ==================================================
+dnl === Check for SDL_gfx ===========================================================
 
 AC_ARG_WITH(sdl-gfx-prefix,
             [  --with-sdl-gfx-prefix=DIR       specify where SDL_gfx library is installed],
@@ -225,10 +225,19 @@ fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
 AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
 
+dnl === Check for curl ==============================================================
+
+AC_ARG_WITH(curl-prefix,
+            [  --with-curl-prefix=DIR       specify where curl library is installed],
+            [CURL_PREFIX="$withval"])
+if test "x$CURL_PREFIX" != "x"; then CURL_BIN="$CURL_PREFIX/bin/curl-config"
+else                                 CURL_BIN=curl-config; fi
+AC_SUBST(CURL_PREFIX)
+AC_CHECK_LIB(curl, curl_easy_init,check_curl="yes",check_curl="no")
+
 dnl === Check for SDL image, mixer, etc., libxml++, libcurl and libpng ==============
 
 AC_CHECK_LIB($PNG, png_error,,,)
-AC_CHECK_LIB(curl, curl_easy_init,check_curl="yes",check_curl="no")
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
 AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
 AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
@@ -288,8 +297,8 @@ if test \
 fi
 
 dnl === Add libxml++, libcurl flags and libpng =================================================
-LIBCURL_CFLAGS=`curl-config --cflags`
-LIBCURL_LIBS=`curl-config --libs`
+LIBCURL_CFLAGS=`$CURL_BIN --cflags`
+LIBCURL_LIBS=`$CURL_BIN --libs`
 
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
