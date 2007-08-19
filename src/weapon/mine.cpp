@@ -223,9 +223,8 @@ void Mine::Add(int x, int y)
   projectile->SetXY(Point2i(x, y));
   projectile->SetOverlappingObject(&ActiveCharacter());
 
-  Point2d speed_vector = ActiveCharacter().GetSpeedXY();
-  projectile->SetSpeedXY(speed_vector);
-  lst_objects.AddObject(projectile);
+  projectile -> SetSpeedXY (ActiveCharacter().GetSpeedXY());
+  lst_objects.AddObject (projectile);
   projectile = NULL;
   ReloadLauncher();
 }
