@@ -238,21 +238,13 @@ void Text::DrawTopLeft(const Point2i &position) const
   }
 }
 
-void Text::DrawCenterOnMap (int x, int y) const
-{
-  DrawTopLeftOnMap(x - surf.GetWidth()/2, y - surf.GetHeight()/2 );
-}
 
-void Text::DrawCenterTopOnMap (int x, int y) const
-{
-  DrawTopLeftOnMap(x - surf.GetWidth()/2, y);
-}
-
-void Text::DrawTopLeftOnMap (int x, int y) const
+void Text::DrawCenterTopOnMap (const Point2i &pos) const
 {
   if(shadowed)
-    AbsoluteDraw(background, Point2i(bg_offset + x, bg_offset + y) );
-  AbsoluteDraw(surf, Point2i(x, y) );
+    AbsoluteDraw(background, Point2i(bg_offset + pos.x - surf.GetWidth() / 2,
+                                     bg_offset + pos.y) );
+  AbsoluteDraw(surf, Point2i(pos.x - surf.GetWidth() / 2, pos.y) );
 }
 
 void Text::SetMaxWidth(uint max_w)

@@ -247,7 +247,7 @@ void Character::DrawName (int dy) const
 
   if (Config::GetInstance()->GetDisplayNameCharacter())
   {
-    name_text->DrawCenterTopOnMap(x,y);
+    name_text->DrawCenterTopOnMap(Point2i(x,y));
   }
 
 }

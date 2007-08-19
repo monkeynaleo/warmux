@@ -55,9 +55,7 @@ public:
   void DrawCenterTop(const Point2i &position) const;
 
   //Draw method using map coordinates
-  void DrawCenterOnMap(int x, int y) const;
-  void DrawTopLeftOnMap(int x, int y) const;
-  void DrawCenterTopOnMap(int x, int y) const;
+  void DrawCenterTopOnMap(const Point2i &position) const;
 
   void Set(const std::string &new_txt);
   const std::string& GetText() const;
