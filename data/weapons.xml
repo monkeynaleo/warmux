@@ -18,7 +18,7 @@
   
   <sprite name="fire_particle">
     <image file="object/fire.png" >
-      <grid pos="0,0" size="32,35" array="6,1" />
+      <grid pos="0,0" size="18,35" array="5,1" />
     </image>
   </sprite>
   
