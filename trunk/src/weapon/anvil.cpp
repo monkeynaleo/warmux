@@ -46,6 +46,7 @@ class Anvil : public WeaponProjectile
   public:
     Anvil(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
+    ~Anvil();
     void Refresh();
 
     void PlayFallSound();
@@ -65,6 +66,11 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
+}
+
+Anvil::~Anvil()
+{
+  falling_sound.Stop(); // paranoiac sound stop
 }
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj)
