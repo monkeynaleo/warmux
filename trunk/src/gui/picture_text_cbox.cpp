@@ -87,8 +87,9 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
 
       video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
 
-      txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2,
-                                GetPositionY() + GetSizeY() - txt_label->GetHeight() );
+      txt_label->DrawCenterTop(GetPosition()
+                               + Point2i(GetSizeX()/2,
+                                         GetSizeY() - txt_label->GetHeight()));
 
       if (!m_value)
         {

@@ -52,7 +52,7 @@ public:
   void DrawCenter(const Point2i &position) const;
   void DrawTopLeft(const Point2i &position) const;
   void DrawTopRight(const Point2i &position) const;
-  void DrawCenterTop(int x, int y) const;
+  void DrawCenterTop(const Point2i &position) const;
 
   //Draw method using map coordinates
   void DrawCenterOnMap(int x, int y) const;

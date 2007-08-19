@@ -102,10 +102,10 @@ void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
   uint center_y = GetPositionY() + (GetSizeY()/2) - txt_label->GetHeight()/2;
   uint value_h = Font::GetInstance(Font::FONT_HUGE)->GetHeight();
 
-  txt_value->DrawCenterTop(center_x, center_y - value_h/2);
+  txt_value->DrawCenterTop(Point2i(center_x, center_y - value_h/2));
 
-  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2,
-                            GetPositionY() + GetSizeY() - txt_label->GetHeight() );
+  txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
+                            GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
 Widget* SpinButtonBig::ClickUp(const Point2i &mousePosition, uint button)
