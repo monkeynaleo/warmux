@@ -46,7 +46,9 @@
   <sound sample="bonus_box/hitting_ground" file="bonus_box_hitting_ground.ogg" />
   <sound sample="bonux_box/picking_up" file="bonus_box_picking_up.ogg" />
 
-  <sound sample="character/change_in_same_team" file="menu/weapon_menu_toggled.ogg" /> <!-- to change!! -->
+  <sound sample="character/change_in_same_team" file="character_change.ogg" />
+
+  <sound sample="time/bip" file="time_bip.ogg" />
 
   <sound sample="sink" file="sink.ogg" />
 
