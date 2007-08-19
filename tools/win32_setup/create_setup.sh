@@ -1,7 +1,6 @@
 #!/bin/bash
 
-## Programs 
-PKG_CONFIG=pkg-config
+## Programs
 MAKE_NSIS=makensis
 
 # Path to which all others are relative
@@ -25,8 +24,20 @@ NSIS="$DEST/wormux.nsi"
 rm -rf $NSIS $DEST
 
 # Prepare stuff
-WIN_WORMUXDIR=$(cd "$WORMUXDIR" && cmd /c cd)
-LOCAL_PATH=$(cmd /c cd)
+if [ "$OSTYPE" == "linux-gnu" ]; then
+  PKG_CONFIG=i586-mingw32msvc-pkg-config
+  SDL_CONFIG=i586-mingw32msvc-sdl-config
+  WIN_WORMUXDIR="$PWD/../.."
+  LOCAL_PATH="$PWD"
+  SEP="/"
+else
+  PKG_CONFIG=pkg-config
+  SDL_CONFIG=sdl-config
+  WIN_WORMUXDIR=$(cd "$WORMUXDIR" && cmd /c cd)
+  LOCAL_PATH=$(cmd /c cd)
+  SEP="\\"
+fi
+
 mkdir -p $DEST
 
 function pkg_path
@@ -66,8 +77,8 @@ SetCompressor ${COMPRESSION}
 
 ;--------------------------------
 ;Modern UI Configuration
-  !define MUI_ICON                          "${LOCAL_PATH}\install.ico"
-  !define MUI_UNICON                        "${LOCAL_PATH}\uninstall.ico"
+  !define MUI_ICON                          "${LOCAL_PATH}${SEP}install.ico"
+  !define MUI_UNICON                        "${LOCAL_PATH}${SEP}uninstall.ico"
   ; Alter License section
   !define MUI_LICENSEPAGE_BUTTON            \$(WORMUX_BUTTON)
   !define MUI_LICENSEPAGE_TEXT_BOTTOM       \$(WORMUX_BOTTOM_TEXT)
@@ -182,12 +193,8 @@ cp "$(pkg_path libxml-2.0)/bin/libxml2"*.dll $DEST
 cp "$(pkg_path libxml++-2.6)/bin/libxml++"*.dll $DEST
 cp "$(pkg_path glibmm-2.4)/bin/libglibmm"*.dll $DEST
 
-# Clean up before non-strippable files
-# WARNING Stripping some dlls corrupts them beyond use
-strip "$DEST/"*.dll "$WORMUXDIR/src/"*.exe
-
 # Files that must not be stripped (all MSVC, mainly SDL and vorbis)
-SDL_PATH=$(sdl-config --prefix)
+SDL_PATH=$($SDL_CONFIG --prefix)
 cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll    \
    "$GLIB_PATH/bin/"{intl,iconv,zlib1,libpng12}.dll     \
    "$SDL_PATH/bin/"lib{curl-4,freetype-6,png12-0}.dll   \
@@ -206,7 +213,7 @@ for gmo in "$WORMUXDIR"/po/*.gmo; do
   lg=${gmo%%.gmo}
   lg=${lg//.*\//}
   echo "  SetOutPath \$INSTDIR\\locale\\$lg\\LC_MESSAGES" >> $NSIS
-  echo "  File /oname=wormux.mo \"$WIN_WORMUXDIR\\po\\$lg.gmo\"" >> $NSIS
+  echo "  File /oname=wormux.mo \"$WIN_WORMUXDIR${SEP}po${SEP}$lg.gmo\"" >> $NSIS
 done
 
 ## Data - I love this syntax
