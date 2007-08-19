@@ -24,6 +24,7 @@
 #include "include/app.h"
 #include "map/map.h"
 #include "tool/file_tools.h"
+#include "tool/i18n.h"
 
 Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 Font* Font::FONT_ARRAY_BOLD[] = {NULL, NULL, NULL, NULL, NULL, NULL};
@@ -41,6 +42,11 @@ Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
 
   if (FONT_ARRAY[ftype] == NULL) {
     try {
+      if (TTF_Init() == -1) {
+        Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
+        exit(1);
+      }
+
       // Load the font in the different styles
       FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
       FONT_ARRAY_BOLD[type]->SetBold();

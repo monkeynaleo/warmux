@@ -31,6 +31,5 @@
 
 std::string Format (const char *format, ...);
 void InitI18N(const std::string &dir, const std::string &default_language);
-void I18N_SetDir(const std::string &dir);
 
 #endif

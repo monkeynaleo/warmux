@@ -78,14 +78,13 @@ AppWormux *AppWormux::GetInstance()
 }
 
 AppWormux::AppWormux():
-  video(NULL)
+  video(new Video())
 {
 }
 
 AppWormux::~AppWormux()
 {
-  if (video)
-    delete video;
+  delete video;
 }
 
 int AppWormux::Main(void)
@@ -172,15 +171,9 @@ int AppWormux::Main(void)
 
 void AppWormux::Init()
 {
-  video = new Video();
-
 #ifndef WIN32
   signal(SIGPIPE, SIG_IGN);
 #endif
-
-  Config::GetInstance();  // init config first, because it initializes i18n
-
-  InitFonts();
 
   teams_list.LoadList();
 
@@ -231,14 +224,6 @@ void AppWormux::RefreshDisplay()
   }
   else if (menu) {
     menu->RedrawMenu();
-  }
-}
-
-void AppWormux::InitFonts() const
-{
-  if (TTF_Init() == -1) {
-    Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
-    exit(1);
   }
 }
 
@@ -354,8 +339,16 @@ void ParseArgs(int argc, char * argv[])
 
 int main(int argc, char *argv[])
 {
+  /* FIXME calling Config::GetInstance here means that there is no need of
+   * singleton for Config but simply a global variable. This may look stange
+   * but the whole system (directories, translation etc...) is needed, even for
+   * the ParseArgs and DisplayWelcomeMessage functions. */
+  Config::GetInstance(); // init config first, because it initializes i18n
+
   ParseArgs(argc, argv);
+
   DisplayWelcomeMessage();
+
   AppWormux::GetInstance()->Main();
   delete AppWormux::GetInstance();
   exit(EXIT_SUCCESS);
