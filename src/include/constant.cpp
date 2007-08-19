@@ -27,8 +27,6 @@ const std::string Constants::ENV_DATADIR = "WORMUX_DATADIR";
 const std::string Constants::ENV_LOCALEDIR = "WORMUX_LOCALEDIR";
 const std::string Constants::ENV_FONT_PATH = "WORMUX_FONT_PATH";
 
-std::vector<std::string> Constants::AUTHORS;
-
 const std::string Constants::WEB_SITE = "http://www.wormux.org";
 const std::string Constants::EMAIL = "wormux-dev .AT. gna .DOT. org";
 

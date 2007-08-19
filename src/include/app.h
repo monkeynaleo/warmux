@@ -37,7 +37,6 @@ private:
 
 private:
   void Init();
-  void ParseArgs(int argc, char* argv[]) const;
   void InitWindow();
   void DisplayLoadingPicture();
   void InitFonts() const;
@@ -50,7 +49,7 @@ public:
   static AppWormux * GetInstance();
   ~AppWormux();
 
-  int Main(int argc, char *argv[]);
+  int Main(void);
 };
 
 #endif
