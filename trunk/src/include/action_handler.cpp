@@ -49,6 +49,7 @@
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/vector2.h"
+#include "sound/jukebox.h"
 #include "weapon/construct.h"
 #include "weapon/weapon_launcher.h"
 #include "weapon/grapple.h"
@@ -139,6 +140,7 @@ void Action_Network_ChangeState (Action *a)
 
 void Action_Player_ChangeWeapon (Action *a)
 {
+  jukebox.Play("share", "change_weapon");
   ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
 }
 

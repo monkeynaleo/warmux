@@ -218,7 +218,7 @@ void WeaponsMenu::Show()
   }
 }
 
-void WeaponsMenu::Hide()
+void WeaponsMenu::Hide(bool play_sound)
 {
   if(show) {
     Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
@@ -228,7 +228,8 @@ void WeaponsMenu::Hide()
       motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
     show = false;
 
-    jukebox.Play("share", "menu/weapon_menu_hide");
+    if (play_sound)
+      jukebox.Play("share", "menu/weapon_menu_hide");
   }
 }
 
@@ -365,7 +366,7 @@ bool WeaponsMenu::ActionClic(const Point2i &/*mouse_pos*/)
     int nb_bullets = ActiveTeam().ReadNbAmmos(tmp->GetType());
     if((nb_bullets == INFINITE_AMMO || nb_bullets > 0) && ActiveTeam().GetWeapon().CanChangeWeapon()) {
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, tmp->GetType()));
-      Hide();
+      Hide(false);
       return true;
     }
   }
