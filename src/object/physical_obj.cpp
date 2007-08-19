@@ -380,12 +380,6 @@ void PhysicalObj::UpdatePosition ()
   // Compute new position.
   RunPhysicalEngine();
 
-  // Test if object is still inside the world
-  if( IsOutsideWorldXY(GetPosition()) ) {
-    Ghost();
-    SignalOutOfMap();
-  }
-
   if (IsGhost()) return;
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
