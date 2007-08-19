@@ -100,6 +100,6 @@ void FramePerSecond::Draw(){
   snprintf(buffer, sizeof(buffer)-1, "%.1f", average);
   buffer[sizeof(buffer)-1] = '\0';
   text->Set (Format(_("%s fps"), buffer));
-  text->DrawTopRight(AppWormux::GetInstance()->video->window.GetWidth()-1,0);
+  text->DrawTopRight(Point2i(AppWormux::GetInstance()->video->window.GetWidth()-1,0));
 }
 

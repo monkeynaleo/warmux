@@ -51,7 +51,7 @@ public:
   //Draw method using windows coordinates
   void DrawCenter(const Point2i &position) const;
   void DrawTopLeft(const Point2i &position) const;
-  void DrawTopRight(int x, int y) const;
+  void DrawTopRight(const Point2i &position) const;
   void DrawCenterTop(int x, int y) const;
 
   //Draw method using map coordinates
