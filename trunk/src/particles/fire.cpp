@@ -34,7 +34,6 @@ ExplosiveWeaponConfig fire_cfg;
 
 FireParticle::FireParticle() :
   Particle("fire_particle"),
-  direction(randomObj.GetBool() ? -1 : 1),
   creation_time(Time::GetInstance()->Read()),
   on_ground(false),
   oscil_delta(randomObj.GetLong(0, dig_ground_time))
@@ -50,10 +49,8 @@ FireParticle::FireParticle() :
   fire_cfg.particle_range = 6;
 
   image = ParticleEngine::GetSprite(FIRE_spr);
-  image->SetRotation_HotSpot(Point2i(image->GetWidth()/2,image->GetHeight()));
+  image->SetRotation_HotSpot(bottom_center);
   SetSize(image->GetSize());
-  SetTestRect((image->GetWidth() / 2)-1, (image->GetWidth() / 2) - 1,
-      (image->GetHeight()/2)-1,1);
 }
 
 FireParticle::~FireParticle()
@@ -71,36 +68,39 @@ void FireParticle::Refresh()
 
   float scale = (now - creation_time)/(float)living_time;
   scale = 1.0 - scale;
-  image->Scale((float)direction * scale, scale);
+  image->Scale(scale, scale);
 
   if(image->GetSize().x != 0 && image->GetSize().y != 0)
   {
-    SetSize( image->GetSize() );
-    SetTestRect((image->GetWidth() / 2)-1, (image->GetWidth() / 2) - 1,
-      (image->GetHeight()/2)-1,1);
-  }
-  else
-    SetSize( Point2i(1,1) );
+    int dx = (GetWidth() - image->GetWidth()) / 2;
 
+    SetTestRect(dx, dx - 1, GetHeight() - 2,1);
+  }
+
+  // The position of the object represents its top left corner
+  // So, since we are resizing the object, we have to move it
+  // to make it appear at the same place
 
   if(on_ground || !FootsInVacuum())
   {
     on_ground = true;
     if((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
     {
-      ApplyExplosion(Point2i(GetCenter().x,(GetY() + GetHeight() + GetCenter().y)/2), fire_cfg, "", false, ParticleEngine::LittleESmoke);
-      fire_cfg.explosion_range = (uint)(0.5 * scale * image->GetWidth()) + 1;
-      fire_cfg.particle_range = (uint)(0.6 * scale * image->GetWidth()) + 1;
+      Point2i expl_pos = GetPosition() + GetSize();
+      expl_pos.x -= GetWidth()/2;
+
+      ApplyExplosion(expl_pos, fire_cfg, "", false, ParticleEngine::LittleESmoke);
+      fire_cfg.explosion_range = (uint)(scale * image->GetWidth()) + 1;
+      fire_cfg.particle_range = (uint)(1.1 * scale * image->GetWidth()) + 1;
     }
-    double angle = 0.0;
-    angle += cos((((now + oscil_delta) % 1000)/500.0) * M_PI) * 0.5; // 0.5 is arbirtary
-    image->SetRotation_HotSpot(Point2i(image->GetWidth()/2,image->GetHeight()));
+
+    double angle = cos((((now + oscil_delta) % 1000)/500.0) * M_PI) * 0.5; // 0.5 is arbirtary
     image->SetRotation_rad( angle);
   }
   else
   {
     double angle = GetSpeedAngle();
-    image->SetRotation_rad((angle - M_PI_2) * direction);
+    image->SetRotation_rad((angle - M_PI_2));
   }
 
   m_last_refresh = now;
@@ -108,7 +108,9 @@ void FireParticle::Refresh()
 
 void FireParticle::Draw()
 {
-  image->Draw(Point2i(GetX(),GetY()));
+  Point2i draw_pos = GetPosition();
+  draw_pos.y += GetHeight()/2;
+  image->Draw( draw_pos );
 }
 
 void FireParticle::SignalDrowning()
