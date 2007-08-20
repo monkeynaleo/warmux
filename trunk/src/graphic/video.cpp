@@ -172,9 +172,6 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
     fullscreen = _fullscreen;
     Camera::GetInstance()->GetInstance()->SetSize(width, height);
     Camera::GetInstance()->GetInstance()->SetXY(Camera::GetInstance()->GetPosition());
-#ifdef WIN32
-    AppWormux::GetInstance()->RefreshDisplay();
-#endif
   }
 
   return true;
@@ -187,6 +184,7 @@ void Video::ToggleFullscreen()
   fullscreen = !fullscreen;
 #else
   SetConfig(window.GetWidth(), window.GetHeight(), !fullscreen);
+  AppWormux::GetInstance()->RefreshDisplay();
 #endif
 }
 
