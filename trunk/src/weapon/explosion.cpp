@@ -74,7 +74,9 @@ void ApplyExplosion_common (const Point2i &pos,
     world.Dig(pos, config.explosion_range);
 
   // Play a sound
-  jukebox.Play("share", son);
+  if (son != "") {
+    jukebox.Play("share", son);
+  }
 
   // Apply damage on the character.
   // Do not care about the death of the active character.
