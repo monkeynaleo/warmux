@@ -350,7 +350,7 @@ void NetworkMenu::AddTeamCallback(const std::string& team_id)
     return;
 
   team_box->AddTeamCallback(team_id);
-  msg_box->NewMessage(team_id + " selected");
+//  msg_box->NewMessage(team_id + " selected");
 }
 
 void NetworkMenu::UpdateTeamCallback(const std::string& team_id)
