@@ -11,6 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2007-08-08 01:30+0100\n"
 "Last-Translator: Bruno Queiros <brunoqueiros@portugalmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -24,14 +25,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
 
-#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:301
+#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:306
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Jogador %i ligado"
 msgstr[1] "Jogadores %i ligados"
 
-#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:314
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -117,7 +118,7 @@ msgstr "A equipa %s já possui munições infinitas para a %s!"
 msgid "%s team has skipped its turn."
 msgstr "A equipa %s passou a vez."
 
-#: src/weapon/gnu.cpp:155
+#: src/weapon/gnu.cpp:156
 #, fuzzy, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -142,7 +143,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:173
+#: src/weapon/anvil.cpp:179
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -251,7 +252,7 @@ msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "A equipa %s ganhou %u baixagravidade!"
 msgstr[1] "As equipas %s ganharam %u baixagravidade!"
 
-#: src/weapon/mine.cpp:236
+#: src/weapon/mine.cpp:235
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -335,7 +336,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "A equipa %s ganhou %u lançador de tux!"
 msgstr[1] "As equipas %s ganharam %u lançadores de tux!"
 
-#: src/include/action_handler.cpp:239
+#: src/include/action_handler.cpp:243
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s tenta ligar com uma versão diferente : cliente=%s, eu=%s."
@@ -370,7 +371,7 @@ msgstr "Martelo Aéreo"
 msgid "All teams"
 msgstr "Todas as equipas"
 
-#: src/game/game_loop.cpp:334
+#: src/game/game_loop.cpp:331
 msgid "And the winner is..."
 msgstr "E o vencedor é..."
 
@@ -384,11 +385,11 @@ msgstr ""
 "Disparar : barra de espaços\n"
 "um tiro por turno"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:125
 msgid "Anvil"
 msgstr "Bigorna"
 
-#: src/main.cpp:331
+#: src/main.cpp:252
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -494,7 +495,7 @@ msgstr "Duração do turno:"
 msgid "Dynamite"
 msgstr "Dinamite"
 
-#: src/game/game_loop.cpp:150 src/game/game_loop.cpp:156
+#: src/game/game_loop.cpp:147 src/game/game_loop.cpp:153
 msgid "END OF GAME"
 msgstr "FIM DE JOGO"
 
@@ -545,22 +546,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:234
+#: src/menu/network_connection_menu.cpp:235
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Erro: Incapaz de ligar a %s:%s"
 
-#: src/menu/network_connection_menu.cpp:208
+#: src/menu/network_connection_menu.cpp:209
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Erro: Incapaz de contactar o servidor de index para receber um jogo"
 
-#: src/menu/network_connection_menu.cpp:245
+#: src/menu/network_connection_menu.cpp:246
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Erro: Incapaz de contactar o servidor de index para procurar por um jogo na "
 "internet"
 
-#: src/menu/network_connection_menu.cpp:222
+#: src/menu/network_connection_menu.cpp:223
 msgid "Error: Unable to start server"
 msgstr "Erro: Incapaz de iniciar servidor"
 
@@ -573,7 +574,7 @@ msgstr "Erro: não consegui encontrar o skin \"%s\" para a equipa \"%s\"."
 msgid "Fullscreen?"
 msgstr "Ecrã inteiro?"
 
-#: src/weapon/gnu.cpp:141
+#: src/weapon/gnu.cpp:142
 msgid "Gnu Launcher"
 msgstr "Lança Gnus"
 
@@ -646,7 +647,7 @@ msgstr ""
 "desejada\n"
 "uma munição por turno"
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:126
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -658,7 +659,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Rápido, tu és lento demais !!"
 
-#: src/main.cpp:323
+#: src/main.cpp:244
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -847,7 +848,7 @@ msgstr "Porta:"
 msgid "Quit"
 msgstr "Sair"
 
-#: src/main.cpp:311
+#: src/main.cpp:232
 msgid "Quit Wormux"
 msgstr "Sair Wormux"
 
@@ -872,11 +873,11 @@ msgstr "Resolução"
 msgid "Riot Bomb"
 msgstr "Bomba Motim"
 
-#: src/main.cpp:193
+#: src/main.cpp:184
 msgid "Run game"
 msgstr "Iniciar jogo"
 
-#: src/network/chat.cpp:74
+#: src/network/chat.cpp:76
 msgid "Say: "
 msgstr "Diz: "
 
@@ -960,7 +961,7 @@ msgstr "Teleporte"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "A Bomba Cluster saiu do campo de batalha antes de poder explodir."
 
-#: src/weapon/gnu.cpp:132
+#: src/weapon/gnu.cpp:133
 msgid "The Gnu left the battlefield before exploding"
 msgstr "O Gnu saiu do campo de batalha antes de explodir"
 
@@ -988,7 +989,7 @@ msgstr "A Granada Disco saiu do campo de batalha antes de explodir"
 msgid "The grenade left the battlefield before exploding"
 msgstr "A granada saiu do campo de batalha antes de explodir"
 
-#: src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:321
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Os outros estão à sua espera! Acorde :-)"
 
@@ -1032,7 +1033,7 @@ msgstr ""
 "Disparar : barra de espaços\n"
 "uma munição por turno"
 
-#: src/interface/weapon_menu.cpp:168
+#: src/interface/weapon_menu.cpp:169
 msgid "Tools"
 msgstr "Ferramentas"
 
@@ -1049,7 +1050,7 @@ msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 msgid "Unable to use this port!"
 msgstr "Incapaz de usar esta porta!"
 
-#: src/main.cpp:263
+#: src/main.cpp:192
 msgid "Version"
 msgstr "Versão"
 
@@ -1060,17 +1061,17 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Espere. A equipa %i ainda não está pronta!"
 msgstr[1] "Espere. As equipas %i ainda não estão prontas."
 
-#: src/menu/network_menu.cpp:383
+#: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "À espera do servidor, tudo que pode fazer é cancelar ou conversar!"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:166
+#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Armas"
 
-#: src/main.cpp:340
+#: src/main.cpp:261
 msgid "Website: "
 msgstr "Página Internet: "
 
@@ -1088,11 +1089,11 @@ msgstr "Mostrar as partículas do vento?"
 msgid "Winner"
 msgstr "Vencedor"
 
-#: src/main.cpp:276
+#: src/main.cpp:205
 msgid "Wormux launching..."
 msgstr "A iniciar wormux..."
 
-#: src/main.cpp:330
+#: src/main.cpp:251
 msgid "Wormux version "
 msgstr "Wormux versão "
 
@@ -1101,7 +1102,7 @@ msgstr "Wormux versão "
 msgid "XML error during loading map '%s' :"
 msgstr "Erro XML durante o carregamento do mapa '%s' :"
 
-#: src/menu/network_menu.cpp:319
+#: src/menu/network_menu.cpp:324
 msgid "You are alone :-/"
 msgstr "Você está sozinho :-/"
 
