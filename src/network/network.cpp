@@ -132,8 +132,9 @@ int Network::ThreadRun(void*/*no_param*/)
 {
   MSG_DEBUG("network", "Thread created: %u", SDL_ThreadID());
   GetInstance()->ReceiveActions();
-  // Not calling disconnect here seems harmless.
-  // Disconnect();
+#ifndef WIN32
+  Disconnect(); // this is really needed but it causes a deadlock on WIN32 for unknown reason
+#endif
   std::cout << "Network : end of thread" << std::endl;
   return 1;
 }
