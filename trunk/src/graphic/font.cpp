@@ -109,6 +109,8 @@ Font::~Font(){
     //SDL_FreeSurface(it->second);
     surface_text_table.erase(it->first);
   }
+
+  TTF_Quit();
 }
 
 void Font::SetBold()

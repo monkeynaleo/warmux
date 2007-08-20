@@ -227,7 +227,6 @@ void AppWormux::End() const
   delete Config::GetInstance();
   delete Time::GetInstance();
   delete Constants::GetInstance();
-  TTF_Quit();
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
