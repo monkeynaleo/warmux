@@ -80,6 +80,11 @@ AppWormux *AppWormux::GetInstance()
 AppWormux::AppWormux():
   video(new Video())
 {
+  teams_list.LoadList();
+
+  jukebox.Init();
+
+  cout << "[ " << _("Run game") << " ]" << endl;
 }
 
 AppWormux::~AppWormux()
@@ -93,7 +98,8 @@ int AppWormux::Main(void)
 
   try
   {
-    Init();
+    DisplayLoadingPicture();
+
     do
       {
         MainMenu main_menu;
@@ -167,21 +173,6 @@ int AppWormux::Main(void)
   }
 
   return 0;
-}
-
-void AppWormux::Init()
-{
-#ifndef WIN32
-  signal(SIGPIPE, SIG_IGN);
-#endif
-
-  teams_list.LoadList();
-
-  DisplayLoadingPicture();
-
-  jukebox.Init();
-
-  cout << "[ " << _("Run game") << " ]" << endl;
 }
 
 void AppWormux::DisplayLoadingPicture()
@@ -339,6 +330,9 @@ void ParseArgs(int argc, char * argv[])
 
 int main(int argc, char *argv[])
 {
+#ifndef WIN32
+  signal(SIGPIPE, SIG_IGN);
+#endif
   /* FIXME calling Config::GetInstance here means that there is no need of
    * singleton for Config but simply a global variable. This may look stange
    * but the whole system (directories, translation etc...) is needed, even for
