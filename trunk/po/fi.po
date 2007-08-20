@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:346
+#: src/map/maps_list.cpp:288
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
@@ -43,12 +43,12 @@ msgstr[1] ""
 msgid "%s (%s) has died."
 msgstr "%s (joukkue %s) kuoli."
 
-#: src/map/maps_list.cpp:178
+#: src/map/maps_list.cpp:120
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s < %s > aka %s %s:stä"
 
-#: src/map/maps_list.cpp:185
+#: src/map/maps_list.cpp:127
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
@@ -124,25 +124,25 @@ msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 msgstr[1] "Joukkue %s voitti %u ilmaiskua."
 
-#: src/weapon/air_attack.cpp:258
+#: src/weapon/air_attack.cpp:257
 #, fuzzy, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 msgstr[1] "Joukkue %s voitti %u ilmaiskua."
 
-#: src/weapon/airhammer.cpp:164
+#: src/weapon/airhammer.cpp:176
 #, c-format
 msgid ""
-"%s team has won %u airhammer! Don't make too much noise with it, thanks for "
+"%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
 "your neighbours."
 msgid_plural ""
-"%s team has won %u airhammers! Don't make too much noise with them, thanks "
-"for your neighbours."
+"%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
+"your neighbours."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:172
+#: src/weapon/anvil.cpp:173
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -216,7 +216,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Joukkue %s voitti %u dynamiittipötkön."
 msgstr[1] "Joukkue %s voitti %u dynamiittipötköä."
 
-#: src/weapon/grapple.cpp:708
+#: src/weapon/grapple.cpp:709
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -251,7 +251,7 @@ msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/weapon/mine.cpp:237
+#: src/weapon/mine.cpp:236
 #, fuzzy, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -272,7 +272,7 @@ msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/weapon/riot_bomb.cpp:91
+#: src/weapon/riot_bomb.cpp:102
 #, fuzzy, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -340,7 +340,7 @@ msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 
-#: src/menu/options_menu.cpp:153
+#: src/menu/options_menu.cpp:155
 msgid "(current)"
 msgstr ""
 
@@ -349,7 +349,7 @@ msgid "(dead)"
 msgstr "(kuollut)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:179
+#: src/menu/options_menu.cpp:181
 msgid "(system language)"
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
-#: src/weapon/air_attack.cpp:202
+#: src/weapon/air_attack.cpp:201
 #, fuzzy
 msgid "Air Attack"
 msgstr "Ilmaisku"
@@ -383,11 +383,11 @@ msgid ""
 "a hit per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr ""
 
-#: src/main.cpp:311
+#: src/main.cpp:331
 msgid "Authors:"
 msgstr "Tekijät:"
 
@@ -452,16 +452,16 @@ msgstr "Klusteripommi"
 msgid "Commit Suicide"
 msgstr "Itsemurhaisku"
 
-#: src/menu/internet_menu.cpp:66
+#: src/menu/internet_menu.cpp:67
 msgid "Connect !"
 msgstr ""
 
 #: src/menu/network_connection_menu.cpp:61
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:176
 msgid "Connect to an internet game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:172
+#: src/menu/network_connection_menu.cpp:168
 msgid "Connect to game"
 msgstr ""
 
@@ -518,18 +518,18 @@ msgstr "Virhe ladattessa joukkuetta %s:"
 msgid "Error loading team's data %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
-#: src/game/config.cpp:296
+#: src/game/config.cpp:334
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Virhe luodessa hakemistoa \"%s\":  asetustiedostoa ei voida tallentaa."
 
-#: src/game/config.cpp:183
+#: src/game/config.cpp:221
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
 
-#: src/game/config.cpp:211
+#: src/game/config.cpp:249
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
@@ -549,22 +549,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:234
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ulkoasuhakemiston avaus epäonnistui (%s)!"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:208
 #, fuzzy
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:245
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:222
 #, fuzzy
 msgid "Error: Unable to start server"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
@@ -603,7 +603,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:105
+#: src/menu/network_connection_menu.cpp:101
 msgid "Have a good game!"
 msgstr ""
 
@@ -616,7 +616,7 @@ msgstr ""
 msgid "Head commander: "
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:164
+#: src/menu/network_connection_menu.cpp:160
 msgid "Host a game"
 msgstr ""
 
@@ -641,7 +641,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -651,7 +651,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:303
+#: src/main.cpp:323
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -662,7 +662,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Aloitus voimat:"
 
-#: src/weapon/bazooka.cpp:85
+#: src/weapon/bazooka.cpp:85 src/weapon/riot_bomb.cpp:88
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -687,7 +687,7 @@ msgstr "Alusta objektit"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/object/objbox.cpp:144
+#: src/object/objbox.cpp:140
 msgid "It's a present!"
 msgstr ""
 
@@ -695,16 +695,15 @@ msgstr ""
 msgid "Jetpack"
 msgstr ""
 
-#. Skip a line
-#: src/menu/network_connection_menu.cpp:103 src/menu/network_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:99 src/menu/network_menu.cpp:145
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
-#: src/menu/options_menu.cpp:105
+#: src/menu/options_menu.cpp:107
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:271
+#: src/map/maps_list.cpp:213
 msgid "Load maps:"
 msgstr "Lataa kartat:"
 
@@ -722,7 +721,7 @@ msgstr "Lataa joukkueet:"
 msgid "LowGrav"
 msgstr ""
 
-#: src/map/map.cpp:348
+#: src/map/map.cpp:295
 #, fuzzy, c-format
 msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
@@ -774,7 +773,7 @@ msgstr "  Hyödyttömin  :  %s (%i).\n"
 msgid "Most violent"
 msgstr "  Väkivaltaisin  :  %s (%i)\n"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:118
 msgid "Music?"
 msgstr "Musiikki?"
 
@@ -853,32 +852,32 @@ msgstr ""
 msgid "Quit"
 msgstr "Lopeta"
 
-#: src/main.cpp:291
+#: src/main.cpp:311
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
-#: src/game/config.cpp:196
+#: src/game/config.cpp:234
 msgid "Reading default config file"
 msgstr ""
 
-#: src/game/config.cpp:219
+#: src/game/config.cpp:257
 msgid "Reading personal config file"
 msgstr ""
 
-#: src/menu/internet_menu.cpp:57
+#: src/menu/internet_menu.cpp:58
 msgid "Refresh"
 msgstr ""
 
-#: src/menu/options_menu.cpp:92
+#: src/menu/options_menu.cpp:94
 msgid "Resolution"
 msgstr ""
 
-#: src/weapon/riot_bomb.cpp:77
+#: src/weapon/riot_bomb.cpp:87
 #, fuzzy
 msgid "Riot Bomb"
 msgstr "Automaattibazookan"
 
-#: src/main.cpp:184
+#: src/main.cpp:193
 msgid "Run game"
 msgstr "Aloita peli"
 
@@ -918,18 +917,15 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr ""
 
-#. Skip a line
-#: src/menu/network_connection_menu.cpp:101
-msgid ""
-"Some weapons are disabled, because of known bugs (grapple, airhammer, "
-"blowtorch, submachine gun) and surely many other things don't work either!"
+#: src/menu/internet_menu.cpp:115
+msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:121
 msgid "Sound effects?"
 msgstr "Ääniefektit?"
 
-#: src/menu/options_menu.cpp:122
+#: src/menu/options_menu.cpp:124
 #, fuzzy
 msgid "Sound frequency"
 msgstr "Ääniefektit?"
@@ -1009,7 +1005,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr ""
 
-#: src/weapon/bazooka.cpp:69 src/weapon/riot_bomb.cpp:63
+#: src/weapon/bazooka.cpp:69 src/weapon/riot_bomb.cpp:73
 #, fuzzy
 msgid "The rocket has left the battlefield..."
 msgstr "Ohjus on poistunut taistelukentältä..."
@@ -1041,7 +1037,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/interface/weapon_menu.cpp:183
+#: src/interface/weapon_menu.cpp:168
 msgid "Tools"
 msgstr ""
 
@@ -1050,7 +1046,7 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/map/maps_list.cpp:281 src/map/maps_list.cpp:293
+#: src/map/maps_list.cpp:223 src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
@@ -1060,15 +1056,9 @@ msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 msgid "Unable to use this port!"
 msgstr "Odota asiakkaita"
 
-#: src/main.cpp:254
+#: src/main.cpp:263
 msgid "Version"
 msgstr "Versio"
-
-#: src/menu/network_connection_menu.cpp:99
-msgid ""
-"WARNING!! Network is still under developement and therefore a little "
-"experimental."
-msgstr ""
 
 #: src/menu/network_menu.cpp:253
 #, c-format
@@ -1083,12 +1073,12 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:181
+#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:166
 #, fuzzy
 msgid "Weapons"
 msgstr "Ase:"
 
-#: src/main.cpp:320
+#: src/main.cpp:340
 msgid "Website: "
 msgstr "Verkkosivu:"
 
@@ -1108,11 +1098,11 @@ msgstr "Näytä tuuli?"
 msgid "Winner"
 msgstr "Miina"
 
-#: src/main.cpp:267
+#: src/main.cpp:276
 msgid "Wormux launching..."
 msgstr "Wormux käynnistyy..."
 
-#: src/main.cpp:310
+#: src/main.cpp:330
 msgid "Wormux version "
 msgstr "Wormux versio"
 
@@ -1129,7 +1119,7 @@ msgstr ""
 msgid "You are alone..."
 msgstr ""
 
-#: src/map/maps_list.cpp:301
+#: src/map/maps_list.cpp:243
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
@@ -1150,7 +1140,7 @@ msgstr "Ammuit ohi!"
 msgid "aka"
 msgstr "Bazooka"
 
-#: src/weapon/air_attack.cpp:203
+#: src/weapon/air_attack.cpp:202
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
