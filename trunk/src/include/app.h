@@ -36,7 +36,6 @@ private:
   static AppWormux * singleton;
 
 private:
-  void Init();
   void InitWindow();
   void DisplayLoadingPicture();
   void End() const;
