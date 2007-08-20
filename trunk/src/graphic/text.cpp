@@ -200,8 +200,7 @@ void Text::SetColor(const Color &new_color)
 
 void Text::DrawCenter (const Point2i &position) const
 {
-  DrawTopLeft(Point2i(position.GetX() - surf.GetWidth() / 2,
-              position.GetY() - surf.GetHeight() / 2));
+  DrawTopLeft(position - surf.GetSize() / 2);
 }
 
 void Text::DrawTopRight (const Point2i &position) const
