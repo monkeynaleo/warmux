@@ -42,6 +42,8 @@ public:
   {
     ACTION_NICKNAME,
     ACTION_NETWORK_CHANGE_STATE,
+    ACTION_NETWORK_CHECK_PHASE1,
+    ACTION_NETWORK_CHECK_PHASE2,
 
     // ########################################################
     ACTION_PLAYER_CHANGE_WEAPON,

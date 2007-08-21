@@ -136,6 +136,63 @@ void Action_Network_ChangeState (Action *a)
   }
 }
 
+void Action_Network_Check_Phase1 (Action */*a*/)
+{
+  // Client receives information request from the server
+  if (Network::GetInstance()->IsServer())
+    return;
+
+  Action b(Action::ACTION_NETWORK_CHECK_PHASE2);
+  b.Push(ActiveMap().GetRawName());
+
+  TeamsList::iterator it = teams_list.playing_list.begin();
+  for (; it != teams_list.playing_list.end() ; ++it) {
+    b.Push((*it)->GetId());
+  }
+
+  // send information to the server
+  Network::GetInstance()->SendAction(&b);
+}
+
+static void Error_in_Network_Check_Phase2 (Action *a)
+{
+  a->creator->force_disconnect = true;
+  std::string str = Format("Error initializing network: Client %s does not agree with you!!\n",
+			   a->creator->GetAddress().c_str());
+  std::cerr << str << std::endl;
+
+  // this client has been checked, it is NOT ok, it will be disconnected
+  a->creator->SetState(DistantComputer::STATE_CHECKED); // If not, it creates a deadlock.
+}
+
+void Action_Network_Check_Phase2 (Action *a)
+{
+  // Server receives information from the client
+  if (Network::GetInstance()->IsClient())
+    return;
+
+  // Check the map
+  std::string map = a->PopString();
+  if (map != ActiveMap().GetRawName()) {
+    Error_in_Network_Check_Phase2(a);
+    return;
+  }
+  
+  // Check the teams
+  std::string team;
+  TeamsList::iterator it = teams_list.playing_list.begin();
+  for (; it != teams_list.playing_list.end() ; ++it) {
+    team = a->PopString();
+    if (team != (*it)->GetId()) {
+      Error_in_Network_Check_Phase2(a);
+      return;
+    }
+  }
+
+  // this client has been checked, it's ok :-)
+  a->creator->SetState(DistantComputer::STATE_CHECKED);
+}
+
 // ########################################################
 
 void Action_Player_ChangeWeapon (Action *a)
@@ -700,6 +757,8 @@ ActionHandler::ActionHandler():
   // ########################################################
   Register (Action::ACTION_NICKNAME, "nickname", Action_Nickname);
   Register (Action::ACTION_NETWORK_CHANGE_STATE, "NETWORK_change_state", &Action_Network_ChangeState);
+  Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check", &Action_Network_Check_Phase1);
+  Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check", &Action_Network_Check_Phase2);
 
   // ########################################################
   Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);

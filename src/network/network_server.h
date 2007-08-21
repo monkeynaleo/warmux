@@ -49,6 +49,7 @@ public:
   const uint GetNbConnectedPlayers() const;
   const uint GetNbInitializedPlayers() const;
   const uint GetNbReadyPlayers() const;
+  const uint GetNbCheckedPlayers() const;
 };
 
 //-----------------------------------------------------------------------------

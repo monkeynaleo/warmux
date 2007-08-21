@@ -72,6 +72,17 @@ void GameInit::EndInitGameData_NetServer()
     SDL_Delay(200);
   }
 
+  // Before playing we should check that init phase happens correctly on all clients
+  Action a(Action::ACTION_NETWORK_CHECK_PHASE1);
+  Network::GetInstance()->SendAction(&a);
+  
+  while (Network::IsConnected()
+         && Network::GetInstanceServer()->GetNbCheckedPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())
+    {
+      ActionHandler::GetInstance()->ExecActions();
+      SDL_Delay(200);
+    }
+
   // Let's play !
   Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
   Network::GetInstance()->SendNetworkState();
