@@ -177,6 +177,7 @@ void TeamsList::LoadList()
 
 void TeamsList::LoadGamingData()
 {
+  std::sort(playing_list.begin(), playing_list.end(), compareTeams); // needed to fix bug #9820
   active_team = playing_list.begin();
 
   iterator it=playing_list.begin(), end=playing_list.end();
