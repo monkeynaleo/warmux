@@ -90,7 +90,7 @@
 	<image file="nose.png"/>
 	<anchor dx="-1" dy="0"/>
 	<attached member_type="horns" frame="*" dx="-2" dy="-4"/>
-	<attached member_type="eyes-normal" frame="*" dx="3" dy="-1"/>
+	<attached member_type="eyes-normal" frame="*" dx="1" dy="-1"/>
 	<attached member_type="helmet" frame="*" dx="-1" dy="1"/>
 </sprite>
 
@@ -103,8 +103,8 @@
 <sprite name="eyes-normal" type="eyes-normal">
 	<image file="eyes.png"/>
 	<anchor dx="4" dy="3"/>
-	<attached member_type="pupil-right" frame="*" dx="2" dy="3"/>
-	<attached member_type="pupil-left" frame="*" dx="4" dy="3"/>
+	<attached member_type="pupil-right" frame="*" dx="4" dy="3"/>
+	<attached member_type="pupil-left" frame="*" dx="6" dy="3"/>
 </sprite>
 
 <sprite name="pupil-right" type="pupil-right" >

@@ -69,7 +69,7 @@
 <sprite name="head" type="head">
 	<image file="head.png"/>
 	<anchor dx="7" dy="11"/>
-	<attached member_type="eyes-normal" frame="*" dx="9" dy="6"/>
+	<attached member_type="eyes-normal" frame="*" dx="7" dy="6"/>
 	<attached member_type="helmet" frame="*" dx="7" dy="9"/>
 </sprite>
 
@@ -89,8 +89,8 @@
 <sprite name="eyes-normal" type="eyes-normal">
 	<image file="eyes.png"/>
 	<anchor dx="4" dy="3"/>
-	<attached member_type="pupil-right" frame="*" dx="2" dy="3"/>
-	<attached member_type="pupil-left" frame="*" dx="4" dy="3"/>
+	<attached member_type="pupil-right" frame="*" dx="4" dy="3"/>
+	<attached member_type="pupil-left" frame="*" dx="6" dy="3"/>
 </sprite>
 
 <sprite name="pupil-right" type="pupil-right" >
