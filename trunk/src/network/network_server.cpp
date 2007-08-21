@@ -123,6 +123,7 @@ void NetworkServer::ReceiveActions()
         // Repeat the packet to other clients:
         if (a->GetType() != Action::ACTION_RULES_SEND_VERSION
             && a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
+	    && a->GetType() != Action::ACTION_NETWORK_CHECK_PHASE2
             && a->GetType() != Action::ACTION_CHAT_MESSAGE)
           for (std::list<DistantComputer*>::iterator client = cpu.begin();
                client != cpu.end();
@@ -130,7 +131,7 @@ void NetworkServer::ReceiveActions()
             if (client != dst_cpu)
             {
               (*client)->SendDatas(packet, packet_size);
-                  }
+	    }
 
         ActionHandler::GetInstance()->NewAction(a, false);
         free(packet);
@@ -246,6 +247,20 @@ const uint NetworkServer::GetNbReadyPlayers() const
        client != cpu.end();
        client++) {
     if ((*client)->GetState() == DistantComputer::STATE_READY)
+      r++;
+  }
+
+  return r;
+}
+
+const uint NetworkServer::GetNbCheckedPlayers() const
+{
+  uint r = 0;
+
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->GetState() == DistantComputer::STATE_CHECKED)
       r++;
   }
 
