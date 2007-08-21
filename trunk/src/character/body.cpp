@@ -303,7 +303,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
       // This movement needs to know the position of the member before
       // being applied so it does a second ApplyMovement afterwards
       // to be used
-      if(mb_mvt.follow_cursor)
+      if(mb_mvt.follow_cursor && Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE)
       {
 	member_mvt angle_mvt;
 
