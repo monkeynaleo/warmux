@@ -50,14 +50,14 @@ public:
     POINTER_FIRE_RIGHT
   } pointer_t;
 
-private:
-  bool scroll_actif;
-
   typedef enum {
     MOUSE_HIDDEN,
     MOUSE_VISIBLE,
     MOUSE_HIDDEN_UNTIL_NEXT_MOVE
   } visibility_t;
+private:
+  bool scroll_actif;
+
   visibility_t visible;
   pointer_t current_pointer;
 
@@ -115,6 +115,7 @@ public:
 
   // Center the pointer on the screen
   void CenterPointer() const;
+  const visibility_t GetVisibility() const { return visible; };
 };
 
 #endif
