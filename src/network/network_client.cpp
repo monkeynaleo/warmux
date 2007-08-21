@@ -149,14 +149,19 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
   int prt = strtol(port.c_str(), NULL, 10);
 
-  if (CheckHost(host, prt) == Network::CONN_TIMEOUT)
-    return Network::CONN_TIMEOUT;
+  connection_state_t r = CheckHost(host, prt);
+  if (r != Network::CONNECTED)
+    return r;
 
   if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt) == -1)
   {
     fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), prt);
     return Network::CONN_BAD_HOST;
   }
+
+  // CheckHost opens and closes a connection to the server, so before reconnecting
+  // wait a bit, so the connection really gets closed ..
+  SDL_Delay(500);
 
   TCPsocket socket = SDLNet_TCP_Open(&ip);
 
