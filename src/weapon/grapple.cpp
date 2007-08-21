@@ -147,7 +147,7 @@ bool Grapple::TryAttachRope()
   length = cfg().automatic_growing_speed * delta_time / 10;
   if (length > cfg().max_rope_length)
     {
-      // Hum the roe is too short !
+      // Hum the rope is too short !
       m_attaching = false;
       m_is_active = false;
 
@@ -346,9 +346,12 @@ void Grapple::Refresh()
   if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
     return;
 
-  ActiveCharacter().SetMovement("ninja-rope");
-  ActiveCharacter().UpdatePosition();
-  SendActiveCharacterInfo(true);
+if (IsInUse() && !m_attaching)
+  {
+    ActiveCharacter().SetMovement("ninja-rope");
+    ActiveCharacter().UpdatePosition();
+    SendActiveCharacterInfo(true);
+  }
 }
 
 void Grapple::Draw()
