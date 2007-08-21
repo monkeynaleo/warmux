@@ -443,7 +443,7 @@ void Character::Draw()
 #ifdef DEBUG_SKIN
   dy -= HAUT_FONT_MIX;
   skin_text->Set(body->GetClothe() + " " + body->GetMovement());
-  skin_text->DrawCenterTopOnMap(GetX(), GetY() - dy);
+  skin_text->DrawCenterTopOnMap(Point2i(GetX(), GetY() - dy));
   dy -= ESPACE;
 #endif
 
