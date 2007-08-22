@@ -61,6 +61,7 @@
 
 //-----------------------------------------------------------------------------
 
+int  Network::num_objects = 0;
 bool Network::sdlnet_initialized = false;
 bool Network::stop_thread = true;
 
@@ -69,7 +70,7 @@ Network * Network::singleton = NULL;
 Network * Network::GetInstance()
 {
   if (singleton == NULL) {
-    singleton = new NetworkLocal();
+    singleton = new   NetworkLocal();
   }
   return singleton;
 }
@@ -102,22 +103,28 @@ Network::Network():
 #endif
 {
   sdlnet_initialized = false;
+  num_objects++;
 }
 //-----------------------------------------------------------------------------
 
 Network::~Network()
 {
-  if (sdlnet_initialized)
-  {
-    SDLNet_Quit();
-    sdlnet_initialized = false;
-
 #ifdef LOG_NETWORK
-    if (fin != 0)
-      close(fin);
-    if (fout != 0)
-      close(fout);
+  if (fin != 0)
+    close(fin);
+  if (fout != 0)
+    close(fout);
 #endif
+
+  num_objects--;
+  if (num_objects==0)
+  {
+    if (sdlnet_initialized)
+    {
+      //printf("###  SDL_net end\n");
+      SDLNet_Quit();
+      sdlnet_initialized = false;
+    }
   }
 }
 
@@ -143,11 +150,16 @@ int Network::ThreadRun(void*/*no_param*/)
 
 void Network::Init()
 {
-  if (sdlnet_initialized) return;
+  if (sdlnet_initialized)
+  {
+      std::cout << "Network already initialized!" << std::endl;
+      return;
+  }
   if (SDLNet_Init()) {
       Error("Failed to initialize network library! (SDL_Net)");
       exit(1);
   }
+  //printf("###  SDL_net start\n");
   sdlnet_initialized = true;
 
   std::cout << "o " << _("Network initialization") << std::endl;
@@ -169,20 +181,9 @@ void Network::Disconnect()
   }
 }
 
-#if 0
-static Uint32 sdl_thread_kill(Uint32 interval, void *param)
-{
-  SDL_KillThread((SDL_Thread*)param);
-  fprintf(stderr, "Add to kill thread 0x%p (timeout=%u ms)\n", param, interval);
-  return 0;
-}
-#endif
-
 static inline void sdl_thread_wait_for(SDL_Thread* thread, uint /*timeout*/)
 {
-  //SDL_TimerID id = SDL_AddTimer(timeout, sdl_thread_kill, thread);
   SDL_WaitThread(thread, NULL);
-  //SDL_RemoveTimer(id);
 }
 
 // Protected method for client and server
@@ -220,6 +221,32 @@ typedef int SOCKET;
 # define closesocket(fd) close(fd)
 #endif
 
+const Network::connection_state_t Network::GetError() const
+{
+#ifdef WIN32
+  int code = WSAGetLastError();
+  switch (code)
+  {
+  case WSAECONNREFUSED: return Network::CONN_REJECTED;
+  case WSAEINPROGRESS:
+  case WSAETIMEDOUT: return Network::CONN_TIMEOUT;
+  default:
+    fprintf(stderr, "Generic network error of code %i\n", code);
+    return Network::CONN_BAD_SOCKET;
+  }
+#else
+  switch(errno)
+  {
+  case ECONNREFUSED: return Network::CONN_REJECTED;
+  case EINPROGRESS:
+  case ETIMEDOUT: return Network::CONN_TIMEOUT;
+  default:
+    fprintf(stderr, "Generic network error of code %i\n", errno);
+    return Network::CONN_BAD_SOCKET;
+  }
+#endif
+}
+
 const Network::connection_state_t Network::CheckHost(const std::string &host, int prt) const
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
@@ -256,33 +283,16 @@ const Network::connection_state_t Network::CheckHost(const std::string &host, in
   struct sockaddr_in addr;
   memset(&addr, 0, sizeof(addr));
   addr.sin_family = AF_INET;
+  addr.sin_port = htons(prt);
 #ifndef WIN32
   addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
 #else
-  addr.sin_addr.s_addr = inet_addr(*hostinfo->h_addr_list);
+  addr.sin_addr.s_addr = inet_addr(inet_ntoa (*(struct in_addr *)*hostinfo->h_addr_list));
 #endif
-
-  addr.sin_port = htons(prt);
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
   {
-#ifdef WIN32
-    switch(WSAGetLastError())
-    {
-    case WSAECONNREFUSED: return Network::CONN_REJECTED;
-    case WSAEINPROGRESS:
-    case WSAETIMEDOUT: return Network::CONN_TIMEOUT;
-    default: return Network::CONN_BAD_SOCKET;
-    }
-#else
-    switch(errno)
-    {
-    case ECONNREFUSED: return Network::CONN_REJECTED;
-    case EINPROGRESS:
-    case ETIMEDOUT: return Network::CONN_TIMEOUT;
-    default: return Network::CONN_BAD_SOCKET;
-    }
-#endif
+    return Network::GetError();
   }
   closesocket(fd);
   return Network::CONNECTED;

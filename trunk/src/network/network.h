@@ -77,9 +77,11 @@ private:
   Network(const Network&);
   const Network& operator=(const Network&);
   friend class DistantComputer;
+  const connection_state_t GetError() const;
 
   static Network * singleton;
   static bool sdlnet_initialized;
+  static int  num_objects;
 
   static bool stop_thread;
   bool turn_master_player;
