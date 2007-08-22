@@ -71,13 +71,28 @@ void NetworkClient::ReceiveActions()
 
   while (cpu.size()==1 && ThreadToContinue()) // While connected to server
   {
+    int num_ready;
+
     if (state == NETWORK_PLAYING && cpu.size() == 0)
     {
       // If while playing everybody disconnected, just quit
       break;
     }
 
-    while (SDLNet_CheckSockets(socket_set, 100) == 0 && ThreadToContinue()); //Loop while nothing is received
+    //Loop while nothing is received
+    while (ThreadToContinue())
+    {
+      num_ready = SDLNet_CheckSockets(socket_set, 100);
+      // Means something is available
+      if (num_ready>0)
+        break;
+      // Means an error
+      else if (num_read == -1)
+      {
+        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
+      }
+      // Means timeout, so continue
+    }
 
     std::list<DistantComputer*>::iterator dst_cpu;
     for (dst_cpu = cpu.begin();
