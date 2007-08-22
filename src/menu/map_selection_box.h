@@ -54,6 +54,7 @@ class MapSelectionBox : public HBox
  public:
   void ChangeMapDelta(int delta_index);
   void ChangeMap(int index);
+  void UpdateMapInfo(PictureWidget * widget, int index, bool selected);
 
   MapSelectionBox(const Rectanglei &rect, bool _display_only = false);
 
