@@ -42,6 +42,7 @@ wormux_SOURCES = \
         gui/button.cpp gui/button.h \
         gui/button_text.cpp gui/button_text.h \
         gui/check_box.cpp gui/check_box.h \
+	gui/combo_box.cpp gui/combo_box.h \
         gui/container.h \
         gui/energy_bar.cpp gui/energy_bar.h \
         gui/label.cpp gui/label.h \

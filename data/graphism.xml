@@ -47,6 +47,7 @@
   <surface name="fullscreen" file="menu/fullscreen.png" />
   <surface name="scroll_on_border" file="menu/scroll_on_border.png" />  
   <surface name="fps" file="menu/fps.png"/>
+  <surface name="resolution" file="menu/resolution.png"/>
 
   <!-- Game mode options -->
 

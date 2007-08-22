@@ -26,6 +26,7 @@
 
 class ListBox;
 class CheckBox;
+class ComboBox;
 class SpinButtonWithPicture;
 
 class OptionMenu : public Menu
@@ -42,7 +43,7 @@ private:
    /********************************************/
 
    /* Graphic options controllers */
-   ListBox *lbox_video_mode;
+   ComboBox *lbox_video_mode;
    ListBox *lbox_languages;
    CheckBox *opt_display_wind_particles;
    CheckBox *opt_display_energy;
