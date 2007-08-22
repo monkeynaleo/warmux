@@ -33,9 +33,9 @@
 ComboBox::ComboBox (const std::string &label,
 		    const std::string &resource_id,
 		    const Rectanglei &rect,
-		    const std::map<std::string, std::string> &choices,
+		    const std::vector<std::pair<std::string, std::string> > &choices,
 		    const std::string choice):
-  m_choices_map(choices), m_choices(choices.size ()), m_index(0)
+  m_choices(choices), m_index(0)
 {
   position =  rect.GetPosition();
   size = rect.GetSize();
@@ -54,12 +54,11 @@ ComboBox::ComboBox (const std::string &label,
   txt_value_white = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
   std::vector<std::string>::size_type index = 0;
-  for (std::map<std::string, std::string>::const_iterator iter
+  for (std::vector<std::pair<std::string, std::string> >::const_iterator iter
 	 = choices.begin ();
        iter != choices.end ();
        iter++) {
 
-    m_choices[index] = iter->first;
     if (iter->first == choice)
       m_index = index;
     index++;
@@ -160,13 +159,15 @@ Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
 
 void ComboBox::SetChoice (std::vector<std::string>::size_type index)
 {
+  std::string text;
+
   if (index >= m_choices.size ())
     m_index = 0; // loop back
   else
     m_index = index;
 
-  txt_value_black->Set(m_choices_map [m_choices[m_index]]);
-  txt_value_white->Set(m_choices_map [m_choices[m_index]]);
+  txt_value_black->Set(m_choices[m_index].second);
+  txt_value_white->Set(m_choices[m_index].second);
 
   ForceRedraw();
 }

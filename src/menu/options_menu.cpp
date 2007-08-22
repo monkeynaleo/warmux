@@ -94,10 +94,10 @@ OptionMenu::OptionMenu() :
 
 
   // Get available video resolution
-  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
-  std::map<std::string, std::string> video_resolutions;
-  std::string current_resolution;
+  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs(); 
   std::list<Point2i>::const_iterator mode;
+  std::vector<std::pair<std::string, std::string> > video_resolutions;
+  std::string current_resolution;
 
   for (mode = video_res.begin(); mode != video_res.end(); ++mode)
     {
@@ -108,11 +108,11 @@ OptionMenu::OptionMenu() :
       if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
 	current_resolution = text;
 
-      video_resolutions[text]=text;
+      video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
   }
-  lbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", stdRect,
+  cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", stdRect,
 				 video_resolutions, current_resolution);
-  bottom_graphic_options->AddWidget(lbox_video_mode);
+  bottom_graphic_options->AddWidget(cbox_video_mode);
 
   top_n_bottom_graphic_options->AddWidget(top_graphic_options);
   top_n_bottom_graphic_options->AddWidget(bottom_graphic_options);
@@ -235,7 +235,7 @@ void OptionMenu::SaveOptions()
   AppWormux * app = AppWormux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
   // Video mode
-  std::string s_mode = lbox_video_mode->GetValue();
+  std::string s_mode = cbox_video_mode->GetValue();
 
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);

@@ -25,8 +25,8 @@
 #include "include/base.h"
 #include "graphic/surface.h"
 #include "widget.h"
-#include <map>
 #include <string>
+#include <vector>
 
 class Text;
 class Button;
@@ -47,8 +47,7 @@ class ComboBox : public Widget
  protected:
   Text *txt_label, *txt_value_white, *txt_value_black;
 
-  std::map<std::string, std::string> m_choices_map;
-  std::vector<std::string> m_choices;
+  std::vector<std::pair <std::string, std::string> > m_choices;
   std::vector<std::string>::size_type m_index;
 
  public:
@@ -56,7 +55,7 @@ class ComboBox : public Widget
   ComboBox(const std::string &label,
 	   const std::string &resource_id,
 	   const Rectanglei &rect,
-	   const std::map<std::string, std::string> &choices,
+	   const std::vector<std::pair <std::string, std::string> > &choices,
 	   const std::string choice);
 
   virtual ~ComboBox();
@@ -66,7 +65,7 @@ class ComboBox : public Widget
   void Draw(const Point2i &mousePosition, Surface& surf) const;
   Widget* Click(const Point2i&, uint) const { return NULL; };
   Widget* ClickUp(const Point2i &mousePosition, uint button);
-  const std::string GetValue() const { return m_choices[m_index]; };
+  const std::string GetValue() const { return m_choices[m_index].first; };
   void SetChoice(std::vector<std::string>::size_type index);
 };
 
