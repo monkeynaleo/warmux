@@ -490,13 +490,13 @@ void WeaponLauncher::HandleKeyReleased_Num9(bool /*shift*/)
 
 void WeaponLauncher::HandleKeyReleased_Less(bool /*shift*/)
 {
-  projectile->IncrementTimeOut();
+  projectile->DecrementTimeOut();
   NetworkSetTimeoutProjectile();
 }
 
 void WeaponLauncher::HandleKeyReleased_More(bool /*shift*/)
 {
-  projectile->DecrementTimeOut();
+  projectile->IncrementTimeOut();
   NetworkSetTimeoutProjectile();
 }
 
