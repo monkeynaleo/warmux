@@ -69,12 +69,12 @@ void NetworkServer::ReceiveActions()
       break;
     }
 
-    while (SDLNet_CheckSockets(socket_set, 100) == 0 && ThreadToContinue()) //Loop while nothing is received
+    while (SDLNet_CheckSockets(socket_set, 100)<1 && ThreadToContinue()) //Loop while nothing is received
+    {
       if (server_socket)
       {
         // Check for an incoming connection
-        TCPsocket incoming;
-        incoming = SDLNet_TCP_Accept(server_socket);
+        TCPsocket incoming = SDLNet_TCP_Accept(server_socket);
         if (incoming)
         {
           cpu.push_back(new DistantComputer(incoming));
@@ -84,6 +84,7 @@ void NetworkServer::ReceiveActions()
         }
         SDL_Delay(100);
       }
+    }
 
     std::list<DistantComputer*>::iterator dst_cpu;
     for (dst_cpu = cpu.begin();
