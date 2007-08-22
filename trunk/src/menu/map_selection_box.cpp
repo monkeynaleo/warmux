@@ -116,7 +116,11 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   AddWidget(tmp_map_box);
 
   // Load Maps' list
-  ChangeMap(MapsList::GetInstance()->GetActiveMapIndex());
+  int i = MapsList::GetInstance()->GetActiveMapIndex();
+  // If network game skip random maps
+  if(Network::GetInstance()->IsServer())
+    for(; MapsList::GetInstance()->lst[i].IsRandom(); i = (i + 1) % MapsList::GetInstance()->lst.size());
+  ChangeMap(i);
 }
 
 void MapSelectionBox::ChangeMapDelta(int delta_index)
