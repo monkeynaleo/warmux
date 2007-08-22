@@ -50,6 +50,7 @@ class PictureWidget : public Widget
 
   // Apply a transparency color mask
   void Disable() { disabled = true; };
+  void Enable() { disabled = false; };
 };
 
 #endif

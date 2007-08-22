@@ -101,6 +101,7 @@ public:
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; };
   bool UseWater() { LoadBasicInfo(); return use_water; };
+  bool IsRandom() { LoadBasicInfo(); return random; };
 
 };
 
