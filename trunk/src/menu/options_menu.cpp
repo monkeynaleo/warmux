@@ -31,6 +31,7 @@
 #include "gui/label.h"
 #include "gui/box.h"
 #include "gui/list_box.h"
+#include "gui/combo_box.h"
 #include "gui/check_box.h"
 #include "gui/picture_widget.h"
 #include "gui/picture_text_cbox.h"
@@ -58,6 +59,7 @@ const uint GRAPHIC_H = 330;
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
 {
+  AppWormux * app = AppWormux::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   Rectanglei stdRect(0, 0, 140, 30);
 
@@ -91,7 +93,25 @@ OptionMenu::OptionMenu() :
   bottom_graphic_options->AddWidget(opt_max_fps);
 
 
-  lbox_video_mode = new ListBoxWithLabel(_("Resolution"), stdRect);
+  // Get available video resolution
+  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
+  std::map<std::string, std::string> video_resolutions;
+  std::string current_resolution;
+  std::list<Point2i>::const_iterator mode;
+
+  for (mode = video_res.begin(); mode != video_res.end(); ++mode)
+    {
+      std::ostringstream ss;
+      std::string text;
+      ss << mode->GetX() << "x" << mode->GetY() ;
+      text = ss.str();
+      if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
+	current_resolution = text;
+
+      video_resolutions[text]=text;
+  }
+  lbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", stdRect,
+				 video_resolutions, current_resolution);
   bottom_graphic_options->AddWidget(lbox_video_mode);
 
   top_n_bottom_graphic_options->AddWidget(top_graphic_options);
@@ -128,7 +148,6 @@ OptionMenu::OptionMenu() :
   widgets.AddWidget(sound_options);
 
   /* Center the widgets */
-  AppWormux * app = AppWormux::GetInstance();
   uint center_x = app->video->window.GetWidth()/2;
 
   sound_options->SetXY(center_x - sound_options->GetSizeX()/2, sound_options->GetPositionY());
@@ -138,28 +157,6 @@ OptionMenu::OptionMenu() :
 			 graphic_options->GetPositionY());
   
   // Values initialization
-
-  // Get available video resolution
-  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
-  std::list<Point2i>::const_iterator mode;
-
-  for (mode = video_res.begin(); mode != video_res.end(); ++mode)
-    {
-      std::ostringstream ss;
-      bool is_current;
-      std::string text;
-      ss << mode->GetX() << "x" << mode->GetY() ;
-      text = ss.str();
-      if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
-        {
-          ss << " " << _("(current)");
-          is_current = true;
-        }
-      else
-        is_current = false;
-
-      lbox_video_mode->AddItem(is_current, ss.str(), text);
-  }
 
   // Generate sound mode list
   uint current_freq = jukebox.GetFrequency();
@@ -238,7 +235,7 @@ void OptionMenu::SaveOptions()
   AppWormux * app = AppWormux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
   // Video mode
-  std::string s_mode = lbox_video_mode->ReadValue();
+  std::string s_mode = lbox_video_mode->GetValue();
 
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
