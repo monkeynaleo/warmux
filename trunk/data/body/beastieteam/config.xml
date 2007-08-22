@@ -89,7 +89,7 @@
 	<image file="head.png"/>
 	<anchor dx="10" dy="16"/>
 	<attached member_type="helmet" frame="*" dx="1" dy="-1"/>
-	<attached member_type="eyes-normal" frame="*" dx="12" dy="10"/>
+	<attached member_type="eyes-normal" frame="*" dx="11" dy="10"/>
 </sprite>
 
 <!-- ###### eyes ###### -->
