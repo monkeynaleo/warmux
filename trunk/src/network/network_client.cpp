@@ -87,7 +87,7 @@ void NetworkClient::ReceiveActions()
       if (num_ready>0)
         break;
       // Means an error
-      else if (num_read == -1)
+      else if (num_ready == -1)
       {
         fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
       }
