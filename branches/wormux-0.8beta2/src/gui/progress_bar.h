@@ -66,7 +66,11 @@ public:
   ProgressBar();
   virtual ~ProgressBar() {};
 
-  // Actualisation de la valeur
+  int GetCurrentValue() { return val; };
+  int GetMinValue() { return min; };
+  int GetMaxValue() { return max; };
+
+  // Update current value
   void UpdateValue (long val);
 
   // Initialise la position

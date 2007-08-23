@@ -57,10 +57,11 @@ class Team
     CrossHair        crosshair;
     Point2i          sauve_camera;
     TeamEnergy       energy;
-    
+
 
   private:
     Surface flag;
+    Surface death_flag;
     Surface big_flag;
     bool is_camera_saved;
     std::string m_teams_dir; // parent directory hosting the data
@@ -133,6 +134,7 @@ class Team
     const std::string& GetPlayerName() const { return m_player_name; }
     const std::string& GetSoundProfile() const { return m_sound_profile; }
     const Surface& GetFlag() const { return flag; }
+    const Surface& GetDeathFlag() const { return death_flag; }
     const Surface& GetBigFlag() const { return big_flag; }
     iterator begin();
     iterator end();
