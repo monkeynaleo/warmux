@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-05-15 12:00+0200\n"
 "Last-Translator: Varga Istvan\n"
 "Language-Team: Hungarian\n"
@@ -371,7 +372,7 @@ msgstr[1] "A(z) %s csapat nyert %u %st!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s eltérõ verzióval próbál csatlakozni: kliens=%s, helyi=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(halott)"
 
@@ -381,7 +382,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
@@ -533,7 +534,7 @@ msgstr "Hiba a következõben: %s, %lu"
 msgid "Error loading team :"
 msgstr "Hiba a csapat betöltése közben:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Hiba a csapat adatainak betöltése közben (%s):"
@@ -588,7 +589,7 @@ msgstr "Hiba: Nem sikerült internetes játékokat keresni a központi szerveren"
 msgid "Error: Unable to start server"
 msgstr "Hiba: Nem sikerült a szerver indítása"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem találom a(z) \"%s\" testet a(z) \"%s\" csapathoz."
@@ -632,7 +633,7 @@ msgid "Head commander"
 msgstr "Parancsnok"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr "Parancsnok: "
 
@@ -945,7 +946,7 @@ msgstr "Hangok"
 msgid "Starting a new game"
 msgstr "Új játék indítása"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Tartalék:"
 

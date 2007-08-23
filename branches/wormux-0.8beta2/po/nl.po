@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-03-23 15:15+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -339,7 +340,7 @@ msgstr[1] "Team %s heeft %u %sen gekregen!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux versies verschillen : client=%s, server=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(dood)"
 
@@ -349,7 +350,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(onbegrensd)"
 
@@ -500,7 +501,7 @@ msgstr "Fout in %s:%lu"
 msgid "Error loading team :"
 msgstr "Fout bij het laden van team %s:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Fout bij het laden van gegevens van team %s:"
@@ -555,7 +556,7 @@ msgstr "Fout: Kon indexserver niet bereiken om naar een internetspel te zoeken"
 msgid "Error: Unable to start server"
 msgstr "Fout: Kon server niet starten"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
@@ -598,7 +599,7 @@ msgid "Head commander"
 msgstr "Hoofdcommandant"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 #, fuzzy
 msgid "Head commander: "
 msgstr "Hoofdcommandant"
@@ -912,7 +913,7 @@ msgstr "Geluiden"
 msgid "Starting a new game"
 msgstr "Starten van een nieuw spel"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Voorraad:"
 

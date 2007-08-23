@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-06-09 01:20+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -338,7 +339,7 @@ msgstr[1] "tim '%s' dobio je %u %s!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux verzije su drugačije : klijent=%s, server=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(mrtav)"
 
@@ -348,7 +349,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(neograničeno)"
 
@@ -502,7 +503,7 @@ msgstr "Greška u %s:%lu"
 msgid "Error loading team :"
 msgstr "Greška kod očitavanja timova %s :"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Greška kod očitavanja timova %s :"
@@ -560,7 +561,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Greška: Nemoguće startati server"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
@@ -603,7 +604,7 @@ msgid "Head commander"
 msgstr "Vojskovođa"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 #, fuzzy
 msgid "Head commander: "
 msgstr "Vojskovođa"
@@ -928,7 +929,7 @@ msgstr "Zvučne opcije"
 msgid "Starting a new game"
 msgstr "Pokreni novu igru"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Zaliha:"
 

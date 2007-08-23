@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-08-09 19:26+0400\n"
 "Last-Translator: \n"
 "Language-Team:  <ru@li.org>\n"
@@ -375,7 +376,7 @@ msgstr[2] "Команда %s выиграла %u автоматических б
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s пытается подключиться с другой версией : client=%s, me=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(мёртв)"
 
@@ -385,7 +386,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
@@ -538,7 +539,7 @@ msgstr "Ошибка в %s:%lu"
 msgid "Error loading team :"
 msgstr "Ошибка при загрузке команды :"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке данных команды %s:"
@@ -594,7 +595,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Ошибка: Не получилось запустить сервер"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
@@ -637,7 +638,7 @@ msgid "Head commander"
 msgstr "Командующий"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr "Командующий: "
 
@@ -961,7 +962,7 @@ msgstr "Звуки"
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Запас:"
 

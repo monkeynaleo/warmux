@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-03-27 20:56+0100\n"
 "Last-Translator: Eduard BERMEJO <templer@iespana.es>\n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
@@ -340,7 +341,7 @@ msgstr[1] "¡Los equipos %s han ganado %u %ss!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Las versiones de Wormux son diferentes: cliente=%s, servidor=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(muerto)"
 
@@ -350,7 +351,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
@@ -501,7 +502,7 @@ msgstr "Error en %s:%lu"
 msgid "Error loading team :"
 msgstr "Error cargando el equipo %s :"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Error cargando datos del equipo %s :"
@@ -559,7 +560,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Error: Imposible comenzar servidor"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no se puede encontrar el skin \"%s\" para el equipo \"%s\"."
@@ -602,7 +603,7 @@ msgid "Head commander"
 msgstr "Comandante jefe"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 #, fuzzy
 msgid "Head commander: "
 msgstr "Comandante jefe"
@@ -914,7 +915,7 @@ msgstr "Opciones de sonido"
 msgid "Starting a new game"
 msgstr "Empezando un nuevo juego"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Munición:"
 

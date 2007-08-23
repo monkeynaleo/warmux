@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2006-06-16 11:36+0100\n"
 "Last-Translator: Bastian Salmela <bastian.salmela@hel.fi>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -340,7 +341,7 @@ msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(kuollut)"
 
@@ -350,7 +351,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
@@ -509,7 +510,7 @@ msgstr "Virhe kohdassa %s:%lu"
 msgid "Error loading team :"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
@@ -565,7 +566,7 @@ msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 msgid "Error: Unable to start server"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
@@ -608,7 +609,7 @@ msgid "Head commander"
 msgstr ""
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr ""
 
@@ -936,7 +937,7 @@ msgstr "Ääni asetukset"
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Varasto:"
 

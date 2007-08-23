@@ -6,6 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.7\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-03-07 15:07+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: sk <stryco@gmail.com>\n"
@@ -362,7 +363,7 @@ msgstr[2] "%s tími vyhrali %u %s!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux verzie sú rozdielne: klient=%s, server=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(mŕtvy)"
 
@@ -372,7 +373,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
@@ -523,7 +524,7 @@ msgstr "Chyba v %s:%lu"
 msgid "Error loading team :"
 msgstr "Chyba počas načítavania tímu %s:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Chyba počas načítavania dát tímu %s:"
@@ -578,7 +579,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Chyba: Nedá sa spustiť server"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť telo \"%s\" pre tím \"%s\"."
@@ -621,7 +622,7 @@ msgid "Head commander"
 msgstr "Hlavný veliteľ"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 #, fuzzy
 msgid "Head commander: "
 msgstr "Hlavný veliteľ"
@@ -936,7 +937,7 @@ msgstr "Zvuky"
 msgid "Starting a new game"
 msgstr "Beh novej hry "
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Munícia:"
 

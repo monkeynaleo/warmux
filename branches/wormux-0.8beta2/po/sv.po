@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-06-04 23:00+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -338,7 +339,7 @@ msgstr[1] "%s-laget har vunnit %u tuxkastare!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s försöker ansluta med en annan version : klient=%s, jag=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(död)"
 
@@ -348,7 +349,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(obegränsat)"
 
@@ -501,7 +502,7 @@ msgstr "Fel i %s:%lu"
 msgid "Error loading team :"
 msgstr "Fel vid inläsning av lag :"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Fel vid inläsning av lagets data %s:"
@@ -556,7 +557,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Fel: Kunde inte starta servern"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fel: kan inte hitta kroppen \"%s\" för laget \"%s\"."
@@ -599,7 +600,7 @@ msgid "Head commander"
 msgstr "Ledare"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr "Befälhavare: "
 
@@ -925,7 +926,7 @@ msgstr "Ljud"
 msgid "Starting a new game"
 msgstr "Startar ett nytt spel"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Antal:"
 

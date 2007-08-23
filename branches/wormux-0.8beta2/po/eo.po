@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.8b1\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2006-06-20 11:35+0100\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx AT wanadoo.fr>\n"
 "Language-Team: eo <victor.stinner AT haypocalc.com>\n"
@@ -347,7 +348,7 @@ msgstr[1] ""
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s provas konetiĝi kun alia versio: kliento=%s, mi=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(mortinta)"
 
@@ -357,7 +358,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
@@ -510,7 +511,7 @@ msgstr "Eraro en %s : %lu"
 msgid "Error loading team :"
 msgstr "Eraro muntante teamon :"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Eraro muntante la datumojn de la teamo %s :"
@@ -563,7 +564,7 @@ msgstr "Eraro : Ne eblas kontakti indeksservilon por serĉi interretan ludon"
 msgid "Error: Unable to start server"
 msgstr "Eraro : Ne eblas starti servilon"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eraro : Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
@@ -606,7 +607,7 @@ msgid "Head commander"
 msgstr "Ĉefkomandoro"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr "Ĉefkomandoro:"
 
@@ -926,7 +927,7 @@ msgstr "Sonoj"
 msgid "Starting a new game"
 msgstr "Komencante novan ludon"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Municioj :"
 

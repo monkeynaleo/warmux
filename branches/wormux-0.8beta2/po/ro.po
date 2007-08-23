@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-06-04 01:20+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -492,7 +493,7 @@ msgstr[2] "Echipa %s a câștigat %u de lansatoare de tux!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s încearcă să se conecteze cu o versiune diferită: client=%s, eu=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(mort)"
 
@@ -502,7 +503,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(infinit)"
 
@@ -656,7 +657,7 @@ msgstr "Eroare în %s:%lu"
 msgid "Error loading team :"
 msgstr "Eroare la încărcarea echipei:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Eroare la încărcarea datelor pentru echipa %s:"
@@ -715,7 +716,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: corpul „%s” pentru echipa „%s” nu poate fi găsit."
@@ -759,7 +760,7 @@ msgstr "Comandant șef"
 
 #
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr "Comandant șef: "
 
@@ -1087,7 +1088,7 @@ msgstr "Sunete"
 msgid "Starting a new game"
 msgstr "Se începe un nou joc"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Stoc:"
 

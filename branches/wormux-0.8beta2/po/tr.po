@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -307,7 +308,7 @@ msgstr[0] "%s takımı %u %s kazandı!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(ölü)"
 
@@ -317,7 +318,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
@@ -469,7 +470,7 @@ msgstr "%s:%lu'da hata"
 msgid "Error loading team :"
 msgstr "%s takımı yüklenirken hata:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
@@ -525,7 +526,7 @@ msgstr "(%s) harita dizini açılamadı!"
 msgid "Error: Unable to start server"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
@@ -568,7 +569,7 @@ msgid "Head commander"
 msgstr ""
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr ""
 
@@ -882,7 +883,7 @@ msgstr "Sesler"
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Stok:"
 

@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-08-21 21:52+0100\n"
 "Last-Translator: Paweł Dyda <pawel.dyda@gazeta.pl>\n"
 "Language-Team:  <pl@li.org>\n"
@@ -410,7 +411,7 @@ msgstr[2] ""
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s usiłuje się połączyć przy użyciu innej wersji: klient=%s, ja=%s."
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(martwy)"
 
@@ -420,7 +421,7 @@ msgid "(system language)"
 msgstr "(język systemu)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(bez ograniczeń)"
 
@@ -573,7 +574,7 @@ msgstr "Błąd w %s:%lu"
 msgid "Error loading team :"
 msgstr "Błąd podczas wczytywania drużyny:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Błąd wczytywania danych drużyny %s:"
@@ -632,7 +633,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Błąd: Nie można uruchomić serwera"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Błąd: nie mogę odnaleźć skórki \"%s\" dla drużyny \"%s\"."
@@ -676,7 +677,7 @@ msgid "Head commander"
 msgstr "Głównodowodzący"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr "Głównodowodzący: "
 
@@ -999,7 +1000,7 @@ msgstr "Dźwięki"
 msgid "Starting a new game"
 msgstr "Uruchamianie nowej gry"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Stan:"
 

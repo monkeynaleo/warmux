@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb-no\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-03-07 13:15+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: \n"
@@ -340,7 +341,7 @@ msgstr[1] "%s-laget har vunnet %u %ss !"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Forskjellige versjoner av Wormux : mottager=%s, tjener=%s"
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(død)"
 
@@ -350,7 +351,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(uendelig)"
 
@@ -501,7 +502,7 @@ msgstr "Feil i %s:%lu"
 msgid "Error loading team :"
 msgstr "Lasting av %s-laget feilet :"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Feil under lasting av %s-laget :"
@@ -557,7 +558,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Start av tjener feilet"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Kan ikke finne utseendet \"%s\" til \"%s\"-laget."
@@ -600,7 +601,7 @@ msgid "Head commander"
 msgstr "Kommandant"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 #, fuzzy
 msgid "Head commander: "
 msgstr "Kommandant"
@@ -912,7 +913,7 @@ msgstr "Lyder"
 msgid "Starting a new game"
 msgstr "Laster et nytt spill"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Lager :"
 

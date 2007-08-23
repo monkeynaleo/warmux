@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-04-11 16:36+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@cvs.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
@@ -337,7 +338,7 @@ msgstr[1] ""
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(morto)"
 
@@ -347,7 +348,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
@@ -498,7 +499,7 @@ msgstr "Erro en %s:%lu"
 msgid "Error loading team :"
 msgstr "Erro cargando o equipo %s:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr ""
@@ -553,7 +554,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Erro: Imposible iniciar o servidor"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr ""
@@ -596,7 +597,7 @@ msgid "Head commander"
 msgstr ""
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr ""
 
@@ -905,7 +906,7 @@ msgstr "Sons"
 msgid "Starting a new game"
 msgstr "Iniciando un novo xogo"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Munición"
 

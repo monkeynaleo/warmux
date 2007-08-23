@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2006-06-16 11:31+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
@@ -340,7 +341,7 @@ msgstr[1] "L'equip '%s' ha conseguit %u bazooka(s) automatic(s)!"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(mort)"
 
@@ -350,7 +351,7 @@ msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
@@ -513,7 +514,7 @@ msgstr "Error en %s:%lu"
 msgid "Error loading team :"
 msgstr "Error carregant l'equip %s :"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr ""
@@ -569,7 +570,7 @@ msgstr "Imposible obrir el directori dels mapas (%s) !"
 msgid "Error: Unable to start server"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
@@ -612,7 +613,7 @@ msgid "Head commander"
 msgstr ""
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr ""
 
@@ -933,7 +934,7 @@ msgstr "Efectes sonors?"
 msgid "Starting a new game"
 msgstr "Començant un nou joc"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Stock :"
 
