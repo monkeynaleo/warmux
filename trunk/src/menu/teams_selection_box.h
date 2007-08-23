@@ -26,7 +26,7 @@
 #include "gui/box.h"
 
 // Forward declarations
-class SpinButtonBig;
+class SpinButtonWithPicture;
 class TeamBox;
 
 const uint MAX_NB_TEAMS=4;
@@ -42,7 +42,7 @@ class TeamsSelectionBox : public HBox
   TeamsSelectionBox operator=(const TeamsSelectionBox&);
   /**********************************************/
 
-  SpinButtonBig *teams_nb;
+  SpinButtonWithPicture *teams_nb;
   std::vector<TeamBox*> teams_selections;
 
   void SetNbTeams(uint nb_teams);
