@@ -91,26 +91,26 @@
 <sprite name="head" type="head">
 	<image file="head.png"/>
 	<anchor dx="8" dy="10"/>
-	<attached member_type="eyes-normal" frame="*" dx="8" dy="4"/>
-	<attached member_type="helmet" frame="*" dx="1" dy="-1"/>
+	<attached member_type="eyes-normal" frame="*" dx="10" dy="4"/>
+	<attached member_type="helmet" frame="*" dx="0" dy="0"/>
 </sprite>
 
 <!-- ###### Eyes ###### -->
 <sprite name="eyes-normal" type="eyes-normal">
 	<image file="eyes.png"/>
 	<anchor dx="4" dy="3"/>
-	<attached member_type="pupil-right" frame="*" dx="4" dy="3"/>
-	<attached member_type="pupil-left" frame="*" dx="6" dy="3"/>
+	<attached member_type="pupil-right" frame="*" dx="3" dy="4"/>
+	<attached member_type="pupil-left" frame="*" dx="5" dy="4"/>
 </sprite>
 
 <sprite name="pupil-right" type="pupil-right" >
 	<image file="pupil.png"/>
-	<anchor dx="-1" dy="0"/>
+	<anchor dx="1" dy="1"/>
 </sprite>
 
 <sprite name="pupil-left" type="pupil-left" >
 	<image file="pupil.png"/>
-	<anchor dx="-1" dy="0"/>
+	<anchor dx="1" dy="1"/>
 </sprite>
 
 <!-- ###### Arms ###### -->
@@ -358,8 +358,6 @@
 		<member type="arm-right" angle="0" />
 		<member type="foot-left" angle="0" />
 		<member type="foot-right" angle="0" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -367,8 +365,6 @@
 		<member type="arm-right" angle="10" />
 		<member type="foot-left" angle="10" />
 		<member type="foot-right" angle="-10" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -376,8 +372,6 @@
 		<member type="arm-right" angle="20" />
 		<member type="foot-left" angle="20" />
 		<member type="foot-right" angle="-20" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -385,8 +379,6 @@
 		<member type="arm-right" angle="30" />
 		<member type="foot-left" angle="30" />
 		<member type="foot-right" angle="-30" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -394,8 +386,6 @@
 		<member type="arm-right" angle="40" />
 		<member type="foot-left" angle="40" />
 		<member type="foot-right" angle="-40" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -403,8 +393,6 @@
 		<member type="arm-right" angle="30" />
 		<member type="foot-left" angle="30" />
 		<member type="foot-right" angle="-30" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -412,8 +400,6 @@
 		<member type="arm-right" angle="20" />
 		<member type="foot-left" angle="20" />
 		<member type="foot-right" angle="-20" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -421,8 +407,6 @@
 		<member type="arm-right" angle="10" />
 		<member type="foot-left" angle="10" />
 		<member type="foot-right" angle="-10" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -430,8 +414,6 @@
 		<member type="arm-right" angle="0" />
 		<member type="foot-left" angle="0" />
 		<member type="foot-right" angle="0" />	
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -439,8 +421,6 @@
 		<member type="arm-right" angle="-10" />
 		<member type="foot-left" angle="-10" />
 		<member type="foot-right" angle="10" />	
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -448,8 +428,6 @@
 		<member type="arm-right" angle="-20" />
 		<member type="foot-left" angle="-20" />
 		<member type="foot-right" angle="20" />	
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -457,8 +435,6 @@
 		<member type="arm-right" angle="-30" />
 		<member type="foot-left" angle="-30" />
 		<member type="foot-right" angle="30" />	
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -466,8 +442,6 @@
 		<member type="arm-right" angle="-40" />
 		<member type="foot-left" angle="-40" />
 		<member type="foot-right" angle="40" />
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -475,8 +449,6 @@
 		<member type="arm-right" angle="-30" />
 		<member type="foot-left" angle="-30" />
 		<member type="foot-right" angle="30" />	
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -484,8 +456,6 @@
 		<member type="arm-right" angle="-20" />
 		<member type="foot-left" angle="-20" />
 		<member type="foot-right" angle="20" />	
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="false"/>
@@ -493,8 +463,6 @@
 		<member type="arm-right" angle="-10" />
 		<member type="foot-left" angle="-10" />
 		<member type="foot-right" angle="10" />	
-		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
-		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 	</frame>
 </movement>
 
@@ -1112,69 +1080,13 @@
 </movement>
 
 <!-- ###### Parachute ###### -->
-<movement name="parachute" speed="180">
+<movement name="parachute" speed="100">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="180"/>
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
-		<member type="weapon" dx="-9" dy="12"/>
-	</frame>
-	<frame>
-		<member type="arm-left" angle="0"/>
-		<member type="arm-right" angle="175"/>
-		<member type="foot-left" angle="45"/>
-		<member type="foot-right" angle="45"/>
-		<member type="body" angle="5"/>
-		<member type="weapon" dx="-9" dy="12"/>
-	</frame>
-	<frame>
-		<member type="arm-left" angle="0"/>
-		<member type="arm-right" angle="170"/>
-		<member type="foot-left" angle="45"/>
-		<member type="foot-right" angle="45"/>
-		<member type="body" angle="10"/>
-		<member type="weapon" dx="-9" dy="12"/>
-	</frame>
-	<frame>
-		<member type="arm-left" angle="0"/>
-		<member type="arm-right" angle="175"/>
-		<member type="foot-left" angle="45"/>
-		<member type="foot-right" angle="45"/>
-		<member type="body" angle="5"/>
-		<member type="weapon" dx="-9" dy="12"/>
-	</frame>
-	<frame>
-		<member type="arm-left" angle="0"/>
-		<member type="arm-right" angle="180"/>
-		<member type="foot-left" angle="45"/>
-		<member type="foot-right" angle="45"/>
-		<member type="weapon" dx="-9" dy="12"/>
-	</frame>
-	<frame>
-		<member type="arm-left" angle="0"/>
-		<member type="arm-right" angle="185"/>
-		<member type="foot-left" angle="45"/>
-		<member type="foot-right" angle="45"/>
-		<member type="body" angle="-5"/>
-		<member type="weapon" dx="-9" dy="12"/>
-	</frame>
-	<frame>
-		<member type="arm-left" angle="0"/>
-		<member type="arm-right" angle="190"/>
-		<member type="foot-left" angle="45"/>
-		<member type="foot-right" angle="45"/>
-		<member type="body" angle="-10"/>
-		<member type="weapon" dx="-9" dy="12"/>
-	</frame>
-	<frame>
-		<member type="arm-left" angle="0"/>
-		<member type="arm-right" angle="185"/>
-		<member type="foot-left" angle="45"/>
-		<member type="foot-right" angle="45"/>
-		<member type="body" angle="-5"/>
-		<member type="weapon" dx="-9" dy="12"/>
 	</frame>
 </movement>
 
@@ -1227,14 +1139,6 @@
 		<member type="arm-right" follow_speed="true"/>
 		<member type="foot-left" follow_speed="true"/>
 		<member type="foot-right" follow_speed="true"/>
-	</frame>
-</movement>
-
-<!-- ###### Airhammer ###### -->
-<movement name="weapon-airhammer-begin-shoot" speed="100" play_mode="play_once" >
-	<collision_rect left="5" right="5" top="10" bottom="2" />
-	<frame>
-		<member type="construct" angle="12" dy="-4"/>
 	</frame>
 </movement>
 

@@ -21,27 +21,21 @@
 
 #include "construct.h"
 #include "explosion.h"
-#include "weapon_cfg.h"
-
 #include "game/game_loop.h"
 #include "game/game_mode.h"
-#include "game/time.h"
-#include "graphic/sprite.h"
 #include "include/action_handler.h"
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
 
 const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
 
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
-                                new WeaponConfig(),
-                                NEVER_VISIBLE)
+				new WeaponConfig(),
+				NEVER_VISIBLE)
 {
   construct_spr = resource_manager.LoadSprite( weapons_res_profile, "construct_spr");
   construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / DELTA_ANGLE));
@@ -56,14 +50,6 @@ Construct::~Construct()
   delete construct_spr;
 }
 
-std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count) const
-{
-  return Format(ngettext(
-            "%s team has won %u construct weapon! Don't forget your helmet.",
-            "%s team has won %u construct weapons! Don't forget your helmet.",
-            items_count), TeamName, items_count);
-}
-
 bool Construct::p_Shoot ()
 {
   if(!target_chosen)
@@ -73,9 +59,14 @@ bool Construct::p_Shoot ()
   return true;
 }
 
+void Construct::Refresh()
+{
+  m_is_active = false;
+}
+
 void Construct::Draw()
 {
-  if (!IsInUse()) {
+  if (!m_is_active) {
     Weapon::Draw();
 
     dst = Mouse::GetInstance()->GetWorldPosition();
@@ -91,7 +82,27 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-void Construct::Up() const
+void Construct::HandleKeyPressed_Up()
+{
+  Up();
+}
+
+void Construct::HandleKeyPressed_Down()
+{
+  Down();
+}
+
+void Construct::HandleMouseWheelUp()
+{
+  Up();
+}
+
+void Construct::HandleMouseWheelDown()
+{
+  Down();
+}
+
+void Construct::Up()
 {
   double new_angle = angle + DELTA_ANGLE;
 
@@ -99,7 +110,7 @@ void Construct::Up() const
   ActionHandler::GetInstance()->NewAction(a);
 }
 
-void Construct::Down() const
+void Construct::Down()
 {
   double new_angle = angle - DELTA_ANGLE;
 
@@ -107,10 +118,19 @@ void Construct::Down() const
   ActionHandler::GetInstance()->NewAction(a);
 }
 
+void Construct::SetAngle(double _angle)
+{
+  angle = _angle;
+}
+
 WeaponConfig& Construct::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
 
-bool Construct::IsInUse() const
+std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count )
 {
-  return m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  return Format(ngettext(
+            "%s team has won %u construct!",
+            "%s team has won %u constructs!",
+            items_count), TeamName, items_count);
 }
+

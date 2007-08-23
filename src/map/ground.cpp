@@ -29,7 +29,6 @@
 #include "maps_list.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
-#include "graphic/colors.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "tool/i18n.h"
@@ -45,16 +44,11 @@ void Ground::Init(){
 
   // Load ground data
   Surface m_image = ActiveMap().ReadImgGround();
-  if(ActiveMap().IsOpened()) {
-    int x_off = 10, y_off = 0;
-    Point2i offset = Point2i(x_off, y_off);
-    LoadImage(m_image, offset);
-  } else {
-    LoadImage(m_image, Point2i());
-  }
+  LoadImage ( m_image );
+
   // Check the size of the map
-  ASSERT(Constants::MAP_MIN_SIZE <= GetSize());
-  ASSERT(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
+  assert(Constants::MAP_MIN_SIZE <= GetSize());
+  assert(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
 
   // Check if the map is "opened"
   open = ActiveMap().IsOpened();
@@ -69,9 +63,9 @@ void Ground::Reset(){
 
 // Read the alpha channel of the pixel
 bool Ground::IsEmpty(const Point2i &pos) const{
-        ASSERT( !world.IsOutsideWorldXY(pos.x, pos.y) );
+	assert( !world.IsOutsideWorldXY(pos.x, pos.y) );
 
-        return GetAlpha( pos ) != 255; // IsTransparent
+	return GetAlpha( pos ) != 255; // IsTransparent
 }
 
 /*
@@ -81,7 +75,7 @@ bool Ground::IsEmpty(const Point2i &pos) const{
  * returns -1.0 if no tangent was found (pixel (x,y) does not touch any
  * other piece of ground
  */
-double Ground::Tangent(int x,int y) const {
+double Ground::Tangent(int x,int y){
   //Approximation : returns the chord instead of the tangent to the ground
 
   /* We try to find 2 points on the ground on each side of (x,y)
@@ -91,14 +85,7 @@ double Ground::Tangent(int x,int y) const {
    */
   Point2i p1,p2;
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
-  {
-#ifdef _MSC_VER
-    const unsigned long nan[2] ={0xffffffff, 0x7fffffff};
-    return *( double* )nan;
-#else
     return NAN;
-#endif
-  }
 
   if(!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y))
   {
@@ -111,7 +98,7 @@ double Ground::Tangent(int x,int y) const {
   if(p1.y == p2.y)
     return M_PI;
 */
-  //ASSERT (p1.x != p2.x);
+  //assert (p1.x != p2.x);
 
   /* double tangeante = atan((double)(p2.y-p1.y)/(double)(p2.x-p1.x));
 
@@ -124,20 +111,20 @@ double Ground::Tangent(int x,int y) const {
 
   //calculated with a good old TI-83... using table[a][b] = atan( (a-2) / (b-2) )
   const float table[5][5] = {
-    {      .78539,       .46364,     M_PI, -.46364+M_PI, -.78539+M_PI},
-    {      1.1071,       .78539,     M_PI, -.78539+M_PI, -1.1071+M_PI},
-    {    M_PI/2.0,     M_PI/2.0, M_PI/2.0,     M_PI/2.0,   M_PI / 2.0},
-    {-1.1071+M_PI, -.78539+M_PI,     M_PI,        78539,       1.1071},
-    {-.78539+M_PI, -.46364+M_PI,     M_PI,       .46364,       .78539}};
+    {.78539,		.46364,		M_PI,		-.46364+M_PI,	-.78539+M_PI},
+    {1.1071,		.78539,		M_PI,		-.78539+M_PI,	-1.1071+M_PI},
+    {M_PI/2.0,		M_PI/2.0,	M_PI/2.0,	M_PI/2.0,	M_PI / 2.0},
+    {-1.1071+M_PI,	 -.78539+M_PI,  M_PI,		78539,		1.1071},
+    {-.78539+M_PI,	-.46364+M_PI,	M_PI,		.46364,		.78539}};
 
-  ASSERT(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
-  ASSERT(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);
+  assert(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
+  assert(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);
 
   return table[(p2.y-p1.y)+2][(p2.x-p1.x)+2];
 }
 
 bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
-                           int bad_x,int bad_y) const
+                           int bad_x,int bad_y)
 {
   //Look for a pixel around (x,y) that is at the edge of the ground
   //and vaccum
@@ -240,26 +227,26 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   return false;
 }
 
-void Ground::Draw(bool redraw_all)
+void Ground::Draw()
 {
   CheckEmptyTiles();
   AppWormux * app = AppWormux::GetInstance();
 
-  Point2i cPos = Camera::GetInstance()->GetPosition();
-  Point2i windowSize = app->video->window.GetSize();
+  Point2i cPos = camera.GetPosition();
+  Point2i windowSize = app->video.window.GetSize();
   Point2i margin = (windowSize - GetSize())/2;
 
-  if( Camera::GetInstance()->GetInstance()->HasFixedX() ){// ground is less wide than screen !
-    app->video->window.BoxColor( Rectanglei(0, 0, margin.x, windowSize.y), black_color);
-    app->video->window.BoxColor( Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color);
+  if( camera.HasFixedX() ){// ground is less wide than screen !
+    app->video.window.BoxColor( Rectanglei(0, 0, margin.x, windowSize.y), black_color);
+    app->video.window.BoxColor( Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color);
   }
 
-  if( Camera::GetInstance()->GetInstance()->HasFixedY() ){// ground is less wide than screen !
-    app->video->window.BoxColor( Rectanglei(0, 0, windowSize.x, margin.y), black_color);
-    app->video->window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
+  if( camera.HasFixedY() ){// ground is less wide than screen !
+    app->video.window.BoxColor( Rectanglei(0, 0, windowSize.x, margin.y), black_color);
+    app->video.window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
   }
 
-  if( lastPos != cPos || redraw_all){
+  if( lastPos != cPos ){
     lastPos = cPos;
     DrawTile();
     return;
@@ -274,9 +261,9 @@ void Ground::Draw(bool redraw_all)
   RedrawParticleList(*world.to_redraw_particles);
 }
 
-void Ground::RedrawParticleList(std::list<Rectanglei> &list) const {
-  std::list<Rectanglei>::iterator it;
+void Ground::RedrawParticleList(std::list<Rectanglei> &list){
+	std::list<Rectanglei>::iterator it;
 
-  for( it = list.begin(); it != list.end(); ++it )
-    DrawTile_Clipped(*it);
+	for( it = list.begin(); it != list.end(); ++it )
+		DrawTile_Clipped(*it);
 }

@@ -30,7 +30,7 @@ class JetPack : public Weapon
     double m_x_force;
     double m_y_force;
 
-    SoundSample flying_sound;
+    int channel;
 
     // Jetpack fuel.
     uint m_last_fuel_down;
@@ -38,18 +38,18 @@ class JetPack : public Weapon
   public:
     JetPack();
     void Reset();
-    void SignalTurnEnd() { p_Deselect(); };
-    void ActionStopUse() { p_Deselect(); };
-
-    virtual void HandleKeyPressed_Up(bool shift);
-    virtual void HandleKeyReleased_Up(bool shift);
-    virtual void HandleKeyPressed_MoveLeft(bool shift);
-    virtual void HandleKeyReleased_MoveLeft(bool shift);
-    virtual void HandleKeyPressed_MoveRight(bool shift);
-    virtual void HandleKeyReleased_MoveRight(bool shift);
-    virtual void HandleKeyPressed_Shoot(bool shift);
-
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+    void SignalTurnEnd();
+    void ActionStopUse();
+    
+    virtual void HandleKeyPressed_Up();
+    virtual void HandleKeyReleased_Up();
+    virtual void HandleKeyPressed_MoveLeft();
+    virtual void HandleKeyReleased_MoveLeft();
+    virtual void HandleKeyPressed_MoveRight();
+    virtual void HandleKeyReleased_MoveRight();
+    virtual void HandleKeyPressed_Shoot();
+    
+    DECLARE_GETWEAPONSTRING();
 
   protected:
     void Refresh();
@@ -60,9 +60,9 @@ class JetPack : public Weapon
     void GoUp();
     void GoLeft();
     void GoRight();
-    void StopUp() { m_y_force = 0.0; StopUse(); };
-    void StopLeft() { m_x_force = 0.0; StopUse(); };
-    void StopRight() { m_x_force = 0.0; StopUse(); };
+    void StopUp();
+    void StopLeft();
+    void StopRight();
     void StartUse();
     void StopUse();
 };

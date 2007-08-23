@@ -21,12 +21,16 @@
 
 #include <iostream>
 #include "include/action_handler.h"
-#include "character/character.h"
+#include "character/body.h"
 #include "character/move.h"
+#include "interface/game_msg.h"
 #include "map/map.h"
+#include "team/macro.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/error.h"
+#include "tool/math_tools.h"
+#include "tool/string_tools.h"
 
 #include "ai_movement_module.h"
 
@@ -39,13 +43,13 @@
 // =================================================
 // Go on !
 // =================================================
-void AIMovementModule::MakeStep() const
+void AIMovementModule::MakeStep()
 {
   if(ActiveCharacter().IsImmobile()) {
-    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
-      MoveActiveCharacterRight(false);
+    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
+      MoveActiveCharacterRight();
     }  else {
-      MoveActiveCharacterLeft(false);
+      MoveActiveCharacterLeft();
     }
   }
 }
@@ -55,7 +59,7 @@ void AIMovementModule::MakeStep() const
 // Return true if sure that it does not need to jump
 // or to use parachute
 // =================================================
-bool AIMovementModule::ObstacleHeight(int& height) const
+bool AIMovementModule::ObstacleHeight(int& height)
 {
   if (ComputeHeightMovement(ActiveCharacter(), height, false))
     return true;
@@ -74,7 +78,7 @@ bool AIMovementModule::ObstacleHeight(int& height) const
     // Compute exact whole size
     for (height = 15; height <= 150 ; height++){
       if ( !ActiveCharacter().IsInVacuum(Point2i(ActiveCharacter().GetDirection(), height))
-          ||  ActiveCharacter().FootsOnFloor(y_floor+height)){
+	  ||  ActiveCharacter().FootsOnFloor(y_floor+height)){
         break;
       }
     }
@@ -83,13 +87,13 @@ bool AIMovementModule::ObstacleHeight(int& height) const
   return false;
 }
 
-bool AIMovementModule::RiskGoingOutOfMap() const
+bool AIMovementModule::RiskGoingOutOfMap()
 {
-  if ( ActiveCharacter().GetDirection() == DIRECTION_LEFT &&
+  if ( ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT &&
        ActiveCharacter().GetX() <= 5 ) {
     return true;
-  } else if ( ActiveCharacter().GetDirection() == DIRECTION_RIGHT &&
-              world.GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
+  } else if ( ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT &&
+	      world.GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
     return true;
   }
 
@@ -118,7 +122,7 @@ void AIMovementModule::PrepareJump()
 
 void AIMovementModule::GoBackToJump()
 {
-  ASSERT(current_movement == BACK_TO_JUMP);
+  assert(current_movement = BACK_TO_JUMP);
 
   MakeStep();
 
@@ -145,14 +149,14 @@ void AIMovementModule::Jump()
 
 void AIMovementModule::EndOfJump()
 {
-  ASSERT(current_movement == JUMPING);
+  assert(current_movement = JUMPING);
   MSG_DEBUG("ai.move", "End of Jump!");
   //GameMessages::GetInstance()->Add("finished to jump");
 
   if ( last_position.GetX() == ActiveCharacter().GetPosition().GetX() ) {
     // we have not moved since last movement
 
-    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
+    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
       max_reachable_x = ActiveCharacter().GetPosition().GetX();
     } else {
       min_reachable_x = ActiveCharacter().GetPosition().GetX();
@@ -195,24 +199,24 @@ void AIMovementModule::Walk()
       last_blocked_position = ActiveCharacter().GetPosition();
 
       if (height < 0 ) {
-        // There's a barrier
+	// There's a barrier
 
-        if (height >= -80) { // we can try to jump!
-          PrepareJump();
-          return; // do not update position
-        } else { // it's too high!
-          // GameMessages::GetInstance()->Add("It's too high!!");
-          MSG_DEBUG("ai.move", "It's too high, we have to go back");
-          InverseDirection(true);
-        }
+	if (height >= -80) { // we can try to jump!
+	  PrepareJump();
+	  return; // do not update position
+	} else { // it's too high!
+	  //	  GameMessages::GetInstance()->Add("It's too high!!");
+	  MSG_DEBUG("ai.move", "It's too high, we have to go back");
+	  InverseDirection(true);
+	}
       } else {
-        // There's a hole
+	// There's a hole
 
-        if (height >= 100) { // it's too deep, go back!!
-          MSG_DEBUG("ai.move", "It's too deep, we have to go back");
-          // GameMessages::GetInstance()->Add("It's too deep!" + ulong2str(height));
-          InverseDirection(true);
-        }
+	if (height >= 100) { // it's too deep, go back!!
+	  MSG_DEBUG("ai.move", "It's too deep, we have to go back");
+	  //	  GameMessages::GetInstance()->Add("It's too deep!" + ulong2str(height));
+	  InverseDirection(true);
+	}
       }
     } else {
       // already have been blocked here...
@@ -248,15 +252,15 @@ void AIMovementModule::InverseDirection(bool completely_blocked)
 {
   MSG_DEBUG("ai.move", "Inverse direction");
 
-  if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
+  if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
 
-    ActiveCharacter().SetDirection(DIRECTION_LEFT);
+    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
     if (completely_blocked)
       max_reachable_x = ActiveCharacter().GetPosition().GetX();
 
   } else {
 
-    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
     if (completely_blocked)
       min_reachable_x = ActiveCharacter().GetPosition().GetX();
 
@@ -347,7 +351,7 @@ void AIMovementModule::UpdateListOfPointsToAvoid()
   // TODO : Refresh position of mines
 }
 
-void AIMovementModule::AddPointToAvoid(const Point2i& dangerous_point)
+void AIMovementModule::AddPointToAvoid(Point2i dangerous_point)
 {
   points_to_avoid.insert(dangerous_point);
 }
@@ -359,7 +363,7 @@ void AIMovementModule::AddPointToAvoid(const Point2i& dangerous_point)
 //  uint min_reachable_x, max_reachable_x;
 //  Point2i destination_point;
 
-void AIMovementModule::SetDestinationPoint(const Point2i& _destination_point)
+void AIMovementModule::SetDestinationPoint(Point2i _destination_point)
 {
   destination_point = _destination_point;
 }
@@ -370,10 +374,10 @@ void AIMovementModule::SetDestinationPoint(const Point2i& _destination_point)
 // This method is not perfect!!
 // =================================================
 bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
-                                          const Character& enemy) const
+					  const Character& enemy) const
 {
-  int delta_x = abs(shooter.GetX() - enemy.GetX());
-  int delta_y = abs(shooter.GetY() - enemy.GetY());
+  uint delta_x = abs(shooter.GetX() - enemy.GetX());
+  uint delta_y = abs(shooter.GetY() - enemy.GetY());
 
   if (delta_x > 300)
     return false;
@@ -381,21 +385,24 @@ bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
   if (delta_y > 100)
     return false;
 
-  if (min_reachable_x>enemy.GetX() || enemy.GetX()>max_reachable_x)
+  if (min_reachable_x > uint(enemy.GetX()) ||
+      uint(enemy.GetX()) > max_reachable_x)
     return false;
+
   return true;
 }
 
-bool AIMovementModule::IsProgressing() const
+bool AIMovementModule::IsProgressing()
 {
-  if (destination_point.GetX()>max_reachable_x ||
-          destination_point.GetX()<min_reachable_x)
+  if (uint(destination_point.GetX()) > max_reachable_x ||
+      uint(destination_point.GetX()) < min_reachable_x)
     return false;
+
   return true;
 }
 
 
-bool AIMovementModule::IsArrived() const
+bool AIMovementModule::IsArrived()
 {
   return (ActiveCharacter().GetPosition() == destination_point);
 }

@@ -22,10 +22,10 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 //-----------------------------------------------------------------------------
+#include "graphic/sprite.h"
+#include "object/physical_obj.h"
 #include "include/base.h"
 //-----------------------------------------------------------------------------
-
-class Sprite;
 
 class CharacterCursor
 {
@@ -40,8 +40,9 @@ private:
 
   uint time_begin_anim;
   uint last_update;
+  PhysicalObj *obj_designe;
   int dy;
-  bool visible;
+  bool actif;
   bool want_hide;
 
   static CharacterCursor * singleton;
@@ -53,10 +54,16 @@ public:
   void Draw();
   void Refresh();
 
+  // Pointe un objet
+  void PointeObj (PhysicalObj *obj);
+
+  // Pointe un objet
   void FollowActiveCharacter ();
 
   // Hide the cursor
   void Hide();
+
+
 
 private:
   CharacterCursor();

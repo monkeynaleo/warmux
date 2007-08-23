@@ -24,11 +24,9 @@
 
 #include "include/base.h"
 #include "graphic/font.h"
-#include "tool/rectangle.h"
+#include "graphic/text.h"
 #include "widget.h"
 #include <list>
-
-class Text;
 
 class MsgBox : public Widget
 {
@@ -40,10 +38,9 @@ class MsgBox : public Widget
  public:
 
   MsgBox(const Rectanglei& rect, Font::font_size_t font_size, Font::font_style_t font_style);
-  ~MsgBox();
 
   void NewMessage(const std::string& msg, const Color& color = white_color);
-
+  
   void Draw (const Point2i &mousePosition, Surface& surf) const;
   void SetSizePosition(const Rectanglei &rect);
 };

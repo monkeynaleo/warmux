@@ -22,14 +22,9 @@
 #define MOVEMENT_H
 #include <map>
 #include <vector>
-#include "include/base.h"
+#include "graphic/sprite.h"
 #include "tool/point.h"
-
-// Forward declaration
-namespace xmlpp
-{
-  class Element;
-}
+#include "tool/xml_document.h"
 
 class member_mvt
 {  // Position of a member relative to its superior one
@@ -47,16 +42,13 @@ public:
     angle_rad = angle;
   }
   /* GetAngle returns radian values */
-  inline const double &GetAngle() const { return angle_rad; }
+  inline const double &GetAngle() { return angle_rad; }
   float alpha;
-  int follow_cursor_limit;
-  bool follow_cursor;
   bool follow_crosshair;
   bool follow_half_crosshair;
   bool follow_speed;
   bool follow_direction;
   member_mvt(): angle_rad(0), pos(0.0, 0.0), scale(1.0, 1.0), alpha(1),
-                follow_cursor_limit(0), follow_cursor(false),
                 follow_crosshair(false), follow_half_crosshair(false),
                 follow_speed(false), follow_direction(false)
   { };
@@ -64,7 +56,7 @@ public:
 
 class Movement
 {
-  typedef std::map<std::string, class member_mvt> member_def; // Describe the position of each member for a given frame
+  typedef std::map<std::string, struct member_mvt> member_def; // Describe the position of each member for a given frame
 
 public:
   std::vector<member_def> frames;

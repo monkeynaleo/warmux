@@ -23,14 +23,13 @@
 #include <SDL_net.h>
 #include <fstream>
 #include "download.h"
-#include "game/config.h"
-#include "graphic/video.h"
 #include "index_server.h"
 #include "index_svr_msg.h"
 #include "network.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "tool/debug.h"
+#include "tool/i18n.h"
 #include "tool/random.h"
 
 IndexServer index_server;
@@ -58,7 +57,7 @@ IndexServer::~IndexServer()
 Network::connection_state_t IndexServer::Connect()
 {
   MSG_DEBUG("index_server", "Connecting..");
-  ASSERT(!connected);
+  assert(!connected);
 
   if( hidden_server )
     return Network::CONNECTED;
@@ -83,7 +82,7 @@ Network::connection_state_t IndexServer::Connect()
 bool IndexServer::ConnectTo(const std::string & address, const int & port)
 {
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
-  AppWormux::GetInstance()->video->Flip();
+  AppWormux::GetInstance()->video.Flip();
 
   Network::Init(); // To get SDL_net initialized
 
@@ -138,11 +137,11 @@ void IndexServer::Disconnect()
 
 static ssize_t getline(std::string& line, std::ifstream& file)
 {
-  line.clear();
-  std::getline(file, line);
-  if(file.eof())
-    return -1;
-  return line.size();
+	line.clear();
+	std::getline(file, line);
+	if(file.eof())
+		return -1;
+	return line.size();
 }
 
 bool IndexServer::GetServerList()
@@ -155,21 +154,22 @@ bool IndexServer::GetServerList()
   // Download the list of user
   const std::string server_file = Config::GetInstance()->GetPersonalDir() + "server_list";
 
-  if( !Downloader::GetInstance()->Get(server_list_url.c_str(), server_file.c_str()) )
+  if( !downloader.Get(server_list_url.c_str(), server_file.c_str()) )
     return false;
 
   // Parse the file
   std::ifstream fin;
   fin.open(server_file.c_str(), std::ios::in);
   if(!fin)
-          return false;
+  	return false;
 
   /*char * line = NULL;
   size_t len = 0;*/
+  ssize_t read;
   std::string line;
 
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
-  while (getline(line, fin) >= 0)
+  while ((read = getline(line, fin)) >= 0)
   {
     if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
       continue;
@@ -208,7 +208,7 @@ bool IndexServer::GetServerAddress( std::string & address, int & port)
     while(nbr--)
       ++first_server;
 
-    ASSERT(first_server != server_lst.end());
+    assert(first_server != server_lst.end());
 
     current_server = first_server;
 
@@ -232,7 +232,7 @@ void IndexServer::Send(const int& nbr)
 {
   char packet[4];
   // this is not cute, but we don't want an int -> uint conversion here
-  Uint32 u_nbr = *((const Uint32*)&nbr);
+  Uint32 u_nbr = *((Uint32*)&nbr);
 
   SDLNet_Write32(u_nbr, packet);
   SDLNet_TCP_Send(socket, packet, sizeof(packet));
@@ -276,16 +276,16 @@ std::string IndexServer::ReceiveStr()
   if(size <= 0)
     return "";
 
+  char* str = new char[size+1];
+
   if(SDLNet_CheckSockets(sock_set, 5000) == 0)
     return "";
 
   if(!SDLNet_SocketReady(socket))
     return "";
 
-  char* str = new char[size+1];
   if( SDLNet_TCP_Recv(socket, str, size) < 1 )
   {
-    delete[] str;
     Disconnect();
     return "";
   }
@@ -320,7 +320,7 @@ bool IndexServer::HandShake()
 
 void IndexServer::SendServerStatus()
 {
-  ASSERT(Network::GetInstance()->IsServer());
+  assert(Network::GetInstance()->IsServer());
 
   if(hidden_server)
     return;

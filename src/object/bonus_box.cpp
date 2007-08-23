@@ -23,21 +23,27 @@
 #include "bonus_box.h"
 #include <sstream>
 #include <iostream>
-#include "character/character.h"
+#include <math.h>
+#include "game/game_mode.h"
+#include "game/game_loop.h"
+#include "game/time.h"
 #include "graphic/sprite.h"
+#include "include/app.h"
 #include "interface/game_msg.h"
+#include "map/camera.h"
+#include "map/map.h"
 #include "network/randomsync.h"
+#include "object/objects_list.h"
 #include "team/macro.h"
-#include "team/team.h"
+#include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
-#include "tool/xml_document.h"
+#include "weapon/explosion.h"
 #include "weapon/weapons_list.h"
 
-// XXX Unused !?
-//const uint SPEED_PARACHUTE = 170; // ms per frame
-//const uint NB_MAX_TRY = 20;
-//const uint SPEED = 5; // meter / seconde
+const uint SPEED = 5; // meter / seconde
+const uint SPEED_PARACHUTE = 170; // ms per frame
+const uint NB_MAX_TRY = 20;
 
 BonusBox::BonusBox():
   ObjBox("bonus_box"),
@@ -98,7 +104,7 @@ void BonusBox::PickRandomWeapon() {
     nbr_ammo = weapon_map[weapon_num].second;
 }
 
-void BonusBox::ApplyBonus(Team &equipe, Character &/*ver*/) {
+void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
   if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
     /*this next 'if' should never be true, but I am loath to remove it just in case. */
@@ -132,7 +138,7 @@ std::map<int,std::pair<Weapon*,int> > BonusBox::weapon_map;
   and retrieved by weapon.GetBonusProbability() and weapon.GetBonusAmmo()
   however, this is not the way that was chosen.
 */
-void BonusBox::LoadXml(const xmlpp::Element * object)
+void BonusBox::LoadXml(xmlpp::Element * object)
 {
   XmlReader::ReadInt(object,"life_points",start_life_points);
   object = XmlReader::GetMarker(object, "probability");

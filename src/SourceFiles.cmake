@@ -37,9 +37,7 @@ gui/box.cpp
 gui/button.cpp
 gui/button_text.cpp
 gui/check_box.cpp
-gui/combo_box.cpp
-gui/combo_box.h
-gui/energy_bar.cpp
+gui/EnergyBar.cpp
 gui/label.cpp
 gui/list_box.cpp
 gui/list_box_w_label.cpp
@@ -61,11 +59,9 @@ include/binreloc.c
 include/constant.cpp
 interface/cursor.cpp
 interface/game_msg.cpp
-interface/joystick.cpp
 interface/interface.cpp
 interface/keyboard.cpp
 interface/loading_screen.cpp
-interface/man_machine_interface.cpp
 interface/mouse.cpp
 interface/weapon_menu.cpp
 main.cpp
@@ -124,7 +120,6 @@ particles/smoke.cpp
 particles/star.cpp
 particles/teleport_member.cpp
 sound/jukebox.cpp
-sound/sound_sample.cpp
 team/results.cpp
 team/team.cpp
 team/team_energy.cpp
@@ -160,7 +155,7 @@ weapon/grapple.cpp
 weapon/grenade.cpp
 weapon/gun.cpp
 weapon/jetpack.cpp
-weapon/weapon_launcher.cpp
+weapon/launcher.cpp
 weapon/lowgrav.cpp
 weapon/mine.cpp
 weapon/parachute.cpp

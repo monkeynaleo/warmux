@@ -21,14 +21,11 @@
 
 #ifndef PARTICLE_H
 #define PARTICLE_H
-
-#include <list>
 #include "object/physical_obj.h"
+#include "graphic/sprite.h"
+#include "graphic/surface.h"
 #include "include/base.h"
-
-// Forward declarations
-class Sprite;
-class Surface;
+#include "weapon/weapon_cfg.h"
 
 typedef enum {
   particle_DARK_SMOKE,
@@ -83,9 +80,9 @@ class Particle : public PhysicalObj
   virtual void Draw();
   virtual void Refresh();
   void SetOnTop(bool b) { on_top = b; }
-  bool IsOnTop() const { return on_top; }
-  bool StillUseful() const;
-  const bool CheckOnEndTurn() const { return m_check_move_on_end_turn; }
+  bool IsOnTop() { return on_top; }
+  bool StillUseful();
+  const bool CheckOnEndTurn() { return m_check_move_on_end_turn; }
 };
 
 class ParticleEngine
@@ -104,22 +101,22 @@ class ParticleEngine
  public:
   ParticleEngine(uint time=100);
   void AddPeriodic(const Point2i &position,
-                   particle_t type,
-                   bool upper,
-                   double angle=-1, double norme=-1);
+		   particle_t type,
+		   bool upper,
+		   double angle=-1, double norme=-1);
 
   static void Load();
   static void FreeMem();
   static Sprite* GetSprite(particle_spr type);
 
   static void AddNow(const Point2i &position,
-                     uint nb_particles, particle_t type,
-                     bool upper,
-                     double angle=-1, double norme=-1);
+		     uint nb_particles, particle_t type,
+		     bool upper,
+		     double angle=-1, double norme=-1);
   static void AddNow(Particle* particle);
 
   enum ESmokeStyle { NoESmoke, LittleESmoke, BigESmoke }; // Style of smoke explosion (quantitie of smoke)
-  static void AddExplosionSmoke(const Point2i &pos, const uint &radius, const ESmokeStyle &style);
+  static void AddExplosionSmoke(const Point2i &pos, const uint &radius, ESmokeStyle &style);
 
   static void Refresh();
   static void Draw(bool upper);

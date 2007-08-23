@@ -28,7 +28,7 @@
 #include "map/maps_list.h"
 #include "map/camera.h"
 #include "tool/debug.h"
-//#include "tool/random.h"
+#include "tool/random.h"
 #include "tool/rectangle.h"
 #include "game/time.h"
 #include "weapon/mine.h"
@@ -70,6 +70,11 @@ void ObjectsList::PlaceBarrels()
 }
 
 
+ObjectsList::~ObjectsList()
+{
+  FreeMem();
+}
+
 //-----------------------------------------------------------------------------
 void ObjectsList::Refresh()
 {
@@ -79,15 +84,10 @@ void ObjectsList::Refresh()
   {
     (*object)->UpdatePosition();
     (*object)->Refresh();
-    if((*object)->IsGhost()) {
-      // Stop following this object, remove from overlapse reference then delete it.
-      Camera::GetInstance()->GetInstance()->StopFollowingObj(*object);
-      RemoveOverlappedObjectReference(*object);
-      delete (*object);
-      object = erase(object);
-    } else {
+    if((*object)->IsGhost())
+      object = lst_objects.erase(object);
+    else
       object++;
-    }
   }
 }
 
@@ -98,7 +98,7 @@ void ObjectsList::Draw()
        it != end();
        ++it)
   {
-    ASSERT((*it) != NULL);
+    assert((*it) != NULL);
 
     if (!(*it)->IsGhost())
       (*it)->Draw();
@@ -106,7 +106,7 @@ void ObjectsList::Draw()
 }
 
 //-----------------------------------------------------------------------------
-bool ObjectsList::AllReady() const
+bool ObjectsList::AllReady()
 {
   FOR_EACH_OBJECT(object)
   {
@@ -133,16 +133,3 @@ void ObjectsList::FreeMem()
   clear();
 }
 
-//-----------------------------------------------------------------------------
-
-void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
-{
-  for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
-    if((*it)->GetOverlappingObject() == obj) {
-      MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" in \"%s\"",
-                obj->GetName().c_str(), (*it)->GetName().c_str());
-      (*it)->SetOverlappingObject(NULL);
-      it = overlapped_objects.erase(it);
-    }
-  }
-}

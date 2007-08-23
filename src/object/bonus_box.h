@@ -22,13 +22,12 @@
 #ifndef BONUS_BOX_H
 #define BONUS_BOX_H
 //-----------------------------------------------------------------------------
-#include <map>
+#include <SDL.h>
 #include "include/base.h"
-#include "weapon/weapon.h"
 #include "objbox.h"
-
-// Forward declarations
-class Character;
+#include "object/physical_obj.h"
+#include "team/team.h"
+#include "weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 
 class BonusBox : public ObjBox
@@ -46,7 +45,7 @@ class BonusBox : public ObjBox
     void PickRandomWeapon();
   public:
     BonusBox();
-    static void LoadXml(const xmlpp::Element * object);
+    static void LoadXml(xmlpp::Element * object);
 
     void Draw();
     void Refresh();

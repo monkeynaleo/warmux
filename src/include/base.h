@@ -30,7 +30,7 @@
 
 //-----------------------------------------------------------------------------
 
-#ifndef _MSC_VER
+// Types non signes
 typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned int   uint;
@@ -39,19 +39,6 @@ typedef unsigned char  uint8;
 //typedef unsigned long uint32;
 typedef signed char    sint8;
 typedef signed long    sint32;
-#else
-typedef unsigned __int8  uchar;
-typedef unsigned __int16 ushort;
-typedef unsigned int     uint;
-typedef unsigned long    ulong;
-typedef unsigned __int8  uint8;
-typedef signed __int8    sint8;
-typedef signed __int32   sint32;
-typedef long int         ssize_t;
-
-typedef signed   __int16  int16_t;
-typedef unsigned __int32  uint32_t;
-#endif
 
 //-----------------------------------------------------------------------------
 

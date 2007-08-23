@@ -23,11 +23,8 @@
 #define OPTIONS_MENU_H
 
 #include "menu.h"
-
-class ListBox;
-class CheckBox;
-class ComboBox;
-class SpinButtonWithPicture;
+#include "include/base.h"
+#include "graphic/font.h"
 
 class OptionMenu : public Menu
 {
@@ -43,16 +40,15 @@ private:
    /********************************************/
 
    /* Graphic options controllers */
-   ComboBox *cbox_video_mode;
-   ListBox *lbox_languages;
+   ListBox *lbox_video_mode;
    CheckBox *opt_display_wind_particles;
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
    CheckBox *full_screen;
-   SpinButtonWithPicture *opt_max_fps;
+   SpinButtonBig *opt_max_fps;
 
    /* Sound options controllers */
-   ComboBox *cbox_sound_freq;
+   ListBox *lbox_sound_freq;
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
 

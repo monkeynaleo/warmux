@@ -23,38 +23,20 @@
  *****************************************************************************/
 
 #include <sstream>
-
-#include "character/character.h"
-#include "game/time.h"
-#include "graphic/sprite.h"
-#include "interface/game_msg.h"
-#include "interface/game_msg.h"
 #include "map/map.h"
-#include "network/randomsync.h"
+#include "game/time.h"
 #include "object/objects_list.h"
-#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
-
-#include "explosion.h"
-#include "submachine_gun.h"
-#include "weapon_cfg.h"
+#include "interface/game_msg.h"
+#include "interface/game_msg.h"
+#include "weapon/explosion.h"
+#include "weapon/submachine_gun.h"
+#include "network/randomsync.h"
 
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
-const uint    SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
+const double  SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
 const double  SUBMACHINE_RANDOM_ANGLE       = 0.01;
-
-class SubMachineGunBullet : public WeaponBullet
-{
-  public:
-    SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
-                        WeaponLauncher * p_launcher);
-  protected:
-    void ShootSound();
-    void RandomizeShoot(double &angle,double &strength);
-};
-
 
 SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                                          WeaponLauncher * p_launcher) :
@@ -63,7 +45,7 @@ SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
   camera_follow_closely = false;
 }
 
-void SubMachineGunBullet::RandomizeShoot(double &angle,double &/*strength*/)
+void SubMachineGunBullet::RandomizeShoot(double &angle,double &strength)
 {
   angle += M_PI * randomSync.GetDouble(-SUBMACHINE_RANDOM_ANGLE,SUBMACHINE_RANDOM_ANGLE);
 }
@@ -85,7 +67,6 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   ignore_ghost_state_signal = true;
   ignore_drowning_signal = true;
   announce_missed_shots = false;
-  m_time_between_each_shot = SUBMACHINE_TIME_BETWEEN_SHOOT;
 
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
@@ -115,12 +96,17 @@ bool SubMachineGun::p_Shoot()
 
   Point2i pos = ActiveCharacter().GetHandPosition();
   double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
-               * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
+                * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
   particle.AddNow(pos, 1, particle_BULLET, true, angle,
-                  5.0 + (Time::GetInstance()->Read() % 6));
+  	                   5.0 + (Time::GetInstance()->Read() % 6));
 
   announce_missed_shots = false;
   return true;
+}
+
+void SubMachineGun::p_Deselect()
+{
+  m_is_active = false;
 }
 
 // Overide regular Refresh method
@@ -129,21 +115,37 @@ void SubMachineGun::RepeatShoot()
   uint tmp = Time::GetInstance()->Read();
   uint time = tmp - m_last_fire_time;
 
-  if (time >= m_time_between_each_shot)
+  if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
     {
       NewActionWeaponShoot();
       m_last_fire_time = tmp;
     }
 }
 
-void SubMachineGun::HandleKeyRefreshed_Shoot(bool /*shift*/)
+void SubMachineGun::SignalTurnEnd()
+{
+  // It's too late !
+  m_is_active = false;
+}
+
+void SubMachineGun::HandleKeyPressed_Shoot()
+{
+  HandleKeyRefreshed_Shoot();
+}
+
+void SubMachineGun::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
     RepeatShoot();
   }
 }
 
-std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_count ) const
+void SubMachineGun::HandleKeyReleased_Shoot()
+{
+  m_is_active = false;
+}
+
+std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u submachine gun!",

@@ -314,7 +314,6 @@
       <change_weapon>1</change_weapon>
       <wind_factor>400.0</wind_factor>
       <air_resist_factor>40.0</air_resist_factor>
-      <force_side_displacement>2000.0</force_side_displacement>
     </parachute>
 
     <polecatlauncher>

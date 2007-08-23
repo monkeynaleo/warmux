@@ -22,28 +22,31 @@
 #ifndef WEAPON_TOOLS_H
 #define WEAPON_TOOLS_H
 
+#include <SDL.h>
+#include "weapon.h"
+#include "graphic/surface.h"
+#include "include/base.h"
+#include "object/physical_obj.h"
 #include "particles/particle.h"
 #include "tool/point.h"
+#include "tool/resource_manager.h"
 
-class Profile;
-class ExplosiveWeaponConfig;
-
-void ApplyExplosion(const Point2i &pos,
-                    const ExplosiveWeaponConfig &config,
-                    const std::string& son="weapon/explosion",
-                    bool fire_particle = true,
-                    ParticleEngine::ESmokeStyle smoke = ParticleEngine::BigESmoke,
-                    std::string network_id = "LOCAL" // Useful only on network : this is used to know that we should not apply blast and damage to the projectile which has created the explosion (bugfix #8529)
-                    );
+void ApplyExplosion (const Point2i &pos,
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son="weapon/explosion",
+		     bool fire_particle = true,
+           ParticleEngine::ESmokeStyle smoke = ParticleEngine::BigESmoke
+		     );
 
 void ApplyExplosion_common (const Point2i &pos,
-                            const ExplosiveWeaponConfig &config,
-                            const std::string& son,
-                            bool fire_particle,
-                            ParticleEngine::ESmokeStyle smoke,
-                            std::string network_id
-                           );
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+           ParticleEngine::ESmokeStyle smoke
+		     );
 
-extern Profile *weapons_res_profile;
+//void UpdateStrengthBar(double strength);
+
+extern Profile *weapons_res_profile; 
 
 #endif //WEAPON_TOOLS_H

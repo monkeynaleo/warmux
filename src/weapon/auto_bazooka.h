@@ -21,30 +21,60 @@
 
 #ifndef AUTO_BAZOOKA_H
 #define AUTO_BAZOOKA_H
-
-#include "weapon_launcher.h"
+#include "launcher.h"
+#include "graphic/surface.h"
+#include "gui/progress_bar.h"
 #include "include/base.h"
+#include "object/physical_obj.h"
 
+class AutomaticBazooka;
 class AutomaticBazookaConfig;
-struct target_t;
+
+class RPG : public WeaponProjectile
+{
+  ParticleEngine smoke_engine;
+  protected:
+    double angle_local;
+    Point2i m_target;
+    bool m_targeted;
+    double m_force;
+    uint m_lastrefresh;
+  public:
+    RPG(AutomaticBazookaConfig& cfg,
+                        WeaponLauncher * p_launcher);
+    void Refresh();
+    void Shoot(double strength);
+    void SetTarget (int x,int y);
+
+  protected:
+    void SignalOutOfMap();
+    void SignalDrowning();
+};
 
 class AutomaticBazooka : public WeaponLauncher
 {
-  target_t       *m_target;
+  private:
+    struct target_t
+    {
+      Point2i pos;
+      bool selected;
+      Surface image;
+    } m_target;
   public:
     AutomaticBazooka();
     void Draw ();
     bool IsReady() const;
     virtual void ChooseTarget(Point2i mouse_pos);
     AutomaticBazookaConfig &cfg();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+    DECLARE_GETWEAPONSTRING();
   protected:
     void Refresh();
-    void p_Select();
+    void p_Select(); 
     void p_Deselect();
 
-    void DrawTarget() const;
+    void DrawTarget();
 
+  protected:
     WeaponProjectile * GetProjectileInstance();
 };
 

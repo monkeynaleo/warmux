@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE resources SYSTEM "../map.dtd" []>
 <resources>
   <author>
     <name>C. Schalkwijk</name>
     <nickname>Papa.Coen</nickname>
-    <email>Papa.Coen@gmail.com</email>
     <country>The Netherlands</country>
+    <email>Papa.Coen@gmail.com</email>
   </author>
 
   <surface name="sky" file="greenhills_sky.jpg" />

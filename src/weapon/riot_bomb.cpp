@@ -22,29 +22,15 @@
 
 #include "riot_bomb.h"
 #include "explosion.h"
-#include "weapon_cfg.h"
-
 #include "game/config.h"
-#include "graphic/sprite.h"
+#include "game/time.h"
+#include "graphic/video.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
-
-// Roquette du bazooka
-class RiotBombRocket : public WeaponProjectile
-{
-  ParticleEngine smoke_engine;
-public:
-  RiotBombRocket(ExplosiveWeaponConfig& cfg,
-                   WeaponLauncher * p_launcher);
-  void Refresh();
-protected:
-  void SignalOutOfMap();
-  void SignalDrowning();
-};
 
 RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
                                    WeaponLauncher * p_launcher) :
@@ -56,16 +42,7 @@ RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
 void RiotBombRocket::Refresh()
 {
   WeaponProjectile::Refresh();
-  if(!IsDrowned())
-  {
-    image->SetRotation_rad(GetSpeedAngle());
-    smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
-                                     GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
-  }
-  else
-  {
-    image->SetRotation_rad(M_PI_2);
-  }
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 void RiotBombRocket::SignalOutOfMap()
@@ -74,10 +51,10 @@ void RiotBombRocket::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-void RiotBombRocket::SignalDrowning()
+void RiotBombRocket::DoExplosion()
 {
-  smoke_engine.Stop();
-  WeaponProjectile::SignalDrowning();
+  Point2i pos = GetCenter();
+  ApplyExplosion (pos, cfg, "weapon/riot_bomb_exp", false, ParticleEngine::LittleESmoke);
 }
 //-----------------------------------------------------------------------------
 
@@ -85,7 +62,6 @@ RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
 {
   m_name = _("Riot Bomb");
-  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
   m_category = HEAVY;
   ReloadLauncher();
 }
@@ -96,7 +72,7 @@ WeaponProjectile * RiotBomb::GetProjectileInstance()
       (new RiotBombRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-std::string RiotBomb::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string RiotBomb::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u riot bomb!",

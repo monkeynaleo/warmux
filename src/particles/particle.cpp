@@ -24,6 +24,7 @@
 #include <map>
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "include/app.h"
 #include "object/objects_list.h"
 #include "tool/resource_manager.h"
 #include "tool/random.h"
@@ -79,7 +80,7 @@ void Particle::Refresh()
 
   if (time >= m_time_between_scale) {
 
-    //ASSERT(m_left_time_to_live > 0);
+    //assert(m_left_time_to_live > 0);
     if (m_left_time_to_live <= 0) return ;
 
     m_left_time_to_live--;
@@ -105,7 +106,7 @@ void Particle::Refresh()
   }
 }
 
-bool Particle::StillUseful() const
+bool Particle::StillUseful()
 {
   return (m_left_time_to_live > 0);
 }
@@ -119,8 +120,8 @@ ParticleEngine::ParticleEngine(uint time):
 
 
 void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
-                                 bool upper,
-                                 double angle, double norme)
+				 bool upper,
+				 double angle, double norme)
 {
   // time spent since last refresh (in milliseconds)
   uint time = Time::GetInstance()->Read() - m_last_refresh;
@@ -173,7 +174,7 @@ void ParticleEngine::FreeMem()
 
 Sprite* ParticleEngine::GetSprite(particle_spr type)
 {
-  ASSERT(type < particle_spr_nbr);
+  assert(type < particle_spr_nbr);
   if (!sprites_loaded)
     return NULL;
 
@@ -181,9 +182,9 @@ Sprite* ParticleEngine::GetSprite(particle_spr type)
 }
 
 void ParticleEngine::AddNow(const Point2i &position,
-                            uint nb_particles, particle_t type,
-                            bool upper,
-                            double angle, double norme)
+			    uint nb_particles, particle_t type,
+			    bool upper,
+			    double angle, double norme)
 {
   if (!sprites_loaded)
     return;
@@ -217,21 +218,21 @@ void ParticleEngine::AddNow(const Point2i &position,
     case particle_MAGIC_STAR : particle = new MagicStarParticle();
       break;
     default : particle = NULL;
-      ASSERT(0);
+      assert(0);
       break;
     }
 
     if (particle != NULL) {
 
       if( norme == -1 )
-        tmp_norme = double(randomObj.GetLong(0, 5000))/100;
+	tmp_norme = double(randomObj.GetLong(0, 5000))/100;
       else
-        tmp_norme = norme;
+	tmp_norme = norme;
 
       if( angle == -1 )
-        tmp_angle = - double(randomObj.GetLong(0, 3000))/1000;
+	tmp_angle = - double(randomObj.GetLong(0, 3000))/1000;
       else
-        tmp_angle = angle;
+	tmp_angle = angle;
 
       particle->SetXY(position);
       particle->SetOnTop(upper);
@@ -316,7 +317,7 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   }
 }
 
-void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius, const ESmokeStyle &style)
+void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius, ESmokeStyle &style)
 {
   if (!sprites_loaded)
     return;

@@ -20,31 +20,20 @@
  * if we hit a character.
  *****************************************************************************/
 
-#include "gun.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
-
+#include "weapon/gun.h"
 #include <sstream>
 #include "map/map.h"
-#include "graphic/sprite.h"
-#include "interface/game_msg.h"
+#include "game/time.h"
 #include "object/objects_list.h"
-#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
+#include "interface/game_msg.h"
+#include "interface/game_msg.h"
+#include "weapon/gun.h"
 #include "tool/math_tools.h"
-#include "tool/resource_manager.h"
+#include "weapon/explosion.h"
 
 const uint GUN_BULLET_SPEED = 20;
-
-class GunBullet : public WeaponBullet
-{
-  public:
-    GunBullet(ExplosiveWeaponConfig& cfg,
-              WeaponLauncher * p_launcher);
-  protected:
-    void ShootSound();
-};
 
 GunBullet::GunBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :
@@ -76,16 +65,17 @@ WeaponProjectile * Gun::GetProjectileInstance()
 
 bool Gun::p_Shoot()
 {
-  if (IsInUse())
+  if (m_is_active)
     return false;
 
+  m_is_active = true;
   projectile->Shoot (GUN_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
   return true;
 }
 
-std::string Gun::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Gun::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u gun!",

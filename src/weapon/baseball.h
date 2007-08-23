@@ -26,7 +26,15 @@
 #include "weapon.h"
 //-----------------------------------------------------------------------------
 
-class BaseballConfig;
+class BaseballConfig : public WeaponConfig
+{
+  public:
+    uint range;
+    uint strength;
+  public:
+    BaseballConfig();
+    void LoadXml(xmlpp::Element *elem);
+};
 
 //-----------------------------------------------------------------------------
 
@@ -34,13 +42,12 @@ class Baseball : public Weapon
 {
   protected:
     bool p_Shoot();
-    void Refresh() { };
+    void Refresh();
 
   public:
     Baseball();
     BaseballConfig &cfg();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-    bool IsInUse() const;
+    DECLARE_GETWEAPONSTRING();
 };
 
 //-----------------------------------------------------------------------------

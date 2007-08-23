@@ -22,16 +22,14 @@
 #ifndef CONTAINER_WIDGET_H
 #define CONTAINER_WIDGET_H
 
-#include "tool/rectangle.h"
-
-class Surface;
+#include "graphic/surface.h"
 
 class Container
 {
  public:
   virtual ~Container() {};
   virtual void Redraw(const Rectanglei& rect,
-                      Surface& surf) = 0;
+		      Surface& surf) = 0;
 };
 
 #endif

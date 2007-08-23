@@ -21,54 +21,18 @@
  *****************************************************************************/
 
 #include "cluster_bomb.h"
-#include "weapon_cfg.h"
 #include <sstream>
 #include <math.h>
 #include "explosion.h"
-#include "graphic/sprite.h"
+#include "game/time.h"
+#include "graphic/video.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
-#include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
-#include "tool/xml_document.h"
-
-class ClusterBombConfig : public ExplosiveWeaponConfig
-{
-public:
-  uint nb_fragments;
-  ClusterBombConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
-};
-
-class Cluster : public WeaponProjectile
-{
-public:
-  Cluster(ClusterBombConfig& cfg,
-          WeaponLauncher * p_launcher);
-  void Refresh();
-  void Shoot(int n_x, int n_y);  
-  virtual void SetEnergyDelta(int delta, bool do_report = true);
-
-protected:
-  void SignalOutOfMap();
-  void DoExplosion();
-};
-
-class ClusterBomb : public WeaponProjectile
-{
-public:
-  ClusterBomb(ClusterBombConfig& cfg,
-              WeaponLauncher * p_launcher);
-  void Refresh();  
-  virtual void SetEnergyDelta(int delta, bool do_report = true);
-
-protected:
-  void DoExplosion();
-  void SignalOutOfMap();
-};
+#include "network/randomsync.h"
 
 Cluster::Cluster(ClusterBombConfig& cfg,
                  WeaponLauncher * p_launcher) :
@@ -79,7 +43,7 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot (int x, int y)
 {
-  Camera::GetInstance()->GetInstance()->FollowObject(this, true, false);
+  camera.FollowObject(this, true, false);
   ResetConstants();
   SetXY( Point2i(x, y) );
 }
@@ -98,8 +62,6 @@ void Cluster::DoExplosion()
 {
   ApplyExplosion (GetPosition(), cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
 }
-
-void Cluster::SetEnergyDelta(int /* delta */, bool /* do_report */){};
 
 //-----------------------------------------------------------------------------
 
@@ -137,9 +99,14 @@ void ClusterBomb::DoExplosion()
   }
   WeaponProjectile::DoExplosion();
 }
- 
-void ClusterBomb::SetEnergyDelta(int /* delta */, bool /* do_report */){};
 
+std::string ClusterBomb::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u custer bomb!",
+            "%s team has won %u custer bombs!",
+            items_count), TeamName, items_count);
+}
 //-----------------------------------------------------------------------------
 
 ClusterLauncher::ClusterLauncher() :
@@ -163,13 +130,6 @@ ClusterBombConfig& ClusterLauncher::cfg()
   return static_cast<ClusterBombConfig&>(*extra_params);
 }
 
-std::string ClusterLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u cluster bomb!",
-            "%s team has won %u cluster bombs!",
-            items_count), TeamName, items_count);
-}
 //-----------------------------------------------------------------------------
 
 ClusterBombConfig::ClusterBombConfig() :

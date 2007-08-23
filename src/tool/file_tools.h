@@ -26,9 +26,6 @@
 // Check if a file exists
 bool IsFileExist(const std::string &name);
 
-// Check if the folder exists
-bool IsFolderExist(const std::string &name);
-
 // Find the extension part of a filename
 std::string FileExtension(const std::string &name);
 
@@ -37,11 +34,5 @@ std::string GetHome ();
 
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory);
-
-typedef struct _FolderSearch FolderSearch;
-
-FolderSearch *OpenFolder(const std::string& dirname);
-const char* FolderSearchNext(FolderSearch *f);
-void CloseFolder(FolderSearch *f);
 
 #endif

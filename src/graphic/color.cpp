@@ -23,50 +23,50 @@
 #include <SDL.h>
 
 Color::Color(){
-        SetColor(200, 50, 50, 130);
+	SetColor(200, 50, 50, 130);
 }
 
 Color::Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
-        SetColor(r, g, b, a);
+	SetColor(r, g, b, a);
 }
 
 bool Color::operator==(const Color &color) const{
-        return red == color.red
-               && green == color.green
-               && blue == color.blue
-               && alpha == color.alpha;
+	return red == color.red 
+		&& green == color.green 
+		&& blue == color.blue 
+		&& alpha == color.alpha;
 }
 
 void Color::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
-        red = r;
-        green = g;
-        blue = b;
-        alpha = a;
+	red = r;
+	green = g;
+	blue = b;
+	alpha = a;
 }
 
 Uint8 Color::GetRed() const{
-        return red;
+	return red;
 }
 
 Uint8 Color::GetGreen() const{
-        return green;
+	return green;
 }
 
 Uint8 Color::GetBlue() const{
-        return blue;
+	return blue;
 }
 
 Uint8 Color::GetAlpha() const{
-        return alpha;
+	return alpha;
 }
 
 SDL_Color Color::GetSDLColor() const{
-        SDL_Color sdlColor;
+	SDL_Color sdlColor;
 
-        sdlColor.r = red;
-        sdlColor.g = green;
-        sdlColor.b = blue;
-        sdlColor.unused = alpha;
+	sdlColor.r = red;
+	sdlColor.g = green;
+	sdlColor.b = blue;
+	sdlColor.unused = alpha;
 
-        return sdlColor;
+	return sdlColor;
 }

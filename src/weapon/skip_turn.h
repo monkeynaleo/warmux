@@ -29,11 +29,10 @@ class SkipTurn : public Weapon
 {
   public:
     SkipTurn();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-    bool IsInUse() const;
+    DECLARE_GETWEAPONSTRING();
   protected:
     bool p_Shoot();
-    void Refresh() { };
+    void Refresh();
 };
 
 //-----------------------------------------------------------------------------

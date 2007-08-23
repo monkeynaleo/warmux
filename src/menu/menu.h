@@ -22,15 +22,22 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "gui/widget_list.h"
-
-// Forward declarations
-class Button;
-class Label;
-class Box;
-class HBox;
-class Sprite;
-
+#include "graphic/sprite.h"
+#include "gui/button.h"
+#include "gui/list_box.h"
+#include "gui/list_box_w_label.h"
+#include "gui/check_box.h"
+#include "gui/spin_button.h"
+#include "gui/spin_button_big.h"
+#include "gui/spin_button_picture.h"
+#include "gui/box.h"
+#include "gui/question.h"
+#include "gui/label.h"
+#include "gui/null_widget.h"
+#include "gui/picture_widget.h"
+#include "gui/picture_text_cbox.h"
+#include "gui/container.h"
+#include "gui/text_box.h"
 
 typedef enum {
   vOkCancel,
@@ -50,10 +57,10 @@ public:
    WidgetList widgets;
    const t_action actions;
 
-   Menu(const std::string& bg, t_action actions = vOkCancel);
+   Menu(std::string bg, t_action actions = vOkCancel);
    virtual ~Menu();
 
-   void Run(bool skip=false);
+   void Run ();
    virtual void Redraw(const Rectanglei& rect, Surface& surf);
    virtual void RedrawMenu();
 
@@ -69,18 +76,10 @@ protected:
    /* Actions buttons  */
    HBox *actions_buttons;
 
-   void play_ok_sound();
-   void play_cancel_sound();
-   void play_error_sound();
-
    virtual void mouse_ok();
    virtual void mouse_cancel();
    virtual void key_ok();
    virtual void key_cancel();
-   virtual void key_up();
-   virtual void key_down();
-   virtual void key_left();
-   virtual void key_right();
    virtual bool signal_ok() = 0;
    virtual bool signal_cancel() = 0;
 

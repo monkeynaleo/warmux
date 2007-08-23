@@ -22,19 +22,16 @@
 #define MEMBER_H
 #include <map>
 #include <vector>
+#include "body.h"
+#include "movement.h"
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 #include "tool/point.h"
+#include "tool/xml_document.h"
 
 typedef std::vector<Point2f> v_attached;
 
-// Forward declaration
-class Sprite;
 class c_junction; //defined in body.h
-class member_mvt; //defined in movement.h
-class Profile;
-namespace xmlpp
-{
-  class Element;
-}
 
 class Member
 {
@@ -60,24 +57,15 @@ public:
   bool go_through_ground;
 
   virtual ~Member();
-  Member(xmlpp::Element *xml, const Profile* res);
+  Member(xmlpp::Element *xml, Profile* res);
   Member(const Member& m);
   virtual void Draw(const Point2i & _pos, int flip_x, int direction);
   void RotateSprite();
-  void ResetMovement()
-  {
-    pos.x = 0;
-    pos.y = 0;
-    angle_rad = 0;
-    alpha = 1.0;
-    scale.x = 1.0;
-    scale.y = 1.0;
-  }
+  void ResetMovement();
   void ApplySqueleton(Member* parent_member);
-  void ApplyMovement(const member_mvt& mvt, std::vector<class c_junction>& squel_lst);
-  const Point2i GetPos() { return Point2i((int)pos.x, (int)pos.y); };
-  const Point2i GetAnchorPos() { return Point2i((int)anchor.x, (int)anchor.y); };
-  void SetAngle(const double &angle) { angle_rad = angle; };
+  void ApplyMovement(member_mvt& mvt, std::vector<class c_junction>& squel_lst);
+  const Point2i GetPos();
+  inline void SetAngle(const double &angle) { angle_rad = angle; };
 };
 
 class WeaponMember : public Member

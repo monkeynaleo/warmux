@@ -23,11 +23,7 @@
 #define WEAPON_CONFIGURATION_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-namespace xmlpp
-{
-  class Element;
-}
-
+#include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
 class EmptyWeaponConfig
@@ -40,8 +36,8 @@ public:
 //-----------------------------------------------------------------------------
 
 class WeaponConfig : public EmptyWeaponConfig
-{
-public:
+{ 
+public: 
   uint damage;
 public:
   WeaponConfig();
@@ -56,16 +52,16 @@ class ExplosiveWeaponConfig : public WeaponConfig
 public:
   uint timeout;
   bool allow_change_timeout;
-  uint blast_range ;
-  uint blast_force ;
+  double blast_range ;
+  double blast_force ;  
   uint explosion_range;
   uint particle_range;
 public:
   ExplosiveWeaponConfig();
   virtual ~ExplosiveWeaponConfig() {};
    virtual void LoadXml(xmlpp::Element *elem);
-
-
+   
+   
 };
 
 //-----------------------------------------------------------------------------

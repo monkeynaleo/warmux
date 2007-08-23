@@ -23,26 +23,25 @@
 #include <SDL_endian.h>
 #include "tile.h"
 #include "game/config.h"
-#include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "tool/error.h"
 #include "tool/point.h"
-//#include "tool/stats.h"
+#include "tool/stats.h"
 #ifdef DBG_TILE
 #include "graphic/colors.h"
 #endif
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 void TileItem_AlphaSoftware::Draw(const Point2i &pos){
-  AppWormux::GetInstance()->video->window.Blit(GetSurface(),
-        pos * CELL_SIZE - Camera::GetInstance()->GetPosition());
+  AppWormux::GetInstance()->video.window.Blit(GetSurface(),
+        pos * CELL_SIZE - camera.GetPosition());
 }
 
-void TileItem_Empty::Draw(const Point2i &/*pos*/)
+void TileItem_Empty::Draw(const Point2i &pos)
 {
 #ifdef DBG_TILE
-  AppWormux::GetInstance()->video->window.FillRect(Rectanglei(pos * CELL_SIZE - Camera::GetInstance()->GetPosition(),CELL_SIZE), c_red);
+  AppWormux::GetInstance()->video.window.FillRect(Rectanglei(pos * CELL_SIZE - camera.GetPosition(),CELL_SIZE), c_red);
 #endif
 }
 // === Implemenation of TileItem_Software_ALpha ==============================
@@ -83,18 +82,18 @@ unsigned char TileItem_AlphaSoftware::GetAlpha(const Point2i &pos){
     return (this->*_GetAlpha)(pos);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const Point2i &pos) const {
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const Point2i &pos){
     return *(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x * 4 + 0);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const Point2i &pos) const {
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const Point2i &pos){
     return *(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x * 4 + 3);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos) const {
+unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos){
     unsigned char r, g, b, a;
 
-    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x*m_surface.GetBytesPerPixel());
+    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x*m_surface.GetBytesPerPixel()); 
     m_surface.GetRGBA(pixel, r, g, b, a);
 
     return a;
@@ -107,7 +106,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig){
     int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
     int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
 
-    for( int py = starting_y ; py < ending_y ; py++)
+    for( int py = starting_y ; py < ending_y ; py++) 
         for( int px = starting_x ; px < ending_x ; px++)
             if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
                 *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
@@ -165,18 +164,18 @@ void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
   m_surface.MergeSurface(spr, position);
 }
 
-void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const
+void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp)
 {
   if( start_x < CELL_SIZE.x && end_x >= 0)
   {
     //Clamp the value to empty only the in this tile
     int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    ASSERT( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
+    assert( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
     int tile_lenght = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
-    ASSERT( tile_lenght > 0);
-    ASSERT( tile_start_x + tile_lenght <= CELL_SIZE.x);
+    assert( tile_lenght > 0);
+    assert( tile_start_x + tile_lenght <= CELL_SIZE.x);
 
-    ASSERT(buf + tile_start_x * bpp + bpp * (tile_lenght-1) < m_surface.GetPixels() + CELL_SIZE.x * CELL_SIZE.y * bpp); //Check for overflow
+    assert(buf + tile_start_x * bpp + bpp * (tile_lenght-1) < m_surface.GetPixels() + CELL_SIZE.x * CELL_SIZE.y * bpp); //Check for overflow
     memset(buf + tile_start_x * bpp, 0 , bpp * tile_lenght);
 
 /*    unsigned int* tmpbuf = (unsigned int*)(buf + tile_start_x * bpp);
@@ -186,16 +185,16 @@ void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned 
   }
 }
 
-void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const
+void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp)
 {
   if( start_x < CELL_SIZE.x && end_x >= 0)
   {
     //Clamp the value to empty only the in this tile
     int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    ASSERT( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
+    assert( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
     int tile_lenght = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
-    ASSERT( tile_lenght > 0);
-    ASSERT( tile_start_x + tile_lenght <= CELL_SIZE.x);
+    assert( tile_lenght > 0);
+    assert( tile_start_x + tile_lenght <= CELL_SIZE.x);
 
     buf += tile_start_x * bpp;
     while(tile_lenght--)
@@ -215,13 +214,17 @@ void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned
   }
 }
 
+Surface TileItem_AlphaSoftware::GetSurface(){
+    return m_surface;
+}
+
 #ifdef DBG_TILE
 void TileItem_AlphaSoftware::FillWithRGB(Uint8 r, Uint8 g, Uint8 b)
 {
   int x=0, y=0;
   while(y < CELL_SIZE.y)
   {
-    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + y*m_surface.GetPitch() + x*m_surface.GetBytesPerPixel());
+    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + y*m_surface.GetPitch() + x*m_surface.GetBytesPerPixel()); 
     Uint8 tmp,a;
     m_surface.GetRGBA(pixel, tmp, tmp, tmp, a);
     if(a != SDL_ALPHA_TRANSPARENT)
@@ -241,7 +244,7 @@ void TileItem_AlphaSoftware::FillWithRGB(Uint8 r, Uint8 g, Uint8 b)
 
 void TileItem_AlphaSoftware::CheckEmpty()
 {
-  ASSERT(need_check_empty);
+  assert(need_check_empty);
   unsigned char alpha;
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   alpha = last_filled_pixel[3];

@@ -82,8 +82,8 @@ POTFILES = \
         src/gui/check_box.cpp \
         src/gui/check_box.h \
         src/gui/container.h \
-        src/gui/energy_bar.cpp \
-        src/gui/energy_bar.h \
+        src/gui/EnergyBar.cpp \
+        src/gui/EnergyBar.h \
         src/gui/label.cpp \
         src/gui/label.h \
         src/gui/list_box.cpp \
@@ -317,6 +317,8 @@ POTFILES = \
         src/weapon/gun.h \
         src/weapon/jetpack.cpp \
         src/weapon/jetpack.h \
+        src/weapon/launcher.cpp \
+        src/weapon/launcher.h \
         src/weapon/lowgrav.cpp \
         src/weapon/lowgrav.h \
         src/weapon/mine.cpp \
@@ -347,8 +349,6 @@ POTFILES = \
         src/weapon/weapon_cfg.h \
         src/weapon/weapon.cpp \
         src/weapon/weapon.h \
-        src/weapon/weapon_launcher.cpp \
-        src/weapon/weapon_launcher.h \
         src/weapon/weapons_list.cpp \
         src/weapon/weapons_list.h \
         tools/index_server/client.cpp \

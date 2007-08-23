@@ -28,20 +28,16 @@
 #include "physical_obj.h"
 #include "physics.h"
 #include "objects_list.h"
-#include "character/character.h"
-#include "game/config.h"
 #include "game/time.h"
 #include "map/map.h"
 #include "network/randomsync.h"
-#include "sound/jukebox.h"
 #include "team/macro.h"
-#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
-#include "weapon/weapon_launcher.h"
+#include "weapon/launcher.h"
 
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 40;
@@ -60,9 +56,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_rebound_position(-1,-1),
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object(NULL),
-  m_minimum_overlapse_time(0),
   m_ignore_movements(false),
-  m_is_character(false),
   m_name(name),
   m_test_left(0),
   m_test_right(0),
@@ -90,6 +84,14 @@ PhysicalObj::~PhysicalObj ()
 //--                         Class Parameters SET/GET                      --//
 //---------------------------------------------------------------------------//
 
+void PhysicalObj::SetX (int x){
+  SetXY( Point2i(x, GetY()) );
+}
+
+void PhysicalObj::SetY (int y){
+  SetXY( Point2i(GetX(), y) );
+}
+
 void PhysicalObj::SetXY(const Point2i &position)
 {
   CheckOverlapping();
@@ -109,53 +111,63 @@ void PhysicalObj::SetXY(const Point2i &position)
   }
 }
 
-void PhysicalObj::SetXY(const Point2d &position)
+const Point2i PhysicalObj::GetPosition() const
 {
-  CheckOverlapping();
-
-  if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) )
-  {
-    SetPhysXY( position / PIXEL_PER_METER );
-    Ghost();
-    SignalOutOfMap();
-  }
-  else
-  {
-    SetPhysXY( position / PIXEL_PER_METER );
-    if( FootsInVacuum() ) StartMoving();
-  }
+  return Point2i(GetX(), GetY());
 }
 
-int PhysicalObj::GetX() const { return (int)round(GetPhysX() * PIXEL_PER_METER); };
-int PhysicalObj::GetY() const { return (int)round(GetPhysY() * PIXEL_PER_METER); };
+int PhysicalObj::GetX() const
+{
+  return (int)round(GetPhysX() * PIXEL_PER_METER);
+}
+
+int PhysicalObj::GetY() const
+{
+  return (int)round(GetPhysY() * PIXEL_PER_METER);
+}
+
+int PhysicalObj::GetCenterX() const
+{
+  return GetX() +m_test_left +GetTestWidth()/2;
+}
+
+int PhysicalObj::GetCenterY() const
+{
+  return GetY() +m_test_top +GetTestHeight()/2;
+}
+
+const Point2i PhysicalObj::GetCenter() const
+{
+  return Point2i(GetCenterX(), GetCenterY());
+}
 
 void PhysicalObj::SetSize(const Point2i &newSize){
   if( newSize == Point2i(0, 0) )
-          Error( "New size of (0, 0) !");
+	  Error( "New size of (0, 0) !");
   m_width = newSize.x;
   m_height = newSize.y;
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
 }
 
-void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
+// Get objest's dimensions
+int PhysicalObj::GetWidth() const{
+  assert (m_width != 0);
+  return m_width;
+}
+
+int PhysicalObj::GetHeight() const{
+  assert (m_height != 0);
+  return m_height;
+}
+
+Point2i PhysicalObj::GetSize() const{
+	return Point2i(m_width, m_height);
+}
+
+void PhysicalObj::SetOverlappingObject(PhysicalObj* obj)
 {
-  m_minimum_overlapse_time = 0;
-  if(obj != NULL) {
-    m_overlapping_object = obj;
-    lst_objects.AddOverlappedObject(this);
-    MSG_DEBUG("physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore",
-              GetName().c_str(), obj->GetName().c_str());
-  } else {
-    if(m_overlapping_object != NULL) {
-      m_overlapping_object = NULL;
-      lst_objects.RemoveOverlappedObject(this);
-      MSG_DEBUG( "physic.overlapping", "clearing overlapping object in \"%s\"", GetName().c_str());
-    }
-    return;
-  }
-  if(timeout > 0)
-    m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
-  
+  m_overlapping_object = obj;
+  MSG_DEBUG( "physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore", GetName().c_str(), obj->GetName().c_str());
   CheckOverlapping();
 }
 
@@ -165,11 +177,10 @@ void PhysicalObj::CheckOverlapping()
     return;
 
   // Check if we are still overlapping with this object
-  if (!m_overlapping_object->GetTestRect().Intersect( GetTestRect() ) && 
-      m_minimum_overlapse_time >= Time::GetInstance()->Read())
+  if (!m_overlapping_object->GetTestRect().Intersect( GetTestRect() ))
   {
     MSG_DEBUG( "physic.overlapping", "\"%s\" just stopped overlapping with \"%s\"", GetName().c_str(), m_overlapping_object->GetName().c_str());
-    SetOverlappingObject(NULL);
+    m_overlapping_object = NULL;
   }
   else
   {
@@ -185,25 +196,45 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
   m_test_bottom = bottom;
 }
 
-void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
+int PhysicalObj::GetTestWidth() const
+{
+  return m_width -m_test_left -m_test_right;
+}
+
+int PhysicalObj::GetTestHeight() const
+{
+  return m_height -m_test_top -m_test_bottom;
+}
+
+const Rectanglei PhysicalObj::GetRect() const
+{
+  return Rectanglei( GetX(), GetY(), m_width, m_height);
+}
+
+const Rectanglei PhysicalObj::GetTestRect() const
+{
+  return Rectanglei(GetX()+m_test_left,
+                    GetY()+m_test_top,
+                    m_width-m_test_right-m_test_left,
+                    m_height-m_test_bottom-m_test_top);
+}
+
+void PhysicalObj::AddDamage(uint damage_points)
 {
   if(life_points == -1)
     return;
-  life_points += delta;
+  life_points -= damage_points;
   if(life_points <= 0 && !IsGhost())
   {
     Ghost();
     life_points = -1;
   }
 }
-
 // Move to a point with collision test
 // Return true if collision occured
 void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 {
-  if (IsGhost())
-    return;
-
+  if (IsGhost()) return;
   Point2d pos, offset;
   PhysicalObj* collided_obj = NULL;
 
@@ -214,7 +245,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   } collision_t;
   collision_t collision = NO_COLLISION;
 
-  if (IsGhost())
+  if(IsGhost())
     return;
 
   // Convert meters to pixels.
@@ -223,9 +254,6 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   // Compute distance between old and new position.
   double lg = oldPos.Distance( newPos);
-
-  MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), distance: %f",
-            typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, lg);
 
   if (lg == 0)
     return;
@@ -239,11 +267,8 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   if (m_goes_through_wall || IsInWater())
   {
-    MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), thr_wall:%d, water:%d",
-              typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
-              m_goes_through_wall, IsInWater());
-
-    SetXY(newPos);
+    Point2i tmpPos( lround(newPos.x), lround(newPos.y) );
+    SetXY(tmpPos);
     return;
   }
 
@@ -262,10 +287,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
         break;
       }
 
-      SetXY( pos );
-
-      MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) : OUTSIDE WORLD",
-                typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
+      SetXY( tmpPos );
       return;
     }
 
@@ -286,7 +308,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
           collision == COLLISION_ON_GROUND ? "on ground" : "on an object");
 
       // Set the object position to the current position.
-      SetXY(Point2d(pos.x - offset.x, pos.y - offset.y));
+      SetXY( Point2i( lround(pos.x - offset.x), lround(pos.y - offset.y)) );
       break;
     }
 
@@ -297,7 +319,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   // Notify the weapon that there is a movement
   // Useful for grapple for example
-  ActiveTeam().AccessWeapon().NotifyMove(!!collision);
+  ActiveTeam().AccessWeapon().NotifyMove(collision);
 
   if ( collision == NO_COLLISION ) // Nothing more to do!
     return;
@@ -328,7 +350,6 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     SignalGroundCollision();
     SignalCollision();
     // Make it rebound on the ground !!
-    MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
     Rebound(contactPos, ground_angle);
     CheckRebound();
   } else if ( collision == COLLISION_ON_OBJECT ) {
@@ -356,7 +377,6 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     // Rebound on the object
     double contact_angle = - GetSpeedAngle();
     Point2d contactPos = pos;
-    MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
     Rebound(contactPos, contact_angle);
     CheckRebound();
   }
@@ -380,12 +400,16 @@ void PhysicalObj::UpdatePosition ()
   // Compute new position.
   RunPhysicalEngine();
 
+  // Test if object is still inside the world
+  if( IsOutsideWorldXY(GetPosition()) )
+    Ghost();
+
   if (IsGhost()) return;
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
   if ( !m_goes_through_wall )
     {
-      if ( IsInWater() && m_alive != DROWNED && m_alive != DEAD) Drown();
+      if ( IsInWater() && m_alive != DROWNED ) Drown();
       else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
     }
 
@@ -448,7 +472,7 @@ void PhysicalObj::Init()
   if (m_alive != ALIVE)
     MSG_DEBUG( "physic.state", "%s - Init.", m_name.c_str());
   m_alive = ALIVE;
-  SetOverlappingObject(NULL);
+  m_overlapping_object = NULL;
   StopMoving();
 }
 
@@ -469,17 +493,12 @@ void PhysicalObj::Ghost ()
 
 void PhysicalObj::Drown()
 {
-  ASSERT (m_alive != DROWNED);
+  assert (m_alive != DROWNED);
   MSG_DEBUG("physic.state", "%s - Drowned...", m_name.c_str());
   m_alive = DROWNED;
 
   // Set the air grab to water resist factor.
   SetAirResistFactor(WATER_RESIST_FACTOR * GetAirResistFactor());
-
-  // Ensure the gravity factor is upper than 0.0
-  if (EqualsZero(GetGravityFactor()))
-    SetGravityFactor(0.1);
-
   StopMoving();
   StartMoving();
   SignalDrowning();
@@ -487,15 +506,29 @@ void PhysicalObj::Drown()
 
 void PhysicalObj::GoOutOfWater()
 {
-  ASSERT (m_alive == DROWNED);
+  assert (m_alive == DROWNED);
   MSG_DEBUG("physic.state", "%s - Go out of water!...", m_name.c_str());
   m_alive = ALIVE;
 
   // Set the air grab to normal air resist factor.
   SetAirResistFactor(m_cfg.m_air_resist_factor);
-  SetGravityFactor(m_cfg.m_gravity_factor);
+
   StartMoving();
 }
+
+bool PhysicalObj::IsImmobile() const
+{
+  return m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST);
+}
+
+bool PhysicalObj::IsDead () const
+{ return ((m_alive == GHOST) || (m_alive == DROWNED) || (m_alive == DEAD)); }
+
+bool PhysicalObj::IsGhost() const
+{ return (m_alive == GHOST); }
+
+bool PhysicalObj::IsDrowned() const
+{ return (m_alive == DROWNED); }
 
 void PhysicalObj::SignalRebound()
 {
@@ -504,9 +537,17 @@ void PhysicalObj::SignalRebound()
      jukebox.Play("share", m_rebound_sound) ;
 }
 
+void PhysicalObj::SignalObjectCollision(PhysicalObj * obj) {}
+
+void PhysicalObj::SignalGroundCollision() {}
+
+void PhysicalObj::SignalCollision() {}
+
+void PhysicalObj::SignalOutOfMap() {}
+
 void PhysicalObj::SetCollisionModel(bool goes_through_wall,
-                                    bool collides_with_characters,
-                                    bool collides_with_objects)
+				    bool collides_with_characters,
+				    bool collides_with_objects)
 {
   m_goes_through_wall = goes_through_wall;
   m_collides_with_characters = collides_with_characters;
@@ -515,11 +556,11 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
   // Check boolean values
   {
     if (m_collides_with_characters || m_collides_with_objects)
-      ASSERT(m_goes_through_wall == false);
+      assert(m_goes_through_wall == false);
 
     if (m_goes_through_wall) {
-      ASSERT(m_collides_with_characters == false);
-      ASSERT(m_collides_with_objects == false);
+      assert(m_collides_with_characters == false);
+      assert(m_collides_with_objects == false);
     }
   }
 }
@@ -539,19 +580,24 @@ void PhysicalObj::CheckRebound()
   m_rebound_position = GetPosition();
 }
 
-bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
+bool PhysicalObj::IsOutsideWorldXY(Point2i position) const{
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
   if( world.IsOutsideWorldXwidth(x, GetTestWidth()) )
-          return true;
+	  return true;
   if( world.IsOutsideWorldYheight(y, GetTestHeight()) ){
     if( m_allow_negative_y )
       if( (Y_OBJET_MIN <= y) && (y + GetTestHeight() - 1 < 0) )
-                  return false;
+		  return false;
     return true;
   }
   return false;
+}
+
+bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const
+{
+  return IsOutsideWorldXY( GetPosition() + offset );
 }
 
 bool PhysicalObj::FootsOnFloor(int y) const
@@ -561,6 +607,16 @@ bool PhysicalObj::FootsOnFloor(int y) const
 
   const int y_max = world.GetHeight()-m_height +m_test_bottom;
   return (y_max <= y);
+}
+
+bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
+{
+  return m_overlapping_object == obj;
+}
+
+bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_object) const
+{
+  return IsInVacuumXY(GetPosition() + offset, check_object);
 }
 
 bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
@@ -575,9 +631,14 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
     return false;
 
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-                  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
+		  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
   return world.RectIsInVacuum (rect);
+}
+
+PhysicalObj* PhysicalObj::CollidedObject(const Point2i &offset) const
+{
+  return CollidedObjectXY(GetPosition() + offset);
 }
 
 PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
@@ -608,13 +669,15 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
         if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this)
             && object->m_collides_with_objects
             && object->GetTestRect().Intersect(rect) )
-        {
-          if (!m_is_character || object->m_collides_with_characters)
-            return object;
-        }
+          return object;
       }
     }
   return NULL;
+}
+
+bool PhysicalObj::FootsInVacuum() const
+{
+  return FootsInVacuumXY(GetPosition());
 }
 
 bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
@@ -632,7 +695,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
   int y_test = position.y + m_height - m_test_bottom;
 
   Rectanglei rect( position.x + m_test_left, y_test,
-                   m_width - m_test_right - m_test_left, 1);
+		 m_width - m_test_right - m_test_left, 1);
 
   if( m_allow_negative_y && rect.GetPositionY() < 0){
     int b = rect.GetPositionY() + rect.GetSizeY();
@@ -649,7 +712,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 
 bool PhysicalObj::IsInWater () const
 {
-  ASSERT (!IsGhost());
+  assert (!IsGhost());
   if (!world.water.IsActive()) return false;
   int x = BorneLong(GetCenterX(), 0, world.GetWidth()-1);
   return (int)world.water.GetHeight(x) < GetCenterY();
@@ -658,10 +721,10 @@ bool PhysicalObj::IsInWater () const
 void PhysicalObj::DirectFall()
 {
   while (!IsGhost() && !IsInWater() && FootsInVacuum())
-    SetY((int)(GetY()+1.0));
+      SetY(GetY()+1);
 }
 
-bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
+bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
 {
   int x1, x2, y1, y2;
 
@@ -723,6 +786,18 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   return false;
 }
 
+// Are the two object in contact ? (uses test rectangles)
+bool PhysicalObj::ObjTouche(const PhysicalObj &b) const
+{
+  return GetTestRect().Intersect( b.GetTestRect() );
+}
+
+// Do the point p touch the object ?
+bool PhysicalObj::ObjTouche(const Point2i &p) const
+{
+   return  GetTestRect().Contains( p );
+}
+
 bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters)
 {
   uint bcl=0;
@@ -751,8 +826,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
       position = randomSync.GetPoint(world.GetSize() - GetSize() + 1);
     }
     SetXY(position);
-    MSG_DEBUG("physic.position", "%s (try %u/%u) - Test in %d, %d",
-              m_name.c_str(), bcl, NB_MAX_TRY, position.x, position.y);
+    MSG_DEBUG("physic.position", "%s - Test in %d, %d",  m_name.c_str(), position.x, position.y);
 
     // Check physical object is not in the ground
     ok &= !IsGhost() && world.ParanoiacRectIsInVacuum(GetTestRect())  && IsInVacuum( Point2i(0, 1) );
@@ -775,25 +849,25 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     {
       if (min_dst_with_characters == 0) {
 
-        if( ObjTouche(*ver) ) {
-            MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*ver).m_name.c_str());
-            ok = false;
-        }
+	if( ObjTouche(*ver) ) {
+	    MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*ver).m_name.c_str());
+	    ok = false;
+	}
       } else {
-        Point2i p1 = ver->GetCenter();
-        Point2i p2 = GetCenter();
-        double dst = p1.Distance( p2 );
+	Point2i p1 = ver->GetCenter();
+	Point2i p2 = GetCenter();
+	double dst = p1.Distance( p2 );
 
-        // ok this test is not perfect but quite efficient ;-)
-        // else we need to check each distance between each "corner"
-        if (dst < min_dst_with_characters) ok = false;
+	// ok this test is not perfect but quite efficient ;-)
+	// else we need to check each distance between each "corner"
+	if (dst < min_dst_with_characters) ok = false;
       }
     }
 
     if (ok && on_top_of_world) SetXY(position);
   } while (!ok);
 
-  MSG_DEBUG("physic.position", "Putted after %u try", m_name.c_str(), bcl);
+  MSG_DEBUG("physic.position", "Putted after  %d try", m_name.c_str(), bcl);
 
   return true;
 }

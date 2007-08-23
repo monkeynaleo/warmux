@@ -21,7 +21,6 @@
 
 #include "smoke.h"
 #include "particle.h"
-#include "graphic/sprite.h"
 
 Smoke::Smoke() :
   Particle("smoke_particle")

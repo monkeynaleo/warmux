@@ -22,11 +22,13 @@
 #ifndef ACTION_H
 #define ACTION_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include <string>
 #include <iostream>
 #include <list>
 #include "base.h"
 #include "tool/point.h"
+#include "network/distant_cpu.h"
 
 class DistantComputer;
 //-----------------------------------------------------------------------------
@@ -34,7 +36,7 @@ class DistantComputer;
 class Action
 {
 private:
-  std::list<uint32_t> var;
+  std::list<Uint32> var;
   Action(const Action& an_action);
   const Action& operator=(const Action&);
 public:
@@ -42,8 +44,6 @@ public:
   {
     ACTION_NICKNAME,
     ACTION_NETWORK_CHANGE_STATE,
-    ACTION_NETWORK_CHECK_PHASE1,
-    ACTION_NETWORK_CHECK_PHASE2,
 
     // ########################################################
     ACTION_PLAYER_CHANGE_WEAPON,
@@ -99,7 +99,7 @@ public:
     ACTION_EXPLOSION,
     ACTION_WIND,
     ACTION_NETWORK_PING,
-    ACTION_NETWORK_RANDOM_INIT,
+    ACTION_NETWORK_RANDOM_CLEAR,
     ACTION_NETWORK_RANDOM_ADD,
     ACTION_NETWORK_CONNECT,
     ACTION_NETWORK_DISCONNECT,
@@ -112,29 +112,26 @@ public:
   //inline Action_t &operator++() { ;}
 
   // Action without parameter
-  Action (Action_t type) { Init(type); };
-
+  Action (Action_t type);
   // Action with various parameter
-  Action (Action_t type, int value) { Init(type); Push(value); };
-  Action (Action_t type, double value) { Init(type); Push(value); };
-  Action (Action_t type, const std::string& value) { Init(type); Push(value); };
-
+  Action (Action_t type, int value);
+  Action (Action_t type, double value);
   Action (Action_t type, double value1, int value2);
   Action (Action_t type, double value1, double value2);
+  Action (Action_t type, const std::string& value);
 
   // Build an action from a network packet
   Action (const char* is, DistantComputer* _creator);
 
-  ~Action() { };
+  ~Action();
 
-  void Init (Action_t type);
   std::ostream& out(std::ostream &os) const;
 
   // Push / Back functions to add / retreive datas
   // Work as a FIFO container, inspiteof the name of methods !
   void Push(int val);
   void Push(double val);
-  void Push(const std::string& val);
+  void Push(std::string val);
   void Push(const Point2i& val);
   void Push(const Point2d& val);
 
@@ -144,7 +141,7 @@ public:
   Point2i PopPoint2i();
   Point2d PopPoint2d();
 
-  bool IsEmpty() const { return var.empty(); };
+  bool IsEmpty() const;
 
   // Store character's information
   void StoreCharacter(uint team_no, uint char_no);
@@ -152,19 +149,11 @@ public:
   void RetrieveCharacter();
 
   // Timestamp handling
-  uint GetTimestamp() const { return m_timestamp; };
+  void SetTimestamp(uint timestamp);
+  uint GetTimestamp();
 
-  int  GetSize() const
-  {
-    return 4  //Size of the type;
-           + 4 //Size of the timestamp
-           + 4 //Size of the number of variable
-           + int(var.size()) * 4;
-  }
-
-  void Write(char *packet) const;
-  void WritePacket(char* & packet, int & size) const;
-  Action_t GetType() const { return m_type; };
+  void WritePacket(char* & packet, int & size);
+  Action_t GetType() const;
 protected:
   Action_t m_type;
   uint m_timestamp;

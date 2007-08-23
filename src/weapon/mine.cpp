@@ -24,26 +24,26 @@
 #include <iostream>
 #include <sstream>
 #include "explosion.h"
-#include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "include/app.h"
 #include "include/constant.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "object/objects_list.h"
-#include "sound/jukebox.h"
 #include "team/macro.h"
-#include "team/team.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "network/randomsync.h"
 #include "tool/resource_manager.h"
-#include "tool/xml_document.h"
 
-// XXX Not used
-//const double DEPART_FONCTIONNEMENT = 5;
+#ifdef __MINGW32__
+#undef LoadImage
+#endif
+
+const double DEPART_FONCTIONNEMENT = 5;
 
 ObjMine::ObjMine(MineConfig& cfg,
                  WeaponLauncher * p_launcher) :
@@ -51,6 +51,7 @@ ObjMine::ObjMine(MineConfig& cfg,
 {
   m_allow_negative_y = true;
   animation = false;
+  channel = -1;
   is_active = true;
   explode_with_collision = false;
 
@@ -84,14 +85,14 @@ void ObjMine::StartTimeout()
   if (!animation)
   {
     animation=true;
-
-    Camera::GetInstance()->GetInstance()->CenterOn(*this);
-
+    
+    camera.CenterOn(*this);
+    
     MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;
     MSG_DEBUG("mine", "EnableDetection : %d", attente);
 
-    timeout_sound.Play("share", "weapon/mine_beep", -1);
+    channel = jukebox.Play("share", "weapon/mine_beep", -1);
   }
 }
 
@@ -131,7 +132,7 @@ void ObjMine::Detection()
 
       (*obj)->GetSpeed(norm, angle);
       if (norm < speed_detection && norm > 0.0) {
-        MSG_DEBUG("mine", "norm: %d, speed_detection: %d", norm, speed_detection);
+	MSG_DEBUG("mine", "norm: %d, speed_detection: %d", norm, speed_detection); 
         StartTimeout();
         return;
       }
@@ -139,11 +140,11 @@ void ObjMine::Detection()
   }
 }
 
-void ObjMine::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
+void ObjMine::AddDamage(uint damage_points)
 {
   // Don't call Explosion here, we're already in an explosion
   attente = 0;
-  animation = true;
+  animation=true;
 }
 
 void ObjMine::Refresh()
@@ -152,7 +153,8 @@ void ObjMine::Refresh()
   // or it's a fake mine that has already exploded!
   if (!is_active)
   {
-    timeout_sound.Stop();
+    jukebox.Stop(channel);
+    channel = -1;
     escape_time = 0;
     return;
   }
@@ -170,21 +172,22 @@ void ObjMine::Refresh()
     if (attente < Time::GetInstance()->ReadSec())
     {
       is_active = false;
-      timeout_sound.Stop();
-      if (!fake)
-        Explosion();
-      else
-        FakeExplosion();
+      jukebox.Stop(channel);
+      channel = -1;
+      if (!fake) 
+	Explosion();
+      else 
+	FakeExplosion();
 
-      if (launcher != NULL)
-        launcher->SignalProjectileTimeout();
+      if (launcher != NULL) 
+	launcher->SignalProjectileTimeout();
     }
   }
 }
 
 bool ObjMine::IsImmobile() const
 {
-  if (is_active && animation)
+  if (is_active && animation) 
     return false;
   return PhysicalObj::IsImmobile();
 }
@@ -218,18 +221,20 @@ bool Mine::p_Shoot()
   return true;
 }
 
-void Mine::Add(int x, int y)
+void Mine::Add (int x, int y)
 {
-  projectile->SetXY(Point2i(x, y));
-  projectile->SetOverlappingObject(&ActiveCharacter());
+  projectile -> SetXY ( Point2i(x, y) );
+  projectile -> SetOverlappingObject(&ActiveCharacter());
 
-  projectile -> SetSpeedXY (ActiveCharacter().GetSpeedXY());
+  Point2d speed_vector;
+  ActiveCharacter().GetSpeedXY(speed_vector);
+  projectile -> SetSpeedXY (speed_vector);
   lst_objects.AddObject (projectile);
   projectile = NULL;
   ReloadLauncher();
 }
 
-std::string Mine::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Mine::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u mine!",

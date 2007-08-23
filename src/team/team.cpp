@@ -21,26 +21,22 @@
 
 #include "team.h"
 #include "teams_list.h"
-#include "character/character.h"
 #include "character/body_list.h"
-#include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
-#include "graphic/sprite.h"
 #include "interface/cursor.h"
-#include "include/base.h"
 #include "include/constant.h"
+#include "game/config.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "network/network.h"
+#include "weapon/weapons_list.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/file_tools.h"
-#include "tool/point.h"
 #include "tool/resource_manager.h"
-#include "tool/xml_document.h"
-#include "weapon/weapons_list.h"
+#include "graphic/sprite.h"
+#include "network/network.h"
 #include <sstream>
 #include <iostream>
 
@@ -49,7 +45,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   : energy(this), m_teams_dir(teams_dir), m_id(id)
 {
   std::string nomfich;
-  XmlReader   doc;
+  XmlReader doc;
 
   // Load XML
   nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
@@ -63,8 +59,6 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   // Load flag
   Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
   flag = resource_manager.LoadImage(res, "flag");
-  death_flag = resource_manager.LoadImage(res, "death_flag");
-  big_flag = resource_manager.LoadImage(res, "big_flag");
   resource_manager.UnLoadXMLProfile(res);
 
   // Get sound profile
@@ -85,7 +79,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
 
 bool Team::LoadCharacters()
 {
-  ASSERT (nb_characters <= 10);
+  assert (nb_characters <= 10);
 
   std::string nomfich;
   try
@@ -133,7 +127,7 @@ bool Team::LoadCharacters()
         // We haven't found any place to put the characters!!
         if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
           std::cerr << std::endl;
-          std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
+          std::cerr << "Error: " << character_name.c_str() << " will be probably misplaced!" << std::endl;
           std::cerr << std::endl;
 
             // Put it with no space...
@@ -167,11 +161,11 @@ void Team::InitEnergy (uint max)
   energy.Config(ReadEnergy(), max);
 }
 
-uint Team::ReadEnergy () const
+uint Team::ReadEnergy ()
 {
   uint total_energy = 0;
 
-  const_iterator it = characters.begin(), end = characters.end();
+  iterator it = characters.begin(), end = characters.end();
 
   for (; it != end; ++it) {
     if ( !(*it).IsDead() )
@@ -193,7 +187,7 @@ TeamEnergy & Team::GetEnergyBar()
 
 void Team::SelectCharacter(uint index)
 {
-  ASSERT(index <= characters.size());
+  assert(index <= characters.size());
   ActiveCharacter().StopPlaying();
   active_character = characters.begin();
   for(uint i = 0; i < index; ++i)
@@ -202,7 +196,7 @@ void Team::SelectCharacter(uint index)
 
 void Team::NextCharacter()
 {
-  ASSERT (0 < NbAliveCharacter());
+  assert (0 < NbAliveCharacter());
   ActiveCharacter().StopPlaying();
   do
   {
@@ -212,8 +206,8 @@ void Team::NextCharacter()
   } while (ActiveCharacter().IsDead());
   ActiveCharacter().StartPlaying();
 
-  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
+  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
+  camera.FollowObject (&ActiveCharacter(),
                           !is_camera_saved, !is_camera_saved,
                           true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
@@ -224,7 +218,7 @@ void Team::NextCharacter()
 
 void Team::PreviousCharacter()
 {
-  ASSERT (0 < NbAliveCharacter());
+  assert (0 < NbAliveCharacter());
   ActiveCharacter().StopPlaying();
   do
   {
@@ -234,8 +228,8 @@ void Team::PreviousCharacter()
   } while (ActiveCharacter().IsDead());
   ActiveCharacter().StartPlaying();
 
-  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
+  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
+  camera.FollowObject (&ActiveCharacter(),
                           !is_camera_saved, !is_camera_saved,
                           true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
@@ -265,8 +259,8 @@ void Team::PrepareTurn()
     NextCharacter();
   }
 
-  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
+  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
+  camera.FollowObject (&ActiveCharacter(),
                           !is_camera_saved, !is_camera_saved,
                           true);
   CharacterCursor::GetInstance()->FollowActiveCharacter();
@@ -280,7 +274,7 @@ void Team::PrepareTurn()
   }
 }
 
-Character& Team::ActiveCharacter() const
+Character& Team::ActiveCharacter()
 {
   return (*active_character);
 }
@@ -288,7 +282,7 @@ Character& Team::ActiveCharacter() const
 void Team::SetWeapon (Weapon::Weapon_type type)
 {
 
-  ASSERT (type >= Weapon::WEAPON_FIRST && type <= Weapon::WEAPON_LAST);
+  assert (type >= Weapon::WEAPON_FIRST && type <= Weapon::WEAPON_LAST);
   AccessWeapon().Deselect();
   active_weapon = WeaponsList::GetInstance()->GetWeapon(type);
   AccessWeapon().Select();
@@ -306,13 +300,13 @@ int Team::ReadNbUnits() const
 
 int Team::ReadNbAmmos(const Weapon::Weapon_type &weapon_type) const
 {
-  ASSERT((unsigned int)weapon_type < m_nb_ammos.size());
+  assert((unsigned int)weapon_type < m_nb_ammos.size());
   return m_nb_ammos[weapon_type];
 }
 
 int Team::ReadNbUnits(const Weapon::Weapon_type &weapon_type) const
 {
-  ASSERT((unsigned int)weapon_type < m_nb_units.size());
+  assert((unsigned int)weapon_type < m_nb_units.size());
   return m_nb_units[weapon_type];
 }
 
@@ -338,10 +332,10 @@ Team::iterator Team::end() { return characters.end(); }
 
 Character* Team::FindByIndex(uint index)
 {
-  ASSERT(index < characters.size());
+  assert(index < characters.size());
   iterator it= characters.begin(), end=characters.end();
 
-  while(index != 0 && it != end)
+  while(index != 0 && it != characters.end())
   {
     index--;
     it++;
@@ -360,7 +354,7 @@ void Team::LoadGamingData()
 
   m_nb_ammos.assign(l_weapons_list.size(), 0);
   m_nb_units.assign(l_weapons_list.size(), 0);
-
+	
   for (; itw != end ; ++itw) {
     m_nb_ammos[ (*itw)->GetType() ] = (*itw)->ReadInitialNbAmmo();
     m_nb_units[ (*itw)->GetType() ] = (*itw)->ReadInitialNbUnit();
@@ -386,7 +380,7 @@ void Team::UnloadGamingData()
 
 void Team::SetNbCharacters(uint howmany)
 {
-  ASSERT(howmany >= 1 && howmany <= 10);
+  assert(howmany >= 1 && howmany <= 10);
   nb_characters = howmany;
 }
 
@@ -407,7 +401,7 @@ void Team::Refresh()
 }
 
 Weapon& Team::AccessWeapon() const { return *active_weapon; }
-Weapon& Team::GetWeapon() const { return *active_weapon; }
+const Weapon& Team::GetWeapon() const { return *active_weapon; }
 Weapon::Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
 
 bool Team::IsSameAs(const Team& other) const

@@ -33,7 +33,7 @@ class WeaponsList
 {
 public:
   typedef std::list<Weapon*> weapons_list_type;
-  typedef std::list<Weapon*>::const_iterator weapons_list_it;
+  typedef std::list<Weapon*>::iterator weapons_list_it;
 
 private:
   static WeaponsList * weapons_list; /* list by itself */
@@ -54,12 +54,12 @@ public:
   void Init();
   static WeaponsList * GetInstance();
 
-  // Weapon refresh
-  // Return true if end of turn
-  void Refresh() const;
+  // Refresh des armes
+  // Retourne true si c'est la fin d'un tour
+  void Refresh();
 
   // Return a list of  weapons
-  const weapons_list_type& GetList() const { return m_weapons_list; };
+  weapons_list_type& GetList();
   Weapon* GetWeapon(Weapon::Weapon_type type);
   bool GetWeaponBySort(Weapon::category_t num_sort, Weapon::Weapon_type &type);
 };

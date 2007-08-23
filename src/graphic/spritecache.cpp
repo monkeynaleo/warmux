@@ -32,7 +32,7 @@ SpriteFrameCache::SpriteFrameCache() {
 }
 #include <iostream>
 void SpriteFrameCache::CreateRotationCache(Surface &surface, unsigned int cache_size){
-  ASSERT (use_rotation == false);
+  assert (use_rotation == false);
   use_rotation = true;
 
   rotated_surface.push_back( surface );
@@ -67,12 +67,12 @@ Surface SpriteFrameCache::GetSurfaceForAngle(double angle) const
 
 void SpriteFrameCache::CreateFlippingCache(Surface &surface)
 {
-  ASSERT (flipped_surface.IsNull());
+  assert (flipped_surface.IsNull());
   flipped_surface = surface.RotoZoom( 0.0, -1.0, 1.0, SMOOTHING_OFF);
   if (use_rotation)
   {
-    ASSERT (rotated_surface.size() != 0);
-    ASSERT (rotated_flipped_surface.size() == 0);
+    assert (rotated_surface.size() != 0);
+    assert (rotated_flipped_surface.size() == 0);
     rotated_flipped_surface.push_back( flipped_surface );
     const unsigned int n = rotated_surface.size();
     for(unsigned int i=1 ; i<n; i++)
@@ -109,14 +109,14 @@ SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
   {
     Surface new_surf = Surface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
 
-        // Disable per pixel alpha on the source surface
+	// Disable per pixel alpha on the source surface
     // in order to properly copy the alpha chanel to the destination suface
-        // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-        other.frames[f].surface.SetAlpha( 0, 0);
-        new_surf.Blit( other.frames[f].surface, NULL, NULL);
+	// see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
+	other.frames[f].surface.SetAlpha( 0, 0);
+	new_surf.Blit( other.frames[f].surface, NULL, NULL);
 
-        // re-enable the per pixel alpha in the
-        other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0);
+	// re-enable the per pixel alpha in the
+	other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0);
     frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
   }
 
@@ -132,15 +132,15 @@ SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
 void SpriteCache::EnableRotationCache(std::vector<SpriteFrame> &sprite_frames, unsigned int cache_size){
   //For each frame, we pre-render 'cache_size' rotated surface
   //At runtime the prerender Surface with the nearest angle to what is asked is displayed
-  ASSERT(1 < cache_size && cache_size <= 360);
-  ASSERT(!have_lastframe_cache);
-  ASSERT(!have_flipping_cache); //Always compute rotation cache before flipping cache!
-  ASSERT(!have_rotation_cache);
+  assert(1 < cache_size and cache_size <= 360);
+  assert(!have_lastframe_cache);
+  assert(!have_flipping_cache); //Always compute rotation cache before flipping cache!
+  assert(!have_rotation_cache);
   have_rotation_cache = true;
 
   if (frames.empty())
     frames.resize( sprite_frames.size() );
-  ASSERT( frames.size() == sprite_frames.size() );
+  assert( frames.size() == sprite_frames.size() );
   rotation_cache_size = cache_size;
 
   for ( unsigned int f = 0 ; f < frames.size() ; f++)
@@ -151,12 +151,12 @@ void SpriteCache::EnableRotationCache(std::vector<SpriteFrame> &sprite_frames, u
 
 void SpriteCache::EnableFlippingCache(std::vector<SpriteFrame> &sprite_frames){
   //For each frame, we pre-render the flipped frame
-  ASSERT(!have_flipping_cache);
-  ASSERT(!have_lastframe_cache);
+  assert(!have_flipping_cache);
+  assert(!have_lastframe_cache);
 
   if (frames.empty())
     frames.resize( sprite_frames.size() );
-  ASSERT( frames.size() == sprite_frames.size() );
+  assert( frames.size() == sprite_frames.size() );
 
   have_flipping_cache = true;
 
@@ -167,16 +167,16 @@ void SpriteCache::EnableFlippingCache(std::vector<SpriteFrame> &sprite_frames){
 void SpriteCache::EnableLastFrameCache(){
   //The result of the last call to SDLgfx is kept in memory
   //to display it again if rotation / scale / alpha didn't changed
-  ASSERT(!have_rotation_cache);
-  ASSERT(!have_flipping_cache);
+  assert(!have_rotation_cache);
+  assert(!have_flipping_cache);
   have_lastframe_cache = true;
 }
 
 void SpriteCache::DisableLastFrameCache(){
   //The result of the last call to SDLgfx is kept in memory
   //to display it again if rotation / scale / alpha didn't changed
-  ASSERT(!have_rotation_cache);
-  ASSERT(!have_flipping_cache);
+  assert(!have_rotation_cache);
+  assert(!have_flipping_cache);
   have_lastframe_cache = false;
 }
 

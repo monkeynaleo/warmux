@@ -20,29 +20,12 @@
  *****************************************************************************/
 
 #include "baseball.h"
-#include "weapon_cfg.h"
-#include "character/character.h"
 #include "game/game_loop.h"
-#include "game/time.h"
-#include "graphic/sprite.h"
 #include "map/camera.h"
-#include "sound/jukebox.h"
 #include "team/macro.h"
-#include "team/team.h"
 #include "tool/point.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
-#include "tool/xml_document.h"
 #include "explosion.h"
-
-class BaseballConfig : public WeaponConfig
-{
-  public:
-    uint range;
-    uint strength;
-    BaseballConfig();
-    void LoadXml(xmlpp::Element *elem);
-};
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 {
@@ -53,8 +36,7 @@ Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
   m_weapon_fire->EnableRotationCache(32);
 }
 
-bool Baseball::p_Shoot()
-{
+bool Baseball::p_Shoot (){
 
   double angle = ActiveCharacter().GetFiringAngle();
   double rayon = 0.0;
@@ -83,11 +65,11 @@ bool Baseball::p_Shoot()
       // Did we touch somebody ?
       if( ver->ObjTouche(pos_to_check) )
       {
-        // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
-        ver->SetMovement("fly");
-        Camera::GetInstance()->GetInstance()->FollowObject (&(*ver), true, true);
-        return true;
+	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
+	ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
+	ver->SetMovement("fly");
+	camera.FollowObject (&(*ver), true, true);
+	return true;
       }
     }
   } while (!fin);
@@ -95,17 +77,16 @@ bool Baseball::p_Shoot()
   return true;
 }
 
-bool Baseball::IsInUse() const
-{
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+void Baseball::Refresh(){
+  if (m_is_active)
+    m_is_active = false;
 }
 
-BaseballConfig& Baseball::cfg()
-{
+BaseballConfig& Baseball::cfg() {
   return static_cast<BaseballConfig&>(*extra_params);
 }
 
-std::string Baseball::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Baseball::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u baseball bat!",
@@ -114,14 +95,12 @@ std::string Baseball::GetWeaponWinString(const char *TeamName, uint items_count 
 }
 
 
-BaseballConfig::BaseballConfig()
-{
+BaseballConfig::BaseballConfig(){
   range =  70;
   strength = 250;
 }
 
-void BaseballConfig::LoadXml(xmlpp::Element *elem)
-{
+void BaseballConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
   XmlReader::ReadUint(elem, "strength", strength);

@@ -17,17 +17,24 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
+#include <SDL_video.h>
+#include <SDL_gfxPrimitives.h>
+#include <string>
 #include <iostream> //cerr
 #include "text.h"
-#include "graphic/video.h"
+#include "color.h"
+#include "colors.h"
+#include "font.h"
+#include "video.h"
 #include "include/app.h"
+#include "tool/error.h"
 #include "interface/interface.h"
 #include "map/map.h"
 
-Text::Text(const std::string &new_txt,
-           const Color& new_color,
-           Font::font_size_t fsize,
-           Font::font_style_t fstyle,
+Text::Text(const std::string &new_txt, 
+	   const Color& new_color,
+	   Font::font_size_t fsize, 
+	   Font::font_style_t fstyle, 
            bool _shadowed)
 {
   font_size = fsize;
@@ -62,7 +69,7 @@ void Text::Render()
     RenderMultiLines();
     return;
   }
-
+  
   Font* font = Font::GetInstance(font_size, font_style);
 
   surf = font->CreateSurface(txt, color);
@@ -91,11 +98,11 @@ void Text::RenderMultiLines()
   std::string::size_type old_pos = 0, current_pos = 0;
 
   while ( old_pos < txt.size() &&
-          (current_pos = txt.find_first_of(" ", old_pos)) != std::string::npos )
+	  (current_pos = txt.find_first_of(" ", old_pos)) != std::string::npos )
     {
       std::string tmp = txt.substr(old_pos, current_pos-old_pos);
-      if (tmp != " " && tmp != "") {
-        tokens.push_back(tmp);
+      if (tmp != " ") {
+	tokens.push_back(tmp);
       }
       old_pos = current_pos+1;
     }
@@ -108,41 +115,41 @@ void Text::RenderMultiLines()
   uint line_width = 0;
   uint max_line_width = 0;
 
-  while (index_word < tokens.size())
+  while (index_word < tokens.size()) 
     {
       if ( lines.size() == index_lines ) {
-        // first word of a line
-        lines.push_back(tokens.at(index_word));
+	// first word of a line
+	lines.push_back(tokens.at(index_word));
 
-        // compute current line size
-        line_width = font->GetWidth(tokens.at(index_word));
-        if (line_width > max_line_width) {
-            max_line_width = line_width;
-        }
+	// compute current line size
+	line_width = font->GetWidth(tokens.at(index_word));
+	if (line_width > max_line_width) {
+	    max_line_width = line_width;
+	}
 
       } else {
-        line_width = font->GetWidth(lines.at(index_lines)+" "+tokens.at(index_word));
+	line_width = font->GetWidth(lines.at(index_lines)+" "+tokens.at(index_word));
 
-        if ( line_width > max_width ) {
+	if ( line_width > max_width ) {
+	  
+	  // line will be too long : prepare next line!
+	  index_lines++;
+	  index_word--;
 
-          // line will be too long : prepare next line!
-          index_lines++;
-          index_word--;
+	} else {
+	  lines.at(index_lines) += " " + tokens.at(index_word);
 
-        } else {
-          lines.at(index_lines) += " " + tokens.at(index_word);
-
-          // this is the longest line
-          if (line_width > max_line_width) {
-            max_line_width = line_width;
-          }
-        }
-
+	  // this is the longest line
+	  if (line_width > max_line_width) {
+	    max_line_width = line_width;
+	  }
+	}
+	
       }
-
+      
       index_word++;
     }
-
+  
   // really Render !
 
   // First, creating a destination surface
@@ -179,7 +186,7 @@ void Text::Set(const std::string &new_txt)
     return;
 
   txt = new_txt;
-
+	
   Render();
 }
 
@@ -194,23 +201,28 @@ void Text::SetColor(const Color &new_color)
     return;
 
   color = new_color;
-
+	
   Render();
+}
+
+void Text::DrawCenter (int x, int y) const
+{ 
+  DrawTopLeft(x - surf.GetWidth() / 2, y - surf.GetHeight() / 2);
 }
 
 void Text::DrawCenter (const Point2i &position) const
 {
-  DrawTopLeft(position - surf.GetSize() / 2);
+  DrawCenter(position.GetX(), position.GetY());
 }
 
-void Text::DrawTopRight (const Point2i &position) const
-{
-  DrawTopLeft(position - Point2i(surf.GetWidth(), 0));
+void Text::DrawTopRight (int x, int y) const
+{ 
+  DrawTopLeft( x - surf.GetWidth(), y);
 }
 
-void Text::DrawCenterTop (const Point2i &position) const
-{
-  DrawTopLeft(position - Point2i(surf.GetWidth()/2, 0));
+void Text::DrawCenterTop (int x, int y) const
+{ 
+  DrawTopLeft( x - surf.GetWidth()/2, y);
 }
 
 void Text::DrawTopLeft(const Point2i &position) const
@@ -222,28 +234,41 @@ void Text::DrawTopLeft(const Point2i &position) const
 
   if(shadowed){
     Rectanglei shad_rect;
-
+    
     shad_rect.SetPosition(dst_rect.GetPosition() + bg_offset);
     shad_rect.SetSize(background.GetWidth(), background.GetHeight() );
-
-    app->video->window.Blit(background, shad_rect.GetPosition());
-    app->video->window.Blit(surf, dst_rect.GetPosition());
-
+    
+    app->video.window.Blit(background, shad_rect.GetPosition());
+    app->video.window.Blit(surf, dst_rect.GetPosition());
+		
     world.ToRedrawOnScreen(Rectanglei(dst_rect.GetPosition(),
                                       shad_rect.GetSize() + bg_offset));
   }else{
-    app->video->window.Blit(surf, dst_rect.GetPosition());
+    app->video.window.Blit(surf, dst_rect.GetPosition());
     world.ToRedrawOnScreen(dst_rect);
-  }
+  }		
 }
 
+void Text::DrawTopLeft (int x, int y) const
+{ 
+  DrawTopLeft( Point2i(x, y) );
+}
 
-void Text::DrawCenterTopOnMap (const Point2i &pos) const
+void Text::DrawCenterOnMap (int x, int y) const
+{
+  DrawTopLeftOnMap(x - surf.GetWidth()/2, y - surf.GetHeight()/2 );
+}
+
+void Text::DrawCenterTopOnMap (int x, int y) const
+{
+  DrawTopLeftOnMap(x - surf.GetWidth()/2, y);
+}
+
+void Text::DrawTopLeftOnMap (int x, int y) const
 {
   if(shadowed)
-    AbsoluteDraw(background, Point2i(bg_offset + pos.x - surf.GetWidth() / 2,
-                                     bg_offset + pos.y) );
-  AbsoluteDraw(surf, Point2i(pos.x - surf.GetWidth() / 2, pos.y) );
+    AbsoluteDraw(background, Point2i(bg_offset + x, bg_offset + y) );
+  AbsoluteDraw(surf, Point2i(x, y) );
 }
 
 void Text::SetMaxWidth(uint max_w)
@@ -268,21 +293,21 @@ int Text::GetHeight() const
   return surf.GetHeight();
 }
 
-void DrawTmpBoxText(Font& font, Point2i pos,
-                    const std::string& txt, uint space,
+void DrawTmpBoxText(Font& font, Point2i pos, 
+		    const std::string& txt, uint space,
                     const Color& boxColor, const Color& rectColor)
 {
   Point2i size = font.GetSize(txt) + Point2i(space, space)*2;
-
+  
   Rectanglei rect( pos - size/2, size);
-
+  
   AppWormux * app = AppWormux::GetInstance();
 
-  app->video->window.BoxColor(rect, boxColor);
-  app->video->window.RectangleColor(rect, rectColor);
+  app->video.window.BoxColor(rect, boxColor);
+  app->video.window.RectangleColor(rect, rectColor);  
 
   world.ToRedrawOnScreen( rect );
-
+  
   pos.y += font.GetHeight(txt)/2;
   font.WriteCenter( pos, txt, white_color);
 }

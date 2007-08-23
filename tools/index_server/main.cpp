@@ -152,7 +152,6 @@ int main(int argc, void** argv)
 		sync_slave.CheckGames();
 
 		struct timeval timeout;
-		memset(&timeout, 0, sizeof(timeout));
 		timeout.tv_sec = 1;
 		timeout.tv_usec = 0;
 

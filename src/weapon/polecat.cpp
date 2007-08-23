@@ -20,42 +20,28 @@
  *****************************************************************************/
 
 #include "polecat.h"
-#include "grenade.h"
-#include "weapon_cfg.h"
-
 #include <sstream>
 #include "explosion.h"
-#include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"
-#include "graphic/sprite.h"
+#include "graphic/video.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
-#include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
+#include "network/randomsync.h"
 
 const uint TIME_BETWEEN_FART = 500;
 
-class Polecat : public WeaponProjectile
+PolecatFart::PolecatFart(ExplosiveWeaponConfig& cfg,
+                 WeaponLauncher * p_launcher) :
+  WeaponProjectile("polecat_fart", cfg, p_launcher)
 {
- private:
-  int m_sens;
-  int save_x, save_y;
-  uint last_fart_time;
-  double angle;
- protected:
-  void SignalOutOfMap();
- public:
-  Polecat(ExplosiveWeaponConfig& cfg,
-          WeaponLauncher * p_launcher);
-  void Shoot(double strength);
-  void Refresh();
-};
-
+  explode_with_collision = false;
+}
 
 Polecat::Polecat(ExplosiveWeaponConfig& cfg,
                  WeaponLauncher * p_launcher) :
@@ -142,6 +128,14 @@ void Polecat::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
+std::string Polecat::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u polecat!",
+            "%s team has won %u polecats!",
+            items_count), TeamName, items_count);
+}
+
 //-----------------------------------------------------------------------------
 
 PolecatLauncher::PolecatLauncher() :
@@ -157,13 +151,3 @@ WeaponProjectile * PolecatLauncher::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
     (new Polecat(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
-
-std::string PolecatLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u polecat! You have you're gas mask, right ?",
-            "%s team has won %u polecats! You have you're gas mask, right ?",
-            items_count), TeamName, items_count);
-}
-
-

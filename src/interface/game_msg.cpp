@@ -23,7 +23,9 @@
 #include <iostream>
 #include "game/time.h"
 #include "graphic/video.h"
+#include "graphic/font.h"
 #include "include/app.h"
+#include "game_msg.h"
 
 // Hauteur de la police de caractere "mini"
 #define HAUT_POLICE_MINI 12 // pixels
@@ -45,12 +47,15 @@ GameMessages * GameMessages::GetInstance() {
   return singleton;
 }
 
+GameMessages::GameMessages() {
+}
+
 // Clean up the message list
 void GameMessages::Reset(){
-  std::list<Message *>::iterator it;
-  for( it=liste.begin(); it != liste.end(); it++){
-    Message * msg = *it;
-    ASSERT(msg); /* the message must be valid if nothing went wrong */
+  iterator i;
+  for( i=liste.begin(); i != liste.end(); i++){
+    Message * msg = *i;
+    assert(msg); /* the message must be valid if nothing went wrong */
     delete (msg);
     msg = NULL;
   }
@@ -62,7 +67,7 @@ void GameMessages::Draw(){
   uint msgy = 50;
 
   for( iterator i=liste.begin(); i != liste.end(); ++i ){
-    (*i)->DrawCenterTop(Point2i(AppWormux::GetInstance()->video->window.GetWidth()/2, msgy));
+    (*i)->DrawCenterTop(AppWormux::GetInstance()->video.window.GetWidth()/2, msgy);
     msgy += HAUT_POLICE_MINI + INTERLIGNE_MINI;
   }
 }
@@ -93,8 +98,9 @@ void GameMessages::Add(const std::string &message){
   /* if there are too many messages, remove some of them */
   while( NBR_MSG_MAX < liste.size()) {
     Message * msg = liste.front();
-    ASSERT(msg); /* the message must be valid if nothing went wrong */
+    assert(msg); /* the message must be valid if nothing went wrong */
     liste.pop_front();
     delete msg;
   }
 }
+

@@ -22,6 +22,7 @@
 #ifndef PROGRESS_BAR_H
 #define PROGRESS_BAR_H
 
+#include <SDL.h>
 #include <list>
 #include "include/base.h"
 #include "graphic/color.h"
@@ -49,14 +50,14 @@ private:
   uint CalculeValBarre (long val) const;
 
   typedef struct s_marqueur_t{
-    Color color;
-    uint val;
+	  Color color;
+	  uint val;
   } marqueur_t;
 
  public:
-  void SetBorderColor(const Color& color) { border_color = color; };
-  void SetBackgroundColor(const Color& color) { background_color = color; };
-  void SetValueColor(const Color& color) { value_color = color; };
+  void SetBorderColor(Color color);
+  void SetBackgroundColor(Color color);
+  void SetValueColor(Color color);
  private:
   typedef std::list<marqueur_t>::iterator marqueur_it;
   typedef std::list<marqueur_t>::const_iterator marqueur_it_const;
@@ -66,11 +67,7 @@ public:
   ProgressBar();
   virtual ~ProgressBar() {};
 
-  int GetCurrentValue() { return val; };
-  int GetMinValue() { return min; };
-  int GetMaxValue() { return max; };
-
-  // Update current value
+  // Actualisation de la valeur
   void UpdateValue (long val);
 
   // Initialise la position
@@ -84,7 +81,7 @@ public:
   void SetReferenceValue (bool use, long value=0);
 
   // Draw la barre de progresssion
-  void Draw() const {  DrawXY( Point2i(x, y) ); };
+  void Draw() const;
 
   // Draw the progress bar
   void DrawXY(const Point2i &pos) const;
@@ -98,7 +95,7 @@ public:
 
   // add/remove value tag
   marqueur_it AddTag (long val, const Color& coul);
-  void ResetTag() { marqueur.clear(); };
+  void ResetTag();
 };
 
 #endif

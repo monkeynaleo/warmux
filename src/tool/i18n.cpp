@@ -24,66 +24,58 @@
 #include <string>
 #include <stdio.h>
 #include <stdarg.h>
-#include <stdlib.h>
 #include "debug.h"
-#ifdef _MSC_VER
-#  include "msvc/config.h"
-#else
-#  include "config.h"
-#endif
+#include "config.h"
 #include "game/config.h"
 
-std::string Format(const char *format, ...)
-{
-  const int bufferSize = 256;
-  char buffer[bufferSize];
-  va_list argp;
-  std::string result;
-
-  va_start(argp, format);
-
-  int size = vsnprintf(buffer, bufferSize, format, argp);
-
-  if(size < 0)
-    Error("Error formating string...");
-
-  if(size < bufferSize) {
-    result = std::string(buffer);
-  } else {
-    char *bigBuffer = (char *)malloc((size + 1) * sizeof(char));
-    if(bigBuffer == NULL)
-      Error( "Out of memory !");
-
-    size = vsnprintf(bigBuffer, size + 1, format, argp);
-    if(size < 0)
-      Error( "Error formating string...");
-
-    result = std::string(bigBuffer);
-    free(bigBuffer);
-  }
-
-  va_end(argp);
-
-  return result;
-}
-
-static void I18N_SetDir(const std::string &dir)
-{
-  printf("o Bind text domain to: %s\n"
-         "o Codeset: %s\n"
-         "o Text domain: %s\n",
-         bindtextdomain(PACKAGE, dir.c_str()), bind_textdomain_codeset(PACKAGE, "UTF-8"), textdomain(PACKAGE));
-}
-
-void InitI18N(const std::string &dir, const std::string &default_language)
-{
-  setlocale(LC_ALL, "");
-#ifdef _WIN32
-  std::string variable = "LANGUAGE=";
-  variable += default_language;
-  _putenv(variable.c_str());
-#else
-  setenv("LANGUAGE", default_language.c_str(), 1);
+// Package is defined by autotools
+#ifdef WIN32
+#define PACKAGE "Wormux"
 #endif
-  I18N_SetDir(dir);
+
+#define GETTEXT_DOMAIN PACKAGE
+
+std::string Format(const char *format, ...){
+	const int bufferSize = 256;
+	char buffer[bufferSize];
+	va_list argp;
+	std::string result;
+
+	va_start(argp, format);
+
+	int size = vsnprintf(buffer, bufferSize, format, argp);
+
+	if( size < 0 )
+		Error( "Error formating string...");
+
+	if( size < bufferSize)
+		result = std::string(buffer);
+	else{
+		char *bigBuffer = (char *)malloc( (size + 1) * sizeof(char) );
+		if( bigBuffer == NULL)
+			Error( "Out of memory !");
+
+		size = vsnprintf(bigBuffer, size + 1, format, argp);
+		if( size < 0 )
+			Error( "Error formating string...");
+
+		result = std::string(bigBuffer);
+		free(bigBuffer);
+	}
+
+	va_end(argp);
+
+	return result;
 }
+
+void I18N_SetDir(const std::string &dir){
+  bindtextdomain(GETTEXT_DOMAIN, dir.c_str());
+  bind_textdomain_codeset (GETTEXT_DOMAIN, "UTF-8");
+}
+
+void InitI18N(const std::string &dir){
+  setlocale (LC_ALL, "");
+  I18N_SetDir (dir);
+  textdomain(GETTEXT_DOMAIN);
+}
+

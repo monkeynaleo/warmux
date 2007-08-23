@@ -21,12 +21,7 @@
 
 #include "auto_bazooka.h"
 #include "explosion.h"
-#include "weapon_cfg.h"
-
-#include "character/character.h"
 #include "game/time.h"
-#include "graphic/sprite.h"
-#include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "interface/game_msg.h"
@@ -34,13 +29,13 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/wind.h"
-#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
-#include "tool/xml_document.h"
 #include "object/objects_list.h"
+#ifdef __MINGW32__
+#undef LoadImage
+#endif
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
   public:
@@ -50,27 +45,6 @@ class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
     double rocket_force;
     AutomaticBazookaConfig();
     void LoadXml(xmlpp::Element *elem);
-};
-
-class RPG : public WeaponProjectile
-{
-  ParticleEngine smoke_engine;
-  protected:
-    double angle_local;
-    Point2i m_targetPoint;
-    bool m_targeted;
-    double m_force;
-    uint m_lastrefresh;
-  public:
-    RPG(AutomaticBazookaConfig& cfg,
-        WeaponLauncher * p_launcher);
-    void Refresh();
-    void Shoot(double strength);
-    void SetTarget (int x,int y);
-
-  protected:
-    void SignalOutOfMap();
-    void SignalDrowning();
 };
 
 RPG::RPG(AutomaticBazookaConfig& cfg,
@@ -105,7 +79,7 @@ void RPG::Refresh()
     {
       m_targeted = true;
       SetSpeed(0,0);
-      angle_local = GetPosition().ComputeAngle( m_targetPoint );
+      angle_local = GetPosition().ComputeAngle( m_target );
       m_force = acfg.rocket_force;
       SetExternForce(m_force, angle_local);
       SetGravityFactor(0);
@@ -119,7 +93,7 @@ void RPG::Refresh()
     if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                        GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
-      double wish_angle = GetPosition().ComputeAngle( m_targetPoint );
+      double wish_angle = GetPosition().ComputeAngle( m_target );
       double max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
       double diff = fmod(wish_angle-angle_local, M_PI*2);
       if(diff < -M_PI) diff += M_PI*2;
@@ -167,18 +141,11 @@ void RPG::SignalOutOfMap()
 // Set the coordinate of the target
 void RPG::SetTarget (int x, int y)
 {
-  m_targetPoint.x = x;
-  m_targetPoint.y = y;
+  m_target.x = x;
+  m_target.y = y;
 }
 
 //-----------------------------------------------------------------------------
-
-struct target_t
-{
-  Point2i pos;
-  bool selected;
-  Surface image;
-};
 
 AutomaticBazooka::AutomaticBazooka() :
   WeaponLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new AutomaticBazookaConfig() )
@@ -188,9 +155,8 @@ AutomaticBazooka::AutomaticBazooka() :
   m_category = HEAVY;
   mouse_character_selection = false;
   m_allow_change_timeout = true;
-  m_target = new target_t;
-  m_target->selected = false;
-  m_target->image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
+  m_target.selected = false;
+  m_target.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
   ReloadLauncher();
 }
 
@@ -215,7 +181,7 @@ void AutomaticBazooka::Refresh()
 void AutomaticBazooka::p_Select()
 {
   WeaponLauncher::p_Select();
-  m_target->selected = false;
+  m_target.selected = false;
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
 }
@@ -223,12 +189,12 @@ void AutomaticBazooka::p_Select()
 void AutomaticBazooka::p_Deselect()
 {
   WeaponLauncher::p_Deselect();
-  if (m_target->selected) {
+  if (m_target.selected) {
     // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
-                        m_target->pos.y-m_target->image.GetHeight()/2,
-                        m_target->image.GetWidth(),
-                        m_target->image.GetHeight()));
+    world.ToRedrawOnMap(Rectanglei(m_target.pos.x-m_target.image.GetWidth()/2,
+                        m_target.pos.y-m_target.image.GetHeight()/2,
+                        m_target.image.GetWidth(),
+                        m_target.image.GetHeight()));
   }
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
@@ -236,39 +202,39 @@ void AutomaticBazooka::p_Deselect()
 
 void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 {
-  if (m_target->selected) {
+  if (m_target.selected) {
     // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
-                        m_target->pos.y-m_target->image.GetHeight()/2,
-                        m_target->image.GetWidth(),
-                        m_target->image.GetHeight()));
+    world.ToRedrawOnMap(Rectanglei(m_target.pos.x-m_target.image.GetWidth()/2,
+                        m_target.pos.y-m_target.image.GetHeight()/2,
+                        m_target.image.GetWidth(),
+                        m_target.image.GetHeight()));
   }
 
-  m_target->pos = mouse_pos;
-  m_target->selected = true;
+  m_target.pos = mouse_pos;
+  m_target.selected = true;
 
   if(!ActiveTeam().IsLocal())
-    Camera::GetInstance()->GetInstance()->SetXYabs(mouse_pos - Camera::GetInstance()->GetSize()/2);
+    camera.SetXYabs(mouse_pos - camera.GetSize()/2);
   DrawTarget();
-  static_cast<RPG *>(projectile)->SetTarget(m_target->pos.x, m_target->pos.y);
+  static_cast<RPG *>(projectile)->SetTarget(m_target.pos.x, m_target.pos.y);
 }
 
-void AutomaticBazooka::DrawTarget() const
+void AutomaticBazooka::DrawTarget()
 {
-  if( !m_target->selected ) return;
+  if( !m_target.selected ) return;
 
-  AppWormux::GetInstance()->video->window.Blit(m_target->image, m_target->pos - m_target->image.GetSize()/2 - Camera::GetInstance()->GetPosition());
+  AppWormux::GetInstance()->video.window.Blit(m_target.image, m_target.pos - m_target.image.GetSize()/2 - camera.GetPosition());
 
-  world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
-                                 m_target->pos.y-m_target->image.GetHeight()/2,
-                                 m_target->image.GetWidth(),
-                                 m_target->image.GetHeight()));
+  world.ToRedrawOnMap(Rectanglei(m_target.pos.x-m_target.image.GetWidth()/2,
+				 m_target.pos.y-m_target.image.GetHeight()/2,
+				 m_target.image.GetWidth(),
+				 m_target.image.GetHeight()));
 
 }
 
 bool AutomaticBazooka::IsReady() const
 {
-  return (EnoughAmmo() && m_target->selected);
+  return (EnoughAmmo() && m_target.selected);
 }
 
 AutomaticBazookaConfig &AutomaticBazooka::cfg() {
@@ -290,7 +256,7 @@ void AutomaticBazookaConfig::LoadXml(xmlpp::Element *elem) {
     XmlReader::ReadDouble(elem, "rocket_force", rocket_force);
 }
 
-std::string AutomaticBazooka::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string AutomaticBazooka::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u automatic bazooka!",

@@ -24,17 +24,41 @@
 #ifndef DYNAMITE_H
 #define DYNAMITE_H
 
-#include "weapon_launcher.h"
+#include "launcher.h"
+#include "graphic/sprite.h"
 #include "include/base.h"
+#include "character/character.h"
+
+class Dynamite;
+
+class DynamiteStick : public WeaponProjectile
+{
+  int channel;
+
+  public:
+    DynamiteStick(ExplosiveWeaponConfig& cfg,
+                  WeaponLauncher * p_launcher);
+
+    void Shoot(double strength);
+    void Refresh();
+
+  protected:
+    void ShootSound();
+    void SignalExplosion();
+    void SignalOutOfMap();
+    void SignalDrowning();
+};
+
 
 // L'arme dynamite
 class Dynamite : public WeaponLauncher
 {
   protected:
     bool p_Shoot();
+  protected:
     WeaponProjectile * GetProjectileInstance();
   public:
     Dynamite();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
+    DECLARE_GETWEAPONSTRING();
 };
 #endif /* DYNAMITE_H */

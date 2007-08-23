@@ -41,7 +41,7 @@ public:
   static const uint NBR_BCL_MAX_EST_VIDE; // Is an object in vacuum ?
 
   // Authors list
-  std::vector<std::string> AUTHORS;
+  static std::vector<std::string> AUTHORS;
 
   // Web site address and email
   static const std::string WEB_SITE;

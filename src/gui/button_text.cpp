@@ -20,19 +20,19 @@
  *****************************************************************************/
 
 #include "button_text.h"
-#include "graphic/text.h"
+#include "include/app.h"
 
 ButtonText::~ButtonText(){
   delete text;
 }
 
-ButtonText::ButtonText(const Point2i& _position,
-                       const Profile *res_profile,
-                       const std::string& resource_id,
-                       const std::string &new_text,
-                       Font::font_size_t font_size,
-                       Font::font_style_t font_style):
-  Button(_position, res_profile, resource_id),
+ButtonText::ButtonText(Point2i position,
+		       const Profile *res_profile,
+		       const std::string& resource_id,
+		       const std::string &new_text,
+		       Font::font_size_t font_size,
+		       Font::font_style_t font_style):
+  Button(position, res_profile, resource_id),
   text(new Text(new_text, white_color, font_size, font_style))
 { }
 

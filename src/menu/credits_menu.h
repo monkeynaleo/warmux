@@ -22,25 +22,25 @@
 #ifndef CREDITS_MENU_H
 #define CREDITS_MENU_H
 
+#include "include/base.h"
+#include "graphic/font.h"
+#include "gui/list_box.h"
 #include "menu/menu.h"
-
-// Forward declarations
-class ListBox;
 
 class CreditsMenu : public Menu
 {
  private:
-  void PrepareAuthorsList(ListBox *lbox_authors) const;
-
+  void PrepareAuthorsList(ListBox *lbox_authors);
+  
   bool signal_ok();
-  bool signal_cancel();
+  bool signal_cancel();   
 
-  void Draw(const Point2i &mousePosition);
+  void Draw(const Point2i &mousePosition);   
 
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
  public:
-  CreditsMenu();
+  CreditsMenu(); 
   ~CreditsMenu();
 };
 

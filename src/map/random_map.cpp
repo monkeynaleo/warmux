@@ -20,57 +20,38 @@
  *****************************************************************************/
 
 #include "random_map.h"
-#include "game/config.h"
-#include "graphic/polygon_generator.h"
-#include "graphic/sprite.h"
-#include "map/maps_list.h"
-#include "tool/affine_transform.h"
 #include "tool/random.h"
-#include "tool/resource_manager.h"
-#include "tool/debug.h"
-#include "tool/xml_document.h"
-#include <sstream>
-#ifdef _MSC_VER
-#  include <time.h>
-#endif
+#include "map/maps_list.h"
 
-Surface * RandomElementList::GetRandomElement()
+MapElement::MapElement(Surface & object, Point2i & pos)
 {
-  if(size() == 0)
-    return NULL;
-  return (*this)[Random::GetInt(0, size() - 1)];
+  element = object;
+  position = pos;
 }
 
-RandomElementList::~RandomElementList()
+Surface & MapElement::GetElement()
 {
-  for(iterator elt = begin(); elt != end(); elt++) {
-    delete((*elt));
-  }
+  return element;
+}
+
+Point2i & MapElement::GetPosition()
+{
+  return position;
 }
 
 RandomMap::RandomMap(Profile *profile, const int width, const int height)
 {
   this->profile = profile;
   SetSize(width, height);
-  result = Surface(Point2i(width, height), SDL_SWSURFACE|SDL_SRCALPHA, true);
+  border_size = 8;
+  result = Surface(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
   random_shape = NULL;
   bezier_shape = NULL;
   expanded_bezier_shape = NULL;
-
-  number_of_element = 0;
-  XmlReader::ReadUint(profile->doc->GetRoot(), "nb_element", number_of_element);
-  border_size = 8.0;
-  XmlReader::ReadDouble(profile->doc->GetRoot(), "border_size", border_size);
-
   // Loading resources
   border_color = resource_manager.LoadColor(profile, "border_color");
   texture = resource_manager.LoadImage(profile, "texture");
-  for(uint i = 0; i < number_of_element; i++) {
-    std::stringstream ss;
-    ss << "element_" << (i + 1);
-    element = resource_manager.LoadImage(profile, ss.str());
-    random_element_list.AddElement(&element);
-  }
+  element = resource_manager.LoadImage(profile, "element");
   element_list.clear();
 }
 
@@ -80,178 +61,152 @@ void RandomMap::SetSize(const int width, const int height)
   this->height = height;
 }
 
-void RandomMap::AddElement(const Surface * object, const Point2i& position)
+const Point2i RandomMap::GetSize()
 {
-  element_list.push_back(MapElement(*object, position));
+  return Point2i(width, height);
+}
+
+const int RandomMap::GetWidth()
+{
+  return width;
+}
+
+const int RandomMap::GetHeight()
+{
+  return height;
+}
+
+void RandomMap::AddElement(Surface & object, Point2i position)
+{
+  element_list.push_back(MapElement(object, position));
 }
 
 void RandomMap::DrawElement()
 {
-  for(std::vector<MapElement>::iterator elt = element_list.begin(); elt != element_list.end(); elt++) {
+  std::vector<MapElement>::iterator elt;
+  for(elt = element_list.begin(); elt != element_list.end(); elt++) {
     Surface & tmp = elt->GetElement();
     result.MergeSurface(tmp, elt->GetPosition() - Point2i((int)(tmp.GetWidth() / 2.0), tmp.GetHeight()));
   }
 }
 
-void RandomMap::GeneratePlatforms()
+void RandomMap::SetBorderSize(const double border)
 {
-  uint minplats = 15, maxplats = 35; /* number of platforms */
-  uint minwidth = 50, maxwidth = 500; /* platform widths */
-  uint minhei = 10, maxhei = 100; /* height */
-  uint vertchance = 10; /* % chance of the platform being vertical */
-  uint elemchance = 10; /* % chance of putting down a random element on the platform */
+  border_size = border;
+}
 
-  XmlReader::ReadUint(profile->doc->GetRoot(), "nb_platforms_min", minplats);
-  XmlReader::ReadUint(profile->doc->GetRoot(), "nb_platforms_max", maxplats);
-  if (minplats < 1)
-    minplats = 1;
-  if (maxplats < minplats)
-    maxplats = minplats;
+void RandomMap::SetBorderColor(const Color color)
+{
+  border_color = color;
+}
 
-  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_width_min", minwidth);
-  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_width_max", maxwidth);
-  if (minwidth < 2)
-    minwidth = 2;
-  if (maxwidth < minwidth)
-    maxwidth = minwidth;
+const bool RandomMap::IsOpen()
+{
+  return is_open;
+}
 
-  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_height_min", minhei);
-  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_height_max", maxhei);
-  if (minhei < 2)
-    minhei = 2;
-  if (maxhei < minhei)
-    maxhei = minhei;
-
-  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_vert_chance", vertchance);
-
-  XmlReader::ReadUint(profile->doc->GetRoot(), "platform_element_chance", elemchance);
-
-  uint nplats = Random::GetInt(minplats, maxplats);
-
+void RandomMap::Generate()
+{
+  srand(time(NULL));
+  // Computing number of island
+  number_of_island = Random::GetInt(2, 4);
+  // is_open = (Random::GetInt(0, 10) > 8); // Open ?
+  is_open = true;
+  // Initializing ground generator
+  double h = height / number_of_island;
+  double w = width / number_of_island;
+  double current_h_position = (width / 2.0) + Random::GetDouble(-w / 2, w / 2);
+  double current_v_position = (height / 2.0) + Random::GetDouble(-h / 2, h / 2);
+  double x_direction = 1.0;
+  double y_direction = 1.0;
+  AffineTransform2D translate;
   result.Fill(0);
-
-  for (uint i = 0; i < nplats; i++) {
-    double wid = Random::GetDouble(minwidth, maxwidth);
-    double hei = Random::GetDouble(minhei, maxhei);
-    if (Random::GetInt(0,99) < (int) vertchance) {
-      double tmp = wid;
-      wid = hei;
-      hei = tmp;
-    }
-    double x = Random::GetDouble(0, (width - wid));
-    double y = Random::GetDouble(0, (height - hei));
-
-    Polygon *tmp = new Polygon();
-
-    tmp->AddPoint(Point2d(x, y));
-    tmp->AddPoint(Point2d(x+wid, y));
-    tmp->AddPoint(Point2d(x+wid, y+hei));
-    tmp->AddPoint(Point2d(x, y+hei));
-
-    if (Random::GetInt(0,99) < (int)elemchance) {
-      Surface * random_element = random_element_list.GetRandomElement();
-      int dx = Random::GetInt((int)(x+10), (int)(x+wid-10));
-      int dy = (int) (y+(minhei / 2));
-      if (random_element != NULL) {
-        Surface * tmp_surf = new Surface(random_element->GetSurface());
-        AddElement(tmp_surf, Point2i(dx, dy));
-      }
-    }
-
-    bezier_shape = tmp->GetBezierInterpolation(1.0, 30, Random::GetDouble(0.0, 0.5));
-
-    // Expand
-    expanded_bezier_shape = new Polygon(*bezier_shape);
-    expanded_bezier_shape->Expand(border_size);
-
-    // Set color, texture etc.
-    bezier_shape->SetTexture(&texture);
-    bezier_shape->SetPlaneColor(border_color);
-    expanded_bezier_shape->SetPlaneColor(border_color);
-
-    // expanded_bezier_shape->ClearItem();
-    // bezier_shape->ClearItem();
+  for(int i = 0; i < number_of_island; i++) {
+    translate = AffineTransform2D::Translate(current_h_position, current_v_position);
+    // Generate Island
+    while(!GenerateIsland(Random::GetDouble(w * 0.55, w * 1.25),
+                          Random::GetDouble(h * 0.55, h * 1.25)));
+    bezier_shape->ApplyTransformation(translate);
+    expanded_bezier_shape->ApplyTransformation(translate);
     // Then draw it
     expanded_bezier_shape->Draw(&result);
     bezier_shape->Draw(&result);
-
-    tmp->SetTexture(&texture);
-    tmp->SetPlaneColor(border_color);
-
-    //  tmp->Draw(&result);
-  }
-  DrawElement();
-}
-
-void RandomMap::GenerateIsland()
-{
-  double minhei = height / Random::GetDouble(7, 5);
-  double maxhei = height / Random::GetDouble(1.5, 4);
-
-  double current_y_pos = height - Random::GetDouble(minhei, maxhei);
-  int num_of_points = Random::GetInt(5, 20);
-
-  result.Fill(0);
-
-  Polygon *tmp = new Polygon();
-
-  // +10 so it's outside the screen
-  tmp->AddPoint(Point2d(-100, height + 100));
-
-  for (int i = 1; i < num_of_points - 1; i++) {
-    current_y_pos = height - Random::GetDouble(minhei, maxhei);
-    double current_x_pos = (((double)i / (double) num_of_points) * (double)width);
-    tmp->AddPoint(Point2d(current_x_pos, current_y_pos));
-    if (Random::GetInt(0, 5) < 1) {
-      Surface * random_element = random_element_list.GetRandomElement();
-      if(random_element != NULL) {
-        Point2i position((int)current_x_pos, (int)(current_y_pos + 20.0));
-        Surface * tmp_surf = new Surface(random_element->GetSurface());
-        AddElement(tmp_surf, Point2i((int)current_x_pos, (int)(current_y_pos + 20.0)));
-        MSG_DEBUG("ground_generator.element", "Add an element in (x = %f, y = %f)", position.GetX(), position.GetY());
-      }
+    // compute a new position
+    current_h_position += x_direction * Random::GetDouble(w * 0.75, w * 1.25);
+    current_v_position += y_direction * Random::GetDouble(h * 0.75, h * 1.25);
+    if(current_h_position > width) {
+      x_direction = -x_direction;
+      current_h_position = width - (current_h_position - width);
+    } else if(current_h_position < 0) {
+      x_direction = -x_direction;
+      current_h_position = -current_h_position;
     }
+    if(current_v_position > height) {
+      y_direction = -y_direction;
+      current_v_position = height - (current_v_position - height);
+    } else if(current_v_position < 0) {
+      y_direction = -y_direction;
+      current_v_position = -current_v_position;
+    }
+    Point2d pos = bezier_shape->GetRandomUpperPoint();
+    AddElement(element, translate * Point2i((int)pos.x, (int)pos.y));
   }
-
-  tmp->AddPoint(Point2d(width + 100, height + 100));
-  tmp->AddPoint(Point2d(width / 2, height + 100));
-
-  // Get bezier interpolation
-  bezier_shape = tmp->GetBezierInterpolation(1.0, 30, Random::GetDouble(0.0, 0.5));
-  delete tmp;
-
-  // Expand
-  expanded_bezier_shape = new Polygon(*bezier_shape);
-  expanded_bezier_shape->Expand(border_size);
-
-  // Set color, texture etc.
-  bezier_shape->SetTexture(&texture);
-  bezier_shape->SetPlaneColor(border_color);
-  expanded_bezier_shape->SetPlaneColor(border_color);
-
-  // expanded_bezier_shape->ClearItem();
-  // bezier_shape->ClearItem();
-  // Then draw it
-  expanded_bezier_shape->Draw(&result);
-  bezier_shape->Draw(&result);
+  AddElement(element, Point2i(width / 2, height / 2));
+  AddElement(element, Point2i(-20, 0));
   DrawElement();
 }
 
-void RandomMap::Generate(InfoMap::Island_type generator)
+bool RandomMap::GenerateIsland(double width, double height)
 {
-  srand(time(NULL));
-  if(generator == InfoMap::RANDOM) {
-    generator = (InfoMap::Island_type) Random::GetInt(InfoMap::SINGLE_ISLAND, InfoMap::DEFAULT);
-    generator = InfoMap::PLATEFORMS;
+  int nb_of_point;
+  double x_rand_offset, y_rand_offset, coef;
+  if(random_shape) {
+    random_shape = NULL;
+    delete random_shape;
   }
-  switch (generator) {
-    case InfoMap::PLATEFORMS: GeneratePlatforms(); break;
-    case InfoMap::SINGLE_ISLAND: GenerateIsland(); break;
-    default: GenerateIsland(); break;
+  if(bezier_shape) {
+    bezier_shape = NULL;
+    delete bezier_shape;
   }
+  if(expanded_bezier_shape) {
+    expanded_bezier_shape = NULL;
+    delete expanded_bezier_shape;
+  }
+  // Generate a random shape
+  switch(Random::GetInt(DENTED_CIRCLE, ROUNDED_RECTANGLE)) {
+    case DENTED_CIRCLE:
+      nb_of_point = Random::GetInt(5, 20);
+      x_rand_offset = width / Random::GetDouble(2.0, 15.0);
+      random_shape = PolygonGenerator::GenerateDentedCircle(width, nb_of_point, x_rand_offset);
+      break;
+    case ROUNDED_RECTANGLE:
+      random_shape = PolygonGenerator::GenerateRectangle(width, height);
+      break;
+    default: case DENTED_TRAPEZE:
+      x_rand_offset = Random::GetDouble(10.0, 15.0);
+      y_rand_offset = Random::GetDouble(10.0, 15.0);
+      coef = Random::GetSign() * Random::GetDouble(0.5, 1.0);
+      random_shape = PolygonGenerator::GenerateRandomTrapeze(width, height, x_rand_offset, y_rand_offset, coef);
+      break;
+  }
+  if(random_shape->GetNbOfPoint() < 4)
+    return false;
+  bezier_shape = random_shape->GetBezierInterpolation(1.0, 20, 1.5);
+  expanded_bezier_shape = new Polygon(*bezier_shape);
+  // Expand the random, bezier shape !
+  expanded_bezier_shape->Expand(border_size);
+  // Setting texture and border color
+  bezier_shape->SetTexture(&texture);
+  expanded_bezier_shape->SetPlaneColor(border_color);
+  return true;
 }
 
 void RandomMap::SaveMap()
 {
-  result.ImgSave(Config::GetInstance()->GetPersonalDir() + ActiveMap().ReadFullMapName() + " - last random generation.png");
+  result.ImgSave(Config::GetInstance()->GetPersonalDir() + ActiveMap().ReadName() + " - last random generation.png");
+}
+
+Surface RandomMap::GetRandomMap()
+{
+  return result;
 }

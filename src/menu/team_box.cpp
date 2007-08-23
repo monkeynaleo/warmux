@@ -19,17 +19,13 @@
  *  Teams selection box
  *****************************************************************************/
 
-#include "gui/label.h"
-#include "gui/picture_widget.h"
-#include "gui/spin_button.h"
-#include "gui/text_box.h"
 #include "team_box.h"
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "team/team.h"
 #include "tool/i18n.h"
 
-TeamBox::TeamBox(const std::string& _player_name, const Rectanglei& rect) :
+TeamBox::TeamBox(std::string _player_name, const Rectanglei& rect) : 
   HBox(rect, false)
 {
   associated_team=NULL;
@@ -43,22 +39,21 @@ TeamBox::TeamBox(const std::string& _player_name, const Rectanglei& rect) :
   tmp_box->SetMargin(2);
   tmp_box->SetBorder(Point2i(0,0));
   team_name = new Label(" ", Rectanglei(0,0,rect.GetSizeX()-80,0),
-                        Font::FONT_MEDIUM, Font::FONT_BOLD,
-                        dark_gray_color, false, false);
+			Font::FONT_MEDIUM, Font::FONT_BOLD, 
+			dark_gray_color, false, false);
 
   Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetBorder(Point2i(0,0));
   tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(rect.GetSizeX()-80)-100,0),
-                                      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
+				      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
   player_name = new TextBox(_player_name, Rectanglei(0,0,100,0),
-                            Font::FONT_SMALL, Font::FONT_NORMAL);
+			    Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp_player_box->AddWidget(player_name);
-  previous_name = " ";
 
   nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),
-                                 6,1,1,10,
-                                 dark_gray_color, false);
+				 6,1,1,10,
+				 dark_gray_color, false);
 
   tmp_box->AddWidget(team_name);
   tmp_box->AddWidget(tmp_player_box);
@@ -71,13 +66,14 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
 {
   associated_team=&_team;
 
+  team_logo->SetSurface(_team.flag);
   if (!_team.IsLocal() && !_team.IsLocalAI()) {
     // translators: this is the team listing and will expand in a context like "OOo team - Remote"
     team_name->SetText(Format(_("%s Team - Remote"), _team.GetName().c_str()));
   } else {
     team_name->SetText(Format(_("%s Team"), _team.GetName().c_str()));
   }
-  team_logo->SetSurface(_team.GetFlag());
+  team_logo->SetSurface(_team.flag);
 
   if (read_team_values) {
     player_name->SetText(_team.GetPlayerName());
@@ -100,8 +96,8 @@ Team* TeamBox::GetTeam() const
 }
 
 void TeamBox::Update(const Point2i &mousePosition,
-                     const Point2i &lastMousePosition,
-                     Surface& surf)
+		     const Point2i &lastMousePosition,
+		     Surface& surf)
 {
   Box::Update(mousePosition, lastMousePosition, surf);
   if (need_redrawing) {
@@ -112,13 +108,6 @@ void TeamBox::Update(const Point2i &mousePosition,
     WidgetList::Update(mousePosition, surf);
   } else {
     Redraw(*this, surf);
-  }
-
-  if (associated_team != NULL && previous_name != player_name->GetText()) {
-    previous_name = player_name->GetText();
-    if (Network::GetInstance()->IsConnected()) {
-      ValidOptions();
-    }
   }
 
   need_redrawing = false;
@@ -132,21 +121,18 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 
     if ( !associated_team->IsLocal() && !associated_team->IsLocalAI() )
       return NULL; // it's not a local team, we can't configure it !!
-
-    if (w == nb_characters) {
+    
+    if (w == nb_characters || w == player_name) {
       if (Network::GetInstance()->IsConnected()) {
-              ValidOptions();
+      	ValidOptions();
       }
-      return w;
-    }
-    if (w == player_name) {
       return w;
     }
   }
   return NULL;
 }
 
-Widget* TeamBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
+Widget* TeamBox::Click(const Point2i &mousePosition, uint button)
 {
   return NULL;
 }
@@ -165,7 +151,7 @@ void TeamBox::ValidOptions() const
     // player or AI ?
     if (player_name->GetText() == "AI-stupid")
       associated_team->SetLocalAI();
-    else
+    else 
       associated_team->SetLocal();
 
     // send team configuration to the remote clients

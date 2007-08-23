@@ -20,83 +20,69 @@
  *****************************************************************************/
 
 #include "maps_list.h"
+#include "map.h"
 #include "game/config.h"
-#include "graphic/surface.h"
-#include "tool/resource_manager.h"
 #include "tool/debug.h"
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
-#include "tool/xml_document.h"
 #include <iostream>
-#ifdef _MSC_VER
-#  include <algorithm>
+#if !defined(WIN32) || defined(__MINGW32__)
+#include <dirent.h>
+#include <sys/stat.h>
 #endif
 
-extern const uint MAX_WIND_OBJECTS;
-
-InfoMap::InfoMap(const std::string &map_name,
-                 const std::string &directory):
-  name("not initialized"),
-  author_info("not initialized"),
-  music_playlist("ingame"),
-  m_directory(directory),
-  m_map_name(map_name),
-  img_ground(),
-  img_sky(),
-  preview(),
-  nb_mine(4),
-  nb_barrel(4),
-  is_opened(false),
-  use_water(false),
-  is_basic_info_loaded(false),
-  is_data_loaded(false),
-  random(false),
-  island_type(RANDOM),
-  res_profile(NULL)
+InfoMap::InfoMap ()
 {
+  is_data_loaded = false;
+  nb_mine = 4;
+  nb_barrel = 4;
   wind.nb_sprite = 0;
   wind.need_flip = false;
   wind.rotation_speed = 0;
+  random = false;
+  music_playlist = "ingame";
 }
 
-bool InfoMap::LoadBasicInfo()
+bool InfoMap::Init (const std::string &map_name,
+                    const std::string &directory)
 {
-  if(is_basic_info_loaded)
-    return true;
   std::string nomfich;
+
+  m_directory = directory;
+
+  res_profile = NULL;
+  is_data_loaded = false;
+
   try
-    {
-      nomfich = m_directory + "config.xml";
+  {
+    nomfich = m_directory+"config.xml";
 
-      // Load resources
-      if (!IsFileExist(nomfich))
-        return false;
-      // FIXME: not freed
-      res_profile = resource_manager.LoadXMLProfile(nomfich, true),
-      // Load preview
-      preview = resource_manager.LoadImage( res_profile, "preview");
-      // Load other informations
-      XmlReader doc;
-      is_basic_info_loaded = true;
-      if (!doc.Load(nomfich)) return false;
-      if (!ProcessXmlData(doc.GetRoot())) return false;
-    }
-
-  catch (const xmlpp::exception &e)
-    {
-      std::cout << std::endl
-                << Format(_("XML error during loading map '%s' :"), m_map_name.c_str())
-                << std::endl
-                << e.what() << std::endl;
+    // Load resources
+    if (!IsFileExist(nomfich))
       return false;
-    }
+    res_profile = resource_manager.LoadXMLProfile( nomfich, true),
+    // Load preview
+    preview = resource_manager.LoadImage( res_profile, "preview");
+    // Load other informations
+    XmlReader doc;
+    if (!doc.Load(nomfich)) return false;
+    if (!ProcessXmlData(doc.GetRoot())) return false;
+  }
+  catch (const xmlpp::exception &e)
+  {
+    std::cout << std::endl
+              << Format(_("XML error during loading map '%s' :"), map_name.c_str())
+              << std::endl
+              << e.what() << std::endl;
+    return false;
+  }
 
-  MSG_DEBUG("map.load", "Map loaded: %s", m_map_name.c_str());
+  MSG_DEBUG("map.load", "Map loaded: %s", map_name.c_str());
 
   return true;
 }
 
-bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
+bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
 {
   XmlReader::ReadBool(xml, "random", random);
   // Read author informations
@@ -169,7 +155,8 @@ void InfoMap::LoadData()
   if(!random) {
     img_ground = resource_manager.LoadImage(res_profile, "map");
   } else {
-    img_ground = resource_manager.GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
+    img_ground = resource_manager.GenerateMap(res_profile, img_sky.GetWidth(), img_sky.GetHeight());
+    //img_ground.ImgSave("/tmp/generate_" + name + ".png");
   }
 }
 
@@ -182,14 +169,12 @@ void InfoMap::FreeData()
 
 Surface InfoMap::ReadImgGround()
 {
-  LoadBasicInfo();
   LoadData();
   return img_ground;
 }
 
 Surface InfoMap::ReadImgSky()
 {
-  LoadBasicInfo();
   LoadData();
   return img_sky;
 }
@@ -212,30 +197,48 @@ MapsList::MapsList()
 
   std::cout << "o " << _("Load maps:");
 
-  const Config * config = Config::GetInstance();
+  Config * config = Config::GetInstance();
   std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "map" + PATH_SEPARATOR;
-  FolderSearch *f = OpenFolder(dirname);
-  if (f) {
-    const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) LoadOneMap(dirname, name);
-    CloseFolder(f);
+#if !defined(WIN32) || defined(__MINGW32__)
+  DIR *dir = opendir(dirname.c_str());
+  struct dirent *file;
+  if (dir != NULL) {
+    while ((file = readdir(dir)) != NULL)
+	  LoadOneMap (dirname, file->d_name);
+    closedir (dir);
   } else {
-    Error (Format(_("Unable to open maps directory (%s)!"), dirname.c_str()));
+    Error (Format(_("Unable to open maps directory (%s)!"),
+		   dirname.c_str()));
   }
+#else
+  std::string pattern = dirname + "*.*";
+  WIN32_FIND_DATA file;
+  HANDLE file_search;
+  file_search=FindFirstFile(pattern.c_str(),&file);
+  if(file_search != INVALID_HANDLE_VALUE)
+  {
+    while (FindNextFile(file_search,&file))
+	{
+	  if(file.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY)
+	    LoadOneMap(dirname,file.cFileName);
+	}
+  } else {
+    Error (Format(_("Unable to open maps directory (%s)!"),
+		   dirname.c_str()));
+  }
+  FindClose(file_search);
+#endif
 
+#if !defined(WIN32) || defined(__MINGW32__)
   // Load personal maps
-  dirname = config->GetPersonalDir() + "map" + PATH_SEPARATOR;
-  f = OpenFolder(dirname);
-  if (f) {
-    const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) LoadOneMap(dirname, name);
-    CloseFolder(f);
-  } else {
-        std::cerr << std::endl
-          << Format(_("Unable to open maps directory (%s)!"), dirname.c_str())
-          << std::endl;
+  dirname = config->GetPersonalDir() + PATH_SEPARATOR + "map";
+  dir = opendir(dirname.c_str());
+  if (dir != NULL) {
+    while ((file = readdir(dir)) != NULL)
+      LoadOneMap (dirname, file->d_name);
+    closedir (dir);
   }
-
+#endif
   std::cout << std::endl << std::endl;
 
   // On a au moins une carte ?
@@ -251,29 +254,34 @@ MapsList::MapsList()
   SelectMapByName(Config::GetInstance()->GetMapName());
 }
 
-void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
+void MapsList::LoadOneMap (const std::string &dir, const std::string &file)
 {
-  if (map_name[0] == '.') return;
+  std::string fullname = dir+file;
 
-  std::string fullname = dir + map_name;
-  if (!IsFolderExist(fullname))
-          return;
+#if !defined(WIN32) || defined(__MINGW32__)
+  struct stat stat_file;
+  if (file[0] == '.') return;
+  if (stat(fullname.c_str(), &stat_file) != 0) return;
+  if (!S_ISDIR(stat_file.st_mode)) return;
+#endif
 
-  InfoMap nv_terrain(map_name, fullname + PATH_SEPARATOR);
+  InfoMap nv_terrain;
+  bool ok = nv_terrain.Init (file, fullname + PATH_SEPARATOR);
+  if (!ok) return;
 
-  std::cout << (lst.empty()?" ":", ") << map_name;
+  std::cout << (lst.empty()?" ":", ") << file;
   std::cout.flush();
   lst.push_back(nv_terrain);
 }
 
 int MapsList::FindMapById (const std::string &id)
 {
-  // XXX Not used !?
-  //iterator terrain=lst.begin(), fin_terrain=lst.end();
-
+  iterator
+    terrain=lst.begin(),
+    fin_terrain=lst.end();
   uint i=0;
   for (; i < lst.size(); ++i)
-    if (lst[i].GetRawName() == id)
+    if (lst[i].ReadName() == id)
       return i;
   return -1;
 }
@@ -284,29 +292,28 @@ void MapsList::SelectMapByName (const std::string &nom)
 
   if (index == -1){
     index = 0;
-    if(nom != "")
-      std::cout << Format(_("! Map %s not found :-("), nom.c_str()) << std::endl;
+    std::cout << Format(_("! Map %s not found :-("), nom.c_str()) << std::endl;
   }
   SelectMapByIndex (index);
 }
 
 void MapsList::SelectMapByIndex (uint index)
 {
-  ASSERT (index < lst.size());
+  assert (index < lst.size());
   if (terrain_actif == (int)index)
     return;
 
   terrain_actif = index;
 }
 
-int MapsList::GetActiveMapIndex () const
+int MapsList::GetActiveMapIndex ()
 {
   return terrain_actif;
 }
 
 InfoMap& MapsList::ActiveMap()
 {
-  ASSERT (0 <= terrain_actif);
+  assert (0 <= terrain_actif);
   return lst.at(terrain_actif);
 }
 
@@ -317,6 +324,6 @@ InfoMap& ActiveMap()
 
 bool compareMaps(const InfoMap& a, const InfoMap& b)
 {
-  return a.GetRawName() < b.GetRawName();
+  return a.ReadName() < b.ReadName();
 }
 

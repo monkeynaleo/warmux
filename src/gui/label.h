@@ -23,11 +23,9 @@
 #define LABEL_H
 
 #include "include/base.h"
+#include "graphic/text.h"
 #include "gui/widget.h"
-#include "graphic/font.h"
 #include <string>
-
-class Text;
 
 class Label : public Widget{
   /* If you need this, implement it (correctly)*/
@@ -38,22 +36,21 @@ class Label : public Widget{
  protected:
   Text *txt_label;
   bool hidden;
+ private:
   Font::font_size_t font_size;
   Font::font_style_t font_style;
-
- private:
   const Color& font_color;
   bool center;
   bool shadowed;
 
  public:
   Label(const std::string &label,
-        const Rectanglei &rect,
-        Font::font_size_t font_size,
-        Font::font_style_t font_style,
-        const Color& color = white_color,
-        bool center = false,
-        bool shadowed = true);
+	const Rectanglei &rect,
+	Font::font_size_t font_size,
+	Font::font_style_t font_style,
+	const Color& color = white_color,
+	bool center = false,
+	bool shadowed = true);
   ~Label();
 
   void Draw (const Point2i &mousePosition, Surface& surf) const;

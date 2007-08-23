@@ -19,12 +19,9 @@
  * Anvil : appear in top of an enemy and crush down his head
  *****************************************************************************/
 
-#include "weapon_cfg.h"
 #include "anvil.h"
-#include "explosion.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
-#include "character/character.h"
 #include "game/time.h"
 #include "graphic/video.h"
 #include "interface/game_msg.h"
@@ -32,51 +29,28 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "object/objects_list.h"
-#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/math_tools.h"
+#include "weapon/explosion.h"
 //-----------------------------------------------------------------------------
-
-class Anvil : public WeaponProjectile
-{
-  private:
-    uint merge_time;
-    SoundSample falling_sound;
-  public:
-    Anvil(ExplosiveWeaponConfig& cfg,
-          WeaponLauncher * p_launcher);
-    ~Anvil();
-    void Refresh();
-
-    void PlayFallSound();
-    void PlayCollisionSound();
-    void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
-  protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj);
-    virtual void SignalGroundCollision();
-    virtual void SignalOutOfMap();
-    virtual void SignalDrowning();
-};
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,
              WeaponLauncher * p_launcher) :
   WeaponProjectile ("anvil", cfg, p_launcher)
 {
+  channel = -1;
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
 }
 
-Anvil::~Anvil()
-{
-  falling_sound.Stop(); // paranoiac sound stop
-}
-
 void Anvil::SignalObjectCollision(PhysicalObj * obj)
 {
-  merge_time = Time::GetInstance()->Read() + 5000;
-  obj->SetEnergyDelta(-200);
+  if (typeid(*obj) == typeid(Character)) {
+    Character * tmp = (Character *)(obj);
+    tmp -> SetEnergyDelta (-200);
+  }
   PlayCollisionSound();
 }
 
@@ -86,20 +60,10 @@ void Anvil::SignalGroundCollision()
   PlayCollisionSound();
 }
 
-void Anvil::SignalOutOfMap()
-{
-  falling_sound.Stop();
-}
-
-void Anvil::SignalDrowning()
-{
-  jukebox.Play("share", "sink");
-}
-
 void Anvil::Refresh()
 {
   if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
-    world.MergeSprite(GetPosition(), image);
+    world.MergeSprite(GetPosition(),image);
     Ghost();
   } else {
     WeaponProjectile::Refresh();
@@ -108,13 +72,21 @@ void Anvil::Refresh()
 
 void Anvil::PlayFallSound()
 {
-  falling_sound.Play("share", "weapon/anvil_fall", -1);
+  channel = jukebox.Play("share","weapon/anvil_fall", -1);
 }
 
 void Anvil::PlayCollisionSound()
 {
-  falling_sound.Stop();
-  jukebox.Play("share", "weapon/anvil_collision");
+  jukebox.Stop(channel);
+  jukebox.Play("share","weapon/anvil_collision");
+}
+
+std::string Anvil::GetWeaponWinString(const char *TeamName, uint items_count )
+{
+  return Format(ngettext(
+            "%s team has won %u anvil!",
+            "%s team has won %u anvils!",
+            items_count), TeamName, items_count);
 }
 
 //-----------------------------------------------------------------------------
@@ -123,7 +95,7 @@ AnvilLauncher::AnvilLauncher() :
     WeaponLauncher(WEAPON_ANVIL, "anvil_launcher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Anvil");
-  m_help = _("Howto use it : left click on target\nan ammo per turn");
+  m_help = _("Howto use it : left clic on target\nan ammo per turn");
   m_category = DUEL;
   mouse_character_selection = false;
   can_be_used_on_closed_map = false;
@@ -147,7 +119,7 @@ bool AnvilLauncher::p_Shoot ()
   projectile->SetXY(target);
   ((Anvil*)projectile)->PlayFallSound();
   lst_objects.AddObject(projectile);
-  Camera::GetInstance()->GetInstance()->FollowObject(projectile,true,true);
+  camera.FollowObject(projectile,true,true);
   projectile = NULL;
   ReloadLauncher();
 
@@ -172,13 +144,3 @@ WeaponProjectile * AnvilLauncher::GetProjectileInstance()
   return dynamic_cast<WeaponProjectile *>
       (new Anvil(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
-
-std::string AnvilLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
-{
-  return Format(ngettext(
-            "%s team has won %u anvil! Splat them all!",
-            "%s team has won %u anvils! Splat them all!",
-            items_count), TeamName, items_count);
-}
-
-

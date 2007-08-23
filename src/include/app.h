@@ -22,32 +22,33 @@
 #ifndef APP_WORMUX_H
 #define APP_WORMUX_H
 
+#include <SDL.h>
 #include <string>
 #include "base.h"
-
-class Video;
+#include "game/config.h"
+#include "graphic/video.h"
 
 class AppWormux
 {
 public:
-  Video *video;
+  Video video;
 
 private:
   static AppWormux * singleton;
 
 private:
+  void Init(int, char**);
   void InitWindow();
   void DisplayLoadingPicture();
-  void End() const;
-  void DisplayWelcomeMessage() const;
+  void InitFonts();
+  void End();
+  void DisplayWelcomeMessage();
   AppWormux();
 
 public:
-  void RefreshDisplay();
   static AppWormux * GetInstance();
-  ~AppWormux();
 
-  int Main(void);
+  int main( int argc, char ** argv );
 };
 
 #endif

@@ -29,19 +29,9 @@
 #define _RESOURCE_MANAGER_H
 
 #include <string>
-#include "graphic/surface.h"
-#include "map/maps_list.h"
-#ifdef WIN32
-   // Protects against macro definition of LoadImage when this header is included last.
-#  undef LoadImage
-#endif
-
-class Sprite;
-namespace xmlpp
-{
-  class Element;
-}
-class XmlReader;
+#include "xml_document.h"
+#include "graphic/sprite.h"
+#include "map/random_map.h"
 
 class Profile
 {
@@ -65,21 +55,19 @@ class ResourceManager
    ResourceManager();
    ~ResourceManager();
 
-   void AddDataPath(const std::string& base_path);
-   Surface LoadImage(const std::string& ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0) const;
+   void AddDataPath(std::string base_path);
+   Surface LoadImage(const std::string ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0);
 
-   Profile *LoadXMLProfile(const std::string& xml_filename, bool relative_path) const;
-   void UnLoadXMLProfile(Profile *profile) const;
+   Profile *LoadXMLProfile(const std::string xml_filename, bool relative_path);
+   void UnLoadXMLProfile(Profile *profile);
 
-   Color LoadColor(const Profile *profile, const std::string& resource_name) const;
-   int LoadInt(const Profile *profile, const std::string& resource_name) const;
-   double LoadDouble(const Profile *profile, const std::string& resource_name) const;
-   Point2i LoadPoint2i(const Profile *profile, const std::string& resource_name) const;
-   Point2d LoadPoint2d(const Profile *profile, const std::string& resource_name) const;
-   Surface LoadImage(const Profile *profile, const std::string& resource_name) const;
-   Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
-   Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height) const;
-   xmlpp::Element * GetElement(const Profile *profile, const std::string& ressource_type, const std::string& ressource_name) const;
+   Color LoadColor(const Profile *profile, const std::string resource_name);
+   Point2i LoadPoint2i(const Profile *profile, const std::string resource_name);
+   Point2d LoadPoint2d(const Profile *profile, const std::string resource_name);
+   Surface LoadImage(const Profile *profile, const std::string resource_name);
+   Sprite *LoadSprite(const Profile *profile, const std::string resource_name);
+   Surface GenerateMap(Profile *profile, const int width, const int height);
+   xmlpp::Element * GetElement(const Profile *profile, const std::string ressource_type, const std::string ressource_name);
 
  private:
    std::string base_path;

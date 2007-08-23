@@ -19,13 +19,15 @@
  * Display a text during the game, waiting for input by the user
  *****************************************************************************/
 
-#include <SDL_events.h>
 #include "question.h"
-#include "graphic/sprite.h"
+#include <SDL.h>
 #include "graphic/text.h"
+#include "graphic/font.h"
 #include "graphic/video.h"
 #include "include/app.h"
+#include "interface/interface.h"
 #include "interface/mouse.h"
+#include "map/map.h"
 #include "tool/resource_manager.h"
 
 Question::Question()
@@ -43,7 +45,7 @@ Question::~Question()
     delete text;
 }
 
-int Question::TreatsKey (const SDL_Event &event){
+int Question::TreatsKey (SDL_Event &event){
 
   // Tests the key
   choice_iterator it=choices.begin(), end=choices.end();
@@ -67,30 +69,31 @@ void Question::Draw() const
 
   if(background != NULL)
   {
-    background->Blit(app->video->window,  app->video->window.GetSize() / 2 - background->GetSize() / 2);
+    background->Blit(app->video.window,  app->video.window.GetSize() / 2 - background->GetSize() / 2);
   }
   else if (text->GetText() != "")
   {
-    uint x = app->video->window.GetWidth()/2 - text->GetWidth()/2 - 10;
-    uint y = app->video->window.GetHeight()/2 - text->GetHeight()/2 - 10;
+    uint x = app->video.window.GetWidth()/2 - text->GetWidth()/2 - 10;
+    uint y = app->video.window.GetHeight()/2 - text->GetHeight()/2 - 10;
 
-    Rectanglei rect(x, y,
-                    text->GetWidth() + 20,
-                    text->GetHeight() + 20);
-
-    AppWormux * appli = AppWormux::GetInstance();
-
-    appli->video->window.BoxColor(rect, defaultColorBox);
-    appli->video->window.RectangleColor(rect, defaultColorRect);
+    Rectanglei rect(x, y, 
+		    text->GetWidth() + 20, 
+		    text->GetHeight() + 20);
+  
+    AppWormux * app = AppWormux::GetInstance();
+    
+    app->video.window.BoxColor(rect, defaultColorBox);
+    app->video.window.RectangleColor(rect, defaultColorRect);
   }
 
   if(text->GetText() != "")
   {
-    text->DrawCenter(app->video->window.GetSize()/2);
+    text->DrawCenter(app->video.window.GetWidth()/2, 
+		     app->video.window.GetHeight()/2);
   }
 }
 
-int Question::Ask ()
+int Question::Ask () 
 {
   SDL_Event event;
 
@@ -102,15 +105,15 @@ int Question::Ask ()
   do{
     while( SDL_PollEvent( &event) ){
       if ( (event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN) &&
-           default_choice.active ){
-        answer = default_choice.value;
-        end_of_boucle = true;
+          default_choice.active ){
+	answer = default_choice.value;
+	end_of_boucle = true;
       }
 
       if (event.type == SDL_KEYUP) {
-        answer = TreatsKey(event);
-        if (answer != -1)
-          end_of_boucle = true;
+	answer = TreatsKey(event);
+	if (answer != -1) 
+	  end_of_boucle = true;
       }
     } // SDL_PollEvent
 
@@ -119,7 +122,7 @@ int Question::Ask ()
       SDL_Delay(50);
     }
 
-    AppWormux::GetInstance()->video->Flip();
+    AppWormux::GetInstance()->video.Flip();
   } while (!end_of_boucle);
 
   Mouse::GetInstance()->SetPointer(prev_pointer);
@@ -128,7 +131,7 @@ int Question::Ask ()
 }
 
 void Question::Set (const std::string &pmessage,
-                    bool default_active, int default_value,const std::string& bg_sprite)
+		    bool default_active, int default_value,const std::string& bg_sprite)
 {
   text = new Text(pmessage, white_color, Font::FONT_BIG, Font::FONT_NORMAL);
 
@@ -146,11 +149,11 @@ void Question::Set (const std::string &pmessage,
     Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
     background = new Sprite(resource_manager.LoadImage(res,bg_sprite));
     background->cache.EnableLastFrameCache();
-    background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());
+    background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
     resource_manager.UnLoadXMLProfile( res);
   }
   else
   {
-    text->SetMaxWidth(AppWormux::GetInstance()->video->window.GetWidth()/2);
+    text->SetMaxWidth(AppWormux::GetInstance()->video.window.GetWidth()/2);
   }
 }

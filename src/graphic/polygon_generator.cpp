@@ -22,7 +22,6 @@
 #include <stdlib.h>
 #include "polygon_generator.h"
 #include "tool/random.h"
-#include "tool/affine_transform.h"
 
 const int PolygonGenerator::MIN_SPACE_BETWEEN_POINT = 50;
 
@@ -112,9 +111,7 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const doub
                                                   const double coef)
 {
   double upper_width, lower_width, upper_offset, lower_offset;
-  int number_of_bottom_point, number_of_side_point;
-  // XXX Unused !?
-  // int number_of_upper_point;
+  int number_of_bottom_point, number_of_upper_point, number_of_side_point;
   Polygon * tmp = new Polygon();
   number_of_side_point = 1 + (int)Random::GetDouble((height * 0.25) / MIN_SPACE_BETWEEN_POINT,
                                      height / MIN_SPACE_BETWEEN_POINT);
@@ -129,9 +126,8 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const doub
     upper_offset = 0.0;
     lower_offset = Random::GetDouble(0.0, width - upper_width);
   }
-  // XXX Unused !?
-  //number_of_upper_point = Random::GetInt(1 + (int)((upper_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
-  //                                       (int)(upper_width / MIN_SPACE_BETWEEN_POINT));
+  number_of_upper_point = Random::GetInt(1 + (int)((upper_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
+                                         (int)(upper_width / MIN_SPACE_BETWEEN_POINT));
   number_of_bottom_point = Random::GetInt(1 + (int)((lower_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
                                           (int)((coef * lower_width) / MIN_SPACE_BETWEEN_POINT));
   tmp->AddRandomCurve(Point2d(upper_offset, 0.0), Point2d(lower_offset, height),
@@ -142,42 +138,5 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const doub
                       x_rand_offset, y_rand_offset, number_of_side_point, false, false);
   tmp->AddRandomCurve(Point2d(upper_offset + upper_width, 0.0), Point2d(upper_offset, 0.0),
                       x_rand_offset, y_rand_offset, number_of_side_point, false, false);
-  return tmp;
-}
-
-Polygon * PolygonGenerator::GeneratePie(double diameter, int nb_point, double angle, double angle_offset)
-{
-  Polygon * tmp = new Polygon();
-  AffineTransform2D trans = AffineTransform2D();
-  Point2d top;
-  for(int i = 0; i < nb_point; i++) {
-    top = Point2d(0.0, diameter / 2.0);
-    trans.SetRotation(angle_offset + ((i * angle) / nb_point));
-    tmp->AddPoint(trans * top);
-  }
-  if(angle < 2 * M_PI)
-    tmp->AddPoint(Point2d(0.0, 0.0));
-  return tmp;
-}
-
-Polygon * PolygonGenerator::GeneratePartialTorus(double diameter, double min_diameter, int nb_point, double angle, double angle_offset)
-{
-  if(diameter < min_diameter) {
-    double tmp = diameter;
-    diameter = min_diameter;
-    min_diameter = tmp;
-  }
-  Polygon * tmp = new Polygon();
-  AffineTransform2D trans = AffineTransform2D();
-  Point2d top = Point2d(0.0, diameter / 2.0);
-  for(int i = 0; i < nb_point; i++) {
-    trans.SetRotation(angle_offset + ((i * angle) / (nb_point - 1)));
-    tmp->AddPoint(trans * top);
-  }
-  top = Point2d(0.0, min_diameter / 2.0);
-  for(int i = nb_point - 1; i >= 0; i--) {
-    trans.SetRotation(angle_offset + ((i * angle) / (nb_point - 1)));
-    tmp->AddPoint(trans * top);
-  }
   return tmp;
 }

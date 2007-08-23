@@ -23,6 +23,7 @@
 #define LIST_BOX_LABEL_H
 
 #include "list_box.h"
+#include "label.h"
 
 class ListBoxWithLabel : public ListBox
 {

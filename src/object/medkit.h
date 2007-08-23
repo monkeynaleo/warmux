@@ -22,11 +22,11 @@
 #ifndef MEDKIT_H
 #define MEDKIT_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "include/base.h"
 #include "objbox.h"
-
-class Team;
-class Character;
+#include "object/physical_obj.h"
+#include "team/team.h"
 //-----------------------------------------------------------------------------
 
 class Medkit : public ObjBox//public PhysicalObj
@@ -36,11 +36,11 @@ class Medkit : public ObjBox//public PhysicalObj
     static int nbr_health;
     //static int start_life_points;
 
-    //bool parachute;
+    //bool parachute; 
     //Sprite *anim;
 
   private:
-    void ApplyMedkit (Team &team, Character &character) const;
+    void ApplyMedkit (Team &team, Character &character);
   public:
     Medkit();
     //~Medkit();
@@ -49,7 +49,7 @@ class Medkit : public ObjBox//public PhysicalObj
     //static void Enable (bool _enable);
     //static bool NewMedkit();
     //void DropMedkit();
-    static void LoadXml(const xmlpp::Element * object);
+    static void LoadXml(xmlpp::Element * object);
 
     void Draw();
     void Refresh();

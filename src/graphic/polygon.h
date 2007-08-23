@@ -23,12 +23,10 @@
 #define POLYGON_H
 
 #include <vector>
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include "tool/affine_transform.h"
+#include "surface.h"
+#include "sprite.h"
 
-// Forward declarations
-class Color;
-class AffineTransform2D;
 class Surface;
 class Sprite;
 
@@ -40,8 +38,8 @@ class PolygonBuffer {
   /*********************************************/
 
  public:
-  int16_t * vx;
-  int16_t * vy;
+  Sint16 * vx;
+  Sint16 * vy;
   int buffer_size;
   int array_size;
   PolygonBuffer();
@@ -59,31 +57,28 @@ class PolygonItem {
   /*********************************************/
 
  public:
-  typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
   typedef enum { TOP,  V_CENTERED, BOTTOM } V_align;
+  typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
  protected:
   Point2d position;
   Point2d transformed_position;
   Sprite * item;
-  H_align h_align;
   V_align v_align;
+  H_align h_align;
  protected:
   virtual Point2i GetOffsetAlignment() const;
  public:
   PolygonItem();
-  PolygonItem(PolygonItem * item);
-  PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
+  PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
   virtual ~PolygonItem();
   void SetPosition(const Point2d & pos);
   void SetAlignment(H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
-  const H_align GetHAlign() const { return h_align; }
-  const V_align GetVAlign() const { return v_align; }
   const Point2d & GetPosition() const;
   const Point2d & GetTransformedPosition() const;
   Point2i GetIntTransformedPosition() const;
   virtual bool Contains(const Point2d & p) const;
   void SetSprite(Sprite * sprite);
-  Sprite * GetSprite();
+  const Sprite * GetSprite();
   virtual void ApplyTransformation(const AffineTransform2D & trans);
   virtual void Draw(Surface * dest);
 };
@@ -111,8 +106,8 @@ class Polygon {
   Polygon operator=(const Polygon&);
  public:
   Polygon();
-  Polygon(const std::vector<Point2d>& shape);
-  Polygon(Polygon & poly);
+  Polygon(const std::vector<Point2d> shape);
+  Polygon(const Polygon & poly);
   virtual ~Polygon();
   // Point handling
   void AddPoint(const Point2d & p);
@@ -125,23 +120,22 @@ class Polygon {
   // Test
   bool IsInsidePolygon(const Point2d & point) const;
   bool IsOverlapping(const Polygon & poly) const;
-  bool IsClockWise() const;
 
   // Use to randomize a construction
   Point2d GetRandomUpperPoint();
   int GetRandomPointIndex();
 
   // Interpolation handling
-  void AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
-                      const Point2d& control2, const Point2d& anchor2,
-                      const int num_steps = 20, const bool add_first_point = true,
-                      const bool add_last_point = true);
-  void AddRandomCurve(const Point2d& start, const Point2d& end,
+  void AddBezierCurve(const Point2d anchor1, const Point2d control1,
+                             const Point2d control2, const Point2d anchor2,
+                             const int num_steps = 20, const bool add_first_point = true,
+                             const bool add_last_point = true);
+  void AddRandomCurve(const Point2d start, const Point2d end,
                       const double x_random_offset, const double y_random_offset,
                       const int num_steps, const bool add_first_point = true,
                       const bool add_last_point = true);
   Polygon * GetBezierInterpolation(double smooth_value = 1.0, int num_steps = 20, double rand = 0.0);
-  void Expand(double expand_value);
+  void Expand(const double expand_value);
 
   // Size information
   double GetWidth() const;
@@ -156,7 +150,7 @@ class Polygon {
   Rectanglei GetRectangleToRefresh() const;
 
   // Buffer of transformed point
-  PolygonBuffer * GetPolygonBuffer();
+  PolygonBuffer * GetPolygonBuffer() const;
 
   // Type of the polygon
   bool IsTextured() const;
@@ -168,7 +162,7 @@ class Polygon {
   void SetClosed();
 
   // Texture handling
-  Surface * GetTexture();
+  Surface * GetTexture() const;
   void SetTexture(Surface * texture_surface);
   // Color handling
   void SetBorderColor(const Color & color);
@@ -181,13 +175,13 @@ class Polygon {
   void DrawOnScreen();
 
   // Item management
-  void AddItem(const Sprite * sprite, const Point2d & pos,
+  void AddItem(Sprite * sprite, const Point2d & pos,
                PolygonItem::H_align h_a = PolygonItem::H_CENTERED,
                PolygonItem::V_align v_a = PolygonItem::V_CENTERED);
   void AddItem(PolygonItem * item);
   void DelItem(int index);
   std::vector<PolygonItem *> GetItem() const;
-  void ClearItem(bool free_mem = true);
+  void ClearItem();
 };
 
 #endif /* POLYGON_H */

@@ -1,12 +1,7 @@
 // Wormux resource for win32 target
 
 #include <winver.h>
-#ifdef __MINGW32__
-#  include "config.h"
-#else
-#  include "msvc/config.h"
-#endif
-
+#include "config.h"
 #if ENABLE_NLS
 #  define IS_NLS_ENABLED "yes"
 #else
@@ -14,13 +9,13 @@
 #endif
 
 1 VERSIONINFO
-FILEVERSION 0,8,1,0
-PRODUCTVERSION 0,8,1,0
+FILEVERSION 0,7,9,0
+PRODUCTVERSION 0,7,9,0
 FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
-FILEFLAGS VS_FF_DEBUG | VS_FF_SPECIALBUILD
+FILEFLAGS 0x1L
 #else
-FILEFLAGS VS_FF_SPECIALBUILD
+FILEFLAGS 0x0L
 #endif
 FILEOS VOS__WINDOWS32
 FILETYPE VFT_APP
@@ -39,11 +34,7 @@ FILETYPE VFT_APP
             VALUE "OriginalFilename", "wormux.exe"
             VALUE "ProductName", "wormux"
             VALUE "ProductVersion", PACKAGE_VERSION
-#ifdef __MINGW32__
-            VALUE "SpecialBuild", "$Revision$, build on " __DATE__ ", " __TIME__ " with compiler version " __VERSION__
-#else
-            VALUE "SpecialBuild", "$Revision$"
-#endif
+            VALUE "SpecialBuild", "Build date: " __DATE__ ", " __TIME__ " with compiler version " __VERSION__
         }
     }
     BLOCK "VarFileInfo"

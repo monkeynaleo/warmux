@@ -29,7 +29,7 @@ class AIengine
 
  public:
   static AIengine* GetInstance();
-  void Refresh() const;
+  void Refresh();
 };
 
 #endif

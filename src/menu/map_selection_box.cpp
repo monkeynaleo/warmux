@@ -20,15 +20,9 @@
  *****************************************************************************/
 
 #include "map_selection_box.h"
-#include "game/config.h"
-#include "gui/button.h"
-#include "gui/label.h"
-#include "gui/picture_widget.h"
-#include "gui/null_widget.h"
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "network/network.h"
-#include "tool/resource_manager.h"
 
 MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   HBox(rect, true), selected_map_index(0)
@@ -45,7 +39,8 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   resource_manager.UnLoadXMLProfile(res);
 
-  Box * tmp_map_box = new VBox( Rectanglei(0, 0, rect.GetSizeX()-63, 0), false);
+  Box * tmp_map_box = new VBox( Rectanglei(0, 0,
+					   rect.GetSizeX()-63, 0), false);
   tmp_map_box->SetBorder( Point2i(0,0) );
   tmp_map_box->SetMargin(0);
 
@@ -64,7 +59,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   if ( uint(tmp_map_box->GetSizeX() - 20) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX())) {
     margin = (tmp_map_box->GetSizeX() - 20 -
-              (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
+	      (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
   }
 
   if (margin < 5) {
@@ -106,6 +101,14 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   tmp_map_box->AddWidget(previews_box);
 
+  if (display_only) {
+    map_preview_before2->Disable();
+    map_preview_before->Disable();
+    map_preview_after->Disable();
+    map_preview_after2->Disable();
+  }
+
+
   // Map information
   map_name_label = new Label("Map", Rectanglei(0,0,0,0), Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_name_label);
@@ -116,73 +119,57 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   AddWidget(tmp_map_box);
 
   // Load Maps' list
-  int i = MapsList::GetInstance()->GetActiveMapIndex();
-  // If network game skip random maps
-  if(Network::GetInstance()->IsServer())
-    for(; MapsList::GetInstance()->lst[i].IsRandom(); i = (i + 1) % MapsList::GetInstance()->lst.size());
-  ChangeMap(i);
+  ChangeMap(MapsList::GetInstance()->GetActiveMapIndex());
 }
 
 void MapSelectionBox::ChangeMapDelta(int delta_index)
 {
-  ASSERT(!display_only);
+  assert(!display_only);
 
   int tmp = selected_map_index + delta_index;
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() : tmp) % MapsList::GetInstance()->lst.size();
 
   ChangeMap(tmp);
 }
 
 void MapSelectionBox::ChangeMap(int index)
 {
-  int tmp;
   if (index < 0 || index > int(MapsList::GetInstance()->lst.size() - 1)) return;
 
-  // Callback other network players
-  if(Network::GetInstance()->IsServer()) {
-    if(MapsList::GetInstance()->lst[index].IsRandom()) // Cant select random map in network mode
-      return;
-    selected_map_index = index;
-    // We need to do it here to send the right map to still not connected clients
-    // in distant_cpu::distant_cpu
-    MapsList::GetInstance()->SelectMapByIndex(index);
+  selected_map_index = index;
 
-    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
-                                                          ActiveMap().GetRawName()));
-  } else {
-    selected_map_index = index;
-  }
+  // Callback other network players
+  if(Network::GetInstance()->IsServer())
+    {
+      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
+					    MapsList::GetInstance()->lst[selected_map_index].ReadName()));
+    }
 
   // Set Map information
-  UpdateMapInfo(map_preview_selected, selected_map_index, true);
+  map_preview_selected->SetSurface(MapsList::GetInstance()->lst[selected_map_index].ReadPreview(), true);
+  map_name_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadName());
+  map_author_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadAuthorInfo());
 
   // Set previews
-  tmp = selected_map_index - 1;
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() : tmp);
-  UpdateMapInfo(map_preview_before, tmp, false);
-
-  tmp = selected_map_index - 2;
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() : tmp);
-  UpdateMapInfo(map_preview_before2, tmp, false);
-
-  UpdateMapInfo(map_preview_after,  (selected_map_index + 1) % MapsList::GetInstance()->lst.size(), false);
-  UpdateMapInfo(map_preview_after2, (selected_map_index + 2) % MapsList::GetInstance()->lst.size(), false);
-}
-
-void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, int index, bool selected)
-{
-  widget->SetSurface(MapsList::GetInstance()->lst[index].ReadPreview(), true);
-  if((display_only && !selected) || (MapsList::GetInstance()->lst[index].IsRandom() && Network::GetInstance()->IsServer()))
-    widget->Disable();
+  if (selected_map_index > 0)
+    map_preview_before->SetSurface(MapsList::GetInstance()->lst[selected_map_index-1].ReadPreview(), true);
   else
-    widget->Enable();
-  // If selected update general information
-  if(selected) {
-    map_name_label->SetText(MapsList::GetInstance()->lst[index].ReadFullMapName());
-    map_author_label->SetText(MapsList::GetInstance()->lst[index].ReadAuthorInfo());
-  }
-}
+    map_preview_before->SetNoSurface();
 
+  if (selected_map_index > 1)
+    map_preview_before2->SetSurface(MapsList::GetInstance()->lst[selected_map_index-2].ReadPreview(), true);
+  else
+    map_preview_before2->SetNoSurface();
+
+  if (selected_map_index+1 < MapsList::GetInstance()->lst.size() )
+    map_preview_after->SetSurface(MapsList::GetInstance()->lst[selected_map_index+1].ReadPreview(), true);
+  else
+    map_preview_after->SetNoSurface();
+
+  if (selected_map_index+2 < MapsList::GetInstance()->lst.size() )
+    map_preview_after2->SetSurface(MapsList::GetInstance()->lst[selected_map_index+2].ReadPreview(), true);
+  else
+    map_preview_after2->SetNoSurface();
+}
 
 Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
@@ -190,26 +177,24 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 
   if (!Contains(mousePosition)) return NULL;
 
-  if (button == SDL_BUTTON_LEFT && bt_map_minus->Contains(mousePosition)) {
-    ChangeMapDelta(-3);
-  } else if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition)) {
+  if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition) ) {
     ChangeMapDelta(-2);
-  } else if ((button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition))
-             || (button == SDL_BUTTON_WHEELUP )) {
+  } else if (   (button == SDL_BUTTON_LEFT && bt_map_minus->Contains(mousePosition))
+	     || (button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition))
+	     || (button == SDL_BUTTON_WHEELUP )) {
     ChangeMapDelta(-1);
-  } else if ((button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
-             || (button == SDL_BUTTON_WHEELDOWN)) {
+  } else if (   (button == SDL_BUTTON_LEFT && bt_map_plus->Contains(mousePosition))
+	     || (button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
+	     || (button == SDL_BUTTON_WHEELDOWN)) {
     ChangeMapDelta(+1);
   } else if (button == SDL_BUTTON_LEFT && map_preview_after2->Contains(mousePosition)) {
     ChangeMapDelta(+2);
-  } else if (button == SDL_BUTTON_LEFT && bt_map_plus->Contains(mousePosition)) {
-    ChangeMapDelta(+3);
   }
 
   return NULL;
 }
 
-Widget* MapSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
+Widget* MapSelectionBox::Click(const Point2i &mousePosition, uint button)
 {
   return NULL;
 }
@@ -220,7 +205,7 @@ void MapSelectionBox::ValidMapSelection()
 
   /* The player chose a map, save it in the main config so that this will be
    * the defaut map at next load of the game */
-  Config::GetInstance()->SetMapName(MapsList::GetInstance()->lst[selected_map_index].GetRawName());
+  Config::GetInstance()->SetMapName(MapsList::GetInstance()->lst[selected_map_index].ReadName());
 }
 
 void MapSelectionBox::ChangeMapCallback()

@@ -22,18 +22,13 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 #include <vector>
-#include "include/base.h"
 #include "weapon_menu.h"
-#include "gui/energy_bar.h"
-#include "gui/energy_bar.h"
+#include "graphic/surface.h"
+#include "graphic/sprite.h"
 #include "gui/progress_bar.h"
-
-// Forward declarations
-class Character;
-class Team;
-class Text;
-class Polygon;
-class Weapon;
+#include "include/base.h"
+#include "character/character.h"
+#include "team/team.h"
 
 #ifdef WIN32
 #undef interface
@@ -44,10 +39,9 @@ class Interface
 
 public:
   Character *character_under_cursor;
-  Weapon *weapon_under_cursor;
+  Weapon* weapon_under_cursor;
   WeaponsMenu weapons_menu;
-  Team *tmp_team;
-  Polygon * interface;
+  Team * tmp_team;
 
  private:
    /* If you need this, implement it (correctly)*/
@@ -93,8 +87,8 @@ public:
    ~Interface();
 
  public:
-   static Interface *GetInstance();
-   const WeaponsMenu &GetWeaponsMenu() const { return weapons_menu; };
+   static Interface * GetInstance();
+   WeaponsMenu & GetWeaponsMenu() { return weapons_menu; };
 
    void Reset();
    void Draw();
@@ -112,20 +106,20 @@ public:
    void EnableDisplay(bool _display);
    void Show();
    void Hide();
-   bool IsVisible() const { return display; };
+   bool IsVisible() const;
 
-   int GetWidth() const { return game_menu.GetWidth(); };
+   int GetWidth() const;
    int GetHeight() const;
    int GetMenuHeight() const;
    Point2i GetSize() const;
 
-   void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; };
+   void SetCurrentOverflyWeapon(Weapon * weapon);
    void UpdateTimer(uint utimer);
-   void UpdateWindIndicator(int wind_value) { wind_bar.UpdateValue(wind_value); };
+   void UpdateWindIndicator(int wind_value);
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
 };
 
-void AbsoluteDraw(const Surface& s, const Point2i& pos);
+void AbsoluteDraw(const Surface& s, Point2i pos);
 void HideGameInterface();
 void ShowGameInterface();
 

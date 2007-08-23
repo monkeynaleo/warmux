@@ -19,7 +19,7 @@
  * Fake Network layer for Wormux.
  *****************************************************************************/
 
-#ifndef NETWORK_LOCAL_H
+#ifndef NETWORK_LOCAL_H 
 #define NETWORK_LOCAL_H
 //-----------------------------------------------------------------------------
 #include "network.h"
@@ -32,7 +32,7 @@ public:
 
   virtual const bool IsConnected() const { return false; }
   virtual const bool IsLocal() const { return true; }
-
+  
   virtual void SendAction(Action* action);
   virtual void ReceiveActions();
 

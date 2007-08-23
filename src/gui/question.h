@@ -24,14 +24,11 @@
 #define QUESTION_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
+#include "graphic/sprite.h"
+#include "graphic/text.h"
 #include <string>
 #include <list>
-
-class Text;
-class Sprite;
-#ifndef _SDL_events_h
-union SDL_Event;
-#endif
+#include <SDL_events.h>
 
 //-----------------------------------------------------------------------------
 
@@ -67,7 +64,7 @@ class Question
     int value;
   } default_choice;
 
-  int TreatsKey (const SDL_Event &event);
+  int TreatsKey (SDL_Event &event);
 
   // Message to display
   Text * text;
@@ -77,8 +74,8 @@ public:
   ~Question();
 
   void Set(const std::string &message,
-           bool default_active,
-           int default_value,
+	   bool default_active,
+	   int default_value,
       const std::string &bg_sprite="");
   int Ask();
   void Draw() const;

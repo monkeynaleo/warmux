@@ -16,19 +16,30 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- *
+ * 
  *****************************************************************************/
 
 #ifndef RIOT_BOMB_H
 #define RIOT_BOMB_H
+#include "launcher.h"
 
-#include "weapon_launcher.h"
+// Roquette du bazooka
+class RiotBombRocket : public WeaponProjectile
+{
+public:
+  RiotBombRocket(ExplosiveWeaponConfig& cfg,
+                   WeaponLauncher * p_launcher);
+  void Refresh();
+protected:
+  void SignalOutOfMap();
+  void DoExplosion();
+};
 
 class RiotBomb : public WeaponLauncher
 {
  public:
   RiotBomb();
-  std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+  DECLARE_GETWEAPONSTRING();
  protected:
   WeaponProjectile * GetProjectileInstance();
 };

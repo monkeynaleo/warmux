@@ -20,29 +20,26 @@
  *****************************************************************************/
 
 #include "teleportation.h"
-#include "character/character.h"
 #include "character/body.h"
 #include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
+#include "graphic/effects.h"
 #include "include/action_handler.h"
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "particles/teleport_member.h"
-#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 
 Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
-                                        new WeaponConfig(),
-                                        VISIBLE_ONLY_WHEN_INACTIVE)
+					new WeaponConfig(),
+					VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Teleportation");
   m_category = MOVE;
   target_chosen = false;
-  // teleportation_anim_duration is declare in particles/teleport_member.h
-  m_time_between_each_shot = teleportation_anim_duration + 100;
 }
 
 bool Teleportation::p_Shoot ()
@@ -64,6 +61,7 @@ bool Teleportation::p_Shoot ()
 
   jukebox.Play("share", "weapon/teleport_start");
 
+  time = Time::GetInstance()->Read();
   ActiveCharacter().Hide();
   ActiveCharacter().body->MakeTeleportParticles(ActiveCharacter().GetPosition(), dst);
 
@@ -73,14 +71,27 @@ bool Teleportation::p_Shoot ()
 
 void Teleportation::Refresh()
 {
-  if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
-    Camera::GetInstance()->GetInstance()->SetXYabs(dst - Camera::GetInstance()->GetSize()/2);
+  if (!m_is_active) return;
+
+  double dt = Time::GetInstance()->Read() - time;
+
+  if(dt > teleportation_anim_duration)
+  {
+    camera.SetXYabs(dst - camera.GetSize()/2);
     ActiveCharacter().SetXY(dst);
+    m_is_active = false;
     ActiveCharacter().SetSpeed(0.0,0.0);
     ActiveCharacter().Show();
     jukebox.Play("share","weapon/teleport_end");
+    //    GameLoop::GetInstance()->interaction_enabled = true;
     return;
   }
+}
+
+void Teleportation::Draw()
+{
+  if (!m_is_active)
+    Weapon::Draw();
 }
 
 void Teleportation::p_Select()
@@ -104,7 +115,7 @@ void Teleportation::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-std::string Teleportation::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Teleportation::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u teleportation!",
@@ -113,11 +124,5 @@ std::string Teleportation::GetWeaponWinString(const char *TeamName, uint items_c
 }
 
 WeaponConfig& Teleportation::cfg()
-{
-  return static_cast<WeaponConfig&>(*extra_params);
-}
+{ return static_cast<WeaponConfig&>(*extra_params); }
 
-bool Teleportation::IsInUse() const
-{
-  return m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
-}

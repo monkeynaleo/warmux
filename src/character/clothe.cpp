@@ -18,11 +18,12 @@
  ******************************************************************************
  *****************************************************************************/
 
-#include "tool/xml_document.h"
 #include "clothe.h"
-#include "member.h"
 #include <map>
 #include <iostream>
+#include "member.h"
+#include "tool/xml_document.h"
+#include "tool/string_tools.h"
 
 Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst):
   name(),
@@ -38,7 +39,7 @@ Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
   for (; it != end; ++it)
   {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-    ASSERT (elem != NULL);
+    assert (elem != NULL);
     std::string att;
     if (!XmlReader::ReadStringAttr(elem, "name", att))
     {

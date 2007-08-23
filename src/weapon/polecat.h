@@ -22,14 +22,42 @@
 #ifndef POLECAT_H
 #define POLECAT_H
 
-#include "weapon_launcher.h"
+#include <SDL.h>
+#include "grenade.h"
+#include "weapon.h"
+#include "graphic/sprite.h"
+#include "gui/progress_bar.h"
 #include "include/base.h"
+#include "object/physical_obj.h"
+
+class PolecatFart : public WeaponProjectile
+{
+  public:
+    PolecatFart(ExplosiveWeaponConfig& cfg,
+                WeaponLauncher * p_launcher);
+};
+
+class Polecat : public WeaponProjectile
+{
+ private:
+  int m_sens;
+  int save_x, save_y;
+  uint last_fart_time;
+  double angle;
+ protected:
+  void SignalOutOfMap();
+ public:
+  Polecat(ExplosiveWeaponConfig& cfg,
+      WeaponLauncher * p_launcher);
+  void Shoot(double strength);
+  void Refresh();
+  DECLARE_GETWEAPONSTRING();
+};
 
 class PolecatLauncher : public WeaponLauncher
 {
 public:
   PolecatLauncher();
-  std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 protected:
   WeaponProjectile * GetProjectileInstance();
 };

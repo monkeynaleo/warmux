@@ -20,14 +20,13 @@
  *****************************************************************************/
 
 #include <time.h>
+#include <math.h>
 #include <stdlib.h>
 #include "randomsync.h"
 #include "network.h"
 #include "include/action_handler.h"
 
-const uint table_size = 1024; //Number of pregerated numbers
-
-static double NET_RAND_MAX = RAND_MAX; // client should use same RAND_MAX than server (bug network windows/linux)
+const uint table_size = 128; //Number of pregerated numbers
 
 RandomSync randomSync;
 
@@ -43,13 +42,12 @@ void RandomSync::Init(){
   rnd_table.clear();
 
   if  (Network::GetInstance()->IsServer()) {
-    Action a(Action::ACTION_NETWORK_RANDOM_INIT);
-    a.Push(NET_RAND_MAX);
+    Action a(Action::ACTION_NETWORK_RANDOM_CLEAR);
     Network::GetInstance()->SendAction(&a);
   }
-
+  
   //Fill the pregenerated tables:
-  for (uint i=0; i < table_size; i++)
+  for(uint i=0; i < table_size; i++)
     GenerateTable();
 }
 
@@ -71,21 +69,20 @@ void RandomSync::AddToTable(double nbr)
   rnd_table.push_back(nbr);
 }
 
-void RandomSync::SetRandMax(double rand_max)
+void RandomSync::ClearTable()
 {
-  NET_RAND_MAX = rand_max;
   rnd_table.clear();
 }
 
 double RandomSync::GetRand()
 {
-  if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
-    GenerateTable();
+  if(Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()) GenerateTable();
 
-  ASSERT(rnd_table.size()!=0);
-  if (rnd_table.size() == 0) {
-    Error("Random table is empty!\n");
-    exit(1);
+  // If the table is empty freeze until the server have sent something
+  while(rnd_table.size() == 0)
+  {
+    SDL_Delay(100);
+    ActionHandler::GetInstance()->ExecActions();
   }
 
   double nbr = rnd_table.front();
@@ -94,23 +91,23 @@ double RandomSync::GetRand()
 }
 
 bool RandomSync::GetBool(){
-  double middle = NET_RAND_MAX/2;
-  return (GetRand() <= middle);
+  int moitie = RAND_MAX/2;
+  return (GetRand() <= moitie);
 }
 
 /**
- *  Get a random number between min and max
+ *  Génère un nombre entier aléatoire compris dans [min;max]
  */
 long RandomSync::GetLong(long min, long max){
-        return min + (long)GetDouble(max - min + 1);
+	return min + (long)GetDouble(max - min + 1);
 }
 
 double RandomSync::GetDouble(double min, double max){
-        return min + GetDouble(max - min);
+	return min + GetDouble(max - min);
 }
 
 double RandomSync::GetDouble(double max){
-        return max * GetDouble();
+	return max * GetDouble();
 }
 
 /**
@@ -119,7 +116,7 @@ double RandomSync::GetDouble(double max){
  * @return A number between 0.0 and 1.0
  */
 double RandomSync::GetDouble(){
-        return 1.0*GetRand()/(NET_RAND_MAX + 1.0);
+	return 1.0*GetRand()/(RAND_MAX + 1.0);
 }
 
 /**
@@ -129,13 +126,13 @@ double RandomSync::GetDouble(){
  * @return a random point.
  */
 Point2i RandomSync::GetPoint(const Rectanglei &rect){
-        Point2i topPoint = rect.GetPosition();
-        Point2i bottomPoint = rect.GetBottomRightPoint();
+	Point2i topPoint = rect.GetPosition();
+	Point2i bottomPoint = rect.GetBottomRightPoint();
 
-        return Point2i( GetLong(topPoint.x, bottomPoint.x),
-                        GetLong(topPoint.y, bottomPoint.y) );
+	return Point2i( GetLong(topPoint.x, bottomPoint.x),
+			GetLong(topPoint.y, bottomPoint.y) );
 }
 
 Point2i RandomSync::GetPoint(const Point2i &pt){
-        return Point2i( GetLong(0, pt.x - 1), GetLong(0, pt.y - 1) );
+	return Point2i( GetLong(0, pt.x - 1), GetLong(0, pt.y - 1) );
 }

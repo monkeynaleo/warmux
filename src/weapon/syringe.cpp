@@ -19,50 +19,21 @@
  * Weapon Syringe
  *****************************************************************************/
 
-#include "explosion.h"
 #include "syringe.h"
-#include "weapon_cfg.h"
-
-#include "character/character.h"
 #include "game/game_loop.h"
-#include "sound/jukebox.h"
 #include "team/macro.h"
-#include "team/team.h"
 #include "tool/point.h"
 #include "tool/i18n.h"
-#include "tool/xml_document.h"
-
-class SyringeConfig : public WeaponConfig
-{
-  public:
-    uint range;
-    uint damage;
-    uint turns;
-    SyringeConfig();
-    void LoadXml(xmlpp::Element *elem);
-};
-
-SyringeConfig& Syringe::cfg() {
-  return static_cast<SyringeConfig&>(*extra_params);
-}
-
-SyringeConfig::SyringeConfig(){
-  range =  45;
-  turns = 10;
-  damage = 10;
-}
-
-void SyringeConfig::LoadXml(xmlpp::Element *elem){
-  WeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "range", range);
-  XmlReader::ReadUint(elem, "turns", turns);
-  XmlReader::ReadUint(elem, "damage", damage);
-}
+#include "explosion.h"
 
 Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())
 {
   m_name = _("Syringe");
   m_category = DUEL;
+}
+
+void Syringe::Draw() {
+  Weapon::Draw();
 }
 
 bool Syringe::p_Shoot (){
@@ -102,10 +73,32 @@ bool Syringe::p_Shoot (){
   return true;
 }
 
-std::string Syringe::GetWeaponWinString(const char *TeamName, uint items_count ) const
+void Syringe::Refresh(){
+  if (m_is_active)
+    m_is_active = false;
+}
+
+std::string Syringe::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u syringe!",
             "%s team has won %u syringes!",
             items_count), TeamName, items_count);
+}
+
+SyringeConfig& Syringe::cfg() {
+  return static_cast<SyringeConfig&>(*extra_params);
+}
+
+SyringeConfig::SyringeConfig(){
+  range =  45;
+  turns = 10;
+  damage = 10;
+}
+
+void SyringeConfig::LoadXml(xmlpp::Element *elem){
+  WeaponConfig::LoadXml(elem);
+  XmlReader::ReadUint(elem, "range", range);
+  XmlReader::ReadUint(elem, "turns", turns);
+  XmlReader::ReadUint(elem, "damage", damage);
 }

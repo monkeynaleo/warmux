@@ -24,29 +24,38 @@
 
 #include "weapon.h"
 
-class BlowtorchConfig;
+class BlowtorchConfig : public WeaponConfig
+{
+  public:
+    BlowtorchConfig();
+    virtual void LoadXml(xmlpp::Element* elem);
+
+    uint range;
+};
 
 class Blowtorch : public Weapon
 {
+  private:
+    uint new_timer, old_timer;
   protected:
     bool p_Shoot();
     void p_Deselect();
-    void Refresh() { };
+    void Refresh();
 
-    void RepeatShoot() const ;
+    void RepeatShoot();
   public:
     Blowtorch();
     BlowtorchConfig& cfg();
 
-    virtual void SignalTurnEnd() { p_Deselect(); };
+    virtual void SignalTurnEnd();
     virtual void ActionStopUse();
 
-    virtual void HandleKeyPressed_Shoot(bool shift);
-    virtual void HandleKeyRefreshed_Shoot(bool shift);
-    virtual void HandleKeyReleased_Shoot(bool) { NewActionWeaponStopUse(); };
-    bool IsInUse() const;
+    virtual void HandleKeyPressed_Shoot();
+    virtual void HandleKeyRefreshed_Shoot();
+    virtual void HandleKeyReleased_Shoot();
 
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+    //std::string GetWeaponWinString(const char *, uint);
+    DECLARE_GETWEAPONSTRING();
 };
 
 #endif  // __BLOWTORCH_H__

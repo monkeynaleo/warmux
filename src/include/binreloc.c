@@ -178,7 +178,6 @@ static char *
 _br_find_exe_for_symbol (const void *symbol, BrInitError *error)
 {
 #ifndef ENABLE_BINRELOC
-	(void)symbol; /* or it would be unused in this case */
 	if (error)
 		*error = BR_INIT_ERROR_DISABLED;
 	return (char *) NULL;

@@ -29,7 +29,6 @@ class Downloader
   Downloader(const Downloader&);
   const Downloader& operator=(const Downloader&);
   /**********************************************/
-  static Downloader * singleton;
 
   CURL* curl;
 public:
@@ -38,8 +37,9 @@ public:
 
   // Return true if the download was successful
   bool Get(const char* url, const char* save_as);
-  static Downloader* GetInstance();
 };
+
+extern Downloader downloader;
 
 #endif
 

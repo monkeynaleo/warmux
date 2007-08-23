@@ -19,43 +19,26 @@
  * AirHammer - Use it to dig
  *****************************************************************************/
 
-#include "airhammer.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
-
+#include "weapon/airhammer.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
-#include "character/character.h"
 #include "game/game.h"
 #include "game/game_loop.h"
 #include "game/time.h"
 #include "include/action_handler.h"
-#include "interface/game_msg.h"
 #include "map/map.h"
 #include "object/objects_list.h"
-#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/macro.h"
-#include "team/team.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
-#include "tool/xml_document.h"
+#include "interface/game_msg.h"
+#include "weapon/explosion.h"
 
 //-----------------------------------------------------------------------------
 
 const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 
 //-----------------------------------------------------------------------------
-
-class AirhammerConfig : public WeaponConfig
-{
-  public:
-    uint range;
-    uint damage;
-    AirhammerConfig();
-    void LoadXml(xmlpp::Element *elem);
-};
-
 //-----------------------------------------------------------------------------
 
 Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())
@@ -65,18 +48,21 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfi
   m_category = TOOL;
 
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
-  m_time_between_each_shot = MIN_TIME_BETWEEN_JOLT;
+  m_last_jolt = 0;
+}
+
+//-----------------------------------------------------------------------------
+
+void Airhammer::p_Deselect()
+{
+  m_is_active = false;
 }
 
 //-----------------------------------------------------------------------------
 
 bool Airhammer::p_Shoot()
 {
-  //if the sound isn't already playing, play it again.
-   select_sound.Stop();
-   if(!drill_sound.IsPlaying()) {
-    drill_sound.Play("share","weapon/airhammer", -1);
-  }
+  jukebox.Play("share","weapon/airhammer");
 
   // initiate movement ;-)
   ActiveCharacter().SetRebounding(false);
@@ -118,7 +104,7 @@ bool Airhammer::p_Shoot()
       if( character->ObjTouche(Point2i(x, y)) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        character->SetEnergyDelta(-(int)cfg().damage);
+        character->SetEnergyDelta(-cfg().damage);
         end = true;
       }
     }
@@ -129,54 +115,62 @@ bool Airhammer::p_Shoot()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::RepeatShoot() const
+void Airhammer::RepeatShoot()
 {
-  uint time = Time::GetInstance()->Read() - m_last_fire_time;
+  uint time = Time::GetInstance()->Read() - m_last_jolt;
+  uint tmp = Time::GetInstance()->Read();
 
-  if (time >= m_time_between_each_shot) {
-    NewActionWeaponShoot();
-  }
+  if (time >= MIN_TIME_BETWEEN_JOLT)
+    {
+      NewActionWeaponShoot();
+      m_last_jolt = tmp;
+    }
 }
 
 //-----------------------------------------------------------------------------
+
+void Airhammer::Refresh()
+{
+}
+
+void Airhammer::SignalTurnEnd()
+{
+  // It's too late !
+  m_is_active = false;
+}
 
 void Airhammer::ActionStopUse()
 {
   ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
+  m_is_active = false;
   GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
-  p_Deselect();
 }
 
-void Airhammer::p_Deselect()
-{
-  drill_sound.Stop();
-  select_sound.Stop();
-}
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::HandleKeyRefreshed_Shoot(bool)
+void Airhammer::HandleKeyPressed_Shoot()
+{
+  HandleKeyRefreshed_Shoot();
+}
+
+void Airhammer::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
     RepeatShoot();
   }
 }
 
-bool Airhammer::IsInUse() const
+void Airhammer::HandleKeyReleased_Shoot()
 {
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  NewActionWeaponStopUse();
 }
 
-void Airhammer::p_Select()
-{
-  select_sound.Play("share","weapon/airhammer_select",-1);
-}
-
-std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
-            "%s team has won %u airhammer! Don't make too much noise with it! Thanks, your neighbours.",
-            "%s team has won %u airhammers! Don't make too much noise with them! Thanks, your neighbours.",
+            "%s team has won %u airhammer!",
+            "%s team has won %u airhammers!",
             items_count), TeamName, items_count);
 }
 

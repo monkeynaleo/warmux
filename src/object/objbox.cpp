@@ -20,8 +20,6 @@
  *****************************************************************************/
 
 #include "objbox.h"
-#include "medkit.h"
-#include "bonus_box.h"
 #include <sstream>
 #include <iostream>
 #include "game/game_mode.h"
@@ -41,9 +39,8 @@
 #include "weapon/explosion.h"
 
 const uint SPEED = 5; // meter / seconde
-// XXX Unused !?
-// const uint NB_MAX_TRY = 20;
-// const uint SPEED_PARACHUTE = 170; // ms par image
+const uint SPEED_PARACHUTE = 170; // ms par image
+const uint NB_MAX_TRY = 20;
 
 ObjBox::ObjBox(const std::string &name)
   : PhysicalObj(name) {
@@ -54,7 +51,6 @@ ObjBox::ObjBox(const std::string &name)
   life_points = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
-  SetCollisionModel(false, false, true);
   std::cout<<"super called"<<std::endl;
 }
 
@@ -77,6 +73,11 @@ void ObjBox::SignalCollision()
   anim->Start();
 }
 
+void ObjBox::SignalDrowning()
+{
+  SignalCollision();
+}
+
 void ObjBox::DropBox()
 {
   if(parachute) {
@@ -89,7 +90,7 @@ void ObjBox::DropBox()
 }
 
 //Boxes can explode...
-void ObjBox::SignalGhostState(bool /*was_already_dead*/)
+void ObjBox::SignalGhostState(bool was_already_dead)
 {
   if(life_points > 0) return;
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
@@ -136,7 +137,7 @@ bool ObjBox::NewBox()
     delete box;
   } else {
     lst_objects.AddObject(box);
-    Camera::GetInstance()->GetInstance()->FollowObject(box, true, true);
+    camera.FollowObject(box, true, true);
     GameMessages::GetInstance()->Add (_("It's a present!"));
     GameLoop::GetInstance()->SetCurrentBox(box);
     return true;

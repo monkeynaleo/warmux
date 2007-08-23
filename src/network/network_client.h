@@ -19,7 +19,7 @@
  * Network client layer for Wormux.
  *****************************************************************************/
 
-#ifndef NETWORK_CLIENT_H
+#ifndef NETWORK_CLIENT_H 
 #define NETWORK_CLIENT_H
 //-----------------------------------------------------------------------------
 #include "network.h"
@@ -31,17 +31,17 @@ public:
   NetworkClient();
   ~NetworkClient();
 
-  //virtual const bool IsConnected() const { return true; }
+  virtual const bool IsConnected() const { return true; }
   virtual const bool IsClient() const { return true; }
-
+  
   virtual void SendChatMessage(const std::string& txt);
   virtual void ReceiveActions();
 
-  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator);
-
+  std::_List_iterator<DistantComputer*> CloseConnection(std::_List_iterator<DistantComputer*>);
+  
   // Client specific methods
-  const Network::connection_state_t ClientConnect(const std::string &host,
-                                                  const std::string& port);
+  const Network::connection_state_t ClientConnect(const std::string &host, 
+						  const std::string& port);
 };
 
 //-----------------------------------------------------------------------------

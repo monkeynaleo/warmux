@@ -19,7 +19,7 @@
  * Network server layer for Wormux.
  *****************************************************************************/
 
-#ifndef NETWORK_SERVER_H
+#ifndef NETWORK_SERVER_H 
 #define NETWORK_SERVER_H
 //-----------------------------------------------------------------------------
 #include "network.h"
@@ -33,9 +33,9 @@ public:
   NetworkServer();
   ~NetworkServer();
 
-  //virtual const bool IsConnected() const { return true; }
+  virtual const bool IsConnected() const { return true; }
   virtual const bool IsServer() const { return true; }
-
+  
   virtual void SendChatMessage(const std::string& txt);
   virtual void ReceiveActions();
 
@@ -49,7 +49,6 @@ public:
   const uint GetNbConnectedPlayers() const;
   const uint GetNbInitializedPlayers() const;
   const uint GetNbReadyPlayers() const;
-  const uint GetNbCheckedPlayers() const;
 };
 
 //-----------------------------------------------------------------------------

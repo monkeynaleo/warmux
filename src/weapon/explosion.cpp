@@ -16,13 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Useful for weapons: explode on one point
+ * Utilitaires pour les armes : applique une explosion en un point.
  *****************************************************************************/
 
 #include "explosion.h"
-#include "weapon_cfg.h"
-
-#include "character/character.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/action_handler.h"
@@ -34,23 +31,42 @@
 #include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
-#include "team/team.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
-#include "weapon.h"
-#include "object/physical_obj.h"
-#include "graphic/surface.h"
-#include "tool/resource_manager.h"
 
 Profile *weapons_res_profile = NULL;
 
+// Network explosion defined below
+void ApplyExplosion_server (const Point2i &pos,
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+		     ParticleEngine::ESmokeStyle smoke);
+
+void ApplyExplosion (const Point2i &pos,
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+		     ParticleEngine::ESmokeStyle smoke
+		     )
+{
+  if(Network::GetInstance()->IsLocal())
+    ApplyExplosion_common(pos, config, son, fire_particle, smoke);
+  else
+  if(Network::GetInstance()->IsServer())
+    ApplyExplosion_server(pos, config, son, fire_particle, smoke);
+  else
+  if(Network::GetInstance()->IsClient())
+    return;
+  // client receives explosion via the action handler
+}
+
 void ApplyExplosion_common (const Point2i &pos,
-                            const ExplosiveWeaponConfig &config,
-                            const std::string& son,
-                            bool fire_particle,
-                            ParticleEngine::ESmokeStyle smoke,
-                            std::string network_id
-                            )
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+		     ParticleEngine::ESmokeStyle smoke
+		     )
 {
   MSG_DEBUG("explosion", "explosion range : %i\n", config.explosion_range);
 
@@ -70,13 +86,10 @@ void ApplyExplosion_common (const Point2i &pos,
 #endif
 
   // Make a hole in the ground
-  if(config.explosion_range != 0)
-    world.Dig(pos, config.explosion_range);
+  world.Dig(pos, config.explosion_range);
 
   // Play a sound
-  if (son != "") {
-    jukebox.Play("share", son);
-  }
+  jukebox.Play("share", son);
 
   // Apply damage on the character.
   // Do not care about the death of the active character.
@@ -92,12 +105,7 @@ void ApplyExplosion_common (const Point2i &pos,
     if (distance <= config.explosion_range)
     {
       MSG_DEBUG("explosion", "\n*Character %s : distance= %f", ver->GetName().c_str(), distance);
-      double dmg;
-      if( config.explosion_range != 0)
-        dmg = cos(M_PI_2 * distance / (float)config.explosion_range);
-      else
-        dmg = cos(M_PI_2 * distance);
-
+      double dmg = cos(M_PI_2 * distance / config.explosion_range);
       dmg *= config.damage;
       MSG_DEBUG("explosion", "hit_point_loss energy= %i", ver->GetName().c_str(), dmg);
       ver -> SetEnergyDelta (-(int)dmg);
@@ -106,12 +114,8 @@ void ApplyExplosion_common (const Point2i &pos,
     // If the character is in the blast range, apply the blast on it !
     if (distance <= config.blast_range)
     {
-      double angle, force;
-      if(config.blast_range != 0)
-        force = cos(M_PI_2 * distance / (float)config.blast_range);
-      else
-        force = cos(M_PI_2 * distance);
-
+      double angle;
+      double force = cos(M_PI_2 * distance / config.blast_range);
       force *= config.blast_force;
 
       if ( force > highest_force )
@@ -120,7 +124,7 @@ void ApplyExplosion_common (const Point2i &pos,
         highest_force = force;
       }
 
-      if (!EqualsZero(distance))
+      if (!EgalZero(distance))
       {
         angle  = pos.ComputeAngle(ver -> GetCenter());
         if( angle > 0 )
@@ -131,60 +135,44 @@ void ApplyExplosion_common (const Point2i &pos,
 
 
       MSG_DEBUG("explosion", "force = %f", force);
-      ASSERT(ver->GetMass() != 0);
       ver->AddSpeed (force / ver->GetMass(), angle);
       ver->SignalExplosion();
     }
   }
 
   if(fastest_character != NULL)
-    Camera::GetInstance()->GetInstance()->FollowObject (fastest_character, true, true);
+    camera.FollowObject (fastest_character, true, true);
 
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(it)
    {
      PhysicalObj *obj = *it;
-
-     if (obj->GetUniqueId() == network_id) {
-       MSG_DEBUG("explosion", "!! skip blast for object %s", network_id.c_str());
-       continue; // hack to fix bug #8529
-     }
-
      if (!obj->GoesThroughWall() && !obj->IsGhost())
      {
        double distance = pos.Distance(obj->GetCenter());
        if(distance < 1.0)
          distance = 1.0;
 
-       if (distance <= (float)config.explosion_range)
+       if (distance <= config.explosion_range)
        {
-         double dmg;
-         if ( config.explosion_range != 0)
-           dmg = cos(M_PI_2 * distance / config.explosion_range);
-         else
-           dmg = cos(M_PI_2 * distance);
-
+         double dmg = cos(M_PI_2 * distance / config.explosion_range);
          dmg *= config.damage;
-         obj->SetEnergyDelta(-(int)dmg);
+         obj->AddDamage (config.damage);
        }
 
-       if (distance <= (float)config.blast_range)
+       if (distance <= config.blast_range)
        {
-         double angle, force;
-         if( config.blast_range != 0)
-           force = cos(M_PI_2 * distance / (float)config.blast_range);
-         else
-           force = cos(M_PI_2 * distance);
+         double angle;
+         double force = cos(M_PI_2 * distance / config.blast_range);
          force *= config.blast_force;
 
-         if (!EqualsZero(distance))
+         if (!EgalZero(distance))
            angle  = pos.ComputeAngle(obj->GetCenter());
          else
            angle = -M_PI_2;
 
          if(fastest_character != NULL)
-           Camera::GetInstance()->GetInstance()->FollowObject (obj, true, true);
-         ASSERT( obj->GetMass() != 0.0);
+           camera.FollowObject (obj, true, true);
          obj->AddSpeed (force / obj->GetMass(), angle);
        }
      }
@@ -197,13 +185,12 @@ void ApplyExplosion_common (const Point2i &pos,
      ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
 }
 
-void ApplyExplosion_master (const Point2i &pos,
-                            const ExplosiveWeaponConfig &config,
-                            const std::string& son,
-                            bool fire_particle,
-                            ParticleEngine::ESmokeStyle smoke,
-                            std::string network_id
-                            )
+void ApplyExplosion_server (const Point2i &pos,
+			    const ExplosiveWeaponConfig &config,
+			    const std::string& son,
+			    bool fire_particle,
+			    ParticleEngine::ESmokeStyle smoke
+			    )
 {
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
@@ -232,7 +219,7 @@ void ApplyExplosion_master (const Point2i &pos,
       // If the character is in the explosion range, apply damage on it !
       if (distance <= config.explosion_range || distance < config.blast_range)
       {
-        // clients : Place characters
+        // cliens : Place characters
         a_characters_info.StoreCharacter(team_no, char_no);
       }
     }
@@ -245,30 +232,13 @@ void ApplyExplosion_master (const Point2i &pos,
   a->Push((int)config.explosion_range);
   a->Push((int)config.particle_range);
   a->Push((int)config.damage);
-  a->Push((int)config.blast_range);
-  a->Push((int)config.blast_force);
+  a->Push(config.blast_range);
+  a->Push(config.blast_force);
   a->Push(son);
   a->Push(fire_particle);
   a->Push(smoke);
-  ASSERT(network_id.size()>0);
-  a->Push(network_id);
 
   action_handler->NewAction(a);
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
   Network::GetInstance()->SendAction(&a_sync_end);
-}
-
-
-void ApplyExplosion (const Point2i &pos,
-                     const ExplosiveWeaponConfig &config,
-                     const std::string& son,
-                     bool fire_particle,
-                     ParticleEngine::ESmokeStyle smoke,
-                     std::string network_id
-                     )
-{
-  if (Network::GetInstance()->IsLocal())
-    ApplyExplosion_common(pos, config, son, fire_particle, smoke, network_id);
-  else if (Network::GetInstance()->IsTurnMaster())
-    ApplyExplosion_master(pos, config, son, fire_particle, smoke, network_id);
 }

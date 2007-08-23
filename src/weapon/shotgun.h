@@ -22,10 +22,21 @@
 #ifndef SHOTGUN_H
 #define SHOTGUN_H
 
+#include <SDL.h>
 #include <vector>
-#include "weapon_launcher.h"
+#include "launcher.h"
 #include "include/base.h"
 #include "tool/point.h"
+
+class ShotgunBuckshot : public WeaponBullet
+{
+  public:
+    ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
+                    WeaponLauncher * p_launcher);
+    bool IsOverlapping(const PhysicalObj* obj) const;
+  protected:
+    void RandomizeShoot(double &angle,double &strength);
+};
 
 class Shotgun : public WeaponLauncher
 {
@@ -35,9 +46,9 @@ class Shotgun : public WeaponLauncher
     bool p_Shoot();
   public:
     Shotgun();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+    DECLARE_GETWEAPONSTRING();
   private:
-    void ShootSound() const;
+    void ShootSound();
 };
 
 #endif /* SHOTGUN_H */

@@ -5,6 +5,10 @@
 <section name="main_menu">
   <surface name="bg_main" file="menu//background.png" />
 
+  <surface name="skin_1" file="menu/skin01.png" />
+  <surface name="skin_2" file="menu/skin02.png" />
+  <surface name="title" file="menu/title.png" />
+
   <sprite name="button">
     <image file="menu/button.png">
       <grid pos="0,0" size="402,64" array="2,1" />
@@ -20,26 +24,13 @@
   <surface name="bg_results" file="menu/background_play.png" />
 
   <surface name="video_label" file="menu/video_label.png" />
-  <surface name="config_label" file="menu/config_label.png" />
   <surface name="audio_label" file="menu/audio_label.png" />
   <surface name="teams_label" file="menu/teams_label.png" />
   <surface name="map_label" file="menu/map_label.png" />
   <surface name="mode_label" file="menu/mode_label.png" />
 
-  <surface name="enabled" file="menu/enabled.png" />
-  <surface name="disabled_front" file="menu/disabled_front.png" />
-  <surface name="disabled_back" file="menu/disabled_back.png" />
-
-  <surface name="annulus_background" file="menu/annulus_background.png" />
-  <surface name="annulus_foreground" file="menu/annulus_foreground.png" />
-  <color name="annulus_progress_color" r="4" g="77" b="134" a="255" />
-
-  <!-- Various options -->
-  <surface name="team_number" file="menu/team_number.png" />
-
   <!-- Sound options -->
 
-  <surface name="sound_frequency" file="menu/sound_frequency.png" />
   <surface name="music_enable" file="menu/music_enable.png" />
   <surface name="sound_effects_enable" file="menu/sound_effects_enable.png" />
 
@@ -50,8 +41,6 @@
   <surface name="display_wind_particles" file="menu/display_wind_particles.png" />
   <surface name="fullscreen" file="menu/fullscreen.png" />
   <surface name="scroll_on_border" file="menu/scroll_on_border.png" />  
-  <surface name="fps" file="menu/fps.png"/>
-  <surface name="resolution" file="menu/resolution.png"/>
 
   <!-- Game mode options -->
 
@@ -92,12 +81,12 @@
   </sprite> 
   <sprite name="big_plus">
     <image file="menu/right.png">
-      <grid pos="0,0" size="20,20" array="2,1" />
+      <grid pos="0,0" size="21,21" array="2,1" />
     </image>
   </sprite> 
   <sprite name="really_big_plus">
     <image file="menu/big_right.png">
-      <grid pos="0,0" size="40,40" array="2,1" />
+      <grid pos="0,0" size="42,42" array="2,1" />
     </image>
   </sprite> 
   <sprite name="minus">
@@ -107,12 +96,12 @@
   </sprite> 
   <sprite name="big_minus">
     <image file="menu/left.png">
-      <grid pos="0,0" size="20,20" array="2,1" />
+      <grid pos="0,0" size="21,21" array="2,1" />
     </image>
   </sprite> 
   <sprite name="really_big_minus">
     <image file="menu/big_left.png">
-      <grid pos="0,0" size="40,40" array="2,1" />
+      <grid pos="0,0" size="42,42" array="2,1" />
     </image>
   </sprite> 
   <sprite name="up">
@@ -125,7 +114,17 @@
       <grid pos="0,0" size="10,5" array="1,2" />
     </image>
   </sprite> 
- </section>
+  <sprite name="arrow-right">
+    <image file="menu/arrow-right.png">
+      <grid pos="0,0" size="58,48" array="2,1" />
+    </image>
+  </sprite> 
+  <sprite name="arrow-left">
+    <image file="menu/arrow-left.png">
+      <grid pos="0,0" size="58,48" array="2,1" />
+    </image>
+  </sprite> 
+</section>
 
 <section name="credit">
   <surface name="background" file="menu/background_credits.png" />
@@ -165,6 +164,7 @@
   <color name="border_color" r="43" g="53" b="108" a="255" />
   <point name="weapons_interface_size" x="320" y="320" />
   <point name="tools_interface_size" x="160" y="320" />
+  <surface name="infinite" file="interface/infinite.png"/>
   <surface name="cross" file="interface/cross.png"/>
   <surface name="clock_background" file="interface/clock_background.png"/>
   <surface name="clock" file="interface/clock.png"/>
@@ -214,7 +214,7 @@
   </sprite>
 
   <surface name="water" file="gfx/water.png" />
-  <surface name="water_bottom" file="gfx/water_bottom.png" />
+  <surface name="fond_eau" file="gfx/water_bottom.png" />
 
 </section>
 

@@ -16,31 +16,20 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Bazooka, a simple rocket launcher
+ * Arme bazooka : projette une roquette avec un angle et une force donn�.
  *****************************************************************************/
 
 #include "bazooka.h"
 #include "explosion.h"
-#include "weapon_cfg.h"
 #include "game/config.h"
-#include "graphic/sprite.h"
+#include "game/time.h"
+#include "graphic/video.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
-
-class BazookaRocket : public WeaponProjectile
-{
-  ParticleEngine smoke_engine;
-public:
-  BazookaRocket(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
-  void Refresh();
-protected:
-  void SignalOutOfMap();
-  void SignalDrowning();
-};
 
 BazookaRocket::BazookaRocket(ExplosiveWeaponConfig& cfg,
                                  WeaponLauncher * p_launcher) :
@@ -93,7 +82,7 @@ WeaponProjectile * Bazooka::GetProjectileInstance()
       (new BazookaRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-std::string Bazooka::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Bazooka::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u bazooka!",

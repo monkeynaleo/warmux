@@ -21,61 +21,37 @@
 
 #include "parachute.h"
 #include "explosion.h"
-#include "weapon_cfg.h"
-
-#include "character/character.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/game_loop.h"
-#include "graphic/sprite.h"
 #include "interface/game_msg.h"
-#include "map/camera.h"
 #include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-#include "team/team.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
-#include "tool/xml_document.h"
-
-class ParachuteConfig : public WeaponConfig
-{
-  public:
-     double wind_factor;
-     double air_resist_factor;
-     double force_side_displacement;
-     ParachuteConfig();
-     void LoadXml(xmlpp::Element *elem);
-};
-
 
 Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConfig(), NEVER_VISIBLE)
 {
   m_name = _("Parachute");
   m_category = MOVE;
-  m_initial_nb_ammo = 2;
-  m_x_extern = 0.0;
+  m_initial_nb_ammo = 2 ;
   use_unit_on_first_shoot = false;
 
-  image = resource_manager.LoadSprite(weapons_res_profile, "parachute_sprite");
+  image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
 }
 
 void Parachute::p_Select()
 {
-  open = false;
-  closing = false;
+  m_is_active = true ;
+  open = false ;
+  closing = false ;
   image->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
 }
 
 void Parachute::p_Deselect()
 {
   ActiveCharacter().ResetConstants();
-}
-
-bool Parachute::IsInUse() const
-{
-  return GameLoop::GetInstance()->GetRemainingTime() > 0 &&
-         GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING;
+  m_is_active = false;
 }
 
 bool Parachute::p_Shoot()
@@ -86,10 +62,11 @@ bool Parachute::p_Shoot()
 
 void Parachute::Draw()
 {
-  if(open) {
-    image->Update();
-    image->Draw(ActiveCharacter().GetHandPosition() - Point2i(image->GetWidth()/2,image->GetHeight()));
-  }
+  if (open)
+    {
+      image->Update();
+      image->Draw(ActiveCharacter().GetHandPosition() - Point2i(image->GetWidth()/2,image->GetHeight()));
+    }
 }
 
 void Parachute::Refresh()
@@ -99,98 +76,63 @@ void Parachute::Refresh()
 
   ActiveCharacter().GetSpeed(speed, angle);
 
-  if(ActiveCharacter().FootsInVacuum() && speed != 0.0) { // We are falling
-    if(!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
-      if(EnoughAmmo()) { // We have enough ammo => start opening the parachute
-        UseAmmo();
-        ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
-        ActiveCharacter().SetWindFactor(cfg().wind_factor);
-        open = true;
-        image->animation.SetPlayBackward(false);
-        image->Start();
-        ActiveCharacter().SetSpeedXY(Point2d(0,0));
-        ActiveCharacter().SetMovement("parachute");
-        Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
-        Camera::GetInstance()->GetInstance()->FollowObject(&ActiveCharacter(), true, true, true);
-      }
-    }
-  } else { // We are on the ground
-    if(open) { // The parachute is opened
-      if (!closing) { // We have just hit the ground. Start closing animation
-        image->animation.SetPlayBackward(true);
-        image->animation.SetShowOnFinish(SpriteAnimation::show_blank);
-        image->Start();
-        closing = true;
-        return;
-      } else { // The parachute is closing
-        if(image->IsFinished()) {
-          // The animation is finished... We are done with the parachute
-          open = false;
-          closing = false;
-          UseAmmoUnit();
+  if (ActiveCharacter().FootsInVacuum() && speed != 0.0)
+    {
+      if (!open && (speed > GameMode::GetInstance()->safe_fall))
+      {
+        if (EnoughAmmo())
+        {
+          UseAmmo();
+          ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
+          ActiveCharacter().SetWindFactor(cfg().wind_factor);
+          open = true ;
+          image->animation.SetPlayBackward(false);
+          image->Start();
+          ActiveCharacter().SetSpeedXY(Point2d(0,0));
+          ActiveCharacter().SetMovement("parachute");
         }
       }
     }
-  }
-  // If parachute is open => character can move a little to the left or to the right
-  if(open)
-    ActiveCharacter().SetExternForce(m_x_extern, 0.0);
+  else
+    {
+      /* We are on the ground */
+      if (open)
+      {
+        /* The parachute is opened */
+        if (!closing)
+        {
+          /* We have just hit the ground. Start closing animation */
+          image->animation.SetPlayBackward(true);
+          image->animation.SetShowOnFinish(SpriteAnimation::show_blank);
+          image->Start();
+          closing = true ;
+        }
+        else
+        {/* The parachute is closing */
+          if (image->IsFinished())
+          {
+                  /* The animation is finished...
+            We are done with the parachute */
+            open = false ;
+            closing = false ;
+            UseAmmoUnit();
+          }
+        }
+      }
+    }
 }
 
-std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count ) const
+void Parachute::SignalTurnEnd()
+{
+  p_Deselect();
+}
+
+std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u parachute!",
             "%s team has won %u parachutes!",
             items_count), TeamName, items_count);
-}
-
-void Parachute::HandleKeyPressed_Shoot(bool shift)
-{
-  if(open) {
-    image->Finish();
-    open = false;
-    closing = false;
-    UseAmmoUnit();
-  } else {
-    Weapon::HandleKeyPressed_Shoot(shift);
-  }
-}
-
-void Parachute::HandleKeyPressed_MoveRight(bool shift)
-{
-  if(open) {
-    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-    m_x_extern = cfg().force_side_displacement;
-  } else {
-    Weapon::HandleKeyPressed_MoveRight(shift);
-  }
-}
-
-void Parachute::HandleKeyReleased_MoveRight(bool shift)
-{
-  if(open)
-    m_x_extern = 0.0;
-  else
-    Weapon::HandleKeyReleased_MoveRight(shift);
-}
-
-void Parachute::HandleKeyPressed_MoveLeft(bool shift)
-{
-  if(open) {
-    ActiveCharacter().SetDirection(DIRECTION_LEFT);
-    m_x_extern = -cfg().force_side_displacement;
-  } else {
-    Weapon::HandleKeyPressed_MoveLeft(shift);
-  }
-}
-
-void Parachute::HandleKeyReleased_MoveLeft(bool shift)
-{
-  if(open)
-    m_x_extern = 0.0;
-  else
-    Weapon::HandleKeyReleased_MoveLeft(shift);
 }
 
 ParachuteConfig& Parachute::cfg() {
@@ -199,13 +141,11 @@ ParachuteConfig& Parachute::cfg() {
 
 ParachuteConfig::ParachuteConfig(){
   wind_factor = 10.0;
-  air_resist_factor = 140.0;
-  force_side_displacement = 2000.0;
+  air_resist_factor = 140.0 ;
 }
 
 void ParachuteConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadDouble(elem, "wind_factor", wind_factor);
   XmlReader::ReadDouble(elem, "air_resist_factor", air_resist_factor);
-  XmlReader::ReadDouble(elem, "force_side_displacement", force_side_displacement);
 }

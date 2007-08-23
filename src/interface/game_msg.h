@@ -40,10 +40,10 @@ private:
 
 public:
   Message(const std::string &new_txt,
-          const Color &new_color,
-          Font::font_size_t font_size,
-          Font::font_style_t font_style,
-          uint _time) :
+	  const Color &new_color, 
+	  Font::font_size_t font_size,
+	  Font::font_style_t font_style,
+	  uint _time) :
     Text(new_txt, new_color, font_size, font_style),
     time(_time) {};
 
@@ -78,8 +78,7 @@ class GameMessages
   std::list<Message *> liste;
   typedef std::list<Message *>::iterator iterator;
   static GameMessages * singleton;
-  GameMessages() { };
-  ~GameMessages() { Reset(); };
+  GameMessages();
 };
 
 //-----------------------------------------------------------------------------

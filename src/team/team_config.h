@@ -22,8 +22,6 @@
 #ifndef CONFIG_TEAM_H
 #define CONFIG_TEAM_H
 
-#include <string>
-
 class ConfigTeam
 {
 public:

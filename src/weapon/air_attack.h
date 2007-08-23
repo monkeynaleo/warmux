@@ -21,18 +21,32 @@
 
 #ifndef AIR_ATTACK_H
 #define AIR_ATTACK_H
+#include "graphic/surface.h"
+#include "graphic/sprite.h"
+#include "include/base.h"
+#include "launcher.h"
 
-#include "weapon_launcher.h"
+class AirAttack;
 
-class AirAttackConfig;
-class Sprite;
-class Obus;
+class AirAttackConfig : public ExplosiveWeaponConfig
+{ 
+  public:
+    double speed;
+    uint nbr_obus; 
+  public:
+    AirAttackConfig();
+    virtual void LoadXml(xmlpp::Element *elem);
+};
+
+class Obus : public WeaponProjectile
+{
+  public:
+    Obus(AirAttackConfig& cfg);
+};
 
 class Plane : public PhysicalObj
 {
   private:
-    SoundSample flying_sound;
-
     uint nb_dropped_bombs;
     Obus * last_dropped_bomb;
 
@@ -46,10 +60,10 @@ class Plane : public PhysicalObj
     bool OnTopOfTarget() const;
     int GetDirection() const;
     void DropBomb();
+
   public:
     Plane(AirAttackConfig& cfg);
-    virtual ~Plane();
-    void Shoot(double speed, const Point2i& target);
+    void Shoot(double speed, Point2i& target);
     void Draw();
     void Refresh();
 };
@@ -59,16 +73,17 @@ class AirAttack : public Weapon
   private:
     Point2i target;
     bool target_chosen;
+    //Plane plane;
   protected:
     bool p_Shoot();
     void p_Select();
     void p_Deselect();
-    void Refresh() { };
+    void Refresh();
   public:
     AirAttack();
-    void ChooseTarget (Point2i mouse_pos);
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-    bool IsInUse() const;
+    virtual void ChooseTarget (Point2i mouse_pos);
+    DECLARE_GETWEAPONSTRING();
+
   private:
     AirAttackConfig& cfg();
 };

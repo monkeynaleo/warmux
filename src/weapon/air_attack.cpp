@@ -20,13 +20,8 @@
  *****************************************************************************/
 
 #include "air_attack.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
-
 #include <sstream>
-#include "character/character.h"
 #include "game/game_loop.h"
-#include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
 #include "interface/mouse.h"
@@ -36,46 +31,19 @@
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
-#include "tool/xml_document.h"
+#include "weapon/explosion.h"
 
 const int FORCE_X_MIN = -50;
 const uint FORCE_X_MAX = 0;
 const uint FORCE_Y_MIN = 1;
 const uint FORCE_Y_MAX = 40;
 
-// XXX Unused ?
-//const double OBUS_SPEED = 7 ;
-
-class AirAttackConfig : public ExplosiveWeaponConfig
-{
-  public:
-    double speed;
-    uint nbr_obus;
-    AirAttackConfig();
-    virtual void LoadXml(xmlpp::Element *elem);
-};
-
-class Obus : public WeaponProjectile
-{
-  private:
-    SoundSample falling_sound;
-  public:
-    Obus(AirAttackConfig& cfg);
-    virtual ~Obus();
-};
-
+const double OBUS_SPEED = 7 ;
 
 Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("air_attack_projectile", cfg, NULL)
 {
   explode_colliding_character = true;
-  falling_sound.Play("share", "weapon/aircraft_bomb_falling");
-}
-
-Obus::~Obus()
-{
-  falling_sound.Stop();
 }
 
 //-----------------------------------------------------------------------------
@@ -90,16 +58,9 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   SetSize(image->GetSize());
   obus_dx = 100;
   obus_dy = GetY() + GetHeight();
-
-  flying_sound.Play("share", "weapon/aircraft_flying");
 }
 
-Plane::~Plane()
-{
-  flying_sound.Stop();
-}
-
-void Plane::Shoot(double speed, const Point2i& target)
+void Plane::Shoot(double speed, Point2i& target)
 {
   nb_dropped_bombs = 0;
   last_dropped_bomb = NULL;
@@ -108,13 +69,13 @@ void Plane::Shoot(double speed, const Point2i& target)
   int dir = ActiveCharacter().GetDirection();
   cible_x = target.x;
   SetY(0);
-  distance_to_release =(int)(speed * sqrt(2.0 * (GetY() + target.y)));
+  distance_to_release =(int)(speed * sqrt(2 * (GetY() + target.y)));
 
   image->Scale(dir, 1);
 
   if (dir == 1) {
     speed_vector.SetValues(speed, 0);
-    SetX(-(int)image->GetWidth() + 1);
+    SetX(-image->GetWidth() + 1);
     //distance_to_release -= obus_dx;
     if(distance_to_release > cible_x) distance_to_release=0;
   } else {
@@ -126,10 +87,10 @@ void Plane::Shoot(double speed, const Point2i& target)
 
   SetSpeedXY (speed_vector);
 
-  Camera::GetInstance()->GetInstance()->FollowObject(this, true, true);
+  camera.FollowObject(this, true, true);
 
   lst_objects.AddObject(this);
-  Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
+  camera.SetCloseFollowing(true);
 }
 
 void Plane::DropBomb()
@@ -137,7 +98,8 @@ void Plane::DropBomb()
   Obus * instance = new Obus(cfg);
   instance->SetXY(Point2i(GetX(), obus_dy) );
 
-  Point2d speed_vector = GetSpeedXY();
+  Point2d speed_vector;
+  GetSpeedXY(speed_vector);
 
   int fx = randomSync.GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
@@ -152,7 +114,7 @@ void Plane::DropBomb()
   nb_dropped_bombs++;
 
   if (nb_dropped_bombs == 1)
-    Camera::GetInstance()->GetInstance()->FollowObject(instance, true, true);
+    camera.FollowObject(instance, true, true);
 
 }
 
@@ -162,7 +124,7 @@ void Plane::Refresh()
   image->Update();
   // First shoot !!
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
-  //  Camera::GetInstance()->GetInstance()->StopFollowingObj(this);
+  //  camera.StopFollowingObj(this);
     DropBomb();
     m_ignore_movements = true;
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
@@ -204,7 +166,11 @@ AirAttack::AirAttack() :
   mouse_character_selection = false;
   can_be_used_on_closed_map = false;
   target_chosen = false;
-  m_time_between_each_shot = 100;
+}
+
+void AirAttack::Refresh()
+{
+  m_is_active = false;
 }
 
 void AirAttack::ChooseTarget(Point2i mouse_pos)
@@ -222,22 +188,14 @@ bool AirAttack::p_Shoot ()
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
-  Plane * plane = new Plane(cfg());
+  Plane* plane = new Plane(cfg());
   plane->Shoot(cfg().speed, target);
-  // The plane instance is in fact added to an objects list,
-  // which will delete it for us when needed.
-
   return true;
 }
 
 void AirAttack::p_Select()
 {
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE);
-}
-
-bool AirAttack::IsInUse() const
-{
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }
 
 void AirAttack::p_Deselect()
@@ -251,7 +209,7 @@ AirAttackConfig& AirAttack::cfg()
   return static_cast<AirAttackConfig&>(*extra_params);
 }
 
-std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
             "%s team has won %u air attack!",

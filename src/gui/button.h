@@ -23,11 +23,9 @@
 #define GUI_BUTTON_H
 
 #include "include/base.h"
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 #include "widget.h"
-
-// Forward declarations
-class Sprite;
-class Profile;
 
 class Button : public Widget
 {
@@ -43,11 +41,11 @@ protected:
 
 public:
   Button (const Rectanglei &rect,
-          const Profile *res_profile, const std::string& resource_id,
-          bool img_scale = true);
+	  const Profile *res_profile, const std::string& resource_id,
+	  bool img_scale = true);
   Button (const Point2i &position,
-          const Profile *res_profile, const std::string& resource_id,
-          bool img_scale = false);
+	  const Profile *res_profile, const std::string& resource_id,
+	  bool img_scale = false);
   virtual ~Button();
 
   virtual void Draw(const Point2i &mousePosition, Surface& surf) const;

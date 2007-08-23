@@ -19,7 +19,16 @@
  * Null widget (blank) in GUI.
  *****************************************************************************/
 
-#include "gui/null_widget.h"
+#include "null_widget.h"
+
+NullWidget::NullWidget (const Rectanglei &rect) : Widget(rect){
+}
+
+NullWidget::~NullWidget(){
+}
+
+void NullWidget::Draw(const Point2i &mousePosition, Surface& surf) const{
+}
 
 void NullWidget::SetSizePosition(const Rectanglei &rect){
   StdSetSizePosition(rect);

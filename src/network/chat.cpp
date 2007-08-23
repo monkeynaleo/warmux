@@ -20,13 +20,11 @@
  * nefertum - Jon de Andres
  *****************************************************************************/
 
-#include <SDL_events.h>
 #include "chat.h"
-#include "graphic/text_list.h"
-#include "network.h"
 #include "graphic/text.h"
 #include "game/time.h"
 #include "tool/i18n.h"
+#include <string>
 
 const uint HEIGHT=15;
 const uint XPOS=25;
@@ -34,13 +32,16 @@ const uint YPOS=130;
 const uint MAXLINES=10; //Fidel's advise
 const uint MAXSECONDS=10;
 
+/*
+ * FIXME, this class leaks memory -> input and msg are not handled...
+ */
 Chat::~Chat()
 {
-  delete msg;
-  delete input;
+  delete chat;
 }
 
 Chat::Chat():
+  chat(new TextList()),
   input(NULL),
   msg(NULL),
   check_input(false),
@@ -48,21 +49,16 @@ Chat::Chat():
 {
 }
 
-void Chat::Clear()
-{
-  chat.Clear();
-}
-
 void Chat::Show()
 {
   uint now = Time::GetInstance()->ReadSec();
 
   if((now - last_time) >= MAXSECONDS){
-    chat.DeleteLine();
+    chat->DeleteLine();
     last_time = now;
   }
 
-  chat.Draw(XPOS, YPOS, HEIGHT);
+  chat->Draw(XPOS, YPOS, HEIGHT);
 
   if(check_input)
     ShowInput();
@@ -75,24 +71,22 @@ void Chat::ShowInput()
     input = new Text("", c_white);
     msg = new Text(_("Say: "), c_red);
   }
-
-  /* FIXME where do those constants come from ?*/
-  msg->DrawTopLeft(Point2i(25, 500));
-  input->DrawTopLeft(Point2i(25 + msg->GetWidth() + 5, 500));
+  input->DrawTopLeft(50,500);
+  msg->DrawTopLeft(25,500);
 }
 
-bool Chat::CheckInput() const {
+bool Chat::CheckInput(){
   return check_input;
 }
 
 void Chat::NewMessage(const std::string &msg)
 {
-  if (!chat.Size()){
+  if (!chat->Size()){
     uint now = Time::GetInstance()->ReadSec();
     last_time = now;
   }
 
-  chat.AddText(msg, MAXLINES);
+  chat->AddText(msg, MAXLINES);
 }
 
 
@@ -130,25 +124,10 @@ void Chat::HandleKey(const SDL_Event& event)
     input->Set(txt);
     break;
 
-  case SDLK_TAB:
-  case SDLK_CLEAR:
-  case SDLK_ESCAPE:
-  case SDLK_DELETE:
-  case SDLK_UP:
-  case SDLK_DOWN:
-  case SDLK_RIGHT:
-  case SDLK_LEFT:
-  case SDLK_INSERT:
-  case SDLK_HOME:
-  case SDLK_END:
-  case SDLK_PAGEUP:
-  case SDLK_PAGEDOWN:
-    break;
-
   default:
     if (kbd_event.state == 1 && key.unicode > 0){
       if(key.unicode < 0x80) { // 1 byte char
-        txt = txt + (char)key.unicode;
+	txt = txt + (char)key.unicode;
       }
       else if (key.unicode < 0x800) {// 2 byte char
         txt = txt + (char)(((key.unicode & 0x7c0) >> 6) | 0xc0);

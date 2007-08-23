@@ -20,23 +20,20 @@
  *****************************************************************************/
 
 #include "menu.h"
-#include "include/app.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
-#include "gui/button.h"
-#include "gui/box.h"
-#include "interface/mouse.h"
-#include "sound/jukebox.h"
+#include "include/app.h"
 #include "tool/resource_manager.h"
+#include "sound/jukebox.h"
 
-Menu::Menu(const std::string& bg, t_action _actions) :
+Menu::Menu(std::string bg, t_action _actions) :
   actions(_actions)
 {
   close_menu = false ;
   AppWormux * app = AppWormux::GetInstance();
 
-  uint x = app->video->window.GetWidth() / 2;
-  uint y = app->video->window.GetHeight() - 50;
+  uint x = app->video.window.GetWidth() / 2;
+  uint y = app->video.window.GetHeight() - 50;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( resource_manager.LoadImage( res, bg));
@@ -45,13 +42,13 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   b_ok = NULL;
   b_cancel = NULL;
   if (actions == vNo) {
-    actions_buttons = NULL;
+    actions_buttons = NULL;    
   } else {
 
-    actions_buttons = new HBox( Rectanglei(x, y, 1, 50), false);
+    actions_buttons = new HBox( Rectanglei(x, y, 1, 40), false);
 
     if (actions == vOk || actions == vOkCancel) {
-      b_ok = new Button( Point2i(0, 0), res, "menu/valider");
+      b_ok = new Button( Point2i(0, 0), res, "menu/valider"); 
       actions_buttons->AddWidget(b_ok);
     }
 
@@ -72,25 +69,10 @@ Menu::~Menu()
   delete background;
 }
 
-void Menu::play_ok_sound()
-{
-  jukebox.Play("share", "menu/ok");
-}
-
-void Menu::play_cancel_sound()
-{
-  jukebox.Play("share", "menu/cancel");
-}
-
-void Menu::play_error_sound()
-{
-  jukebox.Play("share", "menu/error");
-}
-
 void Menu::mouse_ok()
 {
   if (signal_ok()) {
-    play_ok_sound();
+    jukebox.Play("share", "menu/ok");
     close_menu = true;
   }
 }
@@ -98,7 +80,7 @@ void Menu::mouse_ok()
 void Menu::mouse_cancel()
 {
   if (signal_cancel()) {
-    play_cancel_sound();
+    jukebox.Play("share", "menu/cancel");
     close_menu = true;
   }
 }
@@ -111,14 +93,14 @@ bool Menu::BasicOnClickUp(const Point2i &mousePosition)
     mouse_cancel();
   else
     return false;
-
+  
   return true;
 }
 
 void Menu::key_ok()
 {
   if (signal_ok()) {
-    play_ok_sound();
+    jukebox.Play("share", "menu/ok");
     close_menu = true;
   }
 }
@@ -126,35 +108,15 @@ void Menu::key_ok()
 void Menu::key_cancel()
 {
   if (signal_cancel()) {
-    play_cancel_sound();
+    jukebox.Play("share", "menu/cancel");
     close_menu = true;
   }
 }
 
-void Menu::key_up()
-{
-  widgets.SetFocusOnPreviousWidget();
-  RedrawMenu();
-}
-
-void Menu::key_down()
-{
-  widgets.SetFocusOnNextWidget();
-  RedrawMenu();
-}
-
-void Menu::key_left()
-{
-}
-
-void Menu::key_right()
-{
-}
-
 void Menu::DrawBackground()
 {
-  background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());
-  background->Blit(AppWormux::GetInstance()->video->window, 0, 0);
+  background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
+  background->Blit(AppWormux::GetInstance()->video.window, 0, 0);
 }
 
 void Menu::Redraw(const Rectanglei& rect, Surface& surf)
@@ -168,14 +130,8 @@ void Menu::RedrawMenu()
   widgets.ForceRedraw();
 }
 
-void Menu::Run (bool skip_menu)
-{
-  if (skip_menu) {
-    signal_ok();
-    return;
-  }
-
-  Mouse::pointer_t old_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
+void Menu::Run ()
+{ 
   int x=0, y=0;
 
   close_menu = false;
@@ -187,46 +143,34 @@ void Menu::Run (bool skip_menu)
   {
     // Poll and treat events
     SDL_Event event;
-
+     
     while (SDL_PollEvent(&event))
     {
       Point2i mousePosition(event.button.x, event.button.y);
-
+	   
       if (event.type == SDL_QUIT) {
         key_cancel();
       } else if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.sym)
-          {
-          case SDLK_ESCAPE:
-            key_cancel();
-            break;
-          case SDLK_RETURN:
-            key_ok();
-            break;
-          case SDLK_UP:
-            key_up();
-            break;
-          case SDLK_DOWN:
-            key_down();
-            break;
-          case SDLK_LEFT:
-            key_left();
-            break;
-          case SDLK_RIGHT:
-            key_right();
-            break;
-          case SDLK_F10:
-            AppWormux::GetInstance()->video->ToggleFullscreen();
-            break;
-          default:
-            widgets.SendKey(event.key.keysym);
-            break;
-          }
+	  {
+	  case SDLK_ESCAPE:
+	    key_cancel();
+	    break;
+	  case SDLK_RETURN:
+	    key_ok();
+	    break;
+	  case SDLK_F10:
+	    AppWormux::GetInstance()->video.ToggleFullscreen();
+	    break;
+	  default:
+	    widgets.SendKey(event.key.keysym);
+	    break;
+	  }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
-        if (!BasicOnClickUp(mousePosition))
-          OnClickUp(mousePosition, event.button.button);
+	if (!BasicOnClickUp(mousePosition))
+	  OnClickUp(mousePosition, event.button.button);
       } else if (event.type == SDL_MOUSEBUTTONDOWN) {
-        OnClick(mousePosition, event.button.button);
+	OnClick(mousePosition, event.button.button);
       }
     }
 
@@ -235,30 +179,28 @@ void Menu::Run (bool skip_menu)
 
       SDL_GetMouseState( &x, &y );
       Point2i mousePosition(x, y);
-
+      
       Display(mousePosition);
     }
 
   } while (!close_menu);
-
-  Mouse::GetInstance()->SetPointer(old_pointer);
 }
 
 void Menu::Display(const Point2i& mousePosition)
 {
-  // to limit CPU
+  // to limit CPU  
   uint sleep_fps=0;
   uint delay = 0;
   uint start = SDL_GetTicks();
 
-  widgets.Update(mousePosition, AppWormux::GetInstance()->video->window);
+  widgets.Update(mousePosition, AppWormux::GetInstance()->video.window);
   Draw(mousePosition);
-  AppWormux::GetInstance()->video->Flip();
+  AppWormux::GetInstance()->video.Flip();
 
   // to limit CPU
-  delay = SDL_GetTicks()-start;
-  if (delay < AppWormux::GetInstance()->video->GetSleepMaxFps())
-    sleep_fps = AppWormux::GetInstance()->video->GetSleepMaxFps() - delay;
+  delay = SDL_GetTicks()-start;   
+  if (delay < 200)
+    sleep_fps = 200 - delay;
   else
     sleep_fps = 0;
   SDL_Delay(sleep_fps);

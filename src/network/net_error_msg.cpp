@@ -31,24 +31,24 @@ void DispNetworkError(Network::connection_state_t err)
   switch(err)
   {
   case Network::CONNECTED:
-    msg = _("Connected !");
-    break;
+	  msg = _("Connected !");
+	  break;
   case Network::CONN_BAD_HOST:
-    msg = _("Unable to contact host.");
-    break;
+	  msg = _("Unable to contact host.");
+	  break;
   case Network::CONN_BAD_PORT:
-    msg = _("Unable to use this port!");
-    break;
+	  msg = _("Unable to use this port!");
+	  break;
   case Network::CONN_BAD_SOCKET:
-    msg = _("Bad socket ...");
-    break;
+	  msg = _("Bad socket ...");
+	  break;
   case Network::CONN_REJECTED:
-    msg = _("The server rejected the connection.");
-    break;
+	  msg = _("The server rejected the connection.");
+	  break;
   case Network::CONN_TIMEOUT:
-    msg = _("The connection timed out. Check there is no firewall in the way!");
-    break;
-  default: ASSERT(false);
+	  msg = _("The connection timed out. Check there is no firewall in the way!");
+	  break;
+  default: assert(false);
   }
 
   question.Set(msg, 1, 0);

@@ -22,14 +22,13 @@
 #ifndef SURFACE_H
 #define SURFACE_H
 
+#include <SDL.h>
 #include <string>
 #include <list>
 #include "color.h"
 #include "include/base.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
-
-struct SDL_Surface;
 
 class Surface
 {
@@ -92,7 +91,7 @@ public:
   void GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a) const;
   Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const;
   Color GetColor(Uint32 color) const;
-  Uint32 MapColor(const Color& color) const;
+  Uint32 MapColor(Color color) const;
 
   void SetClipRect(const Rectanglei &rect);
   void Flip();
@@ -103,9 +102,6 @@ public:
   int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
-  int FilledCircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
-  int PieColor(const uint &x, const uint &y, const uint &rad, const int &start, const int &end, const Color &color);
-  int FilledPieColor(const uint &x, const uint &y, const uint &rad, const int &start, const int &end, const Color &color);
   int AAPolygonColor(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color);
   int AAPolygonColor(std::list<Point2i> polygon, const Color & color);
   int FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color);
@@ -118,13 +114,13 @@ public:
   int FillRect(const Rectanglei &dstRect, Uint32 color) const;
   int FillRect(const Rectanglei &dstRect, const Color &color) const;
 
-  int ImgLoad(const std::string& filename);
-  int ImgSave(const std::string& filename);
+  int ImgLoad(std::string filename);
+  int ImgSave(std::string filename);
   Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
-  Uint32 GetPixel(int x, int y) const;
-  void PutPixel(int x, int y, Uint32 pixel) const;
+  Uint32 GetPixel(int x, int y);
+  void PutPixel(int x, int y, Uint32 pixel);
 
   bool IsNull() const;
   Point2i GetSize() const;

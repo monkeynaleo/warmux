@@ -22,33 +22,64 @@
 #ifndef SUPERTUX_H
 #define SUPERTUX_H
 
-#include "weapon_launcher.h"
-#include "particles/particle.h"
+#include "launcher.h"
+#include "graphic/surface.h"
+#include "gui/progress_bar.h"
+#include "include/base.h"
+#include "object/physical_obj.h"
 
-class SuperTux;
+class TuxLauncher;
 
-class SuperTuxWeaponConfig;
+class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
+{
+  public:
+    uint speed;
+    SuperTuxWeaponConfig();
+    virtual void LoadXml(xmlpp::Element *elem);
+};
+
+class SuperTux : public WeaponProjectile
+{
+  private:
+    ParticleEngine particle_engine;
+    double angle_rad;
+    int sound_channel;
+
+  public:
+    uint speed;
+    uint time_now;
+    uint time_next_action;
+    uint last_move;
+
+    SuperTux(SuperTuxWeaponConfig& cfg,
+             WeaponLauncher * p_launcher);
+    void Refresh();
+
+    inline void SetAngle(double angle) {angle_rad = angle;}
+    void turn_left();
+    void turn_right();
+    void Shoot(double strength);
+    virtual void Explosion();
+  protected:
+    void SignalOutOfMap();
+};
 
 class TuxLauncher : public WeaponLauncher
 {
   private:
     SuperTux * current_tux;
   public:
-    TuxLauncher();
-    void EndOfTurn() const; // should be called only by SuperTux
-    bool IsInUse() const;
+    TuxLauncher(); 
+    void EndOfTurn(); // should be called only by SuperTux
 
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-
-    void SignalEndOfProjectile();
-    void HandleKeyPressed_MoveRight(bool shift);
-    void HandleKeyRefreshed_MoveRight(bool shift);
-    void HandleKeyReleased_MoveRight(bool shift);
-    void HandleKeyPressed_MoveLeft(bool shift);
-    void HandleKeyRefreshed_MoveLeft(bool shift);
-    void HandleKeyReleased_MoveLeft(bool shift);
-
-    void RefreshFromNetwork(double angle, Point2d pos);
+    virtual void HandleKeyPressed_MoveRight();
+    virtual void HandleKeyRefreshed_MoveRight();
+    virtual void HandleKeyReleased_MoveRight();
+    
+    virtual void HandleKeyPressed_MoveLeft();
+    virtual void HandleKeyRefreshed_MoveLeft();
+    virtual void HandleKeyReleased_MoveLeft();
+    DECLARE_GETWEAPONSTRING();
 
   protected:
     WeaponProjectile * GetProjectileInstance();

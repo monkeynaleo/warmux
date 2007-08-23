@@ -23,6 +23,7 @@
 #define WIDGET_LIST_H
 
 #include <list>
+#include <SDL_keyboard.h>
 #include "widget.h"
 #include "container.h"
 
@@ -36,8 +37,6 @@ private:
 
   Point2i lastMousePosition;
   Widget* last_clicked;
-  Widget* keyboard_selection;
-  Widget* mouse_selection;
 
 protected:
   std::list<Widget*> widget_list;
@@ -54,17 +53,14 @@ public:
   virtual void SendKey(SDL_keysym key);
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
-  virtual void Draw(const Point2i&, Surface&) const { };
+  virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
 
   // needed to implements Widget
-  virtual void SetSizePosition(const Rectanglei &/*rect*/) {};
+  virtual void SetSizePosition(const Rectanglei &rect) {};
 
   // to add a widget
   virtual void AddWidget(Widget*);
-  // Navigate between widget
-  virtual void SetFocusOnNextWidget();
-  virtual void SetFocusOnPreviousWidget();
-  Widget * GetCurrentSelectedWidget() const { return keyboard_selection; };
+
   // redraw bottom layer container
   virtual void Redraw(const Rectanglei& rect, Surface& surf);
 

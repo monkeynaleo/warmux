@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!ELEMENT objects_physics (
-          character,bonus_box,medkit,barrel,anvil,
+          character,bonus_box,barrel,anvil,
           wind_particle,smoke_particle,polecat_fart_particle,fire_particle,explosion_smoke_particle,
           dark_smoke,star_particle,magic_star_particle,bullet_particle, ground_particle,
           body_member_particle,teleport_member_particle,
@@ -15,7 +15,6 @@
 
 <!ELEMENT character (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 <!ELEMENT bonus_box (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
-<!ELEMENT medkit (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 <!ELEMENT barrel (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 <!ELEMENT anvil (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 

@@ -23,8 +23,8 @@
 #define WATER_H
 
 #include <vector>
-#include "include/base.h"
 #include "graphic/surface.h"
+#include "include/base.h"
 
 const uint WATER_INITIAL_HEIGHT = 100;
 #define pattern_width 180
@@ -40,15 +40,13 @@ private:
   int height[pattern_width];
   Surface surface;
   Surface pattern;
-  Surface bottom;
-  Surface wpattern;
 public:
   void Init();
   void Reset();
   void Free();
   void Refresh();
   void Draw();
-  bool IsActive() const { return actif; }
-  int GetHeight(int x) const;
+  bool IsActive();
+  int GetHeight(int x);
 };
 #endif

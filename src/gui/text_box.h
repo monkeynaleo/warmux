@@ -22,23 +22,21 @@
 #ifndef TEXT_BOX_H
 #define TEXT_BOX_H
 
+#include <SDL_keyboard.h>
 #include "label.h"
-
-// Forward declaration
-struct SDL_keysym;
 
 class TextBox : public Label
 {
 protected:
   std::string::size_type cursor_pos;
 public:
-  TextBox(const std::string &label,
-          const Rectanglei &rect,
-          Font::font_size_t fsize,
-          Font::font_style_t fstyle);
-  ~TextBox() { };
+  TextBox(const std::string &label, 
+	  const Rectanglei &rect, 
+	  Font::font_size_t fsize,
+	  Font::font_style_t fstyle);
+  ~TextBox();
 
-  void SendKey(const SDL_keysym& key);
+  void SendKey(SDL_keysym key);
   void Draw(const Point2i &mousePosition, Surface& surf) const;
   void SetText(std::string const &new_txt);
   void SetCursor(std::string::size_type pos);

@@ -30,9 +30,7 @@ DamageStatistics::DamageStatistics(const Character& _owner) :
   damage_friendly_fire(0),
   damage_itself(0),
   max_damage(0),
-  current_total_damage(0),
-  total_shots(0),
-  death_time(0) // If not initialized, undead ?
+  current_total_damage(0)
 {}
 
 DamageStatistics::DamageStatistics(const DamageStatistics& adamage_stats, const Character& _owner) :
@@ -41,9 +39,7 @@ DamageStatistics::DamageStatistics(const DamageStatistics& adamage_stats, const 
   damage_friendly_fire(adamage_stats.damage_friendly_fire),
   damage_itself(adamage_stats.damage_itself),
   max_damage(adamage_stats.max_damage),
-  current_total_damage(adamage_stats.current_total_damage),
-  total_shots(adamage_stats.total_shots),
-  death_time(adamage_stats.death_time) // XXX: May not be correct
+  current_total_damage(adamage_stats.current_total_damage)
 {}
 
 void DamageStatistics::ResetDamage()
@@ -53,7 +49,6 @@ void DamageStatistics::ResetDamage()
   damage_itself = 0;
   max_damage = 0;
   current_total_damage = 0;
-  total_shots = 0;
 }
 
 void DamageStatistics::HandleMostDamage()
@@ -69,14 +64,11 @@ void DamageStatistics::HandleMostDamage()
 
 void DamageStatistics::MadeDamage(const int Dmg, const Character &other)
 {
-  if (Dmg < 0) // the character have win energy with a bonus box for instance
-    return;
-
   if (owner.GetTeam().IsSameAs(other.GetTeam()))
   {
     if (owner.IsSameAs(other))
       damage_itself += Dmg;
-    else
+    else 
       damage_friendly_fire += Dmg;
   }
   else

@@ -24,11 +24,11 @@
 
 #include <string>
 #include <vector>
+#include <SDL.h>
 #include "widget.h"
+#include "button.h"
 #include "label.h"
 #include "include/base.h"
-
-class Button;
 
 class ListBoxItem : public Label
 {
@@ -37,13 +37,13 @@ private:
 
 public:
   ListBoxItem(const std::string& _label,
-              Font::font_size_t font_size,
-              Font::font_style_t font_style,
-              const std::string& value,
-              const Color& color = white_color);
+	      Font::font_size_t font_size,
+	      Font::font_style_t font_style,
+	      const std::string& value,
+	      const Color& color = white_color);
 
   const std::string& GetLabel() const;
-  const std::string& GetValue() const { return value; };
+  const std::string& GetValue() const;
 };
 
 class ListBox : public Widget
@@ -53,6 +53,7 @@ class ListBox : public Widget
   ListBox operator=(const ListBox&);
   /*********************************************/
 
+private:
   bool always_one_selected;
 
   bool scrolling;
@@ -74,35 +75,35 @@ protected:
   Color default_item_color;
 
 public:
-  void SetBorderColor(const Color & border) { border_color = border; };
-  void SetBackgroundColor(const Color & background) { background_color = background; };
-  void SetSelectedItemColor(const Color & selected_item) { selected_item_color = selected_item; };
-  void SetDefaultItemColor(const Color & default_item) { default_item_color = default_item; };
+  void SetBorderColor(const Color & border);
+  void SetBackgroundColor(const Color & background);
+  void SetSelectedItemColor(const Color & selected_item);
+  void SetDefaultItemColor(const Color & default_item);
 
   ListBox (const Rectanglei &rect, bool always_one_selected_b = true);
   ~ListBox();
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
   void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition,
-              Surface& surf);
+	      const Point2i &lastMousePosition,
+	      Surface& surf);
 
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
   void AddItem(bool selected, const std::string &label,
-               const std::string &value,
-               Font::font_size_t fsize = Font::FONT_SMALL,
-               Font::font_style_t fstyle = Font::FONT_NORMAL,
-               const Color& color = white_color);
-  void Sort() const;
+	       const std::string &value,
+	       Font::font_size_t fsize = Font::FONT_SMALL,
+	       Font::font_style_t fstyle = Font::FONT_NORMAL,
+	       const Color& color = white_color);
+  void Sort();
 
   int MouseIsOnWhichItem(const Point2i &mousePosition) const;
 
   void Select(uint index);
   void Select(const std::string& val);
-  int GetSelectedItem() const { return selected_item; };
+  int GetSelectedItem() const;
   void Deselect();
   void RemoveSelected();
   const std::string& ReadLabel() const;
@@ -110,7 +111,7 @@ public:
   const int ReadIntValue() const;
   const std::string& ReadValue(int index) const;
 
-  uint Size() const { return m_items.size(); };
+  uint Size() const;
 };
 
 #endif

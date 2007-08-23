@@ -23,15 +23,9 @@
 #ifndef CHAT_H
 #define CHAT_H
 
-#include <string>
-#include "include/base.h"
+#include <SDL.h>
 #include "graphic/text_list.h"
-
-// Forward declarations
-class Text;
-#ifndef _SDL_events_h
-union SDL_Event;
-#endif
+#include "network.h"
 
 class Chat
 {
@@ -41,7 +35,7 @@ class Chat
   const Chat& operator=(const Chat&);
   /*********************************************/
 
-  TextList chat;
+  TextList* chat;
   Text* input;
   Text* msg;
 
@@ -53,8 +47,8 @@ class Chat
   ~Chat();
   void Show();
   void ShowInput();
-  bool CheckInput() const;
-  void Clear();
+  bool CheckInput();
+  void Reset();
   void NewMessage(const std::string& msg);
   void HandleKey(const SDL_Event& event);
 };

@@ -21,23 +21,25 @@
 
 #include "interface.h"
 #include "mouse.h"
-#include "character/character.h"
+#include <iostream>
+#include <SDL.h>
+#include <sstream>
 #include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
-#include "graphic/text.h"
-#include "graphic/sprite.h"
+#include "graphic/colors.h"
 #include "graphic/video.h"
+#include "graphic/font.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
+#include "team/teams_list.h"
 #include "team/macro.h"
-#include "team/team.h"
-#include "tool/resource_manager.h"
+#include "tool/debug.h"
 #include "tool/string_tools.h"
 #include "tool/i18n.h"
-#include "weapon/weapon.h"
-#include "weapon/weapon_strength_bar.h"
+#include "tool/resource_manager.h"
+#include "weapon/weapons_list.h"
 
 WeaponStrengthBar weapon_strength_bar;
 
@@ -91,9 +93,8 @@ Interface::Interface()
 
   Color text_color = resource_manager.LoadColor(res, "interface/text_color");
   Color energy_text_color = resource_manager.LoadColor(res, "interface/energy_text_color");
-  // XXX Unused !?
-  // Color turn_timer_text_color = resource_manager.LoadColor(res, "interface/turn_timer_text_color");
-  // Color global_clock_text_color = resource_manager.LoadColor(res, "interface/global_clock_text_color");
+  Color turn_timer_text_color = resource_manager.LoadColor(res, "interface/turn_timer_text_color");
+  Color global_clock_text_color = resource_manager.LoadColor(res, "interface/global_clock_text_color");
 
   global_timer = new Text(ulong2str(0), gray_color, Font::FONT_BIG, Font::FONT_NORMAL, false);
   timer = new Text(ulong2str(0), black_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
@@ -133,22 +134,18 @@ void Interface::Reset()
 void Interface::DrawCharacterInfo()
 {
   AppWormux * app = AppWormux::GetInstance();
-  // XXX Not used !?
-  // Point2i pos = (app->video->window.GetSize() - GetSize()) * Point2d(0.5, 1);
+  Point2i pos = (app->video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
 
   // Get the character
   if (character_under_cursor == NULL) character_under_cursor = &ActiveCharacter();
 
   // Display energy bar
-  Point2i energy_bar_offset = BORDER_POSITION + Point2i(MARGIN + character_under_cursor->GetTeam().GetFlag().GetWidth(),
-                                                        character_under_cursor->GetTeam().GetFlag().GetHeight() / 2);
+  Point2i energy_bar_offset = BORDER_POSITION + Point2i(MARGIN + character_under_cursor->GetTeam().flag.GetWidth(),
+                                                        character_under_cursor->GetTeam().flag.GetHeight() / 2);
   energy_bar.DrawXY(bottom_bar_pos + energy_bar_offset);
 
   // Display team logo
-  if(energy_bar.GetCurrentValue() == energy_bar.GetMinValue())
-    app->video->window.Blit(character_under_cursor->GetTeam().GetDeathFlag(), bottom_bar_pos + BORDER_POSITION);
-  else
-    app->video->window.Blit(character_under_cursor->GetTeam().GetFlag(), bottom_bar_pos + BORDER_POSITION);
+  app->video.window.Blit(character_under_cursor->GetTeam().flag, bottom_bar_pos + BORDER_POSITION);
 
   // Display team name
   t_team_name->Set(character_under_cursor->GetTeam().GetName());
@@ -214,12 +211,12 @@ void Interface::DrawWeaponInfo() const
 void Interface::DrawTimeInfo() const
 {
   AppWormux * app = AppWormux::GetInstance();
-  Point2i turn_time_pos = (app->video->window.GetSize() - clock_background.GetSize()) * Point2d(0.5, 1) +
+  Point2i turn_time_pos = (app->video.window.GetSize() - clock_background.GetSize()) * Point2d(0.5, 1) + 
       Point2i(0, - GetHeight() + clock_background.GetHeight());
   Rectanglei dr(turn_time_pos, clock_background.GetSize());
 
   // Draw background interface
-  app->video->window.Blit(clock_background, turn_time_pos);
+  app->video.window.Blit(clock_background, turn_time_pos);
   world.ToRedrawOnScreen(dr);
   DrawClock(turn_time_pos + clock_background.GetSize() / 2);
 }
@@ -255,7 +252,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
 
   // draw wind icon
   if(draw_icon) {
-    app->video->window.Blit(wind_icon, wind_bar_pos);
+    app->video.window.Blit(wind_icon, wind_bar_pos);
     world.ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_icon.GetSize()));
     height = wind_icon.GetHeight() - wind_indicator.GetHeight();
   } else {
@@ -265,7 +262,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
   // draw wind indicator
   Point2i wind_bar_offset = Point2i(0, height);
   Point2i tmp = wind_bar_pos + wind_bar_offset + Point2i(2, 2);
-  app->video->window.Blit(wind_indicator, wind_bar_pos + wind_bar_offset);
+  app->video.window.Blit(wind_indicator, wind_bar_pos + wind_bar_offset);
   wind_bar.DrawXY(tmp);
   world.ToRedrawOnScreen(Rectanglei(wind_bar_pos + wind_bar_offset, wind_indicator.GetSize()));
 }
@@ -286,8 +283,8 @@ void Interface::DrawSmallInterface() const
   height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
   height = (height > 0 ? height : 0);
   height = (height < small_background_interface.GetHeight() ? height : small_background_interface.GetHeight());
-  Point2i small_interface_position = Point2i(app->video->window.GetWidth() / 2 - small_background_interface.GetWidth() / 2, app->video->window.GetHeight() - height);
-  app->video->window.Blit(small_background_interface,small_interface_position);
+  Point2i small_interface_position = Point2i(app->video.window.GetWidth() / 2 - small_background_interface.GetWidth() / 2, app->video.window.GetHeight() - height);
+  app->video.window.Blit(small_background_interface,small_interface_position);
   world.ToRedrawOnScreen(Rectanglei(small_interface_position,small_background_interface.GetSize()));
   DrawWindIndicator(small_interface_position + Point2i(MARGIN, 0), false);
   if (display_timer)
@@ -308,12 +305,12 @@ void Interface::DrawTeamEnergy() const
 void Interface::Draw()
 {
   AppWormux * app = AppWormux::GetInstance();
-  bottom_bar_pos = (app->video->window.GetSize() - GetSize()) * Point2d(0.5, 1);
+  bottom_bar_pos = (app->video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
 
   if ( GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING && weapon_strength_bar.visible)
   {
     // Position on the screen
-    Point2i barPos = (app->video->window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
+    Point2i barPos = (app->video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
         - Point2i(0, game_menu.GetHeight() + MARGIN);
 
     // Drawing on the screen
@@ -324,7 +321,7 @@ void Interface::Draw()
 
   // Display the background of both Character info and weapon info
   Rectanglei dr(bottom_bar_pos, game_menu.GetSize());
-  app->video->window.Blit(game_menu, bottom_bar_pos);
+  app->video.window.Blit(game_menu, bottom_bar_pos);
 
   world.ToRedrawOnScreen(dr);
 
@@ -335,6 +332,11 @@ void Interface::Draw()
   DrawTeamEnergy();
   DrawWeaponInfo();
   DrawSmallInterface();
+}
+
+int Interface::GetWidth() const
+{
+  return game_menu.GetWidth();
 }
 
 int Interface::GetHeight() const
@@ -364,7 +366,7 @@ Point2i Interface::GetSize() const
 void Interface::EnableDisplay(bool _display)
 {
   display = _display;
-  Camera::GetInstance()->GetInstance()->CenterOnFollowedObject();
+  camera.CenterOnFollowedObject();
 }
 
 void Interface::Show()
@@ -387,27 +389,42 @@ void Interface::Hide()
     start_hide_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_hide_display));
 }
 
+bool Interface::IsVisible() const
+{
+  return display;
+}
+
 void Interface::UpdateTimer(uint utimer)
 {
   timer->Set(ulong2str(utimer));
   remaining_turn_time = utimer;
 }
 
-void AbsoluteDraw(const Surface &s, const Point2i& pos)
+void Interface::SetCurrentOverflyWeapon(Weapon * weapon)
+{
+  weapon_under_cursor = weapon;
+}
+
+void Interface::UpdateWindIndicator(int wind_value)
+{
+  wind_bar.UpdateValue(wind_value);
+}
+
+void AbsoluteDraw(const Surface &s, Point2i pos)
 {
   Rectanglei rectSurface(pos, s.GetSize());
 
-  if( !rectSurface.Intersect(*Camera::GetInstance()))
+  if( !rectSurface.Intersect(camera) )
     return;
 
   world.ToRedrawOnMap(rectSurface);
 
-  rectSurface.Clip(*Camera::GetInstance());
+  rectSurface.Clip( camera );
 
   Rectanglei rectSource(rectSurface.GetPosition() - pos, rectSurface.GetSize());
-  Point2i ptDest = rectSurface.GetPosition() - Camera::GetInstance()->GetPosition();
+  Point2i ptDest = rectSurface.GetPosition() - camera.GetPosition();
 
-  AppWormux::GetInstance()->video->window.Blit(s, rectSource, ptDest);
+  AppWormux::GetInstance()->video.window.Blit(s, rectSource, ptDest);
 }
 
 void HideGameInterface()

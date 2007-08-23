@@ -24,13 +24,13 @@
 #include <algorithm>
 #include "all.h"
 #include "explosion.h"
+#include "game/game_loop.h"
+#include "game/time.h"
 #include "interface/interface.h"
-#include "map/camera.h"
-#include "map/maps_list.h"
 #include "object/objects_list.h"
+#include "map/camera.h"
 #include "team/macro.h"
-#include "team/team.h"
-#include "tool/resource_manager.h"
+#include "map/maps_list.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -58,8 +58,6 @@ WeaponsList::~WeaponsList()
           delete *it;
         }
       weapon_list = NULL;
-      resource_manager.UnLoadXMLProfile(weapons_res_profile);
-      weapons_res_profile = NULL;
     }
 }
 
@@ -103,9 +101,16 @@ WeaponsList::WeaponsList():
 
 //-----------------------------------------------------------------------------
 
-void WeaponsList::Refresh () const
+void WeaponsList::Refresh ()
 {
   ActiveTeam().AccessWeapon().Manage();
+}
+
+//-----------------------------------------------------------------------------
+
+WeaponsList::weapons_list_type& WeaponsList::GetList()
+{
+  return m_weapons_list;
 }
 
 
@@ -182,7 +187,7 @@ Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)
 {
   weapons_list_it it;
   it = std::find_if(m_weapons_list.begin(), m_weapons_list.end(), test_weapon_type(type));
-  ASSERT (it != m_weapons_list.end());
+  assert (it != m_weapons_list.end());
   return *it;
 }
 

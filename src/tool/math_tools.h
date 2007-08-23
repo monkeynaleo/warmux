@@ -28,7 +28,7 @@ extern const double EPS_ZERO;
 // Borne une valeur dans l'intervale [min;max]
 long BorneLong (const long &valeur, const long &min, const long &max);
 double BorneDouble (const double &valeur, const double &min,
-                    const double &max);
+		    const double &max);
 
 // Inverse un angle par rapport à l'axe vertical
 double InverseAngle (const double &angle);
@@ -40,28 +40,7 @@ double Deg2Rad (int degre);
 int Rad2Deg(double rad);
 
 // Valeur absolue
-double AbsoluteValue (const double x);
-bool EqualsZero (const double x);
-
-#ifdef __APPLE__
-using namespace std;  // For isnan->std::isnan for instance
-#endif
-
-#ifdef WIN32
-#  include <float.h>
-#  define isnan _isnan
-#endif
-
-#ifdef _MSC_VER
-// MIT licensed from http://opensource.adobe.com/cmath_8hpp-source.html
-#  include <math.h>
-double inline round(double a) { return (a<0.0) ? ceil(a-0.5) : floor(a+0.5); };
-long int inline lround(double a) { return static_cast<long>(a + (a < 0.0 ? -0.5 : 0.5)); }
-#endif
-
-template <class T> T max(T a, T b)
-{
-  return a > b ? a : b;
-};
+double AbsReel (const double x);
+bool EgalZero (const double x);
 
 #endif

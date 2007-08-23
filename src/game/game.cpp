@@ -18,28 +18,35 @@
  ******************************************************************************
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
-#include <iostream>
+
 #include "game.h"
+#include <iostream>
+#include <SDL.h>
+#include <sstream>
 #include "time.h"
 #include "game_init.h"
 #include "game_loop.h"
+#include "game_mode.h"
 #include "graphic/video.h"
-#include "gui/question.h"
+#include "graphic/fps.h"
 #include "include/app.h"
+#include "interface/cursor.h"
 #include "interface/keyboard.h"
-#include "interface/joystick.h"
+#include "interface/game_msg.h"
 #include "interface/mouse.h"
+#include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "menu/results_menu.h"
 #include "network/network.h"
 #include "object/objects_list.h"
-#include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
-#include "team/team.h"
 #include "team/results.h"
+#include "tool/debug.h"
 #include "tool/i18n.h"
+#include "tool/resource_manager.h"
+#include "weapon/weapons_list.h"
 
 Game * Game::singleton = NULL;
 
@@ -86,13 +93,13 @@ void Game::MessageEndOfGame() const
   std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-  ResultsMenu menu(*results_list);
+  ResultsMenu menu(results_list);
   menu.Run();
 
   TeamResults::deleteAllResults(results_list);
 }
 
-int Game::AskQuestion (Question &question, bool draw) const
+int Game::AskQuestion (Question &question, bool draw)
 {
   Time::GetInstance()->Pause();
 
@@ -111,8 +118,6 @@ void Game::Start()
   bool end = false;
   std::string err_msg;
   want_end_of_game = false;
-  Keyboard::GetInstance()->Reset();
-  Joystick::GetInstance()->Reset();
 
   try
   {
@@ -138,10 +143,10 @@ void Game::Start()
 
       if (!end)
       {
-        world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video->window.GetSize()));
-        Keyboard::GetInstance()->Reset();
-        Joystick::GetInstance()->Reset();
-        want_end_of_game = false;
+        world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
+	Keyboard::GetInstance()->Reset();
+	ActiveCharacter().StopPlaying();
+	want_end_of_game = false;
       }
 
     } while (!end);
@@ -153,7 +158,7 @@ void Game::Start()
   }
 
   jukebox.StopAll();
-
+  
   if (!err)
   // * When debug is disabled : only show the result menu if game
   // have 'regularly' finished (only one survivor or timeout reached)
@@ -183,7 +188,7 @@ void Game::Start()
   }
 }
 
-void Game::UnloadDatas() const
+void Game::UnloadDatas()
 {
   world.FreeMem();
   lst_objects.FreeMem();
@@ -192,7 +197,7 @@ void Game::UnloadDatas() const
   jukebox.StopAll();
 }
 
-void Game::TogglePause() const
+void Game::TogglePause()
 {
   if(Time::GetInstance()->IsGamePaused())
     Time::GetInstance()->Continue();
@@ -200,7 +205,7 @@ void Game::TogglePause() const
     Time::GetInstance()->Pause();
 }
 
-void Game::DisplayPause() const
+void Game::DisplayPause()
 {
   Question question;
   if(!Network::GetInstance()->IsLocal())
@@ -208,15 +213,16 @@ void Game::DisplayPause() const
 
   jukebox.Pause();
 
-  // Pause screen
-  question.Set("", false, 0, "interface/pause_screen");
-  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(ManMachineInterface::KEY_PAUSE), 1);
-  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(ManMachineInterface::KEY_QUIT), 1);
+  //Pause screen
+  question.Set ("", false, 0, "interface/pause_screen");
+  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(Keyboard::KEY_PAUSE),
+		      1
+		      );
   AskQuestion(question, false);
   jukebox.Resume();
 }
 
-bool Game::DisplayQuit() const
+bool Game::DisplayQuit()
 {
   Question question;
   const char *msg = _("Do you really want to quit? (Y/N)");
@@ -225,7 +231,7 @@ bool Game::DisplayQuit() const
   {
     /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
     /* Let's find out what the user would like to press ... */
-    const char *key_x_ptr = strchr (msg, '/');
+    char *key_x_ptr = strchr (msg, '/');
     char key_x;
     if (key_x_ptr && key_x_ptr > msg) /* it's there and it's not the first char */
       key_x = tolower(key_x_ptr[-1]);

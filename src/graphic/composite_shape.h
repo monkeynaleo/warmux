@@ -23,11 +23,9 @@
 #define COMPOSITE_SHAPE_H
 
 #include <vector>
-
-// Forward declarations
-class Polygon;
-class Surface;
-class AffineTransform2D;
+#include "../tool/affine_transform.h"
+#include "surface.h"
+#include "polygon.h"
 
 class CompositeShape {
  protected:

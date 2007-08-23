@@ -21,10 +21,8 @@
 #ifndef EFFECTS_H
 #define EFFECTS_H
 
-#include "include/base.h"
-
-class Sprite;
-class Surface;
+#include <SDL.h>
+#include "sprite.h"
 
 Sprite* WaveSurface(Surface &a, unsigned int nbr_frames, unsigned int duration, float wave_amp, float wave_per);
 void Rebound(Sprite* spr, int &y, uint t0, uint per, int dy_max);

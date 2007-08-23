@@ -22,16 +22,14 @@
 #ifndef JUKEBOX_H
 #define JUKEBOX_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
+#include <SDL_mixer.h>
+
 #include <vector>
 #include <map>
 #include <set>
 #include <utility>
-
-#include <SDL.h>
-#include <SDL_mixer.h>
-
 #include "include/base.h"
-
 //-----------------------------------------------------------------------------
 
 /* Informations about music...
@@ -104,7 +102,7 @@ private:
   static void EndChunk(int channel);
   static void EndMusic();
 
-  bool PlayMusicSample(const std::vector<std::string>::const_iterator& file);
+  bool PlayMusicSample(std::vector<std::string>::const_iterator file);
 
 public:
   JukeBox();
@@ -115,8 +113,8 @@ public:
   bool UseEffects() const {return m_config.effects;};
   int GetFrequency() const {return m_config.frequency;};
   int HowManyChannels() const {return m_config.channels;};
-  void Pause() const;
-  void Resume() const;
+  void Pause();
+  void Resume();
 
   void ActiveMusic (bool on);
   void ActiveEffects (bool on) {m_config.effects = on;};
@@ -147,12 +145,12 @@ public:
    * <i>loop</i>: -1 for loop forever, else number of times to play
    */
   int Play(const std::string& category,
-           const std::string& sample,
-           const int loop = 1);
+	   const std::string& sample,
+	   const int loop = 1);
 
-  int Stop(int channel) const;
+  int Stop(int channel);
 
-  int StopAll() const;
+  int StopAll();
 
 private:
   /**

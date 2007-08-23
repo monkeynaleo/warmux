@@ -24,17 +24,51 @@
 #define CLUSTER_BOMB_H
 
 #include <list>
-#include "weapon_launcher.h"
+#include "launcher.h"
+#include "graphic/surface.h"
+#include "gui/progress_bar.h"
 #include "include/base.h"
+#include "object/physical_obj.h"
 
 class ClusterBombConfig;
+
+class Cluster : public WeaponProjectile
+{
+public:
+  Cluster(ClusterBombConfig& cfg,
+          WeaponLauncher * p_launcher);
+  void Refresh();
+  void Shoot(int n_x, int n_y);
+protected:
+  void SignalOutOfMap();
+  void DoExplosion();
+};
+
+class ClusterBomb : public WeaponProjectile
+{
+public:
+  ClusterBomb(ClusterBombConfig& cfg,
+              WeaponLauncher * p_launcher);
+  void Refresh();
+  DECLARE_GETWEAPONSTRING();
+protected:
+  void DoExplosion();
+  void SignalOutOfMap();
+};
+
+class ClusterBombConfig : public ExplosiveWeaponConfig
+{ 
+public: 
+  uint nb_fragments;
+public:
+  ClusterBombConfig();
+  virtual void LoadXml(xmlpp::Element *elem);
+};
 
 class ClusterLauncher : public WeaponLauncher
 {
  public:
   ClusterLauncher();
-  std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
-
  protected:
   WeaponProjectile * GetProjectileInstance();
  private:

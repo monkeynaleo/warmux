@@ -21,7 +21,6 @@
 
 #include "progress_bar.h"
 #include <SDL.h>
-#include "graphic/video.h"
 #include "include/app.h"
 #include "map/map.h"
 #include "tool/math_tools.h"
@@ -35,9 +34,21 @@ ProgressBar::ProgressBar(){
    m_use_ref_val = false;
 }
 
+void ProgressBar::SetBorderColor(Color color){
+   border_color = color;
+}
+
+void ProgressBar::SetBackgroundColor(Color color){
+   background_color = color;
+}
+
+void ProgressBar::SetValueColor(Color color){
+   value_color = color;
+}
+
 void ProgressBar::InitPos (uint px, uint py, uint plarg, uint phaut){
-  ASSERT (3 <= plarg);
-  ASSERT (3 <= phaut);
+  assert (3 <= plarg);
+  assert (3 <= phaut);
   x = px;
   y = py;
   larg = plarg;
@@ -54,8 +65,8 @@ void ProgressBar::InitPos (uint px, uint py, uint plarg, uint phaut){
  */
 void ProgressBar::InitVal (long pval, long pmin, long pmax,
     enum orientation porientation){
-  ASSERT (pmin != pmax);
-  ASSERT (pmin < pmax);
+  assert (pmin != pmax);
+  assert (pmin < pmax);
   val = pval;
   min = pmin;
   max = pmax;
@@ -68,8 +79,8 @@ void ProgressBar::UpdateValue (long pval){
   val_barre = CalculeValBarre(val);
 }
 
-uint ProgressBar::CalculeVal (long pval) const{
-  return BorneLong(pval, min, max);
+uint ProgressBar::CalculeVal (long val) const{
+  return BorneLong(val, min, max);
 }
 
 uint ProgressBar::CalculeValBarre (long val) const{
@@ -77,6 +88,10 @@ uint ProgressBar::CalculeValBarre (long val) const{
     return ( CalculeVal(val) -min)*(larg-2)/(max-min);
   else
     return ( CalculeVal(val) -min)*(haut-2)/(max-min);
+}
+
+void ProgressBar::Draw() const{
+  DrawXY( Point2i(x, y) );
 }
 
 // TODO pass a Surface as parameter
@@ -135,7 +150,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
     image.FillRect( r_marq, it->color);
   }
   Rectanglei dst(pos.x, pos.y, larg, haut);
-  AppWormux::GetInstance()->video->window.Blit(image, pos);
+  AppWormux::GetInstance()->video.window.Blit(image, pos);
 
   world.ToRedrawOnScreen(dst);
 }
@@ -149,6 +164,10 @@ ProgressBar::marqueur_it ProgressBar::AddTag (long val, const Color& color){
   marqueur.push_back (m);
 
   return --marqueur.end();
+}
+
+void ProgressBar::ResetTag(){
+  marqueur.clear();
 }
 
 void ProgressBar::SetReferenceValue (bool use, long value){

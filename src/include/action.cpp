@@ -23,37 +23,62 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include "action_handler.h"
-#include "character/body.h"
-#include "character/character.h"
-#include "game/game.h"
-#include "game/time.h"
-#include "network/distant_cpu.h"
-#include "team/team.h"
-#include "team/teams_list.h"
 #include "tool/debug.h"
+#include "game/time.h"
+#include "character/character.h"
+#include "network/distant_cpu.h"
+#include "team/teams_list.h"
+#include "network/network.h"
 //-----------------------------------------------------------------------------
-
-static inline uint TimeStamp()
+// Action without parameter
+Action::Action (Action_t type)
 {
-  if (Game::GetInstance()->IsGameLaunched())
-    return Time::GetInstance()->Read();
-
-  return 0;
+  var.clear();
+  m_type = type;
+  m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 // Action with various parameters
-Action::Action (Action_t type, double value1, double value2)
+Action::Action (Action_t type, int value) : m_type(type)
 {
-  Init(type);
-  Push(value1);
-  Push(value2);
+  var.clear();
+  Push(value);
+  m_timestamp = Time::GetInstance()->Read();
 }
 
-Action::Action (Action_t type, double value1, int value2)
+Action::Action (Action_t type, double value) : m_type(type)
 {
-  Init(type);
+  var.clear();
+  Push(value);
+  m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
+}
+
+Action::Action (Action_t type, const std::string& value) : m_type(type)
+{
+  var.clear();
+  Push(value);
+  m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
+}
+
+Action::Action (Action_t type, double value1, double value2) : m_type(type)
+{
+  var.clear();
   Push(value1);
   Push(value2);
+  m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
+}
+
+Action::Action (Action_t type, double value1, int value2) : m_type(type)
+{
+  var.clear();
+  Push(value1);
+  Push(value2);
+  m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 // Build an action from a network packet
@@ -64,67 +89,84 @@ Action::Action (const char *is, DistantComputer* _creator)
   var.clear();
   m_type = (Action_t)SDLNet_Read32(is);
   is += 4;
-  m_timestamp = (uint)SDLNet_Read32(is);
+  m_timestamp = (Action_t)SDLNet_Read32(is);
   is += 4;
-  int m_length = SDLNet_Read32(is);
+  int m_lenght = SDLNet_Read32(is);
   is += 4;
 
-  for(int i=0; i < m_length; i++)
+  for(int i=0; i < m_lenght; i++)
   {
-    uint32_t val = SDLNet_Read32(is);
+    Uint32 val = SDLNet_Read32(is);
     var.push_back(val);
     is += 4;
   }
 }
 
-void Action::Init(Action_t type)
+Action::~Action ()
 {
-  m_type = type;
-  var.clear();
-  m_timestamp = TimeStamp();
-  creator = NULL;
 }
 
-void Action::Write(char *os) const
+Action::Action_t Action::GetType() const
 {
+  return m_type;
+}
+
+bool Action::IsEmpty() const
+{
+  return var.empty();
+}
+
+void Action::SetTimestamp(uint timestamp)
+{
+  m_timestamp = timestamp;
+}
+
+uint Action::GetTimestamp()
+{
+  return m_timestamp;
+}
+
+// Convert the action to a packet
+void Action::WritePacket(char* &packet, int & size)
+{
+  size = 4  //Size of the type;
+        + 4 //Size of the timestamp
+        + 4 //Size of the number of variable
+        + int(var.size()) * 4;
+
+  packet = (char*)malloc(size);
+  char* os = packet;
+
   SDLNet_Write32(m_type, os);
   os += 4;
   SDLNet_Write32(m_timestamp, os);
   os += 4;
-  uint32_t param_size = (uint32_t)var.size();
+  Uint32 param_size = (Uint32)var.size();
   SDLNet_Write32(param_size, os);
   os += 4;
 
-  for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++)
+  for(std::list<Uint32>::iterator val = var.begin(); val!=var.end(); val++)
   {
     SDLNet_Write32(*val, os);
     os += 4;
   }
 }
 
-// Convert the action to a packet
-void Action::WritePacket(char* &packet, int & size) const
-{
-  size = GetSize();
-  packet = (char*)malloc(size);
-
-  Write(packet);
-}
-
 //-------------  Add datas to the action  ----------------
 void Action::Push(int val)
 {
-  uint32_t tmp;
+  Uint32 tmp;
   memcpy(&tmp, &val, 4);
   var.push_back(tmp);
   MSG_DEBUG( "action", " (%s) Pushing int : %i",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
+
 }
 
 void Action::Push(double val)
 {
-  uint32_t tmp[2];
-  memcpy(tmp, &val, 8);
+  Uint32 tmp[2];
+  memcpy(&tmp, &val, 8);
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   var.push_back(tmp[0]);
   var.push_back(tmp[1]);
@@ -149,7 +191,7 @@ void Action::Push(const Point2d& val)
   Push(val.y);
 }
 
-void Action::Push(const std::string& val)
+void Action::Push(std::string val)
 {
   //Cut the string into 32bit values
   //But first, we write the size of the string:
@@ -159,19 +201,22 @@ void Action::Push(const std::string& val)
   int count = val.size();
   while(count > 0)
   {
-    uint32_t tmp = 0;
+    Uint32 tmp = 0;
     // Fix-me : We are reading out of the c_str() buffer there :
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
     strncpy((char*)&tmp, ch, 4);
+    var.push_back(tmp);
     ch += 4;
+    count -= 4;
 #else
     char* c_tmp = (char*)&tmp;
     c_tmp +=3;
     for(int i=0; i < 4; i++)
       *(c_tmp--) = *(ch++);
-#endif
+
     var.push_back(tmp);
     count -= 4;
+#endif
   }
   MSG_DEBUG( "action", " (%s) Pushing string : %s",
   ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val.c_str());
@@ -180,14 +225,14 @@ void Action::Push(const std::string& val)
 //-------------  Retrieve datas from the action  ----------------
 int Action::PopInt()
 {
-  NET_ASSERT(var.size() > 0)
+  net_assert(var.size() > 0)
   {
     if(creator) creator->force_disconnect = true;
     return 0;
   }
 
   int val;
-  uint32_t tmp = var.front();
+  Uint32 tmp = var.front();
   memcpy(&val, &tmp, 4);
   var.pop_front();
   MSG_DEBUG( "action", " (%s) Poping int : %i",
@@ -197,25 +242,27 @@ int Action::PopInt()
 
 double Action::PopDouble()
 {
-  NET_ASSERT(var.size() > 0)
+  net_assert(var.size() > 0)
   {
     if(creator) creator->force_disconnect = true;
     return 0.0;
   }
 
   double val;
-  uint32_t tmp[2];
+  Uint32 tmp[2];
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   tmp[0] = var.front();
   var.pop_front();
   tmp[1] = var.front();
+  var.pop_front();
+  memcpy(&val, &tmp, 8);
 #else
   tmp[1] = var.front();
   var.pop_front();
   tmp[0] = var.front();
-#endif
   var.pop_front();
-  memcpy(&val, tmp, 8);
+  memcpy(&val, &tmp, 8);
+#endif
 
   MSG_DEBUG( "action", " (%s) Poping double : %f",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
@@ -224,44 +271,47 @@ double Action::PopDouble()
 
 std::string Action::PopString()
 {
-  NET_ASSERT(var.size() > 1)
+  net_assert(var.size() > 1)
   {
     if(creator) creator->force_disconnect = true;
     return "";
   }
 
-  int length = PopInt();
+  int lenght = PopInt();
 
   std::string str="";
 
-  NET_ASSERT((int)var.size() >= length/4)
+  net_assert((int)var.size() >= lenght/4)
   {
     if(creator) creator->force_disconnect = true;
     return "";
   }
 
-  while(length > 0)
+  while(lenght > 0)
   {
-    NET_ASSERT(var.size() > 0)
+    net_assert(var.size() > 0)
     {
       if(creator) creator->force_disconnect = true;
       return "";
     }
 
-    uint32_t tmp = var.front();
+    Uint32 tmp = var.front();
     var.pop_front();
     char tmp_str[5] = {0, 0, 0, 0, 0};
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
     memcpy(tmp_str, &tmp, 4);
+    str += tmp_str;
+    lenght -= 4;
 #else
     char* c_tmp_str = (char*)(&tmp_str) + 3;
     char* c_tmp = (char*)&tmp;
     for(int i=0; i < 4; i++)
       *(c_tmp_str--) = *(c_tmp++);
-#endif
+
     str += tmp_str;
-    length -= 4;
-  }
+    lenght -= 4;
+#endif
+    }
   MSG_DEBUG( "action", " (%s) Poping string : %s",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), str.c_str());
   return str;
@@ -322,7 +372,7 @@ void Action::RetrieveCharacter()
   int char_no = PopInt();
   Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   c->SetXY(PopPoint2i());
-  c->SetDirection((BodyDirection_t)PopInt());
+  c->SetDirection((Body::Direction_t)PopInt());
   c->SetFiringAngle(PopDouble());
   c->SetEnergy(PopInt());
   c->SetLifeState((alive_t)PopInt());
@@ -333,7 +383,7 @@ void Action::RetrieveCharacter()
   c->SetExternForceXY(PopPoint2d());
   c->SetRopeAngle(PopDouble());
   c->SetRopeLength(PopDouble());
-  if(PopInt()) { // If active characters, retrieve stored animation
+  if((bool)PopInt()) { // If active characters, retrieve stored animation
     if(c->GetTeam().IsActiveTeam())
       ActiveTeam().SelectCharacter(char_no);
     c->SetClothe(PopString());

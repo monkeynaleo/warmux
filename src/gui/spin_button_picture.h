@@ -23,12 +23,10 @@
 #define SPIN_BUTTON_PICTURE_H
 
 #include "include/base.h"
-#include "graphic/surface.h"
+#include "graphic/text.h"
 #include "widget.h"
+#include "button.h"
 #include <string>
-
-class Text;
-class Button;
 
 class SpinButtonWithPicture : public Widget
 {
@@ -39,30 +37,25 @@ class SpinButtonWithPicture : public Widget
   /*********************************************/
 
   Surface m_image;
-  Surface m_annulus_background;
-  Surface m_annulus_foreground;
-  Color m_progress_color;
 
  protected:
-  Text *txt_label, *txt_value_white, *txt_value_black;
+  Text *txt_label, *txt_value;
 
   int m_value;
   int m_min_value, m_max_value, m_step;
 
  public:
-  SpinButtonWithPicture(const std::string &label,
-                        const std::string &resource_id,
-                        const Rectanglei &rect,
-                        int value=0, int step=1,
-                        int min_value=-1, int max_value=-1);
+  SpinButtonWithPicture(const std::string &label, const std::string &resource_id,
+			const Rectanglei &rect,
+			int value=0, int step=1, int min_value=-1, int max_value=-1);
   virtual ~SpinButtonWithPicture();
 
   void SetSizePosition(const Rectanglei &rect);
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
-  Widget* Click(const Point2i&, uint) const { return NULL; };
+  Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
-  int GetValue() const { return m_value; };
+  int GetValue() const;
   void SetValue(int value);
 };
 

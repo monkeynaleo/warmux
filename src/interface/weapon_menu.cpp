@@ -20,37 +20,36 @@
  *****************************************************************************/
 
 #include "weapon_menu.h"
+#include "weapon/weapons_list.h"
+
 #include <sstream>
+#include <math.h>
 #include "interface.h"
-#include "game/time.h"
-#include "graphic/font.h"
-#include "graphic/polygon_generator.h"
-#include "graphic/sprite.h"
 #include "graphic/video.h"
+#include "graphic/font.h"
+#include "game/time.h"
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "interface/mouse.h"
+#include "map/camera.h"
+#include "map/map.h"
 #include "map/maps_list.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
+#include "tool/point.h"
+#include "tool/rectangle.h"
+#include "tool/string_tools.h"
 #include "tool/resource_manager.h"
-#include "sound/jukebox.h"
+#include "tool/i18n.h"
+#include "graphic/sprite.h"
 #include "weapon/weapon.h"
 #include "weapon/weapons_list.h"
-#include "game/config.h"
+
 
 // Weapon menu
-const uint ICONS_DRAW_TIME = 400;       // Time to display all icons (in ms)
-const uint BLING_ICONS_DRAW_TIME = 600; // Bling bling version
-
-const uint ICON_ZOOM_TIME = 150;        // Time to zoom one icon.
-
-const uint JELLY_TIME = 0;              // Jelly time when appearing
-const uint BLING_JELLY_TIME = 300;      // Bling bling version
-
-const uint ROTATION_TIME = 0;           // Number of rotation
-const uint BLING_ROTATION_TIME = 2;     // bling bling !
+const uint ICONS_DRAW_TIME = 600; // Time to display all icons (in ms)
+const uint ICON_ZOOM_TIME = 150; // Time to zoom one icon.
+const uint JELLY_TIME = 300;     // Jelly time when appearing
 
 const double DEFAULT_ICON_SCALE = 0.7;
 const double MAX_ICON_SCALE = 1.1;
@@ -66,7 +65,6 @@ WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
 {
   SetSprite(new Sprite(weapon->GetIcon()));
   SetPosition(position);
-  SetZoomTime(ICON_ZOOM_TIME);
 }
 
 WeaponMenuItem::~WeaponMenuItem()
@@ -103,8 +101,8 @@ void WeaponMenuItem::SetZoom(bool value)
 void WeaponMenuItem::Draw(Surface * dest)
 {
   double scale = DEFAULT_ICON_SCALE;
-  if(zoom || zoom_start_time + GetZoomTime() > Time::GetInstance()->Read()) {
-    scale = (Time::GetInstance()->Read() - zoom_start_time) / (double)GetZoomTime();
+  if(zoom || zoom_start_time + ICON_ZOOM_TIME > Time::GetInstance()->Read()) {
+    scale = (Time::GetInstance()->Read() - zoom_start_time) / (double)ICON_ZOOM_TIME;
     if(zoom) {
       scale = DEFAULT_ICON_SCALE + (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
       scale = (scale > MAX_ICON_SCALE ? MAX_ICON_SCALE : scale);
@@ -113,20 +111,25 @@ void WeaponMenuItem::Draw(Surface * dest)
       scale = (scale > DEFAULT_ICON_SCALE ? scale : DEFAULT_ICON_SCALE);
     }
   }
-  item->Scale((float)scale, (float)scale);
+  item->Scale(scale, scale);
   PolygonItem::Draw(dest);
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
   if(nb_bullets ==  INFINITE_AMMO) {
-    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", gray_color);
+    Interface::GetInstance()->GetWeaponsMenu().GetInfiniteSymbol()->Blit(*dest, tmp);
   } else if(nb_bullets == 0) {
-    tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
+    tmp += Point2i(0, -Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
     Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->Blit(*dest, tmp);
   } else {
     std::ostringstream txt;
     txt << nb_bullets;
     (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), gray_color);
   }
+}
+
+Weapon * WeaponMenuItem::GetWeapon() const
+{
+  return weapon;
 }
 
 WeaponsMenu::WeaponsMenu():
@@ -137,17 +140,16 @@ WeaponsMenu::WeaponsMenu():
   shear(),
   rotation(),
   zoom(),
+  infinite(NULL),
   cross(NULL),
   show(false),
   motion_start_time(0),
-  icons_draw_time(ICONS_DRAW_TIME),
-  jelly_time(JELLY_TIME),
-  rotation_time(ROTATION_TIME),
   nbr_weapon_type(0),
   nb_weapon_type(new int[MAX_NUMBER_OF_WEAPON])
 {
   // Loading value from XML
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  infinite = new Sprite(resource_manager.LoadImage(res, "interface/infinite"));
   cross = new Sprite(resource_manager.LoadImage(res, "interface/cross"));
   // Polygon Size
   Point2i size = resource_manager.LoadPoint2i(res, "interface/weapons_interface_size");
@@ -208,28 +210,23 @@ void WeaponsMenu::Show()
 {
   ShowGameInterface();
   if(!show) {
-    if(motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
+    if(motion_start_time + ICONS_DRAW_TIME < Time::GetInstance()->Read())
       motion_start_time = Time::GetInstance()->Read();
     else
-      motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
+      motion_start_time = Time::GetInstance()->Read() - (ICONS_DRAW_TIME - (Time::GetInstance()->Read() - motion_start_time));
     show = true;
-
-    jukebox.Play("share", "menu/weapon_menu_show");
   }
 }
 
-void WeaponsMenu::Hide(bool play_sound)
+void WeaponsMenu::Hide()
 {
   if(show) {
     Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
-    if(motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
+    if(motion_start_time + ICONS_DRAW_TIME < Time::GetInstance()->Read())
       motion_start_time = Time::GetInstance()->Read();
     else
-      motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
+      motion_start_time = Time::GetInstance()->Read() - (ICONS_DRAW_TIME - (Time::GetInstance()->Read() - motion_start_time));
     show = false;
-
-    if (play_sound)
-      jukebox.Play("share", "menu/weapon_menu_hide");
   }
 }
 
@@ -239,15 +236,6 @@ void WeaponsMenu::Reset()
   RefreshWeaponList();
   motion_start_time = 0;
   show = false;
-  if(Config::GetInstance()->IsBlingBlingInterface()) {
-    SetJellyTime(BLING_JELLY_TIME);
-    SetIconsDrawTime(BLING_ICONS_DRAW_TIME);
-    SetRotationTime(BLING_ROTATION_TIME);
-  } else {
-    SetJellyTime(JELLY_TIME);
-    SetIconsDrawTime(ICONS_DRAW_TIME);
-    SetRotationTime(ROTATION_TIME);
-  }
 }
 
 void WeaponsMenu::RefreshWeaponList()
@@ -264,7 +252,7 @@ void WeaponsMenu::RefreshWeaponList()
   for(; item != items.end(); item++) {
     delete (*item);
   }
-  weapons_menu->ClearItem(false);
+  weapons_menu->ClearItem();
   weapons_menu->AddItem(tmp);
   // Tools menu
   items = tools_menu->GetItem();
@@ -273,30 +261,51 @@ void WeaponsMenu::RefreshWeaponList()
   for(; item != items.end(); item++) {
     delete (*item);
   }
-  tools_menu->ClearItem(false);
+  tools_menu->ClearItem();
   tools_menu->AddItem(tmp);
   // Reinserting weapon
   WeaponsList *weapons_list = WeaponsList::GetInstance();
-  for (WeaponsList::weapons_list_it it=weapons_list->GetList().begin();
-       it != weapons_list->GetList().end();
-       ++it)
+  for (WeaponsList::weapons_list_it it=weapons_list->GetList().begin(); it != weapons_list->GetList().end(); ++it)
     AddWeapon(*it);
+}
+
+void WeaponsMenu::SwitchDisplay()
+{
+  if(show)
+    Hide();
+  else
+    Show();
+}
+
+bool WeaponsMenu::IsDisplayed() const
+{
+  return show;
+}
+
+Sprite * WeaponsMenu::GetInfiniteSymbol() const
+{
+  return infinite;
+}
+
+Sprite * WeaponsMenu::GetCrossSymbol() const
+{
+  return cross;
 }
 
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 {
   // Init animation parameter
-  Point2d start(AppWormux::GetInstance()->video->window.GetWidth(), 0);
-  Point2i pos(AppWormux::GetInstance()->video->window.GetSize() / 2 + Point2i((int)(tools_menu->GetWidth() / 2) + 10, 0));
+  Point2d start(AppWormux::GetInstance()->video.window.GetWidth(), 0);
+  Point2i pos(AppWormux::GetInstance()->video.window.GetSize() / 2 + Point2i((int)(tools_menu->GetWidth() / 2) + 10, 0));
   Point2d end(POINT2I_2_POINT2D(pos));
   double zoom_start = 0.2, zoom_end = 1.0;
-  double angle_start = M_PI * GetRotationTime(), angle_end = 0.0;
+  double angle_start = M_PI * 2.0, angle_end = 0.0;
   // Define the animation
-  position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
-  zoom.SetShrinkAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show,
+  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, start, end);
+  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show,
                           zoom_start, zoom_start, zoom_end, zoom_end);
-  rotation.SetRotationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, angle_start, angle_end);
-  shear.SetShearAnimation(motion_start_time + GetIconsDrawTime(), GetJellyTime(), Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
+  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, angle_start, angle_end);
+  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
   return position * shear * zoom * rotation;
 }
 
@@ -304,22 +313,22 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 {
   // Init animation parameter
   Point2d start(0, 0);
-  Point2i pos(AppWormux::GetInstance()->video->window.GetSize() / 2 - Point2i((int)(weapons_menu->GetWidth() / 2) + 10, 0));
+  Point2i pos(AppWormux::GetInstance()->video.window.GetSize() / 2 - Point2i((int)(weapons_menu->GetWidth() / 2) + 10, 0));
   Point2d end(POINT2I_2_POINT2D(pos));
   double zoom_start = 0.2, zoom_end = 1.0;
-  double angle_start = -M_PI * GetRotationTime(), angle_end = 0.0;
+  double angle_start = -M_PI * 2.0, angle_end = 0.0;
  // Define the animation
-  position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
-  zoom.SetShrinkAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show,
+  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, start, end);
+  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show,
                           zoom_start, zoom_start, zoom_end, zoom_end);
-  rotation.SetRotationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, angle_start, angle_end);
-  shear.SetShearAnimation(motion_start_time + GetIconsDrawTime(), GetJellyTime(), Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
+  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, angle_start, angle_end);
+  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
   return position * shear * zoom * rotation;
 }
 
 void WeaponsMenu::Draw()
 {
-  if(!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + GetIconsDrawTime()))
+  if(!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + ICONS_DRAW_TIME))
     return;
   // Draw weapons menu
   weapons_menu->ApplyTransformation(ComputeWeaponTransformation());
@@ -332,7 +341,11 @@ void WeaponsMenu::Draw()
     UpdateCurrentOverflyItem(tools_menu);
 }
 
-Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)
+void WeaponsMenu::SetHelp(std::ostringstream msg)
+{
+}
+
+Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly)
 {
   std::vector<PolygonItem *> items = poly->GetItem();
   WeaponMenuItem * tmp;
@@ -354,7 +367,7 @@ Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)
   return NULL;
 }
 
-bool WeaponsMenu::ActionClic(const Point2i &/*mouse_pos*/)
+bool WeaponsMenu::ActionClic(const Point2i &mouse_pos)
 {
   Weapon * tmp;
   if(!show)
@@ -366,7 +379,7 @@ bool WeaponsMenu::ActionClic(const Point2i &/*mouse_pos*/)
     int nb_bullets = ActiveTeam().ReadNbAmmos(tmp->GetType());
     if((nb_bullets == INFINITE_AMMO || nb_bullets > 0) && ActiveTeam().GetWeapon().CanChangeWeapon()) {
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, tmp->GetType()));
-      Hide(false);
+      Hide();
       return true;
     }
   }

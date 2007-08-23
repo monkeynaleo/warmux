@@ -22,14 +22,34 @@
 #ifndef DISCO_GRENADE_H
 #define DISCO_GRENADE_H
 
-#include "weapon_launcher.h"
+#include "launcher.h"
+#include "graphic/surface.h"
+#include "gui/progress_bar.h"
 #include "include/base.h"
+
+class DiscoGrenadeLauncher;
+
+// The Disco Grenade
+class DiscoGrenade : public WeaponProjectile
+{
+  protected:
+    bool have_played_music;
+
+    ParticleEngine smoke_engine;
+  public:
+    DiscoGrenade(ExplosiveWeaponConfig& cfg,
+                 WeaponLauncher * p_launcher);
+    void Refresh();
+    DECLARE_GETWEAPONSTRING();
+  protected:
+    void Explosion();
+    void SignalOutOfMap();
+};
 
 class DiscoGrenadeLauncher : public WeaponLauncher
 {
   public:
     DiscoGrenadeLauncher();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
   protected:
     WeaponProjectile * GetProjectileInstance();
 };

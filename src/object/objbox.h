@@ -22,15 +22,10 @@
 #ifndef OBJBOX_H
 #define OBJBOX_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "include/base.h"
+#include "team/team.h"
 #include "object/physical_obj.h"
-
-class Team;
-class Character;
-class Sprite;
-namespace xmlpp
-{
-  class Element;
-}
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
@@ -40,7 +35,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
   /*********************************************/
 
   private:
-    virtual void ApplyBox (Team &/*team*/, Character &/*character*/){}
+    virtual void ApplyBox (Team &team, Character &character){}
 
   public:
     ObjBox(const std::string &name);
@@ -50,7 +45,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     static void Enable (bool _enable);
     static bool NewBox();
     void DropBox();
-    static void LoadXml(xmlpp::Element * /*object*/){};
+    static void LoadXml(xmlpp::Element * object){}
 
     virtual void Draw(){}
     virtual void Refresh(){}
@@ -62,7 +57,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     static int start_life_points;
     // Signal Fall ending
     void SignalCollision();
-    void SignalDrowning() { SignalCollision(); };
+    void SignalDrowning();
     void SignalGhostState(bool was_already_dead);
 };
 

@@ -23,7 +23,6 @@
 #include "explosion_smoke.h"
 #include "particle.h"
 #include "game/time.h"
-#include "graphic/sprite.h"
 #include "tool/random.h"
 
 ExplosionSmoke::ExplosionSmoke(const uint size_init) :
@@ -53,7 +52,7 @@ void ExplosionSmoke::Refresh()
   image->Update();
 
   if (time >= m_time_between_scale) {
-    //ASSERT(m_left_time_to_live > 0);
+    //assert(m_left_time_to_live > 0);
     if (m_left_time_to_live <= 0) return ;
 
     m_left_time_to_live--;

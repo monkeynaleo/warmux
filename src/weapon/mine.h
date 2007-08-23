@@ -22,17 +22,22 @@
 #ifndef MINE_H
 #define MINE_H
 
-#include "weapon_cfg.h"
-#include "weapon_launcher.h"
+#include <SDL.h>
+#include "launcher.h"
+#include "graphic/surface.h"
+#include "graphic/sprite.h"
 #include "include/base.h"
+#include "object/physical_obj.h"
+#include "character/character.h"
 
 class Mine;
 class MineConfig;
 
 class ObjMine : public WeaponProjectile
 {
-private:
-    SoundSample timeout_sound;
+  private:
+  // channel used for sound
+    int channel;
 
   // this is a fake mine ?
     bool fake;
@@ -55,17 +60,17 @@ private:
     void Detection();
     virtual bool IsImmobile() const;
     // Damage handling
-    void SetEnergyDelta(int delta, bool do_report = true);
+    virtual void AddDamage(uint damage_points);
 
     void Draw();
     void Refresh();
 };
 
 class MineConfig : public ExplosiveWeaponConfig
-{
+{ 
   private:
     static MineConfig * singleton;
-  public:
+  public: 
     uint escape_time;
     double detection_range;
     double speed_detection;
@@ -85,9 +90,11 @@ class Mine : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
     bool p_Shoot();
   public:
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
     Mine();
     MineConfig& cfg();
+
+    DECLARE_GETWEAPONSTRING();
+
 };
 
 #endif /* MINE_H */

@@ -20,10 +20,7 @@
  *****************************************************************************/
 
 #include "polygon.h"
-#include "tool/affine_transform.h"
-#include "sprite.h"
 #include "tool/random.h"
-#include "graphic/video.h"
 #include "include/app.h"
 #include "map/map.h"
 
@@ -36,8 +33,8 @@ PolygonBuffer::PolygonBuffer()
 {
   // Start with at least 32 points buffer
   array_size = 32;
-  vx = new int16_t[array_size];
-  vy = new int16_t[array_size];
+  vx = new Sint16[array_size];
+  vy = new Sint16[array_size];
   buffer_size = 0;
 }
 
@@ -57,13 +54,13 @@ void PolygonBuffer::SetSize(const int size)
   if(array_size > size) {
     buffer_size = size;
   } else {
-    int16_t * tmp_vx = vx;
-    int16_t * tmp_vy = vy;
+    Sint16 * tmp_vx = vx;
+    Sint16 * tmp_vy = vy;
     // double the buffer size (64, 128, 256, 512)
     // to avoid call of delete/new at each new point
     array_size = (array_size * 2 > size ? array_size * 2 : size);
-    vx = new int16_t[array_size];
-    vy = new int16_t[array_size];
+    vx = new Sint16[array_size];
+    vy = new Sint16[array_size];
     for(int i = 0; i < buffer_size; i++) {
       vx[i] = tmp_vx[i];
       vy[i] = tmp_vy[i];
@@ -84,25 +81,15 @@ PolygonItem::PolygonItem()
   SetAlignment(H_CENTERED, V_CENTERED);
 }
 
-PolygonItem::PolygonItem(PolygonItem * item)
-{
-  transformed_position = item->transformed_position;
-  position = item->position;
-  SetPosition(item->GetPosition());
-  SetSprite(new Sprite(*(item->GetSprite())));
-  SetAlignment(item->h_align, item->v_align);
-}
-
-PolygonItem::PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)
+PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)
 {
   SetPosition(pos);
-  SetSprite(new Sprite(*sprite));
+  SetSprite(sprite);
   SetAlignment(h_a, v_a);
 }
 
 PolygonItem::~PolygonItem()
 {
-  // delete(item);
 }
 
 void PolygonItem::SetPosition(const Point2d & pos)
@@ -136,7 +123,7 @@ void PolygonItem::SetSprite(Sprite * sprite)
   item = sprite;
 }
 
-Sprite * PolygonItem::GetSprite()
+const Sprite * PolygonItem::GetSprite()
 {
   return item;
 }
@@ -183,14 +170,14 @@ Polygon::Polygon()
   Init();
 }
 
-Polygon::Polygon(const std::vector<Point2d>& shape)
+Polygon::Polygon(const std::vector<Point2d> shape)
 {
   Init();
   transformed_shape = original_shape = shape;
   shape_buffer->SetSize(original_shape.size());
 }
 
-Polygon::Polygon(Polygon & poly)
+Polygon::Polygon(const Polygon & poly)
 {
   Init();
   texture = poly.texture;
@@ -202,14 +189,14 @@ Polygon::Polygon(Polygon & poly)
   }
   transformed_shape = original_shape = poly.original_shape;
   shape_buffer->SetSize(original_shape.size());
-  for(std::vector<PolygonItem *>::iterator elt = poly.items.begin(); elt != poly.items.end(); elt++) {
-    AddItem((*elt)->GetSprite(), (*elt)->GetPosition(), (*elt)->GetHAlign(), (*elt)->GetVAlign());
-  }
 }
 
 Polygon::~Polygon()
 {
-  ClearItem();
+  for(std::vector<PolygonItem *>::iterator item = items.begin();
+      item != items.end(); item++) {
+    delete (*item);
+  }
   if (texture)
     delete texture;
   if (border_color)
@@ -221,7 +208,6 @@ Polygon::~Polygon()
   texture = NULL;
 }
 
-// Only called by constructor, so setting pointer values is valid
 void Polygon::Init()
 {
   is_closed = true;
@@ -294,16 +280,6 @@ bool Polygon::IsInsidePolygon(const Point2d & p) const
           c = !c;
   }
   return c;
-}
-
-// we process the area size. If < 0 => clockwise else anticlokwise
-// Warning ! The polygon must be concave
-bool Polygon::IsClockWise() const
-{
-  Point2d a = original_shape[0];
-  Point2d b = original_shape[original_shape.size() / 3];
-  Point2d c = original_shape[(original_shape.size() * 2) / 3];
-  return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y) < 0;
 }
 
 // Not accurate at 100% but sufficent for the moment
@@ -379,7 +355,7 @@ void Polygon::DeletePoint(int index)
   transformed_shape = original_shape = vector_tmp;
 }
 
-void Polygon::AddItem(const Sprite * sprite, const Point2d & pos, PolygonItem::H_align h_a, PolygonItem::V_align v_a)
+void Polygon::AddItem(Sprite * sprite, const Point2d & pos, PolygonItem::H_align h_a, PolygonItem::V_align v_a)
 {
   items.push_back(new PolygonItem(sprite, pos, h_a, v_a));
 }
@@ -407,13 +383,8 @@ std::vector<PolygonItem *> Polygon::GetItem() const
   return items;
 }
 
-void Polygon::ClearItem(bool free_mem)
+void Polygon::ClearItem()
 {
-  for(std::vector<PolygonItem *>::iterator item = items.begin();
-      item != items.end(); item++) {
-    if(free_mem)
-      delete (*item);
-  }
   items.clear();
 }
 
@@ -489,8 +460,8 @@ int Polygon::GetNbOfPoint() const
 
 // And the famous Bezier curve. And this algorithme is that simple ? I'm so disappointed !
 // But now you can say to the world wormux is using Bezier curve.
-void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
-                             const Point2d& control2, const Point2d& anchor2,
+void Polygon::AddBezierCurve(const Point2d anchor1, const Point2d control1,
+                             const Point2d control2, const Point2d anchor2,
                              const int num_steps, const bool add_first_point,
                              const bool add_last_point)
 {
@@ -509,7 +480,7 @@ void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
 }
 
 // Generate random point between 2 points
-void Polygon::AddRandomCurve(const Point2d& start, const Point2d& end,
+void Polygon::AddRandomCurve(const Point2d start, const Point2d end,
                              const double x_random_offset, const double y_random_offset,
                              const int num_steps, const bool add_first_point,
                              const bool add_last_point)
@@ -563,26 +534,21 @@ Polygon * Polygon::GetBezierInterpolation(double smooth_value, int num_steps, do
 
     shape->AddBezierCurve(p1, v1, v2, p2, num_steps, false);
   }
-  for(std::vector<PolygonItem *>::iterator elt = items.begin(); elt != items.end(); elt++) {
-    shape->AddItem((*elt)->GetSprite(), (*elt)->GetPosition(), (*elt)->GetHAlign(), (*elt)->GetVAlign());
-  }
   return shape;
 }
 
-PolygonBuffer * Polygon::GetPolygonBuffer()
+PolygonBuffer * Polygon::GetPolygonBuffer() const
 {
   return shape_buffer;
 }
 
 // expand the polygon (to draw a little border for example)
-void Polygon::Expand(double expand_value)
+void Polygon::Expand(const double expand_value)
 {
   if(original_shape.size() < 2) return;
-  if(!IsClockWise())
-    expand_value = -expand_value;
   std::vector<Point2d> tmp_shape;
   AffineTransform2D trans = AffineTransform2D::Rotate(M_PI_2);
-  Point2d current, next, vect, expand;
+  Point2d current, next, vector, expand;
   int i, j, k;
   for(i = 0; i < (int)original_shape.size(); i++) {
     j = (i + 1) % original_shape.size();
@@ -596,9 +562,9 @@ void Polygon::Expand(double expand_value)
       next    = original_shape[j];
       k++;
     }
-    vect = trans * (next - current);
-    vect = (vect / vect.Norm()) * expand_value; // Normalize and length
-    expand = current + vect;
+    vector = trans * (next - current);
+    vector = (vector / vector.Norm()) * expand_value; // Normalize and length
+    expand = current + vector;
     tmp_shape.push_back(expand);
     shape_buffer->vx[i] = (int)expand.x;
     shape_buffer->vy[i] = (int)expand.y;
@@ -624,7 +590,7 @@ bool Polygon::IsBordered() const
 }
 
 // Texture handling
-Surface * Polygon::GetTexture()
+Surface * Polygon::GetTexture() const
 {
   return texture;
 }
@@ -691,6 +657,6 @@ void Polygon::Draw(Surface * dest)
 
 void Polygon::DrawOnScreen()
 {
-  Draw(&AppWormux::GetInstance()->video->window);
+  Draw(&AppWormux::GetInstance()->video.window);
   world.ToRedrawOnScreen(GetRectangleToRefresh());
 }

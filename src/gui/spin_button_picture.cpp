@@ -18,31 +18,23 @@
  *****************************************************************************/
 
 #include "spin_button_picture.h"
-#include "graphic/text.h"
-#include "graphic/video.h"
-#include "button.h"
 #include <sstream>
+#include <iostream>
 #include "include/app.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
-#include "graphic/polygon_generator.h"
-#include "tool/affine_transform.h"
+#include "graphic/font.h"
 
-SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label,
-                                              const std::string &resource_id,
-                                              const Rectanglei &rect,
-                                              int value, int step,
-                                              int min_value, int max_value)
+SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const std::string &resource_id,
+					      const Rectanglei &rect,
+					      int value, int step, int min_value, int max_value)
 {
   position =  rect.GetPosition();
   size = rect.GetSize();
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
   m_image = resource_manager.LoadImage(res, resource_id);
-  m_annulus_background = resource_manager.LoadImage(res, "menu/annulus_background");
-  m_annulus_foreground = resource_manager.LoadImage(res, "menu/annulus_foreground");
-  m_progress_color = resource_manager.LoadColor(res, "menu/annulus_progress_color");
-  resource_manager.UnLoadXMLProfile( res);
+  resource_manager.UnLoadXMLProfile( res); 
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
@@ -55,8 +47,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label,
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value_black = new Text("", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
-  txt_value_white = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_value = new Text("", dark_gray_color, Font::FONT_LARGE, Font::FONT_NORMAL, false);
   SetValue(value);
 
   m_step = step;
@@ -65,8 +56,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label,
 SpinButtonWithPicture::~SpinButtonWithPicture ()
 {
   delete txt_label;
-  delete txt_value_black;
-  delete txt_value_white;
+  delete txt_value;
 }
 
 void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
@@ -75,95 +65,73 @@ void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
   txt_label->SetMaxWidth(GetSizeX());
 }
 
-void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
+void SpinButtonWithPicture::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  Surface video_window = AppWormux::GetInstance()->video->window;
+  // center the image on the first half
+  uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/4 ;
+  uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
 
-  //  the computed positions are to center on the image part of the widget
+  AppWormux::GetInstance()->video.window.Blit(m_image, Point2i(tmp_x, tmp_y));
 
-  // 1. first draw the annulus background
-  uint tmp_back_x = GetPositionX() + (GetSizeX() - m_annulus_background.GetWidth())/4 ;
-  uint tmp_back_y = GetPositionY() + (GetSizeY() - m_annulus_background.GetHeight() - txt_label->GetHeight() - 5) /2;
-  video_window.Blit(m_annulus_background, Point2i(tmp_back_x, tmp_back_y));
+  tmp_x = GetPositionX() + (3*GetSizeX()/4);
+  tmp_y = GetPositionY() + (GetSizeY()/2) - txt_label->GetHeight()/2;
 
-  // 2. then draw the progress annulus
-  static uint small_r = 25;
-  static uint big_r = 35;
-  static double open_angle_value = 0.96; // 55 °
-  uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
-  uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
-  double angle = (2 * M_PI - open_angle_value) * (m_value - m_min_value) / (m_max_value - m_min_value);
-  Polygon *tmp = PolygonGenerator::GeneratePartialTorus(big_r * 2, small_r * 2, 100, angle, open_angle_value / 2.0);
-  tmp->SetPlaneColor(m_progress_color);
-  tmp->ApplyTransformation(AffineTransform2D::Translate(center_x, center_y));
-  tmp->Draw(&video_window);
-  delete(tmp);
+  uint value_h = Font::GetInstance(Font::FONT_HUGE)->GetHeight();
 
-  // 3. then draw the annulus foreground
-  uint tmp_fore_x = GetPositionX() + (GetSizeX() - m_annulus_foreground.GetWidth())/4 ;
-  uint tmp_fore_y = GetPositionY() + (GetSizeY() - m_annulus_foreground.GetHeight() - txt_label->GetHeight() - 5) /2;
-  video_window.Blit(m_annulus_foreground, Point2i(tmp_fore_x, tmp_fore_y));
+  txt_value->DrawCenterTop(tmp_x, tmp_y - value_h/2);
 
-  // 4. then draw the image
-  uint tmp_x = center_x - m_image.GetWidth() / 2;
-  uint tmp_y = center_y - m_image.GetHeight() / 2;
-
-  video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
-
-  // 5. add in the value image
-  tmp_x = center_x;
-  tmp_y = center_y + small_r - 3;
-  uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
-
-  txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1 - value_h/2));
-  txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y - value_h/2));
-
-  // 6. and finally the label image
-  txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
-                            GetPositionY() + GetSizeY() - txt_label->GetHeight()));
+  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2, 
+			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 }
 
 Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
-  if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {
-
+  if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {  
+    
     m_value += m_step;
     if (m_value > m_max_value) SetValue(m_min_value);
     else SetValue(m_value);
-    return this;
 
-  } else if (button == SDL_BUTTON_RIGHT && Contains(mousePosition)) {
-
+  } else if (button == SDL_BUTTON_RIGHT && Contains(mousePosition)) {  
+    
     m_value -= m_step;
     if (m_value < m_min_value) SetValue(m_max_value);
     else SetValue(m_value);
-    return this;
 
   } else if( button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition) ) {
-
+    
     SetValue(m_value - m_step);
     return this;
-
+    
   } else if( button == SDL_BUTTON_WHEELUP && Contains(mousePosition) ) {
-
+    
     SetValue(m_value + m_step);
     return this;
   }
   return NULL;
 }
 
-void SpinButtonWithPicture::SetValue(int value)
+Widget* SpinButtonWithPicture::Click(const Point2i &mousePosition, uint button)
 {
-  m_value = BorneLong(value, m_min_value, m_max_value);
+  return NULL;
+}
+
+int SpinButtonWithPicture::GetValue() const
+{
+  return m_value;
+}
+
+void SpinButtonWithPicture::SetValue(int value)  
+{
+  m_value = BorneLong(value, m_min_value, m_max_value);  
 
   std::ostringstream value_s;
   value_s << m_value ;
 
   std::string s(value_s.str());
-  txt_value_black->Set(s);
-  txt_value_white->Set(s);
+  txt_value->Set(s);
 
   ForceRedraw();
 }

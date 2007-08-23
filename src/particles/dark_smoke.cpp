@@ -21,7 +21,6 @@
 
 #include "dark_smoke.h"
 #include "particle.h"
-#include "graphic/sprite.h"
 
 DarkSmoke::DarkSmoke() :
   Particle("dark_smoke")

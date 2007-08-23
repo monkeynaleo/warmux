@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "check_box.h"
-#include "graphic/text.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
 #include "tool/resource_manager.h"
@@ -30,20 +29,6 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
   m_value(value),
   m_checked_image(NULL),
   hidden(false)
-{
-  Init(rect);
-}
-
-CheckBox::CheckBox(Text *text, const Rectanglei &rect, bool value):
-  txt_label(text),
-  m_value(value),
-  m_checked_image(NULL),
-  hidden(false)
-{
-  Init(rect);
-}
-
-void CheckBox::Init(const Rectanglei &rect)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_checked_image = resource_manager.LoadSprite( res, "menu/check");
@@ -63,26 +48,47 @@ CheckBox::~CheckBox()
   delete txt_label;
 }
 
-void CheckBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
+void CheckBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   if (!hidden)
     {
       txt_label->DrawTopLeft( GetPosition() );
 
       if (m_value)
-        m_checked_image->SetCurrentFrame(0);
+	m_checked_image->SetCurrentFrame(0);
       else
-        m_checked_image->SetCurrentFrame(1);
+	m_checked_image->SetCurrentFrame(1);
 
       m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
     }
 }
 
-Widget* CheckBox::ClickUp(const Point2i &/*mousePosition*/, uint /*button*/)
+Widget* CheckBox::Click(const Point2i &mousePosition, uint button)
+{
+  // do nothing since user has not released the button
+  return this;
+}
+
+Widget* CheckBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
   m_value = !m_value;
   return this;
+}
+
+void CheckBox::SetSizePosition(const Rectanglei &rect)
+{
+  StdSetSizePosition(rect);
+}
+
+bool CheckBox::GetValue() const
+{
+  return m_value;
+}
+
+void CheckBox::SetValue(bool value)
+{
+  m_value = value;
 }
 
 void CheckBox::SetVisible(bool visible)

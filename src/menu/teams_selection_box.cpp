@@ -20,14 +20,7 @@
  *****************************************************************************/
 
 #include "teams_selection_box.h"
-#include "team_box.h"
-#include "gui/label.h"
-#include "gui/picture_widget.h"
-#include "gui/spin_button.h"
-#include "gui/spin_button_picture.h"
-#include "gui/text_box.h"
 #include "team/teams_list.h"
-#include "team/team.h"
 #include "tool/i18n.h"
 
 TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
@@ -35,16 +28,14 @@ TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
   AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
 
   // How many teams ?
-  teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
-				       "menu/team_number",
-				       Rectanglei(0, 0, 130, 30),
-				       2, 1,
-				       2, MAX_NB_TEAMS);
+  teams_nb = new SpinButtonBig(_("Number of teams:"), Rectanglei(0, 0, 130, 30),
+			       2, 1,
+			       2, MAX_NB_TEAMS);
   AddWidget(teams_nb);
 
   Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0,
-                                                         rect.GetSizeX() - teams_nb->GetSizeX() - 60, 0)
-                                              ,false);
+							 rect.GetSizeX() - teams_nb->GetSizeX() - 60, 0)
+					      ,false);
   top_n_bottom_team_options->SetBorder(Point2i(5,0));
   top_n_bottom_team_options->SetMargin(10);
   Box * top_team_options = new HBox ( Rectanglei(0, 0, 0, rect.GetSizeY()/2 - 20), false);
@@ -105,24 +96,24 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 
       if (teams_selections.at(i)->Contains(mousePosition)) {
 
-        Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
+	Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
 
-        if (w == NULL) {
-          Rectanglei r(teams_selections.at(i)->GetPositionX(),
-                       teams_selections.at(i)->GetPositionY(),
-                       60,
-                       60);
-          if ( r.Contains(mousePosition) ) {
-            if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
-              NextTeam(i);
-            } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
-              PrevTeam(i);
-            }
-          }
-        } else {
-          return w;
-        }
-        break;
+	if (w == NULL) {
+	  Rectanglei r(teams_selections.at(i)->GetPositionX(),
+		       teams_selections.at(i)->GetPositionY(),
+		       60,
+		       60);
+	  if ( r.Contains(mousePosition) ) {
+	    if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
+	      NextTeam(i);
+	    } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
+	      PrevTeam(i);
+	    }
+	  }
+	} else {
+	  return w;
+	}
+	break;
       }
     }
   }
@@ -130,7 +121,7 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* TeamsSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
+Widget* TeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
 {
   return NULL;
 }
@@ -153,23 +144,23 @@ void TeamsSelectionBox::PrevTeam(int i)
 
       // select the last team if we are outside list
       if ( index < 0 )
-        index = int(teams_list.full_list.size())-1;
+	index = int(teams_list.full_list.size())-1;
 
       // Get the team at current index
       tmp = teams_list.FindByIndex(index);
 
       // Check if that team is already selected
       for (int j = 0; j < teams_nb->GetValue(); j++) {
-        if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
-          index--;
-          to_continue = true;
-          break;
-        }
+	if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
+	  index--;
+	  to_continue = true;
+	  break;
+	}
       }
 
       // We have found a team which is not selected
       if (tmp != NULL && !to_continue)
-        teams_selections.at(i)->SetTeam(*tmp);
+	teams_selections.at(i)->SetTeam(*tmp);
     } while ( index != previous_index && to_continue);
 }
 
@@ -191,23 +182,23 @@ void TeamsSelectionBox::NextTeam(int i)
 
       // select the first team if we are outside list
       if ( index >= int(teams_list.full_list.size()) )
-        index = 0;
+	index = 0;
 
       // Get the team at current index
       tmp = teams_list.FindByIndex(index);
 
       // Check if that team is already selected
       for (int j = 0; j < teams_nb->GetValue(); j++) {
-        if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
-          index++;
-          to_continue = true;
-          break;
-        }
+	if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
+	  index++;
+	  to_continue = true;
+	  break;
+	}
       }
 
       // We have found a team which is not selected
       if (tmp != NULL && !to_continue)
-        teams_selections.at(i)->SetTeam(*tmp);
+	teams_selections.at(i)->SetTeam(*tmp);
     } while ( index != previous_index && to_continue);
 }
 
@@ -240,11 +231,11 @@ void TeamsSelectionBox::ValidTeamsSelection()
 
     for (uint i=0; i < teams_selections.size(); i++) {
       if (teams_selections.at(i)->GetTeam() != NULL) {
-        int index = -1;
-        teams_selections.at(i)->ValidOptions();
-        teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
-        if (index > -1)
-          selection.push_back(uint(index));
+	int index = -1;
+	teams_selections.at(i)->ValidOptions();
+	teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
+	if (index > -1)
+	  selection.push_back(uint(index));
       }
     }
     teams_list.ChangeSelection (selection);

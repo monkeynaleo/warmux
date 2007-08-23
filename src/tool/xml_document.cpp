@@ -60,7 +60,7 @@ xmlpp::Element* XmlReader::GetMarker(const xmlpp::Node *x,
   if (nodes.size() != 1) return NULL;
 
   xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (nodes.front());
-  ASSERT (elem != NULL);
+  assert (elem != NULL);
   return elem;
 }
 
@@ -75,7 +75,7 @@ xmlpp::Element* XmlReader::Access(const xmlpp::Node *x,
   for (; it != end; ++it) {
 
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*it);
-    ASSERT (elem != NULL);
+    assert (elem != NULL);
     const xmlpp::Attribute *attr = elem->get_attribute("name");
     if (attr != NULL) {
       if (attr -> get_value() == attr_name) return elem;
@@ -151,10 +151,10 @@ bool XmlReader::ReadMarkerValue(const xmlpp::Node *marker,
   }
 
   // Read node value
-  ASSERT(marker->get_children().size() == 1);
-  ASSERT(marker->get_children().front()->get_name() == "text");
+  assert(marker->get_children().size() == 1);
+  assert(marker->get_children().front()->get_name() == "text");
   const xmlpp::TextNode *text = dynamic_cast<const xmlpp::TextNode*>(marker->get_children().front());
-  ASSERT(text != NULL);
+  assert(text != NULL);
   output = text->get_content();
   return true;
 }
@@ -164,7 +164,7 @@ bool XmlReader::ReadStringAttr(const xmlpp::Element *x,
                                const std::string &name,
                                std::string &output)
 {
-  ASSERT (x != NULL);
+  assert (x != NULL);
   const xmlpp::Attribute *attr = x -> get_attribute(name);
   if (attr == NULL) return false;
   output = attr->get_value();
@@ -224,9 +224,9 @@ bool XmlReader::IsOk() const
 
 xmlpp::Element* XmlReader::GetRoot() const
 {
-  ASSERT(IsOk());
+  assert(IsOk());
   xmlpp::Element *root = parser.get_document()->get_root_node();
-  ASSERT(root != NULL);
+  assert(root != NULL);
   return root;
 }
 
@@ -260,7 +260,7 @@ void XmlWriter::WriteElement(xmlpp::Element *x,
 }
 
 void XmlWriter::WriteComment(xmlpp::Element *x,
-                             const std::string& comment)
+			     const std::string& comment)
 {
   x->add_child_comment(comment);
   m_save = false;
@@ -276,13 +276,13 @@ bool XmlWriter::Create(const std::string &filename,const std::string &root,
   m_encoding = encoding;
   m_doc = new xmlpp::Document(version);
   m_root = m_doc->create_root_node(root);
-  ASSERT(m_root != NULL);
+  assert(m_root != NULL);
   return true;
 }
 
 xmlpp::Element* XmlWriter::GetRoot()
 {
-  ASSERT (m_root != NULL);
+  assert (m_root != NULL);
   return m_root;
 }
 

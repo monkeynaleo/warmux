@@ -20,15 +20,14 @@
  *****************************************************************************/
 
 #include "label.h"
-#include "graphic/text.h"
 
 Label::Label (const std::string &label,
-              const Rectanglei &rect,
-              Font::font_size_t fsize,
-              Font::font_style_t fstyle,
-              const Color& color,
-              bool _center,
-              bool _shadowed):
+	      const Rectanglei &rect,
+	      Font::font_size_t fsize,
+	      Font::font_style_t fstyle,
+	      const Color& color,
+	      bool _center,
+	      bool _shadowed):
   txt_label(new Text(label, color, fsize, fstyle, _shadowed)),
   hidden(false),
   font_size(fsize),
@@ -48,14 +47,14 @@ Label::~Label()
   delete txt_label;
 }
 
-void Label::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
+void Label::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   if (!hidden)
     {
       if (!center)
-        txt_label->DrawTopLeft(position);
+	txt_label->DrawTopLeft(position);
       else
-        txt_label->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
+	txt_label->DrawCenterTop(position.x + size.x/2, position.y);
     }
 }
 

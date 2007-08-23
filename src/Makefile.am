@@ -36,15 +36,14 @@ wormux_SOURCES = \
         graphic/surface.cpp graphic/surface.h \
         graphic/text.cpp graphic/text.h \
         graphic/text_list.cpp graphic/text_list.h \
-        graphic/textured_polygon.h \
+	graphic/textured_polygon.h \
         graphic/video.cpp graphic/video.h \
         gui/box.cpp gui/box.h \
         gui/button.cpp gui/button.h \
         gui/button_text.cpp gui/button_text.h \
         gui/check_box.cpp gui/check_box.h \
-	gui/combo_box.cpp gui/combo_box.h \
         gui/container.h \
-        gui/energy_bar.cpp gui/energy_bar.h \
+        gui/EnergyBar.cpp gui/EnergyBar.h \
         gui/label.cpp gui/label.h \
         gui/list_box.cpp gui/list_box.h \
         gui/list_box_w_label.cpp gui/list_box_w_label.h \
@@ -69,10 +68,8 @@ wormux_SOURCES = \
         interface/cursor.cpp interface/cursor.h \
         interface/game_msg.cpp interface/game_msg.h \
         interface/interface.cpp interface/interface.h \
-        interface/joystick.cpp interface/joystick.h \
         interface/keyboard.cpp interface/keyboard.h \
         interface/loading_screen.cpp interface/loading_screen.h \
-        interface/man_machine_interface.cpp interface/man_machine_interface.h \
         interface/mouse.cpp interface/mouse.h \
         interface/weapon_menu.cpp interface/weapon_menu.h \
         map/camera.cpp map/camera.h \
@@ -131,7 +128,6 @@ wormux_SOURCES = \
         particles/star.cpp particles/star.h \
         particles/teleport_member.cpp particles/teleport_member.h \
         sound/jukebox.cpp sound/jukebox.h \
-        sound/sound_sample.cpp sound/sound_sample.h \
         team/macro.h \
         team/results.cpp team/results.h \
         team/team_config.h \
@@ -172,6 +168,7 @@ wormux_SOURCES = \
         weapon/grenade.cpp weapon/grenade.h \
         weapon/gun.cpp weapon/gun.h \
         weapon/jetpack.cpp weapon/jetpack.h\
+        weapon/launcher.cpp weapon/launcher.h \
         weapon/lowgrav.cpp weapon/lowgrav.h \
         weapon/mine.cpp weapon/mine.h \
         weapon/parachute.cpp weapon/parachute.h \
@@ -187,22 +184,17 @@ wormux_SOURCES = \
         weapon/teleportation.cpp weapon/teleportation.h \
         weapon/weapon_cfg.cpp weapon/weapon_cfg.h \
         weapon/weapon.cpp weapon/weapon.h \
-        weapon/weapon_launcher.cpp weapon/weapon_launcher.h \
-        weapon/weapons_list.cpp weapon/weapons_list.h \
-        weapon/weapon_strength_bar.h
+        weapon/weapons_list.cpp weapon/weapons_list.h
 
 if AUTOPACKAGE
 DEFINE_AUTOPACKAGE=-DUSE_AUTOPACKAGE
 endif
 
-AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
-  -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
-  -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)
+AM_CXXFLAGS = -DINSTALL_DATADIR=\"@DATADIR@\" -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\" -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE) -Werror -I $(top_srcdir)/src/
+
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
 .rc.o:
-	@WINDRES@ -o $@ -i $<
-else
-AM_CXXFLAGS += -Werror
+	windres -o $@ -i $<
 endif

@@ -22,14 +22,12 @@
 #ifndef ACTION_HANDLER_H
 #define ACTION_HANDLER_H
 //-----------------------------------------------------------------------------
+#include <SDL_mutex.h>
 #include <map>
 #include <list>
 #include "action.h"
 #include "base.h"
 //-----------------------------------------------------------------------------
-
-// Forward declarations
-struct SDL_mutex;
 
 class ActionHandler
 {
@@ -57,9 +55,8 @@ public:
   void NewAction(Action* a, bool repeat_to_network=true);
   void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
 
-  void Flush();
   void ExecActions();
-  const std::string &GetActionName(Action::Action_t action) const;
+  std::string GetActionName(Action::Action_t action);
 
 private:
   ActionHandler();

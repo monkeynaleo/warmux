@@ -40,6 +40,10 @@ ObjectConfig::ObjectConfig()
   m_mass = 1.0;
 }
 
+ObjectConfig::~ObjectConfig()
+{
+}
+
 void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &config_file)
 {
   xmlpp::Element* elem = NULL;
@@ -47,24 +51,24 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
 
   if (config_file == "") {
 
-    MSG_DEBUG("game_mode", "Load %s configuration from %s\n",
-              obj_name.c_str(),
-              GameMode::GetInstance()->GetName().c_str());
+    MSG_DEBUG("game_mode", "Load %s configuration from %s\n", 
+	      obj_name.c_str(), 
+	      GameMode::GetInstance()->GetName().c_str());
 
-    const XmlReader* ddoc = GameMode::GetInstance()->GetXmlObjects();
-    elem = XmlReader::GetMarker(ddoc->GetRoot(), obj_name);
+    XmlReader& ddoc = GameMode::GetInstance()->GetXmlObjects();
+    elem = XmlReader::GetMarker(ddoc.GetRoot(), obj_name);
 
   } else {
-
-    MSG_DEBUG("game_mode", "** Load %s configuration from file %s\n",
-              obj_name.c_str(), config_file.c_str());
+    
+    MSG_DEBUG("game_mode", "** Load %s configuration from file %s\n", 
+	      obj_name.c_str(), config_file.c_str());
 
     // Load Xml configuration
-    ASSERT(doc.Load(config_file));
+    assert(doc.Load(config_file));
     elem = XmlReader::GetMarker(doc.GetRoot(), obj_name);
   }
 
-  ASSERT(elem != NULL);
+  assert(elem != NULL);
   XmlReader::ReadDouble(elem, "mass", m_mass);
   XmlReader::ReadDouble(elem, "wind_factor", m_wind_factor);
   XmlReader::ReadDouble(elem, "air_resist_factor", m_air_resist_factor);

@@ -22,14 +22,12 @@
 #ifndef GAME_LOOP_H
 #define GAME_LOOP_H
 
+#include "graphic/fps.h"
 #include "include/base.h"
+#include "character/character.h"
 #include "network/chat.h"
-
-// Forward declarations
-class Character;
-class ObjBox;
-class PhysicalObj;
-class FramePerSecond;
+#include "object/bonus_box.h"
+#include "object/medkit.h"
 
 class GameLoop
 {
@@ -52,24 +50,12 @@ private:
   ObjBox * current_ObjBox;
   bool give_objbox;
 
-  FramePerSecond *fps;
+  FramePerSecond fps;
 
   static GameLoop * singleton;
   GameLoop();
-  ~GameLoop();
 
-  // Time to wait between 2 loops
-  int delay;
-  // Time to display the next frame
-  uint time_of_next_frame;
-  // Time to compute the next physic engine frame
-  uint time_of_next_phy_frame;
-
-  static uint last_unique_id;
 public:
-  static std::string GetUniqueId();
-  static void ResetUniqueIds();
-
   static GameLoop * GetInstance();
 
   bool character_already_chosen;
@@ -85,44 +71,41 @@ public:
 
   // Read/Set State
   game_loop_state_t ReadState() const { return state; }
-  void SetState(game_loop_state_t new_state, bool begin_game=false) const;
+  void SetState(game_loop_state_t new_state, bool begin_game=false);
   void Really_SetState(game_loop_state_t new_state); // called by the action_handler
 
-  // Get remaining time to play
-  uint GetRemainingTime() const;
   // Signal death of a player
-  void SignalCharacterDeath (const Character *character) const;
+  void SignalCharacterDeath (Character *character);
 
   // Signal character damage
-  void SignalCharacterDamage(const Character *character) const;
+  void SignalCharacterDamage(Character *character);
 
   void SetCurrentBox(ObjBox * current_box);
-  ObjBox * GetCurrentBox();
+  ObjBox * GetCurrentBox() const;
 
 private:
 
   // Refresh all objects (position, state ...)
-  void RefreshObject() const;
+  void RefreshObject();
   void RefreshClock();
 
   // Input management (keyboard/mouse)
-  void RefreshInput() const;
-  void IgnorePendingInputEvents() const;
+  void RefreshInput();
+  void IgnorePendingInputEvents();
 
-  void PingClient() const;
+  void PingClient();
 
   void CallDraw();
 
-  PhysicalObj* GetMovingObject() const;
-  bool IsAnythingMoving() const;
-  void ApplyDiseaseDamage() const;
-  void ApplyDeathMode() const;
+  PhysicalObj* GetMovingObject();
+  bool IsAnythingMoving();
+  void ApplyDiseaseDamage();
+  void ApplyDeathMode();
 
   void __SetState_PLAYING();
   void __SetState_HAS_PLAYED();
   void __SetState_END_TURN();
 
-  void EndOfGameLoop();
-  void MainLoop();
+  void EndOfGame();
 };
 #endif

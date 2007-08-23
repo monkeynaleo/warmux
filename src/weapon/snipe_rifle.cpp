@@ -20,38 +20,22 @@
  *****************************************************************************/
 
 #include "snipe_rifle.h"
-#include "weapon_cfg.h"
-
 #include <sstream>
 #include "explosion.h"
-#include "character/character.h"
-#include "game/game_loop.h"
-#include "graphic/sprite.h"
-#include "graphic/video.h"
-#include "include/app.h"
+#include "game/time.h"
 #include "interface/game_msg.h"
 #include "map/map.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
-#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
+#include "include/app.h"
+#include "game/game_loop.h"
 
 
 const uint SNIPE_RIFLE_BEAM_START = 5;
 const uint SNIPE_RIFLE_BULLET_SPEED = 20;
 const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
-
-class SnipeBullet : public WeaponBullet
-{
-  public:
-    SnipeBullet(ExplosiveWeaponConfig& cfg,
-                WeaponLauncher * p_launcher);
-  protected:
-    void ShootSound();
-};
-
 
 SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :
@@ -89,9 +73,10 @@ WeaponProjectile * SnipeRifle::GetProjectileInstance()
 
 bool SnipeRifle::p_Shoot()
 {
-  if(IsInUse())
+  if(m_is_active)
     return false;
 
+  m_is_active = true;
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
@@ -101,6 +86,7 @@ bool SnipeRifle::p_Shoot()
 // When an explosion occurs, we compute a new targeted point
 void SnipeRifle::SignalProjectileGhostState()
 {
+  m_is_active = false;
   ReloadLauncher();
   ComputeCrossPoint(true);
 }
@@ -165,9 +151,9 @@ void SnipeRifle::p_Deselect()
 
 void SnipeRifle::DrawBeam()
 {
-  Point2i pos1 = laser_beam_start - Camera::GetInstance()->GetPosition();
-  Point2i pos2 = targeted_point - Camera::GetInstance()->GetPosition();
-  AppWormux::GetInstance()->video->window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
+  Point2i pos1 = laser_beam_start - camera.GetPosition();
+  Point2i pos2 = targeted_point - camera.GetPosition();
+  AppWormux::GetInstance()->video.window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
 
   // Set area of the screen to be redrawn:
   // Splited into little rectangles to avoid too large area of redraw
@@ -219,11 +205,11 @@ void SnipeRifle::Draw()
   if( targeting_something ) m_laser_image->Draw(targeted_point - (m_laser_image->GetSize()/2));
 }
 
-std::string SnipeRifle::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string SnipeRifle::GetWeaponWinString(const char *TeamName, uint items_count )
 {
   return Format(ngettext(
-            "%s team has won %u snipe rifle! Shout it him between the eyes!",
-            "%s team has won %u snipe rifles! Shout it him between the eyes!",
+            "%s team has won %u snipe rifle!",
+            "%s team has won %u snipe rifles!",
             items_count), TeamName, items_count);
 }
 

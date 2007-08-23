@@ -22,9 +22,8 @@
 #ifndef MOVE_H
 #define MOVE_H
 
-#include "include/base.h"
-
-class Character;
+#include "character.h"
+#include "object/physical_obj.h"
 
 // Pause between two movements
 const uint PAUSE_MOVEMENT=30; // ms
@@ -32,12 +31,12 @@ const uint PAUSE_MOVEMENT=30; // ms
 // Compute the height to fall or to walk on when moving horizontally
 // Return a boolean which says if movement is possible
 bool ComputeHeightMovement (Character &character, int &height,
-                            bool falling);
+			    bool falling);
 
 void MoveCharacter (Character &character);
 
 // Move the active character to the left/right
-void MoveActiveCharacterRight(bool shift);
-void MoveActiveCharacterLeft(bool shift);
+void MoveActiveCharacterRight();
+void MoveActiveCharacterLeft();
 
 #endif

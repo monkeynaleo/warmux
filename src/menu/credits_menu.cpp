@@ -23,16 +23,9 @@
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include <iostream>
-#ifdef _MSC_VER
-#  include <algorithm>  //std::transform
-#endif
 #include "game/config.h"
-#include "graphic/font.h"
-#include "graphic/video.h"
-#include "gui/list_box.h"
-#include "include/app.h"
 #include "tool/i18n.h"
-#include "tool/xml_document.h"
+#include "include/app.h"
 //-----------------------------------------------------------------------------
 
 class Author
@@ -45,41 +38,41 @@ public:
   std::string description;
 
   bool Feed (const xmlpp::Node *node);
-  std::string PrettyString(bool with_email) const;
+  std::string PrettyString(bool with_email);
 };
 
 //-----------------------------------------------------------------------------
 
 bool Author::Feed (const xmlpp::Node *node)
 {
-  if (!XmlReader::ReadString(node, "name", name)) return false;
-  if (!XmlReader::ReadString(node, "description", description)) return false;
-  XmlReader::ReadString(node, "nickname", nickname);
-  XmlReader::ReadString(node, "email", email);
-  XmlReader::ReadString(node, "country", country);
-  return true;
+   if (!XmlReader::ReadString(node, "name", name)) return false;
+   if (!XmlReader::ReadString(node, "description", description)) return false;
+   XmlReader::ReadString(node, "nickname", nickname);
+   XmlReader::ReadString(node, "email", email);
+   XmlReader::ReadString(node, "country", country);
+   return true;
 }
 
 //-----------------------------------------------------------------------------
 
-std::string Author::PrettyString(bool with_email) const
+std::string Author::PrettyString(bool with_email)
 {
-  std::ostringstream ss;
-  ss << "* " << name;
-  if (with_email)
-  {
-    ss << " <" << email << ">";
-  }
-  if (!nickname.empty())
-  {
-    ss << " " << _("aka") << " " << nickname;
-  }
-  if (!country.empty())
-  {
-    ss << " " << _("from") << " " << country;
-  }
-  ss << ": " << description;
-  return ss.str();
+   std::ostringstream ss;
+   ss << "* " << name;
+   if (with_email)
+   {
+     ss << " <" << email << ">";
+   }
+   if (!nickname.empty())
+   {
+     ss << " " << _("aka") << " " << nickname;
+   }
+   if (!country.empty())
+   {
+     ss << " " << _("from") << " " << country;
+   }
+   ss << ": " << description;
+   return ss.str();
 }
 
 //-----------------------------------------------------------------------------
@@ -89,8 +82,8 @@ CreditsMenu::CreditsMenu()  :
   Menu("credit/background", vOk)
 {
   ListBox * lbox_authors = new ListBox( Rectanglei( 30, 30,
-                                               AppWormux::GetInstance()->video->window.GetWidth()-60,
-                                               AppWormux::GetInstance()->video->window.GetHeight()-60-30),
+						    AppWormux::GetInstance()->video.window.GetWidth()-60,
+						    AppWormux::GetInstance()->video.window.GetHeight()-60-30),
                                         false);
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
   widgets.AddWidget(lbox_authors);
@@ -113,7 +106,7 @@ bool CreditsMenu::signal_cancel()
 }
 
 
-void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
+void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
 {
   std::string filename = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "authors.xml";
   XmlReader doc;
@@ -138,10 +131,10 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
     // I think this is ugly, but someone can use a better presentation
     std::cout << "       ===[ " << team_title << " ]===" << std::endl << std::endl;
 
-    lbox_authors->AddItem (false, " ", "",
-                           Font::FONT_BIG, Font::FONT_NORMAL);
-    lbox_authors->AddItem (false, team_title, teams[i],
-                           Font::FONT_BIG, Font::FONT_NORMAL, c_red);
+    lbox_authors->AddItem (false, " ", "", 
+			   Font::FONT_BIG, Font::FONT_NORMAL);
+    lbox_authors->AddItem (false, team_title, teams[i], 
+			   Font::FONT_BIG, Font::FONT_NORMAL, c_red);
 
     // We think there is ONLY ONE occurence of team section, so we use the first
     xmlpp::Node::NodeList sections = team.front()->get_children("section");
@@ -159,8 +152,8 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
       xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*section);
       if (!elem)
       {
-        std::cerr << "cast error" << std::endl;
-        continue;
+          std::cerr << "cast error" << std::endl;
+          continue;
       }
       if (!XmlReader::ReadStringAttr(elem, "title", title)) continue;
 
@@ -168,24 +161,25 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
 
       lbox_authors->AddItem (false, " ", "");
       lbox_authors->AddItem (false, "   "+title, title,
-                             Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
+			     Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
 
       for (; node != end; ++node)
       {
-        Author author;
-        if (author.Feed(*node))
-        {
-          std::cout << author.PrettyString(false) << std::endl;
-          lbox_authors->AddItem (false, author.PrettyString(false), author.name);
-        }
+          Author author;
+          if (author.Feed(*node))
+          {
+            std::cout << author.PrettyString(false) << std::endl;
+            lbox_authors->AddItem (false, author.PrettyString(false), author.name);
+          }
       }
       std::cout << std::endl;
       lbox_authors->AddItem (false, "", "");
     }
   }
+
 }
 
-void CreditsMenu::Draw(const Point2i& /*mousePosition*/)
+void CreditsMenu::Draw(const Point2i& mousePosition)
 {
 }
 

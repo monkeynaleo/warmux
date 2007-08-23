@@ -23,14 +23,9 @@
 #define MAP_SELECTION_BOX_H
 
 #include "gui/box.h"
-#include "include/base.h"
-#include "tool/point.h"
-#include "tool/rectangle.h"
-
-// Forward declarations
-class Button;
-class Label;
-class PictureWidget;
+#include "gui/button.h"
+#include "gui/label.h"
+#include "gui/picture_widget.h"
 
 class MapSelectionBox : public HBox
 {
@@ -51,11 +46,10 @@ class MapSelectionBox : public HBox
   Label *map_author_label;
   Button *bt_map_plus, *bt_map_minus;
 
- public:
   void ChangeMapDelta(int delta_index);
   void ChangeMap(int index);
-  void UpdateMapInfo(PictureWidget * widget, int index, bool selected);
 
+ public:
   MapSelectionBox(const Rectanglei &rect, bool _display_only = false);
 
   void ValidMapSelection();

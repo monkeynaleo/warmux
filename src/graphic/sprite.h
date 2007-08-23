@@ -27,12 +27,10 @@
 
 #include <SDL.h>
 #include <vector>
-#include "include/base.h"
+#include "spriteframe.h"
 #include "spritecache.h"
 #include "spriteanimation.h"
-
-// Forward declarations
-class SpriteFrame;
+#include "include/base.h"
 
 typedef enum {
   top_left,
@@ -55,16 +53,16 @@ public:
 
 public:
   explicit Sprite();
-  explicit Sprite(const Surface& surface);
+  explicit Sprite( Surface surface);
   Sprite(const Sprite &other);
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
-  Surface GetSurface() const;
+  Surface GetSurface();
 
   // Frame number
   unsigned int GetCurrentFrame() const;
   void SetCurrentFrame( unsigned int frame_no);
-  unsigned int GetFrameCount() const;
+  unsigned int GetFrameCount();
 
   // Size
   unsigned int GetWidth() const;
@@ -76,17 +74,17 @@ public:
   Point2i GetSize() const;
   Point2i GetSizeMax() const;
 
-  void GetScaleFactors( float &_scale_x, float &_scale_y) const;
+  void GetScaleFactors( float &scale_x, float &scale_y);
   void SetSize(unsigned int w, unsigned int h);
   void SetSize(const Point2i &size);
   void Scale( float scale_x, float scale_y);
   void ScaleSize(int width, int height);
-  void ScaleSize(const Point2i& size);
+  void ScaleSize(Point2i size);
 
   // Rotation
   void SetRotation_rad( double angle_rad);
-  const double &GetRotation_rad() const;
-  void SetRotation_HotSpot( const Point2i& new_hotspot);
+  const double &GetRotation_rad();
+  void SetRotation_HotSpot( const Point2i new_hotspot);
   void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   const Point2i& GetRotationPoint() { return rotation_point; };
 
@@ -106,7 +104,7 @@ public:
 
   // Alpha
   void SetAlpha( float alpha); // Can't be combined with per pixel alpha
-  float GetAlpha() const;
+  float GetAlpha();
 
   // Cache
   void EnableRotationCache(unsigned int cache_size);
@@ -144,7 +142,7 @@ private:
 
 private:
    void Constructor();
-   void Calculate_Rotation_Offset(const Surface& tmp_surface);
+   void Calculate_Rotation_Offset(Surface& tmp_surface);
 };
 
 #endif /* _SPRITE_H */

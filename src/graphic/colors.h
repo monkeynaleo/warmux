@@ -22,6 +22,7 @@
 #ifndef COLORS_H
 #define COLORS_H
 
+#include <SDL_video.h>
 #include "color.h"
 
 // Greyscale
@@ -36,6 +37,7 @@ const Color c_black  (0x00, 0x00, 0x00, 0x70);
 const Color c_red    (0xFF, 0x00, 0x00, 0x70);
 const Color c_yellow (0x00, 0xFF, 0xFF, 0x70);
 const Color c_grey   (0xF0, 0xF0, 0xF0, 0x70);
+			   
 
 // Green
 const Color green_color (68, 120, 51, SDL_ALPHA_OPAQUE);

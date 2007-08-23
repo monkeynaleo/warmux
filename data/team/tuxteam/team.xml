@@ -4,8 +4,6 @@
   <name>Tux</name>
   <sound_profile>flying</sound_profile>
   <surface name="flag" file="flag.png" />
-  <surface name="death_flag" file="dead.png" />
-  <surface name="big_flag" file="flag64.png" />
   <team>
     <character name="Tux" body="tuxteam" />
     <character name="Chilly Willy" body="tuxteam" />

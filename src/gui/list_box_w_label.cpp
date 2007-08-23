@@ -21,13 +21,16 @@
 
 #include "list_box_w_label.h"
 #include <algorithm>
-#include "graphic/text.h"
-#include "button.h"
+#include <SDL_gfxPrimitives.h>
+#include "graphic/font.h"
+#include "include/app.h"
+#include "tool/math_tools.h"
+#include "tool/resource_manager.h"
 
 //#define SCROLLBAR
 
 ListBoxWithLabel::ListBoxWithLabel (const std::string &label, const Rectanglei &rect) : ListBox(rect)
-{
+{  
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   SetSizePosition(rect);
   txt_label->SetMaxWidth(GetSizeX());
@@ -43,9 +46,9 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
   int item = MouseIsOnWhichItem(mousePosition);
 
   Rectanglei rect (GetPositionX(),
-                   GetPositionY(),
-                   GetSizeX(),
-                   GetSizeY()- 2 - txt_label->GetHeight());
+		   GetPositionY(),
+		   GetSizeX(),
+		   GetSizeY()- 2 - txt_label->GetHeight());
 
   surf.BoxColor(rect, defaultListColor1);
   surf.RectangleColor(rect, white_color);
@@ -57,29 +60,29 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
 
   for(uint i=first_visible_item; i < m_items.size(); i++){
 
-    Rectanglei rect2(GetPositionX() + 1,
-                     pos.GetY() + 1,
-                     GetSizeX() - 2,
-                     m_items[i]->GetSizeY() - 2);
+    Rectanglei rect2(GetPositionX() + 1, 
+		     pos.GetY() + 1, 
+		     GetSizeX() - 2, 
+		     m_items[i]->GetSizeY() - 2);
 
     // no more place to add item
     if (draw_it && rect2.GetPositionY()+rect2.GetSizeY() > GetPositionY()+ rect.GetSizeY()) {
       local_max_visible_items = i - first_visible_item;
       draw_it = false;
     }
-
+    
     // item is selected or mouse-overed
     if (draw_it) {
       if( int(i) == selected_item) {
-        surf.BoxColor(rect2, defaultListColor2);
+	surf.BoxColor(rect2, defaultListColor2);
       } else if( i == uint(item) ) {
-        surf.BoxColor(rect2, defaultListColor3);
+	surf.BoxColor(rect2, defaultListColor3);
       }
     }
 
     // Really draw items
-    Rectanglei rect3(pos.x, pos.y,
-                     GetSizeX()-2, m_items[i]->GetSizeY() - 2);
+    Rectanglei rect3(pos.x, pos.y, 
+		     GetSizeX()-2, m_items[i]->GetSizeY() - 2);
 
     m_items[i]->SetSizePosition(rect3);
     if (draw_it) {
@@ -90,8 +93,7 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
   }
 
   // Draw the label
-  txt_label->DrawTopLeft( Point2i(GetPositionX(),
-        GetPositionY() + GetSizeY() - txt_label->GetHeight() ));
+  txt_label->DrawTopLeft( GetPositionX(), GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 
   // buttons for listbox with more items than visible
   if (m_items.size() > local_max_visible_items){
@@ -103,10 +105,10 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
     tmp_h = nb_visible_items_max * (h-20) / m_items.size();
     if (tmp_h < 5) tmp_h =5;
 
-    boxRGBA(surf,
-            x+w-10, tmp_y,
-            x+w-1,  tmp_y+tmp_h,
-            white_color);
+    boxRGBA(surf, 
+	    x+w-10, tmp_y,
+	    x+w-1,  tmp_y+tmp_h,
+	    white_color);
 #endif
   }
 }
@@ -116,13 +118,13 @@ void ListBoxWithLabel::SetSizePosition(const Rectanglei &rect)
   StdSetSizePosition(rect);
   txt_label->SetMaxWidth(GetSizeX());
 
-  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_up->GetSizeX() - 2,
-                                    GetPositionY()+2,
-                                    m_up->GetSizeX(), m_up->GetSizeY()) );
+  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_up->GetSizeX() - 2, 
+				    GetPositionY()+2, 
+				    m_up->GetSizeX(), m_up->GetSizeY()) );
 
-  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_down->GetSizeX() - 2,
-                                      GetPositionY() + GetSizeY() - m_down->GetSizeY() - 2 -
-                                      txt_label->GetHeight() - 2,
-                                      m_down->GetSizeX(),
-                                      m_down->GetSizeY()) );
+  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_down->GetSizeX() - 2, 
+				      GetPositionY() + GetSizeY() - m_down->GetSizeY() - 2 -
+				      txt_label->GetHeight() - 2,
+				      m_down->GetSizeX(), 
+				      m_down->GetSizeY()) );  
 }

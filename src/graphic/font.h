@@ -26,7 +26,6 @@
 #include "colors.h"
 #include "surface.h"
 
-// Forward declarations
 class GameLoop;
 
 class Font
@@ -49,9 +48,10 @@ private:
 
   std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
-  void Write(const Point2i &pos, const Surface &surface) const;
+  void Write(const Point2i &pos, Surface &surface);
 
   Font(int size);
+  bool Load (const std::string& filename, int size);
 
 public:
   // Size
@@ -76,8 +76,8 @@ public:
 
   ~Font();
 
-  static Surface GenerateSurface(const std::string &txt, const Color &color,
-                                 font_size_t size = FONT_MEDIUM, font_style_t style = FONT_NORMAL);
+  static Surface GenerateSurface(const std::string &txt, const Color &color, 
+				 font_size_t size = FONT_MEDIUM, font_style_t style = FONT_NORMAL);
 
   void WriteLeft(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteLeftBottom(const Point2i &pos, const std::string &txt, const Color &color);
@@ -85,10 +85,10 @@ public:
   void WriteCenterTop(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteCenter(const Point2i &pos, const std::string &txt, const Color &color);
 
-  int GetWidth(const std::string &txt) const;
-  int GetHeight() const;
-  int GetHeight(const std::string &txt) const;
-  Point2i GetSize(const std::string &txt) const;
+  int GetWidth(const std::string &txt);
+  int GetHeight();
+  int GetHeight(const std::string &txt);
+  Point2i GetSize(const std::string &txt);
 
   Surface Render(const std::string &txt, const Color &color, bool cache=false);
   Surface CreateSurface(const std::string &txt, const Color &color);

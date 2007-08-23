@@ -49,13 +49,17 @@ public:
   virtual ~Text();
 
   //Draw method using windows coordinates
+  void DrawCenter(int x, int y) const;
   void DrawCenter(const Point2i &position) const;
+  void DrawTopLeft(int x, int y) const;
   void DrawTopLeft(const Point2i &position) const;
-  void DrawTopRight(const Point2i &position) const;
-  void DrawCenterTop(const Point2i &position) const;
+  void DrawTopRight(int x, int y) const;
+  void DrawCenterTop(int x, int y) const;
 
   //Draw method using map coordinates
-  void DrawCenterTopOnMap(const Point2i &position) const;
+  void DrawCenterOnMap(int x, int y) const;
+  void DrawTopLeftOnMap(int x, int y) const;
+  void DrawCenterTopOnMap(int x, int y) const;
 
   void Set(const std::string &new_txt);
   const std::string& GetText() const;
@@ -66,9 +70,9 @@ public:
 };
 
 void DrawTmpBoxText(Font& font,
-                    Point2i pos,
-                    const std::string& txt, uint space=3,
-                    const Color& boxColor = defaultColorBox,
-                    const Color& rectColor = defaultColorRect);
+		    Point2i pos,
+		    const std::string& txt, uint space=3,
+		    const Color& boxColor = defaultColorBox,
+		    const Color& rectColor = defaultColorRect);
 
 #endif

@@ -22,14 +22,17 @@
 #ifndef NETWORK_MENU_H
 #define NETWORK_MENU_H
 
+#include <list>
 #include "menu.h"
+#include "network_teams_selection_box.h"
+#include "map_selection_box.h"
+#include "include/base.h"
+#include "graphic/font.h"
+#include "gui/button_text.h"
+#include "gui/msg_box.h"
+#include "gui/text_box.h"
 
 class Team;
-class SpinButton;
-class NetworkTeamsSelectionBox;
-class MsgBox;
-class MapSelectionBox;
-class TextBox;
 
 class NetworkMenu : public Menu
 {
@@ -71,12 +74,12 @@ public:
   NetworkMenu();
   ~NetworkMenu();
 
-  void AddTeamCallback(const std::string& team_id);
-  void UpdateTeamCallback(const std::string& team_id);
-  void DelTeamCallback(const std::string& team_id);
+  void AddTeamCallback(std::string team_id);
+  void UpdateTeamCallback(std::string team_id);
+  void DelTeamCallback(std::string team_id);
   void ChangeMapCallback();
 
-  void ReceiveMsgCallback(const std::string& msg);
+  void ReceiveMsgCallback(std::string msg);
 };
 
 #endif

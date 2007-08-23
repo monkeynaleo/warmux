@@ -23,18 +23,13 @@
 
 #include "internet_menu.h"
 
+#include "menu.h"
 #include "include/app.h"
-#include "gui/button.h"
-#include "gui/label.h"
-#include "gui/box.h"
 #include "gui/button_text.h"
-#include "gui/list_box.h"
-#include "gui/question.h"
-#include "graphic/video.h"
+#include "network/network.h"
 #include "network/net_error_msg.h"
 #include "network/index_server.h"
 #include "tool/i18n.h"
-#include "tool/resource_manager.h"
 
 InternetMenu::InternetMenu() :
   Menu("menu/bg_network", vCancel)
@@ -42,10 +37,10 @@ InternetMenu::InternetMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
   
-  Rectanglei stdRect(0, 0, 405, 64);
+  Rectanglei stdRect(0, 0, 300, 64);
 
-  uint x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - stdRect.GetSizeX()/2;
-  uint y_box = AppWormux::GetInstance()->video->window.GetHeight()/2 - 200;
+  uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
+  uint y_box = AppWormux::GetInstance()->video.window.GetHeight()/2 - 200;
 
   connection_box = new VBox(Rectanglei( x_button, y_box, stdRect.GetSizeX(), 1), false);
   connection_box->SetBorder(Point2i(0,0));
@@ -54,19 +49,19 @@ InternetMenu::InternetMenu() :
   connection_box->AddWidget(connect_lst);
 
   refresh = new ButtonText( Point2i(0,0),
-                            res, "main_menu/button",
-                            _("Refresh"), // Refresh the list of available hosts
-                            Font::FONT_BIG, 
-                            Font::FONT_NORMAL);
+			    res, "main_menu/button",
+			    _("Refresh"), // Refresh the list of available hosts
+			    Font::FONT_BIG, 
+			    Font::FONT_NORMAL);
 
   refresh->SetSizePosition( stdRect );
   connection_box->AddWidget(refresh);
 
   connect = new ButtonText( Point2i(0,0),
-                            res, "main_menu/button",
-                            _("Connect !"),
-                            Font::FONT_BIG, 
-                            Font::FONT_NORMAL);
+			    res, "main_menu/button",
+			    _("Connect !"),
+			    Font::FONT_BIG, 
+			    Font::FONT_NORMAL);
 
   connect->SetSizePosition( stdRect );
   connection_box->AddWidget(connect);
@@ -74,7 +69,7 @@ InternetMenu::InternetMenu() :
   widgets.AddWidget(connection_box);
 
   resource_manager.UnLoadXMLProfile(res);
-  RefreshList(false);
+  RefreshList();
 }
 
 InternetMenu::~InternetMenu()
@@ -86,7 +81,7 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
   Widget* w = widgets.ClickUp(mousePosition, button);  
 
   if (w == refresh)
-    RefreshList(true);
+    RefreshList();
   else
   if (w == connect && connect_lst->GetSelectedItem() != -1)
   {
@@ -109,21 +104,13 @@ void InternetMenu::OnClick(const Point2i &mousePosition, int button)
   widgets.Click(mousePosition, button); 
 }
 
-void InternetMenu::DisplayNoGameRunning()
-{
-  Question question;
-  question.Set(_("Sorry, currently, no game is waiting for players"), 1, 0);
-  question.Ask();
-  Menu::RedrawMenu();
-}
-
-void InternetMenu::RefreshList(bool warning_if_empty)
+void InternetMenu::RefreshList()
 {
   // Save the currently selected address
   int current = connect_lst->GetSelectedItem();
 
   // Empty the list:
-  while (connect_lst->Size() != 0)
+  while( connect_lst->Size() != 0 )
   {
     connect_lst->Select(0);
     connect_lst->RemoveSelected();
@@ -131,21 +118,16 @@ void InternetMenu::RefreshList(bool warning_if_empty)
 
   std::list<address_pair> lst = index_server.GetHostList();
 
-  if (warning_if_empty && lst.size() == 0) {
-    DisplayNoGameRunning();
-    return;
-  }
-
-  for (std::list<address_pair>::iterator pair_it = lst.begin();
-       pair_it != lst.end();
-       ++pair_it)
+  for(std::list<address_pair>::iterator pair_it = lst.begin();
+      pair_it != lst.end();
+      ++pair_it)
     connect_lst->AddItem( false, pair_it->first, pair_it->second );
 
-  if (current != -1 && connect_lst->Size() != 0)
+  if(current != -1 && connect_lst->Size() != 0)
     connect_lst->Select( current );
 }
 
-void InternetMenu::Draw(const Point2i &/*mousePosition*/)
+void InternetMenu::Draw(const Point2i &mousePosition)
 {
   index_server.Refresh();
 }

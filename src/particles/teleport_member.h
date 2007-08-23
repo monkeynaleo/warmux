@@ -33,7 +33,7 @@ class TeleportMemberParticle : public Particle
   float sin_x_max;
   float sin_y_max;
  public:
-  TeleportMemberParticle(const Sprite* spr, const Point2i& position, const Point2i& dest, int direction);
+  TeleportMemberParticle(Sprite* spr, const Point2i& position, const Point2i& dest, int direction);
   ~TeleportMemberParticle();
   void Refresh();
 };

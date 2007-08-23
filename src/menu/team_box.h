@@ -22,14 +22,13 @@
 #ifndef TEAM_BOX_H
 #define TEAM_BOX_H
 
-#include <string>
 #include "gui/box.h"
+#include "gui/label.h"
+#include "gui/picture_widget.h"
+#include "gui/spin_button.h"
+#include "gui/text_box.h"
 
 class Team;
-class SpinButton;
-class Label;
-class PictureWidget;
-class TextBox;
 
 class TeamBox : public HBox
 {
@@ -40,7 +39,6 @@ class TeamBox : public HBox
   /**********************************************/
 
   bool is_local; // local/remote team
-  std::string previous_name; // only for network
 
   Team * associated_team;
   PictureWidget *team_logo;
@@ -49,7 +47,7 @@ class TeamBox : public HBox
   SpinButton * nb_characters;
 
  public:
-  TeamBox(const std::string& player_name, const Rectanglei &rect);
+  TeamBox(std::string player_name, const Rectanglei &rect);
 
   void SetTeam(Team& _team, bool read_team_values=false);
   void ClearTeam();
@@ -59,8 +57,8 @@ class TeamBox : public HBox
   bool IsLocal() const;
 
   void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition,
-              Surface& surf);
+	      const Point2i &lastMousePosition,
+	      Surface& surf);
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
 };

@@ -22,11 +22,9 @@
 #ifndef PICTURE_WIDGET_H
 #define PICTURE_WIDGET_H
 
+#include "graphic/sprite.h"
 #include "widget.h"
 #include <string>
-
-class Sprite;
-class Surface;
 
 class PictureWidget : public Widget
 {
@@ -41,16 +39,15 @@ class PictureWidget : public Widget
 
  public:
   PictureWidget(const Rectanglei &rect);
-  PictureWidget(const Rectanglei &rect, const std::string& resource_id);
+  PictureWidget(const Rectanglei &rect, const std::string resource_id);
   ~PictureWidget();
   void SetSurface(const Surface& s, bool enable_scaling=false);
   void SetNoSurface();
   void Draw(const Point2i &mousePosition, Surface& surf) const;
-  void SetSizePosition(const Rectanglei &rect) { StdSetSizePosition(rect); };
+  void SetSizePosition(const Rectanglei &rect);
 
   // Apply a transparency color mask
-  void Disable() { disabled = true; };
-  void Enable() { disabled = false; };
+  void Disable();
 };
 
 #endif

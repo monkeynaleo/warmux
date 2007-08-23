@@ -22,12 +22,9 @@
 #ifndef LOADING_SCREEN_H
 #define LOADING_SCREEN_H
 
-#include "include/base.h"
 #include <string>
-
-// Forwar declarations
-class Profile;
-class Sprite;
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 
 class LoadingScreen
 {
@@ -44,8 +41,8 @@ class LoadingScreen
   static LoadingScreen* GetInstance();
 
   void DrawBackground();
-  void StartLoading(uint nb, const std::string& resource,
-                    const std::string& label) const;
+  void StartLoading(uint nb, std::string resource, 
+		    std::string label);
 };
 
 #endif

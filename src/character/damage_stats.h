@@ -30,33 +30,25 @@ class DamageStatistics
 {
   const Character& owner;
 
-  uint damage_other_teams;
-  uint damage_friendly_fire; // damage same team but not itself
-  uint damage_itself;
-  uint max_damage;
-  uint current_total_damage;
-  uint total_shots;
-
-  uint death_time; // if 0, not dead
+  uint  damage_other_teams;
+  uint  damage_friendly_fire; // damage same team but not itself
+  uint  damage_itself;
+  uint  max_damage;
+  uint  current_total_damage;
 
 public:
   DamageStatistics(const Character& _owner);
   DamageStatistics(const DamageStatistics& adamage_stats,
-                   const Character& _owner);
+		   const Character& _owner);
 
-  void OneMoreShot() { total_shots++; }
   void MadeDamage(const int Dmg, const Character &other);
   void HandleMostDamage();
   void ResetDamage();
 
-  uint GetMostDamage() const { return max_damage; }
-  uint GetFriendlyFireDamage() const { return damage_friendly_fire; }
-  uint GetItselfDamage() const { return damage_itself; }
-  uint GetOthersDamage() const { return damage_other_teams; }
-  double GetAccuracy() const { return (total_shots) ? damage_other_teams/(double)total_shots : 0.0; }
-
-  void SetDeathTime(uint _death_time) { death_time = _death_time; };
-  uint GetDeathTime() const { return death_time; };
+  uint  GetMostDamage() const { return max_damage; }
+  uint  GetFriendlyFireDamage() const { return damage_friendly_fire; }
+  uint  GetItselfDamage() const { return damage_itself; }
+  uint  GetOthersDamage() const { return damage_other_teams; }
 };
 
 #endif

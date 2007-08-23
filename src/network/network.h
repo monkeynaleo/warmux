@@ -23,32 +23,18 @@
 #define NETWORK_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
+#include <SDL_thread.h>
 #include <list>
 #include <string>
+#include "distant_cpu.h"
+#include "include/action.h"
 #include "include/base.h"
+#include "menu/network_menu.h"
 //-----------------------------------------------------------------------------
-
-// Use this debug to store network communication to a file
-//#define LOG_NETWORK
-// Factorize some declarations for Visual C++
-#ifdef _MSC_VER
-#  define S_IRUSR _S_IREAD
-#  define S_IWUSR _S_IWRITE
-#endif
-#ifdef WIN32
-#  define S_IRGRP 0
-#  define O_SYNC  O_BINARY
-#endif
-
 const std::string WORMUX_NETWORK_PORT = "3826";
 const uint WORMUX_NETWORK_PORT_INT = 3826;
 
-// Some forward declarations
-struct SDL_Thread;
-class Action;
-class DistantComputer;
 class NetworkServer;
-class NetworkMenu;
 
 class Network
 {
@@ -77,14 +63,11 @@ private:
   Network(const Network&);
   const Network& operator=(const Network&);
   friend class DistantComputer;
-  const connection_state_t GetError() const;
 
   static Network * singleton;
   static bool sdlnet_initialized;
-  static int  num_objects;
 
   static bool stop_thread;
-  bool turn_master_player;
 
 protected:
   network_state_t state;
@@ -96,16 +79,17 @@ protected:
   IPaddress ip; // for server : store listening port
                 // for client : store server address/port
 
-#ifdef LOG_NETWORK
+#if defined(DEBUG) && not defined(WIN32)
   int fout;
   int fin;
 #endif
 
-  bool ThreadToContinue() const;
+  bool ThreadToContinue();
   static int ThreadRun(void* no_param);
 
   void DisconnectNetwork();
-  const connection_state_t CheckHost(const std::string &host, int prt) const;
+  const connection_state_t CheckHost(const std::string &host,
+				     const std::string &port) const;
 public:
   NetworkMenu* network_menu;
 
@@ -146,9 +130,6 @@ public:
   void SetState(Network::network_state_t state);
   Network::network_state_t GetState() const;
   void SendNetworkState() const;
-
-  void SetTurnMaster(bool master);
-  bool IsTurnMaster() const;
 };
 
 //-----------------------------------------------------------------------------

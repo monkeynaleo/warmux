@@ -30,13 +30,6 @@
 	<country>France</country>
       </author>
       <author>
-	<nickname>Kurosu</nickname>
-	<name>John DOE</name>
-	<description>Win32 port, programmer</description>
-	<email>kurosu_AT_free_DOT_fr</email>
-	<country>France</country>
-      </author>
-      <author>
 	<nickname>lodesi</nickname>
 	<name>Laurent DEFERT SIMONNEAU</name>
 	<description>Programmer and graphic artist</description>
@@ -136,25 +129,11 @@
 	<country>France</country>
       </author>
       <author>
-	<nickname>GArik</nickname>
-	<name>Igor MURZOV</name>
-	<description>Update Russian translation</description>
-	<email>igor_AT_gplsoft_DOT_org</email>
-	<country>Russia</country>
-      </author>
-      <author>
 	<nickname>Alexandre</nickname>
 	<name>Alexandre PROKOUDINE</name>
 	<description>Translate Wormux into Russian</description>
 	<email>alexandre.prokoudine_AT_gmail_DOT_com</email>
 	<country>Russia</country>
-      </author>
-      <author>
-	<nickname>Pierre-Marie</nickname>
-	<name>Pierre-Marie</name>
-	<description>Update translation of Wormux in Esperanto</description>
-	<email>pedrotpmx_AT_wanadoo_DOT_fr</email>
-	<country>France</country>
       </author>
       <author>
 	<nickname>Axel</nickname>
@@ -247,13 +226,6 @@
 	<website>http://www.abctrad.com/</website>
 	<email>gaiaquero_AT_yahoo_DOT_fr</email>
 	<country>Italia</country>
-      </author>
-      <author>
-        <nickname>Michele</nickname>
-        <name>Michele Mauri</name>
-        <description>Updated Italian translation</description>
-        <email>mikimauri_AT_gmail_DOT_com</email>
-        <country>Italia</country>
       </author>
       <author>
 	<nickname>Henrik</nickname>
@@ -361,7 +333,7 @@
 	<name>Adnan Hodzic</name>
 	<description>Prepares Wormux SlackBuilds for Slackware</description>
 	<email>AbsintheSyringe_AT_gmail_DOT_com</email>
-	<country>Bosnia-Herzegovina</country>
+	<country>Bosnia</country>
       </author>
       <author>
 	<nickname>artefact</nickname>
@@ -404,8 +376,14 @@
 	<nickname>Julien</nickname>
 	<name>Julien CATALANO</name>
 	<description>Prepare RPM packages for Mandrake</description>
-	<website>http://julien.catalano.free.fr/</website>
 	<email>julien.catalano_AT_gmail_DOT_com</email>
+	<country>France</country>
+      </author>
+      <author>
+	<nickname>Kurosu</nickname>
+	<name>John DOE</name>
+	<description>Make Win32 port</description>
+	<email>kurosu_AT_free_DOT_fr</email>
 	<country>France</country>
       </author>
       <author>
@@ -524,19 +502,11 @@
 	<email>phhusson_AT_free_DOT_fr</email>
       </author>
       <author>
-	<nickname>paxed</nickname>
-	<name>Pasi Kallinen</name>
-	<description>Improve the ground generator</description>
-	<website>http://bilious.homelinux.org/</website>
-	<email>paxed@alt.org</email>
-	<country>Finland</country>
-      </author>
-      <author>
 	<nickname>Progs</nickname>
 	<name>Romain BIGNON</name>
 	<description>Developer</description>
-	<website>http://coderz.info</website>
 	<email>progs_AT_headfucking.net</email>
+	<website>http://coderz.info</website>
 	<country>France</country>
       </author>
       <author>
@@ -560,25 +530,11 @@
 	<email>sampie_AT_ariana-dsl.utu_DOT_fi</email>
       </author>
       <author>
-	<nickname>Snark</nickname>
-	<name>Julien Puydt</name>
-	<description>Patch to compile without -Wno-unused-parameter, reworked some menu widgets, little additions to class Surface</description>
-	<email>julien.puydt_AT_laposte_DOT_net</email>
-	<country>France</country>
-      </author>
-      <author>
 	<nickname>Timo</nickname>
 	<name>Timo HORSTSCHÄFER</name>
 	<description>Riot bomb weapon</description>
 	<email>mail_AT_timo-hortschaefer_DOT_de</email>
 	<country>Germany</country>
-      </author>
-      <author>
-	<nickname>the gritche</nickname>
-	<name>David Zysman</name>
-	<description>GUI patch</description>
-	<email>thegritche_AT_gmail_DOT_com</email>
-	<country>France</country>
       </author>
       <author>
 	<nickname>vegar</nickname>
@@ -697,12 +653,6 @@
 	<description>Draw the map Dinos and the skin Dude</description>
 	<email>rashid_AT_vp_DOT_pl</email>
 	<country>Poland</country>
-      </author>
-      <author>
-	<nickname>tgm</nickname>
-	<name>C.A</name>
-	<description>Map 'FunkyIsland'</description>
-	<email>warcraftiii-projekt_AT_gmx_DOT_de</email>
       </author>
       <author>
 	<nickname>Toon</nickname>

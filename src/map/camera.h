@@ -23,10 +23,9 @@
 #define SCROLLING_H
 
 #include "include/base.h"
+#include "object/physical_obj.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
-
-class PhysicalObj;
 
 class Camera : public Rectanglei
 {
@@ -34,18 +33,15 @@ class Camera : public Rectanglei
   const Camera& operator=(const Camera&);
 
 private:
-  static Camera * singleton;
-  Camera();
-
   bool auto_crop;
   const PhysicalObj* followed_object;
   bool throw_camera;
   bool follow_closely;
 
-  Point2i FreeDegrees() const { return Point2i(HasFixedX()? 0 : 1, HasFixedY()? 0 : 1); };
-  Point2i NonFreeDegrees() const { return Point2i(1, 1) - FreeDegrees(); };
+  Point2i FreeDegrees() const;
+  Point2i NonFreeDegrees() const;
 public:
-  static Camera * GetInstance();
+  Camera();
 
   // before beginning a game
   void Reset();
@@ -56,24 +52,26 @@ public:
   // set camera to position
   void SetXY(Point2i pos);
   void SetXYabs(int x, int y);
-  void SetXYabs(const Point2i &pos) { SetXYabs(pos.x, pos.y); };
+  void SetXYabs(const Point2i &pos);
 
   // Auto crop on an object
-  void FollowObject (const PhysicalObj *obj,
+  void FollowObject (PhysicalObj *obj,
                      bool follow, bool center_on,
                      bool force_center_on_object=false);
-  void StopFollowingObj (const PhysicalObj* obj);
+  void StopFollowingObj (PhysicalObj* obj);
 
-  bool IsVisible(const PhysicalObj &obj) const;
+  bool IsVisible(const PhysicalObj &obj);
 
   void Refresh();
 
   void CenterOn(const PhysicalObj &obj);
-  void CenterOnFollowedObject() { CenterOn(*followed_object); };
+  void CenterOnFollowedObject();
   void AutoCrop();
-  void SetAutoCrop(bool crop) { auto_crop = crop; };
-  bool IsAutoCrop() const { return auto_crop; };
-  void SetCloseFollowing(bool close) { follow_closely = close; };
+  void SetAutoCrop(bool crop);
+  bool IsAutoCrop() const;
+  void SetCloseFollowing(bool close);
 };
+
+extern Camera camera;
 
 #endif

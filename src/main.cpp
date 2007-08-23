@@ -27,23 +27,14 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <getopt.h>
-#ifndef WIN32
-#include <signal.h>
-#endif
 using namespace std;
 
 #include <SDL.h>
 #include "game/config.h"
-#include "game/game.h"
+#include "game/game_mode.h"
 #include "game/time.h"
-#include "graphic/sprite.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
-#include "graphic/text.h"
-#include "include/action_handler.h"
-#include "include/constant.h"
-#include "map/map.h"
 #include "map/maps_list.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
@@ -51,20 +42,16 @@ using namespace std;
 #include "menu/network_connection_menu.h"
 #include "menu/network_menu.h"
 #include "menu/options_menu.h"
-#include "network/download.h"
+#include "include/action_handler.h"
+#include "include/constant.h"
 #include "sound/jukebox.h"
-#include "team/team_config.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
 #include "tool/stats.h"
 
-
-static Menu *menu = NULL;
-static MainMenu::menu_item choice = MainMenu::NONE;
-static bool skip_menu = false;
-static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+#include "network/download.h"
 
 AppWormux *AppWormux::singleton = NULL;
 
@@ -78,81 +65,57 @@ AppWormux *AppWormux::GetInstance()
 }
 
 AppWormux::AppWormux():
-  video(new Video())
+  video()
 {
-  teams_list.LoadList();
-
-  jukebox.Init();
-
-  cout << "[ " << _("Run game") << " ]" << endl;
 }
 
-AppWormux::~AppWormux()
-{
-  delete video;
-}
-
-int AppWormux::Main(void)
+int AppWormux::main(int argc, char **argv)
 {
   bool quit = false;
 
   try
   {
-    DisplayLoadingPicture();
-
+    Init(argc, argv);
     do
       {
-        MainMenu main_menu;
+	Main_Menu main_menu;
+	menu_item choix;
 
-        if (choice == MainMenu::NONE) {
-          menu = &main_menu;
-          StatStart("Main:Menu");
-          choice = main_menu.Run();
-          StatStop("Main:Menu");
-        }
+	StatStart("Main:Menu");
+	choix = main_menu.Run();
+	StatStop("Main:Menu");
 
-        ActionHandler::GetInstance()->Flush();
-
-        switch (choice)
-          {
-            case MainMenu::PLAY:
-            {
-              GameMenu game_menu;
-              menu = &game_menu;
-              game_menu.Run(skip_menu);
-              break;
-            }
-            case MainMenu::NETWORK:
-            {
-              NetworkConnectionMenu network_connection_menu;
-              menu = &network_connection_menu;
-              network_connection_menu.SetAction(net_action);
-              network_connection_menu.Run(skip_menu);
-              break;
-            }
-            case MainMenu::OPTIONS:
-            {
-              OptionMenu options_menu;
-              menu = &options_menu;
-              options_menu.Run();
-              break;
-            }
-            case MainMenu::CREDITS:
-            {
-              CreditsMenu credits_menu;
-              menu = &credits_menu;
-              credits_menu.Run();
-              break;
-            }
-            case MainMenu::QUIT:
-            quit = true;
-          default:
-            break;
-          }
-        menu = NULL;
-        choice = MainMenu::NONE;
-        skip_menu = false;
-        net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+	switch (choix)
+	  {
+	  case menuPLAY:
+	    {
+	      GameMenu game_menu;
+	      game_menu.Run();
+	      break;
+	    }
+	  case menuNETWORK:
+	    {
+	      NetworkConnectionMenu network_connection_menu;
+	      network_connection_menu.Run();
+	      break;
+	    }
+	  case menuOPTIONS:
+	    {
+	      OptionMenu options_menu;
+	      options_menu.Run();
+	      break;
+	    }
+	  case menuCREDITS:
+	    {
+	      CreditsMenu credits_menu;
+	      credits_menu.Run();
+	      break;
+	    }
+	  case menuQUIT:
+	    quit = true;
+	  default:
+	    break;
+	  }
       }
     while (!quit);
 
@@ -175,6 +138,21 @@ int AppWormux::Main(void)
   return 0;
 }
 
+void AppWormux::Init(int argc, char **argv)
+{
+  Config::GetInstance();  // init config first, because it initializes i18n
+
+  InitFonts();
+  DisplayWelcomeMessage();
+  InitDebugModes(argc, argv);
+
+  teams_list.LoadList();
+
+  DisplayLoadingPicture();
+
+  jukebox.Init();
+}
+
 void AppWormux::DisplayLoadingPicture()
 {
   Config *config = Config::GetInstance();
@@ -188,37 +166,34 @@ void AppWormux::DisplayLoadingPicture()
   Sprite loading_image = Sprite(surfaceLoading);
 
   loading_image.cache.EnableLastFrameCache();
-  loading_image.ScaleSize(video->window.GetSize());
-  loading_image.Blit(video->window, 0, 0);
+  loading_image.ScaleSize(video.window.GetSize());
+  loading_image.Blit(video.window, 0, 0);
 
   Time::GetInstance()->Reset();
 
   Text text1(_("Wormux launching..."), white_color,
-             Font::FONT_HUGE, Font::FONT_NORMAL, true);
+	     Font::FONT_HUGE, Font::FONT_NORMAL, true);
   Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_NORMAL,
-             true);
+	     true);
 
-  Point2i windowCenter = video->window.GetSize() / 2;
+  Point2i windowCenter = video.window.GetSize() / 2;
 
   text1.DrawCenter(windowCenter);
   text2.DrawCenter(windowCenter
                    + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_NORMAL)).GetHeight() + 20));
 
-  video->window.Flip();
+  video.window.Flip();
 }
 
-void AppWormux::RefreshDisplay()
+void AppWormux::InitFonts()
 {
-  if (Game::GetInstance()->IsGameLaunched()) {
-    world.DrawSky(true);
-    world.Draw(true);
-  }
-  else if (menu) {
-    menu->RedrawMenu();
+  if (TTF_Init() == -1) {
+    Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
+    exit(1);
   }
 }
 
-void AppWormux::End() const
+void AppWormux::End()
 {
   cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
 
@@ -227,24 +202,25 @@ void AppWormux::End() const
   delete Config::GetInstance();
   delete Time::GetInstance();
   delete Constants::GetInstance();
+  TTF_Quit();
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
 #endif
   cout << "o " << _("If you found a bug or have a feature request "
-                    "send us a email (in english, please):")
+			 "send us a email (in english, please):")
     << " " << Constants::EMAIL << endl;
 }
 
-void DisplayWelcomeMessage()
+void AppWormux::DisplayWelcomeMessage()
 {
   cout << "=== " << _("Wormux version ") << Constants::VERSION << endl;
   cout << "=== " << _("Authors:") << ' ';
-  for (vector < string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
-       fin = Constants::GetInstance()->AUTHORS.end(); it != fin; ++it)
+  for (vector < string >::iterator it = Constants::AUTHORS.begin(),
+       fin = Constants::AUTHORS.end(); it != fin; ++it)
     {
-      if (it != Constants::GetInstance()->AUTHORS.begin())
-        cout << ", ";
+      if (it != Constants::AUTHORS.begin())
+	cout << ", ";
       cout << *it;
     }
   cout << endl
@@ -263,86 +239,13 @@ void DisplayWelcomeMessage()
   cout << "This program was compiled in DEBUG mode (development version)"
        << endl << endl;
 #endif
+
+  cout << "[ " << _("Run game") << " ]" << endl;
 }
 
-void ParseArgs(int argc, char * argv[])
+int main(int argc, char **argv)
 {
-  char c;
-  int option_index = 0;
-  struct option long_options[] =
-    {
-      {"help",    no_argument,       NULL, 'h'},
-      {"version", no_argument,       NULL, 'v'},
-      {"play",    no_argument,       NULL, 'p'},
-      {"internet",no_argument,       NULL, 'i'},
-      {"client",  optional_argument, NULL, 'c'},
-      {"server",  no_argument,       NULL, 's'},
-      {"debug",   required_argument, NULL, 'd'},
-      {NULL,      no_argument,       NULL,  0 }
-    };
-
-  while ((c = getopt_long (argc, argv, "hvpic::sd:",
-                           long_options, &option_index)) != -1)
-    {
-      switch (c)
-        {
-        case 'h':
-          printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
-                 " [-i|--internet] [-s|--server] [-c|--client [ip]]"
-                 " [-d|--debug debug_masks]\n", argv[0]);
-          exit(0);
-          break;
-        case 'v':
-          DisplayWelcomeMessage();
-          exit(0);
-          break;
-        case 'p':
-          choice = MainMenu::PLAY;
-          skip_menu = true;
-          break;
-        case 'c':
-          choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
-          if (optarg)
-            {
-              Config::GetInstance()->SetNetworkHost(optarg);
-            }
-          skip_menu = true;
-          break;
-        case 'd':
-          printf("Debug: %s\n", optarg);
-          AddDebugMode(optarg);
-          break;
-        case 's':
-          choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_HOST;
-          skip_menu = true;
-          break;
-        case 'i':
-          choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
-          skip_menu = true;
-          break;
-        }
-    }
-}
-
-int main(int argc, char *argv[])
-{
-#ifndef WIN32
-  signal(SIGPIPE, SIG_IGN);
-#endif
-  /* FIXME calling Config::GetInstance here means that there is no need of
-   * singleton for Config but simply a global variable. This may look stange
-   * but the whole system (directories, translation etc...) is needed, even for
-   * the ParseArgs and DisplayWelcomeMessage functions. */
-  Config::GetInstance(); // init config first, because it initializes i18n
-
-  ParseArgs(argc, argv);
-
-  DisplayWelcomeMessage();
-
-  AppWormux::GetInstance()->Main();
+  AppWormux::GetInstance()->main(argc, argv);
   delete AppWormux::GetInstance();
   exit(EXIT_SUCCESS);
 }

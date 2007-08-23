@@ -20,32 +20,27 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-/** Usage example :
+/** Usage example : 
  *
  * MSG_DEBUG( "game.pause", "Salut %s", "Truc" )
- *
+ * 
  * MSG_DEBUG use standart printf style for the message.
- *
+ * 
  * A debug will be printed only if there is a mode game or game.pause. A mode can be added by running wormux with:
  * ./wormux -d game        # print all messages in game section
  * ./wormux -d ""          # print all debug messages
  *
  */
 #ifdef DEBUG
-#  define MSG_DEBUG(LEVEL, MESSAGE, ...) \
-   PrintDebug( __FILE__, __FUNCTION__, __LINE__, LEVEL, MESSAGE, ## __VA_ARGS__)
+#  define MSG_DEBUG(LEVEL, MESSAGE, ARGS...) \
+	PrintDebug( __FILE__, __PRETTY_FUNCTION__, __LINE__, LEVEL, MESSAGE, ## ARGS)
 #else
-#  define MSG_DEBUG(LEVEL, MESSAGE, ...) do {} while (0)
+#  define MSG_DEBUG(LEVEL, MESSAGE, ARGS...) do {} while (0)
 #endif
 
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...);
-void AddDebugMode(const std::string& mode);
-
-#ifdef DEBUG
-bool IsDEBUGGING(const char* mode);
-#else
-#define IsDEBUGGING(a) false
-#endif
+void AddDebugMode( std::string mode );
+void InitDebugModes( int argc, char **argv );
 
 #endif

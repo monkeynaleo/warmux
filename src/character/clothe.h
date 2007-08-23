@@ -21,12 +21,13 @@
 #ifndef CLOTHE_H
 #define CLOTHE_H
 #include <map>
+#include "member.h"
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
+#include "tool/point.h"
+#include "tool/xml_document.h"
 
 class Member;
-namespace xmlpp
-{
-  class Element;
-}
 
 class Clothe
 {

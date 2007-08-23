@@ -23,14 +23,26 @@
 #ifndef GUN_H
 #define GUN_H
 
-#include "weapon_launcher.h"
+#include <SDL.h>
+#include <vector>
+#include "launcher.h"
 #include "include/base.h"
+#include "tool/point.h"
+
+class GunBullet : public WeaponBullet
+{
+  public:
+    GunBullet(ExplosiveWeaponConfig& cfg,
+              WeaponLauncher * p_launcher);
+  protected:
+    void ShootSound();
+};
 
 class Gun : public WeaponLauncher
 {
   public:
     Gun();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
+    DECLARE_GETWEAPONSTRING();
   protected:
     bool p_Shoot();
     WeaponProjectile * GetProjectileInstance();

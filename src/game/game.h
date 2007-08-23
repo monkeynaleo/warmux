@@ -24,8 +24,8 @@
 #define GAME_H
 
 #include "include/base.h"
-
-class Question;
+#include "gui/question.h"
+#include "weapon/weapons_list.h"
 
 class Game
 {
@@ -38,18 +38,18 @@ private:
   Game();
   static Game * singleton;
 
-  int AskQuestion (Question &question, bool draw=true) const;
-  void DisplayPause() const;
-  bool DisplayQuit() const;
+  int AskQuestion (Question &question, bool draw=true);
+  void DisplayPause();
+  bool DisplayQuit();
 
 public:
   static Game * GetInstance();
 
   void Start();
-  void UnloadDatas() const;
+  void UnloadDatas();
 
   int NbrRemainingTeams() const;
-
+  
   bool IsGameFinished() const;
   bool IsGamePaused() const;
   bool IsGameLaunched() const;
@@ -57,7 +57,7 @@ public:
   void MessageLoading() const;
   void MessageEndOfGame() const;
 
-  void TogglePause() const;
+  void TogglePause();
   void UserWantEndOfGame() { want_end_of_game = true; };
 };
 #endif

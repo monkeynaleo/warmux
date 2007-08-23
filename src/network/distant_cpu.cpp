@@ -19,35 +19,28 @@
  * Distant Computer handling
  *****************************************************************************/
 
-#ifdef _MSC_VER
-#  include <algorithm>  //std::find
-#endif
 #include "distant_cpu.h"
 //-----------------------------------------------------------------------------
-#include <SDL_mutex.h>
+#include <SDL_net.h>
 #include <SDL_thread.h>
 #include "network.h"
-#include "include/action.h"
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "menu/network_menu.h"
-#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
+#include "tool/i18n.h"
 //-----------------------------------------------------------------------------
 
 DistantComputer::DistantComputer(TCPsocket new_sock) :
   sock_lock(SDL_CreateMutex()),
   sock(new_sock),
   owned_teams(),
-  state(DistantComputer::STATE_ERROR),
+  state(DistantComputer::ERROR),
   version_checked(false),
   force_disconnect(false),
   nickname("this is not initialized")
 {
-  packet_size = 0;
-  packet_received = 0;
-  packet = NULL;
   SDLNet_TCP_AddSocket(Network::GetInstance()->socket_set, sock);
 
   // If we are the server, we have to tell this new computer
@@ -61,7 +54,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
     SendDatas(pack, size);
     free(pack);
 
-    Action a(Action::ACTION_MENU_SET_MAP, ActiveMap().GetRawName());
+    Action a(Action::ACTION_MENU_SET_MAP, ActiveMap().ReadName());
     a.WritePacket(pack, size);
     SendDatas(pack, size);
     free(pack);
@@ -83,16 +76,16 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
 
 DistantComputer::~DistantComputer()
 {
-  if (version_checked)
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAddress()));
-  if (force_disconnect)
-    std::cerr << GetAddress() << " have been kicked" << std::endl;
+  if(version_checked)
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAdress()));
+  if(force_disconnect)
+    std::cerr << GetAdress() << " have been kicked" << std::endl;
 
   SDLNet_TCP_Close(sock);
   SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
 
-  if (Network::GetInstance()->IsConnected())
-  for (std::list<std::string>::iterator team = owned_teams.begin();
+  if(Network::GetInstance()->IsConnected())
+  for(std::list<std::string>::iterator team = owned_teams.begin();
       team != owned_teams.end();
       ++team)
   {
@@ -103,7 +96,7 @@ DistantComputer::~DistantComputer()
   SDL_DestroyMutex(sock_lock);
 }
 
-bool DistantComputer::SocketReady() const
+bool DistantComputer::SocketReady()
 {
   return SDLNet_SocketReady(sock);
 }
@@ -113,67 +106,47 @@ int DistantComputer::ReceiveDatas(char* & buf)
   SDL_LockMutex(sock_lock);
   MSG_DEBUG("network","locked");
 
-  if( packet_size == 0)
+  // Firstly, we read the size of the incoming packet
+  Uint32 net_size;
+  if (SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
   {
-    // Firstly, we read the size of the incoming packet
-    Uint32 net_size;
-    if (SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
-    {
-      SDL_UnlockMutex(sock_lock);
-      return -1;
-    }
-
-    packet_size = (int)SDLNet_Read32(&net_size);
-    NET_ASSERT(packet_size > 0)
-    {
-      // force_disconnect = true; // hum.. in this case we will assume it's a network error
-      return -1;
-    }
-
-    packet = (char*)malloc(packet_size);
+    SDL_UnlockMutex(sock_lock);
+    return -1;
   }
 
-
-  int sdl_received = 0;
-  do
+  int size = (int)SDLNet_Read32(&net_size);
+  net_assert(size > 0)
   {
-    sdl_received = SDLNet_TCP_Recv(sock, packet + packet_received, packet_size - packet_received);
-    if (sdl_received > 0)
+    // force_disconnect = true; // hum.. in this case we will assume it's a network error
+    return 0;
+  }
+
+  // Now we read the packet
+  buf = (char*)malloc(size);
+
+  int total_received = 0;
+  while (total_received != size)
+  {
+    int received = SDLNet_TCP_Recv(sock, buf + total_received, size - total_received);
+    if (received > 0)
     {
-      MSG_DEBUG("network", "%i received", sdl_received);
-      packet_received += sdl_received;
+      MSG_DEBUG("network", "%i received", received);
+      total_received += received;
     }
 
-    if (sdl_received < 0)
+    if (received < 0)
     {
       std::cerr << "Malformed packet" << std::endl;
-      packet_received = 0;
-      packet_size = 0;
-      free(packet);
-      packet = NULL;
-      NET_ASSERT(false)
+      total_received = received;
+      net_assert(false)
       {
-        return -1;
+	return 0;
       }
     }
   }
-  while( sdl_received > 0 && packet_received != packet_size);
-
   SDL_UnlockMutex(sock_lock);
   MSG_DEBUG("network","unlocked");
-
-  if( packet_received == packet_size )
-  {
-    int size = packet_size;
-    buf = packet;
-    packet = NULL;
-    packet_size = 0;
-    packet_received = 0;
-    return size;
-  }
-
-  buf = NULL;
-  return 0;
+  return total_received;
 }
 
 void DistantComputer::SendDatas(char* packet, int size_tmp)
@@ -190,7 +163,7 @@ void DistantComputer::SendDatas(char* packet, int size_tmp)
   MSG_DEBUG("network","unlocked");
 }
 
-std::string DistantComputer::GetAddress()
+std::string DistantComputer::GetAdress()
 {
   IPaddress* ip = SDLNet_TCP_GetPeerAddress(sock);
   std::string address;
@@ -222,7 +195,7 @@ void DistantComputer::ManageTeam(Action* team)
   {
     std::list<std::string>::iterator it;
     it = find(owned_teams.begin(), owned_teams.end(), name);
-    NET_ASSERT(it != owned_teams.end())
+    net_assert(it != owned_teams.end())
     {
       force_disconnect = true;
       return;
@@ -231,10 +204,10 @@ void DistantComputer::ManageTeam(Action* team)
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, name), false);
   }
   else
-    ASSERT(false);
+    assert(false);
 }
 
-void DistantComputer::SendChatMessage(Action* a) const
+void DistantComputer::SendChatMessage(Action* a)
 {
   std::string txt = a->PopString();
   if (txt == "") return;
@@ -248,7 +221,7 @@ void DistantComputer::SendChatMessage(Action* a) const
   }
 }
 
-void DistantComputer::SetState(DistantComputer::state_t _state)
+void DistantComputer::SetState(DistantComputer::state_t _state) 
 {
   state = _state;
 }

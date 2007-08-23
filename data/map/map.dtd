@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!ELEMENT resources (author,description?,surface+,name,water,nb_mine,nb_barrel?,is_open,infinite_background?,(sprite,wind)?,music_playlist?) >
+<!ELEMENT resources (author,surface+,name,water,nb_mine,nb_barrel?,is_open,infinite_background?, (sprite,wind)?) >
 <!ELEMENT section (author+)>
 <!ATTLIST section title CDATA #REQUIRED>
 
@@ -9,8 +9,6 @@
 <!ELEMENT nickname (#PCDATA)>
 <!ELEMENT email (#PCDATA)>
 <!ELEMENT country (#PCDATA)>
-
-<!ELEMENT description (#PCDATA)>
 
 <!ELEMENT surface EMPTY>
 <!ATTLIST surface name CDATA #REQUIRED file CDATA #REQUIRED>
@@ -30,15 +28,12 @@
 <!ELEMENT animation EMPTY>
 <!ATTLIST animation speed CDATA #IMPLIED loop_mode CDATA #IMPLIED >
 
-<!ELEMENT wind (nbr_sprite, need_flip?, rotation_speed?, mass, wind_factor, air_resist_factor, gravity_factor, rebounding, rebound_factor)>
+<!ELEMENT wind (nbr_sprite, need_flip?, mass, wind_factor, air_resist_factor, gravity_factor, rebounding, rebound_factor)>
 <!ELEMENT nbr_sprite (#PCDATA)>
 <!ELEMENT need_flip (#PCDATA)>
-<!ELEMENT rotation_speed (#PCDATA)>
 <!ELEMENT mass (#PCDATA)>
 <!ELEMENT wind_factor (#PCDATA)>
 <!ELEMENT air_resist_factor (#PCDATA)>
 <!ELEMENT gravity_factor (#PCDATA)>
 <!ELEMENT rebounding (#PCDATA)>
 <!ELEMENT rebound_factor (#PCDATA)>
-
-<!ELEMENT music_playlist (#PCDATA)>

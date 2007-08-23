@@ -20,6 +20,7 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
+#include <SDL.h>
 #include <string>
 #include <list>
 #include "surface.h"
@@ -35,16 +36,15 @@ class Video{
   std::list<Point2i> available_configs;
   void ComputeAvailableConfigs();
 
-  void SetWindowIcon(const std::string& icon) const;
+  void SetWindowIcon(std::string icon);
   void InitSDL(void);
 
 public:
   Surface window;
-  void SetWindowCaption(const std::string& caption) const;
+  void SetWindowCaption(std::string caption);
   void SetMaxFps(uint max_fps);
-  uint GetMaxFps() const;
-  uint GetSleepMaxFps() const;
-  void AddConfigIfAbsent(int w, int h);
+  uint GetMaxFps();
+  uint GetSleepMaxFps();
 
 public:
   Video();
@@ -52,8 +52,8 @@ public:
 
   bool IsFullScreen() const;
 
-  const std::list<Point2i>& GetAvailableConfigs() const;
-  bool SetConfig(int width, int height, bool fullscreen);
+  std::list<Point2i>& GetAvailableConfigs();
+  bool SetConfig(const int width, const int height, const bool fullscreen);
   void ToggleFullscreen();
 
   void Flip(void);

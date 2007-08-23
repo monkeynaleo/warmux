@@ -23,9 +23,17 @@
 #define SNIPE_RIFLE_H
 
 #include <vector>
-#include "weapon_launcher.h"
-#include "graphic/color.h"
+#include "launcher.h"
 #include "include/base.h"
+
+class SnipeBullet : public WeaponBullet
+{
+  public:
+    SnipeBullet(ExplosiveWeaponConfig& cfg,
+                WeaponLauncher * p_launcher); 
+  protected:
+    void ShootSound();
+};
 
 class SnipeRifle : public WeaponLauncher
 {
@@ -48,7 +56,7 @@ class SnipeRifle : public WeaponLauncher
     void SignalProjectileGhostState();
     void DrawBeam();
     void Draw();  // In order to draw the laser beam / and the contact point.
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+    DECLARE_GETWEAPONSTRING();
 };
 
 #endif /* SNIPE_RIFLE_H */

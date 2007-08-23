@@ -3,8 +3,6 @@
 <resources>
   <name>Gnu</name>
   <surface name="flag" file="flag.png" />
-  <surface name="death_flag" file="dead.png" />
-  <surface name="big_flag" file="flag64.png" />
   <team>
     <character name="Connochaetes Taurinus" body="gnuteam" />
     <character name="Connochaetes gnu" body="gnuteam" />

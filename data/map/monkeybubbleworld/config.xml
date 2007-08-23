@@ -26,6 +26,7 @@
     <nbr_sprite>35</nbr_sprite>
     <need_flip>1</need_flip>
     <rotation_speed>0.02</rotation_speed>
+
     <mass>2.0</mass>
     <wind_factor>5.5</wind_factor>
     <air_resist_factor>0.5</air_resist_factor>

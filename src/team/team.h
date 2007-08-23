@@ -26,11 +26,16 @@
 #include <vector>
 #include <string>
 #include "team_energy.h"
+#include "character/character.h"
 #include "graphic/surface.h"
+#include "include/base.h"
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"
+#include "tool/point.h"
+#include "tool/resource_manager.h"
 
 class Character;
+class Weapon;
 
 typedef enum {
   TEAM_human_local,
@@ -51,18 +56,14 @@ class Team
 
     std::vector<int> m_nb_ammos;
     std::vector<int> m_nb_units;
-    std::vector<int> m_energy;
 
-    // Autres
-    CrossHair        crosshair;
-    Point2i          sauve_camera;
-    TeamEnergy       energy;
-
+  // Autres
+    CrossHair crosshair;
+    Surface flag;
+    Point2i sauve_camera;
+    TeamEnergy energy;
 
   private:
-    Surface flag;
-    Surface death_flag;
-    Surface big_flag;
     bool is_camera_saved;
     std::string m_teams_dir; // parent directory hosting the data
     std::string m_id;
@@ -104,7 +105,7 @@ class Team
     void PrepareTurn();
 
   // Access to the character.
-    Character& ActiveCharacter() const;
+    Character& ActiveCharacter();
 
     void DrawEnergy(const Point2i& pos);
     void Refresh();
@@ -115,7 +116,7 @@ class Team
 
   // Access to the active weapon.
     Weapon& AccessWeapon() const;
-    Weapon& GetWeapon() const;
+    const Weapon& GetWeapon() const;
     Weapon::Weapon_type GetWeaponType() const;
 
   // Init the energy bar of the team.
@@ -126,16 +127,13 @@ class Team
     TeamEnergy & GetEnergyBar();
 
   // Read the total energy of the team.
-    uint ReadEnergy() const;
+    uint ReadEnergy();
 
   // Access to data.
     const std::string& GetName() const { return m_name; }
     const std::string& GetId() const { return m_id; }
     const std::string& GetPlayerName() const { return m_player_name; }
     const std::string& GetSoundProfile() const { return m_sound_profile; }
-    const Surface& GetFlag() const { return flag; }
-    const Surface& GetDeathFlag() const { return death_flag; }
-    const Surface& GetBigFlag() const { return big_flag; }
     iterator begin();
     iterator end();
     Character* FindByIndex(uint index);

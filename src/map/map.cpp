@@ -19,18 +19,18 @@
  * Monde ou plateau de jeu.
  *****************************************************************************/
 
-#include <iostream>
 #include "map.h"
-#include "object/physical_obj.h"
-#include "graphic/surface.h"
-#include "graphic/sprite.h"
-#include "graphic/text.h"
+//#include <iostream>
 #include "camera.h"
 #include "maps_list.h"
 #include "wind.h"
 #include "game/time.h"
-#include "object/objbox.h"
+#include "graphic/surface.h"
+#include "graphic/font.h"
+#include "include/constant.h"
+#include "object/bonus_box.h"
 #include "tool/i18n.h"
+#include "tool/stats.h"
 
 const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
 
@@ -96,10 +96,15 @@ void Map::FreeMem()
   to_redraw_particles_now->clear();
 }
 
+void Map::ToRedrawOnMap(Rectanglei r)
+{
+  to_redraw->push_back(r);
+}
+
 void Map::ToRedrawOnScreen(Rectanglei r)
 {
-  r.SetPosition( r.GetPosition() + Camera::GetInstance()->GetPosition() );
-  to_redraw->push_back(r);
+  r.SetPosition( r.GetPosition() + camera.GetPosition() );
+  to_redraw->push_back( r );
 }
 
 void Map::SwitchDrawingCache()
@@ -118,46 +123,46 @@ void Map::SwitchDrawingCacheParticles()
   to_redraw_particles->clear();
 }
 
-void Map::Dig(const Point2i& position, const Surface& surface)
+void Map::Dig(const Point2i position, const Surface& surface)
 {
    ground.Dig (position, surface);
    to_redraw->push_back(Rectanglei(position, surface.GetSize()));
 }
 
-void Map::Dig(const Point2i& center, const uint radius)
+void Map::Dig(const Point2i center, const uint radius)
 {
    ground.Dig (center, radius);
-   to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE),
-                                   Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
+   to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE)
+                                      , Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
-void Map::PutSprite(const Point2i& pos, const Sprite* spr)
+void Map::PutSprite(const Point2i pos, Sprite* spr)
 {
    ground.PutSprite (pos, spr);
    to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
-void Map::MergeSprite(const Point2i& pos, const Sprite * spr)
+void Map::MergeSprite(const Point2i pos, Sprite * spr)
 {
   Surface tmp = spr->GetSurface();
   ground.MergeSprite (pos, tmp);
   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
-void Map::DrawSky(bool redraw_all)
+void Map::DrawSky()
 {
   SwitchDrawingCache();
   SwitchDrawingCacheParticles();
 
   OptimizeCache(*to_redraw_now);
 
-  sky.Draw(redraw_all);
+  sky.Draw();
 }
 
 void Map::DrawWater()
 { water.Draw(); }
 
-void Map::Draw(bool redraw_all)
+void Map::Draw()
 {
   std::list<Rectanglei> *tmp = to_redraw;
   to_redraw_particles->clear();
@@ -166,10 +171,41 @@ void Map::Draw(bool redraw_all)
   wind.DrawParticles();
   to_redraw = tmp;
 
-//  Done from DrawSky
-//  OptimizeCache(*to_redraw_now);
+  OptimizeCache(*to_redraw_now);
 
-  ground.Draw(redraw_all);
+  ground.Draw();
+}
+
+bool Map::IsOutsideWorldX(int x) const{
+  return (x < 0) || ((int)GetWidth() <= x);
+}
+
+bool Map::IsOutsideWorldY(int y) const{
+  return (y < 0) || ((int)GetHeight() <= y);
+}
+
+bool Map::IsOutsideWorldXwidth(int x, uint larg) const{
+  return (x + (int)larg - 1 < 0) || ((int)GetWidth() <= x);
+}
+
+bool Map::IsOutsideWorldYheight(int y, uint haut) const{
+  return ((y + (int)haut - 1 < 0) || ((int)GetHeight() <= y));
+}
+
+bool Map::IsOutsideWorldXY(int x, int y) const{
+  return IsOutsideWorldX(x) || IsOutsideWorldY(y);
+}
+
+bool Map::IsOutsideWorld(const Point2i &pos) const{
+  return IsOutsideWorldXY(pos.x, pos.y);
+}
+
+bool Map::IsInVacuum(int x, int y) const{
+  return ground.IsEmpty(Point2i(x, y));
+}
+
+bool Map::IsInVacuum(const Point2i& pos) const{
+  return ground.IsEmpty(pos);
 }
 
 bool Map::HorizontalLine_IsInVacuum(int ox, int y, int width) const
@@ -177,15 +213,15 @@ bool Map::HorizontalLine_IsInVacuum(int ox, int y, int width) const
   // Traite une ligne
 
   for (int i=0; i<width; ++i)
-    if (!IsInVacuum(ox+i, (uint)y))
-      return false;
+	if (!IsInVacuum(ox+i, (uint)y))
+	  return false;
   return true;
 }
 
 // TODO : for consistency, VerticalLine_IsInVacuum should use a 'height' as LigneH does it ...
 bool Map::VerticalLine_IsInVacuum(int x, int top, int bottom) const
 {
-  ASSERT (top <= bottom);
+  assert (top <= bottom);
 
   // Check we are still inside the world
   if (IsOutsideWorldX(x) || IsOutsideWorldYheight(top, bottom-top+1))
@@ -254,29 +290,29 @@ bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect) const
 bool Map::IsInVacuum_top(const PhysicalObj &obj, int dx, int dy) const
 {
   return HorizontalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-                                    obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy,
-                                    obj.GetTestRect().GetSizeX());
+			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy,
+			     obj.GetTestRect().GetSizeX());
 }
 
 bool Map::IsInVacuum_bottom(const PhysicalObj &obj, int dx, int dy) const
 {
   return HorizontalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-                                    obj.GetTestRect().GetPositionY() + dy,
-                                    obj.GetTestRect().GetSizeX());
+			     obj.GetTestRect().GetPositionY() + dy,
+			     obj.GetTestRect().GetSizeX());
 }
 
 bool Map::IsInVacuum_left(const PhysicalObj &obj, int dx, int dy) const
 {
   return VerticalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-                                  obj.GetTestRect().GetPositionY() + dy,
-                                  obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
+			     obj.GetTestRect().GetPositionY() + dy,
+			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }
 
 bool Map::IsInVacuum_right(const PhysicalObj &obj, int dx, int dy) const
 {
   return VerticalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + obj.GetTestRect().GetSizeX() + dx,
-                                  obj.GetTestRect().GetPositionY() + dy,
-                                  obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
+			     obj.GetTestRect().GetPositionY() + dy,
+			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }
 
 void Map::DrawAuthorName()
@@ -293,23 +329,22 @@ void Map::DrawAuthorName()
   if (author_info1 == NULL) {
     std::string txt;
     txt  = Format(_("Map %s, a creation of: "),
-                  ActiveMap().ReadFullMapName().c_str());
+		  ActiveMap().ReadName().c_str());
     author_info1 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
     txt = ActiveMap().ReadAuthorInfo();
     author_info2 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
   }
 
-  /* FIXME use a real layout here... not calculated positions */
-  author_info1->DrawTopLeft(Point2i(AUTHOR_INFO_X,AUTHOR_INFO_Y));
-  author_info2->DrawTopLeft(Point2i(AUTHOR_INFO_X,AUTHOR_INFO_Y+(*Font::GetInstance(Font::FONT_SMALL)).GetHeight()));
+  author_info1->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y);
+  author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+(*Font::GetInstance(Font::FONT_SMALL)).GetHeight());
 }
 
 bool CompareRectangle(const Rectanglei& a, const Rectanglei& b)
 {
-  return ( a.GetTopLeftPoint() < b.GetTopLeftPoint() );
+  return ( a.GetTopLeftPoint() <= b.GetTopLeftPoint() );
 }
 
-void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
+void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache)
 {
   rectangleCache.sort(CompareRectangle);
 
@@ -338,19 +373,10 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
 //       std::cout << "Y: " << (*it).GetPositionY() << " ; " << (*it).GetBottomRightPoint().GetY();
 //       std::cout << std::endl;
       tmp = it;
-      if (tmp == rectangleCache.begin())
-      {
-        rectangleCache.erase(it);
-        it = rectangleCache.begin();
-        if (jt == it)
-          jt++;
-      }
-      else
-      {
-        --tmp;
-        rectangleCache.erase(it);
-        it = tmp;
-      }
+      --tmp;
+      rectangleCache.erase(it);
+      it = tmp;
+
     } else {
       it++;
       jt++;

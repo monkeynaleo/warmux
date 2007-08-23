@@ -22,11 +22,8 @@
 #ifndef AI_SHOOT_MODULE_H
 #define AI_SHOOT_MODULE_H
 
-#include "include/base.h"
-
-// Forward declararion
-class AIMovementModule;
-class Character;
+#include "character/character.h"
+#include "ai_movement_module.h"
 
 class AIShootModule
 {
@@ -36,12 +33,11 @@ class AIShootModule
   typedef enum {
     NO_STRATEGY,
     NEAR_FROM_ENEMY,
-    SHOOT_FROM_POINT,
-    SHOOT_BAZOOKA
+    SHOOT_FROM_POINT
   } strategy_t;
 
   strategy_t m_current_strategy;
-
+  
   uint m_current_time;
 
   const Character* m_enemy;
@@ -54,25 +50,23 @@ class AIShootModule
   uint m_last_shoot_time;
 
   // for shooting weapons like gun, shotgun, sniper rifle, m16, ...
-  static bool IsDirectlyShootable(const Character& shooter,
-                                  const Character& enemy,
-                                  double& shoot_angle);
+  static bool IsDirectlyShootable(const Character& shooter, 
+				  const Character& enemy,
+				  double& shoot_angle);
 
-  static const Character* FindShootableEnemy(const Character& shooter,
-                                             double& shoot_angle);
+  static const Character* FindShootableEnemy(Character& shooter,
+					     double& shoot_angle);
 
   bool SelectFiringWeapon(double shoot_angle) const;
 
-  void ShootWithBazooka();
-  const Character* FindBazookaShootableEnemy(const Character& shooter) const;
   // for proximity weapons like dynamite, mine, ...
   // TODO -> Go in ai_movment_module
-  const Character *FindProximityEnemy(const Character& shooter) const;
+  const Character* FindProximityEnemy(const Character& shooter) const;
 
   bool SelectProximityWeapon(const Character& enemy) const;
 
   // Watch the choosen enemy
-  void ChooseDirection() const;
+  void ChooseDirection();
   const Character* FindEnemy();
 
   void Shoot();

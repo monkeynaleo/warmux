@@ -21,7 +21,11 @@
 #ifndef BODY_LIST_H
 #define BODY_LIST_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "body.h"
 #include "include/base.h"
+#include "tool/xml_document.h"
+#include "tool/resource_manager.h"
 #include <map>
 #include <string>
 //-----------------------------------------------------------------------------

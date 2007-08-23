@@ -18,10 +18,10 @@
  ******************************************************************************
  * Picture widget: A widget containing a picture
  *****************************************************************************/
-
 #include "picture_widget.h"
+//#include <SDL_gfxPrimitives.h>
 #include "graphic/colors.h"
-#include "graphic/sprite.h"
+#include "include/app.h"
 #include "tool/resource_manager.h"
 
 PictureWidget::PictureWidget (const Rectanglei &rect) : Widget(rect)
@@ -30,14 +30,14 @@ PictureWidget::PictureWidget (const Rectanglei &rect) : Widget(rect)
   disabled = false;
 }
 
-PictureWidget::PictureWidget (const Rectanglei &rect, const std::string& resource_id) : Widget(rect)
+PictureWidget::PictureWidget (const Rectanglei &rect, std::string resource_id) : Widget(rect)
 {
   spr = NULL;
   disabled = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   Surface tmp = resource_manager.LoadImage(res, resource_id);
-  SetSurface(tmp, false);
+  SetSurface(tmp, false);  
   resource_manager.UnLoadXMLProfile( res);
 }
 
@@ -57,8 +57,8 @@ void PictureWidget::SetSurface(const Surface& s, bool enable_scaling)
   spr = new Sprite(s);
   if (enable_scaling) {
     float scale = std::min( float(GetSizeY())/spr->GetHeight(),
-                            float(GetSizeX())/spr->GetWidth() ) ;
-
+			    float(GetSizeX())/spr->GetWidth() ) ;
+  
     spr->Scale (scale, scale);
   }
 }
@@ -73,8 +73,8 @@ void PictureWidget::SetNoSurface()
   spr = NULL;
 }
 
-void PictureWidget::Draw(const Point2i &/*mousePosition*/,
-                         Surface& surf) const
+void PictureWidget::Draw(const Point2i &mousePosition,
+			 Surface& surf) const
 {
   if (spr != NULL) {
     int x = GetPositionX() + ( GetSizeX()/2 ) - (spr->GetWidth()/2);
@@ -85,7 +85,17 @@ void PictureWidget::Draw(const Point2i &/*mousePosition*/,
     // Draw a transparency mask
     if (disabled) {
       surf.BoxColor(Rectanglei(x,y,spr->GetWidth(),spr->GetHeight()),
-                    defaultOptionColorBox);
+		    defaultOptionColorBox);
     }
   }
+}
+
+void PictureWidget::SetSizePosition(const Rectanglei &rect)
+{
+  StdSetSizePosition(rect);
+}
+
+void PictureWidget::Disable()
+{
+  disabled = true;
 }

@@ -22,14 +22,11 @@
 //-----------------------------------------------------------------------------
 #include <string>
 #include <iostream>
-#include "body.h"
-#include "movement.h"
-#include "game/config.h"
-#include "tool/resource_manager.h"
+#include "game/config.h" // DATADIR
+#include "tool/i18n.h"
 #include "tool/xml_document.h"
 
 const std::string CONFIG_FN = "config.xml";
-
 //-----------------------------------------------------------------------------
 BodyList body_list;
 //-----------------------------------------------------------------------------

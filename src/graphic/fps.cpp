@@ -20,8 +20,12 @@
  *****************************************************************************/
 
 #include "fps.h"
+#include <SDL.h>
+#include <sstream>
+#include <iomanip>
+#include "colors.h"
+#include "video.h"
 #include "text.h"
-#include "graphic/video.h"
 #include "include/app.h"
 #include "tool/i18n.h"
 
@@ -100,6 +104,6 @@ void FramePerSecond::Draw(){
   snprintf(buffer, sizeof(buffer)-1, "%.1f", average);
   buffer[sizeof(buffer)-1] = '\0';
   text->Set (Format(_("%s fps"), buffer));
-  text->DrawTopRight(Point2i(AppWormux::GetInstance()->video->window.GetWidth()-1,0));
+  text->DrawTopRight(AppWormux::GetInstance()->video.window.GetWidth()-1,0);
 }
 

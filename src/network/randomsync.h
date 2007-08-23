@@ -28,13 +28,13 @@
 class RandomSync{
   //Pregenerated table of random number (mainly usefull for network)
   std::list<double> rnd_table;
-
+  
   double GetRand();
   void GenerateTable();
 public:
   RandomSync();
   void Init();
-
+  
   bool GetBool();
   double GetDouble();
   double GetDouble(double max);
@@ -43,9 +43,9 @@ public:
   Point2i GetPoint(const Rectanglei &rect);
   Point2i GetPoint(const Point2i &pt);
 
-  //to fill the pregenerated tables
-  void SetRandMax(double rand_max);
+  //Fill the pregenerated tables
   void AddToTable(double nbr);
+  void ClearTable();
 };
 
 extern RandomSync randomSync;

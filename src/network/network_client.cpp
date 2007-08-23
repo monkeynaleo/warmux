@@ -21,25 +21,22 @@
 
 #include "network_client.h"
 //-----------------------------------------------------------------------------
-#include <SDL_thread.h>
 #include "include/action_handler.h"
 #include "game/game_mode.h"
 #include "tool/debug.h"
+#include "tool/i18n.h"
 #include "distant_cpu.h"
 
+#if defined(DEBUG) && not defined(WIN32)
 #include <sys/types.h>
-#ifdef LOG_NETWORK
-#  include <sys/stat.h>
-#  include <fcntl.h>
-#  ifdef WIN32
-#    include <io.h>
-#  endif
+#include <sys/stat.h>
+#include <fcntl.h>
 #endif
 //-----------------------------------------------------------------------------
 
 NetworkClient::NetworkClient()
 {
-#ifdef LOG_NETWORK
+#if defined(DEBUG) && not defined(WIN32)
   fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
   fout = open("./network_client.out", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
 #endif
@@ -71,118 +68,98 @@ void NetworkClient::ReceiveActions()
 
   while (cpu.size()==1 && ThreadToContinue()) // While connected to server
   {
-    int num_ready;
-
     if (state == NETWORK_PLAYING && cpu.size() == 0)
     {
       // If while playing everybody disconnected, just quit
       break;
     }
 
-    //Loop while nothing is received
-    while (ThreadToContinue())
-    {
-      num_ready = SDLNet_CheckSockets(socket_set, 100);
-      // Means something is available
-      if (num_ready>0)
-        break;
-      // Means an error
-      else if (num_ready == -1)
-      {
-        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
-      }
-      // Means timeout, so continue
-    }
+    while (SDLNet_CheckSockets(socket_set, 100) == 0 && ThreadToContinue()); //Loop while nothing is received
 
     std::list<DistantComputer*>::iterator dst_cpu;
     for (dst_cpu = cpu.begin();
-         dst_cpu != cpu.end() && ThreadToContinue();
-         dst_cpu++)
+	 dst_cpu != cpu.end() && ThreadToContinue();
+	 dst_cpu++)
     {
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
         // Read the size of the packet
         int packet_size = (*dst_cpu)->ReceiveDatas(packet);
-        if( packet_size == -1) // An error occured during the reception
-        {
+        if( packet_size <= 0)
+	{
           dst_cpu = CloseConnection(dst_cpu);
           continue;
-        } else
-        if( packet_size == 0) // We didn't received the full packet yet
-          continue;
-
-#ifdef LOG_NETWORK
-        if (fin != 0) {
-          int tmp = 0xFFFFFFFF;
-          write(fin, &packet_size, 4);
-          write(fin, packet, packet_size);
-          write(fin, &tmp, 4);
         }
+
+#if defined(DEBUG) && not defined(WIN32)
+	if (fin != 0) {
+	  int tmp = 0xFFFFFFFF;
+	  write(fin, &packet_size, 4);
+	  write(fin, packet, packet_size);
+	  write(fin, &tmp, 4);
+	}
 #endif
 
         Action* a = new Action(packet, (*dst_cpu));
         MSG_DEBUG("network.traffic","Received action %s",
-                  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+                ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
-        switch (a->GetType()) {
-        case Action::ACTION_NICKNAME:
-          {
-            std::string nickname = a->PopString();
-            std::cout<<"New nickname: " + nickname<< std::endl;
-            (*dst_cpu)->nickname = nickname;
-            delete a;
-          }
-          break;
+	switch (a->GetType()) {
+	case Action::ACTION_NICKNAME: 
+	  {
+	    std::string nickname = a->PopString();
+	    std::cout<<"New nickname: " + nickname<< std::endl;
+	    (*dst_cpu)->nickname = nickname;
+	    delete a;
+	  }
+	  break;
 
-        case Action::ACTION_MENU_ADD_TEAM:
-        case Action::ACTION_MENU_DEL_TEAM:
+	case Action::ACTION_MENU_ADD_TEAM:
+	case Action::ACTION_MENU_DEL_TEAM:
           (*dst_cpu)->ManageTeam(a);
           delete a;
-          break;
+	  break;
 
-        case Action::ACTION_CHAT_MESSAGE:
+	case Action::ACTION_CHAT_MESSAGE:
           (*dst_cpu)->SendChatMessage(a);
           delete a;
-          break;
+	  break;
 
-        default:
+	default:
           ActionHandler::GetInstance()->NewAction(a, false);
-        }
-        free(packet);
+	}
+	free(packet);
       }
     }
   }
 }
 
 //-----------------------------------------------------------------------------
-const Network::connection_state_t
-NetworkClient::ClientConnect(const std::string &host, const std::string& port)
+
+const Network::connection_state_t NetworkClient::ClientConnect(const std::string &host, 
+							       const std::string& port)
 {
   Init();
 
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
-  int prt = strtol(port.c_str(), NULL, 10);
+  int prt=0;
+  sscanf(port.c_str(),"%i",&prt);
 
-  connection_state_t r = CheckHost(host, prt);
-  if (r != Network::CONNECTED)
-    return r;
+  if (CheckHost(host, port) == Network::CONN_TIMEOUT)
+    return Network::CONN_TIMEOUT;
 
   if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt) == -1)
   {
-    fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), prt);
+    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return Network::CONN_BAD_HOST;
   }
-
-  // CheckHost opens and closes a connection to the server, so before reconnecting
-  // wait a bit, so the connection really gets closed ..
-  SDL_Delay(500);
 
   TCPsocket socket = SDLNet_TCP_Open(&ip);
 
   if (!socket)
   {
-    fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), prt);
+    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
     return Network::CONN_REJECTED;
   }
 

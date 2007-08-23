@@ -26,20 +26,31 @@
 #include "weapon.h"
 //-----------------------------------------------------------------------------
 
-class SyringeConfig;
+class SyringeConfig : public WeaponConfig
+{
+  public:
+    uint range;
+    uint damage;
+    uint turns;
+  public:
+    SyringeConfig();
+    void LoadXml(xmlpp::Element *elem);
+};
+
+//-----------------------------------------------------------------------------
 
 class Syringe : public Weapon
 {
   protected:
     bool p_Shoot();
-    void Refresh() { if (IsInUse()) m_is_active = false; };
+    void Refresh();
 
-    void Draw() { Weapon::Draw(); };
+    void Draw();
 
   public:
     Syringe();
     SyringeConfig &cfg();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+    DECLARE_GETWEAPONSTRING();
 };
 
 //-----------------------------------------------------------------------------

@@ -21,17 +21,16 @@
 
 #include "body_member.h"
 #include "particle.h"
-#include "graphic/sprite.h"
 #include "tool/random.h"
 
-BodyMemberParticle::BodyMemberParticle(const Sprite* spr, const Point2i& position) :
+BodyMemberParticle::BodyMemberParticle(Sprite* spr, const Point2i& position) :
   Particle("body_member_particle")
 {
   SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;
   image = new Sprite(spr->GetSurface());
   image->EnableRotationCache(32);
-  ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
+  assert(image->GetWidth() != 0 && image->GetHeight()!=0);
   SetXY(position);
 
   SetSize(image->GetSize());
@@ -44,8 +43,10 @@ void BodyMemberParticle::Refresh()
 {
   m_left_time_to_live--;
   UpdatePosition();
+  Point2d speed;
+  GetSpeedXY(speed);
 
-  angle_rad += GetSpeedXY().Norm() * 20;
+  angle_rad += speed.Norm() * 20;
   angle_rad = fmod(angle_rad, 2 *M_PI);
   //FIXME what about negatives values ? what would happen ?
   if(m_left_time_to_live < 50)

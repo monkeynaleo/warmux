@@ -25,13 +25,8 @@
 
 #include <string>
 #include "include/base.h"
+#include "tool/xml_document.h"
 #include "weapon/weapon_cfg.h"
-
-namespace xmlpp
-{
-  class Element;
-}
-class XmlReader;
 
 class GameMode
 {
@@ -76,9 +71,9 @@ public:
 private:
   std::string m_current;
 
-  XmlReader* doc_objects;
+  XmlReader doc_objects;
 
-  bool LoadXml (const xmlpp::Element *xml);
+  bool LoadXml (xmlpp::Element *xml);
   bool ExportFileToString(const std::string& filename, std::string& contents) const;
 
   std::string GetFilename() const;
@@ -94,20 +89,19 @@ public:
   // mode: xml text of data/game_mode/<mode>.xml
   // mode_objects: xml text of data/game_mode/<mode>_objects.xml
   bool LoadFromString(const std::string& game_mode_name,
-                      const std::string& mode,
-                      const std::string& mode_objects);
+		      const std::string& mode,
+		      const std::string& mode_objects);
 
   bool ExportToString(std::string& mode,
-                      std::string& mode_objects) const;
+		      std::string& mode_objects) const;
 
-  const XmlReader* GetXmlObjects() const; // for object_cfg
+  XmlReader& GetXmlObjects(); // for object_cfg
 
   bool AllowCharacterSelection() const;
 
 private:
   static GameMode * singleton;
   GameMode();
-  ~GameMode();
 
 };
 
