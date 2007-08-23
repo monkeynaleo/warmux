@@ -6,7 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.7\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2007-03-07 15:07+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: sk <stryco@gmail.com>\n"
@@ -408,7 +407,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/main.cpp:252
+#: src/main.cpp:242
 msgid "Authors:"
 msgstr "Autory:"
 
@@ -440,18 +439,18 @@ msgstr "Odrazená lopta"
 msgid "Bye bye tux..."
 msgstr "Maj sa tux..."
 
-#: src/team/teams_list.cpp:460 src/team/teams_list.cpp:482
-#: src/team/teams_list.cpp:530
+#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
+#: src/team/teams_list.cpp:534
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nemôžem nájsť tím %s!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:157
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:145
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
@@ -523,7 +522,7 @@ msgstr "KONIEC HRY"
 msgid "Error in %s:%lu"
 msgstr "Chyba v %s:%lu"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
+#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
 #, fuzzy
 msgid "Error loading team :"
 msgstr "Chyba počas načítavania tímu %s:"
@@ -666,7 +665,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Ponáhľaj sa, si príliš pomalý  !!"
 
-#: src/main.cpp:244
+#: src/main.cpp:234
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -723,7 +722,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Načítavam mapy:"
 
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:133
 msgid "Load teams:"
 msgstr "Načítavam tímy"
 
@@ -790,7 +789,7 @@ msgstr "Hudba?"
 msgid "Network Game"
 msgstr "Sieťová hra"
 
-#: src/network/network.cpp:152
+#: src/network/network.cpp:153
 #, fuzzy
 msgid "Network initialization"
 msgstr "Inicializuje sa okolie..."
@@ -855,7 +854,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Koniec"
 
-#: src/main.cpp:232
+#: src/main.cpp:223
 msgid "Quit Wormux"
 msgstr "Ukončiť Wormuxa"
 
@@ -880,7 +879,7 @@ msgstr "Rozlíšenie"
 msgid "Riot Bomb"
 msgstr "Riot Bomba"
 
-#: src/main.cpp:184
+#: src/main.cpp:87
 msgid "Run game"
 msgstr "Spusti hru"
 
@@ -1051,7 +1050,7 @@ msgstr "Nedá sa otvoriť adresár máp (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nedá sa použiť tento port!"
 
-#: src/main.cpp:192
+#: src/main.cpp:183
 msgid "Version"
 msgstr "Verzia"
 
@@ -1073,7 +1072,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Zbraňe"
 
-#: src/main.cpp:261
+#: src/main.cpp:251
 msgid "Website: "
 msgstr "Web stránka: "
 
@@ -1092,11 +1091,11 @@ msgstr "Častice vetra?"
 msgid "Winner"
 msgstr "Mína "
 
-#: src/main.cpp:205
+#: src/main.cpp:196
 msgid "Wormux launching..."
 msgstr "Wormux sa spúšťa..."
 
-#: src/main.cpp:251
+#: src/main.cpp:241
 msgid "Wormux version "
 msgstr "Wormux verzia"
 
@@ -1118,7 +1117,7 @@ msgstr "Si sáám..."
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tímy !"
 

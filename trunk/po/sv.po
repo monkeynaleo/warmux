@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2007-06-04 23:00+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -387,7 +386,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Städ"
 
-#: src/main.cpp:252
+#: src/main.cpp:242
 msgid "Authors:"
 msgstr "Upphovsmän:"
 
@@ -419,18 +418,18 @@ msgstr "Studsboll"
 msgid "Bye bye tux..."
 msgstr "Hej då Tux..."
 
-#: src/team/teams_list.cpp:460 src/team/teams_list.cpp:482
-#: src/team/teams_list.cpp:530
+#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
+#: src/team/teams_list.cpp:534
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan inte hitta laget %s!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:157
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan inte öppna lagkatalogen (%s)!"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:145
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan inte öppna lagkatalogen (%s)!"
@@ -502,7 +501,7 @@ msgstr "SPELET ÄR ÖVER"
 msgid "Error in %s:%lu"
 msgstr "Fel i %s:%lu"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
+#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Fel vid inläsning av lag :"
 
@@ -655,7 +654,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynda dig, du är för långsam!!"
 
-#: src/main.cpp:244
+#: src/main.cpp:234
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -715,7 +714,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Läs in kartor:"
 
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:133
 msgid "Load teams:"
 msgstr "Läs in lag:"
 
@@ -781,7 +780,7 @@ msgstr "Musik?"
 msgid "Network Game"
 msgstr "Nätverksspel"
 
-#: src/network/network.cpp:152
+#: src/network/network.cpp:153
 msgid "Network initialization"
 msgstr "Nätverkinitiering"
 
@@ -845,7 +844,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/main.cpp:232
+#: src/main.cpp:223
 msgid "Quit Wormux"
 msgstr "Avsluta Wormux"
 
@@ -870,7 +869,7 @@ msgstr "Upplösning"
 msgid "Riot Bomb"
 msgstr "Massbomb"
 
-#: src/main.cpp:184
+#: src/main.cpp:87
 msgid "Run game"
 msgstr "Kör spel"
 
@@ -1048,7 +1047,7 @@ msgstr "Kunde inte öppna kartkatalogen (%s)!"
 msgid "Unable to use this port!"
 msgstr "Kan inte använda den här porten!"
 
-#: src/main.cpp:192
+#: src/main.cpp:183
 msgid "Version"
 msgstr "Version"
 
@@ -1069,7 +1068,7 @@ msgstr "Väntar på servern, allt du kan göra är att avbryta eller chatta!"
 msgid "Weapons"
 msgstr "Vapen"
 
-#: src/main.cpp:261
+#: src/main.cpp:251
 msgid "Website: "
 msgstr "Webbplats: "
 
@@ -1087,11 +1086,11 @@ msgstr "Vindpartiklar?"
 msgid "Winner"
 msgstr "Vinnare"
 
-#: src/main.cpp:205
+#: src/main.cpp:196
 msgid "Wormux launching..."
 msgstr "Wormux startar..."
 
-#: src/main.cpp:251
+#: src/main.cpp:241
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1112,7 +1111,7 @@ msgstr "Du är ensam..."
 msgid "You need at least one valid map !"
 msgstr "Du behöver åtminstone en giltig karta!"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams !"
 msgstr "Du behöver åtminstone två giltiga lag!"
 

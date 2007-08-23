@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2007-07-09 08:59+0100\n"
 "Last-Translator: michele mauri <mikimauri@gmail.com>\n"
 "Language-Team: RebelCode <info@rebelcoders.org>; TeMpLeR <LL@li.org>\n"
@@ -390,7 +389,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Incudine"
 
-#: src/main.cpp:252
+#: src/main.cpp:242
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -422,18 +421,18 @@ msgstr "Pallina Rimbalzina"
 msgid "Bye bye tux..."
 msgstr "Ciao ciao tux..."
 
-#: src/team/teams_list.cpp:460 src/team/teams_list.cpp:482
-#: src/team/teams_list.cpp:530
+#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
+#: src/team/teams_list.cpp:534
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossibile trovare la squadra %s!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:157
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Impossibile aprire la directory delle squadra (%s)!"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:145
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossibile aprire la directory delle squadra (%s)!"
@@ -505,7 +504,7 @@ msgstr "FINE DEL GIOCO"
 msgid "Error in %s:%lu"
 msgstr "Errore in %s: %lu"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
+#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Errore nel caricamento della squadra:"
 
@@ -661,7 +660,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Muoviti, sei troppo lento !!"
 
-#: src/main.cpp:244
+#: src/main.cpp:234
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -719,7 +718,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Caricamento mappe :"
 
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:133
 msgid "Load teams:"
 msgstr "Caricamento squadre :"
 
@@ -785,7 +784,7 @@ msgstr "Musica ?"
 msgid "Network Game"
 msgstr "Gioco online"
 
-#: src/network/network.cpp:152
+#: src/network/network.cpp:153
 msgid "Network initialization"
 msgstr "Inizializzazione della rete"
 
@@ -849,7 +848,7 @@ msgstr "Porta:"
 msgid "Quit"
 msgstr "Esci"
 
-#: src/main.cpp:232
+#: src/main.cpp:223
 msgid "Quit Wormux"
 msgstr "Esci da Wormux"
 
@@ -874,7 +873,7 @@ msgstr "Risoluzione"
 msgid "Riot Bomb"
 msgstr "Bomba Antisommossa"
 
-#: src/main.cpp:184
+#: src/main.cpp:87
 msgid "Run game"
 msgstr "Avvia il gioco"
 
@@ -1051,7 +1050,7 @@ msgstr "Impossibile aprire la directory delle mappe (%s)!"
 msgid "Unable to use this port!"
 msgstr "Impossibile usare questa porta!"
 
-#: src/main.cpp:192
+#: src/main.cpp:183
 msgid "Version"
 msgstr "Versione"
 
@@ -1072,7 +1071,7 @@ msgstr "In attesa del server, puoi chattare o disconnetterti"
 msgid "Weapons"
 msgstr "Armi"
 
-#: src/main.cpp:261
+#: src/main.cpp:251
 msgid "Website: "
 msgstr "Sito web: "
 
@@ -1090,11 +1089,11 @@ msgstr "Particelle di vento?"
 msgid "Winner"
 msgstr "Vincitore"
 
-#: src/main.cpp:205
+#: src/main.cpp:196
 msgid "Wormux launching..."
 msgstr "Avvio in corso..."
 
-#: src/main.cpp:251
+#: src/main.cpp:241
 msgid "Wormux version "
 msgstr "Wormux Versione"
 
@@ -1115,7 +1114,7 @@ msgstr "Sei da solo..."
 msgid "You need at least one valid map !"
 msgstr "Hai bisogno almeno di una mappa valida!"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams !"
 msgstr "Hai bisogno almeno di due squadre valide !"
 

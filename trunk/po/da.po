@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2007-06-06 16:53+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
@@ -386,7 +385,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:252
+#: src/main.cpp:242
 msgid "Authors:"
 msgstr "Forfattere:"
 
@@ -418,18 +417,18 @@ msgstr "Hoppebold"
 msgid "Bye bye tux..."
 msgstr "Faaarvel Tux..."
 
-#: src/team/teams_list.cpp:460 src/team/teams_list.cpp:482
-#: src/team/teams_list.cpp:530
+#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
+#: src/team/teams_list.cpp:534
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan ikke finde holdet %s!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:157
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:145
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
@@ -501,7 +500,7 @@ msgstr "SLUT PÅ SPILLET"
 msgid "Error in %s:%lu"
 msgstr "Fejl i %s: %lu"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
+#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Fejl under indlæsning af hold:"
 
@@ -653,7 +652,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynd dig, du er for langsom!"
 
-#: src/main.cpp:244
+#: src/main.cpp:234
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -711,7 +710,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Indlæser baner:"
 
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:133
 msgid "Load teams:"
 msgstr "Indlæser hold:"
 
@@ -777,7 +776,7 @@ msgstr "Musik?"
 msgid "Network Game"
 msgstr "Netværksspil"
 
-#: src/network/network.cpp:152
+#: src/network/network.cpp:153
 msgid "Network initialization"
 msgstr "Netværksinitialisation"
 
@@ -841,7 +840,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Afslut"
 
-#: src/main.cpp:232
+#: src/main.cpp:223
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
@@ -866,7 +865,7 @@ msgstr "Opløsning"
 msgid "Riot Bomb"
 msgstr "Oprørsbombe"
 
-#: src/main.cpp:184
+#: src/main.cpp:87
 msgid "Run game"
 msgstr "Kører spillet"
 
@@ -1042,7 +1041,7 @@ msgstr "Kan ikke åbne banekataloget (%s)!"
 msgid "Unable to use this port!"
 msgstr "Kan ikke bruge denne port!"
 
-#: src/main.cpp:192
+#: src/main.cpp:183
 msgid "Version"
 msgstr "Version"
 
@@ -1064,7 +1063,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Våben"
 
-#: src/main.cpp:261
+#: src/main.cpp:251
 msgid "Website: "
 msgstr "Hjemmeside: "
 
@@ -1082,11 +1081,11 @@ msgstr "Vindpartikler?"
 msgid "Winner"
 msgstr "Vinder"
 
-#: src/main.cpp:205
+#: src/main.cpp:196
 msgid "Wormux launching..."
 msgstr "Wormux starter..."
 
-#: src/main.cpp:251
+#: src/main.cpp:241
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1107,7 +1106,7 @@ msgstr "Du er alene..."
 msgid "You need at least one valid map !"
 msgstr "Du skal vælge mindst én gyldig bane!"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams !"
 msgstr "Du skal vælge mindst to gyldige hold!"
 

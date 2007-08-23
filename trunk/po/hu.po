@@ -2,7 +2,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2007-05-15 12:00+0200\n"
 "Last-Translator: Varga Istvan\n"
 "Language-Team: Hungarian\n"
@@ -417,7 +416,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Üllõ"
 
-#: src/main.cpp:252
+#: src/main.cpp:242
 msgid "Authors:"
 msgstr "Szerzõk:"
 
@@ -450,18 +449,18 @@ msgstr "Gumilabda"
 msgid "Bye bye tux..."
 msgstr "Viszlát, pingvin..."
 
-#: src/team/teams_list.cpp:460 src/team/teams_list.cpp:482
-#: src/team/teams_list.cpp:530
+#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
+#: src/team/teams_list.cpp:534
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nem találom a(z) %s csapatot!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:157
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:145
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
@@ -534,7 +533,7 @@ msgstr "JÁTÉK VÉGE"
 msgid "Error in %s:%lu"
 msgstr "Hiba a következõben: %s, %lu"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
+#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Hiba a csapat betöltése közben:"
 
@@ -676,7 +675,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Siess, túl lassú vagy!!"
 
-#: src/main.cpp:244
+#: src/main.cpp:234
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -732,7 +731,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Térképek betöltése:"
 
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:133
 msgid "Load teams:"
 msgstr "Csapatok betöltése:"
 
@@ -799,7 +798,7 @@ msgstr "Zene"
 msgid "Network Game"
 msgstr "Hálózati játék"
 
-#: src/network/network.cpp:152
+#: src/network/network.cpp:153
 msgid "Network initialization"
 msgstr "Hálózat elõkészítése"
 
@@ -865,7 +864,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Kilépés"
 
-#: src/main.cpp:232
+#: src/main.cpp:223
 msgid "Quit Wormux"
 msgstr "Kilépés a Wormuxból"
 
@@ -890,7 +889,7 @@ msgstr "Felbontás"
 msgid "Riot Bomb"
 msgstr "Rohambomba"
 
-#: src/main.cpp:184
+#: src/main.cpp:87
 msgid "Run game"
 msgstr "Játék futtatása"
 
@@ -1059,7 +1058,7 @@ msgstr "Nem sikerült megnyitni a pályák könyvtárát (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nem sikerült megnyitni a portot!"
 
-#: src/main.cpp:192
+#: src/main.cpp:183
 msgid "Version"
 msgstr "Verzió"
 
@@ -1080,7 +1079,7 @@ msgstr "Várakozás a szerverre, visszaléphetsz vagy csetelhetsz!"
 msgid "Weapons"
 msgstr "Fegyverek"
 
-#: src/main.cpp:261
+#: src/main.cpp:251
 msgid "Website: "
 msgstr "Honlap: "
 
@@ -1099,11 +1098,11 @@ msgstr "Hulló dísztárgyak"
 msgid "Winner"
 msgstr "Taposó akna"
 
-#: src/main.cpp:205
+#: src/main.cpp:196
 msgid "Wormux launching..."
 msgstr "Wormux indítása..."
 
-#: src/main.cpp:251
+#: src/main.cpp:241
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
@@ -1125,7 +1124,7 @@ msgstr "Egyedül vagy..."
 msgid "You need at least one valid map !"
 msgstr "Választanod kell legalább egy pályát!"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams !"
 msgstr "Választanod kell legalább két csapatot!"
 
