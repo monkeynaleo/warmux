@@ -52,7 +52,7 @@ private:
    SpinButtonWithPicture *opt_max_fps;
 
    /* Sound options controllers */
-   ListBox *lbox_sound_freq;
+   ComboBox *cbox_sound_freq;
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
 

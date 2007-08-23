@@ -66,6 +66,7 @@ class ComboBox : public Widget
   Widget* Click(const Point2i&, uint) const { return NULL; };
   Widget* ClickUp(const Point2i &mousePosition, uint button);
   const std::string GetValue() const { return m_choices[m_index].first; };
+  const int GetIntValue() const;
   void SetChoice(std::vector<std::string>::size_type index);
 };
 

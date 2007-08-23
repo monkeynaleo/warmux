@@ -141,8 +141,25 @@ OptionMenu::OptionMenu() :
   opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", stdRect);
   all_sound_options->AddWidget(opt_sound_effects);
 
-  lbox_sound_freq = new ListBoxWithLabel(_("Sound frequency"), stdRect);
-  all_sound_options->AddWidget(lbox_sound_freq);
+
+  // Generate sound mode list
+  uint current_freq = jukebox.GetFrequency();
+  std::vector<std::pair<std::string, std::string> > sound_freqs;
+  std::string current_sound_freq;
+  sound_freqs.push_back (std::pair<std::string, std::string> ("11025", "11 kHz"));
+  sound_freqs.push_back (std::pair<std::string, std::string> ("22050", "22 kHz"));
+  sound_freqs.push_back (std::pair<std::string, std::string> ("44100", "44 kHz"));
+
+  if (current_freq == 44100)
+    current_sound_freq = "44100";
+  else if (current_freq == 22050)
+    current_sound_freq = "22050";
+  else
+    current_sound_freq = "11025";
+
+  cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
+				 stdRect, sound_freqs, current_sound_freq);
+  all_sound_options->AddWidget(cbox_sound_freq);
 
   sound_options->AddWidget(all_sound_options);
   widgets.AddWidget(sound_options);
@@ -157,12 +174,6 @@ OptionMenu::OptionMenu() :
 			 graphic_options->GetPositionY());
   
   // Values initialization
-
-  // Generate sound mode list
-  uint current_freq = jukebox.GetFrequency();
-  lbox_sound_freq->AddItem(current_freq == 11025, "11 kHz", "11025");
-  lbox_sound_freq->AddItem(current_freq == 22050, "22 kHz", "22050");
-  lbox_sound_freq->AddItem(current_freq == 44100, "44 kHz", "44100");
 
   resource_manager.UnLoadXMLProfile(res);
 
@@ -230,7 +241,7 @@ void OptionMenu::SaveOptions()
   // Sound settings
   config->SetSoundEffects(opt_sound_effects->GetValue());
   config->SetSoundMusic(opt_music->GetValue());
-  config->SetSoundFrequency(lbox_sound_freq->ReadIntValue());
+  config->SetSoundFrequency(cbox_sound_freq->GetIntValue());
 
   AppWormux * app = AppWormux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
@@ -253,7 +264,7 @@ void OptionMenu::SaveOptions()
   // Sound
   jukebox.ActiveMusic(opt_music->GetValue());
   jukebox.ActiveEffects(opt_sound_effects->GetValue());
-  std::string sfreq = lbox_sound_freq->ReadValue();
+  std::string sfreq = cbox_sound_freq->GetValue();
   long freq;
   if (str2long(sfreq,freq)) jukebox.SetFrequency(freq);
 

@@ -39,6 +39,7 @@
 
   <!-- Sound options -->
 
+  <surface name="sound_frequency" file="menu/sound_frequency.png" />
   <surface name="music_enable" file="menu/music_enable.png" />
   <surface name="sound_effects_enable" file="menu/sound_effects_enable.png" />
 
