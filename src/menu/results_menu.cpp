@@ -47,10 +47,8 @@
 #define DEF_SIZE       32
 #define LINE_THICKNESS  2
 
-#define GRAPH_X        20
-#define GRAPH_Y       500
-#define GRAPH_W       400
-#define GRAPH_H       200
+#define GRAPH_BORDER        20
+#define GRAPH_START_Y       450
 
 const Point2i BorderSize(DEF_BORDER, DEF_BORDER);
 const Vector2<double> Zoom(1.7321, 1.7321);
@@ -517,5 +515,7 @@ void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
   if (index == -1)
     SetResult(results.size()-1);
   // Far from rendering properly
-  //DrawGraph(GRAPH_X, GRAPH_Y, GRAPH_W, GRAPH_H);
+  DrawGraph(GRAPH_BORDER, GRAPH_START_Y,
+            AppWormux::GetInstance()->video->window.GetWidth()/2-GRAPH_BORDER,
+            AppWormux::GetInstance()->video->window.GetHeight()-GRAPH_BORDER-GRAPH_START_Y);
 }
