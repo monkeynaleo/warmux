@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2007-03-23 15:15+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -216,7 +215,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Team %s heeft %u staaf dynamiet gekregen!"
 msgstr[1] "Het team %s heeft %u staven dynamiet gekregen!"
 
-#: src/weapon/grapple.cpp:709
+#: src/weapon/grapple.cpp:712
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -335,21 +334,17 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Team %s heeft %u %s gekregen!"
 msgstr[1] "Team %s heeft %u %sen gekregen!"
 
-#: src/include/action_handler.cpp:243
+#: src/include/action_handler.cpp:300
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux versies verschillen : client=%s, server=%s."
-
-#: src/menu/options_menu.cpp:155
-msgid "(current)"
-msgstr "(huidige)"
 
 #: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(dood)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:178
 msgid "(system language)"
 msgstr ""
 
@@ -385,7 +380,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Aambeeld"
 
-#: src/main.cpp:252
+#: src/main.cpp:242
 msgid "Authors:"
 msgstr "Auteurs:"
 
@@ -417,8 +412,8 @@ msgstr "Stuiterbal"
 msgid "Bye bye tux..."
 msgstr "Dag dag tux..."
 
-#: src/team/teams_list.cpp:460 src/team/teams_list.cpp:482
-#: src/team/teams_list.cpp:530
+#: src/team/teams_list.cpp:461 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:531
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan team %s niet vinden!"
@@ -565,7 +560,7 @@ msgstr "Fout: Kon server niet starten"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:86
 msgid "Fullscreen?"
 msgstr "Volledig scherm?"
 
@@ -643,7 +638,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
-#: src/main.cpp:244
+#: src/main.cpp:234
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -662,21 +657,21 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game_init.cpp:143
+#: src/game/game_init.cpp:154
 msgid "Initialisation"
 msgstr "Initialisatie"
 
-#: src/game/game_init.cpp:98
+#: src/game/game_init.cpp:109
 #, fuzzy
 msgid "Initialise map"
 msgstr "Initialiseer data"
 
-#: src/game/game_init.cpp:130
+#: src/game/game_init.cpp:141
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Initialiseer data"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:120
 msgid "Initialise teams"
 msgstr "Initialiseer teams"
 
@@ -692,7 +687,7 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Bezoek #wormux op irc.freenode.net om tegenstanders te vinden."
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr ""
 
@@ -718,7 +713,7 @@ msgstr "LageZwaartekracht"
 msgid "Map %s, a creation of: "
 msgstr "Kaart %s, gemaakt door :"
 
-#: src/game/game_init.cpp:100
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Kaarten"
 
@@ -726,7 +721,7 @@ msgstr "Kaarten"
 msgid "Max number of players:"
 msgstr "Max aantal spelers:"
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:89
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
@@ -759,7 +754,7 @@ msgstr "Meest zinloos"
 msgid "Most violent"
 msgstr "Meest gewelddadig"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:138
 msgid "Music?"
 msgstr "Muziek?"
 
@@ -767,7 +762,7 @@ msgstr "Muziek?"
 msgid "Network Game"
 msgstr "Netwerk Spel"
 
-#: src/network/network.cpp:152
+#: src/network/network.cpp:165
 #, fuzzy
 msgid "Network initialization"
 msgstr "Initialiseren van de grond..."
@@ -811,11 +806,11 @@ msgstr "Spelen"
 msgid "Player"
 msgstr "Speler"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:80
 msgid "Player energy?"
 msgstr "Energie van speler?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:83
 msgid "Player's name?"
 msgstr "Naam van speler?"
 
@@ -832,7 +827,7 @@ msgstr "Poort:"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/main.cpp:232
+#: src/main.cpp:223
 msgid "Quit Wormux"
 msgstr "Wormux afsluiten"
 
@@ -849,7 +844,7 @@ msgstr "Persoonlijk config bestand wordt gelezen"
 msgid "Refresh"
 msgstr "Verversen"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:113
 msgid "Resolution"
 msgstr "Resolutie"
 
@@ -857,7 +852,7 @@ msgstr "Resolutie"
 msgid "Riot Bomb"
 msgstr "Rellenbom"
 
-#: src/main.cpp:184
+#: src/main.cpp:87
 msgid "Run game"
 msgstr "Spel wordt gestart"
 
@@ -900,16 +895,16 @@ msgstr "Scherpschuttersgeweer"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
 msgstr "Geluidseffecten?"
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:144
 msgid "Sound frequency"
 msgstr "Geluids- frequentie"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:133
+#: src/game/game_init.cpp:144
 msgid "Sounds"
 msgstr "Geluiden"
 
@@ -933,7 +928,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Injectienaald"
 
-#: src/game/game_init.cpp:111
+#: src/game/game_init.cpp:122
 msgid "Teams"
 msgstr "Teams"
 
@@ -1027,7 +1022,7 @@ msgstr "Kon kaarten directory niet openen (%s)!"
 msgid "Unable to use this port!"
 msgstr "Kon deze poort niet gebruiken!"
 
-#: src/main.cpp:192
+#: src/main.cpp:183
 msgid "Version"
 msgstr "Versie"
 
@@ -1044,11 +1039,11 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:133 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Wapens"
 
-#: src/main.cpp:261
+#: src/main.cpp:251
 msgid "Website: "
 msgstr "Website: "
 
@@ -1058,7 +1053,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:77
 msgid "Wind particles?"
 msgstr "Wind deeltjes?"
 
@@ -1067,11 +1062,11 @@ msgstr "Wind deeltjes?"
 msgid "Winner"
 msgstr "Mijn"
 
-#: src/main.cpp:205
+#: src/main.cpp:196
 msgid "Wormux launching..."
 msgstr "Wormux wordt gestart..."
 
-#: src/main.cpp:251
+#: src/main.cpp:241
 msgid "Wormux version "
 msgstr "Wormux versie "
 
@@ -1093,7 +1088,7 @@ msgstr "U bent alleen..."
 msgid "You need at least one valid map !"
 msgstr "U heeft minimaal één geldige kaart nodig !"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:126 src/team/teams_list.cpp:164
 msgid "You need at least two valid teams !"
 msgstr "U heeft minimaal twee geldige teams nodig !"
 
@@ -1139,6 +1134,9 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
+
+#~ msgid "(current)"
+#~ msgstr "(huidige)"
 
 #, fuzzy
 #~ msgid ""

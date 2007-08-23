@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2006-06-16 11:36+0100\n"
 "Last-Translator: Bastian Salmela <bastian.salmela@hel.fi>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -217,7 +216,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Joukkue %s voitti %u dynamiittipötkön."
 msgstr[1] "Joukkue %s voitti %u dynamiittipötköä."
 
-#: src/weapon/grapple.cpp:709
+#: src/weapon/grapple.cpp:712
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -336,13 +335,9 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/include/action_handler.cpp:243
+#: src/include/action_handler.cpp:300
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-
-#: src/menu/options_menu.cpp:155
-msgid "(current)"
 msgstr ""
 
 #: src/interface/interface.cpp:170
@@ -350,7 +345,7 @@ msgid "(dead)"
 msgstr "(kuollut)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:178
 msgid "(system language)"
 msgstr ""
 
@@ -388,7 +383,7 @@ msgstr ""
 msgid "Anvil"
 msgstr ""
 
-#: src/main.cpp:252
+#: src/main.cpp:242
 msgid "Authors:"
 msgstr "Tekijät:"
 
@@ -422,8 +417,8 @@ msgstr ""
 msgid "Bye bye tux..."
 msgstr ""
 
-#: src/team/teams_list.cpp:460 src/team/teams_list.cpp:482
-#: src/team/teams_list.cpp:530
+#: src/team/teams_list.cpp:461 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:531
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ei löydy joukkuetta %s!"
@@ -575,7 +570,7 @@ msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:86
 msgid "Fullscreen?"
 msgstr "Kokoruutu?"
 
@@ -652,7 +647,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:244
+#: src/main.cpp:234
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -670,21 +665,21 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game_init.cpp:143
+#: src/game/game_init.cpp:154
 msgid "Initialisation"
 msgstr "Alustus"
 
-#: src/game/game_init.cpp:98
+#: src/game/game_init.cpp:109
 #, fuzzy
 msgid "Initialise map"
 msgstr "Alusta tiedot"
 
-#: src/game/game_init.cpp:130
+#: src/game/game_init.cpp:141
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Alusta objektit"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:120
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
@@ -700,7 +695,7 @@ msgstr ""
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr ""
 
@@ -727,7 +722,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
 
-#: src/game/game_init.cpp:100
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr ""
 
@@ -736,7 +731,7 @@ msgstr ""
 msgid "Max number of players:"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:89
 #, fuzzy
 msgid "Maximum FPS"
 msgstr "Enimmäismäärä FPS:lle:"
@@ -774,7 +769,7 @@ msgstr "  Hyödyttömin  :  %s (%i).\n"
 msgid "Most violent"
 msgstr "  Väkivaltaisin  :  %s (%i)\n"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:138
 msgid "Music?"
 msgstr "Musiikki?"
 
@@ -782,7 +777,7 @@ msgstr "Musiikki?"
 msgid "Network Game"
 msgstr "Nettipeli"
 
-#: src/network/network.cpp:152
+#: src/network/network.cpp:165
 #, fuzzy
 msgid "Network initialization"
 msgstr "Maaston alustus..."
@@ -830,12 +825,12 @@ msgstr "Pelaa"
 msgid "Player"
 msgstr "Pelaa"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:80
 #, fuzzy
 msgid "Player energy?"
 msgstr "Näytä pelaajien voima?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:83
 #, fuzzy
 msgid "Player's name?"
 msgstr "Näytä pelaajien nimet?"
@@ -853,7 +848,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Lopeta"
 
-#: src/main.cpp:232
+#: src/main.cpp:223
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
@@ -869,7 +864,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:113
 msgid "Resolution"
 msgstr ""
 
@@ -878,7 +873,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Automaattibazookan"
 
-#: src/main.cpp:184
+#: src/main.cpp:87
 msgid "Run game"
 msgstr "Aloita peli"
 
@@ -922,17 +917,17 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
 msgstr "Ääniefektit?"
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:144
 #, fuzzy
 msgid "Sound frequency"
 msgstr "Ääniefektit?"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:133
+#: src/game/game_init.cpp:144
 #, fuzzy
 msgid "Sounds"
 msgstr "Ääni asetukset"
@@ -957,7 +952,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_init.cpp:111
+#: src/game/game_init.cpp:122
 msgid "Teams"
 msgstr ""
 
@@ -1057,7 +1052,7 @@ msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 msgid "Unable to use this port!"
 msgstr "Odota asiakkaita"
 
-#: src/main.cpp:192
+#: src/main.cpp:183
 msgid "Version"
 msgstr "Versio"
 
@@ -1074,12 +1069,12 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:133 src/interface/weapon_menu.cpp:167
 #, fuzzy
 msgid "Weapons"
 msgstr "Ase:"
 
-#: src/main.cpp:261
+#: src/main.cpp:251
 msgid "Website: "
 msgstr "Verkkosivu:"
 
@@ -1089,7 +1084,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Wind particles?"
 msgstr "Näytä tuuli?"
@@ -1099,11 +1094,11 @@ msgstr "Näytä tuuli?"
 msgid "Winner"
 msgstr "Miina"
 
-#: src/main.cpp:205
+#: src/main.cpp:196
 msgid "Wormux launching..."
 msgstr "Wormux käynnistyy..."
 
-#: src/main.cpp:251
+#: src/main.cpp:241
 msgid "Wormux version "
 msgstr "Wormux versio"
 
@@ -1124,7 +1119,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:126 src/team/teams_list.cpp:164
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
