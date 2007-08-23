@@ -145,7 +145,10 @@ void Interface::DrawCharacterInfo()
   energy_bar.DrawXY(bottom_bar_pos + energy_bar_offset);
 
   // Display team logo
-  app->video->window.Blit(character_under_cursor->GetTeam().GetFlag(), bottom_bar_pos + BORDER_POSITION);
+  if(energy_bar.GetCurrentValue() == energy_bar.GetMinValue())
+    app->video->window.Blit(character_under_cursor->GetTeam().GetDeathFlag(), bottom_bar_pos + BORDER_POSITION);
+  else
+    app->video->window.Blit(character_under_cursor->GetTeam().GetFlag(), bottom_bar_pos + BORDER_POSITION);
 
   // Display team name
   t_team_name->Set(character_under_cursor->GetTeam().GetName());

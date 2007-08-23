@@ -115,6 +115,7 @@ class TeamEnergy
     void Refresh();
     void Draw(const Point2i& pos);
 
+    void SetIcon(const Surface & icon);
     void SetValue(uint nv_energie);
 
     void SetRanking(uint classem); // no animation

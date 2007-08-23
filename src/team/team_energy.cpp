@@ -102,9 +102,17 @@ void TeamEnergy::Config(uint _current_energy,
   new_value = _current_energy;
   ASSERT(max_value != 0)
   energy_bar.InitVal(value, 0, max_value, ProgressBar::PROG_BAR_VERTICAL);
-  icon = new Sprite(team->GetFlag());
-  icon->Scale(0.8,0.8);
+  icon = NULL;
+  SetIcon(team->GetFlag());
   energy_list.Reset();
+}
+
+void TeamEnergy::SetIcon(const Surface & new_icon)
+{
+  if(icon)
+    delete icon;
+  icon = new Sprite(new_icon);
+  icon->Scale(0.8,0.8);
 }
 
 void TeamEnergy::Refresh()
@@ -151,6 +159,8 @@ void TeamEnergy::Draw(const Point2i& pos)
 
 void TeamEnergy::SetValue(uint new_energy)
 {
+  if(new_energy == 0)
+    SetIcon(team->GetDeathFlag());
   new_value = new_energy;
   energy_list.AddValue(new_energy);
 }

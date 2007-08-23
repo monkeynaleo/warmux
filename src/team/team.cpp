@@ -63,6 +63,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   // Load flag
   Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
   flag = resource_manager.LoadImage(res, "flag");
+  death_flag = resource_manager.LoadImage(res, "death_flag");
   big_flag = resource_manager.LoadImage(res, "big_flag");
   resource_manager.UnLoadXMLProfile(res);
 
