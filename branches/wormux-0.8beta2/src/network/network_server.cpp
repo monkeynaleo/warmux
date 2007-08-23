@@ -69,12 +69,16 @@ void NetworkServer::ReceiveActions()
       break;
     }
 
-    while (SDLNet_CheckSockets(socket_set, 100) == 0 && ThreadToContinue()) //Loop while nothing is received
+    //Loop while nothing is received
+    // XXX Under windows (and MSVC build?), SDLNet_CheckSockets returns -1
+    //     until first client is connected, but there is no actual error.
+    //     So we keep on looping even on error.
+    while (SDLNet_CheckSockets(socket_set, 100)<1 && ThreadToContinue())
+    {
       if (server_socket)
       {
         // Check for an incoming connection
-        TCPsocket incoming;
-        incoming = SDLNet_TCP_Accept(server_socket);
+        TCPsocket incoming = SDLNet_TCP_Accept(server_socket);
         if (incoming)
         {
           cpu.push_back(new DistantComputer(incoming));
@@ -84,6 +88,7 @@ void NetworkServer::ReceiveActions()
         }
         SDL_Delay(100);
       }
+    }
 
     std::list<DistantComputer*>::iterator dst_cpu;
     for (dst_cpu = cpu.begin();
