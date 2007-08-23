@@ -37,6 +37,7 @@ class Airhammer : public Weapon
     Surface impact;
     void RepeatShoot() const;
     SoundSample drill_sound;
+    SoundSample select_sound;
 
   protected:
     void p_Select();

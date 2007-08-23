@@ -73,6 +73,7 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfi
 bool Airhammer::p_Shoot()
 {
   //if the sound isn't already playing, play it again.
+   select_sound.Stop();
    if(!drill_sound.IsPlaying()) {
     drill_sound.Play("share","weapon/airhammer", -1);
   }
@@ -149,6 +150,7 @@ void Airhammer::ActionStopUse()
 void Airhammer::p_Deselect()
 {
   drill_sound.Stop();
+  select_sound.Stop();
 }
 
 //-----------------------------------------------------------------------------
@@ -167,7 +169,7 @@ bool Airhammer::IsInUse() const
 
 void Airhammer::p_Select()
 {
-  jukebox.Play("share","weapon/airhammer_select");
+  select_sound.Play("share","weapon/airhammer_select",-1);
 }
 
 std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const
