@@ -45,8 +45,13 @@ void Ground::Init(){
 
   // Load ground data
   Surface m_image = ActiveMap().ReadImgGround();
-  LoadImage ( m_image );
-
+  if(ActiveMap().IsOpened()) {
+    int x_off = 10, y_off = 0;
+    Point2i offset = Point2i(x_off, y_off);
+    LoadImage(m_image, offset);
+  } else {
+    LoadImage(m_image, Point2i());
+  }
   // Check the size of the map
   ASSERT(Constants::MAP_MIN_SIZE <= GetSize());
   ASSERT(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
