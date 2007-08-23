@@ -206,6 +206,15 @@ void Config::RemoveAllObjectConfigs()
 
 bool Config::DoLoading(void)
 {
+  // create the directory if it does not exist (we should do it before exiting the game)
+  // the user can ask to start an internet game and download a file in the personnal dir
+  // so it should exist
+#ifndef WIN32
+  mkdir(personal_dir.c_str(), 0750);
+#else
+  _mkdir(personal_dir.c_str());
+#endif
+
   try {
     // Load XML conf
     XmlReader doc;
