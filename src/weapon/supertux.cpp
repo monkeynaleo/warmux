@@ -278,6 +278,9 @@ std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_cou
 
 void TuxLauncher::RefreshFromNetwork(double angle, Point2d pos)
 {
+  // Fix bug #9815 : Crash when changing tux angle in network mode.
+  if(current_tux == NULL)
+    return;
   current_tux->SetAngle(angle);
   current_tux->SetPhysXY(pos);
   current_tux->SetSpeedXY(Point2d(0,0));
