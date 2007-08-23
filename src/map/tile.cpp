@@ -39,8 +39,9 @@ Tile::~Tile(){
   FreeMem();
 }
 
-void Tile::InitTile(const Point2i &pSize){
+void Tile::InitTile(const Point2i &pSize, const Point2i &offset){
   nbCells = pSize / CELL_SIZE;
+  nbCells = nbCells + (offset * 2);
 
   if( (pSize.x % CELL_SIZE.x) != 0 )
     nbCells.x++;
@@ -48,7 +49,7 @@ void Tile::InitTile(const Point2i &pSize){
   if( (pSize.y % CELL_SIZE.y) != 0 )
     nbCells.y++;
 
-  size = pSize;
+  size = pSize + (CELL_SIZE * offset * 2);
 
   nbr_cell = nbCells.x * nbCells.y;
 }
@@ -151,10 +152,9 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf){
     }
 }
 
-void Tile::LoadImage (Surface& terrain){
+void Tile::LoadImage (Surface& terrain, Point2i offset){
   FreeMem();
-
-  InitTile(terrain.GetSize());
+  InitTile(terrain.GetSize(), offset);
   ASSERT(nbr_cell != 0);
 
   // Create the TileItem objects
@@ -166,7 +166,7 @@ void Tile::LoadImage (Surface& terrain){
   for( i.y = 0; i.y < nbCells.y; i.y++ )
     for( i.x = 0; i.x < nbCells.x; i.x++ ){
       int piece = i.y * nbCells.x + i.x;
-      Rectanglei sr( i * CELL_SIZE, CELL_SIZE);
+      Rectanglei sr(i * CELL_SIZE - CELL_SIZE * offset, CELL_SIZE);
 
       terrain.SetAlpha(0, 0);
       item[piece]->GetSurface().Blit(terrain, sr, Point2i(0, 0));

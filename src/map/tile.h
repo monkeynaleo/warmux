@@ -48,7 +48,7 @@ public:
   void MergeSprite(const Point2i &position, Surface & provider);
 
   // Load an image
-  void LoadImage (Surface& ground_surface);
+  void LoadImage (Surface& ground_surface, Point2i offset);
 
   // Get alpha value of a pixel
   unsigned char GetAlpha(const Point2i &pos) const;
@@ -67,7 +67,7 @@ public:
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();
 protected:
-  void InitTile(const Point2i &pSize);
+  void InitTile(const Point2i &pSize, const Point2i &offset);
 
   void FreeMem();
   Point2i Clamp(const Point2i &v) const { return v.clamp(Point2i(0, 0), nbCells - 1); };
