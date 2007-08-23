@@ -132,12 +132,14 @@ Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button
     m_value += m_step;
     if (m_value > m_max_value) SetValue(m_min_value);
     else SetValue(m_value);
+    return this;
 
   } else if (button == SDL_BUTTON_RIGHT && Contains(mousePosition)) {
 
     m_value -= m_step;
     if (m_value < m_min_value) SetValue(m_max_value);
     else SetValue(m_value);
+    return this;
 
   } else if( button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition) ) {
 
