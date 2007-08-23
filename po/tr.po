@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -354,7 +353,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Örs"
 
-#: src/main.cpp:252
+#: src/main.cpp:242
 msgid "Authors:"
 msgstr "Yazarlar:"
 
@@ -386,18 +385,18 @@ msgstr "Zıplayan Top"
 msgid "Bye bye tux..."
 msgstr "Bay bay tux..."
 
-#: src/team/teams_list.cpp:460 src/team/teams_list.cpp:482
-#: src/team/teams_list.cpp:530
+#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
+#: src/team/teams_list.cpp:534
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:157
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:145
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
@@ -469,7 +468,7 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "%s:%lu'da hata"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
+#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
 #, fuzzy
 msgid "Error loading team :"
 msgstr "%s takımı yüklenirken hata:"
@@ -612,7 +611,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Çabuk ol, çok yavaşsın !!"
 
-#: src/main.cpp:244
+#: src/main.cpp:234
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -669,7 +668,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Haritaları yükle:"
 
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:133
 msgid "Load teams:"
 msgstr "Takımları yükle:"
 
@@ -736,7 +735,7 @@ msgstr "Müzik?"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/network/network.cpp:152
+#: src/network/network.cpp:153
 #, fuzzy
 msgid "Network initialization"
 msgstr "Alan oluşturuluyor..."
@@ -802,7 +801,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Çıkış"
 
-#: src/main.cpp:232
+#: src/main.cpp:223
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
@@ -827,7 +826,7 @@ msgstr "Çözünürlük"
 msgid "Riot Bomb"
 msgstr "Ses Bombası"
 
-#: src/main.cpp:184
+#: src/main.cpp:87
 msgid "Run game"
 msgstr "Oyunu çalıştır"
 
@@ -995,7 +994,7 @@ msgstr "(%s) harita dizini açılamadı!"
 msgid "Unable to use this port!"
 msgstr ""
 
-#: src/main.cpp:192
+#: src/main.cpp:183
 msgid "Version"
 msgstr "Sürüm"
 
@@ -1015,7 +1014,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Silahlar"
 
-#: src/main.cpp:261
+#: src/main.cpp:251
 msgid "Website: "
 msgstr "Web sitesi: "
 
@@ -1034,11 +1033,11 @@ msgstr "Rüzgar parçacıkları?"
 msgid "Winner"
 msgstr "Mayın"
 
-#: src/main.cpp:205
+#: src/main.cpp:196
 msgid "Wormux launching..."
 msgstr "Wormux çalıştırılıyor..."
 
-#: src/main.cpp:251
+#: src/main.cpp:241
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
@@ -1059,7 +1058,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
