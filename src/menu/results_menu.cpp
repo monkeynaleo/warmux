@@ -519,3 +519,4 @@ void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
             AppWormux::GetInstance()->video->window.GetWidth()/2-GRAPH_BORDER,
             AppWormux::GetInstance()->video->window.GetHeight()-GRAPH_BORDER-GRAPH_START_Y);
 }
+
