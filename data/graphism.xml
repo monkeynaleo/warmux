@@ -34,6 +34,9 @@
   <surface name="annulus_foreground" file="menu/annulus_foreground.png" />
   <color name="annulus_progress_color" r="4" g="77" b="134" a="255" />
 
+  <!-- Various options -->
+  <surface name="team_number" file="menu/team_number.png" />
+
   <!-- Sound options -->
 
   <surface name="music_enable" file="menu/music_enable.png" />

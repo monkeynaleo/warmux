@@ -24,7 +24,7 @@
 #include "gui/label.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
-#include "gui/spin_button_big.h"
+#include "gui/spin_button_picture.h"
 #include "gui/text_box.h"
 #include "include/action_handler.h"
 #include "team/teams_list.h"
@@ -38,9 +38,11 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Rectanglei &rect) : HBo
   Rectanglei rectZero(0, 0, 0, 0);
 
   // How many teams ?
-  local_teams_nb = new SpinButtonBig(_("Local teams:"), Rectanglei(0, 0, 130, 30),
-                                     0, 1,
-                                     0, NMAX_NB_TEAMS);
+  local_teams_nb = new SpinButtonWithPicture(_("Local teams:"),
+					     "menu/team_number",
+					     Rectanglei(0, 0, 130, 30),
+					     0, 1,
+					     0, NMAX_NB_TEAMS);
   AddWidget(local_teams_nb);
 
   Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0,

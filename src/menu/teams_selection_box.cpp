@@ -24,7 +24,7 @@
 #include "gui/label.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
-#include "gui/spin_button_big.h"
+#include "gui/spin_button_picture.h"
 #include "gui/text_box.h"
 #include "team/teams_list.h"
 #include "team/team.h"
@@ -35,9 +35,11 @@ TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
   AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
 
   // How many teams ?
-  teams_nb = new SpinButtonBig(_("Number of teams:"), Rectanglei(0, 0, 130, 30),
-                               2, 1,
-                               2, MAX_NB_TEAMS);
+  teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
+				       "menu/team_number",
+				       Rectanglei(0, 0, 130, 30),
+				       2, 1,
+				       2, MAX_NB_TEAMS);
   AddWidget(teams_nb);
 
   Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0,
