@@ -201,21 +201,27 @@ Character::~Character()
 
 void Character::SignalDrowning()
 {
+  // Follow character
+  Camera::GetInstance()->FollowObject(this, true, true, true);
+  Camera::GetInstance()->SetCloseFollowing(true);
+  // Set energy
   SetEnergy(0);
   SetMovement("drowned");
-
   jukebox.Play (GetTeam().GetSoundProfile(),"sink");
   GameLoop::GetInstance()->SignalCharacterDeath (this);
 }
 
-// Si un ver devient un fantome, il meurt ! Signale sa mort
+// Signal the character death (short life as you can notice)
+// May you rest in peace young one.
 void Character::SignalGhostState (bool was_dead)
 {
+  // Stop to follow closely
+  Camera::GetInstance()->SetCloseFollowing(false);
+
   // Report to damage performer this character lost all of its energy
   ActiveCharacter().damage_stats->MadeDamage(GetEnergy(), *this);
 
   MSG_DEBUG("character", "ghost");
-
   // Signal the death
   if (!was_dead) GameLoop::GetInstance()->SignalCharacterDeath (this);
 }
@@ -533,11 +539,19 @@ void Character::Refresh()
 {
   if (IsGhost()) return;
 
-  UpdatePosition ();
+  UpdatePosition();
 
   if (IsDead()) return;
 
   Time * global_time = Time::GetInstance();
+
+  // center on character who is falling
+  if(FootsInVacuum()) {
+    Camera::GetInstance()->FollowObject(this, true, true, true);
+    Camera::GetInstance()->SetCloseFollowing(true);
+  } else {
+    Camera::GetInstance()->SetCloseFollowing(false);
+  }
 
   if(IsDiseased())
   {
