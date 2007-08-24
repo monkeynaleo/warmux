@@ -10,7 +10,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-08-09 13:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -144,7 +143,7 @@ msgstr[2] "Ekipa %s je osvojila %u zračne napade!"
 msgstr[3] "Ekipa %s je osvojila %u zračnih napadov!"
 
 #: src/weapon/airhammer.cpp:176
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
 "your neighbours."
@@ -416,17 +415,17 @@ msgstr[3] ""
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
 
-#: src/interface/interface.cpp:173
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(mrtev)"
 
 #. Setting language selection
 #: src/menu/options_menu.cpp:178
 msgid "(system language)"
-msgstr ""
+msgstr "(sistemski jezik)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
@@ -579,7 +578,7 @@ msgstr "Napaka v %s:%lu"
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe :"
 
-#: src/team/team.cpp:157
+#: src/team/team.cpp:156
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Napaka pri nalaganju podatkov ekipe %s:"
@@ -638,7 +637,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:119
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
@@ -681,7 +680,7 @@ msgid "Head commander"
 msgstr "Poveljnik"
 
 #. Display player's name
-#: src/interface/interface.cpp:164
+#: src/interface/interface.cpp:161
 msgid "Head commander: "
 msgstr "Poveljnik: "
 
@@ -785,7 +784,7 @@ msgstr ""
 
 #: src/menu/options_menu.cpp:127
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 #: src/map/maps_list.cpp:213
 msgid "Load maps:"
@@ -986,7 +985,7 @@ msgstr "Ostrostrelska puška"
 
 #: src/menu/internet_menu.cpp:115
 msgid "Sorry, currently, no game is waiting for players"
-msgstr ""
+msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
 #: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
@@ -1005,7 +1004,7 @@ msgstr "Zvoki"
 msgid "Starting a new game"
 msgstr "Zagon nove igre"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Zaloga:"
 
