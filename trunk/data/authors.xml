@@ -294,14 +294,12 @@
 	<nickname>Nicolas</nickname>
 	<name>Nicolas LETAVENIER</name>
 	<description>Help for English translation of the website</description>
-	<email>nicolas.letavenier_AT_utbm_DOT_fr</email>
 	<country>France</country>
       </author>
       <author>
 	<nickname>Packo</nickname>
 	<name>Packo ASSAMITA</name>
 	<description>Translate the whole website in Spanish</description>
-	<email>packo_assamita_AT_supercable_DOT_es</email>
 	<country>Spain</country>
       </author>
       <author>
@@ -329,7 +327,6 @@
 	<nickname>templer</nickname>
 	<name>Eduard BERMEJO</name>
 	<description>Add Spain AND Catalan translation in Wormux</description>
-	<email>templer_AT_iespana_DOT_es</email>
 	<country>Spain</country>
       </author>
       <author>
