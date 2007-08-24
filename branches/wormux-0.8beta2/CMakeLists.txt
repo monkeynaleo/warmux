@@ -2,7 +2,7 @@
 PROJECT(Wormux)
 SET(WORMUX_MAJOR "0")
 SET(WORMUX_MINOR "8")
-SET(WORMUX_PATCH "beta1")
+SET(WORMUX_PATCH "beta2")
 SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}${WORMUX_PATCH}")
 
 # Some aliases of cmake variables
