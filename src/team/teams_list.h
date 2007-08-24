@@ -55,7 +55,7 @@ public:
   void LoadGamingData();
   void UnloadGamingData();
   void Clear();
-
+  void RandomizeFirstPlayer();
 
   // Add a new team to playing, and change active team
   void AddTeam (const ConfigTeam& the_team_cfg, bool generate_error=true);

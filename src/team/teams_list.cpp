@@ -34,6 +34,7 @@
 #include "team_energy.h"
 #include <algorithm>
 #include <iostream>
+#include "network/randomsync.h"
 
 //-----------------------------------------------------------------------------
 TeamsList teams_list;
@@ -184,6 +185,14 @@ void TeamsList::LoadGamingData()
 
   // Load the data of all teams
   for (; it != end; ++it) (**it).LoadGamingData();
+}
+
+void TeamsList::RandomizeFirstPlayer()
+{
+  active_team = playing_list.begin();
+  int skip = randomSync.GetLong(0, playing_list.size() - 1);
+  for(int i = 0; i < skip; i++)
+    active_team++;
 }
 
 //-----------------------------------------------------------------------------

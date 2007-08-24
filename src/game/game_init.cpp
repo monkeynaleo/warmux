@@ -133,6 +133,9 @@ void GameInit::InitTeams()
   LoadingScreen::GetInstance()->StartLoading(3, "weapon_icon", _("Weapons")); // use fake message...
   teams_list.InitEnergy();
 
+  // Randomize first player
+  teams_list.RandomizeFirstPlayer();
+
   lst_objects.PlaceMines();
 }
 
