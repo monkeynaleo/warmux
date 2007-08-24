@@ -49,7 +49,7 @@
 const uint SOUND_X = 30;
 const uint SOUND_Y = 30;
 const uint SOUND_W = 530;
-const uint SOUND_H = 170;
+const uint SOUND_H = 200;
 
 const uint GRAPHIC_X = 30;
 const uint GRAPHIC_Y = SOUND_Y + SOUND_H + 20;
