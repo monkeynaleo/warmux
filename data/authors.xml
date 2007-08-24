@@ -353,6 +353,13 @@
 	<email>icq_AT_cvs_DOT_gnome_DOT_org</email>
 	<country>Spain</country>
       </author>
+      <author>
+        <nickname>????</nickname>
+        <name>Varga Istvan</name>
+        <description>Hungarian translation updates(?)</description>
+        <email>????</email>
+        <country>Hungary</country>
+      </author>
     </section>
 
     <section title="Package maintainers">
