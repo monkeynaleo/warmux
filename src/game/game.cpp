@@ -77,6 +77,8 @@ int Game::NbrRemainingTeams() const
 
 void Game::MessageLoading() const
 {
+  GameInit loading_sreen; /* displays the loading screen stuff */
+
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
 }
@@ -114,10 +116,11 @@ void Game::Start()
   Keyboard::GetInstance()->Reset();
   Joystick::GetInstance()->Reset();
 
+  MessageLoading();
+
   try
   {
     jukebox.PlayMusic(ActiveMap().ReadMusicPlaylist());
-    GameInit::Init ();
 
     do
     {

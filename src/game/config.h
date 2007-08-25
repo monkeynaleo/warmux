@@ -35,10 +35,11 @@
 #include <map>
 #include "include/base.h"
 #include "tool/point.h"
+#include "team/team_config.h"
 
 // Forward declarations
 class ObjectConfig;
-class ConfigTeam;
+
 namespace xmlpp
 {
   class Element;

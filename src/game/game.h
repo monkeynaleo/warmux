@@ -41,6 +41,8 @@ private:
   int AskQuestion (Question &question, bool draw=true) const;
   void DisplayPause() const;
   bool DisplayQuit() const;
+  void MessageLoading() const;
+  void MessageEndOfGame() const;
 
 public:
   static Game * GetInstance();
@@ -53,9 +55,6 @@ public:
   bool IsGameFinished() const;
   bool IsGamePaused() const;
   bool IsGameLaunched() const;
-
-  void MessageLoading() const;
-  void MessageEndOfGame() const;
 
   void TogglePause() const;
   void UserWantEndOfGame() { want_end_of_game = true; };
