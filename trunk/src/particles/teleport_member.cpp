@@ -53,7 +53,7 @@ TeleportMemberParticle::TeleportMemberParticle(const Sprite* spr, const Point2i&
 
 TeleportMemberParticle::~TeleportMemberParticle()
 {
-  Camera::GetInstance()->GetInstance()->StopFollowingObj(this);
+  Camera::GetInstance()->StopFollowingObj(this);
 }
 
 void TeleportMemberParticle::Refresh()
