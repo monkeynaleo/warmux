@@ -81,7 +81,7 @@ void ObjectsList::Refresh()
     (*object)->Refresh();
     if((*object)->IsGhost()) {
       // Stop following this object, remove from overlapse reference then delete it.
-      Camera::GetInstance()->GetInstance()->StopFollowingObj(*object);
+      Camera::GetInstance()->StopFollowingObj(*object);
       RemoveOverlappedObjectReference(*object);
       delete (*object);
       object = erase(object);
