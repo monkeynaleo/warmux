@@ -142,11 +142,11 @@ Surface ResourceManager::LoadImage(const std::string& filename,
   return end_surface;
 }
 
-Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool relative_path) const
+Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const
 {
    XmlReader *doc = new XmlReader;
    std::string filename, path;
-   if (!relative_path) {
+   if (!is_absolute_path) {
      path = base_path;
      filename = path + xml_filename;
    } else {
