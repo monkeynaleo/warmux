@@ -63,6 +63,7 @@ Video::Video(){
 Video::~Video(){
   if( SDLReady )
     SDL_Quit();
+  SDLReady = false;
 }
 
 void Video::SetMaxFps(uint max_fps){
