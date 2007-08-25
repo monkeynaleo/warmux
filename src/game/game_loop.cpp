@@ -635,8 +635,7 @@ void GameLoop::SignalCharacterDeath (const Character *character) const
 {
   std::string txt;
 
-  if (!Game::GetInstance()->IsGameLaunched())
-    return;
+  ASSERT(Game::GetInstance()->IsGameLaunched());
 
   if (character -> IsDrowned()) {
     txt = Format(_("%s has fallen in water."), character -> GetName().c_str());

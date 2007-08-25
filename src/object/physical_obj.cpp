@@ -155,7 +155,7 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
   }
   if(timeout > 0)
     m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
-  
+
   CheckOverlapping();
 }
 
@@ -165,7 +165,7 @@ void PhysicalObj::CheckOverlapping()
     return;
 
   // Check if we are still overlapping with this object
-  if (!m_overlapping_object->GetTestRect().Intersect( GetTestRect() ) && 
+  if (!m_overlapping_object->GetTestRect().Intersect( GetTestRect() ) &&
       m_minimum_overlapse_time >= Time::GetInstance()->Read())
   {
     MSG_DEBUG( "physic.overlapping", "\"%s\" just stopped overlapping with \"%s\"", GetName().c_str(), m_overlapping_object->GetName().c_str());
@@ -761,14 +761,15 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
       continue;
     }
 
-    // Check object does not go in water or outside the map
-    DirectFall();
-    ok &= !IsGhost() && !IsInWater() && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
-
+    /* check if the area rigth under the object has a bottom on the ground */
+    ok &= !world.ParanoiacRectIsInVacuum(Rectanglei(position.x, position.y, 1, world.GetHeight() -
+             (WATER_INITIAL_HEIGHT + 30) - position.y));
     if (!ok) {
       MSG_DEBUG("physic.position", "%s - Put in outside the map or in water -> try again", m_name.c_str());
       continue;
     }
+
+    DirectFall();
 
     // Check distance with characters
     FOR_ALL_LIVING_CHARACTERS(equipe, ver) if (&(*ver) != this)
