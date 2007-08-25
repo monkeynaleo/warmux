@@ -27,7 +27,6 @@
 #include <SDL_rotozoom.h>
 #include <iostream>
 #include "surface.h"
-#include "game/game.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
@@ -350,8 +349,7 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   }
 
   // For the cache mechanism
-  if( Game::GetInstance()->IsGameLaunched() )
-    world.ToRedrawOnScreen( dstRect );
+  world.ToRedrawOnScreen(dstRect);
 }
 
 void Sprite::Finish(){
