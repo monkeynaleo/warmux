@@ -221,7 +221,10 @@ void AppWormux::End() const
 {
   cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
 
+  /* FIXME calling Config->Save here sucks: it nothing was ever done, it loads
+   * the whole stuff just before exiting... This should be moved, but where? */
   Config::GetInstance()->Save();
+
   jukebox.End();
   delete Config::GetInstance();
   delete Time::GetInstance();
