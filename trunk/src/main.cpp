@@ -87,6 +87,7 @@ AppWormux::AppWormux():
 
 AppWormux::~AppWormux()
 {
+  singleton = NULL;
   delete video;
   TeamsListCleanup();
 }

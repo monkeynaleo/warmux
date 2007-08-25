@@ -55,6 +55,7 @@ public:
   static const uint HAUT_MIN_TERRAIN_OUVERT;
 
   static Constants * GetInstance();
+  ~Constants() { singleton = NULL; AUTHORS.clear(); };
 
 private:
   Constants();

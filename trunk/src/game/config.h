@@ -122,6 +122,7 @@ public:
   std::string GetPersonalDir() const;
 
   static Config * GetInstance();
+  ~Config() { singleton = NULL; };
 
   bool Save();
   inline const std::string &GetGameMode() const { return m_game_mode; }

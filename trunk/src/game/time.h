@@ -43,6 +43,7 @@ private:
   Time();
 public:
   static Time *GetInstance();
+  ~Time() { singleton = NULL; };
 
   void Reset();
   bool IsGamePaused() const;
