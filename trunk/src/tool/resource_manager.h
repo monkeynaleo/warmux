@@ -68,7 +68,7 @@ class ResourceManager
    void AddDataPath(const std::string& base_path);
    Surface LoadImage(const std::string& ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0) const;
 
-   Profile *LoadXMLProfile(const std::string& xml_filename, bool relative_path) const;
+   Profile *LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const;
    void UnLoadXMLProfile(Profile *profile) const;
 
    Color LoadColor(const Profile *profile, const std::string& resource_name) const;

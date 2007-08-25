@@ -238,7 +238,7 @@ void Config::LoadDefaultValue()
 {
   try { // Load default XML conf
     m_default_config = GetDataDir() + PATH_SEPARATOR + "wormux_default_config.xml";
-    Profile *res = resource_manager.LoadXMLProfile(m_default_config, false);
+    Profile *res = resource_manager.LoadXMLProfile(m_default_config, true);
 
     std::cout << "o " << _("Reading default config file") << std::endl;
     std::ostringstream section;
