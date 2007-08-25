@@ -76,8 +76,8 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Rectanglei &rect) : HBo
   AddWidget(top_n_bottom_team_options);
 
   // Load Teams' list
-  teams_list.full_list.sort(compareTeams);
-  teams_list.Clear();
+  GetTeamsList().full_list.sort(compareTeams);
+  GetTeamsList().Clear();
 
   // No selected team by default
   for (uint i=0; i<teams_selections.size(); i++) {
@@ -138,7 +138,7 @@ void NetworkTeamsSelectionBox::PrevTeam(uint i)
   Team* tmp;
   int previous_index = -1, index;
 
-  teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
+  GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
 
   index = previous_index-1;
 
@@ -148,10 +148,10 @@ void NetworkTeamsSelectionBox::PrevTeam(uint i)
 
       // select the last team if we are outside list
       if ( index < 0 )
-        index = int(teams_list.full_list.size())-1;
+        index = int(GetTeamsList().full_list.size())-1;
 
       // Get the team at current index
-      tmp = teams_list.FindByIndex(index);
+      tmp = GetTeamsList().FindByIndex(index);
 
       // Check if that team is already selected
       for (uint j = 0; j < NMAX_NB_TEAMS; j++) {
@@ -181,7 +181,7 @@ void NetworkTeamsSelectionBox::NextTeam(uint i,
   int previous_index = -1, index;
 
   if (check_null_prev_team) {
-    teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
+    GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
   }
 
   index = previous_index+1;
@@ -191,11 +191,11 @@ void NetworkTeamsSelectionBox::NextTeam(uint i,
       to_continue = false;
 
       // select the first team if we are outside list
-      if ( index >= int(teams_list.full_list.size()) )
+      if ( index >= int(GetTeamsList().full_list.size()) )
         index = 0;
 
       // Get the team at current index
-      tmp = teams_list.FindByIndex(index);
+      tmp = GetTeamsList().FindByIndex(index);
 
       // Check if that team is already selected
       for (uint j = 0; j < NMAX_NB_TEAMS; j++) {
@@ -280,7 +280,7 @@ void NetworkTeamsSelectionBox::AddTeamCallback(const std::string& team_id)
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() == NULL) {
       int index = 0;
-      Team * tmp = teams_list.FindById(team_id, index);
+      Team * tmp = GetTeamsList().FindById(team_id, index);
 
       teams_selections.at(i)->SetTeam(*tmp, true);
       break;
@@ -304,7 +304,7 @@ void NetworkTeamsSelectionBox::UpdateTeamCallback(const std::string& team_id)
     if (teams_selections.at(i)->GetTeam() != NULL &&
         teams_selections.at(i)->GetTeam()->GetId() == team_id) {
       int index = 0;
-      Team * tmp = teams_list.FindById(team_id, index);
+      Team * tmp = GetTeamsList().FindById(team_id, index);
       // Force refresh of information
       teams_selections.at(i)->SetTeam(*tmp, true);
       std::cout << "Update " << team_id << std::endl;
@@ -353,11 +353,11 @@ void NetworkTeamsSelectionBox::ValidTeamsSelection()
       if (teams_selections.at(i)->GetTeam() != NULL) {
         int index = -1;
         teams_selections.at(i)->ValidOptions();
-        teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
+        GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
         if (index > -1)
           selection.push_back(uint(index));
       }
     }
-    teams_list.ChangeSelection (selection);
+    GetTeamsList().ChangeSelection (selection);
   }
 }

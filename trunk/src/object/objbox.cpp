@@ -115,7 +115,7 @@ bool ObjBox::NewBox()
     return false;
   }
 
-  uint nbr_teams=teams_list.playing_list.size();
+  uint nbr_teams=GetTeamsList().playing_list.size();
   if(nbr_teams<=1) {
     MSG_DEBUG("box", "There is less than 2 teams in the game");
     return false;

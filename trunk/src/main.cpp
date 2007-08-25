@@ -80,8 +80,6 @@ AppWormux *AppWormux::GetInstance()
 AppWormux::AppWormux():
   video(new Video())
 {
-  teams_list.LoadList();
-
   jukebox.Init();
 
   cout << "[ " << _("Run game") << " ]" << endl;
@@ -90,6 +88,7 @@ AppWormux::AppWormux():
 AppWormux::~AppWormux()
 {
   delete video;
+  TeamsListCleanup();
 }
 
 int AppWormux::Main(void)

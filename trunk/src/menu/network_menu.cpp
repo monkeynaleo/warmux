@@ -212,8 +212,8 @@ bool NetworkMenu::signal_ok()
   {
     // Check the user have selected a team:
     bool found = false;
-    for(std::vector<Team*>::iterator team = teams_list.playing_list.begin();
-                    team != teams_list.playing_list.end();
+    for(std::vector<Team*>::iterator team = GetTeamsList().playing_list.begin();
+                    team != GetTeamsList().playing_list.end();
                     team++)
     {
       if((*team)->IsLocal())
@@ -234,12 +234,12 @@ bool NetworkMenu::signal_ok()
   }
   else if (Network::GetInstance()->IsServer())
   {
-    if (teams_list.playing_list.size() <= 1)
+    if (GetTeamsList().playing_list.size() <= 1)
     {
       msg_box->NewMessage(Format(ngettext("There is only %i team.",
                                           "There are only %i teams.",
-                                          teams_list.playing_list.size()),
-                                 teams_list.playing_list.size()), c_red);
+                                          GetTeamsList().playing_list.size()),
+                                 GetTeamsList().playing_list.size()), c_red);
       goto error;
     }
     if (Network::GetInstanceServer()->GetNbConnectedPlayers() <= 1)

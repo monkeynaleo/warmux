@@ -188,7 +188,7 @@ void Game::UnloadDatas() const
   world.FreeMem();
   lst_objects.FreeMem();
   ParticleEngine::Stop();
-  teams_list.UnloadGamingData();
+  GetTeamsList().UnloadGamingData();
   jukebox.StopAll();
 }
 

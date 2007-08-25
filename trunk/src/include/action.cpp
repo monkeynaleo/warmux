@@ -294,7 +294,7 @@ void Action::StoreCharacter(uint team_no, uint char_no)
 {
   Push((int)team_no);
   Push((int)char_no);
-  Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
   Push(c->GetPosition());
   Push((int)c->GetDirection());
   Push(c->GetAbsFiringAngle());
@@ -320,7 +320,7 @@ void Action::RetrieveCharacter()
 {
   int team_no = PopInt();
   int char_no = PopInt();
-  Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
   c->SetXY(PopPoint2i());
   c->SetDirection((BodyDirection_t)PopInt());
   c->SetFiringAngle(PopDouble());

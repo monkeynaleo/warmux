@@ -122,19 +122,19 @@ void GameInit::InitTeams()
   LoadingScreen::GetInstance()->StartLoading(2, "team_icon", _("Teams"));
 
   // Check the number of teams
-  if (teams_list.playing_list.size() < 2)
+  if (GetTeamsList().playing_list.size() < 2)
     Error(_("You need at least two valid teams !"));
-  ASSERT (teams_list.playing_list.size() <= GameMode::GetInstance()->max_teams);
+  ASSERT (GetTeamsList().playing_list.size() <= GameMode::GetInstance()->max_teams);
 
   // Load the teams
-  teams_list.LoadGamingData();
+  GetTeamsList().LoadGamingData();
 
   // Initialization of teams' energy
   LoadingScreen::GetInstance()->StartLoading(3, "weapon_icon", _("Weapons")); // use fake message...
-  teams_list.InitEnergy();
+  GetTeamsList().InitEnergy();
 
   // Randomize first player
-  teams_list.RandomizeFirstPlayer();
+  GetTeamsList().RandomizeFirstPlayer();
 
   lst_objects.PlaceMines();
 }
@@ -218,7 +218,7 @@ void GameInit::Init()
   Time::GetInstance()->Reset();
 
   // Put the camera on the first playing character.
-  Team* team = teams_list.GetNextTeam();
+  Team* team = GetTeamsList().GetNextTeam();
   Character* first_to_play;
   if(team->GetNbCharacters() > 1)
         first_to_play = team->FindByIndex(1);
