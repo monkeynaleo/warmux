@@ -22,19 +22,22 @@
 #ifndef GAME_INIT_H
 #define GAME_INIT_H
 
+#include "interface/loading_screen.h"
+
 class GameInit
 {
 public:
-  static void Init();
+  GameInit();
 private:
+  LoadingScreen loading_sreen;
   // Initialization
-  static void InitGameData_NetServer();
-  static void EndInitGameData_NetServer();
-  static void EndInitGameData_NetClient();
+  void InitGameData_NetServer();
+  void EndInitGameData_NetServer();
+  void EndInitGameData_NetClient();
 
-  static void InitMap();
-  static void InitTeams();
-  static void InitSounds();
-  static void InitData();
+  void InitMap();
+  void InitTeams();
+  void InitSounds();
+  void InitData();
 };
 #endif

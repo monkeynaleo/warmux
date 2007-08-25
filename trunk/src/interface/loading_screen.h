@@ -32,16 +32,12 @@ class Sprite;
 class LoadingScreen
 {
  private:
-  static LoadingScreen * singleton;
-
   Profile * res;
   Sprite * loading_bg;
 
-  LoadingScreen();
  public:
+  LoadingScreen();
   ~LoadingScreen();
-
-  static LoadingScreen* GetInstance();
 
   void DrawBackground();
   void StartLoading(uint nb, const std::string& resource,
