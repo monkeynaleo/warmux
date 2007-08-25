@@ -42,8 +42,6 @@ const int DEFAULT_SCREEN_HEIGHT = 768 ;
 
 MainMenu::~MainMenu()
 {
- // delete skin_left;
- // delete skin_right;
   delete version_text;
   delete website_text;
 }
@@ -62,13 +60,6 @@ MainMenu::MainMenu() :
   x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - button_width/2;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-
-  /* skin_left = new Sprite( resource_manager.LoadImage(res,"main_menu/skin_1"));
-   skin_right = new Sprite( resource_manager.LoadImage(res,"main_menu/skin_2"));
-
-  s_title = resource_manager.LoadImage(res,"main_menu/title");
-  title = new PictureWidget(Rectanglei(AppWormux::GetInstance()->video->window.GetWidth()/2  - s_title.GetWidth()/2 + 10, 0, 648, 168));
-  title->SetSurface(s_title); */
 
   int y = int(290 * y_scale) ;
   const int y2 = AppWormux::GetInstance()->video->window.GetHeight() + VERSION_DY -20 - button_height;
@@ -116,7 +107,6 @@ MainMenu::MainMenu() :
   widgets.AddWidget(options);
   widgets.AddWidget(infos);
   widgets.AddWidget(quit);
- // widgets.AddWidget(title);
 
   resource_manager.UnLoadXMLProfile( res);
 
@@ -199,9 +189,6 @@ void MainMenu::DrawBackground()
   Surface& window = AppWormux::GetInstance()->video->window;
 
   Menu::DrawBackground();
-  // skin_left->Blit(window, 0, window.GetHeight() - skin_left->GetHeight());
-  // skin_right->Blit(window, window.GetWidth()  - skin_right->GetWidth(),
-  //                  window.GetHeight() - skin_right->GetHeight());
 
   version_text->DrawCenter( Point2i(window.GetWidth()/2,
                             window.GetHeight() + VERSION_DY));
@@ -213,30 +200,4 @@ void MainMenu::DrawBackground()
 void MainMenu::Redraw(const Rectanglei& rect, Surface &window)
 {
   Menu::Redraw(rect, window);
-
-  // we never had to redraw texts
-  // but sometimes we need to redraw the skins...
-
-  /*Rectanglei dest(0, window.GetHeight() - skin_left->GetHeight(),
-                    skin_left->GetWidth(), skin_left->GetHeight());
-  dest.Clip(rect);
-
-  Rectanglei src(rect.GetPositionX() - 0,
-                 rect.GetPositionY() - (window.GetHeight() - skin_left->GetHeight()),
-                 dest.GetSizeX(), dest.GetSizeY());
-
-  skin_left->Blit(window, src, dest.GetPosition());
-
-  Rectanglei dest2(window.GetWidth()  - skin_right->GetWidth(),
-                   window.GetHeight() - skin_right->GetHeight(),
-                   skin_right->GetWidth(), skin_right->GetHeight());
-  dest2.Clip(rect);
-
-  Rectanglei src2(dest2.GetPositionX() - (window.GetWidth()  - skin_right->GetWidth()),
-                  dest2.GetPositionY() - (window.GetHeight() - skin_right->GetHeight()),
-                  dest2.GetSizeX(), dest2.GetSizeY());
-
-  skin_right->Blit(window, src2, dest2.GetPosition());*/
-
-
 }
