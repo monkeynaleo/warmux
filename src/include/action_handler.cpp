@@ -145,8 +145,8 @@ void Action_Network_Check_Phase1 (Action */*a*/)
   Action b(Action::ACTION_NETWORK_CHECK_PHASE2);
   b.Push(ActiveMap().GetRawName());
 
-  TeamsList::iterator it = teams_list.playing_list.begin();
-  for (; it != teams_list.playing_list.end() ; ++it) {
+  TeamsList::iterator it = GetTeamsList().playing_list.begin();
+  for (; it != GetTeamsList().playing_list.end() ; ++it) {
     b.Push((*it)->GetId());
   }
 
@@ -180,8 +180,8 @@ void Action_Network_Check_Phase2 (Action *a)
   
   // Check the teams
   std::string team;
-  TeamsList::iterator it = teams_list.playing_list.begin();
-  for (; it != teams_list.playing_list.end() ; ++it) {
+  TeamsList::iterator it = GetTeamsList().playing_list.begin();
+  for (; it != GetTeamsList().playing_list.end() ; ++it) {
     team = a->PopString();
     if (team != (*it)->GetId()) {
       Error_in_Network_Check_Phase2(a);
@@ -225,7 +225,7 @@ void Action_GameLoop_ChangeCharacter (Action *a)
 
 void Action_GameLoop_NextTeam (Action *a)
 {
-  teams_list.SetActive (a->PopString());
+  GetTeamsList().SetActive (a->PopString());
   ASSERT (!ActiveCharacter().IsDead());
 
   // Are we turn master for next turn ?
@@ -353,7 +353,7 @@ void Action_Menu_AddTeam (Action *a)
 
   MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
 
-  teams_list.AddTeam (the_team);
+  GetTeamsList().AddTeam (the_team);
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
@@ -367,7 +367,7 @@ void Action_Menu_UpdateTeam (Action *a)
   the_team.player_name = a->PopString();
   the_team.nb_characters = uint(a->PopInt());
 
-  teams_list.UpdateTeam (the_team);
+  GetTeamsList().UpdateTeam (the_team);
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id);
@@ -386,12 +386,12 @@ void Action_Menu_DelTeam (Action *a)
   MSG_DEBUG("action_handler.menu", "- %s", team.c_str());
   if (Game::GetInstance()->IsGameLaunched() && Network::GetInstance()->IsServer()) {
     int i;
-    Team* t = teams_list.FindById(team, i);
+    Team* t = GetTeamsList().FindById(team, i);
     if (t == &ActiveTeam()) // we have loose the turn master!!
       Network::GetInstance()->SetTurnMaster(true);
   }
 
-  teams_list.DelTeam (team);
+  GetTeamsList().DelTeam (team);
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->DelTeamCallback(team);
@@ -407,8 +407,8 @@ void SyncCharacters()
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   Network::GetInstance()->SendAction(&a_begin_sync);
   TeamsList::iterator
-    it=teams_list.playing_list.begin(),
-    end=teams_list.playing_list.end();
+    it=GetTeamsList().playing_list.begin(),
+    end=GetTeamsList().playing_list.end();
 
   for (int team_no = 0; it != end; ++it, ++team_no)
   {

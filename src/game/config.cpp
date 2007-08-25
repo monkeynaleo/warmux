@@ -369,8 +369,8 @@ bool Config::SaveXml()
   xmlpp::Element *team_elements = root->add_child("teams");
 
   TeamsList::iterator
-    it=teams_list.playing_list.begin(),
-    fin=teams_list.playing_list.end();
+    it=GetTeamsList().playing_list.begin(),
+    fin=GetTeamsList().playing_list.end();
   for (int i=0; it != fin; ++it, i++)
   {
     xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));

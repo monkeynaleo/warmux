@@ -211,8 +211,8 @@ void ApplyExplosion_master (const Point2i &pos,
   Network::GetInstance()->SendAction(&a_begin_sync);
 
   TeamsList::iterator
-    it=teams_list.playing_list.begin(),
-    end=teams_list.playing_list.end();
+    it=GetTeamsList().playing_list.begin(),
+    end=GetTeamsList().playing_list.end();
 
   Action a_characters_info(Action::ACTION_CHARACTER_SET_PHYSICS);
 

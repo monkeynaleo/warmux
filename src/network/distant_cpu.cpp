@@ -67,8 +67,8 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
     free(pack);
 
     // Teams infos of already connected computers
-    for(TeamsList::iterator team = teams_list.playing_list.begin();
-      team != teams_list.playing_list.end();
+    for(TeamsList::iterator team = GetTeamsList().playing_list.begin();
+      team != GetTeamsList().playing_list.end();
       ++team)
     {
       Action b(Action::ACTION_MENU_ADD_TEAM, (*team)->GetId());
@@ -210,7 +210,7 @@ void DistantComputer::ManageTeam(Action* team)
     owned_teams.push_back(name);
 
     int index = 0;
-    Team * tmp = teams_list.FindById(name, index);
+    Team * tmp = GetTeamsList().FindById(name, index);
     tmp->SetRemote();
 
     Action* copy = new Action(Action::ACTION_MENU_ADD_TEAM, name);

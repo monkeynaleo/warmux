@@ -195,7 +195,7 @@ void GameLoop::RefreshObject() const
   // Recompute energy of each team
   FOR_EACH_TEAM(team)
     (**team).Refresh();
-  teams_list.RefreshEnergy();
+  GetTeamsList().RefreshEnergy();
 
   ActiveTeam().AccessWeapon().Manage();
   lst_objects.Refresh();
@@ -482,7 +482,7 @@ void GameLoop::__SetState_PLAYING()
 
   if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
     {
-      teams_list.NextTeam();
+      GetTeamsList().NextTeam();
 
       if ( GameMode::GetInstance()->allow_character_selection==GameMode::CHANGE_ON_END_TURN
            || GameMode::GetInstance()->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)

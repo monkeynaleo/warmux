@@ -37,7 +37,18 @@
 #include "network/randomsync.h"
 
 //-----------------------------------------------------------------------------
-TeamsList teams_list;
+TeamsList *TeamsList::singleton = NULL;
+
+TeamsList *TeamsList::GetInstance()
+{
+  if (singleton == NULL)
+    {
+      singleton = new TeamsList();
+    }
+  return singleton;
+}
+
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
@@ -46,10 +57,13 @@ TeamsList::TeamsList():
   playing_list(),
   selection(),
   active_team(playing_list.end())
-{}
+{
+  LoadList();
+}
 
 TeamsList::~TeamsList()
 {
+  singleton = NULL;
   Clear();
   for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
     delete (*it);
@@ -61,7 +75,7 @@ TeamsList::~TeamsList()
 void TeamsList::NextTeam ()
 {
   Team* next = GetNextTeam();
-  teams_list.SetActive (next->GetId());
+  GetTeamsList().SetActive (next->GetId());
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
   Network::GetInstance()->SendAction(&a);
 }
@@ -158,7 +172,7 @@ void TeamsList::LoadList()
       << std::endl;
   }
 
-  teams_list.full_list.sort(compareTeams);
+  full_list.sort(compareTeams);
 
   // We need at least 2 teams
   if (full_list.size() < 2)
@@ -544,7 +558,7 @@ void TeamsList::SetActive(const std::string &id)
 
 Team& ActiveTeam()
 {
-  return teams_list.ActiveTeam();
+  return GetTeamsList().ActiveTeam();
 }
 
 //-----------------------------------------------------------------------------
