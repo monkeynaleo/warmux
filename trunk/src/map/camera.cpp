@@ -31,7 +31,6 @@
 #include "tool/debug.h"
 #include "tool/math_tools.h"
 
-const Point2i CAMERA_MARGIN(200, 200);
 const Point2i CAMERA_SPEED(20, 20);
 
 Camera* Camera::singleton = NULL;
@@ -105,20 +104,16 @@ void Camera::AutoCrop(){
   if( pos.y < 0 )
     pos.y = 0;
 
-  Point2i dstMax = GetSize()/2 - CAMERA_MARGIN;
+  Point2i dstMax = GetSize()/2;
 
-  /* prevent division by 0 */
-  if (dstMax.IsXNull())
-    dstMax += Point2i(1, 0);
-  if (dstMax.IsYNull())
-    dstMax += Point2i(0, 1);
+  ASSERT(!dstMax.IsNull());
 
   Point2i cameraBR = GetSize() + position;
-  Point2i objectBRmargin = pos + size + CAMERA_MARGIN;
+  Point2i objectBRmargin = pos + size + GetSize()/2;
   Point2i dst(0, 0);
 
   dst += cameraBR.inf(objectBRmargin) * (objectBRmargin - cameraBR);
-  dst += (pos - CAMERA_MARGIN).inf(position) * (pos - CAMERA_MARGIN - position);
+  dst += (pos - GetSize()/2).inf(position) * (pos - GetSize()/2 - position);
 
   SetXY(dst * CAMERA_SPEED / dstMax );
 }
