@@ -27,7 +27,7 @@
 #include "damage_stats.h"
 #include "game/config.h"
 #include "game/game_mode.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "game/time.h"
 #include "graphic/text.h"
 #include "include/action_handler.h"
@@ -208,7 +208,7 @@ void Character::SignalDrowning()
   SetEnergy(0);
   SetMovement("drowned");
   jukebox.Play (GetTeam().GetSoundProfile(),"sink");
-  GameLoop::GetInstance()->SignalCharacterDeath (this);
+  Game::GetInstance()->SignalCharacterDeath (this);
 }
 
 // Signal the character death (short life as you can notice)
@@ -223,7 +223,7 @@ void Character::SignalGhostState (bool was_dead)
 
   MSG_DEBUG("character", "ghost");
   // Signal the death
-  if (!was_dead) GameLoop::GetInstance()->SignalCharacterDeath (this);
+  if (!was_dead) Game::GetInstance()->SignalCharacterDeath (this);
 }
 
 void Character::SetDirection (BodyDirection_t nv_direction)
@@ -345,7 +345,7 @@ void Character::Die()
     ASSERT(IsDead());
 
     // Signal the death
-    GameLoop::GetInstance()->SignalCharacterDeath (this);
+    Game::GetInstance()->SignalCharacterDeath (this);
   }
 
   damage_stats->SetDeathTime(Time::GetInstance()->Read());
@@ -373,13 +373,13 @@ void Character::Draw()
 
   bool dessine_perte = (lost_energy != 0);
   if ((&ActiveCharacter() == this
-    && GameLoop::GetInstance()->ReadState() != GameLoop::END_TURN)
+    && Game::GetInstance()->ReadState() != Game::END_TURN)
       //&& (game_loop.ReadState() != jeuANIM_FIN_TOUR)
     || IsDead()
      )
     dessine_perte = false;
 
-  if(GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN && body->IsWalking())
+  if(Game::GetInstance()->ReadState() == Game::END_TURN && body->IsWalking())
     body->ResetWalk();
 
   if(Time::GetInstance()->Read() > animation_time && &ActiveCharacter()!=this && !IsDead()
@@ -428,7 +428,7 @@ void Character::Draw()
   bool est_ver_actif = (this == &ActiveCharacter());
   Config * config = Config::GetInstance();
   bool display_energy = config->GetDisplayEnergyCharacter();
-  display_energy &= !est_ver_actif || (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING);
+  display_energy &= !est_ver_actif || (Game::GetInstance()->ReadState() != Game::PLAYING);
   display_energy |= dessine_perte;
   display_energy &= !IsDead();
   if (display_energy)
@@ -523,7 +523,7 @@ void Character::PrepareShoot()
 
 void Character::DoShoot()
 {
-  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
+  if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return; // hack related to bugs 8656 and 9462
 
   MSG_DEBUG("weapon.shoot", "-> begin");
@@ -562,7 +562,7 @@ void Character::Refresh()
                               - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
   }
 
-  if( IsActiveCharacter() && GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
+  if( IsActiveCharacter() && Game::GetInstance()->ReadState() == Game::PLAYING)
   {
     if(do_nothing_time + do_nothing_timeout < global_time->Read())
       CharacterCursor::GetInstance()->FollowActiveCharacter();
@@ -671,7 +671,7 @@ void Character::SignalCollision()
     norm -= game_mode->safe_fall;
     degat = norm * game_mode->damage_per_fall_unit;
     SetEnergyDelta (-(int)degat);
-    GameLoop::GetInstance()->SignalCharacterDamage(this);
+    Game::GetInstance()->SignalCharacterDamage(this);
     SetClothe("normal");
     SetMovement("walk");
     SetMovementOnce("hard-land");
@@ -704,7 +704,7 @@ void Character::SignalExplosion()
     // Select the weapon back. If not, we cannot move the crosshair.
     ActiveTeam().AccessWeapon().Select();
     // End of turn
-    GameLoop::GetInstance()->SignalCharacterDamage(this);
+    Game::GetInstance()->SignalCharacterDamage(this);
   }
 }
 

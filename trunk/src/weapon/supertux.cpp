@@ -25,7 +25,7 @@
 
 #include "character/character.h"
 #include "game/config.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
@@ -209,7 +209,7 @@ bool TuxLauncher::p_Shoot ()
 void TuxLauncher::EndOfTurn() const
 {
   // To go further in the game loop
-  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+  Game::GetInstance()->SetState(Game::HAS_PLAYED);
 }
 
 bool TuxLauncher::IsInUse() const

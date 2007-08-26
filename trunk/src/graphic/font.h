@@ -27,7 +27,7 @@
 #include "surface.h"
 
 // Forward declarations
-class GameLoop;
+class Game;
 
 class Font
 {

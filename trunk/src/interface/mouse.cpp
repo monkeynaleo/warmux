@@ -26,7 +26,7 @@
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game_mode.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/action_handler.h"
@@ -153,7 +153,7 @@ bool Mouse::HandleClic (const SDL_Event& event) const
     return false ;
   }
 
-  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
+  if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return true;
 
   if(!ActiveTeam().IsLocal())
@@ -183,7 +183,7 @@ bool Mouse::HandleClic (const SDL_Event& event) const
 
 void Mouse::ChoixVerPointe() const
 {
-  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
+  if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return;
 
   const Point2i pos_monde = GetWorldPosition();

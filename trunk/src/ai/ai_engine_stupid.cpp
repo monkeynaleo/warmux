@@ -21,7 +21,7 @@
 
 #include "ai_engine_stupid.h"
 #include "character/character.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "game/time.h"
 #include "team/teams_list.h"
 
@@ -124,5 +124,5 @@ void AIStupidEngine::Refresh()
 void AIStupidEngine::ForceEndOfTurn()
 {
   m_movement.StopMoving();
-  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+  Game::GetInstance()->SetState(Game::HAS_PLAYED);
 }

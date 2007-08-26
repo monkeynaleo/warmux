@@ -27,7 +27,6 @@
 #include "character/body.h"
 #include "character/move.h"
 #include "game/game_mode.h"
-#include "game/game_loop.h"
 #include "game/game.h"
 #include "game/time.h"
 #include "include/constant.h"
@@ -177,7 +176,7 @@ void Action_Network_Check_Phase2 (Action *a)
     Error_in_Network_Check_Phase2(a);
     return;
   }
-  
+
   // Check the teams
   std::string team;
   TeamsList::iterator it = GetTeamsList().playing_list.begin();
@@ -217,13 +216,13 @@ void Action_Player_PreviousCharacter (Action *a)
   Camera::GetInstance()->GetInstance()->FollowObject(&ActiveCharacter(), true, true);
 }
 
-void Action_GameLoop_ChangeCharacter (Action *a)
+void Action_Game_ChangeCharacter (Action *a)
 {
   a->RetrieveCharacter();
   Camera::GetInstance()->GetInstance()->FollowObject(&ActiveCharacter(), true, true);
 }
 
-void Action_GameLoop_NextTeam (Action *a)
+void Action_Game_NextTeam (Action *a)
 {
   GetTeamsList().SetActive (a->PopString());
   ASSERT (!ActiveCharacter().IsDead());
@@ -235,9 +234,9 @@ void Action_GameLoop_NextTeam (Action *a)
     Network::GetInstance()->SetTurnMaster(false);
 }
 
-void Action_GameLoop_SetState (Action *a)
+void Action_Game_SetState (Action *a)
 {
-  GameLoop::GetInstance()->Really_SetState(GameLoop::game_loop_state_t(a->PopInt()));
+  Game::GetInstance()->Really_SetState(Game::game_loop_state_t(a->PopInt()));
 }
 
 // ########################################################
@@ -319,7 +318,7 @@ void Action_ChatMessage (Action *a)
   {
     if(Game::GetInstance()->IsGameLaunched())
       //Add message to chat session in Game
-      GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
+      Game::GetInstance()->chatsession.NewMessage(a->PopString());
     else if (Network::GetInstance()->network_menu != NULL) {
       //Network Menu
       Network::GetInstance()->network_menu->ReceiveMsgCallback(a->PopString());
@@ -429,19 +428,19 @@ void SyncCharacters()
 
 void Action_Character_Jump (Action */*a*/)
 {
-  GameLoop::GetInstance()->character_already_chosen = true;
+  Game::GetInstance()->character_already_chosen = true;
   ActiveCharacter().Jump();
 }
 
 void Action_Character_HighJump (Action */*a*/)
 {
-  GameLoop::GetInstance()->character_already_chosen = true;
+  Game::GetInstance()->character_already_chosen = true;
   ActiveCharacter().HighJump();
 }
 
 void Action_Character_BackJump (Action */*a*/)
 {
-  GameLoop::GetInstance()->character_already_chosen = true;
+  Game::GetInstance()->character_already_chosen = true;
   ActiveCharacter().BackJump();
 }
 
@@ -476,7 +475,7 @@ void SendActiveCharacterInfo(bool can_be_dropped)
 
 void Action_Weapon_Shoot (Action *a)
 {
-  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
+  if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return; // hack related to bug 8656
 
   double strength = a->PopDouble();
@@ -764,9 +763,9 @@ ActionHandler::ActionHandler():
   Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
   Register (Action::ACTION_PLAYER_NEXT_CHARACTER, "PLAYER_next_character", &Action_Player_NextCharacter);
   Register (Action::ACTION_PLAYER_PREVIOUS_CHARACTER, "PLAYER_previous_character", &Action_Player_PreviousCharacter);
-  Register (Action::ACTION_GAMELOOP_CHANGE_CHARACTER, "GAMELOOP_change_character", &Action_GameLoop_ChangeCharacter);
-  Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_GameLoop_NextTeam);
-  Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_GameLoop_SetState);
+  Register (Action::ACTION_GAMELOOP_CHANGE_CHARACTER, "GAMELOOP_change_character", &Action_Game_ChangeCharacter);
+  Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_Game_NextTeam);
+  Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_Game_SetState);
 
   // ########################################################
   // To be sure that rules will be the same on each computer

@@ -22,7 +22,7 @@
 #include "character/character.h"
 #include "crosshair.h"
 #include "weapon.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/app.h"
@@ -60,7 +60,7 @@ void CrossHair::Draw() const
     return;
   if( ActiveCharacter().IsDead() )
     return;
-  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING )
+  if( Game::GetInstance()->ReadState() != Game::PLAYING )
     return;
   Point2i tmp = ActiveCharacter().GetHandPosition() + crosshair_position;
   AppWormux::GetInstance()->video->window.Blit(image, tmp - Camera::GetInstance()->GetPosition());

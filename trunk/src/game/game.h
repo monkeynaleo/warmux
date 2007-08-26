@@ -24,39 +24,127 @@
 #define GAME_H
 
 #include "include/base.h"
+#include "network/chat.h"
 
+// Forward declarations
+class Character;
+class ObjBox;
+class PhysicalObj;
+class FramePerSecond;
 class Question;
 
 class Game
 {
+  /* If you need this, implement it (correctly)*/
+  Game(const Game&);
+  Game operator=(const Game&);
+  /**********************************************/
+
+public:
+  typedef enum {
+    PLAYING = 0,
+    HAS_PLAYED = 1,
+    END_TURN = 2
+  } game_loop_state_t;
+
+
 private:
   bool isGameLaunched;
+
+  static Game * singleton;
 
   // Set the user requested an end of the game
   bool want_end_of_game;
 
-  Game();
-  static Game * singleton;
+  game_loop_state_t state;
+  uint pause_seconde;
+  uint duration;
+  ObjBox * current_ObjBox;
+  bool give_objbox;
 
-  int AskQuestion (Question &question, bool draw=true) const;
-  void DisplayPause() const;
-  bool DisplayQuit() const;
-  void MessageLoading() const;
-  void MessageEndOfGame() const;
+  FramePerSecond *fps;
 
+  // Time to wait between 2 loops
+  int delay;
+  // Time to display the next frame
+  uint time_of_next_frame;
+  // Time to compute the next physic engine frame
+  uint time_of_next_phy_frame;
+
+  static uint last_unique_id;
 public:
   static Game * GetInstance();
 
   void Start();
   void UnloadDatas() const;
 
-  int NbrRemainingTeams() const;
-
-  bool IsGameFinished() const;
-  bool IsGamePaused() const;
   bool IsGameLaunched() const;
 
-  void TogglePause() const;
+  static std::string GetUniqueId();
+  static void ResetUniqueIds();
+
+  bool character_already_chosen;
+  Chat chatsession;
+
+  void Init();
+
+  // Draw to screen
+  void Draw();
+
+  // Main loop
+  void Run();
+
+  // Read/Set State
+  game_loop_state_t ReadState() const { return state; }
+  void SetState(game_loop_state_t new_state, bool begin_game=false) const;
+  bool IsGameFinished() const;
+
   void UserWantEndOfGame() { want_end_of_game = true; };
+  void Really_SetState(game_loop_state_t new_state); // called by the action_handler
+
+  // Get remaining time to play
+  uint GetRemainingTime() const;
+  // Signal death of a player
+  void SignalCharacterDeath (const Character *character) const;
+
+  // Signal character damage
+  void SignalCharacterDamage(const Character *character) const;
+
+  void SetCurrentBox(ObjBox * current_box);
+  ObjBox * GetCurrentBox();
+
+private:
+  Game();
+  ~Game();
+
+  void MessageLoading() const;
+
+  // Refresh all objects (position, state ...)
+  void RefreshObject() const;
+  void RefreshClock();
+
+  // Input management (keyboard/mouse)
+  void RefreshInput();
+  void IgnorePendingInputEvents() const;
+
+  void PingClient() const;
+
+  void CallDraw();
+
+  PhysicalObj* GetMovingObject() const;
+  bool IsAnythingMoving() const;
+  void ApplyDiseaseDamage() const;
+  void ApplyDeathMode() const;
+
+  void __SetState_PLAYING();
+  void __SetState_HAS_PLAYED();
+  void __SetState_END_TURN();
+
+  void DisplayPause() const;
+  bool AskQuit() const;
+  void MessageEndOfGame() const;
+  int NbrRemainingTeams() const;
+  void EndOfGame();
+  void MainLoop();
 };
 #endif

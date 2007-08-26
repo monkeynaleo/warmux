@@ -22,7 +22,6 @@
 #include "game_init.h"
 #include <SDL.h>
 #include <iostream>
-#include "game_loop.h"
 #include "game.h"
 #include "game_mode.h"
 #include "time.h"
@@ -208,7 +207,7 @@ GameInit::GameInit():
   else if (Network::GetInstance()->IsClient())
     EndInitGameData_NetClient();
 
-  GameLoop::GetInstance()->Init();
+  Game::GetInstance()->Init();
 
   // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
   Time::GetInstance()->Reset();

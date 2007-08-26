@@ -25,7 +25,7 @@
 #include <sstream>
 #include "explosion.h"
 #include "character/character.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "include/app.h"
@@ -212,7 +212,7 @@ void SnipeRifle::DrawBeam()
 void SnipeRifle::Draw()
 {
   WeaponLauncher::Draw();
-  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsInUse() ) return;
+  if( Game::GetInstance()->ReadState() != Game::PLAYING || IsInUse() ) return;
   ComputeCrossPoint();
   DrawBeam();
   // Draw the laser impact

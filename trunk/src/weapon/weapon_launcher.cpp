@@ -27,7 +27,7 @@
 #include "explosion.h"
 #include "character/character.h"
 #include "game/config.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
@@ -119,7 +119,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   ResetTimeOut();
 
   // generate a unique id for the projectile
-  m_unique_id = name + GameLoop::GetUniqueId();
+  m_unique_id = name + Game::GetUniqueId();
 }
 
 WeaponProjectile::~WeaponProjectile()

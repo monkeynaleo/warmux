@@ -22,7 +22,7 @@
 #include "move.h"
 //#include <math.h>
 #include "character.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "team/team.h"
@@ -104,7 +104,7 @@ void MoveCharacter(Character &character)
   do
   {
     // Move !
-    GameLoop::GetInstance()->character_already_chosen = true;
+    Game::GetInstance()->character_already_chosen = true;
     // Eventually moves the character
 
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),

@@ -24,7 +24,6 @@
 
 //-----------------------------------------------------------------------------
 #include "character/character.h"
-#include "game/game_loop.h"
 #include "game/time.h"
 #include "interface/game_msg.h"
 #include "sound/jukebox.h"
