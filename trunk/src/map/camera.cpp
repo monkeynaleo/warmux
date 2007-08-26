@@ -90,11 +90,17 @@ void Camera::SetXY(Point2i pos){
 }
 
 void Camera::AutoCrop(){
-  if( !followed_object || followed_object->IsGhost() )
-    return;
+  /* Stuff is put static in order to be able to reach the last position
+   * of the object the camera was following, in case it desapears. This
+   * typically happen when something explodes or a character dies. */
+  static Point2i pos(0, 0);
+  static Point2i size(1, 1);
 
-  Point2i pos = followed_object->GetPosition();
-  Point2i size = followed_object->GetSize();
+  if (followed_object && !followed_object->IsGhost() )
+  {
+    pos = followed_object->GetPosition();
+    size = followed_object->GetSize();
+  }
 
   if( pos.y < 0 )
     pos.y = 0;
@@ -142,12 +148,11 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow, bool center_on, b
   followed_object = obj;
 }
 
-void Camera::StopFollowingObj(const PhysicalObj* obj){
+void Camera::StopFollowingObj(const PhysicalObj*){
   if(Game::GetInstance()->IsGameFinished())
     return;
 
-  if (followed_object == obj)
-    FollowObject((PhysicalObj*)&ActiveCharacter(), true, true, true);
+  followed_object = NULL;
 }
 
 bool Camera::IsVisible(const PhysicalObj &obj) const {
