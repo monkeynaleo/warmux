@@ -163,7 +163,7 @@ void WeaponProjectile::Shoot(double strength)
   ShootSound();
 
   lst_objects.AddObject(this);
-  Camera::GetInstance()->GetInstance()->FollowObject(this, true, true, true);
+  Camera::GetInstance()->GetInstance()->FollowObject(this, true, true);
 }
 
 void WeaponProjectile::ShootSound()

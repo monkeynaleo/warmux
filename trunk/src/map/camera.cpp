@@ -134,11 +134,11 @@ void Camera::Refresh(){
     AutoCrop();
 }
 
-void Camera::FollowObject(const PhysicalObj *obj, bool follow, bool center_on, bool force_center_on_object){
-  MSG_DEBUG( "camera.tracking", "Following object %s, center_on=%d, follow=%d", obj->GetName().c_str(), center_on, follow);
+void Camera::FollowObject(const PhysicalObj *obj, bool follow, bool center_on){
+  MSG_DEBUG( "camera.tracking", "Following object %s, center_on=%d",
+                                 obj->GetName().c_str(), center_on);
 
-  if ((center_on) && (followed_object != obj ||
-                      !IsVisible(*obj) || force_center_on_object))
+  if ((center_on) && (followed_object != obj || !IsVisible(*obj)))
   {
     bool visible = IsVisible(*obj);
     auto_crop = follow;
