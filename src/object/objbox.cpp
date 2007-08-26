@@ -25,7 +25,7 @@
 #include <sstream>
 #include <iostream>
 #include "game/game_mode.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/app.h"
@@ -60,14 +60,14 @@ ObjBox::ObjBox(const std::string &name)
 
 ObjBox::~ObjBox(){
   delete anim;
-  GameLoop::GetInstance()->SetCurrentBox(NULL);
+  Game::GetInstance()->SetCurrentBox(NULL);
 }
 
 // Say hello to the ground
 void ObjBox::SignalCollision()
 {
   SetAirResistFactor(1.0);
-  GameLoop::GetInstance()->SetCurrentBox(NULL);
+  Game::GetInstance()->SetCurrentBox(NULL);
   MSG_DEBUG("box", "End of the fall: parachute=%d", parachute);
   if (!parachute) return;
 
@@ -138,7 +138,7 @@ bool ObjBox::NewBox()
     lst_objects.AddObject(box);
     Camera::GetInstance()->GetInstance()->FollowObject(box, true, true);
     GameMessages::GetInstance()->Add (_("It's a present!"));
-    GameLoop::GetInstance()->SetCurrentBox(box);
+    Game::GetInstance()->SetCurrentBox(box);
     return true;
   }
 

@@ -22,6 +22,7 @@
 #include "camera.h"
 #include "map.h"
 #include "wind.h"
+#include "game/game.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "interface/mouse.h"
@@ -29,13 +30,12 @@
 #include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
-#include "game/game.h"
 
 const Point2i CAMERA_MARGIN(200, 200);
 const Point2i CAMERA_SPEED(20, 20);
 
 Camera* Camera::singleton = NULL;
- 
+
 Camera * Camera::GetInstance()
 {
   if (singleton == NULL) {

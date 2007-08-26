@@ -23,7 +23,6 @@
 #include "explosion.h"
 #include "weapon_cfg.h"
 
-#include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/sprite.h"

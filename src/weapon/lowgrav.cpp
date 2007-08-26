@@ -25,7 +25,6 @@
 
 #include "character/character.h"
 #include "game/game.h"
-#include "game/game_loop.h"
 #include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "interface/game_msg.h"

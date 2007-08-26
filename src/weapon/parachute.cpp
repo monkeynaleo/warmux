@@ -26,7 +26,6 @@
 #include "character/character.h"
 #include "game/game.h"
 #include "game/game_mode.h"
-#include "game/game_loop.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
@@ -74,8 +73,8 @@ void Parachute::p_Deselect()
 
 bool Parachute::IsInUse() const
 {
-  return GameLoop::GetInstance()->GetRemainingTime() > 0 &&
-         GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING;
+  return Game::GetInstance()->GetRemainingTime() > 0 &&
+         Game::GetInstance()->ReadState() == Game::PLAYING;
 }
 
 bool Parachute::p_Shoot()

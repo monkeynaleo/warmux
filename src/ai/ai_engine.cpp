@@ -24,7 +24,7 @@
 #include <iostream>
 #include "ai_engine_stupid.h"
 #include "character/character.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 
@@ -47,7 +47,7 @@ AIengine* AIengine::GetInstance()
 void AIengine::Refresh() const
 {
   // AI does not have right to play
-  if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
+  if (Game::GetInstance()->ReadState() == Game::END_TURN)
     return;
 
   if (ActiveCharacter().GetTeam().IsLocalAI()) {

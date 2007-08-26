@@ -22,7 +22,7 @@
 #include "interface.h"
 #include "mouse.h"
 #include "character/character.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/text.h"
@@ -310,7 +310,7 @@ void Interface::Draw()
   AppWormux * app = AppWormux::GetInstance();
   bottom_bar_pos = (app->video->window.GetSize() - GetSize()) * Point2d(0.5, 1);
 
-  if ( GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING && weapon_strength_bar.visible)
+  if ( Game::GetInstance()->ReadState() == Game::PLAYING && weapon_strength_bar.visible)
   {
     // Position on the screen
     Point2i barPos = (app->video->window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)

@@ -23,7 +23,6 @@
 #include "explosion.h"
 #include "character/character.h"
 #include "game/game.h"
-#include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "include/action_handler.h"

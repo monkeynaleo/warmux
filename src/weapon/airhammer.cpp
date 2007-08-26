@@ -27,7 +27,6 @@
 #include <sstream>
 #include "character/character.h"
 #include "game/game.h"
-#include "game/game_loop.h"
 #include "game/time.h"
 #include "include/action_handler.h"
 #include "interface/game_msg.h"
@@ -143,7 +142,7 @@ void Airhammer::RepeatShoot() const
 void Airhammer::ActionStopUse()
 {
   ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
-  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+  Game::GetInstance()->SetState(Game::HAS_PLAYED);
   p_Deselect();
 }
 

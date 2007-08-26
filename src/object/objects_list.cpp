@@ -23,7 +23,6 @@
 //-----------------------------------------------------------------------------
 #include "barrel.h"
 #include "include/app.h"
-#include "game/game_loop.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "map/camera.h"

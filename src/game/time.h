@@ -68,6 +68,7 @@ public:
 
   void Pause();
   void Continue();
+  void TogglePause();
 };
 
 #endif

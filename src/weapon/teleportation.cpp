@@ -22,7 +22,6 @@
 #include "teleportation.h"
 #include "character/character.h"
 #include "character/body.h"
-#include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "include/action_handler.h"
@@ -60,7 +59,7 @@ bool Teleportation::p_Shoot ()
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
-  //  GameLoop::GetInstance()->interaction_enabled = false;
+  //  Game::GetInstance()->interaction_enabled = false;
 
   jukebox.Play("share", "weapon/teleport_start");
 

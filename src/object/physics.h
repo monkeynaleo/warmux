@@ -39,7 +39,7 @@ typedef enum
   Pendulum,
 } MotionType_t;
 
-class GameLoop;
+class Game;
 
 class Physics : private ObjectConfig
 {

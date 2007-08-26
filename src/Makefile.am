@@ -18,7 +18,6 @@ wormux_SOURCES = \
         game/config.cpp game/config.h \
         game/game.cpp game/game.h \
         game/game_init.cpp game/game_init.h \
-        game/game_loop.cpp game/game_loop.h \
         game/game_mode.cpp game/game_mode.h \
         game/time.cpp game/time.h \
         graphic/color.cpp graphic/color.h \

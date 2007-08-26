@@ -24,7 +24,6 @@
 #include "weapon_cfg.h"
 
 #include "character/character.h"
-#include "game/game_loop.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"

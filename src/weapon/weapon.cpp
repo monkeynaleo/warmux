@@ -26,7 +26,7 @@
 #include <sstream>
 #include "character/character.h"
 #include "game/time.h"
-#include "game/game_loop.h"
+#include "game/game.h"
 #include "graphic/text.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
@@ -196,9 +196,9 @@ void Weapon::Manage()
 
   Refresh();
 
-  GameLoop * game_loop = GameLoop::GetInstance();
+  Game * game_loop = Game::GetInstance();
 
-  if (game_loop->ReadState() != GameLoop::PLAYING)
+  if (game_loop->ReadState() != Game::PLAYING)
     return;
 
   if ( (ActiveTeam().ReadNbUnits() == 0) )
@@ -208,7 +208,7 @@ void Weapon::Manage()
       if (m_can_change_weapon)
         Select();
       else
-        game_loop->SetState(GameLoop::HAS_PLAYED);
+        game_loop->SetState(Game::HAS_PLAYED);
     }
 }
 
@@ -308,7 +308,7 @@ bool Weapon::Shoot()
 
   if (max_strength != 0) ActiveCharacter().previous_strength = m_strength;
 
-  GameLoop::GetInstance()->character_already_chosen = true;
+  Game::GetInstance()->character_already_chosen = true;
 
   return true;
 }
@@ -413,7 +413,7 @@ void Weapon::InitLoading(){
 
   m_strength = 0;
 
-  GameLoop::GetInstance()->character_already_chosen = true;
+  Game::GetInstance()->character_already_chosen = true;
 }
 
 void Weapon::StopLoading(){
@@ -423,7 +423,7 @@ void Weapon::StopLoading(){
 }
 
 void Weapon::Draw(){
-  if(GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING &&
+  if(Game::GetInstance()->ReadState() != Game::PLAYING &&
      m_last_fire_time + 100 < Time::GetInstance()->Read())
     return;
 
@@ -523,7 +523,7 @@ void Weapon::Draw(){
 
     AppWormux::GetInstance()->video->window.RectangleColor(rect, c_red);
 
-    MSG_DEBUG("weapon.handposition", "Position: %d, %d - hand: %d, %d", 
+    MSG_DEBUG("weapon.handposition", "Position: %d, %d - hand: %d, %d",
 	      ActiveCharacter().GetX(),
 	      ActiveCharacter().GetY(),
 	      ActiveCharacter().GetHandPosition().GetX(),
