@@ -33,9 +33,11 @@ class TuxLauncher : public WeaponLauncher
 {
   private:
     SuperTux * current_tux;
+
+    friend class SuperTux;
+    void EndOfTurn() const; // should be called only by SuperTux
   public:
     TuxLauncher();
-    void EndOfTurn() const; // should be called only by SuperTux
     bool IsInUse() const;
 
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
