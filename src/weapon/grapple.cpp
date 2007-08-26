@@ -458,7 +458,6 @@ void Grapple::AttachRope(const Point2i& contact_point)
 
   // Camera should focus on it!
   Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),true, true, true);
-  Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
 }
 
 void Grapple::DetachRope()
@@ -466,7 +465,6 @@ void Grapple::DetachRope()
   ActiveCharacter().UnsetPhysFixationPoint() ;
   rope_nodes.clear();
   m_is_active = false;
-  Camera::GetInstance()->GetInstance()->SetCloseFollowing(false);
 }
 
 void Grapple::AttachNode(const Point2i& contact_point,

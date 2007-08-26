@@ -128,7 +128,6 @@ void Plane::Shoot(double speed, const Point2i& target)
   Camera::GetInstance()->GetInstance()->FollowObject(this, true, true);
 
   lst_objects.AddObject(this);
-  Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
 }
 
 void Plane::DropBomb()

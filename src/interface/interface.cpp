@@ -364,7 +364,6 @@ Point2i Interface::GetSize() const
 void Interface::EnableDisplay(bool _display)
 {
   display = _display;
-  Camera::GetInstance()->GetInstance()->CenterOnFollowedObject();
 }
 
 void Interface::Show()

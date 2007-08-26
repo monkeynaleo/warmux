@@ -110,7 +110,6 @@ void JetPack::p_Deselect()
   m_y_force = 0;
   ActiveCharacter().SetExternForce(0,0);
   StopUse();
-  Camera::GetInstance()->GetInstance()->SetCloseFollowing(false);
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("walk");
 }
@@ -124,9 +123,6 @@ void JetPack::StartUse()
       flying_sound.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
       Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),true, true, true);
-      Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
-//                           bool suit, bool recentre,
-//                           bool force_recentrage=false);
     }
 }
 
