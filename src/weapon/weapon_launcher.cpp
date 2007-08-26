@@ -181,7 +181,6 @@ void WeaponProjectile::Refresh()
 
 void WeaponProjectile::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
 {
-  Explosion();
 }
 
 void WeaponProjectile::Draw()
