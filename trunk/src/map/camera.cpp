@@ -143,11 +143,10 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow, bool center_on){
   followed_object = obj;
 }
 
-void Camera::StopFollowingObj(const PhysicalObj*){
-  if(Game::GetInstance()->IsGameFinished())
-    return;
+void Camera::StopFollowingObj(const PhysicalObj* obj){
 
-  followed_object = NULL;
+  if (followed_object == obj)
+    followed_object = NULL;
 }
 
 bool Camera::IsVisible(const PhysicalObj &obj) const {
