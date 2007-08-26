@@ -75,6 +75,10 @@ InternetMenu::InternetMenu() :
 
   resource_manager.UnLoadXMLProfile(res);
   RefreshList(false);
+
+  //if there is a running server, preselect it
+  if (connect_lst->Size() > 0)
+    connect_lst->Select(0);
 }
 
 InternetMenu::~InternetMenu()
