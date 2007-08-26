@@ -109,7 +109,6 @@ void Parachute::Refresh()
         image->Start();
         ActiveCharacter().SetSpeedXY(Point2d(0,0));
         ActiveCharacter().SetMovement("parachute");
-        Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
         Camera::GetInstance()->GetInstance()->FollowObject(&ActiveCharacter(), true, true, true);
       }
     }

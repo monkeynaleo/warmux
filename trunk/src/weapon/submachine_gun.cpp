@@ -60,7 +60,6 @@ SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                                          WeaponLauncher * p_launcher) :
   WeaponBullet("m16_bullet", cfg, p_launcher)
 {
-  camera_follow_closely = false;
 }
 
 void SubMachineGunBullet::RandomizeShoot(double &angle,double &/*strength*/)

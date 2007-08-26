@@ -33,7 +33,6 @@ class WeaponProjectile : public PhysicalObj
 {
   protected:
     Sprite *image;
-    bool camera_follow_closely;
     bool explode_colliding_character; // before timeout.
     bool explode_with_timeout;
     bool explode_with_collision;
@@ -132,7 +131,7 @@ class WeaponLauncher : public Weapon
     virtual void Draw();
 
     std::string GetWeaponWinString(const char *TeamName, uint items_count)const = 0;
-	    
+
     // Handle of projectile events
     // Signal the end of a projectile for any reason possible
     virtual void SignalEndOfProjectile() { DecActiveProjectile(); };

@@ -203,7 +203,6 @@ void Character::SignalDrowning()
 {
   // Follow character
   Camera::GetInstance()->FollowObject(this, true, true, true);
-  Camera::GetInstance()->SetCloseFollowing(true);
   // Set energy
   SetEnergy(0);
   SetMovement("drowned");
@@ -215,9 +214,6 @@ void Character::SignalDrowning()
 // May you rest in peace young one.
 void Character::SignalGhostState (bool was_dead)
 {
-  // Stop to follow closely
-  Camera::GetInstance()->SetCloseFollowing(false);
-
   // Report to damage performer this character lost all of its energy
   ActiveCharacter().damage_stats->MadeDamage(GetEnergy(), *this);
 
@@ -548,9 +544,6 @@ void Character::Refresh()
   // center on character who is falling
   if(FootsInVacuum()) {
     Camera::GetInstance()->FollowObject(this, true, true, true);
-    Camera::GetInstance()->SetCloseFollowing(true);
-  } else {
-    Camera::GetInstance()->SetCloseFollowing(false);
   }
 
   if(IsDiseased())
