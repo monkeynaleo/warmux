@@ -37,8 +37,6 @@ POTFILES = \
         src/game/game.cpp \
         src/game/game.h \
         src/game/game_init.cpp \
-        src/game/game_loop.cpp \
-        src/game/game_loop.h \
         src/game/game_mode.cpp \
         src/game/game_mode.h \
         src/game/time.cpp \
@@ -378,7 +376,7 @@ MSGID_BUGS_ADDRESS = wormux-dev@gna.org
 
 localedir=@LOCALEDIR@
 
-XGETTEXT = @XGETTEXT@ 
+XGETTEXT = @XGETTEXT@
 # add as automated comments all strings preceeding the gettexized line
 # since it seems that in most cases the comments are useful
 XGETTEXT_OPTIONS = -c --keyword=_ --keyword=N_
