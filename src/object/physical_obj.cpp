@@ -762,7 +762,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     }
 
     /* check if the area rigth under the object has a bottom on the ground */
-    ok &= !world.ParanoiacRectIsInVacuum(Rectanglei(position.x, position.y, 1, world.GetHeight() -
+    ok &= !world.ParanoiacRectIsInVacuum(Rectanglei(GetCenter().x, position.y, 1, world.GetHeight() -
              (WATER_INITIAL_HEIGHT + 30) - position.y));
     if (!ok) {
       MSG_DEBUG("physic.position", "%s - Put in outside the map or in water -> try again", m_name.c_str());
