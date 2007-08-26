@@ -27,7 +27,6 @@
 #include "include/action_handler.h"
 #include "tool/i18n.h"
 #include "map/map.h"
-#include "game/game.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "character/move.h"
@@ -72,7 +71,6 @@ bool Blowtorch::IsInUse() const
 void Blowtorch::ActionStopUse()
 {
   SignalTurnEnd();
-  Game::GetInstance()->SetState(Game::HAS_PLAYED);
 }
 
 bool Blowtorch::p_Shoot()
