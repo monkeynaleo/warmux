@@ -287,6 +287,8 @@ void NetworkMenu::key_ok()
     return;
   }
 
+  index_server.Disconnect();
+
   Menu::key_ok();
 }
 
