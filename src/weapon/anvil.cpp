@@ -147,7 +147,7 @@ bool AnvilLauncher::p_Shoot ()
   projectile->SetXY(target);
   ((Anvil*)projectile)->PlayFallSound();
   lst_objects.AddObject(projectile);
-  Camera::GetInstance()->GetInstance()->FollowObject(projectile,true,true);
+  Camera::GetInstance()->FollowObject(projectile,true,true);
   projectile = NULL;
   ReloadLauncher();
 

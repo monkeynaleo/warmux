@@ -48,7 +48,7 @@ TeleportMemberParticle::TeleportMemberParticle(const Sprite* spr, const Point2i&
 
   sin_x_max = randomObj.GetDouble(M_PI_4, 3.0 * M_PI_4);
   sin_y_max = randomObj.GetDouble(M_PI_4, 3.0 * M_PI_4);
-  Camera::GetInstance()->GetInstance()->FollowObject(this, true, true);
+  Camera::GetInstance()->FollowObject(this, true, true);
 }
 
 TeleportMemberParticle::~TeleportMemberParticle()

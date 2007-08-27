@@ -138,7 +138,7 @@ void ApplyExplosion_common (const Point2i &pos,
   }
 
   if(fastest_character != NULL)
-    Camera::GetInstance()->GetInstance()->FollowObject (fastest_character, true, true);
+    Camera::GetInstance()->FollowObject (fastest_character, true, true);
 
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(it)
@@ -183,7 +183,7 @@ void ApplyExplosion_common (const Point2i &pos,
            angle = -M_PI_2;
 
          if(fastest_character != NULL)
-           Camera::GetInstance()->GetInstance()->FollowObject (obj, true, true);
+           Camera::GetInstance()->FollowObject (obj, true, true);
          ASSERT( obj->GetMass() != 0.0);
          obj->AddSpeed (force / obj->GetMass(), angle);
        }
