@@ -362,9 +362,9 @@ bool AIShootModule::Refresh(uint current_time)
   case NEAR_FROM_ENEMY:
     // We are near enough of an enemy (perhaps not the first one we have choosen)
     FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
-      if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
-                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
-        //if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 50) {
+//      if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
+//                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
+        if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 30) {
               if (&(*character) != m_enemy) {
                 GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
                                                  + (*character).GetName());
