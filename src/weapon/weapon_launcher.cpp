@@ -53,6 +53,7 @@ WeaponBullet::WeaponBullet(const std::string &name,
   WeaponProjectile(name, cfg, p_launcher)
 {
   explode_colliding_character = true;
+  m_allow_negative_y = false;
   ResetTimeOut();
 }
 
