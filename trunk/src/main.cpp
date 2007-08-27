@@ -58,7 +58,6 @@ using namespace std;
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
-#include "tool/stats.h"
 
 
 static Menu *menu = NULL;
@@ -102,13 +101,11 @@ int AppWormux::Main(void)
 
     do
       {
-        MainMenu main_menu;
 
         if (choice == MainMenu::NONE) {
+          MainMenu main_menu;
           menu = &main_menu;
-          StatStart("Main:Menu");
           choice = main_menu.Run();
-          StatStop("Main:Menu");
         }
 
         ActionHandler::GetInstance()->Flush();

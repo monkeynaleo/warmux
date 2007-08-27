@@ -30,6 +30,7 @@
 #include "sound/jukebox.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+#include "tool/stats.h"
 
 #ifndef WIN32
 #include <dirent.h>
@@ -44,6 +45,7 @@ MainMenu::~MainMenu()
 {
   delete version_text;
   delete website_text;
+  StatStop("Main:Menu");
 }
 
 MainMenu::MainMenu() :
@@ -118,6 +120,8 @@ MainMenu::MainMenu() :
 
   if(!jukebox.IsPlayingMusic())
      jukebox.PlayMusic("menu");
+
+  StatStart("Main:Menu");
 }
 
 void MainMenu::button_click() const
