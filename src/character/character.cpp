@@ -84,7 +84,7 @@ void Character::SetBody(Body* char_body)
   SetMovement("breathe");
 
   SetDirection(randomSync.GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
-  body->SetFrame(0);
+  body->SetFrame(randomObj.GetLong(0, body->GetFrameCount()-1));
   SetSize(body->GetSize());
 }
 
