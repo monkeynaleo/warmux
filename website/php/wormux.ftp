@@ -1,0 +1,10 @@
+open ftp.wormux.org
+user user password
+cd ~/www/php
+rm last_update
+put last_update
+rm -r po_status
+mkdir po_status
+cd po_status
+mput po_status/*
+
