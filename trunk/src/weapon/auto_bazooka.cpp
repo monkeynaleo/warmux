@@ -248,7 +248,7 @@ void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
   m_target->selected = true;
 
   if(!ActiveTeam().IsLocal())
-    Camera::GetInstance()->GetInstance()->SetXYabs(mouse_pos - Camera::GetInstance()->GetSize()/2);
+    Camera::GetInstance()->SetXYabs(mouse_pos - Camera::GetInstance()->GetSize()/2);
   DrawTarget();
   static_cast<RPG *>(projectile)->SetTarget(m_target->pos.x, m_target->pos.y);
 }

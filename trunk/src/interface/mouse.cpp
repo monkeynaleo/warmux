@@ -225,16 +225,16 @@ void Mouse::ScrollCamera() const
 
   tstVector = mousePos.inf(sensitZone);
   if( !tstVector.IsNull() ){
-    Camera::GetInstance()->GetInstance()->SetXY( tstVector * (mousePos - (sensitZone * coef))/2 );
-    Camera::GetInstance()->GetInstance()->SetAutoCrop(false);
+    Camera::GetInstance()->SetXY( tstVector * (mousePos - (sensitZone * coef))/2 );
+    Camera::GetInstance()->SetAutoCrop(false);
     // XXX Not used
     // scroll = true;
   }
 
   tstVector = winSize.inf(mousePos + sensitZone);
   if( !tstVector.IsNull() ){
-    Camera::GetInstance()->GetInstance()->SetXY( tstVector * (mousePos + (sensitZone * coef) - winSize)/2 );
-    Camera::GetInstance()->GetInstance()->SetAutoCrop(false);
+    Camera::GetInstance()->SetXY( tstVector * (mousePos + (sensitZone * coef) - winSize)/2 );
+    Camera::GetInstance()->SetAutoCrop(false);
     // XXX Not used
     //scroll = true;
   }
@@ -263,8 +263,8 @@ void Mouse::TestCamera()
   if( demande_scroll ){
     if( scroll_actif ){
       Point2i offset = savedPos - mousePos;
-      Camera::GetInstance()->GetInstance()->SetXY(offset);
-      Camera::GetInstance()->GetInstance()->SetAutoCrop(false);
+      Camera::GetInstance()->SetXY(offset);
+      Camera::GetInstance()->SetAutoCrop(false);
     }else{
       scroll_actif = true;
     }

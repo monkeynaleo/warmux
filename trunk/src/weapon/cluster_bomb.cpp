@@ -79,7 +79,7 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot (int x, int y)
 {
-  Camera::GetInstance()->GetInstance()->FollowObject(this, true, false);
+  Camera::GetInstance()->FollowObject(this, true, false);
   ResetConstants();
   SetXY( Point2i(x, y) );
 }

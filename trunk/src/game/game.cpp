@@ -177,7 +177,7 @@ void Game::Init()
   chatsession.Clear();
   fps->Reset();
   IgnorePendingInputEvents();
-  Camera::GetInstance()->GetInstance()->Reset();
+  Camera::GetInstance()->Reset();
 
   ActionHandler::GetInstance()->ExecActions();
 
@@ -587,7 +587,7 @@ void Game::__SetState_PLAYING()
           ActiveTeam().NextCharacter();
         }
 
-      Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(), true, true);
+      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true, true);
 
       if ( Network::GetInstance()->IsTurnMaster() )
         {

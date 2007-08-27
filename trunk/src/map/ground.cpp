@@ -249,12 +249,12 @@ void Ground::Draw(bool redraw_all)
   Point2i windowSize = app->video->window.GetSize();
   Point2i margin = (windowSize - GetSize())/2;
 
-  if( Camera::GetInstance()->GetInstance()->HasFixedX() ){// ground is less wide than screen !
+  if( Camera::GetInstance()->HasFixedX() ){// ground is less wide than screen !
     app->video->window.BoxColor( Rectanglei(0, 0, margin.x, windowSize.y), black_color);
     app->video->window.BoxColor( Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color);
   }
 
-  if( Camera::GetInstance()->GetInstance()->HasFixedY() ){// ground is less wide than screen !
+  if( Camera::GetInstance()->HasFixedY() ){// ground is less wide than screen !
     app->video->window.BoxColor( Rectanglei(0, 0, windowSize.x, margin.y), black_color);
     app->video->window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
   }
