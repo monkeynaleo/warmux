@@ -81,7 +81,7 @@ void Character::SetBody(Body* char_body)
   body = char_body;
   body->SetOwner(this);
   SetClothe("normal");
-  SetMovement("walk");
+  SetMovement("breathe");
 
   SetDirection(randomSync.GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
   body->SetFrame(0);
@@ -302,7 +302,7 @@ void Character::SetEnergy(int new_energy)
       printf("%s have been resurrected\n", GetName().c_str());
       m_alive = ALIVE;
       SetClothe("normal");
-      SetMovement("walk");
+      SetMovement("breathe");
     }
   }
 
@@ -334,7 +334,7 @@ void Character::Die()
     jukebox.Play(GetTeam().GetSoundProfile(),"death");
     body->SetRotation(0.0);
     SetClothe("dead");
-    SetMovement("walk");
+    SetMovement("breathe");
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
@@ -393,14 +393,14 @@ void Character::Draw()
   || body->GetClothe() == "black"))
   {
     SetClothe("normal");
-    SetMovement("walk");
+    SetMovement("breathe");
   }
 
   // Stop flying if we don't go fast enough
   double n, a;
   GetSpeed(n, a);
   if(body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
-    SetMovement("walk");
+    SetMovement("breathe");
 
 
   // Refresh the body (needed to determine if "weapon-*-begin-shoot" is finnished)
@@ -567,10 +567,10 @@ void Character::Refresh()
   else
   {
     if(body->GetMovement() == "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
-      body->SetMovement("walk");
+      body->SetMovement("breathe");
   }
 
-  if(body->IsWalking())
+  if(body->IsWalking() && body->GetMovement() == "walk")
   {
     // Play the step sound only twice during the walking animation
     uint frame_nbr = body->GetFrameCount();
@@ -651,7 +651,12 @@ void Character::SignalCollision()
   && body->GetClothe() != "jetpack-fire"
   && body->GetClothe() != "helmet")
     SetClothe("normal");
-  SetMovement("walk");
+
+  if(body->IsWalking())
+    SetMovement("walk");
+  else
+    SetMovement("breathe");
+
   SetMovementOnce("soft-land");
 
   body->SetRotation(0.0);
@@ -666,7 +671,12 @@ void Character::SignalCollision()
     SetEnergyDelta (-(int)degat);
     Game::GetInstance()->SignalCharacterDamage(this);
     SetClothe("normal");
-    SetMovement("walk");
+
+    if(body->IsWalking())
+      SetMovement("walk");
+    else
+      SetMovement("breathe");
+
     SetMovementOnce("hard-land");
   }
 }
@@ -711,7 +721,7 @@ void Character::StopPlaying()
 {
   if(IsDead()) return;
   SetClothe("normal");
-  SetMovement("walk");
+  SetMovement("breathe");
   body->ResetWalk();
   SetRebounding(true);
 }
@@ -759,7 +769,7 @@ void Character::SetWeaponClothe()
   SetClothe("weapon-" + m_team.GetWeapon().GetID());
   if(body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID())
     SetClothe("normal");
-  SetMovement("walk");
+  SetMovement("breathe");
 }
 
 void Character::SetMovement(const std::string& name)
