@@ -56,10 +56,10 @@
 	<anchor dx="12" dy="15"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
 	<attached member_type="head" frame="*" dx="10" dy="2"/>
-	<attached member_type="arm-right"  frame="*" dx="5" dy="10"/>
-	<attached member_type="arm-left"  frame="*" dx="11" dy="9"/>
-	<attached member_type="foot-right"  frame="*" dx="9" dy="28"/>
-	<attached member_type="foot-left"  frame="*" dx="18" dy="26"/>
+	<attached member_type="arm-right"  frame="*" dx="6" dy="10"/>
+	<attached member_type="arm-left"  frame="*" dx="12" dy="9"/>
+	<attached member_type="foot-right"  frame="*" dx="9" dy="27"/>
+	<attached member_type="foot-left"  frame="*" dx="18" dy="25"/>
 	<attached member_type="jetpack" frame="*" dx="3" dy="13"/>
 	<attached member_type="jetpack-belt" frame="*" dx="0" dy="18" />
 	<attached member_type="construct" frame="*" dx="8" dy="-2"/>
@@ -317,6 +317,66 @@
        #############    MOVEMENTS    #############
        ##############               ##############
        ###########################################   -->
+
+<!-- ###### Breathe ###### -->
+<movement name="breathe" speed="190">
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-left" />
+		<member type="arm-right" follow_half_crosshair="true"/>
+		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="foot-left" dy="-1" />
+		<member type="foot-right" dy="-1" />
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-left" dx="-1" dy="1" />
+		<member type="arm-right" dx="-1" dy="1" follow_half_crosshair="true"/>
+		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="foot-left" dy="0" />
+		<member type="foot-right" dy="0" />
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-left" dx="-2" dy="1" />
+		<member type="arm-right" dx="-2" dy="1" follow_half_crosshair="true"/>
+		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="foot-left" dy="1" />
+		<member type="foot-right" dy="1" />
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-left" dx="-2" dy="0" />
+		<member type="arm-right" dx="-2" dy="0" follow_half_crosshair="true"/>
+		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="foot-left" dy="1" />
+		<member type="foot-right" dy="1" />
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-left" dx="-2" dy="0" />
+		<member type="arm-right" dx="-2" dy="0" follow_half_crosshair="true"/>
+		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="foot-left" dy="0" />
+		<member type="foot-right" dy="0" />
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-left" dx="-1" dy="1" />
+		<member type="arm-right" dx="-1" dy="1" follow_half_crosshair="true"/>
+		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
+		<member type="foot-left" dy="-1" />
+		<member type="foot-right" dy="-1" />
+	</frame>
+</movement>
+
 
 <!-- ###### Walk ###### -->
 <movement name="walk" speed="30">

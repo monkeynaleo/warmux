@@ -111,7 +111,7 @@ void JetPack::p_Deselect()
   ActiveCharacter().SetExternForce(0,0);
   StopUse();
   ActiveCharacter().SetClothe("normal");
-  ActiveCharacter().SetMovement("walk");
+  ActiveCharacter().SetMovement("breathe");
 }
 
 void JetPack::StartUse()

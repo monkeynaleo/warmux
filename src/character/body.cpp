@@ -620,12 +620,15 @@ void Body::StopWalk()
   if(walk_events > 0)
     walk_events--;
   if(current_mvt->type == "walk")
+  {
+    SetMovement("breathe");
     SetFrame(0);
+  }
 }
 
 bool Body::IsWalking() const
 {
-  return walk_events > 0 && current_mvt->type == "walk";
+  return walk_events > 0 /* && current_mvt->type == "walk" */;
 }
 
 uint Body::GetMovementDuration() const
