@@ -103,7 +103,7 @@
 
 <sprite name="eyelid-normal" type="eyelid">
 	<image file="eyelid.png">
-		<grid pos="0,0" size="9,7" array="10,1" />
+		<grid pos="0,0" size="9,7" array="7,1" />
 	</image>
 	<animation speed="200" loop_mode="pingpong" />
 	<anchor dx="0" dy="0"/>
