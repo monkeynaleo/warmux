@@ -96,8 +96,17 @@
 <sprite name="eyes-normal" type="eyes-normal">
 	<image file="eyes.png"/>
 	<anchor dx="4" dy="3"/>
+	<attached member_type="eyelid" frame="*" dx="0" dy="0"/>
 	<attached member_type="pupil-right" frame="*" dx="4" dy="3"/>
 	<attached member_type="pupil-left" frame="*" dx="6" dy="3"/>
+</sprite>
+
+<sprite name="eyelid-normal" type="eyelid">
+	<image file="eyelid.png">
+		<grid pos="0,0" size="9,7" array="10,1" />
+	</image>
+	<animation speed="200" loop_mode="pingpong" />
+	<anchor dx="0" dy="0"/>
 </sprite>
 
 <sprite name="pupil-right" type="pupil-right" >
@@ -219,6 +228,7 @@
 	<member name="eyes-normal"/>
 	<member name="pupil-right"/>
 	<member name="pupil-left"/>
+	<member name="eyelid-normal"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
 	<member name="weapon"/>

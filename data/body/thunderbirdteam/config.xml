@@ -56,8 +56,8 @@
 	<anchor dx="9" dy="20"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="27"/>
 	<attached member_type="head" frame="*" dx="9" dy="6"/>
-	<attached member_type="wingright" frame="*" dx="4" dy="16"/>
-	<attached member_type="wingleft" frame="*" dx="11" dy="17"/>
+	<attached member_type="wingright" frame="*" dx="5" dy="16"/>
+	<attached member_type="wingleft" frame="*" dx="12" dy="17"/>
 	<attached member_type="foot-left" frame="*" dx="12" dy="36"/>
 	<attached member_type="foot-right" frame="*" dx="7" dy="37"/>
 	<attached member_type="construct" frame="*" dx="6" dy="6"/>
@@ -99,8 +99,17 @@
 <sprite name="eyes-normal" type="eyes-normal">
 	<image file="eyes.png"/>
 	<anchor dx="4" dy="3"/>
+	<attached member_type="eyelid" frame="*" dx="0" dy="0"/>
 	<attached member_type="pupil-right" frame="*" dx="4" dy="3"/>
 	<attached member_type="pupil-left" frame="*" dx="6" dy="3"/>
+</sprite>
+
+<sprite name="eyelid-normal" type="eyelid">
+	<image file="eyelid.png">
+		<grid pos="0,0" size="9,7" array="10,1" />
+	</image>
+	<animation speed="200" loop_mode="pingpong" />
+	<anchor dx="0" dy="0"/>
 </sprite>
 
 <sprite name="pupil-right" type="pupil-right" >
@@ -191,6 +200,7 @@
 	<member name="eyes-normal"/>
 	<member name="pupil-right"/>
 	<member name="pupil-left"/>
+	<member name="eyelid-normal"/>
 	<member name="hair"/>
 	<member name="foot-right"/>
 	<member name="wingright"/>
@@ -345,8 +355,8 @@
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-left" />
-		<member type="arm-right" follow_half_crosshair="true"/>
+		<member type="wingleft" />
+		<member type="wingright" follow_half_crosshair="true"/>
 		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="foot-left" dy="-1" />
@@ -354,8 +364,8 @@
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-left" dx="-1" dy="1" />
-		<member type="arm-right" dx="-1" dy="1" follow_half_crosshair="true"/>
+		<member type="wingleft" dx="-1" dy="1" />
+		<member type="wingright" dx="-1" dy="1" follow_half_crosshair="true"/>
 		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="foot-left" dy="0" />
@@ -363,8 +373,8 @@
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-left" dx="-2" dy="1" />
-		<member type="arm-right" dx="-2" dy="1" follow_half_crosshair="true"/>
+		<member type="wingleft" dx="-2" dy="1" />
+		<member type="wingright" dx="-2" dy="1" follow_half_crosshair="true"/>
 		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="foot-left" dy="1" />
@@ -372,8 +382,8 @@
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-left" dx="-2" dy="0" />
-		<member type="arm-right" dx="-2" dy="0" follow_half_crosshair="true"/>
+		<member type="wingleft" dx="-2" dy="0" />
+		<member type="wingright" dx="-2" dy="0" follow_half_crosshair="true"/>
 		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="foot-left" dy="1" />
@@ -381,8 +391,8 @@
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-left" dx="-2" dy="0" />
-		<member type="arm-right" dx="-2" dy="0" follow_half_crosshair="true"/>
+		<member type="wingleft" dx="-2" dy="0" />
+		<member type="wingright" dx="-2" dy="0" follow_half_crosshair="true"/>
 		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="foot-left" dy="0" />
@@ -390,8 +400,8 @@
 	</frame>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-left" dx="-1" dy="1" />
-		<member type="arm-right" dx="-1" dy="1" follow_half_crosshair="true"/>
+		<member type="wingleft" dx="-1" dy="1" />
+		<member type="wingright" dx="-1" dy="1" follow_half_crosshair="true"/>
 		<member type="pupil-right" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="pupil-left" follow_cursor="true" follow_cursor_limit="100" />
 		<member type="foot-left" dy="-1" />
