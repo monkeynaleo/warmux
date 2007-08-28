@@ -104,6 +104,13 @@
   <contributors>
     <section title="Translations">
       <author>
+        <nickname>orvils</nickname>
+        <name>Raivis Dejus</name>
+	<description>Latvian translation</description>
+	<email>orvils_AT_gmail_DOT_com</email>
+	<country>Latvia</country>
+      </author>
+      <author>
         <nickname>GG</nickname>
         <name>Jérôme Gallard</name>
 	<description>Créole Réyoné translation</description>
