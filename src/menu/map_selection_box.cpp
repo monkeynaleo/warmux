@@ -107,11 +107,11 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   tmp_map_box->AddWidget(previews_box);
 
   // Map information
-  map_name_label = new Label("Map", Rectanglei(-1, -1, -1, -1), Font::FONT_SMALL, 
+  map_name_label = new Label("Map", Point2i(-1, -1), Font::FONT_SMALL, 
 			     Font::FONT_BOLD, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_name_label);
 
-  map_author_label = new Label("Author", Rectanglei(-1, -1, -1, -1), Font::FONT_SMALL, 
+  map_author_label = new Label("Author", Point2i(-1, -1), Font::FONT_SMALL, 
 			       Font::FONT_NORMAL, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_author_label);
 

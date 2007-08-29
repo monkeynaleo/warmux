@@ -79,7 +79,7 @@ public:
   void SetSelectedItemColor(const Color & selected_item) { selected_item_color = selected_item; };
   void SetDefaultItemColor(const Color & default_item) { default_item_color = default_item; };
 
-  ListBox (const Rectanglei &rect, bool always_one_selected_b = true);
+  ListBox (const Point2i &size, bool always_one_selected_b = true);
   ~ListBox();
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;

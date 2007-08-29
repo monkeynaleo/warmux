@@ -32,13 +32,13 @@
 
 ComboBox::ComboBox (const std::string &label,
 		    const std::string &resource_id,
-		    const Rectanglei &rect,
+		    const Point2i &_size,
 		    const std::vector<std::pair<std::string, std::string> > &choices,
 		    const std::string choice):
   m_choices(choices), m_index(0)
 {
-  position =  rect.GetPosition();
-  size = rect.GetSize();
+  position = Point2i(-1, -1);
+  size = _size;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_image = resource_manager.LoadImage(res, resource_id);

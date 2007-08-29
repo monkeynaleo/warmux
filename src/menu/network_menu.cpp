@@ -58,7 +58,7 @@ NetworkMenu::NetworkMenu() :
   waiting_for_server = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-  Rectanglei rectZero(-1, -1, -1, -1);
+  Point2i pointZero(-1, -1);
   Rectanglei stdRect (-1, -1, 130, -1);
 
   Surface window = AppWormux::GetInstance()->video->window;
@@ -98,7 +98,7 @@ NetworkMenu::NetworkMenu() :
 
   Box* tmp_box = new VBox( Rectanglei(-1, -1, 200, -1), false);
 
-  mode = new Label("", rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  mode = new Label("", pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
   if (Network::GetInstance()->IsClient()) {
     // Client Mode
@@ -121,11 +121,11 @@ NetworkMenu::NetworkMenu() :
     tmp_box->AddWidget(player_number);
 
     connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
-                                rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
+                                pointZero, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(connected_players);
 
     initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-                                    rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
+                                    pointZero, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(initialized_players);
   }
 
@@ -150,7 +150,7 @@ NetworkMenu::NetworkMenu() :
   tmp2_box->SetMargin(4);
   tmp2_box->SetBorder(Point2i(0,0));
   line_to_send_tbox = new TextBox(" ",
-                                  Rectanglei(-1, -1, chat_box->GetSizeX()-20, 0),
+                                  Point2i(chat_box->GetSizeX()-20, 0),
                                   Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp2_box->AddWidget(line_to_send_tbox);
 

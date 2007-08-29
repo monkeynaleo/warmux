@@ -33,7 +33,7 @@ protected:
   std::string::size_type cursor_pos;
 public:
   TextBox(const std::string &label,
-          const Rectanglei &rect,
+          const Point2i &size,
           Font::font_size_t fsize,
           Font::font_style_t fstyle);
   ~TextBox() { };

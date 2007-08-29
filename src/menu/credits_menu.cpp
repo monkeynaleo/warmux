@@ -88,11 +88,12 @@ std::string Author::PrettyString(bool with_email) const
 CreditsMenu::CreditsMenu()  :
   Menu("credit/background", vOk)
 {
-  ListBox * lbox_authors = new ListBox( Rectanglei( 30, 30,
-                                               AppWormux::GetInstance()->video->window.GetWidth()-60,
-                                               AppWormux::GetInstance()->video->window.GetHeight()-60-30),
-                                        false);
+  ListBox * lbox_authors = new ListBox(Point2i(AppWormux::GetInstance()->video->window.GetWidth()-60,
+					       AppWormux::GetInstance()->video->window.GetHeight()-60-30),
+				       false);
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
+  lbox_authors->SetXY(30, 30);
+
   widgets.AddWidget(lbox_authors);
 
   PrepareAuthorsList(lbox_authors);

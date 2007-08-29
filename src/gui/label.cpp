@@ -23,7 +23,7 @@
 #include "graphic/text.h"
 
 Label::Label (const std::string &label,
-              const Rectanglei &rect,
+              const Point2i &_size,
               Font::font_size_t fsize,
               Font::font_style_t fstyle,
               const Color& color,
@@ -37,8 +37,8 @@ Label::Label (const std::string &label,
   center(_center),
   shadowed(_shadowed)
 {
-  position = rect.GetPosition();
-  size = rect.GetSize();
+  position = Point2i(-1, -1);
+  size = _size;
   txt_label->SetMaxWidth(GetSizeX());
   size.y = txt_label->GetHeight();
 }

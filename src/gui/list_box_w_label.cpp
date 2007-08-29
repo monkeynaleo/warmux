@@ -26,10 +26,10 @@
 
 //#define SCROLLBAR
 
-ListBoxWithLabel::ListBoxWithLabel (const std::string &label, const Rectanglei &rect) : ListBox(rect)
+ListBoxWithLabel::ListBoxWithLabel (const std::string &label, const Point2i &_size) : ListBox(_size)
 {
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
-  SetSizePosition(rect);
+  SetSizePosition(Rectanglei(-1, -1, _size.x, _size.y));
   txt_label->SetMaxWidth(GetSizeX());
 }
 
