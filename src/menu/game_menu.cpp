@@ -59,7 +59,7 @@ GameMenu::GameMenu() :
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
-  Rectanglei stdRect (0, 0, 130, 30);
+  Rectanglei stdRect (-1, -1, 130, -1);
 
   Surface window = AppWormux::GetInstance()->video->window;
 
@@ -79,7 +79,7 @@ GameMenu::GameMenu() :
   // ################################################
   // ##  MAP SELECTION
   // ################################################
-  map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
+  map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_TOP,
                                             mainBoxWidth, mapBoxHeight));
 
   widgets.AddWidget(map_box);
@@ -87,9 +87,9 @@ GameMenu::GameMenu() :
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
-  game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
+  game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP,
                                       mainBoxWidth/2, OPTIONS_BOX_H), true);
-  game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
+  game_options->AddWidget(new PictureWidget(Rectanglei(-1, -1, 39, 128), "menu/mode_label"));
 
   game_options->SetMargin(50);
 
@@ -108,7 +108,7 @@ GameMenu::GameMenu() :
   opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", stdRect);
   game_options->AddWidget(opt_scroll_on_border);
 
-  game_options->AddWidget(new NullWidget(Rectanglei(0,0,50,10)));
+  game_options->AddWidget(new NullWidget(Rectanglei(-1, -1, 50, 10)));
 
   widgets.AddWidget(game_options);
 

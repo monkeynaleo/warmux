@@ -58,7 +58,7 @@ OptionMenu::OptionMenu() :
 {
   AppWormux * app = AppWormux::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
-  Rectanglei stdRect(-1, -1, 140, 30);
+  Rectanglei stdRect(-1, -1, 140, -1);
 
   /* Graphic options */
   Box * graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H));
@@ -126,7 +126,7 @@ OptionMenu::OptionMenu() :
 
   /* Sound options */
   Box * sound_options = new HBox(Rectanglei(-1, -1, SOUND_W, SOUND_H));
-  sound_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,138), "menu/audio_label"));
+  sound_options->AddWidget(new PictureWidget(Rectanglei(-1, -1, 40, 138), "menu/audio_label"));
 
   Box * all_sound_options = new HBox(Rectanglei(-1, -1, SOUND_W, SOUND_H-20),false);
   all_sound_options->SetMargin(25);
