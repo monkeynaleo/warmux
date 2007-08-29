@@ -54,8 +54,8 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   // What do we want to do ?
   Box* action_box = new HBox(Rectanglei(-1, -1, -1, 64), false);
 
-  previous_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_minus", false);
-  next_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_plus", false);
+  previous_action_bt = new Button(res, "menu/really_big_minus", false);
+  next_action_bt = new Button(res, "menu/really_big_plus", false);
   action_label = new Label(_("Connect to an internet game"),
                            Rectanglei(-1, -1, 250, -1),
                            Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
@@ -79,7 +79,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   // Available on internet ?
   internet_server = new CheckBox(_("Server available on Internet"),
-				 rectZero, true);
+				 -1, true);
   connection_box->AddWidget(internet_server);
 
   connection_box->SetXY(center_x - connection_box->GetSizeX()/2,

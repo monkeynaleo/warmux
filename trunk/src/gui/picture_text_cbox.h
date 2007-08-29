@@ -34,10 +34,10 @@ class PictureTextCBox : public CheckBox
   Surface m_disabled_back;
 
  public:
-  PictureTextCBox(const std::string &label, const std::string &resource_id, const Rectanglei &rect, bool value = true);
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  PictureTextCBox(const std::string& label, const std::string& resource_id, const Point2i& size, bool value = true);
+  void Draw(const Point2i& mousePosition, Surface& surf) const;
 
-  void SetSizePosition(const Rectanglei &rect);
+  void SetSizePosition(const Rectanglei& rect);
 };
 
 #endif

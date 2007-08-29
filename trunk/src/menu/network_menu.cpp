@@ -94,7 +94,7 @@ NetworkMenu::NetworkMenu() :
 
   options_box = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
                                      mainBoxWidth, OPTIONS_BOX_H), true);
-  options_box->AddWidget(new PictureWidget(Rectanglei(-1, -1, 39, 128), "menu/mode_label"));
+  options_box->AddWidget(new PictureWidget(Point2i(39, 128), "menu/mode_label"));
 
   Box* tmp_box = new VBox( Rectanglei(-1, -1, 200, -1), false);
 
@@ -114,7 +114,7 @@ NetworkMenu::NetworkMenu() :
     mode->SetText(_("Server mode"));
     tmp_box->AddWidget(mode);
 
-    player_number = new SpinButton(_("Max number of players:"), rectZero,
+    player_number = new SpinButton(_("Max number of players:"), -1,
                                    GameMode::GetInstance()->max_teams, 1, 2,
                                    GameMode::GetInstance()->max_teams);
 
@@ -154,7 +154,7 @@ NetworkMenu::NetworkMenu() :
                                   Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp2_box->AddWidget(line_to_send_tbox);
 
-  send_txt_bt = new Button(Point2i(0,0), res, "menu/send_txt", true);
+  send_txt_bt = new Button(res, "menu/send_txt", true);
   tmp2_box->AddWidget(send_txt_bt);
 
   chat_box->AddWidget(tmp2_box);

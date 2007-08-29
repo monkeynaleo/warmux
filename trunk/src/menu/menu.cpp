@@ -51,12 +51,12 @@ Menu::Menu(const std::string& bg, t_action _actions) :
     actions_buttons = new HBox( Rectanglei(x, y, 1, 50), false);
 
     if (actions == vOk || actions == vOkCancel) {
-      b_ok = new Button( Point2i(0, 0), res, "menu/valider");
+      b_ok = new Button(res, "menu/valider");
       actions_buttons->AddWidget(b_ok);
     }
 
     if (actions == vCancel  || actions == vOkCancel) {
-      b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
+      b_cancel = new Button(res, "menu/annuler");
       actions_buttons->AddWidget(b_cancel);
     }
 

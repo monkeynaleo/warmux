@@ -55,15 +55,10 @@ ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b):
   selected_item_color(defaultListColor2),
   default_item_color(defaultListColor3)
 {
-  Rectanglei buttonRect;
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-
-  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 12, GetPositionY() + 2);
-  buttonRect.SetSize(10, 5);
-  m_up = new Button(buttonRect, res, "menu/up");
-  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7);
-  m_down = new Button(buttonRect, res, "menu/down");
-
+  m_up = new Button(res, "menu/up");
+  m_down = new Button(res, "menu/down");
+  SetSizePosition(rect);
   resource_manager.UnLoadXMLProfile(res);
 }
 

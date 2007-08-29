@@ -58,7 +58,7 @@ GameMenu::GameMenu() :
   Menu("menu/bg_play")
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-  Rectanglei stdRect (-1, -1, 130, -1);
+  Point2i stdSize(130, -1);
 
   Surface window = AppWormux::GetInstance()->video->window;
 
@@ -88,23 +88,23 @@ GameMenu::GameMenu() :
   // ################################################
   game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP,
                                       mainBoxWidth/2, OPTIONS_BOX_H), true);
-  game_options->AddWidget(new PictureWidget(Rectanglei(-1, -1, 39, 128), "menu/mode_label"));
+  game_options->AddWidget(new PictureWidget(Point2i(39, 128), "menu/mode_label"));
 
   game_options->SetMargin(50);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
-                                                stdRect,
+                                                stdSize,
                                                 TPS_TOUR_MIN, 5,
                                                 TPS_TOUR_MIN, TPS_TOUR_MAX);
   game_options->AddWidget(opt_duration_turn);
 
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
-                                             stdRect,
+                                             stdSize,
                                              100, 5,
                                              5, 200);
   game_options->AddWidget(opt_energy_ini);
 
-  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", stdRect);
+  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", stdSize);
   game_options->AddWidget(opt_scroll_on_border);
 
   game_options->AddWidget(new NullWidget(Rectanglei(-1, -1, 50, 10)));

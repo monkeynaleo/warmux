@@ -100,7 +100,7 @@ ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
   score_lbl = new Label("", Rectanglei(pos, score_size), font_size, font_style);
   AddWidget(score_lbl);
 
-  team_picture = new PictureWidget( Rectanglei(0,0,48,48) );
+  team_picture = new PictureWidget(Point2i(48, 48) );
   AddWidget(team_picture);
 }
 
@@ -199,7 +199,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
     winner_box = new VBox(Rectanglei(x, y, 240, 0), true);
     winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 240,1), Font::FONT_BIG, Font::FONT_BOLD,
                                     white_color, true));
-    PictureWidget* winner_logo = new PictureWidget( Rectanglei(0,0,64,64));
+    PictureWidget* winner_logo = new PictureWidget(Point2i(64, 64));
     winner_logo->SetSurface(first_team->GetBigFlag());
     winner_box->AddWidget(winner_logo);
     winner_box->AddWidget(new Label(first_team->GetName(), Rectanglei(0,0, 240,1), Font::FONT_BIG, Font::FONT_NORMAL,
@@ -222,14 +222,14 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   team_box->SetMargin(DEF_MARGIN);
   team_box->SetBorder(Point2i(DEF_BORDER, DEF_BORDER));
 
-  bt_prev_team = new Button(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)),
-                            res, "menu/really_big_minus");
+  bt_prev_team = new Button(res, "menu/really_big_minus");
+  bt_prev_team->SetSizePosition(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)));
   team_box->AddWidget(bt_prev_team);
 
   pos.SetValues(pos.GetX()+DEF_SIZE, pos.GetY());
 
   HBox* tmp_box = new HBox( Rectanglei(pos, team_size), false);
-  team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
+  team_logo = new PictureWidget(Point2i(48, 48) );
   tmp_box->AddWidget(team_logo);
 
   pos.SetValues(pos.GetX()+team_logo->GetSizeX(),pos.GetY());
@@ -238,8 +238,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
 
   team_box->AddWidget(tmp_box);
   pos.SetValues(pos.GetX()+team_size.GetX(), pos.GetY());
-  bt_next_team = new Button(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)),
-                            res, "menu/really_big_plus");
+  bt_next_team = new Button(res, "menu/really_big_plus");
+  bt_next_team->SetSizePosition(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)));
   team_box->AddWidget(bt_next_team);
 
   widgets.AddWidget(team_box);

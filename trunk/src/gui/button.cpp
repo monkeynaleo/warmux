@@ -23,19 +23,6 @@
 #include "tool/resource_manager.h"
 #include "graphic/sprite.h"
 
-Button::Button (const Rectanglei &rect, const Profile *res_profile,
-                const std::string& resource_id, bool _img_scale) :
-  Widget(rect),
-  hidden(false),
-  img_scale(_img_scale),
-  image(resource_manager.LoadSprite(res_profile,resource_id))
-{
-  image->cache.EnableLastFrameCache();
-
-  if (img_scale)
-    image->ScaleSize(rect.GetSize());
-}
-
 Button::Button (const Point2i &m_position, const Profile *res_profile,
                 const std::string& resource_id, bool _img_scale):
   hidden(false),
@@ -43,6 +30,16 @@ Button::Button (const Point2i &m_position, const Profile *res_profile,
   image(resource_manager.LoadSprite(res_profile,resource_id))
 {
   position = m_position;
+  size = image->GetSize();
+}
+
+Button::Button (const Profile *res_profile,
+                const std::string& resource_id, bool _img_scale):
+  hidden(false),
+  img_scale(_img_scale),
+  image(resource_manager.LoadSprite(res_profile,resource_id))
+{
+  position = Point2i(-1, -1);
   size = image->GetSize();
 }
 

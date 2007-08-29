@@ -47,7 +47,7 @@ class SpinButton : public Widget
   Button *m_plus, *m_minus;
 
  public:
-  SpinButton(const std::string &label, const Rectanglei &rect,
+  SpinButton(const std::string &label, int width,
              int value=0, int step=1, int min_value=-1, int max_value=-1,
              const Color& color = white_color, bool shadowed = true);
   virtual ~SpinButton();

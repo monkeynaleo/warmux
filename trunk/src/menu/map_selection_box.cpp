@@ -37,11 +37,11 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
 
-  AddWidget(new PictureWidget(Rectanglei(-1, -1, 46, -1), "menu/map_label"));
+  AddWidget(new PictureWidget(Point2i(46, -1), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
-  bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus", false);
-  bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus", false);
+  bt_map_plus = new Button(res, "menu/big_plus", false);
+  bt_map_minus = new Button(res, "menu/big_minus", false);
 
   resource_manager.UnLoadXMLProfile(res);
 
@@ -82,20 +82,20 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
     previews_box->AddWidget(new NullWidget(*bt_map_minus));
   }
 
-  map_preview_before2 = new PictureWidget(Rectanglei(-1, -1, map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_before2 = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before2);
 
-  map_preview_before = new PictureWidget(Rectanglei(-1, -1, map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_before = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before);
 
   // Selected map...
-  map_preview_selected = new PictureWidget(Rectanglei(-1, -1, map_preview_width, map_preview_height));
+  map_preview_selected = new PictureWidget(Point2i(map_preview_width, map_preview_height));
   previews_box->AddWidget(map_preview_selected);
 
-  map_preview_after = new PictureWidget(Rectanglei(-1, -1, map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_after = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_after);
 
-  map_preview_after2 = new PictureWidget(Rectanglei(-1, -1, map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_after2 = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_after2);
 
   if (!display_only) {
