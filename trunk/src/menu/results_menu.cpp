@@ -61,7 +61,7 @@ private:
   Label *score_lbl;
   PictureWidget *team_picture;
 public:
-  ResultBox(const Rectanglei &rect, bool _visible,
+  ResultBox(int height, bool _visible,
             const char* type_name,
             Font::font_size_t font_size,
             Font::font_style_t font_style,
@@ -75,14 +75,14 @@ public:
   void SetNoResult();
 };
 
-ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
+ResultBox::ResultBox(int height, bool _visible,
                      const char *type_name,
                      Font::font_size_t font_size,
                      Font::font_style_t font_style,
                      const Point2i& type_size,
                      const Point2i& name_size,
                      const Point2i& score_size)
-  : HBox(rect, _visible)
+  : HBox(height, _visible)
 {
   Point2i pos(0, 0);
   Point2i posZero(0,0);
@@ -196,7 +196,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   if (first_team) {
     jukebox.Play("share","victory");
 
-    winner_box = new VBox(Rectanglei(x, y, 240, 0), true);
+    winner_box = new VBox(240, true);
     winner_box->AddWidget(new Label(_("Winner"), Point2i(240, -1), Font::FONT_BIG, Font::FONT_BOLD,
                                     white_color, true));
     PictureWidget* winner_logo = new PictureWidget(Point2i(64, 64));
@@ -209,6 +209,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
     winner_box->AddWidget(new Label(tmp, Point2i(240, -1), Font::FONT_MEDIUM, Font::FONT_NORMAL,
                                     white_color, true));
 
+    winner_box->SetXY(x, y);
     widgets.AddWidget(winner_box);
   }
 
@@ -218,7 +219,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   x+=260;
 
   //Team selection
-  team_box = new HBox(Rectanglei(x, y, 0, max_height), true);
+  team_box = new HBox(max_height, true);
   team_box->SetMargin(DEF_MARGIN);
   team_box->SetBorder(Point2i(DEF_BORDER, DEF_BORDER));
 
@@ -228,7 +229,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
 
   pos.SetValues(pos.GetX()+DEF_SIZE, pos.GetY());
 
-  HBox* tmp_box = new HBox( Rectanglei(pos, team_size), false);
+  HBox* tmp_box = new HBox(team_size.GetY(), false);
   team_logo = new PictureWidget(Point2i(48, 48) );
   tmp_box->AddWidget(team_logo);
 
@@ -242,43 +243,45 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   bt_next_team->SetSizePosition(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)));
   team_box->AddWidget(bt_next_team);
 
+  team_box->SetXY(x, y);
   widgets.AddWidget(team_box);
 
   resource_manager.UnLoadXMLProfile(res);
 
   //Results
-  statistics_box = new VBox(Rectanglei(x, y+int(1.5*max_height), 510, 0), true);
+  statistics_box = new VBox(510, true);
 
-  most_violent = new ResultBox(Rectanglei(0,0,0, max_height),
+  most_violent = new ResultBox(max_height,
                                false, _("Most violent"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
   statistics_box->AddWidget(most_violent);
 
-  most_useful = new ResultBox(Rectanglei(0,0,0, max_height),
+  most_useful = new ResultBox(max_height,
                                false, _("Most useful"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
   statistics_box->AddWidget(most_useful);
 
-  most_useless = new ResultBox(Rectanglei(0,0,0, max_height),
+  most_useless = new ResultBox(max_height,
                                false, _("Most useless"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
   statistics_box->AddWidget(most_useless);
 
-  biggest_traitor = new ResultBox(Rectanglei(0,0,0, max_height),
+  biggest_traitor = new ResultBox(max_height,
                                   false, _("Most sold-out"), Font::FONT_BIG, Font::FONT_NORMAL,
                                   type_size, name_size, score_size);
   statistics_box->AddWidget(biggest_traitor);
 
-  most_clumsy = new ResultBox(Rectanglei(0,0,0, max_height),
+  most_clumsy = new ResultBox(max_height,
                               false, _("Most clumsy"), Font::FONT_BIG, Font::FONT_NORMAL,
                               type_size, name_size, score_size);
   statistics_box->AddWidget(most_clumsy);
 
-  most_accurate = new ResultBox(Rectanglei(0,0,0, max_height),
+  most_accurate = new ResultBox(max_height,
                                 false, _("Most accurate"), Font::FONT_BIG, Font::FONT_NORMAL,
                                 type_size, name_size, score_size);
   statistics_box->AddWidget(most_accurate);
 
+  statistics_box->SetXY(x, y+int(1.5*max_height));
   widgets.AddWidget(statistics_box);
 
   // Label for graph axes

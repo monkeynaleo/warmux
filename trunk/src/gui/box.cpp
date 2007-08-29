@@ -71,9 +71,9 @@ void Box::Draw(const Point2i &/*mousePosition*/,
 
 // --------------------------------------------------
 
-VBox::VBox(const Rectanglei &rect, bool _visible) : Box(rect, _visible)
+VBox::VBox(int width, bool _visible) : 
+  Box(Rectanglei(-1, -1, width, -1), _visible)
 {
-  size.y = 1;
 }
 
 void VBox::DelFirstWidget()
@@ -132,9 +132,9 @@ void VBox::SetSizePosition(const Rectanglei &rect)
 
 // --------------------------------------------------
 
-HBox::HBox(const Rectanglei &rect, bool _visible) : Box(rect, _visible)
+HBox::HBox(int height, bool _visible) : 
+  Box(Rectanglei(-1, -1, -1, height), _visible)
 {
-  size.x = 1;
 }
 
 void HBox::AddWidget(Widget * a_widget)

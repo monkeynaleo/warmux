@@ -49,7 +49,7 @@ class NetworkTeamsSelectionBox : public HBox
   void NextTeam(uint i, bool check_null_prev_team = true);
 
  public:
-  NetworkTeamsSelectionBox(const Rectanglei &rect);
+  NetworkTeamsSelectionBox(const Point2i &size);
 
   void ValidTeamsSelection();
   Widget* Click(const Point2i &mousePosition, uint button);

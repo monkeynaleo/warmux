@@ -30,7 +30,7 @@
 #include "team/team.h"
 #include "tool/i18n.h"
 
-TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
+TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), true)
 {
   AddWidget(new PictureWidget(Point2i(38, -1), "menu/teams_label"));
 
@@ -42,13 +42,11 @@ TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
 				       2, MAX_NB_TEAMS);
   AddWidget(teams_nb);
 
-  Box * top_n_bottom_team_options = new VBox( Rectanglei(-1, -1,
-                                                         rect.GetSizeX() - teams_nb->GetSizeX() - 60, -1)
-                                              ,false);
+  Box * top_n_bottom_team_options = new VBox(_size.GetX() - teams_nb->GetSizeX() - 60, false);
   top_n_bottom_team_options->SetBorder(Point2i(5,0));
   top_n_bottom_team_options->SetMargin(10);
-  Box * top_team_options = new HBox ( Rectanglei(-1, -1, -1, rect.GetSizeY()/2 - 20), false);
-  Box * bottom_team_options = new HBox ( Rectanglei(-1, -1, -1, rect.GetSizeY()/2 - 20), false);
+  Box * top_team_options = new HBox(_size.GetY()/2 - 20, false);
+  Box * bottom_team_options = new HBox(_size.GetY()/2 - 20, false);
   top_team_options->SetBorder(Point2i(0,0));
   bottom_team_options->SetBorder(Point2i(0,0));
 
@@ -60,7 +58,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
     char num_player[4];
     sprintf(num_player, " %d", i+1);
     player_name += num_player;
-    teams_selections.push_back(new TeamBox(player_name, Rectanglei(-1, -1, team_w_size, rect.GetSizeY()/2)));
+    teams_selections.push_back(new TeamBox(player_name, Point2i(team_w_size, _size.GetY()/2)));
     if ( i%2 == 0)
       top_team_options->AddWidget(teams_selections.at(i));
     else

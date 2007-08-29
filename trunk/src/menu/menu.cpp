@@ -48,7 +48,7 @@ Menu::Menu(const std::string& bg, t_action _actions) :
     actions_buttons = NULL;
   } else {
 
-    actions_buttons = new HBox( Rectanglei(x, y, 1, 50), false);
+    actions_buttons = new HBox(50, false);
 
     if (actions == vOk || actions == vOkCancel) {
       b_ok = new Button(res, "menu/valider");
@@ -60,6 +60,7 @@ Menu::Menu(const std::string& bg, t_action _actions) :
       actions_buttons->AddWidget(b_cancel);
     }
 
+    actions_buttons->SetXY(x, y);
     widgets.AddWidget(actions_buttons);
   }
 

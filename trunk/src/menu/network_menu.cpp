@@ -59,7 +59,6 @@ NetworkMenu::NetworkMenu() :
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i pointZero(-1, -1);
-  Rectanglei stdRect (-1, -1, 130, -1);
 
   Surface window = AppWormux::GetInstance()->video->window;
 
@@ -71,32 +70,29 @@ NetworkMenu::NetworkMenu() :
   // ################################################
   // ##  TEAM SELECTION
   // ################################################
-  team_box = new NetworkTeamsSelectionBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP,
-                                              mainBoxWidth, TEAMS_BOX_H));
+  team_box = new NetworkTeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H));
+  team_box->SetXY(MARGIN_SIDE, MARGIN_TOP);
   widgets.AddWidget(team_box);
 
   // ################################################
   // ##  MAP SELECTION
   // ################################################
   if(Network::GetInstance()->IsServer()) {
-    map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-                                              mainBoxWidth, mapBoxHeight));
+    map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight));
   } else {
-    map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-                                              mainBoxWidth, mapBoxHeight),
-                                   true);
+    map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true);
   }
+  map_box->SetXY(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE);
   widgets.AddWidget(map_box);
 
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
 
-  options_box = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
-                                     mainBoxWidth, OPTIONS_BOX_H), true);
+  options_box = new HBox(OPTIONS_BOX_H, true);
   options_box->AddWidget(new PictureWidget(Point2i(39, 128), "menu/mode_label"));
 
-  Box* tmp_box = new VBox( Rectanglei(-1, -1, 200, -1), false);
+  Box* tmp_box = new VBox(200, false);
 
   mode = new Label("", pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
@@ -130,23 +126,23 @@ NetworkMenu::NetworkMenu() :
   }
 
   options_box->AddWidget(tmp_box);
+  options_box->SetXY(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE);
   widgets.AddWidget(options_box);
 
   // ################################################
   // ##  CHAT BOX
   // ################################################
-  VBox* chat_box = new VBox(Rectanglei(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
-                                       options_box->GetPositionY(),
-                                       mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE,
-                                       OPTIONS_BOX_H), false);
+  VBox* chat_box = new VBox(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, false);
   chat_box->SetBorder(Point2i(0,0));
 
   msg_box = new MsgBox(Rectanglei(-1, -1, 400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
 
+  chat_box->SetXY(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
+		  options_box->GetPositionY());
   chat_box->AddWidget(msg_box);
 
-  HBox* tmp2_box = new HBox(Rectanglei(-1, -1,chat_box->GetSizeX(),16), false);
+  HBox* tmp2_box = new HBox(16, false);
   tmp2_box->SetMargin(4);
   tmp2_box->SetBorder(Point2i(0,0));
   line_to_send_tbox = new TextBox(" ",

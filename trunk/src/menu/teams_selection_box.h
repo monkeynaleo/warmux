@@ -49,7 +49,7 @@ class TeamsSelectionBox : public HBox
   void PrevTeam(int i);
   void NextTeam(int i);
  public:
-  TeamsSelectionBox(const Rectanglei &rect);
+  TeamsSelectionBox(const Point2i &size);
 
   void ValidTeamsSelection();
   Widget* Click(const Point2i &mousePosition, uint button);

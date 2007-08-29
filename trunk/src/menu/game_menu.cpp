@@ -70,24 +70,23 @@ GameMenu::GameMenu() :
   // ################################################
   // ##  TEAM SELECTION
   // ################################################
-  team_box = new TeamsSelectionBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP,
-                                              mainBoxWidth, TEAMS_BOX_H));
-
+  team_box = new TeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H));
+  team_box->SetXY(MARGIN_SIDE, MARGIN_TOP);
   widgets.AddWidget(team_box);
 
   // ################################################
   // ##  MAP SELECTION
   // ################################################
-  map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_TOP,
-                                            mainBoxWidth, mapBoxHeight));
+  map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight));
 
+  map_box->SetXY(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_TOP);
   widgets.AddWidget(map_box);
 
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
-  game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP,
-                                      mainBoxWidth/2, OPTIONS_BOX_H), true);
+  game_options = new HBox(OPTIONS_BOX_H, true);
+  game_options->SetXY(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP);
   game_options->AddWidget(new PictureWidget(Point2i(39, 128), "menu/mode_label"));
 
   game_options->SetMargin(50);
