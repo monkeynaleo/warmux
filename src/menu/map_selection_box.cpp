@@ -30,8 +30,8 @@
 #include "network/network.h"
 #include "tool/resource_manager.h"
 
-MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
-  HBox(rect, true), selected_map_index(0)
+MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
+  HBox(_size.GetY(), true), selected_map_index(0)
 {
   display_only = _display_only;
 
@@ -45,15 +45,15 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   resource_manager.UnLoadXMLProfile(res);
 
-  Box * tmp_map_box = new VBox( Rectanglei(-1, -1, rect.GetSizeX()-63, -1), false);
+  Box * tmp_map_box = new VBox(_size.GetX()-63, false);
   tmp_map_box->SetBorder( Point2i(0,0) );
   tmp_map_box->SetMargin(0);
 
   // compute margin width between previews
-  uint map_preview_height = rect.GetSizeY() -2*10 -40;
+  uint map_preview_height = _size.GetY() -2*10 -40;
 
   // Previews
-  Box* previews_box = new HBox( Rectanglei(-1, -1, -1, map_preview_height+10 ), false);
+  Box* previews_box = new HBox(map_preview_height+10, false);
   previews_box->SetBorder( Point2i(10,0) );
 
    // compute margin width between previews

@@ -48,11 +48,11 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
 
   // Connection related widgets
-  connection_box = new VBox(Rectanglei(-1, -1, 360, -1), false);
+  connection_box = new VBox(360, false);
   connection_box->SetBorder(Point2i(0,0));
 
   // What do we want to do ?
-  Box* action_box = new HBox(Rectanglei(-1, -1, -1, 64), false);
+  Box* action_box = new HBox(64, false);
 
   previous_action_bt = new Button(res, "menu/really_big_minus", false);
   next_action_bt = new Button(res, "menu/really_big_plus", false);

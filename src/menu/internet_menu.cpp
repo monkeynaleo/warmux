@@ -44,10 +44,7 @@ InternetMenu::InternetMenu() :
   
   Rectanglei stdRect(0, 0, 405, 64);
 
-  uint x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - stdRect.GetSizeX()/2;
-  uint y_box = AppWormux::GetInstance()->video->window.GetHeight()/2 - 200;
-
-  connection_box = new VBox(Rectanglei( x_button, y_box, stdRect.GetSizeX(), 1), false);
+  connection_box = new VBox(stdRect.GetSizeX(), false);
   connection_box->SetBorder(Point2i(0,0));
 
   connect_lst = new ListBox( Point2i(stdRect.GetSizeX(), 300), false);
@@ -71,6 +68,8 @@ InternetMenu::InternetMenu() :
   connect->SetSizePosition( stdRect );
   connection_box->AddWidget(connect);
 
+  connection_box->SetXY(AppWormux::GetInstance()->video->window.GetWidth()/2 - stdRect.GetSizeX()/2,
+			AppWormux::GetInstance()->video->window.GetHeight()/2 - 200);
   widgets.AddWidget(connection_box);
 
   resource_manager.UnLoadXMLProfile(res);

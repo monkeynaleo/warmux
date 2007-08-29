@@ -61,12 +61,12 @@ OptionMenu::OptionMenu() :
   Point2i stdSize(140, -1);
 
   /* Graphic options */
-  Box * graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H));
+  Box * graphic_options = new HBox(GRAPHIC_H);
   graphic_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/video_label"));
 
-  Box * top_n_bottom_graphic_options = new VBox(Rectanglei(-1, -1, GRAPHIC_W - 40, GRAPHIC_H),false);
-  Box * top_graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
-  Box * bottom_graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
+  Box * top_n_bottom_graphic_options = new VBox(GRAPHIC_W - 40,false);
+  Box * top_graphic_options = new HBox(GRAPHIC_H / 2 - 20, false);
+  Box * bottom_graphic_options = new HBox(GRAPHIC_H / 2 - 20, false);
   top_graphic_options->SetMargin(25);
   bottom_graphic_options->SetMargin(25);
 
@@ -84,9 +84,9 @@ OptionMenu::OptionMenu() :
   bottom_graphic_options->AddWidget(full_screen);
 
   opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-                                                stdSize,
-                                                50, 5,
-                                                20, 50);
+					  stdSize,
+					  50, 5,
+					  20, 50);
   bottom_graphic_options->AddWidget(opt_max_fps);
 
 
@@ -118,17 +118,17 @@ OptionMenu::OptionMenu() :
   widgets.AddWidget(graphic_options);
 
   /* Language selection */
-  Box * language_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H));
+  Box * language_options = new HBox(GRAPHIC_H);
   language_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/config_label"));
   widgets.AddWidget(language_options);
   lbox_languages = new ListBoxWithLabel(_("Language"), stdSize);
   language_options->AddWidget(lbox_languages);
 
   /* Sound options */
-  Box * sound_options = new HBox(Rectanglei(-1, -1, SOUND_W, SOUND_H));
+  Box * sound_options = new HBox(SOUND_H);
   sound_options->AddWidget(new PictureWidget(Point2i(40, 138), "menu/audio_label"));
 
-  Box * all_sound_options = new HBox(Rectanglei(-1, -1, SOUND_W, SOUND_H-20),false);
+  Box * all_sound_options = new HBox(SOUND_H-20,false);
   all_sound_options->SetMargin(25);
   all_sound_options->SetBorder(Point2i(10,10));
 

@@ -54,7 +54,7 @@ class Box : public WidgetList
 class VBox : public Box
 {
  public:
-  VBox(const Rectanglei &rect, bool _visible=true);
+  VBox(int width, bool _visible=true);
   void DelFirstWidget();
   void SetSizePosition(const Rectanglei &rect);
   void AddWidget(Widget *a_widget);
@@ -63,7 +63,7 @@ class VBox : public Box
 class HBox : public Box
 {
  public:
-  HBox(const Rectanglei &rect, bool _visible=true);
+  HBox(int height, bool _visible=true);
   void SetSizePosition(const Rectanglei &rect);
   void AddWidget(Widget *a_widget);
 };

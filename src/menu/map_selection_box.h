@@ -56,7 +56,7 @@ class MapSelectionBox : public HBox
   void ChangeMap(int index);
   void UpdateMapInfo(PictureWidget * widget, int index, bool selected);
 
-  MapSelectionBox(const Rectanglei &rect, bool _display_only = false);
+  MapSelectionBox(const Point2i &size, bool _display_only = false);
 
   void ValidMapSelection();
   void ChangeMapCallback();
