@@ -46,13 +46,10 @@
 #include "tool/resource_manager.h"
 #include <sstream>
 
-const uint SOUND_X = 30;
-const uint SOUND_Y = 30;
+const uint SOUND_Y = 10;
 const uint SOUND_W = 530;
 const uint SOUND_H = 200;
 
-const uint GRAPHIC_X = 30;
-const uint GRAPHIC_Y = SOUND_Y + SOUND_H + 20;
 const uint GRAPHIC_W = 530;
 const uint GRAPHIC_H = 330;
 
@@ -61,15 +58,15 @@ OptionMenu::OptionMenu() :
 {
   AppWormux * app = AppWormux::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
-  Rectanglei stdRect(0, 0, 140, 30);
+  Rectanglei stdRect(-1, -1, 140, 30);
 
   /* Graphic options */
-  Box * graphic_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
-  graphic_options->AddWidget(new PictureWidget(Rectanglei(0, 0, 40, 136), "menu/video_label"));
+  Box * graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H));
+  graphic_options->AddWidget(new PictureWidget(Rectanglei(-1, -1, 40, 136), "menu/video_label"));
 
-  Box * top_n_bottom_graphic_options = new VBox(Rectanglei(0, 0, GRAPHIC_W - 40, GRAPHIC_H),false);
-  Box * top_graphic_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
-  Box * bottom_graphic_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
+  Box * top_n_bottom_graphic_options = new VBox(Rectanglei(-1, -1, GRAPHIC_W - 40, GRAPHIC_H),false);
+  Box * top_graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
+  Box * bottom_graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
   top_graphic_options->SetMargin(25);
   bottom_graphic_options->SetMargin(25);
 
@@ -121,17 +118,17 @@ OptionMenu::OptionMenu() :
   widgets.AddWidget(graphic_options);
 
   /* Language selection */
-  Box * language_options = new HBox(Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
-  language_options->AddWidget(new PictureWidget(Rectanglei(0, 0, 40, 136), "menu/config_label"));
+  Box * language_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H));
+  language_options->AddWidget(new PictureWidget(Rectanglei(-1, -1, 40, 136), "menu/config_label"));
   widgets.AddWidget(language_options);
   lbox_languages = new ListBoxWithLabel(_("Language"), stdRect);
   language_options->AddWidget(lbox_languages);
 
   /* Sound options */
-  Box * sound_options = new HBox(Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H));
+  Box * sound_options = new HBox(Rectanglei(-1, -1, SOUND_W, SOUND_H));
   sound_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,138), "menu/audio_label"));
 
-  Box * all_sound_options = new HBox(Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H-20),false);
+  Box * all_sound_options = new HBox(Rectanglei(-1, -1, SOUND_W, SOUND_H-20),false);
   all_sound_options->SetMargin(25);
   all_sound_options->SetBorder(Point2i(10,10));
 
@@ -167,11 +164,13 @@ OptionMenu::OptionMenu() :
   /* Center the widgets */
   uint center_x = app->video->window.GetWidth()/2;
 
-  sound_options->SetXY(center_x - sound_options->GetSizeX()/2, sound_options->GetPositionY());
+  sound_options->SetXY(center_x - sound_options->GetSizeX()/2, SOUND_Y);
+
   language_options->SetXY(center_x - (graphic_options->GetSizeX() + language_options->GetSizeX() + 20)/2,
-			  language_options->GetPositionY());
+			  sound_options->GetPositionY() + sound_options->GetSizeY() + 10);
+
   graphic_options->SetXY(language_options->GetPositionX() + language_options->GetSizeX() + 10, 
-			 graphic_options->GetPositionY());
+			 language_options->GetPositionY());
   
   // Values initialization
 
