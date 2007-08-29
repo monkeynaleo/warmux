@@ -58,8 +58,8 @@ NetworkMenu::NetworkMenu() :
   waiting_for_server = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-  Rectanglei rectZero(0, 0, 0, 0);
-  Rectanglei stdRect (0, 0, 130, 30);
+  Rectanglei rectZero(-1, -1, -1, -1);
+  Rectanglei stdRect (-1, -1, 130, -1);
 
   Surface window = AppWormux::GetInstance()->video->window;
 
@@ -94,9 +94,9 @@ NetworkMenu::NetworkMenu() :
 
   options_box = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
                                      mainBoxWidth, OPTIONS_BOX_H), true);
-  options_box->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
+  options_box->AddWidget(new PictureWidget(Rectanglei(-1, -1, 39, 128), "menu/mode_label"));
 
-  Box* tmp_box = new VBox( Rectanglei(0,0, 200,0), false);
+  Box* tmp_box = new VBox( Rectanglei(-1, -1, 200, -1), false);
 
   mode = new Label("", rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
@@ -141,16 +141,16 @@ NetworkMenu::NetworkMenu() :
                                        OPTIONS_BOX_H), false);
   chat_box->SetBorder(Point2i(0,0));
 
-  msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
+  msg_box = new MsgBox(Rectanglei(-1, -1, 400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
 
   chat_box->AddWidget(msg_box);
 
-  HBox* tmp2_box = new HBox(Rectanglei(0,0,chat_box->GetSizeX(),16), false);
+  HBox* tmp2_box = new HBox(Rectanglei(-1, -1,chat_box->GetSizeX(),16), false);
   tmp2_box->SetMargin(4);
   tmp2_box->SetBorder(Point2i(0,0));
   line_to_send_tbox = new TextBox(" ",
-                                  Rectanglei(0, 0, chat_box->GetSizeX()-20, 0),
+                                  Rectanglei(-1, -1, chat_box->GetSizeX()-20, 0),
                                   Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp2_box->AddWidget(line_to_send_tbox);
 

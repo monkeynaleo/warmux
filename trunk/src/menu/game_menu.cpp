@@ -58,7 +58,6 @@ GameMenu::GameMenu() :
   Menu("menu/bg_play")
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-  Rectanglei rectZero(0, 0, 0, 0);
   Rectanglei stdRect (-1, -1, 130, -1);
 
   Surface window = AppWormux::GetInstance()->video->window;
