@@ -50,8 +50,7 @@ InternetMenu::InternetMenu() :
   connect_lst = new ListBox( Point2i(stdRect.GetSizeX(), 300), false);
   connection_box->AddWidget(connect_lst);
 
-  refresh = new ButtonText( Point2i(0,0),
-                            res, "main_menu/button",
+  refresh = new ButtonText( res, "main_menu/button",
                             _("Refresh"), // Refresh the list of available hosts
                             Font::FONT_BIG, 
                             Font::FONT_NORMAL);
@@ -59,8 +58,7 @@ InternetMenu::InternetMenu() :
   refresh->SetSizePosition( stdRect );
   connection_box->AddWidget(refresh);
 
-  connect = new ButtonText( Point2i(0,0),
-                            res, "main_menu/button",
+  connect = new ButtonText( res, "main_menu/button",
                             _("Connect !"),
                             Font::FONT_BIG, 
                             Font::FONT_NORMAL);

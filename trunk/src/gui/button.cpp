@@ -23,16 +23,6 @@
 #include "tool/resource_manager.h"
 #include "graphic/sprite.h"
 
-Button::Button (const Point2i &m_position, const Profile *res_profile,
-                const std::string& resource_id, bool _img_scale):
-  hidden(false),
-  img_scale(_img_scale),
-  image(resource_manager.LoadSprite(res_profile,resource_id))
-{
-  position = m_position;
-  size = image->GetSize();
-}
-
 Button::Button (const Profile *res_profile,
                 const std::string& resource_id, bool _img_scale):
   hidden(false),

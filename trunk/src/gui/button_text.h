@@ -38,8 +38,7 @@ private:
   Text *text;
 
 public:
-  ButtonText(const Point2i& _position,
-             const Profile *res_profile,
+  ButtonText(const Profile *res_profile,
              const std::string& resource_id,
              const std::string &new_text,
              Font::font_size_t font_size,

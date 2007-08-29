@@ -70,39 +70,38 @@ MainMenu::MainMenu() :
   if(Config::GetInstance()->IsNetworkActivated())
     dy = std::max((y2-y)/4, button_height);
 
-  play = new ButtonText(Point2i(x_button, y),
-                        res, "main_menu/button",
+  play = new ButtonText(res, "main_menu/button",
                         _("Play"),
                         Font::FONT_LARGE, Font::FONT_NORMAL);
+  play->SetXY(x_button, y);
   y += dy;
 
   if(Config::GetInstance()->IsNetworkActivated()) {
-    network = new ButtonText( Point2i(x_button, y),
-                              res, "main_menu/button",
-                              _("Network Game"),
-                              Font::FONT_LARGE, Font::FONT_NORMAL );
+    network = new ButtonText(res, "main_menu/button",
+                             _("Network Game"),
+                             Font::FONT_LARGE, Font::FONT_NORMAL );
+    network->SetXY(x_button, y);
     y += dy;
   } else {
     network = NULL;
   }
 
-  options = new ButtonText(Point2i(x_button, y),
-                           res, "main_menu/button",
+  options = new ButtonText(res, "main_menu/button",
                            _("Options"),
                            Font::FONT_LARGE, Font::FONT_NORMAL);
+  options->SetXY(x_button, y);
   y += dy;
 
-  infos =  new ButtonText(Point2i(x_button, y),
-                          res, "main_menu/button",
-                          _("Credits"),
-                          Font::FONT_LARGE, Font::FONT_NORMAL);
+  infos = new ButtonText(res, "main_menu/button",
+			 _("Credits"),
+			 Font::FONT_LARGE, Font::FONT_NORMAL);
+  infos->SetXY(x_button, y);
   y += dy;
 
-  quit =  new ButtonText(Point2i(x_button, y),
-                         res, "main_menu/button",
+  quit =  new ButtonText(res, "main_menu/button",
                          _("Quit"),
                          Font::FONT_LARGE, Font::FONT_NORMAL);
-
+  quit->SetXY(x_button, y);
   widgets.AddWidget(play);
   if(Config::GetInstance()->IsNetworkActivated())
     widgets.AddWidget(network);
