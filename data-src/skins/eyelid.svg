@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="90"
+   height="7.3511434"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   version="1.0"
+   sodipodi:docbase="/home/yekcim/Desktop"
+   sodipodi:docname="eyelid.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="TRUE"
+   inkscape:export-filename="/home/yekcim/Desktop/eyelid.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="9.0666667"
+     inkscape:cx="40.588235"
+     inkscape:cy="3.5"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     width="90px"
+     height="7.3511434px"
+     inkscape:window-width="910"
+     inkscape:window-height="626"
+     inkscape:window-x="193"
+     inkscape:window-y="129" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-95.974524,-300.11517)">
+    <path
+       id="path5765"
+       d="M 96.50182,304.22605 C 96.6601,306.24051 97.95054,307.6804 99.38227,307.44012 C 100.81402,307.19983 101.84755,305.36989 101.68928,303.35544 C 101.531,301.34098 100.24056,299.90107 98.80883,300.14136 C 97.37708,300.38165 96.34355,302.21159 96.50182,304.22605 z "
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#0f0f0f;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1" />
+    <path
+       id="path5767"
+       d="M 100.75468,304.40021 C 100.85738,305.7074 101.76933,306.62926 102.79028,306.45791 C 103.81125,306.28656 104.55649,305.08659 104.45378,303.77938 C 104.35108,302.47219 103.43913,301.55034 102.41817,301.72168 C 101.39722,301.89304 100.65196,303.093 100.75468,304.40021 z "
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#0f0f0f;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1" />
+    <path
+       style="fill:#ffd5d5;fill-opacity:1;fill-rule:nonzero;stroke:#0f0f0f;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1"
+       d="M 99.06828,300.55267 C 98.911077,300.5543 98.757551,300.56831 98.59953,300.61517 C 97.33537,300.99 96.57393,302.72746 96.91203,304.49017 C 97.25013,306.25288 98.55412,307.36501 99.81828,306.99017 C 100.50304,306.78714 101.02602,306.1858 101.31828,305.39642 C 101.644,305.91274 102.16602,306.2089 102.72453,306.11517 C 103.59758,305.96864 104.25038,304.92728 104.16203,303.80267 C 104.07366,302.67805 103.28508,301.90614 102.41203,302.05267 C 102.0004,302.12175 101.66739,302.39185 101.41203,302.77142 C 101.03462,301.42967 100.07972,300.54218 99.06828,300.55267 z "
+       id="path5769" />
+  </g>
+</svg>
