@@ -48,7 +48,7 @@ class Label : public Widget{
 
  public:
   Label(const std::string &label,
-        const Rectanglei &rect,
+        const Point2i &size,
         Font::font_size_t font_size,
         Font::font_style_t font_style,
         const Color& color = white_color,

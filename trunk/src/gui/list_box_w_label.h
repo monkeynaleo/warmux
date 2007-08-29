@@ -35,7 +35,7 @@ class ListBoxWithLabel : public ListBox
   Text *txt_label;
 
 public:
-  ListBoxWithLabel (const std::string &label, const Rectanglei &rect);
+  ListBoxWithLabel (const std::string &label, const Point2i &size);
   ~ListBoxWithLabel();
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;

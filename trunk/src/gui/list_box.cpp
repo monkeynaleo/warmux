@@ -31,7 +31,7 @@ ListBoxItem::ListBoxItem(const std::string& _label,
                          Font::font_style_t fstyle,
                          const std::string& _value,
                          const Color& color) :
-  Label(_label, Rectanglei(0,0,0,0), fsize, fstyle, color),
+  Label(_label, Point2i(0,0), fsize, fstyle, color),
   value(_value)
 {
 }
@@ -41,8 +41,8 @@ const std::string& ListBoxItem::GetLabel() const
   return txt_label->GetText();
 }
 
-ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b):
-  Widget(rect),
+ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
+  Widget(Rectanglei(-1, -1, _size.x, _size.y)),
   always_one_selected(always_one_selected_b),
   scrolling(false),
   first_visible_item(0),
@@ -58,7 +58,7 @@ ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b):
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_up = new Button(res, "menu/up");
   m_down = new Button(res, "menu/down");
-  SetSizePosition(rect);
+  SetSizePosition(Rectanglei(-1, -1, _size.x, _size.y));
   resource_manager.UnLoadXMLProfile(res);
 }
 

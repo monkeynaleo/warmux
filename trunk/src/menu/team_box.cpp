@@ -42,16 +42,16 @@ TeamBox::TeamBox(const std::string& _player_name, const Rectanglei& rect) :
   Box * tmp_box = new VBox(Rectanglei(-1, -1, rect.GetSizeX()-80, 80), false);
   tmp_box->SetMargin(2);
   tmp_box->SetBorder(Point2i(0,0));
-  team_name = new Label(" ", Rectanglei(-1, -1,rect.GetSizeX()-80, -1),
+  team_name = new Label(" ", Point2i(rect.GetSizeX()-80, -1),
                         Font::FONT_MEDIUM, Font::FONT_BOLD,
                         dark_gray_color, false, false);
 
   Box * tmp_player_box = new HBox(Rectanglei(-1, -1, -1,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetBorder(Point2i(0,0));
-  tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(-1, -1,(rect.GetSizeX()-80)-100, -1),
+  tmp_player_box->AddWidget(new Label(_("Head commander"), Point2i((rect.GetSizeX()-80)-100, -1),
                                       Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
-  player_name = new TextBox(_player_name, Rectanglei(-1, -1, 100, -1),
+  player_name = new TextBox(_player_name, Point2i(100, -1),
                             Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp_player_box->AddWidget(player_name);
   previous_name = " ";

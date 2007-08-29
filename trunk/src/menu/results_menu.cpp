@@ -90,14 +90,14 @@ ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
   margin = DEF_MARGIN;
   border.SetValues(DEF_BORDER, DEF_BORDER);
 
-  AddWidget(new Label(type_name, Rectanglei(pos, type_size), font_size, font_style));
+  AddWidget(new Label(type_name, type_size, font_size, font_style));
 
   pos.SetValues(pos.GetX()+type_size.GetX(), pos.GetY());
-  name_lbl = new Label("", Rectanglei(pos, name_size), font_size, font_style);
+  name_lbl = new Label("", name_size, font_size, font_style);
   AddWidget(name_lbl);
 
   pos.SetValues(pos.GetX()+name_size.GetX(), pos.GetY());
-  score_lbl = new Label("", Rectanglei(pos, score_size), font_size, font_style);
+  score_lbl = new Label("", score_size, font_size, font_style);
   AddWidget(score_lbl);
 
   team_picture = new PictureWidget(Point2i(48, 48) );
@@ -197,16 +197,16 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
     jukebox.Play("share","victory");
 
     winner_box = new VBox(Rectanglei(x, y, 240, 0), true);
-    winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 240,1), Font::FONT_BIG, Font::FONT_BOLD,
+    winner_box->AddWidget(new Label(_("Winner"), Point2i(240, -1), Font::FONT_BIG, Font::FONT_BOLD,
                                     white_color, true));
     PictureWidget* winner_logo = new PictureWidget(Point2i(64, 64));
     winner_logo->SetSurface(first_team->GetBigFlag());
     winner_box->AddWidget(winner_logo);
-    winner_box->AddWidget(new Label(first_team->GetName(), Rectanglei(0,0, 240,1), Font::FONT_BIG, Font::FONT_NORMAL,
+    winner_box->AddWidget(new Label(first_team->GetName(), Point2i(240, -1), Font::FONT_BIG, Font::FONT_NORMAL,
                                     white_color, true));
 
     std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
-    winner_box->AddWidget(new Label(tmp, Rectanglei(0,0, 240,1), Font::FONT_MEDIUM, Font::FONT_NORMAL,
+    winner_box->AddWidget(new Label(tmp, Point2i(240, -1), Font::FONT_MEDIUM, Font::FONT_NORMAL,
                                     white_color, true));
 
     widgets.AddWidget(winner_box);
@@ -233,7 +233,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   tmp_box->AddWidget(team_logo);
 
   pos.SetValues(pos.GetX()+team_logo->GetSizeX(),pos.GetY());
-  team_name = new Label("", Rectanglei(pos, team_size-48), Font::FONT_BIG, Font::FONT_NORMAL);
+  team_name = new Label("", team_size-48, Font::FONT_BIG, Font::FONT_NORMAL);
   tmp_box->AddWidget(team_name);
 
   team_box->AddWidget(tmp_box);
@@ -282,7 +282,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   widgets.AddWidget(statistics_box);
 
   // Label for graph axes
-  //widgets.AddWidget(new Label(_("Time"), Rectanglei(GRAPH_X, GRAPH_Y+8, GRAPH_W, 32),
+  //widgets.AddWidget(new Label(_("Time"), Point2i(GRAPH_W, 32),
   //                            Font::FONT_SMALL, Font::FONT_BOLD, black_color, true, false));
 }
 

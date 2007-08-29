@@ -42,7 +42,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   Menu("menu/bg_network", vOkCancel)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-  Rectanglei rectZero(-1, -1, -1, -1);
+  Point2i pointZero(-1, -1);
 
   uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
@@ -57,7 +57,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   previous_action_bt = new Button(res, "menu/really_big_minus", false);
   next_action_bt = new Button(res, "menu/really_big_plus", false);
   action_label = new Label(_("Connect to an internet game"),
-                           Rectanglei(-1, -1, 250, -1),
+                           Point2i(250, -1),
                            Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
   action_box->AddWidget(previous_action_bt);
   action_box->AddWidget(action_label);
@@ -66,15 +66,15 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   connection_box->AddWidget(action_box);
 
   // Server address
-  server_address_label = new Label(_("Server address:"), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  server_address_label = new Label(_("Server address:"), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(server_address_label);
-  server_address = new TextBox(Config::GetInstance()->GetNetworkHost(), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  server_address = new TextBox(Config::GetInstance()->GetNetworkHost(), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(server_address);
 
   // Server port
-  port_number_label = new Label(_("Port:"), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number_label = new Label(_("Port:"), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(port_number_label);
-  port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(port_number);
 
   // Available on internet ?

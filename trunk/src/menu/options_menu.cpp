@@ -58,7 +58,6 @@ OptionMenu::OptionMenu() :
 {
   AppWormux * app = AppWormux::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
-  Rectanglei stdRect(-1, -1, 140, -1);
   Point2i stdSize(140, -1);
 
   /* Graphic options */
@@ -108,7 +107,7 @@ OptionMenu::OptionMenu() :
 
       video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
   }
-  cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", stdRect,
+  cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", stdSize,
 				 video_resolutions, current_resolution);
   bottom_graphic_options->AddWidget(cbox_video_mode);
 
@@ -122,7 +121,7 @@ OptionMenu::OptionMenu() :
   Box * language_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H));
   language_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/config_label"));
   widgets.AddWidget(language_options);
-  lbox_languages = new ListBoxWithLabel(_("Language"), stdRect);
+  lbox_languages = new ListBoxWithLabel(_("Language"), stdSize);
   language_options->AddWidget(lbox_languages);
 
   /* Sound options */
@@ -156,7 +155,7 @@ OptionMenu::OptionMenu() :
     current_sound_freq = "11025";
 
   cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
-				 stdRect, sound_freqs, current_sound_freq);
+				 stdSize, sound_freqs, current_sound_freq);
   all_sound_options->AddWidget(cbox_sound_freq);
 
   sound_options->AddWidget(all_sound_options);

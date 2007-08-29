@@ -50,7 +50,7 @@ InternetMenu::InternetMenu() :
   connection_box = new VBox(Rectanglei( x_button, y_box, stdRect.GetSizeX(), 1), false);
   connection_box->SetBorder(Point2i(0,0));
 
-  connect_lst = new ListBox( Rectanglei(0, 0, stdRect.GetSizeX(), 300), false);
+  connect_lst = new ListBox( Point2i(stdRect.GetSizeX(), 300), false);
   connection_box->AddWidget(connect_lst);
 
   refresh = new ButtonText( Point2i(0,0),
