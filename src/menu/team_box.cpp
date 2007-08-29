@@ -36,7 +36,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Rectanglei& rect) :
 
   SetMargin(2);
 
-  team_logo = new PictureWidget( Rectanglei(-1, -1, 48, 48) );
+  team_logo = new PictureWidget(Point2i(48, 48) );
   AddWidget(team_logo);
 
   Box * tmp_box = new VBox(Rectanglei(-1, -1, rect.GetSizeX()-80, 80), false);
@@ -56,7 +56,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Rectanglei& rect) :
   tmp_player_box->AddWidget(player_name);
   previous_name = " ";
 
-  nb_characters = new SpinButton(_("Number of characters"), Rectanglei(-1, -1, -1, -1),
+  nb_characters = new SpinButton(_("Number of characters"), -1,
                                  6,1,1,10,
                                  dark_gray_color, false);
 

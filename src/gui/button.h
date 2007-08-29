@@ -42,9 +42,8 @@ protected:
   Sprite *image;
 
 public:
-  Button (const Rectanglei &rect,
-          const Profile *res_profile, const std::string& resource_id,
-          bool img_scale = true);
+  Button (const Profile *res_profile, const std::string& resource_id,
+          bool img_scale = false);
   Button (const Point2i &position,
           const Profile *res_profile, const std::string& resource_id,
           bool img_scale = false);

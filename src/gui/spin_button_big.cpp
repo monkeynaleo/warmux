@@ -24,11 +24,11 @@
 #include "tool/resource_manager.h"
 #include "graphic/text.h"
 
-SpinButtonBig::SpinButtonBig (const std::string &label, const Rectanglei &rect,
+SpinButtonBig::SpinButtonBig (const std::string &label, const Point2i &_size,
                               int value, int step, int min_value, int max_value)
 {
-  position =  rect.GetPosition();
-  size = rect.GetSize();
+  position = Point2i(-1, -1);
+  size = _size;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 

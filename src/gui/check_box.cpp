@@ -25,25 +25,25 @@
 #include "graphic/sprite.h"
 #include "tool/resource_manager.h"
 
-CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value):
+CheckBox::CheckBox(const std::string& label, int width, bool value):
   txt_label(new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL)),
   m_value(value),
   m_checked_image(NULL),
   hidden(false)
 {
-  Init(rect);
+  Init(width);
 }
 
-CheckBox::CheckBox(Text *text, const Rectanglei &rect, bool value):
+CheckBox::CheckBox(Text *text, int width, bool value):
   txt_label(text),
   m_value(value),
   m_checked_image(NULL),
   hidden(false)
 {
-  Init(rect);
+  Init(width);
 }
 
-void CheckBox::Init(const Rectanglei &rect)
+void CheckBox::Init(int width)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_checked_image = resource_manager.LoadSprite( res, "menu/check");
@@ -51,10 +51,9 @@ void CheckBox::Init(const Rectanglei &rect)
 
   m_checked_image->cache.EnableLastFrameCache();
 
-  SetPosition( rect.GetPosition() );
-  SetSize( rect.GetSize() );
-
-  SetSizeY( (*Font::GetInstance(Font::FONT_SMALL)).GetHeight() );
+  position = Point2i(-1,-1);
+  size.x = width;
+  size.y = txt_label->GetHeight();
 }
 
 CheckBox::~CheckBox()

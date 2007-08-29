@@ -24,14 +24,16 @@
 #include "graphic/sprite.h"
 #include "tool/resource_manager.h"
 
-PictureWidget::PictureWidget (const Rectanglei &rect) : Widget(rect)
+PictureWidget::PictureWidget (const Point2i& _size)
 {
+  size = _size;
   spr = NULL;
   disabled = false;
 }
 
-PictureWidget::PictureWidget (const Rectanglei &rect, const std::string& resource_id) : Widget(rect)
+PictureWidget::PictureWidget (const Point2i& _size, const std::string& resource_id)
 {
+  size = _size;
   spr = NULL;
   disabled = false;
 

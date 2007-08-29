@@ -52,7 +52,7 @@ class SpinButtonWithPicture : public Widget
  public:
   SpinButtonWithPicture(const std::string &label,
                         const std::string &resource_id,
-                        const Rectanglei &rect,
+                        const Point2i &size,
                         int value=0, int step=1,
                         int min_value=-1, int max_value=-1);
   virtual ~SpinButtonWithPicture();

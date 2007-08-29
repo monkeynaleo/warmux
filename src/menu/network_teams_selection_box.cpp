@@ -34,12 +34,12 @@
 
 NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
 {
-  AddWidget(new PictureWidget(Rectanglei(-1, -1, 38, -1), "menu/teams_label"));
+  AddWidget(new PictureWidget(Point2i(38, -1), "menu/teams_label"));
 
   // How many teams ?
   local_teams_nb = new SpinButtonWithPicture(_("Local teams:"),
 					     "menu/team_number",
-					     Rectanglei(-1, -1, 130, -1),
+					     Point2i(130, -1),
 					     0, 1,
 					     0, NMAX_NB_TEAMS);
   AddWidget(local_teams_nb);

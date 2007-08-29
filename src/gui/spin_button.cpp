@@ -25,12 +25,12 @@
 #include "tool/resource_manager.h"
 #include "button.h"
 
-SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
+SpinButton::SpinButton (const std::string &label, int width,
                         int value, int step, int min_value, int max_value,
                         const Color& color, bool _shadowed)
 {
-  position =  rect.GetPosition();
-  size = rect.GetSize();
+  position = Point2i(-1, -1);
+  size.x = width;
   size.y = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
   shadowed = _shadowed;
 

@@ -28,14 +28,14 @@
 #include "graphic/polygon_generator.h"
 #include "tool/affine_transform.h"
 
-SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label,
-                                              const std::string &resource_id,
-                                              const Rectanglei &rect,
+SpinButtonWithPicture::SpinButtonWithPicture (const std::string& label,
+                                              const std::string& resource_id,
+                                              const Point2i& _size,
                                               int value, int step,
                                               int min_value, int max_value)
 {
-  position =  rect.GetPosition();
-  size = rect.GetSize();
+  position = Point2i(-1, -1);
+  size = _size;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_image = resource_manager.LoadImage(res, resource_id);

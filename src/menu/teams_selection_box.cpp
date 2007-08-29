@@ -32,12 +32,12 @@
 
 TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
 {
-  AddWidget(new PictureWidget(Rectanglei(-1, -1, 38, -1), "menu/teams_label"));
+  AddWidget(new PictureWidget(Point2i(38, -1), "menu/teams_label"));
 
   // How many teams ?
   teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
 				       "menu/team_number",
-				       Rectanglei(-1, -1, 130, -1),
+				       Point2i(130, -1),
 				       2, 1,
 				       2, MAX_NB_TEAMS);
   AddWidget(teams_nb);
@@ -60,7 +60,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
     char num_player[4];
     sprintf(num_player, " %d", i+1);
     player_name += num_player;
-    teams_selections.push_back(new TeamBox(player_name, Rectanglei(-1, -1, team_w_size, -1)));
+    teams_selections.push_back(new TeamBox(player_name, Rectanglei(-1, -1, team_w_size, rect.GetSizeY()/2)));
     if ( i%2 == 0)
       top_team_options->AddWidget(teams_selections.at(i));
     else

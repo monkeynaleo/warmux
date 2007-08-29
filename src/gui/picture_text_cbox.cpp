@@ -30,8 +30,9 @@
 
 PictureTextCBox::PictureTextCBox(const std::string &label,
                                  const std::string &resource_id,
-                                 const Rectanglei &rect, bool value):
-  CheckBox(new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false), rect, value)
+                                 const Point2i &_size, bool value):
+  CheckBox(new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false),
+	   _size.x, value)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_image = resource_manager.LoadImage(res, resource_id);

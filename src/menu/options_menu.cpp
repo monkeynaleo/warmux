@@ -59,10 +59,11 @@ OptionMenu::OptionMenu() :
   AppWormux * app = AppWormux::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   Rectanglei stdRect(-1, -1, 140, -1);
+  Point2i stdSize(140, -1);
 
   /* Graphic options */
   Box * graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H));
-  graphic_options->AddWidget(new PictureWidget(Rectanglei(-1, -1, 40, 136), "menu/video_label"));
+  graphic_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/video_label"));
 
   Box * top_n_bottom_graphic_options = new VBox(Rectanglei(-1, -1, GRAPHIC_W - 40, GRAPHIC_H),false);
   Box * top_graphic_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H / 2 - 20), false);
@@ -71,20 +72,20 @@ OptionMenu::OptionMenu() :
   bottom_graphic_options->SetMargin(25);
 
   // Various options
-  opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", stdRect);
+  opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", stdSize);
   top_graphic_options->AddWidget(opt_display_wind_particles);
 
-  opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", stdRect);
+  opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", stdSize);
   top_graphic_options->AddWidget(opt_display_energy);
 
-  opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", stdRect);
+  opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", stdSize);
   top_graphic_options->AddWidget(opt_display_name);
 
-  full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdRect);
+  full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdSize);
   bottom_graphic_options->AddWidget(full_screen);
 
   opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-                                                stdRect,
+                                                stdSize,
                                                 50, 5,
                                                 20, 50);
   bottom_graphic_options->AddWidget(opt_max_fps);
@@ -119,23 +120,23 @@ OptionMenu::OptionMenu() :
 
   /* Language selection */
   Box * language_options = new HBox(Rectanglei(-1, -1, GRAPHIC_W, GRAPHIC_H));
-  language_options->AddWidget(new PictureWidget(Rectanglei(-1, -1, 40, 136), "menu/config_label"));
+  language_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/config_label"));
   widgets.AddWidget(language_options);
   lbox_languages = new ListBoxWithLabel(_("Language"), stdRect);
   language_options->AddWidget(lbox_languages);
 
   /* Sound options */
   Box * sound_options = new HBox(Rectanglei(-1, -1, SOUND_W, SOUND_H));
-  sound_options->AddWidget(new PictureWidget(Rectanglei(-1, -1, 40, 138), "menu/audio_label"));
+  sound_options->AddWidget(new PictureWidget(Point2i(40, 138), "menu/audio_label"));
 
   Box * all_sound_options = new HBox(Rectanglei(-1, -1, SOUND_W, SOUND_H-20),false);
   all_sound_options->SetMargin(25);
   all_sound_options->SetBorder(Point2i(10,10));
 
-  opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", stdRect);
+  opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", stdSize);
   all_sound_options->AddWidget(opt_music);
 
-  opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", stdRect);
+  opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", stdSize);
   all_sound_options->AddWidget(opt_sound_effects);
 
 

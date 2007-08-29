@@ -44,7 +44,7 @@ class SpinButtonBig : public Widget
   Button *m_plus, *m_minus;
 
  public:
-  SpinButtonBig(const std::string &label, const Rectanglei &rect,
+  SpinButtonBig(const std::string &label, const Point2i &size,
                 int value=0, int step=1, int min_value=-1, int max_value=-1);
   virtual ~SpinButtonBig();
 

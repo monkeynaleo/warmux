@@ -35,6 +35,7 @@ class CheckBox : public Widget
  CheckBox(const CheckBox&);
  CheckBox operator=(const CheckBox&);
  /**********************************************/
+ void Init(int width);
 
  protected:
   Text *txt_label;
@@ -43,10 +44,10 @@ class CheckBox : public Widget
   bool hidden;
 
  public:
-  CheckBox(const std::string &label, const Rectanglei &rect, bool value = true);
-  CheckBox(Text* text, const Rectanglei &rect, bool value = true);
-  void Init(const Rectanglei &rect);
+  CheckBox(const std::string &label, int width, bool value = true);
+  CheckBox(Text* text, int width, bool value = true);
   ~CheckBox();
+
   void Draw(const Point2i &mousePosition, Surface& surf) const;
   Widget* Click(const Point2i&, uint) { return this; };
   Widget* ClickUp(const Point2i &mousePosition, uint button);
