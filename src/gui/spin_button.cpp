@@ -56,8 +56,10 @@ SpinButton::SpinButton (const std::string &label, int width,
 
   uint margin = 5;
 
-  m_plus = new Button( Point2i(position.x + size.x - 5, position.y), res, "menu/plus");
-  m_minus = new Button( Point2i(position.x + size.x - max_value_w - 5 - 2 * margin, position.y), res, "menu/minus");
+  m_plus = new Button(res, "menu/plus");
+  m_plus->SetXY(position.x + size.x - 5, position.y);
+  m_minus = new Button(res, "menu/minus");
+  m_minus->SetXY(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
   resource_manager.UnLoadXMLProfile( res);
   m_step = step;
 }
