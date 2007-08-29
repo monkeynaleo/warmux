@@ -34,24 +34,23 @@
 
 NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
 {
-  AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
-  Rectanglei rectZero(0, 0, 0, 0);
+  AddWidget(new PictureWidget(Rectanglei(-1, -1, 38, -1), "menu/teams_label"));
 
   // How many teams ?
   local_teams_nb = new SpinButtonWithPicture(_("Local teams:"),
 					     "menu/team_number",
-					     Rectanglei(0, 0, 130, 30),
+					     Rectanglei(-1, -1, 130, -1),
 					     0, 1,
 					     0, NMAX_NB_TEAMS);
   AddWidget(local_teams_nb);
 
-  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0,
-                                                         rect.GetSizeX() - local_teams_nb->GetSizeX() - 60, 0)
+  Box * top_n_bottom_team_options = new VBox( Rectanglei(-1, -1,
+                                                         rect.GetSizeX() - local_teams_nb->GetSizeX() - 60, -1)
                                               ,false);
   top_n_bottom_team_options->SetBorder(Point2i(5,0));
   top_n_bottom_team_options->SetMargin(10);
-  Box * top_team_options = new HBox ( Rectanglei(0, 0, 0, rect.GetSizeY()/2 - 20), false);
-  Box * bottom_team_options = new HBox ( Rectanglei(0, 0, 0, rect.GetSizeY()/2 - 20), false);
+  Box * top_team_options = new HBox ( Rectanglei(-1, -1, -1, rect.GetSizeY()/2 - 20), false);
+  Box * bottom_team_options = new HBox ( Rectanglei(-1, -1, -1, rect.GetSizeY()/2 - 20), false);
   top_team_options->SetBorder(Point2i(0,0));
   bottom_team_options->SetBorder(Point2i(0,0));
 
@@ -63,7 +62,7 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Rectanglei &rect) : HBo
     char num_player[4];
     sprintf(num_player, " %d", i+1);
     player_name += num_player;
-    teams_selections.push_back(new TeamBox(player_name, Rectanglei(0,0,team_w_size,rect.GetSizeY()/2)));
+    teams_selections.push_back(new TeamBox(player_name, Rectanglei(-1, -1, team_w_size, rect.GetSizeY()/2)));
     if ( i%2 == 0)
       top_team_options->AddWidget(teams_selections.at(i));
     else

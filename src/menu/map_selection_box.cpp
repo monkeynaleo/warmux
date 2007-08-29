@@ -37,7 +37,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
 
-  AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
+  AddWidget(new PictureWidget(Rectanglei(-1, -1, 46, -1), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
   bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus", false);
@@ -45,7 +45,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   resource_manager.UnLoadXMLProfile(res);
 
-  Box * tmp_map_box = new VBox( Rectanglei(0, 0, rect.GetSizeX()-63, 0), false);
+  Box * tmp_map_box = new VBox( Rectanglei(-1, -1, rect.GetSizeX()-63, -1), false);
   tmp_map_box->SetBorder( Point2i(0,0) );
   tmp_map_box->SetMargin(0);
 
@@ -53,7 +53,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   uint map_preview_height = rect.GetSizeY() -2*10 -40;
 
   // Previews
-  Box* previews_box = new HBox( Rectanglei(0, 0, 0, map_preview_height+10 ), false);
+  Box* previews_box = new HBox( Rectanglei(-1, -1, -1, map_preview_height+10 ), false);
   previews_box->SetBorder( Point2i(10,0) );
 
    // compute margin width between previews
@@ -82,20 +82,20 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
     previews_box->AddWidget(new NullWidget(*bt_map_minus));
   }
 
-  map_preview_before2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_before2 = new PictureWidget(Rectanglei(-1, -1, map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before2);
 
-  map_preview_before = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_before = new PictureWidget(Rectanglei(-1, -1, map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before);
 
   // Selected map...
-  map_preview_selected = new PictureWidget(Rectanglei(0, 0, map_preview_width, map_preview_height));
+  map_preview_selected = new PictureWidget(Rectanglei(-1, -1, map_preview_width, map_preview_height));
   previews_box->AddWidget(map_preview_selected);
 
-  map_preview_after = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_after = new PictureWidget(Rectanglei(-1, -1, map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_after);
 
-  map_preview_after2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_after2 = new PictureWidget(Rectanglei(-1, -1, map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_after2);
 
   if (!display_only) {
@@ -107,10 +107,12 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   tmp_map_box->AddWidget(previews_box);
 
   // Map information
-  map_name_label = new Label("Map", Rectanglei(0,0,0,0), Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, true, false);
+  map_name_label = new Label("Map", Rectanglei(-1, -1, -1, -1), Font::FONT_SMALL, 
+			     Font::FONT_BOLD, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_name_label);
 
-  map_author_label = new Label("Author", Rectanglei(0,0,0,0), Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, true, false);
+  map_author_label = new Label("Author", Rectanglei(-1, -1, -1, -1), Font::FONT_SMALL, 
+			       Font::FONT_NORMAL, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_author_label);
 
   AddWidget(tmp_map_box);
