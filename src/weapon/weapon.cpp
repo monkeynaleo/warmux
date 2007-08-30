@@ -185,6 +185,7 @@ void Weapon::Select()
 void Weapon::Deselect()
 {
   ActiveTeam().crosshair.enable = false;
+  m_is_active = false;
   MSG_DEBUG("weapon.change", "Deselect %s", m_name.c_str());
   p_Deselect();
 }
