@@ -149,7 +149,7 @@
 <sprite name="arm-right2" type="arm-right">
 	<image file="arm2.png"/>
 	<anchor dx="6" dy="0"/>
-	<attached member_type="weapon" frame="*" dx="0" dy="15"/>
+	<attached member_type="weapon" frame="*" dx="7" dy="19"/>
 </sprite>
 
 <!-- ###### Legs ###### -->
@@ -417,7 +417,23 @@
 	<member name="body-black"/>
 </clothe>
 
-
+<!-- ###### Gun ###### -->
+<clothe name="weapon-gun">
+	<member name="wing-left"/>
+	<member name="tail"/>
+	<member name="wing-right"/>
+	<member name="arm-left2"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="horns"/>
+	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right2"/>
+	<member name="weapon"/>
+</clothe>
 
 
 
@@ -1774,6 +1790,35 @@
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" follow_half_crosshair="true" angle="-15"/>
+	</frame>
+</movement>
+
+<!-- ###### gun ###### -->
+<movement name="weapon-gun-select" speed="50" play_mode="play_once">
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="0"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-20"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-40"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-60"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-80"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-100"/>
 	</frame>
 </movement>
 
