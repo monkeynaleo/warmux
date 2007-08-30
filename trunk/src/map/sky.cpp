@@ -19,10 +19,10 @@
  * Sky: background of the map
  *****************************************************************************/
 
-#include "sky.h"
-#include "camera.h"
-#include "map.h"
-#include "maps_list.h"
+#include "map/sky.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "map/maps_list.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/app.h"

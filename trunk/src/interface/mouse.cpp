@@ -19,10 +19,10 @@
  * Mouse management
  *****************************************************************************/
 
-#include "mouse.h"
+#include "interface/mouse.h"
 
-#include "cursor.h"
-#include "interface.h"
+#include "interface/cursor.h"
+#include "interface/interface.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game_mode.h"

@@ -19,12 +19,12 @@
  * Refresh water that may be placed in bottom of the ground.
  *****************************************************************************/
 
-#include "water.h"
+#include "map/water.h"
 #include <assert.h>
 #include <SDL.h>
-#include "camera.h"
-#include "map.h"
-#include "maps_list.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "map/maps_list.h"
 #include "game/time.h"
 #include "interface/interface.h"
 #include "tool/math_tools.h"

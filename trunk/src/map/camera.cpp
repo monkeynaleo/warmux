@@ -19,9 +19,9 @@
  * Camera : follow an object, center on it or follow mouse interaction.
  *****************************************************************************/
 
-#include "camera.h"
-#include "map.h"
-#include "wind.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "map/wind.h"
 #include "game/game.h"
 #include "graphic/video.h"
 #include "include/app.h"

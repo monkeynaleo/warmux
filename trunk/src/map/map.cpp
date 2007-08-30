@@ -20,14 +20,14 @@
  *****************************************************************************/
 
 #include <iostream>
-#include "map.h"
+#include "map/map.h"
 #include "object/physical_obj.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
-#include "camera.h"
-#include "maps_list.h"
-#include "wind.h"
+#include "map/camera.h"
+#include "map/maps_list.h"
+#include "map/wind.h"
 #include "game/time.h"
 #include "object/objbox.h"
 #include "tool/i18n.h"
