@@ -105,7 +105,6 @@ void JetPack::p_Select()
 
 void JetPack::p_Deselect()
 {
-  m_is_active = false;
   m_x_force = 0;
   m_y_force = 0;
   ActiveCharacter().SetExternForce(0,0);
@@ -215,7 +214,6 @@ void JetPack::HandleKeyPressed_Shoot(bool)
 
 bool JetPack::p_Shoot()
 {
-  m_is_active = true;
   ActiveCharacter().SetClothe("jetpack-fire");
 
   return true;
