@@ -23,9 +23,9 @@
 #define MAP_H
 
 #include "include/base.h"
-#include "ground.h"
-#include "sky.h"
-#include "water.h"
+#include "map/ground.h"
+#include "map/sky.h"
+#include "map/water.h"
 
 // Forward declarations
 class Text;
