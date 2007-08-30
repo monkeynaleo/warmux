@@ -1779,6 +1779,35 @@
 	</frame>
 </movement>
 
+<!-- ###### gun ###### -->
+<movement name="weapon-gun-select" speed="50" play_mode="play_once">
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="0"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-20"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-40"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-60"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-80"/>
+	</frame>
+	<frame>
+		<member type="head" follow_half_crosshair="true"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-100"/>
+	</frame>
+</movement>
+
 <!-- ###### Dynamite ###### -->
 <movement name="weapon-dynamite-begin-shoot" speed="30" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
