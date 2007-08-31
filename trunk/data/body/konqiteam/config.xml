@@ -45,8 +45,6 @@
 
 
 
-
-
 <!--   ###########################################
        ###############             ###############
        ##############   SKELETON    ##############
@@ -437,8 +435,59 @@
 	<member name="weapon"/>
 </clothe>
 
+<!-- ###### m16 ###### -->
+<clothe name="weapon-m16">
+	<member name="wing-left"/>
+	<member name="tail"/>
+	<member name="wing-right"/>
+	<member name="arm-left2"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="horns"/>
+	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right2"/>
+	<member name="weapon"/>
+</clothe>
 
+<!-- ###### shotgun ###### -->
+<clothe name="weapon-shotgun">
+	<member name="wing-left"/>
+	<member name="tail"/>
+	<member name="wing-right"/>
+	<member name="arm-left2"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="horns"/>
+	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right2"/>
+	<member name="weapon"/>
+</clothe>
 
+<!-- ###### snipe_rifle ###### -->
+<clothe name="weapon-snipe_rifle">
+	<member name="wing-left"/>
+	<member name="tail"/>
+	<member name="wing-right"/>
+	<member name="arm-left2"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="horns"/>
+	<member name="head"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right2"/>
+	<member name="weapon"/>
+</clothe>
 
 
 <!--   ###########################################
