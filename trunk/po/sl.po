@@ -8,11 +8,11 @@
 # Jaka Kranjc <mokovec@gmail.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: sl\n"
+"Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-20 21:35+0200\n"
-"PO-Revision-Date: 2007-08-09 13:30+0100\n"
-"Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
+"PO-Revision-Date: 2007-08-31 10:02+0200\n"
+"Last-Translator: Marko Burjek <email4marko@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -145,17 +145,24 @@ msgstr[3] "Ekipa %s je osvojila %u zračnih napadov!"
 
 #: src/weapon/airhammer.cpp:176
 #, c-format
-#, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
 "your neighbours."
 msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
-msgstr[0] "Ekipa %s je osvojila %u pnevmatično kladivo!"
-msgstr[1] "Ekipa %s je osvojila %u pnevmatično kladivi!"
-msgstr[2] "Ekipa %s je osvojila %u pnevmatično kladiva!"
-msgstr[3] "Ekipa %s je osvojila %u pnevmatično kladiv!"
+msgstr[0] ""
+"Ekipa %s je osvojila %u pnevmatično kladivo! Z njim ne delajte preveč hrupa! Hvala, "
+"vaši sosedi."
+msgstr[1] ""
+"Ekipa %s je osvojila %u pnevmatični kladivi! Z njima ne delajte preveč hrupa! Hvala, "
+"vaši sosedi."
+msgstr[2] ""
+"Ekipa %s je osvojila %u pnevmatična kladiva! Z njimi ne delajte preveč hrupa! Hvala, "
+"vaši sosedi."
+msgstr[3] ""
+"Ekipa %s je osvojila %u pnevmatičnih kladiv! Z njimi ne delajte preveč hrupa! Hvala, "
+"vaši sosedi."
 
 #: src/weapon/anvil.cpp:179
 #, c-format
@@ -200,10 +207,10 @@ msgid ""
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr[0] "Ekipa %s je osvojila %u varilnik!"
-msgstr[1] "Ekipa %s je osvojila %u varilnika!"
-msgstr[2] "Ekipa %s je osvojila %u varilnike!"
-msgstr[3] "Ekipa %s je osvojila %u varilnikov!"
+msgstr[0] "Ekipa %s je osvojila %u varilnik! Če ste stari manj kot 18 let, ga naj uporabljajo vaši starši."
+msgstr[1] "Ekipa %s je osvojila %u varilnika! Če ste stari manj kot 18 let, ju naj uporabljata vaši starši."
+msgstr[2] "Ekipa %s je osvojila %u varilnike! Če ste stari manj kot 18 let, jih naj uporabljajo vaši starši."
+msgstr[3] "Ekipa %s je osvojila %u varilnikov! Če ste stari manj kot 18 let, jih naj uporabljajo vaši starši."
 
 #: src/weapon/bounce_ball.cpp:107
 #, c-format
@@ -227,10 +234,10 @@ msgstr[3] "Ekipa %s je osvojila %u kasetnih bomb!"
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] "Ekipa %s je osvojila %u tram! Ne pozabite na čelado!"
-msgstr[1] "Ekipa %s je osvojila %u trama! Ne pozabite na čelado!"
-msgstr[2] "Ekipa %s je osvojila %u trame! Ne pozabite na čelado!"
-msgstr[3] "Ekipa %s je osvojila %u tramov! Ne pozabite na čelado!"
+msgstr[0] "Ekipa %s je osvojila %u tram! Ne pozabite na čelado."
+msgstr[1] "Ekipa %s je osvojila %u trama! Ne pozabite na čelado."
+msgstr[2] "Ekipa %s je osvojila %u trame! Ne pozabite na čelado."
+msgstr[3] "Ekipa %s je osvojila %u tramov! Ne pozabite na čelado."
 
 #: src/weapon/disco_grenade.cpp:137
 #, c-format
@@ -318,14 +325,10 @@ msgstr[3] "Ekipa %s je osvojila %u padal!"
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
-msgstr[0] ""
-"Ekipa %s je osvojila %u dihurjemet! Bolje da imajo s sabo gas maske!"
-msgstr[1] ""
-"Ekipa %s je osvojila %u dihurjemeta! Bolje da imajo s sabo gas maske!"
-msgstr[2] ""
-"Ekipa %s je osvojila %u dihurjemete! Bolje da imajo s sabo gas maske!"
-msgstr[3] ""
-"Ekipa %s je osvojila %u dihurjemetov! Bolje da imajo s sabo gas maske!"
+msgstr[0] "Ekipa %s je osvojila %u dihurjemet! Bolje da imajo s sabo plinske maske!"
+msgstr[1] "Ekipa %s je osvojila %u dihurjemeta! Bolje da imajo s sabo plinske maske!"
+msgstr[2] "Ekipa %s je osvojila %u dihurjemete! Bolje da imajo s sabo plinske maske!"
+msgstr[3] "Ekipa %s je osvojila %u dihurjemetov! Bolje da imajo s sabo plinske maske!"
 
 #: src/weapon/riot_bomb.cpp:102
 #, c-format
@@ -394,23 +397,19 @@ msgstr[3] "Ekipa %s je osvojila %u teleprenosov!"
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
-msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
-msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
-msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
+msgstr[0] "Ekipa %s je osvojila %u Preskoči potezo! Vem da vam bo všeč."
+msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Vem da vam bo všeč."
+msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Vem da vam bo všeč."
+msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Vem da vam bo všeč."
 
 #: src/weapon/supertux.cpp:274
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] ""
-"Ekipa %s je osvojila %u SuperTux! Še niste videli letečega pingvina?"
-msgstr[1] ""
-"Ekipa %s je osvojila %u SuperTux-a! Še niste videli letečega pingvina?"
-msgstr[2] ""
-"Ekipa %s je osvojila %u SuperTux-e! Še niste videli letečega pingvina?"
-msgstr[3] ""
-"Ekipa %s je osvojila %u SuperTux-ov! Še niste videli letečega pingvina?"
+msgstr[0] "Ekipa %s je osvojila %u SuperTux! Še niste videli letečega pingvina?"
+msgstr[1] "Ekipa %s je osvojila %u SuperTux-a! Še niste videli letečega pingvina?"
+msgstr[2] "Ekipa %s je osvojila %u SuperTux-e! Še niste videli letečega pingvina?"
+msgstr[3] "Ekipa %s je osvojila %u SuperTux-ov! Še niste videli letečega pingvina?"
 
 #: src/include/action_handler.cpp:243
 #, c-format
@@ -428,7 +427,7 @@ msgstr "(mrtev)"
 #. Setting language selection
 #: src/menu/options_menu.cpp:181
 msgid "(system language)"
-msgstr "(sistemski jezik)"
+msgstr "(jezik sistema)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:201
@@ -991,7 +990,7 @@ msgstr "Ostrostrelska puška"
 
 #: src/menu/internet_menu.cpp:115
 msgid "Sorry, currently, no game is waiting for players"
-msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
+msgstr "Žal trenutno nobena igra ne potrebuje igralcev"
 
 #: src/menu/options_menu.cpp:121
 msgid "Sound effects?"
