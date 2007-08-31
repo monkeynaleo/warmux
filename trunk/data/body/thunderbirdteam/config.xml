@@ -37,7 +37,9 @@
 <alias movement="weapon-snipe_rifle-end-shoot" correspond_to="weapon-uzi-end-shoot" />
 <alias movement="weapon-gnulauncher-begin-shoot" correspond_to="weapon-tux-begin-shoot" />
 <alias movement="weapon-gnulauncher-end-shoot" correspond_to="weapon-tux-end-shoot" />
-
+<alias movement="weapon-m16-select" correspond_to="weapon-gun-select" />
+<alias movement="weapon-shotgun-select" correspond_to="weapon-gun-select" />
+<alias movement="weapon-snipe_rifle-select" correspond_to="weapon-gun-select" />
 
 
 
@@ -1684,15 +1686,6 @@
 		<member type="foot-right" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="wingright" follow_half_crosshair="true" angle="0"/>
-	</frame>
-</movement>
-
-<!-- ###### Uzi ###### -->
-<movement name="weapon-uzi-end-shoot" speed="100" play_mode="play_once" >
-	<collision_rect left="5" right="5" top="10" bottom="2" />
-	<frame>
-		<member type="head" follow_half_crosshair="true"/>
-		<member type="wingright" follow_half_crosshair="true" angle="-15"/>
 	</frame>
 </movement>
 
