@@ -1772,10 +1772,6 @@
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" follow_half_crosshair="true" angle="-100"/>
 	</frame>
-	<frame>
-		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-120"/>
-	</frame>
 </movement>
 
 <!-- ###### Dynamite ###### -->
