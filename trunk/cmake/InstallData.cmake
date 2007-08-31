@@ -493,8 +493,7 @@ sound/default/out_01.ogg
 sound/default/profile.xml
 sound/default/sink.ogg
 sound/default/skip_turn.ogg
-sound/default/step_01.ogg
-sound/default/step_02.ogg
+sound/default/step.ogg
 sound/default/suicide_01.ogg
 sound/default/superjump_01.ogg
 sound/default/uuh_01.ogg
