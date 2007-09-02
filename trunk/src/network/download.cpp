@@ -22,7 +22,7 @@
 #include <curl/curl.h>
 #include "include/base.h"
 #include "tool/error.h"
-#include "download.h"
+#include "network/download.h"
 
 Downloader * Downloader::singleton = NULL;
 

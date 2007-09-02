@@ -19,7 +19,7 @@
  * Handle a color
  *****************************************************************************/
 
-#include "color.h"
+#include "graphic/color.h"
 #include <SDL.h>
 
 Color::Color(){

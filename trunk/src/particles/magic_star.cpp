@@ -20,7 +20,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "magic_star.h"
+#include "particles/magic_star.h"
 #include "particles/particle.h"
 #include "tool/random.h"
 #include "game/time.h"

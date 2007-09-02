@@ -19,7 +19,7 @@
  * Simple button
  *****************************************************************************/
 
-#include "button.h"
+#include "gui/button.h"
 #include "tool/resource_manager.h"
 #include "graphic/sprite.h"
 

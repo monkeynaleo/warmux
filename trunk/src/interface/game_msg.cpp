@@ -19,7 +19,7 @@
  * Messages s'affichant en haut de l'ecran (et écrit dans la console).
  *****************************************************************************/
 
-#include "game_msg.h"
+#include "interface/game_msg.h"
 #include <iostream>
 #include "game/time.h"
 #include "graphic/video.h"

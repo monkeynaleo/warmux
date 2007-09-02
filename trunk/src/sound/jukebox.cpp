@@ -19,7 +19,7 @@
  * Sound engine
  *****************************************************************************/
 
-#include "jukebox.h"
+#include "sound/jukebox.h"
 
 #include <iostream>
 #include <fstream>

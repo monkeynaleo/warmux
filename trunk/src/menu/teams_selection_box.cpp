@@ -19,8 +19,8 @@
  *  Teams selection box
  *****************************************************************************/
 
-#include "teams_selection_box.h"
-#include "team_box.h"
+#include "menu/teams_selection_box.h"
+#include "menu/team_box.h"
 #include "gui/label.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"

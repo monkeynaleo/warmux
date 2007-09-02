@@ -22,7 +22,7 @@
  *             Initial version
  *****************************************************************************/
 
-#include "spritecache.h"
+#include "graphic/spritecache.h"
 #include <SDL_rotozoom.h>
 
 #define BUGGY_SDLGFX

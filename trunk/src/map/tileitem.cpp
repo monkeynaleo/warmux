@@ -17,11 +17,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include "tileitem.h"
+#include "map/tileitem.h"
 #include <iostream>
 #include <SDL.h>
 #include <SDL_endian.h>
-#include "tile.h"
+#include "map/tile.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"

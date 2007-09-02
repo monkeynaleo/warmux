@@ -22,12 +22,12 @@
 
 #include <SDL_net.h>
 #include <fstream>
-#include "download.h"
+#include "network/download.h"
 #include "game/config.h"
 #include "graphic/video.h"
-#include "index_server.h"
-#include "index_svr_msg.h"
-#include "network.h"
+#include "network/index_server.h"
+#include "network/index_svr_msg.h"
+#include "network/network.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "tool/debug.h"

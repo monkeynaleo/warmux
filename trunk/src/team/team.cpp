@@ -19,7 +19,7 @@
  * A team
  *****************************************************************************/
 
-#include "team.h"
+#include "team/team.h"
 #include "team/teams_list.h"
 #include "character/character.h"
 #include "character/body_list.h"

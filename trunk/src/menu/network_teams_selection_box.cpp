@@ -19,8 +19,8 @@
  *  Network teams selection box
  *****************************************************************************/
 
-#include "network_teams_selection_box.h"
-#include "team_box.h"
+#include "menu/network_teams_selection_box.h"
+#include "menu/team_box.h"
 #include "gui/label.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"

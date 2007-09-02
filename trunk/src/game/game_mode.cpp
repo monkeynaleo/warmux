@@ -22,7 +22,7 @@
 
 #include "game/game_mode.h"
 #include <iostream>
-#include "config.h"
+#include "game/config.h"
 #include "game/game.h"
 #include "object/medkit.h"
 #include "object/bonus_box.h"

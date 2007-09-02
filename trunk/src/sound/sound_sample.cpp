@@ -21,8 +21,8 @@
  *****************************************************************************/
 
 #include <SDL_mixer.h>
-#include "sound_sample.h"
-#include "jukebox.h"
+#include "sound/sound_sample.h"
+#include "sound/jukebox.h"
 
 SoundSample::SoundSample() : channel(-1)
 {}

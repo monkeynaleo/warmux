@@ -19,7 +19,7 @@
  * Options menu
  *****************************************************************************/
 
-#include "options_menu.h"
+#include "menu/options_menu.h"
 
 #include "include/app.h"
 #include "game/game_mode.h"

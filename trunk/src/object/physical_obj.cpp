@@ -25,9 +25,9 @@
  *****************************************************************************/
 
 #include <iostream>
-#include "physical_obj.h"
-#include "physics.h"
-#include "objects_list.h"
+#include "object/physical_obj.h"
+#include "object/physics.h"
+#include "object/objects_list.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"

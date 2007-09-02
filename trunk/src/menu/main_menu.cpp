@@ -20,7 +20,7 @@
  * infomations or leave the game.
  *****************************************************************************/
 
-#include "main_menu.h"
+#include "menu/main_menu.h"
 #include "gui/button_text.h"
 #include "game/config.h"
 #include "graphic/text.h"

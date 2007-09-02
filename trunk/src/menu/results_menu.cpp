@@ -19,7 +19,7 @@
  * Results menu
  *****************************************************************************/
 
-#include "results_menu.h"
+#include "menu/results_menu.h"
 #ifdef _MSC_VER
 #  include <algorithm>  //std::sort
 #endif

@@ -17,13 +17,13 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include "spin_button.h"
+#include "gui/spin_button.h"
 #include "graphic/text.h"
-#include "button.h"
+#include "gui/button.h"
 #include <sstream>
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
-#include "button.h"
+#include "gui/button.h"
 
 SpinButton::SpinButton (const std::string &label, int width,
                         int value, int step, int min_value, int max_value,

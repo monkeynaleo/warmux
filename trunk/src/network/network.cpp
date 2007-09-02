@@ -21,11 +21,11 @@
 
 #include <SDL_thread.h>
 #include <SDL_timer.h>
-#include "network.h"
-#include "network_local.h"
-#include "network_client.h"
-#include "network_server.h"
-#include "distant_cpu.h"
+#include "network/network.h"
+#include "network/network_local.h"
+#include "network/network_client.h"
+#include "network/network_server.h"
+#include "network/distant_cpu.h"
 //-----------------------------------------------------------------------------
 #include "game/game_mode.h"
 #include "game/game.h"

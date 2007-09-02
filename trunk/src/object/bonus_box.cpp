@@ -20,7 +20,7 @@
  * The box can contain any weapon in the game.
  *****************************************************************************/
 
-#include "bonus_box.h"
+#include "object/bonus_box.h"
 #include <sstream>
 #include <iostream>
 #include "character/character.h"

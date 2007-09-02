@@ -21,9 +21,9 @@
  *****************************************************************************/
 
 
-#include "network_connection_menu.h"
-#include "network_menu.h"
-#include "internet_menu.h"
+#include "menu/network_connection_menu.h"
+#include "menu/network_menu.h"
+#include "menu/internet_menu.h"
 
 #include "game/config.h"
 #include "graphic/video.h"

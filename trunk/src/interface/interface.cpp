@@ -19,8 +19,8 @@
  * Graphical interface showing various information about the game.
  *****************************************************************************/
 
-#include "interface.h"
-#include "mouse.h"
+#include "interface/interface.h"
+#include "interface/mouse.h"
 #include "character/character.h"
 #include "game/game.h"
 #include "game/game_mode.h"

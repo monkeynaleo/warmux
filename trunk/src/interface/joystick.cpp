@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <SDL.h>
-#include "joystick.h"
+#include "interface/joystick.h"
 
 Joystick * Joystick::singleton = NULL;
 

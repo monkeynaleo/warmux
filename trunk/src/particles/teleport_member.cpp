@@ -19,7 +19,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "teleport_member.h"
+#include "particles/teleport_member.h"
 #include "particles/particle.h"
 #include "tool/random.h"
 #include "game/time.h"

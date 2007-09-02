@@ -19,10 +19,10 @@
  * Game menu
  *****************************************************************************/
 
-#include "network_menu.h"
+#include "menu/network_menu.h"
 
-#include "network_teams_selection_box.h"
-#include "map_selection_box.h"
+#include "menu/network_teams_selection_box.h"
+#include "menu/map_selection_box.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "graphic/video.h"

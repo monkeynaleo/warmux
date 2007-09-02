@@ -19,7 +19,7 @@
  * Handle a SDL Surface
  *****************************************************************************/
 
-#include "surface.h"
+#include "graphic/surface.h"
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
@@ -30,7 +30,7 @@
 
 /* texturedPolygon import from SDL_gfx v2.0.15 */
 #if (SDL_GFXPRIMITIVES_MAJOR == 2) && (SDL_GFXPRIMITIVES_MINOR == 0) && (SDL_GFXPRIMITIVES_MICRO < 14)
-#include "textured_polygon.h"
+#include "graphic/textured_polygon.h"
 #endif /* texturedPolygon import from SDL_gfx v2.0.15 */
 
 /**

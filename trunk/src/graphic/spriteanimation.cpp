@@ -22,9 +22,9 @@
  *             Initial version
  *****************************************************************************/
 
-#include "spriteanimation.h"
+#include "graphic/spriteanimation.h"
 #include "game/time.h"
-#include "sprite.h"
+#include "graphic/sprite.h"
 
 SpriteAnimation::SpriteAnimation(Sprite &p_sprite) :
   sprite(p_sprite)

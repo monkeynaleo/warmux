@@ -21,8 +21,8 @@
 
 #include <time.h>
 #include <stdlib.h>
-#include "randomsync.h"
-#include "network.h"
+#include "network/randomsync.h"
+#include "network/network.h"
 #include "include/action_handler.h"
 
 const uint table_size = 1024; //Number of pregerated numbers

@@ -19,7 +19,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "dark_smoke.h"
+#include "particles/dark_smoke.h"
 #include "particles/particle.h"
 #include "graphic/sprite.h"
 

@@ -19,7 +19,7 @@
  * Loading screen
  *****************************************************************************/
 
-#include "loading_screen.h"
+#include "interface/loading_screen.h"
 #include "include/app.h"
 #include "game/config.h"
 #include "graphic/font.h"

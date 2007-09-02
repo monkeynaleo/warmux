@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "particles/particle.h"
-#include "star.h"
+#include "particles/star.h"
 #include "graphic/sprite.h"
 
 StarParticle::StarParticle() :

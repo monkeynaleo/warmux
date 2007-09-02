@@ -20,7 +20,7 @@
  * Contains health for a character.
  *****************************************************************************/
 
-#include "medkit.h"
+#include "object/medkit.h"
 #include <sstream>
 #include <iostream>
 #include "character/character.h"

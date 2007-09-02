@@ -21,7 +21,7 @@
 
 #include "object/objects_list.h"
 //-----------------------------------------------------------------------------
-#include "barrel.h"
+#include "object/barrel.h"
 #include "include/app.h"
 #include "map/map.h"
 #include "map/maps_list.h"

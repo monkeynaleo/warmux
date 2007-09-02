@@ -19,7 +19,7 @@
  * Arrow on top of the active character
  *****************************************************************************/
 
-#include "cursor.h"
+#include "interface/cursor.h"
 #include "character/character.h"
 #include "game/time.h"
 #include "graphic/effects.h"

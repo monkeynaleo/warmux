@@ -19,9 +19,9 @@
  * Game menu
  *****************************************************************************/
 
-#include "game_menu.h"
-#include "map_selection_box.h"
-#include "teams_selection_box.h"
+#include "menu/game_menu.h"
+#include "menu/map_selection_box.h"
+#include "menu/teams_selection_box.h"
 
 #include "game/game.h"
 #include "game/config.h"

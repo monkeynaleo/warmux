@@ -19,7 +19,7 @@
  * Label in GUI.
  *****************************************************************************/
 
-#include "label.h"
+#include "gui/label.h"
 #include "graphic/text.h"
 
 Label::Label (const std::string &label,
