@@ -69,6 +69,7 @@ void WeaponBullet::SignalOutOfMap()
 {
   WeaponProjectile::SignalOutOfMap();
   launcher->IncMissedShots();
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true, true);
 }
 
 void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
