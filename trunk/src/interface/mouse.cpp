@@ -201,7 +201,9 @@ void Mouse::ChoixVerPointe() const
 void Mouse::Refresh()
 {
   static Point2i lastpos(0,0);
-
+  /* FIXME the 200 is hardcoded because I cannot find where the main loop
+   * refresh rate is set... */
+  static int counter = 200;
   ChoixVerPointe();
 
   Point2i pos = GetPosition();
@@ -210,6 +212,16 @@ void Mouse::Refresh()
     {
       Show();
       lastpos = pos;
+    }
+  else if (visible == MOUSE_VISIBLE)
+    {
+      /* The mouse is hidden after a while when not moving */
+      --counter;
+      if (counter <= 0)
+        {
+          counter = 200;
+          Hide();
+        }
     }
 }
 
@@ -422,16 +434,3 @@ void Mouse::Hide()
             GetPosition().GetY() );
 }
 
-// Center the pointer on the screen
-void Mouse::CenterPointer() const
-{
-  MSG_DEBUG("mouse", "1) %d, %d\n", GetPosition().GetX(),
-            GetPosition().GetY());
-
-  SDL_WarpMouse(AppWormux::GetInstance()->video->window.GetWidth()/2,
-                AppWormux::GetInstance()->video->window.GetHeight()/2);
-  SDL_PumpEvents(); // force new position else GetPosition does not return new position
-
-  MSG_DEBUG("mouse", "2) %d, %d\n", GetPosition().GetX(),
-            GetPosition().GetY());
-}

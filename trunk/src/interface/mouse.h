@@ -106,8 +106,6 @@ public:
   void Show();
   void Hide();
 
-  // Center the pointer on the screen
-  void CenterPointer() const;
   const visibility_t GetVisibility() const { return visible; };
 };
 #endif
