@@ -19,9 +19,9 @@
  * Suicide.
  *****************************************************************************/
 
-#include "suicide.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/suicide.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include <iostream>
 #include "character/character.h"

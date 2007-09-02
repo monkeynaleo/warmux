@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "team.h"
-#include "teams_list.h"
+#include "team/teams_list.h"
 #include "character/character.h"
 #include "character/body_list.h"
 #include "game/config.h"

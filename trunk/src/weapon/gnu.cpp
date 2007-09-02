@@ -19,9 +19,9 @@
  * Weapon gnu : a gnu jump in (more or less) random directions and explodes
  *****************************************************************************/
 
-#include "explosion.h"
-#include "gnu.h"
-#include "weapon_cfg.h"
+#include "weapon/explosion.h"
+#include "weapon/gnu.h"
+#include "weapon/weapon_cfg.h"
 
 #include <sstream>
 #include "character/character.h"

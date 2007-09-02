@@ -19,7 +19,7 @@
  * Statistics.
  *****************************************************************************/
 
-#include "stats.h"
+#include "tool/stats.h"
 #ifdef ENABLE_STATS
 #include <SDL.h>
 #include <map>

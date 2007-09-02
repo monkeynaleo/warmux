@@ -19,10 +19,10 @@
  * Artificial intelligence engine
  *****************************************************************************/
 
-#include "ai_engine.h"
+#include "ai/ai_engine.h"
 #include <string>
 #include <iostream>
-#include "ai_engine_stupid.h"
+#include "ai/ai_engine_stupid.h"
 #include "character/character.h"
 #include "game/game.h"
 #include "team/team.h"

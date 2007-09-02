@@ -19,7 +19,7 @@
  * Base classes for weapons configuration.
  *****************************************************************************/
 
-#include "weapon_cfg.h"
+#include "weapon/weapon_cfg.h"
 #include <iostream>
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------

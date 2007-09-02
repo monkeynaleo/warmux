@@ -19,8 +19,8 @@
  * Useful for weapons: explode on one point
  *****************************************************************************/
 
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
 #include "graphic/surface.h"
@@ -37,7 +37,7 @@
 #include "team/team.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
-#include "weapon.h"
+#include "weapon/weapon.h"
 #include "object/physical_obj.h"
 #include "graphic/surface.h"
 #include "tool/resource_manager.h"

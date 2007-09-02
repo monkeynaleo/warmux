@@ -20,9 +20,9 @@
  * if we hit a character.
  *****************************************************************************/
 
-#include "gun.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/gun.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include <sstream>
 #include "map/map.h"

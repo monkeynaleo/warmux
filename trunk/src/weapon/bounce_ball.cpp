@@ -20,8 +20,8 @@
  * bounce since it has not collide a character
  *****************************************************************************/
 
-#include "bounce_ball.h"
-#include "weapon_cfg.h"
+#include "weapon/bounce_ball.h"
+#include "weapon/weapon_cfg.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "graphic/sprite.h"

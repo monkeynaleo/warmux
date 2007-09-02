@@ -19,11 +19,11 @@
  * Grapple
  *****************************************************************************/
 
-#include "grapple.h"
-#include "weapon_cfg.h"
+#include "weapon/grapple.h"
+#include "weapon/weapon_cfg.h"
 
 #include <math.h>
-#include "explosion.h"
+#include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game.h"

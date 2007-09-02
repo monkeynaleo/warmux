@@ -21,9 +21,9 @@
  * Like a dynamite after all :)
  *****************************************************************************/
 
-#include "dynamite.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/dynamite.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
 #include "game/config.h"

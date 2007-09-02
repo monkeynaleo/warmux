@@ -19,7 +19,7 @@
  * Artificial intelligence stupid engine
  *****************************************************************************/
 
-#include "ai_engine_stupid.h"
+#include "ai/ai_engine_stupid.h"
 #include "character/character.h"
 #include "game/game.h"
 #include "game/time.h"

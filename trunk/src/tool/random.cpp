@@ -21,7 +21,7 @@
 
 #include <time.h>
 #include <stdlib.h>
-#include "random.h"
+#include "tool/random.h"
 
 Random randomObj;
 

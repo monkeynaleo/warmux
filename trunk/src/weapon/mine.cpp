@@ -20,10 +20,10 @@
  * Sometime the mine didn't explode randomly.
  *****************************************************************************/
 
-#include "mine.h"
+#include "weapon/mine.h"
 #include <iostream>
 #include <sstream>
-#include "explosion.h"
+#include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"

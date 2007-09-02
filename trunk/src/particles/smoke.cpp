@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "smoke.h"
-#include "particle.h"
+#include "particles/particle.h"
 #include "graphic/sprite.h"
 
 Smoke::Smoke() :

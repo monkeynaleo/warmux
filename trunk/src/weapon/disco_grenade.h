@@ -22,7 +22,7 @@
 #ifndef DISCO_GRENADE_H
 #define DISCO_GRENADE_H
 
-#include "weapon_launcher.h"
+#include "weapon/weapon_launcher.h"
 #include "include/base.h"
 
 class DiscoGrenadeLauncher : public WeaponLauncher

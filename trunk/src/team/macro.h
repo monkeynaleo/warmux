@@ -22,7 +22,7 @@
 #ifndef TEAM_MACRO_H
 #define TEAM_MACRO_H
 //-----------------------------------------------------------------------------
-#include "teams_list.h"
+#include "team/teams_list.h"
 //-----------------------------------------------------------------------------
 
 // Boucle pour chaque team

@@ -22,7 +22,7 @@
 #include <libxml++/libxml++.h>
 #include "team.h"
 #include "team_config.h"
-#include "teams_list.h"
+#include "team/teams_list.h"
 //-----------------------------------------------------------------------------
 #include "character/character.h"
 #include "character/body_list.h"
@@ -31,7 +31,7 @@
 #include "network/network.h"
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
-#include "team_energy.h"
+#include "team/team_energy.h"
 #include <algorithm>
 #include <iostream>
 #include "network/randomsync.h"

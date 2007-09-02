@@ -30,7 +30,7 @@
 #  include <stdlib.h> // getenv
 #endif
 
-#include "i18n.h"
+#include "tool/i18n.h"
 
 // Test if a file exists
 bool IsFileExist(const std::string &name)

@@ -21,10 +21,10 @@
 
 #include <sstream>
 #include <iostream>
-#include "body.h"
-#include "character.h"
-#include "move.h"
-#include "damage_stats.h"
+#include "character/body.h"
+#include "character/character.h"
+#include "character/move.h"
+#include "character/damage_stats.h"
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game.h"

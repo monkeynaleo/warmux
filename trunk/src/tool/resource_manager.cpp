@@ -25,12 +25,12 @@
  * TODO:       Keep reference to resources, better exceptions
  *****************************************************************************/
 
-#include "resource_manager.h"
+#include "tool/resource_manager.h"
 #include <string>
 #include <iostream>
-#include "error.h"
-#include "xml_document.h"
-#include "string_tools.h"
+#include "tool/error.h"
+#include "tool/xml_document.h"
+#include "tool/string_tools.h"
 #include "game/config.h"
 #include "graphic/sprite.h"
 #include "graphic/polygon_generator.h"

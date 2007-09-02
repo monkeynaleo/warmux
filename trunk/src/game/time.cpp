@@ -19,7 +19,7 @@
  *  Handle the game time. The game can be paused.
  *****************************************************************************/
 
-#include "time.h"
+#include "game/time.h"
 #include <SDL.h>
 #include <sstream>
 #include <iomanip>

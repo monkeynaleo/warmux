@@ -17,7 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include "euler_vector.h"
+#include "tool/euler_vector.h"
 
 /**
  *  Set the euler vector to (0, 0, 0).

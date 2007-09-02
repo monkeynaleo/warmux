@@ -19,9 +19,9 @@
  * Bazooka, a simple rocket launcher
  *****************************************************************************/
 
-#include "bazooka.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/bazooka.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 #include "game/config.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"

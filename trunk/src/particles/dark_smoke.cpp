@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "dark_smoke.h"
-#include "particle.h"
+#include "particles/particle.h"
 #include "graphic/sprite.h"
 
 DarkSmoke::DarkSmoke() :

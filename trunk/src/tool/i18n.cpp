@@ -20,12 +20,12 @@
  * Eg. : Format("Hello %s", "world") returns "Hello World".
  *****************************************************************************/
 
-#include "i18n.h"
+#include "tool/i18n.h"
 #include <string>
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include "debug.h"
+#include "tool/debug.h"
 #ifdef _MSC_VER
 #  include "msvc/config.h"
 #else

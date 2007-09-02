@@ -19,11 +19,11 @@
  * Disco Grenade
  *****************************************************************************/
 
-#include "disco_grenade.h"
-#include "weapon_cfg.h"
+#include "weapon/disco_grenade.h"
+#include "weapon/weapon_cfg.h"
 
 #include <sstream>
-#include "explosion.h"
+#include "weapon/explosion.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"

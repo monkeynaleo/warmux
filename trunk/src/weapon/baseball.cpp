@@ -19,8 +19,8 @@
  * baseball bat
  *****************************************************************************/
 
-#include "baseball.h"
-#include "weapon_cfg.h"
+#include "weapon/baseball.h"
+#include "weapon/weapon_cfg.h"
 #include "character/character.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
@@ -32,7 +32,7 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
-#include "explosion.h"
+#include "weapon/explosion.h"
 
 class BaseballConfig : public WeaponConfig
 {

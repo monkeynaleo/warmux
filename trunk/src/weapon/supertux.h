@@ -22,7 +22,7 @@
 #ifndef SUPERTUX_H
 #define SUPERTUX_H
 
-#include "weapon_launcher.h"
+#include "weapon/weapon_launcher.h"
 #include "particles/particle.h"
 
 class SuperTux;

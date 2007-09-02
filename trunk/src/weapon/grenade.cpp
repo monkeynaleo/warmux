@@ -20,8 +20,8 @@
  * Explose au bout de quelques secondes
  *****************************************************************************/
 
-#include "grenade.h"
-#include "weapon_cfg.h"
+#include "weapon/grenade.h"
+#include "weapon/weapon_cfg.h"
 
 //-----------------------------------------------------------------------------
 #include <sstream>

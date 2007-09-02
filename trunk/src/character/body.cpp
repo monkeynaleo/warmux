@@ -21,11 +21,11 @@
 #include <sstream>
 #include <iostream>
 #include <map>
-#include "body.h"
-#include "character.h"
-#include "clothe.h"
-#include "member.h"
-#include "movement.h"
+#include "character/body.h"
+#include "character/character.h"
+#include "character/clothe.h"
+#include "character/member.h"
+#include "character/movement.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/mouse.h"
