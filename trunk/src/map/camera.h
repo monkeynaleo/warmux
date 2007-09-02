@@ -69,8 +69,6 @@ public:
   void Refresh();
 
   void AutoCrop();
-  void SetAutoCrop(bool crop) { auto_crop = crop; };
-  bool IsAutoCrop() const { return auto_crop; };
 };
 
 #endif
