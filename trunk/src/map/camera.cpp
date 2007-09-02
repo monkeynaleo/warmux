@@ -21,7 +21,6 @@
 
 #include "map/camera.h"
 #include "map/map.h"
-#include "map/wind.h"
 #include "game/game.h"
 #include "game/config.h"
 #include "graphic/video.h"
@@ -209,12 +208,7 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow, bool center_on){
                                  obj->GetName().c_str(), center_on);
 
   if ((center_on) && (followed_object != obj || !IsVisible(*obj)))
-  {
-    bool visible = IsVisible(*obj);
     auto_crop = follow;
-    if(!visible)
-      wind.RandomizeParticlesPos();
-  }
   followed_object = obj;
 }
 
