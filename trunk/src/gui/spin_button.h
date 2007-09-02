@@ -25,12 +25,13 @@
 #include "include/base.h"
 #include "graphic/colors.h"
 #include "widget.h"
+#include "abstract_spin_button.h"
 #include <string>
 
 class Button;
 class Text;
 
-class SpinButton : public Widget
+class SpinButton : public AbstractSpinButton
 {
  private:
   /* If you need this, implement it (correctly)*/
@@ -41,24 +42,22 @@ class SpinButton : public Widget
   bool shadowed;
 
   Text *txt_label, *txt_value;
-
-  int m_value;
-  int m_min_value, m_max_value, m_step;
   Button *m_plus, *m_minus;
 
  public:
   SpinButton(const std::string &label, int width,
-             int value=0, int step=1, int min_value=-1, int max_value=-1,
+             int value, int step, int min_value, int max_value,
              const Color& color = white_color, bool shadowed = true);
   virtual ~SpinButton();
 
-  void SetSizePosition(const Rectanglei &rect);
+  // From Widget
+  virtual void SetSizePosition(const Rectanglei &rect);
+  virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
+  virtual Widget* Click(const Point2i&, uint) const { return NULL; };
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
-  Widget* Click(const Point2i&, uint) const { return NULL; };
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
-  int GetValue() const { return m_value; };
-  void SetValue(int value);
+  // From AbstractSpinButton
+  virtual void ValueHasChanged();
 };
 
 #endif

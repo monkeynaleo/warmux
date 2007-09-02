@@ -25,12 +25,13 @@
 #include "include/base.h"
 #include "graphic/surface.h"
 #include "widget.h"
+#include "abstract_spin_button.h"
 #include <string>
 
 class Text;
 class Button;
 
-class SpinButtonWithPicture : public Widget
+class SpinButtonWithPicture : public AbstractSpinButton
 {
  private:
   /* If you need this, implement it (correctly)*/
@@ -46,24 +47,22 @@ class SpinButtonWithPicture : public Widget
  protected:
   Text *txt_label, *txt_value_white, *txt_value_black;
 
-  int m_value;
-  int m_min_value, m_max_value, m_step;
-
  public:
   SpinButtonWithPicture(const std::string &label,
                         const std::string &resource_id,
                         const Point2i &size,
-                        int value=0, int step=1,
-                        int min_value=-1, int max_value=-1);
+                        int value, int step,
+                        int min_value, int max_value);
   virtual ~SpinButtonWithPicture();
 
-  void SetSizePosition(const Rectanglei &rect);
+  // From Widget
+  virtual void SetSizePosition(const Rectanglei &rect);
+  virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
+  virtual Widget* Click(const Point2i&, uint) const { return NULL; };
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
-  Widget* Click(const Point2i&, uint) const { return NULL; };
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
-  int GetValue() const { return m_value; };
-  void SetValue(int value);
+  // From AbstractSpinButton
+  virtual void ValueHasChanged();
 };
 
 #endif
