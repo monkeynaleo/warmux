@@ -33,7 +33,6 @@ class Team;
 class ParticleEngine;
 class DamageStatistics;
 class Body;
-typedef enum BodyDirection BodyDirection_t;
 
 #ifdef DEBUG
 //#define DEBUG_SKIN

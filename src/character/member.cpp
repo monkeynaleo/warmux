@@ -20,10 +20,14 @@
 
 #include <map>
 #include <iostream>
-#include "character/member.h"
 #include "character/body.h"
+#include "character/character.h"
+#include "character/member.h"
 #include "character/movement.h"
+#include "game/game.h"
 #include "graphic/sprite.h"
+#include "team/teams_list.h"
+#include "team/team.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
@@ -285,5 +289,9 @@ WeaponMember::~WeaponMember()
 
 void WeaponMember::Draw(const Point2i & /*_pos*/, int /*flip_center*/, int /*direction*/)
 {
-  // Would be cool to display the weapon from here...
+  if (!ActiveCharacter().IsDead() && Game::GetInstance()->ReadState() != Game::END_TURN)
+  {
+        ActiveTeam().crosshair.Draw();
+        ActiveTeam().AccessWeapon().Draw();
+  }
 }
