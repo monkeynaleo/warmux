@@ -19,9 +19,9 @@
  * Generic Box that falls from they sky.
  *****************************************************************************/
 
-#include "objbox.h"
-#include "medkit.h"
-#include "bonus_box.h"
+#include "object/objbox.h"
+#include "object/medkit.h"
+#include "object/bonus_box.h"
 #include <sstream>
 #include <iostream>
 #include "game/game_mode.h"

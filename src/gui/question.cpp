@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <SDL_events.h>
-#include "question.h"
+#include "gui/question.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
 #include "graphic/video.h"

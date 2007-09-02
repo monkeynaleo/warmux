@@ -18,7 +18,7 @@
  ******************************************************************************/
 
 #include <iostream>
-#include "font.h"
+#include "graphic/font.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"

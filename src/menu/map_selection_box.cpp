@@ -19,7 +19,7 @@
  * Map selection box
  *****************************************************************************/
 
-#include "map_selection_box.h"
+#include "menu/map_selection_box.h"
 #include "game/config.h"
 #include "gui/button.h"
 #include "gui/label.h"

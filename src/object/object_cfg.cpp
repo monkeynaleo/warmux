@@ -22,7 +22,7 @@
 //-----------------------------------------------------------------------------
 #include <cstring>
 #include <iostream>
-#include "object_cfg.h"
+#include "object/object_cfg.h"
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "include/base.h"

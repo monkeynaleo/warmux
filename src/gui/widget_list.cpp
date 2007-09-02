@@ -20,8 +20,8 @@
  * It is a fake widget.
  *****************************************************************************/
 #include <SDL_keyboard.h>
-#include "widget_list.h"
-#include "widget.h"
+#include "gui/widget_list.h"
+#include "gui/widget.h"
 #include <iostream>
 
 WidgetList::WidgetList()

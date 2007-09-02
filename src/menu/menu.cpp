@@ -19,7 +19,7 @@
  * Generic menu
  *****************************************************************************/
 
-#include "menu.h"
+#include "menu/menu.h"
 #include "include/app.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"

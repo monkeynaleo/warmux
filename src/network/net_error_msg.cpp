@@ -19,8 +19,8 @@
  *  Displays network related error messages in a pop-up
  *****************************************************************************/
 
-#include "net_error_msg.h"
-#include "network.h"
+#include "network/net_error_msg.h"
+#include "network/network.h"
 #include "tool/i18n.h"
 #include "gui/question.h"
 

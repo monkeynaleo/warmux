@@ -17,8 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include "spin_button_big.h"
-#include "button.h"
+#include "gui/spin_button_big.h"
+#include "gui/button.h"
 #include <sstream>
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"

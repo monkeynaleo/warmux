@@ -19,7 +19,7 @@
  * Keyboard management.
  *****************************************************************************/
 
-#include "keyboard.h"
+#include "interface/keyboard.h"
 #include "game/game.h"
 #include "network/chat.h"
 #include <SDL_events.h>

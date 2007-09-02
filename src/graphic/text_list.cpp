@@ -21,8 +21,8 @@
  * nefertum - Jon de Andres
  *****************************************************************************/
 
-#include "text_list.h"
-#include "text.h"
+#include "graphic/text_list.h"
+#include "graphic/text.h"
 
 TextList::TextList()
 {}

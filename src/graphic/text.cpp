@@ -18,7 +18,7 @@
  ******************************************************************************/
 
 #include <iostream> //cerr
-#include "text.h"
+#include "graphic/text.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "interface/interface.h"

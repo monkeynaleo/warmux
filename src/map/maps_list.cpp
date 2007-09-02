@@ -19,7 +19,7 @@
  * Maps list
  *****************************************************************************/
 
-#include "maps_list.h"
+#include "map/maps_list.h"
 #include "game/config.h"
 #include "graphic/surface.h"
 #include "tool/resource_manager.h"

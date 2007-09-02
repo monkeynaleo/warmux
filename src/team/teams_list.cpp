@@ -20,8 +20,8 @@
  *****************************************************************************/
 
 #include <libxml++/libxml++.h>
-#include "team.h"
-#include "team_config.h"
+#include "team/team.h"
+#include "team/team_config.h"
 #include "team/teams_list.h"
 //-----------------------------------------------------------------------------
 #include "character/character.h"

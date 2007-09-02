@@ -20,8 +20,8 @@
  *****************************************************************************/
 
 
-#include "widget.h"
-#include "container.h"
+#include "gui/widget.h"
+#include "gui/container.h"
 
 Widget::Widget():
   Rectanglei(),

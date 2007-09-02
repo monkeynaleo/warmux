@@ -19,7 +19,7 @@
  * Progress bar for GUI.
  *****************************************************************************/
 
-#include "progress_bar.h"
+#include "gui/progress_bar.h"
 #include <SDL.h>
 #include "graphic/video.h"
 #include "include/app.h"

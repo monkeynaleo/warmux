@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <SDL_keyboard.h>
-#include "text_box.h"
+#include "gui/text_box.h"
 #include "graphic/text.h"
 
 TextBox::TextBox (const std::string &label, const Point2i &_size,

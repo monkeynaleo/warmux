@@ -19,9 +19,9 @@
  * Polygon class. Store point of a polygon and handle affine transformation
  *****************************************************************************/
 
-#include "polygon.h"
+#include "graphic/polygon.h"
 #include "tool/affine_transform.h"
-#include "sprite.h"
+#include "graphic/sprite.h"
 #include "tool/random.h"
 #include "graphic/video.h"
 #include "include/app.h"

@@ -19,7 +19,7 @@
  * Button with text.
  *****************************************************************************/
 
-#include "button_text.h"
+#include "gui/button_text.h"
 #include "graphic/text.h"
 
 ButtonText::~ButtonText(){

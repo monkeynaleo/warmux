@@ -21,7 +21,7 @@
  *****************************************************************************/
 
 
-#include "internet_menu.h"
+#include "menu/internet_menu.h"
 
 #include "include/app.h"
 #include "gui/button.h"

@@ -21,7 +21,7 @@
  * the configuration file.
  *****************************************************************************/
 
-#include "config.h"
+#include "game/config.h"
 
 #include <sstream>
 #include <string>

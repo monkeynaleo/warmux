@@ -19,13 +19,13 @@
  * Network server layer for Wormux.
  *****************************************************************************/
 
-#include "network_server.h"
+#include "network/network_server.h"
 //-----------------------------------------------------------------------------
 #include <SDL_thread.h>
 #include "include/action_handler.h"
 #include "game/game_mode.h"
 #include "tool/debug.h"
-#include "distant_cpu.h"
+#include "network/distant_cpu.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK

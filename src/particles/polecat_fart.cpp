@@ -19,7 +19,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "polecat_fart.h"
+#include "particles/polecat_fart.h"
 #include "particles/particle.h"
 #include "character/character.h"
 #include "graphic/sprite.h"

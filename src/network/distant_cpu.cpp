@@ -22,11 +22,11 @@
 #ifdef _MSC_VER
 #  include <algorithm>  //std::find
 #endif
-#include "distant_cpu.h"
+#include "network/distant_cpu.h"
 //-----------------------------------------------------------------------------
 #include <SDL_mutex.h>
 #include <SDL_thread.h>
-#include "network.h"
+#include "network/network.h"
 #include "include/action.h"
 #include "include/action_handler.h"
 #include "map/maps_list.h"

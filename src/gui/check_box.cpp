@@ -19,7 +19,7 @@
  * Checkbox in GUI.
  *****************************************************************************/
 
-#include "check_box.h"
+#include "gui/check_box.h"
 #include "graphic/text.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"

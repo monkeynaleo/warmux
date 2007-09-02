@@ -19,10 +19,10 @@
  * A widget integrating a ListBox with a bottom Label
  *****************************************************************************/
 
-#include "list_box_w_label.h"
+#include "gui/list_box_w_label.h"
 #include <algorithm>
 #include "graphic/text.h"
-#include "button.h"
+#include "gui/button.h"
 
 //#define SCROLLBAR
 

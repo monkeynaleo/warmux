@@ -19,7 +19,7 @@
  * Vertical or Horizontal Box
  *****************************************************************************/
 
-#include "box.h"
+#include "gui/box.h"
 #include "graphic/surface.h"
 #include "graphic/colors.h"
 

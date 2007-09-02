@@ -19,8 +19,8 @@
  * Calculate frame per second.
  *****************************************************************************/
 
-#include "fps.h"
-#include "text.h"
+#include "graphic/fps.h"
+#include "graphic/text.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "tool/i18n.h"

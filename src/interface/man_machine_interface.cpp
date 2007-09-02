@@ -20,9 +20,9 @@
  *****************************************************************************/
 
 #include <SDL_events.h>
-#include "man_machine_interface.h"
-#include "cursor.h"
-#include "interface.h"
+#include "interface/man_machine_interface.h"
+#include "interface/cursor.h"
+#include "interface/interface.h"
 #include "character/character.h"
 #include "ai/ai_engine_stupid.h"
 #include "game/game.h"

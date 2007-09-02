@@ -19,7 +19,7 @@
  * Picture widget: A widget containing a picture
  *****************************************************************************/
 
-#include "picture_widget.h"
+#include "gui/picture_widget.h"
 #include "graphic/colors.h"
 #include "graphic/sprite.h"
 #include "tool/resource_manager.h"

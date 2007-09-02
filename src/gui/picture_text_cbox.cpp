@@ -19,7 +19,7 @@
  * A beautiful checkbox with picture and text
  *****************************************************************************/
 
-#include "picture_text_cbox.h"
+#include "gui/picture_text_cbox.h"
 #include "include/app.h"
 #include "graphic/text.h"
 #include "graphic/font.h"

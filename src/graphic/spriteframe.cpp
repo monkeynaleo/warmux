@@ -17,7 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include "spriteframe.h"
+#include "graphic/spriteframe.h"
 
 SpriteFrame::SpriteFrame(const Surface& p_surface, unsigned int p_speed){
   ASSERT( !p_surface.IsNull() );

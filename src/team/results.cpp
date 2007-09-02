@@ -22,11 +22,11 @@
 #include <iostream>
 #include "include/app.h"
 #include "include/constant.h"
-#include "results.h"
+#include "team/results.h"
 #include "character/character.h"
 #include "character/damage_stats.h"
-#include "team.h"
-#include "macro.h"
+#include "team/team.h"
+#include "team/macro.h"
 
 TopCharacters::TopCharacters()
   : Violent(NULL)

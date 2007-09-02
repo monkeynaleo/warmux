@@ -21,9 +21,9 @@
  *****************************************************************************/
 
 #include <SDL_events.h>
-#include "chat.h"
+#include "network/chat.h"
 #include "graphic/text_list.h"
-#include "network.h"
+#include "network/network.h"
 #include "graphic/text.h"
 #include "game/time.h"
 #include "tool/i18n.h"

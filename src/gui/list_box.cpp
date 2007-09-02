@@ -19,12 +19,12 @@
  * Listbox
  *****************************************************************************/
 
-#include "list_box.h"
-#include "container.h"
+#include "gui/list_box.h"
+#include "gui/container.h"
 #include <algorithm>
 #include "tool/resource_manager.h"
 #include "graphic/text.h"
-#include "button.h"
+#include "gui/button.h"
 
 ListBoxItem::ListBoxItem(const std::string& _label,
                          Font::font_size_t fsize,

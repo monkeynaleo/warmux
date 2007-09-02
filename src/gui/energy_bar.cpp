@@ -21,7 +21,7 @@
 
 #include <iostream>
 #include <sstream>
-#include "energy_bar.h"
+#include "gui/energy_bar.h"
 #include "tool/resource_manager.h"
 #include "gui/progress_bar.h"
 

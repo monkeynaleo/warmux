@@ -19,9 +19,9 @@
  * Interface showing various informations about the game.
  *****************************************************************************/
 
-#include "weapon_menu.h"
+#include "interface/weapon_menu.h"
 #include <sstream>
-#include "interface.h"
+#include "interface/interface.h"
 #include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/polygon_generator.h"

@@ -22,18 +22,18 @@
  *             Initial version
  *****************************************************************************/
 
-#include "sprite.h"
+#include "graphic/sprite.h"
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <iostream>
-#include "surface.h"
+#include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "tool/rectangle.h"
 #include "tool/debug.h"
-#include "spriteframe.h"
+#include "graphic/spriteframe.h"
 
 #define BUGGY_SDLGFX
 

@@ -19,7 +19,7 @@
  * Random map generator
  *****************************************************************************/
 
-#include "random_map.h"
+#include "map/random_map.h"
 #include "game/config.h"
 #include "graphic/polygon_generator.h"
 #include "graphic/sprite.h"

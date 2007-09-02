@@ -20,10 +20,10 @@
 #include <vector>
 #include <sstream>
 
-#include "combo_box.h"
+#include "gui/combo_box.h"
 #include "graphic/text.h"
 #include "graphic/video.h"
-#include "button.h"
+#include "gui/button.h"
 #include "include/app.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"

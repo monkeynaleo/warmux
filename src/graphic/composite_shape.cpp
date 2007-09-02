@@ -19,9 +19,9 @@
  * Composite Shape. Use Polygon and Sprite to draw a shape.
  *****************************************************************************/
 
-#include "composite_shape.h"
-#include "surface.h"
-#include "polygon.h"
+#include "graphic/composite_shape.h"
+#include "graphic/surface.h"
+#include "graphic/polygon.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "map/map.h"

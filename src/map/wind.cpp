@@ -19,8 +19,8 @@
  *  wind Refresh (you may get cold ;) )
  *****************************************************************************/
 
-#include "wind.h"
-#include "camera.h"
+#include "map/wind.h"
+#include "map/camera.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
