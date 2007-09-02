@@ -63,6 +63,7 @@ private:
   std::list<WindParticle *> particles;
   typedef std::list<WindParticle *>::iterator iterator;
   void RemoveAllParticles();
+  void RandomizeParticlesPos(); // Put particles randomly on the screen
 
 public:
   Wind() { m_val = m_nv_val = 0; };
@@ -73,7 +74,6 @@ public:
   void Refresh();
   void Reset();
   void DrawParticles();
-  void RandomizeParticlesPos(); // Put particles randomly on the screen
 };
 
 extern Wind wind;
