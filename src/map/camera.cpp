@@ -141,7 +141,7 @@ void Camera::ScrollCamera()
 
   if (!tstVector.IsNull()) {
     SetXY(tstVector);
-    SetAutoCrop(false);
+    auto_crop = false;
   }
 
   /* mouse pointer */
@@ -180,7 +180,7 @@ void Camera::TestCamera()
   if (SDL_GetModState() & KMOD_CTRL ||
       SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
     {
-      SetAutoCrop(false);
+      auto_crop = false;
       SetXY(last_mouse_pos - curr_pos);
       Mouse::GetInstance()->SetPointer(Mouse::POINTER_MOVE);
       last_mouse_pos = curr_pos;
