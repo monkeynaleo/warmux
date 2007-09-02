@@ -611,9 +611,6 @@ void Game::__SetState_PLAYING()
     }
 
   give_objbox = true; //hack make it so no more than one objbox per turn
-
-  // Center the cursor
-  Mouse::GetInstance()->CenterPointer();
 }
 
 void Game::__SetState_HAS_PLAYED()
