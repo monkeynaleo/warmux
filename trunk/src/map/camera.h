@@ -35,6 +35,8 @@ class Camera : public Rectanglei
 
 private:
   static Camera * singleton;
+  void TestCamera();
+  void ScrollCamera();
   Camera();
 
   bool auto_crop;

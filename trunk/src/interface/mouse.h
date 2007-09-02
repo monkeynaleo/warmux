@@ -32,6 +32,7 @@ struct SDL_event;
 class Mouse
 {
 public:
+
   typedef enum {
     POINTER_STANDARD,
     POINTER_SELECT,
@@ -53,16 +54,12 @@ public:
   typedef enum {
     MOUSE_HIDDEN,
     MOUSE_VISIBLE,
-    MOUSE_HIDDEN_UNTIL_NEXT_MOVE
   } visibility_t;
 private:
-  bool scroll_actif;
 
   visibility_t visible;
   pointer_t current_pointer;
 
-  Point2i savedPos;
-  Point2i lastPos;
   static Mouse * singleton;
 
   Surface pointer_select,
@@ -80,10 +77,9 @@ private:
     pointer_aim;
 
   Mouse();
-  pointer_t ScrollPointer() const;
   bool DrawMovePointer() const;
-  void ScrollCamera() const;
   void DrawSelectPointer() const;
+  void ChoixVerPointe() const;
 
   const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 
@@ -98,8 +94,6 @@ public:
   bool HandleClic (const SDL_Event& event) const;
 
   void Refresh();
-  void TestCamera();
-  void ChoixVerPointe() const;
 
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
@@ -111,11 +105,9 @@ public:
   // Hide/show mouse pointer
   void Show();
   void Hide();
-  void HideUntilNextMove();
 
   // Center the pointer on the screen
   void CenterPointer() const;
   const visibility_t GetVisibility() const { return visible; };
 };
-
 #endif

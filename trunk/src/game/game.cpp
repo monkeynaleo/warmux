@@ -614,7 +614,6 @@ void Game::__SetState_PLAYING()
 
   // Center the cursor
   Mouse::GetInstance()->CenterPointer();
-  Mouse::GetInstance()->HideUntilNextMove();
 }
 
 void Game::__SetState_HAS_PLAYED()
