@@ -23,9 +23,11 @@
 #include "map/map.h"
 #include "map/wind.h"
 #include "game/game.h"
+#include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "interface/mouse.h"
+#include "interface/interface.h"
 #include "object/physical_obj.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
@@ -118,11 +120,84 @@ void Camera::AutoCrop(){
   SetXY(dst * CAMERA_SPEED / dstMax );
 }
 
+void Camera::ScrollCamera()
+{
+  static const unsigned int SENSIT_SCROLL_MOUSE = 50;
+  Point2i mousePos = Mouse::GetInstance()->GetPosition();
+
+  Point2i tstVector;
+  // If application is fullscreen, mouse is only sensitive when touching the
+  // border screen
+  int coef = (AppWormux::GetInstance()->video->IsFullScreen() ? 10 : 1);
+  Point2i sensitZone(SENSIT_SCROLL_MOUSE / coef, SENSIT_SCROLL_MOUSE / coef);
+
+  /* tstVector represents the vector of how deep the cursor is in a sensit
+   * zone; negative value means that the camera has to reduce its coordinates,
+   * a positive value means that it should increase. Actually reduce means
+   * LEFT/UP (for x/y) and increase RIGHT/DOWN directions.
+   * The bigger tstVector is, the faster the camera will scroll. */
+  tstVector = GetSize().inf(mousePos + sensitZone) * (mousePos + sensitZone - GetSize()) ;
+  tstVector -= mousePos.inf(sensitZone) * (sensitZone - mousePos);
+
+  if (!tstVector.IsNull()) {
+    SetXY(tstVector);
+    SetAutoCrop(false);
+  }
+
+  /* mouse pointer */
+  /* FIXME I do not really like this code to be here... But I do not really
+   * know where to put it in a better place. I do not like the mouse to have a
+   * dependancy on camera. This may mean that mouse is a member of camera and
+   * not a singleton. If you have some better idea I would be glad to hear
+   * about it :) */
+  if (tstVector.IsXNull() && tstVector.y < 0)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP);
+  else if (tstVector.IsXNull() && tstVector.y > 0)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN);
+  else if (tstVector.IsYNull() && tstVector.x < 0)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_LEFT);
+  else if (tstVector.IsYNull() && tstVector.x > 0)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_RIGHT);
+  else if (tstVector.y > 0 && tstVector.x > 0)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN_RIGHT);
+  else if (tstVector.y < 0 && tstVector.x > 0)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP_RIGHT);
+  else if (tstVector.y < 0 && tstVector.x < 0)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP_LEFT);
+  else if (tstVector.y > 0 && tstVector.x < 0)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN_LEFT);
+  else
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+}
+
+void Camera::TestCamera()
+{
+  static Point2i last_mouse_pos(0, 0);
+  Point2i curr_pos = Mouse::GetInstance()->GetPosition();
+
+  int x,y;
+  //Move camera with mouse holding Ctrl key down or with middle button of mouse
+  if (SDL_GetModState() & KMOD_CTRL ||
+      SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
+    {
+      SetAutoCrop(false);
+      SetXY(last_mouse_pos - curr_pos);
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_MOVE);
+      last_mouse_pos = curr_pos;
+      return;
+    }
+  last_mouse_pos = curr_pos;
+
+  if(!Interface::GetInstance()->weapons_menu.IsDisplayed() &&
+     Config::GetInstance()->GetScrollOnBorder())
+    ScrollCamera();
+}
+
 void Camera::Refresh(){
   throw_camera = false;
 
-  // mouse mouvement
-  Mouse::GetInstance()->TestCamera();
+  // Check if player wants the camera to move
+  TestCamera();
   if (throw_camera) return;
 
   if (auto_crop)

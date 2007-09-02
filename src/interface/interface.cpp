@@ -418,6 +418,5 @@ void HideGameInterface()
 
 void ShowGameInterface()
 {
-  Mouse::GetInstance()->Show();
   Interface::GetInstance()->Show();
 }

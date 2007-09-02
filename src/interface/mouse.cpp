@@ -38,12 +38,6 @@
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 
-// XXX Unused mouse scroll speed
-// const uint SCROLL_MOUSE = 20;
-
-// size of the sensitive area use to scroll the map with mouse
-const uint SENSIT_SCROLL_MOUSE = 40;
-
 Mouse * Mouse::singleton = NULL;
 
 Mouse * Mouse::GetInstance() {
@@ -54,7 +48,6 @@ Mouse * Mouse::GetInstance() {
 }
 
 Mouse::Mouse(){
-  scroll_actif = false;
   visible = MOUSE_VISIBLE;
   // Load the different pointers
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
@@ -203,94 +196,21 @@ void Mouse::ChoixVerPointe() const
       Interface::GetInstance()->character_under_cursor = &ActiveCharacter();
   }
 
-  // Draws the cursor arround the pointed character il any
-//  if (interface.character_under_cursor != NULL) {
-//    curseur_ver.PointeObj (interface.character_under_cursor);
-//  } else {
-//    curseur_ver.PointeAucunObj();
-//  }
-}
-
-void Mouse::ScrollCamera() const
-{
-  // XXX Not used
-  // bool scroll = false;
-
-  Point2i mousePos = GetPosition();
-  Point2i winSize = AppWormux::GetInstance()->video->window.GetSize();
-  Point2i tstVector;
-  // If application is fullscreen, mouse is only sensitive when touching the border screen
-  int coef = (AppWormux::GetInstance()->video->IsFullScreen() ? 10 : 1);
-  Point2i sensitZone(SENSIT_SCROLL_MOUSE / coef, SENSIT_SCROLL_MOUSE / coef);
-
-  tstVector = mousePos.inf(sensitZone);
-  if( !tstVector.IsNull() ){
-    Camera::GetInstance()->SetXY( tstVector * (mousePos - (sensitZone * coef))/2 );
-    Camera::GetInstance()->SetAutoCrop(false);
-    // XXX Not used
-    // scroll = true;
-  }
-
-  tstVector = winSize.inf(mousePos + sensitZone);
-  if( !tstVector.IsNull() ){
-    Camera::GetInstance()->SetXY( tstVector * (mousePos + (sensitZone * coef) - winSize)/2 );
-    Camera::GetInstance()->SetAutoCrop(false);
-    // XXX Not used
-    //scroll = true;
-  }
-
-}
-
-void Mouse::TestCamera()
-{
-  Point2i mousePos = GetPosition();
-  int x,y;
-  //Move camera with mouse holding Ctrl key down or with middle button of mouse
-  const bool demande_scroll = SDL_GetModState() & KMOD_CTRL ||
-                              SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE);
-
-  // Show cursor and information interface when moving mouse
-  if (lastPos != mousePos) {
-    MSG_DEBUG("mouse", "Before: %d, %d -> now: %d, %d",
-            lastPos.GetX(), lastPos.GetY(),
-            mousePos.GetX(), mousePos.GetY());
-
-    Show();
-    Interface::GetInstance()->Show();
-    lastPos = mousePos;
-  }
-
-  if( demande_scroll ){
-    if( scroll_actif ){
-      Point2i offset = savedPos - mousePos;
-      Camera::GetInstance()->SetXY(offset);
-      Camera::GetInstance()->SetAutoCrop(false);
-    }else{
-      scroll_actif = true;
-    }
-    savedPos = mousePos;
-    return;
-  }else{
-    scroll_actif = false;
-  }
-
-  if(!Interface::GetInstance()->weapons_menu.IsDisplayed() &&
-     Config::GetInstance()->GetScrollOnBorder())
-    ScrollCamera();
 }
 
 void Mouse::Refresh()
 {
-  if (!scroll_actif)
-    ChoixVerPointe();
+  static Point2i lastpos(0,0);
+
+  ChoixVerPointe();
 
   Point2i pos = GetPosition();
-  if (visible == MOUSE_HIDDEN_UNTIL_NEXT_MOVE
-      && lastPos != pos) {
-    MSG_DEBUG("mouse", "Show : %d, %d - %d, %d", lastPos.GetX(),
-              lastPos.GetY(), pos.GetX(), pos.GetY() );
-    Show();
-  }
+
+  if (lastpos != pos)
+    {
+      Show();
+      lastpos = pos;
+    }
 }
 
 Point2i Mouse::GetPosition() const
@@ -316,8 +236,10 @@ Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
 
   if (current_pointer == pointer) return current_pointer;
 
-  if (pointer == POINTER_STANDARD) SDL_ShowCursor(true);
-  else SDL_ShowCursor(false);
+  if (pointer == POINTER_STANDARD)
+    SDL_ShowCursor(true);
+  else
+    SDL_ShowCursor(false);
 
   pointer_t old_pointer = current_pointer;
   current_pointer = pointer;
@@ -367,79 +289,11 @@ const Surface& Mouse::GetSurfaceFromPointer(pointer_t pointer) const
   return pointer_select;
 }
 
-
-// Return POINTER_STANDARD if it does not need a special
-// arrow cursor
-Mouse::pointer_t Mouse::ScrollPointer() const
-{
-  if (!Config::GetInstance()->GetScrollOnBorder() ||
-      Interface::GetInstance()->weapons_menu.IsDisplayed())
-    return POINTER_STANDARD;
-
-  Point2i mousePos = GetPosition();
-  Point2i winSize = AppWormux::GetInstance()->video->window.GetSize();
-  Point2i cameraPos = Camera::GetInstance()->GetPosition();
-
-  // tries to go up
-  if ( (mousePos.y > 0 && mousePos.y < (int)SENSIT_SCROLL_MOUSE)
-       && (cameraPos.y > 0) )
-    {
-      // and to the right
-      if ( (mousePos.x > winSize.x - (int)SENSIT_SCROLL_MOUSE)
-           && ( cameraPos.x + winSize.x < world.GetWidth() ))
-        return POINTER_ARROW_UP_RIGHT;
-
-      // or to the left
-      if ( (mousePos.x > 0 && mousePos.x < (int)SENSIT_SCROLL_MOUSE)
-       && (cameraPos.x > 0) )
-        return POINTER_ARROW_UP_LEFT;
-
-      return POINTER_ARROW_UP;
-    }
-
-  // tries to go down
-  if ( (mousePos.y > winSize.y - (int)SENSIT_SCROLL_MOUSE)
-       && (cameraPos.y + winSize.y < world.GetHeight()) )
-    {
-      // and to the right
-      if ( (mousePos.x > winSize.x - (int)SENSIT_SCROLL_MOUSE)
-           && ( cameraPos.x + winSize.x < world.GetWidth() ))
-        return POINTER_ARROW_DOWN_RIGHT;
-
-      // or to the left
-      if ( (mousePos.x > 0 && mousePos.x < (int)SENSIT_SCROLL_MOUSE)
-       && (cameraPos.x > 0) )
-        return POINTER_ARROW_DOWN_LEFT;
-
-      return POINTER_ARROW_DOWN;
-    }
-
-
-  // tries to go on the left
-  if ( (mousePos.x > 0 && mousePos.x < (int)SENSIT_SCROLL_MOUSE)
-       && (cameraPos.x > 0) )
-      return POINTER_ARROW_LEFT;
-
-  // tries to go on the right
-  if ( (mousePos.x > winSize.x - (int)SENSIT_SCROLL_MOUSE)
-       && ( cameraPos.x + winSize.x < world.GetWidth() ))
-      return POINTER_ARROW_RIGHT;
-
-  return POINTER_STANDARD;
-}
-
 bool Mouse::DrawMovePointer() const
 {
-  if (scroll_actif) {
-    AppWormux::GetInstance()->video->window.Blit( pointer_move, GetPosition() );
-    world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y ,
-                                      pointer_move.GetWidth(), pointer_move.GetHeight()));
-    return true;
-  }
 
-  pointer_t scroll_pointer = ScrollPointer();
-  if (scroll_pointer != POINTER_STANDARD) {
-    const Surface& cursor = GetSurfaceFromPointer(scroll_pointer);
+  if (current_pointer != POINTER_STANDARD) {
+    const Surface& cursor = GetSurfaceFromPointer(current_pointer);
     AppWormux::GetInstance()->video->window.Blit( cursor, GetPosition() );
     world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y ,
                                       cursor.GetWidth(), cursor.GetHeight()));
@@ -562,16 +416,6 @@ void Mouse::Show()
 void Mouse::Hide()
 {
   visible = MOUSE_HIDDEN;
-  SDL_ShowCursor(false); // be sure cursor is invisible
-
-  MSG_DEBUG("mouse", "%d, %d", GetPosition().GetX(),
-            GetPosition().GetY() );
-}
-
-void Mouse::HideUntilNextMove()
-{
-  visible = MOUSE_HIDDEN_UNTIL_NEXT_MOVE;
-  lastPos = GetPosition();
   SDL_ShowCursor(false); // be sure cursor is invisible
 
   MSG_DEBUG("mouse", "%d, %d", GetPosition().GetX(),
