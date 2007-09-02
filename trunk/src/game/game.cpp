@@ -290,10 +290,6 @@ void Game::Draw ()
 
   StatStart("GameDraw:active_character");
   ActiveCharacter().Draw();
-  if (!ActiveCharacter().IsDead() && state != END_TURN) {
-        ActiveTeam().crosshair.Draw();
-        ActiveTeam().AccessWeapon().Draw();
-  }
   StatStop("GameDraw:active_character");
   StatStop("GameDraw:characters");
 
