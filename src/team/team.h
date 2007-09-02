@@ -25,7 +25,7 @@
 #include <list>
 #include <vector>
 #include <string>
-#include "team_energy.h"
+#include "team/team_energy.h"
 #include "graphic/surface.h"
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"

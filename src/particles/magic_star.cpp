@@ -21,7 +21,7 @@
  *****************************************************************************/
 
 #include "magic_star.h"
-#include "particle.h"
+#include "particles/particle.h"
 #include "tool/random.h"
 #include "game/time.h"
 #include "graphic/sprite.h"

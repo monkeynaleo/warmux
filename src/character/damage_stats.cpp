@@ -19,7 +19,7 @@
  * Damage statistics for a character
  *****************************************************************************/
 
-#include "damage_stats.h"
+#include "character/damage_stats.h"
 #include "character/character.h"
 #include "team/team.h"
 #include "tool/debug.h"

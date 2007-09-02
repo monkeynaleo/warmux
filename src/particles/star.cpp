@@ -19,7 +19,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "particle.h"
+#include "particles/particle.h"
 #include "star.h"
 #include "graphic/sprite.h"
 

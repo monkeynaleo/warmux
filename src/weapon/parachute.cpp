@@ -19,9 +19,9 @@
  * Parachute !
  *****************************************************************************/
 
-#include "parachute.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/parachute.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
 #include "game/game.h"

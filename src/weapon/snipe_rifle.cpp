@@ -19,11 +19,11 @@
  * Snipe Rifle. Overide the Draw method in order to draw the laser beam.
  *****************************************************************************/
 
-#include "snipe_rifle.h"
-#include "weapon_cfg.h"
+#include "weapon/snipe_rifle.h"
+#include "weapon/weapon_cfg.h"
 
 #include <sstream>
-#include "explosion.h"
+#include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/game.h"
 #include "graphic/sprite.h"

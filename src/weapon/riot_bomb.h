@@ -22,7 +22,7 @@
 #ifndef RIOT_BOMB_H
 #define RIOT_BOMB_H
 
-#include "weapon_launcher.h"
+#include "weapon/weapon_launcher.h"
 
 class RiotBomb : public WeaponLauncher
 {

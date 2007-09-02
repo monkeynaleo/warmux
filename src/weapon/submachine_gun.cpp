@@ -37,9 +37,9 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
-#include "explosion.h"
-#include "submachine_gun.h"
-#include "weapon_cfg.h"
+#include "weapon/explosion.h"
+#include "weapon/submachine_gun.h"
+#include "weapon/weapon_cfg.h"
 
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_TIME_BETWEEN_SHOOT = 70;

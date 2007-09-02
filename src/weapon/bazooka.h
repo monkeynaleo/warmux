@@ -22,7 +22,7 @@
 #ifndef BAZOOKA_H
 #define BAZOOKA_H
 
-#include "weapon_launcher.h"
+#include "weapon/weapon_launcher.h"
 
 class Bazooka : public WeaponLauncher
 {

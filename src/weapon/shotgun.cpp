@@ -19,9 +19,9 @@
  * Shotgun. Shoot a bunch of buckshot at each fire
  *****************************************************************************/
 
-#include "explosion.h"
-#include "shotgun.h"
-#include "weapon_cfg.h"
+#include "weapon/explosion.h"
+#include "weapon/shotgun.h"
+#include "weapon/weapon_cfg.h"
 
 #include <sstream>
 #include "map/map.h"

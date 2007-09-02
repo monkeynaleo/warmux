@@ -23,7 +23,7 @@
 #ifndef GRENADE_H
 #define GRENADE_H
 
-#include "weapon_launcher.h"
+#include "weapon/weapon_launcher.h"
 
 // La Grenade
 class Grenade : public WeaponProjectile

@@ -23,7 +23,7 @@
 #ifndef GUN_H
 #define GUN_H
 
-#include "weapon_launcher.h"
+#include "weapon/weapon_launcher.h"
 #include "include/base.h"
 
 class Gun : public WeaponLauncher

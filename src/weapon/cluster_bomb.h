@@ -24,7 +24,7 @@
 #define CLUSTER_BOMB_H
 
 #include <list>
-#include "weapon_launcher.h"
+#include "weapon/weapon_launcher.h"
 #include "include/base.h"
 
 class ClusterBombConfig;

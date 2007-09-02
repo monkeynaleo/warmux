@@ -19,12 +19,12 @@
  * Game loop : drawing and data handling
  *****************************************************************************/
 
-#include "game_init.h"
+#include "game/game_init.h"
 #include <SDL.h>
 #include <iostream>
-#include "game.h"
-#include "game_mode.h"
-#include "time.h"
+#include "game/game.h"
+#include "game/game_mode.h"
+#include "game/time.h"
 #include "character/character.h"
 #include "include/action_handler.h"
 #include "interface/cursor.h"

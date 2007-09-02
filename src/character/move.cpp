@@ -19,9 +19,9 @@
  * Mouvement right/left for a character.
  *****************************************************************************/
 
-#include "move.h"
+#include "character/move.h"
 //#include <math.h>
-#include "character.h"
+#include "character/character.h"
 #include "game/game.h"
 #include "include/action_handler.h"
 #include "network/network.h"

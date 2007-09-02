@@ -19,8 +19,8 @@
  * Artificial intelligence Shoot module
  *****************************************************************************/
 
-#include "ai_shoot_module.h"
-#include "ai_movement_module.h"
+#include "ai/ai_shoot_module.h"
+#include "ai/ai_movement_module.h"
 #include "character/character.h"
 #include "interface/game_msg.h"
 #include "map/map.h"

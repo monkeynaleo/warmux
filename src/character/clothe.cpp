@@ -19,8 +19,8 @@
  *****************************************************************************/
 
 #include "tool/xml_document.h"
-#include "clothe.h"
-#include "member.h"
+#include "character/clothe.h"
+#include "character/member.h"
 #include <map>
 #include <iostream>
 

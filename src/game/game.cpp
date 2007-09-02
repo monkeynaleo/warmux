@@ -19,13 +19,13 @@
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
 #include <iostream>
-#include "game.h"
-#include "time.h"
+#include "game/game.h"
+#include "game/time.h"
 #include "ai/ai_engine.h"
 #include "map/camera.h"
 #include "character/character.h"
-#include "game_init.h"
-#include "game_mode.h"
+#include "game/game_init.h"
+#include "game/game_mode.h"
 #include "graphic/fps.h"
 #include "graphic/video.h"
 #include "gui/question.h"

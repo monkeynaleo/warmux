@@ -19,9 +19,9 @@
  * Weapon Syringe
  *****************************************************************************/
 
-#include "explosion.h"
-#include "syringe.h"
-#include "weapon_cfg.h"
+#include "weapon/explosion.h"
+#include "weapon/syringe.h"
+#include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
 #include "sound/jukebox.h"

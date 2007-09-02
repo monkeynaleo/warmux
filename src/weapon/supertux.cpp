@@ -19,9 +19,9 @@
  * Weapon Supertux : Look ! it's the famous flying magic pinguin !
  *****************************************************************************/
 
-#include "supertux.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/supertux.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
 #include "game/config.h"

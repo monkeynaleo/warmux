@@ -20,9 +20,9 @@
  * Weapon projectile are handled in WeaponLauncher (see launcher.cpp and launcher.h).
  *****************************************************************************/
 
-#include "weapon.h"
-#include "weapon_strength_bar.h"
-#include "weapon_cfg.h"
+#include "weapon/weapon.h"
+#include "weapon/weapon_strength_bar.h"
+#include "weapon/weapon_cfg.h"
 #include <sstream>
 #include "character/character.h"
 #include "game/time.h"

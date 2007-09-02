@@ -23,7 +23,7 @@
 #define SHOTGUN_H
 
 #include <vector>
-#include "weapon_launcher.h"
+#include "weapon/weapon_launcher.h"
 #include "include/base.h"
 #include "tool/point.h"
 

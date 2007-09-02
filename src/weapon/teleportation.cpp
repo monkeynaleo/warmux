@@ -19,7 +19,7 @@
  * Teleportation : move a charecter anywhere on the map
  *****************************************************************************/
 
-#include "teleportation.h"
+#include "weapon/teleportation.h"
 #include "character/character.h"
 #include "character/body.h"
 #include "game/game_mode.h"

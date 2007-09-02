@@ -18,12 +18,12 @@
  ******************************************************************************
  *****************************************************************************/
 
-#include "body_list.h"
+#include "character/body_list.h"
 //-----------------------------------------------------------------------------
 #include <string>
 #include <iostream>
-#include "body.h"
-#include "movement.h"
+#include "character/body.h"
+#include "character/movement.h"
 #include "game/config.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"

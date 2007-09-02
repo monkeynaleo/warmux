@@ -19,9 +19,9 @@
  * Anvil : appear in top of an enemy and crush down his head
  *****************************************************************************/
 
-#include "weapon_cfg.h"
-#include "anvil.h"
-#include "explosion.h"
+#include "weapon/weapon_cfg.h"
+#include "weapon/anvil.h"
+#include "weapon/explosion.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "character/character.h"

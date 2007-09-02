@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "polecat_fart.h"
-#include "particle.h"
+#include "particles/particle.h"
 #include "character/character.h"
 #include "graphic/sprite.h"
 

@@ -20,9 +20,9 @@
 
 #include <map>
 #include <iostream>
-#include "member.h"
-#include "body.h"
-#include "movement.h"
+#include "character/member.h"
+#include "character/body.h"
+#include "character/movement.h"
 #include "graphic/sprite.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"

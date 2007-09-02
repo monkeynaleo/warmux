@@ -19,9 +19,9 @@
  * auto bazooka : launch a homing missile
  *****************************************************************************/
 
-#include "auto_bazooka.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/auto_bazooka.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
 #include "game/time.h"

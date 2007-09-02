@@ -20,9 +20,9 @@
  * hole with angle and force
  *****************************************************************************/
 
-#include "riot_bomb.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/riot_bomb.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include "game/config.h"
 #include "graphic/sprite.h"

@@ -19,8 +19,8 @@
  * Jet Pack :-)
  *****************************************************************************/
 
-#include "jetpack.h"
-#include "explosion.h"
+#include "weapon/jetpack.h"
+#include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/game.h"
 #include "game/game_mode.h"

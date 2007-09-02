@@ -19,11 +19,11 @@
  * Xml documents access
  *****************************************************************************/
 
-#include "xml_document.h"
+#include "tool/xml_document.h"
 #include <libxml++/libxml++.h>
 #include <iostream>
-#include "string_tools.h"
-#include "file_tools.h"
+#include "tool/string_tools.h"
+#include "tool/file_tools.h"
 
 bool XmlReader::Load(const std::string &filename)
 {

@@ -20,8 +20,8 @@
  *****************************************************************************/
 
 #include "character/character.h"
-#include "crosshair.h"
-#include "weapon.h"
+#include "weapon/crosshair.h"
+#include "weapon/weapon.h"
 #include "game/game.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"

@@ -19,7 +19,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "particle.h"
+#include "particles/particle.h"
 #include <SDL.h>
 #include <map>
 #include "game/time.h"

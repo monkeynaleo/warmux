@@ -19,9 +19,9 @@
  * Blowtorch - burns holes into walls
  *****************************************************************************/
 
-#include "blowtorch.h"
-#include "explosion.h"
-#include "weapon_cfg.h"
+#include "weapon/blowtorch.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
 #include "include/action_handler.h"

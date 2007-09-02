@@ -19,11 +19,11 @@
  * Refresh des armes.
  *****************************************************************************/
 
-#include "weapons_list.h"
+#include "weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 #include <algorithm>
-#include "all.h"
-#include "explosion.h"
+#include "weapon/all.h"
+#include "weapon/explosion.h"
 #include "interface/interface.h"
 #include "map/camera.h"
 #include "map/maps_list.h"

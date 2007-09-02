@@ -28,7 +28,7 @@
 #include "tool/debug.h"
 #include "tool/error.h"
 
-#include "ai_movement_module.h"
+#include "ai/ai_movement_module.h"
 
 // TODO:
 // - Be sure to not go out of the map

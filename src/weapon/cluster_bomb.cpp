@@ -20,11 +20,11 @@
  * exploding bomb
  *****************************************************************************/
 
-#include "cluster_bomb.h"
-#include "weapon_cfg.h"
+#include "weapon/cluster_bomb.h"
+#include "weapon/weapon_cfg.h"
 #include <sstream>
 #include <math.h>
-#include "explosion.h"
+#include "weapon/explosion.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
