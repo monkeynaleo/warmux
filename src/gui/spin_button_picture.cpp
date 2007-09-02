@@ -32,7 +32,8 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string& label,
                                               const std::string& resource_id,
                                               const Point2i& _size,
                                               int value, int step,
-                                              int min_value, int max_value)
+                                              int min_value, int max_value) :
+  AbstractSpinButton(value, step, min_value, max_value)
 {
   position = Point2i(-1, -1);
   size = _size;
@@ -47,19 +48,10 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string& label,
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
 
-  if ( min_value != -1 && min_value <= value)
-    m_min_value = min_value;
-  else m_min_value = value/2;
-
-  if ( max_value != -1 && max_value >= value)
-    m_max_value = max_value;
-  else m_max_value = value*2;
-
   txt_value_black = new Text("", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_value_white = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
-  SetValue(value);
 
-  m_step = step;
+  ValueHasChanged();
 }
 
 SpinButtonWithPicture::~SpinButtonWithPicture ()
@@ -75,16 +67,14 @@ void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
   txt_label->SetMaxWidth(GetSizeX());
 }
 
-void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
+void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
 {
-  Surface video_window = AppWormux::GetInstance()->video->window;
-
   //  the computed positions are to center on the image part of the widget
 
   // 1. first draw the annulus background
   uint tmp_back_x = GetPositionX() + (GetSizeX() - m_annulus_background.GetWidth())/4 ;
   uint tmp_back_y = GetPositionY() + (GetSizeY() - m_annulus_background.GetHeight() - txt_label->GetHeight() - 5) /2;
-  video_window.Blit(m_annulus_background, Point2i(tmp_back_x, tmp_back_y));
+  surf.Blit(m_annulus_background, Point2i(tmp_back_x, tmp_back_y));
 
   // 2. then draw the progress annulus
   static uint small_r = 25;
@@ -92,23 +82,22 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
   static double open_angle_value = 0.96; // 55 °
   uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
   uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
-  double angle = (2 * M_PI - open_angle_value) * (m_value - m_min_value) / (m_max_value - m_min_value);
+  double angle = (2 * M_PI - open_angle_value) * (GetValue() - GetMinValue()) / (GetMaxValue() - GetMinValue());
   Polygon *tmp = PolygonGenerator::GeneratePartialTorus(big_r * 2, small_r * 2, 100, angle, open_angle_value / 2.0);
   tmp->SetPlaneColor(m_progress_color);
   tmp->ApplyTransformation(AffineTransform2D::Translate(center_x, center_y));
-  tmp->Draw(&video_window);
+  tmp->Draw(&surf);
   delete(tmp);
 
   // 3. then draw the annulus foreground
   uint tmp_fore_x = GetPositionX() + (GetSizeX() - m_annulus_foreground.GetWidth())/4 ;
   uint tmp_fore_y = GetPositionY() + (GetSizeY() - m_annulus_foreground.GetHeight() - txt_label->GetHeight() - 5) /2;
-  video_window.Blit(m_annulus_foreground, Point2i(tmp_fore_x, tmp_fore_y));
+  surf.Blit(m_annulus_foreground, Point2i(tmp_fore_x, tmp_fore_y));
 
   // 4. then draw the image
   uint tmp_x = center_x - m_image.GetWidth() / 2;
   uint tmp_y = center_y - m_image.GetHeight() / 2;
-
-  video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
+  surf.Blit(m_image, Point2i(tmp_x, tmp_y));
 
   // 5. add in the value image
   tmp_x = center_x;
@@ -120,50 +109,35 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& /*su
 
   // 6. and finally the label image
   txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
-                            GetPositionY() + GetSizeY() - txt_label->GetHeight()));
+				   GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
 Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
-  if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {
+  if (!Contains(mousePosition)) {
+    return NULL;
+  }
 
-    m_value += m_step;
-    if (m_value > m_max_value) SetValue(m_min_value);
-    else SetValue(m_value);
+  if (button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELDOWN) {
+    DecValue();
     return this;
 
-  } else if (button == SDL_BUTTON_RIGHT && Contains(mousePosition)) {
-
-    m_value -= m_step;
-    if (m_value < m_min_value) SetValue(m_max_value);
-    else SetValue(m_value);
-    return this;
-
-  } else if( button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition) ) {
-
-    SetValue(m_value - m_step);
-    return this;
-
-  } else if( button == SDL_BUTTON_WHEELUP && Contains(mousePosition) ) {
-
-    SetValue(m_value + m_step);
+  } else if (button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELUP) {
+    IncValue();
     return this;
   }
+
   return NULL;
 }
 
-void SpinButtonWithPicture::SetValue(int value)
+void SpinButtonWithPicture::ValueHasChanged()
 {
-  m_value = BorneLong(value, m_min_value, m_max_value);
-
   std::ostringstream value_s;
-  value_s << m_value ;
+  value_s << GetValue();
 
   std::string s(value_s.str());
   txt_value_black->Set(s);
   txt_value_white->Set(s);
-
-  ForceRedraw();
 }

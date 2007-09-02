@@ -58,5 +58,7 @@ class NetworkTeamsSelectionBox : public HBox
   void AddTeamCallback(const std::string& team_id);
   void UpdateTeamCallback(const std::string& team_id);
   void DelTeamCallback(const std::string& team_id);
+
+  void SetMaxNbLocalPlayers(uint nb);
 };
 #endif

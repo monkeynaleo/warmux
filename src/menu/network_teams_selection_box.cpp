@@ -31,7 +31,6 @@
 #include "team/team.h"
 #include "tool/i18n.h"
 
-
 NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), true)
 {
   AddWidget(new PictureWidget(Point2i(38, -1), "menu/teams_label"));
@@ -41,7 +40,7 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size) : HBox(
 					     "menu/team_number",
 					     Point2i(130, -1),
 					     0, 1,
-					     0, NMAX_NB_TEAMS);
+					     0, NMAX_NB_TEAMS-1);
   AddWidget(local_teams_nb);
 
   Box * top_n_bottom_team_options = new VBox(_size.GetX() - local_teams_nb->GetSizeX() - 60, false);
@@ -76,7 +75,7 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size) : HBox(
   GetTeamsList().full_list.sort(compareTeams);
   GetTeamsList().Clear();
 
-  // No selected team by default
+  // No selected team(s) by default
   for (uint i=0; i<teams_selections.size(); i++) {
     teams_selections.at(i)->ClearTeam();
   }
@@ -356,5 +355,14 @@ void NetworkTeamsSelectionBox::ValidTeamsSelection()
       }
     }
     GetTeamsList().ChangeSelection (selection);
+  }
+}
+
+void NetworkTeamsSelectionBox::SetMaxNbLocalPlayers(uint nb) 
+{
+  uint current_nb_teams = local_teams_nb->GetValue();
+  local_teams_nb->SetMaxValue(nb);
+  if (nb < current_nb_teams) {
+    SetNbLocalTeams(local_teams_nb->GetValue(), current_nb_teams);
   }
 }

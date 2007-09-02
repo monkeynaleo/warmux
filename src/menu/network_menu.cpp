@@ -113,7 +113,7 @@ NetworkMenu::NetworkMenu() :
     player_number = new SpinButton(_("Max number of players:"), -1,
                                    GameMode::GetInstance()->max_teams, 1, 2,
                                    GameMode::GetInstance()->max_teams);
-
+    team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
     tmp_box->AddWidget(player_number);
 
     connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
@@ -171,6 +171,7 @@ void NetworkMenu::OnClickUp(const Point2i &mousePosition, int button)
   if (player_number != NULL && w == player_number)
   {
     Network::GetInstanceServer()->SetMaxNumberOfPlayers(player_number->GetValue());
+    team_box->SetMaxNbLocalPlayers(player_number->GetValue()-1);
   }
   else if (w == send_txt_bt)
   {
@@ -302,7 +303,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
       //Refresh the number of connected players:
       int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers();
       std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
-      if(connected_players->GetText() != pl)
+      if (connected_players->GetText() != pl)
         connected_players->SetText(pl);
     }
 
