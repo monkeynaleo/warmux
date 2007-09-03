@@ -33,4 +33,7 @@
     <rebounding>false</rebounding>
     <rebound_factor>1.3</rebound_factor>
   </wind>
+
+  <music_playlist>monkey</music_playlist>
+
 </resources>
