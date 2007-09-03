@@ -9,15 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-23 21:42+0200\n"
-"PO-Revision-Date: 2007-06-04 01:20+0300\n"
+"POT-Creation-Date: 2007-09-03 11:04+0300\n"
+"PO-Revision-Date: 2007-09-03 13:24+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
@@ -127,12 +126,12 @@ msgid "%s team has skipped its turn."
 msgstr "Echipa %s a sărit peste tură."
 
 #: src/weapon/gnu.cpp:156
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
-msgstr[0] "'%s a câștigat %u mingie săltăreață!"
-msgstr[1] "'%s a câștigat %u mingii săltărețe!"
-msgstr[2] "'%s a câștigat %u de mingii săltărețe!"
+msgstr[0] "Echipa %s a câștigat %u antilopă gnu! Rade-i pe toți!"
+msgstr[1] "Echipa %s a câștigat %u antilope gnu! Rade-i pe toți!"
+msgstr[2] "Echipa %s a câștigat %u de antilope gnu! Rade-i pe toți!"
 
 #: src/weapon/air_attack.cpp:257
 #, c-format
@@ -150,17 +149,17 @@ msgid ""
 msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Echipa %s a câștigat %u ciocan pneumatic! Nu face prea mult zgomot cu el! Îți mulțumim, vecinii tăi."
+msgstr[1] "Echipa %s a câștigat %u ciocane pneumatice! Nu face prea mult zgomot cu ele! Îți mulțumim, vecinii tăi."
+msgstr[2] "Echipa %s a câștigat %u de ciocane pneumatice! Nu face prea mult zgomot cu ele! Îți mulțumim, vecinii tăi."
 
 #: src/weapon/anvil.cpp:179
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
-msgstr[0] "'%s a câștigat %u atac aerian"
-msgstr[1] "'%s a câștigat %u atacuri aeriene"
-msgstr[2] "'%s a câștigat %u de atacuri aeriene"
+msgstr[0] "Echipa %s a câștigat %u nicovală! Storcoșește tot cu ea!"
+msgstr[1] "Echipa %s a câștigat %u nicovale! Storcoșește tot cu ele!"
+msgstr[2] "Echipa %s a câștigat %u de nicovale! Storcoșește tot cu ele!"
 
 #: src/weapon/auto_bazooka.cpp:296
 #, c-format
@@ -194,22 +193,21 @@ msgstr[2] "Echipa %s a câștigat %u de rachete!"
 
 #: src/weapon/blowtorch.cpp:141
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Echipa %s a câștigat %u lampă cu carbid! Dacă ai sub 18 ani, cere părinților voie să o folosești!"
+msgstr[1] "Echipa %s a câștigat %u lampi cu carbid! Dacă ai sub 18 ani, cere părinților voie să le folosești!"
+msgstr[2] "Echipa %s a câștigat %u de lampi cu carbid! Dacă ai sub 18 ani, cere părinților voie să le folosești!"
 
 #: src/weapon/bounce_ball.cpp:107
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
-msgstr[0] "'%s a câștigat %u mingie săltăreață!"
-msgstr[1] "'%s a câștigat %u mingii săltărețe!"
-msgstr[2] "'%s a câștigat %u de mingii săltărețe!"
+msgstr[0] "Echipa %s a câștigat %u mingie săltăreață! Boing!"
+msgstr[1] "Echipa %s a câștigat %u mingii săltărețe! Boing!"
+msgstr[2] "Echipa %s a câștigat %u de mingii săltărețe! Boing!"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -218,7 +216,7 @@ msgstr[2] "'%s a câștigat %u de mingii săltărețe!"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/cluster_bomb.cpp:169
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Echipa %s a câștigat %u bombă cu schije!"
@@ -232,12 +230,12 @@ msgstr[2] "Echipa %s a câștigat %u de bombe cu schije!"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/construct.cpp:62
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] "Echipa %s a câștigat %u construcție!"
-msgstr[1] "Echipa %s a câștigat %u construcții!"
-msgstr[2] "Echipa %s a câștigat %u de construcții!"
+msgstr[0] "Echipa %s a câștigat %u construcție! Nu-ți uita casca."
+msgstr[1] "Echipa %s a câștigat %u construcții! Nu-ți uita casca."
+msgstr[2] "Echipa %s a câștigat %u de construcții! Nu-ți uita casca."
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -246,13 +244,12 @@ msgstr[2] "Echipa %s a câștigat %u de construcții!"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/disco_grenade.cpp:137
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
-msgstr[0] "Echipa %s a câștigat %u grenadă disco!"
-msgstr[1] "Echipa %s a câștigat %u grenade disco!"
-msgstr[2] "Echipa %s a câștigat %u de grenade disco!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgstr[0] "Echipa %s a câștigat %u grenadă disco! Dă din fund când o arunci!"
+msgstr[1] "Echipa %s a câștigat %u grenade disco! Dă din fund când le arunci!"
+msgstr[2] "Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
 
 #: src/weapon/dynamite.cpp:135
 #, c-format
@@ -305,12 +302,12 @@ msgstr[1] "Echipa %s a câștigat %u pistoale!"
 msgstr[2] "Echipa %s a câștigat %u de pistoale!"
 
 #: src/weapon/jetpack.cpp:232
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
-msgstr[0] "'%s a câștigat %u propulsor personal"
-msgstr[1] "'%s a câștigat %u propulsoare personale"
-msgstr[2] "'%s a câștigat %u de propulsoare personale"
+msgstr[0] "Echipa %s a câștigat %u propulsor personal! Tare!"
+msgstr[1] "Echipa %s a câștigat %u propulsoare personale! Tare!"
+msgstr[2] "Echipa %s a câștigat %u de propulsoare personale! Tare!"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -319,12 +316,12 @@ msgstr[2] "'%s a câștigat %u de propulsoare personale"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/lowgrav.cpp:72
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] "Echipa %s a câștigat %u gravitație scăzută!"
-msgstr[1] "Echipa %s a câștigat %u gravitații scăzute!"
-msgstr[2] "Echipa %s a câștigat %u de gravitații scăzute!"
+msgstr[0] "Echipa %s a câștigat %u gravitație scăzută! Sunt Neil Armstrong!"
+msgstr[1] "Echipa %s a câștigat %u gravitații scăzute! Sunt Neil Armstrong!"
+msgstr[2] "Echipa %s a câștigat %u de gravitații scăzute! Sunt Neil Armstrong!"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -361,12 +358,12 @@ msgstr[2] "Echipa %s a câștigat %u de parașute!"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/polecat.cpp:164
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
-msgstr[0] "Echipa %s a câștigat %u sconcs!"
-msgstr[1] "Echipa %s a câștigat %u sconcși!"
-msgstr[2] "Echipa %s a câștigat %u de sconcși!"
+msgstr[0] "Echipa %s a câștigat %u sconcs! Ți-ai luat masca de gaze, da?"
+msgstr[1] "Echipa %s a câștigat %u sconcși! Ți-ai luat masca de gaze, da?"
+msgstr[2] "Echipa %s a câștigat %u de sconcși! Ți-ai luat masca de gaze, da?"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -403,12 +400,12 @@ msgstr[2] "Echipa %s a câștigat %u de puști!"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/snipe_rifle.cpp:225
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
-msgstr[0] "Echipa %s a câștigat %u pușcă cu lunetă!"
-msgstr[1] "Echipa %s a câștigat %u puști cu lunetă!"
-msgstr[2] "Echipa %s a câștigat %u de puști cu lunetă!"
+msgstr[0] "Echipa %s a câștigat %u pușcă cu lunetă! Țintește direct între ochi!"
+msgstr[1] "Echipa %s a câștigat %u puști cu lunetă! Țintește direct între ochi!"
+msgstr[2] "Echipa %s a câștigat %u de puști cu lunetă! Țintește direct între ochi!"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -467,12 +464,12 @@ msgstr[2] "Echipa %s a câștigat %u de teleportări."
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/skip_turn.cpp:59
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] "Echipa %s a câștigat %u salt de tură!"
-msgstr[1] "Echipa %s a câștigat %u salturi de tură!"
-msgstr[2] "Echipa %s a câștigat %u de salturi de tură!"
+msgstr[0] "Echipa %s a câștigat %u salt de tură! Sigur o să-ți placă."
+msgstr[1] "Echipa %s a câștigat %u salturi de tură! Sigur o să-ți placă."
+msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă."
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -481,12 +478,12 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură!"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/supertux.cpp:274
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "Echipa %s a câștigat %u lansator de tux!"
-msgstr[1] "Echipa %s a câștigat %u lansatoare de tux!"
-msgstr[2] "Echipa %s a câștigat %u de lansatoare de tux!"
+msgstr[0] "Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
+msgstr[1] "Echipa %s a câștigat %u lansatoare de tux! N-ai mai văzut un pinguin zburător?"
+msgstr[2] "Echipa %s a câștigat %u de lansatoare de tux! N-ai mai văzut un pinguin zburător?"
 
 #: src/include/action_handler.cpp:300
 #, c-format
@@ -500,7 +497,7 @@ msgstr "(mort)"
 #. Setting language selection
 #: src/menu/options_menu.cpp:178
 msgid "(system language)"
-msgstr ""
+msgstr "(limba sistemului)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:204
@@ -577,9 +574,9 @@ msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
 
 #: src/team/teams_list.cpp:156
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open personal teams directory (%s)!"
-msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
+msgstr "Directorul personal cu echipe nu poate fi deschis (%s)!"
 
 #: src/team/teams_list.cpp:144
 #, c-format
@@ -662,23 +659,22 @@ msgstr "Eroare la încărcarea echipei:"
 msgid "Error loading team's data %s:"
 msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
-#: src/game/config.cpp:334
+#: src/game/config.cpp:343
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
 
-#: src/game/config.cpp:221
+#: src/game/config.cpp:230
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eroare în timpul încărcării fișierul de configurare: %s"
 
-#: src/game/config.cpp:249
-#, fuzzy, c-format
+#: src/game/config.cpp:258
+#, c-format
 msgid "Error while loading default configuration file: %s"
-msgstr "Eroare în timpul încărcării fișierul de configurare: %s"
+msgstr "Eroare în timpul încărcării fișierul de configurare implicită: %s"
 
 #: src/game/game_mode.cpp:235
 #, c-format
@@ -799,7 +795,6 @@ msgstr ""
 "un proiectil per rundă"
 
 #: src/weapon/anvil.cpp:126
-#, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -865,9 +860,8 @@ msgstr ""
 "joc."
 
 #: src/menu/options_menu.cpp:127
-#, fuzzy
 msgid "Language"
-msgstr "Seringă"
+msgstr "Limba"
 
 #: src/map/maps_list.cpp:213
 msgid "Load maps:"
@@ -909,7 +903,7 @@ msgstr "Mină"
 
 #: src/menu/results_menu.cpp:280
 msgid "Most accurate"
-msgstr ""
+msgstr "Cel mai bun țintaș"
 
 #: src/menu/results_menu.cpp:275
 msgid "Most clumsy"
@@ -1007,12 +1001,11 @@ msgstr "Ieșire"
 msgid "Quit Wormux"
 msgstr "Ieșire din Wormux"
 
-#: src/game/config.cpp:234
-#, fuzzy
+#: src/game/config.cpp:243
 msgid "Reading default config file"
-msgstr "Se citește fișierul personal de configurare"
+msgstr "Se citește fișierul implicit de configurare"
 
-#: src/game/config.cpp:257
+#: src/game/config.cpp:266
 msgid "Reading personal config file"
 msgstr "Se citește fișierul personal de configurare"
 
@@ -1069,7 +1062,7 @@ msgstr "Pușcă cu lunetă"
 
 #: src/menu/internet_menu.cpp:115
 msgid "Sorry, currently, no game is waiting for players"
-msgstr ""
+msgstr "Din păcate, acum nu există nici un joc în așteptare de jucători"
 
 #: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
@@ -1279,7 +1272,7 @@ msgstr "Aveți nevoie de cel puțin două echipe valide !"
 
 #: src/menu/network_menu.cpp:227
 msgid "You won't be able to play before selecting a team !"
-msgstr ""
+msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 
 #: src/weapon/weapon_launcher.cpp:434
 msgid "Your shot has missed!"
@@ -2293,3 +2286,4 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
+

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-23 21:42+0200\n"
+"POT-Creation-Date: 2007-09-03 11:04+0300\n"
 "PO-Revision-Date: 2007-05-15 12:00+0200\n"
 "Last-Translator: Varga Istvan\n"
 "Language-Team: Hungarian\n"
@@ -539,7 +539,7 @@ msgstr "Hiba a csapat betöltése közben:"
 msgid "Error loading team's data %s:"
 msgstr "Hiba a csapat adatainak betöltése közben (%s):"
 
-#: src/game/config.cpp:334
+#: src/game/config.cpp:343
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -547,12 +547,12 @@ msgstr ""
 "Hiba a(z) \"%s\" könyvtár létrehozása közben: nem lehet a konfigurációs "
 "fájlt menteni."
 
-#: src/game/config.cpp:221
+#: src/game/config.cpp:230
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Hiba a konfigurációs fájl betöltése közben: %s"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:258
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Hiba a konfigurációs fájl betöltése közben: %s"
@@ -865,12 +865,12 @@ msgstr "Kilépés"
 msgid "Quit Wormux"
 msgstr "Kilépés a Wormuxból"
 
-#: src/game/config.cpp:234
+#: src/game/config.cpp:243
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Személyes konfigurációs fájl olvasása"
 
-#: src/game/config.cpp:257
+#: src/game/config.cpp:266
 msgid "Reading personal config file"
 msgstr "Személyes konfigurációs fájl olvasása"
 
