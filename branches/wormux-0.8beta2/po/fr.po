@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-09-03 11:04+0300\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-08-20 21:54+0100\n"
 "Last-Translator: Matthieu Fertré <matthieu.fertre@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -528,7 +528,7 @@ msgstr "Erreur au chargement de l'équipe :"
 msgid "Error loading team's data %s:"
 msgstr "Erreur durant le chargement de l'équipe %s :"
 
-#: src/game/config.cpp:343
+#: src/game/config.cpp:334
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -536,12 +536,12 @@ msgstr ""
 "Erreur lors de la création du répertoire \"%s\" : impossible de sauvegarder "
 "la configuration du jeu."
 
-#: src/game/config.cpp:230
+#: src/game/config.cpp:221
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Erreur lors du chargement du fichier de configuration : %s"
 
-#: src/game/config.cpp:258
+#: src/game/config.cpp:249
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Erreur lors du chargement du fichier de configuration : %s"
@@ -868,11 +868,11 @@ msgstr "Quitter"
 msgid "Quit Wormux"
 msgstr "Quitte Wormux"
 
-#: src/game/config.cpp:243
+#: src/game/config.cpp:234
 msgid "Reading default config file"
 msgstr "Lecture du fichier de configuration par défaut"
 
-#: src/game/config.cpp:266
+#: src/game/config.cpp:257
 msgid "Reading personal config file"
 msgstr "Lecture du fichier de configuration personnel"
 

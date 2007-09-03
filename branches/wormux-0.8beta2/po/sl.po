@@ -10,7 +10,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-09-03 11:04+0300\n"
 "PO-Revision-Date: 2007-08-09 13:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -416,7 +415,7 @@ msgstr[3] ""
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
 
-#: src/interface/interface.cpp:173
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(mrtev)"
 
@@ -426,7 +425,7 @@ msgid "(system language)"
 msgstr "(sistemski jezik)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
@@ -579,12 +578,12 @@ msgstr "Napaka v %s:%lu"
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe :"
 
-#: src/team/team.cpp:157
+#: src/team/team.cpp:156
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Napaka pri nalaganju podatkov ekipe %s:"
 
-#: src/game/config.cpp:343
+#: src/game/config.cpp:334
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -592,12 +591,12 @@ msgstr ""
 "Napaka pri ustvarjanju imenika \"%s\": ni bilo mogoče shraniti datoteke z "
 "nastavitvami."
 
-#: src/game/config.cpp:230
+#: src/game/config.cpp:221
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
 
-#: src/game/config.cpp:258
+#: src/game/config.cpp:249
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke s privzetimi nastavitvami: %s"
@@ -638,7 +637,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:119
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
@@ -681,7 +680,7 @@ msgid "Head commander"
 msgstr "Poveljnik"
 
 #. Display player's name
-#: src/interface/interface.cpp:164
+#: src/interface/interface.cpp:161
 msgid "Head commander: "
 msgstr "Poveljnik: "
 
@@ -925,11 +924,11 @@ msgstr "Končaj"
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
-#: src/game/config.cpp:243
+#: src/game/config.cpp:234
 msgid "Reading default config file"
 msgstr "Branje privzete nastavitvene datoteke"
 
-#: src/game/config.cpp:266
+#: src/game/config.cpp:257
 msgid "Reading personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
@@ -1005,7 +1004,7 @@ msgstr "Zvoki"
 msgid "Starting a new game"
 msgstr "Zagon nove igre"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Zaloga:"
 

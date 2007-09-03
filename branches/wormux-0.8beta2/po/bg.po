@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-09-03 11:04+0300\n"
+"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-02-19 03:27+0100\n"
 "Last-Translator: Stefan Kachaunov <mindless@data.bg>\n"
 "Language-Team: Bulgarian <mindless@data.bg>\n"
@@ -508,7 +508,7 @@ msgstr "Грешка при зареждането на отбора %s:"
 msgid "Error loading team's data %s:"
 msgstr "Проблем при зареждането на данните за %s:"
 
-#: src/game/config.cpp:343
+#: src/game/config.cpp:334
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -516,12 +516,12 @@ msgstr ""
 "Не мога да създам директорията \"%s\"! не мога да съхраня конфигурационните "
 "файлове!"
 
-#: src/game/config.cpp:230
+#: src/game/config.cpp:221
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
 
-#: src/game/config.cpp:258
+#: src/game/config.cpp:249
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
@@ -840,12 +840,12 @@ msgstr "Вън!"
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
-#: src/game/config.cpp:243
+#: src/game/config.cpp:234
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
-#: src/game/config.cpp:266
+#: src/game/config.cpp:257
 msgid "Reading personal config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
