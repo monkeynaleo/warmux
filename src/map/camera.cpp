@@ -46,15 +46,13 @@ Camera * Camera::GetInstance()
 
 Camera::Camera():
   auto_crop(true),
-  followed_object(NULL),
-  throw_camera(false)
+  followed_object(NULL)
 {}
 
 void Camera::Reset()
 {
   auto_crop = true;
   followed_object = NULL;
-  throw_camera = false;
 }
 
 bool Camera::HasFixedX() const{
@@ -78,7 +76,6 @@ void Camera::SetXYabs(int x, int y){
   else
     position.y = - (app->video->window.GetHeight() - world.GetHeight())/2;
 
-  throw_camera = true;
 }
 
 void Camera::SetXY(Point2i pos){
@@ -209,11 +206,8 @@ void Camera::TestCamera()
 }
 
 void Camera::Refresh(){
-  throw_camera = false;
-
   // Check if player wants the camera to move
   TestCamera();
-  if (throw_camera) return;
 
   if (auto_crop)
     AutoCrop();
