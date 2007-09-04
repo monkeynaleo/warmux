@@ -41,7 +41,6 @@ private:
 
   bool auto_crop;
   const PhysicalObj* followed_object;
-  bool throw_camera;
 
   Point2i FreeDegrees() const { return Point2i(HasFixedX()? 0 : 1, HasFixedY()? 0 : 1); };
   Point2i NonFreeDegrees() const { return Point2i(1, 1) - FreeDegrees(); };
