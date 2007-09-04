@@ -301,28 +301,6 @@ const Surface& Mouse::GetSurfaceFromPointer(pointer_t pointer) const
   return pointer_select;
 }
 
-bool Mouse::DrawMovePointer() const
-{
-
-  if (current_pointer != POINTER_STANDARD) {
-    const Surface& cursor = GetSurfaceFromPointer(current_pointer);
-    AppWormux::GetInstance()->video->window.Blit( cursor, GetPosition() );
-    world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y ,
-                                      cursor.GetWidth(), cursor.GetHeight()));
-    return true;
-  }
-
-  return false;
-}
-
-void Mouse::DrawSelectPointer() const
-{
-  AppWormux::GetInstance()->video->window.Blit( pointer_select,
-                                               Point2i(GetPosition().x-3, GetPosition().y-2) );
-  world.ToRedrawOnScreen(Rectanglei(GetPosition().x-3, GetPosition().y-2,
-                                    pointer_select.GetWidth(), pointer_select.GetHeight()));
-}
-
 void Mouse::Draw() const
 {
   if (visible != MOUSE_VISIBLE)
@@ -331,86 +309,10 @@ void Mouse::Draw() const
   if (current_pointer == POINTER_STANDARD)
     return; // use standard SDL cursor
 
-  if ( DrawMovePointer() )
-    return;
-
-  if (Interface::GetInstance()->weapons_menu.IsDisplayed()) {
-    DrawSelectPointer();
-    return;
-  }
-
-  switch (current_pointer)
-    {
-      // The standard beautiful hand
-    case POINTER_SELECT:
-      DrawSelectPointer();
-      break;
-
-      // Move pointer (displayed when middle clic on the map)
-    case POINTER_MOVE:
-      AppWormux::GetInstance()->video->window.Blit( pointer_move, GetPosition() );
-      world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y ,
-                                        pointer_move.GetWidth(), pointer_move.GetHeight()));
-      break;
-
-      // Target pointer (used at least by automatic bazooka)
-    case POINTER_AIM:
-      if(ActiveTeam().IsLocal()) {
-        AppWormux::GetInstance()->video->window.Blit( pointer_aim,
-                                                     Point2i(GetPosition().x-7, GetPosition().y-10 ));
-        world.ToRedrawOnScreen(Rectanglei(GetPosition().x-7, GetPosition().y-10,
-                                          pointer_aim.GetWidth(), pointer_aim.GetHeight()));
-      } else {
-        DrawSelectPointer();
-      }
-      break;
-
-      // Fire pointer (used by air attack)
-    case POINTER_FIRE:
-      if(ActiveTeam().IsLocal()) {
-        if (ActiveCharacter().GetDirection() == DIRECTION_LEFT) {
-          // right hand to shoot on the left
-          AppWormux::GetInstance()->video->window.Blit( pointer_fire_right,
-                                                       Point2i(GetPosition().x-7, GetPosition().y-9 ));
-          world.ToRedrawOnScreen(Rectanglei(GetPosition().x-7, GetPosition().y-9,
-                                            pointer_fire_right.GetWidth(), pointer_fire_right.GetHeight()));
-        } else {
-          // left hand to shoot on the right
-          AppWormux::GetInstance()->video->window.Blit( pointer_fire_left,
-                                                       Point2i(GetPosition().x-17, GetPosition().y-9 ));
-          world.ToRedrawOnScreen(Rectanglei(GetPosition().x-17, GetPosition().y-9,
-                                            pointer_fire_left.GetWidth(), pointer_fire_left.GetHeight()));
-        }
-      } else {
-        DrawSelectPointer();
-      }
-      break;
-
-    case POINTER_FIRE_LEFT: // left hand to shoot on the right
-      if(ActiveTeam().IsLocal()) {
-        AppWormux::GetInstance()->video->window.Blit( pointer_fire_right,
-                                                     Point2i(GetPosition().x-7, GetPosition().y-9 ));
-        world.ToRedrawOnScreen(Rectanglei(GetPosition().x-7, GetPosition().y-9,
-                                          pointer_fire_right.GetWidth(), pointer_fire_right.GetHeight()));
-      } else {
-        DrawSelectPointer();
-      }
-      break;
-
-    case POINTER_FIRE_RIGHT: // right hand to shoot on the left
-      if(ActiveTeam().IsLocal()) {
-        AppWormux::GetInstance()->video->window.Blit( pointer_fire_left,
-                                                     Point2i(GetPosition().x-17, GetPosition().y-9 ));
-        world.ToRedrawOnScreen(Rectanglei(GetPosition().x-17, GetPosition().y-9,
-                                          pointer_fire_left.GetWidth(), pointer_fire_left.GetHeight()));
-      } else {
-        DrawSelectPointer();
-      }
-      break;
-
-    default:
-      break;
-    };
+  const Surface& cursor = GetSurfaceFromPointer(current_pointer);
+  AppWormux::GetInstance()->video->window.Blit( cursor, GetPosition() );
+  world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y ,
+                         cursor.GetWidth(), cursor.GetHeight()));
 }
 
 void Mouse::Show()

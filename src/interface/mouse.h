@@ -77,8 +77,6 @@ private:
     pointer_aim;
 
   Mouse();
-  bool DrawMovePointer() const;
-  void DrawSelectPointer() const;
   void ChoixVerPointe() const;
 
   const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
