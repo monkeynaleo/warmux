@@ -99,6 +99,7 @@ public:
   Point2i GetWorldPosition() const;
 
   // Choose the pointer
+  const pointer_t &GetPointer() const { return current_pointer; };
   pointer_t SetPointer(pointer_t pointer);
   void Draw() const;
 

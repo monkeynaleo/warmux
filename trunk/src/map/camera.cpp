@@ -138,18 +138,35 @@ void Camera::ScrollCamera()
   tstVector = GetSize().inf(mousePos + sensitZone) * (mousePos + sensitZone - GetSize()) ;
   tstVector -= mousePos.inf(sensitZone) * (sensitZone - mousePos);
 
-  if (!tstVector.IsNull()) {
-    SetXY(tstVector);
-    SetAutoCrop(false);
-  }
+  if (!tstVector.IsNull())
+    {
+      SetXY(tstVector);
+      SetAutoCrop(false);
+    }
 
-  /* mouse pointer */
+  /* mouse pointer ***********************************************************/
   /* FIXME I do not really like this code to be here... But I do not really
    * know where to put it in a better place. I do not like the mouse to have a
    * dependancy on camera. This may mean that mouse is a member of camera and
    * not a singleton. If you have some better idea I would be glad to hear
    * about it :) */
-  if (tstVector.IsXNull() && tstVector.y < 0)
+
+  /* Do not reset the pointer if it was replaced by a specialized one */
+  Mouse::pointer_t current_pointer = Mouse::GetInstance()->GetPointer();
+  if (current_pointer != Mouse::POINTER_SELECT &&
+      current_pointer != Mouse::POINTER_ARROW_UP &&
+      current_pointer != Mouse::POINTER_ARROW_DOWN &&
+      current_pointer != Mouse::POINTER_ARROW_LEFT &&
+      current_pointer != Mouse::POINTER_ARROW_RIGHT &&
+      current_pointer != Mouse::POINTER_ARROW_DOWN_RIGHT &&
+      current_pointer != Mouse::POINTER_ARROW_UP_RIGHT &&
+      current_pointer != Mouse::POINTER_ARROW_UP_LEFT &&
+      current_pointer != Mouse::POINTER_ARROW_DOWN_LEFT)
+    return;
+
+  if (tstVector.IsNull())
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  else if (tstVector.IsXNull() && tstVector.y < 0)
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP);
   else if (tstVector.IsXNull() && tstVector.y > 0)
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN);
@@ -165,8 +182,7 @@ void Camera::ScrollCamera()
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP_LEFT);
   else if (tstVector.y > 0 && tstVector.x < 0)
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN_LEFT);
-  else
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  /***************************************************************************/
 }
 
 void Camera::TestCamera()
