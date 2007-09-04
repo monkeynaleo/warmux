@@ -198,6 +198,9 @@ void Camera::TestCamera()
       last_mouse_pos = curr_pos;
       return;
     }
+  else if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_MOVE)
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+
   last_mouse_pos = curr_pos;
 
   if(!Interface::GetInstance()->weapons_menu.IsDisplayed() &&
