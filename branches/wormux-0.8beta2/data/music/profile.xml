@@ -5,4 +5,5 @@
   <music type="fear" playlist="ingame/fear.m3u" />
   <music type="sea" playlist="ingame/sea.m3u" />
   <music type="funfair" playlist="ingame/funfair.m3u" />
+  <music type="monkey" playlist="ingame/monkey.m3u" />
 </profile>
