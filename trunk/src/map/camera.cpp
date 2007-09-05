@@ -194,7 +194,8 @@ void Camera::TestCamera()
     {
       SetAutoCrop(false);
       SetXY(last_mouse_pos - curr_pos);
-      Mouse::GetInstance()->SetPointer(Mouse::POINTER_MOVE);
+      if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_SELECT)
+        Mouse::GetInstance()->SetPointer(Mouse::POINTER_MOVE);
       last_mouse_pos = curr_pos;
       return;
     }
