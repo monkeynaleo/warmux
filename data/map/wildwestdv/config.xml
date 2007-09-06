@@ -8,8 +8,8 @@
 		<country>Poland</country>
 	</author>
 
-  <surface name="sky" file="backgr.jpg" />
-  <surface name="map" file="wildwestdv.png" />
+  <surface name="sky" file="sky.jpg" />
+  <surface name="map" file="map.png" />
   <surface name="preview" file="preview.jpg" />
 
   <name>Wild West - Death Valley</name>
