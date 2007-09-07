@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-09-07 15:00+0200\n"
+"POT-Creation-Date: 2007-09-08 01:09+0300\n"
 "PO-Revision-Date: 2007-08-08 01:30+0100\n"
 "Last-Translator: Bruno Queiros <brunoqueiros@portugalmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -613,7 +613,6 @@ msgid "Host a game"
 msgstr "Criar um Jogo"
 
 #: src/weapon/blowtorch.cpp:54
-#, fuzzy
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -624,7 +623,6 @@ msgstr ""
 "uma munição por turno"
 
 #: src/weapon/airhammer.cpp:64
-#, fuzzy
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -633,7 +631,6 @@ msgstr ""
 "uma munição por turno"
 
 #: src/weapon/auto_bazooka.cpp:187
-#, fuzzy
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -647,7 +644,6 @@ msgstr ""
 "uma munição por turno"
 
 #: src/weapon/anvil.cpp:126
-#, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -672,7 +668,6 @@ msgid "Initial energy"
 msgstr "Energia inicial"
 
 #: src/weapon/bazooka.cpp:85 src/weapon/riot_bomb.cpp:88
-#, fuzzy
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -1010,7 +1005,6 @@ msgstr[0] "Existe apenas %i equipa."
 msgstr[1] "Existem apenas %i equipas."
 
 #: src/weapon/cluster_bomb.cpp:149
-#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1024,7 +1018,6 @@ msgstr ""
 "uma munição por turno"
 
 #: src/weapon/bounce_ball.cpp:82
-#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"

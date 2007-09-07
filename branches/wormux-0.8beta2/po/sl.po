@@ -8,11 +8,10 @@
 # Jaka Kranjc <mokovec@gmail.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: wormux\n"
+"Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-09-07 15:00+0200\n"
-"PO-Revision-Date: 2007-08-31 10:02+0200\n"
-"Last-Translator: Marko Burjek <email4marko@gmail.com>\n"
+"PO-Revision-Date: 2007-08-09 13:30+0100\n"
+"Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,18 +150,10 @@ msgid ""
 msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
-msgstr[0] ""
-"Ekipa %s je osvojila %u pnevmatično kladivo! Z njim ne delajte preveč hrupa! "
-"Hvala, vaši sosedi."
-msgstr[1] ""
-"Ekipa %s je osvojila %u pnevmatični kladivi! Z njima ne delajte preveč "
-"hrupa! Hvala, vaši sosedi."
-msgstr[2] ""
-"Ekipa %s je osvojila %u pnevmatična kladiva! Z njimi ne delajte preveč "
-"hrupa! Hvala, vaši sosedi."
-msgstr[3] ""
-"Ekipa %s je osvojila %u pnevmatičnih kladiv! Z njimi ne delajte preveč "
-"hrupa! Hvala, vaši sosedi."
+msgstr[0] "Ekipa %s je osvojila %u pnevmatično kladivo!"
+msgstr[1] "Ekipa %s je osvojila %u pnevmatično kladivi!"
+msgstr[2] "Ekipa %s je osvojila %u pnevmatično kladiva!"
+msgstr[3] "Ekipa %s je osvojila %u pnevmatično kladiv!"
 
 #: src/weapon/anvil.cpp:179
 #, c-format
@@ -207,18 +198,10 @@ msgid ""
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr[0] ""
-"Ekipa %s je osvojila %u varilnik! Če ste stari manj kot 18 let, ga naj "
-"uporabljajo vaši starši."
-msgstr[1] ""
-"Ekipa %s je osvojila %u varilnika! Če ste stari manj kot 18 let, ju naj "
-"uporabljata vaši starši."
-msgstr[2] ""
-"Ekipa %s je osvojila %u varilnike! Če ste stari manj kot 18 let, jih naj "
-"uporabljajo vaši starši."
-msgstr[3] ""
-"Ekipa %s je osvojila %u varilnikov! Če ste stari manj kot 18 let, jih naj "
-"uporabljajo vaši starši."
+msgstr[0] "Ekipa %s je osvojila %u varilnik!"
+msgstr[1] "Ekipa %s je osvojila %u varilnika!"
+msgstr[2] "Ekipa %s je osvojila %u varilnike!"
+msgstr[3] "Ekipa %s je osvojila %u varilnikov!"
 
 #: src/weapon/bounce_ball.cpp:107
 #, c-format
@@ -242,10 +225,10 @@ msgstr[3] "Ekipa %s je osvojila %u kasetnih bomb!"
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] "Ekipa %s je osvojila %u tram! Ne pozabite na čelado."
-msgstr[1] "Ekipa %s je osvojila %u trama! Ne pozabite na čelado."
-msgstr[2] "Ekipa %s je osvojila %u trame! Ne pozabite na čelado."
-msgstr[3] "Ekipa %s je osvojila %u tramov! Ne pozabite na čelado."
+msgstr[0] "Ekipa %s je osvojila %u tram! Ne pozabite na čelado!"
+msgstr[1] "Ekipa %s je osvojila %u trama! Ne pozabite na čelado!"
+msgstr[2] "Ekipa %s je osvojila %u trame! Ne pozabite na čelado!"
+msgstr[3] "Ekipa %s je osvojila %u tramov! Ne pozabite na čelado!"
 
 #: src/weapon/disco_grenade.cpp:137
 #, c-format
@@ -334,13 +317,13 @@ msgstr[3] "Ekipa %s je osvojila %u padal!"
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] ""
-"Ekipa %s je osvojila %u dihurjemet! Bolje da imajo s sabo plinske maske!"
+"Ekipa %s je osvojila %u dihurjemet! Bolje da imajo s sabo gas maske!"
 msgstr[1] ""
-"Ekipa %s je osvojila %u dihurjemeta! Bolje da imajo s sabo plinske maske!"
+"Ekipa %s je osvojila %u dihurjemeta! Bolje da imajo s sabo gas maske!"
 msgstr[2] ""
-"Ekipa %s je osvojila %u dihurjemete! Bolje da imajo s sabo plinske maske!"
+"Ekipa %s je osvojila %u dihurjemete! Bolje da imajo s sabo gas maske!"
 msgstr[3] ""
-"Ekipa %s je osvojila %u dihurjemetov! Bolje da imajo s sabo plinske maske!"
+"Ekipa %s je osvojila %u dihurjemetov! Bolje da imajo s sabo gas maske!"
 
 #: src/weapon/riot_bomb.cpp:102
 #, c-format
@@ -361,7 +344,7 @@ msgstr[2] "Ekipa %s je osvojila %u šibrovke!"
 msgstr[3] "Ekipa %s je osvojila %u šibrovk!"
 
 #: src/weapon/snipe_rifle.cpp:225
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
 msgstr[0] "Ekipa %s je osvojila %u ostrostrelsko puško!"
@@ -409,10 +392,10 @@ msgstr[3] "Ekipa %s je osvojila %u teleprenosov!"
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] "Ekipa %s je osvojila %u Preskoči potezo! Vem da vam bo všeč."
-msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Vem da vam bo všeč."
-msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Vem da vam bo všeč."
-msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Vem da vam bo všeč."
+msgstr[0] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
+msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
+msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
+msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 
 #: src/weapon/supertux.cpp:274
 #, c-format
@@ -432,17 +415,17 @@ msgstr[3] ""
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
 
-#: src/interface/interface.cpp:173
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(mrtev)"
 
 #. Setting language selection
 #: src/menu/options_menu.cpp:178
 msgid "(system language)"
-msgstr "(jezik sistema)"
+msgstr "(sistemski jezik)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
@@ -595,12 +578,12 @@ msgstr "Napaka v %s:%lu"
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe :"
 
-#: src/team/team.cpp:157
+#: src/team/team.cpp:156
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Napaka pri nalaganju podatkov ekipe %s:"
 
-#: src/game/config.cpp:343
+#: src/game/config.cpp:334
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -608,12 +591,12 @@ msgstr ""
 "Napaka pri ustvarjanju imenika \"%s\": ni bilo mogoče shraniti datoteke z "
 "nastavitvami."
 
-#: src/game/config.cpp:230
+#: src/game/config.cpp:221
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
 
-#: src/game/config.cpp:258
+#: src/game/config.cpp:249
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke s privzetimi nastavitvami: %s"
@@ -654,7 +637,7 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:119
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
@@ -697,7 +680,7 @@ msgid "Head commander"
 msgstr "Poveljnik"
 
 #. Display player's name
-#: src/interface/interface.cpp:164
+#: src/interface/interface.cpp:161
 msgid "Head commander: "
 msgstr "Poveljnik: "
 
@@ -706,7 +689,6 @@ msgid "Host a game"
 msgstr "Gostite igro"
 
 #: src/weapon/blowtorch.cpp:54
-#, fuzzy
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -717,7 +699,6 @@ msgstr ""
 "ena uporaba na potezo"
 
 #: src/weapon/airhammer.cpp:64
-#, fuzzy
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -726,7 +707,6 @@ msgstr ""
 "ena uporaba na potezo"
 
 #: src/weapon/auto_bazooka.cpp:187
-#, fuzzy
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -739,7 +719,6 @@ msgstr ""
 "ena uporaba na potezo"
 
 #: src/weapon/anvil.cpp:126
-#, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -764,7 +743,6 @@ msgid "Initial energy"
 msgstr "Začetna energija"
 
 #: src/weapon/bazooka.cpp:85 src/weapon/riot_bomb.cpp:88
-#, fuzzy
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -946,11 +924,11 @@ msgstr "Končaj"
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
-#: src/game/config.cpp:243
+#: src/game/config.cpp:234
 msgid "Reading default config file"
 msgstr "Branje privzete nastavitvene datoteke"
 
-#: src/game/config.cpp:266
+#: src/game/config.cpp:257
 msgid "Reading personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
@@ -1007,7 +985,7 @@ msgstr "Ostrostrelska puška"
 
 #: src/menu/internet_menu.cpp:115
 msgid "Sorry, currently, no game is waiting for players"
-msgstr "Žal trenutno nobena igra ne potrebuje igralcev"
+msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
 #: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
@@ -1026,7 +1004,7 @@ msgstr "Zvoki"
 msgid "Starting a new game"
 msgstr "Zagon nove igre"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Zaloga:"
 
@@ -1104,7 +1082,6 @@ msgstr[2] "Tukaj so samo %i ekipe."
 msgstr[3] "Tukaj je samo %i ekip."
 
 #: src/weapon/cluster_bomb.cpp:149
-#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1117,7 +1094,6 @@ msgstr ""
 "ena uporaba na potezo"
 
 #: src/weapon/bounce_ball.cpp:82
-#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"

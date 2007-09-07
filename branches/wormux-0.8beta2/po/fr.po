@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-09-07 15:00+0200\n"
+"POT-Creation-Date: 2007-09-08 00:56+0300\n"
 "PO-Revision-Date: 2007-08-20 21:54+0100\n"
 "Last-Translator: Matthieu Fertré <matthieu.fertre@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -300,7 +300,7 @@ msgstr[0] "L'équipe %s a gagné %u fusil d'assaut !"
 msgstr[1] "L'équipe %s a gagné %u fusils d'assaut !"
 
 #: src/weapon/snipe_rifle.cpp:225
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
 msgstr[0] "L'équipe %s a gagné %u fusil à lunette ! Vise entre les yeux !"
@@ -633,7 +633,6 @@ msgid "Host a game"
 msgstr "Créer une partie"
 
 #: src/weapon/blowtorch.cpp:54
-#, fuzzy
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -644,7 +643,6 @@ msgstr ""
 "une munition par tour"
 
 #: src/weapon/airhammer.cpp:64
-#, fuzzy
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -653,7 +651,6 @@ msgstr ""
 "une munition par tour"
 
 #: src/weapon/auto_bazooka.cpp:187
-#, fuzzy
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -666,7 +663,6 @@ msgstr ""
 "une munition par tour"
 
 #: src/weapon/anvil.cpp:126
-#, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -691,7 +687,6 @@ msgid "Initial energy"
 msgstr "Énergie initiale"
 
 #: src/weapon/bazooka.cpp:85 src/weapon/riot_bomb.cpp:88
-#, fuzzy
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -1030,7 +1025,6 @@ msgstr[0] "Il n'y a que %i équipe."
 msgstr[1] "Il n'y a que %i équipes."
 
 #: src/weapon/cluster_bomb.cpp:149
-#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1043,7 +1037,6 @@ msgstr ""
 "une munition par tour"
 
 #: src/weapon/bounce_ball.cpp:82
-#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
