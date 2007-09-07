@@ -1,3 +1,34 @@
+> 2007/09/07 - 0.8beta2 release
+ Code improvements:
+  - A lot of network bug fixes (synchro, win32 network support,...)
+  - Fixed full screen on Windows
+  - Fixed memory leaks
+  - Cleaner code with useless code deleted
+  - Faster compilation
+  - Simplify some calculations
+  - Made the water more beautiful
+  - Camera improvements
+ Menu:
+  - Better widgets in menus
+  - Language selection in Options menu
+  - Small enhancement of Results menu
+  - Options menu accessible from game with F11 key
+  - Main menu can be keyboard driven
+ Data:
+  - New maps : hive, moon-4m, pillars, tic-tac-toe, towers, funkyisland
+  - Monkey-bubble music for monkey-bubble map
+  - Some graphics improvements (map previews, skins,...)
+  - Characters' eyes follow cursor
+  - Add new sounds
+  - Updated translations
+ New features:
+  - Smaller step in angle selection when pressing Shift
+  - Joystick support
+  - Initial management of command line options
+ Still experimental :
+  - Better AI (but still stupid)
+  - Improved random level generator
+
 > 2007/06/28 - 0.8beta1 release
   - Better network game support (visible by default)
   - Use 3826 as default network port. This number is registred by IANA for Wormux
