@@ -138,7 +138,11 @@ msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
 msgstr[0] ""
+"%s ganhou %u britadeira! Não faça muito barulho com ela! Obrigado, "
+"seus vizinhos."
 msgstr[1] ""
+"%s ganhou %u britadeiras! Não faça muito barulho com ela! Obrigado, "
+"seus vizinhos."
 
 #: src/weapon/anvil.cpp:179
 #, fuzzy, c-format
@@ -176,7 +180,11 @@ msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
 msgstr[0] ""
+"%s ganhou %u maçarico! Se você for menor de 18, peça permissão dos seus pais"
+" para usá-lo."
 msgstr[1] ""
+"%s ganhou %u maçaricos! Se você for menor de 18, peça permissão dos seus pais"
+" para usá-los."
 
 #: src/weapon/bounce_ball.cpp:107
 #, fuzzy, c-format
@@ -345,7 +353,7 @@ msgstr "(morto)"
 #. Setting language selection
 #: src/menu/options_menu.cpp:178
 msgid "(system language)"
-msgstr ""
+msgstr "(idioma do sistema)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:204
@@ -374,6 +382,9 @@ msgid ""
 "Fire : space key\n"
 "a hit per turn"
 msgstr ""
+"Ângulo : Seta para Cima/Seta para Baixo\n"
+"Atirar : tecla de espaço\n"
+"um tiro por rodada"
 
 #: src/weapon/anvil.cpp:125
 msgid "Anvil"
@@ -484,7 +495,7 @@ msgstr "Você deseja mesmo sair? (Y/N)"
 
 #: src/menu/game_menu.cpp:96
 msgid "Duration of a turn"
-msgstr "Duração de um turno:"
+msgstr "Duração de uma rodada:"
 
 #: src/weapon/dynamite.cpp:106
 msgid "Dynamite"
@@ -623,12 +634,17 @@ msgid ""
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
+"Como usá-la : mantenha a tecla de espaço pressionada\n"
+"Ângul : Seta para cima/Seta para baixo\n"
+"uma munição por rodada"
 
 #: src/weapon/airhammer.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
 msgstr ""
+"Como usá-la : mantenha a tecla de espaço pressionada\n"
+"uma munição por rodada"
 
 #: src/weapon/auto_bazooka.cpp:187
 msgid ""
@@ -637,12 +653,19 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Como usá-la : clique com o botão esquerdo sobre o alvo\n"
+"Ângulo inicial de disparo : Seta para cima/Seta para baixo\n"
+"Atirar : mantenha a tecla de espaço pressionada até atingir "
+"a força necessária\n"
+"uma munição por rodada"
 
 #: src/weapon/anvil.cpp:126
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
 msgstr ""
+"Como usá-la : clique com o botão esquerdo sobre o alvo\n"
+"uma munição por rodada"
 
 #: src/game/game_loop.cpp:706
 msgid "Hurry up, you are too slow !!"
@@ -666,6 +689,10 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Ângulo inicial de disparo : Seta para cima/Seta para baixo\n"
+"Atirar : mantenha a tecla de espaço pressionada até atingir"
+" a força desejada\n"
+"uma munição por rodada"
 
 #: src/game/game_init.cpp:154
 msgid "Initialisation"
@@ -700,7 +727,7 @@ msgstr "Visite #wormux em irc.freenode.net para saber mais"
 
 #: src/menu/options_menu.cpp:127
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: src/map/maps_list.cpp:213
 msgid "Load maps:"
@@ -743,7 +770,7 @@ msgstr "Mina"
 
 #: src/menu/results_menu.cpp:280
 msgid "Most accurate"
-msgstr ""
+msgstr "Mais preciso"
 
 #: src/menu/results_menu.cpp:275
 #, fuzzy
@@ -909,7 +936,7 @@ msgstr "Rifle Sniper"
 
 #: src/menu/internet_menu.cpp:115
 msgid "Sorry, currently, no game is waiting for players"
-msgstr ""
+msgstr "Desculpe, atualmente nenhum jogo está esperando jogadores"
 
 #: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
@@ -1015,6 +1042,11 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Tempo limite : Roda do mouse ou Page Up/Down\n"
+"Ângulo : Seta para cima/Seta para Baixo\n"
+"Atirar : mantenha a tecla de espaço pressionada até atingir"
+" a força desejada\n"
+"uma munição por rodada"
 
 #: src/weapon/bounce_ball.cpp:82
 msgid ""
@@ -1023,6 +1055,10 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
+"Tempo Limite : Roda do mouse ou Page Up/Down\n"
+"Ângulo : Seta para Cima/Seta para Baixo\n"
+"Atirar : tecla de espaço\n"
+"uma munição por rodada"
 
 #: src/interface/weapon_menu.cpp:169
 msgid "Tools"
@@ -1114,7 +1150,7 @@ msgstr "Você precisa de pelo menos duas equipes válidas!"
 
 #: src/menu/network_menu.cpp:227
 msgid "You won't be able to play before selecting a team !"
-msgstr ""
+msgstr "Você não vai conseguir jogar antes de selecionar uma equipe !"
 
 #: src/weapon/weapon_launcher.cpp:434
 msgid "Your shot has missed!"
@@ -1131,6 +1167,9 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
+"direçao de ataque : Esquerda/Direita\n"
+"Bombardear : clicar com o botão esquerdo no alvo\n"
+"um bombardeio por rodada"
 
 #: src/map/ground.cpp:57
 msgid "done"

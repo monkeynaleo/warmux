@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-06-06 16:53+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
@@ -214,7 +213,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Holdet %s har fået %u dynamit!"
 msgstr[1] "Holdet %s har fået %u dynamitter!"
 
-#: src/weapon/grapple.cpp:712
+#: src/weapon/grapple.cpp:709
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -286,8 +285,8 @@ msgstr[1] "Holdet %s har fået %u haglgeværer!"
 
 #: src/weapon/snipe_rifle.cpp:225
 #, fuzzy, c-format
-msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
-msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
+msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
+msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
 msgstr[0] "Holdet %s har fået %u skarpskytteriffel!"
 msgstr[1] "Holdet %s har fået %u skarpskytterifler!"
 
@@ -333,22 +332,26 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Holdet %s har fået %u Tux affyring!"
 msgstr[1] "Holdet %s har fået %u Tux affyringer!"
 
-#: src/include/action_handler.cpp:300
+#: src/include/action_handler.cpp:243
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s prøver at forbinde med en anden version: klient=%s, mig=%s."
 
-#: src/interface/interface.cpp:173
+#: src/menu/options_menu.cpp:155
+msgid "(current)"
+msgstr "(nuværende)"
+
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(død)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:178
+#: src/menu/options_menu.cpp:181
 msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
@@ -414,18 +417,18 @@ msgstr "Hoppebold"
 msgid "Bye bye tux..."
 msgstr "Faaarvel Tux..."
 
-#: src/team/teams_list.cpp:461 src/team/teams_list.cpp:483
-#: src/team/teams_list.cpp:531
+#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
+#: src/team/teams_list.cpp:534
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan ikke finde holdet %s!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:157
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:145
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
@@ -497,11 +500,11 @@ msgstr "SLUT PÅ SPILLET"
 msgid "Error in %s:%lu"
 msgstr "Fejl i %s: %lu"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
+#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Fejl under indlæsning af hold:"
 
-#: src/team/team.cpp:157
+#: src/team/team.cpp:156
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Fejl under indlæsning af holdet %ss data:"
@@ -555,12 +558,12 @@ msgstr "Fejl: Kan ikke kontakte indeksserveren for at søge efter internetspil"
 msgid "Error: Unable to start server"
 msgstr "Fejl: Kan ikke starte server"
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:119
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fejl: Kan ikke finde kroppen \"%s\" for holdet \"%s\"."
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Fuld skærm?"
 
@@ -598,7 +601,7 @@ msgid "Head commander"
 msgstr "Hovedkommandør"
 
 #. Display player's name
-#: src/interface/interface.cpp:164
+#: src/interface/interface.cpp:161
 msgid "Head commander: "
 msgstr "Hovedkommandør: "
 
@@ -608,9 +611,9 @@ msgstr "Vær vært for et spil"
 
 #: src/weapon/blowtorch.cpp:54
 msgid ""
-"Howto use it : keep space key pressed\n"
+"Howto use it: keep space key pressed\n"
 "Angle : Up/Down\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Hvordan man bruger det: Hold mellemrum nede\n"
 "Vinkel: Op/ned piletaster\n"
@@ -618,18 +621,18 @@ msgstr ""
 
 #: src/weapon/airhammer.cpp:64
 msgid ""
-"Howto use it : keep space key pressed\n"
-"an ammo per turn"
+"Howto use it: keep space key pressed\n"
+"one ammo per turn"
 msgstr ""
 "Hvordan man bruger det: Hold mellemrum nede\n"
 "Et stykke ammunition per tur"
 
 #: src/weapon/auto_bazooka.cpp:187
 msgid ""
-"Howto use it : left clic on target\n"
+"Howto use it: left clic on target\n"
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Hvordan man bruger det: Venstreklik på målet\n"
 "Affyringsvinkel (udgangspunkt): Op/ned piletaster\n"
@@ -639,8 +642,8 @@ msgstr ""
 #: src/weapon/anvil.cpp:126
 #, fuzzy
 msgid ""
-"Howto use it : left click on target\n"
-"an ammo per turn"
+"Howto use it: left click on target\n"
+"one ammo per turn"
 msgstr ""
 "Hvordan man bruger det: Venstreklik på målet\n"
 "Et stykke ammunition per tur"
@@ -665,25 +668,25 @@ msgstr "Energi som udgangspunkt"
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Affyringsvinkel (udgangspunkt): Op/ned piletaster\n"
 "Affyr: Hold mellemrum nede indtil den ønskede styrke er nået\n"
 "Et stykke ammunition per tur"
 
-#: src/game/game_init.cpp:154
+#: src/game/game_init.cpp:143
 msgid "Initialisation"
 msgstr "Klargører"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:98
 msgid "Initialise map"
 msgstr "Klargører banen"
 
-#: src/game/game_init.cpp:141
+#: src/game/game_init.cpp:130
 msgid "Initialise sounds"
 msgstr "Klargører lyde"
 
-#: src/game/game_init.cpp:120
+#: src/game/game_init.cpp:109
 msgid "Initialise teams"
 msgstr "Klargører hold"
 
@@ -699,7 +702,7 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:107
 msgid "Language"
 msgstr ""
 
@@ -707,7 +710,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Indlæser baner:"
 
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:133
 msgid "Load teams:"
 msgstr "Indlæser hold:"
 
@@ -725,7 +728,7 @@ msgstr "Svag tyngdekraft"
 msgid "Map %s, a creation of: "
 msgstr "Banen %s, en kreation af: "
 
-#: src/game/game_init.cpp:111
+#: src/game/game_init.cpp:100
 msgid "Maps"
 msgstr "Baner"
 
@@ -733,7 +736,7 @@ msgstr "Baner"
 msgid "Max number of players:"
 msgstr "Maksimum antal spillere:"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr "Maksimum FPS"
 
@@ -765,7 +768,7 @@ msgstr "Mest ubrugelig"
 msgid "Most violent"
 msgstr "Mest voldelig"
 
-#: src/menu/options_menu.cpp:138
+#: src/menu/options_menu.cpp:118
 msgid "Music?"
 msgstr "Musik?"
 
@@ -773,7 +776,7 @@ msgstr "Musik?"
 msgid "Network Game"
 msgstr "Netværksspil"
 
-#: src/network/network.cpp:165
+#: src/network/network.cpp:153
 msgid "Network initialization"
 msgstr "Netværksinitialisation"
 
@@ -816,11 +819,11 @@ msgstr "Spil"
 msgid "Player"
 msgstr "Spiller"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Vis krigernes energi?"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Vis krigernes navne?"
 
@@ -854,7 +857,7 @@ msgstr "Læser personlig konfigureringsfil"
 msgid "Refresh"
 msgstr "Opdater"
 
-#: src/menu/options_menu.cpp:113
+#: src/menu/options_menu.cpp:94
 msgid "Resolution"
 msgstr "Opløsning"
 
@@ -905,16 +908,16 @@ msgstr "Skarpskytteriffel"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:121
 msgid "Sound effects?"
 msgstr "Lydeffekter?"
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:124
 msgid "Sound frequency"
 msgstr "Lydfrekvens"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:144
+#: src/game/game_init.cpp:133
 msgid "Sounds"
 msgstr "Lyde"
 
@@ -922,7 +925,7 @@ msgstr "Lyde"
 msgid "Starting a new game"
 msgstr "Starter et nyt spil"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Lager:"
 
@@ -938,7 +941,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Sprøjte"
 
-#: src/game/game_init.cpp:122
+#: src/game/game_init.cpp:111
 msgid "Teams"
 msgstr "Hold"
 
@@ -1002,7 +1005,7 @@ msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Lunte: Musehjul eller SideOp/SideNed tasterne\n"
 "Vinkel: Op/ned piletaster\n"
@@ -1014,7 +1017,7 @@ msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Lunte: Musehjul eller SideOp/SideNed tasterne\n"
 "Vinkel: Op/ned piletaster\n"
@@ -1056,7 +1059,7 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:133 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Våben"
 
@@ -1070,7 +1073,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hvilken skam for %s – han blev dræbt af en simpel pistol!"
 
 #. Various options
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Vindpartikler?"
 
@@ -1103,7 +1106,7 @@ msgstr "Du er alene..."
 msgid "You need at least one valid map !"
 msgstr "Du skal vælge mindst én gyldig bane!"
 
-#: src/game/game_init.cpp:126 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams !"
 msgstr "Du skal vælge mindst to gyldige hold!"
 
@@ -1150,9 +1153,6 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
-
-#~ msgid "(current)"
-#~ msgstr "(nuværende)"
 
 #~ msgid ""
 #~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "

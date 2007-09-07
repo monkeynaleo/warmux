@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-23 21:42+0200\n"
 "PO-Revision-Date: 2007-08-20 21:54+0100\n"
 "Last-Translator: Matthieu Fertré <matthieu.fertre@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -229,7 +228,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "L'équipe %s a gagné %u dynamite !"
 msgstr[1] "L'équipe %s a gagné %u dynamites !"
 
-#: src/weapon/grapple.cpp:712
+#: src/weapon/grapple.cpp:709
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -301,8 +300,8 @@ msgstr[1] "L'équipe %s a gagné %u fusils d'assaut !"
 
 #: src/weapon/snipe_rifle.cpp:225
 #, c-format
-msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
-msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
+msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
+msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
 msgstr[0] "L'équipe %s a gagné %u fusil à lunette ! Vise entre les yeux !"
 msgstr[1] "L'équipe %s a gagné %u fusils à lunette ! Vise entre les yeux !"
 
@@ -354,23 +353,27 @@ msgstr[1] ""
 "L'équipe %s a gagné %u lanceurs de Tux ! Depuis quand les pingouins savent "
 "voler ??"
 
-#: src/include/action_handler.cpp:300
+#: src/include/action_handler.cpp:243
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 "%s a essayé de se connecter à une version différente : client=%s, serveur=%s."
 
-#: src/interface/interface.cpp:173
+#: src/menu/options_menu.cpp:155
+msgid "(current)"
+msgstr "(actuel)"
+
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:178
+#: src/menu/options_menu.cpp:181
 msgid "(system language)"
 msgstr "(langue du système)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(illimitées)"
 
@@ -436,18 +439,18 @@ msgstr "Balle rebondissante"
 msgid "Bye bye tux..."
 msgstr "Adieu tux !"
 
-#: src/team/teams_list.cpp:461 src/team/teams_list.cpp:483
-#: src/team/teams_list.cpp:531
+#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
+#: src/team/teams_list.cpp:534
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossible de trouver l'équipe %s !"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:157
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire personnel des équipes(%s) !"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:145
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
@@ -519,11 +522,11 @@ msgstr "FIN DU JEU"
 msgid "Error in %s:%lu"
 msgstr "Erreur dans %s:%lu"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
+#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Erreur au chargement de l'équipe :"
 
-#: src/team/team.cpp:157
+#: src/team/team.cpp:156
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Erreur durant le chargement de l'équipe %s :"
@@ -581,12 +584,12 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Impossible de démarrer le serveur"
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:119
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : impossible de trouver le skin \"%s\" pour l'équipe \"%s\"."
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Plein écran ?"
 
@@ -624,7 +627,7 @@ msgid "Head commander"
 msgstr "Commandant"
 
 #. Display player's name
-#: src/interface/interface.cpp:164
+#: src/interface/interface.cpp:161
 msgid "Head commander: "
 msgstr "Commandant : "
 
@@ -634,9 +637,9 @@ msgstr "Créer une partie"
 
 #: src/weapon/blowtorch.cpp:54
 msgid ""
-"Howto use it : keep space key pressed\n"
+"Howto use it: keep space key pressed\n"
 "Angle : Up/Down\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Usage : garder la touche espace enfoncée\n"
 "Angle : Haut/Bas\n"
@@ -644,18 +647,18 @@ msgstr ""
 
 #: src/weapon/airhammer.cpp:64
 msgid ""
-"Howto use it : keep space key pressed\n"
-"an ammo per turn"
+"Howto use it: keep space key pressed\n"
+"one ammo per turn"
 msgstr ""
 "Usage : garder la touche espace enfoncée\n"
 "une munition par tour"
 
 #: src/weapon/auto_bazooka.cpp:187
 msgid ""
-"Howto use it : left clic on target\n"
+"Howto use it: left clic on target\n"
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Usage : clic gauche sur la cible\n"
 "Angle de tir initial : Haut/Bas\n"
@@ -664,8 +667,8 @@ msgstr ""
 
 #: src/weapon/anvil.cpp:126
 msgid ""
-"Howto use it : left click on target\n"
-"an ammo per turn"
+"Howto use it: left click on target\n"
+"one ammo per turn"
 msgstr ""
 "Usage : clic gauche sur la cible\n"
 "une munition par tour"
@@ -690,25 +693,25 @@ msgstr "Énergie initiale"
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Angle de tir initial : Haut/Bas\n"
 "Tirer : garder la touche espace enfoncée jusqu'à la puissance désirée\n"
 "une munition par tour"
 
-#: src/game/game_init.cpp:154
+#: src/game/game_init.cpp:143
 msgid "Initialisation"
 msgstr "Initialisation"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:98
 msgid "Initialise map"
 msgstr "Initialisation des données"
 
-#: src/game/game_init.cpp:141
+#: src/game/game_init.cpp:130
 msgid "Initialise sounds"
 msgstr "Initialisation des sons"
 
-#: src/game/game_init.cpp:120
+#: src/game/game_init.cpp:109
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
@@ -725,7 +728,7 @@ msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires."
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:107
 msgid "Language"
 msgstr "Langue"
 
@@ -733,7 +736,7 @@ msgstr "Langue"
 msgid "Load maps:"
 msgstr "Chargement des terrains :"
 
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:133
 msgid "Load teams:"
 msgstr "Chargement des équipes :"
 
@@ -751,7 +754,7 @@ msgstr "Anti-gravité"
 msgid "Map %s, a creation of: "
 msgstr "Terrain %s, une création de :"
 
-#: src/game/game_init.cpp:111
+#: src/game/game_init.cpp:100
 msgid "Maps"
 msgstr "Terrains"
 
@@ -759,7 +762,7 @@ msgstr "Terrains"
 msgid "Max number of players:"
 msgstr "Nombre de joueurs max. :"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr "Nbr. max. d'images/sec"
 
@@ -791,7 +794,7 @@ msgstr "Le plus inutile"
 msgid "Most violent"
 msgstr "Le plus violent"
 
-#: src/menu/options_menu.cpp:138
+#: src/menu/options_menu.cpp:118
 msgid "Music?"
 msgstr "Musique ?"
 
@@ -799,7 +802,7 @@ msgstr "Musique ?"
 msgid "Network Game"
 msgstr "Jeu en réseau"
 
-#: src/network/network.cpp:165
+#: src/network/network.cpp:153
 msgid "Network initialization"
 msgstr "Initialisation du réseau"
 
@@ -843,11 +846,11 @@ msgstr "Jouer"
 msgid "Player"
 msgstr "Joueur"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Énergie des joueurs ?"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Nom des joueurs ?"
 
@@ -880,7 +883,7 @@ msgstr "Lecture du fichier de configuration personnel"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: src/menu/options_menu.cpp:113
+#: src/menu/options_menu.cpp:94
 msgid "Resolution"
 msgstr "Résolution"
 
@@ -931,16 +934,16 @@ msgstr "Fusil sniper"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Désolé, il n'y a actuellement aucun jeu en attente de joueurs"
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:121
 msgid "Sound effects?"
 msgstr "Effets sonores ?"
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:124
 msgid "Sound frequency"
 msgstr "Fréquence d'échantillonage"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:144
+#: src/game/game_init.cpp:133
 msgid "Sounds"
 msgstr "Options sonores"
 
@@ -948,7 +951,7 @@ msgstr "Options sonores"
 msgid "Starting a new game"
 msgstr "Lancement d'une nouvelle partie"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Munitions :"
 
@@ -964,7 +967,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringue"
 
-#: src/game/game_init.cpp:122
+#: src/game/game_init.cpp:111
 msgid "Teams"
 msgstr "Équipes"
 
@@ -1029,7 +1032,7 @@ msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Échéance : molette ou Page Suiv./Préc.\n"
 "Angle : Haut/Bas\n"
@@ -1041,7 +1044,7 @@ msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
-"an ammo per turn"
+"one ammo per turn"
 msgstr ""
 "Échéance : molette ou Page Suiv./Préc.\n"
 "Angle : Haut/Bas\n"
@@ -1082,7 +1085,7 @@ msgstr "Attente du serveur, vous pouvez annuler ou discuter !"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:133 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Armes"
 
@@ -1096,7 +1099,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : il a été tué par un simple pistolet !"
 
 #. Various options
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Particules du vent ?"
 
@@ -1129,7 +1132,7 @@ msgstr "Vous voulez vraiment jouer tout seul ?!"
 msgid "You need at least one valid map !"
 msgstr "Il faut au minimum un terrain valide !"
 
-#: src/game/game_init.cpp:126 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams !"
 msgstr "Il faut au minimum deux équipes valides !"
 
@@ -1176,9 +1179,6 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
-#~ msgid "(current)"
-#~ msgstr "(actuel)"
 
 #~ msgid ""
 #~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "

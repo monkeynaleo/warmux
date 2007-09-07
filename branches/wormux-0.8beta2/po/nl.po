@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2007-08-23 21:42+0200\n"
-"PO-Revision-Date: 2007-03-23 15:15+0100\n"
+"PO-Revision-Date: 2007-09-01 01:58+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,14 +24,16 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Kaart %s niet gevonden :-("
 
-#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:306
+#: src/menu/network_menu.cpp:123
+#: src/menu/network_menu.cpp:306
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i speler maakte verbinding"
 msgstr[1] "%i spelers maakten verbinding"
 
-#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:314
+#: src/menu/network_menu.cpp:127
+#: src/menu/network_menu.cpp:314
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -54,15 +56,15 @@ msgid "%s <%s> from %s"
 msgstr "%s <%s> van %s"
 
 #: src/menu/team_box.cpp:78
-#, fuzzy, c-format
+#, c-format
 msgid "%s Team"
-msgstr "Teams"
+msgstr "Team %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:76
 #, c-format
 msgid "%s Team - Remote"
-msgstr ""
+msgstr "Team %s - Op afstand"
 
 #: src/game/game_loop.cpp:649
 #, c-format
@@ -118,227 +120,219 @@ msgid "%s team has skipped its turn."
 msgstr "Team %s heeft een beurt overgeslagen."
 
 #: src/weapon/gnu.cpp:156
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
-msgstr[0] "'%s heeft %u luchtaanval gekregen"
-msgstr[1] "'%s heeft %u luchtaanvallen gekregen"
+msgstr[0] "Team %s heeft %u Gnu gekregen! Blaas ze allemaal op, cowboy!"
+msgstr[1] "Team %s heeft %u Gnus gekregen! Blaas ze allemaal op, cowboy!"
 
 #: src/weapon/air_attack.cpp:257
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
-msgstr[0] "'%s heeft %u luchtaanval gekregen"
-msgstr[1] "'%s heeft %u luchtaanvallen gekregen"
+msgstr[0] "Team %s heeft %u luchtaanval gekregen!"
+msgstr[1] "Team %s heeft %u luchtaanvallen gekregen!"
 
 #: src/weapon/airhammer.cpp:176
 #, c-format
-msgid ""
-"%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
-"your neighbours."
-msgid_plural ""
-"%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
-"your neighbours."
-msgstr[0] ""
-msgstr[1] ""
+msgid "%s team has won %u airhammer! Don't make too much noise with it! Thanks, your neighbours."
+msgid_plural "%s team has won %u airhammers! Don't make too much noise with them! Thanks, your neighbours."
+msgstr[0] "Team %s heeft %u drilboor gekregen! Maak er niet te veel herrie mee! Bedankt, uw buren."
+msgstr[1] "Team %s heeft %u drilboren gekregen! Maak er niet te veel herrie mee! Bedankt, uw buren."
 
 #: src/weapon/anvil.cpp:179
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
-msgstr[0] "'%s heeft %u luchtaanval gekregen"
-msgstr[1] "'%s heeft %u luchtaanvallen gekregen"
+msgstr[0] "Team %s heeft %u aambeeld gekregen! Plet ze allemaal!"
+msgstr[1] "Team %s heeft %u aambeelden gekregen! Plet ze allemaal!"
 
 #: src/weapon/auto_bazooka.cpp:296
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "Team %s heeft %u automatische bazooka gekregen!"
-msgstr[1] "Het team %s heeft %u automatische bazooka's gekregen!"
+msgstr[1] "Team %s heeft %u automatische bazooka's gekregen!"
 
 #: src/weapon/baseball.cpp:111
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
-msgstr[0] "'%s heeft %u luchtaanval gekregen"
-msgstr[1] "'%s heeft %u luchtaanvallen gekregen"
+msgstr[0] "Team %s heeft %u honkbalknuppel gekregen"
+msgstr[1] "Team %s heeft %u honkbalknuppels gekregen"
 
 #: src/weapon/bazooka.cpp:99
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u bazooka gekregen!"
+msgstr[1] "Team %s heeft %u bazooka's gekregen!"
 
 #: src/weapon/blowtorch.cpp:141
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
-msgid_plural ""
-"%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
-"it."
-msgstr[0] ""
-msgstr[1] ""
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid_plural "%s team has won %u blowtorchs! If you're under 18, ask your parents to use it."
+msgstr[0] "Team %s heeft %u snijbrander gekregen! Vraag of uw ouders het willen gebruiken als u onder de 18 bent."
+msgstr[1] "Team %s heeft %u snijbranders gekregen! Vraag of uw ouders het willen gebruiken als u onder de 18 bent."
 
 #: src/weapon/bounce_ball.cpp:107
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
-msgstr[0] "'%s heeft %u luchtaanval gekregen"
-msgstr[1] "'%s heeft %u luchtaanvallen gekregen"
+msgstr[0] "Team %s heeft %u stuiterbal gekregen! Boing!"
+msgstr[1] "Team %s heeft %u stuiterballen gekregen! Boing!"
 
 #: src/weapon/cluster_bomb.cpp:169
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u clusterbom gekregen!"
+msgstr[1] "Team %s heeft %u clusterbommen gekregen!"
 
 #: src/weapon/construct.cpp:62
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u constructiewapen gekregen! Vergeet uw helm niet."
+msgstr[1] "Team %s heeft %u constructiewapens gekregen! Vergeet uw helm niet."
 
 #: src/weapon/disco_grenade.cpp:137
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgstr[0] "Team %s heeft %u discogranaat gekregen! Schud met uw lichaam terwijl u hem gooit!"
+msgstr[1] "Team %s heeft %u discogranaten gekregen! Schud met uw lichaam terwijl u ze gooit!"
 
 #: src/weapon/dynamite.cpp:135
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Team %s heeft %u staaf dynamiet gekregen!"
-msgstr[1] "Het team %s heeft %u staven dynamiet gekregen!"
+msgstr[1] "Team %s heeft %u staven dynamiet gekregen!"
 
 #: src/weapon/grapple.cpp:712
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u haak gekregen!"
+msgstr[1] "Team %s heeft %u haken gekregen!"
 
 #: src/weapon/grenade.cpp:83
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u granaat gekregen!"
+msgstr[1] "Team %s heeft %u granaten gekregen!"
 
 #: src/weapon/gun.cpp:91
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u geweer gekregen!"
+msgstr[1] "Team %s heeft %u geweren gekregen!"
 
 #: src/weapon/jetpack.cpp:232
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
-msgstr[0] "'%s heeft %u luchtaanval gekregen"
-msgstr[1] "'%s heeft %u luchtaanvallen gekregen"
+msgstr[0] "Team %s heeft %u jetpack gekregen"
+msgstr[1] "Team %s heeft %u jetpacks gekregen"
 
 #: src/weapon/lowgrav.cpp:72
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u lagezwaartekracht gekregen! Ik ben Neil Armstrong!"
+msgstr[1] "Team %s heeft %u lagezwaartekrachten gekregen! Ik ben Neil Armstrong!"
 
 #: src/weapon/mine.cpp:235
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u mijn gekregen!"
+msgstr[1] "Team %s heeft %u mijnen gekregen!"
 
 #: src/weapon/parachute.cpp:143
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u parachute gekregen!"
+msgstr[1] "Team %s heeft %u parachutes gekregen!"
 
 #: src/weapon/polecat.cpp:164
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u stinkdier gekregen! U heeft uw gasmasker, nietwaar ?"
+msgstr[1] "Team %s heeft %u stinkdieren gekregen! U heeft uw gasmasker, nietwaar ?"
 
 #: src/weapon/riot_bomb.cpp:102
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u rellenbom gekregen!"
+msgstr[1] "Team %s heeft %u rellenbommen gekregen!"
 
 #: src/weapon/shotgun.cpp:126
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u jachtgeweer gekregen!"
+msgstr[1] "Team %s heeft %u jachtgeweren gekregen!"
 
 #: src/weapon/snipe_rifle.cpp:225
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u sluipschuttersgeweer gekregen! Schiet ermee tussen zijn ogen!"
+msgstr[1] "Team %s heeft %u sluipschuttersgeweren gekregen! Schiet ermee tussen zijn ogen!"
 
 #: src/weapon/submachine_gun.cpp:149
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u automatisch geweer gekregen!"
+msgstr[1] "Team %s heeft %u automatische geweren gekregen!"
 
 #: src/weapon/suicide.cpp:70
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u zelfmoord gekregen!"
+msgstr[1] "Team %s heeft %u zelfmoorden gekregen! Gebruik ze allemaal voor een extra bonus!"
 
 #: src/weapon/syringe.cpp:108
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u injectienaald gekregen!"
+msgstr[1] "Team %s heeft %u injectienaalden gekregen!"
 
 #: src/weapon/teleportation.cpp:110
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
-msgstr[0] "Team %s heeft %u teleportatie gekregen."
-msgstr[1] "\"Team %s heeft %u teleportaties gekregen."
+msgstr[0] "Team %s heeft %u teleportatie gekregen!"
+msgstr[1] "Team %s heeft %u teleportaties gekregen!"
 
 #: src/weapon/skip_turn.cpp:59
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u beurt overslaan gekregen! Ik weet dat u daar gek op bent."
+msgstr[1] "Team %s heeft %u keer een beurt overslaan gekregen! Ik weet dat u daar gek op bent."
 
 #: src/weapon/supertux.cpp:274
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "Team %s heeft %u %s gekregen!"
-msgstr[1] "Team %s heeft %u %sen gekregen!"
+msgstr[0] "Team %s heeft %u tux lanceerder gekregen! Nog nooit een pinguïn zien vliegen?"
+msgstr[1] "Team %s heeft %u tux lanceerders gekregen! Nog nooit een pinguïn zien vliegen?"
 
 #: src/include/action_handler.cpp:300
-#, fuzzy, c-format
+#, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "Wormux versies verschillen : client=%s, server=%s."
+msgstr "%s probeert te verbinden met een andere versie : client=%s, ik=%s."
 
 #: src/interface/interface.cpp:173
 msgid "(dead)"
@@ -347,7 +341,7 @@ msgstr "(dood)"
 #. Setting language selection
 #: src/menu/options_menu.cpp:178
 msgid "(system language)"
-msgstr ""
+msgstr "(systeemtaal)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:204
@@ -368,7 +362,7 @@ msgstr "Alle teams"
 
 #: src/game/game_loop.cpp:331
 msgid "And the winner is..."
-msgstr ""
+msgstr "En de winnaar is..."
 
 #: src/weapon/baseball.cpp:50
 msgid ""
@@ -376,6 +370,9 @@ msgid ""
 "Fire : space key\n"
 "a hit per turn"
 msgstr ""
+"Hoek : Omhoog/Omlaag\n"
+"Vuur : spatiebalk\n"
+"een slag per beurt"
 
 #: src/weapon/anvil.cpp:125
 msgid "Anvil"
@@ -413,16 +410,17 @@ msgstr "Stuiterbal"
 msgid "Bye bye tux..."
 msgstr "Dag dag tux..."
 
-#: src/team/teams_list.cpp:461 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:461
+#: src/team/teams_list.cpp:483
 #: src/team/teams_list.cpp:531
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan team %s niet vinden!"
 
 #: src/team/teams_list.cpp:156
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open personal teams directory (%s)!"
-msgstr "Kan teams directory niet openen (%s)!"
+msgstr "Kan persoonlijke-teamsdirectory niet openen (%s)!"
 
 #: src/team/teams_list.cpp:144
 #, c-format
@@ -465,7 +463,7 @@ msgstr "Bouw"
 
 #: src/menu/results_menu.cpp:210
 msgid "Controlled by: "
-msgstr ""
+msgstr "Bestuurd door: "
 
 #: src/menu/main_menu.cpp:104
 msgid "Credits"
@@ -487,7 +485,8 @@ msgstr "Duur van een beurt"
 msgid "Dynamite"
 msgstr "Dynamiet"
 
-#: src/game/game_loop.cpp:147 src/game/game_loop.cpp:153
+#: src/game/game_loop.cpp:147
+#: src/game/game_loop.cpp:153
 msgid "END OF GAME"
 msgstr "EINDE VAN HET SPEL"
 
@@ -496,10 +495,10 @@ msgstr "EINDE VAN HET SPEL"
 msgid "Error in %s:%lu"
 msgstr "Fout in %s:%lu"
 
-#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
-#, fuzzy
+#: src/team/teams_list.cpp:111
+#: src/team/teams_list.cpp:119
 msgid "Error loading team :"
-msgstr "Fout bij het laden van team %s:"
+msgstr "Fout bij het laden van team :"
 
 #: src/team/team.cpp:157
 #, c-format
@@ -508,11 +507,8 @@ msgstr "Fout bij het laden van gegevens van team %s:"
 
 #: src/game/config.cpp:334
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Fout bij het aanmaken van directory \"%s\": kon configuratiebestand niet "
-"opslaan."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Fout bij het aanmaken van directory \"%s\": kon configuratiebestand niet opslaan."
 
 #: src/game/config.cpp:221
 #, c-format
@@ -520,9 +516,9 @@ msgid "Error while loading configuration file: %s"
 msgstr "Fout bij het laden van configuratiebestand: %s"
 
 #: src/game/config.cpp:249
-#, fuzzy, c-format
+#, c-format
 msgid "Error while loading default configuration file: %s"
-msgstr "Fout bij het laden van configuratiebestand: %s"
+msgstr "Fout bij het laden van standaardconfiguratiebestand: %s"
 
 #: src/game/game_mode.cpp:235
 #, c-format
@@ -571,7 +567,7 @@ msgstr "Gnu Lanceren"
 
 #: src/weapon/grapple.cpp:103
 msgid "Grapple"
-msgstr ""
+msgstr "Haak"
 
 #: src/weapon/grenade.cpp:68
 msgid "Grenade"
@@ -600,9 +596,8 @@ msgstr "Hoofdcommandant"
 
 #. Display player's name
 #: src/interface/interface.cpp:164
-#, fuzzy
 msgid "Head commander: "
-msgstr "Hoofdcommandant"
+msgstr "Hoofdcommandant: "
 
 #: src/menu/network_connection_menu.cpp:160
 msgid "Host a game"
@@ -614,12 +609,17 @@ msgid ""
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
+"Hoe te gebruiken : houd de spatiebalk ingedrukt\n"
+"Hoek : Omhoog/Omlaag\n"
+"eenmaal per beurt"
 
 #: src/weapon/airhammer.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
 msgstr ""
+"Hoe te gebruiken : houd de spatiebalk ingedrukt\n"
+"eenmaal per beurt"
 
 #: src/weapon/auto_bazooka.cpp:187
 msgid ""
@@ -628,49 +628,53 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Hoe te gebruiken : klik met de linkermuisknop op het doel\n"
+"Initiële vuurhoek : Omhoog/Omlaag\n"
+"Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
+"een schot per beurt"
 
 #: src/weapon/anvil.cpp:126
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
 msgstr ""
+"Hoe te gebruiken : klik met de linkermuisknop op het doel\n"
+"slechts een per beurt"
 
 #: src/game/game_loop.cpp:706
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
 #: src/main.cpp:234
-msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
-"please):"
-msgstr ""
-"Als u een bug hebt gevonden of een feature wilt aanvragen stuur ons dan een "
-"e-mail (graag in het Engels):"
+msgid "If you found a bug or have a feature request send us a email (in english, please):"
+msgstr "Als u een bug hebt gevonden of een feature wilt aanvragen stuur ons dan een e-mail (graag in het Engels):"
 
 #: src/menu/game_menu.cpp:102
 msgid "Initial energy"
 msgstr "Initiële energie"
 
-#: src/weapon/bazooka.cpp:85 src/weapon/riot_bomb.cpp:88
+#: src/weapon/bazooka.cpp:85
+#: src/weapon/riot_bomb.cpp:88
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Initiële vuurhoek : Omhoog/Omlaag\n"
+"Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
+"slechts een per beurt"
 
 #: src/game/game_init.cpp:154
 msgid "Initialisation"
 msgstr "Initialisatie"
 
 #: src/game/game_init.cpp:109
-#, fuzzy
 msgid "Initialise map"
-msgstr "Initialiseer data"
+msgstr "Initialiseer kaart"
 
 #: src/game/game_init.cpp:141
-#, fuzzy
 msgid "Initialise sounds"
-msgstr "Initialiseer data"
+msgstr "Initialiseer geluiden"
 
 #: src/game/game_init.cpp:120
 msgid "Initialise teams"
@@ -684,13 +688,14 @@ msgstr "Het is een cadeau!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:99 src/menu/network_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:99
+#: src/menu/network_menu.cpp:145
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Bezoek #wormux op irc.freenode.net om tegenstanders te vinden."
 
 #: src/menu/options_menu.cpp:127
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #: src/map/maps_list.cpp:213
 msgid "Load maps:"
@@ -732,12 +737,11 @@ msgstr "Mijn"
 
 #: src/menu/results_menu.cpp:280
 msgid "Most accurate"
-msgstr ""
+msgstr "Nauwkeurigste"
 
 #: src/menu/results_menu.cpp:275
-#, fuzzy
 msgid "Most clumsy"
-msgstr "Meest zinvol"
+msgstr "Onhandigste"
 
 #: src/menu/results_menu.cpp:270
 msgid "Most sold-out"
@@ -764,9 +768,8 @@ msgid "Network Game"
 msgstr "Netwerk Spel"
 
 #: src/network/network.cpp:165
-#, fuzzy
 msgid "Network initialization"
-msgstr "Initialiseren van de grond..."
+msgstr "Netwerk wordt geïnitialiseerd"
 
 #: src/weapon/weapon.cpp:589
 #, c-format
@@ -833,9 +836,8 @@ msgid "Quit Wormux"
 msgstr "Wormux afsluiten"
 
 #: src/game/config.cpp:234
-#, fuzzy
 msgid "Reading default config file"
-msgstr "Persoonlijk config bestand wordt gelezen"
+msgstr "Standaard configbestand wordt gelezen"
 
 #: src/game/config.cpp:257
 msgid "Reading personal config file"
@@ -859,7 +861,7 @@ msgstr "Spel wordt gestart"
 
 #: src/network/chat.cpp:76
 msgid "Say: "
-msgstr ""
+msgstr "Zeg: "
 
 #: src/menu/game_menu.cpp:108
 msgid "Scroll on border"
@@ -894,7 +896,7 @@ msgstr "Scherpschuttersgeweer"
 
 #: src/menu/internet_menu.cpp:115
 msgid "Sorry, currently, no game is waiting for players"
-msgstr ""
+msgstr "Sorry, er is op dit moment geen spel dat op spelers wacht"
 
 #: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
@@ -959,8 +961,7 @@ msgstr "De bal heeft het slagveld verlaten voor te ontploffen"
 
 #: src/network/net_error_msg.cpp:49
 msgid "The connection timed out. Check there is no firewall in the way!"
-msgstr ""
-"De verbinding gaf een time out. Controleer of er geen firewall in de weg zit!"
+msgstr "De verbinding gaf een time out. Controleer of er geen firewall in de weg zit!"
 
 #: src/weapon/disco_grenade.cpp:113
 msgid "The disco grenade has left the dance floor before exploding"
@@ -972,14 +973,14 @@ msgstr "De granaat heeft het slagveld verlaten voor te ontploffen"
 
 #: src/menu/network_menu.cpp:321
 msgid "The others are waiting for you! Wake up :-)"
-msgstr ""
+msgstr "De anderen wachten op u! Wakker worden :-)"
 
-#: src/weapon/bazooka.cpp:69 src/weapon/riot_bomb.cpp:73
+#: src/weapon/bazooka.cpp:69
+#: src/weapon/riot_bomb.cpp:73
 msgid "The rocket has left the battlefield..."
 msgstr "De raket heeft het slagveld verlaten voor te ontploffen"
 
 #: src/network/net_error_msg.cpp:46
-#, fuzzy
 msgid "The server rejected the connection."
 msgstr "De server weigerde de verbinding."
 
@@ -997,6 +998,10 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
+"Timeout : Muiswiel of Page Up/Down\n"
+"Hoek : Omhoog/Omlaag\n"
+"Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
+"slechts een per beurt"
 
 #: src/weapon/bounce_ball.cpp:82
 msgid ""
@@ -1005,16 +1010,21 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
+"Timeout : Muiswiel of Page Up/Down\n"
+"Hoek : Omhoog/Omlaag\n"
+"Vuur : spatiebalk\n"
+"slechts een per beurt"
 
 #: src/interface/weapon_menu.cpp:169
 msgid "Tools"
-msgstr ""
+msgstr "Gereedschap"
 
 #: src/network/net_error_msg.cpp:37
 msgid "Unable to contact host."
 msgstr "Kon geen verbinding maken met host."
 
-#: src/map/maps_list.cpp:223 src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:223
+#: src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kon kaarten directory niet openen (%s)!"
@@ -1036,11 +1046,12 @@ msgstr[1] "Wacht! %i spelers zijn nog niet klaar!"
 
 #: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr ""
+msgstr "Wachten op de server, het enige wat u nu kunt doen is annuleren of chatten!"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:133 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:133
+#: src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Wapens"
 
@@ -1059,9 +1070,8 @@ msgid "Wind particles?"
 msgstr "Wind deeltjes?"
 
 #: src/menu/results_menu.cpp:202
-#, fuzzy
 msgid "Winner"
-msgstr "Mijn"
+msgstr "Winaar"
 
 #: src/main.cpp:196
 msgid "Wormux launching..."
@@ -1077,9 +1087,8 @@ msgid "XML error during loading map '%s' :"
 msgstr "XML fout bij het laden van kaart '%s' :"
 
 #: src/menu/network_menu.cpp:324
-#, fuzzy
 msgid "You are alone :-/"
-msgstr "U bent alleen..."
+msgstr "U bent alleen :-/"
 
 #: src/menu/network_menu.cpp:247
 msgid "You are alone..."
@@ -1089,22 +1098,22 @@ msgstr "U bent alleen..."
 msgid "You need at least one valid map !"
 msgstr "U heeft minimaal één geldige kaart nodig !"
 
-#: src/game/game_init.cpp:126 src/team/teams_list.cpp:164
+#: src/game/game_init.cpp:126
+#: src/team/teams_list.cpp:164
 msgid "You need at least two valid teams !"
 msgstr "U heeft minimaal twee geldige teams nodig !"
 
 #: src/menu/network_menu.cpp:227
 msgid "You won't be able to play before selecting a team !"
-msgstr ""
+msgstr "U kunt pas spelen als u een team heeft geselecteerd !"
 
 #: src/weapon/weapon_launcher.cpp:434
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 
 #: src/menu/credits_menu.cpp:75
-#, fuzzy
 msgid "aka"
-msgstr " aka "
+msgstr "aka"
 
 #: src/weapon/air_attack.cpp:202
 msgid ""
@@ -1112,15 +1121,17 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
+"aanvalsrichting : Links/Rechts\n"
+"Bombarderen: klik met de linkermuisknop op het doel\n"
+"een bombardement per beurt"
 
 #: src/map/ground.cpp:57
 msgid "done"
 msgstr "klaar"
 
 #: src/menu/credits_menu.cpp:79
-#, fuzzy
 msgid "from"
-msgstr " van "
+msgstr "van"
 
 #: src/sound/jukebox.cpp:155
 msgid "o Loading music"
@@ -1147,7 +1158,6 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #~ "Enkele wapens zijn uitgeschakeld vanwege bugs (ninja touw, drilboor, "
 #~ "snijbrander, automatisch geweer) en waarschijnlijk werken veel andere "
 #~ "dingen ook niet!"
-
 #~ msgid ""
 #~ "WARNING!! Network is still under developement and therefore a little "
 #~ "experimental."
@@ -1183,86 +1193,62 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #~ msgid_plural "%s team has won %u unexpected weapons!"
 #~ msgstr[0] "Team %s heeft %u %s gekregen!"
 #~ msgstr[1] "Team %s heeft %u %sen gekregen!"
-
 #~ msgid ""
 #~ "WARNING! Disconnections are not yet handled. So you have to restart "
 #~ "Wormux after each disconnection!"
 #~ msgstr ""
 #~ "WAARSCHUWING! Verbroken verbindingen worden nog niet afgehandeld. Daarom "
 #~ "moet u Wormux opnieuw starten na elke verbroken verbinding!"
-
 #~ msgid "Remote"
 #~ msgstr "Via netwerk"
-
 #~ msgid "Ninjarope"
 #~ msgstr "Ninja touw"
 
 #, fuzzy
 #~ msgid "Error while exporting file %s:"
 #~ msgstr "Fout bij het exporteren van spelmodus %s (bestand %s):"
-
 #~ msgid "Error while loading game mode %s from memory:"
 #~ msgstr "Fout bij het laden van spelmodus %s uit het geheugen:"
-
 #~ msgid "Unexpected exception caught..."
 #~ msgstr "Onverwachte uitzondering gevangen..."
-
 #~ msgid "C++ exception caught:"
 #~ msgstr "C++ uitzondering gevangen:"
-
 #~ msgid "Failed to initialize network library!"
 #~ msgstr "Kon netwerkbibliotheek niet initialiseren!"
-
 #~ msgid "Initialisation of TTF library failed: %s"
 #~ msgstr "Kon TTF bibliotheek niet initialiseren: %s"
-
 #~ msgid "Unable to initialize SDL library: %s"
 #~ msgstr "Kon SDL bibliotheek niet initialiseren: %s"
-
 #~ msgid "You need at least two teams to play: change this in 'Options menu' !"
 #~ msgstr ""
 #~ "U heeft minimaal twee teams nodig om te spelen: verander dit in 'Opties "
 #~ "menu' !"
-
 #~ msgid "general: "
 #~ msgstr "algemeen:"
-
 #~ msgid " has joined the party"
 #~ msgstr " is bij het feest gekomen"
-
 #~ msgid " has left the party"
 #~ msgstr " heeft het feest verlaten"
-
 #~ msgid "* Couldn't initialize SDL: "
 #~ msgstr "* Kon SDL niet initialiseren: "
-
 #~ msgid "* Couldn't open audio: "
 #~ msgstr "* Kon audio niet openen: "
-
 #~ msgid "Find a random position for characters"
 #~ msgstr "Zoek een willekeurige positie voor de spelers"
-
 #~ msgid "Initialise objects"
 #~ msgstr "Initialiseer objecten"
-
 #~ msgid "[Music] Error : Unable to load music file: %s"
 #~ msgstr "[Muziek] Fout : Kon muziekbestand niet laden: %s"
-
 #~ msgid "[Music] Error : file %s does not exist"
 #~ msgstr "[Muziek] Fout : bestand %s bestaat niet"
-
 #~ msgid "[Music] Error : file %s not found"
 #~ msgstr "[Muziek] Fout : bestand %s niet gevonden"
-
 #~ msgid "[Music] Unable to find music file: %s"
 #~ msgstr "[Muziek] Kon muziekbestand niet vinden: %s"
-
 #~ msgid "[Music] Unable to find profile: %s"
 #~ msgstr "[Muziek] Kon profiel niet vinden: %s"
-
 #~ msgid "[Sound] Error : file %s not found"
 #~ msgstr "[Geluid] Fout : bestand %s niet gevonden"
-
 #~ msgid "[Sound] Error: File %s does not exist"
 #~ msgstr "[Geluid] Fout: Bestand %s bestaat niet"
 
@@ -1281,15 +1267,12 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #, fuzzy
 #~ msgid "  Most violent  :  "
 #~ msgstr "  Meest gewelddadig  : %s (%i).\n"
-
 #~ msgid "%s has lost %u point of energy."
 #~ msgid_plural "%s has lost %u points of energy."
 #~ msgstr[0] "%s verloor %u punt energie"
 #~ msgstr[1] "%s verloor %u punten energie"
-
 #~ msgid "%s is stupidly dead because he gone out of the map ..."
 #~ msgstr "%s is stom dood gegaan, omdat hij van het terrein afging ..."
-
 #~ msgid "%s team has won.\n"
 #~ msgstr "Team %s heeft gewonnen.\n"
 
@@ -1310,118 +1293,86 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #~ msgid_plural "'%s has won %u Low gravity"
 #~ msgstr[0] "'%s heeft %u luchtaanval gekregen"
 #~ msgstr[1] "'%s heeft %u luchtaanvallen gekregen"
-
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""
 #~ "Om <infinite_background> goed te laten werken moet <is_open> ingesteld "
 #~ "zijn!!"
-
 #~ msgid "Air attack"
 #~ msgstr "Luchtaanval"
 
 #, fuzzy
 #~ msgid "All teams results:\n"
 #~ msgstr "Alle-Teams resultaten:\n"
-
 #~ msgid "Authors"
 #~ msgstr "Auteurs"
-
 #~ msgid "Automatic bazooka"
 #~ msgstr "Automatische bazooka"
-
 #~ msgid "Baseball"
 #~ msgstr "Honkbalknuppel"
-
 #~ msgid "ClanLib error :"
 #~ msgstr "ClanLib fout :"
 
 #, fuzzy
 #~ msgid "Connected to "
 #~ msgstr "Einde van het spel"
-
 #~ msgid "Dead of %s (%s)."
 #~ msgstr "Dood van %s (%s)."
-
 #~ msgid "Drawn game :-("
 #~ msgstr "Gelijkspel :-("
-
 #~ msgid "Duration of the end of a turn:"
 #~ msgstr "Duur van einde van een beurt:"
-
 #~ msgid "End of the game!\n"
 #~ msgstr "Einde van het spel!\n"
-
 #~ msgid "Energy:"
 #~ msgstr "Energie:"
-
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Fout bij het laden van skin %s:"
 
 #, fuzzy
 #~ msgid "Game options:"
 #~ msgstr "Spel opties"
-
 #~ msgid "Graphic options"
 #~ msgstr "Grafische opties"
-
 #~ msgid "Info"
 #~ msgstr "Info"
-
 #~ msgid "Init data"
 #~ msgstr "Initialiseren van gegevens"
-
 #~ msgid "Is it a gift?"
 #~ msgstr "Is het een geschenk?"
 
 #, fuzzy
 #~ msgid "Load game data..."
 #~ msgstr "Spel gegevens laden ..."
-
 #~ msgid "Load map"
 #~ msgstr "Laad kaart"
-
 #~ msgid "Load skins:"
 #~ msgstr "Skins worden geladen:"
-
 #~ msgid "Name:"
 #~ msgstr "Naam:"
-
 #~ msgid "Number of players per team:"
 #~ msgstr "Aantal spelers per team:"
-
 #~ msgid "Ok"
 #~ msgstr "Ok"
-
 #~ msgid "PAUSE"
 #~ msgstr "Pause"
-
 #~ msgid "Pause"
 #~ msgstr "Pauze"
-
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr "Vertel ons a.u.b. uw mening over Wormux via e-mail:"
-
 #~ msgid "Riot bomb"
 #~ msgstr "Riot bomb"
-
 #~ msgid "Select the teams:"
 #~ msgstr "Selecteer de teams:"
-
 #~ msgid "Select the world:"
 #~ msgstr "Selecteer de wereld:"
-
 #~ msgid "Sound error :"
 #~ msgstr "Fout met het geluid :"
-
 #~ msgid "Sound options"
 #~ msgstr "Geluid opties"
-
 #~ msgid "Team %s results:\n"
 #~ msgstr "Resultaten team %s:\n"
-
 #~ msgid "Thank you to deliver your opinion by following email :"
 #~ msgstr "Gelieve uw mening naar het volgende e-mailadres te sturen :"
-
 #~ msgid "The game has ended as a draw.\n"
 #~ msgstr "Het spel eindigde in een gelijkspel.\n"
 
@@ -1436,33 +1387,28 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #, fuzzy
 #~ msgid "Unable to join the game..."
 #~ msgstr "Kon skins directory niet openen (%s)!"
-
 #~ msgid "Unknow action"
 #~ msgstr "Onbekende actie"
 
 #, fuzzy
 #~ msgid "Use sound?"
 #~ msgstr "Gebruik geluid"
-
 #~ msgid "Wait for map"
 #~ msgstr "Wacht op kaart"
-
 #~ msgid "Wait for server"
 #~ msgstr "Wacht op server"
-
 #~ msgid "Wait for server informations"
 #~ msgstr "Wacht op server informatie"
 
 #, fuzzy
 #~ msgid "Wait! "
 #~ msgstr "Wacht teams"
-
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr "Waarschuwing! Gewicht van wind deeltjes te laag ! Standaard is 0.3"
-
 #~ msgid "Weapon:"
 #~ msgstr "Wapen:"
 
 #, fuzzy
 #~ msgid "disconnection!"
 #~ msgstr "Einde van het spel"
+
