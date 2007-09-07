@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.8b1\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-09-07 15:00+0200\n"
 "PO-Revision-Date: 2006-06-20 11:35+0100\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx AT wanadoo.fr>\n"
 "Language-Team: eo <victor.stinner AT haypocalc.com>\n"
@@ -221,7 +222,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s teamo gajnis %u dinamitan bastonon !"
 msgstr[1] "%s teamo gajnis %u dinamitajn bastonojn !"
 
-#: src/weapon/grapple.cpp:709
+#: src/weapon/grapple.cpp:712
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -292,9 +293,9 @@ msgstr[0] "%s teamo gajnis %u blovfusilon !"
 msgstr[1] "%s teamo gajnis %u blovfusilojn !"
 
 #: src/weapon/snipe_rifle.cpp:225
-#, c-format
-msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
-msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
+#, fuzzy, c-format
+msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
+msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
 msgstr[0] "%s teamo gajnis %u tiraljoran fusilon ! Celu inter la okuloj !"
 msgstr[1] "%s teamo gajnis %u tiraljorajn fusilojn ! Celu inter la okuloj !"
 
@@ -342,26 +343,22 @@ msgstr[0] ""
 msgstr[1] ""
 "%s teamo gajnis %u tuksĵetilojn ! Ĉu vi neniam vidis flugantan sfeniskon ?"
 
-#: src/include/action_handler.cpp:243
+#: src/include/action_handler.cpp:300
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s provas konetiĝi kun alia versio: kliento=%s, mi=%s."
 
-#: src/menu/options_menu.cpp:155
-msgid "(current)"
-msgstr "(nuna)"
-
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(mortinta)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:178
 msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
@@ -427,18 +424,18 @@ msgstr "Resaltanta pilko"
 msgid "Bye bye tux..."
 msgstr "Adiaŭ, tukso..."
 
-#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
-#: src/team/teams_list.cpp:534
+#: src/team/teams_list.cpp:461 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:531
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ne eblas trovi teamon %s !"
 
-#: src/team/teams_list.cpp:157
+#: src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ne eblas malfermi teaman dosierujon (%s) !"
 
-#: src/team/teams_list.cpp:145
+#: src/team/teams_list.cpp:144
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ne eblas malfermi teaman dosierujon (%s) !"
@@ -510,27 +507,27 @@ msgstr "LUDFINO"
 msgid "Error in %s:%lu"
 msgstr "Eraro en %s : %lu"
 
-#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
+#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
 msgid "Error loading team :"
 msgstr "Eraro muntante teamon :"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Eraro muntante la datumojn de la teamo %s :"
 
-#: src/game/config.cpp:334
+#: src/game/config.cpp:343
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Eraro kreante dosierujon \"%s\" : ne eblas registri agordan dosieron."
 
-#: src/game/config.cpp:221
+#: src/game/config.cpp:230
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eraro muntante agordan dosieron : %s"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:258
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Eraro muntante norman agordan dosieron : %s"
@@ -567,12 +564,12 @@ msgstr "Eraro : Ne eblas kontakti indeksservilon por serĉi interretan ludon"
 msgid "Error: Unable to start server"
 msgstr "Eraro : Ne eblas starti servilon"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eraro : Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:86
 msgid "Fullscreen?"
 msgstr "Plenekrane ?"
 
@@ -610,7 +607,7 @@ msgid "Head commander"
 msgstr "Ĉefkomandoro"
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr "Ĉefkomandoro:"
 
@@ -619,37 +616,41 @@ msgid "Host a game"
 msgstr "Gastigu ludon"
 
 #: src/weapon/blowtorch.cpp:54
+#, fuzzy
 msgid ""
-"Howto use it: keep space key pressed\n"
+"Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 "Kiel uzi ĝin : apogu kontinue spacetosignon\n"
 "Unu uzo vice"
 
 #: src/weapon/airhammer.cpp:64
+#, fuzzy
 msgid ""
-"Howto use it: keep space key pressed\n"
-"one ammo per turn"
+"Howto use it : keep space key pressed\n"
+"an ammo per turn"
 msgstr ""
 "Kiel uzi ĝin : apogu kontinue spacetosignon\n"
 "Unu uzo vice"
 
 #: src/weapon/auto_bazooka.cpp:187
+#, fuzzy
 msgid ""
-"Howto use it: left clic on target\n"
+"Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 "Kiel uzi ĝin : maldekstrklaku sur celo\n"
 "Komenca pafangulo : Supren/Malsupren\n"
 "Pafo : apogu kontinue spacetosignon ĝis la vola fortoUnu pafo vice"
 
 #: src/weapon/anvil.cpp:126
+#, fuzzy
 msgid ""
-"Howto use it: left click on target\n"
-"one ammo per turn"
+"Howto use it : left click on target\n"
+"an ammo per turn"
 msgstr ""
 "Kiel uzi ĝin : maldekstrklaku sur celo\n"
 "Unu amunicio vice"
@@ -671,28 +672,29 @@ msgid "Initial energy"
 msgstr "Komenca energio"
 
 #: src/weapon/bazooka.cpp:85 src/weapon/riot_bomb.cpp:88
+#, fuzzy
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 "Komenca pafangulo : Supren/Malsupren\n"
 "Pafo : apogu kontinue spacetosignon ĝis la vola forto\n"
 "Unu pafo vice"
 
-#: src/game/game_init.cpp:143
+#: src/game/game_init.cpp:154
 msgid "Initialisation"
 msgstr "Preparanto"
 
-#: src/game/game_init.cpp:98
+#: src/game/game_init.cpp:109
 msgid "Initialise map"
 msgstr "Preparante mapon"
 
-#: src/game/game_init.cpp:130
+#: src/game/game_init.cpp:141
 msgid "Initialise sounds"
 msgstr "Preparante sonojn"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:120
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
@@ -708,7 +710,7 @@ msgstr "Jetpako"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Aliĝu #wormux en irc.freenode.net por trovi oponantojn."
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr ""
 
@@ -716,7 +718,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Muntas la mapojn :"
 
-#: src/team/teams_list.cpp:133
+#: src/team/teams_list.cpp:132
 msgid "Load teams:"
 msgstr "Muntas la teamojn :"
 
@@ -734,7 +736,7 @@ msgstr "Malpezigilo"
 msgid "Map %s, a creation of: "
 msgstr "Mapo %s, far :"
 
-#: src/game/game_init.cpp:100
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Mapoj"
 
@@ -742,7 +744,7 @@ msgstr "Mapoj"
 msgid "Max number of players:"
 msgstr "Maksimuma kvanto da ludantoj :"
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:89
 msgid "Maximum FPS"
 msgstr "Maksimumaj bildoj po sukundo (fps)"
 
@@ -774,7 +776,7 @@ msgstr "La plej malutila"
 msgid "Most violent"
 msgstr "La plej perforta"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:138
 msgid "Music?"
 msgstr "Muzikon ?"
 
@@ -782,7 +784,7 @@ msgstr "Muzikon ?"
 msgid "Network Game"
 msgstr "Reta ludo"
 
-#: src/network/network.cpp:153
+#: src/network/network.cpp:165
 msgid "Network initialization"
 msgstr "Preparante la reton"
 
@@ -825,11 +827,11 @@ msgstr "Aktoru"
 msgid "Player"
 msgstr "Ludanto"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:80
 msgid "Player energy?"
 msgstr "Ludantan energion ?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:83
 msgid "Player's name?"
 msgstr "Ludantajn nomojn ?"
 
@@ -850,11 +852,11 @@ msgstr "Forlasu"
 msgid "Quit Wormux"
 msgstr "Forigu el Wormux"
 
-#: src/game/config.cpp:234
+#: src/game/config.cpp:243
 msgid "Reading default config file"
 msgstr "Legante norman agordaron"
 
-#: src/game/config.cpp:257
+#: src/game/config.cpp:266
 msgid "Reading personal config file"
 msgstr "Legante personan agordaron"
 
@@ -862,7 +864,7 @@ msgstr "Legante personan agordaron"
 msgid "Refresh"
 msgstr "Refreŝu"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:113
 msgid "Resolution"
 msgstr "Difino"
 
@@ -913,16 +915,16 @@ msgstr "Tiraljora fusilo"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
 msgstr "Sonajn efektojn ?"
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:144
 msgid "Sound frequency"
 msgstr "Sona frekvenco"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:133
+#: src/game/game_init.cpp:144
 msgid "Sounds"
 msgstr "Sonoj"
 
@@ -930,7 +932,7 @@ msgstr "Sonoj"
 msgid "Starting a new game"
 msgstr "Komencante novan ludon"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Municioj :"
 
@@ -946,7 +948,7 @@ msgstr "SuperTukso"
 msgid "Syringe"
 msgstr "Injektilo"
 
-#: src/game/game_init.cpp:111
+#: src/game/game_init.cpp:122
 msgid "Teams"
 msgstr "Teamoj"
 
@@ -1006,22 +1008,24 @@ msgstr[0] "Sole estas %i teamo."
 msgstr[1] "Sole estas %i teamoj."
 
 #: src/weapon/cluster_bomb.cpp:149
+#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 "Tempolimo : Radmuso aŭ Paĝa Supren/Malsupren\n"
 "Angulo : Supren/Malsupren\n"
 "Pafo : apogu kontinue spacetosignon ĝis la vola fortoUnu pafo vice"
 
 #: src/weapon/bounce_ball.cpp:82
+#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 "Tempolimo : Radmuso aŭ Paĝa Supren/Malsupren\n"
 "Angulo : Supren/Malsupren\n"
@@ -1061,7 +1065,7 @@ msgstr "Atende servilon, vi nur povas rezigni aŭ babili !"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:133 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Armiloj"
 
@@ -1075,7 +1079,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo !"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:77
 msgid "Wind particles?"
 msgstr "Venterojn ?"
 
@@ -1108,7 +1112,7 @@ msgstr "Vi estas sola..."
 msgid "You need at least one valid map !"
 msgstr "Vi bezonas almenaŭ unu taŭgan mapon !"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
+#: src/game/game_init.cpp:126 src/team/teams_list.cpp:164
 msgid "You need at least two valid teams !"
 msgstr "Vi bezonas almenaŭ du teamojn !"
 
@@ -1155,6 +1159,9 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#~ msgid "(current)"
+#~ msgstr "(nuna)"
 
 #~ msgid ""
 #~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "

@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-09-07 15:00+0200\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -200,7 +201,7 @@ msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/grapple.cpp:709
+#: src/weapon/grapple.cpp:712
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -262,8 +263,8 @@ msgstr[0] "%s takımı %u %s kazandı!"
 
 #: src/weapon/snipe_rifle.cpp:225
 #, fuzzy, c-format
-msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
-msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
+msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
+msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
 #: src/weapon/submachine_gun.cpp:149
@@ -302,26 +303,22 @@ msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/include/action_handler.cpp:243
+#: src/include/action_handler.cpp:300
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 
-#: src/menu/options_menu.cpp:155
-msgid "(current)"
-msgstr "(şimdiki)"
-
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(ölü)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:178
 msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
@@ -385,18 +382,18 @@ msgstr "Zıplayan Top"
 msgid "Bye bye tux..."
 msgstr "Bay bay tux..."
 
-#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
-#: src/team/teams_list.cpp:534
+#: src/team/teams_list.cpp:461 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:531
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
 
-#: src/team/teams_list.cpp:157
+#: src/team/teams_list.cpp:156
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
-#: src/team/teams_list.cpp:145
+#: src/team/teams_list.cpp:144
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
@@ -468,28 +465,28 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "%s:%lu'da hata"
 
-#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
+#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
 #, fuzzy
 msgid "Error loading team :"
 msgstr "%s takımı yüklenirken hata:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
 
-#: src/game/config.cpp:334
+#: src/game/config.cpp:343
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
-#: src/game/config.cpp:221
+#: src/game/config.cpp:230
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:258
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
@@ -529,12 +526,12 @@ msgstr "(%s) harita dizini açılamadı!"
 msgid "Error: Unable to start server"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:86
 msgid "Fullscreen?"
 msgstr "Tam ekran?"
 
@@ -572,7 +569,7 @@ msgid "Head commander"
 msgstr ""
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr ""
 
@@ -582,29 +579,29 @@ msgstr ""
 
 #: src/weapon/blowtorch.cpp:54
 msgid ""
-"Howto use it: keep space key pressed\n"
+"Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
 #: src/weapon/airhammer.cpp:64
 msgid ""
-"Howto use it: keep space key pressed\n"
-"one ammo per turn"
+"Howto use it : keep space key pressed\n"
+"an ammo per turn"
 msgstr ""
 
 #: src/weapon/auto_bazooka.cpp:187
 msgid ""
-"Howto use it: left clic on target\n"
+"Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
 #: src/weapon/anvil.cpp:126
 msgid ""
-"Howto use it: left click on target\n"
-"one ammo per turn"
+"Howto use it : left click on target\n"
+"an ammo per turn"
 msgstr ""
 
 #: src/game/game_loop.cpp:706
@@ -627,24 +624,24 @@ msgstr "Başlangıç enerjisi"
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
-#: src/game/game_init.cpp:143
+#: src/game/game_init.cpp:154
 msgid "Initialisation"
 msgstr "Ayarlama"
 
-#: src/game/game_init.cpp:98
+#: src/game/game_init.cpp:109
 #, fuzzy
 msgid "Initialise map"
 msgstr "Veriler yükleniyor"
 
-#: src/game/game_init.cpp:130
+#: src/game/game_init.cpp:141
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Nesneler yükleniyor"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:120
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
@@ -660,7 +657,7 @@ msgstr "Jet çantası"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr ""
 
@@ -668,7 +665,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Haritaları yükle:"
 
-#: src/team/teams_list.cpp:133
+#: src/team/teams_list.cpp:132
 msgid "Load teams:"
 msgstr "Takımları yükle:"
 
@@ -687,7 +684,7 @@ msgstr "Düşük yer çekimi"
 msgid "Map %s, a creation of: "
 msgstr "%s haritasını tasarlayan:"
 
-#: src/game/game_init.cpp:100
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Haritalar"
 
@@ -695,7 +692,7 @@ msgstr "Haritalar"
 msgid "Max number of players:"
 msgstr ""
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:89
 msgid "Maximum FPS"
 msgstr "En fazla FPS"
 
@@ -727,7 +724,7 @@ msgstr ""
 msgid "Most violent"
 msgstr ""
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:138
 msgid "Music?"
 msgstr "Müzik?"
 
@@ -735,7 +732,7 @@ msgstr "Müzik?"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/network/network.cpp:153
+#: src/network/network.cpp:165
 #, fuzzy
 msgid "Network initialization"
 msgstr "Alan oluşturuluyor..."
@@ -780,11 +777,11 @@ msgstr "Oyna"
 msgid "Player"
 msgstr "Oyna"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:80
 msgid "Player energy?"
 msgstr "Oyuncu enerjisi?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:83
 msgid "Player's name?"
 msgstr "Oyuncu isimleri?"
 
@@ -805,12 +802,12 @@ msgstr "Çıkış"
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/game/config.cpp:234
+#: src/game/config.cpp:243
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
-#: src/game/config.cpp:257
+#: src/game/config.cpp:266
 msgid "Reading personal config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
@@ -818,7 +815,7 @@ msgstr "Kişisel ayar dosyası okunuyor"
 msgid "Refresh"
 msgstr ""
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:113
 msgid "Resolution"
 msgstr "Çözünürlük"
 
@@ -869,16 +866,16 @@ msgstr "Suikast Tüfeği"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
 msgstr "Ses efektleri?"
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:144
 msgid "Sound frequency"
 msgstr "Ses frekansı"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:133
+#: src/game/game_init.cpp:144
 msgid "Sounds"
 msgstr "Sesler"
 
@@ -886,7 +883,7 @@ msgstr "Sesler"
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Stok:"
 
@@ -902,7 +899,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Şırınga"
 
-#: src/game/game_init.cpp:111
+#: src/game/game_init.cpp:122
 msgid "Teams"
 msgstr "Takımlar"
 
@@ -965,7 +962,7 @@ msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
 #: src/weapon/bounce_ball.cpp:82
@@ -973,7 +970,7 @@ msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
 #: src/interface/weapon_menu.cpp:169
@@ -1010,7 +1007,7 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:133 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Silahlar"
 
@@ -1024,7 +1021,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:77
 msgid "Wind particles?"
 msgstr "Rüzgar parçacıkları?"
 
@@ -1058,7 +1055,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
+#: src/game/game_init.cpp:126 src/team/teams_list.cpp:164
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
@@ -1103,6 +1100,9 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#~ msgid "(current)"
+#~ msgstr "(şimdiki)"
 
 #, fuzzy
 #~ msgid "%s team has won %u Gnu!"

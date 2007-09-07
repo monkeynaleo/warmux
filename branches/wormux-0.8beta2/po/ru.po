@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-08-23 21:42+0200\n"
+"POT-Creation-Date: 2007-09-07 15:00+0200\n"
 "PO-Revision-Date: 2007-08-28 22:21+0400\n"
 "Last-Translator: \n"
 "Language-Team:  <ru@li.org>\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -146,9 +147,15 @@ msgid ""
 msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
-msgstr[0] "Команда %s выиграла %u отбойный молот! Не слишком шумите! Спасибо, ваши соседи."
-msgstr[1] "Команда %s выиграла %u отбойных молота! Не слишком шумите! Спасибо, ваши соседи."
-msgstr[2] "Команда %s выиграла %u отбойных молотов! Не слишком шумите! Спасибо, ваши соседи."
+msgstr[0] ""
+"Команда %s выиграла %u отбойный молот! Не слишком шумите! Спасибо, ваши "
+"соседи."
+msgstr[1] ""
+"Команда %s выиграла %u отбойных молота! Не слишком шумите! Спасибо, ваши "
+"соседи."
+msgstr[2] ""
+"Команда %s выиграла %u отбойных молотов! Не слишком шумите! Спасибо, ваши "
+"соседи."
 
 #: src/weapon/anvil.cpp:179
 #, c-format
@@ -184,13 +191,20 @@ msgstr[2] "Команда %s выиграла %u базук!"
 
 #: src/weapon/blowtorch.cpp:141
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr[0] "Команда %s выиграла %u паяльную лампу! Если вам нет 18-ти, спросите у родителей разрешения."
-msgstr[1] "Команда %s выиграла %u паяльные лампы! Если вам нет 18-ти, спросите у родителей разрешения."
-msgstr[2] "Команда %s выиграла %u паяльных ламп! Если вам нет 18-ти, спросите у родителей разрешения."
+msgstr[0] ""
+"Команда %s выиграла %u паяльную лампу! Если вам нет 18-ти, спросите у "
+"родителей разрешения."
+msgstr[1] ""
+"Команда %s выиграла %u паяльные лампы! Если вам нет 18-ти, спросите у "
+"родителей разрешения."
+msgstr[2] ""
+"Команда %s выиграла %u паяльных ламп! Если вам нет 18-ти, спросите у "
+"родителей разрешения."
 
 #: src/weapon/bounce_ball.cpp:107
 #, c-format
@@ -219,7 +233,8 @@ msgstr[2] "Команда %s выиграла %u строительств! Не 
 #: src/weapon/disco_grenade.cpp:137
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Команда %s выиграла %u диско-гранату! Станцуй пока бросаешь её!"
 msgstr[1] "Команда %s выиграла %u диско-гранаты! Станцуй пока бросаешь их!"
 msgstr[2] "Команда %s выиграла %u диско-гранат! Станцуй пока бросаешь их!"
@@ -333,8 +348,12 @@ msgstr[2] "Команда %s выиграла %u автоматов!"
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "Команда %s выиграла %u суицид!"
-msgstr[1] "Команда %s выиграла %u суицида! Используйте их все для получения экстра бонуса"
-msgstr[2] "Команда %s выиграла %u суицидов! Используйте их все для получения экстра бонуса"
+msgstr[1] ""
+"Команда %s выиграла %u суицида! Используйте их все для получения экстра "
+"бонуса"
+msgstr[2] ""
+"Команда %s выиграла %u суицидов! Используйте их все для получения экстра "
+"бонуса"
 
 #: src/weapon/syringe.cpp:108
 #, c-format
@@ -364,9 +383,15 @@ msgstr[2] "Команда %s выиграла %u пропусков хода! В
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "Команда %s выиграла %u tux'а взрывателя! Никогда не видели летающего пингвина?"
-msgstr[1] "Команда %s выиграла %u tux'а взрывателя! Никогда не видели летающего пингвина?"
-msgstr[2] "Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего пингвина?"
+msgstr[0] ""
+"Команда %s выиграла %u tux'а взрывателя! Никогда не видели летающего "
+"пингвина?"
+msgstr[1] ""
+"Команда %s выиграла %u tux'а взрывателя! Никогда не видели летающего "
+"пингвина?"
+msgstr[2] ""
+"Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего "
+"пингвина?"
 
 #: src/include/action_handler.cpp:300
 #, c-format
@@ -541,17 +566,19 @@ msgstr "Ошибка при загрузке команды :"
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке данных команды %s:"
 
-#: src/game/config.cpp:334
+#: src/game/config.cpp:343
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
 
-#: src/game/config.cpp:221
+#: src/game/config.cpp:230
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ошибка при загрузке конфигурационного файла: %s"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:258
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Ошибка при загрузке конфигурационного файла по умолчанию: %s"
@@ -875,11 +902,11 @@ msgstr "Выйти"
 msgid "Quit Wormux"
 msgstr "Выйти из Wormux"
 
-#: src/game/config.cpp:234
+#: src/game/config.cpp:243
 msgid "Reading default config file"
 msgstr "Чтение конфига по умолчанию"
 
-#: src/game/config.cpp:257
+#: src/game/config.cpp:266
 msgid "Reading personal config file"
 msgstr "Чтение персонального конфига"
 
@@ -1086,7 +1113,8 @@ msgstr[2] "Подождите %i игроков пока не готовы!"
 
 #: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr "Ожидание сервера, всё что вы можете сделать это отменить или поболтать!"
+msgstr ""
+"Ожидание сервера, всё что вы можете сделать это отменить или поболтать!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -1184,4 +1212,3 @@ msgstr "o Загрузка звукового профиля: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
-

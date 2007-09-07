@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-09-07 15:00+0200\n"
 "PO-Revision-Date: 2006-06-16 11:36+0100\n"
 "Last-Translator: Bastian Salmela <bastian.salmela@hel.fi>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -216,7 +217,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Joukkue %s voitti %u dynamiittipötkön."
 msgstr[1] "Joukkue %s voitti %u dynamiittipötköä."
 
-#: src/weapon/grapple.cpp:709
+#: src/weapon/grapple.cpp:712
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -288,8 +289,8 @@ msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
 #: src/weapon/snipe_rifle.cpp:225
 #, fuzzy, c-format
-msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
-msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
+msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
+msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
@@ -335,26 +336,22 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/include/action_handler.cpp:243
+#: src/include/action_handler.cpp:300
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 
-#: src/menu/options_menu.cpp:155
-msgid "(current)"
-msgstr ""
-
-#: src/interface/interface.cpp:170
+#: src/interface/interface.cpp:173
 msgid "(dead)"
 msgstr "(kuollut)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:178
 msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
@@ -421,18 +418,18 @@ msgstr ""
 msgid "Bye bye tux..."
 msgstr ""
 
-#: src/team/teams_list.cpp:464 src/team/teams_list.cpp:486
-#: src/team/teams_list.cpp:534
+#: src/team/teams_list.cpp:461 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:531
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ei löydy joukkuetta %s!"
 
-#: src/team/teams_list.cpp:157
+#: src/team/teams_list.cpp:156
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
 
-#: src/team/teams_list.cpp:145
+#: src/team/teams_list.cpp:144
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
@@ -508,28 +505,28 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Virhe kohdassa %s:%lu"
 
-#: src/team/teams_list.cpp:112 src/team/teams_list.cpp:120
+#: src/team/teams_list.cpp:111 src/team/teams_list.cpp:119
 #, fuzzy
 msgid "Error loading team :"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
-#: src/game/config.cpp:334
+#: src/game/config.cpp:343
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Virhe luodessa hakemistoa \"%s\":  asetustiedostoa ei voida tallentaa."
 
-#: src/game/config.cpp:221
+#: src/game/config.cpp:230
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:258
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
@@ -569,12 +566,12 @@ msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 msgid "Error: Unable to start server"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:86
 msgid "Fullscreen?"
 msgstr "Kokoruutu?"
 
@@ -612,7 +609,7 @@ msgid "Head commander"
 msgstr ""
 
 #. Display player's name
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:164
 msgid "Head commander: "
 msgstr ""
 
@@ -622,29 +619,29 @@ msgstr ""
 
 #: src/weapon/blowtorch.cpp:54
 msgid ""
-"Howto use it: keep space key pressed\n"
+"Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
 #: src/weapon/airhammer.cpp:64
 msgid ""
-"Howto use it: keep space key pressed\n"
-"one ammo per turn"
+"Howto use it : keep space key pressed\n"
+"an ammo per turn"
 msgstr ""
 
 #: src/weapon/auto_bazooka.cpp:187
 msgid ""
-"Howto use it: left clic on target\n"
+"Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
 #: src/weapon/anvil.cpp:126
 msgid ""
-"Howto use it: left click on target\n"
-"one ammo per turn"
+"Howto use it : left click on target\n"
+"an ammo per turn"
 msgstr ""
 
 #: src/game/game_loop.cpp:706
@@ -666,24 +663,24 @@ msgstr "Aloitus voimat:"
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
-#: src/game/game_init.cpp:143
+#: src/game/game_init.cpp:154
 msgid "Initialisation"
 msgstr "Alustus"
 
-#: src/game/game_init.cpp:98
+#: src/game/game_init.cpp:109
 #, fuzzy
 msgid "Initialise map"
 msgstr "Alusta tiedot"
 
-#: src/game/game_init.cpp:130
+#: src/game/game_init.cpp:141
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Alusta objektit"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:120
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
@@ -699,7 +696,7 @@ msgstr ""
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr ""
 
@@ -707,7 +704,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Lataa kartat:"
 
-#: src/team/teams_list.cpp:133
+#: src/team/teams_list.cpp:132
 msgid "Load teams:"
 msgstr "Lataa joukkueet:"
 
@@ -726,7 +723,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
 
-#: src/game/game_init.cpp:100
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr ""
 
@@ -735,7 +732,7 @@ msgstr ""
 msgid "Max number of players:"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:89
 #, fuzzy
 msgid "Maximum FPS"
 msgstr "Enimmäismäärä FPS:lle:"
@@ -773,7 +770,7 @@ msgstr "  Hyödyttömin  :  %s (%i).\n"
 msgid "Most violent"
 msgstr "  Väkivaltaisin  :  %s (%i)\n"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:138
 msgid "Music?"
 msgstr "Musiikki?"
 
@@ -781,7 +778,7 @@ msgstr "Musiikki?"
 msgid "Network Game"
 msgstr "Nettipeli"
 
-#: src/network/network.cpp:153
+#: src/network/network.cpp:165
 #, fuzzy
 msgid "Network initialization"
 msgstr "Maaston alustus..."
@@ -829,12 +826,12 @@ msgstr "Pelaa"
 msgid "Player"
 msgstr "Pelaa"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:80
 #, fuzzy
 msgid "Player energy?"
 msgstr "Näytä pelaajien voima?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:83
 #, fuzzy
 msgid "Player's name?"
 msgstr "Näytä pelaajien nimet?"
@@ -856,11 +853,11 @@ msgstr "Lopeta"
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
-#: src/game/config.cpp:234
+#: src/game/config.cpp:243
 msgid "Reading default config file"
 msgstr ""
 
-#: src/game/config.cpp:257
+#: src/game/config.cpp:266
 msgid "Reading personal config file"
 msgstr ""
 
@@ -868,7 +865,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:113
 msgid "Resolution"
 msgstr ""
 
@@ -921,17 +918,17 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:141
 msgid "Sound effects?"
 msgstr "Ääniefektit?"
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:144
 #, fuzzy
 msgid "Sound frequency"
 msgstr "Ääniefektit?"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:133
+#: src/game/game_init.cpp:144
 #, fuzzy
 msgid "Sounds"
 msgstr "Ääni asetukset"
@@ -940,7 +937,7 @@ msgstr "Ääni asetukset"
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:204
 msgid "Stock:"
 msgstr "Varasto:"
 
@@ -956,7 +953,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_init.cpp:111
+#: src/game/game_init.cpp:122
 msgid "Teams"
 msgstr ""
 
@@ -1026,7 +1023,7 @@ msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
 #: src/weapon/bounce_ball.cpp:82
@@ -1034,7 +1031,7 @@ msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
-"one ammo per turn"
+"an ammo per turn"
 msgstr ""
 
 #: src/interface/weapon_menu.cpp:169
@@ -1073,7 +1070,7 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:122 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:133 src/interface/weapon_menu.cpp:167
 #, fuzzy
 msgid "Weapons"
 msgstr "Ase:"
@@ -1088,7 +1085,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Wind particles?"
 msgstr "Näytä tuuli?"
@@ -1123,7 +1120,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
-#: src/game/game_init.cpp:115 src/team/teams_list.cpp:165
+#: src/game/game_init.cpp:126 src/team/teams_list.cpp:164
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
