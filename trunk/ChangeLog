@@ -1,35 +1,35 @@
 > 2007/09/09 - 0.8beta2 release
   - Code improvements:
-      - A lot of network bug fixes (synchro, win32 network support,...)
-      - Fix full screen on Windows
-      - Fix memory leaks
-      - Cleaner code, with useless code deleted
-      - Add debug messages
-      - Faster compilation
-      - Simplify some calculations
-      - Made the water more beautiful
-      - Camera improvements
+      * A lot of network bug fixes (synchro, win32 network support,...)
+      * Fix full screen on Windows
+      * Fix memory leaks
+      * Cleaner code, with useless code deleted
+      * Add debug messages
+      * Faster compilation
+      * Simplify some calculations
+      * Made the water more beautiful
+      * Camera improvements
   - Menu:
-      - Better widgets in menus
-      - Language selection in Options menu
-      - Small enhancement of Results menu
-      - Options menu accessible from game with F11 key
-      - Main menu can be keyboard driven
+      * Better widgets in menus
+      * Language selection in Options menu
+      * Small enhancement of Results menu
+      * Options menu accessible from game with F11 key
+      * Main menu can be keyboard driven
   - Data:
-      - New maps : hive, moon-4m, pillars, tic-tac-toe, towers, funkyisland
-      - Monkey-bubble music for monkey-bubble map
-      - Some graphics improvements (map previews, skins,...)
-      - Add some skins positions
-      - Characters' eyes follow cursor
-      - Add new sounds
-      - Updated translations
+      * New maps : hive, moon-4m, pillars, tic-tac-toe, towers, funkyisland
+      * Monkey-bubble music for monkey-bubble map
+      * Some graphics improvements (map previews, skins,...)
+      * Add some skins positions
+      * Characters' eyes follow cursor
+      * Add new sounds
+      * Updated translations
   - New features:
-      - Smaller step in angle selection when pressing Shift
-      - Joystick support
-      - Initial management of command line options
+      * Smaller step in angle selection when pressing Shift
+      * Joystick support
+      * Initial management of command line options
   - Still experimental :
-      - Better AI (but still stupid)
-      - Improved random level generator
+      * Better AI (but still stupid)
+      * Improved random level generator
 
 > 2007/06/28 - 0.8beta1 release
   - Better network game support (visible by default)
