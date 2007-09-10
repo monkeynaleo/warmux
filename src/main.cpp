@@ -267,7 +267,7 @@ void DisplayWelcomeMessage()
 
 void ParseArgs(int argc, char * argv[])
 {
-  char c;
+  int c;
   int option_index = 0;
   struct option long_options[] =
     {
