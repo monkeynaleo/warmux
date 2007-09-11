@@ -39,9 +39,10 @@ Tile::~Tile(){
   FreeMem();
 }
 
-void Tile::InitTile(const Point2i &pSize, const Point2i &offset){
+void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
+  Point2i offset = upper_left_offset + lower_right_offset;
   nbCells = pSize / CELL_SIZE;
-  nbCells = nbCells + (offset * 2);
+  nbCells = nbCells + offset;
 
   if( (pSize.x % CELL_SIZE.x) != 0 )
     nbCells.x++;
@@ -152,9 +153,10 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf){
     }
 }
 
-void Tile::LoadImage (Surface& terrain, Point2i offset){
+void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
+  Point2i offset = upper_left_offset + lower_right_offset;
   FreeMem();
-  InitTile(terrain.GetSize(), offset);
+  InitTile(terrain.GetSize(), upper_left_offset, lower_right_offset);
   ASSERT(nbr_cell != 0);
 
   // Create the TileItem objects

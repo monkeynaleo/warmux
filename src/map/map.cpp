@@ -120,27 +120,27 @@ void Map::SwitchDrawingCacheParticles()
 
 void Map::Dig(const Point2i& position, const Surface& surface)
 {
-   ground.Dig (position, surface);
+   ground.Dig(position, surface);
    to_redraw->push_back(Rectanglei(position, surface.GetSize()));
 }
 
 void Map::Dig(const Point2i& center, const uint radius)
 {
-   ground.Dig (center, radius);
+   ground.Dig(center, radius);
    to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE),
                                    Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
 void Map::PutSprite(const Point2i& pos, const Sprite* spr)
 {
-   ground.PutSprite (pos, spr);
+   ground.PutSprite(pos, spr);
    to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
 void Map::MergeSprite(const Point2i& pos, const Sprite * spr)
 {
   Surface tmp = spr->GetSurface();
-  ground.MergeSprite (pos, tmp);
+  ground.MergeSprite(pos, tmp);
   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
