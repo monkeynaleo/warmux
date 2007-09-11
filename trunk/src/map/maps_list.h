@@ -65,6 +65,8 @@ private:
   bool is_basic_info_loaded;
   bool is_data_loaded;
   bool random;
+  Point2i upper_left_pad;
+  Point2i lower_right_pad;
   Island_type island_type;
 
   Profile *res_profile;
@@ -102,6 +104,11 @@ public:
   bool IsOpened() { LoadBasicInfo(); return is_opened; };
   bool UseWater() { LoadBasicInfo(); return use_water; };
   bool IsRandom() { LoadBasicInfo(); return random; };
+
+  Point2i GetUpperLeftPad() { return upper_left_pad; };
+  Point2i GetLowerRightPad() { return lower_right_pad; };
+  void SetUpperLeftPad(const Point2i & value) { upper_left_pad = value; };
+  void SetLowerRightPad(const Point2i & value) { lower_right_pad = value; };
 
 };
 

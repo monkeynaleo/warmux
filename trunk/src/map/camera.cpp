@@ -66,13 +66,13 @@ bool Camera::HasFixedY() const{
 void Camera::SetXYabs(int x, int y){
   AppWormux * app = AppWormux::GetInstance();
 
-  if( !HasFixedX() )
+  if(!HasFixedX())
     position.x = BorneLong(x, 0, world.GetWidth() - GetSizeX());
   else
     position.x = - (app->video->window.GetWidth() - world.GetWidth())/2;
 
-  if( !HasFixedY() )
-    position.y = BorneLong(y, 0, world.GetHeight()-GetSizeY());
+  if(!HasFixedY())
+    position.y = BorneLong(y, 0, world.GetHeight() - GetSizeY());
   else
     position.y = - (app->video->window.GetHeight() - world.GetHeight())/2;
 

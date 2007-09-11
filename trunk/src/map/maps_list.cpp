@@ -74,7 +74,7 @@ bool InfoMap::LoadBasicInfo()
       // FIXME: not freed
       res_profile = resource_manager.LoadXMLProfile(nomfich, true),
       // Load preview
-      preview = resource_manager.LoadImage( res_profile, "preview");
+      preview = resource_manager.LoadImage(res_profile, "preview");
       // Load other informations
       XmlReader doc;
       is_basic_info_loaded = true;
@@ -135,6 +135,14 @@ bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
   XmlReader::ReadUint(xml, "nb_mine", nb_mine);
   XmlReader::ReadUint(xml, "nb_barrel", nb_barrel);
   XmlReader::ReadBool(xml, "is_open", is_opened);
+
+  // Load padding value
+  bool add_pad = false;
+  XmlReader::ReadBool(xml, "add_pad", add_pad);
+  if(is_opened && add_pad) {
+    upper_left_pad = resource_manager.LoadPoint2i(res_profile, "upper_left_pad");
+    lower_right_pad = resource_manager.LoadPoint2i(res_profile, "lower_right_pad");
+  }
 
   xmlpp::Element *xmlwind = XmlReader::GetMarker(xml, "wind");
   if (xmlwind != NULL)
