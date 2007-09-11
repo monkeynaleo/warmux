@@ -27,36 +27,30 @@
 #include "graphic/video.h"
 #include "include/app.h"
 
-// Vitesse (comprise entre 0 et 0.5)
-const Point2d SKY_SPEED( 0.3, 1);
-
-Sky::Sky(){
+void Sky::Init()
+{
+  // That is temporary -> image will be loaded directly without alpha chanel
+  Surface tmp_image = ActiveMap().ReadImgSky();
+  tmp_image.SetAlpha( 0, 0);
+  image = tmp_image.DisplayFormat();
 }
 
-void Sky::Init(){
-         // That is temporary -> image will be loaded directly without alpha chanel
-        Surface tmp_image = ActiveMap().ReadImgSky();
-        tmp_image.SetAlpha( 0, 0);
-        image = tmp_image.DisplayFormat();
-
-        tstVect = image.GetSize().inf( Camera::GetInstance()->GetSize() );
-        margin = tstVect * (Camera::GetInstance()->GetSize() - image.GetSize())/2;
+void Sky::Reset()
+{
+  Init();
+  last_pos.SetValues(INT_MAX, INT_MAX);
 }
 
-void Sky::Reset(){
-        Init();
-        lastPos.SetValues(INT_MAX, INT_MAX);
-}
-
-void Sky::Free(){
-        image.Free();
+void Sky::Free()
+{
+  image.Free();
 }
 
 void Sky::Draw(bool redraw_all)
 {
-  if( lastPos != Camera::GetInstance()->GetPosition() || redraw_all){
-    lastPos = Camera::GetInstance()->GetPosition();
-    RedrawParticle(*Camera::GetInstance());
+  if(last_pos != Camera::GetInstance()->GetPosition() || redraw_all) {
+    last_pos = Camera::GetInstance()->GetPosition();
+    RedrawParticle(Rectanglei(Camera::GetInstance()->GetPosition(), AppWormux::GetInstance()->video->window.GetSize()));
     return;
   }
 
@@ -64,19 +58,31 @@ void Sky::Draw(bool redraw_all)
   RedrawParticleList(*world.to_redraw_particles_now);
 }
 
-void Sky::RedrawParticleList(std::list<Rectanglei> &list) const{
+void Sky::RedrawParticleList(std::list<Rectanglei> &list) const
+{
   std::list<Rectanglei>::iterator it;
 
   for( it = list.begin(); it != list.end(); ++it )
           RedrawParticle(*it);
 }
 
-void Sky::RedrawParticle(const Rectanglei &particle) const{
-    Rectanglei ds(GetSkyPos() + particle.GetPosition() - Camera::GetInstance()->GetPosition() - margin,
-                  particle.GetSize() );
-    AppWormux::GetInstance()->video->window.Blit(image, ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
+void Sky::RedrawParticle(const Rectanglei &particle) const
+{
+  Rectanglei ds(GetSkyPos() + particle.GetPosition() - Camera::GetInstance()->GetPosition(),
+                particle.GetSize());
+  AppWormux::GetInstance()->video->window.Blit(image, ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
 }
 
-Point2i Sky::GetSkyPos() const{
-        return (Point2i(1, 1) - tstVect) * Camera::GetInstance()->GetPosition() * SKY_SPEED;
+Point2i Sky::GetSkyPos() const
+{
+  Point2i min(0, 0);
+  Point2i max = image.GetSize() - AppWormux::GetInstance()->video->window.GetSize();
+  Point2i tmp = Camera::GetInstance()->GetPosition();
+  int w_w = world.GetWidth();
+  int w_h = world.GetHeight();
+  int v_w = AppWormux::GetInstance()->video->window.GetWidth();
+  int v_h = AppWormux::GetInstance()->video->window.GetHeight();
+  double x_sky = (double)(tmp.x) / (double)(w_w - v_w);
+  double y_sky = (double)(tmp.y) / (double)(w_h - v_h);
+  return max * Point2d(x_sky, y_sky);
 }

@@ -31,15 +31,13 @@
 class Sky{
 private:
   Surface image;
-  Point2i lastPos;
-  Point2i tstVect;
-  Point2i margin;
+  Point2i last_pos;
   void RedrawParticleList(std::list<Rectanglei> &list) const;
   void RedrawParticle(const Rectanglei &particle) const;
   Point2i GetSkyPos() const;
 
 public:
-  Sky();
+  Sky() {};
   void Init();
   void Reset();
   void Draw(bool redraw_all);
