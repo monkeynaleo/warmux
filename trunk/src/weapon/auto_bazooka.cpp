@@ -73,15 +73,14 @@ class RPG : public WeaponProjectile
     void SignalDrowning();
 };
 
-RPG::RPG(AutomaticBazookaConfig& cfg,
-                                         WeaponLauncher * p_launcher) :
+RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
   WeaponProjectile("rocket", cfg, p_launcher), smoke_engine(20), m_lastrefresh(0)
 {
   m_targeted = false;
   explode_colliding_character = true;
 }
 
-void RPG::Shoot (double strength)
+void RPG::Shoot(double strength)
 {
   WeaponProjectile::Shoot(strength);
   angle_local=ActiveCharacter().GetFiringAngle();
@@ -89,6 +88,7 @@ void RPG::Shoot (double strength)
 
 void RPG::Refresh()
 {
+  WeaponProjectile::Refresh();
   AutomaticBazookaConfig &acfg = dynamic_cast<AutomaticBazookaConfig &>(cfg);
   uint time = Time::GetInstance()->Read();
   float flying_time = time - begin_time;

@@ -65,7 +65,7 @@ Polecat::Polecat(ExplosiveWeaponConfig& cfg,
   last_fart_time = 0;
 }
 
-void Polecat::Shoot (double strength)
+void Polecat::Shoot(double strength)
 {
   WeaponProjectile::Shoot(strength);
   last_fart_time = Time::GetInstance()->Read() + TIME_BETWEEN_FART;

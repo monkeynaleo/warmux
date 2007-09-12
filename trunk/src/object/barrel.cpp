@@ -34,7 +34,7 @@ PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
   img= resource_manager.LoadSprite( res, "object/barrel");
   resource_manager.UnLoadXMLProfile(res);
 
-  life_points = 40;
+  energy = 40;
 
   SetCollisionModel(false, true, true);
   SetSize(img->GetSize());

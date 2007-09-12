@@ -175,6 +175,8 @@ void WeaponProjectile::ShootSound()
 
 void WeaponProjectile::Refresh()
 {
+  if(energy == 0)
+    Explosion();
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -183,6 +185,8 @@ void WeaponProjectile::Refresh()
 
 void WeaponProjectile::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
 {
+  // Don't call Explosion here, we're already in an explosion
+  energy = 0;
 }
 
 void WeaponProjectile::Draw()

@@ -139,8 +139,9 @@ void ObjMine::Detection()
   }
 }
 
-void ObjMine::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
+void ObjMine::SetEnergyDelta(int delta, bool do_report)
 {
+  WeaponProjectile::SetEnergyDelta(delta, do_report);
   // Don't call Explosion here, we're already in an explosion
   attente = 0;
   animation = true;

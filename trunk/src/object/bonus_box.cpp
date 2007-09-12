@@ -83,14 +83,14 @@ void BonusBox::Refresh()
 void BonusBox::PickRandomWeapon() {
   uint weapon_num = 0;
   if(weapon_count <= 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode
-    life_points = 0;
+    energy = 0;
     MSG_DEBUG("bonus","Weapon count is zero");
     return;
   }
   weapon_num = (int)randomSync.GetDouble(1,weapon_count);
   contents = (weapon_map[weapon_num].first)->GetType();
   if(ActiveTeam().ReadNbAmmos(contents)==INFINITE_AMMO) {
-    life_points = 0;
+    energy = 0;
     nbr_ammo = 0;
     MSG_DEBUG("bonus","Weapon %s already has infinite ammo",WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
   }
@@ -134,7 +134,7 @@ std::map<int,std::pair<Weapon*,int> > BonusBox::weapon_map;
 */
 void BonusBox::LoadXml(const xmlpp::Element * object)
 {
-  XmlReader::ReadInt(object,"life_points",start_life_points);
+  XmlReader::ReadInt(object, "life_points", start_life_points);
   object = XmlReader::GetMarker(object, "probability");
   std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList();
   std::list<Weapon*>::iterator

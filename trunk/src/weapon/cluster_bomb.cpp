@@ -62,7 +62,7 @@ class ClusterBomb : public WeaponProjectile
 public:
   ClusterBomb(ClusterBombConfig& cfg,
               WeaponLauncher * p_launcher);
-  void Refresh();  
+  void Refresh();
   virtual void SetEnergyDelta(int delta, bool do_report = true);
 
 protected:
@@ -86,6 +86,7 @@ void Cluster::Shoot (int x, int y)
 
 void Cluster::Refresh()
 {
+  WeaponProjectile::Refresh();
   image->SetRotation_rad(GetSpeedAngle());
 }
 
