@@ -311,8 +311,9 @@ void Mouse::Draw() const
     return; // use standard SDL cursor
 
   const Surface& cursor = GetSurfaceFromPointer(current_pointer);
-  AppWormux::GetInstance()->video->window.Blit( cursor, GetPosition() );
-  world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y ,
+  AppWormux::GetInstance()->video->window.Blit(cursor, GetPosition() - cursor.GetSize()/2);
+  world.ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetWidth()/2,
+                                    GetPosition().y - cursor.GetHeight()/2,
                          cursor.GetWidth(), cursor.GetHeight()));
 }
 
