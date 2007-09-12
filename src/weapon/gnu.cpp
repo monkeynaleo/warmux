@@ -59,7 +59,7 @@ Gnu::Gnu(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
 }
 
-void Gnu::Shoot (double strength)
+void Gnu::Shoot(double strength)
 {
   WeaponProjectile::Shoot(strength);
 

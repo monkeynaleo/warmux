@@ -133,7 +133,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 #endif
 
   // Energy
-  life_points = GameMode::GetInstance()->character.init_energy;
+  energy = GameMode::GetInstance()->character.init_energy;
   energy_bar.InitVal (GameMode::GetInstance()->character.init_energy,
                       0,
                       GameMode::GetInstance()->character.init_energy);
@@ -268,7 +268,7 @@ void Character::SetEnergyDelta(int delta, bool do_report)
   if (do_report)
     ActiveCharacter().damage_stats->MadeDamage(-delta, *this);
 
-  uint saved_life_points = GetEnergy();
+  uint saved_energy = GetEnergy();
 
   // Update energy
   SetEnergy(GetEnergy() + delta);
@@ -277,7 +277,7 @@ void Character::SetEnergyDelta(int delta, bool do_report)
 
   // Compute energy lost
   if (delta < 0) {
-    lost_energy += (int)GetEnergy() - (int)saved_life_points;
+    lost_energy += (int)GetEnergy() - (int)saved_energy;
 
     if ( lost_energy > -33 )
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_light");
@@ -310,10 +310,9 @@ void Character::SetEnergy(int new_energy)
   if(IsDead()) return;
 
   // Change energy
-  long energy = BorneLong((int)new_energy, 0,
-                          GameMode::GetInstance()->character.max_energy);
-  life_points = energy;
-  energy_bar.Actu (energy);
+  energy = BorneLong((int)new_energy, 0,
+                     GameMode::GetInstance()->character.max_energy);
+  energy_bar.Actu(energy);
 
   // Dead character ?
   if (GetEnergy() <= 0) Die();

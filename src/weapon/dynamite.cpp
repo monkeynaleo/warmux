@@ -76,7 +76,9 @@ void DynamiteStick::Shoot(double strength)
 void DynamiteStick::Refresh()
 {
   image->Update();
-  if (image->IsFinished()) Explosion();
+  if (image->IsFinished())
+    energy = 0;
+  WeaponProjectile::Refresh();
 }
 
 void DynamiteStick::ShootSound()

@@ -72,7 +72,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_height(0),
   m_rebound_sound(""),
   m_alive(ALIVE),
-  life_points(-1),
+  energy(-1),
   m_allow_negative_y(false)
 {
   m_cfg = Config::GetInstance()->GetOjectConfig(m_name,xml_config);
@@ -187,13 +187,13 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
 {
-  if(life_points == -1)
+  if(energy == -1)
     return;
-  life_points += delta;
-  if(life_points <= 0 && !IsGhost())
+  energy += delta;
+  if(energy <= 0 && !IsGhost())
   {
     Ghost();
-    life_points = -1;
+    energy = -1;
   }
 }
 

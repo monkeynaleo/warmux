@@ -51,7 +51,7 @@ ObjBox::ObjBox(const std::string &name)
 
   parachute = true;
 
-  life_points = start_life_points;
+  energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
   SetCollisionModel(false, false, true);
@@ -91,7 +91,7 @@ void ObjBox::DropBox()
 //Boxes can explode...
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {
-  if(life_points > 0) return;
+  if(energy > 0) return;
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
   ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
 }
