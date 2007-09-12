@@ -50,7 +50,7 @@ void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, con
   if( (pSize.y % CELL_SIZE.y) != 0 )
     nbCells.y++;
 
-  size = pSize + (CELL_SIZE * offset * 2);
+  size = pSize + (CELL_SIZE * offset);
 
   nbr_cell = nbCells.x * nbCells.y;
 }
@@ -58,8 +58,8 @@ void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, con
 void Tile::Dig(const Point2i &position, const Surface& dig){
   // XXX Not used !?
   // Rectanglei rect = Rectanglei(position, dig.GetSize());
-  Point2i firstCell = Clamp(position/CELL_SIZE);
-  Point2i lastCell = Clamp((position + dig.GetSize())/CELL_SIZE);
+  Point2i firstCell = Clamp(position / CELL_SIZE);
+  Point2i lastCell = Clamp((position + dig.GetSize()) / CELL_SIZE);
   Point2i c;
 
   for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
@@ -168,7 +168,7 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   for( i.y = 0; i.y < nbCells.y; i.y++ )
     for( i.x = 0; i.x < nbCells.x; i.x++ ){
       int piece = i.y * nbCells.x + i.x;
-      Rectanglei sr(i * CELL_SIZE - CELL_SIZE * offset, CELL_SIZE);
+      Rectanglei sr(i * CELL_SIZE - CELL_SIZE * upper_left_offset, CELL_SIZE);
 
       terrain.SetAlpha(0, 0);
       item[piece]->GetSurface().Blit(terrain, sr, Point2i(0, 0));
