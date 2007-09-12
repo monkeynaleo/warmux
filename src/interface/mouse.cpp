@@ -203,7 +203,8 @@ void Mouse::Refresh()
   static Point2i lastpos(0,0);
   /* FIXME the 200 is hardcoded because I cannot find where the main loop
    * refresh rate is set... */
-  static int counter = 200;
+#define NB_LOOP_BEFORE_HIDE 200
+  static int counter = 0;
   ChoixVerPointe();
 
   Point2i pos = GetPosition();
@@ -219,7 +220,7 @@ void Mouse::Refresh()
       --counter;
       if (counter <= 0)
         {
-          counter = 200;
+          counter = NB_LOOP_BEFORE_HIDE;
           Hide();
         }
     }
