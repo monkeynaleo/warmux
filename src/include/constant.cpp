@@ -32,7 +32,7 @@ const std::string Constants::EMAIL = "wormux-dev .AT. gna .DOT. org";
 
 // Size min/max of the map (pixels)
 const Point2i Constants::MAP_MIN_SIZE = Point2i(100, 200);
-const int Constants::MAP_MAX_SIZE = 4000*4000;
+const int Constants::MAP_MAX_SIZE = 6000*6000;
 
 Constants * Constants::singleton = NULL;
 

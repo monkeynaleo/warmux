@@ -16,6 +16,10 @@
   <water>1</water>
   <nb_mine>3</nb_mine>
   <is_open>1</is_open>
+  <!-- pad is given in pixel count. -->
+  <add_pad>1</add_pad>
+  <point name="upper_left_pad" x="1000" y="500" />
+  <point name="lower_right_pad" x="1000" y="0" />
 
   <sprite name="wind_particle">
     <image file="nuage.png">
