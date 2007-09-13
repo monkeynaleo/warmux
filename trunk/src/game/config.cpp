@@ -253,6 +253,15 @@ void Config::LoadDefaultValue()
       if(tmp.GetX() > 0 && tmp.GetY() > 0)
         resolution_available.push_back(tmp);
     }
+    //== Team Color
+    /*int number_of_team_color = resource_manager.LoadInt(res, "team_colors/number_of_team_color");
+    for(int i = 1; i <= number_of_team_color; i++) {
+      tmp = Point2i(0, 0);
+      std::ostringstream section; section << "team_colors/" << i;
+      tmp = resource_manager.LoadPoint2i(res, section.str());
+      if(tmp.GetX() > 0 && tmp.GetY() > 0)
+        resolution_available.push_back(tmp);
+    }*/
   } catch (const xmlpp::exception &e) {
     std::cout << "o "
         << _("Error while loading default configuration file: %s") << std::endl

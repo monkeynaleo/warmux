@@ -175,8 +175,10 @@ void WeaponProjectile::ShootSound()
 
 void WeaponProjectile::Refresh()
 {
-  if(energy == 0)
+  if(energy == 0) {
     Explosion();
+    return;
+  }
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
 
