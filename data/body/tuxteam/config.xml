@@ -1163,7 +1163,6 @@
 </movement>
 
 <!-- ###### Parachute ###### -->
-<!-- ###### Parachute ###### -->
 <movement name="parachute" speed="180">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
@@ -1171,7 +1170,7 @@
 		<member type="wingright" angle="180"/>
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
-		<member type="weapon" dx="-6" dy="12"/>
+		<member type="weapon" dx="-2" dy="12"/>
 	</frame>
 	<frame>
 		<member type="wingleft" angle="0"/>
@@ -1179,7 +1178,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="5"/>
-		<member type="weapon" dx="-6" dy="12"/>
+		<member type="weapon" dx="-2" dy="12"/>
 	</frame>
 	<frame>
 		<member type="wingleft" angle="0"/>
@@ -1187,7 +1186,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="10"/>
-		<member type="weapon" dx="-6" dy="12"/>
+		<member type="weapon" dx="-2" dy="12"/>
 	</frame>
 	<frame>
 		<member type="wingleft" angle="0"/>
@@ -1195,14 +1194,14 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="5"/>
-		<member type="weapon" dx="-6" dy="12"/>
+		<member type="weapon" dx="-2" dy="12"/>
 	</frame>
 	<frame>
 		<member type="wingleft" angle="0"/>
 		<member type="wingright" angle="180"/>
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
-		<member type="weapon" dx="-6" dy="12"/>
+		<member type="weapon" dx="-2" dy="12"/>
 	</frame>
 	<frame>
 		<member type="wingleft" angle="0"/>
@@ -1210,7 +1209,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="-5"/>
-		<member type="weapon" dx="-6" dy="12"/>
+		<member type="weapon" dx="-2" dy="12"/>
 	</frame>
 	<frame>
 		<member type="wingleft" angle="0"/>
@@ -1218,7 +1217,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="-10"/>
-		<member type="weapon" dx="-6" dy="12"/>
+		<member type="weapon" dx="-2" dy="12"/>
 	</frame>
 	<frame>
 		<member type="wingleft" angle="0"/>
@@ -1226,7 +1225,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="-5"/>
-		<member type="weapon" dx="-6" dy="12"/>
+		<member type="weapon" dx="-2" dy="12"/>
 	</frame>
 </movement>
 

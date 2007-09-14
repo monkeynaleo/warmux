@@ -1182,7 +1182,7 @@
 		<member type="arm-right" angle="180"/>
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
-		<member type="weapon" dx="-3" dy="8"/>
+		<member type="weapon" dx="-1" dy="8"/>
 	</frame>
 	<frame>
 		<member type="arm-left" angle="0"/>
@@ -1190,7 +1190,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="5"/>
-		<member type="weapon" dx="-3" dy="8"/>
+		<member type="weapon" dx="-1" dy="8"/>
 	</frame>
 	<frame>
 		<member type="arm-left" angle="0"/>
@@ -1198,7 +1198,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="10"/>
-		<member type="weapon" dx="-3" dy="8"/>
+		<member type="weapon" dx="-1" dy="8"/>
 	</frame>
 	<frame>
 		<member type="arm-left" angle="0"/>
@@ -1206,14 +1206,14 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="5"/>
-		<member type="weapon" dx="-3" dy="8"/>
+		<member type="weapon" dx="-1" dy="8"/>
 	</frame>
 	<frame>
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="180"/>
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
-		<member type="weapon" dx="-3" dy="8"/>
+		<member type="weapon" dx="-1" dy="8"/>
 	</frame>
 	<frame>
 		<member type="arm-left" angle="0"/>
@@ -1221,7 +1221,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="-5"/>
-		<member type="weapon" dx="-3" dy="8"/>
+		<member type="weapon" dx="-1" dy="8"/>
 	</frame>
 	<frame>
 		<member type="arm-left" angle="0"/>
@@ -1229,7 +1229,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="-10"/>
-		<member type="weapon" dx="-3" dy="8"/>
+		<member type="weapon" dx="-1" dy="8"/>
 	</frame>
 	<frame>
 		<member type="arm-left" angle="0"/>
@@ -1237,7 +1237,7 @@
 		<member type="foot-left" angle="45"/>
 		<member type="foot-right" angle="45"/>
 		<member type="body" angle="-5"/>
-		<member type="weapon" dx="-3" dy="8"/>
+		<member type="weapon" dx="-1" dy="8"/>
 	</frame>
 </movement>
 
