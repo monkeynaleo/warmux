@@ -251,13 +251,13 @@ void DisplayWelcomeMessage()
     << "=== " << _("Website: ") << Constants::WEB_SITE << endl
     << endl;
 
-  // Affiche l'absence de garantie sur le jeu
+  // print the disclaimer
   cout << "Wormux version " << Constants::VERSION
-    << ", Copyright (C) 2001-2006 Wormux Team" << endl
+    << ", Copyright (C) 2001-2007 Wormux Team" << endl
     << "Wormux comes with ABSOLUTELY NO WARRANTY." << endl
-    << "This is free software, and you are welcome to redistribute it" << endl
+    << "This is free software and you are welcome to redistribute it" << endl
     << "under certain conditions." << endl << endl
-    << "Read COPYING file for details." << endl << endl;
+    << "Read the file COPYING for details." << endl << endl;
 
 #ifdef DEBUG
   cout << "This program was compiled in DEBUG mode (development version)"
