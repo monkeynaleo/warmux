@@ -387,7 +387,7 @@ const std::string& Weapon::GetHelp() const {
 }
 
 const std::string& Weapon::GetID() const {
-  ASSERT (!m_name.empty());
+  ASSERT (!m_id.empty());
   return m_id;
 }
 
