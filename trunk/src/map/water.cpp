@@ -146,7 +146,7 @@ void Water::Draw(){
    * The copy is done pixel per pixel */
   uint bpp = surface.GetSurface()->format->BytesPerPixel;
 
-  double decree = static_cast<double>(2*M_PI/360.0);
+  double degree = static_cast<double>(2*M_PI/360.0);
   double angle1 = -shift1;
   double angle2 = shift1;
   double a = 5, b = 8;
@@ -155,41 +155,46 @@ void Water::Draw(){
   const int wave_count = 3;
 
   for (uint x = 0; x < pattern_width; x++)
+  {
+    assert (wave_count == 3);
+    wave_height[0] = static_cast<int>(sin(angle1)*a + sin(angle2)*b);
+    wave_height[1] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*degree)*b);
+    wave_height[2] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*degree)*b);
+
+    int top = max(wave_height[0], wave_height[1]);
+    height[x] = max(top, wave_height[2]);
+
+    int l = (int)(a + b) * 2 + wave_inc * wave_count + 32; // 32 = pattern slide length (in texture)
+    assert(l < pattern_height);
+    Uint32 pitch = pattern.GetSurface()->pitch;
+    Uint8 *dst = (Uint8*)pattern.GetSurface()->pixels + l*pitch;
+    const Uint8 *src = (Uint8*)bottom.GetSurface()->pixels + l*pitch;
+    for (; l < pattern_height; l++)
     {
-      assert (wave_count == 3);
-      wave_height[0] = static_cast<int>(sin(angle1)*a + sin(angle2)*b);
-      wave_height[1] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*decree)*b);
-      wave_height[2] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*decree)*b);
+      memcpy(dst, src, bpp * pattern_width);
+      dst += pitch;
+      src += pitch;
+    }
 
-      double top = max(wave_height[0], wave_height[1]);
-      top = max((int)top, wave_height[2]);
-      height[x] = static_cast<int>(top);
-
-      int l = (int)(a + b) * 2 + wave_inc * wave_count + 32; // 32 = pattern slide length (in texture)
-      assert(l < pattern_height);
-      for (; l < pattern_height; l++)
-        {
-          memcpy((Uint8*)pattern.GetSurface()->pixels + l * pattern.GetSurface()->pitch,
-                 (Uint8*)bottom.GetSurface()->pixels + l * pattern.GetSurface()->pitch,
-                 bpp * pattern_width);
-        }
-
-      int wave;
-      for (wave = 0; wave < wave_count; wave++)
-        {
-          for (uint y=0; y<(uint)surface.GetHeight(); y++)
-            {
-              memcpy((Uint8*)pattern.GetSurface()->pixels + x * bpp
-                     + (wave_height[wave]+15+wave_inc*wave+y) * pattern.GetSurface()->pitch,
-                     (Uint8*)surface.GetSurface()->pixels + y * bpp, bpp);
-            }
+    int wave;
+    for (wave = 0; wave < wave_count; wave++)
+    {
+      dst = (Uint8*)pattern.GetSurface()->pixels + x * bpp
+          + (wave_height[wave]+15+wave_inc*wave) * pitch;
+      src = (Uint8*)surface.GetSurface()->pixels;
+      for (uint y=0; y<(uint)surface.GetHeight(); y++)
+      {
+        memcpy(dst, src, bpp);
+        dst += pitch;
+        src += bpp;
       }
+    }
 
-    angle1 += 2*decree;
-    angle2 += 4*decree;
+    angle1 += 2*degree;
+    angle2 += 4*degree;
   }
 
-  shift1 += 4*decree;
+  shift1 += 4*degree;
 
   SDL_UnlockSurface(bottom.GetSurface());
   SDL_UnlockSurface(pattern.GetSurface());
@@ -202,16 +207,16 @@ void Water::Draw(){
   for(int y = world.GetHeight() - (hauteur_eau + height_mvt) - 20;
       y < (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
       y += pattern_height)
+  {
+    Surface *bitmap = r ? &bottom : &pattern;
+    for(int x = Camera::GetInstance()->GetPosition().x - x0;
+        x < Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x;
+        x += pattern_width)
     {
-      Surface *bitmap = r ? &bottom : &pattern;
-      for(int x = Camera::GetInstance()->GetPosition().x - x0;
-          x < Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x;
-          x += pattern_width)
-        {
-          AbsoluteDraw(*bitmap, Point2i(x, y));
-        }
-      r++;
+      AbsoluteDraw(*bitmap, Point2i(x, y));
     }
+    r++;
+  }
 }
 
 int Water::GetHeight(int x) const
