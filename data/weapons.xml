@@ -321,10 +321,10 @@
   <!-- Snipe rifle ressources -->
 
   <surface name="snipe_rifle" file="weapon/snipe_rifle/snipe_rifle.png" />
-  <position name="snipe_rifle" origin="hand" x="-14" y="-10" />
-  <hole name="snipe_rifle" dx="31" dy="0" />
+  <position name="snipe_rifle" origin="hand" x="-13" y="-14" />
+  <hole name="snipe_rifle" dx="5" dy="9" />
   <surface name="snipe_rifle_ico" file="weapon/snipe_rifle/snipe_rifle_ico.png" />
-  <color name="snipe_rifle_laser_color" r="255" g="0" b="0" a="100" />
+  <color name="snipe_rifle_laser_color" r="221" g="0" b="0" a="255" />
   <surface name="snipe_rifle_laser" file="weapon/snipe_rifle/snipe_rifle_laser.png" />
   <surface name="snipe_rifle_fire" file="weapon/gun/gun_fire.png" />
   <sprite name="snipe_rifle_bullet">
