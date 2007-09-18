@@ -44,6 +44,11 @@
 #include "map/map.h"
 #endif
 
+// Enable it to debug the gun hole position
+#ifdef DEBUG
+#define DEBUG_HOLE
+#endif
+
 extern Profile *weapons_res_profile;
 
 const int INFINITE_AMMO = -1;
@@ -339,11 +344,17 @@ void Weapon::PosXY (int &x, int &y) const
 const Point2i Weapon::GetGunHolePosition() const
 {
   const Point2i &pos = ActiveCharacter().GetHandPosition();
-  Point2i hole(pos +  hole_delta);
+  Point2i hole(pos +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
-  return pos + Point2i(static_cast<int>(dst * cos(angle + ActiveCharacter().GetFiringAngle())),
-                       static_cast<int>(dst * sin(angle + ActiveCharacter().GetFiringAngle())));
+
+  if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
+    angle += ActiveCharacter().GetFiringAngle();
+  else
+    angle += ActiveCharacter().GetFiringAngle() - M_PI;
+ 
+  return pos + Point2i(static_cast<int>(dst * cos(angle)),
+		       static_cast<int>(dst * sin(angle)));
 }
 
 bool Weapon::EnoughAmmo() const
@@ -428,7 +439,9 @@ void Weapon::Draw(){
      m_last_fire_time + 100 < Time::GetInstance()->Read())
     return;
 
+#ifndef DEBUG_HOLE
   if (m_last_fire_time + m_fire_remanence_time > Time::GetInstance()->Read())
+#endif
     DrawWeaponFire();
   weapon_strength_bar.visible = false;
 
@@ -537,11 +550,34 @@ void Weapon::Draw(){
 void Weapon::DrawWeaponFire()
 {
   if (m_weapon_fire == NULL) return;
-  Point2i size = m_weapon_fire->GetSize();
-  size.x = (ActiveCharacter().GetDirection() == DIRECTION_RIGHT ? 0 : size.x);
-  size.y /= 2;
+  Point2i pos = ActiveCharacter().GetHandPosition();
+  Point2i hole(pos +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1) - Point2i(0, m_weapon_fire->GetHeight()/(ActiveCharacter().GetDirection()==1?2:-1)));
+  double dst = pos.Distance(hole);
+  double angle = pos.ComputeAngle(hole);
+
+  if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
+    angle += ActiveCharacter().GetFiringAngle();
+  else
+    angle += ActiveCharacter().GetFiringAngle() -  M_PI;
+ 
+  Point2i spr_pos =  pos + Point2i(static_cast<int>(dst * cos(angle)),
+                                   static_cast<int>(dst * sin(angle)));
+
+  m_weapon_fire->SetRotation_HotSpot (Point2i(0,0));
   m_weapon_fire->SetRotation_rad (ActiveCharacter().GetFiringAngle());
-  m_weapon_fire->Draw( GetGunHolePosition() - size );
+  m_weapon_fire->Draw( spr_pos );
+
+
+#ifdef DEBUG_HOLE
+  Rectanglei rect(GetGunHolePosition().GetX() - Camera::GetInstance()->GetPositionX()- 1,
+                  GetGunHolePosition().GetY() - Camera::GetInstance()->GetPositionY()- 1,
+      	    	  3, 3);
+
+  world.ToRedrawOnMap(rect);
+  AppWormux::GetInstance()->video->window.RectangleColor(rect, c_red);
+
+//  rect = Rectangle(
+#endif
 }
 
 void Weapon::DrawAmmoUnits() const
