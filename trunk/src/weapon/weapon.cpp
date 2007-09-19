@@ -344,7 +344,7 @@ void Weapon::PosXY (int &x, int &y) const
 const Point2i Weapon::GetGunHolePosition() const
 {
   const Point2i &pos = ActiveCharacter().GetHandPosition();
-  Point2i hole(pos - hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
+  Point2i hole(pos + hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
 
