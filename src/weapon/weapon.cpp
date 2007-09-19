@@ -325,11 +325,11 @@ void Weapon::PosXY (int &x, int &y) const
   if (origin == weapon_origin_HAND)
   {
     Point2i handPos = ActiveCharacter().GetHandPosition();
-    y = handPos.y + position.y;
+    y = handPos.y - position.y;
     if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
-      x = handPos.x + position.x;
+      x = handPos.x - position.x;
     else
-      x = handPos.x - position.x - m_image->GetWidth();
+      x = handPos.x + position.x - m_image->GetWidth();
   }
   else
   if (origin == weapon_origin_OVER)
@@ -344,7 +344,7 @@ void Weapon::PosXY (int &x, int &y) const
 const Point2i Weapon::GetGunHolePosition() const
 {
   const Point2i &pos = ActiveCharacter().GetHandPosition();
-  Point2i hole(pos +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
+  Point2i hole(pos - hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
 
@@ -652,7 +652,7 @@ bool Weapon::LoadXml(const xmlpp::Element * weapon)
   if (extra_params != NULL) extra_params->LoadXml(elem);
 
   if (m_visibility != NEVER_VISIBLE && origin == weapon_origin_HAND)
-    m_image->SetRotation_HotSpot(-position);
+    m_image->SetRotation_HotSpot(position);
 
   return true;
 }
