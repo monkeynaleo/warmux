@@ -551,15 +551,20 @@ void Weapon::DrawWeaponFire()
 {
   if (m_weapon_fire == NULL) return;
   Point2i pos = ActiveCharacter().GetHandPosition();
-  Point2i hole(pos +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1) - Point2i(0, m_weapon_fire->GetHeight()/(ActiveCharacter().GetDirection()==1?2:-1)));
+  Point2i hole(pos +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
+
+  if( ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
+    hole = hole -  Point2i(0, m_weapon_fire->GetHeight()/2);
+  else
+    hole = hole +  Point2i(0, m_weapon_fire->GetHeight()/2);
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
 
-  if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
-    angle += ActiveCharacter().GetFiringAngle();
-  else
-    angle += ActiveCharacter().GetFiringAngle() -  M_PI;
- 
+  angle += ActiveCharacter().GetFiringAngle();
+
+  if( ActiveCharacter().GetDirection() == DIRECTION_LEFT)
+    angle -= M_PI;
+
   Point2i spr_pos =  pos + Point2i(static_cast<int>(dst * cos(angle)),
                                    static_cast<int>(dst * sin(angle)));
 
