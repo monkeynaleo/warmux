@@ -141,7 +141,7 @@ void WeaponProjectile::Shoot(double strength)
   ResetConstants();
 
   // Set the initial position.
-  SetXY(launcher->GetGunHolePosition());
+  SetXY(launcher->GetGunHolePosition() - GetSize()/2);
   SetOverlappingObject(&ActiveCharacter(), 100);
 
   // Set the initial speed.
