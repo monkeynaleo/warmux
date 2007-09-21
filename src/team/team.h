@@ -27,7 +27,6 @@
 #include <string>
 #include "team/team_energy.h"
 #include "graphic/surface.h"
-#include "weapon/crosshair.h"
 #include "weapon/weapon.h"
 
 class Character;
@@ -54,7 +53,6 @@ class Team
     std::vector<int> m_energy;
 
     // Autres
-    CrossHair        crosshair;
     Point2i          sauve_camera;
     TeamEnergy       energy;
 
