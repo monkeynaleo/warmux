@@ -86,8 +86,8 @@
     </image>
   </sprite> 
   <sprite name="plus">
-    <image file="menu/plus.png">
-      <grid pos="0,0" size="5,10" array="2,1" />
+    <image file="menu/+.png">
+      <grid pos="0,0" size="20,20" array="2,1" />
     </image>
   </sprite> 
   <sprite name="big_plus">
@@ -101,8 +101,8 @@
     </image>
   </sprite> 
   <sprite name="minus">
-    <image file="menu/minus.png">
-      <grid pos="0,0" size="5,10" array="2,1" />
+    <image file="menu/-.png">
+      <grid pos="0,0" size="20,20" array="2,1" />
     </image>
   </sprite> 
   <sprite name="big_minus">
