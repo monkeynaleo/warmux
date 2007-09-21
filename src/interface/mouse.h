@@ -22,12 +22,14 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
+#include <map>
 #include "graphic/surface.h"
 #include "include/base.h"
 #include "tool/point.h"
 
 // Forward declarations
 struct SDL_event;
+class MouseCursor;
 
 class Mouse
 {
@@ -46,58 +48,43 @@ public:
     POINTER_ARROW_RIGHT,
     POINTER_ARROW_LEFT,
     POINTER_AIM,
-    POINTER_FIRE,
     POINTER_FIRE_LEFT,
-    POINTER_FIRE_RIGHT
+    POINTER_FIRE_RIGHT,
+    POINTER_FIRE // Must always be the last one
   } pointer_t;
 
   typedef enum {
     MOUSE_HIDDEN,
     MOUSE_VISIBLE,
   } visibility_t;
+
 private:
+  static std::map<pointer_t, MouseCursor> cursors;
 
   visibility_t visible;
   pointer_t current_pointer;
 
   static Mouse * singleton;
-
-  Surface pointer_select,
-    pointer_move,
-    pointer_arrow_up,
-    pointer_arrow_up_right,
-    pointer_arrow_up_left,
-    pointer_arrow_down,
-    pointer_arrow_down_right,
-    pointer_arrow_down_left,
-    pointer_arrow_right,
-    pointer_arrow_left,
-    pointer_fire_left,
-    pointer_fire_right,
-    pointer_aim;
-
   Mouse();
   void ChoixVerPointe() const;
-
-  const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 
   void ActionLeftClic(bool shift = false) const;
   void ActionRightClic(bool shift = false) const;
   void ActionWheelDown(bool shift = false) const;
   void ActionWheelUp(bool shift = false) const;
-public:
+  const MouseCursor& GetCursor(pointer_t pointer) const;
 
+public:
   static Mouse * GetInstance();
 
   bool HandleClic (const SDL_Event& event) const;
-
   void Refresh();
 
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
 
   // Choose the pointer
-  const pointer_t &GetPointer() const { return current_pointer; };
+  const pointer_t GetPointer() const;
   pointer_t SetPointer(pointer_t pointer);
   void Draw() const;
 

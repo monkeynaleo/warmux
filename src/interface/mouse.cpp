@@ -23,6 +23,7 @@
 
 #include "interface/cursor.h"
 #include "interface/interface.h"
+#include "interface/mouse_cursor.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game_mode.h"
@@ -40,6 +41,24 @@
 
 Mouse * Mouse::singleton = NULL;
 
+std::string __pointers[] = {
+  "mouse/pointer_standard",
+  "mouse/pointer_select",
+  "mouse/pointer_move",
+  "mouse/pointer_arrow_up",
+  "mouse/pointer_arrow_up_right",
+  "mouse/pointer_arrow_up_left",
+  "mouse/pointer_arrow_down",
+  "mouse/pointer_arrow_down_right",
+  "mouse/pointer_arrow_down_left",
+  "mouse/pointer_arrow_right",
+  "mouse/pointer_arrow_left",
+  "mouse/pointer_aim",
+  "mouse/pointer_fire_left",
+  "mouse/pointer_fire_right"
+};
+std::map<Mouse::pointer_t, MouseCursor> Mouse::cursors;
+
 Mouse * Mouse::GetInstance() {
   if (singleton == NULL) {
     singleton = new Mouse();
@@ -49,21 +68,16 @@ Mouse * Mouse::GetInstance() {
 
 Mouse::Mouse(){
   visible = MOUSE_VISIBLE;
-  // Load the different pointers
-  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
-  pointer_select = resource_manager.LoadImage(res, "mouse/pointer_select");
-  pointer_move = resource_manager.LoadImage(res, "mouse/pointer_move");
-  pointer_arrow_up = resource_manager.LoadImage(res, "mouse/pointer_arrow_up");
-  pointer_arrow_up_right = resource_manager.LoadImage(res, "mouse/pointer_arrow_up_right");
-  pointer_arrow_up_left = resource_manager.LoadImage(res, "mouse/pointer_arrow_up_left");
-  pointer_arrow_down = resource_manager.LoadImage(res, "mouse/pointer_arrow_down");
-  pointer_arrow_down_right = resource_manager.LoadImage(res, "mouse/pointer_arrow_down_right");
-  pointer_arrow_down_left = resource_manager.LoadImage(res, "mouse/pointer_arrow_down_left");
-  pointer_arrow_right = resource_manager.LoadImage(res, "mouse/pointer_arrow_right");
-  pointer_arrow_left = resource_manager.LoadImage(res, "mouse/pointer_arrow_left");
-  pointer_aim = resource_manager.LoadImage(res, "mouse/pointer_aim");
-  pointer_fire_right = resource_manager.LoadImage(res, "mouse/pointer_fire_right");
-  pointer_fire_left = resource_manager.LoadImage(res, "mouse/pointer_fire_left");
+
+  // Load the different pointers  
+  Profile *res = resource_manager.LoadXMLProfile("cursors.xml", false);
+
+  for (int i=POINTER_SELECT; i < POINTER_FIRE; i++) {
+    cursors.insert(std::make_pair(Mouse::pointer_t(i), 
+				  resource_manager.LoadMouseCursor(res, __pointers[i], 
+								   Mouse::pointer_t(i))));
+  }
+  
   current_pointer = POINTER_STANDARD;
   resource_manager.UnLoadXMLProfile(res);
 }
@@ -239,15 +253,33 @@ Point2i Mouse::GetWorldPosition() const
   return GetPosition() + Camera::GetInstance()->GetPosition();
 }
 
+const MouseCursor& Mouse::GetCursor(pointer_t pointer) const
+{
+  ASSERT(pointer != POINTER_STANDARD);
+
+  if (pointer == POINTER_FIRE) {
+    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
+      return GetCursor(POINTER_FIRE_LEFT); // left hand to shoot on the right
+    else
+      return GetCursor(POINTER_FIRE_RIGHT);
+  }
+  return (*cursors.find(pointer)).second;
+}
+
+const Mouse::pointer_t Mouse::GetPointer() const
+{
+  return current_pointer;
+}
+
 // set the new pointer type and return the previous one
 Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
 {
   if (Config::GetInstance()->GetDefaultMouseCursor()) {
     Show(); // be sure cursor is visible
-    return current_pointer;
+    return Mouse::POINTER_STANDARD;
   }
 
-  if (current_pointer == pointer) return current_pointer;
+  if (current_pointer == pointer) return pointer;
 
   if (pointer == POINTER_STANDARD)
     SDL_ShowCursor(true);
@@ -260,48 +292,6 @@ Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
   return old_pointer;
 }
 
-const Surface& Mouse::GetSurfaceFromPointer(pointer_t pointer) const
-{
-  switch (pointer) {
-  case POINTER_STANDARD:
-    return pointer_select;
-  case POINTER_SELECT:
-    return pointer_select;
-  case POINTER_MOVE:
-    return pointer_move;
-  case POINTER_ARROW_UP:
-    return pointer_arrow_up;
-  case POINTER_ARROW_UP_RIGHT:
-    return pointer_arrow_up_right;
-  case POINTER_ARROW_UP_LEFT:
-    return pointer_arrow_up_left;
-  case POINTER_ARROW_DOWN:
-    return pointer_arrow_down;
-  case POINTER_ARROW_DOWN_RIGHT:
-    return pointer_arrow_down_right;
-  case POINTER_ARROW_DOWN_LEFT:
-    return pointer_arrow_down_left;
-  case POINTER_ARROW_RIGHT:
-    return pointer_arrow_right;
-  case POINTER_ARROW_LEFT:
-    return pointer_arrow_left;
-  case POINTER_AIM:
-    return pointer_aim;
-  case POINTER_FIRE:
-    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
-      return pointer_fire_left; // left hand to shoot on the right
-    else
-      return pointer_fire_right;
-  case POINTER_FIRE_RIGHT:
-    return pointer_fire_left;
-  case POINTER_FIRE_LEFT:
-    return pointer_fire_right;
-  }
-
-  // to make g++ happy
-  return pointer_select;
-}
-
 void Mouse::Draw() const
 {
   if (visible != MOUSE_VISIBLE)
@@ -310,11 +300,12 @@ void Mouse::Draw() const
   if (current_pointer == POINTER_STANDARD)
     return; // use standard SDL cursor
 
-  const Surface& cursor = GetSurfaceFromPointer(current_pointer);
-  AppWormux::GetInstance()->video->window.Blit(cursor, GetPosition() - cursor.GetSize()/2);
-  world.ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetWidth()/2,
-                                    GetPosition().y - cursor.GetHeight()/2,
-                         cursor.GetWidth(), cursor.GetHeight()));
+  const MouseCursor& cursor = GetCursor(current_pointer);
+  const Surface& surf = cursor.GetSurface();
+  AppWormux::GetInstance()->video->window.Blit(surf, GetPosition() + cursor.GetClicPos());
+  world.ToRedrawOnScreen(Rectanglei(GetPosition().x + cursor.GetClicPos().x,
+                                    GetPosition().y + cursor.GetClicPos().y,
+				    surf.GetWidth(), surf.GetHeight()));
 }
 
 void Mouse::Show()
