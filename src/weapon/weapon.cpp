@@ -46,7 +46,7 @@
 
 // Enable it to debug the gun hole position
 #ifdef DEBUG
-#define DEBUG_HOLE
+//#define DEBUG_HOLE
 #endif
 
 extern Profile *weapons_res_profile;
