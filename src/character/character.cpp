@@ -228,6 +228,7 @@ void Character::SetDirection (BodyDirection_t nv_direction)
   uint l,r,t,b;
   body->GetTestRect(l,r,t,b);
   SetTestRect(l,r,t,b);
+  m_team.crosshair.Refresh(GetFiringAngle());
 }
 
 void Character::DrawEnergyBar(int dy) const
@@ -729,8 +730,10 @@ void Character::StartPlaying()
 {
   ASSERT (!IsGhost());
   SetWeaponClothe();
+  ActiveTeam().crosshair.Draw();
  // SetRebounding(false);
   ShowGameInterface();
+  m_team.crosshair.Refresh(GetFiringAngle());
 }
 
 bool Character::IsActiveCharacter() const
@@ -757,6 +760,7 @@ void Character::SetFiringAngle(double angle) {
   angle = BorneDouble(angle, -(ActiveTeam().GetWeapon().GetMaxAngle()),
                              -(ActiveTeam().GetWeapon().GetMinAngle()));
   firing_angle = angle;
+  m_team.crosshair.Refresh(GetFiringAngle());
 }
 
 void Character::SetWeaponClothe()
@@ -877,7 +881,7 @@ void Character::HandleKeyRefreshed_Up(bool shift)
   HideGameInterface();
   if (ActiveCharacter().IsImmobile())
     {
-      if (ActiveTeam().GetWeapon().UseCrossHair())
+      if (ActiveTeam().crosshair.enable)
         {
           do_nothing_time = Time::GetInstance()->Read();
           CharacterCursor::GetInstance()->Hide();
@@ -894,7 +898,7 @@ void Character::HandleKeyRefreshed_Down(bool shift)
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
     {
-      if (ActiveTeam().GetWeapon().UseCrossHair())
+      if (ActiveTeam().crosshair.enable)
         {
           do_nothing_time = Time::GetInstance()->Read();
           CharacterCursor::GetInstance()->Hide();

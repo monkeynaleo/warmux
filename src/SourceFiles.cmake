@@ -150,6 +150,7 @@ weapon/blowtorch.cpp
 weapon/bounce_ball.cpp
 weapon/cluster_bomb.cpp
 weapon/construct.cpp
+weapon/crosshair.cpp
 weapon/disco_grenade.cpp
 weapon/dynamite.cpp
 weapon/explosion.cpp
