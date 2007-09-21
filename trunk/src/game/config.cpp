@@ -31,6 +31,9 @@
 #ifdef WIN32
 #  include <direct.h>
 #endif
+#ifdef OSX_BUNDLE
+#	include <CoreFoundation/CoreFoundation.h>
+#endif
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
@@ -134,6 +137,20 @@ Config::Config():
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
   filename     = data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf";
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
+#elif defined(OSX_BUNDLE)
+  // the following code will enable wormux to find its data when placed in an app bundle on mac OS X.
+  // configure with './configure ... CPPFLAGS=-DOSX_BUNDLE' to enable
+  char path[1024];
+  CFBundleRef mainBundle = CFBundleGetMainBundle(); assert(mainBundle);
+  CFURLRef mainBundleURL = CFBundleCopyBundleURL(mainBundle); assert(mainBundleURL);
+  CFStringRef cfStringRef = CFURLCopyFileSystemPath( mainBundleURL, kCFURLPOSIXPathStyle); assert(cfStringRef);
+  CFStringGetCString(cfStringRef, path, 1024, kCFStringEncodingASCII);
+  CFRelease(mainBundleURL);
+  CFRelease(cfStringRef);
+  std::string contents = std::string(path) + std::string("/Contents");
+  data_dir = contents + std::string("/Resources/data");
+  ttf_filename = contents + std::string("/Resources/data/font/DejaVuSans.ttf");
+  locale_dir = contents + std::string("/Resources/po");
 #else
 #  ifdef _WIN32
   std::string basepath = GetWormuxPath();
