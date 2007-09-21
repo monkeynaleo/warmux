@@ -389,6 +389,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>auria</nickname>
+	<name>Marianne Gagnon</name>
+	<description>MacOSX package</description>
+	<email>fire_void_AT_hotmail_DOT_com</email>
+	<country>Québec</country>
+      </author>
+      <author>
 	<nickname>che</nickname>
 	<name>Rudolf KASTL</name>
 	<description>Prepare RPM packages for Fedora Core 3</description>
