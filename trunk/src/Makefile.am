@@ -163,6 +163,7 @@ wormux_SOURCES = \
         weapon/bounce_ball.cpp weapon/bounce_ball.h \
         weapon/cluster_bomb.cpp weapon/cluster_bomb.h \
         weapon/construct.cpp weapon/construct.h \
+        weapon/crosshair.cpp weapon/crosshair.h \
         weapon/disco_grenade.cpp weapon/disco_grenade.h \
         weapon/dynamite.cpp weapon/dynamite.h \
         weapon/explosion.cpp weapon/explosion.h \
