@@ -74,6 +74,7 @@ wormux_SOURCES = \
         interface/loading_screen.cpp interface/loading_screen.h \
         interface/man_machine_interface.cpp interface/man_machine_interface.h \
         interface/mouse.cpp interface/mouse.h \
+	interface/mouse_cursor.cpp interface/mouse_cursor.h \
         interface/weapon_menu.cpp interface/weapon_menu.h \
         map/camera.cpp map/camera.h \
         map/ground.cpp map/ground.h \

@@ -86,8 +86,8 @@
     </image>
   </sprite> 
   <sprite name="plus">
-    <image file="menu/+.png">
-      <grid pos="0,0" size="20,20" array="2,1" />
+    <image file="menu/plus.png">
+      <grid pos="0,0" size="5,10" array="2,1" />
     </image>
   </sprite> 
   <sprite name="big_plus">
@@ -101,8 +101,8 @@
     </image>
   </sprite> 
   <sprite name="minus">
-    <image file="menu/-.png">
-      <grid pos="0,0" size="20,20" array="2,1" />
+    <image file="menu/minus.png">
+      <grid pos="0,0" size="5,10" array="2,1" />
     </image>
   </sprite> 
   <sprite name="big_minus">
@@ -179,22 +179,6 @@
   <surface name="team_icon" file="menu/ico_skins.png"/>
   <surface name="sound_icon" file="menu/ico_sounds.png"/>
   <surface name="weapon_icon" file="menu/ico_weapons.png"/>
-</section>
-
-<section name ="mouse">
-  <surface name="pointer_select" file="interface/cursors/hand-cursor.png"/>
-  <surface name="pointer_move" file="interface/cursors/hand-move.png"/>
-  <surface name="pointer_aim" file="interface/cursors/hand-fire.png"/>
-  <surface name="pointer_fire_right" file="interface/cursors/hand-fire.right.png"/>
-  <surface name="pointer_fire_left" file="interface/cursors/hand-fire.left.png"/>
-  <surface name="pointer_arrow_up" file="interface/cursors/arrow-top.png"/>
-  <surface name="pointer_arrow_right" file="interface/cursors/arrow-right.png"/>
-  <surface name="pointer_arrow_left" file="interface/cursors/arrow-left.png"/>  
-  <surface name="pointer_arrow_down" file="interface/cursors/arrow-down.png"/>
-  <surface name="pointer_arrow_up_right" file="interface/cursors/arrow-top.right.png"/>
-  <surface name="pointer_arrow_up_left" file="interface/cursors/arrow-top.left.png"/>
-  <surface name="pointer_arrow_down_right" file="interface/cursors/arrow-down.right.png"/>
-  <surface name="pointer_arrow_down_left" file="interface/cursors/arrow-down.left.png"/>
 </section>
 
 <section name="energy_bar">

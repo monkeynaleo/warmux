@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "graphism.dtd" []>
+<resources>
+
+<section name="mouse">
+  <mouse_cursor name="pointer_select" file="interface/cursors/hand-cursor.png" x="2" y="2" />
+  <mouse_cursor name="pointer_move" file="interface/cursors/hand-move.png" x="2" y="2" />
+  <mouse_cursor name="pointer_aim" file="interface/cursors/hand-fire.png" x="2" y="2" />
+  <mouse_cursor name="pointer_fire_right" file="interface/cursors/hand-fire.right.png" x="2" y="2" />
+  <mouse_cursor name="pointer_fire_left" file="interface/cursors/hand-fire.left.png" x="2" y="2" />
+  <mouse_cursor name="pointer_arrow_up" file="interface/cursors/arrow-top.png" x="2" y="2" />
+  <mouse_cursor name="pointer_arrow_right" file="interface/cursors/arrow-right.png" x="2" y="2" />
+  <mouse_cursor name="pointer_arrow_left" file="interface/cursors/arrow-left.png" x="2" y="2" />  
+  <mouse_cursor name="pointer_arrow_down" file="interface/cursors/arrow-down.png" x="2" y="2" />
+  <mouse_cursor name="pointer_arrow_up_right" file="interface/cursors/arrow-top.right.png" x="2" y="2" />
+  <mouse_cursor name="pointer_arrow_up_left" file="interface/cursors/arrow-top.left.png" x="2" y="2" />
+  <mouse_cursor name="pointer_arrow_down_right" file="interface/cursors/arrow-down.right.png" x="2" y="2" />
+  <mouse_cursor name="pointer_arrow_down_left" file="interface/cursors/arrow-down.left.png" x="2" y="2" />
+</section>
+
+</resources>

@@ -30,6 +30,7 @@
 
 #include <string>
 #include "graphic/surface.h"
+#include "interface/mouse.h"
 #include "map/maps_list.h"
 #ifdef WIN32
    // Protects against macro definition of LoadImage when this header is included last.
@@ -42,6 +43,8 @@ namespace xmlpp
   class Element;
 }
 class XmlReader;
+
+class MouseCursor;
 
 class Profile
 {
@@ -71,6 +74,7 @@ class ResourceManager
    Profile *LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const;
    void UnLoadXMLProfile(Profile *profile) const;
 
+   MouseCursor LoadMouseCursor(const Profile *profile, const std::string& resource_name, Mouse::pointer_t pointer_id) const;
    Color LoadColor(const Profile *profile, const std::string& resource_name) const;
    int LoadInt(const Profile *profile, const std::string& resource_name) const;
    double LoadDouble(const Profile *profile, const std::string& resource_name) const;
