@@ -544,6 +544,16 @@ void Weapon::Draw(){
 	      ActiveCharacter().GetHandPosition().GetY());
   }
 #endif
+#ifdef DEBUG_HOLE
+  Rectanglei rect(GetGunHolePosition().GetX() - Camera::GetInstance()->GetPositionX()- 1,
+                  GetGunHolePosition().GetY() - Camera::GetInstance()->GetPositionY()- 1,
+      	    	  3, 3);
+
+  world.ToRedrawOnMap(rect);
+  AppWormux::GetInstance()->video->window.RectangleColor(rect, c_red);
+
+//  rect = Rectangle(
+#endif
 }
 
 // Draw the weapon fire when firing
@@ -571,18 +581,6 @@ void Weapon::DrawWeaponFire()
   m_weapon_fire->SetRotation_HotSpot (Point2i(0,0));
   m_weapon_fire->SetRotation_rad (ActiveCharacter().GetFiringAngle());
   m_weapon_fire->Draw( spr_pos );
-
-
-#ifdef DEBUG_HOLE
-  Rectanglei rect(GetGunHolePosition().GetX() - Camera::GetInstance()->GetPositionX()- 1,
-                  GetGunHolePosition().GetY() - Camera::GetInstance()->GetPositionY()- 1,
-      	    	  3, 3);
-
-  world.ToRedrawOnMap(rect);
-  AppWormux::GetInstance()->video->window.RectangleColor(rect, c_red);
-
-//  rect = Rectangle(
-#endif
 }
 
 void Weapon::DrawAmmoUnits() const
