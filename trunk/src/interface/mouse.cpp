@@ -69,15 +69,15 @@ Mouse * Mouse::GetInstance() {
 Mouse::Mouse(){
   visible = MOUSE_VISIBLE;
 
-  // Load the different pointers  
+  // Load the different pointers
   Profile *res = resource_manager.LoadXMLProfile("cursors.xml", false);
 
   for (int i=POINTER_SELECT; i < POINTER_FIRE; i++) {
-    cursors.insert(std::make_pair(Mouse::pointer_t(i), 
-				  resource_manager.LoadMouseCursor(res, __pointers[i], 
+    cursors.insert(std::make_pair(Mouse::pointer_t(i),
+				  resource_manager.LoadMouseCursor(res, __pointers[i],
 								   Mouse::pointer_t(i))));
   }
-  
+
   current_pointer = POINTER_STANDARD;
   resource_manager.UnLoadXMLProfile(res);
 }
@@ -311,17 +311,11 @@ void Mouse::Show()
   if (Config::GetInstance()->GetDefaultMouseCursor()) {
     SDL_ShowCursor(true); // be sure cursor is visible
   }
-
-  MSG_DEBUG("mouse", "%d, %d", GetPosition().GetX(),
-            GetPosition().GetY() );
 }
 
 void Mouse::Hide()
 {
   visible = MOUSE_HIDDEN;
   SDL_ShowCursor(false); // be sure cursor is invisible
-
-  MSG_DEBUG("mouse", "%d, %d", GetPosition().GetX(),
-            GetPosition().GetY() );
 }
 
