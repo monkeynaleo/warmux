@@ -202,7 +202,7 @@ Character::~Character()
 void Character::SignalDrowning()
 {
   // Follow character
-  Camera::GetInstance()->FollowObject(this, true, true);
+  Camera::GetInstance()->FollowObject(this, true);
   // Set energy
   SetEnergy(0);
   SetMovement("drowned");
@@ -542,7 +542,7 @@ void Character::Refresh()
 
   // center on character who is falling
   if(FootsInVacuum()) {
-    Camera::GetInstance()->FollowObject(this, true, true);
+    Camera::GetInstance()->FollowObject(this, true);
   }
 
   if(IsDiseased())

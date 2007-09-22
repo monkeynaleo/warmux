@@ -136,7 +136,7 @@ bool ObjBox::NewBox()
     delete box;
   } else {
     lst_objects.AddObject(box);
-    Camera::GetInstance()->FollowObject(box, true, true);
+    Camera::GetInstance()->FollowObject(box, true);
     GameMessages::GetInstance()->Add (_("It's a present!"));
     Game::GetInstance()->SetCurrentBox(box);
     return true;

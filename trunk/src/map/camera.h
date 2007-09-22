@@ -59,8 +59,7 @@ public:
   void SetXYabs(const Point2i &pos) { SetXYabs(pos.x, pos.y); };
 
   // Auto crop on an object
-  void FollowObject (const PhysicalObj *obj,
-                     bool follow, bool center_on);
+  void FollowObject (const PhysicalObj *obj, bool follow);
   void StopFollowingObj (const PhysicalObj* obj);
 
   bool IsVisible(const PhysicalObj &obj) const;

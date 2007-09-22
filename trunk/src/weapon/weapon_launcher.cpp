@@ -69,7 +69,7 @@ void WeaponBullet::SignalOutOfMap()
 {
   WeaponProjectile::SignalOutOfMap();
   launcher->IncMissedShots();
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true, true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
 void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
@@ -165,7 +165,7 @@ void WeaponProjectile::Shoot(double strength)
   ShootSound();
 
   lst_objects.AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true, true);
+  Camera::GetInstance()->FollowObject(this, true);
 }
 
 void WeaponProjectile::ShootSound()

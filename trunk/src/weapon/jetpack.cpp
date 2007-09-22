@@ -121,7 +121,7 @@ void JetPack::StartUse()
       m_last_fuel_down = Time::GetInstance()->Read();
       flying_sound.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
-      Camera::GetInstance()->FollowObject (&ActiveCharacter(),true, true);
+      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
     }
 }
 

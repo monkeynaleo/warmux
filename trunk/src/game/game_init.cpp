@@ -219,5 +219,5 @@ GameInit::GameInit():
         first_to_play = team->FindByIndex(1);
   else
         first_to_play = team->FindByIndex(0);
-  Camera::GetInstance()->FollowObject(first_to_play, true, true);
+  Camera::GetInstance()->FollowObject(first_to_play, true);
 }
