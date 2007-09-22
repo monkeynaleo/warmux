@@ -211,13 +211,4 @@ GameInit::GameInit():
 
   // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
   Time::GetInstance()->Reset();
-
-  // Put the camera on the first playing character.
-  Team* team = GetTeamsList().GetNextTeam();
-  Character* first_to_play;
-  if(team->GetNbCharacters() > 1)
-        first_to_play = team->FindByIndex(1);
-  else
-        first_to_play = team->FindByIndex(0);
-  Camera::GetInstance()->FollowObject(first_to_play, true);
 }
