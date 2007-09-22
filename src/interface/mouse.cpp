@@ -227,17 +227,13 @@ void Mouse::Refresh()
     {
       Show();
       lastpos = pos;
+      counter = NB_LOOP_BEFORE_HIDE;
     }
-  else if (visible == MOUSE_VISIBLE)
-    {
+  else
+    if (visible == MOUSE_VISIBLE)
       /* The mouse is hidden after a while when not moving */
-      --counter;
-      if (counter <= 0)
-        {
-          counter = NB_LOOP_BEFORE_HIDE;
-          Hide();
-        }
-    }
+      if (--counter <= 0)
+        Hide();
 }
 
 Point2i Mouse::GetPosition() const
