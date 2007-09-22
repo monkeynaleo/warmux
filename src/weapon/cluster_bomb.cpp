@@ -49,7 +49,7 @@ public:
   Cluster(ClusterBombConfig& cfg,
           WeaponLauncher * p_launcher);
   void Refresh();
-  void Shoot(int n_x, int n_y);  
+  void Shoot(int n_x, int n_y);
   virtual void SetEnergyDelta(int delta, bool do_report = true);
 
 protected:
@@ -79,7 +79,7 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot (int x, int y)
 {
-  Camera::GetInstance()->FollowObject(this, true, false);
+  Camera::GetInstance()->FollowObject(this, true);
   ResetConstants();
   SetXY( Point2i(x, y) );
 }
@@ -138,7 +138,7 @@ void ClusterBomb::DoExplosion()
   }
   WeaponProjectile::DoExplosion();
 }
- 
+
 void ClusterBomb::SetEnergyDelta(int /* delta */, bool /* do_report */){};
 
 //-----------------------------------------------------------------------------

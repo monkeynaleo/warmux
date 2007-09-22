@@ -220,7 +220,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       return;
     case KEY_CENTER:
       CharacterCursor::GetInstance()->FollowActiveCharacter();
-      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true, true);
+      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
       return;
     case KEY_TOGGLE_INTERFACE:
       Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());

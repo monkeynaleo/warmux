@@ -172,7 +172,6 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
 
     fullscreen = _fullscreen;
     Camera::GetInstance()->SetSize(width, height);
-    Camera::GetInstance()->SetXY(Camera::GetInstance()->GetPosition());
   }
 
   return true;

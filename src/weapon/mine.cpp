@@ -85,7 +85,7 @@ void ObjMine::StartTimeout()
   {
     animation=true;
 
-    Camera::GetInstance()->FollowObject(this, true, true);
+    Camera::GetInstance()->FollowObject(this, true);
 
     MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;

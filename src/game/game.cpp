@@ -583,7 +583,7 @@ void Game::__SetState_PLAYING()
           ActiveTeam().NextCharacter();
         }
 
-      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true, true);
+      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
 
       if ( Network::GetInstance()->IsTurnMaster() )
         {

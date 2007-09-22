@@ -205,7 +205,7 @@ void Action_Player_NextCharacter (Action *a)
   jukebox.Play("share", "character/change_in_same_team");
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve next character information
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true, true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
 void Action_Player_PreviousCharacter (Action *a)
@@ -213,13 +213,13 @@ void Action_Player_PreviousCharacter (Action *a)
   jukebox.Play("share", "character/change_in_same_team");
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve previous character's information
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true, true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
 void Action_Game_ChangeCharacter (Action *a)
 {
   a->RetrieveCharacter();
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true, true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
 void Action_Game_NextTeam (Action *a)
