@@ -66,6 +66,7 @@ interface/keyboard.cpp
 interface/loading_screen.cpp
 interface/man_machine_interface.cpp
 interface/mouse.cpp
+interface/mouse_cursor.cpp
 interface/weapon_menu.cpp
 main.cpp
 map/camera.cpp
