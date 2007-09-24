@@ -334,6 +334,7 @@ void Character::Die()
     body->SetRotation(0.0);
     SetClothe("dead");
     SetMovement("breathe");
+    SetCollisionModel(false, false, false);
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
