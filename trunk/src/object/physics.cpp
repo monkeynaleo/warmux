@@ -32,6 +32,7 @@
 #include "game/time.h"
 #include "map/wind.h"
 #include "tool/debug.h"
+#include "tool/isnan.h"
 #include "tool/math_tools.h"
 
 // Physical constants
@@ -424,7 +425,7 @@ void Physics::Rebound(Point2d /*contactPos*/, double contact_angle)
     {
       // Compute rebound angle.
       /* if no tangent rebound in the opposit direction */
-      if(isnan(contact_angle))
+      if(isNaN(contact_angle))
         angle = angle + M_PI ;
       else
         angle =  M_PI - angle -2.0 *  contact_angle;

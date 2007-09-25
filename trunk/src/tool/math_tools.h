@@ -43,14 +43,12 @@ int Rad2Deg(double rad);
 double AbsoluteValue (const double x);
 bool EqualsZero (const double x);
 
-#ifdef __APPLE__
-using namespace std;  // For isnan->std::isnan for instance
-#endif
-
+/*
 #ifdef WIN32
 #  include <float.h>
 #  define isnan _isnan
 #endif
+*/
 
 #ifdef _MSC_VER
 // MIT licensed from http://opensource.adobe.com/cmath_8hpp-source.html
