@@ -38,6 +38,7 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
+#include "tool/isnan.h"
 #include "tool/math_tools.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
@@ -313,7 +314,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     if (ContactPoint(cx, cy)) {
       ground_angle = world.ground.Tangent(cx, cy);
-      if(!isnan(ground_angle)) {
+      if(!isNaN(ground_angle)) {
         contactPos.x = (double)cx / PIXEL_PER_METER;
         contactPos.y = (double)cy / PIXEL_PER_METER;
       } else {
