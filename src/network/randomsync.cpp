@@ -131,11 +131,13 @@ double RandomSync::GetDouble(){
 Point2i RandomSync::GetPoint(const Rectanglei &rect){
         Point2i topPoint = rect.GetPosition();
         Point2i bottomPoint = rect.GetBottomRightPoint();
-
-        return Point2i( GetLong(topPoint.x, bottomPoint.x),
-                        GetLong(topPoint.y, bottomPoint.y) );
+	long x = GetLong(topPoint.x, bottomPoint.x);
+	long y = GetLong(topPoint.y, bottomPoint.y);
+        return Point2i( x, y );
 }
 
 Point2i RandomSync::GetPoint(const Point2i &pt){
-        return Point2i( GetLong(0, pt.x - 1), GetLong(0, pt.y - 1) );
+	long x = GetLong(0, pt.x - 1);
+	long y = GetLong(0, pt.y - 1);
+        return Point2i( x, y );
 }
