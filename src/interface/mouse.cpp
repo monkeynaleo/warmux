@@ -298,9 +298,9 @@ void Mouse::Draw() const
 
   const MouseCursor& cursor = GetCursor(current_pointer);
   const Surface& surf = cursor.GetSurface();
-  AppWormux::GetInstance()->video->window.Blit(surf, GetPosition() + cursor.GetClicPos());
-  world.ToRedrawOnScreen(Rectanglei(GetPosition().x + cursor.GetClicPos().x,
-                                    GetPosition().y + cursor.GetClicPos().y,
+  AppWormux::GetInstance()->video->window.Blit(surf, GetPosition() - cursor.GetClicPos());
+  world.ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetClicPos().x,
+                                    GetPosition().y - cursor.GetClicPos().y,
 				    surf.GetWidth(), surf.GetHeight()));
 }
 
