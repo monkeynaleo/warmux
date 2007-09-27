@@ -240,7 +240,8 @@ MapsList::MapsList()
     CloseFolder(f);
   } else {
         std::cerr << std::endl
-          << Format(_("Unable to open maps directory (%s)!"), dirname.c_str())
+          << Format(_("Unable to open personal maps directory (%s)!"),
+                      dirname.c_str())
           << std::endl;
   }
 
