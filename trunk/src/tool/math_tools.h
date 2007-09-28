@@ -43,16 +43,10 @@ int Rad2Deg(double rad);
 double AbsoluteValue (const double x);
 bool EqualsZero (const double x);
 
-/*
-#ifdef WIN32
-#  include <float.h>
-#  define isnan _isnan
-#endif
-*/
-
 #ifdef _MSC_VER
 // MIT licensed from http://opensource.adobe.com/cmath_8hpp-source.html
 #  include <math.h>
+#  include <float.h>
 double inline round(double a) { return (a<0.0) ? ceil(a-0.5) : floor(a+0.5); };
 long int inline lround(double a) { return static_cast<long>(a + (a < 0.0 ? -0.5 : 0.5)); }
 #endif

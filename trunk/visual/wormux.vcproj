@@ -274,10 +274,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\game\game_loop.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\src\game\game_mode.cpp"
 					>
 				</File>
@@ -487,6 +483,10 @@
 				</File>
 				<File
 					RelativePath="..\src\interface\mouse.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\interface\mouse_cursor.cpp"
 					>
 				</File>
 				<File
@@ -1048,10 +1048,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\game\game_loop.h"
-					>
-				</File>
-				<File
 					RelativePath="..\src\game\game_mode.h"
 					>
 				</File>
@@ -1285,6 +1281,10 @@
 				</File>
 				<File
 					RelativePath="..\src\interface\mouse.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\interface\mouse_cursor.h"
 					>
 				</File>
 				<File
