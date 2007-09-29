@@ -63,9 +63,6 @@ class IndexServer
   int ReceiveInt();
   std::string ReceiveStr();
 
-  // Download the list of online servers on www.wormux.org
-  bool GetServerList();
-
   // Gives the address of a server in the list
   bool GetServerAddress(std::string & address, int & port);
   // Connect to a server

@@ -21,7 +21,6 @@
  *****************************************************************************/
 
 #include <SDL_net.h>
-#include <fstream>
 #include "network/download.h"
 #include "game/config.h"
 #include "graphic/video.h"
@@ -63,7 +62,16 @@ Network::connection_state_t IndexServer::Connect()
   if( hidden_server )
     return Network::CONNECTED;
 
-  if( !GetServerList() )
+  // Download the server if it's empty
+  if( server_lst.size() == 0 )
+  {
+    server_lst = Downloader::GetInstance()->GetServerList("server_list");
+    first_server = server_lst.end();
+    current_server = server_lst.end();
+  }
+
+  // If it's still empty, then something went wrong when downloading it
+  if( server_lst.size() == 0 )
     return Network::CONN_REJECTED;
 
   std::string addr;
@@ -134,64 +142,6 @@ void IndexServer::Disconnect()
   SDLNet_TCP_Close(socket);
   connected = false;
   SDLNet_FreeSocketSet(sock_set);
-}
-
-static ssize_t getline(std::string& line, std::ifstream& file)
-{
-  line.clear();
-  std::getline(file, line);
-  if(file.eof())
-    return -1;
-  return line.size();
-}
-
-bool IndexServer::GetServerList()
-{
-  MSG_DEBUG("index_server", "Retrieving server list");
-  // If we already have it, no need to redownload it
-  if(server_lst.size() != 0)
-    return true;
-
-  // Download the list of user
-  const std::string server_file = Config::GetInstance()->GetPersonalDir() + "server_list";
-
-  if( !Downloader::GetInstance()->Get(server_list_url.c_str(), server_file.c_str()) )
-    return false;
-
-  // Parse the file
-  std::ifstream fin;
-  fin.open(server_file.c_str(), std::ios::in);
-  if(!fin)
-          return false;
-
-  /*char * line = NULL;
-  size_t len = 0;*/
-  std::string line;
-
-  // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
-  while (getline(line, fin) >= 0)
-  {
-    if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
-      continue;
-
-    std::string::size_type port_pos = line.find(':', 0);
-    if(port_pos == std::string::npos)
-      continue;
-
-    std::string hostname = line.substr(0, port_pos);
-    std::string portstr = line.substr(port_pos+1);
-    int port = atoi(portstr.c_str());
-
-    server_lst[ hostname ] = port;
-  }
-
-  fin.close();
-
-  first_server = server_lst.end();
-  current_server = server_lst.end();
-  MSG_DEBUG("index_server", "Server list retrieved. %i servers are running", server_lst.size());
-
-  return (server_lst.size() != 0);
 }
 
 bool IndexServer::GetServerAddress( std::string & address, int & port)

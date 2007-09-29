@@ -19,10 +19,14 @@
  * Download a file using libcurl
  *****************************************************************************/
 
+#include <map>
+#include <fstream>
 #include <curl/curl.h>
+#include "game/config.h"
 #include "include/base.h"
-#include "tool/error.h"
 #include "network/download.h"
+#include "tool/debug.h"
+#include "tool/error.h"
 
 Downloader * Downloader::singleton = NULL;
 
@@ -66,3 +70,59 @@ bool Downloader::Get(const char* url, const char* save_as)
 
   return (r == CURLE_OK);
 }
+
+static ssize_t getline(std::string& line, std::ifstream& file)
+{
+	  line.clear();
+	    std::getline(file, line);
+	      if(file.eof())
+		          return -1;
+	        return line.size();
+}
+
+std::map<std::string, int> Downloader::GetServerList(std::string list_name)
+{
+  std::map<std::string, int> server_lst;
+  MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
+
+  // Download the list of server
+  const std::string server_file = Config::GetInstance()->GetPersonalDir() + list_name;
+  const std::string list_url = "http://www.wormux.org/" + list_name;
+
+  if( !Get(list_url.c_str(), server_file.c_str()) )
+    return server_lst;
+
+  // Parse the file
+  std::ifstream fin;
+  fin.open(server_file.c_str(), std::ios::in);
+  if(!fin)
+   return server_lst;
+
+  /*char * line = NULL;
+  size_t len = 0;*/
+  std::string line;
+
+  // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
+  while (getline(line, fin) >= 0)
+  {
+    if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
+      continue;
+
+    std::string::size_type port_pos = line.find(':', 0);
+    if(port_pos == std::string::npos)
+      continue;
+
+    std::string hostname = line.substr(0, port_pos);
+    std::string portstr = line.substr(port_pos+1);
+    int port = atoi(portstr.c_str());
+
+    server_lst[ hostname ] = port;
+  }
+
+  fin.close();
+
+  MSG_DEBUG("downloader", "Server list retrieved. %i servers are running", server_lst.size());
+
+  return server_lst;
+}
+
