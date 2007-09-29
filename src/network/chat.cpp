@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #include <SDL_events.h>
+#include "network/admin_commands.h"
 #include "network/chat.h"
 #include "graphic/text_list.h"
 #include "network/network.h"
@@ -92,6 +93,7 @@ void Chat::NewMessage(const std::string &msg)
     last_time = now;
   }
 
+
   chat.AddText(msg, MAXLINES);
 }
 
@@ -106,6 +108,9 @@ void Chat::HandleKey(const SDL_Event& event)
 
   case SDLK_RETURN:
     check_input = false; //Hide input widget
+    if ( txt[0] == '/' )
+  	  ProcessCommand(txt);
+    else
     if (txt != "" )
       Network::GetInstance()->SendChatMessage(txt); //Send 'txt' to other players
     input->Set("");
