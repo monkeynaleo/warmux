@@ -21,6 +21,7 @@
 
 #ifndef DOWNLOAD_H
 #define DOWNLOAD_H
+#include <map>
 #include <curl/curl.h>
 
 class Downloader
@@ -38,6 +39,7 @@ public:
 
   // Return true if the download was successful
   bool Get(const char* url, const char* save_as);
+  std::map<std::string, int> GetServerList(std::string list_name);
   static Downloader* GetInstance();
 };
 
