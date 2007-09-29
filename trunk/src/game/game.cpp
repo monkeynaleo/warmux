@@ -523,7 +523,6 @@ void Game::RefreshClock()
             break;
           }
           else {
-            ActiveTeam().AccessWeapon().Deselect();
             SetState(PLAYING);
             break;
           }
@@ -622,6 +621,7 @@ void Game::__SetState_END_TURN()
 {
   MSG_DEBUG("game.statechange", "End of turn");
   ActiveTeam().AccessWeapon().SignalTurnEnd();
+  ActiveTeam().AccessWeapon().Deselect();
   CharacterCursor::GetInstance()->Hide();
   duration = GameMode::GetInstance()->duration_exchange_player;
   Interface::GetInstance()->UpdateTimer(duration);
