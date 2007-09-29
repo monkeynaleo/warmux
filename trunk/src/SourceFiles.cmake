@@ -92,6 +92,7 @@ menu/options_menu.cpp
 menu/results_menu.cpp
 menu/team_box.cpp
 menu/teams_selection_box.cpp
+network/admin_commands.cpp
 network/chat.cpp
 network/distant_cpu.cpp
 network/download.cpp
