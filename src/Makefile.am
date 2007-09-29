@@ -99,6 +99,7 @@ wormux_SOURCES = \
         menu/results_menu.cpp menu/results_menu.h \
         menu/team_box.cpp menu/team_box.h \
         menu/teams_selection_box.cpp menu/teams_selection_box.h \
+        network/admin_commands.cpp network/admin_commands.h \
         network/chat.cpp network/chat.h \
         network/distant_cpu.cpp network/distant_cpu.h \
         network/download.cpp network/download.h \
