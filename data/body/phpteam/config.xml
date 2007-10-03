@@ -770,7 +770,13 @@
 	</frame>
 </movement>
 
-
+<!-- ###### Black ###### -->
+<movement name="black" speed="1000">
+        <collision_rect left="5" right="5" top="10" bottom="2" />
+        <frame>
+                <member type="body" angle="0" />
+        </frame>
+</movement>
 
 
 
