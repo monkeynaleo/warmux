@@ -32,7 +32,7 @@
 #  include <direct.h>
 #endif
 #ifdef OSX_BUNDLE
-#	include <CoreFoundation/CoreFoundation.h>
+#  include <CoreFoundation/CoreFoundation.h>
 #endif
 #include "graphic/video.h"
 #include "include/app.h"
@@ -156,7 +156,7 @@ Config::Config():
   std::string basepath = GetWormuxPath();
   data_dir     = basepath + "\\data";
   locale_dir   = basepath + "\\locale";
-  ttf_filename     = basepath + "\\data\\font\\DejaVuSans.ttf";
+  ttf_filename = basepath + "\\data\\font\\DejaVuSans.ttf";
 #  else
   data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
