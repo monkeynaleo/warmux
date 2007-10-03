@@ -42,7 +42,6 @@ Label::Label (const std::string &label,
   txt_label = new Text(label, color, fsize, fstyle, _shadowed, label.empty());
   size.y = txt_label->GetHeight();
   txt_label->SetMaxWidth(GetSizeX());
-  printf("Label %s of size %ix%i\n", label.c_str(), size.x, size.y);
 }
 
 Label::~Label()
