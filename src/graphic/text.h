@@ -32,20 +32,22 @@ class Text
   std::string txt;
   Color color;
   bool shadowed;
+  bool dummy;
   uint bg_offset;
   uint max_width;
 
   Font::font_size_t font_size;
   Font::font_style_t font_style;
 
-  void Render();
+  virtual void Render();
   void RenderMultiLines();
 public:
   Text(const std::string &new_txt,
        const Color& new_color = white_color,
        Font::font_size_t fsize = Font::FONT_SMALL,
        Font::font_style_t fstyle = Font::FONT_NORMAL,
-       bool shadowed = true);
+       bool shadowed = true,
+       bool dummy = false);
   virtual ~Text();
 
   //Draw method using windows coordinates

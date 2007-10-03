@@ -28,7 +28,8 @@ Text::Text(const std::string &new_txt,
            const Color& new_color,
            Font::font_size_t fsize,
            Font::font_style_t fstyle,
-           bool _shadowed)
+           bool _shadowed,
+           bool _dummy)
 {
   font_size = fsize;
   font_style = fstyle;
@@ -36,8 +37,9 @@ Text::Text(const std::string &new_txt,
   txt = new_txt;
   color = new_color;
   shadowed = _shadowed;
+  dummy = _dummy;
 
-  if( shadowed ){
+  if( shadowed && !dummy ){
     int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
     bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
     if (bg_offset < 1) bg_offset = 1;
@@ -56,18 +58,29 @@ Text::~Text()
 
 void Text::Render()
 {
-  if (txt=="") return;
+  if (!dummy)
+  {
+    if (txt=="") return;
 
-  if (max_width != 0) {
-    RenderMultiLines();
-    return;
+    if (max_width != 0) {
+      RenderMultiLines();
+      return;
+    }
+
+    Font* font = Font::GetInstance(font_size, font_style);
+
+    surf = font->CreateSurface(txt, color);
+    if ( shadowed ) {
+      background = font->CreateSurface(txt, black_color);
+    }
   }
-
-  Font* font = Font::GetInstance(font_size, font_style);
-
-  surf = font->CreateSurface(txt, color);
-  if ( shadowed ) {
-    background = font->CreateSurface(txt, black_color);
+  else
+  {
+    int psize = Font::GetPointSize(font_size);
+    surf = Surface(Point2i(psize, psize), 0);
+    if ( shadowed ) {
+      background = Surface(Point2i(psize, psize), 0);
+    }
   }
 }
 
@@ -215,7 +228,7 @@ void Text::DrawCenterTop (const Point2i &position) const
 
 void Text::DrawTopLeft(const Point2i &position) const
 {
-  if(txt == "") return;
+  if(txt == "" && !dummy) return;
 
   Rectanglei dst_rect(position, surf.GetSize());
   AppWormux * app = AppWormux::GetInstance();
@@ -258,13 +271,13 @@ void Text::SetMaxWidth(uint max_w)
 
 int Text::GetWidth() const
 {
-  if(txt=="") return 0;
+  if(txt=="" && !dummy) return 0;
   return surf.GetWidth();
 }
 
 int Text::GetHeight() const
 {
-  if(txt=="") return 0;
+  if(txt=="" && !dummy) return 0;
   return surf.GetHeight();
 }
 
