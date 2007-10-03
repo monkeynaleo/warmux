@@ -95,13 +95,18 @@ Network::Network():
 #endif
   network_menu(NULL),
   cpu(),
-  sync_lock(false),
-#ifdef WIN32
-  nickname(getenv("USERNAME"))
-#else
-  nickname(getenv("USER"))
-#endif
+  sync_lock(false)
 {
+  const char *nick = NULL;
+#ifdef WIN32
+  char  buffer[32];
+  DWORD size = 32;
+  if (GetUserName(buffer, &size))
+    nick = buffer;
+#else
+  nick = getenv("USER");
+#endif
+  nickname = (nick) ? nick : _("Unnamed");
   sdlnet_initialized = false;
   num_objects++;
 }
