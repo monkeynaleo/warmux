@@ -262,7 +262,7 @@ SubSection /e \$(WORMUX_SHORCUTS_TITLE) Sec_Shortcuts
   Section \$(WORMUX_STARTM_SC_DESC) Sec_StartMenuShortcut
     SetOverwrite on
     CreateDirectory "\$SMPROGRAMS\Wormux"
-    CreateShortCut "\$SMPROGRAMS\\Wormux.lnk" \
+    CreateShortCut "\$SMPROGRAMS\Wormux\Wormux.lnk" \
       "\$INSTDIR\wormux.exe" "" "\$INSTDIR\wormux.exe" 0
     SetOverwrite off
   SectionEnd
@@ -297,6 +297,7 @@ Section "Uninstall"
   SetShellVarContext all
   Delete "\$SMPROGRAMS\Wormux\*.*"
   RMDir  "\$SMPROGRAMS\Wormux"
+  Delete "\$SMPROGRAMS\Wormux.lnk"
   Delete "\$DESKTOP\Wormux.lnk"
   ; remove files
   RMDir /r "\$INSTDIR"
