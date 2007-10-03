@@ -85,6 +85,7 @@ public:
   void WriteCenterTop(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteCenter(const Point2i &pos, const std::string &txt, const Color &color);
 
+  static int GetPointSize(font_size_t size) { return FONT_SIZE[size]; };
   int GetWidth(const std::string &txt) const;
   int GetHeight() const;
   int GetHeight(const std::string &txt) const;
