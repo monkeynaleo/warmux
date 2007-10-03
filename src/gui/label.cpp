@@ -29,7 +29,6 @@ Label::Label (const std::string &label,
               const Color& color,
               bool _center,
               bool _shadowed):
-  txt_label(new Text(label, color, fsize, fstyle, _shadowed)),
   hidden(false),
   font_size(fsize),
   font_style(fstyle),
@@ -39,8 +38,11 @@ Label::Label (const std::string &label,
 {
   position = Point2i(-1, -1);
   size = _size;
-  txt_label->SetMaxWidth(GetSizeX());
+
+  txt_label = new Text(label, color, fsize, fstyle, _shadowed, label.empty());
   size.y = txt_label->GetHeight();
+  txt_label->SetMaxWidth(GetSizeX());
+  printf("Label %s of size %ix%i\n", label.c_str(), size.x, size.y);
 }
 
 Label::~Label()
@@ -70,7 +72,7 @@ void Label::SetText(const std::string &new_txt)
 {
   need_redrawing = true;
   delete txt_label;
-  txt_label = new Text(new_txt, font_color, font_size, font_style, shadowed);
+  txt_label = new Text(new_txt, font_color, font_size, font_style, shadowed, new_txt.empty());
   txt_label->SetMaxWidth(GetSizeX());
 }
 
