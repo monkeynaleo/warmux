@@ -85,7 +85,7 @@ bool Airhammer::p_Shoot()
 
   Point2i pos = Point2i(ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 - impact.GetWidth()/2,
                         ActiveCharacter().GetTestRect().GetPositionY() +
-                        ActiveCharacter().GetHeight()  -15);
+                        ActiveCharacter().GetHeight()  -16);
 
   ParticleEngine::AddNow(pos + Point2i(impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
                          true, -3.0 * M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
