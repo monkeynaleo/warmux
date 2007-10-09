@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\src&quot;;&quot;$(ProjectDir)..\src\msvc&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\src&quot;;&quot;$(ProjectDir)..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;;&quot;$(GTK_BASEPATH)\include\libxml++-2.6&quot;;&quot;$(GTK_BASEPATH)\include\glibmm-2.4&quot;;&quot;$(GTK_BASEPATH)\include\glib-2.0&quot;;&quot;$(GTK_BASEPATH)\lib\glib-2.0\include&quot;;&quot;$(GTK_BASEPATH)\lib\glibmm-2.4\include&quot;;&quot;$(GTK_BASEPATH)\lib\libxml++-2.6\include&quot;"
 				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8beta1\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib shell32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllibd.lib glibmm-2.4d.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6d.lib sigc-2.0d.lib png.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllibd.lib png.lib xml2.lib glibmm-2.4.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6.lib sigc-2.0.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib"
@@ -130,7 +130,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\src&quot;;&quot;$(ProjectDir)..\src\msvc&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\src&quot;;&quot;$(ProjectDir)..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;;&quot;$(GTK_BASEPATH)\include\libxml++-2.6&quot;;&quot;$(GTK_BASEPATH)\include\glibmm-2.4&quot;;&quot;$(GTK_BASEPATH)\include\glib-2.0&quot;;&quot;$(GTK_BASEPATH)\lib\glib-2.0\include&quot;;&quot;$(GTK_BASEPATH)\lib\glibmm-2.4\include&quot;;&quot;$(GTK_BASEPATH)\lib\libxml++-2.6\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8beta1\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -154,7 +154,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib shell32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllib.lib glibmm-2.4.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6.lib sigc-2.0.lib png.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllib.lib png.lib xml2.lib glibmm-2.4.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6.lib sigc-2.0.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\$(ProjectName).exe"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="msvcrtd.lib"
@@ -597,6 +597,10 @@
 			<Filter
 				Name="network"
 				>
+				<File
+					RelativePath="..\src\network\admin_commands.cpp"
+					>
+				</File>
 				<File
 					RelativePath="..\src\network\chat.cpp"
 					>
@@ -1399,6 +1403,10 @@
 			<Filter
 				Name="network"
 				>
+				<File
+					RelativePath="..\src\network\admin_commands.h"
+					>
+				</File>
 				<File
 					RelativePath="..\src\network\chat.h"
 					>
