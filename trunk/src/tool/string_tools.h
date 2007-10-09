@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh des chaînes de caractère (string).
+ * Refresh character strings.
  *****************************************************************************/
 
 #ifndef STRING_TOOLS_H
