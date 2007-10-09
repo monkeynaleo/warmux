@@ -65,11 +65,11 @@ void FramePerSecond::Refresh()
 {
   uint nv_temps = SDL_GetTicks();
 
-  // Pas encore l'heure de recalculer : exit !
+  // Not yet time to compute: exit!
   if (nv_temps <= time_in_second)
     return;
 
-  // On décale !
+  // Shift position!
   while (time_in_second < nv_temps){
     time_in_second += 1000;
     nb_frames.pop_back();
@@ -78,7 +78,7 @@ void FramePerSecond::Refresh()
       nb_valid_values++;
   }
 
-  // Recalcule la average
+  // Recompute average
   if (0 < nb_valid_values){
     average = 0;
     std::list<uint>::const_iterator it=nb_frames.begin();

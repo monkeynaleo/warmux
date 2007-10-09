@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Outils mathématiques.
+ * Mathematical tools.
  *****************************************************************************/
 
 #include "tool/math_tools.h"
@@ -25,7 +25,7 @@
 // Limit under which, real numbers are considered as NULL
 const double EPS_ZERO = 0.05;
 
-// Conversion degré en radian
+// Degree <-> radian angle conversion
 double Deg2Rad (int degre){
   return ((double)degre)*M_PI/180;
 }
@@ -34,7 +34,7 @@ int Rad2Deg(double rad) {
   return int(rad*180/M_PI);
 }
 
-// Modèle pour borner une valeur entre min et max
+// Template to force a value into a range.
 template <class T>
 T BorneTpl (const T &valeur, const T &min, const T &max){
   if (valeur < min)
@@ -53,7 +53,7 @@ double BorneDouble (const double &valeur, const double &min, const double &max){
         return BorneTpl (valeur, min, max);
 }
 
-// Inverse un angle par rapport à l'axe vertical
+// Inverts an angle along vertical axis.
 double InverseAngle (const double &angle){
   if (angle < 0)
     return -M_PI - angle;
@@ -61,7 +61,6 @@ double InverseAngle (const double &angle){
     return M_PI - angle;
 }
 
-// Inverse un angle par rapport à l'axe vertical
 double InverseAngleRad (const double &angle){
   if (angle < 0)
     return -M_PI - angle;
@@ -69,7 +68,6 @@ double InverseAngleRad (const double &angle){
     return M_PI - angle;
 }
 
-// Inverse un angle par rapport à l'axe vertical
 double InverseAngleDeg (const double &angle){
   if (angle < 0)
     return -180 - angle;

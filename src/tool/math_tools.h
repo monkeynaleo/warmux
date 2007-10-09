@@ -25,21 +25,21 @@
 // Limit under which, real numbers are considered as NULL
 extern const double EPS_ZERO;
 
-// Borne une valeur dans l'intervale [min;max]
+// Force a value into range [min;max]
 long BorneLong (const long &valeur, const long &min, const long &max);
 double BorneDouble (const double &valeur, const double &min,
                     const double &max);
 
-// Inverse un angle par rapport à l'axe vertical
+// Invert an angle along the vertical axis
 double InverseAngle (const double &angle);
 double InverseAngleDeg (const double &angle);
 double InverseAngleRad (const double &angle);
 
-// Conversion degré en radian
+// degree<->radian angle conversion
 double Deg2Rad (int degre);
 int Rad2Deg(double rad);
 
-// Valeur absolue
+// Absolute value
 double AbsoluteValue (const double x);
 bool EqualsZero (const double x);
 
