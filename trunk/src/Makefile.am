@@ -37,12 +37,12 @@ wormux_SOURCES = \
         graphic/text_list.cpp graphic/text_list.h \
         graphic/textured_polygon.h \
         graphic/video.cpp graphic/video.h \
-	gui/abstract_spin_button.h \
+        gui/abstract_spin_button.h \
         gui/box.cpp gui/box.h \
         gui/button.cpp gui/button.h \
         gui/button_text.cpp gui/button_text.h \
         gui/check_box.cpp gui/check_box.h \
-	gui/combo_box.cpp gui/combo_box.h \
+        gui/combo_box.cpp gui/combo_box.h \
         gui/container.h \
         gui/energy_bar.cpp gui/energy_bar.h \
         gui/label.cpp gui/label.h \
@@ -74,7 +74,7 @@ wormux_SOURCES = \
         interface/loading_screen.cpp interface/loading_screen.h \
         interface/man_machine_interface.cpp interface/man_machine_interface.h \
         interface/mouse.cpp interface/mouse.h \
-	interface/mouse_cursor.cpp interface/mouse_cursor.h \
+        interface/mouse_cursor.cpp interface/mouse_cursor.h \
         interface/weapon_menu.cpp interface/weapon_menu.h \
         map/camera.cpp map/camera.h \
         map/ground.cpp map/ground.h \
