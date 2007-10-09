@@ -23,7 +23,7 @@
 #define BASE_H
 //-----------------------------------------------------------------------------
 
-// Mode debogage ? Peut-être désactivé en ajoutant -DRELEASE à la compilation
+// Debug mode can be deactivated by adding -DRELEASE when compiling
 #ifndef DEBUG
 #  define RELEASE
 #endif
