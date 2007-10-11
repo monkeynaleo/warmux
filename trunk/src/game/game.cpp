@@ -20,6 +20,7 @@
  *****************************************************************************/
 #include <iostream>
 #include "game/game.h"
+#include "game/config.h"
 #include "game/time.h"
 #include "ai/ai_engine.h"
 #include "map/camera.h"
@@ -224,14 +225,15 @@ void Game::RefreshInput()
     // Keyboard event
     Keyboard::GetInstance()->HandleKeyEvent(event);
     // Joystick event
-    if(refresh_joystick)
+    if(refresh_joystick && !Config::GetInstance()->IsJoystickDisable())
       Joystick::GetInstance()->HandleKeyEvent(event);
   }
 
   // Keyboard, Joystick and mouse refresh
-  Mouse::GetInstance()->Refresh();
+  if(!Config::GetInstance()->IsMouseDisable())
+    Mouse::GetInstance()->Refresh();
   Keyboard::GetInstance()->Refresh();
-  if(refresh_joystick)
+  if(refresh_joystick && !Config::GetInstance()->IsJoystickDisable())
     Joystick::GetInstance()->Refresh();
   AIengine::GetInstance()->Refresh();
 

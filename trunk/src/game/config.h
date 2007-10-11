@@ -65,62 +65,64 @@ public:
   void RemoveAllObjectConfigs();
 
   void SetLanguage(const std::string language);
-  std::string GetLanguage() const { return default_language; };
+  inline std::string GetLanguage() const { return default_language; };
 
-  bool GetDisplayEnergyCharacter() const;
-  void SetDisplayEnergyCharacter(const bool dec);
+  inline bool GetDisplayEnergyCharacter() const { return display_energy_character; };
+  inline void SetDisplayEnergyCharacter(const bool dec) { display_energy_character = dec; };
 
-  bool GetDisplayNameCharacter() const;
-  void SetDisplayNameCharacter(const bool dnc);
+  inline bool GetDisplayNameCharacter() const { return display_name_character; };
+  inline void SetDisplayNameCharacter(const bool dnc) { display_name_character = dnc; };
 
-  bool GetDisplayWindParticles() const;
-  void SetDisplayWindParticles(bool dwp);
+  inline bool GetDisplayWindParticles() const { return display_wind_particles; };
+  inline void SetDisplayWindParticles(bool dwp) { display_wind_particles = dwp; };
 
-  bool GetDefaultMouseCursor() const;
-  void SetDefaultMouseCursor(const bool dmc);
+  inline bool GetDefaultMouseCursor() const { return default_mouse_cursor; };
+  inline void SetDefaultMouseCursor(const bool dmc) { default_mouse_cursor = dmc; };
 
-  bool GetScrollOnBorder() const;
-  void SetScrollOnBorder(const bool sob);
+  inline bool IsMouseDisable() const { return disable_mouse; };
+  inline bool IsJoystickDisable() const { return disable_joystick; };
 
-  bool IsNetworkActivated() const;
-  void SetNetworkActivated(const bool set_net);
+  inline bool GetScrollOnBorder() const { return scroll_on_border; };
+  inline void SetScrollOnBorder(const bool sob) { scroll_on_border = sob; };
 
-  bool IsVideoFullScreen() const;
-  void SetVideoFullScreen(const bool set_fullscreen);
+  inline bool IsNetworkActivated() const { return enable_network; };
+  inline void SetNetworkActivated(const bool set_net) { enable_network = set_net; };
 
-  uint GetVideoWidth() const;
-  void SetVideoWidth(const uint width);
+  inline bool IsVideoFullScreen() const { return video_fullscreen; };
+  inline void SetVideoFullScreen(const bool set_fullscreen) { video_fullscreen = set_fullscreen; };
 
-  uint GetVideoHeight() const;
-  void SetVideoHeight(const uint height);
+  inline uint GetVideoWidth() const { return video_width; };
+  inline void SetVideoWidth(const uint width) { video_width = width; };
 
-  std::list<Point2i> & GetResolutionAvailable() { return resolution_available; };
+  inline uint GetVideoHeight() const { return video_height; };
+  inline void SetVideoHeight(const uint height) { video_height = height; };
+
+  inline std::list<Point2i> & GetResolutionAvailable() { return resolution_available; };
   inline uint GetMaxFps() const { return max_fps; };
 
-  bool IsBlingBlingInterface() const;
-  void SetBlingBlingInterface(bool bling_bling);
+  inline bool IsBlingBlingInterface() const { return bling_bling_interface; };
+  inline void SetBlingBlingInterface(bool bling_bling) { bling_bling_interface = bling_bling; };
 
-  bool GetSoundMusic() const;
-  void SetSoundMusic(const bool music);
+  inline bool GetSoundMusic() const { return sound_music; };
+  inline void SetSoundMusic(const bool music) { sound_music = music; };
 
-  bool GetSoundEffects() const;
-  void SetSoundEffects(const bool effects);
+  inline bool GetSoundEffects() const { return sound_effects; };
+  inline void SetSoundEffects(const bool effects) { sound_effects = effects; };
 
-  uint GetSoundFrequency() const;
-  void SetSoundFrequency(const uint freq);
+  inline uint GetSoundFrequency() const { return sound_frequency; };
+  inline void SetSoundFrequency(const uint freq) { sound_frequency = freq; };
 
-  std::list<ConfigTeam> & AccessTeamList();
-  const std::string & GetMapName() const;
-  inline void SetMapName(const std::string& new_name)
-  { map_name = new_name; }
+  inline std::list<ConfigTeam> & AccessTeamList() { return teams; };
+  inline const std::string & GetMapName() const { return map_name; };
+  inline void SetMapName(const std::string& new_name) { map_name = new_name; }
 
-  int GetTransparency() const;
+  inline int GetTransparency() const { return transparency; };
 
-  std::string GetTtfFilename() const;
+  inline std::string GetTtfFilename() const { return ttf_filename; };
 
-  std::string GetDataDir() const;
-  std::string GetLocaleDir() const;
-  std::string GetPersonalDir() const;
+  inline std::string GetDataDir() const { return data_dir; };
+  inline std::string GetLocaleDir() const { return locale_dir; };
+  inline std::string GetPersonalDir() const { return personal_dir; };
 
   static Config * GetInstance();
   ~Config() { singleton = NULL; };
@@ -156,6 +158,8 @@ protected:
   bool display_wind_particles;
   bool default_mouse_cursor;
   bool scroll_on_border;
+  bool disable_joystick;
+  bool disable_mouse;
 
   // Video settings
   uint video_width;
@@ -187,4 +191,5 @@ private:
    * GetOjectConfig() witch is not supposed to modify the object itself */
   mutable std::map<std::string, ObjectConfig *> config_set;
 };
+
 #endif
