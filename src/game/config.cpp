@@ -105,6 +105,8 @@ Config::Config():
   display_wind_particles(true),
   default_mouse_cursor(false),
   scroll_on_border(true),
+  disable_joystick(true),
+  disable_mouse(false),
   video_width(800),
   video_height(600),
   video_fullscreen(false),
@@ -329,6 +331,8 @@ void Config::LoadXml(const xmlpp::Element *xml)
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);
     XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
     XmlReader::ReadBool(elem, "scroll_on_border", scroll_on_border);
+    XmlReader::ReadBool(elem, "disable_mouse", disable_mouse);
+    XmlReader::ReadBool(elem, "disable_joystick", disable_joystick);
     XmlReader::ReadUint(elem, "width", video_width);
     XmlReader::ReadUint(elem, "height", video_height);
     XmlReader::ReadBool(elem, "full_screen", video_fullscreen);
@@ -414,6 +418,8 @@ bool Config::SaveXml()
   doc.WriteElement(video_node, "bling_bling_interface", ulong2str(bling_bling_interface));
   doc.WriteElement(video_node, "default_mouse_cursor", ulong2str(default_mouse_cursor));
   doc.WriteElement(video_node, "scroll_on_border", ulong2str(scroll_on_border));
+  doc.WriteElement(video_node, "disable_mouse", ulong2str(disable_mouse));
+  doc.WriteElement(video_node, "disable_joystick", ulong2str(disable_joystick));
   doc.WriteElement(video_node, "width", ulong2str(video->window.GetWidth()));
   doc.WriteElement(video_node, "height", ulong2str(video->window.GetHeight()));
   doc.WriteElement(video_node, "full_screen",
@@ -455,169 +461,4 @@ std::string Config::GetEnv(const std::string & name, const std::string &default_
   } else {
     return default_value;
   }
-}
-
-std::string Config::GetDataDir() const
-{
-  return data_dir;
-}
-
-std::string Config::GetLocaleDir() const
-{
-  return locale_dir;
-}
-
-std::string Config::GetPersonalDir() const
-{
-  return personal_dir;
-}
-
-std::list<ConfigTeam> & Config::AccessTeamList()
-{
-  return teams;
-}
-
-const std::string & Config::GetMapName() const
-{
-  return map_name;
-}
-
-bool Config::GetDisplayEnergyCharacter() const
-{
-  return display_energy_character;
-}
-
-bool Config::GetDisplayNameCharacter() const
-{
-  return display_name_character;
-}
-
-bool Config::GetDisplayWindParticles() const
-{
-  return display_wind_particles;
-}
-
-bool Config::GetDefaultMouseCursor() const
-{
-  return default_mouse_cursor;
-}
-
-bool Config::GetScrollOnBorder() const
-{
-  return scroll_on_border;
-}
-
-std::string Config::GetTtfFilename() const
-{
-  return ttf_filename;
-}
-
-bool Config::IsNetworkActivated() const
-{
-  return enable_network;
-}
-
-bool Config::IsVideoFullScreen() const
-{
-  return video_fullscreen;
-}
-
-void Config::SetNetworkActivated(const bool set_net)
-{
-  enable_network = set_net;
-}
-
-void Config::SetVideoFullScreen(const bool set_fullscreen)
-{
-  video_fullscreen = set_fullscreen;
-}
-
-uint Config::GetVideoWidth() const
-{
-  return video_width;
-}
-
-void Config::SetVideoWidth(const uint width)
-{
-  video_width = width;
-}
-
-uint Config::GetVideoHeight() const
-{
-  return video_height;
-}
-
-void Config::SetVideoHeight(const uint height)
-{
-  video_height = height;
-}
-
-bool Config::IsBlingBlingInterface() const
-{
-  return bling_bling_interface;
-}
-
-void Config::SetBlingBlingInterface(bool bling_bling)
-{
-  bling_bling_interface = bling_bling;
-}
-
-bool Config::GetSoundMusic() const
-{
-  return sound_music;
-}
-
-void Config::SetSoundMusic(const bool music)
-{
-  sound_music = music;
-}
-
-bool Config::GetSoundEffects() const
-{
-  return sound_effects;
-}
-
-void Config::SetSoundEffects(const bool effects)
-{
-  sound_effects = effects;
-}
-
-uint Config::GetSoundFrequency() const
-{
-  return sound_frequency;
-}
-
-void Config::SetSoundFrequency(const uint freq)
-{
-  sound_frequency = freq;
-}
-
-void Config::SetDisplayEnergyCharacter(const bool dec)
-{
-  display_energy_character = dec;
-}
-
-void Config::SetDisplayNameCharacter(const bool dnc)
-{
-  display_name_character = dnc;
-}
-
-void Config::SetDisplayWindParticles(const bool dwp)
-{
-  display_wind_particles = dwp;
-}
-
-void Config::SetDefaultMouseCursor(const bool dmc)
-{
-  default_mouse_cursor = dmc;
-}
-
-void Config::SetScrollOnBorder(const bool sob)
-{
-  scroll_on_border = sob;
-}
-
-int Config::GetTransparency() const
-{
-  return transparency;
 }
