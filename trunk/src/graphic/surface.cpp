@@ -81,7 +81,7 @@ Surface::Surface(const std::string &filename){
 
 /**
  * Copy constructor: build a surface from an other surface.
- *
+ *  
  * The two surfaces share the same graphic data.
  */
 Surface::Surface(const Surface &src){
