@@ -33,6 +33,7 @@
 #include "graphic/video.h"
 #include "network/net_error_msg.h"
 #include "network/index_server.h"
+#include "network/irc.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
@@ -76,6 +77,8 @@ InternetMenu::InternetMenu() :
   //if there is a running server, preselect it
   if (connect_lst->Size() > 0)
     connect_lst->Select(0);
+
+  irc.Connect();
 }
 
 InternetMenu::~InternetMenu()
@@ -91,8 +94,8 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
   else
   if (w == connect && connect_lst->GetSelectedItem() != -1)
   {
-    Network::connection_state_t conn = Network::ClientStart(connect_lst->ReadLabel(), connect_lst->ReadValue());
-    if ( Network::IsConnected() && conn == Network::CONNECTED )
+    connection_state_t conn = Network::ClientStart(connect_lst->ReadLabel(), connect_lst->ReadValue());
+    if ( Network::IsConnected() && conn == CONNECTED )
     {
       close_menu = true;
       Menu::mouse_ok();

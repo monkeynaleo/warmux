@@ -226,44 +226,44 @@ typedef int SOCKET;
 # define closesocket(fd) close(fd)
 #endif
 
-const Network::connection_state_t Network::GetError() const
+const connection_state_t Network::GetError() const
 {
 #ifdef WIN32
   int code = WSAGetLastError();
   switch (code)
   {
-  case WSAECONNREFUSED: return Network::CONN_REJECTED;
+  case WSAECONNREFUSED: return CONN_REJECTED;
   case WSAEINPROGRESS:
-  case WSAETIMEDOUT: return Network::CONN_TIMEOUT;
+  case WSAETIMEDOUT: return CONN_TIMEOUT;
   default:
     fprintf(stderr, "Generic network error of code %i\n", code);
-    return Network::CONN_BAD_SOCKET;
+    return CONN_BAD_SOCKET;
   }
 #else
   switch(errno)
   {
-  case ECONNREFUSED: return Network::CONN_REJECTED;
+  case ECONNREFUSED: return CONN_REJECTED;
   case EINPROGRESS:
-  case ETIMEDOUT: return Network::CONN_TIMEOUT;
+  case ETIMEDOUT: return CONN_TIMEOUT;
   default:
     fprintf(stderr, "Generic network error of code %i\n", errno);
-    return Network::CONN_BAD_SOCKET;
+    return CONN_BAD_SOCKET;
   }
 #endif
 }
 
-const Network::connection_state_t Network::CheckHost(const std::string &host, int prt) const
+const connection_state_t Network::CheckHost(const std::string &host, int prt) const
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 
   struct hostent* hostinfo;
   hostinfo = gethostbyname(host.c_str());
   if( ! hostinfo )
-    return Network::CONN_BAD_HOST;
+    return CONN_BAD_HOST;
 
   SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
   if( fd == INVALID_SOCKET )
-    return Network::CONN_BAD_SOCKET;
+    return CONN_BAD_SOCKET;
 
   // Set the timeout
 #ifdef WIN32
@@ -276,13 +276,13 @@ const Network::connection_state_t Network::CheckHost(const std::string &host, in
   if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
   {
     fprintf(stderr, "Setting receive timeout on socket failed\n");
-    return Network::CONN_BAD_SOCKET;
+    return CONN_BAD_SOCKET;
   }
 
   if (setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
   {
     fprintf(stderr, "Setting send timeout on socket failed\n");
-    return Network::CONN_BAD_SOCKET;
+    return CONN_BAD_SOCKET;
   }
 
   struct sockaddr_in addr;
@@ -297,10 +297,10 @@ const Network::connection_state_t Network::CheckHost(const std::string &host, in
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
   {
-    return Network::GetError();
+    return GetError();
   }
   closesocket(fd);
-  return Network::CONNECTED;
+  return CONNECTED;
 }
 
 //-----------------------------------------------------------------------------
@@ -360,7 +360,7 @@ const uint Network::GetPort() const
 //-----------------------------------------------------------------------------
 
 // Static method
-Network::connection_state_t Network::ClientStart(const std::string &host,
+connection_state_t Network::ClientStart(const std::string &host,
                                                  const std::string& port)
 {
   NetworkClient* net = new NetworkClient();
@@ -371,9 +371,9 @@ Network::connection_state_t Network::ClientStart(const std::string &host,
 
   // try to connect
   stop_thread = false;
-  const Network::connection_state_t error = net->ClientConnect(host, port);
+  const connection_state_t error = net->ClientConnect(host, port);
 
-  if (error != Network::CONNECTED) {
+  if (error != CONNECTED) {
     // revert change if connection failed
     stop_thread = true;
     singleton = prev;
@@ -388,7 +388,7 @@ Network::connection_state_t Network::ClientStart(const std::string &host,
 //-----------------------------------------------------------------------------
 
 // Static method
-Network::connection_state_t Network::ServerStart(const std::string& port)
+connection_state_t Network::ServerStart(const std::string& port)
 {
   NetworkServer* net = new NetworkServer();
 
@@ -398,9 +398,9 @@ Network::connection_state_t Network::ServerStart(const std::string& port)
 
   // try to connect
   stop_thread = false;
-  const Network::connection_state_t error = net->ServerStart(port);
+  const connection_state_t error = net->ServerStart(port);
 
-  if (error != Network::CONNECTED) {
+  if (error != CONNECTED) {
     // revert change
     stop_thread = true;
     singleton = prev;

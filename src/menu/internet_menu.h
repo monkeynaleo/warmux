@@ -24,6 +24,7 @@
 #define INTERNET_MENU_H
 
 #include "menu.h"
+#include "network/irc.h"
 
 // Forward declarations
 class ButtonText;
@@ -32,6 +33,7 @@ class ListBox;
 
 class InternetMenu : public Menu
 {
+   IrcChat irc;
    VBox* connection_box;
    ListBox* connect_lst;
    ButtonText* refresh;

@@ -54,13 +54,13 @@ IndexServer::~IndexServer()
 }
 
 /*************  Connection  /  Disconnection  ******************/
-Network::connection_state_t IndexServer::Connect()
+connection_state_t IndexServer::Connect()
 {
   MSG_DEBUG("index_server", "Connecting..");
   ASSERT(!connected);
 
   if( hidden_server )
-    return Network::CONNECTED;
+    return CONNECTED;
 
   // Download the server if it's empty
   if( server_lst.size() == 0 )
@@ -72,7 +72,7 @@ Network::connection_state_t IndexServer::Connect()
 
   // If it's still empty, then something went wrong when downloading it
   if( server_lst.size() == 0 )
-    return Network::CONN_REJECTED;
+    return CONN_REJECTED;
 
   std::string addr;
   int port;
@@ -82,10 +82,10 @@ Network::connection_state_t IndexServer::Connect()
   while( GetServerAddress( addr, port) )
   {
     if( ConnectTo( addr, port) )
-      return Network::CONNECTED;
+      return CONNECTED;
   }
 
-  return Network::CONN_REJECTED;
+  return CONN_REJECTED;
 }
 
 bool IndexServer::ConnectTo(const std::string & address, const int & port)

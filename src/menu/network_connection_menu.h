@@ -69,7 +69,7 @@ class NetworkConnectionMenu : public Menu
    void OnClickUp(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
 
-   void DisplayError(Network::connection_state_t conn);
+   void DisplayError(connection_state_t conn);
 
    bool signal_ok();
    bool signal_cancel();

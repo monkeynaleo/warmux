@@ -75,7 +75,7 @@ public:
   ~IndexServer();
 
   // Connect/disconnect to a server
-  Network::connection_state_t Connect();
+  connection_state_t Connect();
   void Disconnect();
 
   // Answers to pings from the server / close connection if distantly closed

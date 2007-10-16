@@ -185,7 +185,7 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
 
 void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/){}
 
-void NetworkConnectionMenu::DisplayError(Network::connection_state_t conn)
+void NetworkConnectionMenu::DisplayError(connection_state_t conn)
 {
   play_error_sound();
   DispNetworkError(conn);
@@ -194,7 +194,7 @@ void NetworkConnectionMenu::DisplayError(Network::connection_state_t conn)
 
 bool NetworkConnectionMenu::signal_ok()
 {
-  Network::connection_state_t conn;
+  connection_state_t conn;
   bool r = false;
 
   switch (current_action) {
@@ -203,7 +203,7 @@ bool NetworkConnectionMenu::signal_ok()
       index_server.SetHiddenServer();
 
     conn = index_server.Connect();
-    if(conn != Network::CONNECTED)
+    if(conn != CONNECTED)
     {
       DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
@@ -211,7 +211,7 @@ bool NetworkConnectionMenu::signal_ok()
     }
 
     conn = Network::GetInstance()->ServerStart(port_number->GetText());
-    if( conn != Network::CONNECTED)
+    if( conn != CONNECTED)
     {
       DisplayError(conn);
       goto out;
@@ -228,7 +228,7 @@ bool NetworkConnectionMenu::signal_ok()
 
   case NET_CONNECT_LOCAL: // Direct connexion to a server
     conn = Network::ClientStart(server_address->GetText(), port_number->GetText());
-    if (!Network::IsConnected() || conn != Network::CONNECTED) {
+    if (!Network::IsConnected() || conn != CONNECTED) {
       DisplayError(conn);
 
       // translators: %s:%s will expand to something like "example.org:9999"
@@ -241,7 +241,7 @@ bool NetworkConnectionMenu::signal_ok()
 
   case NET_BROWSE_INTERNET: // Search an internet game!
     conn = index_server.Connect();
-    if (conn != Network::CONNECTED) {
+    if (conn != CONNECTED) {
       DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
       goto out;
