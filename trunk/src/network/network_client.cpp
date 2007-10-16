@@ -155,7 +155,7 @@ void NetworkClient::ReceiveActions()
 }
 
 //-----------------------------------------------------------------------------
-const Network::connection_state_t
+const connection_state_t
 NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 {
   Init();
@@ -165,13 +165,13 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   int prt = strtol(port.c_str(), NULL, 10);
 
   connection_state_t r = CheckHost(host, prt);
-  if (r != Network::CONNECTED)
+  if (r != CONNECTED)
     return r;
 
   if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt) == -1)
   {
     fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), prt);
-    return Network::CONN_BAD_HOST;
+    return CONN_BAD_HOST;
   }
 
   // CheckHost opens and closes a connection to the server, so before reconnecting
@@ -183,7 +183,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   if (!socket)
   {
     fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), prt);
-    return Network::CONN_REJECTED;
+    return CONN_REJECTED;
   }
 
   socket_set = SDLNet_AllocSocketSet(1);
@@ -194,5 +194,5 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
   //Control to net_thread_func
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
-  return Network::CONNECTED;
+  return CONNECTED;
 }

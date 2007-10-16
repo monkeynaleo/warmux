@@ -16,42 +16,63 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- *  Displays network related error messages in a pop-up
+ * Irc client
  *****************************************************************************/
 
-#include "network/net_error_msg.h"
-#include "network/network.h"
-#include "tool/i18n.h"
-#include "gui/question.h"
+#include <SDL_net.h>
+#include "network/download.h"
+#include "network/irc.h"
 
-void DispNetworkError(connection_state_t err)
+
+IrcChat::IrcChat()
 {
-  Question question;
-  std::string msg;
-  switch(err)
-  {
-  case CONNECTED:
-    msg = _("Connected !");
-    break;
-  case CONN_BAD_HOST:
-    msg = _("Unable to contact host.");
-    break;
-  case CONN_BAD_PORT:
-    msg = _("Unable to use this port!");
-    break;
-  case CONN_BAD_SOCKET:
-    msg = _("Bad socket ...");
-    break;
-  case CONN_REJECTED:
-    msg = _("The server rejected the connection.");
-    break;
-  case CONN_TIMEOUT:
-    msg = _("The connection timed out. Check there is no firewall in the way!");
-    break;
-  default: ASSERT(false);
-  }
+}
 
-  question.Set(msg, 1, 0);
-  question.Ask();
+IrcChat::~IrcChat()
+{
+}
+
+
+connection_state_t IrcChat::Connect()
+{
+//  // If we don't the server adress download it
+//  if(server_lst.size() == 0)
+//    server_lst = Downloader::GetInstance()->GetServerList("irc_server");
+//
+//  // If the download failed go back
+//  if(server_lst.size() == 0)
+//    return CONN_REJECTED;
+
+//  connection_state_t r = sock.Connect(server_lst.begin()->first,
+//                                      server_lst.begin()->second );
+
+  return CONNECTED;
+
+  connection_state_t r = sock.Connect(std::string("localhost"), 6667);
+
+  if(r != CONNECTED)
+	  return r;
+
+  printf("Connected\n");
+
+  r = sock.SendString("USER ident * * :Wormux player\r\n");
+  if(r != CONNECTED)
+	  return r;
+
+  r = sock.SendString("NICK wx_player\r\n");
+  if(r != CONNECTED)
+	  return r;
+
+  char* str = NULL;
+  while(!str)
+  {
+    r = sock.GetString(&str, '\n');
+    if(r != CONNECTED)
+      return r;
+  }
+  printf("%s\n", str);
+  free(str);
+
+  return CONNECTED;
 }
 

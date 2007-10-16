@@ -40,7 +40,7 @@ public:
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator);
 
   // Client specific methods
-  const Network::connection_state_t ClientConnect(const std::string &host,
+  const connection_state_t ClientConnect(const std::string &host,
                                                   const std::string& port);
 };
 

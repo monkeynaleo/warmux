@@ -147,7 +147,7 @@ void NetworkServer::ReceiveActions()
 
 //-----------------------------------------------------------------------------
 
-Network::connection_state_t NetworkServer::ServerStart(const std::string &port)
+connection_state_t NetworkServer::ServerStart(const std::string &port)
 {
   Init();
 
@@ -161,20 +161,20 @@ Network::connection_state_t NetworkServer::ServerStart(const std::string &port)
   if (SDLNet_ResolveHost(&ip,NULL,(Uint16)prt) != 0)
   {
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return Network::CONN_BAD_PORT;
+    return CONN_BAD_PORT;
   }
 
   max_nb_players = GameMode::GetInstance()->max_teams;
 
   // Open the port to listen to
   if (!AcceptIncoming()) {
-    return Network::CONN_BAD_PORT;
+    return CONN_BAD_PORT;
   }
   printf("\nConnected\n");
   socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
   printf("Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
-  return Network::CONNECTED;
+  return CONNECTED;
 }
 
 std::list<DistantComputer*>::iterator

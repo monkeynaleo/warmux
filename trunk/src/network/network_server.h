@@ -40,7 +40,7 @@ public:
   virtual void ReceiveActions();
 
   // Serveur specific methods
-  Network::connection_state_t ServerStart(const std::string &port);
+  connection_state_t ServerStart(const std::string &port);
 
   bool AcceptIncoming();
   void RejectIncoming();

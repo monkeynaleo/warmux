@@ -23,6 +23,6 @@
 #define NET_ERROR_MSG_H
 #include "network.h"
 
-void DispNetworkError(Network::connection_state_t err);
+void DispNetworkError(connection_state_t err);
 
 #endif

@@ -97,12 +97,14 @@ network/chat.cpp
 network/distant_cpu.cpp
 network/download.cpp
 network/index_server.cpp
+network/irc.cpp
 network/net_error_msg.cpp
 network/network_client.cpp
 network/network.cpp
 network/network_local.cpp
 network/network_server.cpp
 network/randomsync.cpp
+network/socket.cpp
 object/barrel.cpp
 object/bonus_box.cpp
 object/medkit.cpp
