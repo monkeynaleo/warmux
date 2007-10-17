@@ -38,6 +38,7 @@ class Color
     Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
     bool operator==(const Color &color) const;
+    Color operator*(const Color &fact) const;
 
     void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
