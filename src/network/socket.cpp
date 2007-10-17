@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include <SDL_net.h>
+#include "include/base.h"
 #include "network/network.h"
 #include "network/socket.h"
 #include "tool/debug.h"
@@ -43,7 +44,7 @@ void Socket::ShowError()
 
 connection_state_t Socket::Connect(std::string host, int port)
 {
-  assert(!connected);
+  ASSERT(!connected);
 
   //Network::GetInstance()->Init();
 
@@ -98,7 +99,7 @@ void Socket::Disconnect()
 
 connection_state_t Socket::SendBinary(char* data, int size)
 {
-  assert(connected);
+  ASSERT(connected);
 
   int sent = SDLNet_TCP_Send(sock_lst.back(), data, size);
 
@@ -115,7 +116,7 @@ connection_state_t Socket::SendString(char* data)
 
 connection_state_t Socket::Receive()
 {
-  assert(connected);
+  ASSERT(connected);
 
   int r = SDLNet_CheckSockets(sock_set, 0);
 
@@ -168,7 +169,7 @@ connection_state_t Socket::Receive()
 
 connection_state_t Socket::GetString(char** str, char eos)
 {
-  assert(connected);
+  ASSERT(connected);
 
   *str = NULL;
 
@@ -198,7 +199,7 @@ connection_state_t Socket::GetString(char** str, char eos)
 }
 connection_state_t Socket::GetBinary(char** data, unsigned int size)
 {
-  assert(connected);
+  ASSERT(connected);
 
   *data = 0;
 
