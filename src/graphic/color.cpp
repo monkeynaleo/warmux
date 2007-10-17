@@ -37,6 +37,13 @@ bool Color::operator==(const Color &color) const{
                && alpha == color.alpha;
 }
 
+Color Color::operator*(const Color &fact) const{
+        return Color((Uint8) ((Uint32)red * fact.red / 255),
+                     (Uint8) ((Uint32)green * fact.green / 255),
+                     (Uint8) ((Uint32)blue * fact.blue / 255),
+                     (Uint8) ((Uint32)alpha * fact.alpha / 255));
+}
+
 void Color::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
         red = r;
         green = g;
