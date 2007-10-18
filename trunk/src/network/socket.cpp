@@ -56,7 +56,7 @@ connection_state_t Socket::Connect(std::string host, int port)
 
   if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)port) == -1)
   {
-    fprintf(stderr, "SDLNet_ResolveHost: %s:%i\n", SDLNet_GetError(), host.c_str(), port);
+    fprintf(stderr, "SDLNet_ResolveHost (%s): %s:%i\n", SDLNet_GetError(), host.c_str(), port);
     ShowError();
     return CONN_BAD_HOST;
   }
