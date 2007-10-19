@@ -41,16 +41,14 @@ Tile::~Tile(){
 
 void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
   Point2i offset = upper_left_offset + lower_right_offset;
-  nbCells = (pSize + offset) / CELL_SIZE;
-  nbCells = nbCells;
+  size = pSize + offset;
+  nbCells = size / CELL_SIZE;
 
-  if( (pSize.x % CELL_SIZE.x) != 0 )
+  if((size.x % CELL_SIZE.x) != 0)
     nbCells.x++;
 
-  if( (pSize.y % CELL_SIZE.y) != 0 )
+  if((size.y % CELL_SIZE.y) != 0)
     nbCells.y++;
-
-  size = pSize + offset;
 
   nbr_cell = nbCells.x * nbCells.y;
 }
