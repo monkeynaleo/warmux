@@ -97,7 +97,7 @@ void Socket::Disconnect()
   SDLNet_FreeSocketSet(sock_set);
 }
 
-connection_state_t Socket::SendBinary(char* data, int size)
+connection_state_t Socket::SendBinary(const char* data, int size)
 {
   ASSERT(connected);
 
@@ -109,7 +109,7 @@ connection_state_t Socket::SendBinary(char* data, int size)
   return CONNECTED;
 }
 
-connection_state_t Socket::SendString(char* data)
+connection_state_t Socket::SendString(const char* data)
 {
   return SendBinary(data, strlen(data));
 }
