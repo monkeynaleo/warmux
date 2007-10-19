@@ -101,7 +101,7 @@ connection_state_t Socket::SendBinary(const char* data, int size)
 {
   ASSERT(connected);
 
-  int sent = SDLNet_TCP_Send(sock_lst.back(), data, size);
+  int sent = SDLNet_TCP_Send(sock_lst.back(), (void*) data, size);
 
   if(sent != size)
     return CONN_REJECTED;
