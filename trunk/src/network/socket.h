@@ -69,8 +69,8 @@ public:
   connection_state_t Connect(std::string host, int port);
   void Disconnect();
 
-  connection_state_t SendString(char* data); // Send a string terminated by a NULL character
-  connection_state_t SendBinary(char* data, int size); // Send binary datas
+  connection_state_t SendString(const char* data); // Send a string terminated by a NULL character
+  connection_state_t SendBinary(const char* data, int size); // Send binary datas
 
   connection_state_t GetString(char** str, char eos); // Allocates and receive a string terminated by eos (if available)
   connection_state_t GetBinary(char** data, unsigned int size); // Allocates and receive a buffer (if available)
