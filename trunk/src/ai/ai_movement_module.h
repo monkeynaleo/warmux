@@ -58,10 +58,14 @@ class AIMovementModule
     BACK_TO_JUMP,
     JUMPING,
     FLYING,
-    ROPING
+    ROPING,
+    BLOCKED
   } movement_type_t;
-
-  movement_type_t current_movement;
+  // Please, never modify m_current_movement directly
+  // but always use SetMovement, this is better for debugging
+  movement_type_t m_current_movement;
+  void SetMovement(movement_type_t move);
+  movement_type_t GetCurrentMovement() const;
 
   Point2i last_position;
   uint time_at_last_position;

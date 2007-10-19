@@ -278,13 +278,13 @@ const Character* AIShootModule::FindEnemy()
     return m_enemy;
   }
 
-  m_current_strategy = NO_STRATEGY;
+  SetStrategy(NO_STRATEGY);
 
   // Proximity enemy ?
   m_enemy = FindProximityEnemy(ActiveCharacter());
   if ( m_enemy != NULL ) {
 
-    m_current_strategy = NEAR_FROM_ENEMY;
+    SetStrategy(NEAR_FROM_ENEMY);
 
     GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injure "
                                      + m_enemy->GetName());
@@ -300,7 +300,7 @@ const Character* AIShootModule::FindEnemy()
   m_enemy = FindShootableEnemy(ActiveCharacter(), m_angle);
   if ( m_enemy != NULL ) {
 
-    m_current_strategy = SHOOT_FROM_POINT;
+    SetStrategy(SHOOT_FROM_POINT);
 
     GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" will shoot "
                                      + m_enemy->GetName());
@@ -313,11 +313,10 @@ const Character* AIShootModule::FindEnemy()
   }
 
   m_enemy = FindBazookaShootableEnemy(ActiveCharacter());
-  if (m_enemy)
-    {
-      m_current_strategy = SHOOT_BAZOOKA;
-      return m_enemy;
-    }
+  if (m_enemy != NULL) {
+    SetStrategy(SHOOT_BAZOOKA);
+    return m_enemy;
+  }
 
   m_current_strategy = NO_STRATEGY;
   m_angle = 0;
@@ -329,9 +328,12 @@ const Character* AIShootModule::FindEnemy()
 void AIShootModule::ChooseDirection() const
 {
   if ( m_enemy ) {
-
-    if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 5 )
+    // TODO : Replace by a more clever function
+    if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 10 )
       return;
+
+    MSG_DEBUG("ai", "Character: %d, enemy %d", 
+	      ActiveCharacter().GetCenterX(), m_enemy->GetCenterX());
 
     if ( ActiveCharacter().GetCenterX() < m_enemy->GetCenterX())
       ActiveCharacter().SetDirection(DIRECTION_RIGHT);
@@ -382,6 +384,11 @@ bool AIShootModule::Refresh(uint current_time)
   case SHOOT_BAZOOKA:
     ShootWithBazooka();
     return false;
+
+  case SKIP_TURN:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
+    Shoot();
+    break;
   }
 
   return true;
@@ -396,8 +403,8 @@ void AIShootModule::BeginTurn()
   m_enemy = NULL;
   m_last_shoot_time = 0;
   m_angle = 0;
-  m_current_strategy = NO_STRATEGY;
   m_has_finished = false;
+  SetStrategy(NO_STRATEGY);
 
   // Choose random direction for the moment
   ActiveCharacter().SetDirection( randomSync.GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
@@ -415,7 +422,14 @@ AIShootModule::AIShootModule(const AIMovementModule& to_remove) :
   std::cout << "o Artificial Intelligence Shoot module initialization" << std::endl;
 }
 
-void AIShootModule::SetNoStrategy()
+void AIShootModule::SetStrategy(strategy_t new_strategy)
 {
-  m_current_strategy = NO_STRATEGY;
+  if (m_current_strategy != new_strategy) {
+    MSG_DEBUG("ai", "%s changes his strategy: %d -> %d", 
+	      ActiveCharacter().GetName().c_str(), m_current_strategy, new_strategy);
+    if (IsDEBUGGING("ai")) {
+      std::cout << "SetStrategy: " << new_strategy << std::endl;
+    }
+    m_current_strategy = new_strategy;
+  }
 }

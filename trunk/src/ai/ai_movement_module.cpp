@@ -110,7 +110,7 @@ void AIMovementModule::PrepareJump()
 
   ActiveCharacter().body->StartWalk();
 
-  current_movement = BACK_TO_JUMP;
+  SetMovement(BACK_TO_JUMP);
   time_at_last_position = m_current_time;
 
   InverseDirection(false);
@@ -118,7 +118,7 @@ void AIMovementModule::PrepareJump()
 
 void AIMovementModule::GoBackToJump()
 {
-  ASSERT(current_movement == BACK_TO_JUMP);
+  ASSERT(GetCurrentMovement() == BACK_TO_JUMP);
 
   MakeStep();
 
@@ -139,13 +139,13 @@ void AIMovementModule::Jump()
   MSG_DEBUG("ai.move", "Jump!");
 
   //  GameMessages::GetInstance()->Add("try to jump!");
-  current_movement = JUMPING;
+  SetMovement(JUMPING);
   ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
 }
 
 void AIMovementModule::EndOfJump()
 {
-  ASSERT(current_movement == JUMPING);
+  ASSERT(GetCurrentMovement() == JUMPING);
   MSG_DEBUG("ai.move", "End of Jump!");
   //GameMessages::GetInstance()->Add("finished to jump");
 
@@ -163,7 +163,7 @@ void AIMovementModule::EndOfJump()
   } else {
     // No more blocked !!
     MSG_DEBUG("ai.move", "We are NO MORE blocked");
-    current_movement = WALKING;
+    SetMovement(WALKING);
   }
 }
 
@@ -176,10 +176,10 @@ void AIMovementModule::EndOfJump()
 void AIMovementModule::Walk()
 {
   // Animate skin
-  if ( current_movement != WALKING ) {
+  if ( GetCurrentMovement() != WALKING ) {
     ActiveCharacter().BeginMovementRL(100);
     ActiveCharacter().body->StartWalk();
-    current_movement = WALKING;
+    SetMovement(WALKING);
   }
 
   MakeStep();
@@ -236,7 +236,7 @@ void AIMovementModule::Walk()
 void AIMovementModule::StopWalking()
 {
   MSG_DEBUG("ai.move", "Stop to walk");
-  current_movement = NO_MOVEMENT;
+  SetMovement(NO_MOVEMENT);
   ActiveCharacter().body->StopWalk();
 }
 
@@ -275,7 +275,7 @@ void AIMovementModule::Move(uint current_time)
     return;
   }
 
-  switch (current_movement) {
+  switch (GetCurrentMovement()) {
 
   case NO_MOVEMENT:
     // Begin to walk
@@ -294,8 +294,12 @@ void AIMovementModule::Move(uint current_time)
 
   case JUMPING:
     EndOfJump();
-
     break;
+
+  case BLOCKED:
+    // nothing to do, just to wait...
+    break;
+
   default:
     break;
   }
@@ -304,9 +308,26 @@ void AIMovementModule::Move(uint current_time)
 void AIMovementModule::StopMoving()
 {
   //  GameMessages::GetInstance()->Add("stop moving");
+  
   StopWalking();
+  SetMovement(BLOCKED);
   //m_step++;
 }
+
+void AIMovementModule::SetMovement(movement_type_t move)
+{
+  if (m_current_movement != move) {
+    MSG_DEBUG("ai.move", "Old movement: %d, new movement: %d",
+	      m_current_movement, move);
+    m_current_movement = move;
+  }
+}
+
+AIMovementModule::movement_type_t AIMovementModule::GetCurrentMovement() const
+{
+  return m_current_movement;
+}
+
 
 // =================================================
 // Initialize Movement module when changing
@@ -314,7 +335,7 @@ void AIMovementModule::StopMoving()
 // =================================================
 void AIMovementModule::BeginTurn()
 {
-  current_movement = NO_MOVEMENT;
+  SetMovement(NO_MOVEMENT);
   time_at_last_position = 0;
   last_position = Point2i(0,0);
   last_blocked_position = Point2i(0,0);
@@ -329,7 +350,7 @@ AIMovementModule::AIMovementModule() :
   min_reachable_x(0),
   max_reachable_x(0),
   destination_point(Point2i(-1,-1)),
-  current_movement(NO_MOVEMENT),
+  m_current_movement(NO_MOVEMENT),
   last_position(Point2i(-1,-1)),
   time_at_last_position(0),
   last_blocked_position(Point2i(-1,-1))
@@ -358,7 +379,6 @@ void AIMovementModule::AddPointToAvoid(const Point2i& dangerous_point)
 // private:
 //  uint min_reachable_x, max_reachable_x;
 //  Point2i destination_point;
-
 void AIMovementModule::SetDestinationPoint(const Point2i& _destination_point)
 {
   destination_point = _destination_point;
@@ -388,9 +408,13 @@ bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
 
 bool AIMovementModule::IsProgressing() const
 {
-  if (destination_point.GetX()>max_reachable_x ||
-          destination_point.GetX()<min_reachable_x)
+  if (GetCurrentMovement() == BLOCKED)
     return false;
+
+//   if (destination_point.GetX() > max_reachable_x ||
+//       destination_point.GetX() < min_reachable_x)
+//     return false;
+
   return true;
 }
 

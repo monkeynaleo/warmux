@@ -56,7 +56,7 @@ void AIStupidEngine::BeginTurn()
   m_last_char = &ActiveCharacter();
   m_enemy = NULL;
 
-  m_begin_turn_time = 0;
+  m_begin_turn_time = Time::GetInstance()->ReadSec();
   m_step = 0;
 
   m_movement.BeginTurn();
@@ -86,8 +86,8 @@ void AIStupidEngine::Refresh()
   if (m_shoot.Refresh(m_current_time)) {
     m_movement.Move(m_current_time);
 
-    if (m_movement.IsProgressing())
-      m_shoot.SetNoStrategy();
+    if (!m_movement.IsProgressing())
+      m_shoot.SetStrategy(AIShootModule::SKIP_TURN);
   }
 
 //   switch (m_step)
