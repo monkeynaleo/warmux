@@ -60,6 +60,7 @@ void NetworkServer::SendChatMessage(const std::string& txt)
 void NetworkServer::ReceiveActions()
 {
   char* packet;
+  std::list<DistantComputer*>::iterator dst_cpu;
 
   while (ThreadToContinue())
   {
@@ -86,21 +87,26 @@ void NetworkServer::ReceiveActions()
           if (GetNbConnectedPlayers() >= max_nb_players)
             RejectIncoming();
         }
+
         SDL_Delay(100);
+      }
+
+      for (dst_cpu = cpu.begin();
+           dst_cpu != cpu.end() && ThreadToContinue();
+           dst_cpu++)
+      {
+        if((*dst_cpu)->force_disconnect)
+        {
+          dst_cpu = CloseConnection(dst_cpu);
+          continue;
+        }
       }
     }
 
-    std::list<DistantComputer*>::iterator dst_cpu;
     for (dst_cpu = cpu.begin();
          dst_cpu != cpu.end() && ThreadToContinue();
          dst_cpu++)
     {
-      if((*dst_cpu)->force_disconnect)
-      {
-        dst_cpu = CloseConnection(dst_cpu);
-        continue;
-      }
-
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
         // Read the size of the packet
