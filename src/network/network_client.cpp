@@ -65,92 +65,31 @@ std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<D
   return cpu.erase(closed);
 }
 
-void NetworkClient::ReceiveActions()
+void NetworkClient::HandleAction(Action* a, DistantComputer* sender)
 {
-  char* packet;
-
-  while (cpu.size()==1 && ThreadToContinue()) // While connected to server
-  {
-    int num_ready;
-
-    if (state == NETWORK_PLAYING && cpu.size() == 0)
+  switch (a->GetType()) {
+  case Action::ACTION_NICKNAME:
     {
-      // If while playing everybody disconnected, just quit
-      break;
+      std::string nickname = a->PopString();
+      std::cout<<"New nickname: " + nickname<< std::endl;
+      sender->nickname = nickname;
+      delete a;
     }
+    break;
 
-    //Loop while nothing is received
-    while (ThreadToContinue())
-    {
-      num_ready = SDLNet_CheckSockets(socket_set, 100);
-      // Means something is available
-      if (num_ready>0)
-        break;
-      // Means an error
-      else if (num_ready == -1)
-      {
-        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
-      }
-      // Means timeout, so continue
-    }
+  case Action::ACTION_MENU_ADD_TEAM:
+  case Action::ACTION_MENU_DEL_TEAM:
+    sender->ManageTeam(a);
+    delete a;
+    break;
 
-    std::list<DistantComputer*>::iterator dst_cpu;
-    for (dst_cpu = cpu.begin();
-         dst_cpu != cpu.end() && ThreadToContinue();
-         dst_cpu++)
-    {
-      if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
-      {
-        // Read the size of the packet
-        int packet_size = (*dst_cpu)->ReceiveDatas(packet);
-        if( packet_size == -1) // An error occured during the reception
-        {
-          dst_cpu = CloseConnection(dst_cpu);
-          continue;
-        } else
-        if( packet_size == 0) // We didn't received the full packet yet
-          continue;
+  case Action::ACTION_CHAT_MESSAGE:
+    sender->SendChatMessage(a);
+    delete a;
+    break;
 
-#ifdef LOG_NETWORK
-        if (fin != 0) {
-          int tmp = 0xFFFFFFFF;
-          write(fin, &packet_size, 4);
-          write(fin, packet, packet_size);
-          write(fin, &tmp, 4);
-        }
-#endif
-
-        Action* a = new Action(packet, (*dst_cpu));
-        MSG_DEBUG("network.traffic","Received action %s",
-                  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
-
-        switch (a->GetType()) {
-        case Action::ACTION_NICKNAME:
-          {
-            std::string nickname = a->PopString();
-            std::cout<<"New nickname: " + nickname<< std::endl;
-            (*dst_cpu)->nickname = nickname;
-            delete a;
-          }
-          break;
-
-        case Action::ACTION_MENU_ADD_TEAM:
-        case Action::ACTION_MENU_DEL_TEAM:
-          (*dst_cpu)->ManageTeam(a);
-          delete a;
-          break;
-
-        case Action::ACTION_CHAT_MESSAGE:
-          (*dst_cpu)->SendChatMessage(a);
-          delete a;
-          break;
-
-        default:
-          ActionHandler::GetInstance()->NewAction(a, false);
-        }
-        free(packet);
-      }
-    }
+  default:
+    ActionHandler::GetInstance()->NewAction(a, false);
   }
 }
 
