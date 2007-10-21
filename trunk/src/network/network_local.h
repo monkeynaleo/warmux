@@ -27,6 +27,10 @@
 
 class NetworkLocal : public Network
 {
+protected:
+  virtual void HandleAction(Action* a, DistantComputer* sender) { ASSERT(false) };
+  virtual void WaitActionSleep() { ASSERT(false) };
+
 public:
   ~NetworkLocal();
 
@@ -34,7 +38,6 @@ public:
   virtual const bool IsLocal() const { return true; }
 
   virtual void SendAction(Action* action);
-  virtual void ReceiveActions();
 
   virtual void SendChatMessage(const std::string& txt);
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);

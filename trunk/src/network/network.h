@@ -86,6 +86,8 @@ private:
   static bool stop_thread;
   bool turn_master_player;
 
+  void ReceiveActions();
+
 protected:
   network_state_t state;
 
@@ -103,6 +105,9 @@ protected:
 
   bool ThreadToContinue() const;
   static int ThreadRun(void* no_param);
+
+  virtual void HandleAction(Action* a, DistantComputer* sender) = 0;
+  virtual void WaitActionSleep() = 0;
 
   void DisconnectNetwork();
 public:
@@ -131,7 +136,6 @@ public:
   void SendPacket(char* packet, int size) const;
   virtual void SendAction(Action* action) const;
 
-  virtual void ReceiveActions() = 0;
   virtual void SendChatMessage(const std::string& txt) = 0;
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
 
