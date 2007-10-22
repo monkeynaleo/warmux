@@ -33,6 +33,8 @@
 #include "graphic/textured_polygon.h"
 #endif /* texturedPolygon import from SDL_gfx v2.0.15 */
 
+#include "graphic/fading_effect.h"
+
 /**
  * Default constructor.
  *
@@ -453,6 +455,10 @@ int Surface::LineColor(const uint &x1, const uint &x2, const uint &y1, const uin
 
 int Surface::AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color){
   return aalineRGBA( surface, x1, y1, x2, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+}
+
+int Surface::AAFadingLineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color1, const Color &color2){
+  return aafadingLineColor(surface, x1, y1, x2, y2,color1.GetColor(), color2.GetColor());
 }
 
 int Surface::CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color){

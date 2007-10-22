@@ -51,22 +51,6 @@ void Color::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
         alpha = a;
 }
 
-Uint8 Color::GetRed() const{
-        return red;
-}
-
-Uint8 Color::GetGreen() const{
-        return green;
-}
-
-Uint8 Color::GetBlue() const{
-        return blue;
-}
-
-Uint8 Color::GetAlpha() const{
-        return alpha;
-}
-
 SDL_Color Color::GetSDLColor() const{
         SDL_Color sdlColor;
 
@@ -76,4 +60,13 @@ SDL_Color Color::GetSDLColor() const{
         sdlColor.unused = alpha;
 
         return sdlColor;
+}
+
+Uint32 Color::GetColor() const
+{
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+  return (red << 24) | green << 16 | blue << 8 | alpha;
+#else
+  return (alpha << 24) | blue << 16 | green << 8 | red;
+#endif
 }
