@@ -28,7 +28,7 @@
 class NetworkLocal : public Network
 {
 protected:
-  virtual void HandleAction(Action* a, DistantComputer* sender) { ASSERT(false) };
+  virtual void HandleAction(Action* /*a*/, DistantComputer* /*sender*/) { ASSERT(false) };
   virtual void WaitActionSleep() { ASSERT(false) };
 
 public:
