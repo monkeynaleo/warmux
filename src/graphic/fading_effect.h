@@ -307,6 +307,12 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     int dx, dy, tmp, xdir, y0p1, x0pxdir, step;
     Uint32 color = color1;
 
+    if (y1 > y2) {
+        color = color1;
+        color1 = color2;
+        color2 = color;
+    }
+
     /*
      * Clip line and test if we have to draw
      */
@@ -332,9 +338,6 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         tmp = xx0;
         xx0 = xx1;
         xx1 = tmp;
-        tmp = color1;
-        color1 = color2;
-        color2 = tmp;
     }
 
     /*
@@ -402,7 +405,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     /*
      * Draw the initial pixel in the foreground color
      */
-    result |= pixelColorNolock(dst, x1, y1, color1);
+    result |= pixelColorNolock(dst, x1, y1, color2);
 
     /*
      * x-major or y-major?
@@ -425,7 +428,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         x0pxdir = xx0 + xdir;
         step = dy;
         while (--dy) {
-            color = interpolateColor(color1, color2, (float)dy / (float)step);
+            color = interpolateColor(color2, color1, (float)dy / (float)step);
             erracctmp = erracc;
             erracc += erradj;
             if (erracc <= erracctmp) {
@@ -465,7 +468,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         y0p1 = yy0 + 1;
         step = dx;
         while (--dx) {
-            color = interpolateColor(color1, color2, (float)dx / (float)step);
+            color = interpolateColor(color2, color1, (float)dx / (float)step);
             erracctmp = erracc;
             erracc += erradj;
             if (erracc <= erracctmp) {
@@ -495,7 +498,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
          * Draw final pixel, always exactly intersected by the line and doesn't
          * need to be weighted.
          */
-        result |= pixelColorNolock (dst, x2, y2, color);
+        result |= pixelColorNolock (dst, x2, y2, color1);
     }
 
     /* Unlock surface */
