@@ -42,10 +42,11 @@ class Color
 
     void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
-    Uint8 GetRed() const;
-    Uint8 GetGreen() const;
-    Uint8 GetBlue() const;
-    Uint8 GetAlpha() const;
+    Uint8 GetRed() const { return red; };
+    Uint8 GetGreen() const { return green; };
+    Uint8 GetBlue() const { return blue; };
+    Uint8 GetAlpha() const { return alpha; };
+    Uint32 GetColor() const;
 
     SDL_Color GetSDLColor() const;
 };

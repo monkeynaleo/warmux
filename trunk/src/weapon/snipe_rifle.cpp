@@ -172,21 +172,10 @@ void SnipeRifle::DrawBeam()
   Point2i pos2 = targeted_point - Camera::GetInstance()->GetPosition();
   float dst = laser_beam_start.Distance(targeted_point);
 
-  if(dst > SNIPE_RIFLE_MAX_BEAM_SIZE - SNIPE_RIFLE_FADE_BEAM_SIZE)
-  {
-    Point2i step = (pos1 - pos2) * SNIPE_RIFLE_FADE_BEAM_SIZE / SNIPE_RIFLE_MAX_BEAM_SIZE / 10;
+  AppWormux::GetInstance()->video->window.
+    AAFadingLineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color, Color(255, 0, 0, 0));
 
-    for(int i=1; i < 10; i++)
-    {
-      Point2i end_b1 = pos2 + (pos1 - pos2) * i * SNIPE_RIFLE_FADE_BEAM_SIZE / SNIPE_RIFLE_MAX_BEAM_SIZE / 10;
-      Point2i end_b2 = end_b1 + step;
- 
-      AppWormux::GetInstance()->video->window.AALineColor(end_b1.x, end_b2.x, end_b1.y, end_b2.y, laser_beam_color * Color(255,255,255,25 * i));
-    } 
-    pos2 = pos2 + (pos1 - pos2) * SNIPE_RIFLE_FADE_BEAM_SIZE / SNIPE_RIFLE_MAX_BEAM_SIZE;
-  }
-
-  AppWormux::GetInstance()->video->window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
+  // AppWormux::GetInstance()->video->window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
 
   // Set area of the screen to be redrawn:
   // Splited into little rectangles to avoid too large area of redraw

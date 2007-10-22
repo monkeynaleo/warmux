@@ -102,6 +102,7 @@ public:
   int VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color);
   int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
+  int AAFadingLineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color1, const Color &color2);
   int CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
   int FilledCircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
   int PieColor(const uint &x, const uint &y, const uint &rad, const int &start, const int &end, const Color &color);
