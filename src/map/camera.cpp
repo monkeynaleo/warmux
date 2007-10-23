@@ -53,6 +53,7 @@ void Camera::Reset()
 {
   auto_crop = true;
   followed_object = NULL;
+  SetXY(world.GetSize() / 2);
 }
 
 bool Camera::HasFixedX() const{
@@ -213,7 +214,7 @@ void Camera::Refresh(){
   // Check if player wants the camera to move
   TestCamera();
 
-  if (auto_crop)
+  if (auto_crop && followed_object != NULL)
     AutoCrop();
 }
 
