@@ -66,7 +66,7 @@ private:
 
   static Mouse * singleton;
   Mouse();
-  void ChoixVerPointe() const;
+  void GetDesignatedCharacter() const;
 
   void ActionLeftClic(bool shift = false) const;
   void ActionRightClic(bool shift = false) const;
