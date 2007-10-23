@@ -82,6 +82,7 @@ public:
 
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
+  void CenterPointer() const;
 
   // Choose the pointer
   const pointer_t GetPointer() const;

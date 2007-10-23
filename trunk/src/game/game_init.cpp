@@ -180,6 +180,7 @@ GameInit::GameInit():
   bool enable_sound = jukebox.UseEffects();
   jukebox.ActiveEffects(false);
 
+  Mouse::GetInstance()->CenterPointer();
   Mouse::GetInstance()->Hide();
 
   // Init all needed data
