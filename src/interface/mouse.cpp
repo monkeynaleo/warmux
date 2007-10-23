@@ -188,7 +188,7 @@ bool Mouse::HandleClic (const SDL_Event& event) const
   return true;
 }
 
-void Mouse::ChoixVerPointe() const
+void Mouse::GetDesignatedCharacter() const
 {
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return;
@@ -197,10 +197,10 @@ void Mouse::ChoixVerPointe() const
 
   // Which character is pointed by the mouse ? (appart from the active one)
   Interface::GetInstance()->character_under_cursor = NULL;
-  FOR_ALL_LIVING_CHARACTERS(equipe,ver){
-    if ((&(*ver) != &ActiveCharacter())
-       && ver->GetRect().Contains(pos_monde) ){
-      Interface::GetInstance()->character_under_cursor = &(*ver);
+  FOR_ALL_LIVING_CHARACTERS(team, character){
+    if ((&(*character) != &ActiveCharacter())
+       && character->GetRect().Contains(pos_monde) ){
+      Interface::GetInstance()->character_under_cursor = &(*character);
     }
   }
 
@@ -219,7 +219,7 @@ void Mouse::Refresh()
    * refresh rate is set... */
 #define NB_LOOP_BEFORE_HIDE 200
   static int counter = 0;
-  ChoixVerPointe();
+  GetDesignatedCharacter();
 
   Point2i pos = GetPosition();
 
