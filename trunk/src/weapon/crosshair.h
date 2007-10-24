@@ -30,6 +30,7 @@ class CrossHair
 {
 public:
   bool enable;
+  bool display;
 
 private:
   Surface image;
