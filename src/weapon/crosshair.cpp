@@ -29,6 +29,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "team/teams_list.h"
+#include "team/team.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
@@ -38,6 +39,7 @@
 CrossHair::CrossHair()
 {
   enable = false;
+  display = false;
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   image = resource_manager.LoadImage(res, "gfx/pointeur1");
   resource_manager.UnLoadXMLProfile(res);
@@ -56,13 +58,13 @@ void CrossHair::Refresh(double angle)
 
 void CrossHair::Draw() const
 {
-  if( !enable )
+  if(!display || !enable)
     return;
-  if( ActiveCharacter().IsDead() )
+  if(ActiveCharacter().IsDead())
     return;
-  if( Game::GetInstance()->ReadState() != Game::PLAYING )
+  if(Game::GetInstance()->ReadState() != Game::PLAYING)
     return;
-  Point2i tmp = ActiveCharacter().GetHandPosition() + crosshair_position;
+  Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition() + crosshair_position;
   AppWormux::GetInstance()->video->window.Blit(image, tmp - Camera::GetInstance()->GetPosition());
   world.ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
 }

@@ -323,6 +323,8 @@ public:
 private:
   // Angle in radian between -PI to PI
   double min_angle, max_angle;
+  // display crosshair ?
+  bool m_display_crosshair;
 
   /* If you need this, implement it (correctly)*/
   Weapon(const Weapon&);

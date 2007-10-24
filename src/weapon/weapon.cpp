@@ -90,6 +90,7 @@ Weapon::Weapon(Weapon_type type,
   m_fire_remanence_time = 100;
   max_strength = min_angle = max_angle = 0;
   use_flipping = true;
+  m_display_crosshair = true;
 
   origin = weapon_origin_HAND;
 
@@ -167,7 +168,10 @@ void Weapon::Select()
   ActiveCharacter().SetWeaponClothe();
 
   // is there a crosshair ?
-  if (!EqualsZero(min_angle - max_angle))
+  if (m_display_crosshair)
+    ActiveTeam().crosshair.display = true;
+
+  if(!EqualsZero(min_angle - max_angle))
     ActiveTeam().crosshair.enable = true;
 
   p_Select();
@@ -190,6 +194,7 @@ void Weapon::Select()
 void Weapon::Deselect()
 {
   ActiveTeam().crosshair.enable = false;
+  ActiveTeam().crosshair.display = false;
   m_is_active = false;
   MSG_DEBUG("weapon.change", "Deselect %s", m_name.c_str());
   p_Deselect();
@@ -642,6 +647,8 @@ bool Weapon::LoadXml(const xmlpp::Element * weapon)
   // change weapon after ? (for the grapple = true)
   XmlReader::ReadBool(elem, "change_weapon", m_can_change_weapon);
 
+  // Disable crosshair ?
+  XmlReader::ReadBool(elem, "display_crosshair", m_display_crosshair);
   // angle of weapon when drawing
   // if (min_angle == max_angle) no cross_hair !
   // between -90 to 90 degrees
@@ -650,6 +657,8 @@ bool Weapon::LoadXml(const xmlpp::Element * weapon)
   XmlReader::ReadInt(elem, "max_angle", max_angle_deg);
   min_angle = static_cast<double>(min_angle_deg) * M_PI / 180.0;
   max_angle = static_cast<double>(max_angle_deg) * M_PI / 180.0;
+  if(EqualsZero(min_angle - max_angle))
+    m_display_crosshair = false;
 
   // Load extra parameters if existing
   if (extra_params != NULL) extra_params->LoadXml(elem);

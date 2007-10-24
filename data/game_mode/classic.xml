@@ -135,7 +135,7 @@
       <max_controlled_turn_speed>10</max_controlled_turn_speed>
       <fuel_time>10</fuel_time>
       <rocket_force>2500</rocket_force>
-	  <allow_change_timeout>1</allow_change_timeout>
+      <allow_change_timeout>1</allow_change_timeout>
     </automatic_bazooka>
 
     <baseball>
@@ -145,7 +145,8 @@
       <damage>25</damage>
       <strength>2500</strength>
       <range>45</range>
-    </baseball>
+      <display_crosshair>0</display_crosshair>
+      </baseball>
 
     <bazooka>
       <max_strength>75</max_strength>
@@ -223,6 +224,7 @@
       <blast_range>100</blast_range>
       <timeout>6</timeout>
       <allow_change_timeout>1</allow_change_timeout>
+      <display_crosshair>0</display_crosshair>
     </gnulauncher>
 
     <grenade>
@@ -329,6 +331,7 @@
       <blast_range>100</blast_range>
       <timeout>6</timeout>
       <allow_change_timeout>1</allow_change_timeout>
+      <display_crosshair>0</display_crosshair>
     </polecatlauncher>
 
     <riot_bomb>
@@ -359,6 +362,7 @@
       <damage>35</damage>
       <explosion_range>15</explosion_range>
       <particle_range>16</particle_range>
+      <display_crosshair>0</display_crosshair>
     </snipe_rifle>
 
     <skip_turn>
@@ -389,6 +393,7 @@
       <blast_force>1000</blast_force>
       <speed>600</speed>
       <timeout>20</timeout>
+      <display_crosshair>0</display_crosshair>
     </tux>
 
     <syringe>
@@ -398,6 +403,7 @@
       <damage>10</damage>
       <turns>10</turns>
       <range>45</range>
+      <display_crosshair>0</display_crosshair>
     </syringe>
 
   </weapons>
