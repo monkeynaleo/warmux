@@ -76,16 +76,16 @@ bool Baseball::p_Shoot()
                          static_cast<int>(rayon * sin(angle)) );
     Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
 
-    FOR_ALL_LIVING_CHARACTERS(equipe,ver)
-    if (&(*ver) != &ActiveCharacter())
+    FOR_ALL_LIVING_CHARACTERS(team, character)
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( ver->ObjTouche(pos_to_check) )
+      if( character->Contain(pos_to_check) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
-        ver->SetMovement("fly");
-        Camera::GetInstance()->FollowObject (&(*ver), true);
+        character->SetSpeed(cfg().strength / character->GetMass(), angle);
+        character->SetMovement("fly");
+        Camera::GetInstance()->FollowObject(&(*character), true);
         return true;
       }
     }

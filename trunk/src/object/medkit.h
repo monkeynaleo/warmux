@@ -27,6 +27,7 @@
 
 class Team;
 class Character;
+class Action;
 //-----------------------------------------------------------------------------
 
 class Medkit : public ObjBox//public PhysicalObj
@@ -52,13 +53,10 @@ class Medkit : public ObjBox//public PhysicalObj
     static void LoadXml(const xmlpp::Element * object);
 
     void Draw();
-    void Refresh();
 
   protected:
-    // Signal Fall ending
-    //void SignalCollision();
-    //void SignalDrowning();
-    //void SignalGhostState(bool was_already_dead);
+    void ApplyBonus(Character *);
+    void GetValueFromAction(Action *);
 };
 
 //-----------------------------------------------------------------------------

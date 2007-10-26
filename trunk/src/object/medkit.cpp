@@ -28,6 +28,7 @@
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/app.h"
+#include "include/action.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -65,22 +66,10 @@ void Medkit::Draw()
   anim->Draw(GetPosition());
 }
 
-void Medkit::Refresh()
+void Medkit::ApplyBonus(Character * c)
 {
-  // If we touch a character, we remove the medkit
-  FOR_ALL_LIVING_CHARACTERS(equipe, ver)
-  {
-    if( ObjTouche(*ver) )
-    {
-      // here is the gift (truly a gift ?!? :)
-      ApplyMedkit (**equipe, *ver);
-      Ghost();
-      return;
-    }
-  }
-
-  // Refresh animation
-  if (!anim->IsFinished() && !parachute) anim->Update();
+  ApplyMedkit(c->AccessTeam(), *c);
+  Ghost();
 }
 
 void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) const {
@@ -103,4 +92,10 @@ void Medkit::LoadXml(const xmlpp::Element * object)
 {
   XmlReader::ReadInt(object,"life_points",start_life_points);
   XmlReader::ReadInt(object,"energy_boost",nbr_health);
+}
+
+void Medkit::GetValueFromAction(Action * a)
+{
+  ObjBox::GetValueFromAction(a);
+  nbr_health = a->PopInt();
 }

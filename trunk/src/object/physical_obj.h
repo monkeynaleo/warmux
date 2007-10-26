@@ -183,10 +183,10 @@ public:
   bool IsDead() const { return (IsGhost() || IsDrowned() || (m_alive == DEAD)); };
 
   // Are the two object in contact ? (uses test rectangles)
-  bool ObjTouche(const PhysicalObj &b) const { return GetTestRect().Intersect( b.GetTestRect() ); };
+  bool Overlapse(const PhysicalObj &b) const { return GetTestRect().Intersect( b.GetTestRect() ); };
 
   // Do the point p touch the object ?
-  bool ObjTouche(const Point2i &p) const { return  GetTestRect().Contains( p ); };
+  bool Contain(const Point2i &p) const { return  GetTestRect().Contains( p ); };
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters);
 
