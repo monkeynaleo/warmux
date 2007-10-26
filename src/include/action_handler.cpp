@@ -236,6 +236,15 @@ void Action_Game_NextTeam (Action *a)
 
 void Action_Game_SetState (Action *a)
 {
+  int random = a->PopInt();
+
+  if (!Network::GetInstance()->IsTurnMaster()) {
+    if (random != int(randomSync.GetLong(0, 65535))) {
+      Error("Network random generator is desynchronized!");
+      ASSERT(false);
+    }
+  }
+
   Game::GetInstance()->Really_SetState(Game::game_loop_state_t(a->PopInt()));
 }
 
