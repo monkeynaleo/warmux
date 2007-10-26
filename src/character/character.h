@@ -179,6 +179,7 @@ public:
 
   // Team owner
   const Team& GetTeam() const { return m_team; };
+  Team& AccessTeam() const { return m_team; };
   uint GetTeamIndex() const;
   uint GetCharacterIndex() const;
 

@@ -114,7 +114,7 @@ bool Airhammer::p_Shoot()
     if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( character->ObjTouche(Point2i(x, y)) )
+      if( character->Contain(Point2i(x, y)) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
         character->SetEnergyDelta(-(int)cfg().damage);

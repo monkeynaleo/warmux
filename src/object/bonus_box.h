@@ -29,6 +29,7 @@
 
 // Forward declarations
 class Character;
+class Action;
 //-----------------------------------------------------------------------------
 
 class BonusBox : public ObjBox
@@ -49,7 +50,10 @@ class BonusBox : public ObjBox
     static void LoadXml(const xmlpp::Element * object);
 
     void Draw();
-    void Refresh();
+  protected:
+    void ApplyBonus(Character *);
+    void Randomize();
+    void GetValueFromAction(Action *);
 };
 
 //-----------------------------------------------------------------------------

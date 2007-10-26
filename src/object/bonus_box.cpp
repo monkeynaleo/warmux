@@ -25,6 +25,7 @@
 #include <iostream>
 #include "character/character.h"
 #include "graphic/sprite.h"
+#include "include/action.h"
 #include "interface/game_msg.h"
 #include "network/randomsync.h"
 #include "team/macro.h"
@@ -53,31 +54,11 @@ BonusBox::BonusBox():
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
-
-  PickRandomWeapon();
 }
 
 void BonusBox::Draw()
 {
   anim->Draw(GetPosition());
-}
-
-void BonusBox::Refresh()
-{
-  // If we touch a character, we remove the bonus box
-  FOR_ALL_LIVING_CHARACTERS(team, character)
-  {
-    if( ObjTouche(*character) )
-    {
-      // here is the gift
-      ApplyBonus (**team, *character);
-      Ghost();
-      return;
-    }
-  }
-
-  // Refresh animation
-  if (!anim->IsFinished() && !parachute) anim->Update();
 }
 
 void BonusBox::PickRandomWeapon() {
@@ -87,38 +68,26 @@ void BonusBox::PickRandomWeapon() {
     MSG_DEBUG("bonus","Weapon count is zero");
     return;
   }
-  weapon_num = (int)randomSync.GetDouble(1,weapon_count);
-  contents = (weapon_map[weapon_num].first)->GetType();
-  if(ActiveTeam().ReadNbAmmos(contents)==INFINITE_AMMO) {
-    energy = 0;
-    nbr_ammo = 0;
-    MSG_DEBUG("bonus","Weapon %s already has infinite ammo",WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
-  }
-  else
-    nbr_ammo = weapon_map[weapon_num].second;
+  do {
+    weapon_num = (int)randomSync.GetDouble(1, weapon_count);
+    contents = (weapon_map[weapon_num].first)->GetType();
+  } while (ActiveTeam().ReadNbAmmos(contents) == INFINITE_AMMO);
+  nbr_ammo = weapon_map[weapon_num].second;
 }
 
-void BonusBox::ApplyBonus(Team &equipe, Character &/*ver*/) {
+void BonusBox::ApplyBonus(Character * c) {
   if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
-    /*this next 'if' should never be true, but I am loath to remove it just in case. */
-    if(equipe.ReadNbAmmos(contents)!=INFINITE_AMMO) {
-        equipe.m_nb_ammos[contents] += nbr_ammo;
-//        txt << Format(ngettext(
-//                "%s team has won %u %s!",
-//                "%s team has won %u %ss!",
-//                nbr_ammo),
-//            equipe.GetName().c_str(), nbr_ammo, WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
-
-        txt << WeaponsList::GetInstance()->
-                GetWeapon(contents)->
-                GetWeaponWinString(equipe.GetName().c_str(),nbr_ammo);
-    }
-    else {
-        txt << Format(gettext("%s team already has infinite ammo for the %s!"), //this should never appear
-            equipe.GetName().c_str(), WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
-    }
-  GameMessages::GetInstance()->Add (txt.str());
+  /*this next 'if' should never be true, but I am loath to remove it just in case. */
+  if(c->AccessTeam().ReadNbAmmos(contents) != INFINITE_AMMO) {
+    c->AccessTeam().m_nb_ammos[contents] += nbr_ammo;
+    txt << WeaponsList::GetInstance()->GetWeapon(contents)->
+                GetWeaponWinString(c->AccessTeam().GetName().c_str(), nbr_ammo);
+  } else {
+    txt << Format(gettext("%s team already has infinite ammo for the %s!"), //this should never appear
+           c->AccessTeam().GetName().c_str(), WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
+  }
+  GameMessages::GetInstance()->Add(txt.str());
 }
 
 
@@ -157,4 +126,17 @@ void BonusBox::LoadXml(const xmlpp::Element * object)
     }
     weapon_count+=prob;
   }
+}
+
+void BonusBox::GetValueFromAction(Action * a)
+{
+  ObjBox::GetValueFromAction(a);
+  int weapon_num = a->PopInt();
+  contents = (weapon_map[weapon_num].first)->GetType();
+  nbr_ammo = weapon_map[weapon_num].second;
+}
+
+void BonusBox::Randomize()
+{
+  PickRandomWeapon();
 }

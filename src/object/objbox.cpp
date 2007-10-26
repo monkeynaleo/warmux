@@ -29,16 +29,19 @@
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/app.h"
+#include "include/action.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "team/macro.h"
+#include "team/team.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
+#include "character/character.h"
 
 const uint SPEED = 5; // meter / seconde
 // XXX Unused !?
@@ -77,6 +80,13 @@ void ObjBox::SignalCollision()
   anim->Start();
 }
 
+void ObjBox::SignalObjectCollision(PhysicalObj * obj)
+{
+  SignalCollision();
+  if(typeid(*obj) == typeid(Character))
+    ApplyBonus((Character *)obj);
+}
+
 void ObjBox::DropBox()
 {
   if(parachute) {
@@ -88,12 +98,32 @@ void ObjBox::DropBox()
   }
 }
 
+void ObjBox::Refresh()
+{
+  // If we touch a character, we remove the medkit
+  FOR_ALL_LIVING_CHARACTERS(team, character)
+  {
+    if(Overlapse(*character)) {
+      ApplyBonus(&(*character));
+      Ghost();
+      return;
+    }
+  }
+  // Refresh animation
+  if (!anim->IsFinished() && !parachute) anim->Update();
+}
+
 //Boxes can explode...
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {
   if(energy > 0) return;
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
   ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
+}
+
+void ObjBox::GetValueFromAction(Action * a)
+{
+  start_life_points = a->PopInt();
 }
 
 //-----------------------------------------------------------------------------
@@ -131,6 +161,7 @@ bool ObjBox::NewBox()
     box = new Medkit();
   else
     box = new BonusBox();
+  box->Randomize();
   if(!box->PutRandomly(true,0)) {
     MSG_DEBUG("box", "Missed to put a box");
     delete box;

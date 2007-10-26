@@ -773,16 +773,16 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     DirectFall();
 
     // Check distance with characters
-    FOR_ALL_LIVING_CHARACTERS(equipe, ver) if (&(*ver) != this)
+    FOR_ALL_LIVING_CHARACTERS(team, character) if (&(*character) != this)
     {
       if (min_dst_with_characters == 0) {
 
-        if( ObjTouche(*ver) ) {
-            MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*ver).m_name.c_str());
+        if(Overlapse(*character)) {
+            MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*character).m_name.c_str());
             ok = false;
         }
       } else {
-        Point2i p1 = ver->GetCenter();
+        Point2i p1 = character->GetCenter();
         Point2i p2 = GetCenter();
         double dst = p1.Distance( p2 );
 
