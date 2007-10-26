@@ -405,7 +405,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     /*
      * Draw the initial pixel in the foreground color
      */
-    result |= pixelColorNolock(dst, x1, y1, color2);
+    result |= pixelColorNolock(dst, x1, y1, color1);
 
     /*
      * x-major or y-major?
@@ -498,7 +498,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
          * Draw final pixel, always exactly intersected by the line and doesn't
          * need to be weighted.
          */
-        result |= pixelColorNolock (dst, x2, y2, color1);
+        result |= pixelColorNolock (dst, x2, y2, color2);
     }
 
     /* Unlock surface */
