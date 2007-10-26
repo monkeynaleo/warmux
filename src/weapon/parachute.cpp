@@ -113,6 +113,7 @@ void Parachute::Refresh()
       }
     }
   } else { // We are on the ground
+    ActiveCharacter().SetMovement("walk");
     if(open) { // The parachute is opened
       if (!closing) { // We have just hit the ground. Start closing animation
         image->animation.SetPlayBackward(true);
@@ -161,6 +162,7 @@ void Parachute::HandleKeyPressed_MoveRight(bool shift)
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     m_x_extern = cfg().force_side_displacement;
   } else {
+    ActiveCharacter().SetMovement("walk");
     Weapon::HandleKeyPressed_MoveRight(shift);
   }
 }
@@ -179,6 +181,7 @@ void Parachute::HandleKeyPressed_MoveLeft(bool shift)
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
     m_x_extern = -cfg().force_side_displacement;
   } else {
+    ActiveCharacter().SetMovement("walk");
     Weapon::HandleKeyPressed_MoveLeft(shift);
   }
 }
