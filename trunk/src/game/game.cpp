@@ -43,6 +43,7 @@
 #include "map/wind.h"
 #include "menu/results_menu.h"
 #include "network/network.h"
+#include "network/randomsync.h"
 #include "object/objbox.h"
 #include "object/objects_list.h"
 #include "particles/particle.h"
@@ -664,10 +665,11 @@ void Game::Really_SetState(game_loop_state_t new_state)
 
 void Game::SetState(game_loop_state_t new_state, bool begin_game) const
 {
-  if (begin_game && Network::GetInstance()->IsServer())
+  if (begin_game && 
+      (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()))
     Network::GetInstance()->SetTurnMaster(true);
 
-  if (!Network::GetInstance()->IsTurnMaster() && !Network::GetInstance()->IsLocal())
+  if (!Network::GetInstance()->IsTurnMaster())
     return;
 
   // already in good state, nothing to do
@@ -677,7 +679,9 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
   if (Network::GetInstance()->IsTurnMaster())
     SyncCharacters();
 
-  Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE, new_state);
+  Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE);
+  a->Push(int(randomSync.GetLong(0, 65535)));
+  a->Push(new_state);
   ActionHandler::GetInstance()->NewAction(a);
 }
 
