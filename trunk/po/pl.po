@@ -1116,7 +1116,7 @@ msgid "Unable to open maps directory (%s)!"
 msgstr "Nie można otworzyć katalogu map (%s)!"
 
 #: src/map/maps_list.cpp:243
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nie można otworzyć katalogu map (%s)!"
 
@@ -1126,7 +1126,7 @@ msgstr "Nie można użyć tego portu!"
 
 #: src/network/network.cpp:109
 msgid "Unnamed"
-msgstr ""
+msgstr "Nienazwane"
 
 #: src/main.cpp:180
 msgid "Version"
