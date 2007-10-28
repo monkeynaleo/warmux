@@ -421,7 +421,7 @@ msgid "(dead)"
 msgstr "(mrtev)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:188
+#: src/menu/options_menu.cpp:189
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
@@ -584,6 +584,7 @@ msgstr "Napaka pri nalaganju ekipe :"
 msgid "Error loading team's data %s:"
 msgstr "Napaka pri nalaganju podatkov ekipe %s:"
 
+
 #: src/game/config.cpp:373
 #, c-format
 msgid ""
@@ -596,6 +597,7 @@ msgstr ""
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
+
 
 #: src/game/config.cpp:286
 #, c-format
@@ -643,7 +645,7 @@ msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Celozaslonski način?"
 
@@ -783,7 +785,7 @@ msgstr ""
 "Pridružite se kanalu #wormux na irc.freenode.net da si poiščite nekaj "
 "nasprotnikov."
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:125
 msgid "Language"
 msgstr "Jezik"
 
@@ -817,7 +819,7 @@ msgstr "Karte"
 msgid "Max number of players:"
 msgstr "Največje število igralcev:"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr "Največji FPS"
 
@@ -849,7 +851,7 @@ msgstr "Najbolj neuporaben"
 msgid "Most violent"
 msgstr "Najbolj nasilen"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:136
 msgid "Music?"
 msgstr "Glasba?"
 
@@ -900,11 +902,11 @@ msgstr "Igraj"
 msgid "Player"
 msgstr "Igralec"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Energija igralca?"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Ime igralca?"
 
@@ -937,7 +939,7 @@ msgstr "Branje osebne nastavitvene datoteke"
 msgid "Refresh"
 msgstr "Osveži"
 
-#: src/menu/options_menu.cpp:110
+#: src/menu/options_menu.cpp:111
 msgid "Resolution"
 msgstr "Ločljivost"
 
@@ -988,11 +990,11 @@ msgstr "Ostrostrelska puška"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
-#: src/menu/options_menu.cpp:138
+#: src/menu/options_menu.cpp:139
 msgid "Sound effects?"
 msgstr "Zvočni učinki?"
 
-#: src/menu/options_menu.cpp:157
+#: src/menu/options_menu.cpp:158
 msgid "Sound frequency"
 msgstr "Frekvenca zvoka"
 
@@ -1120,9 +1122,9 @@ msgid "Unable to open maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti imenika s kartami (%s)!"
 
 #: src/map/maps_list.cpp:243
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open personal maps directory (%s)!"
-msgstr "Ni bilo mogoče odpreti imenika s kartami (%s)!"
+msgstr "Ni bilo mogoče odpreti zasebnega imenika s kartami (%s)!"
 
 #: src/network/net_error_msg.cpp:40
 msgid "Unable to use this port!"
@@ -1130,7 +1132,7 @@ msgstr "Ni bilo mogoče uporabiti teh vrat!"
 
 #: src/network/network.cpp:109
 msgid "Unnamed"
-msgstr ""
+msgstr "Brezimjek"
 
 #: src/main.cpp:180
 msgid "Version"
@@ -1165,7 +1167,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
 
 #. Various options
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Vetrni delci?"
 
