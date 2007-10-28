@@ -48,9 +48,7 @@ team attempts to produce maximum damage to their opponents.
 .br
 * Key backspace: ("Vertical") jump
 .br
-* Key tab: Switch to next character
-.br
-* Key 'q': Switch to previous character
+* Key tab: Switch to next or previous (when Ctrl is pressed too) character
 .br
 * Key 'c': Recenter to active character
 .br
