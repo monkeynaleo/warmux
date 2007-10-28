@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-26 12:30+0300\n"
+"POT-Creation-Date: 2007-10-28 13:50+0100\n"
 "PO-Revision-Date: 2007-10-26 12:28+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -44,7 +44,7 @@ msgstr[0] "%i jucător e gata"
 msgstr[1] "%i jucători sunt gata"
 msgstr[2] "%i de jucători sunt gata"
 
-#: src/game/game.cpp:760
+#: src/game/game.cpp:764
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) a murit."
@@ -70,7 +70,7 @@ msgstr "Echipa %s"
 msgid "%s Team - Remote"
 msgstr "Echipa %s - la distanță"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -80,17 +80,17 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărții!"
 
-#: src/object/medkit.cpp:89
+#: src/object/medkit.cpp:78
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -98,13 +98,13 @@ msgstr[0] "%s a câștigat %u punct de energie!"
 msgstr[1] "%s a câștigat %u puncte de energie!"
 msgstr[2] "%s a câștigat %u de puncte de energie!"
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "Psihopatia sălășluiește în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game.cpp:749
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -115,7 +115,7 @@ msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
 
 # XXX: having "the" there is not that smart, translations might not make sense.
-#: src/object/bonus_box.cpp:118
+#: src/object/bonus_box.cpp:87
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Echipa %s are deja muniție infinită pentru %s!"
@@ -509,7 +509,7 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
 
-#: src/include/action_handler.cpp:299
+#: src/include/action_handler.cpp:308
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s încearcă să se conecteze cu o versiune diferită: client=%s, eu=%s."
@@ -540,7 +540,7 @@ msgstr "Ciocan pnumatic"
 msgid "All teams"
 msgstr "Toate echipele"
 
-#: src/game/game.cpp:426
+#: src/game/game.cpp:427
 msgid "And the winner is..."
 msgstr "Iar câștigătorul este..."
 
@@ -653,7 +653,7 @@ msgstr "Merite"
 msgid "Disco Grenade"
 msgstr "Grenadă disco"
 
-#: src/game/game.cpp:831
+#: src/game/game.cpp:835
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriți să abandonați? (D/N)"
 
@@ -665,7 +665,7 @@ msgstr "Durata unei ture"
 msgid "Dynamite"
 msgstr "Dinamită"
 
-#: src/game/game.cpp:211 src/game/game.cpp:217
+#: src/game/game.cpp:212 src/game/game.cpp:218
 msgid "END OF GAME"
 msgstr "SFÂRȘITUL JOCULUI"
 
@@ -706,7 +706,7 @@ msgstr "Eroare în timpul încărcării fișierul de configurare implicită: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Eroare în timpul încărcării modului de joc %s (fișierul %s):"
 
-#: src/game/game.cpp:110
+#: src/game/game.cpp:111
 #, c-format
 msgid ""
 "Error:\n"
@@ -827,7 +827,7 @@ msgstr ""
 "Cum se folosește : clic stânga pe țintă\n"
 "un proiectil per rundă"
 
-#: src/game/game.cpp:796
+#: src/game/game.cpp:800
 msgid "Hurry up, you are too slow !!"
 msgstr "Grăbește-te te miști prea încet!!"
 
@@ -869,7 +869,7 @@ msgstr "Inițializare sunete"
 msgid "Initialise teams"
 msgstr "Inițializare echipe"
 
-#: src/object/objbox.cpp:140
+#: src/object/objbox.cpp:171
 msgid "It's a present!"
 msgstr "E un cadou!"
 
@@ -1102,7 +1102,7 @@ msgstr "Frecvența sunetului"
 msgid "Sounds"
 msgstr "Sunete"
 
-#: src/game/game.cpp:78
+#: src/game/game.cpp:79
 msgid "Starting a new game"
 msgstr "Se începe un nou joc"
 
@@ -1260,7 +1260,7 @@ msgstr "Arme"
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:761
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"

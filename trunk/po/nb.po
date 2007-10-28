@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb-no\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-26 12:30+0300\n"
+"POT-Creation-Date: 2007-10-28 13:50+0100\n"
 "PO-Revision-Date: 2007-03-07 13:15+0100\n"
 "Last-Translator: Christian LOMSDALEN <christian@vindstille.net>\n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgid_plural "%i players ready"
 msgstr[0] " %i spiller klar"
 msgstr[1] " %i spillere klare"
 
-#: src/game/game.cpp:760
+#: src/game/game.cpp:764
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) døde."
@@ -65,7 +65,7 @@ msgstr "Lag"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s tok selvmord !"
@@ -75,29 +75,29 @@ msgstr "%s tok selvmord !"
 msgid "%s fps"
 msgstr "%s bps"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s har falt i vannet"
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s har falt av kartet !"
 
-#: src/object/medkit.cpp:89
+#: src/object/medkit.cpp:78
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har fått %u livspoeng !"
 msgstr[1] "%s har fått %u livspoeng !"
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er sinnsyk, han har drept et medlem av %s-laget !"
 
-#: src/game/game.cpp:749
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s døde fordi han klønet det til!"
@@ -107,7 +107,7 @@ msgstr "%s døde fordi han klønet det til!"
 msgid "%s is next to a mine!"
 msgstr "%s er i nærheten av en mine !"
 
-#: src/object/bonus_box.cpp:118
+#: src/object/bonus_box.cpp:87
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s-laget har allere uendelig med ammunisjon for %s !"
@@ -336,7 +336,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s-laget har vunnet %u %s !"
 msgstr[1] "%s-laget har vunnet %u %ss !"
 
-#: src/include/action_handler.cpp:299
+#: src/include/action_handler.cpp:308
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Forskjellige versjoner av Wormux : mottager=%s, tjener=%s"
@@ -367,7 +367,7 @@ msgstr "Lufthammer"
 msgid "All teams"
 msgstr "Alle lag"
 
-#: src/game/game.cpp:426
+#: src/game/game.cpp:427
 msgid "And the winner is..."
 msgstr ""
 
@@ -476,7 +476,7 @@ msgstr "Heder og ære"
 msgid "Disco Grenade"
 msgstr "Diskogranat"
 
-#: src/game/game.cpp:831
+#: src/game/game.cpp:835
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Vil du virkelig avslutte ? (J/N)"
 
@@ -488,7 +488,7 @@ msgstr "Varighet per runde"
 msgid "Dynamite"
 msgstr "Dynamitt"
 
-#: src/game/game.cpp:211 src/game/game.cpp:217
+#: src/game/game.cpp:212 src/game/game.cpp:218
 msgid "END OF GAME"
 msgstr "Spillet er slutt"
 
@@ -529,7 +529,7 @@ msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Lasting av spillmodus feilet %s (fil %s) :"
 
-#: src/game/game.cpp:110
+#: src/game/game.cpp:111
 #, c-format
 msgid ""
 "Error:\n"
@@ -637,7 +637,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:796
+#: src/game/game.cpp:800
 msgid "Hurry up, you are too slow !!"
 msgstr "Kjapp deg, du er for treg !!"
 
@@ -677,7 +677,7 @@ msgstr "Laster objekter"
 msgid "Initialise teams"
 msgstr "Laster lagene"
 
-#: src/object/objbox.cpp:140
+#: src/object/objbox.cpp:171
 msgid "It's a present!"
 msgstr "Det er en gave !"
 
@@ -909,7 +909,7 @@ msgstr "Lydstyrke ?"
 msgid "Sounds"
 msgstr "Lyder"
 
-#: src/game/game.cpp:78
+#: src/game/game.cpp:79
 msgid "Starting a new game"
 msgstr "Laster et nytt spill"
 
@@ -1058,7 +1058,7 @@ msgstr "Våpen"
 msgid "Website: "
 msgstr "Webside : "
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:761
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "For en skam for %s : han ble drept av en liten pistol !"

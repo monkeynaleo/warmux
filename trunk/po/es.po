@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-26 12:30+0300\n"
+"POT-Creation-Date: 2007-10-28 13:50+0100\n"
 "PO-Revision-Date: 2007-03-27 20:56+0100\n"
 "Last-Translator: Eduard BERMEJO <templer@iespana.es>\n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i jugador listo"
 msgstr[1] "%i jugadores listos"
 
-#: src/game/game.cpp:760
+#: src/game/game.cpp:764
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) ha muerto."
@@ -65,7 +65,7 @@ msgstr "Equipos"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se suicida!"
@@ -75,29 +75,29 @@ msgstr "%s se suicida!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s se ha caido al agua."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s se ha salido del mapa!"
 
-#: src/object/medkit.cpp:89
+#: src/object/medkit.cpp:78
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "¡El jugador %s ha ganado %u punto de vida!"
 msgstr[1] "¡El jugador %s ha ganado %u puntos de vida!"
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "¡ %s es un psicopata!!, ha matado a un miembro de su equipo : %s !"
 
-#: src/game/game.cpp:749
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "¡ %s se ha muerto porque es más tonto que abundio!"
@@ -107,7 +107,7 @@ msgstr "¡ %s se ha muerto porque es más tonto que abundio!"
 msgid "%s is next to a mine!"
 msgstr "¡ %s esta cerca de una mina!"
 
-#: src/object/bonus_box.cpp:118
+#: src/object/bonus_box.cpp:87
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "¡el equipo %s ahora tiene municion infinita para %s!"
@@ -336,7 +336,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "¡El equipo %s ha ganado %u %s!"
 msgstr[1] "¡Los equipos %s han ganado %u %ss!"
 
-#: src/include/action_handler.cpp:299
+#: src/include/action_handler.cpp:308
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Las versiones de Wormux son diferentes: cliente=%s, servidor=%s."
@@ -367,7 +367,7 @@ msgstr "Martillo Aereo"
 msgid "All teams"
 msgstr "Todos los equipos"
 
-#: src/game/game.cpp:426
+#: src/game/game.cpp:427
 msgid "And the winner is..."
 msgstr ""
 
@@ -476,7 +476,7 @@ msgstr "Creditos"
 msgid "Disco Grenade"
 msgstr "Granada disco"
 
-#: src/game/game.cpp:831
+#: src/game/game.cpp:835
 msgid "Do you really want to quit? (Y/N)"
 msgstr "¿Esta seguro que quiere salir? (S/N)"
 
@@ -488,7 +488,7 @@ msgstr "Duración del turno"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/game/game.cpp:211 src/game/game.cpp:217
+#: src/game/game.cpp:212 src/game/game.cpp:218
 msgid "END OF GAME"
 msgstr "FIN DEL JUEGO"
 
@@ -530,7 +530,7 @@ msgstr "Error cargando el fichero de configuración %s :"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Error cargando el modo de juego %s (fichero %s) :"
 
-#: src/game/game.cpp:110
+#: src/game/game.cpp:111
 #, c-format
 msgid ""
 "Error:\n"
@@ -639,7 +639,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:796
+#: src/game/game.cpp:800
 msgid "Hurry up, you are too slow !!"
 msgstr "Date prisa, eres demasiado lento !!"
 
@@ -679,7 +679,7 @@ msgstr "Inicialización de objetos"
 msgid "Initialise teams"
 msgstr "Inicialización de equipos"
 
-#: src/object/objbox.cpp:140
+#: src/object/objbox.cpp:171
 msgid "It's a present!"
 msgstr "Eso es un regalo!"
 
@@ -911,7 +911,7 @@ msgstr "Frecuencia del sonido"
 msgid "Sounds"
 msgstr "Opciones de sonido"
 
-#: src/game/game.cpp:78
+#: src/game/game.cpp:79
 msgid "Starting a new game"
 msgstr "Empezando un nuevo juego"
 
@@ -1061,7 +1061,7 @@ msgstr "Armas"
 msgid "Website: "
 msgstr "Sitio web: "
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:761
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "¡Que vergüenza para %s : lo ha matado una simple pistola!"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-26 12:30+0300\n"
+"POT-Creation-Date: 2007-10-28 13:50+0100\n"
 "PO-Revision-Date: 2006-06-16 11:36+0100\n"
 "Last-Translator: Bastian Salmela <bastian.salmela@hel.fi>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -39,7 +39,7 @@ msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game.cpp:760
+#: src/game/game.cpp:764
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (joukkue %s) kuoli."
@@ -65,7 +65,7 @@ msgstr ""
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suoritti itsemurhan !"
@@ -75,29 +75,29 @@ msgstr "%s suoritti itsemurhan !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
 
-#: src/object/medkit.cpp:89
+#: src/object/medkit.cpp:78
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/game/game.cpp:749
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kuoli kömpelyyteensä!"
@@ -107,7 +107,7 @@ msgstr "%s kuoli kömpelyyteensä!"
 msgid "%s is next to a mine!"
 msgstr "%s on aivan miinan vieressä!"
 
-#: src/object/bonus_box.cpp:118
+#: src/object/bonus_box.cpp:87
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -336,7 +336,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/include/action_handler.cpp:299
+#: src/include/action_handler.cpp:308
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -369,7 +369,7 @@ msgstr ""
 msgid "All teams"
 msgstr "Odota joukkueita"
 
-#: src/game/game.cpp:426
+#: src/game/game.cpp:427
 msgid "And the winner is..."
 msgstr ""
 
@@ -483,7 +483,7 @@ msgstr "Kiitokset"
 msgid "Disco Grenade"
 msgstr "Kranaatti"
 
-#: src/game/game.cpp:831
+#: src/game/game.cpp:835
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
@@ -496,7 +496,7 @@ msgstr "Vuoron kesto:"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game.cpp:211 src/game/game.cpp:217
+#: src/game/game.cpp:212 src/game/game.cpp:218
 msgid "END OF GAME"
 msgstr ""
 
@@ -536,7 +536,7 @@ msgstr "Virhe luettaessa asetustiedostoa: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Virhe ladataessa pelityyppiä %s (tiedosto %s):"
 
-#: src/game/game.cpp:110
+#: src/game/game.cpp:111
 #, c-format
 msgid ""
 "Error:\n"
@@ -644,7 +644,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:796
+#: src/game/game.cpp:800
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -684,7 +684,7 @@ msgstr "Alusta objektit"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/object/objbox.cpp:140
+#: src/object/objbox.cpp:171
 msgid "It's a present!"
 msgstr ""
 
@@ -933,7 +933,7 @@ msgstr "Ääniefektit?"
 msgid "Sounds"
 msgstr "Ääni asetukset"
 
-#: src/game/game.cpp:78
+#: src/game/game.cpp:79
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
@@ -1088,7 +1088,7 @@ msgstr "Ase:"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:761
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"

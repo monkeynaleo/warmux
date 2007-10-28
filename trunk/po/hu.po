@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-26 12:30+0300\n"
+"POT-Creation-Date: 2007-10-28 13:50+0100\n"
 "PO-Revision-Date: 2007-05-15 12:00+0200\n"
 "Last-Translator: Varga Istvan\n"
 "Language-Team: Hungarian\n"
@@ -30,7 +30,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i játékos kész"
 msgstr[1] "%i játékos kész"
 
-#: src/game/game.cpp:760
+#: src/game/game.cpp:764
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -56,7 +56,7 @@ msgstr "Csapatok"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
@@ -66,29 +66,29 @@ msgstr "%s öngyilkos lett!"
 msgid "%s fps"
 msgstr "%s képkocka/másodperc"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s vízbe esett."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
 
-#: src/object/medkit.cpp:89
+#: src/object/medkit.cpp:78
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s nyert %u energiapontot!"
 msgstr[1] "%s energiája %u egységgel nõtt!"
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s egy pszichopata, megölte a(z) %s csapat egy tagját!"
 
-#: src/game/game.cpp:749
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s egy kicsit ügyefogyott volt, ezért távozott az élõk sorából!"
@@ -98,7 +98,7 @@ msgstr "%s egy kicsit ügyefogyott volt, ezért távozott az élõk sorából!"
 msgid "%s is next to a mine!"
 msgstr "%s egy taposóakna mellett ténfereg!"
 
-#: src/object/bonus_box.cpp:118
+#: src/object/bonus_box.cpp:87
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "A(z) %s csapatnak végtelen lõszere van a(z) %s fegyverhez!"
@@ -367,7 +367,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
-#: src/include/action_handler.cpp:299
+#: src/include/action_handler.cpp:308
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s eltérõ verzióval próbál csatlakozni: kliens=%s, helyi=%s."
@@ -398,7 +398,7 @@ msgstr "Légkalapács"
 msgid "All teams"
 msgstr "Összes csapat"
 
-#: src/game/game.cpp:426
+#: src/game/game.cpp:427
 msgid "And the winner is..."
 msgstr ""
 
@@ -509,7 +509,7 @@ msgstr "Szerzõk"
 msgid "Disco Grenade"
 msgstr "Diszkógránát"
 
-#: src/game/game.cpp:831
+#: src/game/game.cpp:835
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Biztosan ki szeretnél lépni? (Y/N)"
 
@@ -521,7 +521,7 @@ msgstr "Egy forduló ideje"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:211 src/game/game.cpp:217
+#: src/game/game.cpp:212 src/game/game.cpp:218
 msgid "END OF GAME"
 msgstr "JÁTÉK VÉGE"
 
@@ -562,7 +562,7 @@ msgstr "Hiba a konfigurációs fájl betöltése közben: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Hiba a(z) %s játékmód betöltése közben (%s fájl):"
 
-#: src/game/game.cpp:110
+#: src/game/game.cpp:111
 #, c-format
 msgid ""
 "Error:\n"
@@ -668,7 +668,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:796
+#: src/game/game.cpp:800
 msgid "Hurry up, you are too slow !!"
 msgstr "Siess, túl lassú vagy!!"
 
@@ -706,7 +706,7 @@ msgstr "Hangok elõkészítése"
 msgid "Initialise teams"
 msgstr "Csapatok elõkészítése"
 
-#: src/object/objbox.cpp:140
+#: src/object/objbox.cpp:171
 msgid "It's a present!"
 msgstr "Ez egy ajándék!"
 
@@ -942,7 +942,7 @@ msgstr "Hangfrekvencia"
 msgid "Sounds"
 msgstr "Hangok"
 
-#: src/game/game.cpp:78
+#: src/game/game.cpp:79
 msgid "Starting a new game"
 msgstr "Új játék indítása"
 
@@ -1089,7 +1089,7 @@ msgstr "Fegyverek"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:761
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s - egy sima pisztoly kinyírta!"
