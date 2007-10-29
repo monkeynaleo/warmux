@@ -110,8 +110,11 @@ public:
   // Signal character damage
   void SignalCharacterDamage(const Character *character) const;
 
-  void SetCurrentBox(ObjBox * current_box);
-  ObjBox * GetCurrentBox();
+  // Bonus box handling
+  bool NewBox();
+  void AddNewBox(ObjBox *);
+  void SetCurrentBox(ObjBox * current_box) { current_ObjBox = current_box; };
+  ObjBox * GetCurrentBox() { return current_ObjBox; };
 
 private:
   Game();

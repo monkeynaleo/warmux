@@ -54,9 +54,9 @@ class Medkit : public ObjBox//public PhysicalObj
 
     void Draw();
 
-  protected:
     void ApplyBonus(Character *);
     void GetValueFromAction(Action *);
+    void StoreValue(Action *);
 };
 
 //-----------------------------------------------------------------------------

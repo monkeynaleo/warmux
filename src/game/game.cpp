@@ -45,6 +45,8 @@
 #include "network/network.h"
 #include "network/randomsync.h"
 #include "object/objbox.h"
+#include "object/bonus_box.h"
+#include "object/medkit.h"
 #include "object/objects_list.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
@@ -52,6 +54,7 @@
 #include "team/team.h"
 #include "team/results.h"
 #include "tool/i18n.h"
+#include "tool/random.h"
 #include "tool/stats.h"
 
 #ifdef DEBUG
@@ -521,7 +524,8 @@ void Game::RefreshClock()
             break;
           }
 
-          if (give_objbox && ObjBox::NewBox()) {
+          if (Network::GetInstance()->IsTurnMaster() && give_objbox && world.IsOpen()) {
+            NewBox();
             give_objbox = false;
             break;
           }
@@ -537,19 +541,59 @@ void Game::RefreshClock()
     }// if
 }
 
+bool Game::NewBox()
+{
+  uint nbr_teams = GetTeamsList().playing_list.size();
+  if(nbr_teams <= 1) {
+    MSG_DEBUG("box", "There is less than 2 teams in the game");
+    return false;
+  }
+  // .7 is a magic number to get the probability of boxes falling once every round close to .333
+  double randValue = Random::GetDouble();
+  if(randValue > (1 - pow(.5, 1.0 / nbr_teams))) {
+    return false;
+  }
+
+  // Type of box : 1 = MedKit, 2 = Bonus Box.
+  ObjBox * box;
+  int type;
+  if(Random::GetBool()) {
+    box = new Medkit();
+    type = 1;
+  } else {
+    box = new BonusBox();
+    type = 2;
+  }
+  // Randomize contain
+  box->Randomize();
+  // Storing value of bonus box and send it over network.
+  Action * a = new Action(Action::ACTION_NEW_BONUS_BOX);
+  a->Push(type);
+  if(!box->PutRandomly(true, 0)) {
+    MSG_DEBUG("box", "Missed to put a box");
+    delete box;
+  } else {
+    /* We only randomize value. The real box will be inserted into world later
+       using action handling (see include/action_handler.cpp */
+    box->StoreValue(a);
+    ActionHandler::GetInstance()->NewAction(a);
+    delete box; 
+    return true;
+  }
+  return false;
+}
+
 uint Game::GetRemainingTime() const
 {
   return duration;
 }
 
-void Game::SetCurrentBox(ObjBox * current_box)
+void Game::AddNewBox(ObjBox * box)
 {
-  current_ObjBox = current_box;
-}
-
-ObjBox * Game::GetCurrentBox()
-{
-  return current_ObjBox;
+  lst_objects.AddObject(box);
+  Camera::GetInstance()->FollowObject(box, true);
+  GameMessages::GetInstance()->Add(_("It's a present!"));
+  SetCurrentBox(box);
 }
 
 // Begining of a new turn

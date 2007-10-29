@@ -99,3 +99,9 @@ void Medkit::GetValueFromAction(Action * a)
   ObjBox::GetValueFromAction(a);
   nbr_health = a->PopInt();
 }
+
+void Medkit::StoreValue(Action * a)
+{
+  ObjBox::StoreValue(a);
+  a->Push(nbr_health);
+}
