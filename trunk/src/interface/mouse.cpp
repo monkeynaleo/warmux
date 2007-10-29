@@ -228,6 +228,7 @@ void Mouse::Refresh()
       Show();
       lastpos = pos;
       counter = NB_LOOP_BEFORE_HIDE;
+      ShowGameInterface();
     }
   else
     if (visible == MOUSE_VISIBLE)
