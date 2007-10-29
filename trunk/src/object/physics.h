@@ -156,6 +156,7 @@ protected:
   virtual void SignalDeath() { };
   virtual void SignalGhostState (bool) { };
   virtual void SignalDrowning() { };
+  virtual void SignalGoingOutOfWater() { };
   virtual void SignalRebound() { };
 
   // Make the object rebound
