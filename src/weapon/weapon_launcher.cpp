@@ -250,6 +250,8 @@ void WeaponProjectile::SignalDrowning()
   PhysicalObj::SignalDrowning();
   if (launcher != NULL && !launcher->ignore_drowning_signal)
     launcher->SignalProjectileDrowning();
+
+  jukebox.Play("share", "sink");
 }
 
 // Default behavior : signal to launcher a projectile is going out of water

@@ -56,7 +56,6 @@ class Anvil : public WeaponProjectile
     virtual void SignalObjectCollision(PhysicalObj * obj);
     virtual void SignalGroundCollision();
     virtual void SignalOutOfMap();
-    virtual void SignalDrowning();
 };
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,
@@ -89,11 +88,6 @@ void Anvil::SignalGroundCollision()
 void Anvil::SignalOutOfMap()
 {
   falling_sound.Stop();
-}
-
-void Anvil::SignalDrowning()
-{
-  jukebox.Play("share", "sink");
 }
 
 void Anvil::Refresh()
