@@ -51,7 +51,7 @@
 
   <sound sample="time/bip" file="time_bip.ogg" />
 
-  <sound sample="sink" file="sink.ogg" />
+  <sound sample="sink" file="../default/sink.ogg" />
 
   <sound sample="music/grenouilles" file="frog_music.ogg" />
 
