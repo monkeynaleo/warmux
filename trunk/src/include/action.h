@@ -93,6 +93,9 @@ public:
     ACTION_WEAPON_CONSTRUCTION,
     ACTION_WEAPON_GRAPPLE,
 
+    // Bonus Box
+    ACTION_NEW_BONUS_BOX,
+
     // ########################################################
     ACTION_NETWORK_SYNC_BEGIN,
     ACTION_NETWORK_SYNC_END,

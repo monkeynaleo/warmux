@@ -42,6 +42,9 @@
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "network/network_server.h"
+#include "object/bonus_box.h"
+#include "object/medkit.h"
+#include "object/objbox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/team_config.h"
@@ -232,6 +235,17 @@ void Action_Game_NextTeam (Action *a)
     Network::GetInstance()->SetTurnMaster(true);
   else
     Network::GetInstance()->SetTurnMaster(false);
+}
+
+void Action_NewBonusBox (Action *a)
+{
+  ObjBox * box;
+  switch(a->PopInt()) {
+    case 2 :               box = new BonusBox(); break;
+    default: /* case 1 */  box = new Medkit(); break;
+  };
+  box->GetValueFromAction(a);
+  Game::GetInstance()->AddNewBox(box);
 }
 
 void Action_Game_SetState (Action *a)
@@ -816,6 +830,8 @@ ActionHandler::ActionHandler():
   Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
   Register (Action::ACTION_WEAPON_GRAPPLE, "WEAPON_grapple", &Action_Weapon_Grapple);
 
+  // Bonus box
+  Register (Action::ACTION_NEW_BONUS_BOX, "BONUSBOX_new_box", &Action_NewBonusBox);
   // ########################################################
   Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
   Register (Action::ACTION_NETWORK_SYNC_END, "NETWORK_sync_end", &Action_Network_SyncEnd);

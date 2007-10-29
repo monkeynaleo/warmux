@@ -27,18 +27,13 @@
 #include "graphic/sprite.h"
 #include "include/action.h"
 #include "interface/game_msg.h"
-#include "network/randomsync.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/i18n.h"
+#include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
-
-// XXX Unused !?
-//const uint SPEED_PARACHUTE = 170; // ms per frame
-//const uint NB_MAX_TRY = 20;
-//const uint SPEED = 5; // meter / seconde
 
 BonusBox::BonusBox():
   ObjBox("bonus_box"),
@@ -50,6 +45,7 @@ BonusBox::BonusBox():
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "object/bonus_box");
   resource_manager.UnLoadXMLProfile(res);
+  weapon_num = 0;
 
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
@@ -62,14 +58,14 @@ void BonusBox::Draw()
 }
 
 void BonusBox::PickRandomWeapon() {
-  uint weapon_num = 0;
+  weapon_num = 0;
   if(weapon_count <= 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode
     energy = 0;
     MSG_DEBUG("bonus","Weapon count is zero");
     return;
   }
   do {
-    weapon_num = (int)randomSync.GetDouble(1, weapon_count);
+    weapon_num = (int)Random::GetDouble(1, weapon_count);
     contents = (weapon_map[weapon_num].first)->GetType();
   } while (ActiveTeam().ReadNbAmmos(contents) == INFINITE_AMMO);
   nbr_ammo = weapon_map[weapon_num].second;
@@ -131,7 +127,7 @@ void BonusBox::LoadXml(const xmlpp::Element * object)
 void BonusBox::GetValueFromAction(Action * a)
 {
   ObjBox::GetValueFromAction(a);
-  int weapon_num = a->PopInt();
+  weapon_num = a->PopInt();
   contents = (weapon_map[weapon_num].first)->GetType();
   nbr_ammo = weapon_map[weapon_num].second;
 }
@@ -139,4 +135,10 @@ void BonusBox::GetValueFromAction(Action * a)
 void BonusBox::Randomize()
 {
   PickRandomWeapon();
+}
+
+void BonusBox::StoreValue(Action * a)
+{
+  ObjBox::StoreValue(a);
+  a->Push(weapon_num);
 }

@@ -124,54 +124,18 @@ void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 void ObjBox::GetValueFromAction(Action * a)
 {
   start_life_points = a->PopInt();
+  SetXY(a->PopPoint2i());
+  SetSpeedXY(a->PopPoint2d());
+}
+
+void ObjBox::StoreValue(Action *a)
+{
+  a->Push(start_life_points);
+  a->Push(GetPosition());
+  a->Push(GetSpeed());
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // Static methods
-bool ObjBox::enable = true;
 int ObjBox::start_life_points = 41;
-
-// Make the box active?
-void ObjBox::Enable (bool _enable)
-{
-  MSG_DEBUG("box", "Enable ? %d", _enable);
-  enable = _enable;
-}
-
-bool ObjBox::NewBox()
-{
-  if (!enable) { // Boxes are disabled on closed map
-    return false;
-  }
-
-  uint nbr_teams=GetTeamsList().playing_list.size();
-  if(nbr_teams<=1) {
-    MSG_DEBUG("box", "There is less than 2 teams in the game");
-    return false;
-  }
-  // .7 is a magic number to get the probability of boxes falling once every round close to .333
-  double randValue = randomSync.GetDouble();
-  if(randValue > (1-pow(.5,1.0/nbr_teams))) {
-       return false;
-  }
-
-  ObjBox * box;
-  if(randomSync.GetBool())
-    box = new Medkit();
-  else
-    box = new BonusBox();
-  box->Randomize();
-  if(!box->PutRandomly(true,0)) {
-    MSG_DEBUG("box", "Missed to put a box");
-    delete box;
-  } else {
-    lst_objects.AddObject(box);
-    Camera::GetInstance()->FollowObject(box, true);
-    GameMessages::GetInstance()->Add (_("It's a present!"));
-    Game::GetInstance()->SetCurrentBox(box);
-    return true;
-  }
-
-  return false;
-}

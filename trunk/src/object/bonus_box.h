@@ -35,8 +35,8 @@ class Action;
 class BonusBox : public ObjBox
 {
   private:
-    uint nbr_ammo;
-
+    int nbr_ammo;
+    int weapon_num;
     Weapon::Weapon_type contents;
     static uint weapon_count;
     static std::map<int,std::pair<Weapon*,int> > weapon_map;
@@ -50,10 +50,10 @@ class BonusBox : public ObjBox
     static void LoadXml(const xmlpp::Element * object);
 
     void Draw();
-  protected:
     void ApplyBonus(Character *);
     void Randomize();
     void GetValueFromAction(Action *);
+    void StoreValue(Action *);
 };
 
 //-----------------------------------------------------------------------------
