@@ -496,6 +496,7 @@ void PhysicalObj::GoOutOfWater()
   SetAirResistFactor(m_cfg.m_air_resist_factor);
   SetGravityFactor(m_cfg.m_gravity_factor);
   StartMoving();
+  SignalGoingOutOfWater();
 }
 
 void PhysicalObj::SignalRebound()

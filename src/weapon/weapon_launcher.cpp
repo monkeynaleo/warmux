@@ -252,6 +252,15 @@ void WeaponProjectile::SignalDrowning()
     launcher->SignalProjectileDrowning();
 }
 
+// Default behavior : signal to launcher a projectile is going out of water
+void WeaponProjectile::SignalGoingOutOfWater()
+{
+  MSG_DEBUG("weapon.projectile", "SignalDrowning %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  PhysicalObj::SignalGoingOutOfWater();
+  if (launcher != NULL && !launcher->ignore_going_out_of_water_signal)
+    launcher->SignalProjectileGoingOutOfWater();
+}
+
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
@@ -344,6 +353,7 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
   ignore_explosion_signal = false;
   ignore_ghost_state_signal = false;
   ignore_drowning_signal = false;
+  ignore_going_out_of_water_signal = false;
 }
 
 WeaponLauncher::~WeaponLauncher()
