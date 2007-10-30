@@ -33,10 +33,14 @@
 
 class BazookaRocket : public WeaponProjectile
 {
+private:
   ParticleEngine smoke_engine;
+  SoundSample flying_sound;
 public:
   BazookaRocket(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
+  void Explosion();
+  void Shoot(double strength);
 protected:
   void SignalOutOfMap();
   void SignalDrowning();
@@ -64,16 +68,33 @@ void BazookaRocket::Refresh()
   }
 }
 
+void BazookaRocket::Shoot(double strength)
+{
+  WeaponProjectile::Shoot(strength);
+  flying_sound.Play("share","weapon/rocket_flying", -1);
+}
+
 void BazookaRocket::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
+
+  flying_sound.Stop();
 }
 
 void BazookaRocket::SignalDrowning()
 {
   smoke_engine.Stop();
   WeaponProjectile::SignalDrowning();
+
+  flying_sound.Stop();
+}
+
+void BazookaRocket::Explosion()
+{
+  WeaponProjectile::Explosion();
+
+  flying_sound.Stop();
 }
 
 //-----------------------------------------------------------------------------

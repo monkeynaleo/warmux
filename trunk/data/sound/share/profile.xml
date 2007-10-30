@@ -36,7 +36,9 @@
   <sound sample="weapon/anvil_collision" file="../../weapon/sound/anvil_collision.ogg" />
   <sound sample="weapon/supertux_flying" file="../../weapon/sound/supertux_flying.ogg" />
   <sound sample="weapon/supertux_swimming" file="../../weapon/sound/supertux_swimming.ogg" />
-  <sound sample="weapon/rocket_flying" file="../../weapon/sound/rocket_flying.ogg" />
+  <sound sample="weapon/rocket_flying" file="../../weapon/sound/supertux_flying.ogg" />
+  <sound sample="weapon/automatic_rocket_flying" file="../../weapon/sound/supertux_flying.ogg" />
+  <sound sample="weapon/riotbomb_rocket_flying" file="../../weapon/sound/supertux_flying.ogg" />
   <sound sample="weapon/aircraft_flying" file="../../weapon/sound/aircraft_flying.ogg" />
   <sound sample="weapon/aircraft_bomb_falling" file="../../weapon/sound/aircraft_bomb_falling.ogg" />
   <sound sample="weapon/grapple_attaching" file="../../weapon/sound/grapple_attaching.ogg" />

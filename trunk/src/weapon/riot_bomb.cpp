@@ -37,10 +37,13 @@
 class RiotBombRocket : public WeaponProjectile
 {
   ParticleEngine smoke_engine;
+  SoundSample flying_sound;
 public:
   RiotBombRocket(ExplosiveWeaponConfig& cfg,
                    WeaponLauncher * p_launcher);
   void Refresh();
+  void Explosion();
+  void Shoot(double strength);
 protected:
   void SignalOutOfMap();
   void SignalDrowning();
@@ -51,6 +54,12 @@ RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
   WeaponProjectile ("riot_rocket", cfg, p_launcher)
 {
   explode_colliding_character = true;
+}
+
+void RiotBombRocket::Shoot(double strength)
+{
+  WeaponProjectile::Shoot(strength);
+  flying_sound.Play("share","weapon/riotbomb_rocket_flying", -1);
 }
 
 void RiotBombRocket::Refresh()
@@ -72,13 +81,25 @@ void RiotBombRocket::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
+
+  flying_sound.Stop();
 }
 
 void RiotBombRocket::SignalDrowning()
 {
   smoke_engine.Stop();
   WeaponProjectile::SignalDrowning();
+
+  flying_sound.Stop();
 }
+
+void RiotBombRocket::Explosion()
+{
+  WeaponProjectile::Explosion();
+
+  flying_sound.Stop();
+}
+
 //-----------------------------------------------------------------------------
 
 RiotBomb::RiotBomb() :

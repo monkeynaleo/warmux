@@ -54,23 +54,26 @@ class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
 
 class RPG : public WeaponProjectile
 {
+private:
   ParticleEngine smoke_engine;
-  protected:
-    double angle_local;
-    Point2i m_targetPoint;
-    bool m_targeted;
-    double m_force;
-    uint m_lastrefresh;
-  public:
-    RPG(AutomaticBazookaConfig& cfg,
-        WeaponLauncher * p_launcher);
-    void Refresh();
-    void Shoot(double strength);
-    void SetTarget (int x,int y);
-
-  protected:
-    void SignalOutOfMap();
-    void SignalDrowning();
+  SoundSample flying_sound;
+protected:
+  double angle_local;
+  Point2i m_targetPoint;
+  bool m_targeted;
+  double m_force;
+  uint m_lastrefresh;
+public:
+  RPG(AutomaticBazookaConfig& cfg,
+      WeaponLauncher * p_launcher);
+  void Refresh();
+  void Shoot(double strength);
+  void Explosion();
+  void SetTarget (int x,int y);
+  
+protected:
+  void SignalOutOfMap();
+  void SignalDrowning();
 };
 
 RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
@@ -84,6 +87,7 @@ void RPG::Shoot(double strength)
 {
   WeaponProjectile::Shoot(strength);
   angle_local=ActiveCharacter().GetFiringAngle();
+  flying_sound.Play("share","weapon/automatic_rocket_flying", -1);
 }
 
 void RPG::Refresh()
@@ -156,12 +160,16 @@ void RPG::SignalDrowning()
 {
   smoke_engine.Stop();
   WeaponProjectile::SignalDrowning();
+
+  flying_sound.Stop();
 }
 
 void RPG::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
+
+  flying_sound.Stop();
 }
 
 // Set the coordinate of the target
@@ -169,6 +177,13 @@ void RPG::SetTarget (int x, int y)
 {
   m_targetPoint.x = x;
   m_targetPoint.y = y;
+}
+
+void RPG::Explosion()
+{
+  WeaponProjectile::Explosion();
+
+  flying_sound.Stop();
 }
 
 //-----------------------------------------------------------------------------
