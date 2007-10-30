@@ -41,6 +41,7 @@
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
 #include "tool/point.h"
+#include "tool/random.h"
 #include "tool/rectangle.h"
 #include "weapon/weapon_launcher.h"
 
@@ -725,7 +726,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   return false;
 }
 
-bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters)
+bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync)
 {
   uint bcl=0;
   uint NB_MAX_TRY = 60;
@@ -747,10 +748,16 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 
     if (on_top_of_world) {
       // Give a random position for x
-      position.x = randomSync.GetLong(0, world.GetWidth() - GetWidth());
+      if(net_sync)
+        position.x = randomSync.GetLong(0, world.GetWidth() - GetWidth());
+      else
+        position.x = Random::GetLong(0, world.GetWidth() - GetWidth());
       position.y = -GetHeight()+1;
     } else {
-      position = randomSync.GetPoint(world.GetSize() - GetSize() + 1);
+      if(net_sync)
+        position = randomSync.GetPoint(world.GetSize() - GetSize() + 1);
+      else
+        position = Random::GetPoint(world.GetSize() - GetSize() + 1);
     }
     SetXY(position);
     MSG_DEBUG("physic.position", "%s (try %u/%u) - Test in %d, %d",
