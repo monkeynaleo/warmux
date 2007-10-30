@@ -62,26 +62,26 @@
       <bounce_ball ammo="1">1</bounce_ball>
       <construct ammo="3">1</construct>
       <cluster_bomb ammo="1">1</cluster_bomb>
+      <disco_grenade ammo="1">1</disco_grenade>
       <dynamite ammo="2">1</dynamite>
       <gnulauncher ammo="1">1</gnulauncher>
+      <grapple ammo="2">1</grapple>
       <grenade ammo="3">1</grenade>
       <gun ammo="2">1</gun>
       <jetpack ammo="1">1</jetpack>
-      <disco_grenade ammo="1">1</disco_grenade>
       <lowgrav ammo="1">1</lowgrav>
       <m16 ammo="1">1</m16>
       <minelauncher ammo="2">1</minelauncher>
-      <grapple ammo="2">1</grapple>
       <parachute ammo="2">1</parachute>
       <polecatlauncher ammo="1">1</polecatlauncher>
       <riot_bomb ammo="1">1</riot_bomb>
       <shotgun ammo="1">1</shotgun>
-      <snipe_rifle ammo="1">1</snipe_rifle>
       <skip_turn ammo="3">1</skip_turn>
+      <snipe_rifle ammo="1">1</snipe_rifle>
+      <suicide ammo="1">1</suicide>
+      <syringe ammo="2">1</syringe>
       <teleportation ammo="2">1</teleportation>
       <tux ammo="1">1</tux>
-      <syringe ammo="2">1</syringe>
-      <suicide ammo="1">1</suicide>
     </probability>
     <life_points>40</life_points>
   </bonus_box>
@@ -146,7 +146,7 @@
       <strength>2500</strength>
       <range>45</range>
       <display_crosshair>0</display_crosshair>
-      </baseball>
+    </baseball>
 
     <bazooka>
       <max_strength>75</max_strength>
@@ -201,6 +201,20 @@
       <allow_change_timeout>1</allow_change_timeout>
     </cluster_bomb>
 
+    <disco_grenade>
+      <max_strength>40</max_strength>
+      <nb_ammo>1</nb_ammo>
+      <damage>80</damage>
+      <min_angle>-89</min_angle>
+      <max_angle>89</max_angle>
+      <explosion_range>125</explosion_range>
+      <particle_range>125</particle_range>
+      <blast_range>125</blast_range>
+      <blast_force>1500</blast_force>
+      <timeout>5</timeout>
+      <allow_change_timeout>1</allow_change_timeout>
+    </disco_grenade>
+
     <dynamite>
       <nb_ammo>3</nb_ammo>
       <damage>75</damage>
@@ -226,6 +240,16 @@
       <allow_change_timeout>1</allow_change_timeout>
       <display_crosshair>0</display_crosshair>
     </gnulauncher>
+
+    <grapple>
+      <nb_ammo>5</nb_ammo>
+      <change_weapon>1</change_weapon>
+      <min_angle>0</min_angle>
+      <max_angle>89</max_angle>
+      <max_rope_length>500</max_rope_length>
+      <automatic_growing_speed>12</automatic_growing_speed>
+      <push_force>15</push_force>
+    </grapple>
 
     <grenade>
       <max_strength>75</max_strength>
@@ -259,20 +283,6 @@
       <change_weapon>1</change_weapon>
     </jetpack>
 
-    <disco_grenade>
-      <max_strength>40</max_strength>
-      <nb_ammo>1</nb_ammo>
-      <damage>80</damage>
-      <min_angle>-89</min_angle>
-      <max_angle>89</max_angle>
-      <explosion_range>125</explosion_range>
-      <particle_range>125</particle_range>
-      <blast_range>125</blast_range>
-      <blast_force>1500</blast_force>
-      <timeout>5</timeout>
-      <allow_change_timeout>1</allow_change_timeout>
-    </disco_grenade>
-
     <lowgrav>
       <nb_ammo>3</nb_ammo>
       <change_weapon>1</change_weapon>
@@ -300,16 +310,6 @@
       <timeout>1</timeout>
       <escape_time>2</escape_time>
     </minelauncher>
-
-    <grapple>
-      <nb_ammo>5</nb_ammo>
-      <change_weapon>1</change_weapon>
-      <min_angle>0</min_angle>
-      <max_angle>89</max_angle>
-      <max_rope_length>500</max_rope_length>
-      <automatic_growing_speed>12</automatic_growing_speed>
-      <push_force>15</push_force>
-    </grapple>
 
     <parachute>
       <nb_ammo>2</nb_ammo>
@@ -354,6 +354,10 @@
       <damage>5</damage>
     </shotgun>
 
+    <skip_turn>
+      <nb_ammo>-1</nb_ammo>
+    </skip_turn>
+
     <snipe_rifle>
       <min_angle>-30</min_angle>
       <max_angle>45</max_angle>
@@ -365,10 +369,6 @@
       <display_crosshair>0</display_crosshair>
     </snipe_rifle>
 
-    <skip_turn>
-      <nb_ammo>-1</nb_ammo>
-    </skip_turn>
-
     <suicide>
       <nb_ammo>-1</nb_ammo>
       <damage>20</damage>
@@ -377,6 +377,16 @@
       <blast_force>3000</blast_force>
       <blast_range>100</blast_range>
     </suicide>
+
+    <syringe>
+      <min_angle>-50</min_angle>
+      <max_angle>85</max_angle>
+      <nb_ammo>-1</nb_ammo>
+      <damage>10</damage>
+      <turns>10</turns>
+      <range>45</range>
+      <display_crosshair>0</display_crosshair>
+    </syringe>
 
     <teleportation>
       <nb_ammo>2</nb_ammo>
@@ -395,16 +405,6 @@
       <timeout>20</timeout>
       <display_crosshair>0</display_crosshair>
     </tux>
-
-    <syringe>
-      <min_angle>-50</min_angle>
-      <max_angle>85</max_angle>
-      <nb_ammo>-1</nb_ammo>
-      <damage>10</damage>
-      <turns>10</turns>
-      <range>45</range>
-      <display_crosshair>0</display_crosshair>
-    </syringe>
 
   </weapons>
 
