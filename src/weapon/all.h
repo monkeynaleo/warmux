@@ -34,6 +34,7 @@
 #include "weapon/construct.h"
 #include "weapon/disco_grenade.h"
 #include "weapon/dynamite.h"
+#include "weapon/flamethrower.h"
 #include "weapon/gnu.h"
 #include "weapon/grapple.h"
 #include "weapon/grenade.h"

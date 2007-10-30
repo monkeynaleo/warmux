@@ -226,6 +226,16 @@
       <allow_change_timeout>1</allow_change_timeout>
     </dynamite>
 
+    <flamethrower>
+      <min_angle>-90</min_angle>
+      <max_angle>90</max_angle>
+      <nb_ammo>12</nb_ammo>
+      <unit_per_ammo>25</unit_per_ammo>
+      <damage>2</damage>
+      <explosion_range>3</explosion_range>
+      <particle_range>16</particle_range>
+    </flamethrower>
+
     <gnulauncher>
       <max_strength>25</max_strength>
       <nb_ammo>2</nb_ammo>
