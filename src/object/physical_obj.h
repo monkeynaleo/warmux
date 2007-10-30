@@ -188,7 +188,7 @@ public:
   // Do the point p touch the object ?
   bool Contain(const Point2i &p) const { return  GetTestRect().Contains( p ); };
 
-  bool PutRandomly(bool on_top_of_world, double min_dst_with_characters);
+  bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
 
 protected:
   virtual void SignalRebound();

@@ -569,7 +569,7 @@ bool Game::NewBox()
   // Storing value of bonus box and send it over network.
   Action * a = new Action(Action::ACTION_NEW_BONUS_BOX);
   a->Push(type);
-  if(!box->PutRandomly(true, 0)) {
+  if(!box->PutRandomly(true, 0, false)) {
     MSG_DEBUG("box", "Missed to put a box");
     delete box;
   } else {
