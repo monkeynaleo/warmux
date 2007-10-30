@@ -88,7 +88,7 @@ void MoveCharacter(Character &character)
   bool ghost;
 
   // If character moves out of the world, no need to go further: it is dead
-  if (character.GetDirection() == -1)
+  if (character.GetDirection() == DIRECTION_LEFT)
     ghost = character.IsOutsideWorld ( Point2i(-1, 0) );
   else
     ghost = character.IsOutsideWorld ( Point2i(1, 0) );
