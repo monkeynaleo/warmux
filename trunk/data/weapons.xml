@@ -160,6 +160,16 @@
     </image>
   </sprite>
 
+<!-- Flamethrower ressources -->
+  <surface name="flamethrower_ico" file="weapon/flamethrower/flame_ico.png" />
+  <surface name="flamethrower_fire" file="weapon/gun/gun_fire.png" />
+  <sprite name="flamethrower_bullet">
+    <image file="weapon/flamethrower/flame_bullet.png" />
+  </sprite>
+  <surface name="flamethrower" file="weapon/flamethrower/flame.png" />
+  <position name="flamethrower" origin="hand" x="4" y="10" />
+  <hole name="flamethrower" dx="31" dy="-10" />
+
 <!-- Grenade ressources -->
 
   <surface name="grenade_ico" file="weapon/grenade/grenade_ico.png" />

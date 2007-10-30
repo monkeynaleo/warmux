@@ -171,6 +171,7 @@ wormux_SOURCES = \
         weapon/disco_grenade.cpp weapon/disco_grenade.h \
         weapon/dynamite.cpp weapon/dynamite.h \
         weapon/explosion.cpp weapon/explosion.h \
+	weapon/flamethrower.cpp weapon/flamethrower.h \
         weapon/gnu.cpp weapon/gnu.h \
         weapon/grapple.cpp weapon/grapple.h \
         weapon/grenade.cpp weapon/grenade.h \

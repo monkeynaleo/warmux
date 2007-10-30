@@ -35,6 +35,7 @@
   <sound sample="weapon/dynamite_exp"    file="weapon/dynamite_exp.ogg" />
   <sound sample="weapon/dynamite_fuze"   file="weapon/dynamite_fuze.ogg" />
   <sound sample="weapon/explosion" file="explosion.ogg" />
+  <sound sample="weapon/flamethrower" file="weapon/flame.ogg" />  
   <sound sample="weapon/gnu_bounce" file="weapon/gnu_bounce.ogg" />
   <sound sample="weapon/grapple_attaching" file="weapon/grapple_attaching.ogg" />
   <sound sample="weapon/grapple_balancing" file="weapon/grapple_balancing.ogg" />
