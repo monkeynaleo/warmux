@@ -37,17 +37,19 @@
 // The Disco Grenade
 class DiscoGrenade : public WeaponProjectile
 {
-  protected:
-    bool have_played_music;
-
-    ParticleEngine smoke_engine;
-  public:
-    DiscoGrenade(ExplosiveWeaponConfig& cfg,
-                 WeaponLauncher * p_launcher);
-    void Refresh();
-  protected:
-    void Explosion();
-    void SignalOutOfMap();
+private:
+  bool have_played_music;
+  ParticleEngine smoke_engine;
+  SoundSample disco_sound;
+public:
+  DiscoGrenade(ExplosiveWeaponConfig& cfg,
+	       WeaponLauncher * p_launcher);
+  void Refresh();
+  void Shoot(double strength);
+protected:
+  void Explosion();
+  void SignalOutOfMap();
+  void SignalDrowning();
 };
 
 
@@ -59,6 +61,12 @@ DiscoGrenade::DiscoGrenade(ExplosiveWeaponConfig& cfg,
   m_rebound_sound = "weapon/disco_grenade_bounce";
   have_played_music = false;
   explode_with_collision = false;
+}
+
+void DiscoGrenade::Shoot(double strength)
+{
+  WeaponProjectile::Shoot(strength);
+  disco_sound.Play("share","weapon/disco_grenade_music", -1);
 }
 
 void DiscoGrenade::Explosion()
@@ -76,6 +84,8 @@ void DiscoGrenade::Explosion()
                                 GetY()+(int)(sin_angle[i]*(float)cfg.explosion_range)),
                                 1,particle_MAGIC_STAR,false,angle,2.5);
   }
+  disco_sound.Stop();
+  
   WeaponProjectile::Explosion();
 }
 
@@ -111,8 +121,19 @@ void DiscoGrenade::Refresh()
 void DiscoGrenade::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The disco grenade has left the dance floor before exploding"));
-  WeaponProjectile::SignalOutOfMap();
+  WeaponProjectile::SignalOutOfMap();  
+
+  disco_sound.Stop();
 }
+
+void DiscoGrenade::SignalDrowning()
+{
+  WeaponProjectile::SignalDrowning();
+
+  disco_sound.Stop();
+}
+
+
 
 //-----------------------------------------------------------------------------
 
