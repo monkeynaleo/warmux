@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE authors SYSTEM "authors.dtd">
-
 <authors>
 
   <team>
@@ -469,8 +468,15 @@
 	<nickname>François</nickname>
 	<name>François BLEIBEL</name>
 	<description>Write first network patch with Jerome Glatigny</description>
-	<email>francois.bleibel_AT_utbm_DOT_fr</email>
+	<email>maisola_AT_gmail_DOT_com</email>
 	<country>France</country>
+      </author>
+      <author>
+	<nickname>funebre</nickname>
+	<name>Carlo MAISOLA</name>
+	<description>Flamethrower weapon</description>
+	<email>francois.bleibel_AT_utbm_DOT_fr</email>
+	<country>Italy</country>
       </author>
       <author>
 	<nickname>Hanna</nickname>
