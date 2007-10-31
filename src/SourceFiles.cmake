@@ -158,6 +158,7 @@ weapon/crosshair.cpp
 weapon/disco_grenade.cpp
 weapon/dynamite.cpp
 weapon/explosion.cpp
+weapon/flamethrower.cpp
 weapon/gnu.cpp
 weapon/grapple.cpp
 weapon/grenade.cpp
