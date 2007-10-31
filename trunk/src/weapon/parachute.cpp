@@ -158,11 +158,14 @@ void Parachute::HandleKeyPressed_Shoot(bool shift)
 
 void Parachute::HandleKeyPressed_MoveRight(bool shift)
 {
+  if (closing) {
+    ActiveCharacter().BeginMovementRL(0);
+  }
+
   if(open) {
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     m_x_extern = cfg().force_side_displacement;
   } else {
-    ActiveCharacter().SetMovement("walk");
     Weapon::HandleKeyPressed_MoveRight(shift);
   }
 }
@@ -177,11 +180,14 @@ void Parachute::HandleKeyReleased_MoveRight(bool shift)
 
 void Parachute::HandleKeyPressed_MoveLeft(bool shift)
 {
+  if (closing) {
+    ActiveCharacter().BeginMovementRL(0);
+  }
+
   if(open) {
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
     m_x_extern = -cfg().force_side_displacement;
   } else {
-    ActiveCharacter().SetMovement("walk");
     Weapon::HandleKeyPressed_MoveLeft(shift);
   }
 }
