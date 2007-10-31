@@ -37,5 +37,5 @@
   <sound sample="laugh" file="hehe.ogg" />
   <sound sample="skip_turn" file="skip_turn.ogg" /> 
 
-  <sound sample="weapon/jetpack" file="../../weapon/sound/jetpack.ogg" />
+  <sound sample="weapon/jetpack" file="../share/weapon/jetpack.ogg" />
 </profile>

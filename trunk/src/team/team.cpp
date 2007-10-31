@@ -68,7 +68,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
 
   // Get sound profile
   if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", m_sound_profile))
-    m_sound_profile = "share";
+    m_sound_profile = "default";
 
   active_character = characters.end();
 
