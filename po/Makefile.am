@@ -305,6 +305,8 @@ POTFILES = \
         src/weapon/dynamite.h \
         src/weapon/explosion.cpp \
         src/weapon/explosion.h \
+        src/weapon/flamethrower.cpp \
+        src/weapon/flamethrower.h \
         src/weapon/gnu.cpp \
         src/weapon/gnu.h \
         src/weapon/grapple.cpp \
