@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-28 13:50+0100\n"
+"POT-Creation-Date: 2007-10-31 15:12+0100\n"
 "PO-Revision-Date: 2007-06-09 01:20+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -37,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i igrač spreman"
 msgstr[1] "%i igrač konektovan"
 
-#: src/game/game.cpp:764
+#: src/game/game.cpp:808
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s tim) je umro."
@@ -63,7 +63,7 @@ msgstr "Timovi"
 msgid "%s Team - Remote"
 msgstr "%s Tim - Udaljenost"
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:787
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izvršava samoubistvo !"
@@ -73,12 +73,12 @@ msgstr "%s izvršava samoubistvo !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:736
+#: src/game/game.cpp:780
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s je pao u vodu."
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s je ispao sa mape!"
@@ -90,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s je dobio %u poena energije!"
 msgstr[1] "%s je dobio %u poena energije"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopata, ubio je člana %s tima!"
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:797
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mrtav zato što je smotan!"
@@ -105,7 +105,7 @@ msgstr "%s je mrtav zato što je smotan!"
 msgid "%s is next to a mine!"
 msgstr "%s je pored mine!"
 
-#: src/object/bonus_box.cpp:87
+#: src/object/bonus_box.cpp:83
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s tim već ima neograničenu municiju za %s!"
@@ -141,14 +141,14 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:179
+#: src/weapon/anvil.cpp:173
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
-#: src/weapon/auto_bazooka.cpp:296
+#: src/weapon/auto_bazooka.cpp:311
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -162,7 +162,7 @@ msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
-#: src/weapon/bazooka.cpp:99
+#: src/weapon/bazooka.cpp:120
 #, fuzzy, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -200,7 +200,7 @@ msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
-#: src/weapon/disco_grenade.cpp:137
+#: src/weapon/disco_grenade.cpp:158
 #, fuzzy, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -212,6 +212,13 @@ msgstr[1] "tim '%s' dobio je %u %s!"
 #, fuzzy, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
+msgstr[0] "%s tim je dobio %u %s!"
+msgstr[1] "tim '%s' dobio je %u %s!"
+
+#: src/weapon/flamethrower.cpp:161
+#, fuzzy, c-format
+msgid "%s team has won %u flame-thrower!"
+msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
@@ -271,7 +278,7 @@ msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
-#: src/weapon/riot_bomb.cpp:102
+#: src/weapon/riot_bomb.cpp:123
 #, fuzzy, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -327,14 +334,14 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
-#: src/weapon/supertux.cpp:274
+#: src/weapon/supertux.cpp:302
 #, fuzzy, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
-#: src/include/action_handler.cpp:308
+#: src/include/action_handler.cpp:322
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux verzije su drugačije : klijent=%s, server=%s."
@@ -365,7 +372,7 @@ msgstr "Zračni čekić"
 msgid "All teams"
 msgstr "Svi timovi"
 
-#: src/game/game.cpp:427
+#: src/game/game.cpp:430
 msgid "And the winner is..."
 msgstr "I pobjednik je ..."
 
@@ -379,7 +386,7 @@ msgstr ""
 "Pucanje: space\n"
 "udarac po redu"
 
-#: src/weapon/anvil.cpp:125
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Nakovanj"
 
@@ -387,7 +394,7 @@ msgstr "Nakovanj"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/weapon/auto_bazooka.cpp:186
+#: src/weapon/auto_bazooka.cpp:201
 msgid "Automatic Bazooka"
 msgstr "Automatska bazuka"
 
@@ -399,7 +406,7 @@ msgstr "Neispravan socket ..."
 msgid "Baseball Bat"
 msgstr "Baseball palica"
 
-#: src/weapon/bazooka.cpp:84
+#: src/weapon/bazooka.cpp:105
 msgid "Bazooka"
 msgstr "Bazuka"
 
@@ -411,7 +418,7 @@ msgstr "Bacač plamena"
 msgid "Bounce Ball"
 msgstr "Bomba odskočica"
 
-#: src/weapon/supertux.cpp:149
+#: src/weapon/supertux.cpp:174
 msgid "Bye bye tux..."
 msgstr "Ćao ćao tux ..."
 
@@ -473,11 +480,11 @@ msgstr "Kontroliran od strane:"
 msgid "Credits"
 msgstr "Krediti"
 
-#: src/weapon/disco_grenade.cpp:122
+#: src/weapon/disco_grenade.cpp:143
 msgid "Disco Grenade"
 msgstr "Disko granata"
 
-#: src/game/game.cpp:835
+#: src/game/game.cpp:879
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Da li želite da izađete? (Y/N)"
 
@@ -489,7 +496,7 @@ msgstr "Trajanje reda"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:212 src/game/game.cpp:218
+#: src/game/game.cpp:215 src/game/game.cpp:221
 msgid "END OF GAME"
 msgstr "KRAJ IGRE"
 
@@ -531,7 +538,7 @@ msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Greška tokom učitavanja moda igre  %s (file %s):"
 
-#: src/game/game.cpp:111
+#: src/game/game.cpp:114
 #, c-format
 msgid ""
 "Error:\n"
@@ -565,6 +572,10 @@ msgstr "Greška: Nemoguće startati server"
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
+
+#: src/weapon/flamethrower.cpp:92
+msgid "Flame Thrower"
+msgstr ""
 
 #: src/menu/options_menu.cpp:83
 msgid "Fullscreen?"
@@ -629,7 +640,7 @@ msgid ""
 "an ammo per turn"
 msgstr "Kako korisiti : drži space<br> municija po redu"
 
-#: src/weapon/auto_bazooka.cpp:187
+#: src/weapon/auto_bazooka.cpp:202
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -641,7 +652,7 @@ msgstr ""
 "Pucaj : drži space do željene jačine udarca\n"
 "municija po redu"
 
-#: src/weapon/anvil.cpp:126
+#: src/weapon/anvil.cpp:120
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -650,7 +661,7 @@ msgstr ""
 "Kako koristiti : lijevi klik na metu\n"
 "municija po redu"
 
-#: src/game/game.cpp:800
+#: src/game/game.cpp:844
 msgid "Hurry up, you are too slow !!"
 msgstr "Požuri, previše si spor !!"
 
@@ -664,7 +675,7 @@ msgstr "Ako si ponašao bug ili imaš prijedlog pošalji nam email (na engleskom
 msgid "Initial energy"
 msgstr "Početna energija"
 
-#: src/weapon/bazooka.cpp:85 src/weapon/riot_bomb.cpp:88
+#: src/weapon/bazooka.cpp:106 src/weapon/riot_bomb.cpp:109
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -692,7 +703,7 @@ msgstr "Inicijaliziranje objekata"
 msgid "Initialise teams"
 msgstr "Inicijaliziranje timova"
 
-#: src/object/objbox.cpp:171
+#: src/game/game.cpp:595
 msgid "It's a present!"
 msgstr "Pa to je poklon!"
 
@@ -725,7 +736,7 @@ msgstr "Lokalni timovi:"
 msgid "LowGrav"
 msgstr "Smanji gravitaciju"
 
-#: src/map/map.cpp:295
+#: src/map/map.cpp:291
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapu %s, napravio je:"
@@ -865,7 +876,7 @@ msgstr "Osvježi"
 msgid "Resolution"
 msgstr "Rezolucija"
 
-#: src/weapon/riot_bomb.cpp:87
+#: src/weapon/riot_bomb.cpp:108
 msgid "Riot Bomb"
 msgstr "Džumbus bomba"
 
@@ -925,7 +936,7 @@ msgstr "Zvučna frekvencija"
 msgid "Sounds"
 msgstr "Zvučne opcije"
 
-#: src/game/game.cpp:79
+#: src/game/game.cpp:82
 msgid "Starting a new game"
 msgstr "Pokreni novu igru"
 
@@ -937,7 +948,7 @@ msgstr "Zaliha:"
 msgid "Submachine Gun"
 msgstr "Mašinka"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:211
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -965,7 +976,7 @@ msgstr "Kasetna bomba je napustila bojište prije nego je explodirala"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Tvor je napustio bojište prije nego je explodirao"
 
-#: src/weapon/auto_bazooka.cpp:163
+#: src/weapon/auto_bazooka.cpp:169
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automatksa rakete je napustila bojište..."
 
@@ -977,7 +988,7 @@ msgstr "Odskočica je napustila bojište prije nego je explodirala"
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Konekcija je istekla. Provjeri da firewall ne stoji na putu!"
 
-#: src/weapon/disco_grenade.cpp:113
+#: src/weapon/disco_grenade.cpp:123
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disko granata je napustila bojište prije nego je explodirala"
 
@@ -989,7 +1000,7 @@ msgstr "Granata napušta bojište prije explozije"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Drugi te čekaju! Probudi se :)"
 
-#: src/weapon/bazooka.cpp:69 src/weapon/riot_bomb.cpp:73
+#: src/weapon/bazooka.cpp:79 src/weapon/riot_bomb.cpp:82
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je napustila bojište..."
 
@@ -1080,7 +1091,7 @@ msgstr "Oružje:"
 msgid "Website: "
 msgstr "Web stranica:"
 
-#: src/game/game.cpp:761
+#: src/game/game.cpp:805
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Koja sramota za %s - koji je ubijen najobičnijim pištoljem!"
@@ -1129,7 +1140,7 @@ msgstr "Trebate barem dva važeća tima !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:437
+#: src/weapon/weapon_launcher.cpp:449
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 

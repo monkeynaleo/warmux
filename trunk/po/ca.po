@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-28 13:50+0100\n"
+"POT-Creation-Date: 2007-10-31 15:12+0100\n"
 "PO-Revision-Date: 2006-06-16 11:31+0100\n"
 "Last-Translator: Eduard BERMEJO <templer@iespana.es>\n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game.cpp:764
+#: src/game/game.cpp:808
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (L'equip %s ) ha mort."
@@ -65,7 +65,7 @@ msgstr ""
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:787
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s es suicida!"
@@ -75,12 +75,12 @@ msgstr "%s es suicida!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game.cpp:736
+#: src/game/game.cpp:780
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ha caigut del mapa."
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ha caigut del mapa!"
@@ -92,12 +92,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "El jugador '%s' ha augmentat %u punt de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip : %s!"
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:797
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ha mort per ser un maldestre!"
@@ -107,7 +107,7 @@ msgstr "%s ha mort per ser un maldestre!"
 msgid "%s is next to a mine!"
 msgstr "%s esta aprop d'una mina!"
 
-#: src/object/bonus_box.cpp:87
+#: src/object/bonus_box.cpp:83
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -143,14 +143,14 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:179
+#: src/weapon/anvil.cpp:173
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "El jugador '%s' ha conseguit %u atac aeri !"
 msgstr[1] "El jugador '%s' ha conseguit %u atacs aeris !"
 
-#: src/weapon/auto_bazooka.cpp:296
+#: src/weapon/auto_bazooka.cpp:311
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -164,7 +164,7 @@ msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "El jugador '%s' ha conseguit %u atac aeri !"
 msgstr[1] "El jugador '%s' ha conseguit %u atacs aeris !"
 
-#: src/weapon/bazooka.cpp:99
+#: src/weapon/bazooka.cpp:120
 #, fuzzy, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -202,7 +202,7 @@ msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "L'equip '%s' ha conseguit %u bazookas automatics!"
 msgstr[1] "L'equip '%s' ha conseguit %u bazooka(s) automatic(s)!"
 
-#: src/weapon/disco_grenade.cpp:137
+#: src/weapon/disco_grenade.cpp:158
 #, fuzzy, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -214,6 +214,13 @@ msgstr[1] "L'equip '%s' ha conseguit %u bazooka(s) automatic(s)!"
 #, fuzzy, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
+msgstr[0] "L'equip '%s' ha conseguit %u dinamita!"
+msgstr[1] "L'equip '%s' ha conseguit %u dinamitaes!"
+
+#: src/weapon/flamethrower.cpp:161
+#, fuzzy, c-format
+msgid "%s team has won %u flame-thrower!"
+msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "L'equip '%s' ha conseguit %u dinamita!"
 msgstr[1] "L'equip '%s' ha conseguit %u dinamitaes!"
 
@@ -273,7 +280,7 @@ msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] "L'equip '%s' ha conseguit %u bazookas automatics!"
 msgstr[1] "L'equip '%s' ha conseguit %u bazooka(s) automatic(s)!"
 
-#: src/weapon/riot_bomb.cpp:102
+#: src/weapon/riot_bomb.cpp:123
 #, fuzzy, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -329,14 +336,14 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "L'equip '%s' ha conseguit %u bazookas automatics!"
 msgstr[1] "L'equip '%s' ha conseguit %u bazooka(s) automatic(s)!"
 
-#: src/weapon/supertux.cpp:274
+#: src/weapon/supertux.cpp:302
 #, fuzzy, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'equip '%s' ha conseguit %u bazookas automatics!"
 msgstr[1] "L'equip '%s' ha conseguit %u bazooka(s) automatic(s)!"
 
-#: src/include/action_handler.cpp:308
+#: src/include/action_handler.cpp:322
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -369,7 +376,7 @@ msgstr ""
 msgid "All teams"
 msgstr "Carrega les mapas"
 
-#: src/game/game.cpp:427
+#: src/game/game.cpp:430
 msgid "And the winner is..."
 msgstr ""
 
@@ -380,7 +387,7 @@ msgid ""
 "a hit per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:125
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr ""
 
@@ -388,7 +395,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autors:"
 
-#: src/weapon/auto_bazooka.cpp:186
+#: src/weapon/auto_bazooka.cpp:201
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatic"
@@ -402,7 +409,7 @@ msgstr ""
 msgid "Baseball Bat"
 msgstr "Baseball"
 
-#: src/weapon/bazooka.cpp:84
+#: src/weapon/bazooka.cpp:105
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -414,7 +421,7 @@ msgstr ""
 msgid "Bounce Ball"
 msgstr ""
 
-#: src/weapon/supertux.cpp:149
+#: src/weapon/supertux.cpp:174
 msgid "Bye bye tux..."
 msgstr ""
 
@@ -482,12 +489,12 @@ msgstr ""
 msgid "Credits"
 msgstr ""
 
-#: src/weapon/disco_grenade.cpp:122
+#: src/weapon/disco_grenade.cpp:143
 #, fuzzy
 msgid "Disco Grenade"
 msgstr "Granada"
 
-#: src/game/game.cpp:835
+#: src/game/game.cpp:879
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Estar segur que vol sortir? (Y/N)"
 
@@ -500,7 +507,7 @@ msgstr "Duració del torn:"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/game/game.cpp:212 src/game/game.cpp:218
+#: src/game/game.cpp:215 src/game/game.cpp:221
 msgid "END OF GAME"
 msgstr ""
 
@@ -540,7 +547,7 @@ msgstr "Error carregant l'equip %s :"
 msgid "Error while loading game mode %s (file %s):"
 msgstr ""
 
-#: src/game/game.cpp:111
+#: src/game/game.cpp:114
 #, c-format
 msgid ""
 "Error:\n"
@@ -574,6 +581,10 @@ msgstr "Imposible obrir el directori dels mapas (%s) !"
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
+
+#: src/weapon/flamethrower.cpp:92
+msgid "Flame Thrower"
+msgstr ""
 
 #: src/menu/options_menu.cpp:83
 msgid "Fullscreen?"
@@ -635,7 +646,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:187
+#: src/weapon/auto_bazooka.cpp:202
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -643,13 +654,13 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:126
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:800
+#: src/game/game.cpp:844
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -664,7 +675,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energia inicial:"
 
-#: src/weapon/bazooka.cpp:85 src/weapon/riot_bomb.cpp:88
+#: src/weapon/bazooka.cpp:106 src/weapon/riot_bomb.cpp:109
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -689,7 +700,7 @@ msgstr "Inicialització de les dades"
 msgid "Initialise teams"
 msgstr "Inicialització de les dades"
 
-#: src/object/objbox.cpp:171
+#: src/game/game.cpp:595
 msgid "It's a present!"
 msgstr ""
 
@@ -723,7 +734,7 @@ msgstr "Carrega les mapas"
 msgid "LowGrav"
 msgstr ""
 
-#: src/map/map.cpp:295
+#: src/map/map.cpp:291
 #, fuzzy, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, fet per :"
@@ -867,7 +878,7 @@ msgstr ""
 msgid "Resolution"
 msgstr ""
 
-#: src/weapon/riot_bomb.cpp:87
+#: src/weapon/riot_bomb.cpp:108
 msgid "Riot Bomb"
 msgstr ""
 
@@ -930,7 +941,7 @@ msgstr "Efectes sonors?"
 msgid "Sounds"
 msgstr "Efectes sonors?"
 
-#: src/game/game.cpp:79
+#: src/game/game.cpp:82
 msgid "Starting a new game"
 msgstr "Començant un nou joc"
 
@@ -942,7 +953,7 @@ msgstr "Stock :"
 msgid "Submachine Gun"
 msgstr ""
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:211
 msgid "SuperTux"
 msgstr ""
 
@@ -972,7 +983,7 @@ msgstr "El cohet ha anat a un altre mon..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "El cohet ha anat a un altre mon..."
 
-#: src/weapon/auto_bazooka.cpp:163
+#: src/weapon/auto_bazooka.cpp:169
 msgid "The automatic rocket has left the battlefield..."
 msgstr "El cohet automatic ha anat a un altre món..."
 
@@ -985,7 +996,7 @@ msgstr "El cohet ha anat a un altre mon..."
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
 
-#: src/weapon/disco_grenade.cpp:113
+#: src/weapon/disco_grenade.cpp:123
 #, fuzzy
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "El cohet ha anat a un altre mon..."
@@ -999,7 +1010,7 @@ msgstr "El cohet ha anat a un altre mon..."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr ""
 
-#: src/weapon/bazooka.cpp:69 src/weapon/riot_bomb.cpp:73
+#: src/weapon/bazooka.cpp:79 src/weapon/riot_bomb.cpp:82
 #, fuzzy
 msgid "The rocket has left the battlefield..."
 msgstr "El cohet ha anat a un altre mon..."
@@ -1085,7 +1096,7 @@ msgstr "Arma :"
 msgid "Website: "
 msgstr "Lloc web: "
 
-#: src/game/game.cpp:761
+#: src/game/game.cpp:805
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s : ha estat mort per una simple pistola!"
@@ -1133,7 +1144,7 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:437
+#: src/weapon/weapon_launcher.cpp:449
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
