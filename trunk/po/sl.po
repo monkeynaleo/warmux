@@ -251,13 +251,13 @@ msgstr[2] "Ekipa %s je osvojila %u dinamite!"
 msgstr[3] "Ekipa %s je osvojila %u dinamitov!"
 
 #: src/weapon/flamethrower.cpp:161
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
-msgstr[0] "Ekipa %s je osvojila %u dinamit!"
-msgstr[1] "Ekipa %s je osvojila %u dinamita!"
-msgstr[2] "Ekipa %s je osvojila %u dinamite!"
-msgstr[3] "Ekipa %s je osvojila %u dinamitov!"
+msgstr[0] "Ekipa %s je osvojila %u metalec plamenov!"
+msgstr[1] "Ekipa %s je osvojila %u metalca plamenov!"
+msgstr[2] "Ekipa %s je osvojila %u metalce plamenov!"
+msgstr[3] "Ekipa %s je osvojila %u metalcev plamenov!"
 
 #: src/weapon/grapple.cpp:709
 #, c-format
@@ -654,7 +654,7 @@ msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
 
 #: src/weapon/flamethrower.cpp:92
 msgid "Flame Thrower"
-msgstr ""
+msgstr "Metalec plamenov"
 
 #: src/menu/options_menu.cpp:83
 msgid "Fullscreen?"
