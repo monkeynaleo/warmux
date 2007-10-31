@@ -715,6 +715,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>Jeese</nickname>
+	<name>JS</name>
+	<description>Draw the map EasterIsland</description>
+	<email>jeeseverly_AT_yahoo_dot_fr</email>
+	<country>france</country>
+      </author>
+      <author>
 	<nickname>Michael</nickname>
 	<name>Michael PRAGER</name>
 	<description>Map pirates. Also: Gentoo package maintainer (prepare ebuilds), German translation of Wormux</description>
