@@ -92,7 +92,6 @@ void RPG::Shoot(double strength)
 
 void RPG::Refresh()
 {
-  WeaponProjectile::Refresh();
   AutomaticBazookaConfig &acfg = dynamic_cast<AutomaticBazookaConfig &>(cfg);
   uint time = Time::GetInstance()->Read();
   float flying_time = time - begin_time;
