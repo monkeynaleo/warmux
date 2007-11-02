@@ -155,6 +155,9 @@ protected:
   virtual void Refresh() = 0;
   virtual bool p_Shoot() = 0;
 
+  virtual void DrawWeaponFire();
+  void DrawAmmoUnits() const;
+
 public:
   Weapon(Weapon_type type,
          const std::string &id,
@@ -172,9 +175,6 @@ public:
 
   // Draw the weapon
   virtual void Draw();
-  virtual void DrawWeaponFire();
-
-  void DrawAmmoUnits() const;
 
   Sprite & GetIcon() const { return *icon; };
   // Manage the numbers of ammunitions
