@@ -30,14 +30,20 @@ TextBox::TextBox (const std::string &label, const Point2i &_size,
 {
 }
 
-void TextBox::SetText(std::string const &new_txt)
+void TextBox::BasicSetText(std::string const &new_txt)
 {
   Font* font = Font::GetInstance(font_size, font_style);
 
   if (font->GetWidth(new_txt) < GetSizeX() - 5) {
     Label::SetText(new_txt);
-    cursor_pos = new_txt.size();
   }
+}
+
+void TextBox::SetText(std::string const &new_txt)
+{
+  BasicSetText(new_txt);
+
+  cursor_pos = new_txt.size();
 }
 
 void TextBox::SetCursor(std::string::size_type pos)
@@ -52,36 +58,36 @@ void TextBox::SetCursor(std::string::size_type pos)
   }
 }
 
-void TextBox::SendKey(const SDL_keysym& key)
+bool TextBox::SendKey(const SDL_keysym& key)
 {
+  bool used = true;
+
   need_redrawing = true;
 
-  std::string::size_type old_cursor_pos = cursor_pos;
-  std::string::size_type length = GetText().size();
   std::string new_txt = GetText();
 
   switch (key.sym){
   case SDLK_BACKSPACE:
-    if(cursor_pos != 0)
+    if (cursor_pos != 0)
       {
-	while((new_txt[--cursor_pos] & 0xc0) == 0x80)
+	while ((new_txt[--cursor_pos] & 0xc0) == 0x80)
 	  {
 	    new_txt.erase(cursor_pos, 1);
 	  }
 	new_txt.erase(cursor_pos, 1);
-	SetText(new_txt);
+	BasicSetText(new_txt);
       }
     break;
   case SDLK_LEFT:
-    if(cursor_pos != 0)
+    if (cursor_pos != 0)
       {
-	while((new_txt[--cursor_pos] & 0xc0) == 0x80);
+	while ((new_txt[--cursor_pos] & 0xc0) == 0x80);
       }
     break;
   case SDLK_RIGHT:
-    if(cursor_pos < new_txt.size())
+    if (cursor_pos < new_txt.size())
       {
-	while((new_txt[++cursor_pos] & 0xc0) == 0x80);
+	while ((new_txt[++cursor_pos] & 0xc0) == 0x80);
       }
     break;
 
@@ -96,6 +102,7 @@ void TextBox::SendKey(const SDL_keysym& key)
   case SDLK_END:
   case SDLK_PAGEUP:
   case SDLK_PAGEDOWN:
+    used = false;
     break;
 
   default:
@@ -116,12 +123,15 @@ void TextBox::SendKey(const SDL_keysym& key)
         new_txt.insert(cursor_pos++, 1, (char)((key.unicode & 0x3f) | 0x80));
       }
     }
-    SetText(new_txt);
+    else
+    {
+      used = false;
+    }  
+    BasicSetText(new_txt);
     break;
   }
   
-  if (GetText().size() == length)
-    cursor_pos = old_cursor_pos;
+  return used;
 }
 
 void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const

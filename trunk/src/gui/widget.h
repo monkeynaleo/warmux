@@ -55,7 +55,7 @@ class Widget : public Rectanglei
                     Surface& surf) const = 0;
   virtual void ForceRedraw() { need_redrawing = true; }; // set need_redrawing to true; -- virtual for widget_list
 
-  virtual void SendKey(const SDL_keysym&) { };
+  virtual bool SendKey(const SDL_keysym&) { return false; };
   virtual Widget* Click(const Point2i &, uint)
   {
     need_redrawing = true;
