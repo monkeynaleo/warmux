@@ -115,7 +115,7 @@ class Team
 
   // Access to the active weapon.
     Weapon& AccessWeapon() const;
-    Weapon& GetWeapon() const;
+    const Weapon& GetWeapon() const;
     Weapon::Weapon_type GetWeaponType() const;
 
   // Init the energy bar of the team.
