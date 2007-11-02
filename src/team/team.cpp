@@ -403,7 +403,7 @@ void Team::Refresh()
 }
 
 Weapon& Team::AccessWeapon() const { return *active_weapon; }
-Weapon& Team::GetWeapon() const { return *active_weapon; }
+const Weapon& Team::GetWeapon() const { return *active_weapon; }
 Weapon::Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
 
 bool Team::IsSameAs(const Team& other) const
