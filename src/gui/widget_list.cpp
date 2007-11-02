@@ -158,10 +158,12 @@ void WidgetList::Redraw(const Rectanglei& rect, Surface& surf)
   }
 }
 
-void WidgetList::SendKey(SDL_keysym key)
+bool WidgetList::SendKey(SDL_keysym key)
 {
-  if(last_clicked != NULL)
-    last_clicked -> SendKey(key);
+  if (last_clicked != NULL)
+    return last_clicked->SendKey(key);
+
+  return false;
 }
 
 Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
