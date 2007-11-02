@@ -47,7 +47,9 @@ Camera * Camera::GetInstance()
 Camera::Camera():
   auto_crop(true),
   followed_object(NULL)
-{}
+{
+  pointer_used_before_scroll = Mouse::POINTER_SELECT;
+}
 
 void Camera::Reset()
 {
@@ -117,6 +119,27 @@ void Camera::AutoCrop(){
   SetXY(dst * CAMERA_SPEED / dstMax );
 }
 
+void Camera::SaveMouseCursor()
+{
+  Mouse::pointer_t current_pointer = Mouse::GetInstance()->GetPointer();
+  if (current_pointer != Mouse::POINTER_MOVE &&
+      current_pointer != Mouse::POINTER_ARROW_UP &&
+      current_pointer != Mouse::POINTER_ARROW_DOWN &&
+      current_pointer != Mouse::POINTER_ARROW_LEFT &&
+      current_pointer != Mouse::POINTER_ARROW_RIGHT &&
+      current_pointer != Mouse::POINTER_ARROW_DOWN_RIGHT &&
+      current_pointer != Mouse::POINTER_ARROW_UP_RIGHT &&
+      current_pointer != Mouse::POINTER_ARROW_UP_LEFT &&
+      current_pointer != Mouse::POINTER_ARROW_DOWN_LEFT) {
+    pointer_used_before_scroll = current_pointer;
+  }
+}
+
+void Camera::RestoreMouseCursor()
+{
+  Mouse::GetInstance()->SetPointer(pointer_used_before_scroll);
+}
+
 void Camera::ScrollCamera()
 {
   static const unsigned int SENSIT_SCROLL_MOUSE = 50;
@@ -143,27 +166,10 @@ void Camera::ScrollCamera()
     }
 
   /* mouse pointer ***********************************************************/
-  /* FIXME I do not really like this code to be here... But I do not really
-   * know where to put it in a better place. I do not like the mouse to have a
-   * dependancy on camera. This may mean that mouse is a member of camera and
-   * not a singleton. If you have some better idea I would be glad to hear
-   * about it :) */
-
-  /* Do not reset the pointer if it was replaced by a specialized one */
-  Mouse::pointer_t current_pointer = Mouse::GetInstance()->GetPointer();
-  if (current_pointer != Mouse::POINTER_SELECT &&
-      current_pointer != Mouse::POINTER_ARROW_UP &&
-      current_pointer != Mouse::POINTER_ARROW_DOWN &&
-      current_pointer != Mouse::POINTER_ARROW_LEFT &&
-      current_pointer != Mouse::POINTER_ARROW_RIGHT &&
-      current_pointer != Mouse::POINTER_ARROW_DOWN_RIGHT &&
-      current_pointer != Mouse::POINTER_ARROW_UP_RIGHT &&
-      current_pointer != Mouse::POINTER_ARROW_UP_LEFT &&
-      current_pointer != Mouse::POINTER_ARROW_DOWN_LEFT)
-    return;
+  SaveMouseCursor();
 
   if (tstVector.IsNull())
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+    RestoreMouseCursor();
   else if (tstVector.IsXNull() && tstVector.y < 0)
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP);
   else if (tstVector.IsXNull() && tstVector.y > 0)
@@ -195,13 +201,13 @@ void Camera::TestCamera()
     {
       SetAutoCrop(false);
       SetXY(last_mouse_pos - curr_pos);
-      if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_SELECT)
-        Mouse::GetInstance()->SetPointer(Mouse::POINTER_MOVE);
+      SaveMouseCursor();
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_MOVE);
       last_mouse_pos = curr_pos;
       return;
     }
   else if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_MOVE)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+    RestoreMouseCursor();
 
   last_mouse_pos = curr_pos;
 

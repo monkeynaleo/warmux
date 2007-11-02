@@ -23,6 +23,7 @@
 #define SCROLLING_H
 
 #include "include/base.h"
+#include "interface/mouse.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
 
@@ -35,6 +36,11 @@ class Camera : public Rectanglei
 
 private:
   static Camera * singleton;
+
+  Mouse::pointer_t pointer_used_before_scroll;
+  void SaveMouseCursor();
+  void RestoreMouseCursor();
+
   void TestCamera();
   void ScrollCamera();
   Camera();
