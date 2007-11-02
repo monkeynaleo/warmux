@@ -358,19 +358,22 @@ void Character::SetLifeState(alive_t state)
 
 void Character::Draw()
 {
-  if (hidden) return;
+  if (hidden) return; // Character is teleporting...
 
   // Gone in another world ?
   if (IsGhost()) return;
 
   // Character is visible on carema? If not, just leave the function
-  Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
-  if (!rect.Intersect(*Camera::GetInstance())) return;
+  // WARNING, this optimization is disabled if it is the active character
+  // because there could be some tricks in the drawing of the weapon (cf bug #10242)
+  if (&ActiveCharacter() != this) {
+    Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
+    if (!rect.Intersect(*Camera::GetInstance())) return;
+  }
 
   bool dessine_perte = (lost_energy != 0);
   if ((&ActiveCharacter() == this
     && Game::GetInstance()->ReadState() != Game::END_TURN)
-      //&& (game_loop.ReadState() != jeuANIM_FIN_TOUR)
     || IsDead()
      )
     dessine_perte = false;
