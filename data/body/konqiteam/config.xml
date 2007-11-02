@@ -41,7 +41,7 @@
 <alias movement="weapon-m16-select" correspond_to="weapon-gun-select" />
 <alias movement="weapon-shotgun-select" correspond_to="weapon-gun-select" />
 <alias movement="weapon-snipe_rifle-select" correspond_to="weapon-gun-select" />
-
+<alias movement="weapon-flamethrower-select" correspond_to="weapon-gun-select" />
 
 
 
