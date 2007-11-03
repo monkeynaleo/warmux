@@ -70,8 +70,12 @@ void BazookaRocket::Refresh()
 
 void BazookaRocket::Shoot(double strength)
 {
-  WeaponProjectile::Shoot(strength);
+  // Sound must be launched before WeaponProjectile::Shoot
+  // in case that the projectile leave the battlefield
+  // during WeaponProjectile::Shoot (#bug 10241)
   flying_sound.Play("share","weapon/rocket_flying", -1);
+
+  WeaponProjectile::Shoot(strength);
 }
 
 void BazookaRocket::SignalOutOfMap()
