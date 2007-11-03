@@ -9,7 +9,7 @@
    <country>france</country>
  </author>
  
- <surface name="sky" file="dessin fond.png" />
+ <surface name="sky" file="dessin_fond.png" />
  <surface name="map" file="map.png" />
  <surface name="preview" file="preview.jpg" />
  
