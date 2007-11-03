@@ -94,7 +94,13 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 }
 
 void SuperTux::Shoot(double strength)
-{
+{    
+  // Sound must be launched before WeaponProjectile::Shoot
+  // in case that the projectile leave the battlefield
+  // during WeaponProjectile::Shoot (#bug 10241)
+  swimming = false;
+  flying_sound.Play("share","weapon/supertux_flying", -1);
+  
   WeaponProjectile::Shoot(strength);
   angle_rad = ActiveCharacter().GetFiringAngle();
 
@@ -102,9 +108,6 @@ void SuperTux::Shoot(double strength)
   time_next_action = global_time->Read();
   last_move = global_time->Read();
   begin_time = global_time->Read();
-
-  swimming = false;
-  flying_sound.Play("share","weapon/supertux_flying", -1);
 }
 
 void SuperTux::Refresh()

@@ -45,7 +45,6 @@ class DynamiteStick : public WeaponProjectile
     void Refresh();
 
   protected:
-    void ShootSound();
     void SignalExplosion();
     void SignalOutOfMap();
     void SignalDrowning();
@@ -70,6 +69,12 @@ void DynamiteStick::Shoot(double strength)
   image->Scale(ActiveCharacter().GetDirection(), 1);
   image->SetCurrentFrame(0);
   image->Start();
+
+  // Sound must be launched before WeaponProjectile::Shoot
+  // in case that the projectile leave the battlefield
+  // during WeaponProjectile::Shoot (#bug 10241)
+  timeout_sound.Play("share","weapon/dynamite_fuze", -1);
+
   WeaponProjectile::Shoot(strength);
 }
 
@@ -79,11 +84,6 @@ void DynamiteStick::Refresh()
   if (image->IsFinished())
     energy = 0;
   WeaponProjectile::Refresh();
-}
-
-void DynamiteStick::ShootSound()
-{
-  timeout_sound.Play("share","weapon/dynamite_fuze", -1);
 }
 
 void DynamiteStick::SignalExplosion()

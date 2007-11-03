@@ -64,9 +64,13 @@ DiscoGrenade::DiscoGrenade(ExplosiveWeaponConfig& cfg,
 }
 
 void DiscoGrenade::Shoot(double strength)
-{
-  WeaponProjectile::Shoot(strength);
+{   
+  // Sound must be launched before WeaponProjectile::Shoot
+  // in case that the projectile leave the battlefield
+  // during WeaponProjectile::Shoot (#bug 10241)
   disco_sound.Play("share","weapon/disco_grenade_music", -1);
+  
+  WeaponProjectile::Shoot(strength);
 }
 
 void DiscoGrenade::Explosion()
