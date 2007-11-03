@@ -31,10 +31,12 @@ static double NET_RAND_MAX = RAND_MAX; // client should use same RAND_MAX than s
 
 RandomSync randomSync;
 
-RandomSync::RandomSync(){
+RandomSync::RandomSync()
+{
 }
 
-void RandomSync::Init(){
+void RandomSync::Init()
+{
   //If we are a client on the network, we don't generate any random number
   if (Network::GetInstance()->IsClient()) return;
 
@@ -93,7 +95,8 @@ double RandomSync::GetRand()
   return nbr;
 }
 
-bool RandomSync::GetBool(){
+bool RandomSync::GetBool()
+{
   double middle = NET_RAND_MAX/2;
   return (GetRand() <= middle);
 }
@@ -101,15 +104,18 @@ bool RandomSync::GetBool(){
 /**
  *  Get a random number between min and max
  */
-long RandomSync::GetLong(long min, long max){
+long RandomSync::GetLong(long min, long max)
+{
         return min + (long)GetDouble(max - min + 1);
 }
 
-double RandomSync::GetDouble(double min, double max){
+double RandomSync::GetDouble(double min, double max)
+{
         return min + GetDouble(max - min);
 }
 
-double RandomSync::GetDouble(double max){
+double RandomSync::GetDouble(double max)
+{
         return max * GetDouble();
 }
 
@@ -118,7 +124,8 @@ double RandomSync::GetDouble(double max){
  *
  * @return A number between 0.0 and 1.0
  */
-double RandomSync::GetDouble(){
+double RandomSync::GetDouble()
+{
         return 1.0*GetRand()/(NET_RAND_MAX + 1.0);
 }
 
@@ -128,7 +135,8 @@ double RandomSync::GetDouble(){
  * @param rect The rectangle in which the returned point will be.
  * @return a random point.
  */
-Point2i RandomSync::GetPoint(const Rectanglei &rect){
+Point2i RandomSync::GetPoint(const Rectanglei &rect)
+{
         Point2i topPoint = rect.GetPosition();
         Point2i bottomPoint = rect.GetBottomRightPoint();
 	long x = GetLong(topPoint.x, bottomPoint.x);
@@ -136,7 +144,8 @@ Point2i RandomSync::GetPoint(const Rectanglei &rect){
         return Point2i( x, y );
 }
 
-Point2i RandomSync::GetPoint(const Point2i &pt){
+Point2i RandomSync::GetPoint(const Point2i &pt)
+{
 	long x = GetLong(0, pt.x - 1);
 	long y = GetLong(0, pt.y - 1);
         return Point2i( x, y );
