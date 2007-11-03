@@ -259,6 +259,22 @@ void Text::DrawCenterTopOnMap (const Point2i &pos) const
   AbsoluteDraw(surf, Point2i(pos.x - surf.GetWidth() / 2, pos.y) );
 }
 
+void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos) const
+{
+  // the cursor position is expressed in number of bytes, taking care of UTF8 character
+
+  //sort of a hacky way to get the cursor pos, but I couldn't find anything better...
+  uint txt_width = 0;
+  if (GetText() != "") {
+    Text txt_before_cursor(*this);
+    txt_before_cursor.Set(GetText().substr(0, cursor_pos));
+    txt_width = txt_before_cursor.GetWidth();
+  }
+  AppWormux::GetInstance()->video->window.VlineColor(text_pos.GetX()+txt_width,
+						     text_pos.GetY()+2,
+						     text_pos.GetY()+GetHeight()-4, c_white);
+}
+
 void Text::SetMaxWidth(uint max_w)
 {
   if (max_width == max_w)
@@ -271,13 +287,13 @@ void Text::SetMaxWidth(uint max_w)
 
 int Text::GetWidth() const
 {
-  if(txt=="" && !dummy) return 0;
+  if (txt=="" && !dummy) return 0;
   return surf.GetWidth();
 }
 
 int Text::GetHeight() const
 {
-  if(txt=="" && !dummy) return 0;
+  if (txt=="" && !dummy) return 0;
   return surf.GetHeight();
 }
 

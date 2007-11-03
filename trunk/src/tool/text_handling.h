@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2007 Jon de Andres
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,48 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Chat in game session.
- * nefertum - Jon de Andres
+ * Text typing, deleting, editing, ...
  *****************************************************************************/
 
-#ifndef CHAT_H
-#define CHAT_H
-
 #include <string>
-#include "include/base.h"
-#include "graphic/text_list.h"
+#include <SDL_keyboard.h>
 
-// Forward declarations
-class Text;
-#ifndef _SDL_events_h
-union SDL_Event;
-#endif
-
-class Chat
-{
- private:
-  /* If you need this, implement it (correctly)*/
-  Chat(const Chat&);
-  const Chat& operator=(const Chat&);
-  /*********************************************/
-
-  TextList chat;
-  Text* input;
-  Text* msg;
-  std::string::size_type cursor_pos;
-
-  bool check_input;
-  uint last_time;
-
- public:
-  Chat();
-  ~Chat();
-  void Show();
-  void ShowInput();
-  bool CheckInput() const;
-  void Clear();
-  void NewMessage(const std::string& msg);
-  void HandleKey(const SDL_Event& event);
-};
-
-#endif
+bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym& key);

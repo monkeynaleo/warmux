@@ -154,6 +154,7 @@ wormux_SOURCES = \
         tool/resource_manager.cpp tool/resource_manager.h \
         tool/stats.cpp tool/stats.h \
         tool/string_tools.cpp tool/string_tools.h \
+	tool/text_handling.cpp tool/text_handling.h \
         tool/vector2.h \
         tool/xml_document.cpp tool/xml_document.h \
         weapon/air_attack.cpp weapon/air_attack.h \

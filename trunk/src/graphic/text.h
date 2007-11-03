@@ -56,6 +56,9 @@ public:
   void DrawTopRight(const Point2i &position) const;
   void DrawCenterTop(const Point2i &position) const;
 
+  //Draw text cursor only (text_pos = position for DrawTopLeft)
+  void DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos) const;
+
   //Draw method using map coordinates
   void DrawCenterTopOnMap(const Point2i &position) const;
 
