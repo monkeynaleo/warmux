@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #include <SDL_events.h>
+#include "include/app.h"
 #include "network/admin_commands.h"
 #include "network/chat.h"
 #include "graphic/text_list.h"
@@ -28,6 +29,7 @@
 #include "graphic/text.h"
 #include "game/time.h"
 #include "tool/i18n.h"
+#include "tool/text_handling.h"
 
 const uint HEIGHT=15;
 const uint XPOS=25;
@@ -79,7 +81,10 @@ void Chat::ShowInput()
 
   /* FIXME where do those constants come from ?*/
   msg->DrawTopLeft(Point2i(25, 500));
-  input->DrawTopLeft(Point2i(25 + msg->GetWidth() + 5, 500));
+  if (input->GetText() != "") {
+    input->DrawTopLeft(Point2i(25 + msg->GetWidth() + 5, 500));
+    input->DrawCursor(Point2i(25 + msg->GetWidth() + 5, 500), cursor_pos);
+  }
 }
 
 bool Chat::CheckInput() const {
@@ -104,67 +109,24 @@ void Chat::HandleKey(const SDL_Event& event)
   SDL_keysym key = kbd_event.keysym;
   std::string txt = input->GetText();
 
-  switch (key.sym){
-
-  case SDLK_RETURN:
-    check_input = false; //Hide input widget
-    if ( txt[0] == '/' )
-  	  ProcessCommand(txt);
-    else
-    if (txt != "" )
-      Network::GetInstance()->SendChatMessage(txt); //Send 'txt' to other players
-    input->Set("");
-    break;
-
-  case SDLK_BACKSPACE:
-    if (kbd_event.state == 1 && txt != "")
-    {
-      int off = txt.size() -1;
-
-      // UTF-8 character encoded on 1 octet
-      if(! (txt[off] & 0x80))
-        txt = txt.substr(0, txt.size()-1);
-      else
-      // Multi-byte char
-      {
-        while(! (txt[off] & 0x40))
-          off--;
-      }
-      txt = txt.substr(0, off);
-    }
+  if (TextHandle(txt, cursor_pos, key)) {
     input->Set(txt);
-    break;
+  } else {
 
-  case SDLK_TAB:
-  case SDLK_CLEAR:
-  case SDLK_ESCAPE:
-  case SDLK_DELETE:
-  case SDLK_UP:
-  case SDLK_DOWN:
-  case SDLK_RIGHT:
-  case SDLK_LEFT:
-  case SDLK_INSERT:
-  case SDLK_HOME:
-  case SDLK_END:
-  case SDLK_PAGEUP:
-  case SDLK_PAGEDOWN:
-    break;
+    switch (key.sym){
+      
+    case SDLK_RETURN:
+      check_input = false; //Hide input widget
+      if ( txt[0] == '/' )
+	ProcessCommand(txt);
+      else
+	if (txt != "" )
+	  Network::GetInstance()->SendChatMessage(txt); //Send 'txt' to other players
+      input->Set("");
+      break;
 
-  default:
-    if (kbd_event.state == 1 && key.unicode > 0){
-      if(key.unicode < 0x80) { // 1 byte char
-        txt = txt + (char)key.unicode;
-      }
-      else if (key.unicode < 0x800) {// 2 byte char
-        txt = txt + (char)(((key.unicode & 0x7c0) >> 6) | 0xc0);
-        txt = txt + (char)((key.unicode & 0x3f) | 0x80);
-      }
-      else {// if (key.unicode < 0x10000) // 3 byte char
-        txt = txt + (char)(((key.unicode & 0xf000) >> 12) | 0xe0);
-        txt = txt + (char)(((key.unicode & 0xfc0) >> 6) | 0x80);
-        txt = txt + (char)((key.unicode & 0x3f) | 0x80);
-      }
-      input->Set(txt);
+    default:
+      break;
     }
   }
 }
