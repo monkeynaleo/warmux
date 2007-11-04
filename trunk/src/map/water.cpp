@@ -161,8 +161,8 @@ void Water::Draw(){
     wave_height[1] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*degree)*b);
     wave_height[2] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*degree)*b);
 
-    int top = max(wave_height[0], wave_height[1]);
-    height[x] = max(top, wave_height[2]);
+    int top = std::max(wave_height[0], wave_height[1]);
+    height[x] = std::max(top, wave_height[2]);
 
     int l = (int)(a + b) * 2 + wave_inc * wave_count + 32; // 32 = pattern slide length (in texture)
     assert(l < pattern_height);
