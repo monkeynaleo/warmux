@@ -145,8 +145,8 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
   if(obj != NULL) {
     m_overlapping_object = obj;
     lst_objects.AddOverlappedObject(this);
-    MSG_DEBUG("physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore",
-              GetName().c_str(), obj->GetName().c_str());
+    MSG_DEBUG("physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore during %d ms",
+              GetName().c_str(), obj->GetName().c_str(), timeout);
   } else {
     if(m_overlapping_object != NULL) {
       m_overlapping_object = NULL;
@@ -155,7 +155,7 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
     }
     return;
   }
-  if(timeout > 0)
+  if (timeout > 0)
     m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
 
   CheckOverlapping();
@@ -163,19 +163,22 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
 
 void PhysicalObj::CheckOverlapping()
 {
-  if(m_overlapping_object == NULL)
+  if (m_overlapping_object == NULL)
     return;
 
   // Check if we are still overlapping with this object
   if (!m_overlapping_object->GetTestRect().Intersect( GetTestRect() ) &&
-      m_minimum_overlapse_time >= Time::GetInstance()->Read())
+      m_minimum_overlapse_time <= Time::GetInstance()->Read())
   {
-    MSG_DEBUG( "physic.overlapping", "\"%s\" just stopped overlapping with \"%s\"", GetName().c_str(), m_overlapping_object->GetName().c_str());
+    MSG_DEBUG("physic.overlapping", "\"%s\" just stopped overlapping with \"%s\" (%d ms left)", 
+	      GetName().c_str(), m_overlapping_object->GetName().c_str(),
+	      (m_minimum_overlapse_time - Time::GetInstance()->Read()));
     SetOverlappingObject(NULL);
   }
   else
   {
-    MSG_DEBUG( "physic.overlapping", "\"%s\" is overlapping with \"%s\"", GetName().c_str(), m_overlapping_object->GetName().c_str());
+    MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\"", 
+	       GetName().c_str(), m_overlapping_object->GetName().c_str());
   }
 }
 
