@@ -37,7 +37,6 @@ gui/button.cpp
 gui/button_text.cpp
 gui/check_box.cpp
 gui/combo_box.cpp
-gui/combo_box.h
 gui/energy_bar.cpp
 gui/label.cpp
 gui/list_box.cpp
@@ -60,8 +59,8 @@ include/binreloc.c
 include/constant.cpp
 interface/cursor.cpp
 interface/game_msg.cpp
-interface/joystick.cpp
 interface/interface.cpp
+interface/joystick.cpp
 interface/keyboard.cpp
 interface/loading_screen.cpp
 interface/man_machine_interface.cpp
@@ -92,6 +91,7 @@ menu/options_menu.cpp
 menu/results_menu.cpp
 menu/team_box.cpp
 menu/teams_selection_box.cpp
+msvc/getopt.c
 network/admin_commands.cpp
 network/chat.cpp
 network/distant_cpu.cpp
@@ -143,6 +143,7 @@ tool/random.cpp
 tool/resource_manager.cpp
 tool/stats.cpp
 tool/string_tools.cpp
+tool/text_handling.cpp
 tool/xml_document.cpp
 weapon/air_attack.cpp
 weapon/airhammer.cpp
@@ -164,7 +165,6 @@ weapon/grapple.cpp
 weapon/grenade.cpp
 weapon/gun.cpp
 weapon/jetpack.cpp
-weapon/weapon_launcher.cpp
 weapon/lowgrav.cpp
 weapon/mine.cpp
 weapon/parachute.cpp
@@ -180,5 +180,6 @@ weapon/syringe.cpp
 weapon/teleportation.cpp
 weapon/weapon_cfg.cpp
 weapon/weapon.cpp
+weapon/weapon_launcher.cpp
 weapon/weapons_list.cpp
 )
