@@ -223,7 +223,8 @@ bool WeaponProjectile::IsImmobile() const
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {
   ASSERT(obj != NULL);
-  MSG_DEBUG("weapon.projectile", "SignalObjectCollision %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d", 
+	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
   if (explode_colliding_character)
     Explosion();
 }
@@ -231,7 +232,7 @@ void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 // projectile explode when hiting the ground
 void WeaponProjectile::SignalGroundCollision()
 {
-  MSG_DEBUG("weapon.projectile", "SignalGroundCollision %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalGroundCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   if (explode_with_collision)
     Explosion();
 }
@@ -239,14 +240,14 @@ void WeaponProjectile::SignalGroundCollision()
 // Default behavior : signal to launcher a collision and explode
 void WeaponProjectile::SignalCollision()
 {
-  MSG_DEBUG("weapon.projectile", "SignalCollision %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
 }
 
 // Default behavior : signal to launcher projectile is drowning
 void WeaponProjectile::SignalDrowning()
 {
-  MSG_DEBUG("weapon.projectile", "SignalDrowning %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalDrowning \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   PhysicalObj::SignalDrowning();
   if (launcher != NULL && !launcher->ignore_drowning_signal)
     launcher->SignalProjectileDrowning();
@@ -257,7 +258,7 @@ void WeaponProjectile::SignalDrowning()
 // Default behavior : signal to launcher a projectile is going out of water
 void WeaponProjectile::SignalGoingOutOfWater()
 {
-  MSG_DEBUG("weapon.projectile", "SignalDrowning %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalDrowning \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   PhysicalObj::SignalGoingOutOfWater();
   if (launcher != NULL && !launcher->ignore_going_out_of_water_signal)
     launcher->SignalProjectileGoingOutOfWater();
@@ -266,20 +267,20 @@ void WeaponProjectile::SignalGoingOutOfWater()
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
-  MSG_DEBUG("weapon.projectile", "SignalGhostState %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalGhostState \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   if (launcher != NULL && !launcher->ignore_ghost_state_signal)
     launcher->SignalProjectileGhostState();
 }
 
 void WeaponProjectile::SignalOutOfMap()
 {
-  MSG_DEBUG("weapon.projectile", "SignalOutOfMap %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalOutOfMap \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
 }
 
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
 {
-  MSG_DEBUG("weapon.projectile", "Explosion %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "Explosion \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   DoExplosion();
   SignalExplosion();
   Ghost();
@@ -287,7 +288,7 @@ void WeaponProjectile::Explosion()
 
 void WeaponProjectile::SignalExplosion()
 {
-  MSG_DEBUG("weapon.projectile", "SignalExplosion %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalExplosion \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   if (launcher != NULL && !launcher->ignore_explosion_signal)
     launcher->SignalProjectileExplosion();
 }
@@ -325,7 +326,7 @@ int WeaponProjectile::GetTotalTimeout() const
 // Signal a projectile timeout and explode
 void WeaponProjectile::SignalTimeout()
 {
-  MSG_DEBUG("weapon.projectile", "%s timeout has expired", m_name.c_str());
+  MSG_DEBUG("weapon.projectile", "\"%s\" timeout has expired", m_name.c_str());
   if (launcher != NULL && !launcher->ignore_timeout_signal)
     launcher->SignalProjectileTimeout();
   if (explode_with_timeout)
