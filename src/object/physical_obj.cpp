@@ -260,8 +260,8 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     if( IsOutsideWorldXY(tmpPos) ){
 
       if( !world.IsOpen() ){
-        tmpPos.x = BorneLong(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
-        tmpPos.y = BorneLong(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
+        tmpPos.x = InRange_Long(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
+        tmpPos.y = InRange_Long(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
         MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
         collision = COLLISION_ON_GROUND;
         break;
@@ -657,7 +657,7 @@ bool PhysicalObj::IsInWater () const
 {
   ASSERT (!IsGhost());
   if (!world.water.IsActive()) return false;
-  int x = BorneLong(GetCenterX(), 0, world.GetWidth()-1);
+  int x = InRange_Long(GetCenterX(), 0, world.GetWidth()-1);
   return (int)world.water.GetHeight(x) < GetCenterY();
 }
 

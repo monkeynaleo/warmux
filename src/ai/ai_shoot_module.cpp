@@ -152,7 +152,7 @@ bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
   }
 
   // Check the angle
-  double angle = BorneDouble(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
+  double angle = InRange_Double(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
                              - (ActiveTeam().GetWeapon().GetMinAngle()) );
 
   if (AbsoluteValue(angle-m_angle) > 0.08726/* 5 degree */) {

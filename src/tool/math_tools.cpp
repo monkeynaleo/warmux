@@ -45,11 +45,11 @@ T BorneTpl (const T &valeur, const T &min, const T &max){
     return valeur;
 }
 
-long BorneLong (const long &valeur, const long &min, const long &max){
+long InRange_Long (const long &valeur, const long &min, const long &max){
         return BorneTpl (valeur, min, max);
 }
 
-double BorneDouble (const double &valeur, const double &min, const double &max){
+double InRange_Double (const double &valeur, const double &min, const double &max){
         return BorneTpl (valeur, min, max);
 }
 

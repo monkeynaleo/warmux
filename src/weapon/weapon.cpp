@@ -414,7 +414,7 @@ void Weapon::UpdateStrength(){
   uint time = Time::GetInstance()->Read() - m_first_time_loading;
   double val = (max_strength * time) / MAX_TIME_LOADING;
 
-  m_strength = BorneDouble (val, 0.0, max_strength);
+  m_strength = InRange_Double (val, 0.0, max_strength);
 
   weapon_strength_bar.UpdateValue ((int)(m_strength*100));
 }
