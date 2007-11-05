@@ -28,6 +28,7 @@
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "network/network.h"
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
@@ -118,10 +119,13 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   AddWidget(tmp_map_box);
 
   // Load Maps' list
-  int i = MapsList::GetInstance()->GetActiveMapIndex();
-  // If network game skip random maps
-  if(Network::GetInstance()->IsServer())
-    for(; MapsList::GetInstance()->lst[i].IsRandom(); i = (i + 1) % MapsList::GetInstance()->lst.size());
+  uint i = MapsList::GetInstance()->GetActiveMapIndex();
+
+  // If network game skip random map and random generated maps
+  if (Network::GetInstance()->IsServer()) {
+    if (i == MapsList::GetInstance()->lst.size()) i=0;
+    for (; MapsList::GetInstance()->lst[i].IsRandomGenerated(); i = (i + 1) % MapsList::GetInstance()->lst.size());
+  }
   ChangeMap(i);
 }
 
@@ -130,19 +134,22 @@ void MapSelectionBox::ChangeMapDelta(int delta_index)
   ASSERT(!display_only);
 
   int tmp = selected_map_index + delta_index;
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() : tmp) % MapsList::GetInstance()->lst.size();
+
+  // +1 is for random map!
+  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() + 1 : tmp) % (MapsList::GetInstance()->lst.size() + 1);
 
   ChangeMap(tmp);
 }
 
-void MapSelectionBox::ChangeMap(int index)
+void MapSelectionBox::ChangeMap(uint index)
 {
   int tmp;
-  if (index < 0 || index > int(MapsList::GetInstance()->lst.size() - 1)) return;
+  if (index > MapsList::GetInstance()->lst.size()+1) return;
 
   // Callback other network players
-  if(Network::GetInstance()->IsServer()) {
-    if(MapsList::GetInstance()->lst[index].IsRandom()) // Cant select random map in network mode
+  if (Network::GetInstance()->IsServer()) {
+    if (index == MapsList::GetInstance()->lst.size() ||
+	MapsList::GetInstance()->lst[index].IsRandomGenerated()) // Cant select random map nor random generated maps in network mode
       return;
     selected_map_index = index;
     // We need to do it here to send the right map to still not connected clients
@@ -150,31 +157,36 @@ void MapSelectionBox::ChangeMap(int index)
     MapsList::GetInstance()->SelectMapByIndex(index);
 
     ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
-                                                          ActiveMap().GetRawName()));
+							ActiveMap().GetRawName()));
   } else {
     selected_map_index = index;
   }
 
   // Set Map information
-  UpdateMapInfo(map_preview_selected, selected_map_index, true);
+  UpdateMapInfo(map_preview_selected, index, true);
 
   // Set previews
-  tmp = selected_map_index - 1;
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() : tmp);
+  tmp = index - 1;
+  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() + 1: tmp);
   UpdateMapInfo(map_preview_before, tmp, false);
-
-  tmp = selected_map_index - 2;
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() : tmp);
+  
+  tmp = index - 2;
+  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() + 1: tmp);
   UpdateMapInfo(map_preview_before2, tmp, false);
-
-  UpdateMapInfo(map_preview_after,  (selected_map_index + 1) % MapsList::GetInstance()->lst.size(), false);
-  UpdateMapInfo(map_preview_after2, (selected_map_index + 2) % MapsList::GetInstance()->lst.size(), false);
+  
+  UpdateMapInfo(map_preview_after,  (index + 1) % (MapsList::GetInstance()->lst.size() +1), false);
+  UpdateMapInfo(map_preview_after2, (index + 2) % (MapsList::GetInstance()->lst.size() +1), false);
 }
 
-void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, int index, bool selected)
+void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool selected)
 {
+  if (index == MapsList::GetInstance()->lst.size()) {
+    UpdateRandomMapInfo(widget, selected);
+    return;
+  }
+
   widget->SetSurface(MapsList::GetInstance()->lst[index].ReadPreview(), true);
-  if((display_only && !selected) || (MapsList::GetInstance()->lst[index].IsRandom() && Network::GetInstance()->IsServer()))
+  if((display_only && !selected) || (MapsList::GetInstance()->lst[index].IsRandomGenerated() && Network::GetInstance()->IsServer()))
     widget->Disable();
   else
     widget->Enable();
@@ -182,6 +194,21 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, int index, bool sele
   if(selected) {
     map_name_label->SetText(MapsList::GetInstance()->lst[index].ReadFullMapName());
     map_author_label->SetText(MapsList::GetInstance()->lst[index].ReadAuthorInfo());
+  }
+}
+
+void MapSelectionBox::UpdateRandomMapInfo(PictureWidget * widget, bool selected)
+{
+  widget->SetNoSurface();
+  if((display_only && !selected) || Network::GetInstance()->IsServer())
+    widget->Disable();
+  else
+    widget->Enable();
+
+  // If selected update general information
+  if(selected) {
+    map_name_label->SetText(_("Random map"));
+    map_author_label->SetText(_("Choose randomly between the different maps"));
   }
 }
 
@@ -218,11 +245,22 @@ Widget* MapSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/
 
 void MapSelectionBox::ValidMapSelection()
 {
-  MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
+  std::string map_name;
+
+  if (selected_map_index == MapsList::GetInstance()->lst.size()) {
+    // random map!
+
+    // Choose one and select it!
+    map_name = "random";
+    MapsList::GetInstance()->SelectMapByName(map_name);
+  } else {
+    map_name = MapsList::GetInstance()->lst[selected_map_index].GetRawName();
+    MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
+  }
 
   /* The player chose a map, save it in the main config so that this will be
    * the defaut map at next load of the game */
-  Config::GetInstance()->SetMapName(MapsList::GetInstance()->lst[selected_map_index].GetRawName());
+  Config::GetInstance()->SetMapName(map_name);
 }
 
 void MapSelectionBox::ChangeMapCallback()

@@ -33,25 +33,30 @@ namespace xmlpp
   class Element;
 }
 
-class InfoMap{
+class InfoMap {
  public:
   typedef enum {
-    RANDOM,
+    RANDOM_GENERATED,
     SINGLE_ISLAND,
     PLATEFORMS,
     DEFAULT
   } Island_type;
+
+  struct s_wind
+  {
+    uint nb_sprite;
+    uint default_nb_sprite;
+    bool need_flip; //do we need to flip the sprite when it changes direction?
+    float rotation_speed;
+  };
 
 private:
 
   std::string name;
   std::string author_info;
   std::string music_playlist;
-  /* FIXME make m_directory private */
-public:
   std::string m_directory;
 
-private:
   std::string m_map_name;
 
   Surface img_ground, img_sky;
@@ -64,38 +69,34 @@ private:
   bool use_water;
   bool is_basic_info_loaded;
   bool is_data_loaded;
-  bool random;
+  bool random_generated;
   Point2i upper_left_pad;
   Point2i lower_right_pad;
   Island_type island_type;
+
+  struct s_wind wind;
 
   Profile *res_profile;
 
   bool ProcessXmlData(const xmlpp::Element *xml);
   void LoadData();
-
-public:
-  struct s_wind
-  {
-    uint nb_sprite;
-    uint default_nb_sprite;
-    bool need_flip; //do we need to flip the sprite when it changes direction?
-    float rotation_speed;
-  } wind;
+  bool LoadBasicInfo();
 
 public:
   InfoMap(const std::string&, const std::string&);
-  bool LoadBasicInfo();
   void FreeData();
 
   const std::string& GetRawName() const { return m_map_name; };
   const std::string& ReadFullMapName() { LoadBasicInfo(); return name; };
   const std::string& ReadAuthorInfo() { LoadBasicInfo(); return author_info; };
   const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; };
+  std::string GetConfigFilepath() const;
 
   Surface ReadImgGround();
   Surface ReadImgSky();
   const Surface& ReadPreview() { LoadBasicInfo(); return preview; };
+
+  const struct s_wind& GetWind() const { return wind; }; 
 
   uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; };
   uint GetNbMine() { LoadBasicInfo(); return nb_mine; };
@@ -103,7 +104,7 @@ public:
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; };
   bool UseWater() { LoadBasicInfo(); return use_water; };
-  bool IsRandom() { LoadBasicInfo(); return random; };
+  bool IsRandomGenerated() { LoadBasicInfo(); return random_generated; };
 
   Point2i GetUpperLeftPad() { return upper_left_pad; };
   Point2i GetLowerRightPad() { return lower_right_pad; };
@@ -120,8 +121,9 @@ public:
   typedef std::vector<InfoMap>::iterator iterator;
 
 private:
-  int terrain_actif;
+  int active_map_index;
   bool m_init;
+  bool random_map;
   static MapsList * singleton;
 
   void LoadOneMap (const std::string &dir, const std::string &file);
