@@ -5,11 +5,11 @@
  <author>
    <name>JS</name>
    <nickname>Jeese</nickname>
-   <email>jeeseverly AT yahoo.fr</email>
+   <email>jeeseverly_AT_yahoo_DOT_fr</email>
    <country>france</country>
  </author>
  
- <surface name="sky" file="dessin_fond.png" />
+ <surface name="sky" file="sky.jpg" />
  <surface name="map" file="map.png" />
  <surface name="preview" file="preview.jpg" />
  
