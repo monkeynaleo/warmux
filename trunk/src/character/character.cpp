@@ -310,7 +310,7 @@ void Character::SetEnergy(int new_energy)
   if(IsDead()) return;
 
   // Change energy
-  energy = BorneLong((int)new_energy, 0,
+  energy = InRange_Long((int)new_energy, 0,
                      GameMode::GetInstance()->character.max_energy);
   energy_bar.Actu(energy);
 
@@ -761,7 +761,7 @@ void Character::SetFiringAngle(double angle) {
     angle -= 2 * M_PI;
   while(angle <= -2 * M_PI)
     angle += 2 * M_PI;*/
-  angle = BorneDouble(angle, -(ActiveTeam().GetWeapon().GetMaxAngle()),
+  angle = InRange_Double(angle, -(ActiveTeam().GetWeapon().GetMaxAngle()),
                              -(ActiveTeam().GetWeapon().GetMinAngle()));
   firing_angle = angle;
   m_team.crosshair.Refresh(GetFiringAngle());

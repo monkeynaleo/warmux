@@ -61,7 +61,7 @@ public:
   void SetValue(int value) 
   {
     int old_value = m_value;
-    m_value = BorneLong(value, m_min_value, m_max_value);
+    m_value = InRange_Long(value, m_min_value, m_max_value);
     
     if (old_value != m_value) {
       ValueHasChanged();

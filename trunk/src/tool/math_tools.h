@@ -26,8 +26,8 @@
 extern const double EPS_ZERO;
 
 // Force a value into range [min;max]
-long BorneLong (const long &valeur, const long &min, const long &max);
-double BorneDouble (const double &valeur, const double &min,
+long InRange_Long (const long &valeur, const long &min, const long &max);
+double InRange_Double (const double &valeur, const double &min,
                     const double &max);
 
 // Invert an angle along the vertical axis
