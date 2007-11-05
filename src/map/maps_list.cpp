@@ -26,6 +26,7 @@
 #include "tool/debug.h"
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
+#include "tool/random.h"
 #include "tool/xml_document.h"
 #include <iostream>
 #ifdef _MSC_VER
@@ -50,8 +51,8 @@ InfoMap::InfoMap(const std::string &map_name,
   use_water(false),
   is_basic_info_loaded(false),
   is_data_loaded(false),
-  random(false),
-  island_type(RANDOM),
+  random_generated(false),
+  island_type(RANDOM_GENERATED),
   res_profile(NULL)
 {
   wind.nb_sprite = 0;
@@ -98,7 +99,7 @@ bool InfoMap::LoadBasicInfo()
 
 bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
 {
-  XmlReader::ReadBool(xml, "random", random);
+  XmlReader::ReadBool(xml, "random", random_generated);
   // Read author informations
   xmlpp::Element *author = XmlReader::GetMarker(xml, "author");
   if (author != NULL) {
@@ -174,7 +175,7 @@ void InfoMap::LoadData()
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
   img_sky = resource_manager.LoadImage(res_profile,"sky");
-  if(!random) {
+  if(!random_generated) {
     img_ground = resource_manager.LoadImage(res_profile, "map");
   } else {
     img_ground = resource_manager.GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
@@ -202,6 +203,13 @@ Surface InfoMap::ReadImgSky()
   return img_sky;
 }
 
+std::string InfoMap::GetConfigFilepath() const
+{
+  return m_directory + PATH_SEPARATOR + "config.xml";
+}
+
+/* ========================================================================== */
+
 MapsList* MapsList::singleton = NULL;
 
 MapsList* MapsList::GetInstance()
@@ -215,7 +223,8 @@ MapsList* MapsList::GetInstance()
 
 MapsList::MapsList()
 {
-  terrain_actif = 0;
+  active_map_index = 0;
+  random_map = false;
   lst.clear() ;
 
   std::cout << "o " << _("Load maps:");
@@ -289,8 +298,16 @@ int MapsList::FindMapById (const std::string &id)
 
 void MapsList::SelectMapByName (const std::string &nom)
 {
-  int index = FindMapById (nom);
+  // Random map!!
+  if (nom == "random") {
+    active_map_index = Random::GetLong(0, lst.size()-1);
+    random_map = true;
+    return;
+  }
 
+  // standard case!
+  int index = FindMapById (nom);
+  
   if (index == -1){
     index = 0;
     if(nom != "")
@@ -302,21 +319,25 @@ void MapsList::SelectMapByName (const std::string &nom)
 void MapsList::SelectMapByIndex (uint index)
 {
   ASSERT (index < lst.size());
-  if (terrain_actif == (int)index)
+  if (active_map_index == (int)index)
     return;
 
-  terrain_actif = index;
+  active_map_index = index;
+  random_map = false;
 }
 
 int MapsList::GetActiveMapIndex () const
 {
-  return terrain_actif;
+  if (!random_map)
+    return active_map_index;
+  else
+    return lst.size();
 }
 
 InfoMap& MapsList::ActiveMap()
 {
-  ASSERT (0 <= terrain_actif);
-  return lst.at(terrain_actif);
+  ASSERT (0 <= active_map_index);
+  return lst.at(active_map_index);
 }
 
 InfoMap& ActiveMap()

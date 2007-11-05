@@ -51,11 +51,12 @@ class MapSelectionBox : public HBox
   Label *map_author_label;
   Button *bt_map_plus, *bt_map_minus;
 
+  void ChangeMap(uint index);
+  void UpdateMapInfo(PictureWidget * widget, uint index, bool selected);
+  void UpdateRandomMapInfo(PictureWidget * widget, bool selected);
+
  public:
   void ChangeMapDelta(int delta_index);
-  void ChangeMap(int index);
-  void UpdateMapInfo(PictureWidget * widget, int index, bool selected);
-
   MapSelectionBox(const Point2i &size, bool _display_only = false);
 
   void ValidMapSelection();
