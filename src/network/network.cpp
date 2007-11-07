@@ -168,13 +168,6 @@ void Network::ReceiveActions()
     while (ThreadToContinue())
     {
       WaitActionSleep();
-
-      if (IsClient() && cpu.size() == 0) {
-	fprintf(stderr, "you are alone!\n");
-	stop_thread = true;
-	continue;
-      }
-
       // Check forced disconnections
       for (dst_cpu = cpu.begin();
            dst_cpu != cpu.end() && ThreadToContinue();
