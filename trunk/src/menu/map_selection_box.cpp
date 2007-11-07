@@ -121,9 +121,8 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   // Load Maps' list
   uint i = MapsList::GetInstance()->GetActiveMapIndex();
 
-  // If network game skip random map and random generated maps
-  if (Network::GetInstance()->IsServer()) {
-    if (i == MapsList::GetInstance()->lst.size()) i=0;
+  // If network game skip random generated maps 
+  if (Network::GetInstance()->IsServer() && i != MapsList::GetInstance()->lst.size()) {
     for (; MapsList::GetInstance()->lst[i].IsRandomGenerated(); i = (i + 1) % MapsList::GetInstance()->lst.size());
   }
   ChangeMap(i);
@@ -148,16 +147,22 @@ void MapSelectionBox::ChangeMap(uint index)
 
   // Callback other network players
   if (Network::GetInstance()->IsServer()) {
-    if (index == MapsList::GetInstance()->lst.size() ||
-	MapsList::GetInstance()->lst[index].IsRandomGenerated()) // Cant select random map nor random generated maps in network mode
+    if (index != MapsList::GetInstance()->lst.size()
+	&& MapsList::GetInstance()->lst[index].IsRandomGenerated()) // Cant select random generated maps in network mode
       return;
     selected_map_index = index;
     // We need to do it here to send the right map to still not connected clients
     // in distant_cpu::distant_cpu
-    MapsList::GetInstance()->SelectMapByIndex(index);
+    
+    if (selected_map_index == MapsList::GetInstance()->lst.size()) { // random map
+      MapsList::GetInstance()->SelectMapByName("random");
+    } else {
+      MapsList::GetInstance()->SelectMapByIndex(index);
+    }
 
-    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
-							ActiveMap().GetRawName()));
+    Action* a = new Action(Action::ACTION_MENU_SET_MAP);
+    MapsList::GetInstance()->FillActionMenuSetMap(*a);
+    ActionHandler::GetInstance()->NewAction(a);
   } else {
     selected_map_index = index;
   }
@@ -248,11 +253,13 @@ void MapSelectionBox::ValidMapSelection()
   std::string map_name;
 
   if (selected_map_index == MapsList::GetInstance()->lst.size()) {
-    // random map!
 
-    // Choose one and select it!
-    map_name = "random";
-    MapsList::GetInstance()->SelectMapByName(map_name);
+      // Choose one and select it!
+      map_name = "random";
+
+      if (Network::GetInstance()->IsLocal()) {
+	MapsList::GetInstance()->SelectMapByName(map_name);
+      }
   } else {
     map_name = MapsList::GetInstance()->lst[selected_map_index].GetRawName();
     MapsList::GetInstance()->SelectMapByIndex(selected_map_index);

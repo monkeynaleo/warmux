@@ -19,6 +19,7 @@
  * Maps list
  *****************************************************************************/
 
+#include "include/action.h"
 #include "map/maps_list.h"
 #include "game/config.h"
 #include "graphic/surface.h"
@@ -284,7 +285,7 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
   lst.push_back(nv_terrain);
 }
 
-int MapsList::FindMapById (const std::string &id)
+int MapsList::FindMapById (const std::string &id) const
 {
   // XXX Not used !?
   //iterator terrain=lst.begin(), fin_terrain=lst.end();
@@ -296,28 +297,41 @@ int MapsList::FindMapById (const std::string &id)
   return -1;
 }
 
-void MapsList::SelectMapByName (const std::string &nom)
+void MapsList::SelectRandomMapByName(const std::string &name)
+{
+  MSG_DEBUG("map.random", "select %s", name.c_str());
+
+  ASSERT(name != "random");
+  SelectMapByName(name);
+  random_map = true;
+}
+
+void MapsList::SelectMapByName (const std::string &name)
 {
   // Random map!!
-  if (nom == "random") {
+  if (name == "random") {
     active_map_index = Random::GetLong(0, lst.size()-1);
+
+    MSG_DEBUG("map.random", "select %u", active_map_index);
     random_map = true;
     return;
   }
 
   // standard case!
-  int index = FindMapById (nom);
+  int index = FindMapById (name);
   
   if (index == -1){
     index = 0;
-    if(nom != "")
-      std::cout << Format(_("! Map %s not found :-("), nom.c_str()) << std::endl;
+    if(name != "")
+      std::cout << Format(_("! Map %s not found :-("), name.c_str()) << std::endl;
   }
   SelectMapByIndex (index);
 }
 
 void MapsList::SelectMapByIndex (uint index)
 {
+  MSG_DEBUG("map", "select %u", index);
+
   ASSERT (index < lst.size());
   if (active_map_index == (int)index)
     return;
@@ -332,6 +346,16 @@ int MapsList::GetActiveMapIndex () const
     return active_map_index;
   else
     return lst.size();
+}
+
+void MapsList::FillActionMenuSetMap(Action& a) const
+{
+  if (!random_map) {
+    a.Push(lst.at(active_map_index).GetRawName());
+  } else {
+    a.Push("random");
+    a.Push(lst.at(active_map_index).GetRawName());
+  }
 }
 
 InfoMap& MapsList::ActiveMap()
@@ -349,4 +373,5 @@ bool compareMaps(const InfoMap& a, const InfoMap& b)
 {
   return a.GetRawName() < b.GetRawName();
 }
+
 

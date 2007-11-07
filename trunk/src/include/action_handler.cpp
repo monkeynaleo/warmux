@@ -176,6 +176,7 @@ void Action_Network_Check_Phase2 (Action *a)
   // Check the map
   std::string map = a->PopString();
   if (map != ActiveMap().GetRawName()) {
+    std::cerr << map << " != " << ActiveMap().GetRawName() << std::endl;
     Error_in_Network_Check_Phase2(a);
     return;
   }
@@ -352,7 +353,13 @@ void Action_ChatMessage (Action *a)
 void Action_Menu_SetMap (Action *a)
 {
   if (!Network::GetInstance()->IsClient()) return;
-  MapsList::GetInstance()->SelectMapByName(a->PopString());
+
+  std::string map_name = a->PopString();
+  if (map_name != "random") {
+    MapsList::GetInstance()->SelectMapByName(map_name);
+  } else {
+    MapsList::GetInstance()->SelectRandomMapByName(a->PopString());
+  }
 
   if (Network::GetInstance()->network_menu != NULL) {
     Network::GetInstance()->network_menu->ChangeMapCallback();
