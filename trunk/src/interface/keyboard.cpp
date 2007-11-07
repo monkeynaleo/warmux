@@ -89,13 +89,6 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
   if(!IsRegistredEvent(event.type))
     return;
 
-  //Handle input text for Chat session in Network game
-  //While player writes, it cannot control the game.
-  if(Game::GetInstance()->chatsession.CheckInput()){
-    Game::GetInstance()->chatsession.HandleKey(event);
-    return;
-  }
-
   Key_Event_t event_type;
   switch(event.type)
     {
@@ -108,6 +101,13 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
     default:
       return;
     }
+
+  //Handle input text for Chat session in Network game
+  //While player writes, it cannot control the game.
+  if (event_type == KEY_PRESSED && Game::GetInstance()->chatsession.CheckInput()){
+    Game::GetInstance()->chatsession.HandleKey(event);
+    return;
+  }
 
   std::map<int, Key_t>::iterator it = layout.find(event.key.keysym.sym);
 
