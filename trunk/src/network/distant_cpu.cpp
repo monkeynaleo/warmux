@@ -61,7 +61,8 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
     SendDatas(pack, size);
     free(pack);
 
-    Action a(Action::ACTION_MENU_SET_MAP, ActiveMap().GetRawName());
+    Action a(Action::ACTION_MENU_SET_MAP);
+    MapsList::GetInstance()->FillActionMenuSetMap(a);
     a.WritePacket(pack, size);
     SendDatas(pack, size);
     free(pack);
