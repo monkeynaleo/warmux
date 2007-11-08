@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-31 15:12+0100\n"
 "PO-Revision-Date: 2007-09-01 01:58+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -19,7 +18,7 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:297
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "Kaart %s niet gevonden :-("
@@ -43,12 +42,12 @@ msgstr[1] "%i spelers zijn gereed"
 msgid "%s (%s) has died."
 msgstr "%s (%s) is overleden."
 
-#: src/map/maps_list.cpp:120
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s van %s"
 
-#: src/map/maps_list.cpp:127
+#: src/map/maps_list.cpp:129
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> van %s"
@@ -153,7 +152,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Team %s heeft %u aambeeld gekregen! Plet ze allemaal!"
 msgstr[1] "Team %s heeft %u aambeelden gekregen! Plet ze allemaal!"
 
-#: src/weapon/auto_bazooka.cpp:311
+#: src/weapon/auto_bazooka.cpp:314
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -167,7 +166,7 @@ msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "Team %s heeft %u honkbalknuppel gekregen"
 msgstr[1] "Team %s heeft %u honkbalknuppels gekregen"
 
-#: src/weapon/bazooka.cpp:120
+#: src/weapon/bazooka.cpp:124
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -209,7 +208,7 @@ msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "Team %s heeft %u constructiewapen gekregen! Vergeet uw helm niet."
 msgstr[1] "Team %s heeft %u constructiewapens gekregen! Vergeet uw helm niet."
 
-#: src/weapon/disco_grenade.cpp:158
+#: src/weapon/disco_grenade.cpp:162
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -294,7 +293,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Team %s heeft %u stinkdieren gekregen! U heeft uw gasmasker, nietwaar ?"
 
-#: src/weapon/riot_bomb.cpp:123
+#: src/weapon/riot_bomb.cpp:127
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -359,7 +358,7 @@ msgstr[1] ""
 "Team %s heeft %u keer een beurt overslaan gekregen! Ik weet dat u daar gek "
 "op bent."
 
-#: src/weapon/supertux.cpp:302
+#: src/weapon/supertux.cpp:305
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -369,7 +368,7 @@ msgstr[1] ""
 "Team %s heeft %u tux lanceerders gekregen! Nog nooit een pinguïn zien "
 "vliegen?"
 
-#: src/include/action_handler.cpp:322
+#: src/include/action_handler.cpp:323
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s probeert te verbinden met een andere versie : client=%s, ik=%s."
@@ -422,7 +421,7 @@ msgstr "Aambeeld"
 msgid "Authors:"
 msgstr "Auteurs:"
 
-#: src/weapon/auto_bazooka.cpp:201
+#: src/weapon/auto_bazooka.cpp:204
 msgid "Automatic Bazooka"
 msgstr "Automatische Bazooka"
 
@@ -434,7 +433,7 @@ msgstr "Foute socket ..."
 msgid "Baseball Bat"
 msgstr "Honkbalknuppel"
 
-#: src/weapon/bazooka.cpp:105
+#: src/weapon/bazooka.cpp:109
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -446,7 +445,7 @@ msgstr "Snijbrander"
 msgid "Bounce Ball"
 msgstr "Stuiterbal"
 
-#: src/weapon/supertux.cpp:174
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Dag dag tux..."
 
@@ -465,6 +464,10 @@ msgstr "Kan persoonlijke-teamsdirectory niet openen (%s)!"
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan teams directory niet openen (%s)!"
+
+#: src/menu/map_selection_box.cpp:216
+msgid "Choose randomly between the different maps"
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -508,7 +511,7 @@ msgstr "Bestuurd door: "
 msgid "Credits"
 msgstr "Credits"
 
-#: src/weapon/disco_grenade.cpp:143
+#: src/weapon/disco_grenade.cpp:147
 msgid "Disco Grenade"
 msgstr "Disco Granaat"
 
@@ -665,7 +668,7 @@ msgstr ""
 "Hoe te gebruiken : houd de spatiebalk ingedrukt\n"
 "eenmaal per beurt"
 
-#: src/weapon/auto_bazooka.cpp:202
+#: src/weapon/auto_bazooka.cpp:205
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -701,7 +704,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Initiële energie"
 
-#: src/weapon/bazooka.cpp:106 src/weapon/riot_bomb.cpp:109
+#: src/weapon/bazooka.cpp:110 src/weapon/riot_bomb.cpp:113
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -743,7 +746,7 @@ msgstr "Bezoek #wormux op irc.freenode.net om tegenstanders te vinden."
 msgid "Language"
 msgstr "Taal"
 
-#: src/map/maps_list.cpp:221
+#: src/map/maps_list.cpp:231
 msgid "Load maps:"
 msgstr "Kaarten worden geladen:"
 
@@ -813,7 +816,7 @@ msgstr "Muziek?"
 msgid "Network Game"
 msgstr "Netwerk Spel"
 
-#: src/network/network.cpp:249
+#: src/network/network.cpp:256
 msgid "Network initialization"
 msgstr "Netwerk wordt geïnitialiseerd"
 
@@ -881,6 +884,11 @@ msgstr "Afsluiten"
 msgid "Quit Wormux"
 msgstr "Wormux afsluiten"
 
+#: src/menu/map_selection_box.cpp:215
+#, fuzzy
+msgid "Random map"
+msgstr "Laad kaart"
+
 #: src/game/config.cpp:262
 msgid "Reading default config file"
 msgstr "Standaard configbestand wordt gelezen"
@@ -897,7 +905,7 @@ msgstr "Verversen"
 msgid "Resolution"
 msgstr "Resolutie"
 
-#: src/weapon/riot_bomb.cpp:108
+#: src/weapon/riot_bomb.cpp:112
 msgid "Riot Bomb"
 msgstr "Rellenbom"
 
@@ -905,7 +913,7 @@ msgstr "Rellenbom"
 msgid "Run game"
 msgstr "Spel wordt gestart"
 
-#: src/network/chat.cpp:77
+#: src/network/chat.cpp:79
 msgid "Say: "
 msgstr "Zeg: "
 
@@ -969,7 +977,7 @@ msgstr "Voorraad:"
 msgid "Submachine Gun"
 msgstr "Automatisch Geweer"
 
-#: src/weapon/supertux.cpp:211
+#: src/weapon/supertux.cpp:214
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -997,7 +1005,7 @@ msgstr "De Gnu heeft het slagveld verlaten voor te ontploffen"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "De Poolkat heeft het slagveld verlaten voor te ontploffen"
 
-#: src/weapon/auto_bazooka.cpp:169
+#: src/weapon/auto_bazooka.cpp:172
 msgid "The automatic rocket has left the battlefield..."
 msgstr "De automatische raket heeft het slagveld verlaten..."
 
@@ -1010,7 +1018,7 @@ msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
 "De verbinding gaf een time out. Controleer of er geen firewall in de weg zit!"
 
-#: src/weapon/disco_grenade.cpp:123
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "De disco granaat heeft de dansvloer verlaten voor te ontploffen"
 
@@ -1022,7 +1030,7 @@ msgstr "De granaat heeft het slagveld verlaten voor te ontploffen"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De anderen wachten op u! Wakker worden :-)"
 
-#: src/weapon/bazooka.cpp:79 src/weapon/riot_bomb.cpp:82
+#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "De raket heeft het slagveld verlaten voor te ontploffen"
 
@@ -1069,12 +1077,12 @@ msgstr "Gereedschap"
 msgid "Unable to contact host."
 msgstr "Kon geen verbinding maken met host."
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:241
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kon kaarten directory niet openen (%s)!"
 
-#: src/map/maps_list.cpp:243
+#: src/map/maps_list.cpp:253
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Kon kaarten directory niet openen (%s)!"
@@ -1135,7 +1143,7 @@ msgstr "Wormux wordt gestart..."
 msgid "Wormux version "
 msgstr "Wormux versie "
 
-#: src/map/maps_list.cpp:88
+#: src/map/maps_list.cpp:90
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "XML fout bij het laden van kaart '%s' :"
@@ -1148,7 +1156,7 @@ msgstr "U bent alleen :-/"
 msgid "You are alone..."
 msgstr "U bent alleen..."
 
-#: src/map/maps_list.cpp:252
+#: src/map/maps_list.cpp:262
 msgid "You need at least one valid map !"
 msgstr "U heeft minimaal één geldige kaart nodig !"
 
@@ -1160,7 +1168,7 @@ msgstr "U heeft minimaal twee geldige teams nodig !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd !"
 
-#: src/weapon/weapon_launcher.cpp:449
+#: src/weapon/weapon_launcher.cpp:450
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 
@@ -1440,9 +1448,6 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #, fuzzy
 #~ msgid "Load game data..."
 #~ msgstr "Spel gegevens laden ..."
-
-#~ msgid "Load map"
-#~ msgstr "Laad kaart"
 
 #~ msgid "Load skins:"
 #~ msgstr "Skins worden geladen:"

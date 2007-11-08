@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-31 15:12+0100\n"
 "PO-Revision-Date: 2007-08-28 22:21+0400\n"
 "Last-Translator: \n"
 "Language-Team:  <ru@li.org>\n"
@@ -22,7 +21,7 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:297
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
@@ -48,12 +47,12 @@ msgstr[2] "%i игроков готовы"
 msgid "%s (%s) has died."
 msgstr "%s (%s) погиб."
 
-#: src/map/maps_list.cpp:120
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s из %s"
 
-#: src/map/maps_list.cpp:127
+#: src/map/maps_list.cpp:129
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
@@ -165,7 +164,7 @@ msgstr[0] "Команда '%s выиграла %u наковальню! Разм
 msgstr[1] "Команда '%s выиграла %u наковальни! Размажьте их!"
 msgstr[2] "Команда '%s выиграла %u наковален! Размажьте их!"
 
-#: src/weapon/auto_bazooka.cpp:311
+#: src/weapon/auto_bazooka.cpp:314
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -181,7 +180,7 @@ msgstr[0] "Команда %s выиграла %u бейсбольную биту
 msgstr[1] "Команда %s выиграла %u бейсбольные биты!"
 msgstr[2] "Команда %s выиграла %u бейсбольных бит!"
 
-#: src/weapon/bazooka.cpp:120
+#: src/weapon/bazooka.cpp:124
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -230,7 +229,7 @@ msgstr[0] "Команда %s выиграла %u строительство! Н�
 msgstr[1] "Команда %s выиграла %u строительства! Не забудьте надеть каску."
 msgstr[2] "Команда %s выиграла %u строительств! Не забудьте надеть каску."
 
-#: src/weapon/disco_grenade.cpp:158
+#: src/weapon/disco_grenade.cpp:162
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -319,7 +318,7 @@ msgstr[0] "Команда %s выиграла %u скунса! Вы ведь н�
 msgstr[1] "Команда %s выиграла %u скунса! Вы ведь не забыли свой противогаз?"
 msgstr[2] "Команда %s выиграла %u скунсов! Вы ведь не забыли свой противогаз?"
 
-#: src/weapon/riot_bomb.cpp:123
+#: src/weapon/riot_bomb.cpp:127
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -387,7 +386,7 @@ msgstr[0] "Команда %s выиграла %u пропуск хода! Вам
 msgstr[1] "Команда %s выиграла %u пропуска хода! Вам это понравится."
 msgstr[2] "Команда %s выиграла %u пропусков хода! Вам это понравится."
 
-#: src/weapon/supertux.cpp:302
+#: src/weapon/supertux.cpp:305
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -401,7 +400,7 @@ msgstr[2] ""
 "Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего "
 "пингвина?"
 
-#: src/include/action_handler.cpp:322
+#: src/include/action_handler.cpp:323
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s пытается подключиться с другой версией : client=%s, me=%s."
@@ -454,7 +453,7 @@ msgstr "Наковальня"
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: src/weapon/auto_bazooka.cpp:201
+#: src/weapon/auto_bazooka.cpp:204
 msgid "Automatic Bazooka"
 msgstr "Автоматическая базука"
 
@@ -466,7 +465,7 @@ msgstr "Ошибка сокета ..."
 msgid "Baseball Bat"
 msgstr "Бейсбольная бита"
 
-#: src/weapon/bazooka.cpp:105
+#: src/weapon/bazooka.cpp:109
 msgid "Bazooka"
 msgstr "Базука"
 
@@ -478,7 +477,7 @@ msgstr "Паяльная лампа"
 msgid "Bounce Ball"
 msgstr "Прыгучий мяч"
 
-#: src/weapon/supertux.cpp:174
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Прощай tux..."
 
@@ -497,6 +496,10 @@ msgstr "Не удаётся открыть личный каталог кома�
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не удаётся открыть каталог команд (%s)!"
+
+#: src/menu/map_selection_box.cpp:216
+msgid "Choose randomly between the different maps"
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -540,7 +543,7 @@ msgstr "Контролируется: "
 msgid "Credits"
 msgstr "Разработчики"
 
-#: src/weapon/disco_grenade.cpp:143
+#: src/weapon/disco_grenade.cpp:147
 msgid "Disco Grenade"
 msgstr "Диско-граната"
 
@@ -698,7 +701,7 @@ msgstr ""
 "Правила использования : зажмите пробел\n"
 "патрон за ход"
 
-#: src/weapon/auto_bazooka.cpp:202
+#: src/weapon/auto_bazooka.cpp:205
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -734,7 +737,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Энергии вначале"
 
-#: src/weapon/bazooka.cpp:106 src/weapon/riot_bomb.cpp:109
+#: src/weapon/bazooka.cpp:110 src/weapon/riot_bomb.cpp:113
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -776,7 +779,7 @@ msgstr "Заходите на #wormux на irc.freenode.net чтобы найт�
 msgid "Language"
 msgstr "Язык"
 
-#: src/map/maps_list.cpp:221
+#: src/map/maps_list.cpp:231
 msgid "Load maps:"
 msgstr "Загрузка карт:"
 
@@ -846,7 +849,7 @@ msgstr "Музыка?"
 msgid "Network Game"
 msgstr "Игра по сети"
 
-#: src/network/network.cpp:249
+#: src/network/network.cpp:256
 msgid "Network initialization"
 msgstr "Инициализация сети"
 
@@ -914,6 +917,11 @@ msgstr "Выйти"
 msgid "Quit Wormux"
 msgstr "Выйти из Wormux"
 
+#: src/menu/map_selection_box.cpp:215
+#, fuzzy
+msgid "Random map"
+msgstr "Загрузка карт:"
+
 #: src/game/config.cpp:262
 msgid "Reading default config file"
 msgstr "Чтение конфига по умолчанию"
@@ -930,7 +938,7 @@ msgstr "Обновить"
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: src/weapon/riot_bomb.cpp:108
+#: src/weapon/riot_bomb.cpp:112
 msgid "Riot Bomb"
 msgstr "Пустотная бомба"
 
@@ -938,7 +946,7 @@ msgstr "Пустотная бомба"
 msgid "Run game"
 msgstr "Начать игру"
 
-#: src/network/chat.cpp:77
+#: src/network/chat.cpp:79
 msgid "Say: "
 msgstr "Говорите: "
 
@@ -1002,7 +1010,7 @@ msgstr "Запас:"
 msgid "Submachine Gun"
 msgstr "Автомат"
 
-#: src/weapon/supertux.cpp:211
+#: src/weapon/supertux.cpp:214
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1030,7 +1038,7 @@ msgstr "Gnu покинул поле битвы"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Скунс покинул поле битвы до взрыва"
 
-#: src/weapon/auto_bazooka.cpp:169
+#: src/weapon/auto_bazooka.cpp:172
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Автоматическая ракета улетела за пределы поля битвы..."
 
@@ -1042,7 +1050,7 @@ msgstr "Мяч улетел за пределы поля битвы"
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Превышено время подключения. Проверьте, что на пути нет фаерволла!"
 
-#: src/weapon/disco_grenade.cpp:123
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Диско-граната улетла с поля битвы не успев взорваться"
 
@@ -1054,7 +1062,7 @@ msgstr "Граната улетела за пределы поля битвы"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Все ждут тебя! Проснись :-)"
 
-#: src/weapon/bazooka.cpp:79 src/weapon/riot_bomb.cpp:82
+#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
 
@@ -1102,12 +1110,12 @@ msgstr "Орудия"
 msgid "Unable to contact host."
 msgstr "Не удалось связаться c хостом."
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:241
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
 
-#: src/map/maps_list.cpp:243
+#: src/map/maps_list.cpp:253
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
@@ -1169,7 +1177,7 @@ msgstr "Запуск Wormux..."
 msgid "Wormux version "
 msgstr "Wormux версии "
 
-#: src/map/maps_list.cpp:88
+#: src/map/maps_list.cpp:90
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "Ошибка разбора XML при загрузке карты '%s' :"
@@ -1182,7 +1190,7 @@ msgstr "Вы один :-/"
 msgid "You are alone..."
 msgstr "Вы один..."
 
-#: src/map/maps_list.cpp:252
+#: src/map/maps_list.cpp:262
 msgid "You need at least one valid map !"
 msgstr "Вам нужна хотя бы одна карта !"
 
@@ -1194,7 +1202,7 @@ msgstr "Вам нужны хотя бы две команды !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Вы не сможете играть не выбрав команду !"
 
-#: src/weapon/weapon_launcher.cpp:449
+#: src/weapon/weapon_launcher.cpp:450
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 

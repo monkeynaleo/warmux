@@ -9,21 +9,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-31 15:12+0100\n"
-"PO-Revision-Date: 2007-10-26 12:28+0300\n"
+"PO-Revision-Date: 2007-11-08 11:41+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:297
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
@@ -49,12 +47,12 @@ msgstr[2] "%i de jucători sunt gata"
 msgid "%s (%s) has died."
 msgstr "%s (%s) a murit."
 
-#: src/map/maps_list.cpp:120
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> cunoscut și ca %s din %s"
 
-#: src/map/maps_list.cpp:127
+#: src/map/maps_list.cpp:129
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
@@ -168,7 +166,7 @@ msgstr[0] "Echipa %s a câștigat %u nicovală! Storcoșește tot cu ea!"
 msgstr[1] "Echipa %s a câștigat %u nicovale! Storcoșește tot cu ele!"
 msgstr[2] "Echipa %s a câștigat %u de nicovale! Storcoșește tot cu ele!"
 
-#: src/weapon/auto_bazooka.cpp:311
+#: src/weapon/auto_bazooka.cpp:314
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -190,7 +188,7 @@ msgstr[2] "'%s a câștigat %u de bâte de basebal"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/bazooka.cpp:120
+#: src/weapon/bazooka.cpp:124
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -200,8 +198,7 @@ msgstr[2] "Echipa %s a câștigat %u de rachete!"
 
 #: src/weapon/blowtorch.cpp:139
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -257,15 +254,13 @@ msgstr[2] "Echipa %s a câștigat %u de construcții! Nu-ți uita casca."
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/disco_grenade.cpp:158
+#: src/weapon/disco_grenade.cpp:162
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Echipa %s a câștigat %u grenadă disco! Dă din fund când o arunci!"
 msgstr[1] "Echipa %s a câștigat %u grenade disco! Dă din fund când le arunci!"
-msgstr[2] ""
-"Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
+msgstr[2] "Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
 
 #: src/weapon/dynamite.cpp:137
 #, c-format
@@ -276,12 +271,12 @@ msgstr[1] "Echipa %s a câștigat %u batoane de dinamită!"
 msgstr[2] "Echipa %s a câștigat %u de batoane de dinamită!"
 
 #: src/weapon/flamethrower.cpp:161
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
-msgstr[0] "Echipa %s a câștigat %u baton de dinamită!"
-msgstr[1] "Echipa %s a câștigat %u batoane de dinamită!"
-msgstr[2] "Echipa %s a câștigat %u de batoane de dinamită!"
+msgstr[0] "Echipa %s a câștigat %u aruncător de flăcări!"
+msgstr[1] "Echipa %s a câștigat %u aruncătoare de flăcări!"
+msgstr[2] "Echipa %s a câștigat %u de aruncătoare de flăcări!"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -395,7 +390,7 @@ msgstr[2] "Echipa %s a câștigat %u de sconcși! Ți-ai luat masca de gaze, da?
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/riot_bomb.cpp:123
+#: src/weapon/riot_bomb.cpp:127
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -427,12 +422,9 @@ msgstr[2] "Echipa %s a câștigat %u de puști!"
 #, c-format
 msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
-msgstr[0] ""
-"Echipa %s a câștigat %u pușcă cu lunetă! Țintește direct între ochi!"
-msgstr[1] ""
-"Echipa %s a câștigat %u puști cu lunetă! Țintește direct între ochi!"
-msgstr[2] ""
-"Echipa %s a câștigat %u de puști cu lunetă! Țintește direct între ochi!"
+msgstr[0] "Echipa %s a câștigat %u pușcă cu lunetă! Țintește direct între ochi!"
+msgstr[1] "Echipa %s a câștigat %u puști cu lunetă! Țintește direct între ochi!"
+msgstr[2] "Echipa %s a câștigat %u de puști cu lunetă! Țintește direct între ochi!"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -504,12 +496,11 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/supertux.cpp:302
+#: src/weapon/supertux.cpp:305
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] ""
-"Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
+msgstr[0] "Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
 msgstr[1] ""
 "Echipa %s a câștigat %u lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
@@ -517,7 +508,7 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
 
-#: src/include/action_handler.cpp:322
+#: src/include/action_handler.cpp:323
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s încearcă să se conecteze cu o versiune diferită: client=%s, eu=%s."
@@ -570,7 +561,7 @@ msgstr "Nicovală"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/weapon/auto_bazooka.cpp:201
+#: src/weapon/auto_bazooka.cpp:204
 msgid "Automatic Bazooka"
 msgstr "Rachetă automată"
 
@@ -583,7 +574,7 @@ msgstr "Socket greșit ..."
 msgid "Baseball Bat"
 msgstr "Bâtă de basebal"
 
-#: src/weapon/bazooka.cpp:105
+#: src/weapon/bazooka.cpp:109
 msgid "Bazooka"
 msgstr "Proiectil reactiv"
 
@@ -595,7 +586,7 @@ msgstr "Lampă de sudură"
 msgid "Bounce Ball"
 msgstr "Minge săltăreață"
 
-#: src/weapon/supertux.cpp:174
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Pa pa tux..."
 
@@ -614,6 +605,10 @@ msgstr "Directorul personal cu echipe nu poate fi deschis (%s)!"
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
+
+#: src/menu/map_selection_box.cpp:216
+msgid "Choose randomly between the different maps"
+msgstr "Alege la întâmplare una din diferitele hărți"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -657,7 +652,7 @@ msgstr "Controlat de: "
 msgid "Credits"
 msgstr "Merite"
 
-#: src/weapon/disco_grenade.cpp:143
+#: src/weapon/disco_grenade.cpp:147
 msgid "Disco Grenade"
 msgstr "Grenadă disco"
 
@@ -693,8 +688,7 @@ msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
 #: src/game/config.cpp:373
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
@@ -752,7 +746,7 @@ msgstr "Eroare: corpul „%s” pentru echipa „%s” nu poate fi găsit."
 
 #: src/weapon/flamethrower.cpp:92
 msgid "Flame Thrower"
-msgstr ""
+msgstr "Aruncător de flăcări"
 
 #: src/menu/options_menu.cpp:83
 msgid "Fullscreen?"
@@ -819,7 +813,7 @@ msgstr ""
 "Cum se folosește : țineți tasta spațiu apăsată\n"
 "un proiectil per rundă"
 
-#: src/weapon/auto_bazooka.cpp:202
+#: src/weapon/auto_bazooka.cpp:205
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -855,7 +849,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energie inițială"
 
-#: src/weapon/bazooka.cpp:106 src/weapon/riot_bomb.cpp:109
+#: src/weapon/bazooka.cpp:110 src/weapon/riot_bomb.cpp:113
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -900,7 +894,7 @@ msgstr ""
 msgid "Language"
 msgstr "Limba"
 
-#: src/map/maps_list.cpp:221
+#: src/map/maps_list.cpp:231
 msgid "Load maps:"
 msgstr "Încărcare hărți:"
 
@@ -970,7 +964,7 @@ msgstr "Muzică?"
 msgid "Network Game"
 msgstr "Joc în rețea"
 
-#: src/network/network.cpp:249
+#: src/network/network.cpp:256
 msgid "Network initialization"
 msgstr "Inițializare rețea"
 
@@ -1038,6 +1032,10 @@ msgstr "Ieșire"
 msgid "Quit Wormux"
 msgstr "Ieșire din Wormux"
 
+#: src/menu/map_selection_box.cpp:215
+msgid "Random map"
+msgstr "Hartă aleatoare"
+
 #: src/game/config.cpp:262
 msgid "Reading default config file"
 msgstr "Se citește fișierul implicit de configurare"
@@ -1054,7 +1052,7 @@ msgstr "Reîmprospătează"
 msgid "Resolution"
 msgstr "Rezoluție"
 
-#: src/weapon/riot_bomb.cpp:108
+#: src/weapon/riot_bomb.cpp:112
 msgid "Riot Bomb"
 msgstr "Cocktail Molotov"
 
@@ -1062,7 +1060,7 @@ msgstr "Cocktail Molotov"
 msgid "Run game"
 msgstr "Rulează jocul"
 
-#: src/network/chat.cpp:77
+#: src/network/chat.cpp:79
 msgid "Say: "
 msgstr "Spune: "
 
@@ -1126,7 +1124,7 @@ msgstr "Stoc:"
 msgid "Submachine Gun"
 msgstr "Mitralieră semiautomată"
 
-#: src/weapon/supertux.cpp:211
+#: src/weapon/supertux.cpp:214
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1154,7 +1152,7 @@ msgstr "Antilopa gnu a părăsit câmpul de luptă înainte de a exploda"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Sconcsul a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/weapon/auto_bazooka.cpp:169
+#: src/weapon/auto_bazooka.cpp:172
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Racheta automată a părăsit câmpul de luptă ..."
 
@@ -1168,7 +1166,7 @@ msgstr ""
 "Timpul de așteptare la conectare a expirat. Verificați dacă există vreun "
 "firewall undeva pe parcurs!"
 
-#: src/weapon/disco_grenade.cpp:123
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Grenada disco a părăsit ringul de dans înainte de a exploda"
 
@@ -1180,7 +1178,7 @@ msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ceilalți te-așteaptă! Trezește-te :-)"
 
-#: src/weapon/bazooka.cpp:79 src/weapon/riot_bomb.cpp:82
+#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Racheta a părăsit câmpul de luptă..."
 
@@ -1228,12 +1226,12 @@ msgstr "Unelte"
 msgid "Unable to contact host."
 msgstr "Nu a fost posibilă contactarea calculatorului."
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:241
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărți (%s)!"
 
-#: src/map/maps_list.cpp:243
+#: src/map/maps_list.cpp:253
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului personal cu hărți (%s)!"
@@ -1295,7 +1293,7 @@ msgstr "Se lansează Wormux..."
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
-#: src/map/maps_list.cpp:88
+#: src/map/maps_list.cpp:90
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "Eroare XML în timpul încărcării hărții '%s' :"
@@ -1308,7 +1306,7 @@ msgstr "Nu mai e nimeni în afară de tine :-/"
 msgid "You are alone..."
 msgstr "Nu mai e nimeni altcineva..."
 
-#: src/map/maps_list.cpp:252
+#: src/map/maps_list.cpp:262
 msgid "You need at least one valid map !"
 msgstr "Aveți nevoie de cel puțin o hartă validă !"
 
@@ -1320,7 +1318,7 @@ msgstr "Aveți nevoie de cel puțin două echipe valide !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 
-#: src/weapon/weapon_launcher.cpp:449
+#: src/weapon/weapon_launcher.cpp:450
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
@@ -1707,9 +1705,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "Load character %s"
 #~ msgstr "Numărul de personaje"
-
-#~ msgid "Load map"
-#~ msgstr "Încărcare hartă"
 
 #, fuzzy
 #~ msgid "Load music sample %s"
@@ -2328,3 +2323,4 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
+

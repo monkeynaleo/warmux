@@ -6,7 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.7\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-31 15:12+0100\n"
 "PO-Revision-Date: 2007-03-07 15:07+0100\n"
 "Last-Translator: Martin Vojčík <stryco@gmail.com>\n"
 "Language-Team: sk <stryco@gmail.com>\n"
@@ -19,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Non-Native-Updates: artefact <artefact@altern.org>\n"
 
-#: src/map/maps_list.cpp:297
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebola nájdená :-("
@@ -45,12 +44,12 @@ msgstr[2] "%i hráči sú pripravení"
 msgid "%s (%s) has died."
 msgstr "%s (%s tím)  zomrel."
 
-#: src/map/maps_list.cpp:120
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s od %s"
 
-#: src/map/maps_list.cpp:127
+#: src/map/maps_list.cpp:129
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> od %s"
@@ -153,7 +152,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Hráč '%s' zvíťazil %u leteckým útokom!"
 msgstr[1] "Hráč '%s' zvíťazil %u leteckými útokmi!"
 
-#: src/weapon/auto_bazooka.cpp:311
+#: src/weapon/auto_bazooka.cpp:314
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -167,7 +166,7 @@ msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "Hráč '%s' zvíťazil %u leteckým útokom!"
 msgstr[1] "Hráč '%s' zvíťazil %u leteckými útokmi!"
 
-#: src/weapon/bazooka.cpp:120
+#: src/weapon/bazooka.cpp:124
 #, fuzzy, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -209,7 +208,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/disco_grenade.cpp:158
+#: src/weapon/disco_grenade.cpp:162
 #, fuzzy, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -295,7 +294,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/riot_bomb.cpp:123
+#: src/weapon/riot_bomb.cpp:127
 #, fuzzy, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -358,7 +357,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/supertux.cpp:302
+#: src/weapon/supertux.cpp:305
 #, fuzzy, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -366,7 +365,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/include/action_handler.cpp:322
+#: src/include/action_handler.cpp:323
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux verzie sú rozdielne: klient=%s, server=%s."
@@ -416,7 +415,7 @@ msgstr "Kovadlina"
 msgid "Authors:"
 msgstr "Autory:"
 
-#: src/weapon/auto_bazooka.cpp:201
+#: src/weapon/auto_bazooka.cpp:204
 msgid "Automatic Bazooka"
 msgstr "Navádzaná  strela"
 
@@ -428,7 +427,7 @@ msgstr "Zlý socket..."
 msgid "Baseball Bat"
 msgstr "Basebalová pálka"
 
-#: src/weapon/bazooka.cpp:105
+#: src/weapon/bazooka.cpp:109
 msgid "Bazooka"
 msgstr "Raketomet"
 
@@ -440,7 +439,7 @@ msgstr "Plameňomet"
 msgid "Bounce Ball"
 msgstr "Odrazená lopta"
 
-#: src/weapon/supertux.cpp:174
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Maj sa tux..."
 
@@ -459,6 +458,10 @@ msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
+
+#: src/menu/map_selection_box.cpp:216
+msgid "Choose randomly between the different maps"
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -502,7 +505,7 @@ msgstr ""
 msgid "Credits"
 msgstr "O programe"
 
-#: src/weapon/disco_grenade.cpp:143
+#: src/weapon/disco_grenade.cpp:147
 msgid "Disco Grenade"
 msgstr "Disco Granát"
 
@@ -656,7 +659,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:202
+#: src/weapon/auto_bazooka.cpp:205
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -686,7 +689,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Základná energia"
 
-#: src/weapon/bazooka.cpp:106 src/weapon/riot_bomb.cpp:109
+#: src/weapon/bazooka.cpp:110 src/weapon/riot_bomb.cpp:113
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -727,7 +730,7 @@ msgstr "Pripoj sa na kanál #wormux na irc.freenode.net a nájdi si súperov."
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:221
+#: src/map/maps_list.cpp:231
 msgid "Load maps:"
 msgstr "Načítavam mapy:"
 
@@ -798,7 +801,7 @@ msgstr "Hudba?"
 msgid "Network Game"
 msgstr "Sieťová hra"
 
-#: src/network/network.cpp:249
+#: src/network/network.cpp:256
 #, fuzzy
 msgid "Network initialization"
 msgstr "Inicializuje sa okolie..."
@@ -867,6 +870,11 @@ msgstr "Koniec"
 msgid "Quit Wormux"
 msgstr "Ukončiť Wormuxa"
 
+#: src/menu/map_selection_box.cpp:215
+#, fuzzy
+msgid "Random map"
+msgstr "Načítavam mapu"
+
 #: src/game/config.cpp:262
 #, fuzzy
 msgid "Reading default config file"
@@ -884,7 +892,7 @@ msgstr "Obnovovanie"
 msgid "Resolution"
 msgstr "Rozlíšenie"
 
-#: src/weapon/riot_bomb.cpp:108
+#: src/weapon/riot_bomb.cpp:112
 msgid "Riot Bomb"
 msgstr "Riot Bomba"
 
@@ -892,7 +900,7 @@ msgstr "Riot Bomba"
 msgid "Run game"
 msgstr "Spusti hru"
 
-#: src/network/chat.cpp:77
+#: src/network/chat.cpp:79
 msgid "Say: "
 msgstr ""
 
@@ -957,7 +965,7 @@ msgstr "Munícia:"
 msgid "Submachine Gun"
 msgstr "SMG zbraň"
 
-#: src/weapon/supertux.cpp:211
+#: src/weapon/supertux.cpp:214
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -985,7 +993,7 @@ msgstr "GNU opustil bojisko pred výbuchom"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Tchor opustil bojisko pred výbuchom"
 
-#: src/weapon/auto_bazooka.cpp:169
+#: src/weapon/auto_bazooka.cpp:172
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automatická raketa opustila bojisko ..."
 
@@ -997,7 +1005,7 @@ msgstr "Lopta opustila bojisko pred výbuchom"
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Pripojenie vypršalo. Skontroluj či nie je povolený firewall!"
 
-#: src/weapon/disco_grenade.cpp:123
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disco granát opustil parket pred výbuchom"
 
@@ -1009,7 +1017,7 @@ msgstr "Granát opustil bojisko pred výbuchom"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr ""
 
-#: src/weapon/bazooka.cpp:79 src/weapon/riot_bomb.cpp:82
+#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa opustila bojisko.."
 
@@ -1050,12 +1058,12 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr "Nedá sa kontaktovať hostiteľar."
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:241
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
 
-#: src/map/maps_list.cpp:243
+#: src/map/maps_list.cpp:253
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
@@ -1117,7 +1125,7 @@ msgstr "Wormux sa spúšťa..."
 msgid "Wormux version "
 msgstr "Wormux verzia"
 
-#: src/map/maps_list.cpp:88
+#: src/map/maps_list.cpp:90
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "XML chyba počas načítavania mapy '%s' :"
@@ -1131,7 +1139,7 @@ msgstr "Si sáám..."
 msgid "You are alone..."
 msgstr "Si sáám..."
 
-#: src/map/maps_list.cpp:252
+#: src/map/maps_list.cpp:262
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
@@ -1143,7 +1151,7 @@ msgstr "Potrebuješ najmenej dva platné tímy !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:449
+#: src/weapon/weapon_launcher.cpp:450
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 
@@ -1405,9 +1413,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Load game data..."
 #~ msgstr "Načítavam údaje hry ..."
-
-#~ msgid "Load map"
-#~ msgstr "Načítavam mapu"
 
 #~ msgid "Load skins:"
 #~ msgstr "Načítavam skiny:"
