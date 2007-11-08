@@ -44,6 +44,9 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   bt_map_plus = new Button(res, "menu/big_plus", false);
   bt_map_minus = new Button(res, "menu/big_minus", false);
 
+  // random map
+  random_map_preview = resource_manager.LoadImage(res, "menu/random_map");
+
   resource_manager.UnLoadXMLProfile(res);
 
   Box * tmp_map_box = new VBox(_size.GetX()-63, false);
@@ -204,7 +207,7 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
 
 void MapSelectionBox::UpdateRandomMapInfo(PictureWidget * widget, bool selected)
 {
-  widget->SetNoSurface();
+  widget->SetSurface(random_map_preview, true);
   if((display_only && !selected) || Network::GetInstance()->IsServer())
     widget->Disable();
   else
