@@ -518,7 +518,7 @@ msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
 #: src/menu/map_selection_box.cpp:216
 msgid "Choose randomly between the different maps"
-msgstr ""
+msgstr "Izberi naključno karto"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -942,9 +942,8 @@ msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
 #: src/menu/map_selection_box.cpp:215
-#, fuzzy
 msgid "Random map"
-msgstr "Nalaganje kart:"
+msgstr "Naključna karta"
 
 #: src/game/config.cpp:262
 msgid "Reading default config file"
