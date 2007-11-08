@@ -10,7 +10,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-10-31 15:12+0100\n"
 "PO-Revision-Date: 2007-08-09 13:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -21,7 +20,7 @@ msgstr ""
 "n%100==4 ? 2 : 3);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:297
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karta %s ni bila najdena :-("
@@ -49,12 +48,12 @@ msgstr[3] "%i igralcev pripravljenih"
 msgid "%s (%s) has died."
 msgstr "%s (%s) je umrl/a."
 
-#: src/map/maps_list.cpp:120
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> znan kot %s iz %s"
 
-#: src/map/maps_list.cpp:127
+#: src/map/maps_list.cpp:129
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz <%s>"
@@ -165,7 +164,7 @@ msgstr[1] "Ekipa %s je osvojila %u nakovali! Speštajte jih!"
 msgstr[2] "Ekipa %s je osvojila %u nakovala! Speštajte jih!"
 msgstr[3] "Ekipa %s je osvojila %u nakoval! Speštajte jih!"
 
-#: src/weapon/auto_bazooka.cpp:311
+#: src/weapon/auto_bazooka.cpp:314
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -183,7 +182,7 @@ msgstr[1] "Ekipa %s je osvojila %u kija!"
 msgstr[2] "Ekipa %s je osvojila %u kije!"
 msgstr[3] "Ekipa %s je osvojila %u kijev!"
 
-#: src/weapon/bazooka.cpp:120
+#: src/weapon/bazooka.cpp:124
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -231,7 +230,7 @@ msgstr[1] "Ekipa %s je osvojila %u trama! Ne pozabite na čelado!"
 msgstr[2] "Ekipa %s je osvojila %u trame! Ne pozabite na čelado!"
 msgstr[3] "Ekipa %s je osvojila %u tramov! Ne pozabite na čelado!"
 
-#: src/weapon/disco_grenade.cpp:158
+#: src/weapon/disco_grenade.cpp:162
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -335,7 +334,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u dihurjemetov! Bolje da imajo s sabo gas maske!"
 
-#: src/weapon/riot_bomb.cpp:123
+#: src/weapon/riot_bomb.cpp:127
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -407,7 +406,7 @@ msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 
-#: src/weapon/supertux.cpp:302
+#: src/weapon/supertux.cpp:305
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -420,7 +419,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u SuperTux-ov! Še niste videli letečega pingvina?"
 
-#: src/include/action_handler.cpp:322
+#: src/include/action_handler.cpp:323
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
@@ -473,7 +472,7 @@ msgstr "Nakovalo"
 msgid "Authors:"
 msgstr "Avtorji:"
 
-#: src/weapon/auto_bazooka.cpp:201
+#: src/weapon/auto_bazooka.cpp:204
 msgid "Automatic Bazooka"
 msgstr "Avtomatska Bazuka"
 
@@ -485,7 +484,7 @@ msgstr "Slab vtičnik..."
 msgid "Baseball Bat"
 msgstr "Kij"
 
-#: src/weapon/bazooka.cpp:105
+#: src/weapon/bazooka.cpp:109
 msgid "Bazooka"
 msgstr "Bazuka"
 
@@ -497,7 +496,7 @@ msgstr "Varilnik"
 msgid "Bounce Ball"
 msgstr "Skokica"
 
-#: src/weapon/supertux.cpp:174
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Adijo tux..."
 
@@ -516,6 +515,10 @@ msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
+
+#: src/menu/map_selection_box.cpp:216
+msgid "Choose randomly between the different maps"
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -559,7 +562,7 @@ msgstr "Vodja: "
 msgid "Credits"
 msgstr "Zasluge"
 
-#: src/weapon/disco_grenade.cpp:143
+#: src/weapon/disco_grenade.cpp:147
 msgid "Disco Grenade"
 msgstr "Disko Granata"
 
@@ -720,7 +723,7 @@ msgstr ""
 "Uporaba: držite preslednico\n"
 "ena uporaba na potezo"
 
-#: src/weapon/auto_bazooka.cpp:202
+#: src/weapon/auto_bazooka.cpp:205
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -756,7 +759,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Začetna energija"
 
-#: src/weapon/bazooka.cpp:106 src/weapon/riot_bomb.cpp:109
+#: src/weapon/bazooka.cpp:110 src/weapon/riot_bomb.cpp:113
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -800,7 +803,7 @@ msgstr ""
 msgid "Language"
 msgstr "Jezik"
 
-#: src/map/maps_list.cpp:221
+#: src/map/maps_list.cpp:231
 msgid "Load maps:"
 msgstr "Nalaganje kart:"
 
@@ -870,7 +873,7 @@ msgstr "Glasba?"
 msgid "Network Game"
 msgstr "Omrežna igra"
 
-#: src/network/network.cpp:249
+#: src/network/network.cpp:256
 msgid "Network initialization"
 msgstr "Inicializacija omrežja"
 
@@ -938,6 +941,11 @@ msgstr "Končaj"
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
+#: src/menu/map_selection_box.cpp:215
+#, fuzzy
+msgid "Random map"
+msgstr "Nalaganje kart:"
+
 #: src/game/config.cpp:262
 msgid "Reading default config file"
 msgstr "Branje privzete nastavitvene datoteke"
@@ -954,7 +962,7 @@ msgstr "Osveži"
 msgid "Resolution"
 msgstr "Ločljivost"
 
-#: src/weapon/riot_bomb.cpp:108
+#: src/weapon/riot_bomb.cpp:112
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
@@ -962,7 +970,7 @@ msgstr "Kopaška granata"
 msgid "Run game"
 msgstr "Poženi igro"
 
-#: src/network/chat.cpp:77
+#: src/network/chat.cpp:79
 msgid "Say: "
 msgstr "Reci: "
 
@@ -1026,7 +1034,7 @@ msgstr "Zaloga:"
 msgid "Submachine Gun"
 msgstr "Brzostrelka"
 
-#: src/weapon/supertux.cpp:211
+#: src/weapon/supertux.cpp:214
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1054,7 +1062,7 @@ msgstr "Gnu je zapustil bojišče preden ga je razneslo"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Dihur je zapustil bojišče preden ga je razneslo"
 
-#: src/weapon/auto_bazooka.cpp:169
+#: src/weapon/auto_bazooka.cpp:172
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Avtomatska raketa je zapustila bojišče..."
 
@@ -1066,7 +1074,7 @@ msgstr "Žoga je zapustila bojišče preden je eksplodirala"
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Povezava se je iztekla. Preverite da ni kriv požarni zid!"
 
-#: src/weapon/disco_grenade.cpp:123
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disko granata je zapustila plesišče preden je eksplodirala"
 
@@ -1078,7 +1086,7 @@ msgstr "Granata je zapustila bojišče preden je eksplodirala"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostali te čakajo! Zbudi se! :-)"
 
-#: src/weapon/bazooka.cpp:79 src/weapon/riot_bomb.cpp:82
+#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je zapustila bojišče..."
 
@@ -1127,12 +1135,12 @@ msgstr "Orodja"
 msgid "Unable to contact host."
 msgstr "Ni bilo mogoče kontaktirati gostitelja."
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:241
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti imenika s kartami (%s)!"
 
-#: src/map/maps_list.cpp:243
+#: src/map/maps_list.cpp:253
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti zasebnega imenika s kartami (%s)!"
@@ -1194,7 +1202,7 @@ msgstr "Wormux se zaganja..."
 msgid "Wormux version "
 msgstr "Wormux različica "
 
-#: src/map/maps_list.cpp:88
+#: src/map/maps_list.cpp:90
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "XML napaka pri nalaganju karte '%s' :"
@@ -1207,7 +1215,7 @@ msgstr "Sami ste :-/"
 msgid "You are alone..."
 msgstr "Sami ste..."
 
-#: src/map/maps_list.cpp:252
+#: src/map/maps_list.cpp:262
 msgid "You need at least one valid map !"
 msgstr "Potrebujete vsaj eno veljavno karto!"
 
@@ -1219,7 +1227,7 @@ msgstr "Potrebujete vsaj dve veljavni ekipi !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:449
+#: src/weapon/weapon_launcher.cpp:450
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 
