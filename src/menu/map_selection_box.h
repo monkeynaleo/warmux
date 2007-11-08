@@ -22,6 +22,7 @@
 #ifndef MAP_SELECTION_BOX_H
 #define MAP_SELECTION_BOX_H
 
+#include "graphic/surface.h"
 #include "gui/box.h"
 #include "include/base.h"
 #include "tool/point.h"
@@ -50,6 +51,7 @@ class MapSelectionBox : public HBox
   Label *map_name_label;
   Label *map_author_label;
   Button *bt_map_plus, *bt_map_minus;
+  Surface random_map_preview;
 
   void ChangeMap(uint index);
   void UpdateMapInfo(PictureWidget * widget, uint index, bool selected);
