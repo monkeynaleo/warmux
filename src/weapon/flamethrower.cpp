@@ -65,7 +65,6 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
   WeaponBullet("flamethrower_bullet", cfg, p_launcher), particle(40)
 {
   explode_colliding_character = true;
-  //camera_follow_closely = false; //why with this don't compile?
 }
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)

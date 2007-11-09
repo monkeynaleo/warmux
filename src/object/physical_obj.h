@@ -40,6 +40,12 @@ typedef enum
   DROWNED
 } alive_t;
 
+typedef enum {
+  NO_COLLISION = 0,
+  COLLISION_ON_GROUND,
+  COLLISION_ON_OBJECT
+} collision_t;
+
 extern const double PIXEL_PER_METER;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2);
@@ -57,6 +63,7 @@ private:
   bool m_collides_with_objects;
   Point2i m_rebound_position;
 protected:
+  collision_t last_collision_type;
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
   bool m_ignore_movements;
@@ -190,6 +197,8 @@ public:
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
 
+  void NotifyMove(Point2d oldPos, Point2d newPos);
+
 protected:
   virtual void SignalRebound();
   virtual void SignalObjectCollision(PhysicalObj *) { };
@@ -201,7 +210,6 @@ private:
   //Retrun the position of the point of contact of the obj on the ground
   bool ContactPoint (int &x, int &y) const;
 
-  void NotifyMove(Point2d oldPos, Point2d newPos);
 
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();

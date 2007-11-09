@@ -60,6 +60,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_characters(false),
   m_collides_with_objects(false),
   m_rebound_position(-1,-1),
+  last_collision_type(NO_COLLISION),
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
@@ -212,12 +213,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   Point2d pos, offset;
   PhysicalObj* collided_obj = NULL;
 
-  typedef enum {
-    NO_COLLISION = 0,
-    COLLISION_ON_GROUND,
-    COLLISION_ON_OBJECT
-  } collision_t;
-  collision_t collision = NO_COLLISION;
+  last_collision_type = NO_COLLISION;
 
   if (IsGhost())
     return;
@@ -263,7 +259,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
         tmpPos.x = InRange_Long(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
         tmpPos.y = InRange_Long(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
         MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
-        collision = COLLISION_ON_GROUND;
+        last_collision_type = COLLISION_ON_GROUND;
         break;
       }
 
@@ -279,16 +275,16 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     if( collided_obj != NULL)
       MSG_DEBUG( "physic.state", "%s collide on %s", m_name.c_str(), collided_obj->GetName().c_str() );
 
-    if( collided_obj != NULL)
-      collision = COLLISION_ON_OBJECT;
+    if(collided_obj != NULL)
+      last_collision_type = COLLISION_ON_OBJECT;
     else
-    if( ! IsInVacuumXY(tmpPos, false) )
-      collision = COLLISION_ON_GROUND;
+    if(!IsInVacuumXY(tmpPos, false))
+      last_collision_type = COLLISION_ON_GROUND;
 
-    if( collision != NO_COLLISION ) // Nothing more to do!
+    if(last_collision_type != NO_COLLISION) // Nothing more to do!
     {
       MSG_DEBUG( "physic.state", "%s - Collision at %d,%d : %s", m_name.c_str(), tmpPos.x, tmpPos.y,
-          collision == COLLISION_ON_GROUND ? "on ground" : "on an object");
+          last_collision_type == COLLISION_ON_GROUND ? "on ground" : "on an object");
 
       // Set the object position to the current position.
       SetXY(Point2d(pos.x - offset.x, pos.y - offset.y));
@@ -302,11 +298,11 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   // Notify the weapon that there is a movement
   // Useful for grapple for example
-  ActiveTeam().AccessWeapon().NotifyMove(!!collision);
+  ActiveTeam().AccessWeapon().NotifyMove(!!last_collision_type);
 
-  if ( collision == NO_COLLISION ) // Nothing more to do!
+  if (last_collision_type == NO_COLLISION ) // Nothing more to do!
     return;
-  if ( collision == COLLISION_ON_GROUND ) {
+  if (last_collision_type == COLLISION_ON_GROUND ) {
       // Find the contact point and collision angle.
 //       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
 //       // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
@@ -336,7 +332,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
     Rebound(contactPos, ground_angle);
     CheckRebound();
-  } else if ( collision == COLLISION_ON_OBJECT ) {
+  } else if (last_collision_type == COLLISION_ON_OBJECT ) {
     SignalObjectCollision(collided_obj);
     collided_obj->SignalObjectCollision(this);
 
