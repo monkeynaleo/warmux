@@ -152,7 +152,7 @@ Config::Config():
   std::string contents = std::string(path) + std::string("/Contents");
   data_dir = contents + std::string("/Resources/data");
   ttf_filename = contents + std::string("/Resources/data/font/DejaVuSans.ttf");
-  locale_dir = contents + std::string("/Resources/po");
+  locale_dir = contents + std::string("/Resources/locale");
 #else
 #  ifdef _WIN32
   std::string basepath = GetWormuxPath();
