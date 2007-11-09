@@ -141,14 +141,12 @@ void WeaponProjectile::Shoot(double strength)
   ResetConstants();
 
   // Set the initial position.
-  SetXY(launcher->GetGunHolePosition() - GetSize()/2);
   SetOverlappingObject(&ActiveCharacter(), 100);
+  lst_objects.AddObject(this);
+  Camera::GetInstance()->FollowObject(this, true);
 
-  // Set the initial speed.
   double angle = ActiveCharacter().GetFiringAngle();
-  RandomizeShoot(angle,strength);
-  SetSpeed(strength, angle);
-  PutOutOfGround(angle);
+  RandomizeShoot(angle, strength);
 
   MSG_DEBUG("weapon.projectile", "shoot from position %d,%d (size %d, %d) - hand position:%d,%d",
 	    ActiveCharacter().GetX(),
@@ -164,8 +162,22 @@ void WeaponProjectile::Shoot(double strength)
 
   ShootSound();
 
-  lst_objects.AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true);
+  // bug #10236 : problem with flamethrower collision detection
+  // Check if the object is colliding something between hand position and gun hole
+  Point2i hand_position = ActiveCharacter().GetHandPosition() - GetSize() / 2;
+  Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
+  Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
+  Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
+  SetXY(hand_position);
+  SetSpeed(strength, angle);
+  NotifyMove(f_hand_position, f_hole_position);
+  if(last_collision_type == NO_COLLISION) {
+    // Set the initial position and speed.
+    SetXY(hole_position);
+    SetSpeed(strength, angle);
+    PutOutOfGround(angle);
+  }
+
 }
 
 void WeaponProjectile::ShootSound()
