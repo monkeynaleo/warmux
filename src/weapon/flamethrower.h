@@ -23,22 +23,22 @@
 #ifndef FLAMETHROWER_H
 #define FLAMETHROWER_H
 
-#include <vector>
-#include "weapon/weapon_launcher.h"
-#include "include/base.h"
-#include "tool/point.h"
+#include "particles/particle.h"
+#include "weapon_launcher.h"
 
-class Shotgun : public WeaponLauncher
+class FlameThrower : public WeaponLauncher
 {
+    ParticleEngine particle;
+    void RepeatShoot();
   protected:
     WeaponProjectile * GetProjectileInstance();
     void IncMissedShots();
     bool p_Shoot();
   public:
-    Shotgun();
+    FlameThrower();
+    virtual void HandleKeyPressed_Shoot(bool shift) { HandleKeyRefreshed_Shoot(shift); };
+    virtual void HandleKeyRefreshed_Shoot(bool shift);
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-  private:
-    void ShootSound() const;
 };
 
-#endif /* SHOTGUN_H */
+#endif /* SUBMACHINE_GUN_H */
