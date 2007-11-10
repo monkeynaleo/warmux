@@ -11,14 +11,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: (null)\n"
 "PO-Revision-Date: 2007-11-08 18:49+0000\n"
 "Last-Translator: Bruno Queiros <brunoqueiros@portugalmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/map/maps_list.cpp:326
 #, c-format
@@ -133,17 +132,21 @@ msgstr[0] "A equipa %s ganhou %u ataque aéreo!"
 msgstr[1] "As equipas %s ganharam %u ataques aéreos!"
 
 #: src/weapon/airhammer.cpp:177
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
 "your neighbours."
+msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
-msgstr ""
-"A equipa %s ganhou %u martelo pneumático! Não faças muito barulho com ele! Obrigado, "
-"os teus vizinhos."
-"A equipa %s ganhou %u martelos pneumáticos! Não faças muito barulho com eles! Obrigado, "
-"os teus vizinhos."
+msgstr[0] ""
+"A equipa %s ganhou %u martelo pneumático! Não faças muito barulho com ele! "
+"Obrigado, os teus vizinhos.A equipa %s ganhou %u martelos pneumáticos! Não "
+"faças muito barulho com eles! Obrigado, os teus vizinhos."
+msgstr[1] ""
+"A equipa %s ganhou %u martelo pneumático! Não faças muito barulho com ele! "
+"Obrigado, os teus vizinhos.A equipa %s ganhou %u martelos pneumáticos! Não "
+"faças muito barulho com eles! Obrigado, os teus vizinhos."
 
 #: src/weapon/anvil.cpp:173
 #, c-format
@@ -174,14 +177,20 @@ msgstr[0] "A equipa %s ganhou %u bazooka!"
 msgstr[1] "As equipas %s ganharam %u bazookas!"
 
 #: src/weapon/blowtorch.cpp:139
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr ""
-"A equipa %s ganhou %u lança-chamas! Se és menor de idade pede aos teus pais que te deixem usá-lo."
-"%s team has won %u lança-chamas! Se és menor de idade pede aos teus pais que te deixem usá-lo."
+msgstr[0] ""
+"A equipa %s ganhou %u lança-chamas! Se és menor de idade pede aos teus pais "
+"que te deixem usá-lo.%s team has won %u lança-chamas! Se és menor de idade "
+"pede aos teus pais que te deixem usá-lo."
+msgstr[1] ""
+"A equipa %s ganhou %u lança-chamas! Se és menor de idade pede aos teus pais "
+"que te deixem usá-lo.%s team has won %u lança-chamas! Se és menor de idade "
+"pede aos teus pais que te deixem usá-lo."
 
 #: src/weapon/bounce_ball.cpp:107
 #, c-format
@@ -201,15 +210,25 @@ msgstr[1] "As equipas %s ganharam %u bombas cluster!"
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] "A equipa %s ganhou %u arma de construção! Não te esqueças do teu capacete."
-msgstr[1] "As equipas %s ganharam %u armas de construção! Não te esqueças do teu capacete."
+msgstr[0] ""
+"A equipa %s ganhou %u arma de construção! Não te esqueças do teu capacete."
+msgstr[1] ""
+"As equipas %s ganharam %u armas de construção! Não te esqueças do teu "
+"capacete."
 
 #: src/weapon/disco_grenade.cpp:162
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
+msgid_plural ""
 "%s team has won %u disco grenades! Shake your body when throwing them!"
-msgstr "A equipa %s ganhou %u granada de disco! Abana o teu corpo quando a lançares!"
-"A equipa %s ganhou %u granadas de disco! Abana o teu corpo quando as lançares!"
+msgstr[0] ""
+"A equipa %s ganhou %u granada de disco! Abana o teu corpo quando a lançares!"
+"A equipa %s ganhou %u granadas de disco! Abana o teu corpo quando as "
+"lançares!"
+msgstr[1] ""
+"A equipa %s ganhou %u granada de disco! Abana o teu corpo quando a lançares!"
+"A equipa %s ganhou %u granadas de disco! Abana o teu corpo quando as "
+"lançares!"
 
 #: src/weapon/dynamite.cpp:137
 #, c-format
@@ -218,7 +237,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "A equipa %s ganhou %u dinamite!"
 msgstr[1] "As equipas %s ganharam %u dinamite!"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -299,7 +318,9 @@ msgstr[1] "As equipas %s ganharam %u caçadeiras!"
 #, c-format
 msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
-msgstr[0] "A equipa %s ganhou %u espingarda de atirador furtivo! Acerta-lhe entre os olhos!"
+msgstr[0] ""
+"A equipa %s ganhou %u espingarda de atirador furtivo! Acerta-lhe entre os "
+"olhos!"
 msgstr[1] "As equipas %s ganharam %u espingardas de atirador furtivo!"
 
 #: src/weapon/submachine_gun.cpp:148
@@ -341,7 +362,8 @@ msgstr[1] "As equipas %s ganharam %u mudanças de turno!"
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "A equipa %s ganhou %u lançador de tux! Nunca viste um penguim voador?"
+msgstr[0] ""
+"A equipa %s ganhou %u lançador de tux! Nunca viste um penguim voador?"
 msgstr[1] "As equipas %s ganharam %u lançadores de tux!"
 
 #: src/include/action_handler.cpp:323
@@ -441,7 +463,7 @@ msgstr "Incapaz de abrir o directório das equipas pessoais (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Incapaz de abrir o directório das equipas (%s)!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr "Escolher aleatóriamente entre os diferentes mapas"
 
@@ -578,7 +600,7 @@ msgstr "Erro: Incapaz de iniciar servidor"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erro: não consegui encontrar o skin \"%s\" para a equipa \"%s\"."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr "Lança Chamas"
 
@@ -864,7 +886,7 @@ msgstr "Sair"
 msgid "Quit Wormux"
 msgstr "Sair Wormux"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 msgid "Random map"
 msgstr "Mapa aleatório"
 
@@ -1146,7 +1168,7 @@ msgstr "Você precisa de pelo menos duas equipas válidas!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Não será capaz de jogar antes de escolher uma equipa !"
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "O seu tiro falhou!"
 
