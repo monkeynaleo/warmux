@@ -15,8 +15,8 @@
 
   <bonus_box>
     <mass>100.0</mass>
-    <wind_factor>16.0</wind_factor>
-    <air_resist_factor>4.5</air_resist_factor>
+    <wind_factor>13.0</wind_factor>
+    <air_resist_factor>16.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
