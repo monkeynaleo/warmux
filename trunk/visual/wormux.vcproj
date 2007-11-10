@@ -618,6 +618,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\irc.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\net_error_msg.cpp"
 					>
 				</File>
@@ -639,6 +643,10 @@
 				</File>
 				<File
 					RelativePath="..\src\network\randomsync.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\socket.cpp"
 					>
 				</File>
 			</Filter>
@@ -814,6 +822,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\text_handling.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\xml_document.cpp"
 					>
 				</File>
@@ -875,6 +887,10 @@
 				</File>
 				<File
 					RelativePath="..\src\weapon\explosion.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\flamethrower.cpp"
 					>
 				</File>
 				<File
@@ -1428,6 +1444,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\irc.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\net_error_msg.h"
 					>
 				</File>
@@ -1449,6 +1469,10 @@
 				</File>
 				<File
 					RelativePath="..\src\network\randomsync.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\socket.h"
 					>
 				</File>
 			</Filter>
@@ -1652,6 +1676,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\text_handling.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\vector2.h"
 					>
 				</File>
@@ -1721,6 +1749,10 @@
 				</File>
 				<File
 					RelativePath="..\src\weapon\explosion.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\flamethrower.h"
 					>
 				</File>
 				<File
