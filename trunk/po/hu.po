@@ -241,7 +241,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s csapata %u dinamitot nyert!"
 msgstr[1] "%s csapata %u dinamitot nyert!"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -468,7 +468,7 @@ msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -604,7 +604,7 @@ msgstr "Hiba: Nem sikerült a szerver indítása"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem találom a(z) \"%s\" testet a(z) \"%s\" csapathoz."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -879,7 +879,7 @@ msgstr "Kilépés"
 msgid "Quit Wormux"
 msgstr "Kilépés a Wormuxból"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr ""
@@ -1159,7 +1159,7 @@ msgstr "Választanod kell legalább két csapatot!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Ez mellé ment!"
 

@@ -216,7 +216,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "L'équipe %s a gagné %u baton de dynamite !"
 msgstr[1] "L'équipe %s a gagné %u batons de dynamite !"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -438,7 +438,7 @@ msgstr "Gaingne pas ouvrir le répertoire des équipes (%s) !"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Gaingne pas ouvrir le répertoire des équipes (%s) !"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -574,7 +574,7 @@ msgstr "Tééé, le serveur y veut pas démarrer."
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : le skin \"%s\" pour l'équipe \"%s\" la fané ça..."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -851,7 +851,7 @@ msgstr "Barré"
 msgid "Quit Wormux"
 msgstr "Quitte Wormux"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Terrains lé en train de charger :"
@@ -1130,7 +1130,7 @@ msgstr "Il faut au minimum deux équipes correctes !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 

@@ -216,7 +216,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Mannschaft %s hat %u Stange Dynamit gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Stangen Dynamit gewonnen!"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -436,7 +436,7 @@ msgstr "Не мога да отворя директорията на отбор
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -576,7 +576,7 @@ msgstr "Kann Server nicht starten"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Не мога да намеря телата на \"%s\" отбора \"%s\" !"
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -854,7 +854,7 @@ msgstr "Вън!"
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Карти които да заредя:"
@@ -1134,7 +1134,7 @@ msgstr "Трябват ми поне два валидни отбора!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Не точно там..."
 

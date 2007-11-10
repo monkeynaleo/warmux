@@ -229,7 +229,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "La squadra %s ha vinto %u Candelotto di Dinamite!"
 msgstr[1] "La squadra %s ha vinto %u Candelotti di Dinamite !"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -459,7 +459,7 @@ msgstr "Impossibile aprire la directory personale delle squadre (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossibile aprire la directory delle squadra (%s)!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -597,7 +597,7 @@ msgstr "Errore: impossibile avviare il server"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Errore: impossibile trovare l'aspetto \"%s\" per la squadra \"%s\"."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -881,7 +881,7 @@ msgstr "Esci"
 msgid "Quit Wormux"
 msgstr "Esci da Wormux"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Caricamento mappa"
@@ -1165,7 +1165,7 @@ msgstr "Hai bisogno almeno di due squadre valide !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Non puoi giocare senza scegliere una squadra!"
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Bersaglio mancato!"
 

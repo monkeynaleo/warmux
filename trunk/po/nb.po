@@ -139,11 +139,11 @@ msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
 msgstr[0] ""
-"%s laget har vunnet %u lufthammer! Ikke bråk for mye med den! På forhånd takk,"
-"Naboene"
+"%s laget har vunnet %u lufthammer! Ikke bråk for mye med den! På forhånd "
+"takk,Naboene"
 msgstr[1] ""
-"%s laget har vunnet %u lufthammere! Ikke bråk for mye med dem! På forhånd takk,"
-"Naboene"
+"%s laget har vunnet %u lufthammere! Ikke bråk for mye med dem! På forhånd "
+"takk,Naboene"
 
 #: src/weapon/anvil.cpp:173
 #, c-format
@@ -180,8 +180,12 @@ msgid ""
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr[0] "%s laget har vunnet %u blåselampe! Hvis du er under 18 du be foresatte om lov til å bruke den."
-msgstr[1] "%s laget har vunnet %u blåselamper! Hvis du er under 18 du be foresatte om lov til å bruke dem."
+msgstr[0] ""
+"%s laget har vunnet %u blåselampe! Hvis du er under 18 du be foresatte om "
+"lov til å bruke den."
+msgstr[1] ""
+"%s laget har vunnet %u blåselamper! Hvis du er under 18 du be foresatte om "
+"lov til å bruke dem."
 
 #: src/weapon/bounce_ball.cpp:107
 #, c-format
@@ -219,7 +223,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s-laget har vunnet %u Dynamittkubbe !"
 msgstr[1] "%s-laget har vunnet %u Dynamittkubber !"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -259,7 +263,8 @@ msgstr[1] "%s-laget har vunnet %u jetmotorer !"
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "%s-laget har vunnet %u lavgravitetsmaskin, Jeg er Niel Armstrong !"
-msgstr[1] "%s-laget har vunnet %u lavgravitetsmaskiner, Jeg er Niel Armstrong !"
+msgstr[1] ""
+"%s-laget har vunnet %u lavgravitetsmaskiner, Jeg er Niel Armstrong !"
 
 #: src/weapon/mine.cpp:236
 #, c-format
@@ -315,7 +320,8 @@ msgstr[1] "%s-laget har vunnet %u maskinpistoler !"
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "%s-laget har vunnet %u selvmordsbombe !"
-msgstr[1] "%s-laget har vunnet %u selvmordsbomber! Bruk alle for å få en ekstra bonus !"
+msgstr[1] ""
+"%s-laget har vunnet %u selvmordsbomber! Bruk alle for å få en ekstra bonus !"
 
 #: src/weapon/syringe.cpp:107
 #, c-format
@@ -335,20 +341,26 @@ msgstr[1] "%s-laget har vunnet %u teleporteringer."
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] "%s-laget har vunnet %u mulighet til å hoppe over en runde, du vil elske det !"
-msgstr[1] "%s-laget har vunnet %u muligheter til å hoppe over en runde, du vil elske det !"
+msgstr[0] ""
+"%s-laget har vunnet %u mulighet til å hoppe over en runde, du vil elske det !"
+msgstr[1] ""
+"%s-laget har vunnet %u muligheter til å hoppe over en runde, du vil elske "
+"det !"
 
 #: src/weapon/supertux.cpp:305
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "%s-laget har vunnet %u Tux-kaster, har du aldri sett en flygende pingvin?"
-msgstr[1] "%s-laget har vunnet %u Tux-kastere, har du aldri sett en flygende pingvin?"
+msgstr[0] ""
+"%s-laget har vunnet %u Tux-kaster, har du aldri sett en flygende pingvin?"
+msgstr[1] ""
+"%s-laget har vunnet %u Tux-kastere, har du aldri sett en flygende pingvin?"
 
 #: src/include/action_handler.cpp:323
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s prøver å koble til en annen versjon av Wormux : mottager=%s, tjener=%s"
+msgstr ""
+"%s prøver å koble til en annen versjon av Wormux : mottager=%s, tjener=%s"
 
 #: src/interface/interface.cpp:173
 msgid "(dead)"
@@ -387,8 +399,7 @@ msgid ""
 "a hit per turn"
 msgstr ""
 "Retning : Opp/ned\n"
-"Skyt : mellomromstasten"
-"Et treff per runde"
+"Skyt : mellomromstastenEt treff per runde"
 
 #: src/weapon/anvil.cpp:119
 msgid "Anvil"
@@ -442,7 +453,7 @@ msgstr "Kan ikke åpne den personlige lagmappen (%s) !"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åpne lagmappen (%s) !"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr "Velg tilfeldig mellom forskjellige kart"
 
@@ -514,7 +525,6 @@ msgid "Error in %s:%lu"
 msgstr "Feil i %s:%lu"
 
 #: src/team/teams_list.cpp:135 src/team/teams_list.cpp:143
-#,
 msgid "Error loading team :"
 msgstr "Lasting av %s-laget feilet :"
 
@@ -579,7 +589,7 @@ msgstr "Start av tjener feilet"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Kan ikke finne utseendet \"%s\" til \"%s\"-laget."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr "Flammekaster"
 
@@ -635,17 +645,14 @@ msgid ""
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
-"Hvordan bruke den : Hold mellomromstasten nede"
-"Retning : Opp/Ned"
-"En ammo per runde"
+"Hvordan bruke den : Hold mellomromstasten nedeRetning : Opp/NedEn ammo per "
+"runde"
 
 #: src/weapon/airhammer.cpp:63
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
-msgstr ""
-"Hvordan bruke den : Hold mellomromstasten nede"
-"En ammo per runde"
+msgstr "Hvordan bruke den : Hold mellomromstasten nedeEn ammo per runde"
 
 #: src/weapon/auto_bazooka.cpp:205
 msgid ""
@@ -654,18 +661,14 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Hvordan bruke den : venstreklikk på målet"
-"Første skytevinkel : Opp/Ned"
-"Skyt : Hold mellomromstasten nede til riktig styrke er nådd"
-"en ammo per runde"
+"Hvordan bruke den : venstreklikk på måletFørste skytevinkel : Opp/NedSkyt : "
+"Hold mellomromstasten nede til riktig styrke er nådden ammo per runde"
 
 #: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
-msgstr ""
-"Hvordan bruke den : venstreklikk på målet"
-"en ammo per runde"
+msgstr "Hvordan bruke den : venstreklikk på måleten ammo per runde"
 
 #: src/game/game.cpp:844
 msgid "Hurry up, you are too slow !!"
@@ -689,9 +692,8 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Første skytevinkel : Opp/Ned"
-"Skyt : Hold mellomromstasten nede til riktig styrke er nådd"
-"en ammo per runde"
+"Første skytevinkel : Opp/NedSkyt : Hold mellomromstasten nede til riktig "
+"styrke er nådden ammo per runde"
 
 #: src/game/game_init.cpp:155
 msgid "Initialisation"
@@ -767,7 +769,7 @@ msgstr "Mine"
 msgid "Most accurate"
 msgstr "Mest treffsikker"
 
-#: src/menu/results_menu.cpp:27
+#: src/menu/results_menu.cpp:275
 msgid "Most clumsy"
 msgstr "Mest klønete"
 
@@ -863,7 +865,7 @@ msgstr "Avslutt"
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 msgid "Random map"
 msgstr "Tilfeldig kart"
 
@@ -1031,10 +1033,9 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Timeout : Rull på musehjulet eller trykk på Page Up/Down"
-"Første skytevinkel : Opp/Ned"
-"Skyt : Hold mellomromstasten nede til riktig styrke er nådd"
-"en ammo per runde"
+"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
+"Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
+"per runde"
 
 #: src/weapon/bounce_ball.cpp:82
 msgid ""
@@ -1043,10 +1044,9 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
-"Timeout : Rull på musehjulet eller trykk på Page Up/Down"
-"Første skytevinkel : Opp/Ned"
-"Skyt : Hold mellomromstasten nede til riktig styrke er nådd"
-"en ammo per runde"
+"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
+"Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
+"per runde"
 
 #: src/interface/weapon_menu.cpp:169
 msgid "Tools"
@@ -1146,7 +1146,7 @@ msgstr "Du må ha minst to godkjente lag!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille uten å ha valgt et lag"
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Du bommet"
 
@@ -1160,9 +1160,7 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
-"angrepsretning: venstre/høyre"
-"å bombe: ventreklikk på målet"
-"en bombe per runde"
+"angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per runde"
 
 #: src/map/ground.cpp:60
 msgid "done"
