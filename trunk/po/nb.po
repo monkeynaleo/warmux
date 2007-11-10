@@ -1007,7 +1007,7 @@ msgstr "Granaten forsvant fra kampplassen uten å eksplodere."
 
 #: src/menu/network_menu.cpp:320
 msgid "The others are waiting for you! Wake up :-)"
-msgstr ""
+msgstr "De andre venter på deg, Våkn opp :-)"
 
 #: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
@@ -1087,7 +1087,7 @@ msgstr[1] "Vent ! %i spillere er ikke klare enda !"
 
 #: src/menu/network_menu.cpp:387
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr ""
+msgstr "Venter på server, alt du kan gjøre er å avbryte eller chatte"
 
 #. Initialization of teams' energy
 #. Adding label
