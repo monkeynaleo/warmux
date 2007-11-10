@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-11-10 13:40+0100\n"
+"PO-Revision-Date: 2007-06-09 01:20+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
-"Language-Team: Bosnian <local@linux.org.ba>\n"
+"Language-Team: Bosnian <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,15 +52,15 @@ msgid "%s <%s> from %s"
 msgstr "%s <%s> iz %s"
 
 #: src/menu/team_box.cpp:78
-#, c-format
+#, fuzzy, c-format
 msgid "%s Team"
-msgstr "Tim"
+msgstr "Timovi"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:76
 #, c-format
 msgid "%s Team - Remote"
-msgstr "%s Tim - Remote"
+msgstr "%s Tim - Udaljenost"
 
 #: src/game/game.cpp:787
 #, c-format
@@ -113,20 +113,20 @@ msgstr "%s tim već ima neograničenu municiju za %s!"
 #: src/weapon/skip_turn.cpp:47
 #, c-format
 msgid "%s team has skipped its turn."
-msgstr "%s tim preskočio svoj red."
+msgstr "%s timj preskočio svoj red."
 
 #: src/weapon/gnu.cpp:156
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
-msgstr[0] "%s tim je dobio  %u Gnu! Odnesi ih sve frajeru!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/air_attack.cpp:254
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
-msgstr[0] "%s tim je dobio %u zračnog napada!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/airhammer.cpp:177
@@ -137,205 +137,207 @@ msgid ""
 msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
-msgstr[0] "%s tim je dobio %u  zračni čekić! Nemoj pravit previše buke sa njim! Hvala, vaše komšije."
+msgstr[0] ""
 msgstr[1] ""
 
 #: src/weapon/anvil.cpp:173
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
-msgstr[0] "%s tim je dobio %u nakovanj! Sve ih složi!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/auto_bazooka.cpp:314
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
-msgstr[0] "%s tim je dobio %u automatskih bazuka!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/baseball.cpp:110
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
-msgstr[0] "%s tim je dobio %u palija!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/bazooka.cpp:124
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
-msgstr[0] "%s tim je dobio %u bazuku!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/blowtorch.cpp:139
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr[0] "%s tim je dobio %u pržača! Ako si ispod 18, pitaj roditelje da ga koristis. "
+msgstr[0] ""
 msgstr[1] ""
 
 #: src/weapon/bounce_ball.cpp:107
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
-msgstr[0] "%s tim je dobio %u odskocica! Boing!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/cluster_bomb.cpp:170
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
-msgstr[0] "%s tim je dobio %u kasetna bomba!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/construct.cpp:61
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] "%s tim je dobio %u konstrukcija! Nemoj zaboravit šljem."
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/disco_grenade.cpp:162
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
-msgstr[0] "%s tim je dobio %u disko granata! Pomakni guzicom dok je bacas!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/dynamite.cpp:137
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
-msgstr[0] "%s tim je dobio %u dinamit!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/flamethrower.cpp:161
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
-msgstr[0] "%s tim je dobio %u bacač plamena!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/grapple.cpp:709
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
-msgstr[0] "%s tim je dobio %u kuku!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/grenade.cpp:83
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
-msgstr[0] "%s tim je dobio %u granatu!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/gun.cpp:91
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
-msgstr[0] "%s tim je dobio %u pistolj!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/jetpack.cpp:225
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
-msgstr[0] "%s tim je dobio %u jetpack! Extraaa!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/lowgrav.cpp:70
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] "%s tim je dobio %u lowgrav! Ja sam Niel Armstrong!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/mine.cpp:236
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
-msgstr[0] "%s tim je dobio %u mina!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/parachute.cpp:142
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
-msgstr[0] "%s tim je dobio %u padobran!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/polecat.cpp:164
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
-msgstr[0] "%s tim je dobio %u tvora! Imas gas masku?"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/riot_bomb.cpp:127
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
-msgstr[0] "%s tim je dobio %u džumbus bombu!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/shotgun.cpp:126
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
-msgstr[0] "%s tim je dobio %u sačmu!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/snipe_rifle.cpp:233
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u snipe rifle! Shout it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shout it him between the eyes!"
-msgstr[0] "%s tim je dobio %u snajper! Među oči ga!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/submachine_gun.cpp:148
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
-msgstr[0] "%s tim je dobio %u mašinku!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/suicide.cpp:69
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
-msgstr[0] "%s tim je dobio %u samoubistvo!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/syringe.cpp:107
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
-msgstr[0] "%s tim je dobio %u špricu!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/teleportation.cpp:109
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
-msgstr[0] "%s tim je dobio %u teleport!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/skip_turn.cpp:58
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] "%s tim je dobio %u preskoči red! Znam da ga voliš"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/weapon/supertux.cpp:305
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "%s tim je dobio %u tux lansera! Nisi vidio letećeg pingivna?"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/include/action_handler.cpp:323
@@ -350,7 +352,7 @@ msgstr "(mrtav)"
 #. Setting language selection
 #: src/menu/options_menu.cpp:188
 msgid "(system language)"
-msgstr "(sistemsi jezik)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:204
@@ -435,9 +437,9 @@ msgstr "Ne mogu otvorit timov direktorij  (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ne mogu otvorit timov direktorij  (%s)!"
 
-#: src/menu/map_selection_box.cpp:219
+#: src/menu/map_selection_box.cpp:216
 msgid "Choose randomly between the different maps"
-msgstr "Nasumice izaberi između drugačijih mapa"
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -518,7 +520,8 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:373
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -555,7 +558,8 @@ msgstr "Greška: Nemoguće konektovat se na %s:%s"
 
 #: src/menu/network_connection_menu.cpp:209
 msgid "Error: Unable to contact index server to host a game"
-msgstr "Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
+msgstr ""
+"Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
 
 #: src/menu/network_connection_menu.cpp:246
 msgid "Error: Unable to contact index server to search an internet game"
@@ -574,7 +578,7 @@ msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
 
 #: src/weapon/flamethrower.cpp:92
 msgid "Flame Thrower"
-msgstr "Bacač plamena"
+msgstr ""
 
 #: src/menu/options_menu.cpp:83
 msgid "Fullscreen?"
@@ -716,7 +720,7 @@ msgstr "Dođi na #wormux na irc.freenode.net da pronađeš protivnika"
 
 #: src/menu/options_menu.cpp:124
 msgid "Language"
-msgstr "Jezik"
+msgstr ""
 
 #: src/map/maps_list.cpp:231
 msgid "Load maps:"
@@ -758,7 +762,7 @@ msgstr "Mina"
 
 #: src/menu/results_menu.cpp:280
 msgid "Most accurate"
-msgstr "Najprecizniji"
+msgstr ""
 
 #: src/menu/results_menu.cpp:275
 #, fuzzy
@@ -858,7 +862,7 @@ msgstr "Odustani"
 msgid "Quit Wormux"
 msgstr "Izađi iz Wormux-a"
 
-#: src/menu/map_selection_box.cpp:218
+#: src/menu/map_selection_box.cpp:215
 #, fuzzy
 msgid "Random map"
 msgstr "Učitaj mape:"
@@ -925,7 +929,7 @@ msgstr "Snajper"
 
 #: src/menu/internet_menu.cpp:119
 msgid "Sorry, currently, no game is waiting for players"
-msgstr "Sorry, trenutno nema igre koja čeka na igrače"
+msgstr ""
 
 #: src/menu/options_menu.cpp:138
 msgid "Sound effects?"
@@ -1068,7 +1072,7 @@ msgstr "Nije u mogućnosti koristit ovaj port!"
 
 #: src/network/network.cpp:109
 msgid "Unnamed"
-msgstr "Bezimeni"
+msgstr ""
 
 #: src/main.cpp:180
 msgid "Version"
@@ -1142,7 +1146,7 @@ msgstr "Trebate barem dva važeća tima !"
 
 #: src/menu/network_menu.cpp:224
 msgid "You won't be able to play before selecting a team !"
-msgstr "Nećeš moć igrat prije nego izabereš tim!"
+msgstr ""
 
 #: src/weapon/weapon_launcher.cpp:450
 msgid "Your shot has missed!"
@@ -1186,3 +1190,57 @@ msgstr "o Učitavam zvučne profile: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
 
+#~ msgid "(current)"
+#~ msgstr "(trenutno)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "
+#~ "blowtorch, submachine gun) and surely many other things don't work either!"
+#~ msgstr ""
+#~ "Neka oružja su isključena, radi poznatih bug-ova (nindža uže, zračni "
+#~ "čekić, bacač plamena, mašinka) i mnoga druge stvari takođe neće raditi!"
+
+#~ msgid ""
+#~ "WARNING!! Network is still under developement and therefore a little "
+#~ "experimental."
+#~ msgstr ""
+#~ "UPOYORENJE! Mreža se i dalje razvija i tako da je poprilično "
+#~ "experimentalna."
+
+#, fuzzy
+#~ msgid "%s team has won %u Gnu!"
+#~ msgid_plural "%s team has won %u Gnus!"
+#~ msgstr[0] "%s tim je dobio %u %s!"
+#~ msgstr[1] "tim '%s' dobio je %u %s!"
+
+#, fuzzy
+#~ msgid "%s team has won %u airhammer!"
+#~ msgid_plural "%s team has won %u airhammers!"
+#~ msgstr[0] "%s tim je dobio %u %s!"
+#~ msgstr[1] "tim '%s' dobio je %u %s!"
+
+#, fuzzy
+#~ msgid "%s team has won %u anvil!"
+#~ msgid_plural "%s team has won %u anvils!"
+#~ msgstr[0] "%s tim je dobio %u %s!"
+#~ msgstr[1] "tim '%s' dobio je %u %s!"
+
+#, fuzzy
+#~ msgid "%s team has won %u blowtorch!"
+#~ msgid_plural "%s team has won %u blowtorchs!"
+#~ msgstr[0] "%s tim je dobio %u %s!"
+#~ msgstr[1] "tim '%s' dobio je %u %s!"
+
+#, fuzzy
+#~ msgid "%s team has won %u unexpected weapon!"
+#~ msgid_plural "%s team has won %u unexpected weapons!"
+#~ msgstr[0] "%s tim je dobio %u %s!"
+#~ msgstr[1] "tim '%s' dobio je %u %s!"
+
+#~ msgid ""
+#~ "WARNING! Disconnections are not yet handled. So you have to restart "
+#~ "Wormux after each disconnection!"
+#~ msgstr ""
+#~ "UPOZORENJE! Diskonektovanje još nije riješeno. Tako da morate resetovati "
+#~ "Wormux nakon svakog diskonektovanja!"
