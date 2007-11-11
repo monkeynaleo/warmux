@@ -1,22 +1,23 @@
 SUBDIRS = data src po doc
 
-EXTRA_DIST = data/wormux.desktop		\
-	doc/license/COPYING.de.txt		\
-	doc/license/COPYING.en.txt		\
-	doc/license/COPYING.eo.txt		\
-	doc/license/COPYING.es.txt		\
-	doc/license/COPYING.fr.txt		\
-	doc/license/COPYING.nl.txt		\
-	doc/license/COPYING.pl.txt		\
-	doc/license/COPYING.pt.txt		\
-	doc/license/COPYING.ru.txt		\
-	doc/license/COPYING.sk.txt		\
-	tools/win32_setup/create_setup.sh	\
-	tools/win32_setup/English.nsh		\
-	tools/win32_setup/French.nsh		\
-	tools/win32_setup/langmacros.nsh	\
-	tools/win32_setup/install.ico		\
-	tools/win32_setup/uninstall.ico
+EXTRA_DIST = data/wormux.desktop                   \
+             doc/license/COPYING.de.txt            \
+             doc/license/COPYING.en.txt            \
+             doc/license/COPYING.eo.txt            \
+             doc/license/COPYING.es.txt            \
+             doc/license/COPYING.fr.txt            \
+             doc/license/COPYING.nl.txt            \
+             doc/license/COPYING.pl.txt            \
+             doc/license/COPYING.pt.txt            \
+             doc/license/COPYING.ru.txt            \
+             doc/license/COPYING.sk.txt            \
+             visual/wormux.vcproj                  \
+             tools/win32_setup/create_setup.sh     \
+             tools/win32_setup/English.nsh         \
+             tools/win32_setup/French.nsh          \
+             tools/win32_setup/langmacros.nsh      \
+             tools/win32_setup/install.ico         \
+             tools/win32_setup/uninstall.ico
 
 if WIN32
 install: all
