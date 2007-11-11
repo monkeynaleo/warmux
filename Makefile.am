@@ -12,6 +12,9 @@ EXTRA_DIST = data/wormux.desktop                   \
              doc/license/COPYING.ru.txt            \
              doc/license/COPYING.sk.txt            \
              visual/wormux.vcproj                  \
+             src/config.h                          \
+             src/getopt.c                          \
+             src/getopt.h                          \
              tools/win32_setup/create_setup.sh     \
              tools/win32_setup/English.nsh         \
              tools/win32_setup/French.nsh          \
