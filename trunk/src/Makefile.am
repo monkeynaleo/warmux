@@ -24,6 +24,7 @@ wormux_SOURCES = \
         graphic/colors.h \
         graphic/composite_shape.cpp graphic/composite_shape.h \
         graphic/effects.cpp graphic/effects.h \
+        graphic/fading_effect.h \
         graphic/font.cpp graphic/font.h \
         graphic/fps.cpp graphic/fps.h \
         graphic/polygon.cpp graphic/polygon.h \
@@ -148,6 +149,7 @@ wormux_SOURCES = \
         tool/euler_vector.cpp tool/euler_vector.h \
         tool/file_tools.cpp tool/file_tools.h \
         tool/i18n.cpp tool/i18n.h \
+        tool/isnan.h \
         tool/math_tools.cpp tool/math_tools.h \
         tool/random.cpp tool/random.h \
         tool/rectangle.h tool/point.h \
