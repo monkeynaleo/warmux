@@ -126,7 +126,7 @@ Network::~Network()
   {
     if (sdlnet_initialized)
     {
-      //printf("###  SDL_net end\n");
+      std::cout << "o " << _("Network deinitialization") << std::endl;
       SDLNet_Quit();
       sdlnet_initialized = false;
     }
