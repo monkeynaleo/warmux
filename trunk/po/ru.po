@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-08-28 22:21+0400\n"
 "Last-Translator: Igor MURZOV <igor@gplsoft.org>\n"
 "Language-Team:  <ru@li.org>\n"
@@ -848,6 +849,11 @@ msgstr "Музыка?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Игра по сети"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Инициализация сети"
 
 #: src/network/network.cpp:256
 msgid "Network initialization"

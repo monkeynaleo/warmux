@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-11-10 21:40+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <local@linux.org.ba>\n"
@@ -137,8 +138,12 @@ msgid ""
 msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
-msgstr[0] "%s tim je dobio %u zračnih čekića! Ne pravi previše buke sa njim! Hvala, tvoje komšije."
-msgstr[1] "%s tim je dobio %u zračnih čekića! Ne pravi previše buke sa njim! Hvala, tvoje komšije."
+msgstr[0] ""
+"%s tim je dobio %u zračnih čekića! Ne pravi previše buke sa njim! Hvala, "
+"tvoje komšije."
+msgstr[1] ""
+"%s tim je dobio %u zračnih čekića! Ne pravi previše buke sa njim! Hvala, "
+"tvoje komšije."
 
 #: src/weapon/anvil.cpp:173
 #, c-format
@@ -170,12 +175,17 @@ msgstr[1] "%s tim je dobio %u bazuka!"
 
 #: src/weapon/blowtorch.cpp:139
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
-msgstr[0] "%s tim je dobio %u bacača plamena! Ako si ispod 18 pitaj roditelje da bi ga koristio."
-msgstr[1] "%s tim je dobio %u bacača plamena! Ako si ispod 18 pitaj roditelje da bi ga koristio."
+msgstr[0] ""
+"%s tim je dobio %u bacača plamena! Ako si ispod 18 pitaj roditelje da bi ga "
+"koristio."
+msgstr[1] ""
+"%s tim je dobio %u bacača plamena! Ako si ispod 18 pitaj roditelje da bi ga "
+"koristio."
 
 #: src/weapon/bounce_ball.cpp:107
 #, c-format
@@ -201,7 +211,8 @@ msgstr[1] "%s tim je dobio %u konstrukcije! Ne zaboravi šljem!"
 #: src/weapon/disco_grenade.cpp:162
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "%s tim je dobio %u disko granata! Pomakni guzu dok ga bacaš!"
 msgstr[1] "%s tim je dobio %u disko granata! Pomakni guzu dok ga bacaš!"
 
@@ -517,8 +528,11 @@ msgstr "Greška kod očitavanja podataka tima %s :"
 
 #: src/game/config.cpp:373
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi konfiguracionu datoteku."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
+"konfiguracionu datoteku."
 
 #: src/game/config.cpp:249
 #, c-format
@@ -552,11 +566,14 @@ msgstr "Greška: Nemoguće konektovat se na %s:%s"
 
 #: src/menu/network_connection_menu.cpp:209
 msgid "Error: Unable to contact index server to host a game"
-msgstr "Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
+msgstr ""
+"Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
 
 #: src/menu/network_connection_menu.cpp:246
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr "Greška: Nije u mogućnosti kontaktirati index server da se potrazi internet igra"
+msgstr ""
+"Greška: Nije u mogućnosti kontaktirati index server da se potrazi internet "
+"igra"
 
 #: src/menu/network_connection_menu.cpp:223
 msgid "Error: Unable to start server"
@@ -780,6 +797,11 @@ msgstr "Muzika?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Mrežna Igra"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Initalaizacija baze ..."
 
 #: src/network/network.cpp:256
 #, fuzzy
@@ -1177,4 +1199,3 @@ msgstr "o Učitavam zvučne profile: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
-

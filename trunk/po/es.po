@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-03-27 20:56+0100\n"
 "Last-Translator: Eduard BERMEJO <templer@iespana.es>\n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
@@ -779,6 +780,11 @@ msgstr "¿Música?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Juego en red"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Inicialización del red"
 
 #: src/network/network.cpp:256
 msgid "Network initialization"

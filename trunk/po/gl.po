@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-04-11 16:36+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@cvs.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
@@ -770,6 +771,11 @@ msgstr "Música?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Xogo en rede"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Inicialización da rede"
 
 #: src/network/network.cpp:256
 msgid "Network initialization"

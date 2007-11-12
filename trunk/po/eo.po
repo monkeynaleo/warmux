@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_eo\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-08-23 23:04+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -793,6 +794,11 @@ msgstr "Muzikon ?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Reta ludo"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Preparante la reton"
 
 #: src/network/network.cpp:256
 msgid "Network initialization"
