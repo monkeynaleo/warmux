@@ -31,6 +31,7 @@
       <blast_force>1500</blast_force>
       <blast_range>50</blast_range>
     </death_explosion>
+    <walking_pause>15</walking_pause>
   </character>
 
   <barrel>
@@ -229,7 +230,7 @@
     <flamethrower>
       <min_angle>-90</min_angle>
       <max_angle>90</max_angle>
-      <nb_ammo>12</nb_ammo>
+      <nb_ammo>2</nb_ammo>
       <unit_per_ammo>25</unit_per_ammo>
       <damage>2</damage>
       <explosion_range>3</explosion_range>

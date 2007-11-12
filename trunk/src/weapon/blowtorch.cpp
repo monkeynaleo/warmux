@@ -24,15 +24,16 @@
 #include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
-#include "include/action_handler.h"
-#include "tool/i18n.h"
-#include "map/map.h"
-#include "game/time.h"
-#include "graphic/sprite.h"
 #include "character/move.h"
 #include "character/body.h"
+#include "include/action_handler.h"
+#include "map/map.h"
+#include "game/game_mode.h"
+#include "game/time.h"
+#include "graphic/sprite.h"
 #include "team/team.h"
 #include "team/teams_list.h"
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
@@ -101,7 +102,7 @@ void Blowtorch::RepeatShoot() const
 
 void Blowtorch::HandleKeyPressed_Shoot(bool shift)
 {
-  ActiveCharacter().BeginMovementRL(PAUSE_MOVEMENT);
+  ActiveCharacter().BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
   ActiveCharacter().SetRebounding(false);
   ActiveCharacter().body->StartWalk();
 
