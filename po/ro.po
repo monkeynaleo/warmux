@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-11-08 11:41+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -972,6 +973,11 @@ msgstr "Muzică?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Joc în rețea"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Inițializare rețea"
 
 #: src/network/network.cpp:256
 msgid "Network initialization"

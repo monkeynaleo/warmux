@@ -10,6 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-08-09 13:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -872,6 +873,11 @@ msgstr "Glasba?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Omrežna igra"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Inicializacija omrežja"
 
 #: src/network/network.cpp:256
 msgid "Network initialization"

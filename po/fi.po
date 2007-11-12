@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2006-06-16 11:36+0100\n"
 "Last-Translator: Bastian Salmela <bastian.salmela@hel.fi>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -791,6 +792,11 @@ msgstr "Musiikki?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Nettipeli"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Maaston alustus..."
 
 #: src/network/network.cpp:256
 #, fuzzy

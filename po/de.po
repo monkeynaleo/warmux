@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-08-24 11:53+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -825,6 +826,11 @@ msgstr "Musik?"
 #: src/menu/main_menu.cpp:81
 msgid "Network Game"
 msgstr "Netzwerkspiel"
+
+#: src/network/network.cpp:129
+#, fuzzy
+msgid "Network deinitialization"
+msgstr "Netzwerk Initialisierung"
 
 #: src/network/network.cpp:256
 msgid "Network initialization"
