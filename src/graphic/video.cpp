@@ -17,19 +17,17 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include "graphic/video.h"
 #ifdef _MSC_VER
 #  include <algorithm>
 #endif
 #include <iostream>
 #include <SDL_image.h>
 #include "game/config.h"
-#ifdef WIN32
-#  include "include/app.h"
-#endif
-#include "tool/i18n.h"
+#include "graphic/video.h"
+#include "include/app.h"
 #include "include/constant.h"
 #include "map/camera.h"
+#include "tool/i18n.h"
 
 
 Video::Video(){
@@ -152,6 +150,8 @@ const std::list<Point2i>& Video::GetAvailableConfigs() const
 
 bool Video::SetConfig(const int width, const int height, const bool _fullscreen){
   int flag = (_fullscreen) ? SDL_FULLSCREEN : 0;
+  bool window_was_null = window.IsNull();
+
 
   // update the main window if needed
   if( window.IsNull() ||
@@ -172,6 +172,10 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
 
     fullscreen = _fullscreen;
     Camera::GetInstance()->SetSize(width, height);
+
+    // refresh all the map when switching to higher resolution
+    if (!window_was_null)
+      AppWormux::GetInstance()->RefreshDisplay();
   }
 
   return true;
