@@ -26,15 +26,12 @@
 
 class Character;
 
-// Pause between two movements
-const uint PAUSE_MOVEMENT=30; // ms
-
 // Compute the height to fall or to walk on when moving horizontally
 // Return a boolean which says if movement is possible
 bool ComputeHeightMovement (Character &character, int &height,
                             bool falling);
 
-void MoveCharacter (Character &character);
+void MoveCharacter (Character &character, bool slowly = false);
 
 // Move the active character to the left/right
 void MoveActiveCharacterRight(bool shift);

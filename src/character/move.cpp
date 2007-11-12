@@ -23,12 +23,12 @@
 //#include <math.h>
 #include "character/character.h"
 #include "game/game.h"
+#include "game/game_mode.h"
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
-
 
 // Max climbing height walking
 const int MAX_CLIMBING_HEIGHT=30;
@@ -82,10 +82,14 @@ bool ComputeHeightMovement(Character &character, int &height,
 }
 
 // Moves a character to the right/left depending the signess of direction
-void MoveCharacter(Character &character)
+void MoveCharacter(Character &character, bool slowly)
 {
   int height;
   bool ghost;
+  uint walking_pause = GameMode::GetInstance()->character.walking_pause;
+  
+  if (slowly)
+    walking_pause *= 10;
 
   // If character moves out of the world, no need to go further: it is dead
   if (character.GetDirection() == DIRECTION_LEFT)
@@ -98,32 +102,33 @@ void MoveCharacter(Character &character)
     return;
   }
 
-  // Compute fall heigth
+  // Compute fall height
   if (!ComputeHeightMovement (character, height, true)) return;
 
-  do
+  // Check we can move (to go not too fast)
+  while (character.CanStillMoveRL(walking_pause) && ComputeHeightMovement (character, height, true))
   {
     // Move !
     Game::GetInstance()->character_already_chosen = true;
-    // Eventually moves the character
 
+    // Eventually moves the character
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),
                              character.GetY() +height) );
 
     // If no collision, let gravity do its job
     character.UpdatePosition();
 
-  } while (character.CanStillMoveRL(PAUSE_MOVEMENT) && ComputeHeightMovement (character, height, true));
+  }
 }
 
 // Move the active character to the left
-void MoveActiveCharacterLeft(bool){
+void MoveActiveCharacterLeft(bool shift){
   // character is ready to move ?
   if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_LEFT);
   if (move) {
-    MoveCharacter(ActiveCharacter());
+    MoveCharacter(ActiveCharacter(), shift);
   } else {
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
     ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
@@ -135,14 +140,14 @@ void MoveActiveCharacterLeft(bool){
 }
 
 // Move the active character to the right
-void MoveActiveCharacterRight(bool)
+void MoveActiveCharacterRight(bool shift)
 {
   // character is ready to move ?
   if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_RIGHT);
   if (move) {
-    MoveCharacter(ActiveCharacter());
+    MoveCharacter(ActiveCharacter(), shift);
   } else {
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);

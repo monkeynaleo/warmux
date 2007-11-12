@@ -62,6 +62,7 @@ public:
     double super_jump_angle;
     uint back_jump_strength;
     double back_jump_angle;
+    uint walking_pause;
   } character;
 
   int allow_character_selection;

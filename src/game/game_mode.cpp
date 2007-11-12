@@ -69,6 +69,7 @@ GameMode::GameMode():
   character.super_jump_angle = -80;
   character.back_jump_strength = 9;
   character.back_jump_angle = -100;
+  character.walking_pause = 50;
 }
 
 GameMode::~GameMode()
@@ -145,6 +146,7 @@ bool GameMode::LoadXml(const xmlpp::Element *xml)
       XmlReader::ReadIntAttr(item, "angle", angle_deg);
       character.back_jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
+    XmlReader::ReadUint(character_xml, "walking_pause", character.walking_pause);
     xmlpp::Element *explosion = XmlReader::GetMarker(character_xml, "death_explosion");
     if (explosion != NULL)
       death_explosion_cfg.LoadXml(explosion);
