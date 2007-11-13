@@ -93,7 +93,7 @@ bool IndexServer::ConnectTo(const std::string & address, const int & port)
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
   AppWormux::GetInstance()->video->Flip();
 
-  Network::GetInstance()->Init(); // To get SDL_net initialized
+  Network::Init(); // To get SDL_net initialized
 
   MSG_DEBUG("index_server", "Opening connection");
 
