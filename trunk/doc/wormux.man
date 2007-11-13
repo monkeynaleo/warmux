@@ -40,7 +40,7 @@ team attempts to produce maximum damage to their opponents.
 .br
 * Key up/down: Aim up/down
 .br
-* Key shift: Smaller aim increment/decrement when used with up or down
+* Key shift: Smaller aim increment/decrement when used with up or down. Smaller step while walking
 .br
 * Key 'b': ("Backwards") jump
 .br
