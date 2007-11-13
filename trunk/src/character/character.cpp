@@ -618,11 +618,13 @@ bool Character::CanMoveRL() const
   return pause_bouge_dg < Time::GetInstance()->Read();
 }
 
-void Character::BeginMovementRL(uint pause)
+void Character::BeginMovementRL(uint pause, bool slowly)
 {
   walking_time = Time::GetInstance()->Read();
   do_nothing_time = Time::GetInstance()->Read();
-  SetMovement("walk");
+  if (!slowly) {
+    SetMovement("walk");
+  }
   CharacterCursor::GetInstance()->Hide();
   step_sound_played = true;
   pause_bouge_dg = Time::GetInstance()->Read()+pause;
@@ -836,7 +838,7 @@ uint Character::GetCharacterIndex() const
 // #################### MOVE_RIGHT
 void Character::HandleKeyPressed_MoveRight(bool shift)
 {
-  BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
+  BeginMovementRL(GameMode::GetInstance()->character.walking_pause, shift);
   body->StartWalk();
 
   HandleKeyRefreshed_MoveRight(shift);
@@ -859,7 +861,7 @@ void Character::HandleKeyReleased_MoveRight(bool)
 // #################### MOVE_LEFT
 void Character::HandleKeyPressed_MoveLeft(bool shift)
 {
-  BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
+  BeginMovementRL(GameMode::GetInstance()->character.walking_pause, shift);
   body->StartWalk();
 
   HandleKeyRefreshed_MoveLeft(shift);
