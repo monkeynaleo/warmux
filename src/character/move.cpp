@@ -90,6 +90,8 @@ void MoveCharacter(Character &character, bool slowly)
   
   if (slowly)
     walking_pause *= 10;
+  else 
+    ActiveCharacter().SetMovement("walk"); // avoid sliding effect when not right or left key is released while releasing shift
 
   // If character moves out of the world, no need to go further: it is dead
   if (character.GetDirection() == DIRECTION_LEFT)
@@ -117,7 +119,6 @@ void MoveCharacter(Character &character, bool slowly)
 
     // If no collision, let gravity do its job
     character.UpdatePosition();
-
   }
 }
 
@@ -131,7 +132,7 @@ void MoveActiveCharacterLeft(bool shift){
     MoveCharacter(ActiveCharacter(), shift);
   } else {
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
-    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
+    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION, shift);
   }
 
   //Refresh skin position across network
@@ -150,7 +151,7 @@ void MoveActiveCharacterRight(bool shift)
     MoveCharacter(ActiveCharacter(), shift);
   } else {
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
+    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION, shift);
   }
 
   //Refresh skin position across network

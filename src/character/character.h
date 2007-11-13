@@ -170,7 +170,7 @@ public:
   void BackJump();
 
   // Initialise left or right movement
-  void BeginMovementRL (uint pause);
+  void BeginMovementRL (uint pause, bool slowly = false);
   bool CanStillMoveRL (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
