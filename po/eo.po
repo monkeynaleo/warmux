@@ -222,7 +222,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s teamo gajnis %u dinamitan bastonon !"
 msgstr[1] "%s teamo gajnis %u dinamitajn bastonojn !"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -447,7 +447,7 @@ msgstr "Ne eblas malfermi teaman dosierujon (%s) !"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ne eblas malfermi teaman dosierujon (%s) !"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -580,7 +580,7 @@ msgstr "Eraro : Ne eblas starti servilon"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eraro : Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -794,7 +794,7 @@ msgstr "Muzikon ?"
 msgid "Network Game"
 msgstr "Reta ludo"
 
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 msgid "Network initialization"
 msgstr "Preparante la reton"
 
@@ -862,7 +862,7 @@ msgstr "Forlasu"
 msgid "Quit Wormux"
 msgstr "Forigu el Wormux"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Muntas la mapojn :"
@@ -1142,7 +1142,7 @@ msgstr "Vi bezonas almenaŭ du teamojn !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon !"
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Vi mispafis !"
 

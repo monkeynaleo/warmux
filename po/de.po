@@ -228,7 +228,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Mannschaft %s hat %u Dynamit gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Dynamit gewonnen!"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -466,7 +466,7 @@ msgstr "Kann das persönliche Mannschaftenverzeichnis (%s) nicht öfnen!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kann das Mannschaftenverzeichnis (%s) nicht öfnen!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -602,7 +602,7 @@ msgstr "Fehler: Kann Server nicht starten"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fehler: kann den Körper \"%s\" für Mannschaft \"%s\" nicht finden."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -826,7 +826,7 @@ msgstr "Musik?"
 msgid "Network Game"
 msgstr "Netzwerkspiel"
 
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 msgid "Network initialization"
 msgstr "Netzwerk Initialisierung"
 
@@ -894,7 +894,7 @@ msgstr "Verlassen"
 msgid "Quit Wormux"
 msgstr "Wormux verlassen"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Lade Karten:"
@@ -1185,7 +1185,7 @@ msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kannst nicht spielen bevor du eine Mannschaft gewählt hast!"
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 

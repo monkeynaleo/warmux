@@ -230,7 +230,7 @@ msgstr[0] "%s komanda ir ieguvusi %u dinamītu!"
 msgstr[1] "%s komanda ir ieguvusi %u dinamītus!"
 msgstr[2] "%s komanda ir ieguvusi %u dinamītus!"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -472,7 +472,7 @@ msgstr "Nevar atvēŗt komandas mapi (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr "Kļūda: Nevar sākt serveri"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Kļūda: Nevar atrast ķermeni \"%s\" komandai \"%s\"."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -826,7 +826,7 @@ msgstr "Mūzika?"
 msgid "Network Game"
 msgstr "Tīkla spēle"
 
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 msgid "Network initialization"
 msgstr "Tīkla inicializācija"
 
@@ -894,7 +894,7 @@ msgstr "Iziet"
 msgid "Quit Wormux"
 msgstr "Iziet no Wormux"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Ielādē kartes:"
@@ -1179,7 +1179,7 @@ msgstr "Jums nepieciešamas vismaz divas derīgas komandas !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Jūs netrāpijāt!"
 

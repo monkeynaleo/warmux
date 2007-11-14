@@ -200,7 +200,7 @@ msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -403,7 +403,7 @@ msgstr "Takım dizini açılamadı (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -540,7 +540,7 @@ msgstr "(%s) harita dizini açılamadı!"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -745,7 +745,7 @@ msgstr "Müzik?"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 #, fuzzy
 msgid "Network initialization"
 msgstr "Alan oluşturuluyor..."
@@ -815,7 +815,7 @@ msgstr "Çıkış"
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Haritaları yükle:"
@@ -1090,7 +1090,7 @@ msgstr "En az iki geçerli takıma ihtiyacınız var !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 

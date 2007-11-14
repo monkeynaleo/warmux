@@ -224,7 +224,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s tím vyhral %u dynamitom!"
 msgstr[1] "%s tím vyhral %u dynamitmi!"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -459,7 +459,7 @@ msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -595,7 +595,7 @@ msgstr "Chyba: Nedá sa spustiť server"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť telo \"%s\" pre tím \"%s\"."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -801,7 +801,7 @@ msgstr "Hudba?"
 msgid "Network Game"
 msgstr "Sieťová hra"
 
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 #, fuzzy
 msgid "Network initialization"
 msgstr "Inicializuje sa okolie..."
@@ -870,7 +870,7 @@ msgstr "Koniec"
 msgid "Quit Wormux"
 msgstr "Ukončiť Wormuxa"
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Načítavam mapu"
@@ -1151,7 +1151,7 @@ msgstr "Potrebuješ najmenej dva platné tímy !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 
