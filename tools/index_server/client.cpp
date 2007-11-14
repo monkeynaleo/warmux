@@ -73,6 +73,7 @@ bool Client::HandleMsg(const std::string & str)
 		version = str;
 		if(str == "0.8beta1"
 		|| str == "0.8beta2"
+		|| str == "0.8beta3"
 		|| str == "0.8svn"
 		|| str == "0.7.9rc1"
 		|| str == "0.7.9rc2"
@@ -83,7 +84,7 @@ bool Client::HandleMsg(const std::string & str)
 			SetVersion( str );
 			msg_id = TS_NO_MSG;
 			stats.NewClient();
-			return SendSignature();		
+			return SendSignature();
 		}
 		else
 		if(str == "WIS")
