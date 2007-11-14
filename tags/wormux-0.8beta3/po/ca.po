@@ -216,7 +216,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "L'equip '%s' ha conseguit %u dinamita!"
 msgstr[1] "L'equip '%s' ha conseguit %u dinamitaes!"
 
-#: src/weapon/flamethrower.cpp:161
+#: src/weapon/flamethrower.cpp:160
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -440,7 +440,7 @@ msgstr "No es pot obrir el directori d'equips (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/menu/map_selection_box.cpp:216
+#: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -585,7 +585,7 @@ msgstr "Imposible obrir el directori dels mapas (%s) !"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 
-#: src/weapon/flamethrower.cpp:92
+#: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
 msgstr ""
 
@@ -791,7 +791,7 @@ msgstr "Música?"
 msgid "Network Game"
 msgstr ""
 
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 #, fuzzy
 msgid "Network initialization"
 msgstr "Inicialització..."
@@ -865,7 +865,7 @@ msgstr "Sortir"
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:215
+#: src/menu/map_selection_box.cpp:218
 #, fuzzy
 msgid "Random map"
 msgstr "Carrega el mapa %s"
@@ -1152,7 +1152,7 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:450
+#: src/weapon/weapon_launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
