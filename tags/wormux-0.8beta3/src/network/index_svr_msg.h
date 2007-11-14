@@ -41,5 +41,7 @@ enum IndexServerMsg
   TS_LAST_MSG // Don't send this
 };
 
+const std::string server_list_url = "http://www.wormux.org/server_list";
+
 #endif
 
