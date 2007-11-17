@@ -814,11 +814,6 @@ msgstr "Musique ?"
 msgid "Network Game"
 msgstr "Jeu en réseau"
 
-#: src/network/network.cpp:129
-#, fuzzy
-msgid "Network deinitialization"
-msgstr "Initialisation du réseau"
-
 #: src/network/network.cpp:256
 msgid "Network initialization"
 msgstr "Initialisation du réseau"
@@ -1210,20 +1205,3 @@ msgstr "o Chargement du profil son : %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
 
-#~ msgid "(current)"
-#~ msgstr "(actuel)"
-
-#~ msgid ""
-#~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "
-#~ "blowtorch, submachine gun) and surely many other things don't work either!"
-#~ msgstr ""
-#~ "Certaines armes sont désactivées car elles sont à l'origine de bugs "
-#~ "connus (corde ninja, attaque aérienne, mitrailleuse) mais il y en a "
-#~ "sûrement d'autres !"
-
-#~ msgid ""
-#~ "WARNING!! Network is still under developement and therefore a little "
-#~ "experimental."
-#~ msgstr ""
-#~ "Attention !! Le jeu en réseau est encore en développement et est de ce "
-#~ "fait très expérimental."
