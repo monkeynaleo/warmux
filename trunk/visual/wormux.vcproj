@@ -1096,6 +1096,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\fading_effect.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\font.h"
 					>
 				</File>
