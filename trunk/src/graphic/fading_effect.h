@@ -302,10 +302,9 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
 {
     Sint32 xx0, yy0, xx1, yy1;
     int result;
-    Uint32 intshift, erracc, erradj;
-    Uint32 erracctmp, wgt, wgtcompmask;
-    int dx, dy, tmp, xdir, y0p1, x0pxdir, step;
+    int dx, dy, tmp, xdir;
     Uint32 color = color1;
+    float step;
 
     if (y1 > y2) {
         color = color1;
@@ -356,45 +355,6 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         dx = (-dx);
     }
 
-    /*
-     * Check for special cases
-     */
-    if (dx == 0) {
-        /*
-         * Vertical line
-         */
-        return (vlineColor(dst, x1, y1, y2, color));
-    } else if (dy == 0) {
-        /*
-         * Horizontal line
-         */
-        return (hlineColor(dst, x1, x2, y1, color));
-    } else if (dx == dy) {
-        /*
-         * Diagonal line
-         */
-        return (lineColor(dst, x1, y1, x2, y2, color));
-    }
-
-    /*
-     * Line is not horizontal, vertical or diagonal
-     */
-    result = 0;
-
-    /*
-     * Zero accumulator
-     */
-    erracc = 0;
-
-    /*
-     * # of bits by which to shift erracc to get intensity level
-     */
-    intshift = 32 - AAbits;
-    /*
-     * Mask used to flip all bits in an intensity weighting
-     */
-    wgtcompmask = AAlevels - 1;
-
     /* Lock surface */
     if (SDL_MUSTLOCK(dst)) {
         if (SDL_LockSurface(dst) < 0) {
@@ -405,91 +365,125 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     /*
      * Draw the initial pixel in the foreground color
      */
-    result |= pixelColorNolock(dst, x1, y1, color1);
+    result = pixelColorNolock(dst, x1, y1, color1);
 
     /*
-     * x-major or y-major?
+     * Check for special cases
      */
-    if (dy > dx) {
-
-        /*
-         * y-major.  Calculate 16-bit fixed point fractional part of a pixel that
-         * X advances every time Y advances 1 pixel, truncating the result so that
-         * we won't overrun the endpoint along the X axis
-         */
-        /*
-         * Not-so-portable version: erradj = ((Uint64)dx << 32) / (Uint64)dy;
-         */
-        erradj = ((dx << 16) / dy) << 16;
-
-        /*
-         * draw all pixels other than the first and last
-         */
-        x0pxdir = xx0 + xdir;
+    if (dx == 0) {
+        /* Vertical line */
         step = dy;
         while (--dy) {
-            color = interpolateColor(color2, color1, (float)dy / (float)step);
-            erracctmp = erracc;
-            erracc += erradj;
-            if (erracc <= erracctmp) {
-                /*
-                 * rollover in error accumulator, x coord advances
-                 */
-                xx0 = x0pxdir;
-                x0pxdir += xdir;
-            }
-            yy0++;              /* y-major so always advance Y */
-
-            /*
-             * the AAbits most significant bits of erracc give us the intensity
-             * weighting for this pixel, and the complement of the weighting for
-             * the paired pixel.
-             */
-            wgt = (erracc >> intshift) & 255;
-            result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
-            result |= pixelColorWeightNolock (dst, x0pxdir, yy0, color, wgt);
+            color = interpolateColor(color2, color1, (float)dy / step);
+            result |= pixelColorNolock(dst, x1, ++yy0, color);
         }
-
-    } else {
-
-        /*
-         * x-major line.  Calculate 16-bit fixed-point fractional part of a pixel
-         * that Y advances each time X advances 1 pixel, truncating the result so
-         * that we won't overrun the endpoint along the X axis.
-         */
-        /*
-         * Not-so-portable version: erradj = ((Uint64)dy << 32) / (Uint64)dx;
-         */
-        erradj = ((dy << 16) / dx) << 16;
-
-        /*
-         * draw all pixels other than the first and last
-         */
-        y0p1 = yy0 + 1;
+    } else if (dy == 0) {
+        /* Horizontal line */
         step = dx;
         while (--dx) {
-            color = interpolateColor(color2, color1, (float)dx / (float)step);
-            erracctmp = erracc;
-            erracc += erradj;
-            if (erracc <= erracctmp) {
-                /*
-                 * Accumulator turned over, advance y
-                 */
-                yy0 = y0p1;
-                y0p1++;
-            }
-            xx0 += xdir;        /* x-major so always advance X */
-            /*
-             * the AAbits most significant bits of erracc give us the intensity
-             * weighting for this pixel, and the complement of the weighting for
-             * the paired pixel.
-             */
-            wgt = (erracc >> intshift) & 255;
-            result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
-            result |= pixelColorWeightNolock (dst, xx0, y0p1, color, wgt);
+            color = interpolateColor(color2, color1, (float)dx / step);
+            result |= pixelColorNolock(dst, xx0, y1, color);
+            xx0 += xdir;
+        }
+    } else if (dx == dy) {
+        /* Diagonal line */
+        step = dx;
+        while (--dx) {
+            color = interpolateColor(color2, color1, (float)dx / step);
+            result |= pixelColorNolock(dst, xx0, ++yy0, color);
+            xx0 += xdir;
         }
     }
+    else {
+        Uint32 erracc = 0; /* Zero accumulator */
+        Uint32 intshift = 32 - AAbits; /* # of bits by which to shift erracc to get intensity level */
+        Uint32 erradj;
+        Uint32 erracctmp, wgt;
+        Uint32 wgtcompmask = AAlevels - 1; /* Mask used to flip all bits in an intensity weighting */
 
+        /*
+         * x-major or y-major?
+         */
+        if (dy > dx) {
+
+            /*
+             * y-major.  Calculate 16-bit fixed point fractional part of a pixel that
+             * X advances every time Y advances 1 pixel, truncating the result so that
+             * we won't overrun the endpoint along the X axis
+             */
+            /*
+             * Not-so-portable version: erradj = ((Uint64)dx << 32) / (Uint64)dy;
+             */
+            erradj = ((dx << 16) / dy) << 16;
+
+            /*
+             * draw all pixels other than the first and last
+             */
+            int x0pxdir = xx0 + xdir;
+            step = dy;
+            while (--dy) {
+                color = interpolateColor(color2, color1, (float)dy / step);
+                erracctmp = erracc;
+                erracc += erradj;
+                if (erracc <= erracctmp) {
+                    /*
+                     * rollover in error accumulator, x coord advances
+                     */
+                    xx0 = x0pxdir;
+                    x0pxdir += xdir;
+                }
+                yy0++;              /* y-major so always advance Y */
+
+                /*
+                 * the AAbits most significant bits of erracc give us the intensity
+                 * weighting for this pixel, and the complement of the weighting for
+                 * the paired pixel.
+                 */
+                wgt = (erracc >> intshift) & 255;
+                result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
+                result |= pixelColorWeightNolock (dst, x0pxdir, yy0, color, wgt);
+            }
+
+        } else {
+
+            /*
+             * x-major line.  Calculate 16-bit fixed-point fractional part of a pixel
+             * that Y advances each time X advances 1 pixel, truncating the result so
+             * that we won't overrun the endpoint along the X axis.
+             */
+            /*
+             * Not-so-portable version: erradj = ((Uint64)dy << 32) / (Uint64)dx;
+             */
+            erradj = ((dy << 16) / dx) << 16;
+
+            /*
+             * draw all pixels other than the first and last
+             */
+            int y0p1 = yy0 + 1;
+            step = dx;
+            while (--dx) {
+                color = interpolateColor(color2, color1, (float)dx / step);
+                erracctmp = erracc;
+                erracc += erradj;
+                if (erracc <= erracctmp) {
+                    /*
+                     * Accumulator turned over, advance y
+                     */
+                    yy0 = y0p1;
+                    y0p1++;
+                }
+                xx0 += xdir;        /* x-major so always advance X */
+                /*
+                 * the AAbits most significant bits of erracc give us the intensity
+                 * weighting for this pixel, and the complement of the weighting for
+                 * the paired pixel.
+                 */
+                wgt = (erracc >> intshift) & 255;
+                result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
+                result |= pixelColorWeightNolock (dst, xx0, y0p1, color, wgt);
+            }
+        }
+    }
     /*
      * Do we have to draw the endpoint
      */
