@@ -118,14 +118,14 @@ void WeaponMenuItem::Draw(Surface * dest)
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
   if(nb_bullets ==  INFINITE_AMMO) {
-    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", gray_color);
+    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", dark_gray_color);
   } else if(nb_bullets == 0) {
     tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
     Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->Blit(*dest, tmp);
   } else {
     std::ostringstream txt;
     txt << nb_bullets;
-    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), gray_color);
+    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), dark_gray_color);
   }
 }
 
@@ -164,9 +164,9 @@ WeaponsMenu::WeaponsMenu():
   tools_menu->SetBorderColor(border_color);
 
   // Adding label
-  weapons_menu->AddItem(new Sprite(Font::GenerateSurface(_("Weapons"), gray_color, Font::FONT_BIG)),
+  weapons_menu->AddItem(new Sprite(Font::GenerateSurface(_("Weapons"), dark_gray_color, Font::FONT_BIG)),
                         weapons_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
-  tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), gray_color, Font::FONT_BIG)),
+  tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), dark_gray_color, Font::FONT_BIG)),
                         tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
 
   resource_manager.UnLoadXMLProfile(res);
