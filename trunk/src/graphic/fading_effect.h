@@ -399,7 +399,6 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         Uint32 intshift = 32 - AAbits; /* # of bits by which to shift erracc to get intensity level */
         Uint32 erradj;
         Uint32 erracctmp, wgt;
-        Uint32 wgtcompmask = AAlevels - 1; /* Mask used to flip all bits in an intensity weighting */
 
         /*
          * x-major or y-major?
@@ -407,12 +406,14 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         if (dy > dx) {
 
             /*
-             * y-major.  Calculate 16-bit fixed point fractional part of a pixel that
-             * X advances every time Y advances 1 pixel, truncating the result so that
-             * we won't overrun the endpoint along the X axis
+             * y-major.  Calculate 16-bit fixed point fractional part of a
+             * pixel that X advances every time Y advances 1 pixel, truncating
+             * the result so that we won't overrun the endpoint along the
+             * X axis
              */
             /*
-             * Not-so-portable version: erradj = ((Uint64)dx << 32) / (Uint64)dy;
+             * Not-so-portable version:
+             * erradj = ((Uint64)dx << 32) / (Uint64)dy;
              */
             erradj = ((dx << 16) / dy) << 16;
 
@@ -435,9 +436,9 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
                 yy0++;              /* y-major so always advance Y */
 
                 /*
-                 * the AAbits most significant bits of erracc give us the intensity
-                 * weighting for this pixel, and the complement of the weighting for
-                 * the paired pixel.
+                 * the AAbits most significant bits of erracc give us the
+                 * intensity weighting for this pixel, and the complement of
+                 * the weighting for the paired pixel.
                  */
                 wgt = (erracc >> intshift) & 255;
                 result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
@@ -447,12 +448,14 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         } else {
 
             /*
-             * x-major line.  Calculate 16-bit fixed-point fractional part of a pixel
-             * that Y advances each time X advances 1 pixel, truncating the result so
-             * that we won't overrun the endpoint along the X axis.
+             * x-major line.  Calculate 16-bit fixed-point fractional part of
+             * a pixel that Y advances each time X advances 1 pixel truncating
+             * the result so that we won't overrun the endpoint along the
+             * X axis.
              */
             /*
-             * Not-so-portable version: erradj = ((Uint64)dy << 32) / (Uint64)dx;
+             * Not-so-portable version:
+             * erradj = ((Uint64)dy << 32) / (Uint64)dx;
              */
             erradj = ((dy << 16) / dx) << 16;
 
@@ -474,9 +477,9 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
                 }
                 xx0 += xdir;        /* x-major so always advance X */
                 /*
-                 * the AAbits most significant bits of erracc give us the intensity
-                 * weighting for this pixel, and the complement of the weighting for
-                 * the paired pixel.
+                 * the AAbits most significant bits of erracc give us the
+                 * intensity weighting for this pixel, and the complement of
+                 * the weighting for the paired pixel.
                  */
                 wgt = (erracc >> intshift) & 255;
                 result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
