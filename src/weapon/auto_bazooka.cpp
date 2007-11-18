@@ -58,6 +58,7 @@ private:
   ParticleEngine smoke_engine;
   SoundSample flying_sound;
 protected:
+  double m_initial_strength;
   double angle_local;
   Point2i m_targetPoint;
   bool m_targeted;
@@ -85,6 +86,8 @@ RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
 
 void RPG::Shoot(double strength)
 {
+  m_initial_strength = strength;
+
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield
   // during WeaponProjectile::Shoot (#bug 10241)
@@ -108,7 +111,7 @@ void RPG::Refresh()
     if(angle_local > M_PI) angle_local = -M_PI;
 
     // TPS_AV_ATTIRANCE msec later being launched, the rocket is homing to the target
-    if(flying_time>1000 * GetTotalTimeout())
+    if(flying_time > (1000 * GetTotalTimeout()) * (m_initial_strength/ActiveTeam().AccessWeapon().max_strength))
     {
       m_targeted = true;
       SetSpeed(0,0);
