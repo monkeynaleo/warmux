@@ -59,14 +59,17 @@ std::string __pointers[] = {
 };
 std::map<Mouse::pointer_t, MouseCursor> Mouse::cursors;
 
-Mouse * Mouse::GetInstance() {
+Mouse * Mouse::GetInstance() 
+{
   if (singleton == NULL) {
     singleton = new Mouse();
   }
   return singleton;
 }
 
-Mouse::Mouse(){
+Mouse::Mouse():
+  lastpos(-1,-1)
+{
   visible = MOUSE_VISIBLE;
 
   // Load the different pointers
@@ -214,7 +217,6 @@ void Mouse::GetDesignatedCharacter() const
 
 void Mouse::Refresh()
 {
-  static Point2i lastpos(0,0);
   /* FIXME the 200 is hardcoded because I cannot find where the main loop
    * refresh rate is set... */
 #define NB_LOOP_BEFORE_HIDE 200
@@ -227,7 +229,7 @@ void Mouse::Refresh()
     {
       Show();
       lastpos = pos;
-      counter = NB_LOOP_BEFORE_HIDE;
+      counter = NB_LOOP_BEFORE_HIDE;  
       ShowGameInterface();
     }
   else
@@ -321,13 +323,15 @@ void Mouse::Hide()
 }
 
 // Center the pointer on the screen
-void Mouse::CenterPointer() const
+void Mouse::CenterPointer()
 {
   MSG_DEBUG("mouse", "1) %d, %d\n", GetPosition().GetX(), GetPosition().GetY());
 
   SDL_WarpMouse(AppWormux::GetInstance()->video->window.GetWidth() / 2,
                 AppWormux::GetInstance()->video->window.GetHeight() / 2);
   SDL_PumpEvents(); // force new position else GetPosition does not return new position
+
+  lastpos = GetPosition();
 
   MSG_DEBUG("mouse", "2) %d, %d\n", GetPosition().GetX(), GetPosition().GetY());
 }

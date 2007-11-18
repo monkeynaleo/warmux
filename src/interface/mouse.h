@@ -60,6 +60,7 @@ public:
 
 private:
   static std::map<pointer_t, MouseCursor> cursors;
+  Point2i lastpos;
 
   visibility_t visible;
   pointer_t current_pointer;
@@ -82,7 +83,7 @@ public:
 
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
-  void CenterPointer() const;
+  void CenterPointer();
 
   // Choose the pointer
   const pointer_t GetPointer() const;

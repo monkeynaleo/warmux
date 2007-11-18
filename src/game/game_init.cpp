@@ -180,7 +180,6 @@ GameInit::GameInit():
   bool enable_sound = jukebox.UseEffects();
   jukebox.ActiveEffects(false);
 
-  Mouse::GetInstance()->CenterPointer();
   Mouse::GetInstance()->Hide();
 
   // Init all needed data
@@ -194,7 +193,8 @@ GameInit::GameInit():
 
   ParticleEngine::Load();
 
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);  
+  Mouse::GetInstance()->CenterPointer();
 
   // First "selection" of a weapon -> fix bug 6576
   ActiveTeam().AccessWeapon().Select();
