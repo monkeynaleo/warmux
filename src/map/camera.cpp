@@ -21,10 +21,12 @@
 
 #include "map/camera.h"
 #include "map/map.h"
+#include "character/character.h"
 #include "game/game.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
+#include "interface/cursor.h"
 #include "interface/mouse.h"
 #include "interface/interface.h"
 #include "object/physical_obj.h"
@@ -55,7 +57,7 @@ void Camera::Reset()
 {
   auto_crop = true;
   followed_object = NULL;
-  SetXY(world.GetSize() / 2);
+  SetXYabs(world.GetSize() / 2);
 }
 
 bool Camera::HasFixedX() const{
@@ -191,6 +193,7 @@ void Camera::ScrollCamera()
 
 void Camera::TestCamera()
 {
+  static Point2i first_mouse_pos(-1, -1);
   static Point2i last_mouse_pos(0, 0);
   Point2i curr_pos = Mouse::GetInstance()->GetPosition();
 
@@ -199,20 +202,34 @@ void Camera::TestCamera()
   if (SDL_GetModState() & KMOD_CTRL ||
       SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
     {
+      // Begin to move the camera...
+      if (Mouse::GetInstance()->GetPointer() != Mouse::POINTER_MOVE) 
+	{
+	  first_mouse_pos = Point2i(x, y);
+	  SaveMouseCursor();
+	  Mouse::GetInstance()->SetPointer(Mouse::POINTER_MOVE);
+	}
+
       SetAutoCrop(false);
       SetXY(last_mouse_pos - curr_pos);
-      SaveMouseCursor();
-      Mouse::GetInstance()->SetPointer(Mouse::POINTER_MOVE);
       last_mouse_pos = curr_pos;
       return;
     }
-  else if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_MOVE)
-    RestoreMouseCursor();
+  else if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_MOVE) 
+    {
+      // if the mouse has not moved at all since the user pressed the middle button, we center the camera!
+      if (first_mouse_pos == curr_pos) 
+	{
+	  CenterOnActiveCharacter();
+	}
+      first_mouse_pos = Point2i(-1, -1);
+      RestoreMouseCursor();
+    }
 
   last_mouse_pos = curr_pos;
 
-  if(!Interface::GetInstance()->weapons_menu.IsDisplayed() &&
-     Config::GetInstance()->GetScrollOnBorder())
+  if (!Interface::GetInstance()->weapons_menu.IsDisplayed() &&
+      Config::GetInstance()->GetScrollOnBorder())
     ScrollCamera();
 }
 
@@ -243,3 +260,8 @@ bool Camera::IsVisible(const PhysicalObj &obj) const {
    return Intersect( obj.GetRect() );
 }
 
+void Camera::CenterOnActiveCharacter()
+{
+  CharacterCursor::GetInstance()->FollowActiveCharacter();
+  FollowObject (&ActiveCharacter(), true);
+}
