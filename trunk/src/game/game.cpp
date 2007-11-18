@@ -216,12 +216,6 @@ void Game::RefreshInput()
       return;
     }
 
-    if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE) {
-      UserWantEndOfGame();
-      std::cout << _("END OF GAME") << std::endl;
-      return;
-    }
-
     // Mouse event
     if (Mouse::GetInstance()->HandleClic(event))
       continue;
