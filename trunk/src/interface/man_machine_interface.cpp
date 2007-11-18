@@ -21,7 +21,6 @@
 
 #include <SDL_events.h>
 #include "interface/man_machine_interface.h"
-#include "interface/cursor.h"
 #include "interface/interface.h"
 #include "character/character.h"
 #include "ai/ai_engine_stupid.h"
@@ -219,8 +218,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
         Game::GetInstance()->chatsession.ShowInput();
       return;
     case KEY_CENTER:
-      CharacterCursor::GetInstance()->FollowActiveCharacter();
-      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
+      Camera::GetInstance()->CenterOnActiveCharacter();
       return;
     case KEY_TOGGLE_INTERFACE:
       Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());
