@@ -131,7 +131,7 @@
       <particle_range>80</particle_range>
       <blast_range>75</blast_range>
       <blast_force>2500</blast_force>
-      <timeout>1</timeout>
+      <timeout>3</timeout>
       <uncontrolled_turn_speed>25</uncontrolled_turn_speed>
       <max_controlled_turn_speed>10</max_controlled_turn_speed>
       <fuel_time>10</fuel_time>
