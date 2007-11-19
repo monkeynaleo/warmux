@@ -240,11 +240,12 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
   // Shoot when in turn
   if (key == KEY_SHOOT) {
 
-    if (Game::GetInstance()->ReadState() == Game::END_TURN &&
-        !Network::IsConnected()) {
+    if (Game::GetInstance()->ReadState() == Game::END_TURN) {
       ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
       if (current_box != NULL) {
-        current_box->DropBox();
+        Action * a = new Action(Action::ACTION_DROP_BONUS_BOX);
+        current_box->StoreValue(a);
+        ActionHandler::GetInstance()->NewAction(a);
       }
     } else if (Game::GetInstance()->ReadState() == Game::PLAYING &&
                ActiveTeam().IsLocal() &&

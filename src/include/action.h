@@ -95,6 +95,7 @@ public:
 
     // Bonus Box
     ACTION_NEW_BONUS_BOX,
+    ACTION_DROP_BONUS_BOX,
 
     // ########################################################
     ACTION_NETWORK_SYNC_BEGIN,

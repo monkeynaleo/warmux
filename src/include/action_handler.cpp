@@ -249,6 +249,15 @@ void Action_NewBonusBox (Action *a)
   Game::GetInstance()->AddNewBox(box);
 }
 
+void Action_DropBonusBox (Action *a)
+{
+  ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
+  if(current_box != NULL) {
+    current_box->GetValueFromAction(a);
+    current_box->DropBox();
+  }
+}
+
 void Action_Game_SetState (Action *a)
 {
   int random = a->PopInt();
@@ -839,6 +848,7 @@ ActionHandler::ActionHandler():
 
   // Bonus box
   Register (Action::ACTION_NEW_BONUS_BOX, "BONUSBOX_new_box", &Action_NewBonusBox);
+  Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);
   // ########################################################
   Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
   Register (Action::ACTION_NETWORK_SYNC_END, "NETWORK_sync_end", &Action_Network_SyncEnd);
