@@ -977,7 +977,7 @@ msgstr "Joc în rețea"
 #: src/network/network.cpp:129
 #, fuzzy
 msgid "Network deinitialization"
-msgstr "Inițializare rețea"
+msgstr "Deinițializare rețea"
 
 #: src/network/network.cpp:256
 msgid "Network initialization"
