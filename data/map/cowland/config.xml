@@ -28,7 +28,7 @@
     </image>
   </sprite>
   <wind>
-    <nbr_sprite>20</nbr_sprite>
+    <nbr_sprite>7</nbr_sprite>
     <need_flip>true</need_flip>
 
     <mass>0.5</mass>
