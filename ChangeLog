@@ -1,3 +1,28 @@
+> 2007/11/20 - 0.8beta3 release
+  - Code improvements:
+      * A lot of bug fixes
+      * Cleaner code, with useless code deleted
+      * Add debug messages
+      * Cursor improvements
+      * Fix visual glitch in the map background
+      * AI improvements (still stupid)
+      * Better collision detection
+  - Data:
+      * Some little graphic improvements
+      * Better characters positions
+      * Add a lot of sounds
+      * Add pumpkins map
+  - Weapons:
+      * Adjust weapons hole/projectiles/hand positions
+      * Some weapons improvements
+      * New weapon : flamethrower
+      * Hide crosshair when useless
+   - Also:
+      * Update translations
+      * Fix shortcut creation in Win32 setup
+      * Option to disable Joystick
+      * Early IRC client support
+
 > 2007/09/09 - 0.8beta2 release
   - Code improvements:
       * A lot of network bug fixes (synchro, win32 network support,...)
@@ -53,7 +78,7 @@
 > 2006/12/22 - 0.7.9RC1 release
   - Better Network game (hidden option)
   - Better Artificial intelligence (hidden option)
-  - Translations&nbsp;: add brazilian and portuguese, comments 
+  - Translations&nbsp;: add brazilian and portuguese, comments
   - Better bonus box, air attack weapon
   - Better camera (centered on character while using the jetpack)
   - New interface, new icon
@@ -108,10 +133,10 @@
 > 2006/04/04 - 0.7 release
   - Graphic enhancement in menus and loading screen
   - Improved game graphics (explosions with smoke)
-  - New maps: Desert, Monkey Bubble, King Kong, Wild West DV, 
+  - New maps: Desert, Monkey Bubble, King Kong, Wild West DV,
   - New teams: Tux team, Nupik, Wilber, PHP, Snort, Thunderbird, WorkRave, BattleNight
   - New weapons: bounce ball
-  - Translations: Dutch, Romanian, Danish, 
+  - Translations: Dutch, Romanian, Danish,
   - Code cleaning: implement some design patterns, translate some variables and functions name, remove dead Clanlib code
   - Compilation process more clean
   - Bug fixes
@@ -145,7 +170,7 @@
 
 > 2005/06/29 (Korgon)
   - Jetpack weapon
-  - Add a secondary unit for weapons ammo. Draw a box with secondary weapon units remaining when using such a weapon. 
+  - Add a secondary unit for weapons ammo. Draw a box with secondary weapon units remaining when using such a weapon.
 
 > 2005/06/19 (Gentildemon)
   - New game loop
@@ -208,7 +233,7 @@
   - Teams are identified by an id
   - Translate some team members into english
   - BUGFIX: Don't show cursor when shown object is a ghost
-  
+
 > 2005/01/05 (Gentildemon)
   - New main menu
   - Uzi weapon (still buggy :)
@@ -362,7 +387,7 @@
    - Translate the last (?) french words in src/Makefile and src/make.env
 
 > 2004/07/03 (Gentildemon)
-   - Add sounds profile for teams. 
+   - Add sounds profile for teams.
    - Random choice between many that are for the same action in the same profile.
 
 > 2004/07/02 (Haypo)
@@ -373,7 +398,7 @@
    - Change team player's name
 
 > 2004/06/29 (Haypo)
-   - Each map have its config.xml now ;-) 
+   - Each map have its config.xml now ;-)
    - Progress bar can now have a "reference value". It's used for the wind.
 
 > 2004/06/26 (Haypo)
@@ -395,7 +420,7 @@
    - BUGIX: Correction of animation.cpp : set frame to zero when animation type is changed
 
 > 2004/06/19 (Gentildemon & Matt)
-   - La grenade tourne lorsqu'elle est en mouvement 
+   - La grenade tourne lorsqu'elle est en mouvement
    - Possibilité de gérer un son de rebond différent par objet rebondissant
    - Ajout de sons pour le lancement de la grenade, le bazooka, le bazooka à tête chercheuse, la téléportation. Ces sons ont été réalisé par Gottfried Hofmann.
    - Changement du son pour le saut.
@@ -413,12 +438,12 @@
 > 2004/06/13 (Laurent/Gentildemon/Matt)
    - Ajout de barres d'énergie aux équipes
    - Ajout de la gestion du rebond dans le moteur physique.
-   - Première version de l'arme "Grenade" :-) 
+   - Première version de l'arme "Grenade" :-)
 
 > 2004/06/10 (Lawrence)
    - Ajout de 2 animations d'un ver qui meurt.
    - Sprite d'explosion pour le bazooka.
-   - Correction de l'arme "Mine", a present elles n'explosent pas sans prevenir... 
+   - Correction de l'arme "Mine", a present elles n'explosent pas sans prevenir...
      1- A une certaine distance elle s'active apres un temps.
      2- Elle explose si on la touche et se desarme si on s'eloigne
    - Correction du mini moteur de placement des caisses/mines,(problème d'assert) y'avait trop de boucle donc provocation d'un assert. A présent même le "y" est en random.
@@ -484,7 +509,7 @@
    - BUGFIX: En mode RELEASE, tire quand même avec le bazooka (avant bazooka.Tire() était écrit dans une assertion, donc zappé)
 
 > 2004/06/02 (Matthieu & Haypo) ===> Version 0.3.1
-   - Possibilité de spécifier le pas d'(in|dé)crémentation dans la classe SpinButton 
+   - Possibilité de spécifier le pas d'(in|dé)crémentation dans la classe SpinButton
    - Ajout des Options "Nombre d'équipiers" et "Énergie initiale" dans le menu.
    - Modification du pas de modification pour l'option "Temps du tour"
    - BUGFIX: Correction de la recherche d'équipes / avatars / terrains : utilise stat() plutôt que les attributs renvoyés par readdir (non conforme POSIX).
@@ -503,7 +528,7 @@
      o images.scr : liste des images (l'écusson)
      o ecusson.png : Ecusson de l'équipe
      o equipe.xml : Liste des vers et nom de l'équipe.
-   - Sauve le terrain choisi dans config.xml   
+   - Sauve le terrain choisi dans config.xml
    - Les ListBox peuvent maintenant avoir plusieurs choix, un nombre de choix minimum, et un nombre de choix maximum
    - Le changement d'équipe dans le menu Options est fonctionnel
    - Code du menu des options déplacé menu_option.cpp/.h
@@ -598,7 +623,7 @@
    - N'autorise plus le changement de ver (touche TAB ou avec la souris) une fois que le ver a bougé, à moins que l'option config.automise_multiple_chg_ver ait la valeur true.
    - Evite les gros patés de vers en évitant qu'ils soient trop proche
    - Sauve la force du bazooka pour chaque équipe, ce qui permet d'afficher un marqueur sur la barre de progression au prochain tir de roquette
-   - BUGFIX: Animation::RAZ() ne touche pas à la direction    
+   - BUGFIX: Animation::RAZ() ne touche pas à la direction
    - BUGFIX: Cache le curseur si le ver passe son tour
    - BUGFIX: Corrige le changement d'énergie pour les caisses (bonus gain ou perte d'énergie)
 
@@ -871,7 +896,7 @@
    - Si un ver sort du monde, il meure. A ce moment la, il n'a meme plus de tombe :-p
    - Correction du code : lorsqu'un ver meure, passe le tour. Mais si tous les vers d'une equipe sont morts, signale la fin d'une partie.
    - Correction du saut : si on ne peut plus sauter, rend la main.
-   - Creation pour afficher des messages d'information en haut de l'ecran. Ils restent affiche 5 secondes.   
+   - Creation pour afficher des messages d'information en haut de l'ecran. Ils restent affiche 5 secondes.
    - Revision de la fonction qui calcul les pertes du ver en cours d'utilisation en fonction de sa distance avec le centre d'explosion de la dynamite
 
 > 2003/10/12 (Haypo & Lami)
