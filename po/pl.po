@@ -9,7 +9,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-11-09 20:39-0000\n"
 "Last-Translator: Paweł Dyda <pawel.dyda@gazeta.pl>\n"
 "Language-Team:  <pl@li.org>\n"
@@ -44,7 +43,7 @@ msgstr[0] "%i gracz jest gotowy"
 msgstr[1] "%i graczy jest gotowych"
 msgstr[2] "%i graczy jest gotowych"
 
-#: src/game/game.cpp:808
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (drużyna %s) zginął."
@@ -70,7 +69,7 @@ msgstr "Drużyna %s"
 msgid "%s Team - Remote"
 msgstr "Drużyna %s - zdalna"
 
-#: src/game/game.cpp:787
+#: src/game/game.cpp:781
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s popełnił samobójstwo!"
@@ -80,12 +79,12 @@ msgstr "%s popełnił samobójstwo!"
 msgid "%s fps"
 msgstr "%s kl/s"
 
-#: src/game/game.cpp:780
+#: src/game/game.cpp:774
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s wpadł do wody."
 
-#: src/game/game.cpp:791
+#: src/game/game.cpp:785
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s wypadł poza mapę!"
@@ -98,12 +97,12 @@ msgstr[0] "%s wygrał %u punkt energii!"
 msgstr[1] "%s wygrał %u punkty energii!"
 msgstr[2] "%s wygrał %u punktów energii!"
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:796
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s jest psychopatą, zabił %s - członka swojej drużyny!"
 
-#: src/game/game.cpp:797
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s zginął przez swoją niezdarność!"
@@ -169,7 +168,7 @@ msgstr[0] "Drużyna %s zyskała %u kowadło! Rozpłaszczcie ich!"
 msgstr[1] "Drużyna %s zyskała %u kowadła! Rozpłaszczcie ich!"
 msgstr[2] "Drużyna %s zyskała %u kowadeł! Rozpłaszczcie ich!"
 
-#: src/weapon/auto_bazooka.cpp:314
+#: src/weapon/auto_bazooka.cpp:317
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -193,7 +192,7 @@ msgstr[0] "Drużyna %s zyskała %u wyrzutnię rakiet!"
 msgstr[1] "Drużyna %s zyskała %u wyrzutnie rakiet!"
 msgstr[2] "Drużyna %s zyskała %u wyrzutni rakiet!"
 
-#: src/weapon/blowtorch.cpp:139
+#: src/weapon/blowtorch.cpp:140
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -414,7 +413,7 @@ msgstr[2] ""
 "Drużyna %s zyskała %u wyrzutni tuksów! Widzieliście już kiedyś latającego "
 "pingwina?"
 
-#: src/include/action_handler.cpp:323
+#: src/include/action_handler.cpp:332
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s usiłuje się połączyć przy użyciu innej wersji: klient=%s, ja=%s."
@@ -445,7 +444,7 @@ msgstr "Młot pneumatyczny"
 msgid "All teams"
 msgstr "Wszystkie drużyny:"
 
-#: src/game/game.cpp:430
+#: src/game/game.cpp:424
 msgid "And the winner is..."
 msgstr "Zwycięstwo przypadło w udziale..."
 
@@ -467,7 +466,7 @@ msgstr "Kowadło"
 msgid "Authors:"
 msgstr "Autorzy:"
 
-#: src/weapon/auto_bazooka.cpp:204
+#: src/weapon/auto_bazooka.cpp:207
 msgid "Automatic Bazooka"
 msgstr "Automatyczna wyrzutnia rakiet"
 
@@ -483,7 +482,7 @@ msgstr "Kij bejsbolowy"
 msgid "Bazooka"
 msgstr "Wyrzutnia rakiet"
 
-#: src/weapon/blowtorch.cpp:52
+#: src/weapon/blowtorch.cpp:53
 msgid "Blowtorch"
 msgstr "Palnik"
 
@@ -533,11 +532,11 @@ msgid "Connect !"
 msgstr "Dołącz!"
 
 #: src/menu/network_connection_menu.cpp:59
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr "Dołącz do gry internetowej"
 
-#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr "Dołącz do gry"
 
@@ -561,7 +560,7 @@ msgstr "Podziękowania"
 msgid "Disco Grenade"
 msgstr "Granat Disco"
 
-#: src/game/game.cpp:879
+#: src/game/game.cpp:873
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Czy naprawdę chcesz zakończyć? (T/N)"
 
@@ -573,7 +572,7 @@ msgstr "Czas trwania tury"
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:215 src/game/game.cpp:221
+#: src/game/game.cpp:215
 msgid "END OF GAME"
 msgstr "KONIEC GRY"
 
@@ -609,7 +608,7 @@ msgstr "Błąd podczas wczytywania pliku konfiguracyjnego %s"
 msgid "Error while loading default configuration file: %s"
 msgstr "Błąd podczas wczytywania domyślnego pliku konfiguracyjnego (%s)"
 
-#: src/game/game_mode.cpp:235
+#: src/game/game_mode.cpp:237
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Błąd podczas wczytywania trybu gry %s (plik %s):"
@@ -624,24 +623,24 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:235
+#: src/menu/network_connection_menu.cpp:239
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Błąd: Połączenie z %s:%s nie powiodło się"
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
 msgstr ""
 "Błąd: nie udało się skontaktować z serwerem indeksującym w celu "
 "zarejestrowania serwera gry"
 
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:250
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Błąd: nie udało się skontaktować z serwerem indeksującym w celu znalezienia "
 "gry internetowej"
 
-#: src/menu/network_connection_menu.cpp:223
+#: src/menu/network_connection_menu.cpp:227
 msgid "Error: Unable to start server"
 msgstr "Błąd: Nie można uruchomić serwera"
 
@@ -697,11 +696,15 @@ msgstr "Głównodowodzący"
 msgid "Head commander: "
 msgstr "Głównodowodzący: "
 
-#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:163
 msgid "Host a game"
 msgstr "Uruchom serwer gry"
 
-#: src/weapon/blowtorch.cpp:53
+#: src/menu/network_connection_menu.cpp:161
+msgid "Host a game (Windows clients only)"
+msgstr ""
+
+#: src/weapon/blowtorch.cpp:54
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -719,7 +722,7 @@ msgstr ""
 "Sposób użycia: przytrzymaj spację\n"
 "amunicji na turę"
 
-#: src/weapon/auto_bazooka.cpp:205
+#: src/weapon/auto_bazooka.cpp:208
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -739,7 +742,7 @@ msgstr ""
 "Sposób użycia: kliknij lewym klawiszem na celu\n"
 "amunicji na turę"
 
-#: src/game/game.cpp:844
+#: src/game/game.cpp:838
 msgid "Hurry up, you are too slow !!"
 msgstr "Pośpieszcie się, jesteście zbyt powolni!!!"
 
@@ -781,7 +784,7 @@ msgstr "Inicjalizacja dźwięków"
 msgid "Initialise teams"
 msgstr "Inicjalizacja drużyn"
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:589
 msgid "It's a present!"
 msgstr "To prezent!"
 
@@ -868,12 +871,7 @@ msgstr "Odtwarzanie muzyki"
 msgid "Network Game"
 msgstr "Gra sieciowa"
 
-#: src/network/network.cpp:129
-#, fuzzy
-msgid "Network deinitialization"
-msgstr "Inicjalizacja sieci..."
-
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 msgid "Network initialization"
 msgstr "Inicjalizacja sieci..."
 
@@ -1061,7 +1059,7 @@ msgstr "Gnu opuściła pole bitwy zanim wybuchła"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Skunks opuścił pole bitwy zanim wybuchł"
 
-#: src/weapon/auto_bazooka.cpp:172
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Kierowana rakieta opuściła pole bitwy..."
 
@@ -1180,7 +1178,7 @@ msgstr "Uzbrojenie"
 msgid "Website: "
 msgstr "Strona domowa: "
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:799
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Co za wstyd! %s został zabity zwykłym pistoletem!"
@@ -1266,6 +1264,10 @@ msgstr "o Wczytywanie profilu dźwięków: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otworzono plik audio - %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Network deinitialization"
+#~ msgstr "Inicjalizacja sieci..."
 
 #~ msgid "(current)"
 #~ msgstr "(obecnie)"

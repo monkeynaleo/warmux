@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2006-06-16 11:36+0100\n"
 "Last-Translator: Bastian Salmela <bastian.salmela@hel.fi>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -39,7 +38,7 @@ msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game.cpp:808
+#: src/game/game.cpp:802
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (joukkue %s) kuoli."
@@ -65,7 +64,7 @@ msgstr ""
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:787
+#: src/game/game.cpp:781
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suoritti itsemurhan !"
@@ -75,12 +74,12 @@ msgstr "%s suoritti itsemurhan !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:780
+#: src/game/game.cpp:774
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:791
+#: src/game/game.cpp:785
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
@@ -92,12 +91,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:796
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/game/game.cpp:797
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kuoli kömpelyyteensä!"
@@ -150,7 +149,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 msgstr[1] "Joukkue %s voitti %u ilmaiskua."
 
-#: src/weapon/auto_bazooka.cpp:314
+#: src/weapon/auto_bazooka.cpp:317
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -171,7 +170,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/weapon/blowtorch.cpp:139
+#: src/weapon/blowtorch.cpp:140
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -343,7 +342,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/include/action_handler.cpp:323
+#: src/include/action_handler.cpp:332
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -376,7 +375,7 @@ msgstr ""
 msgid "All teams"
 msgstr "Odota joukkueita"
 
-#: src/game/game.cpp:430
+#: src/game/game.cpp:424
 msgid "And the winner is..."
 msgstr ""
 
@@ -395,7 +394,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Tekijät:"
 
-#: src/weapon/auto_bazooka.cpp:204
+#: src/weapon/auto_bazooka.cpp:207
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Automaattibazooka"
@@ -413,7 +412,7 @@ msgstr "Pesäpallomaila"
 msgid "Bazooka"
 msgstr "Bazooka"
 
-#: src/weapon/blowtorch.cpp:52
+#: src/weapon/blowtorch.cpp:53
 msgid "Blowtorch"
 msgstr ""
 
@@ -465,11 +464,11 @@ msgid "Connect !"
 msgstr ""
 
 #: src/menu/network_connection_menu.cpp:59
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr ""
 
@@ -494,7 +493,7 @@ msgstr "Kiitokset"
 msgid "Disco Grenade"
 msgstr "Kranaatti"
 
-#: src/game/game.cpp:879
+#: src/game/game.cpp:873
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
@@ -507,7 +506,7 @@ msgstr "Vuoron kesto:"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game.cpp:215 src/game/game.cpp:221
+#: src/game/game.cpp:215
 msgid "END OF GAME"
 msgstr ""
 
@@ -542,7 +541,7 @@ msgstr "Virhe luettaessa asetustiedostoa: %s"
 msgid "Error while loading default configuration file: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
 
-#: src/game/game_mode.cpp:235
+#: src/game/game_mode.cpp:237
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Virhe ladataessa pelityyppiä %s (tiedosto %s):"
@@ -557,22 +556,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:235
+#: src/menu/network_connection_menu.cpp:239
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ulkoasuhakemiston avaus epäonnistui (%s)!"
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:213
 #, fuzzy
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:250
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/menu/network_connection_menu.cpp:223
+#: src/menu/network_connection_menu.cpp:227
 #, fuzzy
 msgid "Error: Unable to start server"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
@@ -628,11 +627,15 @@ msgstr ""
 msgid "Head commander: "
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:163
 msgid "Host a game"
 msgstr ""
 
-#: src/weapon/blowtorch.cpp:53
+#: src/menu/network_connection_menu.cpp:161
+msgid "Host a game (Windows clients only)"
+msgstr ""
+
+#: src/weapon/blowtorch.cpp:54
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -645,7 +648,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:205
+#: src/weapon/auto_bazooka.cpp:208
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -659,7 +662,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:844
+#: src/game/game.cpp:838
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -699,7 +702,7 @@ msgstr "Alusta objektit"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:589
 msgid "It's a present!"
 msgstr ""
 
@@ -793,12 +796,7 @@ msgstr "Musiikki?"
 msgid "Network Game"
 msgstr "Nettipeli"
 
-#: src/network/network.cpp:129
-#, fuzzy
-msgid "Network deinitialization"
-msgstr "Maaston alustus..."
-
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 #, fuzzy
 msgid "Network initialization"
 msgstr "Maaston alustus..."
@@ -1000,7 +998,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Ohjus on poistunut taistelukentältä..."
 
-#: src/weapon/auto_bazooka.cpp:172
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaattiohjus on poistunut taistelukentältä..."
 
@@ -1113,7 +1111,7 @@ msgstr "Ase:"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:799
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -1199,6 +1197,10 @@ msgstr "Virhe luettaessa asetustiedostoa: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Network deinitialization"
+#~ msgstr "Maaston alustus..."
 
 #, fuzzy
 #~ msgid "%s team has won %u Gnu!"
