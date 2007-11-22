@@ -44,12 +44,14 @@ JukeBox::JukeBox()
 
 void JukeBox::Pause() const
 {
-  Mix_Pause(-1);
+  if (m_config.music || m_config.effects)
+    Mix_Pause(-1);
 }
 
 void JukeBox::Resume() const
 {
-  Mix_Resume(-1);
+  if (m_config.music || m_config.effects)
+    Mix_Resume(-1);
 }
 
 void JukeBox::Init()
