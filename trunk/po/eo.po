@@ -9,7 +9,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_eo\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-08-23 23:04+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -38,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i ludanto pretas"
 msgstr[1] "%i ludantoj pretas"
 
-#: src/game/game.cpp:808
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s teamo) mortis."
@@ -64,7 +63,7 @@ msgstr "%s Teamo"
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
 
-#: src/game/game.cpp:787
+#: src/game/game.cpp:781
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -74,12 +73,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr "%s bildo po sekundo (fps)"
 
-#: src/game/game.cpp:780
+#: src/game/game.cpp:774
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s droniĝis."
 
-#: src/game/game.cpp:791
+#: src/game/game.cpp:785
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s falis el la mapo !"
@@ -91,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:796
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game.cpp:797
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -152,7 +151,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "%s teamo gajnis %u amboson ! Platigu ĉiujn !"
 msgstr[1] "%s teamo gajnis %u ambosojn ! Platigu ĉiujn !"
 
-#: src/weapon/auto_bazooka.cpp:314
+#: src/weapon/auto_bazooka.cpp:317
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -173,7 +172,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "%s teamo gajnis %u bazukon !"
 msgstr[1] "%s teamo gajnis %u bazukojn !"
 
-#: src/weapon/blowtorch.cpp:139
+#: src/weapon/blowtorch.cpp:140
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -351,7 +350,7 @@ msgstr[0] ""
 msgstr[1] ""
 "%s teamo gajnis %u tuksĵetilojn ! Ĉu vi neniam vidis flugantan sfeniskon ?"
 
-#: src/include/action_handler.cpp:323
+#: src/include/action_handler.cpp:332
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s provas konetiĝi kun alia versio: kliento=%s, mi=%s."
@@ -382,7 +381,7 @@ msgstr "Pneŭmatika martelo"
 msgid "All teams"
 msgstr "Ĉiuj teamoj"
 
-#: src/game/game.cpp:430
+#: src/game/game.cpp:424
 msgid "And the winner is..."
 msgstr "Kaj la gajnanto estas..."
 
@@ -404,7 +403,7 @@ msgstr "Amboso"
 msgid "Authors:"
 msgstr "Aŭtoroj :"
 
-#: src/weapon/auto_bazooka.cpp:204
+#: src/weapon/auto_bazooka.cpp:207
 msgid "Automatic Bazooka"
 msgstr "Aŭtomatika bazuko"
 
@@ -420,7 +419,7 @@ msgstr "Basbalbatilo"
 msgid "Bazooka"
 msgstr "Bazuko"
 
-#: src/weapon/blowtorch.cpp:52
+#: src/weapon/blowtorch.cpp:53
 msgid "Blowtorch"
 msgstr "Torĉo"
 
@@ -470,11 +469,11 @@ msgid "Connect !"
 msgstr "Konektu !"
 
 #: src/menu/network_connection_menu.cpp:59
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr "Konektu al interretludo"
 
-#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr "Konektu al ludo"
 
@@ -498,7 +497,7 @@ msgstr "Kreditoj"
 msgid "Disco Grenade"
 msgstr "Diskogrenado"
 
-#: src/game/game.cpp:879
+#: src/game/game.cpp:873
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Ĉu vi volas vere forlasi (J/N) ?"
 
@@ -510,7 +509,7 @@ msgstr "Vicdaŭro"
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/game/game.cpp:215 src/game/game.cpp:221
+#: src/game/game.cpp:215
 msgid "END OF GAME"
 msgstr "LUDFINO"
 
@@ -544,7 +543,7 @@ msgstr "Eraro muntante agordan dosieron : %s"
 msgid "Error while loading default configuration file: %s"
 msgstr "Eraro muntante norman agordan dosieron : %s"
 
-#: src/game/game_mode.cpp:235
+#: src/game/game_mode.cpp:237
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Eraro muntante ludon %s (dosiero %s) :"
@@ -559,20 +558,20 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:235
+#: src/menu/network_connection_menu.cpp:239
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ne eblas konekti al %s : %s"
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Eraro : Ne eblas kontakti indeksservilon por gastigi ludon"
 
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:250
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Eraro : Ne eblas kontakti indeksservilon por serĉi interretan ludon"
 
-#: src/menu/network_connection_menu.cpp:223
+#: src/menu/network_connection_menu.cpp:227
 msgid "Error: Unable to start server"
 msgstr "Eraro : Ne eblas starti servilon"
 
@@ -627,11 +626,15 @@ msgstr "Ĉefkomandoro"
 msgid "Head commander: "
 msgstr "Ĉefkomandoro:"
 
-#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:163
 msgid "Host a game"
 msgstr "Gastigu ludon"
 
-#: src/weapon/blowtorch.cpp:53
+#: src/menu/network_connection_menu.cpp:161
+msgid "Host a game (Windows clients only)"
+msgstr ""
+
+#: src/weapon/blowtorch.cpp:54
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -648,7 +651,7 @@ msgstr ""
 "Kiel uzi ĝin : apogu kontinue spacetosignon\n"
 "Unu uzo vice"
 
-#: src/weapon/auto_bazooka.cpp:205
+#: src/weapon/auto_bazooka.cpp:208
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -667,7 +670,7 @@ msgstr ""
 "Kiel uzi ĝin : maldekstrklaku sur celo\n"
 "Unu amunicio vice"
 
-#: src/game/game.cpp:844
+#: src/game/game.cpp:838
 msgid "Hurry up, you are too slow !!"
 msgstr "Rapidegu, vi tro malrapidas !"
 
@@ -709,7 +712,7 @@ msgstr "Preparante sonojn"
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:589
 msgid "It's a present!"
 msgstr "Tio estas donaco !"
 
@@ -795,12 +798,7 @@ msgstr "Muzikon ?"
 msgid "Network Game"
 msgstr "Reta ludo"
 
-#: src/network/network.cpp:129
-#, fuzzy
-msgid "Network deinitialization"
-msgstr "Preparante la reton"
-
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 msgid "Network initialization"
 msgstr "Preparante la reton"
 
@@ -989,7 +987,7 @@ msgstr "La Gnuo foriris de la batalejo antaŭ ol explodi"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "La putoro foriris de la batalejo antaŭ ol explodi"
 
-#: src/weapon/auto_bazooka.cpp:172
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La aŭtomatika raketo foriris de la batalejo..."
 
@@ -1101,7 +1099,7 @@ msgstr "Armiloj"
 msgid "Website: "
 msgstr "TTT-ejo: "
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:799
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo !"
@@ -1187,3 +1185,7 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#, fuzzy
+#~ msgid "Network deinitialization"
+#~ msgstr "Preparante la reton"

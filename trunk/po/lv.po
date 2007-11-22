@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-lv\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-08-25 12:48+0300\n"
 "Last-Translator: Raivis Dejus <orvils@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -39,7 +38,7 @@ msgstr[0] "%i spēlētājs gatavs"
 msgstr[1] "%i spēlētāji gatavi"
 msgstr[2] "%i spēlētāju gatavi"
 
-#: src/game/game.cpp:808
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s ) ir nomiris."
@@ -65,7 +64,7 @@ msgstr "%s komanda"
 msgid "%s Team - Remote"
 msgstr "%s komanda - attālināta"
 
-#: src/game/game.cpp:787
+#: src/game/game.cpp:781
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izdara pašnāvību !"
@@ -75,12 +74,12 @@ msgstr "%s izdara pašnāvību !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:780
+#: src/game/game.cpp:774
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s iekrita ūdenī."
 
-#: src/game/game.cpp:791
+#: src/game/game.cpp:785
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s nokrita no kartes!"
@@ -93,12 +92,12 @@ msgstr[0] "%s ir ieguvis %u enerģijas punktu!"
 msgstr[1] "%s ir ieguvis %u enerģijas punktus!"
 msgstr[2] "%s ir ieguvis %u enerģijas punktus!"
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:796
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ir manjaks, viņš nogalināja %s komandas dalībnieku!"
 
-#: src/game/game.cpp:797
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ir miris, jo bija pārāk neveikls!"
@@ -155,7 +154,7 @@ msgstr[0] "%s komanda ir ieguvusi %u gaisa uzlidojumu!"
 msgstr[1] "%s komanda ir ieguvusi %u gaisa uzlidojumus!"
 msgstr[2] "%s komanda ir ieguvusi %u gaisa uzlidojumus!"
 
-#: src/weapon/auto_bazooka.cpp:314
+#: src/weapon/auto_bazooka.cpp:317
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -179,7 +178,7 @@ msgstr[0] "%s komanda ir ieguvusi %u bazuku!"
 msgstr[1] "%s komanda ir ieguvusi %u bazukas!"
 msgstr[2] "%s komanda ir ieguvusi %u bazukas!"
 
-#: src/weapon/blowtorch.cpp:139
+#: src/weapon/blowtorch.cpp:140
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -375,7 +374,7 @@ msgstr[0] "%s komanda ir ieguvusi %u tux šāvēju!"
 msgstr[1] "%s komanda ir ieguvusi %u tux šāvējus!"
 msgstr[2] "%s komanda ir ieguvusi %u tux šāvējus!"
 
-#: src/include/action_handler.cpp:323
+#: src/include/action_handler.cpp:332
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -407,7 +406,7 @@ msgstr "Perforators"
 msgid "All teams"
 msgstr "Visas komandas"
 
-#: src/game/game.cpp:430
+#: src/game/game.cpp:424
 msgid "And the winner is..."
 msgstr "Un uzvarētājs ir..."
 
@@ -429,7 +428,7 @@ msgstr "Lakta"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/weapon/auto_bazooka.cpp:204
+#: src/weapon/auto_bazooka.cpp:207
 msgid "Automatic Bazooka"
 msgstr "Automātiskā bazuka"
 
@@ -445,7 +444,7 @@ msgstr "Beisbola nūja"
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/weapon/blowtorch.cpp:52
+#: src/weapon/blowtorch.cpp:53
 msgid "Blowtorch"
 msgstr "Gāzes deglis"
 
@@ -495,11 +494,11 @@ msgid "Connect !"
 msgstr "Pieslēgties !"
 
 #: src/menu/network_connection_menu.cpp:59
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr "Pieslēgties spēlei internetā"
 
-#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr "Pieslēgties spēlei"
 
@@ -523,7 +522,7 @@ msgstr "Veidotāji"
 msgid "Disco Grenade"
 msgstr "Disko granāta"
 
-#: src/game/game.cpp:879
+#: src/game/game.cpp:873
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Vai tiešām vēlaties iziet? (Y/N)"
 
@@ -535,7 +534,7 @@ msgstr "Gājiena ilgums"
 msgid "Dynamite"
 msgstr "Dinamīts"
 
-#: src/game/game.cpp:215 src/game/game.cpp:221
+#: src/game/game.cpp:215
 msgid "END OF GAME"
 msgstr "SPĒLES BEIGAS"
 
@@ -569,7 +568,7 @@ msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 msgid "Error while loading default configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/game/game_mode.cpp:235
+#: src/game/game_mode.cpp:237
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Kļūda ielādējot spēles režīmu %s (fails %s):"
@@ -584,21 +583,21 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:235
+#: src/menu/network_connection_menu.cpp:239
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Kļūda: Nevar pieslēgties %s:%s"
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Kļūda: Nevar sazināties ar indeksa serveri, lai izvietotu spēli"
 
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:250
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Kļūda: Nevar sazināties ar indeksa serveri, lai meklētu interneta spēles"
 
-#: src/menu/network_connection_menu.cpp:223
+#: src/menu/network_connection_menu.cpp:227
 msgid "Error: Unable to start server"
 msgstr "Kļūda: Nevar sākt serveri"
 
@@ -653,11 +652,15 @@ msgstr "Virspavēlnieks"
 msgid "Head commander: "
 msgstr "Virspavēlnieks: "
 
-#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:163
 msgid "Host a game"
 msgstr "Izveidot spēli"
 
-#: src/weapon/blowtorch.cpp:53
+#: src/menu/network_connection_menu.cpp:161
+msgid "Host a game (Windows clients only)"
+msgstr ""
+
+#: src/weapon/blowtorch.cpp:54
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -675,7 +678,7 @@ msgstr ""
 "Kā to izmantot : turiet nospiestu atstarpes taustiņu\n"
 "munīcija gājienā"
 
-#: src/weapon/auto_bazooka.cpp:205
+#: src/weapon/auto_bazooka.cpp:208
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -697,7 +700,7 @@ msgstr ""
 "Kā to izmantot : kreizais klikšķis uz mērķa\n"
 "munīcija gājienā"
 
-#: src/game/game.cpp:844
+#: src/game/game.cpp:838
 msgid "Hurry up, you are too slow !!"
 msgstr "Pasteidzies, tu esi par lēnu !!"
 
@@ -739,7 +742,7 @@ msgstr "Gatavo skaņas"
 msgid "Initialise teams"
 msgstr "Gatavo komandas"
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:589
 msgid "It's a present!"
 msgstr "Tā ir dāvana!"
 
@@ -827,12 +830,7 @@ msgstr "Mūzika?"
 msgid "Network Game"
 msgstr "Tīkla spēle"
 
-#: src/network/network.cpp:129
-#, fuzzy
-msgid "Network deinitialization"
-msgstr "Tīkla inicializācija"
-
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 msgid "Network initialization"
 msgstr "Tīkla inicializācija"
 
@@ -1022,7 +1020,7 @@ msgstr "Gnu nokrita no spēles laukuma pirms paguva uzsprāgt"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Sesks nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/weapon/auto_bazooka.cpp:172
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automātiksā raķete izgāja no spēles laukuma..."
 
@@ -1138,7 +1136,7 @@ msgstr "Ieroči"
 msgid "Website: "
 msgstr "Mākas lapa: "
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:799
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kauns un negods %s - viņu nogalināja ar vienkāršu ieroci!"
@@ -1224,6 +1222,10 @@ msgstr "o Ielādē skaņas profilu: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Atver skaņu %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Network deinitialization"
+#~ msgstr "Tīkla inicializācija"
 
 #~ msgid "%s team has won %u Gnu!"
 #~ msgid_plural "%s team has won %u Gnus!"

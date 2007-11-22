@@ -10,7 +10,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-08-09 13:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -44,7 +43,7 @@ msgstr[1] "%i igralca pripravljena"
 msgstr[2] "%i igralci pripravljeni"
 msgstr[3] "%i igralcev pripravljenih"
 
-#: src/game/game.cpp:808
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) je umrl/a."
@@ -70,7 +69,7 @@ msgstr "Ekipa %s"
 msgid "%s Team - Remote"
 msgstr "Ekipa %s - Oddaljena"
 
-#: src/game/game.cpp:787
+#: src/game/game.cpp:781
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s je naredil/a samomor!"
@@ -80,12 +79,12 @@ msgstr "%s je naredil/a samomor!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:780
+#: src/game/game.cpp:774
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s je padel/a v vodo."
 
-#: src/game/game.cpp:791
+#: src/game/game.cpp:785
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s je padel/a s karte!"
@@ -99,12 +98,12 @@ msgstr[1] "%s je dobil %u točki energije!"
 msgstr[2] "%s je dobil %u točke energije!"
 msgstr[3] "%s je dobil %u točk energije!"
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:796
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopat, saj je ubil člana ekipe %s!"
 
-#: src/game/game.cpp:797
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mrtev, ker je bil neroden!"
@@ -165,7 +164,7 @@ msgstr[1] "Ekipa %s je osvojila %u nakovali! Speštajte jih!"
 msgstr[2] "Ekipa %s je osvojila %u nakovala! Speštajte jih!"
 msgstr[3] "Ekipa %s je osvojila %u nakoval! Speštajte jih!"
 
-#: src/weapon/auto_bazooka.cpp:314
+#: src/weapon/auto_bazooka.cpp:317
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -192,7 +191,7 @@ msgstr[1] "Ekipa %s je osvojila %u bazuki!"
 msgstr[2] "Ekipa %s je osvojila %u bazuke!"
 msgstr[3] "Ekipa %s je osvojila %u bazuk!"
 
-#: src/weapon/blowtorch.cpp:139
+#: src/weapon/blowtorch.cpp:140
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -420,7 +419,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u SuperTux-ov! Še niste videli letečega pingvina?"
 
-#: src/include/action_handler.cpp:323
+#: src/include/action_handler.cpp:332
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
@@ -451,7 +450,7 @@ msgstr "Pnevmatsko kladivo"
 msgid "All teams"
 msgstr "Vse ekipe"
 
-#: src/game/game.cpp:430
+#: src/game/game.cpp:424
 msgid "And the winner is..."
 msgstr "In zmagali so ..."
 
@@ -473,7 +472,7 @@ msgstr "Nakovalo"
 msgid "Authors:"
 msgstr "Avtorji:"
 
-#: src/weapon/auto_bazooka.cpp:204
+#: src/weapon/auto_bazooka.cpp:207
 msgid "Automatic Bazooka"
 msgstr "Avtomatska Bazuka"
 
@@ -489,7 +488,7 @@ msgstr "Kij"
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/weapon/blowtorch.cpp:52
+#: src/weapon/blowtorch.cpp:53
 msgid "Blowtorch"
 msgstr "Varilnik"
 
@@ -539,11 +538,11 @@ msgid "Connect !"
 msgstr "Poveži !"
 
 #: src/menu/network_connection_menu.cpp:59
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr "Povezava na igro preko interneta"
 
-#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr "Povezava do igre"
 
@@ -567,7 +566,7 @@ msgstr "Zasluge"
 msgid "Disco Grenade"
 msgstr "Disko Granata"
 
-#: src/game/game.cpp:879
+#: src/game/game.cpp:873
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Ali resnično želite končati? (Y/N)"
 
@@ -579,7 +578,7 @@ msgstr "Trajanje poteze"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:215 src/game/game.cpp:221
+#: src/game/game.cpp:215
 msgid "END OF GAME"
 msgstr "KONEC IGRE"
 
@@ -615,7 +614,7 @@ msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
 msgid "Error while loading default configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke s privzetimi nastavitvami: %s"
 
-#: src/game/game_mode.cpp:235
+#: src/game/game_mode.cpp:237
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Napaka pri nalaganju igralskega načina %s (datoteka %s):"
@@ -630,24 +629,24 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:235
+#: src/menu/network_connection_menu.cpp:239
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Napaka: Ni se bilo mogoče povezati na %s:%s"
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko gostili "
 "igro"
 
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:250
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko iskali "
 "internetno igro"
 
-#: src/menu/network_connection_menu.cpp:223
+#: src/menu/network_connection_menu.cpp:227
 msgid "Error: Unable to start server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
@@ -702,11 +701,15 @@ msgstr "Poveljnik"
 msgid "Head commander: "
 msgstr "Poveljnik: "
 
-#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:163
 msgid "Host a game"
 msgstr "Gostite igro"
 
-#: src/weapon/blowtorch.cpp:53
+#: src/menu/network_connection_menu.cpp:161
+msgid "Host a game (Windows clients only)"
+msgstr ""
+
+#: src/weapon/blowtorch.cpp:54
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -724,7 +727,7 @@ msgstr ""
 "Uporaba: držite preslednico\n"
 "ena uporaba na potezo"
 
-#: src/weapon/auto_bazooka.cpp:205
+#: src/weapon/auto_bazooka.cpp:208
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -744,7 +747,7 @@ msgstr ""
 "Uporaba: kliknite na tarčo\n"
 "ena uporaba na potezo"
 
-#: src/game/game.cpp:844
+#: src/game/game.cpp:838
 msgid "Hurry up, you are too slow !!"
 msgstr "Pohitite, prepočasni ste!!"
 
@@ -786,7 +789,7 @@ msgstr "Inicializacija zvokov"
 msgid "Initialise teams"
 msgstr "Inicializacija ekip"
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:589
 msgid "It's a present!"
 msgstr "To je darilo!"
 
@@ -874,12 +877,7 @@ msgstr "Glasba?"
 msgid "Network Game"
 msgstr "Omrežna igra"
 
-#: src/network/network.cpp:129
-#, fuzzy
-msgid "Network deinitialization"
-msgstr "Inicializacija omrežja"
-
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 msgid "Network initialization"
 msgstr "Inicializacija omrežja"
 
@@ -1067,7 +1065,7 @@ msgstr "Gnu je zapustil bojišče preden ga je razneslo"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Dihur je zapustil bojišče preden ga je razneslo"
 
-#: src/weapon/auto_bazooka.cpp:172
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Avtomatska raketa je zapustila bojišče..."
 
@@ -1185,7 +1183,7 @@ msgstr "Orožja"
 msgid "Website: "
 msgstr "Spletna stran: "
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:799
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
@@ -1271,6 +1269,10 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Network deinitialization"
+#~ msgstr "Inicializacija omrežja"
 
 #~ msgid "(current)"
 #~ msgstr "(trenutna)"

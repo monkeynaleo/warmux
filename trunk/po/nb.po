@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb-no\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-11-12 20:10+0100\n"
 "PO-Revision-Date: 2007-03-07 13:15+0100\n"
 "Last-Translator: Christian LOMSDALEN <christian@vindstille.net>\n"
 "Language-Team: \n"
@@ -38,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] " %i spiller klar"
 msgstr[1] " %i spillere klare"
 
-#: src/game/game.cpp:808
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) døde."
@@ -64,7 +63,7 @@ msgstr "%s -laget"
 msgid "%s Team - Remote"
 msgstr "%s -laget - Fjernstyrt"
 
-#: src/game/game.cpp:787
+#: src/game/game.cpp:781
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s tok selvmord !"
@@ -74,12 +73,12 @@ msgstr "%s tok selvmord !"
 msgid "%s fps"
 msgstr "%s bps"
 
-#: src/game/game.cpp:780
+#: src/game/game.cpp:774
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s har falt i vannet"
 
-#: src/game/game.cpp:791
+#: src/game/game.cpp:785
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s har falt av kartet !"
@@ -91,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har fått %u livspoeng !"
 msgstr[1] "%s har fått %u livspoeng !"
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:796
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er sinnsyk, han har drept et medlem av %s-laget !"
 
-#: src/game/game.cpp:797
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s døde fordi han klønet det til!"
@@ -153,7 +152,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "%s-laget har vunnet %u anbolt, mos alle !"
 msgstr[1] "%s-laget har vunnet %u anbolter, mos alle !"
 
-#: src/weapon/auto_bazooka.cpp:314
+#: src/weapon/auto_bazooka.cpp:317
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -174,7 +173,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "%s-laget har vunnet %u rakettkanon !"
 msgstr[1] "%s-laget har vunnet %u rakettkanoner !"
 
-#: src/weapon/blowtorch.cpp:139
+#: src/weapon/blowtorch.cpp:140
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -357,7 +356,7 @@ msgstr[0] ""
 msgstr[1] ""
 "%s-laget har vunnet %u Tux-kastere, har du aldri sett en flygende pingvin?"
 
-#: src/include/action_handler.cpp:323
+#: src/include/action_handler.cpp:332
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -389,7 +388,7 @@ msgstr "Lufthammer"
 msgid "All teams"
 msgstr "Alle lag"
 
-#: src/game/game.cpp:430
+#: src/game/game.cpp:424
 msgid "And the winner is..."
 msgstr "Og vinneren er..."
 
@@ -410,7 +409,7 @@ msgstr "Ambolt"
 msgid "Authors:"
 msgstr "Forfattere :"
 
-#: src/weapon/auto_bazooka.cpp:204
+#: src/weapon/auto_bazooka.cpp:207
 msgid "Automatic Bazooka"
 msgstr "Automatisk rakettkaster"
 
@@ -426,7 +425,7 @@ msgstr "Balltre"
 msgid "Bazooka"
 msgstr "Rakettkaster"
 
-#: src/weapon/blowtorch.cpp:52
+#: src/weapon/blowtorch.cpp:53
 msgid "Blowtorch"
 msgstr "Sveiseapparat"
 
@@ -476,11 +475,11 @@ msgid "Connect !"
 msgstr "Koble til !"
 
 #: src/menu/network_connection_menu.cpp:59
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr "Koble til et internetspill"
 
-#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr "Koble til et spill"
 
@@ -504,7 +503,7 @@ msgstr "Heder og ære"
 msgid "Disco Grenade"
 msgstr "Diskogranat"
 
-#: src/game/game.cpp:879
+#: src/game/game.cpp:873
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Vil du virkelig avslutte ? (J/N)"
 
@@ -516,7 +515,7 @@ msgstr "Varighet per runde"
 msgid "Dynamite"
 msgstr "Dynamitt"
 
-#: src/game/game.cpp:215 src/game/game.cpp:221
+#: src/game/game.cpp:215
 msgid "END OF GAME"
 msgstr "Spillet er slutt"
 
@@ -551,7 +550,7 @@ msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
 msgid "Error while loading default configuration file: %s"
 msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
 
-#: src/game/game_mode.cpp:235
+#: src/game/game_mode.cpp:237
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Lasting av spillmodus feilet %s (fil %s) :"
@@ -566,22 +565,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:235
+#: src/menu/network_connection_menu.cpp:239
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Tilkobling til %s:%s feilet"
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:213
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Tilkobling til Oversiktstjener for å starte et spill feilet"
 
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:250
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Tilkobling til Oversiktstjener feilet i forsøket på å søke etter et "
 "internettspill"
 
-#: src/menu/network_connection_menu.cpp:223
+#: src/menu/network_connection_menu.cpp:227
 msgid "Error: Unable to start server"
 msgstr "Start av tjener feilet"
 
@@ -636,11 +635,15 @@ msgstr "Kommandant"
 msgid "Head commander: "
 msgstr "Kommandant"
 
-#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:163
 msgid "Host a game"
 msgstr "Hold et spill"
 
-#: src/weapon/blowtorch.cpp:53
+#: src/menu/network_connection_menu.cpp:161
+msgid "Host a game (Windows clients only)"
+msgstr ""
+
+#: src/weapon/blowtorch.cpp:54
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -655,7 +658,7 @@ msgid ""
 "an ammo per turn"
 msgstr "Hvordan bruke den : Hold mellomromstasten nedeEn ammo per runde"
 
-#: src/weapon/auto_bazooka.cpp:205
+#: src/weapon/auto_bazooka.cpp:208
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -671,7 +674,7 @@ msgid ""
 "an ammo per turn"
 msgstr "Hvordan bruke den : venstreklikk på måleten ammo per runde"
 
-#: src/game/game.cpp:844
+#: src/game/game.cpp:838
 msgid "Hurry up, you are too slow !!"
 msgstr "Kjapp deg, du er for treg !!"
 
@@ -712,7 +715,7 @@ msgstr "Laster lyder"
 msgid "Initialise teams"
 msgstr "Laster lagene"
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:589
 msgid "It's a present!"
 msgstr "Det er en gave !"
 
@@ -798,12 +801,7 @@ msgstr "Musikk ?"
 msgid "Network Game"
 msgstr "Nettverksspill"
 
-#: src/network/network.cpp:129
-#, fuzzy
-msgid "Network deinitialization"
-msgstr "Starter nettverk ..."
-
-#: src/network/network.cpp:256
+#: src/network/network.cpp:255
 msgid "Network initialization"
 msgstr "Starter nettverk ..."
 
@@ -991,7 +989,7 @@ msgstr "Gnu'en forsvant fra kampplassen uten å eksplodere."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Ilderen forsvant fra kampplassen uten å eksplodere."
 
-#: src/weapon/auto_bazooka.cpp:172
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Den laserstyrte raketten forsvant fra kampplassen uten å eksplodere."
 
@@ -1105,7 +1103,7 @@ msgstr "Våpen"
 msgid "Website: "
 msgstr "Webside : "
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:799
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "For en skam for %s : han ble drept av en liten pistol !"
@@ -1189,6 +1187,10 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Åpnet lyden på %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Network deinitialization"
+#~ msgstr "Starter nettverk ..."
 
 #~ msgid "(current)"
 #~ msgstr "(aktuell)"
