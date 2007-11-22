@@ -27,6 +27,7 @@
 #include <iostream>
 #include <png.h>
 #include "tool/i18n.h"
+#include "tool/math_tools.h"
 
 /* texturedPolygon import from SDL_gfx v2.0.15 */
 #if (SDL_GFXPRIMITIVES_MAJOR == 2) && (SDL_GFXPRIMITIVES_MINOR == 0) && (SDL_GFXPRIMITIVES_MICRO < 14)
@@ -660,7 +661,10 @@ static const double ratio_deg_to_rad = 180 / M_PI;
 Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
   Surface newSurf;
 
-  newSurf.SetSurface( rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth) );
+  if (abs(angle) < EPS_ZERO)
+    newSurf.SetSurface( zoomSurface(surface, zoomx, zoomy, smooth) );
+  else
+    newSurf.SetSurface( rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth) );
 
   if( newSurf.IsNull() )
     Error( "Unable to make a rotozoom on the surface !" );
