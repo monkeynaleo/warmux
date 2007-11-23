@@ -305,6 +305,17 @@ void Interface::DrawTeamEnergy() const
   }
 }
 
+// Draw map preview
+void Interface::DrawMapPreview()
+{
+#if TILE_HAS_PREVIEW
+  Surface& window  = AppWormux::GetInstance()->video->window;
+  const Surface& preview = *world.ground.GetPreview();
+
+  window.Blit(preview, window.GetSize() - preview.GetSize() - Point2i(MARGIN/2, 2*MARGIN));
+#endif
+}
+
 void Interface::Draw()
 {
   AppWormux * app = AppWormux::GetInstance();
@@ -334,6 +345,7 @@ void Interface::Draw()
   DrawCharacterInfo();
   DrawTeamEnergy();
   DrawWeaponInfo();
+  DrawMapPreview();
   DrawSmallInterface();
 }
 

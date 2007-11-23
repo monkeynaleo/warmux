@@ -31,6 +31,7 @@ class TileItem;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
+#define TILE_HAS_PREVIEW   0
 
 class Tile : public Rectanglei{
 public:
@@ -48,7 +49,7 @@ public:
   void MergeSprite(const Point2i &position, Surface & provider);
 
   // Load an image
-  void LoadImage (Surface& ground_surface, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
+  void LoadImage(Surface& ground_surface, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
 
   // Get alpha value of a pixel
   unsigned char GetAlpha(const Point2i &pos) const;
@@ -64,6 +65,11 @@ public:
   // Return a surface of the ground inside the rect
   Surface GetPart(const Rectanglei& rec);
 
+  // Return the preview
+#if TILE_HAS_PREVIEW
+  const Surface* GetPreview() const { return m_preview; };
+#endif
+
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();
 protected:
@@ -75,6 +81,11 @@ protected:
   // Ground dimensions
   Point2i nbCells;
   unsigned int nbr_cell;
+
+#if TILE_HAS_PREVIEW
+  Surface* m_preview;
+  uint     m_shift;
+#endif
 
   // Canvas giving access to tiles
   std::vector<TileItem *> item;
