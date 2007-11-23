@@ -106,6 +106,7 @@ public:
    void DrawWindInfo() const;
    void DrawClock(const Point2i &time_pos) const;
    void DrawTimeInfo() const;
+   void DrawMapPreview();
    void DrawSmallInterface() const;
 
    bool IsDisplayed () const { return display; };

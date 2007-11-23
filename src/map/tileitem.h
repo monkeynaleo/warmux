@@ -39,6 +39,7 @@ public:
   virtual unsigned char GetAlpha(const Point2i &pos) = 0;
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
   virtual void Dig(const Point2i &center, const uint radius) = 0;
+  virtual void ScalePreview(uint8_t *odata, uint opitch, uint shift);
   virtual void MergeSprite(const Point2i &/*position*/, Surface& /*spr*/) {};
   virtual Surface GetSurface() = 0;
   virtual void Draw(const Point2i &pos) = 0;
@@ -78,6 +79,7 @@ public:
   void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
   void MergeSprite(const Point2i &position, Surface& spr);
+  void ScalePreview(uint8_t *odata, uint opitch, uint shift);
   void Draw(const Point2i &pos);
 
   bool NeedDelete() const {return need_delete; };
