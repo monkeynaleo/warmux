@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-11-14 21:34+0100\n"
 "PO-Revision-Date: 2007-08-28 22:21+0400\n"
 "Last-Translator: Igor MURZOV <igor@gplsoft.org>\n"
 "Language-Team:  <ru@li.org>\n"
@@ -42,7 +43,7 @@ msgstr[0] "%i игрок готов"
 msgstr[1] "%i игрока готовы"
 msgstr[2] "%i игроков готовы"
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:808
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) погиб."
@@ -68,7 +69,7 @@ msgstr "Команда %s"
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удаленно"
 
-#: src/game/game.cpp:781
+#: src/game/game.cpp:787
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -78,12 +79,12 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:774
+#: src/game/game.cpp:780
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game.cpp:785
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -96,12 +97,12 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game.cpp:796
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game.cpp:791
+#: src/game/game.cpp:797
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
@@ -164,7 +165,7 @@ msgstr[0] "Команда '%s выиграла %u наковальню! Разм
 msgstr[1] "Команда '%s выиграла %u наковальни! Размажьте их!"
 msgstr[2] "Команда '%s выиграла %u наковален! Размажьте их!"
 
-#: src/weapon/auto_bazooka.cpp:317
+#: src/weapon/auto_bazooka.cpp:314
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -188,7 +189,7 @@ msgstr[0] "Команда %s выиграла %u базуку!"
 msgstr[1] "Команда %s выиграла %u базуки!"
 msgstr[2] "Команда %s выиграла %u базук!"
 
-#: src/weapon/blowtorch.cpp:140
+#: src/weapon/blowtorch.cpp:139
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -247,12 +248,12 @@ msgstr[1] "Команда %s выиграла %u динамитные шашки
 msgstr[2] "Команда %s выиграла %u динамитных шашек!"
 
 #: src/weapon/flamethrower.cpp:160
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
-msgstr[0] "Команда %s выиграла %u динамитную шашку!"
-msgstr[1] "Команда %s выиграла %u динамитные шашки!"
-msgstr[2] "Команда %s выиграла %u динамитных шашек!"
+msgstr[0] "Команда %s выиграла %u огнемет!"
+msgstr[1] "Команда %s выиграла %u огнемета!"
+msgstr[2] "Команда %s выиграла %u огнеметов!"
 
 #: src/weapon/grapple.cpp:709
 #, c-format
@@ -400,7 +401,7 @@ msgstr[2] ""
 "Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего "
 "пингвина?"
 
-#: src/include/action_handler.cpp:332
+#: src/include/action_handler.cpp:323
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s пытается подключиться с другой версией : client=%s, me=%s."
@@ -431,9 +432,9 @@ msgstr "Отбойный молот"
 msgid "All teams"
 msgstr "Все команды"
 
-#: src/game/game.cpp:424
+#: src/game/game.cpp:430
 msgid "And the winner is..."
-msgstr "И победил..."
+msgstr "И победителем стал..."
 
 #: src/weapon/baseball.cpp:49
 msgid ""
@@ -453,7 +454,7 @@ msgstr "Наковальня"
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: src/weapon/auto_bazooka.cpp:207
+#: src/weapon/auto_bazooka.cpp:204
 msgid "Automatic Bazooka"
 msgstr "Автоматическая базука"
 
@@ -469,7 +470,7 @@ msgstr "Бейсбольная бита"
 msgid "Bazooka"
 msgstr "Базука"
 
-#: src/weapon/blowtorch.cpp:53
+#: src/weapon/blowtorch.cpp:52
 msgid "Blowtorch"
 msgstr "Паяльная лампа"
 
@@ -499,7 +500,7 @@ msgstr "Не удаётся открыть каталог команд (%s)!"
 
 #: src/menu/map_selection_box.cpp:219
 msgid "Choose randomly between the different maps"
-msgstr ""
+msgstr "Выбрать карту случайно"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -519,11 +520,11 @@ msgid "Connect !"
 msgstr "Подключиться !"
 
 #: src/menu/network_connection_menu.cpp:59
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:176
 msgid "Connect to an internet game"
 msgstr "Подключиться к интернет игре"
 
-#: src/menu/network_connection_menu.cpp:172
+#: src/menu/network_connection_menu.cpp:168
 msgid "Connect to game"
 msgstr "Подключиться к игре"
 
@@ -547,7 +548,7 @@ msgstr "Разработчики"
 msgid "Disco Grenade"
 msgstr "Диско-граната"
 
-#: src/game/game.cpp:873
+#: src/game/game.cpp:879
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
@@ -559,7 +560,7 @@ msgstr "Продолжительность хода"
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/game/game.cpp:215
+#: src/game/game.cpp:215 src/game/game.cpp:221
 msgid "END OF GAME"
 msgstr "КОНЕЦ ИГРЫ"
 
@@ -594,7 +595,7 @@ msgstr "Ошибка при загрузке конфигурационного 
 msgid "Error while loading default configuration file: %s"
 msgstr "Ошибка при загрузке конфигурационного файла по умолчанию: %s"
 
-#: src/game/game_mode.cpp:237
+#: src/game/game_mode.cpp:235
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
@@ -609,22 +610,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:235
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ошибка: не удалось подключиться к %s: %s"
 
-#: src/menu/network_connection_menu.cpp:213
+#: src/menu/network_connection_menu.cpp:209
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Ошибка: Не удалось соединиться с сервером, чтобы создать хостинг игры."
 
-#: src/menu/network_connection_menu.cpp:250
+#: src/menu/network_connection_menu.cpp:246
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Ошибка: Не удалось соединиться с указанным сервером, чтобы найти интернет "
 "игру"
 
-#: src/menu/network_connection_menu.cpp:227
+#: src/menu/network_connection_menu.cpp:223
 msgid "Error: Unable to start server"
 msgstr "Ошибка: Не получилось запустить сервер"
 
@@ -635,7 +636,7 @@ msgstr "Ошибка: не удаётся найти тему \"%s\" для ко
 
 #: src/weapon/flamethrower.cpp:91
 msgid "Flame Thrower"
-msgstr ""
+msgstr "Огнемет"
 
 #: src/menu/options_menu.cpp:83
 msgid "Fullscreen?"
@@ -679,15 +680,11 @@ msgstr "Командующий"
 msgid "Head commander: "
 msgstr "Командующий: "
 
-#: src/menu/network_connection_menu.cpp:163
+#: src/menu/network_connection_menu.cpp:160
 msgid "Host a game"
 msgstr "Стать сервером"
 
-#: src/menu/network_connection_menu.cpp:161
-msgid "Host a game (Windows clients only)"
-msgstr ""
-
-#: src/weapon/blowtorch.cpp:54
+#: src/weapon/blowtorch.cpp:53
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -705,7 +702,7 @@ msgstr ""
 "Правила использования : зажмите пробел\n"
 "патрон за ход"
 
-#: src/weapon/auto_bazooka.cpp:208
+#: src/weapon/auto_bazooka.cpp:205
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -725,7 +722,7 @@ msgstr ""
 "Правила использования : щелкните левой кнопкой мыши на цели\n"
 "патрон за ход"
 
-#: src/game/game.cpp:838
+#: src/game/game.cpp:844
 msgid "Hurry up, you are too slow !!"
 msgstr "Поторопитесь, вы слишком медлительны !!"
 
@@ -767,7 +764,7 @@ msgstr "Инициализация звуков"
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
-#: src/game/game.cpp:589
+#: src/game/game.cpp:595
 msgid "It's a present!"
 msgstr "Это подарок!"
 
@@ -922,9 +919,8 @@ msgid "Quit Wormux"
 msgstr "Выйти из Wormux"
 
 #: src/menu/map_selection_box.cpp:218
-#, fuzzy
 msgid "Random map"
-msgstr "Загрузка карт:"
+msgstr "Случайная карта"
 
 #: src/game/config.cpp:262
 msgid "Reading default config file"
@@ -1042,7 +1038,7 @@ msgstr "Gnu покинул поле битвы"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Скунс покинул поле битвы до взрыва"
 
-#: src/weapon/auto_bazooka.cpp:175
+#: src/weapon/auto_bazooka.cpp:172
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Автоматическая ракета улетела за пределы поля битвы..."
 
@@ -1120,9 +1116,9 @@ msgid "Unable to open maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
 
 #: src/map/maps_list.cpp:253
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open personal maps directory (%s)!"
-msgstr "Невозможно открыть каталог с картами (%s)!"
+msgstr "Невозможно открыть личный каталог с картами (%s)!"
 
 #: src/network/net_error_msg.cpp:40
 msgid "Unable to use this port!"
@@ -1130,7 +1126,7 @@ msgstr "Нельзя использовать этот порт!"
 
 #: src/network/network.cpp:109
 msgid "Unnamed"
-msgstr ""
+msgstr "Нет имени"
 
 #: src/main.cpp:180
 msgid "Version"
@@ -1159,7 +1155,7 @@ msgstr "Оружие"
 msgid "Website: "
 msgstr "Веб-сайт: "
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:805
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -1167,7 +1163,7 @@ msgstr "Какой позор для %s - его убили из простог�
 #. Various options
 #: src/menu/options_menu.cpp:74
 msgid "Wind particles?"
-msgstr "Ветер?"
+msgstr "Частицы ветра?"
 
 #: src/menu/results_menu.cpp:200
 msgid "Winner"
@@ -1245,7 +1241,3 @@ msgstr "o Загрузка звукового профиля: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
-
-#, fuzzy
-#~ msgid "Network deinitialization"
-#~ msgstr "Инициализация сети"
