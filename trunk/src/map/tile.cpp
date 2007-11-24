@@ -231,6 +231,9 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   m_preview->SetAlpha(SDL_SRCALPHA, 0);
   uint8_t *dst  = m_preview->GetPixels();
   uint    pitch = m_preview->GetPitch();
+
+  m_preview_size = m_preview->GetSize() - (offset / (1<<m_shift));
+  m_preview_rect = Rectanglei(upper_left_offset / (1<<m_shift), m_preview_size);
 #endif
 
   // Create the TileItem objects

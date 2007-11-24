@@ -311,7 +311,8 @@ void Interface::DrawMapPreview()
 #if TILE_HAS_PREVIEW
   Surface& window  = AppWormux::GetInstance()->video->window;
   const Surface* preview = world.ground.GetPreview();
-  window.Blit(*preview, window.GetSize() - preview->GetSize() - Point2i(MARGIN/2, 2*MARGIN));
+  window.Blit(*preview, world.ground.GetPreviewRect(),
+              window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN));
 #endif
 }
 

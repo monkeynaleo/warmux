@@ -68,6 +68,8 @@ public:
   // Return the preview
 #if TILE_HAS_PREVIEW
   const Surface* GetPreview() const { return m_preview; };
+  const Point2i& GetPreviewSize() const { return m_preview_size; };
+  const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
 #endif
 
   // Check if a title is empty, so we can delete it
@@ -85,6 +87,8 @@ protected:
 #if TILE_HAS_PREVIEW
   Surface*   m_preview;
   uint       m_shift;
+  Point2i    m_preview_size;
+  Rectanglei m_preview_rect;
 #endif
 
   // Canvas giving access to tiles
