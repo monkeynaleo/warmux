@@ -79,7 +79,7 @@ Surface::Surface(const std::string &filename){
   surface = NULL;
   autoFree = true;
   if( !ImgLoad(filename) )
-  Error( Format("Unable to open image file '%s': %s", filename.c_str(), IMG_GetError() ) );
+    Error( Format("Unable to open image file '%s': %s", filename.c_str(), IMG_GetError() ) );
 }
 
 /**
@@ -661,7 +661,7 @@ static const double ratio_deg_to_rad = 180 / M_PI;
 Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
   Surface newSurf;
 
-  if (abs(angle) < EPS_ZERO)
+  if (fabs(angle) < EPS_ZERO)
     newSurf.SetSurface( zoomSurface(surface, zoomx, zoomy, smooth) );
   else
     newSurf.SetSurface( rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth) );
