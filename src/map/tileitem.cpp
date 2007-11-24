@@ -35,7 +35,7 @@
 
 void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
 {
-  for (uint j=0; j<CELL_SIZE.y>>shift; j++)
+  for (int j=0; j<CELL_SIZE.y>>shift; j++)
   {
     memset(odata, 0, (CELL_SIZE.x>>shift)<<2);
     odata += opitch;
@@ -180,9 +180,9 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
   const Uint8*   idata  = m_surface.GetPixels();
   uint           ipitch = m_surface.GetPitch();
 
-  for (uint j=0; j<m_size.y>>shift; j++)
+  for (int j=0; j<m_size.y>>shift; j++)
   {
-    for (uint i=0; i<m_size.x>>shift; i++)
+    for (int i=0; i<m_size.x>>shift; i++)
     {
       uint p0 = 0, p1 = 0, p2 = 0, p3 = 0;
       const Uint8* ptr = idata + (i<<(2+shift));
