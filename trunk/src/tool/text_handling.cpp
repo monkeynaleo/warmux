@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "tool/text_handling.h"
+#include "tool/copynpaste.h"
 
 bool MoveCursorLeft(const std::string& text, std::string::size_type& pos)
 {
@@ -96,6 +97,18 @@ bool InsertUTF8Char(std::string& text, std::string::size_type& pos, const SDL_ke
   return false;
 }
 
+bool processModifier(std::string& text, std::string::size_type& pos, const SDL_keysym& key)
+{
+  switch (key.sym)
+    {
+    case SDLK_v:
+    case SDLK_y:
+      return RetrieveBuffer(text, pos);
+    default:
+      return false;
+    }
+}
+
 bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym& key)
 {
   bool r = false;
@@ -130,7 +143,10 @@ bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym
     r = RemoveUTF8CharAfter(text, pos);
     break;
   default:
-    r = InsertUTF8Char(text, pos, key);
+    if (SDL_GetModState()&(KMOD_CTRL|KMOD_META))
+      r = processModifier(text, pos, key);
+    else
+      r = InsertUTF8Char(text, pos, key);
     break;
   }
 
