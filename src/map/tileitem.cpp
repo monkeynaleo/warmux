@@ -199,8 +199,8 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
       }
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-      p3 >>= 2*shift;
-      if (p3 < 64)
+      p3 = (p3 + (1<<(2*shift-1)))>>(2*shift);
+      if (p3 < 160)
       {
         memset(odata+4*i, 0, 4);
       }
@@ -212,8 +212,8 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
         odata[4*i+3] = 255;
       }
 #else
-      p0 >>= 2*shift;
-      if (p0 < 64)
+      p0 = (p0 + (1<<(2*shift-1)))>>(2*shift);
+      if (p0 < 160)
       {
         memset(odata+4*i, 0, 4);
       }
