@@ -144,6 +144,7 @@ wormux_SOURCES = \
         team/team_energy.cpp team/team_energy.h \
         team/teams_list.cpp team/teams_list.h \
         tool/affine_transform.cpp tool/affine_transform.h \
+        tool/copynpaste.cpp tool/copynpaste.h \
         tool/debug.cpp tool/debug.h \
         tool/error.cpp tool/error.h \
         tool/euler_vector.cpp tool/euler_vector.h \
@@ -156,7 +157,7 @@ wormux_SOURCES = \
         tool/resource_manager.cpp tool/resource_manager.h \
         tool/stats.cpp tool/stats.h \
         tool/string_tools.cpp tool/string_tools.h \
-	tool/text_handling.cpp tool/text_handling.h \
+        tool/text_handling.cpp tool/text_handling.h \
         tool/vector2.h \
         tool/xml_document.cpp tool/xml_document.h \
         weapon/air_attack.cpp weapon/air_attack.h \
@@ -174,7 +175,7 @@ wormux_SOURCES = \
         weapon/disco_grenade.cpp weapon/disco_grenade.h \
         weapon/dynamite.cpp weapon/dynamite.h \
         weapon/explosion.cpp weapon/explosion.h \
-	weapon/flamethrower.cpp weapon/flamethrower.h \
+        weapon/flamethrower.cpp weapon/flamethrower.h \
         weapon/gnu.cpp weapon/gnu.h \
         weapon/grapple.cpp weapon/grapple.h \
         weapon/grenade.cpp weapon/grenade.h \

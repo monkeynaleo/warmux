@@ -192,14 +192,22 @@ if test "x$PACKAGE_CONFIG" = "xnone"; then
   AC_MSG_ERROR([*** pkg-config, needed to check for libxml++ existence has not been found.])
 fi
 
-dnl === Check for PNG ==================================================
+dnl === Check for X11 =====================================================
+AC_CHECK_LIB(X11, XOpenDisplay, check_x11="yes", check_x11="no")
+if test x${check_x11} = xyes ; then
+  AC_CHECK_HEADERS(X11/Xlib.h,,check_x11="no")
+fi
+if test x${check_x11} = xyes ; then LIBS="$LIBS -lX11" ; fi
+
+
+dnl === Check for PNG =====================================================
 
 AC_MSG_CHECKING(for libpng)
 for PNG in png png12 png13 dummypng; do
   if $PACKAGE_CONFIG --exists lib$PNG > /dev/null 2>&1 ; then
     LIBPNG_CFLAGS=`$PACKAGE_CONFIG --cflags lib$PNG`
     LIBPNG_LIB=`$PACKAGE_CONFIG --libs lib$PNG`
-    CFLAGS="$CFLAGS $LIBPNG_CFLAGS"
+    CXXFLAGS="$CXXFLAGS $LIBPNG_CFLAGS"
     LIBS="$LIBS $LIBPNG_LIB"
     break
   fi
