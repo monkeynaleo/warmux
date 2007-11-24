@@ -223,9 +223,12 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
 #if TILE_HAS_PREVIEW
   m_shift = 3;
   // Crappy interpolation anyway
-  m_preview = new Surface(Point2i(nbCells.x*(CELL_SIZE.x>>m_shift), nbCells.y*(CELL_SIZE.y>>m_shift)),
-                          SDL_SWSURFACE|SDL_SRCALPHA, true);
-  m_preview->SetAlpha(SDL_SRCALPHA, SDL_ALPHA_TRANSPARENT);
+  Surface tmp_ = Surface(Point2i(nbCells.x*(CELL_SIZE.x>>m_shift), nbCells.y*(CELL_SIZE.y>>m_shift)),
+                        SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
+  m_preview = new Surface();
+  m_preview->SetSurface(tmp_.GetSurface());
+  tmp_.SetSurface(NULL, false);
+  m_preview->SetAlpha(SDL_SRCALPHA, 0);
   uint8_t *dst  = m_preview->GetPixels();
   uint    pitch = m_preview->GetPitch();
 #endif

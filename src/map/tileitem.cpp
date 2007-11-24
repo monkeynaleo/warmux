@@ -35,25 +35,11 @@
 
 void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
 {
-#if 0 /* Seem useless */
   for (uint j=0; j<CELL_SIZE.y>>shift; j++)
   {
-    for (uint i=0; i<CELL_SIZE.x>>shift; i++)
-    {
-      /* If all 0, memset ? */
-      odata[4*i+1] = 0;
-      odata[4*i+2] = 0;
-#  if SDL_BYTEORDER == SDL_LIL_ENDIAN
-      odata[4*i+0] = 0;
-      odata[4*i+3] = 0;
-#  else
-      odata[4*i+0] = 0;
-      odata[4*i+3] = 0;
-#  endif
-    }
+    memset(odata, 0, (CELL_SIZE.x>>shift)<<2);
     odata += opitch;
   }
-#endif
 }
 
 
@@ -212,14 +198,32 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
         ptr += ipitch;
       }
 
-      odata[4*i+1] = (p1 + (1<<(2*shift-1)))>>(2*shift);
-      odata[4*i+2] = (p2 + (1<<(2*shift-1)))>>(2*shift);
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-      odata[4*i+0] = (p0 + (1<<(2*shift-1)))>>(2*shift);
-      odata[4*i+3] = (p3>>(2*shift) < 64) ? 0 : 255;
+      p3 >>= 2*shift;
+      if (p3 < 64)
+      {
+        memset(odata+4*i, 0, 4);
+      }
+      else
+      {
+        odata[4*i+0] = (p0 + (1<<(2*shift-1)))>>(2*shift);
+        odata[4*i+1] = (p1 + (1<<(2*shift-1)))>>(2*shift);
+        odata[4*i+2] = (p2 + (1<<(2*shift-1)))>>(2*shift);
+        odata[4*i+3] = 255;
+      }
 #else
-      odata[4*i+0] = (p0>>(2*shift) < 64) ? 0 : 255;
-      odata[4*i+3] = (p3 + (1<<(2*shift-1)))>>(2*shift);
+      p0 >>= 2*shift;
+      if (p0 < 64)
+      {
+        memset(odata+4*i, 0, 4);
+      }
+      else
+      {
+        odata[4*i+0] = 255;
+        odata[4*i+1] = (p1 + (1<<(2*shift-1)))>>(2*shift);
+        odata[4*i+2] = (p2 + (1<<(2*shift-1)))>>(2*shift);
+        odata[4*i+3] = (p3 + (1<<(2*shift-1)))>>(2*shift);
+      }
 #endif
     }
     odata += opitch;
