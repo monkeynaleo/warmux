@@ -83,8 +83,8 @@ protected:
   unsigned int nbr_cell;
 
 #if TILE_HAS_PREVIEW
-  Surface* m_preview;
-  uint     m_shift;
+  Surface*   m_preview;
+  uint       m_shift;
 #endif
 
   // Canvas giving access to tiles
