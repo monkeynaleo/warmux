@@ -306,6 +306,21 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     Uint32 color = color1;
     float step;
 
+    if (y1 == y2) {
+        /* Horizontal line */
+        dx = x2-x1;
+        xdir = 1;
+        if (dx < 0) {
+            dx = -dx;
+            xdir = -1;
+        }
+        step = dx;
+        while (--dx) {
+            color = interpolateColor(color2, color1, (float)dx / step);
+            result |= pixelColorNolock(dst, x1, y1, color);
+            x1 += xdir;
+        }
+    }
     if (y1 > y2) {
         color = color1;
         color1 = color2;
@@ -378,13 +393,6 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
             result |= pixelColorNolock(dst, x1, ++yy0, color);
         }
     } else if (dy == 0) {
-        /* Horizontal line */
-        step = dx;
-        while (--dx) {
-            color = interpolateColor(color2, color1, (float)dx / step);
-            result |= pixelColorNolock(dst, xx0, y1, color);
-            xx0 += xdir;
-        }
     } else if (dx == dy) {
         /* Diagonal line */
         step = dx;
