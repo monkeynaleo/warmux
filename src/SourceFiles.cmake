@@ -133,6 +133,7 @@ team/team.cpp
 team/team_energy.cpp
 team/teams_list.cpp
 tool/affine_transform.cpp
+tool/copynpaste.cpp
 tool/debug.cpp
 tool/error.cpp
 tool/euler_vector.cpp
