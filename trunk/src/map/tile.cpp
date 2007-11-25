@@ -19,6 +19,9 @@
 
 #include "map/tile.h"
 #include "map/tileitem.h"
+#if TILE_HAS_PREVIEW
+#  include "game/game.h"
+#endif
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
@@ -221,7 +224,14 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   ASSERT(nbr_cell != 0);
 
 #if TILE_HAS_PREVIEW
-  m_shift = 3;
+  Point2i world_size = terrain.GetSize();
+  Point2i video_size = AppWormux::GetInstance()->video->window.GetSize()/3;
+  m_shift = 0;
+  while (world_size > video_size)
+  {
+    world_size >>= 1;
+    m_shift++;
+  }
   m_preview = new Surface();
   *m_preview = Surface(Point2i(nbCells.x*(CELL_SIZE.x>>m_shift), nbCells.y*(CELL_SIZE.y>>m_shift)),
                        SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
