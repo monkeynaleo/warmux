@@ -202,6 +202,10 @@
 				RelativePath="..\src\main.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\src\wormux.rc"
+				>
+			</File>
 			<Filter
 				Name="ai"
 				>
@@ -210,801 +214,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\ai\ai_engine_stupid.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\ai\ai_movement_module.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\ai\ai_shoot_module.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="character"
-				>
-				<File
-					RelativePath="..\src\character\body.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\character\body_list.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\character\character.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\character\clothe.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\character\damage_stats.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\character\member.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\character\move.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\character\movement.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="game"
-				>
-				<File
-					RelativePath="..\src\game\config.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\game\game.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\game\game_init.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\game\game_mode.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\game\time.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="graphic"
-				>
-				<File
-					RelativePath="..\src\graphic\color.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\composite_shape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\effects.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\font.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\fps.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\polygon.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\polygon_generator.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\sprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\spriteanimation.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\spritecache.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\spriteframe.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\surface.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\text.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\text_list.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\graphic\video.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="gui"
-				>
-				<File
-					RelativePath="..\src\gui\box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\button.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\button_text.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\check_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\combo_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\energy_bar.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\label.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\list_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\list_box_w_label.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\msg_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\null_widget.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\picture_text_cbox.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\picture_widget.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\progress_bar.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\question.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\spin_button.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\spin_button_big.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\spin_button_picture.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\text_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\widget.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\gui\widget_list.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="include"
-				>
-				<File
-					RelativePath="..\src\include\action.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\include\action_handler.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\include\constant.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="interface"
-				>
-				<File
-					RelativePath="..\src\interface\cursor.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\game_msg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\interface.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\joystick.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\keyboard.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\loading_screen.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\man_machine_interface.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\mouse.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\mouse_cursor.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\interface\weapon_menu.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="map"
-				>
-				<File
-					RelativePath="..\src\map\camera.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\ground.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\map.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\maps_list.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\random_map.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\sky.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\tile.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\tileitem.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\water.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\map\wind.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="menu"
-				>
-				<File
-					RelativePath="..\src\menu\credits_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\game_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\internet_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\main_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\map_selection_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\network_connection_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\network_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\network_teams_selection_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\options_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\results_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\team_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\teams_selection_box.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="network"
-				>
-				<File
-					RelativePath="..\src\network\admin_commands.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\chat.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\distant_cpu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\download.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\index_server.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\irc.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\net_error_msg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\network.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\network_client.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\network_local.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\network_server.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\randomsync.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\network\socket.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="particles"
-				>
-				<File
-					RelativePath="..\src\particles\body_member.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\bullet.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\dark_smoke.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\explosion_smoke.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\fire.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\ground_particles.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\ill_bubble.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\magic_star.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\particle.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\polecat_fart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\smoke.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\star.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\teleport_member.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="object"
-				>
-				<File
-					RelativePath="..\src\object\barrel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\bonus_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\medkit.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\objbox.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\object_cfg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\objects_list.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\physical_obj.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\physics.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="sound"
-				>
-				<File
-					RelativePath="..\src\sound\jukebox.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\sound\sound_sample.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="team"
-				>
-				<File
-					RelativePath="..\src\team\results.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\team\team.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\team\team_energy.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\team\teams_list.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="tool"
-				>
-				<File
-					RelativePath="..\src\tool\affine_transform.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\copynpaste.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\debug.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\error.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\euler_vector.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\file_tools.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\i18n.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\math_tools.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\random.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\resource_manager.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\stats.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\string_tools.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\text_handling.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\xml_document.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="weapon"
-				>
-				<File
-					RelativePath="..\src\weapon\air_attack.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\airhammer.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\anvil.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\auto_bazooka.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\baseball.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\bazooka.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\blowtorch.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\bounce_ball.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\cluster_bomb.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\construct.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\crosshair.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\disco_grenade.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\dynamite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\explosion.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\flamethrower.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\gnu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\grapple.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\grenade.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\gun.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\jetpack.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\lowgrav.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\mine.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\parachute.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\polecat.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\riot_bomb.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\shotgun.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\skip_turn.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\snipe_rifle.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\submachine_gun.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\suicide.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\supertux.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\syringe.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\teleportation.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\weapon.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\weapon_cfg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\weapon_launcher.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\weapons_list.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="msvc"
-				>
-				<File
-					RelativePath="..\src\msvc\getopt.c"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
-			>
-			<Filter
-				Name="ai"
-				>
-				<File
 					RelativePath="..\src\ai\ai_engine.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\ai\ai_engine_stupid.cpp"
 					>
 				</File>
 				<File
@@ -1012,7 +226,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\ai\ai_movement_module.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\ai\ai_movement_module.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\ai\ai_shoot_module.cpp"
 					>
 				</File>
 				<File
@@ -1024,7 +246,15 @@
 				Name="character"
 				>
 				<File
+					RelativePath="..\src\character\body.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\character\body.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\character\body_list.cpp"
 					>
 				</File>
 				<File
@@ -1032,7 +262,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\character\character.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\character\character.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\character\clothe.cpp"
 					>
 				</File>
 				<File
@@ -1040,7 +278,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\character\damage_stats.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\character\damage_stats.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\character\member.cpp"
 					>
 				</File>
 				<File
@@ -1048,7 +294,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\character\move.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\character\move.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\character\movement.cpp"
 					>
 				</File>
 				<File
@@ -1060,7 +314,15 @@
 				Name="game"
 				>
 				<File
+					RelativePath="..\src\game\config.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\game\config.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\game\game.cpp"
 					>
 				</File>
 				<File
@@ -1068,11 +330,23 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\game\game_init.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\game\game_init.h"
 					>
 				</File>
 				<File
+					RelativePath="..\src\game\game_mode.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\game\game_mode.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\game\time.cpp"
 					>
 				</File>
 				<File
@@ -1084,6 +358,10 @@
 				Name="graphic"
 				>
 				<File
+					RelativePath="..\src\graphic\color.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\color.h"
 					>
 				</File>
@@ -1092,7 +370,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\composite_shape.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\composite_shape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\graphic\effects.cpp"
 					>
 				</File>
 				<File
@@ -1104,7 +390,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\font.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\font.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\graphic\fps.cpp"
 					>
 				</File>
 				<File
@@ -1112,7 +406,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\polygon.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\polygon.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\graphic\polygon_generator.cpp"
 					>
 				</File>
 				<File
@@ -1120,7 +422,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\sprite.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\sprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\graphic\spriteanimation.cpp"
 					>
 				</File>
 				<File
@@ -1128,7 +438,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\spritecache.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\spritecache.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\graphic\spriteframe.cpp"
 					>
 				</File>
 				<File
@@ -1136,11 +454,23 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\surface.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\surface.h"
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\text.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\text.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\graphic\text_list.cpp"
 					>
 				</File>
 				<File
@@ -1152,6 +482,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\graphic\video.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\graphic\video.h"
 					>
 				</File>
@@ -1160,7 +494,15 @@
 				Name="gui"
 				>
 				<File
+					RelativePath="..\src\gui\box.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\button.cpp"
 					>
 				</File>
 				<File
@@ -1168,11 +510,23 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\button_text.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\button_text.h"
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\check_box.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\check_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\combo_box.cpp"
 					>
 				</File>
 				<File
@@ -1184,7 +538,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\energy_bar.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\energy_bar.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\label.cpp"
 					>
 				</File>
 				<File
@@ -1192,7 +554,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\list_box.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\list_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\list_box_w_label.cpp"
 					>
 				</File>
 				<File
@@ -1200,7 +570,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\msg_box.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\msg_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\null_widget.cpp"
 					>
 				</File>
 				<File
@@ -1208,7 +586,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\picture_text_cbox.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\picture_text_cbox.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\picture_widget.cpp"
 					>
 				</File>
 				<File
@@ -1216,7 +602,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\progress_bar.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\progress_bar.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\question.cpp"
 					>
 				</File>
 				<File
@@ -1224,7 +618,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\spin_button.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\spin_button.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\spin_button_big.cpp"
 					>
 				</File>
 				<File
@@ -1232,7 +634,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\spin_button_picture.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\spin_button_picture.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\text_box.cpp"
 					>
 				</File>
 				<File
@@ -1240,7 +650,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\widget.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\widget.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\widget_list.cpp"
 					>
 				</File>
 				<File
@@ -1252,7 +670,15 @@
 				Name="include"
 				>
 				<File
+					RelativePath="..\src\include\action.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\include\action.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\include\action_handler.cpp"
 					>
 				</File>
 				<File
@@ -1272,6 +698,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\include\constant.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\include\constant.h"
 					>
 				</File>
@@ -1280,7 +710,15 @@
 				Name="interface"
 				>
 				<File
+					RelativePath="..\src\interface\cursor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\interface\cursor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\interface\game_msg.cpp"
 					>
 				</File>
 				<File
@@ -1288,7 +726,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\interface\interface.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\interface\interface.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\interface\joystick.cpp"
 					>
 				</File>
 				<File
@@ -1296,7 +742,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\interface\keyboard.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\interface\keyboard.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\interface\loading_screen.cpp"
 					>
 				</File>
 				<File
@@ -1304,7 +758,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\interface\man_machine_interface.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\interface\man_machine_interface.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\interface\mouse.cpp"
 					>
 				</File>
 				<File
@@ -1312,7 +774,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\interface\mouse_cursor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\interface\mouse_cursor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\interface\weapon_menu.cpp"
 					>
 				</File>
 				<File
@@ -1324,7 +794,15 @@
 				Name="map"
 				>
 				<File
+					RelativePath="..\src\map\camera.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\map\camera.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\map\ground.cpp"
 					>
 				</File>
 				<File
@@ -1332,7 +810,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\map\map.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\map\map.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\map\maps_list.cpp"
 					>
 				</File>
 				<File
@@ -1340,7 +826,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\map\random_map.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\map\random_map.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\map\sky.cpp"
 					>
 				</File>
 				<File
@@ -1348,7 +842,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\map\tile.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\map\tile.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\map\tileitem.cpp"
 					>
 				</File>
 				<File
@@ -1356,7 +858,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\map\water.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\map\water.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\map\wind.cpp"
 					>
 				</File>
 				<File
@@ -1368,7 +878,15 @@
 				Name="menu"
 				>
 				<File
+					RelativePath="..\src\menu\credits_menu.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\credits_menu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\menu\game_menu.cpp"
 					>
 				</File>
 				<File
@@ -1376,7 +894,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\menu\internet_menu.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\internet_menu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\menu\main_menu.cpp"
 					>
 				</File>
 				<File
@@ -1384,7 +910,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\menu\map_selection_box.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\map_selection_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\menu\menu.cpp"
 					>
 				</File>
 				<File
@@ -1392,7 +926,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\menu\network_connection_menu.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\network_connection_menu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\menu\network_menu.cpp"
 					>
 				</File>
 				<File
@@ -1400,7 +942,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\menu\network_teams_selection_box.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\network_teams_selection_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\menu\options_menu.cpp"
 					>
 				</File>
 				<File
@@ -1412,11 +962,23 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\menu\results_menu.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\results_menu.h"
 					>
 				</File>
 				<File
+					RelativePath="..\src\menu\team_box.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\team_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\menu\teams_selection_box.cpp"
 					>
 				</File>
 				<File
@@ -1428,7 +990,15 @@
 				Name="network"
 				>
 				<File
+					RelativePath="..\src\network\admin_commands.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\admin_commands.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\chat.cpp"
 					>
 				</File>
 				<File
@@ -1436,11 +1006,23 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\distant_cpu.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\distant_cpu.h"
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\download.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\download.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\index_server.cpp"
 					>
 				</File>
 				<File
@@ -1452,7 +1034,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\irc.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\irc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\net_error_msg.cpp"
 					>
 				</File>
 				<File
@@ -1460,7 +1050,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\network.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\network.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\network_client.cpp"
 					>
 				</File>
 				<File
@@ -1468,7 +1066,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\network_local.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\network_local.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\network_server.cpp"
 					>
 				</File>
 				<File
@@ -1476,7 +1082,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\randomsync.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\randomsync.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\socket.cpp"
 					>
 				</File>
 				<File
@@ -1485,46 +1099,18 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="object"
-				>
-				<File
-					RelativePath="..\src\object\barrel.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\bonus_box.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\medkit.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\objbox.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\object_cfg.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\objects_list.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\physical_obj.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\object\physics.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="particles"
 				>
 				<File
+					RelativePath="..\src\particles\body_member.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\particles\body_member.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\bullet.cpp"
 					>
 				</File>
 				<File
@@ -1532,7 +1118,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\particles\dark_smoke.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\particles\dark_smoke.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\explosion_smoke.cpp"
 					>
 				</File>
 				<File
@@ -1540,7 +1134,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\particles\fire.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\particles\fire.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\ground_particles.cpp"
 					>
 				</File>
 				<File
@@ -1548,7 +1150,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\particles\ill_bubble.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\particles\ill_bubble.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\magic_star.cpp"
 					>
 				</File>
 				<File
@@ -1556,7 +1166,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\particles\particle.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\particles\particle.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\polecat_fart.cpp"
 					>
 				</File>
 				<File
@@ -1564,11 +1182,23 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\particles\smoke.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\particles\smoke.h"
 					>
 				</File>
 				<File
+					RelativePath="..\src\particles\star.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\particles\star.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\teleport_member.cpp"
 					>
 				</File>
 				<File
@@ -1577,14 +1207,70 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="replay"
+				Name="object"
 				>
 				<File
-					RelativePath="..\src\replay\replay.h"
+					RelativePath="..\src\object\barrel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\src\replay\replay_info.h"
+					RelativePath="..\src\object\barrel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\bonus_box.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\bonus_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\medkit.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\medkit.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\objbox.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\objbox.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\object_cfg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\object_cfg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\objects_list.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\objects_list.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\physical_obj.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\physical_obj.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\physics.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\object\physics.h"
 					>
 				</File>
 			</Filter>
@@ -1592,7 +1278,15 @@
 				Name="sound"
 				>
 				<File
+					RelativePath="..\src\sound\jukebox.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\sound\jukebox.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\sound\sound_sample.cpp"
 					>
 				</File>
 				<File
@@ -1608,7 +1302,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\team\results.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\team\results.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\team\team.cpp"
 					>
 				</File>
 				<File
@@ -1620,7 +1322,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\team\team_energy.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\team\team_energy.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\team\teams_list.cpp"
 					>
 				</File>
 				<File
@@ -1632,7 +1342,15 @@
 				Name="tool"
 				>
 				<File
+					RelativePath="..\src\tool\affine_transform.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\affine_transform.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\tool\copynpaste.cpp"
 					>
 				</File>
 				<File
@@ -1640,7 +1358,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\debug.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\debug.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\tool\error.cpp"
 					>
 				</File>
 				<File
@@ -1648,7 +1374,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\euler_vector.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\euler_vector.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\tool\file_tools.cpp"
 					>
 				</File>
 				<File
@@ -1656,7 +1390,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\i18n.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\i18n.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\tool\math_tools.cpp"
 					>
 				</File>
 				<File
@@ -1668,6 +1410,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\random.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\random.h"
 					>
 				</File>
@@ -1676,7 +1422,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\resource_manager.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\resource_manager.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\tool\stats.cpp"
 					>
 				</File>
 				<File
@@ -1684,7 +1438,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\string_tools.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\string_tools.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\tool\text_handling.cpp"
 					>
 				</File>
 				<File
@@ -1696,6 +1458,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\tool\xml_document.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\tool\xml_document.h"
 					>
 				</File>
@@ -1704,7 +1470,15 @@
 				Name="weapon"
 				>
 				<File
+					RelativePath="..\src\weapon\air_attack.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\air_attack.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\airhammer.cpp"
 					>
 				</File>
 				<File
@@ -1716,7 +1490,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\anvil.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\anvil.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\auto_bazooka.cpp"
 					>
 				</File>
 				<File
@@ -1724,7 +1506,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\baseball.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\baseball.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\bazooka.cpp"
 					>
 				</File>
 				<File
@@ -1732,7 +1522,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\blowtorch.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\blowtorch.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\bounce_ball.cpp"
 					>
 				</File>
 				<File
@@ -1740,7 +1538,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\cluster_bomb.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\cluster_bomb.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\construct.cpp"
 					>
 				</File>
 				<File
@@ -1748,7 +1554,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\crosshair.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\crosshair.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\disco_grenade.cpp"
 					>
 				</File>
 				<File
@@ -1756,7 +1570,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\dynamite.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\dynamite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\explosion.cpp"
 					>
 				</File>
 				<File
@@ -1764,7 +1586,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\flamethrower.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\flamethrower.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\gnu.cpp"
 					>
 				</File>
 				<File
@@ -1772,7 +1602,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\grapple.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\grapple.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\grenade.cpp"
 					>
 				</File>
 				<File
@@ -1780,7 +1618,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\gun.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\gun.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\jetpack.cpp"
 					>
 				</File>
 				<File
@@ -1792,7 +1638,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\lowgrav.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\lowgrav.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\mine.cpp"
 					>
 				</File>
 				<File
@@ -1800,7 +1654,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\parachute.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\parachute.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\polecat.cpp"
 					>
 				</File>
 				<File
@@ -1808,7 +1670,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\riot_bomb.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\riot_bomb.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\shotgun.cpp"
 					>
 				</File>
 				<File
@@ -1816,7 +1686,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\skip_turn.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\skip_turn.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\snipe_rifle.cpp"
 					>
 				</File>
 				<File
@@ -1824,7 +1702,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\submachine_gun.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\submachine_gun.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\suicide.cpp"
 					>
 				</File>
 				<File
@@ -1832,7 +1718,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\supertux.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\supertux.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\syringe.cpp"
 					>
 				</File>
 				<File
@@ -1840,7 +1734,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\teleportation.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\teleportation.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\weapon.cpp"
 					>
 				</File>
 				<File
@@ -1848,11 +1750,23 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\weapon_cfg.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\weapon_cfg.h"
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\weapon_launcher.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\weapon_strength_bar.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\weapons_list.cpp"
 					>
 				</File>
 				<File
@@ -1868,20 +1782,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\msvc\getopt.c"
+					>
+				</File>
+				<File
 					RelativePath="..\src\msvc\getopt.h"
 					>
 				</File>
 			</Filter>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-			<File
-				RelativePath="..\src\wormux.rc"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Gettext"
