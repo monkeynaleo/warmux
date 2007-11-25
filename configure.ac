@@ -62,13 +62,13 @@ AC_ARG_ENABLE([static],
               [static=no])
 
 # Check whether user supplied the option to statically link binaries.
-#if test "$static" = yes; then
+if test "$static" = yes; then
 # if we're using gcc, add `-static' to LDFLAGS
-#       if test -n "$GCC" || test "$ac_cv_prog_gcc" = "yes"; then
-#               STATIC_LD="-static"
-#               LDFLAGS="$LDFLAGS -static"
-#       fi
-#fi
+       if test -n "$GCC" || test "$ac_cv_prog_gcc" = "yes"; then
+               STATIC_LD="-static"
+               LDFLAGS="$LDFLAGS -static"
+       fi
+fi
 
 if test "x${prefix}" = "xNONE"; then
   prefix="${ac_default_prefix}"
@@ -244,7 +244,8 @@ AC_ARG_WITH(curl-prefix,
 if test "x$CURL_PREFIX" != "x"; then CURL_BIN="$CURL_PREFIX/bin/curl-config"
 else                                 CURL_BIN=curl-config; fi
 AC_SUBST(CURL_PREFIX)
-AC_CHECK_LIB(curl, curl_easy_init,check_curl="yes",check_curl="no")
+
+LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
 
 dnl === Check for SDL image, mixer, etc., libxml++, libcurl and libpng ==============
 
