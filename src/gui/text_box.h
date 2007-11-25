@@ -43,6 +43,7 @@ public:
   void Draw(const Point2i &mousePosition, Surface& surf) const;
   void SetText(std::string const &new_txt);
   void SetCursor(std::string::size_type pos);
+  Widget *ClickUp(const Point2i &, uint);
 };
 
 #endif
