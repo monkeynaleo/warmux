@@ -31,7 +31,7 @@
 #ifdef WIN32
 #  include <direct.h>
 #endif
-#ifdef OSX_BUNDLE
+#ifdef __APPLE__
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
 #include "graphic/video.h"
@@ -139,7 +139,7 @@ Config::Config():
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
   filename     = data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf";
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
-#elif defined(OSX_BUNDLE)
+#elif defined(__APPLE__)
   // the following code will enable wormux to find its data when placed in an app bundle on mac OS X.
   // configure with './configure ... CPPFLAGS=-DOSX_BUNDLE' to enable
   char path[1024];
@@ -149,10 +149,25 @@ Config::Config():
   CFStringGetCString(cfStringRef, path, 1024, kCFStringEncodingASCII);
   CFRelease(mainBundleURL);
   CFRelease(cfStringRef);
+  
   std::string contents = std::string(path) + std::string("/Contents");
-  data_dir = contents + std::string("/Resources/data");
-  ttf_filename = contents + std::string("/Resources/data/font/DejaVuSans.ttf");
-  locale_dir = contents + std::string("/Resources/locale");
+  if(contents.find(".app") != std::string::npos){
+      // executable is inside an app bundle, use app bundle-relative paths
+      std::string default_data_dir = contents + std::string("/Resources/data");
+      std::string default_ttf_filename = contents + std::string("/Resources/data/font/DejaVuSans.ttf");
+      std::string default_locale_dir = contents + std::string("/Resources/locale");
+      
+      // if environment variables exist, they will override default values
+      data_dir     = GetEnv(Constants::ENV_DATADIR, default_data_dir);
+      locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, default_locale_dir);
+      ttf_filename = GetEnv(Constants::ENV_FONT_PATH, default_ttf_filename);
+  }
+  else {
+      // executable is installed Unix-style, use default paths
+      data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
+      locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
+      ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
+  }
 #else
 #  ifdef _WIN32
   std::string basepath = GetWormuxPath();
