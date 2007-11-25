@@ -22,10 +22,58 @@
 #  include "config.h"
 #endif
 
-#include <SDL/SDL_syswm.h>
+#include <SDL_syswm.h>
 #include "copynpaste.h"
 
-#ifdef HAVE_X11_XLIB_H
+#ifdef WIN32
+bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
+{
+  bool ret = false;
+
+  if (!OpenClipboard(NULL))
+    return false;
+  HANDLE h = GetClipboardData(CF_TEXT);
+
+  if (h)
+  {
+    const char* data = (char*)GlobalLock(h);
+    
+    if (data)
+    {
+      text.insert(pos, data); 
+      pos += strlen(data);
+      GlobalUnlock(h);
+      ret = true;
+    }
+  }
+  CloseClipboard();
+  return ret;
+}
+#elif defined(__APPLE__)
+#include <Carbon/Carbon.h>
+
+bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
+{
+  ScrapRef scrap;
+  if (::GetCurrentScrap(&scrap) != noErr)
+    return false;
+
+  SInt32   byteCount = 0;
+  OSStatus status    = ::GetScrapFlavorSize(scrap, kScrapFlavorTypeText, &byteCount);
+  if (status != noErr)
+    return false;
+
+  char *buffer = new char[byteCount];
+  bool ret     = ::GetScrapFlavorData(scrap, kScrapFlavorTypeText, &byteCount, buffer) == noErr;
+  if (ret)
+  {
+    text.insert(pos, buffer); 
+    pos += strlen(buffer);
+  }
+  delete[] buffer;
+  return ret;
+}
+#elif defined(HAVE_X11_XLIB_H)
 static char* getSelection(Display *dpy, Window us, Atom selection)
 {
   int    max_events = 50;
@@ -80,17 +128,15 @@ static char* getSelection(Display *dpy, Window us, Atom selection)
   printf("Timeout\n");
   return NULL;
 }
-#endif
 
 bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
 {
   SDL_SysWMinfo info;
 
-  printf("Retrieving buffer...\n");
+  //printf("Retrieving buffer...\n");
   SDL_VERSION(&info.version);
   if ( SDL_GetWMInfo(&info) )
   {
-#ifdef HAVE_X11_XLIB_H
     Display *dpy  = info.info.x11.display;
     Window  us    = info.info.x11.window;
     char    *data = NULL;
@@ -119,7 +165,9 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
       pos += strlen(data);
       XFree(data);
     }
-#endif
   }
   return false;
 }
+#else
+bool RetrieveBuffer(std::string& text, std::string::size_type& pos) { return false; }
+#endif

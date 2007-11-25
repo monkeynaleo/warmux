@@ -31,7 +31,7 @@ class TileItem;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
-#define TILE_HAS_PREVIEW   0
+#define TILE_HAS_PREVIEW   1
 
 class Tile : public Rectanglei{
 public:
