@@ -245,11 +245,11 @@ template<class T> class Vector2
       y -= p2.y;
     }
 
-    inline void operator <<= (unsigned int val) const{
+    inline void operator <<= (unsigned int val){
       x <<= val;
       y <<= val;
     }
-    inline void operator >>= (unsigned int val) const{
+    inline void operator >>= (unsigned int val){
       x >>= val;
       y >>= val;
     }
