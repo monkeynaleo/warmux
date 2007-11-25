@@ -199,8 +199,8 @@ void Camera::TestCamera()
 
   int x,y;
   //Move camera with mouse holding Ctrl key down or with middle button of mouse
-  if (SDL_GetModState() & KMOD_CTRL ||
-      SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
+  if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE)
+      || SDL_GetModState() & KMOD_CTRL)
     {
       // Begin to move the camera...
       if (Mouse::GetInstance()->GetPointer() != Mouse::POINTER_MOVE) 
