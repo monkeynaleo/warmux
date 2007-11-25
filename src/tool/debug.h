@@ -38,6 +38,8 @@
 #  define MSG_DEBUG(LEVEL, MESSAGE, ...) do {} while (0)
 #endif
 
+extern bool debug_all;
+
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...);
 void AddDebugMode(const std::string& mode);
