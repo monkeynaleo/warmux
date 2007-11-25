@@ -27,7 +27,8 @@
 
 #include <vector>
 #include "include/base.h"
-#include "spriteframe.h"
+#include "graphic/spriteframe.h"
+#include "graphic/surface.h"
 
 class Sprite;
 
@@ -43,8 +44,8 @@ public:
   Surface GetSurfaceForAngle(double angle) const;
 
   SpriteFrameCache();
-  void CreateRotationCache(Surface &surface, unsigned int cache_size);
-  void CreateFlippingCache(Surface &surface);
+  void CreateRotationCache(Surface &surface, unsigned int cache_size, bool smooth);
+  void CreateFlippingCache(Surface &surface, bool smooth);
 };
 
 class SpriteCache
@@ -53,6 +54,7 @@ class SpriteCache
 
 // TODO: Remove "public:" :-)
 public:
+  bool smooth;
   bool have_rotation_cache;
   unsigned int rotation_cache_size;
   bool have_flipping_cache;

@@ -36,6 +36,8 @@
 
 #include "graphic/fading_effect.h"
 
+#define BUGGY_SDLGFX 1
+
 /**
  * Default constructor.
  *
@@ -661,8 +663,20 @@ static const double ratio_deg_to_rad = 180 / M_PI;
 Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
   Surface newSurf;
 
+#ifdef BUGGY_SDLGFX
+  /* From SDLGFX website, 
+   * 'zoomx' and 'zoomy' are scaling factors that
+   * can also be negative. In this case the corresponding axis is flipped.
+   * Note: Flipping currently only works with antialiasing turned off
+   */ 
+  if (zoomx < 0.0 || zoomy < 0.0)
+    smooth = SMOOTHING_OFF;
+#endif
+
   if (fabs(angle) < EPS_ZERO)
     newSurf.SetSurface( zoomSurface(surface, zoomx, zoomy, smooth) );
+  else if (zoomx == zoomy && zoomx > 0.0)
+    newSurf.SetSurface( rotozoomSurface(surface, angle * ratio_deg_to_rad , zoomx, smooth) );
   else
     newSurf.SetSurface( rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth) );
 
