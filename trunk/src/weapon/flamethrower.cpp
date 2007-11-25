@@ -58,6 +58,7 @@ class FlameThrowerBullet : public WeaponBullet
     void RandomizeShoot(double &angle, double &strength);
     void DoExplosion();
     void SignalGroundCollision();
+    void SignalDrowning();
 };
 
 
@@ -66,6 +67,7 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
   WeaponBullet("flamethrower_bullet", cfg, p_launcher), particle(40)
 {
   explode_colliding_character = true;
+  can_drown = false;
 }
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
@@ -89,6 +91,13 @@ void FlameThrowerBullet::SignalGroundCollision()
 {
   WeaponProjectile::SignalGroundCollision();
   launcher->IncMissedShots();
+}
+
+void FlameThrowerBullet::SignalDrowning()
+{
+  particle.AddNow(GetPosition(), 2, particle_SMOKE, true, 0, 1);
+  launcher->IncMissedShots();
+  Ghost();
 }
 
 //-----------------------------------------------------------------------------

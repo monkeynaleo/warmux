@@ -36,6 +36,7 @@ class WeaponProjectile : public PhysicalObj
     bool explode_colliding_character; // before timeout.
     bool explode_with_timeout;
     bool explode_with_collision;
+    bool can_drown;
     double begin_time;
 
     ExplosiveWeaponConfig& cfg;
