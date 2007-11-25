@@ -289,7 +289,9 @@ void ParseArgs(int argc, char * argv[])
         case 'h':
           printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
                  " [-i|--internet] [-s|--server] [-c|--client [ip]]"
-                 " [-d|--debug debug_masks]\n", argv[0]);
+                 " [-d|--debug <debug_masks>|all]\n", argv[0]);
+          printf("\nWith :\n");
+          printf(" <debug_msg> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body.state | bonus | box | camera.tracking | character | damage | downloader | explosion | game | game.endofturn | game_mode | game.pause | game.statechange | ghost | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.play | lst_objects | map | map.load | map.random | menu | mine | mouse | network | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.move | physic.overlapping | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | physic.state | socket | sprite | team | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | wind }\n");
           exit(0);
           break;
         case 'v':
