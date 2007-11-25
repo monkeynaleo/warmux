@@ -56,7 +56,7 @@ void PictureWidget::SetSurface(const Surface& s, bool enable_scaling)
   if (spr != NULL)
     delete spr;
 
-  spr = new Sprite(s);
+  spr = new Sprite(s, true);
   if (enable_scaling) {
     float scale = std::min( float(GetSizeY())/spr->GetHeight(),
                             float(GetSizeX())/spr->GetWidth() ) ;

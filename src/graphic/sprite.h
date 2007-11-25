@@ -49,13 +49,16 @@ typedef enum {
 
 class Sprite
 {
+private:
+  bool smooth;
+
 public:
   SpriteCache cache;
   SpriteAnimation animation;
 
 public:
-  explicit Sprite();
-  explicit Sprite(const Surface& surface);
+  explicit Sprite(bool _smooth=false);
+  explicit Sprite(const Surface& surface, bool _smooth=false);
   Sprite(const Sprite &other);
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
@@ -65,6 +68,10 @@ public:
   unsigned int GetCurrentFrame() const;
   void SetCurrentFrame( unsigned int frame_no);
   unsigned int GetFrameCount() const;
+
+  // Antialiasing
+  void SetAntialiasing(bool on);
+  bool IsAntialiased() const;
 
   // Size
   unsigned int GetWidth() const;

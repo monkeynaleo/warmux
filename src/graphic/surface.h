@@ -120,7 +120,7 @@ public:
 
   int ImgLoad(const std::string& filename);
   int ImgSave(const std::string& filename);
-  Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
+  Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth=1 /* auto-aliasing = ON */);
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
   Uint32 GetPixel(int x, int y) const;
