@@ -23,6 +23,7 @@
 #include "gui/text_box.h"
 #include "graphic/text.h"
 #include "tool/text_handling.h"
+#include "tool/copynpaste.h"
 
 TextBox::TextBox (const std::string &label, const Point2i &_size,
                   Font::font_size_t fsize, Font::font_style_t fstyle) :
@@ -88,3 +89,19 @@ void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
       txt_label->DrawCursor(position, cursor_pos);
     }
 }
+
+Widget* TextBox::ClickUp(const Point2i &, uint button)
+{
+  bool used = true;
+
+  need_redrawing = true;
+  if (button == SDL_BUTTON_MIDDLE)
+  {
+    std::string new_txt = GetText();
+    used = RetrieveBuffer(new_txt, cursor_pos);
+
+    if (new_txt != GetText())
+      BasicSetText(new_txt);
+  }
+  return used ? this : NULL;
+};
