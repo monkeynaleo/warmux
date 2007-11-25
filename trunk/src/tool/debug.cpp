@@ -32,6 +32,7 @@
 #include "include/base.h"
 #include "tool/debug.h"
 
+bool debug_all = false;
 /**
  * The debug modes in use.
  */
@@ -73,7 +74,7 @@ bool IsDEBUGGING(const char* mode)
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...)
 {
-  if (IsDEBUGGING(level)) {
+  if (debug_all || IsDEBUGGING(level)) {
       va_list argp;
       int pid = (int)getpid();
 
@@ -91,5 +92,9 @@ void PrintDebug (const char *filename, const char *function, unsigned long line,
  * Add a new debug mode to check.
  */
 void AddDebugMode(const std::string& mode ){
+  if(mode == "all") {
+    debug_all = true;
+    return;
+  }
   debugModes.push_back( mode );
 }
