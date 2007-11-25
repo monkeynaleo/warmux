@@ -202,6 +202,18 @@ if test x${check_x11} = xyes ; then
 fi
 if test x${check_x11} = xyes ; then LIBS="$LIBS -lX11" ; fi
 
+dnl === Check for FriBidi =================================================
+AC_ARG_ENABLE(fribidi, AC_HELP_STRING([--enable-fribidi], [enable bi-directional unicode support]) )
+if test "${enable_fribidi}" = "yes"; then
+   AC_CHECK_LIB(fribidi, fribidi_log2vis,
+                [ LDFLAGS="$LDFLAGS `fribidi-config --libs`"
+                  CFLAGS="$CFLAGS `fribidi-config --cflags`"
+                  AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
+                [ AC_MSG_WARN([unable to use FriBidi]) ],
+                [ `fribidi-config --libs` ])
+else
+  AC_MSG_WARN([fribidi is disable. If you want bi-directional text rendering, please use configure with this option : --enable-fribidi])
+fi
 
 dnl === Check for PNG =====================================================
 
@@ -363,6 +375,8 @@ else
    echo "* Game data will be installed into $DATADIR"
    echo "* Game locale will be installed into $LOCALEDIR"
    echo "* Font file will be $FONTFILE"
+   echo ""
+   echo "* [[Optional]] Bi-directional rendering : ${enable_fribidi:-no}"
 fi
 echo ""
 echo "Execute make to compile then execute make install to $INSTALL_OP"
