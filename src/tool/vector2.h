@@ -178,8 +178,17 @@ template<class T> class Vector2
      */
     inline Vector2<T> operator/(const T val) const{
       return Vector2<T>(x / val, y / val);
-        }
+    }
 
+    /**
+     *
+     */
+    inline Vector2<T> operator<<(unsigned int val) const{
+      return Vector2<T>(x << val, y << val);
+    }
+    inline Vector2<T> operator>>(unsigned int val) const{
+      return Vector2<T>(x >> val, y >> val);
+    }
 
     // Operators on itself with a scalar
 
@@ -209,6 +218,14 @@ template<class T> class Vector2
       y *= val;
     }
 
+    /**
+     *
+     */
+    inline void operator/=(const T val){
+      x /= val;
+      y /= val;
+    }
+
     // Operators on itself with an other vector
 
     /**
@@ -226,6 +243,15 @@ template<class T> class Vector2
     inline void operator-=(const Vector2<T> &p2){
       x -= p2.x;
       y -= p2.y;
+    }
+
+    inline void operator <<= (unsigned int val) const{
+      x <<= val;
+      y <<= val;
+    }
+    inline void operator >>= (unsigned int val) const{
+      x >>= val;
+      y >>= val;
     }
 
     // Special operators
