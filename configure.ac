@@ -87,6 +87,9 @@ case "${host}" in
      AC_SUBST(WINDRES)
      ;;
   *cygwin*) WIN32="yes" ;;
+  *-apple-darwin*)
+     LIBS="$LIBS -Wl,-framework,Carbon"
+     ;;
   *) WIN32="no" ;;
 esac
 AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
