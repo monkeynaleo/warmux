@@ -707,7 +707,7 @@ msgstr "Gostite igro"
 
 #: src/menu/network_connection_menu.cpp:161
 msgid "Host a game (Windows clients only)"
-msgstr ""
+msgstr "Gostite igro (Samo za odjemalce z Okni)"
 
 #: src/weapon/blowtorch.cpp:54
 msgid ""
