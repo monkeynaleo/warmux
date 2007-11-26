@@ -168,9 +168,11 @@ void Network::ReceiveActions()
     {
       WaitActionSleep();
 
-      if (IsClient() && cpu.size() == 0) {
-	fprintf(stderr, "you are alone!\n");
-	stop_thread = true;
+      if (cpu.empty()) {
+        if (IsClient()) {
+          fprintf(stderr, "you are alone!\n");
+	  stop_thread = true;
+        }
 	continue;
       }
 
