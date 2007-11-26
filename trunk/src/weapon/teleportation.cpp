@@ -73,11 +73,11 @@ bool Teleportation::p_Shoot ()
 void Teleportation::Refresh()
 {
   if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
-    Camera::GetInstance()->SetXYabs(dst - Camera::GetInstance()->GetSize()/2);
+    Camera::GetInstance()->SetXYabs(dst - Camera::GetInstance()->GetSize() / 2);
     ActiveCharacter().SetXY(dst);
-    ActiveCharacter().SetSpeed(0.0,0.0);
+    ActiveCharacter().SetSpeed(0.0, 0.0);
     ActiveCharacter().Show();
-    jukebox.Play("share","weapon/teleport_end");
+    jukebox.Play("share", "weapon/teleport_end");
     return;
   }
 }
@@ -85,12 +85,15 @@ void Teleportation::Refresh()
 void Teleportation::p_Select()
 {
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
+  Weapon::p_Select();
+  target_chosen = false;
 }
 
 void Teleportation::p_Deselect()
 {
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  Weapon::p_Deselect();
 }
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)
