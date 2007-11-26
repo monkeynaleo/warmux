@@ -193,10 +193,7 @@ void Network::ReceiveActions()
       if (num_ready>0)
         break;
       // Means an error
-#ifndef WIN32
-      // XXX Under windows (and MSVC build?), SDLNet_CheckSockets returns -1
-      //     until first client is connected, but there is no actual error.
-      //     So we keep on looping even on error.
+#if 1//ndef WIN32
       else if (num_ready == -1)
       {
         fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
