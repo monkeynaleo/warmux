@@ -95,7 +95,7 @@ void NetworkServer::WaitActionSleep()
       if (GetNbConnectedPlayers() >= max_nb_players)
         RejectIncoming();
     }
-    //SDL_Delay(100);
+    SDL_Delay(100);
   }
 }
 //-----------------------------------------------------------------------------
