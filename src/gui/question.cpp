@@ -122,6 +122,7 @@ int Question::Ask ()
     AppWormux::GetInstance()->video->Flip();
   } while (!end_of_boucle);
 
+  AppWormux::GetInstance()->RefreshDisplay();
   Mouse::GetInstance()->SetPointer(prev_pointer);
 
   return answer;
