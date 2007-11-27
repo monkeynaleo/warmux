@@ -216,3 +216,7 @@ LIBS+=@LIBINTL@
 else
 AM_CXXFLAGS += -Werror
 endif
+
+if STATIC
+LIBS += -lssl -lcrypto -lz -lpthread
+endif
