@@ -23,6 +23,7 @@
 #include "map/maps_list.h"
 #include "game/config.h"
 #include "graphic/surface.h"
+#include "gui/question.h"
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
 #include "tool/file_tools.h"
@@ -61,27 +62,29 @@ InfoMap::InfoMap(const std::string &map_name,
   wind.rotation_speed = 0;
 }
 
-bool InfoMap::LoadBasicInfo()
+void InfoMap::LoadBasicInfo()
 {
   if(is_basic_info_loaded)
-    return true;
-  std::string nomfich;
+    return;
+
   try
     {
-      nomfich = m_directory + "config.xml";
+      std::string nomfich = m_directory + "config.xml";
 
       // Load resources
       if (!IsFileExist(nomfich))
-        return false;
+        goto err;
       // FIXME: not freed
-      res_profile = resource_manager.LoadXMLProfile(nomfich, true),
+      res_profile = resource_manager.LoadXMLProfile(nomfich, true);
+      if (!res_profile)
+        goto err;
       // Load preview
       preview = resource_manager.LoadImage(res_profile, "preview");
       // Load other informations
       XmlReader doc;
       is_basic_info_loaded = true;
-      if (!doc.Load(nomfich)) return false;
-      if (!ProcessXmlData(doc.GetRoot())) return false;
+      if (!doc.Load(nomfich) || !ProcessXmlData(doc.GetRoot()))
+        goto err;
     }
 
   catch (const xmlpp::exception &e)
@@ -90,12 +93,18 @@ bool InfoMap::LoadBasicInfo()
                 << Format(_("XML error during loading map '%s' :"), m_map_name.c_str())
                 << std::endl
                 << e.what() << std::endl;
-      return false;
+      goto err;
     }
 
   MSG_DEBUG("map.load", "Map loaded: %s", m_map_name.c_str());
 
-  return true;
+  return;
+err:
+  Question question;
+  std::string msg = Format("Map %s in folder %s is invalid!", m_map_name.c_str(), m_directory.c_str());
+  std::cerr << msg << std::endl;
+  question.Set(msg, 1, 0);
+  question.Ask();
 }
 
 bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
@@ -373,5 +382,3 @@ bool compareMaps(const InfoMap& a, const InfoMap& b)
 {
   return a.GetRawName() < b.GetRawName();
 }
-
-
