@@ -23,8 +23,9 @@
 #include "game/config.h"
 #include "gui/button.h"
 #include "gui/label.h"
-#include "gui/picture_widget.h"
 #include "gui/null_widget.h"
+#include "gui/picture_widget.h"
+#include "gui/question.h"
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "network/network.h"
@@ -193,7 +194,26 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
     return;
   }
 
-  widget->SetSurface(MapsList::GetInstance()->lst[index].ReadPreview(), true);
+  InfoMap& info = MapsList::GetInstance()->lst[index];
+  try {
+    widget->SetSurface(info.ReadPreview(), true);
+  }
+  catch (const char* msg) {
+    Question question;
+    std::string err = Format("Map %s in folder '%s' is invalid: %s",
+                             info.GetRawName().c_str(), info.GetDirectory().c_str(), msg);
+    std::cerr << err << std::endl;
+    question.Set(err, 1, 0);
+    question.Ask();
+
+    // Crude
+    std::vector<InfoMap>::iterator it = MapsList::GetInstance()->lst.begin();
+    while (index--)
+      it++;
+    MapsList::GetInstance()->lst.erase(it);
+    return;
+  }
+
   if((display_only && !selected) || (MapsList::GetInstance()->lst[index].IsRandomGenerated() && Network::GetInstance()->IsServer()))
     widget->Disable();
   else

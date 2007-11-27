@@ -88,6 +88,7 @@ public:
   void FreeData();
 
   const std::string& GetRawName() const { return m_map_name; };
+  const std::string& GetDirectory() const { return m_directory; };
   const std::string& ReadFullMapName() { LoadBasicInfo(); return name; };
   const std::string& ReadAuthorInfo() { LoadBasicInfo(); return author_info; };
   const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; };

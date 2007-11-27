@@ -23,7 +23,6 @@
 #include "map/maps_list.h"
 #include "game/config.h"
 #include "graphic/surface.h"
-#include "gui/question.h"
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
 #include "tool/file_tools.h"
@@ -73,38 +72,28 @@ void InfoMap::LoadBasicInfo()
 
       // Load resources
       if (!IsFileExist(nomfich))
-        goto err;
+        throw _("no configuration file!");
       // FIXME: not freed
       res_profile = resource_manager.LoadXMLProfile(nomfich, true);
       if (!res_profile)
-        goto err;
+        throw _("couldn't load config");
       // Load preview
       preview = resource_manager.LoadImage(res_profile, "preview");
+      is_basic_info_loaded = true;
       // Load other informations
       XmlReader doc;
-      is_basic_info_loaded = true;
       if (!doc.Load(nomfich) || !ProcessXmlData(doc.GetRoot()))
-        goto err;
+        throw _("error parsing the config file");
     }
 
   catch (const xmlpp::exception &e)
     {
-      std::cout << std::endl
-                << Format(_("XML error during loading map '%s' :"), m_map_name.c_str())
-                << std::endl
-                << e.what() << std::endl;
-      goto err;
+      std::string msg = Format(_("XML error during loading map '%s': "), m_map_name.c_str());
+      msg += e.what();
+      throw msg.c_str();
     }
 
   MSG_DEBUG("map.load", "Map loaded: %s", m_map_name.c_str());
-
-  return;
-err:
-  Question question;
-  std::string msg = Format("Map %s in folder %s is invalid!", m_map_name.c_str(), m_directory.c_str());
-  std::cerr << msg << std::endl;
-  question.Set(msg, 1, 0);
-  question.Ask();
 }
 
 bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
