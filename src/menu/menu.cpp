@@ -167,11 +167,6 @@ void Menu::RedrawMenu()
 {
   DrawBackground();
   widgets.ForceRedraw();
-
-  int x, y;
-  SDL_GetMouseState( &x, &y );
-  Point2i mousePosition(x, y);
-  Display(mousePosition);
 }
 
 void Menu::Run (bool skip_menu)
