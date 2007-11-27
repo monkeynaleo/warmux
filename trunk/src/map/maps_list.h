@@ -81,7 +81,7 @@ private:
 
   bool ProcessXmlData(const xmlpp::Element *xml);
   void LoadData();
-  bool LoadBasicInfo();
+  void LoadBasicInfo(); // Fails with abort if error
 
 public:
   InfoMap(const std::string&, const std::string&);
