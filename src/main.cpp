@@ -60,7 +60,6 @@ using namespace std;
 #include "tool/random.h"
 
 
-static Menu *menu = NULL;
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
 static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
@@ -77,7 +76,8 @@ AppWormux *AppWormux::GetInstance()
 }
 
 AppWormux::AppWormux():
-  video(new Video())
+  video(new Video()),
+  menu(NULL)
 {
   jukebox.Init();
 
@@ -202,6 +202,11 @@ void AppWormux::DisplayLoadingPicture()
                    + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_NORMAL)).GetHeight() + 20));
 
   video->window.Flip();
+}
+
+void AppWormux::SetCurrentMenu(Menu* _menu)
+{
+  menu = _menu;
 }
 
 void AppWormux::RefreshDisplay()

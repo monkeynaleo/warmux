@@ -26,6 +26,7 @@
 #include "base.h"
 
 class Video;
+class Menu;
 
 class AppWormux
 {
@@ -33,6 +34,7 @@ public:
   Video *video;
 
 private:
+  Menu *menu;
   static AppWormux * singleton;
 
 private:
@@ -43,6 +45,7 @@ private:
   AppWormux();
 
 public:
+  void SetCurrentMenu(Menu *menu);
   void RefreshDisplay();
   static AppWormux * GetInstance();
   ~AppWormux();

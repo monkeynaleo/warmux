@@ -167,6 +167,11 @@ void Menu::RedrawMenu()
 {
   DrawBackground();
   widgets.ForceRedraw();
+
+  int x, y;
+  SDL_GetMouseState( &x, &y );
+  Point2i mousePosition(x, y);
+  Display(mousePosition);
 }
 
 void Menu::Run (bool skip_menu)
@@ -186,6 +191,9 @@ void Menu::Run (bool skip_menu)
 
   do
   {
+    // this is the current menu (here in case we had run a submenu)
+    AppWormux::GetInstance()->SetCurrentMenu(this);
+
     // Poll and treat events
     SDL_Event event;
 
