@@ -37,7 +37,7 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
   if (h)
   {
     const char* data = (char*)GlobalLock(h);
-    
+
     if (data)
     {
       text.insert(pos, data); 
@@ -92,7 +92,7 @@ static char* getSelection(Display *dpy, Window us, Atom selection)
   while (max_events--)
   {
     XEvent        e;
-    
+
     XNextEvent(dpy, &e);
     if(e.type == SelectionNotify)
     {
@@ -102,7 +102,7 @@ static char* getSelection(Display *dpy, Window us, Atom selection)
         //printf("Couldn't convert\n");
         return NULL;
       }
-      
+
       long unsigned len, left, dummy;
       int           format;
       Atom          type;
@@ -169,11 +169,5 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
   return false;
 }
 #else
-bool RetrieveBuffer(std::string& text, std::string::size_type& pos) 
-{ 
-  int temp = pos;
-  pos = text.size();
-  pos = temp;
-  return false;
-}
+bool RetrieveBuffer(std::string&, std::string::size_type&) { return false; }
 #endif
