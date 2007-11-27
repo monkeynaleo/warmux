@@ -169,5 +169,11 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
   return false;
 }
 #else
-bool RetrieveBuffer(std::string& text, std::string::size_type& pos) { return false; }
+bool RetrieveBuffer(std::string& text, std::string::size_type& pos) 
+{ 
+  int temp = pos;
+  pos = text.size();
+  pos = temp;
+  return false;
+}
 #endif
