@@ -78,7 +78,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   energy(-1),
   m_allow_negative_y(false)
 {
-  m_cfg = Config::GetInstance()->GetOjectConfig(m_name,xml_config);
+  m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());

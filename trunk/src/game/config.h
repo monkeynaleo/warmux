@@ -60,7 +60,7 @@ public:
   static const int ALPHA = 0;
   static const int COLORKEY = 1;
 
-  const ObjectConfig &GetOjectConfig(const std::string &name,
+  const ObjectConfig &GetObjectConfig(const std::string &name,
                                      const std::string &xml_config) const;
   void RemoveAllObjectConfigs();
 
@@ -188,7 +188,7 @@ private:
   void LoadXml(const xmlpp::Element *xml);
 
   /* this is mutable in order to be able to load config on fly when calling
-   * GetOjectConfig() witch is not supposed to modify the object itself */
+   * GetObjectConfig() witch is not supposed to modify the object itself */
   mutable std::map<std::string, ObjectConfig *> config_set;
 };
 
