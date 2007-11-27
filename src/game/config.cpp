@@ -211,7 +211,7 @@ void Config::SetLanguage(const std::string language)
  * This tries to find already loaded data in the map<> config_set and actually
  * load it if it cannot be found.
  */
-const ObjectConfig &Config::GetOjectConfig(const std::string &name, const std::string &xml_config) const
+const ObjectConfig &Config::GetObjectConfig(const std::string &name, const std::string &xml_config) const
 {
   ObjectConfig * objcfg;
 
