@@ -67,6 +67,8 @@ if test "$static" = yes; then
        if test -n "$GCC" || test "$ac_cv_prog_gcc" = "yes"; then
                STATIC_LD="-static"
                LDFLAGS="$LDFLAGS -static"
+               LIBCURL="$(curl-config --libs)"
+               LIBCURL="${LIBCURL:--lcurl} -lssl -lcrypto -ldl -lz"
        fi
 fi
 
@@ -244,6 +246,9 @@ if test "x$SDL_GFX_PREFIX" != "x"; then
   CPPFLAGS="$CPPFLAGS -I$SDL_GFX_PREFIX/include/SDL"
   CXXFLAGS="$CXXFLAGS -I$SDL_GFX_PREFIX/include/SDL"
   LIBS="-L$SDL_GFX_PREFIX/lib $LIBS"
+fi
+if test "$static" = yes; then
+  LIBS="$LIBS -lm -ldl -lfreetype -lz"
 fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
 AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
