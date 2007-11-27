@@ -103,7 +103,6 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
     else
     {
       DispNetworkError(conn);
-      Menu::RedrawMenu();
     }
   }
 }
@@ -118,7 +117,6 @@ void InternetMenu::DisplayNoGameRunning()
   Question question;
   question.Set(_("Sorry, currently, no game is waiting for players"), 1, 0);
   question.Ask();
-  Menu::RedrawMenu();
 }
 
 void InternetMenu::RefreshList(bool warning_if_empty)

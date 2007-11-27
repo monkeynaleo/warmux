@@ -193,7 +193,6 @@ void NetworkConnectionMenu::DisplayError(connection_state_t conn)
 {
   play_error_sound();
   DispNetworkError(conn);
-  Menu::RedrawMenu();
 }
 
 bool NetworkConnectionMenu::signal_ok()
