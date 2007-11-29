@@ -85,6 +85,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
     previews_box->AddWidget(bt_map_minus);
   } else {
     previews_box->AddWidget(new NullWidget(*bt_map_minus));
+    delete bt_map_minus;
   }
 
   map_preview_before2 = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
@@ -107,6 +108,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
     previews_box->AddWidget(bt_map_plus);
   }else {
     previews_box->AddWidget(new NullWidget(*bt_map_plus));
+    delete bt_map_plus;
   }
 
   tmp_map_box->AddWidget(previews_box);
