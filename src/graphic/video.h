@@ -31,11 +31,12 @@ class Video{
   uint m_sleep_max_fps;
   bool SDLReady;
   bool fullscreen;
+  SDL_Surface *icon;
 
   std::list<Point2i> available_configs;
   void ComputeAvailableConfigs();
 
-  void SetWindowIcon(const std::string& icon) const;
+  void SetWindowIcon(const std::string& icon);
   void InitSDL(void);
 
 public:
