@@ -212,6 +212,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "sl",    "Slovenščina",         "sl");
   lbox_languages->AddItem(config->GetLanguage() == "sv",    "Svenska",             "sv");
   lbox_languages->AddItem(config->GetLanguage() == "tr",    "Türkçe",              "tr");
+  lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "中文", "zh_CN");
 
   opt_music->SetValue(jukebox.UseMusic());
   opt_sound_effects->SetValue(jukebox.UseEffects());
