@@ -34,6 +34,7 @@ Video::Video(){
   SetMaxFps (50);
   fullscreen = false;
   SDLReady = false;
+  icon = NULL;
 
   InitSDL();
 
@@ -59,6 +60,8 @@ Video::Video(){
 }
 
 Video::~Video(){
+  if (icon)
+    SDL_FreeSurface(icon);
   if( SDLReady )
     SDL_Quit();
   SDLReady = false;
@@ -196,8 +199,9 @@ void Video::SetWindowCaption(const std::string& caption) const {
   SDL_WM_SetCaption( caption.c_str(), NULL );
 }
 
-void Video::SetWindowIcon(const std::string& filename) const {
-  SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
+void Video::SetWindowIcon(const std::string& filename) {
+  icon = IMG_Load(filename.c_str());
+  SDL_WM_SetIcon( icon, NULL );
 }
 
 void Video::InitSDL(){
