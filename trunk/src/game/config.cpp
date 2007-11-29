@@ -296,6 +296,7 @@ void Config::LoadDefaultValue()
       if(tmp.GetX() > 0 && tmp.GetY() > 0)
         resolution_available.push_back(tmp);
     }*/
+    delete res;
   } catch (const xmlpp::exception &e) {
     std::cout << "o "
         << _("Error while loading default configuration file: %s") << std::endl
