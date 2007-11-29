@@ -214,10 +214,13 @@ Polygon::~Polygon()
     delete texture;
   if (border_color)
     delete border_color;
+  if (plane_color)
+    delete plane_color;
   delete shape_buffer;
 
   shape_buffer = NULL;
   border_color = NULL;
+  plane_color = NULL;
   texture = NULL;
 }
 
