@@ -795,8 +795,8 @@ ActionHandler::ActionHandler():
   // ########################################################
   Register (Action::ACTION_NICKNAME, "nickname", Action_Nickname);
   Register (Action::ACTION_NETWORK_CHANGE_STATE, "NETWORK_change_state", &Action_Network_ChangeState);
-  Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check", &Action_Network_Check_Phase1);
-  Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check", &Action_Network_Check_Phase2);
+  Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check1", &Action_Network_Check_Phase1);
+  Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check2", &Action_Network_Check_Phase2);
 
   // ########################################################
   Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
