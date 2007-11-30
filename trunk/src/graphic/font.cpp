@@ -109,8 +109,6 @@ Font::~Font(){
     //SDL_FreeSurface(it->second);
     surface_text_table.erase(it->first);
   }
-
-  TTF_Quit();
 }
 
 void Font::ReleaseInstances(void)
@@ -143,6 +141,8 @@ void Font::ReleaseInstances(void)
       FONT_ARRAY_ITALIC[i] = NULL;
     }
   }
+
+  TTF_Quit();
 }
 
 void Font::SetBold()
