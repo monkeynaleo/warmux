@@ -263,7 +263,6 @@ void Network::Disconnect()
   AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::VERSION);
 
   if (singleton != NULL) {
-    printf("Destroying %p\n", singleton);
     singleton->stop_thread = true;
     singleton->DisconnectNetwork();
     delete singleton;
@@ -271,16 +270,11 @@ void Network::Disconnect()
   }
 }
 
-static inline void sdl_thread_wait_for(SDL_Thread* thread, uint /*timeout*/)
-{
-  SDL_WaitThread(thread, NULL);
-}
-
 // Protected method for client and server
 void Network::DisconnectNetwork()
 {
   if (thread != NULL && SDL_ThreadID() != SDL_GetThreadID(thread)) {
-    sdl_thread_wait_for(thread, 4000);
+    SDL_WaitThread(thread, NULL);
   }
 
   thread = NULL;
