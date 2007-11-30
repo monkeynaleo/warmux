@@ -76,10 +76,11 @@ connection_state_t IndexServer::Connect()
 
   std::string addr;
   int port;
+  uint nb_servers_tried = 0; // how many servers have we tried to connect ?
 
   // Cycle through the list of server
   // Until we find one running
-  while( GetServerAddress( addr, port) )
+  while (GetServerAddress(addr, port, nb_servers_tried))
   {
     if( ConnectTo( addr, port) )
       return CONNECTED;
@@ -144,31 +145,37 @@ void IndexServer::Disconnect()
   SDLNet_FreeSocketSet(sock_set);
 }
 
-bool IndexServer::GetServerAddress( std::string & address, int & port)
+bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb_servers_tried)
 {
+  // have we already tried all servers ?
+  if (server_lst.size() == nb_servers_tried) {
+    return false;
+  }
+  nb_servers_tried++;
+
   MSG_DEBUG("index_server", "Trying a new server");
   // Cycle through the server list to find the first one
   // accepting connection
-  if( first_server == server_lst.end() )
-  {
-    // First try :
-    // Randomly select a server in the list
-    int nbr = randomObj.GetLong( 0, server_lst.size()-1 );
-    first_server = server_lst.begin();
-    while(nbr--)
-      ++first_server;
-
-    ASSERT(first_server != server_lst.end());
-
-    current_server = first_server;
-
-    address = current_server->first;
-    port = current_server->second;
-    return true;
-  }
+  if (first_server == server_lst.end())
+    {
+      // First try :
+      // Randomly select a server in the list
+      int nbr = randomObj.GetLong( 0, server_lst.size()-1 );
+      first_server = server_lst.begin();
+      while(nbr--)
+	++first_server;
+      
+      ASSERT(first_server != server_lst.end());
+      
+      current_server = first_server;
+      
+      address = current_server->first;
+      port = current_server->second;
+      return true;
+    }
 
   ++current_server;
-  if( current_server == server_lst.end() )
+  if (current_server == server_lst.end())
     current_server = server_lst.begin();
 
   address = current_server->first;
