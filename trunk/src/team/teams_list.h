@@ -74,6 +74,7 @@ public:
   void RefreshSort (); //Refresh energy bar position
   void ChangeSelection (const std::list<uint>& liste);
   bool IsSelected (uint index);
+  static bool IsLoaded() { return singleton != NULL; }
 
   // Find a team by its id or index (in full_list)
   Team* FindById (const std::string &id, int &pos);
@@ -97,7 +98,7 @@ bool compareTeams(const Team *a, const Team *b);
 
 inline TeamsList &GetTeamsList(void) { return *TeamsList::GetInstance(); };
 
-inline void TeamsListCleanup(void) { delete TeamsList::GetInstance(); };
+inline void TeamsListCleanup(void) { if (TeamsList::singleton) delete TeamsList::singleton; };
 
 //-----------------------------------------------------------------------------
 #endif

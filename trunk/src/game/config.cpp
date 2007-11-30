@@ -414,17 +414,21 @@ bool Config::SaveXml()
   //=== Teams ===
   xmlpp::Element *team_elements = root->add_child("teams");
 
-  TeamsList::iterator
-    it=GetTeamsList().playing_list.begin(),
-    fin=GetTeamsList().playing_list.end();
-
-  for (int i=0; it != fin; ++it, i++)
+  if (TeamsList::IsLoaded())
   {
-    if ((**it).IsLocal() || (**it).IsLocalAI()) { 
-      xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));
-      doc.WriteElement(a_team, "id", (**it).GetId());
-      doc.WriteElement(a_team, "player_name", (**it).GetPlayerName());
-      doc.WriteElement(a_team, "nb_characters", ulong2str((**it).GetNbCharacters()));
+    TeamsList::iterator
+      it=GetTeamsList().playing_list.begin(),
+      fin=GetTeamsList().playing_list.end();
+
+    for (int i=0; it != fin; ++it, i++)
+    {
+      if ((**it).IsLocal() || (**it).IsLocalAI())
+      {
+        xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));
+        doc.WriteElement(a_team, "id", (**it).GetId());
+        doc.WriteElement(a_team, "player_name", (**it).GetPlayerName());
+        doc.WriteElement(a_team, "nb_characters", ulong2str((**it).GetNbCharacters()));
+      }
     }
   }
 
