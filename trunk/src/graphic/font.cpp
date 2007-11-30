@@ -113,6 +113,38 @@ Font::~Font(){
   TTF_Quit();
 }
 
+void Font::ReleaseInstances(void)
+{
+  uint i;
+
+  for (i=0; i<sizeof(FONT_ARRAY)/sizeof(Font*); i++)
+  {
+    if (FONT_ARRAY[i])
+    {
+      delete FONT_ARRAY[i];
+      FONT_ARRAY[i] = NULL;
+    }
+  }
+
+  for (i=0; i<sizeof(FONT_ARRAY_BOLD)/sizeof(Font*); i++)
+  {
+    if (FONT_ARRAY_BOLD[i])
+    {
+      delete FONT_ARRAY_BOLD[i];
+      FONT_ARRAY_BOLD[i] = NULL;
+    }
+  }
+
+  for (i=0; i<sizeof(FONT_ARRAY_ITALIC)/sizeof(Font*); i++)
+  {
+    if (FONT_ARRAY_ITALIC[i])
+    {
+      delete FONT_ARRAY_ITALIC[i];
+      FONT_ARRAY_ITALIC[i] = NULL;
+    }
+  }
+}
+
 void Font::SetBold()
 {
   TTF_SetFontStyle(m_font, TTF_STYLE_BOLD);
