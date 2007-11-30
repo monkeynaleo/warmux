@@ -178,7 +178,7 @@ void Network::ReceiveActions()
 
       // Check forced disconnections
       for (dst_cpu = cpu.begin();
-           dst_cpu != cpu.end() && ThreadToContinue();
+           ThreadToContinue() && dst_cpu != cpu.end();
            dst_cpu++)
       {
         if((*dst_cpu)->force_disconnect)
@@ -193,16 +193,15 @@ void Network::ReceiveActions()
       if (num_ready>0)
         break;
       // Means an error
-#if 1//ndef WIN32
       else if (num_ready == -1)
       {
         fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
+        continue; //Or break?
       }
-#endif
     }
 
     for (dst_cpu = cpu.begin();
-         dst_cpu != cpu.end() && ThreadToContinue();
+         ThreadToContinue() && dst_cpu != cpu.end();
          dst_cpu++)
     {
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
@@ -211,6 +210,8 @@ void Network::ReceiveActions()
         int packet_size = (*dst_cpu)->ReceiveDatas(packet);
         if( packet_size == -1) { // An error occured during the reception
           dst_cpu = CloseConnection(dst_cpu);
+          if (cpu.empty())
+            break;
           continue;
         } else
         if (packet_size == 0) // We didn't receive the full packet yet
@@ -263,6 +264,7 @@ void Network::Disconnect()
   AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::VERSION);
 
   if (singleton != NULL) {
+    printf("Destroying %p\n", singleton);
     singleton->stop_thread = true;
     singleton->DisconnectNetwork();
     delete singleton;
