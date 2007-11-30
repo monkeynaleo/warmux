@@ -208,7 +208,7 @@ dnl === Check for FriBidi =================================================
 AC_ARG_ENABLE(fribidi, AC_HELP_STRING([--enable-fribidi], [enable bi-directional unicode support]) )
 if test "${enable_fribidi}" = "yes"; then
    AC_CHECK_LIB(fribidi, fribidi_log2vis,
-                [ LDFLAGS="$LDFLAGS `fribidi-config --libs`"
+                [ LIBS="$LIBS `fribidi-config --libs`"
                   CFLAGS="$CFLAGS `fribidi-config --cflags`"
                   AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
                 [ AC_MSG_WARN([unable to use FriBidi]) ],
