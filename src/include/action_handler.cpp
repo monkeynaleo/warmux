@@ -400,6 +400,7 @@ void Action_Menu_AddTeam (Action *a)
 void Action_Menu_UpdateTeam (Action *a)
 {
   ConfigTeam the_team;
+  bool       remote = Network::GetInstance()->IsServer() && a->creator;
 
   the_team.id = a->PopString();
   the_team.player_name = a->PopString();
@@ -408,7 +409,7 @@ void Action_Menu_UpdateTeam (Action *a)
   GetTeamsList().UpdateTeam (the_team);
 
   if (Network::GetInstance()->network_menu != NULL)
-    Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id);
+    Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id, remote);
 }
 
 void Action_Menu_DelTeam (Action *a)

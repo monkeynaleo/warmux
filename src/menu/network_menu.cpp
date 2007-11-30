@@ -352,12 +352,13 @@ void NetworkMenu::AddTeamCallback(const std::string& team_id)
 //  msg_box->NewMessage(team_id + " selected");
 }
 
-void NetworkMenu::UpdateTeamCallback(const std::string& team_id)
+void NetworkMenu::UpdateTeamCallback(const std::string& team_id, bool remote)
 {
   if ( close_menu )
     return;
 
-  team_box->UpdateTeamCallback(team_id);
+  // Team always remote when called from here
+  team_box->UpdateTeamCallback(team_id, remote);
 }
 
 void NetworkMenu::ChangeMapCallback()

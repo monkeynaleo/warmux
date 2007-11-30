@@ -72,7 +72,7 @@ public:
   ~NetworkMenu();
 
   void AddTeamCallback(const std::string& team_id);
-  void UpdateTeamCallback(const std::string& team_id);
+  void UpdateTeamCallback(const std::string& team_id, bool remote=false);
   void DelTeamCallback(const std::string& team_id);
   void ChangeMapCallback();
 
