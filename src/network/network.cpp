@@ -143,7 +143,6 @@ int Network::ThreadRun(void*/*no_param*/)
 {
   MSG_DEBUG("network", "Thread created: %u", SDL_ThreadID());
   GetInstance()->ReceiveActions();
-  std::cout << "Network : end of thread" << std::endl;
   return 1;
 }
 
