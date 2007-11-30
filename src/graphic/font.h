@@ -46,7 +46,7 @@ private:
   static Font* FONT_ARRAY[6];
   static Font* FONT_ARRAY_BOLD[6];
   static Font* FONT_ARRAY_ITALIC[6];
-  static bool  TTF_LIB_INIT;
+  static bool  LIB_INIT;
 
   std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
