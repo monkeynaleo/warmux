@@ -64,7 +64,7 @@ class IndexServer
   std::string ReceiveStr();
 
   // Gives the address of a server in the list
-  bool GetServerAddress(std::string & address, int & port);
+  bool GetServerAddress(std::string & address, int & port, uint& nb_tries);
   // Connect to a server
   bool ConnectTo(const std::string & address, const int & port);
 
