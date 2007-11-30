@@ -274,7 +274,7 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
 
   std::string fullname = dir + map_name;
   if (!IsFolderExist(fullname))
-          return;
+    return;
 
   InfoMap nv_terrain(map_name, fullname + PATH_SEPARATOR);
 
@@ -285,9 +285,6 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
 
 int MapsList::FindMapById (const std::string &id) const
 {
-  // XXX Not used !?
-  //iterator terrain=lst.begin(), fin_terrain=lst.end();
-
   uint i=0;
   for (; i < lst.size(); ++i)
     if (lst[i].GetRawName() == id)
@@ -317,7 +314,7 @@ void MapsList::SelectMapByName (const std::string &name)
 
   // standard case!
   int index = FindMapById (name);
-  
+
   if (index == -1){
     index = 0;
     if(name != "")
