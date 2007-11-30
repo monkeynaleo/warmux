@@ -29,6 +29,7 @@
 Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 Font* Font::FONT_ARRAY_BOLD[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 Font* Font::FONT_ARRAY_ITALIC[] = {NULL, NULL, NULL, NULL, NULL, NULL};
+bool  Font::LIB_INIT = false;
 
 /*
  * Constants
@@ -42,10 +43,11 @@ Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
 
   if (FONT_ARRAY[ftype] == NULL) {
     try {
-      if (TTF_Init() == -1) {
+      if (!LIB_INIT && TTF_Init() == -1) {
         Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
         exit(1);
       }
+      LIB_INIT = true;
 
       // Load the font in the different styles
       FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
