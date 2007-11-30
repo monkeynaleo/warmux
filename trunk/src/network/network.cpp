@@ -170,6 +170,7 @@ void Network::ReceiveActions()
           fprintf(stderr, "you are alone!\n");
 	  stop_thread = true;
         }
+        // Even for server, as Visual Studio in debug mode has trouble with that loop
 	continue;
       }
 
@@ -207,6 +208,7 @@ void Network::ReceiveActions()
         int packet_size = (*dst_cpu)->ReceiveDatas(packet);
         if( packet_size == -1) { // An error occured during the reception
           dst_cpu = CloseConnection(dst_cpu);
+          // Please Visual Studio that in debug mode has trouble with continuing
           if (cpu.empty())
             break;
           continue;
@@ -225,7 +227,7 @@ void Network::ReceiveActions()
 
         Action* a = new Action(packet, (*dst_cpu));
         MSG_DEBUG("network.traffic","Received action %s",
-                        ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+                  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
 	HandleAction(a, *dst_cpu);
         free(packet);
