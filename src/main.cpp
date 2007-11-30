@@ -87,8 +87,6 @@ AppWormux::AppWormux():
 AppWormux::~AppWormux()
 {
   singleton = NULL;
-  delete video;
-  TeamsListCleanup();
 }
 
 int AppWormux::Main(void)
@@ -232,6 +230,8 @@ void AppWormux::End() const
   delete Config::GetInstance();
   delete Time::GetInstance();
   delete Constants::GetInstance();
+  delete video;
+  TeamsListCleanup();
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
