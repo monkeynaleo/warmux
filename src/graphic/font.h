@@ -73,6 +73,7 @@ public:
 
   // type: defined as static consts above
   static Font* GetInstance(font_size_t size, font_style_t style = FONT_NORMAL);
+  static void ReleaseInstances(void);
 
   ~Font();
 
