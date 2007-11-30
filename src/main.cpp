@@ -43,6 +43,8 @@ using namespace std;
 #include "graphic/text.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
+#include "interface/mouse.h"
+#include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "menu/credits_menu.h"
@@ -89,6 +91,8 @@ AppWormux::~AppWormux()
   delete video;
   TeamsListCleanup();
   Font::ReleaseInstances();
+  delete Mouse::GetInstance();
+  delete Camera::GetInstance();
   singleton = NULL;
 }
 
