@@ -35,7 +35,7 @@
 #include "team/team.h"
 #include "tool/i18n.h"
 
-const double JETPACK_FORCE = 2500.0;
+const double JETPACK_FORCE = 1800.0;
 
 const uint DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumption.
 
