@@ -157,11 +157,7 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
 
   switch (current_action) {
   case NET_HOST:
-#ifdef WIN32
-    action_label->SetText(_("Host a game (Windows clients only)"));
-#else
     action_label->SetText(_("Host a game"));
-#endif
     server_address_label->SetVisible(false);
     server_address->SetVisible(false);
     port_number_label->SetVisible(true);
