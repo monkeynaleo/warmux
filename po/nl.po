@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-11-08 21:31+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -18,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:321
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "Kaart %s niet gevonden :-("
@@ -42,12 +43,12 @@ msgstr[1] "%i spelers zijn gereed"
 msgid "%s (%s) has died."
 msgstr "%s (%s) is overleden."
 
-#: src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:120
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s van %s"
 
-#: src/map/maps_list.cpp:129
+#: src/map/maps_list.cpp:127
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> van %s"
@@ -227,7 +228,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Team %s heeft %u staaf dynamiet gekregen!"
 msgstr[1] "Team %s heeft %u staven dynamiet gekregen!"
 
-#: src/weapon/flamethrower.cpp:160
+#: src/weapon/flamethrower.cpp:176
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -341,7 +342,7 @@ msgid_plural "%s team has won %u syringes!"
 msgstr[0] "Team %s heeft %u injectienaald gekregen!"
 msgstr[1] "Team %s heeft %u injectienaalden gekregen!"
 
-#: src/weapon/teleportation.cpp:109
+#: src/weapon/teleportation.cpp:112
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -417,7 +418,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Aambeeld"
 
-#: src/main.cpp:242
+#: src/main.cpp:252
 msgid "Authors:"
 msgstr "Auteurs:"
 
@@ -465,7 +466,7 @@ msgstr "Kan persoonlijke-teamsdirectory niet openen (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan teams directory niet openen (%s)!"
 
-#: src/menu/map_selection_box.cpp:219
+#: src/menu/map_selection_box.cpp:241
 msgid "Choose randomly between the different maps"
 msgstr "Kies een willekeurige kaart"
 
@@ -545,7 +546,7 @@ msgstr "Fout bij het laden van team :"
 msgid "Error loading team's data %s:"
 msgstr "Fout bij het laden van gegevens van team %s:"
 
-#: src/game/config.cpp:373
+#: src/game/config.cpp:389
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -553,12 +554,12 @@ msgstr ""
 "Fout bij het aanmaken van directory \"%s\": kon configuratiebestand niet "
 "opslaan."
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:264
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fout bij het laden van configuratiebestand: %s"
 
-#: src/game/config.cpp:286
+#: src/game/config.cpp:302
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Fout bij het laden van standaardconfiguratiebestand: %s"
@@ -578,20 +579,20 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:238
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Fout: Kon niet verbinden met %s:%s"
 
-#: src/menu/network_connection_menu.cpp:213
+#: src/menu/network_connection_menu.cpp:212
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Fout: Kon indexserver niet bereiken om een spel te hosten"
 
-#: src/menu/network_connection_menu.cpp:250
+#: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Fout: Kon indexserver niet bereiken om naar een internetspel te zoeken"
 
-#: src/menu/network_connection_menu.cpp:227
+#: src/menu/network_connection_menu.cpp:226
 msgid "Error: Unable to start server"
 msgstr "Fout: Kon server niet starten"
 
@@ -600,7 +601,7 @@ msgstr "Fout: Kon server niet starten"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
 
-#: src/weapon/flamethrower.cpp:91
+#: src/weapon/flamethrower.cpp:107
 msgid "Flame Thrower"
 msgstr "Vlammenwerper"
 
@@ -696,7 +697,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
-#: src/main.cpp:234
+#: src/main.cpp:244
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -750,7 +751,7 @@ msgstr "Bezoek #wormux op irc.freenode.net om tegenstanders te vinden."
 msgid "Language"
 msgstr "Taal"
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:229
 msgid "Load maps:"
 msgstr "Kaarten worden geladen:"
 
@@ -820,7 +821,7 @@ msgstr "Muziek?"
 msgid "Network Game"
 msgstr "Netwerk Spel"
 
-#: src/network/network.cpp:255
+#: src/network/network.cpp:253
 msgid "Network initialization"
 msgstr "Netwerk wordt geïnitialiseerd"
 
@@ -884,19 +885,19 @@ msgstr "Poort:"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/main.cpp:220
+#: src/main.cpp:230
 msgid "Quit Wormux"
 msgstr "Wormux afsluiten"
 
-#: src/menu/map_selection_box.cpp:218
+#: src/menu/map_selection_box.cpp:240
 msgid "Random map"
 msgstr "Willekeurige kaart"
 
-#: src/game/config.cpp:262
+#: src/game/config.cpp:277
 msgid "Reading default config file"
 msgstr "Standaard configbestand wordt gelezen"
 
-#: src/game/config.cpp:294
+#: src/game/config.cpp:310
 msgid "Reading personal config file"
 msgstr "Persoonlijk config bestand wordt gelezen"
 
@@ -912,7 +913,7 @@ msgstr "Resolutie"
 msgid "Riot Bomb"
 msgstr "Rellenbom"
 
-#: src/main.cpp:84
+#: src/main.cpp:86
 msgid "Run game"
 msgstr "Spel wordt gestart"
 
@@ -951,7 +952,7 @@ msgstr "Beurt overslaan"
 msgid "Sniper Rifle"
 msgstr "Scherpschuttersgeweer"
 
-#: src/menu/internet_menu.cpp:119
+#: src/menu/internet_menu.cpp:118
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, er is op dit moment geen spel dat op spelers wacht"
 
@@ -1080,12 +1081,12 @@ msgstr "Gereedschap"
 msgid "Unable to contact host."
 msgstr "Kon geen verbinding maken met host."
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:239
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kon kaarten directory niet openen (%s)!"
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:251
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Kon persoonlijke-kaartendirectory niet openen (%s)!"
@@ -1098,7 +1099,7 @@ msgstr "Kon deze poort niet gebruiken!"
 msgid "Unnamed"
 msgstr "Naamloos"
 
-#: src/main.cpp:180
+#: src/main.cpp:185
 msgid "Version"
 msgstr "Versie"
 
@@ -1109,7 +1110,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Wacht! %i speler is nog niet klaar!"
 msgstr[1] "Wacht! %i spelers zijn nog niet klaar!"
 
-#: src/menu/network_menu.cpp:387
+#: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Wachten op de server, het enige wat u nu kunt doen is annuleren of chatten!"
@@ -1120,7 +1121,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Wapens"
 
-#: src/main.cpp:251
+#: src/main.cpp:261
 msgid "Website: "
 msgstr "Website: "
 
@@ -1138,17 +1139,17 @@ msgstr "Wind deeltjes?"
 msgid "Winner"
 msgstr "Winaar"
 
-#: src/main.cpp:193
+#: src/main.cpp:198
 msgid "Wormux launching..."
 msgstr "Wormux wordt gestart..."
 
-#: src/main.cpp:241
+#: src/main.cpp:251
 msgid "Wormux version "
 msgstr "Wormux versie "
 
-#: src/map/maps_list.cpp:90
-#, c-format
-msgid "XML error during loading map '%s' :"
+#: src/map/maps_list.cpp:91
+#, fuzzy, c-format
+msgid "XML error during loading map '%s': "
 msgstr "XML fout bij het laden van kaart '%s' :"
 
 #: src/menu/network_menu.cpp:323
@@ -1159,7 +1160,7 @@ msgstr "U bent alleen :-/"
 msgid "You are alone..."
 msgstr "U bent alleen..."
 
-#: src/map/maps_list.cpp:262
+#: src/map/maps_list.cpp:260
 msgid "You need at least one valid map !"
 msgstr "U heeft minimaal één geldige kaart nodig !"
 
@@ -1171,7 +1172,7 @@ msgstr "U heeft minimaal twee geldige teams nodig !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd !"
 
-#: src/weapon/weapon_launcher.cpp:462
+#: src/weapon/weapon_launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 
@@ -1189,24 +1190,38 @@ msgstr ""
 "Bombarderen: klik met de linkermuisknop op het doel\n"
 "een bombardement per beurt"
 
+#: src/map/maps_list.cpp:79
+msgid "couldn't load config"
+msgstr ""
+
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "klaar"
+
+#: src/map/maps_list.cpp:86
+#, fuzzy
+msgid "error parsing the config file"
+msgstr "Standaard configbestand wordt gelezen"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "van"
 
-#: src/sound/jukebox.cpp:155
+#: src/map/maps_list.cpp:75
+#, fuzzy
+msgid "no configuration file!"
+msgstr "Fout bij het laden van configuratiebestand: %s"
+
+#: src/sound/jukebox.cpp:157
 msgid "o Loading music"
 msgstr "o Muziek wordt geladen"
 
-#: src/sound/jukebox.cpp:325
+#: src/sound/jukebox.cpp:327
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Geluidsprofiel wordt geladen: %s"
 
-#: src/sound/jukebox.cpp:84
+#: src/sound/jukebox.cpp:86
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-12-02 11:42+0100\n"
+"POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-11-08 23:03+0100\n"
 "Last-Translator: Matthieu Fertré <matthieu.fertre@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -365,8 +365,7 @@ msgstr[1] ""
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
-"%s a essayé de se connecter à une version différente : client=%s, "
-"serveur=%s."
+"%s a essayé de se connecter à une version différente : client=%s, serveur=%s."
 
 #: src/interface/interface.cpp:173
 msgid "(dead)"
@@ -545,8 +544,8 @@ msgstr "Erreur durant le chargement de l'équipe %s :"
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
-"Erreur lors de la création du répertoire \"%s\" : impossible "
-"de sauvegarder la configuration du jeu."
+"Erreur lors de la création du répertoire \"%s\" : impossible de sauvegarder "
+"la configuration du jeu."
 
 #: src/game/config.cpp:264
 #, c-format
@@ -1146,6 +1145,7 @@ msgid "Wormux version "
 msgstr "Wormux version "
 
 #: src/map/maps_list.cpp:91
+#, c-format
 msgid "XML error during loading map '%s': "
 msgstr "Erreur XML lors du chargement du terrain '%s' :"
 
