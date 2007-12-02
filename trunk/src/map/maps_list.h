@@ -130,13 +130,11 @@ private:
 
   void LoadOneMap (const std::string &dir, const std::string &file);
   MapsList();
-
-protected:
   ~MapsList();
   static MapsList * singleton;
 
 public:
-  friend void MapsListCleanup(void);
+  static void CleanUp(void) { if (singleton) delete singleton; };
   static MapsList * GetInstance();
 
   // Return -1 if fails
@@ -151,7 +149,5 @@ public:
 };
 
 InfoMap* ActiveMap();
-
-inline void MapsListCleanup(void) { if (MapsList::singleton) delete MapsList::singleton; };
 
 #endif
