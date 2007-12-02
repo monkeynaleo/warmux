@@ -65,7 +65,7 @@ public:
     
     if (old_value != m_value) {
       ValueHasChanged();
-      ForceRedraw();
+      NeedRedrawing();
     }
   }
 
@@ -76,7 +76,7 @@ public:
     if (m_max_value != max_value) {
       m_max_value = max_value;
       SetValue(m_value);
-      ForceRedraw();
+      NeedRedrawing();
     }
     ASSERT(m_min_value < m_max_value);
     ASSERT(m_step <= (m_max_value - m_min_value));
@@ -87,7 +87,7 @@ public:
     if (m_min_value != min_value) {
       m_min_value = min_value;
       SetValue(m_value);
-      ForceRedraw();
+      NeedRedrawing();
     }
     ASSERT(m_min_value < m_max_value);
     ASSERT(m_step <= (m_max_value - m_min_value));
