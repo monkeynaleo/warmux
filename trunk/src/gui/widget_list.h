@@ -51,7 +51,7 @@ public:
   void Update(const Point2i &mousePosition, Surface& surf);
   virtual void Draw(const Point2i&, Surface&) const { };
   // set need_redrawing to true for all sub widgets;
-  void ForceRedraw();
+  void NeedRedrawing();
 
   // methods specialized from Widget to manage the list of widgets
   virtual bool SendKey(SDL_keysym key);
