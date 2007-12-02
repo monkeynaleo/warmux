@@ -34,7 +34,7 @@ class Widget : public Rectanglei
 {
   bool has_mouse_focus;
   bool has_keyboard_focus;
-  
+  bool visible;
 
   Widget(const Widget&);
   const Widget& operator=(const Widget&);
@@ -60,6 +60,10 @@ class Widget : public Rectanglei
   virtual bool SendKey(const SDL_keysym&) { return false; };
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+
+  // widget may be hidden
+  bool IsVisible() const { return visible; }
+  void SetVisible(bool _visible);
 
   // manage mouse focus
   bool HasMouseFocus() const { return has_mouse_focus; };

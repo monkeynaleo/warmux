@@ -54,50 +54,47 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
 {
   Surface video_window = AppWormux::GetInstance()->video->window;
 
-  if (!hidden)
+  if (m_value)
     {
-      if (m_value)
-        {
-          uint enabled_x = GetPositionX() + (GetSizeX() - m_enabled.GetWidth() - 20)/2 ;
-          uint enabled_y = GetPositionY() + (GetSizeY() - m_enabled.GetHeight() - txt_label->GetHeight() - 5) /2;
-          uint outside_x = std::max(uint(0), GetPositionX() - enabled_x);
-          uint outside_y = std::max(uint(0), GetPositionY() - enabled_y);
-
-          enabled_x+= outside_x;
-          enabled_y+= outside_y;
-          Rectanglei srcRect(outside_x, outside_y, m_enabled.GetWidth() - outside_x,
-                             m_enabled.GetHeight() - outside_y);
-          video_window.Blit(m_enabled, srcRect, Point2i(enabled_x, enabled_y));
-        }
-      else
-        {
-          uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_back.GetWidth() - 20)/2 ;
-          uint disabled_y = GetPositionY() + (GetSizeY() - m_disabled_back.GetHeight() - txt_label->GetHeight() - 5) /2;
-          uint outside_x = std::max(uint(0), GetPositionX() - disabled_x);
-          uint outside_y = std::max(uint(0), GetPositionY() - disabled_y);
-
-          disabled_x+= outside_x;
-          disabled_y+= outside_y;
-          Rectanglei srcRect(outside_x, outside_y, m_disabled_back.GetWidth() - outside_x,
-                             m_disabled_back.GetHeight() - outside_y);
-          video_window.Blit(m_disabled_back, srcRect, Point2i(disabled_x, disabled_y));
-        }
-      // center the image
-      uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth() - 20)/2 ;
-      uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
-
-      video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
-
-      txt_label->DrawCenterTop(GetPosition()
-                               + Point2i(GetSizeX()/2,
-                                         GetSizeY() - txt_label->GetHeight()));
-
-      if (!m_value)
-        {
-          uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_front.GetWidth() - 20)/2 ;
-          uint disabled_y = GetPositionY() + (GetSizeY() - m_disabled_front.GetHeight() - txt_label->GetHeight() - 5) /2;
-          video_window.Blit(m_disabled_front, Point2i(disabled_x, disabled_y));
-        }
+      uint enabled_x = GetPositionX() + (GetSizeX() - m_enabled.GetWidth() - 20)/2 ;
+      uint enabled_y = GetPositionY() + (GetSizeY() - m_enabled.GetHeight() - txt_label->GetHeight() - 5) /2;
+      uint outside_x = std::max(uint(0), GetPositionX() - enabled_x);
+      uint outside_y = std::max(uint(0), GetPositionY() - enabled_y);
+      
+      enabled_x+= outside_x;
+      enabled_y+= outside_y;
+      Rectanglei srcRect(outside_x, outside_y, m_enabled.GetWidth() - outside_x,
+			 m_enabled.GetHeight() - outside_y);
+      video_window.Blit(m_enabled, srcRect, Point2i(enabled_x, enabled_y));
+    }
+  else
+    {
+      uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_back.GetWidth() - 20)/2 ;
+      uint disabled_y = GetPositionY() + (GetSizeY() - m_disabled_back.GetHeight() - txt_label->GetHeight() - 5) /2;
+      uint outside_x = std::max(uint(0), GetPositionX() - disabled_x);
+      uint outside_y = std::max(uint(0), GetPositionY() - disabled_y);
+      
+      disabled_x+= outside_x;
+      disabled_y+= outside_y;
+      Rectanglei srcRect(outside_x, outside_y, m_disabled_back.GetWidth() - outside_x,
+			 m_disabled_back.GetHeight() - outside_y);
+      video_window.Blit(m_disabled_back, srcRect, Point2i(disabled_x, disabled_y));
+    }
+  // center the image
+  uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth() - 20)/2 ;
+  uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
+  
+  video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
+  
+  txt_label->DrawCenterTop(GetPosition()
+			   + Point2i(GetSizeX()/2,
+				     GetSizeY() - txt_label->GetHeight()));
+  
+  if (!m_value)
+    {
+      uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_front.GetWidth() - 20)/2 ;
+      uint disabled_y = GetPositionY() + (GetSizeY() - m_disabled_front.GetHeight() - txt_label->GetHeight() - 5) /2;
+      video_window.Blit(m_disabled_front, Point2i(disabled_x, disabled_y));
     }
 }
 

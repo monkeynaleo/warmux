@@ -78,16 +78,13 @@ bool TextBox::SendKey(const SDL_keysym& key)
 
 void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  if (!hidden)
-    {
-      if (HasMouseFocus() || HasKeyboardFocus())
-        surf.BoxColor(*this, highlightOptionColorBox);
-
-      surf.RectangleColor(*this, defaultOptionColorRect);
-
-      Label::Draw(mousePosition, surf);
-      txt_label->DrawCursor(position, cursor_pos);
-    }
+  if (HasMouseFocus() || HasKeyboardFocus())
+    surf.BoxColor(*this, highlightOptionColorBox);
+  
+  surf.RectangleColor(*this, defaultOptionColorRect);
+  
+  Label::Draw(mousePosition, surf);
+  txt_label->DrawCursor(position, cursor_pos);
 }
 
 Widget* TextBox::ClickUp(const Point2i &, uint button)
