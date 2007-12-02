@@ -159,14 +159,6 @@ void WidgetList::SetKeyboardFocusOnPreviousWidget()
   keyboard_selection->SetKeyboardFocus(true);
 }
 
-void WidgetList::Redraw(const Rectanglei& rect, Surface& surf)
-{
-  // Redraw bottom layer
-  if (ct != NULL) {
-    ct->Redraw(rect, surf);
-  }
-}
-
 bool WidgetList::SendKey(SDL_keysym key)
 {
   if (last_clicked != NULL)

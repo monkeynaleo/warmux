@@ -59,7 +59,7 @@ public:
   ~MainMenu();
   menu_item Run ();
 
-  void Redraw(const Rectanglei& rect, Surface& surf);
+  void RedrawBackground(const Rectanglei& rect, Surface& surf);
 
 protected:
    bool signal_ok();

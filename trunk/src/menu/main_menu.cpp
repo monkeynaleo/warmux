@@ -200,7 +200,7 @@ void MainMenu::DrawBackground()
 
 }
 
-void MainMenu::Redraw(const Rectanglei& rect, Surface &window)
+void MainMenu::RedrawBackground(const Rectanglei& rect, Surface &window)
 {
-  Menu::Redraw(rect, window);
+  Menu::RedrawBackground(rect, window);
 }

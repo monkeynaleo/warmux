@@ -111,7 +111,7 @@ void TeamBox::Update(const Point2i &mousePosition,
   if (associated_team != NULL){
     WidgetList::Update(mousePosition, surf);
   } else {
-    Redraw(*this, surf);
+    RedrawBackground(*this, surf);
   }
 
   if (associated_team != NULL && previous_name != player_name->GetText()) {

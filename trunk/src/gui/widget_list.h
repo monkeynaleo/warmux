@@ -26,7 +26,7 @@
 #include "widget.h"
 #include "container.h"
 
-class WidgetList : public Widget, public Container
+class WidgetList : public Widget
 {
 private:
   /* If you need this, implement it (correctly)*/
@@ -50,8 +50,6 @@ public:
 
   void Update(const Point2i &mousePosition, Surface& surf);
   virtual void Draw(const Point2i&, Surface&) const { };
-  // redraw bottom layer container
-  virtual void Redraw(const Rectanglei& rect, Surface& surf);
   // set need_redrawing to true for all sub widgets;
   void ForceRedraw();
 

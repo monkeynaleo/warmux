@@ -57,10 +57,13 @@ void Widget::StdSetSizePosition(const Rectanglei &rect)
   size = rect.GetSize();
 }
 
-
-void Widget::DrawBorderAndBackground(const Rectanglei& rect,
-				     Surface& surf)
+// From Container: it redraws the border and the background
+void Widget::RedrawBackground(const Rectanglei& rect,
+			      Surface& surf)
 {
+  if (ct != NULL) 
+    ct->RedrawBackground(rect, surf);
+
   if (!visible)
     return;
 
@@ -80,13 +83,12 @@ void Widget::Update(const Point2i &mousePosition,
       (Contains(mousePosition) && mousePosition != lastMousePosition) ||
       (Contains(lastMousePosition) && !Contains(mousePosition))) {
 
-    if (ct != NULL) 
-      ct->Redraw(*this, surf);
+    // Redraw the border and the background
+    RedrawBackground(*this, surf);
 
     __Update(mousePosition, lastMousePosition, surf);
 
     if (visible) {
-      DrawBorderAndBackground(*this, surf);
       Draw(mousePosition, surf);
     }
   }

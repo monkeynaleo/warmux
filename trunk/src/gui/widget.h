@@ -24,14 +24,14 @@
 
 #include "include/base.h"
 #include "graphic/color.h"
+#include "gui/container.h"
 #include "tool/rectangle.h"
 #include "tool/point.h"
 
-class Container;
 class Surface;
 struct SDL_keysym;
 
-class Widget : public Rectanglei
+class Widget : public Rectanglei, public Container
 {
   bool has_mouse_focus;
   bool has_keyboard_focus;
@@ -53,8 +53,8 @@ class Widget : public Rectanglei
 			const Point2i &/* lastMousePosition */,
 			Surface& /* surf */) {};
 
-  void DrawBorderAndBackground(const Rectanglei& rect,
-			       Surface& surf);
+  void RedrawBackground(const Rectanglei& rect,
+			Surface& surf);
 
  public:
   Widget();
