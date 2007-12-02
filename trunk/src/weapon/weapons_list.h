@@ -37,9 +37,6 @@ public:
 
 private:
   static WeaponsList * weapons_list; /* list by itself */
-  /* reference counter on the list WARNING not thread safe */
-  int ref_counter;
-
   WeaponsList();
   weapons_list_type m_weapons_list;
 
@@ -51,6 +48,7 @@ private:
 
 public:
   void Init();
+  static void CleanUp();
   static WeaponsList * GetInstance();
 
   // Weapon refresh

@@ -126,7 +126,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
 
 WeaponProjectile::~WeaponProjectile()
 {
-  //  delete image; /*-> it causes a segfault :-/ */
+  delete image;
 }
 
 void WeaponProjectile::Shoot(double strength)
