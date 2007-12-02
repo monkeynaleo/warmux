@@ -185,6 +185,8 @@ void InfoMap::FreeData()
 {
   img_sky.Free();
   img_ground.Free();
+  preview.Free();
+  if (res_profile) delete res_profile;
   is_data_loaded = false;
 }
 
