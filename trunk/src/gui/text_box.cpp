@@ -64,7 +64,7 @@ bool TextBox::SendKey(const SDL_keysym& key)
 {
   bool used = true;
 
-  ForceRedraw();
+  NeedRedrawing();
 
   std::string new_txt = GetText();
 
@@ -91,7 +91,7 @@ Widget* TextBox::ClickUp(const Point2i &, uint button)
 {
   bool used = true;
 
-  ForceRedraw();
+  NeedRedrawing();
   if (button == SDL_BUTTON_MIDDLE)
   {
     std::string new_txt = GetText();

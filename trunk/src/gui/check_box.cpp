@@ -74,7 +74,7 @@ void CheckBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
 
 Widget* CheckBox::ClickUp(const Point2i &/*mousePosition*/, uint /*button*/)
 {
-  ForceRedraw();
+  NeedRedrawing();
   m_value = !m_value;
   return this;
 }

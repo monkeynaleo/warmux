@@ -383,7 +383,7 @@ void NetworkMenu::WaitingForServer()
 
   waiting_for_server = true;
   b_ok->SetVisible(false);
-  actions_buttons->ForceRedraw();
+  actions_buttons->NeedRedrawing();
 
   msg_box->NewMessage(_("Waiting for server, all you can do is cancel or chat!"), c_red);
 

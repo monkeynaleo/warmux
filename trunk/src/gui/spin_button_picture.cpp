@@ -114,7 +114,7 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& surf
 
 Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)
 {
-  ForceRedraw();
+  NeedRedrawing();
 
   if (!Contains(mousePosition)) {
     return NULL;

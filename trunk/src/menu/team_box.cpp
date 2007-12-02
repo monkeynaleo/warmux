@@ -84,14 +84,14 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
     nb_characters->SetValue(_team.GetNbCharacters());
   }
 
-  ForceRedraw();
+  NeedRedrawing();
 }
 
 void TeamBox::ClearTeam()
 {
   associated_team=NULL;
 
-  ForceRedraw();
+  NeedRedrawing();
 }
 
 Team* TeamBox::GetTeam() const

@@ -73,7 +73,7 @@ void MsgBox::NewMessage(const std::string &msg, const Color& color)
   // Remove old messages if needed
   Flush();
 
-  ForceRedraw();
+  NeedRedrawing();
 }
 
 void MsgBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
