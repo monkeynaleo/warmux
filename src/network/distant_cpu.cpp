@@ -89,18 +89,19 @@ DistantComputer::~DistantComputer()
   if (force_disconnect)
     std::cerr << GetAddress() << " have been kicked" << std::endl;
 
-  SDLNet_TCP_Close(sock);
-  SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
-
   if (Network::GetInstance()->IsConnected())
-  for (std::list<std::string>::iterator team = owned_teams.begin();
-      team != owned_teams.end();
-      ++team)
   {
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, *team));
+    for (std::list<std::string>::iterator team = owned_teams.begin();
+         team != owned_teams.end();
+         ++team)
+    {
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, *team));
+    }
   }
   owned_teams.clear();
 
+  SDLNet_TCP_Close(sock);
+  SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
   SDL_DestroyMutex(sock_lock);
 }
 
