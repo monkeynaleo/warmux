@@ -44,6 +44,9 @@ class Widget : public Rectanglei
   bool need_redrawing;
 
   void StdSetSizePosition(const Rectanglei &rect);
+  virtual void __Update(const Point2i &/* mousePosition */,
+			const Point2i &/* lastMousePosition */,
+			Surface& /* surf */) {};
 
  public:
   Widget();
@@ -51,8 +54,10 @@ class Widget : public Rectanglei
   virtual ~Widget() { };
 
   virtual void Update(const Point2i &mousePosition,
-                      const Point2i &lastMousePosition,
-                      Surface& surf); // virtual only for Box and ListBox
+		      const Point2i &lastMousePosition,
+		      Surface& surf); // Virtual for widget_list: to remove!
+
+
   virtual void Draw(const Point2i &mousePosition,
                     Surface& surf) const = 0;
   virtual void ForceRedraw() { need_redrawing = true; }; // set need_redrawing to true; -- virtual for widget_list

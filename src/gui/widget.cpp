@@ -60,6 +60,8 @@ void Widget::Update(const Point2i &mousePosition,
     if (ct != NULL) 
       ct->Redraw(*this, surf);
 
+    __Update(mousePosition, lastMousePosition, surf);
+
     if (visible)
       Draw(mousePosition, surf);
   }

@@ -210,7 +210,7 @@ Widget* WidgetList::Click(const Point2i &mousePosition, uint button)
 
 void WidgetList::ForceRedraw()
 {
-  ForceRedraw();
+  need_redrawing = true;
 
   for(std::list<Widget*>::iterator w=widget_list.begin();
       w != widget_list.end();
