@@ -54,7 +54,6 @@ class SpriteCache
 
 // TODO: Remove "public:" :-)
 public:
-  bool smooth;
   bool have_rotation_cache;
   unsigned int rotation_cache_size;
   bool have_flipping_cache;
