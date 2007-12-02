@@ -25,9 +25,13 @@
 
 Box::Box(const Rectanglei &rect, bool _visible) : WidgetList( rect )
 {
-  visible = _visible;
   margin = 5;
   border.SetValues(5, 5);
+
+  if (_visible) {
+    Widget::SetBorder(defaultOptionColorRect, 2);
+    Widget::SetBackgroundColor(defaultOptionColorBox);
+  }
 }
 
 Box::~Box()
@@ -40,10 +44,7 @@ void Box::Redraw(const Rectanglei& rect,
   // Redraw bottom layer container
   WidgetList::Redraw(rect, surf);
 
-  if ( visible ) {
-    // Redraw
-    surf.BoxColor(rect, defaultOptionColorBox);
-  }
+  Widget::DrawBorderAndBackground(rect, surf);
 }
 
 void Box::Update(const Point2i &mousePosition,
@@ -51,22 +52,12 @@ void Box::Update(const Point2i &mousePosition,
 		   Surface& surf)
 {
   if (need_redrawing) {
+    Widget::DrawBorderAndBackground(*this, surf);
     Draw(mousePosition, surf);
   }
 
   WidgetList::Update(mousePosition, surf);
   need_redrawing = false;
-}
-
-void Box::Draw(const Point2i &/*mousePosition*/,
-               Surface& surf) const
-{
-  Rectanglei rect(position, size);
-
-  if( visible ){
-    surf.BoxColor(rect, defaultOptionColorBox);
-    surf.RectangleColor(rect, defaultOptionColorRect,2);
-  }
 }
 
 // --------------------------------------------------

@@ -23,6 +23,7 @@
 #define GUI_WIDGET_H
 
 #include "include/base.h"
+#include "graphic/color.h"
 #include "tool/rectangle.h"
 #include "tool/point.h"
 
@@ -36,6 +37,10 @@ class Widget : public Rectanglei
   bool has_keyboard_focus;
   bool visible;
 
+  Color border_color;
+  uint border_size;
+  Color background_color;
+
   Widget(const Widget&);
   const Widget& operator=(const Widget&);
 
@@ -47,6 +52,9 @@ class Widget : public Rectanglei
   virtual void __Update(const Point2i &/* mousePosition */,
 			const Point2i &/* lastMousePosition */,
 			Surface& /* surf */) {};
+
+  void DrawBorderAndBackground(const Rectanglei& rect,
+			       Surface& surf);
 
  public:
   Widget();
@@ -76,6 +84,10 @@ class Widget : public Rectanglei
   // manage keyboard focus
   bool HasKeyboardFocus() const { return has_keyboard_focus; };
   void SetKeyboardFocus(bool focus);
+
+  // border, background color
+  void SetBorder(const Color &border_color, uint boder_size);
+  void SetBackgroundColor(const Color &background_color);
 
   void SetContainer(Container * _ct) { ct = _ct; };
 
