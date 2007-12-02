@@ -114,6 +114,12 @@ Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
   delta_len = 0 ;
 }
 
+Grapple::~Grapple()
+{
+  if (m_hook_sprite) delete m_hook_sprite;
+  if (m_node_sprite) delete m_node_sprite;
+}
+
 bool Grapple::p_Shoot()
 {
   last_broken_node_angle = 100;

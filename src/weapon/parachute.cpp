@@ -56,14 +56,20 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
   m_x_extern = 0.0;
   use_unit_on_first_shoot = false;
 
-  image = resource_manager.LoadSprite(weapons_res_profile, "parachute_sprite");
+  img = resource_manager.LoadSprite(weapons_res_profile, "parachute_sprite");
+}
+
+Parachute::~Parachute()
+{
+  if (img)
+    delete img;
 }
 
 void Parachute::p_Select()
 {
   open = false;
   closing = false;
-  image->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
+  img->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
 }
 
 void Parachute::p_Deselect()
@@ -86,8 +92,8 @@ bool Parachute::p_Shoot()
 void Parachute::Draw()
 {
   if(open) {
-    image->Update();
-    image->Draw(ActiveCharacter().GetHandPosition() - Point2i(image->GetWidth()/2,image->GetHeight()));
+    img->Update();
+    img->Draw(ActiveCharacter().GetHandPosition() - Point2i(img->GetWidth()/2,img->GetHeight()));
   }
 }
 
@@ -105,8 +111,8 @@ void Parachute::Refresh()
         ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
         ActiveCharacter().SetWindFactor(cfg().wind_factor);
         open = true;
-        image->animation.SetPlayBackward(false);
-        image->Start();
+        img->animation.SetPlayBackward(false);
+        img->Start();
         ActiveCharacter().SetSpeedXY(Point2d(0,0));
         ActiveCharacter().SetMovement("parachute");
         Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
@@ -116,13 +122,13 @@ void Parachute::Refresh()
     ActiveCharacter().SetMovement("walk");
     if(open) { // The parachute is opened
       if (!closing) { // We have just hit the ground. Start closing animation
-        image->animation.SetPlayBackward(true);
-        image->animation.SetShowOnFinish(SpriteAnimation::show_blank);
-        image->Start();
+        img->animation.SetPlayBackward(true);
+        img->animation.SetShowOnFinish(SpriteAnimation::show_blank);
+        img->Start();
         closing = true;
         return;
       } else { // The parachute is closing
-        if(image->IsFinished()) {
+        if(img->IsFinished()) {
           // The animation is finished... We are done with the parachute
           open = false;
           closing = false;
@@ -147,7 +153,7 @@ std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count
 void Parachute::HandleKeyPressed_Shoot(bool shift)
 {
   if(open) {
-    image->Finish();
+    img->Finish();
     open = false;
     closing = false;
     UseAmmoUnit();

@@ -83,6 +83,7 @@ class Grapple : public Weapon
     double delta_len ;
 
     Grapple();
+    ~Grapple();
     void Draw();
     virtual void NotifyMove(bool collision);
 

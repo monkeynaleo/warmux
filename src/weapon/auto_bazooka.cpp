@@ -215,6 +215,12 @@ AutomaticBazooka::AutomaticBazooka() :
   ReloadLauncher();
 }
 
+AutomaticBazooka::~AutomaticBazooka()
+{
+  if (m_target)
+    delete m_target;
+}
+
 WeaponProjectile * AutomaticBazooka::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>

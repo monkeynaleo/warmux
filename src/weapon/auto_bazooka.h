@@ -33,6 +33,7 @@ class AutomaticBazooka : public WeaponLauncher
   target_t       *m_target;
   public:
     AutomaticBazooka();
+    ~AutomaticBazooka();
     void Draw ();
     bool IsReady() const;
     virtual void ChooseTarget(Point2i mouse_pos);

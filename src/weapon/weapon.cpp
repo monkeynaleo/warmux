@@ -152,6 +152,8 @@ Weapon::Weapon(Weapon_type type,
 
 Weapon::~Weapon()
 {
+  if (m_image) delete m_image;
+  if (m_weapon_fire) delete m_weapon_fire;
   if(extra_params) delete extra_params;
   if(icon) delete icon;
 }
