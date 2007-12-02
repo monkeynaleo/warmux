@@ -54,7 +54,7 @@ private:
 
 public:
   friend TeamsList &GetTeamsList(void);
-  friend void TeamsListCleanup(void);
+  static void CleanUp() { if (singleton) delete singleton; };
   void NextTeam();
   Team* GetNextTeam();
   Team& ActiveTeam();
@@ -97,8 +97,6 @@ Character& ActiveCharacter();
 bool compareTeams(const Team *a, const Team *b);
 
 inline TeamsList &GetTeamsList(void) { return *TeamsList::GetInstance(); };
-
-inline void TeamsListCleanup(void) { if (TeamsList::singleton) delete TeamsList::singleton; };
 
 //-----------------------------------------------------------------------------
 #endif

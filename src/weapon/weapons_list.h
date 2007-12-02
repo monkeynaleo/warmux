@@ -47,10 +47,9 @@ private:
 
   /* if you need to use this, implement it */
   WeaponsList(const WeaponsList &a_list);
-
+  ~WeaponsList();
 
 public:
-  ~WeaponsList();
   void Init();
   static WeaponsList * GetInstance();
 

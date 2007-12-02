@@ -89,8 +89,6 @@ AppWormux::AppWormux():
 AppWormux::~AppWormux()
 {
   delete video;
-  TeamsListCleanup();
-  MapsListCleanup();
   Font::ReleaseInstances();
   delete Mouse::GetInstance();
   delete Camera::GetInstance();
@@ -235,6 +233,8 @@ void AppWormux::End() const
   Config::GetInstance()->Save();
 
   jukebox.End();
+  TeamsList::CleanUp();
+  MapsList::CleanUp();
   delete Config::GetInstance();
   delete Time::GetInstance();
   delete Constants::GetInstance();
