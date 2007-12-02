@@ -237,6 +237,7 @@ void AppWormux::End() const
   delete Config::GetInstance();
   delete Time::GetInstance();
   delete Constants::GetInstance();
+  delete Downloader::GetInstance(); // not needed if index server not used
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
