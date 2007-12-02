@@ -158,7 +158,7 @@ void Menu::DrawBackground()
   background->Blit(AppWormux::GetInstance()->video->window, 0, 0);
 }
 
-void Menu::Redraw(const Rectanglei& rect, Surface& surf)
+void Menu::RedrawBackground(const Rectanglei& rect, Surface& surf)
 {
   background->Blit(surf, rect, rect.GetPosition());
 }

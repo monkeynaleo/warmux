@@ -38,21 +38,12 @@ Box::~Box()
 {
 }
 
-void Box::Redraw(const Rectanglei& rect,
-                 Surface& surf)
-{
-  // Redraw bottom layer container
-  WidgetList::Redraw(rect, surf);
-
-  Widget::DrawBorderAndBackground(rect, surf);
-}
-
 void Box::Update(const Point2i &mousePosition,
 		   const Point2i &/*lastMousePosition*/,
 		   Surface& surf)
 {
   if (need_redrawing) {
-    Widget::DrawBorderAndBackground(*this, surf);
+    Widget::RedrawBackground(*this, surf);
     Draw(mousePosition, surf);
   }
 
