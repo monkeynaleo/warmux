@@ -127,13 +127,16 @@ private:
   int active_map_index;
   bool m_init;
   bool random_map;
-  static MapsList * singleton;
 
   void LoadOneMap (const std::string &dir, const std::string &file);
   MapsList();
 
-public:
+protected:
   ~MapsList();
+  static MapsList * singleton;
+
+public:
+  friend void MapsListCleanup(void);
   static MapsList * GetInstance();
 
   // Return -1 if fails
@@ -148,5 +151,7 @@ public:
 };
 
 InfoMap* ActiveMap();
+
+inline void MapsListCleanup(void) { if (MapsList::singleton) delete MapsList::singleton; };
 
 #endif

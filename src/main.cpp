@@ -90,6 +90,7 @@ AppWormux::~AppWormux()
 {
   delete video;
   TeamsListCleanup();
+  MapsListCleanup();
   Font::ReleaseInstances();
   delete Mouse::GetInstance();
   delete Camera::GetInstance();
