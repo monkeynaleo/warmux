@@ -145,7 +145,7 @@ void Action_Network_Check_Phase1 (Action */*a*/)
     return;
 
   Action b(Action::ACTION_NETWORK_CHECK_PHASE2);
-  b.Push(ActiveMap().GetRawName());
+  b.Push(ActiveMap()->GetRawName());
 
   TeamsList::iterator it = GetTeamsList().playing_list.begin();
   for (; it != GetTeamsList().playing_list.end() ; ++it) {
@@ -175,8 +175,8 @@ void Action_Network_Check_Phase2 (Action *a)
 
   // Check the map
   std::string map = a->PopString();
-  if (map != ActiveMap().GetRawName()) {
-    std::cerr << map << " != " << ActiveMap().GetRawName() << std::endl;
+  if (map != ActiveMap()->GetRawName()) {
+    std::cerr << map << " != " << ActiveMap()->GetRawName() << std::endl;
     Error_in_Network_Check_Phase2(a);
     return;
   }

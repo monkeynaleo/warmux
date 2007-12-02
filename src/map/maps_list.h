@@ -85,6 +85,7 @@ private:
 
 public:
   InfoMap(const std::string&, const std::string&);
+  ~InfoMap();
   void FreeData();
 
   const std::string& GetRawName() const { return m_map_name; };
@@ -119,8 +120,8 @@ public:
 class MapsList
 {
 public:
-  std::vector<InfoMap> lst;
-  typedef std::vector<InfoMap>::iterator iterator;
+  std::vector<InfoMap*> lst;
+  typedef std::vector<InfoMap*>::iterator iterator;
 
 private:
   int active_map_index;
@@ -132,6 +133,7 @@ private:
   MapsList();
 
 public:
+  ~MapsList();
   static MapsList * GetInstance();
 
   // Return -1 if fails
@@ -140,13 +142,11 @@ public:
   void SelectRandomMapByName(const std::string &nom);
   void SelectMapByIndex (uint index);
   int GetActiveMapIndex () const;
-  InfoMap& ActiveMap();
+  InfoMap* ActiveMap();
 
   void FillActionMenuSetMap(Action& a) const;
 };
 
-InfoMap& ActiveMap();
-
-bool compareMaps(const InfoMap& a, const InfoMap& b);
+InfoMap* ActiveMap();
 
 #endif

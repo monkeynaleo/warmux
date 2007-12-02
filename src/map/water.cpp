@@ -85,7 +85,7 @@ void Water::Init(){
 }
 
 void Water::Reset(){
-  actif = ActiveMap().UseWater();
+  actif = ActiveMap()->UseWater();
   if(!actif) return;
   Init();
   hauteur_eau = WATER_INITIAL_HEIGHT;

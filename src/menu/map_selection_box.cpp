@@ -129,7 +129,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 
   // If network game skip random generated maps 
   if (Network::GetInstance()->IsServer() && i != MapsList::GetInstance()->lst.size()) {
-    for (; MapsList::GetInstance()->lst[i].IsRandomGenerated(); i = (i + 1) % MapsList::GetInstance()->lst.size());
+    for (; MapsList::GetInstance()->lst[i]->IsRandomGenerated(); i = (i + 1) % MapsList::GetInstance()->lst.size());
   }
   ChangeMap(i);
 }
@@ -154,7 +154,7 @@ void MapSelectionBox::ChangeMap(uint index)
   // Callback other network players
   if (Network::GetInstance()->IsServer()) {
     if (index != MapsList::GetInstance()->lst.size()
-	&& MapsList::GetInstance()->lst[index].IsRandomGenerated()) // Cant select random generated maps in network mode
+	&& MapsList::GetInstance()->lst[index]->IsRandomGenerated()) // Cant select random generated maps in network mode
       return;
     selected_map_index = index;
     // We need to do it here to send the right map to still not connected clients
@@ -196,34 +196,35 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
     return;
   }
 
-  InfoMap& info = MapsList::GetInstance()->lst[index];
+  InfoMap* info = MapsList::GetInstance()->lst[index];
   try {
-    widget->SetSurface(info.ReadPreview(), true);
+    widget->SetSurface(info->ReadPreview(), true);
   }
   catch (const char* msg) {
     Question question;
     std::string err = Format("Map %s in folder '%s' is invalid: %s",
-                             info.GetRawName().c_str(), info.GetDirectory().c_str(), msg);
+                             info->GetRawName().c_str(), info->GetDirectory().c_str(), msg);
     std::cerr << err << std::endl;
     question.Set(err, 1, 0);
     question.Ask();
 
     // Crude
-    std::vector<InfoMap>::iterator it = MapsList::GetInstance()->lst.begin();
+    MapsList::iterator it = MapsList::GetInstance()->lst.begin();
     while (index--)
       it++;
+    //delete *it;
     MapsList::GetInstance()->lst.erase(it);
     return;
   }
 
-  if((display_only && !selected) || (MapsList::GetInstance()->lst[index].IsRandomGenerated() && Network::GetInstance()->IsServer()))
+  if((display_only && !selected) || (MapsList::GetInstance()->lst[index]->IsRandomGenerated() && Network::GetInstance()->IsServer()))
     widget->Disable();
   else
     widget->Enable();
   // If selected update general information
   if(selected) {
-    map_name_label->SetText(MapsList::GetInstance()->lst[index].ReadFullMapName());
-    map_author_label->SetText(MapsList::GetInstance()->lst[index].ReadAuthorInfo());
+    map_name_label->SetText(MapsList::GetInstance()->lst[index]->ReadFullMapName());
+    map_author_label->SetText(MapsList::GetInstance()->lst[index]->ReadAuthorInfo());
   }
 }
 
@@ -286,7 +287,7 @@ void MapSelectionBox::ValidMapSelection()
 	MapsList::GetInstance()->SelectMapByName(map_name);
       }
   } else {
-    map_name = MapsList::GetInstance()->lst[selected_map_index].GetRawName();
+    map_name = MapsList::GetInstance()->lst[selected_map_index]->GetRawName();
     MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
   }
 

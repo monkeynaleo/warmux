@@ -91,7 +91,7 @@ void Game::Start()
 
   try
   {
-    jukebox.PlayMusic(ActiveMap().ReadMusicPlaylist());
+    jukebox.PlayMusic(ActiveMap()->ReadMusicPlaylist());
 
     isGameLaunched = true;
 
