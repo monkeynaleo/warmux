@@ -34,6 +34,7 @@ class Widget : public Rectanglei
 {
   bool has_mouse_focus;
   bool has_keyboard_focus;
+  
 
   Widget(const Widget&);
   const Widget& operator=(const Widget&);
@@ -41,6 +42,7 @@ class Widget : public Rectanglei
  protected:
   Container * ct;
   bool need_redrawing;
+
   void StdSetSizePosition(const Rectanglei &rect);
 
  public:
@@ -56,16 +58,8 @@ class Widget : public Rectanglei
   virtual void ForceRedraw() { need_redrawing = true; }; // set need_redrawing to true; -- virtual for widget_list
 
   virtual bool SendKey(const SDL_keysym&) { return false; };
-  virtual Widget* Click(const Point2i &, uint)
-  {
-    need_redrawing = true;
-    return this;
-  };
-  virtual Widget* ClickUp(const Point2i &, uint)
-  {
-    need_redrawing = true;
-    return this;
-  };
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   // manage mouse focus
   bool HasMouseFocus() const { return has_mouse_focus; };

@@ -134,7 +134,7 @@ void ComboBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 
 Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
 {
-  need_redrawing = true;
+  ForceRedraw();
 
   if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {
 

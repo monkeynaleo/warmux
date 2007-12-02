@@ -73,6 +73,6 @@ void Button::SetVisible(bool visible)
 {
   if (hidden == visible) {
     hidden = !visible;
-    need_redrawing = true;
+    ForceRedraw();
   }
 }

@@ -79,7 +79,7 @@ void CheckBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
 
 Widget* CheckBox::ClickUp(const Point2i &/*mousePosition*/, uint /*button*/)
 {
-  need_redrawing = true;
+  ForceRedraw();
   m_value = !m_value;
   return this;
 }
@@ -88,6 +88,6 @@ void CheckBox::SetVisible(bool visible)
 {
   if (hidden == visible) {
     hidden = !visible;
-    need_redrawing = true;
+    ForceRedraw();
   }
 }
