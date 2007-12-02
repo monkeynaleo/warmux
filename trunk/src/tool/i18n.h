@@ -27,9 +27,14 @@
 #include <string>
 #include <libintl.h>
 
+#ifdef USE_FRIBIDI
+#define _(X) localization(X)
+char * localization(char * buffer);
+#else
 #define _(X) gettext(X)
+#endif /* USE_FRIBIDI */
 
 std::string Format (const char *format, ...);
 void InitI18N(const std::string &dir, const std::string &default_language);
 
-#endif
+#endif /* FORMAT_H */
