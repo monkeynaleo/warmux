@@ -39,7 +39,7 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   uint y = app->video->window.GetHeight() - 50;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  background = new Sprite( resource_manager.LoadImage( res, bg));
+  background = new Sprite( resource_manager.LoadImage( res, bg), true);
   background->cache.EnableLastFrameCache();
 
   b_ok = NULL;
