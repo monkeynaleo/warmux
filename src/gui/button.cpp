@@ -25,7 +25,6 @@
 
 Button::Button (const Profile *res_profile,
                 const std::string& resource_id, bool _img_scale):
-  hidden(false),
   img_scale(_img_scale),
   image(resource_manager.LoadSprite(res_profile,resource_id))
 {
@@ -40,25 +39,22 @@ Button::~Button()
 
 void Button::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  if (!hidden)
-    {
-      uint frame = (HasKeyboardFocus() || Contains(mousePosition) ? 1 : 0);
-
-      image->SetCurrentFrame(frame);
-
-      if (img_scale) {
-        // image scalling : easy to place image
-        image->Blit(surf, position);
-      } else {
-        // centering image
-        Point2i pos = position;
-
-        pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
-        pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
-
-        image->Blit(surf, pos);
-      }
-    }
+  uint frame = (HasKeyboardFocus() || Contains(mousePosition) ? 1 : 0);
+  
+  image->SetCurrentFrame(frame);
+  
+  if (img_scale) {
+    // image scalling : easy to place image
+    image->Blit(surf, position);
+  } else {
+    // centering image
+    Point2i pos = position;
+    
+    pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
+    pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
+    
+    image->Blit(surf, pos);
+  }
 }
 
 void Button::SetSizePosition(const Rectanglei &rect)
@@ -69,10 +65,3 @@ void Button::SetSizePosition(const Rectanglei &rect)
     image->ScaleSize(size);
 }
 
-void Button::SetVisible(bool visible)
-{
-  if (hidden == visible) {
-    hidden = !visible;
-    ForceRedraw();
-  }
-}

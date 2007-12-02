@@ -41,7 +41,6 @@ class CheckBox : public Widget
   Text *txt_label;
   bool m_value;
   Sprite *m_checked_image;
-  bool hidden;
 
  public:
   CheckBox(const std::string &label, int width, bool value = true);
@@ -55,8 +54,6 @@ class CheckBox : public Widget
 
   bool GetValue() const { return m_value; };
   void SetValue(bool value) { m_value = value; };
-
-  void SetVisible(bool visible);
 };
 
 #endif

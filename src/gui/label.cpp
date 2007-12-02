@@ -29,7 +29,6 @@ Label::Label (const std::string &label,
               const Color& color,
               bool _center,
               bool _shadowed):
-  hidden(false),
   font_size(fsize),
   font_style(fstyle),
   font_color(color),
@@ -51,13 +50,10 @@ Label::~Label()
 
 void Label::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
-  if (!hidden)
-    {
-      if (!center)
-        txt_label->DrawTopLeft(position);
-      else
-        txt_label->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
-    }
+  if (!center)
+    txt_label->DrawTopLeft(position);
+  else
+    txt_label->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
 }
 
 void Label::SetSizePosition(const Rectanglei &rect)
@@ -78,12 +74,4 @@ void Label::SetText(const std::string &new_txt)
 const std::string& Label::GetText() const
 {
   return txt_label->GetText();
-}
-
-void Label::SetVisible(bool visible)
-{
-  if (hidden == visible) {
-    hidden = !visible;
-    ForceRedraw();
-  }
 }

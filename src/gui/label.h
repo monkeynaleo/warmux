@@ -37,7 +37,6 @@ class Label : public Widget{
 
  protected:
   Text *txt_label;
-  bool hidden;
   Font::font_size_t font_size;
   Font::font_style_t font_style;
 
@@ -60,8 +59,6 @@ class Label : public Widget{
   void SetSizePosition(const Rectanglei &rect);
   void SetText(const std::string &new_txt);
   const std::string& GetText() const;
-
-  void SetVisible(bool visible);
 };
 
 #endif

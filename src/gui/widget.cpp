@@ -27,6 +27,7 @@ Widget::Widget():
   Rectanglei(),
   has_mouse_focus(false),
   has_keyboard_focus(false),
+  visible(true),
   ct(NULL),
   need_redrawing(true)
 {
@@ -36,6 +37,7 @@ Widget::Widget(const Rectanglei &rect):
   Rectanglei(rect),
   has_mouse_focus(false),
   has_keyboard_focus(false),
+  visible(true),
   ct(NULL),
   need_redrawing(true)
 {
@@ -54,9 +56,12 @@ void Widget::Update(const Point2i &mousePosition,
   if (need_redrawing ||
       (Contains(mousePosition) && mousePosition != lastMousePosition) ||
       (Contains(lastMousePosition) && !Contains(mousePosition))) {
-    if (ct != NULL) ct->Redraw(*this, surf);
 
-    Draw(mousePosition, surf);
+    if (ct != NULL) 
+      ct->Redraw(*this, surf);
+
+    if (visible)
+      Draw(mousePosition, surf);
   }
   need_redrawing = false;
 }
@@ -91,3 +96,10 @@ Widget* Widget::ClickUp(const Point2i &mousePosition, uint /* button */)
   return NULL;
 }
 
+void Widget::SetVisible(bool _visible)
+{
+  if (visible != _visible) {
+    visible = _visible;
+    ForceRedraw();
+  }
+}
