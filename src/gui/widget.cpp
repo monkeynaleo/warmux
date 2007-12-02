@@ -19,8 +19,10 @@
  * Widget
  *****************************************************************************/
 
-
 #include "gui/widget.h"
+
+#include "graphic/colors.h"
+#include "graphic/surface.h"
 #include "gui/container.h"
 
 Widget::Widget():
@@ -28,6 +30,9 @@ Widget::Widget():
   has_mouse_focus(false),
   has_keyboard_focus(false),
   visible(true),
+  border_color(white_color),
+  border_size(0),
+  background_color(transparent_color),
   ct(NULL),
   need_redrawing(true)
 {
@@ -37,7 +42,10 @@ Widget::Widget(const Rectanglei &rect):
   Rectanglei(rect),
   has_mouse_focus(false),
   has_keyboard_focus(false),
-  visible(true),
+  visible(true),  
+  border_color(white_color),
+  border_size(0),
+  background_color(transparent_color),
   ct(NULL),
   need_redrawing(true)
 {
@@ -47,6 +55,21 @@ void Widget::StdSetSizePosition(const Rectanglei &rect)
 {
   position = rect.GetPosition();
   size = rect.GetSize();
+}
+
+
+void Widget::DrawBorderAndBackground(const Rectanglei& rect,
+				     Surface& surf)
+{
+  if (!visible)
+    return;
+
+  if (background_color != transparent_color)
+    surf.BoxColor(rect, background_color);
+  
+  if (border_size != 0 && border_color != transparent_color
+      && rect == *this)
+    surf.RectangleColor(*this, border_color, border_size);
 }
 
 void Widget::Update(const Point2i &mousePosition,
@@ -62,8 +85,10 @@ void Widget::Update(const Point2i &mousePosition,
 
     __Update(mousePosition, lastMousePosition, surf);
 
-    if (visible)
+    if (visible) {
+      DrawBorderAndBackground(*this, surf);
       Draw(mousePosition, surf);
+    }
   }
   need_redrawing = false;
 }
@@ -102,6 +127,24 @@ void Widget::SetVisible(bool _visible)
 {
   if (visible != _visible) {
     visible = _visible;
+    ForceRedraw();
+  }
+}
+
+void Widget::SetBorder(const Color &_border_color, uint _border_size)
+{
+  if (border_color != _border_color ||
+      border_size != _border_size) {
+    border_color = _border_color;
+    border_size = _border_size;
+    ForceRedraw();
+  }
+}
+
+void Widget::SetBackgroundColor(const Color &bg_color)
+{
+  if (background_color != bg_color) {
+    background_color = bg_color;
     ForceRedraw();
   }
 }
