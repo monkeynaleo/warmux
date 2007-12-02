@@ -73,6 +73,8 @@ protected:
   Color selected_item_color;
   Color default_item_color;
 
+  uint margin; // for ListBoxWithLabel
+
 public:
   void SetBorderColor(const Color & border) { border_color = border; };
   void SetBackgroundColor(const Color & background) { background_color = background; };
