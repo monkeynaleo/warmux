@@ -69,7 +69,7 @@ void Label::SetSizePosition(const Rectanglei &rect)
 
 void Label::SetText(const std::string &new_txt)
 {
-  need_redrawing = true;
+  ForceRedraw();
   delete txt_label;
   txt_label = new Text(new_txt, font_color, font_size, font_style, shadowed, new_txt.empty());
   txt_label->SetMaxWidth(GetSizeX());
@@ -84,6 +84,6 @@ void Label::SetVisible(bool visible)
 {
   if (hidden == visible) {
     hidden = !visible;
-    need_redrawing = true;
+    ForceRedraw();
   }
 }

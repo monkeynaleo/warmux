@@ -51,7 +51,7 @@ PictureWidget::~PictureWidget()
 
 void PictureWidget::SetSurface(const Surface& s, bool enable_scaling)
 {
-  need_redrawing = true;
+  ForceRedraw();
 
   if (spr != NULL)
     delete spr;
@@ -67,7 +67,7 @@ void PictureWidget::SetSurface(const Surface& s, bool enable_scaling)
 
 void PictureWidget::SetNoSurface()
 {
-  need_redrawing = true;
+  ForceRedraw();
 
   if (spr != NULL)
     delete spr;

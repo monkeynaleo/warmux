@@ -72,3 +72,22 @@ void Widget::SetKeyboardFocus(bool focus)
   has_keyboard_focus = focus;
   ForceRedraw();
 }
+
+Widget* Widget::Click(const Point2i &mousePosition, uint /* button */)
+{
+  if (Contains(mousePosition)) {
+    ForceRedraw();
+    return this;
+  }
+  return NULL;
+}
+
+Widget* Widget::ClickUp(const Point2i &mousePosition, uint /* button */)
+{
+  if (Contains(mousePosition)) {
+    ForceRedraw();
+    return this;
+  }
+  return NULL;
+}
+
