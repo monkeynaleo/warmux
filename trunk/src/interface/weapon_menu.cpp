@@ -185,7 +185,7 @@ WeaponsMenu::~WeaponsMenu()
 // Add a new weapon to the weapon menu.
 void WeaponsMenu::AddWeapon(Weapon* new_item)
 {
-  if(!new_item->CanBeUsedOnClosedMap() && !ActiveMap().IsOpened())
+  if(!new_item->CanBeUsedOnClosedMap() && !ActiveMap()->IsOpened())
     return;
 
   Point2d position;

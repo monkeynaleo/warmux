@@ -130,7 +130,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
       } while(it != end
               && ((*it)->Category() != sort
                   || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
-                  || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap().IsOpened()))
+                  || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap()->IsOpened()))
               );
 
       /* Ok, a weapon was found let's return it */
@@ -155,7 +155,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
   while(it != end
       && ((*it)->Category() != sort
         || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
-        || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap().IsOpened())))
+        || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap()->IsOpened())))
     ++it;
 
   /* Ok, a weapon was found let's return it if it is not the one active */

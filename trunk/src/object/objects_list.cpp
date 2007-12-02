@@ -42,7 +42,7 @@ ObjectsList lst_objects;
 void ObjectsList::PlaceMines()
 {
   MSG_DEBUG("lst_objects","Placing mines");
-  for (uint i=0; i<ActiveMap().GetNbMine(); ++i)
+  for (uint i=0; i<ActiveMap()->GetNbMine(); ++i)
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
@@ -57,7 +57,7 @@ void ObjectsList::PlaceMines()
 void ObjectsList::PlaceBarrels()
 {
   MSG_DEBUG("lst_objects","Placing barrels");
-  for (uint i= 0; i<ActiveMap().GetNbBarrel(); ++i)
+  for (uint i= 0; i<ActiveMap()->GetNbBarrel(); ++i)
   {
     PetrolBarrel *obj = new PetrolBarrel();
 

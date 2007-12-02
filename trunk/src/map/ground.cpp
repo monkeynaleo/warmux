@@ -44,9 +44,9 @@ void Ground::Init(){
   std::cout.flush();
 
   // Load ground data
-  Surface m_image = ActiveMap().ReadImgGround();
-  if(ActiveMap().IsOpened()) {
-    LoadImage(m_image, ActiveMap().GetUpperLeftPad(), ActiveMap().GetLowerRightPad());
+  Surface m_image = ActiveMap()->ReadImgGround();
+  if(ActiveMap()->IsOpened()) {
+    LoadImage(m_image, ActiveMap()->GetUpperLeftPad(), ActiveMap()->GetLowerRightPad());
   } else {
     LoadImage(m_image, Point2i(), Point2i());
   }
@@ -55,7 +55,7 @@ void Ground::Init(){
   ASSERT(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
 
   // Check if the map is "opened"
-  open = ActiveMap().IsOpened();
+  open = ActiveMap()->IsOpened();
 
   std::cout << _("done") << std::endl;
 }
