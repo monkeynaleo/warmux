@@ -75,6 +75,10 @@ protected:
 
   uint margin; // for ListBoxWithLabel
 
+  virtual void __Update(const Point2i &mousePosition,
+			const Point2i &lastMousePosition,
+			Surface& surf);
+
 public:
   void SetBorderColor(const Color & border) { border_color = border; };
   void SetBackgroundColor(const Color & background) { background_color = background; };
@@ -85,9 +89,6 @@ public:
   ~ListBox();
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
-  void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition,
-              Surface& surf);
 
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);

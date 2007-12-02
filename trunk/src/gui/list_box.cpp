@@ -142,33 +142,20 @@ Widget* ListBox::Click(const Point2i &mousePosition, uint button)
   return this;
 }
 
-void ListBox::Update(const Point2i &mousePosition,
-                     const Point2i &lastMousePosition,
-                     Surface& surf)
+void ListBox::__Update(const Point2i &mousePosition,
+		       const Point2i &/*lastMousePosition*/,
+		       Surface& /*surf*/)
 {
   if (!Contains(mousePosition)) {
     scrolling = false;
   }
-
-  if (
-      need_redrawing
-      || (Contains(mousePosition) && mousePosition != lastMousePosition)
-      || (Contains(lastMousePosition) && !Contains(mousePosition))
-      )
+  // update position of items because of scrolling with scroll bar
+  if (scrolling &&
+      uint(mousePosition.y) < GetPositionY() + GetSizeY() - 12 -margin&&
+      mousePosition.y > GetPositionY() + 12)
     {
-      if (ct != NULL) ct->Redraw(*this, surf);
-
-      // update position of items because of scrolling with scroll bar
-      if (scrolling &&
-          uint(mousePosition.y) < GetPositionY() + GetSizeY() - 12 -margin&&
-          mousePosition.y > GetPositionY() + 12)
-        {
-          first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20-margin);
-        }
-
-      Draw(mousePosition, surf);
+      first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20-margin);
     }
-  need_redrawing = false;
 }
 
 void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
