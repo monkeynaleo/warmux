@@ -67,6 +67,7 @@ Sprite::Sprite(const Sprite &other) :
   current_frame = other.current_frame;
   rot_hotspot = other.rot_hotspot;
   show = other.show;
+  smooth = other.smooth;
 
   for(unsigned int f=0;f<other.frames.size();f++)
     AddFrame(other.frames[f].surface,other.frames[f].delay);
@@ -434,7 +435,7 @@ void Sprite::RefreshSurface()
     }
   //cache.have_flipping_cache==true && cache.have_rotation_cache==true
   else if ((scale_x != 1.0 && scale_x != -1.0)  || scale_y != 1.0)
-    current_surface = frames[current_frame].surface.RotoZoom( rotation_rad, scale_x, scale_y);
+    current_surface = frames[current_frame].surface.RotoZoom( rotation_rad, scale_x, scale_y, smooth);
   else if (scale_x == 1.0) //Scale_y == 1.0
     current_surface = cache.frames[current_frame].GetSurfaceForAngle(rotation_rad);
   else
