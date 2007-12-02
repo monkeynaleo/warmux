@@ -230,8 +230,8 @@ void SnipeRifle::Draw()
 std::string SnipeRifle::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
-            "%s team has won %u snipe rifle! Shout it him between the eyes!",
-            "%s team has won %u snipe rifles! Shout it him between the eyes!",
+            "%s team has won %u snipe rifle! Shoot it him between the eyes!",
+            "%s team has won %u snipe rifles! Shoot it him between the eyes!",
             items_count), TeamName, items_count);
 }
 
