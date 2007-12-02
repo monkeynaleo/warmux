@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-08-24 08:31+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2;plural=n != 1;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:321
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Kartan %s hittades inte :-("
@@ -40,12 +41,12 @@ msgstr[1] "%i spelare redo"
 msgid "%s (%s) has died."
 msgstr "%s (%s) har dött."
 
-#: src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:120
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> även känd som %s från %s"
 
-#: src/map/maps_list.cpp:129
+#: src/map/maps_list.cpp:127
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> från %s"
@@ -222,7 +223,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s-laget har vunnit %u dynamitgubbe!"
 msgstr[1] "%s-laget har vunnit %u dynamitgubbar!"
 
-#: src/weapon/flamethrower.cpp:160
+#: src/weapon/flamethrower.cpp:176
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -327,7 +328,7 @@ msgid_plural "%s team has won %u syringes!"
 msgstr[0] "%s-laget har vunnit %u spruta!"
 msgstr[1] "%s-laget har vunnit %u sprutor!"
 
-#: src/weapon/teleportation.cpp:109
+#: src/weapon/teleportation.cpp:112
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -399,7 +400,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Städ"
 
-#: src/main.cpp:242
+#: src/main.cpp:252
 msgid "Authors:"
 msgstr "Upphovsmän:"
 
@@ -447,7 +448,7 @@ msgstr "Kan inte öppna personliga lagkatalogen (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan inte öppna lagkatalogen (%s)!"
 
-#: src/menu/map_selection_box.cpp:219
+#: src/menu/map_selection_box.cpp:241
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -527,19 +528,19 @@ msgstr "Fel vid inläsning av lag :"
 msgid "Error loading team's data %s:"
 msgstr "Fel vid inläsning av lagets data %s:"
 
-#: src/game/config.cpp:373
+#: src/game/config.cpp:389
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fel vid skapandet av katalogen \"%s\": kunde inte lagra konfigurationsfilen."
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:264
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fel vid inläsning av konfigurationsfil: %s"
 
-#: src/game/config.cpp:286
+#: src/game/config.cpp:302
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Fel vid inläsning av standardkonfigurationsfil: %s"
@@ -559,21 +560,21 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:238
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Fel: Kunde inte ansluta till %s:%s"
 
-#: src/menu/network_connection_menu.cpp:213
+#: src/menu/network_connection_menu.cpp:212
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Fel: Kunde inte kontakta indexservern för att vara värd för ett spel"
 
-#: src/menu/network_connection_menu.cpp:250
+#: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Fel: Kunde inte kontakta indexservern för att söka efter ett internetspel"
 
-#: src/menu/network_connection_menu.cpp:227
+#: src/menu/network_connection_menu.cpp:226
 msgid "Error: Unable to start server"
 msgstr "Fel: Kunde inte starta servern"
 
@@ -582,7 +583,7 @@ msgstr "Fel: Kunde inte starta servern"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fel: kan inte hitta kroppen \"%s\" för laget \"%s\"."
 
-#: src/weapon/flamethrower.cpp:91
+#: src/weapon/flamethrower.cpp:107
 msgid "Flame Thrower"
 msgstr ""
 
@@ -678,7 +679,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynda dig, du är för långsam!!"
 
-#: src/main.cpp:234
+#: src/main.cpp:244
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -734,7 +735,7 @@ msgstr ""
 msgid "Language"
 msgstr "Språk"
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:229
 msgid "Load maps:"
 msgstr "Läs in kartor:"
 
@@ -804,7 +805,7 @@ msgstr "Musik?"
 msgid "Network Game"
 msgstr "Nätverksspel"
 
-#: src/network/network.cpp:255
+#: src/network/network.cpp:253
 msgid "Network initialization"
 msgstr "Nätverkinitiering"
 
@@ -868,20 +869,20 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/main.cpp:220
+#: src/main.cpp:230
 msgid "Quit Wormux"
 msgstr "Avsluta Wormux"
 
-#: src/menu/map_selection_box.cpp:218
+#: src/menu/map_selection_box.cpp:240
 #, fuzzy
 msgid "Random map"
 msgstr "Läs in kartor:"
 
-#: src/game/config.cpp:262
+#: src/game/config.cpp:277
 msgid "Reading default config file"
 msgstr "Läser in standardkonfigurationsfil"
 
-#: src/game/config.cpp:294
+#: src/game/config.cpp:310
 msgid "Reading personal config file"
 msgstr "Läser in personlig konfigurationsfil"
 
@@ -897,7 +898,7 @@ msgstr "Upplösning"
 msgid "Riot Bomb"
 msgstr "Massbomb"
 
-#: src/main.cpp:84
+#: src/main.cpp:86
 msgid "Run game"
 msgstr "Kör spel"
 
@@ -936,7 +937,7 @@ msgstr "Hoppa över omgång"
 msgid "Sniper Rifle"
 msgstr "Prickskyttegevär"
 
-#: src/menu/internet_menu.cpp:119
+#: src/menu/internet_menu.cpp:118
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Tyvärr, inget spel väntar just nu på spelare"
 
@@ -1066,12 +1067,12 @@ msgstr "Verktyg"
 msgid "Unable to contact host."
 msgstr "Kunde inte kontakta värden."
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:239
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kunde inte öppna kartkatalogen (%s)!"
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:251
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Kunde inte öppna kartkatalogen (%s)!"
@@ -1084,7 +1085,7 @@ msgstr "Kan inte använda den här porten!"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:180
+#: src/main.cpp:185
 msgid "Version"
 msgstr "Version"
 
@@ -1095,7 +1096,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vänta! %i spelare är inte klara än!"
 msgstr[1] "Vänta! %i spelare är inte klara än!"
 
-#: src/menu/network_menu.cpp:387
+#: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Väntar på servern, allt du kan göra är att avbryta eller chatta!"
 
@@ -1105,7 +1106,7 @@ msgstr "Väntar på servern, allt du kan göra är att avbryta eller chatta!"
 msgid "Weapons"
 msgstr "Vapen"
 
-#: src/main.cpp:251
+#: src/main.cpp:261
 msgid "Website: "
 msgstr "Webbplats: "
 
@@ -1123,17 +1124,17 @@ msgstr "Vindpartiklar?"
 msgid "Winner"
 msgstr "Vinnare"
 
-#: src/main.cpp:193
+#: src/main.cpp:198
 msgid "Wormux launching..."
 msgstr "Wormux startar..."
 
-#: src/main.cpp:241
+#: src/main.cpp:251
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/map/maps_list.cpp:90
-#, c-format
-msgid "XML error during loading map '%s' :"
+#: src/map/maps_list.cpp:91
+#, fuzzy, c-format
+msgid "XML error during loading map '%s': "
 msgstr "XML-fel vid inläsning av kartan \"%s\" :"
 
 #: src/menu/network_menu.cpp:323
@@ -1144,7 +1145,7 @@ msgstr "Du är ensam :-/"
 msgid "You are alone..."
 msgstr "Du är ensam..."
 
-#: src/map/maps_list.cpp:262
+#: src/map/maps_list.cpp:260
 msgid "You need at least one valid map !"
 msgstr "Du behöver åtminstone en giltig karta!"
 
@@ -1156,7 +1157,7 @@ msgstr "Du behöver åtminstone två giltiga lag!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kommer inte att kunna spela innan du har valt ett lag!"
 
-#: src/weapon/weapon_launcher.cpp:462
+#: src/weapon/weapon_launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "Ditt skott missade!"
 
@@ -1174,24 +1175,38 @@ msgstr ""
 "Bombning : vänsterklicka på målet\n"
 "en bombning per omgång"
 
+#: src/map/maps_list.cpp:79
+msgid "couldn't load config"
+msgstr ""
+
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "klar"
+
+#: src/map/maps_list.cpp:86
+#, fuzzy
+msgid "error parsing the config file"
+msgstr "Läser in standardkonfigurationsfil"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "från"
 
-#: src/sound/jukebox.cpp:155
+#: src/map/maps_list.cpp:75
+#, fuzzy
+msgid "no configuration file!"
+msgstr "Fel vid inläsning av konfigurationsfil: %s"
+
+#: src/sound/jukebox.cpp:157
 msgid "o Loading music"
 msgstr "o Läser in musik"
 
-#: src/sound/jukebox.cpp:325
+#: src/sound/jukebox.cpp:327
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Läser in ljudprofil: %s"
 
-#: src/sound/jukebox.cpp:84
+#: src/sound/jukebox.cpp:86
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"

@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-11-30 18:35+1000\n"
 "Last-Translator: luojie-dune <luojie-dune@operamail.com>\n"
 "Language-Team: Chinese (China) <luojie-dune@operamail.com>\n"
@@ -15,23 +16,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: \n"
 
-#: src/map/maps_list.cpp:324
+#: src/map/maps_list.cpp:321
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! 地圖 %s未找到 :-("
 
-#: src/menu/network_menu.cpp:119
-#: src/menu/network_menu.cpp:305
+#: src/menu/network_menu.cpp:119 src/menu/network_menu.cpp:305
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i 玩家已連接"
 msgstr[1] "%i 玩家均已連接"
 
-#: src/menu/network_menu.cpp:123
-#: src/menu/network_menu.cpp:313
+#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:313
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -134,8 +132,12 @@ msgstr[1] "%s 隊得到 %u 空襲!"
 
 #: src/weapon/airhammer.cpp:177
 #, c-format
-msgid "%s team has won %u airhammer! Don't make too much noise with it! Thanks, your neighbours."
-msgid_plural "%s team has won %u airhammers! Don't make too much noise with them! Thanks, your neighbours."
+msgid ""
+"%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
+"your neighbours."
+msgid_plural ""
+"%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
+"your neighbours."
 msgstr[0] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 msgstr[1] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 
@@ -169,8 +171,11 @@ msgstr[1] "%s 隊得到 %u 火箭炮!"
 
 #: src/weapon/blowtorch.cpp:140
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
-msgid_plural "%s team has won %u blowtorchs! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid_plural ""
+"%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
+"it."
 msgstr[0] "%s 隊得到 %u 吹管! 18歲以下, 使用請請教父母."
 msgstr[1] "%s 隊得到 %u 吹管! 18歲以下, 使用請請教父母."
 
@@ -198,7 +203,8 @@ msgstr[1] "%s 隊得到 %u 噴槍! 帶好安全帽."
 #: src/weapon/disco_grenade.cpp:162
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "%s 隊得到 %u 躍動手雷! 扭動身子丟出去!"
 msgstr[1] "%s 隊得到 %u 舞動手雷! 扭動身子丟出去!"
 
@@ -384,7 +390,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "鐵砧"
 
-#: src/main.cpp:247
+#: src/main.cpp:252
 msgid "Authors:"
 msgstr "作者:"
 
@@ -417,8 +423,7 @@ msgstr "彈力球"
 msgid "Bye bye tux..."
 msgstr "Bye bye 企鵝..."
 
-#: src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:515
+#: src/team/teams_list.cpp:493 src/team/teams_list.cpp:515
 #: src/team/teams_list.cpp:563
 #, c-format
 msgid "Can't find team %s!"
@@ -434,7 +439,7 @@ msgstr "打不開個人團隊目錄(%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "打不開團隊目錄 (%s)!"
 
-#: src/menu/map_selection_box.cpp:239
+#: src/menu/map_selection_box.cpp:241
 msgid "Choose randomly between the different maps"
 msgstr "在地圖中隨機選擇"
 
@@ -505,8 +510,7 @@ msgstr "游戲末尾"
 msgid "Error in %s:%lu"
 msgstr "錯誤出現%s:%lu"
 
-#: src/team/teams_list.cpp:135
-#: src/team/teams_list.cpp:143
+#: src/team/teams_list.cpp:135 src/team/teams_list.cpp:143
 msgid "Error loading team :"
 msgstr "讀取隊伍出錯 :"
 
@@ -515,9 +519,10 @@ msgstr "讀取隊伍出錯 :"
 msgid "Error loading team's data %s:"
 msgstr "讀取隊伍數據 %s 時出錯 :"
 
-#: src/game/config.cpp:388
+#: src/game/config.cpp:389
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr "建立目錄失敗 \"%s\": 不能儲存設置文档."
 
 #: src/game/config.cpp:264
@@ -525,7 +530,7 @@ msgstr "建立目錄失敗 \"%s\": 不能儲存設置文档."
 msgid "Error while loading configuration file: %s"
 msgstr "建立目錄失敗 \"%s\": 不能儲存設置文档."
 
-#: src/game/config.cpp:301
+#: src/game/config.cpp:302
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "正讀取默認設置文档"
@@ -665,16 +670,17 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "快點,伙計你也太慢了!"
 
-#: src/main.cpp:239
-msgid "If you found a bug or have a feature request send us a email (in english, please):"
+#: src/main.cpp:244
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
 msgstr "假如你發現Bug或想要什么游戲特性, 請發英文郵件給我們"
 
 #: src/menu/game_menu.cpp:100
 msgid "Initial energy"
 msgstr "初始耐久"
 
-#: src/weapon/bazooka.cpp:110
-#: src/weapon/riot_bomb.cpp:113
+#: src/weapon/bazooka.cpp:110 src/weapon/riot_bomb.cpp:113
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -709,8 +715,7 @@ msgid "Jetpack"
 msgstr "噴射包"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:99
-#: src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:99 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "加入#wormux IRC irc.freenode.net 找對手"
 
@@ -788,7 +793,7 @@ msgstr "音樂?"
 msgid "Network Game"
 msgstr "網絡游戲"
 
-#: src/network/network.cpp:254
+#: src/network/network.cpp:253
 msgid "Network initialization"
 msgstr "網絡初始化"
 
@@ -852,11 +857,11 @@ msgstr "端口:"
 msgid "Quit"
 msgstr "退出"
 
-#: src/main.cpp:225
+#: src/main.cpp:230
 msgid "Quit Wormux"
 msgstr "退出"
 
-#: src/menu/map_selection_box.cpp:238
+#: src/menu/map_selection_box.cpp:240
 msgid "Random map"
 msgstr "隨機讀取地圖"
 
@@ -864,7 +869,7 @@ msgstr "隨機讀取地圖"
 msgid "Reading default config file"
 msgstr "正讀取默認設置文档"
 
-#: src/game/config.cpp:309
+#: src/game/config.cpp:310
 msgid "Reading personal config file"
 msgstr "正讀取個人設置文档"
 
@@ -880,7 +885,7 @@ msgstr "分辨率"
 msgid "Riot Bomb"
 msgstr "爆炸彈"
 
-#: src/main.cpp:84
+#: src/main.cpp:86
 msgid "Run game"
 msgstr "運行游戲"
 
@@ -1000,8 +1005,7 @@ msgstr "手榴彈離開戰場前發生爆炸"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "別人在等你! 快醒吧:-)"
 
-#: src/weapon/bazooka.cpp:83
-#: src/weapon/riot_bomb.cpp:86
+#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "火箭離開了戰場..."
 
@@ -1066,7 +1070,7 @@ msgstr "端口不可用"
 msgid "Unnamed"
 msgstr "未命名"
 
-#: src/main.cpp:180
+#: src/main.cpp:185
 msgid "Version"
 msgstr "版本"
 
@@ -1077,18 +1081,17 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "請等待! %i沒准備好!"
 msgstr[1] "請等待! %i沒准備好!"
 
-#: src/menu/network_menu.cpp:387
+#: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "等着接受服務吧, 現在先聊天 !"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131
-#: src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:256
+#: src/main.cpp:261
 msgid "Website: "
 msgstr "網站Website: "
 
@@ -1107,11 +1110,11 @@ msgstr "風來了?"
 msgid "Winner"
 msgstr "勝者"
 
-#: src/main.cpp:193
+#: src/main.cpp:198
 msgid "Wormux launching..."
 msgstr "准備中, Wormux!!!"
 
-#: src/main.cpp:246
+#: src/main.cpp:251
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
@@ -1132,8 +1135,7 @@ msgstr "你是孤單的..."
 msgid "You need at least one valid map !"
 msgstr "你需要可用的地圖!"
 
-#: src/game/game_init.cpp:124
-#: src/team/teams_list.cpp:188
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:188
 msgid "You need at least two valid teams !"
 msgstr "至少有2組才能開始 !"
 
@@ -1194,4 +1196,3 @@ msgstr "o讀取音樂档案 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
-

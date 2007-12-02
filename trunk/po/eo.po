@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_eo\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-08-23 23:04+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:321
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas :-("
@@ -42,12 +43,12 @@ msgstr[1] "%i ludantoj pretas"
 msgid "%s (%s) has died."
 msgstr "%s (%s teamo) mortis."
 
-#: src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:120
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> kiel %s el %s"
 
-#: src/map/maps_list.cpp:129
+#: src/map/maps_list.cpp:127
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> el %s"
@@ -222,7 +223,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s teamo gajnis %u dinamitan bastonon !"
 msgstr[1] "%s teamo gajnis %u dinamitajn bastonojn !"
 
-#: src/weapon/flamethrower.cpp:160
+#: src/weapon/flamethrower.cpp:176
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -327,7 +328,7 @@ msgid_plural "%s team has won %u syringes!"
 msgstr[0] "%s teamo gajnis %u injektilon !"
 msgstr[1] "%s teamo gajnis %u injektilojn !"
 
-#: src/weapon/teleportation.cpp:109
+#: src/weapon/teleportation.cpp:112
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -399,7 +400,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Amboso"
 
-#: src/main.cpp:242
+#: src/main.cpp:252
 msgid "Authors:"
 msgstr "Aŭtoroj :"
 
@@ -447,7 +448,7 @@ msgstr "Ne eblas malfermi teaman dosierujon (%s) !"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ne eblas malfermi teaman dosierujon (%s) !"
 
-#: src/menu/map_selection_box.cpp:219
+#: src/menu/map_selection_box.cpp:241
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -527,18 +528,18 @@ msgstr "Eraro muntante teamon :"
 msgid "Error loading team's data %s:"
 msgstr "Eraro muntante la datumojn de la teamo %s :"
 
-#: src/game/config.cpp:373
+#: src/game/config.cpp:389
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Eraro kreante dosierujon \"%s\" : ne eblas registri agordan dosieron."
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:264
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eraro muntante agordan dosieron : %s"
 
-#: src/game/config.cpp:286
+#: src/game/config.cpp:302
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Eraro muntante norman agordan dosieron : %s"
@@ -558,20 +559,20 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:238
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ne eblas konekti al %s : %s"
 
-#: src/menu/network_connection_menu.cpp:213
+#: src/menu/network_connection_menu.cpp:212
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Eraro : Ne eblas kontakti indeksservilon por gastigi ludon"
 
-#: src/menu/network_connection_menu.cpp:250
+#: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Eraro : Ne eblas kontakti indeksservilon por serĉi interretan ludon"
 
-#: src/menu/network_connection_menu.cpp:227
+#: src/menu/network_connection_menu.cpp:226
 msgid "Error: Unable to start server"
 msgstr "Eraro : Ne eblas starti servilon"
 
@@ -580,7 +581,7 @@ msgstr "Eraro : Ne eblas starti servilon"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eraro : Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
 
-#: src/weapon/flamethrower.cpp:91
+#: src/weapon/flamethrower.cpp:107
 msgid "Flame Thrower"
 msgstr ""
 
@@ -674,7 +675,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Rapidegu, vi tro malrapidas !"
 
-#: src/main.cpp:234
+#: src/main.cpp:244
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -728,7 +729,7 @@ msgstr "Aliĝu #wormux en irc.freenode.net por trovi oponantojn."
 msgid "Language"
 msgstr "Lingvo"
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:229
 msgid "Load maps:"
 msgstr "Muntas la mapojn :"
 
@@ -798,7 +799,7 @@ msgstr "Muzikon ?"
 msgid "Network Game"
 msgstr "Reta ludo"
 
-#: src/network/network.cpp:255
+#: src/network/network.cpp:253
 msgid "Network initialization"
 msgstr "Preparante la reton"
 
@@ -862,20 +863,20 @@ msgstr "Pordo :"
 msgid "Quit"
 msgstr "Forlasu"
 
-#: src/main.cpp:220
+#: src/main.cpp:230
 msgid "Quit Wormux"
 msgstr "Forigu el Wormux"
 
-#: src/menu/map_selection_box.cpp:218
+#: src/menu/map_selection_box.cpp:240
 #, fuzzy
 msgid "Random map"
 msgstr "Muntas la mapojn :"
 
-#: src/game/config.cpp:262
+#: src/game/config.cpp:277
 msgid "Reading default config file"
 msgstr "Legante norman agordaron"
 
-#: src/game/config.cpp:294
+#: src/game/config.cpp:310
 msgid "Reading personal config file"
 msgstr "Legante personan agordaron"
 
@@ -891,7 +892,7 @@ msgstr "Difino"
 msgid "Riot Bomb"
 msgstr "Tumultbombo"
 
-#: src/main.cpp:84
+#: src/main.cpp:86
 msgid "Run game"
 msgstr "Komencas partion"
 
@@ -930,7 +931,7 @@ msgstr "Pasigo"
 msgid "Sniper Rifle"
 msgstr "Tiraljora fusilo"
 
-#: src/menu/internet_menu.cpp:119
+#: src/menu/internet_menu.cpp:118
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
@@ -1056,12 +1057,12 @@ msgstr "Iloj"
 msgid "Unable to contact host."
 msgstr "Ne eblas kontakti fora komputilon."
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:239
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ne eblas malfermi mapan dosierujon (%s) !"
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:251
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Ne eblas malfermi mapan dosierujon (%s) !"
@@ -1074,7 +1075,7 @@ msgstr "Ne eblas uzi ĉi tiun pordon !"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:180
+#: src/main.cpp:185
 msgid "Version"
 msgstr "Versio"
 
@@ -1085,7 +1086,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Atendu ! %i ludanto ankoraŭ ne pretas !"
 msgstr[1] "Atendu ! %i ludantoj ankoraŭ ne pretas !"
 
-#: src/menu/network_menu.cpp:387
+#: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Atende servilon, vi nur povas rezigni aŭ babili !"
 
@@ -1095,7 +1096,7 @@ msgstr "Atende servilon, vi nur povas rezigni aŭ babili !"
 msgid "Weapons"
 msgstr "Armiloj"
 
-#: src/main.cpp:251
+#: src/main.cpp:261
 msgid "Website: "
 msgstr "TTT-ejo: "
 
@@ -1113,17 +1114,17 @@ msgstr "Venterojn ?"
 msgid "Winner"
 msgstr "Gajnanto"
 
-#: src/main.cpp:193
+#: src/main.cpp:198
 msgid "Wormux launching..."
 msgstr "Wormux muntas..."
 
-#: src/main.cpp:241
+#: src/main.cpp:251
 msgid "Wormux version "
 msgstr "Wormux versio "
 
-#: src/map/maps_list.cpp:90
-#, c-format
-msgid "XML error during loading map '%s' :"
+#: src/map/maps_list.cpp:91
+#, fuzzy, c-format
+msgid "XML error during loading map '%s': "
 msgstr "XML-a eraro dum la mapa muntado '%s':"
 
 #: src/menu/network_menu.cpp:323
@@ -1134,7 +1135,7 @@ msgstr "Vi estas sola :-/"
 msgid "You are alone..."
 msgstr "Vi estas sola..."
 
-#: src/map/maps_list.cpp:262
+#: src/map/maps_list.cpp:260
 msgid "You need at least one valid map !"
 msgstr "Vi bezonas almenaŭ unu taŭgan mapon !"
 
@@ -1146,7 +1147,7 @@ msgstr "Vi bezonas almenaŭ du teamojn !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon !"
 
-#: src/weapon/weapon_launcher.cpp:462
+#: src/weapon/weapon_launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "Vi mispafis !"
 
@@ -1164,24 +1165,38 @@ msgstr ""
 "Bombado: Maldekstrklaku sur celo\n"
 "Unu bombado vice"
 
+#: src/map/maps_list.cpp:79
+msgid "couldn't load config"
+msgstr ""
+
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "farita"
+
+#: src/map/maps_list.cpp:86
+#, fuzzy
+msgid "error parsing the config file"
+msgstr "Legante norman agordaron"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "el"
 
-#: src/sound/jukebox.cpp:155
+#: src/map/maps_list.cpp:75
+#, fuzzy
+msgid "no configuration file!"
+msgstr "Eraro muntante agordan dosieron : %s"
+
+#: src/sound/jukebox.cpp:157
 msgid "o Loading music"
 msgstr "o Legante muzikon"
 
-#: src/sound/jukebox.cpp:325
+#: src/sound/jukebox.cpp:327
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Legante sonan profilon: %s"
 
-#: src/sound/jukebox.cpp:84
+#: src/sound/jukebox.cpp:86
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"

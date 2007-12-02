@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-02-19 03:27+0100\n"
 "Last-Translator: Stefan Kachaunov <mindless@data.bg>\n"
 "Language-Team: Bulgarian <mindless@data.bg>\n"
@@ -19,7 +20,7 @@ msgstr ""
 "X-Poedit-Language: Bulgarian\n"
 "X-Poedit-Country: BULGARIA\n"
 
-#: src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:321
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s =("
@@ -43,12 +44,12 @@ msgstr[1] "%i Spieler bereit"
 msgid "%s (%s) has died."
 msgstr "%s от %s си го отнесе..."
 
-#: src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:120
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> познат и като %s от %s"
 
-#: src/map/maps_list.cpp:129
+#: src/map/maps_list.cpp:127
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> от %s"
@@ -216,7 +217,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Mannschaft %s hat %u Stange Dynamit gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Stangen Dynamit gewonnen!"
 
-#: src/weapon/flamethrower.cpp:160
+#: src/weapon/flamethrower.cpp:176
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -321,7 +322,7 @@ msgid_plural "%s team has won %u syringes!"
 msgstr[0] "Отборът на %s спечели %u %s !"
 msgstr[1] "Отборът на %s спечели %u %sи !"
 
-#: src/weapon/teleportation.cpp:109
+#: src/weapon/teleportation.cpp:112
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -388,7 +389,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Наковалня"
 
-#: src/main.cpp:242
+#: src/main.cpp:252
 msgid "Authors:"
 msgstr "Автори:"
 
@@ -436,7 +437,7 @@ msgstr "Не мога да отворя директорията на отбор
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
 
-#: src/menu/map_selection_box.cpp:219
+#: src/menu/map_selection_box.cpp:241
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -518,7 +519,7 @@ msgstr "Грешка при зареждането на отбора %s:"
 msgid "Error loading team's data %s:"
 msgstr "Проблем при зареждането на данните за %s:"
 
-#: src/game/config.cpp:373
+#: src/game/config.cpp:389
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -526,12 +527,12 @@ msgstr ""
 "Не мога да създам директорията \"%s\"! не мога да съхраня конфигурационните "
 "файлове!"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:264
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
 
-#: src/game/config.cpp:286
+#: src/game/config.cpp:302
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
@@ -551,22 +552,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:238
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Kann nicht verbinden"
 
-#: src/menu/network_connection_menu.cpp:213
+#: src/menu/network_connection_menu.cpp:212
 #, fuzzy
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Kann Indexserver nicht kontaktieren!"
 
-#: src/menu/network_connection_menu.cpp:250
+#: src/menu/network_connection_menu.cpp:249
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Kann Indexserver nicht kontaktieren!"
 
-#: src/menu/network_connection_menu.cpp:227
+#: src/menu/network_connection_menu.cpp:226
 #, fuzzy
 msgid "Error: Unable to start server"
 msgstr "Kann Server nicht starten"
@@ -576,7 +577,7 @@ msgstr "Kann Server nicht starten"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Не мога да намеря телата на \"%s\" отбора \"%s\" !"
 
-#: src/weapon/flamethrower.cpp:91
+#: src/weapon/flamethrower.cpp:107
 msgid "Flame Thrower"
 msgstr ""
 
@@ -662,7 +663,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Хабиш време за убиване за други неща!!!"
 
-#: src/main.cpp:234
+#: src/main.cpp:244
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -716,7 +717,7 @@ msgstr "Komm nach #wormux auf irc.freenode.net"
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:229
 msgid "Load maps:"
 msgstr "Карти които да заредя:"
 
@@ -789,7 +790,7 @@ msgstr "Музика?"
 msgid "Network Game"
 msgstr "Мрежова игра"
 
-#: src/network/network.cpp:255
+#: src/network/network.cpp:253
 #, fuzzy
 msgid "Network initialization"
 msgstr "Инициализирам терена..."
@@ -854,21 +855,21 @@ msgstr ""
 msgid "Quit"
 msgstr "Вън!"
 
-#: src/main.cpp:220
+#: src/main.cpp:230
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
-#: src/menu/map_selection_box.cpp:218
+#: src/menu/map_selection_box.cpp:240
 #, fuzzy
 msgid "Random map"
 msgstr "Карти които да заредя:"
 
-#: src/game/config.cpp:262
+#: src/game/config.cpp:277
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
-#: src/game/config.cpp:294
+#: src/game/config.cpp:310
 msgid "Reading personal config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
@@ -884,7 +885,7 @@ msgstr "Разделителна способност"
 msgid "Riot Bomb"
 msgstr "Звуков заряд"
 
-#: src/main.cpp:84
+#: src/main.cpp:86
 msgid "Run game"
 msgstr "Пусни играта"
 
@@ -924,7 +925,7 @@ msgstr "Пропускане на ход"
 msgid "Sniper Rifle"
 msgstr "Снайперистка пушка"
 
-#: src/menu/internet_menu.cpp:119
+#: src/menu/internet_menu.cpp:118
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
@@ -1045,12 +1046,12 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr "Kann Server nicht kontaktieren!"
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:239
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Не мога да отворя директорията за карти! (%s)"
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:251
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Не мога да отворя директорията за карти! (%s)"
@@ -1064,7 +1065,7 @@ msgstr "Kann Server nicht starten!"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:180
+#: src/main.cpp:185
 msgid "Version"
 msgstr "версия"
 
@@ -1075,7 +1076,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
 msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 
-#: src/menu/network_menu.cpp:387
+#: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
@@ -1085,7 +1086,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Оръжия"
 
-#: src/main.cpp:251
+#: src/main.cpp:261
 msgid "Website: "
 msgstr "Страница: "
 
@@ -1105,17 +1106,17 @@ msgstr "Красотички носени от вятъра?"
 msgid "Winner"
 msgstr "Противопехотна мина"
 
-#: src/main.cpp:193
+#: src/main.cpp:198
 msgid "Wormux launching..."
 msgstr "Wormux се зарежда..."
 
-#: src/main.cpp:241
+#: src/main.cpp:251
 msgid "Wormux version "
 msgstr "Версия на Wormux"
 
-#: src/map/maps_list.cpp:90
-#, c-format
-msgid "XML error during loading map '%s' :"
+#: src/map/maps_list.cpp:91
+#, fuzzy, c-format
+msgid "XML error during loading map '%s': "
 msgstr "XML грешка при зареждане на картата '%s ':"
 
 #: src/menu/network_menu.cpp:323
@@ -1126,7 +1127,7 @@ msgstr ""
 msgid "You are alone..."
 msgstr ""
 
-#: src/map/maps_list.cpp:262
+#: src/map/maps_list.cpp:260
 msgid "You need at least one valid map !"
 msgstr "Трябва ми поне една валидна карта!"
 
@@ -1138,7 +1139,7 @@ msgstr "Трябват ми поне два валидни отбора!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:462
+#: src/weapon/weapon_launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "Не точно там..."
 
@@ -1154,24 +1155,38 @@ msgid ""
 "a bombing per turn"
 msgstr ""
 
+#: src/map/maps_list.cpp:79
+msgid "couldn't load config"
+msgstr ""
+
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "готово"
+
+#: src/map/maps_list.cpp:86
+#, fuzzy
+msgid "error parsing the config file"
+msgstr "Чета персоналния конфигурационен фаил"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr ""
 
-#: src/sound/jukebox.cpp:155
+#: src/map/maps_list.cpp:75
+#, fuzzy
+msgid "no configuration file!"
+msgstr "Проблем при зареждането на конфигурацията: %s"
+
+#: src/sound/jukebox.cpp:157
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:325
+#: src/sound/jukebox.cpp:327
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
 
-#: src/sound/jukebox.cpp:84
+#: src/sound/jukebox.cpp:86
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""

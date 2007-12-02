@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -19,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:321
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
@@ -41,12 +42,12 @@ msgstr[0] ""
 msgid "%s (%s) has died."
 msgstr "%s (%s) öldü."
 
-#: src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:120
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s'den %s <%s> aka %s"
 
-#: src/map/maps_list.cpp:129
+#: src/map/maps_list.cpp:127
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
@@ -200,7 +201,7 @@ msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/flamethrower.cpp:160
+#: src/weapon/flamethrower.cpp:176
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -290,7 +291,7 @@ msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/teleportation.cpp:109
+#: src/weapon/teleportation.cpp:112
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -355,7 +356,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Örs"
 
-#: src/main.cpp:242
+#: src/main.cpp:252
 msgid "Authors:"
 msgstr "Yazarlar:"
 
@@ -403,7 +404,7 @@ msgstr "Takım dizini açılamadı (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
-#: src/menu/map_selection_box.cpp:219
+#: src/menu/map_selection_box.cpp:241
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -484,18 +485,18 @@ msgstr "%s takımı yüklenirken hata:"
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
 
-#: src/game/config.cpp:373
+#: src/game/config.cpp:389
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:264
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/game/config.cpp:286
+#: src/game/config.cpp:302
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
@@ -515,22 +516,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:238
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:213
+#: src/menu/network_connection_menu.cpp:212
 #, fuzzy
 msgid "Error: Unable to contact index server to host a game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:250
+#: src/menu/network_connection_menu.cpp:249
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:227
+#: src/menu/network_connection_menu.cpp:226
 #, fuzzy
 msgid "Error: Unable to start server"
 msgstr "(%s) harita dizini açılamadı!"
@@ -540,7 +541,7 @@ msgstr "(%s) harita dizini açılamadı!"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 
-#: src/weapon/flamethrower.cpp:91
+#: src/weapon/flamethrower.cpp:107
 msgid "Flame Thrower"
 msgstr ""
 
@@ -625,7 +626,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Çabuk ol, çok yavaşsın !!"
 
-#: src/main.cpp:234
+#: src/main.cpp:244
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -678,7 +679,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:229
 msgid "Load maps:"
 msgstr "Haritaları yükle:"
 
@@ -749,7 +750,7 @@ msgstr "Müzik?"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/network/network.cpp:255
+#: src/network/network.cpp:253
 #, fuzzy
 msgid "Network initialization"
 msgstr "Alan oluşturuluyor..."
@@ -815,21 +816,21 @@ msgstr ""
 msgid "Quit"
 msgstr "Çıkış"
 
-#: src/main.cpp:220
+#: src/main.cpp:230
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/menu/map_selection_box.cpp:218
+#: src/menu/map_selection_box.cpp:240
 #, fuzzy
 msgid "Random map"
 msgstr "Haritaları yükle:"
 
-#: src/game/config.cpp:262
+#: src/game/config.cpp:277
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
-#: src/game/config.cpp:294
+#: src/game/config.cpp:310
 msgid "Reading personal config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
@@ -845,7 +846,7 @@ msgstr "Çözünürlük"
 msgid "Riot Bomb"
 msgstr "Ses Bombası"
 
-#: src/main.cpp:84
+#: src/main.cpp:86
 msgid "Run game"
 msgstr "Oyunu çalıştır"
 
@@ -884,7 +885,7 @@ msgstr "Sırayı atla"
 msgid "Sniper Rifle"
 msgstr "Suikast Tüfeği"
 
-#: src/menu/internet_menu.cpp:119
+#: src/menu/internet_menu.cpp:118
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
@@ -1004,12 +1005,12 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:239
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:251
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
@@ -1022,7 +1023,7 @@ msgstr ""
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:180
+#: src/main.cpp:185
 msgid "Version"
 msgstr "Sürüm"
 
@@ -1032,7 +1033,7 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 
-#: src/menu/network_menu.cpp:387
+#: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
@@ -1042,7 +1043,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Silahlar"
 
-#: src/main.cpp:251
+#: src/main.cpp:261
 msgid "Website: "
 msgstr "Web sitesi: "
 
@@ -1061,17 +1062,17 @@ msgstr "Rüzgar parçacıkları?"
 msgid "Winner"
 msgstr "Mayın"
 
-#: src/main.cpp:193
+#: src/main.cpp:198
 msgid "Wormux launching..."
 msgstr "Wormux çalıştırılıyor..."
 
-#: src/main.cpp:241
+#: src/main.cpp:251
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
-#: src/map/maps_list.cpp:90
-#, c-format
-msgid "XML error during loading map '%s' :"
+#: src/map/maps_list.cpp:91
+#, fuzzy, c-format
+msgid "XML error during loading map '%s': "
 msgstr "'%s' haritası yüklenirken XML hatası :"
 
 #: src/menu/network_menu.cpp:323
@@ -1082,7 +1083,7 @@ msgstr ""
 msgid "You are alone..."
 msgstr ""
 
-#: src/map/maps_list.cpp:262
+#: src/map/maps_list.cpp:260
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
@@ -1094,7 +1095,7 @@ msgstr "En az iki geçerli takıma ihtiyacınız var !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:462
+#: src/weapon/weapon_launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 
@@ -1110,24 +1111,38 @@ msgid ""
 "a bombing per turn"
 msgstr ""
 
+#: src/map/maps_list.cpp:79
+msgid "couldn't load config"
+msgstr ""
+
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "tamam"
+
+#: src/map/maps_list.cpp:86
+#, fuzzy
+msgid "error parsing the config file"
+msgstr "Kişisel ayar dosyası okunuyor"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr ""
 
-#: src/sound/jukebox.cpp:155
+#: src/map/maps_list.cpp:75
+#, fuzzy
+msgid "no configuration file!"
+msgstr "Ayar dosyası yüklenirken hata: %s"
+
+#: src/sound/jukebox.cpp:157
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:325
+#: src/sound/jukebox.cpp:327
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/sound/jukebox.cpp:84
+#: src/sound/jukebox.cpp:86
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""

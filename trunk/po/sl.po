@@ -10,6 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-08-09 13:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -20,7 +21,7 @@ msgstr ""
 "n%100==4 ? 2 : 3);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:321
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karta %s ni bila najdena :-("
@@ -48,12 +49,12 @@ msgstr[3] "%i igralcev pripravljenih"
 msgid "%s (%s) has died."
 msgstr "%s (%s) je umrl/a."
 
-#: src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:120
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> znan kot %s iz %s"
 
-#: src/map/maps_list.cpp:129
+#: src/map/maps_list.cpp:127
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz <%s>"
@@ -249,7 +250,7 @@ msgstr[1] "Ekipa %s je osvojila %u dinamita!"
 msgstr[2] "Ekipa %s je osvojila %u dinamite!"
 msgstr[3] "Ekipa %s je osvojila %u dinamitov!"
 
-#: src/weapon/flamethrower.cpp:160
+#: src/weapon/flamethrower.cpp:176
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -388,7 +389,7 @@ msgstr[1] "Ekipa %s je osvojila %u injekciji!"
 msgstr[2] "Ekipa %s je osvojila %u injekcije!"
 msgstr[3] "Ekipa %s je osvojila %u injekcij!"
 
-#: src/weapon/teleportation.cpp:109
+#: src/weapon/teleportation.cpp:112
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -468,7 +469,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovalo"
 
-#: src/main.cpp:242
+#: src/main.cpp:252
 msgid "Authors:"
 msgstr "Avtorji:"
 
@@ -516,7 +517,7 @@ msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
-#: src/menu/map_selection_box.cpp:219
+#: src/menu/map_selection_box.cpp:241
 msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
 
@@ -596,7 +597,7 @@ msgstr "Napaka pri nalaganju ekipe :"
 msgid "Error loading team's data %s:"
 msgstr "Napaka pri nalaganju podatkov ekipe %s:"
 
-#: src/game/config.cpp:373
+#: src/game/config.cpp:389
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -604,12 +605,12 @@ msgstr ""
 "Napaka pri ustvarjanju imenika \"%s\": ni bilo mogoče shraniti datoteke z "
 "nastavitvami."
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:264
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
 
-#: src/game/config.cpp:286
+#: src/game/config.cpp:302
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke s privzetimi nastavitvami: %s"
@@ -629,24 +630,24 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:238
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Napaka: Ni se bilo mogoče povezati na %s:%s"
 
-#: src/menu/network_connection_menu.cpp:213
+#: src/menu/network_connection_menu.cpp:212
 msgid "Error: Unable to contact index server to host a game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko gostili "
 "igro"
 
-#: src/menu/network_connection_menu.cpp:250
+#: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko iskali "
 "internetno igro"
 
-#: src/menu/network_connection_menu.cpp:227
+#: src/menu/network_connection_menu.cpp:226
 msgid "Error: Unable to start server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
@@ -655,7 +656,7 @@ msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
 
-#: src/weapon/flamethrower.cpp:91
+#: src/weapon/flamethrower.cpp:107
 msgid "Flame Thrower"
 msgstr "Metalec plamenov"
 
@@ -751,7 +752,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Pohitite, prepočasni ste!!"
 
-#: src/main.cpp:234
+#: src/main.cpp:244
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -807,7 +808,7 @@ msgstr ""
 msgid "Language"
 msgstr "Jezik"
 
-#: src/map/maps_list.cpp:231
+#: src/map/maps_list.cpp:229
 msgid "Load maps:"
 msgstr "Nalaganje kart:"
 
@@ -877,7 +878,7 @@ msgstr "Glasba?"
 msgid "Network Game"
 msgstr "Omrežna igra"
 
-#: src/network/network.cpp:255
+#: src/network/network.cpp:253
 msgid "Network initialization"
 msgstr "Inicializacija omrežja"
 
@@ -941,19 +942,19 @@ msgstr "Vrata:"
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/main.cpp:220
+#: src/main.cpp:230
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
-#: src/menu/map_selection_box.cpp:218
+#: src/menu/map_selection_box.cpp:240
 msgid "Random map"
 msgstr "Naključna karta"
 
-#: src/game/config.cpp:262
+#: src/game/config.cpp:277
 msgid "Reading default config file"
 msgstr "Branje privzete nastavitvene datoteke"
 
-#: src/game/config.cpp:294
+#: src/game/config.cpp:310
 msgid "Reading personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
@@ -969,7 +970,7 @@ msgstr "Ločljivost"
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: src/main.cpp:84
+#: src/main.cpp:86
 msgid "Run game"
 msgstr "Poženi igro"
 
@@ -1008,7 +1009,7 @@ msgstr "Preskoči potezo"
 msgid "Sniper Rifle"
 msgstr "Ostrostrelska puška"
 
-#: src/menu/internet_menu.cpp:119
+#: src/menu/internet_menu.cpp:118
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
@@ -1138,12 +1139,12 @@ msgstr "Orodja"
 msgid "Unable to contact host."
 msgstr "Ni bilo mogoče kontaktirati gostitelja."
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:239
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti imenika s kartami (%s)!"
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:251
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti zasebnega imenika s kartami (%s)!"
@@ -1156,7 +1157,7 @@ msgstr "Ni bilo mogoče uporabiti teh vrat!"
 msgid "Unnamed"
 msgstr "Brezimjek"
 
-#: src/main.cpp:180
+#: src/main.cpp:185
 msgid "Version"
 msgstr "Različica"
 
@@ -1169,7 +1170,7 @@ msgstr[1] "Počakajte! %i igralca še nista pripravljena!"
 msgstr[2] "Počakajte! %i igralci še niso pripravljeni!"
 msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 
-#: src/menu/network_menu.cpp:387
+#: src/menu/network_menu.cpp:388
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
@@ -1179,7 +1180,7 @@ msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 msgid "Weapons"
 msgstr "Orožja"
 
-#: src/main.cpp:251
+#: src/main.cpp:261
 msgid "Website: "
 msgstr "Spletna stran: "
 
@@ -1197,17 +1198,17 @@ msgstr "Vetrni delci?"
 msgid "Winner"
 msgstr "Zmagovalec"
 
-#: src/main.cpp:193
+#: src/main.cpp:198
 msgid "Wormux launching..."
 msgstr "Wormux se zaganja..."
 
-#: src/main.cpp:241
+#: src/main.cpp:251
 msgid "Wormux version "
 msgstr "Wormux različica "
 
-#: src/map/maps_list.cpp:90
-#, c-format
-msgid "XML error during loading map '%s' :"
+#: src/map/maps_list.cpp:91
+#, fuzzy, c-format
+msgid "XML error during loading map '%s': "
 msgstr "XML napaka pri nalaganju karte '%s' :"
 
 #: src/menu/network_menu.cpp:323
@@ -1218,7 +1219,7 @@ msgstr "Sami ste :-/"
 msgid "You are alone..."
 msgstr "Sami ste..."
 
-#: src/map/maps_list.cpp:262
+#: src/map/maps_list.cpp:260
 msgid "You need at least one valid map !"
 msgstr "Potrebujete vsaj eno veljavno karto!"
 
@@ -1230,7 +1231,7 @@ msgstr "Potrebujete vsaj dve veljavni ekipi !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:462
+#: src/weapon/weapon_launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 
@@ -1248,24 +1249,38 @@ msgstr ""
 "Bombardiranje: levi klik na tarčo\n"
 "eno bombardiranje na potezo"
 
+#: src/map/maps_list.cpp:79
+msgid "couldn't load config"
+msgstr ""
+
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "opravljeno"
+
+#: src/map/maps_list.cpp:86
+#, fuzzy
+msgid "error parsing the config file"
+msgstr "Branje privzete nastavitvene datoteke"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "iz"
 
-#: src/sound/jukebox.cpp:155
+#: src/map/maps_list.cpp:75
+#, fuzzy
+msgid "no configuration file!"
+msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
+
+#: src/sound/jukebox.cpp:157
 msgid "o Loading music"
 msgstr "o Nalaganje glasbe"
 
-#: src/sound/jukebox.cpp:325
+#: src/sound/jukebox.cpp:327
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Nalaganje zvočnega profila: %s"
 
-#: src/sound/jukebox.cpp:84
+#: src/sound/jukebox.cpp:86
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
