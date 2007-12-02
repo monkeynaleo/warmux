@@ -25,4 +25,3 @@ SpriteFrame::SpriteFrame(const Surface& p_surface, unsigned int p_speed){
   surface = p_surface;
   delay = p_speed;
 }
-

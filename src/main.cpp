@@ -36,6 +36,7 @@ using namespace std;
 #include <SDL.h>
 #include "game/config.h"
 #include "game/game.h"
+#include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "graphic/font.h"
@@ -60,7 +61,7 @@ using namespace std;
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
-
+#include "weapon/weapons_list.h"
 
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
@@ -235,7 +236,10 @@ void AppWormux::End() const
   jukebox.End();
   TeamsList::CleanUp();
   MapsList::CleanUp();
+  WeaponsList::CleanUp();
   delete Config::GetInstance();
+  Game::CleanUp();
+  GameMode::CleanUp();
   delete Time::GetInstance();
   delete Constants::GetInstance();
   delete Downloader::GetInstance(); // not needed if index server not used
