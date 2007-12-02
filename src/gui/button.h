@@ -47,8 +47,6 @@ public:
 
   virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
   virtual void SetSizePosition(const Rectanglei &rect);
-
-  Sprite* GetSprite() { return image; };
 };
 
 #endif
