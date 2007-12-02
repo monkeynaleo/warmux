@@ -80,7 +80,7 @@ void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   if (!hidden)
     {
-      if (have_focus)
+      if (HasMouseFocus() || HasKeyboardFocus())
         surf.BoxColor(*this, highlightOptionColorBox);
 
       surf.RectangleColor(*this, defaultOptionColorRect);

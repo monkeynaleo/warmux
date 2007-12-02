@@ -25,19 +25,19 @@
 
 Widget::Widget():
   Rectanglei(),
+  has_mouse_focus(false),
+  has_keyboard_focus(false),
   ct(NULL),
-  need_redrawing(true),
-  have_focus(false),
-  is_selected(false)
+  need_redrawing(true)
 {
 }
 
 Widget::Widget(const Rectanglei &rect):
   Rectanglei(rect),
+  has_mouse_focus(false),
+  has_keyboard_focus(false),
   ct(NULL),
-  need_redrawing(true),
-  have_focus(false),
-  is_selected(false)
+  need_redrawing(true)
 {
 }
 
@@ -59,4 +59,16 @@ void Widget::Update(const Point2i &mousePosition,
     Draw(mousePosition, surf);
   }
   need_redrawing = false;
+}
+
+void Widget::SetMouseFocus(bool focus)
+{
+  has_mouse_focus = focus;
+  ForceRedraw();
+}
+
+void Widget::SetKeyboardFocus(bool focus)
+{
+  has_keyboard_focus = focus;
+  ForceRedraw();
 }

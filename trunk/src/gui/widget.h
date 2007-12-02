@@ -32,6 +32,9 @@ struct SDL_keysym;
 
 class Widget : public Rectanglei
 {
+  bool has_mouse_focus;
+  bool has_keyboard_focus;
+
   Widget(const Widget&);
   const Widget& operator=(const Widget&);
 
@@ -41,9 +44,6 @@ class Widget : public Rectanglei
   void StdSetSizePosition(const Rectanglei &rect);
 
  public:
-  bool have_focus;
-  bool is_selected;
-
   Widget();
   Widget(const Rectanglei &rect);
   virtual ~Widget() { };
@@ -66,9 +66,14 @@ class Widget : public Rectanglei
     need_redrawing = true;
     return this;
   };
-  bool IsSelected() const { return is_selected; };
-  virtual void Select() { is_selected = true; need_redrawing = true; };
-  virtual void Unselect() { is_selected = false; need_redrawing = true; };
+
+  // manage mouse focus
+  bool HasMouseFocus() const { return has_mouse_focus; };
+  void SetMouseFocus(bool focus);
+
+  // manage keyboard focus
+  bool HasKeyboardFocus() const { return has_keyboard_focus; };
+  void SetKeyboardFocus(bool focus);
 
   void SetContainer(Container * _ct) { ct = _ct; };
 

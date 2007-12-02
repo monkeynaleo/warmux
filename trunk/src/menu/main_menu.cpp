@@ -178,9 +178,9 @@ bool MainMenu::signal_cancel()
 
 bool MainMenu::signal_ok()
 {
-  Widget * w = widgets.GetCurrentSelectedWidget();
+  Widget * w = widgets.GetCurrentKeyboardSelectedWidget();
   if(w != NULL) {
-    SelectAction(widgets.GetCurrentSelectedWidget());
+    SelectAction(widgets.GetCurrentKeyboardSelectedWidget());
   } else {
     choice = PLAY;
   }

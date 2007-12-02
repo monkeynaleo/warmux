@@ -134,13 +134,13 @@ void Menu::key_cancel()
 
 void Menu::key_up()
 {
-  widgets.SetFocusOnPreviousWidget();
+  widgets.SetKeyboardFocusOnPreviousWidget();
   RedrawMenu();
 }
 
 void Menu::key_down()
 {
-  widgets.SetFocusOnNextWidget();
+  widgets.SetKeyboardFocusOnNextWidget();
   RedrawMenu();
 }
 

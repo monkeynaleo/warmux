@@ -278,7 +278,7 @@ bool NetworkMenu::signal_ok()
 void NetworkMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
-  if (line_to_send_tbox->have_focus)
+  if (line_to_send_tbox->HasMouseFocus())
   {
     SendChatMsg();
     return;
@@ -428,7 +428,7 @@ void NetworkMenu::WaitingForServer()
     }
 
     Menu::Display(mousePosition);
-    widgets.SetFocusOn(line_to_send_tbox);
+    widgets.SetMouseFocusOn(line_to_send_tbox);
 
   } while (Network::GetInstance()->GetState() == Network::NETWORK_MENU_OK &&
            Network::GetInstance()->IsConnected());
