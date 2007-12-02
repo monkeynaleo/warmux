@@ -85,6 +85,7 @@ private:
 
 public:
   InfoMap(const std::string&, const std::string&);
+  ~InfoMap() { FreeData(); };
   void FreeData();
 
   const std::string& GetRawName() const { return m_map_name; };
