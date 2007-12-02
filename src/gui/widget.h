@@ -62,7 +62,6 @@ class Widget : public Rectanglei
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   // widget may be hidden
-  bool IsVisible() const { return visible; }
   void SetVisible(bool _visible);
 
   // manage mouse focus
