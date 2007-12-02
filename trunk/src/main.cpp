@@ -187,7 +187,7 @@ void AppWormux::DisplayLoadingPicture()
                          + PATH_SEPARATOR + "loading.png";
 
   Surface surfaceLoading = Surface(filename.c_str());
-  Sprite loading_image = Sprite(surfaceLoading);
+  Sprite loading_image = Sprite(surfaceLoading, true);
 
   loading_image.cache.EnableLastFrameCache();
   loading_image.ScaleSize(video->window.GetSize());
