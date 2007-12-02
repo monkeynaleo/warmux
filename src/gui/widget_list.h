@@ -49,30 +49,30 @@ public:
   virtual ~WidgetList();
 
   void Update(const Point2i &mousePosition, Surface& surf);
+  virtual void Draw(const Point2i&, Surface&) const { };
+  // redraw bottom layer container
+  virtual void Redraw(const Rectanglei& rect, Surface& surf);
+  // set need_redrawing to true for all sub widgets;
+  void ForceRedraw();
 
   // methods specialized from Widget to manage the list of widgets
   virtual bool SendKey(SDL_keysym key);
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
-  virtual void Draw(const Point2i&, Surface&) const { };
 
   // needed to implements Widget
   virtual void SetSizePosition(const Rectanglei &/*rect*/) {};
 
   // to add a widget
   virtual void AddWidget(Widget*);
-  // Navigate between widget
-  virtual void SetFocusOnNextWidget();
-  virtual void SetFocusOnPreviousWidget();
-  Widget * GetCurrentSelectedWidget() const { return keyboard_selection; };
-  // redraw bottom layer container
-  virtual void Redraw(const Rectanglei& rect, Surface& surf);
 
-  // set need_redrawing to true for all sub widgets;
-  void ForceRedraw();
+  // Navigate between widget with keyboard
+  virtual void SetKeyboardFocusOnNextWidget();
+  virtual void SetKeyboardFocusOnPreviousWidget();
+  Widget * GetCurrentKeyboardSelectedWidget() const { return keyboard_selection; };
 
   // set focus on a widget
-  void SetFocusOn(Widget*);
+  void SetMouseFocusOn(Widget*);
 };
 
 #endif // WIDGET_LIST_H

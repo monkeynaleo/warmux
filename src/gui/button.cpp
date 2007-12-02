@@ -42,7 +42,7 @@ void Button::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   if (!hidden)
     {
-      uint frame = (is_selected || Contains(mousePosition) ? 1 : 0);
+      uint frame = (HasKeyboardFocus() || Contains(mousePosition) ? 1 : 0);
 
       image->SetCurrentFrame(frame);
 
