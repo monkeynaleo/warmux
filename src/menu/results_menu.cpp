@@ -117,7 +117,7 @@ void ResultBox::SetIntResult(const std::string& name, int score, const Surface& 
   score_lbl->SetText(score_str);
   team_picture->SetSurface(team_logo);
 
-  //ForceRedraw();
+  //NeedRedrawing();
 }
 
 void ResultBox::SetDoubleResult(const std::string& name, double score, const Surface& team_logo)
@@ -133,7 +133,7 @@ void ResultBox::SetDoubleResult(const std::string& name, double score, const Sur
   score_lbl->SetText(score_str);
   team_picture->SetSurface(team_logo);
 
-  //ForceRedraw();
+  //NeedRedrawing();
 }
 
 void ResultBox::SetNoResult()
@@ -142,7 +142,7 @@ void ResultBox::SetNoResult()
   score_lbl->SetText("0");
   team_picture->SetNoSurface();
 
-  //ForceRedraw();
+  //NeedRedrawing();
 }
 
 //=========================================================
@@ -423,10 +423,10 @@ void ResultsMenu::SetResult(int i)
   std::string name;
 
   DrawBackground();
-  b_ok->ForceRedraw();
+  b_ok->NeedRedrawing();
 
   if (winner_box)
-    winner_box->ForceRedraw();
+    winner_box->NeedRedrawing();
 
   DrawPodium(Point2i(70,350));
 
@@ -448,7 +448,7 @@ void ResultsMenu::SetResult(int i)
   }
 
   team_name->SetText(name);
-  team_box->ForceRedraw();
+  team_box->NeedRedrawing();
 
   //Most violent
   player = res->getMostViolent();
@@ -492,7 +492,7 @@ void ResultsMenu::SetResult(int i)
   else
     most_accurate->SetNoResult();
 
-  statistics_box->ForceRedraw();
+  statistics_box->NeedRedrawing();
 }
 
 void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)

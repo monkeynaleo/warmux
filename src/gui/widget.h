@@ -68,7 +68,7 @@ class Widget : public Rectanglei, public Container
 
   virtual void Draw(const Point2i &mousePosition,
                     Surface& surf) const = 0;
-  virtual void ForceRedraw() { need_redrawing = true; }; // set need_redrawing to true; -- virtual for widget_list
+  virtual void NeedRedrawing() { need_redrawing = true; }; // set need_redrawing to true; -- virtual for widget_list
 
   virtual bool SendKey(const SDL_keysym&) { return false; };
   virtual Widget* Click(const Point2i &mousePosition, uint button);

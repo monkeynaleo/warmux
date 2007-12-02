@@ -200,7 +200,7 @@ Widget* WidgetList::Click(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-void WidgetList::ForceRedraw()
+void WidgetList::NeedRedrawing()
 {
   need_redrawing = true;
 
@@ -208,7 +208,7 @@ void WidgetList::ForceRedraw()
       w != widget_list.end();
       w++)
   {
-    (*w)->ForceRedraw();
+    (*w)->NeedRedrawing();
   }
 }
 

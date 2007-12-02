@@ -166,7 +166,7 @@ void Menu::RedrawBackground(const Rectanglei& rect, Surface& surf)
 void Menu::RedrawMenu()
 {
   DrawBackground();
-  widgets.ForceRedraw();
+  widgets.NeedRedrawing();
 }
 
 void Menu::Run (bool skip_menu)

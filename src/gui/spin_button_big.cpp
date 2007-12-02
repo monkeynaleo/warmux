@@ -104,7 +104,7 @@ void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
 
 Widget* SpinButtonBig::ClickUp(const Point2i &mousePosition, uint button)
 {
-  ForceRedraw();
+  NeedRedrawing();
 
   if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
       (button == SDL_BUTTON_LEFT && m_minus->Contains(mousePosition)) ){

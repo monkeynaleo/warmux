@@ -98,19 +98,19 @@ void Widget::Update(const Point2i &mousePosition,
 void Widget::SetMouseFocus(bool focus)
 {
   has_mouse_focus = focus;
-  ForceRedraw();
+  NeedRedrawing();
 }
 
 void Widget::SetKeyboardFocus(bool focus)
 {
   has_keyboard_focus = focus;
-  ForceRedraw();
+  NeedRedrawing();
 }
 
 Widget* Widget::Click(const Point2i &mousePosition, uint /* button */)
 {
   if (Contains(mousePosition)) {
-    ForceRedraw();
+    NeedRedrawing();
     return this;
   }
   return NULL;
@@ -119,7 +119,7 @@ Widget* Widget::Click(const Point2i &mousePosition, uint /* button */)
 Widget* Widget::ClickUp(const Point2i &mousePosition, uint /* button */)
 {
   if (Contains(mousePosition)) {
-    ForceRedraw();
+    NeedRedrawing();
     return this;
   }
   return NULL;
@@ -129,7 +129,7 @@ void Widget::SetVisible(bool _visible)
 {
   if (visible != _visible) {
     visible = _visible;
-    ForceRedraw();
+    NeedRedrawing();
   }
 }
 
@@ -139,7 +139,7 @@ void Widget::SetBorder(const Color &_border_color, uint _border_size)
       border_size != _border_size) {
     border_color = _border_color;
     border_size = _border_size;
-    ForceRedraw();
+    NeedRedrawing();
   }
 }
 
@@ -147,6 +147,6 @@ void Widget::SetBackgroundColor(const Color &bg_color)
 {
   if (background_color != bg_color) {
     background_color = bg_color;
-    ForceRedraw();
+    NeedRedrawing();
   }
 }

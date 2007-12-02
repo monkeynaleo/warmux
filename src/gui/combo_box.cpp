@@ -134,7 +134,7 @@ void ComboBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 
 Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
 {
-  ForceRedraw();
+  NeedRedrawing();
 
   if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {
 
@@ -171,7 +171,7 @@ void ComboBox::SetChoice (std::vector<std::string>::size_type index)
   txt_value_black->Set(m_choices[m_index].second);
   txt_value_white->Set(m_choices[m_index].second);
 
-  ForceRedraw();
+  NeedRedrawing();
 }
 
 const int ComboBox::GetIntValue() const
