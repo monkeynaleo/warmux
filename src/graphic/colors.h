@@ -24,6 +24,8 @@
 
 #include "color.h"
 
+const Color transparent_color (255, 255, 255, SDL_ALPHA_TRANSPARENT);
+
 // Greyscale
 const Color white_color (255, 255, 255, SDL_ALPHA_OPAQUE);
 const Color lightgray_color (169, 169, 169, SDL_ALPHA_OPAQUE);

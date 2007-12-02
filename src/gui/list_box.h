@@ -68,8 +68,6 @@ protected:
   Button *m_up, *m_down;
 
   // Colors
-  Color border_color;
-  Color background_color;
   Color selected_item_color;
   Color default_item_color;
 
@@ -80,8 +78,6 @@ protected:
 			Surface& surf);
 
 public:
-  void SetBorderColor(const Color & border) { border_color = border; };
-  void SetBackgroundColor(const Color & background) { background_color = background; };
   void SetSelectedItemColor(const Color & selected_item) { selected_item_color = selected_item; };
   void SetDefaultItemColor(const Color & default_item) { default_item_color = default_item; };
 

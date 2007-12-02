@@ -50,8 +50,6 @@ ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
   m_items(),
   m_up(NULL),
   m_down(NULL),
-  border_color(white_color),
-  background_color(defaultListColor1),
   selected_item_color(defaultListColor2),
   default_item_color(defaultListColor3),
   margin(0)
@@ -61,6 +59,9 @@ ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
   m_down = new Button(res, "menu/down");
   SetSizePosition(Rectanglei(-1, -1, _size.x, _size.y));
   resource_manager.UnLoadXMLProfile(res);
+
+  Widget::SetBorder(white_color, 1);
+  Widget::SetBackgroundColor(defaultListColor1);
 }
 
 ListBox::~ListBox()
@@ -161,14 +162,6 @@ void ListBox::__Update(const Point2i &mousePosition,
 void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   int item = MouseIsOnWhichItem(mousePosition);
-  Rectanglei rect (GetPositionX(),
-		   GetPositionY(),
-		   GetSizeX(),
-		   GetSizeY() - margin);
-
-  // Draw border and bg color
-  surf.BoxColor(rect, background_color);
-  surf.RectangleColor(rect, border_color);
 
   // Draw items
   Point2i pos = GetPosition() + Point2i(5, 0);
