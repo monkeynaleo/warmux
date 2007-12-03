@@ -201,14 +201,12 @@ Config::Config():
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
 
-void Config::SetLanguage(const std::string language, bool update)
+void Config::SetLanguage(const std::string language)
 {
   default_language = language;
   InitI18N(TranslateDirectory(locale_dir), language);
 
-  if (update) {
-    WeaponsList::GetInstance()->UpdateTranslation();
-  }
+  WeaponsList::UpdateTranslation();
 }
 
 /*

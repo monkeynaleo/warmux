@@ -262,7 +262,7 @@ void OptionMenu::SaveOptions()
 
   // Language
   std::string s_language = lbox_languages->ReadValue();
-  config->SetLanguage(s_language, true);
+  config->SetLanguage(s_language);
 
   // Sound
   jukebox.ActiveMusic(opt_music->GetValue());

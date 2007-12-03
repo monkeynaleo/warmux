@@ -64,7 +64,7 @@ public:
                                      const std::string &xml_config) const;
   void RemoveAllObjectConfigs();
 
-  void SetLanguage(const std::string language, bool update=false);
+  void SetLanguage(const std::string language);
   inline std::string GetLanguage() const { return default_language; };
 
   inline bool GetDisplayEnergyCharacter() const { return display_energy_character; };

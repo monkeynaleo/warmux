@@ -109,7 +109,10 @@ void WeaponsList::Refresh () const
 
 void WeaponsList::UpdateTranslation()
 {
-  weapons_list_it it = m_weapons_list.begin(), end=m_weapons_list.end();
+  if (weapon_list == NULL) return;
+    
+
+  weapons_list_it it = GetInstance()->m_weapons_list.begin(), end=GetInstance()->m_weapons_list.end();
   for (; it != end; it++) {
     (*it)->UpdateTranslationStrings();
   }
