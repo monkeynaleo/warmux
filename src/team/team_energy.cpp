@@ -111,7 +111,7 @@ void TeamEnergy::SetIcon(const Surface & new_icon)
 {
   if(icon)
     delete icon;
-  icon = new Sprite(new_icon);
+  icon = new Sprite(new_icon, true);
   icon->Scale(0.8,0.8);
 }
 
