@@ -59,12 +59,20 @@ class AirhammerConfig : public WeaponConfig
 
 Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())
 {
-  m_name = _("Airhammer");
-  m_help = _("Howto use it : keep space key pressed\nan ammo per turn");
+  UpdateTranslationStrings();
+
   m_category = TOOL;
 
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
   m_time_between_each_shot = MIN_TIME_BETWEEN_JOLT;
+}
+
+//-----------------------------------------------------------------------------
+
+void Airhammer::UpdateTranslationStrings()
+{
+  m_name = _("Airhammer");
+  m_help = _("Howto use it : keep space key pressed\nan ammo per turn");
 }
 
 //-----------------------------------------------------------------------------

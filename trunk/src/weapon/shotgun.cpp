@@ -75,7 +75,8 @@ bool ShotgunBuckshot::IsOverlapping(const PhysicalObj* obj) const
 
 Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeaponConfig())
 {
-  m_name = _("Shotgun");
+  UpdateTranslationStrings();
+
   m_category = RIFLE;
 
   announce_missed_shots = false;
@@ -83,6 +84,13 @@ Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeap
   m_weapon_fire->EnableRotationCache(32);
 
   ReloadLauncher();
+}
+
+void Shotgun::UpdateTranslationStrings()
+{
+  m_name = _("Shotgun");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 // Return a buckshot instance for the shotgun

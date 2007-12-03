@@ -37,11 +37,19 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
                                         new WeaponConfig(),
                                         VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  m_name = _("Teleportation");
+  UpdateTranslationStrings();
+
   m_category = MOVE;
   target_chosen = false;
   // teleportation_anim_duration is declare in particles/teleport_member.h
   m_time_between_each_shot = teleportation_anim_duration + 100;
+}
+
+void Teleportation::UpdateTranslationStrings()
+{
+  m_name = _("Teleportation");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 bool Teleportation::p_Shoot ()

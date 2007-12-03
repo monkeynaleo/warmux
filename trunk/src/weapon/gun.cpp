@@ -61,11 +61,19 @@ void GunBullet::ShootSound()
 
 Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
-  m_name = _("Gun");
+  UpdateTranslationStrings();
+
   m_category = RIFLE;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
   ReloadLauncher();
+}
+
+void Gun::UpdateTranslationStrings()
+{
+  m_name = _("Gun");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 WeaponProjectile * Gun::GetProjectileInstance()

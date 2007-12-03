@@ -33,6 +33,7 @@ class ClusterLauncher : public WeaponLauncher
 {
  public:
   ClusterLauncher();
+  void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
 
  protected:

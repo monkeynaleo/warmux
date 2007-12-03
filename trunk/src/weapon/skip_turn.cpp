@@ -34,9 +34,19 @@
 
 SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn", new WeaponConfig())
 {
-  m_name = _("Skip turn");
+  UpdateTranslationStrings();
+
   m_category = TOOL;
   m_time_between_each_shot = 40;
+}
+
+//-----------------------------------------------------------------------------
+
+void SkipTurn::UpdateTranslationStrings()
+{
+  m_name = _("Skip turn");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 //-----------------------------------------------------------------------------

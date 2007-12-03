@@ -50,11 +50,17 @@ class BlowtorchConfig : public WeaponConfig
 
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
-  m_name = _("Blowtorch");
-  m_help = _("Howto use it : keep space key pressed\nAngle : Up/Down\nan ammo per turn");
+  UpdateTranslationStrings();
+
   m_category = TOOL;
   m_time_between_each_shot = MIN_TIME_BETWEEN_DIG;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile, "blowtorch_fire"));
+}
+
+void Blowtorch::UpdateTranslationStrings()
+{
+  m_name = _("Blowtorch");
+  m_help = _("Howto use it : keep space key pressed\nAngle : Up/Down\nan ammo per turn");
 }
 
 void Blowtorch::p_Deselect()

@@ -55,6 +55,8 @@ public:
   // Return true if end of turn
   void Refresh() const;
 
+  void UpdateTranslation();
+
   // Return a list of  weapons
   const weapons_list_type& GetList() const { return m_weapons_list; };
   Weapon* GetWeapon(Weapon::Weapon_type type);

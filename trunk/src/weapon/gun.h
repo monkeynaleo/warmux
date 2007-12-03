@@ -30,6 +30,8 @@ class Gun : public WeaponLauncher
 {
   public:
     Gun();
+
+    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
   protected:
     bool p_Shoot();

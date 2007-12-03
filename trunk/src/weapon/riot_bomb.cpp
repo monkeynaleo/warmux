@@ -109,10 +109,16 @@ void RiotBombRocket::Explosion()
 RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
 {
-  m_name = _("Riot Bomb");
-  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
+  UpdateTranslationStrings();
+
   m_category = HEAVY;
   ReloadLauncher();
+}
+
+void RiotBomb::UpdateTranslationStrings()
+{
+  m_name = _("Riot Bomb");
+  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
 }
 
 WeaponProjectile * RiotBomb::GetProjectileInstance()

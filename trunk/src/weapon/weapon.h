@@ -307,6 +307,9 @@ public:
   const std::string& GetHelp() const;
   Weapon_type GetType() const { return m_type; };
 
+  // For localization purposes, called when changing language
+  virtual void UpdateTranslationStrings() = 0;
+
   // For localization purposes, each weapon needs to have its own
   // "%s team has won %d <weapon>" function
   virtual std::string GetWeaponWinString(const char *TeamName, uint items_count) const = 0;

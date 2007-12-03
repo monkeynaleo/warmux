@@ -104,6 +104,7 @@ class Grapple : public Weapon
     void DetachNode();
     void SetRopeSize(double length) const;
 
+    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
 
     // Keys management

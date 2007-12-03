@@ -50,13 +50,21 @@ class ParachuteConfig : public WeaponConfig
 
 Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConfig(), NEVER_VISIBLE)
 {
-  m_name = _("Parachute");
+  UpdateTranslationStrings();
+
   m_category = MOVE;
   m_initial_nb_ammo = 2;
   m_x_extern = 0.0;
   use_unit_on_first_shoot = false;
 
   img = resource_manager.LoadSprite(weapons_res_profile, "parachute_sprite");
+}
+
+void Parachute::UpdateTranslationStrings()
+{
+  m_name = _("Parachute");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 Parachute::~Parachute()

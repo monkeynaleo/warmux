@@ -85,6 +85,7 @@ class Mine : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
     bool p_Shoot();
   public:
+    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
     Mine();
     MineConfig& cfg();
