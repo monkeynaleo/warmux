@@ -43,7 +43,7 @@ class PictureWidget : public Widget
   PictureWidget(const Point2i& size);
   PictureWidget(const Point2i& size, const std::string& resource_id);
   ~PictureWidget();
-  void SetSurface(const Surface& s, bool enable_scaling=false);
+  void SetSurface(const Surface& s, bool enable_scaling=false, bool antialiasing=false);
   void SetNoSurface();
   void Draw(const Point2i &mousePosition, Surface& surf) const;
   void SetSizePosition(const Rectanglei &rect) { StdSetSizePosition(rect); };
