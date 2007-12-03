@@ -33,13 +33,14 @@ struct SDL_keysym;
 
 class Widget : public Rectanglei, public Container
 {
-  bool has_mouse_focus;
-  bool has_keyboard_focus;
+  bool has_focus;
   bool visible;
+  bool is_highlighted;
 
   Color border_color;
   uint border_size;
   Color background_color;
+  Color highlight_bg_color;
 
   Widget(const Widget&);
   const Widget& operator=(const Widget&);
@@ -77,17 +78,17 @@ class Widget : public Rectanglei, public Container
   // widget may be hidden
   void SetVisible(bool _visible);
 
-  // manage mouse focus
-  bool HasMouseFocus() const { return has_mouse_focus; };
-  void SetMouseFocus(bool focus);
+  // manage mouse/keyboard focus
+  bool HasFocus() const { return has_focus; };
+  void SetFocus(bool focus);
 
-  // manage keyboard focus
-  bool HasKeyboardFocus() const { return has_keyboard_focus; };
-  void SetKeyboardFocus(bool focus);
+  bool IsHighlighted() const;
+  void SetHighlighted(bool focus);
 
   // border, background color
   void SetBorder(const Color &border_color, uint boder_size);
   void SetBackgroundColor(const Color &background_color);
+  void SetHighlightBgColor(const Color &highlight_bg_color);
 
   void SetContainer(Container * _ct) { ct = _ct; };
 
