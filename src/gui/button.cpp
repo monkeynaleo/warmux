@@ -37,9 +37,9 @@ Button::~Button()
   delete image;
 }
 
-void Button::Draw(const Point2i &mousePosition, Surface& surf) const
+void Button::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
 {
-  uint frame = (HasKeyboardFocus() || Contains(mousePosition) ? 1 : 0);
+  uint frame = (IsHighlighted());
   
   image->SetCurrentFrame(frame);
   

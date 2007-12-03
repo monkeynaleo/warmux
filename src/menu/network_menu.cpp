@@ -278,7 +278,7 @@ bool NetworkMenu::signal_ok()
 void NetworkMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
-  if (line_to_send_tbox->HasMouseFocus())
+  if (line_to_send_tbox->HasFocus())
   {
     SendChatMsg();
     return;

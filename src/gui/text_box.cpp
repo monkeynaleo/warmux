@@ -30,6 +30,8 @@ TextBox::TextBox (const std::string &label, const Point2i &_size,
   Label(label, _size, fsize, fstyle),
   cursor_pos(label.size())
 {
+  Widget::SetBorder(defaultOptionColorRect, 1);
+  Widget::SetHighlightBgColor(highlightOptionColorBox);
 }
 
 void TextBox::BasicSetText(std::string const &new_txt)
@@ -78,11 +80,6 @@ bool TextBox::SendKey(const SDL_keysym& key)
 
 void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  if (HasMouseFocus() || HasKeyboardFocus())
-    surf.BoxColor(*this, highlightOptionColorBox);
-  
-  surf.RectangleColor(*this, defaultOptionColorRect);
-  
   Label::Draw(mousePosition, surf);
   txt_label->DrawCursor(position, cursor_pos);
 }

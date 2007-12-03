@@ -27,12 +27,13 @@
 
 Widget::Widget():
   Rectanglei(),
-  has_mouse_focus(false),
-  has_keyboard_focus(false),
+  has_focus(false),
   visible(true),
+  is_highlighted(false),
   border_color(white_color),
   border_size(0),
   background_color(transparent_color),
+  highlight_bg_color(transparent_color),
   ct(NULL),
   need_redrawing(true)
 {
@@ -40,12 +41,12 @@ Widget::Widget():
 
 Widget::Widget(const Rectanglei &rect):
   Rectanglei(rect),
-  has_mouse_focus(false),
-  has_keyboard_focus(false),
+  has_focus(false),
   visible(true),  
   border_color(white_color),
   border_size(0),
   background_color(transparent_color),
+  highlight_bg_color(transparent_color),
   ct(NULL),
   need_redrawing(true)
 {
@@ -67,8 +68,11 @@ void Widget::RedrawBackground(const Rectanglei& rect,
   if (!visible)
     return;
 
-  if (background_color != transparent_color)
+  if (IsHighlighted() && highlight_bg_color != transparent_color) {
+    surf.BoxColor(*this, highlight_bg_color);
+  } else if (background_color != transparent_color) {
     surf.BoxColor(rect, background_color);
+  }
   
   if (border_size != 0 && border_color != transparent_color
       && rect == *this)
@@ -95,15 +99,10 @@ void Widget::Update(const Point2i &mousePosition,
   need_redrawing = false;
 }
 
-void Widget::SetMouseFocus(bool focus)
+void Widget::SetFocus(bool focus)
 {
-  has_mouse_focus = focus;
-  NeedRedrawing();
-}
-
-void Widget::SetKeyboardFocus(bool focus)
-{
-  has_keyboard_focus = focus;
+  has_focus = focus;
+  is_highlighted = focus;
   NeedRedrawing();
 }
 
@@ -147,6 +146,25 @@ void Widget::SetBackgroundColor(const Color &bg_color)
 {
   if (background_color != bg_color) {
     background_color = bg_color;
+    NeedRedrawing();
+  }
+}
+
+bool Widget::IsHighlighted() const 
+{ 
+  return (is_highlighted || HasFocus()); 
+}
+  
+void Widget::SetHighlighted(bool focus)
+{
+  is_highlighted = focus;
+  NeedRedrawing();
+}
+
+void Widget::SetHighlightBgColor(const Color &_highlight_bg_color)
+{
+  if (highlight_bg_color != _highlight_bg_color) {
+    highlight_bg_color = _highlight_bg_color;
     NeedRedrawing();
   }
 }
