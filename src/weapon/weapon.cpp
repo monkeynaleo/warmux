@@ -114,7 +114,7 @@ Weapon::Weapon(Weapon_type type,
       m_image->cache.EnableLastFrameCache();
   }
 
-  icon = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_ico"));
+  icon = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_ico"), true);
   icon->cache.EnableLastFrameCache();
 
   mouse_character_selection = true;
