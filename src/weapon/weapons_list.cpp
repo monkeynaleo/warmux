@@ -107,6 +107,13 @@ void WeaponsList::Refresh () const
   ActiveTeam().AccessWeapon().Manage();
 }
 
+void WeaponsList::UpdateTranslation()
+{
+  weapons_list_it it = m_weapons_list.begin(), end=m_weapons_list.end();
+  for (; it != end; it++) {
+    (*it)->UpdateTranslationStrings();
+  }
+}
 
 //-----------------------------------------------------------------------------
 

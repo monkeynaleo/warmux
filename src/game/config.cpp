@@ -48,6 +48,7 @@
 #include "tool/string_tools.h"
 #include "tool/i18n.h"
 #include "tool/xml_document.h"
+#include "weapon/weapons_list.h"
 #ifdef USE_AUTOPACKAGE
 #  include "include/binreloc.h"
 #endif
@@ -200,10 +201,14 @@ Config::Config():
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
 
-void Config::SetLanguage(const std::string language)
+void Config::SetLanguage(const std::string language, bool update)
 {
   default_language = language;
   InitI18N(TranslateDirectory(locale_dir), language);
+
+  if (update) {
+    WeaponsList::GetInstance()->UpdateTranslation();
+  }
 }
 
 /*

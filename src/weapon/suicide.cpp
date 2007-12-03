@@ -32,8 +32,16 @@
 
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {
-  m_name = _("Commit Suicide");
+  UpdateTranslationStrings();
+
   m_category = DUEL;
+}
+
+void Suicide::UpdateTranslationStrings()
+{
+  m_name = _("Commit Suicide");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 bool Suicide::p_Shoot()

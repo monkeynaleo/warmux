@@ -147,7 +147,6 @@ Weapon::Weapon(Weapon_type type,
     XmlReader::ReadIntAttr(elem, "dx", hole_delta.x);
     XmlReader::ReadIntAttr(elem, "dy", hole_delta.y);
   }
-
 }
 
 Weapon::~Weapon()

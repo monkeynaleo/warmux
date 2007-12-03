@@ -45,11 +45,17 @@ class BaseballConfig : public WeaponConfig
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 {
-  m_name = _("Baseball Bat");
-  m_help = _("Angle : Up/Down\nFire : space key\na hit per turn");
+  UpdateTranslationStrings();
+
   m_category = DUEL;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
+}
+
+void Baseball::UpdateTranslationStrings()
+{
+  m_name = _("Baseball Bat");
+  m_help = _("Angle : Up/Down\nFire : space key\na hit per turn");
 }
 
 bool Baseball::p_Shoot()

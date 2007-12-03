@@ -35,6 +35,8 @@ class Shotgun : public WeaponLauncher
     bool p_Shoot();
   public:
     Shotgun();
+
+    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
   private:
     void ShootSound() const;

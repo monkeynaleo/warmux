@@ -60,8 +60,16 @@ void SyringeConfig::LoadXml(xmlpp::Element *elem){
 
 Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())
 {
-  m_name = _("Syringe");
+  UpdateTranslationStrings();
+
   m_category = DUEL;
+}
+
+void Syringe::UpdateTranslationStrings()
+{
+  m_name = _("Syringe");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 bool Syringe::p_Shoot (){

@@ -39,6 +39,8 @@ class Syringe : public Weapon
   public:
     Syringe();
     SyringeConfig &cfg();
+
+    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 

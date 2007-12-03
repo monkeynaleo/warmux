@@ -139,9 +139,17 @@ void Gnu::SignalOutOfMap()
 GnuLauncher::GnuLauncher() :
   WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  m_name = _("Gnu Launcher");
+  UpdateTranslationStrings();
+
   m_category = SPECIAL;
   ReloadLauncher();
+}
+
+void GnuLauncher::UpdateTranslationStrings()
+{
+  m_name = _("Gnu Launcher");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 WeaponProjectile * GnuLauncher::GetProjectileInstance()

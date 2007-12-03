@@ -106,8 +106,8 @@ void BazookaRocket::Explosion()
 Bazooka::Bazooka() :
   WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
 {
-  m_name = _("Bazooka");
-  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
+  UpdateTranslationStrings();
+
   m_category = HEAVY;
   ReloadLauncher();
 }
@@ -116,6 +116,12 @@ WeaponProjectile * Bazooka::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>
       (new BazookaRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+}
+
+void Bazooka::UpdateTranslationStrings()
+{
+  m_name = _("Bazooka");
+  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
 }
 
 std::string Bazooka::GetWeaponWinString(const char *TeamName, uint items_count ) const

@@ -64,11 +64,18 @@ void Grenade::SignalOutOfMap()
 GrenadeLauncher::GrenadeLauncher() :
   WeaponLauncher(WEAPON_GRENADE, "grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
+  UpdateTranslationStrings();
 
-  m_name = _("Grenade");
   m_category = THROW;
   m_allow_change_timeout = true;
   ReloadLauncher();
+}
+
+void GrenadeLauncher::UpdateTranslationStrings()
+{
+  m_name = _("Grenade");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 WeaponProjectile * GrenadeLauncher::GetProjectileInstance()

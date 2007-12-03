@@ -199,9 +199,17 @@ void ObjMine::Draw()
 
 Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  m_name = _("Mine");
+  UpdateTranslationStrings();
+
   m_category = THROW;
   ReloadLauncher();
+}
+
+void Mine::UpdateTranslationStrings()
+{
+    m_name = _("Mine");
+    /* TODO: FILL IT */
+    /* m_help = _(""); */
 }
 
 WeaponProjectile * Mine::GetProjectileInstance()

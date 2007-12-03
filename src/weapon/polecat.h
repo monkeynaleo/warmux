@@ -29,6 +29,8 @@ class PolecatLauncher : public WeaponLauncher
 {
 public:
   PolecatLauncher();
+
+  void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 protected:
   WeaponProjectile * GetProjectileInstance();

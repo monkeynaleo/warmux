@@ -99,7 +99,8 @@ class GrappleConfig : public EmptyWeaponConfig
 
 Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
 {
-  m_name = _("Grapple");
+  UpdateTranslationStrings();
+
   m_category = MOVE;
   use_unit_on_first_shoot = false;
 
@@ -112,6 +113,13 @@ Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
   go_left = false ;
   go_right = false ;
   delta_len = 0 ;
+}
+
+void Grapple::UpdateTranslationStrings()
+{
+  m_name = _("Grapple");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 Grapple::~Grapple()

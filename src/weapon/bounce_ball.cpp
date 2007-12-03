@@ -78,10 +78,16 @@ void BounceBall::SignalOutOfMap()
 BounceBallLauncher::BounceBallLauncher() :
   WeaponLauncher(WEAPON_BOUNCE_BALL, "bounce_ball", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  m_name = _("Bounce Ball");
-  m_help = _("Timeout : Wheel mouse or Page Up/Down\nAngle : Up/Down\nFire : space key\nan ammo per turn");
+  UpdateTranslationStrings();
+
   m_category = DUEL;
   ReloadLauncher();
+}
+
+void BounceBallLauncher::UpdateTranslationStrings()
+{
+  m_name = _("Bounce Ball");
+  m_help = _("Timeout : Wheel mouse or Page Up/Down\nAngle : Up/Down\nFire : space key\nan ammo per turn");
 }
 
 WeaponProjectile * BounceBallLauncher::GetProjectileInstance()

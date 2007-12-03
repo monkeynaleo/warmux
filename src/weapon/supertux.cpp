@@ -211,7 +211,8 @@ void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem)
 TuxLauncher::TuxLauncher() :
   WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  m_name = _("SuperTux");
+  UpdateTranslationStrings();
+
   m_category = SPECIAL;
   current_tux = NULL;
   ReloadLauncher();
@@ -221,6 +222,13 @@ TuxLauncher::TuxLauncher() :
 
   // Supertux doesn't drown! it swims!
   ignore_drowning_signal = true;
+}
+
+void TuxLauncher::UpdateTranslationStrings()
+{
+  m_name = _("SuperTux");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 WeaponProjectile * TuxLauncher::GetProjectileInstance()

@@ -105,9 +105,17 @@ void DynamiteStick::SignalDrowning()
 Dynamite::Dynamite() :
     WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  m_name = _("Dynamite");
+  UpdateTranslationStrings();
+
   m_category = THROW;
   ReloadLauncher();
+}
+
+void Dynamite::UpdateTranslationStrings()
+{
+  m_name = _("Dynamite");
+  /*TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 WeaponProjectile * Dynamite::GetProjectileInstance()

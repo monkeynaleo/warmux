@@ -76,7 +76,8 @@ void SubMachineGunBullet::ShootSound()
 
 SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", new ExplosiveWeaponConfig())
 {
-  m_name = _("Submachine Gun");
+  UpdateTranslationStrings();
+
   m_category = RIFLE;
 
   ignore_collision_signal = true;
@@ -90,6 +91,13 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   m_weapon_fire->EnableRotationCache(32);
 
   ReloadLauncher();
+}
+
+void SubMachineGun::UpdateTranslationStrings()
+{
+  m_name = _("Submachine Gun");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 // Return a projectile instance for the submachine gun

@@ -37,10 +37,18 @@ const double LOW_GRAVITY_FACTOR = 0.4;
 LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",
                             new WeaponConfig(), NEVER_VISIBLE)
 {
-  m_name = _("LowGrav");
+  UpdateTranslationStrings();
+
   m_category = MOVE;
 
   use_unit_on_first_shoot = false;
+}
+
+void LowGrav::UpdateTranslationStrings()
+{
+  m_name = _("LowGrav");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 void LowGrav::p_Deselect()

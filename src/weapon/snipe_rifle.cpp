@@ -69,7 +69,8 @@ void SnipeBullet::ShootSound()
 
 SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new ExplosiveWeaponConfig())
 {
-  m_name = _("Sniper Rifle");
+  UpdateTranslationStrings();
+
   m_category = RIFLE;
 
   last_angle = 0.0;
@@ -80,6 +81,13 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   laser_beam_color = resource_manager.LoadColor(weapons_res_profile,m_id+"_laser_color");
 
   ReloadLauncher();
+}
+
+void SnipeRifle::UpdateTranslationStrings()
+{
+  m_name = _("Sniper Rifle");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 WeaponProjectile * SnipeRifle::GetProjectileInstance()

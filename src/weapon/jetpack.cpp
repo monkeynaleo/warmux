@@ -43,7 +43,8 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
                             NEVER_VISIBLE)
 {
-  m_name = _("Jetpack");
+  UpdateTranslationStrings();
+
   m_category = MOVE;
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
@@ -51,6 +52,13 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
   m_x_force = 0.0;
   m_y_force = 0.0;
+}
+
+void JetPack::UpdateTranslationStrings()
+{
+  m_name = _("Jetpack");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
 }
 
 void JetPack::Refresh()
