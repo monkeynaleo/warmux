@@ -198,7 +198,7 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
 
   InfoMap* info = MapsList::GetInstance()->lst[index];
   try {
-    widget->SetSurface(info->ReadPreview(), true);
+    widget->SetSurface(info->ReadPreview(), true, true);
   }
   catch (const char* msg) {
     Question question;
@@ -230,7 +230,7 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
 
 void MapSelectionBox::UpdateRandomMapInfo(PictureWidget * widget, bool selected)
 {
-  widget->SetSurface(random_map_preview, true);
+  widget->SetSurface(random_map_preview, true, true);
   if((display_only && !selected) || Network::GetInstance()->IsServer())
     widget->Disable();
   else
