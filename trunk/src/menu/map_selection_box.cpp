@@ -231,13 +231,13 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
 void MapSelectionBox::UpdateRandomMapInfo(PictureWidget * widget, bool selected)
 {
   widget->SetSurface(random_map_preview, true, true);
-  if((display_only && !selected) || Network::GetInstance()->IsServer())
+  if ((display_only && !selected))
     widget->Disable();
   else
     widget->Enable();
 
   // If selected update general information
-  if(selected) {
+  if (selected) {
     map_name_label->SetText(_("Random map"));
     map_author_label->SetText(_("Choose randomly between the different maps"));
   }
