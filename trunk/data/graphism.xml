@@ -63,7 +63,7 @@
   <surface name="podium" file="menu/podium.png" />
 
   <!-- Random map -->
-  <surface name="random_map" file="map/random_map.png" />
+  <surface name="random_map" file="map/random_map.jpg" />
 
   <!-- Buttons -->
   
