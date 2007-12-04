@@ -1207,9 +1207,9 @@ msgid "Wormux version "
 msgstr "Wormux različica "
 
 #: src/map/maps_list.cpp:91
-#, fuzzy, c-format
+#, c-format
 msgid "XML error during loading map '%s': "
-msgstr "XML napaka pri nalaganju karte '%s' :"
+msgstr "Napaka v XML med nalaganjem karte '%s': "
 
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
@@ -1251,25 +1251,23 @@ msgstr ""
 
 #: src/map/maps_list.cpp:79
 msgid "couldn't load config"
-msgstr ""
+msgstr "nalaganje nastavitev ni bilo mogoče"
 
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "opravljeno"
 
 #: src/map/maps_list.cpp:86
-#, fuzzy
 msgid "error parsing the config file"
-msgstr "Branje privzete nastavitvene datoteke"
+msgstr "napaka pri razčlenjevanju nastavitvene datoteke"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "iz"
 
 #: src/map/maps_list.cpp:75
-#, fuzzy
 msgid "no configuration file!"
-msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
+msgstr "ni nastavitvene datoteke!"
 
 #: src/sound/jukebox.cpp:157
 msgid "o Loading music"
