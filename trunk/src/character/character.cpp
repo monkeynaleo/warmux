@@ -121,7 +121,8 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   SetBody(char_body);
 
   ResetConstants();
-
+  // Allow player to go outside of map by upper bound (bug #10420)
+  m_allow_negative_y = true;
   // Name Text object
   if (Config::GetInstance()->GetDisplayNameCharacter())
     name_text = new Text(character_name);
