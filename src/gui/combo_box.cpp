@@ -88,7 +88,7 @@ void ComboBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 
   // 1. first draw the annulus background
   uint tmp_back_x = GetPositionX() + (GetSizeX() - m_annulus_background.GetWidth())/4 ;
-  uint tmp_back_y = GetPositionY() + (GetSizeY() - m_annulus_background.GetHeight() - txt_label->GetHeight() - 5) /2;
+  uint tmp_back_y = GetPositionY();
   video_window.Blit(m_annulus_background, Point2i(tmp_back_x, tmp_back_y));
 
   // 2. then draw the progress annulus
@@ -109,8 +109,8 @@ void ComboBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
   delete(tmp);
 
   // 3. then draw the annulus foreground
-  uint tmp_fore_x = GetPositionX() + (GetSizeX() - m_annulus_foreground.GetWidth())/4 ;
-  uint tmp_fore_y = GetPositionY() + (GetSizeY() - m_annulus_foreground.GetHeight() - txt_label->GetHeight() - 5) /2;
+  uint tmp_fore_x = tmp_back_x;
+  uint tmp_fore_y = tmp_back_y;
   video_window.Blit(m_annulus_foreground, Point2i(tmp_fore_x, tmp_fore_y));
 
   // 4. then draw the image

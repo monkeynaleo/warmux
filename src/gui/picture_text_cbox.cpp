@@ -57,7 +57,7 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
   if (m_value)
     {
       uint enabled_x = GetPositionX() + (GetSizeX() - m_enabled.GetWidth() - 20)/2 ;
-      uint enabled_y = GetPositionY() + (GetSizeY() - m_enabled.GetHeight() - txt_label->GetHeight() - 5) /2;
+      uint enabled_y = GetPositionY();
       uint outside_x = std::max(uint(0), GetPositionX() - enabled_x);
       uint outside_y = std::max(uint(0), GetPositionY() - enabled_y);
       
@@ -70,7 +70,7 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
   else
     {
       uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_back.GetWidth() - 20)/2 ;
-      uint disabled_y = GetPositionY() + (GetSizeY() - m_disabled_back.GetHeight() - txt_label->GetHeight() - 5) /2;
+      uint disabled_y = GetPositionY();
       uint outside_x = std::max(uint(0), GetPositionX() - disabled_x);
       uint outside_y = std::max(uint(0), GetPositionY() - disabled_y);
       
@@ -82,8 +82,8 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
     }
   // center the image
   uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth() - 20)/2 ;
-  uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
-  
+  uint tmp_y = GetPositionY() + (m_enabled.GetHeight() - m_image.GetHeight())/2;
+
   video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
   
   txt_label->DrawCenterTop(GetPosition()
@@ -93,7 +93,7 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
   if (!m_value)
     {
       uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_front.GetWidth() - 20)/2 ;
-      uint disabled_y = GetPositionY() + (GetSizeY() - m_disabled_front.GetHeight() - txt_label->GetHeight() - 5) /2;
+      uint disabled_y = GetPositionY() + (m_enabled.GetHeight() - m_disabled_front.GetHeight())/2;
       video_window.Blit(m_disabled_front, Point2i(disabled_x, disabled_y));
     }
 }
