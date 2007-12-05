@@ -14,7 +14,7 @@
 	</Platforms>
 	<ToolFiles>
 		<ToolFile
-			RelativePath="gettext.rules"
+			RelativePath=".\gettext.rules"
 		/>
 	</ToolFiles>
 	<Configurations>
@@ -30,6 +30,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				Description="Setting missing #defines for dumb Visual resource compiler"
+				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h"
 			/>
 			<Tool
 				Name="Gettext compilation"
@@ -117,6 +119,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				Description="Setting missing #defines for dumb Visual resource compiler"
+				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h"
 			/>
 			<Tool
 				Name="Gettext compilation"

@@ -5,6 +5,9 @@
 #  include "config.h"
 #else
 #  include "msvc/config.h"
+// Is build automatically by a pre-built event
+#  include "../visual/resource.h"
+#  define __VERSION__ "Visual Studio"
 #endif
 
 #if ENABLE_NLS
@@ -39,11 +42,7 @@ FILETYPE VFT_APP
             VALUE "OriginalFilename", "wormux.exe"
             VALUE "ProductName", "wormux"
             VALUE "ProductVersion", PACKAGE_VERSION
-#ifdef __MINGW32__
             VALUE "SpecialBuild", "$Revision$, build on " __DATE__ ", " __TIME__ " with compiler version " __VERSION__
-#else
-            VALUE "SpecialBuild", "$Revision$"
-#endif
         }
     }
     BLOCK "VarFileInfo"
