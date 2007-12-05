@@ -19,7 +19,7 @@
 	<is_open>1</is_open>
 	<!-- pad is given in pixel count. -->
 	<add_pad>1</add_pad>
-	<point name="upper_left_pad" x="1000" y="1000" />
-	<point name="lower_right_pad" x="1000" y="0" />
+	<point name="upper_left_pad" x="1200" y="1500" />
+	<point name="lower_right_pad" x="1200" y="0" />
 	<music_playlist>funfair</music_playlist>
 </resources>
