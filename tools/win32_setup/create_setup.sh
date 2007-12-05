@@ -188,17 +188,18 @@ GLIB_PATH=$(pkg_path glib-2.0)
 cp "$GLIB_PATH"/bin/libg{object,thread,module,lib}-2.0-0.dll "$DEST"
 
 # Other libs
-cp "$(pkg_path sigc++-2.0)/bin/libsigc"*.dll $DEST
-cp "$(pkg_path libxml-2.0)/bin/libxml2"*.dll $DEST
-cp "$(pkg_path libxml++-2.6)/bin/libxml++"*.dll $DEST
-cp "$(pkg_path glibmm-2.4)/bin/libglibmm"*.dll $DEST
+cp "$(pkg_path sigc++-2.0)/bin/{lib,}sigc"*.dll $DEST
+cp "$(pkg_path libxml-2.0)/bin/{lib,}xml2"*.dll $DEST
+cp "$(pkg_path libxml++-2.6)/bin/{lib,}xml++"*.dll $DEST
+cp "$(pkg_path glibmm-2.4)/bin/{lib,}glibmm"*.dll $DEST
 
 # Files that must not be stripped (all MSVC, mainly SDL and vorbis)
+# Make sure freetype, libpng and jpeg dll are matching your libs.
 SDL_PATH=$($SDL_CONFIG --prefix)
 cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll    \
    "$GLIB_PATH/bin/"{intl,iconv,zlib1,libpng12}.dll     \
-   "$SDL_PATH/bin/"lib{curl-4,freetype-6,png12-0}.dll   \
-   "$SDL_PATH/bin/jpeg.dll"                             \
+   "$SDL_PATH/bin/"lib{curl-4,freetype6,png12}.dll   \
+   "$SDL_PATH/bin/jpeg62.dll"                             \
    "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3}.dll "$DEST"
 
 # Continue producing installer
