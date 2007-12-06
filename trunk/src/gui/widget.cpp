@@ -24,6 +24,7 @@
 #include "graphic/colors.h"
 #include "graphic/surface.h"
 #include "gui/container.h"
+#include "tool/debug.h"
 
 Widget::Widget():
   Rectanglei(),
@@ -77,6 +78,9 @@ void Widget::RedrawBackground(const Rectanglei& rect,
   if (border_size != 0 && border_color != transparent_color
       && rect == *this)
     surf.RectangleColor(*this, border_color, border_size);
+
+  if (IsDEBUGGING("widget.border"))
+    surf.RectangleColor(*this, c_red, border_size);
 }
 
 void Widget::Update(const Point2i &mousePosition,
