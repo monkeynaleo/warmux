@@ -265,7 +265,8 @@ void Action_Game_SetState (Action *a)
   if (!Network::GetInstance()->IsTurnMaster()) {
     int random2 = int(randomSync.GetLong(0, 65535));
     if (random != random2) {
-      Error("Network random generator is desynchronized (%d!=%d) !", random, random2);
+      std::string str = Format("Network random generator is desynchronized (%d!=%d) !", random, random2);
+      Error(str);
       ASSERT(false);
     }
   }
