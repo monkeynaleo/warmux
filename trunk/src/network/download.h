@@ -33,14 +33,15 @@ class Downloader
   static Downloader * singleton;
 
   CURL* curl;
-public:
   Downloader();
   ~Downloader();
+public:
+  static Downloader* GetInstance();
+  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
 
   // Return true if the download was successful
   bool Get(const char* url, const char* save_as);
   std::map<std::string, int> GetServerList(std::string list_name);
-  static Downloader* GetInstance();
 };
 
 #endif
