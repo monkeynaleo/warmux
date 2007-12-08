@@ -458,7 +458,7 @@ void Game::MainLoop()
       // How many frame by seconds ?
       fps->Refresh();
       StatStop("Game:Draw()");
-      time_of_next_frame += AppWormux::GetInstance()->video->GetSleepMaxFps();
+      time_of_next_frame += AppWormux::GetInstance()->video->GetMaxDelay();
 #ifndef USE_VALGRIND
     }
   }

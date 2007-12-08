@@ -28,7 +28,7 @@
 class Video{
  private:
   uint m_max_fps;     // If equals to zero, it means no limit
-  uint m_sleep_max_fps;
+  uint m_max_delay;
   bool SDLReady;
   bool fullscreen;
   SDL_Surface *icon;
@@ -44,7 +44,7 @@ public:
   void SetWindowCaption(const std::string& caption) const;
   void SetMaxFps(uint max_fps);
   uint GetMaxFps() const { return m_max_fps; };
-  uint GetSleepMaxFps() const { return m_sleep_max_fps; };
+  uint GetMaxDelay() const { return m_max_delay; };
   void AddConfigIfAbsent(int w, int h);
 
 public:

@@ -70,9 +70,9 @@ Video::~Video(){
 void Video::SetMaxFps(uint max_fps){
   m_max_fps = max_fps;
   if (0 < m_max_fps)
-    m_sleep_max_fps = 1000/m_max_fps;
+    m_max_delay = 1000/m_max_fps;
   else
-    m_sleep_max_fps = 0;
+    m_max_delay = 0;
 }
 
 static bool CompareConfigs(const Point2i& a, const Point2i& b)
