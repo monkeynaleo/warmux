@@ -43,7 +43,8 @@ Widget::Widget():
 Widget::Widget(const Rectanglei &rect):
   Rectanglei(rect),
   has_focus(false),
-  visible(true),  
+  visible(true),
+  is_highlighted(false),
   border_color(white_color),
   border_size(0),
   background_color(transparent_color),
@@ -63,7 +64,7 @@ void Widget::StdSetSizePosition(const Rectanglei &rect)
 void Widget::RedrawBackground(const Rectanglei& rect,
 			      Surface& surf)
 {
-  if (ct != NULL) 
+  if (ct != NULL)
     ct->RedrawBackground(rect, surf);
 
   if (!visible)
@@ -74,7 +75,7 @@ void Widget::RedrawBackground(const Rectanglei& rect,
   } else if (background_color != transparent_color) {
     surf.BoxColor(rect, background_color);
   }
-  
+
   if (border_size != 0 && border_color != transparent_color
       && rect == *this)
     surf.RectangleColor(*this, border_color, border_size);
@@ -154,11 +155,11 @@ void Widget::SetBackgroundColor(const Color &bg_color)
   }
 }
 
-bool Widget::IsHighlighted() const 
-{ 
-  return (is_highlighted || HasFocus()); 
+bool Widget::IsHighlighted() const
+{
+  return (is_highlighted || HasFocus());
 }
-  
+
 void Widget::SetHighlighted(bool focus)
 {
   is_highlighted = focus;
