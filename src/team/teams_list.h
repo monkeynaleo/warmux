@@ -46,10 +46,11 @@ private:
   static TeamsList *singleton;
 
   void LoadOneTeam (const std::string &dir, const std::string &file);
-  TeamsList();
+  // GetInstance does more than create!
   ~TeamsList();
   void LoadList();
 
+  // GetInstance does more than create!
   static TeamsList *GetInstance();
 
 public:
