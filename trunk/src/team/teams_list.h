@@ -80,7 +80,7 @@ public:
   Team* FindById (const std::string &id, int &pos);
   Team* FindByIndex (uint index);
   // Find a team by its id or index (in playing full_list)
-  Team* FindPlayingById(const std::string &id, uint &index);
+  Team* FindPlayingById(const std::string &id, int &index);
   Team* FindPlayingByIndex(uint index);
 };
 
