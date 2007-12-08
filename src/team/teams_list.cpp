@@ -272,7 +272,7 @@ Team *TeamsList::FindPlayingByIndex (uint index)
 
 //-----------------------------------------------------------------------------
 
-Team* TeamsList::FindPlayingById(const std::string &id, uint &index)
+Team* TeamsList::FindPlayingById(const std::string &id, int &index)
 {
   iterator it = playing_list.begin(), end = playing_list.end();
   index=0;
@@ -281,6 +281,8 @@ Team* TeamsList::FindPlayingById(const std::string &id, uint &index)
     if ((*it) -> GetId() == id)
       return *it;
   }
+
+  index = -1;
   ASSERT(false);
   return NULL;
 }
