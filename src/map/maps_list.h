@@ -134,7 +134,7 @@ private:
   static MapsList * singleton;
 
 public:
-  static void CleanUp(void) { if (singleton) delete singleton; };
+  static void CleanUp(void) { if (singleton) delete singleton; singleton = NULL; };
   static MapsList * GetInstance();
 
   // Return -1 if fails

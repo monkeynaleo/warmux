@@ -86,7 +86,7 @@ private:
   std::string GetObjectsFilename() const;
 
 public:
-  static void CleanUp() { if (singleton) delete singleton; };
+  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
   static GameMode * GetInstance();
 
   const std::string& GetName() const;

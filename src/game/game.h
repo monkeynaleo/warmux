@@ -73,7 +73,7 @@ private:
 
   static uint last_unique_id;
 public:
-  static void CleanUp() { if (singleton) delete singleton; };
+  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
   static Game * GetInstance();
 
   void Start();
