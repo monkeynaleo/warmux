@@ -75,18 +75,6 @@ void Video::SetMaxFps(uint max_fps){
     m_sleep_max_fps = 0;
 }
 
-uint Video::GetMaxFps() const {
-  return m_max_fps;
-}
-
-uint Video::GetSleepMaxFps() const {
-  return m_sleep_max_fps;
-}
-
-bool Video::IsFullScreen() const{
-  return fullscreen;
-}
-
 static bool CompareConfigs(const Point2i& a, const Point2i& b)
 {
   return  (a.x < b.x) || ((a.x == b.x) && (a.y < b.y));
@@ -144,11 +132,6 @@ void Video::ComputeAvailableConfigs()
     else
       prev++;
   }
-}
-
-const std::list<Point2i>& Video::GetAvailableConfigs() const
-{
-  return available_configs;
 }
 
 bool Video::SetConfig(const int width, const int height, const bool _fullscreen){

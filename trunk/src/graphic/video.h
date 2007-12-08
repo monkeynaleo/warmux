@@ -43,17 +43,17 @@ public:
   Surface window;
   void SetWindowCaption(const std::string& caption) const;
   void SetMaxFps(uint max_fps);
-  uint GetMaxFps() const;
-  uint GetSleepMaxFps() const;
+  uint GetMaxFps() const { return m_max_fps; };
+  uint GetSleepMaxFps() const { return m_sleep_max_fps; };
   void AddConfigIfAbsent(int w, int h);
 
 public:
   Video();
   ~Video();
 
-  bool IsFullScreen() const;
+  bool IsFullScreen() const { return fullscreen; };
 
-  const std::list<Point2i>& GetAvailableConfigs() const;
+  const std::list<Point2i>& GetAvailableConfigs() const { return available_configs; };
   bool SetConfig(int width, int height, bool fullscreen);
   void ToggleFullscreen();
 
