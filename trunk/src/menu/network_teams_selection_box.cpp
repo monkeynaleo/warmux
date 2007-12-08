@@ -275,7 +275,8 @@ void NetworkTeamsSelectionBox::AddTeamCallback(const std::string& team_id)
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() == NULL) {
       int index;
-      Team * tmp = GetTeamsList().Find/*Playing*/ById(team_id, index);
+      /* FindPlayingById should be faster */
+      Team * tmp = GetTeamsList().FindById(team_id, index);
 
       teams_selections.at(i)->SetTeam(*tmp, true);
       break;
