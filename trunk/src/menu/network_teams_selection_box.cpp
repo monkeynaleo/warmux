@@ -294,15 +294,13 @@ void NetworkTeamsSelectionBox::AddTeamCallback(const std::string& team_id)
   local_teams_nb->SetValue(nb_local_teams);
 }
 
-void NetworkTeamsSelectionBox::UpdateTeamCallback(const std::string& team_id, bool remote)
+void NetworkTeamsSelectionBox::UpdateTeamCallback(const std::string& team_id)
 {
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() != NULL &&
         teams_selections.at(i)->GetTeam()->GetId() == team_id) {
       int index = 0;
       Team * tmp = GetTeamsList().FindById(team_id, index);
-      if (remote)
-        tmp->SetRemote();
 
       // Force refresh of information
       teams_selections.at(i)->SetTeam(*tmp, true);

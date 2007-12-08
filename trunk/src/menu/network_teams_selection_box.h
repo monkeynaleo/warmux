@@ -56,7 +56,7 @@ class NetworkTeamsSelectionBox : public HBox
   Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void AddTeamCallback(const std::string& team_id);
-  void UpdateTeamCallback(const std::string& team_id, bool remote=false);
+  void UpdateTeamCallback(const std::string& team_id);
   void DelTeamCallback(const std::string& team_id);
 
   void SetMaxNbLocalPlayers(uint nb);
