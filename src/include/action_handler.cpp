@@ -393,16 +393,17 @@ void Action_Menu_AddTeam (Action *a)
 
   MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
 
-  GetTeamsList().AddTeam (the_team);
+  GetTeamsList().AddTeam(the_team);
 
   if (Network::GetInstance()->network_menu != NULL)
+  {
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
+  }
 }
 
 void Action_Menu_UpdateTeam (Action *a)
 {
   ConfigTeam the_team;
-  bool       remote = Network::GetInstance()->IsServer() && a->creator;
 
   the_team.id = a->PopString();
   the_team.player_name = a->PopString();
@@ -411,7 +412,7 @@ void Action_Menu_UpdateTeam (Action *a)
   GetTeamsList().UpdateTeam (the_team);
 
   if (Network::GetInstance()->network_menu != NULL)
-    Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id, remote);
+    Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id);
 }
 
 void Action_Menu_DelTeam (Action *a)
