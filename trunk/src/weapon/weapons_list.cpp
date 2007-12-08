@@ -49,6 +49,7 @@ void WeaponsList::CleanUp()
 {
   if (weapon_list)
     delete weapon_list;
+  weapon_list = NULL;
 }
 
 WeaponsList::~WeaponsList()

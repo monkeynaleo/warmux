@@ -54,7 +54,7 @@ private:
 
 public:
   friend TeamsList &GetTeamsList(void);
-  static void CleanUp() { if (singleton) delete singleton; };
+  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
   void NextTeam();
   Team* GetNextTeam();
   Team& ActiveTeam();
