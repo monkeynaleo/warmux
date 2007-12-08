@@ -23,6 +23,7 @@
 #define OBJBOX_H
 //-----------------------------------------------------------------------------
 #include "object/physical_obj.h"
+#include "sound/sound_sample.h"
 
 class Team;
 class Character;
@@ -35,12 +36,13 @@ namespace xmlpp
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
-  /* If you need this, implement it (correctly)*/
-  ObjBox(const ObjBox&);
-  const ObjBox& operator=(const ObjBox&);
-  /*********************************************/
+    /* If you need this, implement it (correctly)*/
+    ObjBox(const ObjBox&);
+    const ObjBox& operator=(const ObjBox&);
+    /*********************************************/
 
-  private:
+    SoundSample hit;
+
     virtual void ApplyBox (Team &/*team*/, Character &/*character*/){}
 
   public:
