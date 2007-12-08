@@ -259,8 +259,6 @@ void Menu::Run (bool skip_menu)
 void Menu::Display(const Point2i& mousePosition)
 {
   // to limit CPU
-  uint sleep_fps=0;
-  uint delay = 0;
   uint start = SDL_GetTicks();
 
   widgets.Update(mousePosition, AppWormux::GetInstance()->video->window);
@@ -268,12 +266,9 @@ void Menu::Display(const Point2i& mousePosition)
   AppWormux::GetInstance()->video->Flip();
 
   // to limit CPU
-  delay = SDL_GetTicks()-start;
-  if (delay < AppWormux::GetInstance()->video->GetSleepMaxFps())
-    sleep_fps = AppWormux::GetInstance()->video->GetSleepMaxFps() - delay;
-  else
-    sleep_fps = 0;
-  SDL_Delay(sleep_fps);
+  uint delay = SDL_GetTicks()-start;
+  if (delay < AppWormux::GetInstance()->video->GetMaxDelay())
+    SDL_Delay(AppWormux::GetInstance()->video->GetMaxDelay() - delay);
 }
 
 void Menu::SetActionButtonsXY(int x, int y){
