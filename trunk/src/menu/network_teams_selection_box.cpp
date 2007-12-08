@@ -262,9 +262,8 @@ void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team, bool remove_prev
 #else
   team.SetPlayerName(getenv("USER"));
 #endif
-  std::string team_id = team.GetId();
 
-  Action* a = new Action(Action::ACTION_MENU_ADD_TEAM, team_id);
+  Action* a = new Action(Action::ACTION_MENU_ADD_TEAM, team.GetId());
   a->Push(team.GetPlayerName());
   a->Push(int(team.GetNbCharacters()));
   ActionHandler::GetInstance()->NewAction(a);
@@ -275,8 +274,8 @@ void NetworkTeamsSelectionBox::AddTeamCallback(const std::string& team_id)
 {
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() == NULL) {
-      int index = 0;
-      Team * tmp = GetTeamsList().FindById(team_id, index);
+      int index;
+      Team * tmp = GetTeamsList().Find/*Playing*/ById(team_id, index);
 
       teams_selections.at(i)->SetTeam(*tmp, true);
       break;
