@@ -814,9 +814,10 @@ void Character::SetClotheOnce(const std::string& name)
 
 uint Character::GetTeamIndex() const
 {
-  uint index = 0;
-  GetTeamsList().FindPlayingById( GetTeam().GetId(), index);
-  return index;
+  int index;
+  GetTeamsList().FindPlayingById(GetTeam().GetId(), index);
+  ASSERT(index != -1);
+  return (uint)index;
 }
 
 uint Character::GetCharacterIndex() const
