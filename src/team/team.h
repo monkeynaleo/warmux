@@ -123,7 +123,7 @@ class Team
 
   // Update the energy bar values of the team.
     void UpdateEnergyBar();
-    TeamEnergy & GetEnergyBar();
+    TeamEnergy & GetEnergyBar() { return energy; };
 
   // Read the total energy of the team.
     uint ReadEnergy() const;
@@ -140,7 +140,7 @@ class Team
     iterator end();
     Character* FindByIndex(uint index);
 
-    void SetPlayerName(const std::string& player_name);
+    void SetPlayerName(const std::string& player_name) { m_player_name = player_name; };
 
   // Number of ammo for the current selected weapon.
   // (return INFINITE_AMMO is ammo are unlimited !)
@@ -158,16 +158,16 @@ class Team
   // Only for network:
   // true if the team belong to a local player
   // false if the team belong to a player on the network or on the AI
-    bool IsLocal() const;
+    bool IsLocal() const { return (type_of_player == TEAM_human_local); };
 
   // true if the team belong to a local AI
-    bool IsLocalAI() const;
+    bool IsLocalAI() const { return (type_of_player == TEAM_ai_local); };
 
     bool IsActiveTeam() const;
 
-    void SetLocal();
-    void SetLocalAI();
-    void SetRemote();
+    void SetLocal() { type_of_player = TEAM_human_local; };
+    void SetLocalAI() { type_of_player = TEAM_ai_local; };
+    void SetRemote() { type_of_player = TEAM_remote; };
 
 };
 
