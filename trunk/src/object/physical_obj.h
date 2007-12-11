@@ -46,6 +46,8 @@ typedef enum {
   COLLISION_ON_OBJECT
 } collision_t;
 
+class Action;
+
 extern const double PIXEL_PER_METER;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2);
@@ -105,6 +107,10 @@ public:
   int GetX() const;
   int GetY() const;
   const Point2i GetPosition() const { return Point2i(GetX(), GetY()); };
+
+  // Used to sync value across network
+  virtual bool GetValueFromAction(Action *);
+  virtual void StoreValue(Action *);
 
   // Set/Get size
   void SetSize(const Point2i &newSize);

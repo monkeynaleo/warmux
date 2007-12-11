@@ -40,6 +40,7 @@ typedef enum
 } MotionType_t;
 
 class Game;
+class Action;
 
 class Physics : private ObjectConfig
 {
@@ -95,6 +96,10 @@ public:
 
   void SetRebounding (bool rebounding) { m_rebounding = rebounding; }
   const bool GetRebounding () const { return m_rebounding; }
+
+  // Used to sync value across network
+  virtual bool GetValueFromAction(Action *);
+  virtual void StoreValue(Action *);
 
   // Reset the physics constants (mass, air_resistance...) to the default values in the cfg
   void ResetConstants() { *((ObjectConfig*)this) = m_cfg; };

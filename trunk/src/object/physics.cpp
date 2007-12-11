@@ -34,6 +34,7 @@
 #include "tool/debug.h"
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
+#include "include/action.h"
 
 // Physical constants
 const double STOP_REBOUND_LIMIT = 0.5 ;
@@ -126,6 +127,90 @@ void Physics::GetSpeed(double &norm, double &angle) const
       ASSERT(false);
       break ;
   }
+}
+
+
+void Physics::StoreValue(Action *a)
+{
+  a->Push(0x7F7F7F7F);
+  a->Push((int)m_motion_type);
+  a->Push(m_pos_x);
+  a->Push(m_pos_y);
+  a->Push(m_extern_force);
+  a->Push((int)m_last_move);
+  a->Push(m_phys_width);
+  a->Push(m_phys_height);
+  a->Push(m_fix_point_gnd);
+  a->Push(m_fix_point_dxy);
+  a->Push(m_rope_angle);
+  a->Push(m_rope_length);
+  a->Push(m_rope_elasticity);
+  a->Push(m_elasticity_damping);
+  a->Push(m_balancing_damping);
+  a->Push(m_elasticity_off);
+  a->Push(0x7F7F7F7F);
+}
+
+bool Physics::GetValueFromAction(Action *a)
+{
+  struct PhysicsValue {
+    MotionType_t m_motion_type;
+    EulerVector m_pos_x;
+    EulerVector m_pos_y;
+    Point2d m_extern_force;
+    uint m_last_move;
+    double m_phys_width;
+    double m_phys_height;
+    Point2d m_fix_point_gnd;
+    Point2d m_fix_point_dxy;
+    EulerVector m_rope_angle;
+    EulerVector m_rope_length;
+    double m_rope_elasticity;
+    double m_elasticity_damping;
+    double m_balancing_damping;
+    int m_elasticity_off;
+  };
+
+  int start, end;
+  PhysicsValue tmp_value;
+  start                          = a->PopInt();
+  tmp_value.m_motion_type        = (MotionType_t)a->PopInt();
+  tmp_value.m_pos_x              = a->PopEulerVector();
+  tmp_value.m_pos_y              = a->PopEulerVector();
+  tmp_value.m_extern_force       = a->PopPoint2d();
+  tmp_value.m_last_move          = (uint)a->PopInt();
+  tmp_value.m_phys_width         = a->PopDouble();
+  tmp_value.m_phys_height        = a->PopDouble();
+  tmp_value.m_fix_point_gnd      = a->PopPoint2d();
+  tmp_value.m_fix_point_dxy      = a->PopPoint2d();
+  tmp_value.m_rope_angle         = a->PopEulerVector();
+  tmp_value.m_rope_length        = a->PopEulerVector();
+  tmp_value.m_rope_elasticity    = a->PopDouble();
+  tmp_value.m_elasticity_damping = a->PopDouble();
+  tmp_value.m_balancing_damping  = a->PopDouble();
+  tmp_value.m_elasticity_off     = a->PopInt();
+  end                            = a->PopInt();
+  if(start == end && start == 0x7F7F7F7F) {
+    m_motion_type        = tmp_value.m_motion_type;
+    m_pos_x              = tmp_value.m_pos_x;
+    m_pos_y              = tmp_value.m_pos_y;
+    m_extern_force       = tmp_value.m_extern_force;
+    m_last_move          = tmp_value.m_last_move;
+    m_phys_width         = tmp_value.m_phys_width;
+    m_phys_height        = tmp_value.m_phys_height;
+    m_fix_point_gnd      = tmp_value.m_fix_point_gnd;
+    m_fix_point_dxy      = tmp_value.m_fix_point_dxy;
+    m_rope_angle         = tmp_value.m_rope_angle;
+    m_rope_length        = tmp_value.m_rope_length;
+    m_rope_elasticity    = tmp_value.m_rope_elasticity;
+    m_elasticity_damping = tmp_value.m_elasticity_damping;
+    m_balancing_damping  = tmp_value.m_balancing_damping;
+    m_elasticity_off     = tmp_value.m_elasticity_off;
+  } else {
+    MSG_DEBUG ("physic.getvaluefromaction", "Error while extracting value from action");
+    return false;
+  }
+  return true;
 }
 
 void Physics::SetExternForceXY (const Point2d& vector)
