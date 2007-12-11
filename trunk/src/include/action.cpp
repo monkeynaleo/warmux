@@ -31,7 +31,9 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
+#include "tool/euler_vector.h"
 //-----------------------------------------------------------------------------
+
 
 static inline uint TimeStamp()
 {
@@ -75,6 +77,22 @@ Action::Action (const char *is, DistantComputer* _creator)
     var.push_back(val);
     is += 4;
   }
+}
+
+void Action::ComputeCRC()
+{
+  crc = 0;
+  for(std::list<uint32_t>::iterator it = var.begin(); it != var.end(); it++)
+    crc += *it;
+}
+
+bool Action::CheckCRC() const
+{
+  uint32_t crc;
+  crc = 0;
+  for(std::list<uint32_t>::const_iterator it = var.begin(); it != var.end(); it++)
+    crc += *it;
+  return this->crc == crc;
 }
 
 void Action::Init(Action_t type)
@@ -147,6 +165,13 @@ void Action::Push(const Point2d& val)
 {
   Push(val.x);
   Push(val.y);
+}
+
+void Action::Push(const EulerVector &val)
+{
+  Push(val.x0);
+  Push(val.x1);
+  Push(val.x2);
 }
 
 void Action::Push(const std::string& val)
@@ -281,6 +306,15 @@ Point2d Action::PopPoint2d()
   x = PopDouble();
   y = PopDouble();
   return Point2d(x, y);
+}
+
+EulerVector Action::PopEulerVector()
+{
+  double x0, x1, x2;
+  x0 = PopDouble();
+  x1 = PopDouble();
+  x2 = PopDouble();
+  return EulerVector(x0, x1, x2);
 }
 
 //-------------  Send/Retrieve datas about Character

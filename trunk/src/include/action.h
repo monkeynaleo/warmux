@@ -29,14 +29,11 @@
 #include "tool/point.h"
 
 class DistantComputer;
+class EulerVector;
 //-----------------------------------------------------------------------------
 
 class Action
 {
-private:
-  std::list<uint32_t> var;
-  Action(const Action& an_action);
-  const Action& operator=(const Action&);
 public:
   typedef enum
   {
@@ -111,6 +108,15 @@ public:
     // ########################################################
   } Action_t;
 
+protected:
+  std::list<uint32_t> var;
+  Action_t m_type;
+  uint m_timestamp;
+  uint crc;
+  Action(const Action& an_action);
+  const Action& operator=(const Action&);
+public:
+
   DistantComputer* creator;
 
   //inline Action_t &operator++() { ;}
@@ -141,12 +147,14 @@ public:
   void Push(const std::string& val);
   void Push(const Point2i& val);
   void Push(const Point2d& val);
+  void Push(const EulerVector& val);
 
   int PopInt();
   double PopDouble();
   std::string PopString();
   Point2i PopPoint2i();
   Point2d PopPoint2d();
+  EulerVector PopEulerVector();
 
   bool IsEmpty() const { return var.empty(); };
 
@@ -165,13 +173,11 @@ public:
            + 4 //Size of the number of variable
            + int(var.size()) * 4;
   }
-
+  void ComputeCRC();
+  bool CheckCRC() const;
   void Write(char *packet) const;
   void WritePacket(char* & packet, int & size) const;
   Action_t GetType() const { return m_type; };
-protected:
-  Action_t m_type;
-  uint m_timestamp;
 };
 
 //-----------------------------------------------------------------------------
