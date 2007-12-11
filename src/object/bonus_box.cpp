@@ -124,12 +124,15 @@ void BonusBox::LoadXml(const xmlpp::Element * object)
   }
 }
 
-void BonusBox::GetValueFromAction(Action * a)
+bool BonusBox::GetValueFromAction(Action * a)
 {
-  ObjBox::GetValueFromAction(a);
+  if(!ObjBox::GetValueFromAction(a)) {
+    return false;
+  }
   weapon_num = a->PopInt();
   contents = (weapon_map[weapon_num].first)->GetType();
   nbr_ammo = weapon_map[weapon_num].second;
+  return true;
 }
 
 void BonusBox::Randomize()
