@@ -28,24 +28,50 @@
 #ifdef WIN32
 bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
 {
-  bool ret = false;
+  bool  ret = false;
 
   if (!OpenClipboard(NULL))
     return false;
-  HANDLE h = GetClipboardData(CF_TEXT);
 
+  HANDLE  h = GetClipboardData(CF_UNICODETEXT);
   if (h)
   {
-    const char* data = (char*)GlobalLock(h);
+    LPCWSTR data = (LPCWSTR)GlobalLock(h);
 
     if (data)
     {
-      text.insert(pos, data); 
-      pos += strlen(data);
+      int  len = WideCharToMultiByte(CP_UTF8, 0, data, -1, NULL, 0, NULL, NULL);
+      if (len > 0)
+      {
+        // Convert from UTF-16 to UTF-8
+        void *temp = malloc(len);
+        if (WideCharToMultiByte(CP_UTF8, 0, data, -1, (LPSTR)temp, len, NULL, NULL))
+        {
+          text.insert(pos, (char*)temp);
+          pos += len-1;
+        }
+        free(temp);
+      }
+    }
+    GlobalUnlock(h);
+  }
+  else
+  {
+    h = GetClipboardData(CF_TEXT);
+
+    if (h)
+    {
+      const char *data = (char*)GlobalLock(h);
+      if (data)
+      {
+        text.insert(pos, data);
+        pos += strlen(data);
+        ret = true;
+      }
       GlobalUnlock(h);
-      ret = true;
     }
   }
+
   CloseClipboard();
   return ret;
 }
