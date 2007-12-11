@@ -25,14 +25,15 @@
  *****************************************************************************/
 
 #include <iostream>
-#include "object/physical_obj.h"
-#include "object/physics.h"
-#include "object/objects_list.h"
 #include "character/character.h"
+#include "include/action.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "map/map.h"
 #include "network/randomsync.h"
+#include "object/physical_obj.h"
+#include "object/physics.h"
+#include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
@@ -138,6 +139,62 @@ void PhysicalObj::SetSize(const Point2i &newSize){
   m_width = newSize.x;
   m_height = newSize.y;
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
+}
+
+void PhysicalObj::StoreValue(Action *a)
+{
+  Physics::StoreValue(a);
+  int tmp = Random::GetInt(0, 0xFFFFFFFF);
+  a->Push(tmp);
+  a->Push(m_goes_through_wall);
+  a->Push(m_collides_with_characters);
+  a->Push(m_collides_with_objects);
+  a->Push(m_rebound_position);
+  a->Push(last_collision_type);
+  a->Push((int)m_minimum_overlapse_time);
+  a->Push(m_ignore_movements);
+  a->Push(m_is_character);
+  a->Push((int)m_test_left);
+  a->Push((int)m_test_right);
+  a->Push((int)m_test_top);
+  a->Push((int)m_test_bottom);
+  a->Push((int)m_width);
+  a->Push((int)m_height);
+  a->Push((int)m_alive);
+  a->Push(energy);
+  a->Push(m_allow_negative_y);
+  a->Push(tmp);
+}
+
+bool PhysicalObj::GetValueFromAction(Action *a)
+{
+  int start, end;
+  if(!Physics::GetValueFromAction(a)) {
+    return false;
+  }
+  start                      = a->PopInt();
+  m_goes_through_wall        = a->PopInt();
+  m_collides_with_characters = a->PopInt();
+  m_collides_with_objects    = a->PopInt();
+  m_rebound_position         = a->PopPoint2i();
+  last_collision_type        = (collision_t)a->PopInt();
+  m_minimum_overlapse_time   = (uint)a->PopInt();
+  m_ignore_movements         = a->PopInt();
+  m_is_character             = a->PopInt();
+  m_test_left                = (uint)a->PopInt();
+  m_test_right               = (uint)a->PopInt();
+  m_test_top                 = (uint)a->PopInt();
+  m_test_bottom              = (uint)a->PopInt();
+  m_width                    = (uint)a->PopInt();
+  m_height                   = (uint)a->PopInt();
+  m_alive                    = (alive_t)a->PopInt();
+  energy                     = a->PopInt();
+  m_allow_negative_y         = a->PopInt();
+  end                        = a->PopInt();
+  if(start == end) {
+    return true;
+  }
+  return false;
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
