@@ -27,6 +27,9 @@ class EulerVector{
     EulerVector() :
                   x0(0.0), x1(0.0), x2(0.0)
                 { };
+    EulerVector(double v0, double v1, double v2) :
+                  x0(v0), x1(v1), x2(v2)
+                { };
     void Clear();
     void ComputeOneEulerStep(double a, double b, double c, double d, double dt);
 };
