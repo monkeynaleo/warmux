@@ -171,6 +171,7 @@ public:
     return 4  //Size of the type;
            + 4 //Size of the timestamp
            + 4 //Size of the number of variable
+           + 4 // crc
            + int(var.size()) * 4;
   }
   uint ComputeCRC() const;
