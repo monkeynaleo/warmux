@@ -173,7 +173,7 @@ public:
            + 4 //Size of the number of variable
            + int(var.size()) * 4;
   }
-  void ComputeCRC();
+  uint ComputeCRC() const;
   bool CheckCRC() const;
   void Write(char *packet) const;
   void WritePacket(char* & packet, int & size) const;
