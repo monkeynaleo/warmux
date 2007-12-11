@@ -94,10 +94,13 @@ void Medkit::LoadXml(const xmlpp::Element * object)
   XmlReader::ReadInt(object,"energy_boost",nbr_health);
 }
 
-void Medkit::GetValueFromAction(Action * a)
+bool Medkit::GetValueFromAction(Action * a)
 {
-  ObjBox::GetValueFromAction(a);
+  if(!ObjBox::GetValueFromAction(a)) {
+    return false;
+  }
   nbr_health = a->PopInt();
+  return true;
 }
 
 void Medkit::StoreValue(Action * a)
