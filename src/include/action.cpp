@@ -128,7 +128,7 @@ void Action::Write(char *os) const
 void Action::WritePacket(char* &packet, int & size) const
 {
   size = GetSize();
-  packet = (char*)malloc(size + 4);
+  packet = (char*)malloc(size);
   Write(packet);
 }
 
