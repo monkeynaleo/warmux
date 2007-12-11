@@ -77,13 +77,15 @@ Action::Action (const char *is, DistantComputer* _creator)
     var.push_back(val);
     is += 4;
   }
+  crc = SDLNet_Read32(is);
 }
 
-void Action::ComputeCRC()
+uint Action::ComputeCRC() const
 {
-  crc = 0;
-  for(std::list<uint32_t>::iterator it = var.begin(); it != var.end(); it++)
+  uint crc = 0;
+  for(std::list<uint32_t>::const_iterator it = var.begin(); it != var.end(); it++)
     crc += *it;
+  return crc;
 }
 
 bool Action::CheckCRC() const
@@ -101,6 +103,7 @@ void Action::Init(Action_t type)
   var.clear();
   m_timestamp = TimeStamp();
   creator = NULL;
+  crc = 0;
 }
 
 void Action::Write(char *os) const
@@ -118,14 +121,14 @@ void Action::Write(char *os) const
     SDLNet_Write32(*val, os);
     os += 4;
   }
+  SDLNet_Write32(ComputeCRC(), os);
 }
 
 // Convert the action to a packet
 void Action::WritePacket(char* &packet, int & size) const
 {
   size = GetSize();
-  packet = (char*)malloc(size);
-
+  packet = (char*)malloc(size + 4);
   Write(packet);
 }
 
