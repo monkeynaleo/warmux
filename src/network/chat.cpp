@@ -47,7 +47,8 @@ Chat::Chat():
   input(NULL),
   msg(NULL),
   check_input(false),
-  last_time(0)
+  last_time(0),
+  cursor_pos(0)
 {
 }
 
