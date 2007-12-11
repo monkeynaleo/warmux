@@ -29,6 +29,8 @@
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
 
+static const int MENU_DELAY = 100;  // 10 fps, much sufficient for menu
+
 Menu::Menu(const std::string& bg, t_action _actions) :
   actions(_actions)
 {
@@ -266,9 +268,9 @@ void Menu::Display(const Point2i& mousePosition)
   AppWormux::GetInstance()->video->Flip();
 
   // to limit CPU
-  uint delay = SDL_GetTicks()-start;
-  if (delay < AppWormux::GetInstance()->video->GetMaxDelay())
-    SDL_Delay(AppWormux::GetInstance()->video->GetMaxDelay() - delay);
+  int delay = MENU_DELAY - (SDL_GetTicks()-start);
+  if (delay > 0)
+    SDL_Delay(delay);
 }
 
 void Menu::SetActionButtonsXY(int x, int y){
