@@ -143,9 +143,9 @@ bool Team::LoadCharacters()
 
       MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 
-        // C'est la fin ?
+        // Did we reach the end ?
       ++it;
-    } while (it!=nodes.end() && characters.size() < nb_characters );
+    } while (it != nodes.end() && characters.size() < nb_characters );
 
     active_character = characters.begin();
 

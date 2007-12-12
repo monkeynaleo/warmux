@@ -170,10 +170,10 @@ void JukeBox::LoadMusicXML()
 
   xmlpp::Node::NodeList nodes = doc.GetRoot()->get_children("music");
   xmlpp::Node::NodeList::iterator
-    it=nodes.begin(),
-    fin=nodes.end();
+    it = nodes.begin(),
+    end = nodes.end();
 
-  for (; it != fin; ++it)
+  for (; it != end; ++it)
   {
     // loading XML ...
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
@@ -340,10 +340,10 @@ void JukeBox::LoadXML(const std::string& profile)
 
   xmlpp::Node::NodeList nodes = doc.GetRoot()->get_children("sound");
   xmlpp::Node::NodeList::iterator
-    it=nodes.begin(),
-    fin=nodes.end();
+    it = nodes.begin(),
+    end = nodes.end();
 
-  for (; it != fin; ++it)
+  for (; it != end; ++it)
   {
     // reads XML
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
