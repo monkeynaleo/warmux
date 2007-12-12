@@ -420,10 +420,10 @@ bool Config::SaveXml()
   if (TeamsList::IsLoaded())
   {
     TeamsList::iterator
-      it=GetTeamsList().playing_list.begin(),
-      fin=GetTeamsList().playing_list.end();
+      it = GetTeamsList().playing_list.begin(),
+      end = GetTeamsList().playing_list.end();
 
-    for (int i=0; it != fin; ++it, i++)
+    for (int i=0; it != end; ++it, i++)
     {
       if ((**it).IsLocal() || (**it).IsLocalAI())
       {

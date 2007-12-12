@@ -99,10 +99,10 @@ void Mouse::ActionLeftClic(bool) const
 
     // Choose a character of our own team
     bool character_found=false;
-    Team::iterator it=ActiveTeam().begin(),
-                         fin=ActiveTeam().end();
+    Team::iterator it = ActiveTeam().begin(),
+                         end = ActiveTeam().end();
 
-    for( ; it != fin; ++it) {
+    for( ; it != end; ++it) {
       if( &(*it) != &ActiveCharacter()
         && !it -> IsDead()
         && it->GetRect().Contains( pos_monde ) ){

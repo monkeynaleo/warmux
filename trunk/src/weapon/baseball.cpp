@@ -63,7 +63,7 @@ bool Baseball::p_Shoot()
 
   double angle = ActiveCharacter().GetFiringAngle();
   double rayon = 0.0;
-  bool fin = false;
+  bool end = false;
 
   jukebox.Play ("share","weapon/baseball");
 
@@ -74,7 +74,7 @@ bool Baseball::p_Shoot()
     if (cfg().range < rayon)
     {
       rayon = cfg().range;
-      fin = true;
+      end = true;
     }
 
     // Compute point coordinates
@@ -95,7 +95,7 @@ bool Baseball::p_Shoot()
         return true;
       }
     }
-  } while (!fin);
+  } while (!end);
 
   return true;
 }

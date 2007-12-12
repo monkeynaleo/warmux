@@ -28,8 +28,8 @@
 // Boucle pour chaque team
 #define FOR_EACH_TEAM(team) \
   for (TeamsList::iterator team=GetTeamsList().playing_list.begin(), \
-       fin_pour_chaque_team=GetTeamsList().playing_list.end(); \
-       team != fin_pour_chaque_team; \
+       end_of_each_team = GetTeamsList().playing_list.end(); \
+       team != end_of_each_team; \
        ++team)
 
 #define FOR_EACH_LIVING_AND_DEAD_CHARACTER(team, character) \

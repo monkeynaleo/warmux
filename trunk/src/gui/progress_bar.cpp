@@ -124,8 +124,8 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
   }
 
   // Marqueurs
-  marqueur_it_const it=marqueur.begin(), fin=marqueur.end();
-  for (; it != fin; ++it)
+  marqueur_it_const it=marqueur.begin(), it_end = marqueur.end();
+  for (; it != it_end; ++it)
   {
     Rectanglei r_marq;
     if(orientation == PROG_BAR_HORIZONTAL)
