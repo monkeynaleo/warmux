@@ -109,7 +109,7 @@ public:
   const Point2i GetPosition() const { return Point2i(GetX(), GetY()); };
 
   // Used to sync value across network
-  virtual bool GetValueFromAction(Action *);
+  virtual void GetValueFromAction(Action *);
   virtual void StoreValue(Action *);
 
   // Set/Get size

@@ -144,8 +144,6 @@ void PhysicalObj::SetSize(const Point2i &newSize){
 void PhysicalObj::StoreValue(Action *a)
 {
   Physics::StoreValue(a);
-  int tmp = Random::GetInt(0, 0xFFFFFFFF);
-  a->Push(tmp);
   a->Push(m_goes_through_wall);
   a->Push(m_collides_with_characters);
   a->Push(m_collides_with_objects);
@@ -163,15 +161,12 @@ void PhysicalObj::StoreValue(Action *a)
   a->Push((int)m_alive);
   a->Push(energy);
   a->Push(m_allow_negative_y);
-  a->Push(tmp);
 }
 
-bool PhysicalObj::GetValueFromAction(Action *a)
+void PhysicalObj::GetValueFromAction(Action *a)
 {
   int start, end;
-  if(!Physics::GetValueFromAction(a)) {
-    return false;
-  }
+  Physics::GetValueFromAction(a);
   start                      = a->PopInt();
   m_goes_through_wall        = a->PopInt();
   m_collides_with_characters = a->PopInt();
@@ -191,10 +186,6 @@ bool PhysicalObj::GetValueFromAction(Action *a)
   energy                     = a->PopInt();
   m_allow_negative_y         = a->PopInt();
   end                        = a->PopInt();
-  if(start == end) {
-    return true;
-  }
-  return false;
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
