@@ -24,6 +24,7 @@
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "include/action_handler.h"
+#include "tool/debug.h"
 
 const uint table_size = 1024; //Number of pregerated numbers
 
@@ -33,6 +34,9 @@ RandomSync randomSync;
 
 RandomSync::RandomSync()
 {
+#ifdef DEBUG
+  nb_get = 0;
+#endif
 }
 
 void RandomSync::Init()
@@ -42,7 +46,7 @@ void RandomSync::Init()
 
   srand( time(NULL) );
 
-  rnd_table.clear();
+  Clear();
 
   if  (Network::GetInstance()->IsServer()) {
     Action a(Action::ACTION_NETWORK_RANDOM_INIT);
@@ -55,10 +59,19 @@ void RandomSync::Init()
     GenerateTable();
 }
 
+void RandomSync::Clear()
+{
+  MSG_DEBUG("random", "Clear random numbers table");
+#ifdef DEBUG
+  nb_get = 0;
+#endif
+  rnd_table.clear();
+}
+
 void RandomSync::GenerateTable()
 {
   //Add a random number to the table
-  double nbr = rand();
+  int nbr = rand();
   AddToTable(nbr);
 
   // send it over network if needed
@@ -68,18 +81,20 @@ void RandomSync::GenerateTable()
   }
 }
 
-void RandomSync::AddToTable(double nbr)
+void RandomSync::AddToTable(int nbr)
 {
+  MSG_DEBUG("random.add", "Add %d", nbr);
   rnd_table.push_back(nbr);
 }
 
 void RandomSync::SetRandMax(double rand_max)
 {
   NET_RAND_MAX = rand_max;
-  rnd_table.clear();
+  MSG_DEBUG("random", "SetRandMax %f", rand_max);
+  Clear();
 }
 
-double RandomSync::GetRand()
+int RandomSync::GetRand()
 {
   if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
     GenerateTable();
@@ -90,7 +105,11 @@ double RandomSync::GetRand()
     exit(1);
   }
 
-  double nbr = rnd_table.front();
+  int nbr = rnd_table.front();
+#ifdef DEBUG
+  nb_get++;
+  MSG_DEBUG("random.get", "Get %04d: %d", nb_get, nbr);
+#endif
   rnd_table.pop_front();
   return nbr;
 }

@@ -27,13 +27,17 @@
 
 class RandomSync{
   //Pregenerated table of random number (mainly usefull for network)
-  std::list<double> rnd_table;
-
-  double GetRand();
+  std::list<int> rnd_table;
   void GenerateTable();
+#ifdef DEBUG
+  uint nb_get;
+#endif
 public:
   RandomSync();
   void Init();
+  void Clear();
+
+  int GetRand(); // public only to check synchronization
 
   bool GetBool();
   double GetDouble();
@@ -45,7 +49,7 @@ public:
 
   //to fill the pregenerated tables
   void SetRandMax(double rand_max);
-  void AddToTable(double nbr);
+  void AddToTable(int nbr);
 };
 
 extern RandomSync randomSync;
