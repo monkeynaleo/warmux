@@ -41,6 +41,7 @@
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
+#include "menu/pause_menu.h"
 #include "menu/results_menu.h"
 #include "network/network.h"
 #include "network/randomsync.h"
@@ -102,7 +103,9 @@ void Game::Start()
     MSG_DEBUG( "game", "End of game_loop.Run()" );
     jukebox.StopAll();
 
-    UnloadDatas();
+    UnloadDatas();  
+    randomSync.Clear();
+
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
     jukebox.PlayMusic("menu");
 
@@ -379,8 +382,8 @@ void Game::Run()
       if ((want_end_of_game = AskQuit()))
         break;
 
-    if (Time::GetInstance()->IsGamePaused())
-      DisplayPause();
+//     if (Time::GetInstance()->IsGamePaused())
+//       DisplayPause();
 
   } while(!IsGameFinished());
 
@@ -718,7 +721,7 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
     SyncCharacters();
 
   Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE);
-  a->Push(int(randomSync.GetLong(0, 65535)));
+  a->Push(randomSync.GetRand());
   a->Push(new_state);
   ActionHandler::GetInstance()->NewAction(a);
 }
@@ -869,29 +872,32 @@ int Game::NbrRemainingTeams() const
 
 bool Game::AskQuit() const
 {
-  Question question;
-  const char *msg = _("Do you really want to quit? (Y/N)");
-  question.Set (msg, true, 0, "interface/quit_screen");
+//   Question question;
+//   const char *msg = _("Do you really want to quit? (Y/N)");
+//   question.Set (msg, true, 0, "interface/quit_screen");
 
-  {
-    /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
-    /* Let's find out what the user would like to press ... */
-    const char *key_x_ptr = strchr (msg, '/');
-    char key_x;
-    if (key_x_ptr && key_x_ptr > msg) /* it's there and it's not the first char */
-      key_x = tolower(key_x_ptr[-1]);
-    else
-      abort();
-    if (!isalpha(key_x)) /* sanity check */
-      abort();
+//   {
+//     /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
+//     /* Let's find out what the user would like to press ... */
+//     const char *key_x_ptr = strchr (msg, '/');
+//     char key_x;
+//     if (key_x_ptr && key_x_ptr > msg) /* it's there and it's not the first char */
+//       key_x = tolower(key_x_ptr[-1]);
+//     else
+//       abort();
+//     if (!isalpha(key_x)) /* sanity check */
+//       abort();
 
-    question.add_choice(SDLK_a + (int)key_x - 'a', 1);
-  }
-
+//     question.add_choice(SDLK_a + (int)key_x - 'a', 1);
+//   }
   jukebox.Pause();
   Time::GetInstance()->Pause();
 
-  bool exit = (question.Ask() == 1);
+  bool exit = false;
+  PauseMenu menu(exit);
+  menu.Run();
+
+  //bool exit = (question.Ask() == 1);
 
   Time::GetInstance()->Continue();
   jukebox.Resume();

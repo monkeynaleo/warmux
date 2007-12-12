@@ -97,6 +97,7 @@ wormux_SOURCES = \
         menu/network_menu.cpp menu/network_menu.h \
         menu/network_teams_selection_box.cpp menu/network_teams_selection_box.h \
         menu/options_menu.cpp menu/options_menu.h \
+	menu/pause_menu.cpp menu/pause_menu.h \
         menu/results_menu.cpp menu/results_menu.h \
         menu/team_box.cpp menu/team_box.h \
         menu/teams_selection_box.cpp menu/teams_selection_box.h \
