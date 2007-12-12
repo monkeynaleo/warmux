@@ -165,9 +165,7 @@ void PhysicalObj::StoreValue(Action *a)
 
 void PhysicalObj::GetValueFromAction(Action *a)
 {
-  int start, end;
   Physics::GetValueFromAction(a);
-  start                      = a->PopInt();
   m_goes_through_wall        = a->PopInt();
   m_collides_with_characters = a->PopInt();
   m_collides_with_objects    = a->PopInt();
@@ -185,7 +183,6 @@ void PhysicalObj::GetValueFromAction(Action *a)
   m_alive                    = (alive_t)a->PopInt();
   energy                     = a->PopInt();
   m_allow_negative_y         = a->PopInt();
-  end                        = a->PopInt();
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
