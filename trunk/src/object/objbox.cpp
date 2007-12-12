@@ -122,15 +122,12 @@ void ObjBox::SignalGhostState(bool /*was_already_dead*/)
   ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
 }
 
-bool ObjBox::GetValueFromAction(Action * a)
+void ObjBox::GetValueFromAction(Action * a)
 {
-  if(!PhysicalObj::GetValueFromAction(a)) {
-    return false;
-  }
+  PhysicalObj::GetValueFromAction(a);
   start_life_points = a->PopInt();
   SetXY(a->PopPoint2i());
   SetSpeedXY(a->PopPoint2d());
-  return true;
 }
 
 void ObjBox::StoreValue(Action *a)

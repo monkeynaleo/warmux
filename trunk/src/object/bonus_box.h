@@ -52,7 +52,7 @@ class BonusBox : public ObjBox
     void Draw();
     void ApplyBonus(Character *);
     void Randomize();
-    bool GetValueFromAction(Action *);
+    void GetValueFromAction(Action *);
     void StoreValue(Action *);
 };
 

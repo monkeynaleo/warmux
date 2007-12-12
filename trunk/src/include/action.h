@@ -176,6 +176,7 @@ public:
   }
   uint ComputeCRC() const;
   bool CheckCRC() const;
+  uint GetCRC() const { return crc; };
   void Write(char *packet) const;
   void WritePacket(char* & packet, int & size) const;
   Action_t GetType() const { return m_type; };

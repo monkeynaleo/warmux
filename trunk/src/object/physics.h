@@ -98,7 +98,7 @@ public:
   const bool GetRebounding () const { return m_rebounding; }
 
   // Used to sync value across network
-  virtual bool GetValueFromAction(Action *);
+  virtual void GetValueFromAction(Action *);
   virtual void StoreValue(Action *);
 
   // Reset the physics constants (mass, air_resistance...) to the default values in the cfg
