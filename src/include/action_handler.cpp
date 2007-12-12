@@ -263,9 +263,9 @@ void Action_Game_SetState (Action *a)
   int random = a->PopInt();
 
   if (!Network::GetInstance()->IsTurnMaster()) {
-    int random2 = int(randomSync.GetLong(0, 65535));
+    int random2 = randomSync.GetRand();
     if (random != random2) {
-      std::string str = Format("Network random generator is desynchronized (%d!=%d) !", random, random2);
+      std::string str = Format("Network random generator is not synchronized (%d!=%d) !", random, random2);
       Error(str);
       ASSERT(false);
     }
@@ -621,7 +621,7 @@ void Action_Wind (Action *a)
 void Action_Network_RandomAdd (Action *a)
 {
   ASSERT(Network::GetInstance()->IsClient())
-  randomSync.AddToTable(a->PopDouble());
+  randomSync.AddToTable(a->PopInt());
 }
 
 void Action_Network_RandomInit (Action *a)
