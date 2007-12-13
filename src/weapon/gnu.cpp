@@ -26,6 +26,7 @@
 #include <sstream>
 #include "character/character.h"
 #include "game/config.h"
+#include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
@@ -37,11 +38,14 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
+const uint TIME_BETWEEN_REBOUND = 600;
+
 class Gnu : public WeaponProjectile
 {
  private:
   int m_sens;
   int save_x, save_y;
+  uint last_rebound_time;
  protected:
   void SignalOutOfMap();
 public:
@@ -57,6 +61,7 @@ Gnu::Gnu(ExplosiveWeaponConfig& cfg,
   WeaponProjectile("gnu", cfg, p_launcher)
 {
   explode_with_collision = false;
+  last_rebound_time = 0;
 }
 
 void Gnu::Shoot(double strength)
@@ -80,8 +85,13 @@ void Gnu::Refresh()
 
   double norme, angle;
   //When we hit the ground, jump !
-  if(!IsMoving()&& !FootsInVacuum())
-  {
+  if(!IsMoving()&& !FootsInVacuum()) {
+    // Limiting number of rebound to avoid desync
+    if(last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
+      image->SetRotation_rad(0.0);
+      return;
+    }
+    last_rebound_time = Time::GetInstance()->Read();
     //If the GNU is stuck in ground -> change direction
     int x = GetX();
     int y = GetY();
@@ -122,10 +132,10 @@ void Gnu::Refresh()
   image->Scale((double)m_sens,1.0);
   image->Update();
   // Fixes test rectangle ??
-  SetTestRect ( image->GetWidth()/2-1,
-                image->GetWidth()/2-1,
-                image->GetHeight()/2-1,
-                image->GetHeight()/2-1);
+  SetTestRect(image->GetWidth() / 2 - 1,
+              image->GetWidth() / 2 - 1,
+              image->GetHeight() / 2 - 1,
+              image->GetHeight() / 2 - 1);
 }
 
 void Gnu::SignalOutOfMap()
