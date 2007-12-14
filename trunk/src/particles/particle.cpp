@@ -37,6 +37,7 @@
 #include "particles/dark_smoke.h"
 #include "particles/explosion_smoke.h"
 #include "particles/fire.h"
+#include "particles/fading_text.h"
 #include "particles/ground_particles.h"
 #include "particles/ill_bubble.h"
 #include "particles/magic_star.h"
@@ -126,7 +127,7 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
   uint time = Time::GetInstance()->Read() - m_last_refresh;
   uint tmp = Time::GetInstance()->Read();
 
-  uint delta = uint(m_time_between_add * double(randomObj.GetLong(3,40))/10);
+  uint delta = uint(m_time_between_add * double(randomObj.GetLong(3, 40)) / 10);
   if (time >= delta) {
     m_last_refresh = tmp;
     ParticleEngine::AddNow(position, 1, type, upper, angle, norme);
