@@ -27,6 +27,8 @@
 #include <string>
 #include <libintl.h>
 
+#include "config.h"
+
 #ifdef USE_FRIBIDI
 #define _(X) localization(X)
 char * localization(char * buffer);
