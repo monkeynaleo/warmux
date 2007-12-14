@@ -219,6 +219,8 @@ POTFILES = \
         src/particles/dark_smoke.h \
         src/particles/explosion_smoke.cpp \
         src/particles/explosion_smoke.h \
+        src/particles/fading_text.cpp \
+        src/particles/fading_text.h \
         src/particles/fire.cpp \
         src/particles/fire.h \
         src/particles/ground_particles.cpp \
