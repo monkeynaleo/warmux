@@ -36,7 +36,6 @@
 #include "particles/bullet.h"
 #include "particles/dark_smoke.h"
 #include "particles/explosion_smoke.h"
-#include "particles/fading_text.h"
 #include "particles/fire.h"
 #include "particles/ground_particles.h"
 #include "particles/ill_bubble.h"
