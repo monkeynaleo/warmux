@@ -36,6 +36,7 @@
 #include "particles/bullet.h"
 #include "particles/dark_smoke.h"
 #include "particles/explosion_smoke.h"
+#include "particles/fading_text.h"
 #include "particles/fire.h"
 #include "particles/ground_particles.h"
 #include "particles/ill_bubble.h"
@@ -182,8 +183,7 @@ Sprite* ParticleEngine::GetSprite(particle_spr type)
 
 void ParticleEngine::AddNow(const Point2i &position,
                             uint nb_particles, particle_t type,
-                            bool upper,
-                            double angle, double norme)
+                            bool upper, double angle, double norme)
 {
   if (!sprites_loaded)
     return;

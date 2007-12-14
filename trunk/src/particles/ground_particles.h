@@ -21,7 +21,7 @@
 
 #ifndef GROUND_PARTICLES_H
 #define GROUND_PARTICLES_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class GroundParticle : public Particle
 {
@@ -30,4 +30,4 @@ class GroundParticle : public Particle
   void Refresh();
 };
 
-#endif
+#endif /* GROUND_PARTICLES_H */

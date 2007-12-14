@@ -29,4 +29,4 @@ class Smoke : public Particle
   Smoke();
 };
 
-#endif
+#endif /* SMOKE_H */

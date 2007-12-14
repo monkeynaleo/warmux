@@ -21,7 +21,7 @@
 
 #ifndef EXPLOSION_SMOKE_H
 #define EXPLOSION_SMOKE_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class ExplosionSmoke : public Particle
 {
@@ -34,4 +34,4 @@ class ExplosionSmoke : public Particle
   virtual void Draw();
 };
 
-#endif
+#endif /* EXPLOSION_SMOKE_H */

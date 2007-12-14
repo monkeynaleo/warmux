@@ -21,7 +21,7 @@
 
 #ifndef BULLET_H
 #define BULLET_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class BulletParticle : public Particle
 {
@@ -33,4 +33,4 @@ class BulletParticle : public Particle
     void SignalRebound();
 };
 
-#endif
+#endif /* BULLET_H */
