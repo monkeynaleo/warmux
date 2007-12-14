@@ -43,7 +43,7 @@ char buffer[16384];
 
 char * localization(char * message) {
   char * string = gettext(message);
-  int l = mbstowcs(NULL, string, 0);
+  int l = strlen(string);
   fribidi_utf8_to_unicode(string, l, unicode_buffer);
   fribidi_log2vis(unicode_buffer, l, &pbase_dir, output_buffer, NULL, NULL, NULL);
   fribidi_unicode_to_utf8(unicode_buffer, l, buffer);
