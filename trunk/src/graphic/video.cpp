@@ -53,7 +53,7 @@ Video::Video(){
     exit (1);
   }
 
-  SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
+  SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION );
   SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux_32x32.xpm" );
 
   ComputeAvailableConfigs();

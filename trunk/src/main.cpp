@@ -182,7 +182,7 @@ void AppWormux::DisplayLoadingPicture()
   Config *config = Config::GetInstance();
 
   string txt_version =
-    _("Version") + string(" ") + Constants::VERSION;
+    _("Version") + string(" ") + Constants::WORMUX_VERSION;
   string filename = config->GetDataDir() + PATH_SEPARATOR + "menu"
                          + PATH_SEPARATOR + "loading.png";
 
@@ -254,7 +254,7 @@ void AppWormux::End() const
 
 void DisplayWelcomeMessage()
 {
-  cout << "=== " << _("Wormux version ") << Constants::VERSION << endl;
+  cout << "=== " << _("Wormux version ") << Constants::WORMUX_VERSION << endl;
   cout << "=== " << _("Authors:") << ' ';
   for (vector < string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
        fin = Constants::GetInstance()->AUTHORS.end(); it != fin; ++it)
@@ -268,7 +268,7 @@ void DisplayWelcomeMessage()
     << endl;
 
   // print the disclaimer
-  cout << "Wormux version " << Constants::VERSION
+  cout << "Wormux version " << Constants::WORMUX_VERSION
     << ", Copyright (C) 2001-2007 Wormux Team" << endl
     << "Wormux comes with ABSOLUTELY NO WARRANTY." << endl
     << "This is free software and you are welcome to redistribute it" << endl

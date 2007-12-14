@@ -266,7 +266,7 @@ void Network::Init()
 void Network::Disconnect()
 {
   // restore Windows title
-  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::VERSION);
+  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION);
 
   if (singleton != NULL) {
     singleton->stop_thread = true;
@@ -466,7 +466,7 @@ connection_state_t Network::ClientStart(const std::string &host,
   } else if (prev != NULL) {
     delete prev;
   }
-  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
+  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION + " - Client mode");
   return error;
 }
 
@@ -493,7 +493,7 @@ connection_state_t Network::ServerStart(const std::string& port)
   } else if (prev != NULL) {
 
     // that's ok
-    AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Server mode");
+    AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION + " - Server mode");
     delete prev;
   }
   return error;

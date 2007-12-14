@@ -257,7 +257,7 @@ std::string IndexServer::ReceiveStr()
 bool IndexServer::HandShake()
 {
   Send(TS_MSG_VERSION);
-  Send(Constants::VERSION);
+  Send(Constants::WORMUX_VERSION);
 
   int msg = ReceiveInt();
   if(msg == -1)
