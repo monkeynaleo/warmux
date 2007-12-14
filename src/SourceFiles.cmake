@@ -117,6 +117,7 @@ particles/body_member.cpp
 particles/bullet.cpp
 particles/dark_smoke.cpp
 particles/explosion_smoke.cpp
+particles/fading_text.cpp
 particles/fire.cpp
 particles/ground_particles.cpp
 particles/ill_bubble.cpp
