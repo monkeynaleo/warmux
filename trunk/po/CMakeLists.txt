@@ -7,6 +7,7 @@ da.po
 de.po
 eo.po
 es.po
+fa.po
 fi.po
 fr.po
 gl.po
