@@ -1,11 +1,13 @@
 # Farsi (Persian) Translate
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the Wormux package.
+#
 # Behdad Pournader <behdadp@farsiweb.info>, 2007.
+msgid ""
+msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-11-14 21:34+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2007-12-14 18:03+0100\n"
 "Last-Translator: Behdad Pournader <behdadp@farsiweb.info>\n"
 "Language-Team: Wormux Fa <behdadp@farsiweb.info>\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +181,7 @@ msgstr[0] "تیم %s برنده‌ی %u شیطونک شد! کووورتیییی�
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
-msgstr[0] "تیم %s برنده‌ی &u بمب خوشه‌ای شد!"
+msgstr[0] "تیم %s برنده‌ی %u بمب خوشه‌ای شد!"
 
 #: src/weapon/construct.cpp:61
 #, c-format
@@ -986,7 +988,7 @@ msgstr "کارگزار اتصال را رد کرد."
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
-msgstr[0] "فقط %s تیم وجود دارد."
+msgstr[0] "فقط %i تیم وجود دارد."
 
 
 #: src/weapon/cluster_bomb.cpp:150
