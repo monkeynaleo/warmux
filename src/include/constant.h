@@ -30,7 +30,7 @@ class Constants
 {
 public:
   // Version number of Wormux
-  static const std::string VERSION;
+  static const std::string WORMUX_VERSION;
 
   // Env variables name to override previous values
   static const std::string ENV_DATADIR;

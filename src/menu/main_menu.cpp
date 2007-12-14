@@ -111,7 +111,7 @@ MainMenu::MainMenu() :
 
   resource_manager.UnLoadXMLProfile( res);
 
-  std::string s("Version "+Constants::VERSION);
+  std::string s("Version "+Constants::WORMUX_VERSION);
   version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
   std::string s2(Constants::WEB_SITE);

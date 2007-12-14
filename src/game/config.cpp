@@ -404,7 +404,7 @@ bool Config::SaveXml()
 
   doc.Create(m_filename, "config", "1.0", "utf-8");
   xmlpp::Element *root = doc.GetRoot();
-  doc.WriteElement(root, "version", Constants::VERSION);
+  doc.WriteElement(root, "version", Constants::WORMUX_VERSION);
 
   //=== Map ===
   //The map name is modified when the player validate its choice in the

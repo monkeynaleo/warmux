@@ -21,7 +21,7 @@
 
 #include "constant.h"
 
-const std::string Constants::VERSION = PACKAGE_VERSION;
+const std::string Constants::WORMUX_VERSION = PACKAGE_VERSION;
 
 const std::string Constants::ENV_DATADIR = "WORMUX_DATADIR";
 const std::string Constants::ENV_LOCALEDIR = "WORMUX_LOCALEDIR";

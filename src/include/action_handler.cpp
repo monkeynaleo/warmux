@@ -319,7 +319,7 @@ void SendGameMode()
 void Action_Rules_AskVersion (Action */*a*/)
 {
   if (!Network::GetInstance()->IsClient()) return;
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_SEND_VERSION, Constants::VERSION));
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_SEND_VERSION, Constants::WORMUX_VERSION));
 }
 
 void Action_Rules_SendVersion (Action *a)
@@ -328,11 +328,11 @@ void Action_Rules_SendVersion (Action *a)
   std::string version= a->PopString();
   ASSERT(a->creator != NULL);
 
-  if (version != Constants::VERSION)
+  if (version != Constants::WORMUX_VERSION)
   {
     a->creator->force_disconnect = true;
     std::string str = Format(_("%s tries to connect with a different version : client=%s, me=%s."),
-                               a->creator->GetAddress().c_str(), version.c_str(), Constants::VERSION.c_str());
+                               a->creator->GetAddress().c_str(), version.c_str(), Constants::WORMUX_VERSION.c_str());
     Network::GetInstance()->network_menu->ReceiveMsgCallback(str);
     std::cerr << str << std::endl;
     return;

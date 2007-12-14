@@ -43,8 +43,6 @@ TeamsList *TeamsList::GetInstance()
 {
   if (singleton == NULL) {
     singleton = new TeamsList();
-    // This must be delayed so that a call in another thread doesn't load it twice.
-    singleton->LoadList();
   }
   return singleton;
 }
@@ -52,6 +50,15 @@ TeamsList *TeamsList::GetInstance()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+
+TeamsList::TeamsList():
+  full_list(),
+  playing_list(),
+  selection(),
+  active_team(playing_list.end())
+{
+  LoadList();
+}
 
 TeamsList::~TeamsList()
 {
@@ -123,15 +130,15 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name
 
   catch (char const *error) {
     std::cerr << std::endl
-        << Format(_("Error loading team :")) << team_name <<":"<< error
-        << std::endl;
+              << Format(_("Error loading team :")) << team_name <<":"<< error
+              << std::endl;
     return;
   }
 
   catch (const xmlpp::exception &e) {
     std::cerr << std::endl
-        << Format(_("Error loading team :")) << team_name << std::endl
-        << e.what() << std::endl;
+              << Format(_("Error loading team :")) << team_name << std::endl
+              << e.what() << std::endl;
     return;
   }
 }
@@ -184,7 +191,6 @@ void TeamsList::LoadList()
 
   std::cout << std::endl;
   InitList(Config::GetInstance()->AccessTeamList());
-  active_team = playing_list.end();
 }
 
 //-----------------------------------------------------------------------------
