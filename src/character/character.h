@@ -79,7 +79,7 @@ private:
   int channel_step;
 
   // Generates green bubbles when the character is ill
-  ParticleEngine *bubble_engine;
+  ParticleEngine *particle_engine;
 public:
 
   // Previous strength
