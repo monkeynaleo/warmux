@@ -127,4 +127,4 @@ class ParticleEngine
   static PhysicalObj * IsSomethingMoving();
 };
 
-#endif
+#endif /* PARTICLE_H */

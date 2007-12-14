@@ -21,7 +21,7 @@
 
 #ifndef FIRE_H
 #define FIRE_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class FireParticle : public Particle
 {
@@ -38,4 +38,4 @@ class FireParticle : public Particle
     void SignalOutOfMap();
 };
 
-#endif
+#endif /* FIRE_H */

@@ -21,7 +21,7 @@
 
 #ifndef POLECAT_FART_H
 #define POLECAT_FART_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class PolecatFart : public Particle
 {

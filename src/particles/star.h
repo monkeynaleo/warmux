@@ -21,7 +21,7 @@
 
 #ifndef STAR_H
 #define STAR_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class StarParticle : public Particle
 {
@@ -29,4 +29,4 @@ class StarParticle : public Particle
   StarParticle();
 };
 
-#endif
+#endif /* STAR_H */

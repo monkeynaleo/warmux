@@ -21,7 +21,7 @@
 
 #ifndef BODY_MEMBER_H
 #define BODY_MEMBER_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class BodyMemberParticle : public Particle
 {
@@ -32,4 +32,4 @@ class BodyMemberParticle : public Particle
   void Refresh();
 };
 
-#endif
+#endif /* BODY_MEMBER_H */

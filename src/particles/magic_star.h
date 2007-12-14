@@ -21,7 +21,7 @@
 
 #ifndef MAGIC_STAR_H
 #define MAGIC_STAR_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class MagicStarParticle: public Particle
 {
@@ -30,4 +30,4 @@ class MagicStarParticle: public Particle
   void Refresh();
 };
 
-#endif
+#endif /* MAGIC_STAR_H */

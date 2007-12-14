@@ -21,7 +21,7 @@
 
 #ifndef DARK_SMOKE_H
 #define DARK_SMOKE_H
-#include "particle.h"
+#include "particles/particle.h"
 
 class DarkSmoke : public Particle
 {
@@ -29,4 +29,4 @@ class DarkSmoke : public Particle
   DarkSmoke();
 };
 
-#endif
+#endif /* DARK_SMOKE_H */

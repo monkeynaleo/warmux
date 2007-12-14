@@ -21,7 +21,7 @@
 
 #ifndef ILL_BUBBLE_H
 #define ILL_BUBBLE_H
-#include "explosion_smoke.h"
+#include "particles/explosion_smoke.h"
 
 class IllBubble : public ExplosionSmoke
 {
@@ -32,4 +32,4 @@ class IllBubble : public ExplosionSmoke
   void Draw();
 };
 
-#endif
+#endif /* ILL_BUBBLE_H */

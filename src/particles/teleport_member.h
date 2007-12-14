@@ -21,7 +21,7 @@
 
 #ifndef TELEPORT_MEMBER_H
 #define TELEPORT_MEMBER_H
-#include "particle.h"
+#include "particles/particle.h"
 
 const int teleportation_anim_duration = 1000;
 
@@ -38,4 +38,4 @@ class TeleportMemberParticle : public Particle
   void Refresh();
 };
 
-#endif
+#endif /* TELEPORT_MEMBER_H */
