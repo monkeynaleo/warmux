@@ -35,6 +35,7 @@
 #include "include/app.h"
 #include "network/net_error_msg.h"
 #include "network/index_server.h"
+#include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
@@ -195,6 +196,9 @@ bool NetworkConnectionMenu::signal_ok()
 {
   connection_state_t conn;
   bool r = false;
+
+  // Hack: force loading of teams before creating threads.
+  GetTeamsList();
 
   switch (current_action) {
   case NET_HOST: // Hosting your own server
