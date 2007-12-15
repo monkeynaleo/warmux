@@ -20,15 +20,35 @@
  *****************************************************************************/
 
 #include <time.h>
-#include <stdlib.h>
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "include/action_handler.h"
 #include "tool/debug.h"
 
-const uint table_size = 1024; //Number of pregerated numbers
+/******************************************************************************
+ * From "man 3 rand"
+ * POSIX.1-2001  gives the following example of an implementation of rand() and 
+ * srand(), possibly useful when one needs the same sequence on two different 
+ * machines.
+ ******************************************************************************/
 
-static double NET_RAND_MAX = RAND_MAX; // client should use same RAND_MAX than server (bug network windows/linux)
+static unsigned long next = 1;
+
+/* RAND_MAX assumed to be 32767 */
+static inline uint wormux_rand(void) 
+{
+  next = next * 1103515245 + 12345;
+  return((uint)(next/65536) % 32768);
+}
+
+static inline void wormux_srand(uint seed) 
+{
+  next = seed;
+}
+
+#define WORMUX_RAND_MAX 32767
+
+/******************************************************************************/
 
 RandomSync randomSync;
 
@@ -41,83 +61,45 @@ RandomSync::RandomSync()
 
 void RandomSync::Init()
 {
-  //If we are a client on the network, we don't generate any random number
-  if (Network::GetInstance()->IsClient()) return;
-
-  srand( time(NULL) );
-
-  Clear();
-
-  if  (Network::GetInstance()->IsServer()) {
-    Action a(Action::ACTION_NETWORK_RANDOM_INIT);
-    a.Push(NET_RAND_MAX);
-    Network::GetInstance()->SendAction(&a);
-  }
-
-  //Fill the pregenerated tables:
-  for (uint i=0; i < table_size; i++)
-    GenerateTable();
-}
-
-void RandomSync::Clear()
-{
-  MSG_DEBUG("random", "Clear random numbers table");
-#ifdef DEBUG
-  nb_get = 0;
-#endif
-  rnd_table.clear();
-}
-
-void RandomSync::GenerateTable()
-{
-  //Add a random number to the table
-  int nbr = rand();
-  AddToTable(nbr);
-
-  // send it over network if needed
-  if (Network::GetInstance()->IsServer()) {
-    Action a(Action::ACTION_NETWORK_RANDOM_ADD,nbr);
-    Network::GetInstance()->SendAction(&a);
+  if  (Network::GetInstance()->IsServer()) {  
+    int seed = time(NULL);
+    Action *a = new Action(Action::ACTION_NETWORK_RANDOM_INIT);
+    a->Push(seed);
+    ActionHandler::GetInstance()->NewAction(a);
   }
 }
 
-void RandomSync::AddToTable(int nbr)
+
+void RandomSync::SetRand(uint seed)
 {
-  MSG_DEBUG("random.add", "Add %d", nbr);
-  rnd_table.push_back(nbr);
+  MSG_DEBUG("random", "SetRand: seed=%u", seed);
+  wormux_srand(seed);
 }
 
-void RandomSync::SetRandMax(double rand_max)
+uint RandomSync::GetRand()
 {
-  NET_RAND_MAX = rand_max;
-  MSG_DEBUG("random", "SetRandMax %f", rand_max);
-  Clear();
-}
-
-int RandomSync::GetRand()
-{
-  if (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal())
-    GenerateTable();
-
-  ASSERT(rnd_table.size()!=0);
-  if (rnd_table.size() == 0) {
-    Error("Random table is empty!\n");
-    exit(1);
-  }
-
-  int nbr = rnd_table.front();
+  uint nbr = wormux_rand();
 #ifdef DEBUG
   nb_get++;
-  MSG_DEBUG("random.get", "Get %04d: %d", nb_get, nbr);
+  MSG_DEBUG("random.get", "Get %04d: %u", nb_get, nbr);
 #endif
-  rnd_table.pop_front();
   return nbr;
 }
 
 bool RandomSync::GetBool()
 {
-  double middle = NET_RAND_MAX/2;
+  double middle = WORMUX_RAND_MAX/2;
   return (GetRand() <= middle);
+}
+
+/**
+ * Get a random number between 0.0 and 1.0
+ *
+ * @return A number between 0.0 and 1.0
+ */
+double RandomSync::GetDouble()
+{
+        return 1.0*GetRand()/(WORMUX_RAND_MAX + 1.0);
 }
 
 /**
@@ -136,16 +118,6 @@ double RandomSync::GetDouble(double min, double max)
 double RandomSync::GetDouble(double max)
 {
         return max * GetDouble();
-}
-
-/**
- * Get a random number between 0.0 and 1.0
- *
- * @return A number between 0.0 and 1.0
- */
-double RandomSync::GetDouble()
-{
-        return 1.0*GetRand()/(NET_RAND_MAX + 1.0);
 }
 
 /**
