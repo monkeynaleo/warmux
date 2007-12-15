@@ -166,7 +166,7 @@ void NetworkServer::RejectIncoming()
   if (!server_socket) return;
   SDLNet_TCP_Close(server_socket);
   server_socket = NULL;
-  printf("\nStop listening");
+  printf("\noo Stop listening\n");
 }
 
 void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
