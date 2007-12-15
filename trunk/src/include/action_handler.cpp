@@ -260,18 +260,12 @@ void Action_DropBonusBox (Action *a)
 
 void Action_Game_SetState (Action *a)
 {
-  int random = a->PopInt();
+  // to re-synchronize random number generator
+  uint seed = a->PopInt();
+  randomSync.SetRand(seed);
 
-  if (!Network::GetInstance()->IsTurnMaster()) {
-    int random2 = randomSync.GetRand();
-    if (random != random2) {
-      std::string str = Format("Network random generator is not synchronized (%d!=%d) !", random, random2);
-      Error(str);
-      ASSERT(false);
-    }
-  }
-
-  Game::GetInstance()->Really_SetState(Game::game_loop_state_t(a->PopInt()));
+  Game::game_loop_state_t state = Game::game_loop_state_t(a->PopInt());
+  Game::GetInstance()->Really_SetState(state);
 }
 
 // ########################################################
@@ -618,16 +612,9 @@ void Action_Wind (Action *a)
   wind.SetVal (a->PopInt());
 }
 
-void Action_Network_RandomAdd (Action *a)
-{
-  ASSERT(Network::GetInstance()->IsClient())
-  randomSync.AddToTable(a->PopInt());
-}
-
 void Action_Network_RandomInit (Action *a)
 {
-  ASSERT(Network::GetInstance()->IsClient());
-  randomSync.SetRandMax(a->PopDouble());
+  randomSync.SetRand(a->PopInt());
 }
 
 void Action_Network_SyncBegin (Action */*a*/)
@@ -861,7 +848,6 @@ ActionHandler::ActionHandler():
   Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
   Register (Action::ACTION_WIND, "wind", &Action_Wind);
   Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
-  Register (Action::ACTION_NETWORK_RANDOM_ADD, "NETWORK_random_add", &Action_Network_RandomAdd);
   Register (Action::ACTION_NETWORK_DISCONNECT, "NETWORK_disconnect", &Action_Network_Disconnect);
   Register (Action::ACTION_NETWORK_CONNECT, "NETWORK_connect", &Action_Network_Connect);
 

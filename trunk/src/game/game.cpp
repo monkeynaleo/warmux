@@ -104,7 +104,6 @@ void Game::Start()
     jukebox.StopAll();
 
     UnloadDatas();  
-    randomSync.Clear();
 
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
     jukebox.PlayMusic("menu");
@@ -721,7 +720,8 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
     SyncCharacters();
 
   Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE);
-  a->Push(randomSync.GetRand());
+  int seed = randomSync.GetRand();
+  a->Push(seed);
   a->Push(new_state);
   ActionHandler::GetInstance()->NewAction(a);
 }
