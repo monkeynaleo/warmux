@@ -61,11 +61,15 @@ RandomSync::RandomSync()
 
 void RandomSync::Init()
 {
+  MSG_DEBUG("random", "Initialization...");
+
+  int seed = time(NULL);
+  SetRand(seed);
+
   if  (Network::GetInstance()->IsServer()) {  
     int seed = time(NULL);
-    Action *a = new Action(Action::ACTION_NETWORK_RANDOM_INIT);
-    a->Push(seed);
-    ActionHandler::GetInstance()->NewAction(a);
+    Action a(Action::ACTION_NETWORK_RANDOM_INIT, seed);
+    Network::GetInstance()->SendAction(&a);
   }
 }
 
