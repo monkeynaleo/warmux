@@ -614,6 +614,7 @@ void Action_Wind (Action *a)
 
 void Action_Network_RandomInit (Action *a)
 {
+  MSG_DEBUG("random", "Initialization from network");
   randomSync.SetRand(a->PopInt());
 }
 
