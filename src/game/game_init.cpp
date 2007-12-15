@@ -158,6 +158,8 @@ void GameInit::InitData()
   // initialize gaming data
   if (Network::GetInstance()->IsServer())
     InitGameData_NetServer();
+  else if (Network::GetInstance()->IsLocal())
+    randomSync.Init();
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
   // done in action_handler for clients
