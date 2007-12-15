@@ -189,7 +189,7 @@
 
     <cluster_bomb>
       <max_strength>75</max_strength>
-      <nb_ammo>-1</nb_ammo>
+      <nb_ammo>3</nb_ammo>
       <damage>20</damage>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
@@ -210,7 +210,7 @@
       <max_angle>89</max_angle>
       <explosion_range>125</explosion_range>
       <particle_range>125</particle_range>
-      <blast_range>125</blast_range>
+      <blast_range>150</blast_range>
       <blast_force>1500</blast_force>
       <timeout>5</timeout>
       <allow_change_timeout>1</allow_change_timeout>
@@ -362,7 +362,7 @@
       <max_angle>89</max_angle>
       <nb_ammo>2</nb_ammo>
       <unit_per_ammo>2</unit_per_ammo>
-      <damage>5</damage>
+      <damage>20</damage>
     </shotgun>
 
     <skip_turn>
