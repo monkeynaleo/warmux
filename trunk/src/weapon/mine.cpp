@@ -56,8 +56,7 @@ ObjMine::ObjMine(MineConfig& cfg,
 
   escape_time = 0;
 
-  // is it a fake mine ?
-  fake = !(randomSync.GetLong(0, 9));
+  fake = false;
 }
 
 void ObjMine::FakeExplosion()
@@ -84,6 +83,10 @@ void ObjMine::StartTimeout()
   if (!animation)
   {
     animation=true;
+
+    // is it a fake mine ? (here because Constructor is called before random
+    // number generator is synchronized over the network)
+    fake = !(randomSync.GetLong(0, 9));
 
     Camera::GetInstance()->FollowObject(this, true);
 
