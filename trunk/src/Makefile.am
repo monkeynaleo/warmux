@@ -61,6 +61,7 @@ wormux_SOURCES = \
         gui/text_box.cpp gui/text_box.h \
         gui/widget.cpp gui/widget.h \
         gui/widget_list.cpp gui/widget_list.h \
+	gui/big/button_pic.cpp gui/big/button_pic.h \
         include/action.cpp include/action.h \
         include/action_handler.cpp include/action_handler.h \
         include/app.h main.cpp \

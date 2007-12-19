@@ -16,42 +16,29 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Pause menu
+ * A beautiful button with picture and text
  *****************************************************************************/
 
-#ifndef PAUSE_MENU_H
-#define PAUSE_MENU_H
+#ifndef BUTTON_PIC_H
+#define BUTTON_PIC_H
 
-#include "menu/menu.h"
+#include "gui/button.h"
+#include "graphic/surface.h"
 
-// Forward declarations
-class ButtonPic;
+class Text;
 
-class PauseMenu : public Menu
+class ButtonPic : public Widget
 {
  private:
-  bool& exit_game;
+  Text *txt_label;
+  Surface m_img_normal;
 
-  ButtonPic * bt_continue_play;
-  ButtonPic * bt_options_menu;
-  ButtonPic * bt_help;
-  ButtonPic * bt_main_menu;
-
-
-  bool signal_ok();
-  bool signal_cancel();
-
-  void BackToMainMenu();
-  void BackToGame();
-  void RunOptionsMenu();
-
-  void Draw(const Point2i &mousePosition);
-
-  void OnClick(const Point2i &mousePosition, int button);
-  void OnClickUp(const Point2i &mousePosition, int button);
  public:
-  PauseMenu(bool& exit_game);
-  ~PauseMenu();
+  ButtonPic(const std::string& label, const std::string& resource_id, const Point2i& size);
+  void Draw(const Point2i& mousePosition, Surface& surf) const;
+
+  void SetSizePosition(const Rectanglei& rect);
 };
 
 #endif
+
