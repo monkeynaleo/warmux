@@ -27,21 +27,21 @@
 
 /******************************************************************************
  * From "man 3 rand"
- * POSIX.1-2001  gives the following example of an implementation of rand() and 
- * srand(), possibly useful when one needs the same sequence on two different 
+ * POSIX.1-2001  gives the following example of an implementation of rand() and
+ * srand(), possibly useful when one needs the same sequence on two different
  * machines.
  ******************************************************************************/
 
 static unsigned long next = 1;
 
 /* RAND_MAX assumed to be 32767 */
-static inline uint wormux_rand(void) 
+static inline uint wormux_rand(void)
 {
   next = next * 1103515245 + 12345;
   return((uint)(next/65536) % 32768);
 }
 
-static inline void wormux_srand(uint seed) 
+static inline void wormux_srand(uint seed)
 {
   next = seed;
 }
@@ -66,7 +66,7 @@ void RandomSync::Init()
   int seed = time(NULL);
   SetRand(seed);
 
-  if  (Network::GetInstance()->IsServer()) {  
+  if  (Network::GetInstance()->IsServer()) {
     int seed = time(NULL);
     Action a(Action::ACTION_NETWORK_RANDOM_INIT, seed);
     Network::GetInstance()->SendAction(&a);
@@ -86,6 +86,10 @@ uint RandomSync::GetRand()
 #ifdef DEBUG
   nb_get++;
   MSG_DEBUG("random.get", "Get %04d: %u", nb_get, nbr);
+
+  if (Network::IsConnected())
+    ASSERT(Network::GetInstance()->GetState() == Network::NETWORK_LOADING_DATA
+	   || Network::GetInstance()->GetState() == Network::NETWORK_PLAYING);
 #endif
   return nbr;
 }
