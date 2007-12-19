@@ -14,10 +14,17 @@
 
 <section name="menu">
 
+  <!-- backgrounds -->
   <surface name="bg_option" file="menu/background_options.png" />
   <surface name="bg_play" file="menu/background_play.png" />
   <surface name="bg_network" file="menu/background_network.png" />
   <surface name="bg_results" file="menu/background_play.png" />
+
+  <!-- buttons to access menus -->
+  <surface name="ico_back_to_battle" file="menu/i_backtobattle.png" />
+  <surface name="ico_quit_battle" file="menu/i_quit.png" />
+  <surface name="ico_options_menu" file="menu/i_options.png" />
+  <surface name="ico_help" file="menu/i_help.png" />
 
   <surface name="video_label" file="menu/video_label.png" />
   <surface name="config_label" file="menu/config_label.png" />
@@ -49,7 +56,7 @@
   <surface name="display_name" file="menu/display_name.png" />
   <surface name="display_wind_particles" file="menu/display_wind_particles.png" />
   <surface name="fullscreen" file="menu/fullscreen.png" />
-  <surface name="scroll_on_border" file="menu/scroll_on_border.png" />  
+  <surface name="scroll_on_border" file="menu/scroll_on_border.png" />
   <surface name="fps" file="menu/fps.png"/>
   <surface name="resolution" file="menu/resolution.png"/>
 
@@ -66,7 +73,7 @@
   <surface name="random_map" file="map/random_map.jpg" />
 
   <!-- Buttons -->
-  
+
   <sprite name="send_txt">
     <image file="menu/send_txt.png">
       <grid pos="0,0" size="16,16" array="2,1" />
@@ -77,57 +84,57 @@
     <image file="menu/validate.png">
       <grid pos="0,0" size="32,32" array="1,2" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="annuler">
     <image file="menu/cancel.png">
       <grid pos="0,0" size="32,32" array="1,2" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="check">
     <image file="menu/check.png">
       <grid pos="0,0" size="16,16" array="1,2" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="plus">
     <image file="menu/plus.png">
       <grid pos="0,0" size="5,10" array="2,1" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="big_plus">
     <image file="menu/right.png">
       <grid pos="0,0" size="20,20" array="2,1" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="really_big_plus">
     <image file="menu/big_right.png">
       <grid pos="0,0" size="40,40" array="2,1" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="minus">
     <image file="menu/minus.png">
       <grid pos="0,0" size="5,10" array="2,1" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="big_minus">
     <image file="menu/left.png">
       <grid pos="0,0" size="20,20" array="2,1" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="really_big_minus">
     <image file="menu/big_left.png">
       <grid pos="0,0" size="40,40" array="2,1" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="up">
     <image file="menu/up.png">
       <grid pos="0,0" size="10,5" array="1,2" />
     </image>
-  </sprite> 
+  </sprite>
   <sprite name="down">
     <image file="menu/down.png">
       <grid pos="0,0" size="10,5" array="1,2" />
     </image>
-  </sprite> 
+  </sprite>
  </section>
 
 <section name="credit">

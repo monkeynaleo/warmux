@@ -30,7 +30,7 @@
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "gui/box.h"
-#include "gui/button_text.h"
+#include "gui/big/button_pic.h"
 #include "include/app.h"
 #include "menu/options_menu.h"
 #include "tool/i18n.h"
@@ -44,25 +44,28 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
 {
   uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
-  
+
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
-  
-  Box* box = new VBox(402, false);
-  bt_main_menu = new ButtonText(res, "main_menu/button",
-				_("Back to main menu"),
-				Font::FONT_LARGE, Font::FONT_NORMAL);
-  box->AddWidget(bt_main_menu);
 
-  bt_continue_play = new ButtonText(res, "main_menu/button",
-				    _("Back to game"),
-				    Font::FONT_LARGE, Font::FONT_NORMAL);
+  Box* box = new HBox(150, false);
+  Point2i size(150,150);
+
+  bt_continue_play = new ButtonPic(_("Back to battle"),
+				   "menu/ico_back_to_battle", size);
   box->AddWidget(bt_continue_play);
 
-  bt_options_menu = new ButtonText(res, "main_menu/button",
-				   _("Options menu"),
-				   Font::FONT_LARGE, Font::FONT_NORMAL);   
+  bt_options_menu = new ButtonPic(_("Options menu"),
+				  "menu/ico_options_menu", size);
   box->AddWidget(bt_options_menu);
+
+//   bt_help = new ButtonPic(_("Help"),
+// 			  "menu/ico_help", size);
+//   box->AddWidget(bt_help);
+
+  bt_main_menu = new ButtonPic(_("Quit battle"),
+			       "menu/ico_quit_battle", size);
+  box->AddWidget(bt_main_menu);
 
   widgets.AddWidget(box);
 
@@ -97,7 +100,7 @@ void PauseMenu::RunOptionsMenu()
 bool PauseMenu::signal_ok()
 {
   bool r = false;
-  
+
   Widget * w = widgets.GetCurrentKeyboardSelectedWidget();
   if (w == bt_main_menu) {
     BackToMainMenu();
