@@ -85,9 +85,6 @@ public:
   inline bool GetScrollOnBorder() const { return scroll_on_border; };
   inline void SetScrollOnBorder(const bool sob) { scroll_on_border = sob; };
 
-  inline bool IsNetworkActivated() const { return enable_network; };
-  inline void SetNetworkActivated(const bool set_net) { enable_network = set_net; };
-
   inline bool IsVideoFullScreen() const { return video_fullscreen; };
   inline void SetVideoFullScreen(const bool set_fullscreen) { video_fullscreen = set_fullscreen; };
 

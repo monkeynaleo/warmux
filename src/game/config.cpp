@@ -150,14 +150,14 @@ Config::Config():
   CFStringGetCString(cfStringRef, path, 1024, kCFStringEncodingASCII);
   CFRelease(mainBundleURL);
   CFRelease(cfStringRef);
-  
+
   std::string contents = std::string(path) + std::string("/Contents");
   if(contents.find(".app") != std::string::npos){
       // executable is inside an app bundle, use app bundle-relative paths
       std::string default_data_dir = contents + std::string("/Resources/data");
       std::string default_ttf_filename = contents + std::string("/Resources/data/font/DejaVuSans.ttf");
       std::string default_locale_dir = contents + std::string("/Resources/locale");
-      
+
       // if environment variables exist, they will override default values
       data_dir     = GetEnv(Constants::ENV_DATADIR, default_data_dir);
       locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, default_locale_dir);
@@ -466,7 +466,6 @@ bool Config::SaveXml()
 
   //=== Network ===
   xmlpp::Element *net_node = root->add_child("network");
-  //doc.WriteElement(net_node, "enable_network",  ulong2str(IsNetworkActivated()));
   doc.WriteElement(net_node, "host", m_network_host);
   doc.WriteElement(net_node, "port", m_network_port);
 
