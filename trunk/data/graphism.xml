@@ -23,8 +23,13 @@
   <!-- buttons to access menus -->
   <surface name="ico_back_to_battle" file="menu/i_backtobattle.png" />
   <surface name="ico_quit_battle" file="menu/i_quit.png" />
+
+  <surface name="ico_play" file="menu/i_play.png" />
   <surface name="ico_options_menu" file="menu/i_options.png" />
+  <surface name="ico_network_menu" file="menu/i_network.png" />
+  <surface name="ico_credits" file="menu/i_credits.png" />
   <surface name="ico_help" file="menu/i_help.png" />
+  <surface name="ico_quit" file="menu/i_quit.png" />
 
   <surface name="video_label" file="menu/video_label.png" />
   <surface name="config_label" file="menu/config_label.png" />
