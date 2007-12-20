@@ -32,6 +32,7 @@ graphic/surface.cpp
 graphic/text.cpp
 graphic/text_list.cpp
 graphic/video.cpp
+gui/big/button_pic.cpp
 gui/box.cpp
 gui/button.cpp
 gui/button_text.cpp
@@ -88,6 +89,7 @@ menu/network_connection_menu.cpp
 menu/network_menu.cpp
 menu/network_teams_selection_box.cpp
 menu/options_menu.cpp
+menu/pause_menu.cpp
 menu/results_menu.cpp
 menu/team_box.cpp
 menu/teams_selection_box.cpp
