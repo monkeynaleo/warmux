@@ -21,7 +21,8 @@
  *****************************************************************************/
 
 #include "menu/main_menu.h"
-#include "gui/button_text.h"
+#include "gui/box.h"
+#include "gui/big/button_pic.h"
 #include "game/config.h"
 #include "graphic/text.h"
 #include "graphic/video.h"
@@ -51,65 +52,33 @@ MainMenu::~MainMenu()
 MainMenu::MainMenu() :
     Menu("main_menu/bg_main", vNo)
 {
-  int x_button;
-  double y_scale;
+  Box* box = new HBox(110, true);
+  Point2i size(120,100);
 
-  int button_width = 402;
-  int button_height = 64;
+  play = new ButtonPic(_("Play"), "menu/ico_play", size);
+  box->AddWidget(play);
 
-  y_scale = (double)AppWormux::GetInstance()->video->window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
+  network = new ButtonPic(_("Network Game"), "menu/ico_network_menu", size);
+  box->AddWidget(network);
 
-  x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - button_width/2;
+  options = new ButtonPic(_("Options"), "menu/ico_options_menu", size);
+  box->AddWidget(options);
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  help = new ButtonPic(_("Help"), "menu/ico_help", size);
+  box->AddWidget(help);
 
-  int y = int(290 * y_scale) ;
-  const int y2 = AppWormux::GetInstance()->video->window.GetHeight() + VERSION_DY -20 - button_height;
+  credits = new ButtonPic(_("Credits"), "menu/ico_credits", size);
+  box->AddWidget(credits);
 
-  int dy = std::max((y2-y)/3, button_height);
-  if(Config::GetInstance()->IsNetworkActivated())
-    dy = std::max((y2-y)/4, button_height);
+  quit =  new ButtonPic(_("Quit"), "menu/ico_quit", size);
+  box->AddWidget(quit);
 
-  play = new ButtonText(res, "main_menu/button",
-                        _("Play"),
-                        Font::FONT_LARGE, Font::FONT_NORMAL);
-  play->SetXY(x_button, y);
-  y += dy;
+  widgets.AddWidget(box);
 
-  if(Config::GetInstance()->IsNetworkActivated()) {
-    network = new ButtonText(res, "main_menu/button",
-                             _("Network Game"),
-                             Font::FONT_LARGE, Font::FONT_NORMAL );
-    network->SetXY(x_button, y);
-    y += dy;
-  } else {
-    network = NULL;
-  }
+  uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
+  uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
+  box->SetXY(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
 
-  options = new ButtonText(res, "main_menu/button",
-                           _("Options"),
-                           Font::FONT_LARGE, Font::FONT_NORMAL);
-  options->SetXY(x_button, y);
-  y += dy;
-
-  infos = new ButtonText(res, "main_menu/button",
-			 _("Credits"),
-			 Font::FONT_LARGE, Font::FONT_NORMAL);
-  infos->SetXY(x_button, y);
-  y += dy;
-
-  quit =  new ButtonText(res, "main_menu/button",
-                         _("Quit"),
-                         Font::FONT_LARGE, Font::FONT_NORMAL);
-  quit->SetXY(x_button, y);
-  widgets.AddWidget(play);
-  if(Config::GetInstance()->IsNetworkActivated())
-    widgets.AddWidget(network);
-  widgets.AddWidget(options);
-  widgets.AddWidget(infos);
-  widgets.AddWidget(quit);
-
-  resource_manager.UnLoadXMLProfile( res);
 
   std::string s("Version "+Constants::WORMUX_VERSION);
   version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
@@ -139,7 +108,7 @@ void MainMenu::SelectAction(const Widget *w)
   } else if(w == options) {
     choice = OPTIONS;
     close_menu = true;
-  } else if(w == infos) {
+  } else if(w == credits) {
     choice = CREDITS;
     close_menu = true;
   } else if(w == quit) {

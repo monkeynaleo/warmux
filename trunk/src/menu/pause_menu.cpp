@@ -45,11 +45,8 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
   uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-
-
-  Box* box = new HBox(150, false);
-  Point2i size(150,150);
+  Box* box = new HBox(110, true);
+  Point2i size(100,100);
 
   bt_continue_play = new ButtonPic(_("Back to battle"),
 				   "menu/ico_back_to_battle", size);
@@ -59,9 +56,9 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
 				  "menu/ico_options_menu", size);
   box->AddWidget(bt_options_menu);
 
-//   bt_help = new ButtonPic(_("Help"),
-// 			  "menu/ico_help", size);
-//   box->AddWidget(bt_help);
+  bt_help = new ButtonPic(_("Help"),
+ 			  "menu/ico_help", size);
+  box->AddWidget(bt_help);
 
   bt_main_menu = new ButtonPic(_("Quit battle"),
 			       "menu/ico_quit_battle", size);
@@ -69,9 +66,7 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
 
   widgets.AddWidget(box);
 
-  box->SetXY(center_x - box->GetSizeX()/2, center_y - 100);
-
-  resource_manager.UnLoadXMLProfile(res);
+  box->SetXY(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
 }
 
 PauseMenu::~PauseMenu()
