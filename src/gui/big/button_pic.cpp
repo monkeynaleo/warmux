@@ -54,7 +54,7 @@ void ButtonPic::Draw(const Point2i &mousePosition, Surface& surf) const
 
   if (Contains(mousePosition)) {
     surf.RectangleColor(*this, c_yellow, 1);
-    txt_label->SetColor(white_color);
+    txt_label->SetColor(black_color);
   } else {
     txt_label->SetColor(dark_gray_color);
   }
