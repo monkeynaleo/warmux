@@ -5,14 +5,6 @@
   <team>
     <section title="Active Team">
       <author>
-	<nickname>deki</nickname>
-	<name>Reiner HERRMANN</name>
-	<description>Programmer</description>
-	<website>http://www.reiner-h.de/</website>
-	<email>reiner_AT_reiner-h_DOT_de</email>
-	<country>Germany</country>
-      </author>
-      <author>
 	<nickname>drayan</nickname>
 	<name>Yannig PERRÉ</name>
 	<description>Programmer</description>
@@ -36,20 +28,6 @@
 	<country>France</country>
       </author>
       <author>
-	<nickname>lodesi</nickname>
-	<name>Laurent DEFERT SIMONNEAU</name>
-	<description>Programmer and graphic artist</description>
-	<email>lodesi2_AT_yahoo_DOT_fr</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>OznOg</nickname>
-	<name>Sébastien GONZALVE</name>
-	<description>Programmer</description>
-	<website>http://zarb.org/%7Eoznog/</website>
-	<email>oznog_AT_zarb_DOT_org</email>
-      <country>France</country></author>
-      <author>
 	<nickname>yeKcim</nickname>
 	<name>Anthony CARRÉ</name>
 	<description>Graphic artist</description>
@@ -60,6 +38,14 @@
     </section>
 
     <section title="Inactive Team">
+      <author>
+	<nickname>deki</nickname>
+	<name>Reiner HERRMANN</name>
+	<description>Programmer</description>
+	<website>http://www.reiner-h.de/</website>
+	<email>reiner_AT_reiner-h_DOT_de</email>
+	<country>Germany</country>
+      </author>
       <author>
 	<nickname>jcduberga</nickname>
 	<name>Jean-Christophe DUBERGA</name>
@@ -84,11 +70,26 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>lodesi</nickname>
+	<name>Laurent DEFERT SIMONNEAU</name>
+	<description>Programmer and graphic artist</description>
+	<email>lodesi2_AT_yahoo_DOT_fr</email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>otacaon</nickname>
 	<name>Olivier SERRES</name>
 	<description>Programmer</description>
 	<email>olivier.serres_AT_gmail_DOT_com</email>
 	<country>France</country>
+      </author>
+      <author>
+	<nickname>OznOg</nickname>
+	<name>Sébastien GONZALVE</name>
+	<description>Programmer</description>
+	<website>http://zarb.org/%7Eoznog/</website>
+	<email>oznog_AT_zarb_DOT_org</email>
+      <country>France</country>
       </author>
       <author>
 	<nickname>renaud</nickname>
@@ -200,7 +201,7 @@
 	<nickname>Christian</nickname>
 	<name>Christian LOMSDALEN</name>
 	<description>Translated Wormux 0.8 to Norwegian</description>
-	<website>http://hinsides.net/</website>
+	<website>http://vindstille.net</website>
 	<email>christian_AT_vindstille_DOT_net</email>
 	<country>Norway</country>
       </author>
