@@ -1,3 +1,16 @@
+> 2007/12/23 - 0.8beta4 release
+  - Network bug fixes:
+      * random number generator
+      * remote team is seen as local team
+  - Menus:
+      * new main menu
+      * new quit menu
+  - Also:
+      * click on mouse middle button to center on active character
+      * copy/paste to textbox
+      * better use of anti-aliasing
+      * other bug fixes (memory leaks, ...)
+
 > 2007/11/20 - 0.8beta3 release
   - Code improvements:
       * A lot of bug fixes
