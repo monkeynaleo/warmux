@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-12-26 17:03-0000\n"
+"PO-Revision-Date: 2007-12-26 21:21-0000\n"
 "Last-Translator: Paweł Dyda <pawel.dyda@gazeta.pl>\n"
 "Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -430,6 +430,10 @@ msgstr "Autorzy:"
 msgid "Automatic Bazooka"
 msgstr "Automatyczna wyrzutnia rakiet"
 
+#: src/menu/pause_menu.cpp:51
+msgid "Back to battle"
+msgstr "Powróć do bitwy"
+
 #: src/network/net_error_msg.cpp:43
 msgid "Bad socket ..."
 msgstr "Błędne gniazdko..."
@@ -648,6 +652,7 @@ msgid "Head commander: "
 msgstr "Głównodowodzący: "
 
 #: src/menu/main_menu.cpp:67
+#: src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "Pomoc"
 
@@ -845,6 +850,10 @@ msgstr "Liczba drużyn:"
 msgid "Options"
 msgstr "Opcje"
 
+#: src/menu/pause_menu.cpp:55
+msgid "Options menu"
+msgstr "Opcje"
+
 #: src/weapon/parachute.cpp:65
 msgid "Parachute"
 msgstr "Spadochron"
@@ -886,6 +895,10 @@ msgstr "Wyjdź"
 #: src/main.cpp:230
 msgid "Quit Wormux"
 msgstr "Wyjdź z programu Wormux"
+
+#: src/menu/pause_menu.cpp:63
+msgid "Quit battle"
+msgstr "Wyjdź"
 
 #: src/menu/map_selection_box.cpp:241
 msgid "Random map"
