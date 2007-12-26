@@ -353,13 +353,13 @@ msgstr[2] "Ekipa %s je osvojila %u šibrovke!"
 msgstr[3] "Ekipa %s je osvojila %u šibrovk!"
 
 #: src/weapon/snipe_rifle.cpp:241
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
-msgstr[0] "Ekipa %s je osvojila %u ostrostrelsko puško!"
-msgstr[1] "Ekipa %s je osvojila %u ostrostrelski puški!"
-msgstr[2] "Ekipa %s je osvojila %u ostrostrelske puške!"
-msgstr[3] "Ekipa %s je osvojila %u ostrostrelskih pušk!"
+msgstr[0] "Ekipa %s je osvojila %u ostrostrelsko puško! Merite med oči!"
+msgstr[1] "Ekipa %s je osvojila %u ostrostrelski puški! Merite med oči!"
+msgstr[2] "Ekipa %s je osvojila %u ostrostrelske puške! Merite med oči!"
+msgstr[3] "Ekipa %s je osvojila %u ostrostrelskih pušk! Merite med oči!"
 
 #: src/weapon/submachine_gun.cpp:156
 #, c-format
@@ -478,7 +478,7 @@ msgstr "Avtomatska Bazuka"
 
 #: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
-msgstr ""
+msgstr "Nazaj v bitko"
 
 #: src/network/net_error_msg.cpp:43
 msgid "Bad socket ..."
@@ -703,7 +703,7 @@ msgstr "Poveljnik: "
 
 #: src/menu/main_menu.cpp:67 src/menu/pause_menu.cpp:59
 msgid "Help"
-msgstr ""
+msgstr "Pomoč"
 
 #: src/menu/network_connection_menu.cpp:161
 msgid "Host a game"
@@ -904,7 +904,6 @@ msgid "Options"
 msgstr "Nastavitve"
 
 #: src/menu/pause_menu.cpp:55
-#, fuzzy
 msgid "Options menu"
 msgstr "Nastavitve"
 
@@ -952,7 +951,7 @@ msgstr "Končaj Wormux"
 
 #: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
-msgstr ""
+msgstr "Končaj bitko"
 
 #: src/menu/map_selection_box.cpp:241
 msgid "Random map"
