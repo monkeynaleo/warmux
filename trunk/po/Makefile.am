@@ -174,6 +174,8 @@ POTFILES = \
         src/menu/network_teams_selection_box.h \
         src/menu/options_menu.cpp \
         src/menu/options_menu.h \
+        src/menu/pause_menu.cpp \
+        src/menu/pause_menu.h \
         src/menu/results_menu.cpp \
         src/menu/results_menu.h \
         src/menu/team_box.cpp \
