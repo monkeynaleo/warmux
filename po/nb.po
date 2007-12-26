@@ -10,7 +10,7 @@ msgstr ""
 "POT-Creation-Date: 2007-12-02 11:46+0100\n"
 "PO-Revision-Date: 2007-03-07 13:15+0100\n"
 "Last-Translator: Christian LOMSDALEN <christian@vindstille.net>\n"
-"Language-Team: \n"
+"Language-Team: http://vindstille.net"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -322,7 +322,8 @@ msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "%s-laget har vunnet %u selvmordsbombe !"
 msgstr[1] ""
-"%s-laget har vunnet %u selvmordsbomber! Bruk alle for å få en ekstra bonus !"
+"%s-laget har vunnet %u selvmordsbomber! Bruk alle for å få en ekstra bonus "
+"!"
 
 #: src/weapon/syringe.cpp:107
 #, c-format
@@ -343,7 +344,8 @@ msgstr[1] "%s-laget har vunnet %u teleporteringer."
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] ""
-"%s-laget har vunnet %u mulighet til å hoppe over en runde, du vil elske det !"
+"%s-laget har vunnet %u mulighet til å hoppe over en runde, du vil elske det "
+"!"
 msgstr[1] ""
 "%s-laget har vunnet %u muligheter til å hoppe over en runde, du vil elske "
 "det !"
@@ -642,7 +644,7 @@ msgstr "Hold et spill"
 
 #: src/menu/network_connection_menu.cpp:161
 msgid "Host a game (Windows clients only)"
-msgstr ""
+msgstr "Vær vert for et spill (kun for Windows-klienter)"
 
 #: src/weapon/blowtorch.cpp:54
 msgid ""
@@ -666,8 +668,8 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Hvordan bruke den : venstreklikk på måletFørste skytevinkel : Opp/NedSkyt : "
-"Hold mellomromstasten nede til riktig styrke er nådden ammo per runde"
+"Hvordan bruke den : venstreklikk på måletFørste skytevinkel : Opp/NedSkyt "
+": Hold mellomromstasten nede til riktig styrke er nådden ammo per runde"
 
 #: src/weapon/anvil.cpp:120
 msgid ""
@@ -1038,9 +1040,9 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
-"Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
-"per runde"
+"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste "
+"skytevinkel : Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er "
+"nådden ammo per runde"
 
 #: src/weapon/bounce_ball.cpp:82
 msgid ""
@@ -1049,9 +1051,9 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
-"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
-"Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
-"per runde"
+"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste "
+"skytevinkel : Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er "
+"nådden ammo per runde"
 
 #: src/interface/weapon_menu.cpp:169
 msgid "Tools"
@@ -1127,9 +1129,9 @@ msgid "Wormux version "
 msgstr "Wormux versjon "
 
 #: src/map/maps_list.cpp:91
-#, fuzzy, c-format
+#, c-format
 msgid "XML error during loading map '%s': "
-msgstr "XMLfeil under lasting av kart '%s' :"
+msgstr "1 uke gammel"
 
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
@@ -1165,29 +1167,28 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
-"angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per runde"
+"angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per "
+"runde"
 
 #: src/map/maps_list.cpp:79
 msgid "couldn't load config"
-msgstr ""
+msgstr "Kunne ikke laste konfigurasjonsfilen"
 
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "ferdig"
 
 #: src/map/maps_list.cpp:86
-#, fuzzy
 msgid "error parsing the config file"
-msgstr "Laster standard konfigurasjonsfil"
+msgstr "Feil under lasting av konfigurasjonsfil"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "fra"
 
 #: src/map/maps_list.cpp:75
-#, fuzzy
 msgid "no configuration file!"
-msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
+msgstr "Fant ingen konfigurasjonsfil"
 
 #: src/sound/jukebox.cpp:157
 msgid "o Loading music"
@@ -1202,236 +1203,3 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Åpnet lyden på %d Hz %d bit"
-
-#, fuzzy
-#~ msgid "Network deinitialization"
-#~ msgstr "Starter nettverk ..."
-
-#~ msgid "(current)"
-#~ msgstr "(aktuell)"
-
-#~ msgid ""
-#~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "
-#~ "blowtorch, submachine gun) and surely many other things don't work either!"
-#~ msgstr ""
-#~ "Noen våpen er skrudd av, fordi det er kjente feil med de(Ninjatau, "
-#~ "Luftangrep, Miltraljøse) og det er sikkert mange andre ting som heller "
-#~ "ikke fungerer !"
-
-#~ msgid ""
-#~ "WARNING!! Network is still under developement and therefore a little "
-#~ "experimental."
-#~ msgstr ""
-#~ "Advarsel!! Nettverksfunksjonen er fremdeles under utvikling og er derfor "
-#~ "litt eksperimentel"
-
-#~ msgid "%s team has won %u Gnu!"
-#~ msgid_plural "%s team has won %u Gnus!"
-#~ msgstr[0] "%s-laget har vunnet %u %s !"
-#~ msgstr[1] "%s-laget har vunnet %u %ss !"
-
-#~ msgid "%s team has won %u airhammer!"
-#~ msgid_plural "%s team has won %u airhammers!"
-#~ msgstr[0] "%s-laget har vunnet %u %s !"
-#~ msgstr[1] "%s-laget har vunnet %u %ss !"
-
-#~ msgid "%s team has won %u anvil!"
-#~ msgid_plural "%s team has won %u anvils!"
-#~ msgstr[0] "%s-laget har vunnet %u %s !"
-#~ msgstr[1] "%s-laget har vunnet %u %ss !"
-
-#~ msgid "%s team has won %u blowtorch!"
-#~ msgid_plural "%s team has won %u blowtorchs!"
-#~ msgstr[0] "%s-laget har vunnet %u %s !"
-#~ msgstr[1] "%s-laget har vunnet %u %ss !"
-
-#~ msgid "%s team has won %u unexpected weapon!"
-#~ msgid_plural "%s team has won %u unexpected weapons!"
-#~ msgstr[0] "%s-laget har vunnet %u %s !"
-#~ msgstr[1] "%s-laget har vunnet %u %ss !"
-
-#~ msgid ""
-#~ "WARNING! Disconnections are not yet handled. So you have to restart "
-#~ "Wormux after each disconnection!"
-#~ msgstr ""
-#~ "Advarsel! Avkoblinger kan enda ikke bli håndtert. Så du må omstarte "
-#~ "Wormux etter hver avkobling !"
-
-#~ msgid "Remote"
-#~ msgstr "Fjern"
-
-#~ msgid "Ninjarope"
-#~ msgstr "Ninjatau"
-
-#~ msgid "Error while exporting file %s:"
-#~ msgstr "Eksportering av spillmodus feilet %s (fil %s) :"
-
-#~ msgid "Error while loading game mode %s from memory:"
-#~ msgstr "Lasting av spillmodus %s fra minnet feilet :"
-
-#~ msgid "Unexpected exception caught..."
-#~ msgstr "Uventet unntak fanget ..."
-
-#~ msgid "C++ exception caught:"
-#~ msgstr "C++ unntak fanget :"
-
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Lasting av nettverksbiblioteket feilet : %s"
-
-#~ msgid "Initialisation of TTF library failed: %s"
-#~ msgstr "Lasting av TTF-biblioteket feilet : %s"
-
-#~ msgid "Unable to initialize SDL library: %s"
-#~ msgstr "Umulig å laste SDL-biblioteket: %s"
-
-#~ msgid "You need at least two teams to play: change this in 'Options menu' !"
-#~ msgstr "Du må ha minst to lag for å spille: endre dette i 'alternativer'"
-
-#~ msgid "general: "
-#~ msgstr "generelt :"
-
-#~ msgid " has joined the party"
-#~ msgstr " har blitt med i spillet"
-
-#~ msgid " has left the party"
-#~ msgstr " har forsvunnet fra spillet"
-
-#~ msgid "* Couldn't initialize SDL: "
-#~ msgstr "* Kunne ikke starte SDL:"
-
-#~ msgid "* Couldn't open audio: "
-#~ msgstr " Kunne ikke starte lydfunksjonen"
-
-#~ msgid "Find a random position for characters"
-#~ msgstr "Finn en tilfeldig plassering for enhetene"
-
-#~ msgid "[Music] Error : Unable to load music file: %s"
-#~ msgstr "[Musikk] Feil: Kunne ikke laste musikkfilen: %s"
-
-#~ msgid "[Music] Error : file %s does not exist"
-#~ msgstr "[Musikk] Feil : filen %s finnes ikke"
-
-#~ msgid "[Music] Error : file %s not found"
-#~ msgstr "[Musikk] Feil: fil %s ble ikke funnet"
-
-#~ msgid "[Music] Unable to find music file: %s"
-#~ msgstr "[Musikk] Kunne ikke laste musikkfilen: %s"
-
-#~ msgid "[Music] Unable to find profile: %s"
-#~ msgstr "[Musikk] Kunne ikke laste profilen: %s"
-
-#~ msgid "[Sound] Error : file %s not found"
-#~ msgstr "[Lyd] Feil: filen %s ble ikke funnet"
-
-#~ msgid "[Sound] Error: File %s does not exist"
-#~ msgstr "[Lyd] Feil: filen %s eksisterer ikke"
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "  Most sold-out  :  "
-#~ msgstr "  Messt utsolgt : "
-
-#~ msgid "  Most useful   :  "
-#~ msgstr " Mest brukbar:  "
-
-#~ msgid "  Most useless  :  "
-#~ msgstr "  Mest ubrukelig :  "
-
-#~ msgid "  Most violent  :  "
-#~ msgstr "  Mest voldelig  :  "
-
-#~ msgid "%s has lost %u point of energy."
-#~ msgid_plural "%s has lost %u points of energy."
-#~ msgstr[0] "%s har mistet %u livspoeng."
-#~ msgstr[1] "%s har mistet %u livspoeng."
-
-#~ msgid "'%s has won %u Anvil"
-#~ msgid_plural "'%s has won %u Anvil"
-#~ msgstr[0] "%s-laget har vunnet %u ambolt !"
-#~ msgstr[1] "%s-laget har vunnet %u ambolter !"
-
-#~ msgid "'%s has won %u Holy grenade"
-#~ msgid_plural "'%s has won %u Holy grenades"
-#~ msgstr[0] "%s-laget har vunnet %u hellig granat !"
-#~ msgstr[1] "%s-laget har vunnet %u hellige granater !"
-
-#~ msgid "'%s has won %u Low gravity"
-#~ msgid_plural "'%s has won %u Low gravity"
-#~ msgstr[0] "%s-laget har vunnet %u Lav Gravitet !"
-#~ msgstr[1] "%s-laget har vunnet %u Lav Gravitet !"
-
-#~ msgid "All teams results:\n"
-#~ msgstr "Statestikk for alle lag:\n"
-
-#~ msgid "Connected to "
-#~ msgstr "Tilkoblet til  "
-
-#~ msgid "Contacting main server..."
-#~ msgstr "Kobler til hovedtjener ..."
-
-#~ msgid "Energy:"
-#~ msgstr "Livspoeng :"
-
-#~ msgid "Game options:"
-#~ msgstr "Spillalternativer"
-
-#~ msgid "Invalid index server adress!"
-#~ msgstr "Feil adresse til Oversiktstjener !"
-
-#~ msgid "Invalid port!"
-#~ msgstr "Feil port!"
-
-#~ msgid "Invalid server adress!"
-#~ msgstr "Feil tjeneradresse !"
-
-#~ msgid "Invalid top server adress!"
-#~ msgstr "Feil hovedtjeneradresse!"
-
-#~ msgid "Is it a gift?"
-#~ msgstr "Er det en gave !"
-
-#~ msgid "It doesn't seem to be a valid Wormux server..."
-#~ msgstr "Det ser ikke ut til å være en godkjent Wormuxtjener ..."
-
-#~ msgid "Name:"
-#~ msgstr "Navn :"
-
-#~ msgid "Only the server can set the map!"
-#~ msgstr "Bare tjeneren kan bestemme kartet!"
-
-#~ msgid "Select the teams:"
-#~ msgstr "Bestemm lag:"
-
-#~ msgid "Select the world:"
-#~ msgstr "Bestem kart :"
-
-#~ msgid "Server started"
-#~ msgstr "Tjener startet"
-
-#~ msgid "So you have to restart Wormux after each"
-#~ msgstr "Du må omstarte wormux etter hver"
-
-#~ msgid "Team %s results:\n"
-#~ msgstr "Statestikk for %s-laget:\n"
-
-#~ msgid "Unable to contact an index server!"
-#~ msgstr "Kunne ikke koble til Oversiktstjener !"
-
-#~ msgid "Unable to contact top server!"
-#~ msgstr "Kunne ikke koble til hovedtjener!"
-
-#~ msgid "Unable to join the game..."
-#~ msgstr "Kunne ikke bli med i spillet ..."
-
-#~ msgid "Wait! "
-#~ msgstr "Vent! "
-
-#~ msgid "Weapon:"
-#~ msgstr "Våpen :"
-
-#~ msgid "disconnection!"
-#~ msgstr "Avkobling!"
-
-#~ msgid "some opponents."
-#~ msgstr "Noen motsandere"
