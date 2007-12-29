@@ -38,8 +38,6 @@ ButtonPic::ButtonPic(const std::string &label,
 
   SetSize(_size);
 
-  SetSizeY( m_img_normal.GetHeight() + (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).GetHeight() );
-
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth (GetSizeX());
 }
@@ -53,7 +51,7 @@ void ButtonPic::Draw(const Point2i &mousePosition, Surface& surf) const
   surf.Blit(m_img_normal, Point2i(tmp_x, tmp_y));
 
   if (Contains(mousePosition)) {
-    surf.RectangleColor(*this, c_yellow, 1);
+    surf.RectangleColor(*this, c_red, 1);
     txt_label->SetColor(black_color);
   } else {
     txt_label->SetColor(dark_gray_color);
