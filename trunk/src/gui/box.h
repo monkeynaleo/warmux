@@ -63,5 +63,21 @@ class HBox : public Box
   void AddWidget(Widget *a_widget);
 };
 
+class GridBox : public Box
+{
+ private:
+  uint max_line_width;
+  Point2i widget_size;
+  uint last_line;
+  uint last_column;
+
+  uint NbWidgetsPerLine(uint nb_total_widgets);
+  void PlaceWidget(Widget * a_widget, uint line, uint column);
+
+ public:
+  GridBox(uint max_line_width, const Point2i& widget_size, bool _visible=true);
+  void SetSizePosition(const Rectanglei &rect);
+  void AddWidget(Widget *a_widget);
+};
 #endif
 
