@@ -52,8 +52,10 @@ MainMenu::~MainMenu()
 MainMenu::MainMenu() :
     Menu("main_menu/bg_main", vNo)
 {
-  Box* box = new HBox(110, true);
-  Point2i size(120,100);
+  uint window_width = AppWormux::GetInstance()->video->window.GetWidth();
+
+  Point2i size(100,110);
+  Box* box = new GridBox(window_width, size, true);
 
   play = new ButtonPic(_("Play"), "menu/ico_play", size);
   box->AddWidget(play);
@@ -78,7 +80,7 @@ MainMenu::MainMenu() :
   uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
   box->SetXY(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
-
+  //box->SetXY(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
 
   std::string s("Version "+Constants::WORMUX_VERSION);
   version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
