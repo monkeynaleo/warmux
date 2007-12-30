@@ -362,7 +362,7 @@
       <max_angle>89</max_angle>
       <nb_ammo>2</nb_ammo>
       <unit_per_ammo>2</unit_per_ammo>
-      <damage>20</damage>
+      <damage>10</damage> <!-- per bullet! -->
     </shotgun>
 
     <skip_turn>
