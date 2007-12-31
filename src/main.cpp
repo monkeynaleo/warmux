@@ -50,6 +50,7 @@ using namespace std;
 #include "map/maps_list.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
+#include "menu/help_menu.h"
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
 #include "menu/network_menu.h"
@@ -130,6 +131,13 @@ int AppWormux::Main(void)
               menu = &network_connection_menu;
               network_connection_menu.SetAction(net_action);
               network_connection_menu.Run(skip_menu);
+              break;
+            }
+            case MainMenu::HELP:
+            {
+              HelpMenu help_menu;
+              menu = &help_menu;
+              help_menu.Run();
               break;
             }
             case MainMenu::OPTIONS:

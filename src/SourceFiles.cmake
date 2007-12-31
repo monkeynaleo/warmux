@@ -81,6 +81,7 @@ map/water.cpp
 map/wind.cpp
 menu/credits_menu.cpp
 menu/game_menu.cpp
+menu/help_menu.cpp
 menu/internet_menu.cpp
 menu/main_menu.cpp
 menu/map_selection_box.cpp
