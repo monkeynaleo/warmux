@@ -90,6 +90,7 @@ wormux_SOURCES = \
         map/wind.cpp map/wind.h \
         menu/credits_menu.cpp menu/credits_menu.h \
         menu/game_menu.cpp menu/game_menu.h \
+        menu/help_menu.cpp menu/help_menu.h \
         menu/internet_menu.cpp menu/internet_menu.h \
         menu/main_menu.cpp menu/main_menu.h \
         menu/map_selection_box.cpp menu/map_selection_box.h \

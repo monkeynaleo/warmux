@@ -110,6 +110,9 @@ void MainMenu::SelectAction(const Widget *w)
   } else if(w == options) {
     choice = OPTIONS;
     close_menu = true;
+  } else if(w == help) {
+    choice = HELP;
+    close_menu = true;
   } else if(w == credits) {
     choice = CREDITS;
     close_menu = true;

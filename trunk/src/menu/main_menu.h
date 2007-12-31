@@ -48,6 +48,7 @@ public:
     PLAY,
     NETWORK,
     OPTIONS,
+    HELP,
     CREDITS,
     QUIT,
   } menu_item;
