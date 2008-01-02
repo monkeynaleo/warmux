@@ -404,6 +404,9 @@ void Game::Run()
 #endif
     MessageEndOfGame();
 
+  // Fix bug #10613: ensure all teams are reseted as local teams
+  FOR_EACH_TEAM(team)
+    (**team).SetLocal();
 }
 
 void Game::MessageEndOfGame() const
