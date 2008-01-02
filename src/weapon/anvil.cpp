@@ -133,26 +133,33 @@ void AnvilLauncher::UpdateTranslationStrings()
 
 void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 {
-  mouse_pos.y = 0;
-  target = mouse_pos - (projectile->GetSize() / 2);
+  target.x = mouse_pos.x - (projectile->GetWidth() / 2);
+  target.y = 0 - projectile->GetHeight();
+
+  if (!world.ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
+     !projectile->IsInVacuumXY(target))
+    return;
+
   target_chosen = true;
   Shoot();
 }
 
 bool AnvilLauncher::p_Shoot ()
 {
-  if(!target_chosen)
+  if (!target_chosen)
     return false;
 
   projectile->SetXY(target);
   ((Anvil*)projectile)->PlayFallSound();
   lst_objects.AddObject(projectile);
-  Camera::GetInstance()->FollowObject(projectile,true);
+  Camera::GetInstance()->FollowObject(projectile, true);
   projectile = NULL;
   ReloadLauncher();
 
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+
+  target_chosen = false; // ensure next shoot cannot be done pressing key space
   return true;
 }
 
