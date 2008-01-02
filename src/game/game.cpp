@@ -103,7 +103,7 @@ void Game::Start()
     MSG_DEBUG( "game", "End of game_loop.Run()" );
     jukebox.StopAll();
 
-    UnloadDatas();  
+    UnloadDatas();
 
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
     jukebox.PlayMusic("menu");
@@ -280,6 +280,12 @@ void Game::Draw ()
   world.Draw();
   StatStop("GameDraw:world");
 
+  // Draw objects
+  StatStart("GameDraw:objects");
+  lst_objects.Draw();
+  ParticleEngine::Draw(true);
+  StatStart("GameDraw:objects");
+
   // Draw the characters
   StatStart("GameDraw:characters");
   FOR_ALL_CHARACTERS(team,character)
@@ -294,12 +300,6 @@ void Game::Draw ()
   ActiveCharacter().Draw();
   StatStop("GameDraw:active_character");
   StatStop("GameDraw:characters");
-
-  // Draw objects
-  StatStart("GameDraw:objects");
-  lst_objects.Draw();
-  ParticleEngine::Draw(true);
-  StatStart("GameDraw:objects");
 
   // Draw arrow on top of character
   StatStart("GameDraw:arrow_character");
@@ -573,7 +573,7 @@ bool Game::NewBox()
        using action handling (see include/action_handler.cpp */
     box->StoreValue(a);
     ActionHandler::GetInstance()->NewAction(a);
-    delete box; 
+    delete box;
     return true;
   }
   return false;
@@ -705,7 +705,7 @@ void Game::Really_SetState(game_loop_state_t new_state)
 
 void Game::SetState(game_loop_state_t new_state, bool begin_game) const
 {
-  if (begin_game && 
+  if (begin_game &&
       (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()))
     Network::GetInstance()->SetTurnMaster(true);
 
