@@ -23,6 +23,7 @@
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
 
+#include "character/character.h"
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
@@ -30,7 +31,10 @@
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
+#include "object/objects_list.h"
 #include "sound/jukebox.h"
+#include "team/macro.h"
+#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
@@ -55,7 +59,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
 void Construct::UpdateTranslationStrings()
 {
   m_name = _("Construct");
-  
+
   /* TODO: FILL IT */
   /* m_help = */
 }
@@ -79,6 +83,8 @@ bool Construct::p_Shoot ()
     return false;
   jukebox.Play("share", "weapon/construct");
   world.MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
+
+  target_chosen = false; // ensure next shoot cannot be done pressing key space
   return true;
 }
 
@@ -96,6 +102,25 @@ void Construct::Draw()
 void Construct::ChooseTarget(Point2i mouse_pos)
 {
   dst = mouse_pos;
+
+  Point2i test_target = dst - construct_spr->GetSize()/2;
+  Rectanglei rect(test_target, construct_spr->GetSize());
+
+  if (!world.ParanoiacRectIsInVacuum(rect))
+    return;
+
+  // Check collision with characters and other physical objects
+  FOR_ALL_CHARACTERS(team, c) {
+    if ((c->GetTestRect()).Intersect(rect))
+      return;
+  }
+
+  FOR_ALL_OBJECTS(it) {
+    PhysicalObj *obj = *it;
+    if ((obj->GetTestRect()).Intersect(rect))
+      return;
+  }
+
   target_chosen = true;
   Shoot();
 }
