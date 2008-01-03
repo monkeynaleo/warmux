@@ -125,7 +125,7 @@ void Plane::Shoot(double speed, const Point2i& target)
 
   SetSpeedXY (speed_vector);
 
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this, true, true);
 
   lst_objects.AddObject(this);
 }
@@ -150,7 +150,7 @@ void Plane::DropBomb()
   nb_dropped_bombs++;
 
   if (nb_dropped_bombs == 1)
-    Camera::GetInstance()->FollowObject(instance, true);
+    Camera::GetInstance()->FollowObject(instance, true, true);
 
 }
 

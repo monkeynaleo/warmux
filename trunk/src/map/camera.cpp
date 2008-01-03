@@ -36,6 +36,12 @@
 
 const Point2i CAMERA_SPEED(20, 20);
 
+// minimum speed of an object that is followed in advance
+#define MIN_SPEED_ADVANCE 5
+
+// for this speed (and higher), the object can be in the corner of the screen
+#define MAX_SPEED_ADVANCE 15
+
 Camera* Camera::singleton = NULL;
 
 Camera * Camera::GetInstance()
@@ -48,6 +54,7 @@ Camera * Camera::GetInstance()
 
 Camera::Camera():
   auto_crop(true),
+  in_advance(false),
   followed_object(NULL)
 {
   pointer_used_before_scroll = Mouse::POINTER_SELECT;
@@ -56,19 +63,23 @@ Camera::Camera():
 void Camera::Reset()
 {
   auto_crop = true;
+  in_advance = false;
   followed_object = NULL;
   SetXYabs(world.GetSize() / 2);
 }
 
-bool Camera::HasFixedX() const{
+bool Camera::HasFixedX() const
+{
   return (int)world.GetWidth() <= GetSizeX();
 }
 
-bool Camera::HasFixedY() const{
+bool Camera::HasFixedY() const
+{
   return (int)world.GetHeight() <= GetSizeY();
 }
 
-void Camera::SetXYabs(int x, int y){
+void Camera::SetXYabs(int x, int y)
+{
   AppWormux * app = AppWormux::GetInstance();
 
   if(!HasFixedX())
@@ -83,7 +94,8 @@ void Camera::SetXYabs(int x, int y){
 
 }
 
-void Camera::SetXY(Point2i pos){
+void Camera::SetXY(Point2i pos)
+{
   pos = pos * FreeDegrees();
   if( pos.IsNull() )
     return;
@@ -91,34 +103,94 @@ void Camera::SetXY(Point2i pos){
   SetXYabs(position + pos);
 }
 
-void Camera::AutoCrop(){
+void Camera::AutoCrop()
+{
   /* Stuff is put static in order to be able to reach the last position
    * of the object the camera was following, in case it desapears. This
    * typically happen when something explodes or a character dies. */
-  static Point2i pos(0, 0);
-  static Point2i size(1, 1);
+  static Point2i obj_pos(0, 0);
+  static Point2i obj_size(1, 1);
+  static Point2d obj_speed(0, 0);
+
+  Point2i Camera_Speed = CAMERA_SPEED;
 
   if (followed_object && !followed_object->IsGhost() )
   {
-    pos = followed_object->GetPosition();
-    size = followed_object->GetSize();
+    /* compute the ideal position!
+     * it takes the physical object direction into account
+     */
+    obj_pos = followed_object->GetPosition();
+    obj_size = followed_object->GetSize();
+
+    if (followed_object->IsMoving() && in_advance)
+    {
+      Point2d prev_speed(obj_speed);
+      obj_speed = followed_object->GetSpeed();
+
+      if ((prev_speed.GetX() > 0 && obj_speed.GetX() < 0) ||
+	  (prev_speed.GetX() < 0 && obj_speed.GetX() > 0))
+      {
+	if ((prev_speed.GetY() > 0 && obj_speed.GetY() < 0) ||
+	    (prev_speed.GetY() < 0 && obj_speed.GetY() > 0))
+	{
+	  /* object has probably rebound, do not try anymore to follow it
+	   * in advance
+	   */
+	  MSG_DEBUG("camera.follow", "No more in advance!");
+	  in_advance = false;
+	}
+      }
+
+      if (in_advance)
+      {
+	double speed_x = InRange_Double(fabs(obj_speed.GetX()), MIN_SPEED_ADVANCE,
+					MAX_SPEED_ADVANCE) - MIN_SPEED_ADVANCE;
+	uint diff_x = (uint)((speed_x * (GetSizeX()/3)) / (MAX_SPEED_ADVANCE - MIN_SPEED_ADVANCE));
+
+	if (obj_speed.GetX() < -MIN_SPEED_ADVANCE) {
+	  obj_pos.SetValues(obj_pos.GetX() - diff_x, obj_pos.GetY());
+	} else if (obj_speed.GetX() > MIN_SPEED_ADVANCE) {
+	  obj_pos.SetValues(obj_pos.GetX() + diff_x, obj_pos.GetY());
+	}
+
+	double speed_y = InRange_Double(fabs(obj_speed.GetY()), MIN_SPEED_ADVANCE,
+					MAX_SPEED_ADVANCE) - MIN_SPEED_ADVANCE;
+	uint diff_y = (uint)((speed_y * (GetSizeY()/3)) / (MAX_SPEED_ADVANCE - MIN_SPEED_ADVANCE));
+
+	if (obj_speed.GetY() < -MIN_SPEED_ADVANCE) {
+	  obj_pos.SetValues(obj_pos.GetX(), obj_pos.GetY() - diff_y);
+	} else if (obj_speed.GetY() > MIN_SPEED_ADVANCE) {
+	  obj_pos.SetValues(obj_pos.GetX(), obj_pos.GetY() + diff_y);
+	}
+
+	MSG_DEBUG("camera.follow", "-> Diff position: %u, %u",
+		  diff_x, diff_y);
+
+	Camera_Speed *= 4;
+      }
+    }
+    else
+    {
+      obj_speed = Point2d(0, 0);
+    }
   }
 
-  if( pos.y < 0 )
-    pos.y = 0;
+  if (obj_pos.y < 0)
+    obj_pos.y = 0;
 
   Point2i dstMax = GetSize()/2;
 
   ASSERT(!dstMax.IsNull());
 
+  // BR-> bottom right
   Point2i cameraBR = GetSize() + position;
-  Point2i objectBRmargin = pos + size + GetSize()/2;
+  Point2i objectBRmargin = obj_pos + obj_size + GetSize()/2;
   Point2i dst(0, 0);
 
   dst += cameraBR.inf(objectBRmargin) * (objectBRmargin - cameraBR);
-  dst += (pos - GetSize()/2).inf(position) * (pos - GetSize()/2 - position);
+  dst += (obj_pos - GetSize()/2).inf(position) * (obj_pos - GetSize()/2 - position);
 
-  SetXY(dst * CAMERA_SPEED / dstMax );
+  SetXY(dst * Camera_Speed / dstMax);
 }
 
 void Camera::SaveMouseCursor()
@@ -203,7 +275,7 @@ void Camera::TestCamera()
       || SDL_GetModState() & KMOD_CTRL)
     {
       // Begin to move the camera...
-      if (Mouse::GetInstance()->GetPointer() != Mouse::POINTER_MOVE) 
+      if (Mouse::GetInstance()->GetPointer() != Mouse::POINTER_MOVE)
 	{
 	  first_mouse_pos = Point2i(x, y);
 	  SaveMouseCursor();
@@ -215,10 +287,10 @@ void Camera::TestCamera()
       last_mouse_pos = curr_pos;
       return;
     }
-  else if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_MOVE) 
+  else if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_MOVE)
     {
       // if the mouse has not moved at all since the user pressed the middle button, we center the camera!
-      if (first_mouse_pos == curr_pos) 
+      if (first_mouse_pos == curr_pos)
 	{
 	  CenterOnActiveCharacter();
 	}
@@ -241,12 +313,16 @@ void Camera::Refresh(){
     AutoCrop();
 }
 
-void Camera::FollowObject(const PhysicalObj *obj, bool follow){
+void Camera::FollowObject(const PhysicalObj *obj, bool follow,
+			  bool _in_advance)
+{
   MSG_DEBUG( "camera.tracking", "Following object %s",
                                  obj->GetName().c_str());
 
   if (followed_object != obj || !IsVisible(*obj))
     auto_crop = follow;
+
+  in_advance = _in_advance;
   followed_object = obj;
 }
 
