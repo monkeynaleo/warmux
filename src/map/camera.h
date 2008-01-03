@@ -46,7 +46,9 @@ private:
   Camera();
 
   bool auto_crop;
+  bool in_advance;
   const PhysicalObj* followed_object;
+  void AutoCrop();
 
   Point2i FreeDegrees() const { return Point2i(HasFixedX()? 0 : 1, HasFixedY()? 0 : 1); };
   Point2i NonFreeDegrees() const { return Point2i(1, 1) - FreeDegrees(); };
@@ -65,7 +67,8 @@ public:
   void SetXYabs(const Point2i &pos) { SetXYabs(pos.x, pos.y); };
 
   // Auto crop on an object
-  void FollowObject(const PhysicalObj *obj, bool follow);
+  // in_advance is used to center the camera on the direction where the object is going
+  void FollowObject(const PhysicalObj *obj, bool follow, bool in_advance = false);
   void StopFollowingObj(const PhysicalObj* obj);
 
   void CenterOnActiveCharacter();
@@ -74,7 +77,6 @@ public:
 
   void Refresh();
 
-  void AutoCrop();
   void SetAutoCrop(bool crop) { auto_crop = crop; };
   bool IsAutoCrop() const { return auto_crop; };
 };

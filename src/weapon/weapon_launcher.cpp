@@ -108,6 +108,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   explode_with_timeout = true;
   explode_with_collision = true;
   can_drown = true;
+  camera_in_advance = true;
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
@@ -144,7 +145,7 @@ void WeaponProjectile::Shoot(double strength)
   // Set the initial position.
   SetOverlappingObject(&ActiveCharacter(), 100);
   lst_objects.AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
 
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
@@ -236,7 +237,7 @@ bool WeaponProjectile::IsImmobile() const
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {
   ASSERT(obj != NULL);
-  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d", 
+  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
 	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
   if (explode_colliding_character)
     Explosion();

@@ -91,7 +91,7 @@ bool Baseball::p_Shoot()
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
         character->SetSpeed(cfg().strength / character->GetMass(), angle);
         character->SetMovement("fly");
-        Camera::GetInstance()->FollowObject(&(*character), true);
+        Camera::GetInstance()->FollowObject(&(*character), true, true);
         return true;
       }
     }
