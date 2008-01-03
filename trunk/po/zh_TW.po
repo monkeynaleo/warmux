@@ -35,7 +35,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i 玩家准備好了"
 msgstr[1] "%i 玩家都准備好了"
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:808
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s)死掉了  ."
@@ -61,7 +61,7 @@ msgstr " %s 隊伍"
 msgid "%s Team - Remote"
 msgstr " %s 隊伍- 遙控"
 
-#: src/game/game.cpp:784
+#: src/game/game.cpp:787
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s 自殺啦 !"
@@ -71,12 +71,12 @@ msgstr "%s 自殺啦 !"
 msgid "%s fps"
 msgstr "%s 幀fps"
 
-#: src/game/game.cpp:777
+#: src/game/game.cpp:780
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s 入水---深呼吸."
 
-#: src/game/game.cpp:788
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s 飛出地圖邊緣---"
@@ -88,13 +88,13 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 贏得 %u 點耐久!"
 msgstr[1] "%s 贏得 %u 點耐久!"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是個瘋子, 他獨自推掉了 %s 一個隊!"
 
 # what about female names?
-#: src/game/game.cpp:794
+#: src/game/game.cpp:797
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
@@ -140,7 +140,7 @@ msgid_plural ""
 msgstr[0] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 msgstr[1] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 
-#: src/weapon/anvil.cpp:179
+#: src/weapon/anvil.cpp:186
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -192,7 +192,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "%s 隊得到 %u 集束炸彈!"
 msgstr[1] "%s 隊得到 %u 集束炸彈!"
 
-#: src/weapon/construct.cpp:71
+#: src/weapon/construct.cpp:75
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -350,7 +350,7 @@ msgid "(dead)"
 msgstr "(死掉的)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:188
+#: src/menu/options_menu.cpp:180
 msgid "(system language)"
 msgstr "(系統語言)"
 
@@ -371,7 +371,7 @@ msgstr "飛錘"
 msgid "All teams"
 msgstr "全部的隊伍"
 
-#: src/game/game.cpp:426
+#: src/game/game.cpp:429
 msgid "And the winner is..."
 msgstr "生者是..."
 
@@ -389,7 +389,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "鐵砧"
 
-#: src/main.cpp:258
+#: src/main.cpp:266
 msgid "Authors:"
 msgstr "作者:"
 
@@ -476,7 +476,7 @@ msgstr "連上游戲"
 msgid "Connected !"
 msgstr "已連接!"
 
-#: src/weapon/construct.cpp:49 src/weapon/construct.cpp:57
+#: src/weapon/construct.cpp:53 src/weapon/construct.cpp:61
 msgid "Construct"
 msgstr "建筑工具"
 
@@ -484,7 +484,7 @@ msgstr "建筑工具"
 msgid "Controlled by: "
 msgstr "控制者: "
 
-#: src/menu/main_menu.cpp:70
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "鳴謝"
 
@@ -492,7 +492,7 @@ msgstr "鳴謝"
 msgid "Disco Grenade"
 msgstr "躍動手雷"
 
-#: src/menu/game_menu.cpp:94
+#: src/menu/game_menu.cpp:95
 msgid "Duration of a turn"
 msgstr "回合時間長度"
 
@@ -576,7 +576,7 @@ msgstr "錯誤: 找不到 body\"%s\" 隊伍 \"%s\"."
 msgid "Flame Thrower"
 msgstr "噴火器"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:80
 msgid "Fullscreen?"
 msgstr "全屏?"
 
@@ -619,7 +619,7 @@ msgstr "指揮官"
 msgid "Head commander: "
 msgstr "指揮官: "
 
-#: src/menu/main_menu.cpp:67 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr ""
 
@@ -665,17 +665,17 @@ msgstr ""
 "如何使用: 鼠標左鍵點擊目標\n"
 "每回合一個彈夾"
 
-#: src/game/game.cpp:841
+#: src/game/game.cpp:844
 msgid "Hurry up, you are too slow !!"
 msgstr "快點,伙計你也太慢了!"
 
-#: src/main.cpp:250
+#: src/main.cpp:258
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
 msgstr "假如你發現Bug或想要什么游戲特性, 請發英文郵件給我們"
 
-#: src/menu/game_menu.cpp:100
+#: src/menu/game_menu.cpp:101
 msgid "Initial energy"
 msgstr "初始耐久"
 
@@ -705,7 +705,7 @@ msgstr "聲音初始化"
 msgid "Initialise teams"
 msgstr "隊伍初始化"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:594
 msgid "It's a present!"
 msgstr "就是現在!"
 
@@ -718,7 +718,7 @@ msgstr "噴射包"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "加入#wormux IRC irc.freenode.net 找對手"
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:119
 msgid "Language"
 msgstr "語言"
 
@@ -752,7 +752,7 @@ msgstr "地圖"
 msgid "Max number of players:"
 msgstr "玩家滿員:"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:83
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
@@ -784,11 +784,11 @@ msgstr "最失敗的"
 msgid "Most violent"
 msgstr "最暴力的"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:128
 msgid "Music?"
 msgstr "音樂?"
 
-#: src/menu/main_menu.cpp:61
+#: src/menu/main_menu.cpp:63
 msgid "Network Game"
 msgstr "網絡游戲"
 
@@ -814,7 +814,7 @@ msgstr "角色數目"
 msgid "Number of teams:"
 msgstr "隊伍數量:"
 
-#: src/menu/main_menu.cpp:64
+#: src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "選項 "
 
@@ -831,20 +831,20 @@ msgstr "降落傘"
 msgid "Parachute is activated automatically."
 msgstr "自動使用"
 
-#: src/menu/main_menu.cpp:58
+#: src/menu/main_menu.cpp:60
 msgid "Play"
 msgstr "要玩了哦"
 
 #: src/menu/network_teams_selection_box.cpp:58
-#: src/menu/teams_selection_box.cpp:57
+#: src/menu/teams_selection_box.cpp:61
 msgid "Player"
 msgstr "玩家"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:74
 msgid "Player energy?"
 msgstr "耐久度?"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:77
 msgid "Player's name?"
 msgstr "請問尊姓大名?"
 
@@ -857,11 +857,11 @@ msgstr "臭鼬排射器"
 msgid "Port:"
 msgstr "端口:"
 
-#: src/menu/main_menu.cpp:73
+#: src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "退出"
 
-#: src/main.cpp:230
+#: src/main.cpp:238
 msgid "Quit Wormux"
 msgstr "退出"
 
@@ -885,7 +885,7 @@ msgstr "正讀取個人設置文档"
 msgid "Refresh"
 msgstr "刷新"
 
-#: src/menu/options_menu.cpp:110
+#: src/menu/options_menu.cpp:107
 msgid "Resolution"
 msgstr "分辨率"
 
@@ -893,7 +893,7 @@ msgstr "分辨率"
 msgid "Riot Bomb"
 msgstr "爆炸彈"
 
-#: src/main.cpp:87
+#: src/main.cpp:88
 msgid "Run game"
 msgstr "運行游戲"
 
@@ -901,7 +901,7 @@ msgstr "運行游戲"
 msgid "Say: "
 msgstr "說: "
 
-#: src/menu/game_menu.cpp:106
+#: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
 msgstr "滾動邊界"
 
@@ -936,11 +936,11 @@ msgstr "狙擊步槍"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 沒人等你."
 
-#: src/menu/options_menu.cpp:138
+#: src/menu/options_menu.cpp:131
 msgid "Sound effects?"
 msgstr "音效?"
 
-#: src/menu/options_menu.cpp:157
+#: src/menu/options_menu.cpp:149
 msgid "Sound frequency"
 msgstr "聲頻"
 
@@ -1078,7 +1078,7 @@ msgstr "端口不可用"
 msgid "Unnamed"
 msgstr "未命名"
 
-#: src/main.cpp:185
+#: src/main.cpp:193
 msgid "Version"
 msgstr "版本"
 
@@ -1099,17 +1099,17 @@ msgstr "等着接受服務吧, 現在先聊天 !"
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:267
+#: src/main.cpp:275
 msgid "Website: "
 msgstr "網站Website: "
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:805
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 慘死在小槍之下...不能瞑目!"
 
 #. Various options
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:71
 msgid "Wind particles?"
 msgstr "風來了?"
 
@@ -1118,11 +1118,11 @@ msgstr "風來了?"
 msgid "Winner"
 msgstr "勝者"
 
-#: src/main.cpp:198
+#: src/main.cpp:206
 msgid "Wormux launching..."
 msgstr "准備中, Wormux!!!"
 
-#: src/main.cpp:257
+#: src/main.cpp:265
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
@@ -1151,7 +1151,7 @@ msgstr "至少有2組才能開始 !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "沒有隊伍，就不會有戰斗!"
 
-#: src/weapon/weapon_launcher.cpp:464
+#: src/weapon/weapon_launcher.cpp:465
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 
