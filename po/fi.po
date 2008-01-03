@@ -38,7 +38,7 @@ msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:808
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (joukkue %s) kuoli."
@@ -64,7 +64,7 @@ msgstr ""
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:784
+#: src/game/game.cpp:787
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suoritti itsemurhan !"
@@ -74,12 +74,12 @@ msgstr "%s suoritti itsemurhan !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:777
+#: src/game/game.cpp:780
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:788
+#: src/game/game.cpp:791
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
@@ -91,12 +91,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:802
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/game/game.cpp:794
+#: src/game/game.cpp:797
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kuoli kömpelyyteensä!"
@@ -142,7 +142,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:179
+#: src/weapon/anvil.cpp:186
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -194,7 +194,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/weapon/construct.cpp:71
+#: src/weapon/construct.cpp:75
 #, fuzzy, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -352,7 +352,7 @@ msgid "(dead)"
 msgstr "(kuollut)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:188
+#: src/menu/options_menu.cpp:180
 msgid "(system language)"
 msgstr ""
 
@@ -375,7 +375,7 @@ msgstr ""
 msgid "All teams"
 msgstr "Odota joukkueita"
 
-#: src/game/game.cpp:426
+#: src/game/game.cpp:429
 msgid "And the winner is..."
 msgstr ""
 
@@ -390,7 +390,7 @@ msgstr ""
 msgid "Anvil"
 msgstr ""
 
-#: src/main.cpp:258
+#: src/main.cpp:266
 msgid "Authors:"
 msgstr "Tekijät:"
 
@@ -480,7 +480,7 @@ msgstr ""
 msgid "Connected !"
 msgstr ""
 
-#: src/weapon/construct.cpp:49 src/weapon/construct.cpp:57
+#: src/weapon/construct.cpp:53 src/weapon/construct.cpp:61
 msgid "Construct"
 msgstr ""
 
@@ -488,7 +488,7 @@ msgstr ""
 msgid "Controlled by: "
 msgstr ""
 
-#: src/menu/main_menu.cpp:70
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Kiitokset"
 
@@ -497,7 +497,7 @@ msgstr "Kiitokset"
 msgid "Disco Grenade"
 msgstr "Kranaatti"
 
-#: src/menu/game_menu.cpp:94
+#: src/menu/game_menu.cpp:95
 #, fuzzy
 msgid "Duration of a turn"
 msgstr "Vuoron kesto:"
@@ -585,7 +585,7 @@ msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 msgid "Flame Thrower"
 msgstr ""
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:80
 msgid "Fullscreen?"
 msgstr "Kokoruutu?"
 
@@ -627,7 +627,7 @@ msgstr ""
 msgid "Head commander: "
 msgstr ""
 
-#: src/menu/main_menu.cpp:67 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr ""
 
@@ -662,17 +662,17 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:841
+#: src/game/game.cpp:844
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:250
+#: src/main.cpp:258
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:100
+#: src/menu/game_menu.cpp:101
 #, fuzzy
 msgid "Initial energy"
 msgstr "Aloitus voimat:"
@@ -702,7 +702,7 @@ msgstr "Alusta objektit"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:594
 msgid "It's a present!"
 msgstr ""
 
@@ -714,7 +714,7 @@ msgstr ""
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:119
 msgid "Language"
 msgstr ""
 
@@ -750,7 +750,7 @@ msgstr ""
 msgid "Max number of players:"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:83
 #, fuzzy
 msgid "Maximum FPS"
 msgstr "Enimmäismäärä FPS:lle:"
@@ -788,11 +788,11 @@ msgstr "  Hyödyttömin  :  %s (%i).\n"
 msgid "Most violent"
 msgstr "  Väkivaltaisin  :  %s (%i)\n"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:128
 msgid "Music?"
 msgstr "Musiikki?"
 
-#: src/menu/main_menu.cpp:61
+#: src/menu/main_menu.cpp:63
 msgid "Network Game"
 msgstr "Nettipeli"
 
@@ -822,7 +822,7 @@ msgstr "Pelaajien määrä joukkueessa:"
 msgid "Number of teams:"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/main_menu.cpp:64
+#: src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "Asetukset"
 
@@ -839,22 +839,22 @@ msgstr ""
 msgid "Parachute is activated automatically."
 msgstr ""
 
-#: src/menu/main_menu.cpp:58
+#: src/menu/main_menu.cpp:60
 msgid "Play"
 msgstr "Pelaa"
 
 #: src/menu/network_teams_selection_box.cpp:58
-#: src/menu/teams_selection_box.cpp:57
+#: src/menu/teams_selection_box.cpp:61
 #, fuzzy
 msgid "Player"
 msgstr "Pelaa"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:74
 #, fuzzy
 msgid "Player energy?"
 msgstr "Näytä pelaajien voima?"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Player's name?"
 msgstr "Näytä pelaajien nimet?"
@@ -868,11 +868,11 @@ msgstr ""
 msgid "Port:"
 msgstr ""
 
-#: src/menu/main_menu.cpp:73
+#: src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "Lopeta"
 
-#: src/main.cpp:230
+#: src/main.cpp:238
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
@@ -897,7 +897,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/menu/options_menu.cpp:110
+#: src/menu/options_menu.cpp:107
 msgid "Resolution"
 msgstr ""
 
@@ -906,7 +906,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Automaattibazookan"
 
-#: src/main.cpp:87
+#: src/main.cpp:88
 msgid "Run game"
 msgstr "Aloita peli"
 
@@ -914,7 +914,7 @@ msgstr "Aloita peli"
 msgid "Say: "
 msgstr ""
 
-#: src/menu/game_menu.cpp:106
+#: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
 msgstr ""
 
@@ -950,11 +950,11 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:138
+#: src/menu/options_menu.cpp:131
 msgid "Sound effects?"
 msgstr "Ääniefektit?"
 
-#: src/menu/options_menu.cpp:157
+#: src/menu/options_menu.cpp:149
 #, fuzzy
 msgid "Sound frequency"
 msgstr "Ääniefektit?"
@@ -1094,7 +1094,7 @@ msgstr "Odota asiakkaita"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:185
+#: src/main.cpp:193
 msgid "Version"
 msgstr "Versio"
 
@@ -1116,17 +1116,17 @@ msgstr ""
 msgid "Weapons"
 msgstr "Ase:"
 
-#: src/main.cpp:267
+#: src/main.cpp:275
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:805
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 
 #. Various options
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:71
 #, fuzzy
 msgid "Wind particles?"
 msgstr "Näytä tuuli?"
@@ -1136,11 +1136,11 @@ msgstr "Näytä tuuli?"
 msgid "Winner"
 msgstr "Miina"
 
-#: src/main.cpp:198
+#: src/main.cpp:206
 msgid "Wormux launching..."
 msgstr "Wormux käynnistyy..."
 
-#: src/main.cpp:257
+#: src/main.cpp:265
 msgid "Wormux version "
 msgstr "Wormux versio"
 
@@ -1169,7 +1169,7 @@ msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:464
+#: src/weapon/weapon_launcher.cpp:465
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 
