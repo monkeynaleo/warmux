@@ -45,6 +45,8 @@
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
+#include "graphic/video.h"
+#include "include/app.h"
 #endif
 
 WeaponBullet::WeaponBullet(const std::string &name,
@@ -224,6 +226,18 @@ void WeaponProjectile::Draw()
       ss.str(), white_color);
     }
   }
+
+#ifdef DEBUG
+  if (IsDEBUGGING("weapon.projectile"))
+  {
+    Rectanglei test_rect(GetTestRect());
+    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+    AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
+
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSize());
+    AppWormux::GetInstance()->video->window.RectangleColor(rect, primary_blue_color, 1);
+  }
+#endif
 }
 
 bool WeaponProjectile::IsImmobile() const
