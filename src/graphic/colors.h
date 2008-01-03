@@ -43,6 +43,8 @@ const Color c_grey   (0xF0, 0xF0, 0xF0, 0x70);
 const Color green_color (68, 120, 51, SDL_ALPHA_OPAQUE);
 
 const Color primary_red_color(255, 0, 0, SDL_ALPHA_OPAQUE);
+const Color primary_green_color(0, 255, 0, SDL_ALPHA_OPAQUE);
+const Color primary_blue_color(0, 0, 255, SDL_ALPHA_OPAQUE);
 
 // Default colors:
 const Color defaultColorBox(80, 80, 159, 206);
