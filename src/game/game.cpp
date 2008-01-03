@@ -590,7 +590,7 @@ uint Game::GetRemainingTime() const
 void Game::AddNewBox(ObjBox * box)
 {
   lst_objects.AddObject(box);
-  Camera::GetInstance()->FollowObject(box, true);
+  Camera::GetInstance()->FollowObject(box, true, true);
   GameMessages::GetInstance()->Add(_("It's a present!"));
   SetCurrentBox(box);
 }
