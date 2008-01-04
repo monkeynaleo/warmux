@@ -310,6 +310,10 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         /* Horizontal line */
         dx = x2-x1;
         xdir = 1;
+	if (dx == 0) {
+	  printf("aafadingLineColorInt: avoid bug #10648");
+	  return 0;
+	}
         if (dx < 0) {
             dx = -dx;
             xdir = -1;
