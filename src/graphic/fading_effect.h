@@ -311,7 +311,6 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         dx = x2-x1;
         xdir = 1;
 	if (dx == 0) {
-	  printf("aafadingLineColorInt: avoid bug #10648");
 	  return 0;
 	}
         if (dx < 0) {
@@ -389,7 +388,9 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     /*
      * Check for special cases
      */
-    if (dx == 0) {
+    if (dx == 0 && dy == 0) {
+      /* nothing to do */
+    } else if (dx == 0) {
         /* Vertical line */
         step = dy;
         while (--dy) {
