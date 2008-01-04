@@ -476,6 +476,8 @@ void Character::Draw()
 
 void Character::Jump(double strength, double angle /*in radian */)
 {
+  Camera::GetInstance()->FollowObject(this, true);
+
   do_nothing_time = Time::GetInstance()->Read();
   walking_time = Time::GetInstance()->Read();
 
@@ -629,6 +631,8 @@ bool Character::CanMoveRL() const
 
 void Character::BeginMovementRL(uint pause, bool slowly)
 {
+  Camera::GetInstance()->FollowObject(this, true);
+
   walking_time = Time::GetInstance()->Read();
   do_nothing_time = Time::GetInstance()->Read();
   if (!slowly) {
