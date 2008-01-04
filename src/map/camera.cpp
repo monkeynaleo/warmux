@@ -319,7 +319,7 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow,
   MSG_DEBUG( "camera.tracking", "Following object %s",
                                  obj->GetName().c_str());
 
-  if (followed_object != obj || !IsVisible(*obj))
+  if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
     auto_crop = follow;
 
   in_advance = _in_advance;
@@ -339,5 +339,5 @@ bool Camera::IsVisible(const PhysicalObj &obj) const {
 void Camera::CenterOnActiveCharacter()
 {
   CharacterCursor::GetInstance()->FollowActiveCharacter();
-  FollowObject (&ActiveCharacter(), true);
+  FollowObject(&ActiveCharacter(), true);
 }
