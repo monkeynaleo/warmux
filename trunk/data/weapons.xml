@@ -239,14 +239,12 @@
   
 <!-- JetPack ressources -->
 
-  <surface name="jetpack" file="weapon/jet_pack/jet_pack.png" />
   <position name="jetpack" origin="hand" x="5" y="6" />
   <surface name="jetpack_ico" file="weapon/jet_pack/jet_pack_ico.png" />
 
 <!-- LowGrav ressources -->
 
   <surface name="lowgrav_ico" file="weapon/lowgrav/lowgrav_ico.png" />
-  <surface name="lowgrav" file="weapon/lowgrav/lowgrav.png" />
   <position name="lowgrav" origin="hand" x="24" y="23" />
 
 <!-- Mine ressources --> 
