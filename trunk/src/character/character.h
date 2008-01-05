@@ -197,10 +197,12 @@ public:
   // Body handling
   Body * GetBody() { return body; };
   void SetWeaponClothe();
-  void SetClothe(const std::string& name);
-  void SetMovement(const std::string& name);
-  void SetClotheOnce(const std::string& name);
-  void SetMovementOnce(const std::string& name);
+
+  // "force" option forces to apply the clothe/movement even if character is dead
+  void SetClothe(const std::string& name, bool force=false);
+  void SetMovement(const std::string& name, bool force=false);
+  void SetClotheOnce(const std::string& name, bool force=false);
+  void SetMovementOnce(const std::string& name, bool force=false);
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool shift);
