@@ -197,7 +197,7 @@ cp "$(pkg_path glibmm-2.4)/bin/"{lib,}glibmm*[0-9].dll "$DEST"
 # Make sure freetype, libpng and jpeg dll are matching your libs.
 SDL_PATH=$($SDL_CONFIG --prefix)
 cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll        \
-   "$GLIB_PATH/bin/"{intl,iconv,zlib1,jpeg62,freetype6}     \
+   "$GLIB_PATH/bin/"{intl,iconv,zlib1,jpeg62,freetype6}.dll \
    "$GLIB_PATH/bin/"lib{png12,tiff3}.dll                    \
    "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3,curl-4}.dll "$DEST"
 
