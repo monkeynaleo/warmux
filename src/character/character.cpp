@@ -206,9 +206,10 @@ void Character::SignalDrowning()
 {
   // Follow character
   Camera::GetInstance()->FollowObject(this, true);
+
   // Set energy
   SetEnergy(0);
-  SetMovement("drowned");
+  SetMovement("drowned", true);
   jukebox.Play (GetTeam().GetSoundProfile(),"sink");
   Game::GetInstance()->SignalCharacterDeath (this);
 }
@@ -790,9 +791,9 @@ void Character::SetWeaponClothe()
   SetMovement("breathe");
 }
 
-void Character::SetMovement(const std::string& name)
+void Character::SetMovement(const std::string& name, bool force)
 {
-  if(IsDead()) return;
+  if (IsDead() && !force) return;
   MSG_DEBUG("body","Character %s -> SetMovement : %s",character_name.c_str(),name.c_str());
   body->SetMovement(name);
   uint l,r,t,b;
@@ -800,9 +801,9 @@ void Character::SetMovement(const std::string& name)
   SetTestRect(l,r,t,b);
 }
 
-void Character::SetMovementOnce(const std::string& name)
+void Character::SetMovementOnce(const std::string& name, bool force)
 {
-  if(IsDead()) return;
+  if (IsDead() && !force) return;
   MSG_DEBUG("body","Character %s -> SetMovementOnce : %s",character_name.c_str(),name.c_str());
   body->SetMovementOnce(name);
   uint l,r,t,b;
@@ -810,16 +811,16 @@ void Character::SetMovementOnce(const std::string& name)
   SetTestRect(l,r,t,b);
 }
 
-void Character::SetClothe(const std::string& name)
+void Character::SetClothe(const std::string& name, bool force)
 {
-  if(IsDead() && name!="dead") return;
+  if (IsDead() && name!="dead" && !force) return;
   MSG_DEBUG("body","Character %s -> SetClothe : %s",character_name.c_str(),name.c_str());
   body->SetClothe(name);
 }
 
-void Character::SetClotheOnce(const std::string& name)
+void Character::SetClotheOnce(const std::string& name, bool force)
 {
-  if(IsDead()) return;
+  if (IsDead() && !force) return;
   MSG_DEBUG("body","Character %s -> SetClotheOnce : %s",character_name.c_str(),name.c_str());
   body->SetClotheOnce(name);
 }
