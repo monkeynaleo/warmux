@@ -49,7 +49,6 @@ class BonusBox : public ObjBox
     BonusBox();
     static void LoadXml(const xmlpp::Element * object);
 
-    void Draw();
     void ApplyBonus(Character *);
     void Randomize();
     void GetValueFromAction(Action *);
