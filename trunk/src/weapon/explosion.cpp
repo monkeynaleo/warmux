@@ -82,16 +82,16 @@ void ApplyExplosion_common (const Point2i &pos,
   // Do not care about the death of the active character.
   double highest_force = 0.0;
   Character* fastest_character = NULL;
-  FOR_ALL_CHARACTERS(equipe,ver)
+  FOR_ALL_CHARACTERS(team, character)
   {
-    double distance = pos.Distance(ver -> GetCenter());
+    double distance = pos.Distance(character -> GetCenter());
     if(distance < 1.0)
       distance = 1.0;
 
     // If the character is in the explosion range, apply damage on it !
     if (distance <= config.explosion_range)
     {
-      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", ver->GetName().c_str(), distance);
+      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", character->GetName().c_str(), distance);
       double dmg;
       if( config.explosion_range != 0)
         dmg = cos(M_PI_2 * distance / (float)config.explosion_range);
@@ -99,8 +99,8 @@ void ApplyExplosion_common (const Point2i &pos,
         dmg = cos(M_PI_2 * distance);
 
       dmg *= config.damage;
-      MSG_DEBUG("explosion", "hit_point_loss energy= %i", ver->GetName().c_str(), dmg);
-      ver -> SetEnergyDelta (-(int)dmg);
+      MSG_DEBUG("explosion", "hit_point_loss energy= %i", character->GetName().c_str(), dmg);
+      character -> SetEnergyDelta (-(int)dmg);
     }
 
     // If the character is in the blast range, apply the blast on it !
@@ -116,13 +116,13 @@ void ApplyExplosion_common (const Point2i &pos,
 
       if ( force > highest_force )
       {
-        fastest_character = &(*ver);
+        fastest_character = &(*character);
         highest_force = force;
       }
 
       if (!EqualsZero(distance))
       {
-        angle  = pos.ComputeAngle(ver -> GetCenter());
+        angle  = pos.ComputeAngle(character -> GetCenter());
         if( angle > 0 )
           angle  = - angle;
       }
@@ -131,9 +131,9 @@ void ApplyExplosion_common (const Point2i &pos,
 
 
       MSG_DEBUG("explosion", "force = %f", force);
-      ASSERT(ver->GetMass() != 0);
-      ver->AddSpeed (force / ver->GetMass(), angle);
-      ver->SignalExplosion();
+      ASSERT(character->GetMass() != 0);
+      character->AddSpeed (force / character->GetMass(), angle);
+      character->SignalExplosion();
     }
   }
 
