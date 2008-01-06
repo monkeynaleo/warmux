@@ -52,7 +52,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     void DropBox();
     static void LoadXml(xmlpp::Element * /*object*/){};
 
-    virtual void Draw() {}
+    void Draw();
     virtual void Refresh();
     virtual void Randomize() {};
     virtual void GetValueFromAction(Action *);

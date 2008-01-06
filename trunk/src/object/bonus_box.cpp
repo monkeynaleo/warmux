@@ -52,11 +52,6 @@ BonusBox::BonusBox():
   anim->SetCurrentFrame(0);
 }
 
-void BonusBox::Draw()
-{
-  anim->Draw(GetPosition());
-}
-
 void BonusBox::PickRandomWeapon() {
   weapon_num = 0;
   if(weapon_count <= 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode

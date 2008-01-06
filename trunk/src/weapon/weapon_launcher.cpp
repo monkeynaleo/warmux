@@ -228,7 +228,7 @@ void WeaponProjectile::Draw()
   }
 
 #ifdef DEBUG
-  if (IsDEBUGGING("weapon.projectile"))
+  if (IsDEBUGGING("test_rectangle"))
   {
     Rectanglei test_rect(GetTestRect());
     test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());

@@ -20,10 +20,9 @@
  *****************************************************************************/
 
 #include "object/objbox.h"
-#include "object/medkit.h"
-#include "object/bonus_box.h"
 #include <sstream>
 #include <iostream>
+#include "character/character.h"
 #include "game/game_mode.h"
 #include "game/game.h"
 #include "game/time.h"
@@ -41,7 +40,12 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
-#include "character/character.h"
+
+#ifdef DEBUG
+#include "graphic/video.h"
+#include "include/app.h"
+#include "map/camera.h"
+#endif
 
 const uint SPEED = 5; // meter / seconde
 // XXX Unused !?
@@ -97,6 +101,23 @@ void ObjBox::DropBox()
   } else {
     m_ignore_movements = true;
   }
+}
+
+void ObjBox::Draw()
+{
+  anim->Draw(GetPosition());
+
+#ifdef DEBUG
+  if (IsDEBUGGING("test_rectangle"))
+  {
+    Rectanglei test_rect(GetTestRect());
+    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+    AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
+
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), anim->GetSize());
+    AppWormux::GetInstance()->video->window.RectangleColor(rect, primary_blue_color, 1);
+  }
+#endif
 }
 
 void ObjBox::Refresh()

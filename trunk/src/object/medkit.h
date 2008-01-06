@@ -37,23 +37,12 @@ class Medkit : public ObjBox//public PhysicalObj
     static int nbr_health;
     //static int start_life_points;
 
-    //bool parachute;
-    //Sprite *anim;
-
   private:
     void ApplyMedkit (Team &team, Character &character) const;
   public:
     Medkit();
-    //~Medkit();
 
-    // Activate medkit ?
-    //static void Enable (bool _enable);
-    //static bool NewMedkit();
-    //void DropMedkit();
     static void LoadXml(const xmlpp::Element * object);
-
-    void Draw();
-
     void ApplyBonus(Character *);
     void GetValueFromAction(Action *);
     void StoreValue(Action *);
