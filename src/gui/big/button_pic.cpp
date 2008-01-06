@@ -38,7 +38,7 @@ ButtonPic::ButtonPic(const std::string &label,
 
   SetSize(_size);
 
-  txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth (GetSizeX());
 }
 
