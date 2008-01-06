@@ -376,34 +376,34 @@ void Character::Draw()
   // Character is visible on carema? If not, just leave the function
   // WARNING, this optimization is disabled if it is the active character
   // because there could be some tricks in the drawing of the weapon (cf bug #10242)
-  if (&ActiveCharacter() != this) {
+  if (!IsActiveCharacter()) {
     Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
     if (!rect.Intersect(*Camera::GetInstance())) return;
   }
 
-  bool dessine_perte = (lost_energy != 0);
-  if ((&ActiveCharacter() == this
-    && Game::GetInstance()->ReadState() != Game::END_TURN)
-    || IsDead()
-     )
-    dessine_perte = false;
+  bool draw_loosing_energy = (lost_energy != 0);
+  if ((IsActiveCharacter()
+       && Game::GetInstance()->ReadState() != Game::END_TURN)
+      || IsDead())
+    draw_loosing_energy = false;
 
-  if(Game::GetInstance()->ReadState() == Game::END_TURN && body->IsWalking())
+  if (Game::GetInstance()->ReadState() == Game::END_TURN && body->IsWalking())
     body->ResetWalk();
 
-  if(Time::GetInstance()->Read() > animation_time && &ActiveCharacter()!=this && !IsDead()
-  && body->GetMovement().substr(0,9) != "animation"
-  &&  body->GetClothe().substr(0,9) != "animation")
+  if (Time::GetInstance()->Read() > animation_time && !IsActiveCharacter() && !IsDead()
+      && body->GetMovement().substr(0,9) != "animation"
+      &&  body->GetClothe().substr(0,9) != "animation")
   {
     body->PlayAnimation();
     animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   }
 
   // Stop the animation or the black skin if we are playing
-  if(&ActiveCharacter() == this
-  &&(body->GetMovement().substr(0,9) == "animation"
-  || body->GetClothe().substr(0,9) == "animation"
-  || body->GetClothe() == "black"))
+  if (IsActiveCharacter()
+      && Game::GetInstance()->ReadState() == Game::PLAYING
+      && (body->GetMovement().substr(0,9) == "animation"
+	  || body->GetClothe().substr(0,9) == "animation"
+	  || body->GetClothe() == "black"))
   {
     SetClothe("normal");
     SetMovement("breathe");
@@ -412,16 +412,16 @@ void Character::Draw()
   // Stop flying if we don't go fast enough
   double n, a;
   GetSpeed(n, a);
-  if(body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
+  if (body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
     SetMovement("breathe");
 
 
   // Refresh the body (needed to determine if "weapon-*-begin-shoot" is finnished)
   body->Build();
 
-  if(prepare_shoot)
+  if (prepare_shoot)
   {
-    if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
+    if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
     {
       // if the movement is finnished, shoot !
       DoShoot();
@@ -432,15 +432,13 @@ void Character::Draw()
   Point2i pos = GetPosition();
   body->Draw(pos);
 
-   // Draw energy bar
+  // Draw energy bar
   int dy = -((int)ESPACE);
-  bool est_ver_actif = (this == &ActiveCharacter());
-  Config * config = Config::GetInstance();
-  bool display_energy = config->GetDisplayEnergyCharacter();
-  display_energy &= !est_ver_actif || (Game::GetInstance()->ReadState() != Game::PLAYING);
-  display_energy |= dessine_perte;
-  display_energy &= !IsDead();
-  if (display_energy)
+  if (Config::GetInstance()->GetDisplayEnergyCharacter()
+      && ((!IsActiveCharacter()
+	   && Game::GetInstance()->ReadState() != Game::END_TURN
+	   && !IsDead())
+	  || draw_loosing_energy) )
   {
     dy -= HAUT_ENERGIE;
     DrawEnergyBar (dy);
@@ -448,7 +446,9 @@ void Character::Draw()
   }
 
   // Draw name
-  if (config->GetDisplayNameCharacter() && !est_ver_actif)
+  if (Config::GetInstance()->GetDisplayNameCharacter()
+      && !IsActiveCharacter()
+      && Game::GetInstance()->ReadState() != Game::END_TURN)
   {
     dy -= HAUT_FONT_MIX;
     DrawName (dy);
@@ -463,7 +463,7 @@ void Character::Draw()
 #endif
 
   // Draw lost energy
-  if (dessine_perte)
+  if (draw_loosing_energy)
   {
     std::ostringstream ss;
     ss << lost_energy;
@@ -557,35 +557,35 @@ void Character::Refresh()
   Time * global_time = Time::GetInstance();
 
   // center on character who is falling
-  if(FootsInVacuum()) {
+  if (FootsInVacuum()) {
     Camera::GetInstance()->FollowObject(this, true);
   }
 
-  if(IsDiseased())
+  if (IsDiseased())
   {
     Point2i bubble_pos = GetPosition();
-    if(GetDirection() == DIRECTION_LEFT)
+    if (GetDirection() == DIRECTION_LEFT)
       bubble_pos.x += GetWidth();
     particle_engine->AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
                               - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
   }
 
-  if( IsActiveCharacter() && Game::GetInstance()->ReadState() == Game::PLAYING)
+  if (IsActiveCharacter() && Game::GetInstance()->ReadState() == Game::PLAYING)
   {
-    if(do_nothing_time + do_nothing_timeout < global_time->Read())
+    if (do_nothing_time + do_nothing_timeout < global_time->Read())
       CharacterCursor::GetInstance()->FollowActiveCharacter();
 
-    if(walking_time + 1000 < global_time->Read() && body->GetMovement().find("-shoot") == std::string::npos)
-    if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
-      body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");
+    if (walking_time + 1000 < global_time->Read() && body->GetMovement().find("-shoot") == std::string::npos)
+      if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
+	body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");
   }
   else
   {
-    if(body->GetMovement() == "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
+    if (body->GetMovement() == "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
       body->SetMovement("breathe");
   }
 
-  if(body->IsWalking() && body->GetMovement() == "walk")
+  if (body->IsWalking() && body->GetMovement() == "walk")
   {
     // Play the step sound only twice during the walking animation
     uint frame_nbr = body->GetFrameCount();
@@ -593,17 +593,17 @@ void Character::Refresh()
     frame_nbr /= 2;
     cur %= frame_nbr;
 
-    if(cur < frame_nbr / 2 && !step_sound_played)
+    if (cur < frame_nbr / 2 && !step_sound_played)
     {
       step_sound_played = true;
       jukebox.Play (GetTeam().GetSoundProfile(),"step");
     }
 
-    if(cur > frame_nbr / 2)
+    if (cur > frame_nbr / 2)
       step_sound_played = false;
   }
 
-  if(back_jumping)
+  if (back_jumping)
   {
     ASSERT(&ActiveCharacter() == this);
     double rotation;
@@ -665,13 +665,14 @@ void Character::SignalCollision()
   double norm, degat;
   Point2d speed_vector;
   GameMode * game_mode = GameMode::GetInstance();
-  if(body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID()
-  && body->GetClothe() != "jetpack"
-  && body->GetClothe() != "jetpack-fire"
-  && body->GetClothe() != "helmet")
+  if (body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID()
+      && body->GetClothe() != "jetpack"
+      && body->GetClothe() != "jetpack-fire"
+      && body->GetClothe() != "helmet"
+      && body->GetClothe() != "black")
     SetClothe("normal");
 
-  if(body->IsWalking())
+  if (body->IsWalking())
     SetMovement("walk");
   else
     SetMovement("breathe");
@@ -691,7 +692,7 @@ void Character::SignalCollision()
     Game::GetInstance()->SignalCharacterDamage(this);
     SetClothe("normal");
 
-    if(body->IsWalking())
+    if (body->IsWalking())
       SetMovement("walk");
     else
       SetMovement("breathe");
@@ -702,12 +703,12 @@ void Character::SignalCollision()
 
 void Character::SignalExplosion()
 {
-  if(IsDead()) return;
+  if (IsDead()) return;
 
   double n, a;
   GetSpeed(n, a);
   SetRebounding(true);
-  if(n > MIN_SPEED_TO_FLY)
+  if (n > MIN_SPEED_TO_FLY)
   {
     SetClothe("normal");
     SetMovement("fly");
@@ -716,18 +717,12 @@ void Character::SignalExplosion()
   {
     SetClotheOnce("black");
     SetMovementOnce("black");
-    if(body->GetClothe() == "black"
-    && body->GetMovement() != "black")
+    if (body->GetClothe() == "black"
+	&& body->GetMovement() != "black")
       std::cerr << "Error: the clothe \"black\" of the character " << GetName() << " is set, but the skin have no \"black\" movement !!!" << std::endl;
   }
-  // bug #7056 : When we are hit by an explosion while using grapple, we broke the rope.
-  if (IsActiveCharacter()) {
-    ActiveTeam().AccessWeapon().Deselect();
-    // Select the weapon back. If not, we cannot move the crosshair.
-    ActiveTeam().AccessWeapon().Select();
-    // End of turn
-    Game::GetInstance()->SignalCharacterDamage(this);
-  }
+
+  Game::GetInstance()->SignalCharacterDamage(this);
 }
 
 BodyDirection_t Character::GetDirection() const
@@ -738,7 +733,7 @@ BodyDirection_t Character::GetDirection() const
 // End of turn or change of character
 void Character::StopPlaying()
 {
-  if(IsDead()) return;
+  if (IsDead()) return;
   SetClothe("normal");
   SetMovement("breathe");
   body->ResetWalk();
@@ -786,7 +781,7 @@ void Character::SetFiringAngle(double angle) {
 void Character::SetWeaponClothe()
 {
   SetClothe("weapon-" + m_team.GetWeapon().GetID());
-  if(body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID())
+  if (body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID())
     SetClothe("normal");
   SetMovement("breathe");
 }
@@ -836,10 +831,10 @@ uint Character::GetTeamIndex() const
 uint Character::GetCharacterIndex() const
 {
   uint index = 0;
-  for(Team::iterator it = m_team.begin();
-                     it != m_team.end() ; ++it, ++index )
+  for (Team::iterator it = m_team.begin();
+       it != m_team.end() ; ++it, ++index )
   {
-    if( &(*it) == this)
+    if (&(*it) == this)
       return index;
   }
   ASSERT(false);

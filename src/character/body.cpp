@@ -177,17 +177,19 @@ Body::Body(const Body& _body):
 
   // Make a copy of members
   std::map<std::string, Member*>::const_iterator it1 = _body.members_lst.begin();
-  while(it1 != _body.members_lst.end())
-  if(it1->second->name != "weapon")
-  {
-    std::pair<std::string,Member*> p;
-    p.first = it1->first;
-    p.second = new Member(*it1->second);
-    members_lst.insert(p);
-    it1++;
-  }
-  else
-    it1++;
+  while (it1 != _body.members_lst.end())
+    {
+      if(it1->second->name != "weapon")
+	{
+	  std::pair<std::string,Member*> p;
+	  p.first = it1->first;
+	  p.second = new Member(*it1->second);
+	  members_lst.insert(p);
+	  it1++;
+	}
+      else
+	it1++;
+    }
 
   // Make a copy of clothes
   std::map<std::string, Clothe*>::const_iterator it2 = _body.clothes_lst.begin();
@@ -238,17 +240,26 @@ Body::~Body()
 
 void Body::ResetMovement() const
 {
-  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
+  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
     current_clothe->layers[layer]->ResetMovement();
 }
 
 void Body::ApplyMovement(Movement* mvt, uint frame)
 {
+#ifdef DEBUG
+  if (mvt->type != "breathe")
+    MSG_DEBUG("body_anim", " %s uses %s-%s:%u",
+	      owner->GetName().c_str(),
+	      current_clothe->name.c_str(),
+	      mvt->type.c_str(),
+	      frame);
+#endif
+
   // Move each member following the movement description
   // We do it using the order of the squeleton, as the movement of each
   // member affect the child members as well
   std::vector<junction>::iterator member = squel_lst.begin();
-  for(;member != squel_lst.end();
+  for (;member != squel_lst.end();
        member++)
   {
     ASSERT( frame < mvt->frames.size() );
@@ -331,7 +342,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
           double angle = v.ComputeAngle(Point2i(0, 0));
 	  angle *= owner->GetDirection();
 	  angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
-  
+
           angle_mvt.SetAngle(angle);
           member->member->ApplyMovement(angle_mvt, squel_lst);
 	}
@@ -361,40 +372,40 @@ void Body::Build()
 {
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
-  if(walk_events > 0 || current_mvt->type!="walk")
-  if(Time::GetInstance()->Read() > last_refresh + current_mvt->speed)
-  {
-    // Compute the new frame number
-    current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->speed;
-    last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->speed) * current_mvt->speed;
 
-    // Depending on playmode loop if we have exceeded the nbr of frame of this movement
-    if(current_frame >= current_mvt->frames.size())
+  if (walk_events > 0 || current_mvt->type != "walk")
     {
-      if(current_mvt->play_mode == Movement::LOOP)
-      {
-        current_frame %= current_mvt->frames.size();
-      }
-      else
-      if(current_mvt->play_mode == Movement::PLAY_ONCE)
-      {
-        current_frame = current_mvt->frames.size() - 1;
-        if(play_once_clothe_sauv)
-          SetClothe(play_once_clothe_sauv->name);
-        if(play_once_mvt_sauv)
-        {
-          SetMovement(play_once_mvt_sauv->type);
-          current_frame = play_once_frame_sauv;
-        }
-      }
+      if(Time::GetInstance()->Read() > last_refresh + current_mvt->speed)
+	{
+	  // Compute the new frame number
+	  current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->speed;
+	  last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->speed) * current_mvt->speed;
+
+	  // Depending on playmode loop if we have exceeded the nbr of frame of this movement
+	  if(current_frame >= current_mvt->frames.size())
+	    {
+	      if(current_mvt->play_mode == Movement::LOOP)
+		{
+		  current_frame %= current_mvt->frames.size();
+		}
+	      else if(current_mvt->play_mode == Movement::PLAY_ONCE)
+		{
+		  current_frame = current_mvt->frames.size() - 1;
+		  if (play_once_clothe_sauv)
+		    SetClothe(play_once_clothe_sauv->name);
+		  if (play_once_mvt_sauv)
+		    {
+		      SetMovement(play_once_mvt_sauv->type);
+		      current_frame = play_once_frame_sauv;
+		    }
+		}
+	    }
+	}
     }
-
-  }
-
   need_rebuild |= (last_frame != current_frame);
   need_rebuild |= current_mvt->always_moving;
 
-  if(!need_rebuild)
+  if (!need_rebuild)
     return;
 
   ResetMovement();
@@ -403,20 +414,23 @@ void Body::Build()
 
   // Rotate each sprite, because the next part need to know the height of the sprite
   // once he is rotated
-  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-  if(current_clothe->layers[layer]->name != "weapon")
-    current_clothe->layers[layer]->RotateSprite();
+  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
+    if (current_clothe->layers[layer]->name != "weapon")
+      current_clothe->layers[layer]->RotateSprite();
+  }
 
   // Move the members to get the lowest member at the bottom of the skin rectangle
   member_mvt body_mvt;
   float y_max = 0;
-  for(int lay=0;lay < (int)current_clothe->layers.size() ;lay++)
-  if(current_clothe->layers[lay]->name != "weapon")
-  {
-    Member* member = current_clothe->layers[lay];
-    if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
-    && !member->go_through_ground)
-      y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
+
+  for (int lay=0;lay < (int)current_clothe->layers.size() ;lay++) {
+    if (current_clothe->layers[lay]->name != "weapon")
+      {
+	Member* member = current_clothe->layers[lay];
+	if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
+	   && !member->go_through_ground)
+	  y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
+      }
   }
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->test_bottom;
   body_mvt.pos.x = GetSize().x / 2.0 - squel_lst.front().member->spr->GetWidth() / 2.0;
@@ -429,7 +443,7 @@ void Body::Build()
 void Body::UpdateWeaponPosition(const Point2i& _pos)
 {
   // update the weapon position
-  if(direction == DIRECTION_RIGHT)
+  if (direction == DIRECTION_RIGHT)
     weapon_pos = Point2i((int)weapon_member->pos.x,(int)weapon_member->pos.y);
   else
     weapon_pos = Point2i(GetSize().x - (int)weapon_member->pos.x,(int)weapon_member->pos.y);
@@ -443,7 +457,7 @@ void Body::Draw(const Point2i& _pos)
   UpdateWeaponPosition(_pos);
 
   // Finally draw each layer one by one
-  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
+  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
     current_clothe->layers[layer]->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
 }
 
