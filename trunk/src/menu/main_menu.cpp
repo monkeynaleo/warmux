@@ -54,7 +54,7 @@ MainMenu::MainMenu() :
 {
   uint window_width = AppWormux::GetInstance()->video->window.GetWidth();
 
-  Point2i size(100,110);
+  Point2i size(120,110);
   Box* box = new GridBox(window_width, size, true);
 
   play = new ButtonPic(_("Play"), "menu/ico_play", size);
