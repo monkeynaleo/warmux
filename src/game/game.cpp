@@ -488,8 +488,8 @@ void Game::RefreshClock()
 
       case PLAYING:
         if (duration <= 1) {
-           jukebox.Play("share", "end_turn");
-           SetState(END_TURN);
+	  jukebox.Play("share", "end_turn");
+	  SetState(END_TURN);
         } else {
           duration--;
           Interface::GetInstance()->UpdateTimer(duration);
@@ -501,7 +501,7 @@ void Game::RefreshClock()
 
       case HAS_PLAYED:
         if (duration <= 1) {
-          SetState (END_TURN);
+          SetState(END_TURN);
         } else {
           duration--;
           Interface::GetInstance()->UpdateTimer(duration);
@@ -722,6 +722,8 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
   if (Network::GetInstance()->IsTurnMaster())
     SyncCharacters();
 
+  MSG_DEBUG("game", "Ask for state %d", new_state);
+
   Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE);
   int seed = randomSync.GetRand();
   a->Push(seed);
@@ -731,7 +733,11 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
 
 PhysicalObj* Game::GetMovingObject() const
 {
-  if (!ActiveCharacter().IsImmobile()) return &ActiveCharacter();
+  if (!ActiveCharacter().IsImmobile())
+  {
+    MSG_DEBUG("game.endofturn", "Active character (%s) is not ready", ActiveCharacter().GetName().c_str());
+    return &ActiveCharacter();
+  }
 
   FOR_ALL_CHARACTERS(team,character)
   {
@@ -821,6 +827,8 @@ void Game::SignalCharacterDeath (const Character *character) const
 // Signal falling or any kind of damage of a character
 void Game::SignalCharacterDamage(const Character *character) const
 {
+  MSG_DEBUG("game.endofturn", "%s has been hurt", character->GetName().c_str());
+
   if (character->IsActiveCharacter())
     SetState(END_TURN);
 }
