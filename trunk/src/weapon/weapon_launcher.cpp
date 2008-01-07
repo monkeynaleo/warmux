@@ -195,6 +195,7 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
+  SetSize(image->GetSizeMax());
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -234,7 +235,7 @@ void WeaponProjectile::Draw()
     test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
     AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
 
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSize());
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSizeMax());
     AppWormux::GetInstance()->video->window.RectangleColor(rect, primary_blue_color, 1);
   }
 #endif
