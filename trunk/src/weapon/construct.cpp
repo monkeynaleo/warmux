@@ -39,6 +39,12 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
+#ifdef DEBUG
+#include "graphic/video.h"
+#include "graphic/colors.h"
+#include "include/app.h"
+#endif
+
 const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
 
 
@@ -95,7 +101,15 @@ void Construct::Draw()
 
     dst = Mouse::GetInstance()->GetWorldPosition();
     construct_spr->SetRotation_rad(angle);
-    construct_spr->Draw(dst - construct_spr->GetSize()/2);
+    construct_spr->Draw(dst - construct_spr->GetSize() / 2);
+#ifdef DEBUG
+    if (IsDEBUGGING("test_rectangle"))
+    {
+      Rectanglei test_rect(dst - construct_spr->GetSizeMax() / 2, construct_spr->GetSizeMax());
+      test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+      AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
+    }
+#endif
   }
 }
 
@@ -103,8 +117,8 @@ void Construct::ChooseTarget(Point2i mouse_pos)
 {
   dst = mouse_pos;
 
-  Point2i test_target = dst - construct_spr->GetSize()/2;
-  Rectanglei rect(test_target, construct_spr->GetSize());
+  Point2i test_target = dst - construct_spr->GetSizeMax() / 2;
+  Rectanglei rect(test_target, construct_spr->GetSizeMax());
 
   if (!world.ParanoiacRectIsInVacuum(rect))
     return;
