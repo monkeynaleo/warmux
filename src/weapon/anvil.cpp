@@ -26,6 +26,7 @@
 #include <sstream>
 #include "character/character.h"
 #include "game/time.h"
+#include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "interface/game_msg.h"
 #include "interface/mouse.h"
@@ -65,6 +66,7 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
+  SetTestRect(image->GetWidth() / 4, image->GetWidth() / 4, 1, image->GetHeight() / 5);
 }
 
 Anvil::~Anvil()
