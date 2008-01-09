@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2007 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -277,7 +277,7 @@ void DisplayWelcomeMessage()
 
   // print the disclaimer
   cout << "Wormux version " << Constants::WORMUX_VERSION
-    << ", Copyright (C) 2001-2007 Wormux Team" << endl
+    << ", Copyright (C) 2001-2008 Wormux Team" << endl
     << "Wormux comes with ABSOLUTELY NO WARRANTY." << endl
     << "This is free software and you are welcome to redistribute it" << endl
     << "under certain conditions." << endl << endl
