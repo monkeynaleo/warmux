@@ -47,8 +47,9 @@ Tile::~Tile(){
 }
 
 void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
-  Point2i offset = upper_left_offset + lower_right_offset;
-  size = pSize + offset;
+  m_upper_left_offset = upper_left_offset;
+  m_lower_right_offset = lower_right_offset;
+  size = pSize + upper_left_offset + lower_right_offset;
   nbCells = size / CELL_SIZE;
 
   if((size.x % CELL_SIZE.x) != 0)
@@ -217,6 +218,52 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf){
   }
 }
 
+#if TILE_HAS_PREVIEW
+// Initialize preview depending on current video and map sizes
+void Tile::InitPreview()
+{
+  Point2i offset     =  m_upper_left_offset + m_lower_right_offset;
+  Point2i world_size = size - offset;
+  m_last_video_size = AppWormux::GetInstance()->video->window.GetSize();
+  m_shift = 0;
+  while (world_size > m_last_video_size/4)
+  {
+    world_size >>= 1;
+    m_shift++;
+  }
+  if (m_preview) delete m_preview;
+  m_preview = new Surface();
+  *m_preview = Surface(Point2i(nbCells.x*(CELL_SIZE.x>>m_shift), nbCells.y*(CELL_SIZE.y>>m_shift)),
+                       SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
+  m_preview->SetAlpha(SDL_SRCALPHA, 0);
+
+  m_preview_size = m_preview->GetSize() - (offset / (1<<m_shift));
+  m_preview_rect = Rectanglei(m_upper_left_offset / (1<<m_shift), m_preview_size);
+}
+
+// Rerender all of the preview
+void Tile::CheckPreview()
+{
+  if (AppWormux::GetInstance()->video->window.GetSize() == m_last_video_size)
+    return;
+
+  InitPreview();
+  uint8_t *dst  = m_preview->GetPixels();
+  uint    pitch = m_preview->GetPitch();
+
+  // Fill the TileItem objects
+  Point2i i;
+  int     piece = 0;
+  for( i.y = 0; i.y < nbCells.y; i.y++)
+  {
+    for( i.x = 0; i.x < nbCells.x; i.x++, piece++ )
+      item[piece]->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
+
+    dst += (CELL_SIZE.y>>m_shift)*pitch;
+  }
+}
+#endif
+
 void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
   Point2i offset = upper_left_offset + lower_right_offset;
   FreeMem();
@@ -224,23 +271,10 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   ASSERT(nbr_cell != 0);
 
 #if TILE_HAS_PREVIEW
-  Point2i world_size = terrain.GetSize();
-  Point2i video_size = AppWormux::GetInstance()->video->window.GetSize()/3;
-  m_shift = 0;
-  while (world_size > video_size)
-  {
-    world_size >>= 1;
-    m_shift++;
-  }
-  m_preview = new Surface();
-  *m_preview = Surface(Point2i(nbCells.x*(CELL_SIZE.x>>m_shift), nbCells.y*(CELL_SIZE.y>>m_shift)),
-                       SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
-  m_preview->SetAlpha(SDL_SRCALPHA, 0);
+  InitPreview();
+  
   uint8_t *dst  = m_preview->GetPixels();
   uint    pitch = m_preview->GetPitch();
-
-  m_preview_size = m_preview->GetSize() - (offset / (1<<m_shift));
-  m_preview_rect = Rectanglei(upper_left_offset / (1<<m_shift), m_preview_size);
 #endif
 
   // Create the TileItem objects
