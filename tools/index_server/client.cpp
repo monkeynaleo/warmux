@@ -46,206 +46,207 @@ std::map<std::string, int> nb_server;
 
 Client::Client(int client_fd, unsigned int & ip)
 {
-	version = "";
-	handshake_done = false;
-	is_hosting = false;
-	Host(client_fd, ip);
+    version = "";
+    handshake_done = false;
+    is_hosting = false;
+    Host(client_fd, ip);
 }
 
 Client::~Client()
 {
-	if( is_hosting )
-	{
-		if( version != "" )
-		{
-			nb_server[ version ]--;
-			NotifyServers( false );
-		}
-	}
+    if( is_hosting )
+    {
+        if( version != "" )
+        {
+            nb_server[ version ]--;
+            NotifyServers( false );
+        }
+    }
 }
 
 bool Client::HandleMsg(const std::string & str)
 {
-	if( msg_id == TS_MSG_VERSION )
-	{
-		if( handshake_done )
-			return false;
-		version = str;
-		if(str == "0.8beta1"
-		|| str == "0.8beta2"
-		|| str == "0.8beta3"
-		|| str == "0.8svn"
-		|| str == "0.7.9rc1"
-		|| str == "0.7.9rc2"
-                || str == "0.7.9")
-		{
-			DPRINT(MSG, "Version checked successfully");
-			handshake_done = true;
-			SetVersion( str );
-			msg_id = TS_NO_MSG;
-			stats.NewClient();
-			return SendSignature();
-		}
-		else
-		if(str == "WIS")
-		{
-			DPRINT(MSG, "New index server connected");
-			// Send our version, the distant server will shutdown if he has a lower version
-			SetVersion( str );
-			SendInt((int) TS_MSG_WIS_VERSION );
-			SendInt( VERSION );
-			// We are ready to read a new message
-			msg_id = TS_NO_MSG;
-			handshake_done = true;
-			return true;
-		}
-		return false;
-	}
+    if( msg_id == TS_MSG_VERSION )
+    {
+        if( handshake_done )
+            return false;
+        version = str;
+        if(str == "0.8beta1"
+           || str == "0.8beta2"
+           || str == "0.8beta3"
+           || str == "0.8beta4"
+           || str == "0.8svn"
+           || str == "0.7.9rc1"
+           || str == "0.7.9rc2"
+           || str == "0.7.9")
+        {
+            DPRINT(MSG, "Version checked successfully");
+            handshake_done = true;
+            SetVersion( str );
+            msg_id = TS_NO_MSG;
+            stats.NewClient();
+            return SendSignature();
+        }
+        else
+        if(str == "WIS")
+        {
+            DPRINT(MSG, "New index server connected");
+            // Send our version, the distant server will shutdown if he has a lower version
+            SetVersion( str );
+            SendInt((int) TS_MSG_WIS_VERSION );
+            SendInt( VERSION );
+            // We are ready to read a new message
+            msg_id = TS_NO_MSG;
+            handshake_done = true;
+            return true;
+        }
+        return false;
+    }
 
-	if( !handshake_done )
-		return false;
+    if( !handshake_done )
+        return false;
 
-	switch(msg_id)
-	{
-	case TS_MSG_HOSTING:
-		if(received < 4)
-			return true;
-		DPRINT(MSG, "This is a server");
-		is_hosting = true;
-		if( nb_server.find(version) != nb_server.end() )
-			nb_server[ version ]++;
-		else
-			nb_server[ version ] = 1;
-		if(! ReceiveInt(port) )
-			return false;
-		NotifyServers( true );
-		stats.NewServer();
+    switch(msg_id)
+    {
+    case TS_MSG_HOSTING:
+        if(received < 4)
+            return true;
+        DPRINT(MSG, "This is a server");
+        is_hosting = true;
+        if( nb_server.find(version) != nb_server.end() )
+            nb_server[ version ]++;
+        else
+            nb_server[ version ] = 1;
+        if(! ReceiveInt(port) )
+            return false;
+        NotifyServers( true );
+        stats.NewServer();
 
-		// TODO: try opening a connection to see if it's 
-		// firewalled or not
-		break;
-	case TS_MSG_GET_LIST:
-		if( is_hosting )
-			return false;
-		msg_id = TS_NO_MSG;
-		return SendList();
-		break;
-	default:
-		DPRINT(MSG, "Wrong message");
-//		if(str == "0.8beta1")
-			return false;
-	}
-	// We are ready to read a new message
-	msg_id = TS_NO_MSG;
-	return true;
+        // TODO: try opening a connection to see if it's 
+        // firewalled or not
+        break;
+    case TS_MSG_GET_LIST:
+        if( is_hosting )
+            return false;
+        msg_id = TS_NO_MSG;
+        return SendList();
+        break;
+    default:
+        DPRINT(MSG, "Wrong message");
+        //if(str == "0.8beta1")
+        return false;
+    }
+    // We are ready to read a new message
+    msg_id = TS_NO_MSG;
+    return true;
 }
 
 void Client::SetVersion(const std::string & ver)
 {
-	DPRINT(MSG, "Setting version to %s", ver.c_str());
-	version = ver;
-	clients.insert( std::make_pair(version, this) );
+    DPRINT(MSG, "Setting version to %s", ver.c_str());
+    version = ver;
+    clients.insert( std::make_pair(version, this) );
 
-	// We are currently registered as an unknown version
-	// So, we unregister it:
-	std::multimap<std::string, Client*>::iterator client;
-	client = clients.find( "unknown" );
-	if( client != clients.end() )
-	{
-		do
-		{
-			if( client->second == this )
-			{
-				clients.erase( client );
-				return;
-			}
-			++client;
-		} while( client != clients.upper_bound( "unknown" ) );
-	}
+    // We are currently registered as an unknown version
+    // So, we unregister it:
+    std::multimap<std::string, Client*>::iterator client;
+    client = clients.find( "unknown" );
+    if( client != clients.end() )
+    {
+        do
+        {
+            if( client->second == this )
+            {
+                clients.erase( client );
+                return;
+            }
+            ++client;
+        } while( client != clients.upper_bound( "unknown" ) );
+    }
 }
 
 bool Client::SendSignature()
 {
-	DPRINT(MSG, "Sending signature");
-	SendInt((int)TS_MSG_VERSION);
-	return SendStr("MassMurder!");
+    DPRINT(MSG, "Sending signature");
+    SendInt((int)TS_MSG_VERSION);
+    return SendStr("MassMurder!");
 }
 
 bool Client::SendList()
 {
-	DPRINT(MSG, "Sending list..");
+    DPRINT(MSG, "Sending list..");
 
-	int nb_s = 0;
-	if( nb_server.find( version ) != nb_server.end() )
-		nb_s = nb_server[ version ];
+    int nb_s = 0;
+    if( nb_server.find( version ) != nb_server.end() )
+        nb_s = nb_server[ version ];
 
-	// TODO : replace this loop by the correct stl function
-	std::multimap<std::string, FakeClient>::iterator fclient = fake_clients.find(version);
-	if( fake_clients.find( version ) != fake_clients.end() )
-	{
-		do
-		{
-			nb_s++;
-			++fclient;
-		} while (fclient != fake_clients.upper_bound(version));
-	}
+    // TODO : replace this loop by the correct stl function
+    std::multimap<std::string, FakeClient>::iterator fclient = fake_clients.find(version);
+    if( fake_clients.find( version ) != fake_clients.end() )
+    {
+        do
+        {
+            nb_s++;
+            ++fclient;
+        } while (fclient != fake_clients.upper_bound(version));
+    }
 
-	if( ! SendInt(nb_s) )
-		return false;
+    if( ! SendInt(nb_s) )
+        return false;
 
-	std::multimap<std::string, Client*>::iterator client = clients.find(version);
-	if( client != clients.end() )
-	{
-		do
-		{
-			if( client->second->is_hosting )
-			{
-				if( ! SendInt(client->second->GetIP()) )
-					return false;
-				if( ! SendInt(client->second->port) )
-					return false;
-			}
-			++client;
-		} while (client != clients.upper_bound(version));
-	}
+    std::multimap<std::string, Client*>::iterator client = clients.find(version);
+    if( client != clients.end() )
+    {
+        do
+        {
+            if( client->second->is_hosting )
+            {
+                if( ! SendInt(client->second->GetIP()) )
+                    return false;
+                if( ! SendInt(client->second->port) )
+                    return false;
+            }
+            ++client;
+        } while (client != clients.upper_bound(version));
+    }
 
-	fclient = fake_clients.find(version);
-	if( fclient != fake_clients.end() )
-	{
-		do
-		{
-			if( ! SendInt(fclient->second.ip) )
-				return false;
-			if( ! SendInt(fclient->second.port) )
-				return false;
-			++fclient;
-		} while (fclient != fake_clients.upper_bound(version));
-	}
-	return true;
+    fclient = fake_clients.find(version);
+    if( fclient != fake_clients.end() )
+    {
+        do
+        {
+            if( ! SendInt(fclient->second.ip) )
+                return false;
+            if( ! SendInt(fclient->second.port) )
+                return false;
+            ++fclient;
+        } while (fclient != fake_clients.upper_bound(version));
+    }
+    return true;
 }
 
 
 void Client::NotifyServers(bool joining)
 {
-	// Tell other index server that a new wormux server just registered
-	DPRINT(MSG, "Notify of a new wormux server..");
+    // Tell other index server that a new wormux server just registered
+    DPRINT(MSG, "Notify of a new wormux server..");
 
-	std::multimap<std::string, Client*>::iterator serv = clients.find( sync_serv_version );
-	if( serv != clients.end() )
-	{
-		do
-		{
-			if( ! serv->second->SendInt( TS_MSG_JOIN_LEAVE ) )
-				return /*false*/;
-			if( ! serv->second->SendStr( version ) )
-				return /*false*/;
-			if( ! serv->second->SendInt(GetIP()) )
-				return /*false*/;
-			// Send the port number : if this client is leaving, send -port
-			if( ! serv->second->SendInt(joining? port : -port) )
-				return /*false*/;
-			++serv;
-		} while (serv != clients.upper_bound(sync_serv_version));
-	}
-	return /*true*/;
+    std::multimap<std::string, Client*>::iterator serv = clients.find( sync_serv_version );
+    if( serv != clients.end() )
+    {
+        do
+        {
+            if( ! serv->second->SendInt( TS_MSG_JOIN_LEAVE ) )
+                return /*false*/;
+            if( ! serv->second->SendStr( version ) )
+                return /*false*/;
+            if( ! serv->second->SendInt(GetIP()) )
+                return /*false*/;
+            // Send the port number : if this client is leaving, send -port
+            if( ! serv->second->SendInt(joining? port : -port) )
+                return /*false*/;
+            ++serv;
+        } while (serv != clients.upper_bound(sync_serv_version));
+    }
+    return /*true*/;
 }
