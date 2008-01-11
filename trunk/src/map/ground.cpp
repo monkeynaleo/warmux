@@ -270,6 +270,10 @@ void Ground::Draw(bool redraw_all)
 
   // Draw on top of new position of particles (redisplayed on top of particles)
   RedrawParticleList(*world.to_redraw_particles);
+
+#if TILE_HAS_PREVIEW
+  CheckPreview();
+#endif
 }
 
 void Ground::RedrawParticleList(std::list<Rectanglei> &list) const {

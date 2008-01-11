@@ -31,7 +31,7 @@ class TileItem;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
-#define TILE_HAS_PREVIEW   0
+#define TILE_HAS_PREVIEW   1
 
 class Tile : public Rectanglei{
 public:
@@ -68,6 +68,7 @@ public:
   // Return the preview
 #if TILE_HAS_PREVIEW
   const Surface* GetPreview() const { return m_preview; };
+  void  CheckPreview();
   const Point2i& GetPreviewSize() const { return m_preview_size; };
   const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
 #endif
@@ -85,11 +86,16 @@ protected:
   unsigned int nbr_cell;
 
 #if TILE_HAS_PREVIEW
+  void InitPreview();
   Surface*   m_preview;
   uint       m_shift;
+  Point2i    m_last_video_size;
   Point2i    m_preview_size;
   Rectanglei m_preview_rect;
 #endif
+
+  Point2i m_upper_left_offset;
+  Point2i m_lower_right_offset;
 
   // Canvas giving access to tiles
   std::vector<TileItem *> item;
