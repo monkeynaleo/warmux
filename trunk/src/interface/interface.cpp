@@ -321,8 +321,11 @@ void Interface::DrawMapPreview()
          character != end_character;
          ++character) {
       if (!character -> IsDead()) {
-        Point2i relcoord = world.ground.PreviewCoordinates((*character).GetPosition());
-        window.Blit(icon, relcoord + offset - icon.GetSize()/2);
+        Point2i coord = world.ground.PreviewCoordinates((*character).GetPosition()) + offset;
+        window.Blit(icon, coord - icon.GetSize()/2);
+        if (character->IsActiveCharacter()) {
+          window.RectangleColor(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()), c_white);
+        }
       }
     }
   }
