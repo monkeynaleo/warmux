@@ -60,6 +60,7 @@ class Team
 
 
   private:
+    Surface mini_flag;
     Surface flag;
     Surface death_flag;
     Surface big_flag;
@@ -134,6 +135,7 @@ class Team
     const std::string& GetPlayerName() const { return m_player_name; }
     const std::string& GetSoundProfile() const { return m_sound_profile; }
     const Surface& GetFlag() const { return flag; }
+    const Surface& GetMiniFlag() const { return mini_flag; }
     const Surface& GetDeathFlag() const { return death_flag; }
     const Surface& GetBigFlag() const { return big_flag; }
     iterator begin();
