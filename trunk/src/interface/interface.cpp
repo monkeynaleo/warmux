@@ -314,16 +314,18 @@ void Interface::DrawMapPreview()
   Point2i  offset  = window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN);
   window.Blit(*preview, world.ground.GetPreviewRect(), offset);
 
-  const Character& active = ActiveCharacter();
-  FOR_ALL_LIVING_ENEMIES(active, team, character) {
+  FOR_EACH_TEAM(team) {
     const Surface& icon = (*team)->GetMiniFlag();
-    Point2i relcoord = world.ground.PreviewCoordinates((*character).GetPosition());
-    window.Blit(icon, relcoord + offset - icon.GetSize()/2);
+    for (Team::iterator character = (*(team))->begin(),
+           end_character = (*(team))->end();
+         character != end_character;
+         ++character) {
+      if (!character -> IsDead()) {
+        Point2i relcoord = world.ground.PreviewCoordinates((*character).GetPosition());
+        window.Blit(icon, relcoord + offset - icon.GetSize()/2);
+      }
+    }
   }
-
-  const Surface& icon = ActiveTeam().GetMiniFlag();
-  Point2i relcoord = world.ground.PreviewCoordinates(active.GetPosition());
-  window.Blit(icon, relcoord + offset - icon.GetSize()/2);
 #endif
 }
 
