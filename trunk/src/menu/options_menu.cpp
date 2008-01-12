@@ -84,31 +84,30 @@ OptionMenu::OptionMenu() :
   bottom_graphic_options->AddWidget(full_screen);
 
   opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-					  stdSize,
-					  50, 5,
-					  20, 50);
+                                          stdSize,
+                                          50, 5,
+                                          20, 50);
   bottom_graphic_options->AddWidget(opt_max_fps);
 
 
   // Get available video resolution
-  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs(); 
+  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
   std::list<Point2i>::const_iterator mode;
   std::vector<std::pair<std::string, std::string> > video_resolutions;
   std::string current_resolution;
 
-  for (mode = video_res.begin(); mode != video_res.end(); ++mode)
-    {
-      std::ostringstream ss;
-      std::string text;
-      ss << mode->GetX() << "x" << mode->GetY() ;
-      text = ss.str();
-      if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
-	current_resolution = text;
+  for (mode = video_res.begin(); mode != video_res.end(); ++mode) {
+    std::ostringstream ss;
+    std::string text;
+    ss << mode->GetX() << "x" << mode->GetY() ;
+    text = ss.str();
+    if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
+      current_resolution = text;
 
-      video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
+    video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
   }
   cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", stdSize,
-				 video_resolutions, current_resolution);
+                                 video_resolutions, current_resolution);
   bottom_graphic_options->AddWidget(cbox_video_mode);
 
   top_n_bottom_graphic_options->AddWidget(top_graphic_options);
@@ -174,8 +173,6 @@ OptionMenu::OptionMenu() :
   
   // Values initialization
 
-  resource_manager.UnLoadXMLProfile(res);
-
   Config * config = Config::GetInstance();
 
   opt_max_fps->SetValue(app->video->GetMaxFps());
@@ -195,9 +192,11 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "eo",    "Esperanto",           "eo");
   lbox_languages->AddItem(config->GetLanguage() == "en",    "English",             "en");
   lbox_languages->AddItem(config->GetLanguage() == "es",    "Castellano",          "es");
+  lbox_languages->AddItem(config->GetLanguage() == "fa",    "فارسی",               "fa");
   lbox_languages->AddItem(config->GetLanguage() == "fi",    "Suomi",               "fi");
   lbox_languages->AddItem(config->GetLanguage() == "fr",    "Français",            "fr");
   lbox_languages->AddItem(config->GetLanguage() == "gl",    "Galego",              "gl");
+  lbox_languages->AddItem(config->GetLanguage() == "he",    "עברית",               "he");
   lbox_languages->AddItem(config->GetLanguage() == "hu",    "Magyar",              "hu");
   lbox_languages->AddItem(config->GetLanguage() == "it",    "Italiano",            "it");
   lbox_languages->AddItem(config->GetLanguage() == "lv",    "latviešu valoda",     "lv");
@@ -217,6 +216,8 @@ OptionMenu::OptionMenu() :
 
   opt_music->SetValue(jukebox.UseMusic());
   opt_sound_effects->SetValue(jukebox.UseEffects());
+
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 OptionMenu::~OptionMenu()
