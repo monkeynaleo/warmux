@@ -71,33 +71,26 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   // Sprite loading
   scale = 0.5 + scale / 2.0;
 
-  Sprite* tmp = resource_manager.LoadSprite( ActiveMap()->ResProfile(), "wind_particle");
-  tmp->Scale(scale, scale);
-  tmp->RefreshSurface();
-  sprite = new Sprite(tmp->GetSurface());
+  sprite = resource_manager.LoadSprite( ActiveMap()->ResProfile(), "wind_particle");
+  sprite->Scale(scale, scale);
+  sprite->RefreshSurface();
   sprite->SetAlpha(scale);
-  sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
+  sprite->SetCurrentFrame(randomObj.GetLong(0, sprite->GetFrameCount() - 1));
 
-  if(ActiveMap()->GetWind().need_flip)
-  {
-    tmp->Scale(-scale, scale);
-    tmp->RefreshSurface();
-    flipped = new Sprite(tmp->GetSurface());
+  if(ActiveMap()->GetWind().need_flip) {
+    flipped = new Sprite(*sprite);
+    flipped->Scale(-scale, scale);
+    flipped->RefreshSurface();
     flipped->SetAlpha(scale);
-    flipped->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
-  }
-  else
+    flipped->SetCurrentFrame(randomObj.GetLong(0, sprite->GetFrameCount()-1));
+  } else {
     flipped = NULL;
+  }
 
-  delete tmp;
-
-
-  if(ActiveMap()->GetWind().rotation_speed != 0.0)
-  {
+  if(ActiveMap()->GetWind().rotation_speed != 0.0) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
-    if(flipped)
-    {
+    if(flipped) {
       flipped->EnableRotationCache(64);
       flipped->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
     }
