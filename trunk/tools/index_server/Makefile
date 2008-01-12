@@ -9,4 +9,4 @@ help:
 	@echo "* Use 'make static' to build a statically linked binary (default)"
 
 clean:
-	@rm -f *.o *~ wormux_server 2>&1 > /dev/null
+	@rm -f *.[od] *~ wormux_server 2>&1 > /dev/null
