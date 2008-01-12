@@ -311,8 +311,21 @@ void Interface::DrawMapPreview()
 #if TILE_HAS_PREVIEW
   Surface& window  = AppWormux::GetInstance()->video->window;
   const Surface* preview = world.ground.GetPreview();
-  window.Blit(*preview, world.ground.GetPreviewRect(),
-              window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN));
+  Point2i  offset  = window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN);
+  window.Blit(*preview, world.ground.GetPreviewRect(), offset);
+
+  printf("Offset: %ix%i\n", offset.x, offset.y);
+
+  const Character& active = ActiveCharacter();
+  FOR_ALL_LIVING_ENEMIES(active, team, character) {
+    const Surface& icon = (*team)->GetFlag();
+    Point2i pos      = (*character).GetPosition();
+    Point2i relcoord = world.ground.PreviewCoordinates(pos);
+    Point2i coord    = relcoord + offset - icon.GetSize()/2;
+    printf("Translated position (%ix%i) into (%i,%i) then shifted to (%i,%i)\n",
+           pos.x, pos.y, relcoord.x, relcoord.y, coord.x, coord.y);
+    window.Blit(icon, coord);
+  }
 #endif
 }
 
