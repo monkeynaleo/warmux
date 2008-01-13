@@ -331,8 +331,10 @@ void Interface::DrawMapPreview()
         Point2i     coord = world.ground.PreviewCoordinates((*character).GetPosition()) + offset;
         Rectanglei  rect(coord - icon.GetSize()/2, icon.GetSize());
         window.Blit(icon, coord - icon.GetSize()/2);
-        if (character->IsActiveCharacter())
-          window.RectangleColor(rect, c_white);
+        if (character->IsActiveCharacter()) {
+          uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
+          window.CircleColor(coord.x, coord.y, 1+radius/2, c_white);
+        }
 	world.ToRedrawOnScreen(rect);
       }
     }
