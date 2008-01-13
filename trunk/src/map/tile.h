@@ -31,8 +31,6 @@ class TileItem;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
-#define TILE_HAS_PREVIEW   1
-
 class Tile : public Rectanglei{
 public:
   Tile ();
@@ -66,7 +64,6 @@ public:
   Surface GetPart(const Rectanglei& rec);
 
   // Return the preview
-#if TILE_HAS_PREVIEW
   const Surface* GetPreview() const { return m_preview; };
   void  CheckPreview();
   const Point2i& GetPreviewSize() const { return m_preview_size; };
@@ -74,7 +71,6 @@ public:
   // Translate world coordinates into a preview ones
   // @warning assumes CELL_SIZE is 64x64
   Point2i PreviewCoordinates(const Point2i& pos) { return (pos-m_upper_left_offset)>>m_shift; };
-#endif
 
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();
@@ -88,14 +84,12 @@ protected:
   Point2i nbCells;
   unsigned int nbr_cell;
 
-#if TILE_HAS_PREVIEW
   void InitPreview();
   Surface*   m_preview;
   uint       m_shift;
   Point2i    m_last_video_size;
   Point2i    m_preview_size;
   Rectanglei m_preview_rect;
-#endif
 
   Point2i m_upper_left_offset;
   Point2i m_lower_right_offset;
