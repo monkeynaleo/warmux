@@ -223,6 +223,9 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     case KEY_TOGGLE_INTERFACE:
       Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());
       return;
+    case KEY_MINIMAP_FROM_GAME:
+      Interface::GetInstance()->ToggleMinimap ();
+      return;
     case KEY_MENU_OPTIONS_FROM_GAME: {
       OptionMenu options_menu;
       options_menu.Run();
