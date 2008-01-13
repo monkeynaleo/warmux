@@ -55,6 +55,7 @@ Sprite::Sprite(const Surface& surface, bool _smooth) :
 }
 
 Sprite::Sprite(const Sprite &other) :
+  smooth(other.smooth),
   cache(*this),
   animation(other.animation, *this),
   frames()
