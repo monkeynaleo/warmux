@@ -306,6 +306,12 @@ void Interface::DrawTeamEnergy() const
   }
 }
 
+void Interface::ToggleMinimap()
+{
+  display_minimap = !display_minimap;
+  world.ToRedrawOnScreen(world.ground.GetPreviewRect());
+}
+
 // Draw map preview
 void Interface::DrawMapPreview()
 {
@@ -329,6 +335,7 @@ void Interface::DrawMapPreview()
       }
     }
   }
+  world.ToRedrawOnScreen(world.ground.GetPreviewRect());
 }
 
 void Interface::Draw()
