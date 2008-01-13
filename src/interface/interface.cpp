@@ -309,7 +309,6 @@ void Interface::DrawTeamEnergy() const
 void Interface::ToggleMinimap()
 {
   display_minimap = !display_minimap;
-  world.ToRedrawOnScreen(world.ground.GetPreviewRect());
 }
 
 // Draw map preview
@@ -319,6 +318,8 @@ void Interface::DrawMapPreview()
   const Surface* preview = world.ground.GetPreview();
   Point2i  offset  = window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN);
   window.Blit(*preview, world.ground.GetPreviewRect(), offset);
+  Rectanglei rect_preview(offset, world.ground.GetPreviewSize());
+  world.ToRedrawOnScreen(rect_preview);
 
   FOR_EACH_TEAM(team) {
     const Surface& icon = (*team)->GetMiniFlag();
@@ -332,10 +333,10 @@ void Interface::DrawMapPreview()
         window.Blit(icon, coord - icon.GetSize()/2);
         if (character->IsActiveCharacter())
           window.RectangleColor(rect, c_white);
+	world.ToRedrawOnScreen(rect);
       }
     }
   }
-  world.ToRedrawOnScreen(world.ground.GetPreviewRect());
 }
 
 void Interface::Draw()
