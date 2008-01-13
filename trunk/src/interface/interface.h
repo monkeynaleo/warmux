@@ -125,7 +125,7 @@ public:
    void UpdateTimer(uint utimer);
    void UpdateWindIndicator(int wind_value) { wind_bar.UpdateValue(wind_value); };
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
-   void ToggleMinimap() { display_minimap = !display_minimap; }
+   void ToggleMinimap();
 };
 
 void AbsoluteDraw(const Surface& s, const Point2i& pos);
