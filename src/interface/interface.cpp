@@ -60,6 +60,7 @@ Interface::Interface()
   display = true;
   start_hide_display = 0;
   start_show_display = 0;
+  display_minimap = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   game_menu = resource_manager.LoadImage( res, "interface/background_interface");
@@ -308,7 +309,6 @@ void Interface::DrawTeamEnergy() const
 // Draw map preview
 void Interface::DrawMapPreview()
 {
-#if TILE_HAS_PREVIEW
   Surface& window  = AppWormux::GetInstance()->video->window;
   const Surface* preview = world.ground.GetPreview();
   Point2i  offset  = window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN);
@@ -321,15 +321,14 @@ void Interface::DrawMapPreview()
          character != end_character;
          ++character) {
       if (!character -> IsDead()) {
-        Point2i coord = world.ground.PreviewCoordinates((*character).GetPosition()) + offset;
+        Point2i     coord = world.ground.PreviewCoordinates((*character).GetPosition()) + offset;
+        Rectanglei  rect(coord - icon.GetSize()/2, icon.GetSize());
         window.Blit(icon, coord - icon.GetSize()/2);
-        if (character->IsActiveCharacter()) {
-          window.RectangleColor(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()), c_white);
-        }
+        if (character->IsActiveCharacter())
+          window.RectangleColor(rect, c_white);
       }
     }
   }
-#endif
 }
 
 void Interface::Draw()
@@ -361,7 +360,8 @@ void Interface::Draw()
   DrawCharacterInfo();
   DrawTeamEnergy();
   DrawWeaponInfo();
-  DrawMapPreview();
+  if (display_minimap)
+    DrawMapPreview();
   DrawSmallInterface();
 }
 
