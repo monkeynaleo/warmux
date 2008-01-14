@@ -374,7 +374,7 @@
       <max_angle>45</max_angle>
       <nb_ammo>2</nb_ammo>
       <unit_per_ammo>2</unit_per_ammo>
-      <damage>35</damage>
+      <damage>25</damage>
       <explosion_range>15</explosion_range>
       <particle_range>16</particle_range>
       <display_crosshair>0</display_crosshair>
