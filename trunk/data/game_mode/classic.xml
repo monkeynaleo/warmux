@@ -46,7 +46,7 @@
 
   <bonus_box>
     <explosion>
-      <damage>50</damage>
+      <damage>30</damage>
       <explosion_range>50</explosion_range>
       <particle_range>50</particle_range>
       <blast_force>500</blast_force>
