@@ -20,10 +20,15 @@
  *****************************************************************************/
 
 #include "menu/help_menu.h"
+#include "gui/box.h"
+#include "gui/picture_widget.h"
 
 HelpMenu::HelpMenu()  :
-  Menu("credit/background", vOk)
+  Menu("help/background", vOk)
 {
+  Box * help = new HBox(800);
+  help->AddWidget(new PictureWidget(Point2i(800, 548), "help/help_shortkeys"));
+  widgets.AddWidget(help);
 }
 
 HelpMenu::~HelpMenu()
