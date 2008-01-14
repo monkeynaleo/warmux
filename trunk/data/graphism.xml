@@ -3,7 +3,7 @@
 <resources>
 
 <section name="main_menu">
-  <surface name="bg_main" file="menu//background.png" />
+  <surface name="bg_main" file="menu/background.png" />
 
   <sprite name="button">
     <image file="menu/button.png">
@@ -144,6 +144,11 @@
 
 <section name="credit">
   <surface name="background" file="menu/background_credits.png" />
+</section>
+
+<section name="help">
+  <surface name="background" file="menu/background_help.png" />
+  <surface name="help_shortkeys" file="help/shortkeys.png" />
 </section>
 
 <section name="object">
