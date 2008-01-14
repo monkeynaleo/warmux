@@ -65,6 +65,7 @@
       <disco_grenade ammo="1">0.7</disco_grenade>
       <dynamite ammo="2">0.9</dynamite>
       <gnulauncher ammo="1">0.9</gnulauncher>
+      <flamethrower ammo="1">1</flamethrower>
       <grapple ammo="2">1</grapple>
       <jetpack ammo="1">1</jetpack>
       <lowgrav ammo="1">1</lowgrav>
