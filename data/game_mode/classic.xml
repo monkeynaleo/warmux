@@ -78,11 +78,11 @@
       <teleportation ammo="2">1</teleportation>
       <tux ammo="1">0.8</tux>
     </probability>
-    <life_points>40</life_points>
+    <life_points>20</life_points>
   </bonus_box>
 
   <medkit>
-    <life_points>40</life_points>
+    <life_points>20</life_points>
     <energy_boost>25</energy_boost>
   </medkit>
 
