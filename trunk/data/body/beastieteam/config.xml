@@ -166,9 +166,66 @@
 </sprite>
 
 <!-- ###### Black ###### -->
+<!-- Body -->
 <sprite name="body-black" type="body" >
-	<image file="black.png"/>
-	<anchor dx="12" dy="15"/>
+	<image file="b_body.png"/>
+	<anchor dx="16" dy="17"/>
+	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
+	<attached member_type="head" frame="*" dx="14" dy="6"/>
+	<attached member_type="arm-right"  frame="*" dx="11" dy="12"/>
+	<attached member_type="arm-left"  frame="*" dx="16" dy="11"/>
+	<attached member_type="foot-left"  frame="*" dx="18" dy="26"/>
+	<attached member_type="foot-right"  frame="*" dx="12" dy="28"/>
+	<attached member_type="jetpack"  frame="*" dx="5" dy="-9"/>
+	<attached member_type="construct" frame="*" dx="12" dy="0"/>
+	<attached member_type="tail" frame="*" dx="8" dy="22"/>
+	<attached member_type="hula" frame="*" dx="14" dy="20"/>
+</sprite>
+<!-- Arms -->
+<sprite name="arm-left-black" type="arm-left" >
+	<image file="b_arm.png"/>
+	<anchor dx="7" dy="1"/>
+</sprite>
+<sprite name="arm-right-black" type="arm-right" >
+	<image file="b_arm.png"/>
+	<anchor dx="7" dy="1"/>
+	<attached member_type="weapon" frame="*" dx="3" dy="13"/>
+	<attached member_type="yoyo" frame="*" dx="-19" dy="5"/>
+</sprite>
+<!-- Legs -->
+<sprite name="foot-left-black" type="foot-left" >
+	<image file="b_foot.png"/>
+	<anchor dx="3" dy="1"/>
+</sprite>
+<sprite name="foot-right-black" type="foot-right" >
+	<image file="b_foot.png"/>
+	<anchor dx="3" dy="1"/>
+</sprite>
+<!-- Tail -->
+<sprite name="tail-black" type="tail" >
+	<image file="b_tail.png"/>
+	<anchor dx="13" dy="0"/>
+</sprite>
+<!-- Head -->
+<sprite name="head-black" type="head">
+	<image file="b_head.png"/>
+	<anchor dx="10" dy="16"/>
+	<attached member_type="helmet" frame="*" dx="1" dy="-1"/>
+	<attached member_type="eyes-normal" frame="*" dx="11" dy="10"/>
+</sprite>
+<sprite name="eyes-black" type="eyes-normal">
+	<image file="eyes.png"/>
+	<anchor dx="4" dy="3"/>
+	<attached member_type="eyelid" frame="*" dx="0" dy="0"/>
+	<attached member_type="pupil-right" frame="*" dx="4" dy="3"/>
+	<attached member_type="pupil-left" frame="*" dx="6" dy="3"/>
+</sprite>
+<sprite name="eyelid-black" type="eyelid">
+	<image file="b_eyelid.png">
+		<grid pos="0,0" size="9,7" array="7,1" />
+	</image>
+	<animation speed="200" loop_mode="pingpong" />
+	<anchor dx="0" dy="0"/>
 </sprite>
 
 <!-- ###### Construct ###### -->
@@ -305,9 +362,35 @@
 
 <!-- ###### Black ###### -->
 <clothe name="black">
+	<member name="arm-left-black"/>
+	<member name="foot-left-black"/>
 	<member name="body-black"/>
+	<member name="tail-black"/>
+	<member name="head-black"/>
+	<member name="eyes-black"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="eyelid-black"/>
+	<member name="foot-right-black"/>
+	<member name="arm-right-black"/>
+	<member name="weapon"/>
 </clothe>
 
+<!-- ###### Fly-Black ###### -->
+<clothe name="fly-black">
+	<member name="arm-left-black"/>
+	<member name="foot-left-black"/>
+	<member name="body-black"/>
+	<member name="tail-black"/>
+	<member name="head-black"/>
+	<member name="eyes-black"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="eyelid-black"/>
+	<member name="foot-right-black"/>
+	<member name="arm-right-black"/>
+	<member name="weapon"/>
+</clothe>
 
 <!-- # Construct/Airhammer helmet # -->
 <clothe name="weapon-construct">
@@ -682,7 +765,7 @@
 <movement name="fly" speed="150">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
-		<member type="body" angle="90" follow_speed="true" /> 
+		<member type="body" angle="90"/> 
 		<member type="head" angle="-140"/>
 		<member type="arm-left" angle="45"/>
 		<member type="arm-right" angle="45"/>
@@ -690,7 +773,7 @@
 		<member type="foot-right" angle="45" />
 	</frame>
 	<frame>
-		<member type="body" angle="90" follow_speed="true" /> 
+		<member type="body" angle="90" /> 
 		<member type="head" angle="-140"/>
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="0"/>
@@ -698,7 +781,7 @@
 		<member type="foot-right" angle="0" />
 	</frame>
 	<frame>
-		<member type="body" angle="90" follow_speed="true" /> 
+		<member type="body" angle="90" /> 
 		<member type="head" angle="-140"/>
 		<member type="arm-left" angle="-45"/>
 		<member type="arm-right" angle="-45"/>
@@ -706,7 +789,7 @@
 		<member type="foot-right" angle="-45" />
 	</frame>
 	<frame>
-		<member type="body" angle="90" follow_speed="true" /> 
+		<member type="body" angle="90" /> 
 		<member type="head" angle="-140"/>
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="0"/>
@@ -717,15 +800,55 @@
 
 <!-- ###### Black ###### -->
 <movement name="black" speed="1000">
-        <collision_rect left="5" right="5" top="10" bottom="2" />
-        <frame>
-                <member type="body" angle="0" />
-        </frame>
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame>
+		<member type="head-black" follow_half_crosshair="true"/>
+		<member type="arm-left-black" angle="-40" />
+		<member type="arm-right-black" angle="0" />
+		<member type="foot-left-black" angle="0" />
+		<member type="foot-right-black" angle="0" />
+		<member type="tail-black" angle="-2" />
+		<member type="pupil-right" dx="-1" />
+		<member type="pupil-left" dx="-1" />		
+	</frame>
 </movement>
 
-
-
-
+<!-- ###### Fly-black ###### -->
+<movement name="fly-black" speed="150">
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame>
+		<member type="body" angle="90"/> 
+		<member type="head" angle="-140"/>
+		<member type="arm-left" angle="45"/>
+		<member type="arm-right" angle="45"/>
+		<member type="foot-left" angle="-45"/>
+		<member type="foot-right" angle="45" />
+	</frame>
+	<frame>
+		<member type="body" angle="90" /> 
+		<member type="head" angle="-140"/>
+		<member type="arm-left" angle="0"/>
+		<member type="arm-right" angle="0"/>
+		<member type="foot-left" angle="0"/>
+		<member type="foot-right" angle="0" />
+	</frame>
+	<frame>
+		<member type="body" angle="90" /> 
+		<member type="head" angle="-140"/>
+		<member type="arm-left" angle="-45"/>
+		<member type="arm-right" angle="-45"/>
+		<member type="foot-left" angle="45"/>
+		<member type="foot-right" angle="-45" />
+	</frame>
+	<frame>
+		<member type="body" angle="90" /> 
+		<member type="head" angle="-140"/>
+		<member type="arm-left" angle="0"/>
+		<member type="arm-right" angle="0"/>
+		<member type="foot-left" angle="0"/>
+		<member type="foot-right" angle="0" />
+	</frame>
+</movement>
 
 <!--   ###########################################
        #############                ##############
