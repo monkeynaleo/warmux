@@ -7,7 +7,7 @@
 <!ELEMENT section (author+)>
 <!ATTLIST section title CDATA #REQUIRED>
 
-<!ELEMENT author (nickname,name?,description,website?,email?,country?)>
+<!ELEMENT author (nickname,name,description,website?,email?,country?)>
 <!ELEMENT nickname (#PCDATA)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
