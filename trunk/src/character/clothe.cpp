@@ -30,7 +30,7 @@ Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
 {
   XmlReader::ReadStringAttr( xml, "name", name);
 
-  xmlpp::Node::NodeList nodes = xml -> get_children("member");
+  xmlpp::Node::NodeList nodes = xml -> get_children("c_member");
   xmlpp::Node::NodeList::iterator
     it=nodes.begin(),
     end=nodes.end();
