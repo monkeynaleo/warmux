@@ -144,7 +144,6 @@ private:
   void __SetState_HAS_PLAYED();
   void __SetState_END_TURN();
 
-  void DisplayPause() const;
   bool MenuQuitPause() const;
   void MessageEndOfGame() const;
   int NbrRemainingTeams() const;
