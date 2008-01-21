@@ -377,7 +377,7 @@ void Config::LoadXml(const xmlpp::Element *xml)
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
 }
 
-bool Config::Save()
+bool Config::Save(bool save_current_teams)
 {
   std::string rep = personal_dir;
 
@@ -395,10 +395,10 @@ bool Config::Save()
     return false;
   }
 
-  return SaveXml();
+  return SaveXml(save_current_teams);
 }
 
-bool Config::SaveXml()
+bool Config::SaveXml(bool save_current_teams)
 {
   XmlWriter doc;
 
@@ -419,20 +419,36 @@ bool Config::SaveXml()
 
   if (TeamsList::IsLoaded())
   {
-    TeamsList::iterator
-      it = GetTeamsList().playing_list.begin(),
-      end = GetTeamsList().playing_list.end();
+    if (save_current_teams)
+      {
+	teams.clear();
+
+	TeamsList::iterator
+	  it = GetTeamsList().playing_list.begin(),
+	  end = GetTeamsList().playing_list.end();
+
+	for (int i=0; it != end; ++it, i++)
+	  {
+	    ConfigTeam config;
+	    config.id = (**it).GetId();
+	    config.player_name = (**it).GetPlayerName();
+	    config.nb_characters = (**it).GetNbCharacters();
+
+	    teams.push_back(config);
+	  }
+      }
+
+    std::list<ConfigTeam>::iterator
+      it = teams.begin(),
+      end = teams.end();
 
     for (int i=0; it != end; ++it, i++)
-    {
-      if ((**it).IsLocal() || (**it).IsLocalAI())
       {
-        xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));
-        doc.WriteElement(a_team, "id", (**it).GetId());
-        doc.WriteElement(a_team, "player_name", (**it).GetPlayerName());
-        doc.WriteElement(a_team, "nb_characters", ulong2str((**it).GetNbCharacters()));
+	xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));
+	doc.WriteElement(a_team, "id", (*it).id);
+	doc.WriteElement(a_team, "player_name", (*it).player_name);
+	doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
       }
-    }
   }
 
   //=== Video ===

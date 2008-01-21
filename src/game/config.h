@@ -124,7 +124,7 @@ public:
   static Config * GetInstance();
   ~Config() { RemoveAllObjectConfigs(); singleton = NULL; };
 
-  bool Save();
+  bool Save(bool save_current_teams = false);
   inline const std::string &GetGameMode() const { return m_game_mode; }
 
   inline const std::string &GetNetworkHost() const { return m_network_host; }
@@ -133,7 +133,7 @@ public:
   inline void SetNetworkPort(std::string s) { m_network_port = s; }
 
 protected:
-  bool SaveXml();
+  bool SaveXml(bool save_current_teams);
   std::string GetEnv(const std::string & name, const std::string &default_value) const;
 
   std::string default_language;
