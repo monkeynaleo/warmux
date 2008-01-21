@@ -204,11 +204,8 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     switch(key){
       // Managing interface
     case KEY_QUIT:
-      Game::GetInstance()->UserWantEndOfGame();
-      return;
     case KEY_PAUSE:
-      if (!Network::IsConnected())
-        Time::GetInstance()->TogglePause();
+      Game::GetInstance()->UserAsksForMenu();
       return;
     case KEY_FULLSCREEN:
       AppWormux::GetInstance()->video->ToggleFullscreen();
