@@ -53,8 +53,8 @@ private:
 
   static Game * singleton;
 
-  // Set the user requested an end of the game
-  bool want_end_of_game;
+  // Set the user requested a pause/end of the game
+  bool ask_for_menu;
 
   game_loop_state_t state;
   uint pause_seconde;
@@ -100,7 +100,7 @@ public:
   void SetState(game_loop_state_t new_state, bool begin_game=false) const;
   bool IsGameFinished() const;
 
-  void UserWantEndOfGame() { want_end_of_game = true; };
+  void UserAsksForMenu() { ask_for_menu = true; };
   void Really_SetState(game_loop_state_t new_state); // called by the action_handler
 
   // Get remaining time to play
@@ -145,7 +145,7 @@ private:
   void __SetState_END_TURN();
 
   void DisplayPause() const;
-  bool AskQuit() const;
+  bool MenuQuitPause() const;
   void MessageEndOfGame() const;
   int NbrRemainingTeams() const;
   void EndOfGame();

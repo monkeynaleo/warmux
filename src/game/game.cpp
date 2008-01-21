@@ -158,7 +158,7 @@ std::string Game::GetUniqueId()
 
 Game::Game():
   isGameLaunched(false),
-  want_end_of_game(false),
+  ask_for_menu(false),
   state(PLAYING),
   pause_seconde(0),
   duration(0),
@@ -213,7 +213,7 @@ void Game::RefreshInput()
   while(SDL_PollEvent(&event)) {
     if ( event.type == SDL_QUIT) {
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
-      UserWantEndOfGame();
+      UserAsksForMenu();
       std::cout << _("END OF GAME") << std::endl;
       return;
     }
@@ -371,18 +371,14 @@ void Game::Run()
   // Time to display the compute next physic engine frame
   time_of_next_phy_frame = 0;
 
-  want_end_of_game = false;
-
   // loop until game is finished
   do
-  {
-    MainLoop();
-    if (want_end_of_game)
-      if ((want_end_of_game = AskQuit()))
-        break;
+    {
+      ask_for_menu = false;
+      MainLoop();
 
-//     if (Time::GetInstance()->IsGamePaused())
-//       DisplayPause();
+      if (ask_for_menu && MenuQuitPause())
+        break;
 
   } while(!IsGameFinished());
 
@@ -881,57 +877,23 @@ int Game::NbrRemainingTeams() const
   return nbr;
 }
 
-bool Game::AskQuit() const
+bool Game::MenuQuitPause() const
 {
-//   Question question;
-//   const char *msg = _("Do you really want to quit? (Y/N)");
-//   question.Set (msg, true, 0, "interface/quit_screen");
-
-//   {
-//     /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
-//     /* Let's find out what the user would like to press ... */
-//     const char *key_x_ptr = strchr (msg, '/');
-//     char key_x;
-//     if (key_x_ptr && key_x_ptr > msg) /* it's there and it's not the first char */
-//       key_x = tolower(key_x_ptr[-1]);
-//     else
-//       abort();
-//     if (!isalpha(key_x)) /* sanity check */
-//       abort();
-
-//     question.add_choice(SDLK_a + (int)key_x - 'a', 1);
-//   }
   jukebox.Pause();
-  Time::GetInstance()->Pause();
+
+  if (!Network::IsConnected()) // partial bugfix of #10679
+    Time::GetInstance()->Pause();
 
   bool exit = false;
   PauseMenu menu(exit);
   menu.Run();
 
-  //bool exit = (question.Ask() == 1);
+  if (!Network::IsConnected()) // partial bugfix of #10679
+    Time::GetInstance()->Continue();
 
-  Time::GetInstance()->Continue();
   jukebox.Resume();
 
   return exit;
-}
-
-void Game::DisplayPause() const
-{
-  Question question;
-  if(!Network::GetInstance()->IsLocal())
-    return;
-
-  // Pause screen
-  question.Set("", false, 0, "interface/pause_screen");
-  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(ManMachineInterface::KEY_PAUSE), 1);
-  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(ManMachineInterface::KEY_QUIT), 1);
-
-  jukebox.Pause();
-  Time::GetInstance()->Pause();
-  question.Ask();
-  Time::GetInstance()->Continue();
-  jukebox.Resume();
 }
 
 
