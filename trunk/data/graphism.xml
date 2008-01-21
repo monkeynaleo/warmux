@@ -190,7 +190,6 @@
   <surface name="clock" file="interface/clock.png"/>
   <surface name="wind" file="interface/wind.png"/>
   <surface name="wind_indicator" file="interface/wind_indicator.png"/>
-  <surface name="pause_screen" file="interface/pause.png"/>
   <surface name="quit_screen" file="interface/quit.png"/>
 </section>
 
