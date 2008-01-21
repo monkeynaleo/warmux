@@ -85,28 +85,29 @@ GameMenu::GameMenu() :
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
-  game_options = new HBox(OPTIONS_BOX_H, true);
-  game_options->SetXY(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP);
-  game_options->AddWidget(new PictureWidget(Point2i(39, 128), "menu/mode_label"));
+  Point2i option_size(130, 130);
 
-  game_options->SetMargin(50);
+  game_options = new GridBox(mainBoxWidth, option_size, true);
+
+  //game_options->AddWidget(new PictureWidget(Point2i(39, 128), "menu/mode_label"));
+  game_options->AddWidget(new PictureWidget(option_size, "menu/mode_label"));
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
-                                                stdSize,
+                                                option_size,
                                                 TPS_TOUR_MIN, 5,
                                                 TPS_TOUR_MIN, TPS_TOUR_MAX);
   game_options->AddWidget(opt_duration_turn);
 
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
-                                             stdSize,
+                                             option_size,
                                              100, 5,
                                              5, 200);
   game_options->AddWidget(opt_energy_ini);
 
-  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", stdSize);
+  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
   game_options->AddWidget(opt_scroll_on_border);
 
-  game_options->AddWidget(new NullWidget(Rectanglei(-1, -1, 50, 10)));
+  game_options->SetXY(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP);
 
   widgets.AddWidget(game_options);
 
@@ -146,9 +147,9 @@ void GameMenu::SaveOptions()
   // teams
   team_box->ValidTeamsSelection();
 
-  //Save options in XML
+  //Save options in XML (including current selected teams)
   Config::GetInstance()->SetScrollOnBorder(opt_scroll_on_border->GetValue());
-  Config::GetInstance()->Save();
+  Config::GetInstance()->Save(true);
 
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->duration_turn = opt_duration_turn->GetValue() ;
