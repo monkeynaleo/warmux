@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Definition of the boolean enum values -->
+<!ELEMENT true EMPTY>
+<!ELEMENT false EMPTY>
+
+<!-- Definition of the loop mode enum values -->
+<!ELEMENT pingpong EMPTY>
+
+<!-- Definition of some base types... -->
+<!ENTITY % integer "CDATA" >
+
 <!ELEMENT resources (author, alias+, sprite+, clothe+, movement+)>
 
 <!-- Author part -->
@@ -26,19 +36,19 @@
 
 <!ELEMENT animation EMPTY>
 <!ATTLIST animation
-          speed CDATA #IMPLIED
-          loop_mode CDATA #IMPLIED >
+          speed %integer; #IMPLIED
+          loop_mode (pingpong) #IMPLIED >
 
 <!ELEMENT anchor EMPTY>
 <!ATTLIST anchor
-          dx CDATA #REQUIRED
-          dy CDATA #REQUIRED>
+          dx %integer; #REQUIRED
+          dy %integer; #REQUIRED>
 
 <!ELEMENT attached EMPTY>
 <!ATTLIST attached
           member_type CDATA #REQUIRED
-          dx CDATA #REQUIRED
-          dy CDATA #REQUIRED
+          dx %integer; #REQUIRED
+          dy %integer; #REQUIRED
           frame CDATA #IMPLIED>
 
 <!-- clothe -->
@@ -90,7 +100,3 @@
           follow_direction CDATA #IMPLIED
           follow_cursor (false|true) "false"
           follow_cursor_limit CDATA #IMPLIED>
-
-<!-- Definition of the boolean enum values -->
-<!ELEMENT true EMPTY>
-<!ELEMENT false EMPTY>
