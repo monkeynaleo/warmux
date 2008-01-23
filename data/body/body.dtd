@@ -75,7 +75,6 @@
 <!ELEMENT frame (member+)>
 <!ATTLIST frame number CDATA #IMPLIED>
 
-<!-- WARNING member is common for clothe and frame but does not take same attributes ... !-->
 <!ELEMENT member EMPTY>
 <!ATTLIST member
           type CDATA #REQUIRED
@@ -92,5 +91,6 @@
           follow_cursor (false|true) "false"
           follow_cursor_limit CDATA #IMPLIED>
 
+<!-- Definition of the boolean enum values -->
 <!ELEMENT true EMPTY>
 <!ELEMENT false EMPTY>
