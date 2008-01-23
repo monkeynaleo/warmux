@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!ELEMENT resources (author, sprite+, clothe+, alias+, movement+)>
+<!ELEMENT resources (author, alias+, sprite+, clothe+, movement+)>
 
 <!-- Author part -->
 <!ELEMENT author (name,nickname?,email,country?)>
@@ -11,25 +11,41 @@
 
 <!-- sprite -->
 <!ELEMENT sprite (image, anchor?, animation?, (attached+)? )>
-<!ATTLIST sprite name CDATA #REQUIRED type CDATA #REQUIRED go_through_ground CDATA #IMPLIED>
+<!ATTLIST sprite
+          name CDATA #REQUIRED
+          type CDATA #REQUIRED
+          go_through_ground CDATA #IMPLIED>
 
 <!ELEMENT image (grid?)>
 <!ATTLIST image file CDATA #REQUIRED>
 <!ELEMENT grid EMPTY>
-<!ATTLIST grid pos CDATA #REQUIRED size CDATA #REQUIRED array CDATA #REQUIRED>
+<!ATTLIST grid
+          pos CDATA #REQUIRED
+          size CDATA #REQUIRED
+          array CDATA #REQUIRED>
 
 <!ELEMENT animation EMPTY>
-<!ATTLIST animation speed CDATA #IMPLIED loop_mode CDATA #IMPLIED >
+<!ATTLIST animation
+          speed CDATA #IMPLIED
+          loop_mode CDATA #IMPLIED >
 
 <!ELEMENT anchor EMPTY>
-<!ATTLIST anchor dx CDATA #REQUIRED dy CDATA #REQUIRED>
+<!ATTLIST anchor
+          dx CDATA #REQUIRED
+          dy CDATA #REQUIRED>
 
 <!ELEMENT attached EMPTY>
-<!ATTLIST attached member_type CDATA #REQUIRED dx CDATA #REQUIRED dy CDATA #REQUIRED frame CDATA #IMPLIED>
+<!ATTLIST attached
+          member_type CDATA #REQUIRED
+          dx CDATA #REQUIRED
+          dy CDATA #REQUIRED
+          frame CDATA #IMPLIED>
 
 <!-- clothe -->
 <!ELEMENT clothe (c_member+)>
-<!ATTLIST clothe name CDATA #REQUIRED layer CDATA #IMPLIED>
+<!ATTLIST clothe
+          name CDATA #REQUIRED
+          layer CDATA #IMPLIED>
 
 <!ELEMENT c_member EMPTY>
 <!ATTLIST c_member
@@ -38,17 +54,25 @@
           
 <!-- alias -->
 <!ELEMENT alias EMPTY>
-<!ATTLIST alias movement CDATA #REQUIRED correspond_to CDATA #IMPLIED>
+<!ATTLIST alias
+          movement CDATA #REQUIRED
+          correspond_to CDATA #IMPLIED>
 
 <!-- movement -->
 <!ELEMENT movement (collision_rect, frame+)>
-<!ATTLIST movement name CDATA #REQUIRED speed CDATA #REQUIRED>
+<!ATTLIST movement
+          name CDATA #REQUIRED
+          speed CDATA #REQUIRED>
 
 <!ELEMENT collision_rect EMPTY>
-<!ATTLIST collision_rect left CDATA #REQUIRED right CDATA #REQUIRED top CDATA #REQUIRED bottom CDATA #REQUIRED>
+<!ATTLIST collision_rect
+          left CDATA #REQUIRED
+          right CDATA #REQUIRED
+          top CDATA #REQUIRED
+          bottom CDATA #REQUIRED>
 
 <!ELEMENT frame (member+)>
-<!ATTLIST frame number CDATA #REQUIRED>
+<!ATTLIST frame number CDATA #IMPLIED>
 
 <!-- WARNING member is common for clothe and frame but does not take same attributes ... !-->
 <!ELEMENT member EMPTY>
