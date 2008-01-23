@@ -300,7 +300,7 @@ msgstr[0] "%s teamo gajnis %u blovfusilon !"
 msgstr[1] "%s teamo gajnis %u blovfusilojn !"
 
 #: src/weapon/snipe_rifle.cpp:241
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
 msgstr[0] "%s teamo gajnis %u tiraljoran fusilon ! Celu inter la okuloj !"
