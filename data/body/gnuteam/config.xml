@@ -138,47 +138,47 @@
 </sprite>
 
 <!-- ###### Legs ###### -->
-<sprite name="foot-left" type="foot-left" on_ground="true">
+<sprite name="foot-left" type="foot-left">
 	<image file="foot.png"/>
 	<anchor dx="5" dy="3"/>
 </sprite>
 
-<sprite name="foot-right" type="foot-right" on_ground="true">
+<sprite name="foot-right" type="foot-right">
 	<image file="foot.png"/>
 	<anchor dx="5" dy="3"/>
 </sprite>
 
 <!-- ###### Jetpack ###### -->
-<sprite name="jetpack-belt" type="jetpack-belt" on_ground="true">
+<sprite name="jetpack-belt" type="jetpack-belt">
 	<image file="jetpack-belt.png"/>
 	<anchor dx="0" dy="0"/>
 </sprite>
 
-<sprite name="jetpack-right" type="jetpack-right" on_ground="true">
+<sprite name="jetpack-right" type="jetpack-right">
 	<image file="jetpack.png"/>
 	<anchor dx="4" dy="10"/>
 	<attached member_type="jetpack-fire-right" frame="*" dx="3" dy="13"/>
 </sprite>
 
-<sprite name="jetpack-left" type="jetpack-left" on_ground="true">
+<sprite name="jetpack-left" type="jetpack-left">
 	<image file="jetpack.png"/>
 	<anchor dx="4" dy="10"/>
 	<attached member_type="jetpack-fire-left" frame="*" dx="3" dy="13"/>
 </sprite>
 
-<sprite name="jetpack-fire-right" type="jetpack-fire-right" on_ground="true">
+<sprite name="jetpack-fire-right" type="jetpack-fire-right">
 	<image file="jetpack-fire.png"/>
 	<anchor dx="2" dy="0"/>
 </sprite>
 
-<sprite name="jetpack-fire-left" type="jetpack-fire-left" on_ground="true">
+<sprite name="jetpack-fire-left" type="jetpack-fire-left">
 	<image file="jetpack-fire.png"/>
 	<anchor dx="2" dy="0"/>
 
 </sprite>
 
 <!-- ###### Helmet ###### -->
-<sprite name="helmet" type="helmet" on_ground="true">
+<sprite name="helmet" type="helmet">
 	<image file="helmet.png"/>
 	<anchor dx="9" dy="13"/>
 </sprite>
@@ -250,11 +250,11 @@
 	<attached member_type="yoyo" frame="*" dx="3" dy="16"/>
 </sprite>
 <!-- Legs -->
-<sprite name="foot-left-black" type="foot-left" on_ground="true">
+<sprite name="foot-left-black" type="foot-left">
 	<image file="b_foot.png"/>
 	<anchor dx="5" dy="3"/>
 </sprite>
-<sprite name="foot-right-black" type="foot-right" on_ground="true">
+<sprite name="foot-right-black" type="foot-right">
 	<image file="b_foot.png"/>
 	<anchor dx="5" dy="3"/>
 </sprite>
