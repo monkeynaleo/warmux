@@ -91,3 +91,6 @@
           follow_direction CDATA #IMPLIED
           follow_cursor (false|true) "false"
           follow_cursor_limit CDATA #IMPLIED>
+
+<!ELEMENT true EMPTY>
+<!ELEMENT false EMPTY>
