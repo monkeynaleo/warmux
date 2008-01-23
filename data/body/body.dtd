@@ -58,7 +58,7 @@
           dy CDATA #IMPLIED
           scale_x CDATA #IMPLIED
           scale_y CDATA #IMPLIED
-          alpha CD_DATA #IMPLIED
+          alpha CDATA #IMPLIED
           angle CDATA #IMPLIED
           follow_crosshair CDATA #IMPLIED
           follow_half_crosshair CDATA #IMPLIED
