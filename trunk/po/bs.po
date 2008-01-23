@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-11-10 21:40+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <local@linux.org.ba>\n"
@@ -36,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i igrač spreman"
 msgstr[1] "%i igrač konektovan"
 
-#: src/game/game.cpp:808
+#: src/game/game.cpp:810
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s tim) je umro."
@@ -62,7 +63,7 @@ msgstr "%s Tim"
 msgid "%s Team - Remote"
 msgstr "%s Tim - Udaljenost"
 
-#: src/game/game.cpp:787
+#: src/game/game.cpp:789
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izvršava samoubistvo !"
@@ -72,29 +73,29 @@ msgstr "%s izvršava samoubistvo !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:780
+#: src/game/game.cpp:782
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s je pao u vodu."
 
-#: src/game/game.cpp:791
+#: src/game/game.cpp:793
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s je ispao sa mape!"
 
-#: src/object/medkit.cpp:78
+#: src/object/medkit.cpp:68
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s je dobio %u poena energije!"
 msgstr[1] "%s je dobio %u poena energije"
 
-#: src/game/game.cpp:802
+#: src/game/game.cpp:804
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopata, ubio je člana %s tima!"
 
-#: src/game/game.cpp:797
+#: src/game/game.cpp:799
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mrtav zato što je smotan!"
@@ -104,7 +105,7 @@ msgstr "%s je mrtav zato što je smotan!"
 msgid "%s is next to a mine!"
 msgstr "%s je pored mine!"
 
-#: src/object/bonus_box.cpp:83
+#: src/object/bonus_box.cpp:78
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s tim već ima neograničenu municiju za %s!"
@@ -144,7 +145,7 @@ msgstr[1] ""
 "%s tim je dobio %u zračnih čekića! Ne pravi previše buke sa njim! Hvala, "
 "tvoje komšije."
 
-#: src/weapon/anvil.cpp:186
+#: src/weapon/anvil.cpp:188
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -200,7 +201,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "%s tim je dobio %u kasatnih bombi!"
 msgstr[1] "%s tim je dobio %u kasatnih bombi!"
 
-#: src/weapon/construct.cpp:75
+#: src/weapon/construct.cpp:81
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -222,7 +223,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s tim je dobio %u dinamita"
 msgstr[1] "%s tim je dobio %u dinamita"
 
-#: src/weapon/flamethrower.cpp:184
+#: src/weapon/flamethrower.cpp:191
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -300,9 +301,10 @@ msgstr[0] "%s tim je dobio %u sačmu!"
 msgstr[1] "%s tim je dobio %u sačmu!"
 
 #: src/weapon/snipe_rifle.cpp:241
-#, c-format
-msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
-msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
+#, fuzzy, c-format
+msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
+msgid_plural ""
+"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] "%s tim je dobio %u snajper! Među oči ga!"
 msgstr[1] "%s tim je dobio %u snajper! Među oči ga!"
 
@@ -353,17 +355,17 @@ msgstr[1] "%s tim je dobio %u tux lanser! Nikad nisi vidio pingvina koji leti?"
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux verzije su drugačije : klijent=%s, server=%s."
 
-#: src/interface/interface.cpp:173
+#: src/interface/interface.cpp:174
 msgid "(dead)"
 msgstr "(mrtav)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:180
+#: src/menu/options_menu.cpp:185
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:205
 msgid "(unlimited)"
 msgstr "(neograničeno)"
 
@@ -379,7 +381,7 @@ msgstr "Zračni čekić"
 msgid "All teams"
 msgstr "Svi timovi"
 
-#: src/game/game.cpp:429
+#: src/game/game.cpp:425
 msgid "And the winner is..."
 msgstr "I pobjednik je ..."
 
@@ -393,7 +395,7 @@ msgstr ""
 "Pucanje: space\n"
 "udarac po redu"
 
-#: src/weapon/anvil.cpp:130
+#: src/weapon/anvil.cpp:132
 msgid "Anvil"
 msgstr "Nakovanj"
 
@@ -405,7 +407,7 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Automatska bazuka"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:52
 msgid "Back to battle"
 msgstr ""
 
@@ -483,7 +485,7 @@ msgstr "Konektuj se na igru"
 msgid "Connected !"
 msgstr "Konektovan !"
 
-#: src/weapon/construct.cpp:53 src/weapon/construct.cpp:61
+#: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
 msgstr "Konstruiraj"
 
@@ -520,7 +522,7 @@ msgstr "Greška u %s:%lu"
 msgid "Error loading team :"
 msgstr "Greška kod očitavanja tima:"
 
-#: src/team/team.cpp:156
+#: src/team/team.cpp:157
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Greška kod očitavanja podataka tima %s :"
@@ -578,16 +580,16 @@ msgstr ""
 msgid "Error: Unable to start server"
 msgstr "Greška: Nemoguće startati server"
 
-#: src/team/team.cpp:119
+#: src/team/team.cpp:120
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
 
-#: src/weapon/flamethrower.cpp:127
+#: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Bacač Plamena"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:83
 msgid "Fullscreen?"
 msgstr "Pun ekran?"
 
@@ -625,11 +627,11 @@ msgid "Head commander"
 msgstr "Vojskovođa"
 
 #. Display player's name
-#: src/interface/interface.cpp:164
+#: src/interface/interface.cpp:165
 msgid "Head commander: "
 msgstr "Vojskovođa:"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
 msgid "Help"
 msgstr ""
 
@@ -665,7 +667,7 @@ msgstr ""
 "Pucaj : drži space do željene jačine udarca\n"
 "municija po redu"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:133
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -674,7 +676,7 @@ msgstr ""
 "Kako koristiti : lijevi klik na metu\n"
 "municija po redu"
 
-#: src/game/game.cpp:844
+#: src/game/game.cpp:848
 msgid "Hurry up, you are too slow !!"
 msgstr "Požuri, previše si spor !!"
 
@@ -714,7 +716,7 @@ msgstr "Inicijaliziranje zvuka"
 msgid "Initialise teams"
 msgstr "Inicijaliziranje timova"
 
-#: src/game/game.cpp:594
+#: src/game/game.cpp:590
 msgid "It's a present!"
 msgstr "Pa to je poklon!"
 
@@ -726,7 +728,7 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Dođi na #wormux na irc.freenode.net da pronađeš protivnika"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:123
 msgid "Language"
 msgstr "Jezik"
 
@@ -760,7 +762,7 @@ msgstr "Mape"
 msgid "Max number of players:"
 msgstr "Maximalan broj igrača:"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:86
 msgid "Maximum FPS"
 msgstr "Maximalaan broj FPS"
 
@@ -793,7 +795,7 @@ msgstr "Najučikovitiji"
 msgid "Most violent"
 msgstr "Najagresivniji"
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:134
 msgid "Music?"
 msgstr "Muzika?"
 
@@ -820,7 +822,7 @@ msgid "Number of characters"
 msgstr "Broj likova"
 
 #. How many teams ?
-#: src/menu/teams_selection_box.cpp:38
+#: src/menu/teams_selection_box.cpp:39
 msgid "Number of teams:"
 msgstr "Broj timova:"
 
@@ -828,7 +830,7 @@ msgstr "Broj timova:"
 msgid "Options"
 msgstr "Opcije"
 
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:56
 #, fuzzy
 msgid "Options menu"
 msgstr "Opcije"
@@ -846,15 +848,15 @@ msgid "Play"
 msgstr "Igraj"
 
 #: src/menu/network_teams_selection_box.cpp:58
-#: src/menu/teams_selection_box.cpp:61
+#: src/menu/teams_selection_box.cpp:51
 msgid "Player"
 msgstr "Igrač"
 
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:77
 msgid "Player energy?"
 msgstr "Prikaži energiju igrača?"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:80
 msgid "Player's name?"
 msgstr "Prikaži ime igrača?"
 
@@ -875,7 +877,7 @@ msgstr "Odustani"
 msgid "Quit Wormux"
 msgstr "Izađi iz Wormux-a"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:64
 msgid "Quit battle"
 msgstr ""
 
@@ -897,7 +899,7 @@ msgstr "Čita lični konfiguracioni podatak"
 msgid "Refresh"
 msgstr "Osvježi"
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:109
 msgid "Resolution"
 msgstr "Rezolucija"
 
@@ -948,11 +950,11 @@ msgstr "Snajper"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, trenutno nema igre koja čeka igrače"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:137
 msgid "Sound effects?"
 msgstr "Zvučni efekti?"
 
-#: src/menu/options_menu.cpp:149
+#: src/menu/options_menu.cpp:156
 msgid "Sound frequency"
 msgstr "Zvučna frekvencija"
 
@@ -965,7 +967,7 @@ msgstr "Zvučne opcije"
 msgid "Starting a new game"
 msgstr "Pokreni novu igru"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:205
 msgid "Stock:"
 msgstr "Zaliha:"
 
@@ -1116,13 +1118,13 @@ msgstr "Oružje:"
 msgid "Website: "
 msgstr "Web stranica:"
 
-#: src/game/game.cpp:805
+#: src/game/game.cpp:807
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Koja sramota za %s - koji je ubijen najobičnijim pištoljem!"
 
 #. Various options
-#: src/menu/options_menu.cpp:71
+#: src/menu/options_menu.cpp:74
 msgid "Wind particles?"
 msgstr "Prikazuj trunke vjetra?"
 
@@ -1165,7 +1167,7 @@ msgstr "Trebate barem dva važeća tima !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nećeš biti u stanju da igraš prije nego izabereš tim!"
 
-#: src/weapon/weapon_launcher.cpp:465
+#: src/weapon/weapon_launcher.cpp:480
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 

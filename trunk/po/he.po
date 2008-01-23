@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-11-08 23:03+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team:  <he@li.org>\n"
@@ -34,7 +35,7 @@ msgid_plural "%i players ready"
 msgstr[0] "שחקן %i מוכן"
 msgstr[1] "%i שחקנים מוכנים"
 
-#: src/game/game.cpp:814
+#: src/game/game.cpp:810
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) נהרג."
@@ -60,7 +61,7 @@ msgstr "צוות %s"
 msgid "%s Team - Remote"
 msgstr "צוות %s - מרוחק"
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:789
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s מאבד עצמו לדעת!"
@@ -70,12 +71,12 @@ msgstr "%s מאבד עצמו לדעת!"
 msgid "%s fps"
 msgstr "%s תמונות בשניה"
 
-#: src/game/game.cpp:786
+#: src/game/game.cpp:782
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s נפל למים."
 
-#: src/game/game.cpp:797
+#: src/game/game.cpp:793
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s נפל מן המפה!"
@@ -87,12 +88,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s זכה ב-%u נקודת אנרגיה!"
 msgstr[1] "%s זכה ב-%u נקודות אנרגיה!"
 
-#: src/game/game.cpp:808
+#: src/game/game.cpp:804
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
 
-#: src/game/game.cpp:803
+#: src/game/game.cpp:799
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s מת כי הוא שלומיאל!"
@@ -293,8 +294,9 @@ msgstr[1] "צוות %s זכה ב-%u רובי שוטגאן!"
 
 #: src/weapon/snipe_rifle.cpp:241
 #, fuzzy, c-format
-msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
-msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
+msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
+msgid_plural ""
+"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] "צוות %s זכה ב-%u רובה צלפים! כוון אל בין העיניים!"
 msgstr[1] "צוות %s זכה ב-%u רובי צלפים! כוון אל בין העיניים!"
 
@@ -345,7 +347,7 @@ msgstr[1] "צוות %s זכה ב-%u משגרי טאקס! אף פעם לא ראי
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s מנסה להתחבר לגרסה אחרת: לקוח=%s, אני=%s."
 
-#: src/interface/interface.cpp:173
+#: src/interface/interface.cpp:174
 msgid "(dead)"
 msgstr "(מת)"
 
@@ -355,7 +357,7 @@ msgid "(system language)"
 msgstr "(שפת מערכת)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:205
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
@@ -371,7 +373,7 @@ msgstr "פטיש אוויר"
 msgid "All teams"
 msgstr "כל הצוותים"
 
-#: src/game/game.cpp:429
+#: src/game/game.cpp:425
 msgid "And the winner is..."
 msgstr "והמנצח..."
 
@@ -491,7 +493,7 @@ msgstr "קרדיטים"
 msgid "Disco Grenade"
 msgstr "רימון דיסקו"
 
-#: src/menu/game_menu.cpp:94
+#: src/menu/game_menu.cpp:95
 msgid "Duration of a turn"
 msgstr "משך תור"
 
@@ -612,7 +614,7 @@ msgid "Head commander"
 msgstr "מפקד"
 
 #. Display player's name
-#: src/interface/interface.cpp:164
+#: src/interface/interface.cpp:165
 msgid "Head commander: "
 msgstr "מפקד: "
 
@@ -662,7 +664,7 @@ msgstr ""
 "לשימוש: קליק שמאלי על המטרה\n"
 "תחמושת לתור"
 
-#: src/game/game.cpp:852
+#: src/game/game.cpp:848
 msgid "Hurry up, you are too slow !!"
 msgstr "קדימה, אתה איטי מדי!!"
 
@@ -674,7 +676,7 @@ msgstr ""
 "אם מצאת באג, או אם אתה מעוניין לבקש הוספת תכונה חדשה, שלח אלינו מסר(באנגלית "
 "בבקשה):"
 
-#: src/menu/game_menu.cpp:100
+#: src/menu/game_menu.cpp:101
 msgid "Initial energy"
 msgstr "אנרגיה ראשונית"
 
@@ -704,7 +706,7 @@ msgstr "מאתחל סאונד"
 msgid "Initialise teams"
 msgstr "מאתחל צוותים"
 
-#: src/game/game.cpp:594
+#: src/game/game.cpp:590
 msgid "It's a present!"
 msgstr "קיבלת מתנה!"
 
@@ -808,7 +810,7 @@ msgid "Number of characters"
 msgstr "מספר דמויותe"
 
 #. How many teams ?
-#: src/menu/teams_selection_box.cpp:38
+#: src/menu/teams_selection_box.cpp:39
 msgid "Number of teams:"
 msgstr "מספר צוותים:"
 
@@ -834,7 +836,7 @@ msgid "Play"
 msgstr "שחק"
 
 #: src/menu/network_teams_selection_box.cpp:58
-#: src/menu/teams_selection_box.cpp:57
+#: src/menu/teams_selection_box.cpp:51
 msgid "Player"
 msgstr "שחקן"
 
@@ -899,7 +901,7 @@ msgstr "הרץ משחק"
 msgid "Say: "
 msgstr "אמור: "
 
-#: src/menu/game_menu.cpp:106
+#: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
 msgstr "גלול על גבול המסך"
 
@@ -951,7 +953,7 @@ msgstr "סאונד"
 msgid "Starting a new game"
 msgstr "מתחיל משחק חדש"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:205
 msgid "Stock:"
 msgstr "מלאי:"
 
@@ -1101,7 +1103,7 @@ msgstr "כלי נשק"
 msgid "Website: "
 msgstr "אתר: "
 
-#: src/game/game.cpp:811
+#: src/game/game.cpp:807
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"
