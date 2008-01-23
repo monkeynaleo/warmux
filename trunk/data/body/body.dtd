@@ -28,11 +28,11 @@
 <!ATTLIST attached member_type CDATA #REQUIRED dx CDATA #REQUIRED dy CDATA #REQUIRED frame CDATA #IMPLIED>
 
 <!-- clothe -->
-<!ELEMENT clothe (member+)>
+<!ELEMENT clothe (c_member+)>
 <!ATTLIST clothe name CDATA #REQUIRED layer CDATA #IMPLIED>
 
-<!ELEMENT member EMPTY>
-<!ATTLIST member
+<!ELEMENT c_member EMPTY>
+<!ATTLIST c_member
           name CDATA #REQUIRED
           layer CDATA #IMPLIED>
           
