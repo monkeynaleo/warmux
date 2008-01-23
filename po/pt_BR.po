@@ -305,7 +305,7 @@ msgstr[0] "A equipe '%s' ganhou %u espingarda!"
 msgstr[1] "A equipe '%s' ganhou %u espingardas!"
 
 #: src/weapon/snipe_rifle.cpp:241
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u snipe rifle! Shoot it him between the eyes!"
 msgid_plural "%s team has won %u snipe rifles! Shoot it him between the eyes!"
 msgstr[0] "A equipe '%s' ganhou %u snipe rifle! Acerte entre os olhos!"
