@@ -62,7 +62,8 @@
 <!ELEMENT movement (collision_rect, frame+)>
 <!ATTLIST movement
           name CDATA #REQUIRED
-          speed CDATA #REQUIRED>
+          speed CDATA #REQUIRED
+          play_mode (play_once|loop) "loop">
 
 <!ELEMENT collision_rect EMPTY>
 <!ATTLIST collision_rect
@@ -87,4 +88,6 @@
           follow_crosshair CDATA #IMPLIED
           follow_half_crosshair CDATA #IMPLIED
           follow_speed CDATA #IMPLIED
-          follow_direction CDATA #IMPLIED>
+          follow_direction CDATA #IMPLIED
+          follow_cursor (true|false) "false"
+          follow_cursor_limit CDATA #IMPLIED>
