@@ -14,7 +14,7 @@
 <!ATTLIST sprite
           name CDATA #REQUIRED
           type CDATA #REQUIRED
-          go_through_ground CDATA #IMPLIED>
+          go_through_ground (false|true) "true">
 
 <!ELEMENT image (grid?)>
 <!ATTLIST image file CDATA #REQUIRED>
@@ -85,9 +85,9 @@
           scale_y CDATA #IMPLIED
           alpha CDATA #IMPLIED
           angle CDATA #IMPLIED
-          follow_crosshair CDATA #IMPLIED
-          follow_half_crosshair CDATA #IMPLIED
-          follow_speed CDATA #IMPLIED
+          follow_crosshair (false|true) "false"
+          follow_half_crosshair (false|true) "false"
+          follow_speed (false|true) "false"
           follow_direction CDATA #IMPLIED
-          follow_cursor (true|false) "false"
+          follow_cursor (false|true) "false"
           follow_cursor_limit CDATA #IMPLIED>
