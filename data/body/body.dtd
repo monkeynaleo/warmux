@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- Definition of the boolean enum values -->
+<!ENTITY % boolean "(false|true)">
 <!ELEMENT true EMPTY>
 <!ELEMENT false EMPTY>
 
@@ -9,6 +10,7 @@
 
 <!-- Definition of some base types... -->
 <!ENTITY % integer "CDATA" >
+<!ENTITY % real "CDATA" >
 
 <!ELEMENT resources (author, alias+, sprite+, clothe+, movement+)>
 
@@ -24,7 +26,7 @@
 <!ATTLIST sprite
           name CDATA #REQUIRED
           type CDATA #REQUIRED
-          go_through_ground (false|true) "true">
+          go_through_ground %boolean; #IMPLIED>
 
 <!ELEMENT image (grid?)>
 <!ATTLIST image file CDATA #REQUIRED>
@@ -55,7 +57,7 @@
 <!ELEMENT clothe (c_member+)>
 <!ATTLIST clothe
           name CDATA #REQUIRED
-          layer CDATA #IMPLIED>
+          layer %integer; #IMPLIED>
 
 <!ELEMENT c_member EMPTY>
 <!ATTLIST c_member
@@ -72,31 +74,30 @@
 <!ELEMENT movement (collision_rect, frame+)>
 <!ATTLIST movement
           name CDATA #REQUIRED
-          speed CDATA #REQUIRED
+          speed %integer; #REQUIRED
           play_mode (play_once|loop) "loop">
 
 <!ELEMENT collision_rect EMPTY>
 <!ATTLIST collision_rect
-          left CDATA #REQUIRED
-          right CDATA #REQUIRED
-          top CDATA #REQUIRED
-          bottom CDATA #REQUIRED>
+          left %integer; #REQUIRED
+          right %integer; #REQUIRED
+          top %integer; #REQUIRED
+          bottom %integer; #REQUIRED>
 
 <!ELEMENT frame (member+)>
-<!ATTLIST frame number CDATA #IMPLIED>
+<!ATTLIST frame number %integer; #IMPLIED>
 
 <!ELEMENT member EMPTY>
 <!ATTLIST member
           type CDATA #REQUIRED
-          dx CDATA #IMPLIED
-          dy CDATA #IMPLIED
-          scale_x CDATA #IMPLIED
-          scale_y CDATA #IMPLIED
-          alpha CDATA #IMPLIED
-          angle CDATA #IMPLIED
-          follow_crosshair (false|true) "false"
-          follow_half_crosshair (false|true) "false"
-          follow_speed (false|true) "false"
+          dx %integer; #IMPLIED
+          dy %integer; #IMPLIED
+          scale_x %real; #IMPLIED
+          scale_y %real; #IMPLIED
+          angle %integer; #IMPLIED
+          follow_crosshair %boolean; #IMPLIED
+          follow_half_crosshair %boolean; #IMPLIED
+          follow_speed %boolean; #IMPLIED
           follow_direction CDATA #IMPLIED
-          follow_cursor (false|true) "false"
-          follow_cursor_limit CDATA #IMPLIED>
+          follow_cursor %boolean; #IMPLIED
+          follow_cursor_limit %integer; #IMPLIED>
