@@ -107,8 +107,8 @@
 	<image file="eyelid.png">
 		<grid pos="0,0" size="9,7" array="7,1" />
 	</image>
-	<animation speed="200" loop_mode="pingpong" />
 	<anchor dx="0" dy="0"/>
+	<animation speed="200" loop_mode="pingpong" />
 </sprite>
 
 <sprite name="pupil-right" type="pupil-right" >
