@@ -36,6 +36,9 @@ void Tile::FreeMem(){
     delete item[i];
   nbr_cell = 0;
   item.clear();
+  if (m_preview)
+    delete m_preview;
+  m_preview = NULL;
 }
 
 Tile::~Tile(){
