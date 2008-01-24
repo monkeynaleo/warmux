@@ -427,7 +427,7 @@ void AIShootModule::SetStrategy(strategy_t new_strategy)
   if (m_current_strategy != new_strategy) {
     MSG_DEBUG("ai", "%s changes his strategy: %d -> %d", 
 	      ActiveCharacter().GetName().c_str(), m_current_strategy, new_strategy);
-    if (IsDEBUGGING("ai")) {
+    if (IsLOGGING("ai")) {
       std::cout << "SetStrategy: " << new_strategy << std::endl;
     }
     m_current_strategy = new_strategy;

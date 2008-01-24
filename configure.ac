@@ -49,6 +49,11 @@ AC_ARG_ENABLE([debug],
               [  --enable-debug          Enable debug in Wormux],
               debug=$enableval,
               debug="")
+AC_ARG_ENABLE([logging],
+              [  --enable-logging        Enable logging in Wormux],
+              logging=$enableval,
+              logging="")
+
 
 AC_ARG_ENABLE([profile],
               [  --enable-profile        Enable profiling],
@@ -162,9 +167,13 @@ if test "x$GCC" = "xyes"; then
   fi
 
   if test "x${debug}" = "xyes"; then
-    GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG"
+    GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG -DWMX_LOG"
   else
     GCC_FLAGS="$GCC_FLAGS -O2"
+  fi
+
+  if test "x${logging}" = "xyes"; then
+    GCC_FLAGS="$GCC_FLAGS -DWMX_LOG"
   fi
 
   dnl Ignore default options set by autoconf
@@ -177,6 +186,11 @@ else
   if test "x${debug}" = "xyes"; then
     CFLAGS="$CFLAGS -DDEBUG"
     CXXFLAGS="$CXXFLAGS -DDEBUG"
+  fi
+
+  if test "x${logging}" = "xyes"; then
+    CFLAGS="$CFLAGS -DWMX_LOG"
+    GCC_FLAGS="$CXXFLAGS -DWMX_LOG"
   fi
 fi
 
