@@ -34,6 +34,7 @@
 using namespace std;
 
 #include <SDL.h>
+#include "ai/ai_engine.h"
 #include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
@@ -94,6 +95,7 @@ AppWormux::~AppWormux()
   Font::ReleaseInstances();
   delete Mouse::GetInstance();
   delete Camera::GetInstance();
+  delete AIengine::GetInstance();
   singleton = NULL;
 }
 
