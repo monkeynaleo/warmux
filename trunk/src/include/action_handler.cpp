@@ -751,7 +751,7 @@ void ActionHandler::Register (Action::Action_t action,
 
 void ActionHandler::Exec(Action *a)
 {
-#ifdef DEBUG
+#ifdef WMX_LOG
   int id=rand();
 #endif
 

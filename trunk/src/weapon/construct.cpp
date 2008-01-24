@@ -103,7 +103,7 @@ void Construct::Draw()
     construct_spr->SetRotation_rad(angle);
     construct_spr->Draw(dst - construct_spr->GetSize() / 2);
 #ifdef DEBUG
-    if (IsDEBUGGING("test_rectangle"))
+    if (IsLOGGING("test_rectangle"))
     {
       Rectanglei test_rect(dst - construct_spr->GetSizeMax() / 2, construct_spr->GetSizeMax());
       test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());

@@ -80,7 +80,7 @@ void Widget::RedrawBackground(const Rectanglei& rect,
       && rect == *this)
     surf.RectangleColor(*this, border_color, border_size);
 
-  if (IsDEBUGGING("widget.border"))
+  if (IsLOGGING("widget.border"))
     surf.RectangleColor(*this, c_red, border_size);
 }
 

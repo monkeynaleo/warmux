@@ -41,8 +41,8 @@ std::vector<std::string> debugModes;
 /**
  * Check if a debug mode is in use
  */
-#ifdef DEBUG
-bool IsDEBUGGING(const char* mode)
+#ifdef WMX_LOG
+bool IsLOGGING(const char* mode)
 {
   int mSize = strlen(mode);
   unsigned int i = 0;
@@ -74,7 +74,7 @@ bool IsDEBUGGING(const char* mode)
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...)
 {
-  if (debug_all || IsDEBUGGING(level)) {
+  if (debug_all || IsLOGGING(level)) {
       va_list argp;
       int pid = (int)getpid();
 

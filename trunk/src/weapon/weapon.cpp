@@ -533,7 +533,7 @@ void Weapon::Draw(){
     m_image->Blit( AppWormux::GetInstance()->video->window, Point2i(x, y) - Camera::GetInstance()->GetPosition());
 
 #ifdef DEBUG
-  if (IsDEBUGGING("weapon")) {
+  if (IsLOGGING("weapon")) {
     Rectanglei rect(ActiveCharacter().GetHandPosition().GetX()-1 - Camera::GetInstance()->GetPositionX(),
 		    ActiveCharacter().GetHandPosition().GetY()-1 - Camera::GetInstance()->GetPositionY(),
 		    3,
