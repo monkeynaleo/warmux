@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2008-01-18 00:03+0100\n"
 "Last-Translator: Kurosu <kurosu@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -1096,7 +1095,7 @@ msgstr "Impossible d'ouvrir le répertoire des terrains (%s) !"
 #: src/map/maps_list.cpp:263
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
-msgstr "Impossible d'ouvrir le répertoire personnels des terrains (%s) !"
+msgstr "Impossible d'ouvrir le répertoire personnel des terrains (%s) !"
 
 #: src/network/net_error_msg.cpp:40
 msgid "Unable to use this port!"
