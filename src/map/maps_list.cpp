@@ -194,14 +194,14 @@ void InfoMap::FreeData()
   is_data_loaded = false;
 }
 
-Surface InfoMap::ReadImgGround()
+Surface& InfoMap::ReadImgGround()
 {
   LoadBasicInfo();
   LoadData();
   return img_ground;
 }
 
-Surface InfoMap::ReadImgSky()
+Surface& InfoMap::ReadImgSky()
 {
   LoadBasicInfo();
   LoadData();

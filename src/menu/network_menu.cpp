@@ -60,7 +60,7 @@ NetworkMenu::NetworkMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i pointZero(-1, -1);
 
-  Surface window = AppWormux::GetInstance()->video->window;
+  Surface& window = AppWormux::GetInstance()->video->window;
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;

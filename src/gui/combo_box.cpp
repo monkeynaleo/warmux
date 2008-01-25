@@ -82,7 +82,7 @@ void ComboBox::SetSizePosition(const Rectanglei &rect)
 
 void ComboBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
-  Surface video_window = AppWormux::GetInstance()->video->window;
+  Surface& video_window = AppWormux::GetInstance()->video->window;
 
   //  the computed positions are to center on the image part of the widget
 

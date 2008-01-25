@@ -95,8 +95,8 @@ public:
   const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; };
   std::string GetConfigFilepath() const;
 
-  Surface ReadImgGround();
-  Surface ReadImgSky();
+  Surface& ReadImgGround();
+  Surface& ReadImgSky();
   const Surface& ReadPreview() { LoadBasicInfo(); return preview; };
 
   const struct s_wind& GetWind() const { return wind; }; 
