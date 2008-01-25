@@ -31,14 +31,14 @@ PictureWidget::PictureWidget (const Point2i& _size)
   disabled = false;
 }
 
-PictureWidget::PictureWidget (const Point2i& _size, const std::string& resource_id)
+PictureWidget::PictureWidget (const Point2i& _size, const std::string& resource_id, bool scale)
 {
   size = _size;
   spr = NULL;
   disabled = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  SetSurface(resource_manager.LoadImage(res, resource_id), false);
+  SetSurface(resource_manager.LoadImage(res, resource_id), scale, scale);
   resource_manager.UnLoadXMLProfile( res);
 }
 
