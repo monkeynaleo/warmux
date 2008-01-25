@@ -33,6 +33,7 @@
 #include "gui/big/button_pic.h"
 #include "include/app.h"
 #include "menu/options_menu.h"
+#include "menu/help_menu.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
@@ -57,9 +58,9 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
 				  "menu/ico_options_menu", size);
   box->AddWidget(bt_options_menu);
 
-  bt_help = new ButtonPic(_("Help"),
+  bt_help_menu = new ButtonPic(_("Help"),
  			  "menu/ico_help", size);
-  box->AddWidget(bt_help);
+  box->AddWidget(bt_help_menu);
 
   bt_main_menu = new ButtonPic(_("Quit battle"),
 			       "menu/ico_quit_battle", size);
@@ -93,6 +94,13 @@ void PauseMenu::RunOptionsMenu()
   close_menu = true;
 }
 
+void PauseMenu::RunHelpMenu()
+{
+  HelpMenu menu;
+  menu.Run();
+  close_menu = true;
+}
+
 bool PauseMenu::signal_ok()
 {
   bool r = false;
@@ -104,6 +112,8 @@ bool PauseMenu::signal_ok()
     BackToGame();
   } else if (w == bt_options_menu) {
     RunOptionsMenu();
+  } else if (w == bt_help_menu) {
+    RunHelpMenu();
   }
 
   return r;
@@ -135,6 +145,8 @@ void PauseMenu::OnClickUp(const Point2i &mousePosition, int button)
       BackToGame();
     } else if (bt_options_menu->Contains(mousePosition)) {
       RunOptionsMenu();
+    } else if (bt_help_menu->Contains(mousePosition)) {
+      RunHelpMenu();
     }
   }
 }

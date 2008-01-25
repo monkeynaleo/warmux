@@ -34,7 +34,7 @@ class PauseMenu : public Menu
 
   ButtonPic * bt_continue_play;
   ButtonPic * bt_options_menu;
-  ButtonPic * bt_help;
+  ButtonPic * bt_help_menu;
   ButtonPic * bt_main_menu;
 
 
@@ -44,6 +44,7 @@ class PauseMenu : public Menu
   void BackToMainMenu();
   void BackToGame();
   void RunOptionsMenu();
+  void RunHelpMenu();
 
   void Draw(const Point2i &mousePosition);
 
