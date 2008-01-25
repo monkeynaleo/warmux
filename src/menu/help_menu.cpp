@@ -19,15 +19,24 @@
  * Help Menu
  *****************************************************************************/
 
-#include "menu/help_menu.h"
+#include "include/app.h"
+#include "graphic/video.h"
 #include "gui/box.h"
 #include "gui/picture_widget.h"
+#include "menu/help_menu.h"
+
+static const uint BORDER        = 20;
+static const uint CHECKBOX_SIZE = 50;
 
 HelpMenu::HelpMenu()  :
   Menu("help/background", vOk)
 {
-  Box * help = new HBox(800);
-  help->AddWidget(new PictureWidget(Point2i(800, 548), "help/help_shortkeys"));
+  Point2i size = AppWormux::GetInstance()->video->window.GetSize()
+               - Point2i(2*BORDER,2*BORDER+CHECKBOX_SIZE);
+  PictureWidget *help_image = new PictureWidget(size, "help/help_shortkeys", true);
+  VBox *help = new VBox(size.x);
+  help->SetXY(BORDER, BORDER);
+  help->AddWidget(help_image);
   widgets.AddWidget(help);
 }
 
