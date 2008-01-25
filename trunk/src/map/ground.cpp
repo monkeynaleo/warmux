@@ -44,7 +44,7 @@ void Ground::Init(){
   std::cout.flush();
 
   // Load ground data
-  Surface m_image = ActiveMap()->ReadImgGround();
+  Surface& m_image = ActiveMap()->ReadImgGround();
   if(ActiveMap()->IsOpened()) {
     LoadImage(m_image, ActiveMap()->GetUpperLeftPad(), ActiveMap()->GetLowerRightPad());
   } else {

@@ -62,7 +62,7 @@ void LoadingScreen::DrawBackground()
 void LoadingScreen::StartLoading(uint nb, const std::string& resource,
                                  const std::string& label) const
 {
-  Surface image = resource_manager.LoadImage(res, "loading_screen/"+resource);
+  const Surface& image = resource_manager.LoadImage(res, "loading_screen/"+resource);
 
   int slot_margin_x = (120/2 - image.GetWidth()/2);
   int x = (AppWormux::GetInstance()->video->window.GetWidth()/2)- (3*120) + nb*120;

@@ -52,7 +52,7 @@ PictureTextCBox::PictureTextCBox(const std::string &label,
 
 void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
-  Surface video_window = AppWormux::GetInstance()->video->window;
+  Surface& video_window = AppWormux::GetInstance()->video->window;
 
   if (m_value)
     {
