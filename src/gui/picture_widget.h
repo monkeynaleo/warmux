@@ -41,7 +41,7 @@ class PictureWidget : public Widget
 
  public:
   PictureWidget(const Point2i& size);
-  PictureWidget(const Point2i& size, const std::string& resource_id);
+  PictureWidget(const Point2i& size, const std::string& resource_id, bool scale=false);
   ~PictureWidget();
   void SetSurface(const Surface& s, bool enable_scaling=false, bool antialiasing=false);
   void SetNoSurface();
