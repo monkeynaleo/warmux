@@ -107,7 +107,7 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 
    for( f.y = 0; f.y < nb_frames_y; f.y++)
      for( f.x = 0; f.x < nb_frames_x; f.x++){
-       Surface new_surf = Surface(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
+       Surface new_surf(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
        Rectanglei sr(f * frameSize, frameSize);
 
        new_surf.Blit( surface, sr, Point2i(0, 0));

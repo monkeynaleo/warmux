@@ -153,7 +153,7 @@ MouseCursor ResourceManager::LoadMouseCursor(const Profile *profile, const std::
 Surface ResourceManager::LoadImage(const std::string& filename,
         bool alpha, bool set_colorkey, Uint32 colorkey) const
 {
-  Surface pre_surface = Surface(filename.c_str());
+  Surface pre_surface(filename.c_str());
   Surface end_surface;
 
   if(set_colorkey)
