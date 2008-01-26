@@ -105,12 +105,8 @@ Font::~Font(){
 
   txt_iterator it;
 
-  for( it = surface_text_table.begin();
-       it != surface_text_table.end();
-       ++it ){
-    //SDL_FreeSurface(it->second);
-    surface_text_table.erase(it->first);
-  }
+  // Fix bug #10866 and also fix memory leak.
+  surface_text_table.clear();
 }
 
 void Font::ReleaseInstances(void)
