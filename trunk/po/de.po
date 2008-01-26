@@ -1,15 +1,15 @@
 # translation of de.po to German
 # This file is distributed under the same license as the Wormux package.
 # Copyright (C) 2001-2004 Lawrence Azzoug
-# 
+#
 # Michael Prager <X_X_L@gmx.net>, 2004, 2006.
-# Reiner Herrmann <reiner@reiner-h.de>, 2006, 2007.
+# Reiner Herrmann <reiner@reiner-h.de>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2008-01-24 01:37+0200\n"
-"PO-Revision-Date: 2007-08-24 11:53+0200\n"
+"PO-Revision-Date: 2008-01-26 10:08+0100\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -175,8 +175,7 @@ msgstr[1] "Mannschaft %s hat %u Bazookas gewonnen!"
 
 #: src/weapon/blowtorch.cpp:146
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -195,7 +194,7 @@ msgstr[0] "Mannschaft %s hat %u Springball gewonnen! Boing!"
 msgstr[1] "Mannschaft %s hat %u Springbälle gewonnen! Boing!"
 
 #: src/weapon/cluster_bomb.cpp:176
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Mannschaft %s hat %u Splittergranate gewonnen!"
@@ -205,16 +204,13 @@ msgstr[1] "Mannschaft %s hat %u Splittergranaten gewonnen!"
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] ""
-"Mannschaft %s hat %u Konstruktion gewonnen! Vergiss deinen Helm nicht."
-msgstr[1] ""
-"Mannschaft %s hat %u Konstruktionen gewonnen! Vergiss deinen Helm nicht."
+msgstr[0] "Mannschaft %s hat %u Konstruktion gewonnen! Vergiss deinen Helm nicht."
+msgstr[1] "Mannschaft %s hat %u Konstruktionen gewonnen! Vergiss deinen Helm nicht."
 
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] ""
 "Mannschaft %s hat %u Diskogranate gewonnen! Schwing deinen Körper nach dem "
 "Wurf!"
@@ -230,18 +226,18 @@ msgstr[0] "Mannschaft %s hat %u Dynamit gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Dynamit gewonnen!"
 
 #: src/weapon/flamethrower.cpp:191
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
-msgstr[0] "Mannschaft %s hat %u Dynamit gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Dynamit gewonnen!"
+msgstr[0] "Mannschaft %s hat %u Flammenwerfer gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Flammenwerfer gewonnen!"
 
 #: src/weapon/grapple.cpp:723
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
-msgstr[0] "Mannschaft %s hat %u Grapple gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Grapple gewonnen!"
+msgstr[0] "Mannschaft %s hat %u Enterhaken gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Enterhaken gewonnen!"
 
 #: src/weapon/grenade.cpp:90
 #, c-format
@@ -268,10 +264,8 @@ msgstr[1] "Mannschaft %s hat %u Jetpacks gewonnen! Sehr cool!"
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] ""
-"Mannschaft %s hat %u Geringe Schwerkraft gewonnen! Ich bin Neil Armstrong!"
-msgstr[1] ""
-"Mannschaft %s hat %u Geringe Schwerkraft gewonnen! Ich bin Neil Armstrong!"
+msgstr[0] "Mannschaft %s hat %u Geringe Schwerkraft gewonnen! Ich bin Neil Armstrong!"
+msgstr[1] "Mannschaft %s hat %u Geringe Schwerkraft gewonnen! Ich bin Neil Armstrong!"
 
 #: src/weapon/mine.cpp:247
 #, c-format
@@ -291,10 +285,8 @@ msgstr[1] "Mannschaft %s hat %u Fallschirme gewonnen!"
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
-msgstr[0] ""
-"Mannschaft %s hat %u Stinktier gewonnen! Du hast deine Gasmaske dabei, oder?"
-msgstr[1] ""
-"Mannschaft %s hat %u Stinktiere gewonnen! Du hast deine Gasmaske dabei, oder?"
+msgstr[0] "Mannschaft %s hat %u Stinktier gewonnen! Du hast deine Gasmaske dabei, oder?"
+msgstr[1] "Mannschaft %s hat %u Stinktiere gewonnen! Du hast deine Gasmaske dabei, oder?"
 
 #: src/weapon/riot_bomb.cpp:133
 #, c-format
@@ -311,15 +303,14 @@ msgstr[0] "Mannschaft %s hat %u Schrotflinte gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Schrotflinten gewonnen!"
 
 #: src/weapon/snipe_rifle.cpp:241
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural ""
-"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] ""
-"Mannschaft %s hat %u Scharfschützengewehr gewonnen! Schieß ihm zwischen die "
+"Mannschaft %s hat %u Scharfschützengewehr gewonnen! Ziel und schieß ihm zwischen die "
 "Augen!"
 msgstr[1] ""
-"Mannschaft %s hat %u Scharfschützengewehre gewonnen! Schieß ihm zwischen die "
+"Mannschaft %s hat %u Scharfschützengewehre gewonnen! Ziel und schieß ihm zwischen die "
 "Augen!"
 
 #: src/weapon/submachine_gun.cpp:156
@@ -354,10 +345,8 @@ msgstr[1] "Mannschaft %s hat %u Teleportationen gewonnen!"
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] ""
-"Mannschaft %s hat %u Rundensprung gewonnen! Ich weiß dass du es liebst."
-msgstr[1] ""
-"Mannschaft %s hat %u Rundensprünge gewonnen! Ich weiß dass du es liebst."
+msgstr[0] "Mannschaft %s hat %u Rundensprung gewonnen! Ich weiß dass du es liebst."
+msgstr[1] "Mannschaft %s hat %u Rundensprünge gewonnen! Ich weiß dass du es liebst."
 
 #: src/weapon/supertux.cpp:313
 #, c-format
@@ -373,8 +362,7 @@ msgstr[1] ""
 #: src/include/action_handler.cpp:328
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-"%s versucht mit einer anderen Version zu verbinden: Client=%s, Server=%s."
+msgstr "%s versucht mit einer anderen Version zu verbinden: Client=%s, Server=%s."
 
 #: src/interface/interface.cpp:174
 msgid "(dead)"
@@ -430,7 +418,7 @@ msgstr "Lenkrakete"
 
 #: src/menu/pause_menu.cpp:52
 msgid "Back to battle"
-msgstr ""
+msgstr "Zurück zur Schlacht"
 
 #: src/network/net_error_msg.cpp:43
 msgid "Bad socket ..."
@@ -474,7 +462,7 @@ msgstr "Kann das Mannschaftenverzeichnis (%s) nicht öfnen!"
 
 #: src/menu/map_selection_box.cpp:242
 msgid "Choose randomly between the different maps"
-msgstr ""
+msgstr "Eine Karte zufällig auswählen"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:101
@@ -550,8 +538,7 @@ msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
 
 #: src/game/config.cpp:392
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
@@ -592,8 +579,7 @@ msgstr "Fehler: Kann Indexserver nicht kontaktieren um ein Spiel zu hosten"
 
 #: src/menu/network_connection_menu.cpp:249
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr ""
-"Fehler: Kann Indexserver nicht kontaktieren um ein Internetspiel zu suchen"
+msgstr "Fehler: Kann Indexserver nicht kontaktieren um ein Internetspiel zu suchen"
 
 #: src/menu/network_connection_menu.cpp:226
 msgid "Error: Unable to start server"
@@ -606,7 +592,7 @@ msgstr "Fehler: kann den Körper \"%s\" für Mannschaft \"%s\" nicht finden."
 
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
-msgstr ""
+msgstr "Flammenwerfer"
 
 #: src/menu/options_menu.cpp:83
 msgid "Fullscreen?"
@@ -617,9 +603,8 @@ msgid "Gnu Launcher"
 msgstr "Gnu-Werfer"
 
 #: src/weapon/grapple.cpp:120
-#, fuzzy
 msgid "Grapple"
-msgstr "Grapple"
+msgstr "Enterhaken"
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -635,8 +620,7 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:125
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr ""
-"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:102
@@ -654,14 +638,13 @@ msgstr "Hauptkommandant:"
 
 #: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
 msgid "Help"
-msgstr ""
+msgstr "Hilfe"
 
 #: src/menu/network_connection_menu.cpp:161
 msgid "Host a game"
 msgstr "Spiel hosten"
 
 #: src/weapon/blowtorch.cpp:63
-#, fuzzy
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -672,7 +655,6 @@ msgstr ""
 "eine Munition pro Runde"
 
 #: src/weapon/airhammer.cpp:75
-#, fuzzy
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -681,7 +663,6 @@ msgstr ""
 "eine Munition pro Runde"
 
 #: src/weapon/auto_bazooka.cpp:221
-#, fuzzy
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -694,7 +675,6 @@ msgstr ""
 "eine Munition pro Runde"
 
 #: src/weapon/anvil.cpp:133
-#, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -719,7 +699,6 @@ msgid "Initial energy"
 msgstr "Startenergie"
 
 #: src/weapon/bazooka.cpp:124 src/weapon/riot_bomb.cpp:121
-#, fuzzy
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -808,7 +787,6 @@ msgid "Most clumsy"
 msgstr "Am tollpatschigsten"
 
 #: src/menu/results_menu.cpp:270
-#, fuzzy
 msgid "Most sold-out"
 msgstr "Am verräterischsten"
 
@@ -852,16 +830,15 @@ msgstr "Anzahl der Figuren"
 #. How many teams ?
 #: src/menu/teams_selection_box.cpp:39
 msgid "Number of teams:"
-msgstr "Anzahl der Mannschaften"
+msgstr "Anzahl der Mannschaften:"
 
 #: src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "Einstellungen"
 
 #: src/menu/pause_menu.cpp:56
-#, fuzzy
 msgid "Options menu"
-msgstr "Einstellungen"
+msgstr "Einstellungs Menü"
 
 #: src/weapon/parachute.cpp:65
 msgid "Parachute"
@@ -907,12 +884,11 @@ msgstr "Wormux verlassen"
 
 #: src/menu/pause_menu.cpp:64
 msgid "Quit battle"
-msgstr ""
+msgstr "Schlacht verlassen"
 
 #: src/menu/map_selection_box.cpp:241
-#, fuzzy
 msgid "Random map"
-msgstr "Lade Karten:"
+msgstr "Zufällige Karte"
 
 #: src/game/config.cpp:280
 msgid "Reading default config file"
@@ -1030,8 +1006,7 @@ msgstr "Das Gnu hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/polecat.cpp:148
 msgid "The Polecat left the battlefield before exploding"
-msgstr ""
-"Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
+msgstr "Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
@@ -1049,13 +1024,11 @@ msgstr ""
 
 #: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
-msgstr ""
-"Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
+msgstr "Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
-msgstr ""
-"Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
+msgstr "Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
 
 #: src/menu/network_menu.cpp:320
 msgid "The others are waiting for you! Wake up :-)"
@@ -1077,7 +1050,6 @@ msgstr[0] "Es gibt nur %i Mannschaft."
 msgstr[1] "Es gibt nur %i Mannschaften."
 
 #: src/weapon/cluster_bomb.cpp:159
-#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1090,7 +1062,6 @@ msgstr ""
 "eine Munition pro Runde"
 
 #: src/weapon/bounce_ball.cpp:90
-#, fuzzy
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1116,9 +1087,9 @@ msgid "Unable to open maps directory (%s)!"
 msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
 
 #: src/map/maps_list.cpp:263
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open personal maps directory (%s)!"
-msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
+msgstr "Kann das persönliche Karten-Verzeichnis (%s) nicht öffnen!"
 
 #: src/network/net_error_msg.cpp:40
 msgid "Unable to use this port!"
@@ -1126,7 +1097,7 @@ msgstr "Kann diesen Port nicht verwenden!"
 
 #: src/network/network.cpp:109
 msgid "Unnamed"
-msgstr ""
+msgstr "Namenlos"
 
 #: src/main.cpp:193
 msgid "Version"
@@ -1176,9 +1147,9 @@ msgid "Wormux version "
 msgstr "Wormux Version "
 
 #: src/map/maps_list.cpp:91
-#, fuzzy, c-format
+#, c-format
 msgid "XML error during loading map '%s': "
-msgstr "XML Fehler beim Laden der Karte '%s ':"
+msgstr "XML Fehler beim Laden der Karte '%s':"
 
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
@@ -1220,25 +1191,23 @@ msgstr ""
 
 #: src/map/maps_list.cpp:79
 msgid "couldn't load config"
-msgstr ""
+msgstr "konnte Konfiguration nicht laden"
 
 #: src/map/ground.cpp:60
 msgid "done"
 msgstr "fertig"
 
 #: src/map/maps_list.cpp:86
-#, fuzzy
 msgid "error parsing the config file"
-msgstr "Lese Standard-Konfigurationsdatei"
+msgstr "Fehler beim Parsen der Konfigurationsdatei"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "aus"
 
 #: src/map/maps_list.cpp:75
-#, fuzzy
 msgid "no configuration file!"
-msgstr "Fehler beim Laden der Konfigurationsdatei: %s"
+msgstr "keine Konfigurationsdatei vorhanden!"
 
 #: src/sound/jukebox.cpp:157
 msgid "o Loading music"
@@ -1254,12 +1223,3 @@ msgstr "o Lade Sound Profil: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
 
-#~ msgid "Do you really want to quit? (Y/N)"
-#~ msgstr "Wollen Sie das Programm wirklich beenden? (J/N)"
-
-#, fuzzy
-#~ msgid "Network deinitialization"
-#~ msgstr "Netzwerk Initialisierung"
-
-#~ msgid "(current)"
-#~ msgstr "(aktuell)"
