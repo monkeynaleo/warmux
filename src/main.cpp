@@ -45,6 +45,7 @@ using namespace std;
 #include "graphic/text.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
+#include "interface/interface.h"
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -96,6 +97,7 @@ AppWormux::~AppWormux()
   delete Mouse::GetInstance();
   delete Camera::GetInstance();
   AIengine::CleanUp();
+  Interface::CleanUp();
   singleton = NULL;
 }
 
