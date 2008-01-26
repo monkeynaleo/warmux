@@ -17,6 +17,8 @@ wormux_SOURCES = \
         character/movement.cpp character/movement.h \
         game/config.cpp game/config.h \
         game/game.cpp game/game.h \
+        game/game_blitz.cpp game/game_blitz.h \
+        game/game_classic.cpp game/game_classic.h \
         game/game_init.cpp game/game_init.h \
         game/game_mode.cpp game/game_mode.h \
         game/time.cpp game/time.h \

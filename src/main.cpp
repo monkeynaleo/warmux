@@ -298,6 +298,7 @@ void ParseArgs(int argc, char * argv[])
   struct option long_options[] =
     {
       {"help",    no_argument,       NULL, 'h'},
+      {"blitz",   no_argument,       NULL, 'b'},
       {"version", no_argument,       NULL, 'v'},
       {"play",    no_argument,       NULL, 'p'},
       {"internet",no_argument,       NULL, 'i'},
@@ -307,7 +308,7 @@ void ParseArgs(int argc, char * argv[])
       {NULL,      no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hvpic::sd:",
+  while ((c = getopt_long (argc, argv, "hbvpic::sd:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
@@ -319,6 +320,9 @@ void ParseArgs(int argc, char * argv[])
           printf("\nWith :\n");
           printf(" <debug_msg> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body_anim | body.state | bonus | box | camera.follow | camera.tracking | character | damage | downloader | explosion | game | game.endofturn | game_mode | game.statechange | ghost | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.play | lst_objects | map | map.load | map.random | menu | mine | mouse | network | network.crc | network.crc_bad | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | random | random.get | socket | sprite | team | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | wind }\n");
           exit(0);
+          break;
+        case 'b':
+          Game::SetMode(Game::BLITZ);
           break;
         case 'v':
           DisplayWelcomeMessage();
