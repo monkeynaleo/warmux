@@ -29,6 +29,8 @@ class AIengine
 
  public:
   static AIengine* GetInstance();
+  static void CleanUp() { if (singleton) delete singleton; singleton = 0; };
+
   void Refresh() const;
 };
 

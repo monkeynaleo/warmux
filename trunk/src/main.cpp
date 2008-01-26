@@ -95,7 +95,7 @@ AppWormux::~AppWormux()
   Font::ReleaseInstances();
   delete Mouse::GetInstance();
   delete Camera::GetInstance();
-  delete AIengine::GetInstance();
+  AIengine::CleanUp();
   singleton = NULL;
 }
 
