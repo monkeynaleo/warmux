@@ -138,6 +138,7 @@ unsigned char *Surface::GetPixels() const{
 Surface &Surface::operator=(const Surface & src){
   AutoFree();
   surface = src.surface;
+  autoFree = true;
   if( !IsNull() )
     surface->refcount++;
 
