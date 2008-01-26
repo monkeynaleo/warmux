@@ -31,6 +31,7 @@
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
+#include "network/network.h"
 #include "object/objbox.h"
 #include "object/bonus_box.h"
 #include "object/medkit.h"

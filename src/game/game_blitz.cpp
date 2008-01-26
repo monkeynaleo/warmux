@@ -31,6 +31,7 @@
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
+#include "network/network.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
