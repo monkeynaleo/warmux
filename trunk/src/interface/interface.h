@@ -95,6 +95,7 @@ public:
 
  public:
    static Interface *GetInstance();
+   static void CleanUp() { if (singleton) delete singleton; singleton = NULL; }
    const WeaponsMenu &GetWeaponsMenu() const { return weapons_menu; };
 
    void Reset();
