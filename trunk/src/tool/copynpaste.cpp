@@ -18,7 +18,9 @@
  ******************************************************************************
  * Retrieve string pasted depending on OS mechanisms.
  *****************************************************************************/
-#ifdef HAVE_CONFIG_H
+#ifdef _MSC_VER
+#  include "msvc/config.h"
+#elif defined(HAVE_CONFIG_H)
 #  include "config.h"
 #endif
 

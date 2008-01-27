@@ -27,7 +27,11 @@
 #include <string>
 #include <libintl.h>
 
-#include "config.h"
+#ifdef _MSC_VER
+#  include "msvc/config.h"
+#else
+#  include "config.h"
+#endif
 
 #ifdef USE_FRIBIDI
 #define _(X) localization(X)
