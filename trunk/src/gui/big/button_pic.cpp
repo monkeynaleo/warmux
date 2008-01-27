@@ -42,6 +42,12 @@ ButtonPic::ButtonPic(const std::string &label,
   txt_label->SetMaxWidth (GetSizeX());
 }
 
+ButtonPic::~ButtonPic()
+{
+  if (txt_label)
+    delete txt_label;
+}
+
 void ButtonPic::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   // center the image horizontally
