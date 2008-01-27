@@ -55,16 +55,16 @@
 #define PACKAGE_NAME "Wormux"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Wormux 0.8beta3"
+#define PACKAGE_STRING "Wormux 0.8svn"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "wormux"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.8beta3"
+#define PACKAGE_VERSION "0.8svn"
 
 /* ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.8beta3"
+#define VERSION "0.8svn"
