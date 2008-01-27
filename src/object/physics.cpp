@@ -165,7 +165,7 @@ void Physics::GetValueFromAction(Action *a)
   m_rope_elasticity    = a->PopDouble();
   m_elasticity_damping = a->PopDouble();
   m_balancing_damping  = a->PopDouble();
-  m_elasticity_off     = a->PopInt();
+  m_elasticity_off     = !!a->PopInt();
 }
 
 void Physics::SetExternForceXY (const Point2d& vector)
