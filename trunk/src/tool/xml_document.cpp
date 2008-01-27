@@ -292,7 +292,7 @@ bool XmlWriter::Save()
   m_save = true;
   try {
     m_doc->write_to_file_formatted(m_filename, m_encoding);
-  } catch (const xmlpp::exception &err) {
+  } catch (const xmlpp::exception &) {
     return false;
   }
   return true;
