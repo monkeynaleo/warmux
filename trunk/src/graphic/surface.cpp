@@ -662,7 +662,7 @@ int Surface::ImgSave(const std::string& filename){
 * (because we juste need an index in array, not an angle) */
 static const double ratio_deg_to_rad = 180 / M_PI;
 Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
-  Surface newSurf;
+  SDL_Surface *surf;
 
 #ifdef BUGGY_SDLGFX
   /* From SDLGFX website, 
@@ -675,44 +675,40 @@ Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
 #endif
 
   if (fabs(angle) < EPS_ZERO)
-    newSurf.SetSurface( zoomSurface(surface, zoomx, zoomy, smooth) );
+    surf = zoomSurface(surface, zoomx, zoomy, smooth);
   else if (zoomx == zoomy && zoomx > 0.0)
-    newSurf.SetSurface( rotozoomSurface(surface, angle * ratio_deg_to_rad , zoomx, smooth) );
+    surf = rotozoomSurface(surface, angle * ratio_deg_to_rad , zoomx, smooth);
   else
-    newSurf.SetSurface( rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth) );
+    surf = rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth);
 
-  if( newSurf.IsNull() )
+  if(!surf)
     Error( "Unable to make a rotozoom on the surface !" );
 
-  return newSurf;
+  return Surface(surf);
 }
 
 /**
  *
  */
 Surface Surface::DisplayFormatAlpha(){
-  Surface newSurf;
+  SDL_Surface *surf = SDL_DisplayFormatAlpha(surface);
 
-  newSurf.SetSurface( SDL_DisplayFormatAlpha( surface ) );
-
-  if( newSurf.IsNull() )
+  if( !surf )
     Error( "Unable to convert the surface to a surface compatible with the display format with alpha." );
 
-  return newSurf;
+  return Surface(surf);
 }
 
 /**
  *
  */
 Surface Surface::DisplayFormat(){
-  Surface newSurf;
+  SDL_Surface *surf = SDL_DisplayFormat(surface);
 
-  newSurf.SetSurface( SDL_DisplayFormat( surface ) );
-
-  if( newSurf.IsNull() )
+  if( !surf )
     Error( "Unable to convert the surface to a surface compatible with the display format." );
 
-  return newSurf;
+  return Surface(surf);
 }
 
 
