@@ -180,6 +180,10 @@ WeaponsMenu::~WeaponsMenu()
     delete tools_menu;
   if(help)
     delete help;
+  if (sprite)
+    delete sprite;
+  if (nb_weapon_type)
+    delete nb_weapon_type;
 }
 
 // Add a new weapon to the weapon menu.
