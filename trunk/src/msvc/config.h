@@ -10,6 +10,7 @@
 #define HAVE_GETTEXT 1
 
 /* iconv() function. */
+#include <iconv.h>
 #define HAVE_ICONV 1
 
 /* `SDL_gfx' library (-lSDL_gfx). */
