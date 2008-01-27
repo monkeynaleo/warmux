@@ -180,8 +180,8 @@ WeaponsMenu::~WeaponsMenu()
     delete tools_menu;
   if(help)
     delete help;
-  if (sprite)
-    delete sprite;
+  if (cross)
+    delete cross;
   if (nb_weapon_type)
     delete nb_weapon_type;
 }
