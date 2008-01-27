@@ -183,7 +183,7 @@ WeaponsMenu::~WeaponsMenu()
   if (cross)
     delete cross;
   if (nb_weapon_type)
-    delete nb_weapon_type;
+    delete[] nb_weapon_type;
 }
 
 // Add a new weapon to the weapon menu.
