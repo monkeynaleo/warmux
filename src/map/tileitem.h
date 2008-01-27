@@ -52,12 +52,16 @@ public:
 class TileItem_Empty : public TileItem
 {
 public:
-  TileItem_Empty () {};
-  ~TileItem_Empty () {};
+  TileItem_Empty () { empty = NULL; };
+  ~TileItem_Empty () { if (empty) delete empty; };
 
+  Surface *empty;
   unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
   void Dig(const Point2i &/*position*/, const Surface& /*dig*/){};
-  Surface GetSurface(){return *new Surface();};
+  Surface GetSurface() {
+    if (!empty) empty = new Surface();
+    return *empty;
+  };
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i &pos);
   bool IsTotallyEmpty() const {return true;};
