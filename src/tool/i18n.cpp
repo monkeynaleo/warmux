@@ -26,11 +26,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "tool/debug.h"
-#ifdef _MSC_VER
-#  include "msvc/config.h"
-#else
-#  include "config.h"
-#endif
 #include "game/config.h"
 
 #ifdef USE_FRIBIDI
