@@ -856,3 +856,9 @@ ActionHandler::ActionHandler():
   SDL_UnlockMutex(mutex);
 }
 
+ActionHandler::~ActionHandler()
+{
+  if (mutex)
+    SDL_DestroyMutex(mutex);
+}
+

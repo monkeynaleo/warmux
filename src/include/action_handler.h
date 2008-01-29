@@ -63,6 +63,7 @@ public:
 
 private:
   ActionHandler();
+  ~ActionHandler();
 
   /* If you need this, you probably made an error in your code... */
   ActionHandler(const ActionHandler&);
