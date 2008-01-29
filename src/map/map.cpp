@@ -56,6 +56,8 @@ Map::~Map()
   delete to_redraw_now;
   delete to_redraw_particles;
   delete to_redraw_particles_now;
+  if (author_info1) delete author_info1;
+  if (author_info2) delete author_info2;
 }
 
 void Map::Reset()
