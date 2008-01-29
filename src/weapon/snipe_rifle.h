@@ -45,6 +45,7 @@ class SnipeRifle : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
   public:
     SnipeRifle();
+    ~SnipeRifle();
     void SignalProjectileGhostState();
     void DrawBeam();
     void Draw();  // In order to draw the laser beam / and the contact point.
