@@ -83,6 +83,11 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   ReloadLauncher();
 }
 
+SnipeRifle::~SnipeRifle()
+{
+  delete m_laser_image;
+}
+
 void SnipeRifle::UpdateTranslationStrings()
 {
   m_name = _("Sniper Rifle");
