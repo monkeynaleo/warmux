@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-11-08 21:31+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -38,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i speler is gereed"
 msgstr[1] "%i spelers zijn gereed"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) is overleden."
@@ -64,7 +63,7 @@ msgstr "Team %s"
 msgid "%s Team - Remote"
 msgstr "Team %s - Op afstand"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s pleegde zelfmoord !"
@@ -74,12 +73,12 @@ msgstr "%s pleegde zelfmoord !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s is in het water gevallen."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s is van de kaart gevallen!"
@@ -91,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s heeft %u punt energie gekregen!"
 msgstr[1] "%s heeft %u punten energie gekregen!"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van team %s!"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s is dood door zijn onhandigheid!"
@@ -308,7 +307,7 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "Team %s heeft %u jachtgeweer gekregen!"
 msgstr[1] "Team %s heeft %u jachtgeweren gekregen!"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -401,10 +400,6 @@ msgstr "Drilboor"
 msgid "All teams"
 msgstr "Alle teams"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "En de winnaar is..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -419,7 +414,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Aambeeld"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Auteurs:"
 
@@ -427,7 +422,7 @@ msgstr "Auteurs:"
 msgid "Automatic Bazooka"
 msgstr "Automatische Bazooka"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr ""
 
@@ -529,7 +524,7 @@ msgstr "Duur van een beurt"
 msgid "Dynamite"
 msgstr "Dynamiet"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "EINDE VAN HET SPEL"
 
@@ -570,7 +565,7 @@ msgstr "Fout bij het laden van standaardconfiguratiebestand: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Fout bij het laden van spel modus %s (bestand %s):"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -648,7 +643,7 @@ msgstr "Hoofdcommandant"
 msgid "Head commander: "
 msgstr "Hoofdcommandant: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr ""
 
@@ -694,11 +689,7 @@ msgstr ""
 "Hoe te gebruiken : klik met de linkermuisknop op het doel\n"
 "slechts een per beurt"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Snel, u bent te langzaam !!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -736,7 +727,7 @@ msgstr "Initialiseer geluiden"
 msgid "Initialise teams"
 msgstr "Initialiseer teams"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "Het is een cadeau!"
 
@@ -769,7 +760,7 @@ msgstr "Lokale teams:"
 msgid "LowGrav"
 msgstr "LageZwaartekracht"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Kaart %s, gemaakt door :"
@@ -848,7 +839,7 @@ msgstr "Aantal teams:"
 msgid "Options"
 msgstr "Opties"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 #, fuzzy
 msgid "Options menu"
 msgstr "Opties"
@@ -891,11 +882,11 @@ msgstr "Poort:"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Wormux afsluiten"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr ""
 
@@ -923,7 +914,7 @@ msgstr "Resolutie"
 msgid "Riot Bomb"
 msgstr "Rellenbom"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Spel wordt gestart"
 
@@ -958,7 +949,7 @@ msgstr "Jachtgeweer"
 msgid "Skip turn"
 msgstr "Beurt overslaan"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Scherpschuttersgeweer"
 
@@ -979,7 +970,7 @@ msgstr "Geluids- frequentie"
 msgid "Sounds"
 msgstr "Geluiden"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Starten van een nieuw spel"
 
@@ -1109,7 +1100,7 @@ msgstr "Kon deze poort niet gebruiken!"
 msgid "Unnamed"
 msgstr "Naamloos"
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Versie"
 
@@ -1131,11 +1122,11 @@ msgstr ""
 msgid "Weapons"
 msgstr "Wapens"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Website: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
@@ -1149,11 +1140,11 @@ msgstr "Wind deeltjes?"
 msgid "Winner"
 msgstr "Winaar"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Wormux wordt gestart..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Wormux versie "
 
@@ -1235,6 +1226,12 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
+
+#~ msgid "And the winner is..."
+#~ msgstr "En de winnaar is..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Snel, u bent te langzaam !!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Wilt u echt afsluiten? (Y/N)"

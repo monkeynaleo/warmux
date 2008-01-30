@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-11-30 18:35+1000\n"
 "Last-Translator: luojie-dune <luojie-dune@operamail.com>\n"
 "Language-Team: Chinese (China) <luojie-dune@operamail.com>\n"
@@ -36,7 +35,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i 玩家准备好了"
 msgstr[1] "%i 玩家都准备好了"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s)死掉了  ."
@@ -62,7 +61,7 @@ msgstr " %s 队伍"
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s 自杀啦 !"
@@ -72,12 +71,12 @@ msgstr "%s 自杀啦 !"
 msgid "%s fps"
 msgstr "%s 帧fps"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s 入水---深呼吸."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s 飞出地图边缘---"
@@ -89,13 +88,13 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 赢得 %u 点耐久!"
 msgstr[1] "%s 赢得 %u 点耐久!"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是个疯子, 他独自推掉了 %s 一个队!"
 
 # what about female names?
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
@@ -292,7 +291,7 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "%s 队得到 %u 猎枪!"
 msgstr[1] "%s 队得到 %u 猎枪!"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -373,10 +372,6 @@ msgstr "飞锤"
 msgid "All teams"
 msgstr "全部的队伍"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "生者是..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -391,7 +386,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "铁砧"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "作者:"
 
@@ -399,7 +394,7 @@ msgstr "作者:"
 msgid "Automatic Bazooka"
 msgstr "制导火箭炮"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr ""
 
@@ -502,7 +497,7 @@ msgstr "回合时间长度"
 msgid "Dynamite"
 msgstr "炸药"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "游戏末尾"
 
@@ -541,7 +536,7 @@ msgstr "正读取默认设置文件"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "读取游戏模式时出错%s (file %s):"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -621,7 +616,7 @@ msgstr "指挥官"
 msgid "Head commander: "
 msgstr "指挥官: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr ""
 
@@ -667,11 +662,7 @@ msgstr ""
 "如何使用: 鼠标左键点击目标\n"
 "每回合一个弹夹"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "快点,伙计你也太慢了!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -707,7 +698,7 @@ msgstr "声音初始化"
 msgid "Initialise teams"
 msgstr "队伍初始化"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "就是现在!"
 
@@ -741,7 +732,7 @@ msgstr "本地队伍:"
 msgid "LowGrav"
 msgstr "漫步-低重力"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "地图 %s, 灵感 : "
@@ -820,7 +811,7 @@ msgstr "队伍数量:"
 msgid "Options"
 msgstr "选项 "
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 #, fuzzy
 msgid "Options menu"
 msgstr "选项 "
@@ -863,11 +854,11 @@ msgstr "端口:"
 msgid "Quit"
 msgstr "退出"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "退出"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr ""
 
@@ -895,7 +886,7 @@ msgstr "分辨率"
 msgid "Riot Bomb"
 msgstr "爆炸弹"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "运行游戏"
 
@@ -930,7 +921,7 @@ msgstr "猎枪"
 msgid "Skip turn"
 msgstr "这次我不动."
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "狙击步枪"
 
@@ -951,7 +942,7 @@ msgstr "声频"
 msgid "Sounds"
 msgstr "声音"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "重新来游戏"
 
@@ -1080,7 +1071,7 @@ msgstr "端口不可用"
 msgid "Unnamed"
 msgstr "未命名"
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "版本"
 
@@ -1101,11 +1092,11 @@ msgstr "等着接受服务吧, 现在先聊天 !"
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "网站Website: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 惨死在小枪之下...不能瞑目!"
@@ -1120,11 +1111,11 @@ msgstr "风来了?"
 msgid "Winner"
 msgstr "胜者"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "准备中, Wormux!!!"
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
@@ -1206,6 +1197,12 @@ msgstr "o读取音乐文件 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音乐 %d Hz %d bit"
+
+#~ msgid "And the winner is..."
+#~ msgstr "生者是..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "快点,伙计你也太慢了!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "您真的想退出吗? (\"Y\"是 或 \"N\"不)"

@@ -34,7 +34,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i joueur prêt"
 msgstr[1] "%i joueurs prêts"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) est mort."
@@ -60,7 +60,7 @@ msgstr "Équipe %s"
 msgid "%s Team - Remote"
 msgstr "Équipe %s - Distant"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s s'est suicidé !"
@@ -70,12 +70,12 @@ msgstr "%s s'est suicidé !"
 msgid "%s fps"
 msgstr "%s i/s"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s est tombé dans l'eau."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s est sorti du terrain !"
@@ -87,12 +87,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Le joueur %s a gagné %u point de vie !"
 msgstr[1] "Le joueur %s a gagné %u points de vie !"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s est un psychopathe, il tue des membres de son équipe (%s) !"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s est mort à cause de sa maladresse !"
@@ -305,7 +305,7 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "L'équipe %s a gagné %u fusil d'assaut !"
 msgstr[1] "L'équipe %s a gagné %u fusils d'assaut !"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -393,10 +393,6 @@ msgstr "Marteau piqueur"
 msgid "All teams"
 msgstr "Toutes les équipes"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "Et le vainqueur est..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -411,7 +407,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Enclume"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Auteurs :"
 
@@ -419,7 +415,7 @@ msgstr "Auteurs :"
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatique"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr "Retour à la partie"
 
@@ -521,7 +517,7 @@ msgstr "Durée d'un tour"
 msgid "Dynamite"
 msgstr "Dynamite"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "FIN DU JEU"
 
@@ -562,7 +558,7 @@ msgstr "Erreur lors du chargement du fichier de configuration : %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Erreur lors du chargement du mode de jeu %s (fichier %s) :"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -643,7 +639,7 @@ msgstr "Commandant"
 msgid "Head commander: "
 msgstr "Commandant : "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr "Aide"
 
@@ -689,11 +685,7 @@ msgstr ""
 "Usage : clic gauche sur la cible\n"
 "une munition par tour"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Dépechez-vous, vous êtes trop lent !!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -731,7 +723,7 @@ msgstr "Initialisation des sons"
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "C'est un cadeau !"
 
@@ -765,7 +757,7 @@ msgstr "Équipes locales :"
 msgid "LowGrav"
 msgstr "Anti-gravité"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Terrain %s, une création de :"
@@ -845,7 +837,7 @@ msgstr "Nombre d'équipes :"
 msgid "Options"
 msgstr "Options"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 msgid "Options menu"
 msgstr "Menu d'options"
 
@@ -887,11 +879,11 @@ msgstr "Port :"
 msgid "Quit"
 msgstr "Quitter"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Quitte Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr "Quitter la partie"
 
@@ -919,7 +911,7 @@ msgstr "Résolution"
 msgid "Riot Bomb"
 msgstr "Bombe anti-émeute"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Lancement du jeu"
 
@@ -954,7 +946,7 @@ msgstr "Fusil à pompe"
 msgid "Skip turn"
 msgstr "Passer son tour"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Fusil sniper"
 
@@ -975,7 +967,7 @@ msgstr "Fréquence d'échantillonage"
 msgid "Sounds"
 msgstr "Options sonores"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Lancement d'une nouvelle partie"
 
@@ -1105,7 +1097,7 @@ msgstr "Impossible d'utiliser ce port !"
 msgid "Unnamed"
 msgstr "Anonyme"
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Version"
 
@@ -1126,11 +1118,11 @@ msgstr "Attente du serveur, vous pouvez annuler ou discuter !"
 msgid "Weapons"
 msgstr "Armes"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Site web : "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : il a été tué par un simple pistolet !"
@@ -1144,11 +1136,11 @@ msgstr "Particules de vent ?"
 msgid "Winner"
 msgstr "Vainqueur"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Lancement de Wormux..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1228,3 +1220,9 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
+
+#~ msgid "And the winner is..."
+#~ msgstr "Et le vainqueur est..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Dépechez-vous, vous êtes trop lent !!"

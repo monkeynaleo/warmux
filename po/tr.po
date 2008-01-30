@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -37,7 +36,7 @@ msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) öldü."
@@ -63,7 +62,7 @@ msgstr "Takımlar"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -73,12 +72,12 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
@@ -89,12 +88,12 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] ""
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -267,7 +266,7 @@ msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -342,10 +341,6 @@ msgstr "Hava çekici"
 msgid "All teams"
 msgstr "Takımları yükle:"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr ""
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -357,7 +352,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Örs"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Yazarlar:"
 
@@ -365,7 +360,7 @@ msgstr "Yazarlar:"
 msgid "Automatic Bazooka"
 msgstr "Otomatik Bazuka"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr ""
 
@@ -467,7 +462,7 @@ msgstr "Tur zamanı"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr ""
 
@@ -507,7 +502,7 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "%s oyun modu yüklenirken hata (dosya %s):"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -588,7 +583,7 @@ msgstr ""
 msgid "Head commander: "
 msgstr ""
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr ""
 
@@ -623,11 +618,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Çabuk ol, çok yavaşsın !!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -664,7 +655,7 @@ msgstr "Nesneler yükleniyor"
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr ""
 
@@ -698,7 +689,7 @@ msgstr "Takımları yükle:"
 msgid "LowGrav"
 msgstr "Düşük yer çekimi"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "%s haritasını tasarlayan:"
@@ -778,7 +769,7 @@ msgstr ""
 msgid "Options"
 msgstr "Seçenekler"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 #, fuzzy
 msgid "Options menu"
 msgstr "Seçenekler"
@@ -822,11 +813,11 @@ msgstr ""
 msgid "Quit"
 msgstr "Çıkış"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr ""
 
@@ -856,7 +847,7 @@ msgstr "Çözünürlük"
 msgid "Riot Bomb"
 msgstr "Ses Bombası"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Oyunu çalıştır"
 
@@ -891,7 +882,7 @@ msgstr "Pompalı tüfek"
 msgid "Skip turn"
 msgstr "Sırayı atla"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Suikast Tüfeği"
 
@@ -912,7 +903,7 @@ msgstr "Ses frekansı"
 msgid "Sounds"
 msgstr "Sesler"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
@@ -1033,7 +1024,7 @@ msgstr ""
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Sürüm"
 
@@ -1053,11 +1044,11 @@ msgstr ""
 msgid "Weapons"
 msgstr "Silahlar"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
@@ -1072,11 +1063,11 @@ msgstr "Rüzgar parçacıkları?"
 msgid "Winner"
 msgstr "Mayın"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Wormux çalıştırılıyor..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
@@ -1156,6 +1147,9 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Çabuk ol, çok yavaşsın !!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"

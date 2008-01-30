@@ -10,7 +10,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2008-01-27 17:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -44,7 +43,7 @@ msgstr[1] "%i igralca pripravljena"
 msgstr[2] "%i igralci pripravljeni"
 msgstr[3] "%i igralcev pripravljenih"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) je umrl/a."
@@ -70,7 +69,7 @@ msgstr "Ekipa %s"
 msgid "%s Team - Remote"
 msgstr "Ekipa %s - Oddaljena"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s je naredil/a samomor!"
@@ -80,12 +79,12 @@ msgstr "%s je naredil/a samomor!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s je padel/a v vodo."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s je padel/a s karte!"
@@ -99,12 +98,12 @@ msgstr[1] "%s je dobil %u točki energije!"
 msgstr[2] "%s je dobil %u točke energije!"
 msgstr[3] "%s je dobil %u točk energije!"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopat, saj je ubil člana ekipe %s!"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mrtev, ker je bil neroden!"
@@ -353,7 +352,7 @@ msgstr[1] "Ekipa %s je osvojila %u šibrovki!"
 msgstr[2] "Ekipa %s je osvojila %u šibrovke!"
 msgstr[3] "Ekipa %s je osvojila %u šibrovk!"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -452,10 +451,6 @@ msgstr "Pnevmatsko kladivo"
 msgid "All teams"
 msgstr "Vse ekipe"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "In zmagali so ..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -470,7 +465,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovalo"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Avtorji:"
 
@@ -478,7 +473,7 @@ msgstr "Avtorji:"
 msgid "Automatic Bazooka"
 msgstr "Avtomatska Bazuka"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr "Nazaj v bitko"
 
@@ -580,7 +575,7 @@ msgstr "Trajanje poteze"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "KONEC IGRE"
 
@@ -621,7 +616,7 @@ msgstr "Napaka pri nalaganju datoteke s privzetimi nastavitvami: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Napaka pri nalaganju igralskega načina %s (datoteka %s):"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -703,7 +698,7 @@ msgstr "Poveljnik"
 msgid "Head commander: "
 msgstr "Poveljnik: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr "Pomoč"
 
@@ -749,11 +744,7 @@ msgstr ""
 "Uporaba: kliknite na tarčo\n"
 "ena uporaba na potezo"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Pohitite, prepočasni ste!!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -791,7 +782,7 @@ msgstr "Inicializacija zvokov"
 msgid "Initialise teams"
 msgstr "Inicializacija ekip"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "To je darilo!"
 
@@ -826,7 +817,7 @@ msgstr "Krajevne ekipe:"
 msgid "LowGrav"
 msgstr "Zmanjševalnik gravitacije"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Karta %s je stvaritev: "
@@ -905,7 +896,7 @@ msgstr "Število ekip:"
 msgid "Options"
 msgstr "Nastavitve"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 msgid "Options menu"
 msgstr "Nastavitve"
 
@@ -947,11 +938,11 @@ msgstr "Vrata:"
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr "Končaj bitko"
 
@@ -979,7 +970,7 @@ msgstr "Ločljivost"
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Poženi igro"
 
@@ -1014,7 +1005,7 @@ msgstr "Šibrovka"
 msgid "Skip turn"
 msgstr "Preskoči potezo"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Ostrostrelska puška"
 
@@ -1035,7 +1026,7 @@ msgstr "Frekvenca zvoka"
 msgid "Sounds"
 msgstr "Zvoki"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Zagon nove igre"
 
@@ -1166,7 +1157,7 @@ msgstr "Ni bilo mogoče uporabiti teh vrat!"
 msgid "Unnamed"
 msgstr "Brezimjek"
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Različica"
 
@@ -1189,11 +1180,11 @@ msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 msgid "Weapons"
 msgstr "Orožja"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Spletna stran: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
@@ -1207,11 +1198,11 @@ msgstr "Vetrni delci?"
 msgid "Winner"
 msgstr "Zmagovalec"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Wormux se zaganja..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Wormux različica "
 
@@ -1291,6 +1282,12 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#~ msgid "And the winner is..."
+#~ msgstr "In zmagali so ..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Pohitite, prepočasni ste!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Ali resnično želite končati? (Y/N)"
