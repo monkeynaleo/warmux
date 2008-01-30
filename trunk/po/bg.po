@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-02-19 03:27+0100\n"
 "Last-Translator: Stefan Kachaunov <mindless@data.bg>\n"
 "Language-Team: Bulgarian <mindless@data.bg>\n"
@@ -39,7 +38,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i Spieler bereit"
 msgstr[1] "%i Spieler bereit"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s от %s си го отнесе..."
@@ -65,7 +64,7 @@ msgstr "Отбори"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s направи жестока жертва!"
@@ -75,12 +74,12 @@ msgstr "%s направи жестока жертва!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "Добър ден за плуване а, %s ?"
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s умело уцели въздуха."
@@ -92,12 +91,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s е опасен, избива хора от отбора на %s!!!"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s проявява сапьорска предпазливост..."
@@ -294,7 +293,7 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "Отборът на %s спечели %u %s !"
 msgstr[1] "Отборът на %s спечели %u %sи !"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -375,10 +374,6 @@ msgstr "Пневматичен чук"
 msgid "All teams"
 msgstr "Alle Mannschaften"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr ""
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -390,7 +385,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Наковалня"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Автори:"
 
@@ -398,7 +393,7 @@ msgstr "Автори:"
 msgid "Automatic Bazooka"
 msgstr "Автоматичен РПГ"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr ""
 
@@ -501,7 +496,7 @@ msgstr "Продължение на хода"
 msgid "Dynamite"
 msgstr "Шашка динамит"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr ""
 
@@ -543,7 +538,7 @@ msgstr "Проблем при зареждането на конфигураци
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Грешла при зареждането на режима %s (файл %s):"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -625,7 +620,7 @@ msgstr "Hauptkommandant"
 msgid "Head commander: "
 msgstr "Hauptkommandant"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr ""
 
@@ -660,11 +655,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Хабиш време за убиване за други неща!!!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -701,7 +692,7 @@ msgstr "Инициализирам обектите..."
 msgid "Initialise teams"
 msgstr "Инициализирам отборите..."
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr ""
 
@@ -736,7 +727,7 @@ msgstr "Lade Mannschaft:"
 msgid "LowGrav"
 msgstr "Ниска гравитация"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Картата %s е творение на: "
@@ -818,7 +809,7 @@ msgstr "Anzahl der Mannschaften"
 msgid "Options"
 msgstr "Настройки"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 #, fuzzy
 msgid "Options menu"
 msgstr "Настройки"
@@ -861,11 +852,11 @@ msgstr ""
 msgid "Quit"
 msgstr "Вън!"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr ""
 
@@ -895,7 +886,7 @@ msgstr "Разделителна способност"
 msgid "Riot Bomb"
 msgstr "Звуков заряд"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Пусни играта"
 
@@ -931,7 +922,7 @@ msgstr "Помпа"
 msgid "Skip turn"
 msgstr "Пропускане на ход"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Снайперистка пушка"
 
@@ -952,7 +943,7 @@ msgstr "Честота на семплиране"
 msgid "Sounds"
 msgstr "Звуци"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Стартирам нова игра"
 
@@ -1075,7 +1066,7 @@ msgstr "Kann Server nicht starten!"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "версия"
 
@@ -1096,11 +1087,11 @@ msgstr ""
 msgid "Weapons"
 msgstr "Оръжия"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Страница: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr ""
@@ -1116,11 +1107,11 @@ msgstr "Красотички носени от вятъра?"
 msgid "Winner"
 msgstr "Противопехотна мина"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Wormux се зарежда..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Версия на Wormux"
 
@@ -1200,6 +1191,9 @@ msgstr "Проблем при зареждането на конфигураци
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Хабиш време за убиване за други неща!!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Тръгваш ли си? (Y/N)"

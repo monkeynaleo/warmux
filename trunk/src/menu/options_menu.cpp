@@ -187,6 +187,8 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "bs",    "Bosanski",            "bs");
   lbox_languages->AddItem(config->GetLanguage() == "ca",    "Català",              "ca");
   lbox_languages->AddItem(config->GetLanguage() == "cpf",   "Créole",              "cpf");
+  lbox_languages->AddItem(config->GetLanguage() == "cs",    "čeština (Czech)",
+   "cs");
   lbox_languages->AddItem(config->GetLanguage() == "da",    "Dansk",               "da");
   lbox_languages->AddItem(config->GetLanguage() == "de",    "Deutsch",             "de");
   lbox_languages->AddItem(config->GetLanguage() == "eo",    "Esperanto",           "eo");

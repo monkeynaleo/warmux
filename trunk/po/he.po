@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-11-08 23:03+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team:  <he@li.org>\n"
@@ -35,7 +34,7 @@ msgid_plural "%i players ready"
 msgstr[0] "שחקן %i מוכן"
 msgstr[1] "%i שחקנים מוכנים"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) נהרג."
@@ -61,7 +60,7 @@ msgstr "צוות %s"
 msgid "%s Team - Remote"
 msgstr "צוות %s - מרוחק"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s מאבד עצמו לדעת!"
@@ -71,12 +70,12 @@ msgstr "%s מאבד עצמו לדעת!"
 msgid "%s fps"
 msgstr "%s תמונות בשניה"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s נפל למים."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s נפל מן המפה!"
@@ -88,12 +87,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s זכה ב-%u נקודת אנרגיה!"
 msgstr[1] "%s זכה ב-%u נקודות אנרגיה!"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s מת כי הוא שלומיאל!"
@@ -292,7 +291,7 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "צוות %s זכה ב-%u שוטגאן!"
 msgstr[1] "צוות %s זכה ב-%u רובי שוטגאן!"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -373,10 +372,6 @@ msgstr "פטיש אוויר"
 msgid "All teams"
 msgstr "כל הצוותים"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "והמנצח..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -391,7 +386,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "סדן"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "מחברים:"
 
@@ -399,7 +394,7 @@ msgstr "מחברים:"
 msgid "Automatic Bazooka"
 msgstr "בזוקה אוטומטית"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr "בחזרה אל הקרב"
 
@@ -501,7 +496,7 @@ msgstr "משך תור"
 msgid "Dynamite"
 msgstr "דינמיט"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
@@ -540,7 +535,7 @@ msgstr "שגיאה בעת טעינת הגדרות ברירת המחדל: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "שגיאה בעת טעינת מצב משחק %s (קובץ %s) :"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -618,7 +613,7 @@ msgstr "מפקד"
 msgid "Head commander: "
 msgstr "מפקד: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr "עזרה"
 
@@ -664,11 +659,7 @@ msgstr ""
 "לשימוש: קליק שמאלי על המטרה\n"
 "תחמושת לתור"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "קדימה, אתה איטי מדי!!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -706,7 +697,7 @@ msgstr "מאתחל סאונד"
 msgid "Initialise teams"
 msgstr "מאתחל צוותים"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "קיבלת מתנה!"
 
@@ -739,7 +730,7 @@ msgstr "צוותים מקומיים:"
 msgid "LowGrav"
 msgstr "אנטי-גרביטציה"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "מפה %s, דרך יצירתה:"
@@ -818,7 +809,7 @@ msgstr "מספר צוותים:"
 msgid "Options"
 msgstr "אפשרויות"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 #, fuzzy
 msgid "Options menu"
 msgstr "תפריט אפשרויות"
@@ -861,11 +852,11 @@ msgstr "פורט:"
 msgid "Quit"
 msgstr "יציאה"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "יציאה מ-Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr "יציאה מן הקרב"
 
@@ -893,7 +884,7 @@ msgstr "אבחנה"
 msgid "Riot Bomb"
 msgstr "מפזר הפגנות"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "הרץ משחק"
 
@@ -928,7 +919,7 @@ msgstr "שוטגאן"
 msgid "Skip turn"
 msgstr "דלג על תור"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "רובה צלפים"
 
@@ -949,7 +940,7 @@ msgstr "תדירות הסאונד"
 msgid "Sounds"
 msgstr "סאונד"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "מתחיל משחק חדש"
 
@@ -1078,7 +1069,7 @@ msgstr "לא ניתן להשתמש בפורט זה!"
 msgid "Unnamed"
 msgstr "ללא שם"
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "גירסה"
 
@@ -1099,11 +1090,11 @@ msgstr "ממתין לשרת, כרגע תוכל רק לבטל או להשתמש �
 msgid "Weapons"
 msgstr "כלי נשק"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "אתר: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"
@@ -1117,11 +1108,11 @@ msgstr "חלקיקי רוח?"
 msgid "Winner"
 msgstr "מנצח"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Wormux נטען..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "גירסת Wormux "
 
@@ -1201,6 +1192,12 @@ msgstr "o טוען פרופיל סאונד: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
+
+#~ msgid "And the winner is..."
+#~ msgstr "והמנצח..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "קדימה, אתה איטי מדי!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Voulez-vous vraiment quitter ? (O/N)"

@@ -9,7 +9,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_eo\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-08-23 23:04+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -38,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i ludanto pretas"
 msgstr[1] "%i ludantoj pretas"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s teamo) mortis."
@@ -64,7 +63,7 @@ msgstr "%s Teamo"
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -74,12 +73,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr "%s bildo po sekundo (fps)"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s droniĝis."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s falis el la mapo !"
@@ -91,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -300,7 +299,7 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "%s teamo gajnis %u blovfusilon !"
 msgstr[1] "%s teamo gajnis %u blovfusilojn !"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -383,10 +382,6 @@ msgstr "Pneŭmatika martelo"
 msgid "All teams"
 msgstr "Ĉiuj teamoj"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "Kaj la gajnanto estas..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -401,7 +396,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Amboso"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Aŭtoroj :"
 
@@ -409,7 +404,7 @@ msgstr "Aŭtoroj :"
 msgid "Automatic Bazooka"
 msgstr "Aŭtomatika bazuko"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr ""
 
@@ -511,7 +506,7 @@ msgstr "Vicdaŭro"
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "LUDFINO"
 
@@ -550,7 +545,7 @@ msgstr "Eraro muntante norman agordan dosieron : %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Eraro muntante ludon %s (dosiero %s) :"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -628,7 +623,7 @@ msgstr "Ĉefkomandoro"
 msgid "Head commander: "
 msgstr "Ĉefkomandoro:"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr ""
 
@@ -672,11 +667,7 @@ msgstr ""
 "Kiel uzi ĝin : maldekstrklaku sur celo\n"
 "Unu amunicio vice"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Rapidegu, vi tro malrapidas !"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -714,7 +705,7 @@ msgstr "Preparante sonojn"
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "Tio estas donaco !"
 
@@ -747,7 +738,7 @@ msgstr "Lokaj teamoj :"
 msgid "LowGrav"
 msgstr "Malpezigilo"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapo %s, far :"
@@ -826,7 +817,7 @@ msgstr "Kvanto da teamoj :"
 msgid "Options"
 msgstr "Opcioj"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 #, fuzzy
 msgid "Options menu"
 msgstr "Opcioj"
@@ -869,11 +860,11 @@ msgstr "Pordo :"
 msgid "Quit"
 msgstr "Forlasu"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Forigu el Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr ""
 
@@ -902,7 +893,7 @@ msgstr "Difino"
 msgid "Riot Bomb"
 msgstr "Tumultbombo"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Komencas partion"
 
@@ -937,7 +928,7 @@ msgstr "Blovfusilo"
 msgid "Skip turn"
 msgstr "Pasigo"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Tiraljora fusilo"
 
@@ -958,7 +949,7 @@ msgstr "Sona frekvenco"
 msgid "Sounds"
 msgstr "Sonoj"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Komencante novan ludon"
 
@@ -1085,7 +1076,7 @@ msgstr "Ne eblas uzi ĉi tiun pordon !"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Versio"
 
@@ -1106,11 +1097,11 @@ msgstr "Atende servilon, vi nur povas rezigni aŭ babili !"
 msgid "Weapons"
 msgstr "Armiloj"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "TTT-ejo: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo !"
@@ -1124,11 +1115,11 @@ msgstr "Venterojn ?"
 msgid "Winner"
 msgstr "Gajnanto"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Wormux muntas..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Wormux versio "
 
@@ -1210,6 +1201,12 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#~ msgid "And the winner is..."
+#~ msgstr "Kaj la gajnanto estas..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Rapidegu, vi tro malrapidas !"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Ĉu vi volas vere forlasi (J/N) ?"

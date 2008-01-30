@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-12-26 21:33-0000\n"
 "Last-Translator: Christian LOMSDALEN <christian@vindstille.net>\n"
 "Language-Team: \n"
@@ -35,7 +34,7 @@ msgid_plural "%i players ready"
 msgstr[0] " %i spiller klar"
 msgstr[1] " %i spillere klare"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) døde."
@@ -61,7 +60,7 @@ msgstr "%s -laget"
 msgid "%s Team - Remote"
 msgstr "%s -laget - Fjernstyrt"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s tok selvmord !"
@@ -71,12 +70,12 @@ msgstr "%s tok selvmord !"
 msgid "%s fps"
 msgstr "%s bps"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s har falt i vannet"
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s har falt av kartet !"
@@ -88,12 +87,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har fått %u livspoeng !"
 msgstr[1] "%s har fått %u livspoeng !"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er sinnsyk, han har drept et medlem av %s-laget !"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s døde fordi han klønet det til!"
@@ -299,7 +298,7 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "%s-laget har vunnet %u hagle !"
 msgstr[1] "%s-laget har vunnet %u hagler !"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -320,8 +319,7 @@ msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "%s-laget har vunnet %u selvmordsbombe !"
 msgstr[1] ""
-"%s-laget har vunnet %u selvmordsbomber! Bruk alle for å få en ekstra bonus "
-"!"
+"%s-laget har vunnet %u selvmordsbomber! Bruk alle for å få en ekstra bonus !"
 
 #: src/weapon/syringe.cpp:115
 #, c-format
@@ -342,8 +340,7 @@ msgstr[1] "%s-laget har vunnet %u teleporteringer."
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] ""
-"%s-laget har vunnet %u mulighet til å hoppe over en runde, du vil elske det "
-"!"
+"%s-laget har vunnet %u mulighet til å hoppe over en runde, du vil elske det !"
 msgstr[1] ""
 "%s-laget har vunnet %u muligheter til å hoppe over en runde, du vil elske "
 "det !"
@@ -389,10 +386,6 @@ msgstr "Lufthammer"
 msgid "All teams"
 msgstr "Alle lag"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "Og vinneren er..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -406,7 +399,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Forfattere :"
 
@@ -414,7 +407,7 @@ msgstr "Forfattere :"
 msgid "Automatic Bazooka"
 msgstr "Automatisk rakettkaster"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr "Tilbake til slaget"
 
@@ -516,7 +509,7 @@ msgstr "Varighet per runde"
 msgid "Dynamite"
 msgstr "Dynamitt"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "Spillet er slutt"
 
@@ -556,7 +549,7 @@ msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Lasting av spillmodus feilet %s (fil %s) :"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -636,7 +629,7 @@ msgstr "Kommandant"
 msgid "Head commander: "
 msgstr "Kommandant"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr "Hjelp"
 
@@ -666,8 +659,8 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Hvordan bruke den : venstreklikk på måletFørste skytevinkel : Opp/NedSkyt "
-": Hold mellomromstasten nede til riktig styrke er nådden ammo per runde"
+"Hvordan bruke den : venstreklikk på måletFørste skytevinkel : Opp/NedSkyt : "
+"Hold mellomromstasten nede til riktig styrke er nådden ammo per runde"
 
 #: src/weapon/anvil.cpp:133
 msgid ""
@@ -675,11 +668,7 @@ msgid ""
 "an ammo per turn"
 msgstr "Hvordan bruke den : venstreklikk på måleten ammo per runde"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Kjapp deg, du er for treg !!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -716,7 +705,7 @@ msgstr "Laster lyder"
 msgid "Initialise teams"
 msgstr "Laster lagene"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "Det er en gave !"
 
@@ -749,7 +738,7 @@ msgstr "Lokale lag :"
 msgid "LowGrav"
 msgstr "Lav gravitet"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "%s-kartet, er laget av :"
@@ -828,7 +817,7 @@ msgstr "Antall lag :"
 msgid "Options"
 msgstr "Alternativer"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 msgid "Options menu"
 msgstr "Alternativer"
 
@@ -870,11 +859,11 @@ msgstr "Port :"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr "Forlat slaget"
 
@@ -902,7 +891,7 @@ msgstr "Resolusjon"
 msgid "Riot Bomb"
 msgstr "Opprørsbombe"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Spill spillet"
 
@@ -937,7 +926,7 @@ msgstr "Hagle"
 msgid "Skip turn"
 msgstr "Hopp over en runde"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Snikskytterrifle"
 
@@ -958,7 +947,7 @@ msgstr "Lydstyrke ?"
 msgid "Sounds"
 msgstr "Lyder"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Laster et nytt spill"
 
@@ -1046,9 +1035,9 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste "
-"skytevinkel : Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er "
-"nådden ammo per runde"
+"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
+"Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
+"per runde"
 
 #: src/weapon/bounce_ball.cpp:90
 msgid ""
@@ -1057,9 +1046,9 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
-"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste "
-"skytevinkel : Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er "
-"nådden ammo per runde"
+"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
+"Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
+"per runde"
 
 #: src/interface/weapon_menu.cpp:169
 msgid "Tools"
@@ -1087,7 +1076,7 @@ msgstr "Kunne ikke bruke denne porten  !"
 msgid "Unnamed"
 msgstr "Uten navn"
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Versjon"
 
@@ -1108,11 +1097,11 @@ msgstr "Venter på server, alt du kan gjøre er å avbryte eller chatte"
 msgid "Weapons"
 msgstr "Våpen"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Webside : "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "For en skam for %s : han ble drept av en liten pistol !"
@@ -1126,11 +1115,11 @@ msgstr "Vindpartikler ?"
 msgid "Winner"
 msgstr "Vinner"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Laster Wormux ..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Wormux versjon "
 
@@ -1173,8 +1162,7 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
-"angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per "
-"runde"
+"angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per runde"
 
 #: src/map/maps_list.cpp:79
 msgid "couldn't load config"
@@ -1209,3 +1197,9 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Åpnet lyden på %d Hz %d bit"
+
+#~ msgid "And the winner is..."
+#~ msgstr "Og vinneren er..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Kjapp deg, du er for treg !!"

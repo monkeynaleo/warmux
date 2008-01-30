@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2007-08-24 08:31+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -36,7 +35,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i spelare redo"
 msgstr[1] "%i spelare redo"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) har dött."
@@ -62,7 +61,7 @@ msgstr "Lag %s"
 msgid "%s Team - Remote"
 msgstr "%s-laget - Fjärr"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begår självmord!"
@@ -72,12 +71,12 @@ msgstr "%s begår självmord!"
 msgid "%s fps"
 msgstr "%s bilder/s"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ramlade i vattnet."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ramlade ut från kartan!"
@@ -89,13 +88,13 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har vunnit %u energipoäng!"
 msgstr[1] "%s har vunnit %u energipoäng!"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s är en psykopat, han har dödat en medlem av %s!"
 
 # what about female names?
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s dog för att han var klumpig!"
@@ -300,7 +299,7 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "%s-laget har vunnit %u hagelbössa!"
 msgstr[1] "%s-laget har vunnit %u hagelbössor!"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -383,10 +382,6 @@ msgstr "Lufthammare"
 msgid "All teams"
 msgstr "Alla lag"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "Och vinnaren är..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -401,7 +396,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Städ"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Upphovsmän:"
 
@@ -409,7 +404,7 @@ msgstr "Upphovsmän:"
 msgid "Automatic Bazooka"
 msgstr "Automatiskt raketgevär"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr ""
 
@@ -511,7 +506,7 @@ msgstr "Längd per omgång"
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "SPELET ÄR ÖVER"
 
@@ -551,7 +546,7 @@ msgstr "Fel vid inläsning av standardkonfigurationsfil: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Fel vid inläsning av spelläget %s (filen %s):"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -630,7 +625,7 @@ msgstr "Ledare"
 msgid "Head commander: "
 msgstr "Befälhavare: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr ""
 
@@ -676,11 +671,7 @@ msgstr ""
 "Hur man använder den : vänsterklicka på målet\n"
 "ett skott per omgång"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Skynda dig, du är för långsam!!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -718,7 +709,7 @@ msgstr "Initiera ljud"
 msgid "Initialise teams"
 msgstr "Initera lag"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "En present!"
 
@@ -753,7 +744,7 @@ msgstr "Lokala lag:"
 msgid "LowGrav"
 msgstr "Låg gravitet"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Kartan %s, skapad av: "
@@ -832,7 +823,7 @@ msgstr "Antal lag:"
 msgid "Options"
 msgstr "Alternativ"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 #, fuzzy
 msgid "Options menu"
 msgstr "Alternativ"
@@ -875,11 +866,11 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Avsluta Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr ""
 
@@ -908,7 +899,7 @@ msgstr "Upplösning"
 msgid "Riot Bomb"
 msgstr "Massbomb"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Kör spel"
 
@@ -943,7 +934,7 @@ msgstr "Hagelbössa"
 msgid "Skip turn"
 msgstr "Hoppa över omgång"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Prickskyttegevär"
 
@@ -964,7 +955,7 @@ msgstr "Ljudfrekvens"
 msgid "Sounds"
 msgstr "Ljud"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Startar ett nytt spel"
 
@@ -1095,7 +1086,7 @@ msgstr "Kan inte använda den här porten!"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Version"
 
@@ -1116,11 +1107,11 @@ msgstr "Väntar på servern, allt du kan göra är att avbryta eller chatta!"
 msgid "Weapons"
 msgstr "Vapen"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Webbplats: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Vad sorgligt för %s - han dödades av en enda pistol!"
@@ -1134,11 +1125,11 @@ msgstr "Vindpartiklar?"
 msgid "Winner"
 msgstr "Vinnare"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Wormux startar..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1220,6 +1211,12 @@ msgstr "o Läser in ljudprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"
+
+#~ msgid "And the winner is..."
+#~ msgstr "Och vinnaren är..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Skynda dig, du är för långsam!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Vill du verkligen avsluta spelet? (J/N)"

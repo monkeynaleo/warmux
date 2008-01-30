@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2008-01-24 02:32+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
@@ -43,7 +43,7 @@ msgstr[0] "%i jucător e gata"
 msgstr[1] "%i jucători sunt gata"
 msgstr[2] "%i de jucători sunt gata"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) a murit."
@@ -69,7 +69,7 @@ msgstr "Echipa %s"
 msgid "%s Team - Remote"
 msgstr "Echipa %s - la distanță"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -79,12 +79,12 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărții!"
@@ -97,13 +97,13 @@ msgstr[0] "%s a câștigat %u punct de energie!"
 msgstr[1] "%s a câștigat %u puncte de energie!"
 msgstr[2] "%s a câștigat %u de puncte de energie!"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "Psihopatia sălășluiește în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -199,7 +199,8 @@ msgstr[2] "Echipa %s a câștigat %u de rachete!"
 
 #: src/weapon/blowtorch.cpp:146
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -258,10 +259,12 @@ msgstr[2] "Echipa %s a câștigat %u de construcții! Nu-ți uita casca."
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Echipa %s a câștigat %u grenadă disco! Dă din fund când o arunci!"
 msgstr[1] "Echipa %s a câștigat %u grenade disco! Dă din fund când le arunci!"
-msgstr[2] "Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
+msgstr[2] ""
+"Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
@@ -419,13 +422,18 @@ msgstr[2] "Echipa %s a câștigat %u de puști!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
-msgstr[0] "Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
-msgstr[1] "Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
-msgstr[2] "Echipa %s a câștigat %u de puști cu lunetă! Țintește și trage direct între ochi!"
+msgid_plural ""
+"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgstr[0] ""
+"Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
+msgstr[1] ""
+"Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
+msgstr[2] ""
+"Echipa %s a câștigat %u de puști cu lunetă! Țintește și trage direct între "
+"ochi!"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -501,7 +509,8 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
+msgstr[0] ""
+"Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
 msgstr[1] ""
 "Echipa %s a câștigat %u lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
@@ -540,10 +549,6 @@ msgstr "Ciocan pnumatic"
 msgid "All teams"
 msgstr "Toate echipele"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "Iar câștigătorul este..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -558,7 +563,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nicovală"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -566,7 +571,7 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Rachetă automată"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr "Înapoi pe câmpul de bătălie"
 
@@ -669,7 +674,7 @@ msgstr "Durata unei ture"
 msgid "Dynamite"
 msgstr "Dinamită"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "SFÂRȘITUL JOCULUI"
 
@@ -689,7 +694,8 @@ msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
 #: src/game/config.cpp:392
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
@@ -709,7 +715,7 @@ msgstr "Eroare în timpul încărcării fișierul de configurare implicită: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Eroare în timpul încărcării modului de joc %s (fișierul %s):"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -792,7 +798,7 @@ msgstr "Comandant șef"
 msgid "Head commander: "
 msgstr "Comandant șef: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr "Ajutor"
 
@@ -838,11 +844,7 @@ msgstr ""
 "Cum se folosește : clic stânga pe țintă\n"
 "un proiectil per rundă"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Grăbește-te te miști prea încet!!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -880,7 +882,7 @@ msgstr "Inițializare sunete"
 msgid "Initialise teams"
 msgstr "Inițializare echipe"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "E un cadou!"
 
@@ -916,7 +918,7 @@ msgstr "Echipe locale:"
 msgid "LowGrav"
 msgstr "Gravitație scăzută"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Harta %s, o creație a lui: "
@@ -996,7 +998,7 @@ msgid "Options"
 msgstr "Opțiuni"
 
 # XXX: nu-mi place cum sună; probabil am să revin la "Opțiuni"
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 msgid "Options menu"
 msgstr "Meniul de opțiuni"
 
@@ -1038,11 +1040,11 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Ieșire"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Ieșire din Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr "Părăsește bătălia"
 
@@ -1070,7 +1072,7 @@ msgstr "Rezoluție"
 msgid "Riot Bomb"
 msgstr "Cocktail Molotov"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Rulează jocul"
 
@@ -1105,7 +1107,7 @@ msgstr "Pușcă"
 msgid "Skip turn"
 msgstr "Sare rândul"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Pușcă cu lunetă"
 
@@ -1126,7 +1128,7 @@ msgstr "Frecvența sunetului"
 msgid "Sounds"
 msgstr "Sunete"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Se începe un nou joc"
 
@@ -1258,7 +1260,7 @@ msgstr "Nu a fost posibilă folosirea acestui port!"
 msgid "Unnamed"
 msgstr "Fără nume"
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Versiunea"
 
@@ -1280,11 +1282,11 @@ msgstr "Se așteaptă serverul, tot ce puteți face e să anulați sau să vorbi
 msgid "Weapons"
 msgstr "Arme"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -1299,11 +1301,11 @@ msgstr "Particulele de vânt?"
 msgid "Winner"
 msgstr "Câștigător"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Se lansează Wormux..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
@@ -1385,6 +1387,12 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#~ msgid "And the winner is..."
+#~ msgstr "Iar câștigătorul este..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Grăbește-te te miști prea încet!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Chiar doriți să abandonați? (D/N)"
@@ -2356,4 +2364,3 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
-

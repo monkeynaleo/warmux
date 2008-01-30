@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-01-24 01:37+0200\n"
 "PO-Revision-Date: 2008-01-26 23:26+0300\n"
 "Last-Translator: \n"
 "Language-Team:  <ru@li.org>\n"
@@ -16,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -42,7 +42,7 @@ msgstr[0] "%i игрок готов"
 msgstr[1] "%i игрока готовы"
 msgstr[2] "%i игроков готовы"
 
-#: src/game/game.cpp:810
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) погиб."
@@ -68,7 +68,7 @@ msgstr "Команда %s"
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удаленно"
 
-#: src/game/game.cpp:789
+#: src/game/game.cpp:635
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -78,12 +78,12 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:628
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game.cpp:793
+#: src/game/game.cpp:639
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -96,12 +96,12 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game.cpp:804
+#: src/game/game.cpp:650
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game.cpp:799
+#: src/game/game.cpp:645
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
@@ -190,7 +190,8 @@ msgstr[2] "Команда %s выиграла %u базук!"
 
 #: src/weapon/blowtorch.cpp:146
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -231,7 +232,8 @@ msgstr[2] "Команда %s выиграла %u строительств! Не 
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Команда %s выиграла %u диско-гранату! Станцуй пока бросаешь её!"
 msgstr[1] "Команда %s выиграла %u диско-гранаты! Станцуй пока бросаешь их!"
 msgstr[2] "Команда %s выиграла %u диско-гранат! Станцуй пока бросаешь их!"
@@ -332,13 +334,20 @@ msgstr[0] "Команда %s выиграла %u дробовик!"
 msgstr[1] "Команда %s выиграла %u дробовика!"
 msgstr[2] "Команда %s выиграла %u дробовиков!"
 
-#: src/weapon/snipe_rifle.cpp:241
+#: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
-msgstr[0] "Команда %s выиграла %u снайперскую винтовку! Прицелься и пальни ему промеж глаз!"
-msgstr[1] "Команда %s выиграла %u снайперские винтовки! Прицелься и пальни ему промеж глаз!"
-msgstr[2] "Команда %s выиграла %u снайперских винтовок! Прицелься и пальни ему промеж глаз!"
+msgid_plural ""
+"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgstr[0] ""
+"Команда %s выиграла %u снайперскую винтовку! Прицелься и пальни ему промеж "
+"глаз!"
+msgstr[1] ""
+"Команда %s выиграла %u снайперские винтовки! Прицелься и пальни ему промеж "
+"глаз!"
+msgstr[2] ""
+"Команда %s выиграла %u снайперских винтовок! Прицелься и пальни ему промеж "
+"глаз!"
 
 #: src/weapon/submachine_gun.cpp:156
 #, c-format
@@ -429,10 +438,6 @@ msgstr "Отбойный молот"
 msgid "All teams"
 msgstr "Все команды"
 
-#: src/game/game.cpp:425
-msgid "And the winner is..."
-msgstr "И победителем стал..."
-
 #: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
@@ -447,7 +452,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Наковальня"
 
-#: src/main.cpp:266
+#: src/main.cpp:270
 msgid "Authors:"
 msgstr "Авторы:"
 
@@ -455,7 +460,7 @@ msgstr "Авторы:"
 msgid "Automatic Bazooka"
 msgstr "Автоматическая базука"
 
-#: src/menu/pause_menu.cpp:52
+#: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
 msgstr "Вернуться к битве"
 
@@ -557,7 +562,7 @@ msgstr "Продолжительность хода"
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/game/game.cpp:217
+#: src/game/game.cpp:229
 msgid "END OF GAME"
 msgstr "КОНЕЦ ИГРЫ"
 
@@ -577,8 +582,10 @@ msgstr "Ошибка при загрузке данных команды %s:"
 
 #: src/game/config.cpp:392
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
 
 #: src/game/config.cpp:267
 #, c-format
@@ -595,7 +602,7 @@ msgstr "Ошибка при загрузке конфигурационного 
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/game.cpp:116
+#: src/game/game.cpp:129
 #, c-format
 msgid ""
 "Error:\n"
@@ -675,7 +682,7 @@ msgstr "Командующий"
 msgid "Head commander: "
 msgstr "Командующий: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:60
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
 msgstr "Справка"
 
@@ -721,11 +728,7 @@ msgstr ""
 "Правила использования : щелкните левой кнопкой мыши на цели\n"
 "патрон за ход"
 
-#: src/game/game.cpp:848
-msgid "Hurry up, you are too slow !!"
-msgstr "Поторопитесь, вы слишком медлительны !!"
-
-#: src/main.cpp:258
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -763,7 +766,7 @@ msgstr "Инициализация звуков"
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
-#: src/game/game.cpp:590
+#: src/game/game.cpp:519
 msgid "It's a present!"
 msgstr "Это подарок!"
 
@@ -796,7 +799,7 @@ msgstr "Локальные команды:"
 msgid "LowGrav"
 msgstr "Антигравитатор"
 
-#: src/map/map.cpp:291
+#: src/map/map.cpp:293
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Карту %s создал: "
@@ -875,7 +878,7 @@ msgstr "Количество команд"
 msgid "Options"
 msgstr "Настройки"
 
-#: src/menu/pause_menu.cpp:56
+#: src/menu/pause_menu.cpp:57
 msgid "Options menu"
 msgstr "Меню настроек"
 
@@ -917,11 +920,11 @@ msgstr "Порт:"
 msgid "Quit"
 msgstr "Выйти"
 
-#: src/main.cpp:238
+#: src/main.cpp:242
 msgid "Quit Wormux"
 msgstr "Выйти из Wormux"
 
-#: src/menu/pause_menu.cpp:64
+#: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
 msgstr "Покинуть битву"
 
@@ -949,7 +952,7 @@ msgstr "Разрешение"
 msgid "Riot Bomb"
 msgstr "Пустотная бомба"
 
-#: src/main.cpp:88
+#: src/main.cpp:90
 msgid "Run game"
 msgstr "Начать игру"
 
@@ -984,7 +987,7 @@ msgstr "Дробовик"
 msgid "Skip turn"
 msgstr "Пропуск хода"
 
-#: src/weapon/snipe_rifle.cpp:88
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Снайперская винтовка"
 
@@ -1005,7 +1008,7 @@ msgstr "Частота звука"
 msgid "Sounds"
 msgstr "Звуки"
 
-#: src/game/game.cpp:83
+#: src/game/game.cpp:96
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
@@ -1135,7 +1138,7 @@ msgstr "Нельзя использовать этот порт!"
 msgid "Unnamed"
 msgstr "Нет имени"
 
-#: src/main.cpp:193
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Версия"
 
@@ -1149,7 +1152,8 @@ msgstr[2] "Подождите! %i игроков пока не готовы!"
 
 #: src/menu/network_menu.cpp:387
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr "Ожидание сервера, всё что вы можете сделать это отменить или поболтать!"
+msgstr ""
+"Ожидание сервера, всё что вы можете сделать это отменить или поболтать!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -1157,11 +1161,11 @@ msgstr "Ожидание сервера, всё что вы можете сде�
 msgid "Weapons"
 msgstr "Оружие"
 
-#: src/main.cpp:275
+#: src/main.cpp:279
 msgid "Website: "
 msgstr "Веб-сайт: "
 
-#: src/game/game.cpp:807
+#: src/game/game.cpp:653
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -1175,11 +1179,11 @@ msgstr "Частицы в воздухе?"
 msgid "Winner"
 msgstr "Победитель"
 
-#: src/main.cpp:206
+#: src/main.cpp:210
 msgid "Wormux launching..."
 msgstr "Запуск Wormux..."
 
-#: src/main.cpp:265
+#: src/main.cpp:269
 msgid "Wormux version "
 msgstr "Wormux версии "
 
@@ -1260,3 +1264,8 @@ msgstr "o Загрузка звукового профиля: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
 
+#~ msgid "And the winner is..."
+#~ msgstr "И победителем стал..."
+
+#~ msgid "Hurry up, you are too slow !!"
+#~ msgstr "Поторопитесь, вы слишком медлительны !!"
