@@ -136,6 +136,13 @@
 	<country>Portugal</country>
       </author>
       <author>
+	<nickname>KonKer</nickname>
+	<name>John Doe</name>
+	<description>Updated Spanish Translation</description>
+	<email>jua56_AT_hotmail_DOT_com</email>
+	<country>Spain</country>
+      </author>
+      <author>
 	<nickname>pepp</nickname>
 	<name>Pierre-eric Pelloux Prayer</name>
 	<description>Write small hack to optimize character drawing</description>
