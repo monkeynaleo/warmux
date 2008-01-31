@@ -66,7 +66,7 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
-  SetTestRect(image->GetWidth() / 4, image->GetWidth() / 4, 1, image->GetHeight() / 5);
+  SetTestRect(0, 0, 0, 0);
 }
 
 Anvil::~Anvil()
