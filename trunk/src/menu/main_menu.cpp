@@ -80,7 +80,6 @@ MainMenu::MainMenu() :
   uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
   box->SetXY(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
-  //box->SetXY(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
 
   std::string s("Version "+Constants::WORMUX_VERSION);
   version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
