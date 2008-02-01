@@ -41,10 +41,7 @@ PictureTextCBox::PictureTextCBox(const std::string &label,
   m_disabled_back = resource_manager.LoadImage(res, "menu/disabled_back");
   resource_manager.UnLoadXMLProfile( res);
 
-  //SetPosition( rect.GetPosition() );
-  //SetSize( rect.GetSize() );
-
-  SetSizeY( m_image.GetHeight() + (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).GetHeight() );
+  SetSize(_size);
   m_value = value;
 
   txt_label->SetMaxWidth (GetSizeX());
@@ -60,7 +57,7 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
       uint enabled_y = GetPositionY();
       uint outside_x = std::max(uint(0), GetPositionX() - enabled_x);
       uint outside_y = std::max(uint(0), GetPositionY() - enabled_y);
-      
+
       enabled_x+= outside_x;
       enabled_y+= outside_y;
       Rectanglei srcRect(outside_x, outside_y, m_enabled.GetWidth() - outside_x,
@@ -73,7 +70,7 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
       uint disabled_y = GetPositionY();
       uint outside_x = std::max(uint(0), GetPositionX() - disabled_x);
       uint outside_y = std::max(uint(0), GetPositionY() - disabled_y);
-      
+
       disabled_x+= outside_x;
       disabled_y+= outside_y;
       Rectanglei srcRect(outside_x, outside_y, m_disabled_back.GetWidth() - outside_x,
@@ -85,11 +82,11 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) 
   uint tmp_y = GetPositionY() + (m_enabled.GetHeight() - m_image.GetHeight())/2;
 
   video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
-  
+
   txt_label->DrawCenterTop(GetPosition()
 			   + Point2i(GetSizeX()/2,
 				     GetSizeY() - txt_label->GetHeight()));
-  
+
   if (!m_value)
     {
       uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_front.GetWidth())/2 ;
