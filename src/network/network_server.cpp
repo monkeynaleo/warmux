@@ -126,7 +126,7 @@ connection_state_t NetworkServer::ServerStart(const std::string &port)
   printf("\nConnected\n");
   socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
-  printf("Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
+  MSG_DEBUG("network", "Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
   return CONNECTED;
 }
 
