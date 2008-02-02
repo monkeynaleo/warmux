@@ -48,7 +48,7 @@
 
 const uint SOUND_Y = 10;
 const uint SOUND_W = 530;
-const uint SOUND_H = 200;
+const uint SOUND_H = 150;
 
 const uint GRAPHIC_W = 530;
 const uint GRAPHIC_H = 330;
@@ -59,35 +59,33 @@ OptionMenu::OptionMenu() :
   AppWormux * app = AppWormux::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   Point2i stdSize(140, -1);
+  Point2i option_size(140, 130);
 
   /* Graphic options */
   Box * graphic_options = new HBox(GRAPHIC_H);
   graphic_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/video_label"));
 
-  Box * top_n_bottom_graphic_options = new VBox(GRAPHIC_W - 40,false);
-  Box * top_graphic_options = new HBox(GRAPHIC_H / 2 - 20, false);
-  Box * bottom_graphic_options = new HBox(GRAPHIC_H / 2 - 20, false);
-  top_graphic_options->SetMargin(25);
-  bottom_graphic_options->SetMargin(25);
+  Box * graphic_options_box = new GridBox(GRAPHIC_W - 40, option_size, false);
 
   // Various options
-  opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", stdSize);
-  top_graphic_options->AddWidget(opt_display_wind_particles);
+  opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
+  graphic_options_box->AddWidget(opt_display_wind_particles);
 
-  opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", stdSize);
-  top_graphic_options->AddWidget(opt_display_energy);
+  opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size);
+  graphic_options_box->AddWidget(opt_display_energy);
 
-  opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", stdSize);
-  top_graphic_options->AddWidget(opt_display_name);
+  opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
+  graphic_options_box->AddWidget(opt_display_name);
 
-  full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdSize);
-  bottom_graphic_options->AddWidget(full_screen);
+  full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
+  graphic_options_box->AddWidget(full_screen);
 
   opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-                                          stdSize,
-                                          50, 5,
-                                          20, 50);
-  bottom_graphic_options->AddWidget(opt_max_fps);
+					  option_size,
+					  50, 5,
+					  20, 50);
+
+  graphic_options_box->AddWidget(opt_max_fps);
 
 
   // Get available video resolution
@@ -106,13 +104,11 @@ OptionMenu::OptionMenu() :
 
     video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
   }
-  cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", stdSize,
+  cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", option_size,
                                  video_resolutions, current_resolution);
-  bottom_graphic_options->AddWidget(cbox_video_mode);
+  graphic_options_box->AddWidget(cbox_video_mode);
 
-  top_n_bottom_graphic_options->AddWidget(top_graphic_options);
-  top_n_bottom_graphic_options->AddWidget(bottom_graphic_options);
-  graphic_options->AddWidget(top_n_bottom_graphic_options);
+  graphic_options->AddWidget(graphic_options_box);
 
   widgets.AddWidget(graphic_options);
 
@@ -127,16 +123,13 @@ OptionMenu::OptionMenu() :
   Box * sound_options = new HBox(SOUND_H);
   sound_options->AddWidget(new PictureWidget(Point2i(40, 138), "menu/audio_label"));
 
-  Box * all_sound_options = new HBox(SOUND_H-20,false);
-  all_sound_options->SetMargin(25);
-  all_sound_options->SetBorder(Point2i(10,10));
+  Box * all_sound_options = new GridBox(SOUND_W, option_size, false);
 
-  opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", stdSize);
+  opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", option_size);
   all_sound_options->AddWidget(opt_music);
 
-  opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", stdSize);
+  opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", option_size);
   all_sound_options->AddWidget(opt_sound_effects);
-
 
   // Generate sound mode list
   uint current_freq = jukebox.GetFrequency();
@@ -154,7 +147,7 @@ OptionMenu::OptionMenu() :
     current_sound_freq = "11025";
 
   cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
-				 stdSize, sound_freqs, current_sound_freq);
+				 option_size, sound_freqs, current_sound_freq);
   all_sound_options->AddWidget(cbox_sound_freq);
 
   sound_options->AddWidget(all_sound_options);
@@ -168,9 +161,9 @@ OptionMenu::OptionMenu() :
   language_options->SetXY(center_x - (graphic_options->GetSizeX() + language_options->GetSizeX() + 20)/2,
 			  sound_options->GetPositionY() + sound_options->GetSizeY() + 10);
 
-  graphic_options->SetXY(language_options->GetPositionX() + language_options->GetSizeX() + 10, 
+  graphic_options->SetXY(language_options->GetPositionX() + language_options->GetSizeX() + 10,
 			 language_options->GetPositionY());
-  
+
   // Values initialization
 
   Config * config = Config::GetInstance();
