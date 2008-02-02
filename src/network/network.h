@@ -61,7 +61,7 @@ typedef enum
   CONN_TIMEOUT
 } connection_state_t;
 
-class Network : public Singleton<Network>
+class Network
 {
 public:
   typedef enum
@@ -80,6 +80,7 @@ private:
   friend class DistantComputer;
   const connection_state_t GetError() const;
 
+  static Network *singleton;
   static bool sdlnet_initialized;
   static int  num_objects;
 
