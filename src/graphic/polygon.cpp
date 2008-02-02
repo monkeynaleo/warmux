@@ -84,13 +84,13 @@ PolygonItem::PolygonItem()
   SetAlignment(H_CENTERED, V_CENTERED);
 }
 
-PolygonItem::PolygonItem(PolygonItem * item)
+PolygonItem::PolygonItem(PolygonItem * other)
 {
-  transformed_position = item->transformed_position;
-  position = item->position;
-  SetPosition(item->GetPosition());
-  SetSprite(new Sprite(*(item->GetSprite())));
-  SetAlignment(item->h_align, item->v_align);
+  transformed_position = other->transformed_position;
+  position = other->position;
+  SetPosition(other->GetPosition());
+  SetSprite(new Sprite(*(other->GetSprite())));
+  SetAlignment(other->h_align, other->v_align);
 }
 
 PolygonItem::PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)

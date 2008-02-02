@@ -26,6 +26,7 @@
 #include <list>
 #include <string>
 #include "include/base.h"
+#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file
@@ -60,7 +61,7 @@ typedef enum
   CONN_TIMEOUT
 } connection_state_t;
 
-class Network
+class Network : public Singleton<Network>
 {
 public:
   typedef enum
@@ -79,7 +80,6 @@ private:
   friend class DistantComputer;
   const connection_state_t GetError() const;
 
-  static Network * singleton;
   static bool sdlnet_initialized;
   static int  num_objects;
 

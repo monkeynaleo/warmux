@@ -34,37 +34,27 @@
 using namespace std;
 
 #include <SDL.h>
-#include "ai/ai_engine.h"
 #include "game/config.h"
 #include "game/game.h"
-#include "game/game_mode.h"
 #include "game/time.h"
-#include "graphic/sprite.h"
 #include "graphic/font.h"
-#include "graphic/video.h"
+#include "graphic/sprite.h"
 #include "graphic/text.h"
+#include "graphic/video.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
-#include "interface/interface.h"
-#include "interface/mouse.h"
-#include "map/camera.h"
+#include "include/singleton.h"
 #include "map/map.h"
-#include "map/maps_list.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
 #include "menu/help_menu.h"
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
-#include "menu/network_menu.h"
 #include "menu/options_menu.h"
-#include "network/download.h"
+#include "particles/particle.h"
 #include "sound/jukebox.h"
-#include "team/team_config.h"
-#include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
-#include "tool/random.h"
-#include "weapon/weapons_list.h"
 
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
@@ -93,11 +83,9 @@ AppWormux::AppWormux():
 AppWormux::~AppWormux()
 {
   delete video;
+  ParticleEngine::FreeMem();
   Font::ReleaseInstances();
-  delete Mouse::GetInstance();
-  delete Camera::GetInstance();
-  AIengine::CleanUp();
-  Interface::CleanUp();
+  BaseSingleton::ReleaseSingletons();
   singleton = NULL;
 }
 
@@ -246,15 +234,6 @@ void AppWormux::End() const
   Config::GetInstance()->Save();
 
   jukebox.End();
-  TeamsList::CleanUp();
-  MapsList::CleanUp();
-  WeaponsList::CleanUp();
-  delete Config::GetInstance();
-  Game::CleanUp();
-  GameMode::CleanUp();
-  delete Time::GetInstance();
-  delete Constants::GetInstance();
-  Downloader::CleanUp();
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");

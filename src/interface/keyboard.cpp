@@ -24,15 +24,6 @@
 #include "network/chat.h"
 #include <SDL_events.h>
 
-Keyboard * Keyboard::singleton = NULL;
-
-Keyboard * Keyboard::GetInstance() {
-  if (singleton == NULL) {
-    singleton = new Keyboard();
-  }
-  return singleton;
-}
-
 Keyboard::Keyboard() : ManMachineInterface()
 {
   //Disable repeated events when a key is kept down

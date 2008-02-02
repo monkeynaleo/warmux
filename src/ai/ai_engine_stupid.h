@@ -21,17 +21,15 @@
 #ifndef AI_STUPID_ENGINE
 #define AI_STUPID_ENGINE
 
+#include "include/singleton.h"
 #include "ai/ai_movement_module.h"
 #include "ai/ai_shoot_module.h"
 
-class AIStupidEngine
+class AIStupidEngine : public Singleton<AIStupidEngine>
 {
  private:
   AIStupidEngine(const AIStupidEngine&);
   const AIStupidEngine& operator=(const AIStupidEngine&);
-
-  static AIStupidEngine * singleton;
-  AIStupidEngine();
 
   AIMovementModule m_movement;
   AIShootModule m_shoot;
@@ -48,9 +46,11 @@ class AIStupidEngine
 
   void ChooseDirection();
 
- public:
-  static AIStupidEngine* GetInstance();
+protected:
+  friend class Singleton<AIStupidEngine>;
+  AIStupidEngine();
 
+ public:
   void Refresh();
   void ForceEndOfTurn();
 };

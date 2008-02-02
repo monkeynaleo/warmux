@@ -63,13 +63,14 @@ wormux_SOURCES = \
         gui/text_box.cpp gui/text_box.h \
         gui/widget.cpp gui/widget.h \
         gui/widget_list.cpp gui/widget_list.h \
-	gui/big/button_pic.cpp gui/big/button_pic.h \
+        gui/big/button_pic.cpp gui/big/button_pic.h \
         include/action.cpp include/action.h \
         include/action_handler.cpp include/action_handler.h \
         include/app.h main.cpp \
         include/base.h \
         include/binreloc.h include/binreloc.c \
         include/constant.cpp include/constant.h \
+        include/singleton.cpp include/singleton.h \
         interface/cursor.cpp interface/cursor.h \
         interface/game_msg.cpp interface/game_msg.h \
         interface/interface.cpp interface/interface.h \

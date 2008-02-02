@@ -34,6 +34,7 @@
 #include <string>
 #include <map>
 #include "include/base.h"
+#include "include/singleton.h"
 #include "tool/point.h"
 #include "team/team_config.h"
 
@@ -54,7 +55,7 @@ namespace xmlpp
 
 //-----------------------------------------------------------------------------
 
-class Config
+class Config : public Singleton<Config>
 {
 public:
   static const int ALPHA = 0;
@@ -121,9 +122,6 @@ public:
   inline std::string GetLocaleDir() const { return locale_dir; };
   inline std::string GetPersonalDir() const { return personal_dir; };
 
-  static Config * GetInstance();
-  ~Config() { RemoveAllObjectConfigs(); singleton = NULL; };
-
   bool Save(bool save_current_teams = false);
   inline const std::string &GetGameMode() const { return m_game_mode; }
 
@@ -177,9 +175,11 @@ protected:
 
   int transparency;
 
-private:
+  friend class Singleton<Config>;
   Config();
-  static Config * singleton;
+  ~Config() { RemoveAllObjectConfigs(); singleton = NULL; }
+
+private:
   bool DoLoading(void);
   void LoadDefaultValue();
   void LoadXml(const xmlpp::Element *xml);

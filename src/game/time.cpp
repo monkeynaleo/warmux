@@ -24,15 +24,6 @@
 #include <sstream>
 #include <iomanip>
 
-Time * Time::singleton = NULL;
-
-Time * Time::GetInstance() {
-  if (singleton == NULL) {
-    singleton = new Time();
-  }
-  return singleton;
-}
-
 bool Time::IsGamePaused() const {
   return is_game_paused;
 }

@@ -25,13 +25,14 @@
 #include <map>
 #include "graphic/surface.h"
 #include "include/base.h"
+#include "include/singleton.h"
 #include "tool/point.h"
 
 // Forward declarations
 struct SDL_event;
 class MouseCursor;
 
-class Mouse
+class Mouse : public Singleton<Mouse>
 {
 public:
 
@@ -65,8 +66,6 @@ private:
   visibility_t visible;
   pointer_t current_pointer;
 
-  static Mouse * singleton;
-  Mouse();
   void GetDesignatedCharacter() const;
 
   void ActionLeftClic(bool shift = false) const;
@@ -75,9 +74,11 @@ private:
   void ActionWheelUp(bool shift = false) const;
   const MouseCursor& GetCursor(pointer_t pointer) const;
 
-public:
-  static Mouse * GetInstance();
+protected:
+  friend class Singleton<Mouse>;
+  Mouse();
 
+public:
   bool HandleClic (const SDL_Event& event) const;
   void Refresh();
 

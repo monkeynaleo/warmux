@@ -66,8 +66,6 @@ protected:
     Y_AXIS_MOTION
   } Key_Event_t;
 
-  ManMachineInterface() { SetDefaultConfig(); };
-  virtual ~ManMachineInterface() { };
   virtual void SetDefaultConfig() { };
   std::map<int, Key_t> layout;
   std::list<uint8> registred_event;
@@ -80,6 +78,9 @@ protected:
   void HandleKeyReleased(const Key_t &action_key);
 
   void SetKeyAction(int key, Key_t at) { layout[key] = at; };
+
+  ManMachineInterface() { SetDefaultConfig(); };
+  virtual ~ManMachineInterface() { };
 
 public:
   virtual void HandleKeyEvent(const SDL_Event& event) = 0;

@@ -22,15 +22,6 @@
 #include <SDL.h>
 #include "interface/joystick.h"
 
-Joystick * Joystick::singleton = NULL;
-
-Joystick * Joystick::GetInstance() {
-  if (singleton == NULL) {
-    singleton = new Joystick();
-  }
-  return singleton;
-}
-
 Joystick::Joystick() :
   ManMachineInterface(),
   previous_x_value(0),

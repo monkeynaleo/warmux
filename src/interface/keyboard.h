@@ -23,18 +23,17 @@
 #define KEYBOARD_H
 //-----------------------------------------------------------------------------
 #include "interface/man_machine_interface.h"
+#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
-class Keyboard : public ManMachineInterface
+class Keyboard : public ManMachineInterface, public Singleton<Keyboard>
 {
-private:
-
+protected:
+  friend class Singleton<Keyboard>;
   Keyboard();
   void SetDefaultConfig();
-  static Keyboard * singleton;
 
 public:
-  static Keyboard * GetInstance();
   void HandleKeyEvent(const SDL_Event& event);
 };
 

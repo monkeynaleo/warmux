@@ -65,8 +65,6 @@ int  Network::num_objects = 0;
 bool Network::sdlnet_initialized = false;
 bool Network::stop_thread = true;
 
-Network * Network::singleton = NULL;
-
 Network * Network::GetInstance()
 {
   if (singleton == NULL) {

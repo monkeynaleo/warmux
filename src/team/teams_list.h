@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <vector>
+#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Forward declarations
@@ -31,7 +32,7 @@ class Team;
 class ConfigTeam;
 class Character;
 
-class TeamsList
+class TeamsList : public Singleton<TeamsList>
 {
 public:
   typedef std::list<Team *>::iterator full_iterator;
@@ -43,18 +44,17 @@ private:
   typedef std::list<uint>::iterator selection_iterator;
   std::list<uint> selection;
   std::vector<Team*>::iterator active_team;
-  static TeamsList *singleton;
 
   void LoadOneTeam (const std::string &dir, const std::string &file);
-  TeamsList();
-  ~TeamsList();
   void LoadList();
 
-  static TeamsList *GetInstance();
+protected:
+  friend class Singleton<TeamsList>;
+  TeamsList();
+  ~TeamsList();
 
 public:
   friend TeamsList &GetTeamsList(void);
-  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
   void NextTeam();
   Team* GetNextTeam();
   Team& ActiveTeam();
@@ -96,7 +96,7 @@ Character& ActiveCharacter();
 
 bool compareTeams(const Team *a, const Team *b);
 
-inline TeamsList &GetTeamsList(void) { return *TeamsList::GetInstance(); };
+inline TeamsList &GetTeamsList(void) { return TeamsList::GetRef(); };
 
 //-----------------------------------------------------------------------------
 #endif

@@ -67,7 +67,6 @@
 #endif
 
 
-Game * Game::singleton       = NULL;
 Game::game_mode_t Game::mode = CLASSIC;
 
 Game * Game::GetInstance()

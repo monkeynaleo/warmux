@@ -167,7 +167,7 @@ WeaponsMenu::WeaponsMenu():
   weapons_menu->AddItem(new Sprite(Font::GenerateSurface(_("Weapons"), dark_gray_color, Font::FONT_BIG)),
                         weapons_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
   tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), dark_gray_color, Font::FONT_BIG)),
-                        tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
+                      tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
 
   resource_manager.UnLoadXMLProfile(res);
 }

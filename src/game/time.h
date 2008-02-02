@@ -24,26 +24,26 @@
 
 #include <string>
 #include "include/base.h"
+#include "include/singleton.h"
 
 // XXX uint wrap-around (or at least system timer) not handled
-class Time
+class Time : public Singleton<Time>
 {
 private:
   uint        current_time;
   //uint        max_time;
   uint        delta_t;
   bool        is_game_paused;
-  static Time *singleton;
 
   uint        real_time_game_start;
   uint        real_time_pause_dt;
   uint        real_time_pause_begin;
 
-private:
+protected:
+  friend class Singleton<Time>;
   Time();
+
 public:
-  static Time *GetInstance();
-  ~Time() { singleton = NULL; };
 
   void Reset();
   bool IsGamePaused() const;

@@ -23,6 +23,7 @@
 #define INTERFACE_H
 #include <vector>
 #include "include/base.h"
+#include "include/singleton.h"
 #include "weapon_menu.h"
 #include "gui/energy_bar.h"
 #include "gui/energy_bar.h"
@@ -39,15 +40,13 @@ class Weapon;
 #undef interface
 #endif
 
-class Interface
+class Interface : public Singleton<Interface>
 {
-
 public:
   Character *character_under_cursor;
   Weapon *weapon_under_cursor;
   WeaponsMenu weapons_menu;
   Team *tmp_team;
-  Polygon * interface;
 
  private:
    /* If you need this, implement it (correctly)*/
@@ -87,15 +86,12 @@ public:
    Surface wind_indicator;
    Point2i bottom_bar_pos;
 
-   static Interface * singleton;
-
- private:
+protected:
+  friend class Singleton<Interface>;
    Interface();
    ~Interface();
 
  public:
-   static Interface *GetInstance();
-   static void CleanUp() { if (singleton) delete singleton; singleton = NULL; }
    const WeaponsMenu &GetWeaponsMenu() const { return weapons_menu; };
 
    void Reset();

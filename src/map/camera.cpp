@@ -42,16 +42,6 @@ const Point2i CAMERA_SPEED(20, 20);
 // for this speed (and higher), the object can be in the corner of the screen
 #define MAX_SPEED_ADVANCE 15
 
-Camera* Camera::singleton = NULL;
-
-Camera * Camera::GetInstance()
-{
-  if (singleton == NULL) {
-    singleton = new Camera();
-  }
-  return singleton;
-}
-
 Camera::Camera():
   auto_crop(true),
   in_advance(false),
