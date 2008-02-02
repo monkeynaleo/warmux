@@ -2,7 +2,6 @@
 #define SINGLETON_H
 
 #include <list>
-#include "tool/debug.h"
 
 class BaseSingleton;
 
@@ -11,28 +10,12 @@ extern SingletonList singletons;
 
 class BaseSingleton
 {
+protected:
+  BaseSingleton();
+  virtual ~BaseSingleton();
+
 public:
-  BaseSingleton()
-  {
-    singletons.push_back(this);
-    MSG_DEBUG("singleton", "Added %p\n", this);
-  }
-  virtual ~BaseSingleton()
-  {
-    singletons.remove(this);
-    MSG_DEBUG("singleton", "Removed %p\n", this);
-  }
-  static void ReleaseSingletons()
-  {
-    SingletonList copy(singletons);
-    for (SingletonList::iterator it = copy.begin();
-         it != copy.end();
-         ++it)
-    {
-      MSG_DEBUG("singleton", "Releasing %p\n", *it);
-      delete (*it);
-    }
-  };
+  static void ReleaseSingletons();
 };
 
 template<typename T>
@@ -44,11 +27,7 @@ protected:
 public:
   static T* GetInstance()
   {
-    if (!singleton)
-    {
-      singleton = new T();
-      MSG_DEBUG("singleton", "Singleton is %p\n", singleton);
-    }
+    if (!singleton) singleton = new T();
     return singleton;
   }
   static const T* GetConstInstance() { return GetInstance(); }
