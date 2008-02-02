@@ -24,15 +24,18 @@
 
 #include <typeinfo>
 #include <list>
+#include "tool/debug.h"
 
 // Forward declarations
 class BaseSingleton;
+struct SDL_mutex;
 
 typedef std::list<BaseSingleton*> SingletonList;
 extern SingletonList singletons;
 
 class BaseSingleton
 {
+  static SDL_mutex* mutex;
 protected:
   BaseSingleton();
   virtual ~BaseSingleton();
