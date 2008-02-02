@@ -60,15 +60,6 @@
 #include "weapon/weapons_list.h"
 #include "weapon/explosion.h"
 
-ActionHandler * ActionHandler::singleton = NULL;
-
-ActionHandler * ActionHandler::GetInstance()
-{
-  if (singleton == NULL)
-    singleton = new ActionHandler();
-  return singleton;
-}
-
 // ########################################################
 // ########################################################
 

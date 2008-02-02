@@ -25,6 +25,7 @@
 
 #include <string>
 #include "include/base.h"
+#include "include/singleton.h"
 #include "weapon/weapon_cfg.h"
 
 namespace xmlpp
@@ -33,7 +34,7 @@ namespace xmlpp
 }
 class XmlReader;
 
-class GameMode
+class GameMode : public Singleton<GameMode>
 {
 public:
   uint nb_characters;
@@ -86,9 +87,6 @@ private:
   std::string GetObjectsFilename() const;
 
 public:
-  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
-  static GameMode * GetInstance();
-
   const std::string& GetName() const;
 
   bool Load(void);
@@ -106,11 +104,10 @@ public:
 
   bool AllowCharacterSelection() const;
 
-private:
-  static GameMode * singleton;
+protected:
+  friend class Singleton<GameMode>;
   GameMode();
   ~GameMode();
-
 };
 
 #endif /* GAME_MODE_H */

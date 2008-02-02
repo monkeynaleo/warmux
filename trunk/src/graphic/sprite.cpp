@@ -61,7 +61,7 @@ Sprite::Sprite(const Sprite &other) :
   frames()
 {
   Constructor();
-  current_surface = Surface(other.current_surface);
+  current_surface = other.current_surface;
   show = other.show;
   current_frame = other.current_frame;
   frame_width_pix = other.frame_width_pix;
@@ -116,7 +116,7 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 }
 
 void Sprite::AddFrame(const Surface &surf, unsigned int delay){
-          frames.push_back( SpriteFrame(surf, delay) );
+  frames.push_back( SpriteFrame(surf, delay) );
 }
 
 void Sprite::SetSize(unsigned int w, unsigned int h){

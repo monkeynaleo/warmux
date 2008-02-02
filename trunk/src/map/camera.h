@@ -29,21 +29,18 @@
 
 class PhysicalObj;
 
-class Camera : public Rectanglei
+class Camera : public Rectanglei, public Singleton<Camera>
 {
   Camera(const Camera&);
   const Camera& operator=(const Camera&);
 
 private:
-  static Camera * singleton;
-
   Mouse::pointer_t pointer_used_before_scroll;
   void SaveMouseCursor();
   void RestoreMouseCursor();
 
   void TestCamera();
   void ScrollCamera();
-  Camera();
 
   bool auto_crop;
   bool in_advance;
@@ -52,9 +49,12 @@ private:
 
   Point2i FreeDegrees() const { return Point2i(HasFixedX()? 0 : 1, HasFixedY()? 0 : 1); };
   Point2i NonFreeDegrees() const { return Point2i(1, 1) - FreeDegrees(); };
-public:
-  static Camera * GetInstance();
 
+protected:
+  friend class Singleton<Camera>;
+  Camera();
+
+public:
   // before beginning a game
   void Reset();
 

@@ -24,9 +24,10 @@
 #include "base.h"
 #include <string>
 #include <vector>
+#include "include/singleton.h"
 #include "tool/point.h"
 
-class Constants
+class Constants : public Singleton<Constants>
 {
 public:
   // Version number of Wormux
@@ -54,13 +55,10 @@ public:
   // Minimal free heigth (in pixel) for the playground to be said "open"
   static const uint HAUT_MIN_TERRAIN_OUVERT;
 
-  static Constants * GetInstance();
-  ~Constants() { singleton = NULL; AUTHORS.clear(); };
-
-private:
+protected:
+  friend class Singleton<Constants>;
   Constants();
-
-  static Constants * singleton;
+  ~Constants() { AUTHORS.clear(); };
 };
 
 #endif

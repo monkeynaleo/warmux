@@ -28,16 +28,6 @@
 #include "tool/debug.h"
 #include "tool/error.h"
 
-Downloader * Downloader::singleton = NULL;
-
-Downloader * Downloader::GetInstance()
-{
-  if (singleton == NULL) {
-    singleton = new Downloader();
-  }
-  return singleton;
-}
-
 Downloader::Downloader():
   curl(curl_easy_init())
 {

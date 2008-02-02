@@ -31,15 +31,6 @@
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 
-GameMode * GameMode::singleton = NULL;
-
-GameMode * GameMode::GetInstance() {
-  if (singleton == NULL) {
-    singleton = new GameMode();
-  }
-  return singleton;
-}
-
 GameMode::GameMode():
   nb_characters(6),
   max_teams(4),

@@ -60,6 +60,7 @@ public:
   explicit Sprite(bool _smooth=false);
   explicit Sprite(const Surface& surface, bool _smooth=false);
   Sprite(const Sprite &other);
+  ~Sprite() { frames.clear(); }
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
   Surface GetSurface() const;

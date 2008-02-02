@@ -21,16 +21,15 @@
 #ifndef AI_ENGINE
 #define AI_ENGINE
 
-class AIengine
+#include "include/singleton.h"
+
+class AIengine : public Singleton<AIengine>
 {
- private:
-  static AIengine * singleton;
+protected:
+  friend class Singleton<AIengine>;
   AIengine();
 
  public:
-  static AIengine* GetInstance();
-  static void CleanUp() { if (singleton) delete singleton; singleton = 0; };
-
   void Refresh() const;
 };
 

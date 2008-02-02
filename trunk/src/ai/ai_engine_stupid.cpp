@@ -27,8 +27,6 @@
 
 #include <iostream>
 
-AIStupidEngine * AIStupidEngine::singleton = NULL;
-
 AIStupidEngine::AIStupidEngine() :
   m_movement(),
   m_shoot(m_movement),
@@ -39,14 +37,6 @@ AIStupidEngine::AIStupidEngine() :
   m_current_time(0)
 {
   std::cout << "o Artificial Intelligence Stupid engine initialization" << std::endl;
-}
-
-AIStupidEngine* AIStupidEngine::GetInstance()
-{
-  if (singleton == NULL)
-    singleton = new AIStupidEngine();
-
-  return singleton;
 }
 
 // --------------------------------------------------

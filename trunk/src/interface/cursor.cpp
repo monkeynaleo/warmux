@@ -34,15 +34,6 @@ const uint y_max = 90; //number of pixels between the bottom of the arrow and th
                         //when the arrow is at the top of its movement
 const uint rebound_time = 1000; //Duration of a full rebound
 
-CharacterCursor * CharacterCursor::singleton = NULL;
-
-CharacterCursor * CharacterCursor::GetInstance() {
-  if (singleton == NULL) {
-    singleton = new CharacterCursor();
-  }
-  return singleton;
-}
-
 CharacterCursor::CharacterCursor()
 {
   visible = false;

@@ -24,6 +24,7 @@
 #define GAME_H
 
 #include "include/base.h"
+#include "include/singleton.h"
 #include "network/chat.h"
 
 // Forward declarations
@@ -32,7 +33,7 @@ class ObjBox;
 class FramePerSecond;
 class PhysicalObj;
 
-class Game
+class Game : public Singleton<Game>
 {
 public:
   typedef enum {
@@ -47,8 +48,6 @@ public:
   } game_mode_t;
 
 protected:
-  Game();
-  virtual ~Game();
   virtual void Run();         // Main loop
 
   bool IsAnythingMoving() const;
@@ -61,8 +60,11 @@ protected:
   bool                give_objbox;
   uint                pause_seconde;
 
+  friend class Singleton<Game>;
+  Game();
+  virtual ~Game();
+
 private:
-  static Game         *singleton;
   static game_mode_t  mode;
 
 
@@ -107,7 +109,6 @@ private:
   virtual void __SetState_END_TURN() = 0;
 
 public:
-  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
   static Game * GetInstance();
   static void SetMode(game_mode_t m) { CleanUp(); mode = m; };
   static std::string GetUniqueId();

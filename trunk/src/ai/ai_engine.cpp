@@ -28,20 +28,9 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 
-
-AIengine * AIengine::singleton = NULL;
-
 AIengine::AIengine()
 {
   std::cout << "o Artificial Intelligence engine initialization" << std::endl;
-}
-
-AIengine* AIengine::GetInstance()
-{
-  if (singleton == NULL)
-    singleton = new AIengine();
-
-  return singleton;
 }
 
 void AIengine::Refresh() const
@@ -53,5 +42,4 @@ void AIengine::Refresh() const
   if (ActiveCharacter().GetTeam().IsLocalAI()) {
     AIStupidEngine::GetInstance()->Refresh();
   }
-
 }

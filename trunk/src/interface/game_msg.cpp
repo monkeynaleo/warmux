@@ -36,15 +36,6 @@
 
 const uint NBR_MSG_MAX = 14;
 
-GameMessages * GameMessages::singleton = NULL;
-
-GameMessages * GameMessages::GetInstance() {
-  if (singleton == NULL) {
-    singleton = new GameMessages();
-  }
-  return singleton;
-}
-
 // Clean up the message list
 void GameMessages::Reset(){
   std::list<Message *>::iterator it;

@@ -37,18 +37,6 @@
 #include "network/randomsync.h"
 
 //-----------------------------------------------------------------------------
-TeamsList *TeamsList::singleton = NULL;
-
-TeamsList *TeamsList::GetInstance()
-{
-  if (singleton == NULL) {
-    singleton = new TeamsList();
-  }
-  return singleton;
-}
-
-
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 TeamsList::TeamsList():
@@ -69,8 +57,12 @@ TeamsList::~TeamsList()
    * Actually, this is not that bad whereas free(NULL) is accepted... but it
    * remains spurious. */
   if (!singleton)
+  {
+    fprintf(stderr, "Destructor still called on unexisting TeamsList\n");
     return;
+  }
 
+  UnloadGamingData();
   Clear();
   for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
     delete (*it);

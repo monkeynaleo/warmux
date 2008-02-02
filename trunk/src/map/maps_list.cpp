@@ -214,19 +214,6 @@ std::string InfoMap::GetConfigFilepath() const
 }
 
 /* ========================================================================== */
-
-MapsList* MapsList::singleton = NULL;
-
-MapsList* MapsList::GetInstance()
-{
-  if (singleton == NULL) {
-    singleton = new MapsList();
-  }
-
-  return singleton;
-}
-
-
 static bool compareMaps(const InfoMap* a, const InfoMap* b)
 {
   return a->GetRawName() < b->GetRawName();

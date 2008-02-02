@@ -45,16 +45,6 @@ const Point2i BORDER_POSITION(5, 5);
 
 const uint MARGIN = 10;
 
-Interface * Interface::singleton = NULL;
-
-Interface * Interface::GetInstance()
-{
-  if (singleton == NULL) {
-    singleton = new Interface();
-  }
-  return singleton;
-}
-
 Interface::Interface()
 {
   display = true;
@@ -111,6 +101,7 @@ Interface::Interface()
 
 Interface::~Interface()
 {
+  if (clock) delete clock;
   if (global_timer) delete global_timer;
   if (timer) delete timer;
   if (t_character_name) delete t_character_name;

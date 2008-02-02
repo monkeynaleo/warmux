@@ -24,14 +24,15 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
-#include "action.h"
-#include "base.h"
+#include "include/action.h"
+#include "include/base.h"
+#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Forward declarations
 struct SDL_mutex;
 
-class ActionHandler
+class ActionHandler : public Singleton<ActionHandler>
 {
 private:
   // Mutex needed to be thread safe for the network
@@ -49,11 +50,7 @@ private:
   // Action queue
   std::list<Action*> queue;
 
-  static ActionHandler * singleton;
-
 public:
-  static ActionHandler * GetInstance();
-
   void NewAction(Action* a, bool repeat_to_network=true);
   void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
 
@@ -61,10 +58,12 @@ public:
   void ExecActions();
   const std::string &GetActionName(Action::Action_t action) const;
 
-private:
+protected:
+  friend class Singleton<ActionHandler>;
   ActionHandler();
   ~ActionHandler();
 
+private:
   /* If you need this, you probably made an error in your code... */
   ActionHandler(const ActionHandler&);
   const ActionHandler& operator=(const ActionHandler&);

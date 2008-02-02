@@ -60,6 +60,7 @@ include/action.cpp
 include/action_handler.cpp
 include/binreloc.c
 include/constant.cpp
+include/singleton.cpp
 interface/cursor.cpp
 interface/game_msg.cpp
 interface/interface.cpp

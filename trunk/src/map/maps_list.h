@@ -24,6 +24,7 @@
 
 #include <vector>
 #include "include/base.h"
+#include "include/singleton.h"
 #include "graphic/surface.h"
 
 // Forward declarations
@@ -117,7 +118,7 @@ public:
 };
 
 
-class MapsList
+class MapsList : public Singleton<MapsList>
 {
 public:
   std::vector<InfoMap*> lst;
@@ -129,14 +130,13 @@ private:
   bool random_map;
 
   void LoadOneMap (const std::string &dir, const std::string &file);
+
+protected:
+  friend class Singleton<MapsList>;
   MapsList();
   ~MapsList();
-  static MapsList * singleton;
 
 public:
-  static void CleanUp(void) { if (singleton) delete singleton; singleton = NULL; };
-  static MapsList * GetInstance();
-
   // Return -1 if fails
   int FindMapById (const std::string &id) const;
   void SelectMapByName(const std::string &nom);

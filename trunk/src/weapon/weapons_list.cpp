@@ -35,23 +35,6 @@
 
 //-----------------------------------------------------------------------------
 
-WeaponsList * weapon_list = NULL;
-
-WeaponsList * WeaponsList::GetInstance()
-{
-  if (weapon_list == NULL) {
-    weapon_list = new WeaponsList();
-  }
-  return weapon_list;
-}
-
-void WeaponsList::CleanUp()
-{
-  if (weapon_list)
-    delete weapon_list;
-  weapon_list = NULL;
-}
-
 WeaponsList::~WeaponsList()
 {
   weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
@@ -60,7 +43,6 @@ WeaponsList::~WeaponsList()
 
   delete weapons_res_profile;
   weapons_res_profile = NULL;
-  weapon_list = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -110,9 +92,7 @@ void WeaponsList::Refresh () const
 
 void WeaponsList::UpdateTranslation()
 {
-  if (weapon_list == NULL) return;
-    
-
+  if (singleton == NULL) return;
   weapons_list_it it = GetInstance()->m_weapons_list.begin(), end=GetInstance()->m_weapons_list.end();
   for (; it != end; it++) {
     (*it)->UpdateTranslationStrings();

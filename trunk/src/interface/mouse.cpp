@@ -39,8 +39,6 @@
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 
-Mouse * Mouse::singleton = NULL;
-
 std::string __pointers[] = {
   "mouse/pointer_standard",
   "mouse/pointer_select",
@@ -58,14 +56,6 @@ std::string __pointers[] = {
   "mouse/pointer_fire_right"
 };
 std::map<Mouse::pointer_t, MouseCursor> Mouse::cursors;
-
-Mouse * Mouse::GetInstance() 
-{
-  if (singleton == NULL) {
-    singleton = new Mouse();
-  }
-  return singleton;
-}
 
 Mouse::Mouse():
   lastpos(-1,-1)

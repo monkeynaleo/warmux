@@ -23,11 +23,12 @@
 #define CURSOR_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
+#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 class Sprite;
 
-class CharacterCursor
+class CharacterCursor : public Singleton<CharacterCursor>
 {
 public:
    Sprite *image;
@@ -44,11 +45,9 @@ private:
   bool visible;
   bool want_hide;
 
-  static CharacterCursor * singleton;
+  bool IsDisplayed() const;
 
 public:
-  static CharacterCursor * GetInstance();
-
   void Reset();
   void Draw();
   void Refresh();
@@ -58,11 +57,10 @@ public:
   // Hide the cursor
   void Hide();
 
-private:
+protected:
+  friend class Singleton<CharacterCursor>;
   CharacterCursor();
   ~CharacterCursor();
-
-  bool IsDisplayed() const;
 };
 
 //-----------------------------------------------------------------------------
