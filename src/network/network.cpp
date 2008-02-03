@@ -69,7 +69,7 @@ Network * Network::GetInstance()
 {
   if (singleton == NULL) {
     singleton = new   NetworkLocal();
-    MSG_DEBUG(singleton, "Created singleton %p of type 'NetworkLocal'\n", singleton);
+    MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkLocal'\n", singleton);
   }
   return singleton;
 }
