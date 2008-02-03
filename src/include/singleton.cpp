@@ -21,20 +21,30 @@
 
 #include <SDL_mutex.h>
 #include "include/singleton.h"
-#include "tool/debug.h"
 
 SingletonList singletons;
 
+SDL_mutex* BaseSingleton::mutex = NULL;
+
 BaseSingleton::BaseSingleton()
 {
+  // Usually the game loading makes the first calls to this constructor serial.
+  if (!mutex) mutex = SDL_CreateMutex();
+
+  SDL_LockMutex(mutex);
   singletons.push_back(this);
-  MSG_DEBUG("singleton", "Added %p\n", this);
+  SDL_UnlockMutex(mutex);
+
+  MSG_DEBUG("singleton", "Added singleton %p\n", this);
 }
 
 BaseSingleton::~BaseSingleton()
 {
+  SDL_LockMutex(mutex);
   singletons.remove(this);
-  MSG_DEBUG("singleton", "Removed %p\n", this);
+  SDL_UnlockMutex(mutex);
+
+  MSG_DEBUG("singleton", "Removed singleton %p\n", this);
 }
 
 void BaseSingleton::ReleaseSingletons()
@@ -44,7 +54,12 @@ void BaseSingleton::ReleaseSingletons()
        it != copy.end();
        ++it)
   {
-    MSG_DEBUG("singleton", "Releasing %p\n", *it);
+    MSG_DEBUG("singleton", "Releasing singleton %p\n", *it);
     delete (*it);
   }
+
+  if (mutex)
+    SDL_DestroyMutex(mutex);
+  mutex = NULL;
 }
+
