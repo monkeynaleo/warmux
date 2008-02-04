@@ -22,30 +22,41 @@
 #ifndef MATH_TOOLS_H
 #define MATH_TOOLS_H
 
+#include <math.h>
+
 // Limit under which, real numbers are considered as NULL
-extern const double EPS_ZERO;
+#define EPS_ZERO 0.05;
+
+// Template to force a value into a range.
+template <class T>
+T BorneTpl (const T &valeur, const T &min, const T &max){
+  if (valeur < min)
+    return min;
+  else if (max < valeur)
+    return max;
+  else
+    return valeur;
+}
 
 // Force a value into range [min;max]
-long InRange_Long (const long &valeur, const long &min, const long &max);
-double InRange_Double (const double &valeur, const double &min,
-                    const double &max);
+long inline InRange_Long (const long &valeur, const long &min, const long &max) {
+  return BorneTpl (valeur, min, max);
+}
+double inline InRange_Double (const double &valeur, const double &min, const double &max) {
+  return BorneTpl (valeur, min, max);
+}
 
 // Invert an angle along the vertical axis
-double InverseAngle (const double &angle);
-double InverseAngleDeg (const double &angle);
-double InverseAngleRad (const double &angle);
-
-// degree<->radian angle conversion
-double Deg2Rad (int degre);
-int Rad2Deg(double rad);
+double inline InverseAngle (const double &angle) { return -angle + (angle<0) ? -M_PI : M_PI; }
+double inline InverseAngleDeg (const double &angle) { return -angle + (angle<0) ? -180 : 180; }
+double inline InverseAngleRad (const double &angle) { return InverseAngle(angle); }
 
 // Absolute value
-double AbsoluteValue (const double x);
-bool EqualsZero (const double x);
+double inline AbsoluteValue (const double x) { return fabs(x); }
+bool inline EqualsZero (const double x) { return AbsoluteValue(x) <= EPS_ZERO; }
 
 #ifdef _MSC_VER
 // MIT licensed from http://opensource.adobe.com/cmath_8hpp-source.html
-#  include <math.h>
 #  include <float.h>
 double inline round(double a) { return (a<0.0) ? ceil(a-0.5) : floor(a+0.5); };
 long int inline lround(double a) { return static_cast<long>(a + (a < 0.0 ? -0.5 : 0.5)); }
