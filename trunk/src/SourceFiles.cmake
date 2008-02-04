@@ -146,7 +146,6 @@ tool/error.cpp
 tool/euler_vector.cpp
 tool/file_tools.cpp
 tool/i18n.cpp
-tool/math_tools.cpp
 tool/random.cpp
 tool/resource_manager.cpp
 tool/stats.cpp

@@ -158,7 +158,7 @@ wormux_SOURCES = \
         tool/file_tools.cpp tool/file_tools.h \
         tool/i18n.cpp tool/i18n.h \
         tool/isnan.h \
-        tool/math_tools.cpp tool/math_tools.h \
+        tool/math_tools.h \
         tool/random.cpp tool/random.h \
         tool/rectangle.h tool/point.h \
         tool/resource_manager.cpp tool/resource_manager.h \
