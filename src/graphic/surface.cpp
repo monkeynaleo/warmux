@@ -674,7 +674,7 @@ Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
     smooth = SMOOTHING_OFF;
 #endif
 
-  if (fabs(angle) < EPS_ZERO)
+  if (EqualsZero(angle))
     surf = zoomSurface(surface, zoomx, zoomy, smooth);
   else if (zoomx == zoomy && zoomx > 0.0)
     surf = rotozoomSurface(surface, angle * ratio_deg_to_rad , zoomx, smooth);
