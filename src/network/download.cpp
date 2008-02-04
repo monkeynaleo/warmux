@@ -27,6 +27,7 @@
 #include "network/download.h"
 #include "tool/debug.h"
 #include "tool/error.h"
+#include "tool/i18n.h"
 
 Downloader::Downloader():
   curl(curl_easy_init())
@@ -68,6 +69,34 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 	      if(file.eof())
 		          return -1;
 	        return line.size();
+}
+
+std::string Downloader::GetLatestVersion()
+{
+  static const char url[] = "http://kurosu.free.fr/last";
+  const std::string last_file = Config::GetInstance()->GetPersonalDir() + "last";
+  if( !Get(url, last_file.c_str()) )
+  {
+    std::string err = _("Couldn't fetch last version from ");
+    err += url;
+    throw err;
+  }
+
+  // Parse the file
+  std::ifstream fin;
+  fin.open(last_file.c_str(), std::ios::in);
+  if(!fin)
+  {
+    std::string err = _("Couldn't open file ");
+    err += last_file;
+    throw err;
+  }
+
+  std::string line;
+  getline(line, fin);
+  fin.close();
+
+  return line;
 }
 
 std::map<std::string, int> Downloader::GetServerList(std::string list_name)

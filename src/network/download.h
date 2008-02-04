@@ -41,6 +41,7 @@ protected:
 
 public:
   // Return true if the download was successful
+  std::string GetLatestVersion();
   bool Get(const char* url, const char* save_as);
   std::map<std::string, int> GetServerList(std::string list_name);
 };
