@@ -66,13 +66,18 @@ ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
 
 ListBox::~ListBox()
 {
-   delete m_up;
-   delete m_down;
+  delete m_up;
+  delete m_down;
 
-   for (std::vector<ListBoxItem*>::iterator lbi=m_items.begin(); lbi!=m_items.end(); lbi++)
+  ClearItems();
+}
+
+void ListBox::ClearItems()
+{
+  for (std::vector<ListBoxItem*>::iterator lbi=m_items.begin(); lbi!=m_items.end(); lbi++)
      delete *lbi;
 
-   m_items.clear();
+  m_items.clear();
 }
 
 int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const

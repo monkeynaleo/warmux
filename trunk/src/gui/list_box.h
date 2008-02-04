@@ -55,10 +55,8 @@ class ListBox : public Widget
 
   bool always_one_selected;
 
-  bool scrolling;
-  Rectanglei ScrollBarPos() const;
-
 protected:
+  bool scrolling;
   // what are the items ?
   uint first_visible_item;
   int selected_item;
@@ -73,6 +71,7 @@ protected:
 
   uint margin; // for ListBoxWithLabel
 
+  Rectanglei ScrollBarPos() const;
   virtual void __Update(const Point2i &mousePosition,
 			const Point2i &lastMousePosition,
 			Surface& surf);
@@ -86,7 +85,7 @@ public:
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
 
-  Widget* Click(const Point2i &mousePosition, uint button);
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
@@ -104,6 +103,8 @@ public:
   int GetSelectedItem() const { return selected_item; };
   void Deselect();
   void RemoveSelected();
+  void ClearItems();
+
   const std::string& ReadLabel() const;
   const std::string& ReadValue() const;
   const int ReadIntValue() const;
