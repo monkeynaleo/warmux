@@ -41,6 +41,7 @@ using namespace std;
 #include "graphic/sprite.h"
 #include "graphic/text.h"
 #include "graphic/video.h"
+#include "gui/question.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
 #include "include/singleton.h"
@@ -51,6 +52,7 @@ using namespace std;
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
+#include "network/download.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "tool/debug.h"
@@ -96,6 +98,27 @@ int AppWormux::Main(void)
   try
   {
     DisplayLoadingPicture();
+
+#if 0
+    try
+    {
+      std::string latest_version = Downloader::GetInstance()->GetLatestVersion();
+      const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
+      if (latest_version != cur_version)
+      {
+        Question new_version;
+        std::string txt = Format(_("A new version %s is available, while your version is %s."
+                                   "You may want to check whether an update is available for your OS!"),
+                                 latest_version.c_str(), cur_version);
+        new_version.Set(txt, true, 0);
+        new_version.Ask();
+      }
+    }
+    catch (const char* err)
+    {
+      std::cerr << Format(_("Version verification failed because: %s\n"), err);
+    }
+#endif
 
     do
       {
