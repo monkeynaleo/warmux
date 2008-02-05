@@ -320,14 +320,16 @@ void Interface::DrawMapPreview()
          ++character) {
       if (!character -> IsDead()) {
         Point2i     coord = world.ground.PreviewCoordinates((*character).GetPosition()) + offset;
-        Rectanglei  rect(coord - icon.GetSize()/2, icon.GetSize());
+        
         window.Blit(icon, coord - icon.GetSize()/2);
         if (character->IsActiveCharacter()) {
           uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
-          window.CircleColor(coord.x, coord.y, 1+radius/2, c_white);
-          world.ToRedrawOnScreen(Rectanglei(coord.x, coord.y, 1+radius/2, 1+radius/2));
+          radius = (radius/2) + 1;
+          window.CircleColor(coord.x, coord.y, radius, c_white);
+          world.ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
         }
-	world.ToRedrawOnScreen(rect);
+	else
+          world.ToRedrawOnScreen(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()));
       }
     }
   }
