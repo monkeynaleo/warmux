@@ -325,6 +325,7 @@ void Interface::DrawMapPreview()
         if (character->IsActiveCharacter()) {
           uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
           window.CircleColor(coord.x, coord.y, 1+radius/2, c_white);
+          world.ToRedrawOnScreen(Rectanglei(coord.x, coord.y, 1+radius/2, 1+radius/2));
         }
 	world.ToRedrawOnScreen(rect);
       }
