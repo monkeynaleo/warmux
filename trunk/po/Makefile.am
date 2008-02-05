@@ -265,7 +265,6 @@ POTFILES = \
         src/tool/file_tools.h \
         src/tool/i18n.cpp \
         src/tool/i18n.h \
-        src/tool/math_tools.cpp \
         src/tool/math_tools.h \
         src/tool/point.h \
         src/tool/random.cpp \
