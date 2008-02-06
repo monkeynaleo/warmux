@@ -47,8 +47,18 @@ double inline InRange_Double (const double &valeur, const double &min, const dou
 }
 
 // Invert an angle along the vertical axis
-double inline InverseAngle (const double &angle) { return -angle + (angle<0) ? -M_PI : M_PI; }
-double inline InverseAngleDeg (const double &angle) { return -angle + (angle<0) ? -180 : 180; }
+double inline InverseAngle (const double &angle) {
+  if (angle < 0)
+    return -M_PI -angle;
+  return M_PI - angle;
+}
+
+double inline InverseAngleDeg (const double &angle) {
+  if (angle < 0)
+    return -180 - angle;
+  return 180 - angle;
+}
+
 double inline InverseAngleRad (const double &angle) { return InverseAngle(angle); }
 
 // Absolute value
@@ -68,3 +78,4 @@ template <class T> T max(T a, T b)
 };
 
 #endif
+
