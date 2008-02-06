@@ -24,11 +24,10 @@
 
 #include <vector>
 #include <map>
+#include "include/base.h"
 
 #include <SDL.h>
 #include <SDL_mixer.h>
-
-#include "include/base.h"
 
 class SampleCache
 {
@@ -37,11 +36,10 @@ class SampleCache
         Mix_Chunk *     m_chunk;
         int             m_refcount;
         int             m_times_used;
-        size_t          m_size;
         std::string     m_filename;
 
         CachedChunk()
-         : m_chunk( NULL ), m_refcount( 0 ), m_times_used( 0 ), m_size( 0 ) {};
+         : m_chunk( NULL ), m_refcount( 0 ), m_times_used( 0 ) {};
     };
 
     std::vector< CachedChunk >  m_cache;
@@ -52,7 +50,7 @@ class SampleCache
     std::map< std::string, int > m_chunks_by_name;
     std::map< Mix_Chunk *, int > m_chunks_by_addr;
 
-    bool          CacheIfPossible ( CachedChunk & chk, const std::string & fn );
+    int           FindSlot        ( Mix_Chunk* sample, const std::string & fn );
     int           FindChunkByName ( const std::string & name );
     int           FindChunkByAddr ( Mix_Chunk * pchk );
 

@@ -20,8 +20,8 @@
  *****************************************************************************/
 
 #include <assert.h>
-#include "sample_cache.h"
 #include "tool/debug.h"
+#include "sample_cache.h"
 
 SampleCache::SampleCache( size_t memory_limit )
     : m_memory_limit( memory_limit )
@@ -29,38 +29,27 @@ SampleCache::SampleCache( size_t memory_limit )
 {
 }
 
-bool SampleCache::CacheIfPossible( CachedChunk & chk,
-                                   const std::string & file_name )
+int SampleCache::FindSlot( Mix_Chunk* sample, const std::string & file_name )
 {
-    assert( NULL == chk.m_chunk );
-    assert( 0 == chk.m_refcount );
+    if ( m_memory_limit > 0 && sample->alen + m_used_memory > m_memory_limit )
+        return -1; // refuse to load when cache is full
 
-    // we need this to know the length
-    FILE * f = fopen( file_name.c_str(), "rb" );
-    if ( NULL == f )
-        return false;
-
-    fseek( f, 0, SEEK_END );
-    // Size for sample should fit into 32 bits even if return is 64bits
-    chk.m_size = ftell( f );
-    fclose( f );
-
-    if ( m_memory_limit > 0 && chk.m_size + m_used_memory > m_memory_limit )
-        return false; // refuse to load when cache is full
-
-    chk.m_chunk = Mix_LoadWAV( file_name.c_str() );
-    if ( NULL == chk.m_chunk )
-        return false;
-
-    m_used_memory += chk.m_size;
-    chk.m_times_used = 0;
+    m_used_memory += sample->alen;
+    CachedChunk chk;
+    
+    chk.m_chunk    = sample;
     chk.m_filename = file_name;
+
+    m_cache.push_back( chk );
+    int slot = m_cache.size() - 1;
+    m_chunks_by_name.insert( std::make_pair( file_name, slot ) );
+    m_chunks_by_addr.insert( std::make_pair( chk.m_chunk, slot ) );
 
     MSG_DEBUG( "jukebox.cache",
                "caching sample '%s' (size %uB), total cache size: %uB",
-               chk.m_filename.c_str(), chk.m_size, m_used_memory );
+               chk.m_filename.c_str(), sample->alen, m_used_memory );
 
-    return true;
+    return slot;
 };
 
 Mix_Chunk * SampleCache::LoadSound( const std::string & file_name )
@@ -70,28 +59,17 @@ Mix_Chunk * SampleCache::LoadSound( const std::string & file_name )
 
     if ( -1 == slot )
     {
-        // not found, so cache it
-        CachedChunk chk;
-        if ( CacheIfPossible( chk, file_name ) )
-        {
-            m_cache.push_back( chk );
-            slot = m_cache.size() - 1;
-            m_chunks_by_name.insert( std::make_pair( file_name, slot ) );
-            m_chunks_by_addr.insert( std::make_pair( chk.m_chunk, slot ) );
-        }
+        // not found, so try to cache it cache it
+        Mix_Chunk *sample = Mix_LoadWAV( file_name.c_str() );
+        slot = FindSlot( sample, file_name );
+        if ( -1 == slot )
+            return sample;
     }
 
-    if ( -1 != slot )
-    {
-        CachedChunk & chk = m_cache[ slot ];
-        chk.m_times_used++;
-        chk.m_refcount ++;
-        return chk.m_chunk;
-    }
-
-    // we only get here if we couldn't cache
-    // so delegate the work to mixer
-    return Mix_LoadWAV( file_name.c_str() );
+    CachedChunk & chk = m_cache[ slot ];
+    chk.m_times_used++;
+    chk.m_refcount ++;
+    return chk.m_chunk;
 }
 
 void SampleCache::FreeChunk( Mix_Chunk * pchk )
@@ -121,7 +99,7 @@ void SampleCache::Clear()
     {
         CachedChunk & chk = *iter;
 
-        m_used_memory -= chk.m_size;
+        m_used_memory -= chk.m_chunk->alen;
         if ( chk.m_refcount != 0 )
         {
             MSG_DEBUG( "jukebox.cache",
@@ -135,11 +113,10 @@ void SampleCache::Clear()
 
         Mix_FreeChunk( chk.m_chunk );
 
-        // reinit
+        // reset memory
         chk.m_chunk = NULL;
         chk.m_refcount = 0;
         chk.m_times_used = 0;
-        chk.m_size = 0;
         chk.m_filename = "";
     }
 
