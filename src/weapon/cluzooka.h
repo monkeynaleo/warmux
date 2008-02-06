@@ -16,43 +16,22 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Include file to include all weapons in one shot ;-)
+ * Cluster bazooka: launches a rocket which works like cluster bomb
  *****************************************************************************/
 
-#ifndef ALL_WEAPONS_H
-#define ALL_WEAPONS_H
+#ifndef CLUZOOKA_H
+#define CLUZOOKA_H
 
-#include "weapon/airhammer.h"
-#include "weapon/air_attack.h"
-#include "weapon/anvil.h"
-#include "weapon/auto_bazooka.h"
-#include "weapon/baseball.h"
-#include "weapon/bazooka.h"
-#include "weapon/blowtorch.h"
-#include "weapon/bounce_ball.h"
-#include "weapon/cluster_bomb.h"
-#include "weapon/construct.h"
-#include "weapon/disco_grenade.h"
-#include "weapon/dynamite.h"
-#include "weapon/flamethrower.h"
-#include "weapon/gnu.h"
-#include "weapon/grapple.h"
-#include "weapon/grenade.h"
-#include "weapon/gun.h"
-#include "weapon/jetpack.h"
-#include "weapon/lowgrav.h"
-#include "weapon/mine.h"
-#include "weapon/parachute.h"
-#include "weapon/polecat.h"
-#include "weapon/riot_bomb.h"
-#include "weapon/shotgun.h"
-#include "weapon/skip_turn.h"
-#include "weapon/snipe_rifle.h"
-#include "weapon/submachine_gun.h"
-#include "weapon/suicide.h"
-#include "weapon/supertux.h"
-#include "weapon/syringe.h"
-#include "weapon/teleportation.h"
-#include "weapon/cluzooka.h"
+#include "weapon/weapon_launcher.h"
+
+class Cluzooka : public WeaponLauncher
+{
+ public:
+  Cluzooka();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+  void UpdateTranslationStrings();
+ protected:
+  WeaponProjectile * GetProjectileInstance();
+};
 
 #endif

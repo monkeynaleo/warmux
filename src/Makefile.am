@@ -177,6 +177,7 @@ wormux_SOURCES = \
         weapon/bazooka.cpp weapon/bazooka.h \
         weapon/blowtorch.cpp weapon/blowtorch.h \
         weapon/bounce_ball.cpp weapon/bounce_ball.h \
+        weapon/cluzooka.cpp weapon/cluzooka.h \
         weapon/cluster_bomb.cpp weapon/cluster_bomb.h \
         weapon/construct.cpp weapon/construct.h \
         weapon/crosshair.cpp weapon/crosshair.h \
