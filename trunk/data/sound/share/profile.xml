@@ -58,4 +58,6 @@
   <sound sample="weapon/supertux_swimming" file="weapon/supertux_swimming.ogg" />
   <sound sample="weapon/teleport_end" file="weapon/teleport_land.ogg" />
   <sound sample="weapon/teleport_start" file="weapon/teleport_start.ogg" />
+  <sound sample="weapon/cluzooka_shot" file="weapon/cluzooka_shot.ogg" />
+  <sound sample="weapon/cluzooka_hit" file="weapon/cluzooka_hit.ogg" />
 </profile>
