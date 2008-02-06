@@ -162,6 +162,7 @@ weapon/bazooka.cpp
 weapon/blowtorch.cpp
 weapon/bounce_ball.cpp
 weapon/cluster_bomb.cpp
+weapon/cluzooka.cpp
 weapon/construct.cpp
 weapon/crosshair.cpp
 weapon/disco_grenade.cpp
