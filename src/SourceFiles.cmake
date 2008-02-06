@@ -135,6 +135,7 @@ particles/star.cpp
 particles/teleport_member.cpp
 sound/jukebox.cpp
 sound/sound_sample.cpp
+sound/sample_cache.cpp
 team/results.cpp
 team/team.cpp
 team/team_energy.cpp
