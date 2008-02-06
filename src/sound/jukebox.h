@@ -31,6 +31,7 @@
 #include <SDL_mixer.h>
 
 #include "include/base.h"
+#include "sample_cache.h"
 
 //-----------------------------------------------------------------------------
 
@@ -98,6 +99,7 @@ private:
   } m_config;
 
   bool m_init;
+  SampleCache m_cache;
 
   std::set<std::string> m_profiles_loaded;
 
