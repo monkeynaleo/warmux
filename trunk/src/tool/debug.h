@@ -20,6 +20,8 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
+#include <string>
+
 /** Usage example :
  *
  * MSG_DEBUG( "game.pause", "Salut %s", "Truc" )
