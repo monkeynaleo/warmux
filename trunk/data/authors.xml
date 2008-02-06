@@ -566,7 +566,7 @@
 	<name>Pasi Kallinen</name>
 	<description>Improve the ground generator</description>
 	<website>http://bilious.homelinux.org/</website>
-	<email>paxed@alt.org</email>
+	<email>paxed_AT_alt_DOT_org</email>
 	<country>Finland</country>
       </author>
       <author>
@@ -576,6 +576,13 @@
 	<website>http://coderz.info</website>
 	<email>progs_AT_headfucking.net</email>
 	<country>France</country>
+      </author>
+      <author>
+	<nickname>RCL</nickname>
+	<name>Dmitry Rekman</name>
+	<description>Developer</description>
+	<email>rcl_AT_mail_DOT_ru</email>
+	<country>Russia</country>
       </author>
       <author>
 	<nickname>Riccardo</nickname>
