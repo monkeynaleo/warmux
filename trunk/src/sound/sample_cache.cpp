@@ -131,7 +131,7 @@ void SampleCache::Clear()
 
         // print statistics
         MSG_DEBUG( "jukebox.cache", "sample '%s' used %d times",
-            chk.m_filename.c_str(), chk.m_times_used );
+                   chk.m_filename.c_str(), chk.m_times_used );
 
         Mix_FreeChunk( chk.m_chunk );
 
