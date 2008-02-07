@@ -110,6 +110,9 @@ public:
   inline uint GetSoundFrequency() const { return sound_frequency; };
   inline void SetSoundFrequency(const uint freq) { sound_frequency = freq; };
 
+  inline bool GetCheckUpdates() const { return check_updates; }
+  inline void SetCheckUpdates(const bool check) { check_updates = check; }
+
   inline std::list<ConfigTeam> & AccessTeamList() { return teams; };
   inline const std::string & GetMapName() const { return map_name; };
   inline void SetMapName(const std::string& new_name) { map_name = new_name; }
@@ -170,6 +173,7 @@ protected:
   uint sound_frequency;
   // network
   bool enable_network;
+  bool check_updates;
 
   std::string ttf_filename;
 

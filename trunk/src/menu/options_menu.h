@@ -34,6 +34,7 @@ class OptionMenu : public Menu
 public:
    OptionMenu();
    ~OptionMenu();
+   static void CheckUpdates();
 
 private:
 
@@ -55,6 +56,9 @@ private:
    ComboBox *cbox_sound_freq;
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
+
+   /* Misc options controllers */
+   CheckBox *opt_updates;
 
    void SaveOptions();
    void OnClick(const Point2i &mousePosition, int button);
