@@ -62,6 +62,7 @@
       <bounce_ball ammo="1">1</bounce_ball>
       <construct ammo="3">1</construct>
       <cluster_bomb ammo="1">1</cluster_bomb>
+      <cluzooka ammo="2">0.9</cluzooka>
       <disco_grenade ammo="1">0.7</disco_grenade>
       <dynamite ammo="2">0.9</dynamite>
       <gnulauncher ammo="1">0.9</gnulauncher>
@@ -157,9 +158,9 @@
 
     <cluzooka>
       <max_strength>75</max_strength>
-      <nb_ammo>-1</nb_ammo>
+      <nb_ammo>3</nb_ammo>
       <damage>25</damage>
-      <min_angle>-89</min_angle>
+      <min_angle>-60</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>30</explosion_range>
       <particle_range>20</particle_range>

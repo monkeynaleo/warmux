@@ -63,6 +63,7 @@
       <bounce_ball ammo="1">1</bounce_ball>
       <construct ammo="3">1</construct>
       <cluster_bomb ammo="1">1</cluster_bomb>
+      <cluzooka ammo="2">0.9</cluzooka>
       <disco_grenade ammo="1">1</disco_grenade>
       <dynamite ammo="2">1</dynamite>
       <gnulauncher ammo="1">1</gnulauncher>
