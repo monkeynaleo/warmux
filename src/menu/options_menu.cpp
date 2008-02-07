@@ -21,7 +21,9 @@
 
 #include "menu/options_menu.h"
 
+#include <iostream>
 #include "include/app.h"
+#include "include/constant.h"
 #include "game/game_mode.h"
 #include "game/config.h"
 #include "graphic/video.h"
@@ -37,8 +39,10 @@
 #include "gui/picture_text_cbox.h"
 #include "gui/spin_button_picture.h"
 #include "gui/list_box_w_label.h"
+#include "gui/question.h"
 
 #include "map/maps_list.h"
+#include "network/download.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
@@ -119,6 +123,13 @@ OptionMenu::OptionMenu() :
   lbox_languages = new ListBoxWithLabel(_("Language"), stdSize);
   language_options->AddWidget(lbox_languages);
 
+  /* Misc options */
+  Box * misc_options = new HBox(SOUND_H);
+  opt_updates = new PictureTextCBox(_("Check updates online?"),
+                                    "menu/ico_network_menu", option_size);
+  misc_options->AddWidget(opt_updates);
+  widgets.AddWidget(misc_options);
+
   /* Sound options */
   Box * sound_options = new HBox(SOUND_H);
   sound_options->AddWidget(new PictureWidget(Point2i(40, 138), "menu/audio_label"));
@@ -156,7 +167,9 @@ OptionMenu::OptionMenu() :
   /* Center the widgets */
   uint center_x = app->video->window.GetWidth()/2;
 
-  sound_options->SetXY(center_x - sound_options->GetSizeX()/2, SOUND_Y);
+  sound_options->SetXY(center_x - (sound_options->GetSizeX() + misc_options->GetSizeX() + 20)/2, SOUND_Y);
+
+  misc_options->SetXY(sound_options->GetPositionX() + sound_options->GetSizeX() + 10, SOUND_Y);
 
   language_options->SetXY(center_x - (graphic_options->GetSizeX() + language_options->GetSizeX() + 20)/2,
 			  sound_options->GetPositionY() + sound_options->GetSizeY() + 10);
@@ -212,6 +225,8 @@ OptionMenu::OptionMenu() :
   opt_music->SetValue(jukebox.UseMusic());
   opt_sound_effects->SetValue(jukebox.UseEffects());
 
+  opt_updates->SetValue(config->GetCheckUpdates());
+
   resource_manager.UnLoadXMLProfile(res);
 }
 
@@ -236,6 +251,9 @@ void OptionMenu::SaveOptions()
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
+
+  // Misc options
+  config->SetCheckUpdates(opt_updates->GetValue());
 
   // Sound settings
   config->SetSoundEffects(opt_sound_effects->GetValue());
@@ -276,6 +294,7 @@ void OptionMenu::SaveOptions()
 bool OptionMenu::signal_ok()
 {
   SaveOptions();
+  CheckUpdates();
   return true;
 }
 
@@ -288,3 +307,27 @@ void OptionMenu::Draw(const Point2i &/*mousePosition*/)
 {
 }
 
+void OptionMenu::CheckUpdates()
+{
+  if (!Config::GetInstance()->GetCheckUpdates())
+    return;
+
+  try
+  {
+    std::string latest_version = Downloader::GetInstance()->GetLatestVersion();
+    const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
+    if (latest_version != cur_version)
+    {
+      Question new_version;
+      std::string txt = Format(_("A new version %s is available, while your version is %s."
+                                 "You may want to check whether an update is available for your OS!"),
+                               latest_version.c_str(), cur_version);
+      new_version.Set(txt, true, 0);
+      new_version.Ask();
+    }
+  }
+  catch (const char* err)
+  {
+    std::cerr << Format(_("Version verification failed because: %s\n"), err);
+  }
+}

@@ -110,6 +110,7 @@ Config::Config():
   sound_effects(true),
   sound_frequency(44100),
   enable_network(true),
+  check_updates(false),
   ttf_filename(),
   transparency(ALPHA),
   config_set()
@@ -422,6 +423,12 @@ void Config::LoadXml(const xmlpp::Element *xml)
     XmlReader::ReadString(elem, "port", m_network_port);
   }
 
+  //=== misc ===
+  if ((elem = XmlReader::GetMarker(xml, "misc")) != NULL)
+  {
+    XmlReader::ReadBool(elem, "check_updates", check_updates);
+  }
+
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
 }
@@ -529,6 +536,10 @@ bool Config::SaveXml(bool save_current_teams)
   xmlpp::Element *net_node = root->add_child("network");
   doc.WriteElement(net_node, "host", m_network_host);
   doc.WriteElement(net_node, "port", m_network_port);
+
+  //=== Misc ===
+  xmlpp::Element *misc_node = root->add_child("misc");
+  doc.WriteElement(misc_node, "check_updates", ulong2str(check_updates));
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);
