@@ -518,11 +518,13 @@ msgid "Controlled by: "
 msgstr "Controlado por: "
 
 #: src/network/download.cpp:80
-msgid "Couldn't fetch last version from "
+#, c-format
+msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/download.cpp:90
-msgid "Couldn't open file "
+#: src/network/download.cpp:89
+#, c-format
+msgid "Couldn't open file %s"
 msgstr ""
 
 #: src/menu/main_menu.cpp:72

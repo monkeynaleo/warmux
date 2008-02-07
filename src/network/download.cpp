@@ -77,8 +77,7 @@ std::string Downloader::GetLatestVersion()
   const std::string last_file = Config::GetInstance()->GetPersonalDataDir() + "last";
   if( !Get(url, last_file.c_str()) )
   {
-    std::string err = _("Couldn't fetch last version from ");
-    err += url;
+    std::string err = Format(_("Couldn't fetch last version from %s"), url);
     throw err;
   }
 
@@ -87,8 +86,7 @@ std::string Downloader::GetLatestVersion()
   fin.open(last_file.c_str(), std::ios::in);
   if(!fin)
   {
-    std::string err = _("Couldn't open file ");
-    err += last_file;
+    std::string err = Format(_("Couldn't open file %s"), last_file.c_str());
     throw err;
   }
 

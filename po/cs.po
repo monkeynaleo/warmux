@@ -538,12 +538,13 @@ msgid "Controlled by: "
 msgstr "Řízeno:"
 
 #: src/network/download.cpp:80
-msgid "Couldn't fetch last version from "
+#, c-format
+msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/download.cpp:90
-#, fuzzy
-msgid "Couldn't open file "
+#: src/network/download.cpp:89
+#, fuzzy, c-format
+msgid "Couldn't open file %s"
 msgstr "nepodařilo se načíst konfigurační soubor"
 
 #: src/menu/main_menu.cpp:72

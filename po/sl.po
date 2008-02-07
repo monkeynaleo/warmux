@@ -582,12 +582,14 @@ msgid "Controlled by: "
 msgstr "Vodja: "
 
 #: src/network/download.cpp:80
-msgid "Couldn't fetch last version from "
-msgstr "Ni bilo mogoče pridobiti zadnje različice iz "
+#, c-format
+msgid "Couldn't fetch last version from %s"
+msgstr "Ni bilo mogoče pridobiti zadnje različice iz %s"
 
-#: src/network/download.cpp:90
-msgid "Couldn't open file "
-msgstr "Ni bilo mogoče odpreti datoteke "
+#: src/network/download.cpp:89
+#, c-format
+msgid "Couldn't open file %s"
+msgstr "Ni bilo mogoče odpreti datoteke %s"
 
 #: src/menu/main_menu.cpp:72
 msgid "Credits"
