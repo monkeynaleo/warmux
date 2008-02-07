@@ -120,7 +120,7 @@ public:
 
   inline std::string GetDataDir() const { return data_dir; };
   inline std::string GetLocaleDir() const { return locale_dir; };
-  inline std::string GetPersonalDir() const { return personal_dir; };
+  inline std::string GetPersonalDataDir() const { return personal_data_dir; };
 
   bool Save(bool save_current_teams = false);
   inline const std::string &GetGameMode() const { return m_game_mode; }
@@ -140,7 +140,7 @@ protected:
   std::string m_network_port;
   std::string m_filename;
 
-  std::string data_dir, locale_dir, personal_dir;
+  std::string data_dir, locale_dir, personal_data_dir, personal_config_dir;
 
   std::list<ConfigTeam> teams;
   std::string map_name;
@@ -183,6 +183,10 @@ private:
   bool DoLoading(void);
   void LoadDefaultValue();
   void LoadXml(const xmlpp::Element *xml);
+
+  // return true if the directory is created
+  bool MkdirPersonalConfigDir();
+  bool MkdirPersonalDataDir();
 
   /* this is mutable in order to be able to load config on fly when calling
    * GetObjectConfig() witch is not supposed to modify the object itself */

@@ -74,7 +74,7 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 std::string Downloader::GetLatestVersion()
 {
   static const char url[] = "http://kurosu.free.fr/last";
-  const std::string last_file = Config::GetInstance()->GetPersonalDir() + "last";
+  const std::string last_file = Config::GetInstance()->GetPersonalDataDir() + "last";
   if( !Get(url, last_file.c_str()) )
   {
     std::string err = _("Couldn't fetch last version from ");
@@ -105,7 +105,7 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name)
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
 
   // Download the list of server
-  const std::string server_file = Config::GetInstance()->GetPersonalDir() + list_name;
+  const std::string server_file = Config::GetInstance()->GetPersonalDataDir() + list_name;
   const std::string list_url = "http://www.wormux.org/" + list_name;
 
   if( !Get(list_url.c_str(), server_file.c_str()) )

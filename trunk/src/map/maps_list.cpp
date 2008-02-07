@@ -239,7 +239,7 @@ MapsList::MapsList()
   }
 
   // Load personal maps
-  dirname = config->GetPersonalDir() + "map" + PATH_SEPARATOR;
+  dirname = config->GetPersonalDataDir() + "map" + PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
     const char *name;

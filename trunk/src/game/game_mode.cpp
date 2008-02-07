@@ -190,7 +190,7 @@ bool GameMode::Load(void)
   try
   {
     // Game mode objects configuration file
-    fullname = config->GetPersonalDir() + GetObjectsFilename();
+    fullname = config->GetPersonalDataDir() + GetObjectsFilename();
 
     if(!IsFileExist(fullname))
       fullname = config->GetDataDir() + GetObjectsFilename();
@@ -206,7 +206,7 @@ bool GameMode::Load(void)
 
     // Game mode file
     XmlReader doc;
-    fullname = config->GetPersonalDir() + GetFilename();
+    fullname = config->GetPersonalDataDir() + GetFilename();
 
     if(!IsFileExist(fullname))
       fullname = config->GetDataDir() + GetFilename();
@@ -272,7 +272,7 @@ bool GameMode::ExportFileToString(const std::string& filename, std::string& cont
   try
   {
     XmlReader doc;
-    fullname = Config::GetInstance()->GetPersonalDir() + filename;
+    fullname = Config::GetInstance()->GetPersonalDataDir() + filename;
 
     if (!IsFileExist(fullname))
       fullname = Config::GetInstance()->GetDataDir() + filename;

@@ -157,7 +157,7 @@ void TeamsList::LoadList()
   }
 
   // Load personal teams
-  dirname = config->GetPersonalDir() + "team" + PATH_SEPARATOR;
+  dirname = config->GetPersonalDataDir() + "team" + PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
     const char *name;

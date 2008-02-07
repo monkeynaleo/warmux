@@ -41,7 +41,7 @@ FileListBox::FileListBox (const Point2i &size, bool always, const char *first_di
   if (first_dir)
     PopulateFileList(first_dir);
   else
-    PopulateFileList(Config::GetInstance()->GetPersonalDir().c_str());
+    PopulateFileList(Config::GetInstance()->GetPersonalDataDir().c_str());
 }
 
 FileListBox::~FileListBox()
