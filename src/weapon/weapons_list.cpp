@@ -56,6 +56,7 @@ WeaponsList::WeaponsList()
   m_weapons_list.push_back(new Shotgun);
   m_weapons_list.push_back(new SnipeRifle);
   m_weapons_list.push_back(new RiotBomb);
+  m_weapons_list.push_back(new Cluzooka);
   m_weapons_list.push_back(new AutomaticBazooka);
   m_weapons_list.push_back(new Dynamite);
   m_weapons_list.push_back(new GrenadeLauncher);
@@ -81,7 +82,6 @@ WeaponsList::WeaponsList()
   m_weapons_list.push_back(new Grapple);
   m_weapons_list.push_back(new Blowtorch);
   m_weapons_list.push_back(new Syringe);
-  m_weapons_list.push_back(new Cluzooka);
 }
 
 //-----------------------------------------------------------------------------
