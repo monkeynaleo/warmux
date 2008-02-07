@@ -5,12 +5,12 @@
 # This file is distributed under the same license as the Wormux package.
 # 
 # Marko Burjek <email4marko@gmail.com>, 2007.
-# Jaka Kranjc <mokovec@gmail.com>, 2007.
+# Jaka Kranjc <mokovec@gmail.com>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-01-27 17:30+0100\n"
+"PO-Revision-Date: 2008-02-07 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -125,13 +125,13 @@ msgid "%s team has skipped its turn."
 msgstr "Ekipa %s je preskočila svojo potezo."
 
 #: src/weapon/cluzooka.cpp:396
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
-msgstr[0] "Ekipa %s je osvojila %u bazuko!"
-msgstr[1] "Ekipa %s je osvojila %u bazuki!"
-msgstr[2] "Ekipa %s je osvojila %u bazuke!"
-msgstr[3] "Ekipa %s je osvojila %u bazuk!"
+msgstr[0] "Ekipa %s je osvojila %u kasetno bazuko!"
+msgstr[1] "Ekipa %s je osvojila %u kasetni bazuki!"
+msgstr[2] "Ekipa %s je osvojila %u kasetne bazuke!"
+msgstr[3] "Ekipa %s je osvojila %u kasetnih bazuk!"
 
 #: src/weapon/gnu.cpp:174
 #, c-format
@@ -454,6 +454,8 @@ msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
+"Na voljo je nova različica %s, vaša je pa %s. Preverite, če je za vaš "
+"operacijski sistem že na voljo posodobitev!"
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -547,9 +549,8 @@ msgid "Cluster Bomb"
 msgstr "Kasetna granata"
 
 #: src/weapon/cluzooka.cpp:389
-#, fuzzy
 msgid "Cluzooka"
-msgstr "Bazuka"
+msgstr "Kasetna bazuka"
 
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
@@ -570,7 +571,7 @@ msgstr "Povezava do igre"
 
 #: src/network/net_error_msg.cpp:34
 msgid "Connected !"
-msgstr "Povezan !"
+msgstr "Povezan!"
 
 #: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
@@ -582,12 +583,11 @@ msgstr "Vodja: "
 
 #: src/network/download.cpp:80
 msgid "Couldn't fetch last version from "
-msgstr ""
+msgstr "Ni bilo mogoče pridobiti zadnje različice iz "
 
 #: src/network/download.cpp:90
-#, fuzzy
 msgid "Couldn't open file "
-msgstr "nalaganje nastavitev ni bilo mogoče"
+msgstr "Ni bilo mogoče odpreti datoteke "
 
 #: src/menu/main_menu.cpp:72
 msgid "Credits"
@@ -616,7 +616,7 @@ msgstr "Napaka v %s:%lu"
 
 #: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
 msgid "Error loading team :"
-msgstr "Napaka pri nalaganju ekipe :"
+msgstr "Napaka pri nalaganju ekipe:"
 
 #: src/team/team.cpp:157
 #, c-format
@@ -1196,7 +1196,7 @@ msgstr "Različica"
 #: src/main.cpp:119
 #, c-format
 msgid "Version verification failed because: %s\n"
-msgstr ""
+msgstr "Preverjanje različice je spodletelo zaradi: %s\n"
 
 #: src/menu/network_menu.cpp:250
 #, c-format
