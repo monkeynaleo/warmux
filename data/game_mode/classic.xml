@@ -120,7 +120,7 @@
       <max_strength>75</max_strength>
       <nb_ammo>1</nb_ammo>
       <damage>50</damage>
-      <min_angle>-89</min_angle>
+      <min_angle>-60</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>80</explosion_range>
       <particle_range>80</particle_range>
@@ -148,7 +148,7 @@
       <max_strength>75</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
-      <min_angle>-89</min_angle>
+      <min_angle>-60</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>80</explosion_range>
       <particle_range>80</particle_range>
@@ -360,7 +360,7 @@
       <max_strength>50</max_strength>
       <nb_ammo>3</nb_ammo>
       <damage>0</damage>
-      <min_angle>-89</min_angle>
+      <min_angle>-60</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>125</explosion_range>
       <particle_range>25</particle_range>
