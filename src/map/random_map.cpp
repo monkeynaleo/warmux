@@ -253,5 +253,5 @@ void RandomMap::Generate(InfoMap::Island_type generator)
 
 void RandomMap::SaveMap()
 {
-  result.ImgSave(Config::GetInstance()->GetPersonalDir() + ActiveMap()->ReadFullMapName() + " - last random generation.png");
+  result.ImgSave(Config::GetInstance()->GetPersonalDataDir() + ActiveMap()->ReadFullMapName() + " - last random generation.png");
 }

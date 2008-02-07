@@ -90,7 +90,8 @@ Config::Config():
   m_filename(),
   data_dir(),
   locale_dir(),
-  personal_dir(),
+  personal_data_dir(),
+  personal_config_dir(),
   teams(),
   map_name(),
   display_energy_character(true),
@@ -175,9 +176,42 @@ Config::Config():
 #endif
 
 #ifndef WIN32
-  personal_dir = GetHome() + "/.wormux/";
+
+  // To respect XDG Base Directory Specification from FreeDesktop
+  // http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html
+
+  const char * c_config_dir = std::getenv("XDG_CONFIG_HOME");
+  const char * c_data_dir = std::getenv("XDG_DATA_HOME");
+
+  if (c_config_dir == NULL)
+    personal_config_dir = GetHome() + "/.config";
+  else
+    personal_config_dir = c_config_dir;
+
+  personal_config_dir += "/wormux/";
+
+  if (c_data_dir == NULL)
+    personal_data_dir = GetHome() + "/.local/share";
+  else
+    personal_data_dir = c_data_dir;
+
+  personal_data_dir += "/wormux/";
+
+  // create the directories
+  MkdirPersonalConfigDir();
+  MkdirPersonalDataDir();
+
+  // move from old directory ($HOME/.wormux/)
+  std::string old_dir = GetHome() + "/.wormux/";
+  rename(old_dir.c_str(), personal_data_dir.c_str());
+
+  std::string old_config_file_name = personal_data_dir + "config.xml";
+  std::string config_file_name = personal_config_dir + "config.xml";
+  rename(old_config_file_name.c_str(), config_file_name.c_str());
+
 #else
-  personal_dir = GetHome() + "\\Wormux\\";
+  personal_config_dir = GetHome() + "\\Wormux\\";
+  personal_data_dir = personal_config_dir;
 #endif
   LoadDefaultValue();
 
@@ -191,6 +225,32 @@ Config::Config():
 
   dir = TranslateDirectory(data_dir);
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
+}
+
+bool Config::MkdirPersonalConfigDir()
+{
+  // Create the directory if it doesn't exist
+#ifndef WIN32
+  if (mkdir(personal_config_dir.c_str(), 0750) != 0 && errno != EEXIST)
+#else
+  if (_mkdir(personal_config_dir.c_str()) != 0 && errno != EEXIST)
+#endif
+    return true;
+
+  return false;
+}
+
+bool Config::MkdirPersonalDataDir()
+{
+  // Create the directory if it doesn't exist
+#ifndef WIN32
+  if (mkdir(personal_data_dir.c_str(), 0750) != 0 && errno != EEXIST)
+#else
+  if (_mkdir(personal_data_dir.c_str()) != 0 && errno != EEXIST)
+#endif
+    return true;
+
+  return false;
 }
 
 void Config::SetLanguage(const std::string language)
@@ -238,17 +298,14 @@ bool Config::DoLoading(void)
   // create the directory if it does not exist (we should do it before exiting the game)
   // the user can ask to start an internet game and download a file in the personnal dir
   // so it should exist
-#ifndef WIN32
-  mkdir(personal_dir.c_str(), 0750);
-#else
-  _mkdir(personal_dir.c_str());
-#endif
+  MkdirPersonalDataDir();
+  MkdirPersonalConfigDir();
 
   try {
     // Load XML conf
     XmlReader doc;
 
-    m_filename = personal_dir + FILENAME;
+    m_filename = personal_config_dir + FILENAME;
 
     if (!doc.Load(m_filename))
       return false;
@@ -371,14 +428,10 @@ void Config::LoadXml(const xmlpp::Element *xml)
 
 bool Config::Save(bool save_current_teams)
 {
-  std::string rep = personal_dir;
+  std::string rep = personal_config_dir;
 
   // Create the directory if it doesn't exist
-#ifndef WIN32
-  if (mkdir(personal_dir.c_str(), 0750) != 0 && errno != EEXIST)
-#else
-  if (_mkdir(personal_dir.c_str()) != 0 && errno != EEXIST)
-#endif
+  if (MkdirPersonalConfigDir())
   {
     std::cerr << "o "
       << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
