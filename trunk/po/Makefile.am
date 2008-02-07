@@ -296,6 +296,7 @@ POTFILES = \
         src/weapon/blowtorch.h \
         src/weapon/bounce_ball.cpp \
         src/weapon/bounce_ball.h \
+        src/weapon/cluzooka.cpp src/weapon/cluzooka.h \
         src/weapon/cluster_bomb.cpp \
         src/weapon/cluster_bomb.h \
         src/weapon/construct.cpp \

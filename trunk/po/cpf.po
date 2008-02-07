@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: KBabel 1.11\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:339
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Scuse à moins, mais y gaingne pas trouve terrain là : %s"
@@ -38,7 +38,7 @@ msgid_plural "%i players ready"
 msgstr[0] " na na %i joueur que lé prêt"
 msgstr[1] " na na %i joueurs que lé prêts"
 
-#: src/game/game.cpp:656
+#: src/game/game.cpp:655
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) lé mort."
@@ -64,7 +64,7 @@ msgstr "%s Équipes"
 msgid "%s Team - Remote"
 msgstr "%s équipe - loin là bas"
 
-#: src/game/game.cpp:635
+#: src/game/game.cpp:634
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s la jette son corps la mer !"
@@ -74,12 +74,12 @@ msgstr "%s la jette son corps la mer !"
 msgid "%s fps"
 msgstr "%s i/s"
 
-#: src/game/game.cpp:628
+#: src/game/game.cpp:627
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s la tombe dans l'eau."
 
-#: src/game/game.cpp:639
+#: src/game/game.cpp:638
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s la sorte du terrain !"
@@ -91,12 +91,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Marmaille %s la gagné %u point d'vie !"
 msgstr[1] "Marmaille %s la gagné %u points d'vie !"
 
-#: src/game/game.cpp:650
+#: src/game/game.cpp:649
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s l'est gazé ça !! Boug là, la kine son camarades (%s) !"
 
-#: src/game/game.cpp:645
+#: src/game/game.cpp:644
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s lé mort à koz son 2 mains gauches..."
@@ -116,6 +116,13 @@ msgstr "%s na n'a déjà munition pou l'arme %s en quantité illimité !"
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "%s la passe son tour."
+
+#: src/weapon/cluzooka.cpp:396
+#, fuzzy, c-format
+msgid "%s team has won %u Cluster bazookas!"
+msgid_plural "%s team has won %u Cluster bazookas!"
+msgstr[0] "L'équipe %s a gagné %u !!"
+msgstr[1] "L'équipe %s a gagné %u !"
 
 #: src/weapon/gnu.cpp:174
 #, c-format
@@ -351,26 +358,33 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'équipe %s a gagné %u !"
 msgstr[1] "L'équipe %s a gagné %u !"
 
-#: src/include/action_handler.cpp:328
+#: src/include/action_handler.cpp:319
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 "%s... Hein, ou'te client et serveur na point la même version de Wormux : "
 "client=%s, serveur=%s."
 
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(kapoute)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:185
+#: src/menu/options_menu.cpp:178
 msgid "(system language)"
 msgstr "ça c'est la langue du système"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:205
+#: src/interface/interface.cpp:196
 msgid "(unlimited)"
 msgstr "(illimitées)"
+
+#: src/main.cpp:110
+#, c-format
+msgid ""
+"A new version %s is available, while your version is %s.You may want to "
+"check whether an update is available for your OS!"
+msgstr ""
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -397,7 +411,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Enclume"
 
-#: src/main.cpp:270
+#: src/main.cpp:272
 msgid "Authors:"
 msgstr "Zoteurs :"
 
@@ -433,18 +447,18 @@ msgstr "Balle y rebondi"
 msgid "Bye bye tux..."
 msgstr "Nartrouvé tux!!"
 
-#: src/team/teams_list.cpp:491 src/team/teams_list.cpp:513
-#: src/team/teams_list.cpp:560
+#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:552
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Gaingne pas trouver l'équipe %s !"
 
-#: src/team/teams_list.cpp:176
+#: src/team/teams_list.cpp:168
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Gaingne pas ouvrir le répertoire des équipes (%s)!"
 
-#: src/team/teams_list.cpp:164
+#: src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Gaingne pas ouvrir le répertoire des équipes (%s) !"
@@ -461,6 +475,11 @@ msgstr "Mode client"
 #: src/weapon/cluster_bomb.cpp:158
 msgid "Cluster Bomb"
 msgstr "Grenade lé fragmenté"
+
+#: src/weapon/cluzooka.cpp:389
+#, fuzzy
+msgid "Cluzooka"
+msgstr "Bazooka"
 
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
@@ -491,6 +510,15 @@ msgstr "Construction"
 msgid "Controlled by: "
 msgstr "ça c'est controllé par:"
 
+#: src/network/download.cpp:80
+msgid "Couldn't fetch last version from "
+msgstr ""
+
+#: src/network/download.cpp:90
+#, fuzzy
+msgid "Couldn't open file "
+msgstr "* Na un n'affaire y s'ar pas ek le son:"
+
 #: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Crédits"
@@ -507,7 +535,7 @@ msgstr "Durée d'un tour"
 msgid "Dynamite"
 msgstr "Dynamite"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:228
 msgid "END OF GAME"
 msgstr "LE JEU LA FINI"
 
@@ -516,7 +544,7 @@ msgstr "LE JEU LA FINI"
 msgid "Error in %s:%lu"
 msgstr "Erreur dans %s:%lu"
 
-#: src/team/teams_list.cpp:133 src/team/teams_list.cpp:140
+#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Pas gagné charger l'équipe %s:"
 
@@ -525,7 +553,7 @@ msgstr "Pas gagné charger l'équipe %s:"
 msgid "Error loading team's data %s:"
 msgstr "Pas gagné charger l'équipe %s :"
 
-#: src/game/config.cpp:392
+#: src/game/config.cpp:384
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -533,22 +561,22 @@ msgstr ""
 "La création du répertoire \"%s\" la échoué : gaingne pas sauvegarde la "
 "configuration du jeu."
 
-#: src/game/config.cpp:267
+#: src/game/config.cpp:259
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Gaingne pas charge lo fichier de configuration : %s"
 
-#: src/game/config.cpp:305
+#: src/game/config.cpp:297
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Gaingne pas charge lo fichier de configuration : %s "
 
-#: src/game/game_mode.cpp:237
+#: src/game/game_mode.cpp:228
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Gaingne pas charge lo mode de jeu %s (fichier %s) :"
 
-#: src/game/game.cpp:129
+#: src/game/game.cpp:128
 #, c-format
 msgid ""
 "Error:\n"
@@ -584,7 +612,7 @@ msgstr "Erreur : le skin \"%s\" pour l'équipe \"%s\" la fané ça..."
 msgid "Flame Thrower"
 msgstr "lance-flammes"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:80
 msgid "Fullscreen?"
 msgstr "Plein écran ?"
 
@@ -623,7 +651,7 @@ msgid "Head commander"
 msgstr "Lo chef"
 
 #. Display player's name
-#: src/interface/interface.cpp:165
+#: src/interface/interface.cpp:156
 msgid "Head commander: "
 msgstr "Lo chef:"
 
@@ -670,7 +698,7 @@ msgstr ""
 "Comment utilises à lu: pese ek le bouton gauche de oute souris sur la cible."
 "une munition par tour"
 
-#: src/main.cpp:262
+#: src/main.cpp:264
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -682,7 +710,8 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Énergie initiale"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/riot_bomb.cpp:121
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -707,7 +736,7 @@ msgstr "Initialisation du sond"
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
-#: src/game/game.cpp:519
+#: src/game/game.cpp:518
 msgid "It's a present!"
 msgstr "Trape kado là pou ou !"
 
@@ -722,15 +751,15 @@ msgstr ""
 "ou su #wormux-fr a irc.freenode.net pou rode d'autres camarades pou jouer "
 "avec."
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:119
 msgid "Language"
 msgstr "la langue"
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Terrains lé en train de charger :"
 
-#: src/team/teams_list.cpp:152
+#: src/team/teams_list.cpp:144
 msgid "Load teams:"
 msgstr "Chargement des équipes :"
 
@@ -756,7 +785,7 @@ msgstr "Terrains"
 msgid "Max number of players:"
 msgstr "Nombre de joueurs maximum :"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:83
 msgid "Maximum FPS"
 msgstr "Nbr. max. d'images/sec"
 
@@ -788,7 +817,7 @@ msgstr "Sa ki serve le moins"
 msgid "Most violent"
 msgstr "Le plus violent"
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:128
 msgid "Music?"
 msgstr "Musique ?"
 
@@ -796,7 +825,7 @@ msgstr "Musique ?"
 msgid "Network Game"
 msgstr "Jeu en réseau"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:259
 msgid "Network initialization"
 msgstr "Prépare lo rézo"
 
@@ -843,11 +872,11 @@ msgstr "Jouer"
 msgid "Player"
 msgstr "Joueur"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:74
 msgid "Player energy?"
 msgstr "Affiche l'énergie des joueurs ?"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:77
 msgid "Player's name?"
 msgstr "Affiche le ti'nom des joueurs ?"
 
@@ -864,7 +893,7 @@ msgstr "Port :"
 msgid "Quit"
 msgstr "Barré"
 
-#: src/main.cpp:242
+#: src/main.cpp:253
 msgid "Quit Wormux"
 msgstr "Quitte Wormux"
 
@@ -876,11 +905,11 @@ msgstr "Allons barer"
 msgid "Random map"
 msgstr "carte choisi n'importe comment"
 
-#: src/game/config.cpp:280
+#: src/game/config.cpp:272
 msgid "Reading default config file"
 msgstr "An train'e lire ou'te fichier de configuration"
 
-#: src/game/config.cpp:313
+#: src/game/config.cpp:305
 msgid "Reading personal config file"
 msgstr "An train'e lire oute fichier de configuration a ou même"
 
@@ -888,7 +917,7 @@ msgstr "An train'e lire oute fichier de configuration a ou même"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:107
 msgid "Resolution"
 msgstr "Résolution"
 
@@ -896,7 +925,7 @@ msgstr "Résolution"
 msgid "Riot Bomb"
 msgstr "Bombe lacrimogène"
 
-#: src/main.cpp:90
+#: src/main.cpp:82
 msgid "Run game"
 msgstr "Lancement du jeu"
 
@@ -940,11 +969,11 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 "Scuze, seulement, là, na point personne y attende pour d'autres joueurs"
 
-#: src/menu/options_menu.cpp:137
+#: src/menu/options_menu.cpp:131
 msgid "Sound effects?"
 msgstr "Effets sonores ?"
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:149
 msgid "Sound frequency"
 msgstr "Fréquence d'échantillonage ?"
 
@@ -953,11 +982,11 @@ msgstr "Fréquence d'échantillonage ?"
 msgid "Sounds"
 msgstr "Options sonores"
 
-#: src/game/game.cpp:96
+#: src/game/game.cpp:95
 msgid "Starting a new game"
 msgstr "Démarrage d'une nouvelle partie"
 
-#: src/interface/interface.cpp:205
+#: src/interface/interface.cpp:196
 msgid "Stock:"
 msgstr "Munitions :"
 
@@ -1018,7 +1047,8 @@ msgstr "La grenade la vole chemin avant lu pête."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Hého, band'na y attendent a ou! alors, grouille oute calbasse !"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "La roquette la fané ..."
 
@@ -1063,12 +1093,12 @@ msgstr "Z'outils"
 msgid "Unable to contact host."
 msgstr "Gaingne pas contact le serveur"
 
-#: src/map/maps_list.cpp:251
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des terrains (%s) !"
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:250
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des terrains (%s)!"
@@ -1077,13 +1107,18 @@ msgstr "Impossible d'ouvrir le répertoire des terrains (%s)!"
 msgid "Unable to use this port!"
 msgstr "Impossible d'utiliser ce port !"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:108
 msgid "Unnamed"
 msgstr "pas de nom"
 
-#: src/main.cpp:197
+#: src/main.cpp:208
 msgid "Version"
 msgstr "Version"
+
+#: src/main.cpp:119
+#, c-format
+msgid "Version verification failed because: %s\n"
+msgstr ""
 
 #: src/menu/network_menu.cpp:250
 #, c-format
@@ -1104,17 +1139,17 @@ msgstr ""
 msgid "Weapons"
 msgstr "Armes"
 
-#: src/main.cpp:279
+#: src/main.cpp:281
 msgid "Website: "
 msgstr "Site internet : "
 
-#: src/game/game.cpp:653
+#: src/game/game.cpp:652
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : un simple pistolet la kine à lu !"
 
 #. Various options
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:71
 msgid "Wind particles?"
 msgstr "Particules du vent ?"
 
@@ -1122,11 +1157,11 @@ msgstr "Particules du vent ?"
 msgid "Winner"
 msgstr "ça que la gagné"
 
-#: src/main.cpp:210
+#: src/main.cpp:221
 msgid "Wormux launching..."
 msgstr "Wormux y démarre ..."
 
-#: src/main.cpp:269
+#: src/main.cpp:271
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1143,11 +1178,11 @@ msgstr "Ou lé tout seul."
 msgid "You are alone..."
 msgstr "Ou lé sur vouloir jouer tout seul ?!"
 
-#: src/map/maps_list.cpp:272
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "Ou na na besoin d'au moins un terrain correct..."
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:184
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Il faut au minimum deux équipes correctes !"
 
@@ -1191,16 +1226,16 @@ msgstr "de"
 msgid "no configuration file!"
 msgstr "Gaingne pas charge lo fichier de configuration!"
 
-#: src/sound/jukebox.cpp:157
+#: src/sound/jukebox.cpp:166
 msgid "o Loading music"
 msgstr "o Music en train'e charger"
 
-#: src/sound/jukebox.cpp:327
+#: src/sound/jukebox.cpp:339
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Profile son en train'e charger : %s"
 
-#: src/sound/jukebox.cpp:86
+#: src/sound/jukebox.cpp:91
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
@@ -1325,9 +1360,6 @@ msgstr "o Démarrage du son à %d Hz %d bit"
 
 #~ msgid "* Couldn't initialize SDL: "
 #~ msgstr "* Aie, lé pa bon... SDL la reste en plan:"
-
-#~ msgid "* Couldn't open audio: "
-#~ msgstr "* Na un n'affaire y s'ar pas ek le son:"
 
 #~ msgid "Find a random position for characters"
 #~ msgstr "Nous lé en train'e place toute bande personnage"
