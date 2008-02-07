@@ -2,7 +2,7 @@
 # translation of bs.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Adnan Hodzic <AbsintheSyringe@gmail.com>, 2006, 2007.
 msgid ""
 msgstr ""
@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:339
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
@@ -36,7 +36,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i igrač spreman"
 msgstr[1] "%i igrač konektovan"
 
-#: src/game/game.cpp:656
+#: src/game/game.cpp:655
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s tim) je umro."
@@ -62,7 +62,7 @@ msgstr "%s Tim"
 msgid "%s Team - Remote"
 msgstr "%s Tim - Udaljenost"
 
-#: src/game/game.cpp:635
+#: src/game/game.cpp:634
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izvršava samoubistvo !"
@@ -72,12 +72,12 @@ msgstr "%s izvršava samoubistvo !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:628
+#: src/game/game.cpp:627
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s je pao u vodu."
 
-#: src/game/game.cpp:639
+#: src/game/game.cpp:638
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s je ispao sa mape!"
@@ -89,12 +89,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s je dobio %u poena energije!"
 msgstr[1] "%s je dobio %u poena energije"
 
-#: src/game/game.cpp:650
+#: src/game/game.cpp:649
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopata, ubio je člana %s tima!"
 
-#: src/game/game.cpp:645
+#: src/game/game.cpp:644
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mrtav zato što je smotan!"
@@ -114,6 +114,13 @@ msgstr "%s tim već ima neograničenu municiju za %s!"
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "%s tim je preskočio svoj red."
+
+#: src/weapon/cluzooka.cpp:396
+#, fuzzy, c-format
+msgid "%s team has won %u Cluster bazookas!"
+msgid_plural "%s team has won %u Cluster bazookas!"
+msgstr[0] "%s tim je dobio %u bazuka!"
+msgstr[1] "%s tim je dobio %u bazuka!"
 
 #: src/weapon/gnu.cpp:174
 #, c-format
@@ -349,24 +356,31 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s tim je dobio %u tux lanser! Nikad nisi vidio pingvina koji leti?"
 msgstr[1] "%s tim je dobio %u tux lanser! Nikad nisi vidio pingvina koji leti?"
 
-#: src/include/action_handler.cpp:328
+#: src/include/action_handler.cpp:319
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux verzije su drugačije : klijent=%s, server=%s."
 
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mrtav)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:185
+#: src/menu/options_menu.cpp:178
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:205
+#: src/interface/interface.cpp:196
 msgid "(unlimited)"
 msgstr "(neograničeno)"
+
+#: src/main.cpp:110
+#, c-format
+msgid ""
+"A new version %s is available, while your version is %s.You may want to "
+"check whether an update is available for your OS!"
+msgstr ""
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -394,7 +408,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovanj"
 
-#: src/main.cpp:270
+#: src/main.cpp:272
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -430,18 +444,18 @@ msgstr "Bomba odskočica"
 msgid "Bye bye tux..."
 msgstr "Ćao ćao tux ..."
 
-#: src/team/teams_list.cpp:491 src/team/teams_list.cpp:513
-#: src/team/teams_list.cpp:560
+#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:552
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ne može naći tim %s!"
 
-#: src/team/teams_list.cpp:176
+#: src/team/teams_list.cpp:168
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ne mogu otvorit direktorij  (%s)!"
 
-#: src/team/teams_list.cpp:164
+#: src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ne mogu otvorit direktorij tima  (%s)!"
@@ -458,6 +472,11 @@ msgstr "Klijent mod"
 #: src/weapon/cluster_bomb.cpp:158
 msgid "Cluster Bomb"
 msgstr "Kasetna bomba"
+
+#: src/weapon/cluzooka.cpp:389
+#, fuzzy
+msgid "Cluzooka"
+msgstr "Bazuka"
 
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
@@ -488,6 +507,14 @@ msgstr "Konstruiraj"
 msgid "Controlled by: "
 msgstr "Kontroliran od strane:"
 
+#: src/network/download.cpp:80
+msgid "Couldn't fetch last version from "
+msgstr ""
+
+#: src/network/download.cpp:90
+msgid "Couldn't open file "
+msgstr ""
+
 #: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Krediti"
@@ -504,7 +531,7 @@ msgstr "Trajanje reda"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:228
 msgid "END OF GAME"
 msgstr "KRAJ IGRE"
 
@@ -513,7 +540,7 @@ msgstr "KRAJ IGRE"
 msgid "Error in %s:%lu"
 msgstr "Greška u %s:%lu"
 
-#: src/team/teams_list.cpp:133 src/team/teams_list.cpp:140
+#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Greška kod očitavanja tima:"
 
@@ -522,7 +549,7 @@ msgstr "Greška kod očitavanja tima:"
 msgid "Error loading team's data %s:"
 msgstr "Greška kod očitavanja podataka tima %s :"
 
-#: src/game/config.cpp:392
+#: src/game/config.cpp:384
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -530,22 +557,22 @@ msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
 
-#: src/game/config.cpp:267
+#: src/game/config.cpp:259
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 
-#: src/game/config.cpp:305
+#: src/game/config.cpp:297
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 
-#: src/game/game_mode.cpp:237
+#: src/game/game_mode.cpp:228
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Greška tokom učitavanja moda igre  %s (file %s):"
 
-#: src/game/game.cpp:129
+#: src/game/game.cpp:128
 #, c-format
 msgid ""
 "Error:\n"
@@ -584,7 +611,7 @@ msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
 msgid "Flame Thrower"
 msgstr "Bacač Plamena"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:80
 msgid "Fullscreen?"
 msgstr "Pun ekran?"
 
@@ -622,7 +649,7 @@ msgid "Head commander"
 msgstr "Vojskovođa"
 
 #. Display player's name
-#: src/interface/interface.cpp:165
+#: src/interface/interface.cpp:156
 msgid "Head commander: "
 msgstr "Vojskovođa:"
 
@@ -671,7 +698,7 @@ msgstr ""
 "Kako koristiti : lijevi klik na metu\n"
 "municija po redu"
 
-#: src/main.cpp:262
+#: src/main.cpp:264
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -681,7 +708,8 @@ msgstr "Ako si ponašao bug ili imaš prijedlog pošalji nam email (na engleskom
 msgid "Initial energy"
 msgstr "Početna energija"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/riot_bomb.cpp:121
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -707,7 +735,7 @@ msgstr "Inicijaliziranje zvuka"
 msgid "Initialise teams"
 msgstr "Inicijaliziranje timova"
 
-#: src/game/game.cpp:519
+#: src/game/game.cpp:518
 msgid "It's a present!"
 msgstr "Pa to je poklon!"
 
@@ -719,15 +747,15 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Dođi na #wormux na irc.freenode.net da pronađeš protivnika"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:119
 msgid "Language"
 msgstr "Jezik"
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Učitaj mape:"
 
-#: src/team/teams_list.cpp:152
+#: src/team/teams_list.cpp:144
 msgid "Load teams:"
 msgstr "Učitaj timove:"
 
@@ -753,7 +781,7 @@ msgstr "Mape"
 msgid "Max number of players:"
 msgstr "Maximalan broj igrača:"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:83
 msgid "Maximum FPS"
 msgstr "Maximalaan broj FPS"
 
@@ -786,7 +814,7 @@ msgstr "Najučikovitiji"
 msgid "Most violent"
 msgstr "Najagresivniji"
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:128
 msgid "Music?"
 msgstr "Muzika?"
 
@@ -794,7 +822,7 @@ msgstr "Muzika?"
 msgid "Network Game"
 msgstr "Mrežna Igra"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:259
 #, fuzzy
 msgid "Network initialization"
 msgstr "Initalaizacija baze ..."
@@ -843,11 +871,11 @@ msgstr "Igraj"
 msgid "Player"
 msgstr "Igrač"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:74
 msgid "Player energy?"
 msgstr "Prikaži energiju igrača?"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:77
 msgid "Player's name?"
 msgstr "Prikaži ime igrača?"
 
@@ -864,7 +892,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Odustani"
 
-#: src/main.cpp:242
+#: src/main.cpp:253
 msgid "Quit Wormux"
 msgstr "Izađi iz Wormux-a"
 
@@ -877,12 +905,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Učitaj mape:"
 
-#: src/game/config.cpp:280
+#: src/game/config.cpp:272
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Čita lični konfiguracioni podatak"
 
-#: src/game/config.cpp:313
+#: src/game/config.cpp:305
 msgid "Reading personal config file"
 msgstr "Čita lični konfiguracioni podatak"
 
@@ -890,7 +918,7 @@ msgstr "Čita lični konfiguracioni podatak"
 msgid "Refresh"
 msgstr "Osvježi"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:107
 msgid "Resolution"
 msgstr "Rezolucija"
 
@@ -898,7 +926,7 @@ msgstr "Rezolucija"
 msgid "Riot Bomb"
 msgstr "Džumbus bomba"
 
-#: src/main.cpp:90
+#: src/main.cpp:82
 msgid "Run game"
 msgstr "Pokreni igru"
 
@@ -941,11 +969,11 @@ msgstr "Snajper"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, trenutno nema igre koja čeka igrače"
 
-#: src/menu/options_menu.cpp:137
+#: src/menu/options_menu.cpp:131
 msgid "Sound effects?"
 msgstr "Zvučni efekti?"
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:149
 msgid "Sound frequency"
 msgstr "Zvučna frekvencija"
 
@@ -954,11 +982,11 @@ msgstr "Zvučna frekvencija"
 msgid "Sounds"
 msgstr "Zvučne opcije"
 
-#: src/game/game.cpp:96
+#: src/game/game.cpp:95
 msgid "Starting a new game"
 msgstr "Pokreni novu igru"
 
-#: src/interface/interface.cpp:205
+#: src/interface/interface.cpp:196
 msgid "Stock:"
 msgstr "Zaliha:"
 
@@ -1018,7 +1046,8 @@ msgstr "Granata napušta bojište prije explozije"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Drugi te čekaju! Probudi se :)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je napustila bojište..."
 
@@ -1066,12 +1095,12 @@ msgstr "Alati"
 msgid "Unable to contact host."
 msgstr "Nije u stanju kontaktirati host."
 
-#: src/map/maps_list.cpp:251
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:250
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
@@ -1080,13 +1109,18 @@ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nije u mogućnosti koristit ovaj port!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:108
 msgid "Unnamed"
 msgstr "Bezimeni"
 
-#: src/main.cpp:197
+#: src/main.cpp:208
 msgid "Version"
 msgstr "Verzija"
+
+#: src/main.cpp:119
+#, c-format
+msgid "Version verification failed because: %s\n"
+msgstr ""
 
 #: src/menu/network_menu.cpp:250
 #, c-format
@@ -1105,17 +1139,17 @@ msgstr "Čekanje za server, sve što sad možeš uraditi je odustati ili chatati
 msgid "Weapons"
 msgstr "Oružje:"
 
-#: src/main.cpp:279
+#: src/main.cpp:281
 msgid "Website: "
 msgstr "Web stranica:"
 
-#: src/game/game.cpp:653
+#: src/game/game.cpp:652
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Koja sramota za %s - koji je ubijen najobičnijim pištoljem!"
 
 #. Various options
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:71
 msgid "Wind particles?"
 msgstr "Prikazuj trunke vjetra?"
 
@@ -1124,11 +1158,11 @@ msgstr "Prikazuj trunke vjetra?"
 msgid "Winner"
 msgstr "Mina"
 
-#: src/main.cpp:210
+#: src/main.cpp:221
 msgid "Wormux launching..."
 msgstr "Wormux se učitava..."
 
-#: src/main.cpp:269
+#: src/main.cpp:271
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
@@ -1146,11 +1180,11 @@ msgstr "Sami ste ..."
 msgid "You are alone..."
 msgstr "Sami ste ..."
 
-#: src/map/maps_list.cpp:272
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "Trebate barem jednu važeće mapu!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:184
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Trebate barem dva važeća tima !"
 
@@ -1200,16 +1234,16 @@ msgstr "od"
 msgid "no configuration file!"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 
-#: src/sound/jukebox.cpp:157
+#: src/sound/jukebox.cpp:166
 msgid "o Loading music"
 msgstr "o Učitavam muziku"
 
-#: src/sound/jukebox.cpp:327
+#: src/sound/jukebox.cpp:339
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Učitavam zvučne profile: %s"
 
-#: src/sound/jukebox.cpp:86
+#: src/sound/jukebox.cpp:91
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"

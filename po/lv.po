@@ -17,7 +17,7 @@ msgstr ""
 "2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:339
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nav atrasta :-("
@@ -38,7 +38,7 @@ msgstr[0] "%i spēlētājs gatavs"
 msgstr[1] "%i spēlētāji gatavi"
 msgstr[2] "%i spēlētāju gatavi"
 
-#: src/game/game.cpp:656
+#: src/game/game.cpp:655
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s ) ir nomiris."
@@ -64,7 +64,7 @@ msgstr "%s komanda"
 msgid "%s Team - Remote"
 msgstr "%s komanda - attālināta"
 
-#: src/game/game.cpp:635
+#: src/game/game.cpp:634
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izdara pašnāvību !"
@@ -74,12 +74,12 @@ msgstr "%s izdara pašnāvību !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:628
+#: src/game/game.cpp:627
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s iekrita ūdenī."
 
-#: src/game/game.cpp:639
+#: src/game/game.cpp:638
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s nokrita no kartes!"
@@ -92,12 +92,12 @@ msgstr[0] "%s ir ieguvis %u enerģijas punktu!"
 msgstr[1] "%s ir ieguvis %u enerģijas punktus!"
 msgstr[2] "%s ir ieguvis %u enerģijas punktus!"
 
-#: src/game/game.cpp:650
+#: src/game/game.cpp:649
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ir manjaks, viņš nogalināja %s komandas dalībnieku!"
 
-#: src/game/game.cpp:645
+#: src/game/game.cpp:644
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ir miris, jo bija pārāk neveikls!"
@@ -117,6 +117,14 @@ msgstr "%s komandai jau ir bezgalīgs daudzums munīcijas priekš %s!"
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "%s komnda izlaiž gājienu."
+
+#: src/weapon/cluzooka.cpp:396
+#, fuzzy, c-format
+msgid "%s team has won %u Cluster bazookas!"
+msgid_plural "%s team has won %u Cluster bazookas!"
+msgstr[0] "%s komanda ir ieguvusi %u bazuku!"
+msgstr[1] "%s komanda ir ieguvusi %u bazukas!"
+msgstr[2] "%s komanda ir ieguvusi %u bazukas!"
 
 #: src/weapon/gnu.cpp:174
 #, fuzzy, c-format
@@ -375,25 +383,32 @@ msgstr[0] "%s komanda ir ieguvusi %u tux šāvēju!"
 msgstr[1] "%s komanda ir ieguvusi %u tux šāvējus!"
 msgstr[2] "%s komanda ir ieguvusi %u tux šāvējus!"
 
-#: src/include/action_handler.cpp:328
+#: src/include/action_handler.cpp:319
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
 "%s mēģina pieslēgties ar atšķirīgu programmas versiju : klientam=%s, man=%s."
 
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mirusi)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:185
+#: src/menu/options_menu.cpp:178
 msgid "(system language)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:205
+#: src/interface/interface.cpp:196
 msgid "(unlimited)"
 msgstr "(bezgalība)"
+
+#: src/main.cpp:110
+#, c-format
+msgid ""
+"A new version %s is available, while your version is %s.You may want to "
+"check whether an update is available for your OS!"
+msgstr ""
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -421,7 +436,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Lakta"
 
-#: src/main.cpp:270
+#: src/main.cpp:272
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -457,18 +472,18 @@ msgstr "Lēkājosā bumba"
 msgid "Bye bye tux..."
 msgstr "Attā attā tux..."
 
-#: src/team/teams_list.cpp:491 src/team/teams_list.cpp:513
-#: src/team/teams_list.cpp:560
+#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:552
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nevar atrast komandu %s!"
 
-#: src/team/teams_list.cpp:176
+#: src/team/teams_list.cpp:168
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
 
-#: src/team/teams_list.cpp:164
+#: src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
@@ -485,6 +500,11 @@ msgstr "Klienta režīms"
 #: src/weapon/cluster_bomb.cpp:158
 msgid "Cluster Bomb"
 msgstr "Ķekarbumba"
+
+#: src/weapon/cluzooka.cpp:389
+#, fuzzy
+msgid "Cluzooka"
+msgstr "Bazuka"
 
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
@@ -515,6 +535,14 @@ msgstr "Būvniecība"
 msgid "Controlled by: "
 msgstr "Kontrolē: "
 
+#: src/network/download.cpp:80
+msgid "Couldn't fetch last version from "
+msgstr ""
+
+#: src/network/download.cpp:90
+msgid "Couldn't open file "
+msgstr ""
+
 #: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Veidotāji"
@@ -531,7 +559,7 @@ msgstr "Gājiena ilgums"
 msgid "Dynamite"
 msgstr "Dinamīts"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:228
 msgid "END OF GAME"
 msgstr "SPĒLES BEIGAS"
 
@@ -540,7 +568,7 @@ msgstr "SPĒLES BEIGAS"
 msgid "Error in %s:%lu"
 msgstr "Kļūda %s:%lu"
 
-#: src/team/teams_list.cpp:133 src/team/teams_list.cpp:140
+#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Kļūda ielādējot komandu :"
 
@@ -549,28 +577,28 @@ msgstr "Kļūda ielādējot komandu :"
 msgid "Error loading team's data %s:"
 msgstr "Kļūda ielādējot komandas datus %s:"
 
-#: src/game/config.cpp:392
+#: src/game/config.cpp:384
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Kļūda veidojot mapi \"%s\": nevar sglabāt konfigurācijas failu."
 
-#: src/game/config.cpp:267
+#: src/game/config.cpp:259
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/game/config.cpp:305
+#: src/game/config.cpp:297
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/game/game_mode.cpp:237
+#: src/game/game_mode.cpp:228
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Kļūda ielādējot spēles režīmu %s (fails %s):"
 
-#: src/game/game.cpp:129
+#: src/game/game.cpp:128
 #, c-format
 msgid ""
 "Error:\n"
@@ -607,7 +635,7 @@ msgstr "Kļūda: Nevar atrast ķermeni \"%s\" komandai \"%s\"."
 msgid "Flame Thrower"
 msgstr ""
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:80
 msgid "Fullscreen?"
 msgstr "Pa visu ekrānu?"
 
@@ -645,7 +673,7 @@ msgid "Head commander"
 msgstr "Virspavēlnieks"
 
 #. Display player's name
-#: src/interface/interface.cpp:165
+#: src/interface/interface.cpp:156
 msgid "Head commander: "
 msgstr "Virspavēlnieks: "
 
@@ -697,7 +725,7 @@ msgstr ""
 "Kā to izmantot : kreizais klikšķis uz mērķa\n"
 "munīcija gājienā"
 
-#: src/main.cpp:262
+#: src/main.cpp:264
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -709,7 +737,8 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Enerģija"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/riot_bomb.cpp:121
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -735,7 +764,7 @@ msgstr "Gatavo skaņas"
 msgid "Initialise teams"
 msgstr "Gatavo komandas"
 
-#: src/game/game.cpp:519
+#: src/game/game.cpp:518
 msgid "It's a present!"
 msgstr "Tā ir dāvana!"
 
@@ -749,15 +778,15 @@ msgstr ""
 "Pievienojies #wormux kanālam irc.freenode.net serverī, lai atrastu "
 "pretiniekus."
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:119
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Ielādē kartes:"
 
-#: src/team/teams_list.cpp:152
+#: src/team/teams_list.cpp:144
 msgid "Load teams:"
 msgstr "Ielādē komandas:"
 
@@ -783,7 +812,7 @@ msgstr "Kartes"
 msgid "Max number of players:"
 msgstr "MAksimālais spēlētāju skaits:"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:83
 msgid "Maximum FPS"
 msgstr "Maksimālais FPS"
 
@@ -815,7 +844,7 @@ msgstr "Vis bezjēdzīgākais"
 msgid "Most violent"
 msgstr "Vis asiņainākais"
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:128
 msgid "Music?"
 msgstr "Mūzika?"
 
@@ -823,7 +852,7 @@ msgstr "Mūzika?"
 msgid "Network Game"
 msgstr "Tīkla spēle"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:259
 msgid "Network initialization"
 msgstr "Tīkla inicializācija"
 
@@ -871,11 +900,11 @@ msgstr "Spēlēt"
 msgid "Player"
 msgstr "Spēlētājs"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:74
 msgid "Player energy?"
 msgstr "Spēlētāja enerģija?"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:77
 msgid "Player's name?"
 msgstr "Spēlētāja vārds?"
 
@@ -892,7 +921,7 @@ msgstr "Ports:"
 msgid "Quit"
 msgstr "Iziet"
 
-#: src/main.cpp:242
+#: src/main.cpp:253
 msgid "Quit Wormux"
 msgstr "Iziet no Wormux"
 
@@ -905,12 +934,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Ielādē kartes:"
 
-#: src/game/config.cpp:280
+#: src/game/config.cpp:272
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
-#: src/game/config.cpp:313
+#: src/game/config.cpp:305
 msgid "Reading personal config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
@@ -918,7 +947,7 @@ msgstr "Lasa personisko konfigurācijas failu"
 msgid "Refresh"
 msgstr "Atjaunināt"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:107
 msgid "Resolution"
 msgstr "Izšķirtspēja"
 
@@ -926,7 +955,7 @@ msgstr "Izšķirtspēja"
 msgid "Riot Bomb"
 msgstr "Dumpja bumba"
 
-#: src/main.cpp:90
+#: src/main.cpp:82
 msgid "Run game"
 msgstr "Sākt spēli"
 
@@ -969,11 +998,11 @@ msgstr "Snaiperšautene"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:137
+#: src/menu/options_menu.cpp:131
 msgid "Sound effects?"
 msgstr "Skaņas efekti?"
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:149
 msgid "Sound frequency"
 msgstr "Skaņas frekvence"
 
@@ -982,11 +1011,11 @@ msgstr "Skaņas frekvence"
 msgid "Sounds"
 msgstr "Skaņas"
 
-#: src/game/game.cpp:96
+#: src/game/game.cpp:95
 msgid "Starting a new game"
 msgstr "Sāk jaunu spēli"
 
-#: src/interface/interface.cpp:205
+#: src/interface/interface.cpp:196
 msgid "Stock:"
 msgstr "Krājumā:"
 
@@ -1046,7 +1075,8 @@ msgstr "Granāta nokrita no spēles laukuma pirms paguva uzsprāgt"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Citi gaida uz tevi! Dari kaut ko :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/riot_bomb.cpp:86
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raķete izgāja no spēles laukuma..."
 
@@ -1094,12 +1124,12 @@ msgstr "Rīki"
 msgid "Unable to contact host."
 msgstr "Nevar pieslēgties."
 
-#: src/map/maps_list.cpp:251
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nevar atvērt karšu mapi (%s)!"
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:250
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nevar atvērt karšu mapi (%s)!"
@@ -1108,13 +1138,18 @@ msgstr "Nevar atvērt karšu mapi (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nevar izmantot šo portu!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:108
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:197
+#: src/main.cpp:208
 msgid "Version"
 msgstr "Versija"
+
+#: src/main.cpp:119
+#, c-format
+msgid "Version verification failed because: %s\n"
+msgstr ""
 
 #: src/menu/network_menu.cpp:250
 #, c-format
@@ -1134,17 +1169,17 @@ msgstr "Gaida uz serveri, jūs varat atcelt vai tērzēt!"
 msgid "Weapons"
 msgstr "Ieroči"
 
-#: src/main.cpp:279
+#: src/main.cpp:281
 msgid "Website: "
 msgstr "Mākas lapa: "
 
-#: src/game/game.cpp:653
+#: src/game/game.cpp:652
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kauns un negods %s - viņu nogalināja ar vienkāršu ieroci!"
 
 #. Various options
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:71
 msgid "Wind particles?"
 msgstr "Vējš?"
 
@@ -1152,11 +1187,11 @@ msgstr "Vējš?"
 msgid "Winner"
 msgstr "Uzvarētājs"
 
-#: src/main.cpp:210
+#: src/main.cpp:221
 msgid "Wormux launching..."
 msgstr "Wormux ielādējas..."
 
-#: src/main.cpp:269
+#: src/main.cpp:271
 msgid "Wormux version "
 msgstr "Wormux versija "
 
@@ -1173,11 +1208,11 @@ msgstr "Jūs esat viens pats :-/"
 msgid "You are alone..."
 msgstr "Jūs esat viens pats..."
 
-#: src/map/maps_list.cpp:272
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "Jums nepieciešama vismaz viena derīga karte !"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:184
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Jums nepieciešamas vismaz divas derīgas komandas !"
 
@@ -1225,16 +1260,16 @@ msgstr "no"
 msgid "no configuration file!"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/sound/jukebox.cpp:157
+#: src/sound/jukebox.cpp:166
 msgid "o Loading music"
 msgstr "o Ielādē mūsiku"
 
-#: src/sound/jukebox.cpp:327
+#: src/sound/jukebox.cpp:339
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Ielādē skaņas profilu: %s"
 
-#: src/sound/jukebox.cpp:86
+#: src/sound/jukebox.cpp:91
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Atver skaņu %d Hz %d bit"
