@@ -161,6 +161,22 @@
       <blast_force>2500</blast_force>
     </bazooka>
 
+    <cluzooka>
+      <max_strength>75</max_strength>
+      <nb_ammo>-1</nb_ammo>
+      <damage>25</damage>
+      <min_angle>-89</min_angle>
+      <max_angle>89</max_angle>
+      <explosion_range>30</explosion_range>
+      <particle_range>20</particle_range>
+      <blast_range>50</blast_range>
+      <blast_force>4500</blast_force>
+      <timeout>3</timeout>
+      <allow_change_timeout>1</allow_change_timeout>
+      <nb_fragments>5</nb_fragments>
+      <nb_angle_dispersion>75</nb_angle_dispersion>
+    </cluzooka>
+
     <blowtorch>
       <nb_ammo>4</nb_ammo>
       <min_angle>-45</min_angle>
