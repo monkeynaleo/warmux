@@ -126,7 +126,7 @@ OptionMenu::OptionMenu() :
   /* Misc options */
   Box * misc_options = new HBox(SOUND_H);
   opt_updates = new PictureTextCBox(_("Check updates online?"),
-                                    "menu/ico_network_menu", option_size);
+                                    "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
   widgets.AddWidget(misc_options);
 
