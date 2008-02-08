@@ -33,6 +33,9 @@
 #include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
+#include "game/time.h"
+#include "network/randomsync.h"
+#include "assert.h"
 
 const Point2i CAMERA_SPEED(20, 20);
 
@@ -43,6 +46,12 @@ const Point2i CAMERA_SPEED(20, 20);
 #define MAX_SPEED_ADVANCE 15
 
 Camera::Camera():
+  m_started_shaking( 0 ),
+  m_shake_duration( 0 ),
+  m_shake_amplitude( 0, 0 ),
+  m_shake_centerpoint( 0, 0 ),
+  m_shake( 0, 0 ),
+  m_last_time_shake_calculated( 0 ),
   auto_crop(true),
   in_advance(false),
   followed_object(NULL)
@@ -331,3 +340,82 @@ void Camera::CenterOnActiveCharacter()
   CharacterCursor::GetInstance()->FollowActiveCharacter();
   FollowObject(&ActiveCharacter(), true);
 }
+
+Point2i Camera::ComputeShake() const
+{
+    uint time = Time::GetInstance()->Read();
+    assert( time >= m_started_shaking );
+    if ( time > m_started_shaking + m_shake_duration || m_shake_duration == 0 )
+    {
+        return Point2i( 0, 0 ); // not shaking now
+    };
+
+    if ( time == m_last_time_shake_calculated )
+        return m_shake;
+
+    // FIXME: we can underflow to 0 if time and m_started_shaking are large enough
+    float t = ( float )( time - m_started_shaking ) / ( float )( m_shake_duration );
+
+    float func_val = 1.0f;
+    if ( t >= 0.0001f )
+    {
+        const float k_scale_angle = 10 * M_PI;
+        float arg = k_scale_angle * t;
+        // denormalized sinc
+        func_val = ( 1 - t ) * sin( arg ) / arg;
+    };
+
+    float x_ampl = ( float )randomSync.GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
+    float y_ampl = ( float )randomSync.GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
+    m_shake.x = ( int )( x_ampl * func_val//( float )m_shake_amplitude.x * func_val 
+        + ( float )m_shake_centerpoint.x );
+    m_shake.y = ( int )( y_ampl * func_val//( float )m_shake_amplitude.y * func_val 
+        + ( float )m_shake_centerpoint.y );
+
+    static uint t_last_time_logged = 0;
+    if ( time - t_last_time_logged > 10 )
+    {
+        MSG_DEBUG( "camera.shake", "Shaking: time = %d, t = %f, func_val = %f, shake: %d, %d",
+            time,
+            t, func_val, m_shake.x, m_shake.y );
+
+        t_last_time_logged = time;
+    };
+
+    m_last_time_shake_calculated = time;
+    return m_shake;
+};
+
+void Camera::Shake( uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint )
+{
+    MSG_DEBUG( "camera.shake", "Shake added!" );
+
+    uint time = Time::GetInstance()->Read();
+
+    assert( time >= m_started_shaking );
+    if ( m_started_shaking + m_shake_duration > time )
+    {
+        // still shaking, so add amplitude/centerpoint to allow shakes to combine
+        m_shake_amplitude = max( m_shake_amplitude, amplitude );
+        m_shake_centerpoint = centerpoint;
+
+        // increase shake duration so it lasts how_long_msec from this time
+        m_shake_duration = how_long_msec + ( time - m_started_shaking );
+    }
+    else
+    {
+        // reinit the shake
+        m_started_shaking = time;
+        m_shake_duration = how_long_msec;
+        m_shake_amplitude = amplitude;
+        m_shake_centerpoint = centerpoint;
+    };
+};
+
+void Camera::ResetShake()
+{
+    m_started_shaking = 0;
+    m_shake_duration = 0;
+    m_last_time_shake_calculated = 0;
+    m_shake = Point2i( 0, 0 );
+};

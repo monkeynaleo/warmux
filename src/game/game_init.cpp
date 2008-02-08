@@ -106,6 +106,7 @@ void GameInit::InitMap()
 {
   std::cout << "o " << _("Initialise map") << std::endl;
 
+  Camera::GetInstance()->ResetShake();
   loading_sreen.StartLoading(1, "map_icon", _("Maps"));
   world.Reset();
   MapsList::GetInstance()->ActiveMap()->FreeData();

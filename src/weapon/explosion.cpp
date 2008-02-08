@@ -41,6 +41,7 @@
 #include "object/physical_obj.h"
 #include "graphic/surface.h"
 #include "tool/resource_manager.h"
+#include "network/randomsync.h"
 
 Profile *weapons_res_profile = NULL;
 
@@ -195,6 +196,17 @@ void ApplyExplosion_common (const Point2i &pos,
   // Do we need to generate some fire particles ?
   if (fire_particle)
      ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
+
+  // Shake the camera (FIXME: use actual vectors?)
+  if ( config.explosion_range > 25 && config.damage > 0 )
+  {
+     int reduced_range = ( int )config.explosion_range / 2;
+     Camera::GetInstance()->Shake( config.explosion_range * 15, 
+         Point2i( randomSync.GetLong( -reduced_range, reduced_range  ), 
+                config.explosion_range ), 
+         Point2i( 0, 0 ) 
+        );
+  };
 }
 
 void ApplyExplosion_master (const Point2i &pos,
