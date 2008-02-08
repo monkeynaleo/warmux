@@ -36,6 +36,13 @@ class Camera : public Rectanglei, public Singleton<Camera>
 
 private:
   Mouse::pointer_t pointer_used_before_scroll;
+  uint m_started_shaking;
+  uint m_shake_duration;
+  Point2i m_shake_amplitude;
+  Point2i m_shake_centerpoint;
+  mutable Point2i m_shake;
+  mutable uint m_last_time_shake_calculated;
+
   void SaveMouseCursor();
   void RestoreMouseCursor();
 
@@ -49,6 +56,7 @@ private:
 
   Point2i FreeDegrees() const { return Point2i(HasFixedX()? 0 : 1, HasFixedY()? 0 : 1); };
   Point2i NonFreeDegrees() const { return Point2i(1, 1) - FreeDegrees(); };
+  Point2i ComputeShake() const;
 
 protected:
   friend class Singleton<Camera>;
@@ -76,6 +84,24 @@ public:
   bool IsVisible(const PhysicalObj &obj) const;
 
   void Refresh();
+
+  inline Point2i GetPosition() const
+  {
+      return position + ComputeShake();
+  }
+
+  inline int GetPositionX() const
+  {
+      return position.x + ComputeShake().x;
+  }
+
+  inline int GetPositionY() const
+  {
+      return position.y + ComputeShake().y;
+  }
+
+  void Shake( uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint );
+  void ResetShake();
 
   void SetAutoCrop(bool crop) { auto_crop = crop; };
   bool IsAutoCrop() const { return auto_crop; };
