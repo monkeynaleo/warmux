@@ -146,3 +146,8 @@ int SampleCache::FindChunkByAddr( Mix_Chunk * pchk )
     return it->second;
 }
 
+void SampleCache::Precache( const std::string & file_name )
+{
+    Mix_Chunk * precache = LoadSound( file_name );
+    FreeChunk( precache ); // this does not remove the sample from cache
+};
