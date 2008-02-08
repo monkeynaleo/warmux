@@ -35,7 +35,7 @@
 #include "tool/math_tools.h"
 #include "game/time.h"
 #include "network/randomsync.h"
-#include "assert.h"
+#include <assert.h>
 
 const Point2i CAMERA_SPEED(20, 20);
 
