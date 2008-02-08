@@ -381,6 +381,9 @@ void JukeBox::LoadXML(const std::string& profile)
 
     // Inserting sound sample in list
     m_soundsamples.insert(sound_sample(profile+"/"+sample, sample_filename));
+
+    // Precache
+    m_cache.Precache( sample_filename.c_str() );
   }
 
   // The profile is loaded

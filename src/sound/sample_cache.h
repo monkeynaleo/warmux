@@ -57,8 +57,10 @@ class SampleCache
 public:
 
     void          Clear           ();
+    void          Precache        ( const std::string & file_name );
     Mix_Chunk *   LoadSound       ( const std::string & file_name );
     void          FreeChunk       ( Mix_Chunk * pchk );
+
 
                   SampleCache     ( size_t memory_limit = 0 );
     virtual       ~SampleCache    () { Clear(); }
