@@ -48,7 +48,7 @@
 #define LINE_THICKNESS  2
 
 #define GRAPH_BORDER        20
-#define GRAPH_START_Y       450
+#define GRAPH_START_Y       400
 
 const Point2i BorderSize(DEF_BORDER, DEF_BORDER);
 const Vector2<double> Zoom(1.7321, 1.7321);
@@ -428,7 +428,7 @@ void ResultsMenu::SetResult(int i)
   if (winner_box)
     winner_box->NeedRedrawing();
 
-  DrawPodium(Point2i(70,350));
+  DrawPodium(Point2i(70,250));
 
   index = i;
   if (index < 0)
