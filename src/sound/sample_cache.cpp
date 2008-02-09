@@ -31,12 +31,13 @@ SampleCache::SampleCache( size_t memory_limit )
 
 int SampleCache::FindSlot( Mix_Chunk* sample, const std::string & file_name )
 {
-    int size = (sample) ? sample->alen : 0;
+    if (!sample)
+        return -1;
 
-    if ( m_memory_limit > 0 && size + m_used_memory > m_memory_limit )
+    if ( m_memory_limit > 0 && sample->alen + m_used_memory > m_memory_limit )
         return -1; // refuse to load when cache is full
 
-    m_used_memory += size;
+    m_used_memory += sample->alen;
     CachedChunk chk;
     
     chk.m_chunk    = sample;
@@ -49,7 +50,7 @@ int SampleCache::FindSlot( Mix_Chunk* sample, const std::string & file_name )
 
     MSG_DEBUG( "jukebox.cache",
                "caching sample '%s' (size %uB), total cache size: %uB",
-               chk.m_filename.c_str(), size, m_used_memory );
+               chk.m_filename.c_str(), sample->alen, m_used_memory );
 
     return slot;
 };
@@ -101,8 +102,7 @@ void SampleCache::Clear()
     {
         CachedChunk & chk = *iter;
 
-        if (chk.m_chunk)
-          m_used_memory -= chk.m_chunk->alen;
+        m_used_memory -= chk.m_chunk->alen;
         if ( chk.m_refcount != 0 )
         {
             MSG_DEBUG( "jukebox.cache",
