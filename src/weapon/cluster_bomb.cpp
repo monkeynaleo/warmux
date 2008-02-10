@@ -34,6 +34,7 @@
 #include "tool/math_tools.h"
 #include "tool/i18n.h"
 #include "tool/xml_document.h"
+#include "game/time.h"
 
 class ClusterBombConfig : public ExplosiveWeaponConfig
 {
@@ -49,12 +50,14 @@ public:
   Cluster(ClusterBombConfig& cfg,
           WeaponLauncher * p_launcher);
   void Refresh();
-  void Shoot(int n_x, int n_y);
+  void Shoot(const Point2i & pos, double strength, double angle);
   virtual void SetEnergyDelta(int delta, bool do_report = true);
 
 protected:
-  void SignalOutOfMap();
-  void DoExplosion();
+  virtual void SignalTimeout();
+  virtual void SignalOutOfMap();
+  virtual void DoExplosion();
+  virtual void Draw();
 };
 
 class ClusterBomb : public WeaponProjectile
@@ -77,18 +80,34 @@ Cluster::Cluster(ClusterBombConfig& cfg,
   explode_colliding_character = true;
 }
 
-void Cluster::Shoot (int x, int y)
+void Cluster::Shoot(const Point2i & pos, double strength, double angle)
 {
+  SetCollisionModel( false, true, false ); // a bit hackish...
+  // we do need to collide with objects, but if we allow for this, the clusters
+  // will explode on spawn (because of colliding with each other)
+
+  begin_time = Time::GetInstance()->Read();
   Camera::GetInstance()->FollowObject(this, true);
   ResetConstants();
-  SetXY( Point2i(x, y) );
+  SetXY( pos );
+  SetSpeed(strength, angle);
 }
 
 void Cluster::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_rad(GetSpeedAngle());
+  // make it rotate
+  uint time = Time::GetInstance()->Read();
+  float flying_time = ( float )( time - begin_time );
+  const float rotations_per_second = 4;
+  image->SetRotation_rad( rotations_per_second * 2 * M_PI * flying_time / 1000.0f );
 }
+
+void Cluster::Draw()
+{
+    // custom Draw() is needed to avoid drawing timeout on top of clusters
+    image->Draw(GetPosition());
+};
 
 void Cluster::SignalOutOfMap()
 {
@@ -101,6 +120,10 @@ void Cluster::DoExplosion()
 }
 
 void Cluster::SetEnergyDelta(int /* delta */, bool /* do_report */){};
+// because of game mechanics, clusters will inherit timeout from its parent bomb,
+// and as such, will explode right after launch - something we don't want
+void Cluster::SignalTimeout(){};
+
 
 //-----------------------------------------------------------------------------
 
@@ -126,17 +149,24 @@ void ClusterBomb::SignalOutOfMap()
 
 void ClusterBomb::DoExplosion()
 {
-  const uint nb = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
+  WeaponProjectile::DoExplosion();
+
+  const uint fragments = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
   Cluster * cluster;
-  for (uint i=0; i<nb; ++i) {
-    double angle = randomSync.GetDouble(2.0 * M_PI);
-    int x = GetX()+(int)(cos(angle) * (double)cfg.blast_range * 0.9);
-    int y = GetY()+(int)(sin(angle) * (double)cfg.blast_range * 0.9);
+
+  const float angle_range = M_PI / 2;
+  Point2i pos = GetPosition();
+  for (uint i = 0; i < fragments; ++i ) 
+  {
+    double angle = -M_PI / 2; // this angle is "upwards" here
+    double cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
+    double speed = randomSync.GetDouble(10, 25);
+
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
-    cluster->Shoot(x,y);
+    cluster->Shoot( pos, speed, angle + cluster_deviation );
+
     lst_objects.AddObject(cluster);
   }
-  WeaponProjectile::DoExplosion();
 }
 
 void ClusterBomb::SetEnergyDelta(int /* delta */, bool /* do_report */){};
