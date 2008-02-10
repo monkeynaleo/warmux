@@ -34,7 +34,7 @@
 #include "tool/debug.h"
 #include "tool/math_tools.h"
 #include "game/time.h"
-#include "network/randomsync.h"
+#include "tool/random.h"
 #include <assert.h>
 
 const Point2i CAMERA_SPEED(20, 20);
@@ -365,8 +365,8 @@ Point2i Camera::ComputeShake() const
         func_val = ( 1 - t ) * sin( arg ) / arg;
     };
 
-    float x_ampl = ( float )randomSync.GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
-    float y_ampl = ( float )randomSync.GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
+    float x_ampl = ( float )Random::GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
+    float y_ampl = ( float )Random::GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
     m_shake.x = ( int )( x_ampl * func_val//( float )m_shake_amplitude.x * func_val 
         + ( float )m_shake_centerpoint.x );
     m_shake.y = ( int )( y_ampl * func_val//( float )m_shake_amplitude.y * func_val 
