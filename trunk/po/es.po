@@ -39,7 +39,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i jugador listo"
 msgstr[1] "%i jugadores listos"
 
-#: src/game/game.cpp:714
+#: src/game/game.cpp:655
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) ha muerto."
@@ -65,7 +65,7 @@ msgstr "%s Equipo"
 msgid "%s Team - Remote"
 msgstr "%s Equipo - Remoto"
 
-#: src/game/game.cpp:693
+#: src/game/game.cpp:634
 #, c-format
 msgid "%s commits suicide !"
 msgstr "¡%s se suicida!"
@@ -75,12 +75,12 @@ msgstr "¡%s se suicida!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:686
+#: src/game/game.cpp:627
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s se ha caido al agua."
 
-#: src/game/game.cpp:697
+#: src/game/game.cpp:638
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "¡%s se ha salido del mapa!"
@@ -92,12 +92,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "¡El jugador %s ha ganado %u punto de vida!"
 msgstr[1] "¡El jugador %s ha ganado %u puntos de vida!"
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:649
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "¡¡%s es un psicopata!!, ha matado a un miembro de su equipo: %s"
 
-#: src/game/game.cpp:703
+#: src/game/game.cpp:644
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "¡%s se ha muerto porque es más tonto que abundio!"
@@ -238,7 +238,7 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "¡El equipo %s ha ganado %u lanzallamas!"
 msgstr[1] "¡El equipo %s ha ganado %u lanzallamas!"
 
-#: src/weapon/grapple.cpp:726
+#: src/weapon/grapple.cpp:723
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -362,7 +362,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "¡El equipo %s ha ganado %u lanzador de Tux!"
 msgstr[1] "¡El equipo %s ha ganado %u lanzadores de Tux!"
 
-#: src/include/action_handler.cpp:330
+#: src/include/action_handler.cpp:319
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -417,7 +417,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Yunque"
 
-#: src/main.cpp:258
+#: src/main.cpp:250
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -529,7 +529,7 @@ msgstr "No se ha podido volver a la versión %s"
 msgid "Couldn't open file %s"
 msgstr "No se pudo abrir el archivo %s"
 
-#: src/menu/main_menu.cpp:75
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Creditos"
 
@@ -545,7 +545,7 @@ msgstr "Duración del turno"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/game/game.cpp:287
+#: src/game/game.cpp:228
 msgid "END OF GAME"
 msgstr "FIN DEL JUEGO"
 
@@ -586,7 +586,7 @@ msgstr "Error cargando el fichero de configuración: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Error cargando el modo de juego %s (fichero %s):"
 
-#: src/game/game.cpp:142 src/game/game.cpp:188
+#: src/game/game.cpp:128
 #, c-format
 msgid ""
 "Error:\n"
@@ -633,7 +633,7 @@ msgstr "¿Pantalla completa?"
 msgid "Gnu Launcher"
 msgstr "Lanzador de Gnu"
 
-#: src/weapon/grapple.cpp:121
+#: src/weapon/grapple.cpp:120
 msgid "Grapple"
 msgstr "Agarra"
 
@@ -713,7 +713,7 @@ msgstr ""
 "Como usarlo: boton derecho sobre el objetivo\n"
 "un arma por turno"
 
-#: src/main.cpp:250
+#: src/main.cpp:242
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -753,7 +753,7 @@ msgstr "Inicialización de sonidos"
 msgid "Initialise teams"
 msgstr "Inicialización de equipos"
 
-#: src/game/game.cpp:577
+#: src/game/game.cpp:518
 msgid "It's a present!"
 msgstr "Eso es un regalo!"
 
@@ -839,7 +839,7 @@ msgstr "¿Música?"
 msgid "Network Game"
 msgstr "Juego en red"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:259
 msgid "Network initialization"
 msgstr "Inicialización del red"
 
@@ -903,11 +903,11 @@ msgstr "Lanzador de mofetas"
 msgid "Port:"
 msgstr "Puerto:"
 
-#: src/menu/main_menu.cpp:78
+#: src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "Salir"
 
-#: src/main.cpp:239
+#: src/main.cpp:231
 msgid "Quit Wormux"
 msgstr "Salir de Wormux"
 
@@ -931,11 +931,6 @@ msgstr "Leyendo fichero de configuración personal"
 msgid "Refresh"
 msgstr "Refrescar"
 
-#: src/menu/main_menu.cpp:72
-#, fuzzy
-msgid "Replay"
-msgstr "Jugar"
-
 #: src/menu/options_menu.cpp:111
 msgid "Resolution"
 msgstr "Resolución"
@@ -944,7 +939,7 @@ msgstr "Resolución"
 msgid "Riot Bomb"
 msgstr "Bomba Antidisturbio"
 
-#: src/main.cpp:80
+#: src/main.cpp:79
 msgid "Run game"
 msgstr "Empieza el juego"
 
@@ -1000,7 +995,7 @@ msgstr "Frecuencia del sonido"
 msgid "Sounds"
 msgstr "Opciones de sonido"
 
-#: src/game/game.cpp:96
+#: src/game/game.cpp:95
 msgid "Starting a new game"
 msgstr "Empezando un nuevo juego"
 
@@ -1129,11 +1124,11 @@ msgstr "¡Imposible abrir el directorio personal de mapas (%s)!"
 msgid "Unable to use this port!"
 msgstr "Imposible usar este puerto!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:108
 msgid "Unnamed"
 msgstr "Sin nombre"
 
-#: src/main.cpp:194
+#: src/main.cpp:186
 msgid "Version"
 msgstr "Versión"
 
@@ -1160,11 +1155,11 @@ msgstr ""
 msgid "Weapons"
 msgstr "Armas"
 
-#: src/main.cpp:267
+#: src/main.cpp:259
 msgid "Website: "
 msgstr "Sitio web: "
 
-#: src/game/game.cpp:711
+#: src/game/game.cpp:652
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "¡Que vergüenza para %s : lo ha matado una simple pistola!"
@@ -1178,11 +1173,11 @@ msgstr "¿Muestra las particulas del viento?"
 msgid "Winner"
 msgstr "Ganador"
 
-#: src/main.cpp:207
+#: src/main.cpp:199
 msgid "Wormux launching..."
 msgstr "Arrancando Wormux..."
 
-#: src/main.cpp:257
+#: src/main.cpp:249
 msgid "Wormux version "
 msgstr "Versión de Wormux"
 
@@ -1272,7 +1267,6 @@ msgstr "o Abierto audio a %d Hz %d bit"
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "¿Esta seguro que quiere salir? (S/N)"
 
-#, fuzzy
 #~ msgid ""
 #~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "
 #~ "blowtorch, submachine gun) and surely many other things don't work either!"
@@ -1297,10 +1291,6 @@ msgstr "o Abierto audio a %d Hz %d bit"
 
 #~ msgid "Ninjarope"
 #~ msgstr "Cuerda Ninja"
-
-#, fuzzy
-#~ msgid "Error while exporting file %s:"
-#~ msgstr "Error cargando el modo de juego %s (fichero %s) :"
 
 #~ msgid "Error while loading game mode %s from memory:"
 #~ msgstr "Error cargando el modo de juego %s de la memoria :"
@@ -1352,19 +1342,15 @@ msgstr "o Abierto audio a %d Hz %d bit"
 #~ msgid "[Sound] Error: File %s does not exist"
 #~ msgstr "[Sound] Error : el fichero %s no existe"
 
-#, fuzzy
 #~ msgid "  Most sold-out  :  "
 #~ msgstr " El más traidor  :  %s (%i).\n"
 
-#, fuzzy
 #~ msgid "  Most useful   :  "
 #~ msgstr " El más útil  :  %s (%i).\n"
 
-#, fuzzy
 #~ msgid "  Most useless  :  "
 #~ msgstr " El más inutil  :  %s (%i).\n"
 
-#, fuzzy
 #~ msgid "  Most violent  :  "
 #~ msgstr " El más violento  :  %s (%i).\n"
 
@@ -1375,24 +1361,6 @@ msgstr "o Abierto audio a %d Hz %d bit"
 
 #~ msgid "%s team has won.\n"
 #~ msgstr "La equipo %s ha ganado.\n"
-
-#, fuzzy
-#~ msgid "'%s has won %u Anvil"
-#~ msgid_plural "'%s has won %u Anvil"
-#~ msgstr[0] "¡El jugador %s ha ganado %u ataque aereo!"
-#~ msgstr[1] "¡El jugador %s ha ganado %u ataques aereos!"
-
-#, fuzzy
-#~ msgid "'%s has won %u Holy grenade"
-#~ msgid_plural "'%s has won %u Holy grenades"
-#~ msgstr[0] "¡El jugador %s ha ganado %u ataque aereo!"
-#~ msgstr[1] "¡El jugador %s ha ganado %u ataques aereos!"
-
-#, fuzzy
-#~ msgid "'%s has won %u Low gravity"
-#~ msgid_plural "'%s has won %u Low gravity"
-#~ msgstr[0] "¡El jugador %s ha ganado %u ataque aereo!"
-#~ msgstr[1] "¡El jugador %s ha ganado %u ataques aereos!"
 
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""
@@ -1405,7 +1373,6 @@ msgstr "o Abierto audio a %d Hz %d bit"
 #~ msgid "All teams results:\n"
 #~ msgstr "Estadisticas de todos los equipos:\n"
 
-#, fuzzy
 #~ msgid "Authors"
 #~ msgstr "Autores:"
 
@@ -1421,10 +1388,6 @@ msgstr "o Abierto audio a %d Hz %d bit"
 #~ msgid "ClanLib error during loading map '%s' :"
 #~ msgstr "ClanLib error durante la carga del mapa '%s' :"
 
-#, fuzzy
-#~ msgid "Connected to "
-#~ msgstr "Final de la partida"
-
 #~ msgid "Duration of the end of a turn:"
 #~ msgstr "Duración de fin de turno:"
 
@@ -1437,7 +1400,6 @@ msgstr "o Abierto audio a %d Hz %d bit"
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Error durante la carga del skin (%s) :"
 
-#, fuzzy
 #~ msgid "Game options:"
 #~ msgstr "Opciones de juego"
 
@@ -1479,12 +1441,6 @@ msgstr "o Abierto audio a %d Hz %d bit"
 
 #~ msgid "Select the world:"
 #~ msgstr "Selecciona el mapa:"
-
-#, fuzzy
-#~ msgid "So you have to restart Wormux after each"
-#~ msgstr ""
-#~ "La opción SDL ha canviado:\n"
-#~ "Ha de reiniciar de nuevo Wormux para aplicar los nuevos ajustes."
 
 #~ msgid "Sound error :"
 #~ msgstr "Error de sonido :"
