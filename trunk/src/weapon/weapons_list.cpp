@@ -62,6 +62,7 @@ WeaponsList::WeaponsList()
   m_weapons_list.push_back(new GrenadeLauncher);
   m_weapons_list.push_back(new DiscoGrenadeLauncher);
   m_weapons_list.push_back(new ClusterLauncher);
+  m_weapons_list.push_back(new FootBombLauncher);
   m_weapons_list.push_back(new FlameThrower);
   m_weapons_list.push_back(new Baseball);
   m_weapons_list.push_back(new Mine);

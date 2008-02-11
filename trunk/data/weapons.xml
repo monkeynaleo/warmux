@@ -366,4 +366,13 @@
     <image file="weapon/cluzooka/cluster.png" />
   </sprite>
 
+<!-- FootBomb ressources -->
+
+  <surface name="footbomb_ico" file="weapon/footbomb/footbomb_ico.png" />
+  <surface name="footbomb" file="weapon/footbomb/bilson.png" />
+  <position name="footbomb" origin="hand" x="6" y="9" />
+  <sprite name="footbomb">
+    <image file="weapon/footbomb/bilson.png" />
+  </sprite>
+
 </resources>

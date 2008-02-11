@@ -281,6 +281,15 @@
     <rebound_factor>0.01</rebound_factor>
   </cluster>
 
+  <footbomb>
+    <mass>50.0</mass>
+    <wind_factor>1.0</wind_factor>
+    <air_resist_factor>0.3</air_resist_factor>
+    <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
+    <rebound_factor>1.0</rebound_factor>
+  </footbomb>
+
   <dynamite_bullet>
     <mass>100.0</mass>
     <wind_factor>1.0</wind_factor>
