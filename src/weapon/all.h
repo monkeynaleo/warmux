@@ -54,5 +54,6 @@
 #include "weapon/syringe.h"
 #include "weapon/teleportation.h"
 #include "weapon/cluzooka.h"
+#include "weapon/footbomb.h"
 
 #endif

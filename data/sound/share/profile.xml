@@ -42,6 +42,7 @@
   <sound sample="weapon/grapple_balancing" file="weapon/grapple_balancing.ogg" />
   <sound sample="weapon/grapple_detaching" file="weapon/grapple_detaching.ogg" />
   <sound sample="weapon/grenade_bounce"  file="weapon/grenade_bounce.ogg" />
+  <sound sample="weapon/footbomb_bounce"  file="weapon/footbomb_bounce.ogg" />
   <sound sample="weapon/gun" file="weapon/gun.ogg" />
   <sound sample="weapon/load" file="weapon/load.ogg" />
   <sound sample="weapon/m16" file="weapon/m16.ogg" />

@@ -227,6 +227,25 @@
       <allow_change_timeout>1</allow_change_timeout>
     </disco_grenade>
 
+    <footbomb>
+      <max_strength>100</max_strength>
+      <nb_ammo>1</nb_ammo>
+      <damage>60</damage>
+      <min_angle>-89</min_angle>
+      <max_angle>89</max_angle>
+      <explosion_range>100</explosion_range>
+      <particle_range>100</particle_range>
+      <blast_range>100</blast_range>
+      <blast_force>1000</blast_force>
+      <timeout>5</timeout>
+      <nb_fragments>2</nb_fragments>
+      <nb_recursions>2</nb_recursions>
+      <nb_angle_dispersion>45</nb_angle_dispersion>
+      <nb_min_speed>15</nb_min_speed>
+      <nb_max_speed>35</nb_max_speed>
+      <allow_change_timeout>1</allow_change_timeout>
+    </footbomb>
+
     <dynamite>
       <nb_ammo>2</nb_ammo>
       <damage>75</damage>
