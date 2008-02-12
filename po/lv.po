@@ -205,7 +205,7 @@ msgstr[0] "%s komanda ir ieguvusi %u lēkājošo bumbu!"
 msgstr[1] "%s komanda ir ieguvusi %u lēkājošās bumbas!"
 msgstr[2] "%s komanda ir ieguvusi %u lēkājošās bumbas!"
 
-#: src/weapon/cluster_bomb.cpp:176
+#: src/weapon/cluster_bomb.cpp:206
 #, fuzzy, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -245,6 +245,14 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "%s komanda ir ieguvusi %u dinamītu!"
 msgstr[1] "%s komanda ir ieguvusi %u dinamītus!"
 msgstr[2] "%s komanda ir ieguvusi %u dinamītus!"
+
+#: src/weapon/footbomb.cpp:172
+#, fuzzy, c-format
+msgid "%s team has won %u football bomb!"
+msgid_plural "%s team has won %u football bombs!"
+msgstr[0] "%s komanda ir ieguvusi %u dumpja bumbu!"
+msgstr[1] "%s komanda ir ieguvusi %u dumpja bumbas!"
+msgstr[2] "%s komanda ir ieguvusi %u dumpja bumbas!"
 
 #: src/weapon/grapple.cpp:723
 #, c-format
@@ -394,7 +402,7 @@ msgid "(dead)"
 msgstr "(mirusi)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:178
+#: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr ""
 
@@ -403,7 +411,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(bezgalība)"
 
-#: src/main.cpp:110
+#: src/menu/options_menu.cpp:322
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -436,7 +444,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Lakta"
 
-#: src/main.cpp:272
+#: src/main.cpp:250
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -488,6 +496,10 @@ msgstr "Nevar atvēŗt komandas mapi (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
 
+#: src/menu/options_menu.cpp:128
+msgid "Check updates online?"
+msgstr ""
+
 #: src/menu/map_selection_box.cpp:242
 msgid "Choose randomly between the different maps"
 msgstr ""
@@ -497,7 +509,7 @@ msgstr ""
 msgid "Client mode"
 msgstr "Klienta režīms"
 
-#: src/weapon/cluster_bomb.cpp:158
+#: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "Ķekarbumba"
 
@@ -579,18 +591,18 @@ msgstr "Kļūda ielādējot komandu :"
 msgid "Error loading team's data %s:"
 msgstr "Kļūda ielādējot komandas datus %s:"
 
-#: src/game/config.cpp:384
+#: src/game/config.cpp:444
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Kļūda veidojot mapi \"%s\": nevar sglabāt konfigurācijas failu."
 
-#: src/game/config.cpp:259
+#: src/game/config.cpp:317
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/game/config.cpp:297
+#: src/game/config.cpp:355
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
@@ -637,7 +649,12 @@ msgstr "Kļūda: Nevar atrast ķermeni \"%s\" komandai \"%s\"."
 msgid "Flame Thrower"
 msgstr ""
 
-#: src/menu/options_menu.cpp:80
+#: src/weapon/footbomb.cpp:154
+#, fuzzy
+msgid "Football Bomb"
+msgstr "Dumpja bumba"
+
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Pa visu ekrānu?"
 
@@ -727,7 +744,7 @@ msgstr ""
 "Kā to izmantot : kreizais klikšķis uz mērķa\n"
 "munīcija gājienā"
 
-#: src/main.cpp:264
+#: src/main.cpp:242
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -750,7 +767,7 @@ msgstr ""
 "Šaut: turiet atstarpes taustiņu līdz sasniegts vēlamais šāviena spēks\n"
 "munīcija gājienā"
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:156
 msgid "Initialisation"
 msgstr "Inicializācija"
 
@@ -758,11 +775,11 @@ msgstr "Inicializācija"
 msgid "Initialise map"
 msgstr "Gatavo karti"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:143
 msgid "Initialise sounds"
 msgstr "Gatavo skaņas"
 
-#: src/game/game_init.cpp:118
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr "Gatavo komandas"
 
@@ -780,7 +797,7 @@ msgstr ""
 "Pievienojies #wormux kanālam irc.freenode.net serverī, lai atrastu "
 "pretiniekus."
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:123
 msgid "Language"
 msgstr ""
 
@@ -806,7 +823,7 @@ msgstr "Antigravitācija"
 msgid "Map %s, a creation of: "
 msgstr "Karte %s, autors:  "
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr "Kartes"
 
@@ -814,7 +831,7 @@ msgstr "Kartes"
 msgid "Max number of players:"
 msgstr "MAksimālais spēlētāju skaits:"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr "Maksimālais FPS"
 
@@ -846,7 +863,7 @@ msgstr "Vis bezjēdzīgākais"
 msgid "Most violent"
 msgstr "Vis asiņainākais"
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:139
 msgid "Music?"
 msgstr "Mūzika?"
 
@@ -902,11 +919,11 @@ msgstr "Spēlēt"
 msgid "Player"
 msgstr "Spēlētājs"
 
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Spēlētāja enerģija?"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Spēlētāja vārds?"
 
@@ -923,7 +940,7 @@ msgstr "Ports:"
 msgid "Quit"
 msgstr "Iziet"
 
-#: src/main.cpp:253
+#: src/main.cpp:231
 msgid "Quit Wormux"
 msgstr "Iziet no Wormux"
 
@@ -936,12 +953,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Ielādē kartes:"
 
-#: src/game/config.cpp:272
+#: src/game/config.cpp:330
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
-#: src/game/config.cpp:305
+#: src/game/config.cpp:363
 msgid "Reading personal config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
@@ -949,7 +966,7 @@ msgstr "Lasa personisko konfigurācijas failu"
 msgid "Refresh"
 msgstr "Atjaunināt"
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:111
 msgid "Resolution"
 msgstr "Izšķirtspēja"
 
@@ -957,7 +974,7 @@ msgstr "Izšķirtspēja"
 msgid "Riot Bomb"
 msgstr "Dumpja bumba"
 
-#: src/main.cpp:82
+#: src/main.cpp:79
 msgid "Run game"
 msgstr "Sākt spēli"
 
@@ -1000,16 +1017,16 @@ msgstr "Snaiperšautene"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:142
 msgid "Sound effects?"
 msgstr "Skaņas efekti?"
 
-#: src/menu/options_menu.cpp:149
+#: src/menu/options_menu.cpp:160
 msgid "Sound frequency"
 msgstr "Skaņas frekvence"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:145
+#: src/game/game_init.cpp:146
 msgid "Sounds"
 msgstr "Skaņas"
 
@@ -1033,7 +1050,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Šļirce"
 
-#: src/game/game_init.cpp:120
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr "Komandas"
 
@@ -1041,8 +1058,13 @@ msgstr "Komandas"
 msgid "Teleportation"
 msgstr "Teleportācija"
 
-#: src/weapon/cluster_bomb.cpp:123
+#: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
+msgstr "Ķekarbumba nokrita no spēles laukuma pirms paguva uzsprāgt."
+
+#: src/weapon/footbomb.cpp:107
+#, fuzzy
+msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Ķekarbumba nokrita no spēles laukuma pirms paguva uzsprāgt."
 
 #: src/weapon/gnu.cpp:143
@@ -1094,7 +1116,7 @@ msgstr[0] "Ir tikai %i komanda."
 msgstr[1] "Ir tikai %i komandas."
 msgstr[2] "Ir tikai %i komandas."
 
-#: src/weapon/cluster_bomb.cpp:159
+#: src/weapon/footbomb.cpp:155 src/weapon/cluster_bomb.cpp:189
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1144,11 +1166,11 @@ msgstr "Nevar izmantot šo portu!"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:208
+#: src/main.cpp:186
 msgid "Version"
 msgstr "Versija"
 
-#: src/main.cpp:119
+#: src/menu/options_menu.cpp:331
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1167,11 +1189,11 @@ msgstr "Gaida uz serveri, jūs varat atcelt vai tērzēt!"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Ieroči"
 
-#: src/main.cpp:281
+#: src/main.cpp:259
 msgid "Website: "
 msgstr "Mākas lapa: "
 
@@ -1181,7 +1203,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kauns un negods %s - viņu nogalināja ar vienkāršu ieroci!"
 
 #. Various options
-#: src/menu/options_menu.cpp:71
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Vējš?"
 
@@ -1189,11 +1211,11 @@ msgstr "Vējš?"
 msgid "Winner"
 msgstr "Uzvarētājs"
 
-#: src/main.cpp:221
+#: src/main.cpp:199
 msgid "Wormux launching..."
 msgstr "Wormux ielādējas..."
 
-#: src/main.cpp:271
+#: src/main.cpp:249
 msgid "Wormux version "
 msgstr "Wormux versija "
 
@@ -1214,7 +1236,7 @@ msgstr "Jūs esat viens pats..."
 msgid "You need at least one valid map !"
 msgstr "Jums nepieciešama vismaz viena derīga karte !"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Jums nepieciešamas vismaz divas derīgas komandas !"
 

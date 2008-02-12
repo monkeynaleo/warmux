@@ -215,7 +215,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/cluster_bomb.cpp:176
+#: src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -253,6 +253,14 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "Tým %s získal %u plamenomet!"
 msgstr[1] "Tým %s získal %u plamenomety!"
 msgstr[2] "Tým %s získal %u plamenometů!"
+
+#: src/weapon/footbomb.cpp:172
+#, fuzzy, c-format
+msgid "%s team has won %u football bomb!"
+msgid_plural "%s team has won %u football bombs!"
+msgstr[0] "Tým %s získal %u baseballovou pálku!"
+msgstr[1] "Tým %s získal %u baseballové pálky!"
+msgstr[2] "Tým %s získal %u baseballových pálek!"
 
 #: src/weapon/grapple.cpp:723
 #, c-format
@@ -395,7 +403,7 @@ msgid "(dead)"
 msgstr "(mrtvý)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:178
+#: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr "(systémový jazyk)"
 
@@ -404,7 +412,7 @@ msgstr "(systémový jazyk)"
 msgid "(unlimited)"
 msgstr "(neomezeně)"
 
-#: src/main.cpp:110
+#: src/menu/options_menu.cpp:322
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -438,7 +446,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/main.cpp:272
+#: src/main.cpp:250
 msgid "Authors:"
 msgstr "Autoři:"
 
@@ -490,6 +498,10 @@ msgstr ""
 msgid "Cannot open teams directory (%s)!"
 msgstr ""
 
+#: src/menu/options_menu.cpp:128
+msgid "Check updates online?"
+msgstr ""
+
 #: src/menu/map_selection_box.cpp:242
 msgid "Choose randomly between the different maps"
 msgstr "Vyber náhodně mezi mapami"
@@ -499,7 +511,7 @@ msgstr "Vyber náhodně mezi mapami"
 msgid "Client mode"
 msgstr "Klientský režim"
 
-#: src/weapon/cluster_bomb.cpp:158
+#: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr ""
 
@@ -581,19 +593,19 @@ msgstr "Chyba při nahrávání týmu:"
 msgid "Error loading team's data %s:"
 msgstr "Chyba při nahrávání dat týmu %s:"
 
-#: src/game/config.cpp:384
+#: src/game/config.cpp:444
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Chyba při vytváření adresáře \"%s\": nebylo možné uložit konfigurační soubor."
 
-#: src/game/config.cpp:259
+#: src/game/config.cpp:317
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Chyba při načítání konfiguračního souboru: %s"
 
-#: src/game/config.cpp:297
+#: src/game/config.cpp:355
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Chyba při načítání výchozího konfiguračního souboru: %s"
@@ -640,7 +652,11 @@ msgstr ""
 msgid "Flame Thrower"
 msgstr "Plamenomet"
 
-#: src/menu/options_menu.cpp:80
+#: src/weapon/footbomb.cpp:154
+msgid "Football Bomb"
+msgstr ""
+
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Celá obrazovka?"
 
@@ -717,7 +733,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/main.cpp:264
+#: src/main.cpp:242
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -735,7 +751,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:156
 msgid "Initialisation"
 msgstr ""
 
@@ -743,11 +759,11 @@ msgstr ""
 msgid "Initialise map"
 msgstr ""
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:143
 msgid "Initialise sounds"
 msgstr ""
 
-#: src/game/game_init.cpp:118
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr ""
 
@@ -763,7 +779,7 @@ msgstr ""
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:123
 msgid "Language"
 msgstr "Jazyk"
 
@@ -789,7 +805,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr ""
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr "Mapy"
 
@@ -797,7 +813,7 @@ msgstr "Mapy"
 msgid "Max number of players:"
 msgstr "Maximální počet hráčů:"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
@@ -829,7 +845,7 @@ msgstr "Nejzbytečnější"
 msgid "Most violent"
 msgstr "Nejnásilnější"
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:139
 msgid "Music?"
 msgstr "Hudba?"
 
@@ -885,11 +901,11 @@ msgstr "Hrát"
 msgid "Player"
 msgstr "Hráč"
 
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Životy hráče?"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Jméno hráče?"
 
@@ -906,7 +922,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/main.cpp:253
+#: src/main.cpp:231
 msgid "Quit Wormux"
 msgstr "Ukončit Wormux"
 
@@ -918,11 +934,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Náhodná mapa"
 
-#: src/game/config.cpp:272
+#: src/game/config.cpp:330
 msgid "Reading default config file"
 msgstr "Čtu výchozí konfigurační soubor"
 
-#: src/game/config.cpp:305
+#: src/game/config.cpp:363
 msgid "Reading personal config file"
 msgstr "Čtu osobní konfigurační soubor"
 
@@ -930,7 +946,7 @@ msgstr "Čtu osobní konfigurační soubor"
 msgid "Refresh"
 msgstr "Obnovit"
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:111
 msgid "Resolution"
 msgstr "Rozlišení"
 
@@ -938,7 +954,7 @@ msgstr "Rozlišení"
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/main.cpp:82
+#: src/main.cpp:79
 msgid "Run game"
 msgstr "Spustit hru"
 
@@ -981,16 +997,16 @@ msgstr "Ostřelovací puška"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:142
 msgid "Sound effects?"
 msgstr "Zvukové efekty?"
 
-#: src/menu/options_menu.cpp:149
+#: src/menu/options_menu.cpp:160
 msgid "Sound frequency"
 msgstr ""
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:145
+#: src/game/game_init.cpp:146
 msgid "Sounds"
 msgstr ""
 
@@ -1014,7 +1030,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Stříkačka"
 
-#: src/game/game_init.cpp:120
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr "Týmy"
 
@@ -1022,9 +1038,14 @@ msgstr "Týmy"
 msgid "Teleportation"
 msgstr "Teleportace"
 
-#: src/weapon/cluster_bomb.cpp:123
+#: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
+
+#: src/weapon/footbomb.cpp:107
+#, fuzzy
+msgid "The Football Bomb has left the battlefield before it could explode."
+msgstr "Gnu opustil bitevní pole předtím, než explodoval"
 
 #: src/weapon/gnu.cpp:143
 msgid "The Gnu left the battlefield before exploding"
@@ -1074,7 +1095,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/cluster_bomb.cpp:159
+#: src/weapon/footbomb.cpp:155 src/weapon/cluster_bomb.cpp:189
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1116,11 +1137,11 @@ msgstr ""
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:208
+#: src/main.cpp:186
 msgid "Version"
 msgstr ""
 
-#: src/main.cpp:119
+#: src/menu/options_menu.cpp:331
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1138,11 +1159,11 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr ""
 
-#: src/main.cpp:281
+#: src/main.cpp:259
 msgid "Website: "
 msgstr ""
 
@@ -1152,7 +1173,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr ""
 
 #. Various options
-#: src/menu/options_menu.cpp:71
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr ""
 
@@ -1160,11 +1181,11 @@ msgstr ""
 msgid "Winner"
 msgstr "Vítěz"
 
-#: src/main.cpp:221
+#: src/main.cpp:199
 msgid "Wormux launching..."
 msgstr ""
 
-#: src/main.cpp:271
+#: src/main.cpp:249
 msgid "Wormux version "
 msgstr "Wormux verze"
 
@@ -1185,7 +1206,7 @@ msgstr "Jste sám..."
 msgid "You need at least one valid map !"
 msgstr ""
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr ""
 
