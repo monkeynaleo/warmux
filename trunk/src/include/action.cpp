@@ -332,25 +332,7 @@ void Action::StoreCharacter(uint team_no, uint char_no)
   Push((int)team_no);
   Push((int)char_no);
   Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  Push(c->GetPosition());
-  Push((int)c->GetDirection());
-  Push(c->GetAbsFiringAngle());
-  Push(c->GetEnergy());
-  Push((int)c->GetLifeState());
-  Push((int)c->GetDiseaseDamage());
-  Push((int)c->GetDiseaseDuration());
-  Push(c->GetSpeed());
-  Push(c->GetExternForce());
-  Push(c->GetRopeAngle());
-  Push(c->GetRopeLength());
-  if(c->IsActiveCharacter()) { // If active character, store step animation
-    Push((int)true);
-    Push(ActiveTeam().ActiveCharacter().GetBody()->GetClothe());
-    Push(ActiveTeam().ActiveCharacter().GetBody()->GetMovement());
-    Push((int)ActiveTeam().ActiveCharacter().GetBody()->GetFrame());
-  } else {
-    Push((int)false);
-  }
+  c->StoreValue(this);
 }
 
 void Action::RetrieveCharacter()
@@ -358,27 +340,7 @@ void Action::RetrieveCharacter()
   int team_no = PopInt();
   int char_no = PopInt();
   Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->SetXY(PopPoint2i());
-  c->SetDirection((BodyDirection_t)PopInt());
-  c->SetFiringAngle(PopDouble());
-  c->SetEnergy(PopInt());
-  c->SetLifeState((alive_t)PopInt());
-  int disease_damage_per_turn = PopInt();
-  int disease_duration = PopInt();
-  c->SetDiseaseDamage(disease_damage_per_turn, disease_duration);
-  c->SetSpeedXY(PopPoint2d());
-  c->SetExternForceXY(PopPoint2d());
-  c->SetRopeAngle(PopDouble());
-  c->SetRopeLength(PopDouble());
-  if(PopInt()) { // If active characters, retrieve stored animation
-    if(c->GetTeam().IsActiveTeam())
-      ActiveTeam().SelectCharacter(char_no);
-    c->SetClothe(PopString());
-    c->SetMovement(PopString());
-    c->GetBody()->SetFrame((uint)PopInt());
-
-    c->GetBody()->UpdateWeaponPosition(c->GetPosition());
-  }
+  c->GetValueFromAction(this);
 }
 
 

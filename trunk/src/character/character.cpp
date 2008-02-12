@@ -113,6 +113,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   hidden(false),
   channel_step(-1),
   particle_engine(new ParticleEngine(500)),
+  is_playing(false),
   previous_strength(0),
   body(NULL)
 {
@@ -171,6 +172,7 @@ Character::Character (const Character& acharacter) :
   hidden(acharacter.hidden),
   channel_step(acharacter.channel_step),
   particle_engine(new ParticleEngine(250)),
+  is_playing(acharacter.is_playing),
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
@@ -268,6 +270,9 @@ void Character::SetEnergyDelta(int delta, bool do_report)
   // If already dead, do nothing
   if (IsDead()) return;
 
+  MSG_DEBUG("character.energy", "%s has win %d life points\n",
+	    character_name.c_str(), delta);
+
   // Report damage to damage performer
   if (do_report)
     ActiveCharacter().damage_stats->MadeDamage(-delta, *this);
@@ -355,15 +360,6 @@ void Character::Die()
   }
 
   damage_stats->SetDeathTime(Time::GetInstance()->Read());
-}
-
-void Character::SetLifeState(alive_t state)
-{
-  if (m_alive == state)
-    return;
-
-  std::cerr << "Force life's state of "<< GetName() << " to m_alive = " << state << std::endl;
-  m_alive = state;
 }
 
 void Character::Draw()
@@ -662,14 +658,13 @@ void Character::SignalCollision()
   if (IsDead()) return;
 
   pause_bouge_dg = Time::GetInstance()->Read();
-  double norm, degat;
-  Point2d speed_vector;
+
   GameMode * game_mode = GameMode::GetInstance();
   if (body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID()
       && body->GetClothe() != "jetpack"
       && body->GetClothe() != "jetpack-fire"
-      && body->GetClothe() != "helmet"
-      && body->GetClothe() != "black")
+      /* && body->GetClothe() != "black"*/
+      && body->GetClothe() != "helmet")
     SetClothe("normal");
 
   if (body->IsWalking())
@@ -682,12 +677,16 @@ void Character::SignalCollision()
   body->SetRotation(0.0);
   back_jumping = false;
 
-  speed_vector= GetSpeedXY();
-  norm = speed_vector.Norm();
+  Point2d speed_vector = GetSpeedXY();
+  double norm = speed_vector.Norm();
+
+  MSG_DEBUG("character.collision", "%s collides with speed %f, %f (norm = %f)",
+	    character_name.c_str(), speed_vector.x, speed_vector.y, norm);
+
   if (norm > game_mode->safe_fall && speed_vector.y>0.0)
   {
     norm -= game_mode->safe_fall;
-    degat = norm * game_mode->damage_per_fall_unit;
+    double degat = norm * game_mode->damage_per_fall_unit;
     SetEnergyDelta (-(int)degat);
     Game::GetInstance()->SignalCharacterDamage(this);
     SetClothe("normal");
@@ -708,14 +707,15 @@ void Character::SignalExplosion()
   double n, a;
   GetSpeed(n, a);
   SetRebounding(true);
+
+  SetClotheOnce("black");
+
   if (n > MIN_SPEED_TO_FLY)
   {
-    SetClothe("normal");
-    SetMovement("fly");
+    SetMovement("fly-black");
   }
   else
   {
-    SetClotheOnce("black");
     SetMovementOnce("black");
     if (body->GetClothe() == "black"
 	&& body->GetMovement() != "black")
@@ -733,6 +733,8 @@ BodyDirection_t Character::GetDirection() const
 // End of turn or change of character
 void Character::StopPlaying()
 {
+  is_playing = false;
+
   if (IsDead()) return;
   SetClothe("normal");
   SetMovement("breathe");
@@ -743,6 +745,10 @@ void Character::StopPlaying()
 // Begining of turn or changed to this character
 void Character::StartPlaying()
 {
+  if (is_playing) return;
+
+  is_playing = true;
+
   ASSERT (!IsGhost());
   SetWeaponClothe();
   ActiveTeam().crosshair.Draw();
@@ -753,7 +759,7 @@ void Character::StartPlaying()
 
 bool Character::IsActiveCharacter() const
 {
-  return this == &ActiveCharacter();
+  return (this == &ActiveCharacter());
 }
 
 // Hand position
@@ -839,6 +845,50 @@ uint Character::GetCharacterIndex() const
   }
   ASSERT(false);
   return 0;
+}
+
+// ###################################################################
+// ###################################################################
+// ###################################################################
+
+void Character::StoreValue(Action *a)
+{
+  PhysicalObj::StoreValue(a);
+  a->Push((int)GetDirection());
+  a->Push(GetAbsFiringAngle());
+  a->Push(GetEnergy());
+  a->Push((int)m_alive);
+  a->Push((int)GetDiseaseDamage());
+  a->Push((int)GetDiseaseDuration());
+  if (IsActiveCharacter()) { // If active character, store step animation
+    a->Push((int)true);
+    a->Push(GetBody()->GetClothe());
+    a->Push(GetBody()->GetMovement());
+    a->Push((int)GetBody()->GetFrame());
+  } else {
+    a->Push((int)false);
+  }
+}
+
+void Character::GetValueFromAction(Action *a)
+{
+  PhysicalObj::GetValueFromAction(a);
+  SetDirection((BodyDirection_t)(a->PopInt()));
+  SetFiringAngle(a->PopDouble());
+  SetEnergy(a->PopInt());
+  m_alive = (alive_t)(a->PopInt());
+  int disease_damage_per_turn = (a->PopInt());
+  int disease_duration = (a->PopInt());
+  SetDiseaseDamage(disease_damage_per_turn, disease_duration);
+  if (a->PopInt()) { // If active characters, retrieve stored animation
+    if (GetTeam().IsActiveTeam())
+      ActiveTeam().SelectCharacter(this);
+    SetClothe(a->PopString());
+    SetMovement(a->PopString());
+    GetBody()->SetFrame((uint)(a->PopInt()));
+
+    GetBody()->UpdateWeaponPosition(GetPosition());
+  }
 }
 
 // ###################################################################

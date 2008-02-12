@@ -186,13 +186,23 @@ void Team::UpdateEnergyBar ()
   energy.SetValue(ReadEnergy());
 }
 
-void Team::SelectCharacter(uint index)
+void Team::SelectCharacter(const Character * c)
 {
-  ASSERT(index <= characters.size());
-  ActiveCharacter().StopPlaying();
-  active_character = characters.begin();
-  for(uint i = 0; i < index; ++i)
-    ++active_character;
+  ASSERT(c != NULL);
+
+  if (!c->IsActiveCharacter()) {
+    ActiveCharacter().StopPlaying();
+
+    active_character = characters.begin();
+    while (!c->IsActiveCharacter() && active_character != characters.end())
+      active_character++;
+
+    ASSERT(active_character != characters.end());
+  }
+
+  // StartPlaying (if needed) even if c was already ActiveCharacter() thanks to
+  // the team change...
+  ActiveCharacter().StartPlaying();
 }
 
 void Team::NextCharacter()
