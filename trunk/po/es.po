@@ -199,7 +199,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "¡El equipo %s ha ganado %u pelota rebote!"
 msgstr[1] "¡El equipo %s ha ganado %u pelotas rebotes!"
 
-#: src/weapon/cluster_bomb.cpp:176
+#: src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -237,6 +237,13 @@ msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "¡El equipo %s ha ganado %u lanzallamas!"
 msgstr[1] "¡El equipo %s ha ganado %u lanzallamas!"
+
+#: src/weapon/footbomb.cpp:172
+#, fuzzy, c-format
+msgid "%s team has won %u football bomb!"
+msgid_plural "%s team has won %u football bombs!"
+msgstr[0] "¡El equipo %s ha ganado %u bomba antidisturbio!"
+msgstr[1] "¡El equipo %s ha ganado %u bombas antidisturbio!"
 
 #: src/weapon/grapple.cpp:723
 #, c-format
@@ -482,7 +489,7 @@ msgstr "Elige al azar entre los distintos mapas"
 msgid "Client mode"
 msgstr "Modo cliente"
 
-#: src/weapon/cluster_bomb.cpp:158
+#: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "Granada de fragmentacion"
 
@@ -624,6 +631,11 @@ msgstr "Error: no se puede encontrar el skin \"%s\" para el equipo \"%s\"."
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Lanzallamas"
+
+#: src/weapon/footbomb.cpp:154
+#, fuzzy
+msgid "Football Bomb"
+msgstr "Bomba Antidisturbio"
 
 #: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
@@ -1023,8 +1035,15 @@ msgstr "Equipos"
 msgid "Teleportation"
 msgstr "Teletransportación"
 
-#: src/weapon/cluster_bomb.cpp:123
+#: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
+msgstr ""
+"La bomba de fragmentación ha abandonado el campo de batalla antes de que "
+"pudiera explotar."
+
+#: src/weapon/footbomb.cpp:107
+#, fuzzy
+msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr ""
 "La bomba de fragmentación ha abandonado el campo de batalla antes de que "
 "pudiera explotar."
@@ -1078,7 +1097,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Solo hay %i equipo."
 msgstr[1] "Solo hay %i equipos."
 
-#: src/weapon/cluster_bomb.cpp:159
+#: src/weapon/footbomb.cpp:155 src/weapon/cluster_bomb.cpp:189
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"

@@ -194,7 +194,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/cluster_bomb.cpp:176
+#: src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -229,6 +229,13 @@ msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] ""
 msgstr[1] ""
+
+#: src/weapon/footbomb.cpp:172
+#, fuzzy, c-format
+msgid "%s team has won %u football bomb!"
+msgid_plural "%s team has won %u football bombs!"
+msgstr[0] "L'equip '%s' ha conseguit %u baseball"
+msgstr[1] "L'equip '%s' ha conseguit %u baseballs"
 
 #: src/weapon/grapple.cpp:723
 #, c-format
@@ -360,7 +367,7 @@ msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:178
+#: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr ""
 
@@ -369,7 +376,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
-#: src/main.cpp:110
+#: src/menu/options_menu.cpp:322
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -399,7 +406,7 @@ msgstr ""
 msgid "Anvil"
 msgstr ""
 
-#: src/main.cpp:272
+#: src/main.cpp:250
 msgid "Authors:"
 msgstr "Autors:"
 
@@ -451,6 +458,10 @@ msgstr "No es pot obrir el directori d'equips (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
+#: src/menu/options_menu.cpp:128
+msgid "Check updates online?"
+msgstr ""
+
 #: src/menu/map_selection_box.cpp:242
 msgid "Choose randomly between the different maps"
 msgstr ""
@@ -460,7 +471,7 @@ msgstr ""
 msgid "Client mode"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:158
+#: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr ""
 
@@ -543,18 +554,18 @@ msgstr "Error carregant l'equip :"
 msgid "Error loading team's data %s:"
 msgstr ""
 
-#: src/game/config.cpp:384
+#: src/game/config.cpp:444
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 
-#: src/game/config.cpp:259
+#: src/game/config.cpp:317
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr ""
 
-#: src/game/config.cpp:297
+#: src/game/config.cpp:355
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr ""
@@ -600,7 +611,11 @@ msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 msgid "Flame Thrower"
 msgstr ""
 
-#: src/menu/options_menu.cpp:80
+#: src/weapon/footbomb.cpp:154
+msgid "Football Bomb"
+msgstr ""
+
+#: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
 msgstr "Pantalla completa?"
 
@@ -677,7 +692,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/main.cpp:264
+#: src/main.cpp:242
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -695,7 +710,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:156
 msgid "Initialisation"
 msgstr "Inicialització"
 
@@ -703,11 +718,11 @@ msgstr "Inicialització"
 msgid "Initialise map"
 msgstr "Inicialització de la mapa"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:143
 msgid "Initialise sounds"
 msgstr "Inicialització de les efectes sonors"
 
-#: src/game/game_init.cpp:118
+#: src/game/game_init.cpp:119
 msgid "Initialise teams"
 msgstr "Inicialització de les equips"
 
@@ -723,7 +738,7 @@ msgstr ""
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:123
 msgid "Language"
 msgstr ""
 
@@ -749,7 +764,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, fet per :"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:110
 msgid "Maps"
 msgstr "Mapas"
 
@@ -758,7 +773,7 @@ msgstr "Mapas"
 msgid "Max number of players:"
 msgstr "Nombre de jugadors per equip:"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:87
 msgid "Maximum FPS"
 msgstr ""
 
@@ -790,7 +805,7 @@ msgstr ""
 msgid "Most violent"
 msgstr ""
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:139
 msgid "Music?"
 msgstr "Música?"
 
@@ -846,11 +861,11 @@ msgstr "Jugar"
 msgid "Player"
 msgstr "Jugador"
 
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Energia del jugador?"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Nom del jugador?"
 
@@ -867,7 +882,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Sortir"
 
-#: src/main.cpp:253
+#: src/main.cpp:231
 msgid "Quit Wormux"
 msgstr ""
 
@@ -879,11 +894,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Mapa aleatoria"
 
-#: src/game/config.cpp:272
+#: src/game/config.cpp:330
 msgid "Reading default config file"
 msgstr ""
 
-#: src/game/config.cpp:305
+#: src/game/config.cpp:363
 msgid "Reading personal config file"
 msgstr ""
 
@@ -891,7 +906,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:111
 msgid "Resolution"
 msgstr ""
 
@@ -899,7 +914,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/main.cpp:82
+#: src/main.cpp:79
 msgid "Run game"
 msgstr "Arrenca el joc"
 
@@ -942,16 +957,16 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:142
 msgid "Sound effects?"
 msgstr "Efectes sonors?"
 
-#: src/menu/options_menu.cpp:149
+#: src/menu/options_menu.cpp:160
 msgid "Sound frequency"
 msgstr ""
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:145
+#: src/game/game_init.cpp:146
 msgid "Sounds"
 msgstr "Efectes sonors?"
 
@@ -975,7 +990,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_init.cpp:120
+#: src/game/game_init.cpp:121
 msgid "Teams"
 msgstr "Equips"
 
@@ -983,9 +998,14 @@ msgstr "Equips"
 msgid "Teleportation"
 msgstr "Teletransportació"
 
-#: src/weapon/cluster_bomb.cpp:123
+#: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
+
+#: src/weapon/footbomb.cpp:107
+#, fuzzy
+msgid "The Football Bomb has left the battlefield before it could explode."
+msgstr "El cohet ha anat a un altre mon..."
 
 #: src/weapon/gnu.cpp:143
 msgid "The Gnu left the battlefield before exploding"
@@ -1036,7 +1056,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/cluster_bomb.cpp:159
+#: src/weapon/footbomb.cpp:155 src/weapon/cluster_bomb.cpp:189
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1078,11 +1098,11 @@ msgstr ""
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:208
+#: src/main.cpp:186
 msgid "Version"
 msgstr "Versió"
 
-#: src/main.cpp:119
+#: src/menu/options_menu.cpp:331
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1100,12 +1120,12 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:167
 #, fuzzy
 msgid "Weapons"
 msgstr "Armas"
 
-#: src/main.cpp:281
+#: src/main.cpp:259
 msgid "Website: "
 msgstr "Lloc web: "
 
@@ -1115,7 +1135,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s : ha estat mort per una simple pistola!"
 
 #. Various options
-#: src/menu/options_menu.cpp:71
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr ""
 
@@ -1123,11 +1143,11 @@ msgstr ""
 msgid "Winner"
 msgstr ""
 
-#: src/main.cpp:221
+#: src/main.cpp:199
 msgid "Wormux launching..."
 msgstr "Arrencant Wormux..."
 
-#: src/main.cpp:271
+#: src/main.cpp:249
 msgid "Wormux version "
 msgstr "Versió Wormux"
 
@@ -1148,7 +1168,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Tu necesites almenys un mapa vàlid!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:125 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Tu necesites almenys dos equips vàlids!"
 
