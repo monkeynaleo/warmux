@@ -216,7 +216,7 @@
 
     <disco_grenade>
       <max_strength>40</max_strength>
-      <nb_ammo>1</nb_ammo>
+      <nb_ammo>0</nb_ammo>
       <damage>80</damage>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
