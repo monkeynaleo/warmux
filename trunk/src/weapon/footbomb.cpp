@@ -104,7 +104,7 @@ void FootBomb::Refresh()
 
 void FootBomb::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The FootBomb Bomb has left the battlefield before it could explode."));
+  GameMessages::GetInstance()->Add (_("The Football Bomb has left the battlefield before it could explode."));
   WeaponProjectile::SignalOutOfMap();
 }
 
@@ -151,7 +151,7 @@ FootBombLauncher::FootBombLauncher() :
 
 void FootBombLauncher::UpdateTranslationStrings()
 {
-  m_name = _("FootBomb");
+  m_name = _("Football Bomb");
   m_help = _("Timeout : Wheel mouse or Page Up/Down\nAngle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
 }
 
