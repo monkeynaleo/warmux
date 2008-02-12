@@ -80,6 +80,10 @@ private:
 
   // Generates green bubbles when the character is ill
   ParticleEngine *particle_engine;
+
+  // this is needed because of network to know
+  // if we have changed of active character
+  bool is_playing;
 public:
 
   // Previous strength
@@ -136,9 +140,9 @@ public:
     else disease_damage_per_turn = 0;
   }
 
-  // to be used by action handler
-  alive_t GetLifeState() const { return m_alive; };
-  void SetLifeState(alive_t state);
+  // Used to sync value across network
+  virtual void GetValueFromAction(Action *);
+  virtual void StoreValue(Action *);
 
   void Draw();
   void Refresh();
