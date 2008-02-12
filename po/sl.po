@@ -268,13 +268,13 @@ msgstr[2] "Ekipa %s je osvojila %u metalce plamenov!"
 msgstr[3] "Ekipa %s je osvojila %u metalcev plamenov!"
 
 #: src/weapon/footbomb.cpp:172
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
-msgstr[0] "Ekipa %s je osvojila %u kopaško granato!"
-msgstr[1] "Ekipa %s je osvojila %u kopaški granati!"
-msgstr[2] "Ekipa %s je osvojila %u kopaške granate!"
-msgstr[3] "Ekipa %s je osvojila %u kopaških granat!"
+msgstr[0] "Ekipa %s je osvojila %u nogometno bombo!"
+msgstr[1] "Ekipa %s je osvojila %u nogometni bombi!"
+msgstr[2] "Ekipa %s je osvojila %u nogometne bombe!"
+msgstr[3] "Ekipa %s je osvojila %u nogometnih bomb!"
 
 #: src/weapon/grapple.cpp:723
 #, c-format
@@ -546,7 +546,7 @@ msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
 #: src/menu/options_menu.cpp:128
 msgid "Check updates online?"
-msgstr ""
+msgstr "Preveri možno posodobitev?"
 
 #: src/menu/map_selection_box.cpp:242
 msgid "Choose randomly between the different maps"
@@ -702,9 +702,8 @@ msgid "Flame Thrower"
 msgstr "Metalec plamenov"
 
 #: src/weapon/footbomb.cpp:154
-#, fuzzy
 msgid "Football Bomb"
-msgstr "Kopaška granata"
+msgstr "Nogometna bomba"
 
 #: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
@@ -1110,9 +1109,8 @@ msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Kasetna granata je zapustila bojišče še preden jo je razneslo."
 
 #: src/weapon/footbomb.cpp:107
-#, fuzzy
 msgid "The Football Bomb has left the battlefield before it could explode."
-msgstr "Kasetna granata je zapustila bojišče še preden jo je razneslo."
+msgstr "Nogometna bomba je zapustila bojišče še preden jo je razneslo."
 
 #: src/weapon/gnu.cpp:143
 msgid "The Gnu left the battlefield before exploding"
