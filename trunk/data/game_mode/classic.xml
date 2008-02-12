@@ -67,7 +67,7 @@
       <dynamite ammo="2">0.9</dynamite>
       <gnulauncher ammo="1">0.9</gnulauncher>
       <flamethrower ammo="1">1</flamethrower>
-      <footbomb ammo="1">0.7</flamethrower>
+      <footbomb ammo="1">0.7</footbomb>
       <grapple ammo="2">1</grapple>
       <jetpack ammo="1">1</jetpack>
       <lowgrav ammo="1">1</lowgrav>
