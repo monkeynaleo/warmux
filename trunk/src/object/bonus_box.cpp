@@ -34,6 +34,7 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
+#include "network/randomsync.h"
 
 BonusBox::BonusBox():
   ObjBox("bonus_box"),
@@ -69,6 +70,11 @@ void BonusBox::PickRandomWeapon() {
 void BonusBox::ApplyBonus(Character * c) {
   if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
+  if ( ExplodesInsteadOfBonus(c) ) {
+    GameMessages::GetInstance()->Add( _("Someone put a booby trap into crate!") );
+    Explode();
+    return;
+  };
   /*this next 'if' should never be true, but I am loath to remove it just in case. */
   if(c->AccessTeam().ReadNbAmmos(contents) != INFINITE_AMMO) {
     c->AccessTeam().m_nb_ammos[contents] += nbr_ammo;
@@ -81,6 +87,26 @@ void BonusBox::ApplyBonus(Character * c) {
   GameMessages::GetInstance()->Add(txt.str());
 }
 
+bool BonusBox::ExplodesInsteadOfBonus(Character * c)
+{
+  assert( NULL != c );
+  // Empyric formula:
+  // 1% chance of explosion for each 5 points of energy
+  // (with max 20% for 100 energy)
+  float explosion_probability = (float)c->GetEnergy() / 5.0f;
+  // clamp to some reasonable values
+  if ( explosion_probability < 5.0f )
+    explosion_probability = 5.0f;
+  else if ( explosion_probability > 40.0f )
+    explosion_probability = 40.0f;
+
+  float randval = randomSync.GetDouble( 1, 100 );
+  bool exploding = randval < explosion_probability;
+  MSG_DEBUG("bonus","explosion chance: %.2f%%, actual value: %.2f, %s",
+    explosion_probability, randval, exploding ? "exploding!" : "not exploding");
+
+  return exploding;
+};
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

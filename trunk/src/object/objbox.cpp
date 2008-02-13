@@ -136,11 +136,16 @@ void ObjBox::Refresh()
 }
 
 //Boxes can explode...
+void ObjBox::Explode()
+{
+  ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
+  ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
+};
+
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {
   if(energy > 0) return;
-  ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
-  ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
+  Explode();
 }
 
 void ObjBox::GetValueFromAction(Action * a)

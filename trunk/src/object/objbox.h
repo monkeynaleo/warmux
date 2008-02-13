@@ -63,6 +63,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     bool parachute;
     Sprite *anim;
     static int start_life_points;
+    void Explode();
     // Signal Fall ending
     void SignalCollision();
     virtual void SignalObjectCollision(PhysicalObj *);
