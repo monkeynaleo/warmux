@@ -47,6 +47,7 @@ std::map<std::string, int> nb_server;
 Client::Client(int client_fd, unsigned int & ip)
 {
     version = "";
+    game_name = "";
     handshake_done = false;
     is_hosting = false;
     Host(client_fd, ip);
@@ -111,7 +112,7 @@ bool Client::HandleMsg(const std::string & str)
     case TS_MSG_HOSTING:
         if(received < 4)
             return true;
-        DPRINT(MSG, "This is a server");
+        DPRINT(MSG, "This is a server (%s)", version.c_str());
         is_hosting = true;
         if( nb_server.find(version) != nb_server.end() )
             nb_server[ version ]++;
@@ -122,7 +123,7 @@ bool Client::HandleMsg(const std::string & str)
         NotifyServers( true );
         stats.NewServer();
 
-        // TODO: try opening a connection to see if it's 
+        // TODO: try opening a connection to see if it's
         // firewalled or not
         break;
     case TS_MSG_GET_LIST:
@@ -131,6 +132,10 @@ bool Client::HandleMsg(const std::string & str)
         msg_id = TS_NO_MSG;
         return SendList();
         break;
+    case TS_MSG_GAMENAME:
+        game_name = str;
+	DPRINT(MSG, "game name is %s", game_name.c_str());
+	break;
     default:
         DPRINT(MSG, "Wrong message");
         //if(str == "0.8beta1")
@@ -199,12 +204,16 @@ bool Client::SendList()
     {
         do
         {
-            if( client->second->is_hosting )
+            if (client->second->is_hosting)
             {
-                if( ! SendInt(client->second->GetIP()) )
-                    return false;
-                if( ! SendInt(client->second->port) )
-                    return false;
+	      if (! SendInt(client->second->GetIP()))
+		return false;
+	      if (! SendInt(client->second->port))
+		return false;
+
+	      if (client->second->game_name != "" /* this must stay only for old version */ &&
+		  ! SendStr(client->second->game_name))
+		return false;
             }
             ++client;
         } while (client != clients.upper_bound(version));
@@ -219,6 +228,9 @@ bool Client::SendList()
                 return false;
             if( ! SendInt(fclient->second.port) )
                 return false;
+	    if (game_name != "" /* this must stay only for old version */ &&
+		  ! SendStr(client->second->game_name))
+		return false;
             ++fclient;
         } while (fclient != fake_clients.upper_bound(version));
     }
@@ -232,19 +244,22 @@ void Client::NotifyServers(bool joining)
     DPRINT(MSG, "Notify of a new wormux server..");
 
     std::multimap<std::string, Client*>::iterator serv = clients.find( sync_serv_version );
-    if( serv != clients.end() )
+    if (serv != clients.end())
     {
         do
         {
-            if( ! serv->second->SendInt( TS_MSG_JOIN_LEAVE ) )
-                return /*false*/;
-            if( ! serv->second->SendStr( version ) )
-                return /*false*/;
-            if( ! serv->second->SendInt(GetIP()) )
-                return /*false*/;
+            if (!serv->second->SendInt(TS_MSG_JOIN_LEAVE))
+	      return /*false*/;
+            if (! serv->second->SendStr(version))
+	      return /*false*/;
+            if (! serv->second->SendInt(GetIP()))
+	      return /*false*/;
             // Send the port number : if this client is leaving, send -port
-            if( ! serv->second->SendInt(joining? port : -port) )
-                return /*false*/;
+            if (! serv->second->SendInt(joining? port : -port))
+	      return /*false*/;
+	    if (! serv->second->SendStr(game_name))
+	      return /*false*/;
+
             ++serv;
         } while (serv != clients.upper_bound(sync_serv_version));
     }

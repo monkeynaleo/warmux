@@ -60,6 +60,9 @@ class NetworkConnectionMenu : public Menu
    Label* port_number_label;
    TextBox* port_number;
 
+   Label* game_name_label;
+   TextBox* game_name;
+
    CheckBox* internet_server;
    VBox* connection_box;
 

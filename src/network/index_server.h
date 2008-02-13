@@ -30,7 +30,14 @@
 #include <utility>
 #include "network.h"
 
-typedef std::pair<std::string, std::string> address_pair;
+class GameServerInfo
+{
+ public:
+  std::string ip_address;
+  std::string port;
+  std::string dns_address;
+  std::string game_name;
+};
 
 class IndexServer
 {
@@ -38,7 +45,6 @@ class IndexServer
   IndexServer(const IndexServer&);
   const IndexServer& operator=(const IndexServer&);
   /*********************************************/
-
 
   // Connection to the server
   TCPsocket socket;
@@ -85,10 +91,10 @@ public:
   void SetHiddenServer() { hidden_server = true; };
 
   // Notify the top server we are hosting a game
-  void SendServerStatus();
+  void SendServerStatus(const std::string& game_name);
 
   // returns a list with string pairs: first element = hostname/ip, second element = port
-  std::list<address_pair> GetHostList();
+  std::list<GameServerInfo> GetHostList();
 };
 
 extern IndexServer index_server;

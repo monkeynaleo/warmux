@@ -27,6 +27,7 @@
 class Client : public NetData
 {
 	std::string version;
+	std::string game_name;
 	bool handshake_done;
 	bool is_hosting;
 	int port; // port number where a game is hosted
@@ -49,13 +50,15 @@ public:
 class FakeClient
 {
 public:
-	FakeClient(const int & _ip, const int & _port) 
+  FakeClient(const int & _ip, const int & _port, const std::string & _game_name)
 	{
 		ip = _ip;
 		port = _port;
+		game_name = _game_name;
 	}
 	int ip;
 	int port;
+	std::string game_name;
 };
-	
+
 #endif
