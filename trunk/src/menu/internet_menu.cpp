@@ -42,7 +42,7 @@ InternetMenu::InternetMenu() :
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
-  
+
   Rectanglei stdRect(0, 0, 405, 64);
 
   connection_box = new VBox(stdRect.GetSizeX(), false);
@@ -53,7 +53,7 @@ InternetMenu::InternetMenu() :
 
   refresh = new ButtonText( res, "main_menu/button",
                             _("Refresh"), // Refresh the list of available hosts
-                            Font::FONT_BIG, 
+                            Font::FONT_BIG,
                             Font::FONT_NORMAL);
 
   refresh->SetSizePosition( stdRect );
@@ -61,7 +61,7 @@ InternetMenu::InternetMenu() :
 
   connect = new ButtonText( res, "main_menu/button",
                             _("Connect !"),
-                            Font::FONT_BIG, 
+                            Font::FONT_BIG,
                             Font::FONT_NORMAL);
 
   connect->SetSizePosition( stdRect );
@@ -86,15 +86,22 @@ InternetMenu::~InternetMenu()
 }
 
 void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
-{     
-  Widget* w = widgets.ClickUp(mousePosition, button);  
+{
+  Widget* w = widgets.ClickUp(mousePosition, button);
 
   if (w == refresh)
     RefreshList(true);
   else
   if (w == connect && connect_lst->GetSelectedItem() != -1)
   {
-    connection_state_t conn = Network::ClientStart(connect_lst->ReadLabel(), connect_lst->ReadValue());
+    char c_address[32];
+    char c_port[16];
+    sscanf(connect_lst->ReadValue().c_str(),"%[^:]:%s", c_address, c_port);
+
+    std::string address = std::string(c_address);
+    std::string port = std::string(c_port);
+
+    connection_state_t conn = Network::ClientStart(address, port);
     if ( Network::IsConnected() && conn == CONNECTED )
     {
       close_menu = true;
@@ -108,8 +115,8 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
 }
 
 void InternetMenu::OnClick(const Point2i &mousePosition, int button)
-{     
-  widgets.Click(mousePosition, button); 
+{
+  widgets.Click(mousePosition, button);
 }
 
 void InternetMenu::DisplayNoGameRunning()
@@ -131,17 +138,25 @@ void InternetMenu::RefreshList(bool warning_if_empty)
     connect_lst->RemoveSelected();
   }
 
-  std::list<address_pair> lst = index_server.GetHostList();
+  std::list<GameServerInfo> lst = index_server.GetHostList();
 
   if (warning_if_empty && lst.size() == 0) {
     DisplayNoGameRunning();
     return;
   }
 
-  for (std::list<address_pair>::iterator pair_it = lst.begin();
-       pair_it != lst.end();
-       ++pair_it)
-    connect_lst->AddItem( false, pair_it->first, pair_it->second );
+  for (std::list<GameServerInfo>::iterator game_server_info_it = lst.begin();
+       game_server_info_it != lst.end();
+       ++game_server_info_it) {
+    std::string display_str = game_server_info_it->ip_address + ":";
+    display_str += game_server_info_it->port + " - ";
+    display_str += game_server_info_it->dns_address + " - ";
+    display_str += game_server_info_it->game_name;
+
+    std::string connect_str = game_server_info_it->ip_address + ":";
+    connect_str += game_server_info_it->port;
+    connect_lst->AddItem(false, display_str, connect_str);
+  }
 
   if (current != -1 && connect_lst->Size() != 0)
     connect_lst->Select( current );

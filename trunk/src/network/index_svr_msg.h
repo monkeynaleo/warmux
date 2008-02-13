@@ -33,6 +33,7 @@ enum IndexServerMsg
   TS_MSG_GET_LIST, // Send this to obtain the list of the current hosting games
   TS_MSG_PING,
   TS_MSG_PONG,
+  TS_MSG_GAMENAME, // Send this to give a name to the game hosted by the server
 
   //********  index servers to index servers messages  ***********************************
   TS_MSG_WIS_VERSION,     // Send the server version
