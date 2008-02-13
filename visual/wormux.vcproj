@@ -28,7 +28,7 @@
 			<Tool
 				Name="VCPreBuildEventTool"
 				Description="Setting missing #defines for dumb Visual resource compiler"
-				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h"
+				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -120,7 +120,7 @@
 			<Tool
 				Name="VCPreBuildEventTool"
 				Description="Setting missing #defines for dumb Visual resource compiler"
-				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h"
+				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -752,6 +752,14 @@
 					RelativePath="..\src\include\constant.h"
 					>
 				</File>
+				<File
+					RelativePath="..\src\include\singleton.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\include\singleton.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="interface"
@@ -1357,6 +1365,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\sound\sample_cache.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\sound\sample_cache.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\sound\sound_sample.cpp"
 					>
 				</File>
@@ -1466,10 +1482,6 @@
 				</File>
 				<File
 					RelativePath="..\src\tool\i18n.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\tool\math_tools.cpp"
 					>
 				</File>
 				<File
@@ -1617,6 +1629,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\cluzooka.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\cluzooka.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\construct.cpp"
 					>
 				</File>
@@ -1662,6 +1682,14 @@
 				</File>
 				<File
 					RelativePath="..\src\weapon\flamethrower.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\footbomb.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\footbomb.h"
 					>
 				</File>
 				<File
