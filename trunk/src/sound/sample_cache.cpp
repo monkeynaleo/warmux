@@ -39,7 +39,7 @@ int SampleCache::FindSlot( Mix_Chunk* sample, const std::string & file_name )
 
     m_used_memory += sample->alen;
     CachedChunk chk;
-    
+
     chk.m_chunk    = sample;
     chk.m_filename = file_name;
 
@@ -53,7 +53,7 @@ int SampleCache::FindSlot( Mix_Chunk* sample, const std::string & file_name )
                chk.m_filename.c_str(), sample->alen, m_used_memory );
 
     return slot;
-};
+}
 
 Mix_Chunk * SampleCache::LoadSound( const std::string & file_name )
 {
@@ -153,4 +153,4 @@ void SampleCache::Precache( const std::string & file_name )
 {
     Mix_Chunk * precache = LoadSound( file_name );
     FreeChunk( precache ); // this does not remove the sample from cache
-};
+}
