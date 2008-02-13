@@ -89,7 +89,8 @@ void BonusBox::ApplyBonus(Character * c) {
 
 bool BonusBox::ExplodesInsteadOfBonus(Character * c)
 {
-  assert( NULL != c );
+  ASSERT(NULL != c);
+
   // Empyric formula:
   // 1% chance of explosion for each 5 points of energy
   // (with max 20% for 100 energy)
@@ -106,7 +107,7 @@ bool BonusBox::ExplodesInsteadOfBonus(Character * c)
     explosion_probability, randval, exploding ? "exploding!" : "not exploding");
 
   return exploding;
-};
+}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
