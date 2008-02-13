@@ -38,6 +38,9 @@ class BonusBox : public ObjBox
     int nbr_ammo;
     int weapon_num;
     Weapon::Weapon_type contents;
+
+    bool ExplodesInsteadOfBonus(Character * c);
+
     static uint weapon_count;
     static std::map<int,std::pair<Weapon*,int> > weapon_map;
     static std::map<int,std::pair<Weapon*,int> > weapon_map_no_infinite;
