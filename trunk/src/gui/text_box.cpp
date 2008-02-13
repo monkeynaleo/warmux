@@ -28,6 +28,7 @@
 TextBox::TextBox (const std::string &label, const Point2i &_size,
                   Font::font_size_t fsize, Font::font_style_t fstyle) :
   Label(label, _size, fsize, fstyle),
+  max_nb_chars(0),
   cursor_pos(label.size())
 {
   Widget::SetBorder(defaultOptionColorRect, 1);
@@ -36,10 +37,15 @@ TextBox::TextBox (const std::string &label, const Point2i &_size,
 
 void TextBox::BasicSetText(std::string const &new_txt)
 {
+  std::string _new_txt = new_txt;
+
+  if (max_nb_chars != 0)
+    _new_txt.resize(max_nb_chars);
+
   Font* font = Font::GetInstance(font_size, font_style);
 
-  if (font->GetWidth(new_txt) < GetSizeX() - 5) {
-    Label::SetText(new_txt);
+  if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
+    Label::SetText(_new_txt);
   }
 }
 
@@ -47,7 +53,7 @@ void TextBox::SetText(std::string const &new_txt)
 {
   BasicSetText(new_txt);
 
-  cursor_pos = new_txt.size();
+  cursor_pos = GetText().size();
 }
 
 void TextBox::SetCursor(std::string::size_type pos)
@@ -62,6 +68,11 @@ void TextBox::SetCursor(std::string::size_type pos)
   }
 }
 
+void TextBox::SetMaxNbChars(unsigned int nb_chars)
+{
+  max_nb_chars = nb_chars;
+}
+
 bool TextBox::SendKey(const SDL_keysym& key)
 {
   bool used = true;
@@ -74,7 +85,7 @@ bool TextBox::SendKey(const SDL_keysym& key)
 
   if (new_txt != GetText())
     BasicSetText(new_txt);
-  
+
   return used;
 }
 
