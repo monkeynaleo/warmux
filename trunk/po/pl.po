@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-02-13 20:38-0000\n"
+"PO-Revision-Date: 2008-02-13 22:21-0000\n"
 "Last-Translator: Paweł Dyda <pawel.dyda@gazeta.pl>\n"
 "Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -114,7 +114,7 @@ msgstr "%s zginął przez swoją niezdarność!"
 msgid "%s is next to a mine!"
 msgstr "%s jest blisko miny!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Drużyna %s posiada już nieograniczoną liczbę amunicji dla %s!"
@@ -493,7 +493,6 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "Nie można otworzyć katalogu drużyn (%s)!"
 
 #: src/menu/options_menu.cpp:128
-#, fuzzy
 msgid "Check updates online?"
 msgstr "Czy sprawdzać dostępność aktualizacji?"
 
@@ -999,6 +998,10 @@ msgstr "Pominięcie tury"
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Snajperka"
+
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into crate!"
+msgstr "Ktoś wsadził minę pułapkę do kontenera!"
 
 #: src/menu/internet_menu.cpp:118
 msgid "Sorry, currently, no game is waiting for players"
