@@ -35,7 +35,7 @@ private:
   int height_mvt;
   bool actif;
   double shift1;
-  uint hauteur_eau;
+  uint water_height;
   uint temps_montee;
   int height[pattern_width];
   Surface surface;
