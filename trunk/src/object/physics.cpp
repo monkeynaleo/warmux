@@ -75,7 +75,7 @@ void Physics::SetSpeedXY (Point2d vector)
 
   m_pos_x.x1 = vector.x ;
   m_pos_y.x1 = vector.y ;
-  m_motion_type = FreeFall ;
+  // setting to FreeFall is done in StartMoving()
 
   if (!was_moving && IsMoving()) StartMoving();
 }
@@ -88,7 +88,7 @@ void Physics::AddSpeedXY (Point2d vector)
 
   m_pos_x.x1 += vector.x ;
   m_pos_y.x1 += vector.y ;
-  m_motion_type = FreeFall ;
+  // setting to FreeFall is done in StartMoving()
 
   if (!was_moving && IsMoving()) StartMoving();
 }

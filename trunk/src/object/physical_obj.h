@@ -146,8 +146,9 @@ public:
 
   // Move the character until he gets out of the ground
   bool PutOutOfGround();
-  bool PutOutOfGround(double direction); //Where direction is the angle of the direction
+  bool PutOutOfGround(double direction, double max_distance=30); //Where direction is the angle of the direction
                                          // where the object is moved
+                                         // and max_distance is max distance allowed when putting out
 
   // Collision management
   void SetCollisionModel(bool goes_through_wall,

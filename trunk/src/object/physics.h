@@ -32,12 +32,12 @@
 #include "tool/point.h"
 #include "object_cfg.h"
 
-typedef enum
+enum MotionType_t
 {
   NoMotion,
   FreeFall,
   Pendulum,
-} MotionType_t;
+};
 
 class Game;
 class Action;
@@ -135,6 +135,8 @@ public:
 
   double GetRopeLength() const { return m_rope_length.x0; };
   void SetRopeLength(double length) { m_rope_length.x0 = length; };
+
+  MotionType_t GetMotionType() const { return m_motion_type; };
 
   // Physical engine : update position (and state) with current time
   void RunPhysicalEngine();
