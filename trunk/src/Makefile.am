@@ -216,7 +216,8 @@ endif
 
 AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
-  -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)
+  -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
+  @LIBCURL_CPPFLAGS@
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
@@ -229,4 +230,6 @@ endif
 
 if STATIC
 LIBS += -lssl -lcrypto -lz -lpthread
+else
+LIBS += @LIBCURL@
 endif
