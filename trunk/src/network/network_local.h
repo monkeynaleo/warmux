@@ -34,8 +34,8 @@ protected:
 public:
   ~NetworkLocal();
 
-  virtual const bool IsConnected() const { return false; }
-  virtual const bool IsLocal() const { return true; }
+  virtual bool IsConnected() const { return false; }
+  virtual bool IsLocal() const { return true; }
 
   virtual void SendAction(Action* action);
 

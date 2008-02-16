@@ -104,7 +104,7 @@ public:
 
   uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; };
   uint GetNbMine() { LoadBasicInfo(); return nb_mine; };
-  const Profile * const ResProfile() const { return res_profile; };
+  Profile * ResProfile() const { return res_profile; };
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; };
   bool UseWater() { LoadBasicInfo(); return use_water; };

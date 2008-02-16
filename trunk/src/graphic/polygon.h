@@ -54,8 +54,8 @@ class PolygonBuffer {
 class PolygonItem {
 
   /* if you need that, implement it (correctly)*/
-  PolygonItem(const PolygonItem&);
-  PolygonItem operator=(const PolygonItem&);
+  PolygonItem( PolygonItem&);
+  PolygonItem operator=( PolygonItem&);
   /*********************************************/
 
  public:
@@ -76,10 +76,10 @@ class PolygonItem {
   virtual ~PolygonItem();
   void SetPosition(const Point2d & pos);
   void SetAlignment(H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
-  const H_align GetHAlign() const { return h_align; }
-  const V_align GetVAlign() const { return v_align; }
-  const Point2d & GetPosition() const;
-  const Point2d & GetTransformedPosition() const;
+  H_align GetHAlign() const { return h_align; }
+  V_align GetVAlign() const { return v_align; }
+  Point2d & GetPosition();
+  Point2d & GetTransformedPosition();
   Point2i GetIntTransformedPosition() const;
   virtual bool Contains(const Point2d & p) const;
   void SetSprite(Sprite * sprite);

@@ -300,7 +300,7 @@ public:
   bool LoadXml(const xmlpp::Element * weapon);
 
   // return the strength of the weapon
-  const double ReadStrength() const { return m_strength; };
+  double ReadStrength() const { return m_strength; };
 
   // Data access
   const std::string& GetName() const;

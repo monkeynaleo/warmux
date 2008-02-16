@@ -78,7 +78,7 @@ private:
   Network(const Network&);
   const Network& operator=(const Network&);
   friend class DistantComputer;
-  const connection_state_t GetError() const;
+  connection_state_t GetError() const;
 
   static bool sdlnet_initialized;
   static int  num_objects;
@@ -127,10 +127,10 @@ public:
   static void Disconnect();
 
   static bool IsConnected();
-  virtual const bool IsLocal() const { return false ; }
-  virtual const bool IsServer() const { return false ; }
-  virtual const bool IsClient() const { return false ; }
-  const uint GetPort() const;
+  virtual bool IsLocal() const { return false ; }
+  virtual bool IsServer() const { return false ; }
+  virtual bool IsClient() const { return false ; }
+  uint GetPort() const;
 
   // Action handling
   void SendPacket(char* packet, int size) const;
@@ -146,7 +146,7 @@ public:
   static connection_state_t ServerStart(const std::string &port);
 
   // Manage network state
-  const connection_state_t CheckHost(const std::string &host, int prt) const;
+  connection_state_t CheckHost(const std::string &host, int prt) const;
   void SetState(Network::network_state_t state);
   Network::network_state_t GetState() const;
   void SendNetworkState() const;

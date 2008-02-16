@@ -72,7 +72,7 @@ private:
   void ActionRightClic(bool shift = false) const;
   void ActionWheelDown(bool shift = false) const;
   void ActionWheelUp(bool shift = false) const;
-  const MouseCursor& GetCursor(pointer_t pointer) const;
+  MouseCursor& GetCursor(pointer_t pointer) const;
 
 protected:
   friend class Singleton<Mouse>;
@@ -87,7 +87,7 @@ public:
   void CenterPointer();
 
   // Choose the pointer
-  const pointer_t GetPointer() const;
+  pointer_t GetPointer() const;
   pointer_t SetPointer(pointer_t pointer);
   void Draw() const;
 
@@ -95,6 +95,6 @@ public:
   void Show();
   void Hide();
 
-  const visibility_t GetVisibility() const { return visible; };
+  visibility_t GetVisibility() const { return visible; };
 };
 #endif

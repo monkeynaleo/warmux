@@ -178,12 +178,12 @@ void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
   }
 }
 
-const uint NetworkServer::GetNbConnectedPlayers() const
+uint NetworkServer::GetNbConnectedPlayers() const
 {
   return cpu.size() + 1;
 }
 
-const uint NetworkServer::GetNbInitializedPlayers() const
+uint NetworkServer::GetNbInitializedPlayers() const
 {
   uint r = 0;
 
@@ -197,7 +197,7 @@ const uint NetworkServer::GetNbInitializedPlayers() const
   return r;
 }
 
-const uint NetworkServer::GetNbReadyPlayers() const
+uint NetworkServer::GetNbReadyPlayers() const
 {
   uint r = 0;
 
@@ -211,7 +211,7 @@ const uint NetworkServer::GetNbReadyPlayers() const
   return r;
 }
 
-const uint NetworkServer::GetNbCheckedPlayers() const
+uint NetworkServer::GetNbCheckedPlayers() const
 {
   uint r = 0;
 

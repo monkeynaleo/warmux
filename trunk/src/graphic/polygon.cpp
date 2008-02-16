@@ -116,12 +116,12 @@ void PolygonItem::SetAlignment(H_align h_a, V_align v_a)
   v_align = v_a;
 }
 
-const Point2d & PolygonItem::GetPosition() const
+Point2d & PolygonItem::GetPosition()
 {
   return position;
 }
 
-const Point2d & PolygonItem::GetTransformedPosition() const
+Point2d & PolygonItem::GetTransformedPosition()
 {
   return transformed_position;
 }

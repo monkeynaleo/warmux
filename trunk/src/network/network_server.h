@@ -39,7 +39,7 @@ public:
   ~NetworkServer();
 
   //virtual const bool IsConnected() const { return true; }
-  virtual const bool IsServer() const { return true; }
+  virtual bool IsServer() const { return true; }
 
   virtual void SendChatMessage(const std::string& txt);
 
@@ -50,10 +50,10 @@ public:
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);
-  const uint GetNbConnectedPlayers() const;
-  const uint GetNbInitializedPlayers() const;
-  const uint GetNbReadyPlayers() const;
-  const uint GetNbCheckedPlayers() const;
+  uint GetNbConnectedPlayers() const;
+  uint GetNbInitializedPlayers() const;
+  uint GetNbReadyPlayers() const;
+  uint GetNbCheckedPlayers() const;
 };
 
 //-----------------------------------------------------------------------------
