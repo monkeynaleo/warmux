@@ -272,17 +272,6 @@ fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
 AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
 
-dnl === Check for curl ==============================================================
-
-AC_ARG_WITH(curl-prefix,
-            [  --with-curl-prefix=DIR       specify where curl library is installed],
-            [CURL_PREFIX="$withval"])
-if test "x$CURL_PREFIX" != "x"; then CURL_BIN="$CURL_PREFIX/bin/curl-config"
-else                                 CURL_BIN=curl-config; fi
-AC_SUBST(CURL_PREFIX)
-
-LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
-
 dnl === Check for SDL image, mixer, etc., libxml++, libcurl and libpng ==============
 
 AC_CHECK_LIB($PNG, png_error,,,)
