@@ -437,26 +437,25 @@ void PhysicalObj::UpdatePosition ()
 
 }
 
-bool PhysicalObj::PutOutOfGround(double direction)
+bool PhysicalObj::PutOutOfGround(double direction, double max_distance)
 {
   if(IsOutsideWorld(Point2i(0, 0)))
     return false;
-
-  const int max_step = 30;
 
   if( IsInVacuum(Point2i(0, 0), false) )
     return true;
 
   double dx = cos(direction);
   double dy = sin(direction);
+  // (dx,dy) is a normal vector (cos^2+sin^2==1)
 
-  int step=1;
-  while(step<max_step && !IsInVacuum(
-                          Point2i((int)(dx * (double)step),(int)(dy * (double)step)), false ))
-    step++;
+  double step=1;
+  while( step<max_distance && !IsInVacuum(
+                          Point2i((int)(dx * step),(int)(dy * step)), false ))
+    step+=1.0;
 
-  if(step<max_step)
-    SetXY( Point2i((int)(dx * (double)step)+GetX(),(int)(dy * (double)step)+GetY()) );
+  if(step<max_distance)
+    SetXY( Point2i((int)(dx * step)+GetX(),(int)(dy * step)+GetY()) );
   else
     return false; //Can't put the object out of the ground
 
@@ -577,7 +576,9 @@ void PhysicalObj::CheckRebound()
   // cause it's almost sure this object is stuck bouncing indefinitely
   if( m_rebound_position != Point2i( -1, -1) )
   {
-    if ( m_rebound_position == GetPosition() )
+    // allow infinite rebounds for Pendulum objects (e.g. characters on rope)
+    // FIXME: test that nothing bad happens because of this
+    if ( Pendulum != GetMotionType() && m_rebound_position == GetPosition() )
     {
       MSG_DEBUG("physic.state", "%s seems to be stuck in ground. Stop moving!", m_name.c_str());
       StopMoving();
