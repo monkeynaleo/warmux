@@ -242,7 +242,7 @@ Point2i Mouse::GetWorldPosition() const
   return GetPosition() + Camera::GetInstance()->GetPosition();
 }
 
-const MouseCursor& Mouse::GetCursor(pointer_t pointer) const
+MouseCursor& Mouse::GetCursor(pointer_t pointer) const
 {
   ASSERT(pointer != POINTER_STANDARD);
 
@@ -255,7 +255,7 @@ const MouseCursor& Mouse::GetCursor(pointer_t pointer) const
   return (*cursors.find(pointer)).second;
 }
 
-const Mouse::pointer_t Mouse::GetPointer() const
+Mouse::pointer_t Mouse::GetPointer() const
 {
   return current_pointer;
 }

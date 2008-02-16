@@ -94,7 +94,7 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* sender)
 }
 
 //-----------------------------------------------------------------------------
-const connection_state_t
+connection_state_t
 NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 {
   Init();

@@ -309,7 +309,7 @@ typedef int SOCKET;
 # define closesocket(fd) close(fd)
 #endif
 
-const connection_state_t Network::GetError() const
+connection_state_t Network::GetError() const
 {
 #ifdef WIN32
   int code = WSAGetLastError();
@@ -335,7 +335,7 @@ const connection_state_t Network::GetError() const
 #endif
 }
 
-const connection_state_t Network::CheckHost(const std::string &host, int prt) const
+connection_state_t Network::CheckHost(const std::string &host, int prt) const
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 
@@ -433,7 +433,7 @@ bool Network::IsConnected()
   return (!GetInstance()->IsLocal() && !stop_thread);
 }
 
-const uint Network::GetPort() const
+uint Network::GetPort() const
 {
   Uint16 prt;
   prt = SDLNet_Read16(&ip.port);

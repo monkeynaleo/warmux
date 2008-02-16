@@ -85,7 +85,7 @@ class Particle : public PhysicalObj
   void SetOnTop(bool b) { on_top = b; }
   bool IsOnTop() const { return on_top; }
   bool StillUseful() const;
-  const bool CheckOnEndTurn() const { return m_check_move_on_end_turn; }
+  bool CheckOnEndTurn() const { return m_check_move_on_end_turn; }
 };
 
 class ParticleEngine

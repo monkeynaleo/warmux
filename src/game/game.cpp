@@ -213,7 +213,7 @@ void Game::Init()
 void Game::IgnorePendingInputEvents() const
 {
   SDL_Event event;
-  while(SDL_PollEvent(&event));
+  while(SDL_PollEvent(&event)) { ; }
 }
 
 void Game::RefreshInput()
