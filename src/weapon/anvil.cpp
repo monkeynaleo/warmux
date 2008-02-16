@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@
 #include <sstream>
 #include "character/character.h"
 #include "game/time.h"
-#include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "interface/game_msg.h"
 #include "interface/mouse.h"
@@ -66,7 +65,6 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
-  SetTestRect(0, 0, 0, 0);
 }
 
 Anvil::~Anvil()
@@ -135,33 +133,26 @@ void AnvilLauncher::UpdateTranslationStrings()
 
 void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 {
-  target.x = mouse_pos.x - (projectile->GetWidth() / 2);
-  target.y = 0 - projectile->GetHeight();
-
-  if (!world.ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
-     !projectile->IsInVacuumXY(target))
-    return;
-
+  mouse_pos.y = 0;
+  target = mouse_pos - (projectile->GetSize() / 2);
   target_chosen = true;
   Shoot();
 }
 
 bool AnvilLauncher::p_Shoot ()
 {
-  if (!target_chosen)
+  if(!target_chosen)
     return false;
 
   projectile->SetXY(target);
   ((Anvil*)projectile)->PlayFallSound();
   lst_objects.AddObject(projectile);
-  Camera::GetInstance()->FollowObject(projectile, true);
+  Camera::GetInstance()->FollowObject(projectile,true);
   projectile = NULL;
   ReloadLauncher();
 
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
-
-  target_chosen = false; // ensure next shoot cannot be done pressing key space
   return true;
 }
 

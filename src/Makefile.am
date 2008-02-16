@@ -17,8 +17,6 @@ wormux_SOURCES = \
         character/movement.cpp character/movement.h \
         game/config.cpp game/config.h \
         game/game.cpp game/game.h \
-        game/game_blitz.cpp game/game_blitz.h \
-        game/game_classic.cpp game/game_classic.h \
         game/game_init.cpp game/game_init.h \
         game/game_mode.cpp game/game_mode.h \
         game/time.cpp game/time.h \
@@ -63,14 +61,13 @@ wormux_SOURCES = \
         gui/text_box.cpp gui/text_box.h \
         gui/widget.cpp gui/widget.h \
         gui/widget_list.cpp gui/widget_list.h \
-        gui/big/button_pic.cpp gui/big/button_pic.h \
+	gui/big/button_pic.cpp gui/big/button_pic.h \
         include/action.cpp include/action.h \
         include/action_handler.cpp include/action_handler.h \
         include/app.h main.cpp \
         include/base.h \
         include/binreloc.h include/binreloc.c \
         include/constant.cpp include/constant.h \
-        include/singleton.cpp include/singleton.h \
         interface/cursor.cpp interface/cursor.h \
         interface/game_msg.cpp interface/game_msg.h \
         interface/interface.cpp interface/interface.h \
@@ -93,7 +90,6 @@ wormux_SOURCES = \
         map/wind.cpp map/wind.h \
         menu/credits_menu.cpp menu/credits_menu.h \
         menu/game_menu.cpp menu/game_menu.h \
-        menu/help_menu.cpp menu/help_menu.h \
         menu/internet_menu.cpp menu/internet_menu.h \
         menu/main_menu.cpp menu/main_menu.h \
         menu/map_selection_box.cpp menu/map_selection_box.h \
@@ -102,7 +98,7 @@ wormux_SOURCES = \
         menu/network_menu.cpp menu/network_menu.h \
         menu/network_teams_selection_box.cpp menu/network_teams_selection_box.h \
         menu/options_menu.cpp menu/options_menu.h \
-        menu/pause_menu.cpp menu/pause_menu.h \
+	menu/pause_menu.cpp menu/pause_menu.h \
         menu/results_menu.cpp menu/results_menu.h \
         menu/team_box.cpp menu/team_box.h \
         menu/teams_selection_box.cpp menu/teams_selection_box.h \
@@ -144,7 +140,6 @@ wormux_SOURCES = \
         particles/teleport_member.cpp particles/teleport_member.h \
         sound/jukebox.cpp sound/jukebox.h \
         sound/sound_sample.cpp sound/sound_sample.h \
-        sound/sample_cache.cpp sound/sample_cache.h \
         team/macro.h \
         team/results.cpp team/results.h \
         team/team_config.h \
@@ -159,7 +154,7 @@ wormux_SOURCES = \
         tool/file_tools.cpp tool/file_tools.h \
         tool/i18n.cpp tool/i18n.h \
         tool/isnan.h \
-        tool/math_tools.h \
+        tool/math_tools.cpp tool/math_tools.h \
         tool/random.cpp tool/random.h \
         tool/rectangle.h tool/point.h \
         tool/resource_manager.cpp tool/resource_manager.h \
@@ -177,9 +172,7 @@ wormux_SOURCES = \
         weapon/bazooka.cpp weapon/bazooka.h \
         weapon/blowtorch.cpp weapon/blowtorch.h \
         weapon/bounce_ball.cpp weapon/bounce_ball.h \
-        weapon/cluzooka.cpp weapon/cluzooka.h \
         weapon/cluster_bomb.cpp weapon/cluster_bomb.h \
-        weapon/footbomb.cpp weapon/footbomb.h \
         weapon/construct.cpp weapon/construct.h \
         weapon/crosshair.cpp weapon/crosshair.h \
         weapon/disco_grenade.cpp weapon/disco_grenade.h \
@@ -216,8 +209,7 @@ endif
 
 AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
-  -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
-  @LIBCURL_CPPFLAGS@
+  -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
@@ -230,6 +222,4 @@ endif
 
 if STATIC
 LIBS += -lssl -lcrypto -lz -lpthread
-else
-LIBS += @LIBCURL@
 endif

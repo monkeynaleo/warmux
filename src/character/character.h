@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -80,10 +80,6 @@ private:
 
   // Generates green bubbles when the character is ill
   ParticleEngine *particle_engine;
-
-  // this is needed because of network to know
-  // if we have changed of active character
-  bool is_playing;
 public:
 
   // Previous strength
@@ -140,9 +136,9 @@ public:
     else disease_damage_per_turn = 0;
   }
 
-  // Used to sync value across network
-  virtual void GetValueFromAction(Action *);
-  virtual void StoreValue(Action *);
+  // to be used by action handler
+  alive_t GetLifeState() const { return m_alive; };
+  void SetLifeState(alive_t state);
 
   void Draw();
   void Refresh();
@@ -201,12 +197,10 @@ public:
   // Body handling
   Body * GetBody() { return body; };
   void SetWeaponClothe();
-
-  // "force" option forces to apply the clothe/movement even if character is dead
-  void SetClothe(const std::string& name, bool force=false);
-  void SetMovement(const std::string& name, bool force=false);
-  void SetClotheOnce(const std::string& name, bool force=false);
-  void SetMovementOnce(const std::string& name, bool force=false);
+  void SetClothe(const std::string& name);
+  void SetMovement(const std::string& name);
+  void SetClotheOnce(const std::string& name);
+  void SetMovementOnce(const std::string& name);
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool shift);

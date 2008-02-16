@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,6 @@
 #include <string>
 #include <map>
 #include "include/base.h"
-#include "include/singleton.h"
 #include "tool/point.h"
 #include "team/team_config.h"
 
@@ -55,7 +54,7 @@ namespace xmlpp
 
 //-----------------------------------------------------------------------------
 
-class Config : public Singleton<Config>
+class Config
 {
 public:
   static const int ALPHA = 0;
@@ -110,9 +109,6 @@ public:
   inline uint GetSoundFrequency() const { return sound_frequency; };
   inline void SetSoundFrequency(const uint freq) { sound_frequency = freq; };
 
-  inline bool GetCheckUpdates() const { return check_updates; }
-  inline void SetCheckUpdates(const bool check) { check_updates = check; }
-
   inline std::list<ConfigTeam> & AccessTeamList() { return teams; };
   inline const std::string & GetMapName() const { return map_name; };
   inline void SetMapName(const std::string& new_name) { map_name = new_name; }
@@ -123,9 +119,12 @@ public:
 
   inline std::string GetDataDir() const { return data_dir; };
   inline std::string GetLocaleDir() const { return locale_dir; };
-  inline std::string GetPersonalDataDir() const { return personal_data_dir; };
+  inline std::string GetPersonalDir() const { return personal_dir; };
 
-  bool Save(bool save_current_teams = false);
+  static Config * GetInstance();
+  ~Config() { RemoveAllObjectConfigs(); singleton = NULL; };
+
+  bool Save();
   inline const std::string &GetGameMode() const { return m_game_mode; }
 
   inline const std::string &GetNetworkHost() const { return m_network_host; }
@@ -134,7 +133,7 @@ public:
   inline void SetNetworkPort(std::string s) { m_network_port = s; }
 
 protected:
-  bool SaveXml(bool save_current_teams);
+  bool SaveXml();
   std::string GetEnv(const std::string & name, const std::string &default_value) const;
 
   std::string default_language;
@@ -143,7 +142,7 @@ protected:
   std::string m_network_port;
   std::string m_filename;
 
-  std::string data_dir, locale_dir, personal_data_dir, personal_config_dir;
+  std::string data_dir, locale_dir, personal_dir;
 
   std::list<ConfigTeam> teams;
   std::string map_name;
@@ -173,24 +172,17 @@ protected:
   uint sound_frequency;
   // network
   bool enable_network;
-  bool check_updates;
 
   std::string ttf_filename;
 
   int transparency;
 
-  friend class Singleton<Config>;
-  Config();
-  ~Config() { RemoveAllObjectConfigs(); singleton = NULL; }
-
 private:
+  Config();
+  static Config * singleton;
   bool DoLoading(void);
   void LoadDefaultValue();
   void LoadXml(const xmlpp::Element *xml);
-
-  // return true if the directory is created
-  bool MkdirPersonalConfigDir();
-  bool MkdirPersonalDataDir();
 
   /* this is mutable in order to be able to load config on fly when calling
    * GetObjectConfig() witch is not supposed to modify the object itself */

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -60,7 +60,6 @@ class Team
 
 
   private:
-    Surface mini_flag;
     Surface flag;
     Surface death_flag;
     Surface big_flag;
@@ -99,7 +98,7 @@ class Team
   // Switch to next worm.
     void NextCharacter();
     void PreviousCharacter();
-    void SelectCharacter(const Character * c);
+    void SelectCharacter(uint index);
 
   // Prepare turn.
     void PrepareTurn();
@@ -135,7 +134,6 @@ class Team
     const std::string& GetPlayerName() const { return m_player_name; }
     const std::string& GetSoundProfile() const { return m_sound_profile; }
     const Surface& GetFlag() const { return flag; }
-    const Surface& GetMiniFlag() const { return mini_flag; }
     const Surface& GetDeathFlag() const { return death_flag; }
     const Surface& GetBigFlag() const { return big_flag; }
     iterator begin();

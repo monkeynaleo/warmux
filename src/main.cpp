@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <iostream>
 #include <getopt.h>
 #ifndef WIN32
 #include <signal.h>
@@ -35,25 +36,32 @@ using namespace std;
 #include <SDL.h>
 #include "game/config.h"
 #include "game/game.h"
+#include "game/game_mode.h"
 #include "game/time.h"
-#include "graphic/font.h"
 #include "graphic/sprite.h"
-#include "graphic/text.h"
+#include "graphic/font.h"
 #include "graphic/video.h"
+#include "graphic/text.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
-#include "include/singleton.h"
+#include "interface/mouse.h"
+#include "map/camera.h"
 #include "map/map.h"
+#include "map/maps_list.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
-#include "menu/help_menu.h"
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
+#include "menu/network_menu.h"
 #include "menu/options_menu.h"
-#include "particles/particle.h"
+#include "network/download.h"
 #include "sound/jukebox.h"
+#include "team/team_config.h"
+#include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
+#include "tool/random.h"
+#include "weapon/weapons_list.h"
 
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
@@ -82,9 +90,9 @@ AppWormux::AppWormux():
 AppWormux::~AppWormux()
 {
   delete video;
-  ParticleEngine::FreeMem();
   Font::ReleaseInstances();
-  BaseSingleton::ReleaseSingletons();
+  delete Mouse::GetInstance();
+  delete Camera::GetInstance();
   singleton = NULL;
 }
 
@@ -95,8 +103,6 @@ int AppWormux::Main(void)
   try
   {
     DisplayLoadingPicture();
-
-    OptionMenu::CheckUpdates();
 
     do
       {
@@ -124,13 +130,6 @@ int AppWormux::Main(void)
               menu = &network_connection_menu;
               network_connection_menu.SetAction(net_action);
               network_connection_menu.Run(skip_menu);
-              break;
-            }
-            case MainMenu::HELP:
-            {
-              HelpMenu help_menu;
-              menu = &help_menu;
-              help_menu.Run();
               break;
             }
             case MainMenu::OPTIONS:
@@ -187,8 +186,8 @@ void AppWormux::DisplayLoadingPicture()
   string filename = config->GetDataDir() + PATH_SEPARATOR + "menu"
                          + PATH_SEPARATOR + "loading.png";
 
-  Surface surfaceLoading(filename.c_str());
-  Sprite loading_image(surfaceLoading, true);
+  Surface surfaceLoading = Surface(filename.c_str());
+  Sprite loading_image = Sprite(surfaceLoading, true);
 
   loading_image.cache.EnableLastFrameCache();
   loading_image.ScaleSize(video->window.GetSize());
@@ -235,6 +234,15 @@ void AppWormux::End() const
   Config::GetInstance()->Save();
 
   jukebox.End();
+  TeamsList::CleanUp();
+  MapsList::CleanUp();
+  WeaponsList::CleanUp();
+  delete Config::GetInstance();
+  Game::CleanUp();
+  GameMode::CleanUp();
+  delete Time::GetInstance();
+  delete Constants::GetInstance();
+  Downloader::CleanUp();
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
@@ -261,7 +269,7 @@ void DisplayWelcomeMessage()
 
   // print the disclaimer
   cout << "Wormux version " << Constants::WORMUX_VERSION
-    << ", Copyright (C) 2001-2008 Wormux Team" << endl
+    << ", Copyright (C) 2001-2007 Wormux Team" << endl
     << "Wormux comes with ABSOLUTELY NO WARRANTY." << endl
     << "This is free software and you are welcome to redistribute it" << endl
     << "under certain conditions." << endl << endl
@@ -280,7 +288,6 @@ void ParseArgs(int argc, char * argv[])
   struct option long_options[] =
     {
       {"help",    no_argument,       NULL, 'h'},
-      {"blitz",   no_argument,       NULL, 'b'},
       {"version", no_argument,       NULL, 'v'},
       {"play",    no_argument,       NULL, 'p'},
       {"internet",no_argument,       NULL, 'i'},
@@ -290,7 +297,7 @@ void ParseArgs(int argc, char * argv[])
       {NULL,      no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hbvpic::sd:",
+  while ((c = getopt_long (argc, argv, "hvpic::sd:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
@@ -300,11 +307,8 @@ void ParseArgs(int argc, char * argv[])
                  " [-i|--internet] [-s|--server] [-c|--client [ip]]"
                  " [-d|--debug <debug_masks>|all]\n", argv[0]);
           printf("\nWith :\n");
-          printf(" <debug_msg> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body_anim | body.state | bonus | box | camera.follow | camera.tracking | character | damage | downloader | explosion | game | game.endofturn | game_mode | game.statechange | ghost | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.play | lst_objects | map | map.load | map.random | menu | mine | mouse | network | network.crc | network.crc_bad | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | random | random.get | socket | sprite | team | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | wind }\n");
+          printf(" <debug_msg> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body.state | bonus | box | camera.tracking | character | damage | downloader | explosion | game | game.endofturn | game_mode | game.pause | game.statechange | ghost | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.play | lst_objects | map | map.load | map.random | menu | mine | mouse | network | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.move | physic.overlapping | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | physic.state | socket | sprite | team | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | wind }\n");
           exit(0);
-          break;
-        case 'b':
-          Game::SetMode(Game::BLITZ);
           break;
         case 'v':
           DisplayWelcomeMessage();

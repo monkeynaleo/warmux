@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -45,8 +45,6 @@
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
-#include "graphic/video.h"
-#include "include/app.h"
 #endif
 
 WeaponBullet::WeaponBullet(const std::string &name,
@@ -110,7 +108,6 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   explode_with_timeout = true;
   explode_with_collision = true;
   can_drown = true;
-  camera_in_advance = true;
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
@@ -147,7 +144,7 @@ void WeaponProjectile::Shoot(double strength)
   // Set the initial position.
   SetOverlappingObject(&ActiveCharacter(), 100);
   lst_objects.AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
+  Camera::GetInstance()->FollowObject(this, true);
 
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
@@ -195,7 +192,6 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
-  SetSize(image->GetSizeMax());
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -227,18 +223,6 @@ void WeaponProjectile::Draw()
       ss.str(), white_color);
     }
   }
-
-#ifdef DEBUG
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSizeMax());
-    AppWormux::GetInstance()->video->window.RectangleColor(rect, primary_blue_color, 1);
-  }
-#endif
 }
 
 bool WeaponProjectile::IsImmobile() const
@@ -252,7 +236,7 @@ bool WeaponProjectile::IsImmobile() const
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {
   ASSERT(obj != NULL);
-  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
+  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d", 
 	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
   if (explode_colliding_character)
     Explosion();

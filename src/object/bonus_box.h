@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,9 +38,6 @@ class BonusBox : public ObjBox
     int nbr_ammo;
     int weapon_num;
     Weapon::Weapon_type contents;
-
-    bool ExplodesInsteadOfBonus(Character * c);
-
     static uint weapon_count;
     static std::map<int,std::pair<Weapon*,int> > weapon_map;
     static std::map<int,std::pair<Weapon*,int> > weapon_map_no_infinite;
@@ -52,6 +49,7 @@ class BonusBox : public ObjBox
     BonusBox();
     static void LoadXml(const xmlpp::Element * object);
 
+    void Draw();
     void ApplyBonus(Character *);
     void Randomize();
     void GetValueFromAction(Action *);

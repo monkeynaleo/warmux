@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -91,7 +91,7 @@ bool Baseball::p_Shoot()
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
         character->SetSpeed(cfg().strength / character->GetMass(), angle);
         character->SetMovement("fly");
-        Camera::GetInstance()->FollowObject(&(*character), true, true);
+        Camera::GetInstance()->FollowObject(&(*character), true);
         return true;
       }
     }

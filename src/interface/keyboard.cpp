@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,15 @@
 #include "game/game.h"
 #include "network/chat.h"
 #include <SDL_events.h>
+
+Keyboard * Keyboard::singleton = NULL;
+
+Keyboard * Keyboard::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Keyboard();
+  }
+  return singleton;
+}
 
 Keyboard::Keyboard() : ManMachineInterface()
 {
@@ -71,8 +80,7 @@ void Keyboard::SetDefaultConfig()
   SetKeyAction(SDLK_PAGEUP,    ManMachineInterface::KEY_WEAPON_MORE);
   SetKeyAction(SDLK_PAGEDOWN,  ManMachineInterface::KEY_WEAPON_LESS);
   SetKeyAction(SDLK_s,         ManMachineInterface::KEY_CHAT);
-  SetKeyAction(SDLK_F11,       ManMachineInterface::KEY_MENU_OPTIONS_FROM_GAME);
-  SetKeyAction(SDLK_m,         ManMachineInterface::KEY_MINIMAP_FROM_GAME);
+  SetKeyAction(SDLK_F11,         ManMachineInterface::KEY_MENU_OPTIONS_FROM_GAME);
 }
 
 void Keyboard::HandleKeyEvent(const SDL_Event& event)

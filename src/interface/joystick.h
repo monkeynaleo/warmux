@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,23 +23,21 @@
 #define JOYSTICK_H
 //-----------------------------------------------------------------------------
 #include "interface/man_machine_interface.h"
-#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
-class Joystick : public ManMachineInterface, public Singleton<Joystick>
+class Joystick : public ManMachineInterface
 {
 private:
   int previous_x_value;
   int previous_y_value;
   Key_t previous_x_axis;
   Key_t previous_y_axis;
-  void SetDefaultConfig();
-
-protected:
-  friend class Singleton<Joystick>;
   Joystick();
+  void SetDefaultConfig();
+  static Joystick * singleton;
 
 public:
+  static Joystick * GetInstance();
   int GetNumberOfJoystick() const;
   void HandleKeyEvent(const SDL_Event& event);
   void Reset();

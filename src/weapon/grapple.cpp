@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -574,7 +574,6 @@ void Grapple::GoRight()
   go_right = true ;
   ActiveCharacter().SetExternForce(cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-  ActiveCharacter().UpdatePosition() ;
 }
 
 void Grapple::StopRight()
@@ -592,7 +591,6 @@ void Grapple::GoLeft()
   go_left = true ;
   ActiveCharacter().SetExternForce(-cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_LEFT);
-  ActiveCharacter().UpdatePosition() ;
 }
 
 void Grapple::StopLeft()

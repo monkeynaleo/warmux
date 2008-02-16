@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     void DropBox();
     static void LoadXml(xmlpp::Element * /*object*/){};
 
-    void Draw();
+    virtual void Draw() {}
     virtual void Refresh();
     virtual void Randomize() {};
     virtual void GetValueFromAction(Action *);
@@ -63,7 +63,6 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     bool parachute;
     Sprite *anim;
     static int start_life_points;
-    void Explode();
     // Signal Fall ending
     void SignalCollision();
     virtual void SignalObjectCollision(PhysicalObj *);

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -126,7 +126,7 @@ connection_state_t NetworkServer::ServerStart(const std::string &port)
   printf("\nConnected\n");
   socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
-  MSG_DEBUG("network", "Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
+  printf("Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
   return CONNECTED;
 }
 
@@ -178,12 +178,12 @@ void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
   }
 }
 
-uint NetworkServer::GetNbConnectedPlayers() const
+const uint NetworkServer::GetNbConnectedPlayers() const
 {
   return cpu.size() + 1;
 }
 
-uint NetworkServer::GetNbInitializedPlayers() const
+const uint NetworkServer::GetNbInitializedPlayers() const
 {
   uint r = 0;
 
@@ -197,7 +197,7 @@ uint NetworkServer::GetNbInitializedPlayers() const
   return r;
 }
 
-uint NetworkServer::GetNbReadyPlayers() const
+const uint NetworkServer::GetNbReadyPlayers() const
 {
   uint r = 0;
 
@@ -211,7 +211,7 @@ uint NetworkServer::GetNbReadyPlayers() const
   return r;
 }
 
-uint NetworkServer::GetNbCheckedPlayers() const
+const uint NetworkServer::GetNbCheckedPlayers() const
 {
   uint r = 0;
 

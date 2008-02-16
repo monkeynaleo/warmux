@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,25 +23,23 @@
 #define DOWNLOAD_H
 #include <map>
 #include <curl/curl.h>
-#include "include/singleton.h"
 
-class Downloader : public Singleton<Downloader>
+class Downloader
 {
   /* If you need this, implement it (correctly) */
   Downloader(const Downloader&);
   const Downloader& operator=(const Downloader&);
   /**********************************************/
+  static Downloader * singleton;
 
   CURL* curl;
-
-protected:
-  friend class Singleton<Downloader>;
   Downloader();
   ~Downloader();
-
 public:
+  static Downloader* GetInstance();
+  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
+
   // Return true if the download was successful
-  std::string GetLatestVersion();
   bool Get(const char* url, const char* save_as);
   std::map<std::string, int> GetServerList(std::string list_name);
 };

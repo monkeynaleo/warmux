@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -107,7 +107,7 @@ SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
 
   for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
   {
-    Surface new_surf(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
+    Surface new_surf = Surface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
 
         // Disable per pixel alpha on the source surface
     // in order to properly copy the alpha chanel to the destination suface

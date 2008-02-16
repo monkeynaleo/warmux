@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -63,21 +63,5 @@ class HBox : public Box
   void AddWidget(Widget *a_widget);
 };
 
-class GridBox : public Box
-{
- private:
-  uint max_line_width;
-  Point2i widget_size;
-  uint last_line;
-  uint last_column;
-
-  uint NbWidgetsPerLine(uint nb_total_widgets);
-  void PlaceWidget(Widget * a_widget, uint line, uint column);
-
- public:
-  GridBox(uint max_line_width, const Point2i& widget_size, bool _visible=true);
-  void SetSizePosition(const Rectanglei &rect);
-  void AddWidget(Widget *a_widget);
-};
 #endif
 

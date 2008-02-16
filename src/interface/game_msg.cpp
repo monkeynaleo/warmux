@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,6 +35,15 @@
 #define MSG_LIFESPAN 7000 // ms
 
 const uint NBR_MSG_MAX = 14;
+
+GameMessages * GameMessages::singleton = NULL;
+
+GameMessages * GameMessages::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new GameMessages();
+  }
+  return singleton;
+}
 
 // Clean up the message list
 void GameMessages::Reset(){

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,6 +35,23 @@
 
 //-----------------------------------------------------------------------------
 
+WeaponsList * weapon_list = NULL;
+
+WeaponsList * WeaponsList::GetInstance()
+{
+  if (weapon_list == NULL) {
+    weapon_list = new WeaponsList();
+  }
+  return weapon_list;
+}
+
+void WeaponsList::CleanUp()
+{
+  if (weapon_list)
+    delete weapon_list;
+  weapon_list = NULL;
+}
+
 WeaponsList::~WeaponsList()
 {
   weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
@@ -43,6 +60,7 @@ WeaponsList::~WeaponsList()
 
   delete weapons_res_profile;
   weapons_res_profile = NULL;
+  weapon_list = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -56,13 +74,11 @@ WeaponsList::WeaponsList()
   m_weapons_list.push_back(new Shotgun);
   m_weapons_list.push_back(new SnipeRifle);
   m_weapons_list.push_back(new RiotBomb);
-  m_weapons_list.push_back(new Cluzooka);
   m_weapons_list.push_back(new AutomaticBazooka);
   m_weapons_list.push_back(new Dynamite);
   m_weapons_list.push_back(new GrenadeLauncher);
   m_weapons_list.push_back(new DiscoGrenadeLauncher);
   m_weapons_list.push_back(new ClusterLauncher);
-  m_weapons_list.push_back(new FootBombLauncher);
   m_weapons_list.push_back(new FlameThrower);
   m_weapons_list.push_back(new Baseball);
   m_weapons_list.push_back(new Mine);
@@ -94,7 +110,9 @@ void WeaponsList::Refresh () const
 
 void WeaponsList::UpdateTranslation()
 {
-  if (singleton == NULL) return;
+  if (weapon_list == NULL) return;
+    
+
   weapons_list_it it = GetInstance()->m_weapons_list.begin(), end=GetInstance()->m_weapons_list.end();
   for (; it != end; it++) {
     (*it)->UpdateTranslationStrings();
@@ -121,7 +139,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
       } while(it != end
               && ((*it)->Category() != sort
                   || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
-                  || (!((*it)->CanBeUsedOnClosedMap()) && !(ActiveMap()->IsOpened())))
+                  || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap()->IsOpened()))
               );
 
       /* Ok, a weapon was found let's return it */

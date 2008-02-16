@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,14 +33,11 @@
 #include "graphic/colors.h"
 #endif
 
-static const uint TRANSPARENT_WHITE = 0x40FFFFFF;
-
 void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
 {
   for (int j=0; j<CELL_SIZE.y>>shift; j++)
   {
-    for (int i=0; i<(CELL_SIZE.x>>shift)>>2; i++)
-      memcpy(odata+(i<<2), &TRANSPARENT_WHITE, 4);
+    memset(odata, 0, (CELL_SIZE.x>>shift)<<2);
     odata += opitch;
   }
 }
@@ -205,7 +202,7 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
       p3 = (p3 + (1<<(2*shift-1)))>>(2*shift);
       if (p3 < 160)
       {
-        memcpy(odata+4*i, &TRANSPARENT_WHITE, 4);
+        memset(odata+4*i, 0, 4);
       }
       else
       {
@@ -218,7 +215,7 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
       p0 = (p0 + (1<<(2*shift-1)))>>(2*shift);
       if (p0 < 160)
       {
-        memcpy(odata+4*i, &TRANSPARENT_WHITE, 4);
+        memset(odata+4*i, 0, 4);
       }
       else
       {

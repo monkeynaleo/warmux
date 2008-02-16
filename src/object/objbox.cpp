@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,9 +20,10 @@
  *****************************************************************************/
 
 #include "object/objbox.h"
+#include "object/medkit.h"
+#include "object/bonus_box.h"
 #include <sstream>
 #include <iostream>
-#include "character/character.h"
 #include "game/game_mode.h"
 #include "game/game.h"
 #include "game/time.h"
@@ -40,12 +41,7 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
-
-#ifdef DEBUG
-#include "graphic/video.h"
-#include "include/app.h"
-#include "map/camera.h"
-#endif
+#include "character/character.h"
 
 const uint SPEED = 5; // meter / seconde
 // XXX Unused !?
@@ -103,23 +99,6 @@ void ObjBox::DropBox()
   }
 }
 
-void ObjBox::Draw()
-{
-  anim->Draw(GetPosition());
-
-#ifdef DEBUG
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), anim->GetSize());
-    AppWormux::GetInstance()->video->window.RectangleColor(rect, primary_blue_color, 1);
-  }
-#endif
-}
-
 void ObjBox::Refresh()
 {
   // If we touch a character, we remove the medkit
@@ -136,16 +115,11 @@ void ObjBox::Refresh()
 }
 
 //Boxes can explode...
-void ObjBox::Explode()
-{
-  ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
-  ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
-};
-
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {
   if(energy > 0) return;
-  Explode();
+  ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
+  ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
 }
 
 void ObjBox::GetValueFromAction(Action * a)

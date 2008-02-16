@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,9 +21,7 @@
 
 #include "menu/options_menu.h"
 
-#include <iostream>
 #include "include/app.h"
-#include "include/constant.h"
 #include "game/game_mode.h"
 #include "game/config.h"
 #include "graphic/video.h"
@@ -39,10 +37,8 @@
 #include "gui/picture_text_cbox.h"
 #include "gui/spin_button_picture.h"
 #include "gui/list_box_w_label.h"
-#include "gui/question.h"
 
 #include "map/maps_list.h"
-#include "network/download.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
@@ -52,7 +48,7 @@
 
 const uint SOUND_Y = 10;
 const uint SOUND_W = 530;
-const uint SOUND_H = 150;
+const uint SOUND_H = 200;
 
 const uint GRAPHIC_W = 530;
 const uint GRAPHIC_H = 330;
@@ -63,56 +59,61 @@ OptionMenu::OptionMenu() :
   AppWormux * app = AppWormux::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   Point2i stdSize(140, -1);
-  Point2i option_size(140, 130);
 
   /* Graphic options */
   Box * graphic_options = new HBox(GRAPHIC_H);
   graphic_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/video_label"));
 
-  Box * graphic_options_box = new GridBox(GRAPHIC_W - 40, option_size, false);
+  Box * top_n_bottom_graphic_options = new VBox(GRAPHIC_W - 40,false);
+  Box * top_graphic_options = new HBox(GRAPHIC_H / 2 - 20, false);
+  Box * bottom_graphic_options = new HBox(GRAPHIC_H / 2 - 20, false);
+  top_graphic_options->SetMargin(25);
+  bottom_graphic_options->SetMargin(25);
 
   // Various options
-  opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
-  graphic_options_box->AddWidget(opt_display_wind_particles);
+  opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", stdSize);
+  top_graphic_options->AddWidget(opt_display_wind_particles);
 
-  opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size);
-  graphic_options_box->AddWidget(opt_display_energy);
+  opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", stdSize);
+  top_graphic_options->AddWidget(opt_display_energy);
 
-  opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
-  graphic_options_box->AddWidget(opt_display_name);
+  opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", stdSize);
+  top_graphic_options->AddWidget(opt_display_name);
 
-  full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
-  graphic_options_box->AddWidget(full_screen);
+  full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdSize);
+  bottom_graphic_options->AddWidget(full_screen);
 
   opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-					  option_size,
+					  stdSize,
 					  50, 5,
 					  20, 50);
-
-  graphic_options_box->AddWidget(opt_max_fps);
+  bottom_graphic_options->AddWidget(opt_max_fps);
 
 
   // Get available video resolution
-  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
+  const std::list<Point2i>& video_res = app->video->GetAvailableConfigs(); 
   std::list<Point2i>::const_iterator mode;
   std::vector<std::pair<std::string, std::string> > video_resolutions;
   std::string current_resolution;
 
-  for (mode = video_res.begin(); mode != video_res.end(); ++mode) {
-    std::ostringstream ss;
-    std::string text;
-    ss << mode->GetX() << "x" << mode->GetY() ;
-    text = ss.str();
-    if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
-      current_resolution = text;
+  for (mode = video_res.begin(); mode != video_res.end(); ++mode)
+    {
+      std::ostringstream ss;
+      std::string text;
+      ss << mode->GetX() << "x" << mode->GetY() ;
+      text = ss.str();
+      if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
+	current_resolution = text;
 
-    video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
+      video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
   }
-  cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", option_size,
-                                 video_resolutions, current_resolution);
-  graphic_options_box->AddWidget(cbox_video_mode);
+  cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", stdSize,
+				 video_resolutions, current_resolution);
+  bottom_graphic_options->AddWidget(cbox_video_mode);
 
-  graphic_options->AddWidget(graphic_options_box);
+  top_n_bottom_graphic_options->AddWidget(top_graphic_options);
+  top_n_bottom_graphic_options->AddWidget(bottom_graphic_options);
+  graphic_options->AddWidget(top_n_bottom_graphic_options);
 
   widgets.AddWidget(graphic_options);
 
@@ -123,24 +124,20 @@ OptionMenu::OptionMenu() :
   lbox_languages = new ListBoxWithLabel(_("Language"), stdSize);
   language_options->AddWidget(lbox_languages);
 
-  /* Misc options */
-  Box * misc_options = new HBox(SOUND_H);
-  opt_updates = new PictureTextCBox(_("Check updates online?"),
-                                    "menu/ico_update", option_size);
-  misc_options->AddWidget(opt_updates);
-  widgets.AddWidget(misc_options);
-
   /* Sound options */
   Box * sound_options = new HBox(SOUND_H);
   sound_options->AddWidget(new PictureWidget(Point2i(40, 138), "menu/audio_label"));
 
-  Box * all_sound_options = new GridBox(SOUND_W, option_size, false);
+  Box * all_sound_options = new HBox(SOUND_H-20,false);
+  all_sound_options->SetMargin(25);
+  all_sound_options->SetBorder(Point2i(10,10));
 
-  opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", option_size);
+  opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", stdSize);
   all_sound_options->AddWidget(opt_music);
 
-  opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", option_size);
+  opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", stdSize);
   all_sound_options->AddWidget(opt_sound_effects);
+
 
   // Generate sound mode list
   uint current_freq = jukebox.GetFrequency();
@@ -158,7 +155,7 @@ OptionMenu::OptionMenu() :
     current_sound_freq = "11025";
 
   cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
-				 option_size, sound_freqs, current_sound_freq);
+				 stdSize, sound_freqs, current_sound_freq);
   all_sound_options->AddWidget(cbox_sound_freq);
 
   sound_options->AddWidget(all_sound_options);
@@ -167,17 +164,17 @@ OptionMenu::OptionMenu() :
   /* Center the widgets */
   uint center_x = app->video->window.GetWidth()/2;
 
-  sound_options->SetXY(center_x - (sound_options->GetSizeX() + misc_options->GetSizeX() + 20)/2, SOUND_Y);
-
-  misc_options->SetXY(sound_options->GetPositionX() + sound_options->GetSizeX() + 10, SOUND_Y);
+  sound_options->SetXY(center_x - sound_options->GetSizeX()/2, SOUND_Y);
 
   language_options->SetXY(center_x - (graphic_options->GetSizeX() + language_options->GetSizeX() + 20)/2,
 			  sound_options->GetPositionY() + sound_options->GetSizeY() + 10);
 
-  graphic_options->SetXY(language_options->GetPositionX() + language_options->GetSizeX() + 10,
+  graphic_options->SetXY(language_options->GetPositionX() + language_options->GetSizeX() + 10, 
 			 language_options->GetPositionY());
-
+  
   // Values initialization
+
+  resource_manager.UnLoadXMLProfile(res);
 
   Config * config = Config::GetInstance();
 
@@ -193,18 +190,14 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "bs",    "Bosanski",            "bs");
   lbox_languages->AddItem(config->GetLanguage() == "ca",    "Català",              "ca");
   lbox_languages->AddItem(config->GetLanguage() == "cpf",   "Créole",              "cpf");
-  lbox_languages->AddItem(config->GetLanguage() == "cs",    "čeština (Czech)",
-   "cs");
   lbox_languages->AddItem(config->GetLanguage() == "da",    "Dansk",               "da");
   lbox_languages->AddItem(config->GetLanguage() == "de",    "Deutsch",             "de");
   lbox_languages->AddItem(config->GetLanguage() == "eo",    "Esperanto",           "eo");
   lbox_languages->AddItem(config->GetLanguage() == "en",    "English",             "en");
   lbox_languages->AddItem(config->GetLanguage() == "es",    "Castellano",          "es");
-  lbox_languages->AddItem(config->GetLanguage() == "fa",    "فارسی",               "fa");
   lbox_languages->AddItem(config->GetLanguage() == "fi",    "Suomi",               "fi");
   lbox_languages->AddItem(config->GetLanguage() == "fr",    "Français",            "fr");
   lbox_languages->AddItem(config->GetLanguage() == "gl",    "Galego",              "gl");
-  lbox_languages->AddItem(config->GetLanguage() == "he",    "עברית",               "he");
   lbox_languages->AddItem(config->GetLanguage() == "hu",    "Magyar",              "hu");
   lbox_languages->AddItem(config->GetLanguage() == "it",    "Italiano",            "it");
   lbox_languages->AddItem(config->GetLanguage() == "lv",    "latviešu valoda",     "lv");
@@ -224,10 +217,6 @@ OptionMenu::OptionMenu() :
 
   opt_music->SetValue(jukebox.UseMusic());
   opt_sound_effects->SetValue(jukebox.UseEffects());
-
-  opt_updates->SetValue(config->GetCheckUpdates());
-
-  resource_manager.UnLoadXMLProfile(res);
 }
 
 OptionMenu::~OptionMenu()
@@ -251,9 +240,6 @@ void OptionMenu::SaveOptions()
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
-
-  // Misc options
-  config->SetCheckUpdates(opt_updates->GetValue());
 
   // Sound settings
   config->SetSoundEffects(opt_sound_effects->GetValue());
@@ -294,7 +280,6 @@ void OptionMenu::SaveOptions()
 bool OptionMenu::signal_ok()
 {
   SaveOptions();
-  CheckUpdates();
   return true;
 }
 
@@ -307,27 +292,3 @@ void OptionMenu::Draw(const Point2i &/*mousePosition*/)
 {
 }
 
-void OptionMenu::CheckUpdates()
-{
-  if (!Config::GetInstance()->GetCheckUpdates())
-    return;
-
-  try
-  {
-    std::string latest_version = Downloader::GetInstance()->GetLatestVersion();
-    const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
-    if (latest_version != cur_version)
-    {
-      Question new_version;
-      std::string txt = Format(_("A new version %s is available, while your version is %s."
-                                 "You may want to check whether an update is available for your OS!"),
-                               latest_version.c_str(), cur_version);
-      new_version.Set(txt, true, 0);
-      new_version.Ask();
-    }
-  }
-  catch (const char* err)
-  {
-    std::cerr << Format(_("Version verification failed because: %s\n"), err);
-  }
-}

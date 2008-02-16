@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,14 +38,10 @@ ButtonPic::ButtonPic(const std::string &label,
 
   SetSize(_size);
 
-  txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  txt_label->SetMaxWidth (GetSizeX());
-}
+  SetSizeY( m_img_normal.GetHeight() + (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).GetHeight() );
 
-ButtonPic::~ButtonPic()
-{
-  if (txt_label)
-    delete txt_label;
+  txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_label->SetMaxWidth (GetSizeX());
 }
 
 void ButtonPic::Draw(const Point2i &mousePosition, Surface& surf) const
@@ -57,7 +53,7 @@ void ButtonPic::Draw(const Point2i &mousePosition, Surface& surf) const
   surf.Blit(m_img_normal, Point2i(tmp_x, tmp_y));
 
   if (Contains(mousePosition)) {
-    surf.RectangleColor(*this, c_red, 1);
+    surf.RectangleColor(*this, c_yellow, 1);
     txt_label->SetColor(black_color);
   } else {
     txt_label->SetColor(dark_gray_color);

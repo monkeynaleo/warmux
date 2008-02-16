@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -427,7 +427,7 @@ void AIShootModule::SetStrategy(strategy_t new_strategy)
   if (m_current_strategy != new_strategy) {
     MSG_DEBUG("ai", "%s changes his strategy: %d -> %d", 
 	      ActiveCharacter().GetName().c_str(), m_current_strategy, new_strategy);
-    if (IsLOGGING("ai")) {
+    if (IsDEBUGGING("ai")) {
       std::cout << "SetStrategy: " << new_strategy << std::endl;
     }
     m_current_strategy = new_strategy;

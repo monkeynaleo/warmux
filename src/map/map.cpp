@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -56,8 +56,6 @@ Map::~Map()
   delete to_redraw_now;
   delete to_redraw_particles;
   delete to_redraw_particles_now;
-  if (author_info1) delete author_info1;
-  if (author_info2) delete author_info2;
 }
 
 void Map::Reset()

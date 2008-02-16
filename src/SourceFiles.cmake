@@ -14,8 +14,6 @@ character/move.cpp
 character/movement.cpp
 game/config.cpp
 game/game.cpp
-game/game_blitz.cpp
-game/game_classic.cpp
 game/game_init.cpp
 game/game_mode.cpp
 game/time.cpp
@@ -60,7 +58,6 @@ include/action.cpp
 include/action_handler.cpp
 include/binreloc.c
 include/constant.cpp
-include/singleton.cpp
 interface/cursor.cpp
 interface/game_msg.cpp
 interface/interface.cpp
@@ -84,7 +81,6 @@ map/water.cpp
 map/wind.cpp
 menu/credits_menu.cpp
 menu/game_menu.cpp
-menu/help_menu.cpp
 menu/internet_menu.cpp
 menu/main_menu.cpp
 menu/map_selection_box.cpp
@@ -135,7 +131,6 @@ particles/star.cpp
 particles/teleport_member.cpp
 sound/jukebox.cpp
 sound/sound_sample.cpp
-sound/sample_cache.cpp
 team/results.cpp
 team/team.cpp
 team/team_energy.cpp
@@ -147,6 +142,7 @@ tool/error.cpp
 tool/euler_vector.cpp
 tool/file_tools.cpp
 tool/i18n.cpp
+tool/math_tools.cpp
 tool/random.cpp
 tool/resource_manager.cpp
 tool/stats.cpp
@@ -162,14 +158,12 @@ weapon/bazooka.cpp
 weapon/blowtorch.cpp
 weapon/bounce_ball.cpp
 weapon/cluster_bomb.cpp
-weapon/cluzooka.cpp
 weapon/construct.cpp
 weapon/crosshair.cpp
 weapon/disco_grenade.cpp
 weapon/dynamite.cpp
 weapon/explosion.cpp
 weapon/flamethrower.cpp
-weapon/footbomb.cpp
 weapon/gnu.cpp
 weapon/grapple.cpp
 weapon/grenade.cpp

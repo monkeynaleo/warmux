@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -65,11 +65,12 @@ int  Network::num_objects = 0;
 bool Network::sdlnet_initialized = false;
 bool Network::stop_thread = true;
 
+Network * Network::singleton = NULL;
+
 Network * Network::GetInstance()
 {
   if (singleton == NULL) {
     singleton = new   NetworkLocal();
-    MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkLocal'\n", singleton);
   }
   return singleton;
 }
@@ -271,6 +272,7 @@ void Network::Disconnect()
     singleton->stop_thread = true;
     singleton->DisconnectNetwork();
     delete singleton;
+    singleton = NULL;
   }
 }
 
@@ -309,7 +311,7 @@ typedef int SOCKET;
 # define closesocket(fd) close(fd)
 #endif
 
-connection_state_t Network::GetError() const
+const connection_state_t Network::GetError() const
 {
 #ifdef WIN32
   int code = WSAGetLastError();
@@ -335,7 +337,7 @@ connection_state_t Network::GetError() const
 #endif
 }
 
-connection_state_t Network::CheckHost(const std::string &host, int prt) const
+const connection_state_t Network::CheckHost(const std::string &host, int prt) const
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 
@@ -433,7 +435,7 @@ bool Network::IsConnected()
   return (!GetInstance()->IsLocal() && !stop_thread);
 }
 
-uint Network::GetPort() const
+const uint Network::GetPort() const
 {
   Uint16 prt;
   prt = SDLNet_Read16(&ip.port);
@@ -444,10 +446,9 @@ uint Network::GetPort() const
 
 // Static method
 connection_state_t Network::ClientStart(const std::string &host,
-                                        const std::string& port)
+                                                 const std::string& port)
 {
   NetworkClient* net = new NetworkClient();
-  MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkClient'\n", net);
 
   // replace current singleton
   Network* prev = singleton;
@@ -475,7 +476,6 @@ connection_state_t Network::ClientStart(const std::string &host,
 connection_state_t Network::ServerStart(const std::string& port)
 {
   NetworkServer* net = new NetworkServer();
-  MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkServer'\n", net);
 
   // replace current singleton
   Network* prev = singleton;

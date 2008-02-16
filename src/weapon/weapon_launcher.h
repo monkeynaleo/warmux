@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,6 @@ class WeaponProjectile : public PhysicalObj
     bool explode_with_timeout;
     bool explode_with_collision;
     bool can_drown;
-    bool camera_in_advance;
     double begin_time;
 
     ExplosiveWeaponConfig& cfg;

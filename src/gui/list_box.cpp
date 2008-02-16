@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -66,18 +66,13 @@ ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
 
 ListBox::~ListBox()
 {
-  delete m_up;
-  delete m_down;
+   delete m_up;
+   delete m_down;
 
-  ClearItems();
-}
-
-void ListBox::ClearItems()
-{
-  for (std::vector<ListBoxItem*>::iterator lbi=m_items.begin(); lbi!=m_items.end(); lbi++)
+   for (std::vector<ListBoxItem*>::iterator lbi=m_items.begin(); lbi!=m_items.end(); lbi++)
      delete *lbi;
 
-  m_items.clear();
+   m_items.clear();
 }
 
 int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const

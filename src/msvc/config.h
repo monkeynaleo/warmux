@@ -10,7 +10,6 @@
 #define HAVE_GETTEXT 1
 
 /* iconv() function. */
-#include <iconv.h>
 #define HAVE_ICONV 1
 
 /* `SDL_gfx' library (-lSDL_gfx). */
@@ -56,16 +55,16 @@
 #define PACKAGE_NAME "Wormux"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Wormux 0.8svn"
+#define PACKAGE_STRING "Wormux 0.8beta3"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "wormux"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.8svn"
+#define PACKAGE_VERSION "0.8beta3"
 
 /* ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.8svn"
+#define VERSION "0.8beta3"

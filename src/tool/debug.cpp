@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -41,8 +41,8 @@ std::vector<std::string> debugModes;
 /**
  * Check if a debug mode is in use
  */
-#ifdef WMX_LOG
-bool IsLOGGING(const char* mode)
+#ifdef DEBUG
+bool IsDEBUGGING(const char* mode)
 {
   int mSize = strlen(mode);
   unsigned int i = 0;
@@ -74,7 +74,7 @@ bool IsLOGGING(const char* mode)
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...)
 {
-  if (debug_all || IsLOGGING(level)) {
+  if (debug_all || IsDEBUGGING(level)) {
       va_list argp;
       int pid = (int)getpid();
 

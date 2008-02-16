@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -533,7 +533,7 @@ void Weapon::Draw(){
     m_image->Blit( AppWormux::GetInstance()->video->window, Point2i(x, y) - Camera::GetInstance()->GetPosition());
 
 #ifdef DEBUG
-  if (IsLOGGING("weapon")) {
+  if (IsDEBUGGING("weapon")) {
     Rectanglei rect(ActiveCharacter().GetHandPosition().GetX()-1 - Camera::GetInstance()->GetPositionX(),
 		    ActiveCharacter().GetHandPosition().GetY()-1 - Camera::GetInstance()->GetPositionY(),
 		    3,

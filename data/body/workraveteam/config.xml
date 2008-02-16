@@ -29,8 +29,6 @@
 <alias movement="weapon-riot_bomb-select" correspond_to="weapon-bazooka-select" />
 <alias movement="weapon-automatic_bazooka-select" correspond_to="weapon-bazooka-select" />
 <alias movement="weapon-automatic_bazooka-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
-<alias movement="weapon-cluzooka-select" correspond_to="weapon-bazooka-select" />
-<alias movement="weapon-cluzooka-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
 <alias movement="weapon-cluster_bomb-begin-shoot" correspond_to="weapon-grenade-begin-shoot" />
 <alias movement="weapon-cluster_bomb-end-shoot" correspond_to="weapon-grenade-end-shoot" />
 <alias movement="weapon-disco_grenade-begin-shoot" correspond_to="weapon-grenade-begin-shoot" />
@@ -99,8 +97,8 @@
 	<image file="eyelid.png">
 		<grid pos="0,0" size="9,7" array="7,1" />
 	</image>
-	<anchor dx="0" dy="0"/>
 	<animation speed="200" loop_mode="pingpong" />
+	<anchor dx="0" dy="0"/>
 </sprite>
 
 <sprite name="pupil-right" type="pupil-right" >
@@ -196,129 +194,129 @@
 
 <!-- ###### Normal ###### -->
 <clothe name="normal">
-	<c_member name="arm-left-normal"/>
-	<c_member name="foot-left-normal"/>
-	<c_member name="body-normal"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid-normal"/>
-	<c_member name="foot-right-normal"/>
-	<c_member name="arm-right-normal"/>
-	<c_member name="weapon"/>
+	<member name="arm-left-normal"/>
+	<member name="foot-left-normal"/>
+	<member name="body-normal"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="eyelid-normal"/>
+	<member name="foot-right-normal"/>
+	<member name="arm-right-normal"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- ###### Jetpack ###### -->
 <clothe name="jetpack"> <!-- When jetpack weapon is selected, during walk, jump movement... -->
-	<c_member name="arm-left-normal"/>
-	<c_member name="foot-left-normal"/>
-	<c_member name="jetpack"/>
-	<c_member name="body-normal"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right-normal"/>
-	<c_member name="jetpack-belt"/>
-	<c_member name="arm-right-normal"/>
-	<c_member name="weapon"/>
+	<member name="arm-left-normal"/>
+	<member name="foot-left-normal"/>
+	<member name="jetpack"/>
+	<member name="body-normal"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right-normal"/>
+	<member name="jetpack-belt"/>
+	<member name="arm-right-normal"/>
+	<member name="weapon"/>
 </clothe>
 
 <clothe name="jetpack-fire"> <!-- When jetpack weapon is selected and used -->
-	<c_member name="arm-left-normal"/>
-	<c_member name="foot-left-normal"/>
-	<c_member name="jetpack-fire"/>
-	<c_member name="jetpack"/>
-	<c_member name="body-normal"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right-normal"/>
-	<c_member name="jetpack-belt"/>
-	<c_member name="arm-right-normal"/>
-	<c_member name="weapon"/>
+	<member name="arm-left-normal"/>
+	<member name="foot-left-normal"/>
+	<member name="jetpack-fire"/>
+	<member name="jetpack"/>
+	<member name="body-normal"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right-normal"/>
+	<member name="jetpack-belt"/>
+	<member name="arm-right-normal"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- # Construct/Airhammer helmet # -->
 <clothe name="weapon-construct">
-	<c_member name="c2"/>
-	<c_member name="arm-left-normal"/>
-	<c_member name="foot-left-normal"/>
-	<c_member name="body-normal"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="construct"/>
-	<c_member name="foot-right-normal"/>
-	<c_member name="arm-right-normal"/>
-	<c_member name="weapon"/>
+	<member name="c2"/>
+	<member name="arm-left-normal"/>
+	<member name="foot-left-normal"/>
+	<member name="body-normal"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="construct"/>
+	<member name="foot-right-normal"/>
+	<member name="arm-right-normal"/>
+	<member name="weapon"/>
 </clothe>
 
 <clothe name="weapon-airhammer">
-	<c_member name="c2"/>
-	<c_member name="arm-left-normal"/>
-	<c_member name="foot-left-normal"/>
-	<c_member name="body-normal"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="construct"/>
-	<c_member name="foot-right-normal"/>
-	<c_member name="arm-right-normal"/>
-	<c_member name="weapon"/>
+	<member name="c2"/>
+	<member name="arm-left-normal"/>
+	<member name="foot-left-normal"/>
+	<member name="body-normal"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="construct"/>
+	<member name="foot-right-normal"/>
+	<member name="arm-right-normal"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- ###### Helmet ###### -->
 <clothe name="helmet">
-	<c_member name="arm-left-normal"/>
-	<c_member name="foot-left-normal"/>
-	<c_member name="body-normal"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="helmet"/>
-	<c_member name="foot-right-normal"/>
-	<c_member name="arm-right-normal"/>
-	<c_member name="weapon"/>
+	<member name="arm-left-normal"/>
+	<member name="foot-left-normal"/>
+	<member name="body-normal"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="helmet"/>
+	<member name="foot-right-normal"/>
+	<member name="arm-right-normal"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- ###### Animation Yoyo ###### -->
 <clothe name="animation0">
-	<c_member name="arm-left-normal"/>
-	<c_member name="foot-left-normal"/>
-	<c_member name="body-normal"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right-normal"/>
-	<c_member name="arm-right-normal"/>
-	<c_member name="yoyo"/>
+	<member name="arm-left-normal"/>
+	<member name="foot-left-normal"/>
+	<member name="body-normal"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right-normal"/>
+	<member name="arm-right-normal"/>
+	<member name="yoyo"/>
 </clothe>
 
 <!-- ###### Dead ###### -->
 <clothe name="dead">
-	<c_member name="body-dead"/>
+	<member name="body-dead"/>
 </clothe>
 
 <!-- ###### Animation Hula hoop ###### -->
 <clothe name="animation2">
-	<c_member name="hula"/>
-	<c_member name="arm-left-normal"/>
-	<c_member name="foot-left-normal"/>
-	<c_member name="body-normal"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right-normal"/>
-	<c_member name="arm-right-normal"/>
-	<c_member name="hoop"/>
+	<member name="hula"/>
+	<member name="arm-left-normal"/>
+	<member name="foot-left-normal"/>
+	<member name="body-normal"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right-normal"/>
+	<member name="arm-right-normal"/>
+	<member name="hoop"/>
 </clothe>
 
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -194,14 +194,14 @@ void InfoMap::FreeData()
   is_data_loaded = false;
 }
 
-Surface& InfoMap::ReadImgGround()
+Surface InfoMap::ReadImgGround()
 {
   LoadBasicInfo();
   LoadData();
   return img_ground;
 }
 
-Surface& InfoMap::ReadImgSky()
+Surface InfoMap::ReadImgSky()
 {
   LoadBasicInfo();
   LoadData();
@@ -214,6 +214,19 @@ std::string InfoMap::GetConfigFilepath() const
 }
 
 /* ========================================================================== */
+
+MapsList* MapsList::singleton = NULL;
+
+MapsList* MapsList::GetInstance()
+{
+  if (singleton == NULL) {
+    singleton = new MapsList();
+  }
+
+  return singleton;
+}
+
+
 static bool compareMaps(const InfoMap* a, const InfoMap* b)
 {
   return a->GetRawName() < b->GetRawName();
@@ -239,7 +252,7 @@ MapsList::MapsList()
   }
 
   // Load personal maps
-  dirname = config->GetPersonalDataDir() + "map" + PATH_SEPARATOR;
+  dirname = config->GetPersonalDir() + "map" + PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
     const char *name;

@@ -3,7 +3,7 @@
 <resources>
 
 <section name="main_menu">
-  <surface name="bg_main" file="menu/background.png" />
+  <surface name="bg_main" file="menu//background.png" />
 
   <sprite name="button">
     <image file="menu/button.png">
@@ -31,15 +31,12 @@
   <surface name="ico_help" file="menu/i_help.png" />
   <surface name="ico_quit" file="menu/i_quit.png" />
 
-  <surface name="ico_update" file="menu/i_update.png" />
-
   <surface name="video_label" file="menu/video_label.png" />
   <surface name="config_label" file="menu/config_label.png" />
   <surface name="audio_label" file="menu/audio_label.png" />
   <surface name="teams_label" file="menu/teams_label.png" />
   <surface name="map_label" file="menu/map_label.png" />
   <surface name="mode_label" file="menu/mode_label.png" />
-
 
   <surface name="enabled" file="menu/enabled.png" />
   <surface name="disabled_front" file="menu/disabled_front.png" />
@@ -149,11 +146,6 @@
   <surface name="background" file="menu/background_credits.png" />
 </section>
 
-<section name="help">
-  <surface name="background" file="menu/background_help.png" />
-  <surface name="help_shortkeys" file="help/shortkeys.png" />
-</section>
-
 <section name="object">
   <sprite name="bonus_box">
     <image file="object/bonus_box.png">
@@ -193,6 +185,7 @@
   <surface name="clock" file="interface/clock.png"/>
   <surface name="wind" file="interface/wind.png"/>
   <surface name="wind_indicator" file="interface/wind_indicator.png"/>
+  <surface name="pause_screen" file="interface/pause.png"/>
   <surface name="quit_screen" file="interface/quit.png"/>
 </section>
 

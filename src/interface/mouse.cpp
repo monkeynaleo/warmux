@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -39,6 +39,8 @@
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 
+Mouse * Mouse::singleton = NULL;
+
 std::string __pointers[] = {
   "mouse/pointer_standard",
   "mouse/pointer_select",
@@ -56,6 +58,14 @@ std::string __pointers[] = {
   "mouse/pointer_fire_right"
 };
 std::map<Mouse::pointer_t, MouseCursor> Mouse::cursors;
+
+Mouse * Mouse::GetInstance() 
+{
+  if (singleton == NULL) {
+    singleton = new Mouse();
+  }
+  return singleton;
+}
 
 Mouse::Mouse():
   lastpos(-1,-1)
@@ -242,7 +252,7 @@ Point2i Mouse::GetWorldPosition() const
   return GetPosition() + Camera::GetInstance()->GetPosition();
 }
 
-MouseCursor& Mouse::GetCursor(pointer_t pointer) const
+const MouseCursor& Mouse::GetCursor(pointer_t pointer) const
 {
   ASSERT(pointer != POINTER_STANDARD);
 
@@ -255,7 +265,7 @@ MouseCursor& Mouse::GetCursor(pointer_t pointer) const
   return (*cursors.find(pointer)).second;
 }
 
-Mouse::pointer_t Mouse::GetPointer() const
+const Mouse::pointer_t Mouse::GetPointer() const
 {
   return current_pointer;
 }

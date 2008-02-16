@@ -111,7 +111,7 @@ bool NetData::ReceiveInt(int & nbr)
 
 bool NetData::ReceiveStr(std::string & full_str)
 {
-	const unsigned int max_str_size = 16;
+	const unsigned int max_str_size = 10;
 
 	if(str_size == 0)
 	{
@@ -241,8 +241,7 @@ bool NetData::Receive()
 	std::string full_str = "";
 	// If a string is embedded in the msg, get it	{
 	if( msg_id == TS_MSG_VERSION
-	    || msg_id == TS_MSG_JOIN_LEAVE
-	    || msg_id == TS_MSG_GAMENAME)
+	||  msg_id == TS_MSG_JOIN_LEAVE )
 	{
 		if( ! ReceiveStr(full_str) )
 			return false;

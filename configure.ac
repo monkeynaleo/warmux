@@ -12,7 +12,7 @@ dnl ========================================================================
 dnl = Require at least automake 2.52
 AC_PREREQ(2.52)
 
-AC_INIT([Wormux], [0.8svn], [wormux-dev@gna.org], [wormux])
+AC_INIT([Wormux], [0.8beta4], [wormux-dev@gna.org], [wormux])
 AC_CONFIG_SRCDIR([src/main.cpp])
 
 dnl Detect the canonical host and target build environment
@@ -49,11 +49,6 @@ AC_ARG_ENABLE([debug],
               [  --enable-debug          Enable debug in Wormux],
               debug=$enableval,
               debug="")
-AC_ARG_ENABLE([logging],
-              [  --enable-logging        Enable logging in Wormux],
-              logging=$enableval,
-              logging="")
-
 
 AC_ARG_ENABLE([profile],
               [  --enable-profile        Enable profiling],
@@ -167,13 +162,9 @@ if test "x$GCC" = "xyes"; then
   fi
 
   if test "x${debug}" = "xyes"; then
-    GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG -DWMX_LOG"
+    GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG"
   else
     GCC_FLAGS="$GCC_FLAGS -O2"
-  fi
-
-  if test "x${logging}" = "xyes"; then
-    GCC_FLAGS="$GCC_FLAGS -DWMX_LOG"
   fi
 
   dnl Ignore default options set by autoconf
@@ -186,11 +177,6 @@ else
   if test "x${debug}" = "xyes"; then
     CFLAGS="$CFLAGS -DDEBUG"
     CXXFLAGS="$CXXFLAGS -DDEBUG"
-  fi
-
-  if test "x${logging}" = "xyes"; then
-    CFLAGS="$CFLAGS -DWMX_LOG"
-    GCC_FLAGS="$CXXFLAGS -DWMX_LOG"
   fi
 fi
 
@@ -274,9 +260,16 @@ AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
 
 dnl === Check for curl ==============================================================
 
+AC_ARG_WITH(curl-prefix,
+            [  --with-curl-prefix=DIR       specify where curl library is installed],
+            [CURL_PREFIX="$withval"])
+if test "x$CURL_PREFIX" != "x"; then CURL_BIN="$CURL_PREFIX/bin/curl-config"
+else                                 CURL_BIN=curl-config; fi
+AC_SUBST(CURL_PREFIX)
+
 LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
 
-dnl === Check for SDL image, mixer, etc., libxml++, and libpng ==============
+dnl === Check for SDL image, mixer, etc., libxml++, libcurl and libpng ==============
 
 AC_CHECK_LIB($PNG, png_error,,,)
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
@@ -292,6 +285,16 @@ if $PACKAGE_CONFIG libxml++-2.6 --libs > /dev/null 2>&1; then
 else
   AC_MSG_RESULT(no)
   check_libxmlpp="no"
+fi
+
+AC_MSG_CHECKING(for libcurl)
+
+if test x$check_curl = xyes; then
+  AC_MSG_RESULT(yes)
+else
+  AC_MSG_RESULT(no)
+  check_libcurl="no"
+  AC_MSG_ERROR([*** No libCurl found. Please install a valid libcurl ***])
 fi
 
 dnl === Display error if SDL image, mixer, etc. is missing ==================
@@ -326,16 +329,19 @@ if test \
   exit 1
 fi
 
-dnl === Add libxml++ and libpng flags ======================================
+dnl === Add libxml++, libcurl flags and libpng =================================================
+LIBCURL_CFLAGS=`$CURL_BIN --cflags`
+LIBCURL_LIBS=`$CURL_BIN --libs`
+
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
 
 LIBPNG_CFLAGS=`$PACKAGE_CONFIG lib$PNG --cflags`
 LIBPNG_LIBS=`$PACKAGE_CONFIG lib$PNG --libs`
 
-CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBPNG_CFLAGS"
-CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBPNG_CFLAGS"
-LIBS="$LIBS $LIBXMLPP_LIBS $LIBPNG_LIBS"
+CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGGS $LIBPNG_CFLAGS"
+CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGS $LIBPNG_CFLAGS"
+LIBS="$LIBS $LIBXMLPP_LIBS $LIBCURL_LIBS $LIBPNG_LIBS"
 
 dnl ========================================================================
 dnl == Check for header files                                              =

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -81,11 +81,6 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   laser_beam_color = resource_manager.LoadColor(weapons_res_profile,m_id+"_laser_color");
 
   ReloadLauncher();
-}
-
-SnipeRifle::~SnipeRifle()
-{
-  delete m_laser_image;
 }
 
 void SnipeRifle::UpdateTranslationStrings()
@@ -243,8 +238,8 @@ void SnipeRifle::Draw()
 std::string SnipeRifle::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
-            "%s team has won %u sniper rifle! Aim and shoot between the eyes!",
-            "%s team has won %u sniper rifles! Aim and shoot between the eyes!",
+            "%s team has won %u snipe rifle! Shoot it him between the eyes!",
+            "%s team has won %u snipe rifles! Shoot it him between the eyes!",
             items_count), TeamName, items_count);
 }
 

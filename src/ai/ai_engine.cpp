@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,9 +28,20 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 
+
+AIengine * AIengine::singleton = NULL;
+
 AIengine::AIengine()
 {
   std::cout << "o Artificial Intelligence engine initialization" << std::endl;
+}
+
+AIengine* AIengine::GetInstance()
+{
+  if (singleton == NULL)
+    singleton = new AIengine();
+
+  return singleton;
 }
 
 void AIengine::Refresh() const
@@ -42,4 +53,5 @@ void AIengine::Refresh() const
   if (ActiveCharacter().GetTeam().IsLocalAI()) {
     AIStupidEngine::GetInstance()->Refresh();
   }
+
 }

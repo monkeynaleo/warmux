@@ -174,8 +174,6 @@ POTFILES = \
         src/menu/network_teams_selection_box.h \
         src/menu/options_menu.cpp \
         src/menu/options_menu.h \
-        src/menu/pause_menu.cpp \
-        src/menu/pause_menu.h \
         src/menu/results_menu.cpp \
         src/menu/results_menu.h \
         src/menu/team_box.cpp \
@@ -265,6 +263,7 @@ POTFILES = \
         src/tool/file_tools.h \
         src/tool/i18n.cpp \
         src/tool/i18n.h \
+        src/tool/math_tools.cpp \
         src/tool/math_tools.h \
         src/tool/point.h \
         src/tool/random.cpp \
@@ -296,8 +295,6 @@ POTFILES = \
         src/weapon/blowtorch.h \
         src/weapon/bounce_ball.cpp \
         src/weapon/bounce_ball.h \
-        src/weapon/cluzooka.cpp src/weapon/cluzooka.h \
-        src/weapon/footbomb.cpp src/weapon/footbomb.h \
         src/weapon/cluster_bomb.cpp \
         src/weapon/cluster_bomb.h \
         src/weapon/construct.cpp \

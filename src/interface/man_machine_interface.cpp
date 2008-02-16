@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -204,8 +204,11 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     switch(key){
       // Managing interface
     case KEY_QUIT:
+      Game::GetInstance()->UserWantEndOfGame();
+      return;
     case KEY_PAUSE:
-      Game::GetInstance()->UserAsksForMenu();
+      if (!Network::IsConnected())
+        Time::GetInstance()->TogglePause();
       return;
     case KEY_FULLSCREEN:
       AppWormux::GetInstance()->video->ToggleFullscreen();
@@ -219,9 +222,6 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       return;
     case KEY_TOGGLE_INTERFACE:
       Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());
-      return;
-    case KEY_MINIMAP_FROM_GAME:
-      Interface::GetInstance()->ToggleMinimap ();
       return;
     case KEY_MENU_OPTIONS_FROM_GAME: {
       OptionMenu options_menu;

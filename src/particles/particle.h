@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -85,7 +85,7 @@ class Particle : public PhysicalObj
   void SetOnTop(bool b) { on_top = b; }
   bool IsOnTop() const { return on_top; }
   bool StillUseful() const;
-  bool CheckOnEndTurn() const { return m_check_move_on_end_turn; }
+  const bool CheckOnEndTurn() const { return m_check_move_on_end_turn; }
 };
 
 class ParticleEngine

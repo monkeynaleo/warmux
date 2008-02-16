@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,14 +30,7 @@
 #include <utility>
 #include "network.h"
 
-class GameServerInfo
-{
- public:
-  std::string ip_address;
-  std::string port;
-  std::string dns_address;
-  std::string game_name;
-};
+typedef std::pair<std::string, std::string> address_pair;
 
 class IndexServer
 {
@@ -45,6 +38,7 @@ class IndexServer
   IndexServer(const IndexServer&);
   const IndexServer& operator=(const IndexServer&);
   /*********************************************/
+
 
   // Connection to the server
   TCPsocket socket;
@@ -91,10 +85,10 @@ public:
   void SetHiddenServer() { hidden_server = true; };
 
   // Notify the top server we are hosting a game
-  void SendServerStatus(const std::string& game_name);
+  void SendServerStatus();
 
   // returns a list with string pairs: first element = hostname/ip, second element = port
-  std::list<GameServerInfo> GetHostList();
+  std::list<address_pair> GetHostList();
 };
 
 extern IndexServer index_server;

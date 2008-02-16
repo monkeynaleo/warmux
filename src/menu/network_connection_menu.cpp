@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -77,13 +77,6 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   connection_box->AddWidget(port_number_label);
   port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(port_number);
-
-  // Game name
-  game_name_label = new Label(_("Game name:"), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-  connection_box->AddWidget(game_name_label);
-  game_name = new TextBox("Wormux party", pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-  game_name->SetMaxNbChars(15);
-  connection_box->AddWidget(game_name);
 
   // Available on internet ?
   internet_server = new CheckBox(_("Server available on Internet"),
@@ -170,8 +163,6 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
     server_address->SetVisible(false);
     port_number_label->SetVisible(true);
     port_number->SetVisible(true);
-    game_name_label->SetVisible(true);
-    game_name->SetVisible(true);
     internet_server->SetVisible(true);
     break;
   case NET_CONNECT_LOCAL:
@@ -180,8 +171,6 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
     server_address->SetVisible(true);
     port_number_label->SetVisible(true);
     port_number->SetVisible(true);
-    game_name_label->SetVisible(false);
-    game_name->SetVisible(false);
     internet_server->SetVisible(false);
     break;
   case NET_BROWSE_INTERNET:
@@ -190,8 +179,6 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
     server_address->SetVisible(false);
     port_number_label->SetVisible(false);
     port_number->SetVisible(false);
-    game_name_label->SetVisible(false);
-    game_name->SetVisible(false);
     internet_server->SetVisible(false);
     break;
   }
@@ -233,7 +220,7 @@ bool NetworkConnectionMenu::signal_ok()
       goto out;
     }
 
-    index_server.SendServerStatus(game_name->GetText());
+    index_server.SendServerStatus();
 
     if (!Network::GetInstance()->IsConnected()) {
       msg_box->NewMessage(_("Error: Unable to start server"), c_red);
@@ -276,7 +263,7 @@ bool NetworkConnectionMenu::signal_ok()
 
   if (Network::GetInstance()->IsConnected()) {
     play_ok_sound();
-
+    
     // run the network menu ! :-)
     NetworkMenu nm;
 

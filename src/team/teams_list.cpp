@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,6 +37,18 @@
 #include "network/randomsync.h"
 
 //-----------------------------------------------------------------------------
+TeamsList *TeamsList::singleton = NULL;
+
+TeamsList *TeamsList::GetInstance()
+{
+  if (singleton == NULL) {
+    singleton = new TeamsList();
+  }
+  return singleton;
+}
+
+
+//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 TeamsList::TeamsList():
@@ -57,12 +69,8 @@ TeamsList::~TeamsList()
    * Actually, this is not that bad whereas free(NULL) is accepted... but it
    * remains spurious. */
   if (!singleton)
-  {
-    fprintf(stderr, "Destructor still called on unexisting TeamsList\n");
     return;
-  }
 
-  UnloadGamingData();
   Clear();
   for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
     delete (*it);
@@ -157,7 +165,7 @@ void TeamsList::LoadList()
   }
 
   // Load personal teams
-  dirname = config->GetPersonalDataDir() + "team" + PATH_SEPARATOR;
+  dirname = config->GetPersonalDir() + "team" + PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
     const char *name;

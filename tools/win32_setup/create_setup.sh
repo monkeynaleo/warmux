@@ -43,7 +43,7 @@ mkdir -p $DEST
 function pkg_path
 {
   if [ -z "$1" ]; then return ""; fi
-  var=$($PKG_CONFIG --variable=prefix $1 2>/dev/null || exit 1)
+  var=$($PKG_CONFIG --variable=prefix $1 2>/dev/null)
   if [ -z "$var" ]; then echo "Couldn't find $1, aborting..." 1>&2; exit 1; fi
   echo "Found $1 in $var" 1>&2
   echo "$var"
@@ -188,18 +188,19 @@ GLIB_PATH=$(pkg_path glib-2.0)
 cp "$GLIB_PATH"/bin/libg{object,thread,module,lib}-2.0-0.dll "$DEST"
 
 # Other libs
-cp "$(pkg_path sigc++-2.0)/bin/"{lib,}sigc*[0-9].dll "$DEST"
-cp "$(pkg_path libxml-2.0)/bin/libxml2.dll" "$DEST"
-cp "$(pkg_path libxml++-2.6)/bin/"{lib,}xml++*[0-9].dll "$DEST"
-cp "$(pkg_path glibmm-2.4)/bin/"{lib,}glibmm*[0-9].dll "$DEST"
+cp "$(pkg_path sigc++-2.0)/bin/{lib,}sigc"*.dll $DEST
+cp "$(pkg_path libxml-2.0)/bin/{lib,}xml2"*.dll $DEST
+cp "$(pkg_path libxml++-2.6)/bin/{lib,}xml++"*.dll $DEST
+cp "$(pkg_path glibmm-2.4)/bin/{lib,}glibmm"*.dll $DEST
 
 # Files that must not be stripped (all MSVC, mainly SDL and vorbis)
 # Make sure freetype, libpng and jpeg dll are matching your libs.
 SDL_PATH=$($SDL_CONFIG --prefix)
-cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll        \
-   "$GLIB_PATH/bin/"{intl,iconv,zlib1,jpeg62,freetype6}.dll \
-   "$GLIB_PATH/bin/"lib{png12,tiff3}.dll                    \
-   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3,curl-4}.dll "$DEST"
+cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll    \
+   "$GLIB_PATH/bin/"{intl,iconv,zlib1,libpng12}.dll     \
+   "$SDL_PATH/bin/"lib{curl-4,freetype6,png12}.dll   \
+   "$SDL_PATH/bin/jpeg62.dll"                             \
+   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3}.dll "$DEST"
 
 # Continue producing installer
 cat >> $NSIS <<EOF

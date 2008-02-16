@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@
 #include <list>
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file
@@ -61,7 +60,7 @@ typedef enum
   CONN_TIMEOUT
 } connection_state_t;
 
-class Network : public Singleton<Network>
+class Network
 {
 public:
   typedef enum
@@ -78,8 +77,9 @@ private:
   Network(const Network&);
   const Network& operator=(const Network&);
   friend class DistantComputer;
-  connection_state_t GetError() const;
+  const connection_state_t GetError() const;
 
+  static Network * singleton;
   static bool sdlnet_initialized;
   static int  num_objects;
 
@@ -127,10 +127,10 @@ public:
   static void Disconnect();
 
   static bool IsConnected();
-  virtual bool IsLocal() const { return false ; }
-  virtual bool IsServer() const { return false ; }
-  virtual bool IsClient() const { return false ; }
-  uint GetPort() const;
+  virtual const bool IsLocal() const { return false ; }
+  virtual const bool IsServer() const { return false ; }
+  virtual const bool IsClient() const { return false ; }
+  const uint GetPort() const;
 
   // Action handling
   void SendPacket(char* packet, int size) const;
@@ -146,7 +146,7 @@ public:
   static connection_state_t ServerStart(const std::string &port);
 
   // Manage network state
-  connection_state_t CheckHost(const std::string &host, int prt) const;
+  const connection_state_t CheckHost(const std::string &host, int prt) const;
   void SetState(Network::network_state_t state);
   Network::network_state_t GetState() const;
   void SendNetworkState() const;

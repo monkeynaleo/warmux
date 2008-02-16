@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -164,11 +164,11 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
       first_server = server_lst.begin();
       while(nbr--)
 	++first_server;
-
+      
       ASSERT(first_server != server_lst.end());
-
+      
       current_server = first_server;
-
+      
       address = current_server->first;
       port = current_server->second;
       return true;
@@ -275,59 +275,49 @@ bool IndexServer::HandShake()
   return true;
 }
 
-void IndexServer::SendServerStatus(const std::string& game_name)
+void IndexServer::SendServerStatus()
 {
   ASSERT(Network::GetInstance()->IsServer());
 
   if(hidden_server)
     return;
-  Send(TS_MSG_GAMENAME);
-  Send(game_name);
   Send(TS_MSG_HOSTING);
   Send(Network::GetInstance()->GetPort());
 }
 
-std::list<GameServerInfo> IndexServer::GetHostList()
+std::list<address_pair> IndexServer::GetHostList()
 {
   Send(TS_MSG_GET_LIST);
   int lst_size = ReceiveInt();
-  std::list<GameServerInfo> lst;
+  std::list<address_pair> lst;
   if(lst_size == -1)
     return lst;
   while(lst_size--)
   {
-    GameServerInfo game_server_info;
     IPaddress ip;
     ip.host = ReceiveInt();
     ip.port = ReceiveInt();
-    game_server_info.game_name = ReceiveStr();
-
-    const char* dns_addr = SDLNet_ResolveIP(&ip);
+    const char* addr = SDLNet_ResolveIP(&ip);
     char port[10];
     sprintf(port, "%d", ip.port);
-    game_server_info.port = std::string(port);
 
-    // We can't resolve the hostname, so just show the ip address
-    unsigned char* str_ip = (unsigned char*)&ip.host;
-    char formated_ip[16];
-    snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
-	     (int)str_ip[1],
-	     (int)str_ip[2],
-	     (int)str_ip[3]);
-    game_server_info.ip_address = std::string(formated_ip);
+    address_pair addr_pair;
+    addr_pair.second = std::string(port);
 
-    if (dns_addr != NULL)
-      game_server_info.dns_address = std::string(dns_addr);
+    if(addr == NULL)
+    {
+      // We can't resolve the hostname, so just show the ip address
+      unsigned char* str_ip = (unsigned char*)&ip.host;
+      char formated_ip[16];
+      snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
+                                           (int)str_ip[1],
+                                           (int)str_ip[2],
+                                           (int)str_ip[3]);
+      addr_pair.first = std::string(formated_ip);
+    }
     else
-      game_server_info.dns_address = game_server_info.ip_address;
-
-    MSG_DEBUG("index_server","ip: %s, port: %s, dns: %s, name: %s\n",
-	      game_server_info.ip_address.c_str(),
-	      game_server_info.port.c_str(),
-	      game_server_info.dns_address.c_str(),
-	      game_server_info.game_name.c_str());
-
-    lst.push_back(game_server_info);
+      addr_pair.first = std::string(addr);
+    lst.push_back(addr_pair);
   }
   return lst;
 }

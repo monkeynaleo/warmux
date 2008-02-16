@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,8 +55,10 @@ class ListBox : public Widget
 
   bool always_one_selected;
 
-protected:
   bool scrolling;
+  Rectanglei ScrollBarPos() const;
+
+protected:
   // what are the items ?
   uint first_visible_item;
   int selected_item;
@@ -71,7 +73,6 @@ protected:
 
   uint margin; // for ListBoxWithLabel
 
-  Rectanglei ScrollBarPos() const;
   virtual void __Update(const Point2i &mousePosition,
 			const Point2i &lastMousePosition,
 			Surface& surf);
@@ -85,7 +86,7 @@ public:
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
 
-  virtual Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
@@ -103,8 +104,6 @@ public:
   int GetSelectedItem() const { return selected_item; };
   void Deselect();
   void RemoveSelected();
-  void ClearItems();
-
   const std::string& ReadLabel() const;
   const std::string& ReadValue() const;
   const int ReadIntValue() const;

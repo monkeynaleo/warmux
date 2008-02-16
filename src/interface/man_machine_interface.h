@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -51,7 +51,6 @@ public:
     KEY_WEAPON_LESS, KEY_WEAPON_MORE,
     KEY_NEXT_CHARACTER,
     KEY_MENU_OPTIONS_FROM_GAME,
-    KEY_MINIMAP_FROM_GAME,
     KEY_NONE
   } Key_t;
 
@@ -66,6 +65,8 @@ protected:
     Y_AXIS_MOTION
   } Key_Event_t;
 
+  ManMachineInterface() { SetDefaultConfig(); };
+  virtual ~ManMachineInterface() { };
   virtual void SetDefaultConfig() { };
   std::map<int, Key_t> layout;
   std::list<uint8> registred_event;
@@ -78,9 +79,6 @@ protected:
   void HandleKeyReleased(const Key_t &action_key);
 
   void SetKeyAction(int key, Key_t at) { layout[key] = at; };
-
-  ManMachineInterface() { SetDefaultConfig(); };
-  virtual ~ManMachineInterface() { };
 
 public:
   virtual void HandleKeyEvent(const SDL_Event& event) = 0;

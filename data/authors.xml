@@ -136,13 +136,6 @@
 	<country>Portugal</country>
       </author>
       <author>
-	<nickname>KonKer</nickname>
-	<name>John Doe</name>
-	<description>Updated Spanish Translation</description>
-	<email>jua56_AT_hotmail_DOT_com</email>
-	<country>Spain</country>
-      </author>
-      <author>
 	<nickname>pepp</nickname>
 	<name>Pierre-eric Pelloux Prayer</name>
 	<description>Write small hack to optimize character drawing</description>
@@ -566,7 +559,7 @@
 	<name>Pasi Kallinen</name>
 	<description>Improve the ground generator</description>
 	<website>http://bilious.homelinux.org/</website>
-	<email>paxed_AT_alt_DOT_org</email>
+	<email>paxed@alt.org</email>
 	<country>Finland</country>
       </author>
       <author>
@@ -576,13 +569,6 @@
 	<website>http://coderz.info</website>
 	<email>progs_AT_headfucking.net</email>
 	<country>France</country>
-      </author>
-      <author>
-	<nickname>RCL</nickname>
-	<name>Dmitry Rekman</name>
-	<description>Developer</description>
-	<email>rcl_AT_mail_DOT_ru</email>
-	<country>Russia</country>
       </author>
       <author>
 	<nickname>Riccardo</nickname>
@@ -607,7 +593,7 @@
       <author>
 	<nickname>Snark</nickname>
 	<name>Julien Puydt</name>
-	<description>Developer</description>
+	<description>Patch to compile without -Wno-unused-parameter, reworked some menu widgets, little additions to class Surface</description>
 	<email>julien.puydt_AT_laposte_DOT_net</email>
 	<country>France</country>
       </author>
@@ -742,7 +728,7 @@
 	<name>JS</name>
 	<description>Draw the map EasterIsland</description>
 	<email>jeeseverly_AT_yahoo_dot_fr</email>
-	<country>France</country>
+	<country>france</country>
       </author>
       <author>
 	<nickname>Michael</nickname>

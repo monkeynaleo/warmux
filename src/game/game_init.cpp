@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -106,7 +106,6 @@ void GameInit::InitMap()
 {
   std::cout << "o " << _("Initialise map") << std::endl;
 
-  Camera::GetInstance()->ResetShake();
   loading_sreen.StartLoading(1, "map_icon", _("Maps"));
   world.Reset();
   MapsList::GetInstance()->ActiveMap()->FreeData();

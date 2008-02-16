@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,6 +33,15 @@ const uint y_min = 20; //number of pixels between the bottom of the arrow and th
 const uint y_max = 90; //number of pixels between the bottom of the arrow and the top of the sprite
                         //when the arrow is at the top of its movement
 const uint rebound_time = 1000; //Duration of a full rebound
+
+CharacterCursor * CharacterCursor::singleton = NULL;
+
+CharacterCursor * CharacterCursor::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new CharacterCursor();
+  }
+  return singleton;
+}
 
 CharacterCursor::CharacterCursor()
 {

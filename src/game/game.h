@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,17 +24,22 @@
 #define GAME_H
 
 #include "include/base.h"
-#include "include/singleton.h"
 #include "network/chat.h"
 
 // Forward declarations
 class Character;
 class ObjBox;
-class FramePerSecond;
 class PhysicalObj;
+class FramePerSecond;
+class Question;
 
-class Game : public Singleton<Game>
+class Game
 {
+  /* If you need this, implement it (correctly)*/
+  Game(const Game&);
+  Game operator=(const Game&);
+  /**********************************************/
+
 public:
   typedef enum {
     PLAYING = 0,
@@ -42,97 +47,64 @@ public:
     END_TURN = 2
   } game_loop_state_t;
 
-  typedef enum {
-    CLASSIC = 0,
-    BLITZ   = 1
-  } game_mode_t;
-
-protected:
-  virtual void Run();         // Main loop
-
-  bool IsAnythingMoving() const;
-  void MainLoop();
-  void ApplyDiseaseDamage() const;
-  int  NbrRemainingTeams() const;
-  bool MenuQuitPause() const;
-
-  game_loop_state_t   state;
-  bool                give_objbox;
-  uint                pause_seconde;
-
-  friend class Singleton<Game>;
-  Game();
-  virtual ~Game();
 
 private:
-  static game_mode_t  mode;
+  bool isGameLaunched;
 
+  static Game * singleton;
 
-  bool                isGameLaunched;
-  ObjBox              *current_ObjBox;
-  // Set the user requested a pause/end of the game
-  bool                ask_for_menu;
+  // Set the user requested an end of the game
+  bool want_end_of_game;
 
-  FramePerSecond      *fps;
+  game_loop_state_t state;
+  uint pause_seconde;
+  uint duration;
+  ObjBox * current_ObjBox;
+  bool give_objbox;
+
+  FramePerSecond *fps;
 
   // Time to wait between 2 loops
-  int                 delay;
+  int delay;
   // Time to display the next frame
-  uint                time_of_next_frame;
+  uint time_of_next_frame;
   // Time to compute the next physic engine frame
-  uint                time_of_next_phy_frame;
+  uint time_of_next_phy_frame;
 
-  static uint         last_unique_id;
-  
-  void Draw();        // Draw to screen
-  void MessageLoading() const;
+  static uint last_unique_id;
+public:
+  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
+  static Game * GetInstance();
+
+  void Start();
   void UnloadDatas() const;
 
-  // Input management (keyboard/mouse)
-  void RefreshInput();
-  void IgnorePendingInputEvents() const;
+  bool IsGameLaunched() const;
 
-  void PingClient() const;
-
-  void CallDraw();
-
-  // Refresh all objects (position, state ...)
-  void RefreshObject() const;
-
-  PhysicalObj* GetMovingObject() const;
-
-  void MessageEndOfGame() const;
-
-  virtual void RefreshClock() = 0;
-  virtual void __SetState_PLAYING() = 0;
-  virtual void __SetState_HAS_PLAYED() = 0;
-  virtual void __SetState_END_TURN() = 0;
-
-public:
-  static Game * GetInstance();
-  static void SetMode(game_mode_t m) { CleanUp(); mode = m; };
   static std::string GetUniqueId();
   static void ResetUniqueIds();
 
-  bool                character_already_chosen;
-  Chat                chatsession;
+  bool character_already_chosen;
+  Chat chatsession;
 
-  void Start();
   void Init();
 
-  // Get remaining time to play
-  virtual uint GetRemainingTime() const = 0;
-  virtual bool IsGameFinished() const = 0;
-  virtual void EndOfGame() = 0;
+  // Draw to screen
+  void Draw();
+
+  // Main loop
+  void Run();
 
   // Read/Set State
   game_loop_state_t ReadState() const { return state; }
   void SetState(game_loop_state_t new_state, bool begin_game=false) const;
-  bool IsGameLaunched() const;
+  bool IsGameFinished() const;
 
-  void UserAsksForMenu() { ask_for_menu = true; };
+  void UserWantEndOfGame() { want_end_of_game = true; };
   void Really_SetState(game_loop_state_t new_state); // called by the action_handler
 
+  // Get remaining time to play
+  uint GetRemainingTime() const;
   // Signal death of a player
   void SignalCharacterDeath (const Character *character) const;
 
@@ -144,5 +116,39 @@ public:
   void AddNewBox(ObjBox *);
   void SetCurrentBox(ObjBox * current_box) { current_ObjBox = current_box; };
   ObjBox * GetCurrentBox() { return current_ObjBox; };
+
+private:
+  Game();
+  ~Game();
+
+  void MessageLoading() const;
+
+  // Refresh all objects (position, state ...)
+  void RefreshObject() const;
+  void RefreshClock();
+
+  // Input management (keyboard/mouse)
+  void RefreshInput();
+  void IgnorePendingInputEvents() const;
+
+  void PingClient() const;
+
+  void CallDraw();
+
+  PhysicalObj* GetMovingObject() const;
+  bool IsAnythingMoving() const;
+  void ApplyDiseaseDamage() const;
+  void ApplyDeathMode() const;
+
+  void __SetState_PLAYING();
+  void __SetState_HAS_PLAYED();
+  void __SetState_END_TURN();
+
+  void DisplayPause() const;
+  bool AskQuit() const;
+  void MessageEndOfGame() const;
+  int NbrRemainingTeams() const;
+  void EndOfGame();
+  void MainLoop();
 };
-#endif // GAME_H
+#endif

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -62,7 +62,6 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   // Load flag
   Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
   flag = resource_manager.LoadImage(res, "flag");
-  mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
   death_flag = resource_manager.LoadImage(res, "death_flag");
   big_flag = resource_manager.LoadImage(res, "big_flag");
   resource_manager.UnLoadXMLProfile(res);
@@ -186,23 +185,13 @@ void Team::UpdateEnergyBar ()
   energy.SetValue(ReadEnergy());
 }
 
-void Team::SelectCharacter(const Character * c)
+void Team::SelectCharacter(uint index)
 {
-  ASSERT(c != NULL);
-
-  if (!c->IsActiveCharacter()) {
-    ActiveCharacter().StopPlaying();
-
-    active_character = characters.begin();
-    while (!c->IsActiveCharacter() && active_character != characters.end())
-      active_character++;
-
-    ASSERT(active_character != characters.end());
-  }
-
-  // StartPlaying (if needed) even if c was already ActiveCharacter() thanks to
-  // the team change...
-  ActiveCharacter().StartPlaying();
+  ASSERT(index <= characters.size());
+  ActiveCharacter().StopPlaying();
+  active_character = characters.begin();
+  for(uint i = 0; i < index; ++i)
+    ++active_character;
 }
 
 void Team::NextCharacter()

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -167,7 +167,7 @@ WeaponsMenu::WeaponsMenu():
   weapons_menu->AddItem(new Sprite(Font::GenerateSurface(_("Weapons"), dark_gray_color, Font::FONT_BIG)),
                         weapons_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
   tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), dark_gray_color, Font::FONT_BIG)),
-                      tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
+                        tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
 
   resource_manager.UnLoadXMLProfile(res);
 }
@@ -180,10 +180,6 @@ WeaponsMenu::~WeaponsMenu()
     delete tools_menu;
   if(help)
     delete help;
-  if (cross)
-    delete cross;
-  if (nb_weapon_type)
-    delete[] nb_weapon_type;
 }
 
 // Add a new weapon to the weapon menu.

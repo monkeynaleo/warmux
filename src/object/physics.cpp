@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ void Physics::SetSpeedXY (Point2d vector)
 
   m_pos_x.x1 = vector.x ;
   m_pos_y.x1 = vector.y ;
-  // setting to FreeFall is done in StartMoving()
+  m_motion_type = FreeFall ;
 
   if (!was_moving && IsMoving()) StartMoving();
 }
@@ -88,7 +88,7 @@ void Physics::AddSpeedXY (Point2d vector)
 
   m_pos_x.x1 += vector.x ;
   m_pos_y.x1 += vector.y ;
-  // setting to FreeFall is done in StartMoving()
+  m_motion_type = FreeFall ;
 
   if (!was_moving && IsMoving()) StartMoving();
 }
@@ -147,12 +147,6 @@ void Physics::StoreValue(Action *a)
   a->Push(m_elasticity_damping);
   a->Push(m_balancing_damping);
   a->Push(m_elasticity_off);
-
-  MSG_DEBUG( "physic", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
-	     typeid(*this).name(),
-             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
-             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-             m_extern_force.x, m_extern_force.y);
 }
 
 void Physics::GetValueFromAction(Action *a)
@@ -171,13 +165,7 @@ void Physics::GetValueFromAction(Action *a)
   m_rope_elasticity    = a->PopDouble();
   m_elasticity_damping = a->PopDouble();
   m_balancing_damping  = a->PopDouble();
-  m_elasticity_off     = !!a->PopInt();
-
-  MSG_DEBUG( "physic", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
-	     typeid(*this).name(),
-             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
-             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-             m_extern_force.x, m_extern_force.y);
+  m_elasticity_off     = a->PopInt();
 }
 
 void Physics::SetExternForceXY (const Point2d& vector)

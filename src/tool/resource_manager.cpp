@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -153,7 +153,7 @@ MouseCursor ResourceManager::LoadMouseCursor(const Profile *profile, const std::
 Surface ResourceManager::LoadImage(const std::string& filename,
         bool alpha, bool set_colorkey, Uint32 colorkey) const
 {
-  Surface pre_surface(filename.c_str());
+  Surface pre_surface = Surface(filename.c_str());
   Surface end_surface;
 
   if(set_colorkey)

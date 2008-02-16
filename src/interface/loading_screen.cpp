@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ void LoadingScreen::DrawBackground()
 void LoadingScreen::StartLoading(uint nb, const std::string& resource,
                                  const std::string& label) const
 {
-  const Surface& image = resource_manager.LoadImage(res, "loading_screen/"+resource);
+  Surface image = resource_manager.LoadImage(res, "loading_screen/"+resource);
 
   int slot_margin_x = (120/2 - image.GetWidth()/2);
   int x = (AppWormux::GetInstance()->video->window.GetWidth()/2)- (3*120) + nb*120;

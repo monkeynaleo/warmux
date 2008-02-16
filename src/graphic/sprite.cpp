@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,24 +55,19 @@ Sprite::Sprite(const Surface& surface, bool _smooth) :
 }
 
 Sprite::Sprite(const Sprite &other) :
-  smooth(other.smooth),
   cache(*this),
-  animation(other.animation, *this),
-  frames()
+  animation(other.animation,*this)
 {
-  Constructor();
-  current_surface = other.current_surface;
-  show = other.show;
-  current_frame = other.current_frame;
   frame_width_pix = other.frame_width_pix;
   frame_height_pix = other.frame_height_pix;
-  alpha = other.alpha;
   scale_x = other.scale_x;
   scale_y = other.scale_y;
+  alpha = other.alpha;
   rotation_rad = other.rotation_rad;
-  rhs_pos = other.rhs_pos;
+  current_frame = other.current_frame;
   rot_hotspot = other.rot_hotspot;
-  rotation_point = other.rotation_point;
+  show = other.show;
+  smooth = other.smooth;
 
   for(unsigned int f=0;f<other.frames.size();f++)
     AddFrame(other.frames[f].surface,other.frames[f].delay);
@@ -85,8 +80,7 @@ Sprite::Sprite(const Sprite &other) :
     EnableFlippingCache();
 }
 
-void Sprite::Constructor()
-{
+void Sprite::Constructor() {
   show = true;
   current_frame = 0;
   frame_width_pix = frame_height_pix = 0;
@@ -96,8 +90,7 @@ void Sprite::Constructor()
   SetRotation_HotSpot(center);
 }
 
-void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y)
-{
+void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y){
    Point2i f;
 
    this->frame_width_pix = frameSize.x;
@@ -107,7 +100,7 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 
    for( f.y = 0; f.y < nb_frames_y; f.y++)
      for( f.x = 0; f.x < nb_frames_x; f.x++){
-       Surface new_surf(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
+       Surface new_surf = Surface(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
        Rectanglei sr(f * frameSize, frameSize);
 
        new_surf.Blit( surface, sr, Point2i(0, 0));
@@ -116,7 +109,7 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 }
 
 void Sprite::AddFrame(const Surface &surf, unsigned int delay){
-  frames.push_back( SpriteFrame(surf, delay) );
+          frames.push_back( SpriteFrame(surf, delay) );
 }
 
 void Sprite::SetSize(unsigned int w, unsigned int h){
@@ -131,7 +124,7 @@ void Sprite::SetSize(const Point2i &size){
 }
 
 unsigned int Sprite::GetWidth() const{
-   return static_cast<uint>(fabsf(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)) + 0.5);
+   return static_cast<uint>(frame_width_pix * (scale_x>0?scale_x:-scale_x));
 }
 
 unsigned int Sprite::GetWidthMax() const{
@@ -142,7 +135,7 @@ unsigned int Sprite::GetWidthMax() const{
 }
 
 unsigned int Sprite::GetHeight() const{
-   return static_cast<uint>(fabsf(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)) + 0.5);
+   return static_cast<uint>(frame_height_pix * (scale_y>0?scale_y:-scale_y));
 }
 
 unsigned int Sprite::GetHeightMax() const{
@@ -152,23 +145,19 @@ unsigned int Sprite::GetHeightMax() const{
     return GetHeight();
 }
 
-Point2i Sprite::GetSize() const
-{
+Point2i Sprite::GetSize() const{
         return Point2i(GetWidth(), GetHeight());
 }
 
-Point2i Sprite::GetSizeMax() const
-{
+Point2i Sprite::GetSizeMax() const{
         return Point2i(GetWidthMax(), GetHeightMax());
 }
 
-unsigned int Sprite::GetFrameCount() const
-{
+unsigned int Sprite::GetFrameCount() const{
    return frames.size();
 }
 
-void Sprite::SetCurrentFrame(unsigned int frame_no)
-{
+void Sprite::SetCurrentFrame( unsigned int frame_no){
   ASSERT (frame_no < frames.size());
   if (current_frame != frame_no) {
     cache.InvalidLastFrame();
@@ -177,70 +166,58 @@ void Sprite::SetCurrentFrame(unsigned int frame_no)
   current_frame = frame_no;
 }
 
-unsigned int Sprite::GetCurrentFrame() const
-{
+unsigned int Sprite::GetCurrentFrame() const{
   ASSERT(current_frame < frames.size());
   return current_frame;
 }
 
-SpriteFrame& Sprite::operator[] (unsigned int index)
-{
+SpriteFrame& Sprite::operator[] (unsigned int index){
   return frames.at(index);
 }
 
-const SpriteFrame& Sprite::operator[] (unsigned int index) const
-{
+const SpriteFrame& Sprite::operator[] (unsigned int index) const{
   return frames.at(index);
 }
 
-const SpriteFrame& Sprite::GetCurrentFrameObject() const
-{
+const SpriteFrame& Sprite::GetCurrentFrameObject() const{
    return frames[current_frame];
 }
 
-void Sprite::Scale( float _scale_x, float _scale_y)
-{
+void Sprite::Scale( float _scale_x, float _scale_y){
    this->scale_x = _scale_x;
    this->scale_y = _scale_y;
    cache.InvalidLastFrame();
 }
 
-void Sprite::ScaleSize(int width, int height)
-{
+void Sprite::ScaleSize(int width, int height){
   Scale(float(width)/float(frame_width_pix),
         float(height)/float(frame_height_pix));
 }
 
-void Sprite::ScaleSize(const Point2i& size)
-{
+void Sprite::ScaleSize(const Point2i& size){
         ScaleSize(size.x, size.y);
 }
 
-void Sprite::GetScaleFactors( float &_scale_x, float &_scale_y) const
-{
+void Sprite::GetScaleFactors( float &_scale_x, float &_scale_y) const {
    _scale_x = this->scale_x;
    _scale_y = this->scale_y;
 }
 
-void Sprite::SetFrameSpeed(unsigned int nv_fs)
-{
+void Sprite::SetFrameSpeed(unsigned int nv_fs){
    for ( unsigned int f = 0 ; f < frames.size() ; f++)
      frames[f].delay = nv_fs;
 }
 
-void Sprite::SetAlpha( float _alpha)
-{
+void Sprite::SetAlpha( float _alpha){
   ASSERT(_alpha >= 0.0 && _alpha <= 1.0);
   this->alpha = _alpha;
 }
 
-float Sprite::GetAlpha() const
-{
+float Sprite::GetAlpha() const {
   return alpha;
 }
 
-void Sprite::SetRotation_rad( double angle_rad)
-{
+void Sprite::SetRotation_rad( double angle_rad){
    while(angle_rad > 2*M_PI)
      angle_rad -= 2 * M_PI;
    while(angle_rad <= -2*M_PI)
@@ -268,8 +245,7 @@ void Sprite::SetRotation_HotSpot( const Point2i& new_hotspot)
     rot_hotspot = center; // avoid using Calculate_Rotation_Offset, thus avoiding a division by zero
 }
 
-void Sprite::Calculate_Rotation_Offset(const Surface& tmp_surface)
-{
+void Sprite::Calculate_Rotation_Offset(const Surface& tmp_surface){
   const SpriteFrame& frame = GetCurrentFrameObject();
   const Surface &surface = frame.surface;
   // Calculate offset of the depending on hotspot rotation position :
@@ -282,10 +258,12 @@ void Sprite::Calculate_Rotation_Offset(const Surface& tmp_surface)
   rotation_point.y = surfaceHeight / 2 - tmp_surface.GetHeight() / 2;
 
   if(rot_hotspot == center)
-    return;
+      return;
 
-  if(rot_hotspot != user_defined) {
-    switch(rot_hotspot) {
+  if(rot_hotspot != user_defined)
+  {
+    switch(rot_hotspot)
+    {
     case top_left:      rhs_pos = Point2i( 0,              0);               break;
     case top_center:    rhs_pos = Point2i( surfaceWidth/2, 0);               break;
     case top_right:     rhs_pos = Point2i( surfaceWidth,   0);               break;
@@ -331,31 +309,26 @@ void Sprite::Calculate_Rotation_Offset(const Surface& tmp_surface)
   rotation_point.y += rhs_pos_tmp.y;
 }
 
-void Sprite::Start()
-{
+void Sprite::Start(){
    show = true;
    animation.Start();
    cache.InvalidLastFrame();
 }
 
-void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y)
-{
+void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y){
   RefreshSurface();
-  Blit(dest, pos_x, pos_y, 0, 0, current_surface.GetWidth(), current_surface.GetHeight());
+    Blit(dest, pos_x, pos_y, 0, 0, current_surface.GetWidth(), current_surface.GetHeight());
 }
 
-void Sprite::Blit( Surface &dest, const Point2i &pos)
-{
-  Blit(dest, pos.GetX(), pos.GetY());
+void Sprite::Blit( Surface &dest, const Point2i &pos){
+        Blit(dest, pos.GetX(), pos.GetY());
 }
 
-void Sprite::Blit( Surface &dest, const Rectanglei &srcRect, const Point2i &destPos)
-{
-  Blit(dest, destPos.GetX(), destPos.GetY(), srcRect.GetPositionX(), srcRect.GetPositionY(), srcRect.GetSizeX(), srcRect.GetSizeY() );
+void Sprite::Blit( Surface &dest, const Rectanglei &srcRect, const Point2i &destPos){
+        Blit(dest, destPos.GetX(), destPos.GetY(), srcRect.GetPositionX(), srcRect.GetPositionY(), srcRect.GetSizeX(), srcRect.GetSizeY() );
 }
 
-void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
-{
+void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h){
   if (!show)
         return;
 
@@ -364,9 +337,10 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   Rectanglei srcRect (src_x, src_y, w, h);
   Rectanglei dstRect (pos_x + rotation_point.x, pos_y + rotation_point.y, w, h);
 
-  if(alpha == 1.0) {
+  if(alpha == 1.0)
     dest.Blit(current_surface, srcRect, dstRect.GetPosition());
-  } else {
+  else
+  {
     Surface surf_alpha;
     surf_alpha.NewSurface(srcRect.GetSize(),SDL_SWSURFACE,false);
     surf_alpha.Blit(dest,dstRect,Point2i(0,0));
@@ -379,8 +353,7 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   world.ToRedrawOnScreen(dstRect);
 }
 
-void Sprite::Finish()
-{
+void Sprite::Finish(){
   animation.Finish();
   switch(animation.GetShowOnFinish())
   {
@@ -398,18 +371,15 @@ void Sprite::Finish()
   cache.InvalidLastFrame();
 }
 
-void Sprite::Update()
-{
+void Sprite::Update(){
   animation.Update();
 }
 
-void Sprite::Draw(const Point2i &pos)
-{
+void Sprite::Draw(const Point2i &pos){
   DrawXY(pos - Camera::GetInstance()->GetPosition());
 }
 
-void Sprite::DrawXY(const Point2i &pos)
-{
+void Sprite::DrawXY(const Point2i &pos){
   if( !show )
     return;
 
@@ -420,13 +390,11 @@ void Sprite::Show() { show = true; }
 void Sprite::Hide() { show = false; }
 bool Sprite::IsFinished() const { return animation.IsFinished(); }
 
-void Sprite::EnableRotationCache(unsigned int cache_size)
-{
+void Sprite::EnableRotationCache(unsigned int cache_size) {
   cache.EnableRotationCache(frames, cache_size);
 }
 
-void Sprite::EnableFlippingCache()
-{
+void Sprite::EnableFlippingCache() {
   cache.EnableFlippingCache(frames);
 }
 
@@ -482,9 +450,8 @@ void Sprite::RefreshSurface()
     Calculate_Rotation_Offset(current_surface);
 }
 
-Surface Sprite::GetSurface() const
-{
-  ASSERT(!current_surface.IsNull());
+Surface Sprite::GetSurface() const {
+  ASSERT ( !current_surface.IsNull() );
   return current_surface;
 }
 

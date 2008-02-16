@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@ void Water::Reset(){
   actif = ActiveMap()->UseWater();
   if(!actif) return;
   Init();
-  water_height = WATER_INITIAL_HEIGHT;
+  hauteur_eau = WATER_INITIAL_HEIGHT;
   temps_montee = GO_UP_TIME * 60 * 1000;
   Refresh(); // Calculate first height position
 }
@@ -122,7 +122,7 @@ void Water::Refresh(){
     }
     else{
       temps_montee += GO_UP_TIME * 60 * 1000;
-      water_height += GO_UP_STEP;
+      hauteur_eau += GO_UP_STEP;
     }
   }
 
@@ -131,12 +131,6 @@ void Water::Refresh(){
 void Water::Draw(){
   if (!actif)
     return;
-
-  int screen_bottom = (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
-  int water_top = world.GetHeight() - (water_height + height_mvt) - 20;
-
-  if ( screen_bottom < water_top )
-    return; // save precious CPU time
 
   /* Now the wave has changed, we need to build the new image pattern */
   pattern.SetAlpha(0, 0);
@@ -210,8 +204,8 @@ void Water::Draw(){
   int x0 = Camera::GetInstance()->GetPosition().x % pattern_width;
 
   int r = 0;
-  for(int y = water_top;
-      y < screen_bottom;
+  for(int y = world.GetHeight() - (hauteur_eau + height_mvt) - 20;
+      y < (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
       y += pattern_height)
   {
     Surface *bitmap = r ? &bottom : &pattern;
@@ -230,7 +224,7 @@ int Water::GetHeight(int x) const
   if (IsActive())
     return height[x % pattern_width]
            + world.GetHeight()
-           - (water_height + height_mvt);
+           - (hauteur_eau + height_mvt);
   else
     return world.GetHeight();
 }

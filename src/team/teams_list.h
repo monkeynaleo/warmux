@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <vector>
-#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Forward declarations
@@ -32,7 +31,7 @@ class Team;
 class ConfigTeam;
 class Character;
 
-class TeamsList : public Singleton<TeamsList>
+class TeamsList
 {
 public:
   typedef std::list<Team *>::iterator full_iterator;
@@ -44,17 +43,18 @@ private:
   typedef std::list<uint>::iterator selection_iterator;
   std::list<uint> selection;
   std::vector<Team*>::iterator active_team;
+  static TeamsList *singleton;
 
   void LoadOneTeam (const std::string &dir, const std::string &file);
-  void LoadList();
-
-protected:
-  friend class Singleton<TeamsList>;
   TeamsList();
   ~TeamsList();
+  void LoadList();
+
+  static TeamsList *GetInstance();
 
 public:
   friend TeamsList &GetTeamsList(void);
+  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
   void NextTeam();
   Team* GetNextTeam();
   Team& ActiveTeam();
@@ -96,7 +96,7 @@ Character& ActiveCharacter();
 
 bool compareTeams(const Team *a, const Team *b);
 
-inline TeamsList &GetTeamsList(void) { return TeamsList::GetRef(); };
+inline TeamsList &GetTeamsList(void) { return *TeamsList::GetInstance(); };
 
 //-----------------------------------------------------------------------------
 #endif

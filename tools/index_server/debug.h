@@ -32,7 +32,7 @@
 #define	CONN		3
 #define INFO		4
 
-#define LOG_LEVEL	TRAFFIC
+#define LOG_LEVEL	INFO
 
 
 #ifdef DEBUG

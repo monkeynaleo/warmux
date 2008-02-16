@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@
 #define LINE_THICKNESS  2
 
 #define GRAPH_BORDER        20
-#define GRAPH_START_Y       400
+#define GRAPH_START_Y       450
 
 const Point2i BorderSize(DEF_BORDER, DEF_BORDER);
 const Vector2<double> Zoom(1.7321, 1.7321);
@@ -428,7 +428,7 @@ void ResultsMenu::SetResult(int i)
   if (winner_box)
     winner_box->NeedRedrawing();
 
-  DrawPodium(Point2i(70,250));
+  DrawPodium(Point2i(70,350));
 
   index = i;
   if (index < 0)

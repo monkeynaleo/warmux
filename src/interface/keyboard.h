@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,17 +23,18 @@
 #define KEYBOARD_H
 //-----------------------------------------------------------------------------
 #include "interface/man_machine_interface.h"
-#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
-class Keyboard : public ManMachineInterface, public Singleton<Keyboard>
+class Keyboard : public ManMachineInterface
 {
-protected:
-  friend class Singleton<Keyboard>;
+private:
+
   Keyboard();
   void SetDefaultConfig();
+  static Keyboard * singleton;
 
 public:
+  static Keyboard * GetInstance();
   void HandleKeyEvent(const SDL_Event& event);
 };
 

@@ -74,7 +74,7 @@ bool SyncSlave::Start()
 
 	std::string my_hostname;
 	config.Get( "my_hostname", my_hostname);
-
+ 
 	// GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
 	while ((read = getline(line, fin)) >= 0)
 	{
@@ -109,7 +109,7 @@ void SyncSlave::CheckGames()
 	{
 		int received;
 		bool result = false;
-
+				
 		if( ioctl( it->second->GetFD(), FIONREAD, &received) == -1 )
 		{
 			PRINT_ERROR;
@@ -151,6 +151,8 @@ IndexServerConn::~IndexServerConn()
 
 bool IndexServerConn::HandleMsg(const std::string & full_str)
 {
+	int nbr;
+	int nbr2;
 	switch(msg_id)
 	{
 	case TS_MSG_VERSION:
@@ -162,63 +164,51 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
 		DPRINT(INFO,"Server identified..");
 		break;
 	case TS_MSG_WIS_VERSION:
-	        {
-		  int version;
-		  if (received < 4) // The message is not completely received
-		    return true;
-		  if (!ReceiveInt(version)) // Receive the version number of the server index
-		    return false;
-		  if (version > VERSION)
-		    {
-		      DPRINT(INFO,"The server at %i have a version %i, while we are only running a %i version",
-			     GetIP(), version, VERSION);
-		      exit(EXIT_FAILURE);
-		    }
-		  else if(version < VERSION)
-		    {
-		      DPRINT(INFO,"This server is running an old version (v%i) !", version);
-		      return false;
-		    }
-		  DPRINT(INFO,"We are running the same version..");
+		if( received < 4 ) // The message is not completely received
+			return true;
+		if(!ReceiveInt(nbr)) // Receive the version number of the server index
+			return false;
+		if(nbr > VERSION)
+		{
+			DPRINT(INFO,"The server at %i have a version %i, while we are only running a %i version",GetIP(), nbr, VERSION);
+			exit(EXIT_FAILURE);
 		}
+		else
+		if(nbr < VERSION)
+		{
+			DPRINT(INFO,"This server is running an old version (v%i) !",nbr);
+			return false;
+		}
+		DPRINT(INFO,"We are running the same version..");
 		break;
 	case TS_MSG_JOIN_LEAVE:
-	        {
-		  int ip;
-		  int port;
-		  std::string game_name;
-
-		  if (received < 8) // The message is not completely received
-		    return true;
-		  if (!ReceiveInt(ip)) // Receive the IP of the wormux server
-		    return false;
-		  if (!ReceiveInt(port)) // Receive the port of the wormux server
-		    return false;
-		  if (!ReceiveStr(game_name))
-		    return false;
-
-		  if (port < 0) // means it disconnected
-		    {
-		      std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( full_str );
-		      if( serv != fake_clients.end() )
+		if( received < 8 ) // The message is not completely received
+			return true;
+		if(!ReceiveInt(nbr)) // Receive the IP of the wormux server
+			return false;
+		if(!ReceiveInt(nbr2)) // Receive the port of the wormux server
+			return false;
+		if(nbr2 < 0) // means it disconnected
+		{
+			std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( full_str );
+			if( serv != fake_clients.end() )
 			{
-			  do
-			    {
-			      if( serv->second.ip == ip
-				  &&  serv->second.port == -port )
+				do
 				{
-				  fake_clients.erase(serv);
-				  DPRINT(MSG, "A fake server disconnected");
-				  break;
-				}
-			    } while (serv != fake_clients.upper_bound(full_str));
+					if( serv->second.ip == nbr 
+					&&  serv->second.port == - nbr2 ) 
+					{
+						fake_clients.erase( serv );
+						DPRINT(MSG, "A fake server disconnected");
+						break;
+					}
+				} while (serv != fake_clients.upper_bound(full_str));
 			}
-		    }
-		  else
-		    {
-		      fake_clients.insert( std::make_pair(full_str, FakeClient(ip, port, game_name)));
-		      stats.NewFakeServer();
-		    }
+		}
+		else
+		{
+			fake_clients.insert( std::make_pair(full_str, FakeClient(nbr, nbr2)));
+			stats.NewFakeServer();
 		}
 		break;
 	default:

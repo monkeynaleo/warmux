@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,6 @@
 #include "gui/big/button_pic.h"
 #include "include/app.h"
 #include "menu/options_menu.h"
-#include "menu/help_menu.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
@@ -46,9 +45,8 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
   uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
 
+  Box* box = new HBox(110, true);
   Point2i size(100,100);
-
-  Box* box = new GridBox(AppWormux::GetInstance()->video->window.GetWidth()/2, size, true);
 
   bt_continue_play = new ButtonPic(_("Back to battle"),
 				   "menu/ico_back_to_battle", size);
@@ -58,9 +56,9 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
 				  "menu/ico_options_menu", size);
   box->AddWidget(bt_options_menu);
 
-  bt_help_menu = new ButtonPic(_("Help"),
+  bt_help = new ButtonPic(_("Help"),
  			  "menu/ico_help", size);
-  box->AddWidget(bt_help_menu);
+  box->AddWidget(bt_help);
 
   bt_main_menu = new ButtonPic(_("Quit battle"),
 			       "menu/ico_quit_battle", size);
@@ -94,13 +92,6 @@ void PauseMenu::RunOptionsMenu()
   close_menu = true;
 }
 
-void PauseMenu::RunHelpMenu()
-{
-  HelpMenu menu;
-  menu.Run();
-  close_menu = true;
-}
-
 bool PauseMenu::signal_ok()
 {
   bool r = false;
@@ -112,8 +103,6 @@ bool PauseMenu::signal_ok()
     BackToGame();
   } else if (w == bt_options_menu) {
     RunOptionsMenu();
-  } else if (w == bt_help_menu) {
-    RunHelpMenu();
   }
 
   return r;
@@ -145,8 +134,6 @@ void PauseMenu::OnClickUp(const Point2i &mousePosition, int button)
       BackToGame();
     } else if (bt_options_menu->Contains(mousePosition)) {
       RunOptionsMenu();
-    } else if (bt_help_menu->Contains(mousePosition)) {
-      RunHelpMenu();
     }
   }
 }

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -310,9 +310,6 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         /* Horizontal line */
         dx = x2-x1;
         xdir = 1;
-	if (dx == 0) {
-	  return 0;
-	}
         if (dx < 0) {
             dx = -dx;
             xdir = -1;
@@ -388,9 +385,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     /*
      * Check for special cases
      */
-    if (dx == 0 && dy == 0) {
-      /* nothing to do */
-    } else if (dx == 0) {
+    if (dx == 0) {
         /* Vertical line */
         step = dy;
         while (--dy) {

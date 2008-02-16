@@ -29,10 +29,6 @@
 <alias movement="weapon-riot_bomb-select" correspond_to="weapon-bazooka-select" />
 <alias movement="weapon-automatic_bazooka-select" correspond_to="weapon-bazooka-select" />
 <alias movement="weapon-automatic_bazooka-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
-<alias movement="weapon-cluzooka-select" correspond_to="weapon-bazooka-select" />
-<alias movement="weapon-cluzooka-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
-<alias movement="weapon-cluzooka-select" correspond_to="weapon-bazooka-select" />
-<alias movement="weapon-cluzooka-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
 <alias movement="weapon-cluster_bomb-begin-shoot" correspond_to="weapon-grenade-begin-shoot" />
 <alias movement="weapon-cluster_bomb-end-shoot" correspond_to="weapon-grenade-end-shoot" />
 <alias movement="weapon-disco_grenade-begin-shoot" correspond_to="weapon-grenade-begin-shoot" />
@@ -45,7 +41,7 @@
 <alias movement="weapon-shotgun-select" correspond_to="weapon-gun-select" />
 <alias movement="weapon-snipe_rifle-select" correspond_to="weapon-gun-select" />
 <alias movement="weapon-flamethrower-select" correspond_to="weapon-gun-select" />
-<alias movement="fly-black" correspond_to="fly" />
+
 
 
 
@@ -121,8 +117,8 @@
 	<image file="eyelid.png">
 		<grid pos="0,0" size="9,7" array="7,1" />
 	</image>
-	<anchor dx="0" dy="0"/>
 	<animation speed="200" loop_mode="pingpong" />
+	<anchor dx="0" dy="0"/>
 </sprite>
 
 <!-- ###### Arms ###### -->
@@ -170,66 +166,9 @@
 </sprite>
 
 <!-- ###### Black ###### -->
-<!-- Body -->
 <sprite name="body-black" type="body" >
-	<image file="b_body.png"/>
-	<anchor dx="16" dy="17"/>
-	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
-	<attached member_type="head" frame="*" dx="14" dy="6"/>
-	<attached member_type="arm-right"  frame="*" dx="11" dy="12"/>
-	<attached member_type="arm-left"  frame="*" dx="16" dy="11"/>
-	<attached member_type="foot-left"  frame="*" dx="18" dy="26"/>
-	<attached member_type="foot-right"  frame="*" dx="12" dy="28"/>
-	<attached member_type="jetpack"  frame="*" dx="5" dy="-9"/>
-	<attached member_type="construct" frame="*" dx="12" dy="0"/>
-	<attached member_type="tail" frame="*" dx="8" dy="22"/>
-	<attached member_type="hula" frame="*" dx="14" dy="20"/>
-</sprite>
-<!-- Arms -->
-<sprite name="arm-left-black" type="arm-left" >
-	<image file="b_arm.png"/>
-	<anchor dx="7" dy="1"/>
-</sprite>
-<sprite name="arm-right-black" type="arm-right" >
-	<image file="b_arm.png"/>
-	<anchor dx="7" dy="1"/>
-	<attached member_type="weapon" frame="*" dx="3" dy="13"/>
-	<attached member_type="yoyo" frame="*" dx="-19" dy="5"/>
-</sprite>
-<!-- Legs -->
-<sprite name="foot-left-black" type="foot-left" >
-	<image file="b_foot.png"/>
-	<anchor dx="3" dy="1"/>
-</sprite>
-<sprite name="foot-right-black" type="foot-right" >
-	<image file="b_foot.png"/>
-	<anchor dx="3" dy="1"/>
-</sprite>
-<!-- Tail -->
-<sprite name="tail-black" type="tail" >
-	<image file="b_tail.png"/>
-	<anchor dx="13" dy="0"/>
-</sprite>
-<!-- Head -->
-<sprite name="head-black" type="head">
-	<image file="b_head.png"/>
-	<anchor dx="10" dy="16"/>
-	<attached member_type="helmet" frame="*" dx="1" dy="-1"/>
-	<attached member_type="eyes-normal" frame="*" dx="11" dy="10"/>
-</sprite>
-<sprite name="eyes-black" type="eyes-normal">
-	<image file="eyes.png"/>
-	<anchor dx="4" dy="3"/>
-	<attached member_type="eyelid" frame="*" dx="0" dy="0"/>
-	<attached member_type="pupil-right" frame="*" dx="4" dy="3"/>
-	<attached member_type="pupil-left" frame="*" dx="6" dy="3"/>
-</sprite>
-<sprite name="eyelid-black" type="eyelid">
-	<image file="b_eyelid.png">
-		<grid pos="0,0" size="9,7" array="7,1" />
-	</image>
-	<anchor dx="0" dy="0"/>
-	<animation speed="200" loop_mode="pingpong" />
+	<image file="black.png"/>
+	<anchor dx="12" dy="15"/>
 </sprite>
 
 <!-- ###### Construct ###### -->
@@ -268,165 +207,139 @@
 
 <!-- ###### Normal ###### -->
 <clothe name="normal">
-	<c_member name="arm-left"/>
-	<c_member name="foot-left"/>
-	<c_member name="body-normal"/>
-	<c_member name="tail"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid-normal"/>
-	<c_member name="foot-right"/>
-	<c_member name="arm-right"/>
-	<c_member name="weapon"/>
+	<member name="arm-left"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="tail"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="eyelid-normal"/>
+	<member name="foot-right"/>
+	<member name="arm-right"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- ###### Jetpack ###### -->
 <clothe name="jetpack">
-	<c_member name="arm-left"/>
-	<c_member name="foot-left"/>
-	<c_member name="body-normal"/>
-	<c_member name="tail"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right"/>
-	<c_member name="arm-right"/>
-	<c_member name="jetpack"/>
-	<c_member name="jetpack-heli"/>
+	<member name="arm-left"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="tail"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right"/>
+	<member name="jetpack"/>
+	<member name="jetpack-heli"/>
 </clothe>
 
 <clothe name="jetpack-fire"> <!-- When jetpack weapon is selected and used -->
-	<c_member name="arm-left"/>
-	<c_member name="foot-left"/>
-	<c_member name="body-normal"/>
-	<c_member name="tail"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right"/>
-	<c_member name="arm-right"/>
-	<c_member name="jetpack"/>
-	<c_member name="jetpack-heli"/>
+	<member name="arm-left"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="tail"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right"/>
+	<member name="jetpack"/>
+	<member name="jetpack-heli"/>
 </clothe>
 
 <!-- ###### Helmet ###### -->
 <clothe name="helmet">
-	<c_member name="arm-left"/>
-	<c_member name="foot-left"/>
-	<c_member name="body-normal"/>
-	<c_member name="tail"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right"/>
-	<c_member name="arm-right"/>
-	<c_member name="helmet"/>
+	<member name="arm-left"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="tail"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right"/>
+	<member name="helmet"/>
 </clothe>
 
 <!-- ###### Animation Yoyo ###### -->
 <clothe name="animation0">
-	<c_member name="arm-left"/>
-	<c_member name="foot-left"/>
-	<c_member name="body-normal"/>
-	<c_member name="tail"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right"/>
-	<c_member name="yoyo"/>
-	<c_member name="arm-right"/>
+	<member name="arm-left"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="tail"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="yoyo"/>
+	<member name="arm-right"/>
 </clothe>
 
 <!-- ###### Animation Hula hoop ###### -->
 <clothe name="animation2">
-	<c_member name="arm-left"/>
-	<c_member name="hula"/>
-	<c_member name="foot-left"/>
-	<c_member name="body-normal"/>
-	<c_member name="tail"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="foot-right"/>
-	<c_member name="arm-right"/>
-	<c_member name="hoop"/>
+	<member name="arm-left"/>
+	<member name="hula"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="tail"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right"/>
+	<member name="hoop"/>
 </clothe>
 
 <!-- ###### Dead ###### -->
 <clothe name="dead">
-	<c_member name="body-dead"/>
+	<member name="body-dead"/>
 </clothe>
 
 <!-- ###### Black ###### -->
 <clothe name="black">
-	<c_member name="arm-left-black"/>
-	<c_member name="foot-left-black"/>
-	<c_member name="body-black"/>
-	<c_member name="tail"/>
-	<c_member name="head-black"/>
-	<c_member name="eyes-black"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid-black"/>
-	<c_member name="foot-right-black"/>
-	<c_member name="arm-right-black"/>
-	<c_member name="weapon"/>
+	<member name="body-black"/>
 </clothe>
 
-<!-- ###### Fly-Black ###### -->
-<clothe name="fly-black">
-	<c_member name="arm-left-black"/>
-	<c_member name="foot-left-black"/>
-	<c_member name="body-black"/>
-	<c_member name="tail-black"/>
-	<c_member name="head-black"/>
-	<c_member name="eyes-black"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid-black"/>
-	<c_member name="foot-right-black"/>
-	<c_member name="arm-right-black"/>
-	<c_member name="weapon"/>
-</clothe>
 
 <!-- # Construct/Airhammer helmet # -->
 <clothe name="weapon-construct">
-	<c_member name="c2"/>
-	<c_member name="arm-left"/>
-	<c_member name="foot-left"/>
-	<c_member name="body-normal"/>
-	<c_member name="tail"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="construct"/>
-	<c_member name="foot-right"/>
-	<c_member name="arm-right"/>
-	<c_member name="weapon"/>
+	<member name="c2"/>
+	<member name="arm-left"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="tail"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="construct"/>
+	<member name="foot-right"/>
+	<member name="arm-right"/>
+	<member name="weapon"/>
 </clothe>
 
 <clothe name="weapon-airhammer">
-	<c_member name="c2"/>
-	<c_member name="arm-left"/>
-	<c_member name="foot-left"/>
-	<c_member name="body-normal"/>
-	<c_member name="tail"/>
-	<c_member name="head-normal"/>
-	<c_member name="eyes-normal"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="construct"/>
-	<c_member name="foot-right"/>
-	<c_member name="arm-right"/>
-	<c_member name="weapon"/>
+	<member name="c2"/>
+	<member name="arm-left"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="tail"/>
+	<member name="head-normal"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="construct"/>
+	<member name="foot-right"/>
+	<member name="arm-right"/>
+	<member name="weapon"/>
 </clothe>
 
 
@@ -769,7 +682,7 @@
 <movement name="fly" speed="150">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
-		<member type="body" angle="90"/> 
+		<member type="body" angle="90" follow_speed="true" /> 
 		<member type="head" angle="-140"/>
 		<member type="arm-left" angle="45"/>
 		<member type="arm-right" angle="45"/>
@@ -777,7 +690,7 @@
 		<member type="foot-right" angle="45" />
 	</frame>
 	<frame>
-		<member type="body" angle="90" /> 
+		<member type="body" angle="90" follow_speed="true" /> 
 		<member type="head" angle="-140"/>
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="0"/>
@@ -785,7 +698,7 @@
 		<member type="foot-right" angle="0" />
 	</frame>
 	<frame>
-		<member type="body" angle="90" /> 
+		<member type="body" angle="90" follow_speed="true" /> 
 		<member type="head" angle="-140"/>
 		<member type="arm-left" angle="-45"/>
 		<member type="arm-right" angle="-45"/>
@@ -793,7 +706,7 @@
 		<member type="foot-right" angle="-45" />
 	</frame>
 	<frame>
-		<member type="body" angle="90" /> 
+		<member type="body" angle="90" follow_speed="true" /> 
 		<member type="head" angle="-140"/>
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="0"/>
@@ -804,18 +717,13 @@
 
 <!-- ###### Black ###### -->
 <movement name="black" speed="1000">
-	<collision_rect left="5" right="5" top="10" bottom="2" />
-	<frame>
-		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-left" angle="-40" />
-		<member type="arm-right" angle="0" />
-		<member type="foot-left" angle="0" />
-		<member type="foot-right" angle="0" />
-		<member type="tail" angle="-2" />
-		<member type="pupil-right" dx="-1" />
-		<member type="pupil-left" dx="-1" />		
-	</frame>
+        <collision_rect left="5" right="5" top="10" bottom="2" />
+        <frame>
+                <member type="body" angle="0" />
+        </frame>
 </movement>
+
+
 
 
 

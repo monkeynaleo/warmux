@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 
 #include <vector>
 #include "include/base.h"
-#include "include/singleton.h"
 #include "graphic/surface.h"
 
 // Forward declarations
@@ -96,15 +95,15 @@ public:
   const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; };
   std::string GetConfigFilepath() const;
 
-  Surface& ReadImgGround();
-  Surface& ReadImgSky();
+  Surface ReadImgGround();
+  Surface ReadImgSky();
   const Surface& ReadPreview() { LoadBasicInfo(); return preview; };
 
   const struct s_wind& GetWind() const { return wind; }; 
 
   uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; };
   uint GetNbMine() { LoadBasicInfo(); return nb_mine; };
-  Profile * ResProfile() const { return res_profile; };
+  const Profile * const ResProfile() const { return res_profile; };
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; };
   bool UseWater() { LoadBasicInfo(); return use_water; };
@@ -118,7 +117,7 @@ public:
 };
 
 
-class MapsList : public Singleton<MapsList>
+class MapsList
 {
 public:
   std::vector<InfoMap*> lst;
@@ -130,13 +129,14 @@ private:
   bool random_map;
 
   void LoadOneMap (const std::string &dir, const std::string &file);
-
-protected:
-  friend class Singleton<MapsList>;
   MapsList();
   ~MapsList();
+  static MapsList * singleton;
 
 public:
+  static void CleanUp(void) { if (singleton) delete singleton; singleton = NULL; };
+  static MapsList * GetInstance();
+
   // Return -1 if fails
   int FindMapById (const std::string &id) const;
   void SelectMapByName(const std::string &nom);

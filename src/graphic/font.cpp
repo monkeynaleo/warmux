@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -105,8 +105,12 @@ Font::~Font(){
 
   txt_iterator it;
 
-  // Fix bug #10866 and also fix memory leak.
-  surface_text_table.clear();
+  for( it = surface_text_table.begin();
+       it != surface_text_table.end();
+       ++it ){
+    //SDL_FreeSurface(it->second);
+    surface_text_table.erase(it->first);
+  }
 }
 
 void Font::ReleaseInstances(void)

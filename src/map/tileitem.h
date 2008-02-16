@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -52,16 +52,12 @@ public:
 class TileItem_Empty : public TileItem
 {
 public:
-  TileItem_Empty () { empty = NULL; };
-  ~TileItem_Empty () { if (empty) delete empty; };
+  TileItem_Empty () {};
+  ~TileItem_Empty () {};
 
-  Surface *empty;
   unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
   void Dig(const Point2i &/*position*/, const Surface& /*dig*/){};
-  Surface GetSurface() {
-    if (!empty) empty = new Surface();
-    return *empty;
-  };
+  Surface GetSurface(){return *new Surface();};
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i &pos);
   bool IsTotallyEmpty() const {return true;};

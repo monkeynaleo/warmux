@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,14 +31,15 @@ PictureWidget::PictureWidget (const Point2i& _size)
   disabled = false;
 }
 
-PictureWidget::PictureWidget (const Point2i& _size, const std::string& resource_id, bool scale)
+PictureWidget::PictureWidget (const Point2i& _size, const std::string& resource_id)
 {
   size = _size;
   spr = NULL;
   disabled = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  SetSurface(resource_manager.LoadImage(res, resource_id), scale, scale);
+  Surface tmp = resource_manager.LoadImage(res, resource_id);
+  SetSurface(tmp, false);
   resource_manager.UnLoadXMLProfile( res);
 }
 

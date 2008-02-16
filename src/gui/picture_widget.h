@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ class PictureWidget : public Widget
 
  public:
   PictureWidget(const Point2i& size);
-  PictureWidget(const Point2i& size, const std::string& resource_id, bool scale=false);
+  PictureWidget(const Point2i& size, const std::string& resource_id);
   ~PictureWidget();
   void SetSurface(const Surface& s, bool enable_scaling=false, bool antialiasing=false);
   void SetNoSurface();

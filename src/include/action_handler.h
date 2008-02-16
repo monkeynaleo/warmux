@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,15 +24,14 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
-#include "include/action.h"
-#include "include/base.h"
-#include "include/singleton.h"
+#include "action.h"
+#include "base.h"
 //-----------------------------------------------------------------------------
 
 // Forward declarations
 struct SDL_mutex;
 
-class ActionHandler : public Singleton<ActionHandler>
+class ActionHandler
 {
 private:
   // Mutex needed to be thread safe for the network
@@ -50,7 +49,11 @@ private:
   // Action queue
   std::list<Action*> queue;
 
+  static ActionHandler * singleton;
+
 public:
+  static ActionHandler * GetInstance();
+
   void NewAction(Action* a, bool repeat_to_network=true);
   void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
 
@@ -58,12 +61,9 @@ public:
   void ExecActions();
   const std::string &GetActionName(Action::Action_t action) const;
 
-protected:
-  friend class Singleton<ActionHandler>;
-  ActionHandler();
-  ~ActionHandler();
-
 private:
+  ActionHandler();
+
   /* If you need this, you probably made an error in your code... */
   ActionHandler(const ActionHandler&);
   const ActionHandler& operator=(const ActionHandler&);

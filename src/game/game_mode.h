@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@
 
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
 #include "weapon/weapon_cfg.h"
 
 namespace xmlpp
@@ -34,7 +33,7 @@ namespace xmlpp
 }
 class XmlReader;
 
-class GameMode : public Singleton<GameMode>
+class GameMode
 {
 public:
   uint nb_characters;
@@ -87,6 +86,9 @@ private:
   std::string GetObjectsFilename() const;
 
 public:
+  static void CleanUp() { if (singleton) delete singleton; singleton = NULL; };
+  static GameMode * GetInstance();
+
   const std::string& GetName() const;
 
   bool Load(void);
@@ -104,10 +106,11 @@ public:
 
   bool AllowCharacterSelection() const;
 
-protected:
-  friend class Singleton<GameMode>;
+private:
+  static GameMode * singleton;
   GameMode();
   ~GameMode();
+
 };
 
 #endif /* GAME_MODE_H */

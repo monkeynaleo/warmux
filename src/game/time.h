@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,26 +24,26 @@
 
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
 
 // XXX uint wrap-around (or at least system timer) not handled
-class Time : public Singleton<Time>
+class Time
 {
 private:
   uint        current_time;
   //uint        max_time;
   uint        delta_t;
   bool        is_game_paused;
+  static Time *singleton;
 
   uint        real_time_game_start;
   uint        real_time_pause_dt;
   uint        real_time_pause_begin;
 
-protected:
-  friend class Singleton<Time>;
+private:
   Time();
-
 public:
+  static Time *GetInstance();
+  ~Time() { singleton = NULL; };
 
   void Reset();
   bool IsGamePaused() const;

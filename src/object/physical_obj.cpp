@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -166,14 +166,14 @@ void PhysicalObj::StoreValue(Action *a)
 void PhysicalObj::GetValueFromAction(Action *a)
 {
   Physics::GetValueFromAction(a);
-  m_goes_through_wall        = !!a->PopInt();
-  m_collides_with_characters = !!a->PopInt();
-  m_collides_with_objects    = !!a->PopInt();
+  m_goes_through_wall        = a->PopInt();
+  m_collides_with_characters = a->PopInt();
+  m_collides_with_objects    = a->PopInt();
   m_rebound_position         = a->PopPoint2i();
   last_collision_type        = (collision_t)a->PopInt();
   m_minimum_overlapse_time   = (uint)a->PopInt();
-  m_ignore_movements         = !!a->PopInt();
-  m_is_character             = !!a->PopInt();
+  m_ignore_movements         = a->PopInt();
+  m_is_character             = a->PopInt();
   m_test_left                = (uint)a->PopInt();
   m_test_right               = (uint)a->PopInt();
   m_test_top                 = (uint)a->PopInt();
@@ -182,7 +182,7 @@ void PhysicalObj::GetValueFromAction(Action *a)
   m_height                   = (uint)a->PopInt();
   m_alive                    = (alive_t)a->PopInt();
   energy                     = a->PopInt();
-  m_allow_negative_y         = !!a->PopInt();
+  m_allow_negative_y         = a->PopInt();
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
@@ -437,25 +437,26 @@ void PhysicalObj::UpdatePosition ()
 
 }
 
-bool PhysicalObj::PutOutOfGround(double direction, double max_distance)
+bool PhysicalObj::PutOutOfGround(double direction)
 {
   if(IsOutsideWorld(Point2i(0, 0)))
     return false;
+
+  const int max_step = 30;
 
   if( IsInVacuum(Point2i(0, 0), false) )
     return true;
 
   double dx = cos(direction);
   double dy = sin(direction);
-  // (dx,dy) is a normal vector (cos^2+sin^2==1)
 
-  double step=1;
-  while( step<max_distance && !IsInVacuum(
-                          Point2i((int)(dx * step),(int)(dy * step)), false ))
-    step+=1.0;
+  int step=1;
+  while(step<max_step && !IsInVacuum(
+                          Point2i((int)(dx * (double)step),(int)(dy * (double)step)), false ))
+    step++;
 
-  if(step<max_distance)
-    SetXY( Point2i((int)(dx * step)+GetX(),(int)(dy * step)+GetY()) );
+  if(step<max_step)
+    SetXY( Point2i((int)(dx * (double)step)+GetX(),(int)(dy * (double)step)+GetY()) );
   else
     return false; //Can't put the object out of the ground
 
@@ -576,9 +577,7 @@ void PhysicalObj::CheckRebound()
   // cause it's almost sure this object is stuck bouncing indefinitely
   if( m_rebound_position != Point2i( -1, -1) )
   {
-    // allow infinite rebounds for Pendulum objects (e.g. characters on rope)
-    // FIXME: test that nothing bad happens because of this
-    if ( Pendulum != GetMotionType() && m_rebound_position == GetPosition() )
+    if ( m_rebound_position == GetPosition() )
     {
       MSG_DEBUG("physic.state", "%s seems to be stuck in ground. Stop moving!", m_name.c_str());
       StopMoving();

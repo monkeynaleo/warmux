@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
  *  Teams selection box
  *****************************************************************************/
 
-#include "game/config.h"
 #include "menu/teams_selection_box.h"
 #include "menu/team_box.h"
 #include "gui/label.h"
@@ -43,24 +42,36 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), 
 				       2, MAX_NB_TEAMS);
   AddWidget(teams_nb);
 
-  Point2i team_box_size((_size.GetX() - teams_nb->GetSizeX() - 60) * 2 / MAX_NB_TEAMS -10, _size.GetY()/2 -15);
+  Box * top_n_bottom_team_options = new VBox(_size.GetX() - teams_nb->GetSizeX() - 60, false);
+  top_n_bottom_team_options->SetBorder(Point2i(5,0));
+  top_n_bottom_team_options->SetMargin(10);
+  Box * top_team_options = new HBox(_size.GetY()/2 - 20, false);
+  Box * bottom_team_options = new HBox(_size.GetY()/2 - 20, false);
+  top_team_options->SetBorder(Point2i(0,0));
+  bottom_team_options->SetBorder(Point2i(0,0));
 
-  Box * teams_grid_box = new GridBox(_size.GetX() - teams_nb->GetSizeX() - 60, team_box_size, false);
+  // Initialize teams
+  uint team_w_size= top_n_bottom_team_options->GetSizeX() * 2 / MAX_NB_TEAMS;
 
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
     std::string player_name = _("Player") ;
     char num_player[4];
     sprintf(num_player, " %d", i+1);
     player_name += num_player;
-    teams_selections.push_back(new TeamBox(player_name, team_box_size));
-    teams_grid_box->AddWidget(teams_selections.at(i));
+    teams_selections.push_back(new TeamBox(player_name, Point2i(team_w_size, _size.GetY()/2)));
+    if ( i%2 == 0)
+      top_team_options->AddWidget(teams_selections.at(i));
+    else
+      bottom_team_options->AddWidget(teams_selections.at(i));
   }
 
-  AddWidget(teams_grid_box);
+  top_n_bottom_team_options->AddWidget(top_team_options);
+  top_n_bottom_team_options->AddWidget(bottom_team_options);
+
+  AddWidget(top_n_bottom_team_options);
 
   // Load Teams' list
   GetTeamsList().full_list.sort(compareTeams);
-  GetTeamsList().InitList(Config::GetInstance()->AccessTeamList());
 
   TeamsList::iterator
     it=GetTeamsList().playing_list.begin(),

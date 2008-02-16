@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -138,7 +138,6 @@ unsigned char *Surface::GetPixels() const{
 Surface &Surface::operator=(const Surface & src){
   AutoFree();
   surface = src.surface;
-  autoFree = true;
   if( !IsNull() )
     surface->refcount++;
 
@@ -662,7 +661,7 @@ int Surface::ImgSave(const std::string& filename){
 * (because we juste need an index in array, not an angle) */
 static const double ratio_deg_to_rad = 180 / M_PI;
 Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
-  SDL_Surface *surf;
+  Surface newSurf;
 
 #ifdef BUGGY_SDLGFX
   /* From SDLGFX website, 
@@ -674,41 +673,45 @@ Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
     smooth = SMOOTHING_OFF;
 #endif
 
-  if (EqualsZero(angle))
-    surf = zoomSurface(surface, zoomx, zoomy, smooth);
+  if (fabs(angle) < EPS_ZERO)
+    newSurf.SetSurface( zoomSurface(surface, zoomx, zoomy, smooth) );
   else if (zoomx == zoomy && zoomx > 0.0)
-    surf = rotozoomSurface(surface, angle * ratio_deg_to_rad , zoomx, smooth);
+    newSurf.SetSurface( rotozoomSurface(surface, angle * ratio_deg_to_rad , zoomx, smooth) );
   else
-    surf = rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth);
+    newSurf.SetSurface( rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth) );
 
-  if(!surf)
+  if( newSurf.IsNull() )
     Error( "Unable to make a rotozoom on the surface !" );
 
-  return Surface(surf);
+  return newSurf;
 }
 
 /**
  *
  */
 Surface Surface::DisplayFormatAlpha(){
-  SDL_Surface *surf = SDL_DisplayFormatAlpha(surface);
+  Surface newSurf;
 
-  if( !surf )
+  newSurf.SetSurface( SDL_DisplayFormatAlpha( surface ) );
+
+  if( newSurf.IsNull() )
     Error( "Unable to convert the surface to a surface compatible with the display format with alpha." );
 
-  return Surface(surf);
+  return newSurf;
 }
 
 /**
  *
  */
 Surface Surface::DisplayFormat(){
-  SDL_Surface *surf = SDL_DisplayFormat(surface);
+  Surface newSurf;
 
-  if( !surf )
+  newSurf.SetSurface( SDL_DisplayFormat( surface ) );
+
+  if( newSurf.IsNull() )
     Error( "Unable to convert the surface to a surface compatible with the display format." );
 
-  return Surface(surf);
+  return newSurf;
 }
 
 

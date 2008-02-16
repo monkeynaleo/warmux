@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ void Ground::Init(){
   std::cout.flush();
 
   // Load ground data
-  Surface& m_image = ActiveMap()->ReadImgGround();
+  Surface m_image = ActiveMap()->ReadImgGround();
   if(ActiveMap()->IsOpened()) {
     LoadImage(m_image, ActiveMap()->GetUpperLeftPad(), ActiveMap()->GetLowerRightPad());
   } else {
@@ -270,8 +270,6 @@ void Ground::Draw(bool redraw_all)
 
   // Draw on top of new position of particles (redisplayed on top of particles)
   RedrawParticleList(*world.to_redraw_particles);
-
-  CheckPreview();
 }
 
 void Ground::RedrawParticleList(std::list<Rectanglei> &list) const {

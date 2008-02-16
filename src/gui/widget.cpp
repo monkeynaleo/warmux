@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ void Widget::RedrawBackground(const Rectanglei& rect,
       && rect == *this)
     surf.RectangleColor(*this, border_color, border_size);
 
-  if (IsLOGGING("widget.border"))
+  if (IsDEBUGGING("widget.border"))
     surf.RectangleColor(*this, c_red, border_size);
 }
 

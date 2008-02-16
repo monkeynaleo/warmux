@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,8 +34,8 @@ protected:
 public:
   ~NetworkLocal();
 
-  virtual bool IsConnected() const { return false; }
-  virtual bool IsLocal() const { return true; }
+  virtual const bool IsConnected() const { return false; }
+  virtual const bool IsLocal() const { return true; }
 
   virtual void SendAction(Action* action);
 

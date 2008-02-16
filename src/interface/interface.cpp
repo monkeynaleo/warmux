@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -45,12 +45,21 @@ const Point2i BORDER_POSITION(5, 5);
 
 const uint MARGIN = 10;
 
+Interface * Interface::singleton = NULL;
+
+Interface * Interface::GetInstance()
+{
+  if (singleton == NULL) {
+    singleton = new Interface();
+  }
+  return singleton;
+}
+
 Interface::Interface()
 {
   display = true;
   start_hide_display = 0;
   start_show_display = 0;
-  display_minimap = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   game_menu = resource_manager.LoadImage( res, "interface/background_interface");
@@ -101,7 +110,6 @@ Interface::Interface()
 
 Interface::~Interface()
 {
-  if (clock) delete clock;
   if (global_timer) delete global_timer;
   if (timer) delete timer;
   if (t_character_name) delete t_character_name;
@@ -297,42 +305,15 @@ void Interface::DrawTeamEnergy() const
   }
 }
 
-void Interface::ToggleMinimap()
-{
-  display_minimap = !display_minimap;
-}
-
 // Draw map preview
 void Interface::DrawMapPreview()
 {
+#if TILE_HAS_PREVIEW
   Surface& window  = AppWormux::GetInstance()->video->window;
   const Surface* preview = world.ground.GetPreview();
-  Point2i  offset  = window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN);
-  window.Blit(*preview, world.ground.GetPreviewRect(), offset);
-  Rectanglei rect_preview(offset, world.ground.GetPreviewSize());
-  world.ToRedrawOnScreen(rect_preview);
-
-  FOR_EACH_TEAM(team) {
-    const Surface& icon = (*team)->GetMiniFlag();
-    for (Team::iterator character = (*(team))->begin(),
-           end_character = (*(team))->end();
-         character != end_character;
-         ++character) {
-      if (!character -> IsDead()) {
-        Point2i     coord = world.ground.PreviewCoordinates((*character).GetPosition()) + offset;
-        
-        window.Blit(icon, coord - icon.GetSize()/2);
-        if (character->IsActiveCharacter()) {
-          uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
-          radius = (radius/2) + 1;
-          window.CircleColor(coord.x, coord.y, radius, c_white);
-          world.ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
-        }
-	else
-          world.ToRedrawOnScreen(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()));
-      }
-    }
-  }
+  window.Blit(*preview, world.ground.GetPreviewRect(),
+              window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN));
+#endif
 }
 
 void Interface::Draw()
@@ -364,8 +345,7 @@ void Interface::Draw()
   DrawCharacterInfo();
   DrawTeamEnergy();
   DrawWeaponInfo();
-  if (display_minimap)
-    DrawMapPreview();
+  DrawMapPreview();
   DrawSmallInterface();
 }
 

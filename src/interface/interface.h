@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@
 #define INTERFACE_H
 #include <vector>
 #include "include/base.h"
-#include "include/singleton.h"
 #include "weapon_menu.h"
 #include "gui/energy_bar.h"
 #include "gui/energy_bar.h"
@@ -40,13 +39,15 @@ class Weapon;
 #undef interface
 #endif
 
-class Interface : public Singleton<Interface>
+class Interface
 {
+
 public:
   Character *character_under_cursor;
   Weapon *weapon_under_cursor;
   WeaponsMenu weapons_menu;
   Team *tmp_team;
+  Polygon * interface;
 
  private:
    /* If you need this, implement it (correctly)*/
@@ -74,7 +75,6 @@ public:
    int start_hide_display;
    int start_show_display;
    bool display_timer;
-   bool display_minimap;
    EnergyBar energy_bar;
    ProgressBar wind_bar;
 
@@ -86,12 +86,14 @@ public:
    Surface wind_indicator;
    Point2i bottom_bar_pos;
 
-protected:
-  friend class Singleton<Interface>;
+   static Interface * singleton;
+
+ private:
    Interface();
    ~Interface();
 
  public:
+   static Interface *GetInstance();
    const WeaponsMenu &GetWeaponsMenu() const { return weapons_menu; };
 
    void Reset();
@@ -122,7 +124,6 @@ protected:
    void UpdateTimer(uint utimer);
    void UpdateWindIndicator(int wind_value) { wind_bar.UpdateValue(wind_value); };
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
-   void ToggleMinimap();
 };
 
 void AbsoluteDraw(const Surface& s, const Point2i& pos);

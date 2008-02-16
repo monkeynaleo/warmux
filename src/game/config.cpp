@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@
 
 #include "game/config.h"
 
-#include <cstdlib>
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -82,6 +81,14 @@ static std::string GetWormuxPath()
 #endif
 
 const std::string FILENAME="config.xml";
+Config * Config::singleton = NULL;
+
+Config * Config::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Config();
+  }
+  return singleton;
+}
 
 Config::Config():
   default_language(""),
@@ -91,8 +98,7 @@ Config::Config():
   m_filename(),
   data_dir(),
   locale_dir(),
-  personal_data_dir(),
-  personal_config_dir(),
+  personal_dir(),
   teams(),
   map_name(),
   display_energy_character(true),
@@ -111,7 +117,6 @@ Config::Config():
   sound_effects(true),
   sound_frequency(44100),
   enable_network(true),
-  check_updates(false),
   ttf_filename(),
   transparency(ALPHA),
   config_set()
@@ -178,42 +183,9 @@ Config::Config():
 #endif
 
 #ifndef WIN32
-
-  // To respect XDG Base Directory Specification from FreeDesktop
-  // http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html
-
-  const char * c_config_dir = std::getenv("XDG_CONFIG_HOME");
-  const char * c_data_dir = std::getenv("XDG_DATA_HOME");
-
-  if (c_config_dir == NULL)
-    personal_config_dir = GetHome() + "/.config";
-  else
-    personal_config_dir = c_config_dir;
-
-  personal_config_dir += "/wormux/";
-
-  if (c_data_dir == NULL)
-    personal_data_dir = GetHome() + "/.local/share";
-  else
-    personal_data_dir = c_data_dir;
-
-  personal_data_dir += "/wormux/";
-
-  // create the directories
-  MkdirPersonalConfigDir();
-  MkdirPersonalDataDir();
-
-  // move from old directory ($HOME/.wormux/)
-  std::string old_dir = GetHome() + "/.wormux/";
-  rename(old_dir.c_str(), personal_data_dir.c_str());
-
-  std::string old_config_file_name = personal_data_dir + "config.xml";
-  std::string config_file_name = personal_config_dir + "config.xml";
-  rename(old_config_file_name.c_str(), config_file_name.c_str());
-
+  personal_dir = GetHome() + "/.wormux/";
 #else
-  personal_config_dir = GetHome() + "\\Wormux\\";
-  personal_data_dir = personal_config_dir;
+  personal_dir = GetHome() + "\\Wormux\\";
 #endif
   LoadDefaultValue();
 
@@ -227,32 +199,6 @@ Config::Config():
 
   dir = TranslateDirectory(data_dir);
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
-}
-
-bool Config::MkdirPersonalConfigDir()
-{
-  // Create the directory if it doesn't exist
-#ifndef WIN32
-  if (mkdir(personal_config_dir.c_str(), 0750) != 0 && errno != EEXIST)
-#else
-  if (_mkdir(personal_config_dir.c_str()) != 0 && errno != EEXIST)
-#endif
-    return true;
-
-  return false;
-}
-
-bool Config::MkdirPersonalDataDir()
-{
-  // Create the directory if it doesn't exist
-#ifndef WIN32
-  if (mkdir(personal_data_dir.c_str(), 0750) != 0 && errno != EEXIST)
-#else
-  if (_mkdir(personal_data_dir.c_str()) != 0 && errno != EEXIST)
-#endif
-    return true;
-
-  return false;
 }
 
 void Config::SetLanguage(const std::string language)
@@ -300,14 +246,17 @@ bool Config::DoLoading(void)
   // create the directory if it does not exist (we should do it before exiting the game)
   // the user can ask to start an internet game and download a file in the personnal dir
   // so it should exist
-  MkdirPersonalDataDir();
-  MkdirPersonalConfigDir();
+#ifndef WIN32
+  mkdir(personal_dir.c_str(), 0750);
+#else
+  _mkdir(personal_dir.c_str());
+#endif
 
   try {
     // Load XML conf
     XmlReader doc;
 
-    m_filename = personal_config_dir + FILENAME;
+    m_filename = personal_dir + FILENAME;
 
     if (!doc.Load(m_filename))
       return false;
@@ -350,7 +299,7 @@ void Config::LoadDefaultValue()
       if(tmp.GetX() > 0 && tmp.GetY() > 0)
         resolution_available.push_back(tmp);
     }*/
-    resource_manager.UnLoadXMLProfile(res);
+    delete res;
   } catch (const xmlpp::exception &e) {
     std::cout << "o "
         << _("Error while loading default configuration file: %s") << std::endl
@@ -424,22 +373,20 @@ void Config::LoadXml(const xmlpp::Element *xml)
     XmlReader::ReadString(elem, "port", m_network_port);
   }
 
-  //=== misc ===
-  if ((elem = XmlReader::GetMarker(xml, "misc")) != NULL)
-  {
-    XmlReader::ReadBool(elem, "check_updates", check_updates);
-  }
-
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
 }
 
-bool Config::Save(bool save_current_teams)
+bool Config::Save()
 {
-  std::string rep = personal_config_dir;
+  std::string rep = personal_dir;
 
   // Create the directory if it doesn't exist
-  if (MkdirPersonalConfigDir())
+#ifndef WIN32
+  if (mkdir(personal_dir.c_str(), 0750) != 0 && errno != EEXIST)
+#else
+  if (_mkdir(personal_dir.c_str()) != 0 && errno != EEXIST)
+#endif
   {
     std::cerr << "o "
       << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
@@ -448,10 +395,10 @@ bool Config::Save(bool save_current_teams)
     return false;
   }
 
-  return SaveXml(save_current_teams);
+  return SaveXml();
 }
 
-bool Config::SaveXml(bool save_current_teams)
+bool Config::SaveXml()
 {
   XmlWriter doc;
 
@@ -472,35 +419,19 @@ bool Config::SaveXml(bool save_current_teams)
 
   if (TeamsList::IsLoaded())
   {
-    if (save_current_teams)
-    {
-      teams.clear();
-
-      TeamsList::iterator
-        it = GetTeamsList().playing_list.begin(),
-        end = GetTeamsList().playing_list.end();
-
-      for (int i=0; it != end; ++it, i++)
-      {
-        ConfigTeam config;
-        config.id = (**it).GetId();
-        config.player_name = (**it).GetPlayerName();
-        config.nb_characters = (**it).GetNbCharacters();
-
-        teams.push_back(config);
-      }
-    }
-
-    std::list<ConfigTeam>::iterator
-      it = teams.begin(),
-      end = teams.end();
+    TeamsList::iterator
+      it = GetTeamsList().playing_list.begin(),
+      end = GetTeamsList().playing_list.end();
 
     for (int i=0; it != end; ++it, i++)
     {
-      xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));
-      doc.WriteElement(a_team, "id", (*it).id);
-      doc.WriteElement(a_team, "player_name", (*it).player_name);
-      doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
+      if ((**it).IsLocal() || (**it).IsLocalAI())
+      {
+        xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));
+        doc.WriteElement(a_team, "id", (**it).GetId());
+        doc.WriteElement(a_team, "player_name", (**it).GetPlayerName());
+        doc.WriteElement(a_team, "nb_characters", ulong2str((**it).GetNbCharacters()));
+      }
     }
   }
 
@@ -537,10 +468,6 @@ bool Config::SaveXml(bool save_current_teams)
   xmlpp::Element *net_node = root->add_child("network");
   doc.WriteElement(net_node, "host", m_network_host);
   doc.WriteElement(net_node, "port", m_network_port);
-
-  //=== Misc ===
-  xmlpp::Element *misc_node = root->add_child("misc");
-  doc.WriteElement(misc_node, "check_updates", ulong2str(check_updates));
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,16 @@
 #include "network/download.h"
 #include "tool/debug.h"
 #include "tool/error.h"
-#include "tool/i18n.h"
+
+Downloader * Downloader::singleton = NULL;
+
+Downloader * Downloader::GetInstance()
+{
+  if (singleton == NULL) {
+    singleton = new Downloader();
+  }
+  return singleton;
+}
 
 Downloader::Downloader():
   curl(curl_easy_init())
@@ -71,39 +80,13 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 	        return line.size();
 }
 
-std::string Downloader::GetLatestVersion()
-{
-  static const char url[] = "http://kurosu.free.fr/last";
-  const std::string last_file = Config::GetInstance()->GetPersonalDataDir() + "last";
-  if( !Get(url, last_file.c_str()) )
-  {
-    std::string err = Format(_("Couldn't fetch last version from %s"), url);
-    throw err;
-  }
-
-  // Parse the file
-  std::ifstream fin;
-  fin.open(last_file.c_str(), std::ios::in);
-  if(!fin)
-  {
-    std::string err = Format(_("Couldn't open file %s"), last_file.c_str());
-    throw err;
-  }
-
-  std::string line;
-  getline(line, fin);
-  fin.close();
-
-  return line;
-}
-
 std::map<std::string, int> Downloader::GetServerList(std::string list_name)
 {
   std::map<std::string, int> server_lst;
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
 
   // Download the list of server
-  const std::string server_file = Config::GetInstance()->GetPersonalDataDir() + list_name;
+  const std::string server_file = Config::GetInstance()->GetPersonalDir() + list_name;
   const std::string list_url = "http://www.wormux.org/" + list_name;
 
   if( !Get(list_url.c_str(), server_file.c_str()) )

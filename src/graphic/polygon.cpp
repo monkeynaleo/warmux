@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -84,13 +84,13 @@ PolygonItem::PolygonItem()
   SetAlignment(H_CENTERED, V_CENTERED);
 }
 
-PolygonItem::PolygonItem(PolygonItem * other)
+PolygonItem::PolygonItem(PolygonItem * item)
 {
-  transformed_position = other->transformed_position;
-  position = other->position;
-  SetPosition(other->GetPosition());
-  SetSprite(new Sprite(*(other->GetSprite())));
-  SetAlignment(other->h_align, other->v_align);
+  transformed_position = item->transformed_position;
+  position = item->position;
+  SetPosition(item->GetPosition());
+  SetSprite(new Sprite(*(item->GetSprite())));
+  SetAlignment(item->h_align, item->v_align);
 }
 
 PolygonItem::PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)
@@ -116,12 +116,12 @@ void PolygonItem::SetAlignment(H_align h_a, V_align v_a)
   v_align = v_a;
 }
 
-Point2d & PolygonItem::GetPosition()
+const Point2d & PolygonItem::GetPosition() const
 {
   return position;
 }
 
-Point2d & PolygonItem::GetTransformedPosition()
+const Point2d & PolygonItem::GetTransformedPosition() const
 {
   return transformed_position;
 }

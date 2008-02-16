@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -51,8 +51,7 @@ class FlameThrowerBullet : public WeaponBullet
 {
   public:
     FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
-                       WeaponLauncher * p_launcher);
-    bool IsOverlapping(const PhysicalObj* obj) const;
+		       WeaponLauncher * p_launcher);
   protected:
     ParticleEngine particle;
     void ShootSound();
@@ -64,17 +63,11 @@ class FlameThrowerBullet : public WeaponBullet
 
 
 FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
-                                       WeaponLauncher * p_launcher) :
+				       WeaponLauncher * p_launcher) :
   WeaponBullet("flamethrower_bullet", cfg, p_launcher), particle(40)
 {
   explode_colliding_character = true;
   can_drown = false;
-}
-
-bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
-{
-  if(GetName() == obj->GetName()) return true;
-  return m_overlapping_object == obj;
 }
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)

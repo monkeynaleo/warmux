@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,6 +30,15 @@
 #include "tool/i18n.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
+
+GameMode * GameMode::singleton = NULL;
+
+GameMode * GameMode::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new GameMode();
+  }
+  return singleton;
+}
 
 GameMode::GameMode():
   nb_characters(6),
@@ -190,7 +199,7 @@ bool GameMode::Load(void)
   try
   {
     // Game mode objects configuration file
-    fullname = config->GetPersonalDataDir() + GetObjectsFilename();
+    fullname = config->GetPersonalDir() + GetObjectsFilename();
 
     if(!IsFileExist(fullname))
       fullname = config->GetDataDir() + GetObjectsFilename();
@@ -206,7 +215,7 @@ bool GameMode::Load(void)
 
     // Game mode file
     XmlReader doc;
-    fullname = config->GetPersonalDataDir() + GetFilename();
+    fullname = config->GetPersonalDir() + GetFilename();
 
     if(!IsFileExist(fullname))
       fullname = config->GetDataDir() + GetFilename();
@@ -272,7 +281,7 @@ bool GameMode::ExportFileToString(const std::string& filename, std::string& cont
   try
   {
     XmlReader doc;
-    fullname = Config::GetInstance()->GetPersonalDataDir() + filename;
+    fullname = Config::GetInstance()->GetPersonalDir() + filename;
 
     if (!IsFileExist(fullname))
       fullname = Config::GetInstance()->GetDataDir() + filename;

@@ -27,14 +27,11 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				Description="Setting missing #defines for dumb Visual resource compiler"
-				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				Description=""
-				CommandLine=""
-				Outputs=""
+				Description="Setting missing #defines for dumb Visual resource compiler"
+				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h"
 			/>
 			<Tool
 				Name="Gettext compilation"
@@ -119,14 +116,11 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				Description="Setting missing #defines for dumb Visual resource compiler"
-				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				Description=""
-				CommandLine=""
-				Outputs=""
+				Description="Setting missing #defines for dumb Visual resource compiler"
+				CommandLine="echo #define __DATE__ &quot;%DATE%&quot; &gt; resource.h&#x0D;&#x0A;echo #define __TIME__ &quot;%TIME&quot; &gt;&gt; resource.h"
 			/>
 			<Tool
 				Name="Gettext compilation"
@@ -346,22 +340,6 @@
 				</File>
 				<File
 					RelativePath="..\src\game\game.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\game\game_blitz.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\game\game_blitz.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\game\game_classic.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\game\game_classic.h"
 					>
 				</File>
 				<File
@@ -700,18 +678,6 @@
 					RelativePath="..\src\gui\widget_list.h"
 					>
 				</File>
-				<Filter
-					Name="big"
-					>
-					<File
-						RelativePath="..\src\gui\big\button_pic.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\src\gui\big\button_pic.h"
-						>
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="include"
@@ -750,14 +716,6 @@
 				</File>
 				<File
 					RelativePath="..\src\include\constant.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\include\singleton.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\include\singleton.h"
 					>
 				</File>
 			</Filter>
@@ -949,14 +907,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\menu\help_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\help_menu.h"
-					>
-				</File>
-				<File
 					RelativePath="..\src\menu\internet_menu.cpp"
 					>
 				</File>
@@ -1018,14 +968,6 @@
 				</File>
 				<File
 					RelativePath="..\src\menu\options_menu.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\pause_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\menu\pause_menu.h"
 					>
 				</File>
 				<File
@@ -1205,14 +1147,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\particles\fading_text.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\particles\fading_text.h"
-					>
-				</File>
-				<File
 					RelativePath="..\src\particles\fire.cpp"
 					>
 				</File>
@@ -1365,14 +1299,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\sound\sample_cache.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\sound\sample_cache.h"
-					>
-				</File>
-				<File
 					RelativePath="..\src\sound\sound_sample.cpp"
 					>
 				</File>
@@ -1482,6 +1408,10 @@
 				</File>
 				<File
 					RelativePath="..\src\tool\i18n.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\tool\math_tools.cpp"
 					>
 				</File>
 				<File
@@ -1629,14 +1559,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\weapon\cluzooka.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\cluzooka.h"
-					>
-				</File>
-				<File
 					RelativePath="..\src\weapon\construct.cpp"
 					>
 				</File>
@@ -1682,14 +1604,6 @@
 				</File>
 				<File
 					RelativePath="..\src\weapon\flamethrower.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\footbomb.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\src\weapon\footbomb.h"
 					>
 				</File>
 				<File

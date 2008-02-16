@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,10 +24,9 @@
 #include "base.h"
 #include <string>
 #include <vector>
-#include "include/singleton.h"
 #include "tool/point.h"
 
-class Constants : public Singleton<Constants>
+class Constants
 {
 public:
   // Version number of Wormux
@@ -55,10 +54,13 @@ public:
   // Minimal free heigth (in pixel) for the playground to be said "open"
   static const uint HAUT_MIN_TERRAIN_OUVERT;
 
-protected:
-  friend class Singleton<Constants>;
+  static Constants * GetInstance();
+  ~Constants() { singleton = NULL; AUTHORS.clear(); };
+
+private:
   Constants();
-  ~Constants() { AUTHORS.clear(); };
+
+  static Constants * singleton;
 };
 
 #endif

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,6 +30,8 @@ class Sprite;
 class TileItem;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
+
+#define TILE_HAS_PREVIEW   0
 
 class Tile : public Rectanglei{
 public:
@@ -64,13 +66,11 @@ public:
   Surface GetPart(const Rectanglei& rec);
 
   // Return the preview
+#if TILE_HAS_PREVIEW
   const Surface* GetPreview() const { return m_preview; };
-  void  CheckPreview();
   const Point2i& GetPreviewSize() const { return m_preview_size; };
   const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
-  // Translate world coordinates into a preview ones
-  // @warning assumes CELL_SIZE is 64x64
-  Point2i PreviewCoordinates(const Point2i& pos) { return (pos-m_upper_left_offset)>>m_shift; };
+#endif
 
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();
@@ -84,15 +84,12 @@ protected:
   Point2i nbCells;
   unsigned int nbr_cell;
 
-  void InitPreview();
+#if TILE_HAS_PREVIEW
   Surface*   m_preview;
   uint       m_shift;
-  Point2i    m_last_video_size;
   Point2i    m_preview_size;
   Rectanglei m_preview_rect;
-
-  Point2i m_upper_left_offset;
-  Point2i m_lower_right_offset;
+#endif
 
   // Canvas giving access to tiles
   std::vector<TileItem *> item;

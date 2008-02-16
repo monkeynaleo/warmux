@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -292,7 +292,7 @@ bool XmlWriter::Save()
   m_save = true;
   try {
     m_doc->write_to_file_formatted(m_filename, m_encoding);
-  } catch (const xmlpp::exception &) {
+  } catch (const xmlpp::exception &err) {
     return false;
   }
   return true;

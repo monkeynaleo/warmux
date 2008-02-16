@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -42,6 +42,11 @@
 #include "tool/xml_document.h"
 #include "weapon/explosion.h"
 
+// XXX Unused !?
+//const uint SPEED = 5; // meter / seconde
+//const uint NB_MAX_TRY = 20;
+//const uint SPEED_PARACHUTE = 170; // ms par image
+
 Medkit::Medkit()
   : ObjBox("medkit") {
   SetTestRect (29, 29, 63, 6);
@@ -54,6 +59,11 @@ Medkit::Medkit()
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
   std::cout<<"anim set"<<std::endl;
+}
+
+void Medkit::Draw()
+{
+  anim->Draw(GetPosition());
 }
 
 void Medkit::ApplyBonus(Character * c)
