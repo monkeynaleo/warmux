@@ -276,7 +276,7 @@ dnl === Check for curl =========================================================
 
 LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
 
-dnl === Check for SDL image, mixer, etc., libxml++, libcurl and libpng ==============
+dnl === Check for SDL image, mixer, etc., libxml++, and libpng ==============
 
 AC_CHECK_LIB($PNG, png_error,,,)
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
@@ -292,16 +292,6 @@ if $PACKAGE_CONFIG libxml++-2.6 --libs > /dev/null 2>&1; then
 else
   AC_MSG_RESULT(no)
   check_libxmlpp="no"
-fi
-
-AC_MSG_CHECKING(for libcurl)
-
-if test x$check_curl = xyes; then
-  AC_MSG_RESULT(yes)
-else
-  AC_MSG_RESULT(no)
-  check_libcurl="no"
-  AC_MSG_ERROR([*** No libCurl found. Please install a valid libcurl ***])
 fi
 
 dnl === Display error if SDL image, mixer, etc. is missing ==================
@@ -336,19 +326,16 @@ if test \
   exit 1
 fi
 
-dnl === Add libxml++, libcurl flags and libpng =================================================
-LIBCURL_CFLAGS=`$CURL_BIN --cflags`
-LIBCURL_LIBS=`$CURL_BIN --libs`
-
+dnl === Add libxml++ and libpng flags ======================================
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
 
 LIBPNG_CFLAGS=`$PACKAGE_CONFIG lib$PNG --cflags`
 LIBPNG_LIBS=`$PACKAGE_CONFIG lib$PNG --libs`
 
-CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGGS $LIBPNG_CFLAGS"
-CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGS $LIBPNG_CFLAGS"
-LIBS="$LIBS $LIBXMLPP_LIBS $LIBCURL_LIBS $LIBPNG_LIBS"
+CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBPNG_CFLAGS"
+CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBPNG_CFLAGS"
+LIBS="$LIBS $LIBXMLPP_LIBS $LIBPNG_LIBS"
 
 dnl ========================================================================
 dnl == Check for header files                                              =
