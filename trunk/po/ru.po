@@ -10,15 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-02-16 15:32+0100\n"
+"PO-Revision-Date: 2008-02-17 22:13+0100\n"
 "Last-Translator: Dmitry 'RCL' Rekman <rcl@mail.ru>\n"
 "Language-Team: Русский <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -200,8 +199,7 @@ msgstr[2] "Команда %s выиграла %u базук!"
 
 #: src/weapon/blowtorch.cpp:146
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -242,8 +240,7 @@ msgstr[2] "Команда %s выиграла %u строительств! Не 
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Команда %s выиграла %u диско-гранату! Станцуй пока бросаешь её!"
 msgstr[1] "Команда %s выиграла %u диско-гранаты! Станцуй пока бросаешь их!"
 msgstr[2] "Команда %s выиграла %u диско-гранат! Станцуй пока бросаешь их!"
@@ -355,8 +352,7 @@ msgstr[2] "Команда %s выиграла %u дробовиков!"
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural ""
-"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] ""
 "Команда %s выиграла %u снайперскую винтовку! Прицелься и пальни ему промеж "
 "глаз!"
@@ -415,10 +411,8 @@ msgstr[2] "Команда %s выиграла %u пропусков хода! В
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] ""
-"Команда %s выиграла %u tux'омёт! Никогда не видели летающего пингвина?"
-msgstr[1] ""
-"Команда %s выиграла %u tux'омёта! Никогда не видели летающего пингвина?"
+msgstr[0] "Команда %s выиграла %u tux'омёт! Никогда не видели летающего пингвина?"
+msgstr[1] "Команда %s выиграла %u tux'омёта! Никогда не видели летающего пингвина?"
 msgstr[2] ""
 "Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего "
 "пингвина?"
@@ -625,10 +619,8 @@ msgstr "Ошибка при загрузке данных команды %s:"
 
 #: src/game/config.cpp:445
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
 
 #: src/game/config.cpp:318
 #, c-format
@@ -696,7 +688,7 @@ msgstr "На весь экран?"
 #. Game name
 #: src/menu/network_connection_menu.cpp:82
 msgid "Game name:"
-msgstr ""
+msgstr "Имя игры"
 
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
@@ -831,8 +823,7 @@ msgstr "Реактивный ранец"
 
 #: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr ""
-"Заходите на #wormux на irc.freenode.net чтобы найти противников для игры"
+msgstr "Заходите на #wormux на irc.freenode.net чтобы найти противников для игры"
 
 #: src/menu/options_menu.cpp:123
 msgid "Language"
@@ -1049,7 +1040,7 @@ msgstr "Снайперская винтовка"
 
 #: src/object/bonus_box.cpp:74
 msgid "Someone put a booby trap into the crate!"
-msgstr ""
+msgstr "В контейнере была мина-ловушка!"
 
 #: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
@@ -1334,3 +1325,4 @@ msgstr "o Загрузка звукового профиля: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
+
