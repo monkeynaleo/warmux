@@ -32,12 +32,12 @@ class GrappleConfig;
 class Grapple : public Weapon
 {
   private:
-    typedef struct
+    struct rope_node_t
     {
       Point2i pos;
       double angle;
       int sense;
-    } rope_node_t;
+    };
 
     uint last_mvt;
     double last_broken_node_angle;
@@ -66,7 +66,7 @@ class Grapple : public Weapon
     bool WillBeAttached();
     bool TryAttachRope();
     bool TryAddNode(int CurrentSense) ;
-    bool TryBreakNode(int CurrentSense) ;
+    bool TryRemoveNodes(int CurrentSense) ;
 
   public:
     enum {
