@@ -71,7 +71,7 @@ void BonusBox::ApplyBonus(Character * c) {
   if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
   if ( ExplodesInsteadOfBonus(c) ) {
-    GameMessages::GetInstance()->Add( _("Someone put a booby trap into crate!") );
+    GameMessages::GetInstance()->Add( _("Someone put a booby trap into the crate!") );
     Explode();
     return;
   };
