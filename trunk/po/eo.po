@@ -105,7 +105,7 @@ msgstr "%s estas mortinta pro lia mallerteco."
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino..."
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s teamo jam havas senlimajn municiojn por la %s"
@@ -243,7 +243,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s teamo gajnis %u tumultbombon !"
 msgstr[1] "%s teamo gajnis %u tumultbombojn !"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -500,11 +500,11 @@ msgid "Connect !"
 msgstr "Konektu !"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Konektu al interretludo"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Konektu al ludo"
 
@@ -564,18 +564,18 @@ msgstr "Eraro muntante teamon :"
 msgid "Error loading team's data %s:"
 msgstr "Eraro muntante la datumojn de la teamo %s :"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Eraro kreante dosierujon \"%s\" : ne eblas registri agordan dosieron."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eraro muntante agordan dosieron : %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Eraro muntante norman agordan dosieron : %s"
@@ -595,20 +595,20 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ne eblas konekti al %s : %s"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Eraro : Ne eblas kontakti indeksservilon por gastigi ludon"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Eraro : Ne eblas kontakti indeksservilon por serĉi interretan ludon"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "Eraro : Ne eblas starti servilon"
 
@@ -630,11 +630,16 @@ msgstr "Tumultbombo"
 msgid "Fullscreen?"
 msgstr "Plenekrane ?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+msgid "Game name:"
+msgstr ""
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Gnuĵetilo"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr "Alkroĉilo"
 
@@ -655,7 +660,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME dosiero (mediovariablo $HOME) ne troveblas !"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "Bone amuzu !"
 
@@ -672,7 +677,7 @@ msgstr "Ĉefkomandoro:"
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Gastigu ludon"
 
@@ -759,7 +764,7 @@ msgstr "Tio estas donaco !"
 msgid "Jetpack"
 msgstr "Jetpako"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Aliĝu #wormux en irc.freenode.net por trovi oponantojn."
 
@@ -919,11 +924,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Muntas la mapojn :"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 msgid "Reading default config file"
 msgstr "Legante norman agordaron"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Legante personan agordaron"
 
@@ -957,7 +962,7 @@ msgid "Server address:"
 msgstr "Servila adreso :"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Interretebla servilo"
 
@@ -978,7 +983,11 @@ msgstr "Pasigo"
 msgid "Sniper Rifle"
 msgstr "Tiraljora fusilo"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 

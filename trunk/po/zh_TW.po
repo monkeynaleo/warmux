@@ -104,7 +104,7 @@ msgstr "%s 的死因是: 太笨 !"
 msgid "%s is next to a mine!"
 msgstr "%s 靠近地雷了!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s 隊有無窮的 %s彈夾!"
@@ -235,7 +235,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s 隊得到 %u 爆炸彈!"
 msgstr[1] "%s 隊得到 %u 爆炸彈!"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -491,11 +491,11 @@ msgid "Connect !"
 msgstr "連接!"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "連上網去玩"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "連上游戲"
 
@@ -555,18 +555,18 @@ msgstr "讀取隊伍出錯 :"
 msgid "Error loading team's data %s:"
 msgstr "讀取隊伍數據 %s 時出錯 :"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "建立目錄失敗 \"%s\": 不能儲存設置文档."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "建立目錄失敗 \"%s\": 不能儲存設置文档."
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "正讀取默認設置文档"
@@ -586,20 +586,20 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "錯誤: 連不到%s:%s"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
 msgstr "錯誤: 無法聯系索引服務器建立游戲"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "錯誤: 無法聯系索引服務器尋找游戲"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "錯誤: 無法開始服務器"
 
@@ -622,11 +622,16 @@ msgstr "爆炸彈"
 msgid "Fullscreen?"
 msgstr "全屏?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+msgid "Game name:"
+msgstr ""
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Gnu-北美野牛-彈射裝置"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr "飛索"
 
@@ -647,7 +652,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr " 找不到 HOME directory (environment variable $HOME) !"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "來吧!"
 
@@ -665,7 +670,7 @@ msgstr "指揮官: "
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "建立游戲"
 
@@ -753,7 +758,7 @@ msgid "Jetpack"
 msgstr "噴射包"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "加入#wormux IRC irc.freenode.net 找對手"
 
@@ -912,11 +917,11 @@ msgstr ""
 msgid "Random map"
 msgstr "隨機讀取地圖"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 msgid "Reading default config file"
 msgstr "正讀取默認設置文档"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "正讀取個人設置文档"
 
@@ -950,7 +955,7 @@ msgid "Server address:"
 msgstr "服務器地址"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Internet可用服務器"
 
@@ -971,7 +976,11 @@ msgstr "這次我不動."
 msgid "Sniper Rifle"
 msgstr "狙擊步槍"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 沒人等你."
 

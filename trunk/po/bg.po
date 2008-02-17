@@ -106,7 +106,7 @@ msgstr "%s проявява сапьорска предпазливост..."
 msgid "%s is next to a mine!"
 msgstr "%sе близко до мина!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Ехее, %s вече си имат безкрайни муниции за %s!"
@@ -237,7 +237,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Отборът на %s спечели %u %s !"
 msgstr[1] "Отборът на %s спечели %u %sи !"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -489,11 +489,11 @@ msgid "Connect !"
 msgstr "Verbinden !"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Zu einem Internet Spiel verbinden"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Zum Spiel verbinden"
 
@@ -555,7 +555,7 @@ msgstr "Грешка при зареждането на отбора %s:"
 msgid "Error loading team's data %s:"
 msgstr "Проблем при зареждането на данните за %s:"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -563,12 +563,12 @@ msgstr ""
 "Не мога да създам директорията \"%s\"! не мога да съхраня конфигурационните "
 "файлове!"
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
@@ -588,22 +588,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Kann nicht verbinden"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 #, fuzzy
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Kann Indexserver nicht kontaktieren!"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Kann Indexserver nicht kontaktieren!"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 #, fuzzy
 msgid "Error: Unable to start server"
 msgstr "Kann Server nicht starten"
@@ -626,11 +626,17 @@ msgstr "Звуков заряд"
 msgid "Fullscreen?"
 msgstr "Цял екран?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+#, fuzzy
+msgid "Game name:"
+msgstr "Spiel Einstellungen:"
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Антилопохвъргачка"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr ""
 
@@ -651,7 +657,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Не мога да намеря HOME директорията (или глобалната променлива $HOME)!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr ""
 
@@ -669,7 +675,7 @@ msgstr "Hauptkommandant"
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Spiel hosten"
 
@@ -746,7 +752,7 @@ msgstr ""
 msgid "Jetpack"
 msgstr "Реактивна раница"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 #, fuzzy
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Komm nach #wormux auf irc.freenode.net"
@@ -911,12 +917,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Карти които да заредя:"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
@@ -950,7 +956,7 @@ msgid "Server address:"
 msgstr "Server Adresse:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Im Internert verfügbare Server"
 
@@ -972,7 +978,11 @@ msgstr "Пропускане на ход"
 msgid "Sniper Rifle"
 msgstr "Снайперистка пушка"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
@@ -1407,9 +1417,6 @@ msgstr ""
 
 #~ msgid "Energy:"
 #~ msgstr "Energie:"
-
-#~ msgid "Game options:"
-#~ msgstr "Spiel Einstellungen:"
 
 #, fuzzy
 #~ msgid "Invalid top server adress!"

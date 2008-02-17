@@ -103,7 +103,7 @@ msgstr "%s öldü, çünkü bir beceriksiz!"
 msgid "%s is next to a mine!"
 msgstr "%s bir mayının yanında!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s takımı zaten %s için sınırsız cephaneye sahip!"
@@ -218,7 +218,7 @@ msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -454,11 +454,11 @@ msgid "Connect !"
 msgstr ""
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr ""
 
@@ -519,18 +519,18 @@ msgstr "%s takımı yüklenirken hata:"
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
@@ -550,22 +550,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 #, fuzzy
 msgid "Error: Unable to contact index server to host a game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 #, fuzzy
 msgid "Error: Unable to start server"
 msgstr "(%s) harita dizini açılamadı!"
@@ -588,11 +588,16 @@ msgstr "Ses Bombası"
 msgid "Fullscreen?"
 msgstr "Tam ekran?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+msgid "Game name:"
+msgstr ""
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Gnu Mancınığı"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr ""
 
@@ -613,7 +618,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr ""
 
@@ -630,7 +635,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr ""
 
@@ -707,7 +712,7 @@ msgstr ""
 msgid "Jetpack"
 msgstr "Jet çantası"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
@@ -870,12 +875,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Haritaları yükle:"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
@@ -909,7 +914,7 @@ msgid "Server address:"
 msgstr ""
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr ""
 
@@ -930,7 +935,11 @@ msgstr "Sırayı atla"
 msgid "Sniper Rifle"
 msgstr "Suikast Tüfeği"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 

@@ -104,7 +104,7 @@ msgstr "%s je mrtav zato što je smotan!"
 msgid "%s is next to a mine!"
 msgstr "%s je pored mine!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s tim već ima neograničenu municiju za %s!"
@@ -243,7 +243,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s tim je dobio %u džumbus bombi!"
 msgstr[1] "%s tim je dobio %u džumbus bombi!"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -498,11 +498,11 @@ msgid "Connect !"
 msgstr "Konektuj!"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Konektuj se na internet igru"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Konektuj se na igru"
 
@@ -562,7 +562,7 @@ msgstr "Greška kod očitavanja tima:"
 msgid "Error loading team's data %s:"
 msgstr "Greška kod očitavanja podataka tima %s :"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -570,12 +570,12 @@ msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
@@ -595,23 +595,23 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Greška: Nemoguće konektovat se na %s:%s"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
 msgstr ""
 "Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Greška: Nije u mogućnosti kontaktirati index server da se potrazi internet "
 "igra"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "Greška: Nemoguće startati server"
 
@@ -633,11 +633,16 @@ msgstr "Džumbus bomba"
 msgid "Fullscreen?"
 msgstr "Pun ekran?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+msgid "Game name:"
+msgstr ""
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Lansiraj GNU-a"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr "Kuka"
 
@@ -658,7 +663,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME direktor (okolina promjenjiva $HOME) nije mogla biti pronađena!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "Uživaj u igri!"
 
@@ -675,7 +680,7 @@ msgstr "Vojskovođa:"
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Hostaj igru"
 
@@ -761,7 +766,7 @@ msgstr "Pa to je poklon!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Dođi na #wormux na irc.freenode.net da pronađeš protivnika"
 
@@ -923,12 +928,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Učitaj mape:"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Čita lični konfiguracioni podatak"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Čita lični konfiguracioni podatak"
 
@@ -962,7 +967,7 @@ msgid "Server address:"
 msgstr "Adresa servera"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Server dostupan na internetu"
 
@@ -983,7 +988,11 @@ msgstr "Preskoči red"
 msgid "Sniper Rifle"
 msgstr "Snajper"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, trenutno nema igre koja čeka igrače"
 

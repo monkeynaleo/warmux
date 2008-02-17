@@ -106,7 +106,7 @@ msgstr "%s è morto perché maldestro!"
 msgid "%s is next to a mine!"
 msgstr "%s è vicino a una mina!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "La squadra %s ha già delle munizioni enormi per %s!"
@@ -250,7 +250,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "La squadra %s ha vinto %u Bomba Antisommossa!"
 msgstr[1] "La squadra %s ha vinto %u Bombe Antisommossa!"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -512,11 +512,11 @@ msgid "Connect !"
 msgstr "Connessione!"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Connessione ad un gioco su internet"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Conessione al gioco"
 
@@ -576,7 +576,7 @@ msgstr "Errore nel caricamento della squadra:"
 msgid "Error loading team's data %s:"
 msgstr "Errore nel caricamento della squadra %s :"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -584,12 +584,12 @@ msgstr ""
 "Errore nella creazione della directory \"%s\" : impossibile salvare il file "
 "di configurazione."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Errore nel caricamento del file di configurazione : %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Errore nel caricamento del file di configurazione default: %s"
@@ -609,23 +609,23 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Errore: connessione impossibile a %s:%s"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
 msgstr ""
 "Errore: impossibile connettersi all'indice del server per gestire il gioco"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Errore: impossibile connettersi all'indice del server per cercare un gioco "
 "su internet"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "Errore: impossibile avviare il server"
 
@@ -647,11 +647,17 @@ msgstr "Bomba Antisommossa"
 msgid "Fullscreen?"
 msgstr "Schermo intero ?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+#, fuzzy
+msgid "Game name:"
+msgstr "Opzioni del gioco"
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Lancia-Gnu"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr "Corda Ninja"
 
@@ -672,7 +678,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directory HOME (environment variable $HOME) non esiste!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "Buon gioco!"
 
@@ -689,7 +695,7 @@ msgstr "Comandante:"
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Gestione della partita"
 
@@ -778,7 +784,7 @@ msgstr "E' presente!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Venite su #wormux in irc.freenode.net per trovare nuovi avversari."
 
@@ -938,11 +944,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Caricamento mappa"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 msgid "Reading default config file"
 msgstr "Lettura del file di configurazione default"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Lettura di un file di configurazione personale"
 
@@ -976,7 +982,7 @@ msgid "Server address:"
 msgstr "Indirizzo server:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Server disponibile su Internet"
 
@@ -997,7 +1003,11 @@ msgstr "Salta Turno"
 msgid "Sniper Rifle"
 msgstr "Fucile da Cecchino"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Siacenti, attualmente non ci sono partite in attesa di giocatori"
 
@@ -1472,10 +1482,6 @@ msgstr "o File audio aperto a %d Hz %d bit"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Errore nel caricamento della skin %s:"
-
-#, fuzzy
-#~ msgid "Game options:"
-#~ msgstr "Opzioni del gioco"
 
 #~ msgid "Graphic options"
 #~ msgstr "Opzioni grafiche"

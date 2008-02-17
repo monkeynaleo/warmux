@@ -97,7 +97,7 @@ msgstr "%s egy kicsit �gyefogyott volt, ez�rt t�vozott az �l�k sor�b�l!"
 msgid "%s is next to a mine!"
 msgstr "%s egy tapos�akna mellett t�nfereg!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "A(z) %s csapatnak v�gtelen l�szere van a(z) %s fegyverhez!"
@@ -262,7 +262,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -521,11 +521,11 @@ msgid "Connect !"
 msgstr "Kapcsol�d�s!"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Kapcsol�d�s internetes j�t�khoz"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Kapcsol�d�s j�t�khoz"
 
@@ -586,7 +586,7 @@ msgstr "Hiba a csapat bet�lt�se k�zben:"
 msgid "Error loading team's data %s:"
 msgstr "Hiba a csapat adatainak bet�lt�se k�zben (%s):"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -594,12 +594,12 @@ msgstr ""
 "Hiba a(z) \"%s\" k�nyvt�r l�trehoz�sa k�zben: nem lehet a konfigur�ci�s "
 "f�jlt menteni."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
@@ -619,20 +619,20 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Hiba: Nem siker�lt csatlakozni (%s:%s)"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Hiba: Nem siker�lt j�t�kot l�trehozni a k�zponti szerveren"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Hiba: Nem siker�lt internetes j�t�kokat keresni a k�zponti szerveren"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "Hiba: Nem siker�lt a szerver ind�t�sa"
 
@@ -654,11 +654,19 @@ msgstr "Rohambomba"
 msgid "Fullscreen?"
 msgstr "Teljesk�perny�s"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+#, fuzzy
+msgid "Game name:"
+msgstr ""
+"BeĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂllĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂ­"
+"tĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂsok"
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Gn�-l�v�"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr ""
 
@@ -680,7 +688,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nem tal�lhat� a felhaszn�l� k�nyvt�ra!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "J� j�t�kot!"
 
@@ -697,7 +705,7 @@ msgstr "Parancsnok: "
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "J�t�k l�trehoz�sa"
 
@@ -772,7 +780,7 @@ msgstr "Ez egy aj�nd�k!"
 msgid "Jetpack"
 msgstr "Sug�rhajt�s� h�tizs�k"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "L�pj be a #wormux szob�ba az irc.freenode.net-en, hogy ellenfeleket tal�lj."
@@ -938,12 +946,12 @@ msgstr ""
 "%s tĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ rkĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ p "
 "betĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂltĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ se"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
@@ -977,7 +985,7 @@ msgid "Server address:"
 msgstr "Szerver c�me:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Interneten el�rhet� szerver"
 
@@ -998,7 +1006,11 @@ msgstr "Fordul� kihagy�sa"
 msgid "Sniper Rifle"
 msgstr "Mesterl�v�szpuska"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
@@ -1503,12 +1515,6 @@ msgstr "Hangmin�s�g: %d Hz, %d bit"
 #~ "Hiba lĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ pett fel a smink (%s) "
 #~ "betĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂltĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ se "
 #~ "kĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂzben:"
-
-#, fuzzy
-#~ msgid "Game options:"
-#~ msgstr ""
-#~ "BeĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂllĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂ­"
-#~ "tĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂsok"
 
 #~ msgid "Info"
 #~ msgstr "InformĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂciĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ"

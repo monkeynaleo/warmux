@@ -114,7 +114,7 @@ msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
 
 # XXX: having "the" there is not that smart, translations might not make sense.
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Echipa %s are deja muniție infinită pentru %s!"
@@ -316,7 +316,7 @@ msgstr[2] "Echipa %s a câștigat %u de cocktailuri Molotov!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -682,11 +682,11 @@ msgid "Connect !"
 msgstr "Conectat!"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Conectare la un joc pe internet"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Conectare la joc"
 
@@ -746,7 +746,7 @@ msgstr "Eroare la încărcarea echipei:"
 msgid "Error loading team's data %s:"
 msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -754,12 +754,12 @@ msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eroare în timpul încărcării fișierul de configurare: %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Eroare în timpul încărcării fișierul de configurare implicită: %s"
@@ -779,24 +779,24 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Nu a fost posibilă conectarea la %s:%s"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a găzdui un "
 "joc"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a căuta un "
 "joc pe internet"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
@@ -818,11 +818,17 @@ msgstr "Cocktail Molotov"
 msgid "Fullscreen?"
 msgstr "Tot ecranul?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+#, fuzzy
+msgid "Game name:"
+msgstr "Opțiuni ale jocului:"
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Lansator de antilope gnu"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr "Ghiară de agățare"
 
@@ -843,7 +849,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "Distracție plăcută!"
 
@@ -861,7 +867,7 @@ msgstr "Comandant șef: "
 msgid "Help"
 msgstr "Ajutor"
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Găzduiește un joc"
 
@@ -951,7 +957,7 @@ msgid "Jetpack"
 msgstr "Propulsor personal"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Intrați pe #wormux în rețeaua irc.freenode.net pentru a găsi parteneri de "
@@ -1112,11 +1118,11 @@ msgstr "Părăsește bătălia"
 msgid "Random map"
 msgstr "Hartă aleatoare"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 msgid "Reading default config file"
 msgstr "Se citește fișierul implicit de configurare"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Se citește fișierul personal de configurare"
 
@@ -1150,7 +1156,7 @@ msgid "Server address:"
 msgstr "Adresa serverului:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Server disponibil în internet"
 
@@ -1171,7 +1177,11 @@ msgstr "Sare rândul"
 msgid "Sniper Rifle"
 msgstr "Pușcă cu lunetă"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Din păcate, acum nu există nici un joc în așteptare de jucători"
 
@@ -1782,9 +1792,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #~ msgstr ""
 #~ "Eroare:\n"
 #~ "%s"
-
-#~ msgid "Game options:"
-#~ msgstr "Opțiuni ale jocului:"
 
 #, fuzzy
 #~ msgid "GameDraw:characters"

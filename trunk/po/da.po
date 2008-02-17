@@ -103,7 +103,7 @@ msgstr "%s døde fordi han var klodset!"
 msgid "%s is next to a mine!"
 msgstr "%s trådte på en mine!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Holdet %s har allerede uendelig ammunition for %s!"
@@ -234,7 +234,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Holdet %s har fået %u oprørsbombe!"
 msgstr[1] "Holdet %s har fået %u oprørsbomber!"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -489,11 +489,11 @@ msgid "Connect !"
 msgstr "Forbinder!"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Forbind til et spil på internettet"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Forbind til spil"
 
@@ -553,19 +553,19 @@ msgstr "Fejl under indlæsning af hold:"
 msgid "Error loading team's data %s:"
 msgstr "Fejl under indlæsning af holdet %ss data:"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fejl under indlæsning af konfigurationsfil: %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Fejl under indlæsning af konfigurationsfil: %s"
@@ -585,20 +585,20 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Fejl: Kan ikke forbinde til %s:%s"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Fejl: Kan ikke kontakte indeksserveren for at starte et spil"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Fejl: Kan ikke kontakte indeksserveren for at søge efter internetspil"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "Fejl: Kan ikke starte server"
 
@@ -620,11 +620,16 @@ msgstr "Oprørsbombe"
 msgid "Fullscreen?"
 msgstr "Fuld skærm?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+msgid "Game name:"
+msgstr ""
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Gnukaster"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr "Klo"
 
@@ -645,7 +650,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "Hav et godt spil!"
 
@@ -662,7 +667,7 @@ msgstr "Hovedkommandør: "
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Vær vært for et spil"
 
@@ -752,7 +757,7 @@ msgstr "Det er en gave!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
 
@@ -912,12 +917,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Indlæser baner:"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Læser personlig konfigureringsfil"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Læser personlig konfigureringsfil"
 
@@ -951,7 +956,7 @@ msgid "Server address:"
 msgstr "Serveradresse:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Server tilgængelig på internettet"
 
@@ -972,7 +977,11 @@ msgstr "Spring denne tur over"
 msgid "Sniper Rifle"
 msgstr "Skarpskytteriffel"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 

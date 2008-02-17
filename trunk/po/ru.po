@@ -17,7 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -112,7 +113,7 @@ msgstr "%s погиб, потому что он недотёпа!"
 msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Команда %s уже имеет бесконечный запас боеприпасов для %s!"
@@ -199,7 +200,8 @@ msgstr[2] "Команда %s выиграла %u базук!"
 
 #: src/weapon/blowtorch.cpp:146
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -240,7 +242,8 @@ msgstr[2] "Команда %s выиграла %u строительств! Не 
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Команда %s выиграла %u диско-гранату! Станцуй пока бросаешь её!"
 msgstr[1] "Команда %s выиграла %u диско-гранаты! Станцуй пока бросаешь их!"
 msgstr[2] "Команда %s выиграла %u диско-гранат! Станцуй пока бросаешь их!"
@@ -269,7 +272,7 @@ msgstr[0] "Команда %s выиграла %u футбольную бомбу
 msgstr[1] "Команда %s выиграла %u футбольные бомбы!"
 msgstr[2] "Команда %s выиграла %u пустотных бомб!"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -352,7 +355,8 @@ msgstr[2] "Команда %s выиграла %u дробовиков!"
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgid_plural ""
+"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] ""
 "Команда %s выиграла %u снайперскую винтовку! Прицелься и пальни ему промеж "
 "глаз!"
@@ -412,11 +416,9 @@ msgstr[2] "Команда %s выиграла %u пропусков хода! В
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] ""
-"Команда %s выиграла %u tux'омёт! Никогда не видели летающего "
-"пингвина?"
+"Команда %s выиграла %u tux'омёт! Никогда не видели летающего пингвина?"
 msgstr[1] ""
-"Команда %s выиграла %u tux'омёта! Никогда не видели летающего "
-"пингвина?"
+"Команда %s выиграла %u tux'омёта! Никогда не видели летающего пингвина?"
 msgstr[2] ""
 "Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего "
 "пингвина?"
@@ -445,7 +447,9 @@ msgstr "(бесконечно)"
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
-msgstr "Появилась уже версия %s, которая является более новой, чем Ваша версия %s. Проверьте, нет ли обновления игры для вашей операционной системы! "
+msgstr ""
+"Появилась уже версия %s, которая является более новой, чем Ваша версия %s. "
+"Проверьте, нет ли обновления игры для вашей операционной системы! "
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -555,11 +559,11 @@ msgid "Connect !"
 msgstr "Подключиться !"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Подключиться к игре через интернет"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Подключиться к игре"
 
@@ -619,17 +623,19 @@ msgstr "Ошибка при загрузке команды :"
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке данных команды %s:"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ошибка при загрузке конфигурационного файла: %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Ошибка при загрузке конфигурационного файла по умолчанию: %s"
@@ -649,22 +655,24 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ошибка: не удалось подключиться к %s: %s"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
-msgstr "Ошибка: Не удалось соединиться с индексным сервером, чтобы создать хостинг игры."
+msgstr ""
+"Ошибка: Не удалось соединиться с индексным сервером, чтобы создать хостинг "
+"игры."
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Ошибка: Не удалось соединиться с указанным сервером, чтобы найти интернет "
 "игру"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "Ошибка: Не получилось запустить сервер"
 
@@ -685,11 +693,16 @@ msgstr "Футбольная бомба"
 msgid "Fullscreen?"
 msgstr "На весь экран?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+msgid "Game name:"
+msgstr ""
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Антилопа гну"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr "\"Кошка\""
 
@@ -710,7 +723,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Домашний каталог (переменная окружения $HOME) не найдена!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "Удачной игры!"
 
@@ -727,7 +740,7 @@ msgstr "Командующий: "
 msgid "Help"
 msgstr "Справка"
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Стать сервером"
 
@@ -816,9 +829,10 @@ msgstr "Получи и распишись."
 msgid "Jetpack"
 msgstr "Реактивный ранец"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr "Заходите на #wormux на irc.freenode.net чтобы найти противников для игры"
+msgstr ""
+"Заходите на #wormux на irc.freenode.net чтобы найти противников для игры"
 
 #: src/menu/options_menu.cpp:123
 msgid "Language"
@@ -974,11 +988,11 @@ msgstr "Покинуть битву"
 msgid "Random map"
 msgstr "Случайная карта"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 msgid "Reading default config file"
 msgstr "Чтение конфига по умолчанию"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Чтение персонального конфига"
 
@@ -1012,7 +1026,7 @@ msgid "Server address:"
 msgstr "Адрес сервера:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Сервер доступен в интернете"
 
@@ -1033,7 +1047,11 @@ msgstr "Пропуск хода"
 msgid "Sniper Rifle"
 msgstr "Снайперская винтовка"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Извините, в данный момент нет игр ожидающих игроков"
 
@@ -1204,7 +1222,9 @@ msgstr[2] "Подождите! %i игроков пока не готовы!"
 
 #: src/menu/network_menu.cpp:387
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr "Ожидание действий сервера - всё что вы можете сделать, это отменить свою готовность или поболтать!"
+msgstr ""
+"Ожидание действий сервера - всё что вы можете сделать, это отменить свою "
+"готовность или поболтать!"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -1314,4 +1334,3 @@ msgstr "o Загрузка звукового профиля: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
-
