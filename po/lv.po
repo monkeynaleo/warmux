@@ -107,7 +107,7 @@ msgstr "%s ir miris, jo bija pārāk neveikls!"
 msgid "%s is next to a mine!"
 msgstr "%s ir nokļuvis blakus mīnai!"
 
-#: src/object/bonus_box.cpp:78
+#: src/object/bonus_box.cpp:84
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s komandai jau ir bezgalīgs daudzums munīcijas priekš %s!"
@@ -254,7 +254,7 @@ msgstr[0] "%s komanda ir ieguvusi %u dumpja bumbu!"
 msgstr[1] "%s komanda ir ieguvusi %u dumpja bumbas!"
 msgstr[2] "%s komanda ir ieguvusi %u dumpja bumbas!"
 
-#: src/weapon/grapple.cpp:723
+#: src/weapon/grapple.cpp:714
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -527,11 +527,11 @@ msgid "Connect !"
 msgstr "Pieslēgties !"
 
 #: src/menu/network_connection_menu.cpp:60
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:188
 msgid "Connect to an internet game"
 msgstr "Pieslēgties spēlei internetā"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:178
 msgid "Connect to game"
 msgstr "Pieslēgties spēlei"
 
@@ -591,18 +591,18 @@ msgstr "Kļūda ielādējot komandu :"
 msgid "Error loading team's data %s:"
 msgstr "Kļūda ielādējot komandas datus %s:"
 
-#: src/game/config.cpp:444
+#: src/game/config.cpp:445
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Kļūda veidojot mapi \"%s\": nevar sglabāt konfigurācijas failu."
 
-#: src/game/config.cpp:317
+#: src/game/config.cpp:318
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/game/config.cpp:355
+#: src/game/config.cpp:356
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
@@ -622,21 +622,21 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:251
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Kļūda: Nevar pieslēgties %s:%s"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:225
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Kļūda: Nevar sazināties ar indeksa serveri, lai izvietotu spēli"
 
-#: src/menu/network_connection_menu.cpp:249
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Kļūda: Nevar sazināties ar indeksa serveri, lai meklētu interneta spēles"
 
-#: src/menu/network_connection_menu.cpp:226
+#: src/menu/network_connection_menu.cpp:239
 msgid "Error: Unable to start server"
 msgstr "Kļūda: Nevar sākt serveri"
 
@@ -658,11 +658,16 @@ msgstr "Dumpja bumba"
 msgid "Fullscreen?"
 msgstr "Pa visu ekrānu?"
 
+#. Game name
+#: src/menu/network_connection_menu.cpp:82
+msgid "Game name:"
+msgstr ""
+
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
 msgstr "Gnu šāvējs"
 
-#: src/weapon/grapple.cpp:120
+#: src/weapon/grapple.cpp:123
 msgid "Grapple"
 msgstr "Āķis"
 
@@ -683,7 +688,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "MĀJAS mape (vides mainīgias $HOME) nav atrasts!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:102
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "Lai jums jauka spēle!"
 
@@ -700,7 +705,7 @@ msgstr "Virspavēlnieks: "
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:161
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Izveidot spēli"
 
@@ -791,7 +796,7 @@ msgstr "Tā ir dāvana!"
 msgid "Jetpack"
 msgstr "Raķešsoma"
 
-#: src/menu/network_connection_menu.cpp:100 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pievienojies #wormux kanālam irc.freenode.net serverī, lai atrastu "
@@ -953,12 +958,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Ielādē kartes:"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:331
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
-#: src/game/config.cpp:363
+#: src/game/config.cpp:364
 msgid "Reading personal config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
@@ -992,7 +997,7 @@ msgid "Server address:"
 msgstr "Servera adrese:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:89
 msgid "Server available on Internet"
 msgstr "Serveris pieejams internetā"
 
@@ -1013,7 +1018,11 @@ msgstr "Izlaist gājienu"
 msgid "Sniper Rifle"
 msgstr "Snaiperšautene"
 
-#: src/menu/internet_menu.cpp:118
+#: src/object/bonus_box.cpp:74
+msgid "Someone put a booby trap into the crate!"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
