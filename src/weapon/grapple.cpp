@@ -49,35 +49,38 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
 {
   Point2d posd;
   double x_step, y_step ;
-  Point2i pos2;
 
   x_step = cos(angle) ;
   y_step = sin(angle) ;
 
-  from.x += (int)round(skip * x_step) ;
-  from.y += (int)round(skip * y_step) ;
-
   posd.x = (double)from.x ;
   posd.y = (double)from.y ;
+
+  posd.x += ((double)skip) * x_step;
+  posd.y += ((double)skip) * y_step;
+  
+  from.x = (int)round(posd.x) ;
+  from.y = (int)round(posd.y) ;
+
   contact_point.x = from.x ;
   contact_point.y = from.y ;
 
   length -= skip;
 
-  pos2.x = from.x + (int)round(length * cos(angle));
-  pos2.y = from.y + (int)round(length * sin(angle));
-
-  while(!world.IsOutsideWorld(contact_point) &&
+  // make it return the last point still in vacuum
+  Point2i new_contact_point = contact_point;
+  while(!world.IsOutsideWorld(new_contact_point) &&
         (length > 0))
     {
-      if (!world.IsInVacuum(contact_point))
+      if (!world.IsInVacuum(new_contact_point))
         return true ;
 
+      contact_point = new_contact_point;
       posd.x += x_step ;
       posd.y += y_step ;
-      contact_point.x = (int)round(posd.x) ;
-      contact_point.y = (int)round(posd.y) ;
-      length-- ;
+      new_contact_point.x = (int)round(posd.x) ;
+      new_contact_point.y = (int)round(posd.y) ;
+      length--;
     }
 
   return false ;
@@ -247,65 +250,52 @@ bool Grapple::TryAddNode(int CurrentSense)
   return false;
 }
 
-bool Grapple::TryBreakNode(int currentSense)
+bool Grapple::TryRemoveNodes(int currentSense)
 {
-  bool breakNode = false;
+  if ( rope_nodes.size() < 2 )
+    return false;
 
-  // Check if we can break a node.
-  int nodeSense = rope_nodes.back().sense;
-  double nodeAngle = rope_nodes.back().angle;
-  double angularSpeed = ActiveCharacter().GetAngularSpeed();
+  // [RCL]: nodeSense check seems to be useless... either remove node senses at all or
+  // find an example where it is required
   double currentAngle = ActiveCharacter().GetRopeAngle();
 
-  if ( (rope_nodes.size() != 1) &&              // We cannot break the initial node.
-       (nodeSense * currentSense < 0) ) // Cannot break a node if we are in the
-                                        // same sense of the node.
-    {
-      if ( (currentAngle > 0) &&
-           (angularSpeed > 0) &&
-           (currentAngle > nodeAngle))
-        breakNode = true ;
+  const int max_nodes_per_turn = 100; // safe value to avoid network congestion
+  int nodes_to_remove = 0;
+  for ( std::list<rope_node_t>::reverse_iterator it = rope_nodes.rbegin();
+       it != rope_nodes.rend(); it++ )
+  {
+    if ( nodes_to_remove >= max_nodes_per_turn )
+        break;
 
-      if ( (currentAngle > 0) &&
-           (angularSpeed < 0) &&
-           (currentAngle < nodeAngle))
-        breakNode = true ;
+    double nodeAngle = it->angle;
 
-      if ( (currentAngle < 0) &&
-           (angularSpeed > 0) &&
-           (currentAngle > nodeAngle))
-        breakNode = true ;
+    int currentAngleSign = ( currentAngle < 0 ) ? -1 : 1;
+    int nodeAngleSign = ( nodeAngle < 0 ) ? -1 : 1;
 
-      if ( (currentAngle < 0) &&
-           (angularSpeed < 0) &&
-           (currentAngle < nodeAngle))
-        breakNode = true ;
+    if ( currentAngleSign != nodeAngleSign && rope_nodes.size() > 2 )
+        nodes_to_remove++;
+    else
+        break;
 
-//       if ( (currentAngle < 0) &&
-//            (angularSpeed > 0) &&
-//            (currentAngle < nodeAngle))
-//         breakNode = true;
+  };
 
+  if ( nodes_to_remove > 0 )
+    MSG_DEBUG( "grapple.break", "nodes to remove %d", nodes_to_remove );
 
-    }
+  for ( int i = 0; i < nodes_to_remove; i ++ )
+  {
+     last_broken_node_angle = currentAngle;
+     last_broken_node_sense = currentSense;
 
-  // We can break the current node... Let's do it !
+     // remove last node
+     DetachNode();
+     // Send node suppression over the network
+     Action a(Action::ACTION_WEAPON_GRAPPLE);
+     a.Push(DETACH_NODE);
+     Network::GetInstance()->SendAction(&a);
+  }
 
-  if (breakNode)
-    {
-      last_broken_node_angle = currentAngle ;
-      last_broken_node_sense = currentSense ;
-
-      // remove last node
-      DetachNode();
-
-      // Send node suppression over the network
-      Action a(Action::ACTION_WEAPON_GRAPPLE);
-      a.Push(DETACH_NODE);
-      Network::GetInstance()->SendAction(&a);
-    }
-
-  return breakNode ;
+  return nodes_to_remove > 0;
 }
 
 void Grapple::NotifyMove(bool collision)
@@ -344,8 +334,7 @@ void Grapple::NotifyMove(bool collision)
   if (addNode)
     return;
 
-  // While there is nodes to break, we break !
-  while (TryBreakNode(currentSense));
+  TryRemoveNodes( currentSense );
 }
 
 void Grapple::Refresh()

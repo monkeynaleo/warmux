@@ -286,7 +286,7 @@
     <grapple>
       <nb_ammo>7</nb_ammo>
       <change_weapon>1</change_weapon>
-      <min_angle>45</min_angle>
+      <min_angle>-45</min_angle>
       <max_angle>89</max_angle>
       <max_rope_length>500</max_rope_length>
       <automatic_growing_speed>12</automatic_growing_speed>
