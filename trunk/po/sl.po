@@ -712,7 +712,7 @@ msgstr "Celozaslonski način?"
 #. Game name
 #: src/menu/network_connection_menu.cpp:82
 msgid "Game name:"
-msgstr ""
+msgstr "Ime igre:"
 
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
@@ -1066,7 +1066,7 @@ msgstr "Ostrostrelska puška"
 
 #: src/object/bonus_box.cpp:74
 msgid "Someone put a booby trap into the crate!"
-msgstr ""
+msgstr "Nekdo je v zaboj podtaknil bombo!"
 
 #: src/menu/internet_menu.cpp:125
 msgid "Sorry, currently, no game is waiting for players"
