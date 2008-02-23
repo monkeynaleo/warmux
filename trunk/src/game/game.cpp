@@ -418,6 +418,18 @@ void Game::Run()
 
 void Game::MessageEndOfGame() const
 {
+  const Network* net = Network::GetInstance();
+
+  // In case of network game and client
+  if (!net->IsLocal())
+  {
+    // Forced disconnection?
+    if (net->GetState()!=Network::NETWORK_PLAYING || net->cpu.empty())
+    {
+      printf("Assuming no winner\n");
+      return;
+    }
+  }
   std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
