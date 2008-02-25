@@ -18,5 +18,6 @@
 	<is_open>1</is_open>
 
 	<add_pad>1</add_pad>
-	<point name="lower_right_pad" x="500" y="0" />
+	<point name="lower_right_pad" x="0" y="0" />
+	<point name="upper_left_pad" x="0" y="500" />
 </resources>
