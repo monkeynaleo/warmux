@@ -174,9 +174,12 @@ bool compareTeamResults(const TeamResults* a, const TeamResults* b)
 
 //=========================================================
 
-ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
+ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   : Menu("menu/bg_results", vOk)
   , results(v)
+  , first_team(NULL)
+  , second_team(NULL)
+  , third_team(NULL)
   , index(-1)
   , max_height(DEF_SIZE+3*DEF_BORDER)
   , team_size(360, 40)
@@ -190,7 +193,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v)
   uint x = 20;
   uint y = 20;
 
-  ComputeTeamsOrder();
+  if (!disconnected)
+    ComputeTeamsOrder();
 
   // And the winner is :
   if (first_team) {

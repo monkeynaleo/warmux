@@ -83,7 +83,7 @@ class ResultsMenu : public Menu
                           const Point2i& relative_position) const;
     void Draw(const Point2i &mousePosition);
  public:
-    ResultsMenu(std::vector<TeamResults*>& v);
+    ResultsMenu(std::vector<TeamResults*>& v, bool disconnected = false);
     ~ResultsMenu();
 };
 

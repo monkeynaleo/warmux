@@ -418,22 +418,20 @@ void Game::Run()
 
 void Game::MessageEndOfGame() const
 {
-  const Network* net = Network::GetInstance();
+  const Network* net          = Network::GetInstance();
+  bool           disconnected = !net->IsLocal() && net->cpu.empty();
 
-  // In case of network game and client
-  if (!net->IsLocal())
+  if (disconnected)
   {
-    // Forced disconnection?
-    if (net->GetState()!=Network::NETWORK_PLAYING || net->cpu.empty())
-    {
-      printf("Assuming no winner\n");
-      return;
-    }
+    Question question;
+    question.Set(_("The game was interrupted because you got disconnected."), true, 0);
+    question.Ask();
   }
-  std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-  ResultsMenu menu(*results_list);
+
+  std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
+  ResultsMenu menu(*results_list, disconnected);
   menu.Run();
 
   TeamResults::deleteAllResults(results_list);
