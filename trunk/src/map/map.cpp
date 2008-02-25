@@ -358,3 +358,54 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
 
 //   std::cout << "//#############################" <<std::endl;
 }
+
+// traces ray, determining the collision point (if any)
+// if no collision detected, TraceResult is left uninitialized
+bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, uint trace_flags)
+{
+  Point2d diff = ( Point2d )( end - start );
+  Point2d delta = diff.GetNormal();
+  double length = diff.Norm();
+
+  // FIXME: use some Bresenham-like algorithm
+  Point2i prev_point = start;
+  Point2i new_point = prev_point;
+  Point2d iterated_point = ( Point2d )( start );
+  while( !IsOutsideWorld( new_point ) && ( length >= 0 ) )
+  {
+    if (!world.IsInVacuum( new_point ))
+    {
+      if ( trace_flags & COMPUTE_HIT )
+      {
+        tr.m_fraction = 1.0f - ( length / diff.Norm() );
+
+        if ( trace_flags & RETURN_LAST_IN_VACUUM_AS_HIT )
+        {
+          tr.m_hit = prev_point; // unless start is in vacuum, it's always in vacuum
+        }
+        else
+        {
+          tr.m_hit = new_point;
+        }
+
+        MSG_DEBUG( "map.collision", "tracing (%d,%d)->(%d,%d), collision at (%d,%d)",
+          start.x, start.y,
+          end.x, end.y,
+          tr.m_hit.x, tr.m_hit.y
+        );
+      }
+      return true ;
+    };
+
+    prev_point = new_point;
+    iterated_point += delta;
+
+    // not using automatic conversions to preserve call to round()
+    // which was in the original find_first_contact function in Grapple
+    new_point.x = ( int )round( iterated_point.x );
+    new_point.y = ( int )round( iterated_point.y );
+    length--;
+  }
+
+  return false;
+};

@@ -69,13 +69,56 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
 
   // make it return the last point still in vacuum
   Point2i new_contact_point = contact_point;
+  bool contact_point_uncertain = true;
   while(!world.IsOutsideWorld(new_contact_point) &&
         (length > 0))
     {
-      if (!world.IsInVacuum(new_contact_point))
+      if ( !world.IsInVacuum( new_contact_point ) )
+      {
+        ASSERT( contact_point_uncertain || world.IsInVacuum( contact_point ) );
+
+        // for uncertain contact points, see if it's in vacuum
+        if ( contact_point_uncertain && !world.IsInVacuum( contact_point ) )
+        {
+           // it's not, so try our best to return a contact point in vacuum
+           // try searching in area NxN around our original point and return 
+           // the closest pixel in vacuum
+
+           // FIXME: can be optimized!
+           const int search_radius = 5; // 121 pixels to search
+
+           Point2i closest_point;
+           Point2i cur;
+           int closest_point_distance = 2 * search_radius * search_radius + 1;// max
+           bool found = false;
+
+           for ( int i = -search_radius; i <= search_radius; i ++ )
+           {
+             for ( int j = -search_radius; j <= search_radius; j ++ )
+             {
+               cur = contact_point + Point2i( i, j );
+               if ( world.IsInVacuum( cur ) )
+               {
+                 // check for new closest
+                 int distance = i * i + j * j;
+                 if ( distance < closest_point_distance )
+                 {
+                   closest_point_distance = distance;
+                   closest_point = cur;
+                   found = true;
+                 }
+               }
+             }
+           }
+
+           if ( found )
+             contact_point = closest_point;
+        }
         return true ;
+      }
 
       contact_point = new_contact_point;
+      contact_point_uncertain = false; //now we know that it's in vacuum
       posd.x += x_step ;
       posd.y += y_step ;
       new_contact_point.x = (int)round(posd.x) ;
@@ -232,6 +275,12 @@ bool Grapple::TryAddNode(int CurrentSense)
            (fabs(last_broken_node_angle - rope_angle) < 0.1))
         return false ;
 
+      // if contact point is the same as position of the last node 
+      // (can happen because of jitter applied in find_first_contact_point),
+      // give up adding such node
+      if ( rope_nodes.size() > 0 && rope_nodes.back().pos == contact_point )
+        return false;
+
       // The rope has collided something...
       // Add a node on the rope and change the fixation point
       AttachNode(contact_point, rope_angle, CurrentSense);
@@ -258,14 +307,34 @@ bool Grapple::TryRemoveNodes(int currentSense)
   // [RCL]: nodeSense check seems to be useless... either remove node senses at all or
   // find an example where it is required
   double currentAngle = ActiveCharacter().GetRopeAngle();
+  Point2i mapRopeStart = ActiveCharacter().GetHandPosition();
 
   const int max_nodes_per_turn = 100; // safe value to avoid network congestion
   int nodes_to_remove = 0;
+
+  TraceResult tr;
+
   for ( std::list<rope_node_t>::reverse_iterator it = rope_nodes.rbegin();
        it != rope_nodes.rend(); it++ )
   {
     if ( nodes_to_remove >= max_nodes_per_turn )
         break;
+
+    // try tracing to current node:
+    // if we cannot trace, this means that previous node shouldn't have been removed
+    // (NOTE: since nodes are often in ground, we're ignoring traces hitting ground
+    // right at the end)
+    const float end_proximity_threshold = 0.95f;
+    if ( world.TraceRay( mapRopeStart, it->pos, tr ) && tr.m_fraction < end_proximity_threshold )
+    {
+        // collision detected!
+        if ( nodes_to_remove > 0 )
+            nodes_to_remove--; // undo the node remove
+
+        // now we can stop removing the nodes as we don't have the clear "sight"
+        // to current node
+        break;
+    };
 
     double nodeAngle = it->angle;
 
