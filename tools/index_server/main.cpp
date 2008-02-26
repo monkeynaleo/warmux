@@ -111,7 +111,10 @@ int main(int argc, void** argv)
 	if(chdir(working_dir.c_str()) == -1)
 		TELL_ERROR;
 
-	DownloadServerList();
+    bool local;
+    config.Get("download_list", local);
+	if (!local)
+        DownloadServerList();
 
 	bool chroot_opt;
 	config.Get("chroot", chroot_opt);
@@ -144,7 +147,8 @@ int main(int argc, void** argv)
 	// Set of socket where an activity have been detected
 	fd_set acting_sock_set;
 
-	sync_slave.Start();
+    if (!local)
+	   sync_slave.Start();
 
 	while(1)
 	{

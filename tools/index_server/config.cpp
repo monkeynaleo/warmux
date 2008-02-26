@@ -33,6 +33,7 @@ Config::Config()
 	SetDefault("chroot_gid", 500);
 	SetDefault("chroot_uid", 500);
 	SetDefault("connexion_max", -2);
+    SetDefault("local", false);
 	Display();
 }
 
