@@ -216,9 +216,9 @@ bool NetworkConnectionMenu::signal_ok()
   switch (current_action) {
   case NET_HOST: // Hosting your own server
     if( !internet_server->GetValue() )
-      index_server.SetHiddenServer();
+      IndexServer::GetInstance()->SetHiddenServer();
 
-    conn = index_server.Connect();
+    conn = IndexServer::GetInstance()->Connect();
     if(conn != CONNECTED)
     {
       DisplayError(conn);
@@ -233,7 +233,7 @@ bool NetworkConnectionMenu::signal_ok()
       goto out;
     }
 
-    index_server.SendServerStatus(game_name->GetText());
+    IndexServer::GetInstance()->SendServerStatus(game_name->GetText());
 
     if (!Network::GetInstance()->IsConnected()) {
       msg_box->NewMessage(_("Error: Unable to start server"), c_red);
@@ -256,7 +256,7 @@ bool NetworkConnectionMenu::signal_ok()
     break;
 
   case NET_BROWSE_INTERNET: // Search an internet game!
-    conn = index_server.Connect();
+    conn = IndexServer::GetInstance()->Connect();
     if (conn != CONNECTED) {
       DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
@@ -266,7 +266,7 @@ bool NetworkConnectionMenu::signal_ok()
     InternetMenu im;
     im.Run();
 
-    index_server.Disconnect();
+    IndexServer::GetInstance()->Disconnect();
 
     // we don't go back into the main menu!
     // -> im.Run() may have connected to a host so the
@@ -286,7 +286,7 @@ bool NetworkConnectionMenu::signal_ok()
     Network::GetInstance()->network_menu = &nm;
     nm.Run();
     Network::GetInstance()->network_menu = NULL;
-    index_server.Disconnect();
+    IndexServer::GetInstance()->Disconnect();
 
     // back to main menu after playing
     Network::Disconnect();
