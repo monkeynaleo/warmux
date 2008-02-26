@@ -88,6 +88,9 @@ public:
   // Answers to pings from the server / close connection if distantly closed
   void Refresh();
 
+  // Set it local
+  void SetLocal(uint16_t port = 9997) { server_lst["127.0.0.1"] = port; }
+
   // We want to host a game hidden on internet
   void SetHiddenServer() { hidden_server = true; };
 
