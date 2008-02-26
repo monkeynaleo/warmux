@@ -50,6 +50,7 @@ using namespace std;
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
+#include "network/index_server.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "tool/debug.h"
@@ -287,10 +288,11 @@ void ParseArgs(int argc, char * argv[])
       {"client",  optional_argument, NULL, 'c'},
       {"server",  no_argument,       NULL, 's'},
       {"debug",   required_argument, NULL, 'd'},
+      {"local-indexserver", optional_argument, NULL, 'l'},
       {NULL,      no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hbvpic::sd:",
+  while ((c = getopt_long (argc, argv, "hbvpic::l::sd:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
@@ -298,7 +300,8 @@ void ParseArgs(int argc, char * argv[])
         case 'h':
           printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
                  " [-i|--internet] [-s|--server] [-c|--client [ip]]"
-                 " [-d|--debug <debug_masks>|all]\n", argv[0]);
+                 " [-d|--debug <debug_masks>|all]\n"
+                 " [-l|--local-indexserver [port]]\n", argv[0]);
           printf("\nWith :\n");
           printf(" <debug_msg> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body_anim | body.state | bonus | box | camera.follow | camera.tracking | character | damage | downloader | explosion | game | game.endofturn | game_mode | game.statechange | ghost | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.play | lst_objects | map | map.load | map.random | menu | mine | mouse | network | network.crc | network.crc_bad | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | random | random.get | socket | sprite | team | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | wind }\n");
           exit(0);
@@ -336,6 +339,10 @@ void ParseArgs(int argc, char * argv[])
           choice = MainMenu::NETWORK;
           net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
           skip_menu = true;
+          break;
+        case 'l':
+          if (optarg) IndexServer::GetInstance()->SetLocal(atoi(optarg));
+          else        IndexServer::GetInstance()->SetLocal();
           break;
         }
     }
