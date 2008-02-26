@@ -284,7 +284,7 @@ void NetworkMenu::key_ok()
     return;
   }
 
-  index_server.Disconnect();
+  IndexServer::GetInstance()->Disconnect();
 
   Menu::key_ok();
 }
@@ -325,7 +325,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
       }
     }
 
-    index_server.Refresh();
+    IndexServer::GetInstance()->Refresh();
   }
   else {
     close_menu = true;

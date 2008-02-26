@@ -138,7 +138,7 @@ void InternetMenu::RefreshList(bool warning_if_empty)
     connect_lst->RemoveSelected();
   }
 
-  std::list<GameServerInfo> lst = index_server.GetHostList();
+  std::list<GameServerInfo> lst = IndexServer::GetInstance()->GetHostList();
 
   if (warning_if_empty && lst.size() == 0) {
     DisplayNoGameRunning();
@@ -164,7 +164,7 @@ void InternetMenu::RefreshList(bool warning_if_empty)
 
 void InternetMenu::Draw(const Point2i &/*mousePosition*/)
 {
-  index_server.Refresh();
+  IndexServer::GetInstance()->Refresh();
 }
 
 bool InternetMenu::signal_ok()

@@ -28,7 +28,8 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "network.h"
+#include "network/network.h"
+#include "include/singleton.h"
 
 class GameServerInfo
 {
@@ -39,7 +40,7 @@ class GameServerInfo
   std::string game_name;
 };
 
-class IndexServer
+class IndexServer : public Singleton<IndexServer>
 {
   /* If you need this, implement it (correctly)*/
   IndexServer(const IndexServer&);
@@ -96,7 +97,5 @@ public:
   // returns a list with string pairs: first element = hostname/ip, second element = port
   std::list<GameServerInfo> GetHostList();
 };
-
-extern IndexServer index_server;
 
 #endif

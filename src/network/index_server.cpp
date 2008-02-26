@@ -32,8 +32,6 @@
 #include "tool/debug.h"
 #include "tool/random.h"
 
-IndexServer index_server;
-
 IndexServer::IndexServer():
   socket(),
   ip(),
