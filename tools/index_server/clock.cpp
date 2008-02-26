@@ -32,7 +32,7 @@ Clock::Clock()
 	last_refresh = time(NULL);
 }
 
-void Clock::HandleJobs()
+void Clock::HandleJobs(bool local)
 {
 	if(time(NULL) == last_refresh)
 		return;
@@ -54,7 +54,7 @@ void Clock::HandleJobs()
 	}
 	else
 	// Refresh connections to the servers every minutes
-	if(time(NULL) % 60 == 0)
+	if(time(NULL) % 60 == 0 && !local)
 	{
 		sync_slave.Start();
 	}

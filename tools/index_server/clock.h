@@ -31,7 +31,7 @@ class Clock
 
 public:
 	Clock();
-	void HandleJobs();
+	void HandleJobs(bool local=false);
 	const char* TimeStr();
 	const char* DateStr();
 	void ShowUpTime();
