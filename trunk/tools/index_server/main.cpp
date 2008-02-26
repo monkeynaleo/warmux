@@ -112,7 +112,7 @@ int main(int argc, void** argv)
 		TELL_ERROR;
 
     bool local;
-    config.Get("download_list", local);
+    config.Get("local", local);
 	if (!local)
         DownloadServerList();
 
@@ -152,7 +152,7 @@ int main(int argc, void** argv)
 
 	while(1)
 	{
-		wx_clock.HandleJobs();
+		wx_clock.HandleJobs(local);
 		sync_slave.CheckGames();
 
 		struct timeval timeout;
