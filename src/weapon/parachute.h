@@ -34,7 +34,11 @@ class Parachute : public Weapon
   private:
     bool open;
     bool closing;
-    double m_x_extern;
+
+    struct {
+      double x_extern;
+      bool changing;
+    } m_x_strength;
     Sprite* img;
   protected:
     void p_Select();
