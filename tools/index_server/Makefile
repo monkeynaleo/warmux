@@ -1,8 +1,8 @@
 dynamic:
-	make -f Makefile.dynamic
+	$(MAKE) -f Makefile.dynamic
 
 static:
-	make -f Makefile.static
+	$(MAKE) -f Makefile.static
 
 help:
 	@echo "* Use 'make' to build a dynamic binary"
