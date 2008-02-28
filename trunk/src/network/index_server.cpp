@@ -290,6 +290,7 @@ bool IndexServer::SendServerStatus(const std::string& game_name)
   if (ack == "OK")
     return true;
 
+  Disconnect();
   return false;
 }
 
