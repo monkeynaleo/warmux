@@ -301,9 +301,28 @@ void SendGameMode()
   Network::GetInstance()->SendAction(&a);
 }
 
-void Action_Rules_AskVersion (Action */*a*/)
+void Action_Rules_AskVersion (Action *a)
 {
   if (!Network::GetInstance()->IsClient()) return;
+
+  bool will_disconnect = false;
+  std::string server_version = "UNKNOWN";
+  if (a->IsEmpty()) {
+    // the server is an old wormux server (0.7.9 to 0.8beta4)
+    will_disconnect = true;
+  } else {
+    std::string server_version = a->PopString();
+    if (server_version != Constants::WORMUX_VERSION) {
+      will_disconnect = true;
+    }
+  }
+
+  if (will_disconnect) {
+    std::string str = Format(_("I tried to connect to a server with a different version : me=%s, server=%s."),
+			     Constants::WORMUX_VERSION.c_str(), server_version.c_str());
+    Network::GetInstance()->network_menu->DisplayError(str);
+  }
+
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_SEND_VERSION, Constants::WORMUX_VERSION));
 }
 
@@ -319,7 +338,7 @@ void Action_Rules_SendVersion (Action *a)
     std::string str = Format(_("%s tries to connect with a different version : client=%s, me=%s."),
                                a->creator->GetAddress().c_str(), version.c_str(), Constants::WORMUX_VERSION.c_str());
     Network::GetInstance()->network_menu->ReceiveMsgCallback(str);
-    std::cerr << str << std::endl;
+    Network::GetInstance()->network_menu->DisplayError(str);
     return;
   }
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT, a->creator->GetAddress()));

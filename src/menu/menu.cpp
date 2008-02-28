@@ -19,12 +19,15 @@
  * Generic menu
  *****************************************************************************/
 
+#include <iostream>
+
 #include "menu/menu.h"
 #include "include/app.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/box.h"
+#include "gui/question.h"
 #include "interface/mouse.h"
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
@@ -154,6 +157,17 @@ void Menu::key_right()
 {
 }
 
+void Menu::DisplayError(const std::string &msg)
+{
+  play_error_sound();
+
+  std::cerr << msg << std::endl;
+
+  Question question;
+  question.Set(msg, true, 0);
+  question.Ask();
+}
+
 void Menu::DrawBackground()
 {
   background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());
@@ -206,7 +220,7 @@ void Menu::Run (bool skip_menu)
 	if (event.key.keysym.sym != SDLK_ESCAPE &&
 	    event.key.keysym.sym != SDLK_RETURN)
 	  used_by_widget = widgets.SendKey(event.key.keysym);
-	
+
 	if (!used_by_widget) {
 	  switch (event.key.keysym.sym)
 	    {
@@ -215,7 +229,7 @@ void Menu::Run (bool skip_menu)
 	      break;
 	    case SDLK_RETURN:
 	      key_ok();
-	      break;          
+	      break;
 	    case SDLK_UP:
 	      key_up();
 	      break;

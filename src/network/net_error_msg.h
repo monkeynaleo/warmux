@@ -23,6 +23,6 @@
 #define NET_ERROR_MSG_H
 #include "network.h"
 
-void DispNetworkError(connection_state_t err);
+const std::string NetworkErrorToString(connection_state_t err);
 
 #endif

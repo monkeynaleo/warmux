@@ -24,9 +24,8 @@
 #include "tool/i18n.h"
 #include "gui/question.h"
 
-void DispNetworkError(connection_state_t err)
+const std::string NetworkErrorToString(connection_state_t err)
 {
-  Question question;
   std::string msg;
   switch(err)
   {
@@ -51,7 +50,6 @@ void DispNetworkError(connection_state_t err)
   default: ASSERT(false);
   }
 
-  question.Set(msg, 1, 0);
-  question.Ask();
+  return msg;
 }
 

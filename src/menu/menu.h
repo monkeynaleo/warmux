@@ -57,6 +57,8 @@ public:
    virtual void RedrawBackground(const Rectanglei& rect, Surface& surf);
    virtual void RedrawMenu();
 
+   void DisplayError(const std::string &msg);
+
 private:
    Sprite *background;
 
