@@ -199,10 +199,9 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
 
 void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/){}
 
-void NetworkConnectionMenu::DisplayError(connection_state_t conn)
+void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
 {
-  play_error_sound();
-  DispNetworkError(conn);
+  Menu::DisplayError(NetworkErrorToString(conn));
 }
 
 bool NetworkConnectionMenu::signal_ok()
@@ -221,7 +220,7 @@ bool NetworkConnectionMenu::signal_ok()
     conn = IndexServer::GetInstance()->Connect();
     if(conn != CONNECTED)
     {
-      DisplayError(conn);
+      DisplayNetError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
       goto out;
     }
@@ -229,13 +228,13 @@ bool NetworkConnectionMenu::signal_ok()
     conn = Network::GetInstance()->ServerStart(port_number->GetText());
     if( conn != CONNECTED)
     {
-      DisplayError(conn);
+      DisplayNetError(conn);
       goto out;
     }
 
     r = IndexServer::GetInstance()->SendServerStatus(game_name->GetText());
     if (false == r) {
-      DisplayError(CONN_BAD_PORT);
+      DisplayNetError(CONN_BAD_PORT);
       msg_box->NewMessage(_("Error: Your server is not reachable from the internet. Check your firewall configuration")
 			    , c_red);
       goto out;
@@ -251,7 +250,7 @@ bool NetworkConnectionMenu::signal_ok()
   case NET_CONNECT_LOCAL: // Direct connexion to a server
     conn = Network::ClientStart(server_address->GetText(), port_number->GetText());
     if (!Network::IsConnected() || conn != CONNECTED) {
-      DisplayError(conn);
+      DisplayNetError(conn);
 
       // translators: %s:%s will expand to something like "example.org:9999"
       msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
@@ -264,7 +263,7 @@ bool NetworkConnectionMenu::signal_ok()
   case NET_BROWSE_INTERNET: // Search an internet game!
     conn = IndexServer::GetInstance()->Connect();
     if (conn != CONNECTED) {
-      DisplayError(conn);
+      DisplayNetError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
       goto out;
     }

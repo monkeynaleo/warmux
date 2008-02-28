@@ -109,7 +109,7 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
     }
     else
     {
-      DispNetworkError(conn);
+      Menu::DisplayError(NetworkErrorToString(conn));
     }
   }
 }
@@ -117,13 +117,6 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
 void InternetMenu::OnClick(const Point2i &mousePosition, int button)
 {
   widgets.Click(mousePosition, button);
-}
-
-void InternetMenu::DisplayNoGameRunning()
-{
-  Question question;
-  question.Set(_("Sorry, currently, no game is waiting for players"), 1, 0);
-  question.Ask();
 }
 
 void InternetMenu::RefreshList(bool warning_if_empty)
@@ -141,7 +134,7 @@ void InternetMenu::RefreshList(bool warning_if_empty)
   std::list<GameServerInfo> lst = IndexServer::GetInstance()->GetHostList();
 
   if (warning_if_empty && lst.size() == 0) {
-    DisplayNoGameRunning();
+    Menu::DisplayError(_("Sorry, currently, no game is waiting for players"));
     return;
   }
 
