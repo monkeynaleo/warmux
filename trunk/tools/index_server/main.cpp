@@ -47,19 +47,20 @@ std::multimap<std::string, Client*> clients;
 
 void SetChroot()
 {
-	if(chroot("./") == -1)
-		TELL_ERROR;
-	if(chdir("/") == -1)
-		TELL_ERROR;
+    // If root, do chroot
+    if(chroot("./") == -1)
+        TELL_ERROR;
+    if(chdir("/") == -1)
+        TELL_ERROR;
 
-	int uid, gid;
-	config.Get("chroot_uid", uid);
-	config.Get("chroot_gid", gid);
+    int uid, gid;
+    config.Get("chroot_uid", uid);
+    config.Get("chroot_gid", gid);
 
-	if(setgid(gid) == -1)
-		TELL_ERROR;
-	if(setuid(uid) == -1)
-		TELL_ERROR;
+    if(setgid(gid) == -1)
+       TELL_ERROR;
+    if(setuid(uid) == -1)
+       TELL_ERROR;
 }
 
 int SetMaxConnection()
@@ -119,7 +120,8 @@ int main(int argc, void** argv)
 	bool chroot_opt;
 	config.Get("chroot", chroot_opt);
 
-	if (chroot_opt)
+    // Attempt chroot only when root
+	if (chroot_opt && !getgid())
 		SetChroot();
 
 	if(getuid() == 0)
