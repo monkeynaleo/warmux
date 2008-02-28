@@ -273,16 +273,24 @@ bool IndexServer::HandShake()
   return true;
 }
 
-void IndexServer::SendServerStatus(const std::string& game_name)
+bool IndexServer::SendServerStatus(const std::string& game_name)
 {
+  std::string ack;
   ASSERT(Network::GetInstance()->IsServer());
 
-  if(hidden_server)
-    return;
+  if (hidden_server)
+    return true;
+
   Send(TS_MSG_GAMENAME);
   Send(game_name);
   Send(TS_MSG_HOSTING);
   Send(Network::GetInstance()->GetPort());
+
+  ack = ReceiveStr();
+  if (ack == "OK")
+    return true;
+
+  return false;
 }
 
 std::list<GameServerInfo> IndexServer::GetHostList()
