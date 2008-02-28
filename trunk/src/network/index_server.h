@@ -89,7 +89,7 @@ public:
   void Refresh();
 
   // Set it local
-  void SetLocal(uint16_t port = 9997) { server_lst["127.0.0.1"] = port; }
+  void SetLocal(const char* hostname = "127.0.0.1") { server_lst[hostname] = 9997; }
 
   // We want to host a game hidden on internet
   void SetHiddenServer() { hidden_server = true; };

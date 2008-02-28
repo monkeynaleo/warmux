@@ -288,7 +288,6 @@ void ParseArgs(int argc, char * argv[])
       {"client",  optional_argument, NULL, 'c'},
       {"server",  no_argument,       NULL, 's'},
       {"debug",   required_argument, NULL, 'd'},
-      {"local-indexserver", optional_argument, NULL, 'l'},
       {NULL,      no_argument,       NULL,  0 }
     };
 
