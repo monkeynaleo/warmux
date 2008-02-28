@@ -233,7 +233,13 @@ bool NetworkConnectionMenu::signal_ok()
       goto out;
     }
 
-    IndexServer::GetInstance()->SendServerStatus(game_name->GetText());
+    r = IndexServer::GetInstance()->SendServerStatus(game_name->GetText());
+    if (false == r) {
+      DisplayError(CONN_BAD_PORT);
+      msg_box->NewMessage(_("Error: Your server is not reachable from the internet. Check your firewall configuration")
+			    , c_red);
+      goto out;
+    }
 
     if (!Network::GetInstance()->IsConnected()) {
       msg_box->NewMessage(_("Error: Unable to start server"), c_red);

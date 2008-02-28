@@ -194,9 +194,11 @@ bool Client::HandleMsg(const std::string & str)
         // firewalled or not
 	if (!CheckHost(GetIP(), port)) {
 	  DPRINT(MSG, "server is not reachable");
+	  // answer to the server
+	  SendStr("UNREACHABLE");
 	  return false;
 	}
-
+	SendStr("OK");
         NotifyServers( true );
         stats.NewServer();
 

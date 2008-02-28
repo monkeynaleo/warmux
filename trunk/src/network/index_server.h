@@ -95,7 +95,7 @@ public:
   void SetHiddenServer() { hidden_server = true; };
 
   // Notify the top server we are hosting a game
-  void SendServerStatus(const std::string& game_name);
+  bool SendServerStatus(const std::string& game_name);
 
   // returns a list with string pairs: first element = hostname/ip, second element = port
   std::list<GameServerInfo> GetHostList();
