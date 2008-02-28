@@ -340,7 +340,7 @@ void ParseArgs(int argc, char * argv[])
           skip_menu = true;
           break;
         case 'l':
-          if (optarg) IndexServer::GetInstance()->SetLocal(atoi(optarg));
+          if (optarg) IndexServer::GetInstance()->SetLocal(optarg);
           else        IndexServer::GetInstance()->SetLocal();
           break;
         }
