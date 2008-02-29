@@ -53,8 +53,8 @@ public:
   typedef enum
   {
     WEAPON_BAZOOKA,       WEAPON_AUTOMATIC_BAZOOKA, WEAPON_CLUZOOKA, WEAPON_RIOT_BOMB,
-    WEAPON_GRENADE,       WEAPON_DISCO_GRENADE,     WEAPON_CLUSTER_BOMB, WEAPON_FOOTBOMB, 
-    WEAPON_GUN,           WEAPON_SHOTGUN,           WEAPON_SUBMACHINE_GUN, 
+    WEAPON_GRENADE,       WEAPON_DISCO_GRENADE,     WEAPON_CLUSTER_BOMB, WEAPON_FOOTBOMB,
+    WEAPON_GUN,           WEAPON_SHOTGUN,           WEAPON_SUBMACHINE_GUN,
     WEAPON_BASEBALL,      WEAPON_FLAMETHROWER,
 
     WEAPON_DYNAMITE,      WEAPON_MINE,
@@ -159,6 +159,7 @@ protected:
   virtual void DrawWeaponFire();
   void DrawAmmoUnits() const;
 
+  void RepeatShoot();
 public:
   Weapon(Weapon_type type,
          const std::string &id,

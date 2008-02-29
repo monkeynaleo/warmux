@@ -97,15 +97,6 @@ bool Blowtorch::p_Shoot()
   return true;
 }
 
-void Blowtorch::RepeatShoot() const
-{
-  uint time = Time::GetInstance()->Read() - m_last_fire_time;
-
-  if (time >= m_time_between_each_shot) {
-    NewActionWeaponShoot();
-  }
-}
-
 void Blowtorch::HandleKeyPressed_Shoot(bool shift)
 {
   ActiveCharacter().BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
@@ -118,7 +109,7 @@ void Blowtorch::HandleKeyPressed_Shoot(bool shift)
 void Blowtorch::HandleKeyRefreshed_Shoot(bool)
 {
   if (EnoughAmmoUnit()) {
-    RepeatShoot();
+    Weapon::RepeatShoot();
   }
 }
 
