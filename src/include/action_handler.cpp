@@ -318,7 +318,7 @@ void Action_Rules_AskVersion (Action *a)
   }
 
   if (will_disconnect) {
-    std::string str = Format(_("I tried to connect to a server with a different version : me=%s, server=%s."),
+    std::string str = Format(_("The client and server versions are incompatible (local=%s, server=%s). Please try another server."),
 			     Constants::WORMUX_VERSION.c_str(), server_version.c_str());
     Network::GetInstance()->network_menu->DisplayError(str);
   }
