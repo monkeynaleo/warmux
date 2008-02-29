@@ -697,7 +697,7 @@ msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
-msgstr ""
+msgstr "Napaka: Vaš strežnik ni dosegljiv preko Interneta. Preverite vaš požarni zid"
 
 #: src/team/team.cpp:120
 #, c-format
@@ -1150,6 +1150,8 @@ msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
+"Različice odjemalca in strežnika niso združljive (odjemalec=%s, strežnik=%s)! "
+"Prosimo poskusite z drugim strežnikom."
 
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
@@ -1161,7 +1163,7 @@ msgstr "Disko granata je zapustila plesišče preden je eksplodirala"
 
 #: src/game/game.cpp:427
 msgid "The game was interrupted because you got disconnected."
-msgstr ""
+msgstr "Igra je bila prekinjena zaradi prekinitve povezave."
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
