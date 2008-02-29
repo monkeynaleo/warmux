@@ -136,18 +136,6 @@ bool Airhammer::p_Shoot()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::RepeatShoot()
-{
-  uint current_time = Time::GetInstance()->Read();
-
-  if (current_time - m_last_fire_time >= m_time_between_each_shot) {
-    NewActionWeaponShoot();
-    m_last_fire_time = current_time;
-  }
-}
-
-//-----------------------------------------------------------------------------
-
 void Airhammer::ActionStopUse()
 {
   ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
@@ -166,7 +154,7 @@ void Airhammer::p_Deselect()
 void Airhammer::HandleKeyRefreshed_Shoot(bool)
 {
   if (EnoughAmmoUnit()) {
-    RepeatShoot();
+    Weapon::RepeatShoot();
   }
 }
 
@@ -178,7 +166,6 @@ bool Airhammer::IsInUse() const
 void Airhammer::p_Select()
 {
   select_sound.Play("share","weapon/airhammer_select",-1);
-  m_last_fire_time = 0;
 }
 
 std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const

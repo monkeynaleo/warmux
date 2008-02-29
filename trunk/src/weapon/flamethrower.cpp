@@ -165,23 +165,10 @@ bool FlameThrower::p_Shoot()
   return true;
 }
 
-// Overide regular Refresh method
-void FlameThrower::RepeatShoot()
-{
-  uint tmp = Time::GetInstance()->Read();
-  uint time = tmp - m_last_fire_time;
-
-  if (time >= m_time_between_each_shot)
-    {
-      NewActionWeaponShoot();
-      m_last_fire_time = tmp;
-    }
-}
-
 void FlameThrower::HandleKeyRefreshed_Shoot(bool /*shift*/)
 {
   if (EnoughAmmoUnit()) {
-    RepeatShoot();
+    Weapon::RepeatShoot();
   }
 }
 

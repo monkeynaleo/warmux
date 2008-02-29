@@ -118,13 +118,13 @@ bool Shotgun::p_Shoot ()
   announce_missed_shots = false;
   if (IsInUse())
     return false;
+
   for(int i = 0; i < SHOTGUN_BULLETS; i++) {
     projectile->Shoot(SHOTGUN_BUCKSHOT_SPEED);
     projectile = NULL;
     ReloadLauncher();
   }
   ShootSound();
-  m_last_fire_time = Time::GetInstance()->Read();
   return true;
 }
 

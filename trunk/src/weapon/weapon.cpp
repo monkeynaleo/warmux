@@ -164,6 +164,7 @@ void Weapon::Select()
   m_time_anim_begin = Time::GetInstance()->Read();
   m_is_active = false;
   m_strength = 0;
+  m_last_fire_time = 0;
   ActiveTeam().ResetNbUnits();
 
   ActiveCharacter().SetWeaponClothe();
@@ -325,7 +326,17 @@ bool Weapon::Shoot()
   return true;
 }
 
-// Calcule la position de l'image de l'arme
+void Weapon::RepeatShoot()
+{
+  uint current_time = Time::GetInstance()->Read();
+
+  if (current_time - m_last_fire_time >= m_time_between_each_shot) {
+    NewActionWeaponShoot();
+    // m_last_fire_time = current_time; this is done in Weapon::Shoot()
+  }
+}
+
+// Compute position of weapon's image
 void Weapon::PosXY (int &x, int &y) const
 {
   if (origin == weapon_origin_HAND)
@@ -358,7 +369,7 @@ const Point2i Weapon::GetGunHolePosition() const
     angle += ActiveCharacter().GetFiringAngle();
   else
     angle += ActiveCharacter().GetFiringAngle() - M_PI;
- 
+
   return pos + Point2i(static_cast<int>(dst * cos(angle)),
 		       static_cast<int>(dst * sin(angle)));
 }

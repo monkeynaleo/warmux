@@ -29,7 +29,6 @@
 class SubMachineGun : public WeaponLauncher
 {
     ParticleEngine particle;
-    void RepeatShoot();
   protected:
     WeaponProjectile * GetProjectileInstance();
     void IncMissedShots();
