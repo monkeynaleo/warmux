@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-lv\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-02-29 03:46+0200\n"
 "PO-Revision-Date: 2007-08-25 12:48+0300\n"
 "Last-Translator: Raivis Dejus <orvils@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -38,7 +39,7 @@ msgstr[0] "%i spēlētājs gatavs"
 msgstr[1] "%i spēlētāji gatavi"
 msgstr[2] "%i spēlētāju gatavi"
 
-#: src/game/game.cpp:655
+#: src/game/game.cpp:665
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s ) ir nomiris."
@@ -64,7 +65,7 @@ msgstr "%s komanda"
 msgid "%s Team - Remote"
 msgstr "%s komanda - attālināta"
 
-#: src/game/game.cpp:634
+#: src/game/game.cpp:644
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izdara pašnāvību !"
@@ -74,12 +75,12 @@ msgstr "%s izdara pašnāvību !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:627
+#: src/game/game.cpp:637
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s iekrita ūdenī."
 
-#: src/game/game.cpp:638
+#: src/game/game.cpp:648
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s nokrita no kartes!"
@@ -92,12 +93,12 @@ msgstr[0] "%s ir ieguvis %u enerģijas punktu!"
 msgstr[1] "%s ir ieguvis %u enerģijas punktus!"
 msgstr[2] "%s ir ieguvis %u enerģijas punktus!"
 
-#: src/game/game.cpp:649
+#: src/game/game.cpp:659
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ir manjaks, viņš nogalināja %s komandas dalībnieku!"
 
-#: src/game/game.cpp:644
+#: src/game/game.cpp:654
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ir miris, jo bija pārāk neveikls!"
@@ -254,7 +255,7 @@ msgstr[0] "%s komanda ir ieguvusi %u dumpja bumbu!"
 msgstr[1] "%s komanda ir ieguvusi %u dumpja bumbas!"
 msgstr[2] "%s komanda ir ieguvusi %u dumpja bumbas!"
 
-#: src/weapon/grapple.cpp:714
+#: src/weapon/grapple.cpp:783
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -302,7 +303,7 @@ msgstr[0] "%s komanda ir ieguvusi %u mīnu!"
 msgstr[1] "%s komanda ir ieguvusi %u mīnas!"
 msgstr[2] "%s komanda ir ieguvusi %u mīnas!"
 
-#: src/weapon/parachute.cpp:156
+#: src/weapon/parachute.cpp:165
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -391,7 +392,7 @@ msgstr[0] "%s komanda ir ieguvusi %u tux šāvēju!"
 msgstr[1] "%s komanda ir ieguvusi %u tux šāvējus!"
 msgstr[2] "%s komanda ir ieguvusi %u tux šāvējus!"
 
-#: src/include/action_handler.cpp:319
+#: src/include/action_handler.cpp:338
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -426,7 +427,7 @@ msgstr "Gaisa uzlidojums"
 msgid "Airhammer"
 msgstr "Perforators"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:447
 msgid "All teams"
 msgstr "Visas komandas"
 
@@ -444,7 +445,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Lakta"
 
-#: src/main.cpp:250
+#: src/main.cpp:251
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -456,7 +457,7 @@ msgstr "Automātiskā bazuka"
 msgid "Back to battle"
 msgstr ""
 
-#: src/network/net_error_msg.cpp:43
+#: src/network/net_error_msg.cpp:42
 msgid "Bad socket ..."
 msgstr "Slikta ligzda ..."
 
@@ -535,7 +536,7 @@ msgstr "Pieslēgties spēlei internetā"
 msgid "Connect to game"
 msgstr "Pieslēgties spēlei"
 
-#: src/network/net_error_msg.cpp:34
+#: src/network/net_error_msg.cpp:33
 msgid "Connected !"
 msgstr "Pieslēdzies !"
 
@@ -543,7 +544,7 @@ msgstr "Pieslēdzies !"
 msgid "Construct"
 msgstr "Būvniecība"
 
-#: src/menu/results_menu.cpp:208
+#: src/menu/results_menu.cpp:212
 msgid "Controlled by: "
 msgstr "Kontrolē: "
 
@@ -622,23 +623,29 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:256
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Kļūda: Nevar pieslēgties %s:%s"
 
-#: src/menu/network_connection_menu.cpp:225
+#: src/menu/network_connection_menu.cpp:224
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Kļūda: Nevar sazināties ar indeksa serveri, lai izvietotu spēli"
 
-#: src/menu/network_connection_menu.cpp:262
+#: src/menu/network_connection_menu.cpp:267
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Kļūda: Nevar sazināties ar indeksa serveri, lai meklētu interneta spēles"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:244
 msgid "Error: Unable to start server"
 msgstr "Kļūda: Nevar sākt serveri"
+
+#: src/menu/network_connection_menu.cpp:238
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration"
+msgstr ""
 
 #: src/team/team.cpp:120
 #, c-format
@@ -667,7 +674,7 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "Gnu šāvējs"
 
-#: src/weapon/grapple.cpp:123
+#: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Āķis"
 
@@ -749,7 +756,7 @@ msgstr ""
 "Kā to izmantot : kreizais klikšķis uz mērķa\n"
 "munīcija gājienā"
 
-#: src/main.cpp:242
+#: src/main.cpp:243
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -788,7 +795,7 @@ msgstr "Gatavo skaņas"
 msgid "Initialise teams"
 msgstr "Gatavo komandas"
 
-#: src/game/game.cpp:518
+#: src/game/game.cpp:528
 msgid "It's a present!"
 msgstr "Tā ir dāvana!"
 
@@ -844,27 +851,27 @@ msgstr "Maksimālais FPS"
 msgid "Mine"
 msgstr "Mīna"
 
-#: src/menu/results_menu.cpp:280
+#: src/menu/results_menu.cpp:284
 msgid "Most accurate"
 msgstr ""
 
-#: src/menu/results_menu.cpp:275
+#: src/menu/results_menu.cpp:279
 msgid "Most clumsy"
 msgstr "Visneveiklākais"
 
-#: src/menu/results_menu.cpp:270
+#: src/menu/results_menu.cpp:274
 msgid "Most sold-out"
 msgstr "Vis nodevīgākais"
 
-#: src/menu/results_menu.cpp:260
+#: src/menu/results_menu.cpp:264
 msgid "Most useful"
 msgstr "Vis noderīgākais"
 
-#: src/menu/results_menu.cpp:265
+#: src/menu/results_menu.cpp:269
 msgid "Most useless"
 msgstr "Vis bezjēdzīgākais"
 
-#: src/menu/results_menu.cpp:255
+#: src/menu/results_menu.cpp:259
 msgid "Most violent"
 msgstr "Vis asiņainākais"
 
@@ -907,11 +914,11 @@ msgstr "Iestatījumi"
 msgid "Options menu"
 msgstr "Iestatījumi"
 
-#: src/weapon/parachute.cpp:65
+#: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Paršūts"
 
-#: src/weapon/parachute.cpp:96
+#: src/weapon/parachute.cpp:100
 msgid "Parachute is activated automatically."
 msgstr "Parašūts aktivizējas automātiski."
 
@@ -945,7 +952,7 @@ msgstr "Ports:"
 msgid "Quit"
 msgstr "Iziet"
 
-#: src/main.cpp:231
+#: src/main.cpp:232
 msgid "Quit Wormux"
 msgstr "Iziet no Wormux"
 
@@ -979,7 +986,7 @@ msgstr "Izšķirtspēja"
 msgid "Riot Bomb"
 msgstr "Dumpja bumba"
 
-#: src/main.cpp:79
+#: src/main.cpp:80
 msgid "Run game"
 msgstr "Sākt spēli"
 
@@ -1022,7 +1029,7 @@ msgstr "Snaiperšautene"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/internet_menu.cpp:125
+#: src/menu/internet_menu.cpp:137
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
@@ -1092,13 +1099,24 @@ msgstr "Automātiksā raķete izgāja no spēles laukuma..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bumba nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/network/net_error_msg.cpp:49
+#: src/include/action_handler.cpp:321
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
+#: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Savienojuma noildze. Pārbaudiet vai tam netraucē ugunssiena!"
 
 #: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disko granāta nokrita no spēles laukuma pirms paguva uzsprāgt"
+
+#: src/game/game.cpp:427
+msgid "The game was interrupted because you got disconnected."
+msgstr ""
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
@@ -1113,7 +1131,7 @@ msgstr "Citi gaida uz tevi! Dari kaut ko :-)"
 msgid "The rocket has left the battlefield..."
 msgstr "Raķete izgāja no spēles laukuma..."
 
-#: src/network/net_error_msg.cpp:46
+#: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
 msgstr "Serveris noraidīja savienojumu."
 
@@ -1153,7 +1171,7 @@ msgstr ""
 msgid "Tools"
 msgstr "Rīki"
 
-#: src/network/net_error_msg.cpp:37
+#: src/network/net_error_msg.cpp:36
 msgid "Unable to contact host."
 msgstr "Nevar pieslēgties."
 
@@ -1167,7 +1185,7 @@ msgstr "Nevar atvērt karšu mapi (%s)!"
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nevar atvērt karšu mapi (%s)!"
 
-#: src/network/net_error_msg.cpp:40
+#: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Nevar izmantot šo portu!"
 
@@ -1175,7 +1193,7 @@ msgstr "Nevar izmantot šo portu!"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:186
+#: src/main.cpp:187
 msgid "Version"
 msgstr "Versija"
 
@@ -1202,11 +1220,11 @@ msgstr "Gaida uz serveri, jūs varat atcelt vai tērzēt!"
 msgid "Weapons"
 msgstr "Ieroči"
 
-#: src/main.cpp:259
+#: src/main.cpp:260
 msgid "Website: "
 msgstr "Mākas lapa: "
 
-#: src/game/game.cpp:652
+#: src/game/game.cpp:662
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kauns un negods %s - viņu nogalināja ar vienkāršu ieroci!"
@@ -1216,15 +1234,15 @@ msgstr "Kauns un negods %s - viņu nogalināja ar vienkāršu ieroci!"
 msgid "Wind particles?"
 msgstr "Vējš?"
 
-#: src/menu/results_menu.cpp:200
+#: src/menu/results_menu.cpp:204
 msgid "Winner"
 msgstr "Uzvarētājs"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 msgid "Wormux launching..."
 msgstr "Wormux ielādējas..."
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Wormux version "
 msgstr "Wormux versija "
 

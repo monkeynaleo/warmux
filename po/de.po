@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-02-29 03:46+0200\n"
 "PO-Revision-Date: 2008-01-26 10:08+0100\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -36,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i Spieler bereit"
 msgstr[1] "%i Spieler bereit"
 
-#: src/game/game.cpp:655
+#: src/game/game.cpp:665
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) ist gestorben."
@@ -62,7 +63,7 @@ msgstr "Mannschaft %s"
 msgid "%s Team - Remote"
 msgstr "Mannschaft %s - Entfernt"
 
-#: src/game/game.cpp:634
+#: src/game/game.cpp:644
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begeht Selbstmord!"
@@ -72,12 +73,12 @@ msgstr "%s begeht Selbstmord!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:627
+#: src/game/game.cpp:637
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ist ins Wasser gefallen."
 
-#: src/game/game.cpp:638
+#: src/game/game.cpp:648
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ist von der Karte gefallen!"
@@ -89,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game.cpp:649
+#: src/game/game.cpp:659
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied von Mannschaft %s getötet!"
 
-#: src/game/game.cpp:644
+#: src/game/game.cpp:654
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s stirbt durch seine Tollpatschigkeit!"
@@ -249,7 +250,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Mannschaft %s hat %u Lärmbombe gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Lärmbombe gewonnen!"
 
-#: src/weapon/grapple.cpp:714
+#: src/weapon/grapple.cpp:783
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -293,7 +294,7 @@ msgid_plural "%s team has won %u mines!"
 msgstr[0] "Mannschaft %s hat %u Mine gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Minen gewonnen!"
 
-#: src/weapon/parachute.cpp:156
+#: src/weapon/parachute.cpp:165
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -383,7 +384,7 @@ msgstr[1] ""
 "Mannschaft %s hat %u Tux-Werfer gewonnen! Noch keinen fliegenden Pinguin "
 "gesehen?"
 
-#: src/include/action_handler.cpp:319
+#: src/include/action_handler.cpp:338
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -418,7 +419,7 @@ msgstr "Luftangriff"
 msgid "Airhammer"
 msgstr "Presslufthammer"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:447
 msgid "All teams"
 msgstr "Alle Mannschaften"
 
@@ -436,7 +437,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Amboss"
 
-#: src/main.cpp:250
+#: src/main.cpp:251
 msgid "Authors:"
 msgstr "Autoren:"
 
@@ -448,7 +449,7 @@ msgstr "Lenkrakete"
 msgid "Back to battle"
 msgstr "Zurück zur Schlacht"
 
-#: src/network/net_error_msg.cpp:43
+#: src/network/net_error_msg.cpp:42
 msgid "Bad socket ..."
 msgstr "fehlerhafter Socket"
 
@@ -527,7 +528,7 @@ msgstr "Zu einem Internet Spiel verbinden"
 msgid "Connect to game"
 msgstr "Zum Spiel verbinden"
 
-#: src/network/net_error_msg.cpp:34
+#: src/network/net_error_msg.cpp:33
 msgid "Connected !"
 msgstr "Verbunden !"
 
@@ -535,7 +536,7 @@ msgstr "Verbunden !"
 msgid "Construct"
 msgstr "Konstruktion"
 
-#: src/menu/results_menu.cpp:208
+#: src/menu/results_menu.cpp:212
 msgid "Controlled by: "
 msgstr "Gesteuert von: "
 
@@ -616,23 +617,29 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:256
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Fehler: Kann nicht zu %s:%s verbinden"
 
-#: src/menu/network_connection_menu.cpp:225
+#: src/menu/network_connection_menu.cpp:224
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Fehler: Kann Indexserver nicht kontaktieren um ein Spiel zu hosten"
 
-#: src/menu/network_connection_menu.cpp:262
+#: src/menu/network_connection_menu.cpp:267
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Fehler: Kann Indexserver nicht kontaktieren um ein Internetspiel zu suchen"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:244
 msgid "Error: Unable to start server"
 msgstr "Fehler: Kann Server nicht starten"
+
+#: src/menu/network_connection_menu.cpp:238
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration"
+msgstr ""
 
 #: src/team/team.cpp:120
 #, c-format
@@ -661,7 +668,7 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "Gnu-Werfer"
 
-#: src/weapon/grapple.cpp:123
+#: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Enterhaken"
 
@@ -742,7 +749,7 @@ msgstr ""
 "Wie man es benutzt : Linksklick aufs Ziel\n"
 "eine Munition pro Runde"
 
-#: src/main.cpp:242
+#: src/main.cpp:243
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -781,7 +788,7 @@ msgstr "Initialisiere Sounds"
 msgid "Initialise teams"
 msgstr "Initialisiere Mannschaft"
 
-#: src/game/game.cpp:518
+#: src/game/game.cpp:528
 msgid "It's a present!"
 msgstr "Es ist ein Geschenk!"
 
@@ -835,27 +842,27 @@ msgstr "Maximale FPS"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/results_menu.cpp:280
+#: src/menu/results_menu.cpp:284
 msgid "Most accurate"
 msgstr "Am präzisesten"
 
-#: src/menu/results_menu.cpp:275
+#: src/menu/results_menu.cpp:279
 msgid "Most clumsy"
 msgstr "Am tollpatschigsten"
 
-#: src/menu/results_menu.cpp:270
+#: src/menu/results_menu.cpp:274
 msgid "Most sold-out"
 msgstr "Am verräterischsten"
 
-#: src/menu/results_menu.cpp:260
+#: src/menu/results_menu.cpp:264
 msgid "Most useful"
 msgstr "Am nützlichsten"
 
-#: src/menu/results_menu.cpp:265
+#: src/menu/results_menu.cpp:269
 msgid "Most useless"
 msgstr "Am nutzlosesten"
 
-#: src/menu/results_menu.cpp:255
+#: src/menu/results_menu.cpp:259
 msgid "Most violent"
 msgstr "Am gewalttätigsten"
 
@@ -897,11 +904,11 @@ msgstr "Einstellungen"
 msgid "Options menu"
 msgstr "Einstellungs Menü"
 
-#: src/weapon/parachute.cpp:65
+#: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Fallschirm"
 
-#: src/weapon/parachute.cpp:96
+#: src/weapon/parachute.cpp:100
 msgid "Parachute is activated automatically."
 msgstr "Fallschirm wird automatisch aktiviert."
 
@@ -935,7 +942,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Verlassen"
 
-#: src/main.cpp:231
+#: src/main.cpp:232
 msgid "Quit Wormux"
 msgstr "Wormux verlassen"
 
@@ -967,7 +974,7 @@ msgstr "Auflösung"
 msgid "Riot Bomb"
 msgstr "Lärmbombe"
 
-#: src/main.cpp:79
+#: src/main.cpp:80
 msgid "Run game"
 msgstr "Spiel starten"
 
@@ -1010,7 +1017,7 @@ msgstr "Scharfschützengewehr"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/internet_menu.cpp:125
+#: src/menu/internet_menu.cpp:137
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Im Moment gibt es leider keine offenen Spiele"
 
@@ -1085,7 +1092,14 @@ msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Der Ball hat das Schlachtfeld verlassen bevor er explodieren konnte."
 
-#: src/network/net_error_msg.cpp:49
+#: src/include/action_handler.cpp:321
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
+#: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
 "Die Zeit für die Verbindung ist abgelaufen. Überprüfe, ob sich eine Firewall "
@@ -1095,6 +1109,10 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr ""
 "Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
+
+#: src/game/game.cpp:427
+msgid "The game was interrupted because you got disconnected."
+msgstr ""
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
@@ -1110,7 +1128,7 @@ msgstr "Die Anderen warten auf dich! Aufwachen :-)"
 msgid "The rocket has left the battlefield..."
 msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 
-#: src/network/net_error_msg.cpp:46
+#: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
 msgstr "Der Server hat die Verbindung zurückgesetzt."
 
@@ -1149,7 +1167,7 @@ msgstr ""
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#: src/network/net_error_msg.cpp:37
+#: src/network/net_error_msg.cpp:36
 msgid "Unable to contact host."
 msgstr "Kann Server nicht kontaktieren!"
 
@@ -1163,7 +1181,7 @@ msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Kann das persönliche Karten-Verzeichnis (%s) nicht öffnen!"
 
-#: src/network/net_error_msg.cpp:40
+#: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Kann diesen Port nicht verwenden!"
 
@@ -1171,7 +1189,7 @@ msgstr "Kann diesen Port nicht verwenden!"
 msgid "Unnamed"
 msgstr "Namenlos"
 
-#: src/main.cpp:186
+#: src/main.cpp:187
 msgid "Version"
 msgstr "Version"
 
@@ -1197,11 +1215,11 @@ msgstr "Auf Server warten. Du kannst abbrechen oder chatten!"
 msgid "Weapons"
 msgstr "Waffen"
 
-#: src/main.cpp:259
+#: src/main.cpp:260
 msgid "Website: "
 msgstr "Webseite: "
 
-#: src/game/game.cpp:652
+#: src/game/game.cpp:662
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
@@ -1211,15 +1229,15 @@ msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
 msgid "Wind particles?"
 msgstr "Windpartikel?"
 
-#: src/menu/results_menu.cpp:200
+#: src/menu/results_menu.cpp:204
 msgid "Winner"
 msgstr "Gewinner"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 msgid "Wormux launching..."
 msgstr "Wormux startet..."
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Wormux version "
 msgstr "Wormux Version "
 

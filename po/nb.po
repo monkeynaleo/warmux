@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-02-29 03:46+0200\n"
 "PO-Revision-Date: 2007-12-26 21:33-0000\n"
 "Last-Translator: Christian LOMSDALEN <christian@vindstille.net>\n"
 "Language-Team: \n"
@@ -34,7 +35,7 @@ msgid_plural "%i players ready"
 msgstr[0] " %i spiller klar"
 msgstr[1] " %i spillere klare"
 
-#: src/game/game.cpp:655
+#: src/game/game.cpp:665
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) døde."
@@ -60,7 +61,7 @@ msgstr "%s -laget"
 msgid "%s Team - Remote"
 msgstr "%s -laget - Fjernstyrt"
 
-#: src/game/game.cpp:634
+#: src/game/game.cpp:644
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s tok selvmord !"
@@ -70,12 +71,12 @@ msgstr "%s tok selvmord !"
 msgid "%s fps"
 msgstr "%s bps"
 
-#: src/game/game.cpp:627
+#: src/game/game.cpp:637
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s har falt i vannet"
 
-#: src/game/game.cpp:638
+#: src/game/game.cpp:648
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s har falt av kartet !"
@@ -87,12 +88,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har fått %u livspoeng !"
 msgstr[1] "%s har fått %u livspoeng !"
 
-#: src/game/game.cpp:649
+#: src/game/game.cpp:659
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er sinnsyk, han har drept et medlem av %s-laget !"
 
-#: src/game/game.cpp:644
+#: src/game/game.cpp:654
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s døde fordi han klønet det til!"
@@ -241,7 +242,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s-laget har vunnet %u opprørsbombe !"
 msgstr[1] "%s-laget har vunnet %u opprørsbomber !"
 
-#: src/weapon/grapple.cpp:714
+#: src/weapon/grapple.cpp:783
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -284,7 +285,7 @@ msgid_plural "%s team has won %u mines!"
 msgstr[0] "%s-laget har vunnet %u mine !"
 msgstr[1] "%s-laget har vunnet %u miner !"
 
-#: src/weapon/parachute.cpp:156
+#: src/weapon/parachute.cpp:165
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -368,7 +369,7 @@ msgstr[0] ""
 msgstr[1] ""
 "%s-laget har vunnet %u Tux-kastere, har du aldri sett en flygende pingvin?"
 
-#: src/include/action_handler.cpp:319
+#: src/include/action_handler.cpp:338
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -403,7 +404,7 @@ msgstr "Luftangrep"
 msgid "Airhammer"
 msgstr "Lufthammer"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:447
 msgid "All teams"
 msgstr "Alle lag"
 
@@ -420,7 +421,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:250
+#: src/main.cpp:251
 msgid "Authors:"
 msgstr "Forfattere :"
 
@@ -432,7 +433,7 @@ msgstr "Automatisk rakettkaster"
 msgid "Back to battle"
 msgstr "Tilbake til slaget"
 
-#: src/network/net_error_msg.cpp:43
+#: src/network/net_error_msg.cpp:42
 msgid "Bad socket ..."
 msgstr "Dårlig tilkobling"
 
@@ -511,7 +512,7 @@ msgstr "Koble til et internetspill"
 msgid "Connect to game"
 msgstr "Koble til et spill"
 
-#: src/network/net_error_msg.cpp:34
+#: src/network/net_error_msg.cpp:33
 msgid "Connected !"
 msgstr "Tilkoblet !"
 
@@ -519,7 +520,7 @@ msgstr "Tilkoblet !"
 msgid "Construct"
 msgstr "Konstruer"
 
-#: src/menu/results_menu.cpp:208
+#: src/menu/results_menu.cpp:212
 msgid "Controlled by: "
 msgstr "Kontrollert av: "
 
@@ -599,24 +600,30 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:256
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Tilkobling til %s:%s feilet"
 
-#: src/menu/network_connection_menu.cpp:225
+#: src/menu/network_connection_menu.cpp:224
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Tilkobling til Oversiktstjener for å starte et spill feilet"
 
-#: src/menu/network_connection_menu.cpp:262
+#: src/menu/network_connection_menu.cpp:267
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Tilkobling til Oversiktstjener feilet i forsøket på å søke etter et "
 "internettspill"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:244
 msgid "Error: Unable to start server"
 msgstr "Start av tjener feilet"
+
+#: src/menu/network_connection_menu.cpp:238
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration"
+msgstr ""
 
 #: src/team/team.cpp:120
 #, c-format
@@ -645,7 +652,7 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "Gnu-kaster"
 
-#: src/weapon/grapple.cpp:123
+#: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Entrehaker"
 
@@ -718,7 +725,7 @@ msgid ""
 "an ammo per turn"
 msgstr "Hvordan bruke den : venstreklikk på måleten ammo per runde"
 
-#: src/main.cpp:242
+#: src/main.cpp:243
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -756,7 +763,7 @@ msgstr "Laster lyder"
 msgid "Initialise teams"
 msgstr "Laster lagene"
 
-#: src/game/game.cpp:518
+#: src/game/game.cpp:528
 msgid "It's a present!"
 msgstr "Det er en gave !"
 
@@ -810,27 +817,27 @@ msgstr "Maksimum BPS"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/results_menu.cpp:280
+#: src/menu/results_menu.cpp:284
 msgid "Most accurate"
 msgstr "Mest treffsikker"
 
-#: src/menu/results_menu.cpp:275
+#: src/menu/results_menu.cpp:279
 msgid "Most clumsy"
 msgstr "Mest klønete"
 
-#: src/menu/results_menu.cpp:270
+#: src/menu/results_menu.cpp:274
 msgid "Most sold-out"
 msgstr "Mest utsolgt"
 
-#: src/menu/results_menu.cpp:260
+#: src/menu/results_menu.cpp:264
 msgid "Most useful"
 msgstr "Mest brukbar"
 
-#: src/menu/results_menu.cpp:265
+#: src/menu/results_menu.cpp:269
 msgid "Most useless"
 msgstr "Mest ubrukbar"
 
-#: src/menu/results_menu.cpp:255
+#: src/menu/results_menu.cpp:259
 msgid "Most violent"
 msgstr "Mest voldelig"
 
@@ -872,11 +879,11 @@ msgstr "Alternativer"
 msgid "Options menu"
 msgstr "Alternativer"
 
-#: src/weapon/parachute.cpp:65
+#: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Fallskjerm"
 
-#: src/weapon/parachute.cpp:96
+#: src/weapon/parachute.cpp:100
 msgid "Parachute is activated automatically."
 msgstr "Fallskjermen blir automatisk aktivert."
 
@@ -910,7 +917,7 @@ msgstr "Port :"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/main.cpp:231
+#: src/main.cpp:232
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
@@ -942,7 +949,7 @@ msgstr "Resolusjon"
 msgid "Riot Bomb"
 msgstr "Opprørsbombe"
 
-#: src/main.cpp:79
+#: src/main.cpp:80
 msgid "Run game"
 msgstr "Spill spillet"
 
@@ -985,7 +992,7 @@ msgstr "Snikskytterrifle"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/internet_menu.cpp:125
+#: src/menu/internet_menu.cpp:137
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Beklager, for øyeblikket er det ingen spill som venter på spillere"
 
@@ -1055,7 +1062,14 @@ msgstr "Den laserstyrte raketten forsvant fra kampplassen uten å eksplodere."
 msgid "The ball left the battlefield before exploding"
 msgstr "Sprettballen forsvant fra kampplassen uten å eksplodere."
 
-#: src/network/net_error_msg.cpp:49
+#: src/include/action_handler.cpp:321
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
+#: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
 "Tilkoblingen brukte for lang tid. Sjekk om en brannmur blokkerer for "
@@ -1064,6 +1078,10 @@ msgstr ""
 #: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Diskogranaten har forlatt dansegulvet uten å eksplodere"
+
+#: src/game/game.cpp:427
+msgid "The game was interrupted because you got disconnected."
+msgstr ""
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
@@ -1078,7 +1096,7 @@ msgstr "De andre venter på deg, Våkn opp :-)"
 msgid "The rocket has left the battlefield..."
 msgstr "Raketten forsvant fra kampplassen uten å eksplodere."
 
-#: src/network/net_error_msg.cpp:46
+#: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
 msgstr "Tjeneren nektet tilkoblingen"
 
@@ -1115,7 +1133,7 @@ msgstr ""
 msgid "Tools"
 msgstr "Verktøy"
 
-#: src/network/net_error_msg.cpp:37
+#: src/network/net_error_msg.cpp:36
 msgid "Unable to contact host."
 msgstr "Umulig å koble til tjeneren."
 
@@ -1129,7 +1147,7 @@ msgstr "kunne ikke åpne kartmappen (%s) !"
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "kunne ikke åpne den personlige kartmappen (%s) !"
 
-#: src/network/net_error_msg.cpp:40
+#: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Kunne ikke bruke denne porten  !"
 
@@ -1137,7 +1155,7 @@ msgstr "Kunne ikke bruke denne porten  !"
 msgid "Unnamed"
 msgstr "Uten navn"
 
-#: src/main.cpp:186
+#: src/main.cpp:187
 msgid "Version"
 msgstr "Versjon"
 
@@ -1163,11 +1181,11 @@ msgstr "Venter på server, alt du kan gjøre er å avbryte eller chatte"
 msgid "Weapons"
 msgstr "Våpen"
 
-#: src/main.cpp:259
+#: src/main.cpp:260
 msgid "Website: "
 msgstr "Webside : "
 
-#: src/game/game.cpp:652
+#: src/game/game.cpp:662
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "For en skam for %s : han ble drept av en liten pistol !"
@@ -1177,15 +1195,15 @@ msgstr "For en skam for %s : han ble drept av en liten pistol !"
 msgid "Wind particles?"
 msgstr "Vindpartikler ?"
 
-#: src/menu/results_menu.cpp:200
+#: src/menu/results_menu.cpp:204
 msgid "Winner"
 msgstr "Vinner"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 msgid "Wormux launching..."
 msgstr "Laster Wormux ..."
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Wormux version "
 msgstr "Wormux versjon "
 

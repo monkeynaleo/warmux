@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_eo\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-02-29 03:46+0200\n"
 "PO-Revision-Date: 2007-08-23 23:04+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -37,7 +38,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i ludanto pretas"
 msgstr[1] "%i ludantoj pretas"
 
-#: src/game/game.cpp:655
+#: src/game/game.cpp:665
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s teamo) mortis."
@@ -63,7 +64,7 @@ msgstr "%s Teamo"
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
 
-#: src/game/game.cpp:634
+#: src/game/game.cpp:644
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -73,12 +74,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr "%s bildo po sekundo (fps)"
 
-#: src/game/game.cpp:627
+#: src/game/game.cpp:637
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s droniĝis."
 
-#: src/game/game.cpp:638
+#: src/game/game.cpp:648
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s falis el la mapo !"
@@ -90,12 +91,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game.cpp:649
+#: src/game/game.cpp:659
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game.cpp:644
+#: src/game/game.cpp:654
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -243,7 +244,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s teamo gajnis %u tumultbombon !"
 msgstr[1] "%s teamo gajnis %u tumultbombojn !"
 
-#: src/weapon/grapple.cpp:714
+#: src/weapon/grapple.cpp:783
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -285,7 +286,7 @@ msgid_plural "%s team has won %u mines!"
 msgstr[0] "%s teamo gajnis %u minon !"
 msgstr[1] "%s teamo gajnis %u minojn !"
 
-#: src/weapon/parachute.cpp:156
+#: src/weapon/parachute.cpp:165
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -365,7 +366,7 @@ msgstr[0] ""
 msgstr[1] ""
 "%s teamo gajnis %u tuksĵetilojn ! Ĉu vi neniam vidis flugantan sfeniskon ?"
 
-#: src/include/action_handler.cpp:319
+#: src/include/action_handler.cpp:338
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s provas konetiĝi kun alia versio: kliento=%s, mi=%s."
@@ -399,7 +400,7 @@ msgstr "Aeratako"
 msgid "Airhammer"
 msgstr "Pneŭmatika martelo"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:447
 msgid "All teams"
 msgstr "Ĉiuj teamoj"
 
@@ -417,7 +418,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Amboso"
 
-#: src/main.cpp:250
+#: src/main.cpp:251
 msgid "Authors:"
 msgstr "Aŭtoroj :"
 
@@ -429,7 +430,7 @@ msgstr "Aŭtomatika bazuko"
 msgid "Back to battle"
 msgstr ""
 
-#: src/network/net_error_msg.cpp:43
+#: src/network/net_error_msg.cpp:42
 msgid "Bad socket ..."
 msgstr "Malbona kontaktilo..."
 
@@ -508,7 +509,7 @@ msgstr "Konektu al interretludo"
 msgid "Connect to game"
 msgstr "Konektu al ludo"
 
-#: src/network/net_error_msg.cpp:34
+#: src/network/net_error_msg.cpp:33
 msgid "Connected !"
 msgstr "Konektis !"
 
@@ -516,7 +517,7 @@ msgstr "Konektis !"
 msgid "Construct"
 msgstr "Konstruilo"
 
-#: src/menu/results_menu.cpp:208
+#: src/menu/results_menu.cpp:212
 msgid "Controlled by: "
 msgstr "Stirato per:"
 
@@ -595,22 +596,28 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:256
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ne eblas konekti al %s : %s"
 
-#: src/menu/network_connection_menu.cpp:225
+#: src/menu/network_connection_menu.cpp:224
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Eraro : Ne eblas kontakti indeksservilon por gastigi ludon"
 
-#: src/menu/network_connection_menu.cpp:262
+#: src/menu/network_connection_menu.cpp:267
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Eraro : Ne eblas kontakti indeksservilon por serĉi interretan ludon"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:244
 msgid "Error: Unable to start server"
 msgstr "Eraro : Ne eblas starti servilon"
+
+#: src/menu/network_connection_menu.cpp:238
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration"
+msgstr ""
 
 #: src/team/team.cpp:120
 #, c-format
@@ -639,7 +646,7 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "Gnuĵetilo"
 
-#: src/weapon/grapple.cpp:123
+#: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Alkroĉilo"
 
@@ -717,7 +724,7 @@ msgstr ""
 "Kiel uzi ĝin : maldekstrklaku sur celo\n"
 "Unu amunicio vice"
 
-#: src/main.cpp:242
+#: src/main.cpp:243
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -756,7 +763,7 @@ msgstr "Preparante sonojn"
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
-#: src/game/game.cpp:518
+#: src/game/game.cpp:528
 msgid "It's a present!"
 msgstr "Tio estas donaco !"
 
@@ -810,27 +817,27 @@ msgstr "Maksimumaj bildoj po sukundo (fps)"
 msgid "Mine"
 msgstr "Mino"
 
-#: src/menu/results_menu.cpp:280
+#: src/menu/results_menu.cpp:284
 msgid "Most accurate"
 msgstr "La plej akurata"
 
-#: src/menu/results_menu.cpp:275
+#: src/menu/results_menu.cpp:279
 msgid "Most clumsy"
 msgstr "La plej mallerta"
 
-#: src/menu/results_menu.cpp:270
+#: src/menu/results_menu.cpp:274
 msgid "Most sold-out"
 msgstr "La plej perfida"
 
-#: src/menu/results_menu.cpp:260
+#: src/menu/results_menu.cpp:264
 msgid "Most useful"
 msgstr "La plej utila"
 
-#: src/menu/results_menu.cpp:265
+#: src/menu/results_menu.cpp:269
 msgid "Most useless"
 msgstr "La plej malutila"
 
-#: src/menu/results_menu.cpp:255
+#: src/menu/results_menu.cpp:259
 msgid "Most violent"
 msgstr "La plej perforta"
 
@@ -873,11 +880,11 @@ msgstr "Opcioj"
 msgid "Options menu"
 msgstr "Opcioj"
 
-#: src/weapon/parachute.cpp:65
+#: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Paraŝuto"
 
-#: src/weapon/parachute.cpp:96
+#: src/weapon/parachute.cpp:100
 msgid "Parachute is activated automatically."
 msgstr "Paraŝuto aŭtomatike uziĝis."
 
@@ -911,7 +918,7 @@ msgstr "Pordo :"
 msgid "Quit"
 msgstr "Forlasu"
 
-#: src/main.cpp:231
+#: src/main.cpp:232
 msgid "Quit Wormux"
 msgstr "Forigu el Wormux"
 
@@ -944,7 +951,7 @@ msgstr "Difino"
 msgid "Riot Bomb"
 msgstr "Tumultbombo"
 
-#: src/main.cpp:79
+#: src/main.cpp:80
 msgid "Run game"
 msgstr "Komencas partion"
 
@@ -987,7 +994,7 @@ msgstr "Tiraljora fusilo"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/internet_menu.cpp:125
+#: src/menu/internet_menu.cpp:137
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
@@ -1057,13 +1064,24 @@ msgstr "La aŭtomatika raketo foriris de la batalejo..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilko foriris de la batalejo antaŭ ol explodi"
 
-#: src/network/net_error_msg.cpp:49
+#: src/include/action_handler.cpp:321
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
+#: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "La konekto tempolimis. Certiĝu, ke no estas ie fajroŝirmilo !"
 
 #: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "La diskogrenado foriris de la diskejo antaŭ ol explodi"
+
+#: src/game/game.cpp:427
+msgid "The game was interrupted because you got disconnected."
+msgstr ""
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
@@ -1078,7 +1096,7 @@ msgstr "La alioj estas atendando vin ! Vekiĝu :-)"
 msgid "The rocket has left the battlefield..."
 msgstr "La raketo foriris de la batalejo..."
 
-#: src/network/net_error_msg.cpp:46
+#: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
 msgstr "La servilo forĵetis la konekton."
 
@@ -1115,7 +1133,7 @@ msgstr ""
 msgid "Tools"
 msgstr "Iloj"
 
-#: src/network/net_error_msg.cpp:37
+#: src/network/net_error_msg.cpp:36
 msgid "Unable to contact host."
 msgstr "Ne eblas kontakti fora komputilon."
 
@@ -1129,7 +1147,7 @@ msgstr "Ne eblas malfermi mapan dosierujon (%s) !"
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Ne eblas malfermi mapan dosierujon (%s) !"
 
-#: src/network/net_error_msg.cpp:40
+#: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Ne eblas uzi ĉi tiun pordon !"
 
@@ -1137,7 +1155,7 @@ msgstr "Ne eblas uzi ĉi tiun pordon !"
 msgid "Unnamed"
 msgstr ""
 
-#: src/main.cpp:186
+#: src/main.cpp:187
 msgid "Version"
 msgstr "Versio"
 
@@ -1163,11 +1181,11 @@ msgstr "Atende servilon, vi nur povas rezigni aŭ babili !"
 msgid "Weapons"
 msgstr "Armiloj"
 
-#: src/main.cpp:259
+#: src/main.cpp:260
 msgid "Website: "
 msgstr "TTT-ejo: "
 
-#: src/game/game.cpp:652
+#: src/game/game.cpp:662
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo !"
@@ -1177,15 +1195,15 @@ msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo !"
 msgid "Wind particles?"
 msgstr "Venterojn ?"
 
-#: src/menu/results_menu.cpp:200
+#: src/menu/results_menu.cpp:204
 msgid "Winner"
 msgstr "Gajnanto"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 msgid "Wormux launching..."
 msgstr "Wormux muntas..."
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Wormux version "
 msgstr "Wormux versio "
 
