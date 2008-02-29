@@ -80,8 +80,8 @@ void Airhammer::UpdateTranslationStrings()
 bool Airhammer::p_Shoot()
 {
   //if the sound isn't already playing, play it again.
-   select_sound.Stop();
-   if(!drill_sound.IsPlaying()) {
+  select_sound.Stop();
+  if (!drill_sound.IsPlaying()) {
     drill_sound.Play("share","weapon/airhammer", -1);
   }
 
@@ -136,12 +136,13 @@ bool Airhammer::p_Shoot()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::RepeatShoot() const
+void Airhammer::RepeatShoot()
 {
-  uint time = Time::GetInstance()->Read() - m_last_fire_time;
+  uint current_time = Time::GetInstance()->Read();
 
-  if (time >= m_time_between_each_shot) {
+  if (current_time - m_last_fire_time >= m_time_between_each_shot) {
     NewActionWeaponShoot();
+    m_last_fire_time = current_time;
   }
 }
 
@@ -177,6 +178,7 @@ bool Airhammer::IsInUse() const
 void Airhammer::p_Select()
 {
   select_sound.Play("share","weapon/airhammer_select",-1);
+  m_last_fire_time = 0;
 }
 
 std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const
