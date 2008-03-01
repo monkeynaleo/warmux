@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2008-02-29 03:46+0200\n"
-"PO-Revision-Date: 2008-03-01 09:34+0100\n"
+"PO-Revision-Date: 2008-03-01 16:35+0100\n"
 "Last-Translator: Juan <jua56@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -203,7 +203,7 @@ msgstr[1] "¡El equipo %s ha ganado %u bombas de fragmentación!"
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "¡El equipo %s ha conseguido %u arma de construcción! No te olvides de tu medalla. "
-msgstr[1] "¡El equipo %s ha conseguido %u armas de construcción! No te olvideis tu medalla!. "
+msgstr[1] "¡El equipo %s ha conseguido %u armas de construcción! No te olvideis tu medalla."
 
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
@@ -1059,7 +1059,7 @@ msgstr "La granada disco ha abandonado la pista de baile antes de explotar."
 
 #: src/game/game.cpp:427
 msgid "The game was interrupted because you got disconnected."
-msgstr "El juego se interrumpido por que te as desconectado."
+msgstr "El juego se interrumpió por que te has desconectado."
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
