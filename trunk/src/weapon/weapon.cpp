@@ -241,6 +241,9 @@ void Weapon::NewActionWeaponShoot() const
 {
   ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
 
+  if (ActiveCharacter().IsPreparingShoot()) // a shot is already in progress
+    return;
+
   Action* a_shoot = new Action(Action::ACTION_WEAPON_SHOOT,
                                m_strength,
                                ActiveCharacter().GetAbsFiringAngle());
