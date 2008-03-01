@@ -1,15 +1,15 @@
 # Chinese (China) translation for Wormux
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the wormux package.
-# 
+#
 # <luojie-dune@operamail.com>,2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2008-02-29 03:46+0200\n"
-"PO-Revision-Date: 2007-11-30 18:35+1000\n"
-"Last-Translator: luojie-dune <luojie-dune@operamail.com>\n"
+"PO-Revision-Date: 2008-02-18 02:28+1000\n"
+"Last-Translator: luojie <luojie-dune@operamail.com>\n"
 "Language-Team: Chinese (China) <luojie-dune@operamail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -117,7 +117,7 @@ msgid "%s team has skipped its turn."
 msgstr "%s隊本回合沒用啥."
 
 #: src/weapon/cluzooka.cpp:396
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "%s 隊得到 %u 火箭炮!"
@@ -223,18 +223,18 @@ msgstr[0] "%s 隊得到 %u 炸彈了!"
 msgstr[1] "%s 隊得到 %u 炸彈了!"
 
 #: src/weapon/flamethrower.cpp:191
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "%s 隊得到 %u 炸彈了!"
-msgstr[1] "%s 隊得到 %u 炸彈了!"
+msgstr[1] "%s 隊得到 %u 噴火器了!"
 
 #: src/weapon/footbomb.cpp:172
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s 隊得到 %u 爆炸彈!"
-msgstr[1] "%s 隊得到 %u 爆炸彈!"
+msgstr[1] "%s 隊得到 %u 足球炸彈!"
 
 #: src/weapon/grapple.cpp:783
 #, c-format
@@ -307,12 +307,12 @@ msgstr[0] "%s 隊得到 %u 獵槍!"
 msgstr[1] "%s 隊得到 %u 獵槍!"
 
 #: src/weapon/snipe_rifle.cpp:246
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
 "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] "%s 隊得到了%u狙擊步槍! "
-msgstr[1] "%s 隊得到了%u狙擊步槍!"
+msgstr[1] "%s 隊得到了%u狙擊步槍! 瞄眼睛！"
 
 #: src/weapon/submachine_gun.cpp:156
 #, c-format
@@ -381,6 +381,7 @@ msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
+"新版本 %s 可用，您的版本是 %s。也許您想查下，是否有針對您的操作系統的升級。"
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -418,10 +419,9 @@ msgstr "制導火箭炮"
 
 #: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
-msgstr ""
+msgstr "返回戰斗"
 
 #: src/network/net_error_msg.cpp:42
-#, fuzzy
 msgid "Bad socket ..."
 msgstr "臭蛋 ..."
 
@@ -463,7 +463,7 @@ msgstr "打不開團隊目錄 (%s)!"
 
 #: src/menu/options_menu.cpp:128
 msgid "Check updates online?"
-msgstr ""
+msgstr "網上檢查升級？"
 
 #: src/menu/map_selection_box.cpp:242
 msgid "Choose randomly between the different maps"
@@ -479,9 +479,8 @@ msgid "Cluster Bomb"
 msgstr "集束炸彈"
 
 #: src/weapon/cluzooka.cpp:389
-#, fuzzy
 msgid "Cluzooka"
-msgstr "火箭炮"
+msgstr "開花彈"
 
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
@@ -515,12 +514,12 @@ msgstr "控制者: "
 #: src/network/download.cpp:80
 #, c-format
 msgid "Couldn't fetch last version from %s"
-msgstr ""
+msgstr "不能從 %s獲取最新版本"
 
 #: src/network/download.cpp:89
-#, fuzzy, c-format
+#, c-format
 msgid "Couldn't open file %s"
-msgstr "無法讀取設置"
+msgstr "無法打開文件%s"
 
 #: src/menu/main_menu.cpp:72
 msgid "Credits"
@@ -560,17 +559,17 @@ msgstr "讀取隊伍數據 %s 時出錯 :"
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "建立目錄失敗 \"%s\": 不能儲存設置文档."
+msgstr "建立目錄失敗 \"%s\": 不能儲存設置文件."
 
 #: src/game/config.cpp:318
-#, fuzzy, c-format
+#, c-format
 msgid "Error while loading configuration file: %s"
-msgstr "建立目錄失敗 \"%s\": 不能儲存設置文档."
+msgstr "讀取設置文件出錯: %s"
 
 #: src/game/config.cpp:356
-#, fuzzy, c-format
+#, c-format
 msgid "Error while loading default configuration file: %s"
-msgstr "正讀取默認設置文档"
+msgstr "正讀取默認設置文件發生錯誤: %s"
 
 #: src/game/game_mode.cpp:228
 #, c-format
@@ -616,14 +615,12 @@ msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "錯誤: 找不到 body\"%s\" 隊伍 \"%s\"."
 
 #: src/weapon/flamethrower.cpp:134
-#, fuzzy
 msgid "Flame Thrower"
 msgstr "噴火器"
 
 #: src/weapon/footbomb.cpp:154
-#, fuzzy
 msgid "Football Bomb"
-msgstr "爆炸彈"
+msgstr "足球炸彈"
 
 #: src/menu/options_menu.cpp:84
 msgid "Fullscreen?"
@@ -667,7 +664,7 @@ msgstr "來吧!"
 msgid "Head commander"
 msgstr "指揮官"
 
-# 
+#
 #. Display player's name
 #: src/interface/interface.cpp:156
 msgid "Head commander: "
@@ -675,7 +672,7 @@ msgstr "指揮官: "
 
 #: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
-msgstr ""
+msgstr "幫助"
 
 #: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
@@ -850,7 +847,7 @@ msgstr "網絡初始化"
 #: src/weapon/weapon.cpp:635
 #, c-format
 msgid "No element <%s> found in the xml config file!"
-msgstr "沒找到 <%s>重點 xml配置文档 !"
+msgstr "沒找到 <%s>重點 xml配置文件 !"
 
 #: src/menu/results_menu.cpp:141
 msgid "Nobody!"
@@ -870,9 +867,8 @@ msgid "Options"
 msgstr "選項 "
 
 #: src/menu/pause_menu.cpp:57
-#, fuzzy
 msgid "Options menu"
-msgstr "選項 "
+msgstr "選項菜單"
 
 #: src/weapon/parachute.cpp:68
 msgid "Parachute"
@@ -918,7 +914,7 @@ msgstr "退出"
 
 #: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
-msgstr ""
+msgstr "推出戰斗"
 
 #: src/menu/map_selection_box.cpp:241
 msgid "Random map"
@@ -926,11 +922,11 @@ msgstr "隨機讀取地圖"
 
 #: src/game/config.cpp:331
 msgid "Reading default config file"
-msgstr "正讀取默認設置文档"
+msgstr "正讀取默認設置文件"
 
 #: src/game/config.cpp:364
 msgid "Reading personal config file"
-msgstr "正讀取個人設置文档"
+msgstr "正讀取個人設置文件"
 
 #: src/menu/internet_menu.cpp:55
 msgid "Refresh"
@@ -1037,7 +1033,6 @@ msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "集束炸彈離開戰場---"
 
 #: src/weapon/footbomb.cpp:107
-#, fuzzy
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "集束炸彈離開戰場---"
 
@@ -1157,7 +1152,7 @@ msgstr "版本"
 #: src/menu/options_menu.cpp:331
 #, c-format
 msgid "Version verification failed because: %s\n"
-msgstr ""
+msgstr "版本改變失敗原因: %s\n"
 
 #: src/menu/network_menu.cpp:250
 #, c-format
@@ -1190,7 +1185,7 @@ msgstr " %s 慘死在小槍之下...不能瞑目!"
 msgid "Wind particles?"
 msgstr "風來了?"
 
-# 
+#
 #: src/menu/results_menu.cpp:204
 msgid "Winner"
 msgstr "勝者"
@@ -1232,7 +1227,7 @@ msgstr "沒有隊伍，就不會有戰斗!"
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 
-# 
+#
 #: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "aka"
@@ -1257,16 +1252,16 @@ msgstr "成"
 
 #: src/map/maps_list.cpp:86
 msgid "error parsing the config file"
-msgstr ""
+msgstr "粘貼設置文件出錯"
 
-# 
+#
 #: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "從"
 
 #: src/map/maps_list.cpp:75
 msgid "no configuration file!"
-msgstr "沒有配置文档！"
+msgstr "沒有設置文件！"
 
 #: src/sound/jukebox.cpp:166
 msgid "o Loading music"
@@ -1275,7 +1270,7 @@ msgstr "o 讀取音樂"
 #: src/sound/jukebox.cpp:339
 #, c-format
 msgid "o Loading sound profile: %s"
-msgstr "o讀取音樂档案 : %s"
+msgstr "o讀取音樂檔案文件 : %s"
 
 #: src/sound/jukebox.cpp:91
 #, c-format
@@ -1289,7 +1284,7 @@ msgstr "o音樂 %d Hz %d bit"
 #~ msgstr "快點,伙計你也太慢了!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
-#~ msgstr "您真的想退出嗎? (\"Y\"是 或 \"N\"否)"
+#~ msgstr "您真的想退出嗎? (\"Y\"是 或 \"N\"不)"
 
 #~ msgid "Host a game (Windows clients only)"
 #~ msgstr "建立主機（僅windows客戶端）"
