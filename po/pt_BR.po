@@ -436,7 +436,7 @@ msgstr "Bazooka automática"
 
 #: src/menu/pause_menu.cpp:53
 msgid "Back to battle"
-msgstr ""
+msgstr "Retornar a batalha"
 
 #: src/network/net_error_msg.cpp:42
 msgid "Bad socket ..."
@@ -480,7 +480,7 @@ msgstr "Não foi possível abrir diretório (%s) das equipes!"
 
 #: src/menu/options_menu.cpp:128
 msgid "Check updates online?"
-msgstr ""
+msgstr "Verificar atualizações online?"
 
 #: src/menu/map_selection_box.cpp:242
 msgid "Choose randomly between the different maps"
@@ -532,12 +532,12 @@ msgstr "Controlado por: "
 #: src/network/download.cpp:80
 #, c-format
 msgid "Couldn't fetch last version from %s"
-msgstr ""
+msgstr "Falha ao receber ultima versão de %s"
 
 #: src/network/download.cpp:89
 #, c-format
 msgid "Couldn't open file %s"
-msgstr ""
+msgstr "Falha ao abrir arquivo %s"
 
 #: src/menu/main_menu.cpp:72
 msgid "Credits"
@@ -631,6 +631,8 @@ msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
 msgstr ""
+"Erro: O seu servidor não pode ser acessado pela internet. Verifique a "
+"configuração do seu firewall"
 
 #: src/team/team.cpp:120
 #, c-format
@@ -653,7 +655,7 @@ msgstr "Tela cheia?"
 #. Game name
 #: src/menu/network_connection_menu.cpp:82
 msgid "Game name:"
-msgstr ""
+msgstr "Nome do jogo:"
 
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
@@ -695,7 +697,7 @@ msgstr "Comandante: "
 
 #: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
 msgid "Help"
-msgstr ""
+msgstr "Ajuda"
 
 #: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
@@ -941,7 +943,7 @@ msgstr "Sair do Wormux"
 
 #: src/menu/pause_menu.cpp:65
 msgid "Quit battle"
-msgstr ""
+msgstr "Sair da batalha"
 
 #: src/menu/map_selection_box.cpp:241
 msgid "Random map"
@@ -1008,7 +1010,7 @@ msgstr "Rifle Sniper"
 
 #: src/object/bonus_box.cpp:74
 msgid "Someone put a booby trap into the crate!"
-msgstr ""
+msgstr "Alguém colocou uma armadilha no caixote!"
 
 #: src/menu/internet_menu.cpp:137
 msgid "Sorry, currently, no game is waiting for players"
@@ -1086,6 +1088,8 @@ msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
+"As versões do cliente e do servidor são incompatíveis (local=%s, servidor=%s). "
+"Por favor tente outro servidor."
 
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
@@ -1097,7 +1101,7 @@ msgstr "A granada festiva deixou o cenário antes que explodisse"
 
 #: src/game/game.cpp:427
 msgid "The game was interrupted because you got disconnected."
-msgstr ""
+msgstr "O jogo foi interrompido porque você foi desconectado."
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
@@ -1272,7 +1276,7 @@ msgstr ""
 
 #: src/map/maps_list.cpp:79
 msgid "couldn't load config"
-msgstr ""
+msgstr "falha ao carregar configuração"
 
 #: src/map/ground.cpp:60
 msgid "done"
