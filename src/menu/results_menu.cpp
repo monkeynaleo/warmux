@@ -186,6 +186,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   , type_size(200, 40)
   , name_size(150, 40)
   , score_size(40, 40)
+  , winner_box(NULL)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i pos (0, 0);
@@ -358,7 +359,7 @@ void ResultsMenu::DrawTeamGraph(const Team *team,
   if (it == end)
     return;
 
-  do 
+  do
   {
     int ex = x+lround((*it)->GetDuration()*duration_scale),
       ey = y-lround((*it)->GetValue()*energy_scale);
