@@ -61,7 +61,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_characters(false),
   m_collides_with_objects(false),
   m_rebound_position(-1,-1),
-  last_collision_type(NO_COLLISION),
+  m_last_collision_type(NO_COLLISION),
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
@@ -143,12 +143,13 @@ void PhysicalObj::SetSize(const Point2i &newSize){
 
 void PhysicalObj::StoreValue(Action *a)
 {
+  ASSERT(m_last_collision_type == NO_COLLISION);
+
   Physics::StoreValue(a);
   a->Push(m_goes_through_wall);
   a->Push(m_collides_with_characters);
   a->Push(m_collides_with_objects);
   a->Push(m_rebound_position);
-  a->Push(last_collision_type);
   a->Push((int)m_minimum_overlapse_time);
   a->Push(m_ignore_movements);
   a->Push(m_is_character);
@@ -170,7 +171,6 @@ void PhysicalObj::GetValueFromAction(Action *a)
   m_collides_with_characters = !!a->PopInt();
   m_collides_with_objects    = !!a->PopInt();
   m_rebound_position         = a->PopPoint2i();
-  last_collision_type        = (collision_t)a->PopInt();
   m_minimum_overlapse_time   = (uint)a->PopInt();
   m_ignore_movements         = !!a->PopInt();
   m_is_character             = !!a->PopInt();
@@ -216,14 +216,14 @@ void PhysicalObj::CheckOverlapping()
   if (!m_overlapping_object->GetTestRect().Intersect( GetTestRect() ) &&
       m_minimum_overlapse_time <= Time::GetInstance()->Read())
   {
-    MSG_DEBUG("physic.overlapping", "\"%s\" just stopped overlapping with \"%s\" (%d ms left)", 
+    MSG_DEBUG("physic.overlapping", "\"%s\" just stopped overlapping with \"%s\" (%d ms left)",
 	      GetName().c_str(), m_overlapping_object->GetName().c_str(),
 	      (m_minimum_overlapse_time - Time::GetInstance()->Read()));
     SetOverlappingObject(NULL);
   }
   else
   {
-    MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\"", 
+    MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\"",
 	       GetName().c_str(), m_overlapping_object->GetName().c_str());
   }
 }
@@ -249,19 +249,15 @@ void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
 }
 
 // Move to a point with collision test
-// Return true if collision occured
-void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
+collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 {
   if (IsGhost())
-    return;
+    return NO_COLLISION;
 
   Point2d pos, offset;
   PhysicalObj* collided_obj = NULL;
 
-  last_collision_type = NO_COLLISION;
-
-  if (IsGhost())
-    return;
+  m_last_collision_type = NO_COLLISION;
 
   // Convert meters to pixels.
   oldPos *= PIXEL_PER_METER;
@@ -274,7 +270,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
             typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, lg);
 
   if (lg == 0)
-    return;
+    return NO_COLLISION;
 
   // Compute increments to move the object step by step from the old
   // to the new position.
@@ -290,7 +286,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
               m_goes_through_wall, IsInWater());
 
     SetXY(newPos);
-    return;
+    return NO_COLLISION;
   }
 
   do
@@ -304,7 +300,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
         tmpPos.x = InRange_Long(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
         tmpPos.y = InRange_Long(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
         MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
-        last_collision_type = COLLISION_ON_GROUND;
+        m_last_collision_type = COLLISION_ON_GROUND;
         break;
       }
 
@@ -312,24 +308,22 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
       MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) : OUTSIDE WORLD",
                 typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
-      return;
+      return NO_COLLISION;
     }
 
     // Test if we collide...
     collided_obj = CollidedObjectXY(tmpPos);
-    if( collided_obj != NULL)
+    if (collided_obj != NULL) {
       MSG_DEBUG( "physic.state", "%s collide on %s", m_name.c_str(), collided_obj->GetName().c_str() );
+      m_last_collision_type = COLLISION_ON_OBJECT;
+    } else if (!IsInVacuumXY(tmpPos, false)) {
+      m_last_collision_type = COLLISION_ON_GROUND;
+    }
 
-    if(collided_obj != NULL)
-      last_collision_type = COLLISION_ON_OBJECT;
-    else
-    if(!IsInVacuumXY(tmpPos, false))
-      last_collision_type = COLLISION_ON_GROUND;
-
-    if(last_collision_type != NO_COLLISION) // Nothing more to do!
+    if (m_last_collision_type != NO_COLLISION) // Nothing more to do!
     {
       MSG_DEBUG( "physic.state", "%s - Collision at %d,%d : %s", m_name.c_str(), tmpPos.x, tmpPos.y,
-          last_collision_type == COLLISION_ON_GROUND ? "on ground" : "on an object");
+          m_last_collision_type == COLLISION_ON_GROUND ? "on ground" : "on an object");
 
       // Set the object position to the current position.
       SetXY(Point2d(pos.x - offset.x, pos.y - offset.y));
@@ -343,11 +337,32 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   // Notify the weapon that there is a movement
   // Useful for grapple for example
-  ActiveTeam().AccessWeapon().NotifyMove(!!last_collision_type);
+  ActiveTeam().AccessWeapon().NotifyMove(!!m_last_collision_type);
 
-  if (last_collision_type == NO_COLLISION ) // Nothing more to do!
-    return;
-  if (last_collision_type == COLLISION_ON_GROUND ) {
+  Collide(collided_obj, pos);
+  collision_t collision = m_last_collision_type;
+  m_last_collision_type = NO_COLLISION;
+  return collision;
+}
+
+void PhysicalObj::Collide(PhysicalObj* collided_obj, const Point2d& position)
+{
+  switch (m_last_collision_type) {
+  case NO_COLLISION: // Nothing more to do!
+    ASSERT(!collided_obj);
+    break;
+  case COLLISION_ON_GROUND:
+    ASSERT(!collided_obj);
+    CollideOnGround(position);
+    break;
+  case COLLISION_ON_OBJECT:
+    CollideOnObject(*collided_obj, position);
+    break;
+  }
+}
+
+void PhysicalObj::CollideOnGround(const Point2d& position)
+{
       // Find the contact point and collision angle.
 //       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
 //       // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
@@ -364,11 +379,11 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
         contactPos.y = (double)cy / PIXEL_PER_METER;
       } else {
         ground_angle = - GetSpeedAngle();
-        contactPos = pos;
+        contactPos = position;
       }
     } else {
       ground_angle = - GetSpeedAngle();
-      contactPos = pos;
+      contactPos = position;
     }
 
     SignalGroundCollision();
@@ -377,16 +392,19 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
     Rebound(contactPos, ground_angle);
     CheckRebound();
-  } else if (last_collision_type == COLLISION_ON_OBJECT ) {
-    SignalObjectCollision(collided_obj);
-    collided_obj->SignalObjectCollision(this);
+}
+
+void PhysicalObj::CollideOnObject(PhysicalObj& collided_obj, const Point2d& contactPos)
+{
+    SignalObjectCollision(&collided_obj);
+    collided_obj.SignalObjectCollision(this);
 
     // Get the current speed
     double v1, v2, mass1, angle1, angle2, mass2;
-    collided_obj->GetSpeed(v1, angle1);
+    collided_obj.GetSpeed(v1, angle1);
     GetSpeed(v2, angle2);
     mass1 = GetMass();
-    mass2 = collided_obj->GetMass();
+    mass2 = collided_obj.GetMass();
 
     // Give speed to the other object
     // thanks to physic and calculations about chocs, we know that :
@@ -395,18 +413,15 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     // v'2 =  ((m2 - m1) * v2 + 2m1 *v1) / (m1 + m2)
     SignalCollision();
 
-    collided_obj->SetSpeed(((mass1 - mass2) * v1 + 2 * mass1 *v2 * m_cfg.m_rebound_factor) / (mass1 + mass2),
-                           angle1);
+    collided_obj.SetSpeed(((mass1 - mass2) * v1 + 2 * mass1 *v2 * m_cfg.m_rebound_factor) / (mass1 + mass2),
+			  angle1);
     SetSpeed(((mass2 - mass1) * v2 + 2 * mass1 *v1 * m_cfg.m_rebound_factor) / (mass1 + mass2), angle2);
 
     // Rebound on the object
     double contact_angle = - GetSpeedAngle();
-    Point2d contactPos = pos;
     MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
     Rebound(contactPos, contact_angle);
     CheckRebound();
-  }
-  return;
 }
 
 void PhysicalObj::UpdatePosition ()

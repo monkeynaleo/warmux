@@ -39,6 +39,12 @@ enum MotionType_t
   Pendulum,
 };
 
+typedef enum {
+  NO_COLLISION = 0,
+  COLLISION_ON_GROUND,
+  COLLISION_ON_OBJECT
+} collision_t;
+
 class Game;
 class Action;
 
@@ -142,7 +148,7 @@ public:
   void RunPhysicalEngine();
 
   // Notify the son class that the object has moved.
-  virtual void NotifyMove(Point2d oldPos, Point2d newPos) = 0 ;
+  virtual collision_t NotifyMove(Point2d oldPos, Point2d newPos) = 0;
 
   // Start moving
   void StartMoving();

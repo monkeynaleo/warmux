@@ -40,12 +40,6 @@ typedef enum
   DROWNED
 } alive_t;
 
-typedef enum {
-  NO_COLLISION = 0,
-  COLLISION_ON_GROUND,
-  COLLISION_ON_OBJECT
-} collision_t;
-
 class Action;
 
 extern const double PIXEL_PER_METER;
@@ -64,8 +58,13 @@ private:
   bool m_collides_with_characters;
   bool m_collides_with_objects;
   Point2i m_rebound_position;
+
+  // MUST equals to NO_COLLISION when outside of NotifyMove
+  // WARNING: physic information about an object must _NEVER_ been sent through
+  //          the network when it IS NOT EQUAL to NO_COLLISION (bug #10668)
+  collision_t m_last_collision_type;
+
 protected:
-  collision_t last_collision_type;
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
   bool m_ignore_movements;
@@ -204,7 +203,7 @@ public:
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
 
-  void NotifyMove(Point2d oldPos, Point2d newPos);
+  collision_t NotifyMove(Point2d oldPos, Point2d newPos);
 
 protected:
   virtual void SignalRebound();
@@ -223,6 +222,10 @@ private:
 
   // Directly after a rebound, if we are stuck in a wall, we stop moving
   void CheckRebound();
+
+  void Collide(PhysicalObj* collided_obj, const Point2d& position);
+  void CollideOnGround(const Point2d& position);
+  void CollideOnObject(PhysicalObj& collided_obj, const Point2d& contactPos);
 };
 
 #endif
