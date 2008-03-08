@@ -246,12 +246,18 @@ bool Config::MkdirPersonalDataDir()
 {
   // Create the directory if it doesn't exist
 #ifndef WIN32
-  if (mkdir(personal_data_dir.c_str(), 0750) != 0 && errno != EEXIST)
+#define MKDIR_P(dir) (mkdir(dir, 0750))
 #else
-  if (_mkdir(personal_data_dir.c_str()) != 0 && errno != EEXIST)
+#define MKDIR_P(dir) (_mkdir(dir))
 #endif
-    return true;
 
+  if ( MKDIR_P(personal_data_dir.c_str()) == 0 || errno == EEXIST)
+  {
+    std::string chatlogdir = personal_data_dir +
+        std::string(PATH_SEPARATOR"logs") ;
+    if ( MKDIR_P(chatlogdir.c_str()) == 0 || errno == EEXIST)
+      return true;
+  }
   return false;
 }
 
