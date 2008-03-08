@@ -75,8 +75,13 @@ private:
 
 // TODO: Move it in an object !
 
-void SendCharacterInfo(int team_no, int char_no);// Send character information over the network (it's totally stupid to send it locally ;-)
+// Send character information over the network (it's totally stupid to send it locally ;-)
+void SendCharacterInfo(int team_no, int char_no);
 void SendActiveCharacterInfo(bool can_be_dropped = false);
+
+// Send character information + an action over the network
+// WARNING: it does not post the action in local queue!!
+void SendActiveCharacterAction(const Action& a);
 
 void SendGameMode();
 void SyncCharacters();

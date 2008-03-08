@@ -476,18 +476,21 @@ void SyncCharacters()
 void Action_Character_Jump (Action */*a*/)
 {
   Game::GetInstance()->character_already_chosen = true;
+  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().Jump();
 }
 
 void Action_Character_HighJump (Action */*a*/)
 {
   Game::GetInstance()->character_already_chosen = true;
+  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().HighJump();
 }
 
 void Action_Character_BackJump (Action */*a*/)
 {
   Game::GetInstance()->character_already_chosen = true;
+  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().BackJump();
 }
 
@@ -495,6 +498,17 @@ void Action_Character_SetPhysics (Action *a)
 {
   while(!a->IsEmpty())
     a->RetrieveCharacter();
+}
+
+void SendActiveCharacterAction(const Action& a)
+{
+  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
+  Network::GetInstance()->SendAction(&a_begin_sync);
+  SendActiveCharacterInfo();
+  Network::GetInstance()->SendAction(&a);
+  Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
+  Network::GetInstance()->SendAction(&a_end_sync);
 }
 
 // Send character information over the network (it's totally stupid to send it locally ;-)

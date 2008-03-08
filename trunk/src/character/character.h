@@ -225,15 +225,15 @@ public:
   void HandleKeyRefreshed_Down(bool shift);
   void HandleKeyReleased_Down(bool) const {};
 
-  void HandleKeyPressed_Jump(bool shift) const;
+  void HandleKeyPressed_Jump(bool shift);
   void HandleKeyRefreshed_Jump(bool) const {};
   void HandleKeyReleased_Jump(bool) const {};
 
-  void HandleKeyPressed_HighJump(bool shift) const;
+  void HandleKeyPressed_HighJump(bool shift);
   void HandleKeyRefreshed_HighJump(bool) const { };
   void HandleKeyReleased_HighJump(bool) const { };
 
-  void HandleKeyPressed_BackJump(bool shift) const;
+  void HandleKeyPressed_BackJump(bool shift);
   void HandleKeyRefreshed_BackJump(bool) const {};
   void HandleKeyReleased_BackJump(bool) const {};
 
