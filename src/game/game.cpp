@@ -570,7 +570,10 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
   if ((state == new_state) && !begin_game) return;
 
   // Send information about energy and position of every characters
-  if (Network::GetInstance()->IsTurnMaster())
+  // ONLY at the beginning of a new turn!
+  // (else you can send unstable information of a character which is moving)
+  // See bug #10668
+  if (Network::GetInstance()->IsTurnMaster() && new_state == PLAYING)
     SyncCharacters();
 
   MSG_DEBUG("game", "Ask for state %d", new_state);
