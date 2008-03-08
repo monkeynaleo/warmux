@@ -251,8 +251,11 @@ void Game::RefreshInput()
   // Execute action
   do {
     ActionHandler::GetInstance()->ExecActions();
-    if(Network::GetInstance()->sync_lock) SDL_Delay(SDL_TIMESLICE);
-  } while(Network::GetInstance()->sync_lock);
+    if (Network::GetInstance()->sync_lock) SDL_Delay(SDL_TIMESLICE);
+  } while (Network::GetInstance()->sync_lock &&
+	   !HasBeenNetworkDisconnected());
+
+  Network::GetInstance()->sync_lock = false;
 
   GameMessages::GetInstance()->Refresh();
 
@@ -416,10 +419,16 @@ void Game::Run()
     (**team).SetLocal();
 }
 
-void Game::MessageEndOfGame() const
+bool Game::HasBeenNetworkDisconnected() const
 {
   const Network* net          = Network::GetInstance();
   bool           disconnected = !net->IsLocal() && net->cpu.empty();
+  return disconnected;
+}
+
+void Game::MessageEndOfGame() const
+{
+  bool disconnected = HasBeenNetworkDisconnected();
 
   if (disconnected)
   {
