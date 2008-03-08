@@ -83,7 +83,7 @@ private:
   uint                time_of_next_phy_frame;
 
   static uint         last_unique_id;
-  
+
   void Draw();        // Draw to screen
   void MessageLoading() const;
   void UnloadDatas() const;
@@ -102,6 +102,9 @@ private:
   PhysicalObj* GetMovingObject() const;
 
   void MessageEndOfGame() const;
+
+  // we were playing in network but now we are alone
+  bool HasBeenNetworkDisconnected() const;
 
   virtual void RefreshClock() = 0;
   virtual void __SetState_PLAYING() = 0;
