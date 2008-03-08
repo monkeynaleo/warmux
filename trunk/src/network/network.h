@@ -134,7 +134,7 @@ public:
 
   // Action handling
   void SendPacket(char* packet, int size) const;
-  virtual void SendAction(Action* action) const;
+  virtual void SendAction(const Action* action) const;
 
   virtual void SendChatMessage(const std::string& txt) = 0;
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;

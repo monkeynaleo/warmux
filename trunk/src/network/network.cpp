@@ -391,7 +391,7 @@ connection_state_t Network::CheckHost(const std::string &host, int prt) const
 //-----------------------------------------------------------------------------
 
 // Send Messages
-void Network::SendAction(Action* a) const
+void Network::SendAction(const Action* a) const
 {
   MSG_DEBUG("network.traffic","Send action %s",
             ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
