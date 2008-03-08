@@ -977,26 +977,35 @@ void Character::HandleKeyRefreshed_Down(bool shift)
 
 // #################### JUMP
 
-void Character::HandleKeyPressed_Jump(bool) const
+void Character::HandleKeyPressed_Jump(bool)
 {
   HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_JUMP));
+  if (ActiveCharacter().IsImmobile()) {
+    Jump();
+    Action a(Action::ACTION_CHARACTER_JUMP);
+    SendActiveCharacterAction(a);
+  }
 }
 
 // #################### HIGH JUMP
-void Character::HandleKeyPressed_HighJump(bool) const
+void Character::HandleKeyPressed_HighJump(bool)
 {
   HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
+  if (ActiveCharacter().IsImmobile()) {
+    HighJump();
+    Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
+    SendActiveCharacterAction(a);
+  }
 }
 
 // #################### BACK JUMP
-void Character::HandleKeyPressed_BackJump(bool) const
+void Character::HandleKeyPressed_BackJump(bool)
 {
   HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_BACK_JUMP));
+  if (ActiveCharacter().IsImmobile()) {
+    BackJump();
+    Action a(Action::ACTION_CHARACTER_BACK_JUMP);
+    SendActiveCharacterAction(a);
+  }
 }
 
