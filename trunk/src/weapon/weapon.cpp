@@ -241,8 +241,13 @@ void Weapon::NewActionWeaponShoot() const
 {
   ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
 
-  if (ActiveCharacter().IsPreparingShoot()) // a shot is already in progress
+  if (ActiveCharacter().IsPreparingShoot()) { // a shot is already in progress
+#ifdef DEBUG
+    fprintf(stderr, "\nWARNING: Weapon::NewActionWeaponShoot: a shot is already in progress!\n");
+    fprintf(stderr, "         Maybe, shot anim for this weapon is longer than m_time_between_each_shot\n\n");
+#endif
     return;
+  }
 
   Action* a_shoot = new Action(Action::ACTION_WEAPON_SHOOT,
                                m_strength,
