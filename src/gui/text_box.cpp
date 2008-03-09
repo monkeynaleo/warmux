@@ -39,7 +39,7 @@ void TextBox::BasicSetText(std::string const &new_txt)
 {
   std::string _new_txt = new_txt;
 
-  if (max_nb_chars != 0)
+  if (max_nb_chars != 0 && _new_txt.size() > max_nb_chars)
     _new_txt.resize(max_nb_chars);
 
   Font* font = Font::GetInstance(font_size, font_style);
