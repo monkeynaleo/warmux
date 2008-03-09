@@ -55,8 +55,8 @@ BonusBox::BonusBox():
 
 void BonusBox::PickRandomWeapon() {
   weapon_num = 0;
-  if(weapon_count <= 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode
-    energy = 0;
+  if (weapon_count <= 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode
+    m_energy = 0;
     MSG_DEBUG("bonus","Weapon count is zero");
     return;
   }
