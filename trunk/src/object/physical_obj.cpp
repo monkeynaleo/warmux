@@ -76,7 +76,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_height(0),
   m_rebound_sound(""),
   m_alive(ALIVE),
-  energy(-1),
+  m_energy(-1),
   m_allow_negative_y(false)
 {
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
@@ -160,7 +160,7 @@ void PhysicalObj::StoreValue(Action *a)
   a->Push((int)m_width);
   a->Push((int)m_height);
   a->Push((int)m_alive);
-  a->Push(energy);
+  a->Push(m_energy);
   a->Push(m_allow_negative_y);
 }
 
@@ -181,7 +181,7 @@ void PhysicalObj::GetValueFromAction(Action *a)
   m_width                    = (uint)a->PopInt();
   m_height                   = (uint)a->PopInt();
   m_alive                    = (alive_t)a->PopInt();
-  energy                     = a->PopInt();
+  m_energy                   = a->PopInt();
   m_allow_negative_y         = !!a->PopInt();
 }
 
@@ -238,13 +238,13 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
 {
-  if(energy == -1)
+  if (m_energy == -1)
     return;
-  energy += delta;
-  if(energy <= 0 && !IsGhost())
+  m_energy += delta;
+  if (m_energy <= 0 && !IsGhost())
   {
     Ghost();
-    energy = -1;
+    m_energy = -1;
   }
 }
 

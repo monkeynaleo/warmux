@@ -137,7 +137,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 #endif
 
   // Energy
-  energy = GameMode::GetInstance()->character.init_energy;
+  m_energy = GameMode::GetInstance()->character.init_energy;
   energy_bar.InitVal (GameMode::GetInstance()->character.init_energy,
                       0,
                       GameMode::GetInstance()->character.init_energy);
@@ -304,30 +304,19 @@ void Character::SetEnergyDelta(int delta, bool do_report)
 
 void Character::SetEnergy(int new_energy)
 {
-  int diff = new_energy - energy;
+  int diff = new_energy - m_energy;
   if(diff < 0) {
     Particle *tmp = new FadingText(long2str(diff));
     tmp->SetXY(GetPosition());
     ParticleEngine::AddNow(tmp);
   }
-  if(!Network::GetInstance()->IsLocal())
-  {
-    if( m_alive == DEAD && new_energy > 0)
-    {
-      printf("%s have been resurrected\n", GetName().c_str());
-      m_alive = ALIVE;
-      SetClothe("normal");
-      SetMovement("breathe");
-    }
-  }
 
-  //ASSERT( m_alive != DEAD );
-  if(IsDead()) return;
+  if (IsDead()) return;
 
   // Change energy
-  energy = InRange_Long((int)new_energy, 0,
+  m_energy = InRange_Long((int)new_energy, 0,
                      GameMode::GetInstance()->character.max_energy);
-  energy_bar.Actu(energy);
+  energy_bar.Actu(m_energy);
 
   // Dead character ?
   if (GetEnergy() <= 0) Die();
@@ -856,8 +845,6 @@ void Character::StoreValue(Action *a)
   PhysicalObj::StoreValue(a);
   a->Push((int)GetDirection());
   a->Push(GetAbsFiringAngle());
-  a->Push(GetEnergy());
-  a->Push((int)m_alive);
   a->Push((int)GetDiseaseDamage());
   a->Push((int)GetDiseaseDuration());
   if (IsActiveCharacter()) { // If active character, store step animation
@@ -872,11 +859,57 @@ void Character::StoreValue(Action *a)
 
 void Character::GetValueFromAction(Action *a)
 {
+  // those 2 parameters will be retrieved by PhysicalObj::GetValueFromAction
+  alive_t prev_live_state = m_alive;
+  int prev_energy = m_energy;
+
   PhysicalObj::GetValueFromAction(a);
   SetDirection((BodyDirection_t)(a->PopInt()));
   SetFiringAngle(a->PopDouble());
-  SetEnergy(a->PopInt());
-  m_alive = (alive_t)(a->PopInt());
+
+  if (m_alive != prev_live_state) {
+    switch (m_alive) {
+    case ALIVE:
+      fprintf(stderr, "Character::GetValueFromAction: %s has been resurrected\n",
+	      GetName().c_str());
+      SetClothe("normal");
+      SetMovement("breathe");
+      if (prev_live_state == DROWNED) {
+	SignalGoingOutOfWater();
+      }
+      break;
+    case DEAD:
+      fprintf(stderr,
+	      "Character::GetValueFromAction: %s has died on the other side of the network\n"
+	      "        Previous energy: %d\n",
+	      GetName().c_str(), prev_energy);
+      death_explosion = false;
+      m_alive = prev_live_state; // to avoid violating an ASSERT in Die()
+      Die();
+      break;
+    case GHOST: {
+      fprintf(stderr, "Character::GetValueFromAction: %s is now a ghost!\n", GetName().c_str());
+      m_alive = prev_live_state;
+      bool was_dead = IsDead();
+      m_alive = GHOST;
+      SignalGhostState(was_dead);
+      break;
+    }
+    case DROWNED:
+      fprintf(stderr, "Character::GetValueFromAction: %s is drowning!\n", GetName().c_str());
+      SignalDrowning();
+      break;
+    }
+  }
+
+  if (prev_energy != m_energy) {
+    fprintf(stderr,
+	    "Character::GetValueFromAction: energy points were differents for %s:\n"
+	    "        - remote : %d\n"
+	    "        - local  : %d\n",
+	    GetName().c_str(), m_energy, prev_energy);
+  }
+
   int disease_damage_per_turn = (a->PopInt());
   int disease_duration = (a->PopInt());
   SetDiseaseDamage(disease_damage_per_turn, disease_duration);

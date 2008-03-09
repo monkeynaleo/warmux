@@ -113,7 +113,7 @@ public:
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);
   void SetEnergy(int new_energy);
-  inline const int & GetEnergy() const { return energy; };
+  inline const int & GetEnergy() const { return m_energy; };
 
   bool GotInjured() const { return lost_energy < 0; };
   void Die();

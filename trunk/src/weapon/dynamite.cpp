@@ -82,7 +82,7 @@ void DynamiteStick::Refresh()
 {
   image->Update();
   if (image->IsFinished())
-    energy = 0;
+    m_energy = 0;
   WeaponProjectile::Refresh();
 }
 

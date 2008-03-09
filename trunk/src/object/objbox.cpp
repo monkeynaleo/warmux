@@ -58,7 +58,7 @@ ObjBox::ObjBox(const std::string &name)
 
   parachute = true;
 
-  energy = start_life_points;
+  m_energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
   SetCollisionModel(false, false, true);
@@ -144,7 +144,7 @@ void ObjBox::Explode()
 
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {
-  if(energy > 0) return;
+  if (m_energy > 0) return;
   Explode();
 }
 

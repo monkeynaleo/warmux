@@ -84,7 +84,7 @@ protected:
   std::string m_rebound_sound;
 
   alive_t m_alive;
-  int energy;
+  int m_energy;
 
   bool m_allow_negative_y;
 
