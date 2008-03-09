@@ -908,6 +908,9 @@ void Character::GetValueFromAction(Action *a)
 	    "        - remote : %d\n"
 	    "        - local  : %d\n",
 	    GetName().c_str(), m_energy, prev_energy);
+    if (m_energy > 0) {
+      energy_bar.Actu(m_energy);
+    }
   }
 
   int disease_damage_per_turn = (a->PopInt());
