@@ -60,23 +60,23 @@ void ProgressBar::InitVal (long pval, long pmin, long pmax,
   min = pmin;
   max = pmax;
   orientation = porientation;
-  val_barre = CalculeValBarre(val);
+  val_barre = ComputeBarValue(val);
 }
 
 void ProgressBar::UpdateValue (long pval){
-  val = CalculeVal(pval);
-  val_barre = CalculeValBarre(val);
+  val = ComputeValue(pval);
+  val_barre = ComputeBarValue(val);
 }
 
-uint ProgressBar::CalculeVal (long pval) const{
+long ProgressBar::ComputeValue (long pval) const{
   return InRange_Long(pval, min, max);
 }
 
-uint ProgressBar::CalculeValBarre (long val) const{
+uint ProgressBar::ComputeBarValue (long val) const{
   if(orientation == PROG_BAR_HORIZONTAL)
-    return ( CalculeVal(val) -min)*(larg-2)/(max-min);
+    return ( ComputeValue(val) -min)*(larg-2)/(max-min);
   else
-    return ( CalculeVal(val) -min)*(haut-2)/(max-min);
+    return ( ComputeValue(val) -min)*(haut-2)/(max-min);
 }
 
 // TODO pass a Surface as parameter
@@ -92,7 +92,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
 
   // Valeur
   if (m_use_ref_val) {
-    int ref = CalculeValBarre (m_ref_val);
+    int ref = ComputeBarValue (m_ref_val);
     if (val < m_ref_val) { // FIXME hum, this seems buggy
       begin = 1+val_barre;
       end = 1+ref;
@@ -114,7 +114,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
   image.FillRect(r_value, value_color);
 
   if (m_use_ref_val) {
-    int ref = CalculeValBarre (m_ref_val);
+    int ref = ComputeBarValue (m_ref_val);
     Rectanglei r_ref;
     if(orientation == PROG_BAR_HORIZONTAL)
        r_ref = Rectanglei(1 + ref, 1, 1, haut - 2);
@@ -144,7 +144,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
 ProgressBar::marqueur_it ProgressBar::AddTag (long val, const Color& color){
   marqueur_t m;
 
-  m.val = CalculeValBarre (val);
+  m.val = ComputeBarValue(val);
   m.color = color;
   marqueur.push_back (m);
 
@@ -153,6 +153,6 @@ ProgressBar::marqueur_it ProgressBar::AddTag (long val, const Color& color){
 
 void ProgressBar::SetReferenceValue (bool use, long value){
   m_use_ref_val = use;
-  m_ref_val = CalculeVal(value);
+  m_ref_val = ComputeValue(value);
 }
 
