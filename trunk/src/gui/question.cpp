@@ -28,10 +28,21 @@
 #include "interface/mouse.h"
 #include "tool/resource_manager.h"
 
-Question::Question()
+Question::Question(type _type)
 {
   background = NULL;
   text = NULL;
+
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  switch (_type) {
+  case WARNING:
+    icon = new Sprite(resource_manager.LoadImage(res,"menu/ico_warning"));
+    break;
+  case NO_TYPE:
+    icon = NULL;
+    break;
+  }
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 Question::~Question()
@@ -41,6 +52,9 @@ Question::~Question()
 
   if (text != NULL)
     delete text;
+
+  if (icon != NULL)
+    delete icon;
 }
 
 int Question::TreatsKey (const SDL_Event &event){
@@ -65,18 +79,27 @@ void Question::Draw() const
 {
   AppWormux * app = AppWormux::GetInstance();
 
-  if(background != NULL)
-  {
-    background->Blit(app->video->window,  app->video->window.GetSize() / 2 - background->GetSize() / 2);
+  Point2i icon_size(0,0);
+  Point2i icon_border(0,0);
+  if (icon != NULL) {
+    icon_size = icon->GetSize();
+    icon_border = Point2i(10, 10);
   }
-  else if (text->GetText() != "")
-  {
-    uint x = app->video->window.GetWidth()/2 - text->GetWidth()/2 - 10;
-    uint y = app->video->window.GetHeight()/2 - text->GetHeight()/2 - 10;
 
-    Rectanglei rect(x, y,
-                    text->GetWidth() + 20,
-                    text->GetHeight() + 20);
+  Rectanglei rect;
+  Point2i top_corner;
+
+  if (background != NULL) {
+    top_corner = app->video->window.GetSize() / 2 - background->GetSize() / 2;
+    rect = Rectanglei(top_corner, background->GetSize());
+    background->Blit(app->video->window,  top_corner);
+  }
+  else if (text->GetText() != "") {
+    Point2i rect_size(text->GetWidth() + icon_size.GetX() + icon_border.GetX() + 10,
+		      std::max(text->GetHeight(), icon_size.GetY() + icon_border.GetY()) + 10);
+
+    top_corner = app->video->window.GetSize() / 2 - rect_size / 2;
+    rect = Rectanglei(top_corner, rect_size);
 
     AppWormux * appli = AppWormux::GetInstance();
 
@@ -84,9 +107,15 @@ void Question::Draw() const
     appli->video->window.RectangleColor(rect, defaultColorRect);
   }
 
-  if(text->GetText() != "")
-  {
-    text->DrawCenter(app->video->window.GetSize()/2);
+  if (icon != NULL) {
+    Point2i icon_position = top_corner + Point2i(5, rect.GetSizeY()/2 - icon_size.GetY() /2);
+    icon->Blit(app->video->window, icon_position);
+  }
+
+  if (text->GetText() != "") {
+    Point2i text_position = rect.GetPosition() +
+      Point2i(rect.GetSizeX() - text->GetWidth()/2 - 10, rect.GetSizeY()/2);
+    text->DrawCenter(text_position);
   }
 }
 

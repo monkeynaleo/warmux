@@ -14,6 +14,8 @@
 
 <section name="menu">
 
+  <surface name="ico_warning" file="interface/warning.png" />
+
   <!-- backgrounds -->
   <surface name="bg_option" file="menu/background_options.png" />
   <surface name="bg_play" file="menu/background_play.png" />

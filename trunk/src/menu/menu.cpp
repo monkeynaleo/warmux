@@ -163,7 +163,7 @@ void Menu::DisplayError(const std::string &msg)
 
   std::cerr << msg << std::endl;
 
-  Question question;
+  Question question(Question::WARNING);
   question.Set(msg, true, 0);
   question.Ask();
 }
