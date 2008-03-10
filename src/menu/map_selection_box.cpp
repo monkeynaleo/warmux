@@ -114,11 +114,11 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   tmp_map_box->AddWidget(previews_box);
 
   // Map information
-  map_name_label = new Label("Map", Point2i(-1, -1), Font::FONT_SMALL, 
+  map_name_label = new Label("Map", Point2i(-1, -1), Font::FONT_SMALL,
 			     Font::FONT_BOLD, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_name_label);
 
-  map_author_label = new Label("Author", Point2i(-1, -1), Font::FONT_SMALL, 
+  map_author_label = new Label("Author", Point2i(-1, -1), Font::FONT_SMALL,
 			       Font::FONT_NORMAL, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_author_label);
 
@@ -127,7 +127,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   // Load Maps' list
   uint i = MapsList::GetInstance()->GetActiveMapIndex();
 
-  // If network game skip random generated maps 
+  // If network game skip random generated maps
   if (Network::GetInstance()->IsServer() && i != MapsList::GetInstance()->lst.size()) {
     for (; MapsList::GetInstance()->lst[i]->IsRandomGenerated(); i = (i + 1) % MapsList::GetInstance()->lst.size());
   }
@@ -159,7 +159,7 @@ void MapSelectionBox::ChangeMap(uint index)
     selected_map_index = index;
     // We need to do it here to send the right map to still not connected clients
     // in distant_cpu::distant_cpu
-    
+
     if (selected_map_index == MapsList::GetInstance()->lst.size()) { // random map
       MapsList::GetInstance()->SelectMapByName("random");
     } else {
@@ -180,11 +180,11 @@ void MapSelectionBox::ChangeMap(uint index)
   tmp = index - 1;
   tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() + 1: tmp);
   UpdateMapInfo(map_preview_before, tmp, false);
-  
+
   tmp = index - 2;
   tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() + 1: tmp);
   UpdateMapInfo(map_preview_before2, tmp, false);
-  
+
   UpdateMapInfo(map_preview_after,  (index + 1) % (MapsList::GetInstance()->lst.size() +1), false);
   UpdateMapInfo(map_preview_after2, (index + 2) % (MapsList::GetInstance()->lst.size() +1), false);
 }
@@ -201,7 +201,7 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
     widget->SetSurface(info->ReadPreview(), true, true);
   }
   catch (const char* msg) {
-    Question question;
+    Question question(Question::WARNING);
     std::string err = Format("Map %s in folder '%s' is invalid: %s",
                              info->GetRawName().c_str(), info->GetDirectory().c_str(), msg);
     std::cerr << err << std::endl;

@@ -37,12 +37,20 @@ union SDL_Event;
 
 class Question
 {
+ public:
+  typedef enum {
+    WARNING,
+    NO_TYPE
+  } type;
+
+ private:
   /* If you need this, implement it (correctly)*/
   Question(const Question&);
   Question operator=(const Question&);
   /*********************************************/
 
   Sprite* background;
+  Sprite* icon;
 
   // A choice = a key return a value
   class choice_t
@@ -73,7 +81,7 @@ class Question
   Text * text;
 
 public:
-  Question();
+  Question(type _type = NO_TYPE);
   ~Question();
 
   void Set(const std::string &message,

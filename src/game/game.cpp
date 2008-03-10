@@ -123,7 +123,7 @@ void Game::Start()
   }
   catch (const std::exception &e)
   {
-    Question question;
+    Question question(Question::WARNING);
     std::string err_msg = e.what();
     std::string txt = Format(_("Error:\n%s"), err_msg.c_str());
     std::cout << std::endl << txt << std::endl;
@@ -432,7 +432,7 @@ void Game::MessageEndOfGame() const
 
   if (disconnected)
   {
-    Question question;
+    Question question(Question::WARNING);
     question.Set(_("The game was interrupted because you got disconnected."), true, 0);
     question.Ask();
   }
