@@ -339,6 +339,7 @@ void Character::Die()
     SetClothe("dead");
     SetMovement("breathe");
     SetCollisionModel(false, false, false);
+    StopCollision(); // bug #11232
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);

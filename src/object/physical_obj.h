@@ -212,6 +212,8 @@ protected:
   virtual void SignalCollision() { };
   virtual void SignalOutOfMap() { };
 
+  void StopCollision();
+
 private:
   //Retrun the position of the point of contact of the obj on the ground
   bool ContactPoint (int &x, int &y) const;
