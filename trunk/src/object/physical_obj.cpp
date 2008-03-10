@@ -363,6 +363,8 @@ void PhysicalObj::Collide(PhysicalObj* collided_obj, const Point2d& position)
 
 void PhysicalObj::CollideOnGround(const Point2d& position)
 {
+  ASSERT(m_last_collision_type == COLLISION_ON_GROUND);
+
       // Find the contact point and collision angle.
 //       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
 //       // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
@@ -390,12 +392,18 @@ void PhysicalObj::CollideOnGround(const Point2d& position)
     SignalCollision();
     // Make it rebound on the ground !!
     MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
+
+    if (m_last_collision_type == NO_COLLISION) // Collision has been stopped !?! (bug #11232)
+      return;
+
     Rebound(contactPos, ground_angle);
     CheckRebound();
 }
 
 void PhysicalObj::CollideOnObject(PhysicalObj& collided_obj, const Point2d& contactPos)
 {
+    ASSERT(m_last_collision_type == COLLISION_ON_OBJECT);
+
     SignalObjectCollision(&collided_obj);
     collided_obj.SignalObjectCollision(this);
 
@@ -417,11 +425,20 @@ void PhysicalObj::CollideOnObject(PhysicalObj& collided_obj, const Point2d& cont
 			  angle1);
     SetSpeed(((mass2 - mass1) * v2 + 2 * mass1 *v1 * m_cfg.m_rebound_factor) / (mass1 + mass2), angle2);
 
+    if (m_last_collision_type == NO_COLLISION) // Collision has been stopped !?! (bug #11232)
+      return;
+
     // Rebound on the object
     double contact_angle = - GetSpeedAngle();
     MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
     Rebound(contactPos, contact_angle);
     CheckRebound();
+}
+
+void PhysicalObj::StopCollision()
+{
+  MSG_DEBUG("physic.state", "Stopping collision of %s!", m_name.c_str());
+  m_last_collision_type = NO_COLLISION;
 }
 
 void PhysicalObj::UpdatePosition ()
