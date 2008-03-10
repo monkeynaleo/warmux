@@ -501,6 +501,13 @@
 	<country>Spain</country>
       </author>
       <author>
+	<nickname>ivze</nickname>
+	<name>Ivan ZELINSKIY</name>
+	<description>Fix wind indicator for x86_64</description>
+	<email>ivze_AT_bk_DOT_ru</email>
+	<country>Russia</country>
+      </author>
+      <author>
 	<nickname>Jerome</nickname>
 	<name>Jerome GLATIGNY</name>
 	<description>Write first network patch with François Bleibel</description>
