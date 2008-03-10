@@ -45,8 +45,8 @@ private:
   uint val_barre; // current value in the progress bar
   enum orientation orientation;
 
-  uint CalculeVal (long val) const;
-  uint CalculeValBarre (long val) const;
+  long ComputeValue (long val) const;
+  uint ComputeBarValue (long val) const;
 
   typedef struct s_marqueur_t{
     Color color;
