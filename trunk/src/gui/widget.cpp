@@ -137,6 +137,11 @@ void Widget::SetVisible(bool _visible)
   }
 }
 
+bool Widget::Contains(const Point2i& point) const
+{
+  return (Rectanglei::Contains(point) && visible);
+}
+
 void Widget::SetBorder(const Color &_border_color, uint _border_size)
 {
   if (border_color != _border_color ||

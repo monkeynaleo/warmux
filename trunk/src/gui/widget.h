@@ -77,6 +77,7 @@ class Widget : public Rectanglei, public Container
 
   // widget may be hidden
   void SetVisible(bool _visible);
+  bool Contains(const Point2i& point) const; // always false if !visible
 
   // manage mouse/keyboard focus
   bool HasFocus() const { return has_focus; };
