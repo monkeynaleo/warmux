@@ -23,12 +23,12 @@
 #include "graphic/surface.h"
 #include "graphic/colors.h"
 
-Box::Box(const Rectanglei &rect, bool _visible) : WidgetList( rect )
+Box::Box(const Rectanglei &rect, bool _draw_border) : WidgetList( rect )
 {
   margin = 5;
   border.SetValues(5, 5);
 
-  if (_visible) {
+  if (_draw_border) {
     Widget::SetBorder(defaultOptionColorRect, 2);
     Widget::SetBackgroundColor(defaultOptionColorBox);
   }
@@ -53,8 +53,8 @@ void Box::Update(const Point2i &mousePosition,
 
 // --------------------------------------------------
 
-VBox::VBox(int width, bool _visible) :
-  Box(Rectanglei(-1, -1, width, -1), _visible)
+VBox::VBox(int width, bool _draw_border) :
+  Box(Rectanglei(-1, -1, width, -1), _draw_border)
 {
 }
 
@@ -114,8 +114,8 @@ void VBox::SetSizePosition(const Rectanglei &rect)
 
 // --------------------------------------------------
 
-HBox::HBox(int height, bool _visible) :
-  Box(Rectanglei(-1, -1, -1, height), _visible)
+HBox::HBox(int height, bool _draw_border) :
+  Box(Rectanglei(-1, -1, -1, height), _draw_border)
 {
 }
 
@@ -163,8 +163,8 @@ void HBox::SetSizePosition(const Rectanglei &rect)
 
 // --------------------------------------------------
 
-GridBox::GridBox(uint _max_line_width, const Point2i& size_of_widget, bool _visible) :
-  Box(Rectanglei(-1, -1, -1, -1), _visible)
+GridBox::GridBox(uint _max_line_width, const Point2i& size_of_widget, bool _draw_border) :
+  Box(Rectanglei(-1, -1, -1, -1), _draw_border)
 {
   max_line_width = _max_line_width;
   widget_size = size_of_widget;
