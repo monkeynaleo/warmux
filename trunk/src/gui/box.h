@@ -22,7 +22,7 @@
 #ifndef GUI_BOX_H
 #define GUI_BOX_H
 
-#include "widget_list.h"
+#include "gui/widget_list.h"
 
 class Box : public WidgetList
 {
@@ -35,8 +35,8 @@ class Box : public WidgetList
   virtual ~Box();
 
   void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition,
-              Surface& surf);
+              const Point2i &lastMousePosition);
+
   Widget* Click(const Point2i &mousePosition, uint button) { return WidgetList::Click(mousePosition, button); };
   Widget* ClickUp(const Point2i &mousePosition, uint button) { return WidgetList::ClickUp(mousePosition, button); };
 

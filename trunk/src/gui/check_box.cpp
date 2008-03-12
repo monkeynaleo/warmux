@@ -23,6 +23,8 @@
 #include "graphic/text.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
+#include "include/app.h"
 #include "tool/resource_manager.h"
 
 CheckBox::CheckBox(const std::string& label, int width, bool value):
@@ -60,15 +62,17 @@ CheckBox::~CheckBox()
   delete txt_label;
 }
 
-void CheckBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
+void CheckBox::Draw(const Point2i &/*mousePosition*/) const
 {
+  Surface& surf = AppWormux::GetInstance()->video->window;
+
   txt_label->DrawTopLeft( GetPosition() );
-  
+
   if (m_value)
     m_checked_image->SetCurrentFrame(0);
   else
     m_checked_image->SetCurrentFrame(1);
-  
+
   m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 

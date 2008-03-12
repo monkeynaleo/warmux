@@ -22,6 +22,8 @@
 #include "gui/picture_widget.h"
 #include "graphic/colors.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
+#include "include/app.h"
 #include "tool/resource_manager.h"
 
 PictureWidget::PictureWidget (const Point2i& _size)
@@ -74,9 +76,10 @@ void PictureWidget::SetNoSurface()
   spr = NULL;
 }
 
-void PictureWidget::Draw(const Point2i &/*mousePosition*/,
-                         Surface& surf) const
+void PictureWidget::Draw(const Point2i &/*mousePosition*/) const
 {
+  Surface& surf = AppWormux::GetInstance()->video->window;
+
   if (spr != NULL) {
     int x = GetPositionX() + ( GetSizeX()/2 ) - (spr->GetWidth()/2);
     int y = GetPositionY() + ( GetSizeY()/2 ) - (spr->GetHeight()/2);

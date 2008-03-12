@@ -60,8 +60,6 @@ public:
   ~MainMenu();
   menu_item Run ();
 
-  void RedrawBackground(const Rectanglei& rect, Surface& surf);
-
 protected:
    bool signal_ok();
    bool signal_cancel();

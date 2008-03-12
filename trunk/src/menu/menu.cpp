@@ -174,9 +174,9 @@ void Menu::DrawBackground()
   background->Blit(AppWormux::GetInstance()->video->window, 0, 0);
 }
 
-void Menu::RedrawBackground(const Rectanglei& rect, Surface& surf)
+void Menu::RedrawBackground(const Rectanglei& rect)
 {
-  background->Blit(surf, rect, rect.GetPosition());
+  background->Blit(AppWormux::GetInstance()->video->window, rect, rect.GetPosition());
 }
 
 void Menu::RedrawMenu()
@@ -277,7 +277,7 @@ void Menu::Display(const Point2i& mousePosition)
   // to limit CPU
   uint start = SDL_GetTicks();
 
-  widgets.Update(mousePosition, AppWormux::GetInstance()->video->window);
+  widgets.Update(mousePosition);
   Draw(mousePosition);
   AppWormux::GetInstance()->video->Flip();
 

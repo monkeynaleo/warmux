@@ -61,8 +61,8 @@ void WidgetList::AddWidget(Widget* w)
   w->SetContainer(this);
 }
 
-void WidgetList::Update(const Point2i &mousePosition, Surface& surf)
-{  
+void WidgetList::Update(const Point2i &mousePosition)
+{
   if (mouse_selection != NULL && !mouse_selection->Contains(mousePosition)) {
     mouse_selection = NULL;
   }
@@ -72,12 +72,12 @@ void WidgetList::Update(const Point2i &mousePosition, Surface& surf)
       w++)
   {
     // Then redraw the widget
-    (*w)->Update(mousePosition, lastMousePosition, surf);
+    (*w)->Update(mousePosition, lastMousePosition);
     if (lastMousePosition != mousePosition && (*w)->Contains(mousePosition)) {
       mouse_selection = (*w);
       mouse_selection->SetHighlighted(true);
     }
-    
+
     if ((*w) != mouse_selection && (*w) != keyboard_selection
 	&& !(*w)->Contains(mousePosition)) {
       (*w)->SetHighlighted(false);

@@ -47,7 +47,7 @@ class CheckBox : public Widget
   CheckBox(Text* text, int width, bool value = true);
   ~CheckBox();
 
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  void Draw(const Point2i &mousePosition) const;
   Widget* Click(const Point2i&, uint) { return this; };
   Widget* ClickUp(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect) { StdSetSizePosition(rect); };

@@ -48,8 +48,10 @@ ButtonPic::~ButtonPic()
     delete txt_label;
 }
 
-void ButtonPic::Draw(const Point2i &mousePosition, Surface& surf) const
+void ButtonPic::Draw(const Point2i &mousePosition) const
 {
+  Surface& surf = AppWormux::GetInstance()->video->window;
+
   // center the image horizontally
   uint tmp_x = GetPositionX() + (GetSizeX() - m_img_normal.GetWidth())/2 ;
   uint tmp_y = GetPositionY();

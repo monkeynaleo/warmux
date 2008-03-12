@@ -21,13 +21,30 @@
 
 #include "gui/widget.h"
 
+#include "gui/container.h"
 #include "graphic/colors.h"
 #include "graphic/surface.h"
-#include "gui/container.h"
+#include "graphic/video.h"
+#include "include/app.h"
 #include "tool/debug.h"
+
 
 Widget::Widget():
   Rectanglei(),
+  has_focus(false),
+  visible(true),
+  is_highlighted(false),
+  border_color(white_color),
+  border_size(0),
+  background_color(transparent_color),
+  highlight_bg_color(transparent_color),
+  ct(NULL),
+  need_redrawing(true)
+{
+}
+
+Widget::Widget(const Point2i &point):
+  Rectanglei(0, 0, point.x, point.y),
   has_focus(false),
   visible(true),
   is_highlighted(false),
@@ -61,11 +78,12 @@ void Widget::StdSetSizePosition(const Rectanglei &rect)
 }
 
 // From Container: it redraws the border and the background
-void Widget::RedrawBackground(const Rectanglei& rect,
-			      Surface& surf)
+void Widget::RedrawBackground(const Rectanglei& rect)
 {
+  Surface& surf = AppWormux::GetInstance()->video->window;
+
   if (ct != NULL)
-    ct->RedrawBackground(rect, surf);
+    ct->RedrawBackground(rect);
 
   if (!visible)
     return;
@@ -85,20 +103,19 @@ void Widget::RedrawBackground(const Rectanglei& rect,
 }
 
 void Widget::Update(const Point2i &mousePosition,
-                    const Point2i &lastMousePosition,
-                    Surface& surf)
+                    const Point2i &lastMousePosition)
 {
   if (need_redrawing ||
       (Contains(mousePosition) && mousePosition != lastMousePosition) ||
       (Contains(lastMousePosition) && !Contains(mousePosition))) {
 
     // Redraw the border and the background
-    RedrawBackground(*this, surf);
+    RedrawBackground(*this);
 
-    __Update(mousePosition, lastMousePosition, surf);
+    __Update(mousePosition, lastMousePosition);
 
     if (visible) {
-      Draw(mousePosition, surf);
+      Draw(mousePosition);
     }
   }
   need_redrawing = false;

@@ -31,7 +31,7 @@ class NullWidget : public Widget
  public:
   NullWidget(const Rectanglei&) { };
   ~NullWidget() { };
-  void Draw(const Point2i&, Surface&) const { };
+  void Draw(const Point2i&) const { };
   void SetSizePosition(const Rectanglei &rect);
 };
 

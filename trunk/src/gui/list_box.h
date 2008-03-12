@@ -73,8 +73,7 @@ protected:
 
   Rectanglei ScrollBarPos() const;
   virtual void __Update(const Point2i &mousePosition,
-			const Point2i &lastMousePosition,
-			Surface& surf);
+			const Point2i &lastMousePosition);
 
 public:
   void SetSelectedItemColor(const Color & selected_item) { selected_item_color = selected_item; };
@@ -83,7 +82,7 @@ public:
   ListBox (const Point2i &size, bool always_one_selected_b = true);
   ~ListBox();
 
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  void Draw(const Point2i &mousePosition) const;
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);

@@ -80,7 +80,7 @@ void ComboBox::SetSizePosition(const Rectanglei &rect)
   txt_label->SetMaxWidth(GetSizeX());
 }
 
-void ComboBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
+void ComboBox::Draw(const Point2i &/*mousePosition*/) const
 {
   Surface& video_window = AppWormux::GetInstance()->video->window;
 

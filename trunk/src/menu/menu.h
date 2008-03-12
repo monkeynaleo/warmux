@@ -54,7 +54,7 @@ public:
    virtual ~Menu();
 
    void Run(bool skip=false);
-   virtual void RedrawBackground(const Rectanglei& rect, Surface& surf);
+   virtual void RedrawBackground(const Rectanglei& rect);
    virtual void RedrawMenu();
 
    void DisplayError(const std::string &msg);

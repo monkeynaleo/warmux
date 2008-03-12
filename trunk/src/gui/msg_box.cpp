@@ -22,6 +22,8 @@
 #include "gui/msg_box.h"
 #include "gui/widget.h"
 #include "graphic/text.h"
+#include "graphic/video.h"
+#include "include/app.h"
 
 const uint vmargin = 5;
 const uint hmargin = 5;
@@ -76,8 +78,10 @@ void MsgBox::NewMessage(const std::string &msg, const Color& color)
   NeedRedrawing();
 }
 
-void MsgBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
+void MsgBox::Draw(const Point2i &/*mousePosition*/) const
 {
+  Surface& surf = AppWormux::GetInstance()->video->window;
+
   // Draw the border
   surf.BoxColor(*this, defaultOptionColorBox);
   surf.RectangleColor(*this, defaultOptionColorRect,2);

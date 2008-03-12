@@ -35,11 +35,11 @@ ButtonText::ButtonText(const Profile *res_profile,
   text(new Text(new_text, white_color, font_size, font_style))
 { }
 
-void ButtonText::Draw(const Point2i &mousePosition, Surface& surf) const
+void ButtonText::Draw(const Point2i &mousePosition) const
 {
   Point2i textPosition = position + size/2;
 
-  Button::Draw(mousePosition, surf);
+  Button::Draw(mousePosition);
   text->DrawCenter(textPosition);
 }
 

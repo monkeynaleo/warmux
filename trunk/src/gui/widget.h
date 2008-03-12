@@ -51,24 +51,21 @@ class Widget : public Rectanglei, public Container
 
   void StdSetSizePosition(const Rectanglei &rect);
   virtual void __Update(const Point2i &/* mousePosition */,
-			const Point2i &/* lastMousePosition */,
-			Surface& /* surf */) {};
+			const Point2i &/* lastMousePosition */) {};
 
-  void RedrawBackground(const Rectanglei& rect,
-			Surface& surf);
+  void RedrawBackground(const Rectanglei& rect);
 
  public:
   Widget();
+  Widget(const Point2i &size);
   Widget(const Rectanglei &rect);
   virtual ~Widget() { };
 
   virtual void Update(const Point2i &mousePosition,
-		      const Point2i &lastMousePosition,
-		      Surface& surf); // Virtual for widget_list: to remove!
+		      const Point2i &lastMousePosition); // Virtual for widget_list: to remove!
 
 
-  virtual void Draw(const Point2i &mousePosition,
-                    Surface& surf) const = 0;
+  virtual void Draw(const Point2i &mousePosition) const = 0;
   virtual void NeedRedrawing() { need_redrawing = true; }; // set need_redrawing to true; -- virtual for widget_list
 
   virtual bool SendKey(const SDL_keysym&) { return false; };

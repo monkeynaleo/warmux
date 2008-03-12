@@ -19,12 +19,15 @@
  * Listbox
  *****************************************************************************/
 
-#include "gui/list_box.h"
-#include "gui/container.h"
 #include <algorithm>
-#include "tool/resource_manager.h"
-#include "graphic/text.h"
+
+#include "gui/list_box.h"
 #include "gui/button.h"
+#include "gui/container.h"
+#include "graphic/text.h"
+#include "graphic/video.h"
+#include "include/app.h"
+#include "tool/resource_manager.h"
 
 ListBoxItem::ListBoxItem(const std::string& _label,
                          Font::font_size_t fsize,
@@ -105,20 +108,20 @@ Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
   // buttons for listbox with more items than visible (first or last item not visible)
   if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
       (button == SDL_BUTTON_LEFT && m_down->Contains(mousePosition))) {
-    
+
     // bottom button
     if (last_visible_item < m_items.size() - 1)
       first_visible_item++ ;
-    
+
     return this;
   }
   else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
 	   (button == SDL_BUTTON_LEFT && m_up->Contains(mousePosition))) {
-    
+
     // top button
     if (first_visible_item > 0)
       first_visible_item-- ;
-    
+
     return this;
   }
 
@@ -149,8 +152,7 @@ Widget* ListBox::Click(const Point2i &mousePosition, uint button)
 }
 
 void ListBox::__Update(const Point2i &mousePosition,
-		       const Point2i &/*lastMousePosition*/,
-		       Surface& /*surf*/)
+		       const Point2i &/*lastMousePosition*/)
 {
   if (!Contains(mousePosition)) {
     scrolling = false;
@@ -164,8 +166,9 @@ void ListBox::__Update(const Point2i &mousePosition,
     }
 }
 
-void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
+void ListBox::Draw(const Point2i &mousePosition) const
 {
+  Surface& surf = AppWormux::GetInstance()->video->window;
   int item = MouseIsOnWhichItem(mousePosition);
 
   // Draw items
@@ -200,7 +203,7 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 
     m_items.at(i)->SetSizePosition(rect2);
     if (draw_it) {
-      m_items.at(i)->Draw(mousePosition, surf);
+      m_items.at(i)->Draw(mousePosition);
     }
 
     pos += Point2i(0, m_items.at(i)->GetSizeY());
@@ -211,9 +214,9 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
   }
 
   // buttons for listbox with more items than visible
-  if (first_visible_item != 0 || last_visible_item != m_items.size() - 1) {  
-    m_up->Draw(mousePosition, surf);
-    m_down->Draw(mousePosition, surf);
+  if (first_visible_item != 0 || last_visible_item != m_items.size() - 1) {
+    m_up->Draw(mousePosition);
+    m_down->Draw(mousePosition);
 
     Rectanglei scrollbar = ScrollBarPos();
     surf.BoxColor(scrollbar, (scrolling || scrollbar.Contains(mousePosition)) ? white_color : gray_color);

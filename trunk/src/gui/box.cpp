@@ -39,15 +39,14 @@ Box::~Box()
 }
 
 void Box::Update(const Point2i &mousePosition,
-		   const Point2i &/*lastMousePosition*/,
-		   Surface& surf)
+		 const Point2i &/*lastMousePosition*/)
 {
   if (need_redrawing) {
-    Widget::RedrawBackground(*this, surf);
-    Draw(mousePosition, surf);
+    Widget::RedrawBackground(*this);
+    Draw(mousePosition);
   }
 
-  WidgetList::Update(mousePosition, surf);
+  WidgetList::Update(mousePosition);
   need_redrawing = false;
 }
 

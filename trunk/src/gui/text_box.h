@@ -40,11 +40,13 @@ public:
           Font::font_style_t fstyle);
   ~TextBox() { };
 
-  bool SendKey(const SDL_keysym& key);
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
+
   void SetText(std::string const &new_txt);
   void SetMaxNbChars(unsigned int nb_chars);
-  void SetCursor(std::string::size_type pos);
+
+  // From widget
+  bool SendKey(const SDL_keysym& key);
+  void Draw(const Point2i &mousePosition) const;
   Widget *ClickUp(const Point2i &, uint);
 };
 
