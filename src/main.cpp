@@ -299,12 +299,16 @@ void ParseArgs(int argc, char * argv[])
         {
         case 'h':
           printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
-                 " [-i|--internet] [-s|--server] [-c|--client [ip]]"
+                 " [-i|--internet] [-s|--server] [-c|--client [ip]]\n"
 		 " [-g|--game-mode <game_mode>]"
+#ifdef DEBUG
                  " [-d|--debug <debug_masks>|all]\n"
+#endif
                  " [-l [ip/hostname]]\n", argv[0]);
+#ifdef DEBUG
           printf("\nWith :\n");
           printf(" <debug_msg> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body_anim | body.state | bonus | box | camera.follow | camera.tracking | character | damage | downloader | explosion | game | game.endofturn | game_mode | game.statechange | ghost | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.play | lst_objects | map | map.load | map.random | menu | mine | mouse | network | network.crc | network.crc_bad | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | physic.sync | random | random.get | socket | sprite | team | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | wind }\n");
+#endif
           exit(0);
           break;
         case 'b':
@@ -328,8 +332,12 @@ void ParseArgs(int argc, char * argv[])
           skip_menu = true;
           break;
         case 'd':
+#ifdef DEBUG
           printf("Debug: %s\n", optarg);
           AddDebugMode(optarg);
+#else
+	  fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug option.\n");
+#endif
           break;
         case 's':
           choice = MainMenu::NETWORK;
