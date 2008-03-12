@@ -67,8 +67,10 @@ void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
   txt_label->SetMaxWidth(GetSizeX());
 }
 
-void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
+void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const
 {
+  Surface& surf = AppWormux::GetInstance()->video->window;
+
   //  the computed positions are to center on the image part of the widget
 
   // 1. first draw the annulus background

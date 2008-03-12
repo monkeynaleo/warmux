@@ -23,7 +23,7 @@
 #define GUI_BUTTON_H
 
 #include "include/base.h"
-#include "widget.h"
+#include "gui/widget.h"
 
 // Forward declarations
 class Sprite;
@@ -45,7 +45,7 @@ public:
           bool img_scale = false);
   virtual ~Button();
 
-  virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
+  virtual void Draw(const Point2i &mousePosition) const;
   virtual void SetSizePosition(const Rectanglei &rect);
 };
 

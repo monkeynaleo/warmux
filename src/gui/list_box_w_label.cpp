@@ -37,9 +37,9 @@ ListBoxWithLabel::~ListBoxWithLabel()
    delete txt_label;
 }
 
-void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
+void ListBoxWithLabel::Draw(const Point2i &mousePosition) const
 {
-  ListBox::Draw(mousePosition, surf);
+  ListBox::Draw(mousePosition);
 
   // Draw the label
   txt_label->DrawTopLeft(Point2i(GetPositionX(),

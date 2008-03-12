@@ -36,7 +36,7 @@ class ButtonPic : public Widget
  public:
   ButtonPic(const std::string& label, const std::string& resource_id, const Point2i& size);
   ~ButtonPic();
-  void Draw(const Point2i& mousePosition, Surface& surf) const;
+  void Draw(const Point2i& mousePosition) const;
 
   void SetSizePosition(const Rectanglei& rect);
 };

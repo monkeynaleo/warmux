@@ -173,7 +173,3 @@ void MainMenu::DrawBackground()
 
 }
 
-void MainMenu::RedrawBackground(const Rectanglei& rect, Surface &window)
-{
-  Menu::RedrawBackground(rect, window);
-}

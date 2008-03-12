@@ -100,18 +100,17 @@ Team* TeamBox::GetTeam() const
 }
 
 void TeamBox::Update(const Point2i &mousePosition,
-                     const Point2i &lastMousePosition,
-                     Surface& surf)
+                     const Point2i &lastMousePosition)
 {
-  Box::Update(mousePosition, lastMousePosition, surf);
+  Box::Update(mousePosition, lastMousePosition);
   if (need_redrawing) {
-    Draw(mousePosition, surf);
+    Draw(mousePosition);
   }
 
   if (associated_team != NULL){
-    WidgetList::Update(mousePosition, surf);
+    WidgetList::Update(mousePosition);
   } else {
-    RedrawBackground(*this, surf);
+    RedrawBackground(*this);
   }
 
   if (associated_team != NULL && previous_name != player_name->GetText()) {

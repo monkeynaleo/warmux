@@ -59,8 +59,8 @@ class TeamBox : public HBox
   bool IsLocal() const;
 
   void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition,
-              Surface& surf);
+              const Point2i &lastMousePosition);
+
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
 };

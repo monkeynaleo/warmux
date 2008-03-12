@@ -45,7 +45,7 @@ public:
              Font::font_style_t font_style);
   ~ButtonText();
 
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  void Draw(const Point2i &mousePosition) const;
 };
 
 #endif

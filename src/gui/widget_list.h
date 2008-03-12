@@ -48,8 +48,8 @@ public:
   WidgetList(const Rectanglei &rect);
   virtual ~WidgetList();
 
-  void Update(const Point2i &mousePosition, Surface& surf);
-  virtual void Draw(const Point2i&, Surface&) const { };
+  void Update(const Point2i &mousePosition);
+  virtual void Draw(const Point2i &/*mousePosition*/) const { };
   // set need_redrawing to true for all sub widgets;
   void NeedRedrawing();
 

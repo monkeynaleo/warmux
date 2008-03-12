@@ -55,7 +55,7 @@ class Label : public Widget{
         bool shadowed = true);
   ~Label();
 
-  void Draw (const Point2i &mousePosition, Surface& surf) const;
+  void Draw(const Point2i &mousePosition) const;
   void SetSizePosition(const Rectanglei &rect);
   void SetText(const std::string &new_txt);
   const std::string& GetText() const;

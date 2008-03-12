@@ -17,13 +17,13 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include "gui/spin_button.h"
-#include "graphic/text.h"
-#include "gui/button.h"
 #include <sstream>
+
+#include "gui/spin_button.h"
+#include "gui/button.h"
+#include "graphic/text.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
-#include "gui/button.h"
 
 SpinButton::SpinButton (const std::string &label, int width,
                         int value, int step, int min_value, int max_value,
@@ -80,15 +80,15 @@ void SpinButton::SetSizePosition(const Rectanglei &rect)
   txt_label->SetMaxWidth(size.x - 30);
 }
 
-void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
+void SpinButton::Draw(const Point2i &mousePosition) const
 {
   txt_label->DrawTopLeft(position);
 
   if (GetValue() != GetMinValue()) {
-    m_minus->Draw(mousePosition, surf);
+    m_minus->Draw(mousePosition);
   }
   if (GetValue() != GetMaxValue()) {
-    m_plus->Draw(mousePosition, surf);
+    m_plus->Draw(mousePosition);
   }
 
   uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;

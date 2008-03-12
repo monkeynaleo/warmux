@@ -56,18 +56,6 @@ void TextBox::SetText(std::string const &new_txt)
   cursor_pos = GetText().size();
 }
 
-void TextBox::SetCursor(std::string::size_type pos)
-{
-  if(pos > GetText().size())
-  {
-    cursor_pos = GetText().size();
-  }
-  else
-  {
-    cursor_pos = pos;
-  }
-}
-
 void TextBox::SetMaxNbChars(unsigned int nb_chars)
 {
   max_nb_chars = nb_chars;
@@ -89,9 +77,9 @@ bool TextBox::SendKey(const SDL_keysym& key)
   return used;
 }
 
-void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
+void TextBox::Draw(const Point2i &mousePosition) const
 {
-  Label::Draw(mousePosition, surf);
+  Label::Draw(mousePosition);
   txt_label->DrawCursor(position, cursor_pos);
 }
 

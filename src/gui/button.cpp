@@ -20,8 +20,11 @@
  *****************************************************************************/
 
 #include "gui/button.h"
-#include "tool/resource_manager.h"
+#include "include/app.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
+#include "tool/resource_manager.h"
+
 
 Button::Button (const Profile *res_profile,
                 const std::string& resource_id, bool _img_scale):
@@ -37,22 +40,24 @@ Button::~Button()
   delete image;
 }
 
-void Button::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
+void Button::Draw(const Point2i &/*mousePosition*/) const
 {
+  Surface& surf = AppWormux::GetInstance()->video->window;
+
   uint frame = (IsHighlighted());
-  
+
   image->SetCurrentFrame(frame);
-  
+
   if (img_scale) {
     // image scalling : easy to place image
     image->Blit(surf, position);
   } else {
     // centering image
     Point2i pos = position;
-    
+
     pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
     pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
-    
+
     image->Blit(surf, pos);
   }
 }

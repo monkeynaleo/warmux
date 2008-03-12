@@ -38,7 +38,7 @@ public:
   ListBoxWithLabel (const std::string &label, const Point2i &size);
   ~ListBoxWithLabel();
 
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  void Draw(const Point2i &mousePosition) const;
   void SetSizePosition(const Rectanglei &rect);
 };
 

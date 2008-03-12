@@ -51,7 +51,7 @@ class ComboBox : public Widget
   std::vector<std::string>::size_type m_index;
 
  public:
-  
+
   ComboBox(const std::string &label,
 	   const std::string &resource_id,
 	   const Point2i &size,
@@ -62,7 +62,7 @@ class ComboBox : public Widget
 
   void SetSizePosition(const Rectanglei &rect);
 
-  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  void Draw(const Point2i &mousePosition) const;
   Widget* Click(const Point2i&, uint) const { return NULL; };
   Widget* ClickUp(const Point2i &mousePosition, uint button);
   const std::string GetValue() const { return m_choices[m_index].first; };

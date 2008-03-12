@@ -16,13 +16,13 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
+#include <sstream>
 
 #include "gui/spin_button_big.h"
 #include "gui/button.h"
-#include <sstream>
+#include "graphic/text.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
-#include "graphic/text.h"
 
 SpinButtonBig::SpinButtonBig (const std::string &label, const Point2i &_size,
                               int value, int step, int min_value, int max_value) :
@@ -83,13 +83,13 @@ void SpinButtonBig::SetSizePosition(const Rectanglei &rect)
                            m_plus->GetSizeX(), m_plus->GetSizeY()) );
 }
 
-void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
+void SpinButtonBig::Draw(const Point2i &mousePosition) const
 {
   if (GetValue() != GetMinValue()) {
-    m_minus->Draw(mousePosition, surf);
+    m_minus->Draw(mousePosition);
   }
   if (GetValue() != GetMaxValue()) {
-    m_plus->Draw(mousePosition, surf);
+    m_plus->Draw(mousePosition);
   }
 
   uint center_x = GetPositionX() + (GetSizeX()/2);
