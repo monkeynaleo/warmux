@@ -131,7 +131,10 @@ public:
 
   //----------- Access to datas (read only) ----------
   virtual const std::string &GetName() const { return m_name; }
+
   const std::string &GetUniqueId() const { return m_unique_id; }
+  void SetUniqueId(const std::string& s) { m_unique_id = s; }
+
   int GetCenterX() const { return GetX() +m_test_left +GetTestWidth()/2; };
   int GetCenterY() const { return GetY() +m_test_top +GetTestHeight()/2; };
   const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
