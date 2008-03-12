@@ -30,18 +30,16 @@
 #include "map/map.h"
 #include "network/network.h"
 #include "object/objects_list.h"
-#include "particles/particle.h"
 #include "object/physical_obj.h"
+#include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
-#include "weapon/weapon.h"
-#include "object/physical_obj.h"
-#include "graphic/surface.h"
 #include "tool/resource_manager.h"
-#include "network/randomsync.h"
+#include "tool/random.h"
+#include "weapon/weapon.h"
 
 Profile *weapons_res_profile = NULL;
 
@@ -53,7 +51,7 @@ void ApplyExplosion_common (const Point2i &pos,
                             std::string network_id
                             )
 {
-  MSG_DEBUG("explosion", "explosion range : %i\n", config.explosion_range);
+  MSG_DEBUG("explosion", "explosion range : %i", config.explosion_range);
 
 #ifdef HAVE_A_REALLY_BIG_CPU
   // Add particles based on the ground image
@@ -186,6 +184,8 @@ void ApplyExplosion_common (const Point2i &pos,
          if(fastest_character != NULL)
            Camera::GetInstance()->FollowObject (obj, true);
          ASSERT( obj->GetMass() != 0.0);
+
+	 MSG_DEBUG("explosion", "!! blasting object %s", network_id.c_str());
          obj->AddSpeed (force / obj->GetMass(), angle);
        }
      }
@@ -201,10 +201,10 @@ void ApplyExplosion_common (const Point2i &pos,
   if ( config.explosion_range > 25 && config.damage > 0 )
   {
      int reduced_range = ( int )config.explosion_range / 2;
-     Camera::GetInstance()->Shake( config.explosion_range * 15, 
-         Point2i( randomSync.GetLong( -reduced_range, reduced_range  ), 
-                config.explosion_range ), 
-         Point2i( 0, 0 ) 
+     Camera::GetInstance()->Shake( config.explosion_range * 15,
+         Point2i( randomObj.GetLong( -reduced_range, reduced_range  ),
+                config.explosion_range ),
+         Point2i( 0, 0 )
         );
   };
 }
