@@ -73,6 +73,10 @@ FootBomb::FootBomb(FootBombConfig& cfg,
   m_rebound_sound = "weapon/footbomb_bounce";
   explode_with_collision = false;
   m_recursions = cfg.nb_recursions;
+
+  // ensure that all football bomb have the same UniqueId
+  // it prevents bomb to be blasted by explosion of its parent (fix network bug #11154)
+  SetUniqueId("footbomb");
 }
 
 void FootBomb::Shoot(const Point2i & pos, double strength, double angle, int recursions)
@@ -120,7 +124,7 @@ void FootBomb::DoExplosion()
 
   double half_angle_range = static_cast<FootBombConfig &>(cfg).nb_angle_dispersion * M_PI / 180;
   Point2i pos = GetPosition();
-  for (uint i = 0; i < fragments; ++i ) 
+  for (uint i = 0; i < fragments; ++i )
   {
     double angle = -M_PI / 2; // this angle is "upwards" here
     double cluster_deviation = randomSync.GetDouble( -half_angle_range, half_angle_range );
