@@ -52,12 +52,11 @@ void GameInit::InitGameData_NetServer()
 
   randomSync.Init();
 
+  GameMode::GetInstance()->Load();
   SendGameMode();
 
   Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
   Network::GetInstance()->SendNetworkState();
-
-  GameMode::GetInstance()->Load();
 }
 
 void GameInit::EndInitGameData_NetServer()
@@ -196,7 +195,7 @@ GameInit::GameInit():
 
   ParticleEngine::Load();
 
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);  
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   Mouse::GetInstance()->CenterPointer();
 
   // First "selection" of a weapon -> fix bug 6576

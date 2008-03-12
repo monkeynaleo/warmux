@@ -274,6 +274,8 @@ void Action_Rules_SetGameMode (Action *a)
   std::string game_mode = a->PopString();
   std::string game_mode_objects = a->PopString();
 
+  MSG_DEBUG("game_mode", "Receiving game_mode: %s", game_mode_name.c_str());
+
   GameMode::GetInstance()->LoadFromString(game_mode_name,
                                           game_mode,
                                           game_mode_objects);
@@ -297,6 +299,8 @@ void SendGameMode()
   GameMode::GetInstance()->ExportToString(game_mode, game_mode_objects);
   a.Push(game_mode);
   a.Push(game_mode_objects);
+
+  MSG_DEBUG("game_mode", "Sending game_mode: %s", game_mode_name.c_str());
 
   Network::GetInstance()->SendAction(&a);
 }
