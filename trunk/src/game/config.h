@@ -127,6 +127,7 @@ public:
 
   bool Save(bool save_current_teams = false);
   inline const std::string &GetGameMode() const { return m_game_mode; }
+  inline void SetGameMode(std::string s) { m_game_mode = s; }
 
   inline const std::string &GetNetworkHost() const { return m_network_host; }
   inline void SetNetworkHost(std::string s) { m_network_host = s; }

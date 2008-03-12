@@ -280,18 +280,19 @@ void ParseArgs(int argc, char * argv[])
   int option_index = 0;
   struct option long_options[] =
     {
-      {"help",    no_argument,       NULL, 'h'},
-      {"blitz",   no_argument,       NULL, 'b'},
-      {"version", no_argument,       NULL, 'v'},
-      {"play",    no_argument,       NULL, 'p'},
-      {"internet",no_argument,       NULL, 'i'},
-      {"client",  optional_argument, NULL, 'c'},
-      {"server",  no_argument,       NULL, 's'},
-      {"debug",   required_argument, NULL, 'd'},
-      {NULL,      no_argument,       NULL,  0 }
+      {"help",       no_argument,       NULL, 'h'},
+      {"blitz",      no_argument,       NULL, 'b'},
+      {"version",    no_argument,       NULL, 'v'},
+      {"play",       no_argument,       NULL, 'p'},
+      {"internet",   no_argument,       NULL, 'i'},
+      {"client",     optional_argument, NULL, 'c'},
+      {"server",     no_argument,       NULL, 's'},
+      {"game-mode",  required_argument, NULL, 'g'},
+      {"debug",      required_argument, NULL, 'd'},
+      {NULL,         no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hbvpic::l::sd:",
+  while ((c = getopt_long (argc, argv, "hbvpic::l::sg:d:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
@@ -299,6 +300,7 @@ void ParseArgs(int argc, char * argv[])
         case 'h':
           printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
                  " [-i|--internet] [-s|--server] [-c|--client [ip]]"
+		 " [-g|--game-mode <game_mode>]"
                  " [-d|--debug <debug_masks>|all]\n"
                  " [-l [ip/hostname]]\n", argv[0]);
           printf("\nWith :\n");
@@ -343,6 +345,10 @@ void ParseArgs(int argc, char * argv[])
           if (optarg) IndexServer::GetInstance()->SetLocal(optarg);
           else        IndexServer::GetInstance()->SetLocal();
           break;
+	case 'g':
+	  printf("Game-mode: %s\n", optarg);
+	  Config::GetInstance()->SetGameMode(optarg);
+	  break;
         }
     }
 }
