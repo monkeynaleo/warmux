@@ -129,7 +129,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 
   // If network game skip random generated maps
   if (Network::GetInstance()->IsServer() && i != MapsList::GetInstance()->lst.size()) {
-    for (; MapsList::GetInstance()->lst[i]->IsRandomGenerated(); i = (i + 1) % MapsList::GetInstance()->lst.size());
+    for (; MapsList::GetInstance()->lst[i]->IsRandomGenerated(); i = (i + 1) % MapsList::GetInstance()->lst.size()) {} ;
   }
   ChangeMap(i);
 }

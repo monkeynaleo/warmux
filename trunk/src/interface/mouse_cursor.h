@@ -38,7 +38,7 @@ public:
   MouseCursor(Mouse::pointer_t pointer_id, 
 	      std::string filename, Point2i clic_pos);
 
-  const Mouse::pointer_t GetPointerId() const;
+  Mouse::pointer_t GetPointerId() const;
   const Surface& GetSurface() const;
   const Point2i& GetClicPos() const;
 };

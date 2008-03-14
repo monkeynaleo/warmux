@@ -88,13 +88,13 @@ class RandomMap {
    RandomMap(Profile *profile, const int width, const int height);
    void SetSize(const int width, const int height);
    const Point2i GetSize() const { return Point2i(width, height); };
-   const int GetWidth() const { return width; };
-   const int GetHeight() const { return height; };
+   int GetWidth() const { return width; };
+   int GetHeight() const { return height; };
    void AddElement(const Surface * object, const Point2i& position);
    void DrawElement();
    void SetBorderSize(const double border) { border_size = border; };
    void SetBorderColor(const Color& color) { border_color = color; };
-   const bool IsOpen() const { return is_open; };
+   bool IsOpen() const { return is_open; };
    void Generate(InfoMap::Island_type generator);
    void GenerateIsland();
    void GeneratePlatforms();

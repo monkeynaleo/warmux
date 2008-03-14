@@ -321,7 +321,7 @@ const std::string& ListBox::ReadValue () const
   return m_items.at(selected_item)->GetValue();
 }
 
-const int ListBox::ReadIntValue() const
+int ListBox::ReadIntValue() const
 {
   int tmp = 0;
   sscanf(ReadValue().c_str(),"%d", &tmp);

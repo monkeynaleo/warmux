@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-02-29 03:46+0200\n"
 "PO-Revision-Date: 2008-02-18 02:28+1000\n"
 "Last-Translator: luojie <luojie-dune@operamail.com>\n"
 "Language-Team: Chinese (China) <luojie-dune@operamail.com>\n"
@@ -17,7 +16,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:324
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! 地图 %s未找到 :-("
@@ -36,17 +35,17 @@ msgid_plural "%i players ready"
 msgstr[0] "%i 玩家准备好了"
 msgstr[1] "%i 玩家都准备好了"
 
-#: src/game/game.cpp:665
+#: src/game/game.cpp:677
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s)死掉了  ."
 
-#: src/map/maps_list.cpp:120
+#: src/map/maps_list.cpp:118
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s 从 %s"
 
-#: src/map/maps_list.cpp:127
+#: src/map/maps_list.cpp:125
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 从 %s"
@@ -62,7 +61,7 @@ msgstr " %s 队伍"
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
 
-#: src/game/game.cpp:644
+#: src/game/game.cpp:656
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s 自杀啦 !"
@@ -72,12 +71,12 @@ msgstr "%s 自杀啦 !"
 msgid "%s fps"
 msgstr "%s 帧fps"
 
-#: src/game/game.cpp:637
+#: src/game/game.cpp:649
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s 入水---深呼吸."
 
-#: src/game/game.cpp:648
+#: src/game/game.cpp:660
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s 飞出地图边缘---"
@@ -89,13 +88,13 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 赢得 %u 点耐久!"
 msgstr[1] "%s 赢得 %u 点耐久!"
 
-#: src/game/game.cpp:659
+#: src/game/game.cpp:671
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是个疯子, 他独自推掉了 %s 一个队!"
 
 # what about female names?
-#: src/game/game.cpp:654
+#: src/game/game.cpp:666
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
@@ -137,7 +136,7 @@ msgid_plural "%s team has won %u air attacks!"
 msgstr[0] "%s 队得到 %u 空袭!"
 msgstr[1] "%s 队得到 %u 空袭!"
 
-#: src/weapon/airhammer.cpp:185
+#: src/weapon/airhammer.cpp:174
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -176,7 +175,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "%s 队得到 %u 火箭炮!"
 msgstr[1] "%s 队得到 %u 火箭炮!"
 
-#: src/weapon/blowtorch.cpp:146
+#: src/weapon/blowtorch.cpp:137
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -222,14 +221,14 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s 队得到 %u 炸弹了!"
 msgstr[1] "%s 队得到 %u 炸弹了!"
 
-#: src/weapon/flamethrower.cpp:191
+#: src/weapon/flamethrower.cpp:178
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "%s 队得到 %u 炸弹了!"
 msgstr[1] "%s 队得到 %u 喷火器了!"
 
-#: src/weapon/footbomb.cpp:172
+#: src/weapon/footbomb.cpp:176
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -314,7 +313,7 @@ msgid_plural ""
 msgstr[0] "%s 队得到了%u狙击步枪! "
 msgstr[1] "%s 队得到了%u狙击步枪! 瞄眼睛！"
 
-#: src/weapon/submachine_gun.cpp:156
+#: src/weapon/submachine_gun.cpp:143
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -356,7 +355,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s 队得到 %u 企鹅发射器! 没见过满天飞的企鹅吗?"
 msgstr[1] "%s 队得到 %u 企鹅发射器! 没见过满天飞的企鹅吗?"
 
-#: src/include/action_handler.cpp:338
+#: src/include/action_handler.cpp:342
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s 试着连接一个不同版本 : client=%s, me=%s."
@@ -391,7 +390,7 @@ msgstr "空袭"
 msgid "Airhammer"
 msgstr "飞锤"
 
-#: src/menu/results_menu.cpp:447
+#: src/menu/results_menu.cpp:446
 msgid "All teams"
 msgstr "全部的队伍"
 
@@ -507,7 +506,7 @@ msgstr "已连接!"
 msgid "Construct"
 msgstr "建筑工具"
 
-#: src/menu/results_menu.cpp:212
+#: src/menu/results_menu.cpp:211
 msgid "Controlled by: "
 msgstr "控制者: "
 
@@ -555,18 +554,18 @@ msgstr "读取队伍出错 :"
 msgid "Error loading team's data %s:"
 msgstr "读取队伍数据 %s 时出错 :"
 
-#: src/game/config.cpp:445
+#: src/game/config.cpp:451
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "建立目录失败 \"%s\": 不能储存设置文件."
 
-#: src/game/config.cpp:318
+#: src/game/config.cpp:324
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "读取设置文件出错: %s"
 
-#: src/game/config.cpp:356
+#: src/game/config.cpp:362
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "正读取默认设置文件发生错误: %s"
@@ -618,7 +617,7 @@ msgstr "错误: 找不到 body\"%s\" 队伍 \"%s\"."
 msgid "Flame Thrower"
 msgstr "喷火器"
 
-#: src/weapon/footbomb.cpp:154
+#: src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "足球炸弹"
 
@@ -737,23 +736,23 @@ msgstr ""
 "开火: 按住空格键积攒到需要的力量\n"
 "每回合一个弹夹"
 
-#: src/game/game_init.cpp:156
+#: src/game/game_init.cpp:155
 msgid "Initialisation"
 msgstr "初始化"
 
-#: src/game/game_init.cpp:107
+#: src/game/game_init.cpp:106
 msgid "Initialise map"
 msgstr "地图初始化"
 
-#: src/game/game_init.cpp:143
+#: src/game/game_init.cpp:142
 msgid "Initialise sounds"
 msgstr "声音初始化"
 
-#: src/game/game_init.cpp:119
+#: src/game/game_init.cpp:118
 msgid "Initialise teams"
 msgstr "队伍初始化"
 
-#: src/game/game.cpp:528
+#: src/game/game.cpp:537
 msgid "It's a present!"
 msgstr "就是现在!"
 
@@ -770,7 +769,7 @@ msgstr "加入#wormux IRC irc.freenode.net 找对手"
 msgid "Language"
 msgstr "语言"
 
-#: src/map/maps_list.cpp:228
+#: src/map/maps_list.cpp:226
 msgid "Load maps:"
 msgstr "读取地图:"
 
@@ -792,7 +791,7 @@ msgstr "漫步-低重力"
 msgid "Map %s, a creation of: "
 msgstr "地图 %s, 灵感 : "
 
-#: src/game/game_init.cpp:110
+#: src/game/game_init.cpp:109
 msgid "Maps"
 msgstr "地图"
 
@@ -808,27 +807,27 @@ msgstr "最大 FPS"
 msgid "Mine"
 msgstr "地雷"
 
-#: src/menu/results_menu.cpp:284
+#: src/menu/results_menu.cpp:283
 msgid "Most accurate"
 msgstr "最准"
 
-#: src/menu/results_menu.cpp:279
+#: src/menu/results_menu.cpp:278
 msgid "Most clumsy"
 msgstr "最笨手笨脚的"
 
-#: src/menu/results_menu.cpp:274
+#: src/menu/results_menu.cpp:273
 msgid "Most sold-out"
 msgstr "最卖力的"
 
-#: src/menu/results_menu.cpp:264
+#: src/menu/results_menu.cpp:263
 msgid "Most useful"
 msgstr "最有价值的"
 
-#: src/menu/results_menu.cpp:269
+#: src/menu/results_menu.cpp:268
 msgid "Most useless"
 msgstr "最失败的"
 
-#: src/menu/results_menu.cpp:259
+#: src/menu/results_menu.cpp:258
 msgid "Most violent"
 msgstr "最暴力的"
 
@@ -844,12 +843,12 @@ msgstr "网络游戏"
 msgid "Network initialization"
 msgstr "网络初始化"
 
-#: src/weapon/weapon.cpp:635
+#: src/weapon/weapon.cpp:654
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "没找到 <%s>重点 xml配置文件 !"
 
-#: src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:139
 msgid "Nobody!"
 msgstr "空房间!"
 
@@ -920,11 +919,11 @@ msgstr "推出战斗"
 msgid "Random map"
 msgstr "随机读取地图"
 
-#: src/game/config.cpp:331
+#: src/game/config.cpp:337
 msgid "Reading default config file"
 msgstr "正读取默认设置文件"
 
-#: src/game/config.cpp:364
+#: src/game/config.cpp:370
 msgid "Reading personal config file"
 msgstr "正读取个人设置文件"
 
@@ -996,7 +995,7 @@ msgid "Sound frequency"
 msgstr "声频"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:146
+#: src/game/game_init.cpp:145
 msgid "Sounds"
 msgstr "声音"
 
@@ -1020,7 +1019,7 @@ msgstr "SuperTux-超级企鹅"
 msgid "Syringe"
 msgstr "注射器"
 
-#: src/game/game_init.cpp:121
+#: src/game/game_init.cpp:120
 msgid "Teams"
 msgstr "队伍"
 
@@ -1032,7 +1031,7 @@ msgstr "传送"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "集束炸弹离开战场---"
 
-#: src/weapon/footbomb.cpp:107
+#: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "集束炸弹离开战场---"
 
@@ -1052,7 +1051,7 @@ msgstr "制导火箭离开战场..."
 msgid "The ball left the battlefield before exploding"
 msgstr "球膨胀前离开战场"
 
-#: src/include/action_handler.cpp:321
+#: src/include/action_handler.cpp:325
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1067,7 +1066,7 @@ msgstr "连接超时. 请检查防火墙!"
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "disco榴弹离开舞池前发生爆炸"
 
-#: src/game/game.cpp:427
+#: src/game/game.cpp:436
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
@@ -1095,7 +1094,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "只有%i队"
 msgstr[1] "只有%i队"
 
-#: src/weapon/footbomb.cpp:155 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1127,12 +1126,12 @@ msgstr "工具"
 msgid "Unable to contact host."
 msgstr "连不上主机"
 
-#: src/map/maps_list.cpp:238
+#: src/map/maps_list.cpp:236
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "打不开地图目录(%s)!"
 
-#: src/map/maps_list.cpp:250
+#: src/map/maps_list.cpp:248
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "无法打开个人地图目录 (%s)!"
@@ -1167,7 +1166,7 @@ msgstr "等着接受服务吧, 现在先聊天 !"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:132 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "武器"
 
@@ -1175,7 +1174,7 @@ msgstr "武器"
 msgid "Website: "
 msgstr "网站Website: "
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:674
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 惨死在小枪之下...不能瞑目!"
@@ -1186,7 +1185,7 @@ msgid "Wind particles?"
 msgstr "风来了?"
 
 #
-#: src/menu/results_menu.cpp:204
+#: src/menu/results_menu.cpp:203
 msgid "Winner"
 msgstr "胜者"
 
@@ -1198,7 +1197,7 @@ msgstr "准备中, Wormux!!!"
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
-#: src/map/maps_list.cpp:91
+#: src/map/maps_list.cpp:89
 #, c-format
 msgid "XML error during loading map '%s': "
 msgstr "读取地图 '%s' 时出现XML错误"
@@ -1211,11 +1210,11 @@ msgstr "你是孤单的 :-/"
 msgid "You are alone..."
 msgstr "你是孤单的..."
 
-#: src/map/maps_list.cpp:259
+#: src/map/maps_list.cpp:257
 msgid "You need at least one valid map !"
 msgstr "你需要可用的地图!"
 
-#: src/game/game_init.cpp:125 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "至少有2组才能开始 !"
 
@@ -1223,12 +1222,12 @@ msgstr "至少有2组才能开始 !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "没有队伍，就不会有战斗!"
 
-#: src/weapon/weapon_launcher.cpp:480
+#: src/weapon/weapon_launcher.cpp:479
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 
 #
-#: src/menu/credits_menu.cpp:75
+#: src/menu/credits_menu.cpp:73
 msgid "aka"
 msgstr "aka"
 
@@ -1242,7 +1241,7 @@ msgstr ""
 "爆炸 : 左键点击目标\n"
 "每回合一次"
 
-#: src/map/maps_list.cpp:79
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "无法读取设置"
 
@@ -1250,16 +1249,16 @@ msgstr "无法读取设置"
 msgid "done"
 msgstr "成"
 
-#: src/map/maps_list.cpp:86
+#: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
 msgstr "粘贴配置文件出错"
 
 #
-#: src/menu/credits_menu.cpp:79
+#: src/menu/credits_menu.cpp:77
 msgid "from"
 msgstr "从"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "没有配置文件！"
 

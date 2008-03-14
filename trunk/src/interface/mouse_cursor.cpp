@@ -30,7 +30,7 @@ MouseCursor::MouseCursor(Mouse::pointer_t _pointer_id,
   clic_pos = _clic_pos;
 }
 
-const Mouse::pointer_t MouseCursor::GetPointerId() const
+Mouse::pointer_t MouseCursor::GetPointerId() const
 {
   return pointer_id;
 }

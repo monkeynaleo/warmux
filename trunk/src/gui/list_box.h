@@ -106,7 +106,7 @@ public:
 
   const std::string& ReadLabel() const;
   const std::string& ReadValue() const;
-  const int ReadIntValue() const;
+  int ReadIntValue() const;
   const std::string& ReadValue(int index) const;
 
   uint Size() const { return m_items.size(); };
