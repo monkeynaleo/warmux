@@ -17,9 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#ifdef _MSC_VER
-#  include <algorithm>
-#endif
+#include <algorithm>
 #include <iostream>
 #include <SDL_image.h>
 #include "game/config.h"

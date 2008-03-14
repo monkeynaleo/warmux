@@ -26,7 +26,7 @@ bool MoveCursorLeft(const std::string& text, std::string::size_type& pos)
 {
   if (pos != 0)
     {
-      while ((text[--pos] & 0xc0) == 0x80);
+      while ((text[--pos] & 0xc0) == 0x80) {} ;
 
       return true;
     }
@@ -37,7 +37,7 @@ bool MoveCursorRight(const std::string& text, std::string::size_type& pos)
 {
   if (pos < text.size())
     {
-      while ((text[++pos] & 0xc0) == 0x80);
+      while ((text[++pos] & 0xc0) == 0x80) {} ;
 
       return true;
     }

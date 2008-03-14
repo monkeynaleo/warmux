@@ -20,9 +20,7 @@
  *****************************************************************************/
 
 #include "menu/results_menu.h"
-#ifdef _MSC_VER
-#  include <algorithm>  //std::sort
-#endif
+#include <algorithm>  //std::sort
 
 #include "character/character.h"
 #include "character/damage_stats.h"

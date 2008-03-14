@@ -30,9 +30,7 @@
 #include "tool/random.h"
 #include "tool/xml_document.h"
 #include <iostream>
-#ifdef _MSC_VER
-#  include <algorithm>
-#endif
+#include <algorithm>
 
 extern const uint MAX_WIND_OBJECTS;
 

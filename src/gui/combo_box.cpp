@@ -174,7 +174,7 @@ void ComboBox::SetChoice (std::vector<std::string>::size_type index)
   NeedRedrawing();
 }
 
-const int ComboBox::GetIntValue() const
+int ComboBox::GetIntValue() const
 {
   int tmp = 0;
   sscanf(GetValue().c_str(),"%d", &tmp);

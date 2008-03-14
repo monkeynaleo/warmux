@@ -19,6 +19,7 @@
  * Sky: background of the map
  *****************************************************************************/
 
+#include <climits>
 #include "map/sky.h"
 #include "map/camera.h"
 #include "map/map.h"
