@@ -54,6 +54,12 @@
 #  include "include/binreloc.h"
 #endif
 
+#ifndef WIN32
+#define MKDIR_P(dir) (mkdir(dir, 0750))
+#else
+#define MKDIR_P(dir) (_mkdir(dir))
+#endif
+
 #ifdef _WIN32
 #include <windows.h>
 
@@ -93,6 +99,7 @@ Config::Config():
   locale_dir(),
   personal_data_dir(),
   personal_config_dir(),
+  chat_log_dir(),
   teams(),
   map_name(),
   display_energy_character(true),
@@ -215,6 +222,10 @@ Config::Config():
   personal_config_dir = GetHome() + "\\Wormux\\";
   personal_data_dir = personal_config_dir;
 #endif
+
+  chat_log_dir = personal_data_dir + std::string(PATH_SEPARATOR"logs");
+  MkdirChatLogDir();
+
   LoadDefaultValue();
 
   // Load personal config
@@ -229,14 +240,19 @@ Config::Config():
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
 
+bool Config::MkdirChatLogDir()
+{
+  // Create the directory if it doesn't exist
+  if (MKDIR_P(chat_log_dir.c_str()) == 0 || errno == EEXIST)
+    return true;
+
+  return false;
+}
+
 bool Config::MkdirPersonalConfigDir()
 {
   // Create the directory if it doesn't exist
-#ifndef WIN32
-  if (mkdir(personal_config_dir.c_str(), 0750) != 0 && errno != EEXIST)
-#else
-  if (_mkdir(personal_config_dir.c_str()) != 0 && errno != EEXIST)
-#endif
+  if (MKDIR_P(personal_config_dir.c_str()) == 0 || errno == EEXIST)
     return true;
 
   return false;
@@ -245,19 +261,9 @@ bool Config::MkdirPersonalConfigDir()
 bool Config::MkdirPersonalDataDir()
 {
   // Create the directory if it doesn't exist
-#ifndef WIN32
-#define MKDIR_P(dir) (mkdir(dir, 0750))
-#else
-#define MKDIR_P(dir) (_mkdir(dir))
-#endif
-
   if ( MKDIR_P(personal_data_dir.c_str()) == 0 || errno == EEXIST)
-  {
-    std::string chatlogdir = personal_data_dir +
-        std::string(PATH_SEPARATOR"logs") ;
-    if ( MKDIR_P(chatlogdir.c_str()) == 0 || errno == EEXIST)
       return true;
-  }
+
   return false;
 }
 
