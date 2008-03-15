@@ -454,7 +454,7 @@ msgstr "(sistemski jezik)"
 
 #: src/network/chatlogger.cpp:34
 msgid "(unknown time)"
-msgstr ""
+msgstr "(čas ni znan)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -942,9 +942,8 @@ msgstr "Inicializacija omrežja"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:54
-#, fuzzy
 msgid "New network game at "
-msgstr "Omrežna igra"
+msgstr "Nova omrežna igra ob"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
