@@ -673,6 +673,7 @@ static void Action_Network_Ping(Action */*a*/)
 void Action_Network_Connect(Action *a)
 {
   std::string msg = Format("%s just connected", a->PopString().c_str());
+  ChatLogger::LogMessageIfOpen(msg);
   if(Game::GetInstance()->IsGameLaunched())
     GameMessages::GetInstance()->Add(msg);
   else if (Network::GetInstance()->network_menu != NULL)
@@ -684,6 +685,7 @@ void Action_Network_Connect(Action *a)
 void Action_Network_Disconnect(Action *a)
 {
   std::string msg = Format("%s just disconnected", a->PopString().c_str());
+  ChatLogger::LogMessageIfOpen(msg);
   if (Game::GetInstance()->IsGameLaunched()) {
     GameMessages::GetInstance()->Add(msg);
   } else if (Network::GetInstance()->network_menu != NULL)

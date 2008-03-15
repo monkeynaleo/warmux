@@ -26,6 +26,7 @@
 #include "network/network_client.h"
 #include "network/network_server.h"
 #include "network/distant_cpu.h"
+#include "network/chatlogger.h"
 //-----------------------------------------------------------------------------
 #include "game/game_mode.h"
 #include "game/game.h"
@@ -271,6 +272,7 @@ void Network::Disconnect()
     singleton->stop_thread = true;
     singleton->DisconnectNetwork();
     delete singleton;
+    ChatLogger::CloseIfOpen();
   }
 }
 

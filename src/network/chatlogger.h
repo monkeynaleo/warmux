@@ -10,16 +10,15 @@ class ChatLogger: public Singleton<ChatLogger>
  public:
   ChatLogger();
   ~ChatLogger();
-  void LogMessage(const std::string& author, const std::string& msg);
   void LogMessage(const std::string& msg);
+  static void LogMessageIfOpen(const std::string& msg);
+  static void CloseIfOpen(void);
   static ChatLogger * GetInstance();
- private:
+ protected:
   friend class Singleton<ChatLogger>;
-  friend class DistantComputer;
-  friend class NetworkClient;
 
-  std::string logfile;
   std::string logdir;
+  std::string logfile;
   std::ofstream m_logfilename;
 };
 
