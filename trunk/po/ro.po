@@ -546,7 +546,7 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s încearcă să se conecteze cu o versiune diferită: client=%s, eu=%s."
@@ -559,6 +559,11 @@ msgstr "(mort)"
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr "(limba sistemului)"
+
+#: src/network/chatlogger.cpp:34
+#, fuzzy
+msgid "(unknown time)"
+msgstr "Acțiune necunoscută"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -609,7 +614,7 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Rachetă automată"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr "Înapoi pe câmpul de bătălie"
 
@@ -709,7 +714,7 @@ msgstr "Controlat de: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Nu s-a putut prelua ultima versiune de la %s"
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Nu a fost posibilă deschiderea fișierului %s"
@@ -871,7 +876,7 @@ msgstr "Comandant șef"
 msgid "Head commander: "
 msgstr "Comandant șef: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "Ajutor"
 
@@ -1045,9 +1050,15 @@ msgstr "Muzică?"
 msgid "Network Game"
 msgstr "Joc în rețea"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 msgid "Network initialization"
 msgstr "Inițializare rețea"
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "Joc în rețea"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -1072,7 +1083,7 @@ msgid "Options"
 msgstr "Opțiuni"
 
 # XXX: nu-mi place cum sună; probabil am să revin la "Opțiuni"
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 msgid "Options menu"
 msgstr "Meniul de opțiuni"
 
@@ -1118,7 +1129,7 @@ msgstr "Ieșire"
 msgid "Quit Wormux"
 msgstr "Ieșire din Wormux"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr "Părăsește bătălia"
 
@@ -1258,7 +1269,7 @@ msgstr "Racheta automată a părăsit câmpul de luptă ..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Mingea a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1352,7 +1363,7 @@ msgstr "Nu a fost posibilă deschiderea directorului personal cu hărți (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nu a fost posibilă folosirea acestui port!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr "Fără nume"
 
@@ -2410,10 +2421,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "teleportation"
 #~ msgstr "Teleportare"
-
-#, fuzzy
-#~ msgid "unknown"
-#~ msgstr "Acțiune necunoscută"
 
 #, fuzzy
 #~ msgid "version"

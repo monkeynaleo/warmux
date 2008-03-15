@@ -100,6 +100,7 @@ menu/teams_selection_box.cpp
 msvc/getopt.c
 network/admin_commands.cpp
 network/chat.cpp
+network/chatlogger.cpp
 network/distant_cpu.cpp
 network/download.cpp
 network/index_server.cpp

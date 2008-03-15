@@ -358,7 +358,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'equip %s aconsegueix %u llançador de tux!"
 msgstr[1] "L'equip %s aconsegueix %u llançador de tux!"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -372,6 +372,10 @@ msgstr "(mort)"
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr "(idioma del sistema)"
+
+#: src/network/chatlogger.cpp:34
+msgid "(unknown time)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -421,7 +425,7 @@ msgstr "Autors:"
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatic"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr "Tornar a la lluita"
 
@@ -520,7 +524,7 @@ msgstr "Controlat per:"
 msgid "Couldn't fetch last version from %s"
 msgstr "No s'ha pogut tornar a la versió %s"
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "No es va poder obrir l'arxiu %s"
@@ -679,7 +683,7 @@ msgstr "Comandant cap"
 msgid "Head commander: "
 msgstr "Comandant cap:"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "Ajuda"
 
@@ -852,9 +856,15 @@ msgstr "Música?"
 msgid "Network Game"
 msgstr "Joc en xarxa"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 msgid "Network initialization"
 msgstr "Inicialización del xarxa"
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "Joc en xarxa"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -878,7 +888,7 @@ msgstr "Nombre de equips:"
 msgid "Options"
 msgstr "Opcions"
 
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 msgid "Options menu"
 msgstr "Menú de opcions"
 
@@ -924,7 +934,7 @@ msgstr "Sortí"
 msgid "Quit Wormux"
 msgstr "Sortir de Wormux"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr "Sortir de la batalla"
 
@@ -1070,7 +1080,7 @@ msgstr "El coet automàtic ha anat a altre món... "
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilota ha abandonat el camp de batalla abans d'explotar."
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1161,7 +1171,7 @@ msgstr "Impossible obrir el directori dels mapes (%s)!"
 msgid "Unable to use this port!"
 msgstr "Impossible usar aquest port!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr "Sense nom"
 

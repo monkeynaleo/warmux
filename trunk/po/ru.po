@@ -423,7 +423,7 @@ msgstr[2] ""
 "Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего "
 "пингвина?"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s пытается подключиться с другой версией : client=%s, me=%s."
@@ -436,6 +436,10 @@ msgstr "(мёртв)"
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr "(системный язык)"
+
+#: src/network/chatlogger.cpp:34
+msgid "(unknown time)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -485,7 +489,7 @@ msgstr "Авторы:"
 msgid "Automatic Bazooka"
 msgstr "Автоматическая базука"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr "Вернуться к битве"
 
@@ -584,7 +588,7 @@ msgstr "Контролируется: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Не получается скачать новую версию с %s"
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Не могу открыть файл %s"
@@ -742,7 +746,7 @@ msgstr "Командующий"
 msgid "Head commander: "
 msgstr "Командующий: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "Справка"
 
@@ -914,9 +918,15 @@ msgstr "Музыка?"
 msgid "Network Game"
 msgstr "Игра по сети"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 msgid "Network initialization"
 msgstr "Инициализация сети"
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "Игра по сети"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -940,7 +950,7 @@ msgstr "Количество команд:"
 msgid "Options"
 msgstr "Настройки"
 
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 msgid "Options menu"
 msgstr "Меню настроек"
 
@@ -986,7 +996,7 @@ msgstr "Выйти"
 msgid "Quit Wormux"
 msgstr "Выйти из Wormux"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr "Покинуть битву"
 
@@ -1126,7 +1136,7 @@ msgstr "Автоматическая ракета улетела за преде
 msgid "The ball left the battlefield before exploding"
 msgstr "Мяч улетел за пределы поля битвы"
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1216,7 +1226,7 @@ msgstr "Невозможно открыть личный каталог с ка�
 msgid "Unable to use this port!"
 msgstr "Не получается использовать этот порт!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr "Без имени"
 

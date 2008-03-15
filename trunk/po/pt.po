@@ -375,7 +375,7 @@ msgstr[0] ""
 msgstr[1] ""
 "A equipa %s ganhou %u lançadores de tux! Nunca viste um penguim voador?"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s tenta ligar com uma versão diferente : cliente=%s, eu=%s."
@@ -388,6 +388,10 @@ msgstr "(morto)"
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr "(linguagem do sistema)"
+
+#: src/network/chatlogger.cpp:34
+msgid "(unknown time)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -435,7 +439,7 @@ msgstr "Autores:"
 msgid "Automatic Bazooka"
 msgstr "Bazooka Automática"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr ""
 
@@ -535,7 +539,7 @@ msgstr "Controlado por:"
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -693,7 +697,7 @@ msgstr "Comandante principal"
 msgid "Head commander: "
 msgstr "Comandante principal: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr ""
 
@@ -866,9 +870,15 @@ msgstr "Música?"
 msgid "Network Game"
 msgstr "Jogo em Rede"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 msgid "Network initialization"
 msgstr "Iniciando a rede"
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "Jogo em Rede"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -892,7 +902,7 @@ msgstr "Número de equipas:"
 msgid "Options"
 msgstr "Opções"
 
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 #, fuzzy
 msgid "Options menu"
 msgstr "Opções"
@@ -939,7 +949,7 @@ msgstr "Sair"
 msgid "Quit Wormux"
 msgstr "Sair Wormux"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr ""
 
@@ -1080,7 +1090,7 @@ msgstr "O míssil teleguiado saiu do campo de batalha..."
 msgid "The ball left the battlefield before exploding"
 msgstr "A bola saiu do campo de batalha antes de explodir"
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1170,7 +1180,7 @@ msgstr "Incapaz de abrir o diretório dos mapas pessoais (%s)!"
 msgid "Unable to use this port!"
 msgstr "Incapaz de usar esta porta!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr "Sem nome"
 

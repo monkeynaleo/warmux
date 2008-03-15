@@ -355,7 +355,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "צוות %s זכה ב-%u משגר טאקס! אף פעם לא ראית פינגווין מעופף?"
 msgstr[1] "צוות %s זכה ב-%u משגרי טאקס! אף פעם לא ראית פינגווין מעופף?"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s מנסה להתחבר לגרסה אחרת: לקוח=%s, אני=%s."
@@ -368,6 +368,10 @@ msgstr "(מת)"
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr "(שפת מערכת)"
+
+#: src/network/chatlogger.cpp:34
+msgid "(unknown time)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -415,7 +419,7 @@ msgstr "מחברים:"
 msgid "Automatic Bazooka"
 msgstr "בזוקה אוטומטית"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr "בחזרה אל הקרב"
 
@@ -515,7 +519,7 @@ msgstr "מבוקר על ידי:"
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "לא ניתן לטעון הגדרות"
@@ -669,7 +673,7 @@ msgstr "מפקד"
 msgid "Head commander: "
 msgstr "מפקד: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "עזרה"
 
@@ -840,9 +844,15 @@ msgstr "מוסיקה?"
 msgid "Network Game"
 msgstr "משחק רשת"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 msgid "Network initialization"
 msgstr "אתחול רשת"
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "משחק רשת"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -866,7 +876,7 @@ msgstr "מספר צוותים:"
 msgid "Options"
 msgstr "אפשרויות"
 
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 #, fuzzy
 msgid "Options menu"
 msgstr "תפריט אפשרויות"
@@ -913,7 +923,7 @@ msgstr "יציאה"
 msgid "Quit Wormux"
 msgstr "יציאה מ-Wormux"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr "יציאה מן הקרב"
 
@@ -1054,7 +1064,7 @@ msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 msgid "The ball left the battlefield before exploding"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1143,7 +1153,7 @@ msgstr "לא ניתן לפתוח את תיקיית המפות האישית (%s)!
 msgid "Unable to use this port!"
 msgstr "לא ניתן להשתמש בפורט זה!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr "ללא שם"
 
