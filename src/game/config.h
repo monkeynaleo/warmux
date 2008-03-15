@@ -124,6 +124,7 @@ public:
   inline std::string GetDataDir() const { return data_dir; };
   inline std::string GetLocaleDir() const { return locale_dir; };
   inline std::string GetPersonalDataDir() const { return personal_data_dir; };
+  inline std::string GetChatLogDir() const { return chat_log_dir; };
 
   bool Save(bool save_current_teams = false);
   inline const std::string &GetGameMode() const { return m_game_mode; }
@@ -144,7 +145,7 @@ protected:
   std::string m_network_port;
   std::string m_filename;
 
-  std::string data_dir, locale_dir, personal_data_dir, personal_config_dir;
+  std::string data_dir, locale_dir, personal_data_dir, personal_config_dir, chat_log_dir;
 
   std::list<ConfigTeam> teams;
   std::string map_name;
@@ -192,6 +193,7 @@ private:
   // return true if the directory is created
   bool MkdirPersonalConfigDir();
   bool MkdirPersonalDataDir();
+  bool MkdirChatLogDir();
 
   /* this is mutable in order to be able to load config on fly when calling
    * GetObjectConfig() witch is not supposed to modify the object itself */

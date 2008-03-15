@@ -18,8 +18,8 @@
 
 
 ChatLogger::ChatLogger() :
-        logdir(Config::GetInstance()->GetPersonalDataDir() + std::string(PATH_SEPARATOR"logs")),
-        logfile(logdir.c_str() + std::string(PATH_SEPARATOR"chat.log"))
+        logdir(Config::GetInstance()->GetChatLogDir()),
+        logfile(logdir + std::string(PATH_SEPARATOR"chat.log"))
 {
   // FIXME: also add the game name to the filename
   //
