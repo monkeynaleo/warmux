@@ -42,6 +42,7 @@
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "network/network_server.h"
+#include "network/chatlogger.h"
 #include "object/bonus_box.h"
 #include "object/medkit.h"
 #include "object/objbox.h"
@@ -359,12 +360,17 @@ void Action_ChatMessage (Action *a)
   }
   else
   {
+    std::string msg = a->PopString();
+    ChatLogger::GetInstance()->LogMessage(msg);
+
     if(Game::GetInstance()->IsGameLaunched())
+    {
       //Add message to chat session in Game
-      Game::GetInstance()->chatsession.NewMessage(a->PopString());
+      Game::GetInstance()->chatsession.NewMessage(msg);
+    }
     else if (Network::GetInstance()->network_menu != NULL) {
       //Network Menu
-      Network::GetInstance()->network_menu->ReceiveMsgCallback(a->PopString());
+      Network::GetInstance()->network_menu->ReceiveMsgCallback(msg);
     }
   }
 }
