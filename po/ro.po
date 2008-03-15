@@ -9,14 +9,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-02-29 04:01+0200\n"
+"PO-Revision-Date: 2008-03-15 12:47+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
@@ -213,8 +212,7 @@ msgstr[2] "Echipa %s a câștigat %u de rachete!"
 
 #: src/weapon/blowtorch.cpp:137
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -273,12 +271,10 @@ msgstr[2] "Echipa %s a câștigat %u de construcții! Nu-ți uita casca."
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Echipa %s a câștigat %u grenadă disco! Dă din fund când o arunci!"
 msgstr[1] "Echipa %s a câștigat %u grenade disco! Dă din fund când le arunci!"
-msgstr[2] ""
-"Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
+msgstr[2] "Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
@@ -453,12 +449,9 @@ msgstr[2] "Echipa %s a câștigat %u de puști!"
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural ""
-"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
-msgstr[0] ""
-"Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
-msgstr[1] ""
-"Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgstr[0] "Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
+msgstr[1] "Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
 msgstr[2] ""
 "Echipa %s a câștigat %u de puști cu lunetă! Țintește și trage direct între "
 "ochi!"
@@ -537,8 +530,7 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] ""
-"Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
+msgstr[0] "Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
 msgstr[1] ""
 "Echipa %s a câștigat %u lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
@@ -561,9 +553,8 @@ msgid "(system language)"
 msgstr "(limba sistemului)"
 
 #: src/network/chatlogger.cpp:34
-#, fuzzy
 msgid "(unknown time)"
-msgstr "Acțiune necunoscută"
+msgstr "(un moment necunoscut)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -755,8 +746,7 @@ msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
 #: src/game/config.cpp:451
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
@@ -1056,9 +1046,8 @@ msgstr "Inițializare rețea"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:54
-#, fuzzy
 msgid "New network game at "
-msgstr "Joc în rețea"
+msgstr "Un nou joc în rețea pornit la "
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -2465,3 +2454,4 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
+
