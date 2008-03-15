@@ -357,7 +357,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Отборът на %s спечели %u %s !"
 msgstr[1] "Отборът на %s спечели %u %sи !"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, fuzzy, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
@@ -369,6 +369,10 @@ msgstr "(мъртъв)"
 #. Setting language selection
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
+msgstr ""
+
+#: src/network/chatlogger.cpp:34
+msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
@@ -414,7 +418,7 @@ msgstr "Автори:"
 msgid "Automatic Bazooka"
 msgstr "Автоматичен РПГ"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr ""
 
@@ -515,7 +519,7 @@ msgstr ""
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -677,7 +681,7 @@ msgstr "Hauptkommandant"
 msgid "Head commander: "
 msgstr "Hauptkommandant"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr ""
 
@@ -840,10 +844,16 @@ msgstr "Музика?"
 msgid "Network Game"
 msgstr "Мрежова игра"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 #, fuzzy
 msgid "Network initialization"
 msgstr "Инициализирам терена..."
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "Мрежова игра"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -867,7 +877,7 @@ msgstr "Anzahl der Mannschaften"
 msgid "Options"
 msgstr "Настройки"
 
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 #, fuzzy
 msgid "Options menu"
 msgstr "Настройки"
@@ -914,7 +924,7 @@ msgstr "Вън!"
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr ""
 
@@ -1058,7 +1068,7 @@ msgstr "Пазете се! Смарт-бомба на свобода!"
 msgid "The ball left the battlefield before exploding"
 msgstr "Топката може да попадне в детски ръчички!"
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1141,7 +1151,7 @@ msgstr "Не мога да отворя директорията за карти
 msgid "Unable to use this port!"
 msgstr "Kann Server nicht starten!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr ""
 

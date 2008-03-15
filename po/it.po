@@ -376,7 +376,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "La squadra %s ha vinto %u Lancia-Tux! Mai visto un pinguino volare?"
 msgstr[1] "La squadra %s ha vinto %u Lancia-Tux! Mai visto un pinguino volare?"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -390,6 +390,10 @@ msgstr "(morto)"
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr "(Lingua di sistema)"
+
+#: src/network/chatlogger.cpp:34
+msgid "(unknown time)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -437,7 +441,7 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatico"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr ""
 
@@ -537,7 +541,7 @@ msgstr "Controllato da:"
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "* Il file audio non può essere aperto:"
@@ -697,7 +701,7 @@ msgstr "Comandante"
 msgid "Head commander: "
 msgstr "Comandante:"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr ""
 
@@ -868,9 +872,15 @@ msgstr "Musica ?"
 msgid "Network Game"
 msgstr "Gioco online"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 msgid "Network initialization"
 msgstr "Inizializzazione della rete"
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "Gioco online"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -894,7 +904,7 @@ msgstr "Numero di squadre:"
 msgid "Options"
 msgstr "Opzioni"
 
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 #, fuzzy
 msgid "Options menu"
 msgstr "Opzioni"
@@ -941,7 +951,7 @@ msgstr "Esci"
 msgid "Quit Wormux"
 msgstr "Esci da Wormux"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr ""
 
@@ -1084,7 +1094,7 @@ msgid "The ball left the battlefield before exploding"
 msgstr ""
 "La pallina rimbalzina ha lasciato il campo di battaglia prima di esplodere"
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1174,7 +1184,7 @@ msgstr "Impossibile aprire la directory delle mappe (%s)!"
 msgid "Unable to use this port!"
 msgstr "Impossibile usare questa porta!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr ""
 

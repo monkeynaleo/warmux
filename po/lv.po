@@ -391,7 +391,7 @@ msgstr[0] "%s komanda ir ieguvusi %u tux šāvēju!"
 msgstr[1] "%s komanda ir ieguvusi %u tux šāvējus!"
 msgstr[2] "%s komanda ir ieguvusi %u tux šāvējus!"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr ""
@@ -404,6 +404,10 @@ msgstr "(mirusi)"
 #. Setting language selection
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
+msgstr ""
+
+#: src/network/chatlogger.cpp:34
+msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
@@ -452,7 +456,7 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Automātiskā bazuka"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr ""
 
@@ -552,7 +556,7 @@ msgstr "Kontrolē: "
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -707,7 +711,7 @@ msgstr "Virspavēlnieks"
 msgid "Head commander: "
 msgstr "Virspavēlnieks: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr ""
 
@@ -882,9 +886,15 @@ msgstr "Mūzika?"
 msgid "Network Game"
 msgstr "Tīkla spēle"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 msgid "Network initialization"
 msgstr "Tīkla inicializācija"
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "Tīkla spēle"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -908,7 +918,7 @@ msgstr "Komandu skaits:"
 msgid "Options"
 msgstr "Iestatījumi"
 
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 #, fuzzy
 msgid "Options menu"
 msgstr "Iestatījumi"
@@ -955,7 +965,7 @@ msgstr "Iziet"
 msgid "Quit Wormux"
 msgstr "Iziet no Wormux"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr ""
 
@@ -1098,7 +1108,7 @@ msgstr "Automātiksā raķete izgāja no spēles laukuma..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bumba nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1188,7 +1198,7 @@ msgstr "Nevar atvērt karšu mapi (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nevar izmantot šo portu!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr ""
 

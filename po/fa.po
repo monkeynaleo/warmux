@@ -327,7 +327,7 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] ""
 "تیم %s برنده‌ی %u سوپرتاکس شد! چیه؟ تاحالا پنگوئن ندیدی که پرواز کنه؟"
 
-#: src/include/action_handler.cpp:342
+#: src/include/action_handler.cpp:343
 #, c-format
 msgid "%s tries to connect with a different version : client=%s, me=%s."
 msgstr "%s می‌خواهد به شما وصل شود، ولی نسخه‌ی او فرق دارد: من=%s او=%s."
@@ -340,6 +340,10 @@ msgstr "(مرده)"
 #: src/menu/options_menu.cpp:191
 msgid "(system language)"
 msgstr "(زبان سیستم)"
+
+#: src/network/chatlogger.cpp:34
+msgid "(unknown time)"
+msgstr ""
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -387,7 +391,7 @@ msgstr "نویسندگان:"
 msgid "Automatic Bazooka"
 msgstr "بازوکای اتوماتیک"
 
-#: src/menu/pause_menu.cpp:53
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr ""
 
@@ -487,7 +491,7 @@ msgstr "کنترل شده بوسیله‌ی: "
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -641,7 +645,7 @@ msgstr "رئیس ارتش"
 msgid "Head commander: "
 msgstr "رئیس ارتش: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:61
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr ""
 
@@ -811,9 +815,15 @@ msgstr "موسیقی؟"
 msgid "Network Game"
 msgstr "بازی شبکه‌ای"
 
-#: src/network/network.cpp:259
+#: src/network/network.cpp:260
 msgid "Network initialization"
 msgstr "در حال آغاز شبکه"
+
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
+#: src/network/chatlogger.cpp:54
+#, fuzzy
+msgid "New network game at "
+msgstr "بازی شبکه‌ای"
 
 #: src/weapon/weapon.cpp:654
 #, c-format
@@ -837,7 +847,7 @@ msgstr "تعداد تیم‌ها: "
 msgid "Options"
 msgstr "گزینه‌ها"
 
-#: src/menu/pause_menu.cpp:57
+#: src/menu/pause_menu.cpp:55
 #, fuzzy
 msgid "Options menu"
 msgstr "گزینه‌ها"
@@ -884,7 +894,7 @@ msgstr "خروج"
 msgid "Quit Wormux"
 msgstr "خروج از ورموکس"
 
-#: src/menu/pause_menu.cpp:65
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr ""
 
@@ -1025,7 +1035,7 @@ msgstr "بازوکای اتوماتیک از زمین جنگ خارج شد..."
 msgid "The ball left the battlefield before exploding"
 msgstr "شیطونک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
-#: src/include/action_handler.cpp:325
+#: src/include/action_handler.cpp:326
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1105,7 +1115,7 @@ msgstr "ناتوان در بازکردن پرونده‌ی نقشه‌های ش�
 msgid "Unable to use this port!"
 msgstr "ناتوان در استفاده از این پورت!"
 
-#: src/network/network.cpp:108
+#: src/network/network.cpp:109
 msgid "Unnamed"
 msgstr "بدون نام"
 
