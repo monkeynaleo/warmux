@@ -230,10 +230,10 @@ if test "${enable_fribidi}" = "yes"; then
                   use_fribidi="false" ],
                 [ `fribidi-config --libs` ])
    if ! ${use_fribidi}; then
-     AC_MSG_WARN([fribidi is disable. If you want bi-directional text rendering, please install fribidi dev package.])
+     AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please install fribidi dev package.])
    fi
 else
-  AC_MSG_WARN([fribidi is disable. If you want bi-directional text rendering, please use configure with this option : --enable-fribidi])
+  AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please use configure with this option : --enable-fribidi])
 fi
 
 dnl === Check for PNG =====================================================
