@@ -36,29 +36,29 @@
 
 
 #ifdef DEBUG
-#define DPRINT(LEVEL, ARGS...) \
-{ \
-	if((LEVEL) >= LOG_LEVEL ) \
-	{ \
-		printf("%s| %10s,%3i : ", wx_clock.TimeStr(),__FILE__,__LINE__); \
-		printf(ARGS); \
-		printf("\n"); \
-	} \
-}
+#define DPRINT(LEVEL, ARGS...)						\
+  {									\
+    if((LEVEL) >= LOG_LEVEL )						\
+      {									\
+	printf("%s| %10s,%3i : ", wx_clock.TimeStr(),__FILE__,__LINE__); \
+	printf(ARGS);							\
+	printf("\n");							\
+      }									\
+  }
 #else
 #define DPRINT(LEVEL, ARGS...)
 #endif
 
-#define TELL_ERROR \
-{ \
-	PRINT_ERROR; \
-	exit(1); \
-}
+#define TELL_ERROR				\
+  {						\
+    PRINT_ERROR;				\
+    exit(1);					\
+  }
 
-#define PRINT_ERROR \
-{ \
-	DPRINT(INFO , "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
-}
+#define PRINT_ERROR							\
+  {									\
+    DPRINT(INFO , "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
+  }
 
 
 #endif

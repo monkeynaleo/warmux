@@ -24,40 +24,40 @@
 
 class ConnectionStats
 {
-	FILE* fd;
-	std::string filename;
+  FILE* fd;
+  std::string filename;
 
-	void CloseFile();
-public:
-	unsigned long servers;
-	unsigned long fake_servers;
-	unsigned long clients;
+  void CloseFile();
+ public:
+  unsigned long servers;
+  unsigned long fake_servers;
+  unsigned long clients;
 
-	ConnectionStats(const std::string & fn);
-	~ConnectionStats();
-	void OpenFile();
-	void Reset();
-	void Write();
-	void Rotate(); 
+  ConnectionStats(const std::string & fn);
+  ~ConnectionStats();
+  void OpenFile();
+  void Reset();
+  void Write();
+  void Rotate();
 };
 
 class Stats
 {
-public:
-	// Keeps records of connections
-	// done hourly. File is rotated
-	// every day
-	ConnectionStats hourly;
+ public:
+  // Keeps records of connections
+  // done hourly. File is rotated
+  // every day
+  ConnectionStats hourly;
 
-	// Keeps records of connections
-	// done daily. File is never changed
-	ConnectionStats daily;
+  // Keeps records of connections
+  // done daily. File is never changed
+  ConnectionStats daily;
 
-	Stats();
-	void Init();
-	void NewServer();
-	void NewFakeServer();
-	void NewClient();
+  Stats();
+  void Init();
+  void NewServer();
+  void NewFakeServer();
+  void NewClient();
 };
 
 extern Stats stats;
