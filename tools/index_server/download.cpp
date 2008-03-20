@@ -27,7 +27,16 @@
 #include "config.h"
 #include "../../src/network/index_svr_msg.h"
 
-Downloader downloader;
+class Downloader
+{
+  CURL* curl;
+public:
+  Downloader();
+  ~Downloader();
+
+  // Return true if the download was successful
+  bool Get(const char* url, const char* save_as);
+};
 
 Downloader::Downloader()
 {
