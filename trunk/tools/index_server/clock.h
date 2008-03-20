@@ -23,18 +23,18 @@
 
 class Clock
 {
-	time_t start_time;
-	time_t last_refresh;
+  time_t start_time;
+  time_t last_refresh;
 
-	char time_str[1024];
-	char date_str[1024];
+  char time_str[1024];
+  char date_str[1024];
 
-public:
-	Clock();
-	void HandleJobs(bool local=false);
-	const char* TimeStr();
-	const char* DateStr();
-	void ShowUpTime();
+ public:
+  Clock();
+  void HandleJobs(bool local=false);
+  const char* TimeStr();
+  const char* DateStr();
+  void ShowUpTime();
 };
 
 extern Clock wx_clock;
