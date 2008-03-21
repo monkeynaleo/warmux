@@ -44,23 +44,46 @@ extern std::multimap<std::string,FakeClient> fake_clients;
 // number of server currently logged depending on the version:
 std::map<std::string, int> nb_server;
 
+HostOptions::HostOptions()
+{
+  game_name = "";
+  passwd = "";
+  used = false;
+}
+
+bool HostOptions::Set(const std::string & _game_name,
+		      const std::string & _passwd)
+{
+  if (used) {
+    DPRINT(MSG, "Game Name and passwd already set");
+    return false;
+  }
+
+  game_name = game_name;
+  passwd = passwd;
+  used = true;
+
+  return true;
+}
+
+
 Client::Client(int client_fd, unsigned int & ip)
 {
-    version = "";
-    game_name = "";
-    handshake_done = false;
-    is_hosting = false;
-    Host(client_fd, ip);
+  version = "";
+
+  handshake_done = false;
+  is_hosting = false;
+  Host(client_fd, ip);
 }
 
 Client::~Client()
 {
-    if( is_hosting )
+  if( is_hosting )
     {
-        if( version != "" )
+      if( version != "" )
         {
-            nb_server[ version ]--;
-            NotifyServers( false );
+	  nb_server[ version ]--;
+	  NotifyServers( false );
         }
     }
 }
@@ -103,16 +126,16 @@ static bool CheckHost(const int ip, int prt)
   timeout.tv_sec = 5; // 5seconds timeout
 #endif
   if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
-  {
-    fprintf(stderr, "Setting receive timeout on socket failed\n");
-    return false /*CONN_BAD_SOCKET*/;
-  }
+    {
+      fprintf(stderr, "Setting receive timeout on socket failed\n");
+      return false /*CONN_BAD_SOCKET*/;
+    }
 
   if (setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
-  {
-    fprintf(stderr, "Setting send timeout on socket failed\n");
-    return false /*CONN_BAD_SOCKET*/;
-  }
+    {
+      fprintf(stderr, "Setting send timeout on socket failed\n");
+      return false /*CONN_BAD_SOCKET*/;
+    }
 
   struct sockaddr_in addr;
   memset(&addr, 0, sizeof(addr));
@@ -125,220 +148,282 @@ static bool CheckHost(const int ip, int prt)
 #endif
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
-  {
-    return false /*GetError()*/;
-  }
+    {
+      return false /*GetError()*/;
+    }
   closesocket(fd);
 
   DPRINT(CONN, "Checking connection to %s:%i : OK", host.c_str(), prt);
   return true /*CONNECTED*/;
 }
 
-bool Client::HandleMsg(const std::string & str)
+bool Client::HandShake(const std::string & version)
 {
-    if( msg_id == TS_MSG_VERSION )
+  if (handshake_done)
+    return false;
+
+  if (version == "0.8beta1"
+      || version == "0.8beta2"
+      || version == "0.8beta3"
+      || version == "0.8beta4"
+      || version == "0.8svn"
+      || version == "0.7.9rc1"
+      || version == "0.7.9rc2"
+      || version == "0.7.9")
     {
-        if( handshake_done )
-            return false;
-        version = str;
-        if(str == "0.8beta1"
-           || str == "0.8beta2"
-           || str == "0.8beta3"
-           || str == "0.8beta4"
-           || str == "0.8svn"
-           || str == "0.7.9rc1"
-           || str == "0.7.9rc2"
-           || str == "0.7.9")
-        {
-            DPRINT(MSG, "Version checked successfully");
-            handshake_done = true;
-            SetVersion( str );
-            msg_id = TS_NO_MSG;
-            stats.NewClient();
-            return SendSignature();
-        }
-        else
-        if(str == "WIS")
-        {
-            DPRINT(MSG, "New index server connected");
-            // Send our version, the distant server will shutdown if he has a lower version
-            SetVersion( str );
-            SendInt((int) TS_MSG_WIS_VERSION );
-            SendInt( VERSION );
-            // We are ready to read a new message
-            msg_id = TS_NO_MSG;
-            handshake_done = true;
-            return true;
-        }
-        return false;
+      DPRINT(MSG, "Version checked successfully");
+      handshake_done = true;
+      SetVersion( version );
+      msg_id = TS_NO_MSG;
+      stats.NewClient();
+      return SendSignature();
+    }
+  else if (version == "WIS")
+    {
+      DPRINT(MSG, "New index server connected");
+      // Send our version, the distant server will shutdown if he has a lower version
+      SetVersion( version );
+      SendInt((int) TS_MSG_WIS_VERSION );
+      SendInt( VERSION );
+      // We are ready to read a new message
+      msg_id = TS_NO_MSG;
+      handshake_done = true;
+      return true;
+    }
+  return false;
+}
+
+bool Client::RegisterWormuxServer()
+{
+  if (received < 4)
+    return true;
+
+  DPRINT(MSG, "This is a server (%s)", version.c_str());
+  is_hosting = true;
+
+  if (nb_server.find(version) != nb_server.end())
+    nb_server[ version ]++;
+  else
+    nb_server[ version ] = 1;
+
+  if (!ReceiveInt(port))
+    return false;
+
+  // try opening a connection to see if it's
+  // firewalled or not
+  if (!CheckHost(GetIP(), port)) {
+    DPRINT(MSG, "server is not reachable");
+    // answer to the server
+    SendStr("UNREACHABLE");
+    return false;
+  }
+
+  SendStr("OK");
+  NotifyServers(true);
+  stats.NewServer();
+  return true;
+}
+
+bool Client::HandleMsg(enum IndexServerMsg msg_id)
+{
+  bool r = true;
+
+  if (msg_id == TS_MSG_VERSION)
+    {
+      std::string clt_version;
+      r = ReceiveStr(clt_version);
+      if (!r)
+	goto next_msg;
+
+      r = HandShake(clt_version);
+      goto next_msg;
     }
 
-    if( !handshake_done )
-        return false;
+  if (!handshake_done)
+    {
+      r = false;
+      goto next_msg;
+    }
 
-    switch(msg_id)
+  switch(msg_id)
     {
     case TS_MSG_HOSTING:
-        if(received < 4)
-            return true;
-        DPRINT(MSG, "This is a server (%s)", version.c_str());
-        is_hosting = true;
-        if( nb_server.find(version) != nb_server.end() )
-            nb_server[ version ]++;
-        else
-            nb_server[ version ] = 1;
-        if(! ReceiveInt(port) )
-            return false;
+      r =  RegisterWormuxServer();
+      break;
 
-        // try opening a connection to see if it's
-        // firewalled or not
-	if (!CheckHost(GetIP(), port)) {
-	  DPRINT(MSG, "server is not reachable");
-	  // answer to the server
-	  SendStr("UNREACHABLE");
-	  return false;
-	}
-	SendStr("OK");
-        NotifyServers( true );
-        stats.NewServer();
-
-        break;
     case TS_MSG_GET_LIST:
-        if( is_hosting )
-            return false;
-        msg_id = TS_NO_MSG;
-        return SendList();
-        break;
+      if (is_hosting) {
+	r = false;
+      } else {
+	r = SendList();
+      }
+      break;
+
     case TS_MSG_GAMENAME:
-        game_name = str;
+      {
+	std::string game_name;
+	r = ReceiveStr(game_name);
+	if (!r)
+	  goto next_msg;
+
+	std::string passwd;
+	r = ReceiveStr(passwd);
+	if (!r)
+	  goto next_msg;
+
+	r = options.Set(game_name, passwd);
 	DPRINT(MSG, "game name is %s", game_name.c_str());
-	break;
+      }
+      break;
+
     default:
-        DPRINT(MSG, "Wrong message");
-        //if(str == "0.8beta1")
-        return false;
+      DPRINT(MSG, "Wrong message");
+      return false;
     }
-    // We are ready to read a new message
-    msg_id = TS_NO_MSG;
-    return true;
+
+ next_msg:
+  // We are ready to read a new message
+  msg_id = TS_NO_MSG;
+  return r;
 }
 
 void Client::SetVersion(const std::string & ver)
 {
-    DPRINT(MSG, "Setting version to %s", ver.c_str());
-    version = ver;
-    clients.insert( std::make_pair(version, this) );
+  DPRINT(MSG, "Setting version to %s", ver.c_str());
+  version = ver;
+  clients.insert( std::make_pair(version, this) );
 
-    // We are currently registered as an unknown version
-    // So, we unregister it:
-    std::multimap<std::string, Client*>::iterator client;
-    client = clients.find( "unknown" );
-    if( client != clients.end() )
+  // We are currently registered as an unknown version
+  // So, we unregister it:
+  std::multimap<std::string, Client*>::iterator client;
+  client = clients.find( "unknown" );
+  if (client != clients.end())
     {
-        do
+      do
         {
-            if( client->second == this )
+	  if (client->second == this)
             {
-                clients.erase( client );
-                return;
+	      clients.erase(client);
+	      return;
             }
-            ++client;
-        } while( client != clients.upper_bound( "unknown" ) );
+	  ++client;
+        } while (client != clients.upper_bound( "unknown" ));
     }
 }
 
 bool Client::SendSignature()
 {
-    DPRINT(MSG, "Sending signature");
-    SendInt((int)TS_MSG_VERSION);
-    return SendStr("MassMurder!");
+  DPRINT(MSG, "Sending signature");
+  SendInt((int)TS_MSG_VERSION);
+  return SendStr("MassMurder!");
 }
 
 bool Client::SendList()
 {
-    DPRINT(MSG, "Sending list..");
+  DPRINT(MSG, "Sending list..");
 
-    int nb_s = 0;
-    if( nb_server.find( version ) != nb_server.end() )
-        nb_s = nb_server[ version ];
+  int nb_s = 0;
+  if (nb_server.find( version ) != nb_server.end())
+    nb_s = nb_server[ version ];
 
-    // TODO : replace this loop by the correct stl function
-    std::multimap<std::string, FakeClient>::iterator fclient = fake_clients.find(version);
-    if( fake_clients.find( version ) != fake_clients.end() )
+  // TODO : replace this loop by the correct stl function
+  std::multimap<std::string, FakeClient>::iterator fclient = fake_clients.find(version);
+  if (fake_clients.find( version ) != fake_clients.end())
     {
-        do
+      do
         {
-            nb_s++;
-            ++fclient;
+	  nb_s++;
+	  ++fclient;
         } while (fclient != fake_clients.upper_bound(version));
     }
 
-    if( ! SendInt(nb_s) )
-        return false;
+  if (!SendInt(nb_s))
+    return false;
 
-    std::multimap<std::string, Client*>::iterator client = clients.find(version);
-    if( client != clients.end() )
+  std::multimap<std::string, Client*>::iterator client = clients.find(version);
+  if (client != clients.end())
     {
-        do
+      do
         {
-            if (client->second->is_hosting)
+	  if (client->second->is_hosting)
             {
-	      if (! SendInt(client->second->GetIP()))
+	      if (!SendInt(client->second->GetIP()))
 		return false;
-	      if (! SendInt(client->second->port))
+	      if (!SendInt(client->second->port))
 		return false;
 
-	      if (client->second->game_name != "" /* this must stay only for old version */ &&
-		  ! SendStr(client->second->game_name))
-		return false;
+	      if (options.used) {
+		if (!SendStr(client->second->options.game_name))
+		  return false;
+
+		// Do not send the password to other users!!
+		//if (!SendStr(client->second->options.passwd))
+		//  return false;
+	      }
             }
-            ++client;
+	  ++client;
         } while (client != clients.upper_bound(version));
     }
 
-    fclient = fake_clients.find(version);
-    if( fclient != fake_clients.end() )
+  fclient = fake_clients.find(version);
+  if (fclient != fake_clients.end())
     {
-        do
+      do
         {
-            if( ! SendInt(fclient->second.ip) )
-                return false;
-            if( ! SendInt(fclient->second.port) )
-                return false;
-	    if (game_name != "" /* this must stay only for old version */ &&
-		  ! SendStr(client->second->game_name))
-		return false;
-            ++fclient;
+	  if (!SendInt(fclient->second.ip))
+	    return false;
+	  if (!SendInt(fclient->second.port))
+	    return false;
+
+	  if (fclient->second.options.used) {
+	    if (!SendStr(fclient->second.options.game_name))
+	      return false;
+	    // Do not send the password to other users!!
+	    //if (!SendStr(fclient->second.options.passwd))
+	    //  return false;
+	  }
+
+	  ++fclient;
         } while (fclient != fake_clients.upper_bound(version));
     }
-    return true;
+  return true;
 }
 
 
 void Client::NotifyServers(bool joining)
 {
-    // Tell other index server that a new wormux server just registered
-    DPRINT(MSG, "Notify of a new wormux server..");
+  // Tell other index server that a new wormux server just registered
+  DPRINT(MSG, "Notify of a new wormux server...");
 
-    std::multimap<std::string, Client*>::iterator serv = clients.find( sync_serv_version );
-    if (serv != clients.end())
+  std::multimap<std::string, Client*>::iterator serv = clients.find( sync_serv_version );
+  if (serv != clients.end())
     {
-        do
+      do
         {
-            if (!serv->second->SendInt(TS_MSG_JOIN_LEAVE))
-	      return /*false*/;
-            if (! serv->second->SendStr(version))
-	      return /*false*/;
-            if (! serv->second->SendInt(GetIP()))
-	      return /*false*/;
-            // Send the port number : if this client is leaving, send -port
-            if (! serv->second->SendInt(joining? port : -port))
-	      return /*false*/;
-	    if (! serv->second->SendStr(game_name))
+	  if (!serv->second->SendInt(TS_MSG_JOIN_LEAVE))
+	    return /*false*/;
+	  if (! serv->second->SendStr(version))
+	    return /*false*/;
+	  if (! serv->second->SendInt(GetIP()))
+	    return /*false*/;
+	  // Send the port number : if this client is leaving, send -port
+	  if (! serv->second->SendInt(joining? port : -port))
+	    return /*false*/;
+
+	  if (joining) {
+	    if (!SendInt(serv->second->options.used))
 	      return /*false*/;
 
-            ++serv;
+	    if (serv->second->options.used) {
+	      if (!SendStr(serv->second->options.game_name))
+		return /*false*/;
+	      if (!SendStr(serv->second->options.passwd))
+		return /*false*/;
+	    }
+	  }
+
+	  ++serv;
         } while (serv != clients.upper_bound(sync_serv_version));
     }
-    return /*true*/;
+  return /*true*/;
 }

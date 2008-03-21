@@ -46,18 +46,16 @@ void Clock::HandleJobs(bool local)
       stats.hourly.Rotate();
       stats.daily.Write();
     }
-  else
-    // Every hour
-    if(time(NULL) % (60 * 60) == 0)
-      {
-	stats.hourly.Write();
-      }
-    else
-      // Refresh connections to the servers every minutes
-      if(time(NULL) % 60 == 0 && !local)
-	{
-	  sync_slave.Start();
-	}
+  // Every hour
+  else if(time(NULL) % (60 * 60) == 0)
+    {
+      stats.hourly.Write();
+    }
+  // Refresh connections to the servers every minutes
+  else if(time(NULL) % 60 == 0 && !local)
+    {
+      sync_slave.Start();
+    }
 
   last_refresh = time(NULL);
 }
