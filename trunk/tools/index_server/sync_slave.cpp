@@ -66,7 +66,7 @@ bool SyncSlave::Start()
   DPRINT(TRAFFIC, "Contacting other servers ...");
   std::ifstream fin;
   fin.open(server_fn.c_str(), std::ios::in);
-  if(!fin)
+  if (!fin)
     return false;
 
   ssize_t read;
@@ -78,22 +78,22 @@ bool SyncSlave::Start()
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
   while ((read = getline(line, fin)) >= 0)
     {
-      if(line.size() == 0 || line.at(0) == '#' )
+      if (line.size() == 0 || line.at(0) == '#')
 	continue;
 
       std::string::size_type port_pos = line.find(':', 0);
-      if(port_pos == std::string::npos)
+      if (port_pos == std::string::npos)
 	continue;
 
       std::string hostname = line.substr(0, port_pos);
       std::string portstr = line.substr(port_pos+1);
       int port = atoi(portstr.c_str());
 
-      if( hostname != my_hostname && find(hostname) == end())
+      if (hostname != my_hostname && find(hostname) == end())
 	{
 	  IndexServerConn* c = new IndexServerConn(hostname, port);
-	  if( c->connected )
-	    insert(make_pair( hostname, c));
+	  if (c->connected)
+	    insert(make_pair(hostname, c));
 	  else
 	    delete c;
 	}
@@ -105,21 +105,21 @@ bool SyncSlave::Start()
 void SyncSlave::CheckGames()
 {
   iterator it = begin();
-  while(it != end())
+  while (it != end())
     {
       int received;
       bool result = false;
 
-      if( ioctl( it->second->GetFD(), FIONREAD, &received) == -1 )
+      if (ioctl( it->second->GetFD(), FIONREAD, &received) == -1)
 	{
 	  PRINT_ERROR;
 	  result = false;
 	}
 
-      if( received == 0 || it->second->Receive() )
+      if (received == 0 || it->second->Receive())
 	result = true;
 
-      if(!result || ! it->second->connected)
+      if (!result || ! it->second->connected)
 	{
 	  DPRINT(INFO, "Index server at %s disconnected", it->first.c_str());
 	  delete it->second;
@@ -149,18 +149,29 @@ IndexServerConn::~IndexServerConn()
   close(GetFD());
 }
 
-bool IndexServerConn::HandleMsg(const std::string & full_str)
+bool IndexServerConn::HandShake()
+{
+  std::string key;
+  if (!ReceiveStr(key))
+    return false;
+
+  if (key != "MassMurder!")
+    {
+      DPRINT(INFO,"Doesn't seem do be a valid server...");
+      return false;
+    }
+  DPRINT(INFO,"Server identified...");
+  return true;
+}
+
+bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
 {
   switch(msg_id)
     {
     case TS_MSG_VERSION:
-      if(full_str != "MassMurder!")
-	{
-	  DPRINT(INFO,"Doesn't seem do be a valid server ..");
-	  return false;
-	}
-      DPRINT(INFO,"Server identified..");
+      return HandShake();
       break;
+
     case TS_MSG_WIS_VERSION:
       {
 	int version;
@@ -186,7 +197,10 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
       {
 	int ip;
 	int port;
-	std::string game_name;
+	std::string server_id;
+
+	if (!ReceiveStr(server_id))
+	    return false;
 
 	if (received < 8) // The message is not completely received
 	  return true;
@@ -194,12 +208,10 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
 	  return false;
 	if (!ReceiveInt(port)) // Receive the port of the wormux server
 	  return false;
-	if (!ReceiveStr(game_name))
-	  return false;
 
 	if (port < 0) // means it disconnected
 	  {
-	    std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( full_str );
+	    std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( server_id );
 	    if( serv != fake_clients.end() )
 	      {
 		do
@@ -211,12 +223,28 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
 			DPRINT(MSG, "A fake server disconnected");
 			break;
 		      }
-		  } while (serv != fake_clients.upper_bound(full_str));
+		  } while (serv != fake_clients.upper_bound(server_id));
 	      }
 	  }
 	else
 	  {
-	    fake_clients.insert( std::make_pair(full_str, FakeClient(ip, port, game_name)));
+	    int host_options;
+	    if (!ReceiveInt(host_options)) // Does the server publish a name and a passwd ?
+	      return false;
+
+	    HostOptions options;
+	    options.used = host_options;
+	    if (options.used) {
+	      std::string game_name;
+	      if (!ReceiveStr(game_name))
+		return false;
+	      std::string passwd;
+	      if (!ReceiveStr(passwd))
+		return false;
+	      options.Set(game_name, passwd);
+	    }
+
+	    fake_clients.insert( std::make_pair(server_id, FakeClient(ip, port, options)));
 	    stats.NewFakeServer();
 	  }
       }

@@ -31,10 +31,13 @@ const std::string sync_serv_version = "WIS";
 // connections on us).
 class IndexServerConn : public NetData
 {
+ private:
+  bool HandShake();
+
  public:
   IndexServerConn(const std::string &addr, int port);
   ~IndexServerConn();
-  bool HandleMsg(const std::string & full_str);
+  bool HandleMsg(enum IndexServerMsg msg_id);
 };
 
 // List that contains informations about wormux client/server connected

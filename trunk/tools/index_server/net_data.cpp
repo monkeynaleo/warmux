@@ -204,6 +204,8 @@ bool NetData::SendStr(const std::string &full_str)
 
 bool NetData::Receive()
 {
+  int r = true;
+
   if( ioctl( GetFD(), FIONREAD, &received) == -1 )
     {
       PRINT_ERROR;
@@ -211,7 +213,7 @@ bool NetData::Receive()
     }
 
   // received < 1 when the client disconnect
-  if(received < 1)
+  if (received < 1)
     return false;
 
   // Get the ID of the message
@@ -224,38 +226,22 @@ bool NetData::Receive()
       msg_id = (IndexServerMsg)id;
     }
 
-  if(msg_id == TS_MSG_PING)
-    {
-      SendInt(TS_MSG_PONG);
-      msg_id = TS_NO_MSG;
-      return true;
-    }
+  switch(msg_id) {
+  case TS_MSG_PING:
+    r = SendInt(TS_MSG_PONG);
+    break;
 
-  if(msg_id == TS_MSG_PONG)
-    {
-      ping_sent = false;
-      msg_id = TS_NO_MSG;
-      return true;
-    }
+  case TS_MSG_PONG:
+    ping_sent = false;
+    break;
 
-  std::string full_str = "";
-  // If a string is embedded in the msg, get it	{
-  if( msg_id == TS_MSG_VERSION
-      || msg_id == TS_MSG_JOIN_LEAVE
-      || msg_id == TS_MSG_GAMENAME)
-    {
-      if( ! ReceiveStr(full_str) )
-	return false;
+  default:
+    r = HandleMsg(msg_id);
+    break;
+  }
 
-      // If we didn't received the full string yet,
-      // just go back
-      if( full_str == "" )
-	return true;
-    }
-
-  bool result = HandleMsg( full_str );
-
-  return result;
+  msg_id = TS_NO_MSG;
+  return r;
 }
 
 void NetData::CheckState()
