@@ -377,6 +377,12 @@
         <description>Hungarian translation updates</description>
         <country>Hungary</country>
       </author>
+      <author>
+	<name>Adrián Chaves</name>
+	<description>Translated Wormux in Galician</description>
+	<email>adriyetichaves_AT_gmail_DOT_com</email>
+	<country>Spain</country>
+      </author>
     </section>
 
     <section title="Package maintainers">
