@@ -21,6 +21,7 @@
 
 #include <map>
 #include <fstream>
+#include <cstdlib>
 #include <curl/curl.h>
 #include "game/config.h"
 #include "include/base.h"

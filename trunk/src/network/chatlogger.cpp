@@ -1,4 +1,4 @@
-#include <string>
+#include <cstring>
 #include <iostream>
 #include <fstream>
 #include "include/base.h"
