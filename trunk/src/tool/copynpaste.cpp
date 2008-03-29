@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
+ *****************************************************************************
  * Retrieve string pasted depending on OS mechanisms.
  *****************************************************************************/
 #ifdef _MSC_VER
@@ -42,7 +42,7 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
 
     if (data)
     {
-      int  len = WideCharToMultiByte(CP_UTF8, 0, data, -1, NULL, 0, NULL, NULL);
+      int len = WideCharToMultiByte(CP_UTF8, 0, data, -1, NULL, 0, NULL, NULL);
       if (len > 0)
       {
         // Convert from UTF-16 to UTF-8
@@ -189,7 +189,7 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
         pos = text.size();
       }
 
-      text.insert(pos, data); 
+      text.insert(pos, data);
       pos += strlen(data);
       XFree(data);
     }
