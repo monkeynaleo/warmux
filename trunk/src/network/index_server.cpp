@@ -84,6 +84,9 @@ connection_state_t IndexServer::Connect()
       return CONNECTED;
   }
 
+  // Undo what was done
+  Disconnect();
+
   return CONN_REJECTED;
 }
 
@@ -130,12 +133,13 @@ void IndexServer::Disconnect()
     return;
   }
 
-  if( !connected )
+  first_server = server_lst.end();
+  current_server = server_lst.end();
+
+  if (!connected)
     return;
 
   MSG_DEBUG("index_server", "Closing connection");
-  first_server = server_lst.end();
-  current_server = server_lst.end();
 
   SDLNet_TCP_DelSocket(sock_set, socket);
   SDLNet_TCP_Close(socket);
