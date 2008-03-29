@@ -279,7 +279,7 @@ bool NetworkConnectionMenu::signal_ok()
     break;
   }
 
-  if (Network::GetInstance()->IsConnected()) {
+  if (Network::IsConnected()) {
     play_ok_sound();
 
     // run the network menu ! :-)
