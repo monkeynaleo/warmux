@@ -30,7 +30,7 @@
 #include "tool/debug.h"
 #include "tool/xml_document.h"
 #include <sstream>
-#ifdef _MSC_VER
+#ifdef _WIN32
 #  include <time.h>
 #endif
 
