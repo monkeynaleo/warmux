@@ -524,12 +524,12 @@ msgstr "Konstruilo"
 msgid "Controlled by: "
 msgstr "Stirato per:"
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -554,7 +554,7 @@ msgstr "Dinamito"
 msgid "END OF GAME"
 msgstr "LUDFINO"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Eraro en %s : %lu"
@@ -568,18 +568,18 @@ msgstr "Eraro muntante teamon :"
 msgid "Error loading team's data %s:"
 msgstr "Eraro muntante la datumojn de la teamo %s :"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Eraro kreante dosierujon \"%s\" : ne eblas registri agordan dosieron."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eraro muntante agordan dosieron : %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Eraro muntante norman agordan dosieron : %s"
@@ -799,7 +799,7 @@ msgstr "Lokaj teamoj :"
 msgid "LowGrav"
 msgstr "Malpezigilo"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapo %s, far :"
@@ -940,11 +940,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Muntas la mapojn :"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr "Legante norman agordaron"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Legante personan agordaron"
 

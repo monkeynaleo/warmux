@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
@@ -212,7 +213,8 @@ msgstr[2] "Echipa %s a câștigat %u de rachete!"
 
 #: src/weapon/blowtorch.cpp:137
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -271,10 +273,12 @@ msgstr[2] "Echipa %s a câștigat %u de construcții! Nu-ți uita casca."
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Echipa %s a câștigat %u grenadă disco! Dă din fund când o arunci!"
 msgstr[1] "Echipa %s a câștigat %u grenade disco! Dă din fund când le arunci!"
-msgstr[2] "Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
+msgstr[2] ""
+"Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
@@ -449,9 +453,12 @@ msgstr[2] "Echipa %s a câștigat %u de puști!"
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
-msgstr[0] "Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
-msgstr[1] "Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
+msgid_plural ""
+"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgstr[0] ""
+"Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
+msgstr[1] ""
+"Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
 msgstr[2] ""
 "Echipa %s a câștigat %u de puști cu lunetă! Țintește și trage direct între "
 "ochi!"
@@ -530,7 +537,8 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
+msgstr[0] ""
+"Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
 msgstr[1] ""
 "Echipa %s a câștigat %u lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
@@ -700,12 +708,12 @@ msgstr "Construiește"
 msgid "Controlled by: "
 msgstr "Controlat de: "
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Nu s-a putut prelua ultima versiune de la %s"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Nu a fost posibilă deschiderea fișierului %s"
@@ -730,7 +738,7 @@ msgstr "Dinamită"
 msgid "END OF GAME"
 msgstr "SFÂRȘITUL JOCULUI"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Eroare în %s:%lu"
@@ -744,19 +752,20 @@ msgstr "Eroare la încărcarea echipei:"
 msgid "Error loading team's data %s:"
 msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eroare în timpul încărcării fișierul de configurare: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Eroare în timpul încărcării fișierul de configurare implicită: %s"
@@ -987,7 +996,7 @@ msgstr "Echipe locale:"
 msgid "LowGrav"
 msgstr "Gravitație scăzută"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Harta %s, o creație a lui: "
@@ -1126,11 +1135,11 @@ msgstr "Părăsește bătălia"
 msgid "Random map"
 msgstr "Hartă aleatoare"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr "Se citește fișierul implicit de configurare"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Se citește fișierul personal de configurare"
 
@@ -2454,4 +2463,3 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
-

@@ -522,12 +522,12 @@ msgstr "Konstruiraj"
 msgid "Controlled by: "
 msgstr "Kontroliran od strane:"
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -552,7 +552,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr "KRAJ IGRE"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Greška u %s:%lu"
@@ -566,7 +566,7 @@ msgstr "Greška kod očitavanja tima:"
 msgid "Error loading team's data %s:"
 msgstr "Greška kod očitavanja podataka tima %s :"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -574,12 +574,12 @@ msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
@@ -801,7 +801,7 @@ msgstr "Lokalni timovi:"
 msgid "LowGrav"
 msgstr "LowGrav"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapu %s, napravio je:"
@@ -944,12 +944,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Učitaj mape:"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Čita lični konfiguracioni podatak"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Čita lični konfiguracioni podatak"
 

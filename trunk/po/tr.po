@@ -478,12 +478,12 @@ msgstr "İnşa Et"
 msgid "Controlled by: "
 msgstr ""
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "SDL kütüphanesi başlatılamadı: %s"
@@ -508,7 +508,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr ""
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "%s:%lu'da hata"
@@ -523,18 +523,18 @@ msgstr "%s takımı yüklenirken hata:"
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
@@ -748,7 +748,7 @@ msgstr "Takımları yükle:"
 msgid "LowGrav"
 msgstr "Düşük yer çekimi"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "%s haritasını tasarlayan:"
@@ -891,12 +891,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Haritaları yükle:"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 

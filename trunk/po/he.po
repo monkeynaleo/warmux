@@ -514,12 +514,12 @@ msgstr "בנייה"
 msgid "Controlled by: "
 msgstr "מבוקר על ידי:"
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "לא ניתן לטעון הגדרות"
@@ -544,7 +544,7 @@ msgstr "דינמיט"
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "שגיאה ב-%s:%lu"
@@ -558,18 +558,18 @@ msgstr "שגיאה בטעינת צוות:"
 msgid "Error loading team's data %s:"
 msgstr "שגיאה בטעינת המידע של צוות %s:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "שגיאה בעת טעינת תיקיית \"%s\": לא ניתן לאחסן קובץ הגדרות."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "שגיאה בעת טעינת קובץ הגדרות: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "שגיאה בעת טעינת הגדרות ברירת המחדל: %s"
@@ -791,7 +791,7 @@ msgstr "צוותים מקומיים:"
 msgid "LowGrav"
 msgstr "אנטי-גרביטציה"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "מפה %s, דרך יצירתה:"
@@ -931,11 +931,11 @@ msgstr "יציאה מן הקרב"
 msgid "Random map"
 msgstr "מפה אקראית"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr "קורא הגדרות מקובץ ברירת מחדל"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "קורא הגדרות מקובץ אישי"
 

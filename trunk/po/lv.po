@@ -551,12 +551,12 @@ msgstr "Būvniecība"
 msgid "Controlled by: "
 msgstr "Kontrolē: "
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -581,7 +581,7 @@ msgstr "Dinamīts"
 msgid "END OF GAME"
 msgstr "SPĒLES BEIGAS"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Kļūda %s:%lu"
@@ -595,18 +595,18 @@ msgstr "Kļūda ielādējot komandu :"
 msgid "Error loading team's data %s:"
 msgstr "Kļūda ielādējot komandas datus %s:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Kļūda veidojot mapi \"%s\": nevar sglabāt konfigurācijas failu."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
@@ -833,7 +833,7 @@ msgstr "Lokālās komandas:"
 msgid "LowGrav"
 msgstr "Antigravitācija"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Karte %s, autors:  "
@@ -974,12 +974,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Ielādē kartes:"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Lasa personisko konfigurācijas failu"
 

@@ -514,12 +514,12 @@ msgstr "建筑工具"
 msgid "Controlled by: "
 msgstr "控制者: "
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "不能從 %s獲取最新版本"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "無法打開文件%s"
@@ -544,7 +544,7 @@ msgstr "炸藥"
 msgid "END OF GAME"
 msgstr "游戲末尾"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "錯誤出現%s:%lu"
@@ -558,18 +558,18 @@ msgstr "讀取隊伍出錯 :"
 msgid "Error loading team's data %s:"
 msgstr "讀取隊伍數據 %s 時出錯 :"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "建立目錄失敗 \"%s\": 不能儲存設置文件."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "讀取設置文件出錯: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "正讀取默認設置文件發生錯誤: %s"
@@ -790,7 +790,7 @@ msgstr "本地隊伍:"
 msgid "LowGrav"
 msgstr "漫步-低重力"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "地圖 %s, 靈感 : "
@@ -929,11 +929,11 @@ msgstr "推出戰斗"
 msgid "Random map"
 msgstr "隨機讀取地圖"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr "正讀取默認設置文件"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "正讀取個人設置文件"
 

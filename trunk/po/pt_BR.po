@@ -532,12 +532,12 @@ msgstr "Construir"
 msgid "Controlled by: "
 msgstr "Controlado por: "
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Falha ao receber ultima versão de %s"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Falha ao abrir arquivo %s"
@@ -562,7 +562,7 @@ msgstr "Dinamite"
 msgid "END OF GAME"
 msgstr "FIM DO JOGO"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Erro em %s:%lu"
@@ -576,7 +576,7 @@ msgstr "Erro ao carregar a equipe :"
 msgid "Error loading team's data %s:"
 msgstr "Erro ao carregar as informações (%s) da equipe :"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -584,12 +584,12 @@ msgstr ""
 "Erro ao criar o directório \"%s\": não foi possível salvar o arquivo de "
 "configuração."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Erro ao carregar o arquivo de configuração: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Erro ao carregar o arquivo de configuração: %s"
@@ -818,7 +818,7 @@ msgstr "Carregar equipes:"
 msgid "LowGrav"
 msgstr "Baixa gravidade"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, uma criação de :"
@@ -958,11 +958,11 @@ msgstr "Sair da batalha"
 msgid "Random map"
 msgstr "Mapa aleatório:"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr "Lendo arquivo de configuração padrão"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Lendo arquivo de configuração pessoal"
 

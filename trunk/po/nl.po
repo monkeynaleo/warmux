@@ -542,12 +542,12 @@ msgstr "Bouw"
 msgid "Controlled by: "
 msgstr "Bestuurd door: "
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "* Kon audio niet openen: "
@@ -572,7 +572,7 @@ msgstr "Dynamiet"
 msgid "END OF GAME"
 msgstr "EINDE VAN HET SPEL"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Fout in %s:%lu"
@@ -586,7 +586,7 @@ msgstr "Fout bij het laden van team :"
 msgid "Error loading team's data %s:"
 msgstr "Fout bij het laden van gegevens van team %s:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -594,12 +594,12 @@ msgstr ""
 "Fout bij het aanmaken van directory \"%s\": kon configuratiebestand niet "
 "opslaan."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fout bij het laden van configuratiebestand: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Fout bij het laden van standaardconfiguratiebestand: %s"
@@ -822,7 +822,7 @@ msgstr "Lokale teams:"
 msgid "LowGrav"
 msgstr "LageZwaartekracht"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Kaart %s, gemaakt door :"
@@ -962,11 +962,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Willekeurige kaart"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr "Standaard configbestand wordt gelezen"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Persoonlijk config bestand wordt gelezen"
 

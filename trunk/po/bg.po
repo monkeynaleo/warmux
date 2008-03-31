@@ -514,12 +514,12 @@ msgstr "Конструкция"
 msgid "Controlled by: "
 msgstr ""
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -544,7 +544,7 @@ msgstr "Шашка динамит"
 msgid "END OF GAME"
 msgstr ""
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Грешка в %s:%lu"
@@ -559,7 +559,7 @@ msgstr "Грешка при зареждането на отбора %s:"
 msgid "Error loading team's data %s:"
 msgstr "Проблем при зареждането на данните за %s:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -567,12 +567,12 @@ msgstr ""
 "Не мога да създам директорията \"%s\"! не мога да съхраня конфигурационните "
 "файлове!"
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
@@ -789,7 +789,7 @@ msgstr "Lade Mannschaft:"
 msgid "LowGrav"
 msgstr "Ниска гравитация"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Картата %s е творение на: "
@@ -933,12 +933,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Карти които да заредя:"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
