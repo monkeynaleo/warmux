@@ -1077,6 +1077,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\network\chatlogger.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\network\chatlogger.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\network\distant_cpu.cpp"
 					>
 				</File>
