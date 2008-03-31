@@ -271,7 +271,7 @@ MineConfig::MineConfig()
 {
   detection_range = 1;
   speed_detection = 2;
-  timeout = 3;
+  timeout = 2;
   escape_time = 2;
 }
 
