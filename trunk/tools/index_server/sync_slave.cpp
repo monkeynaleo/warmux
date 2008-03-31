@@ -79,24 +79,24 @@ bool SyncSlave::Start()
   while ((read = getline(line, fin)) >= 0)
     {
       if (line.size() == 0 || line.at(0) == '#')
-	continue;
+        continue;
 
       std::string::size_type port_pos = line.find(':', 0);
       if (port_pos == std::string::npos)
-	continue;
+        continue;
 
       std::string hostname = line.substr(0, port_pos);
       std::string portstr = line.substr(port_pos+1);
       int port = atoi(portstr.c_str());
 
       if (hostname != my_hostname && find(hostname) == end())
-	{
-	  IndexServerConn* c = new IndexServerConn(hostname, port);
-	  if (c->connected)
-	    insert(make_pair(hostname, c));
-	  else
-	    delete c;
-	}
+        {
+          IndexServerConn* c = new IndexServerConn(hostname, port);
+          if (c->connected)
+            insert(make_pair(hostname, c));
+          else
+            delete c;
+        }
     }
   fin.close();
   return true;
@@ -111,26 +111,26 @@ void SyncSlave::CheckGames()
       bool result = false;
 
       if (ioctl( it->second->GetFD(), FIONREAD, &received) == -1)
-	{
-	  PRINT_ERROR;
-	  result = false;
-	}
+        {
+          PRINT_ERROR;
+          result = false;
+        }
 
       if (received == 0 || it->second->Receive())
-	result = true;
+        result = true;
 
       if (!result || ! it->second->connected)
-	{
-	  DPRINT(INFO, "Index server at %s disconnected", it->first.c_str());
-	  delete it->second;
-	  erase(it);
-	  it = begin();
-	}
+        {
+          DPRINT(INFO, "Index server at %s disconnected", it->first.c_str());
+          delete it->second;
+          erase(it);
+          it = begin();
+        }
       else
-	{
-	  it->second->CheckState();
-	  ++it;
-	}
+        {
+          it->second->CheckState();
+          ++it;
+        }
     }
 }
 
@@ -174,79 +174,79 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
 
     case TS_MSG_WIS_VERSION:
       {
-	int version;
-	if (received < 4) // The message is not completely received
-	  return true;
-	if (!ReceiveInt(version)) // Receive the version number of the server index
-	  return false;
-	if (version > VERSION)
-	  {
-	    DPRINT(INFO,"The server at %i have a version %i, while we are only running a %i version",
-		   GetIP(), version, VERSION);
-	    exit(EXIT_FAILURE);
-	  }
-	else if(version < VERSION)
-	  {
-	    DPRINT(INFO,"This server is running an old version (v%i) !", version);
-	    return false;
-	  }
-	DPRINT(INFO,"We are running the same version..");
+        int version;
+        if (received < 4) // The message is not completely received
+          return true;
+        if (!ReceiveInt(version)) // Receive the version number of the server index
+          return false;
+        if (version > VERSION)
+          {
+            DPRINT(INFO,"The server at %i have a version %i, while we are only running a %i version",
+                   GetIP(), version, VERSION);
+            exit(EXIT_FAILURE);
+          }
+        else if(version < VERSION)
+          {
+            DPRINT(INFO,"This server is running an old version (v%i) !", version);
+            return false;
+          }
+        DPRINT(INFO,"We are running the same version..");
       }
       break;
     case TS_MSG_JOIN_LEAVE:
       {
-	int ip;
-	int port;
-	std::string server_id;
+        int ip;
+        int port;
+        std::string server_id;
 
-	if (!ReceiveStr(server_id))
-	    return false;
+        if (!ReceiveStr(server_id))
+            return false;
 
-	if (received < 8) // The message is not completely received
-	  return true;
-	if (!ReceiveInt(ip)) // Receive the IP of the wormux server
-	  return false;
-	if (!ReceiveInt(port)) // Receive the port of the wormux server
-	  return false;
+        if (received < 8) // The message is not completely received
+          return true;
+        if (!ReceiveInt(ip)) // Receive the IP of the wormux server
+          return false;
+        if (!ReceiveInt(port)) // Receive the port of the wormux server
+          return false;
 
-	if (port < 0) // means it disconnected
-	  {
-	    std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( server_id );
-	    if( serv != fake_clients.end() )
-	      {
-		do
-		  {
-		    if( serv->second.ip == ip
-			&&  serv->second.port == -port )
-		      {
-			fake_clients.erase(serv);
-			DPRINT(MSG, "A fake server disconnected");
-			break;
-		      }
-		  } while (serv != fake_clients.upper_bound(server_id));
-	      }
-	  }
-	else
-	  {
-	    int host_options;
-	    if (!ReceiveInt(host_options)) // Does the server publish a name and a passwd ?
-	      return false;
+        if (port < 0) // means it disconnected
+          {
+            std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( server_id );
+            if( serv != fake_clients.end() )
+              {
+                do
+                  {
+                    if( serv->second.ip == ip
+                        &&  serv->second.port == -port )
+                      {
+                        fake_clients.erase(serv);
+                        DPRINT(MSG, "A fake server disconnected");
+                        break;
+                      }
+                  } while (serv != fake_clients.upper_bound(server_id));
+              }
+          }
+        else
+          {
+            int host_options;
+            if (!ReceiveInt(host_options)) // Does the server publish a name and a passwd ?
+              return false;
 
-	    HostOptions options;
-	    options.used = host_options;
-	    if (options.used) {
-	      std::string game_name;
-	      if (!ReceiveStr(game_name))
-		return false;
-	      std::string passwd = "";
-// 	      if (!ReceiveStr(passwd))
-// 		return false;
-	      options.Set(game_name, passwd);
-	    }
+            HostOptions options;
+            options.used = host_options;
+            if (options.used) {
+              std::string game_name;
+              if (!ReceiveStr(game_name))
+                return false;
+              std::string passwd = "";
+//               if (!ReceiveStr(passwd))
+//                 return false;
+              options.Set(game_name, passwd);
+            }
 
-	    fake_clients.insert( std::make_pair(server_id, FakeClient(ip, port, options)));
-	    stats.NewFakeServer();
-	  }
+            fake_clients.insert( std::make_pair(server_id, FakeClient(ip, port, options)));
+            stats.NewFakeServer();
+          }
       }
       break;
     default:

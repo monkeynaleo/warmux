@@ -88,21 +88,21 @@ void DownloadServerList()
       dl.Get( server_list_url.c_str(), server_fn.c_str() );
 
       if(chroot)
-	{
-	  if(chown(server_fn.c_str(), (uid_t)uid, (gid_t)gid) == -1)
-	    TELL_ERROR;
-	}
+        {
+          if(chown(server_fn.c_str(), (uid_t)uid, (gid_t)gid) == -1)
+            TELL_ERROR;
+        }
 
       if(do_fork)
-	{
-	  do_fork = false;
-	  child = fork();
-	  if( child == -1)
-	    TELL_ERROR
-	    else
-	      if(child == 0)
-		break;
-	}
+        {
+          do_fork = false;
+          child = fork();
+          if( child == -1)
+            TELL_ERROR
+            else
+              if(child == 0)
+                break;
+        }
       // Wait 1 day
       sleep(60 * 60 * 24);
     }

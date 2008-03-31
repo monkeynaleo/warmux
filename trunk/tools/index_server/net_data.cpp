@@ -117,15 +117,15 @@ bool NetData::ReceiveStr(std::string & full_str)
     {
       // We don't know the string size -> read it
       if (received < 4)
-	return true;
+        return true;
 
       int size;
       if (!ReceiveInt(size))
-	return false;
+        return false;
 
       str_size = (unsigned int)size;
       if (str_size <= 0 || str_size > max_str_size)
-	return false;
+        return false;
 
       str = new char[str_size+1];
       memset(str, 0, str_size+1);
@@ -223,7 +223,7 @@ bool NetData::Receive()
     {
       int id;
       if( !ReceiveInt(id) )
-	return false;
+        return false;
       msg_id = (IndexServerMsg)id;
     }
 

@@ -52,7 +52,7 @@ HostOptions::HostOptions()
 }
 
 bool HostOptions::Set(const std::string & _game_name,
-		      const std::string & _passwd)
+                      const std::string & _passwd)
 {
   if (used) {
     DPRINT(MSG, "Game Name and passwd already set");
@@ -82,8 +82,8 @@ Client::~Client()
     {
       if( version != "" )
         {
-	  nb_server[ version ]--;
-	  NotifyServers( false );
+          nb_server[ version ]--;
+          NotifyServers( false );
         }
     }
 }
@@ -100,9 +100,9 @@ static bool CheckHost(const int ip, int prt)
   unsigned char* str_ip = (unsigned char*)&ip;
   char formated_ip[16];
   snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
-	   (int)str_ip[1],
-	   (int)str_ip[2],
-	   (int)str_ip[3]);
+           (int)str_ip[1],
+           (int)str_ip[2],
+           (int)str_ip[3]);
 
   std::string host = std::string(formated_ip);
 
@@ -233,7 +233,7 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
       std::string clt_version;
       r = ReceiveStr(clt_version);
       if (!r)
-	goto next_msg;
+        goto next_msg;
 
       r = HandShake(clt_version);
       goto next_msg;
@@ -253,27 +253,27 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
 
     case TS_MSG_GET_LIST:
       if (is_hosting) {
-	r = false;
+        r = false;
       } else {
-	r = SendList();
+        r = SendList();
       }
       break;
 
     case TS_MSG_GAMENAME:
       {
-	std::string game_name;
-	r = ReceiveStr(game_name);
-	if (!r)
-	  goto next_msg;
+        std::string game_name;
+        r = ReceiveStr(game_name);
+        if (!r)
+          goto next_msg;
 
-	std::string passwd = "";
-// 	std::string passwd;
-// 	r = ReceiveStr(passwd);
-// 	if (!r)
-// 	  goto next_msg;
+        std::string passwd = "";
+//         std::string passwd;
+//         r = ReceiveStr(passwd);
+//         if (!r)
+//           goto next_msg;
 
-	r = options.Set(game_name, passwd);
-	DPRINT(MSG, "game name is %s", game_name.c_str());
+        r = options.Set(game_name, passwd);
+        DPRINT(MSG, "game name is %s", game_name.c_str());
       }
       break;
 
@@ -302,12 +302,12 @@ void Client::SetVersion(const std::string & ver)
     {
       do
         {
-	  if (client->second == this)
+          if (client->second == this)
             {
-	      clients.erase(client);
-	      return;
+              clients.erase(client);
+              return;
             }
-	  ++client;
+          ++client;
         } while (client != clients.upper_bound( "unknown" ));
     }
 }
@@ -333,8 +333,8 @@ bool Client::SendList()
     {
       do
         {
-	  nb_s++;
-	  ++fclient;
+          nb_s++;
+          ++fclient;
         } while (fclient != fake_clients.upper_bound(version));
     }
 
@@ -346,27 +346,27 @@ bool Client::SendList()
     {
       do
         {
-	  if (client->second->is_hosting)
+          if (client->second->is_hosting)
             {
-	      if (!SendInt(client->second->GetIP()))
-		return false;
-	      if (!SendInt(client->second->port))
-		return false;
+              if (!SendInt(client->second->GetIP()))
+                return false;
+              if (!SendInt(client->second->port))
+                return false;
 
-	      if (client->second->options.used) {
-		if (!SendStr(client->second->options.game_name))
-		  return false;
+              if (client->second->options.used) {
+                if (!SendStr(client->second->options.game_name))
+                  return false;
 
-// 		if (client->second->options.passwd != "") {
-// 		  if (!SendInt(1))
-// 		    return false;
-// 		} else {
-// 		  if (!SendInt(0))
-// 		    return false;
-// 		}
-	      }
+//                 if (client->second->options.passwd != "") {
+//                   if (!SendInt(1))
+//                     return false;
+//                 } else {
+//                   if (!SendInt(0))
+//                     return false;
+//                 }
+              }
             }
-	  ++client;
+          ++client;
         } while (client != clients.upper_bound(version));
     }
 
@@ -375,25 +375,25 @@ bool Client::SendList()
     {
       do
         {
-	  if (!SendInt(fclient->second.ip))
-	    return false;
-	  if (!SendInt(fclient->second.port))
-	    return false;
+          if (!SendInt(fclient->second.ip))
+            return false;
+          if (!SendInt(fclient->second.port))
+            return false;
 
-	  if (fclient->second.options.used) {
-	    if (!SendStr(fclient->second.options.game_name))
-	      return false;
+          if (fclient->second.options.used) {
+            if (!SendStr(fclient->second.options.game_name))
+              return false;
 
-// 	    if (fclient->second.options.passwd != "") {
-// 	      if (!SendInt(1))
-// 		return false;
-// 	    } else {
-// 	      if (!SendInt(0))
-// 		return false;
-// 	    }
-	  }
+//             if (fclient->second.options.passwd != "") {
+//               if (!SendInt(1))
+//                 return false;
+//             } else {
+//               if (!SendInt(0))
+//                 return false;
+//             }
+          }
 
-	  ++fclient;
+          ++fclient;
         } while (fclient != fake_clients.upper_bound(version));
     }
   return true;
@@ -410,29 +410,29 @@ void Client::NotifyServers(bool joining)
     {
       do
         {
-	  if (!serv->second->SendInt(TS_MSG_JOIN_LEAVE))
-	    return /*false*/;
-	  if (! serv->second->SendStr(version))
-	    return /*false*/;
-	  if (! serv->second->SendInt(GetIP()))
-	    return /*false*/;
-	  // Send the port number : if this client is leaving, send -port
-	  if (! serv->second->SendInt(joining? port : -port))
-	    return /*false*/;
+          if (!serv->second->SendInt(TS_MSG_JOIN_LEAVE))
+            return /*false*/;
+          if (! serv->second->SendStr(version))
+            return /*false*/;
+          if (! serv->second->SendInt(GetIP()))
+            return /*false*/;
+          // Send the port number : if this client is leaving, send -port
+          if (! serv->second->SendInt(joining? port : -port))
+            return /*false*/;
 
-	  if (joining) {
-	    if (!SendInt(serv->second->options.used))
-	      return /*false*/;
+          if (joining) {
+            if (!SendInt(serv->second->options.used))
+              return /*false*/;
 
-	    if (serv->second->options.used) {
-	      if (!SendStr(serv->second->options.game_name))
-		return /*false*/;
-// 	      if (!SendStr(serv->second->options.passwd))
-// 		return /*false*/;
-	    }
-	  }
+            if (serv->second->options.used) {
+              if (!SendStr(serv->second->options.game_name))
+                return /*false*/;
+//               if (!SendStr(serv->second->options.passwd))
+//                 return /*false*/;
+            }
+          }
 
-	  ++serv;
+          ++serv;
         } while (serv != clients.upper_bound(sync_serv_version));
     }
   return /*true*/;

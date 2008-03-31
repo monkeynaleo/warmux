@@ -165,47 +165,47 @@ int main(int argc, void** argv)
       acting_sock_set = listen_sock.GetSockSet();
       // Lock the process until activity is detected
       if ( select(FD_SETSIZE, &acting_sock_set, NULL, NULL, &timeout) < 1 )
-	{
-	  // Timeout to check for other games on other servers
-	  if(timeout.tv_sec != 0 && timeout.tv_usec != 0)
-	    TELL_ERROR;
-	}
+        {
+          // Timeout to check for other games on other servers
+          if(timeout.tv_sec != 0 && timeout.tv_usec != 0)
+            TELL_ERROR;
+        }
 
       // Find the socket where activity have been detected:
       // First check for already established connections
       for(std::multimap<std::string,Client*>::iterator client = clients.begin();
-	  client != clients.end();
-	  ++client)
-	{
-	  client->second->CheckState();
+          client != clients.end();
+          ++client)
+        {
+          client->second->CheckState();
 
-	  if( ! client->second->connected )
-	    {
-	      // Connection closed
-	      listen_sock.CloseConnection( client->second->GetFD() );
-	      delete client->second;
-	      clients.erase(client);
-	      DPRINT(CONN, "%i connections up!", (int)clients.size());
-	      break;
-	    }
-	  if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
-	    {
-	      if( ! client->second->Receive() )
-		client->second->connected = false;
-	      // Exit as the clients list may have changed
-	      break;
-	    }
-	}
+          if( ! client->second->connected )
+            {
+              // Connection closed
+              listen_sock.CloseConnection( client->second->GetFD() );
+              delete client->second;
+              clients.erase(client);
+              DPRINT(CONN, "%i connections up!", (int)clients.size());
+              break;
+            }
+          if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
+            {
+              if( ! client->second->Receive() )
+                client->second->connected = false;
+              // Exit as the clients list may have changed
+              break;
+            }
+        }
 
       // Then check if there is any new incoming connection
       if( FD_ISSET(listen_sock.GetFD(), &acting_sock_set) )
-	{
-	  Client* client = listen_sock.NewConnection();
-	  if(client != NULL)
-	    clients.insert(std::make_pair("unknown", client ));
-	  DPRINT(CONN, "%i connections up!", (int)clients.size());
+        {
+          Client* client = listen_sock.NewConnection();
+          if(client != NULL)
+            clients.insert(std::make_pair("unknown", client ));
+          DPRINT(CONN, "%i connections up!", (int)clients.size());
 
-	  // Exit as the 'clients' list may have changed
-	}
+          // Exit as the 'clients' list may have changed
+        }
     }
 }
