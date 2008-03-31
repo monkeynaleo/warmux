@@ -27,6 +27,7 @@
 Stats stats;
 
 ConnectionStats::ConnectionStats(const std::string & fn)
+  : fd(NULL)
 {
   Reset();
   filename = fn;
@@ -50,6 +51,12 @@ void ConnectionStats::OpenFile()
   snprintf(time_str, 1024, "%4i-%02i-%02i_", 1900 + t->tm_year, 1 + t->tm_mon,t->tm_mday);
 
   full_name = std::string(time_str) + full_name + '_' + filename;
+
+  if(fd)
+    {
+      DPRINT(INFO, "Closing previous logfile");
+      fclose(fd);
+    }
 
   DPRINT(INFO, "Opening logfile : %s",full_name.c_str());
   fd = fopen(full_name.c_str(), "a+");
