@@ -40,11 +40,11 @@ class Config
   Config();
 
   bool Get( const std::string & name,
-	    std::string & value);
+            std::string & value);
   bool Get( const std::string & name,
-	    int & value);
+            int & value);
   bool Get( const std::string & name,
-	    bool & value);
+            bool & value);
 };
 
 extern Config config;

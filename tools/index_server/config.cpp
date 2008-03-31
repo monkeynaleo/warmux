@@ -68,14 +68,14 @@ void Config::Load()
     {
       line_nbr++;
       if(line.size() == 0 || line.at(0) == '#' )
-	continue;
+        continue;
 
       std::string::size_type equ_pos = line.find('=',0);
       if(equ_pos == std::string::npos)
-	{
-	  DPRINT(INFO, "Wrong format on line %i",line_nbr);
-	  continue;
-	}
+        {
+          DPRINT(INFO, "Wrong format on line %i",line_nbr);
+          continue;
+        }
 
       std::string opt = line.substr(0, equ_pos);
       std::string val = line.substr(equ_pos+1);
@@ -83,22 +83,22 @@ void Config::Load()
       // val is considered to be an int if it doesn't contain
       // a '.' (ip address have to be handled as string...
       if(val.find('.',0) == std::string::npos
-	 && ((val.at(0) >= '0' && val.at(0) <= '9')
-	     ||   val.at(0) == '-' ))
-	{
-	  int nbr = atoi(val.c_str());
-	  int_value[ opt ] = nbr;
-	}
+         && ((val.at(0) >= '0' && val.at(0) <= '9')
+             ||   val.at(0) == '-' ))
+        {
+          int nbr = atoi(val.c_str());
+          int_value[ opt ] = nbr;
+        }
       else
-	{
-	  if(val == "true")
-	    bool_value[ opt ] = true;
-	  else
-	    if(val == "false")
-	      bool_value[ opt ] = false;
-	    else
-	      str_value[ opt ] = val;
-	}
+        {
+          if(val == "true")
+            bool_value[ opt ] = true;
+          else
+            if(val == "false")
+              bool_value[ opt ] = false;
+            else
+              str_value[ opt ] = val;
+        }
     }
 
   DPRINT(INFO, "Config loaded");
@@ -194,3 +194,4 @@ void Config::SetDefault(const std::string & name, const std::string & value)
       str_value[ name ] = value;
     }
 }
+
