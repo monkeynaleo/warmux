@@ -238,9 +238,9 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
 	      std::string game_name;
 	      if (!ReceiveStr(game_name))
 		return false;
-	      std::string passwd;
-	      if (!ReceiveStr(passwd))
-		return false;
+	      std::string passwd = "";
+// 	      if (!ReceiveStr(passwd))
+// 		return false;
 	      options.Set(game_name, passwd);
 	    }
 
