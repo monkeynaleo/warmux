@@ -31,6 +31,7 @@
 #include "game/time.h"
 #include "object/objbox.h"
 #include "tool/i18n.h"
+#include "tool/math_tools.h"
 
 const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
 
