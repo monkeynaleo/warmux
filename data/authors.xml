@@ -454,6 +454,13 @@
 	<country>Germany</country>
       </author>
       <author>
+    <nickname>Plorf</nickname>
+    <name>Yoann Katchourine</name>
+    <description>Prepare Mac OS X (Intel) packages</description>
+    <email>yplorf@gmail.com></email>
+    <country>France</country>
+        </author>
+        <author>
 	<nickname>Serge</nickname>
 	<name>Serge CLAUS</name>
 	<description>Wormux 0.7.4 package for Ubuntu Dapper</description>

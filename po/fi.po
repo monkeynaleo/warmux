@@ -519,12 +519,12 @@ msgstr ""
 msgid "Controlled by: "
 msgstr ""
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "SDL kirjaston alustus epäonnistui:%s"
@@ -551,7 +551,7 @@ msgstr "Dynamiitti"
 msgid "END OF GAME"
 msgstr ""
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Virhe kohdassa %s:%lu"
@@ -566,18 +566,18 @@ msgstr "Virhe ladattessa joukkuetta %s:"
 msgid "Error loading team's data %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Virhe luodessa hakemistoa \"%s\":  asetustiedostoa ei voida tallentaa."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
@@ -791,7 +791,7 @@ msgstr "Lataa joukkueet:"
 msgid "LowGrav"
 msgstr ""
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, fuzzy, c-format
 msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
@@ -946,11 +946,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Lataa kartta"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr ""
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr ""
 

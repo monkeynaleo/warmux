@@ -546,12 +546,12 @@ msgstr "�p�t"
 msgid "Controlled by: "
 msgstr ""
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -576,7 +576,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr "J�T�K V�GE"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Hiba a k�vetkez�ben: %s, %lu"
@@ -590,7 +590,7 @@ msgstr "Hiba a csapat bet�lt�se k�zben:"
 msgid "Error loading team's data %s:"
 msgstr "Hiba a csapat adatainak bet�lt�se k�zben (%s):"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -598,12 +598,12 @@ msgstr ""
 "Hiba a(z) \"%s\" k�nyvt�r l�trehoz�sa k�zben: nem lehet a konfigur�ci�s "
 "f�jlt menteni."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
@@ -816,7 +816,7 @@ msgstr "Helyi csapatok:"
 msgid "LowGrav"
 msgstr "Alacsony gravit�ci�"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "A(z) %s p�lya k�sz�t�je: "
@@ -962,12 +962,12 @@ msgstr ""
 "%s tĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ rkĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ p "
 "betĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂltĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ se"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
@@ -1415,8 +1415,7 @@ msgstr "Hangmin�s�g: %d Hz, %d bit"
 #~ "kĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ t csapatot kell "
 #~ "verbuvĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂlnod a "
 #~ "jĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂtĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ khoz! "
-#~ "Ezt a "
-#~ "BeĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂllĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂ­"
+#~ "Ezt a BeĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂllĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂ­"
 #~ "tĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂsok "
 #~ "menĂÂĂÂÄÂĂÂÄÂÄšÄĂĹĄĂÂpont alatt teheted meg!"
 

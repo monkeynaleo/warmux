@@ -583,12 +583,12 @@ msgstr "Строительство"
 msgid "Controlled by: "
 msgstr "Контролируется: "
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Не получается скачать новую версию с %s"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Не могу открыть файл %s"
@@ -613,7 +613,7 @@ msgstr "Динамит"
 msgid "END OF GAME"
 msgstr "КОНЕЦ ИГРЫ"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Ошибка в %s:%lu"
@@ -627,19 +627,19 @@ msgstr "Ошибка при загрузке команды :"
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке данных команды %s:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ошибка при загрузке конфигурационного файла: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Ошибка при загрузке конфигурационного файла по умолчанию: %s"
@@ -865,7 +865,7 @@ msgstr "Локальные команды:"
 msgid "LowGrav"
 msgstr "Антигравитатор"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Карту %s создал: "
@@ -1004,11 +1004,11 @@ msgstr "Покинуть битву"
 msgid "Random map"
 msgstr "Случайная карта"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr "Чтение конфига по умолчанию"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Чтение персонального конфига"
 

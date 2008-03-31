@@ -534,12 +534,12 @@ msgstr "Construção"
 msgid "Controlled by: "
 msgstr "Controlado por:"
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -564,7 +564,7 @@ msgstr "Dinamite"
 msgid "END OF GAME"
 msgstr "FIM DE JOGO"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Erro em %s.%lu"
@@ -578,7 +578,7 @@ msgstr "Erro ao carregar a equipa :"
 msgid "Error loading team's data %s:"
 msgstr "Erro ao carregar a informação da equipa %s:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -586,12 +586,12 @@ msgstr ""
 "Erro ao criar o directório \"%s\": incapaz de guardar o ficheiro de "
 "configuração."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Erro ao carregar o ficheiro de configuração : %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Erro ao carregar o ficheiro de configuração padrão : %s"
@@ -817,7 +817,7 @@ msgstr "Equipas locais:"
 msgid "LowGrav"
 msgstr "Baixa Gravidade"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "O mapa %s, é uma criação de :"
@@ -957,11 +957,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Mapa aleatório"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 msgid "Reading default config file"
 msgstr "Lendo o ficheiro de configuração por defeito"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Lendo ficheiro de configuração pessoal"
 

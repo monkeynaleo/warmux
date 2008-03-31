@@ -513,12 +513,12 @@ msgstr "Konstruér"
 msgid "Controlled by: "
 msgstr "Kontrolleret af: "
 
-#: src/network/download.cpp:80
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:89
+#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -543,7 +543,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "SLUT PÅ SPILLET"
 
-#: src/tool/error.cpp:81
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Fejl i %s: %lu"
@@ -557,19 +557,19 @@ msgstr "Fejl under indlæsning af hold:"
 msgid "Error loading team's data %s:"
 msgstr "Fejl under indlæsning af holdet %ss data:"
 
-#: src/game/config.cpp:451
+#: src/game/config.cpp:457
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
 
-#: src/game/config.cpp:324
+#: src/game/config.cpp:330
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fejl under indlæsning af konfigurationsfil: %s"
 
-#: src/game/config.cpp:362
+#: src/game/config.cpp:368
 #, fuzzy, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Fejl under indlæsning af konfigurationsfil: %s"
@@ -792,7 +792,7 @@ msgstr "Lokale hold:"
 msgid "LowGrav"
 msgstr "Svag tyngdekraft"
 
-#: src/map/map.cpp:293
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Banen %s, en kreation af: "
@@ -933,12 +933,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Indlæser baner:"
 
-#: src/game/config.cpp:337
+#: src/game/config.cpp:343
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Læser personlig konfigureringsfil"
 
-#: src/game/config.cpp:370
+#: src/game/config.cpp:376
 msgid "Reading personal config file"
 msgstr "Læser personlig konfigureringsfil"
 
