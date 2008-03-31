@@ -101,6 +101,8 @@ void Config::Load()
         }
     }
 
+  fin.close();
+
   DPRINT(INFO, "Config loaded");
 }
 
