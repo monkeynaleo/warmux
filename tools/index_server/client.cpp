@@ -59,8 +59,8 @@ bool HostOptions::Set(const std::string & _game_name,
     return false;
   }
 
-  game_name = game_name;
-  passwd = passwd;
+  game_name = _game_name;
+  passwd = _passwd;
   used = true;
 
   return true;
@@ -266,10 +266,11 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
 	if (!r)
 	  goto next_msg;
 
-	std::string passwd;
-	r = ReceiveStr(passwd);
-	if (!r)
-	  goto next_msg;
+	std::string passwd = "";
+// 	std::string passwd;
+// 	r = ReceiveStr(passwd);
+// 	if (!r)
+// 	  goto next_msg;
 
 	r = options.Set(game_name, passwd);
 	DPRINT(MSG, "game name is %s", game_name.c_str());
@@ -320,7 +321,7 @@ bool Client::SendSignature()
 
 bool Client::SendList()
 {
-  DPRINT(MSG, "Sending list..");
+  DPRINT(MSG, "Sending list...");
 
   int nb_s = 0;
   if (nb_server.find( version ) != nb_server.end())
@@ -352,13 +353,17 @@ bool Client::SendList()
 	      if (!SendInt(client->second->port))
 		return false;
 
-	      if (options.used) {
+	      if (client->second->options.used) {
 		if (!SendStr(client->second->options.game_name))
 		  return false;
 
-		// Do not send the password to other users!!
-		//if (!SendStr(client->second->options.passwd))
-		//  return false;
+// 		if (client->second->options.passwd != "") {
+// 		  if (!SendInt(1))
+// 		    return false;
+// 		} else {
+// 		  if (!SendInt(0))
+// 		    return false;
+// 		}
 	      }
             }
 	  ++client;
@@ -378,9 +383,14 @@ bool Client::SendList()
 	  if (fclient->second.options.used) {
 	    if (!SendStr(fclient->second.options.game_name))
 	      return false;
-	    // Do not send the password to other users!!
-	    //if (!SendStr(fclient->second.options.passwd))
-	    //  return false;
+
+// 	    if (fclient->second.options.passwd != "") {
+// 	      if (!SendInt(1))
+// 		return false;
+// 	    } else {
+// 	      if (!SendInt(0))
+// 		return false;
+// 	    }
 	  }
 
 	  ++fclient;
@@ -417,8 +427,8 @@ void Client::NotifyServers(bool joining)
 	    if (serv->second->options.used) {
 	      if (!SendStr(serv->second->options.game_name))
 		return /*false*/;
-	      if (!SendStr(serv->second->options.passwd))
-		return /*false*/;
+// 	      if (!SendStr(serv->second->options.passwd))
+// 		return /*false*/;
 	    }
 	  }
 

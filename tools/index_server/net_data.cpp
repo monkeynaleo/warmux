@@ -113,18 +113,18 @@ bool NetData::ReceiveStr(std::string & full_str)
 {
   const unsigned int max_str_size = 16;
 
-  if(str_size == 0)
+  if (str_size == 0)
     {
       // We don't know the string size -> read it
-      if(received < 4)
+      if (received < 4)
 	return true;
 
       int size;
-      if( !ReceiveInt(size) )
+      if (!ReceiveInt(size))
 	return false;
 
       str_size = (unsigned int)size;
-      if(str_size <= 0 || str_size > max_str_size)
+      if (str_size <= 0 || str_size > max_str_size)
 	return false;
 
       str = new char[str_size+1];
@@ -132,11 +132,12 @@ bool NetData::ReceiveStr(std::string & full_str)
     }
 
   // Check if the string is already arrived
-  if(received == 0)
-    {
-      full_str = "";
-      return true;
-    }
+ //  if (received == 0)
+//     {
+//       printf("the string is already arrived\n");
+//       full_str = "";
+//       return true;
+//     }
 
   unsigned int old_size = strlen(str);
   unsigned int to_receive = str_size - old_size;
