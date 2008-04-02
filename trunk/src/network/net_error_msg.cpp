@@ -47,6 +47,9 @@ const std::string NetworkErrorToString(connection_state_t err)
   case CONN_TIMEOUT:
     msg = _("The connection timed out. Check there is no firewall in the way!");
     break;
+  case CONN_WRONG_PASSWORD:
+    msg = _("The server rejected the connection: wrong password!");
+    break;
   default: ASSERT(false);
   }
 

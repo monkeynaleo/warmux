@@ -31,11 +31,12 @@ class NetworkServer : public Network
   TCPsocket server_socket; // Wait for incoming connections on this socket
 
 protected:
-  virtual void HandleAction(Action* a, DistantComputer* sender);
+  bool HandShake(DistantComputer& client);
+  virtual void HandleAction(Action* a, DistantComputer* sender) const;
   virtual void WaitActionSleep();
 
 public:
-  NetworkServer();
+  NetworkServer(const std::string& password);
   ~NetworkServer();
 
   //virtual const bool IsConnected() const { return true; }

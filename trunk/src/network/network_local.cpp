@@ -21,6 +21,8 @@
 
 #include "network/network_local.h"
 
+NetworkLocal::NetworkLocal() : Network("") {}
+
 NetworkLocal::~NetworkLocal() {}
 
 void NetworkLocal::SendAction(Action* /*action*/) {}

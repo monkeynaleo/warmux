@@ -37,7 +37,7 @@
 #endif
 //-----------------------------------------------------------------------------
 
-NetworkClient::NetworkClient()
+NetworkClient::NetworkClient(const std::string& password) : Network(password)
 {
 #ifdef LOG_NETWORK
   fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
@@ -65,7 +65,7 @@ std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<D
   return cpu.erase(closed);
 }
 
-void NetworkClient::HandleAction(Action* a, DistantComputer* sender)
+void NetworkClient::HandleAction(Action* a, DistantComputer* sender) const
 {
   switch (a->GetType()) {
   case Action::ACTION_NICKNAME:
@@ -94,6 +94,12 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* sender)
 }
 
 //-----------------------------------------------------------------------------
+
+bool NetworkClient::HandShake(DistantComputer& /*server*/)
+{
+  return true;
+}
+
 connection_state_t
 NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 {
@@ -126,7 +132,15 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   }
 
   socket_set = SDLNet_AllocSocketSet(1);
-  cpu.push_back(new DistantComputer(socket));
+
+  DistantComputer * server = new DistantComputer(socket);
+
+  if (!HandShake(*server)) {
+    delete server;
+    return CONN_WRONG_PASSWORD;
+  }
+
+  cpu.push_back(server);
   //Send nickname to server
   Action a(Action::ACTION_NICKNAME, nickname);
   SendAction(&a);

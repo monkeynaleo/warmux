@@ -101,7 +101,7 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
     std::string address = std::string(c_address);
     std::string port = std::string(c_port);
 
-    connection_state_t conn = Network::ClientStart(address, port);
+    connection_state_t conn = Network::ClientStart(address, port, "");
     if ( Network::IsConnected() && conn == CONNECTED )
     {
       close_menu = true;

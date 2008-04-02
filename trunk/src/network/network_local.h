@@ -28,10 +28,11 @@
 class NetworkLocal : public Network
 {
 protected:
-  virtual void HandleAction(Action* /*a*/, DistantComputer* /*sender*/) { ASSERT(false) };
+  virtual void HandleAction(Action* /*a*/, DistantComputer* /*sender*/) const { ASSERT(false) };
   virtual void WaitActionSleep() { ASSERT(false) };
 
 public:
+  NetworkLocal();
   ~NetworkLocal();
 
   virtual bool IsConnected() const { return false; }
