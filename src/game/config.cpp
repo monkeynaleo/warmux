@@ -451,12 +451,13 @@ bool Config::Save(bool save_current_teams)
   std::string rep = personal_config_dir;
 
   // Create the directory if it doesn't exist
-  if (MkdirPersonalConfigDir())
+  if (!MkdirPersonalConfigDir())
   {
     std::cerr << "o "
-      << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
-          rep.c_str())
-      << std::endl;
+	      << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
+			rep.c_str())
+	      << " " << strerror(errno)
+	      << std::endl;
     return false;
   }
 
