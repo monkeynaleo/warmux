@@ -113,6 +113,7 @@ protected:
   virtual void WaitActionSleep() = 0;
 
   void DisconnectNetwork();
+
 public:
   NetworkMenu* network_menu;
 
@@ -159,6 +160,12 @@ public:
 
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
+
+  static void Send(TCPsocket& socket, const int& nbr);
+  static void Send(TCPsocket& socket, const std::string &str);
+
+  static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
+  static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str);
 };
 
 //-----------------------------------------------------------------------------

@@ -189,71 +189,47 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
 /*************  Basic transmissions  ******************/
 void IndexServer::Send(const int& nbr)
 {
-  char packet[4];
-  // this is not cute, but we don't want an int -> uint conversion here
-  Uint32 u_nbr = *((const Uint32*)&nbr);
-
-  SDLNet_Write32(u_nbr, packet);
-  SDLNet_TCP_Send(socket, packet, sizeof(packet));
+  Network::Send(socket, nbr);
 }
 
 void IndexServer::Send(const std::string &str)
 {
-  Send(str.size());
-  SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
+  Network::Send(socket, str);
+
 }
 
 int IndexServer::ReceiveInt()
 {
-  char packet[4];
   //somehow we can get here while being disconnected... this should not be
-  if(!connected)
-    return -1;
-  if(SDLNet_CheckSockets(sock_set, 5000) == 0)
+  if (!connected)
     return -1;
 
-  if(!SDLNet_SocketReady(socket))
-    return -1;
-
-  if( SDLNet_TCP_Recv(socket, packet, sizeof(packet)) < 1 )
-  {
+  int r, nbr;
+  r = Network::ReceiveInt(sock_set, socket, nbr);
+  if (r == -2) {
     Disconnect();
     return 0;
+  } else if (r != 0) {
+    return r;
   }
 
-  Uint32 u_nbr = SDLNet_Read32(packet);
-  int nbr = *((int*)&u_nbr);
   return nbr;
 }
 
 std::string IndexServer::ReceiveStr()
 {
-  if(!connected)
+  if (!connected)
     return "";
 
-  int size = ReceiveInt();
-  if(size <= 0)
-    return "";
+  int r;
+  std::string str("");
 
-  if(SDLNet_CheckSockets(sock_set, 5000) == 0)
-    return "";
-
-  if(!SDLNet_SocketReady(socket))
-    return "";
-
-  char* str = new char[size+1];
-  if( SDLNet_TCP_Recv(socket, str, size) < 1 )
-  {
-    delete[] str;
+  r = Network::ReceiveStr(sock_set, socket, str);
+  if (r == -2) {
     Disconnect();
-    return "";
   }
 
-  str[size] = '\0';
-
-  std::string st(str);
-  delete []str;
-  return st;
+  return str;
 }
 
 bool IndexServer::HandShake()
