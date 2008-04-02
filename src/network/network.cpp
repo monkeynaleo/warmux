@@ -532,3 +532,76 @@ bool Network::IsTurnMaster() const
 {
   return turn_master_player;
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+// Static methods usefull to communicate without action
+// (index server, handshake, ...)
+
+void Network::Send(TCPsocket& socket, const int& nbr)
+{
+  char packet[4];
+  // this is not cute, but we don't want an int -> uint conversion here
+  Uint32 u_nbr = *((const Uint32*)&nbr);
+
+  SDLNet_Write32(u_nbr, packet);
+  SDLNet_TCP_Send(socket, packet, sizeof(packet));
+}
+
+void Network::Send(TCPsocket& socket, const std::string &str)
+{
+  Send(socket, str.size());
+  SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
+}
+
+int Network::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
+{
+  char packet[4];
+
+  if (SDLNet_CheckSockets(sock_set, 5000) == 0)
+    return -1;
+
+  if (!SDLNet_SocketReady(socket))
+    return -1;
+
+  if (SDLNet_TCP_Recv(socket, packet, sizeof(packet)) < 1)
+  {
+    return -2;
+  }
+
+  Uint32 u_nbr = SDLNet_Read32(packet);
+  nbr = *((int*)&u_nbr);
+
+  return 0;
+}
+
+int Network::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &_str)
+{
+  int r, size = 0;
+  r = ReceiveInt(sock_set, socket, size);
+  if (r)
+    return r;
+
+  if (size <= 0)
+    return -1;
+
+  if (SDLNet_CheckSockets(sock_set, 5000) == 0)
+    return -1;
+
+  if (!SDLNet_SocketReady(socket))
+    return -1;
+
+  char* str = new char[size+1];
+  if( SDLNet_TCP_Recv(socket, str, size) < 1 )
+  {
+    delete[] str;
+    return -2;
+  }
+
+  str[size] = '\0';
+
+  _str = str;
+  delete []str;
+  return 0;
+}
