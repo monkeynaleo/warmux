@@ -37,9 +37,7 @@
 #include "network/randomsync.h"
 
 BonusBox::BonusBox():
-  ObjBox("bonus_box"),
-  nbr_ammo(2),
-  contents(Weapon::WEAPON_MINE)
+  ObjBox("bonus_box")
 {
   SetTestRect (29, 29, 63, 6);
 
@@ -53,36 +51,47 @@ BonusBox::BonusBox():
   anim->SetCurrentFrame(0);
 }
 
-void BonusBox::PickRandomWeapon() {
+void BonusBox::PickRandomWeapon()
+{
+  Weapon::Weapon_type w_type;
+
+  ASSERT(weapon_list.size() != 0);
+
   weapon_num = 0;
-  if (weapon_count <= 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode
-    m_energy = 0;
-    MSG_DEBUG("bonus","Weapon count is zero");
-    return;
-  }
+  int nb_try = 0;
   do {
-    weapon_num = (int)Random::GetDouble(1, weapon_count);
-    contents = (weapon_map[weapon_num].first)->GetType();
-  } while (ActiveTeam().ReadNbAmmos(contents) == INFINITE_AMMO);
-  nbr_ammo = weapon_map[weapon_num].second;
+    double num = Random::GetDouble(0, total_probability);
+    double tmp = 0;
+
+    for (uint i=0; i < weapon_list.size(); i++) {
+      if (tmp < num && num <= tmp + weapon_list[i].probability) {
+	break;
+      }
+    }
+    w_type = weapon_list[weapon_num].weapon->GetType();
+    nb_try++;
+  } while (ActiveTeam().ReadNbAmmos(w_type) == INFINITE_AMMO
+	   && nb_try <= 50);
+  MSG_DEBUG("bonus","Weapon choosed: %s", weapon_list[weapon_num].weapon->GetName().c_str());
 }
 
-void BonusBox::ApplyBonus(Character * c) {
-  if(weapon_count == 0 || nbr_ammo == 0) return;
+void BonusBox::ApplyBonus(Character * c)
+{
   std::ostringstream txt;
   if ( ExplodesInsteadOfBonus(c) ) {
     GameMessages::GetInstance()->Add( _("Someone put a booby trap into the crate!") );
     Explode();
     return;
   };
+  Weapon::Weapon_type w_type = weapon_list[weapon_num].weapon->GetType();
+
   /*this next 'if' should never be true, but I am loath to remove it just in case. */
-  if(c->AccessTeam().ReadNbAmmos(contents) != INFINITE_AMMO) {
-    c->AccessTeam().m_nb_ammos[contents] += nbr_ammo;
-    txt << WeaponsList::GetInstance()->GetWeapon(contents)->
-                GetWeaponWinString(c->AccessTeam().GetName().c_str(), nbr_ammo);
+  if (c->AccessTeam().ReadNbAmmos(w_type) != INFINITE_AMMO) {
+    c->AccessTeam().m_nb_ammos[w_type] += weapon_list[weapon_num].nb_ammos;
+    txt << weapon_list[weapon_num].weapon->GetWeaponWinString(c->AccessTeam().GetName().c_str(), weapon_list[weapon_num].nb_ammos);
   } else {
     txt << Format(gettext("%s team already has infinite ammo for the %s!"), //this should never appear
-           c->AccessTeam().GetName().c_str(), WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
+           c->AccessTeam().GetName().c_str(), weapon_list[weapon_num].weapon->GetName().c_str());
   }
   GameMessages::GetInstance()->Add(txt.str());
 }
@@ -112,8 +121,8 @@ bool BonusBox::ExplodesInsteadOfBonus(Character * c)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // Static methods
-uint BonusBox::weapon_count = 0;
-std::map<int,std::pair<Weapon*,int> > BonusBox::weapon_map;
+double BonusBox::total_probability;
+std::vector<struct WeaponProba> BonusBox::weapon_list;
 
 /* Weapon probabilities could possibily be stored in the weapon section of classic.xml
   and retrieved by weapon.GetBonusProbability() and weapon.GetBonusAmmo()
@@ -121,37 +130,47 @@ std::map<int,std::pair<Weapon*,int> > BonusBox::weapon_map;
 */
 void BonusBox::LoadXml(const xmlpp::Element * object)
 {
+  total_probability = 0;
+  struct WeaponProba w;
+  w.nb_ammos = 0;
+  w.probability = 0;
+
   XmlReader::ReadInt(object, "life_points", start_life_points);
   object = XmlReader::GetMarker(object, "probability");
   std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList();
   std::list<Weapon*>::iterator
-      itw = l_weapons_list.begin(),
-      end = l_weapons_list.end();
+    itw = l_weapons_list.begin(),
+    end = l_weapons_list.end();
   xmlpp::Element *elem;
-  uint a = 0;
-  int prob = 0;
-  int ammo = 0;
+
   for(; itw != end; ++itw) {
-    XmlReader::ReadInt(object, (*itw)->GetID().c_str(), prob);
-    elem = XmlReader::GetMarker(object, (*itw)->GetID());
-    if(elem != NULL)
-      XmlReader::ReadIntAttr (elem, "ammo", ammo);
-    if((*itw)->ReadInitialNbAmmo() == INFINITE_AMMO) {
-      prob = 0;
+    w.weapon = *itw;
+
+    XmlReader::ReadDouble(object, w.weapon->GetID().c_str(), w.probability);
+    if (w.probability == 0.0) {
+      std::cerr << "No bonus probability defined for weapon "
+		<< w.weapon->GetID().c_str() << std::endl;
+      continue;
     }
-    for(a = weapon_count; a < weapon_count+prob; ++a) {
-      weapon_map[a]=std::make_pair<Weapon*,int>(*itw,ammo);
+    total_probability += w.probability;
+
+    elem = XmlReader::GetMarker(object, w.weapon->GetID());
+    ASSERT(elem != NULL);
+    XmlReader::ReadIntAttr (elem, "ammo", w.nb_ammos);
+
+    if ((*itw)->ReadInitialNbAmmo() == INFINITE_AMMO) {
+      w.probability = 0;
     }
-    weapon_count+=prob;
+    MSG_DEBUG("bonus","+ %s: %f", w.weapon->GetName().c_str(), w.probability);
+    weapon_list.push_back(w);
   }
+  ASSERT(total_probability != 0.0);
 }
 
 void BonusBox::GetValueFromAction(Action * a)
 {
   ObjBox::GetValueFromAction(a);
-  weapon_num = a->PopInt();
-  contents = (weapon_map[weapon_num].first)->GetType();
-  nbr_ammo = weapon_map[weapon_num].second;
+  weapon_num = (uint)(a->PopInt());
 }
 
 void BonusBox::Randomize()
@@ -162,5 +181,5 @@ void BonusBox::Randomize()
 void BonusBox::StoreValue(Action * a)
 {
   ObjBox::StoreValue(a);
-  a->Push(weapon_num);
+  a->Push(int(weapon_num));
 }
