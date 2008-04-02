@@ -225,7 +225,7 @@ bool NetworkConnectionMenu::signal_ok()
       goto out;
     }
 
-    conn = Network::GetInstance()->ServerStart(port_number->GetText());
+    conn = Network::GetInstance()->ServerStart(port_number->GetText(), "");
     if( conn != CONNECTED)
     {
       DisplayNetError(conn);
@@ -248,7 +248,7 @@ bool NetworkConnectionMenu::signal_ok()
     break;
 
   case NET_CONNECT_LOCAL: // Direct connexion to a server
-    conn = Network::ClientStart(server_address->GetText(), port_number->GetText());
+    conn = Network::ClientStart(server_address->GetText(), port_number->GetText(), "");
     if (!Network::IsConnected() || conn != CONNECTED) {
       DisplayNetError(conn);
 

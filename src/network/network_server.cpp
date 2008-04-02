@@ -23,6 +23,7 @@
 //-----------------------------------------------------------------------------
 #include <SDL_thread.h>
 #include "include/action_handler.h"
+#include "include/constant.h"
 #include "game/game_mode.h"
 #include "tool/debug.h"
 #include "network/distant_cpu.h"
@@ -38,7 +39,7 @@
 
 //-----------------------------------------------------------------------------
 
-NetworkServer::NetworkServer()
+NetworkServer::NetworkServer(const std::string& password) : Network(password)
 {
 #ifdef LOG_NETWORK
   fin = open("./network_server.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
@@ -57,7 +58,7 @@ void NetworkServer::SendChatMessage(const std::string& txt)
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + std::string("> ") + txt));
 }
 
-void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
+void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
 {
   // Repeat the packet to other clients:
   if (a->GetType() != Action::ACTION_RULES_SEND_VERSION
@@ -69,7 +70,7 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
     int packet_size;
     a->WritePacket(packet, packet_size);
 
-    for (std::list<DistantComputer*>::iterator client = cpu.begin();
+    for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
          client != cpu.end();
          client++)
       if (*client != sender)
@@ -82,6 +83,11 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
+bool NetworkServer::HandShake(DistantComputer& /* client */)
+{
+  return true;
+}
+
 void NetworkServer::WaitActionSleep()
 {
   if (server_socket)
@@ -90,7 +96,14 @@ void NetworkServer::WaitActionSleep()
     TCPsocket incoming = SDLNet_TCP_Accept(server_socket);
     if (incoming)
     {
-      cpu.push_back(new DistantComputer(incoming));
+      DistantComputer * client = new DistantComputer(incoming);
+
+      if (!HandShake(*client)) {
+	delete client;
+	return;
+      }
+
+      cpu.push_back(client);
       printf("New client connected\n");
       if (GetNbConnectedPlayers() >= max_nb_players)
         RejectIncoming();

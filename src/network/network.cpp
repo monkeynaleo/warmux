@@ -69,7 +69,7 @@ bool Network::stop_thread = true;
 Network * Network::GetInstance()
 {
   if (singleton == NULL) {
-    singleton = new   NetworkLocal();
+    singleton = new NetworkLocal();
     MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkLocal'\n", singleton);
   }
   return singleton;
@@ -83,7 +83,8 @@ NetworkServer * Network::GetInstanceServer()
   return (NetworkServer*)singleton;
 }
 
-Network::Network():
+Network::Network(const std::string& passwd):
+  password(passwd),
   turn_master_player(false),
   state(NO_NETWORK),// useless value at beginning
   thread(NULL),
@@ -445,10 +446,11 @@ uint Network::GetPort() const
 //-----------------------------------------------------------------------------
 
 // Static method
-connection_state_t Network::ClientStart(const std::string &host,
-                                        const std::string& port)
+connection_state_t Network::ClientStart(const std::string& host,
+                                        const std::string& port,
+					const std::string& password)
 {
-  NetworkClient* net = new NetworkClient();
+  NetworkClient* net = new NetworkClient(password);
   MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkClient'\n", net);
 
   // replace current singleton
@@ -474,9 +476,9 @@ connection_state_t Network::ClientStart(const std::string &host,
 //-----------------------------------------------------------------------------
 
 // Static method
-connection_state_t Network::ServerStart(const std::string& port)
+connection_state_t Network::ServerStart(const std::string& port, const std::string& password)
 {
-  NetworkServer* net = new NetworkServer();
+  NetworkServer* net = new NetworkServer(password);
   MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkServer'\n", net);
 
   // replace current singleton
