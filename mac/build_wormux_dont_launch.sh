@@ -72,7 +72,7 @@ if [ ! -e ${SOURCE_DIR} ] ; then
 else
 	cd ${SOURCE_DIR};
 	export OLD_SVN=`svn info | grep Revision | cut -d ' ' -f 2`;
-	svn up;
+	#svn up;
 fi
 
 export NEW_SVN=`svn info | grep Revision | cut -d ' ' -f 2`
