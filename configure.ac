@@ -95,6 +95,7 @@ case "${host}" in
      ;;
   *cygwin*) WIN32="yes" ;;
   *-apple-darwin*)
+     OSX="yes"
      LIBS="$LIBS -Wl,-framework,Carbon"
      ;;
   *) WIN32="no" ;;
@@ -212,11 +213,22 @@ if test "x$PACKAGE_CONFIG" = "xnone"; then
 fi
 
 dnl === Check for X11 =====================================================
-AC_CHECK_LIB(X11, XOpenDisplay, check_x11="yes", check_x11="no")
-if test x${check_x11} = xyes ; then
-  AC_CHECK_HEADERS(X11/Xlib.h,,check_x11="no")
+dnl Deactivated on purpose under OSX (in case X11 SDK is installed)
+if test "x$OSX" != "xyes" ; then
+  AC_CHECK_HEADER(X11/Xlib.h, check_x11="yes",check_x11="no")
+  if test x${check_x11} = xno ; then
+    AC_CHECK_HEADER(X11R6/Xlib.h,
+                    [ check_x11="yes"
+                      CFLAGS="-L/usr/X11R6/include $CFLAGS"],
+                    check_x11="no")
+  fi
+  if test x${check_x11} = xyes ; then
+    AC_CHECK_LIB(X11, XOpenDisplay,
+                 [ check_x11="yes"
+                   LIBS="$LIBS -lX11"],
+                 check_x11="no")
+  fi
 fi
-if test x${check_x11} = xyes ; then LIBS="$LIBS -lX11" ; fi
 
 dnl === Check for FriBidi =================================================
 AC_ARG_ENABLE(fribidi, AC_HELP_STRING([--enable-fribidi], [enable bi-directional unicode support]) )
@@ -368,11 +380,8 @@ AM_CONFIG_HEADER(src/config.h)
 
 AC_OUTPUT
 
-if test "${WIN32}" = "yes"; then INSTALL_OP="build NSIS installer..."
-else INSTALL_OP="install..."; fi
-
-   echo "Configuration complete"
-   echo ""
+echo "Configuration complete"
+echo ""
 if test "$enable_autopackage" = "yes"; then
    echo "Use autopackage for file locations"
 else
@@ -383,4 +392,8 @@ else
    echo "* [[Optional]] Bi-directional rendering : ${enable_fribidi:-no}"
 fi
 echo ""
-echo "Execute make to compile then execute make install to $INSTALL_OP"
+echo "Execute make to compile then execute make install to install..."
+
+if test "${WIN32}" = "yes"; then
+   echo "Alternatively, type make setup to build an installer"
+fi
