@@ -28,8 +28,7 @@
 class NetworkClient : public Network
 {
 protected:
-  bool HandShake(DistantComputer& server);
-
+  connection_state_t HandShake(TCPsocket& server_socket);
   virtual void HandleAction(Action* a, DistantComputer* sender) const;
   virtual void WaitActionSleep() {};
 

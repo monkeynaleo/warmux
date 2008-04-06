@@ -52,8 +52,6 @@ public:
 
     // ########################################################
     // To be sure that rules will be the same on each computer
-    ACTION_RULES_ASK_VERSION,
-    ACTION_RULES_SEND_VERSION,
     ACTION_RULES_SET_GAME_MODE,
 
     // ########################################################

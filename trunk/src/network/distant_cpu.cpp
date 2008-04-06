@@ -40,7 +40,6 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
   sock(new_sock),
   owned_teams(),
   state(DistantComputer::STATE_ERROR),
-  version_checked(false),
   force_disconnect(false),
   nickname("this is not initialized")
 {
@@ -55,17 +54,16 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
   {
     int size;
     char* pack;
-    Action c(Action::ACTION_RULES_ASK_VERSION);
-    c.Push(Constants::WORMUX_VERSION);
-    c.WritePacket(pack, size);
-    SendDatas(pack, size);
-    free(pack);
+
+    MSG_DEBUG("network", "Server: Sending map information");
 
     Action a(Action::ACTION_MENU_SET_MAP);
     MapsList::GetInstance()->FillActionMenuSetMap(a);
     a.WritePacket(pack, size);
     SendDatas(pack, size);
     free(pack);
+
+    MSG_DEBUG("network", "Server: Sending teams information");
 
     // Teams infos of already connected computers
     for(TeamsList::iterator team = GetTeamsList().playing_list.begin();
@@ -84,8 +82,8 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
 
 DistantComputer::~DistantComputer()
 {
-  if (version_checked)
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAddress()));
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAddress()));
+
   if (force_disconnect)
     std::cerr << GetAddress() << " have been kicked" << std::endl;
 

@@ -558,50 +558,73 @@ void Network::Send(TCPsocket& socket, const std::string &str)
 int Network::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
 {
   char packet[4];
+  int r = 0;
+  Uint32 u_nbr;
 
-  if (SDLNet_CheckSockets(sock_set, 5000) == 0)
-    return -1;
+  if (SDLNet_CheckSockets(sock_set, 5000) == 0) {
+    r = 1;
+    goto out;
+  }
 
-  if (!SDLNet_SocketReady(socket))
-    return -1;
+  if (!SDLNet_SocketReady(socket)) {
+    r = -1;
+    goto out;
+  }
 
   if (SDLNet_TCP_Recv(socket, packet, sizeof(packet)) < 1)
   {
-    return -2;
+    r = -2;
+    goto out;
   }
 
-  Uint32 u_nbr = SDLNet_Read32(packet);
+  u_nbr = SDLNet_Read32(packet);
   nbr = *((int*)&u_nbr);
 
-  return 0;
+ out:
+  MSG_DEBUG("network", "r = %d", r);
+  return r;
 }
 
 int Network::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &_str)
 {
-  int r, size = 0;
-  r = ReceiveInt(sock_set, socket, size);
-  if (r)
-    return r;
+  int r;
+  uint size = 0;
+  char* str;
 
-  if (size <= 0)
-    return -1;
+  r = ReceiveInt(sock_set, socket, (int&)size);
+  if (r) {
+    goto out;
+  }
 
-  if (SDLNet_CheckSockets(sock_set, 5000) == 0)
-    return -1;
+  if (size == 0) {
+    _str = "";
+    goto out;
+  }
 
-  if (!SDLNet_SocketReady(socket))
-    return -1;
+  if (SDLNet_CheckSockets(sock_set, 5000) == 0) {
+    r = -1;
+    goto out;
+  }
 
-  char* str = new char[size+1];
+  if (!SDLNet_SocketReady(socket)) {
+    r = -1;
+    goto out;
+  }
+
+  str = new char[size+1];
   if( SDLNet_TCP_Recv(socket, str, size) < 1 )
   {
-    delete[] str;
-    return -2;
+    r = -2;
+    goto out_delete;
   }
 
   str[size] = '\0';
 
   _str = str;
+
+ out_delete:
   delete []str;
-  return 0;
+ out:
+  MSG_DEBUG("network", "r = %d", r);
+  return r;
 }
