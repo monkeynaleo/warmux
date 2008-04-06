@@ -101,7 +101,7 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
   delete[] buffer;
   return ret;
 }
-#elif defined(HAVE_X11_XLIB_H)
+#elif USE_X11
 static char* getSelection(Display *dpy, Window us, Atom selection)
 {
   int    max_events = 50;
