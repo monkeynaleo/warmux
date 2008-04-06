@@ -15,4 +15,8 @@ make clean
 make -w
 
 cd mac 
-./build_wormux_dont_launch.sh
+# Macports / Fink
+# Fink : comment the second line
+# Macports : comment the first line
+./build_wormux_fink.sh
+#./build_wormux_macports.sh
