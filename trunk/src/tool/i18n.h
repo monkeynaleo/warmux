@@ -35,7 +35,7 @@
 
 #ifdef USE_FRIBIDI
 #define _(X) localization(X)
-char * localization(char * buffer);
+char * localization(const char * buffer);
 #else
 #define _(X) gettext(X)
 #endif /* USE_FRIBIDI */

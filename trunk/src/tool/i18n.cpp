@@ -35,7 +35,7 @@ FriBidiCharType pbase_dir = FRIBIDI_TYPE_ON;
 FriBidiChar unicode_buffer[16384];
 char buffer[16384];
 
-char * localization(char * message) {
+char * localization(const char * message) {
   char * string = gettext(message);
   int l = strlen(string);
   int l_u;
