@@ -57,7 +57,6 @@ class DistantComputer
   int packet_received;
   char* packet;
 public:
-  bool version_checked;
   bool force_disconnect;
 
   DistantComputer(TCPsocket new_sock);

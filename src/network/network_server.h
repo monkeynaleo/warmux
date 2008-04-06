@@ -31,7 +31,7 @@ class NetworkServer : public Network
   TCPsocket server_socket; // Wait for incoming connections on this socket
 
 protected:
-  bool HandShake(DistantComputer& client);
+  bool HandShake(TCPsocket& client_socket);
   virtual void HandleAction(Action* a, DistantComputer* sender) const;
   virtual void WaitActionSleep();
 

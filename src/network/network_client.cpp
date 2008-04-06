@@ -23,9 +23,13 @@
 //-----------------------------------------------------------------------------
 #include <SDL_thread.h>
 #include "include/action_handler.h"
+#include "include/constant.h"
 #include "game/game_mode.h"
-#include "tool/debug.h"
+#include "menu/network_menu.h"
 #include "network/distant_cpu.h"
+#include "network/net_error_msg.h"
+#include "tool/debug.h"
+#include "tool/i18n.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK
@@ -95,9 +99,64 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* sender) const
 
 //-----------------------------------------------------------------------------
 
-bool NetworkClient::HandShake(DistantComputer& /*server*/)
+connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
 {
-  return true;
+  int r, ack;
+  connection_state_t ret = CONN_REJECTED;
+  std::string version;
+
+  MSG_DEBUG("network", "Client: Handshake !");
+
+  // Adding the socket to a temporary socket set
+  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
+  SDLNet_TCP_AddSocket(tmp_socket_set, server_socket);
+
+  // 1) Send the version number
+  MSG_DEBUG("network", "Client: sending version number");
+
+  Network::Send(server_socket, Constants::WORMUX_VERSION);
+
+  // is it ok ?
+  r = Network::ReceiveStr(tmp_socket_set, server_socket, version);
+
+  MSG_DEBUG("network", "Client: server version number is %s", version.c_str());
+
+  if (r)
+    goto error;
+
+  if (Constants::WORMUX_VERSION != version) {
+    std::string str = Format(_("The client and server versions are incompatible "
+			       "(local=%s, server=%s). Please try another server."),
+			     Constants::WORMUX_VERSION.c_str(), version.c_str());
+    Network::GetInstance()->network_menu->DisplayError(str);
+    goto error;
+  }
+
+  // 2) Send the password
+
+  MSG_DEBUG("network", "Client: sending password");
+  Network::Send(server_socket, GetPassword());
+
+  // is it ok ?
+  r = Network::ReceiveInt(tmp_socket_set, server_socket, ack);
+  if (r)
+    goto error;
+
+  if (ack) {
+    ret = CONN_WRONG_PASSWORD;
+    goto error;
+  }
+
+  MSG_DEBUG("network", "Client: Handshake done successfully :)");
+  ret = CONNECTED;
+
+ error:
+  if (ret != CONNECTED)
+    std::cerr << "Client: HandShake with server has failed!" << std::endl;
+
+  SDLNet_TCP_DelSocket(tmp_socket_set, server_socket);
+  SDLNet_FreeSocketSet(tmp_socket_set);
+  return ret;
 }
 
 connection_state_t
@@ -131,14 +190,13 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
     return CONN_REJECTED;
   }
 
+  r = HandShake(socket);
+  if (r != CONNECTED)
+    return r;
+
   socket_set = SDLNet_AllocSocketSet(1);
 
   DistantComputer * server = new DistantComputer(socket);
-
-  if (!HandShake(*server)) {
-    delete server;
-    return CONN_WRONG_PASSWORD;
-  }
 
   cpu.push_back(server);
   //Send nickname to server

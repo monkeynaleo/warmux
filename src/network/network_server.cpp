@@ -61,8 +61,7 @@ void NetworkServer::SendChatMessage(const std::string& txt)
 void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
 {
   // Repeat the packet to other clients:
-  if (a->GetType() != Action::ACTION_RULES_SEND_VERSION
-      && a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
+  if (a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
       && a->GetType() != Action::ACTION_NETWORK_CHECK_PHASE2
       && a->GetType() != Action::ACTION_CHAT_MESSAGE)
   {
@@ -83,9 +82,66 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
-bool NetworkServer::HandShake(DistantComputer& /* client */)
+bool NetworkServer::HandShake(TCPsocket& client_socket)
 {
-  return true;
+  int r;
+  bool ret = false;
+  std::string version;
+  std::string _password;
+
+  MSG_DEBUG("network", "server: Handshake!");
+
+  // Adding the socket to a temporary socket set
+  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
+  SDLNet_TCP_AddSocket(tmp_socket_set, client_socket);
+
+  // 1) Receive the version number
+  MSG_DEBUG("network", "Server: waiting for client version number");
+
+  r = Network::ReceiveStr(tmp_socket_set, client_socket, version);
+  if (r) {
+    std::cerr << "Error " << r << " when receiving version number"
+	      << std::endl;
+    goto error;
+  }
+
+  MSG_DEBUG("network", "Server: sending version number to client");
+
+  Network::Send(client_socket, Constants::WORMUX_VERSION);
+
+  if (Constants::WORMUX_VERSION != version) {
+    std::cerr << "Client disconnected: wrong version " << version.c_str()
+	     << std::endl;
+    goto error;
+  }
+
+  // 2) Check the password
+  MSG_DEBUG("network", "Server: waiting for password");
+
+  r = Network::ReceiveStr(tmp_socket_set, client_socket, _password);
+  if (r)
+    goto error;
+
+  if (_password != GetPassword()) {
+    std::cerr << "Client disconnected: wrong password " << _password.c_str()
+	      << std::endl;
+    Network::Send(client_socket, 1);
+    goto error;
+  }
+  MSG_DEBUG("network", "Server: password OK");
+
+  Network::Send(client_socket, 0);
+
+  MSG_DEBUG("network", "server: Handshake done successfully :)");
+  ret = true;
+
+ error:
+  if (!ret) {
+    std::cerr << "Server: HandShake with client has failed!" << std::endl;
+  }
+  SDLNet_TCP_DelSocket(tmp_socket_set, client_socket);
+  SDLNet_FreeSocketSet(tmp_socket_set);
+  return ret;
 }
 
 void NetworkServer::WaitActionSleep()
@@ -96,14 +152,14 @@ void NetworkServer::WaitActionSleep()
     TCPsocket incoming = SDLNet_TCP_Accept(server_socket);
     if (incoming)
     {
+      if (!HandShake(incoming))
+ 	return;
+
       DistantComputer * client = new DistantComputer(incoming);
-
-      if (!HandShake(*client)) {
-	delete client;
-	return;
-      }
-
       cpu.push_back(client);
+
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT,
+							 client->GetAddress()));
       printf("New client connected\n");
       if (GetNbConnectedPlayers() >= max_nb_players)
         RejectIncoming();

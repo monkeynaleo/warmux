@@ -306,50 +306,6 @@ void SendGameMode()
   Network::GetInstance()->SendAction(&a);
 }
 
-void Action_Rules_AskVersion (Action *a)
-{
-  if (!Network::GetInstance()->IsClient()) return;
-
-  bool will_disconnect = false;
-  std::string server_version = "UNKNOWN";
-  if (a->IsEmpty()) {
-    // the server is an old wormux server (0.7.9 to 0.8beta4)
-    will_disconnect = true;
-  } else {
-    std::string server_version = a->PopString();
-    if (server_version != Constants::WORMUX_VERSION) {
-      will_disconnect = true;
-    }
-  }
-
-  if (will_disconnect) {
-    std::string str = Format(_("The client and server versions are incompatible (local=%s, server=%s). Please try another server."),
-			     Constants::WORMUX_VERSION.c_str(), server_version.c_str());
-    Network::GetInstance()->network_menu->DisplayError(str);
-  }
-
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_SEND_VERSION, Constants::WORMUX_VERSION));
-}
-
-void Action_Rules_SendVersion (Action *a)
-{
-  if (!Network::GetInstance()->IsServer()) return;
-  std::string version= a->PopString();
-  ASSERT(a->creator != NULL);
-
-  if (version != Constants::WORMUX_VERSION)
-  {
-    a->creator->force_disconnect = true;
-    std::string str = Format(_("%s tries to connect with a different version : client=%s, me=%s."),
-                               a->creator->GetAddress().c_str(), version.c_str(), Constants::WORMUX_VERSION.c_str());
-    Network::GetInstance()->network_menu->ReceiveMsgCallback(str);
-    Network::GetInstance()->network_menu->DisplayError(str);
-    return;
-  }
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT, a->creator->GetAddress()));
-  a->creator->version_checked = true;
-}
-
 // ########################################################
 
 void Action_ChatMessage (Action *a)
@@ -836,8 +792,6 @@ ActionHandler::ActionHandler():
 
   // ########################################################
   // To be sure that rules will be the same on each computer
-  Register (Action::ACTION_RULES_ASK_VERSION, "RULES_ask_version", &Action_Rules_AskVersion);
-  Register (Action::ACTION_RULES_SEND_VERSION, "RULES_send_version", &Action_Rules_SendVersion);
   Register (Action::ACTION_RULES_SET_GAME_MODE, "RULES_set_game_mode", &Action_Rules_SetGameMode);
 
   // ########################################################
