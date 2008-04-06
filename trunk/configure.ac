@@ -219,14 +219,14 @@ if test "x$OSX" != "xyes" ; then
   if test x${check_x11} = xno ; then
     AC_CHECK_HEADER(X11R6/Xlib.h,
                     [ check_x11="yes"
-                      CFLAGS="-L/usr/X11R6/include $CFLAGS"],
+                      LDFLAGS="-L/usr/X11R6/include $CFLAGS"],
                     check_x11="no")
   fi
   if test x${check_x11} = xyes ; then
     AC_CHECK_LIB(X11, XOpenDisplay,
-                 [ check_x11="yes"
-                   LIBS="$LIBS -lX11"],
-                 check_x11="no")
+                 [ LIBS="$LIBS -lX11"
+                   AC_DEFINE(USE_X11, 1, [Define to use X11 copy'n'paste]) ],
+                 [])
   fi
 fi
 
