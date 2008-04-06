@@ -10,7 +10,9 @@
 #ifdef DEBUG
 #  include <stdlib.h>
 #endif
-
+#ifdef _WIN32
+#  define random rand  // random more secure but unavailable under Windows
+#endif
 
 // the year that time has as base; although time(2)
 // says the reference is 1970, tests show is 1900. WHY?
