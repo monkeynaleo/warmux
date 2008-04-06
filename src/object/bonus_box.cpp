@@ -132,8 +132,6 @@ void BonusBox::LoadXml(const xmlpp::Element * object)
 {
   total_probability = 0;
   struct WeaponProba w;
-  w.nb_ammos = 0;
-  w.probability = 0;
 
   XmlReader::ReadInt(object, "life_points", start_life_points);
   object = XmlReader::GetMarker(object, "probability");
@@ -146,8 +144,7 @@ void BonusBox::LoadXml(const xmlpp::Element * object)
   for(; itw != end; ++itw) {
     w.weapon = *itw;
 
-    XmlReader::ReadDouble(object, w.weapon->GetID().c_str(), w.probability);
-    if (w.probability == 0.0) {
+    if (!XmlReader::ReadDouble(object, w.weapon->GetID().c_str(), w.probability) || w.probability == 0.0) {
       std::cerr << "No bonus probability defined for weapon "
 		<< w.weapon->GetID().c_str() << std::endl;
       continue;
