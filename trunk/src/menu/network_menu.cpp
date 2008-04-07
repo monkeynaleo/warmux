@@ -408,6 +408,7 @@ void NetworkMenu::WaitingForServer()
             Menu::mouse_cancel();
             break;
           case SDLK_RETURN:
+          case SDLK_KP_ENTER:
             SendChatMsg();
             break;
           case SDLK_F10:

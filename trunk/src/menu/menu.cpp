@@ -218,7 +218,8 @@ void Menu::Run (bool skip_menu)
 	bool used_by_widget = false;
 
 	if (event.key.keysym.sym != SDLK_ESCAPE &&
-	    event.key.keysym.sym != SDLK_RETURN)
+	    event.key.keysym.sym != SDLK_RETURN &&
+	    event.key.keysym.sym != SDLK_KP_ENTER)
 	  used_by_widget = widgets.SendKey(event.key.keysym);
 
 	if (!used_by_widget) {
@@ -228,6 +229,7 @@ void Menu::Run (bool skip_menu)
 	      key_cancel();
 	      break;
 	    case SDLK_RETURN:
+	    case SDLK_KP_ENTER:
 	      key_ok();
 	      break;
 	    case SDLK_UP:
