@@ -146,29 +146,47 @@ echo "Copying executable from           ${SOURCE_DIR}/src"
 echo "Stripping executable              ${PROG_NAME}"
 /usr/bin/strip ${MACOS_TARGET}/${PROG_NAME}
 
+
 # Copy the .dylibs that are linked by the program
- echo "Copying the shared libraries to   ${MACOS_TARGET}"
- for i in `${OTOOL} -L ${MACOS_TARGET}/${PROG_NAME} | grep version | cut -f 1 -d ' ' | grep -v \/System\/Library | grep -v \/usr\/lib` ; do
-   ${CP} -p ${i} ${MACOS_TARGET};
-   echo "Copied `basename ${i}`";
-   ${INSTALL_NAME_TOOL} -id @executable_path/`basename ${i}`  ${MACOS_TARGET}/`basename ${i}`;
-   ${INSTALL_NAME_TOOL} -change ${i} @executable_path/`basename ${i}` ${MACOS_TARGET}/${PROG_NAME};
-# now check paths for other libraries linked by the copied libraries.
-   for j in `${OTOOL} -L ${i} | grep version | cut -f 1 -d ' '| grep -v ${i} | grep -v \/System\/Library | grep -v \/usr\/lib` ; do
-     if [ ! -e `basename ${j}` ] ; then
-     ${CP} -p ${j} ${MACOS_TARGET};
-     ${INSTALL_NAME_TOOL} -id @executable_path/`basename ${j}` ${MACOS_TARGET}/`basename ${j}`;
-    for k in `${OTOOL} -L ${j} | grep version | cut -f 1 -d ' '| grep -v ${j} | grep -v \/System\/Library | grep -v \/usr\/lib` ; do
-    if [ ! -e `basename ${k}` ] ; then
-        ${CP} -p ${k} ${MACOS_TARGET};
-        ${INSTALL_NAME_TOOL} -id @executable_path/`basename ${k}` ${MACOS_TARGET}/`basename ${k}`;
-    fi
-    ${INSTALL_NAME_TOOL} -change ${k} @executable_path/`basename ${k}` ${MACOS_TARGET}/`basename ${j}`;
+echo "Copying the shared libraries to   ${MACOS_TARGET}"
+for i in `${OTOOL} -L ${MACOS_TARGET}/${PROG_NAME} | grep version | cut -f 1 -d ' ' | grep -v \/System\/Library | grep -v \/usr\/lib` ; do
+    ${CP} -p ${i} ${MACOS_TARGET};
+    echo "Copied `basename ${i}`";
+    ${INSTALL_NAME_TOOL} -change ${i} @executable_path/`basename ${i}` ${MACOS_TARGET}/${PROG_NAME};
+    echo "Changed `basename ${i}` in ${PROG_NAME}";
+    # now check paths for other libraries linked by the copied libraries.
+    for j in `${OTOOL} -L ${i} | grep version | cut -f 1 -d ' '| grep -v ${i} | grep -v \/System\/Library | grep -v \/usr\/lib` ; do
+        if [ ! -e ${MACOS_TARGET}/`basename ${j}` ] ; then
+            ${CP} -p ${j} ${MACOS_TARGET};
+            echo "  Copied `basename ${j}`";
+            for k in `${OTOOL} -L ${j} | grep version | cut -f 1 -d ' '| grep -v ${j} | grep -v \/System\/Library | grep -v \/usr\/lib` ; do
+                if [ ! -e ${MACOS_TARGET}/`basename ${k}` ] ; then
+                    ${CP} -p ${k} ${MACOS_TARGET};
+                    echo "    Copied `basename ${k}`";
+                    for l in `${OTOOL} -L ${j} | grep version | cut -f 1 -d ' '| grep -v ${j} | grep -v \/System\/Library | grep -v \/usr\/lib` ; do
+                        if [ ! -e ${MACOS_TARGET}/`basename ${l}` ] ; then
+                            ${CP} -p ${l} ${MACOS_TARGET};
+                            echo "      Copied `basename ${l}`";
+                        fi
+                    done
+                fi
+            done
+        fi
+    done
 done
-    fi
-      ${INSTALL_NAME_TOOL} -change ${j} @executable_path/`basename ${j}` ${MACOS_TARGET}/`basename ${i}`;
-     done
+
+# Fix the install locations for the dylibs
+echo "Modifying the linked libraries in ${MACOS_TARGET}"
+for b in `${LS} -1 ${MACOS_TARGET}/*.dylib` ; do
+    echo "Modifying `basename ${b}`"
+    ${INSTALL_NAME_TOOL} -id @executable_path/`basename ${b}` ${MACOS_TARGET}/`basename ${b}`;
+    for c in `otool -L ${b} | grep version | cut -f 1 -d ' ' | grep -v \`basename ${b}\` | grep -v \/System\/Library | grep -v \/usr\/lib` ; do
+        ${INSTALL_NAME_TOOL} -change ${c} @executable_path/`basename ${c}` ${MACOS_TARGET}/`basename ${b}`;
+        echo "  Changed `basename ${c}` in `basename ${b}`";
+    done
 done
+
+
 
 # Create resources directory
 echo "Creating Resources target         ${RSC_TARGET}"
