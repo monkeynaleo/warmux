@@ -106,7 +106,7 @@ msgstr "%s lé mort à koz son 2 mains gauches..."
 msgid "%s is next to a mine!"
 msgstr "%s lé près d'une mine !"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s na n'a déjà munition pou l'arme %s en quantité illimité !"
@@ -365,13 +365,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'équipe %s a gagné %u !"
 msgstr[1] "L'équipe %s a gagné %u !"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-"%s... Hein, ou'te client et serveur na point la même version de Wormux : "
-"client=%s, serveur=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(kapoute)"
@@ -381,7 +374,7 @@ msgstr "(kapoute)"
 msgid "(system language)"
 msgstr "ça c'est la langue du système"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -530,7 +523,7 @@ msgstr "ça c'est controllé par:"
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "* Na un n'affaire y s'ar pas ek le son:"
@@ -858,12 +851,12 @@ msgstr "Musique ?"
 msgid "Network Game"
 msgstr "Jeu en réseau"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Prépare lo rézo"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Jeu en réseau"
@@ -1003,7 +996,7 @@ msgstr "Passer son tour"
 msgid "Sniper Rifle"
 msgstr "Fusil sniper"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1080,13 +1073,6 @@ msgstr "La roquette que lé automatique la barré ailleurs ..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La balle ki rebondi la sorte du champs de bataille avant lu pête."
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "La connexion terminé. Vérifi na point de firewall !"
@@ -1114,6 +1100,11 @@ msgstr "La roquette la fané ..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "Le serveur la envoy'e chié oute connexion"
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Le serveur la envoy'e chié oute connexion"
 
 #: src/menu/network_menu.cpp:236
@@ -1167,7 +1158,7 @@ msgstr "Impossible d'ouvrir le répertoire des terrains (%s)!"
 msgid "Unable to use this port!"
 msgstr "Impossible d'utiliser ce port !"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "pas de nom"
 
@@ -1299,6 +1290,11 @@ msgstr "o Profile son en train'e charger : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr ""
+#~ "%s... Hein, ou'te client et serveur na point la même version de Wormux : "
+#~ "client=%s, serveur=%s."
 
 #~ msgid "And the winner is..."
 #~ msgstr "Voilà quissa la gagné..."

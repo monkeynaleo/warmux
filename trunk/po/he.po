@@ -102,7 +102,7 @@ msgstr "%s מת כי הוא שלומיאל!"
 msgid "%s is next to a mine!"
 msgstr "%s סמוך למוקש!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "לצוות %s יש כבר תחמושת בלתי מוגבלת עבור ה-%s!"
@@ -355,11 +355,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "צוות %s זכה ב-%u משגר טאקס! אף פעם לא ראית פינגווין מעופף?"
 msgstr[1] "צוות %s זכה ב-%u משגרי טאקס! אף פעם לא ראית פינגווין מעופף?"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s מנסה להתחבר לגרסה אחרת: לקוח=%s, אני=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(מת)"
@@ -369,7 +364,7 @@ msgstr "(מת)"
 msgid "(system language)"
 msgstr "(שפת מערכת)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -519,7 +514,7 @@ msgstr "מבוקר על ידי:"
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "לא ניתן לטעון הגדרות"
@@ -844,12 +839,12 @@ msgstr "מוסיקה?"
 msgid "Network Game"
 msgstr "משחק רשת"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "אתחול רשת"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "משחק רשת"
@@ -990,7 +985,7 @@ msgstr "דלג על תור"
 msgid "Sniper Rifle"
 msgstr "רובה צלפים"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1064,13 +1059,6 @@ msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 msgid "The ball left the battlefield before exploding"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "זמן ההמתנה לחיבור עבר. בדוק אם אין חומת-אש שמפריעה!"
@@ -1098,6 +1086,11 @@ msgstr "הרקטה יצאה משדה הקרב..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "השרת סירב לבקשת החיבור."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "השרת סירב לבקשת החיבור."
 
 #: src/menu/network_menu.cpp:236
@@ -1153,7 +1146,7 @@ msgstr "לא ניתן לפתוח את תיקיית המפות האישית (%s)!
 msgid "Unable to use this port!"
 msgstr "לא ניתן להשתמש בפורט זה!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "ללא שם"
 
@@ -1285,6 +1278,9 @@ msgstr "o טוען פרופיל סאונד: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s מנסה להתחבר לגרסה אחרת: לקוח=%s, אני=%s."
 
 #~ msgid "And the winner is..."
 #~ msgstr "והמנצח..."

@@ -104,7 +104,7 @@ msgstr "%s stirbt durch seine Tollpatschigkeit!"
 msgid "%s is next to a mine!"
 msgstr "%s ist neben einer Mine!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Team %s hat bereits unendlich Munition für %s!"
@@ -383,12 +383,6 @@ msgstr[1] ""
 "Mannschaft %s hat %u Tux-Werfer gewonnen! Noch keinen fliegenden Pinguin "
 "gesehen?"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-"%s versucht mit einer anderen Version zu verbinden: Client=%s, Server=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(tot)"
@@ -398,7 +392,7 @@ msgstr "(tot)"
 msgid "(system language)"
 msgstr "(System Sprache)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr "(unbekannte Zeit)"
 
@@ -550,7 +544,7 @@ msgstr "Gesteuert von: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Konnte die neuste Version von %s nicht abrufen"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "konnte Konfiguration nicht laden"
@@ -881,12 +875,12 @@ msgstr "Musik?"
 msgid "Network Game"
 msgstr "Netzwerkspiel"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Netzwerk Initialisierung"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 msgid "New network game at "
 msgstr "Neues Netzwerkspiel um "
 
@@ -1025,7 +1019,7 @@ msgstr "Runde überspringen"
 msgid "Sniper Rifle"
 msgstr "Scharfschützengewehr"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Eine Sprengfalle wurde in einer Holzkiste versteckt."
 
@@ -1102,15 +1096,6 @@ msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Der Ball hat das Schlachtfeld verlassen bevor er explodieren konnte."
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-"Die Versionen von Client und Server sind inkompatibel (local=%s, server=%s). "
-"Versuche es mit einem anderen Server."
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1142,6 +1127,11 @@ msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "Der Server hat die Verbindung zurückgesetzt."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Der Server hat die Verbindung zurückgesetzt."
 
 #: src/menu/network_menu.cpp:236
@@ -1197,7 +1187,7 @@ msgstr "Kann das persönliche Karten-Verzeichnis (%s) nicht öffnen!"
 msgid "Unable to use this port!"
 msgstr "Kann diesen Port nicht verwenden!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "Namenlos"
 
@@ -1329,6 +1319,17 @@ msgstr "o Lade Sound Profil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr ""
+#~ "%s versucht mit einer anderen Version zu verbinden: Client=%s, Server=%s."
+
+#~ msgid ""
+#~ "The client and server versions are incompatible (local=%s, server=%s). "
+#~ "Please try another server."
+#~ msgstr ""
+#~ "Die Versionen von Client und Server sind inkompatibel (local=%s, server=%"
+#~ "s). Versuche es mit einem anderen Server."
 
 #~ msgid "And the winner is..."
 #~ msgstr "Und der Gewinner ist..."

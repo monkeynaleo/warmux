@@ -113,7 +113,7 @@ msgstr "%s je mrtev, ker je bil neroden!"
 msgid "%s is next to a mine!"
 msgstr "%s je blizu mine!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Ekipa %s že ima neskončno streliva za %s!"
@@ -438,11 +438,6 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u SuperTux-ov! Še niste videli letečega pingvina?"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mrtev)"
@@ -452,7 +447,7 @@ msgstr "(mrtev)"
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr "(čas ni znan)"
 
@@ -603,7 +598,7 @@ msgstr "Vodja: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Ni bilo mogoče pridobiti zadnje različice iz %s"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Ni bilo mogoče odpreti datoteke %s"
@@ -936,12 +931,12 @@ msgstr "Glasba?"
 msgid "Network Game"
 msgstr "Omrežna igra"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Inicializacija omrežja"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 msgid "New network game at "
 msgstr "Nova omrežna igra ob"
 
@@ -1080,7 +1075,7 @@ msgstr "Preskoči potezo"
 msgid "Sniper Rifle"
 msgstr "Ostrostrelska puška"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nekdo je v zaboj podtaknil bombo!"
 
@@ -1153,15 +1148,6 @@ msgstr "Avtomatska raketa je zapustila bojišče..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Žoga je zapustila bojišče preden je eksplodirala"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-"Različice odjemalca in strežnika niso združljive (odjemalec=%s, strežnik=%"
-"s)! Prosimo poskusite z drugim strežnikom."
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Povezava se je iztekla. Preverite da ni kriv požarni zid!"
@@ -1189,6 +1175,11 @@ msgstr "Raketa je zapustila bojišče..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "Strežnik je zavrnil povezavo."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Strežnik je zavrnil povezavo."
 
 #: src/menu/network_menu.cpp:236
@@ -1246,7 +1237,7 @@ msgstr "Ni bilo mogoče odpreti zasebnega imenika s kartami (%s)!"
 msgid "Unable to use this port!"
 msgstr "Ni bilo mogoče uporabiti teh vrat!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "Brezimjek"
 
@@ -1380,6 +1371,16 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
+
+#~ msgid ""
+#~ "The client and server versions are incompatible (local=%s, server=%s). "
+#~ "Please try another server."
+#~ msgstr ""
+#~ "Različice odjemalca in strežnika niso združljive (odjemalec=%s, strežnik=%"
+#~ "s)! Prosimo poskusite z drugim strežnikom."
 
 #~ msgid "And the winner is..."
 #~ msgstr "In zmagali so ..."

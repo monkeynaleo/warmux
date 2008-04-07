@@ -97,7 +97,7 @@ msgstr "%s egy kicsit ügyefogyott volt, ezért távozott az élõk sorából!"
 msgid "%s is next to a mine!"
 msgstr "%s egy taposóakna mellett ténfereg!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "A(z) %s csapatnak végtelen lõszere van a(z) %s fegyverhez!"
@@ -388,11 +388,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s eltérõ verzióval próbál csatlakozni: kliens=%s, helyi=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(halott)"
@@ -402,7 +397,7 @@ msgstr "(halott)"
 msgid "(system language)"
 msgstr ""
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -551,7 +546,7 @@ msgstr ""
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -870,12 +865,12 @@ msgstr "Zene"
 msgid "Network Game"
 msgstr "Hálózati játék"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Hálózat elõkészítése"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Hálózati játék"
@@ -1022,7 +1017,7 @@ msgstr "Forduló kihagyása"
 msgid "Sniper Rifle"
 msgstr "Mesterlövészpuska"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1096,13 +1091,6 @@ msgstr "Az autómatikus rakéta elhagyta a csatamezõt..."
 msgid "The ball left the battlefield before exploding"
 msgstr "A labda elhagyta a csatateret robbanás elõtt"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1131,6 +1119,11 @@ msgstr "A rakéta elhagyta a csatateret..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "A szerver elutasította a kapcsolatot."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "A szerver elutasította a kapcsolatot."
 
 #: src/menu/network_menu.cpp:236
@@ -1178,7 +1171,7 @@ msgstr "Nem sikerült megnyitni a pályák könyvtárát (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nem sikerült megnyitni a portot!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr ""
 
@@ -1313,6 +1306,9 @@ msgstr "Hangprofil betöltése: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Hangminõség: %d Hz, %d bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s eltérõ verzióval próbál csatlakozni: kliens=%s, helyi=%s."
 
 #~ msgid "Hurry up, you are too slow !!"
 #~ msgstr "Siess, túl lassú vagy!!"

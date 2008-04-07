@@ -107,7 +107,7 @@ msgstr "%s ir miris, jo bija pārāk neveikls!"
 msgid "%s is next to a mine!"
 msgstr "%s ir nokļuvis blakus mīnai!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s komandai jau ir bezgalīgs daudzums munīcijas priekš %s!"
@@ -391,12 +391,6 @@ msgstr[0] "%s komanda ir ieguvusi %u tux šāvēju!"
 msgstr[1] "%s komanda ir ieguvusi %u tux šāvējus!"
 msgstr[2] "%s komanda ir ieguvusi %u tux šāvējus!"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-"%s mēģina pieslēgties ar atšķirīgu programmas versiju : klientam=%s, man=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mirusi)"
@@ -406,7 +400,7 @@ msgstr "(mirusi)"
 msgid "(system language)"
 msgstr ""
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -556,7 +550,7 @@ msgstr "Kontrolē: "
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -886,12 +880,12 @@ msgstr "Mūzika?"
 msgid "Network Game"
 msgstr "Tīkla spēle"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Tīkla inicializācija"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Tīkla spēle"
@@ -1034,7 +1028,7 @@ msgstr "Izlaist gājienu"
 msgid "Sniper Rifle"
 msgstr "Snaiperšautene"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1108,13 +1102,6 @@ msgstr "Automātiksā raķete izgāja no spēles laukuma..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bumba nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Savienojuma noildze. Pārbaudiet vai tam netraucē ugunssiena!"
@@ -1142,6 +1129,11 @@ msgstr "Raķete izgāja no spēles laukuma..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "Serveris noraidīja savienojumu."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Serveris noraidīja savienojumu."
 
 #: src/menu/network_menu.cpp:236
@@ -1198,7 +1190,7 @@ msgstr "Nevar atvērt karšu mapi (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nevar izmantot šo portu!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr ""
 
@@ -1333,6 +1325,11 @@ msgstr "o Ielādē skaņas profilu: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Atver skaņu %d Hz %d bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr ""
+#~ "%s mēģina pieslēgties ar atšķirīgu programmas versiju : klientam=%s, man=%"
+#~ "s."
 
 #~ msgid "And the winner is..."
 #~ msgstr "Un uzvarētājs ir..."

@@ -106,7 +106,7 @@ msgstr "%s проявява сапьорска предпазливост..."
 msgid "%s is next to a mine!"
 msgstr "%sе близко до мина!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Ехее, %s вече си имат безкрайни муниции за %s!"
@@ -357,11 +357,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Отборът на %s спечели %u %s !"
 msgstr[1] "Отборът на %s спечели %u %sи !"
 
-#: src/include/action_handler.cpp:343
-#, fuzzy, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(мъртъв)"
@@ -371,7 +366,7 @@ msgstr "(мъртъв)"
 msgid "(system language)"
 msgstr ""
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -519,7 +514,7 @@ msgstr ""
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -844,13 +839,13 @@ msgstr "Музика?"
 msgid "Network Game"
 msgstr "Мрежова игра"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 #, fuzzy
 msgid "Network initialization"
 msgstr "Инициализирам терена..."
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Мрежова игра"
@@ -994,7 +989,7 @@ msgstr "Пропускане на ход"
 msgid "Sniper Rifle"
 msgstr "Снайперистка пушка"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1068,13 +1063,6 @@ msgstr "Пазете се! Смарт-бомба на свобода!"
 msgid "The ball left the battlefield before exploding"
 msgstr "Топката може да попадне в детски ръчички!"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1102,6 +1090,10 @@ msgstr "Ехаааа...."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr ""
+
+#: src/network/net_error_msg.cpp:51
+msgid "The server rejected the connection: wrong password!"
 msgstr ""
 
 #: src/menu/network_menu.cpp:236
@@ -1151,7 +1143,7 @@ msgstr "Не мога да отворя директорията за карти
 msgid "Unable to use this port!"
 msgstr "Kann Server nicht starten!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr ""
 
@@ -1285,6 +1277,10 @@ msgstr "Проблем при зареждането на конфигураци
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#, fuzzy
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
 
 #~ msgid "Hurry up, you are too slow !!"
 #~ msgstr "Хабиш време за убиване за други неща!!!"

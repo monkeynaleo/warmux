@@ -104,7 +104,7 @@ msgstr "%s dog för att han var klumpig!"
 msgid "%s is next to a mine!"
 msgstr "%s står bredvid en mina!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Laget %s har oändligt med ammunition för %s!"
@@ -365,11 +365,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s-laget har vunnit %u tuxkastare! Aldrig sett en flygande pingvin?"
 msgstr[1] "%s-laget har vunnit %u tuxkastare! Aldrig sett en flygande pingvin?"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s försöker ansluta med en annan version : klient=%s, jag=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(död)"
@@ -379,7 +374,7 @@ msgstr "(död)"
 msgid "(system language)"
 msgstr "(systemets språk)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -529,7 +524,7 @@ msgstr "Kontrolleras av: "
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "* Kunde inte öppna ljud: "
@@ -859,12 +854,12 @@ msgstr "Musik?"
 msgid "Network Game"
 msgstr "Nätverksspel"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Nätverkinitiering"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Nätverksspel"
@@ -1006,7 +1001,7 @@ msgstr "Hoppa över omgång"
 msgid "Sniper Rifle"
 msgstr "Prickskyttegevär"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1080,13 +1075,6 @@ msgstr "Den automatiska raketen har lämnat slagfältet..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bollen har lämnat slagfältet innan den exploderade"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1116,6 +1104,11 @@ msgstr "Raketen har lämnat slagfältet..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "Servern nekade anslutningen."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Servern nekade anslutningen."
 
 #: src/menu/network_menu.cpp:236
@@ -1171,7 +1164,7 @@ msgstr "Kunde inte öppna kartkatalogen (%s)!"
 msgid "Unable to use this port!"
 msgstr "Kan inte använda den här porten!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr ""
 
@@ -1305,6 +1298,9 @@ msgstr "o Läser in ljudprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s försöker ansluta med en annan version : klient=%s, jag=%s."
 
 #~ msgid "And the winner is..."
 #~ msgstr "Och vinnaren är..."

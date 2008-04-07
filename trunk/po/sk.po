@@ -108,7 +108,7 @@ msgstr "%s je mŕtvy, pretože bol nemotorný!"
 msgid "%s is next to a mine!"
 msgstr "%s je veľmi blízko míny!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s tím už má nekonečné množstvo nábojov pre %s!"
@@ -382,11 +382,6 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/include/action_handler.cpp:343
-#, fuzzy, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "Wormux verzie sú rozdielne: klient=%s, server=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mŕtvy)"
@@ -396,7 +391,7 @@ msgstr "(mŕtvy)"
 msgid "(system language)"
 msgstr ""
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -543,7 +538,7 @@ msgstr ""
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "Nedá sa inicializovať SDL knižnca: %s"
@@ -862,13 +857,13 @@ msgstr "Hudba?"
 msgid "Network Game"
 msgstr "Sieťová hra"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 #, fuzzy
 msgid "Network initialization"
 msgstr "Inicializuje sa okolie..."
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Sieťová hra"
@@ -1012,7 +1007,7 @@ msgstr "Preskoč kolo"
 msgid "Sniper Rifle"
 msgstr "Sniper puška"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1086,13 +1081,6 @@ msgstr "Automatická raketa opustila bojisko ..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Lopta opustila bojisko pred výbuchom"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Pripojenie vypršalo. Skontroluj či nie je povolený firewall!"
@@ -1121,6 +1109,11 @@ msgstr "Raketa opustila bojisko.."
 #: src/network/net_error_msg.cpp:45
 #, fuzzy
 msgid "The server rejected the connection."
+msgstr "Server odmietol pripojenie."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Server odmietol pripojenie."
 
 #: src/menu/network_menu.cpp:236
@@ -1169,7 +1162,7 @@ msgstr "Nedá sa otvoriť adresár máp (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nedá sa použiť tento port!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr ""
 
@@ -1305,6 +1298,10 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#, fuzzy
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "Wormux verzie sú rozdielne: klient=%s, server=%s."
 
 #~ msgid "Hurry up, you are too slow !!"
 #~ msgstr "Ponáhľaj sa, si príliš pomalý  !!"

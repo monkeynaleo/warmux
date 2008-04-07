@@ -107,7 +107,7 @@ msgstr "%s ha mort!"
 msgid "%s is next to a mine!"
 msgstr "¡%s esta aprop d'una mina!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s es un psicòpata!!, ha mort a un membre des seu equip %s"
@@ -358,12 +358,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'equip %s aconsegueix %u llançador de tux!"
 msgstr[1] "L'equip %s aconsegueix %u llançador de tux!"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-"%s intenta a connectar-se amb una version diferent: client=%s, servidor=%s. "
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mort)"
@@ -373,7 +367,7 @@ msgstr "(mort)"
 msgid "(system language)"
 msgstr "(idioma del sistema)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr "(temps desconegut)"
 
@@ -524,7 +518,7 @@ msgstr "Controlat per:"
 msgid "Couldn't fetch last version from %s"
 msgstr "No s'ha pogut tornar a la versió %s"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "No es va poder obrir l'arxiu %s"
@@ -856,12 +850,12 @@ msgstr "Música?"
 msgid "Network Game"
 msgstr "Joc en xarxa"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Inicialización del xarxa"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 msgid "New network game at "
 msgstr "Nou joc de la xarxa en"
 
@@ -1000,7 +994,7 @@ msgstr "Saltar torn"
 msgid "Sniper Rifle"
 msgstr "Fusell de franctirador"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Algú va posar un parany explosiu camuflat a caixa! "
 
@@ -1079,15 +1073,6 @@ msgstr "El coet automàtic ha anat a altre món... "
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilota ha abandonat el camp de batalla abans d'explotar."
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-"El client i el servidor tenen la versió incompatible (client=%s, servidor=%"
-"s). Porfavor escull un altre servidor. "
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Ha passat el temps de connexió. Mira si no hi ha algun firewall."
@@ -1115,6 +1100,11 @@ msgstr "El coet ha anat a un altre mon..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "El servidor ha rebutjat la connexió."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "El servidor ha rebutjat la connexió."
 
 #: src/menu/network_menu.cpp:236
@@ -1170,7 +1160,7 @@ msgstr "Impossible obrir el directori dels mapes (%s)!"
 msgid "Unable to use this port!"
 msgstr "Impossible usar aquest port!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "Sense nom"
 
@@ -1302,6 +1292,18 @@ msgstr "o Carregant perfil de so: %s "
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Obert àudio a %d Hz %d bit "
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr ""
+#~ "%s intenta a connectar-se amb una version diferent: client=%s, servidor=%"
+#~ "s. "
+
+#~ msgid ""
+#~ "The client and server versions are incompatible (local=%s, server=%s). "
+#~ "Please try another server."
+#~ msgstr ""
+#~ "El client i el servidor tenen la versió incompatible (client=%s, servidor="
+#~ "%s). Porfavor escull un altre servidor. "
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Estar segur que vol sortir? (Y/N)"
