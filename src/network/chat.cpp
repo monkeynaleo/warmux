@@ -117,6 +117,7 @@ void Chat::HandleKey(const SDL_Event& event)
     switch (key.sym){
       
     case SDLK_RETURN:
+    case SDLK_KP_ENTER:
       check_input = false; //Hide input widget
       if ( txt[0] == '/' )
 	ProcessCommand(txt);

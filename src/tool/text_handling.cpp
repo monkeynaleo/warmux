@@ -116,6 +116,7 @@ bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym
   switch (key.sym) {
 
   case SDLK_RETURN:
+  case SDLK_KP_ENTER:
   case SDLK_TAB:
   case SDLK_CLEAR:
   case SDLK_ESCAPE:
