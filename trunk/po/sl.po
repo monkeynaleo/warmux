@@ -1178,9 +1178,8 @@ msgid "The server rejected the connection."
 msgstr "Strežnik je zavrnil povezavo."
 
 #: src/network/net_error_msg.cpp:51
-#, fuzzy
 msgid "The server rejected the connection: wrong password!"
-msgstr "Strežnik je zavrnil povezavo."
+msgstr "Strežnik je zavrnil povezavo: napačno geslo!"
 
 #: src/menu/network_menu.cpp:236
 #, c-format
