@@ -104,7 +104,7 @@ msgstr "%s 的死因是: 太笨 !"
 msgid "%s is next to a mine!"
 msgstr "%s 靠近地雷了!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s 队有无穷的 %s弹夹!"
@@ -355,11 +355,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s 队得到 %u 企鹅发射器! 没见过满天飞的企鹅吗?"
 msgstr[1] "%s 队得到 %u 企鹅发射器! 没见过满天飞的企鹅吗?"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s 试着连接一个不同版本 : client=%s, me=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(死掉的)"
@@ -369,7 +364,7 @@ msgstr "(死掉的)"
 msgid "(system language)"
 msgstr "(系统语言)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -519,7 +514,7 @@ msgstr "控制者: "
 msgid "Couldn't fetch last version from %s"
 msgstr "不能从 %s获取最新版本"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "无法打开文件%s"
@@ -843,12 +838,12 @@ msgstr "音乐?"
 msgid "Network Game"
 msgstr "网络游戏"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "网络初始化"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "网络游戏"
@@ -988,7 +983,7 @@ msgstr "这次我不动."
 msgid "Sniper Rifle"
 msgstr "狙击步枪"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1061,13 +1056,6 @@ msgstr "制导火箭离开战场..."
 msgid "The ball left the battlefield before exploding"
 msgstr "球膨胀前离开战场"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "连接超时. 请检查防火墙!"
@@ -1095,6 +1083,11 @@ msgstr "火箭离开了战场..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "服务器拒绝"
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "服务器拒绝"
 
 #: src/menu/network_menu.cpp:236
@@ -1150,7 +1143,7 @@ msgstr "无法打开个人地图目录 (%s)!"
 msgid "Unable to use this port!"
 msgstr "端口不可用"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "未命名"
 
@@ -1285,6 +1278,9 @@ msgstr "o读取音乐文件 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音乐 %d Hz %d bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s 试着连接一个不同版本 : client=%s, me=%s."
 
 #~ msgid "And the winner is..."
 #~ msgstr "生者是..."

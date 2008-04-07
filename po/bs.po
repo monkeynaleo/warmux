@@ -104,7 +104,7 @@ msgstr "%s je mrtav zato što je smotan!"
 msgid "%s is next to a mine!"
 msgstr "%s je pored mine!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s tim već ima neograničenu municiju za %s!"
@@ -363,11 +363,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s tim je dobio %u tux lanser! Nikad nisi vidio pingvina koji leti?"
 msgstr[1] "%s tim je dobio %u tux lanser! Nikad nisi vidio pingvina koji leti?"
 
-#: src/include/action_handler.cpp:343
-#, fuzzy, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "Wormux verzije su drugačije : klijent=%s, server=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mrtav)"
@@ -377,7 +372,7 @@ msgstr "(mrtav)"
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -527,7 +522,7 @@ msgstr "Kontroliran od strane:"
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -855,13 +850,13 @@ msgstr "Muzika?"
 msgid "Network Game"
 msgstr "Mrežna Igra"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 #, fuzzy
 msgid "Network initialization"
 msgstr "Initalaizacija baze ..."
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Mrežna Igra"
@@ -1004,7 +999,7 @@ msgstr "Preskoči red"
 msgid "Sniper Rifle"
 msgstr "Snajper"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1078,13 +1073,6 @@ msgstr "Automatksa rakete je napustila bojište..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Odskočica je napustila bojište prije nego je explodirala"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Konekcija je istekla. Provjeri da firewall ne stoji na putu!"
@@ -1113,6 +1101,11 @@ msgstr "Raketa je napustila bojište..."
 #: src/network/net_error_msg.cpp:45
 #, fuzzy
 msgid "The server rejected the connection."
+msgstr "Server odbio konekciju."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Server odbio konekciju."
 
 #: src/menu/network_menu.cpp:236
@@ -1168,7 +1161,7 @@ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nije u mogućnosti koristit ovaj port!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "Bezimeni"
 
@@ -1306,6 +1299,10 @@ msgstr "o Učitavam zvučne profile: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "Wormux verzije su drugačije : klijent=%s, server=%s."
 
 #~ msgid "And the winner is..."
 #~ msgstr "I pobjednik je ..."

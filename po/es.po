@@ -107,7 +107,7 @@ msgstr "¡%s se ha muerto porque es más tonto que abundio!"
 msgid "%s is next to a mine!"
 msgstr "¡%s esta cerca de una mina!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "¡el equipo %s ahora tiene municion infinita para %s!"
@@ -371,12 +371,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "¡El equipo %s ha conseguido %u lanzador de Tux!"
 msgstr[1] "¡El equipo %s ha ganado %u lanzadores de Tux!"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-"%s intenta a conectarse con una version diferente: cliente=%s, servidor=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(muerto)"
@@ -386,7 +380,7 @@ msgstr "(muerto)"
 msgid "(system language)"
 msgstr "(idioma del sistema)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr "(tiempo desconocido)"
 
@@ -537,7 +531,7 @@ msgstr "Controlado por: "
 msgid "Couldn't fetch last version from %s"
 msgstr "No se ha podido volver a la versión %s"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "No se pudo abrir el archivo %s"
@@ -868,12 +862,12 @@ msgstr "¿Música?"
 msgid "Network Game"
 msgstr "Juego en red"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Inicialización del red"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 msgid "New network game at "
 msgstr "Nuevo juego de la red en"
 
@@ -1012,7 +1006,7 @@ msgstr "Saltar turno"
 msgid "Sniper Rifle"
 msgstr "Fusil de francotirador"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "¡Alguien puso una trampa explosiva camuflada en la caja!"
 
@@ -1093,15 +1087,6 @@ msgstr "El cohete automático ha ido a otro mundo..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La pelota ha abandonado el campo de batalla antes de explotar."
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-"El cliente y el servidor tienen la versión incompatible (cliente=%s, "
-"servidor=%s). Porfavor elige otro servidor."
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Ha pasado el tiempo de conexión. Mira si no hay algún firewall."
@@ -1129,6 +1114,11 @@ msgstr "El cohete ha ido a otro mundo..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "El servidor ha rechazado la conexión"
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "El servidor ha rechazado la conexión"
 
 #: src/menu/network_menu.cpp:236
@@ -1184,7 +1174,7 @@ msgstr "¡Imposible abrir el directorio personal de mapas (%s)!"
 msgid "Unable to use this port!"
 msgstr "¡Imposible usar este puerto!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "Sin nombre"
 
@@ -1317,6 +1307,18 @@ msgstr "o Cargando perfil de sonido: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Abierto audio a %d Hz %d bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr ""
+#~ "%s intenta a conectarse con una version diferente: cliente=%s, servidor=%"
+#~ "s."
+
+#~ msgid ""
+#~ "The client and server versions are incompatible (local=%s, server=%s). "
+#~ "Please try another server."
+#~ msgstr ""
+#~ "El cliente y el servidor tienen la versión incompatible (cliente=%s, "
+#~ "servidor=%s). Porfavor elige otro servidor."
 
 #~ msgid "And the winner is..."
 #~ msgstr "El ganador es..."

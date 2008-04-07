@@ -106,7 +106,7 @@ msgstr "%s je mrtvý, protože je trdlo!"
 msgid "%s is next to a mine!"
 msgstr "%s šlápl na minu."
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Tým %s již má nekonečně nábojů pro %s!"
@@ -393,11 +393,6 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s se zkoušel připojit s různou verzí: klient=%s, já=%s"
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mrtvý)"
@@ -407,7 +402,7 @@ msgstr "(mrtvý)"
 msgid "(system language)"
 msgstr "(systémový jazyk)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -558,7 +553,7 @@ msgstr "Řízeno:"
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "nepodařilo se načíst konfigurační soubor"
@@ -868,12 +863,12 @@ msgstr "Hudba?"
 msgid "Network Game"
 msgstr "Síťová hra"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr ""
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Síťová hra"
@@ -1014,7 +1009,7 @@ msgstr "Přeskočit tah"
 msgid "Sniper Rifle"
 msgstr "Ostřelovací puška"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1088,13 +1083,6 @@ msgstr ""
 msgid "The ball left the battlefield before exploding"
 msgstr ""
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1122,6 +1110,10 @@ msgstr ""
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr ""
+
+#: src/network/net_error_msg.cpp:51
+msgid "The server rejected the connection: wrong password!"
 msgstr ""
 
 #: src/menu/network_menu.cpp:236
@@ -1169,7 +1161,7 @@ msgstr ""
 msgid "Unable to use this port!"
 msgstr ""
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr ""
 
@@ -1298,6 +1290,9 @@ msgstr "o Načítám hudební profil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otevřena hudba o %d Hz %d bitech"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s se zkoušel připojit s různou verzí: klient=%s, já=%s"
 
 #~ msgid "And the winner is..."
 #~ msgstr "A vítězem se stává..."

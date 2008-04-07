@@ -102,7 +102,7 @@ msgstr "%s døde fordi han klønet det til!"
 msgid "%s is next to a mine!"
 msgstr "%s er i nærheten av en mine !"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s-laget har allere uendelig med ammunisjon for %s !"
@@ -368,12 +368,6 @@ msgstr[0] ""
 msgstr[1] ""
 "%s-laget har vunnet %u Tux-kastere, har du aldri sett en flygende pingvin?"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-"%s prøver å koble til en annen versjon av Wormux : mottager=%s, tjener=%s"
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(død)"
@@ -383,7 +377,7 @@ msgstr "(død)"
 msgid "(system language)"
 msgstr "(systemspråk)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -532,7 +526,7 @@ msgstr "Kontrollert av: "
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "Kunne ikke laste konfigurasjonsfilen"
@@ -852,12 +846,12 @@ msgstr "Musikk ?"
 msgid "Network Game"
 msgstr "Nettverksspill"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Starter nettverk ..."
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Nettverksspill"
@@ -997,7 +991,7 @@ msgstr "Hopp over en runde"
 msgid "Sniper Rifle"
 msgstr "Snikskytterrifle"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1071,13 +1065,6 @@ msgstr "Den laserstyrte raketten forsvant fra kampplassen uten å eksplodere."
 msgid "The ball left the battlefield before exploding"
 msgstr "Sprettballen forsvant fra kampplassen uten å eksplodere."
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1107,6 +1094,11 @@ msgstr "Raketten forsvant fra kampplassen uten å eksplodere."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "Tjeneren nektet tilkoblingen"
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Tjeneren nektet tilkoblingen"
 
 #: src/menu/network_menu.cpp:236
@@ -1160,7 +1152,7 @@ msgstr "kunne ikke åpne den personlige kartmappen (%s) !"
 msgid "Unable to use this port!"
 msgstr "Kunne ikke bruke denne porten  !"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "Uten navn"
 
@@ -1290,6 +1282,10 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Åpnet lyden på %d Hz %d bit"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr ""
+#~ "%s prøver å koble til en annen versjon av Wormux : mottager=%s, tjener=%s"
 
 #~ msgid "And the winner is..."
 #~ msgstr "Og vinneren er..."

@@ -103,7 +103,7 @@ msgstr "%s öldü, çünkü bir beceriksiz!"
 msgid "%s is next to a mine!"
 msgstr "%s bir mayının yanında!"
 
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s takımı zaten %s için sınırsız cephaneye sahip!"
@@ -321,11 +321,6 @@ msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr ""
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(ölü)"
@@ -335,7 +330,7 @@ msgstr "(ölü)"
 msgid "(system language)"
 msgstr ""
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr ""
 
@@ -483,7 +478,7 @@ msgstr ""
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "SDL kütüphanesi başlatılamadı: %s"
@@ -801,13 +796,13 @@ msgstr "Müzik?"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 #, fuzzy
 msgid "Network initialization"
 msgstr "Alan oluşturuluyor..."
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 #, fuzzy
 msgid "New network game at "
 msgstr "Ağ Oyunu"
@@ -951,7 +946,7 @@ msgstr "Sırayı atla"
 msgid "Sniper Rifle"
 msgstr "Suikast Tüfeği"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1025,13 +1020,6 @@ msgstr "Otomatik roket savaş alanını terketti..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Top, patlamadan savaş alanını terketti"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1059,6 +1047,10 @@ msgstr "Roket savaş alanını terketti..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr ""
+
+#: src/network/net_error_msg.cpp:51
+msgid "The server rejected the connection: wrong password!"
 msgstr ""
 
 #: src/menu/network_menu.cpp:236
@@ -1106,7 +1098,7 @@ msgstr "(%s) harita dizini açılamadı!"
 msgid "Unable to use this port!"
 msgstr ""
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr ""
 

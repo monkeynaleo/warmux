@@ -114,7 +114,7 @@ msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
 
 # XXX: having "the" there is not that smart, translations might not make sense.
-#: src/object/bonus_box.cpp:84
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Echipa %s are deja muniție infinită pentru %s!"
@@ -546,11 +546,6 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
 
-#: src/include/action_handler.cpp:343
-#, c-format
-msgid "%s tries to connect with a different version : client=%s, me=%s."
-msgstr "%s încearcă să se conecteze cu o versiune diferită: client=%s, eu=%s."
-
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mort)"
@@ -560,7 +555,7 @@ msgstr "(mort)"
 msgid "(system language)"
 msgstr "(limba sistemului)"
 
-#: src/network/chatlogger.cpp:34
+#: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
 msgstr "(un moment necunoscut)"
 
@@ -713,7 +708,7 @@ msgstr "Controlat de: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Nu s-a putut prelua ultima versiune de la %s"
 
-#: src/network/chatlogger.cpp:62 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Nu a fost posibilă deschiderea fișierului %s"
@@ -1049,12 +1044,12 @@ msgstr "Muzică?"
 msgid "Network Game"
 msgstr "Joc în rețea"
 
-#: src/network/network.cpp:260
+#: src/network/network.cpp:261
 msgid "Network initialization"
 msgstr "Inițializare rețea"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: src/network/chatlogger.cpp:56
 msgid "New network game at "
 msgstr "Un nou joc în rețea pornit la "
 
@@ -1194,7 +1189,7 @@ msgstr "Sare rândul"
 msgid "Sniper Rifle"
 msgstr "Pușcă cu lunetă"
 
-#: src/object/bonus_box.cpp:74
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Cineva a pus o capcană în cutie!"
 
@@ -1267,15 +1262,6 @@ msgstr "Racheta automată a părăsit câmpul de luptă ..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Mingea a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/include/action_handler.cpp:326
-#, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-"Versiunile de client și de server sunt incompatibile (local=%s, server=%s). "
-"Încercați alt server."
-
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1305,6 +1291,11 @@ msgstr "Racheta a părăsit câmpul de luptă..."
 
 #: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
+msgstr "Serverul a refuzat conexiunea."
+
+#: src/network/net_error_msg.cpp:51
+#, fuzzy
+msgid "The server rejected the connection: wrong password!"
 msgstr "Serverul a refuzat conexiunea."
 
 #: src/menu/network_menu.cpp:236
@@ -1361,7 +1352,7 @@ msgstr "Nu a fost posibilă deschiderea directorului personal cu hărți (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nu a fost posibilă folosirea acestui port!"
 
-#: src/network/network.cpp:109
+#: src/network/network.cpp:110
 msgid "Unnamed"
 msgstr "Fără nume"
 
@@ -1497,6 +1488,17 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr ""
+#~ "%s încearcă să se conecteze cu o versiune diferită: client=%s, eu=%s."
+
+#~ msgid ""
+#~ "The client and server versions are incompatible (local=%s, server=%s). "
+#~ "Please try another server."
+#~ msgstr ""
+#~ "Versiunile de client și de server sunt incompatibile (local=%s, server=%"
+#~ "s). Încercați alt server."
 
 #~ msgid "And the winner is..."
 #~ msgstr "Iar câștigătorul este..."
