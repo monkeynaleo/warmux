@@ -94,7 +94,7 @@ bool Team::LoadCharacters()
 
     // Load XML
     nomfich = m_teams_dir+m_id+PATH_SEPARATOR+ "team.xml";
-    if (!IsFileExist(nomfich)) return false;
+    if (!DoesFileExist(nomfich)) return false;
     if (!doc.Load(nomfich)) return false;
 
     // Create the characters

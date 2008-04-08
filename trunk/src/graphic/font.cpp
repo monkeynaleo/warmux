@@ -86,7 +86,7 @@ Font::Font(int size):
 {
   const std::string filename = Config::GetInstance()->GetTtfFilename();
 
-  if (IsFileExist(filename))
+  if (DoesFileExist(filename))
     {
       m_font = TTF_OpenFont(filename.c_str(), size);
 

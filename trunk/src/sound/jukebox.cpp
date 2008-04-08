@@ -170,7 +170,7 @@ void JukeBox::LoadMusicXML()
   // Load the XML
   std::string folder = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "music" + PATH_SEPARATOR;
   std::string xml_filename = folder + "profile.xml";
-  if( !IsFileExist(xml_filename) )
+  if( !DoesFileExist(xml_filename) )
   {
     std::cerr << "[Music] Error : file " << xml_filename
               << " not found" << std::endl;
@@ -197,7 +197,7 @@ void JukeBox::LoadMusicXML()
 
     // Load sound
     std::string filename = folder + file;
-    if( !IsFileExist(filename) ){
+    if( !DoesFileExist(filename) ){
       std::cerr << "Music error: File " << filename.c_str()
                 << " does not exist !" << std::endl;
       continue;
@@ -210,11 +210,11 @@ void JukeBox::LoadMusicXML()
     {
       if(line[0] == '#') continue;
 
-      if(!IsFileExist(line))
+      if(!DoesFileExist(line))
       {
         // This line comes from an XML file, thus path separator here is "/"
         line = filename.substr(0, filename.find_last_of("/")) + PATH_SEPARATOR + line;
-        if(!IsFileExist(line))
+        if(!DoesFileExist(line))
         {
           std::cerr << "[Music] Unable to find " << line << " music file." << std::endl;
           continue;
@@ -344,7 +344,7 @@ void JukeBox::LoadXML(const std::string& profile)
   std::string folder = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR
                      + "sound"+ PATH_SEPARATOR + profile + PATH_SEPARATOR;
   std::string xml_filename = folder + "profile.xml";
-  if( !IsFileExist(xml_filename) )
+  if( !DoesFileExist(xml_filename) )
   {
     std::cerr << "[Sound] Error : file " << xml_filename
               << " not found" << std::endl;
@@ -372,7 +372,7 @@ void JukeBox::LoadXML(const std::string& profile)
 
     // Load sound
     std::string sample_filename = folder + file;
-    if( !IsFileExist(sample_filename) )
+    if( !DoesFileExist(sample_filename) )
     {
       std::cerr << "Sound error: File " << sample_filename.c_str()
                 << " does not exist !" << std::endl;

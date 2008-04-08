@@ -69,7 +69,7 @@ void InfoMap::LoadBasicInfo()
       std::string nomfich = m_directory + "config.xml";
 
       // Load resources
-      if (!IsFileExist(nomfich))
+      if (!DoesFileExist(nomfich))
         throw _("no configuration file!");
       // FIXME: not freed
       res_profile = resource_manager.LoadXMLProfile(nomfich, true);

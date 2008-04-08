@@ -24,7 +24,7 @@
 #include "include/base.h"
 
 // Check if a file exists
-bool IsFileExist(const std::string &name);
+bool DoesFileExist(const std::string &name);
 
 // Check if the folder exists
 bool IsFolderExist(const std::string &name);
