@@ -30,6 +30,23 @@
 
 #ifdef USE_FRIBIDI
 #include <fribidi/fribidi.h>
+
+/** Needed because fribidi2 doesn't export those symbols in the 0.19.1 release */
+#define fribidi_utf8_to_unicode FRIBIDI_NAMESPACE(utf8_to_unicode)
+#define fribidi_unicode_to_utf8 FRIBIDI_NAMESPACE(unicode_to_utf8)
+extern "C" {
+FriBidiStrIndex fribidi_utf8_to_unicode (
+  const char *s,
+  FriBidiStrIndex length,
+  FriBidiChar *us
+);
+FRIBIDI_ENTRY FriBidiStrIndex fribidi_unicode_to_utf8 (
+  const FriBidiChar *us,
+  FriBidiStrIndex length,
+  char *s
+);
+};
+
 FriBidiCharType pbase_dir = FRIBIDI_TYPE_ON;
 
 FriBidiChar unicode_buffer[16384];
@@ -41,7 +58,7 @@ char * localization(const char * message) {
   int l_u;
   l_u = fribidi_utf8_to_unicode(string, l, unicode_buffer);
   fribidi_log2vis(unicode_buffer, l_u, &pbase_dir, unicode_buffer, NULL, NULL, NULL);
-  fribidi_unicode_to_utf8(unicode_buffer, l, (char *)buffer);
+  fribidi_unicode_to_utf8(unicode_buffer, l_u, (char *)buffer);
   return buffer;
 }
 #endif /* USE_FRIBIDI */
