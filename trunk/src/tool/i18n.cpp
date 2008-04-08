@@ -31,6 +31,7 @@
 #ifdef USE_FRIBIDI
 #include <fribidi/fribidi.h>
 
+#if defined(FRIBIDI_MINOR_VERSION) && FRIBIDI_MINOR_VERSION == 19
 /** Needed because fribidi2 doesn't export those symbols in the 0.19.1 release */
 #define fribidi_utf8_to_unicode FRIBIDI_NAMESPACE(utf8_to_unicode)
 #define fribidi_unicode_to_utf8 FRIBIDI_NAMESPACE(unicode_to_utf8)
@@ -46,6 +47,7 @@ FRIBIDI_ENTRY FriBidiStrIndex fribidi_unicode_to_utf8 (
   char *s
 );
 };
+#endif
 
 FriBidiCharType pbase_dir = FRIBIDI_TYPE_ON;
 
