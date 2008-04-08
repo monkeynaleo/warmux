@@ -24,6 +24,9 @@
 #include "gui/box.h"
 #include "gui/picture_widget.h"
 #include "menu/help_menu.h"
+#include "game/config.h"
+#include "tool/resource_manager.h"
+#include "tool/xml_document.h"
 
 static const uint BORDER        = 20;
 static const uint CHECKBOX_SIZE = 50;
@@ -33,7 +36,16 @@ HelpMenu::HelpMenu()  :
 {
   Point2i size = AppWormux::GetInstance()->video->window.GetSize()
                - Point2i(2*BORDER,2*BORDER+CHECKBOX_SIZE);
-  PictureWidget *help_image = new PictureWidget(size, "help/help_shortkeys", true);
+
+  std::string lang = Config::GetInstance()->GetLanguage();
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  xmlpp::Element *elem = resource_manager.GetElement (res, "surface", "help/help_shortkeys_" + lang);
+  std::string filename;
+  if (elem == NULL || !res->doc->ReadStringAttr(elem, "file", filename))
+    lang = "en";
+  resource_manager.UnLoadXMLProfile(res);
+  PictureWidget *help_image = new PictureWidget(size, "help/help_shortkeys_" + lang, true);
+
   VBox *help = new VBox(size.x);
   help->SetXY(BORDER, BORDER);
   help->AddWidget(help_image);
