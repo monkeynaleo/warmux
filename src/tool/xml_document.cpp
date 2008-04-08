@@ -27,7 +27,7 @@
 
 bool XmlReader::Load(const std::string &filename)
 {
-  if( !IsFileExist(filename) )
+  if( !DoesFileExist(filename) )
      return false;
 
   // Activate DTD validation parser

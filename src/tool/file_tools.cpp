@@ -33,7 +33,7 @@
 #include "tool/i18n.h"
 
 // Test if a file exists
-bool IsFileExist(const std::string &name)
+bool DoesFileExist(const std::string &name)
 {
   std::ifstream f(name.c_str());
   bool exist = f.good();

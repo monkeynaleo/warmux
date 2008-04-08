@@ -192,10 +192,10 @@ bool GameMode::Load(void)
     // Game mode objects configuration file
     fullname = config->GetPersonalDataDir() + GetObjectsFilename();
 
-    if(!IsFileExist(fullname))
+    if(!DoesFileExist(fullname))
       fullname = config->GetDataDir() + GetObjectsFilename();
 
-    if(!IsFileExist(fullname)) {
+    if(!DoesFileExist(fullname)) {
       Error(Format("Can not find file %s\n", fullname.c_str()));
       return false;
     }
@@ -208,10 +208,10 @@ bool GameMode::Load(void)
     XmlReader doc;
     fullname = config->GetPersonalDataDir() + GetFilename();
 
-    if(!IsFileExist(fullname))
+    if(!DoesFileExist(fullname))
       fullname = config->GetDataDir() + GetFilename();
 
-    if(!IsFileExist(fullname)) {
+    if(!DoesFileExist(fullname)) {
       Error(Format("Can not find file %s\n", fullname.c_str()));
       return false;
     }
@@ -274,7 +274,7 @@ bool GameMode::ExportFileToString(const std::string& filename, std::string& cont
     XmlReader doc;
     fullname = Config::GetInstance()->GetPersonalDataDir() + filename;
 
-    if (!IsFileExist(fullname))
+    if (!DoesFileExist(fullname))
       fullname = Config::GetInstance()->GetDataDir() + filename;
     if (!doc.Load(fullname))
       return false;
