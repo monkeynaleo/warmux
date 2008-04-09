@@ -136,7 +136,6 @@ OptionMenu::OptionMenu() :
 
   Box * all_sound_options = new GridBox(SOUND_W, option_size, false);
 
-  uint max_vol = Config::GetMaxVolume();
   volume_music = new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
 					   option_size,
                                            fromVolume(Config::GetInstance()->GetVolumeMusic()), 5,
