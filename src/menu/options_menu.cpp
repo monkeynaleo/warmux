@@ -139,14 +139,14 @@ OptionMenu::OptionMenu() :
   uint max_vol = Config::GetMaxVolume();
   volume_music = new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
 					   option_size,
-                                           Config::GetInstance()->GetVolumeMusic(), max_vol/16,
-                                           0, max_vol);
+                                           fromVolume(Config::GetInstance()->GetVolumeMusic()), 5,
+                                           0, 100);
   all_sound_options->AddWidget(volume_music);
 
   volume_effects = new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
 					     option_size,
-                                             Config::GetInstance()->GetVolumeEffects(), max_vol/16,
-                                             0, max_vol);
+                                             fromVolume(Config::GetInstance()->GetVolumeEffects()), 5,
+                                             0, 100);
   all_sound_options->AddWidget(volume_effects);
 
   // Generate sound mode list
@@ -260,8 +260,8 @@ void OptionMenu::SaveOptions()
   config->SetCheckUpdates(opt_updates->GetValue());
 
   // Sound settings
-  config->SetVolumeMusic(volume_music->GetValue());
-  config->SetVolumeEffects(volume_effects->GetValue());
+  config->SetVolumeMusic(toVolume(volume_music->GetValue()));
+  config->SetVolumeEffects(toVolume(volume_effects->GetValue()));
   config->SetSoundFrequency(cbox_sound_freq->GetIntValue());
 
   AppWormux * app = AppWormux::GetInstance();
@@ -333,3 +333,15 @@ void OptionMenu::CheckUpdates()
     std::cerr << Format(_("Version verification failed because: %s\n"), err);
   }
 }
+
+uint OptionMenu::toVolume(uint level)
+{
+  return (level * Config::GetMaxVolume() + 50) / 100;
+}
+
+uint OptionMenu::fromVolume(uint vol)
+{
+  uint max = Config::GetMaxVolume();
+  return (vol*100 + max/2) / max;
+}
+
