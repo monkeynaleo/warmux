@@ -75,7 +75,7 @@ AppWormux::AppWormux():
   video(new Video()),
   menu(NULL)
 {
-  jukebox.Init();
+  JukeBox::GetInstance()->Init();
 
   cout << "[ " << _("Run game") << " ]" << endl;
 }
@@ -235,7 +235,7 @@ void AppWormux::End() const
    * the whole stuff just before exiting... This should be moved, but where? */
   Config::GetInstance()->Save();
 
-  jukebox.End();
+  JukeBox::GetInstance()->End();
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
@@ -307,7 +307,7 @@ void ParseArgs(int argc, char * argv[])
                  " [-l [ip/hostname]]\n", argv[0]);
 #ifdef DEBUG
           printf("\nWith :\n");
-          printf(" <debug_msg> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body_anim | body.state | bonus | box | camera.follow | camera.tracking | character | damage | downloader | explosion | game | game.endofturn | game_mode | game.statechange | ghost | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.play | lst_objects | map | map.load | map.random | menu | mine | mouse | network | network.crc | network.crc_bad | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | physic.sync | random | random.get | socket | sprite | team | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | wind }\n");
+          printf(" <debug_msg> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body_anim | body.state | bonus | box | camera.follow | camera.tracking | character | damage | downloader | explosion | game | game.endofturn | game_mode | game.statechange | ghost | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | JukeBox::GetInstance()->play | lst_objects | map | map.load | map.random | menu | mine | mouse | network | network.crc | network.crc_bad | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | physic.sync | random | random.get | socket | sprite | team | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | wind }\n");
 #endif
           exit(0);
           break;

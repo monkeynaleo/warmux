@@ -104,7 +104,7 @@ void Game::Start()
 
   try
   {
-    jukebox.PlayMusic(ActiveMap()->ReadMusicPlaylist());
+    JukeBox::GetInstance()->PlayMusic(ActiveMap()->ReadMusicPlaylist());
 
     isGameLaunched = true;
 
@@ -113,12 +113,12 @@ void Game::Start()
     isGameLaunched = false;
 
     MSG_DEBUG( "game", "End of game_loop.Run()" );
-    jukebox.StopAll();
+    JukeBox::GetInstance()->StopAll();
 
     UnloadDatas();
 
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-    jukebox.PlayMusic("menu");
+    JukeBox::GetInstance()->PlayMusic("menu");
 
   }
   catch (const std::exception &e)
@@ -141,7 +141,7 @@ void Game::UnloadDatas() const
   lst_objects.FreeMem();
   ParticleEngine::Stop();
   GetTeamsList().UnloadGamingData();
-  jukebox.StopAll();
+  JukeBox::GetInstance()->StopAll();
 }
 
 bool Game::IsGameLaunched() const{
@@ -659,7 +659,7 @@ void Game::SignalCharacterDeath (const Character *character) const
     } else if (state == PLAYING) {
       txt = Format(_("%s has fallen off the map!"),
                    character -> GetName().c_str());
-       jukebox.Play(ActiveTeam().GetSoundProfile(), "out");
+       JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "out");
 
       // The playing character killed hisself
     } else {
@@ -721,7 +721,7 @@ int Game::NbrRemainingTeams() const
 
 bool Game::MenuQuitPause() const
 {
-  jukebox.Pause();
+  JukeBox::GetInstance()->Pause();
 
   if (!Network::IsConnected()) // partial bugfix of #10679
     Time::GetInstance()->Pause();
@@ -733,7 +733,7 @@ bool Game::MenuQuitPause() const
   if (!Network::IsConnected()) // partial bugfix of #10679
     Time::GetInstance()->Continue();
 
-  jukebox.Resume();
+  JukeBox::GetInstance()->Resume();
 
   return exit;
 }

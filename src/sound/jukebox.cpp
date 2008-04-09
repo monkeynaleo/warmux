@@ -31,8 +31,6 @@
 #include "tool/file_tools.h"
 #include "tool/xml_document.h"
 
-JukeBox jukebox;
-
 JukeBox::JukeBox()
   : music(NULL)
   , m_init(false)
@@ -58,9 +56,9 @@ void JukeBox::Resume() const
 
 void JukeBox::Init()
 {
-  jukebox.ActiveMusic(Config::GetInstance()->GetSoundMusic());
-  jukebox.ActiveEffects(Config::GetInstance()->GetSoundEffects());
-  jukebox.SetFrequency(Config::GetInstance()->GetSoundFrequency());
+  JukeBox::GetInstance()->ActiveMusic(Config::GetInstance()->GetSoundMusic());
+  JukeBox::GetInstance()->ActiveEffects(Config::GetInstance()->GetSoundEffects());
+  JukeBox::GetInstance()->SetFrequency(Config::GetInstance()->GetSoundFrequency());
 
   if (!m_config.music && !m_config.effects) {
     End();
@@ -231,21 +229,22 @@ void JukeBox::LoadMusicXML()
 
 void JukeBox::EndMusic()
 {
-  if(!jukebox.music)
+  JukeBox *jukebox = JukeBox::GetInstance();
+  if(!jukebox->music)
     return;
 
-  Mix_FreeMusic(jukebox.music);
-  jukebox.music = 0;
+  Mix_FreeMusic(jukebox->music);
+  jukebox->music = 0;
 
-  if(!jukebox.UseMusic() || !jukebox.IsPlayingMusic())
+  if(!jukebox->UseMusic() || !jukebox->IsPlayingMusic())
     return;
 
-  if((jukebox.playing_music+1) == jukebox.playing_pl->second.end())
-    jukebox.playing_music = jukebox.playing_pl->second.begin();
+  if((jukebox->playing_music+1) == jukebox->playing_pl->second.end())
+    jukebox->playing_music = jukebox->playing_pl->second.begin();
   else
-    ++jukebox.playing_music;
+    ++jukebox->playing_music;
 
-  jukebox.PlayMusicSample(jukebox.playing_music);
+  jukebox->PlayMusicSample(jukebox->playing_music);
 
   return;
 }
@@ -463,11 +462,12 @@ int JukeBox::PlaySample (Mix_Chunk * sample, int loop)
 
 void JukeBox::EndChunk(int channel)
 {
-  Mix_Chunk* chk = jukebox.chunks[channel];
+  JukeBox *jukebox = JukeBox::GetInstance();
+  Mix_Chunk* chk = jukebox->chunks[channel];
 
   if(!chk) return;
 
   //Mix_FreeChunk(chk);
-  jukebox.m_cache.FreeChunk( chk );
-  jukebox.chunks[channel] = 0;
+  jukebox->m_cache.FreeChunk( chk );
+  jukebox->chunks[channel] = 0;
 }

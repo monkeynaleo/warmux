@@ -69,7 +69,7 @@ void SubMachineGunBullet::RandomizeShoot(double &angle,double &/*strength*/)
 
 void SubMachineGunBullet::ShootSound()
 {
-  jukebox.Play("share", "weapon/m16");
+  JukeBox::GetInstance()->Play("share", "weapon/m16");
 }
 
 //-----------------------------------------------------------------------------

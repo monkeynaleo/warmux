@@ -102,7 +102,7 @@ WeaponProjectile * Shotgun::GetProjectileInstance()
 
 void Shotgun::ShootSound() const
 {
-  jukebox.Play("share", "weapon/shotgun");
+  JukeBox::GetInstance()->Play("share", "weapon/shotgun");
 }
 
 void Shotgun::IncMissedShots()

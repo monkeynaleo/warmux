@@ -56,7 +56,7 @@ protected:
 #endif
 
         // fake explosion 
-        jukebox.Play( "share", "weapon/cluzooka_shot" );
+        JukeBox::GetInstance()->Play( "share", "weapon/cluzooka_shot" );
         ParticleEngine::AddExplosionSmoke( pos, 
             50, 
             ParticleEngine::LittleESmoke );

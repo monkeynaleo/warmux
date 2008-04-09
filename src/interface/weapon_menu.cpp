@@ -218,7 +218,7 @@ void WeaponsMenu::Show()
       motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
     show = true;
 
-    jukebox.Play("share", "menu/weapon_menu_show");
+    JukeBox::GetInstance()->Play("share", "menu/weapon_menu_show");
   }
 }
 
@@ -233,7 +233,7 @@ void WeaponsMenu::Hide(bool play_sound)
     show = false;
 
     if (play_sound)
-      jukebox.Play("share", "menu/weapon_menu_hide");
+      JukeBox::GetInstance()->Play("share", "menu/weapon_menu_hide");
   }
 }
 

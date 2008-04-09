@@ -110,7 +110,7 @@ void Anvil::PlayFallSound()
 void Anvil::PlayCollisionSound()
 {
   falling_sound.Stop();
-  jukebox.Play("share", "weapon/anvil_collision");
+  JukeBox::GetInstance()->Play("share", "weapon/anvil_collision");
 }
 
 //-----------------------------------------------------------------------------

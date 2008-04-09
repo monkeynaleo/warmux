@@ -54,7 +54,7 @@ GunBullet::GunBullet(ExplosiveWeaponConfig& cfg,
 
 void GunBullet::ShootSound()
 {
-  jukebox.Play("share","weapon/gun");
+  JukeBox::GetInstance()->Play("share","weapon/gun");
 }
 
 //-----------------------------------------------------------------------------

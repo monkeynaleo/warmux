@@ -31,6 +31,7 @@
 #include <SDL_mixer.h>
 
 #include "include/base.h"
+#include "include/singleton.h"
 #include "sample_cache.h"
 
 //-----------------------------------------------------------------------------
@@ -67,7 +68,7 @@
  * -Progs
  */
 
-class JukeBox
+class JukeBox : public Singleton<JukeBox>
 {
 private:
   /* If you need this, implement it (correctly) */
@@ -108,8 +109,11 @@ private:
 
   bool PlayMusicSample(const std::vector<std::string>::const_iterator& file);
 
-public:
+protected:
   JukeBox();
+  friend class Singleton<JukeBox>;
+
+public:
   void Init();
   void End();
 
@@ -164,7 +168,5 @@ private:
    */
   int PlaySample (Mix_Chunk * sample, int loop=0);
 };
-
-extern JukeBox jukebox;
 //-----------------------------------------------------------------------------
 #endif

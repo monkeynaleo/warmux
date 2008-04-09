@@ -116,7 +116,7 @@ void FireParticle::Draw()
 void FireParticle::SignalDrowning()
 {
   m_left_time_to_live = 0;
-  // jukebox.Play("share","fire/pschiit");
+  // JukeBox::GetInstance()->Play("share","fire/pschiit");
 }
 
 void FireParticle::SignalOutOfMap()

@@ -74,13 +74,13 @@ void GameClassic::RefreshClock()
 
       case PLAYING:
         if (duration <= 1) {
-	  jukebox.Play("share", "end_turn");
+	  JukeBox::GetInstance()->Play("share", "end_turn");
 	  SetState(END_TURN);
         } else {
           duration--;
           Interface::GetInstance()->UpdateTimer(duration);
 	  if (duration <= 5) {
-	    jukebox.Play("share", "time/bip");
+	    JukeBox::GetInstance()->Play("share", "time/bip");
 	  }
         }
         break;

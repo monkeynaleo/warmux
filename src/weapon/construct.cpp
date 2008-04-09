@@ -87,7 +87,7 @@ bool Construct::p_Shoot ()
 {
   if(!target_chosen)
     return false;
-  jukebox.Play("share", "weapon/construct");
+  JukeBox::GetInstance()->Play("share", "weapon/construct");
   world.MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
 
   target_chosen = false; // ensure next shoot cannot be done pressing key space
