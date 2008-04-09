@@ -448,6 +448,7 @@ int JukeBox::PlaySample (Mix_Chunk * sample, int loop)
 {
   if (loop != -1) loop--;
 
+  Mix_VolumeChunk(sample, Config::GetInstance()->GetVolumeEffects());
   int channel = Mix_PlayChannel(-1, sample, loop);
 
   if (channel == -1)

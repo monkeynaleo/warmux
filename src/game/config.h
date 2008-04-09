@@ -110,6 +110,11 @@ public:
   uint GetSoundFrequency() const { return sound_frequency; };
   void SetSoundFrequency(const uint freq) { sound_frequency = freq; };
 
+  uint GetVolumeMusic() const { return volume_music; }
+  void SetVolumeMusic(uint vol);
+  uint GetVolumeEffects() const { return volume_effects; }
+  void SetVolumeEffects(uint vol) { volume_effects = vol; }
+
   bool GetCheckUpdates() const { return check_updates; }
   void SetCheckUpdates(const bool check) { check_updates = check; }
 
@@ -173,6 +178,9 @@ protected:
   bool sound_music;
   bool sound_effects;
   uint sound_frequency;
+  uint volume_music;
+  uint volume_effects;
+
   // network
   bool enable_network;
   bool check_updates;

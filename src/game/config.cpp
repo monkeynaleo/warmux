@@ -123,6 +123,9 @@ Config::Config():
   transparency(ALPHA),
   config_set()
 {
+  // Set audio volume
+  volume_music = JukeBox::GetMaxVolume();
+  volume_effects = JukeBox::GetMaxVolume();
 
 #ifdef USE_AUTOPACKAGE
   BrInitError error;
@@ -426,6 +429,8 @@ void Config::LoadXml(const xmlpp::Element *xml)
     XmlReader::ReadBool(elem, "music", sound_music);
     XmlReader::ReadBool(elem, "effects", sound_effects);
     XmlReader::ReadUint(elem, "frequency", sound_frequency);
+    XmlReader::ReadUint(elem, "volume_music", volume_music);
+    XmlReader::ReadUint(elem, "volume_effects", volume_effects);
   }
 
   //=== network ===
@@ -545,6 +550,8 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(sound_node, "music",  ulong2str(JukeBox::GetConstInstance()->UseMusic()));
   doc.WriteElement(sound_node, "effects", ulong2str(JukeBox::GetConstInstance()->UseEffects()));
   doc.WriteElement(sound_node, "frequency", ulong2str(JukeBox::GetConstInstance()->GetFrequency()));
+  doc.WriteElement(sound_node, "volume_music",  ulong2str(volume_music));
+  doc.WriteElement(sound_node, "volume_effects", ulong2str(volume_effects));
 
   //=== Network ===
   xmlpp::Element *net_node = root->add_child("network");
@@ -567,9 +574,11 @@ bool Config::SaveXml(bool save_current_teams)
 std::string Config::GetEnv(const std::string & name, const std::string &default_value) const
 {
   const char *env = std::getenv(name.c_str());
-  if (env != NULL) {
-    return env;
-  } else {
-    return default_value;
-  }
+  return (env) ? env : default_value;
+}
+
+void Config::SetVolumeMusic(uint vol)
+{
+  volume_music = vol;
+  JukeBox::SetMusicVolume(vol);
 }
