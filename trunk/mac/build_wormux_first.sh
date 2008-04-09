@@ -23,6 +23,11 @@ svn up
 make clean
 make -w
 
+
+
+echo "*******************************************"
+echo "lauch build_wormux_(fink/macports) script !"
+echo "*******************************************"
 cd mac 
 # Macports / Fink
 # Fink : comment the second line
