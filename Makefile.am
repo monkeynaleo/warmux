@@ -11,6 +11,12 @@ EXTRA_DIST = data/wormux.desktop                   \
              doc/license/COPYING.pt.txt            \
              doc/license/COPYING.ru.txt            \
              doc/license/COPYING.sk.txt            \
+			 mac/Info.plist.in					   \
+			 mac/PkgInfo.in						   \
+			 mac/README-mac.txt					   \
+			 mac/build_wormux_fink.sh			   \
+			 mac/build_wormux_first.sh			   \
+			 mac/build_wormux_macports.sh		   \
              visual/wormux.vcproj                  \
              src/msvc/config.h                     \
              src/msvc/getopt.c                     \
