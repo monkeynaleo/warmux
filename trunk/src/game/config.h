@@ -66,74 +66,74 @@ public:
   void RemoveAllObjectConfigs();
 
   void SetLanguage(const std::string language);
-  inline std::string GetLanguage() const { return default_language; };
+  std::string GetLanguage() const { return default_language; };
 
-  inline bool GetDisplayEnergyCharacter() const { return display_energy_character; };
-  inline void SetDisplayEnergyCharacter(const bool dec) { display_energy_character = dec; };
+  bool GetDisplayEnergyCharacter() const { return display_energy_character; };
+  void SetDisplayEnergyCharacter(const bool dec) { display_energy_character = dec; };
 
-  inline bool GetDisplayNameCharacter() const { return display_name_character; };
-  inline void SetDisplayNameCharacter(const bool dnc) { display_name_character = dnc; };
+  bool GetDisplayNameCharacter() const { return display_name_character; };
+  void SetDisplayNameCharacter(const bool dnc) { display_name_character = dnc; };
 
-  inline bool GetDisplayWindParticles() const { return display_wind_particles; };
-  inline void SetDisplayWindParticles(bool dwp) { display_wind_particles = dwp; };
+  bool GetDisplayWindParticles() const { return display_wind_particles; };
+  void SetDisplayWindParticles(bool dwp) { display_wind_particles = dwp; };
 
-  inline bool GetDefaultMouseCursor() const { return default_mouse_cursor; };
-  inline void SetDefaultMouseCursor(const bool dmc) { default_mouse_cursor = dmc; };
+  bool GetDefaultMouseCursor() const { return default_mouse_cursor; };
+  void SetDefaultMouseCursor(const bool dmc) { default_mouse_cursor = dmc; };
 
-  inline bool IsMouseDisable() const { return disable_mouse; };
-  inline bool IsJoystickDisable() const { return disable_joystick; };
+  bool IsMouseDisable() const { return disable_mouse; };
+  bool IsJoystickDisable() const { return disable_joystick; };
 
-  inline bool GetScrollOnBorder() const { return scroll_on_border; };
-  inline void SetScrollOnBorder(const bool sob) { scroll_on_border = sob; };
+  bool GetScrollOnBorder() const { return scroll_on_border; };
+  void SetScrollOnBorder(const bool sob) { scroll_on_border = sob; };
 
-  inline bool IsVideoFullScreen() const { return video_fullscreen; };
-  inline void SetVideoFullScreen(const bool set_fullscreen) { video_fullscreen = set_fullscreen; };
+  bool IsVideoFullScreen() const { return video_fullscreen; };
+  void SetVideoFullScreen(const bool set_fullscreen) { video_fullscreen = set_fullscreen; };
 
-  inline uint GetVideoWidth() const { return video_width; };
-  inline void SetVideoWidth(const uint width) { video_width = width; };
+  uint GetVideoWidth() const { return video_width; };
+  void SetVideoWidth(const uint width) { video_width = width; };
 
-  inline uint GetVideoHeight() const { return video_height; };
-  inline void SetVideoHeight(const uint height) { video_height = height; };
+  uint GetVideoHeight() const { return video_height; };
+  void SetVideoHeight(const uint height) { video_height = height; };
 
-  inline std::list<Point2i> & GetResolutionAvailable() { return resolution_available; };
-  inline uint GetMaxFps() const { return max_fps; };
+  std::list<Point2i> & GetResolutionAvailable() { return resolution_available; };
+  uint GetMaxFps() const { return max_fps; };
 
-  inline bool IsBlingBlingInterface() const { return bling_bling_interface; };
-  inline void SetBlingBlingInterface(bool bling_bling) { bling_bling_interface = bling_bling; };
+  bool IsBlingBlingInterface() const { return bling_bling_interface; };
+  void SetBlingBlingInterface(bool bling_bling) { bling_bling_interface = bling_bling; };
 
-  inline bool GetSoundMusic() const { return sound_music; };
-  inline void SetSoundMusic(const bool music) { sound_music = music; };
+  bool GetSoundMusic() const { return sound_music; };
+  void SetSoundMusic(const bool music) { sound_music = music; };
 
-  inline bool GetSoundEffects() const { return sound_effects; };
-  inline void SetSoundEffects(const bool effects) { sound_effects = effects; };
+  bool GetSoundEffects() const { return sound_effects; };
+  void SetSoundEffects(const bool effects) { sound_effects = effects; };
 
-  inline uint GetSoundFrequency() const { return sound_frequency; };
-  inline void SetSoundFrequency(const uint freq) { sound_frequency = freq; };
+  uint GetSoundFrequency() const { return sound_frequency; };
+  void SetSoundFrequency(const uint freq) { sound_frequency = freq; };
 
-  inline bool GetCheckUpdates() const { return check_updates; }
-  inline void SetCheckUpdates(const bool check) { check_updates = check; }
+  bool GetCheckUpdates() const { return check_updates; }
+  void SetCheckUpdates(const bool check) { check_updates = check; }
 
-  inline std::list<ConfigTeam> & AccessTeamList() { return teams; };
-  inline const std::string & GetMapName() const { return map_name; };
-  inline void SetMapName(const std::string& new_name) { map_name = new_name; }
+  std::list<ConfigTeam> & AccessTeamList() { return teams; };
+  const std::string & GetMapName() const { return map_name; };
+  void SetMapName(const std::string& new_name) { map_name = new_name; }
 
-  inline int GetTransparency() const { return transparency; };
+  int GetTransparency() const { return transparency; };
 
-  inline std::string GetTtfFilename() const { return ttf_filename; };
+  std::string GetTtfFilename() const { return ttf_filename; };
 
-  inline std::string GetDataDir() const { return data_dir; };
-  inline std::string GetLocaleDir() const { return locale_dir; };
-  inline std::string GetPersonalDataDir() const { return personal_data_dir; };
-  inline std::string GetChatLogDir() const { return chat_log_dir; };
+  std::string GetDataDir() const { return data_dir; };
+  std::string GetLocaleDir() const { return locale_dir; };
+  std::string GetPersonalDataDir() const { return personal_data_dir; };
+  std::string GetChatLogDir() const { return chat_log_dir; };
 
   bool Save(bool save_current_teams = false);
-  inline const std::string &GetGameMode() const { return m_game_mode; }
-  inline void SetGameMode(std::string s) { m_game_mode = s; }
+  const std::string &GetGameMode() const { return m_game_mode; }
+  void SetGameMode(std::string s) { m_game_mode = s; }
 
-  inline const std::string &GetNetworkHost() const { return m_network_host; }
-  inline void SetNetworkHost(std::string s) { m_network_host = s; }
-  inline const std::string &GetNetworkPort() const { return m_network_port; }
-  inline void SetNetworkPort(std::string s) { m_network_port = s; }
+  const std::string &GetNetworkHost() const { return m_network_host; }
+  void SetNetworkHost(std::string s) { m_network_host = s; }
+  const std::string &GetNetworkPort() const { return m_network_port; }
+  void SetNetworkPort(std::string s) { m_network_port = s; }
 
 protected:
   bool SaveXml(bool save_current_teams);
