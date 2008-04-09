@@ -136,11 +136,18 @@ OptionMenu::OptionMenu() :
 
   Box * all_sound_options = new GridBox(SOUND_W, option_size, false);
 
-  opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", option_size);
-  all_sound_options->AddWidget(opt_music);
+  uint max_vol = Config::GetMaxVolume();
+  volume_music = new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
+					   option_size,
+                                           Config::GetInstance()->GetVolumeMusic(), max_vol/16,
+                                           0, max_vol);
+  all_sound_options->AddWidget(volume_music);
 
-  opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", option_size);
-  all_sound_options->AddWidget(opt_sound_effects);
+  volume_effects = new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
+					     option_size,
+                                             Config::GetInstance()->GetVolumeEffects(), max_vol/16,
+                                             0, max_vol);
+  all_sound_options->AddWidget(volume_effects);
 
   // Generate sound mode list
   uint current_freq = JukeBox::GetInstance()->GetFrequency();
@@ -222,9 +229,6 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "汉语 (hànyǔ)",        "zh_CN");
   lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",        "zh_TW");
 
-  opt_music->SetValue(JukeBox::GetInstance()->UseMusic());
-  opt_sound_effects->SetValue(JukeBox::GetInstance()->UseEffects());
-
   opt_updates->SetValue(config->GetCheckUpdates());
 
   resource_manager.UnLoadXMLProfile(res);
@@ -256,8 +260,8 @@ void OptionMenu::SaveOptions()
   config->SetCheckUpdates(opt_updates->GetValue());
 
   // Sound settings
-  config->SetSoundEffects(opt_sound_effects->GetValue());
-  config->SetSoundMusic(opt_music->GetValue());
+  config->SetVolumeMusic(volume_music->GetValue());
+  config->SetVolumeEffects(volume_effects->GetValue());
   config->SetSoundFrequency(cbox_sound_freq->GetIntValue());
 
   AppWormux * app = AppWormux::GetInstance();
@@ -279,8 +283,6 @@ void OptionMenu::SaveOptions()
   config->SetLanguage(s_language);
 
   // Sound
-  JukeBox::GetInstance()->ActiveMusic(opt_music->GetValue());
-  JukeBox::GetInstance()->ActiveEffects(opt_sound_effects->GetValue());
   std::string sfreq = cbox_sound_freq->GetValue();
   long freq;
   if (str2long(sfreq,freq)) JukeBox::GetInstance()->SetFrequency(freq);

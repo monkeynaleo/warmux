@@ -114,8 +114,6 @@ Config::Config():
   video_fullscreen(false),
   max_fps(0),
   bling_bling_interface(false),
-  sound_music(true),
-  sound_effects(true),
   sound_frequency(44100),
   enable_network(true),
   check_updates(false),
@@ -426,8 +424,6 @@ void Config::LoadXml(const xmlpp::Element *xml)
   //=== Sound ===
   if ((elem = XmlReader::GetMarker(xml, "sound")) != NULL)
   {
-    XmlReader::ReadBool(elem, "music", sound_music);
-    XmlReader::ReadBool(elem, "effects", sound_effects);
     XmlReader::ReadUint(elem, "frequency", sound_frequency);
     XmlReader::ReadUint(elem, "volume_music", volume_music);
     XmlReader::ReadUint(elem, "volume_effects", volume_effects);
@@ -547,8 +543,6 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== Sound ===
   xmlpp::Element *sound_node = root->add_child("sound");
-  doc.WriteElement(sound_node, "music",  ulong2str(JukeBox::GetConstInstance()->UseMusic()));
-  doc.WriteElement(sound_node, "effects", ulong2str(JukeBox::GetConstInstance()->UseEffects()));
   doc.WriteElement(sound_node, "frequency", ulong2str(JukeBox::GetConstInstance()->GetFrequency()));
   doc.WriteElement(sound_node, "volume_music",  ulong2str(volume_music));
   doc.WriteElement(sound_node, "volume_effects", ulong2str(volume_effects));
@@ -581,4 +575,9 @@ void Config::SetVolumeMusic(uint vol)
 {
   volume_music = vol;
   JukeBox::SetMusicVolume(vol);
+}
+
+uint Config::GetMaxVolume()
+{
+  return JukeBox::GetMaxVolume();
 }

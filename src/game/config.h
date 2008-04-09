@@ -101,11 +101,8 @@ public:
   bool IsBlingBlingInterface() const { return bling_bling_interface; };
   void SetBlingBlingInterface(bool bling_bling) { bling_bling_interface = bling_bling; };
 
-  bool GetSoundMusic() const { return sound_music; };
-  void SetSoundMusic(const bool music) { sound_music = music; };
-
-  bool GetSoundEffects() const { return sound_effects; };
-  void SetSoundEffects(const bool effects) { sound_effects = effects; };
+  bool GetSoundMusic() const { return !!volume_music; }
+  bool GetSoundEffects() const { return !!volume_effects; }
 
   uint GetSoundFrequency() const { return sound_frequency; };
   void SetSoundFrequency(const uint freq) { sound_frequency = freq; };
@@ -114,6 +111,7 @@ public:
   void SetVolumeMusic(uint vol);
   uint GetVolumeEffects() const { return volume_effects; }
   void SetVolumeEffects(uint vol) { volume_effects = vol; }
+  static uint GetMaxVolume();
 
   bool GetCheckUpdates() const { return check_updates; }
   void SetCheckUpdates(const bool check) { check_updates = check; }
@@ -175,8 +173,6 @@ protected:
   std::list<Point2i> resolution_available;
 
   // Sound settings
-  bool sound_music;
-  bool sound_effects;
   uint sound_frequency;
   uint volume_music;
   uint volume_effects;

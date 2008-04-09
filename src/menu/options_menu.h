@@ -54,8 +54,8 @@ private:
 
    /* Sound options controllers */
    ComboBox *cbox_sound_freq;
-   CheckBox *opt_music;
-   CheckBox *opt_sound_effects;
+   SpinButtonWithPicture *volume_music;
+   SpinButtonWithPicture *volume_effects;
 
    /* Misc options controllers */
    CheckBox *opt_updates;
