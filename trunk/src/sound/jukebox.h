@@ -114,6 +114,9 @@ protected:
   friend class Singleton<JukeBox>;
 
 public:
+  static uint GetMaxVolume() { return MIX_MAX_VOLUME; }
+  static void SetMusicVolume(uint vol) { Mix_VolumeMusic(vol); }
+
   void Init();
   void End();
 
