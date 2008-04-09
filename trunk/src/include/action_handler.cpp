@@ -192,13 +192,13 @@ void Action_Network_Check_Phase2 (Action *a)
 
 void Action_Player_ChangeWeapon (Action *a)
 {
-  jukebox.Play("share", "change_weapon");
+  JukeBox::GetInstance()->Play("share", "change_weapon");
   ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
 }
 
 void Action_Player_NextCharacter (Action *a)
 {
-  jukebox.Play("share", "character/change_in_same_team");
+  JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve next character information
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
@@ -206,7 +206,7 @@ void Action_Player_NextCharacter (Action *a)
 
 void Action_Player_PreviousCharacter (Action *a)
 {
-  jukebox.Play("share", "character/change_in_same_team");
+  JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve previous character's information
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);

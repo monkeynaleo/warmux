@@ -80,17 +80,17 @@ Menu::~Menu()
 
 void Menu::play_ok_sound()
 {
-  jukebox.Play("share", "menu/ok");
+  JukeBox::GetInstance()->Play("share", "menu/ok");
 }
 
 void Menu::play_cancel_sound()
 {
-  jukebox.Play("share", "menu/cancel");
+  JukeBox::GetInstance()->Play("share", "menu/cancel");
 }
 
 void Menu::play_error_sound()
 {
-  jukebox.Play("share", "menu/error");
+  JukeBox::GetInstance()->Play("share", "menu/error");
 }
 
 void Menu::mouse_ok()

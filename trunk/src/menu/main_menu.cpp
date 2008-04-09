@@ -87,15 +87,15 @@ MainMenu::MainMenu() :
   std::string s2(Constants::WEB_SITE);
   website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
-  if(!jukebox.IsPlayingMusic())
-     jukebox.PlayMusic("menu");
+  if(!JukeBox::GetConstInstance()->IsPlayingMusic())
+     JukeBox::GetInstance()->PlayMusic("menu");
 
   StatStart("Main:Menu");
 }
 
 void MainMenu::button_click() const
 {
-  jukebox.Play("share", "menu/clic");
+  JukeBox::GetInstance()->Play("share", "menu/clic");
 }
 
 void MainMenu::SelectAction(const Widget *w)

@@ -63,7 +63,7 @@ void ObjMine::FakeExplosion()
 {
   MSG_DEBUG("mine", "Fake explosion");
 
-  jukebox.Play("share", "weapon/mine_fake");
+  JukeBox::GetInstance()->Play("share", "weapon/mine_fake");
   ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
 
   if ( animation )

@@ -31,13 +31,13 @@ void SoundSample::Play(const std::string& category,
                        const std::string& sample,
                        const int loop)
 {
-  channel = jukebox.Play(category, sample, loop);
+  channel = JukeBox::GetInstance()->Play(category, sample, loop);
 }
 
 void SoundSample::Stop()
 {
   if (channel != -1)
-    jukebox.Stop(channel);
+    JukeBox::GetInstance()->Stop(channel);
   channel = -1;
 }
 

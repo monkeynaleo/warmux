@@ -144,10 +144,10 @@ void GameInit::InitSounds()
   // Load teams' sound profiles
   loading_sreen.StartLoading(4, "sound_icon", _("Sounds"));
 
-  jukebox.LoadXML("default");
+  JukeBox::GetInstance()->LoadXML("default");
   FOR_EACH_TEAM(team)
     if ( (**team).GetSoundProfile() != "default" )
-      jukebox.LoadXML((**team).GetSoundProfile()) ;
+      JukeBox::GetInstance()->LoadXML((**team).GetSoundProfile()) ;
 }
 
 void GameInit::InitData()
@@ -179,8 +179,8 @@ GameInit::GameInit():
   Config::GetInstance()->RemoveAllObjectConfigs();
 
   // Disable sound during the loading of data
-  bool enable_sound = jukebox.UseEffects();
-  jukebox.ActiveEffects(false);
+  bool enable_sound = JukeBox::GetInstance()->UseEffects();
+  JukeBox::GetInstance()->ActiveEffects(false);
 
   Mouse::GetInstance()->Hide();
 
@@ -202,7 +202,7 @@ GameInit::GameInit():
   ActiveTeam().AccessWeapon().Select();
 
   // Loading is finished, sound effects can be enabled again
-  jukebox.ActiveEffects(enable_sound);
+  JukeBox::GetInstance()->ActiveEffects(enable_sound);
 
   // Waiting for others players
   if  (Network::GetInstance()->IsServer())

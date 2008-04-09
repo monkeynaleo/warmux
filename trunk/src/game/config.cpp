@@ -542,9 +542,9 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== Sound ===
   xmlpp::Element *sound_node = root->add_child("sound");
-  doc.WriteElement(sound_node, "music",  ulong2str(jukebox.UseMusic()));
-  doc.WriteElement(sound_node, "effects", ulong2str(jukebox.UseEffects()));
-  doc.WriteElement(sound_node, "frequency", ulong2str(jukebox.GetFrequency()));
+  doc.WriteElement(sound_node, "music",  ulong2str(JukeBox::GetConstInstance()->UseMusic()));
+  doc.WriteElement(sound_node, "effects", ulong2str(JukeBox::GetConstInstance()->UseEffects()));
+  doc.WriteElement(sound_node, "frequency", ulong2str(JukeBox::GetConstInstance()->GetFrequency()));
 
   //=== Network ===
   xmlpp::Element *net_node = root->add_child("network");

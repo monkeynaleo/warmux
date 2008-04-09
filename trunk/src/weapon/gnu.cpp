@@ -104,7 +104,7 @@ void Gnu::Refresh()
     norme = randomSync.GetDouble(2.0, 5.0);
     PutOutOfGround();
     SetSpeedXY(Point2d(m_sens * norme , - norme * 3.0));
-    jukebox.Play("share", "weapon/gnu_bounce");
+    JukeBox::GetInstance()->Play("share", "weapon/gnu_bounce");
   }
 
   //Due to a bug in the physic engine

@@ -212,7 +212,7 @@ void Character::SignalDrowning()
   // Set energy
   SetEnergy(0);
   SetMovement("drowned", true);
-  jukebox.Play (GetTeam().GetSoundProfile(),"sink");
+  JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(),"sink");
   Game::GetInstance()->SignalCharacterDeath (this);
 }
 
@@ -289,17 +289,17 @@ void Character::SetEnergyDelta(int delta, bool do_report)
     lost_energy += (int)GetEnergy() - (int)saved_energy;
 
     if ( lost_energy > -33 )
-      jukebox.Play (GetTeam().GetSoundProfile(), "injured_light");
+      JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "injured_light");
     else if ( lost_energy > -66 )
-      jukebox.Play (GetTeam().GetSoundProfile(), "injured_medium");
+      JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "injured_medium");
     else
-      jukebox.Play (GetTeam().GetSoundProfile(), "injured_high");
+      JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "injured_high");
   } else
     lost_energy = 0;
 
   // "Friendly fire !!"
   if ( !IsActiveCharacter() && ActiveTeam().IsSameAs(m_team) )
-    jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
+    JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "friendly_fire");
 }
 
 void Character::SetEnergy(int new_energy)
@@ -334,7 +334,7 @@ void Character::Die()
 
     SetEnergy(0);
 
-    jukebox.Play(GetTeam().GetSoundProfile(),"death");
+    JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(),"death");
     body->SetRotation(0.0);
     SetClothe("dead");
     SetMovement("breathe");
@@ -480,7 +480,7 @@ void Character::Jump(double strength, double angle /*in radian */)
 void Character::Jump()
 {
   MSG_DEBUG("character", "Jump");
-  jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
+  JukeBox::GetInstance()->Play (ActiveTeam().GetSoundProfile(), "jump");
   Jump(GameMode::GetInstance()->character.jump_strength,
        GameMode::GetInstance()->character.jump_angle);
 }
@@ -488,7 +488,7 @@ void Character::Jump()
 void Character::HighJump()
 {
   MSG_DEBUG("character", "HighJump");
-  jukebox.Play (ActiveTeam().GetSoundProfile(), "superjump");
+  JukeBox::GetInstance()->Play (ActiveTeam().GetSoundProfile(), "superjump");
   Jump(GameMode::GetInstance()->character.super_jump_strength,
        GameMode::GetInstance()->character.super_jump_angle);
 }
@@ -497,7 +497,7 @@ void Character::BackJump()
 {
   MSG_DEBUG("character", "BackJump");
   back_jumping = true;
-  jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
+  JukeBox::GetInstance()->Play (ActiveTeam().GetSoundProfile(), "jump");
   Jump(GameMode::GetInstance()->character.back_jump_strength,
        GameMode::GetInstance()->character.back_jump_angle);
 }
@@ -582,7 +582,7 @@ void Character::Refresh()
     if (cur < frame_nbr / 2 && !step_sound_played)
     {
       step_sound_played = true;
-      jukebox.Play (GetTeam().GetSoundProfile(),"step");
+      JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(),"step");
     }
 
     if (cur > frame_nbr / 2)

@@ -56,7 +56,7 @@ bool SkipTurn::p_Shoot()
   // Show message
   GameMessages::GetInstance()->Add (Format(_("%s team has skipped its turn."),
                                            ActiveTeam().GetName().c_str()));
-  jukebox.Play(ActiveTeam().GetSoundProfile(), "skip_turn");
+  JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "skip_turn");
   return true;
 }
 

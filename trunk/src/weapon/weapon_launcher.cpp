@@ -62,7 +62,7 @@ WeaponBullet::WeaponBullet(const std::string &name,
 // Signal that the bullet has hit the ground
 void WeaponBullet::SignalGroundCollision()
 {
-  jukebox.Play("share", "weapon/ricoche1");
+  JukeBox::GetInstance()->Play("share", "weapon/ricoche1");
   WeaponProjectile::SignalGroundCollision();
   launcher->IncMissedShots();
 }
@@ -185,7 +185,7 @@ void WeaponProjectile::Shoot(double strength)
 
 void WeaponProjectile::ShootSound()
 {
-  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
+  JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "fire");
 }
 
 void WeaponProjectile::Refresh()
@@ -280,8 +280,8 @@ void WeaponProjectile::SignalDrowning()
   if (launcher != NULL && !launcher->ignore_drowning_signal)
     launcher->SignalProjectileDrowning();
 
-  if (can_drown) jukebox.Play("share", "sink");
-  //else jukebox.Play("share", "pschiiit");
+  if (can_drown) JukeBox::GetInstance()->Play("share", "sink");
+  //else JukeBox::GetInstance()->Play("share", "pschiiit");
 }
 
 // Default behavior : signal to launcher a projectile is going out of water

@@ -143,7 +143,7 @@ OptionMenu::OptionMenu() :
   all_sound_options->AddWidget(opt_sound_effects);
 
   // Generate sound mode list
-  uint current_freq = jukebox.GetFrequency();
+  uint current_freq = JukeBox::GetInstance()->GetFrequency();
   std::vector<std::pair<std::string, std::string> > sound_freqs;
   std::string current_sound_freq;
   sound_freqs.push_back (std::pair<std::string, std::string> ("11025", "11 kHz"));
@@ -222,8 +222,8 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "汉语 (hànyǔ)",        "zh_CN");
   lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",        "zh_TW");
 
-  opt_music->SetValue(jukebox.UseMusic());
-  opt_sound_effects->SetValue(jukebox.UseEffects());
+  opt_music->SetValue(JukeBox::GetInstance()->UseMusic());
+  opt_sound_effects->SetValue(JukeBox::GetInstance()->UseEffects());
 
   opt_updates->SetValue(config->GetCheckUpdates());
 
@@ -279,13 +279,13 @@ void OptionMenu::SaveOptions()
   config->SetLanguage(s_language);
 
   // Sound
-  jukebox.ActiveMusic(opt_music->GetValue());
-  jukebox.ActiveEffects(opt_sound_effects->GetValue());
+  JukeBox::GetInstance()->ActiveMusic(opt_music->GetValue());
+  JukeBox::GetInstance()->ActiveEffects(opt_sound_effects->GetValue());
   std::string sfreq = cbox_sound_freq->GetValue();
   long freq;
-  if (str2long(sfreq,freq)) jukebox.SetFrequency(freq);
+  if (str2long(sfreq,freq)) JukeBox::GetInstance()->SetFrequency(freq);
 
-  jukebox.Init(); // commit modification on sound options
+  JukeBox::GetInstance()->Init(); // commit modification on sound options
 
   //Save options in XML
   config->Save();

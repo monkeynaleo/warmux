@@ -77,7 +77,7 @@ bool Syringe::p_Shoot (){
   double radius = 0.0;
   bool end = false;
 
-  jukebox.Play ("share","weapon/syringe");
+  JukeBox::GetInstance()->Play ("share","weapon/syringe");
 
   do
   {
