@@ -309,7 +309,7 @@ void OptionMenu::Draw(const Point2i &/*mousePosition*/)
 
 void OptionMenu::CheckUpdates()
 {
-  if (!Config::GetInstance()->GetCheckUpdates() || Constants::WORMUX_VERSION.find("svn") != -1)
+  if (!Config::GetInstance()->GetCheckUpdates() || Constants::WORMUX_VERSION.find("svn") != std::string::npos)
     return;
 
   try
