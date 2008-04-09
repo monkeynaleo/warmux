@@ -64,6 +64,8 @@ private:
    void OnClick(const Point2i &mousePosition, int button);
    void OnClickUp(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
+   static uint fromVolume(uint vol);
+   static uint toVolume(uint level);
 
    bool signal_ok();
    bool signal_cancel();
