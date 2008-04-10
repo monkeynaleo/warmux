@@ -61,6 +61,7 @@ OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
 {
   AppWormux * app = AppWormux::GetInstance();
+  Config * config = Config::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   Point2i stdSize(140, -1);
   Point2i option_size(140, 130);
@@ -136,15 +137,17 @@ OptionMenu::OptionMenu() :
 
   Box * all_sound_options = new GridBox(SOUND_W, option_size, false);
 
+  initial_vol_mus = config->GetVolumeMusic();
   volume_music = new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
 					   option_size,
-                                           fromVolume(Config::GetInstance()->GetVolumeMusic()), 5,
+                                           fromVolume(initial_vol_mus), 5,
                                            0, 100);
   all_sound_options->AddWidget(volume_music);
 
+  initial_vol_eff = config->GetVolumeEffects();
   volume_effects = new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
 					     option_size,
-                                             fromVolume(Config::GetInstance()->GetVolumeEffects()), 5,
+                                             fromVolume(initial_vol_eff), 5,
                                              0, 100);
   all_sound_options->AddWidget(volume_effects);
 
@@ -184,9 +187,6 @@ OptionMenu::OptionMenu() :
 			 language_options->GetPositionY());
 
   // Values initialization
-
-  Config * config = Config::GetInstance();
-
   opt_max_fps->SetValue(app->video->GetMaxFps());
   opt_display_wind_particles->SetValue(config->GetDisplayWindParticles());
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
@@ -240,6 +240,13 @@ OptionMenu::~OptionMenu()
 void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   widgets.ClickUp(mousePosition, button);
+
+  // Now that the click has been processed by the underlying widgets,
+  // make use of their newer values in near-realtime!
+  if (volume_music->Contains(mousePosition))
+    Config::GetInstance()->SetVolumeMusic(toVolume(volume_music->GetValue()));
+  else if (volume_effects->Contains(mousePosition))
+    Config::GetInstance()->SetVolumeEffects(toVolume(volume_effects->GetValue()));
 }
 
 void OptionMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
@@ -258,9 +265,7 @@ void OptionMenu::SaveOptions()
   // Misc options
   config->SetCheckUpdates(opt_updates->GetValue());
 
-  // Sound settings
-  config->SetVolumeMusic(toVolume(volume_music->GetValue()));
-  config->SetVolumeEffects(toVolume(volume_effects->GetValue()));
+  // Sound settings - volume already saved
   config->SetSoundFrequency(cbox_sound_freq->GetIntValue());
 
   AppWormux * app = AppWormux::GetInstance();
@@ -301,6 +306,8 @@ bool OptionMenu::signal_ok()
 
 bool OptionMenu::signal_cancel()
 {
+  Config::GetInstance()->SetVolumeMusic(initial_vol_mus);
+  Config::GetInstance()->SetVolumeEffects(initial_vol_eff);
   return true;
 }
 
@@ -343,4 +350,3 @@ uint OptionMenu::fromVolume(uint vol)
   uint max = Config::GetMaxVolume();
   return (vol*100 + max/2) / max;
 }
-
