@@ -96,7 +96,6 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
     }
 
   //Handle input text for Chat session in Network game
-  //While player writes, it cannot control the game.
   if (event_type == KEY_PRESSED && Game::GetInstance()->chatsession.CheckInput()){
     Game::GetInstance()->chatsession.HandleKey(event);
     return;
@@ -108,6 +107,17 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
     return;
 
   Key_t key = it->second;
+
+  //While player writes, it cannot control the game but QUIT or PAUSE.
+  if (Game::GetInstance()->chatsession.CheckInput()) {
+    switch (key) {
+    case KEY_QUIT:
+    case KEY_PAUSE:
+      break;
+    default:
+      return;
+    }
+  }
 
   if(event_type == KEY_PRESSED) {
     HandleKeyPressed(key);
