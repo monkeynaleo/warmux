@@ -54,6 +54,8 @@ private:
 
    /* Sound options controllers */
    ComboBox *cbox_sound_freq;
+   uint initial_vol_mus;
+   uint initial_vol_eff;
    SpinButtonWithPicture *volume_music;
    SpinButtonWithPicture *volume_effects;
 
