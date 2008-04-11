@@ -26,6 +26,7 @@
 #include "include/base.h"
 #include "include/singleton.h"
 #include "graphic/surface.h"
+#include "map/water.h"
 
 // Forward declarations
 class Action;
@@ -68,13 +69,13 @@ private:
   uint nb_barrel;
 
   bool is_opened;
-  bool use_water;
   bool is_basic_info_loaded;
   bool is_data_loaded;
   bool random_generated;
   Point2i upper_left_pad;
   Point2i lower_right_pad;
   Island_type island_type;
+  Water::Water_type water_type;
 
   struct s_wind wind;
 
@@ -100,15 +101,15 @@ public:
   Surface& ReadImgSky();
   const Surface& ReadPreview() { LoadBasicInfo(); return preview; };
 
-  const struct s_wind& GetWind() const { return wind; }; 
+  const struct s_wind& GetWind() const { return wind; };
 
   uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; };
   uint GetNbMine() { LoadBasicInfo(); return nb_mine; };
   Profile * ResProfile() const { return res_profile; };
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; };
-  bool UseWater() { LoadBasicInfo(); return use_water; };
   bool IsRandomGenerated() { LoadBasicInfo(); return random_generated; };
+  Water::Water_type WaterType() { LoadBasicInfo(); return water_type; };
 
   Point2i GetUpperLeftPad() { return upper_left_pad; };
   Point2i GetLowerRightPad() { return lower_right_pad; };

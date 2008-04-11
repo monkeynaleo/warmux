@@ -222,8 +222,11 @@
     <image file="gfx/arrow.png" />
   </sprite>
 
-  <surface name="water" file="gfx/water.png" />
-  <surface name="water_bottom" file="gfx/water_bottom.png" />
+  <surface name="water" file="gfx/water/water.png" />
+  <surface name="water_bottom" file="gfx/water/water_bottom.png" />
+
+  <surface name="lava" file="gfx/water/lava.png" />
+  <surface name="lava_bottom" file="gfx/water/lava_bottom.png" />
 
 </section>
 

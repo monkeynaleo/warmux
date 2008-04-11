@@ -31,9 +31,16 @@ const uint WATER_INITIAL_HEIGHT = 100;
 
 class Water
 {
+public:
+  typedef enum {
+    NO_WATER,
+    WATER,
+    LAVA,
+    MAX_WATER_TYPE
+  } Water_type;
+
 private:
   int height_mvt;
-  bool actif;
   double shift1;
   uint water_height;
   uint temps_montee;
@@ -42,13 +49,15 @@ private:
   Surface pattern;
   Surface bottom;
   Surface wpattern;
+  Water_type water_type;
+
 public:
   void Init();
   void Reset();
   void Free();
   void Refresh();
   void Draw();
-  bool IsActive() const { return actif; }
+  bool IsActive() const { return water_type != NO_WATER; }
   int GetHeight(int x) const;
 };
 #endif
