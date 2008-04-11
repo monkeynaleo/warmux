@@ -195,7 +195,7 @@ OptionMenu::OptionMenu() :
 
   // Setting language selection
   lbox_languages->AddItem(config->GetLanguage() == "",    _("(system language)"),  "");
-  lbox_languages->AddItem(config->GetLanguage() == "bg",    "Български",           "bg");
+  lbox_languages->AddItem(config->GetLanguage() == "bg",    "Български (bg)",      "bg");
   lbox_languages->AddItem(config->GetLanguage() == "bs",    "Bosanski",            "bs");
   lbox_languages->AddItem(config->GetLanguage() == "ca",    "Català",              "ca");
   lbox_languages->AddItem(config->GetLanguage() == "cpf",   "Créole",              "cpf");
@@ -206,11 +206,11 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "eo",    "Esperanto",           "eo");
   lbox_languages->AddItem(config->GetLanguage() == "en",    "English",             "en");
   lbox_languages->AddItem(config->GetLanguage() == "es",    "Castellano",          "es");
-  lbox_languages->AddItem(config->GetLanguage() == "fa",    "فارسی",               "fa");
+  lbox_languages->AddItem(config->GetLanguage() == "fa",    "فارسی (Farsi)",       "fa");
   lbox_languages->AddItem(config->GetLanguage() == "fi",    "Suomi",               "fi");
   lbox_languages->AddItem(config->GetLanguage() == "fr",    "Français",            "fr");
   lbox_languages->AddItem(config->GetLanguage() == "gl",    "Galego",              "gl");
-  lbox_languages->AddItem(config->GetLanguage() == "he",    "עברית",               "he");
+  lbox_languages->AddItem(config->GetLanguage() == "he",    "עברית (Hebrew)",      "he");
   lbox_languages->AddItem(config->GetLanguage() == "hu",    "Magyar",              "hu");
   lbox_languages->AddItem(config->GetLanguage() == "it",    "Italiano",            "it");
   lbox_languages->AddItem(config->GetLanguage() == "lv",    "latviešu valoda",     "lv");
@@ -220,7 +220,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "pt",    "Português",           "pt");
   lbox_languages->AddItem(config->GetLanguage() == "pt_BR", "Português do Brasil", "pt_BR");
   lbox_languages->AddItem(config->GetLanguage() == "ro",    "Română",              "ro");
-  lbox_languages->AddItem(config->GetLanguage() == "ru",    "Pусский язык",        "ru");
+  lbox_languages->AddItem(config->GetLanguage() == "ru",    "Pусский язык (ru)",   "ru");
   lbox_languages->AddItem(config->GetLanguage() == "sk",    "Slovenčina",          "sk");
   lbox_languages->AddItem(config->GetLanguage() == "sl",    "Slovenščina",         "sl");
   lbox_languages->AddItem(config->GetLanguage() == "sv",    "Svenska",             "sv");
