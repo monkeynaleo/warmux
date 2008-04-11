@@ -35,6 +35,7 @@
 #ifdef __APPLE__
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
+#include "graphic/font.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
@@ -143,7 +144,8 @@ Config::Config():
 #ifdef USE_AUTOPACKAGE
   data_dir     = GetEnv(Constants::ENV_DATADIR, br_find_data_dir(INSTALL_DATADIR));
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
-  filename     = data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf";
+  font_dir     = data_dir + PATH_SEPARATOR + "font";
+  filename     = font_dir + PATH_SEPARATOR + "DejaVuSans.ttf";
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
 #elif defined(__APPLE__)
   // the following code will enable wormux to find its data when placed in an app bundle on mac OS X.
@@ -185,6 +187,7 @@ Config::Config():
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
 #  endif
+  font_dir     = GetEnv(Constants::ENV_FONT_PATH, data_dir + PATH_SEPARATOR + "font");
 #endif
 
 #ifndef WIN32
@@ -275,6 +278,7 @@ void Config::SetLanguage(const std::string language)
   default_language = language;
   InitI18N(TranslateDirectory(locale_dir), language);
 
+  Font::ReleaseInstances();
   WeaponsList::UpdateTranslation();
 }
 
@@ -356,6 +360,25 @@ void Config::LoadDefaultValue()
       if(tmp.GetX() > 0 && tmp.GetY() > 0)
         resolution_available.push_back(tmp);
     }
+
+    //=== Default fonts value ===
+    xmlpp::Element *node = resource_manager.GetElement(res, "section", "default_language_fonts");
+    if (node) {
+      xmlpp::Node::NodeList list = node->get_children("language");
+      for (xmlpp::Node::NodeList::iterator it = list.begin(); it != list.end(); ++it) {
+        std::string lang, font;
+        const xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*it);
+        if (res->doc->ReadStringAttr(elem, "name", lang) &&
+            res->doc->ReadStringAttr(elem, "file", font)) {
+          bool rel = false;
+          res->doc->ReadBoolAttr(elem, "relative", rel);
+          fonts[lang] = (rel) ? font_dir + PATH_SEPARATOR + font : font;
+          //std::cout << "Language " << lang << ": " << fonts[lang] << std::endl;
+        }
+      }
+    }
+    else printf("Bleh...\n");
+
     //== Team Color
     /*int number_of_team_color = resource_manager.LoadInt(res, "team_colors/number_of_team_color");
     for(int i = 1; i <= number_of_team_color; i++) {
@@ -586,4 +609,10 @@ void Config::SetVolumeMusic(uint vol)
 uint Config::GetMaxVolume()
 {
   return JukeBox::GetMaxVolume();
+}
+
+const std::string& Config::GetTtfFilename()
+{
+  if (fonts.find(default_language) == fonts.end()) return ttf_filename;
+  else                                             return fonts[default_language];
 }

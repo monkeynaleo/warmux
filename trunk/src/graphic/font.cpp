@@ -141,6 +141,7 @@ void Font::ReleaseInstances(void)
   }
 
   TTF_Quit();
+  LIB_INIT = false;
 }
 
 void Font::SetBold()

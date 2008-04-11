@@ -125,7 +125,7 @@ public:
 
   int GetTransparency() const { return transparency; };
 
-  std::string GetTtfFilename() const { return ttf_filename; };
+  const std::string& GetTtfFilename();
 
   std::string GetDataDir() const { return data_dir; };
   std::string GetLocaleDir() const { return locale_dir; };
@@ -186,6 +186,9 @@ protected:
   bool enable_network;
   bool check_updates;
 
+  // Font setting
+  std::map<std::string, std::string>  fonts;
+  std::string font_dir;
   std::string ttf_filename;
 
   int transparency;
