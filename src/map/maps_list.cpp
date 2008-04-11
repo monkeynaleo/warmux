@@ -47,11 +47,11 @@ InfoMap::InfoMap(const std::string &map_name,
   nb_mine(4),
   nb_barrel(4),
   is_opened(false),
-  use_water(false),
   is_basic_info_loaded(false),
   is_data_loaded(false),
   random_generated(false),
   island_type(RANDOM_GENERATED),
+  water_type(Water::NO_WATER),
   res_profile(NULL)
 {
   wind.nb_sprite = 0;
@@ -129,10 +129,16 @@ bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
   }
 
   XmlReader::ReadString(xml, "name", name);
-  XmlReader::ReadBool(xml, "water", use_water);
   XmlReader::ReadUint(xml, "nb_mine", nb_mine);
   XmlReader::ReadUint(xml, "nb_barrel", nb_barrel);
   XmlReader::ReadBool(xml, "is_open", is_opened);
+
+  // reading water type
+  water_type = Water::NO_WATER;
+  uint wtype;
+  XmlReader::ReadUint(xml, "water", wtype);
+  if (wtype < uint(Water::MAX_WATER_TYPE))
+    water_type = Water::Water_type(wtype);
 
   // Load padding value
   bool add_pad = false;
