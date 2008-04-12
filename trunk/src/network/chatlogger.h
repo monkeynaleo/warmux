@@ -13,7 +13,6 @@ class ChatLogger: public Singleton<ChatLogger>
   void LogMessage(const std::string& msg);
   static void LogMessageIfOpen(const std::string& msg);
   static void CloseIfOpen(void);
-  static ChatLogger * GetInstance();
  protected:
   friend class Singleton<ChatLogger>;
 

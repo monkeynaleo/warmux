@@ -225,7 +225,7 @@ Config::Config():
   rename(old_config_file_name.c_str(), config_file_name.c_str());
 
 #else
-  personal_config_dir = GetHome() + "\\Wormux\\";
+  personal_config_dir = GetHome() + "\\Wormux";
   personal_data_dir = personal_config_dir;
 #endif
 

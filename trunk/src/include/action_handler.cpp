@@ -318,7 +318,6 @@ void Action_ChatMessage (Action *a)
   {
     std::string msg = a->PopString();
     ChatLogger::GetInstance()->LogMessage(msg);
-
     if(Game::GetInstance()->IsGameLaunched())
     {
       //Add message to chat session in Game

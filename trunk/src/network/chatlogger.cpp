@@ -40,7 +40,7 @@ ChatLogger::ChatLogger() :
       plt = localtime(&t);
       memcpy(&lt, plt, sizeof(struct tm));
 
-      timestamp = Format ( "%.4d-%.2d-%.2d-%.2d:%.2d:%.2d" ,
+      timestamp = Format ( "%.4d-%.2d-%.2d-%.2dH%.2dm%.2d" ,
         lt.tm_year + TIME_BASE_YEAR, lt.tm_mon+1, lt.tm_mday+1,
         lt.tm_hour, lt.tm_min, lt.tm_sec ) ;
 
@@ -86,15 +86,6 @@ void ChatLogger::LogMessageIfOpen(
     )
 {
   if ( singleton ) ChatLogger::GetInstance()->LogMessage(msg);
-}
-
-ChatLogger *ChatLogger::GetInstance()
-{
-    if ( singleton == NULL ) {
-        singleton = new ChatLogger();
-        MSG_DEBUG("singleton", "Created singleton %p of type 'ChatLoogger'\n", singleton);
-    }
-    return singleton;
 }
 
 void ChatLogger::CloseIfOpen()
