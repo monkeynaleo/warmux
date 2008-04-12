@@ -130,7 +130,7 @@ int Question::Ask ()
   Mouse::pointer_t prev_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
   do{
     while( SDL_PollEvent( &event) ){
-      if ( (event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN) &&
+      if ( (event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONUP) &&
            default_choice.active ){
         answer = default_choice.value;
         end_of_boucle = true;
