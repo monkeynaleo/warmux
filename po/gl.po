@@ -9,7 +9,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux. gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-04-09 09:46+0200\n"
 "PO-Revision-Date: 2008-03-24 12:19+0100\n"
 "Last-Translator: Adrián Chaves <adriyetichaves@gmail.com>\n"
 "Language-Team: Galego <gl@li.org>\n"
@@ -19,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);X-Generator: KBabel 1.11.4\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:324
+#: src/map/maps_list.cpp:330
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Non se atopou o mapa %s :-("
@@ -388,7 +387,7 @@ msgid "(dead)"
 msgstr "(morto)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:191
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(lingua do sistema)"
 
@@ -401,7 +400,7 @@ msgstr "(tempo descoñecido)"
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
-#: src/menu/options_menu.cpp:322
+#: src/menu/options_menu.cpp:330
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -488,7 +487,7 @@ msgstr "Non se pode abrir o directorio de equipos personalizados (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Non se pode abrir o directorio de equipos (%s)!"
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:129
 msgid "Check updates online?"
 msgstr "Buscar actualizacións en liña?"
 
@@ -568,6 +567,10 @@ msgstr "Dinamita"
 msgid "END OF GAME"
 msgstr "FIN DA PARTIDA"
 
+#: src/menu/options_menu.cpp:148
+msgid "Effects volume"
+msgstr ""
+
 #: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
@@ -582,7 +585,7 @@ msgstr "Erro ao cargar o equipo :"
 msgid "Error loading team's data %s:"
 msgstr "Erro ao cargar os datos do equipo %s:"
 
-#: src/game/config.cpp:457
+#: src/game/config.cpp:485
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -590,12 +593,12 @@ msgstr ""
 "Erro ao crear o directorio \"%s\": imposible almacenar o ficheiro de "
 "configuración."
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:337
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Erro ao cargar o ficheiro de configuración: %s"
 
-#: src/game/config.cpp:368
+#: src/game/config.cpp:394
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Erro ao cargar o ficheiro de configuración predeterminado: %s"
@@ -656,7 +659,7 @@ msgstr "Lanzachamas"
 msgid "Football Bomb"
 msgstr "Bomba de rugbi"
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 msgid "Fullscreen?"
 msgstr "Pantalla completa?"
 
@@ -800,11 +803,11 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Únete a #wormux no irc.freenode.net para atopar algún adversario."
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:124
 msgid "Language"
 msgstr "Lingua"
 
-#: src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:232
 msgid "Load maps:"
 msgstr "Cargar mapas:"
 
@@ -834,7 +837,7 @@ msgstr "Mapas"
 msgid "Max number of players:"
 msgstr "Número máximo de xogadores:"
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:88
 msgid "Maximum FPS"
 msgstr "FPS máximos"
 
@@ -866,9 +869,9 @@ msgstr "O máis inútil"
 msgid "Most violent"
 msgstr "O máis animal"
 
-#: src/menu/options_menu.cpp:139
-msgid "Music?"
-msgstr "Música?"
+#: src/menu/options_menu.cpp:141
+msgid "Music volume"
+msgstr ""
 
 #: src/menu/main_menu.cpp:63
 msgid "Network Game"
@@ -926,11 +929,11 @@ msgstr "Xogar"
 msgid "Player"
 msgstr "Xogador"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player energy?"
 msgstr "Enerxía de xogador?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Player's name?"
 msgstr "Nome do xogador?"
 
@@ -959,11 +962,11 @@ msgstr "Saír da batalla"
 msgid "Random map"
 msgstr "Mapa ao chou"
 
-#: src/game/config.cpp:343
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "A ler o ficheiro de configuración"
 
-#: src/game/config.cpp:376
+#: src/game/config.cpp:402
 msgid "Reading personal config file"
 msgstr "A ler o ficheiro de configuración persoal"
 
@@ -971,7 +974,7 @@ msgstr "A ler o ficheiro de configuración persoal"
 msgid "Refresh"
 msgstr "Actualizar"
 
-#: src/menu/options_menu.cpp:111
+#: src/menu/options_menu.cpp:112
 msgid "Resolution"
 msgstr "Resolución"
 
@@ -1026,11 +1029,7 @@ msgstr "Alguén debeu de por unha bomba trampa na caixa!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desculpa, pero neste momento non hai partidas agardando por xogadores"
 
-#: src/menu/options_menu.cpp:142
-msgid "Sound effects?"
-msgstr "Efectos de son?"
-
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:169
 msgid "Sound frequency"
 msgstr "Frecuencia de son?"
 
@@ -1167,12 +1166,12 @@ msgstr "Ferramentas"
 msgid "Unable to contact host."
 msgstr "Imposible contactar co host."
 
-#: src/map/maps_list.cpp:236
+#: src/map/maps_list.cpp:242
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Imposible abrir o directorio de mapas (%s)!"
 
-#: src/map/maps_list.cpp:248
+#: src/map/maps_list.cpp:254
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Imposible abrir o directorio persoal de mapas (%s)!"
@@ -1189,7 +1188,7 @@ msgstr "Sen Nome"
 msgid "Version"
 msgstr "Versión"
 
-#: src/menu/options_menu.cpp:331
+#: src/menu/options_menu.cpp:339
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "A verificación da versión fallou porque: %s\n"
@@ -1221,7 +1220,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Que vergoña estará a pasar %s - asasinado cunha simple pistola!"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Wind particles?"
 msgstr "Partículas no vento?"
 
@@ -1250,7 +1249,7 @@ msgstr "Estás só :-/"
 msgid "You are alone..."
 msgstr "Estás só..."
 
-#: src/map/maps_list.cpp:257
+#: src/map/maps_list.cpp:263
 msgid "You need at least one valid map !"
 msgstr "Necesitas alomenos un mapa válido!"
 
@@ -1300,19 +1299,25 @@ msgstr "de"
 msgid "no configuration file!"
 msgstr "non hai ficheiro de configuración!"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:164
 msgid "o Loading music"
 msgstr "o A cargar a música"
 
-#: src/sound/jukebox.cpp:339
+#: src/sound/jukebox.cpp:338
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o A cargar o perfil de son: %s"
 
-#: src/sound/jukebox.cpp:91
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Son aberto a %d Hz e %d bit"
+
+#~ msgid "Music?"
+#~ msgstr "Música?"
+
+#~ msgid "Sound effects?"
+#~ msgstr "Efectos de son?"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s tenta conectar cunha versión diferente: cliente=%s, eu=%s."
