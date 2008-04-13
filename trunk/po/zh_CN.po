@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-04-09 09:46+0200\n"
 "PO-Revision-Date: 2008-02-18 02:28+1000\n"
 "Last-Translator: luojie <luojie-dune@operamail.com>\n"
 "Language-Team: Chinese (China) <luojie-dune@operamail.com>\n"
@@ -17,7 +16,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/map/maps_list.cpp:324
+#: src/map/maps_list.cpp:330
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! 地图 %s未找到 :-("
@@ -361,7 +360,7 @@ msgid "(dead)"
 msgstr "(死掉的)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:191
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(系统语言)"
 
@@ -374,7 +373,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(无限的)"
 
-#: src/menu/options_menu.cpp:322
+#: src/menu/options_menu.cpp:330
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -460,7 +459,7 @@ msgstr "打不开个人团队目录(%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "打不开团队目录 (%s)!"
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:129
 msgid "Check updates online?"
 msgstr "网上检查升级？"
 
@@ -540,6 +539,10 @@ msgstr "炸药"
 msgid "END OF GAME"
 msgstr "游戏末尾"
 
+#: src/menu/options_menu.cpp:148
+msgid "Effects volume"
+msgstr ""
+
 #: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
@@ -554,18 +557,18 @@ msgstr "读取队伍出错 :"
 msgid "Error loading team's data %s:"
 msgstr "读取队伍数据 %s 时出错 :"
 
-#: src/game/config.cpp:457
+#: src/game/config.cpp:485
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "建立目录失败 \"%s\": 不能储存设置文件."
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:337
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "读取设置文件出错: %s"
 
-#: src/game/config.cpp:368
+#: src/game/config.cpp:394
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "正读取默认设置文件发生错误: %s"
@@ -621,7 +624,7 @@ msgstr "喷火器"
 msgid "Football Bomb"
 msgstr "足球炸弹"
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 msgid "Fullscreen?"
 msgstr "全屏?"
 
@@ -765,11 +768,11 @@ msgstr "喷射包"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "加入#wormux IRC irc.freenode.net 找对手"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:124
 msgid "Language"
 msgstr "语言"
 
-#: src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:232
 msgid "Load maps:"
 msgstr "读取地图:"
 
@@ -799,7 +802,7 @@ msgstr "地图"
 msgid "Max number of players:"
 msgstr "玩家满员:"
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:88
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
@@ -831,9 +834,9 @@ msgstr "最失败的"
 msgid "Most violent"
 msgstr "最暴力的"
 
-#: src/menu/options_menu.cpp:139
-msgid "Music?"
-msgstr "音乐?"
+#: src/menu/options_menu.cpp:141
+msgid "Music volume"
+msgstr ""
 
 #: src/menu/main_menu.cpp:63
 msgid "Network Game"
@@ -892,11 +895,11 @@ msgstr "要玩了哦"
 msgid "Player"
 msgstr "玩家"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player energy?"
 msgstr "耐久度?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Player's name?"
 msgstr "请问尊姓大名?"
 
@@ -925,11 +928,11 @@ msgstr "推出战斗"
 msgid "Random map"
 msgstr "随机读取地图"
 
-#: src/game/config.cpp:343
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "正读取默认设置文件"
 
-#: src/game/config.cpp:376
+#: src/game/config.cpp:402
 msgid "Reading personal config file"
 msgstr "正读取个人设置文件"
 
@@ -937,7 +940,7 @@ msgstr "正读取个人设置文件"
 msgid "Refresh"
 msgstr "刷新"
 
-#: src/menu/options_menu.cpp:111
+#: src/menu/options_menu.cpp:112
 msgid "Resolution"
 msgstr "分辨率"
 
@@ -992,11 +995,7 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 没人等你."
 
-#: src/menu/options_menu.cpp:142
-msgid "Sound effects?"
-msgstr "音效?"
-
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:169
 msgid "Sound frequency"
 msgstr "声频"
 
@@ -1130,12 +1129,12 @@ msgstr "工具"
 msgid "Unable to contact host."
 msgstr "连不上主机"
 
-#: src/map/maps_list.cpp:236
+#: src/map/maps_list.cpp:242
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "打不开地图目录(%s)!"
 
-#: src/map/maps_list.cpp:248
+#: src/map/maps_list.cpp:254
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "无法打开个人地图目录 (%s)!"
@@ -1152,7 +1151,7 @@ msgstr "未命名"
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:331
+#: src/menu/options_menu.cpp:339
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "版本改变失败原因: %s\n"
@@ -1184,7 +1183,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 惨死在小枪之下...不能瞑目!"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Wind particles?"
 msgstr "风来了?"
 
@@ -1214,7 +1213,7 @@ msgstr "你是孤单的 :-/"
 msgid "You are alone..."
 msgstr "你是孤单的..."
 
-#: src/map/maps_list.cpp:257
+#: src/map/maps_list.cpp:263
 msgid "You need at least one valid map !"
 msgstr "你需要可用的地图!"
 
@@ -1266,19 +1265,25 @@ msgstr "从"
 msgid "no configuration file!"
 msgstr "没有配置文件！"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:164
 msgid "o Loading music"
 msgstr "o 读取音乐"
 
-#: src/sound/jukebox.cpp:339
+#: src/sound/jukebox.cpp:338
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o读取音乐文件 : %s"
 
-#: src/sound/jukebox.cpp:91
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音乐 %d Hz %d bit"
+
+#~ msgid "Music?"
+#~ msgstr "音乐?"
+
+#~ msgid "Sound effects?"
+#~ msgstr "音效?"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s 试着连接一个不同版本 : client=%s, me=%s."

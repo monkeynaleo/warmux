@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-04-09 09:46+0200\n"
 "PO-Revision-Date: 2007-11-10 21:40+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <local@linux.org.ba>\n"
@@ -18,7 +17,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:324
+#: src/map/maps_list.cpp:330
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
@@ -369,7 +368,7 @@ msgid "(dead)"
 msgstr "(mrtav)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:191
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
@@ -382,7 +381,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(neograničeno)"
 
-#: src/menu/options_menu.cpp:322
+#: src/menu/options_menu.cpp:330
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -467,7 +466,7 @@ msgstr "Ne mogu otvorit direktorij  (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ne mogu otvorit direktorij tima  (%s)!"
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:129
 msgid "Check updates online?"
 msgstr ""
 
@@ -548,6 +547,10 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr "KRAJ IGRE"
 
+#: src/menu/options_menu.cpp:148
+msgid "Effects volume"
+msgstr ""
+
 #: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
@@ -562,7 +565,7 @@ msgstr "Greška kod očitavanja tima:"
 msgid "Error loading team's data %s:"
 msgstr "Greška kod očitavanja podataka tima %s :"
 
-#: src/game/config.cpp:457
+#: src/game/config.cpp:485
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -570,12 +573,12 @@ msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:337
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 
-#: src/game/config.cpp:368
+#: src/game/config.cpp:394
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
@@ -635,7 +638,7 @@ msgstr "Bacač Plamena"
 msgid "Football Bomb"
 msgstr "Džumbus bomba"
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 msgid "Fullscreen?"
 msgstr "Pun ekran?"
 
@@ -776,11 +779,11 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Dođi na #wormux na irc.freenode.net da pronađeš protivnika"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:124
 msgid "Language"
 msgstr "Jezik"
 
-#: src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:232
 msgid "Load maps:"
 msgstr "Učitaj mape:"
 
@@ -810,7 +813,7 @@ msgstr "Mape"
 msgid "Max number of players:"
 msgstr "Maximalan broj igrača:"
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:88
 msgid "Maximum FPS"
 msgstr "Maximalaan broj FPS"
 
@@ -843,9 +846,9 @@ msgstr "Najučikovitiji"
 msgid "Most violent"
 msgstr "Najagresivniji"
 
-#: src/menu/options_menu.cpp:139
-msgid "Music?"
-msgstr "Muzika?"
+#: src/menu/options_menu.cpp:141
+msgid "Music volume"
+msgstr ""
 
 #: src/menu/main_menu.cpp:63
 msgid "Network Game"
@@ -906,11 +909,11 @@ msgstr "Igraj"
 msgid "Player"
 msgstr "Igrač"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player energy?"
 msgstr "Prikaži energiju igrača?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Player's name?"
 msgstr "Prikaži ime igrača?"
 
@@ -940,12 +943,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Učitaj mape:"
 
-#: src/game/config.cpp:343
+#: src/game/config.cpp:350
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Čita lični konfiguracioni podatak"
 
-#: src/game/config.cpp:376
+#: src/game/config.cpp:402
 msgid "Reading personal config file"
 msgstr "Čita lični konfiguracioni podatak"
 
@@ -953,7 +956,7 @@ msgstr "Čita lični konfiguracioni podatak"
 msgid "Refresh"
 msgstr "Osvježi"
 
-#: src/menu/options_menu.cpp:111
+#: src/menu/options_menu.cpp:112
 msgid "Resolution"
 msgstr "Rezolucija"
 
@@ -1008,11 +1011,7 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, trenutno nema igre koja čeka igrače"
 
-#: src/menu/options_menu.cpp:142
-msgid "Sound effects?"
-msgstr "Zvučni efekti?"
-
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:169
 msgid "Sound frequency"
 msgstr "Zvučna frekvencija"
 
@@ -1148,12 +1147,12 @@ msgstr "Alati"
 msgid "Unable to contact host."
 msgstr "Nije u stanju kontaktirati host."
 
-#: src/map/maps_list.cpp:236
+#: src/map/maps_list.cpp:242
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
-#: src/map/maps_list.cpp:248
+#: src/map/maps_list.cpp:254
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
@@ -1170,7 +1169,7 @@ msgstr "Bezimeni"
 msgid "Version"
 msgstr "Verzija"
 
-#: src/menu/options_menu.cpp:331
+#: src/menu/options_menu.cpp:339
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1202,7 +1201,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Koja sramota za %s - koji je ubijen najobičnijim pištoljem!"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Wind particles?"
 msgstr "Prikazuj trunke vjetra?"
 
@@ -1233,7 +1232,7 @@ msgstr "Sami ste ..."
 msgid "You are alone..."
 msgstr "Sami ste ..."
 
-#: src/map/maps_list.cpp:257
+#: src/map/maps_list.cpp:263
 msgid "You need at least one valid map !"
 msgstr "Trebate barem jednu važeće mapu!"
 
@@ -1287,19 +1286,25 @@ msgstr "od"
 msgid "no configuration file!"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:164
 msgid "o Loading music"
 msgstr "o Učitavam muziku"
 
-#: src/sound/jukebox.cpp:339
+#: src/sound/jukebox.cpp:338
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Učitavam zvučne profile: %s"
 
-#: src/sound/jukebox.cpp:91
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
+
+#~ msgid "Music?"
+#~ msgstr "Muzika?"
+
+#~ msgid "Sound effects?"
+#~ msgstr "Zvučni efekti?"
 
 #, fuzzy
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."

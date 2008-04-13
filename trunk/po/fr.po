@@ -399,8 +399,9 @@ msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
-"Une nouvelle version %s est disponible alors que vous utilisez la version %s. Vous devriez "
-"vérifier si vous n'auriez pas une nouvelle version pour votre système !"
+"Une nouvelle version %s est disponible alors que vous utilisez la version %"
+"s. Vous devriez vérifier si vous n'auriez pas une nouvelle version pour "
+"votre système !"
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -636,8 +637,8 @@ msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
 msgstr ""
-"Erreur : Votre serveur n'est pas accessible depuis internet. Vérifier les paramètres "
-"de votre firewall."
+"Erreur : Votre serveur n'est pas accessible depuis internet. Vérifier les "
+"paramètres de votre firewall."
 
 #: src/team/team.cpp:120
 #, c-format
@@ -1068,8 +1069,7 @@ msgstr ""
 
 #: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
-msgstr ""
-"La ballon explosif a quitté le champ de bataille avant d'exploser."
+msgstr "La ballon explosif a quitté le champ de bataille avant d'exploser."
 
 #: src/weapon/gnu.cpp:143
 msgid "The Gnu left the battlefield before exploding"
@@ -1254,7 +1254,7 @@ msgstr "Il faut au minimum deux équipes valides !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vous ne pourrez jouer sans sélectionner d'équipe !"
 
-#: src/weapon/weapon_launcher.cpp:482
+#: src/weapon/weapon_launcher.cpp:479
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 

@@ -641,7 +641,7 @@ msgstr "Napaka pri nalaganju ekipe:"
 msgid "Error loading team's data %s:"
 msgstr "Napaka pri nalaganju podatkov ekipe %s:"
 
-#: src/game/config.cpp:462
+#: src/game/config.cpp:485
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -649,12 +649,12 @@ msgstr ""
 "Napaka pri ustvarjanju imenika \"%s\": ni bilo mogoče shraniti datoteke z "
 "nastavitvami."
 
-#: src/game/config.cpp:333
+#: src/game/config.cpp:337
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
 
-#: src/game/config.cpp:371
+#: src/game/config.cpp:394
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Napaka pri nalaganju datoteke s privzetimi nastavitvami: %s"
@@ -1020,11 +1020,11 @@ msgstr "Končaj bitko"
 msgid "Random map"
 msgstr "Naključna karta"
 
-#: src/game/config.cpp:346
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "Branje privzete nastavitvene datoteke"
 
-#: src/game/config.cpp:379
+#: src/game/config.cpp:402
 msgid "Reading personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
