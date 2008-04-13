@@ -312,7 +312,7 @@ bool JukeBox::PlayMusicSample(const std::vector<std::string>::const_iterator& fi
     Mix_FreeMusic(music);
 
   music = Mix_LoadMUS(file.c_str());
-
+  SetMusicVolume(Config::GetInstance()->GetVolumeMusic());
   MSG_DEBUG("jukebox", "We trying to load music %s", file.c_str());
 
   if(!music || Mix_PlayMusic(music, 0) < 0)
