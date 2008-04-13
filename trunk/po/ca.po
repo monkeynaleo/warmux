@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2008-04-09 09:46+0200\n"
-"PO-Revision-Date: 2008-03-15 12:59+0100\n"
+"PO-Revision-Date: 2008-04-12 16:08+0100\n"
 "Last-Translator: Juan <jua56@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,19 +21,21 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:324
+#: src/map/maps_list.cpp:330
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mape %s no trobat :-("
 
-#: src/menu/network_menu.cpp:119 src/menu/network_menu.cpp:305
+#: src/menu/network_menu.cpp:119
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i jugador connectat"
 msgstr[1] "%i jugadors connectats"
 
-#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:313
+#: src/menu/network_menu.cpp:123
+#: src/menu/network_menu.cpp:313
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -142,12 +144,8 @@ msgstr[1] "L'equip %s aconsegueix %u atacs aeris!"
 
 #: src/weapon/airhammer.cpp:174
 #, c-format
-msgid ""
-"%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
-"your neighbours."
-msgid_plural ""
-"%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
-"your neighbours."
+msgid "%s team has won %u airhammer! Don't make too much noise with it! Thanks, your neighbours."
+msgid_plural "%s team has won %u airhammers! Don't make too much noise with them! Thanks, your neighbours."
 msgstr[0] "L'equip %s aconsegueix %u martell volador!"
 msgstr[1] "L'equip %s aconsegueix %u martells voladors!"
 
@@ -181,11 +179,8 @@ msgstr[1] "L'equip %s aconsegueix %u bazookas"
 
 #: src/weapon/blowtorch.cpp:137
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
-msgid_plural ""
-"%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
-"it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid_plural "%s team has won %u blowtorchs! If you're under 18, ask your parents to use it."
 msgstr[0] "L'equip %s aconsegueix %u bufador!"
 msgstr[1] "L'equip %s aconsegueix %u bufadors!"
 
@@ -213,8 +208,7 @@ msgstr[1] "L'equip %s aconsegueix %u armes de construcció!"
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "L'equip %s aconsegueix %u disc explosiu!"
 msgstr[1] "L'equip %s aconsegueix %u discs explosius!"
 
@@ -312,8 +306,7 @@ msgstr[1] "L'equip %s aconsegueix %u escopetes!"
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural ""
-"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] "L'equip %s aconsegueix %u rifle!"
 msgstr[1] "L'equip %s aconsegueix %u rifles!"
 
@@ -359,12 +352,78 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'equip %s aconsegueix %u llançador de tux!"
 msgstr[1] "L'equip %s aconsegueix %u llançador de tux!"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr "L'equip %s ha guanyat."
+
+#. 1003.2 specifies the format of this message.
+#: src/msvc/getopt.c:792
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: opció il·legal -- %c\n"
+
+#: src/msvc/getopt.c:795
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: opció invalida -- %c\n"
+
+#: src/msvc/getopt.c:715
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: opció `%c%s' no suporta un argument \n"
+
+#: src/msvc/getopt.c:685
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: opció `%s' és ambigüa\n"
+
+#: src/msvc/getopt.c:733
+#: src/msvc/getopt.c:906
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: opció `%s' requereix un argument\n"
+
+#: src/msvc/getopt.c:710
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr "%s: opció  `--%s' no suporta un argument\n"
+
+#: src/msvc/getopt.c:890
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr "%s: opció  `-W %s' no suporta un argument\n"
+
+#: src/msvc/getopt.c:872
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr "%s: opció `-W %s' és ambigua\n"
+
+#. 1003.2 specifies the format of this message.
+#: src/msvc/getopt.c:825
+#: src/msvc/getopt.c:955
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: l'opció requereix un argument  -- %c\n"
+
+#. +option or -option
+#: src/msvc/getopt.c:766
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: opció no reconeguda `%c%s'\n"
+
+#. --option
+#: src/msvc/getopt.c:762
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: opció no reconeguda`--%s'\n"
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:191
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(idioma del sistema)"
 
@@ -377,14 +436,10 @@ msgstr "(temps desconegut)"
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
-#: src/menu/options_menu.cpp:322
+#: src/menu/options_menu.cpp:330
 #, c-format
-msgid ""
-"A new version %s is available, while your version is %s.You may want to "
-"check whether an update is available for your OS!"
-msgstr ""
-"La versió %s està disponible, però tens la versió %s. Potser vols veure si "
-"hi ha una actualització disponible per al teu sistema operatiu. "
+msgid "A new version %s is available, while your version is %s.You may want to check whether an update is available for your OS!"
+msgstr "La versió %s està disponible, però tens la versió %s. Potser vols veure si hi ha una actualització disponible per al teu sistema operatiu. "
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -397,6 +452,11 @@ msgstr "Martell aeri"
 #: src/menu/results_menu.cpp:446
 msgid "All teams"
 msgstr "Tots els equips "
+
+#: src/game/game_blitz.cpp:50
+#: src/game/game_classic.cpp:56
+msgid "And the winner is..."
+msgstr "El guanyador és..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -448,7 +508,8 @@ msgstr "Bounce Ball"
 msgid "Bye bye tux..."
 msgstr "Fins ara tux... "
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:505
 #: src/team/teams_list.cpp:552
 #, c-format
 msgid "Can't find team %s!"
@@ -464,7 +525,7 @@ msgstr "No es pot obrir el directori d'equips (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:129
 msgid "Check updates online?"
 msgstr "Comprovar actualitzacions a Internet? "
 
@@ -506,7 +567,8 @@ msgstr "Connectat a una partida"
 msgid "Connected !"
 msgstr "Connectat"
 
-#: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
+#: src/weapon/construct.cpp:59
+#: src/weapon/construct.cpp:67
 msgid "Construct"
 msgstr "Construir"
 
@@ -519,7 +581,8 @@ msgstr "Controlat per:"
 msgid "Couldn't fetch last version from %s"
 msgstr "No s'ha pogut tornar a la versió %s"
 
-#: src/network/chatlogger.cpp:64 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:64
+#: src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "No es va poder obrir l'arxiu %s"
@@ -531,6 +594,10 @@ msgstr "Crèdits"
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disc explosiu"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr "Mostra aquest missatge"
 
 #: src/menu/game_menu.cpp:95
 msgid "Duration of a turn"
@@ -544,12 +611,17 @@ msgstr "Dinamita"
 msgid "END OF GAME"
 msgstr "Fi del joc"
 
+#: src/menu/options_menu.cpp:148
+msgid "Effects volume"
+msgstr "Volum dels efectes"
+
 #: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Error en %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:125
+#: src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Error carregant l'equip:"
 
@@ -558,20 +630,17 @@ msgstr "Error carregant l'equip:"
 msgid "Error loading team's data %s:"
 msgstr "Error carregant dades de l'equip %s:"
 
-#: src/game/config.cpp:457
+#: src/game/config.cpp:485
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Error mentre es creava el directori \"%s\": no es pot guardar el fitxer de "
-"configuració."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Error mentre es creava el directori \"%s\": no es pot guardar el fitxer de configuració."
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:337
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Error carregant el fitxer de configuració: %s"
 
-#: src/game/config.cpp:368
+#: src/game/config.cpp:394
 #, c-format
 msgid "Error while loading default configuration file: %s"
 msgstr "Error carregant el fitxer de configuració: %s"
@@ -602,21 +671,15 @@ msgstr "Error: No es pot contactar amb el servidor on s'allotja la partida"
 
 #: src/menu/network_connection_menu.cpp:267
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr ""
-"Error: No es pot contactar amb el servidor per a trobar una partida a "
-"internet"
+msgstr "Error: No es pot contactar amb el servidor per a trobar una partida a internet"
 
 #: src/menu/network_connection_menu.cpp:244
 msgid "Error: Unable to start server"
 msgstr "Error: Imposible iniciar servidor"
 
 #: src/menu/network_connection_menu.cpp:238
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration"
-msgstr ""
-"Error: El teu servidor no es pot connectar a internet. Comprova la "
-"configuració del teu tallafoc. "
+msgid "Error: Your server is not reachable from the internet. Check your firewall configuration"
+msgstr "Error: El teu servidor no es pot connectar a internet. Comprova la configuració del teu tallafoc. "
 
 #: src/team/team.cpp:120
 #, c-format
@@ -631,7 +694,7 @@ msgstr "Llançaflames"
 msgid "Football Bomb"
 msgstr "Pantalla completa?"
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 msgid "Fullscreen?"
 msgstr "Pantalla completa?"
 
@@ -678,7 +741,8 @@ msgstr "Comandant cap"
 msgid "Head commander: "
 msgstr "Comandant cap:"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69
+#: src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "Ajuda"
 
@@ -713,8 +777,7 @@ msgid ""
 msgstr ""
 "Com usar-lo: clic esquerre sobre l'objectiu\n"
 "Angulo de foc inicial: Dalt/Baix\n"
-"Foc: mantingues premuda la barra espaciadora fins a arribar a la força "
-"desitjada\n"
+"Foc: mantingues premuda la barra espaciadora fins a arribar a la força desitjada\n"
 "un arma per torn "
 
 #: src/weapon/anvil.cpp:133
@@ -725,19 +788,20 @@ msgstr ""
 "Com usar-lo: botó dret sobre l'objectiu\n"
 " un arma per torn "
 
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Apressa't, ets massa lent"
+
 #: src/main.cpp:243
-msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
-"please):"
-msgstr ""
-"Si trobes un bug o tens una petició de funcionalitat, envia'ns un email (amb "
-"engles, per favor): "
+msgid "If you found a bug or have a feature request send us a email (in english, please):"
+msgstr "Si trobes un bug o tens una petició de funcionalitat, envia'ns un email (amb engles, per favor): "
 
 #: src/menu/game_menu.cpp:101
 msgid "Initial energy"
 msgstr "Energia inicial"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124
+#: src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -745,8 +809,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 "Angle inicial de foc: Dalt/Baix\n"
-" Foc: mantingues estreta la barra espaciadora fins a aconseguir la força "
-"desitjada\n"
+" Foc: mantingues estreta la barra espaciadora fins a aconseguir la força desitjada\n"
 " un arma per torn "
 
 #: src/game/game_init.cpp:155
@@ -773,15 +836,20 @@ msgstr "Això és un regal! "
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:139
+#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_menu.cpp:139
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Entra #en wormux en irc.freenode.net per a trobar algun contrincant."
 
-#: src/menu/options_menu.cpp:123
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr "Treu els jugadors designats per <nickname> fora del joc"
+
+#: src/menu/options_menu.cpp:124
 msgid "Language"
 msgstr "Idioma"
 
-#: src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:232
 msgid "Load maps:"
 msgstr "Carrega els mapas:"
 
@@ -811,7 +879,7 @@ msgstr "Mapes"
 msgid "Max number of players:"
 msgstr "Nombre de jugadors màxim per equip:"
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:88
 msgid "Maximum FPS"
 msgstr "Numero màxim de FPS"
 
@@ -843,9 +911,9 @@ msgstr "El més inutil"
 msgid "Most violent"
 msgstr "El més violent"
 
-#: src/menu/options_menu.cpp:139
-msgid "Music?"
-msgstr "Música?"
+#: src/menu/options_menu.cpp:141
+msgid "Music volume"
+msgstr "Volum de la música"
 
 #: src/menu/main_menu.cpp:63
 msgid "Network Game"
@@ -853,7 +921,7 @@ msgstr "Joc en xarxa"
 
 #: src/network/network.cpp:261
 msgid "Network initialization"
-msgstr "Inicialización del xarxa"
+msgstr "Inicialització de la xarxa"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:56
@@ -903,11 +971,11 @@ msgstr "Jugar"
 msgid "Player"
 msgstr "Jugador"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player energy?"
 msgstr "Energia del jugador?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Player's name?"
 msgstr "¿Nom del jugador?"
 
@@ -936,11 +1004,11 @@ msgstr "Sortir de la batalla"
 msgid "Random map"
 msgstr "Mapa aleatori"
 
-#: src/game/config.cpp:343
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "Llegint fitxer de configuració"
 
-#: src/game/config.cpp:376
+#: src/game/config.cpp:402
 msgid "Reading personal config file"
 msgstr "Llegint fitxer de configuració personal"
 
@@ -948,7 +1016,7 @@ msgstr "Llegint fitxer de configuració personal"
 msgid "Refresh"
 msgstr "Actualitzar"
 
-#: src/menu/options_menu.cpp:111
+#: src/menu/options_menu.cpp:112
 msgid "Resolution"
 msgstr "Resolució"
 
@@ -1003,11 +1071,7 @@ msgstr "Algú va posar un parany explosiu camuflat a caixa! "
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Lo siento, actualmente, ningún juego está esperando a jugadores"
 
-#: src/menu/options_menu.cpp:142
-msgid "Sound effects?"
-msgstr "Efectes sonors?"
-
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:169
 msgid "Sound frequency"
 msgstr "Freqüència del so"
 
@@ -1046,15 +1110,11 @@ msgstr "Teletransportació"
 
 #: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr ""
-"La bomba de fragmentació ha abandonat el camp de batalla abans que pogués "
-"explotar."
+msgstr "La bomba de fragmentació ha abandonat el camp de batalla abans que pogués explotar."
 
 #: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
-msgstr ""
-"La bomba de fragmentació ha abandonat es camp de batalla abans de poder "
-"explota."
+msgstr "La bomba de fragmentació ha abandonat es camp de batalla abans de poder explota."
 
 #: src/weapon/gnu.cpp:143
 msgid "The Gnu left the battlefield before exploding"
@@ -1062,9 +1122,7 @@ msgstr "El Gnu va abandonar el camp de batalla abans d'explotar. T'enyorarem"
 
 #: src/weapon/polecat.cpp:148
 msgid "The Polecat left the battlefield before exploding"
-msgstr ""
-"La mofeta va abandonar el camp de batalla abans d'explotar. Que el seu pudor "
-"descansi en pau. "
+msgstr "La mofeta va abandonar el camp de batalla abans d'explotar. Que el seu pudor descansi en pau. "
 
 #: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
@@ -1073,6 +1131,11 @@ msgstr "El coet automàtic ha anat a altre món... "
 #: src/weapon/bounce_ball.cpp:72
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilota ha abandonat el camp de batalla abans d'explotar."
+
+#: src/network/network_client.cpp:128
+#, c-format
+msgid "The client and server versions are incompatible (local=%s, server=%s). Please try another server."
+msgstr "El client i el servidor tenen la versió incompatible (client=%s, servidor=%s). Porfavor escull un altre servidor. "
 
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
@@ -1094,7 +1157,8 @@ msgstr "La granada ha abandonat el camp de batalla abans d'explotar. "
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Tots estan esperant! Venja que tots estan per tu :-) "
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83
+#: src/weapon/cluzooka.cpp:336
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "El coet ha anat a un altre mon..."
@@ -1104,9 +1168,8 @@ msgid "The server rejected the connection."
 msgstr "El servidor ha rebutjat la connexió."
 
 #: src/network/net_error_msg.cpp:51
-#, fuzzy
 msgid "The server rejected the connection: wrong password!"
-msgstr "El servidor ha rebutjat la connexió."
+msgstr "El servidor ha rebutjat la connexió: password erroni"
 
 #: src/menu/network_menu.cpp:236
 #, c-format
@@ -1115,7 +1178,8 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Solament hi ha %i equip."
 msgstr[1] "Solament hi ha %i equips."
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189
+#: src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1147,12 +1211,12 @@ msgstr "Eines"
 msgid "Unable to contact host."
 msgstr "Impossible contactar amb el servidor! "
 
-#: src/map/maps_list.cpp:236
+#: src/map/maps_list.cpp:242
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Imposible obrir el directori dels mapas (%s)!"
 
-#: src/map/maps_list.cpp:248
+#: src/map/maps_list.cpp:254
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Impossible obrir el directori dels mapes (%s)!"
@@ -1160,6 +1224,10 @@ msgstr "Impossible obrir el directori dels mapes (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Impossible usar aquest port!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr "Comando desconegut"
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1169,7 +1237,7 @@ msgstr "Sense nom"
 msgid "Version"
 msgstr "Versió"
 
-#: src/menu/options_menu.cpp:331
+#: src/menu/options_menu.cpp:339
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "La verificació de versió ha fallat per: %s\n"
@@ -1187,7 +1255,8 @@ msgstr "Esperant al servidor, tot el que pots fer és cancel·lar o xerrar!"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:131
+#: src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Armes"
 
@@ -1201,7 +1270,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s: ha estat mort per una simple pistola!"
 
 #. Various options
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Wind particles?"
 msgstr "Mostra les particulas del vent?"
 
@@ -1230,11 +1299,12 @@ msgstr "Estàs solament..."
 msgid "You are alone..."
 msgstr "Estàs solament... "
 
-#: src/map/maps_list.cpp:257
+#: src/map/maps_list.cpp:263
 msgid "You need at least one valid map !"
 msgstr "Tu necesites almenys un mapa vàlid!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124
+#: src/team/teams_list.cpp:176
 msgid "You need at least two valid teams !"
 msgstr "Tu necesites almenys dos equips vàlids!"
 
@@ -1280,16 +1350,16 @@ msgstr "de"
 msgid "no configuration file!"
 msgstr "no hi ha un fitxer de configuració"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:164
 msgid "o Loading music"
 msgstr "o Carregant musica"
 
-#: src/sound/jukebox.cpp:339
+#: src/sound/jukebox.cpp:338
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Carregant perfil de so: %s "
 
-#: src/sound/jukebox.cpp:91
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Obert àudio a %d Hz %d bit "
@@ -1298,72 +1368,49 @@ msgstr "o Obert àudio a %d Hz %d bit "
 #~ msgstr ""
 #~ "%s intenta a connectar-se amb una version diferent: client=%s, servidor=%"
 #~ "s. "
-
-#~ msgid ""
-#~ "The client and server versions are incompatible (local=%s, server=%s). "
-#~ "Please try another server."
-#~ msgstr ""
-#~ "El client i el servidor tenen la versió incompatible (client=%s, servidor="
-#~ "%s). Porfavor escull un altre servidor. "
-
+#~ msgid "C++ exception caught:"
+#~ msgstr "Excepció C++ interceptada :"
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Estar segur que vol sortir? (Y/N)"
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Duracio del temps despres del torn:"
+#~ msgid "End of the game!\n"
+#~ msgstr "Final de la partida !\n"
+#~ msgid "Energy:"
+#~ msgstr "Energia :"
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Error durant la carrega del skin %s :"
+#~ msgid "Info"
+#~ msgstr "Informació"
+#~ msgid "Load game data..."
+#~ msgstr "Carregant les dades del joc ..."
+#~ msgid "Load weapon %s"
+#~ msgstr "Carregant l'arma %s"
+#~ msgid "Music?"
+#~ msgstr "Música?"
+#~ msgid "Name:"
+#~ msgstr "Nom :"
 
 #, fuzzy
 #~ msgid "Network deinitialization"
 #~ msgstr "Inicialització..."
-
-#~ msgid "C++ exception caught:"
-#~ msgstr "Excepció C++ interceptada :"
-
+#~ msgid "Number of players per team:"
+#~ msgstr "Nombre de jugadors per equip:"
+#~ msgid "Pause"
+#~ msgstr "Pausa"
+#~ msgid "Please tell us your opinion of Wormux via email:"
+#~ msgstr "Siusplau dona'ns la teva opinió de Wormux per correu electrónic:"
+#~ msgid "Sound effects?"
+#~ msgstr "Efectes sonors?"
+#~ msgid "Sound error :"
+#~ msgstr "Error de so :"
+#~ msgid "The game has ended as a draw.\n"
+#~ msgstr "El joc ha acabat en empat.\n"
+#~ msgid "Use sound?"
+#~ msgstr "Utilitza so?"
 #~ msgid "You need at least two teams to play: change this in 'Options menu' !"
 #~ msgstr ""
 #~ "Necesites almenys dos equips per jugar, canvia això en 'Opcions del menú'!"
-
-#~ msgid "%s team has won.\n"
-#~ msgstr "L'equip %s ha guanyat.\n"
-
-#~ msgid "Duration of the end of a turn:"
-#~ msgstr "Duracio del temps despres del torn:"
-
-#~ msgid "End of the game!\n"
-#~ msgstr "Final de la partida !\n"
-
-#~ msgid "Energy:"
-#~ msgstr "Energia :"
-
-#~ msgid "Error during loading skin %s:"
-#~ msgstr "Error durant la carrega del skin %s :"
-
-#~ msgid "Info"
-#~ msgstr "Informació"
-
-#~ msgid "Load game data..."
-#~ msgstr "Carregant les dades del joc ..."
-
-#~ msgid "Load weapon %s"
-#~ msgstr "Carregant l'arma %s"
-
-#~ msgid "Name:"
-#~ msgstr "Nom :"
-
-#~ msgid "Number of players per team:"
-#~ msgstr "Nombre de jugadors per equip:"
-
-#~ msgid "Pause"
-#~ msgstr "Pausa"
-
-#~ msgid "Please tell us your opinion of Wormux via email:"
-#~ msgstr "Siusplau dona'ns la teva opinió de Wormux per correu electrónic:"
-
-#~ msgid "Sound error :"
-#~ msgstr "Error de so :"
-
-#~ msgid "The game has ended as a draw.\n"
-#~ msgstr "El joc ha acabat en empat.\n"
-
-#~ msgid "Use sound?"
-#~ msgstr "Utilitza so?"
 
 #, fuzzy
 #~ msgid "[Music] Error : file %s does not exist"
@@ -1376,3 +1423,4 @@ msgstr "o Obert àudio a %d Hz %d bit "
 #, fuzzy
 #~ msgid "disconnection!"
 #~ msgstr "Final de la partida"
+
