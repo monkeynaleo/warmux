@@ -449,8 +449,8 @@ void Config::LoadXml(const xmlpp::Element *xml)
   //=== Sound ===
   if ((elem = XmlReader::GetMarker(xml, "sound")) != NULL)
   {
-    XmlReader::ReadBool(elem, "music", sound_music); 	 
-    XmlReader::ReadBool(elem, "effects", sound_effects); 	 
+    XmlReader::ReadBool(elem, "music", sound_music);
+    XmlReader::ReadBool(elem, "effects", sound_effects);
     XmlReader::ReadUint(elem, "frequency", sound_frequency);
     XmlReader::ReadUint(elem, "volume_music", volume_music);
     XmlReader::ReadUint(elem, "volume_effects", volume_effects);
@@ -459,7 +459,7 @@ void Config::LoadXml(const xmlpp::Element *xml)
   //=== network ===
   if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
   {
-  //  XmlReader::ReadBool(elem, "enable_network", enable_network);
+    //XmlReader::ReadBool(elem, "enable_network", enable_network);
     XmlReader::ReadString(elem, "host", m_network_host);
     XmlReader::ReadString(elem, "port", m_network_port);
   }
@@ -570,8 +570,8 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== Sound ===
   xmlpp::Element *sound_node = root->add_child("sound");
-  doc.WriteElement(sound_node, "music",  ulong2str(JukeBox::GetConstInstance()->UseMusic())); 	 
-  doc.WriteElement(sound_node, "effects", ulong2str(JukeBox::GetConstInstance()->UseEffects())); 	 
+  doc.WriteElement(sound_node, "music",  ulong2str(JukeBox::GetConstInstance()->UseMusic()));
+  doc.WriteElement(sound_node, "effects", ulong2str(JukeBox::GetConstInstance()->UseEffects()));
   doc.WriteElement(sound_node, "frequency", ulong2str(JukeBox::GetConstInstance()->GetFrequency()));
   doc.WriteElement(sound_node, "volume_music",  ulong2str(volume_music));
   doc.WriteElement(sound_node, "volume_effects", ulong2str(volume_effects));
