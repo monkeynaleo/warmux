@@ -41,7 +41,7 @@ class ClusterBombConfig : public ExplosiveWeaponConfig
 public:
   uint nb_fragments;
   ClusterBombConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
+  virtual void LoadXml(xmlNode* elem);
 };
 
 class Cluster : public WeaponProjectile
@@ -215,7 +215,7 @@ ClusterBombConfig::ClusterBombConfig() :
   nb_fragments = 5;
 }
 
-void ClusterBombConfig::LoadXml(xmlpp::Element *elem)
+void ClusterBombConfig::LoadXml(xmlNode* elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "nb_fragments", nb_fragments);

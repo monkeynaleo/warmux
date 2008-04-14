@@ -29,6 +29,7 @@
 #define _RESOURCE_MANAGER_H
 
 #include <string>
+#include "include/base.h"
 #include "graphic/surface.h"
 #include "interface/mouse.h"
 #include "map/maps_list.h"
@@ -38,12 +39,8 @@
 #endif
 
 class Sprite;
-namespace xmlpp
-{
-  class Element;
-}
 class XmlReader;
-
+typedef struct _xmlNode xmlNode;
 class MouseCursor;
 
 class Profile
@@ -83,7 +80,7 @@ class ResourceManager
    Surface LoadImage(const Profile *profile, const std::string& resource_name) const;
    Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
    Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height) const;
-   xmlpp::Element * GetElement(const Profile *profile, const std::string& ressource_type, const std::string& ressource_name) const;
+   xmlNode*  GetElement(const Profile *profile, const std::string& ressource_type, const std::string& ressource_name) const;
 
  private:
    std::string base_path;

@@ -40,11 +40,7 @@
 
 // Forward declarations
 class ObjectConfig;
-
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 //-----------------------------------------------------------------------------
 #ifdef WIN32
@@ -200,7 +196,7 @@ protected:
 private:
   bool DoLoading(void);
   void LoadDefaultValue();
-  void LoadXml(const xmlpp::Element *xml);
+  void LoadXml(xmlNode* xml);
 
   // return true if the directory is created
   bool MkdirPersonalConfigDir();

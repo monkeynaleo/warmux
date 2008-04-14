@@ -17,7 +17,7 @@ msgstr ""
 "2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nav atrasta :-("
@@ -43,12 +43,12 @@ msgstr[2] "%i spēlētāju gatavi"
 msgid "%s (%s) has died."
 msgstr "%s (%s ) ir nomiris."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s no %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> no %s"
@@ -478,18 +478,18 @@ msgstr "Lēkājosā bumba"
 msgid "Bye bye tux..."
 msgstr "Attā attā tux..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nevar atrast komandu %s!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
@@ -584,35 +584,15 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Kļūda %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Kļūda ielādējot komandu :"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Kļūda ielādējot komandas datus %s:"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Kļūda veidojot mapi \"%s\": nevar sglabāt konfigurācijas failu."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Kļūda ielādējot konfigurācijas failu: %s"
-
-#: src/game/config.cpp:394
-#, fuzzy, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Kļūda ielādējot konfigurācijas failu: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Kļūda ielādējot spēles režīmu %s (fails %s):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -648,7 +628,7 @@ msgid ""
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Kļūda: Nevar atrast ķermeni \"%s\" komandai \"%s\"."
@@ -814,11 +794,11 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "Ielādē kartes:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Ielādē komandas:"
 
@@ -894,7 +874,7 @@ msgstr "Tīkla inicializācija"
 msgid "New network game at "
 msgstr "Tīkla spēle"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "<%s> elementi nav atrasti xml konfigurācijas failā!"
@@ -972,12 +952,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Ielādē kartes:"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
@@ -1176,12 +1156,12 @@ msgstr "Rīki"
 msgid "Unable to contact host."
 msgstr "Nevar pieslēgties."
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nevar atvērt karšu mapi (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nevar atvērt karšu mapi (%s)!"
@@ -1247,11 +1227,6 @@ msgstr "Wormux ielādējas..."
 msgid "Wormux version "
 msgstr "Wormux versija "
 
-#: src/map/maps_list.cpp:89
-#, fuzzy, c-format
-msgid "XML error during loading map '%s': "
-msgstr "XML kļūda ielādējot karti '%s' :"
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "Jūs esat viens pats :-/"
@@ -1260,11 +1235,11 @@ msgstr "Jūs esat viens pats :-/"
 msgid "You are alone..."
 msgstr "Jūs esat viens pats..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "Jums nepieciešama vismaz viena derīga karte !"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "Jums nepieciešamas vismaz divas derīgas komandas !"
 
@@ -1276,7 +1251,7 @@ msgstr ""
 msgid "Your shot has missed!"
 msgstr "Jūs netrāpijāt!"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "aka"
 
@@ -1290,7 +1265,7 @@ msgstr ""
 "Bombardēšana : kreisais klikšķis uz mērķa\n"
 "bombardēšana gājienā"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr ""
 
@@ -1298,16 +1273,16 @@ msgstr ""
 msgid "done"
 msgstr "darīts"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 #, fuzzy
 msgid "error parsing the config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "no"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 #, fuzzy
 msgid "no configuration file!"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
@@ -1316,7 +1291,7 @@ msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 msgid "o Loading music"
 msgstr "o Ielādē mūsiku"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Ielādē skaņas profilu: %s"
@@ -1325,6 +1300,23 @@ msgstr "o Ielādē skaņas profilu: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Atver skaņu %d Hz %d bit"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Kļūda ielādējot komandas datus %s:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Kļūda ielādējot konfigurācijas failu: %s"
+
+#, fuzzy
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Kļūda ielādējot konfigurācijas failu: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Kļūda ielādējot spēles režīmu %s (fails %s):"
+
+#, fuzzy
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "XML kļūda ielādējot karti '%s' :"
 
 #~ msgid "Music?"
 #~ msgstr "Mūzika?"

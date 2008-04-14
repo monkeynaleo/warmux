@@ -177,19 +177,18 @@ void JukeBox::LoadMusicXML()
   if(!doc.Load(xml_filename))
     return;
 
-  xmlpp::Node::NodeList nodes = doc.GetRoot()->get_children("music");
-  xmlpp::Node::NodeList::iterator
+  xmlNodeArray nodes = XmlReader::GetNamedNeighbours(doc.GetRoot(), "music");
+  xmlNodeArray::const_iterator
     it = nodes.begin(),
     end = nodes.end();
 
   for (; it != end; ++it)
   {
     // loading XML ...
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     std::string sample="no_sample";
     std::string file="no_file";
-    XmlReader::ReadStringAttr(elem, "type", sample);
-    XmlReader::ReadStringAttr(elem, "playlist", file);
+    XmlReader::ReadStringAttr(*it, "type", sample);
+    XmlReader::ReadStringAttr(*it, "playlist", file);
 
     MSG_DEBUG("jukebox", "Load music sample %s", sample.c_str());
 
@@ -352,19 +351,18 @@ void JukeBox::LoadXML(const std::string& profile)
   if(!doc.Load(xml_filename))
     return;
 
-  xmlpp::Node::NodeList nodes = doc.GetRoot()->get_children("sound");
-  xmlpp::Node::NodeList::iterator
+  xmlNodeArray nodes = XmlReader::GetNamedNeighbours(doc.GetRoot(), "sound");
+  xmlNodeArray::const_iterator
     it = nodes.begin(),
     end = nodes.end();
 
   for (; it != end; ++it)
   {
     // reads XML
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     std::string sample="no_sample";
     std::string file="no_file";
-    XmlReader::ReadStringAttr(elem, "sample", sample);
-    XmlReader::ReadStringAttr(elem, "file", file);
+    XmlReader::ReadStringAttr(*it, "sample", sample);
+    XmlReader::ReadStringAttr(*it, "file", file);
 
     MSG_DEBUG("jukebox", "Load sound sample %s/%s: %s",
               profile.c_str(), sample.c_str(), file.c_str());

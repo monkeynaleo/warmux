@@ -28,11 +28,8 @@
 class Team;
 class Character;
 class Sprite;
+typedef struct _xmlNode xmlNode;
 class Action;
-namespace xmlpp
-{
-  class Element;
-}
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
@@ -50,7 +47,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     ~ObjBox();
 
     void DropBox();
-    static void LoadXml(xmlpp::Element * /*object*/){};
+    static void LoadXml(xmlNode*  /*object*/){};
 
     void Draw();
     virtual void Refresh();

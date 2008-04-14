@@ -52,7 +52,7 @@ class AirhammerConfig : public WeaponConfig
     uint range;
     uint damage;
     AirhammerConfig();
-    void LoadXml(xmlpp::Element *elem);
+    void LoadXml(xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
@@ -192,7 +192,7 @@ AirhammerConfig::AirhammerConfig(){
 
 //-----------------------------------------------------------------------------
 
-void AirhammerConfig::LoadXml(xmlpp::Element *elem){
+void AirhammerConfig::LoadXml(xmlNode* elem){
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
   XmlReader::ReadUint(elem, "damage", damage);

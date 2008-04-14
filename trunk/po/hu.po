@@ -10,7 +10,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "A(z) %s p�lya nem tal�lhat�"
@@ -34,12 +34,12 @@ msgstr[1] "%i j�t�kos k�sz"
 msgid "%s (%s) has died."
 msgstr "%s (%s csapat) meghalt."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s>, ismertebb nev�n %s a(z) %s csapatb�l"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a(z) %s csapatb�l"
@@ -473,18 +473,18 @@ msgstr "Gumilabda"
 msgid "Bye bye tux..."
 msgstr "Viszl�t, pingvin..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nem tal�lom a(z) %s csapatot!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok k�nyvt�r�t (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok k�nyvt�r�t (%s)!"
@@ -580,37 +580,17 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Hiba a k�vetkez�ben: %s, %lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Hiba a csapat bet�lt�se k�zben:"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Hiba a csapat adatainak bet�lt�se k�zben (%s):"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Hiba a(z) \"%s\" k�nyvt�r l�trehoz�sa k�zben: nem lehet a konfigur�ci�s "
 "f�jlt menteni."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
-
-#: src/game/config.cpp:394
-#, fuzzy, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Hiba a(z) %s j�t�km�d bet�lt�se k�zben (%s f�jl):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -645,7 +625,7 @@ msgid ""
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem tal�lom a(z) \"%s\" testet a(z) \"%s\" csapathoz."
@@ -798,11 +778,11 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "T�rk�pek bet�lt�se:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Csapatok bet�lt�se:"
 
@@ -879,7 +859,7 @@ msgstr "H�l�zat el�k�sz�t�se"
 msgid "New network game at "
 msgstr "H�l�zati j�t�k"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "A(z) <%s> elem nem tal�lhat� a konfigur�ci�s XML f�jlban!"
@@ -961,12 +941,12 @@ msgstr ""
 "%s tĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ rkĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ p "
 "betĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂltĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ se"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
@@ -1157,12 +1137,12 @@ msgstr "Eszk�z�k"
 msgid "Unable to contact host."
 msgstr "Nem siker�lt csatlakozni a kiszolg�l�hoz."
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nem siker�lt megnyitni a p�ly�k k�nyvt�r�t (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nem siker�lt megnyitni a p�ly�k k�nyvt�r�t (%s)!"
@@ -1228,11 +1208,6 @@ msgstr "Wormux ind�t�sa..."
 msgid "Wormux version "
 msgstr "Wormux verzi� "
 
-#: src/map/maps_list.cpp:89
-#, fuzzy, c-format
-msgid "XML error during loading map '%s': "
-msgstr "XML hiba a(z) '%s' p�lya bet�lt�se k�zben:"
-
 #: src/menu/network_menu.cpp:323
 #, fuzzy
 msgid "You are alone :-/"
@@ -1242,11 +1217,11 @@ msgstr "Egyed�l vagy..."
 msgid "You are alone..."
 msgstr "Egyed�l vagy..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "V�lasztanod kell legal�bb egy p�ly�t!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "V�lasztanod kell legal�bb k�t csapatot!"
 
@@ -1258,7 +1233,7 @@ msgstr ""
 msgid "Your shot has missed!"
 msgstr "Ez mell� ment!"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 #, fuzzy
 msgid "aka"
 msgstr ", ismertebb nev�n"
@@ -1270,7 +1245,7 @@ msgid ""
 "a bombing per turn"
 msgstr ""
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr ""
 
@@ -1278,17 +1253,17 @@ msgstr ""
 msgid "done"
 msgstr "k�sz"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 #, fuzzy
 msgid "error parsing the config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 #, fuzzy
 msgid "from"
 msgstr "a k�vetkez�t�l:"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 #, fuzzy
 msgid "no configuration file!"
 msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
@@ -1297,7 +1272,7 @@ msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
 msgid "o Loading music"
 msgstr "Zene bet�lt�se"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Hangprofil bet�lt�se: %s"
@@ -1306,6 +1281,23 @@ msgstr "Hangprofil bet�lt�se: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Hangmin�s�g: %d Hz, %d bit"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Hiba a csapat adatainak bet�lt�se k�zben (%s):"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
+
+#, fuzzy
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Hiba a konfigur�ci�s f�jl bet�lt�se k�zben: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Hiba a(z) %s j�t�km�d bet�lt�se k�zben (%s f�jl):"
+
+#, fuzzy
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "XML hiba a(z) '%s' p�lya bet�lt�se k�zben:"
 
 #~ msgid "Music?"
 #~ msgstr "Zene"
@@ -1417,8 +1409,7 @@ msgstr "Hangmin�s�g: %d Hz, %d bit"
 #~ "kĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ t csapatot kell "
 #~ "verbuvĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂlnod a "
 #~ "jĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂtĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ khoz! "
-#~ "Ezt a "
-#~ "BeĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂllĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂ­"
+#~ "Ezt a BeĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂllĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂ­"
 #~ "tĂÂĂÂÄÂĂÂĂÂĂÂÄÂĂÂsok "
 #~ "menĂÂĂÂÄÂĂÂÄÂÄšÄĂĹĄĂÂpont alatt teheted meg!"
 

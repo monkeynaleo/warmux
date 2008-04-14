@@ -23,10 +23,7 @@
 #define WEAPON_CONFIGURATION_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 //-----------------------------------------------------------------------------
 
@@ -34,7 +31,7 @@ class EmptyWeaponConfig
 {
 public:
    virtual ~EmptyWeaponConfig() {};
-   virtual void LoadXml(xmlpp::Element *elem) = 0;
+   virtual void LoadXml(xmlNode* elem) = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -46,7 +43,7 @@ public:
 public:
   WeaponConfig();
   virtual ~WeaponConfig() {};
-  virtual void LoadXml(xmlpp::Element *elem);
+  virtual void LoadXml(xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
@@ -63,7 +60,7 @@ public:
 public:
   ExplosiveWeaponConfig();
   virtual ~ExplosiveWeaponConfig() {};
-   virtual void LoadXml(xmlpp::Element *elem);
+   virtual void LoadXml(xmlNode* elem);
 
 
 };

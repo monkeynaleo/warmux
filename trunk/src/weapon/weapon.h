@@ -31,10 +31,7 @@
 class Character;
 class Sprite;
 class EmptyWeaponConfig;
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 // Infinite ammos constant
 extern const int INFINITE_AMMO;
@@ -298,7 +295,7 @@ public:
 
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
-  bool LoadXml(const xmlpp::Element * weapon);
+  bool LoadXml(xmlNode*  weapon);
 
   // return the strength of the weapon
   double ReadStrength() const { return m_strength; };

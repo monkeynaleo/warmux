@@ -128,30 +128,29 @@ std::vector<struct WeaponProba> BonusBox::weapon_list;
   and retrieved by weapon.GetBonusProbability() and weapon.GetBonusAmmo()
   however, this is not the way that was chosen.
 */
-void BonusBox::LoadXml(const xmlpp::Element * object)
+void BonusBox::LoadXml(xmlNode* object)
 {
   total_probability = 0;
   struct WeaponProba w;
 
   XmlReader::ReadInt(object, "life_points", start_life_points);
-  object = XmlReader::GetMarker(object, "probability");
+  xmlNode* node = XmlReader::GetMarker(object, "probability");
   std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList();
   std::list<Weapon*>::iterator
     itw = l_weapons_list.begin(),
     end = l_weapons_list.end();
-  xmlpp::Element *elem;
 
   for(; itw != end; ++itw) {
     w.weapon = *itw;
 
-    if (!XmlReader::ReadDouble(object, w.weapon->GetID().c_str(), w.probability) || w.probability == 0.0) {
+    if (!XmlReader::ReadDouble(node, w.weapon->GetID().c_str(), w.probability) || w.probability == 0.0) {
       std::cerr << "No bonus probability defined for weapon "
 		<< w.weapon->GetID().c_str() << std::endl;
       continue;
     }
     total_probability += w.probability;
 
-    elem = XmlReader::GetMarker(object, w.weapon->GetID());
+    xmlNode* elem = XmlReader::GetMarker(node, w.weapon->GetID());
     ASSERT(elem != NULL);
     XmlReader::ReadIntAttr (elem, "ammo", w.nb_ammos);
 

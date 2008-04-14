@@ -19,7 +19,6 @@
  * Team handling
  *****************************************************************************/
 
-#include <libxml++/libxml++.h>
 #include "team/team.h"
 #include "team/team_config.h"
 #include "team/teams_list.h"
@@ -124,13 +123,6 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name
     std::cerr << std::endl
               << Format(_("Error loading team :")) << team_name <<":"<< error
               << std::endl;
-    return;
-  }
-
-  catch (const xmlpp::exception &e) {
-    std::cerr << std::endl
-              << Format(_("Error loading team :")) << team_name << std::endl
-              << e.what() << std::endl;
     return;
   }
 }

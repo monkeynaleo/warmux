@@ -77,7 +77,8 @@ void Physics::SetSpeedXY (Point2d vector)
   m_pos_y.x1 = vector.y ;
   // setting to FreeFall is done in StartMoving()
 
-  if (!was_moving && IsMoving()) StartMoving();
+  if (!was_moving && IsMoving())
+    StartMoving();
 }
 
 void Physics::AddSpeedXY (Point2d vector)
@@ -90,7 +91,8 @@ void Physics::AddSpeedXY (Point2d vector)
   m_pos_y.x1 += vector.y ;
   // setting to FreeFall is done in StartMoving()
 
-  if (!was_moving && IsMoving()) StartMoving();
+  if (!was_moving && IsMoving())
+    StartMoving();
 }
 
 void Physics::GetSpeed(double &norm, double &angle) const
@@ -184,7 +186,7 @@ void Physics::SetExternForceXY (const Point2d& vector)
 {
   bool was_moving = IsMoving();
 
-  MSG_DEBUG ("physic.physic", "%s EXTERN FORCE.", typeid(*this).name());
+  MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
 
   m_extern_force.SetValues(vector);
 
@@ -241,7 +243,8 @@ void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
 
       bool was_moving = IsMoving();
       m_motion_type = Pendulum ;
-      if (!was_moving && IsMoving()) StartMoving();
+      if (!was_moving && IsMoving())
+        StartMoving();
     }
 }
 
@@ -276,7 +279,8 @@ void Physics::ChangePhysRopeSize(double dl)
   // Recompute angular speed depending on the new rope length.
   m_rope_angle.x1 = m_rope_angle.x1 * (m_rope_length.x0 - dl) / m_rope_length.x0 ;
 
-  if (!was_moving && IsMoving()) StartMoving();
+  if (!was_moving && IsMoving())
+    StartMoving();
 }
 
 
@@ -291,12 +295,12 @@ void Physics::StartMoving()
   if (m_motion_type == NoMotion)
     m_motion_type = FreeFall ;
 
-  MSG_DEBUG ("physic.physic", "%s starts moving.", typeid(*this).name());
+  MSG_DEBUG ("physic.physic", "Starting to move: %s.", typeid(*this).name());
 }
 
 void Physics::StopMoving()
 {
-  if (IsMoving()) MSG_DEBUG ("physic.physic", "%s stops moving...", typeid(*this).name());
+  if (IsMoving()) MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
   // Always called by PhysicalObj::StopMoving
   m_pos_x.x1 = 0 ;
   m_pos_x.x2 = 0 ;

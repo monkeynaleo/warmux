@@ -34,10 +34,7 @@ class Member;
 class Movement;
 class Clothe;
 class Profile;
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 enum BodyDirection
 {
@@ -108,7 +105,7 @@ class Body
 
 public:
 
-  Body(xmlpp::Element *xml, const Profile* res);
+  Body(xmlNode* xml, const Profile* res);
   Body(const Body&);
   ~Body();
 

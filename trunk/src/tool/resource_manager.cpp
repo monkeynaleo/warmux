@@ -63,7 +63,7 @@ void ResourceManager::AddDataPath(const std::string& base_path)
 int ResourceManager::LoadInt(const Profile *profile, const std::string& resource_name) const
 {
   int tmp = 0;
-  xmlpp::Element *elem = GetElement(profile, "int", resource_name);
+  xmlNode* elem = GetElement(profile, "int", resource_name);
   if (elem == NULL)
     Error("ResourceManager: can't find int resource \""+resource_name+"\" in profile "+profile->filename);
   if (!profile->doc->ReadIntAttr(elem, "value", tmp))
@@ -74,7 +74,7 @@ int ResourceManager::LoadInt(const Profile *profile, const std::string& resource
 double ResourceManager::LoadDouble(const Profile *profile, const std::string& resource_name) const
 {
   double tmp = 0.0;
-  xmlpp::Element *elem = GetElement(profile, "double", resource_name);
+  xmlNode* elem = GetElement(profile, "double", resource_name);
   if (elem == NULL)
     Error("ResourceManager: can't find double resource \""+resource_name+"\" in profile "+profile->filename);
   if (!profile->doc->ReadDoubleAttr(elem, "value", tmp))
@@ -84,7 +84,7 @@ double ResourceManager::LoadDouble(const Profile *profile, const std::string& re
 
 Color ResourceManager::LoadColor(const Profile *profile, const std::string& resource_name) const
 {
-  xmlpp::Element *elem = GetElement(profile, "color", resource_name);
+  xmlNode* elem = GetElement(profile, "color", resource_name);
   if ( elem == NULL)
     Error("ResourceManager: can't find color resource \""+resource_name+"\" in profile "+profile->filename);
 
@@ -99,7 +99,7 @@ Color ResourceManager::LoadColor(const Profile *profile, const std::string& reso
 
 Point2i ResourceManager::LoadPoint2i(const Profile *profile, const std::string& resource_name) const
 {
-  xmlpp::Element *elem = GetElement(profile, "point", resource_name);
+  xmlNode* elem = GetElement(profile, "point", resource_name);
   if ( elem == NULL)
     Error("ResourceManager: can't find point resource \""+resource_name+"\" in profile "+profile->filename);
 
@@ -114,7 +114,7 @@ Point2i ResourceManager::LoadPoint2i(const Profile *profile, const std::string& 
 
 Point2d ResourceManager::LoadPoint2d(const Profile *profile, const std::string& resource_name) const
 {
-  xmlpp::Element *elem = GetElement(profile, "point", resource_name);
+  xmlNode* elem = GetElement(profile, "point", resource_name);
   if ( elem == NULL)
     Error("ResourceManager: can't find point resource \""+resource_name+"\" in profile "+profile->filename);
 
@@ -130,7 +130,7 @@ Point2d ResourceManager::LoadPoint2d(const Profile *profile, const std::string& 
 MouseCursor ResourceManager::LoadMouseCursor(const Profile *profile, const std::string& resource_name,
 					     Mouse::pointer_t _pointer_id) const
 {
-  xmlpp::Element *elem = GetElement ( profile, "mouse_cursor", resource_name);
+  xmlNode* elem = GetElement ( profile, "mouse_cursor", resource_name);
   if(elem == NULL)
     Error("ResourceManager: can't find mouse cursor resource \""+resource_name+"\" in profile "+profile->filename);
 
@@ -200,13 +200,13 @@ void ResourceManager::UnLoadXMLProfile( Profile *profile) const
    delete profile;
 }
 
-xmlpp::Element * ResourceManager::GetElement( const Profile *profile, const std::string& resource_type, const std::string& resource_name) const
+xmlNode*  ResourceManager::GetElement( const Profile *profile, const std::string& resource_type, const std::string& resource_name) const
 {
-  xmlpp::Element *elem = profile->doc->Access(profile->doc->GetRoot(), resource_type, resource_name);
+  xmlNode* elem = profile->doc->Access(profile->doc->GetRoot(), resource_type, resource_name);
 
   if(elem == NULL) {
     std::string r_name = resource_name;
-    xmlpp::Element *cur_elem = profile->doc->GetRoot();
+    xmlNode* cur_elem = profile->doc->GetRoot();
 
     while((r_name.find("/") != r_name.npos) && (cur_elem != NULL)) {
       cur_elem = profile->doc->Access(cur_elem, "section", r_name.substr(0, r_name.find("/")));
@@ -220,7 +220,7 @@ xmlpp::Element * ResourceManager::GetElement( const Profile *profile, const std:
 
 Surface ResourceManager::LoadImage( const Profile *profile, const std::string& resource_name) const
 {
-  xmlpp::Element *elem = GetElement ( profile, "surface", resource_name);
+  xmlNode* elem = GetElement ( profile, "surface", resource_name);
   if(elem == NULL)
     Error("ResourceManager: can't find image resource \""+resource_name+"\" in profile "+profile->filename);
 
@@ -238,11 +238,11 @@ Surface ResourceManager::LoadImage( const Profile *profile, const std::string& r
 
 Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& resource_name) const
 {
-  xmlpp::Element *elem_sprite = GetElement(profile, "sprite", resource_name);
+  xmlNode* elem_sprite = GetElement(profile, "sprite", resource_name);
   if(elem_sprite == NULL)
     Error("ResourceManager: can't find sprite resource \""+resource_name+"\" in profile "+profile->filename);;
 
-  xmlpp::Element *elem_image = profile->doc->GetMarker(elem_sprite, "image");
+  xmlNode* elem_image = profile->doc->GetMarker(elem_sprite, "image");
 
   if(elem_image == NULL)
     Error("ResourceManager: can't load (sprite) resource " + resource_name);
@@ -257,9 +257,10 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& r
   bool alpha = true;
   Sprite *sprite = NULL;
 
-  xmlpp::Element *elem_grid = profile->doc->GetMarker(elem_image, "grid");
+  xmlNode* elem_grid = profile->doc->GetMarker(elem_image, "grid");
 
   if ( elem_grid == NULL ) {
+    ASSERT(resource_name != "barrel");
     // No grid element, Load the Sprite like a normal image
     Surface surface = LoadImage(profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
@@ -300,7 +301,7 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& r
 
   ASSERT(sprite != NULL);
 
-  xmlpp::Element *elem = profile->doc->GetMarker(elem_sprite, "animation");
+  xmlNode* elem = profile->doc->GetMarker(elem_sprite, "animation");
   if ( elem != NULL ) {
     std::string str;
     // Set the frame speed

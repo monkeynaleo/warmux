@@ -29,6 +29,7 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <errno.h>
+#include <libxml/tree.h>
 #ifdef WIN32
 #  include <direct.h>
 #endif
@@ -322,86 +323,74 @@ bool Config::DoLoading(void)
   MkdirPersonalDataDir();
   MkdirPersonalConfigDir();
 
-  try {
-    // Load XML conf
-    XmlReader doc;
+  // Load XML conf
+  XmlReader doc;
 
-    m_filename = personal_config_dir + FILENAME;
+  m_filename = personal_config_dir + FILENAME;
 
-    if (!doc.Load(m_filename))
-      return false;
-
-    LoadXml(doc.GetRoot());
-  } catch (const xmlpp::exception &e) {
-    std::cout << "o "
-        << _("Error while loading configuration file: %s") << std::endl
-        << e.what() << std::endl;
+  if (!doc.Load(m_filename))
     return false;
-  }
+
+  LoadXml(doc.GetRoot());
+
   return true;
 }
 
 void Config::LoadDefaultValue()
 {
-  try { // Load default XML conf
-    m_default_config = GetDataDir() + PATH_SEPARATOR + "wormux_default_config.xml";
-    Profile *res = resource_manager.LoadXMLProfile(m_default_config, true);
+  // Load default XML conf
+  m_default_config = GetDataDir() + PATH_SEPARATOR + "wormux_default_config.xml";
+  Profile *res = resource_manager.LoadXMLProfile(m_default_config, true);
 
-    std::cout << "o " << _("Reading default config file") << std::endl;
-    std::ostringstream section;
-    Point2i tmp;
+  std::cout << "o " << _("Reading default config file") << std::endl;
+  std::ostringstream section;
+  Point2i tmp;
 
-    //=== Default video value ===
-    int number_of_resolution_available = resource_manager.LoadInt(res, "default_video_mode/number_of_resolution_available");
-    for(int i = 1; i <= number_of_resolution_available; i++) {
-      tmp = Point2i(0, 0);
-      std::ostringstream section; section << "default_video_mode/" << i;
-      tmp = resource_manager.LoadPoint2i(res, section.str());
-      if(tmp.GetX() > 0 && tmp.GetY() > 0)
-        resolution_available.push_back(tmp);
-    }
+  //=== Default video value ===
+  int number_of_resolution_available = resource_manager.LoadInt(res, "default_video_mode/number_of_resolution_available");
+  for(int i = 1; i <= number_of_resolution_available; i++) {
+    tmp = Point2i(0, 0);
+    std::ostringstream section; section << "default_video_mode/" << i;
+    tmp = resource_manager.LoadPoint2i(res, section.str());
+    if(tmp.GetX() > 0 && tmp.GetY() > 0)
+      resolution_available.push_back(tmp);
+  }
 
-    //=== Default fonts value ===
-    xmlpp::Element *node = resource_manager.GetElement(res, "section", "default_language_fonts");
-    if (node) {
-      xmlpp::Node::NodeList list = node->get_children("language");
-      for (xmlpp::Node::NodeList::iterator it = list.begin(); it != list.end(); ++it) {
-        std::string lang, font;
-        const xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*it);
-        if (res->doc->ReadStringAttr(elem, "name", lang) &&
-            res->doc->ReadStringAttr(elem, "file", font)) {
-          bool rel = false;
-          res->doc->ReadBoolAttr(elem, "relative", rel);
-          fonts[lang] = (rel) ? font_dir + PATH_SEPARATOR + font : font;
-          //std::cout << "Language " << lang << ": " << fonts[lang] << std::endl;
-        }
+  //=== Default fonts value ===
+  xmlNode *node = resource_manager.GetElement(res, "section", "default_language_fonts");
+  if (node) {
+    xmlNodeArray list = XmlReader::GetNamedChildren(node, "language");
+    for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it) {
+      std::string lang, font;
+      if (res->doc->ReadStringAttr(*it, "name", lang) &&
+         res->doc->ReadStringAttr(*it, "file", font)) {
+        bool rel = false;
+        res->doc->ReadBoolAttr(*it, "relative", rel);
+        fonts[lang] = (rel) ? font_dir + PATH_SEPARATOR + font : font;
+        //std::cout << "Language " << lang << ": " << fonts[lang] << std::endl;
       }
     }
-    else printf("Bleh...\n");
-
-    //== Team Color
-    /*int number_of_team_color = resource_manager.LoadInt(res, "team_colors/number_of_team_color");
-    for(int i = 1; i <= number_of_team_color; i++) {
-      tmp = Point2i(0, 0);
-      std::ostringstream section; section << "team_colors/" << i;
-      tmp = resource_manager.LoadPoint2i(res, section.str());
-      if(tmp.GetX() > 0 && tmp.GetY() > 0)
-        resolution_available.push_back(tmp);
-    }*/
-    resource_manager.UnLoadXMLProfile(res);
-  } catch (const xmlpp::exception &e) {
-    std::cout << "o "
-        << _("Error while loading default configuration file: %s") << std::endl
-        << e.what() << std::endl;
   }
+  else printf("Bleh...\n");
+
+#if 0 //== Team Color
+  int number_of_team_color = resource_manager.LoadInt(res, "team_colors/number_of_team_color");
+  for(int i = 1; i <= number_of_team_color; i++) {
+    tmp = Point2i(0, 0);
+    std::ostringstream section; section << "team_colors/" << i;
+    tmp = resource_manager.LoadPoint2i(res, section.str());
+    if(tmp.GetX() > 0 && tmp.GetY() > 0)
+      resolution_available.push_back(tmp);
+  }
+#endif
+
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 // Read personal config file
-void Config::LoadXml(const xmlpp::Element *xml)
+void Config::LoadXml(xmlNode *xml)
 {
   std::cout << "o " << _("Reading personal config file") << std::endl;
-
-  xmlpp::Element *elem;
 
   //=== Map ===
   XmlReader::ReadString(xml, "map", map_name);
@@ -411,10 +400,10 @@ void Config::LoadXml(const xmlpp::Element *xml)
   SetLanguage(default_language);
 
   //=== Teams ===
-  elem = XmlReader::GetMarker(xml, "teams");
+  xmlNode *elem = XmlReader::GetMarker(xml, "teams");
   int i = 0;
 
-  xmlpp::Element *team;
+  xmlNode *team;
 
   while ((team = XmlReader::GetMarker(elem, "team_" + ulong2str(i))) != NULL)
   {
@@ -497,7 +486,7 @@ bool Config::SaveXml(bool save_current_teams)
   XmlWriter doc;
 
   doc.Create(m_filename, "config", "1.0", "utf-8");
-  xmlpp::Element *root = doc.GetRoot();
+  xmlNode *root = doc.GetRoot();
   doc.WriteElement(root, "version", Constants::WORMUX_VERSION);
 
   //=== Map ===
@@ -509,7 +498,8 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(root, "default_language", default_language);
 
   //=== Teams ===
-  xmlpp::Element *team_elements = root->add_child("teams");
+  xmlNode *team_elements = xmlAddChild(root,
+                                       xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"teams"));
 
   if (TeamsList::IsLoaded())
   {
@@ -538,16 +528,18 @@ bool Config::SaveXml(bool save_current_teams)
 
     for (int i=0; it != end; ++it, i++)
     {
-      xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));
-      doc.WriteElement(a_team, "id", (*it).id);
-      doc.WriteElement(a_team, "player_name", (*it).player_name);
-      doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
+       std::string name = "team_"+ulong2str(i);
+       xmlNode* a_team = xmlAddChild(team_elements,
+                                     xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
+       doc.WriteElement(a_team, "id", (*it).id);
+       doc.WriteElement(a_team, "player_name", (*it).player_name);
+       doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
     }
   }
 
   //=== Video ===
   Video * video = AppWormux::GetInstance()->video;
-  xmlpp::Element *video_node = root->add_child("video");
+  xmlNode* video_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"video"));
   doc.WriteElement(video_node, "display_wind_particles", ulong2str(display_wind_particles));
   doc.WriteElement(video_node, "display_energy_character", ulong2str(display_energy_character));
   doc.WriteElement(video_node, "display_name_character", ulong2str(display_name_character));
@@ -569,7 +561,7 @@ bool Config::SaveXml(bool save_current_teams)
     doc.WriteElement(video_node, "transparency", "colorkey");
 
   //=== Sound ===
-  xmlpp::Element *sound_node = root->add_child("sound");
+  xmlNode *sound_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"sound"));
   doc.WriteElement(sound_node, "music",  ulong2str(JukeBox::GetConstInstance()->UseMusic()));
   doc.WriteElement(sound_node, "effects", ulong2str(JukeBox::GetConstInstance()->UseEffects()));
   doc.WriteElement(sound_node, "frequency", ulong2str(JukeBox::GetConstInstance()->GetFrequency()));
@@ -577,12 +569,12 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(sound_node, "volume_effects", ulong2str(volume_effects));
 
   //=== Network ===
-  xmlpp::Element *net_node = root->add_child("network");
+  xmlNode *net_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"network"));
   doc.WriteElement(net_node, "host", m_network_host);
   doc.WriteElement(net_node, "port", m_network_port);
 
   //=== Misc ===
-  xmlpp::Element *misc_node = root->add_child("misc");
+  xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
   doc.WriteElement(misc_node, "check_updates", ulong2str(check_updates));
 
   //=== game mode ===

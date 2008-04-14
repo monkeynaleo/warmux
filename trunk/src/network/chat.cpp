@@ -99,10 +99,8 @@ void Chat::NewMessage(const std::string &msg)
     last_time = now;
   }
 
-
   chat.AddText(msg, MAXLINES);
 }
-
 
 void Chat::HandleKey(const SDL_Event& event)
 {

@@ -21,12 +21,10 @@
 #ifndef CLOTHE_H
 #define CLOTHE_H
 #include <map>
+#include <vector>
 
 class Member;
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 class Clothe
 {
@@ -35,7 +33,7 @@ public:
   std::vector<Member*> layers;
 
   ~Clothe();
-  Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst);
+  Clothe(xmlNode* xml, std::map<std::string, Member*>& members_lst);
   Clothe(Clothe* c, std::map<std::string, Member*>& members_lst);
 };
 

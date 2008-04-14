@@ -880,7 +880,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     if (ok && on_top_of_world) SetXY(position);
   } while (!ok);
 
-  MSG_DEBUG("physic.position", "Putted after %u try", m_name.c_str(), bcl);
+  MSG_DEBUG("physic.position", "Put '%s' after %u tries", m_name.c_str(), bcl);
 
   return true;
 }

@@ -28,10 +28,7 @@
 
 // Forward declarations
 class Sprite;
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 // Max wind strength in m/(sec*sec)
 #define WIND_STRENGTH  5.0

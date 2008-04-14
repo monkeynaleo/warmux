@@ -42,16 +42,18 @@ public:
   std::string country;
   std::string description;
 
-  bool Feed (const xmlpp::Node *node);
+  bool Feed (xmlNode* node);
   std::string PrettyString(bool with_email) const;
 };
 
 //-----------------------------------------------------------------------------
 
-bool Author::Feed (const xmlpp::Node *node)
+bool Author::Feed (xmlNode* node)
 {
-  if (!XmlReader::ReadString(node, "name", name)) return false;
-  if (!XmlReader::ReadString(node, "description", description)) return false;
+  if (!XmlReader::ReadString(node, "name", name))
+    return false;
+  if (!XmlReader::ReadString(node, "description", description))
+    return false;
   XmlReader::ReadString(node, "nickname", nickname);
   XmlReader::ReadString(node, "email", email);
   XmlReader::ReadString(node, "country", country);
@@ -122,14 +124,14 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
     return;
   }
   // Use an array for this is the best solution I think, but there is perhaps a better code...
-  static std::string teams[] = { "team", "contributors", "thanks" };
+  static const std::string teams[] = { "team", "contributors", "thanks" };
 
   for(uint i = 0; i < (sizeof teams / sizeof* teams); ++i)
   {
+    xmlNodeArray team = XmlReader::GetNamedNeighbours(doc.GetRoot(), teams[i]);
 
-    xmlpp::Node::NodeList team = doc.GetRoot()->get_children(teams[i]);
-
-    if(team.empty()) continue;
+    if (team.empty())
+      continue;
 
     std::string team_title = teams[i];
     std::transform( team_title.begin(), team_title.end(), team_title.begin(), static_cast<int (*)(int)>(toupper) );
@@ -143,25 +145,17 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
                            Font::FONT_BIG, Font::FONT_NORMAL, c_red);
 
     // We think there is ONLY ONE occurence of team section, so we use the first
-    xmlpp::Node::NodeList sections = team.front()->get_children("section");
-    xmlpp::Node::NodeList::iterator
-      section=sections.begin(),
-      end_section=sections.end();
+    xmlNodeArray sections = XmlReader::GetNamedChildren(team.front(), "section");
+    xmlNodeArray::const_iterator section=sections.begin(), end_section=sections.end();
 
     for (; section != end_section; ++section)
     {
-      xmlpp::Node::NodeList authors = (**section).get_children("author");
-      xmlpp::Node::NodeList::iterator
-        node=authors.begin(),
-        end=authors.end();
+      xmlNodeArray authors = XmlReader::GetNamedChildren(*section, "author");
+      xmlNodeArray::const_iterator node=authors.begin(), end=authors.end();
       std::string title;
-      xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*section);
-      if (!elem)
-      {
-        std::cerr << "cast error" << std::endl;
+
+      if (!XmlReader::ReadStringAttr(*section, "title", title))
         continue;
-      }
-      if (!XmlReader::ReadStringAttr(elem, "title", title)) continue;
 
       std::cout << "== " << title << " ==" << std::endl;
 

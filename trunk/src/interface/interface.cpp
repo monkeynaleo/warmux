@@ -297,11 +297,6 @@ void Interface::DrawTeamEnergy() const
   }
 }
 
-void Interface::ToggleMinimap()
-{
-  display_minimap = !display_minimap;
-}
-
 // Draw map preview
 void Interface::DrawMapPreview()
 {

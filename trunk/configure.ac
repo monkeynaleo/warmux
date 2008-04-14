@@ -209,7 +209,7 @@ dnl === Check for pkg-config ===============================================
 
 AC_PATH_PROGS([PACKAGE_CONFIG], [$host_alias-pkg-config pkg-config], [none])
 if test "x$PACKAGE_CONFIG" = "xnone"; then
-  AC_MSG_ERROR([*** pkg-config, needed to check for libxml++ existence has not been found.])
+  AC_MSG_ERROR([*** pkg-config, needed to check for libxml2 existence has not been found.])
 fi
 
 dnl === Check for X11 =====================================================
@@ -288,7 +288,7 @@ dnl === Check for curl =========================================================
 
 LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
 
-dnl === Check for SDL image, mixer, etc., libxml++, and libpng ==============
+dnl === Check for SDL image, mixer, etc., libxml2, and libpng ==============
 
 AC_CHECK_LIB($PNG, png_error,,,)
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
@@ -297,13 +297,13 @@ AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
 AC_CHECK_LIB([SDL_net], [SDLNet_Init],,check_sdl_net="no")
 if test "${WIN32}" = "yes"; then LIBS="$LIBS -lwsock32 -lws2_32 -luser32"; fi
 
-AC_MSG_CHECKING(for libxml++)
+AC_MSG_CHECKING(for libxml2)
 
-if $PACKAGE_CONFIG libxml++-2.6 --libs > /dev/null 2>&1; then
+if $PACKAGE_CONFIG libxml-2.0 --libs > /dev/null 2>&1; then
   AC_MSG_RESULT(yes)
 else
   AC_MSG_RESULT(no)
-  check_libxmlpp="no"
+  check_libxml="no"
 fi
 
 dnl === Display error if SDL image, mixer, etc. is missing ==================
@@ -314,7 +314,7 @@ if test \
   -o   x${check_sdl_ttf} = xno \
   -o   x${check_sdl_gfx} = xno \
   -o   x${check_sdl_net} = xno \
-  -o  x${check_libxmlpp} = xno \
+  -o    x${check_libxml} = xno \
 ; then
   AC_MSG_RESULT([])
   if test x${check_sdl_image} = xno; then
@@ -332,22 +332,22 @@ if test \
   if test x${check_sdl_net} = xno; then
     AC_MSG_RESULT([ERROR: SDL_net library required])
   fi
-  if test x${check_libxmlpp} = xno; then
-    AC_MSG_RESULT([ERROR: libxml++ version 2.6 not found!])
+  if test x${check_libxml} = xno; then
+    AC_MSG_RESULT([ERROR: libxml2 not found!])
   fi
   exit 1
 fi
 
-dnl === Add libxml++ and libpng flags ======================================
-LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
-LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
+dnl === Add libxml2 and libpng flags ======================================
+LIBXML_CFLAGS=`$PACKAGE_CONFIG libxml-2.0 --cflags`
+LIBXML_LIBS=`$PACKAGE_CONFIG libxml-2.0 --libs`
 
 LIBPNG_CFLAGS=`$PACKAGE_CONFIG lib$PNG --cflags`
 LIBPNG_LIBS=`$PACKAGE_CONFIG lib$PNG --libs`
 
-CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBPNG_CFLAGS"
-CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBPNG_CFLAGS"
-LIBS="$LIBS $LIBXMLPP_LIBS $LIBPNG_LIBS"
+CFLAGS="$CFLAGS $LIBXML_CFLAGS $LIBPNG_CFLAGS"
+CXXFLAGS="$CXXFLAGS $LIBXML_CFLAGS $LIBPNG_CFLAGS"
+LIBS="$LIBS $LIBXML_LIBS $LIBPNG_LIBS"
 
 dnl ========================================================================
 dnl == Check for header files                                              =
@@ -368,7 +368,6 @@ DATA_FILES=`echo $DATA_FILES`
 
 AC_SUBST([DATA_FILES])
 AC_SUBST([BUILD_ENV])
-
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile

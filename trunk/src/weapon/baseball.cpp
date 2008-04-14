@@ -40,7 +40,7 @@ class BaseballConfig : public WeaponConfig
     uint range;
     uint strength;
     BaseballConfig();
-    void LoadXml(xmlpp::Element *elem);
+    void LoadXml(xmlNode* elem);
 };
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
@@ -125,7 +125,7 @@ BaseballConfig::BaseballConfig()
   strength = 250;
 }
 
-void BaseballConfig::LoadXml(xmlpp::Element *elem)
+void BaseballConfig::LoadXml(xmlNode* elem)
 {
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
