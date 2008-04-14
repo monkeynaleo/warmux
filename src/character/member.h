@@ -31,10 +31,7 @@ class Sprite;
 class c_junction; //defined in body.h
 class member_mvt; //defined in movement.h
 class Profile;
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 class Member
 {
@@ -60,7 +57,7 @@ public:
   bool go_through_ground;
 
   virtual ~Member();
-  Member(xmlpp::Element *xml, const Profile* res);
+  Member(xmlNode* xml, const Profile* res);
   Member(const Member& m);
   virtual void Draw(const Point2i & _pos, int flip_x, int direction);
   void RotateSprite();

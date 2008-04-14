@@ -635,31 +635,31 @@ int Surface::ImgLoad(const std::string& filename)
  *
  * @param filename
  */
+#ifdef WIN32
+#  define alloca _alloca
+#endif
 int Surface::ImgSave(const std::string& filename)
 {
-  FILE *f             = NULL;
-  png_structp png_ptr = NULL;
-  png_infop info_ptr  = NULL;
-  Uint32 spr_pix;
-  Uint8 r, g, b, a;
+  FILE            *f        = NULL;
+  png_structp     png_ptr   = NULL;
+  png_infop       info_ptr  = NULL;
   SDL_PixelFormat * spr_fmt = surface->format;
+  int             ret       = 1;
+  Uint8           *tmp_line = NULL;
 
   // Creating a png ...
   png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
   if(png_ptr == NULL) // Structure and ...
     return 1;
   info_ptr = png_create_info_struct(png_ptr);
-  if(info_ptr == NULL) { // Information.
-    png_destroy_write_struct(&png_ptr, NULL);
-    return 1;
-  }
+  if(info_ptr == NULL) // Information.
+    goto end;
 
   // Opening a new file
   f = fopen(filename.c_str(), "wb");
-  if(f == NULL) {
-    png_destroy_write_struct(&png_ptr, NULL);
-    return 1;
-  }
+  if(f == NULL)
+    goto end;
+
   png_init_io(png_ptr, f); // Associate png struture with a file
   png_set_IHDR(png_ptr, info_ptr, surface->w, surface->h, 8,
                PNG_COLOR_TYPE_RGB_ALPHA,      PNG_INTERLACE_NONE,
@@ -669,12 +669,14 @@ int Surface::ImgSave(const std::string& filename)
   // Creating the png file
   png_write_info(png_ptr, info_ptr);
 
+  tmp_line = SDL_stack_alloc(Uint8, surface->w * spr_fmt->BytesPerPixel); // alloca
   Lock();
-  Uint8 *tmp_line = new Uint8[surface->w * spr_fmt->BytesPerPixel]; // alloca
   for(int y = 0; y < surface->h; y++) {
     for(int x = 0; x < surface->w; x++) {
+      Uint8   r, g, b, a;
       // Retrieving a pixel of sprite to merge
-      spr_pix = ((Uint32*)surface->pixels)[y * surface->w  + x];
+      Uint32  spr_pix = ((Uint32*)surface->pixels)[y * surface->w  + x];
+
       // Retreiving each chanel of the pixel using pixel format
       r = (Uint8)(((spr_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
       g = (Uint8)(((spr_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
@@ -688,11 +690,16 @@ int Surface::ImgSave(const std::string& filename)
     png_write_row(png_ptr, (Uint8 *)tmp_line);
   }
   Unlock();
-  delete[] tmp_line;
+  SDL_stack_free(tmp_line);
   png_write_flush(png_ptr);
   png_write_end(png_ptr, info_ptr);
-  fclose(f);
-  return 0;
+  ret = 1;
+
+end:
+  if (info_ptr) png_destroy_info_struct(png_ptr, &info_ptr);
+  if (png_ptr) png_destroy_write_struct(&png_ptr, NULL);
+  if (f) fclose(f);
+  return ret;
 }
 
 /**

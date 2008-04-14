@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mape %s no trobat :-("
@@ -44,12 +44,12 @@ msgstr[1] "%i jugadors preparats"
 msgid "%s (%s) has died."
 msgstr "%s (equip %s) ha mort."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s de %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
@@ -447,18 +447,18 @@ msgstr "Bounce Ball"
 msgid "Bye bye tux..."
 msgstr "Fins ara tux... "
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Equip %s no disponible!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
@@ -552,37 +552,17 @@ msgstr "Volum dels efectes"
 msgid "Error in %s:%lu"
 msgstr "Error en %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Error carregant l'equip:"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Error carregant dades de l'equip %s:"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Error mentre es creava el directori \"%s\": no es pot guardar el fitxer de "
 "configuració."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Error carregant el fitxer de configuració: %s"
-
-#: src/game/config.cpp:394
-#, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Error carregant el fitxer de configuració: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Error carregant la manera de joc %s (fitxer %s):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -621,7 +601,7 @@ msgstr ""
 "Error: El teu servidor no es pot connectar a internet. Comprova la "
 "configuració del teu tallafoc. "
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
@@ -784,11 +764,11 @@ msgstr "Entra #en wormux en irc.freenode.net per a trobar algun contrincant."
 msgid "Language"
 msgstr "Idioma"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "Carrega els mapas:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Carrega els equips:"
 
@@ -863,7 +843,7 @@ msgstr "Inicialització de la xarxa"
 msgid "New network game at "
 msgstr "Nou joc de la xarxa en"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Cap element <%s> trobat en el arxiu de configuració xml!"
@@ -939,11 +919,11 @@ msgstr "Sortir de la batalla"
 msgid "Random map"
 msgstr "Mapa aleatori"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 msgid "Reading default config file"
 msgstr "Llegint fitxer de configuració"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Llegint fitxer de configuració personal"
 
@@ -1145,12 +1125,12 @@ msgstr "Eines"
 msgid "Unable to contact host."
 msgstr "Impossible contactar amb el servidor! "
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Imposible obrir el directori dels mapas (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Impossible obrir el directori dels mapes (%s)!"
@@ -1215,11 +1195,6 @@ msgstr "Arrencant Wormux..."
 msgid "Wormux version "
 msgstr "Versió Wormux"
 
-#: src/map/maps_list.cpp:89
-#, c-format
-msgid "XML error during loading map '%s': "
-msgstr "Error XML durant la carrega del mapa '%s':"
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "Estàs solament..."
@@ -1228,11 +1203,11 @@ msgstr "Estàs solament..."
 msgid "You are alone..."
 msgstr "Estàs solament... "
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "Tu necesites almenys un mapa vàlid!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "Tu necesites almenys dos equips vàlids!"
 
@@ -1244,7 +1219,7 @@ msgstr "No podràs jugar abans de seleccionar un equip!"
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "aqui "
 
@@ -1258,7 +1233,7 @@ msgstr ""
 "Per a bombardejar: clic dret sobre l'objectiu\n"
 "un atac per torn"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr "No es pot carregar el fitxer de configuració"
 
@@ -1266,15 +1241,15 @@ msgstr "No es pot carregar el fitxer de configuració"
 msgid "done"
 msgstr "Acabat"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 msgid "error parsing the config file"
 msgstr "Llegint fitxer de configuració"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "de"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 msgid "no configuration file!"
 msgstr "no hi ha un fitxer de configuració"
 
@@ -1282,7 +1257,7 @@ msgstr "no hi ha un fitxer de configuració"
 msgid "o Loading music"
 msgstr "o Carregant musica"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Carregant perfil de so: %s "
@@ -1291,6 +1266,21 @@ msgstr "o Carregant perfil de so: %s "
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Obert àudio a %d Hz %d bit "
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Error carregant dades de l'equip %s:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Error carregant el fitxer de configuració: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Error carregant el fitxer de configuració: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Error carregant la manera de joc %s (fitxer %s):"
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "Error XML durant la carrega del mapa '%s':"
 
 #~ msgid "%s team was fragged down."
 #~ msgstr "L'equip %s ha guanyat."

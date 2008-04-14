@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
@@ -49,12 +49,12 @@ msgstr[2] "%i игроков готовы"
 msgid "%s (%s) has died."
 msgstr "%s (%s) погиб."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s из %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
@@ -512,18 +512,18 @@ msgstr "Прыгучий мяч"
 msgid "Bye bye tux..."
 msgstr "Прощай tux..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не удаётся найти команду %s!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Не удаётся открыть личный каталог команд (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не удаётся открыть каталог команд (%s)!"
@@ -617,36 +617,16 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Ошибка в %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Ошибка при загрузке команды :"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Ошибка при загрузке данных команды %s:"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Ошибка при создании папки \"%s\": не удалось сохранить конфигурационный файл."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Ошибка при загрузке конфигурационного файла: %s"
-
-#: src/game/config.cpp:394
-#, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Ошибка при загрузке конфигурационного файла по умолчанию: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -685,7 +665,7 @@ msgid ""
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
@@ -847,11 +827,11 @@ msgstr ""
 msgid "Language"
 msgstr "Язык"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "Загрузка карт:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Загрузка команд:"
 
@@ -927,7 +907,7 @@ msgstr "Инициализация сети"
 msgid "New network game at "
 msgstr "Игра по сети"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
@@ -1003,11 +983,11 @@ msgstr "Покинуть битву"
 msgid "Random map"
 msgstr "Случайная карта"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 msgid "Reading default config file"
 msgstr "Чтение конфига по умолчанию"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Чтение персонального конфига"
 
@@ -1205,12 +1185,12 @@ msgstr "Инструменты"
 msgid "Unable to contact host."
 msgstr "Не удалось связаться c хостом."
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Невозможно открыть личный каталог с картами (%s)!"
@@ -1278,11 +1258,6 @@ msgstr "Запуск Wormux..."
 msgid "Wormux version "
 msgstr "Wormux версии "
 
-#: src/map/maps_list.cpp:89
-#, c-format
-msgid "XML error during loading map '%s': "
-msgstr "Ошибка разбора XML при загрузке карты '%s': "
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "Вы один :-/"
@@ -1291,11 +1266,11 @@ msgstr "Вы один :-/"
 msgid "You are alone..."
 msgstr "Вы один..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "Вам нужна хотя бы одна карта !"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды !"
 
@@ -1307,7 +1282,7 @@ msgstr "Вы не сможете играть не выбрав команду !
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "aka"
 
@@ -1321,7 +1296,7 @@ msgstr ""
 "Бомбежка : щелкните левой кнопкой мыши на цели\n"
 "Одна бомбардировка за ход"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr "не могу загрузить конфиг"
 
@@ -1329,15 +1304,15 @@ msgstr "не могу загрузить конфиг"
 msgid "done"
 msgstr "готово"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 msgid "error parsing the config file"
 msgstr "ошибка разбора конфигурационного файла"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "из"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 msgid "no configuration file!"
 msgstr "нет конфигурационного файла!"
 
@@ -1345,7 +1320,7 @@ msgstr "нет конфигурационного файла!"
 msgid "o Loading music"
 msgstr "o Загрузка музыки"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Загрузка звукового профиля: %s"
@@ -1354,6 +1329,21 @@ msgstr "o Загрузка звукового профиля: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Ошибка при загрузке данных команды %s:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Ошибка при загрузке конфигурационного файла: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Ошибка при загрузке конфигурационного файла по умолчанию: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Ошибка при загрузке режима игры %s (файл %s):"
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "Ошибка разбора XML при загрузке карты '%s': "
 
 #~ msgid "Music?"
 #~ msgstr "Музыка?"

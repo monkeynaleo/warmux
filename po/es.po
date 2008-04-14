@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "Mapa %s no encontrado :-("
@@ -44,12 +44,12 @@ msgstr[1] "%i jugadores listos"
 msgid "%s (%s) has died."
 msgstr "%s (%s) ha muerto."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s de %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
@@ -460,18 +460,18 @@ msgstr "Bounce Ball"
 msgid "Bye bye tux..."
 msgstr "Hasta luego tux..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "¡Equipo %s no encontrado!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "¡No se puede abrir el directorio de equipos (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "¡No se puede abrir el directorio de equipos (%s)!"
@@ -565,37 +565,17 @@ msgstr "Volumen de los efectos"
 msgid "Error in %s:%lu"
 msgstr "Error en %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Error cargando el equipo:"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Error cargando datos del equipo %s:"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Error mientras se creaba el directorio \"%s\": no se puede guardar el "
 "fichero de configuración."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Error cargando el fichero de configuración: %s"
-
-#: src/game/config.cpp:394
-#, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Error cargando el fichero de configuración: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Error cargando el modo de juego %s (fichero %s):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -634,7 +614,7 @@ msgstr ""
 "Error: Tu servidor no se puede conectar a internet. Comprueba la "
 "configuración de tu cortafuego (firewall)."
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no se puede encontrar el skin \"%s\" para el equipo \"%s\"."
@@ -796,11 +776,11 @@ msgstr "Entra en #wormux en irc.freenode.net para encontrar algún oponente."
 msgid "Language"
 msgstr "Idioma"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "Carga el mapa %s:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Carga los equipos:"
 
@@ -875,7 +855,7 @@ msgstr "Inicialización de la red"
 msgid "New network game at "
 msgstr "Nuevo juego de la red en"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "¡Ningun elemento <%s> encontrado en el archivo de configuración xml!"
@@ -951,11 +931,11 @@ msgstr "Salir de la batalla"
 msgid "Random map"
 msgstr "Mapa aleatorio"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 msgid "Reading default config file"
 msgstr "Leyendo fichero de configuración"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Leyendo fichero de configuración personal"
 
@@ -1159,12 +1139,12 @@ msgstr "Herramientas"
 msgid "Unable to contact host."
 msgstr "¡Imposible contactar con el servidor!"
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "¡Imposible abrir el directorio de los mapas (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "¡Imposible abrir el directorio personal de mapas (%s)!"
@@ -1230,11 +1210,6 @@ msgstr "Arrancando Wormux..."
 msgid "Wormux version "
 msgstr "Versión de Wormux"
 
-#: src/map/maps_list.cpp:89
-#, c-format
-msgid "XML error during loading map '%s': "
-msgstr "Error XML durante la carga del mapa '%s':"
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "Estás solo..."
@@ -1243,11 +1218,11 @@ msgstr "Estás solo..."
 msgid "You are alone..."
 msgstr "Estás solo..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "¡Necesitas al menos un mapa válido!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "¡Necesitas al menos dos equipos válidos!"
 
@@ -1259,7 +1234,7 @@ msgstr "¡No podrás jugar antes de seleccionar un equipo!"
 msgid "Your shot has missed!"
 msgstr "¡Has fallado el tiro!"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "aqui"
 
@@ -1273,7 +1248,7 @@ msgstr ""
 "Para bombardear: clic derecho sobre el objetivo\n"
 "un ataque por turno"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr "No se puede cargar el fichero de configuración"
 
@@ -1281,15 +1256,15 @@ msgstr "No se puede cargar el fichero de configuración"
 msgid "done"
 msgstr "Terminado"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 msgid "error parsing the config file"
 msgstr "Leyendo fichero de configuración"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "de "
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 msgid "no configuration file!"
 msgstr "no hay un fichero de configuración"
 
@@ -1297,7 +1272,7 @@ msgstr "no hay un fichero de configuración"
 msgid "o Loading music"
 msgstr "o Cargando musica"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Cargando perfil de sonido: %s"
@@ -1306,6 +1281,21 @@ msgstr "o Cargando perfil de sonido: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Abierto audio a %d Hz %d bit"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Error cargando datos del equipo %s:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Error cargando el fichero de configuración: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Error cargando el fichero de configuración: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Error cargando el modo de juego %s (fichero %s):"
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "Error XML durante la carga del mapa '%s':"
 
 #~ msgid "%s team was fragged down."
 #~ msgstr "El equipo %s ha ganado."

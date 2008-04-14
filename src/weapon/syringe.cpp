@@ -38,7 +38,7 @@ class SyringeConfig : public WeaponConfig
     uint damage;
     uint turns;
     SyringeConfig();
-    void LoadXml(xmlpp::Element *elem);
+    void LoadXml(xmlNode* elem);
 };
 
 SyringeConfig& Syringe::cfg() {
@@ -51,7 +51,7 @@ SyringeConfig::SyringeConfig(){
   damage = 10;
 }
 
-void SyringeConfig::LoadXml(xmlpp::Element *elem){
+void SyringeConfig::LoadXml(xmlNode* elem){
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
   XmlReader::ReadUint(elem, "turns", turns);

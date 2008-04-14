@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! %s-kartet ble ikke funnet :-("
@@ -39,12 +39,12 @@ msgstr[1] " %i spillere klare"
 msgid "%s (%s) has died."
 msgstr "%s (%s) døde."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> dit %s fra %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
@@ -454,18 +454,18 @@ msgstr "Sprettball"
 msgid "Bye bye tux..."
 msgstr "Hadé tux!!"
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan ikke finne %s-laget !"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan ikke åpne den personlige lagmappen (%s) !"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åpne lagmappen (%s) !"
@@ -560,36 +560,16 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Feil i %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Lasting av %s-laget feilet :"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Feil under lasting av %s-laget :"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Katalogen \"%s\" kunne ikke lages: konfigurasjonsfilen kunne ikke lagres"
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
-
-#: src/game/config.cpp:394
-#, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Lasting av spillmodus feilet %s (fil %s) :"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -626,7 +606,7 @@ msgid ""
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Kan ikke finne utseendet \"%s\" til \"%s\"-laget."
@@ -780,11 +760,11 @@ msgstr "Oppsøk #wormux-fr på  irc.freenode.net for å finne motstandere."
 msgid "Language"
 msgstr "språk"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "Last kart :"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Last lagene :"
 
@@ -860,7 +840,7 @@ msgstr "Starter nettverk ..."
 msgid "New network game at "
 msgstr "Nettverksspill"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Ikke noe element <%s> kunne bli funnet i konfigurasjonsfilet for XML !"
@@ -936,11 +916,11 @@ msgstr "Forlat slaget"
 msgid "Random map"
 msgstr "Tilfeldig kart"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 msgid "Reading default config file"
 msgstr "Laster standard konfigurasjonsfil"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Laster personlig konfigurasjonsfil"
 
@@ -1138,12 +1118,12 @@ msgstr "Verktøy"
 msgid "Unable to contact host."
 msgstr "Umulig å koble til tjeneren."
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "kunne ikke åpne kartmappen (%s) !"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "kunne ikke åpne den personlige kartmappen (%s) !"
@@ -1208,11 +1188,6 @@ msgstr "Laster Wormux ..."
 msgid "Wormux version "
 msgstr "Wormux versjon "
 
-#: src/map/maps_list.cpp:89
-#, c-format
-msgid "XML error during loading map '%s': "
-msgstr "XMLfeil under lasting av kart '%s':"
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "Du er alene :-/"
@@ -1221,11 +1196,11 @@ msgstr "Du er alene :-/"
 msgid "You are alone..."
 msgstr "Du er alene..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "Du må ha i hvert fall ett godkjent kart !"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "Du må ha minst to godkjente lag!"
 
@@ -1237,7 +1212,7 @@ msgstr "Du kan ikke spille uten å ha valgt et lag"
 msgid "Your shot has missed!"
 msgstr "Du bommet"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "kjent som"
 
@@ -1249,7 +1224,7 @@ msgid ""
 msgstr ""
 "angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per runde"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr "Kunne ikke laste konfigurasjonsfilen"
 
@@ -1257,15 +1232,15 @@ msgstr "Kunne ikke laste konfigurasjonsfilen"
 msgid "done"
 msgstr "ferdig"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 msgid "error parsing the config file"
 msgstr "Feil under lasting av konfigurasjonsfil"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "fra"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 msgid "no configuration file!"
 msgstr "Konfigurasjonsfilen ble ikke funnet!"
 
@@ -1273,7 +1248,7 @@ msgstr "Konfigurasjonsfilen ble ikke funnet!"
 msgid "o Loading music"
 msgstr "Laster musikk"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Kunne ikke laste lydprofilen : %s"
@@ -1282,6 +1257,21 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Åpnet lyden på %d Hz %d bit"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Feil under lasting av %s-laget :"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Lasting av spillmodus feilet %s (fil %s) :"
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "XMLfeil under lasting av kart '%s':"
 
 #~ msgid "Music?"
 #~ msgstr "Musikk ?"

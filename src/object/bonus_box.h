@@ -53,7 +53,7 @@ class BonusBox : public ObjBox
     void PickRandomWeapon();
   public:
     BonusBox();
-    static void LoadXml(const xmlpp::Element * object);
+    static void LoadXml(xmlNode*  object);
 
     void ApplyBonus(Character *);
     void Randomize();

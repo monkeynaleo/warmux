@@ -61,7 +61,7 @@ void BodyList::FreeMem()
   list.clear();
 }
 
-void BodyList::Load (const std::string &name)
+void BodyList::Load(const std::string &name)
 {
   std::string fn = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "body" + PATH_SEPARATOR + name + PATH_SEPARATOR + CONFIG_FN;
 

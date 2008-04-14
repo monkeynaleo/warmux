@@ -22,36 +22,44 @@
 #include <iostream>
 #include "character/movement.h"
 #include "tool/xml_document.h"
+#include "tool/debug.h"
 
-Movement::Movement(xmlpp::Element *xml)
+Movement::Movement(xmlNode* xml)
 {
   frames.clear();
   play_mode = LOOP;
   always_moving = false;
-  XmlReader::ReadStringAttr( xml, "name", type);
+
+  XmlReader::ReadStringAttr(xml, "name", type);
   ASSERT(type!="");
+  MSG_DEBUG("body.movement", "  Loading movement %s\n", type.c_str());
 
   speed = 15;
   XmlReader::ReadIntAttr(xml, "speed", speed);
 
   std::string pm;
-  if( XmlReader::ReadStringAttr(xml, "play_mode", pm))
-  if( pm == "play_once" )
+  if (XmlReader::ReadStringAttr(xml, "play_mode", pm))
+  if (pm == "play_once")
     play_mode = PLAY_ONCE;
 
    // Load the test rectangle
   test_left = test_right = test_top = test_bottom = 0;
-  xmlpp::Element *collision_rect = XmlReader::GetMarker(xml, "collision_rect");
-  if (collision_rect == NULL) return;
+  xmlNode* collision_rect = XmlReader::GetMarker(xml, "collision_rect");
+  if (collision_rect == NULL)
+  {
+    fprintf(stderr, "No collision rect for %s\n", type.c_str());
+    return;
+  }
   XmlReader::ReadUintAttr(collision_rect, "left", test_left);
   XmlReader::ReadUintAttr(collision_rect, "right", test_right);
   XmlReader::ReadUintAttr(collision_rect, "top", test_top);
   XmlReader::ReadUintAttr(collision_rect, "bottom", test_bottom);
-
-  xmlpp::Node::NodeList nodes = xml -> get_children("frame");
-  xmlpp::Node::NodeList::iterator
-    it=nodes.begin(),
-    end=nodes.end();
+  MSG_DEBUG("body.movement", "Collision rect set to (%u,%u) -> (%u,%u)\n",
+            test_left, test_top, test_left, test_bottom);
+  
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "frame");
+  xmlNodeArray::const_iterator it = nodes.begin(), end = nodes.end();
+  MSG_DEBUG("body.movement", "  Found %i movement frames\n", nodes.size());
 
   /* We know the number of member frame that are being read so we can resize
    * thr array to be able to get all of them. */
@@ -59,38 +67,32 @@ Movement::Movement(xmlpp::Element *xml)
 
   for (int frame_number=0; it != end; ++it, frame_number++)
   {
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-    ASSERT (elem != NULL);
+    xmlNodeArray members = XmlReader::GetNamedChildren(*it, "member");
+    xmlNodeArray::const_iterator it2;
+    MSG_DEBUG("body.movement", "    Found %i frame members\n", members.size());
 
-    xmlpp::Node::NodeList nodes2 = elem -> get_children("member");
-    xmlpp::Node::NodeList::iterator
-      it2=nodes2.begin(),
-      end2=nodes2.end();
-
-    for (; it2 != end2; ++it2)
+    for (it2 = members.begin(); it2 != members.end(); ++it2)
     {
-      xmlpp::Element *elem2 = dynamic_cast<xmlpp::Element*> (*it2);
+      xmlNode *child = *it2;
       std::string member_type;
-      XmlReader::ReadStringAttr(elem2, "type", member_type);
+      XmlReader::ReadStringAttr(child, "type", member_type);
 
       member_mvt mvt;
-      int dx, dy;
-      int angle_deg = 0;
-      dx = dy = 0;
-      double scale_x, scale_y, tmp_alpha;
-      scale_x = scale_y = tmp_alpha = 1.0;
-      XmlReader::ReadIntAttr(elem2, "dx", dx);
-      XmlReader::ReadIntAttr(elem2, "dy", dy);
-      XmlReader::ReadDoubleAttr(elem2, "scale_x", scale_x);
-      XmlReader::ReadDoubleAttr(elem2, "scale_y", scale_y);
-      XmlReader::ReadDoubleAttr(elem2, "alpha", tmp_alpha);
-      XmlReader::ReadIntAttr(elem2, "angle", angle_deg);
-      XmlReader::ReadBoolAttr(elem2, "follow_crosshair", mvt.follow_crosshair);
-      XmlReader::ReadBoolAttr(elem2, "follow_half_crosshair", mvt.follow_half_crosshair);
-      XmlReader::ReadBoolAttr(elem2, "follow_speed", mvt.follow_speed);
-      XmlReader::ReadBoolAttr(elem2, "follow_direction", mvt.follow_direction);
-      if( XmlReader::ReadBoolAttr(elem2, "follow_cursor", mvt.follow_cursor)
-      && !XmlReader::ReadIntAttr(elem2, "follow_cursor_limit", mvt.follow_cursor_limit))
+      int dx = 0, dy = 0, angle_deg = 0;
+      double scale_x = 1.0, scale_y = 1.0, tmp_alpha = 1.0;
+
+      XmlReader::ReadIntAttr(child, "dx", dx);
+      XmlReader::ReadIntAttr(child, "dy", dy);
+      XmlReader::ReadDoubleAttr(child, "scale_x", scale_x);
+      XmlReader::ReadDoubleAttr(child, "scale_y", scale_y);
+      XmlReader::ReadDoubleAttr(child, "alpha", tmp_alpha);
+      XmlReader::ReadIntAttr(child, "angle", angle_deg);
+      XmlReader::ReadBoolAttr(child, "follow_crosshair", mvt.follow_crosshair);
+      XmlReader::ReadBoolAttr(child, "follow_half_crosshair", mvt.follow_half_crosshair);
+      XmlReader::ReadBoolAttr(child, "follow_speed", mvt.follow_speed);
+      XmlReader::ReadBoolAttr(child, "follow_direction", mvt.follow_direction);
+      if( XmlReader::ReadBoolAttr(child, "follow_cursor", mvt.follow_cursor)
+          && !XmlReader::ReadIntAttr(child, "follow_cursor_limit", mvt.follow_cursor_limit))
         printf("Warning ! \"follow_cursor\" flag used while \"follow_cursor_limit\" isn't defined, this won't do anything!\n");
       if(tmp_alpha < 0.0 || tmp_alpha > 1.0) tmp_alpha = 1.0;
       mvt.SetAngle(angle_deg * M_PI / 180);

@@ -84,7 +84,7 @@ public:
   uint m_angle_dispersion;
 
   CluzookaConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
+  virtual void LoadXml(xmlNode *elem);
 };
 
 CluzookaConfig::CluzookaConfig() :
@@ -94,7 +94,7 @@ CluzookaConfig::CluzookaConfig() :
 {
 }
 
-void CluzookaConfig::LoadXml(xmlpp::Element *elem)
+void CluzookaConfig::LoadXml(xmlNode *elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "nb_fragments", m_fragments);

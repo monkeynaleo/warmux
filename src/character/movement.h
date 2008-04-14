@@ -25,11 +25,7 @@
 #include "include/base.h"
 #include "tool/point.h"
 
-// Forward declaration
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 class member_mvt
 {  // Position of a member relative to its superior one
@@ -80,7 +76,7 @@ public:
   std::string type;
 
   ~Movement();
-  Movement(xmlpp::Element *xml);
+  Movement(xmlNode* xml);
 };
 
 #endif //MEMBER_H

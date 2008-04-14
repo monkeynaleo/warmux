@@ -138,7 +138,7 @@ class GrappleConfig : public EmptyWeaponConfig
 
  public:
   GrappleConfig();
-  void LoadXml(xmlpp::Element *elem);
+  void LoadXml(xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
@@ -800,7 +800,7 @@ GrappleConfig::GrappleConfig()
   push_force = 10;
 }
 
-void GrappleConfig::LoadXml(xmlpp::Element *elem)
+void GrappleConfig::LoadXml(xmlNode* elem)
 {
   EmptyWeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "max_rope_length", max_rope_length);

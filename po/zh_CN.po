@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! 地图 %s未找到 :-("
@@ -40,12 +40,12 @@ msgstr[1] "%i 玩家都准备好了"
 msgid "%s (%s) has died."
 msgstr "%s (%s)死掉了  ."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s 从 %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 从 %s"
@@ -443,18 +443,18 @@ msgstr "弹力球"
 msgid "Bye bye tux..."
 msgstr "Bye bye 企鹅..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "没找到队伍 %s!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "打不开个人团队目录(%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "打不开团队目录 (%s)!"
@@ -548,35 +548,15 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "错误出现%s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "读取队伍出错 :"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "读取队伍数据 %s 时出错 :"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "建立目录失败 \"%s\": 不能储存设置文件."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "读取设置文件出错: %s"
-
-#: src/game/config.cpp:394
-#, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "正读取默认设置文件发生错误: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "读取游戏模式时出错%s (file %s):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -611,7 +591,7 @@ msgid ""
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "错误: 找不到 body\"%s\" 队伍 \"%s\"."
@@ -772,11 +752,11 @@ msgstr "加入#wormux IRC irc.freenode.net 找对手"
 msgid "Language"
 msgstr "语言"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "读取地图:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "读取队伍:"
 
@@ -852,7 +832,7 @@ msgstr "网络初始化"
 msgid "New network game at "
 msgstr "网络游戏"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "没找到 <%s>重点 xml配置文件 !"
@@ -928,11 +908,11 @@ msgstr "推出战斗"
 msgid "Random map"
 msgstr "随机读取地图"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 msgid "Reading default config file"
 msgstr "正读取默认设置文件"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "正读取个人设置文件"
 
@@ -1129,12 +1109,12 @@ msgstr "工具"
 msgid "Unable to contact host."
 msgstr "连不上主机"
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "打不开地图目录(%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "无法打开个人地图目录 (%s)!"
@@ -1200,11 +1180,6 @@ msgstr "准备中, Wormux!!!"
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
-#: src/map/maps_list.cpp:89
-#, c-format
-msgid "XML error during loading map '%s': "
-msgstr "读取地图 '%s' 时出现XML错误"
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "你是孤单的 :-/"
@@ -1213,11 +1188,11 @@ msgstr "你是孤单的 :-/"
 msgid "You are alone..."
 msgstr "你是孤单的..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "你需要可用的地图!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "至少有2组才能开始 !"
 
@@ -1230,7 +1205,7 @@ msgid "Your shot has missed!"
 msgstr "你打偏了!"
 
 #
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "aka"
 
@@ -1244,7 +1219,7 @@ msgstr ""
 "爆炸 : 左键点击目标\n"
 "每回合一次"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr "无法读取设置"
 
@@ -1252,16 +1227,16 @@ msgstr "无法读取设置"
 msgid "done"
 msgstr "成"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 msgid "error parsing the config file"
 msgstr "粘贴配置文件出错"
 
 #
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "从"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 msgid "no configuration file!"
 msgstr "没有配置文件！"
 
@@ -1269,7 +1244,7 @@ msgstr "没有配置文件！"
 msgid "o Loading music"
 msgstr "o 读取音乐"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o读取音乐文件 : %s"
@@ -1278,6 +1253,21 @@ msgstr "o读取音乐文件 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音乐 %d Hz %d bit"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "读取队伍数据 %s 时出错 :"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "读取设置文件出错: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "正读取默认设置文件发生错误: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "读取游戏模式时出错%s (file %s):"
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "读取地图 '%s' 时出现XML错误"
 
 #~ msgid "Music?"
 #~ msgstr "音乐?"

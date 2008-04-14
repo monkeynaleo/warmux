@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "نقشه‌ی %s پیدا نشد."
@@ -37,12 +37,12 @@ msgstr[0] "بازیکن %i آماده است."
 msgid "%s (%s) has died."
 msgstr "%s (%s) مرد."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> مشهور به %s از %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> از %s"
@@ -414,18 +414,18 @@ msgstr "شیطونک"
 msgid "Bye bye tux..."
 msgstr "بای بای تاکس..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "نمی‌توان تیم %s را پیدا کرد!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی شخصی تیم‌ها را باز کرد (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی تیم‌ها را باز کرد (%s)!"
@@ -520,35 +520,15 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "مشکل در %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "مشکل در بارگذاری تیم: "
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "مشکل در بارگذاری داده‌های تیم %s: "
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "مشکل در ساخت پوشه‌ی جدید \"%s\": ناتوان در ذخیره‌ی پرونده‌ی تنظیمات."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
-
-#: src/game/config.cpp:394
-#, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "مشکل در بارگذاری پرونده‌ی پیش‌فرض تنظیمات: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "مشکل در بارگذاری بازی در حالت %s (پرونده‌ی %s): "
 
 #: src/game/game.cpp:128
 #, c-format
@@ -583,7 +563,7 @@ msgid ""
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "مشکل: ناتوان در پیدا کردن \"%s\" از تیم \"%s\""
@@ -744,11 +724,11 @@ msgstr "به #wormux در irc.freenode.net بپیوندید."
 msgid "Language"
 msgstr "زبان"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "بارگذاری نقشه‌ها: "
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "بارگذاری تیم‌ها: "
 
@@ -824,7 +804,7 @@ msgstr "در حال آغاز شبکه"
 msgid "New network game at "
 msgstr "بازی شبکه‌ای"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "هیچ عنصر <%s> در پرونده‌ی تنظیم xml پیدا نشد!"
@@ -901,11 +881,11 @@ msgstr ""
 msgid "Random map"
 msgstr "نقشه تصادفی"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 msgid "Reading default config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات پیش‌فرض"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات شخصی"
 
@@ -1094,12 +1074,12 @@ msgstr "ابزارها"
 msgid "Unable to contact host."
 msgstr "قادر به اتصال به میزبان نیست."
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "ناتوان در بازکردن پرونده‌ی نقشه‌ها (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "ناتوان در بازکردن پرونده‌ی نقشه‌های شخصی (%s)!"
@@ -1163,11 +1143,6 @@ msgstr "ورموکس در حال اجراست..."
 msgid "Wormux version "
 msgstr "نسخه‌ی ورموکس"
 
-#: src/map/maps_list.cpp:89
-#, fuzzy, c-format
-msgid "XML error during loading map '%s': "
-msgstr "مشکل xml در هنگام بارگذاری نقشه‌ی '%s': "
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "شما تنهایید!"
@@ -1176,11 +1151,11 @@ msgstr "شما تنهایید!"
 msgid "You are alone..."
 msgstr "شما تنهایید..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "شما حداقل یک نقشه‌ که به درستی کار کند نیاز دارید!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "شما حداقل به ۲ تیم نیاز دارید!"
 
@@ -1192,7 +1167,7 @@ msgstr "شما قبل از اینکه تیمی انتخاب کنید نمی‌ت
 msgid "Your shot has missed!"
 msgstr "شلیک شما از دست رفت!"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "مشهور به"
 
@@ -1203,7 +1178,7 @@ msgid ""
 "a bombing per turn"
 msgstr ""
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr ""
 
@@ -1211,16 +1186,16 @@ msgstr ""
 msgid "done"
 msgstr "تمام"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 #, fuzzy
 msgid "error parsing the config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات پیش‌فرض"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "از"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 #, fuzzy
 msgid "no configuration file!"
 msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
@@ -1229,7 +1204,7 @@ msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
 msgid "o Loading music"
 msgstr "در حال بارگذاری موسیقی"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "در حال بارگذاری پرونده‌ی موسیقی: %s"
@@ -1238,6 +1213,22 @@ msgstr "در حال بارگذاری پرونده‌ی موسیقی: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "صدا با %d هرتز و %d بیت باز شد"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "مشکل در بارگذاری داده‌های تیم %s: "
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "مشکل در بارگذاری پرونده‌ی پیش‌فرض تنظیمات: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "مشکل در بارگذاری بازی در حالت %s (پرونده‌ی %s): "
+
+#, fuzzy
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "مشکل xml در هنگام بارگذاری نقشه‌ی '%s': "
 
 #~ msgid "Music?"
 #~ msgstr "موسیقی؟"

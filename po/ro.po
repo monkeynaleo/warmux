@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
@@ -48,12 +48,12 @@ msgstr[2] "%i de jucători sunt gata"
 msgid "%s (%s) has died."
 msgstr "%s (%s) a murit."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> cunoscut și ca %s din %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
@@ -637,18 +637,18 @@ msgstr "Minge săltăreață"
 msgid "Bye bye tux..."
 msgstr "Pa pa tux..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Directorul personal cu echipe nu poate fi deschis (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
@@ -742,37 +742,17 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Eroare în %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Eroare la încărcarea echipei:"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Eroare la încărcarea datelor pentru echipa %s:"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Eroare în timpul încărcării fișierul de configurare: %s"
-
-#: src/game/config.cpp:394
-#, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Eroare în timpul încărcării fișierul de configurare implicită: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Eroare în timpul încărcării modului de joc %s (fișierul %s):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -813,7 +793,7 @@ msgstr ""
 "Eroare: Serverul nu este aceesibil din internet. Verificați configurația "
 "firewall-ului"
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: corpul „%s” pentru echipa „%s” nu poate fi găsit."
@@ -978,11 +958,11 @@ msgstr ""
 msgid "Language"
 msgstr "Limba"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "Încărcare hărți:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Încărcare echipe:"
 
@@ -1057,7 +1037,7 @@ msgstr "Inițializare rețea"
 msgid "New network game at "
 msgstr "Un nou joc în rețea pornit la "
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fișierul xml de configurare!"
@@ -1134,11 +1114,11 @@ msgstr "Părăsește bătălia"
 msgid "Random map"
 msgstr "Hartă aleatoare"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 msgid "Reading default config file"
 msgstr "Se citește fișierul implicit de configurare"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Se citește fișierul personal de configurare"
 
@@ -1338,12 +1318,12 @@ msgstr "Unelte"
 msgid "Unable to contact host."
 msgstr "Nu a fost posibilă contactarea calculatorului."
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărți (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului personal cu hărți (%s)!"
@@ -1410,11 +1390,6 @@ msgstr "Se lansează Wormux..."
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
-#: src/map/maps_list.cpp:89
-#, c-format
-msgid "XML error during loading map '%s': "
-msgstr "Eroare XML în timpul încărcării hărții „%s”: "
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "Nu mai e nimeni în afară de tine :-/"
@@ -1423,11 +1398,11 @@ msgstr "Nu mai e nimeni în afară de tine :-/"
 msgid "You are alone..."
 msgstr "Nu mai e nimeni altcineva..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "Aveți nevoie de cel puțin o hartă validă !"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "Aveți nevoie de cel puțin două echipe valide !"
 
@@ -1440,7 +1415,7 @@ msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
 #
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "zis"
 
@@ -1454,7 +1429,7 @@ msgstr ""
 "bombardare : clic stânga pe țintă\n"
 "un proiectil per rundă"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr "configurația nu a putut fi încărcată"
 
@@ -1462,16 +1437,16 @@ msgstr "configurația nu a putut fi încărcată"
 msgid "done"
 msgstr "finalizat"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 msgid "error parsing the config file"
 msgstr "eroare la analiza fișierului de configurare"
 
 #
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "de la:"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 msgid "no configuration file!"
 msgstr "nu există nici un fișier de configurare!"
 
@@ -1479,7 +1454,7 @@ msgstr "nu există nici un fișier de configurare!"
 msgid "o Loading music"
 msgstr "o Se încarcă muzica"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Se încarcă profilul de sunet: %s"
@@ -1488,6 +1463,21 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Eroare la încărcarea datelor pentru echipa %s:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Eroare în timpul încărcării fișierul de configurare: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Eroare în timpul încărcării fișierul de configurare implicită: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Eroare în timpul încărcării modului de joc %s (fișierul %s):"
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "Eroare XML în timpul încărcării hărții „%s”: "
 
 #~ msgid "Music?"
 #~ msgstr "Muzică?"

@@ -28,10 +28,7 @@
 #include "include/singleton.h"
 #include "weapon/weapon_cfg.h"
 
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 class XmlReader;
 
 class GameMode : public Singleton<GameMode>
@@ -80,7 +77,7 @@ private:
 
   XmlReader* doc_objects;
 
-  bool LoadXml (const xmlpp::Element *xml);
+  bool LoadXml (xmlNode* xml);
   bool ExportFileToString(const std::string& filename, std::string& contents) const;
 
   std::string GetFilename() const;

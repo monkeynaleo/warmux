@@ -74,7 +74,7 @@ class MineConfig : public ExplosiveWeaponConfig
     MineConfig();
   public:
     static MineConfig * GetInstance();
-    virtual void LoadXml(xmlpp::Element *elem);
+    virtual void LoadXml(xmlNode* elem);
 };
 
 class Mine : public WeaponLauncher

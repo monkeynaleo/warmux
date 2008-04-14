@@ -275,7 +275,7 @@ MineConfig::MineConfig()
   escape_time = 2;
 }
 
-void MineConfig::LoadXml(xmlpp::Element *elem)
+void MineConfig::LoadXml(xmlNode* elem)
 {
   ExplosiveWeaponConfig::LoadXml (elem);
   XmlReader::ReadUint(elem, "escape_time", escape_time);

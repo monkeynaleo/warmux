@@ -31,10 +31,7 @@
 // Forward declarations
 class Action;
 class Profile;
-namespace xmlpp
-{
-  class Element;
-}
+typedef struct _xmlNode xmlNode;
 
 class InfoMap {
  public:
@@ -81,7 +78,7 @@ private:
 
   Profile *res_profile;
 
-  bool ProcessXmlData(const xmlpp::Element *xml);
+  bool ProcessXmlData(xmlNode* xml);
   void LoadData();
   void LoadBasicInfo(); // Fails with abort if error
 

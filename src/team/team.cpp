@@ -60,7 +60,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
     throw "Invalid file structure: cannot find a name for team ";
 
   // Load flag
-  Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
+  Profile *res = resource_manager.LoadXMLProfile(nomfich, true);
   flag = resource_manager.LoadImage(res, "flag");
   mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
   death_flag = resource_manager.LoadImage(res, "death_flag");
@@ -87,77 +87,64 @@ bool Team::LoadCharacters()
 {
   ASSERT (nb_characters <= 10);
 
-  std::string nomfich;
-  try
-  {
-    XmlReader doc;
-
-    // Load XML
-    nomfich = m_teams_dir+m_id+PATH_SEPARATOR+ "team.xml";
-    if (!DoesFileExist(nomfich)) return false;
-    if (!doc.Load(nomfich)) return false;
-
-    // Create the characters
-    xmlpp::Element *xml = XmlReader::GetMarker(doc.GetRoot(), "team");
-
-    xmlpp::Node::NodeList nodes = xml->get_children("character");
-    xmlpp::Node::NodeList::iterator it=nodes.begin();
-
-    characters.clear();
-    active_character = characters.end();
-    do
-    {
-      xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-      Body* body;
-      std::string character_name = "Unknown Soldier (it's all over)";
-      std::string body_name = "";
-      XmlReader::ReadStringAttr(elem, "name", character_name);
-      XmlReader::ReadStringAttr(elem, "body", body_name);
-
-      if (!(body = body_list.GetBody(body_name)) )
-      {
-        std::cerr
-            << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
-                      body_name.c_str(),
-                      m_name.c_str())
-            << std::endl;
-        return false;
-      }
-
-      // Create a new character and add him to the team
-      Character new_character(*this, character_name, body);
-      characters.push_back(new_character);
-      active_character = characters.begin(); // we need active_character to be initialized here !!
-      if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters()))
-      {
-        // We haven't found any place to put the characters!!
-        if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
-          std::cerr << std::endl;
-          std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
-          std::cerr << std::endl;
-
-            // Put it with no space...
-          characters.back().PutRandomly(false, 0);
-        }
-      }
-      characters.back().Init();
-
-      MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
-
-        // Did we reach the end ?
-      ++it;
-    } while (it != nodes.end() && characters.size() < nb_characters );
-
-    active_character = characters.begin();
-
-  }
-  catch (const xmlpp::exception &e)
-  {
-    std::cerr << std::endl
-        << Format(_("Error loading team's data %s:"), m_id.c_str())
-        << std::endl << e.what() << std::endl;
+  std::string nomfich = m_teams_dir+m_id+PATH_SEPARATOR+ "team.xml";
+  // Load XML
+  if (!DoesFileExist(nomfich))
     return false;
-  }
+
+  XmlReader doc;
+  if (!doc.Load(nomfich))
+    return false;
+
+  // Create the characters
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
+  xmlNodeArray::const_iterator it = nodes.begin();
+
+  characters.clear();
+  active_character = characters.end();
+  do
+  {
+    Body* body;
+    std::string character_name = "Unknown Soldier (it's all over)";
+    std::string body_name = "";
+    XmlReader::ReadStringAttr(*it, "name", character_name);
+    XmlReader::ReadStringAttr(*it, "body", body_name);
+
+    if (!(body = body_list.GetBody(body_name)) )
+    {
+      std::cerr
+          << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
+                    body_name.c_str(),
+                    m_name.c_str())
+          << std::endl;
+      return false;
+    }
+
+    // Create a new character and add him to the team
+    Character new_character(*this, character_name, body);
+    characters.push_back(new_character);
+    active_character = characters.begin(); // we need active_character to be initialized here !!
+    if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters()))
+    {
+      // We haven't found any place to put the characters!!
+      if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
+        std::cerr << std::endl;
+        std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
+        std::cerr << std::endl;
+
+        // Put it with no space...
+        characters.back().PutRandomly(false, 0);
+      }
+    }
+    characters.back().Init();
+
+    MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
+
+    // Did we reach the end ?
+    ++it;
+  } while (it != nodes.end() && characters.size() < nb_characters );
+
+  active_character = characters.begin();
 
   return (characters.size() == nb_characters);
 }

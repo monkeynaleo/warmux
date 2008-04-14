@@ -38,7 +38,7 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-Body::Body(xmlpp::Element* xml, const Profile* res):
+Body::Body(xmlNode* xml, const Profile* res):
   members_lst(),
   clothes_lst(),
   mvt_lst(),
@@ -59,92 +59,81 @@ Body::Body(xmlpp::Element* xml, const Profile* res):
   need_rebuild(false),
   owner(NULL)
 {
+  xmlNodeArray nodes = XmlReader::GetNamedNeighbours(xml, "sprite");
+  xmlNodeArray::const_iterator it;
+
   // Load members
-  xmlpp::Node::NodeList nodes = xml -> get_children("sprite");
-  xmlpp::Node::NodeList::iterator it=nodes.begin();
-
-  while(it != nodes.end())
-   {
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
+  MSG_DEBUG("body", "Found %i sprites\n", nodes.size());
+  for (it = nodes.begin(); it != nodes.end(); ++it)
+  {
     std::string name;
-    XmlReader::ReadStringAttr( elem, "name", name);
+    XmlReader::ReadStringAttr(*it, "name", name);
 
-    Member* member = new Member(elem, res);
-    if(members_lst.find(name) != members_lst.end())
+    Member* member = new Member(*it, res);
+    if (members_lst.find(name) != members_lst.end())
       std::cerr << "Warning !! The member \""<< name << "\" is defined twice in the xml file" << std::endl;
     else
       members_lst[name] = member;
-
-    it++;
-  }
+  } 
 
   members_lst["weapon"] = weapon_member;
 
   // Load clothes
-  xmlpp::Node::NodeList nodes2 = xml -> get_children("clothe");
-  xmlpp::Node::NodeList::iterator it2=nodes2.begin();
-
-  while(it2 != nodes2.end())
+  nodes = XmlReader::GetNamed(xml, "clothe");
+  MSG_DEBUG("body", "Found %i clothes\n", nodes.size());
+  for (it = nodes.begin(); it != nodes.end(); ++it)
   {
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it2);
     std::string name;
-    XmlReader::ReadStringAttr( elem, "name", name);
+    XmlReader::ReadStringAttr(*it, "name", name);
 
-    Clothe* clothe = new Clothe(elem, members_lst);
+    Clothe* clothe = new Clothe(*it, members_lst);
     if (clothes_lst.find(name) != clothes_lst.end())
       std::cerr << "Warning !! The clothe \""<< name << "\" is defined twice in the xml file" << std::endl;
     else
       clothes_lst[name] = clothe;
-
-    it2++;
   }
 
   // Load movements alias
-  xmlpp::Node::NodeList nodes4 = xml -> get_children("alias");
-  xmlpp::Node::NodeList::iterator it4=nodes4.begin();
   std::map<std::string, std::string> mvt_alias;
-  while(it4 != nodes4.end())
+  nodes = XmlReader::GetNamedNeighbours(xml, "alias");
+  MSG_DEBUG("body", "Found %i aliases\n", nodes.size());
+  for (it = nodes.begin(); it != nodes.end(); ++it)
   {
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it4);
     std::string mvt, corresp;
-    XmlReader::ReadStringAttr( elem, "movement", mvt);
-    XmlReader::ReadStringAttr( elem, "correspond_to", corresp);
-    mvt_alias.insert(std::make_pair(mvt,corresp));
-    it4++;
+    XmlReader::ReadStringAttr(*it, "movement", mvt);
+    XmlReader::ReadStringAttr(*it, "correspond_to", corresp);
+    mvt_alias.insert(std::make_pair(mvt, corresp));
+    MSG_DEBUG("body", "  %s -> %s", mvt.c_str(), corresp.c_str());
   }
 
   // Load movements
-  xmlpp::Node::NodeList nodes3 = xml -> get_children("movement");
-  xmlpp::Node::NodeList::iterator it3=nodes3.begin();
-
-  while(it3 != nodes3.end())
+  nodes = XmlReader::GetNamedNeighbours(xml, "movement");
+  MSG_DEBUG("body", "Found %i movements\n", nodes.size());
+  for (it = nodes.begin(); it != nodes.end(); ++it)
   {
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it3);
     std::string name;
-    XmlReader::ReadStringAttr( elem, "name", name);
-    if(strncmp(name.c_str(),"animation", 9)==0)
+    XmlReader::ReadStringAttr(*it, "name", name);
+    if (strncmp(name.c_str(),"animation", 9)==0)
       animation_number++;
 
-    Movement* mvt = new Movement(elem);
+    Movement* mvt = new Movement(*it);
     if(mvt_lst.find(name) != mvt_lst.end())
       std::cerr << "Warning !! The movement \""<< name << "\" is defined twice in the xml file" << std::endl;
     else
       mvt_lst[name] = mvt;
 
-
-    for(std::map<std::string, std::string>::iterator it = mvt_alias.begin();
-        it != mvt_alias.end();  ++it)
-    if(it->second == name)
-    {
-      Movement* mvt = new Movement(elem);
-      mvt->type = it->first;
-      mvt_lst[it->first] = mvt;
-    }
-    it3++;
+    for(std::map<std::string, std::string>::iterator iter = mvt_alias.begin();
+        iter != mvt_alias.end();  ++iter)
+      if (iter->second == name)
+      {
+        Movement* mvt = new Movement(*it);
+        mvt->type = iter->first;
+        mvt_lst[iter->first] = mvt;
+      }
   }
 
-  if((mvt_lst.find("black") == mvt_lst.end() && clothes_lst.find("black") != clothes_lst.end())
-  || (mvt_lst.find("black") != mvt_lst.end() && clothes_lst.find("black") == clothes_lst.end()))
+  if ((mvt_lst.find("black") == mvt_lst.end() && clothes_lst.find("black") != clothes_lst.end())
+      || (mvt_lst.find("black") != mvt_lst.end() && clothes_lst.find("black") == clothes_lst.end()))
   {
     std::cerr << "Error: The movement \"black\" or the clothe \"black\" is not defined!" << std::endl;
     exit(EXIT_FAILURE);
@@ -495,14 +484,14 @@ void Body::BuildSqueleton()
 
   // Find the "body" member as its the top of the squeleton
   for(uint lay = 0; lay < current_clothe->layers.size(); lay++)
-  if(current_clothe->layers[lay]->type == "body")
-  {
-    junction body;
-    body.member = current_clothe->layers[lay];
-    body.parent = NULL;
-    squel_lst.push_back(body);
-    break;
-  }
+    if(current_clothe->layers[lay]->type == "body")
+    {
+      junction body;
+      body.member = current_clothe->layers[lay];
+      body.parent = NULL;
+      squel_lst.push_back(body);
+      break;
+    }
 
   if(squel_lst.size() == 0)
   {
@@ -516,9 +505,10 @@ void Body::BuildSqueleton()
 void Body::SetClothe(const std::string& name)
 {
   MSG_DEBUG("body", " %s use clothe %s", owner->GetName().c_str(), name.c_str());
-  if(current_clothe && current_clothe->name == name) return;
+  if (current_clothe && current_clothe->name == name)
+    return;
 
-  if(clothes_lst.find(name) != clothes_lst.end())
+  if (clothes_lst.find(name) != clothes_lst.end())
   {
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
@@ -527,7 +517,7 @@ void Body::SetClothe(const std::string& name)
     play_once_clothe_sauv = NULL;
   }
   else
-    MSG_DEBUG("body","Clothe not found");
+    MSG_DEBUG("body", "Clothe not found");
 
   ASSERT(current_clothe != NULL);
 }
@@ -550,7 +540,7 @@ void Body::SetMovement(const std::string& name)
     play_once_mvt_sauv = NULL;
   }
   else
-    MSG_DEBUG("body","Movement not found");
+    MSG_DEBUG("body", "Movement not found");
 
   ASSERT(current_mvt != NULL);
 }
@@ -578,7 +568,7 @@ void Body::SetClotheOnce(const std::string& name)
     need_rebuild = true;
   }
   else
-    MSG_DEBUG("body","Clothe not found");
+    MSG_DEBUG("body", "Clothe not found");
 
   ASSERT(current_clothe != NULL);
 }
@@ -606,7 +596,7 @@ void Body::SetMovementOnce(const std::string& name)
     need_rebuild = true;
   }
   else
-    MSG_DEBUG("body","Movement not found");
+    MSG_DEBUG("body", "Movement not found");
 
   ASSERT(current_mvt != NULL);
 }

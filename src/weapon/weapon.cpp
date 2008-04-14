@@ -20,6 +20,7 @@
  * Weapon projectile are handled in WeaponLauncher (see launcher.cpp and launcher.h).
  *****************************************************************************/
 
+#include <libxml/tree.h>
 #include "weapon/weapon.h"
 #include "weapon/weapon_strength_bar.h"
 #include "weapon/weapon_cfg.h"
@@ -119,7 +120,7 @@ Weapon::Weapon(Weapon_type type,
 
   mouse_character_selection = true;
 
-  xmlpp::Element *elem = resource_manager.GetElement(weapons_res_profile, "position", m_id);
+  xmlNode* elem = resource_manager.GetElement(weapons_res_profile, "position", m_id);
   if (elem != NULL) {
     // E.g. <position name="my_weapon_id" origin="hand" x="-1" y="0" />
     std::string origin_xml;
@@ -646,9 +647,9 @@ void Weapon::DrawAmmoUnits() const
   }
 }
 
-bool Weapon::LoadXml(const xmlpp::Element * weapon)
+bool Weapon::LoadXml(xmlNode*  weapon)
 {
-  xmlpp::Element *elem = XmlReader::GetMarker(weapon, m_id);
+  xmlNode* elem = XmlReader::GetMarker(weapon, m_id)->children;
   if (elem == NULL)
   {
       std::cout << Format(_("No element <%s> found in the xml config file!"),

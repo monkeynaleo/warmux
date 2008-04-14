@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Banen %s blev ikke fundet :-("
@@ -40,12 +40,12 @@ msgstr[1] "Spillere %i er klar"
 msgid "%s (%s) has died."
 msgstr "%s (%s) døde."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> også kendt som %s fra %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
@@ -441,18 +441,18 @@ msgstr "Hoppebold"
 msgid "Bye bye tux..."
 msgstr "Faaarvel Tux..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan ikke finde holdet %s!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
@@ -547,36 +547,16 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Fejl i %s: %lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Fejl under indlæsning af hold:"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Fejl under indlæsning af holdet %ss data:"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Fejl under indlæsning af konfigurationsfil: %s"
-
-#: src/game/config.cpp:394
-#, fuzzy, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Fejl under indlæsning af konfigurationsfil: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Fejl under indlæsning af spilmodus %s (file %s):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -611,7 +591,7 @@ msgid ""
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fejl: Kan ikke finde kroppen \"%s\" for holdet \"%s\"."
@@ -774,11 +754,11 @@ msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "Indlæser baner:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Indlæser hold:"
 
@@ -854,7 +834,7 @@ msgstr "Netværksinitialisation"
 msgid "New network game at "
 msgstr "Netværksspil"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Intet <%s> element fundet i XML-konfigurationsfilen!"
@@ -932,12 +912,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Indlæser baner:"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Læser personlig konfigureringsfil"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Læser personlig konfigureringsfil"
 
@@ -1135,12 +1115,12 @@ msgstr "Værktøj"
 msgid "Unable to contact host."
 msgstr "Kan ikke kontakte værten."
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kan ikke åbne banekataloget (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Kan ikke åbne banekataloget (%s)!"
@@ -1206,11 +1186,6 @@ msgstr "Wormux starter..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/map/maps_list.cpp:89
-#, fuzzy, c-format
-msgid "XML error during loading map '%s': "
-msgstr "XML-fejl under indlæsning af bane '%s':"
-
 #: src/menu/network_menu.cpp:323
 msgid "You are alone :-/"
 msgstr "Du er alene :-/"
@@ -1219,11 +1194,11 @@ msgstr "Du er alene :-/"
 msgid "You are alone..."
 msgstr "Du er alene..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "Du skal vælge mindst én gyldig bane!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "Du skal vælge mindst to gyldige hold!"
 
@@ -1235,7 +1210,7 @@ msgstr ""
 msgid "Your shot has missed!"
 msgstr "Du ramte ved siden af!"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "også kendt som"
 
@@ -1249,7 +1224,7 @@ msgstr ""
 "Bombning: Venstreklik på målet\n"
 "En bombning per tur"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr ""
 
@@ -1257,16 +1232,16 @@ msgstr ""
 msgid "done"
 msgstr "færdig"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 #, fuzzy
 msgid "error parsing the config file"
 msgstr "Læser personlig konfigureringsfil"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "fra"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 #, fuzzy
 msgid "no configuration file!"
 msgstr "Fejl under indlæsning af konfigurationsfil: %s"
@@ -1275,7 +1250,7 @@ msgstr "Fejl under indlæsning af konfigurationsfil: %s"
 msgid "o Loading music"
 msgstr "o Indlæser musik"
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Indlæser lydprofilen: %s"
@@ -1284,6 +1259,23 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Fejl under indlæsning af holdet %ss data:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Fejl under indlæsning af konfigurationsfil: %s"
+
+#, fuzzy
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Fejl under indlæsning af konfigurationsfil: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Fejl under indlæsning af spilmodus %s (file %s):"
+
+#, fuzzy
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "XML-fejl under indlæsning af bane '%s':"
 
 #~ msgid "Music?"
 #~ msgstr "Musik?"

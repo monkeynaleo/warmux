@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Non-Native-Updates: artefact <artefact@altern.org>\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:320
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebola nájdená :-("
@@ -44,12 +44,12 @@ msgstr[2] "%i hráči sú pripravení"
 msgid "%s (%s) has died."
 msgstr "%s (%s tím)  zomrel."
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:108
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s od %s"
 
-#: src/map/maps_list.cpp:125
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> od %s"
@@ -466,18 +466,18 @@ msgstr "Odrazená lopta"
 msgid "Bye bye tux..."
 msgstr "Maj sa tux..."
 
-#: src/team/teams_list.cpp:483 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
+#: src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nemôžem nájsť tím %s!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:160
 #, fuzzy, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 
-#: src/team/teams_list.cpp:156
+#: src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
@@ -572,37 +572,17 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Chyba v %s:%lu"
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:124
 #, fuzzy
 msgid "Error loading team :"
 msgstr "Chyba počas načítavania tímu %s:"
 
-#: src/team/team.cpp:157
-#, c-format
-msgid "Error loading team's data %s:"
-msgstr "Chyba počas načítavania dát tímu %s:"
-
-#: src/game/config.cpp:485
+#: src/game/config.cpp:474
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Chyba počas vytvárania priečinka  \"%s\": nedá sa uložiť konfiguračný súbor. "
-
-#: src/game/config.cpp:337
-#, c-format
-msgid "Error while loading configuration file: %s"
-msgstr "Chyba počas načítavania konfiguračného súboru: %s"
-
-#: src/game/config.cpp:394
-#, fuzzy, c-format
-msgid "Error while loading default configuration file: %s"
-msgstr "Chyba počas načítavania konfiguračného súboru: %s"
-
-#: src/game/game_mode.cpp:228
-#, c-format
-msgid "Error while loading game mode %s (file %s):"
-msgstr "Chyba počas načítavania herného módu %s (súbor %s):"
 
 #: src/game/game.cpp:128
 #, c-format
@@ -638,7 +618,7 @@ msgid ""
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:120
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť telo \"%s\" pre tím \"%s\"."
@@ -790,11 +770,11 @@ msgstr "Pripoj sa na kanál #wormux na irc.freenode.net a nájdi si súperov."
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:222
 msgid "Load maps:"
 msgstr "Načítavam mapy:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Načítavam tímy"
 
@@ -872,7 +852,7 @@ msgstr "Inicializuje sa okolie..."
 msgid "New network game at "
 msgstr "Sieťová hra"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenájdený element <%s> v xml konfiguračnom súbore!"
@@ -950,12 +930,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Načítavam mapu"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:345
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Čítam osobný konfiguračný súbor"
 
-#: src/game/config.cpp:402
+#: src/game/config.cpp:393
 msgid "Reading personal config file"
 msgstr "Čítam osobný konfiguračný súbor"
 
@@ -1148,12 +1128,12 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr "Nedá sa kontaktovať hostiteľar."
 
-#: src/map/maps_list.cpp:242
+#: src/map/maps_list.cpp:232
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
 
-#: src/map/maps_list.cpp:254
+#: src/map/maps_list.cpp:244
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
@@ -1220,11 +1200,6 @@ msgstr "Wormux sa spúšťa..."
 msgid "Wormux version "
 msgstr "Wormux verzia"
 
-#: src/map/maps_list.cpp:89
-#, fuzzy, c-format
-msgid "XML error during loading map '%s': "
-msgstr "XML chyba počas načítavania mapy '%s' :"
-
 #: src/menu/network_menu.cpp:323
 #, fuzzy
 msgid "You are alone :-/"
@@ -1234,11 +1209,11 @@ msgstr "Si sáám..."
 msgid "You are alone..."
 msgstr "Si sáám..."
 
-#: src/map/maps_list.cpp:263
+#: src/map/maps_list.cpp:253
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tímy !"
 
@@ -1250,7 +1225,7 @@ msgstr ""
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 
-#: src/menu/credits_menu.cpp:73
+#: src/menu/credits_menu.cpp:75
 #, fuzzy
 msgid "aka"
 msgstr "Raketomet"
@@ -1262,7 +1237,7 @@ msgid ""
 "a bombing per turn"
 msgstr ""
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:75
 msgid "couldn't load config"
 msgstr ""
 
@@ -1270,16 +1245,16 @@ msgstr ""
 msgid "done"
 msgstr "koniec"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:82
 #, fuzzy
 msgid "error parsing the config file"
 msgstr "Čítam osobný konfiguračný súbor"
 
-#: src/menu/credits_menu.cpp:77
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr ""
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:71
 #, fuzzy
 msgid "no configuration file!"
 msgstr "Chyba počas načítavania konfiguračného súboru: %s"
@@ -1289,7 +1264,7 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 msgid "o Loading music"
 msgstr "=== Načítavam ==="
 
-#: src/sound/jukebox.cpp:338
+#: src/sound/jukebox.cpp:337
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Chyba počas načítavania konfiguračného súboru: %s"
@@ -1298,6 +1273,23 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Chyba počas načítavania dát tímu %s:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
+
+#, fuzzy
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Chyba počas načítavania herného módu %s (súbor %s):"
+
+#, fuzzy
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "XML chyba počas načítavania mapy '%s' :"
 
 #~ msgid "Music?"
 #~ msgstr "Hudba?"

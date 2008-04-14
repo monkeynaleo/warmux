@@ -45,7 +45,7 @@ public:
   double nb_max_speed;
 
   FootBombConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
+  virtual void LoadXml(xmlNode *elem);
 };
 
 class FootBomb : public WeaponProjectile
@@ -186,7 +186,7 @@ FootBombConfig::FootBombConfig() :
   nb_recursions = 2;
 }
 
-void FootBombConfig::LoadXml(xmlpp::Element *elem)
+void FootBombConfig::LoadXml(xmlNode *elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "nb_fragments", nb_fragments);
