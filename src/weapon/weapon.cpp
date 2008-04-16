@@ -341,7 +341,9 @@ void Weapon::RepeatShoot()
 
   if (current_time - m_last_fire_time >= m_time_between_each_shot) {
     NewActionWeaponShoot();
-    // m_last_fire_time = current_time; this is done in Weapon::Shoot()
+    // this is done in Weapon::Shoot() but let's set meanwhile,
+    // to prevent problems with rapid fire weapons such as submachine
+    m_last_fire_time = current_time;
   }
 }
 
