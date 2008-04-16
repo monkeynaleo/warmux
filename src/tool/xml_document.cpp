@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include <iostream>
+#include <cstring>
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
 #include "tool/file_tools.h"
