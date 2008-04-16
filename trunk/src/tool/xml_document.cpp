@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include <iostream>
-#include <cstring>
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
 #include "tool/file_tools.h"
@@ -292,7 +291,7 @@ bool XmlReader::ReadMarkerValue(xmlNode* marker,
 
   // Read node value
   marker = marker->children;
-  if (strcmp((const char*)marker->name, "text"))
+  if (std::string("text") != (const char*)marker->name)
   {
     printf("Element '%s' had content '%s'\n",
               marker->name, marker->content);
