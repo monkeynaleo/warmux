@@ -77,7 +77,6 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
   CloseClipboard();
   return ret;
 }
-/*
 #elif defined(__APPLE__)
 #include <Carbon/Carbon.h>
 
@@ -197,7 +196,6 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
   }
   return false;
 }
-*/
 #else
 bool RetrieveBuffer(std::string&, std::string::size_type&) { return false; }
 #endif
