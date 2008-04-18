@@ -78,6 +78,11 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
   return ret;
 }
 #elif defined(__APPLE__)
+
+#ifdef Status
+#undef Status
+#endif
+
 #include <Carbon/Carbon.h>
 
 bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
@@ -101,6 +106,7 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
   delete[] buffer;
   return ret;
 }
+
 #elif USE_X11
 static char* getSelection(Display *dpy, Window us, Atom selection)
 {
