@@ -222,11 +222,14 @@ AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
-LIBS+=@LIBINTL@
 .rc.o:
 	@WINDRES@ -o $@ -i $<
 else
 AM_CXXFLAGS += -Werror
+endif
+
+if !INCLUDEDINTL
+LIBS+=@LIBINTL@
 endif
 
 if STATIC
