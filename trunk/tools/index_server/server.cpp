@@ -86,7 +86,8 @@ Client* Server::NewConnection()
   unsigned int ip = client_address.sin_addr.s_addr;
 
   Client* client = new Client(client_fd, ip);
-  DPRINT(CONN, "New connection opened by %i", ip);
+  DPRINT(CONN, "New connection opened by %i.%i.%i.%i (%i)",
+         ip&0xFF, (ip>>8)&0xFF, (ip>>16)&0xFF, ip>>24, ip);
   return client;
 }
 
