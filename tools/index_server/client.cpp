@@ -232,9 +232,12 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
     {
       std::string clt_version;
       r = ReceiveStr(clt_version);
-      if (!r)
+      if (!r) {
+        DPRINT(TRAFFIC, "didn't receive client version string");
         goto next_msg;
+      }
 
+      DPRINT(TRAFFIC, "client version: %s", clt_version.c_str());
       r = HandShake(clt_version);
       goto next_msg;
     }

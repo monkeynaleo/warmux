@@ -116,8 +116,10 @@ bool NetData::ReceiveStr(std::string & full_str)
   if (str_size == 0)
     {
       // We don't know the string size -> read it
-      if (received < 4)
-        return true;
+      if (received < 4) {
+        DPRINT(TRAFFIC, "Not enough data to store string length: %i", received);
+        return false;
+      }
 
       int size;
       if (!ReceiveInt(size))
@@ -215,7 +217,10 @@ bool NetData::Receive()
 
   // received < 1 when the client disconnect
   if (received < 1)
-    return false;
+    {
+      DPRINT(TRAFFIC, "Nothing received");
+      return false;
+    }
 
   // Get the ID of the message
   // if we don't already know it
@@ -223,7 +228,10 @@ bool NetData::Receive()
     {
       int id;
       if( !ReceiveInt(id) )
-        return false;
+        {
+          DPRINT(TRAFFIC, "Didn't received msg id!");
+          return false;
+        }
       msg_id = (IndexServerMsg)id;
     }
 

@@ -190,8 +190,10 @@ int main(int argc, void** argv)
             }
           if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
             {
-              if( ! client->second->Receive() )
+              if( ! client->second->Receive() ) {
+                DPRINT(CONN, "Nothing received, disconnecting!");
                 client->second->connected = false;
+              }
               // Exit as the clients list may have changed
               break;
             }
