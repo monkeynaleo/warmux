@@ -100,64 +100,65 @@ int AppWormux::Main(void)
     OptionMenu::CheckUpdates();
 
     do
+    {
+
+      if (choice == MainMenu::NONE)
       {
-
-        if (choice == MainMenu::NONE) {
-          MainMenu main_menu;
-          menu = &main_menu;
-          choice = main_menu.Run();
-        }
-
-        ActionHandler::GetInstance()->Flush();
-
-        switch (choice)
-          {
-            case MainMenu::PLAY:
-            {
-              GameMenu game_menu;
-              menu = &game_menu;
-              game_menu.Run(skip_menu);
-              break;
-            }
-            case MainMenu::NETWORK:
-            {
-              NetworkConnectionMenu network_connection_menu;
-              menu = &network_connection_menu;
-              network_connection_menu.SetAction(net_action);
-              network_connection_menu.Run(skip_menu);
-              break;
-            }
-            case MainMenu::HELP:
-            {
-              HelpMenu help_menu;
-              menu = &help_menu;
-              help_menu.Run();
-              break;
-            }
-            case MainMenu::OPTIONS:
-            {
-              OptionMenu options_menu;
-              menu = &options_menu;
-              options_menu.Run();
-              break;
-            }
-            case MainMenu::CREDITS:
-            {
-              CreditsMenu credits_menu;
-              menu = &credits_menu;
-              credits_menu.Run();
-              break;
-            }
-            case MainMenu::QUIT:
-            quit = true;
-          default:
-            break;
-          }
-        menu = NULL;
-        choice = MainMenu::NONE;
-        skip_menu = false;
-        net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+        MainMenu main_menu;
+        menu = &main_menu;
+        choice = main_menu.Run();
       }
+
+      ActionHandler::GetInstance()->Flush();
+
+      switch (choice)
+      {
+        case MainMenu::PLAY:
+        {
+          GameMenu game_menu;
+          menu = &game_menu;
+          game_menu.Run(skip_menu);
+          break;
+        }
+        case MainMenu::NETWORK:
+        {
+          NetworkConnectionMenu network_connection_menu;
+          menu = &network_connection_menu;
+          network_connection_menu.SetAction(net_action);
+          network_connection_menu.Run(skip_menu);
+          break;
+        }
+        case MainMenu::HELP:
+        {
+          HelpMenu help_menu;
+          menu = &help_menu;
+          help_menu.Run();
+          break;
+        }
+        case MainMenu::OPTIONS:
+        {
+          OptionMenu options_menu;
+          menu = &options_menu;
+          options_menu.Run();
+          break;
+        }
+        case MainMenu::CREDITS:
+        {
+          CreditsMenu credits_menu;
+          menu = &credits_menu;
+          credits_menu.Run();
+          break;
+        }
+        case MainMenu::QUIT:
+          quit = true;
+        default:
+          break;
+      }
+      menu = NULL;
+      choice = MainMenu::NONE;
+      skip_menu = false;
+      net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+    }
     while (!quit);
 
     End();
@@ -185,8 +186,7 @@ void AppWormux::DisplayLoadingPicture()
 
   string txt_version =
     _("Version") + string(" ") + Constants::WORMUX_VERSION;
-  string filename = config->GetDataDir() + PATH_SEPARATOR + "menu"
-                         + PATH_SEPARATOR + "loading.png";
+  string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "loading.png";
 
   Surface surfaceLoading(filename.c_str());
   Sprite loading_image(surfaceLoading, true);
