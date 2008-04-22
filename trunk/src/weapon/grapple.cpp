@@ -183,7 +183,7 @@ bool Grapple::p_Shoot()
   m_initial_angle = ActiveCharacter().GetFiringAngle();
   last_mvt=Time::GetInstance()->Read();
 
-  TryAttachRope();
+  if (TryAttachRope()) JukeBox::GetInstance()->Play("share", "weapon/grapple_attaching");
   return true;
 }
 
