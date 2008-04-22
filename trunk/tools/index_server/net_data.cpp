@@ -34,6 +34,7 @@
 NetData::NetData()
 {
   str_size = 0;
+  received = 0;
   connected = false;
   ping_sent = false;
   msg_id = TS_NO_MSG;
