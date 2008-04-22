@@ -21,7 +21,7 @@
 
 ChatLogger::ChatLogger() :
         logdir(Config::GetInstance()->GetChatLogDir()),
-        logfile(logdir + std::string(PATH_SEPARATOR"chat.log"))
+        logfile(logdir + "chat.log")
 {
   // FIXME: also add the game name to the filename
   //
@@ -32,30 +32,31 @@ ChatLogger::ChatLogger() :
   struct tm lt, *plt;
   std::string timestamp;
 
-  if ( ((time_t) -1) == time(&t) ) {
-      timestamp = std::string (_("(unknown time)")) ;
+  if ( ((time_t) -1) == time(&t) )
+  {
+    timestamp = std::string (_("(unknown time)")) ;
   }
-  else {
-      // convert to local time
-      plt = localtime(&t);
-      memcpy(&lt, plt, sizeof(struct tm));
+  else
+  {
+    // convert to local time
+    plt = localtime(&t);
+    memcpy(&lt, plt, sizeof(struct tm));
 
-      timestamp = Format ( "%.4d-%.2d-%.2d-%.2dH%.2dm%.2d" ,
-        lt.tm_year + TIME_BASE_YEAR, lt.tm_mon+1, lt.tm_mday+1,
-        lt.tm_hour, lt.tm_min, lt.tm_sec ) ;
+    timestamp = Format ( "%4d-%2d-%2d-%2dH%2dm%2d" ,
+    lt.tm_year + TIME_BASE_YEAR, lt.tm_mon+1, lt.tm_mday+1,
+    lt.tm_hour, lt.tm_min, lt.tm_sec ) ;
 
 #ifndef DEBUG
-      logfile = Format ( "%s.log" , timestamp.c_str() );
+    logfile = Format ( "%s.log" , timestamp.c_str() );
 #else // DEBUG
-      logfile = Format ( "%s-%c.log" , timestamp.c_str(), (char)((random() % 10)+'a') );
+    logfile = Format ( "%s-%c.log" , timestamp.c_str(), (char)((random() % 10)+'a') );
 #endif // DEBUG
-
   }
 
   // TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
   timestamp = std::string(_("New network game at ")) + timestamp ;
 
-  std::string fn = logdir + std::string(PATH_SEPARATOR) + logfile ;
+  std::string fn = logdir + logfile ;
 
 
   m_logfilename.open(fn.c_str(), std::ios::out | std::ios::app);
@@ -66,7 +67,6 @@ ChatLogger::ChatLogger() :
   }
 
   this->LogMessage(timestamp);
-
 }
 
 ChatLogger::~ChatLogger()
@@ -74,21 +74,17 @@ ChatLogger::~ChatLogger()
   m_logfilename.close();
 }
 
-void ChatLogger::LogMessage(
-        const std::string &msg
-    )
+void ChatLogger::LogMessage(const std::string &msg)
 {
   m_logfilename << msg << std::endl << std::flush;
 }
 
-void ChatLogger::LogMessageIfOpen(
-        const std::string &msg
-    )
+void ChatLogger::LogMessageIfOpen(const std::string &msg)
 {
   if ( singleton ) ChatLogger::GetInstance()->LogMessage(msg);
 }
 
 void ChatLogger::CloseIfOpen()
 {
-    if ( singleton ) ChatLogger::GetInstance()->CleanUp();
+  if ( singleton ) ChatLogger::GetInstance()->CleanUp();
 }

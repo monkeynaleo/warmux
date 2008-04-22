@@ -222,7 +222,7 @@ MapsList::MapsList()
   std::cout << "o " << _("Load maps:");
 
   const Config * config = Config::GetInstance();
-  std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "map" + PATH_SEPARATOR;
+  std::string dirname = config->GetDataDir() + "map" PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
@@ -233,7 +233,7 @@ MapsList::MapsList()
   }
 
   // Load personal maps
-  dirname = config->GetPersonalDataDir() + "map" + PATH_SEPARATOR;
+  dirname = config->GetPersonalDataDir() + "map" PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
     const char *name;

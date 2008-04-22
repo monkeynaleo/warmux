@@ -166,7 +166,7 @@ void JukeBox::LoadMusicXML()
   XmlReader doc;
 
   // Load the XML
-  std::string folder = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "music" + PATH_SEPARATOR;
+  std::string folder = Config::GetInstance()->GetDataDir() + "music" PATH_SEPARATOR;
   std::string xml_filename = folder + "profile.xml";
   if( !DoesFileExist(xml_filename) )
   {
@@ -339,8 +339,8 @@ void JukeBox::LoadXML(const std::string& profile)
   XmlReader doc;
 
   // Load the XML
-  std::string folder = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR
-                     + "sound"+ PATH_SEPARATOR + profile + PATH_SEPARATOR;
+  std::string folder = Config::GetInstance()->GetDataDir()
+                     + "sound" PATH_SEPARATOR + profile + PATH_SEPARATOR;
   std::string xml_filename = folder + "profile.xml";
   if( !DoesFileExist(xml_filename) )
   {

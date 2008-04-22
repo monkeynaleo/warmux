@@ -305,9 +305,7 @@ bool GameMode::AllowCharacterSelection() const
 std::string GameMode::GetFilename() const
 {
   std::string filename =
-    PATH_SEPARATOR
-    + std::string("game_mode")
-    + std::string(PATH_SEPARATOR)
+    std::string("game_mode" PATH_SEPARATOR)
     + m_current
     + std::string(".xml");
 
@@ -317,9 +315,7 @@ std::string GameMode::GetFilename() const
 std::string GameMode::GetObjectsFilename() const
 {
   std::string filename =
-    PATH_SEPARATOR
-    + std::string("game_mode")
-    + std::string(PATH_SEPARATOR)
+    std::string("game_mode" PATH_SEPARATOR)
     + m_current
     + std::string("_objects.xml");
 

@@ -34,7 +34,7 @@ LoadingScreen::LoadingScreen()
   AppWormux * app = AppWormux::GetInstance();
 
   loading_bg = new Sprite(Surface((
-                                   config->GetDataDir() + PATH_SEPARATOR
+                                   config->GetDataDir()
                                    + "menu" + PATH_SEPARATOR
                                    + "loading.png").c_str()),
 			  true);

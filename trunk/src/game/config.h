@@ -147,6 +147,7 @@ protected:
   std::string m_network_port;
   std::string m_filename;
 
+  // Code setting it must make sure it ends with the path separator
   std::string data_dir, locale_dir, personal_data_dir, personal_config_dir, chat_log_dir;
 
   std::list<ConfigTeam> teams;
