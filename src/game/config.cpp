@@ -145,8 +145,8 @@ Config::Config():
 #ifdef USE_AUTOPACKAGE
   data_dir     = GetEnv(Constants::ENV_DATADIR, br_find_data_dir(INSTALL_DATADIR));
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
-  font_dir     = data_dir + PATH_SEPARATOR + "font";
-  filename     = font_dir + PATH_SEPARATOR + "DejaVuSans.ttf";
+  font_dir     = data_dir + PATH_SEPARATOR "font" PATH_SEPARATOR;
+  filename     = font_dir + PATH_SEPARATOR "DejaVuSans.ttf";
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
 #elif defined(__APPLE__)
   // the following code will enable wormux to find its data when placed in an app bundle on mac OS X.
@@ -162,9 +162,9 @@ Config::Config():
   std::string contents = std::string(path) + std::string("/Contents");
   if(contents.find(".app") != std::string::npos){
       // executable is inside an app bundle, use app bundle-relative paths
-      std::string default_data_dir = contents + std::string("/Resources/data");
+      std::string default_data_dir = contents + std::string("/Resources/data/");
       std::string default_ttf_filename = contents + std::string("/Resources/data/font/DejaVuSans.ttf");
-      std::string default_locale_dir = contents + std::string("/Resources/locale");
+      std::string default_locale_dir = contents + std::string("/Resources/locale/");
 
       // if environment variables exist, they will override default values
       data_dir     = GetEnv(Constants::ENV_DATADIR, default_data_dir);
@@ -180,15 +180,15 @@ Config::Config():
 #else
 #  ifdef _WIN32
   std::string basepath = GetWormuxPath();
-  data_dir     = basepath + "\\data";
-  locale_dir   = basepath + "\\locale";
+  data_dir     = basepath + "\\data\\";
+  locale_dir   = basepath + "\\locale\\";
   ttf_filename = basepath + "\\data\\font\\DejaVuSans.ttf";
 #  else
   data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
 #  endif
-  font_dir     = GetEnv(Constants::ENV_FONT_PATH, data_dir + PATH_SEPARATOR + "font");
+  font_dir     = GetEnv(Constants::ENV_FONT_PATH, data_dir + PATH_SEPARATOR "font" PATH_SEPARATOR);
 #endif
 
 #ifndef WIN32
@@ -226,11 +226,11 @@ Config::Config():
   rename(old_config_file_name.c_str(), config_file_name.c_str());
 
 #else
-  personal_config_dir = GetHome() + "\\Wormux";
+  personal_config_dir = GetHome() + "\\Wormux\\";
   personal_data_dir = personal_config_dir;
 #endif
 
-  chat_log_dir = personal_data_dir + std::string(PATH_SEPARATOR"logs");
+  chat_log_dir = personal_data_dir + std::string("logs");
   MkdirChatLogDir();
 
   LoadDefaultValue();
@@ -339,7 +339,7 @@ bool Config::DoLoading(void)
 void Config::LoadDefaultValue()
 {
   // Load default XML conf
-  m_default_config = GetDataDir() + PATH_SEPARATOR + "wormux_default_config.xml";
+  m_default_config = GetDataDir() + "wormux_default_config.xml";
   Profile *res = resource_manager.LoadXMLProfile(m_default_config, true);
 
   std::cout << "o " << _("Reading default config file") << std::endl;
@@ -366,7 +366,7 @@ void Config::LoadDefaultValue()
          res->doc->ReadStringAttr(*it, "file", font)) {
         bool rel = false;
         res->doc->ReadBoolAttr(*it, "relative", rel);
-        fonts[lang] = (rel) ? font_dir + PATH_SEPARATOR + font : font;
+        fonts[lang] = (rel) ? font_dir + font : font;
         //std::cout << "Language " << lang << ": " << fonts[lang] << std::endl;
       }
     }

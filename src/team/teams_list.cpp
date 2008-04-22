@@ -138,7 +138,7 @@ void TeamsList::LoadList()
   const Config * config = Config::GetInstance();
 
   // Load Wormux teams
-  std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "team" + PATH_SEPARATOR;
+  std::string dirname = config->GetDataDir() + "team" PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
@@ -149,7 +149,7 @@ void TeamsList::LoadList()
   }
 
   // Load personal teams
-  dirname = config->GetPersonalDataDir() + "team" + PATH_SEPARATOR;
+  dirname = config->GetPersonalDataDir() + "team" PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
     const char *name;

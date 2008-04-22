@@ -51,7 +51,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   XmlReader   doc;
 
   // Load XML
-  nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
+  nomfich = teams_dir+id+ PATH_SEPARATOR "team.xml";
 
   if (!doc.Load(nomfich))
     throw "unable to load file of team data";
@@ -87,7 +87,7 @@ bool Team::LoadCharacters()
 {
   ASSERT (nb_characters <= 10);
 
-  std::string nomfich = m_teams_dir+m_id+PATH_SEPARATOR+ "team.xml";
+  std::string nomfich = m_teams_dir+m_id+ PATH_SEPARATOR "team.xml";
   // Load XML
   if (!DoesFileExist(nomfich))
     return false;

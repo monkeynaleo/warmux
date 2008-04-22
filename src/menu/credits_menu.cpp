@@ -116,7 +116,7 @@ bool CreditsMenu::signal_cancel()
 
 void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
 {
-  std::string filename = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "authors.xml";
+  std::string filename = Config::GetInstance()->GetDataDir() + "authors.xml";
   XmlReader doc;
   if(!doc.Load(filename))
   {
