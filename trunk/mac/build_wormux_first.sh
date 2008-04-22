@@ -19,7 +19,7 @@ export RM=/bin/rm
 cd ..
 svn up
 ./autogen.sh
-./configure
+./configure --enable-debug
 make clean
 make -w
 
