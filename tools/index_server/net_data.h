@@ -57,6 +57,7 @@ class NetData
   void Host(const int & client_fd, const unsigned int & ip);
   bool ConnectTo(const std::string & address, const int & port);
   bool Receive();
+  bool ReceiveData();
   virtual bool HandleMsg(enum IndexServerMsg msg_id) = 0;
   void CheckState();
 };

@@ -205,22 +205,33 @@ bool NetData::SendStr(const std::string &full_str)
   return true;
 }
 
-bool NetData::Receive()
+bool NetData::ReceiveData()
 {
-  int r = true;
+  int packet_size = 0;
 
-  if( ioctl( GetFD(), FIONREAD, &received) == -1 )
+  if( ioctl( GetFD(), FIONREAD, &packet_size) == -1 )
     {
       PRINT_ERROR;
       return false;
     }
 
   // received < 1 when the client disconnect
-  if (received < 1)
+  if (packet_size < 1)
     {
       DPRINT(TRAFFIC, "Nothing received");
       return false;
     }
+  received += packet_size;
+
+  return true;
+}
+
+bool NetData::Receive()
+{
+  int r = true;
+
+  if (!ReceiveData())
+    return false;
 
   // Get the ID of the message
   // if we don't already know it
