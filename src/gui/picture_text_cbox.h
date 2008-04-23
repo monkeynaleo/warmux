@@ -35,9 +35,8 @@ class PictureTextCBox : public CheckBox
 
  public:
   PictureTextCBox(const std::string& label, const std::string& resource_id, const Point2i& size, bool value = true);
-  void Draw(const Point2i& mousePosition) const;
-
-  void SetSizePosition(const Rectanglei& rect);
+  virtual void Draw(const Point2i& mousePosition) const;
+  virtual void Pack();
 };
 
 #endif

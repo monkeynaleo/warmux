@@ -42,18 +42,20 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   Box * tmp_box = new VBox(_size.GetX()-80, false);
   tmp_box->SetMargin(2);
   tmp_box->SetBorder(Point2i(0,0));
-  team_name = new Label(" ", Point2i(_size.GetX()-80, -1),
+  team_name = new Label(" ", _size.GetX()-80,
                         Font::FONT_MEDIUM, Font::FONT_BOLD,
                         dark_gray_color, false, false);
 
   Box * tmp_player_box = new HBox(Font::GetInstance(Font::FONT_SMALL)->GetHeight(), false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetBorder(Point2i(0,0));
-  tmp_player_box->AddWidget(new Label(_("Head commander"), Point2i((_size.GetX()-80)-100, -1),
+  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-80-100,
                                       Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
-  player_name = new TextBox(_player_name, Point2i(100, -1),
+  player_name = new TextBox(_player_name, 100,
                             Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp_player_box->AddWidget(player_name);
+  tmp_player_box->Pack();
+
   previous_name = " ";
 
   nb_characters = new SpinButton(_("Number of characters"), -1,
@@ -63,6 +65,8 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   tmp_box->AddWidget(team_name);
   tmp_box->AddWidget(tmp_player_box);
   tmp_box->AddWidget(nb_characters);
+
+  tmp_box->Pack();
 
   AddWidget(tmp_box);
 }

@@ -30,16 +30,15 @@
 
 ButtonPic::ButtonPic(const std::string &label,
 		     const std::string &resource_id,
-		     const Point2i &_size)
+		     const Point2i &_size) :
+  Widget(_size)
 {
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   m_img_normal = resource_manager.LoadImage(res, resource_id);
   resource_manager.UnLoadXMLProfile(res);
 
-  SetSize(_size);
-
   txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  txt_label->SetMaxWidth (GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 }
 
 ButtonPic::~ButtonPic()
@@ -70,8 +69,7 @@ void ButtonPic::Draw(const Point2i &mousePosition) const
 				     GetSizeY() - txt_label->GetHeight()));
 }
 
-void ButtonPic::SetSizePosition(const Rectanglei &rect)
+void ButtonPic::Pack()
 {
-  StdSetSizePosition(rect);
-  txt_label->SetMaxWidth (GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 }

@@ -38,8 +38,8 @@ public:
   ListBoxWithLabel (const std::string &label, const Point2i &size);
   ~ListBoxWithLabel();
 
-  void Draw(const Point2i &mousePosition) const;
-  void SetSizePosition(const Rectanglei &rect);
+  virtual void Draw(const Point2i &mousePosition) const;
+  virtual void Pack();
 };
 
 #endif

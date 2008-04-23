@@ -35,7 +35,7 @@ protected:
   void BasicSetText(std::string const &new_txt);
 public:
   TextBox(const std::string &label,
-          const Point2i &size,
+          uint max_width,
           Font::font_size_t fsize,
           Font::font_style_t fstyle);
   ~TextBox() { };
@@ -45,9 +45,9 @@ public:
   void SetMaxNbChars(unsigned int nb_chars);
 
   // From widget
-  bool SendKey(const SDL_keysym& key);
-  void Draw(const Point2i &mousePosition) const;
-  Widget *ClickUp(const Point2i &, uint);
+  virtual bool SendKey(const SDL_keysym& key);
+  virtual void Draw(const Point2i &mousePosition) const;
+  virtual Widget *ClickUp(const Point2i &, uint);
 };
 
 #endif

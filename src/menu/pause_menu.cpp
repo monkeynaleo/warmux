@@ -65,8 +65,9 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
   box->AddWidget(bt_main_menu);
 
   widgets.AddWidget(box);
-
-  box->SetXY(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
+  widgets.Pack();
+  box->SetPosition(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
+  widgets.Pack();
 }
 
 PauseMenu::~PauseMenu()

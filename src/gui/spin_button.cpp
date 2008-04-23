@@ -48,9 +48,9 @@ SpinButton::SpinButton (const std::string &label, int width,
   uint margin = 5;
 
   m_plus = new Button(res, "menu/plus");
-  m_plus->SetXY(position.x + size.x - 5, position.y);
+  m_plus->SetPosition(position.x + size.x - 5, position.y);
   m_minus = new Button(res, "menu/minus");
-  m_minus->SetXY(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
+  m_minus->SetPosition(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
   resource_manager.UnLoadXMLProfile( res);
 
   ValueHasChanged();
@@ -64,18 +64,16 @@ SpinButton::~SpinButton ()
   delete m_minus;
 }
 
-void SpinButton::SetSizePosition(const Rectanglei &rect)
+void SpinButton::Pack()
 {
-  StdSetSizePosition(rect);
-
   std::ostringstream max_value_s;
   max_value_s << GetMaxValue();
   uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());
 
   uint margin = 5;
 
-  m_plus->SetSizePosition( Rectanglei(position.x + size.x - 5, position.y, 5, 10) );
-  m_minus->SetSizePosition( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10) );
+  m_plus->SetPosition(position.x + size.x - 5, position.y);
+  m_minus->SetPosition(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
 
   txt_label->SetMaxWidth(size.x - 30);
 }

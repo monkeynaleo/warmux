@@ -23,7 +23,7 @@
 #include "graphic/surface.h"
 #include "graphic/colors.h"
 
-Box::Box(const Rectanglei &rect, bool _draw_border) : WidgetList( rect )
+Box::Box(const Point2i &size, bool _draw_border) : WidgetList(size)
 {
   margin = 5;
   border.SetValues(5, 5);
@@ -53,48 +53,16 @@ void Box::Update(const Point2i &mousePosition,
 // --------------------------------------------------
 
 VBox::VBox(int width, bool _draw_border) :
-  Box(Rectanglei(-1, -1, width, -1), _draw_border)
+  Box(Point2i(width, -1), _draw_border)
 {
 }
 
-void VBox::DelFirstWidget()
+void VBox::Pack()
 {
-  int w_height = widget_list.front()->GetSizeY();
-  WidgetList::DelFirstWidget();
-  //Make all remaining widget go up:
-  for( std::list<Widget*>::iterator it = widget_list.begin();
-       it != widget_list.end();
-       ++it )
-  {
-    (*it)->SetPositionY((*it)->GetPositionY() - w_height - margin);
-  }
-  size.y -= w_height + margin;
-}
+  WidgetList::Pack();
 
-void VBox::AddWidget(Widget * a_widget)
-{
-  ASSERT(a_widget != NULL);
+  int _y = position.y;
 
-  uint _y;
-
-  if(!widget_list.empty())
-    _y = widget_list.back()->GetPositionY() + widget_list.back()->GetSizeY();
-  else
-    _y = position.y + border.y - margin;
-
-  a_widget->SetSizePosition(Rectanglei(position.x + border.x,
-                                       _y + margin,
-                                       size.x - 2 * border.x,
-                                       a_widget->GetSizeY() ));
-
-  size.y = a_widget->GetPositionY() + a_widget->GetSizeY() - position.y + border.y;
-  WidgetList::AddWidget(a_widget);
-}
-
-void VBox::SetSizePosition(const Rectanglei &rect)
-{
-  position = rect.GetPosition();
-  int _y = rect.GetPositionY();
   std::list<Widget *>::iterator it;
   for( it = widget_list.begin();
        it != widget_list.end();
@@ -103,46 +71,30 @@ void VBox::SetSizePosition(const Rectanglei &rect)
     if( it == widget_list.begin() )
       _y += border.y - margin;
 
-    (*it)->SetSizePosition( Rectanglei(position.x + border.x,
-                                       _y + margin,
-                                       (*it)->GetSizeX(),
-                                       (*it)->GetSizeY() ));
+    (*it)->SetPosition(position.x + border.x,
+		       _y + margin);
+    (*it)->SetSize(size.x - 2*border.x,
+		   (*it)->GetSizeY());
+
     _y = (*it)->GetPositionY() + (*it)->GetSizeY();
   }
+  size.y = _y - position.y;
+
+  WidgetList::Pack();
 }
 
 // --------------------------------------------------
 
 HBox::HBox(int height, bool _draw_border) :
-  Box(Rectanglei(-1, -1, -1, height), _draw_border)
+  Box(Point2i(-1, height), _draw_border)
 {
 }
 
-void HBox::AddWidget(Widget * a_widget)
+void HBox::Pack()
 {
-  ASSERT(a_widget != NULL);
+  WidgetList::Pack();
 
-  uint _x;
-
-  if (!widget_list.empty())
-    _x = widget_list.back()->GetPositionX() + widget_list.back()->GetSizeX();
-  else
-    _x = position.x + border.x - margin;
-
-  a_widget->SetSizePosition( Rectanglei(_x + margin,
-                                        position.y + border.y,
-                                        a_widget->GetSizeX(),
-                                        size.y - 2 * border.y) );
-
-  size.x = a_widget->GetPositionX() + a_widget->GetSizeX() - position.x + border.x;
-
-  WidgetList::AddWidget(a_widget);
-}
-
-void HBox::SetSizePosition(const Rectanglei &rect)
-{
-  position = rect.GetPosition();
-  int _x = rect.GetPositionX();
+  int _x = position.x;
 
   std::list<Widget *>::iterator it;
   for( it = widget_list.begin();
@@ -152,18 +104,22 @@ void HBox::SetSizePosition(const Rectanglei &rect)
     if( it == widget_list.begin() )
       _x += border.x - margin;
 
-    (*it)->SetSizePosition( Rectanglei(_x + margin,
-                                       position.y + border.y,
-                                       (*it)->GetSizeX(),
-                                       (*it)->GetSizeY()) );
+    (*it)->SetPosition(_x + margin,
+		       position.y + border.y);
+    (*it)->SetSize((*it)->GetSizeX(),
+		   size.y - 2*border.y);
+
     _x = (*it)->GetPositionX()+ (*it)->GetSizeX();
   }
+  size.x = _x - position.x;
+
+  WidgetList::Pack();
 }
 
 // --------------------------------------------------
 
 GridBox::GridBox(uint _max_line_width, const Point2i& size_of_widget, bool _draw_border) :
-  Box(Rectanglei(-1, -1, -1, -1), _draw_border)
+  Box(Point2i(-1, -1), _draw_border)
 {
   max_line_width = _max_line_width;
   widget_size = size_of_widget;
@@ -178,9 +134,8 @@ void GridBox::PlaceWidget(Widget * a_widget, uint _line, uint _column)
   _x = position.x + border.x + _column * (widget_size.GetX() + margin);
   _y = position.y + border.y + _line * (widget_size.GetY() + margin);
 
-  a_widget->SetSizePosition( Rectanglei(_x, _y,
-                                        a_widget->GetSizeX(),
-                                        a_widget->GetSizeY()) );
+  a_widget->SetPosition(_x, _y);
+  a_widget->SetSize(widget_size);
 }
 
 uint GridBox::NbWidgetsPerLine(const uint nb_total_widgets)
@@ -209,20 +164,11 @@ uint GridBox::NbWidgetsPerLine(const uint nb_total_widgets)
   return nb_widgets_per_line;
 }
 
-void GridBox::AddWidget(Widget * a_widget)
+void GridBox::Pack()
 {
-  ASSERT(a_widget != NULL);
+  WidgetList::Pack();
 
-  WidgetList::AddWidget(a_widget);
-  size.x = max_line_width;
-  SetXY(position.x, position.y);
-}
-
-void GridBox::SetSizePosition(const Rectanglei &rect)
-{
-  position = rect.GetPosition();
-  if (rect.GetSizeX() > 0)
-    max_line_width = rect.GetSizeX();
+  // max_line_width = size.x;
 
   uint nb_widgets_per_line = NbWidgetsPerLine(widget_list.size());
 
@@ -246,4 +192,6 @@ void GridBox::SetSizePosition(const Rectanglei &rect)
 
   size.x = 2*border.x + nb_widgets_per_line * (widget_size.GetX() + margin) - margin;
   size.y = 2*border.y + (last_line+1) * (widget_size.GetY() + margin) - margin;
+
+  WidgetList::Pack();
 }

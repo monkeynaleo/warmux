@@ -23,24 +23,20 @@
 #include "graphic/text.h"
 
 Label::Label (const std::string &label,
-              const Point2i &_size,
+              uint max_width,
               Font::font_size_t fsize,
               Font::font_style_t fstyle,
               const Color& color,
               bool _center,
-              bool _shadowed):
-  font_size(fsize),
-  font_style(fstyle),
-  font_color(color),
-  center(_center),
-  shadowed(_shadowed)
+              bool shadowed):
+  center(_center)
 {
-  position = Point2i(-1, -1);
-  size = _size;
+  Widget::SetFont(color, fsize, fstyle, shadowed, false);
 
-  txt_label = new Text(label, color, fsize, fstyle, _shadowed, label.empty());
+  size.x = max_width;
+  txt_label = new Text(label, color, fsize, fstyle, shadowed, label.empty());
+  txt_label->SetMaxWidth(size.x);
   size.y = txt_label->GetHeight();
-  txt_label->SetMaxWidth(GetSizeX());
 }
 
 Label::~Label()
@@ -56,22 +52,30 @@ void Label::Draw(const Point2i &/*mousePosition*/) const
     txt_label->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
 }
 
-void Label::SetSizePosition(const Rectanglei &rect)
+void Label::Pack()
 {
-  StdSetSizePosition(rect);
-  txt_label->SetMaxWidth(GetSizeX());
+  txt_label->SetMaxWidth(size.x);
   size.y = txt_label->GetHeight();
 }
 
 void Label::SetText(const std::string &new_txt)
 {
   NeedRedrawing();
-  delete txt_label;
-  txt_label = new Text(new_txt, font_color, font_size, font_style, shadowed, new_txt.empty());
-  txt_label->SetMaxWidth(GetSizeX());
+
+  if (txt_label)
+    delete txt_label;
+
+  txt_label = new Text(new_txt, GetFontColor(), GetFontSize(), GetFontStyle(), IsFontShadowed(), new_txt.empty());
+  txt_label->SetMaxWidth(size.x);
+  size.y = txt_label->GetHeight();
 }
 
 const std::string& Label::GetText() const
 {
   return txt_label->GetText();
+}
+
+void Label::OnFontChange()
+{
+  SetText(GetText());
 }

@@ -45,11 +45,6 @@ const uint OPTIONS_BOX_H = 150;
 
 const uint TPS_TOUR_MIN = 10;
 const uint TPS_TOUR_MAX = 120;
-// XXX Not used !?
-// const uint TPS_FIN_TOUR_MIN = 1;
-// const uint TPS_FIN_TOUR_MAX = 10;
-
-
 
 // ################################################
 // ##  GAME MENU CLASS
@@ -71,15 +66,16 @@ GameMenu::GameMenu() :
   // ##  TEAM SELECTION
   // ################################################
   team_box = new TeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H));
-  team_box->SetXY(MARGIN_SIDE, MARGIN_TOP);
+  team_box->SetPosition(MARGIN_SIDE, MARGIN_TOP);
+  team_box->Pack();
   widgets.AddWidget(team_box);
 
   // ################################################
   // ##  MAP SELECTION
   // ################################################
   map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight));
-
-  map_box->SetXY(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_TOP);
+  map_box->SetPosition(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_TOP);
+  map_box->Pack();
   widgets.AddWidget(map_box);
 
   // ################################################
@@ -107,10 +103,11 @@ GameMenu::GameMenu() :
   opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
   game_options->AddWidget(opt_scroll_on_border);
 
-  game_options->SetXY(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP);
+  game_options->SetPosition(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP);
+  game_options->Pack();
 
   widgets.AddWidget(game_options);
-
+  widgets.Pack();
 
   // Values initialization
 

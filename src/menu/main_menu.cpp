@@ -77,9 +77,14 @@ MainMenu::MainMenu() :
 
   widgets.AddWidget(box);
 
+  // We must "pack" all the widgets before centering the box to compute its size
+  box->Pack();
+
   uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
-  box->SetXY(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
+  box->SetPosition(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
+
+  widgets.Pack();
 
   std::string s("Version "+Constants::WORMUX_VERSION);
   version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
@@ -87,8 +92,7 @@ MainMenu::MainMenu() :
   std::string s2(Constants::WEB_SITE);
   website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
-  if(!JukeBox::GetConstInstance()->IsPlayingMusic())
-     JukeBox::GetInstance()->PlayMusic("menu");
+  JukeBox::GetInstance()->PlayMusic("menu");
 
   StatStart("Main:Menu");
 }

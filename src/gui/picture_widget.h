@@ -42,11 +42,11 @@ class PictureWidget : public Widget
  public:
   PictureWidget(const Point2i& size);
   PictureWidget(const Point2i& size, const std::string& resource_id, bool scale=false);
-  ~PictureWidget();
+  virtual ~PictureWidget();
   void SetSurface(const Surface& s, bool enable_scaling=false, bool antialiasing=false);
   void SetNoSurface();
-  void Draw(const Point2i &mousePosition) const;
-  void SetSizePosition(const Rectanglei &rect) { StdSetSizePosition(rect); };
+  virtual void Draw(const Point2i &mousePosition) const;
+  virtual void Pack() {};
 
   // Apply a transparency color mask
   void Disable() { disabled = true; };

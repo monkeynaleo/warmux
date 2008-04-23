@@ -24,6 +24,7 @@
 
 #include "include/base.h"
 #include "graphic/color.h"
+#include "graphic/font.h"
 #include "gui/container.h"
 #include "tool/rectangle.h"
 #include "tool/point.h"
@@ -42,6 +43,11 @@ class Widget : public Rectanglei, public Container
   Color background_color;
   Color highlight_bg_color;
 
+  Color font_color;
+  bool font_shadowed;
+  Font::font_size_t font_size;
+  Font::font_style_t font_style;
+
   Widget(const Widget&);
   const Widget& operator=(const Widget&);
 
@@ -49,16 +55,21 @@ class Widget : public Rectanglei, public Container
   Container * ct;
   bool need_redrawing;
 
-  void StdSetSizePosition(const Rectanglei &rect);
   virtual void __Update(const Point2i &/* mousePosition */,
 			const Point2i &/* lastMousePosition */) {};
 
   void RedrawBackground(const Rectanglei& rect);
 
+  // Handle font
+  virtual void OnFontChange() {};
+  const Color& GetFontColor() const { return font_color; };
+  const Font::font_size_t GetFontSize() const { return font_size; };
+  const Font::font_style_t GetFontStyle() const { return font_style; };
+  bool IsFontShadowed() const { return font_shadowed; };
+
  public:
   Widget();
   Widget(const Point2i &size);
-  Widget(const Rectanglei &rect);
   virtual ~Widget() { };
 
   virtual void Update(const Point2i &mousePosition,
@@ -88,12 +99,17 @@ class Widget : public Rectanglei, public Container
   void SetBackgroundColor(const Color &background_color);
   void SetHighlightBgColor(const Color &highlight_bg_color);
 
+  // font color
+  // If (update_now == true), we call OnFontChange()
+  void SetFont(const Color &font_color,
+	       const Font::font_size_t font_size,
+	       const Font::font_style_t font_style,
+	       bool font_shadowed,
+	       bool update_now = true);
+
   void SetContainer(Container * _ct) { ct = _ct; };
 
-  virtual void SetSizePosition(const Rectanglei &rect) = 0;
-  void SetXY(int _x, int _y){
-    SetSizePosition( Rectanglei(Point2i(_x, _y), size) );
-  };
+  virtual void Pack() = 0;
 };
 
 #endif

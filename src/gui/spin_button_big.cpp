@@ -44,9 +44,9 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Point2i &_size,
 
   uint margin = 5;
   m_plus = new Button(res, "menu/big_plus");
-  m_plus->SetXY(position.x + size.x - margin, position.y);
+  m_plus->SetPosition(position.x + size.x - margin, position.y);
   m_minus = new Button(res, "menu/big_minus");
-  m_minus->SetXY(position.x + size.x - max_value_w - margin - 2 * margin, position.y);
+  m_minus->SetPosition(position.x + size.x - max_value_w - margin - 2 * margin, position.y);
   resource_manager.UnLoadXMLProfile( res);
 
   ValueHasChanged();
@@ -60,27 +60,24 @@ SpinButtonBig::~SpinButtonBig ()
   delete m_minus;
 }
 
-void SpinButtonBig::SetSizePosition(const Rectanglei &rect)
+void SpinButtonBig::Pack()
 {
-  StdSetSizePosition(rect);
-
   // label can be multiline
-  txt_label->SetMaxWidth(GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 
   std::ostringstream max_value_s;
   max_value_s << GetMaxValue();
   uint max_value_w = Font::GetInstance(Font::FONT_HUGE)->GetWidth(max_value_s.str());
 
   // center the value
-  uint center_x = GetPositionX() + GetSizeX()/2 ;
-  uint center_y = GetPositionY() + GetSizeY()/2 - txt_label->GetHeight()/2;
+  uint center_x = position.x + size.x/2 ;
+  uint center_y = position.y + size.y/2 - txt_label->GetHeight()/2;
 
-  m_minus->SetSizePosition( Rectanglei(center_x - max_value_w/2 - m_minus->GetSizeX() - 5,
-                            center_y - m_minus->GetSizeY()/2,
-                            m_minus->GetSizeX(), m_minus->GetSizeY()) );
-  m_plus->SetSizePosition( Rectanglei(center_x + max_value_w/2 + 5,
-                           center_y - m_plus->GetSizeY()/2,
-                           m_plus->GetSizeX(), m_plus->GetSizeY()) );
+  m_minus->SetPosition(center_x - max_value_w/2 - m_minus->GetSizeX() - 5,
+		       center_y - m_minus->GetSizeY()/2);
+
+  m_plus->SetPosition(center_x + max_value_w/2 + 5,
+		      center_y - m_plus->GetSizeY()/2);
 }
 
 void SpinButtonBig::Draw(const Point2i &mousePosition) const
@@ -92,14 +89,14 @@ void SpinButtonBig::Draw(const Point2i &mousePosition) const
     m_plus->Draw(mousePosition);
   }
 
-  uint center_x = GetPositionX() + (GetSizeX()/2);
-  uint center_y = GetPositionY() + (GetSizeY()/2) - txt_label->GetHeight()/2;
+  uint center_x = position.x + (size.x/2);
+  uint center_y = position.y + (size.y/2) - txt_label->GetHeight()/2;
   uint value_h = Font::GetInstance(Font::FONT_HUGE)->GetHeight();
 
   txt_value->DrawCenterTop(Point2i(center_x, center_y - value_h/2));
 
-  txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
-                            GetPositionY() + GetSizeY() - txt_label->GetHeight()));
+  txt_label->DrawCenterTop(Point2i(position.x + size.x/2,
+                            position.y + size.y - txt_label->GetHeight()));
 }
 
 Widget* SpinButtonBig::ClickUp(const Point2i &mousePosition, uint button)

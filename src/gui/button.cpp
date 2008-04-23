@@ -62,10 +62,8 @@ void Button::Draw(const Point2i &/*mousePosition*/) const
   }
 }
 
-void Button::SetSizePosition(const Rectanglei &rect)
+void Button::Pack()
 {
-  StdSetSizePosition(rect);
-
   if (img_scale)
     image->ScaleSize(size);
 }

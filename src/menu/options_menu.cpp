@@ -39,8 +39,8 @@
 #include "gui/picture_text_cbox.h"
 #include "gui/spin_button_picture.h"
 #include "gui/list_box_w_label.h"
+#include "gui/tabs.h"
 #include "gui/question.h"
-
 #include "map/maps_list.h"
 #include "network/download.h"
 #include "sound/jukebox.h"
@@ -49,13 +49,6 @@
 #include "tool/string_tools.h"
 #include "tool/resource_manager.h"
 #include <sstream>
-
-const uint SOUND_Y = 10;
-const uint SOUND_W = 530;
-const uint SOUND_H = 150;
-
-const uint GRAPHIC_W = 530;
-const uint GRAPHIC_H = 330;
 
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
@@ -66,31 +59,35 @@ OptionMenu::OptionMenu() :
   Point2i stdSize(140, -1);
   Point2i option_size(140, 130);
 
-  /* Graphic options */
-  Box * graphic_options = new HBox(GRAPHIC_H);
-  graphic_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/video_label"));
+  uint max_width = app->video->window.GetWidth()-50;
 
-  Box * graphic_options_box = new GridBox(GRAPHIC_W - 40, option_size, false);
+  /* Tabs */
+  MultiTabs * tabs = new MultiTabs(Point2i(max_width,
+					   app->video->window.GetHeight()-100));
+  tabs->SetPosition(25, 25);
+
+  /* Graphic options */
+  Box * graphic_options = new GridBox(max_width, option_size, false);
 
   // Various options
   opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
-  graphic_options_box->AddWidget(opt_display_wind_particles);
+  graphic_options->AddWidget(opt_display_wind_particles);
 
   opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size);
-  graphic_options_box->AddWidget(opt_display_energy);
+  graphic_options->AddWidget(opt_display_energy);
 
   opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
-  graphic_options_box->AddWidget(opt_display_name);
+  graphic_options->AddWidget(opt_display_name);
 
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
-  graphic_options_box->AddWidget(full_screen);
+  graphic_options->AddWidget(full_screen);
 
   opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
 					  option_size,
 					  50, 5,
 					  20, 50);
 
-  graphic_options_box->AddWidget(opt_max_fps);
+  graphic_options->AddWidget(opt_max_fps);
 
 
   // Get available video resolution
@@ -111,45 +108,42 @@ OptionMenu::OptionMenu() :
   }
   cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", option_size,
                                  video_resolutions, current_resolution);
-  graphic_options_box->AddWidget(cbox_video_mode);
+  graphic_options->AddWidget(cbox_video_mode);
 
-  graphic_options->AddWidget(graphic_options_box);
-
-  widgets.AddWidget(graphic_options);
+  tabs->AddNewTab(_("Graphic"), graphic_options);
 
   /* Language selection */
-  Box * language_options = new HBox(GRAPHIC_H);
-  language_options->AddWidget(new PictureWidget(Point2i(40, 136), "menu/config_label"));
-  widgets.AddWidget(language_options);
-  lbox_languages = new ListBoxWithLabel(_("Language"), stdSize);
+  Box * language_options = new GridBox(max_width, option_size, false);
+  lbox_languages = new ListBox(stdSize);
   language_options->AddWidget(lbox_languages);
 
+  tabs->AddNewTab(_("Language"), language_options);
+
   /* Misc options */
-  Box * misc_options = new HBox(SOUND_H);
+  Box * misc_options = new GridBox(max_width, option_size, false);
   opt_updates = new PictureTextCBox(_("Check updates online?"),
                                     "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
-  widgets.AddWidget(misc_options);
+
+  tabs->AddNewTab(_("Misc"), misc_options);
+
 
   /* Sound options */
-  Box * sound_options = new HBox(SOUND_H);
-  sound_options->AddWidget(new PictureWidget(Point2i(40, 138), "menu/audio_label"));
-
-  Box * all_sound_options = new GridBox(SOUND_W, option_size, false);
+  Box * sound_options = new GridBox(max_width, option_size, false);
 
   initial_vol_mus = config->GetVolumeMusic();
   volume_music = new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
 					   option_size,
                                            fromVolume(initial_vol_mus), 5,
                                            0, 100);
-  all_sound_options->AddWidget(volume_music);
+  sound_options->AddWidget(volume_music);
 
   initial_vol_eff = config->GetVolumeEffects();
   volume_effects = new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
 					     option_size,
                                              fromVolume(initial_vol_eff), 5,
                                              0, 100);
-  all_sound_options->AddWidget(volume_effects);
+  sound_options->AddWidget(volume_effects);
 
   // Generate sound mode list
   uint current_freq = JukeBox::GetInstance()->GetFrequency();
@@ -168,23 +162,9 @@ OptionMenu::OptionMenu() :
 
   cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
 				 option_size, sound_freqs, current_sound_freq);
-  all_sound_options->AddWidget(cbox_sound_freq);
+  sound_options->AddWidget(cbox_sound_freq);
 
-  sound_options->AddWidget(all_sound_options);
-  widgets.AddWidget(sound_options);
-
-  /* Center the widgets */
-  uint center_x = app->video->window.GetWidth()/2;
-
-  sound_options->SetXY(center_x - (sound_options->GetSizeX() + misc_options->GetSizeX() + 20)/2, SOUND_Y);
-
-  misc_options->SetXY(sound_options->GetPositionX() + sound_options->GetSizeX() + 10, SOUND_Y);
-
-  language_options->SetXY(center_x - (graphic_options->GetSizeX() + language_options->GetSizeX() + 20)/2,
-			  sound_options->GetPositionY() + sound_options->GetSizeY() + 10);
-
-  graphic_options->SetXY(language_options->GetPositionX() + language_options->GetSizeX() + 10,
-			 language_options->GetPositionY());
+  tabs->AddNewTab(_("Sound"), sound_options);
 
   // Values initialization
   opt_max_fps->SetValue(app->video->GetMaxFps());
@@ -199,8 +179,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "bs",    "Bosanski",            "bs");
   lbox_languages->AddItem(config->GetLanguage() == "ca",    "Català",              "ca");
   lbox_languages->AddItem(config->GetLanguage() == "cpf",   "Créole",              "cpf");
-  lbox_languages->AddItem(config->GetLanguage() == "cs",    "čeština (Czech)",
-   "cs");
+  lbox_languages->AddItem(config->GetLanguage() == "cs",    "čeština (Czech)",     "cs");
   lbox_languages->AddItem(config->GetLanguage() == "da",    "Dansk",               "da");
   lbox_languages->AddItem(config->GetLanguage() == "de",    "Deutsch",             "de");
   lbox_languages->AddItem(config->GetLanguage() == "eo",    "Esperanto",           "eo");
@@ -231,6 +210,9 @@ OptionMenu::OptionMenu() :
   opt_updates->SetValue(config->GetCheckUpdates());
 
   resource_manager.UnLoadXMLProfile(res);
+
+  widgets.AddWidget(tabs);
+  widgets.Pack();
 }
 
 OptionMenu::~OptionMenu()

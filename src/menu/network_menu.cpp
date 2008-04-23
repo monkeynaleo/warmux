@@ -71,7 +71,7 @@ NetworkMenu::NetworkMenu() :
   // ##  TEAM SELECTION
   // ################################################
   team_box = new NetworkTeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H));
-  team_box->SetXY(MARGIN_SIDE, MARGIN_TOP);
+  team_box->SetPosition(MARGIN_SIDE, MARGIN_TOP);
   widgets.AddWidget(team_box);
 
   // ################################################
@@ -82,7 +82,7 @@ NetworkMenu::NetworkMenu() :
   } else {
     map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true);
   }
-  map_box->SetXY(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE);
+  map_box->SetPosition(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE);
   widgets.AddWidget(map_box);
 
   // ################################################
@@ -94,7 +94,7 @@ NetworkMenu::NetworkMenu() :
 
   Box* tmp_box = new VBox(200, false);
 
-  mode = new Label("", pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  mode = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
   if (Network::GetInstance()->IsClient()) {
     // Client Mode
@@ -117,16 +117,16 @@ NetworkMenu::NetworkMenu() :
     tmp_box->AddWidget(player_number);
 
     connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
-                                pointZero, Font::FONT_SMALL, Font::FONT_NORMAL);
+				  0, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(connected_players);
 
     initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-                                    pointZero, Font::FONT_SMALL, Font::FONT_NORMAL);
+                                    0, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(initialized_players);
   }
 
   options_box->AddWidget(tmp_box);
-  options_box->SetXY(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE);
+  options_box->SetPosition(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE);
   widgets.AddWidget(options_box);
 
   // ################################################
@@ -135,18 +135,17 @@ NetworkMenu::NetworkMenu() :
   VBox* chat_box = new VBox(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, false);
   chat_box->SetBorder(Point2i(0,0));
 
-  msg_box = new MsgBox(Rectanglei(-1, -1, 400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
+  msg_box = new MsgBox(Point2i(400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
 
-  chat_box->SetXY(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
+  chat_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
 		  options_box->GetPositionY());
   chat_box->AddWidget(msg_box);
 
   HBox* tmp2_box = new HBox(16, false);
   tmp2_box->SetMargin(4);
   tmp2_box->SetBorder(Point2i(0,0));
-  line_to_send_tbox = new TextBox(" ",
-                                  Point2i(chat_box->GetSizeX()-20, 0),
+  line_to_send_tbox = new TextBox(" ", chat_box->GetSizeX()-20,
                                   Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp2_box->AddWidget(line_to_send_tbox);
 

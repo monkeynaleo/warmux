@@ -25,9 +25,9 @@
 #include "tool/text_handling.h"
 #include "tool/copynpaste.h"
 
-TextBox::TextBox (const std::string &label, const Point2i &_size,
+TextBox::TextBox (const std::string &label, uint max_width,
                   Font::font_size_t fsize, Font::font_style_t fstyle) :
-  Label(label, _size, fsize, fstyle),
+  Label(label, max_width, fsize, fstyle),
   max_nb_chars(0),
   cursor_pos(label.size())
 {
@@ -42,7 +42,7 @@ void TextBox::BasicSetText(std::string const &new_txt)
   if (max_nb_chars != 0 && _new_txt.size() > max_nb_chars)
     _new_txt.resize(max_nb_chars);
 
-  Font* font = Font::GetInstance(font_size, font_style);
+  Font* font = Font::GetInstance(GetFontSize(), GetFontStyle());
 
   if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
     Label::SetText(_new_txt);
@@ -97,4 +97,4 @@ Widget* TextBox::ClickUp(const Point2i &, uint button)
       BasicSetText(new_txt);
   }
   return used ? this : NULL;
-};
+}

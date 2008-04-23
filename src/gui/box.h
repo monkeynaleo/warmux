@@ -31,7 +31,7 @@ class Box : public WidgetList
   Point2i border;
 
  public:
-  Box(const Rectanglei &rect, bool _draw_border=true);
+  Box(const Point2i &size, bool _draw_border=true);
   virtual ~Box();
 
   void Update(const Point2i &mousePosition,
@@ -43,24 +43,21 @@ class Box : public WidgetList
   void SetMargin(uint _margin) { margin = _margin; };
   void SetBorder(const Point2i &newBorder) { border = newBorder; };
 
-  virtual void AddWidget(Widget *a_widget) = 0;
+  virtual void Pack() = 0;
 };
 
 class VBox : public Box
 {
  public:
   VBox(int width, bool _draw_border=true);
-  void DelFirstWidget();
-  void SetSizePosition(const Rectanglei &rect);
-  void AddWidget(Widget *a_widget);
+  void Pack();
 };
 
 class HBox : public Box
 {
  public:
   HBox(int height, bool _draw_border=true);
-  void SetSizePosition(const Rectanglei &rect);
-  void AddWidget(Widget *a_widget);
+  void Pack();
 };
 
 class GridBox : public Box
@@ -76,8 +73,7 @@ class GridBox : public Box
 
  public:
   GridBox(uint max_line_width, const Point2i& widget_size, bool _draw_border=true);
-  void SetSizePosition(const Rectanglei &rect);
-  void AddWidget(Widget *a_widget);
+  void Pack();
 };
 #endif
 

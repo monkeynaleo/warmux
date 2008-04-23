@@ -74,10 +74,9 @@ ComboBox::~ComboBox ()
   delete txt_value_white;
 }
 
-void ComboBox::SetSizePosition(const Rectanglei &rect)
+void ComboBox::Pack()
 {
-  StdSetSizePosition(rect);
-  txt_label->SetMaxWidth(GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 }
 
 void ComboBox::Draw(const Point2i &/*mousePosition*/) const

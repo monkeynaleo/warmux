@@ -51,7 +51,7 @@ class SpinButton : public AbstractSpinButton
   virtual ~SpinButton();
 
   // From Widget
-  virtual void SetSizePosition(const Rectanglei &rect);
+  virtual void Pack();
   virtual void Draw(const Point2i &mousePosition) const;
   virtual Widget* Click(const Point2i &/*mousePosition*/, uint /*button*/) const { return NULL; };
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);

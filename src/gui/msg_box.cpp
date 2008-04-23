@@ -28,8 +28,8 @@
 const uint vmargin = 5;
 const uint hmargin = 5;
 
-MsgBox::MsgBox(const Rectanglei& rect, Font::font_size_t fsize, Font::font_style_t fstyle) :
-  Widget(rect), font_size(fsize), font_style(fstyle)
+MsgBox::MsgBox(const Point2i& size, Font::font_size_t fsize, Font::font_style_t fstyle) :
+  Widget(size), font_size(fsize), font_style(fstyle)
 {
 }
 
@@ -96,14 +96,12 @@ void MsgBox::Draw(const Point2i &/*mousePosition*/) const
   }
 }
 
-void MsgBox::SetSizePosition(const Rectanglei &rect)
+void MsgBox::Pack()
 {
-  StdSetSizePosition(rect);
-
   // render the messages with the correct width
   std::list<Text*>::iterator it;
   for (it = messages.begin(); it != messages.end(); it++) {
-    (*it)->SetMaxWidth(GetSizeX() - (2*hmargin));
+    (*it)->SetMaxWidth(size.x - (2*hmargin));
   }
 
   // Remove old messages if needed

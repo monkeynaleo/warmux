@@ -42,7 +42,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), 
 				       2, 1,
 				       2, MAX_NB_TEAMS);
   AddWidget(teams_nb);
-
+  Pack();
   Point2i team_box_size((_size.GetX() - teams_nb->GetSizeX() - 60) * 2 / MAX_NB_TEAMS -10, _size.GetY()/2 -15);
 
   Box * teams_grid_box = new GridBox(_size.GetX() - teams_nb->GetSizeX() - 60, team_box_size, false);
@@ -56,6 +56,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), 
     teams_grid_box->AddWidget(teams_selections.at(i));
   }
 
+  teams_grid_box->Pack();
   AddWidget(teams_grid_box);
 
   // Load Teams' list

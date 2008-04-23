@@ -16,11 +16,55 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Null widget (blank) in GUI.
+ * Tabs
  *****************************************************************************/
 
-#include "gui/null_widget.h"
+#ifndef GUI_TABS_H
+#define GUI_TABS_H
 
-void NullWidget::SetSizePosition(const Rectanglei &rect){
-  StdSetSizePosition(rect);
-}
+#include <list>
+#include "include/base.h"
+#include "gui/widget.h"
+
+class Button;
+class Box;
+class Text;
+class Tab;
+
+class MultiTabs : public Widget
+{
+private:
+  std::list<Tab> tabs;
+  Tab* current_tab;
+  Text *current_tab_title;
+
+  Button* prev_tab_bt;
+  Button* next_tab_bt;
+  Point2i tab_size;
+
+  void SetCurrentTab(Tab* _tab);
+
+  void PrevTab();
+  void NextTab();
+
+  void DrawHeader(const Point2i &mousePosition) const;
+
+public:
+  MultiTabs(const Point2i& size);
+  ~MultiTabs();
+
+  void AddNewTab(const std::string& title, Box* box);
+
+  // from widget
+  virtual void NeedRedrawing();
+  virtual void Draw(const Point2i &mousePosition) const;
+  virtual void Update(const Point2i &mousePosition,
+		      const Point2i &lastMousePosition);
+  virtual void Pack();
+
+  virtual bool SendKey(const SDL_keysym&);
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+};
+
+#endif // GUI_TABS_H

@@ -43,7 +43,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   Menu("menu/bg_network", vOkCancel)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-  Point2i pointZero(-1, -1);
+  Point2i def_size(300, 20);
 
   uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
   uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
@@ -57,52 +57,56 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   previous_action_bt = new Button(res, "menu/really_big_minus", false);
   next_action_bt = new Button(res, "menu/really_big_plus", false);
-  action_label = new Label(_("Connect to an internet game"),
-                           Point2i(250, -1),
+  action_label = new Label(_("Connect to an internet game"), 250,
                            Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
   action_box->AddWidget(previous_action_bt);
   action_box->AddWidget(action_label);
   action_box->AddWidget(next_action_bt);
-
+  action_box->Pack();
   connection_box->AddWidget(action_box);
 
   // Server address
-  server_address_label = new Label(_("Server address:"), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  server_address_label = new Label(_("Server address:"), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(server_address_label);
-  server_address = new TextBox(Config::GetInstance()->GetNetworkHost(), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  server_address = new TextBox(Config::GetInstance()->GetNetworkHost(), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(server_address);
 
   // Server port
-  port_number_label = new Label(_("Port:"), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number_label = new Label(_("Port:"), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number_label->Pack();
   connection_box->AddWidget(port_number_label);
-  port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number->Pack();
   connection_box->AddWidget(port_number);
 
   // Game name
-  game_name_label = new Label(_("Game name:"), pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  game_name_label = new Label(_("Game name:"), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  game_name_label->Pack();
   connection_box->AddWidget(game_name_label);
-  game_name = new TextBox("Wormux party", pointZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  game_name = new TextBox("Wormux party", def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   game_name->SetMaxNbChars(15);
+  game_name->Pack();
   connection_box->AddWidget(game_name);
 
   // Available on internet ?
   internet_server = new CheckBox(_("Server available on Internet"),
 				 -1, true);
   connection_box->AddWidget(internet_server);
-
-  connection_box->SetXY(center_x - connection_box->GetSizeX()/2,
-			center_y - 200);
-
+  connection_box->Pack();
+  connection_box->SetPosition(center_x - connection_box->GetSizeX()/2,
+			      center_y - 200);
+  connection_box->Pack();
   widgets.AddWidget(connection_box);
 
   SetAction(NET_BROWSE_INTERNET);
 
   // Warning about experimental networking
-  msg_box = new MsgBox(Rectanglei( AppWormux::GetInstance()->video->window.GetWidth()/2 - 300,
-                                   connection_box->GetPositionY() + connection_box->GetSizeY() + 30,
-                                   600, 200),
-                       Font::FONT_SMALL, Font::FONT_NORMAL);
+  msg_box = new MsgBox(Point2i(600, 200), Font::FONT_SMALL, Font::FONT_NORMAL);
+  msg_box->SetPosition(AppWormux::GetInstance()->video->window.GetWidth()/2 - 300,
+		       connection_box->GetPositionY() + connection_box->GetSizeY() + 30);
+
   widgets.AddWidget(msg_box);
+  widgets.Pack();
 
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
   msg_box->NewMessage(""); // Skip a line
