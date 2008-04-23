@@ -203,7 +203,7 @@ bool MultiTabs::SendKey(const SDL_keysym& key)
   if (current_tab)
     return current_tab->box->SendKey(key);
 
-  return NULL;
+  return false;
 }
 
 Widget* MultiTabs::Click(const Point2i &mousePosition, uint button)
