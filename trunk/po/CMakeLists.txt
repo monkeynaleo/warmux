@@ -1,36 +1,8 @@
-SET(PO_FILES
-bg.po
-bs.po
-ca.po
-cpf.po
-da.po
-de.po
-eo.po
-es.po
-fa.po
-fi.po
-fr.po
-gl.po
-hu.po
-it.po
-nb.po
-nl.po
-pl.po
-pt.po
-pt_BR.po
-ro.po
-ru.po
-sk.po
-sl.po
-sv.po
-tr.po
-)
+FILE(GLOB PO_FILES RELATIVE . *.po) 
 
 SET(COPYRIGHT_HOLDER "Wormux Development Team")
 SET(BUGS_ADDRESS "wormux-dev@gna.org")
 SET(POT_FILE ${CMAKE_CURRENT_BINARY_DIR}/wormux.pot)
-
-INCLUDE(../src/SourceFiles.cmake)
 
 # Create PO Template file 'wormux.pot'
 
