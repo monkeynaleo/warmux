@@ -110,6 +110,8 @@ AC_ARG_WITH([datadir-name],
                             [specify where datas are installed (default: ${prefix}/share/wormux)])],
             [DATADIR="$withval"])
 AC_SUBST([DATADIR])
+# ensure a trailing slash (r4255)
+DATADIR="${DATADIR}/"
 
 
 if test "${WIN32}" = "yes"; then LOCALEDIR="locale"
