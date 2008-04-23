@@ -45,7 +45,6 @@ gui/label.cpp
 gui/list_box.cpp
 gui/list_box_w_label.cpp
 gui/msg_box.cpp
-gui/null_widget.cpp
 gui/picture_text_cbox.cpp
 gui/picture_widget.cpp
 gui/progress_bar.cpp
@@ -53,6 +52,7 @@ gui/question.cpp
 gui/spin_button_big.cpp
 gui/spin_button.cpp
 gui/spin_button_picture.cpp
+gui/tabs.cpp
 gui/text_box.cpp
 gui/widget.cpp
 gui/widget_list.cpp
