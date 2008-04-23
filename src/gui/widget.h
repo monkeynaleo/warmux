@@ -63,8 +63,8 @@ class Widget : public Rectanglei, public Container
   // Handle font
   virtual void OnFontChange() {};
   const Color& GetFontColor() const { return font_color; };
-  const Font::font_size_t GetFontSize() const { return font_size; };
-  const Font::font_style_t GetFontStyle() const { return font_style; };
+  Font::font_size_t GetFontSize() const { return font_size; };
+  Font::font_style_t GetFontStyle() const { return font_style; };
   bool IsFontShadowed() const { return font_shadowed; };
 
  public:
