@@ -47,4 +47,4 @@ run: all
 # make debug: run the game in gdb without installing it.
 #             requires gdb to be in your $PATH.
 debug: all
-	WORMUX_DATADIR=@srcdir@/data WORMUX_FONT_PATH=@srcdir@/data/font/DejaVuSans.ttf gdb @srcdir@/src/wormux
+	WORMUX_DATADIR=@srcdir@/data/ WORMUX_FONT_PATH=@srcdir@/data/font/DejaVuSans.ttf gdb @srcdir@/src/wormux
