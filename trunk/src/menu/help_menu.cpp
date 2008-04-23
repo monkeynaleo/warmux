@@ -47,9 +47,10 @@ HelpMenu::HelpMenu()  :
   PictureWidget *help_image = new PictureWidget(size, "help/help_shortkeys_" + lang, true);
 
   VBox *help = new VBox(size.x);
-  help->SetXY(BORDER, BORDER);
+  help->SetPosition(BORDER, BORDER);
   help->AddWidget(help_image);
   widgets.AddWidget(help);
+  widgets.Pack();
 }
 
 HelpMenu::~HelpMenu()

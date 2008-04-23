@@ -52,7 +52,7 @@ wormux_SOURCES = \
         gui/list_box.cpp gui/list_box.h \
         gui/list_box_w_label.cpp gui/list_box_w_label.h \
         gui/msg_box.cpp gui/msg_box.h \
-        gui/null_widget.cpp gui/null_widget.h \
+        gui/null_widget.h \
         gui/picture_text_cbox.cpp gui/picture_text_cbox.h \
         gui/picture_widget.cpp gui/picture_widget.h \
         gui/progress_bar.cpp gui/progress_bar.h \
@@ -60,6 +60,7 @@ wormux_SOURCES = \
         gui/spin_button_big.cpp gui/spin_button_big.h \
         gui/spin_button.cpp gui/spin_button.h \
         gui/spin_button_picture.cpp gui/spin_button_picture.h \
+	gui/tabs.cpp gui/tabs.h \
         gui/text_box.cpp gui/text_box.h \
         gui/widget.cpp gui/widget.h \
         gui/widget_list.cpp gui/widget_list.h \

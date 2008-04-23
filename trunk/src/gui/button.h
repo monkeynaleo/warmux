@@ -46,7 +46,7 @@ public:
   virtual ~Button();
 
   virtual void Draw(const Point2i &mousePosition) const;
-  virtual void SetSizePosition(const Rectanglei &rect);
+  virtual void Pack();
 };
 
 #endif

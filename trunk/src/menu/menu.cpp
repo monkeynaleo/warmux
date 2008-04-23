@@ -65,8 +65,9 @@ Menu::Menu(const std::string& bg, t_action _actions) :
       actions_buttons->AddWidget(b_cancel);
     }
 
-    actions_buttons->SetXY(x, y);
+    actions_buttons->SetPosition(x, y);
     widgets.AddWidget(actions_buttons);
+    widgets.Pack();
   }
 
   widgets.SetContainer(this);
@@ -290,6 +291,7 @@ void Menu::Display(const Point2i& mousePosition)
 }
 
 void Menu::SetActionButtonsXY(int x, int y){
-  if (actions_buttons != NULL)
-    actions_buttons->SetSizePosition( Rectanglei(x, y, actions_buttons->GetSizeX(), actions_buttons->GetSizeY()) );
+  if (actions_buttons != NULL) {
+    actions_buttons->SetPosition(x, y);
+  }
 }

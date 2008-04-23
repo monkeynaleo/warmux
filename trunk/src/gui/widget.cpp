@@ -38,13 +38,17 @@ Widget::Widget():
   border_size(0),
   background_color(transparent_color),
   highlight_bg_color(transparent_color),
+  font_color(dark_gray_color),
+  font_shadowed(false),
+  font_size(Font::FONT_SMALL),
+  font_style(Font::FONT_NORMAL),
   ct(NULL),
   need_redrawing(true)
 {
 }
 
-Widget::Widget(const Point2i &point):
-  Rectanglei(0, 0, point.x, point.y),
+Widget::Widget(const Point2i &size):
+  Rectanglei(0, 0, size.x, size.y),
   has_focus(false),
   visible(true),
   is_highlighted(false),
@@ -52,29 +56,13 @@ Widget::Widget(const Point2i &point):
   border_size(0),
   background_color(transparent_color),
   highlight_bg_color(transparent_color),
+  font_color(dark_gray_color),
+  font_shadowed(false),
+  font_size(Font::FONT_SMALL),
+  font_style(Font::FONT_NORMAL),
   ct(NULL),
   need_redrawing(true)
 {
-}
-
-Widget::Widget(const Rectanglei &rect):
-  Rectanglei(rect),
-  has_focus(false),
-  visible(true),
-  is_highlighted(false),
-  border_color(white_color),
-  border_size(0),
-  background_color(transparent_color),
-  highlight_bg_color(transparent_color),
-  ct(NULL),
-  need_redrawing(true)
-{
-}
-
-void Widget::StdSetSizePosition(const Rectanglei &rect)
-{
-  position = rect.GetPosition();
-  size = rect.GetSize();
 }
 
 // From Container: it redraws the border and the background
@@ -94,9 +82,15 @@ void Widget::RedrawBackground(const Rectanglei& rect)
     surf.BoxColor(rect, background_color);
   }
 
-  if (border_size != 0 && border_color != transparent_color
-      && rect == *this)
-    surf.RectangleColor(*this, border_color, border_size);
+  if (border_size != 0 && border_color != transparent_color) {
+    if (rect == *this)
+      surf.RectangleColor(*this, border_color, border_size);
+    else {
+      // TODO: partial redraw of the border...
+      ASSERT(border_color.GetAlpha() == SDL_ALPHA_OPAQUE);
+      surf.RectangleColor(*this, border_color, border_size);
+    }
+  }
 
   if (IsLOGGING("widget.border"))
     surf.RectangleColor(*this, c_red, border_size);
@@ -123,9 +117,12 @@ void Widget::Update(const Point2i &mousePosition,
 
 void Widget::SetFocus(bool focus)
 {
-  has_focus = focus;
-  is_highlighted = focus;
-  NeedRedrawing();
+  if (has_focus != focus
+      || is_highlighted != focus) {
+    has_focus = focus;
+    is_highlighted = focus;
+    NeedRedrawing();
+  }
 }
 
 Widget* Widget::Click(const Point2i &mousePosition, uint /* button */)
@@ -184,8 +181,10 @@ bool Widget::IsHighlighted() const
 
 void Widget::SetHighlighted(bool focus)
 {
-  is_highlighted = focus;
-  NeedRedrawing();
+  if (is_highlighted != focus) {
+    is_highlighted = focus;
+    NeedRedrawing();
+  }
 }
 
 void Widget::SetHighlightBgColor(const Color &_highlight_bg_color)
@@ -193,5 +192,35 @@ void Widget::SetHighlightBgColor(const Color &_highlight_bg_color)
   if (highlight_bg_color != _highlight_bg_color) {
     highlight_bg_color = _highlight_bg_color;
     NeedRedrawing();
+  }
+}
+
+void Widget::SetFont(const Color &_font_color,
+		     const Font::font_size_t _font_size,
+		     const Font::font_style_t _font_style,
+		     bool _font_shadowed,
+		     bool update_now)
+{
+  bool change = false;
+
+  if (font_color != _font_color) {
+    font_color = _font_color;
+    change = true;
+  }
+  if (font_size != _font_size) {
+    font_size = _font_size;
+    change = true;
+  }
+  if (font_style != _font_style) {
+    font_style = _font_style;
+    change = true;
+  }
+  if (font_shadowed != _font_shadowed) {
+    font_shadowed = _font_shadowed;
+    change = true;
+  }
+
+  if (change && update_now) {
+    OnFontChange();
   }
 }

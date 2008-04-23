@@ -92,9 +92,10 @@ CreditsMenu::CreditsMenu()  :
 					       AppWormux::GetInstance()->video->window.GetHeight()-60-30),
 				       false);
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
-  lbox_authors->SetXY(30, 30);
+  lbox_authors->SetPosition(30, 30);
 
   widgets.AddWidget(lbox_authors);
+  widgets.Pack();
 
   PrepareAuthorsList(lbox_authors);
 }

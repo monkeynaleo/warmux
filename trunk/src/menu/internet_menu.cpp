@@ -43,12 +43,12 @@ InternetMenu::InternetMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
 
-  Rectanglei stdRect(0, 0, 405, 64);
+  Point2i stdSize(405, 64);
 
-  connection_box = new VBox(stdRect.GetSizeX(), false);
+  connection_box = new VBox(stdSize.x, false);
   connection_box->SetBorder(Point2i(0,0));
 
-  connect_lst = new ListBox( Point2i(stdRect.GetSizeX(), 300), false);
+  connect_lst = new ListBox( Point2i(stdSize.x, 300), false);
   connection_box->AddWidget(connect_lst);
 
   refresh = new ButtonText( res, "main_menu/button",
@@ -56,7 +56,7 @@ InternetMenu::InternetMenu() :
                             Font::FONT_BIG,
                             Font::FONT_NORMAL);
 
-  refresh->SetSizePosition( stdRect );
+  refresh->SetSize(stdSize);
   connection_box->AddWidget(refresh);
 
   connect = new ButtonText( res, "main_menu/button",
@@ -64,11 +64,11 @@ InternetMenu::InternetMenu() :
                             Font::FONT_BIG,
                             Font::FONT_NORMAL);
 
-  connect->SetSizePosition( stdRect );
+  connect->SetSize(stdSize);
   connection_box->AddWidget(connect);
 
-  connection_box->SetXY(AppWormux::GetInstance()->video->window.GetWidth()/2 - stdRect.GetSizeX()/2,
-			AppWormux::GetInstance()->video->window.GetHeight()/2 - 200);
+  connection_box->SetPosition(AppWormux::GetInstance()->video->window.GetWidth()/2 - stdSize.x/2,
+			      AppWormux::GetInstance()->video->window.GetHeight()/2 - 200);
   widgets.AddWidget(connection_box);
 
   resource_manager.UnLoadXMLProfile(res);

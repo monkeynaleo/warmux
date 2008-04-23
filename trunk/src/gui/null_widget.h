@@ -29,10 +29,10 @@ class Surface;
 class NullWidget : public Widget
 {
  public:
-  NullWidget(const Rectanglei&) { };
-  ~NullWidget() { };
-  void Draw(const Point2i&) const { };
-  void SetSizePosition(const Rectanglei &rect);
+  NullWidget(const Rectanglei&) {};
+  virtual ~NullWidget() {};
+  virtual void Draw(const Point2i&) const {};
+  virtual void Pack() {};
 };
 
 #endif

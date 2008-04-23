@@ -61,10 +61,9 @@ SpinButtonWithPicture::~SpinButtonWithPicture ()
   delete txt_value_white;
 }
 
-void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
+void SpinButtonWithPicture::Pack()
 {
-  StdSetSizePosition(rect);
-  txt_label->SetMaxWidth(GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 }
 
 void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const

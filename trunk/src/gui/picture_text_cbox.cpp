@@ -40,11 +40,9 @@ PictureTextCBox::PictureTextCBox(const std::string &label,
   m_disabled_front = resource_manager.LoadImage(res, "menu/disabled_front");
   m_disabled_back = resource_manager.LoadImage(res, "menu/disabled_back");
   resource_manager.UnLoadXMLProfile( res);
-
-  SetSize(_size);
   m_value = value;
 
-  txt_label->SetMaxWidth (GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 }
 
 void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
@@ -95,8 +93,7 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
     }
 }
 
-void PictureTextCBox::SetSizePosition(const Rectanglei &rect)
+void PictureTextCBox::Pack()
 {
-  StdSetSizePosition(rect);
-  txt_label->SetMaxWidth (GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 }

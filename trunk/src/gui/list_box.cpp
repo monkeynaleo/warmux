@@ -34,7 +34,7 @@ ListBoxItem::ListBoxItem(const std::string& _label,
                          Font::font_style_t fstyle,
                          const std::string& _value,
                          const Color& color) :
-  Label(_label, Point2i(0,0), fsize, fstyle, color),
+  Label(_label, 200, fsize, fstyle, color),
   value(_value)
 {
 }
@@ -45,7 +45,7 @@ const std::string& ListBoxItem::GetLabel() const
 }
 
 ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
-  Widget(Rectanglei(-1, -1, _size.x, _size.y)),
+  Widget(Point2i(_size.x, _size.y)),
   always_one_selected(always_one_selected_b),
   scrolling(false),
   first_visible_item(0),
@@ -60,7 +60,6 @@ ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_up = new Button(res, "menu/up");
   m_down = new Button(res, "menu/down");
-  SetSizePosition(Rectanglei(-1, -1, _size.x, _size.y));
   resource_manager.UnLoadXMLProfile(res);
 
   Widget::SetBorder(white_color, 1);
@@ -198,10 +197,9 @@ void ListBox::Draw(const Point2i &mousePosition) const
     }
 
     // Really draw items
-    Rectanglei rect2(pos.x, pos.y,
-                     GetSizeX()-12, m_items.at(i)->GetSizeY() - 2);
-
-    m_items.at(i)->SetSizePosition(rect2);
+    m_items.at(i)->SetPosition(pos);
+    m_items.at(i)->SetSize(size.x - 12, m_items.at(i)->GetSizeY() - 2);
+    m_items.at(i)->Pack();
     if (draw_it) {
       m_items.at(i)->Draw(mousePosition);
     }
@@ -242,11 +240,16 @@ Rectanglei ListBox::ScrollBarPos() const
   return Rectanglei(GetPositionX()+GetSizeX()-11, tmp_y, 9,  /*tmp_y+*/tmp_h);
 }
 
-void ListBox::SetSizePosition(const Rectanglei &rect)
+void ListBox::Pack()
 {
-  StdSetSizePosition(rect);
-  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 12, GetPositionY()+2, 10, 5) );
-  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7 -margin, 10, 5) );
+  m_up->SetPosition(position.x + size.x - 12, position.y +2);
+  m_down->SetPosition(position.x + size.x - 12, position.y + size.y - 7 -margin);
+
+  for(std::vector<ListBoxItem*>::iterator it=m_items.begin();
+      it != m_items.end(); it++)
+  {
+    (*it)->Pack();
+  }
 }
 
 void ListBox::AddItem (bool selected,

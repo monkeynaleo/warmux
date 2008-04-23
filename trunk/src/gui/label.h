@@ -37,17 +37,13 @@ class Label : public Widget{
 
  protected:
   Text *txt_label;
-  Font::font_size_t font_size;
-  Font::font_style_t font_style;
 
  private:
-  const Color& font_color;
   bool center;
-  bool shadowed;
 
  public:
   Label(const std::string &label,
-        const Point2i &size,
+        uint max_width,
         Font::font_size_t font_size,
         Font::font_style_t font_style,
         const Color& color = white_color,
@@ -55,10 +51,12 @@ class Label : public Widget{
         bool shadowed = true);
   ~Label();
 
-  void Draw(const Point2i &mousePosition) const;
-  void SetSizePosition(const Rectanglei &rect);
+  virtual void Draw(const Point2i &mousePosition) const;
   void SetText(const std::string &new_txt);
   const std::string& GetText() const;
+
+  virtual void OnFontChange();
+  virtual void Pack();
 };
 
 #endif

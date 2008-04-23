@@ -28,8 +28,7 @@ ListBoxWithLabel::ListBoxWithLabel (const std::string &label, const Point2i &_si
 {
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   margin =  2 + txt_label->GetHeight();
-  SetSizePosition(Rectanglei(-1, -1, _size.x, _size.y));
-  txt_label->SetMaxWidth(GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 }
 
 ListBoxWithLabel::~ListBoxWithLabel()
@@ -46,18 +45,19 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition) const
 				 GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
-void ListBoxWithLabel::SetSizePosition(const Rectanglei &rect)
+void ListBoxWithLabel::Pack()
 {
-  StdSetSizePosition(rect);
-  txt_label->SetMaxWidth(GetSizeX());
+  txt_label->SetMaxWidth(size.x);
 
-  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_up->GetSizeX() - 2,
-                                    GetPositionY()+2,
-                                    m_up->GetSizeX(), m_up->GetSizeY()) );
+  m_up->SetPosition(position.x + size.x - m_up->GetSizeX() - 2,
+		    position.y + 2);
 
-  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_down->GetSizeX() - 2,
-                                      GetPositionY() + GetSizeY() - m_down->GetSizeY() - 2 -
-                                      txt_label->GetHeight() - 2,
-                                      m_down->GetSizeX(),
-                                      m_down->GetSizeY()) );
+  m_down->SetPosition(position.x + size.x - m_down->GetSizeX() - 2,
+		      position.y + size.y - m_down->GetSizeY() - 2 - txt_label->GetHeight() - 2);
+
+  for(std::vector<ListBoxItem*>::iterator it=m_items.begin();
+      it != m_items.end(); it++)
+    {
+      (*it)->Pack();
+    }
 }

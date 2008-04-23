@@ -82,11 +82,11 @@ public:
   ListBox (const Point2i &size, bool always_one_selected_b = true);
   ~ListBox();
 
-  void Draw(const Point2i &mousePosition) const;
+  virtual void Draw(const Point2i &mousePosition) const;
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
-  void SetSizePosition(const Rectanglei &rect);
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  virtual void Pack();
 
   void AddItem(bool selected, const std::string &label,
                const std::string &value,

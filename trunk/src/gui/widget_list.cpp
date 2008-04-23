@@ -31,7 +31,7 @@ WidgetList::WidgetList()
   keyboard_selection = NULL;
 }
 
-WidgetList::WidgetList(const Rectanglei &rect) : Widget(rect)
+WidgetList::WidgetList(const Point2i &size) : Widget(size)
 {
   last_clicked = NULL;
   mouse_selection = NULL;
@@ -228,5 +228,15 @@ void WidgetList::SetMouseFocusOn(Widget* w)
   if (w != NULL) {
     last_clicked = w ;
     last_clicked->SetFocus(true);
+  }
+}
+
+void WidgetList::Pack()
+{
+  for(std::list<Widget*>::iterator w=widget_list.begin();
+      w != widget_list.end();
+      w++)
+  {
+    (*w)->Pack();
   }
 }

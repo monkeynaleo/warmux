@@ -47,10 +47,10 @@ class CheckBox : public Widget
   CheckBox(Text* text, int width, bool value = true);
   ~CheckBox();
 
-  void Draw(const Point2i &mousePosition) const;
-  Widget* Click(const Point2i&, uint) { return this; };
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
-  void SetSizePosition(const Rectanglei &rect) { StdSetSizePosition(rect); };
+  virtual void Draw(const Point2i &mousePosition) const;
+  virtual Widget* Click(const Point2i&, uint) { return this; };
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  virtual void Pack() {};
 
   bool GetValue() const { return m_value; };
   void SetValue(bool value) { m_value = value; };
