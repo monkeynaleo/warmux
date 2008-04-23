@@ -114,11 +114,11 @@ msgid "%s team has skipped its turn."
 msgstr "%s hoppet over sin tur."
 
 #: src/weapon/cluzooka.cpp:396
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
-msgstr[0] "%s-laget har vunnet %u rakettkanon !"
-msgstr[1] "%s-laget har vunnet %u rakettkanoner !"
+msgstr[0] "%s-laget har vunnet %u Cluster kanon !"
+msgstr[1] "%s-laget har vunnet %u Cluster kanoner !"
 
 #: src/weapon/gnu.cpp:174
 #, c-format
@@ -235,11 +235,11 @@ msgstr[0] "%s-laget har vunnet %u flammekaster !"
 msgstr[1] "%s-laget har vunnet %u flammekastere !"
 
 #: src/weapon/footbomb.cpp:176
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
-msgstr[0] "%s-laget har vunnet %u opprørsbombe !"
-msgstr[1] "%s-laget har vunnet %u opprørsbomber !"
+msgstr[0] "%s-laget har vunnet %u fotballbombe !"
+msgstr[1] "%s-laget har vunnet %u fotballbomber !"
 
 #: src/weapon/grapple.cpp:783
 #, c-format
@@ -333,7 +333,8 @@ msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "%s-laget har vunnet %u selvmordsbombe !"
 msgstr[1] ""
-"%s-laget har vunnet %u selvmordsbomber! Bruk alle for å få en ekstra bonus !"
+"%s-laget har vunnet %u selvmordsbomber! Bruk alle for å få en ekstra bonus "
+"!"
 
 #: src/weapon/syringe.cpp:115
 #, c-format
@@ -354,7 +355,8 @@ msgstr[1] "%s-laget har vunnet %u teleporteringer."
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] ""
-"%s-laget har vunnet %u mulighet til å hoppe over en runde, du vil elske det !"
+"%s-laget har vunnet %u mulighet til å hoppe over en runde, du vil elske det "
+"!"
 msgstr[1] ""
 "%s-laget har vunnet %u muligheter til å hoppe over en runde, du vil elske "
 "det !"
@@ -379,7 +381,7 @@ msgstr "(systemspråk)"
 
 #: src/network/chatlogger.cpp:36
 msgid "(unknown time)"
-msgstr ""
+msgstr "(ukjent tid)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -392,6 +394,8 @@ msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
+"En ny versjon, %s, er tilgjengelig, din versjon er %s. Du bør sjekke om en "
+"oppdatering er tilgjengelig for ditt operativsystem!"
 
 #: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
@@ -472,7 +476,7 @@ msgstr "Kan ikke åpne lagmappen (%s) !"
 
 #: src/menu/options_menu.cpp:129
 msgid "Check updates online?"
-msgstr ""
+msgstr "Sjekke oppdateringer online?"
 
 #: src/menu/map_selection_box.cpp:242
 msgid "Choose randomly between the different maps"
@@ -488,9 +492,8 @@ msgid "Cluster Bomb"
 msgstr "Klasebombe"
 
 #: src/weapon/cluzooka.cpp:389
-#, fuzzy
 msgid "Cluzooka"
-msgstr "Rakettkaster"
+msgstr "Cluster kanon"
 
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
@@ -524,12 +527,12 @@ msgstr "Kontrollert av: "
 #: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
-msgstr ""
+msgstr "Kunne ikke hente siste versjon fra %s"
 
 #: src/network/chatlogger.cpp:64 src/network/download.cpp:90
-#, fuzzy, c-format
+#, c-format
 msgid "Couldn't open file %s"
-msgstr "Kunne ikke laste konfigurasjonsfilen"
+msgstr "Kunne ikke laste filen %s"
 
 #: src/menu/main_menu.cpp:72
 msgid "Credits"
@@ -553,7 +556,7 @@ msgstr "Spillet er slutt"
 
 #: src/menu/options_menu.cpp:148
 msgid "Effects volume"
-msgstr ""
+msgstr "Effektsvolum"
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -605,6 +608,8 @@ msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
 msgstr ""
+"Feil: Din server er ikke tilgjengelig fra internett, sjekk "
+"brannmurinstillingene dine."
 
 #: src/team/team.cpp:116
 #, c-format
@@ -616,9 +621,8 @@ msgid "Flame Thrower"
 msgstr "Flammekaster"
 
 #: src/weapon/footbomb.cpp:158
-#, fuzzy
 msgid "Football Bomb"
-msgstr "Opprørsbombe"
+msgstr "Fotballbombe"
 
 #: src/menu/options_menu.cpp:85
 msgid "Fullscreen?"
@@ -627,7 +631,7 @@ msgstr "Full skjerm ?"
 #. Game name
 #: src/menu/network_connection_menu.cpp:82
 msgid "Game name:"
-msgstr ""
+msgstr "Spill navn:"
 
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
@@ -697,8 +701,8 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Hvordan bruke den : venstreklikk på måletFørste skytevinkel : Opp/NedSkyt : "
-"Hold mellomromstasten nede til riktig styrke er nådden ammo per runde"
+"Hvordan bruke den : venstreklikk på måletFørste skytevinkel : Opp/NedSkyt "
+": Hold mellomromstasten nede til riktig styrke er nådden ammo per runde"
 
 #: src/weapon/anvil.cpp:133
 msgid ""
@@ -824,7 +828,7 @@ msgstr "Mest voldelig"
 
 #: src/menu/options_menu.cpp:141
 msgid "Music volume"
-msgstr ""
+msgstr "Musikkvolum"
 
 #: src/menu/main_menu.cpp:63
 msgid "Network Game"
@@ -836,9 +840,8 @@ msgstr "Starter nettverk ..."
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:56
-#, fuzzy
 msgid "New network game at "
-msgstr "Nettverksspill"
+msgstr "Nytt nettverksspill på"
 
 #: src/weapon/weapon.cpp:655
 #, c-format
@@ -977,7 +980,7 @@ msgstr "Snikskytterrifle"
 
 #: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
-msgstr ""
+msgstr "Noen har plassert en felle i krateret!"
 
 #: src/menu/internet_menu.cpp:137
 msgid "Sorry, currently, no game is waiting for players"
@@ -1025,9 +1028,8 @@ msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Klasebomben forsvant fra kampplassen uten å eksplodere."
 
 #: src/weapon/footbomb.cpp:111
-#, fuzzy
 msgid "The Football Bomb has left the battlefield before it could explode."
-msgstr "Klasebomben forsvant fra kampplassen uten å eksplodere."
+msgstr "Fotballbomben forsvant fra kampplassen uten å eksplodere."
 
 #: src/weapon/gnu.cpp:143
 msgid "The Gnu left the battlefield before exploding"
@@ -1057,7 +1059,7 @@ msgstr "Diskogranaten har forlatt dansegulvet uten å eksplodere"
 
 #: src/game/game.cpp:436
 msgid "The game was interrupted because you got disconnected."
-msgstr ""
+msgstr "Spillet ble avbrutt fordi du ble frakoblet."
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
@@ -1077,9 +1079,8 @@ msgid "The server rejected the connection."
 msgstr "Tjeneren nektet tilkoblingen"
 
 #: src/network/net_error_msg.cpp:51
-#, fuzzy
 msgid "The server rejected the connection: wrong password!"
-msgstr "Tjeneren nektet tilkoblingen"
+msgstr "Tjeneren nektet tilkoblingen: feil passord!"
 
 #: src/menu/network_menu.cpp:236
 #, c-format
@@ -1095,9 +1096,9 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
-"Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
-"per runde"
+"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste "
+"skytevinkel : Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er "
+"nådden ammo per runde"
 
 #: src/weapon/bounce_ball.cpp:90
 msgid ""
@@ -1106,9 +1107,9 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
-"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
-"Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
-"per runde"
+"Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste "
+"skytevinkel : Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er "
+"nådden ammo per runde"
 
 #: src/interface/weapon_menu.cpp:169
 msgid "Tools"
@@ -1143,7 +1144,7 @@ msgstr "Versjon"
 #: src/menu/options_menu.cpp:339
 #, c-format
 msgid "Version verification failed because: %s\n"
-msgstr ""
+msgstr "Versjonsjekken feilet fordi: %s\n"
 
 #: src/menu/network_menu.cpp:250
 #, c-format
@@ -1222,7 +1223,8 @@ msgid ""
 "Bombing : left clic on target\n"
 "a bombing per turn"
 msgstr ""
-"angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per runde"
+"angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per "
+"runde"
 
 #: src/map/maps_list.cpp:75
 msgid "couldn't load config"
@@ -1257,34 +1259,3 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Åpnet lyden på %d Hz %d bit"
-
-#~ msgid "Error loading team's data %s:"
-#~ msgstr "Feil under lasting av %s-laget :"
-
-#~ msgid "Error while loading configuration file: %s"
-#~ msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
-
-#~ msgid "Error while loading default configuration file: %s"
-#~ msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
-
-#~ msgid "Error while loading game mode %s (file %s):"
-#~ msgstr "Lasting av spillmodus feilet %s (fil %s) :"
-
-#~ msgid "XML error during loading map '%s': "
-#~ msgstr "XMLfeil under lasting av kart '%s':"
-
-#~ msgid "Music?"
-#~ msgstr "Musikk ?"
-
-#~ msgid "Sound effects?"
-#~ msgstr "Lydeffekter ?"
-
-#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
-#~ msgstr ""
-#~ "%s prøver å koble til en annen versjon av Wormux : mottager=%s, tjener=%s"
-
-#~ msgid "And the winner is..."
-#~ msgstr "Og vinneren er..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Kjapp deg, du er for treg !!"
