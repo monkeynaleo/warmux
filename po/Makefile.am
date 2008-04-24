@@ -90,7 +90,6 @@ POTFILES = \
         src/gui/list_box_w_label.h \
         src/gui/msg_box.cpp \
         src/gui/msg_box.h \
-        src/gui/null_widget.cpp \
         src/gui/null_widget.h \
         src/gui/picture_text_cbox.cpp \
         src/gui/picture_text_cbox.h \
@@ -106,6 +105,8 @@ POTFILES = \
         src/gui/spin_button.h \
         src/gui/spin_button_picture.cpp \
         src/gui/spin_button_picture.h \
+	src/gui/tabs.cpp \
+	src/gui/tabs.h \
         src/gui/text_box.cpp \
         src/gui/text_box.h \
         src/gui/widget.cpp \
@@ -158,8 +159,6 @@ POTFILES = \
         src/menu/credits_menu.h \
         src/menu/game_menu.cpp \
         src/menu/game_menu.h \
-        src/menu/internet_menu.cpp \
-        src/menu/internet_menu.h \
         src/menu/main_menu.cpp \
         src/menu/main_menu.h \
         src/menu/map_selection_box.cpp \
