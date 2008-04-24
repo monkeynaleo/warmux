@@ -56,7 +56,6 @@ OptionMenu::OptionMenu() :
   AppWormux * app = AppWormux::GetInstance();
   Config * config = Config::GetInstance();
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
-  Point2i stdSize(140, -1);
   Point2i option_size(140, 130);
 
   uint max_width = app->video->window.GetWidth()-50;
@@ -110,14 +109,14 @@ OptionMenu::OptionMenu() :
                                  video_resolutions, current_resolution);
   graphic_options->AddWidget(cbox_video_mode);
 
-  tabs->AddNewTab(_("Graphic"), graphic_options);
+  tabs->AddNewTab("unused", _("Graphic"), graphic_options);
 
   /* Language selection */
   Box * language_options = new GridBox(max_width, option_size, false);
-  lbox_languages = new ListBox(stdSize);
+  lbox_languages = new ListBox(option_size);
   language_options->AddWidget(lbox_languages);
 
-  tabs->AddNewTab(_("Language"), language_options);
+  tabs->AddNewTab("unused", _("Language"), language_options);
 
   /* Misc options */
   Box * misc_options = new GridBox(max_width, option_size, false);
@@ -125,7 +124,7 @@ OptionMenu::OptionMenu() :
                                     "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
 
-  tabs->AddNewTab(_("Misc"), misc_options);
+  tabs->AddNewTab("unused", _("Misc"), misc_options);
 
 
   /* Sound options */
@@ -164,7 +163,7 @@ OptionMenu::OptionMenu() :
 				 option_size, sound_freqs, current_sound_freq);
   sound_options->AddWidget(cbox_sound_freq);
 
-  tabs->AddNewTab(_("Sound"), sound_options);
+  tabs->AddNewTab("unused", _("Sound"), sound_options);
 
   // Values initialization
   opt_max_fps->SetValue(app->video->GetMaxFps());

@@ -53,7 +53,8 @@ public:
   MultiTabs(const Point2i& size);
   ~MultiTabs();
 
-  void AddNewTab(const std::string& title, Box* box);
+  void AddNewTab(const std::string& id, const std::string& title, Box* box);
+  const std::string& GetCurrentTabId() const;
 
   // from widget
   virtual void NeedRedrawing();

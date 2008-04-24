@@ -58,7 +58,7 @@ using namespace std;
 
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
-static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+//static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
 
 AppWormux *AppWormux::singleton = NULL;
 
@@ -124,7 +124,7 @@ int AppWormux::Main(void)
         {
           NetworkConnectionMenu network_connection_menu;
           menu = &network_connection_menu;
-          network_connection_menu.SetAction(net_action);
+          //network_connection_menu.SetAction(net_action);
           network_connection_menu.Run(skip_menu);
           break;
         }
@@ -157,7 +157,7 @@ int AppWormux::Main(void)
       menu = NULL;
       choice = MainMenu::NONE;
       skip_menu = false;
-      net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+      //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
     }
     while (!quit);
 
@@ -324,7 +324,7 @@ void ParseArgs(int argc, char * argv[])
           break;
         case 'c':
           choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
+          //net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
           if (optarg)
             {
               Config::GetInstance()->SetNetworkHost(optarg);
@@ -341,12 +341,12 @@ void ParseArgs(int argc, char * argv[])
           break;
         case 's':
           choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_HOST;
+          //net_action = NetworkConnectionMenu::NET_HOST;
           skip_menu = true;
           break;
         case 'i':
           choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+          //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
           skip_menu = true;
           break;
         case 'l':

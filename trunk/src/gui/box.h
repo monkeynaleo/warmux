@@ -26,11 +26,11 @@
 
 class Box : public WidgetList
 {
- protected:
+protected:
   uint margin;
   Point2i border;
 
- public:
+public:
   Box(const Point2i &size, bool _draw_border=true);
   virtual ~Box();
 
@@ -48,21 +48,27 @@ class Box : public WidgetList
 
 class VBox : public Box
 {
- public:
-  VBox(int width, bool _draw_border=true);
+protected:
+  bool force_widget_size;
+
+public:
+  VBox(uint width, bool _draw_border=true, bool force_widget_size = true);
   void Pack();
 };
 
 class HBox : public Box
 {
- public:
-  HBox(int height, bool _draw_border=true);
+protected:
+  bool force_widget_size;
+
+public:
+  HBox(uint height, bool _draw_border=true, bool force_widget_size = true);
   void Pack();
 };
 
 class GridBox : public Box
 {
- private:
+private:
   uint max_line_width;
   Point2i widget_size;
   uint last_line;
@@ -71,7 +77,7 @@ class GridBox : public Box
   uint NbWidgetsPerLine(uint nb_total_widgets);
   void PlaceWidget(Widget * a_widget, uint line, uint column);
 
- public:
+public:
   GridBox(uint max_line_width, const Point2i& widget_size, bool _draw_border=true);
   void Pack();
 };

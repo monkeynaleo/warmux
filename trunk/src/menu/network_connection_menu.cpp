@@ -23,7 +23,6 @@
 
 #include "menu/network_connection_menu.h"
 #include "menu/network_menu.h"
-#include "menu/internet_menu.h"
 
 #include "game/config.h"
 #include "graphic/video.h"
@@ -31,6 +30,8 @@
 #include "gui/box.h"
 #include "gui/check_box.h"
 #include "gui/msg_box.h"
+#include "gui/list_box.h"
+#include "gui/tabs.h"
 #include "gui/text_box.h"
 #include "include/app.h"
 #include "network/net_error_msg.h"
@@ -45,65 +46,105 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i def_size(300, 20);
 
-  uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
-  uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
+  uint max_width = AppWormux::GetInstance()->video->window.GetWidth()-50;
 
-  // Connection related widgets
-  connection_box = new VBox(360, false);
-  connection_box->SetBorder(Point2i(0,0));
+  /* Tabs */
+  tabs = new MultiTabs(Point2i(max_width,
+			       AppWormux::GetInstance()->video->window.GetHeight()-180));
+  tabs->SetPosition(25, 25);
 
-  // What do we want to do ?
-  Box* action_box = new HBox(64, false);
-
-  previous_action_bt = new Button(res, "menu/really_big_minus", false);
-  next_action_bt = new Button(res, "menu/really_big_plus", false);
-  action_label = new Label(_("Connect to an internet game"), 250,
-                           Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
-  action_box->AddWidget(previous_action_bt);
-  action_box->AddWidget(action_label);
-  action_box->AddWidget(next_action_bt);
-  action_box->Pack();
-  connection_box->AddWidget(action_box);
-
-  // Server address
-  server_address_label = new Label(_("Server address:"), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-  connection_box->AddWidget(server_address_label);
-  server_address = new TextBox(Config::GetInstance()->GetNetworkHost(), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-  connection_box->AddWidget(server_address);
+  /* server connection related widgets */
+  Box * srv_connection_box = new VBox(360, false);
+  srv_connection_box->SetBorder(Point2i(0,0));
 
   // Server port
-  port_number_label = new Label(_("Port:"), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-  port_number_label->Pack();
-  connection_box->AddWidget(port_number_label);
-  port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-  port_number->Pack();
-  connection_box->AddWidget(port_number);
+  Box * srv_tmp_box = new HBox(W_UNDEF, false, false);
+  srv_tmp_box->SetMargin(0);
+  srv_tmp_box->SetBorder(Point2i(0,0));
+
+  srv_tmp_box->AddWidget(new Label(_("Port:"), def_size.x/2));
+  srv_port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), def_size.x/2);
+  srv_tmp_box->AddWidget(srv_port_number);
+
+  srv_connection_box->AddWidget(srv_tmp_box);
 
   // Game name
-  game_name_label = new Label(_("Game name:"), def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-  game_name_label->Pack();
-  connection_box->AddWidget(game_name_label);
-  game_name = new TextBox("Wormux party", def_size.x, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-  game_name->SetMaxNbChars(15);
-  game_name->Pack();
-  connection_box->AddWidget(game_name);
+  srv_tmp_box = new HBox(W_UNDEF, false, false);
+  srv_tmp_box->SetMargin(0);
+  srv_tmp_box->SetBorder(Point2i(0,0));
+
+  srv_tmp_box->AddWidget(new Label(_("Game name:"), def_size.x/2));
+  srv_game_name = new TextBox("Wormux party", def_size.x/2);
+  srv_game_name->SetMaxNbChars(15);
+  srv_tmp_box->AddWidget(srv_game_name);
+
+  srv_connection_box->AddWidget(srv_tmp_box);
 
   // Available on internet ?
-  internet_server = new CheckBox(_("Server available on Internet"),
-				 -1, true);
-  connection_box->AddWidget(internet_server);
-  connection_box->Pack();
-  connection_box->SetPosition(center_x - connection_box->GetSizeX()/2,
-			      center_y - 200);
-  connection_box->Pack();
-  widgets.AddWidget(connection_box);
+  srv_internet_server = new CheckBox(_("Server available on Internet"), W_UNDEF, true);
+  srv_connection_box->AddWidget(srv_internet_server);
 
-  SetAction(NET_BROWSE_INTERNET);
+  tabs->AddNewTab("TAB_server", _("Host a game"), srv_connection_box);
+
+  /* client connection related widgets */
+  Box * cl_connection_box = new VBox(360, false);
+  cl_connection_box->SetBorder(Point2i(0,0));
+
+  // Public battles
+  Box * cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box->SetMargin(0);
+  cl_tmp_box->SetBorder(Point2i(0,0));
+
+  cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
+  cl_tmp_box->AddWidget(cl_refresh_net_games);
+  cl_tmp_box->AddWidget(new Label(_("Public battles"), def_size.x, Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
+  cl_connection_box->AddWidget(cl_tmp_box);
+
+  cl_net_games_lst = new ListBox( Point2i(def_size.x, 30), false);
+  cl_connection_box->AddWidget(cl_net_games_lst);
+
+  // Manual connection
+  cl_connection_box->AddWidget(new Label(_("Manual connection"), def_size.x, Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
+
+  // Server address
+  cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box->SetMargin(0);
+  cl_tmp_box->SetBorder(Point2i(0,0));
+
+  cl_tmp_box->AddWidget(new Label(_("Server address:"), def_size.x/2));
+  cl_server_address = new TextBox(Config::GetInstance()->GetNetworkHost(), def_size.x/2);
+  cl_tmp_box->AddWidget(cl_server_address);
+
+  cl_connection_box->AddWidget(cl_tmp_box);
+
+  // Server port
+  cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box->SetMargin(0);
+  cl_tmp_box->SetBorder(Point2i(0,0));
+
+  cl_tmp_box->AddWidget(new Label(_("Port:"), def_size.x/2));
+  cl_port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), def_size.x/2);
+  cl_tmp_box->AddWidget(cl_port_number);
+
+  cl_connection_box->AddWidget(cl_tmp_box);
+
+  tabs->AddNewTab("TAB_client", _("Connect to game"), cl_connection_box);
+
+  widgets.AddWidget(tabs);
+  widgets.Pack();
+
+  // Optimize height of public net games table
+  uint net_games_lst_height = cl_net_games_lst->GetSizeY() +
+    (tabs->GetPositionY() + tabs->GetSizeY()) - (cl_connection_box->GetPositionY() + cl_connection_box->GetSizeY()) - 10;
+  cl_net_games_lst->SetSize(def_size.x, net_games_lst_height);
 
   // Warning about experimental networking
-  msg_box = new MsgBox(Point2i(600, 200), Font::FONT_SMALL, Font::FONT_NORMAL);
-  msg_box->SetPosition(AppWormux::GetInstance()->video->window.GetWidth()/2 - 300,
-		       connection_box->GetPositionY() + connection_box->GetSizeY() + 30);
+  Point2i msg_box_pos(25, tabs->GetPositionY() + tabs->GetSizeY() + 10);
+  Point2i msg_box_size(max_width,
+		       AppWormux::GetInstance()->video->window.GetHeight() - 50 - msg_box_pos.y);
+
+  msg_box = new MsgBox(msg_box_size, Font::FONT_SMALL, Font::FONT_NORMAL);
+  msg_box->SetPosition(msg_box_pos);
 
   widgets.AddWidget(msg_box);
   widgets.Pack();
@@ -124,81 +165,61 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget* w = widgets.ClickUp(mousePosition, button);
 
-  if ((w == next_action_bt) ||
-      (w == action_label && (button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN)))
-    {
-      switch (current_action) {
-      case NET_HOST:
-        SetAction(NET_CONNECT_LOCAL);
-        break;
-      case NET_CONNECT_LOCAL:
-        SetAction(NET_BROWSE_INTERNET);
-        break;
-      case NET_BROWSE_INTERNET:
-        SetAction(NET_HOST);
-        break;
-      }
-      return;
-    }
-
-  if ((w == previous_action_bt) ||
-      (w == action_label && (button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP)))
-    {
-      switch (current_action) {
-      case NET_HOST:
-        SetAction(NET_BROWSE_INTERNET);
-        break;
-      case NET_CONNECT_LOCAL:
-        SetAction(NET_HOST);
-        break;
-      case NET_BROWSE_INTERNET:
-        SetAction(NET_CONNECT_LOCAL);
-        break;
-      }
-      return;
-    }
+  if (w == cl_refresh_net_games)
+    RefreshList();
 }
 
-void NetworkConnectionMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
+void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
 {
+  widgets.Click(mousePosition, button);
 }
 
-void NetworkConnectionMenu::SetAction(network_menu_action_t action)
+void NetworkConnectionMenu::RefreshList()
 {
-  current_action = action;
 
-  switch (current_action) {
-  case NET_HOST:
-    action_label->SetText(_("Host a game"));
-    server_address_label->SetVisible(false);
-    server_address->SetVisible(false);
-    port_number_label->SetVisible(true);
-    port_number->SetVisible(true);
-    game_name_label->SetVisible(true);
-    game_name->SetVisible(true);
-    internet_server->SetVisible(true);
-    break;
-  case NET_CONNECT_LOCAL:
-    action_label->SetText(_("Connect to game"));
-    server_address_label->SetVisible(true);
-    server_address->SetVisible(true);
-    port_number_label->SetVisible(true);
-    port_number->SetVisible(true);
-    game_name_label->SetVisible(false);
-    game_name->SetVisible(false);
-    internet_server->SetVisible(false);
-    break;
-  case NET_BROWSE_INTERNET:
-    action_label->SetText(_("Connect to an internet game"));
-    server_address_label->SetVisible(false);
-    server_address->SetVisible(false);
-    port_number_label->SetVisible(false);
-    port_number->SetVisible(false);
-    game_name_label->SetVisible(false);
-    game_name->SetVisible(false);
-    internet_server->SetVisible(false);
-    break;
+  // Save the currently selected address
+  int current = cl_net_games_lst->GetSelectedItem();
+
+  // Empty the list:
+  while (cl_net_games_lst->Size() != 0)
+  {
+    cl_net_games_lst->Select(0);
+    cl_net_games_lst->RemoveSelected();
   }
+
+  // Connect to the index server
+  connection_state_t conn = IndexServer::GetInstance()->Connect();
+  if (conn != CONNECTED) {
+    DisplayNetError(conn);
+    msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
+    return;
+  }
+
+  std::list<GameServerInfo> lst = IndexServer::GetInstance()->GetHostList();
+
+  if (lst.size() == 0) {
+    Menu::DisplayError(_("Sorry, currently, no game is waiting for players"));
+    IndexServer::GetInstance()->Disconnect();
+    return;
+  }
+
+  for (std::list<GameServerInfo>::iterator game_server_info_it = lst.begin();
+       game_server_info_it != lst.end();
+       ++game_server_info_it) {
+    std::string display_str = game_server_info_it->ip_address + ":";
+    display_str += game_server_info_it->port + " - ";
+    display_str += game_server_info_it->dns_address + " - ";
+    display_str += game_server_info_it->game_name;
+
+    std::string connect_str = game_server_info_it->ip_address + ":";
+    connect_str += game_server_info_it->port;
+    cl_net_games_lst->AddItem(false, display_str, connect_str);
+  }
+
+  if (current != -1 && cl_net_games_lst->Size() != 0)
+    cl_net_games_lst->Select( current );
+
+  IndexServer::GetInstance()->Disconnect();
 }
 
 void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/){}
@@ -208,79 +229,114 @@ void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
   Menu::DisplayError(NetworkErrorToString(conn));
 }
 
-bool NetworkConnectionMenu::signal_ok()
+bool NetworkConnectionMenu::HostingServer(const std::string& port,
+					  const std::string& game_name,
+					  bool internet)
 {
-  connection_state_t conn;
   bool r = false;
 
-  // Hack: force loading of teams before creating threads.
-  GetTeamsList();
+  if (!internet)
+    IndexServer::GetInstance()->SetHiddenServer();
 
-  switch (current_action) {
-  case NET_HOST: // Hosting your own server
-    if( !internet_server->GetValue() )
-      IndexServer::GetInstance()->SetHiddenServer();
-
-    conn = IndexServer::GetInstance()->Connect();
-    if(conn != CONNECTED)
+  connection_state_t conn = IndexServer::GetInstance()->Connect();
+  if (conn != CONNECTED)
     {
       DisplayNetError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
       goto out;
     }
 
-    conn = Network::GetInstance()->ServerStart(port_number->GetText(), "");
-    if( conn != CONNECTED)
+  conn = Network::GetInstance()->ServerStart(port, "");
+  if( conn != CONNECTED)
     {
       DisplayNetError(conn);
       goto out;
     }
 
-    r = IndexServer::GetInstance()->SendServerStatus(game_name->GetText());
-    if (false == r) {
-      DisplayNetError(CONN_BAD_PORT);
-      msg_box->NewMessage(_("Error: Your server is not reachable from the internet. Check your firewall configuration")
-			    , c_red);
+  r = IndexServer::GetInstance()->SendServerStatus(game_name);
+  if (false == r) {
+    DisplayNetError(CONN_BAD_PORT);
+    msg_box->NewMessage(_("Error: Your server is not reachable from the internet. Check your firewall configuration")
+			, c_red);
+    goto out;
+  }
+
+  if (!Network::GetInstance()->IsConnected()) {
+    msg_box->NewMessage(_("Error: Unable to start server"), c_red);
+    goto out;
+  }
+  r = true;
+
+ out:
+  return r;
+}
+
+bool NetworkConnectionMenu::ConnectToClient(const std::string& srv_address,
+					    const std::string& port,
+					    const std::string& passwd)
+{
+  bool r = true;
+
+  connection_state_t conn = Network::ClientStart(srv_address, port, passwd);
+  if (!Network::IsConnected() || conn != CONNECTED) {
+    DisplayNetError(conn);
+
+    // translators: %s:%s will expand to something like "example.org:9999"
+    msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
+			       srv_address.c_str(), port.c_str()),
+			c_red);
+    r = false;
+  }
+  return r;
+}
+
+bool NetworkConnectionMenu::signal_ok()
+{
+  bool r = false;
+
+  // Hack: force loading of teams before creating threads.
+  GetTeamsList();
+
+  // Which tab is displayed ?
+  std::string id = tabs->GetCurrentTabId();
+
+  if (id == "TAB_server") {
+    // Hosting your own server
+    bool ret;
+    ret = HostingServer(srv_port_number->GetText(), srv_game_name->GetText(), srv_internet_server->GetValue());
+    if (!ret)
       goto out;
-    }
+  } else if (id == "TAB_client") {
 
-    if (!Network::GetInstance()->IsConnected()) {
-      msg_box->NewMessage(_("Error: Unable to start server"), c_red);
-      goto out;
-    }
+    if (!cl_server_address->GetText().empty())
+      { // Direct connexion to a server
+	bool ret;
+	ret = ConnectToClient(cl_server_address->GetText(), cl_port_number->GetText(), "");
+	if (!ret)
+	  goto out;
 
-    break;
+	// Remember the parameters
+	Config::GetInstance()->SetNetworkHost(cl_server_address->GetText());
+	Config::GetInstance()->SetNetworkPort(cl_port_number->GetText());
+      }
+    else
+      { // Connect to an internet game!
+	bool ret;
 
-  case NET_CONNECT_LOCAL: // Direct connexion to a server
-    conn = Network::ClientStart(server_address->GetText(), port_number->GetText(), "");
-    if (!Network::IsConnected() || conn != CONNECTED) {
-      DisplayNetError(conn);
+	if (cl_net_games_lst->GetSelectedItem() == -1)
+	  goto out;
 
-      // translators: %s:%s will expand to something like "example.org:9999"
-      msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
-                                 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
-                          c_red);
-      goto out;
-    }
-    break;
+	char c_address[32];
+	char c_port[16];
+	sscanf(cl_net_games_lst->ReadValue().c_str(),"%[^:]:%s", c_address, c_port);
 
-  case NET_BROWSE_INTERNET: // Search an internet game!
-    conn = IndexServer::GetInstance()->Connect();
-    if (conn != CONNECTED) {
-      DisplayNetError(conn);
-      msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
-      goto out;
-    }
+	std::string address = std::string(c_address);
+	std::string port = std::string(c_port);
 
-    InternetMenu im;
-    im.Run();
-
-    IndexServer::GetInstance()->Disconnect();
-
-    // we don't go back into the main menu!
-    // -> im.Run() may have connected to a host so the
-    // if(Network::GetInstance()->IsConnected()) just below will be catched and close the menu
-    break;
+	ret = ConnectToClient(address, port, "");
+	if (!ret)
+	  goto out;
+      }
   }
 
   if (Network::IsConnected()) {
@@ -288,10 +344,6 @@ bool NetworkConnectionMenu::signal_ok()
 
     // run the network menu ! :-)
     NetworkMenu nm;
-
-    Config::GetInstance()->SetNetworkHost(server_address->GetText());
-    Config::GetInstance()->SetNetworkPort(port_number->GetText());
-
     Network::GetInstance()->network_menu = &nm;
     nm.Run();
     Network::GetInstance()->network_menu = NULL;
@@ -300,14 +352,6 @@ bool NetworkConnectionMenu::signal_ok()
     // back to main menu after playing
     Network::Disconnect();
     return true;
-  } else {
-    // if InternetMenu was closed without making a connection menu has to be redrawn
-    Menu::RedrawMenu();
-    Network::Disconnect();
-
-    play_error_sound();
-    goto out;
-    // TODO : add error sound and dialog
   }
 
   r = true;
