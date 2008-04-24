@@ -130,12 +130,18 @@ OptionMenu::OptionMenu() :
   /* Sound options */
   Box * sound_options = new GridBox(max_width, option_size, false);
 
+  music_cbox = new PictureTextCBox(_("Music?"), "menu/music_enable", option_size);
+  sound_options->AddWidget(music_cbox);
+
   initial_vol_mus = config->GetVolumeMusic();
   volume_music = new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
 					   option_size,
                                            fromVolume(initial_vol_mus), 5,
                                            0, 100);
   sound_options->AddWidget(volume_music);
+
+  effects_cbox = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", option_size);
+  sound_options->AddWidget(effects_cbox);
 
   initial_vol_eff = config->GetVolumeEffects();
   volume_effects = new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
@@ -171,6 +177,8 @@ OptionMenu::OptionMenu() :
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
   full_screen->SetValue(app->video->IsFullScreen());
+  music_cbox->SetValue(config->GetSoundMusic());
+  effects_cbox->SetValue(config->GetSoundEffects());
 
   // Setting language selection
   lbox_languages->AddItem(config->GetLanguage() == "",    _("(system language)"),  "");
@@ -220,14 +228,18 @@ OptionMenu::~OptionMenu()
 
 void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  widgets.ClickUp(mousePosition, button);
+  Widget* w = widgets.ClickUp(mousePosition, button);
 
   // Now that the click has been processed by the underlying widgets,
   // make use of their newer values in near-realtime!
-  if (volume_music->Contains(mousePosition))
+  if (w == volume_music)
     Config::GetInstance()->SetVolumeMusic(toVolume(volume_music->GetValue()));
-  else if (volume_effects->Contains(mousePosition))
+  else if (w == volume_effects)
     Config::GetInstance()->SetVolumeEffects(toVolume(volume_effects->GetValue()));
+  else if (w == music_cbox)
+    JukeBox::GetInstance()->ActiveMusic(music_cbox->GetValue());
+  else if (w == effects_cbox)
+    JukeBox::GetInstance()->ActiveEffects(effects_cbox->GetValue());
 }
 
 void OptionMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
@@ -248,6 +260,8 @@ void OptionMenu::SaveOptions()
 
   // Sound settings - volume already saved
   config->SetSoundFrequency(cbox_sound_freq->GetIntValue());
+  config->SetSoundMusic(music_cbox->GetValue());
+  config->SetSoundEffects(effects_cbox->GetValue());
 
   AppWormux * app = AppWormux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
