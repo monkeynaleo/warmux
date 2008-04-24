@@ -58,7 +58,7 @@ NetworkMenu::NetworkMenu() :
   waiting_for_server = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-  Point2i pointZero(-1, -1);
+  Point2i pointZero(W_UNDEF, W_UNDEF);
 
   Surface& window = AppWormux::GetInstance()->video->window;
 
@@ -73,6 +73,7 @@ NetworkMenu::NetworkMenu() :
   team_box = new NetworkTeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H));
   team_box->SetPosition(MARGIN_SIDE, MARGIN_TOP);
   widgets.AddWidget(team_box);
+  widgets.Pack();
 
   // ################################################
   // ##  MAP SELECTION
@@ -84,6 +85,7 @@ NetworkMenu::NetworkMenu() :
   }
   map_box->SetPosition(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE);
   widgets.AddWidget(map_box);
+  widgets.Pack();
 
   // ################################################
   // ##  GAME OPTIONS
@@ -110,7 +112,7 @@ NetworkMenu::NetworkMenu() :
     mode->SetText(_("Server mode"));
     tmp_box->AddWidget(mode);
 
-    player_number = new SpinButton(_("Max number of players:"), -1,
+    player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
                                    GameMode::GetInstance()->max_teams, 1, 2,
                                    GameMode::GetInstance()->max_teams);
     team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
@@ -128,6 +130,7 @@ NetworkMenu::NetworkMenu() :
   options_box->AddWidget(tmp_box);
   options_box->SetPosition(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE);
   widgets.AddWidget(options_box);
+  widgets.Pack();
 
   // ################################################
   // ##  CHAT BOX
@@ -155,6 +158,7 @@ NetworkMenu::NetworkMenu() :
   chat_box->AddWidget(tmp2_box);
 
   widgets.AddWidget(chat_box);
+  widgets.Pack();
 
   resource_manager.UnLoadXMLProfile(res);
 }

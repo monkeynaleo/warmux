@@ -32,6 +32,8 @@
 class Surface;
 struct SDL_keysym;
 
+#define W_UNDEF 0
+
 class Widget : public Rectanglei, public Container
 {
   bool has_focus;

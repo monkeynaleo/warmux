@@ -27,7 +27,7 @@
 #include "include/app.h"
 #include "tool/resource_manager.h"
 
-CheckBox::CheckBox(const std::string& label, int width, bool value):
+CheckBox::CheckBox(const std::string& label, uint width, bool value):
   txt_label(new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL)),
   m_value(value),
   m_checked_image(NULL)
@@ -35,7 +35,7 @@ CheckBox::CheckBox(const std::string& label, int width, bool value):
   Init(width);
 }
 
-CheckBox::CheckBox(Text *text, int width, bool value):
+CheckBox::CheckBox(Text *text, uint width, bool value):
   txt_label(text),
   m_value(value),
   m_checked_image(NULL)
@@ -43,7 +43,7 @@ CheckBox::CheckBox(Text *text, int width, bool value):
   Init(width);
 }
 
-void CheckBox::Init(int width)
+void CheckBox::Init(uint width)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_checked_image = resource_manager.LoadSprite( res, "menu/check");
@@ -51,7 +51,7 @@ void CheckBox::Init(int width)
 
   m_checked_image->cache.EnableLastFrameCache();
 
-  position = Point2i(-1,-1);
+  position = Point2i(W_UNDEF, W_UNDEF);
   size.x = width;
   size.y = txt_label->GetHeight();
 }

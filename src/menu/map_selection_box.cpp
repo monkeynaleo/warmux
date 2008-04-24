@@ -39,7 +39,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
 
-  AddWidget(new PictureWidget(Point2i(46, -1), "menu/map_label"));
+  AddWidget(new PictureWidget(Point2i(46, W_UNDEF), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
   bt_map_plus = new Button(res, "menu/big_plus", false);
@@ -116,11 +116,11 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   tmp_map_box->AddWidget(previews_box);
 
   // Map information
-  map_name_label = new Label("Map", -1, Font::FONT_SMALL,
+  map_name_label = new Label("Map", W_UNDEF, Font::FONT_SMALL,
 			     Font::FONT_BOLD, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_name_label);
 
-  map_author_label = new Label("Author", -1, Font::FONT_SMALL,
+  map_author_label = new Label("Author", W_UNDEF, Font::FONT_SMALL,
 			       Font::FONT_NORMAL, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_author_label);
 

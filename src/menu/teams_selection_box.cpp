@@ -33,12 +33,12 @@
 
 TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), true)
 {
-  AddWidget(new PictureWidget(Point2i(38, -1), "menu/teams_label"));
+  AddWidget(new PictureWidget(Point2i(38, W_UNDEF), "menu/teams_label"));
 
   // How many teams ?
   teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
 				       "menu/team_number",
-				       Point2i(130, -1),
+				       Point2i(130, W_UNDEF),
 				       2, 1,
 				       2, MAX_NB_TEAMS);
   AddWidget(teams_nb);
