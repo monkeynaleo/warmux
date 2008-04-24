@@ -52,68 +52,85 @@ void Box::Update(const Point2i &mousePosition,
 
 // --------------------------------------------------
 
-VBox::VBox(int width, bool _draw_border) :
-  Box(Point2i(width, -1), _draw_border)
+VBox::VBox(uint width, bool _draw_border, bool _force_widget_size) :
+  Box(Point2i(width, 100), _draw_border),
+  force_widget_size(_force_widget_size)
 {
 }
 
 void VBox::Pack()
 {
-  WidgetList::Pack();
-
-  int _y = position.y;
+  uint _y = position.y;
+  uint max_size_x = 0;
 
   std::list<Widget *>::iterator it;
-  for( it = widget_list.begin();
+  for (it = widget_list.begin();
        it != widget_list.end();
-       ++it ){
+       ++it) {
 
-    if( it == widget_list.begin() )
+    if (it == widget_list.begin())
       _y += border.y - margin;
 
     (*it)->SetPosition(position.x + border.x,
 		       _y + margin);
-    (*it)->SetSize(size.x - 2*border.x,
-		   (*it)->GetSizeY());
+
+    if (force_widget_size) {
+      (*it)->SetSize(size.x - 2*border.x,
+		     (*it)->GetSizeY());
+    } else {
+      max_size_x = std::max(max_size_x, uint((*it)->GetSizeX()));
+    }
+
+    (*it)->Pack();
 
     _y = (*it)->GetPositionY() + (*it)->GetSizeY();
   }
-  size.y = _y - position.y;
 
-  WidgetList::Pack();
+  size.y = _y - position.y;
+  if (!force_widget_size) {
+    size.x = max_size_x;
+  }
 }
 
 // --------------------------------------------------
 
-HBox::HBox(int height, bool _draw_border) :
-  Box(Point2i(-1, height), _draw_border)
+HBox::HBox(uint height, bool _draw_border, bool _force_widget_size) :
+  Box(Point2i(100, height), _draw_border),
+  force_widget_size(_force_widget_size)
 {
 }
 
 void HBox::Pack()
 {
-  WidgetList::Pack();
-
-  int _x = position.x;
+  uint _x = position.x;
+  uint max_size_y = 0;
 
   std::list<Widget *>::iterator it;
-  for( it = widget_list.begin();
+  for (it = widget_list.begin();
        it != widget_list.end();
-       ++it ){
+       ++it) {
 
-    if( it == widget_list.begin() )
+    if (it == widget_list.begin())
       _x += border.x - margin;
 
     (*it)->SetPosition(_x + margin,
 		       position.y + border.y);
-    (*it)->SetSize((*it)->GetSizeX(),
-		   size.y - 2*border.y);
+
+    if (force_widget_size) {
+      (*it)->SetSize((*it)->GetSizeX(),
+		     size.y - 2*border.y);
+    } else {
+      max_size_y = std::max(max_size_y, uint((*it)->GetSizeY()));
+    }
+
+    (*it)->Pack();
 
     _x = (*it)->GetPositionX()+ (*it)->GetSizeX();
   }
   size.x = _x - position.x;
-
-  WidgetList::Pack();
+  if (!force_widget_size) {
+    size.y = max_size_y;
+  }
 }
 
 // --------------------------------------------------

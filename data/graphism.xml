@@ -145,6 +145,11 @@
       <grid pos="0,0" size="10,5" array="1,2" />
     </image>
   </sprite>
+  <sprite name="refresh_small">
+    <image file="menu/left.png">
+      <grid pos="0,0" size="20,20" array="2,1" />
+    </image>
+  </sprite>
  </section>
 
 <section name="credit">

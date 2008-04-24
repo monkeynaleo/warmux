@@ -214,6 +214,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
     winner_box->SetPosition(x, y);
     widgets.AddWidget(winner_box);
+    widgets.Pack();
   }
 
   // Load the podium img
@@ -250,6 +251,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   team_box->SetPosition(x, y);
   widgets.AddWidget(team_box);
+  widgets.Pack();
 
   resource_manager.UnLoadXMLProfile(res);
 
@@ -288,7 +290,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   statistics_box->SetPosition(x, y+int(1.5*max_height));
   widgets.AddWidget(statistics_box);
-
+  widgets.Pack();
   // Label for graph axes
   //widgets.AddWidget(new Label(_("Time"), Point2i(GRAPH_W, 32),
   //                            Font::FONT_SMALL, Font::FONT_BOLD, black_color, true, false));

@@ -28,60 +28,54 @@
 #include "network/network.h"
 
 // Forward declarations
+class Button;
 class TextBox;
-class VBox;
 class MsgBox;
 class CheckBox;
+class MultiTabs;
+class ListBox;
 
 class NetworkConnectionMenu : public Menu
 {
- public:
-  typedef enum {
-    NET_HOST,
-    NET_CONNECT_LOCAL,
-    NET_BROWSE_INTERNET
-  } network_menu_action_t;
-
- private:
+private:
   /* If you need this, implement it (correctly)*/
-   NetworkConnectionMenu(const NetworkConnectionMenu&);
-   NetworkConnectionMenu operator=(const NetworkConnectionMenu&);
-   /********************************************/
+  NetworkConnectionMenu(const NetworkConnectionMenu&);
+  NetworkConnectionMenu operator=(const NetworkConnectionMenu&);
+  /********************************************/
 
-   /* Connection controllers */
-   Button *previous_action_bt, *next_action_bt;
+  MultiTabs * tabs;
 
-   Label* action_label;
-   network_menu_action_t current_action;
+  TextBox* srv_port_number;
+  TextBox* srv_game_name;
+  CheckBox* srv_internet_server;
 
-   Label* server_address_label;
-   TextBox* server_address;
+  Button* cl_refresh_net_games;
+  ListBox* cl_net_games_lst;
+  TextBox* cl_server_address;
+  TextBox* cl_port_number;
 
-   Label* port_number_label;
-   TextBox* port_number;
+  MsgBox *msg_box;
 
-   Label* game_name_label;
-   TextBox* game_name;
+  void OnClick(const Point2i &mousePosition, int button);
+  void OnClickUp(const Point2i &mousePosition, int button);
+  void Draw(const Point2i &mousePosition);
 
-   CheckBox* internet_server;
-   VBox* connection_box;
+  void DisplayNetError(connection_state_t conn);
 
-   MsgBox *msg_box;
+  bool signal_ok();
+  bool signal_cancel();
 
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
-   void Draw(const Point2i &mousePosition);
-
-   void DisplayNetError(connection_state_t conn);
-
-   bool signal_ok();
-   bool signal_cancel();
+  void RefreshList();
+  bool HostingServer(const std::string& port,
+		     const std::string& game_name,
+		     bool internet);
+  bool ConnectToClient(const std::string& srv_address,
+		       const std::string& port,
+		       const std::string& passwd);
 
 public:
    NetworkConnectionMenu();
    ~NetworkConnectionMenu();
-
-   void SetAction(network_menu_action_t action);
 };
 
 #endif

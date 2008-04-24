@@ -32,16 +32,20 @@ static Point2i widget_size(150, 150);
 class Tab
 {
 private:
+  std::string id;
   std::string title;
 
 public:
   Box* box;
 
 public:
-  Tab(const std::string& _title, Box* _box) : title(_title), box(_box) {};
+  Tab(const std::string& _id, const std::string& _title, Box* _box) :
+    id(_id), title(_title), box(_box) {};
+
   ~Tab() {};
 
   const std::string& GetTitle() const { return title; };
+  const std::string& GetId() const { return id; };
 };
 
 
@@ -55,7 +59,7 @@ MultiTabs::MultiTabs(const Point2i& size):
   prev_tab_bt = new Button(res, "menu/really_big_minus", false);
   next_tab_bt = new Button(res, "menu/really_big_plus", false);
 
-  current_tab_title = new Text("No tab!", primary_red_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, true);
+  current_tab_title = new Text("No tab!", primary_red_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true);
 
   Widget::SetBorder(defaultOptionColorRect, 2);
   Widget::SetBackgroundColor(defaultOptionColorBox);
@@ -112,9 +116,9 @@ void MultiTabs::NextTab()
   SetCurrentTab( &(*it));
 }
 
-void MultiTabs::AddNewTab(const std::string& title, Box * box)
+void MultiTabs::AddNewTab(const std::string& id, const std::string& title, Box * box)
 {
-  Tab tab(title, box);
+  Tab tab(id, title, box);
   tabs.push_back(tab);
   box->SetContainer(this);
 
@@ -185,7 +189,7 @@ void MultiTabs::Pack()
   for (it = tabs.begin(); it != tabs.end(); it++)
     {
       (*it).box->SetPosition(tab_pos);
-      (*it).box->SetSize(tab_pos);
+      (*it).box->SetSize(tab_size);
       (*it).box->Pack();
     }
 }
@@ -242,4 +246,10 @@ Widget* MultiTabs::ClickUp(const Point2i &mousePosition, uint button)
     return current_tab->box->ClickUp(mousePosition, button);
 
   return NULL;
+}
+
+const std::string& MultiTabs::GetCurrentTabId() const
+{
+  ASSERT(current_tab);
+  return current_tab->GetId();
 }
