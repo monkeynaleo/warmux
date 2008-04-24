@@ -58,6 +58,8 @@ private:
    uint initial_vol_eff;
    SpinButtonWithPicture *volume_music;
    SpinButtonWithPicture *volume_effects;
+   CheckBox *music_cbox;
+   CheckBox *effects_cbox;
 
    /* Misc options controllers */
    CheckBox *opt_updates;
