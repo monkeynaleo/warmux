@@ -54,7 +54,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   tabs->SetPosition(25, 25);
 
   /* server connection related widgets */
-  Box * srv_connection_box = new VBox(360, false);
+  Box * srv_connection_box = new VBox(W_UNDEF, false, false);
   srv_connection_box->SetBorder(Point2i(0,0));
 
   // Server port
@@ -81,13 +81,13 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   srv_connection_box->AddWidget(srv_tmp_box);
 
   // Available on internet ?
-  srv_internet_server = new CheckBox(_("Server available on Internet"), W_UNDEF, true);
+  srv_internet_server = new CheckBox(_("Server available on Internet"), def_size.x, true);
   srv_connection_box->AddWidget(srv_internet_server);
 
   tabs->AddNewTab("TAB_server", _("Host a game"), srv_connection_box);
 
   /* client connection related widgets */
-  Box * cl_connection_box = new VBox(360, false);
+  Box * cl_connection_box = new VBox(W_UNDEF, false, false);
   cl_connection_box->SetBorder(Point2i(0,0));
 
   // Public battles
@@ -134,9 +134,10 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   widgets.Pack();
 
   // Optimize height of public net games table
+  uint net_games_lst_width = tabs->GetSizeX() - 2*(cl_connection_box->GetPositionX()-tabs->GetPositionX());
   uint net_games_lst_height = cl_net_games_lst->GetSizeY() +
     (tabs->GetPositionY() + tabs->GetSizeY()) - (cl_connection_box->GetPositionY() + cl_connection_box->GetSizeY()) - 10;
-  cl_net_games_lst->SetSize(def_size.x, net_games_lst_height);
+  cl_net_games_lst->SetSize(net_games_lst_width, net_games_lst_height);
 
   // Warning about experimental networking
   Point2i msg_box_pos(25, tabs->GetPositionY() + tabs->GetSizeY() + 10);
