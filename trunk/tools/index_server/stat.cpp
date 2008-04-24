@@ -67,8 +67,9 @@ void ConnectionStats::OpenFile()
 
 void ConnectionStats::CloseFile()
 {
-  if(fd)
+  if (fd)
     fclose(fd);
+  fd = NULL;
 }
 
 void ConnectionStats::Reset()
