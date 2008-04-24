@@ -33,12 +33,12 @@
 
 NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), true)
 {
-  AddWidget(new PictureWidget(Point2i(38, -1), "menu/teams_label"));
+  AddWidget(new PictureWidget(Point2i(38, W_UNDEF), "menu/teams_label"));
 
   // How many teams ?
   local_teams_nb = new SpinButtonWithPicture(_("Local teams:"),
 					     "menu/team_number",
-					     Point2i(130, -1),
+					     Point2i(130, W_UNDEF),
 					     0, 1,
 					     0, NMAX_NB_TEAMS-1);
   AddWidget(local_teams_nb);
@@ -359,7 +359,7 @@ void NetworkTeamsSelectionBox::ValidTeamsSelection()
   }
 }
 
-void NetworkTeamsSelectionBox::SetMaxNbLocalPlayers(uint nb) 
+void NetworkTeamsSelectionBox::SetMaxNbLocalPlayers(uint nb)
 {
   uint current_nb_teams = local_teams_nb->GetValue();
   local_teams_nb->SetMaxValue(nb);

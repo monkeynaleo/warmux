@@ -35,7 +35,7 @@ class CheckBox : public Widget
  CheckBox(const CheckBox&);
  CheckBox operator=(const CheckBox&);
  /**********************************************/
- void Init(int width);
+ void Init(uint width);
 
  protected:
   Text *txt_label;
@@ -43,8 +43,8 @@ class CheckBox : public Widget
   Sprite *m_checked_image;
 
  public:
-  CheckBox(const std::string &label, int width, bool value = true);
-  CheckBox(Text* text, int width, bool value = true);
+  CheckBox(const std::string &label, uint width, bool value = true);
+  CheckBox(Text* text, uint width, bool value = true);
   ~CheckBox();
 
   virtual void Draw(const Point2i &mousePosition) const;
