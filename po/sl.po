@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-04-13 18:30+0100\n"
+"PO-Revision-Date: 2008-04-25 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -692,7 +692,7 @@ msgstr "Celozaslonski način?"
 
 #: src/menu/game_menu.cpp:100
 msgid "Game"
-msgstr ""
+msgstr "Igra"
 
 #: src/menu/network_connection_menu.cpp:76
 msgid "Game name:"
@@ -704,7 +704,7 @@ msgstr "Metalec gnuja"
 
 #: src/menu/options_menu.cpp:115
 msgid "Graphic"
-msgstr ""
+msgstr "Grafika"
 
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
@@ -863,12 +863,11 @@ msgstr "Zmanjševalnik gravitacije"
 #. Manual connection
 #: src/menu/network_connection_menu.cpp:107
 msgid "Manual connection"
-msgstr ""
+msgstr "Ročna povezava"
 
 #: src/menu/game_menu.cpp:80
-#, fuzzy
 msgid "Map"
-msgstr "Karte"
+msgstr "Karta"
 
 #: src/map/map.cpp:294
 #, c-format
@@ -892,9 +891,8 @@ msgid "Mine"
 msgstr "Mina"
 
 #: src/menu/options_menu.cpp:130
-#, fuzzy
 msgid "Misc"
-msgstr "Glasba?"
+msgstr "Razno"
 
 #: src/menu/results_menu.cpp:287
 msgid "Most accurate"
@@ -1002,9 +1000,8 @@ msgid "Port:"
 msgstr "Vrata:"
 
 #: src/menu/network_connection_menu.cpp:100
-#, fuzzy
 msgid "Public battles"
-msgstr "Končaj bitko"
+msgstr "Javne bitke"
 
 #: src/menu/main_menu.cpp:75
 msgid "Quit"
@@ -1085,9 +1082,8 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
 #: src/menu/options_menu.cpp:175
-#, fuzzy
 msgid "Sound"
-msgstr "Zvoki"
+msgstr "Zvok"
 
 #: src/menu/options_menu.cpp:146
 msgid "Sound effects?"
