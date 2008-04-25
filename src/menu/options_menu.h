@@ -49,6 +49,7 @@ private:
    CheckBox *opt_display_wind_particles;
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
+   CheckBox *opt_scroll_on_border;
    CheckBox *full_screen;
    SpinButtonWithPicture *opt_max_fps;
 

@@ -78,6 +78,9 @@ OptionMenu::OptionMenu() :
   opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
   graphic_options->AddWidget(opt_display_name);
 
+  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
+  graphic_options->AddWidget(opt_scroll_on_border);
+
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
 
@@ -176,6 +179,7 @@ OptionMenu::OptionMenu() :
   opt_display_wind_particles->SetValue(config->GetDisplayWindParticles());
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
+  opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
   full_screen->SetValue(app->video->IsFullScreen());
   music_cbox->SetValue(config->GetSoundMusic());
   effects_cbox->SetValue(config->GetSoundEffects());
@@ -249,11 +253,13 @@ void OptionMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
 
 void OptionMenu::SaveOptions()
 {
-  // Save values
   Config * config = Config::GetInstance();
+
+  // Graphic options
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
+  config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
 
   // Misc options
   config->SetCheckUpdates(opt_updates->GetValue());
