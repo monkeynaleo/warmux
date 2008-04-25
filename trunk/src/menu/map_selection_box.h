@@ -33,7 +33,7 @@ class Button;
 class Label;
 class PictureWidget;
 
-class MapSelectionBox : public HBox
+class MapSelectionBox : public VBox
 {
  private:
   /* If you need this, implement it (correctly) */
@@ -63,8 +63,10 @@ class MapSelectionBox : public HBox
 
   void ValidMapSelection();
   void ChangeMapCallback();
-  Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
+
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  virtual void Pack();
 };
 
 

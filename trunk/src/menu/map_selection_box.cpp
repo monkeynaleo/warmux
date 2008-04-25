@@ -33,13 +33,11 @@
 #include "tool/resource_manager.h"
 
 MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
-  HBox(_size.GetY(), true), selected_map_index(0)
+  VBox(_size.GetX(), false), selected_map_index(0)
 {
   display_only = _display_only;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-
-  AddWidget(new PictureWidget(Point2i(46, W_UNDEF), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
   bt_map_plus = new Button(res, "menu/big_plus", false);
@@ -49,10 +47,6 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   random_map_preview = resource_manager.LoadImage(res, "menu/random_map");
 
   resource_manager.UnLoadXMLProfile(res);
-
-  Box * tmp_map_box = new VBox(_size.GetX()-63, false);
-  tmp_map_box->SetBorder( Point2i(0,0) );
-  tmp_map_box->SetMargin(0);
 
   // compute margin width between previews
   uint map_preview_height = _size.GetY() -2*10 -40;
@@ -67,14 +61,14 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 
   uint margin = 0;
 
-  if ( uint(tmp_map_box->GetSizeX() - 20) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX())) {
-    margin = (tmp_map_box->GetSizeX() - 20 -
+  if ( uint(size.x - 20) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX())) {
+    margin = (size.x - 20 -
               (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
   }
 
   if (margin < 5) {
     margin = 5;
-    uint total_size_wo_margin = tmp_map_box->GetSizeX() - 20 - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX();
+    uint total_size_wo_margin = size.x - 20 - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX();
     map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
     map_preview_height = 3/4 * map_preview_width;
   }
@@ -111,22 +105,16 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
     delete bt_map_plus;
   }
 
-  previews_box->Pack();
-
-  tmp_map_box->AddWidget(previews_box);
+  AddWidget(previews_box);
 
   // Map information
   map_name_label = new Label("Map", W_UNDEF, Font::FONT_SMALL,
 			     Font::FONT_BOLD, dark_gray_color, true, false);
-  tmp_map_box->AddWidget(map_name_label);
+  AddWidget(map_name_label);
 
   map_author_label = new Label("Author", W_UNDEF, Font::FONT_SMALL,
 			       Font::FONT_NORMAL, dark_gray_color, true, false);
-  tmp_map_box->AddWidget(map_author_label);
-
-  tmp_map_box->Pack();
-
-  AddWidget(tmp_map_box);
+  AddWidget(map_author_label);
 
   // Load Maps' list
   uint i = MapsList::GetInstance()->GetActiveMapIndex();
@@ -304,4 +292,10 @@ void MapSelectionBox::ChangeMapCallback()
 {
   int index = MapsList::GetInstance()->GetActiveMapIndex();
   ChangeMap(index);
+}
+
+void MapSelectionBox::Pack()
+{
+  VBox::Pack();
+  ChangeMapCallback();
 }
