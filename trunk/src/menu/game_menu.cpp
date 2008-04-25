@@ -85,7 +85,6 @@ GameMenu::GameMenu() :
 
   game_options = new GridBox(mainBoxWidth, option_size, true);
 
-  //game_options->AddWidget(new PictureWidget(Point2i(39, 128), "menu/mode_label"));
   game_options->AddWidget(new PictureWidget(option_size, "menu/mode_label"));
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
@@ -99,9 +98,6 @@ GameMenu::GameMenu() :
                                              100, 5,
                                              5, 200);
   game_options->AddWidget(opt_energy_ini);
-
-  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
-  game_options->AddWidget(opt_scroll_on_border);
 
   game_options->SetPosition(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP);
   game_options->Pack();
@@ -144,8 +140,7 @@ void GameMenu::SaveOptions()
   // teams
   team_box->ValidTeamsSelection();
 
-  //Save options in XML (including current selected teams)
-  Config::GetInstance()->SetScrollOnBorder(opt_scroll_on_border->GetValue());
+  //Save options in XML (including current selected teams, selected map)
   Config::GetInstance()->Save(true);
 
   GameMode * game_mode = GameMode::GetInstance();
