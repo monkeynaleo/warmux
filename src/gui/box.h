@@ -53,7 +53,7 @@ protected:
 
 public:
   VBox(uint width, bool _draw_border=true, bool force_widget_size = true);
-  void Pack();
+  virtual void Pack();
 };
 
 class HBox : public Box
@@ -63,7 +63,7 @@ protected:
 
 public:
   HBox(uint height, bool _draw_border=true, bool force_widget_size = true);
-  void Pack();
+  virtual void Pack();
 };
 
 class GridBox : public Box
@@ -79,7 +79,7 @@ private:
 
 public:
   GridBox(uint max_line_width, const Point2i& widget_size, bool _draw_border=true);
-  void Pack();
+  virtual void Pack();
 };
 #endif
 

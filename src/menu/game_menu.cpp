@@ -31,6 +31,7 @@
 #include "gui/picture_text_cbox.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button_picture.h"
+#include "gui/tabs.h"
 #include "include/app.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
@@ -59,8 +60,8 @@ GameMenu::GameMenu() :
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
-  uint mapBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)
-    - TEAMS_BOX_H - OPTIONS_BOX_H;
+  uint multitabsHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)
+    - TEAMS_BOX_H;
 
   // ################################################
   // ##  TEAM SELECTION
@@ -70,22 +71,20 @@ GameMenu::GameMenu() :
   team_box->Pack();
   widgets.AddWidget(team_box);
 
+  MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, multitabsHeight));
+
   // ################################################
   // ##  MAP SELECTION
   // ################################################
-  map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight));
-  map_box->SetPosition(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_TOP);
-  map_box->Pack();
-  widgets.AddWidget(map_box);
+  map_box = new MapSelectionBox(Point2i(mainBoxWidth-10, multitabsHeight - 50));
+  tabs->AddNewTab("TAB_Map", _("Map"), map_box);
 
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
   Point2i option_size(130, 130);
 
-  game_options = new GridBox(mainBoxWidth, option_size, true);
-
-  game_options->AddWidget(new PictureWidget(option_size, "menu/mode_label"));
+  game_options = new GridBox(mainBoxWidth, option_size, false);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
                                                 option_size,
@@ -98,11 +97,11 @@ GameMenu::GameMenu() :
                                              100, 5,
                                              5, 200);
   game_options->AddWidget(opt_energy_ini);
+  tabs->AddNewTab("TAB_Game", _("Game"), game_options);
 
-  game_options->SetPosition(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_TOP);
-  game_options->Pack();
+  tabs->SetPosition(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_TOP);
 
-  widgets.AddWidget(game_options);
+  widgets.AddWidget(tabs);
   widgets.Pack();
 
   // Values initialization
