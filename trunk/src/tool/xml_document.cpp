@@ -395,9 +395,12 @@ void XmlWriter::Reset()
 {
    if (m_doc)
      xmlFreeDoc(m_doc);
+   m_doc = NULL;
+
 #if 0
    if (m_root)
      xmlFreeNode(m_root);
+   m_root = NULL;
 #endif
 }
 
