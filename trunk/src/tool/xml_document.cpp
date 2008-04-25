@@ -31,6 +31,7 @@ void XmlReader::Reset()
 {
    if (doc)
      xmlFreeDoc(doc);
+   doc = NULL;
 }
 
 XmlReader::~XmlReader()
@@ -315,7 +316,7 @@ bool XmlReader::ReadStringAttr(xmlNode* x,
     MSG_DEBUG("xml", " Attribute '%s' not found", name.c_str());
     return false;
   }
-    
+
   char *value = (char*) xmlGetProp(attr->parent, attr->name);
   if (!value)
     Error("Unknown attribute " + name);
@@ -358,7 +359,7 @@ bool XmlReader::ReadBoolAttr(xmlNode* x,
                              bool &output)
 {
   std::string val;
-  
+
   if (!ReadStringAttr(x, name, val))
     return false;
   return str2bool(val, output);
