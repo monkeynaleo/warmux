@@ -7,8 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-02-18 02:28+1000\n"
-"Last-Translator: luojie <luojie-dune@operamail.com>\n"
+"POT-Creation-Date: 2008-04-25 20:07+0200\n"
+"PO-Revision-Date: 2008-04-25 13:48+1000\n"
+"Last-Translator: luojie-dune <luojie-dune@operamail.com>\n"
 "Language-Team: Chinese (China) <luojie-dune@operamail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +92,7 @@ msgstr[1] "%s 赢得 %u 点耐久!"
 #: src/game/game.cpp:671
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
-msgstr "%s 是个疯子, 他独自推掉了 %s 一个队!"
+msgstr "%s 是个疯子, 他干掉了 %s 的一个!"
 
 # what about female names?
 #: src/game/game.cpp:666
@@ -204,7 +205,7 @@ msgstr[1] "%s 队得到 %u 集束炸弹!"
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "%s 队得到 %u 建筑工具! 带好安全帽."
-msgstr[1] "%s 队得到 %u 喷枪! 带好安全帽."
+msgstr[1] "%s 队得到 %u 建筑工具! 带好安全帽."
 
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
@@ -212,7 +213,7 @@ msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
 "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "%s 队得到 %u 跃动手雷! 扭动身子丢出去!"
-msgstr[1] "%s 队得到 %u 舞动手雷! 扭动身子丢出去!"
+msgstr[1] "%s 队得到 %u 跃动手雷! 扭动身子丢出去!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
@@ -225,14 +226,14 @@ msgstr[1] "%s 队得到 %u 炸弹了!"
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
-msgstr[0] "%s 队得到 %u 炸弹了!"
+msgstr[0] "%s 队得到 %u 喷火器了!"
 msgstr[1] "%s 队得到 %u 喷火器了!"
 
 #: src/weapon/footbomb.cpp:176
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
-msgstr[0] "%s 队得到 %u 爆炸弹!"
+msgstr[0] "%s 队得到 %u 足球炸弹!"
 msgstr[1] "%s 队得到 %u 足球炸弹!"
 
 #: src/weapon/grapple.cpp:783
@@ -240,7 +241,7 @@ msgstr[1] "%s 队得到 %u 足球炸弹!"
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "%s队得到 %u 飞索了!"
-msgstr[1] "%s队有%u 飞索了!"
+msgstr[1] "%s队得到 %u 飞索了!"
 
 #: src/weapon/grenade.cpp:90
 #, c-format
@@ -267,8 +268,8 @@ msgstr[1] "%s 队得到 %u 喷射包了! 帅啊!"
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] "%s 队得到 %u 低重力了! I'm(我是) Neil Armstrong!"
-msgstr[1] "%s 队得到 %u 低重力了! I'm(我是) Neil Armstrong!"
+msgstr[0] "%s 队得到 %u 低重力了!"
+msgstr[1] "%s 队得到 %u 低重力了!"
 
 #: src/weapon/mine.cpp:247
 #, c-format
@@ -310,8 +311,8 @@ msgstr[1] "%s 队得到 %u 猎枪!"
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
 "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
-msgstr[0] "%s 队得到了%u狙击步枪! "
-msgstr[1] "%s 队得到了%u狙击步枪! 瞄眼睛！"
+msgstr[0] "%s 队得到了%u狙击步枪! 看准,两只眼中间！ "
+msgstr[1] "%s 队得到了%u狙击步枪! 看准,两只眼中间！"
 
 #: src/weapon/submachine_gun.cpp:144
 #, c-format
@@ -331,15 +332,15 @@ msgstr[1] "%s 队得到 %u 自杀冲击!"
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
-msgstr[0] "%s 队得到 %u syringe!"
-msgstr[1] "%s 队得到 %u syringes!"
+msgstr[0] "%s 队得到 %u 注射器!"
+msgstr[1] "%s 队得到 %u 注射器!"
 
 #: src/weapon/teleportation.cpp:120
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
-msgstr[0] "%s 队得到 %u teleportation!"
-msgstr[1] "%s 队得到 %u teleportations!"
+msgstr[0] "%s 队得到 %u 传送!"
+msgstr[1] "%s 队得到 %u 传送!"
 
 #: src/weapon/skip_turn.cpp:68
 #, c-format
@@ -366,7 +367,7 @@ msgstr "(系统语言)"
 
 #: src/network/chatlogger.cpp:37
 msgid "(unknown time)"
-msgstr ""
+msgstr "(未知时间)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:196
@@ -528,11 +529,11 @@ msgstr "炸药"
 
 #: src/game/game.cpp:228
 msgid "END OF GAME"
-msgstr "游戏末尾"
+msgstr "游戏结束"
 
 #: src/menu/options_menu.cpp:150
 msgid "Effects volume"
-msgstr ""
+msgstr "音效大小"
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -580,7 +581,7 @@ msgstr "错误: 无法开始服务器"
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
-msgstr ""
+msgstr "错误: 无法从互联网上获取服务器.请检查防火墙."
 
 #: src/team/team.cpp:116
 #, c-format
@@ -605,11 +606,11 @@ msgstr ""
 
 #: src/menu/network_connection_menu.cpp:76
 msgid "Game name:"
-msgstr ""
+msgstr "游戏名:"
 
 #: src/weapon/gnu.cpp:160
 msgid "Gnu Launcher"
-msgstr "Gnu-北美野牛-弹射装置"
+msgstr "Gnu-北美野牛发射器"
 
 #: src/menu/options_menu.cpp:115
 msgid "Graphic"
@@ -625,7 +626,7 @@ msgstr "手雷"
 
 #: src/map/ground.cpp:43
 msgid "Ground initialization..."
-msgstr "地面初始化..."
+msgstr "地面构建中..."
 
 #: src/weapon/gun.cpp:74
 msgid "Gun"
@@ -633,7 +634,7 @@ msgstr "枪"
 
 #: src/tool/file_tools.cpp:125
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr " 找不到 HOME directory (environment variable $HOME) !"
+msgstr " 找不到家目录 (environment variable $HOME) !"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:155
@@ -829,7 +830,7 @@ msgstr "最暴力的"
 
 #: src/menu/options_menu.cpp:140
 msgid "Music volume"
-msgstr ""
+msgstr "音乐音量:"
 
 #: src/menu/options_menu.cpp:136
 msgid "Music?"
@@ -845,9 +846,8 @@ msgstr "网络初始化"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:57
-#, fuzzy
 msgid "New network game at "
-msgstr "网络游戏"
+msgstr "网上游戏"
 
 #: src/weapon/weapon.cpp:657
 #, c-format
@@ -902,7 +902,7 @@ msgstr "请问尊姓大名?"
 
 #: src/weapon/polecat.cpp:165
 msgid "Polecat Launcher"
-msgstr "臭鼬排射器"
+msgstr "臭鼬发射器"
 
 #: src/menu/network_connection_menu.cpp:65
 #: src/menu/network_connection_menu.cpp:125
@@ -986,7 +986,7 @@ msgstr "狙击步枪"
 
 #: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
-msgstr ""
+msgstr "有人在箱子里布置了炸弹作礼物!"
 
 #: src/menu/network_connection_menu.cpp:202
 msgid "Sorry, currently, no game is waiting for players"
@@ -1072,7 +1072,7 @@ msgstr "disco榴弹离开舞池前发生爆炸"
 
 #: src/game/game.cpp:436
 msgid "The game was interrupted because you got disconnected."
-msgstr ""
+msgstr "您断线了."
 
 #: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
@@ -1092,9 +1092,8 @@ msgid "The server rejected the connection."
 msgstr "服务器拒绝"
 
 #: src/network/net_error_msg.cpp:51
-#, fuzzy
 msgid "The server rejected the connection: wrong password!"
-msgstr "服务器拒绝"
+msgstr "服务器拒绝: 密码错了."
 
 #: src/menu/network_menu.cpp:239
 #, c-format
