@@ -48,6 +48,7 @@ public:
   const std::string& GetId() const { return id; };
 };
 
+#define CIRCULAR_TABS   1
 
 MultiTabs::MultiTabs(const Point2i& size):
   Widget(size), current_tab(NULL)
@@ -91,7 +92,12 @@ void MultiTabs::SetCurrentTab(Tab* _tab)
 void MultiTabs::PrevTab()
 {
   if (current_tab == &(tabs.front()))
+  {
+#if CIRCULAR_TABS
+    SetCurrentTab(&tabs.back());
+#endif
     return;
+  }
 
   std::list<Tab>::reverse_iterator it;
   for (it = tabs.rbegin(); it != tabs.rend(); it++)
@@ -105,7 +111,12 @@ void MultiTabs::PrevTab()
 void MultiTabs::NextTab()
 {
   if (current_tab == &(tabs.back()))
+  {
+#if CIRCULAR_TABS
+    SetCurrentTab(&tabs.front());
+#endif
     return;
+  }
 
   std::list<Tab>::iterator it;
   for (it = tabs.begin(); it != tabs.end(); it++) {
@@ -128,10 +139,14 @@ void MultiTabs::AddNewTab(const std::string& id, const std::string& title, Box *
 void MultiTabs::DrawHeader(const Point2i &mousePosition) const
 {
   // Draw the buttons to change tab
+#if !CIRCULAR_TABS
   if (current_tab != &(tabs.front()))
+#endif
     prev_tab_bt->Draw(mousePosition);
 
+#if !CIRCULAR_TABS
   if (current_tab != &(tabs.back()))
+#endif
     next_tab_bt->Draw(mousePosition);
 
   // Draw the title of the current tab
