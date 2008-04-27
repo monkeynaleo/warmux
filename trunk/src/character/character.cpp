@@ -885,7 +885,12 @@ void Character::GetValueFromAction(Action *a)
 	      "        Previous energy: %d\n",
 	      GetName().c_str(), prev_energy);
       death_explosion = false;
-      m_alive = prev_live_state; // to avoid violating an ASSERT in Die()
+
+      // to avoid violating an ASSERT in Die()
+      m_alive = prev_live_state;
+      if (m_alive != ALIVE && m_alive != DROWNED)
+	m_alive = ALIVE;
+
       Die();
       break;
     case GHOST: {
