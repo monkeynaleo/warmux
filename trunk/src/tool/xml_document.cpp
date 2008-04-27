@@ -462,7 +462,6 @@ bool XmlWriter::Save()
   int result = xmlSaveFormatFileEnc(m_filename.c_str(), m_doc,
                                     m_encoding.empty() ? NULL : m_encoding.c_str(), true);
   return (result != -1);
-  return true;
 }
 
 std::string XmlWriter::SaveToString()
