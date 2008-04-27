@@ -43,8 +43,8 @@ ChatLogger::ChatLogger() :
     memcpy(&lt, plt, sizeof(struct tm));
 
     timestamp = Format ( "%4d-%02d-%02d-%02dH%02dm%02d" ,
-    lt.tm_year + TIME_BASE_YEAR, lt.tm_mon+1, lt.tm_mday+1,
-    lt.tm_hour, lt.tm_min, lt.tm_sec ) ;
+                         lt.tm_year + TIME_BASE_YEAR, lt.tm_mon+1, lt.tm_mday+1,
+                         lt.tm_hour, lt.tm_min, lt.tm_sec ) ;
 
 #ifndef DEBUG
     logfile = Format ( "%s.log" , timestamp.c_str() );
@@ -76,7 +76,24 @@ ChatLogger::~ChatLogger()
 
 void ChatLogger::LogMessage(const std::string &msg)
 {
-  m_logfilename << msg << std::endl << std::flush;
+  time_t t;
+  struct tm lt, *plt;
+  std::string timestamp;
+
+  if ( ((time_t) -1) == time(&t) )
+  {
+    timestamp = std::string (_("(unknown time)")) ;
+  }
+  else
+  {
+    // convert to local time
+    plt = localtime(&t);
+    memcpy(&lt, plt, sizeof(struct tm));
+
+    timestamp = Format( "(%02dH%02dm%02d) ", lt.tm_hour, lt.tm_min, lt.tm_sec );
+  }
+
+  m_logfilename << timestamp << msg << std::endl << std::flush;
 }
 
 void ChatLogger::LogMessageIfOpen(const std::string &msg)
