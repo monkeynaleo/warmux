@@ -53,6 +53,7 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
           pos += len-1;
         }
         free(temp);
+        ret = true;
       }
     }
     GlobalUnlock(h);
