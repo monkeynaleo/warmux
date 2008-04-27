@@ -230,7 +230,7 @@ Config::Config():
   personal_data_dir = personal_config_dir;
 #endif
 
-  chat_log_dir = personal_data_dir + std::string("logs");
+  chat_log_dir = personal_data_dir + "logs" PATH_SEPARATOR;
   MkdirChatLogDir();
 
   LoadDefaultValue();
