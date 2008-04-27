@@ -42,7 +42,7 @@ ChatLogger::ChatLogger() :
     plt = localtime(&t);
     memcpy(&lt, plt, sizeof(struct tm));
 
-    timestamp = Format ( "%4d-%2d-%2d-%2dH%2dm%2d" ,
+    timestamp = Format ( "%4d-%02d-%02d-%02dH%02dm%02d" ,
     lt.tm_year + TIME_BASE_YEAR, lt.tm_mon+1, lt.tm_mday+1,
     lt.tm_hour, lt.tm_min, lt.tm_sec ) ;
 
