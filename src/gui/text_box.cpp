@@ -47,6 +47,8 @@ void TextBox::BasicSetText(std::string const &new_txt)
   if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
     Label::SetText(_new_txt);
   }
+  else
+    cursor_pos = GetText().size();
 }
 
 void TextBox::SetText(std::string const &new_txt)
