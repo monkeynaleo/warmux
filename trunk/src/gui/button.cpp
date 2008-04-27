@@ -46,6 +46,11 @@ void Button::Draw(const Point2i &/*mousePosition*/) const
 
   uint frame = (IsHighlighted());
 
+  // Check that there are enough frames in the image...
+  if (image->GetFrameCount() <= frame) {
+    frame = 0;
+  }
+
   image->SetCurrentFrame(frame);
 
   if (img_scale) {
