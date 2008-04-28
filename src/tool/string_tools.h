@@ -38,4 +38,9 @@ std::string ulong2str (ulong x);
 std::string double2str (ulong x);
 std::string bool2str (bool x);
 
+#ifdef _WIN32
+// Allocated with new
+char* LocaleToUTF8(const char* orig);
+#endif
+
 #endif
