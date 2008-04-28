@@ -642,7 +642,7 @@ bool Character::CanStillMoveRL(uint pause)
 }
 
 // Signal the end of a fall
-void Character::SignalCollision()
+void Character::SignalCollision(const Point2d& speed_vector)
 {
   // Do not manage dead characters.
   if (IsDead()) return;
@@ -667,7 +667,6 @@ void Character::SignalCollision()
   body->SetRotation(0.0);
   back_jumping = false;
 
-  Point2d speed_vector = GetSpeedXY();
   double norm = speed_vector.Norm();
 
   MSG_DEBUG("character.collision", "%s collides with speed %f, %f (norm = %f)",

@@ -55,7 +55,7 @@ class Anvil : public WeaponProjectile
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
-    virtual void SignalGroundCollision();
+    virtual void SignalGroundCollision(const Point2d& /* speed_before */);
     virtual void SignalOutOfMap();
 };
 
@@ -81,7 +81,7 @@ void Anvil::SignalObjectCollision(PhysicalObj * obj)
   PlayCollisionSound();
 }
 
-void Anvil::SignalGroundCollision()
+void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
 {
   merge_time = Time::GetInstance()->Read() + 5000;
   PlayCollisionSound();

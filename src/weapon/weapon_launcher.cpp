@@ -60,10 +60,10 @@ WeaponBullet::WeaponBullet(const std::string &name,
 }
 
 // Signal that the bullet has hit the ground
-void WeaponBullet::SignalGroundCollision()
+void WeaponBullet::SignalGroundCollision(const Point2d& speed_before)
 {
   JukeBox::GetInstance()->Play("share", "weapon/ricoche1");
-  WeaponProjectile::SignalGroundCollision();
+  WeaponProjectile::SignalGroundCollision(speed_before);
   launcher->IncMissedShots();
 }
 
@@ -74,12 +74,12 @@ void WeaponBullet::SignalOutOfMap()
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
-void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
+void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before)
 {
   if (!obj->IsCharacter())
     Explosion();
   obj->SetEnergyDelta(-(int)cfg.damage);
-  obj->AddSpeed(2, GetSpeedAngle());
+  obj->AddSpeed(2, my_speed_before.ComputeAngle());
   Ghost();
 }
 
@@ -248,7 +248,7 @@ bool WeaponProjectile::IsImmobile() const
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
+void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* my_speed_before */)
 {
   ASSERT(obj != NULL);
   MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
@@ -258,7 +258,7 @@ void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 }
 
 // projectile explode when hiting the ground
-void WeaponProjectile::SignalGroundCollision()
+void WeaponProjectile::SignalGroundCollision(const Point2d& /*speed_before*/)
 {
   MSG_DEBUG("weapon.projectile", "SignalGroundCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   if (explode_with_collision)
@@ -266,10 +266,11 @@ void WeaponProjectile::SignalGroundCollision()
 }
 
 // Default behavior : signal to launcher a collision and explode
-void WeaponProjectile::SignalCollision()
+void WeaponProjectile::SignalCollision(const Point2d& speed_before)
 {
   MSG_DEBUG("weapon.projectile", "SignalCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
-  if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
+  if (launcher != NULL && !launcher->ignore_collision_signal)
+    launcher->SignalProjectileCollision(speed_before);
 }
 
 // Default behavior : signal to launcher projectile is drowning
