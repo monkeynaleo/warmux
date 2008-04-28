@@ -21,6 +21,7 @@
 
 #include "tool/string_tools.h"
 #include <sstream>
+#include <assert.h>
 
 bool str2long (const std::string &txt, long &valeur)
 {
@@ -95,3 +96,29 @@ std::string bol2str (bool x)
   return ss.str();
 }
 
+#ifdef _WIN32
+#  include <windows.h>
+
+char* LocaleToUTF8(const char* data)
+{
+  assert(data);
+  printf("Converting %s\n", data);
+
+  // Convert from OEM to UTF-16
+  int len = 2*MultiByteToWideChar(CP_OEMCP, 0, data, -1, NULL, 0);
+  assert(len > 0);
+  char* utf16 = new char[len+1];
+  int ret = MultiByteToWideChar(CP_OEMCP, 0, data, -1, (LPWSTR)utf16, len);
+  assert(ret > 0);
+
+  // Now convert from UTF-16 to UTF-8
+  len = WideCharToMultiByte(CP_UTF8, 0, (LPCWSTR)utf16, -1, NULL, 0, NULL, NULL);
+  assert(len > 0);
+  char* str = new char[len+1];
+  ret = WideCharToMultiByte(CP_UTF8, 0, (LPCWSTR)utf16, -1, str, len, NULL, NULL);
+  assert(ret > 0);
+
+  delete[] utf16;
+  return str;
+}
+#endif
