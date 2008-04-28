@@ -335,33 +335,93 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     lg -= 1.0 ;
   } while (0 < lg);
 
-  // Notify the weapon that there is a movement
-  // Useful for grapple for example
-  ActiveTeam().AccessWeapon().NotifyMove(!!m_last_collision_type);
+  Point2d speed_before_collision = GetSpeed();
+  Point2d speed_collided_obj;
+  if (collided_obj)
+    speed_collided_obj = collided_obj->GetSpeed();
 
   Collide(collided_obj, pos);
   collision_t collision = m_last_collision_type;
   m_last_collision_type = NO_COLLISION;
+
+  // ===================================
+  // it's time to signal object(s) about collision!
+  // WARNING: the following calls can send Action(s) over the network (cf bug #11232)
+  // Be sure to keep it isolated here
+  // ===================================
+  ActiveTeam().AccessWeapon().NotifyMove(!!collision);
+  switch (collision) {
+  case NO_COLLISION:
+    // Nothing more to do!
+    ASSERT(!collided_obj);
+    break;
+  case COLLISION_ON_GROUND:
+    SignalGroundCollision(speed_before_collision);
+    SignalCollision(speed_before_collision);
+    break;
+  case COLLISION_ON_OBJECT:
+    SignalObjectCollision(collided_obj, speed_before_collision);
+    collided_obj->SignalObjectCollision(this, speed_collided_obj);
+    SignalCollision(speed_before_collision);
+    collided_obj->SignalCollision(speed_before_collision);
+    break;
+  }
+  // ===================================
+
   return collision;
 }
 
 void PhysicalObj::Collide(PhysicalObj* collided_obj, const Point2d& position)
 {
+  Point2d contactPos;
+  double contactAngle;
+
   switch (m_last_collision_type) {
-  case NO_COLLISION: // Nothing more to do!
+  case NO_COLLISION:
+    // Nothing more to do!
     ASSERT(!collided_obj);
-    break;
+    return;
+
   case COLLISION_ON_GROUND:
     ASSERT(!collided_obj);
-    CollideOnGround(position);
+    ContactPointAngleOnGround(position, contactPos, contactAngle);
     break;
+
   case COLLISION_ON_OBJECT:
-    CollideOnObject(*collided_obj, position);
+    contactPos = position;
+    contactAngle = - GetSpeedAngle();
+
+    // Compute the new speed norm of this and collided_obj, new speed angle will be set
+    // thanks to Rebound()
+
+    // Get the current speed
+    double v1, v2, mass1, angle1, angle2, mass2;
+    collided_obj->GetSpeed(v1, angle1);
+    GetSpeed(v2, angle2);
+    mass1 = GetMass();
+    mass2 = collided_obj->GetMass();
+
+    // Give speed to the other object
+    // thanks to physic and calculations about chocs, we know that :
+    //
+    // v'1 =  ((m1 - m2) * v1 + 2m1 *v2) / (m1 + m2)
+    // v'2 =  ((m2 - m1) * v2 + 2m1 *v1) / (m1 + m2)
+    collided_obj->SetSpeed(((mass1 - mass2) * v1 + 2 * mass1 *v2 * m_cfg.m_rebound_factor) / (mass1 + mass2),
+			  angle1);
+    SetSpeed(((mass2 - mass1) * v2 + 2 * mass1 *v1 * m_cfg.m_rebound_factor) / (mass1 + mass2), angle2);
     break;
   }
+
+  // Make it rebound!!
+  MSG_DEBUG("physic.state", "m_name.c_str() rebounds at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
+
+  Rebound(contactPos, contactAngle);
+  CheckRebound();
 }
 
-void PhysicalObj::CollideOnGround(const Point2d& position)
+void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
+					    Point2d& contactPos,
+					    double& contactAngle) const
 {
   ASSERT(m_last_collision_type == COLLISION_ON_GROUND);
 
@@ -371,68 +431,20 @@ void PhysicalObj::CollideOnGround(const Point2d& position)
 //       // !!! uninitialised values of cx and cy!!
 //       if( ContactPoint(cx, cy) ){
     int cx, cy;
-    Point2d contactPos;
-    double ground_angle;
 
     if (ContactPoint(cx, cy)) {
-      ground_angle = world.ground.Tangent(cx, cy);
-      if(!isNaN(ground_angle)) {
+      contactAngle = world.ground.Tangent(cx, cy);
+      if(!isNaN(contactAngle)) {
         contactPos.x = (double)cx / PIXEL_PER_METER;
         contactPos.y = (double)cy / PIXEL_PER_METER;
       } else {
-        ground_angle = - GetSpeedAngle();
-        contactPos = position;
+        contactAngle = - GetSpeedAngle();
+        contactPos = oldPos;
       }
     } else {
-      ground_angle = - GetSpeedAngle();
-      contactPos = position;
+      contactAngle = - GetSpeedAngle();
+      contactPos = oldPos;
     }
-
-    SignalGroundCollision();
-    SignalCollision();
-    // Make it rebound on the ground !!
-    MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
-
-    if (m_last_collision_type == NO_COLLISION) // Collision has been stopped !?! (bug #11232)
-      return;
-
-    Rebound(contactPos, ground_angle);
-    CheckRebound();
-}
-
-void PhysicalObj::CollideOnObject(PhysicalObj& collided_obj, const Point2d& contactPos)
-{
-    ASSERT(m_last_collision_type == COLLISION_ON_OBJECT);
-
-    SignalObjectCollision(&collided_obj);
-    collided_obj.SignalObjectCollision(this);
-
-    // Get the current speed
-    double v1, v2, mass1, angle1, angle2, mass2;
-    collided_obj.GetSpeed(v1, angle1);
-    GetSpeed(v2, angle2);
-    mass1 = GetMass();
-    mass2 = collided_obj.GetMass();
-
-    // Give speed to the other object
-    // thanks to physic and calculations about chocs, we know that :
-    //
-    // v'1 =  ((m1 - m2) * v1 + 2m1 *v2) / (m1 + m2)
-    // v'2 =  ((m2 - m1) * v2 + 2m1 *v1) / (m1 + m2)
-    SignalCollision();
-
-    collided_obj.SetSpeed(((mass1 - mass2) * v1 + 2 * mass1 *v2 * m_cfg.m_rebound_factor) / (mass1 + mass2),
-			  angle1);
-    SetSpeed(((mass2 - mass1) * v2 + 2 * mass1 *v1 * m_cfg.m_rebound_factor) / (mass1 + mass2), angle2);
-
-    if (m_last_collision_type == NO_COLLISION) // Collision has been stopped !?! (bug #11232)
-      return;
-
-    // Rebound on the object
-    double contact_angle = - GetSpeedAngle();
-    MSG_DEBUG("physic.state", "Rebound on %s at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
-    Rebound(contactPos, contact_angle);
-    CheckRebound();
 }
 
 void PhysicalObj::StopCollision()

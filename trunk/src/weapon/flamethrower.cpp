@@ -58,7 +58,7 @@ class FlameThrowerBullet : public WeaponBullet
     void ShootSound();
     void RandomizeShoot(double &angle, double &strength);
     void DoExplosion();
-    void SignalGroundCollision();
+    void SignalGroundCollision(const Point2d& speed_before);
     void SignalDrowning();
 };
 
@@ -94,9 +94,9 @@ void FlameThrowerBullet::DoExplosion()
   particle.AddNow(pos, 2, particle_SMOKE, true, 0, 1);
 }
 
-void FlameThrowerBullet::SignalGroundCollision()
+void FlameThrowerBullet::SignalGroundCollision(const Point2d& speed_before)
 {
-  WeaponProjectile::SignalGroundCollision();
+  WeaponProjectile::SignalGroundCollision(speed_before);
   launcher->IncMissedShots();
 }
 

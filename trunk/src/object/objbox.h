@@ -41,6 +41,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     SoundSample hit;
 
     virtual void ApplyBox (Team &/*team*/, Character &/*character*/){}
+    void CloseParachute();
 
   public:
     ObjBox(const std::string &name);
@@ -62,10 +63,10 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     static int start_life_points;
     void Explode();
     // Signal Fall ending
-    void SignalCollision();
-    virtual void SignalObjectCollision(PhysicalObj *);
-    void SignalDrowning() { SignalCollision(); };
-    void SignalGhostState(bool was_already_dead);
+    virtual void SignalCollision(const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(PhysicalObj *, const Point2d& my_speed_before);
+    virtual void SignalDrowning();
+    virtual void SignalGhostState(bool was_already_dead);
 };
 
 //-----------------------------------------------------------------------------

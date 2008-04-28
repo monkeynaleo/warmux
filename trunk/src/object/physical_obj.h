@@ -211,9 +211,9 @@ public:
 
 protected:
   virtual void SignalRebound();
-  virtual void SignalObjectCollision(PhysicalObj *) { };
-  virtual void SignalGroundCollision() { };
-  virtual void SignalCollision() { };
+  virtual void SignalObjectCollision(PhysicalObj *, const Point2d& /* my_speed_before */) { };
+  virtual void SignalGroundCollision(const Point2d& /* my_speed_before */) { };
+  virtual void SignalCollision(const Point2d& /* my_speed_before */) { };
   virtual void SignalOutOfMap() { };
 
   void StopCollision();
@@ -230,8 +230,10 @@ private:
   void CheckRebound();
 
   void Collide(PhysicalObj* collided_obj, const Point2d& position);
-  void CollideOnGround(const Point2d& position);
-  void CollideOnObject(PhysicalObj& collided_obj, const Point2d& contactPos);
+
+  void ContactPointAngleOnGround(const Point2d& oldPos,
+				 Point2d& contactPos,
+				 double& contactAngle) const;
 };
 
 #endif

@@ -97,7 +97,7 @@ private:
 
   void SignalDrowning();
   void SignalGhostState(bool was_dead);
-  void SignalCollision();
+  void SignalCollision(const Point2d& speed_vector);
   void SetBody(Body* char_body);
 
   void AddFiringAngle(double angle) { SetFiringAngle(firing_angle + angle); };

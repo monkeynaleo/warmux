@@ -70,8 +70,7 @@ ObjBox::~ObjBox(){
   Game::GetInstance()->SetCurrentBox(NULL);
 }
 
-// Say hello to the ground
-void ObjBox::SignalCollision()
+void ObjBox::CloseParachute()
 {
   SetAirResistFactor(1.0);
   Game::GetInstance()->SetCurrentBox(NULL);
@@ -85,11 +84,20 @@ void ObjBox::SignalCollision()
   anim->Start();
 }
 
-void ObjBox::SignalObjectCollision(PhysicalObj * obj)
+void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
 {
-  SignalCollision();
-  if(obj->IsCharacter())
+  CloseParachute();
+}
+
+void ObjBox::SignalObjectCollision(PhysicalObj * obj, const Point2d& /*my_speed_before*/)
+{
+  //  SignalCollision(); // this is done by the physical engine...
+  if (obj->IsCharacter())
     ApplyBonus((Character *)obj);
+}
+void ObjBox::SignalDrowning()
+{
+  CloseParachute();
 }
 
 void ObjBox::DropBox()
