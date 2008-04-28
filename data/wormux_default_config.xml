@@ -17,8 +17,11 @@
 <section name="default_keyboard_layout">
 </section>
 
+<!-- This is how to setup per language font files -->
+<!--
 <section name="default_language_fonts">
   <language name="fa" file="terafik.ttf" relative="true" />
 </section>
-
+-->
+  
 </resources>
