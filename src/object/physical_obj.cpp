@@ -358,7 +358,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     SignalObjectCollision(collided_obj, speed_before_collision);
     collided_obj->SignalObjectCollision(this, speed_collided_obj);
     SignalCollision(speed_before_collision);
-    collided_obj->SignalCollision(speed_before_collision);
+    collided_obj->SignalCollision(speed_collided_obj);
     break;
   }
   // ===================================
