@@ -88,7 +88,7 @@ void ObjBox::SignalCollision()
 void ObjBox::SignalObjectCollision(PhysicalObj * obj)
 {
   SignalCollision();
-  if(typeid(*obj) == typeid(Character))
+  if(obj->IsCharacter())
     ApplyBonus((Character *)obj);
 }
 

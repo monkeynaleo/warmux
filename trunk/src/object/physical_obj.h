@@ -140,6 +140,7 @@ public:
   const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
   const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), m_width, m_height); };
   bool GoesThroughWall() const { return m_goes_through_wall; }
+  bool IsCharacter() const { return m_is_character; }
 
   //----------- Physics related function ----------
 

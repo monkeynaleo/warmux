@@ -76,7 +76,7 @@ void WeaponBullet::SignalOutOfMap()
 
 void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
 {
-  if (typeid(*obj) != typeid(Character))
+  if (!obj->IsCharacter())
     Explosion();
   obj->SetEnergyDelta(-(int)cfg.damage);
   obj->AddSpeed(2, GetSpeedAngle());
