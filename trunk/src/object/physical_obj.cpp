@@ -61,7 +61,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_characters(false),
   m_collides_with_objects(false),
   m_rebound_position(-1,-1),
-  m_last_collision_type(NO_COLLISION),
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
@@ -143,8 +142,6 @@ void PhysicalObj::SetSize(const Point2i &newSize){
 
 void PhysicalObj::StoreValue(Action *a)
 {
-  ASSERT(m_last_collision_type == NO_COLLISION);
-
   Physics::StoreValue(a);
   a->Push(m_goes_through_wall);
   a->Push(m_collides_with_characters);
@@ -257,7 +254,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   Point2d pos, offset;
   PhysicalObj* collided_obj = NULL;
 
-  m_last_collision_type = NO_COLLISION;
+  collision_t collision = NO_COLLISION;
 
   // Convert meters to pixels.
   oldPos *= PIXEL_PER_METER;
@@ -300,7 +297,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
         tmpPos.x = InRange_Long(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
         tmpPos.y = InRange_Long(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
         MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
-        m_last_collision_type = COLLISION_ON_GROUND;
+        collision = COLLISION_ON_GROUND;
         break;
       }
 
@@ -315,15 +312,15 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     collided_obj = CollidedObjectXY(tmpPos);
     if (collided_obj != NULL) {
       MSG_DEBUG( "physic.state", "%s collide on %s", m_name.c_str(), collided_obj->GetName().c_str() );
-      m_last_collision_type = COLLISION_ON_OBJECT;
+      collision = COLLISION_ON_OBJECT;
     } else if (!IsInVacuumXY(tmpPos, false)) {
-      m_last_collision_type = COLLISION_ON_GROUND;
+      collision = COLLISION_ON_GROUND;
     }
 
-    if (m_last_collision_type != NO_COLLISION) // Nothing more to do!
+    if (collision != NO_COLLISION) // Nothing more to do!
     {
       MSG_DEBUG( "physic.state", "%s - Collision at %d,%d : %s", m_name.c_str(), tmpPos.x, tmpPos.y,
-          m_last_collision_type == COLLISION_ON_GROUND ? "on ground" : "on an object");
+          collision == COLLISION_ON_GROUND ? "on ground" : "on an object");
 
       // Set the object position to the current position.
       SetXY(Point2d(pos.x - offset.x, pos.y - offset.y));
@@ -340,9 +337,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   if (collided_obj)
     speed_collided_obj = collided_obj->GetSpeed();
 
-  Collide(collided_obj, pos);
-  collision_t collision = m_last_collision_type;
-  m_last_collision_type = NO_COLLISION;
+  Collide(collision, collided_obj, pos);
 
   // ===================================
   // it's time to signal object(s) about collision!
@@ -371,12 +366,12 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   return collision;
 }
 
-void PhysicalObj::Collide(PhysicalObj* collided_obj, const Point2d& position)
+void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position)
 {
   Point2d contactPos;
   double contactAngle;
 
-  switch (m_last_collision_type) {
+  switch (collision) {
   case NO_COLLISION:
     // Nothing more to do!
     ASSERT(!collided_obj);
@@ -423,8 +418,6 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
 					    Point2d& contactPos,
 					    double& contactAngle) const
 {
-  ASSERT(m_last_collision_type == COLLISION_ON_GROUND);
-
       // Find the contact point and collision angle.
 //       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
 //       // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
@@ -445,12 +438,6 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
       contactAngle = - GetSpeedAngle();
       contactPos = oldPos;
     }
-}
-
-void PhysicalObj::StopCollision()
-{
-  MSG_DEBUG("physic.state", "Stopping collision of %s!", m_name.c_str());
-  m_last_collision_type = NO_COLLISION;
 }
 
 void PhysicalObj::UpdatePosition ()

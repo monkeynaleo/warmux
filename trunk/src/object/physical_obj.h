@@ -59,11 +59,6 @@ private:
   bool m_collides_with_objects;
   Point2i m_rebound_position;
 
-  // MUST equals to NO_COLLISION when outside of NotifyMove
-  // WARNING: physic information about an object must _NEVER_ been sent through
-  //          the network when it IS NOT EQUAL to NO_COLLISION (bug #10668)
-  collision_t m_last_collision_type;
-
 protected:
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
@@ -216,8 +211,6 @@ protected:
   virtual void SignalCollision(const Point2d& /* my_speed_before */) { };
   virtual void SignalOutOfMap() { };
 
-  void StopCollision();
-
 private:
   //Retrun the position of the point of contact of the obj on the ground
   bool ContactPoint (int &x, int &y) const;
@@ -229,7 +222,7 @@ private:
   // Directly after a rebound, if we are stuck in a wall, we stop moving
   void CheckRebound();
 
-  void Collide(PhysicalObj* collided_obj, const Point2d& position);
+  void Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position);
 
   void ContactPointAngleOnGround(const Point2d& oldPos,
 				 Point2d& contactPos,
