@@ -47,7 +47,6 @@ class GameMenu : public Menu
    Box * game_options;
    SpinButtonWithPicture *opt_duration_turn;
    SpinButtonWithPicture *opt_energy_ini;
-   CheckBox *opt_scroll_on_border;
 
    void SaveOptions();
    void OnClick(const Point2i &mousePosition, int button);

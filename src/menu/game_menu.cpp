@@ -112,7 +112,6 @@ GameMenu::GameMenu() :
   GameMode * game_mode = GameMode::GetInstance();
   opt_duration_turn->SetValue(game_mode->duration_turn);
   opt_energy_ini->SetValue(game_mode->character.init_energy);
-  opt_scroll_on_border->SetValue(Config::GetInstance()->GetScrollOnBorder());
 
   resource_manager.UnLoadXMLProfile(res);
 }
