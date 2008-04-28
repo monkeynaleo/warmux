@@ -30,6 +30,7 @@
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/i18n.h"
+#include "tool/string_tools.h"
 
 NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), true)
 {
@@ -258,7 +259,10 @@ void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team, bool remove_prev
 
   team.SetLocal();
 #ifdef WIN32
-  team.SetPlayerName(getenv("USERNAME"));
+  // The username might be in NLS !
+  char* name = LocaleToUTF8(getenv("USERNAME"));
+  team.SetPlayerName(name);
+  delete[] name;
 #else
   team.SetPlayerName(getenv("USER"));
 #endif
