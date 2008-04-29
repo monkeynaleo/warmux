@@ -76,7 +76,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllibd.lib png.lib xml2.lib glibmm-2.4d.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6d.lib sigc-2.0d.lib fribidid.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllibd.lib png.lib xml2.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib fribidid.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib;libcmt.lib"
@@ -176,7 +176,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllib.lib png.lib xml2.lib glibmm-2.4.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib xml++-2.6.lib sigc-2.0.lib fribidi.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllib.lib png.lib xml2.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib fribidi.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\$(ProjectName).exe"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="msvcrtd.lib;libcmt.lib"
