@@ -47,6 +47,7 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
   particle_range = explosion_range;
   blast_range = 0 ;
   blast_force = 0 ;
+  speed_on_hit = 0 ;
 }
 
 void ExplosiveWeaponConfig::LoadXml(xmlNode* elem)
@@ -58,6 +59,7 @@ void ExplosiveWeaponConfig::LoadXml(xmlNode* elem)
   XmlReader::ReadUint(elem, "particle_range", particle_range);
   XmlReader::ReadUint(elem, "blast_range", blast_range);
   XmlReader::ReadUint(elem, "blast_force", blast_force);
+  XmlReader::ReadUint(elem, "speed_on_hit", speed_on_hit);
 }
 
 //-----------------------------------------------------------------------------

@@ -79,7 +79,7 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_sp
   if (!obj->IsCharacter())
     Explosion();
   obj->SetEnergyDelta(-(int)cfg.damage);
-  obj->AddSpeed(2, my_speed_before.ComputeAngle());
+  obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
   Ghost();
 }
 

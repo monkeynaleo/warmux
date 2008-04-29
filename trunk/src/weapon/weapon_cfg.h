@@ -57,12 +57,11 @@ public:
   uint blast_force ;
   uint explosion_range;
   uint particle_range;
+  uint speed_on_hit;
 public:
   ExplosiveWeaponConfig();
   virtual ~ExplosiveWeaponConfig() {};
-   virtual void LoadXml(xmlNode* elem);
-
-
+  virtual void LoadXml(xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
