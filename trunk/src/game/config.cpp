@@ -182,7 +182,7 @@ Config::Config():
   std::string basepath = GetWormuxPath();
   data_dir     = basepath + "\\data\\";
   locale_dir   = basepath + "\\locale\\";
-  ttf_filename = basepath + "\\data\\font\\DejaVuSans.ttf";
+  ttf_filename = basepath + "\\" FONT_FILE;
 #  else
   data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
