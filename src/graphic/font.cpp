@@ -87,12 +87,13 @@ Font::Font(int size):
   const std::string filename = Config::GetInstance()->GetTtfFilename();
 
   if (DoesFileExist(filename))
-    {
-      m_font = TTF_OpenFont(filename.c_str(), size);
-
-      if (!m_font)
-       throw "Error: Font " + filename + " can't be found!\n";
-    }
+  {
+    m_font = TTF_OpenFont(filename.c_str(), size);
+    if (!m_font)
+      Error("Error in font file");
+  }
+  else
+    Error("Can't find font file");
 
   TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
 }
