@@ -555,6 +555,29 @@ void Network::Send(TCPsocket& socket, const std::string &str)
   SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
 }
 
+uint Network::Batch(void* buffer, const int& nbr)
+{
+  // this is not cute, but we don't want an int -> uint conversion here
+  Uint32 u_nbr = *((const Uint32*)&nbr);
+
+  SDLNet_Write32(u_nbr, buffer);
+
+  return 4;
+}
+
+uint Network::Batch(void* buffer, const std::string &str)
+{
+  uint size = str.size();
+  Batch(buffer, size);
+  memcpy(((char*)buffer)+4, str.c_str(), size);
+  return 4+size;
+}
+
+void Network::SendBatch(TCPsocket& socket, const void* data, size_t len)
+{
+  SDLNet_TCP_Send(socket, data, len);
+}
+
 int Network::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
 {
   char packet[4];
