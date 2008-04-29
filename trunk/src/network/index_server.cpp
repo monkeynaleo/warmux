@@ -20,6 +20,7 @@
  * Obtain information about running games from an index server
  *****************************************************************************/
 
+#include <assert.h>
 #include <SDL_net.h>
 #include "network/download.h"
 #include "game/config.h"
@@ -36,6 +37,7 @@ IndexServer::IndexServer():
   socket(),
   ip(),
   sock_set(),
+  used(0),
   server_lst(),
   first_server(server_lst.end()),
   current_server(server_lst.end()),
@@ -192,10 +194,27 @@ void IndexServer::Send(const int& nbr)
   Network::Send(socket, nbr);
 }
 
-void IndexServer::Send(const std::string &str)
+void IndexServer::NewBatch()
 {
-  Network::Send(socket, str);
+  assert(used == 0);
+}
 
+void IndexServer::Batch(const int& nbr)
+{
+  assert(used+4 < INDEX_SERVER_BUFFER_LENGTH);
+  used += Network::Batch(buffer+used, nbr);
+}
+
+void IndexServer::Batch(const std::string &str)
+{
+  assert(used+4+str.size() < INDEX_SERVER_BUFFER_LENGTH);
+  used += Network::Batch(buffer+used, str);
+}
+
+void IndexServer::SendBatch()
+{
+  Network::SendBatch(socket, buffer, used);
+  used = 0;
 }
 
 int IndexServer::ReceiveInt()
@@ -234,8 +253,10 @@ std::string IndexServer::ReceiveStr()
 
 bool IndexServer::HandShake()
 {
-  Send(TS_MSG_VERSION);
-  Send(Constants::WORMUX_VERSION);
+  NewBatch();
+  Batch(TS_MSG_VERSION);
+  Batch(Constants::WORMUX_VERSION);
+  SendBatch();
 
   int msg = ReceiveInt();
   if(msg == -1)
@@ -261,10 +282,12 @@ bool IndexServer::SendServerStatus(const std::string& game_name)
   if (hidden_server)
     return true;
 
-  Send(TS_MSG_GAMENAME);
-  Send(game_name);
-  Send(TS_MSG_HOSTING);
-  Send(Network::GetInstance()->GetPort());
+  NewBatch();
+  Batch(TS_MSG_GAMENAME);
+  Batch(game_name);
+  Batch(TS_MSG_HOSTING);
+  Batch(Network::GetInstance()->GetPort());
+  SendBatch();
 
   ack = ReceiveStr();
   if (ack == "OK")

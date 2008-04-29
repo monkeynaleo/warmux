@@ -40,6 +40,8 @@ class GameServerInfo
   std::string game_name;
 };
 
+#define INDEX_SERVER_BUFFER_LENGTH   1500
+
 class IndexServer : public Singleton<IndexServer>
 {
   /* If you need this, implement it (correctly)*/
@@ -51,6 +53,8 @@ class IndexServer : public Singleton<IndexServer>
   TCPsocket socket;
   IPaddress ip;
   SDLNet_SocketSet sock_set;
+  char    buffer[INDEX_SERVER_BUFFER_LENGTH];
+  uint    used;
 
   // Stores the hostname / port of all online servers
   std::map<std::string, int> server_lst;
@@ -65,8 +69,11 @@ class IndexServer : public Singleton<IndexServer>
   bool connected;
 
   // Transfer functions
-  void Send(const int &nbr);
-  void Send(const std::string &str);
+  void Send(const int& nbr);
+  void NewBatch();
+  void Batch(const int &nbr);
+  void Batch(const std::string &str);
+  void SendBatch();
   int ReceiveInt();
   std::string ReceiveStr();
 
