@@ -575,7 +575,7 @@ uint Network::Batch(void* buffer, const std::string &str)
 
 void Network::SendBatch(TCPsocket& socket, const void* data, size_t len)
 {
-  SDLNet_TCP_Send(socket, data, len);
+  SDLNet_TCP_Send(socket, (void*)data, len);
 }
 
 int Network::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
