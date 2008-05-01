@@ -29,6 +29,7 @@
 #include <string>
 #include <utility>
 #include "network/network.h"
+#include "network/index_svr_msg.h"
 #include "include/singleton.h"
 
 class GameServerInfo
@@ -69,11 +70,10 @@ class IndexServer : public Singleton<IndexServer>
   bool connected;
 
   // Transfer functions
-  void Send(const int& nbr);
-  void NewBatch();
+  void NewMsg(IndexServerMsg msg_id);
   void Batch(const int &nbr);
   void Batch(const std::string &str);
-  void SendBatch();
+  void SendMsg();
   int ReceiveInt();
   std::string ReceiveStr();
 

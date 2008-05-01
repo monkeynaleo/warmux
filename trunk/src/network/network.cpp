@@ -573,9 +573,12 @@ uint Network::Batch(void* buffer, const std::string &str)
   return 4+size;
 }
 
-void Network::SendBatch(TCPsocket& socket, const void* data, size_t len)
+// A batch consists in a msg id, a size, and the batch itself.
+// Size wasn't known yet, so write it now.
+void Network::SendBatch(TCPsocket& socket, void* data, size_t len)
 {
-  SDLNet_TCP_Send(socket, (void*)data, len);
+  SDLNet_Write32(len, (void*)( ((char*)data)+4 ) );
+  SDLNet_TCP_Send(socket, data, len);
 }
 
 int Network::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)

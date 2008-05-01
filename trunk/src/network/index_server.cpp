@@ -189,14 +189,12 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
 }
 
 /*************  Basic transmissions  ******************/
-void IndexServer::Send(const int& nbr)
-{
-  Network::Send(socket, nbr);
-}
-
-void IndexServer::NewBatch()
+void IndexServer::NewMsg(IndexServerMsg msg_id)
 {
   assert(used == 0);
+  Batch((int)msg_id);
+  // Reserve 4 bytes for the total message length.
+  used += 4;
 }
 
 void IndexServer::Batch(const int& nbr)
@@ -211,7 +209,7 @@ void IndexServer::Batch(const std::string &str)
   used += Network::Batch(buffer+used, str);
 }
 
-void IndexServer::SendBatch()
+void IndexServer::SendMsg()
 {
   Network::SendBatch(socket, buffer, used);
   used = 0;
@@ -253,10 +251,9 @@ std::string IndexServer::ReceiveStr()
 
 bool IndexServer::HandShake()
 {
-  NewBatch();
-  Batch(TS_MSG_VERSION);
+  NewMsg(TS_MSG_VERSION);
   Batch(Constants::WORMUX_VERSION);
-  SendBatch();
+  SendMsg();
 
   int msg = ReceiveInt();
   if(msg == -1)
@@ -282,12 +279,12 @@ bool IndexServer::SendServerStatus(const std::string& game_name)
   if (hidden_server)
     return true;
 
-  NewBatch();
-  Batch(TS_MSG_GAMENAME);
+  NewMsg(TS_MSG_GAMENAME);
   Batch(game_name);
-  Batch(TS_MSG_HOSTING);
+  SendMsg();
+  NewMsg(TS_MSG_HOSTING);
   Batch(Network::GetInstance()->GetPort());
-  SendBatch();
+  SendMsg();
 
   ack = ReceiveStr();
   if (ack == "OK")
@@ -299,7 +296,8 @@ bool IndexServer::SendServerStatus(const std::string& game_name)
 
 std::list<GameServerInfo> IndexServer::GetHostList()
 {
-  Send(TS_MSG_GET_LIST);
+  NewMsg(TS_MSG_GET_LIST);
+  SendMsg();
   int lst_size = ReceiveInt();
   std::list<GameServerInfo> lst;
   if(lst_size == -1)
@@ -358,7 +356,10 @@ void IndexServer::Refresh()
     return;
 
   if( msg_id == TS_MSG_PING )
-    Send(TS_MSG_PONG);
+  {
+    NewMsg(TS_MSG_PONG);
+    SendMsg();
+  }
   else
     Disconnect();
 }
