@@ -61,12 +61,16 @@ void BonusBox::PickRandomWeapon()
   int nb_try = 0;
   do {
     double num = Random::GetDouble(0, total_probability);
-    double tmp = 0;
+    double total_bf_weapon, total_after_weapon = 0;
 
     for (uint i=0; i < weapon_list.size(); i++) {
-      if (tmp < num && num <= tmp + weapon_list[i].probability) {
+      total_after_weapon = total_bf_weapon + weapon_list[i].probability;
+
+      if (total_bf_weapon < num && num <= total_after_weapon) {
+	weapon_num = i;
 	break;
       }
+      total_bf_weapon = total_after_weapon;
     }
     w_type = weapon_list[weapon_num].weapon->GetType();
     nb_try++;
