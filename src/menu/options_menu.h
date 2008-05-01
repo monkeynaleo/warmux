@@ -50,6 +50,7 @@ private:
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
    CheckBox *opt_scroll_on_border;
+   SpinButtonWithPicture * opt_scroll_border_size;
    CheckBox *full_screen;
    SpinButtonWithPicture *opt_max_fps;
 

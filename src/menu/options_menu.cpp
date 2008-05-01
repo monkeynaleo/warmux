@@ -81,6 +81,11 @@ OptionMenu::OptionMenu() :
   opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
   graphic_options->AddWidget(opt_scroll_on_border);
 
+  opt_scroll_border_size = new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
+						     option_size,
+						     50, 2, 2, 80);
+  graphic_options->AddWidget(opt_scroll_border_size);
+
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
 
@@ -88,9 +93,7 @@ OptionMenu::OptionMenu() :
 					  option_size,
 					  50, 5,
 					  20, 50);
-
   graphic_options->AddWidget(opt_max_fps);
-
 
   // Get available video resolution
   const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
@@ -180,6 +183,7 @@ OptionMenu::OptionMenu() :
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
   opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
+  opt_scroll_border_size->SetValue(config->GetScrollBorderSize());
   full_screen->SetValue(app->video->IsFullScreen());
   music_cbox->SetValue(config->GetSoundMusic());
   effects_cbox->SetValue(config->GetSoundEffects());
@@ -260,6 +264,7 @@ void OptionMenu::SaveOptions()
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
+  config->SetScrollBorderSize(opt_scroll_border_size->GetValue());
 
   // Misc options
   config->SetCheckUpdates(opt_updates->GetValue());

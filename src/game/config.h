@@ -82,6 +82,9 @@ public:
   bool GetScrollOnBorder() const { return scroll_on_border; };
   void SetScrollOnBorder(const bool sob) { scroll_on_border = sob; };
 
+  uint GetScrollBorderSize() const { return scroll_border_size; };
+  void SetScrollBorderSize(const uint size) { scroll_border_size = size; };
+
   bool IsVideoFullScreen() const { return video_fullscreen; };
   void SetVideoFullScreen(const bool set_fullscreen) { video_fullscreen = set_fullscreen; };
 
@@ -160,7 +163,6 @@ protected:
   bool display_name_character;
   bool display_wind_particles;
   bool default_mouse_cursor;
-  bool scroll_on_border;
   bool disable_joystick;
   bool disable_mouse;
 
@@ -171,10 +173,12 @@ protected:
   uint max_fps;
   bool bling_bling_interface;
   std::list<Point2i> resolution_available;
+  bool scroll_on_border;
+  uint scroll_border_size;
 
   // Sound settings
-  bool sound_music; 	 
-  bool sound_effects; 	 
+  bool sound_music;
+  bool sound_effects;
   uint sound_frequency;
   uint volume_music;
   uint volume_effects;

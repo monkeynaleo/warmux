@@ -215,20 +215,17 @@ void Camera::RestoreMouseCursor()
 
 void Camera::ScrollCamera()
 {
-  static const unsigned int SENSIT_SCROLL_MOUSE = 50;
   Point2i mousePos = Mouse::GetInstance()->GetPosition();
 
-  Point2i tstVector;
-  // If application is fullscreen, mouse is only sensitive when touching the
-  // border screen
-  int coef = (AppWormux::GetInstance()->video->IsFullScreen() ? 10 : 1);
-  Point2i sensitZone(SENSIT_SCROLL_MOUSE / coef, SENSIT_SCROLL_MOUSE / coef);
+  uint zone_size = Config::GetInstance()->GetScrollBorderSize();
+  Point2i sensitZone(zone_size, zone_size);
 
   /* tstVector represents the vector of how deep the cursor is in a sensit
    * zone; negative value means that the camera has to reduce its coordinates,
    * a positive value means that it should increase. Actually reduce means
    * LEFT/UP (for x/y) and increase RIGHT/DOWN directions.
    * The bigger tstVector is, the faster the camera will scroll. */
+  Point2i tstVector;
   tstVector = GetSize().inf(mousePos + sensitZone) * (mousePos + sensitZone - GetSize()) ;
   tstVector -= mousePos.inf(sensitZone) * (sensitZone - mousePos);
 
@@ -367,9 +364,9 @@ Point2i Camera::ComputeShake() const
 
     float x_ampl = ( float )Random::GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
     float y_ampl = ( float )Random::GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
-    m_shake.x = ( int )( x_ampl * func_val//( float )m_shake_amplitude.x * func_val 
+    m_shake.x = ( int )( x_ampl * func_val//( float )m_shake_amplitude.x * func_val
         + ( float )m_shake_centerpoint.x );
-    m_shake.y = ( int )( y_ampl * func_val//( float )m_shake_amplitude.y * func_val 
+    m_shake.y = ( int )( y_ampl * func_val//( float )m_shake_amplitude.y * func_val
         + ( float )m_shake_centerpoint.y );
 
     static uint t_last_time_logged = 0;
