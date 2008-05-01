@@ -32,12 +32,13 @@
 #include "debug.h"
 
 NetData::NetData()
+  : str(NULL)
+  , str_size(0)
+  , msg_size(0)
+  , ping_sent(false)
+  , msg_id(TS_NO_MSG)
+  , connected(false)
 {
-  str_size = 0;
-  received = 0;
-  connected = false;
-  ping_sent = false;
-  msg_id = TS_NO_MSG;
   UpdatePing();
 }
 
@@ -245,7 +246,28 @@ bool NetData::Receive()
           return false;
         }
       msg_id = (IndexServerMsg)id;
+
+      int lsize;
+      if( !ReceiveInt(lsize) )
+        {
+          DPRINT(TRAFFIC, "Didn't received msg size!");
+          return false;
+        }
+
+      // Message is at least id+length
+      if (lsize<8 || lsize > 65535)
+        {
+          DPRINT(TRAFFIC, "Incorrect msg size of %i!", lsize);
+          return false;
+        }
+
+      msg_size = lsize;
+      DPRINT(TRAFFIC, "Message of id %i and size %u\n", id, msg_size);
     }
+
+  // Check that enough data has been received
+  if (received < msg_size-8)
+    return false;
 
   switch(msg_id) {
   case TS_MSG_PING:
