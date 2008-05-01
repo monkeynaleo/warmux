@@ -36,10 +36,10 @@ private:
   std::string title;
 
 public:
-  Box* box;
+  Widget* box;
 
 public:
-  Tab(const std::string& _id, const std::string& _title, Box* _box) :
+  Tab(const std::string& _id, const std::string& _title, Widget* _box) :
     id(_id), title(_title), box(_box) {};
 
   ~Tab() {};
@@ -127,11 +127,11 @@ void MultiTabs::NextTab()
   SetCurrentTab( &(*it));
 }
 
-void MultiTabs::AddNewTab(const std::string& id, const std::string& title, Box * box)
+void MultiTabs::AddNewTab(const std::string& id, const std::string& title, Widget * w)
 {
-  Tab tab(id, title, box);
+  Tab tab(id, title, w);
   tabs.push_back(tab);
-  box->SetContainer(this);
+  w->SetContainer(this);
 
   SetCurrentTab(&(tabs.front()));
 }
@@ -139,11 +139,13 @@ void MultiTabs::AddNewTab(const std::string& id, const std::string& title, Box *
 void MultiTabs::DrawHeader(const Point2i &mousePosition) const
 {
   // Draw the buttons to change tab
+  if (tabs.size() != 1)
 #if !CIRCULAR_TABS
   if (current_tab != &(tabs.front()))
 #endif
     prev_tab_bt->Draw(mousePosition);
 
+  if (tabs.size() != 1)
 #if !CIRCULAR_TABS
   if (current_tab != &(tabs.back()))
 #endif
@@ -196,9 +198,9 @@ void MultiTabs::Pack()
 
   // Update tabs position
   Point2i tab_pos(position.x + margin,
-		  position.y + prev_tab_bt->GetSizeY() + margin);
+		  position.y + GetHeaderHeight());
   Point2i tab_size(size.x - 2*margin,
-		   size.y - prev_tab_bt->GetSizeY() - margin);
+		   size.y - GetHeaderHeight() - margin);
 
   std::list<Tab>::iterator it;
   for (it = tabs.begin(); it != tabs.end(); it++)
@@ -235,26 +237,29 @@ Widget* MultiTabs::Click(const Point2i &mousePosition, uint button)
 
 Widget* MultiTabs::ClickUp(const Point2i &mousePosition, uint button)
 {
+  if (tabs.size() != 1) {
+
     Rectanglei rect_header(position.x,
 			   position.y,
 			   size.x,
 			   prev_tab_bt->GetSizeY());
 
-  if (button == SDL_BUTTON_LEFT && prev_tab_bt->Contains(mousePosition)) {
-    PrevTab();
-    return this;
+    if (button == SDL_BUTTON_LEFT && prev_tab_bt->Contains(mousePosition)) {
+      PrevTab();
+      return this;
 
-  } else if (button == SDL_BUTTON_LEFT && next_tab_bt->Contains(mousePosition)) {
-    NextTab();
-    return this;
+    } else if (button == SDL_BUTTON_LEFT && next_tab_bt->Contains(mousePosition)) {
+      NextTab();
+      return this;
 
-  } else if (button == SDL_BUTTON_WHEELDOWN && rect_header.Contains(mousePosition)) {
-    PrevTab();
-    return this;
+    } else if (button == SDL_BUTTON_WHEELDOWN && rect_header.Contains(mousePosition)) {
+      PrevTab();
+      return this;
 
-  } else if (button == SDL_BUTTON_WHEELUP && rect_header.Contains(mousePosition)) {
-    NextTab();
-    return this;
+    } else if (button == SDL_BUTTON_WHEELUP && rect_header.Contains(mousePosition)) {
+      NextTab();
+      return this;
+    }
   }
 
   if (current_tab)
@@ -267,4 +272,12 @@ const std::string& MultiTabs::GetCurrentTabId() const
 {
   ASSERT(current_tab);
   return current_tab->GetId();
+}
+
+uint MultiTabs::GetHeaderHeight() const
+{
+  uint header_h = std::max(current_tab_title->GetHeight(),
+			   prev_tab_bt->GetSizeY());
+  header_h += 5;
+  return header_h;
 }
