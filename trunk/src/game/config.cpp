@@ -108,7 +108,6 @@ Config::Config():
   display_name_character(true),
   display_wind_particles(true),
   default_mouse_cursor(false),
-  scroll_on_border(true),
   disable_joystick(true),
   disable_mouse(false),
   video_width(800),
@@ -116,6 +115,8 @@ Config::Config():
   video_fullscreen(false),
   max_fps(0),
   bling_bling_interface(false),
+  scroll_on_border(true),
+  scroll_border_size(50),
   sound_music(true),
   sound_effects(true),
   sound_frequency(44100),
@@ -428,6 +429,7 @@ void Config::LoadXml(xmlNode *xml)
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);
     XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
     XmlReader::ReadBool(elem, "scroll_on_border", scroll_on_border);
+    XmlReader::ReadUint(elem, "scroll_border_size", scroll_border_size);
     XmlReader::ReadBool(elem, "disable_mouse", disable_mouse);
     XmlReader::ReadBool(elem, "disable_joystick", disable_joystick);
     XmlReader::ReadUint(elem, "width", video_width);
@@ -546,6 +548,7 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(video_node, "bling_bling_interface", ulong2str(bling_bling_interface));
   doc.WriteElement(video_node, "default_mouse_cursor", ulong2str(default_mouse_cursor));
   doc.WriteElement(video_node, "scroll_on_border", ulong2str(scroll_on_border));
+  doc.WriteElement(video_node, "scroll_border_size", ulong2str(scroll_border_size));
   doc.WriteElement(video_node, "disable_mouse", ulong2str(disable_mouse));
   doc.WriteElement(video_node, "disable_joystick", ulong2str(disable_joystick));
   doc.WriteElement(video_node, "width", ulong2str(video->window.GetWidth()));
