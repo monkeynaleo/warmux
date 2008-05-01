@@ -47,12 +47,14 @@ private:
 
   TextBox* srv_port_number;
   TextBox* srv_game_name;
+  TextBox* srv_game_pwd;
   CheckBox* srv_internet_server;
 
   Button* cl_refresh_net_games;
   ListBox* cl_net_games_lst;
   TextBox* cl_server_address;
   TextBox* cl_port_number;
+  TextBox* cl_server_pwd;
 
   MsgBox *msg_box;
 
@@ -68,6 +70,7 @@ private:
   void RefreshList();
   bool HostingServer(const std::string& port,
 		     const std::string& game_name,
+                     const std::string& passwd,
 		     bool internet);
   bool ConnectToClient(const std::string& srv_address,
 		       const std::string& port,

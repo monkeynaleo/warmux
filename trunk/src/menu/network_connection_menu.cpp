@@ -80,6 +80,19 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   srv_connection_box->AddWidget(srv_tmp_box);
 
+  // Server password
+  srv_tmp_box = new HBox(W_UNDEF, false, false);
+  srv_tmp_box->SetMargin(0);
+  srv_tmp_box->SetBorder(Point2i(0,0));
+
+  srv_tmp_box->AddWidget(new Label(_("Password:"), def_size.x/2));
+  srv_game_pwd = new TextBox("", def_size.x/2);
+  srv_game_pwd->SetMaxNbChars(15);
+  srv_tmp_box->AddWidget(srv_game_pwd);
+
+  srv_connection_box->AddWidget(srv_tmp_box);
+
+
   // Available on internet ?
   srv_internet_server = new CheckBox(_("Server available on Internet"), def_size.x, true);
   srv_connection_box->AddWidget(srv_internet_server);
@@ -128,6 +141,16 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   cl_connection_box->AddWidget(cl_tmp_box);
 
+  // Server password
+  cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box->SetMargin(0);
+  cl_tmp_box->SetBorder(Point2i(0,0));
+
+  cl_tmp_box->AddWidget(new Label(_("Password:"), def_size.x/2));
+  cl_server_pwd = new TextBox("", def_size.x/2);
+  cl_tmp_box->AddWidget(cl_server_pwd);
+
+  cl_connection_box->AddWidget(cl_tmp_box);
   tabs->AddNewTab("TAB_client", _("Connect to game"), cl_connection_box);
 
   widgets.AddWidget(tabs);
@@ -232,6 +255,7 @@ void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
 
 bool NetworkConnectionMenu::HostingServer(const std::string& port,
 					  const std::string& game_name,
+                                          const std::string& password,
 					  bool internet)
 {
   bool r = false;
@@ -247,7 +271,7 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
       goto out;
     }
 
-  conn = Network::GetInstance()->ServerStart(port, "");
+  conn = Network::GetInstance()->ServerStart(port, password);
   if( conn != CONNECTED)
     {
       DisplayNetError(conn);
@@ -304,7 +328,10 @@ bool NetworkConnectionMenu::signal_ok()
   if (id == "TAB_server") {
     // Hosting your own server
     bool ret;
-    ret = HostingServer(srv_port_number->GetText(), srv_game_name->GetText(), srv_internet_server->GetValue());
+    ret = HostingServer(srv_port_number->GetText(),
+                        srv_game_name->GetText(),
+                        srv_game_pwd->GetText(),
+                        srv_internet_server->GetValue());
     if (!ret)
       goto out;
   } else if (id == "TAB_client") {
@@ -312,7 +339,9 @@ bool NetworkConnectionMenu::signal_ok()
     if (!cl_server_address->GetText().empty())
       { // Direct connexion to a server
 	bool ret;
-	ret = ConnectToClient(cl_server_address->GetText(), cl_port_number->GetText(), "");
+	ret = ConnectToClient(cl_server_address->GetText(),
+                              cl_port_number->GetText(),
+                              cl_server_pwd->GetText());
 	if (!ret)
 	  goto out;
 
