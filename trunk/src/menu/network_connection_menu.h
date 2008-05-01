@@ -30,6 +30,7 @@
 // Forward declarations
 class Button;
 class TextBox;
+class PasswordBox;
 class MsgBox;
 class CheckBox;
 class MultiTabs;
@@ -47,14 +48,14 @@ private:
 
   TextBox* srv_port_number;
   TextBox* srv_game_name;
-  TextBox* srv_game_pwd;
+  PasswordBox* srv_game_pwd;
   CheckBox* srv_internet_server;
 
   Button* cl_refresh_net_games;
   ListBox* cl_net_games_lst;
   TextBox* cl_server_address;
   TextBox* cl_port_number;
-  TextBox* cl_server_pwd;
+  PasswordBox* cl_server_pwd;
 
   MsgBox *msg_box;
 
