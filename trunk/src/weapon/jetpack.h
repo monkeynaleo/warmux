@@ -38,8 +38,8 @@ class JetPack : public Weapon
   public:
     JetPack();
     void Reset();
-    void SignalTurnEnd() { p_Deselect(); };
-    void ActionStopUse() { p_Deselect(); };
+    virtual void SignalTurnEnd() { p_Deselect(); };
+    virtual void ActionStopUse();
 
     virtual void HandleKeyPressed_Up(bool shift);
     virtual void HandleKeyReleased_Up(bool shift);
@@ -58,6 +58,7 @@ class JetPack : public Weapon
     void p_Deselect();
     bool p_Shoot();
 
+  private:
     void GoUp();
     void GoLeft();
     void GoRight();

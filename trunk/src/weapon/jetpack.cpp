@@ -121,6 +121,12 @@ void JetPack::p_Deselect()
   ActiveCharacter().SetMovement("breathe");
 }
 
+void JetPack::ActionStopUse()
+{
+  p_Deselect();
+  ActiveTeam().AccessNbUnits() = 0;
+}
+
 void JetPack::StartUse()
 {
   ActiveCharacter().SetMovement("jetpack-fire");
