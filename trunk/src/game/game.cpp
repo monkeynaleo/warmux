@@ -495,10 +495,14 @@ bool Game::NewBox()
     MSG_DEBUG("box", "There is less than 2 teams in the game");
     return false;
   }
-  // .7 is a magic number to get the probability of boxes falling once every round close to .333
-  double randValue = Random::GetDouble();
-  if(randValue > (1 - pow(.5, 1.0 / nbr_teams))) {
-    return false;
+
+  // if started with "-d box", get one box per turn
+  if (!IsLOGGING("box")) {
+    // .7 is a magic number to get the probability of boxes falling once every round close to .333
+    double randValue = Random::GetDouble();
+    if(randValue > (1 - pow(.5, 1.0 / nbr_teams))) {
+      return false;
+    }
   }
 
   // Type of box : 1 = MedKit, 2 = Bonus Box.
