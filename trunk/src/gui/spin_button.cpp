@@ -76,6 +76,7 @@ void SpinButton::Pack()
   m_minus->SetPosition(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
 
   txt_label->SetMaxWidth(size.x - 30);
+  size.y = txt_label->GetHeight();
 }
 
 void SpinButton::Draw(const Point2i &mousePosition) const
