@@ -50,7 +50,7 @@ class CheckBox : public Widget
   virtual void Draw(const Point2i &mousePosition) const;
   virtual Widget* Click(const Point2i&, uint) { return this; };
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
-  virtual void Pack() {};
+  virtual void Pack();
 
   bool GetValue() const { return m_value; };
   void SetValue(bool value) { m_value = value; };

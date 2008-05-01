@@ -62,6 +62,13 @@ CheckBox::~CheckBox()
   delete txt_label;
 }
 
+void CheckBox::Pack()
+{
+  txt_label->SetMaxWidth(size.x - m_checked_image->GetWidth() -2);
+  size.y = std::max(uint(txt_label->GetHeight()),
+		    m_checked_image->GetHeight());
+}
+
 void CheckBox::Draw(const Point2i &/*mousePosition*/) const
 {
   Surface& surf = AppWormux::GetInstance()->video->window;
