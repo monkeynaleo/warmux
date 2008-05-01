@@ -556,6 +556,10 @@ void PhysicalObj::Drown()
   if (EqualsZero(GetGravityFactor()))
     SetGravityFactor(0.1);
 
+  // make a splash in the water :-)
+  if (GetMass() >= 2)
+    world.water.Splash(GetPosition());
+
   StopMoving();
   StartMoving();
   SignalDrowning();

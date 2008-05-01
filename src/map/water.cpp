@@ -27,6 +27,7 @@
 #include "map/maps_list.h"
 #include "game/time.h"
 #include "interface/interface.h"
+#include "particles/particle.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
@@ -257,4 +258,18 @@ int Water::GetHeight(int x) const
            - (water_height + height_mvt);
   else
     return world.GetHeight();
+}
+
+void Water::Splash(const Point2i& pos) const
+{
+  switch (water_type) {
+  case WATER:
+    ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_WATER, true, -1, 20);
+    break;
+  case LAVA:
+    ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_LAVA, true, -1, 20);
+    break;
+  default:
+    break;
+  }
 }

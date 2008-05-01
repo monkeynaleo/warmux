@@ -44,6 +44,7 @@
 #include "particles/polecat_fart.h"
 #include "particles/smoke.h"
 #include "particles/star.h"
+#include "particles/water_drop.h"
 
 Particle::Particle(const std::string &name) :
   PhysicalObj(name),
@@ -159,6 +160,8 @@ void ParticleEngine::Load()
   particle_sprite[BULLET_spr] = resource_manager.LoadSprite(res,"bullet_particle");
   particle_sprite[BULLET_spr]->EnableRotationCache(6);
   particle_sprite[POLECAT_FART_spr] = resource_manager.LoadSprite(res,"polecat_fart");
+  particle_sprite[WATER_spr] = resource_manager.LoadSprite(res,"water_drop");
+  particle_sprite[LAVA_spr] = resource_manager.LoadSprite(res,"lava_drop");
   resource_manager.UnLoadXMLProfile(res);
 
   sprites_loaded = true;
@@ -215,6 +218,10 @@ void ParticleEngine::AddNow(const Point2i &position,
       // impact size from here ...
       break;
     case particle_MAGIC_STAR : particle = new MagicStarParticle();
+      break;
+    case particle_WATER : particle = new WaterParticle();
+      break;
+    case particle_LAVA: particle = new LavaParticle();
       break;
     default : particle = NULL;
       ASSERT(0);
