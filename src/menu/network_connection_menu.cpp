@@ -230,7 +230,8 @@ void NetworkConnectionMenu::RefreshList()
   for (std::list<GameServerInfo>::iterator game_server_info_it = lst.begin();
        game_server_info_it != lst.end();
        ++game_server_info_it) {
-    std::string display_str = game_server_info_it->ip_address + ":";
+    std::string display_str = (game_server_info_it->passworded) ? "! " : "  ";
+    display_str += game_server_info_it->ip_address + ":";
     display_str += game_server_info_it->port + " - ";
     display_str += game_server_info_it->dns_address + " - ";
     display_str += game_server_info_it->game_name;
@@ -278,7 +279,7 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
       goto out;
     }
 
-  r = IndexServer::GetInstance()->SendServerStatus(game_name);
+  r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "");
   if (false == r) {
     DisplayNetError(CONN_BAD_PORT);
     msg_box->NewMessage(_("Error: Your server is not reachable from the internet. Check your firewall configuration")
