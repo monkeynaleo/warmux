@@ -23,15 +23,11 @@
 #define NETWORK_TEAMS_SELECTION_BOX_H
 
 #include <vector>
-#include "gui/box.h"
+#include "menu/teams_selection_box.h"
 
-class TeamBox;
-class SpinButtonWithPicture;
 class Team;
 
-const uint NMAX_NB_TEAMS=4;
-
-class NetworkTeamsSelectionBox : public HBox
+class NetworkTeamsSelectionBox : public TeamsSelectionBox
 {
  private:
   /* If you need this, implement it (correctly) */
@@ -39,21 +35,20 @@ class NetworkTeamsSelectionBox : public HBox
   NetworkTeamsSelectionBox operator=(const NetworkTeamsSelectionBox&);
   /**********************************************/
 
-  SpinButtonWithPicture *local_teams_nb;
-  std::vector<TeamBox*> teams_selections;
   void SetNbLocalTeams(uint nb_teams, uint previous_nb);
   void AddLocalTeam(uint i);
   void RemoveLocalTeam(uint i);
   void SetLocalTeam(uint i, Team& team, bool remove_previous_team);
+
   void PrevTeam(uint i);
   void NextTeam(uint i, bool check_null_prev_team = true);
 
  public:
   NetworkTeamsSelectionBox(const Point2i &size);
 
-  void ValidTeamsSelection();
-  Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
+  virtual void ValidTeamsSelection();
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void AddTeamCallback(const std::string& team_id);
   void UpdateTeamCallback(const std::string& team_id);

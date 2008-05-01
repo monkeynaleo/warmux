@@ -31,21 +31,33 @@
 #include "team/team.h"
 #include "tool/i18n.h"
 
-TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), true)
+TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network) :
+  HBox(_size.y, network)
 {
-  AddWidget(new PictureWidget(Point2i(38, W_UNDEF), "menu/teams_label"));
+  if (!network)
+    SetNoBorder();
 
   // How many teams ?
-  teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
-				       "menu/team_number",
-				       Point2i(130, W_UNDEF),
-				       2, 1,
-				       2, MAX_NB_TEAMS);
-  AddWidget(teams_nb);
-  Pack();
-  Point2i team_box_size((_size.GetX() - teams_nb->GetSizeX() - 60) * 2 / MAX_NB_TEAMS -10, _size.GetY()/2 -15);
+  if (network) {
+    local_teams_nb = new SpinButtonWithPicture(_("Local teams:"),
+					       "menu/team_number",
+					       Point2i(130, W_UNDEF),
+					       0, 1,
+					       0, MAX_NB_TEAMS-1);
+  } else {
+    local_teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
+					       "menu/team_number",
+					       Point2i(130, W_UNDEF),
+					       2, 1,
+					       2, MAX_NB_TEAMS);
+  }
+  AddWidget(local_teams_nb);
 
-  Box * teams_grid_box = new GridBox(_size.GetX() - teams_nb->GetSizeX() - 60, team_box_size, false);
+  uint teams_box_w = _size.x - local_teams_nb->GetSizeX() - 5;
+  Point2i team_box_size(teams_box_w / (MAX_NB_TEAMS /2) - 10, _size.y/2 -15);
+
+  Box * teams_grid_box = new GridBox(teams_box_w, team_box_size, false);
+  teams_grid_box->SetNoBorder();
 
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
     std::string player_name = _("Player") ;
@@ -56,28 +68,44 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size) : HBox(_size.GetY(), 
     teams_grid_box->AddWidget(teams_selections.at(i));
   }
 
-  teams_grid_box->Pack();
   AddWidget(teams_grid_box);
 
   // Load Teams' list
   GetTeamsList().full_list.sort(compareTeams);
-  GetTeamsList().InitList(Config::GetInstance()->AccessTeamList());
 
-  TeamsList::iterator
-    it=GetTeamsList().playing_list.begin(),
-    end=GetTeamsList().playing_list.end();
 
-  uint j=0;
-  for (; it != end && j<teams_selections.size(); ++it, j++)
-    {
-      teams_selections.at(j)->SetTeam((**it), true);
+  // initialize teams
+  if (network) {
+    // for network game
+    GetTeamsList().Clear();
+
+    // No selected team(s) by default
+    for (uint i=0; i<teams_selections.size(); i++) {
+      teams_selections.at(i)->ClearTeam();
     }
 
-  if (j < 2) {
-    SetNbTeams(2);
-    teams_nb->SetValue(2);
   } else {
-    teams_nb->SetValue(j);
+    // for local game
+
+    GetTeamsList().InitList(Config::GetInstance()->AccessTeamList());
+
+    TeamsList::iterator
+      it=GetTeamsList().playing_list.begin(),
+      end=GetTeamsList().playing_list.end();
+
+    uint j=0;
+    for (; it != end && j<teams_selections.size(); ++it, j++)
+      {
+	teams_selections.at(j)->SetTeam((**it), true);
+      }
+
+    // we need at least 2 teams
+    if (j < 2) {
+      SetNbTeams(2);
+      local_teams_nb->SetValue(2);
+    } else {
+      local_teams_nb->SetValue(j);
+    }
   }
 }
 
@@ -85,8 +113,8 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (!Contains(mousePosition)) return NULL;
 
-  if (teams_nb->ClickUp(mousePosition, button)){
-    SetNbTeams(teams_nb->GetValue());
+  if (local_teams_nb->ClickUp(mousePosition, button)){
+    SetNbTeams(local_teams_nb->GetValue());
 
   } else {
     for (uint i=0; i<teams_selections.size() ; i++) {
@@ -147,7 +175,7 @@ void TeamsSelectionBox::PrevTeam(int i)
       tmp = GetTeamsList().FindByIndex(index);
 
       // Check if that team is already selected
-      for (int j = 0; j < teams_nb->GetValue(); j++) {
+      for (int j = 0; j < local_teams_nb->GetValue(); j++) {
         if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
           index--;
           to_continue = true;
@@ -185,7 +213,7 @@ void TeamsSelectionBox::NextTeam(int i)
       tmp = GetTeamsList().FindByIndex(index);
 
       // Check if that team is already selected
-      for (int j = 0; j < teams_nb->GetValue(); j++) {
+      for (int j = 0; j < local_teams_nb->GetValue(); j++) {
         if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
           index++;
           to_continue = true;
