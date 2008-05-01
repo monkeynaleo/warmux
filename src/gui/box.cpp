@@ -86,9 +86,10 @@ void VBox::Pack()
     _y = (*it)->GetPositionY() + (*it)->GetSizeY();
   }
 
-  size.y = _y - position.y;
+  size.y = _y - position.y + border.y;
+
   if (!force_widget_size) {
-    size.x = max_size_x;
+    size.x = max_size_x + 2*border.x;
   }
 }
 
@@ -127,9 +128,10 @@ void HBox::Pack()
 
     _x = (*it)->GetPositionX()+ (*it)->GetSizeX();
   }
-  size.x = _x - position.x;
+  size.x = _x - position.x + border.x;
+
   if (!force_widget_size) {
-    size.y = max_size_y;
+    size.y = max_size_y + 2*border.y;
   }
 }
 
@@ -184,8 +186,6 @@ uint GridBox::NbWidgetsPerLine(const uint nb_total_widgets)
 void GridBox::Pack()
 {
   WidgetList::Pack();
-
-  // max_line_width = size.x;
 
   uint nb_widgets_per_line = NbWidgetsPerLine(widget_list.size());
 
