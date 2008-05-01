@@ -26,17 +26,18 @@
 
 class NetData
 {
-  char* str;
-  unsigned int str_size;
+  char*  str;
+  size_t str_size;
+  size_t msg_size;
 
-  int fd;
-  int ip_address;
+  int    fd;
+  int    ip_address;
   time_t ping_time;
-  bool ping_sent;
+  bool   ping_sent;
 
   void UpdatePing();
  protected:
-  int received;
+  size_t received;
   enum IndexServerMsg msg_id;
 
   // Return false if the client closed the connection
