@@ -143,6 +143,7 @@ wormux_SOURCES = \
         particles/smoke.cpp particles/smoke.h \
         particles/star.cpp particles/star.h \
         particles/teleport_member.cpp particles/teleport_member.h \
+        particles/water_drop.cpp particles/water_drop.h \
         sound/jukebox.cpp sound/jukebox.h \
         sound/sound_sample.cpp sound/sound_sample.h \
         sound/sample_cache.cpp sound/sample_cache.h \

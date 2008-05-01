@@ -3,25 +3,25 @@
 <resources>
 
 <!-- Common ressources (explosion and impact) -->
-  
+
   <sprite name="smoke">
     <image file="object/smoke2.png" />
   </sprite>
-  
+
   <sprite name="smoke_explosion">
     <image file="object/smoke3.png" />
   </sprite>
-  
+
   <sprite name="ill_bubble">
     <image file="object/ill_bubble.png" />
   </sprite>
-  
+
   <sprite name="fire_particle">
     <image file="object/fire.png" >
       <grid pos="0,0" size="18,35" array="5,1" />
     </image>
   </sprite>
-  
+
   <sprite name="star_particle">
     <image file="object/star.png" />
   </sprite>
@@ -46,8 +46,16 @@
     <image file="weapon/gun/gun_bullet.png" />
   </sprite>
 
+  <sprite name="water_drop">
+    <image file="gfx/water/water_drop.png" />
+  </sprite>
+
+  <sprite name="lava_drop">
+    <image file="gfx/water/lava_drop.png" />
+  </sprite>
+
 <!-- Air attack ressources -->
-  
+
   <surface name="air_attack_ico" file="weapon/air_attack/air_attack_ico.png" />
   <surface name="air_attack" file="weapon/air_attack/air_attack.png" />
   <position name="air_attack" origin="over" x="0" y="-5" />
@@ -188,7 +196,7 @@
   <surface name="gun_fire" file="weapon/gun/gun_fire.png" />
   <sprite name="gun_bullet">
     <image file="weapon/gun/gun_bullet.png" />
-  </sprite>	
+  </sprite>
 
 <!-- Shotgun ressources -->
 
@@ -202,7 +210,7 @@
   <hole name="shotgun" dx="32" dy="-3" />
 
 <!-- Holly Grenade ressources -->
-  
+
   <surface name="disco_grenade_ico" file="weapon/disco_grenade/disco_grenade_ico.png" />
   <surface name="disco_grenade" file="weapon/disco_grenade/disco_grenade.png" />
   <position name="disco_grenade" origin="hand" x="10" y="6" />
@@ -211,7 +219,7 @@
   </sprite>
 
   <!-- Gnu ressources -->
-  
+
   <surface name="gnulauncher_ico" file="weapon/gnu/gnu_ico.png" />
   <surface name="gnulauncher" file="weapon/gnu/gnulauncher.png" />
   <position name="gnulauncher" origin="hand" x="20" y="20" />
@@ -221,9 +229,9 @@
     </image>
     <animation speed="35" loop_mode="pingpong" />
   </sprite>
-  
+
   <!-- Polecat ressources -->
-  
+
   <surface name="polecatlauncher_ico" file="weapon/polecat/polecat_ico.png" />
   <surface name="polecatlauncher" file="weapon/polecat/polecatlauncher.png" />
   <position name="polecatlauncher" origin="hand" x="20" y="20" />
@@ -236,7 +244,7 @@
     </image>
     <animation speed="35" loop_mode="pingpong" />
   </sprite>
-  
+
 <!-- JetPack ressources -->
 
   <position name="jetpack" origin="hand" x="5" y="6" />
@@ -247,7 +255,7 @@
   <surface name="lowgrav_ico" file="weapon/lowgrav/lowgrav_ico.png" />
   <position name="lowgrav" origin="hand" x="24" y="23" />
 
-<!-- Mine ressources --> 
+<!-- Mine ressources -->
 
   <surface name="minelauncher_ico" file="weapon/mine/mine_ico.png" />
   <surface name="minelauncher" file="weapon/mine/mine.png" />
@@ -275,7 +283,7 @@
   </sprite>
 
 <!-- Parachute ressources -->
-  
+
   <surface name="parachute_ico" file="weapon/parachute/parachute_ico.png" />
   <surface name="parachute" file="weapon/parachute/parachute.png" />
   <position name="parachute" origin="hand" x="34" y="65" />

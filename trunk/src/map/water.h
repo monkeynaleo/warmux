@@ -59,5 +59,7 @@ public:
   void Draw();
   bool IsActive() const { return water_type != NO_WATER; }
   int GetHeight(int x) const;
+
+  void Splash(const Point2i& pos) const;
 };
 #endif
