@@ -39,6 +39,7 @@ class GameServerInfo
   std::string port;
   std::string dns_address;
   std::string game_name;
+  bool        passworded;
 };
 
 #define INDEX_SERVER_BUFFER_LENGTH   1500
@@ -102,7 +103,7 @@ public:
   void SetHiddenServer() { hidden_server = true; };
 
   // Notify the top server we are hosting a game
-  bool SendServerStatus(const std::string& game_name);
+  bool SendServerStatus(const std::string& game_name, bool passwd);
 
   // returns a list with string pairs: first element = hostname/ip, second element = port
   std::list<GameServerInfo> GetHostList();

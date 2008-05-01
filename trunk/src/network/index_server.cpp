@@ -271,7 +271,7 @@ bool IndexServer::HandShake()
   return true;
 }
 
-bool IndexServer::SendServerStatus(const std::string& game_name)
+bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd)
 {
   std::string ack;
   ASSERT(Network::GetInstance()->IsServer());
@@ -279,8 +279,9 @@ bool IndexServer::SendServerStatus(const std::string& game_name)
   if (hidden_server)
     return true;
 
-  NewMsg(TS_MSG_GAMENAME);
+  NewMsg(TS_MSG_REGISTER_GAME);
   Batch(game_name);
+  Batch((int)pwd);
   SendMsg();
   NewMsg(TS_MSG_HOSTING);
   Batch(Network::GetInstance()->GetPort());
@@ -308,6 +309,7 @@ std::list<GameServerInfo> IndexServer::GetHostList()
     IPaddress ip;
     ip.host = ReceiveInt();
     ip.port = ReceiveInt();
+    game_server_info.passworded = !!ReceiveInt();
     game_server_info.game_name = ReceiveStr();
 
     const char* dns_addr = SDLNet_ResolveIP(&ip);
@@ -329,11 +331,12 @@ std::list<GameServerInfo> IndexServer::GetHostList()
     else
       game_server_info.dns_address = game_server_info.ip_address;
 
-    MSG_DEBUG("index_server","ip: %s, port: %s, dns: %s, name: %s\n",
+    MSG_DEBUG("index_server","ip: %s, port: %s, dns: %s, name: %s, pwd=%s\n",
 	      game_server_info.ip_address.c_str(),
 	      game_server_info.port.c_str(),
 	      game_server_info.dns_address.c_str(),
-	      game_server_info.game_name.c_str());
+	      game_server_info.game_name.c_str(),
+              (game_server_info.passworded) ? "yes" : "no");
 
     lst.push_back(game_server_info);
   }
