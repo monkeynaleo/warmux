@@ -47,12 +47,11 @@ std::map<std::string, int> nb_server;
 HostOptions::HostOptions()
 {
   game_name = "";
-  passwd = "";
+  passwd = false;
   used = false;
 }
 
-bool HostOptions::Set(const std::string & _game_name,
-                      const std::string & _passwd)
+bool HostOptions::Set(const std::string & _game_name, bool _passwd)
 {
   if (used) {
     DPRINT(MSG, "Game Name and passwd already set");
@@ -262,21 +261,21 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
       }
       break;
 
-    case TS_MSG_GAMENAME:
+    case TS_MSG_REGISTER_GAME:
       {
         std::string game_name;
         r = ReceiveStr(game_name);
         if (!r)
           goto next_msg;
 
-        std::string passwd = "";
-//         std::string passwd;
-//         r = ReceiveStr(passwd);
-//         if (!r)
-//           goto next_msg;
+        int passwd;
+        r = ReceiveInt(passwd);
+        if (!r)
+          goto next_msg;
 
+        passwd = !!passwd;
         r = options.Set(game_name, passwd);
-        DPRINT(MSG, "game name is %s", game_name.c_str());
+        DPRINT(MSG, "game: name=%s pwd=%s", game_name.c_str(), (passwd) ? "yes" : "no");
       }
       break;
 
@@ -355,18 +354,12 @@ bool Client::SendList()
                 return false;
               if (!SendInt(client->second->port))
                 return false;
+              if (!SendInt(client->second->options.passwd))
+                return false;
 
               if (client->second->options.used) {
                 if (!SendStr(client->second->options.game_name))
                   return false;
-
-//                 if (client->second->options.passwd != "") {
-//                   if (!SendInt(1))
-//                     return false;
-//                 } else {
-//                   if (!SendInt(0))
-//                     return false;
-//                 }
               }
             }
           ++client;

@@ -27,12 +27,11 @@
 class HostOptions {
  public:
   std::string game_name;
-  std::string passwd;
-  bool used;
+  bool        passwd;
+  bool        used;
 
   HostOptions();
-  bool Set(const std::string & game_name,
-	   const std::string & passwd);
+  bool Set(const std::string & game_name, bool pwd);
 };
 
 class Client : public NetData
