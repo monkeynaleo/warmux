@@ -86,12 +86,11 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   srv_tmp_box->SetBorder(Point2i(0,0));
 
   srv_tmp_box->AddWidget(new Label(_("Password:"), def_size.x/2));
-  srv_game_pwd = new TextBox("", def_size.x/2);
+  srv_game_pwd = new PasswordBox("", def_size.x/2);
   srv_game_pwd->SetMaxNbChars(15);
   srv_tmp_box->AddWidget(srv_game_pwd);
 
   srv_connection_box->AddWidget(srv_tmp_box);
-
 
   // Available on internet ?
   srv_internet_server = new CheckBox(_("Server available on Internet"), def_size.x, true);
@@ -147,7 +146,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   cl_tmp_box->SetBorder(Point2i(0,0));
 
   cl_tmp_box->AddWidget(new Label(_("Password:"), def_size.x/2));
-  cl_server_pwd = new TextBox("", def_size.x/2);
+  cl_server_pwd = new PasswordBox("", def_size.x/2);
   cl_tmp_box->AddWidget(cl_server_pwd);
 
   cl_connection_box->AddWidget(cl_tmp_box);
@@ -331,7 +330,7 @@ bool NetworkConnectionMenu::signal_ok()
     bool ret;
     ret = HostingServer(srv_port_number->GetText(),
                         srv_game_name->GetText(),
-                        srv_game_pwd->GetText(),
+                        srv_game_pwd->GetPassword(),
                         srv_internet_server->GetValue());
     if (!ret)
       goto out;
@@ -342,7 +341,7 @@ bool NetworkConnectionMenu::signal_ok()
 	bool ret;
 	ret = ConnectToClient(cl_server_address->GetText(),
                               cl_port_number->GetText(),
-                              cl_server_pwd->GetText());
+                              cl_server_pwd->GetPassword());
 	if (!ret)
 	  goto out;
 

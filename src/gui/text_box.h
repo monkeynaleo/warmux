@@ -32,7 +32,7 @@ class TextBox : public Label
 protected:
   unsigned int max_nb_chars;
   std::string::size_type cursor_pos;
-  void BasicSetText(std::string const &new_txt);
+  virtual void BasicSetText(std::string const &new_txt);
 public:
   TextBox(const std::string &label,
           uint max_width,
@@ -48,6 +48,19 @@ public:
   virtual bool SendKey(const SDL_keysym& key);
   virtual void Draw(const Point2i &mousePosition) const;
   virtual Widget *ClickUp(const Point2i &, uint);
+};
+
+class PasswordBox : public TextBox
+{
+  std::string clear_text;
+  void BasicSetText(std::string const &new_txt);
+public:
+  PasswordBox(const std::string &label,
+              uint max_width,
+              Font::font_size_t fsize = Font::FONT_SMALL,
+              Font::font_style_t fstyle = Font::FONT_NORMAL);
+  bool SendKey(const SDL_keysym& key);
+  const std::string& GetPassword() const { return clear_text; };
 };
 
 #endif
