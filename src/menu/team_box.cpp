@@ -30,43 +30,40 @@
 #include "tool/i18n.h"
 
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
-  HBox(_size.GetY(), false)
+  HBox(W_UNDEF, false, false)
 {
   associated_team=NULL;
 
   SetMargin(2);
+  SetNoBorder();
 
   team_logo = new PictureWidget(Point2i(48, 48));
   AddWidget(team_logo);
 
-  Box * tmp_box = new VBox(_size.GetX()-80, false);
+  Box * tmp_box = new VBox(W_UNDEF, false, false);
   tmp_box->SetMargin(2);
-  tmp_box->SetBorder(Point2i(0,0));
-  team_name = new Label(" ", _size.GetX()-80,
+  tmp_box->SetNoBorder();
+  previous_name = "team";
+  team_name = new Label(previous_name, _size.x - 50,
                         Font::FONT_MEDIUM, Font::FONT_BOLD,
                         dark_gray_color, false, false);
 
-  Box * tmp_player_box = new HBox(Font::GetInstance(Font::FONT_SMALL)->GetHeight(), false);
+  Box * tmp_player_box = new HBox(W_UNDEF, false, false);
   tmp_player_box->SetMargin(0);
-  tmp_player_box->SetBorder(Point2i(0,0));
-  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-80-100,
+  tmp_player_box->SetNoBorder();
+  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
                                       Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
   player_name = new TextBox(_player_name, 100,
                             Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp_player_box->AddWidget(player_name);
-  tmp_player_box->Pack();
 
-  previous_name = " ";
-
-  nb_characters = new SpinButton(_("Number of characters"), -1,
+  nb_characters = new SpinButton(_("Number of characters"), _size.GetX()-50,
                                  6,1,1,10,
                                  dark_gray_color, false);
 
   tmp_box->AddWidget(team_name);
   tmp_box->AddWidget(tmp_player_box);
   tmp_box->AddWidget(nb_characters);
-
-  tmp_box->Pack();
 
   AddWidget(tmp_box);
 }
