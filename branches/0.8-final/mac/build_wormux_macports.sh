@@ -45,7 +45,7 @@ then
 	EXTRA_PKG_CONFIG_PATH="/opt/local/lib/pkgconfig"
 fi
 
-export SOURCE_DIR=${HERE}/../../wormux
+export SOURCE_DIR=${HERE}/..
 #export FINK_PATH=/sw/bin:/sw/sbin
 #export  OTHER_PATH=/src/usr/local-${ARCH}/bin
 #export MACPORTS_PATH=/opt/local/bin:/opt/local/sbin
