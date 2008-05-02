@@ -27,7 +27,7 @@ export HERE=`pwd`
 
 export PROG_NAME=wormux
 export BUNDLE_NAME=Wormux
-export APP_VERSION=0.8svn
+export APP_VERSION=0.8
 
 export SOURCE_DIR=${HERE}/../../wormux
 export FINK_PATH=/sw/bin:/sw/sbin
