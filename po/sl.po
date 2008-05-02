@@ -836,7 +836,7 @@ msgstr "Raketni nahrbtnik"
 #: src/menu/network_connection_menu.cpp:175 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
-"Pridružite se kanalu #wormux na irc.freenode.net da si poiščite nekaj "
+"Pridružite se kanalu #wormux na irc.freenode.net in si poiščite nekaj "
 "nasprotnikov."
 
 #: src/menu/options_menu.cpp:125
@@ -1060,7 +1060,7 @@ msgstr "Naslov strežnika:"
 #. Available on internet ?
 #: src/menu/network_connection_menu.cpp:96
 msgid "Server available on Internet"
-msgstr "Strežnik na voljo na Internetu"
+msgstr "Strežnik naj bo viden na Internetu"
 
 #. Server Mode
 #: src/menu/network_menu.cpp:112
