@@ -264,7 +264,7 @@ void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos
   // the cursor position is expressed in number of bytes, taking care of UTF8 character
 
   //sort of a hacky way to get the cursor pos, but I couldn't find anything better...
-  uint txt_width = 0;
+  uint txt_width = 1;
   if (GetText() != "") {
     Text txt_before_cursor(*this);
     txt_before_cursor.Set(GetText().substr(0, cursor_pos));
