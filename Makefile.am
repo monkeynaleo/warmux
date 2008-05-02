@@ -11,6 +11,12 @@ EXTRA_DIST = data/wormux.desktop                   \
              doc/license/COPYING.pt.txt            \
              doc/license/COPYING.ru.txt            \
              doc/license/COPYING.sk.txt            \
+             doc/howto_play/de.pdf                 \
+             doc/howto_play/en.pdf                 \
+             doc/howto_play/fr.pdf                 \
+             doc/howto_play/pl.pdf                 \
+             doc/howto_play/sk.pdf                 \
+             doc/howto_play/sv.pdf                 \
 			 mac/Info.plist.in					   \
 			 mac/PkgInfo.in						   \
 			 mac/README-mac.txt					   \
