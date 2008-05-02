@@ -18,9 +18,9 @@ export RM=/bin/rm
 #cd wormux
 cd ..
 svn up
+make clean
 ./autogen.sh
 ./configure --enable-debug
-make clean
 make -w
 
 
