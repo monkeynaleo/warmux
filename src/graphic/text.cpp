@@ -293,8 +293,11 @@ int Text::GetWidth() const
 
 int Text::GetHeight() const
 {
-  if (txt=="" && !dummy) return 0;
-  return surf.GetHeight();
+  Font* font = Font::GetInstance(font_size, font_style);
+  if (txt=="" || dummy) {
+    return font->GetHeight();
+  }
+  return std::max(surf.GetHeight(), font->GetHeight());
 }
 
 void DrawTmpBoxText(Font& font, Point2i pos,
