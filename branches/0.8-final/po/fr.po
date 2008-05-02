@@ -270,7 +270,7 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "L'équipe %s a gagné %u pistolet !"
 msgstr[1] "L'équipe %s a gagné %u pistolets !"
 
-#: src/weapon/jetpack.cpp:233
+#: src/weapon/jetpack.cpp:239
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -1323,4 +1323,3 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
