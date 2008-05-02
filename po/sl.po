@@ -974,7 +974,7 @@ msgstr "Padalo se samodejno odpre."
 #: src/menu/network_connection_menu.cpp:88
 #: src/menu/network_connection_menu.cpp:148
 msgid "Password:"
-msgstr ""
+msgstr "Geslo:"
 
 #: src/menu/main_menu.cpp:60
 msgid "Play"
@@ -1046,9 +1046,8 @@ msgid "Say: "
 msgstr "Reci: "
 
 #: src/menu/options_menu.cpp:84
-#, fuzzy
 msgid "Scroll border size"
-msgstr "Drsenje na robu"
+msgstr "Meja drsenja na robu"
 
 #: src/menu/options_menu.cpp:81
 msgid "Scroll on border"
@@ -1126,14 +1125,12 @@ msgid "Syringe"
 msgstr "Injekcija"
 
 #: src/menu/results_menu.cpp:389
-#, fuzzy
 msgid "Team graphs"
-msgstr "Ekipe"
+msgstr "Ekipni grafi"
 
 #: src/menu/results_menu.cpp:378
-#, fuzzy
 msgid "Team stats"
-msgstr "Ekipe"
+msgstr "Ekipna statistika"
 
 #: src/game/game_init.cpp:120 src/menu/game_menu.cpp:72
 msgid "Teams"
