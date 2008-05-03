@@ -53,7 +53,7 @@
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\src&quot;;&quot;$(ProjectDir)..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI"
+				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\LiberationSans-Regular.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -1040,6 +1040,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\menu\skin_menu.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\menu\skin_menu.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\team_box.cpp"
 					>
 				</File>
@@ -1289,6 +1297,14 @@
 				</File>
 				<File
 					RelativePath="..\src\particles\teleport_member.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\water_drop.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\water_drop.h"
 					>
 				</File>
 			</Filter>
