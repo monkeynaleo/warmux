@@ -23,7 +23,6 @@
 #include "character/body_list.h"
 #include "character/body.h"
 #include "character/clothe.h"
-#include "character/member.h"
 #include "graphic/video.h"
 #include "gui/box.h"
 #include "gui/list_box_w_label.h"
@@ -52,7 +51,6 @@ SkinMenu::SkinMenu(const char* name)
   position = 2*BORDER + size;
 
   teams = new ListBoxWithLabel("Teams", Point2i(120, -1)); box->AddWidget(teams);
-  member_list = new ListBoxWithLabel("Members", Point2i(110, -1)); box->AddWidget(member_list);
   clothe_list = new ListBoxWithLabel("Clothes", Point2i(130, -1)); box->AddWidget(clothe_list);
   movement_list = new ListBoxWithLabel("Movements", Point2i(240, -1)); box->AddWidget(movement_list);
 
@@ -96,13 +94,6 @@ void SkinMenu::LoadBody(const std::string& name)
   printf("Should load %s\n", name.c_str());
   body_list.FreeMem();
   body = body_list.GetBody(name);
-
-  member_list->ClearItems();
-  for (std::map<std::string, Member*>::const_iterator it = body->members_lst.begin();
-       it != body->members_lst.end(); ++it)
-  {
-    member_list->AddItem(false, (*it).first, (*it).first);
-  }
 
   clothe_list->ClearItems();
   for (std::map<std::string, Clothe*>::const_iterator it = body->clothes_lst.begin();
@@ -157,9 +148,6 @@ void SkinMenu::OnClickUp(const Point2i &mousePosition, int button)
   if (w == teams)
   {
     LoadBody(teams->ReadValue());
-  }
-  else if (w == member_list)
-  {
   }
   else if (w == clothe_list)
   {
