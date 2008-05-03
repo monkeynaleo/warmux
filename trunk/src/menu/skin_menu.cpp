@@ -42,8 +42,8 @@ static const uint SKIN_SIZE     = 100;
 
 SkinMenu::SkinMenu(const char* name)
  : Menu("menu/bg_option")
- , body(NULL)
  , frame(NULL)
+ , body(NULL)
 {
   uint size = AppWormux::GetInstance()->video->window.GetHeight()
             - (2*BORDER+CHECKBOX_SIZE+SKIN_SIZE);
