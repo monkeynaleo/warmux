@@ -45,7 +45,7 @@ public:
 
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
-  void Draw(const Point2i &mousePosition) { };
+  void Draw(const Point2i&) { };
 
   bool signal_ok() { return true; };
   bool signal_cancel() { return true; };
