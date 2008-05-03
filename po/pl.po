@@ -614,10 +614,6 @@ msgstr "Błąd: Nie można uruchomić serwera"
 msgid "Error: Your server is not reachable from the internet. Check your firewall configuration"
 msgstr "Błąd: Twój serwer nie jest dostępny z Internetu. Sprawdź konfigurację zapory sieciowej."
 
-#: src/menu/network_connection_menu.cpp:284
-msgid "Error: Your server is not reachable from the internet. Check your firewall configuration"
-msgstr "Błąd: Twój serwer nie jest dostępny z Internetu. Sprawdź konfigurację zapory sieciowej."
-
 #: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
