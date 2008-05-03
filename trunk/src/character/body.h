@@ -64,6 +64,7 @@ class Body
   /**********************************************/
 
   friend class BodyList;
+  friend class SkinMenu;
   std::map<std::string, Member*> members_lst;
   std::map<std::string, Clothe*> clothes_lst;
   std::map<std::string, Movement*> mvt_lst;
@@ -109,7 +110,7 @@ public:
   Body(const Body&);
   ~Body();
 
-  Point2i GetSize() {return Point2i(30,45);};
+  static Point2i GetSize() {return Point2i(30,45);};
 
   void Draw(const Point2i& pos);
   void SetClothe(const std::string& name);

@@ -51,6 +51,7 @@ public:
     HELP,
     CREDITS,
     QUIT,
+    SKIN_VIEWER
   } menu_item;
 
 
