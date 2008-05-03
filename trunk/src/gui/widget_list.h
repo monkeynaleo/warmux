@@ -60,6 +60,7 @@ public:
 
   // to add a widget
   void AddWidget(Widget* widget);
+  void RemoveWidget(Widget* w);
 
   // Navigate between widget with keyboard
   virtual void SetKeyboardFocusOnNextWidget();
