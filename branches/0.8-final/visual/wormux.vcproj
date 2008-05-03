@@ -1291,6 +1291,14 @@
 					RelativePath="..\src\particles\teleport_member.h"
 					>
 				</File>
+				<File
+					RelativePath="..\src\particles\water_drop.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\particles\water_drop.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="object"
