@@ -27,6 +27,7 @@
 #include "graphic/video.h"
 #include "gui/box.h"
 #include "gui/list_box_w_label.h"
+#include "gui/spin_button.h"
 #include "include/app.h"
 #include "game/config.h"
 #include "team/team.h"
@@ -42,6 +43,7 @@ static const uint SKIN_SIZE     = 100;
 SkinMenu::SkinMenu(const char* name)
  : Menu("menu/bg_option")
  , body(NULL)
+ , frame(NULL)
 {
   uint size = AppWormux::GetInstance()->video->window.GetHeight()
             - (2*BORDER+CHECKBOX_SIZE+SKIN_SIZE);
@@ -97,24 +99,21 @@ void SkinMenu::LoadBody(const std::string& name)
 
   member_list->ClearItems();
   for (std::map<std::string, Member*>::const_iterator it = body->members_lst.begin();
-       it != body->members_lst.end();
-       ++it)
+       it != body->members_lst.end(); ++it)
   {
     member_list->AddItem(false, (*it).first, (*it).first);
   }
 
   clothe_list->ClearItems();
   for (std::map<std::string, Clothe*>::const_iterator it = body->clothes_lst.begin();
-       it != body->clothes_lst.end();
-       ++it)
+       it != body->clothes_lst.end(); ++it)
   {
     clothe_list->AddItem(false, (*it).first, (*it).first);
   }
 
   movement_list->ClearItems();
   for (std::map<std::string, Movement*>::const_iterator it = body->mvt_lst.begin();
-       it != body->mvt_lst.end();
-       ++it)
+       it != body->mvt_lst.end(); ++it)
   {
     movement_list->AddItem(false, (*it).first, (*it).first);
   }
@@ -124,7 +123,22 @@ void SkinMenu::Display()
 {
   if (body)
   {
-    RedrawBackground(Rectanglei(Point2i(BORDER, position), body->GetSize()));
+    if (frame)
+    {
+      // Will also delete it
+      widgets.RemoveWidget(frame);
+      frame = NULL;
+    }
+
+    uint count = body->GetFrameCount()-1;
+    if (count)
+    {
+      frame = new SpinButton("Frame", 90, 0, 1, 0, count);
+      frame->SetPosition(Point2i(BORDER+50, position));
+      widgets.AddWidget(frame);
+      widgets.Pack();
+    }
+    RedrawBackground(Rectanglei(Point2i(BORDER-10, position-10), Point2i(160,60)));
     body->Draw(Point2i(BORDER, position));
   }
 }
@@ -165,6 +179,15 @@ void SkinMenu::OnClickUp(const Point2i &mousePosition, int button)
       body->SetMovement(movement_list->ReadValue());
       if (clothe_list->GetSelectedItem() != -1)
         Display();
+    }
+  }
+  else if (frame && w == frame)
+  {
+    if (body)
+    {
+      body->SetFrame(frame->GetValue());
+      RedrawBackground(Rectanglei(Point2i(BORDER-10, position-10), Point2i(60,60)));
+      body->Draw(Point2i(BORDER, position));
     }
   }
 }
