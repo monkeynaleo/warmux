@@ -31,7 +31,6 @@ class SpinButton;
 class SkinMenu : public Menu
 {
   ListBoxWithLabel *teams;
-  ListBoxWithLabel *member_list;
   ListBoxWithLabel *clothe_list;
   ListBoxWithLabel *movement_list;
   SpinButton       *frame;
