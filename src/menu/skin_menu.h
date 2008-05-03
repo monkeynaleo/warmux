@@ -26,6 +26,7 @@
 
 class ListBoxWithLabel;
 class Body;
+class SpinButton;
 
 class SkinMenu : public Menu
 {
@@ -33,6 +34,7 @@ class SkinMenu : public Menu
   ListBoxWithLabel *member_list;
   ListBoxWithLabel *clothe_list;
   ListBoxWithLabel *movement_list;
+  SpinButton       *frame;
   Body             *body;
   uint             position;
 
