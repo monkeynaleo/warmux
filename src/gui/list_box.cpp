@@ -29,22 +29,7 @@
 #include "include/app.h"
 #include "tool/resource_manager.h"
 
-ListBoxItem::ListBoxItem(const std::string& _label,
-                         Font::font_size_t fsize,
-                         Font::font_style_t fstyle,
-                         const std::string& _value,
-                         const Color& color) :
-  Label(_label, 200, fsize, fstyle, color),
-  value(_value)
-{
-}
-
-const std::string& ListBoxItem::GetLabel() const
-{
-  return txt_label->GetText();
-}
-
-ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
+BaseListBox::BaseListBox (const Point2i &_size, bool always_one_selected_b):
   Widget(Point2i(_size.x, _size.y)),
   always_one_selected(always_one_selected_b),
   scrolling(false),
@@ -66,7 +51,7 @@ ListBox::ListBox (const Point2i &_size, bool always_one_selected_b):
   Widget::SetBackgroundColor(defaultListColor1);
 }
 
-ListBox::~ListBox()
+BaseListBox::~BaseListBox()
 {
   delete m_up;
   delete m_down;
@@ -74,15 +59,15 @@ ListBox::~ListBox()
   ClearItems();
 }
 
-void ListBox::ClearItems()
+void BaseListBox::ClearItems()
 {
-  for (std::vector<ListBoxItem*>::iterator lbi=m_items.begin(); lbi!=m_items.end(); lbi++)
+  for (std::vector<Widget*>::iterator lbi=m_items.begin(); lbi!=m_items.end(); lbi++)
      delete *lbi;
 
   m_items.clear();
 }
 
-int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
+int BaseListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
 {
   if( !Contains(mousePosition) )
     return -1;
@@ -97,7 +82,7 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
 
 static uint last_visible_item = 0; // to not break Draw constness
 
-Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
+Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   scrolling = false;
 
@@ -140,7 +125,7 @@ Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* ListBox::Click(const Point2i &mousePosition, uint button)
+Widget* BaseListBox::Click(const Point2i &mousePosition, uint button)
 {
   if (!Contains(mousePosition)) return NULL;
 
@@ -150,7 +135,7 @@ Widget* ListBox::Click(const Point2i &mousePosition, uint button)
   return this;
 }
 
-void ListBox::__Update(const Point2i &mousePosition,
+void BaseListBox::__Update(const Point2i &mousePosition,
 		       const Point2i &/*lastMousePosition*/)
 {
   if (!Contains(mousePosition)) {
@@ -165,7 +150,7 @@ void ListBox::__Update(const Point2i &mousePosition,
     }
 }
 
-void ListBox::Draw(const Point2i &mousePosition) const
+void BaseListBox::Draw(const Point2i &mousePosition) const
 {
   Surface& surf = AppWormux::GetInstance()->video->window;
   int item = MouseIsOnWhichItem(mousePosition);
@@ -221,7 +206,7 @@ void ListBox::Draw(const Point2i &mousePosition) const
   }
 }
 
-Rectanglei ListBox::ScrollBarPos() const
+Rectanglei BaseListBox::ScrollBarPos() const
 {
   uint tmp_y, tmp_h;
   if(m_items.size() != 0)
@@ -240,29 +225,21 @@ Rectanglei ListBox::ScrollBarPos() const
   return Rectanglei(GetPositionX()+GetSizeX()-11, tmp_y, 9,  /*tmp_y+*/tmp_h);
 }
 
-void ListBox::Pack()
+void BaseListBox::Pack()
 {
   m_up->SetPosition(position.x + size.x - 12, position.y +2);
   m_down->SetPosition(position.x + size.x - 12, position.y + size.y - 7 -margin);
 
-  for(std::vector<ListBoxItem*>::iterator it=m_items.begin();
+  for(std::vector<Widget*>::iterator it=m_items.begin();
       it != m_items.end(); it++)
   {
     (*it)->Pack();
   }
 }
 
-void ListBox::AddItem (bool selected,
-                       const std::string &label,
-                       const std::string &value,
-                       Font::font_size_t fsize,
-                       Font::font_style_t fstyle,
-                       const Color& color)
+void BaseListBox::AddWidgetItem(bool selected, Widget* item)
 {
   uint pos = m_items.size();
-
-  // Push item
-  ListBoxItem * item = new ListBoxItem(label, fsize, fstyle, value, color);
   m_items.push_back (item);
 
   // Select it if selected
@@ -270,12 +247,12 @@ void ListBox::AddItem (bool selected,
     Select (pos);
 }
 
-void ListBox::Sort() const
+void BaseListBox::Sort() const
 {
   //std::sort( m_items.begin(), m_items.end(), CompareItems() );
 }
 
-void ListBox::RemoveSelected()
+void BaseListBox::RemoveSelected()
 {
   ASSERT (always_one_selected == false);
 
@@ -285,43 +262,89 @@ void ListBox::RemoveSelected()
   }
 }
 
-void ListBox::Select (uint index)
+void BaseListBox::Select (uint index)
 {
   ASSERT(index < m_items.size());
   selected_item = index;
 }
 
-void ListBox::Select(const std::string& val)
-{
-  uint index = 0;
-  for(std::vector<ListBoxItem*>::iterator it=m_items.begin();
-      it != m_items.end();
-      it++,index++)
-  {
-    if((*it)->GetLabel() == val)
-    {
-      Select(index);
-      return;
-    }
-  }
-}
-
-void ListBox::Deselect ()
+void BaseListBox::Deselect ()
 {
   ASSERT (always_one_selected == false);
   selected_item = -1;
 }
 
+//-----------------------------------------------------------------------------
+
+class ListBoxItem : public Label
+{
+private:
+  std::string value;
+
+public:
+  ListBoxItem(const std::string& _label,
+              Font::font_size_t font_size,
+              Font::font_style_t font_style,
+              const std::string& value,
+              const Color& color = white_color);
+
+  const std::string& GetLabel() const;
+  const std::string& GetValue() const { return value; };
+};
+
+ListBoxItem::ListBoxItem(const std::string& _label,
+                         Font::font_size_t fsize,
+                         Font::font_style_t fstyle,
+                         const std::string& _value,
+                         const Color& color) :
+  Label(_label, 200, fsize, fstyle, color),
+  value(_value)
+{
+}
+
+const std::string& ListBoxItem::GetLabel() const
+{
+  return txt_label->GetText();
+}
+
+//-----------------------------------------------------------------------------
+
+void ListBox::AddItem (bool selected,
+                       const std::string &label,
+                       const std::string &value,
+                       Font::font_size_t fsize,
+                       Font::font_style_t fstyle,
+                       const Color& color)
+{
+  // Push item
+  AddWidgetItem(selected, new ListBoxItem(label, fsize, fstyle, value, color));
+}
+
+void ListBox::Select(const std::string& val)
+{
+  uint index = 0;
+  for(std::vector<Widget*>::iterator it=m_items.begin();
+      it != m_items.end();
+      it++,index++)
+  {
+    if(GetItem(*it)->GetLabel() == val)
+    {
+      BaseListBox::Select(index);
+      return;
+    }
+  }
+}
+
 const std::string& ListBox::ReadLabel () const
 {
   ASSERT (selected_item != -1);
-  return m_items.at(selected_item)->GetLabel();
+  return GetItem(m_items[selected_item])->GetLabel();
 }
 
 const std::string& ListBox::ReadValue () const
 {
   ASSERT (selected_item != -1);
-  return m_items.at(selected_item)->GetValue();
+  return GetItem(m_items[selected_item])->GetValue();
 }
 
 int ListBox::ReadIntValue() const
@@ -334,5 +357,5 @@ int ListBox::ReadIntValue() const
 const std::string& ListBox::ReadValue (int index) const
 {
   ASSERT (index != -1 && index < (int)m_items.size());
-  return m_items.at(index)->GetValue();
+  return GetItem(m_items[index])->GetValue();
 }
