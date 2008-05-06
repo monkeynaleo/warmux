@@ -55,9 +55,8 @@ void ListBoxWithLabel::Pack()
   m_down->SetPosition(position.x + size.x - m_down->GetSizeX() - 2,
 		      position.y + size.y - m_down->GetSizeY() - 2 - txt_label->GetHeight() - 2);
 
-  for(std::vector<ListBoxItem*>::iterator it=m_items.begin();
-      it != m_items.end(); it++)
-    {
-      (*it)->Pack();
-    }
+  for(std::vector<Widget*>::iterator it=m_items.begin(); it != m_items.end(); it++)
+  {
+    (*it)->Pack();
+  }
 }
