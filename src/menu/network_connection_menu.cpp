@@ -31,6 +31,7 @@
 #include "gui/check_box.h"
 #include "gui/msg_box.h"
 #include "gui/list_box.h"
+#include "gui/picture_widget.h"
 #include "gui/tabs.h"
 #include "gui/text_box.h"
 #include "include/app.h"
@@ -39,6 +40,48 @@
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+
+class GameInfoBox : public HBox
+{
+public:
+  bool password;
+  std::string port, ip_address;
+  GameInfoBox(uint width, bool pwd, const std::string& ip, const std::string& p,
+              const std::string& dns, const std::string& name)
+    : HBox(width, true, false)
+    , password(pwd)
+    , port(p)
+    , ip_address(ip)
+  {
+    AddWidget(new PictureWidget(Point2i(16, 16),
+                                (pwd) ? "menu/disabled_back" : "menu/enabled", true));
+    AddWidget(new Label(ip, 100));
+    AddWidget(new Label(p, 40));
+    AddWidget(new Label(dns, 340));
+    AddWidget(new Label(name, 200));
+    Pack();
+  }
+  void Draw(const Point2i &mousePosition) const
+  {
+    HBox::Draw(mousePosition);
+    for (std::list<Widget*>::const_iterator it = widget_list.begin(); it != widget_list.end(); ++it)
+      (*it)->Draw(mousePosition);
+  }
+};
+
+class GameListBox : public BaseListBox
+{
+public:
+  GameListBox(const Point2i &size, bool b = true) : BaseListBox(size, b) { }
+  void Select(uint index) { BaseListBox::Select(index); }
+  void AddItem(bool selected, bool pwd, const std::string& ip_address,
+               const std::string& port, const std::string& dns, const std::string& name)
+  {
+    AddWidgetItem(selected, new GameInfoBox(600, pwd, ip_address, port, dns, name));
+  }
+  const std::string& GetAddress() { return ((GameInfoBox*)m_items[selected_item])->ip_address; }
+  const std::string& GetPort() { return ((GameInfoBox*)m_items[selected_item])->port; }
+};
 
 NetworkConnectionMenu::NetworkConnectionMenu() :
   Menu("menu/bg_network", vOkCancel)
@@ -112,7 +155,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   cl_tmp_box->AddWidget(new Label(_("Public battles"), def_size.x, Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
   cl_connection_box->AddWidget(cl_tmp_box);
 
-  cl_net_games_lst = new ListBox( Point2i(def_size.x, 30), false);
+  cl_net_games_lst = new GameListBox( Point2i(def_size.x, 30), false);
   cl_connection_box->AddWidget(cl_net_games_lst);
 
   // Manual connection
@@ -190,6 +233,8 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 
   if (w == cl_refresh_net_games)
     RefreshList();
+  else if (w == cl_net_games_lst)
+    printf("%s\n", cl_net_games_lst->GetAddress().c_str());
 }
 
 void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
@@ -226,22 +271,13 @@ void NetworkConnectionMenu::RefreshList()
     return;
   }
 
-  for (std::list<GameServerInfo>::iterator game_server_info_it = lst.begin();
-       game_server_info_it != lst.end();
-       ++game_server_info_it) {
-    std::string display_str = (game_server_info_it->passworded) ? "! " : "  ";
-    display_str += game_server_info_it->ip_address + ":";
-    display_str += game_server_info_it->port + " - ";
-    display_str += game_server_info_it->dns_address + " - ";
-    display_str += game_server_info_it->game_name;
-
-    std::string connect_str = game_server_info_it->ip_address + ":";
-    connect_str += game_server_info_it->port;
-    cl_net_games_lst->AddItem(false, display_str, connect_str);
+  for (std::list<GameServerInfo>::iterator it = lst.begin(); it != lst.end(); ++it) {
+    cl_net_games_lst->AddItem(false, it->passworded, it->ip_address,
+                              it->port, it->dns_address, it->game_name);
   }
-
   if (current != -1 && cl_net_games_lst->Size() != 0)
     cl_net_games_lst->Select( current );
+  cl_net_games_lst->NeedRedrawing();
 
   IndexServer::GetInstance()->Disconnect();
 }
@@ -356,14 +392,7 @@ bool NetworkConnectionMenu::signal_ok()
 	if (cl_net_games_lst->GetSelectedItem() == -1)
 	  goto out;
 
-	char c_address[32];
-	char c_port[16];
-	sscanf(cl_net_games_lst->ReadValue().c_str(),"%[^:]:%s", c_address, c_port);
-
-	std::string address = std::string(c_address);
-	std::string port = std::string(c_port);
-
-	ret = ConnectToClient(address, port, "");
+	ret = ConnectToClient(cl_net_games_lst->GetAddress(), cl_net_games_lst->GetPort(), "");
 	if (!ret)
 	  goto out;
       }
