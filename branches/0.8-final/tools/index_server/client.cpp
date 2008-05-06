@@ -161,14 +161,8 @@ bool Client::HandShake(const std::string & version)
   if (handshake_done)
     return false;
 
-  if (version == "0.8beta1"
-      || version == "0.8beta2"
-      || version == "0.8beta3"
-      || version == "0.8beta4"
-      || version == "0.8svn"
-      || version == "0.7.9rc1"
-      || version == "0.7.9rc2"
-      || version == "0.7.9")
+  if (version == "0.8"
+      || version == "0.8svn")
     {
       DPRINT(MSG, "Version checked successfully");
       handshake_done = true;
