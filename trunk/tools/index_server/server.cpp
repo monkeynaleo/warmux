@@ -36,6 +36,11 @@ Server::Server(int port)
   address.sin_addr.s_addr = htonl(INADDR_ANY);
   address.sin_port = htons(port);
 
+  int on = 1;
+  if ( setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) < 0 ) {
+    TELL_ERROR;
+  }
+
   if ( bind(fd, (struct sockaddr*) &address, sizeof(address)) == -1 ) {
     TELL_ERROR;
   }
