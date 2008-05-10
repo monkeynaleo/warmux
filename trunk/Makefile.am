@@ -2,6 +2,7 @@ SUBDIRS = data src po doc
 
 EXTRA_DIST = data/wormux.desktop                   \
              doc/license/COPYING.de.txt            \
+             doc/license/COPYING.el.txt            \
              doc/license/COPYING.en.txt            \
              doc/license/COPYING.eo.txt            \
              doc/license/COPYING.es.txt            \
