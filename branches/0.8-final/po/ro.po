@@ -9,14 +9,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-03-15 12:47+0200\n"
+"PO-Revision-Date: 2008-05-11 13:50+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
@@ -213,8 +212,7 @@ msgstr[2] "Echipa %s a câștigat %u de rachete!"
 
 #: src/weapon/blowtorch.cpp:137
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -273,12 +271,10 @@ msgstr[2] "Echipa %s a câștigat %u de construcții! Nu-ți uita casca."
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Echipa %s a câștigat %u grenadă disco! Dă din fund când o arunci!"
 msgstr[1] "Echipa %s a câștigat %u grenade disco! Dă din fund când le arunci!"
-msgstr[2] ""
-"Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
+msgstr[2] "Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
@@ -453,12 +449,9 @@ msgstr[2] "Echipa %s a câștigat %u de puști!"
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural ""
-"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
-msgstr[0] ""
-"Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
-msgstr[1] ""
-"Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgstr[0] "Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
+msgstr[1] "Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
 msgstr[2] ""
 "Echipa %s a câștigat %u de puști cu lunetă! Țintește și trage direct între "
 "ochi!"
@@ -537,8 +530,7 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] ""
-"Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
+msgstr[0] "Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
 msgstr[1] ""
 "Echipa %s a câștigat %u lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
@@ -726,7 +718,7 @@ msgstr "SFÂRȘITUL JOCULUI"
 
 #: src/menu/options_menu.cpp:153
 msgid "Effects volume"
-msgstr ""
+msgstr "Volumul efectelor"
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -739,8 +731,7 @@ msgstr "Eroare la încărcarea echipei:"
 
 #: src/game/config.cpp:476
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
@@ -802,9 +793,8 @@ msgid "Fullscreen?"
 msgstr "Tot ecranul?"
 
 #: src/menu/game_menu.cpp:104
-#, fuzzy
 msgid "Game"
-msgstr "Rulează jocul"
+msgstr "Joc"
 
 #: src/menu/network_connection_menu.cpp:76
 msgid "Game name:"
@@ -816,7 +806,7 @@ msgstr "Lansator de antilope gnu"
 
 #: src/menu/options_menu.cpp:118
 msgid "Graphic"
-msgstr ""
+msgstr "Grafică"
 
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
@@ -976,14 +966,12 @@ msgstr "Gravitație scăzută"
 # URM1-2
 #. Manual connection
 #: src/menu/network_connection_menu.cpp:119
-#, fuzzy
 msgid "Manual connection"
-msgstr "fiecare deconectare!"
+msgstr "Conectare manuală"
 
 #: src/menu/game_menu.cpp:84
-#, fuzzy
 msgid "Map"
-msgstr "Hărți"
+msgstr "Hartă"
 
 #: src/map/map.cpp:294
 #, c-format
@@ -1007,9 +995,8 @@ msgid "Mine"
 msgstr "Mină"
 
 #: src/menu/options_menu.cpp:133
-#, fuzzy
 msgid "Misc"
-msgstr "Muzică?"
+msgstr "Diverse"
 
 #: src/menu/results_menu.cpp:370
 msgid "Most accurate"
@@ -1037,7 +1024,7 @@ msgstr "Cel mai violent"
 
 #: src/menu/options_menu.cpp:143
 msgid "Music volume"
-msgstr ""
+msgstr "Volumul muzicii"
 
 #: src/menu/options_menu.cpp:139
 msgid "Music?"
@@ -1093,7 +1080,7 @@ msgstr "Parașuta se activează automat."
 #: src/menu/network_connection_menu.cpp:88
 #: src/menu/network_connection_menu.cpp:148
 msgid "Password:"
-msgstr ""
+msgstr "Parola:"
 
 #: src/menu/main_menu.cpp:60
 msgid "Play"
@@ -1121,9 +1108,8 @@ msgid "Port:"
 msgstr "Port:"
 
 #: src/menu/network_connection_menu.cpp:112
-#, fuzzy
 msgid "Public battles"
-msgstr "Părăsește bătălia"
+msgstr "Bătălii publice"
 
 #: src/menu/main_menu.cpp:75
 msgid "Quit"
@@ -1166,9 +1152,8 @@ msgid "Say: "
 msgstr "Spune: "
 
 #: src/menu/options_menu.cpp:84
-#, fuzzy
 msgid "Scroll border size"
-msgstr "Derulare la margine"
+msgstr "Dimensiunea marginii de derulare"
 
 #: src/menu/options_menu.cpp:81
 msgid "Scroll on border"
@@ -1209,9 +1194,8 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Din păcate, acum nu există nici un joc în așteptare de jucători"
 
 #: src/menu/options_menu.cpp:178
-#, fuzzy
 msgid "Sound"
-msgstr "Sunete"
+msgstr "Sunet"
 
 #: src/menu/options_menu.cpp:149
 msgid "Sound effects?"
@@ -1247,14 +1231,12 @@ msgid "Syringe"
 msgstr "Seringă"
 
 #: src/menu/results_menu.cpp:389
-#, fuzzy
 msgid "Team graphs"
-msgstr "Echipe"
+msgstr "Grafice echipe"
 
 #: src/menu/results_menu.cpp:378
-#, fuzzy
 msgid "Team stats"
-msgstr "Echipe"
+msgstr "Statistici echipe"
 
 #: src/game/game_init.cpp:120 src/menu/game_menu.cpp:72
 msgid "Teams"
@@ -1320,9 +1302,8 @@ msgid "The server rejected the connection."
 msgstr "Serverul a refuzat conexiunea."
 
 #: src/network/net_error_msg.cpp:51
-#, fuzzy
 msgid "The server rejected the connection: wrong password!"
-msgstr "Serverul a refuzat conexiunea."
+msgstr "Serverul a refuzat conexiunea: parolă greșită!"
 
 #: src/menu/network_menu.cpp:239
 #, c-format
@@ -2497,3 +2478,4 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
+
