@@ -62,7 +62,7 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 // =================================================
 // This method is not perfect
 // It tests from the Center of the shooter
-// and not from the gun hole -todo
+// and not from the gun hole
 // =================================================
 bool AIShootModule::IsDirectlyShootable(const Character& shooter,
                                         const Character& enemy,
