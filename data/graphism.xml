@@ -82,6 +82,9 @@
   <!-- Random map -->
   <surface name="random_map" file="map/random_map.jpg" />
 
+  <!-- For nework menu  -->
+  <surface name="password_lock" file="menu/padlock.png" />
+
   <!-- Buttons -->
 
   <sprite name="send_txt">
