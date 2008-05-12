@@ -15,8 +15,4 @@
   <water>0</water>
   <nb_mine>0</nb_mine>
   <is_open>1</is_open>
-  <!-- pad is given in pixel count. -->
-  <add_pad>1</add_pad>
-  <point name="upper_left_pad" x="1050" y="1300" />
-  <point name="lower_right_pad" x="1050" y="0" />
 </resources>

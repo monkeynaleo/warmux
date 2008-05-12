@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@
 
 class Team;
 class Character;
-class Action;
 //-----------------------------------------------------------------------------
 
 class Medkit : public ObjBox//public PhysicalObj
@@ -37,15 +36,29 @@ class Medkit : public ObjBox//public PhysicalObj
     static int nbr_health;
     //static int start_life_points;
 
+    //bool parachute;
+    //Sprite *anim;
+
   private:
     void ApplyMedkit (Team &team, Character &character) const;
   public:
     Medkit();
+    //~Medkit();
 
-    static void LoadXml(xmlNode * object);
-    void ApplyBonus(Character *);
-    void GetValueFromAction(Action *);
-    void StoreValue(Action *);
+    // Activate medkit ?
+    //static void Enable (bool _enable);
+    //static bool NewMedkit();
+    //void DropMedkit();
+    static void LoadXml(const xmlpp::Element * object);
+
+    void Draw();
+    void Refresh();
+
+  protected:
+    // Signal Fall ending
+    //void SignalCollision();
+    //void SignalDrowning();
+    //void SignalGhostState(bool was_already_dead);
 };
 
 //-----------------------------------------------------------------------------

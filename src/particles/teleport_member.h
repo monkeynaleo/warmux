@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 
 #ifndef TELEPORT_MEMBER_H
 #define TELEPORT_MEMBER_H
-#include "particles/particle.h"
+#include "particle.h"
 
 const int teleportation_anim_duration = 1000;
 
@@ -38,4 +38,4 @@ class TeleportMemberParticle : public Particle
   void Refresh();
 };
 
-#endif /* TELEPORT_MEMBER_H */
+#endif

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@
 #define MAP_H
 
 #include "include/base.h"
-#include "map/ground.h"
-#include "map/sky.h"
-#include "map/water.h"
+#include "ground.h"
+#include "sky.h"
+#include "water.h"
 
 // Forward declarations
 class Text;
@@ -33,21 +33,6 @@ class Surface;
 class PhysicalObj;
 
 extern const uint MAX_WIND_OBJECTS;
-
-// a structure used when tracing rays (e.g. determining the collision)
-struct TraceResult
-{
-  Point2i m_hit; // place where ray hit the ground
-  float m_fraction; // relative position of hit point (0=start, 1=end)
-  // more to come: ground normal, ground type, etc
-};
-
-enum // trace flags
-{
-  COMPUTE_HIT       =   (1<<0),
-  RETURN_LAST_IN_VACUUM_AS_HIT = (1<<1)
-};
-
 
 class Map{
   Map(const Map&);
@@ -83,10 +68,6 @@ public:
   // To manage the cache mechanism
   void ToRedrawOnMap(const Rectanglei& r) { to_redraw->push_back(r); };
   void ToRedrawOnScreen(Rectanglei r);
-
-  // traces ray, determining the collision point (if any)
-  // if no collision detected, TraceResult is left uninitialized
-  bool TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, uint trace_flags = COMPUTE_HIT);
 
   // Are we in the world or in vacuum ?
   bool IsInVacuum(const Point2i &pos) const { return ground.IsEmpty(pos); };

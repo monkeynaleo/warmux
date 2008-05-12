@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,22 +32,20 @@ class Text
   std::string txt;
   Color color;
   bool shadowed;
-  bool dummy;
   uint bg_offset;
   uint max_width;
 
   Font::font_size_t font_size;
   Font::font_style_t font_style;
 
-  virtual void Render();
+  void Render();
   void RenderMultiLines();
 public:
   Text(const std::string &new_txt,
        const Color& new_color = white_color,
        Font::font_size_t fsize = Font::FONT_SMALL,
        Font::font_style_t fstyle = Font::FONT_NORMAL,
-       bool shadowed = true,
-       bool dummy = false);
+       bool shadowed = true);
   virtual ~Text();
 
   //Draw method using windows coordinates
@@ -55,9 +53,6 @@ public:
   void DrawTopLeft(const Point2i &position) const;
   void DrawTopRight(const Point2i &position) const;
   void DrawCenterTop(const Point2i &position) const;
-
-  //Draw text cursor only (text_pos = position for DrawTopLeft)
-  void DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos) const;
 
   //Draw method using map coordinates
   void DrawCenterTopOnMap(const Point2i &position) const;

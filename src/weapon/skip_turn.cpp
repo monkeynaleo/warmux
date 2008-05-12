@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,11 +19,12 @@
  * Skip his turn
  *****************************************************************************/
 
-#include "weapon/skip_turn.h"
-#include "weapon/weapon_cfg.h"
+#include "skip_turn.h"
+#include "weapon_cfg.h"
 
 //-----------------------------------------------------------------------------
 #include "character/character.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "interface/game_msg.h"
 #include "sound/jukebox.h"
@@ -34,19 +35,9 @@
 
 SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn", new WeaponConfig())
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Skip turn");
   m_category = TOOL;
   m_time_between_each_shot = 40;
-}
-
-//-----------------------------------------------------------------------------
-
-void SkipTurn::UpdateTranslationStrings()
-{
-  m_name = _("Skip turn");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
 }
 
 //-----------------------------------------------------------------------------
@@ -56,7 +47,7 @@ bool SkipTurn::p_Shoot()
   // Show message
   GameMessages::GetInstance()->Add (Format(_("%s team has skipped its turn."),
                                            ActiveTeam().GetName().c_str()));
-  JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "skip_turn");
+  jukebox.Play(ActiveTeam().GetSoundProfile(), "skip_turn");
   return true;
 }
 

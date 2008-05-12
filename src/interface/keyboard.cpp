@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,10 +19,19 @@
  * Keyboard management.
  *****************************************************************************/
 
-#include "interface/keyboard.h"
-#include "game/game.h"
+#include "keyboard.h"
+#include "game/game_loop.h"
 #include "network/chat.h"
 #include <SDL_events.h>
+
+Keyboard * Keyboard::singleton = NULL;
+
+Keyboard * Keyboard::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Keyboard();
+  }
+  return singleton;
+}
 
 Keyboard::Keyboard() : ManMachineInterface()
 {
@@ -47,7 +56,7 @@ void Keyboard::SetDefaultConfig()
   SetKeyAction(SDLK_SPACE,     ManMachineInterface::KEY_SHOOT);
   SetKeyAction(SDLK_TAB,       ManMachineInterface::KEY_NEXT_CHARACTER);
   SetKeyAction(SDLK_ESCAPE,    ManMachineInterface::KEY_QUIT);
-  SetKeyAction(SDLK_PAUSE,     ManMachineInterface::KEY_PAUSE);
+  SetKeyAction(SDLK_p,         ManMachineInterface::KEY_PAUSE);
   SetKeyAction(SDLK_F10,       ManMachineInterface::KEY_FULLSCREEN);
   SetKeyAction(SDLK_F9,        ManMachineInterface::KEY_TOGGLE_INTERFACE);
   SetKeyAction(SDLK_F1,        ManMachineInterface::KEY_WEAPONS1);
@@ -71,9 +80,7 @@ void Keyboard::SetDefaultConfig()
   SetKeyAction(SDLK_PAGEUP,    ManMachineInterface::KEY_WEAPON_MORE);
   SetKeyAction(SDLK_PAGEDOWN,  ManMachineInterface::KEY_WEAPON_LESS);
   SetKeyAction(SDLK_s,         ManMachineInterface::KEY_CHAT);
-  SetKeyAction(SDLK_t,         ManMachineInterface::KEY_CHAT);
-  SetKeyAction(SDLK_F11,       ManMachineInterface::KEY_MENU_OPTIONS_FROM_GAME);
-  SetKeyAction(SDLK_m,         ManMachineInterface::KEY_MINIMAP_FROM_GAME);
+  SetKeyAction(SDLK_F11,         ManMachineInterface::KEY_MENU_OPTIONS_FROM_GAME);
 }
 
 void Keyboard::HandleKeyEvent(const SDL_Event& event)
@@ -81,6 +88,13 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
   // Not a registred event
   if(!IsRegistredEvent(event.type))
     return;
+
+  //Handle input text for Chat session in Network game
+  //While player writes, it cannot control the game.
+  if(GameLoop::GetInstance()->chatsession.CheckInput()){
+    GameLoop::GetInstance()->chatsession.HandleKey(event);
+    return;
+  }
 
   Key_Event_t event_type;
   switch(event.type)
@@ -95,29 +109,12 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
       return;
     }
 
-  //Handle input text for Chat session in Network game
-  if (event_type == KEY_PRESSED && Game::GetInstance()->chatsession.CheckInput()){
-    Game::GetInstance()->chatsession.HandleKey(event);
-    return;
-  }
-
   std::map<int, Key_t>::iterator it = layout.find(event.key.keysym.sym);
 
   if(it == layout.end())
     return;
 
   Key_t key = it->second;
-
-  //While player writes, it cannot control the game but QUIT or PAUSE.
-  if (Game::GetInstance()->chatsession.CheckInput()) {
-    switch (key) {
-    case KEY_QUIT:
-    case KEY_PAUSE:
-      break;
-    default:
-      return;
-    }
-  }
 
   if(event_type == KEY_PRESSED) {
     HandleKeyPressed(key);

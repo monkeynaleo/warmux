@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
  * Useful for weapons: explode on one point
  *****************************************************************************/
 
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 #include "character/character.h"
 #include "graphic/surface.h"
@@ -30,16 +30,17 @@
 #include "map/map.h"
 #include "network/network.h"
 #include "object/objects_list.h"
-#include "object/physical_obj.h"
 #include "particles/particle.h"
+#include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/debug.h"
 #include "tool/math_tools.h"
+#include "weapon.h"
+#include "object/physical_obj.h"
+#include "graphic/surface.h"
 #include "tool/resource_manager.h"
-#include "tool/random.h"
-#include "weapon/weapon.h"
 
 Profile *weapons_res_profile = NULL;
 
@@ -51,7 +52,7 @@ void ApplyExplosion_common (const Point2i &pos,
                             std::string network_id
                             )
 {
-  MSG_DEBUG("explosion", "explosion range : %i", config.explosion_range);
+  MSG_DEBUG("explosion", "explosion range : %i\n", config.explosion_range);
 
 #ifdef HAVE_A_REALLY_BIG_CPU
   // Add particles based on the ground image
@@ -74,23 +75,23 @@ void ApplyExplosion_common (const Point2i &pos,
 
   // Play a sound
   if (son != "") {
-    JukeBox::GetInstance()->Play("share", son);
+    jukebox.Play("share", son);
   }
 
   // Apply damage on the character.
   // Do not care about the death of the active character.
   double highest_force = 0.0;
   Character* fastest_character = NULL;
-  FOR_ALL_CHARACTERS(team, character)
+  FOR_ALL_CHARACTERS(equipe,ver)
   {
-    double distance = pos.Distance(character -> GetCenter());
+    double distance = pos.Distance(ver -> GetCenter());
     if(distance < 1.0)
       distance = 1.0;
 
     // If the character is in the explosion range, apply damage on it !
     if (distance <= config.explosion_range)
     {
-      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", character->GetName().c_str(), distance);
+      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", ver->GetName().c_str(), distance);
       double dmg;
       if( config.explosion_range != 0)
         dmg = cos(M_PI_2 * distance / (float)config.explosion_range);
@@ -98,8 +99,8 @@ void ApplyExplosion_common (const Point2i &pos,
         dmg = cos(M_PI_2 * distance);
 
       dmg *= config.damage;
-      MSG_DEBUG("explosion", "hit_point_loss energy= %i", character->GetName().c_str(), dmg);
-      character -> SetEnergyDelta (-(int)dmg);
+      MSG_DEBUG("explosion", "hit_point_loss energy= %i", ver->GetName().c_str(), dmg);
+      ver -> SetEnergyDelta (-(int)dmg);
     }
 
     // If the character is in the blast range, apply the blast on it !
@@ -115,13 +116,13 @@ void ApplyExplosion_common (const Point2i &pos,
 
       if ( force > highest_force )
       {
-        fastest_character = &(*character);
+        fastest_character = &(*ver);
         highest_force = force;
       }
 
       if (!EqualsZero(distance))
       {
-        angle  = pos.ComputeAngle(character -> GetCenter());
+        angle  = pos.ComputeAngle(ver -> GetCenter());
         if( angle > 0 )
           angle  = - angle;
       }
@@ -130,14 +131,14 @@ void ApplyExplosion_common (const Point2i &pos,
 
 
       MSG_DEBUG("explosion", "force = %f", force);
-      ASSERT(character->GetMass() != 0);
-      character->AddSpeed (force / character->GetMass(), angle);
-      character->SignalExplosion();
+      ASSERT(ver->GetMass() != 0);
+      ver->AddSpeed (force / ver->GetMass(), angle);
+      ver->SignalExplosion();
     }
   }
 
   if(fastest_character != NULL)
-    Camera::GetInstance()->FollowObject (fastest_character, true);
+    Camera::GetInstance()->GetInstance()->FollowObject (fastest_character, true, true);
 
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(it)
@@ -182,10 +183,8 @@ void ApplyExplosion_common (const Point2i &pos,
            angle = -M_PI_2;
 
          if(fastest_character != NULL)
-           Camera::GetInstance()->FollowObject (obj, true);
+           Camera::GetInstance()->GetInstance()->FollowObject (obj, true, true);
          ASSERT( obj->GetMass() != 0.0);
-
-	 MSG_DEBUG("explosion", "!! blasting object %s", network_id.c_str());
          obj->AddSpeed (force / obj->GetMass(), angle);
        }
      }
@@ -196,17 +195,6 @@ void ApplyExplosion_common (const Point2i &pos,
   // Do we need to generate some fire particles ?
   if (fire_particle)
      ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
-
-  // Shake the camera (FIXME: use actual vectors?)
-  if ( config.explosion_range > 25 && config.damage > 0 )
-  {
-     int reduced_range = ( int )config.explosion_range / 2;
-     Camera::GetInstance()->Shake( config.explosion_range * 15,
-         Point2i( randomObj.GetLong( -reduced_range, reduced_range  ),
-                config.explosion_range ),
-         Point2i( 0, 0 )
-        );
-  };
 }
 
 void ApplyExplosion_master (const Point2i &pos,
@@ -223,8 +211,8 @@ void ApplyExplosion_master (const Point2i &pos,
   Network::GetInstance()->SendAction(&a_begin_sync);
 
   TeamsList::iterator
-    it=GetTeamsList().playing_list.begin(),
-    end=GetTeamsList().playing_list.end();
+    it=teams_list.playing_list.begin(),
+    end=teams_list.playing_list.end();
 
   Action a_characters_info(Action::ACTION_CHARACTER_SET_PHYSICS);
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #ifndef AIR_ATTACK_H
 #define AIR_ATTACK_H
 
-#include "weapon/weapon_launcher.h"
+#include "weapon_launcher.h"
 
 class AirAttackConfig;
 class Sprite;
@@ -67,7 +67,6 @@ class AirAttack : public Weapon
   public:
     AirAttack();
     void ChooseTarget (Point2i mouse_pos);
-    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
     bool IsInUse() const;
   private:

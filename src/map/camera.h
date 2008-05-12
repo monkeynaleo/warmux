@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,46 +23,30 @@
 #define SCROLLING_H
 
 #include "include/base.h"
-#include "interface/mouse.h"
 #include "tool/point.h"
 #include "tool/rectangle.h"
 
 class PhysicalObj;
 
-class Camera : public Rectanglei, public Singleton<Camera>
+class Camera : public Rectanglei
 {
   Camera(const Camera&);
   const Camera& operator=(const Camera&);
 
 private:
-  Mouse::pointer_t pointer_used_before_scroll;
-  uint m_started_shaking;
-  uint m_shake_duration;
-  Point2i m_shake_amplitude;
-  Point2i m_shake_centerpoint;
-  mutable Point2i m_shake;
-  mutable uint m_last_time_shake_calculated;
-
-  void SaveMouseCursor();
-  void RestoreMouseCursor();
-
-  void TestCamera();
-  void ScrollCamera();
+  static Camera * singleton;
+  Camera();
 
   bool auto_crop;
-  bool in_advance;
   const PhysicalObj* followed_object;
-  void AutoCrop();
+  bool throw_camera;
+  bool follow_closely;
 
   Point2i FreeDegrees() const { return Point2i(HasFixedX()? 0 : 1, HasFixedY()? 0 : 1); };
   Point2i NonFreeDegrees() const { return Point2i(1, 1) - FreeDegrees(); };
-  Point2i ComputeShake() const;
-
-protected:
-  friend class Singleton<Camera>;
-  Camera();
-
 public:
+  static Camera * GetInstance();
+
   // before beginning a game
   void Reset();
 
@@ -75,36 +59,21 @@ public:
   void SetXYabs(const Point2i &pos) { SetXYabs(pos.x, pos.y); };
 
   // Auto crop on an object
-  // in_advance is used to center the camera on the direction where the object is going
-  void FollowObject(const PhysicalObj *obj, bool follow, bool in_advance = false);
-  void StopFollowingObj(const PhysicalObj* obj);
-
-  void CenterOnActiveCharacter();
+  void FollowObject (const PhysicalObj *obj,
+                     bool follow, bool center_on,
+                     bool force_center_on_object=false);
+  void StopFollowingObj (const PhysicalObj* obj);
 
   bool IsVisible(const PhysicalObj &obj) const;
 
   void Refresh();
 
-  inline Point2i GetPosition() const
-  {
-      return position + ComputeShake();
-  }
-
-  inline int GetPositionX() const
-  {
-      return position.x + ComputeShake().x;
-  }
-
-  inline int GetPositionY() const
-  {
-      return position.y + ComputeShake().y;
-  }
-
-  void Shake( uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint );
-  void ResetShake();
-
+  void CenterOn(const PhysicalObj &obj);
+  void CenterOnFollowedObject() { CenterOn(*followed_object); };
+  void AutoCrop();
   void SetAutoCrop(bool crop) { auto_crop = crop; };
   bool IsAutoCrop() const { return auto_crop; };
+  void SetCloseFollowing(bool close) { follow_closely = close; };
 };
 
 #endif

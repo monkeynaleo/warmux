@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,11 +19,12 @@
  * Weapon Syringe
  *****************************************************************************/
 
-#include "weapon/explosion.h"
-#include "weapon/syringe.h"
-#include "weapon/weapon_cfg.h"
+#include "explosion.h"
+#include "syringe.h"
+#include "weapon_cfg.h"
 
 #include "character/character.h"
+#include "game/game_loop.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
@@ -38,7 +39,7 @@ class SyringeConfig : public WeaponConfig
     uint damage;
     uint turns;
     SyringeConfig();
-    void LoadXml(xmlNode* elem);
+    void LoadXml(xmlpp::Element *elem);
 };
 
 SyringeConfig& Syringe::cfg() {
@@ -51,7 +52,7 @@ SyringeConfig::SyringeConfig(){
   damage = 10;
 }
 
-void SyringeConfig::LoadXml(xmlNode* elem){
+void SyringeConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
   XmlReader::ReadUint(elem, "turns", turns);
@@ -60,16 +61,8 @@ void SyringeConfig::LoadXml(xmlNode* elem){
 
 Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())
 {
-  UpdateTranslationStrings();
-
-  m_category = DUEL;
-}
-
-void Syringe::UpdateTranslationStrings()
-{
   m_name = _("Syringe");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_category = DUEL;
 }
 
 bool Syringe::p_Shoot (){
@@ -77,7 +70,7 @@ bool Syringe::p_Shoot (){
   double radius = 0.0;
   bool end = false;
 
-  JukeBox::GetInstance()->Play ("share","weapon/syringe");
+  jukebox.Play ("share","weapon/syringe");
 
   do
   {
@@ -97,7 +90,7 @@ bool Syringe::p_Shoot (){
     if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( character->Contain(pos_to_check) )
+      if( character->ObjTouche(pos_to_check) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
         character->SetDiseaseDamage(cfg().damage, cfg().turns);

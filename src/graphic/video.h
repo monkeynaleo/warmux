@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,32 +28,31 @@
 class Video{
  private:
   uint m_max_fps;     // If equals to zero, it means no limit
-  uint m_max_delay;
+  uint m_sleep_max_fps;
   bool SDLReady;
   bool fullscreen;
-  SDL_Surface *icon;
 
   std::list<Point2i> available_configs;
   void ComputeAvailableConfigs();
 
-  void SetWindowIcon(const std::string& icon);
+  void SetWindowIcon(const std::string& icon) const;
   void InitSDL(void);
 
 public:
   Surface window;
   void SetWindowCaption(const std::string& caption) const;
   void SetMaxFps(uint max_fps);
-  uint GetMaxFps() const { return m_max_fps; };
-  uint GetMaxDelay() const { return m_max_delay; };
+  uint GetMaxFps() const;
+  uint GetSleepMaxFps() const;
   void AddConfigIfAbsent(int w, int h);
 
 public:
   Video();
   ~Video();
 
-  bool IsFullScreen() const { return fullscreen; };
+  bool IsFullScreen() const;
 
-  const std::list<Point2i>& GetAvailableConfigs() const { return available_configs; };
+  const std::list<Point2i>& GetAvailableConfigs() const;
   bool SetConfig(int width, int height, bool fullscreen);
   void ToggleFullscreen();
 

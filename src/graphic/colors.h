@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,11 +24,9 @@
 
 #include "color.h"
 
-const Color transparent_color (255, 255, 255, SDL_ALPHA_TRANSPARENT);
-
 // Greyscale
 const Color white_color (255, 255, 255, SDL_ALPHA_OPAQUE);
-const Color light_gray_color (169, 169, 169, SDL_ALPHA_OPAQUE);
+const Color lightgray_color (169, 169, 169, SDL_ALPHA_OPAQUE);
 const Color gray_color (128, 128, 128, SDL_ALPHA_OPAQUE);
 const Color dark_gray_color (64, 64, 64, SDL_ALPHA_OPAQUE);
 const Color black_color (0, 0, 0, SDL_ALPHA_OPAQUE);
@@ -43,17 +41,18 @@ const Color c_grey   (0xF0, 0xF0, 0xF0, 0x70);
 const Color green_color (68, 120, 51, SDL_ALPHA_OPAQUE);
 
 const Color primary_red_color(255, 0, 0, SDL_ALPHA_OPAQUE);
-const Color primary_green_color(0, 255, 0, SDL_ALPHA_OPAQUE);
-const Color primary_blue_color(0, 0, 255, SDL_ALPHA_OPAQUE);
 
 // Default colors:
 const Color defaultColorBox(80, 80, 159, 206);
 const Color defaultColorRect(49, 32, 122, 255);
 
-const Color defaultOptionColorBox(255, 255, 255, 160);
-const Color defaultOptionColorRect(59, 88, 129, SDL_ALPHA_OPAQUE);
-
+const Color defaultOptionColorBox(255,255,255,160);
+//const Color defaultOptionColorBox(34, 133, 175, 206);
 const Color highlightOptionColorBox(200, 100, 100, 206);
+//const Color defaultOptionColorBox(34, 133, 175, 206);
+
+const Color defaultDisabledColorBox(0,0,0,127);
+const Color defaultOptionColorRect(59,88,129,206);
 
 //const Color defaultListColor1(255, 255, 255, 255*3/10);
 const Color defaultListColor1(75, 163, 200, 255*3/10);

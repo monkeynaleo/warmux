@@ -1,3 +1,4 @@
+
 Licence Publique Générale GNU
 
 Benjamin Drieu, APRIL (bdrieu@april.org), Mélanie Clément-Fontaine (melanie@amberlab.net), Arnaud Fontaine (arnaud@crao.net), Loïc Dachary (loic@gnu.org), Frédéric Couchet (fcouchet@fsffrance.org).

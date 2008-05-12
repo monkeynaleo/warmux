@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
  *  wind Refresh (you may get cold ;) )
  *****************************************************************************/
 
-#include "map/wind.h"
-#include "map/camera.h"
+#include "wind.h"
+#include "camera.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
@@ -71,26 +71,33 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   // Sprite loading
   scale = 0.5 + scale / 2.0;
 
-  sprite = resource_manager.LoadSprite( ActiveMap()->ResProfile(), "wind_particle");
-  sprite->Scale(scale, scale);
-  sprite->RefreshSurface();
+  Sprite* tmp = resource_manager.LoadSprite( ActiveMap().ResProfile(), "wind_particle");
+  tmp->Scale(scale, scale);
+  tmp->RefreshSurface();
+  sprite = new Sprite(tmp->GetSurface());
   sprite->SetAlpha(scale);
-  sprite->SetCurrentFrame(randomObj.GetLong(0, sprite->GetFrameCount() - 1));
+  sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
 
-  if(ActiveMap()->GetWind().need_flip) {
-    flipped = new Sprite(*sprite);
-    flipped->Scale(-scale, scale);
-    flipped->RefreshSurface();
+  if(ActiveMap().wind.need_flip)
+  {
+    tmp->Scale(-scale, scale);
+    tmp->RefreshSurface();
+    flipped = new Sprite(tmp->GetSurface());
     flipped->SetAlpha(scale);
-    flipped->SetCurrentFrame(randomObj.GetLong(0, sprite->GetFrameCount()-1));
-  } else {
-    flipped = NULL;
+    flipped->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
   }
+  else
+    flipped = NULL;
 
-  if(ActiveMap()->GetWind().rotation_speed != 0.0) {
+  delete tmp;
+
+
+  if(ActiveMap().wind.rotation_speed != 0.0)
+  {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
-    if(flipped) {
+    if(flipped)
+    {
       flipped->EnableRotationCache(64);
       flipped->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
     }
@@ -111,16 +118,16 @@ void WindParticle::Refresh()
     sprite->Update();
 
   // Rotate the sprite if needed
-  if(ActiveMap()->GetWind().rotation_speed != 0.0)
+  if(ActiveMap().wind.rotation_speed != 0.0)
   {
     if(flipped && GetSpeed().x < 0)
     {
-      float new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
+      float new_angle = flipped->GetRotation_rad() + ActiveMap().wind.rotation_speed;
       flipped->SetRotation_rad(new_angle);
     }
     else
     {
-      float new_angle = sprite->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
+      float new_angle = sprite->GetRotation_rad() + ActiveMap().wind.rotation_speed;
       sprite->SetRotation_rad(new_angle);
     }
   }
@@ -185,11 +192,11 @@ void Wind::Reset(){
   if (!Config::GetInstance()->GetDisplayWindParticles())
     return;
 
-  uint nb = ActiveMap()->GetWind().nb_sprite;
+  uint nb = ActiveMap().wind.nb_sprite;
 
   if (!nb) return;
 
-  std::string config_file = ActiveMap()->GetConfigFilepath();
+  std::string config_file = ActiveMap().m_directory + PATH_SEPARATOR + "config.xml";
 
   for (uint i=0; i<nb; ++i){
     WindParticle *tmp = new WindParticle(config_file, (float)i / nb);

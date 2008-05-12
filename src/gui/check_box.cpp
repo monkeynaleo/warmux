@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,31 +19,31 @@
  * Checkbox in GUI.
  *****************************************************************************/
 
-#include "gui/check_box.h"
+#include "check_box.h"
 #include "graphic/text.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
-#include "graphic/video.h"
-#include "include/app.h"
 #include "tool/resource_manager.h"
 
-CheckBox::CheckBox(const std::string& label, uint width, bool value):
+CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value):
   txt_label(new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL)),
   m_value(value),
-  m_checked_image(NULL)
+  m_checked_image(NULL),
+  hidden(false)
 {
-  Init(width);
+  Init(rect);
 }
 
-CheckBox::CheckBox(Text *text, uint width, bool value):
+CheckBox::CheckBox(Text *text, const Rectanglei &rect, bool value):
   txt_label(text),
   m_value(value),
-  m_checked_image(NULL)
+  m_checked_image(NULL),
+  hidden(false)
 {
-  Init(width);
+  Init(rect);
 }
 
-void CheckBox::Init(uint width)
+void CheckBox::Init(const Rectanglei &rect)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_checked_image = resource_manager.LoadSprite( res, "menu/check");
@@ -51,9 +51,10 @@ void CheckBox::Init(uint width)
 
   m_checked_image->cache.EnableLastFrameCache();
 
-  position = Point2i(W_UNDEF, W_UNDEF);
-  size.x = width;
-  size.y = txt_label->GetHeight();
+  SetPosition( rect.GetPosition() );
+  SetSize( rect.GetSize() );
+
+  SetSizeY( (*Font::GetInstance(Font::FONT_SMALL)).GetHeight() );
 }
 
 CheckBox::~CheckBox()
@@ -62,30 +63,32 @@ CheckBox::~CheckBox()
   delete txt_label;
 }
 
-void CheckBox::Pack()
+void CheckBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
 {
-  txt_label->SetMaxWidth(size.x - m_checked_image->GetWidth() -2);
-  size.y = std::max(uint(txt_label->GetHeight()),
-		    m_checked_image->GetHeight());
-}
+  if (!hidden)
+    {
+      txt_label->DrawTopLeft( GetPosition() );
 
-void CheckBox::Draw(const Point2i &/*mousePosition*/) const
-{
-  Surface& surf = AppWormux::GetInstance()->video->window;
+      if (m_value)
+        m_checked_image->SetCurrentFrame(0);
+      else
+        m_checked_image->SetCurrentFrame(1);
 
-  txt_label->DrawTopLeft( GetPosition() );
-
-  if (m_value)
-    m_checked_image->SetCurrentFrame(0);
-  else
-    m_checked_image->SetCurrentFrame(1);
-
-  m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
+      m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
+    }
 }
 
 Widget* CheckBox::ClickUp(const Point2i &/*mousePosition*/, uint /*button*/)
 {
-  NeedRedrawing();
+  need_redrawing = true;
   m_value = !m_value;
   return this;
+}
+
+void CheckBox::SetVisible(bool visible)
+{
+  if (hidden == visible) {
+    hidden = !visible;
+    need_redrawing = true;
+  }
 }

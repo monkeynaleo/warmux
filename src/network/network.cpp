@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,12 +21,11 @@
 
 #include <SDL_thread.h>
 #include <SDL_timer.h>
-#include "network/network.h"
-#include "network/network_local.h"
-#include "network/network_client.h"
-#include "network/network_server.h"
-#include "network/distant_cpu.h"
-#include "network/chatlogger.h"
+#include "network.h"
+#include "network_local.h"
+#include "network_client.h"
+#include "network_server.h"
+#include "distant_cpu.h"
 //-----------------------------------------------------------------------------
 #include "game/game_mode.h"
 #include "game/game.h"
@@ -66,11 +65,12 @@ int  Network::num_objects = 0;
 bool Network::sdlnet_initialized = false;
 bool Network::stop_thread = true;
 
+Network * Network::singleton = NULL;
+
 Network * Network::GetInstance()
 {
   if (singleton == NULL) {
-    singleton = new NetworkLocal();
-    MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkLocal'\n", singleton);
+    singleton = new   NetworkLocal();
   }
   return singleton;
 }
@@ -83,8 +83,7 @@ NetworkServer * Network::GetInstanceServer()
   return (NetworkServer*)singleton;
 }
 
-Network::Network(const std::string& passwd):
-  password(passwd),
+Network::Network():
   turn_master_player(false),
   state(NO_NETWORK),// useless value at beginning
   thread(NULL),
@@ -96,18 +95,13 @@ Network::Network(const std::string& passwd):
 #endif
   network_menu(NULL),
   cpu(),
-  sync_lock(false)
-{
-  const char *nick = NULL;
+  sync_lock(false),
 #ifdef WIN32
-  char  buffer[32];
-  DWORD size = 32;
-  if (GetUserName(buffer, &size))
-    nick = buffer;
+  nickname(getenv("USERNAME"))
 #else
-  nick = getenv("USER");
+  nickname(getenv("USER"))
 #endif
-  nickname = (nick) ? nick : _("Unnamed");
+{
   sdlnet_initialized = false;
   num_objects++;
 }
@@ -127,6 +121,7 @@ Network::~Network()
   {
     if (sdlnet_initialized)
     {
+      //printf("###  SDL_net end\n");
       SDLNet_Quit();
       sdlnet_initialized = false;
     }
@@ -144,104 +139,13 @@ int Network::ThreadRun(void*/*no_param*/)
 {
   MSG_DEBUG("network", "Thread created: %u", SDL_ThreadID());
   GetInstance()->ReceiveActions();
+#ifndef WIN32
+  Disconnect(); // this is really needed but it causes a deadlock on WIN32 for unknown reason
+#endif
+  std::cout << "Network : end of thread" << std::endl;
   return 1;
 }
 
-void Network::ReceiveActions()
-{
-  char* packet;
-  std::list<DistantComputer*>::iterator dst_cpu;
-
-  while (ThreadToContinue()) // While the connection is up
-  {
-    if (state == NETWORK_PLAYING && cpu.size() == 0)
-    {
-      // If while playing everybody disconnected, just quit
-      break;
-    }
-
-    //Loop while nothing is received
-    while (ThreadToContinue())
-    {
-      WaitActionSleep();
-
-      if (cpu.empty()) {
-        if (IsClient()) {
-          fprintf(stderr, "you are alone!\n");
-	  stop_thread = true;
-        }
-        // Even for server, as Visual Studio in debug mode has trouble with that loop
-	continue;
-      }
-
-      // Check forced disconnections
-      for (dst_cpu = cpu.begin();
-           ThreadToContinue() && dst_cpu != cpu.end();
-           dst_cpu++)
-      {
-        if((*dst_cpu)->force_disconnect)
-        {
-          dst_cpu = CloseConnection(dst_cpu);
-          continue;
-        }
-      }
-
-      int num_ready = SDLNet_CheckSockets(socket_set, 100);
-      // Means something is available
-      if (num_ready>0)
-        break;
-      // Means an error
-      else if (num_ready == -1)
-      {
-        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
-        continue; //Or break?
-      }
-    }
-
-    for (dst_cpu = cpu.begin();
-         ThreadToContinue() && dst_cpu != cpu.end();
-         dst_cpu++)
-    {
-      if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
-      {
-        // Read the size of the packet
-        int packet_size = (*dst_cpu)->ReceiveDatas(packet);
-        if( packet_size == -1) { // An error occured during the reception
-          dst_cpu = CloseConnection(dst_cpu);
-          // Please Visual Studio that in debug mode has trouble with continuing
-          if (cpu.empty())
-            break;
-          continue;
-        } else
-        if (packet_size == 0) // We didn't receive the full packet yet
-          continue;
-
-#ifdef LOG_NETWORK
-        if (fin != 0) {
-          int tmp = 0xFFFFFFFF;
-          write(fin, &packet_size, 4);
-          write(fin, packet, packet_size);
-          write(fin, &tmp, 4);
-        }
-#endif
-
-        Action* a = new Action(packet, (*dst_cpu));
-#ifdef DEBUG
-        MSG_DEBUG("network.crc", "CRC : received %d, computed %d", a->GetCRC(), a->ComputeCRC());
-#endif
-        if(!a->CheckCRC()) {
-          MSG_DEBUG("network.crc_bad","!!! Bad CRC for action received !!!");
-          delete a;
-        } else {
-          MSG_DEBUG("network.traffic", "Received action %s",
-                    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
-          HandleAction(a, *dst_cpu);
-        }
-        free(packet);
-      }
-    }
-  }
-}
 //-----------------------------------------------------------------------------
 
 void Network::Init()
@@ -267,21 +171,26 @@ void Network::Init()
 void Network::Disconnect()
 {
   // restore Windows title
-  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION);
+  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::VERSION);
 
   if (singleton != NULL) {
     singleton->stop_thread = true;
     singleton->DisconnectNetwork();
     delete singleton;
-    ChatLogger::CloseIfOpen();
+    singleton = NULL;
   }
+}
+
+static inline void sdl_thread_wait_for(SDL_Thread* thread, uint /*timeout*/)
+{
+  SDL_WaitThread(thread, NULL);
 }
 
 // Protected method for client and server
 void Network::DisconnectNetwork()
 {
   if (thread != NULL && SDL_ThreadID() != SDL_GetThreadID(thread)) {
-    SDL_WaitThread(thread, NULL);
+    sdl_thread_wait_for(thread, 4000);
   }
 
   thread = NULL;
@@ -312,44 +221,44 @@ typedef int SOCKET;
 # define closesocket(fd) close(fd)
 #endif
 
-connection_state_t Network::GetError() const
+const Network::connection_state_t Network::GetError() const
 {
 #ifdef WIN32
   int code = WSAGetLastError();
   switch (code)
   {
-  case WSAECONNREFUSED: return CONN_REJECTED;
+  case WSAECONNREFUSED: return Network::CONN_REJECTED;
   case WSAEINPROGRESS:
-  case WSAETIMEDOUT: return CONN_TIMEOUT;
+  case WSAETIMEDOUT: return Network::CONN_TIMEOUT;
   default:
     fprintf(stderr, "Generic network error of code %i\n", code);
-    return CONN_BAD_SOCKET;
+    return Network::CONN_BAD_SOCKET;
   }
 #else
   switch(errno)
   {
-  case ECONNREFUSED: return CONN_REJECTED;
+  case ECONNREFUSED: return Network::CONN_REJECTED;
   case EINPROGRESS:
-  case ETIMEDOUT: return CONN_TIMEOUT;
+  case ETIMEDOUT: return Network::CONN_TIMEOUT;
   default:
     fprintf(stderr, "Generic network error of code %i\n", errno);
-    return CONN_BAD_SOCKET;
+    return Network::CONN_BAD_SOCKET;
   }
 #endif
 }
 
-connection_state_t Network::CheckHost(const std::string &host, int prt) const
+const Network::connection_state_t Network::CheckHost(const std::string &host, int prt) const
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 
   struct hostent* hostinfo;
   hostinfo = gethostbyname(host.c_str());
   if( ! hostinfo )
-    return CONN_BAD_HOST;
+    return Network::CONN_BAD_HOST;
 
   SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
   if( fd == INVALID_SOCKET )
-    return CONN_BAD_SOCKET;
+    return Network::CONN_BAD_SOCKET;
 
   // Set the timeout
 #ifdef WIN32
@@ -362,13 +271,13 @@ connection_state_t Network::CheckHost(const std::string &host, int prt) const
   if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
   {
     fprintf(stderr, "Setting receive timeout on socket failed\n");
-    return CONN_BAD_SOCKET;
+    return Network::CONN_BAD_SOCKET;
   }
 
   if (setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
   {
     fprintf(stderr, "Setting send timeout on socket failed\n");
-    return CONN_BAD_SOCKET;
+    return Network::CONN_BAD_SOCKET;
   }
 
   struct sockaddr_in addr;
@@ -383,10 +292,10 @@ connection_state_t Network::CheckHost(const std::string &host, int prt) const
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
   {
-    return GetError();
+    return Network::GetError();
   }
   closesocket(fd);
-  return CONNECTED;
+  return Network::CONNECTED;
 }
 
 //-----------------------------------------------------------------------------
@@ -394,7 +303,7 @@ connection_state_t Network::CheckHost(const std::string &host, int prt) const
 //-----------------------------------------------------------------------------
 
 // Send Messages
-void Network::SendAction(const Action* a) const
+void Network::SendAction(Action* a) const
 {
   MSG_DEBUG("network.traffic","Send action %s",
             ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
@@ -436,7 +345,7 @@ bool Network::IsConnected()
   return (!GetInstance()->IsLocal() && !stop_thread);
 }
 
-uint Network::GetPort() const
+const uint Network::GetPort() const
 {
   Uint16 prt;
   prt = SDLNet_Read16(&ip.port);
@@ -446,12 +355,10 @@ uint Network::GetPort() const
 //-----------------------------------------------------------------------------
 
 // Static method
-connection_state_t Network::ClientStart(const std::string& host,
-                                        const std::string& port,
-					const std::string& password)
+Network::connection_state_t Network::ClientStart(const std::string &host,
+                                                 const std::string& port)
 {
-  NetworkClient* net = new NetworkClient(password);
-  MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkClient'\n", net);
+  NetworkClient* net = new NetworkClient();
 
   // replace current singleton
   Network* prev = singleton;
@@ -459,9 +366,9 @@ connection_state_t Network::ClientStart(const std::string& host,
 
   // try to connect
   stop_thread = false;
-  const connection_state_t error = net->ClientConnect(host, port);
+  const Network::connection_state_t error = net->ClientConnect(host, port);
 
-  if (error != CONNECTED) {
+  if (error != Network::CONNECTED) {
     // revert change if connection failed
     stop_thread = true;
     singleton = prev;
@@ -469,17 +376,16 @@ connection_state_t Network::ClientStart(const std::string& host,
   } else if (prev != NULL) {
     delete prev;
   }
-  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION + " - Client mode");
+  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
   return error;
 }
 
 //-----------------------------------------------------------------------------
 
 // Static method
-connection_state_t Network::ServerStart(const std::string& port, const std::string& password)
+Network::connection_state_t Network::ServerStart(const std::string& port)
 {
-  NetworkServer* net = new NetworkServer(password);
-  MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkServer'\n", net);
+  NetworkServer* net = new NetworkServer();
 
   // replace current singleton
   Network* prev = singleton;
@@ -487,9 +393,9 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
 
   // try to connect
   stop_thread = false;
-  const connection_state_t error = net->ServerStart(port);
+  const Network::connection_state_t error = net->ServerStart(port);
 
-  if (error != CONNECTED) {
+  if (error != Network::CONNECTED) {
     // revert change
     stop_thread = true;
     singleton = prev;
@@ -497,7 +403,7 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
   } else if (prev != NULL) {
 
     // that's ok
-    AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION + " - Server mode");
+    AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Server mode");
     delete prev;
   }
   return error;
@@ -531,126 +437,4 @@ void Network::SetTurnMaster(bool master)
 bool Network::IsTurnMaster() const
 {
   return turn_master_player;
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-// Static methods usefull to communicate without action
-// (index server, handshake, ...)
-
-void Network::Send(TCPsocket& socket, const int& nbr)
-{
-  char packet[4];
-  // this is not cute, but we don't want an int -> uint conversion here
-  Uint32 u_nbr = *((const Uint32*)&nbr);
-
-  SDLNet_Write32(u_nbr, packet);
-  SDLNet_TCP_Send(socket, packet, sizeof(packet));
-}
-
-void Network::Send(TCPsocket& socket, const std::string &str)
-{
-  Send(socket, str.size());
-  SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
-}
-
-uint Network::Batch(void* buffer, const int& nbr)
-{
-  // this is not cute, but we don't want an int -> uint conversion here
-  Uint32 u_nbr = *((const Uint32*)&nbr);
-
-  SDLNet_Write32(u_nbr, buffer);
-
-  return 4;
-}
-
-uint Network::Batch(void* buffer, const std::string &str)
-{
-  uint size = str.size();
-  Batch(buffer, size);
-  memcpy(((char*)buffer)+4, str.c_str(), size);
-  return 4+size;
-}
-
-// A batch consists in a msg id, a size, and the batch itself.
-// Size wasn't known yet, so write it now.
-void Network::SendBatch(TCPsocket& socket, void* data, size_t len)
-{
-  SDLNet_Write32(len, (void*)( ((char*)data)+4 ) );
-  SDLNet_TCP_Send(socket, data, len);
-}
-
-int Network::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
-{
-  char packet[4];
-  int r = 0;
-  Uint32 u_nbr;
-
-  if (SDLNet_CheckSockets(sock_set, 5000) == 0) {
-    r = 1;
-    goto out;
-  }
-
-  if (!SDLNet_SocketReady(socket)) {
-    r = -1;
-    goto out;
-  }
-
-  if (SDLNet_TCP_Recv(socket, packet, sizeof(packet)) < 1)
-  {
-    r = -2;
-    goto out;
-  }
-
-  u_nbr = SDLNet_Read32(packet);
-  nbr = *((int*)&u_nbr);
-
- out:
-  MSG_DEBUG("network", "r = %d", r);
-  return r;
-}
-
-int Network::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &_str)
-{
-  int r;
-  uint size = 0;
-  char* str;
-
-  r = ReceiveInt(sock_set, socket, (int&)size);
-  if (r) {
-    goto out;
-  }
-
-  if (size == 0) {
-    _str = "";
-    goto out;
-  }
-
-  if (SDLNet_CheckSockets(sock_set, 5000) == 0) {
-    r = -1;
-    goto out;
-  }
-
-  if (!SDLNet_SocketReady(socket)) {
-    r = -1;
-    goto out;
-  }
-
-  str = new char[size+1];
-  if( SDLNet_TCP_Recv(socket, str, size) < 1 )
-  {
-    r = -2;
-    goto out_delete;
-  }
-
-  str[size] = '\0';
-
-  _str = str;
-
- out_delete:
-  delete []str;
- out:
-  MSG_DEBUG("network", "r = %d", r);
-  return r;
 }

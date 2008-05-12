@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,20 +30,16 @@ class Character;
 
 class AIShootModule
 {
- public:
+ private:
+
   // ===== TODO : move in AI-stupid-engine
   typedef enum {
     NO_STRATEGY,
     NEAR_FROM_ENEMY,
     SHOOT_FROM_POINT,
-    SHOOT_BAZOOKA,
-    SKIP_TURN
+    SHOOT_BAZOOKA
   } strategy_t;
-  void SetStrategy(strategy_t new_strategy);
 
- private:
-  // Please, never modify m_current_strategy directly
-  // but always use SetStrategy, this is better for debugging
   strategy_t m_current_strategy;
 
   uint m_current_time;
@@ -85,6 +81,7 @@ class AIShootModule
   void BeginTurn();
 
   bool Refresh(uint current_time);
+  void SetNoStrategy();
 };
 
 #endif

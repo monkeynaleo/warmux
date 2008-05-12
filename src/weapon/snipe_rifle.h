@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #define SNIPE_RIFLE_H
 
 #include <vector>
-#include "weapon/weapon_launcher.h"
+#include "weapon_launcher.h"
 #include "graphic/color.h"
 #include "include/base.h"
 
@@ -37,7 +37,7 @@ class SnipeRifle : public WeaponLauncher
     bool targeting_something;
     Sprite * m_laser_image;
     Color laser_beam_color;
-    void ComputeCrossPoint(bool force);
+    bool ComputeCrossPoint(bool force);
 
   protected:
     bool p_Shoot();
@@ -45,12 +45,9 @@ class SnipeRifle : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
   public:
     SnipeRifle();
-    ~SnipeRifle();
     void SignalProjectileGhostState();
     void DrawBeam();
     void Draw();  // In order to draw the laser beam / and the contact point.
-
-    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 

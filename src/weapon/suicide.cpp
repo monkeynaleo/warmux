@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,29 +19,22 @@
  * Suicide.
  *****************************************************************************/
 
-#include "weapon/suicide.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "suicide.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 #include <iostream>
 #include "character/character.h"
 #include "character/body.h"
+#include "game/game_loop.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "include/action_handler.h"
 
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {
-  UpdateTranslationStrings();
-
-  m_category = DUEL;
-}
-
-void Suicide::UpdateTranslationStrings()
-{
   m_name = _("Commit Suicide");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_category = DUEL;
 }
 
 bool Suicide::p_Shoot()

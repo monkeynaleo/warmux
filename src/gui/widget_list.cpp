@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,22 +20,22 @@
  * It is a fake widget.
  *****************************************************************************/
 #include <SDL_keyboard.h>
-#include "gui/widget_list.h"
-#include "gui/widget.h"
+#include "widget_list.h"
+#include "widget.h"
 #include <iostream>
 
 WidgetList::WidgetList()
 {
   last_clicked = NULL;
-  mouse_selection = NULL;
   keyboard_selection = NULL;
+  mouse_selection = NULL;
 }
 
-WidgetList::WidgetList(const Point2i &size) : Widget(size)
+WidgetList::WidgetList(const Rectanglei &rect) : Widget(rect)
 {
   last_clicked = NULL;
-  mouse_selection = NULL;
   keyboard_selection = NULL;
+  mouse_selection = NULL;
 }
 
 WidgetList::~WidgetList()
@@ -61,125 +61,107 @@ void WidgetList::AddWidget(Widget* w)
   w->SetContainer(this);
 }
 
-void WidgetList::RemoveWidget(Widget* w)
+void WidgetList::Update(const Point2i &mousePosition, Surface& surf)
 {
-  ASSERT(w!=NULL);
-  widget_list.remove(w);
-  w->SetContainer(NULL);
-  delete w;
-}
-
-void WidgetList::Update(const Point2i &mousePosition)
-{
-  if (mouse_selection != NULL && !mouse_selection->Contains(mousePosition)) {
-    mouse_selection = NULL;
+  if(keyboard_selection != NULL && lastMousePosition != mousePosition) {
+    keyboard_selection->Unselect();
+    keyboard_selection = NULL;
   }
-
-  for (std::list<Widget*>::iterator w=widget_list.begin();
+  for(std::list<Widget*>::iterator w=widget_list.begin();
       w != widget_list.end();
       w++)
   {
     // Then redraw the widget
-    (*w)->Update(mousePosition, lastMousePosition);
-    if (lastMousePosition != mousePosition && (*w)->Contains(mousePosition)) {
+    (*w)->Update(mousePosition, lastMousePosition, surf);
+    if(lastMousePosition != mousePosition && (*w)->Contains(mousePosition)) {
       mouse_selection = (*w);
-      mouse_selection->SetHighlighted(true);
-    }
-
-    if ((*w) != mouse_selection && (*w) != keyboard_selection
-	&& !(*w)->Contains(mousePosition)) {
-      (*w)->SetHighlighted(false);
     }
   }
-
-  if (mouse_selection != NULL && keyboard_selection != NULL && lastMousePosition != mousePosition) {
-    keyboard_selection->SetFocus(false);
+  if(mouse_selection != NULL && keyboard_selection != NULL && lastMousePosition != mousePosition) {
+    keyboard_selection->Unselect();
     keyboard_selection = NULL;
   }
   lastMousePosition = mousePosition;
 }
 
-void WidgetList::SetKeyboardFocusOnNextWidget()
+void WidgetList::SetFocusOnNextWidget()
 {
+  if(mouse_selection != NULL && mouse_selection->Contains(lastMousePosition))
+    return;
   // No widget => exit
-  if (widget_list.size() == 0) {
+  if(widget_list.size() == 0) {
     keyboard_selection = NULL;
     return;
   }
-
   // Previous selection ?
-  if (keyboard_selection != NULL)
-    keyboard_selection->SetFocus(false);
-  else if (mouse_selection != NULL) {
-    keyboard_selection = mouse_selection;
-    mouse_selection->SetFocus(false);
-  } else {
+  if(keyboard_selection != NULL)
+    keyboard_selection->Unselect();
+  else {
     keyboard_selection = (*widget_list.begin());
-    keyboard_selection->SetFocus(true);
+    keyboard_selection->Select();
     return;
   }
-
   std::list<Widget*>::iterator w = widget_list.begin();
-  for (;  w != widget_list.end(); w++) {
-    if (keyboard_selection == (*w))
+  for(;  w != widget_list.end(); w++) {
+    if(keyboard_selection == (*w))
       break;
   }
   w++;
-
   // The next widget is not the end ?
-  if (w != widget_list.end()) {
+  if(w != widget_list.end()) {
     keyboard_selection = (*w);
   } else {
     keyboard_selection = (*widget_list.begin());
   }
-  keyboard_selection->SetFocus(true);
+  keyboard_selection->Select();
 }
 
-void WidgetList::SetKeyboardFocusOnPreviousWidget()
+void WidgetList::SetFocusOnPreviousWidget()
 {
+  if(mouse_selection != NULL && mouse_selection->Contains(lastMousePosition))
+    return;
   Widget * previous_one = NULL;
-
   // No widget => exit
-  if (widget_list.size() == 0) {
+  if(widget_list.size() == 0) {
     keyboard_selection = NULL;
     return;
   }
-
   // Previous selection ?
-  if (keyboard_selection != NULL)
-    keyboard_selection->SetFocus(false);
-  else if (mouse_selection != NULL) {
-    keyboard_selection = mouse_selection;
-    mouse_selection->SetFocus(false);
-  } else {
+  if(keyboard_selection != NULL)
+    keyboard_selection->Unselect();
+  else {
     keyboard_selection = (*widget_list.begin());
-    keyboard_selection->SetFocus(true);
+    keyboard_selection->Select();
     return;
   }
-
   std::list<Widget*>::iterator w = widget_list.begin();
-  for (; w != widget_list.end(); w++) {
-    if (keyboard_selection == (*w))
+  for(;  w != widget_list.end(); w++) {
+    if(keyboard_selection == (*w))
       break;
     previous_one = (*w);
   }
-
   // The next widget is not the end ?
-  if (previous_one == NULL) {
+  if(previous_one == NULL) {
     w = widget_list.end(); w--;
     keyboard_selection = (*w);
   } else {
     keyboard_selection = previous_one;
   }
-  keyboard_selection->SetFocus(true);
+  keyboard_selection->Select();
 }
 
-bool WidgetList::SendKey(SDL_keysym key)
+void WidgetList::Redraw(const Rectanglei& rect, Surface& surf)
 {
-  if (last_clicked != NULL)
-    return last_clicked->SendKey(key);
+  // Redraw bottom layer
+  if (ct != NULL) {
+    ct->Redraw(rect, surf);
+  }
+}
 
-  return false;
+void WidgetList::SendKey(SDL_keysym key)
+{
+  if(last_clicked != NULL)
+    last_clicked -> SendKey(key);
 }
 
 Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
@@ -193,7 +175,7 @@ Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
       Widget* child = (*w)->ClickUp(mousePosition,button);
       if(child != NULL)
       {
-        SetMouseFocusOn(child);
+        SetFocusOn(child);
         return child;
       }
     }
@@ -215,7 +197,7 @@ Widget* WidgetList::Click(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-void WidgetList::NeedRedrawing()
+void WidgetList::ForceRedraw()
 {
   need_redrawing = true;
 
@@ -223,28 +205,20 @@ void WidgetList::NeedRedrawing()
       w != widget_list.end();
       w++)
   {
-    (*w)->NeedRedrawing();
+    (*w)->ForceRedraw();
   }
 }
 
-void WidgetList::SetMouseFocusOn(Widget* w)
+void WidgetList::SetFocusOn(Widget* w)
 {
   if(last_clicked != NULL) {
-    last_clicked->SetFocus(false);
+    last_clicked->have_focus = false;
+    last_clicked->ForceRedraw();
   }
 
   if (w != NULL) {
     last_clicked = w ;
-    last_clicked->SetFocus(true);
-  }
-}
-
-void WidgetList::Pack()
-{
-  for(std::list<Widget*>::iterator w=widget_list.begin();
-      w != widget_list.end();
-      w++)
-  {
-    (*w)->Pack();
+    last_clicked->have_focus = true;
+    last_clicked->ForceRedraw();
   }
 }

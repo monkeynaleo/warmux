@@ -23,7 +23,22 @@
 #include <string>
 #include "net_data.h"
 
+class IndexServerConn;
+
 const std::string sync_serv_version = "WIS";
+
+// List that contains informations about wormux client/server connected
+// on other index servers
+class SyncSlave : public std::map<std::string, IndexServerConn*>
+{
+public:
+	SyncSlave();
+	~SyncSlave();
+	bool Start();
+	void CheckGames();
+};
+
+extern SyncSlave sync_slave;
 
 // Connection to an other index server
 // We don't send anything to this connection (except the handshake+version), we just receive information
@@ -31,26 +46,10 @@ const std::string sync_serv_version = "WIS";
 // connections on us).
 class IndexServerConn : public NetData
 {
- private:
-  bool HandShake();
-
- public:
-  IndexServerConn(const std::string &addr, int port);
-  ~IndexServerConn();
-  bool HandleMsg(enum IndexServerMsg msg_id);
+public:
+	IndexServerConn(const std::string &addr, int port);
+	~IndexServerConn();
+	bool HandleMsg(const std::string & full_str);
 };
-
-// List that contains informations about wormux client/server connected
-// on other index servers
-class SyncSlave : public std::map<std::string, IndexServerConn*>
-{
- public:
-  SyncSlave();
-  ~SyncSlave();
-  bool Start();
-  void CheckGames();
-};
-
-extern SyncSlave sync_slave;
 
 #endif

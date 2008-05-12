@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,9 +37,9 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
-#include "weapon/explosion.h"
-#include "weapon/submachine_gun.h"
-#include "weapon/weapon_cfg.h"
+#include "explosion.h"
+#include "submachine_gun.h"
+#include "weapon_cfg.h"
 
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
@@ -50,7 +50,6 @@ class SubMachineGunBullet : public WeaponBullet
   public:
     SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                         WeaponLauncher * p_launcher);
-    ~SubMachineGunBullet() { };
   protected:
     void ShootSound();
     void RandomizeShoot(double &angle,double &strength);
@@ -61,6 +60,7 @@ SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                                          WeaponLauncher * p_launcher) :
   WeaponBullet("m16_bullet", cfg, p_launcher)
 {
+  camera_follow_closely = false;
 }
 
 void SubMachineGunBullet::RandomizeShoot(double &angle,double &/*strength*/)
@@ -70,15 +70,14 @@ void SubMachineGunBullet::RandomizeShoot(double &angle,double &/*strength*/)
 
 void SubMachineGunBullet::ShootSound()
 {
-  JukeBox::GetInstance()->Play("share", "weapon/m16");
+  jukebox.Play("share", "weapon/m16");
 }
 
 //-----------------------------------------------------------------------------
 
 SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", new ExplosiveWeaponConfig())
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Submachine Gun");
   m_category = RIFLE;
 
   ignore_collision_signal = true;
@@ -92,13 +91,6 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   m_weapon_fire->EnableRotationCache(32);
 
   ReloadLauncher();
-}
-
-void SubMachineGun::UpdateTranslationStrings()
-{
-  m_name = _("Submachine Gun");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
 }
 
 // Return a projectile instance for the submachine gun
@@ -131,10 +123,23 @@ bool SubMachineGun::p_Shoot()
   return true;
 }
 
+// Overide regular Refresh method
+void SubMachineGun::RepeatShoot()
+{
+  uint tmp = Time::GetInstance()->Read();
+  uint time = tmp - m_last_fire_time;
+
+  if (time >= m_time_between_each_shot)
+    {
+      NewActionWeaponShoot();
+      m_last_fire_time = tmp;
+    }
+}
+
 void SubMachineGun::HandleKeyRefreshed_Shoot(bool /*shift*/)
 {
   if (EnoughAmmoUnit()) {
-    Weapon::RepeatShoot();
+    RepeatShoot();
   }
 }
 

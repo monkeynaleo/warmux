@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -116,7 +116,7 @@ void FireParticle::Draw()
 void FireParticle::SignalDrowning()
 {
   m_left_time_to_live = 0;
-  // JukeBox::GetInstance()->Play("share","fire/pschiit");
+  // jukebox.Play("share","fire/pschiit");
 }
 
 void FireParticle::SignalOutOfMap()

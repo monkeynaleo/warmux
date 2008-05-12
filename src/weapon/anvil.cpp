@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,14 +19,13 @@
  * Anvil : appear in top of an enemy and crush down his head
  *****************************************************************************/
 
-#include "weapon/weapon_cfg.h"
-#include "weapon/anvil.h"
-#include "weapon/explosion.h"
+#include "weapon_cfg.h"
+#include "anvil.h"
+#include "explosion.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "character/character.h"
 #include "game/time.h"
-#include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "interface/game_msg.h"
 #include "interface/mouse.h"
@@ -55,8 +54,9 @@ class Anvil : public WeaponProjectile
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
-    virtual void SignalGroundCollision(const Point2d& /* speed_before */);
+    virtual void SignalGroundCollision();
     virtual void SignalOutOfMap();
+    virtual void SignalDrowning();
 };
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,
@@ -66,7 +66,6 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
-  SetTestRect(0, 0, 0, 0);
 }
 
 Anvil::~Anvil()
@@ -81,7 +80,7 @@ void Anvil::SignalObjectCollision(PhysicalObj * obj)
   PlayCollisionSound();
 }
 
-void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
+void Anvil::SignalGroundCollision()
 {
   merge_time = Time::GetInstance()->Read() + 5000;
   PlayCollisionSound();
@@ -90,6 +89,11 @@ void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
 void Anvil::SignalOutOfMap()
 {
   falling_sound.Stop();
+}
+
+void Anvil::SignalDrowning()
+{
+  jukebox.Play("share", "sink");
 }
 
 void Anvil::Refresh()
@@ -110,7 +114,7 @@ void Anvil::PlayFallSound()
 void Anvil::PlayCollisionSound()
 {
   falling_sound.Stop();
-  JukeBox::GetInstance()->Play("share", "weapon/anvil_collision");
+  jukebox.Play("share", "weapon/anvil_collision");
 }
 
 //-----------------------------------------------------------------------------
@@ -118,8 +122,8 @@ void Anvil::PlayCollisionSound()
 AnvilLauncher::AnvilLauncher() :
     WeaponLauncher(WEAPON_ANVIL, "anvil_launcher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Anvil");
+  m_help = _("Howto use it : left click on target\nan ammo per turn");
   m_category = DUEL;
   mouse_character_selection = false;
   can_be_used_on_closed_map = false;
@@ -127,41 +131,28 @@ AnvilLauncher::AnvilLauncher() :
   target_chosen = false;
 }
 
-void AnvilLauncher::UpdateTranslationStrings()
-{
-  m_name = _("Anvil");
-  m_help = _("Howto use it : left click on target\nan ammo per turn");
-}
-
 void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 {
-  target.x = mouse_pos.x - (projectile->GetWidth() / 2);
-  target.y = 0 - projectile->GetHeight();
-
-  if (!world.ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
-     !projectile->IsInVacuumXY(target))
-    return;
-
+  mouse_pos.y = 0;
+  target = mouse_pos - (projectile->GetSize() / 2);
   target_chosen = true;
   Shoot();
 }
 
 bool AnvilLauncher::p_Shoot ()
 {
-  if (!target_chosen)
+  if(!target_chosen)
     return false;
 
   projectile->SetXY(target);
   ((Anvil*)projectile)->PlayFallSound();
   lst_objects.AddObject(projectile);
-  Camera::GetInstance()->FollowObject(projectile, true);
+  Camera::GetInstance()->GetInstance()->FollowObject(projectile,true,true);
   projectile = NULL;
   ReloadLauncher();
 
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
-
-  target_chosen = false; // ensure next shoot cannot be done pressing key space
   return true;
 }
 

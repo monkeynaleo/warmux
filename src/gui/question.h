@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,20 +37,12 @@ union SDL_Event;
 
 class Question
 {
- public:
-  typedef enum {
-    WARNING,
-    NO_TYPE
-  } type;
-
- private:
   /* If you need this, implement it (correctly)*/
   Question(const Question&);
   Question operator=(const Question&);
   /*********************************************/
 
   Sprite* background;
-  Sprite* icon;
 
   // A choice = a key return a value
   class choice_t
@@ -81,7 +73,7 @@ class Question
   Text * text;
 
 public:
-  Question(type _type = NO_TYPE);
+  Question();
   ~Question();
 
   void Set(const std::string &message,

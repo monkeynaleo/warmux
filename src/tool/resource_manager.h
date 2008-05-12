@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,9 +29,7 @@
 #define _RESOURCE_MANAGER_H
 
 #include <string>
-#include "include/base.h"
 #include "graphic/surface.h"
-#include "interface/mouse.h"
 #include "map/maps_list.h"
 #ifdef WIN32
    // Protects against macro definition of LoadImage when this header is included last.
@@ -39,9 +37,11 @@
 #endif
 
 class Sprite;
+namespace xmlpp
+{
+  class Element;
+}
 class XmlReader;
-typedef struct _xmlNode xmlNode;
-class MouseCursor;
 
 class Profile
 {
@@ -68,10 +68,9 @@ class ResourceManager
    void AddDataPath(const std::string& base_path);
    Surface LoadImage(const std::string& ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0) const;
 
-   Profile *LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const;
+   Profile *LoadXMLProfile(const std::string& xml_filename, bool relative_path) const;
    void UnLoadXMLProfile(Profile *profile) const;
 
-   MouseCursor LoadMouseCursor(const Profile *profile, const std::string& resource_name, Mouse::pointer_t pointer_id) const;
    Color LoadColor(const Profile *profile, const std::string& resource_name) const;
    int LoadInt(const Profile *profile, const std::string& resource_name) const;
    double LoadDouble(const Profile *profile, const std::string& resource_name) const;
@@ -80,7 +79,7 @@ class ResourceManager
    Surface LoadImage(const Profile *profile, const std::string& resource_name) const;
    Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
    Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height) const;
-   xmlNode*  GetElement(const Profile *profile, const std::string& ressource_type, const std::string& ressource_name) const;
+   xmlpp::Element * GetElement(const Profile *profile, const std::string& ressource_type, const std::string& ressource_name) const;
 
  private:
    std::string base_path;

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,14 +19,13 @@
  * Weapon gnu : a gnu jump in (more or less) random directions and explodes
  *****************************************************************************/
 
-#include "weapon/explosion.h"
-#include "weapon/gnu.h"
-#include "weapon/weapon_cfg.h"
+#include "explosion.h"
+#include "gnu.h"
+#include "weapon_cfg.h"
 
 #include <sstream>
 #include "character/character.h"
 #include "game/config.h"
-#include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
@@ -38,14 +37,11 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
-const uint TIME_BETWEEN_REBOUND = 600;
-
 class Gnu : public WeaponProjectile
 {
  private:
   int m_sens;
   int save_x, save_y;
-  uint last_rebound_time;
  protected:
   void SignalOutOfMap();
 public:
@@ -61,10 +57,9 @@ Gnu::Gnu(ExplosiveWeaponConfig& cfg,
   WeaponProjectile("gnu", cfg, p_launcher)
 {
   explode_with_collision = false;
-  last_rebound_time = 0;
 }
 
-void Gnu::Shoot(double strength)
+void Gnu::Shoot (double strength)
 {
   WeaponProjectile::Shoot(strength);
 
@@ -85,13 +80,8 @@ void Gnu::Refresh()
 
   double norme, angle;
   //When we hit the ground, jump !
-  if(!IsMoving()&& !FootsInVacuum()) {
-    // Limiting number of rebound to avoid desync
-    if(last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
-      image->SetRotation_rad(0.0);
-      return;
-    }
-    last_rebound_time = Time::GetInstance()->Read();
+  if(!IsMoving()&& !FootsInVacuum())
+  {
     //If the GNU is stuck in ground -> change direction
     int x = GetX();
     int y = GetY();
@@ -104,7 +94,7 @@ void Gnu::Refresh()
     norme = randomSync.GetDouble(2.0, 5.0);
     PutOutOfGround();
     SetSpeedXY(Point2d(m_sens * norme , - norme * 3.0));
-    JukeBox::GetInstance()->Play("share", "weapon/gnu_bounce");
+    jukebox.Play("share", "weapon/gnu_bounce");
   }
 
   //Due to a bug in the physic engine
@@ -132,10 +122,10 @@ void Gnu::Refresh()
   image->Scale((double)m_sens,1.0);
   image->Update();
   // Fixes test rectangle ??
-  SetTestRect(image->GetWidth() / 2 - 1,
-              image->GetWidth() / 2 - 1,
-              image->GetHeight() / 2 - 1,
-              image->GetHeight() / 2 - 1);
+  SetTestRect ( image->GetWidth()/2-1,
+                image->GetWidth()/2-1,
+                image->GetHeight()/2-1,
+                image->GetHeight()/2-1);
 }
 
 void Gnu::SignalOutOfMap()
@@ -149,17 +139,9 @@ void Gnu::SignalOutOfMap()
 GnuLauncher::GnuLauncher() :
   WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Gnu Launcher");
   m_category = SPECIAL;
   ReloadLauncher();
-}
-
-void GnuLauncher::UpdateTranslationStrings()
-{
-  m_name = _("Gnu Launcher");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
 }
 
 WeaponProjectile * GnuLauncher::GetProjectileInstance()

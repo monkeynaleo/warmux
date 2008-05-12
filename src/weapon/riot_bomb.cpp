@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,9 +20,9 @@
  * hole with angle and force
  *****************************************************************************/
 
-#include "weapon/riot_bomb.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "riot_bomb.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 #include "game/config.h"
 #include "graphic/sprite.h"
@@ -37,13 +37,10 @@
 class RiotBombRocket : public WeaponProjectile
 {
   ParticleEngine smoke_engine;
-  SoundSample flying_sound;
 public:
   RiotBombRocket(ExplosiveWeaponConfig& cfg,
                    WeaponLauncher * p_launcher);
   void Refresh();
-  void Explosion();
-  void Shoot(double strength);
 protected:
   void SignalOutOfMap();
   void SignalDrowning();
@@ -54,16 +51,6 @@ RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
   WeaponProjectile ("riot_rocket", cfg, p_launcher)
 {
   explode_colliding_character = true;
-}
-
-void RiotBombRocket::Shoot(double strength)
-{
-  // Sound must be launched before WeaponProjectile::Shoot
-  // in case that the projectile leave the battlefield
-  // during WeaponProjectile::Shoot (#bug 10241)
-  flying_sound.Play("share","weapon/riotbomb_rocket_flying", -1);
-
-  WeaponProjectile::Shoot(strength);
 }
 
 void RiotBombRocket::Refresh()
@@ -85,40 +72,22 @@ void RiotBombRocket::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
-
-  flying_sound.Stop();
 }
 
 void RiotBombRocket::SignalDrowning()
 {
   smoke_engine.Stop();
   WeaponProjectile::SignalDrowning();
-
-  flying_sound.Stop();
 }
-
-void RiotBombRocket::Explosion()
-{
-  WeaponProjectile::Explosion();
-
-  flying_sound.Stop();
-}
-
 //-----------------------------------------------------------------------------
 
 RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
 {
-  UpdateTranslationStrings();
-
-  m_category = HEAVY;
-  ReloadLauncher();
-}
-
-void RiotBomb::UpdateTranslationStrings()
-{
   m_name = _("Riot Bomb");
   m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
+  m_category = HEAVY;
+  ReloadLauncher();
 }
 
 WeaponProjectile * RiotBomb::GetProjectileInstance()

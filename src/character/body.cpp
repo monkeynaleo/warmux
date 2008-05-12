@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,11 +21,11 @@
 #include <sstream>
 #include <iostream>
 #include <map>
-#include "character/body.h"
-#include "character/character.h"
-#include "character/clothe.h"
-#include "character/member.h"
-#include "character/movement.h"
+#include "body.h"
+#include "character.h"
+#include "clothe.h"
+#include "member.h"
+#include "movement.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/mouse.h"
@@ -38,7 +38,7 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-Body::Body(xmlNode* xml, const Profile* res):
+Body::Body(xmlpp::Element* xml, const Profile* res):
   members_lst(),
   clothes_lst(),
   mvt_lst(),
@@ -59,86 +59,88 @@ Body::Body(xmlNode* xml, const Profile* res):
   need_rebuild(false),
   owner(NULL)
 {
-  xmlNodeArray nodes = XmlReader::GetNamedNeighbours(xml, "sprite");
-  xmlNodeArray::const_iterator it;
-
   // Load members
-  MSG_DEBUG("body", "Found %i sprites\n", nodes.size());
-  for (it = nodes.begin(); it != nodes.end(); ++it)
-  {
-    std::string name;
-    XmlReader::ReadStringAttr(*it, "name", name);
+  xmlpp::Node::NodeList nodes = xml -> get_children("sprite");
+  xmlpp::Node::NodeList::iterator it=nodes.begin();
 
-    Member* member = new Member(*it, res);
-    if (members_lst.find(name) != members_lst.end())
+  while(it != nodes.end())
+   {
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
+    std::string name;
+    XmlReader::ReadStringAttr( elem, "name", name);
+
+    Member* member = new Member(elem, res);
+    if(members_lst.find(name) != members_lst.end())
       std::cerr << "Warning !! The member \""<< name << "\" is defined twice in the xml file" << std::endl;
     else
       members_lst[name] = member;
-  } 
+
+    it++;
+  }
 
   members_lst["weapon"] = weapon_member;
 
   // Load clothes
-  nodes = XmlReader::GetNamed(xml, "clothe");
-  MSG_DEBUG("body", "Found %i clothes\n", nodes.size());
-  for (it = nodes.begin(); it != nodes.end(); ++it)
-  {
-    std::string name;
-    XmlReader::ReadStringAttr(*it, "name", name);
+  xmlpp::Node::NodeList nodes2 = xml -> get_children("clothe");
+  xmlpp::Node::NodeList::iterator it2=nodes2.begin();
 
-    Clothe* clothe = new Clothe(*it, members_lst);
+  while(it2 != nodes2.end())
+  {
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it2);
+    std::string name;
+    XmlReader::ReadStringAttr( elem, "name", name);
+
+    Clothe* clothe = new Clothe(elem, members_lst);
     if (clothes_lst.find(name) != clothes_lst.end())
       std::cerr << "Warning !! The clothe \""<< name << "\" is defined twice in the xml file" << std::endl;
     else
       clothes_lst[name] = clothe;
+
+    it2++;
   }
 
   // Load movements alias
+  xmlpp::Node::NodeList nodes4 = xml -> get_children("alias");
+  xmlpp::Node::NodeList::iterator it4=nodes4.begin();
   std::map<std::string, std::string> mvt_alias;
-  nodes = XmlReader::GetNamedNeighbours(xml, "alias");
-  MSG_DEBUG("body", "Found %i aliases\n", nodes.size());
-  for (it = nodes.begin(); it != nodes.end(); ++it)
+  while(it4 != nodes4.end())
   {
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it4);
     std::string mvt, corresp;
-    XmlReader::ReadStringAttr(*it, "movement", mvt);
-    XmlReader::ReadStringAttr(*it, "correspond_to", corresp);
-    mvt_alias.insert(std::make_pair(mvt, corresp));
-    MSG_DEBUG("body", "  %s -> %s", mvt.c_str(), corresp.c_str());
+    XmlReader::ReadStringAttr( elem, "movement", mvt);
+    XmlReader::ReadStringAttr( elem, "correspond_to", corresp);
+    mvt_alias.insert(std::make_pair(mvt,corresp));
+    it4++;
   }
 
   // Load movements
-  nodes = XmlReader::GetNamedNeighbours(xml, "movement");
-  MSG_DEBUG("body", "Found %i movements\n", nodes.size());
-  for (it = nodes.begin(); it != nodes.end(); ++it)
+  xmlpp::Node::NodeList nodes3 = xml -> get_children("movement");
+  xmlpp::Node::NodeList::iterator it3=nodes3.begin();
+
+  while(it3 != nodes3.end())
   {
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it3);
     std::string name;
-    XmlReader::ReadStringAttr(*it, "name", name);
-    if (strncmp(name.c_str(),"animation", 9)==0)
+    XmlReader::ReadStringAttr( elem, "name", name);
+    if(strncmp(name.c_str(),"animation", 9)==0)
       animation_number++;
 
-    Movement* mvt = new Movement(*it);
+    Movement* mvt = new Movement(elem);
     if(mvt_lst.find(name) != mvt_lst.end())
       std::cerr << "Warning !! The movement \""<< name << "\" is defined twice in the xml file" << std::endl;
     else
       mvt_lst[name] = mvt;
 
-    for(std::map<std::string, std::string>::iterator iter = mvt_alias.begin();
-        iter != mvt_alias.end();  ++iter)
-      if (iter->second == name)
-      {
-        Movement* mvt = new Movement(*it);
-        mvt->type = iter->first;
-        mvt_lst[iter->first] = mvt;
-      }
+    for(std::map<std::string, std::string>::iterator it = mvt_alias.begin();
+        it != mvt_alias.end();  ++it)
+    if(it->second == name)
+    {
+      Movement* mvt = new Movement(elem);
+      mvt->type = it->first;
+      mvt_lst[it->first] = mvt;
+    }
+    it3++;
   }
-
-  if ((mvt_lst.find("black") == mvt_lst.end() && clothes_lst.find("black") != clothes_lst.end())
-      || (mvt_lst.find("black") != mvt_lst.end() && clothes_lst.find("black") == clothes_lst.end()))
-  {
-    std::cerr << "Error: The movement \"black\" or the clothe \"black\" is not defined!" << std::endl;
-    exit(EXIT_FAILURE);
-  }
-
 }
 
 Body::Body(const Body& _body):
@@ -166,19 +168,17 @@ Body::Body(const Body& _body):
 
   // Make a copy of members
   std::map<std::string, Member*>::const_iterator it1 = _body.members_lst.begin();
-  while (it1 != _body.members_lst.end())
-    {
-      if(it1->second->name != "weapon")
-	{
-	  std::pair<std::string,Member*> p;
-	  p.first = it1->first;
-	  p.second = new Member(*it1->second);
-	  members_lst.insert(p);
-	  it1++;
-	}
-      else
-	it1++;
-    }
+  while(it1 != _body.members_lst.end())
+  if(it1->second->name != "weapon")
+  {
+    std::pair<std::string,Member*> p;
+    p.first = it1->first;
+    p.second = new Member(*it1->second);
+    members_lst.insert(p);
+    it1++;
+  }
+  else
+    it1++;
 
   // Make a copy of clothes
   std::map<std::string, Clothe*>::const_iterator it2 = _body.clothes_lst.begin();
@@ -229,26 +229,17 @@ Body::~Body()
 
 void Body::ResetMovement() const
 {
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
+  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
     current_clothe->layers[layer]->ResetMovement();
 }
 
 void Body::ApplyMovement(Movement* mvt, uint frame)
 {
-#ifdef DEBUG
-  if (mvt->type != "breathe")
-    MSG_DEBUG("body_anim", " %s uses %s-%s:%u",
-	      owner->GetName().c_str(),
-	      current_clothe->name.c_str(),
-	      mvt->type.c_str(),
-	      frame);
-#endif
-
   // Move each member following the movement description
   // We do it using the order of the squeleton, as the movement of each
   // member affect the child members as well
   std::vector<junction>::iterator member = squel_lst.begin();
-  for (;member != squel_lst.end();
+  for(;member != squel_lst.end();
        member++)
   {
     ASSERT( frame < mvt->frames.size() );
@@ -331,7 +322,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
           double angle = v.ComputeAngle(Point2i(0, 0));
 	  angle *= owner->GetDirection();
 	  angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
-
+  
           angle_mvt.SetAngle(angle);
           member->member->ApplyMovement(angle_mvt, squel_lst);
 	}
@@ -361,40 +352,40 @@ void Body::Build()
 {
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
+  if(walk_events > 0 || current_mvt->type!="walk")
+  if(Time::GetInstance()->Read() > last_refresh + current_mvt->speed)
+  {
+    // Compute the new frame number
+    current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->speed;
+    last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->speed) * current_mvt->speed;
 
-  if (walk_events > 0 || current_mvt->type != "walk")
+    // Depending on playmode loop if we have exceeded the nbr of frame of this movement
+    if(current_frame >= current_mvt->frames.size())
     {
-      if(Time::GetInstance()->Read() > last_refresh + current_mvt->speed)
-	{
-	  // Compute the new frame number
-	  current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->speed;
-	  last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->speed) * current_mvt->speed;
-
-	  // Depending on playmode loop if we have exceeded the nbr of frame of this movement
-	  if(current_frame >= current_mvt->frames.size())
-	    {
-	      if(current_mvt->play_mode == Movement::LOOP)
-		{
-		  current_frame %= current_mvt->frames.size();
-		}
-	      else if(current_mvt->play_mode == Movement::PLAY_ONCE)
-		{
-		  current_frame = current_mvt->frames.size() - 1;
-		  if (play_once_clothe_sauv)
-		    SetClothe(play_once_clothe_sauv->name);
-		  if (play_once_mvt_sauv)
-		    {
-		      SetMovement(play_once_mvt_sauv->type);
-		      current_frame = play_once_frame_sauv;
-		    }
-		}
-	    }
-	}
+      if(current_mvt->play_mode == Movement::LOOP)
+      {
+        current_frame %= current_mvt->frames.size();
+      }
+      else
+      if(current_mvt->play_mode == Movement::PLAY_ONCE)
+      {
+        current_frame = current_mvt->frames.size() - 1;
+        if(play_once_clothe_sauv)
+          SetClothe(play_once_clothe_sauv->name);
+        if(play_once_mvt_sauv)
+        {
+          SetMovement(play_once_mvt_sauv->type);
+          current_frame = play_once_frame_sauv;
+        }
+      }
     }
+
+  }
+
   need_rebuild |= (last_frame != current_frame);
   need_rebuild |= current_mvt->always_moving;
 
-  if (!need_rebuild)
+  if(!need_rebuild)
     return;
 
   ResetMovement();
@@ -403,23 +394,20 @@ void Body::Build()
 
   // Rotate each sprite, because the next part need to know the height of the sprite
   // once he is rotated
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
-    if (current_clothe->layers[layer]->name != "weapon")
-      current_clothe->layers[layer]->RotateSprite();
-  }
+  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
+  if(current_clothe->layers[layer]->name != "weapon")
+    current_clothe->layers[layer]->RotateSprite();
 
   // Move the members to get the lowest member at the bottom of the skin rectangle
   member_mvt body_mvt;
   float y_max = 0;
-
-  for (int lay=0;lay < (int)current_clothe->layers.size() ;lay++) {
-    if (current_clothe->layers[lay]->name != "weapon")
-      {
-	Member* member = current_clothe->layers[lay];
-	if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
-	   && !member->go_through_ground)
-	  y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
-      }
+  for(int lay=0;lay < (int)current_clothe->layers.size() ;lay++)
+  if(current_clothe->layers[lay]->name != "weapon")
+  {
+    Member* member = current_clothe->layers[lay];
+    if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
+    && !member->go_through_ground)
+      y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
   }
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->test_bottom;
   body_mvt.pos.x = GetSize().x / 2.0 - squel_lst.front().member->spr->GetWidth() / 2.0;
@@ -432,7 +420,7 @@ void Body::Build()
 void Body::UpdateWeaponPosition(const Point2i& _pos)
 {
   // update the weapon position
-  if (direction == DIRECTION_RIGHT)
+  if(direction == DIRECTION_RIGHT)
     weapon_pos = Point2i((int)weapon_member->pos.x,(int)weapon_member->pos.y);
   else
     weapon_pos = Point2i(GetSize().x - (int)weapon_member->pos.x,(int)weapon_member->pos.y);
@@ -446,7 +434,7 @@ void Body::Draw(const Point2i& _pos)
   UpdateWeaponPosition(_pos);
 
   // Finally draw each layer one by one
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
+  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
     current_clothe->layers[layer]->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
 }
 
@@ -484,14 +472,14 @@ void Body::BuildSqueleton()
 
   // Find the "body" member as its the top of the squeleton
   for(uint lay = 0; lay < current_clothe->layers.size(); lay++)
-    if(current_clothe->layers[lay]->type == "body")
-    {
-      junction body;
-      body.member = current_clothe->layers[lay];
-      body.parent = NULL;
-      squel_lst.push_back(body);
-      break;
-    }
+  if(current_clothe->layers[lay]->type == "body")
+  {
+    junction body;
+    body.member = current_clothe->layers[lay];
+    body.parent = NULL;
+    squel_lst.push_back(body);
+    break;
+  }
 
   if(squel_lst.size() == 0)
   {
@@ -505,10 +493,9 @@ void Body::BuildSqueleton()
 void Body::SetClothe(const std::string& name)
 {
   MSG_DEBUG("body", " %s use clothe %s", owner->GetName().c_str(), name.c_str());
-  if (current_clothe && current_clothe->name == name)
-    return;
+  if(current_clothe && current_clothe->name == name) return;
 
-  if (clothes_lst.find(name) != clothes_lst.end())
+  if(clothes_lst.find(name) != clothes_lst.end())
   {
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
@@ -517,7 +504,7 @@ void Body::SetClothe(const std::string& name)
     play_once_clothe_sauv = NULL;
   }
   else
-    MSG_DEBUG("body", "Clothe not found");
+    MSG_DEBUG("body","Clothe not found");
 
   ASSERT(current_clothe != NULL);
 }
@@ -540,7 +527,7 @@ void Body::SetMovement(const std::string& name)
     play_once_mvt_sauv = NULL;
   }
   else
-    MSG_DEBUG("body", "Movement not found");
+    MSG_DEBUG("body","Movement not found");
 
   ASSERT(current_mvt != NULL);
 }
@@ -568,7 +555,7 @@ void Body::SetClotheOnce(const std::string& name)
     need_rebuild = true;
   }
   else
-    MSG_DEBUG("body", "Clothe not found");
+    MSG_DEBUG("body","Clothe not found");
 
   ASSERT(current_clothe != NULL);
 }
@@ -596,7 +583,7 @@ void Body::SetMovementOnce(const std::string& name)
     need_rebuild = true;
   }
   else
-    MSG_DEBUG("body", "Movement not found");
+    MSG_DEBUG("body","Movement not found");
 
   ASSERT(current_mvt != NULL);
 }
@@ -633,15 +620,12 @@ void Body::StopWalk()
   if(walk_events > 0)
     walk_events--;
   if(current_mvt->type == "walk")
-  {
-    SetMovement("breathe");
     SetFrame(0);
-  }
 }
 
 bool Body::IsWalking() const
 {
-  return walk_events > 0 /* && current_mvt->type == "walk" */;
+  return walk_events > 0 && current_mvt->type == "walk";
 }
 
 uint Body::GetMovementDuration() const

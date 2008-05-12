@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,13 +20,14 @@
  *****************************************************************************/
 
 #include <SDL_events.h>
-#include "interface/man_machine_interface.h"
-#include "interface/interface.h"
+#include "man_machine_interface.h"
+#include "cursor.h"
+#include "interface.h"
 #include "character/character.h"
 #include "ai/ai_engine_stupid.h"
 #include "game/game.h"
+#include "game/game_loop.h"
 #include "game/game_mode.h"
-#include "game/time.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/action_handler.h"
@@ -76,16 +77,16 @@ bool ManMachineInterface::MoveCamera(const Key_t &key) const
 
   switch(key) {
   case KEY_MOVE_RIGHT:
-    Camera::GetInstance()->SetXY(Point2i(SCROLL_KEYBOARD, 0));
+    Camera::GetInstance()->GetInstance()->SetXY(Point2i(SCROLL_KEYBOARD, 0));
     break;
   case KEY_MOVE_LEFT:
-    Camera::GetInstance()->SetXY(Point2i(-SCROLL_KEYBOARD, 0));
+    Camera::GetInstance()->GetInstance()->SetXY(Point2i(-SCROLL_KEYBOARD, 0));
     break;
   case KEY_UP:
-    Camera::GetInstance()->SetXY(Point2i(0, -SCROLL_KEYBOARD));
+    Camera::GetInstance()->GetInstance()->SetXY(Point2i(0, -SCROLL_KEYBOARD));
     break;
   case KEY_DOWN:
-    Camera::GetInstance()->SetXY(Point2i(0, SCROLL_KEYBOARD));
+    Camera::GetInstance()->GetInstance()->SetXY(Point2i(0, SCROLL_KEYBOARD));
     break;
   default:
     r = false;
@@ -93,7 +94,7 @@ bool ManMachineInterface::MoveCamera(const Key_t &key) const
   }
 
   if (r)
-    Camera::GetInstance()->SetAutoCrop(false);
+    Camera::GetInstance()->GetInstance()->SetAutoCrop(false);
 
   return r;
 }
@@ -112,11 +113,11 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
   // Managing keys related to character moves
   // Available only when local
   if (!ActiveTeam().IsLocal()) return;
-  if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
   if (ActiveCharacter().IsDead()) return;
 
   bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
-  if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED) {
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::HAS_PLAYED) {
     switch (key) {
 
     case KEY_MOVE_RIGHT:
@@ -147,7 +148,7 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
       // key not supported
       return;
     }
-  } else if (Game::GetInstance()->ReadState() == Game::PLAYING) {
+  } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
 
     // Movements are managed by weapons because sometimes it overrides the keys
     switch (key) {
@@ -174,7 +175,7 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
       ActiveTeam().AccessWeapon().HandleKeyPressed_BackJump(shift);
       break;
     case KEY_SHOOT:
-      if (Game::GetInstance()->ReadState() == Game::PLAYING) {
+      if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
         ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot(shift);
         break;
       }
@@ -204,24 +205,25 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     switch(key){
       // Managing interface
     case KEY_QUIT:
+      Game::GetInstance()->UserWantEndOfGame();
+      return;
     case KEY_PAUSE:
-      Game::GetInstance()->UserAsksForMenu();
+      if (!Network::IsConnected())
+        Game::GetInstance()->TogglePause();
       return;
     case KEY_FULLSCREEN:
       AppWormux::GetInstance()->video->ToggleFullscreen();
       return;
     case KEY_CHAT:
       if(Network::IsConnected())
-        Game::GetInstance()->chatsession.ShowInput();
+        GameLoop::GetInstance()->chatsession.ShowInput();
       return;
     case KEY_CENTER:
-      Camera::GetInstance()->CenterOnActiveCharacter();
+      CharacterCursor::GetInstance()->FollowActiveCharacter();
+      Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(), true, true, true);
       return;
     case KEY_TOGGLE_INTERFACE:
       Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());
-      return;
-    case KEY_MINIMAP_FROM_GAME:
-      Interface::GetInstance()->ToggleMinimap ();
       return;
     case KEY_MENU_OPTIONS_FROM_GAME: {
       OptionMenu options_menu;
@@ -240,14 +242,13 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
   // Shoot when in turn
   if (key == KEY_SHOOT) {
 
-    if (Game::GetInstance()->ReadState() == Game::END_TURN) {
-      ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
+    if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN &&
+        !Network::IsConnected()) {
+      ObjBox* current_box = GameLoop::GetInstance()->GetCurrentBox();
       if (current_box != NULL) {
-        Action * a = new Action(Action::ACTION_DROP_BONUS_BOX);
-        current_box->StoreValue(a);
-        ActionHandler::GetInstance()->NewAction(a);
+        current_box->DropBox();
       }
-    } else if (Game::GetInstance()->ReadState() == Game::PLAYING &&
+    } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
                ActiveTeam().IsLocal() &&
                !ActiveCharacter().IsDead()) {
       ActiveTeam().AccessWeapon().HandleKeyReleased_Shoot(shift);
@@ -259,9 +260,9 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     // Available only when local
     if (!ActiveTeam().IsLocal()) return;
     if (ActiveCharacter().IsDead()) return;
-    if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
+    if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
 
-    if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED) {
+    if (GameLoop::GetInstance()->ReadState() == GameLoop::HAS_PLAYED) {
       switch (key) {
       case KEY_MOVE_RIGHT:
         ActiveCharacter().HandleKeyReleased_MoveRight(shift);
@@ -291,7 +292,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
         // Key not supported
         return;
       }
-    } else if  (Game::GetInstance()->ReadState() == Game::PLAYING) {
+    } else if  (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
 
       // Movements are managed by weapons because sometimes it overrides the keys
       switch (key) {
@@ -365,7 +366,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
 
   { // Managing keys related to change of character or weapon
 
-    if (Game::GetInstance()->ReadState() != Game::PLAYING ||
+    if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING ||
         !ActiveTeam().GetWeapon().CanChangeWeapon())
       return;
 
@@ -447,7 +448,7 @@ void ManMachineInterface::Refresh() const
       // Available only when local
       if (!ActiveTeam().IsLocal()) return;
       if (ActiveCharacter().IsDead()) return;
-      if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
+      if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
 
       // Movements are managed by weapons because sometimes it overrides the keys
       bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
@@ -475,7 +476,7 @@ void ManMachineInterface::Refresh() const
         ActiveTeam().AccessWeapon().HandleKeyRefreshed_BackJump(shift);
         break;
       case KEY_SHOOT:
-        if (Game::GetInstance()->ReadState() == Game::PLAYING) {
+        if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
           ActiveTeam().AccessWeapon().HandleKeyRefreshed_Shoot(shift);
         }
         break;

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,11 +19,11 @@
  * Disco Grenade
  *****************************************************************************/
 
-#include "weapon/disco_grenade.h"
-#include "weapon/weapon_cfg.h"
+#include "disco_grenade.h"
+#include "weapon_cfg.h"
 
 #include <sstream>
-#include "weapon/explosion.h"
+#include "explosion.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
@@ -37,19 +37,17 @@
 // The Disco Grenade
 class DiscoGrenade : public WeaponProjectile
 {
-private:
-  bool have_played_music;
-  ParticleEngine smoke_engine;
-  SoundSample disco_sound;
-public:
-  DiscoGrenade(ExplosiveWeaponConfig& cfg,
-	       WeaponLauncher * p_launcher);
-  void Refresh();
-  void Shoot(double strength);
-protected:
-  void Explosion();
-  void SignalOutOfMap();
-  void SignalDrowning();
+  protected:
+    bool have_played_music;
+
+    ParticleEngine smoke_engine;
+  public:
+    DiscoGrenade(ExplosiveWeaponConfig& cfg,
+                 WeaponLauncher * p_launcher);
+    void Refresh();
+  protected:
+    void Explosion();
+    void SignalOutOfMap();
 };
 
 
@@ -61,16 +59,6 @@ DiscoGrenade::DiscoGrenade(ExplosiveWeaponConfig& cfg,
   m_rebound_sound = "weapon/disco_grenade_bounce";
   have_played_music = false;
   explode_with_collision = false;
-}
-
-void DiscoGrenade::Shoot(double strength)
-{   
-  // Sound must be launched before WeaponProjectile::Shoot
-  // in case that the projectile leave the battlefield
-  // during WeaponProjectile::Shoot (#bug 10241)
-  disco_sound.Play("share","weapon/disco_grenade_music", -1);
-  
-  WeaponProjectile::Shoot(strength);
 }
 
 void DiscoGrenade::Explosion()
@@ -88,8 +76,6 @@ void DiscoGrenade::Explosion()
                                 GetY()+(int)(sin_angle[i]*(float)cfg.explosion_range)),
                                 1,particle_MAGIC_STAR,false,angle,2.5);
   }
-  disco_sound.Stop();
-  
   WeaponProjectile::Explosion();
 }
 
@@ -116,7 +102,7 @@ void DiscoGrenade::Refresh()
   double tmp = Time::GetInstance()->Read() - begin_time;
   // Ah ! Ah ! Ah ! Staying Alive, staying alive ...
   if (GetTotalTimeout() >= 2 && tmp > (1000 * GetTotalTimeout() - 2000) && !have_played_music) {
-    JukeBox::GetInstance()->Play("share","weapon/alleluia") ;
+    jukebox.Play("share","weapon/alleluia") ;
     have_played_music = true;
   }
   image->SetRotation_rad(GetSpeedAngle());
@@ -125,38 +111,19 @@ void DiscoGrenade::Refresh()
 void DiscoGrenade::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The disco grenade has left the dance floor before exploding"));
-  WeaponProjectile::SignalOutOfMap();  
-
-  disco_sound.Stop();
+  WeaponProjectile::SignalOutOfMap();
 }
-
-void DiscoGrenade::SignalDrowning()
-{
-  WeaponProjectile::SignalDrowning();
-
-  disco_sound.Stop();
-}
-
-
 
 //-----------------------------------------------------------------------------
 
 DiscoGrenadeLauncher::DiscoGrenadeLauncher() :
   WeaponLauncher(WEAPON_DISCO_GRENADE, "disco_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Disco Grenade");
   m_category = THROW;
   m_allow_change_timeout = true;
   ignore_collision_signal = true;
   ReloadLauncher();
-}
-
-void DiscoGrenadeLauncher::UpdateTranslationStrings()
-{
-  m_name = _("Disco Grenade");
-  /* FILL IT */
-  /* m_help = _(" "); */
 }
 
 WeaponProjectile * DiscoGrenadeLauncher::GetProjectileInstance()

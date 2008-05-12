@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,12 +19,13 @@
  * Air attack.
  *****************************************************************************/
 
-#include "weapon/air_attack.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "air_attack.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 #include <sstream>
 #include "character/character.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
@@ -52,7 +53,7 @@ class AirAttackConfig : public ExplosiveWeaponConfig
     double speed;
     uint nbr_obus;
     AirAttackConfig();
-    virtual void LoadXml(xmlNode* elem);
+    virtual void LoadXml(xmlpp::Element *elem);
 };
 
 class Obus : public WeaponProjectile
@@ -125,9 +126,10 @@ void Plane::Shoot(double speed, const Point2i& target)
 
   SetSpeedXY (speed_vector);
 
-  Camera::GetInstance()->FollowObject(this, true, true);
+  Camera::GetInstance()->GetInstance()->FollowObject(this, true, true);
 
   lst_objects.AddObject(this);
+  Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
 }
 
 void Plane::DropBomb()
@@ -150,7 +152,7 @@ void Plane::DropBomb()
   nb_dropped_bombs++;
 
   if (nb_dropped_bombs == 1)
-    Camera::GetInstance()->FollowObject(instance, true, true);
+    Camera::GetInstance()->GetInstance()->FollowObject(instance, true, true);
 
 }
 
@@ -160,6 +162,7 @@ void Plane::Refresh()
   image->Update();
   // First shoot !!
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
+  //  Camera::GetInstance()->GetInstance()->StopFollowingObj(this);
     DropBomb();
     m_ignore_movements = true;
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
@@ -195,19 +198,13 @@ bool Plane::OnTopOfTarget() const
 AirAttack::AirAttack() :
   Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE)//, plane(cfg())
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Air Attack");
+  m_help = _("attack direction : Left/Right\nBombing : left clic on target\na bombing per turn");
   m_category = HEAVY;
   mouse_character_selection = false;
   can_be_used_on_closed_map = false;
   target_chosen = false;
   m_time_between_each_shot = 100;
-}
-
-void AirAttack::UpdateTranslationStrings()
-{
-  m_name = _("Air Attack");
-  m_help = _("attack direction : Left/Right\nBombing : left clic on target\na bombing per turn");
 }
 
 void AirAttack::ChooseTarget(Point2i mouse_pos)
@@ -271,7 +268,7 @@ AirAttackConfig::AirAttackConfig()
   speed = 7;
 }
 
-void AirAttackConfig::LoadXml(xmlNode* elem)
+void AirAttackConfig::LoadXml(xmlpp::Element *elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "nbr_obus", nbr_obus);

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@
 #include "include/base.h"
 #include "tool/debug.h"
 
-bool debug_all = false;
 /**
  * The debug modes in use.
  */
@@ -41,8 +40,8 @@ std::vector<std::string> debugModes;
 /**
  * Check if a debug mode is in use
  */
-#ifdef WMX_LOG
-bool IsLOGGING(const char* mode)
+#ifdef DEBUG
+bool IsDEBUGGING(const char* mode)
 {
   int mSize = strlen(mode);
   unsigned int i = 0;
@@ -74,7 +73,7 @@ bool IsLOGGING(const char* mode)
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...)
 {
-  if (debug_all || IsLOGGING(level)) {
+  if (IsDEBUGGING(level)) {
       va_list argp;
       int pid = (int)getpid();
 
@@ -92,9 +91,5 @@ void PrintDebug (const char *filename, const char *function, unsigned long line,
  * Add a new debug mode to check.
  */
 void AddDebugMode(const std::string& mode ){
-  if(mode == "all") {
-    debug_all = true;
-    return;
-  }
   debugModes.push_back( mode );
 }

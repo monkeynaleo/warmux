@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,9 +19,10 @@
  * Team handling
  *****************************************************************************/
 
-#include "team/team.h"
-#include "team/team_config.h"
-#include "team/teams_list.h"
+#include <libxml++/libxml++.h>
+#include "team.h"
+#include "team_config.h"
+#include "teams_list.h"
 //-----------------------------------------------------------------------------
 #include "character/character.h"
 #include "character/body_list.h"
@@ -30,11 +31,12 @@
 #include "network/network.h"
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
-#include "team/team_energy.h"
+#include "team_energy.h"
 #include <algorithm>
 #include <iostream>
-#include "network/randomsync.h"
 
+//-----------------------------------------------------------------------------
+TeamsList teams_list;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
@@ -43,30 +45,14 @@ TeamsList::TeamsList():
   playing_list(),
   selection(),
   active_team(playing_list.end())
-{
-  LoadList();
-}
+{}
 
 TeamsList::~TeamsList()
 {
-  /* The teamslist was never built... nothing to delete.
-   * FIXME This is needed because we are lead to delete things even if they
-   * were not created completely. IMHO, this reflects the fact that the object
-   * life time is not well known...
-   * Actually, this is not that bad whereas free(NULL) is accepted... but it
-   * remains spurious. */
-  if (!singleton)
-  {
-    fprintf(stderr, "Destructor still called on unexisting TeamsList\n");
-    return;
-  }
-
-  UnloadGamingData();
   Clear();
   for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
     delete (*it);
   full_list.clear();
-  singleton = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -74,7 +60,7 @@ TeamsList::~TeamsList()
 void TeamsList::NextTeam ()
 {
   Team* next = GetNextTeam();
-  GetTeamsList().SetActive (next->GetId());
+  teams_list.SetActive (next->GetId());
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
   Network::GetInstance()->SendAction(&a);
 }
@@ -119,12 +105,22 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name
     std::cout.flush();
   }
 
-  catch (char const *error) {
-    std::cerr << std::endl
-              << Format(_("Error loading team :")) << team_name <<":"<< error
-              << std::endl;
-    return;
-  }
+  catch (char const *error)
+    {
+      std::cerr << std::endl
+        << Format(_("Error loading team :")) << team_name <<":"<< error
+        << std::endl;
+      return;
+    }
+
+  catch (const xmlpp::exception &e)
+    {
+      std::cerr << std::endl
+        << Format(_("Error loading team :")) << team_name << std::endl
+        << e.what() << std::endl;
+      return;
+    }
+
 }
 
 //-----------------------------------------------------------------------------
@@ -138,7 +134,7 @@ void TeamsList::LoadList()
   const Config * config = Config::GetInstance();
 
   // Load Wormux teams
-  std::string dirname = config->GetDataDir() + "team" PATH_SEPARATOR;
+  std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "team" + PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
@@ -149,7 +145,7 @@ void TeamsList::LoadList()
   }
 
   // Load personal teams
-  dirname = config->GetPersonalDataDir() + "team" PATH_SEPARATOR;
+  dirname = config->GetPersonalDir() + "team" + PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
     const char *name;
@@ -161,7 +157,7 @@ void TeamsList::LoadList()
       << std::endl;
   }
 
-  full_list.sort(compareTeams);
+  teams_list.full_list.sort(compareTeams);
 
   // We need at least 2 teams
   if (full_list.size() < 2)
@@ -190,20 +186,12 @@ void TeamsList::LoadGamingData()
   for (; it != end; ++it) (**it).LoadGamingData();
 }
 
-void TeamsList::RandomizeFirstPlayer()
-{
-  active_team = playing_list.begin();
-  int skip = randomSync.GetLong(0, playing_list.size() - 1);
-  for(int i = 0; i < skip; i++)
-    active_team++;
-}
-
 //-----------------------------------------------------------------------------
 
 void TeamsList::UnloadGamingData()
 {
   body_list.FreeMem();
-  iterator it=playing_list.begin(), end = playing_list.end();
+  iterator it=playing_list.begin(), end=playing_list.end();
 
   // Unload the data of all teams
   for (; it != end; ++it) (**it).UnloadGamingData();
@@ -213,9 +201,9 @@ void TeamsList::UnloadGamingData()
 
 Team *TeamsList::FindById (const std::string &id, int &pos)
 {
-  full_iterator it=full_list.begin(), end = full_list.end();
+  full_iterator it=full_list.begin(), fin=full_list.end();
   int i=0;
-  for (; it != end; ++it, ++i)
+  for (; it != fin; ++it, ++i)
   {
     if ((*it)->GetId() == id)
     {
@@ -231,9 +219,9 @@ Team *TeamsList::FindById (const std::string &id, int &pos)
 
 Team *TeamsList::FindByIndex (uint index)
 {
-  full_iterator it=full_list.begin(), end = full_list.end();
+  full_iterator it=full_list.begin(), fin=full_list.end();
   uint i=0;
-  for (; it != end; ++it, ++i)
+  for (; it != fin; ++it, ++i)
   {
     if (i == index)
       return (*it);
@@ -252,7 +240,7 @@ Team *TeamsList::FindPlayingByIndex (uint index)
 
 //-----------------------------------------------------------------------------
 
-Team* TeamsList::FindPlayingById(const std::string &id, int &index)
+Team* TeamsList::FindPlayingById(const std::string &id, uint &index)
 {
   iterator it = playing_list.begin(), end = playing_list.end();
   index=0;
@@ -261,8 +249,6 @@ Team* TeamsList::FindPlayingById(const std::string &id, int &index)
     if ((*it) -> GetId() == id)
       return *it;
   }
-
-  index = -1;
   ASSERT(false);
   return NULL;
 }
@@ -285,9 +271,9 @@ void TeamsList::InitEnergy()
 {
   // Looking at team with the greatest energy
   // (in case teams does not have same amount of character)
-  iterator it=playing_list.begin(), end = playing_list.end();
+  iterator it=playing_list.begin(), fin=playing_list.end();
   uint max = 0;
-  for (; it != end; ++it)
+  for (; it != fin; ++it)
   {
     if( (**it).ReadEnergy() > max)
       max = (**it).ReadEnergy();
@@ -295,18 +281,18 @@ void TeamsList::InitEnergy()
 
   // Init each team's energy bar
   it=playing_list.begin();
-  for (; it != end; ++it)
+  for (; it != fin; ++it)
   {
     (**it).InitEnergy (max);
   }
 
   // Initial ranking
   it=playing_list.begin();
-  for (; it != end; ++it)
+  for (; it != fin; ++it)
   {
     uint rank = 0;
     iterator it2=playing_list.begin();
-    for (; it2 != end; ++it2)
+    for (; it2 != fin; ++it2)
     {
       if((it != it2)
           && (**it2).ReadEnergy() > (**it).ReadEnergy() )
@@ -315,11 +301,11 @@ void TeamsList::InitEnergy()
     (**it).energy.rank_tmp = rank;
   }
   it=playing_list.begin();
-  for (; it != end; ++it)
+  for (; it != fin; ++it)
   {
     uint rank = (**it).energy.rank_tmp;
     iterator it2=playing_list.begin();
-    for (it2 = it; it2 != end; ++it2)
+    for (it2 = it; it2 != fin; ++it2)
     {
       if((it != it2)
           && (**it2).ReadEnergy() == (**it).ReadEnergy() )
@@ -339,12 +325,12 @@ void TeamsList::RefreshEnergy()
   // - change ranking
   // - prepare energy bar for next event
 
-  iterator it=playing_list.begin(), end = playing_list.end();
+  iterator it=playing_list.begin(), fin=playing_list.end();
   energy_t status;
 
   bool waiting = true; // every energy bar are waiting
 
-  for (; it != end; ++it) {
+  for (; it != fin; ++it) {
     if( (**it).energy.status != EnergyStatusWait) {
       waiting = false;
       break;
@@ -356,7 +342,7 @@ void TeamsList::RefreshEnergy()
     status = EnergyStatusOK;
 
     // change an energy bar value ?
-    for (it=playing_list.begin(); it != end; ++it) {
+    for (it=playing_list.begin(); it != fin; ++it) {
       if( (**it).energy.status == EnergyStatusValueChange) {
         status = EnergyStatusValueChange;
         break;
@@ -364,7 +350,7 @@ void TeamsList::RefreshEnergy()
     }
 
     // change a ranking ?
-    for (it=playing_list.begin(); it != end; ++it) {
+    for (it=playing_list.begin(); it != fin; ++it) {
       if( (**it).energy.status == EnergyStatusRankChange
              && ((**it).energy.IsMoving() || status == EnergyStatusOK)) {
         status = EnergyStatusRankChange;
@@ -381,13 +367,13 @@ void TeamsList::RefreshEnergy()
   // Setting event to process in every energy bar
   if(status != EnergyStatusOK || waiting) {
     it=playing_list.begin();
-    for (; it != end; ++it) {
+    for (; it != fin; ++it) {
       (**it).energy.status = status;
     }
   }
 
   // Actualisation des valeurs (pas d'actualisation de l'affichage)
-  for (it=playing_list.begin(); it != end; ++it) {
+  for (it=playing_list.begin(); it != fin; ++it) {
     (**it).UpdateEnergyBar();
     RefreshSort();
   }
@@ -396,16 +382,16 @@ void TeamsList::RefreshEnergy()
 
 void TeamsList::RefreshSort ()
 {
-  iterator it=playing_list.begin(), end = playing_list.end();
+  iterator it=playing_list.begin(), fin=playing_list.end();
   uint rank;
 
   // Find a ranking without taking acount of the equalities
   it=playing_list.begin();
-  for (; it != end; ++it)
+  for (; it != fin; ++it)
   {
     rank = 0;
     iterator it2=playing_list.begin();
-    for (; it2 != end; ++it2)
+    for (; it2 != fin; ++it2)
     {
       if((it != it2)
           && (**it2).ReadEnergy() > (**it).ReadEnergy() )
@@ -416,11 +402,11 @@ void TeamsList::RefreshSort ()
 
   // Fix equalities
   it=playing_list.begin();
-  for (; it != end; ++it)
+  for (; it != fin; ++it)
   {
     rank = (**it).energy.rank_tmp;
     iterator it2=playing_list.begin();
-    for (it2 = it; it2 != end; ++it2)
+    for (it2 = it; it2 != fin; ++it2)
     {
       if((it != it2)
           && (**it2).ReadEnergy() == (**it).ReadEnergy() )
@@ -436,9 +422,9 @@ void TeamsList::ChangeSelection (const std::list<uint>& nv_selection)
 {
   selection = nv_selection;
 
-  selection_iterator it=selection.begin(), end = selection.end();
+  selection_iterator it=selection.begin(), fin=selection.end();
   playing_list.clear();
-  for (; it != end; ++it) playing_list.push_back (FindByIndex(*it));
+  for (; it != fin; ++it) playing_list.push_back (FindByIndex(*it));
   active_team = playing_list.begin();
 }
 
@@ -510,13 +496,13 @@ void TeamsList::DelTeam (const std::string &id)
   Team *equipe = FindById (id, pos);
   ASSERT(equipe != NULL);
 
-  selection_iterator it = find(selection.begin(), selection.end(), (uint)pos);
+  selection_iterator it = find(selection.begin(),selection.end(),(uint)pos);
 
   if (it != selection.end()) {
     selection.erase(it);
   }
 
-  iterator playing_it = find(playing_list.begin(), playing_list.end(), equipe);
+  iterator playing_it = find(playing_list.begin(),playing_list.end(),equipe);
 
   if (playing_it != playing_list.end()) {
     playing_list.erase(playing_it);
@@ -529,7 +515,8 @@ void TeamsList::DelTeam (const std::string &id)
 
 void TeamsList::SetActive(const std::string &id)
 {
-  iterator it = playing_list.begin(),
+  iterator
+      it = playing_list.begin(),
   end = playing_list.end();
   for (; it != end; ++it)
   {
@@ -548,7 +535,7 @@ void TeamsList::SetActive(const std::string &id)
 
 Team& ActiveTeam()
 {
-  return GetTeamsList().ActiveTeam();
+  return teams_list.ActiveTeam();
 }
 
 //-----------------------------------------------------------------------------

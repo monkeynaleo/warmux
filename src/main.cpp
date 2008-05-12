@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <iostream>
 #include <getopt.h>
 #ifndef WIN32
 #include <signal.h>
@@ -36,31 +37,34 @@ using namespace std;
 #include "game/config.h"
 #include "game/game.h"
 #include "game/time.h"
-#include "graphic/font.h"
 #include "graphic/sprite.h"
-#include "graphic/text.h"
+#include "graphic/font.h"
 #include "graphic/video.h"
+#include "graphic/text.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
-#include "include/singleton.h"
 #include "map/map.h"
+#include "map/maps_list.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
-#include "menu/help_menu.h"
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
+#include "menu/network_menu.h"
 #include "menu/options_menu.h"
-#include "menu/skin_menu.h"
-#include "network/index_server.h"
-#include "particles/particle.h"
+#include "network/download.h"
 #include "sound/jukebox.h"
+#include "team/team_config.h"
+#include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
+#include "tool/random.h"
+#include "tool/stats.h"
 
+
+static Menu *menu = NULL;
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
-static const char* skin = NULL;
-//static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
 
 AppWormux *AppWormux::singleton = NULL;
 
@@ -74,10 +78,11 @@ AppWormux *AppWormux::GetInstance()
 }
 
 AppWormux::AppWormux():
-  video(new Video()),
-  menu(NULL)
+  video(new Video())
 {
-  JukeBox::GetInstance()->Init();
+  teams_list.LoadList();
+
+  jukebox.Init();
 
   cout << "[ " << _("Run game") << " ]" << endl;
 }
@@ -85,10 +90,6 @@ AppWormux::AppWormux():
 AppWormux::~AppWormux()
 {
   delete video;
-  ParticleEngine::FreeMem();
-  Font::ReleaseInstances();
-  BaseSingleton::ReleaseSingletons();
-  singleton = NULL;
 }
 
 int AppWormux::Main(void)
@@ -99,76 +100,60 @@ int AppWormux::Main(void)
   {
     DisplayLoadingPicture();
 
-    OptionMenu::CheckUpdates();
-
     do
-    {
-
-      if (choice == MainMenu::NONE)
       {
         MainMenu main_menu;
-        menu = &main_menu;
-        choice = main_menu.Run();
-      }
 
-      ActionHandler::GetInstance()->Flush();
+        if (choice == MainMenu::NONE) {
+          menu = &main_menu;
+          StatStart("Main:Menu");
+          choice = main_menu.Run();
+          StatStop("Main:Menu");
+        }
 
-      switch (choice)
-      {
-        case MainMenu::PLAY:
-        {
-          GameMenu game_menu;
-          menu = &game_menu;
-          game_menu.Run(skip_menu);
-          break;
-        }
-        case MainMenu::NETWORK:
-        {
-          NetworkConnectionMenu network_connection_menu;
-          menu = &network_connection_menu;
-          //network_connection_menu.SetAction(net_action);
-          network_connection_menu.Run(skip_menu);
-          break;
-        }
-        case MainMenu::HELP:
-        {
-          HelpMenu help_menu;
-          menu = &help_menu;
-          help_menu.Run();
-          break;
-        }
-        case MainMenu::OPTIONS:
-        {
-          OptionMenu options_menu;
-          menu = &options_menu;
-          options_menu.Run();
-          break;
-        }
-        case MainMenu::CREDITS:
-        {
-          CreditsMenu credits_menu;
-          menu = &credits_menu;
-          credits_menu.Run();
-          break;
-        }
-        case MainMenu::QUIT:
-          quit = true;
-          break;
-        case MainMenu::SKIN_VIEWER:
-        {
-          SkinMenu skin_menu(skin);
-          menu = &skin_menu;
-          skin_menu.Run();
-          break;
-        }
-        default:
-          break;
+        ActionHandler::GetInstance()->Flush();
+
+        switch (choice)
+          {
+            case MainMenu::PLAY:
+            {
+              GameMenu game_menu;
+              menu = &game_menu;
+              game_menu.Run(skip_menu);
+              break;
+            }
+            case MainMenu::NETWORK:
+            {
+              NetworkConnectionMenu network_connection_menu;
+              menu = &network_connection_menu;
+              network_connection_menu.SetAction(net_action);
+              network_connection_menu.Run(skip_menu);
+              break;
+            }
+            case MainMenu::OPTIONS:
+            {
+              OptionMenu options_menu;
+              menu = &options_menu;
+              options_menu.Run();
+              break;
+            }
+            case MainMenu::CREDITS:
+            {
+              CreditsMenu credits_menu;
+              menu = &credits_menu;
+              credits_menu.Run();
+              break;
+            }
+            case MainMenu::QUIT:
+            quit = true;
+          default:
+            break;
+          }
+        menu = NULL;
+        choice = MainMenu::NONE;
+        skip_menu = false;
+        net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
       }
-      menu = NULL;
-      choice = MainMenu::NONE;
-      skip_menu = false;
-      //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
-    }
     while (!quit);
 
     End();
@@ -195,11 +180,12 @@ void AppWormux::DisplayLoadingPicture()
   Config *config = Config::GetInstance();
 
   string txt_version =
-    _("Version") + string(" ") + Constants::WORMUX_VERSION;
-  string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "loading.png";
+    _("Version") + string(" ") + Constants::VERSION;
+  string filename = config->GetDataDir() + PATH_SEPARATOR + "menu"
+                         + PATH_SEPARATOR + "loading.png";
 
-  Surface surfaceLoading(filename.c_str());
-  Sprite loading_image(surfaceLoading, true);
+  Surface surfaceLoading = Surface(filename.c_str());
+  Sprite loading_image = Sprite(surfaceLoading);
 
   loading_image.cache.EnableLastFrameCache();
   loading_image.ScaleSize(video->window.GetSize());
@@ -221,11 +207,6 @@ void AppWormux::DisplayLoadingPicture()
   video->window.Flip();
 }
 
-void AppWormux::SetCurrentMenu(Menu* _menu)
-{
-  menu = _menu;
-}
-
 void AppWormux::RefreshDisplay()
 {
   if (Game::GetInstance()->IsGameLaunched()) {
@@ -241,11 +222,11 @@ void AppWormux::End() const
 {
   cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
 
-  /* FIXME calling Config->Save here sucks: it nothing was ever done, it loads
-   * the whole stuff just before exiting... This should be moved, but where? */
   Config::GetInstance()->Save();
-
-  JukeBox::GetInstance()->End();
+  jukebox.End();
+  delete Config::GetInstance();
+  delete Time::GetInstance();
+  delete Constants::GetInstance();
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
@@ -257,7 +238,7 @@ void AppWormux::End() const
 
 void DisplayWelcomeMessage()
 {
-  cout << "=== " << _("Wormux version ") << Constants::WORMUX_VERSION << endl;
+  cout << "=== " << _("Wormux version ") << Constants::VERSION << endl;
   cout << "=== " << _("Authors:") << ' ';
   for (vector < string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
        fin = Constants::GetInstance()->AUTHORS.end(); it != fin; ++it)
@@ -270,13 +251,13 @@ void DisplayWelcomeMessage()
     << "=== " << _("Website: ") << Constants::WEB_SITE << endl
     << endl;
 
-  // print the disclaimer
-  cout << "Wormux version " << Constants::WORMUX_VERSION
-    << ", Copyright (C) 2001-2008 Wormux Team" << endl
+  // Affiche l'absence de garantie sur le jeu
+  cout << "Wormux version " << Constants::VERSION
+    << ", Copyright (C) 2001-2006 Wormux Team" << endl
     << "Wormux comes with ABSOLUTELY NO WARRANTY." << endl
-    << "This is free software and you are welcome to redistribute it" << endl
+    << "This is free software, and you are welcome to redistribute it" << endl
     << "under certain conditions." << endl << endl
-    << "Read the file COPYING for details." << endl << endl;
+    << "Read COPYING file for details." << endl << endl;
 
 #ifdef DEBUG
   cout << "This program was compiled in DEBUG mode (development version)"
@@ -286,44 +267,30 @@ void DisplayWelcomeMessage()
 
 void ParseArgs(int argc, char * argv[])
 {
-  int c;
+  char c;
   int option_index = 0;
   struct option long_options[] =
     {
-      {"help",       no_argument,       NULL, 'h'},
-      {"blitz",      no_argument,       NULL, 'b'},
-      {"version",    no_argument,       NULL, 'v'},
-      {"play",       no_argument,       NULL, 'p'},
-      {"internet",   no_argument,       NULL, 'i'},
-      {"client",     optional_argument, NULL, 'c'},
-      {"server",     no_argument,       NULL, 's'},
-      {"skin-viewer",optional_argument, NULL, 'y'},
-      {"game-mode",  required_argument, NULL, 'g'},
-      {"debug",      required_argument, NULL, 'd'},
-      {NULL,         no_argument,       NULL,  0 }
+      {"help",    no_argument,       NULL, 'h'},
+      {"version", no_argument,       NULL, 'v'},
+      {"play",    no_argument,       NULL, 'p'},
+      {"internet",no_argument,       NULL, 'i'},
+      {"client",  optional_argument, NULL, 'c'},
+      {"server",  no_argument,       NULL, 's'},
+      {"debug",   required_argument, NULL, 'd'},
+      {NULL,      no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hbvpic::l::sy::g:d:",
+  while ((c = getopt_long (argc, argv, "hvpic::sd:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
         {
         case 'h':
           printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
-                 " [-i|--internet] [-s|--server] [-c|--client [ip]]\n"
-                 " [-g|--game-mode <game_mode>] [-y|--skin-viewer [team]]"
-#ifdef DEBUG
-                 " [-d|--debug <debug_masks>|all]\n"
-#endif
-                 " [-l [ip/hostname]]\n", argv[0]);
-#ifdef DEBUG
-          printf("\nWith :\n");
-          printf(" <debug_masks> ::= { action | action_handler | action_handler.menu | ai | ai.move | body | body_anim | body.state | bonus | box | camera.follow | camera.shake | camera.tracking | character | character.collision | character.energy | damage | downloader | explosion | game | game.endofturn | game_mode | game.statechange | ghost | grapple.break | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.cache | jukebox.play | lst_objects | map | map.collision | map.load | map.random | menu | mine | mouse | network | network.crc | network.crc_bad | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | physic.sync | random | random.get | singleton | socket | sprite | team | test_rectangle | weapon | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | widget.border | wind }\n");
-#endif
+                 " [-i|--internet] [-s|--server] [-c|--client [ip]]"
+                 " [-d|--debug debug_masks]\n", argv[0]);
           exit(0);
-          break;
-        case 'b':
-          Game::SetMode(Game::BLITZ);
           break;
         case 'v':
           DisplayWelcomeMessage();
@@ -335,7 +302,7 @@ void ParseArgs(int argc, char * argv[])
           break;
         case 'c':
           choice = MainMenu::NETWORK;
-          //net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
+          net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
           if (optarg)
             {
               Config::GetInstance()->SetNetworkHost(optarg);
@@ -343,37 +310,19 @@ void ParseArgs(int argc, char * argv[])
           skip_menu = true;
           break;
         case 'd':
-#ifdef DEBUG
           printf("Debug: %s\n", optarg);
           AddDebugMode(optarg);
-#else
-	  fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug option.\n");
-#endif
           break;
         case 's':
           choice = MainMenu::NETWORK;
-          //net_action = NetworkConnectionMenu::NET_HOST;
+          net_action = NetworkConnectionMenu::NET_HOST;
           skip_menu = true;
           break;
         case 'i':
           choice = MainMenu::NETWORK;
-          //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+          net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
           skip_menu = true;
           break;
-        case 'l':
-          if (optarg) IndexServer::GetInstance()->SetLocal(optarg);
-          else        IndexServer::GetInstance()->SetLocal();
-          break;
-        case 'y':
-          choice = MainMenu::SKIN_VIEWER;
-          skin = optarg;
-          //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
-          skip_menu = true;
-          break;
-	case 'g':
-	  printf("Game-mode: %s\n", optarg);
-	  Config::GetInstance()->SetGameMode(optarg);
-	  break;
         }
     }
 }

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,9 +26,6 @@ class EulerVector{
 
     EulerVector() :
                   x0(0.0), x1(0.0), x2(0.0)
-                { };
-    EulerVector(double v0, double v1, double v2) :
-                  x0(v0), x1(v1), x2(v2)
                 { };
     void Clear();
     void ComputeOneEulerStep(double a, double b, double c, double d, double dt);

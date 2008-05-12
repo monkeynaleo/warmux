@@ -131,9 +131,8 @@ template<class T> class Vector2
      *
      * @param p2
      */
-    template< typename OtherT >
-    inline Vector2<T> operator*(const Vector2<OtherT> &p2) const{
-      return Vector2<T>( (T)( x * p2.x ), (T)( y * p2.y ) );
+    inline Vector2<T> operator*(const Vector2<T> &p2) const{
+      return Vector2<T>(x * p2.x, y * p2.y);
     }
 
     /**
@@ -169,41 +168,18 @@ template<class T> class Vector2
     /**
      *
      */
-    /*
     inline Vector2<T> operator*(const T val) const{
       return Vector2<T>(x * val, y * val);
-    }
-    */
-
-    template< typename OtherT >
-    inline Vector2<T> operator*(const OtherT val) const{
-      return Vector2<T>( (T)( x * val ), (T)( y * val ) );
     }
 
     /**
      *
      * @param val
      */
-    /*
     inline Vector2<T> operator/(const T val) const{
       return Vector2<T>(x / val, y / val);
-    }
-    */
+        }
 
-    template< typename OtherT >
-    inline Vector2<T> operator/(const OtherT val) const{
-      return Vector2<T>( (T)( x / val ), (T)( y / val ) );
-    }
-
-    /**
-     *
-     */
-    inline Vector2<T> operator<<(unsigned int val) const{
-      return Vector2<T>(x << val, y << val);
-    }
-    inline Vector2<T> operator>>(unsigned int val) const{
-      return Vector2<T>(x >> val, y >> val);
-    }
 
     // Operators on itself with a scalar
 
@@ -233,14 +209,6 @@ template<class T> class Vector2
       y *= val;
     }
 
-    /**
-     *
-     */
-    inline void operator/=(const T val){
-      x /= val;
-      y /= val;
-    }
-
     // Operators on itself with an other vector
 
     /**
@@ -260,21 +228,11 @@ template<class T> class Vector2
       y -= p2.y;
     }
 
-    inline void operator <<= (unsigned int val){
-      x <<= val;
-      y <<= val;
-    }
-    inline void operator >>= (unsigned int val){
-      x >>= val;
-      y >>= val;
-    }
-
     // Special operators
 
     /**
      *
      */
-    /*
     inline Vector2<T> operator*(const Vector2<double> &p2){
       Vector2<T> r;
 
@@ -283,7 +241,6 @@ template<class T> class Vector2
 
       return r;
     }
-    */
 
     /**
      * Return the comparaison of two vector in the form of a vector.
@@ -327,7 +284,7 @@ template<class T> class Vector2
      * For T == int, this method is defined at the end of this file
      * @param p2
      */
-    inline T Distance(const Vector2<T> & p2) const{
+    inline T Distance(const Vector2<T> p2) const{
       T distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
       return sqrt( distPow2 );
     }
@@ -337,17 +294,6 @@ template<class T> class Vector2
      */
     T Norm() const{
       return Distance( Vector2(0,0) );
-    }
-
-    /**
-     * [RCL]: using doubles, to keep the precision consistent with rest of 
-     * functions here
-    */
-    Vector2<T> GetNormal() const {
-      double len = sqrt(x*x + y*y);
-      if ( len > 0.00001 )
-        return Vector2<T>( (T)(x/len), (T)(y/len) );
-      return *this;
     }
 
     /**
@@ -369,7 +315,7 @@ template<class T> class Vector2
     /**
      *
      */
-    void SetValues( const Vector2<T> & v2){
+    void SetValues( Vector2<T> v2){
       x = v2.x;
       y = v2.y;
     }
@@ -413,10 +359,9 @@ template<class T> class Vector2
        if( !IsZero( x ) )
          if( !IsZero( y ) ){
            double angle = atan(double(y)/double(x));
-           if( x < 0 ){
+           if( x < 0 )
              if( y > 0 ) return angle + M_PI;
              else        return angle - M_PI;
-           }
            return angle;
          }
          else
@@ -432,55 +377,17 @@ template<class T> class Vector2
      *
      * @param v2
      */
-    double ComputeAngle(const Vector2<T> & v2) const{
+    double ComputeAngle(const Vector2<T> v2) const{
       Vector2<T> veq( v2.x - x, v2.y - y);
 
       return veq.ComputeAngle();
     }
-
-    /**
-     *
-     * Computes angle at current point in triangle v1, this, v2
-     * @param v1
-     * @param v2
-     * [RCL]: by the way, why double? floats are not enough?
-     */
-    double ComputeAngle(const Vector2<T> & v1, const Vector2<T> & v2) const
-    {
-      Vector2<T> side1( v1.x - x, v1.y - y);
-      Vector2<T> side2( v2.x - x, v2.y - y);
-
-      // we need double precision even for ints
-      double l1 = sqrt( side1.x * side1.x + side1.y * side1.y );
-      double l2 = sqrt( side2.x * side2.x + side2.y * side2.y );
-
-      if ( l1 < 0.00001f || l2 < 0.00001f )
-         return 0; // zero vector is collinear with every other
-
-      // now we find the cos of the angle from dot product formula
-      // side1 dot side2 = l1 * l2 * cos ( angle_between_side1_and_side2 )
-      double cosA = ( side1.x * side2.x + side1.y * side2.y ) / ( l1 * l2 );
-      return acos( cosA );
-    }
-
-    // convertor
-    template< typename OtherT >
-    operator Vector2<OtherT>() const
-    {
-        return Vector2<OtherT>( (OtherT)x, (OtherT)y );
-    };
 };
 
 template < >
-inline int Vector2<int>::Distance(const Vector2<int> & p2) const{
+inline int Vector2<int>::Distance(const Vector2<int> p2) const{
  int distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
  return (int)sqrt( (float)distPow2 );
-}
-
-// some other auxilliaries
-template< typename T >
-inline Vector2<T> operator*(const T val, const Vector2<T> &v) {
-    return Vector2<T>( v.x * val, v.y * val );
 }
 
 #endif //_VECTOR2_H

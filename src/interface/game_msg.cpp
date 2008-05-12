@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,10 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Messages displayed at the top of screen and also into the terminal.
+ * Messages s'affichant en haut de l'ecran (et écrit dans la console).
  *****************************************************************************/
 
-#include "interface/game_msg.h"
+#include "game_msg.h"
 #include <iostream>
 #include "game/time.h"
 #include "graphic/video.h"
@@ -35,6 +35,15 @@
 #define MSG_LIFESPAN 7000 // ms
 
 const uint NBR_MSG_MAX = 14;
+
+GameMessages * GameMessages::singleton = NULL;
+
+GameMessages * GameMessages::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new GameMessages();
+  }
+  return singleton;
+}
 
 // Clean up the message list
 void GameMessages::Reset(){

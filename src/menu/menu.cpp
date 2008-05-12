@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,20 +19,15 @@
  * Generic menu
  *****************************************************************************/
 
-#include <iostream>
-
-#include "menu/menu.h"
+#include "menu.h"
 #include "include/app.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/box.h"
-#include "gui/question.h"
 #include "interface/mouse.h"
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
-
-static const int MENU_DELAY = 100;  // 10 fps, much sufficient for menu
 
 Menu::Menu(const std::string& bg, t_action _actions) :
   actions(_actions)
@@ -44,7 +39,7 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   uint y = app->video->window.GetHeight() - 50;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  background = new Sprite( resource_manager.LoadImage( res, bg), true);
+  background = new Sprite( resource_manager.LoadImage( res, bg));
   background->cache.EnableLastFrameCache();
 
   b_ok = NULL;
@@ -53,21 +48,19 @@ Menu::Menu(const std::string& bg, t_action _actions) :
     actions_buttons = NULL;
   } else {
 
-    actions_buttons = new HBox(50, false);
+    actions_buttons = new HBox( Rectanglei(x, y, 1, 50), false);
 
     if (actions == vOk || actions == vOkCancel) {
-      b_ok = new Button(res, "menu/valider");
+      b_ok = new Button( Point2i(0, 0), res, "menu/valider");
       actions_buttons->AddWidget(b_ok);
     }
 
     if (actions == vCancel  || actions == vOkCancel) {
-      b_cancel = new Button(res, "menu/annuler");
+      b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
       actions_buttons->AddWidget(b_cancel);
     }
 
-    actions_buttons->SetPosition(x, y);
     widgets.AddWidget(actions_buttons);
-    widgets.Pack();
   }
 
   widgets.SetContainer(this);
@@ -81,17 +74,17 @@ Menu::~Menu()
 
 void Menu::play_ok_sound()
 {
-  JukeBox::GetInstance()->Play("share", "menu/ok");
+  jukebox.Play("share", "menu/ok");
 }
 
 void Menu::play_cancel_sound()
 {
-  JukeBox::GetInstance()->Play("share", "menu/cancel");
+  jukebox.Play("share", "menu/cancel");
 }
 
 void Menu::play_error_sound()
 {
-  JukeBox::GetInstance()->Play("share", "menu/error");
+  jukebox.Play("share", "menu/error");
 }
 
 void Menu::mouse_ok()
@@ -140,13 +133,13 @@ void Menu::key_cancel()
 
 void Menu::key_up()
 {
-  widgets.SetKeyboardFocusOnPreviousWidget();
+  widgets.SetFocusOnPreviousWidget();
   RedrawMenu();
 }
 
 void Menu::key_down()
 {
-  widgets.SetKeyboardFocusOnNextWidget();
+  widgets.SetFocusOnNextWidget();
   RedrawMenu();
 }
 
@@ -158,32 +151,21 @@ void Menu::key_right()
 {
 }
 
-void Menu::DisplayError(const std::string &msg)
-{
-  play_error_sound();
-
-  std::cerr << msg << std::endl;
-
-  Question question(Question::WARNING);
-  question.Set(msg, true, 0);
-  question.Ask();
-}
-
 void Menu::DrawBackground()
 {
   background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());
   background->Blit(AppWormux::GetInstance()->video->window, 0, 0);
 }
 
-void Menu::RedrawBackground(const Rectanglei& rect)
+void Menu::Redraw(const Rectanglei& rect, Surface& surf)
 {
-  background->Blit(AppWormux::GetInstance()->video->window, rect, rect.GetPosition());
+  background->Blit(surf, rect, rect.GetPosition());
 }
 
 void Menu::RedrawMenu()
 {
   DrawBackground();
-  widgets.NeedRedrawing();
+  widgets.ForceRedraw();
 }
 
 void Menu::Run (bool skip_menu)
@@ -203,9 +185,6 @@ void Menu::Run (bool skip_menu)
 
   do
   {
-    // this is the current menu (here in case we had run a submenu)
-    AppWormux::GetInstance()->SetCurrentMenu(this);
-
     // Poll and treat events
     SDL_Event event;
 
@@ -216,43 +195,33 @@ void Menu::Run (bool skip_menu)
       if (event.type == SDL_QUIT) {
         key_cancel();
       } else if (event.type == SDL_KEYDOWN) {
-	bool used_by_widget = false;
-
-	if (event.key.keysym.sym != SDLK_ESCAPE &&
-	    event.key.keysym.sym != SDLK_RETURN &&
-	    event.key.keysym.sym != SDLK_KP_ENTER)
-	  used_by_widget = widgets.SendKey(event.key.keysym);
-
-	if (!used_by_widget) {
-	  switch (event.key.keysym.sym)
-	    {
-	    case SDLK_ESCAPE:
-	      key_cancel();
-	      break;
-	    case SDLK_RETURN:
-	    case SDLK_KP_ENTER:
-	      key_ok();
-	      break;
-	    case SDLK_UP:
-	      key_up();
-	      break;
-	    case SDLK_DOWN:
-	      key_down();
-	      break;
-	    case SDLK_LEFT:
-	      key_left();
-	      break;
-	    case SDLK_RIGHT:
-	      key_right();
-	      break;
-	    case SDLK_F10:
-	      AppWormux::GetInstance()->video->ToggleFullscreen();
-	      break;
-	    default:
-	      // should have been handle upper!
-	      break;
-	    }
-	}
+        switch (event.key.keysym.sym)
+          {
+          case SDLK_ESCAPE:
+            key_cancel();
+            break;
+          case SDLK_RETURN:
+            key_ok();
+            break;
+          case SDLK_UP:
+            key_up();
+            break;
+          case SDLK_DOWN:
+            key_down();
+            break;
+          case SDLK_LEFT:
+            key_left();
+            break;
+          case SDLK_RIGHT:
+            key_right();
+            break;
+          case SDLK_F10:
+            AppWormux::GetInstance()->video->ToggleFullscreen();
+            break;
+          default:
+            widgets.SendKey(event.key.keysym);
+            break;
+          }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
         if (!BasicOnClickUp(mousePosition))
           OnClickUp(mousePosition, event.button.button);
@@ -278,20 +247,24 @@ void Menu::Run (bool skip_menu)
 void Menu::Display(const Point2i& mousePosition)
 {
   // to limit CPU
+  uint sleep_fps=0;
+  uint delay = 0;
   uint start = SDL_GetTicks();
 
-  widgets.Update(mousePosition);
+  widgets.Update(mousePosition, AppWormux::GetInstance()->video->window);
   Draw(mousePosition);
   AppWormux::GetInstance()->video->Flip();
 
   // to limit CPU
-  int delay = MENU_DELAY - (SDL_GetTicks()-start);
-  if (delay > 0)
-    SDL_Delay(delay);
+  delay = SDL_GetTicks()-start;
+  if (delay < AppWormux::GetInstance()->video->GetSleepMaxFps())
+    sleep_fps = AppWormux::GetInstance()->video->GetSleepMaxFps() - delay;
+  else
+    sleep_fps = 0;
+  SDL_Delay(sleep_fps);
 }
 
 void Menu::SetActionButtonsXY(int x, int y){
-  if (actions_buttons != NULL) {
-    actions_buttons->SetPosition(x, y);
-  }
+  if (actions_buttons != NULL)
+    actions_buttons->SetSizePosition( Rectanglei(x, y, actions_buttons->GetSizeX(), actions_buttons->GetSizeY()) );
 }

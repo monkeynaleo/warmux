@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,12 +32,12 @@ class GrappleConfig;
 class Grapple : public Weapon
 {
   private:
-    struct rope_node_t
+    typedef struct
     {
       Point2i pos;
       double angle;
       int sense;
-    };
+    } rope_node_t;
 
     uint last_mvt;
     double last_broken_node_angle;
@@ -66,7 +66,7 @@ class Grapple : public Weapon
     bool WillBeAttached();
     bool TryAttachRope();
     bool TryAddNode(int CurrentSense) ;
-    bool TryRemoveNodes(int CurrentSense) ;
+    bool TryBreakNode(int CurrentSense) ;
 
   public:
     enum {
@@ -83,7 +83,6 @@ class Grapple : public Weapon
     double delta_len ;
 
     Grapple();
-    ~Grapple();
     void Draw();
     virtual void NotifyMove(bool collision);
 
@@ -104,7 +103,6 @@ class Grapple : public Weapon
     void DetachNode();
     void SetRopeSize(double length) const;
 
-    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
 
     // Keys management

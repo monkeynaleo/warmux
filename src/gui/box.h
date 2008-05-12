@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,67 +22,51 @@
 #ifndef GUI_BOX_H
 #define GUI_BOX_H
 
-#include "gui/widget_list.h"
+#include "widget_list.h"
 
 class Box : public WidgetList
 {
-protected:
+ protected:
+  bool visible;
   uint margin;
   Point2i border;
 
-public:
-  Box(const Point2i &size, bool _draw_border=true);
+ public:
+  Box(const Rectanglei &rect, bool _visible=true);
   virtual ~Box();
 
   void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition);
-
+              const Point2i &lastMousePosition,
+              Surface& surf);
+  void Draw(const Point2i &mousePosition,
+            Surface& surf) const;
+  void Redraw(const Rectanglei& rect,
+              Surface& surf);
   Widget* Click(const Point2i &mousePosition, uint button) { return WidgetList::Click(mousePosition, button); };
   Widget* ClickUp(const Point2i &mousePosition, uint button) { return WidgetList::ClickUp(mousePosition, button); };
 
   void SetMargin(uint _margin) { margin = _margin; };
-
   void SetBorder(const Point2i &newBorder) { border = newBorder; };
-  void SetBorder(uint x, uint y) { border.SetValues(x, y); };
-  void SetNoBorder() { border.SetValues(0, 0); };
 
-  virtual void Pack() = 0;
+  virtual void AddWidget(Widget *a_widget) = 0;
 };
 
 class VBox : public Box
 {
-protected:
-  bool force_widget_size;
-
-public:
-  VBox(uint width, bool _draw_border=true, bool force_widget_size = true);
-  virtual void Pack();
+ public:
+  VBox(const Rectanglei &rect, bool _visible=true);
+  void DelFirstWidget();
+  void SetSizePosition(const Rectanglei &rect);
+  void AddWidget(Widget *a_widget);
 };
 
 class HBox : public Box
 {
-protected:
-  bool force_widget_size;
-
-public:
-  HBox(uint height, bool _draw_border=true, bool force_widget_size = true);
-  virtual void Pack();
+ public:
+  HBox(const Rectanglei &rect, bool _visible=true);
+  void SetSizePosition(const Rectanglei &rect);
+  void AddWidget(Widget *a_widget);
 };
 
-class GridBox : public Box
-{
-private:
-  uint max_line_width;
-  Point2i widget_size;
-  uint last_line;
-  uint last_column;
-
-  uint NbWidgetsPerLine(uint nb_total_widgets);
-  void PlaceWidget(Widget * a_widget, uint line, uint column);
-
-public:
-  GridBox(uint max_line_width, const Point2i& widget_size, bool _draw_border=true);
-  virtual void Pack();
-};
 #endif
 

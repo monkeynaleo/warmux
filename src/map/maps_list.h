@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,39 +24,34 @@
 
 #include <vector>
 #include "include/base.h"
-#include "include/singleton.h"
 #include "graphic/surface.h"
-#include "map/water.h"
 
 // Forward declarations
-class Action;
 class Profile;
-typedef struct _xmlNode xmlNode;
+namespace xmlpp
+{
+  class Element;
+}
 
-class InfoMap {
+class InfoMap{
  public:
   typedef enum {
-    RANDOM_GENERATED,
+    RANDOM,
     SINGLE_ISLAND,
     PLATEFORMS,
     DEFAULT
   } Island_type;
-
-  struct s_wind
-  {
-    uint nb_sprite;
-    uint default_nb_sprite;
-    bool need_flip; //do we need to flip the sprite when it changes direction?
-    float rotation_speed;
-  };
 
 private:
 
   std::string name;
   std::string author_info;
   std::string music_playlist;
+  /* FIXME make m_directory private */
+public:
   std::string m_directory;
 
+private:
   std::string m_map_name;
 
   Surface img_ground, img_sky;
@@ -66,86 +61,78 @@ private:
   uint nb_barrel;
 
   bool is_opened;
+  bool use_water;
   bool is_basic_info_loaded;
   bool is_data_loaded;
-  bool random_generated;
-  Point2i upper_left_pad;
-  Point2i lower_right_pad;
+  bool random;
   Island_type island_type;
-  Water::Water_type water_type;
-
-  struct s_wind wind;
 
   Profile *res_profile;
 
-  bool ProcessXmlData(xmlNode* xml);
+  bool ProcessXmlData(const xmlpp::Element *xml);
   void LoadData();
-  void LoadBasicInfo(); // Fails with abort if error
+
+public:
+  struct s_wind
+  {
+    uint nb_sprite;
+    uint default_nb_sprite;
+    bool need_flip; //do we need to flip the sprite when it changes direction?
+    float rotation_speed;
+  } wind;
 
 public:
   InfoMap(const std::string&, const std::string&);
-  ~InfoMap();
+  bool LoadBasicInfo();
   void FreeData();
 
   const std::string& GetRawName() const { return m_map_name; };
-  const std::string& GetDirectory() const { return m_directory; };
   const std::string& ReadFullMapName() { LoadBasicInfo(); return name; };
   const std::string& ReadAuthorInfo() { LoadBasicInfo(); return author_info; };
   const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; };
-  std::string GetConfigFilepath() const;
 
-  Surface& ReadImgGround();
-  Surface& ReadImgSky();
+  Surface ReadImgGround();
+  Surface ReadImgSky();
   const Surface& ReadPreview() { LoadBasicInfo(); return preview; };
-
-  const struct s_wind& GetWind() const { return wind; };
 
   uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; };
   uint GetNbMine() { LoadBasicInfo(); return nb_mine; };
-  Profile * ResProfile() const { return res_profile; };
+  const Profile * const ResProfile() const { return res_profile; };
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; };
-  bool IsRandomGenerated() { LoadBasicInfo(); return random_generated; };
-  Water::Water_type WaterType() { LoadBasicInfo(); return water_type; };
-
-  Point2i GetUpperLeftPad() { return upper_left_pad; };
-  Point2i GetLowerRightPad() { return lower_right_pad; };
-  void SetUpperLeftPad(const Point2i & value) { upper_left_pad = value; };
-  void SetLowerRightPad(const Point2i & value) { lower_right_pad = value; };
+  bool UseWater() { LoadBasicInfo(); return use_water; };
+  bool IsRandom() { LoadBasicInfo(); return random; };
 
 };
 
 
-class MapsList : public Singleton<MapsList>
+class MapsList
 {
 public:
-  std::vector<InfoMap*> lst;
-  typedef std::vector<InfoMap*>::iterator iterator;
+  std::vector<InfoMap> lst;
+  typedef std::vector<InfoMap>::iterator iterator;
 
 private:
-  int active_map_index;
+  int terrain_actif;
   bool m_init;
-  bool random_map;
+  static MapsList * singleton;
 
   void LoadOneMap (const std::string &dir, const std::string &file);
-
-protected:
-  friend class Singleton<MapsList>;
   MapsList();
-  ~MapsList();
 
 public:
+  static MapsList * GetInstance();
+
   // Return -1 if fails
-  int FindMapById (const std::string &id) const;
-  void SelectMapByName(const std::string &nom);
-  void SelectRandomMapByName(const std::string &nom);
+  int FindMapById (const std::string &id);
+  void SelectMapByName (const std::string &nom);
   void SelectMapByIndex (uint index);
   int GetActiveMapIndex () const;
-  InfoMap* ActiveMap();
-
-  void FillActionMenuSetMap(Action& a) const;
+  InfoMap& ActiveMap();
 };
 
-InfoMap* ActiveMap();
+InfoMap& ActiveMap();
+
+bool compareMaps(const InfoMap& a, const InfoMap& b);
 
 #endif

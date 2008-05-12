@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,10 @@
 
 // Forward declarations
 class Sprite;
-typedef struct _xmlNode xmlNode;
+namespace xmlpp
+{
+  class Element;
+}
 
 // Max wind strength in m/(sec*sec)
 #define WIND_STRENGTH  5.0
@@ -60,7 +63,6 @@ private:
   std::list<WindParticle *> particles;
   typedef std::list<WindParticle *>::iterator iterator;
   void RemoveAllParticles();
-  void RandomizeParticlesPos(); // Put particles randomly on the screen
 
 public:
   Wind() { m_val = m_nv_val = 0; };
@@ -71,6 +73,7 @@ public:
   void Refresh();
   void Reset();
   void DrawParticles();
+  void RandomizeParticlesPos(); // Put particles randomly on the screen
 };
 
 extern Wind wind;

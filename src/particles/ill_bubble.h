@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 
 #ifndef ILL_BUBBLE_H
 #define ILL_BUBBLE_H
-#include "particles/explosion_smoke.h"
+#include "explosion_smoke.h"
 
 class IllBubble : public ExplosionSmoke
 {
@@ -32,4 +32,4 @@ class IllBubble : public ExplosionSmoke
   void Draw();
 };
 
-#endif /* ILL_BUBBLE_H */
+#endif

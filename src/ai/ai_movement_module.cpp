@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@
 #include "tool/debug.h"
 #include "tool/error.h"
 
-#include "ai/ai_movement_module.h"
+#include "ai_movement_module.h"
 
 // TODO:
 // - Be sure to not go out of the map
@@ -110,7 +110,7 @@ void AIMovementModule::PrepareJump()
 
   ActiveCharacter().body->StartWalk();
 
-  SetMovement(BACK_TO_JUMP);
+  current_movement = BACK_TO_JUMP;
   time_at_last_position = m_current_time;
 
   InverseDirection(false);
@@ -118,7 +118,7 @@ void AIMovementModule::PrepareJump()
 
 void AIMovementModule::GoBackToJump()
 {
-  ASSERT(GetCurrentMovement() == BACK_TO_JUMP);
+  ASSERT(current_movement == BACK_TO_JUMP);
 
   MakeStep();
 
@@ -139,13 +139,13 @@ void AIMovementModule::Jump()
   MSG_DEBUG("ai.move", "Jump!");
 
   //  GameMessages::GetInstance()->Add("try to jump!");
-  SetMovement(JUMPING);
+  current_movement = JUMPING;
   ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
 }
 
 void AIMovementModule::EndOfJump()
 {
-  ASSERT(GetCurrentMovement() == JUMPING);
+  ASSERT(current_movement == JUMPING);
   MSG_DEBUG("ai.move", "End of Jump!");
   //GameMessages::GetInstance()->Add("finished to jump");
 
@@ -163,7 +163,7 @@ void AIMovementModule::EndOfJump()
   } else {
     // No more blocked !!
     MSG_DEBUG("ai.move", "We are NO MORE blocked");
-    SetMovement(WALKING);
+    current_movement = WALKING;
   }
 }
 
@@ -176,10 +176,10 @@ void AIMovementModule::EndOfJump()
 void AIMovementModule::Walk()
 {
   // Animate skin
-  if ( GetCurrentMovement() != WALKING ) {
+  if ( current_movement != WALKING ) {
     ActiveCharacter().BeginMovementRL(100);
     ActiveCharacter().body->StartWalk();
-    SetMovement(WALKING);
+    current_movement = WALKING;
   }
 
   MakeStep();
@@ -236,7 +236,7 @@ void AIMovementModule::Walk()
 void AIMovementModule::StopWalking()
 {
   MSG_DEBUG("ai.move", "Stop to walk");
-  SetMovement(NO_MOVEMENT);
+  current_movement = NO_MOVEMENT;
   ActiveCharacter().body->StopWalk();
 }
 
@@ -275,7 +275,7 @@ void AIMovementModule::Move(uint current_time)
     return;
   }
 
-  switch (GetCurrentMovement()) {
+  switch (current_movement) {
 
   case NO_MOVEMENT:
     // Begin to walk
@@ -294,12 +294,8 @@ void AIMovementModule::Move(uint current_time)
 
   case JUMPING:
     EndOfJump();
-    break;
 
-  case BLOCKED:
-    // nothing to do, just to wait...
     break;
-
   default:
     break;
   }
@@ -308,26 +304,9 @@ void AIMovementModule::Move(uint current_time)
 void AIMovementModule::StopMoving()
 {
   //  GameMessages::GetInstance()->Add("stop moving");
-  
   StopWalking();
-  SetMovement(BLOCKED);
   //m_step++;
 }
-
-void AIMovementModule::SetMovement(movement_type_t move)
-{
-  if (m_current_movement != move) {
-    MSG_DEBUG("ai.move", "Old movement: %d, new movement: %d",
-	      m_current_movement, move);
-    m_current_movement = move;
-  }
-}
-
-AIMovementModule::movement_type_t AIMovementModule::GetCurrentMovement() const
-{
-  return m_current_movement;
-}
-
 
 // =================================================
 // Initialize Movement module when changing
@@ -335,7 +314,7 @@ AIMovementModule::movement_type_t AIMovementModule::GetCurrentMovement() const
 // =================================================
 void AIMovementModule::BeginTurn()
 {
-  SetMovement(NO_MOVEMENT);
+  current_movement = NO_MOVEMENT;
   time_at_last_position = 0;
   last_position = Point2i(0,0);
   last_blocked_position = Point2i(0,0);
@@ -350,7 +329,7 @@ AIMovementModule::AIMovementModule() :
   min_reachable_x(0),
   max_reachable_x(0),
   destination_point(Point2i(-1,-1)),
-  m_current_movement(NO_MOVEMENT),
+  current_movement(NO_MOVEMENT),
   last_position(Point2i(-1,-1)),
   time_at_last_position(0),
   last_blocked_position(Point2i(-1,-1))
@@ -379,6 +358,7 @@ void AIMovementModule::AddPointToAvoid(const Point2i& dangerous_point)
 // private:
 //  uint min_reachable_x, max_reachable_x;
 //  Point2i destination_point;
+
 void AIMovementModule::SetDestinationPoint(const Point2i& _destination_point)
 {
   destination_point = _destination_point;
@@ -408,13 +388,9 @@ bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
 
 bool AIMovementModule::IsProgressing() const
 {
-  if (GetCurrentMovement() == BLOCKED)
+  if (destination_point.GetX()>max_reachable_x ||
+          destination_point.GetX()<min_reachable_x)
     return false;
-
-//   if (destination_point.GetX() > max_reachable_x ||
-//       destination_point.GetX() < min_reachable_x)
-//     return false;
-
   return true;
 }
 

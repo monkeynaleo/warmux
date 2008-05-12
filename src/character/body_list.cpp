@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
  ******************************************************************************
  *****************************************************************************/
 
-#include "character/body_list.h"
+#include "body_list.h"
 //-----------------------------------------------------------------------------
 #include <string>
 #include <iostream>
-#include "character/body.h"
-#include "character/movement.h"
+#include "body.h"
+#include "movement.h"
 #include "game/config.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
@@ -61,7 +61,7 @@ void BodyList::FreeMem()
   list.clear();
 }
 
-void BodyList::Load(const std::string &name)
+void BodyList::Load (const std::string &name)
 {
   std::string fn = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "body" + PATH_SEPARATOR + name + PATH_SEPARATOR + CONFIG_FN;
 

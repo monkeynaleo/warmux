@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,28 +19,30 @@
  *****************************************************************************/
 
 #include "tool/xml_document.h"
-#include "tool/debug.h"
-#include "character/clothe.h"
-#include "character/member.h"
+#include "clothe.h"
+#include "member.h"
 #include <map>
 #include <iostream>
 
-Clothe::Clothe(xmlNode* xml, std::map<std::string, Member*>& members_lst):
+Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst):
   name(),
   layers()
 {
-  XmlReader::ReadStringAttr(xml, "name", name);
+  XmlReader::ReadStringAttr( xml, "name", name);
 
-  xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "c_member");
-  xmlNodeArray::const_iterator it;
-  MSG_DEBUG("body.clothe", "   Found %i clothe members\n", nodes.size());
+  xmlpp::Node::NodeList nodes = xml -> get_children("member");
+  xmlpp::Node::NodeList::iterator
+    it=nodes.begin(),
+    end=nodes.end();
 
-  for (it = nodes.begin(); it != nodes.end(); ++it)
+  for (; it != end; ++it)
   {
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
+    ASSERT (elem != NULL);
     std::string att;
-    if (!XmlReader::ReadStringAttr(*it, "name", att))
+    if (!XmlReader::ReadStringAttr(elem, "name", att))
     {
-      std::cerr << "Malformed attached clothe member definition" << std::endl;
+      std::cerr << "Malformed attached member definition" << std::endl;
       continue;
     }
 
@@ -51,11 +53,11 @@ Clothe::Clothe(xmlNode* xml, std::map<std::string, Member*>& members_lst):
     }
     else
     {
-      std::cerr << "Undefined clothe member \"" << att << "\"" << std::endl;
+      std::cerr << "Undefined member \"" << att << "\"" << std::endl;
     }
 
     layers.push_back( member );
-  } 
+  }
 
   std::vector<Member*>::iterator i = layers.begin();
   while( i != layers.end())

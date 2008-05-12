@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <vector>
-#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Forward declarations
@@ -32,7 +31,7 @@ class Team;
 class ConfigTeam;
 class Character;
 
-class TeamsList : public Singleton<TeamsList>
+class TeamsList
 {
 public:
   typedef std::list<Team *>::iterator full_iterator;
@@ -44,24 +43,19 @@ private:
   typedef std::list<uint>::iterator selection_iterator;
   std::list<uint> selection;
   std::vector<Team*>::iterator active_team;
-
   void LoadOneTeam (const std::string &dir, const std::string &file);
-  void LoadList();
-
-protected:
-  friend class Singleton<TeamsList>;
-  TeamsList();
-  ~TeamsList();
 
 public:
-  friend TeamsList &GetTeamsList(void);
+  TeamsList();
+  ~TeamsList();
+  void LoadList();
   void NextTeam();
   Team* GetNextTeam();
   Team& ActiveTeam();
   void LoadGamingData();
   void UnloadGamingData();
   void Clear();
-  void RandomizeFirstPlayer();
+
 
   // Add a new team to playing, and change active team
   void AddTeam (const ConfigTeam& the_team_cfg, bool generate_error=true);
@@ -74,16 +68,16 @@ public:
   void RefreshSort (); //Refresh energy bar position
   void ChangeSelection (const std::list<uint>& liste);
   bool IsSelected (uint index);
-  static bool IsLoaded() { return singleton != NULL; }
 
   // Find a team by its id or index (in full_list)
   Team* FindById (const std::string &id, int &pos);
   Team* FindByIndex (uint index);
   // Find a team by its id or index (in playing full_list)
-  Team* FindPlayingById(const std::string &id, int &index);
+  Team* FindPlayingById(const std::string &id, uint &index);
   Team* FindPlayingByIndex(uint index);
 };
 
+extern TeamsList teams_list;
 //-----------------------------------------------------------------------------
 
 // current active team
@@ -95,8 +89,6 @@ Character& ActiveCharacter();
 //-----------------------------------------------------------------------------
 
 bool compareTeams(const Team *a, const Team *b);
-
-inline TeamsList &GetTeamsList(void) { return TeamsList::GetRef(); };
 
 //-----------------------------------------------------------------------------
 #endif

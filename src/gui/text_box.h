@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,37 +30,18 @@ struct SDL_keysym;
 class TextBox : public Label
 {
 protected:
-  unsigned int max_nb_chars;
   std::string::size_type cursor_pos;
-  virtual void BasicSetText(std::string const &new_txt);
 public:
   TextBox(const std::string &label,
-          uint max_width,
-          Font::font_size_t fsize = Font::FONT_SMALL,
-          Font::font_style_t fstyle = Font::FONT_NORMAL);
+          const Rectanglei &rect,
+          Font::font_size_t fsize,
+          Font::font_style_t fstyle);
   ~TextBox() { };
 
-
+  void SendKey(const SDL_keysym& key);
+  void Draw(const Point2i &mousePosition, Surface& surf) const;
   void SetText(std::string const &new_txt);
-  void SetMaxNbChars(unsigned int nb_chars);
-
-  // From widget
-  virtual bool SendKey(const SDL_keysym& key);
-  virtual void Draw(const Point2i &mousePosition) const;
-  virtual Widget *ClickUp(const Point2i &, uint);
-};
-
-class PasswordBox : public TextBox
-{
-  std::string clear_text;
-  void BasicSetText(std::string const &new_txt);
-public:
-  PasswordBox(const std::string &label,
-              uint max_width,
-              Font::font_size_t fsize = Font::FONT_SMALL,
-              Font::font_style_t fstyle = Font::FONT_NORMAL);
-  bool SendKey(const SDL_keysym& key);
-  const std::string& GetPassword() const { return clear_text; };
+  void SetCursor(std::string::size_type pos);
 };
 
 #endif

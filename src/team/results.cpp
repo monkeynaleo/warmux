@@ -22,11 +22,11 @@
 #include <iostream>
 #include "include/app.h"
 #include "include/constant.h"
-#include "team/results.h"
+#include "results.h"
 #include "character/character.h"
 #include "character/damage_stats.h"
-#include "team/team.h"
-#include "team/macro.h"
+#include "team.h"
+#include "macro.h"
 
 TopCharacters::TopCharacters()
   : Violent(NULL)
@@ -179,10 +179,8 @@ std::vector<TeamResults*>* TeamResults::createAllResults(void)
 void TeamResults::deleteAllResults(std::vector<TeamResults*>* results_list)
 {
   // Build results list
-  for (std::vector<TeamResults*>::iterator it = results_list->begin();
-       it != results_list->end();
-       ++it)
-    delete *it;
+  for (int i=results_list->size()-1; i==0; i--)
+    delete ((*results_list)[i]);
 
   // Add overall results to list
   delete results_list;

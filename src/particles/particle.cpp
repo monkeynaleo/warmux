@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "particles/particle.h"
+#include "particle.h"
 #include <SDL.h>
 #include <map>
 #include "game/time.h"
@@ -31,20 +31,18 @@
 #include "weapon/explosion.h"
 #include "map/map.h"
 
-#include "particles/body_member.h"
-#include "particles/teleport_member.h"
-#include "particles/bullet.h"
-#include "particles/dark_smoke.h"
-#include "particles/explosion_smoke.h"
-#include "particles/fire.h"
-#include "particles/fading_text.h"
-#include "particles/ground_particles.h"
-#include "particles/ill_bubble.h"
-#include "particles/magic_star.h"
-#include "particles/polecat_fart.h"
-#include "particles/smoke.h"
-#include "particles/star.h"
-#include "particles/water_drop.h"
+#include "body_member.h"
+#include "teleport_member.h"
+#include "bullet.h"
+#include "dark_smoke.h"
+#include "explosion_smoke.h"
+#include "fire.h"
+#include "ground_particles.h"
+#include "ill_bubble.h"
+#include "magic_star.h"
+#include "polecat_fart.h"
+#include "smoke.h"
+#include "star.h"
 
 Particle::Particle(const std::string &name) :
   PhysicalObj(name),
@@ -128,7 +126,7 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
   uint time = Time::GetInstance()->Read() - m_last_refresh;
   uint tmp = Time::GetInstance()->Read();
 
-  uint delta = uint(m_time_between_add * double(randomObj.GetLong(3, 40)) / 10);
+  uint delta = uint(m_time_between_add * double(randomObj.GetLong(3,40))/10);
   if (time >= delta) {
     m_last_refresh = tmp;
     ParticleEngine::AddNow(position, 1, type, upper, angle, norme);
@@ -160,8 +158,6 @@ void ParticleEngine::Load()
   particle_sprite[BULLET_spr] = resource_manager.LoadSprite(res,"bullet_particle");
   particle_sprite[BULLET_spr]->EnableRotationCache(6);
   particle_sprite[POLECAT_FART_spr] = resource_manager.LoadSprite(res,"polecat_fart");
-  particle_sprite[WATER_spr] = resource_manager.LoadSprite(res,"water_drop");
-  particle_sprite[LAVA_spr] = resource_manager.LoadSprite(res,"lava_drop");
   resource_manager.UnLoadXMLProfile(res);
 
   sprites_loaded = true;
@@ -186,7 +182,8 @@ Sprite* ParticleEngine::GetSprite(particle_spr type)
 
 void ParticleEngine::AddNow(const Point2i &position,
                             uint nb_particles, particle_t type,
-                            bool upper, double angle, double norme)
+                            bool upper,
+                            double angle, double norme)
 {
   if (!sprites_loaded)
     return;
@@ -218,10 +215,6 @@ void ParticleEngine::AddNow(const Point2i &position,
       // impact size from here ...
       break;
     case particle_MAGIC_STAR : particle = new MagicStarParticle();
-      break;
-    case particle_WATER : particle = new WaterParticle();
-      break;
-    case particle_LAVA: particle = new LavaParticle();
       break;
     default : particle = NULL;
       ASSERT(0);

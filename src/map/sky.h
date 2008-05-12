@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,13 +31,15 @@
 class Sky{
 private:
   Surface image;
-  Point2i last_pos;
+  Point2i lastPos;
+  Point2i tstVect;
+  Point2i margin;
   void RedrawParticleList(std::list<Rectanglei> &list) const;
   void RedrawParticle(const Rectanglei &particle) const;
   Point2i GetSkyPos() const;
 
 public:
-  Sky() {};
+  Sky();
   void Init();
   void Reset();
   void Draw(bool redraw_all);

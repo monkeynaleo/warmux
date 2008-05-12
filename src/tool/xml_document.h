@@ -7,20 +7,14 @@
 
 #include "include/base.h"
 #include <string>
-#include <vector>
-
-// Forward declaration
-typedef struct _xmlNode xmlNode;
-typedef struct _xmlDoc xmlDoc;
-typedef std::vector<xmlNode*> xmlNodeArray;
+#include <libxml++/libxml++.h>
 
 class XmlReader
 {
-  xmlDoc*  doc;
 public:
-  XmlReader() : doc(NULL) { };
-  ~XmlReader();
+  xmlpp::DomParser parser;
 
+public:
   // Load an XML document from a file
   bool Load(const std::string &nomfich);
 
@@ -30,62 +24,55 @@ public:
 
   bool IsOk() const;
 
-  // Return the *exploitable* root (use root->parent for the real one) */
-  xmlNode* GetRoot() const;
-
-  // Return any child matching name
-  static xmlNodeArray GetNamed(xmlNode* father, const std::string& name);
-  // Return the Children matching name
-  static xmlNodeArray GetNamedChildren(xmlNode* father, const std::string& name);
-  // Return the neighbours node matching name
-  static xmlNodeArray GetNamedNeighbours(xmlNode* first, const std::string& name);
+  // Get da root man
+  xmlpp::Element* GetRoot() const;
 
   // get a attribute marker
-  static bool ReadString(xmlNode* father,
+  static bool ReadString(const xmlpp::Node *father,
                          const std::string &name,
                          std::string &output);
-  static bool ReadDouble(xmlNode* father,
+  static bool ReadDouble(const xmlpp::Node *father,
                          const std::string &name,
                          double &output);
-  static bool ReadInt(xmlNode* father,
+  static bool ReadInt(const xmlpp::Node *father,
                       const std::string &name,
                       int &output);
-  static bool ReadUint(xmlNode* father,
+  static bool ReadUint(const xmlpp::Node *father,
                        const std::string &name,
                        unsigned int &output);
-  static bool ReadBool(xmlNode* father,
+  static bool ReadBool(const xmlpp::Node *father,
                        const std::string &name,
                        bool &output);
 
   // get an XML element
-  static xmlNode* GetMarker(xmlNode* x,
-                              const std::string &name);
+  static xmlpp::Element* GetMarker(const xmlpp::Node *x,
+                                   const std::string &name);
 
   // Access to the 'anchor' <[name] name="[attr_name]"> : have to be uniq !
-  static xmlNode* Access(xmlNode* x,
-                         const std::string &name,
-                         const std::string &attr_name);
+  static xmlpp::Element* Access(const xmlpp::Node *x,
+                                const std::string &name,
+                                const std::string &attr_name);
 
   // Lit un attribut d'un noeud
-  static bool ReadStringAttr(xmlNode* x,
+  static bool ReadStringAttr(const xmlpp::Element *x,
                              const std::string &name,
                              std::string &output);
-  static bool ReadDoubleAttr(xmlNode* x,
+  static bool ReadDoubleAttr(const xmlpp::Element *x,
                              const std::string &name,
                              double &output);
-  static bool ReadIntAttr(xmlNode* x,
+  static bool ReadIntAttr(const xmlpp::Element *x,
                           const std::string &name,
                           int &output);
-  static bool ReadUintAttr(xmlNode* x,
+  static bool ReadUintAttr(const xmlpp::Element *x,
                            const std::string &name,
                            unsigned int &output);
-  static bool ReadBoolAttr(xmlNode* x,
+  static bool ReadBoolAttr(const xmlpp::Element *x,
                            const std::string &name,
                            bool &output);
 private:
   // Read marker value
-  static bool ReadMarkerValue(xmlNode* marker, std::string &output);
-  void Reset();
+  static bool ReadMarkerValue(const xmlpp::Node *marker, std::string &output);
+
 };
 
 //-----------------------------------------------------------------------------
@@ -96,17 +83,16 @@ class XmlWriter
   XmlWriter(const XmlWriter&);
   XmlWriter operator=(const XmlWriter&);
   /*********************************************/
-  void Reset();
 
 protected:
-  xmlDoc*  m_doc;
-  xmlNode* m_root;
+  xmlpp::Document *m_doc;
+  xmlpp::Element *m_root;
   std::string m_filename;
   bool m_save;
   std::string m_encoding;
 
 public:
-  XmlWriter() : m_doc(NULL), m_root(NULL), m_save(false) { } ;
+  XmlWriter();
   ~XmlWriter();
 
   bool Create(const std::string &filename, const std::string &root,
@@ -114,13 +100,13 @@ public:
 
   bool IsOk() const;
 
-  xmlNode* GetRoot();
+  xmlpp::Element* GetRoot();
 
-  void WriteElement(xmlNode* x,
+  void WriteElement(xmlpp::Element *x,
                     const std::string &name,
                     const std::string &value);
 
-  void WriteComment(xmlNode* x,
+  void WriteComment(xmlpp::Element *x,
                     const std::string& comment);
 
   bool Save();

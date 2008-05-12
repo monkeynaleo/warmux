@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -58,14 +58,10 @@ class AIMovementModule
     BACK_TO_JUMP,
     JUMPING,
     FLYING,
-    ROPING,
-    BLOCKED
+    ROPING
   } movement_type_t;
-  // Please, never modify m_current_movement directly
-  // but always use SetMovement, this is better for debugging
-  movement_type_t m_current_movement;
-  void SetMovement(movement_type_t move);
-  movement_type_t GetCurrentMovement() const;
+
+  movement_type_t current_movement;
 
   Point2i last_position;
   uint time_at_last_position;

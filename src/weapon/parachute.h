@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,12 +34,8 @@ class Parachute : public Weapon
   private:
     bool open;
     bool closing;
-
-    struct {
-      double x_extern;
-      bool changing;
-    } m_x_strength;
-    Sprite* img;
+    double m_x_extern;
+    Sprite* image;
   protected:
     void p_Select();
     void p_Deselect();
@@ -47,7 +43,6 @@ class Parachute : public Weapon
     bool p_Shoot();
   public:
     Parachute();
-    ~Parachute();
     void Draw();
     void SignalTurnEnd() { p_Deselect(); };
     bool IsInUse() const;
@@ -57,8 +52,6 @@ class Parachute : public Weapon
     void HandleKeyReleased_MoveRight(bool shift);
     void HandleKeyPressed_MoveLeft(bool shift);
     void HandleKeyReleased_MoveLeft(bool shift);
-
-    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 
     ParachuteConfig& cfg();

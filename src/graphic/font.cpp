@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  ******************************************************************************/
 
 #include <iostream>
-#include "graphic/font.h"
+#include "font.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
@@ -29,7 +29,6 @@
 Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 Font* Font::FONT_ARRAY_BOLD[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 Font* Font::FONT_ARRAY_ITALIC[] = {NULL, NULL, NULL, NULL, NULL, NULL};
-bool  Font::LIB_INIT = false;
 
 /*
  * Constants
@@ -43,11 +42,10 @@ Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
 
   if (FONT_ARRAY[ftype] == NULL) {
     try {
-      if (!LIB_INIT && TTF_Init() == -1) {
+      if (TTF_Init() == -1) {
         Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
         exit(1);
       }
-      LIB_INIT = true;
 
       // Load the font in the different styles
       FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
@@ -86,14 +84,13 @@ Font::Font(int size):
 {
   const std::string filename = Config::GetInstance()->GetTtfFilename();
 
-  if (DoesFileExist(filename))
-  {
-    m_font = TTF_OpenFont(filename.c_str(), size);
-    if (!m_font)
-      Error("Error in font file");
-  }
-  else
-    Error("Can't find font file");
+  if (IsFileExist(filename))
+    {
+      m_font = TTF_OpenFont(filename.c_str(), size);
+
+      if (!m_font)
+       throw "Error: Font " + filename + " can't be found!\n";
+    }
 
   TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
 }
@@ -106,43 +103,14 @@ Font::~Font(){
 
   txt_iterator it;
 
-  // Fix bug #10866 and also fix memory leak.
-  surface_text_table.clear();
-}
-
-void Font::ReleaseInstances(void)
-{
-  uint i;
-
-  for (i=0; i<sizeof(FONT_ARRAY)/sizeof(Font*); i++)
-  {
-    if (FONT_ARRAY[i])
-    {
-      delete FONT_ARRAY[i];
-      FONT_ARRAY[i] = NULL;
-    }
-  }
-
-  for (i=0; i<sizeof(FONT_ARRAY_BOLD)/sizeof(Font*); i++)
-  {
-    if (FONT_ARRAY_BOLD[i])
-    {
-      delete FONT_ARRAY_BOLD[i];
-      FONT_ARRAY_BOLD[i] = NULL;
-    }
-  }
-
-  for (i=0; i<sizeof(FONT_ARRAY_ITALIC)/sizeof(Font*); i++)
-  {
-    if (FONT_ARRAY_ITALIC[i])
-    {
-      delete FONT_ARRAY_ITALIC[i];
-      FONT_ARRAY_ITALIC[i] = NULL;
-    }
+  for( it = surface_text_table.begin();
+       it != surface_text_table.end();
+       ++it ){
+    //SDL_FreeSurface(it->second);
+    surface_text_table.erase(it->first);
   }
 
   TTF_Quit();
-  LIB_INIT = false;
 }
 
 void Font::SetBold()

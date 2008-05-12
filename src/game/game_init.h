@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,22 +22,19 @@
 #ifndef GAME_INIT_H
 #define GAME_INIT_H
 
-#include "interface/loading_screen.h"
-
 class GameInit
 {
 public:
-  GameInit();
+  static void Init();
 private:
-  LoadingScreen loading_sreen;
   // Initialization
-  void InitGameData_NetServer();
-  void EndInitGameData_NetServer();
-  void EndInitGameData_NetClient();
+  static void InitGameData_NetServer();
+  static void EndInitGameData_NetServer();
+  static void EndInitGameData_NetClient();
 
-  void InitMap();
-  void InitTeams();
-  void InitSounds();
-  void InitData();
+  static void InitMap();
+  static void InitTeams();
+  static void InitSounds();
+  static void InitData();
 };
 #endif

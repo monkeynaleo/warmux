@@ -26,39 +26,40 @@
 #include <errno.h>
 #include "clock.h"
 
-#define ALL        0
-#define TRAFFIC    1
-#define MSG        2
-#define CONN       3
-#define INFO       4
+#define	ALL		0
+#define TRAFFIC		1
+#define	MSG		2
+#define	CONN		3
+#define INFO		4
 
-#define LOG_LEVEL    TRAFFIC
+#define LOG_LEVEL	INFO
 
 
 #ifdef DEBUG
-#define DPRINT(LEVEL, ARGS...)                                          \
-  {                                                                     \
-    if((LEVEL) >= LOG_LEVEL )                                           \
-      {                                                                 \
-        printf("%s| %10s,%3i : ", wx_clock.TimeStr(),__FILE__,__LINE__); \
-        printf(ARGS);                                                   \
-        printf("\n");                                                   \
-      }                                                                 \
-  }
+#define DPRINT(LEVEL, ARGS...) \
+{ \
+	if((LEVEL) >= LOG_LEVEL ) \
+	{ \
+		printf("%s| %10s,%3i : ", wx_clock.TimeStr(),__FILE__,__LINE__); \
+		printf(ARGS); \
+		printf("\n"); \
+	} \
+}
 #else
 #define DPRINT(LEVEL, ARGS...)
 #endif
 
-#define TELL_ERROR         \
-  {                        \
-    PRINT_ERROR;           \
-    exit(1);               \
-  }
+#define TELL_ERROR \
+{ \
+	PRINT_ERROR; \
+	exit(1); \
+}
 
-#define PRINT_ERROR                    \
-  {                                    \
-    DPRINT(INFO , "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
-  }
+#define PRINT_ERROR \
+{ \
+	DPRINT(INFO , "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
+}
 
 
 #endif
+

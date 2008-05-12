@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,6 @@
 #define NET_ERROR_MSG_H
 #include "network.h"
 
-const std::string NetworkErrorToString(connection_state_t err);
+void DispNetworkError(Network::connection_state_t err);
 
 #endif

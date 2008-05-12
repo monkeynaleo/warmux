@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,10 @@
 class Character;
 class Sprite;
 class EmptyWeaponConfig;
-typedef struct _xmlNode xmlNode;
+namespace xmlpp
+{
+  class Element;
+}
 
 // Infinite ammos constant
 extern const int INFINITE_AMMO;
@@ -49,10 +52,9 @@ class Weapon
 public:
   typedef enum
   {
-    WEAPON_BAZOOKA,       WEAPON_AUTOMATIC_BAZOOKA, WEAPON_CLUZOOKA, WEAPON_RIOT_BOMB,
-    WEAPON_GRENADE,       WEAPON_DISCO_GRENADE,     WEAPON_CLUSTER_BOMB, WEAPON_FOOTBOMB,
-    WEAPON_GUN,           WEAPON_SHOTGUN,           WEAPON_SUBMACHINE_GUN,
-    WEAPON_BASEBALL,      WEAPON_FLAMETHROWER,
+    WEAPON_BAZOOKA,        WEAPON_AUTOMATIC_BAZOOKA, WEAPON_RIOT_BOMB, WEAPON_GRENADE,
+    WEAPON_DISCO_GRENADE,  WEAPON_CLUSTER_BOMB,      WEAPON_GUN,       WEAPON_SHOTGUN,
+    WEAPON_SUBMACHINE_GUN, WEAPON_BASEBALL,
 
     WEAPON_DYNAMITE,      WEAPON_MINE,
 
@@ -153,10 +155,6 @@ protected:
   virtual void Refresh() = 0;
   virtual bool p_Shoot() = 0;
 
-  virtual void DrawWeaponFire();
-  void DrawAmmoUnits() const;
-
-  void RepeatShoot();
 public:
   Weapon(Weapon_type type,
          const std::string &id,
@@ -174,6 +172,9 @@ public:
 
   // Draw the weapon
   virtual void Draw();
+  virtual void DrawWeaponFire();
+
+  void DrawAmmoUnits() const;
 
   Sprite & GetIcon() const { return *icon; };
   // Manage the numbers of ammunitions
@@ -295,19 +296,16 @@ public:
 
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
-  bool LoadXml(xmlNode*  weapon);
+  bool LoadXml(const xmlpp::Element * weapon);
 
   // return the strength of the weapon
-  double ReadStrength() const { return m_strength; };
+  const double ReadStrength() const { return m_strength; };
 
   // Data access
   const std::string& GetName() const;
   const std::string& GetID() const;
   const std::string& GetHelp() const;
   Weapon_type GetType() const { return m_type; };
-
-  // For localization purposes, called when changing language
-  virtual void UpdateTranslationStrings() = 0;
 
   // For localization purposes, each weapon needs to have its own
   // "%s team has won %d <weapon>" function
@@ -325,8 +323,6 @@ public:
 private:
   // Angle in radian between -PI to PI
   double min_angle, max_angle;
-  // display crosshair ?
-  bool m_display_crosshair;
 
   /* If you need this, implement it (correctly)*/
   Weapon(const Weapon&);

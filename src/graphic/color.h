@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Color
+ * Handle a SDL_Surface.
  *****************************************************************************/
 
 #ifndef COLOR_H
@@ -38,16 +38,13 @@ class Color
     Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
     bool operator==(const Color &color) const;
-    bool operator!=(const Color &color) const;
-    Color operator*(const Color &fact) const;
 
     void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
-    Uint8 GetRed() const { return red; };
-    Uint8 GetGreen() const { return green; };
-    Uint8 GetBlue() const { return blue; };
-    Uint8 GetAlpha() const { return alpha; };
-    Uint32 GetColor() const;
+    Uint8 GetRed() const;
+    Uint8 GetGreen() const;
+    Uint8 GetBlue() const;
+    Uint8 GetAlpha() const;
 
     SDL_Color GetSDLColor() const;
 };

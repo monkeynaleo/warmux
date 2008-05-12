@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,19 +20,15 @@
 
 #include <map>
 #include <iostream>
-#include "character/body.h"
-#include "character/character.h"
-#include "character/member.h"
-#include "character/movement.h"
-#include "game/game.h"
+#include "member.h"
+#include "body.h"
+#include "movement.h"
 #include "graphic/sprite.h"
-#include "team/teams_list.h"
-#include "team/team.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 
-Member::Member(xmlNode* xml, const Profile* res):
+Member::Member(xmlpp::Element *xml, const Profile* res):
   parent(NULL),
   angle_rad(0),
   anchor(0,0),
@@ -45,56 +41,58 @@ Member::Member(xmlNode* xml, const Profile* res):
   type(""),
   go_through_ground(false)
 {
-  if (xml == NULL)
+  if(xml == NULL)
     return;
-  XmlReader::ReadStringAttr(xml, "name", name);
+  XmlReader::ReadStringAttr( xml, "name", name);
   ASSERT(name!="");
 
   // Load the sprite
   spr = resource_manager.LoadSprite( res, name);
-  //spr->EnableRotationCache(32);
-  //spr->EnableFlippingCache();
+//  spr->EnableRotationCache(32);
+//  spr->EnableFlippingCache();
   spr->cache.EnableLastFrameCache();
 
   // Get the various option
-  XmlReader::ReadStringAttr(xml, "type", type);
+  XmlReader::ReadStringAttr( xml, "type", type);
   ASSERT(type!="");
 
-  xmlNode* el = XmlReader::GetMarker(xml, "anchor");
+  xmlpp::Element *el = XmlReader::GetMarker(xml, "anchor");
   if(el != 0)
   {
-    int dx = 0, dy = 0;
+    int dx,dy;
+    dx = dy = 0;
     XmlReader::ReadIntAttr(el, "dx", dx);
     XmlReader::ReadIntAttr(el, "dy", dy);
-    MSG_DEBUG("body", "   Member %s has anchor (%i,%i)\n", name.c_str(), dx, dy);
     anchor = Point2f((float)dx,(float)dy);
     spr->SetRotation_HotSpot(Point2i(dx,dy));
   }
-  else
-    MSG_DEBUG("body", "   Member %s has no anchor\n", name.c_str());
 
   XmlReader::ReadBoolAttr(xml, "go_through_ground", go_through_ground);
 
-  xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "attached");
-  xmlNodeArray::const_iterator it;
+  xmlpp::Node::NodeList nodes = xml -> get_children("attached");
+  xmlpp::Node::NodeList::iterator
+    it=nodes.begin(),
+    end=nodes.end();
 
-  for (it = nodes.begin(); it != nodes.end(); ++it)
+  for (; it != end; ++it)
   {
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
+    ASSERT (elem != NULL);
     std::string att_type;
-    if (!XmlReader::ReadStringAttr(*it, "member_type", att_type))
+    if (!XmlReader::ReadStringAttr(elem, "member_type", att_type))
     {
       std::cerr << "Malformed attached member definition" << std::endl;
       continue;
     }
 
-    int dx = 0, dy = 0;
-    XmlReader::ReadIntAttr(*it, "dx", dx);
-    XmlReader::ReadIntAttr(*it, "dy", dy);
-    MSG_DEBUG("body", "   Attached member %s has anchor (%i,%i)\n", att_type.c_str(), dx, dy);
+    int dx,dy;
+    dx = dy = 0;
+    XmlReader::ReadIntAttr(elem, "dx", dx);
+    XmlReader::ReadIntAttr(elem, "dy", dy);
     Point2f d((float)dx, (float)dy);
 
     std::string frame_str;
-    XmlReader::ReadStringAttr(*it, "frame", frame_str);
+    XmlReader::ReadStringAttr(elem, "frame", frame_str);
     if (frame_str == "*")
     {
       v_attached rot_spot;
@@ -117,8 +115,7 @@ Member::Member(xmlNode* xml, const Profile* res):
       }
       (attached_members.find(att_type)->second)[frame] = d;
     }
-  } 
-
+  }
   ResetMovement();
 }
 
@@ -288,9 +285,5 @@ WeaponMember::~WeaponMember()
 
 void WeaponMember::Draw(const Point2i & /*_pos*/, int /*flip_center*/, int /*direction*/)
 {
-  if (!ActiveCharacter().IsDead() && Game::GetInstance()->ReadState() != Game::END_TURN)
-  {
-        ActiveTeam().crosshair.Draw();
-        ActiveTeam().AccessWeapon().Draw();
-  }
+  // Would be cool to display the weapon from here...
 }

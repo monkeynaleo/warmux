@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,32 +29,27 @@ class NetworkServer : public Network
 {
   uint max_nb_players;
   TCPsocket server_socket; // Wait for incoming connections on this socket
-
-protected:
-  bool HandShake(TCPsocket& client_socket);
-  virtual void HandleAction(Action* a, DistantComputer* sender) const;
-  virtual void WaitActionSleep();
-
 public:
-  NetworkServer(const std::string& password);
+  NetworkServer();
   ~NetworkServer();
 
   //virtual const bool IsConnected() const { return true; }
-  virtual bool IsServer() const { return true; }
+  virtual const bool IsServer() const { return true; }
 
   virtual void SendChatMessage(const std::string& txt);
+  virtual void ReceiveActions();
 
   // Serveur specific methods
-  connection_state_t ServerStart(const std::string &port);
+  Network::connection_state_t ServerStart(const std::string &port);
 
   bool AcceptIncoming();
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);
-  uint GetNbConnectedPlayers() const;
-  uint GetNbInitializedPlayers() const;
-  uint GetNbReadyPlayers() const;
-  uint GetNbCheckedPlayers() const;
+  const uint GetNbConnectedPlayers() const;
+  const uint GetNbInitializedPlayers() const;
+  const uint GetNbReadyPlayers() const;
+  const uint GetNbCheckedPlayers() const;
 };
 
 //-----------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@
 #include <list>
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file
@@ -51,18 +50,7 @@ class DistantComputer;
 class NetworkServer;
 class NetworkMenu;
 
-typedef enum
-{
-  CONNECTED,
-  CONN_BAD_HOST,
-  CONN_BAD_PORT,
-  CONN_BAD_SOCKET,
-  CONN_REJECTED,
-  CONN_TIMEOUT,
-  CONN_WRONG_PASSWORD,
-} connection_state_t;
-
-class Network : public Singleton<Network>
+class Network
 {
 public:
   typedef enum
@@ -74,27 +62,34 @@ public:
       NETWORK_PLAYING
     } network_state_t;
 
+  typedef enum
+    {
+      CONNECTED,
+      CONN_BAD_HOST,
+      CONN_BAD_PORT,
+      CONN_BAD_SOCKET,
+      CONN_REJECTED,
+      CONN_TIMEOUT
+    } connection_state_t;
+
 private:
 
   Network(const Network&);
   const Network& operator=(const Network&);
   friend class DistantComputer;
+  const connection_state_t GetError() const;
 
-  std::string password;
-  connection_state_t GetError() const;
-
+  static Network * singleton;
   static bool sdlnet_initialized;
   static int  num_objects;
 
   static bool stop_thread;
   bool turn_master_player;
 
-  void ReceiveActions();
-
 protected:
   network_state_t state;
 
-  Network(const std::string& password); // pattern singleton
+  Network(); // pattern singleton
 
   SDL_Thread* thread; // network thread, where we receive data from network
   SDLNet_SocketSet socket_set;
@@ -109,11 +104,8 @@ protected:
   bool ThreadToContinue() const;
   static int ThreadRun(void* no_param);
 
-  virtual void HandleAction(Action* a, DistantComputer* sender) const = 0;
-  virtual void WaitActionSleep() = 0;
-
   void DisconnectNetwork();
-
+  const connection_state_t CheckHost(const std::string &host, int prt) const;
 public:
   NetworkMenu* network_menu;
 
@@ -131,45 +123,32 @@ public:
   static void Disconnect();
 
   static bool IsConnected();
-  virtual bool IsLocal() const { return false ; }
-  virtual bool IsServer() const { return false ; }
-  virtual bool IsClient() const { return false ; }
-  uint GetPort() const;
-  const std::string& GetPassword() const { return password; }
+  virtual const bool IsLocal() const { return false ; }
+  virtual const bool IsServer() const { return false ; }
+  virtual const bool IsClient() const { return false ; }
+  const uint GetPort() const;
 
   // Action handling
   void SendPacket(char* packet, int size) const;
-  virtual void SendAction(const Action* action) const;
+  virtual void SendAction(Action* action) const;
 
+  virtual void ReceiveActions() = 0;
   virtual void SendChatMessage(const std::string& txt) = 0;
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
 
   // Start a client
-  static connection_state_t ClientStart(const std::string &host, const std::string &port,
-					const std::string& password);
+  static connection_state_t ClientStart(const std::string &host, const std::string &port);
 
   // Start a server
-  static connection_state_t ServerStart(const std::string &port,
-					const std::string& password);
+  static connection_state_t ServerStart(const std::string &port);
 
   // Manage network state
-  connection_state_t CheckHost(const std::string &host, int prt) const;
   void SetState(Network::network_state_t state);
   Network::network_state_t GetState() const;
   void SendNetworkState() const;
 
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
-
-  static void Send(TCPsocket& socket, const int& nbr);
-  static void Send(TCPsocket& socket, const std::string &str);
-
-  static uint Batch(void* buffer, const int& nbr);
-  static uint Batch(void* buffer, const std::string &str);
-  static void SendBatch(TCPsocket& socket, void* data, size_t len);
-
-  static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
-  static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str);
 };
 
 //-----------------------------------------------------------------------------

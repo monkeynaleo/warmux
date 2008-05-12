@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,14 +22,12 @@
 #include "gui/msg_box.h"
 #include "gui/widget.h"
 #include "graphic/text.h"
-#include "graphic/video.h"
-#include "include/app.h"
 
 const uint vmargin = 5;
 const uint hmargin = 5;
 
-MsgBox::MsgBox(const Point2i& size, Font::font_size_t fsize, Font::font_style_t fstyle) :
-  Widget(size), font_size(fsize), font_style(fstyle)
+MsgBox::MsgBox(const Rectanglei& rect, Font::font_size_t fsize, Font::font_style_t fstyle) :
+  Widget(rect), font_size(fsize), font_style(fstyle)
 {
 }
 
@@ -75,13 +73,11 @@ void MsgBox::NewMessage(const std::string &msg, const Color& color)
   // Remove old messages if needed
   Flush();
 
-  NeedRedrawing();
+  ForceRedraw();
 }
 
-void MsgBox::Draw(const Point2i &/*mousePosition*/) const
+void MsgBox::Draw(const Point2i &/*mousePosition*/, Surface& surf) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
-
   // Draw the border
   surf.BoxColor(*this, defaultOptionColorBox);
   surf.RectangleColor(*this, defaultOptionColorRect,2);
@@ -96,12 +92,14 @@ void MsgBox::Draw(const Point2i &/*mousePosition*/) const
   }
 }
 
-void MsgBox::Pack()
+void MsgBox::SetSizePosition(const Rectanglei &rect)
 {
+  StdSetSizePosition(rect);
+
   // render the messages with the correct width
   std::list<Text*>::iterator it;
   for (it = messages.begin(); it != messages.end(); it++) {
-    (*it)->SetMaxWidth(size.x - (2*hmargin));
+    (*it)->SetMaxWidth(GetSizeX() - (2*hmargin));
   }
 
   // Remove old messages if needed

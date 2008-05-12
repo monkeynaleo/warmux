@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
  * Artificial intelligence Shoot module
  *****************************************************************************/
 
-#include "ai/ai_shoot_module.h"
-#include "ai/ai_movement_module.h"
+#include "ai_shoot_module.h"
+#include "ai_movement_module.h"
 #include "character/character.h"
 #include "interface/game_msg.h"
 #include "map/map.h"
@@ -152,7 +152,7 @@ bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
   }
 
   // Check the angle
-  double angle = InRange_Double(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
+  double angle = BorneDouble(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
                              - (ActiveTeam().GetWeapon().GetMinAngle()) );
 
   if (AbsoluteValue(angle-m_angle) > 0.08726/* 5 degree */) {
@@ -240,7 +240,7 @@ void AIShootModule::ShootWithBazooka()
 
 
     std::cout << "shooting " << V0x <<" "  <<"   " << V0y << " "<< " " <<  atan(V0y/V0x) << " " <<m_enemy->GetName() << std::endl;
-    ActiveTeam().AccessWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetCenterX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
+    ActiveTeam().GetWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetCenterX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
     m_last_shoot_time = m_current_time;
   }
 }
@@ -278,13 +278,13 @@ const Character* AIShootModule::FindEnemy()
     return m_enemy;
   }
 
-  SetStrategy(NO_STRATEGY);
+  m_current_strategy = NO_STRATEGY;
 
   // Proximity enemy ?
   m_enemy = FindProximityEnemy(ActiveCharacter());
   if ( m_enemy != NULL ) {
 
-    SetStrategy(NEAR_FROM_ENEMY);
+    m_current_strategy = NEAR_FROM_ENEMY;
 
     GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injure "
                                      + m_enemy->GetName());
@@ -300,7 +300,7 @@ const Character* AIShootModule::FindEnemy()
   m_enemy = FindShootableEnemy(ActiveCharacter(), m_angle);
   if ( m_enemy != NULL ) {
 
-    SetStrategy(SHOOT_FROM_POINT);
+    m_current_strategy = SHOOT_FROM_POINT;
 
     GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" will shoot "
                                      + m_enemy->GetName());
@@ -313,10 +313,11 @@ const Character* AIShootModule::FindEnemy()
   }
 
   m_enemy = FindBazookaShootableEnemy(ActiveCharacter());
-  if (m_enemy != NULL) {
-    SetStrategy(SHOOT_BAZOOKA);
-    return m_enemy;
-  }
+  if (m_enemy)
+    {
+      m_current_strategy = SHOOT_BAZOOKA;
+      return m_enemy;
+    }
 
   m_current_strategy = NO_STRATEGY;
   m_angle = 0;
@@ -328,12 +329,9 @@ const Character* AIShootModule::FindEnemy()
 void AIShootModule::ChooseDirection() const
 {
   if ( m_enemy ) {
-    // TODO : Replace by a more clever function
-    if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 10 )
-      return;
 
-    MSG_DEBUG("ai", "Character: %d, enemy %d", 
-	      ActiveCharacter().GetCenterX(), m_enemy->GetCenterX());
+    if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 5 )
+      return;
 
     if ( ActiveCharacter().GetCenterX() < m_enemy->GetCenterX())
       ActiveCharacter().SetDirection(DIRECTION_RIGHT);
@@ -364,9 +362,9 @@ bool AIShootModule::Refresh(uint current_time)
   case NEAR_FROM_ENEMY:
     // We are near enough of an enemy (perhaps not the first one we have choosen)
     FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
-//      if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
-//                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
-        if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 30) {
+      if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
+                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
+        //if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 50) {
               if (&(*character) != m_enemy) {
                 GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
                                                  + (*character).GetName());
@@ -384,11 +382,6 @@ bool AIShootModule::Refresh(uint current_time)
   case SHOOT_BAZOOKA:
     ShootWithBazooka();
     return false;
-
-  case SKIP_TURN:
-    ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
-    Shoot();
-    break;
   }
 
   return true;
@@ -403,8 +396,8 @@ void AIShootModule::BeginTurn()
   m_enemy = NULL;
   m_last_shoot_time = 0;
   m_angle = 0;
+  m_current_strategy = NO_STRATEGY;
   m_has_finished = false;
-  SetStrategy(NO_STRATEGY);
 
   // Choose random direction for the moment
   ActiveCharacter().SetDirection( randomSync.GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
@@ -422,14 +415,7 @@ AIShootModule::AIShootModule(const AIMovementModule& to_remove) :
   std::cout << "o Artificial Intelligence Shoot module initialization" << std::endl;
 }
 
-void AIShootModule::SetStrategy(strategy_t new_strategy)
+void AIShootModule::SetNoStrategy()
 {
-  if (m_current_strategy != new_strategy) {
-    MSG_DEBUG("ai", "%s changes his strategy: %d -> %d", 
-	      ActiveCharacter().GetName().c_str(), m_current_strategy, new_strategy);
-    if (IsLOGGING("ai")) {
-      std::cout << "SetStrategy: " << new_strategy << std::endl;
-    }
-    m_current_strategy = new_strategy;
-  }
+  m_current_strategy = NO_STRATEGY;
 }

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,16 +19,16 @@
  * Mouvement right/left for a character.
  *****************************************************************************/
 
-#include "character/move.h"
+#include "move.h"
 //#include <math.h>
-#include "character/character.h"
-#include "game/game.h"
-#include "game/game_mode.h"
+#include "character.h"
+#include "game/game_loop.h"
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
+
 
 // Max climbing height walking
 const int MAX_CLIMBING_HEIGHT=30;
@@ -82,19 +82,13 @@ bool ComputeHeightMovement(Character &character, int &height,
 }
 
 // Moves a character to the right/left depending the signess of direction
-void MoveCharacter(Character &character, bool slowly)
+void MoveCharacter(Character &character)
 {
   int height;
   bool ghost;
-  uint walking_pause = GameMode::GetInstance()->character.walking_pause;
-  
-  if (slowly)
-    walking_pause *= 10;
-  else 
-    ActiveCharacter().SetMovement("walk"); // avoid sliding effect when not right or left key is released while releasing shift
 
   // If character moves out of the world, no need to go further: it is dead
-  if (character.GetDirection() == DIRECTION_LEFT)
+  if (character.GetDirection() == -1)
     ghost = character.IsOutsideWorld ( Point2i(-1, 0) );
   else
     ghost = character.IsOutsideWorld ( Point2i(1, 0) );
@@ -104,35 +98,35 @@ void MoveCharacter(Character &character, bool slowly)
     return;
   }
 
-  // Compute fall height
+  // Compute fall heigth
   if (!ComputeHeightMovement (character, height, true)) return;
 
-  // Check we can move (to go not too fast)
-  while (character.CanStillMoveRL(walking_pause) && ComputeHeightMovement (character, height, true))
+  do
   {
     // Move !
-    Game::GetInstance()->character_already_chosen = true;
-
+    GameLoop::GetInstance()->character_already_chosen = true;
     // Eventually moves the character
+
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),
                              character.GetY() +height) );
 
     // If no collision, let gravity do its job
     character.UpdatePosition();
-  }
+
+  } while (character.CanStillMoveRL(PAUSE_MOVEMENT) && ComputeHeightMovement (character, height, true));
 }
 
 // Move the active character to the left
-void MoveActiveCharacterLeft(bool shift){
+void MoveActiveCharacterLeft(bool){
   // character is ready to move ?
   if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_LEFT);
   if (move) {
-    MoveCharacter(ActiveCharacter(), shift);
+    MoveCharacter(ActiveCharacter());
   } else {
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
-    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION, shift);
+    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
   }
 
   //Refresh skin position across network
@@ -141,17 +135,17 @@ void MoveActiveCharacterLeft(bool shift){
 }
 
 // Move the active character to the right
-void MoveActiveCharacterRight(bool shift)
+void MoveActiveCharacterRight(bool)
 {
   // character is ready to move ?
   if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_RIGHT);
   if (move) {
-    MoveCharacter(ActiveCharacter(), shift);
+    MoveCharacter(ActiveCharacter());
   } else {
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION, shift);
+    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
   }
 
   //Refresh skin position across network

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,20 +27,9 @@
 #include <string>
 #include <libintl.h>
 
-#ifdef _MSC_VER
-#  include "msvc/config.h"
-#else
-#  include "config.h"
-#endif
-
-#ifdef USE_FRIBIDI
-#define _(X) localization(X)
-char * localization(const char * buffer);
-#else
 #define _(X) gettext(X)
-#endif /* USE_FRIBIDI */
 
 std::string Format (const char *format, ...);
 void InitI18N(const std::string &dir, const std::string &default_language);
 
-#endif /* FORMAT_H */
+#endif

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,19 +19,30 @@
  * Simple button
  *****************************************************************************/
 
-#include "gui/button.h"
-#include "include/app.h"
-#include "graphic/sprite.h"
-#include "graphic/video.h"
+#include "button.h"
 #include "tool/resource_manager.h"
+#include "graphic/sprite.h"
 
-
-Button::Button (const Profile *res_profile,
-                const std::string& resource_id, bool _img_scale):
+Button::Button (const Rectanglei &rect, const Profile *res_profile,
+                const std::string& resource_id, bool _img_scale) :
+  Widget(rect),
+  hidden(false),
   img_scale(_img_scale),
   image(resource_manager.LoadSprite(res_profile,resource_id))
 {
-  position = Point2i(-1, -1);
+  image->cache.EnableLastFrameCache();
+
+  if (img_scale)
+    image->ScaleSize(rect.GetSize());
+}
+
+Button::Button (const Point2i &m_position, const Profile *res_profile,
+                const std::string& resource_id, bool _img_scale):
+  hidden(false),
+  img_scale(_img_scale),
+  image(resource_manager.LoadSprite(res_profile,resource_id))
+{
+  position = m_position;
   size = image->GetSize();
 }
 
@@ -40,36 +51,41 @@ Button::~Button()
   delete image;
 }
 
-void Button::Draw(const Point2i &/*mousePosition*/) const
+void Button::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  if (!hidden)
+    {
+      uint frame = (is_selected || Contains(mousePosition) ? 1 : 0);
 
-  uint frame = (IsHighlighted());
+      image->SetCurrentFrame(frame);
 
-  // Check that there are enough frames in the image...
-  if (image->GetFrameCount() <= frame) {
-    frame = 0;
-  }
+      if (img_scale) {
+        // image scalling : easy to place image
+        image->Blit(surf, position);
+      } else {
+        // centering image
+        Point2i pos = position;
 
-  image->SetCurrentFrame(frame);
+        pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
+        pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
 
-  if (img_scale) {
-    // image scalling : easy to place image
-    image->Blit(surf, position);
-  } else {
-    // centering image
-    Point2i pos = position;
-
-    pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
-    pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
-
-    image->Blit(surf, pos);
-  }
+        image->Blit(surf, pos);
+      }
+    }
 }
 
-void Button::Pack()
+void Button::SetSizePosition(const Rectanglei &rect)
 {
+  StdSetSizePosition(rect);
+
   if (img_scale)
     image->ScaleSize(size);
 }
 
+void Button::SetVisible(bool visible)
+{
+  if (hidden == visible) {
+    hidden = !visible;
+    need_redrawing = true;
+  }
+}

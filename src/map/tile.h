@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ class TileItem;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
+
 class Tile : public Rectanglei{
 public:
   Tile ();
@@ -47,7 +48,7 @@ public:
   void MergeSprite(const Point2i &position, Surface & provider);
 
   // Load an image
-  void LoadImage(Surface& ground_surface, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
+  void LoadImage (Surface& ground_surface);
 
   // Get alpha value of a pixel
   unsigned char GetAlpha(const Point2i &pos) const;
@@ -63,19 +64,10 @@ public:
   // Return a surface of the ground inside the rect
   Surface GetPart(const Rectanglei& rec);
 
-  // Return the preview
-  const Surface* GetPreview() const { return m_preview; };
-  void  CheckPreview();
-  const Point2i& GetPreviewSize() const { return m_preview_size; };
-  const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
-  // Translate world coordinates into a preview ones
-  // @warning assumes CELL_SIZE is 64x64
-  Point2i PreviewCoordinates(const Point2i& pos) { return (pos-m_upper_left_offset)>>m_shift; };
-
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();
 protected:
-  void InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
+  void InitTile(const Point2i &pSize);
 
   void FreeMem();
   Point2i Clamp(const Point2i &v) const { return v.clamp(Point2i(0, 0), nbCells - 1); };
@@ -83,16 +75,6 @@ protected:
   // Ground dimensions
   Point2i nbCells;
   unsigned int nbr_cell;
-
-  void InitPreview();
-  Surface*   m_preview;
-  uint       m_shift;
-  Point2i    m_last_video_size;
-  Point2i    m_preview_size;
-  Rectanglei m_preview_rect;
-
-  Point2i m_upper_left_offset;
-  Point2i m_lower_right_offset;
 
   // Canvas giving access to tiles
   std::vector<TileItem *> item;

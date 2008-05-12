@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 #include <list>
 #include <vector>
 #include <string>
-#include "team/team_energy.h"
+#include "team_energy.h"
 #include "graphic/surface.h"
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"
@@ -60,7 +60,6 @@ class Team
 
 
   private:
-    Surface mini_flag;
     Surface flag;
     Surface death_flag;
     Surface big_flag;
@@ -99,7 +98,7 @@ class Team
   // Switch to next worm.
     void NextCharacter();
     void PreviousCharacter();
-    void SelectCharacter(const Character * c);
+    void SelectCharacter(uint index);
 
   // Prepare turn.
     void PrepareTurn();
@@ -116,7 +115,7 @@ class Team
 
   // Access to the active weapon.
     Weapon& AccessWeapon() const;
-    const Weapon& GetWeapon() const;
+    Weapon& GetWeapon() const;
     Weapon::Weapon_type GetWeaponType() const;
 
   // Init the energy bar of the team.
@@ -124,7 +123,7 @@ class Team
 
   // Update the energy bar values of the team.
     void UpdateEnergyBar();
-    TeamEnergy & GetEnergyBar() { return energy; };
+    TeamEnergy & GetEnergyBar();
 
   // Read the total energy of the team.
     uint ReadEnergy() const;
@@ -135,14 +134,13 @@ class Team
     const std::string& GetPlayerName() const { return m_player_name; }
     const std::string& GetSoundProfile() const { return m_sound_profile; }
     const Surface& GetFlag() const { return flag; }
-    const Surface& GetMiniFlag() const { return mini_flag; }
     const Surface& GetDeathFlag() const { return death_flag; }
     const Surface& GetBigFlag() const { return big_flag; }
     iterator begin();
     iterator end();
     Character* FindByIndex(uint index);
 
-    void SetPlayerName(const std::string& player_name) { m_player_name = player_name; };
+    void SetPlayerName(const std::string& player_name);
 
   // Number of ammo for the current selected weapon.
   // (return INFINITE_AMMO is ammo are unlimited !)
@@ -160,16 +158,16 @@ class Team
   // Only for network:
   // true if the team belong to a local player
   // false if the team belong to a player on the network or on the AI
-    bool IsLocal() const { return (type_of_player == TEAM_human_local); };
+    bool IsLocal() const;
 
   // true if the team belong to a local AI
-    bool IsLocalAI() const { return (type_of_player == TEAM_ai_local); };
+    bool IsLocalAI() const;
 
     bool IsActiveTeam() const;
 
-    void SetLocal() { type_of_player = TEAM_human_local; };
-    void SetLocalAI() { type_of_player = TEAM_ai_local; };
-    void SetRemote() { type_of_player = TEAM_remote; };
+    void SetLocal();
+    void SetLocalAI();
+    void SetRemote();
 
 };
 

@@ -7,9 +7,9 @@
 !define WORMUX_BOTTOM_TEXT      "${WORMUX_TITLE} est disponible sous licence GNU General Public License (GPL). Le texte de licence suivant est fourni uniquement à titre informatif. $_CLICK"
 
 !define WORMUX_SHORTCUTS_DESC   "Installer les raccourcis"
-!define WORMUX_DESKTOP_SC_DESC  "Raccourci sur le bureau pour lancer Wormux"
-!define WORMUX_STARTM_SC_DESC   "Raccourci dans le menu Démarrer\Wormux"
-!define WORMUX_UNINST_SC_DESC   "Raccourci de désinstallation dans le menu Démarrer\Wormux"
+!define WORMUX_DESKTOP_SC_DESC  "Raccourci sur le bureau"
+!define WORMUX_STARTM_SC_DESC   "Raccourci dans le menu Démarrer"
+!define WORMUX_UNINST_SC_DESC   "Raccourci de désinstallation"
 
 !define WORMUX_SHORCUTS_TITLE   "Installation des raccourcis"
 

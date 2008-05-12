@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,15 +19,16 @@
  * Distant Computer handling
  *****************************************************************************/
 
-#include <algorithm>  //std::find
-#include "network/distant_cpu.h"
+#ifdef _MSC_VER
+#  include <algorithm>  //std::find
+#endif
+#include "distant_cpu.h"
 //-----------------------------------------------------------------------------
 #include <SDL_mutex.h>
 #include <SDL_thread.h>
-#include "network/network.h"
+#include "network.h"
 #include "include/action.h"
 #include "include/action_handler.h"
-#include "include/constant.h"
 #include "map/maps_list.h"
 #include "menu/network_menu.h"
 #include "team/team.h"
@@ -40,6 +41,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
   sock(new_sock),
   owned_teams(),
   state(DistantComputer::STATE_ERROR),
+  version_checked(false),
   force_disconnect(false),
   nickname("this is not initialized")
 {
@@ -54,20 +56,19 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
   {
     int size;
     char* pack;
+    Action c(Action::ACTION_RULES_ASK_VERSION);
+    c.WritePacket(pack, size);
+    SendDatas(pack, size);
+    free(pack);
 
-    MSG_DEBUG("network", "Server: Sending map information");
-
-    Action a(Action::ACTION_MENU_SET_MAP);
-    MapsList::GetInstance()->FillActionMenuSetMap(a);
+    Action a(Action::ACTION_MENU_SET_MAP, ActiveMap().GetRawName());
     a.WritePacket(pack, size);
     SendDatas(pack, size);
     free(pack);
 
-    MSG_DEBUG("network", "Server: Sending teams information");
-
     // Teams infos of already connected computers
-    for(TeamsList::iterator team = GetTeamsList().playing_list.begin();
-      team != GetTeamsList().playing_list.end();
+    for(TeamsList::iterator team = teams_list.playing_list.begin();
+      team != teams_list.playing_list.end();
       ++team)
     {
       Action b(Action::ACTION_MENU_ADD_TEAM, (*team)->GetId());
@@ -82,24 +83,23 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
 
 DistantComputer::~DistantComputer()
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAddress()));
-
+  if (version_checked)
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAddress()));
   if (force_disconnect)
     std::cerr << GetAddress() << " have been kicked" << std::endl;
 
+  SDLNet_TCP_Close(sock);
+  SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
+
   if (Network::GetInstance()->IsConnected())
+  for (std::list<std::string>::iterator team = owned_teams.begin();
+      team != owned_teams.end();
+      ++team)
   {
-    for (std::list<std::string>::iterator team = owned_teams.begin();
-         team != owned_teams.end();
-         ++team)
-    {
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, *team));
-    }
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, *team));
   }
   owned_teams.clear();
 
-  SDLNet_TCP_Close(sock);
-  SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
   SDL_DestroyMutex(sock_lock);
 }
 
@@ -210,21 +210,13 @@ void DistantComputer::ManageTeam(Action* team)
     owned_teams.push_back(name);
 
     int index = 0;
-    Team * tmp = GetTeamsList().FindById(name, index);
-    if (tmp != NULL)
-    {
-      tmp->SetRemote();
+    Team * tmp = teams_list.FindById(name, index);
+    tmp->SetRemote();
 
-      Action* copy = new Action(Action::ACTION_MENU_ADD_TEAM, name);
-      copy->Push( team->PopString() );
-      copy->Push( team->PopInt() );
-      ActionHandler::GetInstance()->NewAction(copy, false);
-    }
-    else
-    {
-      std::cerr << "Team "<< name << "does not exist!" << std::endl;
-      ASSERT(false);
-    }
+    Action* copy = new Action(Action::ACTION_MENU_ADD_TEAM, name);
+    copy->Push( team->PopString() );
+    copy->Push( team->PopInt() );
+    ActionHandler::GetInstance()->NewAction(copy, false);
   }
   else if(team->GetType() == Action::ACTION_MENU_DEL_TEAM)
   {
@@ -235,11 +227,8 @@ void DistantComputer::ManageTeam(Action* team)
       force_disconnect = true;
       return;
     }
-    if (it != owned_teams.end())
-    {
-      owned_teams.erase(it);
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, name), false);
-    }
+    owned_teams.erase(it);
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, name), false);
   }
   else
     ASSERT(false);

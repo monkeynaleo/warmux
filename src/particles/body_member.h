@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 
 #ifndef BODY_MEMBER_H
 #define BODY_MEMBER_H
-#include "particles/particle.h"
+#include "particle.h"
 
 class BodyMemberParticle : public Particle
 {
@@ -32,4 +32,4 @@ class BodyMemberParticle : public Particle
   void Refresh();
 };
 
-#endif /* BODY_MEMBER_H */
+#endif

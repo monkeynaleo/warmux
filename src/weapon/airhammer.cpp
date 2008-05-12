@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,14 +19,15 @@
  * AirHammer - Use it to dig
  *****************************************************************************/
 
-#include "weapon/airhammer.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "airhammer.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "character/character.h"
 #include "game/game.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "include/action_handler.h"
 #include "interface/game_msg.h"
@@ -52,15 +53,15 @@ class AirhammerConfig : public WeaponConfig
     uint range;
     uint damage;
     AirhammerConfig();
-    void LoadXml(xmlNode* elem);
+    void LoadXml(xmlpp::Element *elem);
 };
 
 //-----------------------------------------------------------------------------
 
 Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Airhammer");
+  m_help = _("Howto use it : keep space key pressed\nan ammo per turn");
   m_category = TOOL;
 
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
@@ -69,19 +70,10 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfi
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::UpdateTranslationStrings()
-{
-  m_name = _("Airhammer");
-  m_help = _("Howto use it : keep space key pressed\nan ammo per turn");
-}
-
-//-----------------------------------------------------------------------------
-
 bool Airhammer::p_Shoot()
 {
   //if the sound isn't already playing, play it again.
-  select_sound.Stop();
-  if (!drill_sound.IsPlaying()) {
+   if(!drill_sound.IsPlaying()) {
     drill_sound.Play("share","weapon/airhammer", -1);
   }
 
@@ -93,7 +85,7 @@ bool Airhammer::p_Shoot()
 
   Point2i pos = Point2i(ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 - impact.GetWidth()/2,
                         ActiveCharacter().GetTestRect().GetPositionY() +
-                        ActiveCharacter().GetHeight()  -16);
+                        ActiveCharacter().GetHeight()  -15);
 
   ParticleEngine::AddNow(pos + Point2i(impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
                          true, -3.0 * M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
@@ -122,7 +114,7 @@ bool Airhammer::p_Shoot()
     if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( character->Contain(Point2i(x, y)) )
+      if( character->ObjTouche(Point2i(x, y)) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
         character->SetEnergyDelta(-(int)cfg().damage);
@@ -136,17 +128,27 @@ bool Airhammer::p_Shoot()
 
 //-----------------------------------------------------------------------------
 
+void Airhammer::RepeatShoot() const
+{
+  uint time = Time::GetInstance()->Read() - m_last_fire_time;
+
+  if (time >= m_time_between_each_shot) {
+    NewActionWeaponShoot();
+  }
+}
+
+//-----------------------------------------------------------------------------
+
 void Airhammer::ActionStopUse()
 {
   ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
-  Game::GetInstance()->SetState(Game::HAS_PLAYED);
+  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
   p_Deselect();
 }
 
 void Airhammer::p_Deselect()
 {
   drill_sound.Stop();
-  select_sound.Stop();
 }
 
 //-----------------------------------------------------------------------------
@@ -154,7 +156,7 @@ void Airhammer::p_Deselect()
 void Airhammer::HandleKeyRefreshed_Shoot(bool)
 {
   if (EnoughAmmoUnit()) {
-    Weapon::RepeatShoot();
+    RepeatShoot();
   }
 }
 
@@ -165,7 +167,7 @@ bool Airhammer::IsInUse() const
 
 void Airhammer::p_Select()
 {
-  select_sound.Play("share","weapon/airhammer_select",-1);
+  jukebox.Play("share","weapon/airhammer_select");
 }
 
 std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const
@@ -192,7 +194,7 @@ AirhammerConfig::AirhammerConfig(){
 
 //-----------------------------------------------------------------------------
 
-void AirhammerConfig::LoadXml(xmlNode* elem){
+void AirhammerConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
   XmlReader::ReadUint(elem, "damage", damage);

@@ -1,12 +1,12 @@
 dynamic:
-	$(MAKE) -f Makefile.dynamic
+	make -f Makefile.dynamic
 
 static:
-	$(MAKE) -f Makefile.static
+	make -f Makefile.static
 
 help:
 	@echo "* Use 'make' to build a dynamic binary"
 	@echo "* Use 'make static' to build a statically linked binary (default)"
 
 clean:
-	@rm -f *.[od] *~ wormux_server 2>&1 > /dev/null
+	@rm -f *.o *~ wormux_server 2>&1 > /dev/null

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,10 +29,10 @@ class Surface;
 class NullWidget : public Widget
 {
  public:
-  NullWidget(const Rectanglei&) {};
-  virtual ~NullWidget() {};
-  virtual void Draw(const Point2i&) const {};
-  virtual void Pack() {};
+  NullWidget(const Rectanglei&) { };
+  ~NullWidget() { };
+  void Draw(const Point2i&, Surface&) const { };
+  void SetSizePosition(const Rectanglei &rect);
 };
 
 #endif

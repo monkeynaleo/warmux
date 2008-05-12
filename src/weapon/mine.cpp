@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,10 +20,10 @@
  * Sometime the mine didn't explode randomly.
  *****************************************************************************/
 
-#include "weapon/mine.h"
+#include "mine.h"
 #include <iostream>
 #include <sstream>
-#include "weapon/explosion.h"
+#include "explosion.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"
@@ -56,14 +56,15 @@ ObjMine::ObjMine(MineConfig& cfg,
 
   escape_time = 0;
 
-  fake = false;
+  // is it a fake mine ?
+  fake = !(randomSync.GetLong(0, 9));
 }
 
 void ObjMine::FakeExplosion()
 {
   MSG_DEBUG("mine", "Fake explosion");
 
-  JukeBox::GetInstance()->Play("share", "weapon/mine_fake");
+  jukebox.Play("share", "weapon/mine_fake");
   ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
 
   if ( animation )
@@ -84,11 +85,7 @@ void ObjMine::StartTimeout()
   {
     animation=true;
 
-    // is it a fake mine ? (here because Constructor is called before random
-    // number generator is synchronized over the network)
-    fake = !(randomSync.GetLong(0, 9));
-
-    Camera::GetInstance()->FollowObject(this, true);
+    Camera::GetInstance()->GetInstance()->CenterOn(*this);
 
     MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;
@@ -142,9 +139,8 @@ void ObjMine::Detection()
   }
 }
 
-void ObjMine::SetEnergyDelta(int delta, bool do_report)
+void ObjMine::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
 {
-  WeaponProjectile::SetEnergyDelta(delta, do_report);
   // Don't call Explosion here, we're already in an explosion
   attente = 0;
   animation = true;
@@ -202,17 +198,9 @@ void ObjMine::Draw()
 
 Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Mine");
   m_category = THROW;
   ReloadLauncher();
-}
-
-void Mine::UpdateTranslationStrings()
-{
-    m_name = _("Mine");
-    /* TODO: FILL IT */
-    /* m_help = _(""); */
 }
 
 WeaponProjectile * Mine::GetProjectileInstance()
@@ -271,11 +259,11 @@ MineConfig::MineConfig()
 {
   detection_range = 1;
   speed_detection = 2;
-  timeout = 2;
+  timeout = 3;
   escape_time = 2;
 }
 
-void MineConfig::LoadXml(xmlNode* elem)
+void MineConfig::LoadXml(xmlpp::Element *elem)
 {
   ExplosiveWeaponConfig::LoadXml (elem);
   XmlReader::ReadUint(elem, "escape_time", escape_time);

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE resources SYSTEM "../team.dtd" []>
 <resources>
-  <name>Konqi</name> 
-  <sound_profile>flying</sound_profile>
+  <name>Konqi</name>
   <surface name="flag" file="flag.png" />
   <surface name="death_flag" file="dead.png" />
   <surface name="big_flag" file="flag64.png" />

@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Definition of the boolean enum values -->
-<!ENTITY % boolean "(false|true)">
-<!ELEMENT true EMPTY>
-<!ELEMENT false EMPTY>
-
-<!-- Definition of the loop mode enum values -->
-<!ELEMENT pingpong EMPTY>
-
-<!-- Definition of some base types... -->
-<!ENTITY % integer "CDATA" >
-<!ENTITY % real "CDATA" >
-
-<!ELEMENT resources (author, alias+, sprite+, clothe+, movement+)>
+<!ELEMENT resources (author, sprite+, clothe+, alias+, movement+)>
 
 <!-- Author part -->
 <!ELEMENT author (name,nickname?,email,country?)>
@@ -23,81 +11,56 @@
 
 <!-- sprite -->
 <!ELEMENT sprite (image, anchor?, animation?, (attached+)? )>
-<!ATTLIST sprite
-          name CDATA #REQUIRED
-          type CDATA #REQUIRED
-          go_through_ground %boolean; #IMPLIED>
+<!ATTLIST sprite name CDATA #REQUIRED type CDATA #REQUIRED go_through_ground CDATA #IMPLIED>
 
 <!ELEMENT image (grid?)>
 <!ATTLIST image file CDATA #REQUIRED>
 <!ELEMENT grid EMPTY>
-<!ATTLIST grid
-          pos CDATA #REQUIRED
-          size CDATA #REQUIRED
-          array CDATA #REQUIRED>
+<!ATTLIST grid pos CDATA #REQUIRED size CDATA #REQUIRED array CDATA #REQUIRED>
 
 <!ELEMENT animation EMPTY>
-<!ATTLIST animation
-          speed %integer; #IMPLIED
-          loop_mode (pingpong) #IMPLIED >
+<!ATTLIST animation speed CDATA #IMPLIED loop_mode CDATA #IMPLIED >
 
 <!ELEMENT anchor EMPTY>
-<!ATTLIST anchor
-          dx %integer; #REQUIRED
-          dy %integer; #REQUIRED>
+<!ATTLIST anchor dx CDATA #REQUIRED dy CDATA #REQUIRED>
 
 <!ELEMENT attached EMPTY>
-<!ATTLIST attached
-          member_type CDATA #REQUIRED
-          dx %integer; #REQUIRED
-          dy %integer; #REQUIRED
-          frame CDATA #IMPLIED>
+<!ATTLIST attached member_type CDATA #REQUIRED dx CDATA #REQUIRED dy CDATA #REQUIRED frame CDATA #IMPLIED>
 
 <!-- clothe -->
-<!ELEMENT clothe (c_member+)>
-<!ATTLIST clothe
-          name CDATA #REQUIRED
-          layer %integer; #IMPLIED>
+<!ELEMENT clothe (member+)>
+<!ATTLIST clothe name CDATA #REQUIRED layer CDATA #IMPLIED>
 
-<!ELEMENT c_member EMPTY>
-<!ATTLIST c_member
+<!ELEMENT member EMPTY>
+<!ATTLIST member
           name CDATA #REQUIRED
           layer CDATA #IMPLIED>
           
 <!-- alias -->
 <!ELEMENT alias EMPTY>
-<!ATTLIST alias
-          movement CDATA #REQUIRED
-          correspond_to CDATA #IMPLIED>
+<!ATTLIST alias movement CDATA #REQUIRED correspond_to CDATA #IMPLIED>
 
 <!-- movement -->
 <!ELEMENT movement (collision_rect, frame+)>
-<!ATTLIST movement
-          name CDATA #REQUIRED
-          speed %integer; #REQUIRED
-          play_mode (play_once|loop) "loop">
+<!ATTLIST movement name CDATA #REQUIRED speed CDATA #REQUIRED>
 
 <!ELEMENT collision_rect EMPTY>
-<!ATTLIST collision_rect
-          left %integer; #REQUIRED
-          right %integer; #REQUIRED
-          top %integer; #REQUIRED
-          bottom %integer; #REQUIRED>
+<!ATTLIST collision_rect left CDATA #REQUIRED right CDATA #REQUIRED top CDATA #REQUIRED bottom CDATA #REQUIRED>
 
 <!ELEMENT frame (member+)>
-<!ATTLIST frame number %integer; #IMPLIED>
+<!ATTLIST frame number CDATA #REQUIRED>
 
+<!-- WARNING member is common for clothe and frame but does not take same attributes ... !-->
 <!ELEMENT member EMPTY>
 <!ATTLIST member
           type CDATA #REQUIRED
-          dx %integer; #IMPLIED
-          dy %integer; #IMPLIED
-          scale_x %real; #IMPLIED
-          scale_y %real; #IMPLIED
-          angle %integer; #IMPLIED
-          follow_crosshair %boolean; #IMPLIED
-          follow_half_crosshair %boolean; #IMPLIED
-          follow_speed %boolean; #IMPLIED
-          follow_direction CDATA #IMPLIED
-          follow_cursor %boolean; #IMPLIED
-          follow_cursor_limit %integer; #IMPLIED>
+          dx CDATA #IMPLIED
+          dy CDATA #IMPLIED
+          scale_x CDATA #IMPLIED
+          scale_y CDATA #IMPLIED
+          alpha CD_DATA #IMPLIED
+          angle CDATA #IMPLIED
+          follow_crosshair CDATA #IMPLIED
+          follow_half_crosshair CDATA #IMPLIED
+          follow_speed CDATA #IMPLIED
+          follow_direction CDATA #IMPLIED>

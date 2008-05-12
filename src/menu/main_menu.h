@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 
 // Forward declarations
 class Text;
-class ButtonPic;
+class ButtonText;
 
 class MainMenu : public Menu
 {
@@ -36,7 +36,7 @@ class MainMenu : public Menu
   MainMenu operator=(const MainMenu&);
   /**********************************************/
 
-  ButtonPic *play, *network, *options, *help, *credits, *quit;
+  ButtonText *play, *network, *options, *infos, *quit;
 
   Text *version_text, *website_text;
 
@@ -48,10 +48,8 @@ public:
     PLAY,
     NETWORK,
     OPTIONS,
-    HELP,
     CREDITS,
     QUIT,
-    SKIN_VIEWER
   } menu_item;
 
 
@@ -60,6 +58,8 @@ public:
   MainMenu();
   ~MainMenu();
   menu_item Run ();
+
+  void Redraw(const Rectanglei& rect, Surface& surf);
 
 protected:
    bool signal_ok();

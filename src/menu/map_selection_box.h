@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@
 #ifndef MAP_SELECTION_BOX_H
 #define MAP_SELECTION_BOX_H
 
-#include "graphic/surface.h"
 #include "gui/box.h"
 #include "include/base.h"
 #include "tool/point.h"
@@ -33,7 +32,7 @@ class Button;
 class Label;
 class PictureWidget;
 
-class MapSelectionBox : public VBox
+class MapSelectionBox : public HBox
 {
  private:
   /* If you need this, implement it (correctly) */
@@ -51,22 +50,18 @@ class MapSelectionBox : public VBox
   Label *map_name_label;
   Label *map_author_label;
   Button *bt_map_plus, *bt_map_minus;
-  Surface random_map_preview;
-
-  void ChangeMap(uint index);
-  void UpdateMapInfo(PictureWidget * widget, uint index, bool selected);
-  void UpdateRandomMapInfo(PictureWidget * widget, bool selected);
 
  public:
   void ChangeMapDelta(int delta_index);
-  MapSelectionBox(const Point2i &size, bool _display_only = false);
+  void ChangeMap(int index);
+  void UpdateMapInfo(PictureWidget * widget, int index, bool selected);
+
+  MapSelectionBox(const Rectanglei &rect, bool _display_only = false);
 
   void ValidMapSelection();
   void ChangeMapCallback();
-
-  virtual Widget* Click(const Point2i &mousePosition, uint button);
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
-  virtual void Pack();
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
 };
 
 

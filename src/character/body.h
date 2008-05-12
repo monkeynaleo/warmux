@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,10 @@ class Member;
 class Movement;
 class Clothe;
 class Profile;
-typedef struct _xmlNode xmlNode;
+namespace xmlpp
+{
+  class Element;
+}
 
 enum BodyDirection
 {
@@ -64,7 +67,6 @@ class Body
   /**********************************************/
 
   friend class BodyList;
-  friend class SkinMenu;
   std::map<std::string, Member*> members_lst;
   std::map<std::string, Clothe*> clothes_lst;
   std::map<std::string, Movement*> mvt_lst;
@@ -106,11 +108,11 @@ class Body
 
 public:
 
-  Body(xmlNode* xml, const Profile* res);
+  Body(xmlpp::Element *xml, const Profile* res);
   Body(const Body&);
   ~Body();
 
-  static Point2i GetSize() {return Point2i(30,45);};
+  Point2i GetSize() {return Point2i(30,45);};
 
   void Draw(const Point2i& pos);
   void SetClothe(const std::string& name);

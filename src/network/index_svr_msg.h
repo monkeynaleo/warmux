@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,15 +28,14 @@ enum IndexServerMsg
   TS_NO_MSG, // Don't send this
 
   //********  Messages shared by wormux clients, womux servers, and index servers ********
-  TS_MSG_VERSION,        // Send this to identify the server
-  TS_MSG_HOSTING,        // Send this if we are hosting a game
-  TS_MSG_GET_LIST,       // Send this to obtain the list of the current hosting games
+  TS_MSG_VERSION,  // Send this to identify the server
+  TS_MSG_HOSTING,  // Send this if we are hosting a game
+  TS_MSG_GET_LIST, // Send this to obtain the list of the current hosting games
   TS_MSG_PING,
   TS_MSG_PONG,
-  TS_MSG_REGISTER_GAME,  // Send this to give a name to the game hosted by the server
 
   //********  index servers to index servers messages  ***********************************
-  TS_MSG_WIS_VERSION,    // Send the server version
+  TS_MSG_WIS_VERSION,     // Send the server version
   TS_MSG_JOIN_LEAVE,     // Send this when a wormux server joined or left the index server
 
   TS_LAST_MSG // Don't send this

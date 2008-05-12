@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,11 +35,11 @@ class ListBoxWithLabel : public ListBox
   Text *txt_label;
 
 public:
-  ListBoxWithLabel (const std::string &label, const Point2i &size);
+  ListBoxWithLabel (const std::string &label, const Rectanglei &rect);
   ~ListBoxWithLabel();
 
-  virtual void Draw(const Point2i &mousePosition) const;
-  virtual void Pack();
+  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  void SetSizePosition(const Rectanglei &rect);
 };
 
 #endif

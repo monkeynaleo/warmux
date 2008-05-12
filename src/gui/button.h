@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #define GUI_BUTTON_H
 
 #include "include/base.h"
-#include "gui/widget.h"
+#include "widget.h"
 
 // Forward declarations
 class Sprite;
@@ -35,18 +35,27 @@ class Button : public Widget
   Button(const Button&);
   Button operator=(const Button&);
   /*********************************************/
+  bool hidden;
 
 protected:
   bool img_scale;
   Sprite *image;
 
 public:
-  Button (const Profile *res_profile, const std::string& resource_id,
+  Button (const Rectanglei &rect,
+          const Profile *res_profile, const std::string& resource_id,
+          bool img_scale = true);
+  Button (const Point2i &position,
+          const Profile *res_profile, const std::string& resource_id,
           bool img_scale = false);
   virtual ~Button();
 
-  virtual void Draw(const Point2i &mousePosition) const;
-  virtual void Pack();
+  virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
+  virtual void SetSizePosition(const Rectanglei &rect);
+
+  Sprite* GetSprite() { return image; };
+
+  void SetVisible(bool visible);
 };
 
 #endif

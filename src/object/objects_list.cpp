@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,8 +21,9 @@
 
 #include "object/objects_list.h"
 //-----------------------------------------------------------------------------
-#include "object/barrel.h"
+#include "barrel.h"
 #include "include/app.h"
+#include "game/game_loop.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "map/camera.h"
@@ -42,7 +43,7 @@ ObjectsList lst_objects;
 void ObjectsList::PlaceMines()
 {
   MSG_DEBUG("lst_objects","Placing mines");
-  for (uint i=0; i<ActiveMap()->GetNbMine(); ++i)
+  for (uint i=0; i<ActiveMap().GetNbMine(); ++i)
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
@@ -57,7 +58,7 @@ void ObjectsList::PlaceMines()
 void ObjectsList::PlaceBarrels()
 {
   MSG_DEBUG("lst_objects","Placing barrels");
-  for (uint i= 0; i<ActiveMap()->GetNbBarrel(); ++i)
+  for (uint i= 0; i<ActiveMap().GetNbBarrel(); ++i)
   {
     PetrolBarrel *obj = new PetrolBarrel();
 
@@ -80,7 +81,7 @@ void ObjectsList::Refresh()
     (*object)->Refresh();
     if((*object)->IsGhost()) {
       // Stop following this object, remove from overlapse reference then delete it.
-      Camera::GetInstance()->StopFollowingObj(*object);
+      Camera::GetInstance()->GetInstance()->StopFollowingObj(*object);
       RemoveOverlappedObjectReference(*object);
       delete (*object);
       object = erase(object);

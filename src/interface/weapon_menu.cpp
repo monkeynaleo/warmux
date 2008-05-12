@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,9 +19,9 @@
  * Interface showing various informations about the game.
  *****************************************************************************/
 
-#include "interface/weapon_menu.h"
+#include "weapon_menu.h"
 #include <sstream>
-#include "interface/interface.h"
+#include "interface.h"
 #include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/polygon_generator.h"
@@ -118,14 +118,14 @@ void WeaponMenuItem::Draw(Surface * dest)
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
   if(nb_bullets ==  INFINITE_AMMO) {
-    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", dark_gray_color);
+    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", gray_color);
   } else if(nb_bullets == 0) {
     tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
     Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->Blit(*dest, tmp);
   } else {
     std::ostringstream txt;
     txt << nb_bullets;
-    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), dark_gray_color);
+    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), gray_color);
   }
 }
 
@@ -164,10 +164,10 @@ WeaponsMenu::WeaponsMenu():
   tools_menu->SetBorderColor(border_color);
 
   // Adding label
-  weapons_menu->AddItem(new Sprite(Font::GenerateSurface(_("Weapons"), dark_gray_color, Font::FONT_BIG)),
+  weapons_menu->AddItem(new Sprite(Font::GenerateSurface(_("Weapons"), gray_color, Font::FONT_BIG)),
                         weapons_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
-  tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), dark_gray_color, Font::FONT_BIG)),
-                      tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
+  tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), gray_color, Font::FONT_BIG)),
+                        tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
 
   resource_manager.UnLoadXMLProfile(res);
 }
@@ -180,16 +180,12 @@ WeaponsMenu::~WeaponsMenu()
     delete tools_menu;
   if(help)
     delete help;
-  if (cross)
-    delete cross;
-  if (nb_weapon_type)
-    delete[] nb_weapon_type;
 }
 
 // Add a new weapon to the weapon menu.
 void WeaponsMenu::AddWeapon(Weapon* new_item)
 {
-  if(!new_item->CanBeUsedOnClosedMap() && !ActiveMap()->IsOpened())
+  if(!new_item->CanBeUsedOnClosedMap() && !ActiveMap().IsOpened())
     return;
 
   Point2d position;
@@ -218,7 +214,7 @@ void WeaponsMenu::Show()
       motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
     show = true;
 
-    JukeBox::GetInstance()->Play("share", "menu/weapon_menu_show");
+    jukebox.Play("share", "menu/weapon_menu_show");
   }
 }
 
@@ -233,7 +229,7 @@ void WeaponsMenu::Hide(bool play_sound)
     show = false;
 
     if (play_sound)
-      JukeBox::GetInstance()->Play("share", "menu/weapon_menu_hide");
+      jukebox.Play("share", "menu/weapon_menu_hide");
   }
 }
 

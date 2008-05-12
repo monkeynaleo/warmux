@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,18 +20,17 @@
  *****************************************************************************/
 
 #include <iostream>
-#include "map/map.h"
+#include "map.h"
 #include "object/physical_obj.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
-#include "map/camera.h"
-#include "map/maps_list.h"
-#include "map/wind.h"
+#include "camera.h"
+#include "maps_list.h"
+#include "wind.h"
 #include "game/time.h"
 #include "object/objbox.h"
 #include "tool/i18n.h"
-#include "tool/math_tools.h"
 
 const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
 
@@ -57,8 +56,6 @@ Map::~Map()
   delete to_redraw_now;
   delete to_redraw_particles;
   delete to_redraw_particles_now;
-  if (author_info1) delete author_info1;
-  if (author_info2) delete author_info2;
 }
 
 void Map::Reset()
@@ -67,6 +64,10 @@ void Map::Reset()
   ground.Reset();
   water.Reset();
   wind.Reset();
+
+  // Configure game about open or closed world
+  bool open = ground.IsOpen();
+  ObjBox::Enable(open);
 
   delete author_info1; author_info1 = NULL;
   delete author_info2; author_info2 = NULL;
@@ -119,27 +120,27 @@ void Map::SwitchDrawingCacheParticles()
 
 void Map::Dig(const Point2i& position, const Surface& surface)
 {
-   ground.Dig(position, surface);
+   ground.Dig (position, surface);
    to_redraw->push_back(Rectanglei(position, surface.GetSize()));
 }
 
 void Map::Dig(const Point2i& center, const uint radius)
 {
-   ground.Dig(center, radius);
+   ground.Dig (center, radius);
    to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE),
                                    Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
 void Map::PutSprite(const Point2i& pos, const Sprite* spr)
 {
-   ground.PutSprite(pos, spr);
+   ground.PutSprite (pos, spr);
    to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
 void Map::MergeSprite(const Point2i& pos, const Sprite * spr)
 {
   Surface tmp = spr->GetSurface();
-  ground.MergeSprite(pos, tmp);
+  ground.MergeSprite (pos, tmp);
   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
@@ -292,9 +293,9 @@ void Map::DrawAuthorName()
   if (author_info1 == NULL) {
     std::string txt;
     txt  = Format(_("Map %s, a creation of: "),
-                  ActiveMap()->ReadFullMapName().c_str());
+                  ActiveMap().ReadFullMapName().c_str());
     author_info1 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
-    txt = ActiveMap()->ReadAuthorInfo();
+    txt = ActiveMap().ReadAuthorInfo();
     author_info2 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
   }
 
@@ -359,54 +360,3 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
 
 //   std::cout << "//#############################" <<std::endl;
 }
-
-// traces ray, determining the collision point (if any)
-// if no collision detected, TraceResult is left uninitialized
-bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, uint trace_flags)
-{
-  Point2d diff = ( Point2d )( end - start );
-  Point2d delta = diff.GetNormal();
-  double length = diff.Norm();
-
-  // FIXME: use some Bresenham-like algorithm
-  Point2i prev_point = start;
-  Point2i new_point = prev_point;
-  Point2d iterated_point = ( Point2d )( start );
-  while( !IsOutsideWorld( new_point ) && ( length >= 0 ) )
-  {
-    if (!world.IsInVacuum( new_point ))
-    {
-      if ( trace_flags & COMPUTE_HIT )
-      {
-        tr.m_fraction = 1.0f - ( length / diff.Norm() );
-
-        if ( trace_flags & RETURN_LAST_IN_VACUUM_AS_HIT )
-        {
-          tr.m_hit = prev_point; // unless start is in vacuum, it's always in vacuum
-        }
-        else
-        {
-          tr.m_hit = new_point;
-        }
-
-        MSG_DEBUG( "map.collision", "tracing (%d,%d)->(%d,%d), collision at (%d,%d)",
-          start.x, start.y,
-          end.x, end.y,
-          tr.m_hit.x, tr.m_hit.y
-        );
-      }
-      return true ;
-    };
-
-    prev_point = new_point;
-    iterated_point += delta;
-
-    // not using automatic conversions to preserve call to round()
-    // which was in the original find_first_contact function in Grapple
-    new_point.x = ( int )round( iterated_point.x );
-    new_point.y = ( int )round( iterated_point.y );
-    length--;
-  }
-
-  return false;
-};

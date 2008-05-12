@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,9 +19,10 @@
  * baseball bat
  *****************************************************************************/
 
-#include "weapon/baseball.h"
-#include "weapon/weapon_cfg.h"
+#include "baseball.h"
+#include "weapon_cfg.h"
 #include "character/character.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "map/camera.h"
@@ -32,7 +33,7 @@
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
-#include "weapon/explosion.h"
+#include "explosion.h"
 
 class BaseballConfig : public WeaponConfig
 {
@@ -40,22 +41,16 @@ class BaseballConfig : public WeaponConfig
     uint range;
     uint strength;
     BaseballConfig();
-    void LoadXml(xmlNode* elem);
+    void LoadXml(xmlpp::Element *elem);
 };
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Baseball Bat");
+  m_help = _("Angle : Up/Down\nFire : space key\na hit per turn");
   m_category = DUEL;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
-}
-
-void Baseball::UpdateTranslationStrings()
-{
-  m_name = _("Baseball Bat");
-  m_help = _("Angle : Up/Down\nFire : space key\na hit per turn");
 }
 
 bool Baseball::p_Shoot()
@@ -63,9 +58,9 @@ bool Baseball::p_Shoot()
 
   double angle = ActiveCharacter().GetFiringAngle();
   double rayon = 0.0;
-  bool end = false;
+  bool fin = false;
 
-  JukeBox::GetInstance()->Play ("share","weapon/baseball");
+  jukebox.Play ("share","weapon/baseball");
 
   do
   {
@@ -74,7 +69,7 @@ bool Baseball::p_Shoot()
     if (cfg().range < rayon)
     {
       rayon = cfg().range;
-      end = true;
+      fin = true;
     }
 
     // Compute point coordinates
@@ -82,20 +77,20 @@ bool Baseball::p_Shoot()
                          static_cast<int>(rayon * sin(angle)) );
     Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
 
-    FOR_ALL_LIVING_CHARACTERS(team, character)
-    if (&(*character) != &ActiveCharacter())
+    FOR_ALL_LIVING_CHARACTERS(equipe,ver)
+    if (&(*ver) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( character->Contain(pos_to_check) )
+      if( ver->ObjTouche(pos_to_check) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        character->SetSpeed(cfg().strength / character->GetMass(), angle);
-        character->SetMovement("fly");
-        Camera::GetInstance()->FollowObject(&(*character), true, true);
+        ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
+        ver->SetMovement("fly");
+        Camera::GetInstance()->GetInstance()->FollowObject (&(*ver), true, true);
         return true;
       }
     }
-  } while (!end);
+  } while (!fin);
 
   return true;
 }
@@ -125,7 +120,7 @@ BaseballConfig::BaseballConfig()
   strength = 250;
 }
 
-void BaseballConfig::LoadXml(xmlNode* elem)
+void BaseballConfig::LoadXml(xmlpp::Element *elem)
 {
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);

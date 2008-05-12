@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,18 +27,14 @@
 
 class NetworkLocal : public Network
 {
-protected:
-  virtual void HandleAction(Action* /*a*/, DistantComputer* /*sender*/) const { ASSERT(false) };
-  virtual void WaitActionSleep() { ASSERT(false) };
-
 public:
-  NetworkLocal();
   ~NetworkLocal();
 
-  virtual bool IsConnected() const { return false; }
-  virtual bool IsLocal() const { return true; }
+  virtual const bool IsConnected() const { return false; }
+  virtual const bool IsLocal() const { return true; }
 
   virtual void SendAction(Action* action);
+  virtual void ReceiveActions();
 
   virtual void SendChatMessage(const std::string& txt);
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);

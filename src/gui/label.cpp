@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,23 +19,27 @@
  * Label in GUI.
  *****************************************************************************/
 
-#include "gui/label.h"
+#include "label.h"
 #include "graphic/text.h"
 
 Label::Label (const std::string &label,
-              uint max_width,
+              const Rectanglei &rect,
               Font::font_size_t fsize,
               Font::font_style_t fstyle,
               const Color& color,
               bool _center,
-              bool shadowed):
-  center(_center)
+              bool _shadowed):
+  txt_label(new Text(label, color, fsize, fstyle, _shadowed)),
+  hidden(false),
+  font_size(fsize),
+  font_style(fstyle),
+  font_color(color),
+  center(_center),
+  shadowed(_shadowed)
 {
-  Widget::SetFont(color, fsize, fstyle, shadowed, false);
-
-  size.x = max_width;
-  txt_label = new Text(label, color, fsize, fstyle, shadowed, label.empty());
-  txt_label->SetMaxWidth(size.x);
+  position = rect.GetPosition();
+  size = rect.GetSize();
+  txt_label->SetMaxWidth(GetSizeX());
   size.y = txt_label->GetHeight();
 }
 
@@ -44,30 +48,30 @@ Label::~Label()
   delete txt_label;
 }
 
-void Label::Draw(const Point2i &/*mousePosition*/) const
+void Label::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
-  if (!center)
-    txt_label->DrawTopLeft(position);
-  else
-    txt_label->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
+  if (!hidden)
+    {
+      if (!center)
+        txt_label->DrawTopLeft(position);
+      else
+        txt_label->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
+    }
 }
 
-void Label::Pack()
+void Label::SetSizePosition(const Rectanglei &rect)
 {
-  txt_label->SetMaxWidth(size.x);
+  StdSetSizePosition(rect);
+  txt_label->SetMaxWidth(GetSizeX());
   size.y = txt_label->GetHeight();
 }
 
 void Label::SetText(const std::string &new_txt)
 {
-  NeedRedrawing();
-
-  if (txt_label)
-    delete txt_label;
-
-  txt_label = new Text(new_txt, GetFontColor(), GetFontSize(), GetFontStyle(), IsFontShadowed(), new_txt.empty());
-  txt_label->SetMaxWidth(size.x);
-  size.y = txt_label->GetHeight();
+  need_redrawing = true;
+  delete txt_label;
+  txt_label = new Text(new_txt, font_color, font_size, font_style, shadowed);
+  txt_label->SetMaxWidth(GetSizeX());
 }
 
 const std::string& Label::GetText() const
@@ -75,7 +79,10 @@ const std::string& Label::GetText() const
   return txt_label->GetText();
 }
 
-void Label::OnFontChange()
+void Label::SetVisible(bool visible)
 {
-  SetText(GetText());
+  if (hidden == visible) {
+    hidden = !visible;
+    need_redrawing = true;
+  }
 }

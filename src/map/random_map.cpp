@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Random map generator
  *****************************************************************************/
 
-#include "map/random_map.h"
+#include "random_map.h"
 #include "game/config.h"
 #include "graphic/polygon_generator.h"
 #include "graphic/sprite.h"
@@ -30,7 +30,7 @@
 #include "tool/debug.h"
 #include "tool/xml_document.h"
 #include <sstream>
-#ifdef _WIN32
+#ifdef _MSC_VER
 #  include <time.h>
 #endif
 
@@ -240,7 +240,7 @@ void RandomMap::GenerateIsland()
 void RandomMap::Generate(InfoMap::Island_type generator)
 {
   srand(time(NULL));
-  if(generator == InfoMap::RANDOM_GENERATED) {
+  if(generator == InfoMap::RANDOM) {
     generator = (InfoMap::Island_type) Random::GetInt(InfoMap::SINGLE_ISLAND, InfoMap::DEFAULT);
     generator = InfoMap::PLATEFORMS;
   }
@@ -253,5 +253,5 @@ void RandomMap::Generate(InfoMap::Island_type generator)
 
 void RandomMap::SaveMap()
 {
-  result.ImgSave(Config::GetInstance()->GetPersonalDataDir() + ActiveMap()->ReadFullMapName() + " - last random generation.png");
+  result.ImgSave(Config::GetInstance()->GetPersonalDir() + ActiveMap().ReadFullMapName() + " - last random generation.png");
 }

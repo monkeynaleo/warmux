@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,50 +23,47 @@
 #define OBJBOX_H
 //-----------------------------------------------------------------------------
 #include "object/physical_obj.h"
-#include "sound/sound_sample.h"
 
 class Team;
 class Character;
 class Sprite;
-typedef struct _xmlNode xmlNode;
-class Action;
+namespace xmlpp
+{
+  class Element;
+}
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
-    /* If you need this, implement it (correctly)*/
-    ObjBox(const ObjBox&);
-    const ObjBox& operator=(const ObjBox&);
-    /*********************************************/
+  /* If you need this, implement it (correctly)*/
+  ObjBox(const ObjBox&);
+  const ObjBox& operator=(const ObjBox&);
+  /*********************************************/
 
-    SoundSample hit;
-
+  private:
     virtual void ApplyBox (Team &/*team*/, Character &/*character*/){}
-    void CloseParachute();
 
   public:
     ObjBox(const std::string &name);
     ~ObjBox();
 
+    // Activate box ?
+    static void Enable (bool _enable);
+    static bool NewBox();
     void DropBox();
-    static void LoadXml(xmlNode*  /*object*/){};
+    static void LoadXml(xmlpp::Element * /*object*/){};
 
-    void Draw();
-    virtual void Refresh();
-    virtual void Randomize() {};
-    virtual void GetValueFromAction(Action *);
-    virtual void StoreValue(Action *);
-    virtual void ApplyBonus(Character *) {};
+    virtual void Draw(){}
+    virtual void Refresh(){}
 
   protected:
     bool parachute;
     Sprite *anim;
+    static bool enable;
     static int start_life_points;
-    void Explode();
     // Signal Fall ending
-    virtual void SignalCollision(const Point2d& my_speed_before);
-    virtual void SignalObjectCollision(PhysicalObj *, const Point2d& my_speed_before);
-    virtual void SignalDrowning();
-    virtual void SignalGhostState(bool was_already_dead);
+    void SignalCollision();
+    void SignalDrowning() { SignalCollision(); };
+    void SignalGhostState(bool was_already_dead);
 };
 
 //-----------------------------------------------------------------------------

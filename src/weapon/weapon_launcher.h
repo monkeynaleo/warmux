@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,11 +33,10 @@ class WeaponProjectile : public PhysicalObj
 {
   protected:
     Sprite *image;
+    bool camera_follow_closely;
     bool explode_colliding_character; // before timeout.
     bool explode_with_timeout;
     bool explode_with_collision;
-    bool can_drown;
-    bool camera_in_advance;
     double begin_time;
 
     ExplosiveWeaponConfig& cfg;
@@ -68,14 +67,13 @@ class WeaponProjectile : public PhysicalObj
     void ResetTimeOut() { m_timeout_modifier = 0; };
     bool change_timeout_allowed() const;
   protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before);
-    virtual void SignalGroundCollision(const Point2d& speed_before);
-    virtual void SignalCollision(const Point2d& speed_before);
+    virtual void SignalObjectCollision(PhysicalObj * obj);
+    virtual void SignalGroundCollision();
+    virtual void SignalCollision();
     virtual void SignalOutOfMap();
     virtual void SignalTimeout();
     virtual void SignalExplosion();
-    virtual void SignalDrowning();
-    virtual void SignalGoingOutOfWater();
+    void SignalDrowning();
     void SignalGhostState (bool was_dead);
 
     virtual void ShootSound();
@@ -94,9 +92,9 @@ class WeaponBullet : public WeaponProjectile
     virtual ~WeaponBullet(){};
     virtual void Refresh();
   protected:
-    virtual void SignalGroundCollision(const Point2d& speed_before);
+    virtual void SignalGroundCollision();
     virtual void SignalOutOfMap();
-    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(PhysicalObj * obj);
     void DoExplosion();
 };
 
@@ -109,7 +107,6 @@ class WeaponLauncher : public Weapon
     bool ignore_explosion_signal;
     bool ignore_ghost_state_signal;
     bool ignore_drowning_signal;
-    bool ignore_going_out_of_water_signal;
   protected:
     WeaponProjectile * projectile;
     uint nb_active_projectile;
@@ -135,18 +132,16 @@ class WeaponLauncher : public Weapon
     virtual void Draw();
 
     std::string GetWeaponWinString(const char *TeamName, uint items_count)const = 0;
-
+	    
     // Handle of projectile events
     // Signal the end of a projectile for any reason possible
     virtual void SignalEndOfProjectile() { DecActiveProjectile(); };
     // Signal that a projectile explosion
     virtual void SignalProjectileExplosion() { SignalEndOfProjectile(); };
     // Signal that a projectile fired by this weapon has hit something (ground, character etc)
-    virtual void SignalProjectileCollision(const Point2d& /*speed_before*/) { SignalEndOfProjectile(); };
+    virtual void SignalProjectileCollision() { SignalEndOfProjectile(); };
     // Signal a projectile is drowning
     virtual void SignalProjectileDrowning() { SignalEndOfProjectile(); };
-    // Signal a projectile is fishing out of water (supertux)
-    virtual void SignalProjectileGoingOutOfWater() {};
     // Signal a ghost state
     virtual void SignalProjectileGhostState() { SignalEndOfProjectile(); };
     // Signal a projectile timeout (for exemple: grenade, disco grenade ... etc.)

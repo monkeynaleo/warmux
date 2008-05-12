@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * energy bar of each team
  *****************************************************************************/
 
-#include "team/team_energy.h"
+#include "team_energy.h"
 #include <sstream>
 #include <math.h>
 #include "map/camera.h"
@@ -27,8 +27,8 @@
 #include "game/time.h"
 #include "graphic/text.h"
 #include "graphic/sprite.h"
-#include "team/team.h"
-#include "team/teams_list.h"
+#include "team.h"
+#include "teams_list.h"
 #include "include/app.h"
 
 const uint BAR_WIDTH = 13;
@@ -111,7 +111,7 @@ void TeamEnergy::SetIcon(const Surface & new_icon)
 {
   if(icon)
     delete icon;
-  icon = new Sprite(new_icon, true);
+  icon = new Sprite(new_icon);
   icon->Scale(0.8,0.8);
 }
 

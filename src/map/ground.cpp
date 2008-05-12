@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,14 +19,14 @@
  * Terrain de jeu.
  *****************************************************************************/
 
-#include "map/ground.h"
+#include "ground.h"
 #include <iostream>
 #include <SDL_video.h>
 #include <SDL_gfxPrimitives.h>
 #include <limits.h>
-#include "map/camera.h"
-#include "map/map.h"
-#include "map/maps_list.h"
+#include "camera.h"
+#include "map.h"
+#include "maps_list.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "graphic/colors.h"
@@ -44,18 +44,15 @@ void Ground::Init(){
   std::cout.flush();
 
   // Load ground data
-  Surface& m_image = ActiveMap()->ReadImgGround();
-  if(ActiveMap()->IsOpened()) {
-    LoadImage(m_image, ActiveMap()->GetUpperLeftPad(), ActiveMap()->GetLowerRightPad());
-  } else {
-    LoadImage(m_image, Point2i(), Point2i());
-  }
+  Surface m_image = ActiveMap().ReadImgGround();
+  LoadImage ( m_image );
+
   // Check the size of the map
   ASSERT(Constants::MAP_MIN_SIZE <= GetSize());
   ASSERT(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
 
   // Check if the map is "opened"
-  open = ActiveMap()->IsOpened();
+  open = ActiveMap().IsOpened();
 
   std::cout << _("done") << std::endl;
 }
@@ -247,12 +244,12 @@ void Ground::Draw(bool redraw_all)
   Point2i windowSize = app->video->window.GetSize();
   Point2i margin = (windowSize - GetSize())/2;
 
-  if( Camera::GetInstance()->HasFixedX() ){// ground is less wide than screen !
+  if( Camera::GetInstance()->GetInstance()->HasFixedX() ){// ground is less wide than screen !
     app->video->window.BoxColor( Rectanglei(0, 0, margin.x, windowSize.y), black_color);
     app->video->window.BoxColor( Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color);
   }
 
-  if( Camera::GetInstance()->HasFixedY() ){// ground is less wide than screen !
+  if( Camera::GetInstance()->GetInstance()->HasFixedY() ){// ground is less wide than screen !
     app->video->window.BoxColor( Rectanglei(0, 0, windowSize.x, margin.y), black_color);
     app->video->window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
   }
@@ -270,8 +267,6 @@ void Ground::Draw(bool redraw_all)
 
   // Draw on top of new position of particles (redisplayed on top of particles)
   RedrawParticleList(*world.to_redraw_particles);
-
-  CheckPreview();
 }
 
 void Ground::RedrawParticleList(std::list<Rectanglei> &list) const {

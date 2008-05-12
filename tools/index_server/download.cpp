@@ -27,16 +27,7 @@
 #include "config.h"
 #include "../../src/network/index_svr_msg.h"
 
-class Downloader
-{
-  CURL* curl;
-public:
-  Downloader();
-  ~Downloader();
-
-  // Return true if the download was successful
-  bool Get(const char* url, const char* save_as);
-};
+Downloader downloader;
 
 Downloader::Downloader()
 {
@@ -68,44 +59,44 @@ bool Downloader::Get(const char* url, const char* save_as)
 
 void DownloadServerList()
 {
-  // Download the server list from wormux.org
-  // and contact every server
-  const std::string server_fn = "./server_list";
-  int gid, uid;
-  bool chroot;
-  bool do_fork = true;
-  pid_t child = 0;
-  config.Get("chroot", chroot);
-  config.Get("chroot_gid", gid);
-  config.Get("chroot_uid", uid);
-  Downloader dl;
+	// Download the server list from wormux.org
+	// and contact every server
+	const std::string server_fn = "./server_list";
+	int gid, uid;
+	bool chroot;
+	bool do_fork = true;
+	pid_t child = 0;
+	config.Get("chroot", chroot);
+	config.Get("chroot_gid", gid);
+	config.Get("chroot_uid", uid);
+	Downloader dl;
 
-  DPRINT(CONN, "Forking process to download the server list");
+	DPRINT(CONN, "Forking process to download the server list");
 
-  do
-    {
-      const std::string server_fn = "./server_list";
-      dl.Get( server_list_url.c_str(), server_fn.c_str() );
+	do
+	{
+		const std::string server_fn = "./server_list";
+		dl.Get( server_list_url.c_str(), server_fn.c_str() );
 
-      if(chroot)
-        {
-          if(chown(server_fn.c_str(), (uid_t)uid, (gid_t)gid) == -1)
-            TELL_ERROR;
-        }
+		if(chroot)
+		{
+			if(chown(server_fn.c_str(), (uid_t)uid, (gid_t)gid) == -1)
+				TELL_ERROR;
+		}
 
-      if(do_fork)
-        {
-          do_fork = false;
-          child = fork();
-          if( child == -1)
-            TELL_ERROR
-            else
-              if(child == 0)
-                break;
-        }
-      // Wait 1 day
-      sleep(60 * 60 * 24);
-    }
-  while(child != 0);
+		if(do_fork)
+		{
+			do_fork = false;
+			child = fork();
+			if( child == -1)
+				TELL_ERROR
+			else
+			if(child == 0)
+				break;
+		}
+		// Wait 1 day
+		sleep(60 * 60 * 24);
+	}
+	while(child != 0);
 }
-
+ 

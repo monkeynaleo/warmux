@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 #include "gui/box.h"
 
 // Forward declarations
-class SpinButtonWithPicture;
+class SpinButtonBig;
 class TeamBox;
 
 const uint MAX_NB_TEAMS=4;
@@ -41,21 +41,19 @@ class TeamsSelectionBox : public HBox
   TeamsSelectionBox(const TeamsSelectionBox&);
   TeamsSelectionBox operator=(const TeamsSelectionBox&);
   /**********************************************/
+
+  SpinButtonBig *teams_nb;
+  std::vector<TeamBox*> teams_selections;
+
   void SetNbTeams(uint nb_teams);
   void PrevTeam(int i);
   void NextTeam(int i);
-
-  void Init(bool network);
- protected:
-  SpinButtonWithPicture *local_teams_nb;
-  std::vector<TeamBox*> teams_selections;
-
  public:
-  TeamsSelectionBox(const Point2i &size, bool network = false);
+  TeamsSelectionBox(const Rectanglei &rect);
 
-  virtual void ValidTeamsSelection();
-  virtual Widget* Click(const Point2i &mousePosition, uint button);
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  void ValidTeamsSelection();
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
 };
 
 #endif

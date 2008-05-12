@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,40 +19,39 @@
  *  Displays network related error messages in a pop-up
  *****************************************************************************/
 
-#include "network/net_error_msg.h"
-#include "network/network.h"
+#include "net_error_msg.h"
+#include "network.h"
 #include "tool/i18n.h"
 #include "gui/question.h"
 
-const std::string NetworkErrorToString(connection_state_t err)
+void DispNetworkError(Network::connection_state_t err)
 {
+  Question question;
   std::string msg;
   switch(err)
   {
-  case CONNECTED:
+  case Network::CONNECTED:
     msg = _("Connected !");
     break;
-  case CONN_BAD_HOST:
+  case Network::CONN_BAD_HOST:
     msg = _("Unable to contact host.");
     break;
-  case CONN_BAD_PORT:
+  case Network::CONN_BAD_PORT:
     msg = _("Unable to use this port!");
     break;
-  case CONN_BAD_SOCKET:
+  case Network::CONN_BAD_SOCKET:
     msg = _("Bad socket ...");
     break;
-  case CONN_REJECTED:
+  case Network::CONN_REJECTED:
     msg = _("The server rejected the connection.");
     break;
-  case CONN_TIMEOUT:
+  case Network::CONN_TIMEOUT:
     msg = _("The connection timed out. Check there is no firewall in the way!");
-    break;
-  case CONN_WRONG_PASSWORD:
-    msg = _("The server rejected the connection: wrong password!");
     break;
   default: ASSERT(false);
   }
 
-  return msg;
+  question.Set(msg, 1, 0);
+  question.Ask();
 }
 

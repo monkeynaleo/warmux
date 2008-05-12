@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh character strings.
+ * Refresh des chaînes de caractère (string).
  *****************************************************************************/
 
 #ifndef STRING_TOOLS_H
@@ -37,10 +37,5 @@ std::string long2str (long x);
 std::string ulong2str (ulong x);
 std::string double2str (ulong x);
 std::string bool2str (bool x);
-
-#ifdef _WIN32
-// Allocated with new
-char* LocaleToUTF8(const char* orig);
-#endif
 
 #endif

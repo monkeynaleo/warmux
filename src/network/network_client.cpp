@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,17 +19,13 @@
  * Network client layer for Wormux.
  *****************************************************************************/
 
-#include "network/network_client.h"
+#include "network_client.h"
 //-----------------------------------------------------------------------------
 #include <SDL_thread.h>
 #include "include/action_handler.h"
-#include "include/constant.h"
 #include "game/game_mode.h"
-#include "menu/network_menu.h"
-#include "network/distant_cpu.h"
-#include "network/net_error_msg.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
+#include "distant_cpu.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK
@@ -41,7 +37,7 @@
 #endif
 //-----------------------------------------------------------------------------
 
-NetworkClient::NetworkClient(const std::string& password) : Network(password)
+NetworkClient::NetworkClient()
 {
 #ifdef LOG_NETWORK
   fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
@@ -69,97 +65,97 @@ std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<D
   return cpu.erase(closed);
 }
 
-void NetworkClient::HandleAction(Action* a, DistantComputer* sender) const
+void NetworkClient::ReceiveActions()
 {
-  switch (a->GetType()) {
-  case Action::ACTION_NICKNAME:
+  char* packet;
+
+  while (cpu.size()==1 && ThreadToContinue()) // While connected to server
+  {
+    int num_ready;
+
+    if (state == NETWORK_PLAYING && cpu.size() == 0)
     {
-      std::string nickname = a->PopString();
-      std::cout<<"New nickname: " + nickname<< std::endl;
-      sender->nickname = nickname;
-      delete a;
+      // If while playing everybody disconnected, just quit
+      break;
     }
-    break;
 
-  case Action::ACTION_MENU_ADD_TEAM:
-  case Action::ACTION_MENU_DEL_TEAM:
-    sender->ManageTeam(a);
-    delete a;
-    break;
+    //Loop while nothing is received
+    while (ThreadToContinue())
+    {
+      num_ready = SDLNet_CheckSockets(socket_set, 100);
+      // Means something is available
+      if (num_ready>0)
+        break;
+      // Means an error
+      else if (num_ready == -1)
+      {
+        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
+      }
+      // Means timeout, so continue
+    }
 
-  case Action::ACTION_CHAT_MESSAGE:
-    sender->SendChatMessage(a);
-    delete a;
-    break;
+    std::list<DistantComputer*>::iterator dst_cpu;
+    for (dst_cpu = cpu.begin();
+         dst_cpu != cpu.end() && ThreadToContinue();
+         dst_cpu++)
+    {
+      if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
+      {
+        // Read the size of the packet
+        int packet_size = (*dst_cpu)->ReceiveDatas(packet);
+        if( packet_size == -1) // An error occured during the reception
+        {
+          dst_cpu = CloseConnection(dst_cpu);
+          continue;
+        } else
+        if( packet_size == 0) // We didn't received the full packet yet
+          continue;
 
-  default:
-    ActionHandler::GetInstance()->NewAction(a, false);
+#ifdef LOG_NETWORK
+        if (fin != 0) {
+          int tmp = 0xFFFFFFFF;
+          write(fin, &packet_size, 4);
+          write(fin, packet, packet_size);
+          write(fin, &tmp, 4);
+        }
+#endif
+
+        Action* a = new Action(packet, (*dst_cpu));
+        MSG_DEBUG("network.traffic","Received action %s",
+                  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+
+        switch (a->GetType()) {
+        case Action::ACTION_NICKNAME:
+          {
+            std::string nickname = a->PopString();
+            std::cout<<"New nickname: " + nickname<< std::endl;
+            (*dst_cpu)->nickname = nickname;
+            delete a;
+          }
+          break;
+
+        case Action::ACTION_MENU_ADD_TEAM:
+        case Action::ACTION_MENU_DEL_TEAM:
+          (*dst_cpu)->ManageTeam(a);
+          delete a;
+          break;
+
+        case Action::ACTION_CHAT_MESSAGE:
+          (*dst_cpu)->SendChatMessage(a);
+          delete a;
+          break;
+
+        default:
+          ActionHandler::GetInstance()->NewAction(a, false);
+        }
+        free(packet);
+      }
+    }
   }
 }
 
 //-----------------------------------------------------------------------------
-
-connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
-{
-  int r, ack;
-  connection_state_t ret = CONN_REJECTED;
-  std::string version;
-
-  MSG_DEBUG("network", "Client: Handshake !");
-
-  // Adding the socket to a temporary socket set
-  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
-  SDLNet_TCP_AddSocket(tmp_socket_set, server_socket);
-
-  // 1) Send the version number
-  MSG_DEBUG("network", "Client: sending version number");
-
-  Network::Send(server_socket, Constants::WORMUX_VERSION);
-
-  // is it ok ?
-  r = Network::ReceiveStr(tmp_socket_set, server_socket, version);
-
-  MSG_DEBUG("network", "Client: server version number is %s", version.c_str());
-
-  if (r)
-    goto error;
-
-  if (Constants::WORMUX_VERSION != version) {
-    std::string str = Format(_("The client and server versions are incompatible "
-			       "(local=%s, server=%s). Please try another server."),
-			     Constants::WORMUX_VERSION.c_str(), version.c_str());
-    Network::GetInstance()->network_menu->DisplayError(str);
-    goto error;
-  }
-
-  // 2) Send the password
-
-  MSG_DEBUG("network", "Client: sending password");
-  Network::Send(server_socket, GetPassword());
-
-  // is it ok ?
-  r = Network::ReceiveInt(tmp_socket_set, server_socket, ack);
-  if (r)
-    goto error;
-
-  if (ack) {
-    ret = CONN_WRONG_PASSWORD;
-    goto error;
-  }
-
-  MSG_DEBUG("network", "Client: Handshake done successfully :)");
-  ret = CONNECTED;
-
- error:
-  if (ret != CONNECTED)
-    std::cerr << "Client: HandShake with server has failed!" << std::endl;
-
-  SDLNet_TCP_DelSocket(tmp_socket_set, server_socket);
-  SDLNet_FreeSocketSet(tmp_socket_set);
-  return ret;
-}
-
-connection_state_t
+const Network::connection_state_t
 NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 {
   Init();
@@ -169,13 +165,13 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   int prt = strtol(port.c_str(), NULL, 10);
 
   connection_state_t r = CheckHost(host, prt);
-  if (r != CONNECTED)
+  if (r != Network::CONNECTED)
     return r;
 
   if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt) == -1)
   {
     fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), prt);
-    return CONN_BAD_HOST;
+    return Network::CONN_BAD_HOST;
   }
 
   // CheckHost opens and closes a connection to the server, so before reconnecting
@@ -187,23 +183,16 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   if (!socket)
   {
     fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), prt);
-    return CONN_REJECTED;
+    return Network::CONN_REJECTED;
   }
 
-  r = HandShake(socket);
-  if (r != CONNECTED)
-    return r;
-
   socket_set = SDLNet_AllocSocketSet(1);
-
-  DistantComputer * server = new DistantComputer(socket);
-
-  cpu.push_back(server);
+  cpu.push_back(new DistantComputer(socket));
   //Send nickname to server
   Action a(Action::ACTION_NICKNAME, nickname);
   SendAction(&a);
 
   //Control to net_thread_func
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
-  return CONNECTED;
+  return Network::CONNECTED;
 }

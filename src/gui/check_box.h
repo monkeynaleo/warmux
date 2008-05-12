@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,25 +35,27 @@ class CheckBox : public Widget
  CheckBox(const CheckBox&);
  CheckBox operator=(const CheckBox&);
  /**********************************************/
- void Init(uint width);
 
  protected:
   Text *txt_label;
   bool m_value;
   Sprite *m_checked_image;
+  bool hidden;
 
  public:
-  CheckBox(const std::string &label, uint width, bool value = true);
-  CheckBox(Text* text, uint width, bool value = true);
+  CheckBox(const std::string &label, const Rectanglei &rect, bool value = true);
+  CheckBox(Text* text, const Rectanglei &rect, bool value = true);
+  void Init(const Rectanglei &rect);
   ~CheckBox();
-
-  virtual void Draw(const Point2i &mousePosition) const;
-  virtual Widget* Click(const Point2i&, uint) { return this; };
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
-  virtual void Pack();
+  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  Widget* Click(const Point2i&, uint) { return this; };
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
+  void SetSizePosition(const Rectanglei &rect) { StdSetSizePosition(rect); };
 
   bool GetValue() const { return m_value; };
   void SetValue(bool value) { m_value = value; };
+
+  void SetVisible(bool visible);
 };
 
 #endif

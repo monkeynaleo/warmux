@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@
 #include "base.h"
 
 class Video;
-class Menu;
 
 class AppWormux
 {
@@ -34,7 +33,6 @@ public:
   Video *video;
 
 private:
-  Menu *menu;
   static AppWormux * singleton;
 
 private:
@@ -45,7 +43,6 @@ private:
   AppWormux();
 
 public:
-  void SetCurrentMenu(Menu *menu);
   void RefreshDisplay();
   static AppWormux * GetInstance();
   ~AppWormux();

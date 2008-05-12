@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,9 +20,9 @@
  * if we hit a character.
  *****************************************************************************/
 
-#include "weapon/gun.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "gun.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 #include <sstream>
 #include "map/map.h"
@@ -54,26 +54,18 @@ GunBullet::GunBullet(ExplosiveWeaponConfig& cfg,
 
 void GunBullet::ShootSound()
 {
-  JukeBox::GetInstance()->Play("share","weapon/gun");
+  jukebox.Play("share","weapon/gun");
 }
 
 //-----------------------------------------------------------------------------
 
 Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Gun");
   m_category = RIFLE;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
   ReloadLauncher();
-}
-
-void Gun::UpdateTranslationStrings()
-{
-  m_name = _("Gun");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
 }
 
 WeaponProjectile * Gun::GetProjectileInstance()

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,10 +19,11 @@
  * Jet Pack :-)
  *****************************************************************************/
 
-#include "weapon/jetpack.h"
-#include "weapon/explosion.h"
+#include "jetpack.h"
+#include "explosion.h"
 #include "character/character.h"
 #include "game/game.h"
+#include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "include/action_handler.h"
@@ -35,7 +36,7 @@
 #include "team/team.h"
 #include "tool/i18n.h"
 
-const double JETPACK_FORCE = 1800.0;
+const double JETPACK_FORCE = 2500.0;
 
 const uint DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumption.
 
@@ -43,8 +44,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
                             NEVER_VISIBLE)
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Jetpack");
   m_category = MOVE;
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
@@ -52,13 +52,6 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
   m_x_force = 0.0;
   m_y_force = 0.0;
-}
-
-void JetPack::UpdateTranslationStrings()
-{
-  m_name = _("Jetpack");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
 }
 
 void JetPack::Refresh()
@@ -113,18 +106,14 @@ void JetPack::p_Select()
 
 void JetPack::p_Deselect()
 {
+  m_is_active = false;
   m_x_force = 0;
   m_y_force = 0;
   ActiveCharacter().SetExternForce(0,0);
   StopUse();
+  Camera::GetInstance()->GetInstance()->SetCloseFollowing(false);
   ActiveCharacter().SetClothe("normal");
-  ActiveCharacter().SetMovement("breathe");
-}
-
-void JetPack::ActionStopUse()
-{
-  p_Deselect();
-  ActiveTeam().AccessNbUnits() = 0;
+  ActiveCharacter().SetMovement("walk");
 }
 
 void JetPack::StartUse()
@@ -135,7 +124,10 @@ void JetPack::StartUse()
       m_last_fuel_down = Time::GetInstance()->Read();
       flying_sound.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
-      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
+      Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),true, true, true);
+      Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
+//                           bool suit, bool recentre,
+//                           bool force_recentrage=false);
     }
 }
 
@@ -228,6 +220,7 @@ void JetPack::HandleKeyPressed_Shoot(bool)
 
 bool JetPack::p_Shoot()
 {
+  m_is_active = true;
   ActiveCharacter().SetClothe("jetpack-fire");
 
   return true;

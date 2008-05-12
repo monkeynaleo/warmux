@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Progress bar for GUI.
  *****************************************************************************/
 
-#include "gui/progress_bar.h"
+#include "progress_bar.h"
 #include <SDL.h>
 #include "graphic/video.h"
 #include "include/app.h"
@@ -60,23 +60,23 @@ void ProgressBar::InitVal (long pval, long pmin, long pmax,
   min = pmin;
   max = pmax;
   orientation = porientation;
-  val_barre = ComputeBarValue(val);
+  val_barre = CalculeValBarre(val);
 }
 
 void ProgressBar::UpdateValue (long pval){
-  val = ComputeValue(pval);
-  val_barre = ComputeBarValue(val);
+  val = CalculeVal(pval);
+  val_barre = CalculeValBarre(val);
 }
 
-long ProgressBar::ComputeValue (long pval) const{
-  return InRange_Long(pval, min, max);
+uint ProgressBar::CalculeVal (long pval) const{
+  return BorneLong(pval, min, max);
 }
 
-uint ProgressBar::ComputeBarValue (long val) const{
+uint ProgressBar::CalculeValBarre (long val) const{
   if(orientation == PROG_BAR_HORIZONTAL)
-    return ( ComputeValue(val) -min)*(larg-2)/(max-min);
+    return ( CalculeVal(val) -min)*(larg-2)/(max-min);
   else
-    return ( ComputeValue(val) -min)*(haut-2)/(max-min);
+    return ( CalculeVal(val) -min)*(haut-2)/(max-min);
 }
 
 // TODO pass a Surface as parameter
@@ -92,7 +92,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
 
   // Valeur
   if (m_use_ref_val) {
-    int ref = ComputeBarValue (m_ref_val);
+    int ref = CalculeValBarre (m_ref_val);
     if (val < m_ref_val) { // FIXME hum, this seems buggy
       begin = 1+val_barre;
       end = 1+ref;
@@ -114,7 +114,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
   image.FillRect(r_value, value_color);
 
   if (m_use_ref_val) {
-    int ref = ComputeBarValue (m_ref_val);
+    int ref = CalculeValBarre (m_ref_val);
     Rectanglei r_ref;
     if(orientation == PROG_BAR_HORIZONTAL)
        r_ref = Rectanglei(1 + ref, 1, 1, haut - 2);
@@ -124,8 +124,8 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
   }
 
   // Marqueurs
-  marqueur_it_const it=marqueur.begin(), it_end = marqueur.end();
-  for (; it != it_end; ++it)
+  marqueur_it_const it=marqueur.begin(), fin=marqueur.end();
+  for (; it != fin; ++it)
   {
     Rectanglei r_marq;
     if(orientation == PROG_BAR_HORIZONTAL)
@@ -144,7 +144,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
 ProgressBar::marqueur_it ProgressBar::AddTag (long val, const Color& color){
   marqueur_t m;
 
-  m.val = ComputeBarValue(val);
+  m.val = CalculeValBarre (val);
   m.color = color;
   marqueur.push_back (m);
 
@@ -153,6 +153,6 @@ ProgressBar::marqueur_it ProgressBar::AddTag (long val, const Color& color){
 
 void ProgressBar::SetReferenceValue (bool use, long value){
   m_use_ref_val = use;
-  m_ref_val = ComputeValue(value);
+  m_ref_val = CalculeVal(value);
 }
 

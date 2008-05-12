@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,13 +19,14 @@
  * A team
  *****************************************************************************/
 
-#include "team/team.h"
-#include "team/teams_list.h"
+#include "team.h"
+#include "teams_list.h"
 #include "character/character.h"
 #include "character/body_list.h"
 #include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
+#include "game/game_loop.h"
 #include "graphic/sprite.h"
 #include "interface/cursor.h"
 #include "include/base.h"
@@ -51,7 +52,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   XmlReader   doc;
 
   // Load XML
-  nomfich = teams_dir+id+ PATH_SEPARATOR "team.xml";
+  nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
 
   if (!doc.Load(nomfich))
     throw "unable to load file of team data";
@@ -60,9 +61,8 @@ Team::Team (const std::string& teams_dir, const std::string& id)
     throw "Invalid file structure: cannot find a name for team ";
 
   // Load flag
-  Profile *res = resource_manager.LoadXMLProfile(nomfich, true);
+  Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
   flag = resource_manager.LoadImage(res, "flag");
-  mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
   death_flag = resource_manager.LoadImage(res, "death_flag");
   big_flag = resource_manager.LoadImage(res, "big_flag");
   resource_manager.UnLoadXMLProfile(res);
@@ -87,64 +87,77 @@ bool Team::LoadCharacters()
 {
   ASSERT (nb_characters <= 10);
 
-  std::string nomfich = m_teams_dir+m_id+ PATH_SEPARATOR "team.xml";
-  // Load XML
-  if (!DoesFileExist(nomfich))
-    return false;
-
-  XmlReader doc;
-  if (!doc.Load(nomfich))
-    return false;
-
-  // Create the characters
-  xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
-  xmlNodeArray::const_iterator it = nodes.begin();
-
-  characters.clear();
-  active_character = characters.end();
-  do
+  std::string nomfich;
+  try
   {
-    Body* body;
-    std::string character_name = "Unknown Soldier (it's all over)";
-    std::string body_name = "";
-    XmlReader::ReadStringAttr(*it, "name", character_name);
-    XmlReader::ReadStringAttr(*it, "body", body_name);
+    XmlReader doc;
 
-    if (!(body = body_list.GetBody(body_name)) )
+    // Load XML
+    nomfich = m_teams_dir+m_id+PATH_SEPARATOR+ "team.xml";
+    if (!IsFileExist(nomfich)) return false;
+    if (!doc.Load(nomfich)) return false;
+
+    // Create the characters
+    xmlpp::Element *xml = XmlReader::GetMarker(doc.GetRoot(), "team");
+
+    xmlpp::Node::NodeList nodes = xml->get_children("character");
+    xmlpp::Node::NodeList::iterator it=nodes.begin();
+
+    characters.clear();
+    active_character = characters.end();
+    do
     {
-      std::cerr
-          << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
-                    body_name.c_str(),
-                    m_name.c_str())
-          << std::endl;
-      return false;
-    }
+      xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
+      Body* body;
+      std::string character_name = "Unknown Soldier (it's all over)";
+      std::string body_name = "";
+      XmlReader::ReadStringAttr(elem, "name", character_name);
+      XmlReader::ReadStringAttr(elem, "body", body_name);
 
-    // Create a new character and add him to the team
-    Character new_character(*this, character_name, body);
-    characters.push_back(new_character);
-    active_character = characters.begin(); // we need active_character to be initialized here !!
-    if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters()))
-    {
-      // We haven't found any place to put the characters!!
-      if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
-        std::cerr << std::endl;
-        std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
-        std::cerr << std::endl;
-
-        // Put it with no space...
-        characters.back().PutRandomly(false, 0);
+      if (!(body = body_list.GetBody(body_name)) )
+      {
+        std::cerr
+            << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
+                      body_name.c_str(),
+                      m_name.c_str())
+            << std::endl;
+        return false;
       }
-    }
-    characters.back().Init();
 
-    MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
+      // Create a new character and add him to the team
+      Character new_character(*this, character_name, body);
+      characters.push_back(new_character);
+      active_character = characters.begin(); // we need active_character to be initialized here !!
+      if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters()))
+      {
+        // We haven't found any place to put the characters!!
+        if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
+          std::cerr << std::endl;
+          std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
+          std::cerr << std::endl;
 
-    // Did we reach the end ?
-    ++it;
-  } while (it != nodes.end() && characters.size() < nb_characters );
+            // Put it with no space...
+          characters.back().PutRandomly(false, 0);
+        }
+      }
+      characters.back().Init();
 
-  active_character = characters.begin();
+      MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
+
+        // C'est la fin ?
+      ++it;
+    } while (it!=nodes.end() && characters.size() < nb_characters );
+
+    active_character = characters.begin();
+
+  }
+  catch (const xmlpp::exception &e)
+  {
+    std::cerr << std::endl
+        << Format(_("Error loading team's data %s:"), m_id.c_str())
+        << std::endl << e.what() << std::endl;
+    return false;
+  }
 
   return (characters.size() == nb_characters);
 }
@@ -173,23 +186,18 @@ void Team::UpdateEnergyBar ()
   energy.SetValue(ReadEnergy());
 }
 
-void Team::SelectCharacter(const Character * c)
+TeamEnergy & Team::GetEnergyBar()
 {
-  ASSERT(c != NULL);
+  return energy;
+}
 
-  if (!c->IsActiveCharacter()) {
-    ActiveCharacter().StopPlaying();
-
-    active_character = characters.begin();
-    while (!c->IsActiveCharacter() && active_character != characters.end())
-      active_character++;
-
-    ASSERT(active_character != characters.end());
-  }
-
-  // StartPlaying (if needed) even if c was already ActiveCharacter() thanks to
-  // the team change...
-  ActiveCharacter().StartPlaying();
+void Team::SelectCharacter(uint index)
+{
+  ASSERT(index <= characters.size());
+  ActiveCharacter().StopPlaying();
+  active_character = characters.begin();
+  for(uint i = 0; i < index; ++i)
+    ++active_character;
 }
 
 void Team::NextCharacter()
@@ -204,9 +212,10 @@ void Team::NextCharacter()
   } while (ActiveCharacter().IsDead());
   ActiveCharacter().StartPlaying();
 
-  if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(),
-                          !is_camera_saved);
+  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
+  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
+                          !is_camera_saved, !is_camera_saved,
+                          true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
             ActiveCharacter().GetName().c_str(),
             ActiveCharacter().GetX(),
@@ -225,9 +234,10 @@ void Team::PreviousCharacter()
   } while (ActiveCharacter().IsDead());
   ActiveCharacter().StartPlaying();
 
-  if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(),
-                          !is_camera_saved);
+  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
+  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
+                          !is_camera_saved, !is_camera_saved,
+                          true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
             ActiveCharacter().GetName().c_str(),
             ActiveCharacter().GetX(),
@@ -255,9 +265,10 @@ void Team::PrepareTurn()
     NextCharacter();
   }
 
-  if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(),
-                          !is_camera_saved);
+  if (is_camera_saved) Camera::GetInstance()->GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
+  Camera::GetInstance()->GetInstance()->FollowObject (&ActiveCharacter(),
+                          !is_camera_saved, !is_camera_saved,
+                          true);
   CharacterCursor::GetInstance()->FollowActiveCharacter();
 
   // Active last weapon use if EnoughAmmo
@@ -379,6 +390,12 @@ void Team::SetNbCharacters(uint howmany)
   nb_characters = howmany;
 }
 
+void Team::SetPlayerName(const std::string& _player_name)
+{
+  m_player_name = _player_name;
+  // energy.SetTeamName(m_player_name+" - "+m_name);
+}
+
 void Team::DrawEnergy(const Point2i& pos)
 {
   energy.Draw(pos);
@@ -390,7 +407,7 @@ void Team::Refresh()
 }
 
 Weapon& Team::AccessWeapon() const { return *active_weapon; }
-const Weapon& Team::GetWeapon() const { return *active_weapon; }
+Weapon& Team::GetWeapon() const { return *active_weapon; }
 Weapon::Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
 
 bool Team::IsSameAs(const Team& other) const
@@ -401,4 +418,35 @@ bool Team::IsSameAs(const Team& other) const
 bool Team::IsActiveTeam() const
 {
   return this == &ActiveTeam();
+}
+
+bool Team::IsLocal() const
+{
+  if (type_of_player == TEAM_human_local)
+    return true;
+
+  return false;
+}
+
+bool Team::IsLocalAI() const
+{
+  if (type_of_player == TEAM_ai_local)
+    return true;
+
+  return false;
+}
+
+void Team::SetLocal()
+{
+  type_of_player = TEAM_human_local;
+}
+
+void Team::SetLocalAI()
+{
+  type_of_player = TEAM_ai_local;
+}
+
+void Team::SetRemote()
+{
+  type_of_player = TEAM_remote;
 }

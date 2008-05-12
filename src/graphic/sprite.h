@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -49,18 +49,14 @@ typedef enum {
 
 class Sprite
 {
-private:
-  bool smooth;
-
 public:
   SpriteCache cache;
   SpriteAnimation animation;
 
 public:
-  explicit Sprite(bool _smooth=false);
-  explicit Sprite(const Surface& surface, bool _smooth=false);
+  explicit Sprite();
+  explicit Sprite(const Surface& surface);
   Sprite(const Sprite &other);
-  ~Sprite() { frames.clear(); }
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
   Surface GetSurface() const;
@@ -69,10 +65,6 @@ public:
   unsigned int GetCurrentFrame() const;
   void SetCurrentFrame( unsigned int frame_no);
   unsigned int GetFrameCount() const;
-
-  // Antialiasing
-  void SetAntialiasing(bool on);
-  bool IsAntialiased() const;
 
   // Size
   unsigned int GetWidth() const;

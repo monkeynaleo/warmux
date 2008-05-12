@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,15 +19,15 @@
  * WeaponLauncher: generic weapon to launch a projectile
  *****************************************************************************/
 
-#include "weapon/weapon_launcher.h"
-#include "weapon/weapon_cfg.h"
+#include "weapon_launcher.h"
+#include "weapon_cfg.h"
 
 #include <sstream>
 
-#include "weapon/explosion.h"
+#include "explosion.h"
 #include "character/character.h"
 #include "game/config.h"
-#include "game/game.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
@@ -45,8 +45,6 @@
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
-#include "graphic/video.h"
-#include "include/app.h"
 #endif
 
 WeaponBullet::WeaponBullet(const std::string &name,
@@ -55,15 +53,14 @@ WeaponBullet::WeaponBullet(const std::string &name,
   WeaponProjectile(name, cfg, p_launcher)
 {
   explode_colliding_character = true;
-  m_allow_negative_y = false;
   ResetTimeOut();
 }
 
 // Signal that the bullet has hit the ground
-void WeaponBullet::SignalGroundCollision(const Point2d& speed_before)
+void WeaponBullet::SignalGroundCollision()
 {
-  JukeBox::GetInstance()->Play("share", "weapon/ricoche1");
-  WeaponProjectile::SignalGroundCollision(speed_before);
+  jukebox.Play("share", "weapon/ricoche1");
+  WeaponProjectile::SignalGroundCollision();
   launcher->IncMissedShots();
 }
 
@@ -71,15 +68,14 @@ void WeaponBullet::SignalOutOfMap()
 {
   WeaponProjectile::SignalOutOfMap();
   launcher->IncMissedShots();
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
-void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before)
+void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
 {
-  if (!obj->IsCharacter())
+  if (typeid(*obj) != typeid(Character))
     Explosion();
   obj->SetEnergyDelta(-(int)cfg.damage);
-  obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
+  obj->AddSpeed(2, GetSpeedAngle());
   Ghost();
 }
 
@@ -109,12 +105,11 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   explode_colliding_character = false;
   explode_with_timeout = true;
   explode_with_collision = true;
-  can_drown = true;
-  camera_in_advance = true;
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
   SetSize(image->GetSize());
+  camera_follow_closely = true;
 
   // Set rectangle test
   int dx = image->GetWidth()/2-1;
@@ -124,12 +119,12 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   ResetTimeOut();
 
   // generate a unique id for the projectile
-  m_unique_id = name + Game::GetUniqueId();
+  m_unique_id = name + GameLoop::GetUniqueId();
 }
 
 WeaponProjectile::~WeaponProjectile()
 {
-  delete image;
+  //  delete image; /*-> it causes a segfault :-/ */
 }
 
 void WeaponProjectile::Shoot(double strength)
@@ -145,12 +140,14 @@ void WeaponProjectile::Shoot(double strength)
   ResetConstants();
 
   // Set the initial position.
+  SetXY(launcher->GetGunHolePosition());
   SetOverlappingObject(&ActiveCharacter(), 100);
-  lst_objects.AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
 
+  // Set the initial speed.
   double angle = ActiveCharacter().GetFiringAngle();
-  RandomizeShoot(angle, strength);
+  RandomizeShoot(angle,strength);
+  SetSpeed(strength, angle);
+  PutOutOfGround(angle);
 
   MSG_DEBUG("weapon.projectile", "shoot from position %d,%d (size %d, %d) - hand position:%d,%d",
 	    ActiveCharacter().GetX(),
@@ -166,35 +163,19 @@ void WeaponProjectile::Shoot(double strength)
 
   ShootSound();
 
-  // bug #10236 : problem with flamethrower collision detection
-  // Check if the object is colliding something between hand position and gun hole
-  Point2i hand_position = ActiveCharacter().GetHandPosition() - GetSize() / 2;
-  Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
-  Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
-  Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
-  SetXY(hand_position);
-  SetSpeed(strength, angle);
-  collision_t collision = NotifyMove(f_hand_position, f_hole_position);
-  if (collision == NO_COLLISION) {
-    // Set the initial position and speed.
-    SetXY(hole_position);
-    SetSpeed(strength, angle);
-    PutOutOfGround(angle);
-  }
+  lst_objects.AddObject(this);
+  Camera::GetInstance()->GetInstance()->FollowObject(this, true, true, true);
+  if (camera_follow_closely)
+    Camera::GetInstance()->GetInstance()->SetCloseFollowing(true);
 }
 
 void WeaponProjectile::ShootSound()
 {
-  JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "fire");
+  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
 }
 
 void WeaponProjectile::Refresh()
 {
-  if (m_energy == 0) {
-    Explosion();
-    return;
-  }
-  SetSize(image->GetSizeMax());
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -203,8 +184,7 @@ void WeaponProjectile::Refresh()
 
 void WeaponProjectile::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
 {
-  // Don't call Explosion here, we're already in an explosion
-  m_energy = 0;
+  Explosion();
 }
 
 void WeaponProjectile::Draw()
@@ -226,18 +206,6 @@ void WeaponProjectile::Draw()
       ss.str(), white_color);
     }
   }
-
-#ifdef DEBUG
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSizeMax());
-    AppWormux::GetInstance()->video->window.RectangleColor(rect, primary_blue_color, 1);
-  }
-#endif
 }
 
 bool WeaponProjectile::IsImmobile() const
@@ -248,69 +216,56 @@ bool WeaponProjectile::IsImmobile() const
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* my_speed_before */)
+void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {
   ASSERT(obj != NULL);
-  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
-	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalObjectCollision %s: %d, %d", m_name.c_str(), GetX(), GetY());
   if (explode_colliding_character)
     Explosion();
 }
 
 // projectile explode when hiting the ground
-void WeaponProjectile::SignalGroundCollision(const Point2d& /*speed_before*/)
+void WeaponProjectile::SignalGroundCollision()
 {
-  MSG_DEBUG("weapon.projectile", "SignalGroundCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalGroundCollision %s: %d, %d", m_name.c_str(), GetX(), GetY());
   if (explode_with_collision)
     Explosion();
 }
 
 // Default behavior : signal to launcher a collision and explode
-void WeaponProjectile::SignalCollision(const Point2d& speed_before)
+void WeaponProjectile::SignalCollision()
 {
-  MSG_DEBUG("weapon.projectile", "SignalCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
-  if (launcher != NULL && !launcher->ignore_collision_signal)
-    launcher->SignalProjectileCollision(speed_before);
+  MSG_DEBUG("weapon.projectile", "SignalCollision %s: %d, %d", m_name.c_str(), GetX(), GetY());
+  if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
 }
 
 // Default behavior : signal to launcher projectile is drowning
 void WeaponProjectile::SignalDrowning()
 {
-  MSG_DEBUG("weapon.projectile", "SignalDrowning \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalDrowning %s: %d, %d", m_name.c_str(), GetX(), GetY());
   PhysicalObj::SignalDrowning();
   if (launcher != NULL && !launcher->ignore_drowning_signal)
     launcher->SignalProjectileDrowning();
-
-  if (can_drown) JukeBox::GetInstance()->Play("share", "sink");
-  //else JukeBox::GetInstance()->Play("share", "pschiiit");
-}
-
-// Default behavior : signal to launcher a projectile is going out of water
-void WeaponProjectile::SignalGoingOutOfWater()
-{
-  MSG_DEBUG("weapon.projectile", "SignalDrowning \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
-  PhysicalObj::SignalGoingOutOfWater();
-  if (launcher != NULL && !launcher->ignore_going_out_of_water_signal)
-    launcher->SignalProjectileGoingOutOfWater();
 }
 
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
-  MSG_DEBUG("weapon.projectile", "SignalGhostState \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalGhostState %s: %d, %d", m_name.c_str(), GetX(), GetY());
   if (launcher != NULL && !launcher->ignore_ghost_state_signal)
     launcher->SignalProjectileGhostState();
+  Camera::GetInstance()->GetInstance()->SetCloseFollowing(false);
 }
 
 void WeaponProjectile::SignalOutOfMap()
 {
-  MSG_DEBUG("weapon.projectile", "SignalOutOfMap \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalOutOfMap %s: %d, %d", m_name.c_str(), GetX(), GetY());
 }
 
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
 {
-  MSG_DEBUG("weapon.projectile", "Explosion \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "Explosion %s: %d, %d", m_name.c_str(), GetX(), GetY());
   DoExplosion();
   SignalExplosion();
   Ghost();
@@ -318,7 +273,7 @@ void WeaponProjectile::Explosion()
 
 void WeaponProjectile::SignalExplosion()
 {
-  MSG_DEBUG("weapon.projectile", "SignalExplosion \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "SignalExplosion %s: %d, %d", m_name.c_str(), GetX(), GetY());
   if (launcher != NULL && !launcher->ignore_explosion_signal)
     launcher->SignalProjectileExplosion();
 }
@@ -356,7 +311,7 @@ int WeaponProjectile::GetTotalTimeout() const
 // Signal a projectile timeout and explode
 void WeaponProjectile::SignalTimeout()
 {
-  MSG_DEBUG("weapon.projectile", "\"%s\" timeout has expired", m_name.c_str());
+  MSG_DEBUG("weapon.projectile", "%s timeout has expired", m_name.c_str());
   if (launcher != NULL && !launcher->ignore_timeout_signal)
     launcher->SignalProjectileTimeout();
   if (explode_with_timeout)
@@ -386,7 +341,6 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
   ignore_explosion_signal = false;
   ignore_ghost_state_signal = false;
   ignore_drowning_signal = false;
-  ignore_going_out_of_water_signal = false;
 }
 
 WeaponLauncher::~WeaponLauncher()
@@ -536,13 +490,13 @@ void WeaponLauncher::HandleKeyReleased_Num9(bool /*shift*/)
 
 void WeaponLauncher::HandleKeyReleased_Less(bool /*shift*/)
 {
-  projectile->DecrementTimeOut();
+  projectile->IncrementTimeOut();
   NetworkSetTimeoutProjectile();
 }
 
 void WeaponLauncher::HandleKeyReleased_More(bool /*shift*/)
 {
-  projectile->IncrementTimeOut();
+  projectile->DecrementTimeOut();
   NetworkSetTimeoutProjectile();
 }
 

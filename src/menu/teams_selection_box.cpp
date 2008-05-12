@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,93 +19,75 @@
  *  Teams selection box
  *****************************************************************************/
 
-#include "game/config.h"
-#include "menu/teams_selection_box.h"
-#include "menu/team_box.h"
+#include "teams_selection_box.h"
+#include "team_box.h"
 #include "gui/label.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
-#include "gui/spin_button_picture.h"
+#include "gui/spin_button_big.h"
 #include "gui/text_box.h"
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/i18n.h"
 
-TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network) :
-  HBox(_size.y, network)
+TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
 {
-  if (!network)
-    SetNoBorder();
+  AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
 
   // How many teams ?
-  if (network) {
-    local_teams_nb = new SpinButtonWithPicture(_("Local teams:"),
-					       "menu/team_number",
-					       Point2i(130, W_UNDEF),
-					       0, 1,
-					       0, MAX_NB_TEAMS-1);
-  } else {
-    local_teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
-					       "menu/team_number",
-					       Point2i(130, W_UNDEF),
-					       2, 1,
-					       2, MAX_NB_TEAMS);
-  }
-  AddWidget(local_teams_nb);
+  teams_nb = new SpinButtonBig(_("Number of teams:"), Rectanglei(0, 0, 130, 30),
+                               2, 1,
+                               2, MAX_NB_TEAMS);
+  AddWidget(teams_nb);
 
-  uint teams_box_w = _size.x - local_teams_nb->GetSizeX() - 5;
-  Point2i team_box_size(teams_box_w / (MAX_NB_TEAMS /2) - 10, _size.y/2 -15);
+  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0,
+                                                         rect.GetSizeX() - teams_nb->GetSizeX() - 60, 0)
+                                              ,false);
+  top_n_bottom_team_options->SetBorder(Point2i(5,0));
+  top_n_bottom_team_options->SetMargin(10);
+  Box * top_team_options = new HBox ( Rectanglei(0, 0, 0, rect.GetSizeY()/2 - 20), false);
+  Box * bottom_team_options = new HBox ( Rectanglei(0, 0, 0, rect.GetSizeY()/2 - 20), false);
+  top_team_options->SetBorder(Point2i(0,0));
+  bottom_team_options->SetBorder(Point2i(0,0));
 
-  Box * teams_grid_box = new GridBox(teams_box_w, team_box_size, false);
-  teams_grid_box->SetNoBorder();
+  // Initialize teams
+  uint team_w_size= top_n_bottom_team_options->GetSizeX() * 2 / MAX_NB_TEAMS;
 
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
     std::string player_name = _("Player") ;
     char num_player[4];
     sprintf(num_player, " %d", i+1);
     player_name += num_player;
-    teams_selections.push_back(new TeamBox(player_name, team_box_size));
-    teams_grid_box->AddWidget(teams_selections.at(i));
+    teams_selections.push_back(new TeamBox(player_name, Rectanglei(0,0,team_w_size,rect.GetSizeY()/2)));
+    if ( i%2 == 0)
+      top_team_options->AddWidget(teams_selections.at(i));
+    else
+      bottom_team_options->AddWidget(teams_selections.at(i));
   }
 
-  AddWidget(teams_grid_box);
+  top_n_bottom_team_options->AddWidget(top_team_options);
+  top_n_bottom_team_options->AddWidget(bottom_team_options);
+
+  AddWidget(top_n_bottom_team_options);
 
   // Load Teams' list
-  GetTeamsList().full_list.sort(compareTeams);
+  teams_list.full_list.sort(compareTeams);
 
+  TeamsList::iterator
+    it=teams_list.playing_list.begin(),
+    end=teams_list.playing_list.end();
 
-  // initialize teams
-  if (network) {
-    // for network game
-    GetTeamsList().Clear();
-
-    // No selected team(s) by default
-    for (uint i=0; i<teams_selections.size(); i++) {
-      teams_selections.at(i)->ClearTeam();
+  uint j=0;
+  for (; it != end && j<teams_selections.size(); ++it, j++)
+    {
+      teams_selections.at(j)->SetTeam((**it), true);
     }
 
+  if (j < 2) {
+    SetNbTeams(2);
+    teams_nb->SetValue(2);
   } else {
-    // for local game
-
-    GetTeamsList().InitList(Config::GetInstance()->AccessTeamList());
-
-    TeamsList::iterator
-      it=GetTeamsList().playing_list.begin(),
-      end=GetTeamsList().playing_list.end();
-
-    uint j=0;
-    for (; it != end && j<teams_selections.size(); ++it, j++)
-      {
-	teams_selections.at(j)->SetTeam((**it), true);
-      }
-
-    // we need at least 2 teams
-    if (j < 2) {
-      SetNbTeams(2);
-      local_teams_nb->SetValue(2);
-    } else {
-      local_teams_nb->SetValue(j);
-    }
+    teams_nb->SetValue(j);
   }
 }
 
@@ -113,8 +95,8 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (!Contains(mousePosition)) return NULL;
 
-  if (local_teams_nb->ClickUp(mousePosition, button)){
-    SetNbTeams(local_teams_nb->GetValue());
+  if (teams_nb->ClickUp(mousePosition, button)){
+    SetNbTeams(teams_nb->GetValue());
 
   } else {
     for (uint i=0; i<teams_selections.size() ; i++) {
@@ -159,7 +141,7 @@ void TeamsSelectionBox::PrevTeam(int i)
   Team* tmp;
   int previous_index = -1, index;
 
-  GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
+  teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
 
   index = previous_index-1;
 
@@ -169,13 +151,13 @@ void TeamsSelectionBox::PrevTeam(int i)
 
       // select the last team if we are outside list
       if ( index < 0 )
-        index = int(GetTeamsList().full_list.size())-1;
+        index = int(teams_list.full_list.size())-1;
 
       // Get the team at current index
-      tmp = GetTeamsList().FindByIndex(index);
+      tmp = teams_list.FindByIndex(index);
 
       // Check if that team is already selected
-      for (int j = 0; j < local_teams_nb->GetValue(); j++) {
+      for (int j = 0; j < teams_nb->GetValue(); j++) {
         if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
           index--;
           to_continue = true;
@@ -197,7 +179,7 @@ void TeamsSelectionBox::NextTeam(int i)
   Team* tmp;
   int previous_index = -1, index;
 
-  GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
+  teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
 
   index = previous_index+1;
 
@@ -206,14 +188,14 @@ void TeamsSelectionBox::NextTeam(int i)
       to_continue = false;
 
       // select the first team if we are outside list
-      if ( index >= int(GetTeamsList().full_list.size()) )
+      if ( index >= int(teams_list.full_list.size()) )
         index = 0;
 
       // Get the team at current index
-      tmp = GetTeamsList().FindByIndex(index);
+      tmp = teams_list.FindByIndex(index);
 
       // Check if that team is already selected
-      for (int j = 0; j < local_teams_nb->GetValue(); j++) {
+      for (int j = 0; j < teams_nb->GetValue(); j++) {
         if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
           index++;
           to_continue = true;
@@ -237,7 +219,7 @@ void TeamsSelectionBox::SetNbTeams(uint nb_teams)
   for (uint i=0; i<nb_teams;i++) {
     if (teams_selections.at(i)->GetTeam() == NULL) {
       // we should find an available team
-      teams_selections.at(i)->SetTeam(*(GetTeamsList().FindByIndex(i)));
+      teams_selections.at(i)->SetTeam(*(teams_list.FindByIndex(i)));
       NextTeam(i);
     }
   }
@@ -258,11 +240,11 @@ void TeamsSelectionBox::ValidTeamsSelection()
       if (teams_selections.at(i)->GetTeam() != NULL) {
         int index = -1;
         teams_selections.at(i)->ValidOptions();
-        GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
+        teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
         if (index > -1)
           selection.push_back(uint(index));
       }
     }
-    GetTeamsList().ChangeSelection (selection);
+    teams_list.ChangeSelection (selection);
   }
 }

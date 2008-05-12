@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,11 +23,15 @@
 #define NETWORK_TEAMS_SELECTION_BOX_H
 
 #include <vector>
-#include "menu/teams_selection_box.h"
+#include "gui/box.h"
 
+class TeamBox;
+class SpinButtonBig;
 class Team;
 
-class NetworkTeamsSelectionBox : public TeamsSelectionBox
+const uint NMAX_NB_TEAMS=4;
+
+class NetworkTeamsSelectionBox : public HBox
 {
  private:
   /* If you need this, implement it (correctly) */
@@ -35,25 +39,24 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   NetworkTeamsSelectionBox operator=(const NetworkTeamsSelectionBox&);
   /**********************************************/
 
+  SpinButtonBig *local_teams_nb;
+  std::vector<TeamBox*> teams_selections;
   void SetNbLocalTeams(uint nb_teams, uint previous_nb);
   void AddLocalTeam(uint i);
   void RemoveLocalTeam(uint i);
   void SetLocalTeam(uint i, Team& team, bool remove_previous_team);
-
   void PrevTeam(uint i);
   void NextTeam(uint i, bool check_null_prev_team = true);
 
  public:
-  NetworkTeamsSelectionBox(const Point2i &size);
+  NetworkTeamsSelectionBox(const Rectanglei &rect);
 
-  virtual void ValidTeamsSelection();
-  virtual Widget* Click(const Point2i &mousePosition, uint button);
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  void ValidTeamsSelection();
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void AddTeamCallback(const std::string& team_id);
   void UpdateTeamCallback(const std::string& team_id);
   void DelTeamCallback(const std::string& team_id);
-
-  void SetMaxNbLocalPlayers(uint nb);
 };
 #endif

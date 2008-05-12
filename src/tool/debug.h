@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,8 +20,6 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#include <string>
-
 /** Usage example :
  *
  * MSG_DEBUG( "game.pause", "Salut %s", "Truc" )
@@ -33,23 +31,21 @@
  * ./wormux -d ""          # print all debug messages
  *
  */
-#ifdef WMX_LOG
+#ifdef DEBUG
 #  define MSG_DEBUG(LEVEL, MESSAGE, ...) \
    PrintDebug( __FILE__, __FUNCTION__, __LINE__, LEVEL, MESSAGE, ## __VA_ARGS__)
 #else
 #  define MSG_DEBUG(LEVEL, MESSAGE, ...) do {} while (0)
 #endif
 
-extern bool debug_all;
-
 void PrintDebug (const char *filename, const char *function, unsigned long line,
                  const char *level, const char *message, ...);
 void AddDebugMode(const std::string& mode);
 
-#ifdef WMX_LOG
-bool IsLOGGING(const char* mode);
+#ifdef DEBUG
+bool IsDEBUGGING(const char* mode);
 #else
-#  define IsLOGGING(a) false
+#define IsDEBUGGING(a) false
 #endif
 
 #endif

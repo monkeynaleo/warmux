@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@
  * bounce since it has not collide a character
  *****************************************************************************/
 
-#include "weapon/bounce_ball.h"
-#include "weapon/weapon_cfg.h"
+#include "bounce_ball.h"
+#include "weapon_cfg.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "graphic/sprite.h"
@@ -78,16 +78,10 @@ void BounceBall::SignalOutOfMap()
 BounceBallLauncher::BounceBallLauncher() :
   WeaponLauncher(WEAPON_BOUNCE_BALL, "bounce_ball", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  UpdateTranslationStrings();
-
-  m_category = DUEL;
-  ReloadLauncher();
-}
-
-void BounceBallLauncher::UpdateTranslationStrings()
-{
   m_name = _("Bounce Ball");
   m_help = _("Timeout : Wheel mouse or Page Up/Down\nAngle : Up/Down\nFire : space key\nan ammo per turn");
+  m_category = DUEL;
+  ReloadLauncher();
 }
 
 WeaponProjectile * BounceBallLauncher::GetProjectileInstance()

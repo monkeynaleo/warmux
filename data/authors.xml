@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE authors SYSTEM "authors.dtd">
+
 <authors>
 
   <team>
     <section title="Active Team">
+      <author>
+	<nickname>deki</nickname>
+	<name>Reiner HERRMANN</name>
+	<description>Programmer</description>
+	<website>http://www.reiner-h.de/</website>
+	<email>reiner_AT_reiner-h_DOT_de</email>
+	<country>Germany</country>
+      </author>
       <author>
 	<nickname>drayan</nickname>
 	<name>Yannig PERRÉ</name>
@@ -28,6 +37,20 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>lodesi</nickname>
+	<name>Laurent DEFERT SIMONNEAU</name>
+	<description>Programmer and graphic artist</description>
+	<email>lodesi2_AT_yahoo_DOT_fr</email>
+	<country>France</country>
+      </author>
+      <author>
+	<nickname>OznOg</nickname>
+	<name>Sébastien GONZALVE</name>
+	<description>Programmer</description>
+	<website>http://zarb.org/%7Eoznog/</website>
+	<email>oznog_AT_zarb_DOT_org</email>
+      <country>France</country></author>
+      <author>
 	<nickname>yeKcim</nickname>
 	<name>Anthony CARRÉ</name>
 	<description>Graphic artist</description>
@@ -38,14 +61,6 @@
     </section>
 
     <section title="Inactive Team">
-      <author>
-	<nickname>deki</nickname>
-	<name>Reiner HERRMANN</name>
-	<description>Programmer</description>
-	<website>http://www.reiner-h.de/</website>
-	<email>reiner_AT_reiner-h_DOT_de</email>
-	<country>Germany</country>
-      </author>
       <author>
 	<nickname>jcduberga</nickname>
 	<name>Jean-Christophe DUBERGA</name>
@@ -70,26 +85,11 @@
 	<country>France</country>
       </author>
       <author>
-	<nickname>lodesi</nickname>
-	<name>Laurent DEFERT SIMONNEAU</name>
-	<description>Programmer and graphic artist</description>
-	<email>lodesi2_AT_yahoo_DOT_fr</email>
-	<country>France</country>
-      </author>
-      <author>
 	<nickname>otacaon</nickname>
 	<name>Olivier SERRES</name>
 	<description>Programmer</description>
 	<email>olivier.serres_AT_gmail_DOT_com</email>
 	<country>France</country>
-      </author>
-      <author>
-	<nickname>OznOg</nickname>
-	<name>Sébastien GONZALVE</name>
-	<description>Programmer</description>
-	<website>http://zarb.org/%7Eoznog/</website>
-	<email>oznog_AT_zarb_DOT_org</email>
-      <country>France</country>
       </author>
       <author>
 	<nickname>renaud</nickname>
@@ -134,13 +134,6 @@
 	<nickname>Pedro Santos</nickname>
 	<description>Updated Portuguese Translation</description>
 	<country>Portugal</country>
-      </author>
-      <author>
-	<nickname>KonKer</nickname>
-	<name>John Doe</name>
-	<description>Updated Spanish Translation</description>
-	<email>jua56_AT_hotmail_DOT_com</email>
-	<country>Spain</country>
       </author>
       <author>
 	<nickname>pepp</nickname>
@@ -208,7 +201,7 @@
 	<nickname>Christian</nickname>
 	<name>Christian LOMSDALEN</name>
 	<description>Translated Wormux 0.8 to Norwegian</description>
-	<website>http://vindstille.net</website>
+	<website>http://hinsides.net/</website>
 	<email>christian_AT_vindstille_DOT_net</email>
 	<country>Norway</country>
       </author>
@@ -258,7 +251,7 @@
 	<nickname>Gaia</nickname>
 	<name>Gaia QUERO</name>
 	<description>Updated Italian translation</description>
-	<website>http://gaiatrad.com/</website>
+	<website>http://www.abctrad.com/</website>
 	<email>gaiaquero_AT_yahoo_DOT_fr</email>
 	<country>Italia</country>
       </author>
@@ -372,16 +365,11 @@
 	<country>Spain</country>
       </author>
       <author>
-        <nickname>Varga</nickname>
+        <nickname>????</nickname>
         <name>Varga Istvan</name>
-        <description>Hungarian translation updates</description>
+        <description>Hungarian translation updates(?)</description>
+        <email>????</email>
         <country>Hungary</country>
-      </author>
-      <author>
-	<name>Adrián Chaves</name>
-	<description>Translated Wormux in Galician</description>
-	<email>adriyetichaves_AT_gmail_DOT_com</email>
-	<country>Spain</country>
       </author>
     </section>
 
@@ -400,13 +388,6 @@
 	<website>http://jeanparpaillon.info/</website>
 	<email>jean.parpaillon_AT_free_DOT_fr</email>
 	<country>France</country>
-      </author>
-      <author>
-	<nickname>Auria</nickname>
-	<name>Marianne Gagnon</name>
-	<description>MacOSX package</description>
-	<email>fire_void_AT_hotmail_DOT_com</email>
-	<country>Canada</country>
       </author>
       <author>
 	<nickname>che</nickname>
@@ -454,14 +435,6 @@
 	<country>Germany</country>
       </author>
       <author>
-    <nickname>Plorf</nickname>
-    <name>Yoann Katchourine</name>
-    <description>Prepare Mac OS X (Intel) packages</description>
-    <website>http://plorf.homeip.net/</website>
-    <email>yplorf@gmail.com></email>
-    <country>France</country>
-        </author>
-        <author>
 	<nickname>Serge</nickname>
 	<name>Serge CLAUS</name>
 	<description>Wormux 0.7.4 package for Ubuntu Dapper</description>
@@ -490,15 +463,8 @@
 	<nickname>François</nickname>
 	<name>François BLEIBEL</name>
 	<description>Write first network patch with Jerome Glatigny</description>
-	<email>maisola_AT_gmail_DOT_com</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>funebre</nickname>
-	<name>Carlo MAISOLA</name>
-	<description>Flamethrower weapon</description>
 	<email>francois.bleibel_AT_utbm_DOT_fr</email>
-	<country>Italy</country>
+	<country>France</country>
       </author>
       <author>
 	<nickname>Hanna</nickname>
@@ -513,13 +479,6 @@
 	<description>Add autotools (autogen.sh, ./configure, ...) to Wormux</description>
 	<email>isaac_AT_sindominio_DOT_net</email>
 	<country>Spain</country>
-      </author>
-      <author>
-	<nickname>ivze</nickname>
-	<name>Ivan ZELINSKIY</name>
-	<description>Fix wind indicator for x86_64</description>
-	<email>ivze_AT_bk_DOT_ru</email>
-	<country>Russia</country>
       </author>
       <author>
 	<nickname>Jerome</nickname>
@@ -587,7 +546,7 @@
 	<name>Pasi Kallinen</name>
 	<description>Improve the ground generator</description>
 	<website>http://bilious.homelinux.org/</website>
-	<email>paxed_AT_alt_DOT_org</email>
+	<email>paxed@alt.org</email>
 	<country>Finland</country>
       </author>
       <author>
@@ -597,13 +556,6 @@
 	<website>http://coderz.info</website>
 	<email>progs_AT_headfucking.net</email>
 	<country>France</country>
-      </author>
-      <author>
-	<nickname>RCL</nickname>
-	<name>Dmitry Rekman</name>
-	<description>Developer</description>
-	<email>rcl_AT_mail_DOT_ru</email>
-	<country>Russia</country>
       </author>
       <author>
 	<nickname>Riccardo</nickname>
@@ -628,7 +580,7 @@
       <author>
 	<nickname>Snark</nickname>
 	<name>Julien Puydt</name>
-	<description>Developer</description>
+	<description>Patch to compile without -Wno-unused-parameter, reworked some menu widgets, little additions to class Surface</description>
 	<email>julien.puydt_AT_laposte_DOT_net</email>
 	<country>France</country>
       </author>
@@ -661,14 +613,6 @@
 	<description>Sounds</description>
 	<email>toddd_AT_mypse.goracer_DOT_de</email>
 	<country>Germany</country>
-      </author>
-      <author>
-	<nickname>Grz-</nickname>
-	<name>VERNEUIL julien</name>
-	<description>Some sounds</description>
-	<website>http://garzul.tonsite.biz/</website>
-	<email>grz.zrg_AT_gmail_DOT_com</email>
-	<country>France</country>
       </author>
       <author>
 	<nickname>jeanbrut</nickname>
@@ -724,13 +668,6 @@
 	<country>France</country>
       </author>
       <author>
-	<nickname>alzen</nickname>
-	<name>Maciej Mroziński</name>
-	<description>lonely_island map</description>
-	<email>mynick2_AT_o2_DOT_pl</email>
-	<country>Poland</country>
-      </author>
-      <author>
 	<nickname>Bertrand</nickname>
 	<name>Bertrand GAFFET</name>
 	<description>Author of the skin Schtroumpf</description>
@@ -762,14 +699,7 @@
 	<nickname>JLedN</nickname>
 	<name>Jeremie LEDENTU</name>
 	<description>Draw the map EasterIsland</description>
-	<email>jledentu_AT_gmail_DOT_com</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>Jeese</nickname>
-	<name>JS</name>
-	<description>Draw the map EasterIsland</description>
-	<email>jeeseverly_AT_yahoo_dot_fr</email>
+	<email>jledn_AT_voila_DOT_fr</email>
 	<country>France</country>
       </author>
       <author>
@@ -777,13 +707,6 @@
 	<name>Michael PRAGER</name>
 	<description>Map pirates. Also: Gentoo package maintainer (prepare ebuilds), German translation of Wormux</description>
 	<email>X_X_L_AT_gmx_DOT_net</email>
-	<country>Germany</country>
-      </author>
-      <author>
-	<nickname>mmbenya</nickname>
-	<name>Matt Benya</name>
-	<description>Some maps</description>
-	<email>mmbenya_AT_primatestudios_DOT_com</email>
 	<country>Germany</country>
       </author>
       <author>
@@ -812,13 +735,6 @@
 	<description>Map 'Leafs'</description>
 	<email>Toon.Verstraelen_AT_ugent_DOT_be</email>
 	<country>Belgium</country>
-      </author>
-      <author>
-	<nickname>Tutur</nickname>
-	<name>Wilfried DUMOUTIER</name>
-	<description>Map 'Contry'</description>
-	<email>wiltur_AT_gmail_DOT_com</email>
-	<country>France</country>
       </author>
       <author>
 	<nickname>Yann</nickname>

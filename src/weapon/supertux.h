@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #ifndef SUPERTUX_H
 #define SUPERTUX_H
 
-#include "weapon/weapon_launcher.h"
+#include "weapon_launcher.h"
 #include "particles/particle.h"
 
 class SuperTux;
@@ -33,14 +33,11 @@ class TuxLauncher : public WeaponLauncher
 {
   private:
     SuperTux * current_tux;
-
-    friend class SuperTux;
-    void EndOfTurn() const; // should be called only by SuperTux
   public:
     TuxLauncher();
+    void EndOfTurn() const; // should be called only by SuperTux
     bool IsInUse() const;
 
-    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 
     void SignalEndOfProjectile();

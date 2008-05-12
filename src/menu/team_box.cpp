@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,41 +23,40 @@
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
 #include "gui/text_box.h"
-#include "menu/team_box.h"
+#include "team_box.h"
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "team/team.h"
 #include "tool/i18n.h"
 
-TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
-  HBox(W_UNDEF, false, false)
+TeamBox::TeamBox(const std::string& _player_name, const Rectanglei& rect) :
+  HBox(rect, false)
 {
   associated_team=NULL;
 
   SetMargin(2);
-  SetNoBorder();
 
-  team_logo = new PictureWidget(Point2i(48, 48));
+  team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
   AddWidget(team_logo);
 
-  Box * tmp_box = new VBox(W_UNDEF, false, false);
+  Box * tmp_box = new VBox(Rectanglei(0, 0, rect.GetSizeX()-80, 80), false);
   tmp_box->SetMargin(2);
-  tmp_box->SetNoBorder();
-  previous_name = "team";
-  team_name = new Label(previous_name, _size.x - 50,
+  tmp_box->SetBorder(Point2i(0,0));
+  team_name = new Label(" ", Rectanglei(0,0,rect.GetSizeX()-80,0),
                         Font::FONT_MEDIUM, Font::FONT_BOLD,
                         dark_gray_color, false, false);
 
-  Box * tmp_player_box = new HBox(W_UNDEF, false, false);
+  Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
   tmp_player_box->SetMargin(0);
-  tmp_player_box->SetNoBorder();
-  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
+  tmp_player_box->SetBorder(Point2i(0,0));
+  tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(rect.GetSizeX()-80)-100,0),
                                       Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
-  player_name = new TextBox(_player_name, 100,
+  player_name = new TextBox(_player_name, Rectanglei(0,0,100,0),
                             Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp_player_box->AddWidget(player_name);
+  previous_name = " ";
 
-  nb_characters = new SpinButton(_("Number of characters"), _size.GetX()-50,
+  nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),
                                  6,1,1,10,
                                  dark_gray_color, false);
 
@@ -85,14 +84,14 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
     nb_characters->SetValue(_team.GetNbCharacters());
   }
 
-  NeedRedrawing();
+  ForceRedraw();
 }
 
 void TeamBox::ClearTeam()
 {
   associated_team=NULL;
 
-  NeedRedrawing();
+  ForceRedraw();
 }
 
 Team* TeamBox::GetTeam() const
@@ -101,17 +100,18 @@ Team* TeamBox::GetTeam() const
 }
 
 void TeamBox::Update(const Point2i &mousePosition,
-                     const Point2i &lastMousePosition)
+                     const Point2i &lastMousePosition,
+                     Surface& surf)
 {
-  Box::Update(mousePosition, lastMousePosition);
+  Box::Update(mousePosition, lastMousePosition, surf);
   if (need_redrawing) {
-    Draw(mousePosition);
+    Draw(mousePosition, surf);
   }
 
   if (associated_team != NULL){
-    WidgetList::Update(mousePosition);
+    WidgetList::Update(mousePosition, surf);
   } else {
-    RedrawBackground(*this);
+    Redraw(*this, surf);
   }
 
   if (associated_team != NULL && previous_name != player_name->GetText()) {

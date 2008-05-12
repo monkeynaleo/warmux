@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,9 +19,10 @@
  * Teleportation : move a charecter anywhere on the map
  *****************************************************************************/
 
-#include "weapon/teleportation.h"
+#include "teleportation.h"
 #include "character/character.h"
 #include "character/body.h"
+#include "game/game_loop.h"
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "include/action_handler.h"
@@ -37,19 +38,11 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
                                         new WeaponConfig(),
                                         VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Teleportation");
   m_category = MOVE;
   target_chosen = false;
   // teleportation_anim_duration is declare in particles/teleport_member.h
   m_time_between_each_shot = teleportation_anim_duration + 100;
-}
-
-void Teleportation::UpdateTranslationStrings()
-{
-  m_name = _("Teleportation");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
 }
 
 bool Teleportation::p_Shoot ()
@@ -67,9 +60,9 @@ bool Teleportation::p_Shoot ()
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
-  //  Game::GetInstance()->interaction_enabled = false;
+  //  GameLoop::GetInstance()->interaction_enabled = false;
 
-  JukeBox::GetInstance()->Play("share", "weapon/teleport_start");
+  jukebox.Play("share", "weapon/teleport_start");
 
   ActiveCharacter().Hide();
   ActiveCharacter().body->MakeTeleportParticles(ActiveCharacter().GetPosition(), dst);
@@ -81,11 +74,11 @@ bool Teleportation::p_Shoot ()
 void Teleportation::Refresh()
 {
   if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
-    Camera::GetInstance()->SetXYabs(dst - Camera::GetInstance()->GetSize() / 2);
+    Camera::GetInstance()->GetInstance()->SetXYabs(dst - Camera::GetInstance()->GetSize()/2);
     ActiveCharacter().SetXY(dst);
-    ActiveCharacter().SetSpeed(0.0, 0.0);
+    ActiveCharacter().SetSpeed(0.0,0.0);
     ActiveCharacter().Show();
-    JukeBox::GetInstance()->Play("share", "weapon/teleport_end");
+    jukebox.Play("share","weapon/teleport_end");
     return;
   }
 }
@@ -93,15 +86,12 @@ void Teleportation::Refresh()
 void Teleportation::p_Select()
 {
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
-  Weapon::p_Select();
-  target_chosen = false;
 }
 
 void Teleportation::p_Deselect()
 {
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
-  Weapon::p_Deselect();
 }
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  ******************************************************************************/
 
 #include <iostream> //cerr
-#include "graphic/text.h"
+#include "text.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "interface/interface.h"
@@ -28,8 +28,7 @@ Text::Text(const std::string &new_txt,
            const Color& new_color,
            Font::font_size_t fsize,
            Font::font_style_t fstyle,
-           bool _shadowed,
-           bool _dummy)
+           bool _shadowed)
 {
   font_size = fsize;
   font_style = fstyle;
@@ -37,9 +36,8 @@ Text::Text(const std::string &new_txt,
   txt = new_txt;
   color = new_color;
   shadowed = _shadowed;
-  dummy = _dummy;
 
-  if( shadowed && !dummy ){
+  if( shadowed ){
     int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
     bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
     if (bg_offset < 1) bg_offset = 1;
@@ -58,29 +56,18 @@ Text::~Text()
 
 void Text::Render()
 {
-  if (!dummy)
-  {
-    if (txt=="") return;
+  if (txt=="") return;
 
-    if (max_width != 0) {
-      RenderMultiLines();
-      return;
-    }
-
-    Font* font = Font::GetInstance(font_size, font_style);
-
-    surf = font->CreateSurface(txt, color);
-    if ( shadowed ) {
-      background = font->CreateSurface(txt, black_color);
-    }
+  if (max_width != 0) {
+    RenderMultiLines();
+    return;
   }
-  else
-  {
-    int psize = Font::GetPointSize(font_size);
-    surf = Surface(Point2i(psize, psize), 0);
-    if ( shadowed ) {
-      background = Surface(Point2i(psize, psize), 0);
-    }
+
+  Font* font = Font::GetInstance(font_size, font_style);
+
+  surf = font->CreateSurface(txt, color);
+  if ( shadowed ) {
+    background = font->CreateSurface(txt, black_color);
   }
 }
 
@@ -163,25 +150,25 @@ void Text::RenderMultiLines()
     max_line_width = max_width;
   }
   Point2i size(max_line_width, (font->GetHeight()+2) * lines.size());
-  Surface tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
-  surf = tmp.DisplayFormatAlpha();
+  surf.NewSurface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  surf = surf.DisplayFormatAlpha();
 
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
-    tmp=(font->CreateSurface(lines.at(i), color)).DisplayFormatAlpha();
+    Surface tmp=(font->CreateSurface(lines.at(i), color)).DisplayFormatAlpha();
     surf.MergeSurface(tmp, Point2i(0, (font->GetHeight() + 2) * i));
   }
 
   // Render the shadow !
   if (!shadowed) return;
 
-  tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
-  background = tmp.DisplayFormatAlpha();
+  background.NewSurface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  background = background.DisplayFormatAlpha();
 
   // Putting pixels of each image in destination surface
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
-    tmp=(font->CreateSurface(lines.at(i), black_color)).DisplayFormatAlpha();
+    Surface tmp=(font->CreateSurface(lines.at(i), black_color)).DisplayFormatAlpha();
     background.MergeSurface(tmp, Point2i(0, (font->GetHeight() + 2) * i));
   }
 }
@@ -228,7 +215,7 @@ void Text::DrawCenterTop (const Point2i &position) const
 
 void Text::DrawTopLeft(const Point2i &position) const
 {
-  if(txt == "" && !dummy) return;
+  if(txt == "") return;
 
   Rectanglei dst_rect(position, surf.GetSize());
   AppWormux * app = AppWormux::GetInstance();
@@ -259,22 +246,6 @@ void Text::DrawCenterTopOnMap (const Point2i &pos) const
   AbsoluteDraw(surf, Point2i(pos.x - surf.GetWidth() / 2, pos.y) );
 }
 
-void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos) const
-{
-  // the cursor position is expressed in number of bytes, taking care of UTF8 character
-
-  //sort of a hacky way to get the cursor pos, but I couldn't find anything better...
-  uint txt_width = 1;
-  if (GetText() != "") {
-    Text txt_before_cursor(*this);
-    txt_before_cursor.Set(GetText().substr(0, cursor_pos));
-    txt_width = txt_before_cursor.GetWidth();
-  }
-  AppWormux::GetInstance()->video->window.VlineColor(text_pos.GetX()+txt_width,
-						     text_pos.GetY()+2,
-						     text_pos.GetY()+GetHeight()-4, c_white);
-}
-
 void Text::SetMaxWidth(uint max_w)
 {
   if (max_width == max_w)
@@ -287,17 +258,14 @@ void Text::SetMaxWidth(uint max_w)
 
 int Text::GetWidth() const
 {
-  if (txt=="" && !dummy) return 0;
+  if(txt=="") return 0;
   return surf.GetWidth();
 }
 
 int Text::GetHeight() const
 {
-  Font* font = Font::GetInstance(font_size, font_style);
-  if (txt=="" || dummy) {
-    return font->GetHeight();
-  }
-  return std::max(surf.GetHeight(), font->GetHeight());
+  if(txt=="") return 0;
+  return surf.GetHeight();
 }
 
 void DrawTmpBoxText(Font& font, Point2i pos,

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -45,8 +45,8 @@ private:
   uint val_barre; // current value in the progress bar
   enum orientation orientation;
 
-  long ComputeValue (long val) const;
-  uint ComputeBarValue (long val) const;
+  uint CalculeVal (long val) const;
+  uint CalculeValBarre (long val) const;
 
   typedef struct s_marqueur_t{
     Color color;

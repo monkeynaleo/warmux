@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,28 +19,25 @@
  * Picture widget: A widget containing a picture
  *****************************************************************************/
 
-#include "gui/picture_widget.h"
+#include "picture_widget.h"
 #include "graphic/colors.h"
 #include "graphic/sprite.h"
-#include "graphic/video.h"
-#include "include/app.h"
 #include "tool/resource_manager.h"
 
-PictureWidget::PictureWidget (const Point2i& _size)
+PictureWidget::PictureWidget (const Rectanglei &rect) : Widget(rect)
 {
-  size = _size;
   spr = NULL;
   disabled = false;
 }
 
-PictureWidget::PictureWidget (const Point2i& _size, const std::string& resource_id, bool scale)
+PictureWidget::PictureWidget (const Rectanglei &rect, const std::string& resource_id) : Widget(rect)
 {
-  size = _size;
   spr = NULL;
   disabled = false;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  SetSurface(resource_manager.LoadImage(res, resource_id), scale, scale);
+  Surface tmp = resource_manager.LoadImage(res, resource_id);
+  SetSurface(tmp, false);
   resource_manager.UnLoadXMLProfile( res);
 }
 
@@ -50,14 +47,14 @@ PictureWidget::~PictureWidget()
     delete spr;
 }
 
-void PictureWidget::SetSurface(const Surface& s, bool enable_scaling, bool antialiasing)
+void PictureWidget::SetSurface(const Surface& s, bool enable_scaling)
 {
-  NeedRedrawing();
+  need_redrawing = true;
 
   if (spr != NULL)
     delete spr;
 
-  spr = new Sprite(s, antialiasing);
+  spr = new Sprite(s);
   if (enable_scaling) {
     float scale = std::min( float(GetSizeY())/spr->GetHeight(),
                             float(GetSizeX())/spr->GetWidth() ) ;
@@ -68,7 +65,7 @@ void PictureWidget::SetSurface(const Surface& s, bool enable_scaling, bool antia
 
 void PictureWidget::SetNoSurface()
 {
-  NeedRedrawing();
+  need_redrawing = true;
 
   if (spr != NULL)
     delete spr;
@@ -76,10 +73,9 @@ void PictureWidget::SetNoSurface()
   spr = NULL;
 }
 
-void PictureWidget::Draw(const Point2i &/*mousePosition*/) const
+void PictureWidget::Draw(const Point2i &/*mousePosition*/,
+                         Surface& surf) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
-
   if (spr != NULL) {
     int x = GetPositionX() + ( GetSizeX()/2 ) - (spr->GetWidth()/2);
     int y = GetPositionY() + ( GetSizeY()/2 ) - (spr->GetHeight()/2);

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,9 +31,7 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
-#include "tool/euler_vector.h"
 //-----------------------------------------------------------------------------
-
 
 static inline uint TimeStamp()
 {
@@ -77,24 +75,6 @@ Action::Action (const char *is, DistantComputer* _creator)
     var.push_back(val);
     is += 4;
   }
-  crc = SDLNet_Read32(is);
-}
-
-uint Action::ComputeCRC() const
-{
-  uint crc = 0;
-  for(std::list<uint32_t>::const_iterator it = var.begin(); it != var.end(); it++)
-    crc += *it;
-  return crc;
-}
-
-bool Action::CheckCRC() const
-{
-  uint32_t crc;
-  crc = 0;
-  for(std::list<uint32_t>::const_iterator it = var.begin(); it != var.end(); it++)
-    crc += *it;
-  return this->crc == crc;
 }
 
 void Action::Init(Action_t type)
@@ -103,7 +83,6 @@ void Action::Init(Action_t type)
   var.clear();
   m_timestamp = TimeStamp();
   creator = NULL;
-  crc = 0;
 }
 
 void Action::Write(char *os) const
@@ -121,7 +100,6 @@ void Action::Write(char *os) const
     SDLNet_Write32(*val, os);
     os += 4;
   }
-  SDLNet_Write32(ComputeCRC(), os);
 }
 
 // Convert the action to a packet
@@ -129,6 +107,7 @@ void Action::WritePacket(char* &packet, int & size) const
 {
   size = GetSize();
   packet = (char*)malloc(size);
+
   Write(packet);
 }
 
@@ -168,13 +147,6 @@ void Action::Push(const Point2d& val)
 {
   Push(val.x);
   Push(val.y);
-}
-
-void Action::Push(const EulerVector &val)
-{
-  Push(val.x0);
-  Push(val.x1);
-  Push(val.x2);
 }
 
 void Action::Push(const std::string& val)
@@ -311,15 +283,6 @@ Point2d Action::PopPoint2d()
   return Point2d(x, y);
 }
 
-EulerVector Action::PopEulerVector()
-{
-  double x0, x1, x2;
-  x0 = PopDouble();
-  x1 = PopDouble();
-  x2 = PopDouble();
-  return EulerVector(x0, x1, x2);
-}
-
 //-------------  Send/Retrieve datas about Character
 
 void Action::StoreActiveCharacter()
@@ -331,16 +294,54 @@ void Action::StoreCharacter(uint team_no, uint char_no)
 {
   Push((int)team_no);
   Push((int)char_no);
-  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->StoreValue(this);
+  Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  Push(c->GetPosition());
+  Push((int)c->GetDirection());
+  Push(c->GetAbsFiringAngle());
+  Push(c->GetEnergy());
+  Push((int)c->GetLifeState());
+  Push((int)c->GetDiseaseDamage());
+  Push((int)c->GetDiseaseDuration());
+  Push(c->GetSpeed());
+  Push(c->GetExternForce());
+  Push(c->GetRopeAngle());
+  Push(c->GetRopeLength());
+  if(c->IsActiveCharacter()) { // If active character, store step animation
+    Push((int)true);
+    Push(ActiveTeam().ActiveCharacter().GetBody()->GetClothe());
+    Push(ActiveTeam().ActiveCharacter().GetBody()->GetMovement());
+    Push((int)ActiveTeam().ActiveCharacter().GetBody()->GetFrame());
+  } else {
+    Push((int)false);
+  }
 }
 
 void Action::RetrieveCharacter()
 {
   int team_no = PopInt();
   int char_no = PopInt();
-  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->GetValueFromAction(this);
+  Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->SetXY(PopPoint2i());
+  c->SetDirection((BodyDirection_t)PopInt());
+  c->SetFiringAngle(PopDouble());
+  c->SetEnergy(PopInt());
+  c->SetLifeState((alive_t)PopInt());
+  int disease_damage_per_turn = PopInt();
+  int disease_duration = PopInt();
+  c->SetDiseaseDamage(disease_damage_per_turn, disease_duration);
+  c->SetSpeedXY(PopPoint2d());
+  c->SetExternForceXY(PopPoint2d());
+  c->SetRopeAngle(PopDouble());
+  c->SetRopeLength(PopDouble());
+  if(PopInt()) { // If active characters, retrieve stored animation
+    if(c->GetTeam().IsActiveTeam())
+      ActiveTeam().SelectCharacter(char_no);
+    c->SetClothe(PopString());
+    c->SetMovement(PopString());
+    c->GetBody()->SetFrame((uint)PopInt());
+
+    c->GetBody()->UpdateWeaponPosition(c->GetPosition());
+  }
 }
 
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 #include "surface.h"
 
 // Forward declarations
-class Game;
+class GameLoop;
 
 class Font
 {
@@ -46,7 +46,6 @@ private:
   static Font* FONT_ARRAY[6];
   static Font* FONT_ARRAY_BOLD[6];
   static Font* FONT_ARRAY_ITALIC[6];
-  static bool  LIB_INIT;
 
   std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
@@ -74,7 +73,6 @@ public:
 
   // type: defined as static consts above
   static Font* GetInstance(font_size_t size, font_style_t style = FONT_NORMAL);
-  static void ReleaseInstances(void);
 
   ~Font();
 
@@ -87,7 +85,6 @@ public:
   void WriteCenterTop(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteCenter(const Point2i &pos, const std::string &txt, const Color &color);
 
-  static int GetPointSize(font_size_t size) { return FONT_SIZE[size]; };
   int GetWidth(const std::string &txt) const;
   int GetHeight() const;
   int GetHeight(const std::string &txt) const;

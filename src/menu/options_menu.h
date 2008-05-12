@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,6 @@ class OptionMenu : public Menu
 public:
    OptionMenu();
    ~OptionMenu();
-   static void CheckUpdates();
 
 private:
 
@@ -49,29 +48,18 @@ private:
    CheckBox *opt_display_wind_particles;
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
-   CheckBox *opt_scroll_on_border;
-   SpinButtonWithPicture * opt_scroll_border_size;
    CheckBox *full_screen;
    SpinButtonWithPicture *opt_max_fps;
 
    /* Sound options controllers */
-   ComboBox *cbox_sound_freq;
-   uint initial_vol_mus;
-   uint initial_vol_eff;
-   SpinButtonWithPicture *volume_music;
-   SpinButtonWithPicture *volume_effects;
-   CheckBox *music_cbox;
-   CheckBox *effects_cbox;
-
-   /* Misc options controllers */
-   CheckBox *opt_updates;
+   ListBox *lbox_sound_freq;
+   CheckBox *opt_music;
+   CheckBox *opt_sound_effects;
 
    void SaveOptions();
    void OnClick(const Point2i &mousePosition, int button);
    void OnClickUp(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
-   static uint fromVolume(uint vol);
-   static uint toVolume(uint level);
 
    bool signal_ok();
    bool signal_cancel();

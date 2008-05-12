@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,15 +20,15 @@
  * Contains health for a character.
  *****************************************************************************/
 
-#include "object/medkit.h"
+#include "medkit.h"
 #include <sstream>
 #include <iostream>
 #include "character/character.h"
 #include "game/game_mode.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/app.h"
-#include "include/action.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -41,6 +41,11 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/explosion.h"
+
+// XXX Unused !?
+//const uint SPEED = 5; // meter / seconde
+//const uint NB_MAX_TRY = 20;
+//const uint SPEED_PARACHUTE = 170; // ms par image
 
 Medkit::Medkit()
   : ObjBox("medkit") {
@@ -56,10 +61,27 @@ Medkit::Medkit()
   std::cout<<"anim set"<<std::endl;
 }
 
-void Medkit::ApplyBonus(Character * c)
+void Medkit::Draw()
 {
-  ApplyMedkit(c->AccessTeam(), *c);
-  Ghost();
+  anim->Draw(GetPosition());
+}
+
+void Medkit::Refresh()
+{
+  // If we touch a character, we remove the medkit
+  FOR_ALL_LIVING_CHARACTERS(equipe, ver)
+  {
+    if( ObjTouche(*ver) )
+    {
+      // here is the gift (truly a gift ?!? :)
+      ApplyMedkit (**equipe, *ver);
+      Ghost();
+      return;
+    }
+  }
+
+  // Refresh animation
+  if (!anim->IsFinished() && !parachute) anim->Update();
 }
 
 void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) const {
@@ -78,20 +100,8 @@ void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) const {
 // Static methods
 int Medkit::nbr_health = 24;
 
-void Medkit::LoadXml(xmlNode*  object)
+void Medkit::LoadXml(const xmlpp::Element * object)
 {
   XmlReader::ReadInt(object,"life_points",start_life_points);
   XmlReader::ReadInt(object,"energy_boost",nbr_health);
-}
-
-void Medkit::GetValueFromAction(Action * a)
-{
-  ObjBox::GetValueFromAction(a);
-  nbr_health = a->PopInt();
-}
-
-void Medkit::StoreValue(Action * a)
-{
-  ObjBox::StoreValue(a);
-  a->Push(nbr_health);
 }

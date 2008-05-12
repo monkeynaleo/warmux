@@ -44,7 +44,6 @@ class Chat
   TextList chat;
   Text* input;
   Text* msg;
-  std::string::size_type cursor_pos;
 
   bool check_input;
   uint last_time;

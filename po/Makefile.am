@@ -37,6 +37,8 @@ POTFILES = \
         src/game/game.cpp \
         src/game/game.h \
         src/game/game_init.cpp \
+        src/game/game_loop.cpp \
+        src/game/game_loop.h \
         src/game/game_mode.cpp \
         src/game/game_mode.h \
         src/game/time.cpp \
@@ -90,6 +92,7 @@ POTFILES = \
         src/gui/list_box_w_label.h \
         src/gui/msg_box.cpp \
         src/gui/msg_box.h \
+        src/gui/null_widget.cpp \
         src/gui/null_widget.h \
         src/gui/picture_text_cbox.cpp \
         src/gui/picture_text_cbox.h \
@@ -105,8 +108,6 @@ POTFILES = \
         src/gui/spin_button.h \
         src/gui/spin_button_picture.cpp \
         src/gui/spin_button_picture.h \
-	src/gui/tabs.cpp \
-	src/gui/tabs.h \
         src/gui/text_box.cpp \
         src/gui/text_box.h \
         src/gui/widget.cpp \
@@ -159,6 +160,8 @@ POTFILES = \
         src/menu/credits_menu.h \
         src/menu/game_menu.cpp \
         src/menu/game_menu.h \
+        src/menu/internet_menu.cpp \
+        src/menu/internet_menu.h \
         src/menu/main_menu.cpp \
         src/menu/main_menu.h \
         src/menu/map_selection_box.cpp \
@@ -173,8 +176,6 @@ POTFILES = \
         src/menu/network_teams_selection_box.h \
         src/menu/options_menu.cpp \
         src/menu/options_menu.h \
-        src/menu/pause_menu.cpp \
-        src/menu/pause_menu.h \
         src/menu/results_menu.cpp \
         src/menu/results_menu.h \
         src/menu/team_box.cpp \
@@ -183,8 +184,6 @@ POTFILES = \
         src/menu/teams_selection_box.h \
         src/network/chat.cpp \
         src/network/chat.h \
-        src/network/chatlogger.cpp \
-        src/network/chatlogger.h \
         src/network/distant_cpu.cpp \
         src/network/distant_cpu.h \
         src/network/download.cpp \
@@ -222,8 +221,6 @@ POTFILES = \
         src/particles/dark_smoke.h \
         src/particles/explosion_smoke.cpp \
         src/particles/explosion_smoke.h \
-        src/particles/fading_text.cpp \
-        src/particles/fading_text.h \
         src/particles/fire.cpp \
         src/particles/fire.h \
         src/particles/ground_particles.cpp \
@@ -266,6 +263,7 @@ POTFILES = \
         src/tool/file_tools.h \
         src/tool/i18n.cpp \
         src/tool/i18n.h \
+        src/tool/math_tools.cpp \
         src/tool/math_tools.h \
         src/tool/point.h \
         src/tool/random.cpp \
@@ -297,8 +295,6 @@ POTFILES = \
         src/weapon/blowtorch.h \
         src/weapon/bounce_ball.cpp \
         src/weapon/bounce_ball.h \
-        src/weapon/cluzooka.cpp src/weapon/cluzooka.h \
-        src/weapon/footbomb.cpp src/weapon/footbomb.h \
         src/weapon/cluster_bomb.cpp \
         src/weapon/cluster_bomb.h \
         src/weapon/construct.cpp \
@@ -311,8 +307,6 @@ POTFILES = \
         src/weapon/dynamite.h \
         src/weapon/explosion.cpp \
         src/weapon/explosion.h \
-        src/weapon/flamethrower.cpp \
-        src/weapon/flamethrower.h \
         src/weapon/gnu.cpp \
         src/weapon/gnu.h \
         src/weapon/grapple.cpp \
@@ -384,7 +378,7 @@ MSGID_BUGS_ADDRESS = wormux-dev@gna.org
 
 localedir=@LOCALEDIR@
 
-XGETTEXT = @XGETTEXT@
+XGETTEXT = @XGETTEXT@ 
 # add as automated comments all strings preceeding the gettexized line
 # since it seems that in most cases the comments are useful
 XGETTEXT_OPTIONS = -c --keyword=_ --keyword=N_

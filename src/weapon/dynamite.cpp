@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,9 +21,9 @@
  * Like a dynamite after all :)
  *****************************************************************************/
 
-#include "weapon/dynamite.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "dynamite.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 #include "character/character.h"
 #include "game/config.h"
@@ -45,6 +45,7 @@ class DynamiteStick : public WeaponProjectile
     void Refresh();
 
   protected:
+    void ShootSound();
     void SignalExplosion();
     void SignalOutOfMap();
     void SignalDrowning();
@@ -69,21 +70,18 @@ void DynamiteStick::Shoot(double strength)
   image->Scale(ActiveCharacter().GetDirection(), 1);
   image->SetCurrentFrame(0);
   image->Start();
-
-  // Sound must be launched before WeaponProjectile::Shoot
-  // in case that the projectile leave the battlefield
-  // during WeaponProjectile::Shoot (#bug 10241)
-  timeout_sound.Play("share","weapon/dynamite_fuze", -1);
-
   WeaponProjectile::Shoot(strength);
 }
 
 void DynamiteStick::Refresh()
 {
   image->Update();
-  if (image->IsFinished())
-    m_energy = 0;
-  WeaponProjectile::Refresh();
+  if (image->IsFinished()) Explosion();
+}
+
+void DynamiteStick::ShootSound()
+{
+  timeout_sound.Play("share","weapon/dynamite_fuze", -1);
 }
 
 void DynamiteStick::SignalExplosion()
@@ -105,17 +103,9 @@ void DynamiteStick::SignalDrowning()
 Dynamite::Dynamite() :
     WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Dynamite");
   m_category = THROW;
   ReloadLauncher();
-}
-
-void Dynamite::UpdateTranslationStrings()
-{
-  m_name = _("Dynamite");
-  /*TODO: FILL IT */
-  /* m_help = _(""); */
 }
 
 WeaponProjectile * Dynamite::GetProjectileInstance()

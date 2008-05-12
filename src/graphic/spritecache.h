@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,8 +27,7 @@
 
 #include <vector>
 #include "include/base.h"
-#include "graphic/spriteframe.h"
-#include "graphic/surface.h"
+#include "spriteframe.h"
 
 class Sprite;
 
@@ -44,8 +43,8 @@ public:
   Surface GetSurfaceForAngle(double angle) const;
 
   SpriteFrameCache();
-  void CreateRotationCache(Surface &surface, unsigned int cache_size, bool smooth);
-  void CreateFlippingCache(Surface &surface, bool smooth);
+  void CreateRotationCache(Surface &surface, unsigned int cache_size);
+  void CreateFlippingCache(Surface &surface);
 };
 
 class SpriteCache

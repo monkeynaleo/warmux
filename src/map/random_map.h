@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -88,13 +88,13 @@ class RandomMap {
    RandomMap(Profile *profile, const int width, const int height);
    void SetSize(const int width, const int height);
    const Point2i GetSize() const { return Point2i(width, height); };
-   int GetWidth() const { return width; };
-   int GetHeight() const { return height; };
+   const int GetWidth() const { return width; };
+   const int GetHeight() const { return height; };
    void AddElement(const Surface * object, const Point2i& position);
    void DrawElement();
    void SetBorderSize(const double border) { border_size = border; };
    void SetBorderColor(const Color& color) { border_color = color; };
-   bool IsOpen() const { return is_open; };
+   const bool IsOpen() const { return is_open; };
    void Generate(InfoMap::Island_type generator);
    void GenerateIsland();
    void GeneratePlatforms();

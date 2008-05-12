@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,9 +19,9 @@
  * Bazooka, a simple rocket launcher
  *****************************************************************************/
 
-#include "weapon/bazooka.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "bazooka.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 #include "game/config.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
@@ -33,14 +33,10 @@
 
 class BazookaRocket : public WeaponProjectile
 {
-private:
   ParticleEngine smoke_engine;
-  SoundSample flying_sound;
 public:
   BazookaRocket(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
-  void Explosion();
-  void Shoot(double strength);
 protected:
   void SignalOutOfMap();
   void SignalDrowning();
@@ -68,37 +64,16 @@ void BazookaRocket::Refresh()
   }
 }
 
-void BazookaRocket::Shoot(double strength)
-{
-  // Sound must be launched before WeaponProjectile::Shoot
-  // in case that the projectile leave the battlefield
-  // during WeaponProjectile::Shoot (#bug 10241)
-  flying_sound.Play("share","weapon/rocket_flying", -1);
-
-  WeaponProjectile::Shoot(strength);
-}
-
 void BazookaRocket::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
-
-  flying_sound.Stop();
 }
 
 void BazookaRocket::SignalDrowning()
 {
   smoke_engine.Stop();
   WeaponProjectile::SignalDrowning();
-
-  flying_sound.Stop();
-}
-
-void BazookaRocket::Explosion()
-{
-  WeaponProjectile::Explosion();
-
-  flying_sound.Stop();
 }
 
 //-----------------------------------------------------------------------------
@@ -106,8 +81,8 @@ void BazookaRocket::Explosion()
 Bazooka::Bazooka() :
   WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Bazooka");
+  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
   m_category = HEAVY;
   ReloadLauncher();
 }
@@ -116,12 +91,6 @@ WeaponProjectile * Bazooka::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>
       (new BazookaRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
-}
-
-void Bazooka::UpdateTranslationStrings()
-{
-  m_name = _("Bazooka");
-  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
 }
 
 std::string Bazooka::GetWeaponWinString(const char *TeamName, uint items_count ) const

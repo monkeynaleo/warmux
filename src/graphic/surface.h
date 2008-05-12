@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -72,7 +72,8 @@ public:
    *
    * Should be used carefully.
    */
-  inline SDL_Surface *GetSurface() { return surface; };
+  inline SDL_Surface *GetSurface()
+  { return surface; };
 
   void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
   int SetAlpha(Uint32 flags, Uint8 alpha);
@@ -101,7 +102,6 @@ public:
   int VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color);
   int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
-  int AAFadingLineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color1, const Color &color2);
   int CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
   int FilledCircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
   int PieColor(const uint &x, const uint &y, const uint &rad, const int &start, const int &end, const Color &color);
@@ -120,7 +120,7 @@ public:
 
   int ImgLoad(const std::string& filename);
   int ImgSave(const std::string& filename);
-  Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth=1 /* auto-aliasing = ON */);
+  Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
   Uint32 GetPixel(int x, int y) const;

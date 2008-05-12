@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,9 +20,8 @@
  * infomations or leave the game.
  *****************************************************************************/
 
-#include "menu/main_menu.h"
-#include "gui/box.h"
-#include "gui/big/button_pic.h"
+#include "main_menu.h"
+#include "gui/button_text.h"
 #include "game/config.h"
 #include "graphic/text.h"
 #include "graphic/video.h"
@@ -31,7 +30,6 @@
 #include "sound/jukebox.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
-#include "tool/stats.h"
 
 #ifndef WIN32
 #include <dirent.h>
@@ -44,62 +42,97 @@ const int DEFAULT_SCREEN_HEIGHT = 768 ;
 
 MainMenu::~MainMenu()
 {
+ // delete skin_left;
+ // delete skin_right;
   delete version_text;
   delete website_text;
-  StatStop("Main:Menu");
 }
 
 MainMenu::MainMenu() :
     Menu("main_menu/bg_main", vNo)
 {
-  uint window_width = AppWormux::GetInstance()->video->window.GetWidth();
+  int x_button;
+  double y_scale;
 
-  Point2i size(120,110);
-  Box* box = new GridBox(window_width, size, true);
+  int button_width = 402;
+  int button_height = 64;
 
-  play = new ButtonPic(_("Play"), "menu/ico_play", size);
-  box->AddWidget(play);
+  y_scale = (double)AppWormux::GetInstance()->video->window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
 
-  network = new ButtonPic(_("Network Game"), "menu/ico_network_menu", size);
-  box->AddWidget(network);
+  x_button = AppWormux::GetInstance()->video->window.GetWidth()/2 - button_width/2;
 
-  options = new ButtonPic(_("Options"), "menu/ico_options_menu", size);
-  box->AddWidget(options);
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
-  help = new ButtonPic(_("Help"), "menu/ico_help", size);
-  box->AddWidget(help);
+  /* skin_left = new Sprite( resource_manager.LoadImage(res,"main_menu/skin_1"));
+   skin_right = new Sprite( resource_manager.LoadImage(res,"main_menu/skin_2"));
 
-  credits = new ButtonPic(_("Credits"), "menu/ico_credits", size);
-  box->AddWidget(credits);
+  s_title = resource_manager.LoadImage(res,"main_menu/title");
+  title = new PictureWidget(Rectanglei(AppWormux::GetInstance()->video->window.GetWidth()/2  - s_title.GetWidth()/2 + 10, 0, 648, 168));
+  title->SetSurface(s_title); */
 
-  quit =  new ButtonPic(_("Quit"), "menu/ico_quit", size);
-  box->AddWidget(quit);
+  int y = int(290 * y_scale) ;
+  const int y2 = AppWormux::GetInstance()->video->window.GetHeight() + VERSION_DY -20 - button_height;
 
-  widgets.AddWidget(box);
+  int dy = std::max((y2-y)/3, button_height);
+  if(Config::GetInstance()->IsNetworkActivated())
+    dy = std::max((y2-y)/4, button_height);
 
-  // We must "pack" all the widgets before centering the box to compute its size
-  box->Pack();
+  play = new ButtonText(Point2i(x_button, y),
+                        res, "main_menu/button",
+                        _("Play"),
+                        Font::FONT_LARGE, Font::FONT_NORMAL);
+  y += dy;
 
-  uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
-  uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
-  box->SetPosition(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
+  if(Config::GetInstance()->IsNetworkActivated()) {
+    network = new ButtonText( Point2i(x_button, y),
+                              res, "main_menu/button",
+                              _("Network Game"),
+                              Font::FONT_LARGE, Font::FONT_NORMAL );
+    y += dy;
+  } else {
+    network = NULL;
+  }
 
-  widgets.Pack();
+  options = new ButtonText(Point2i(x_button, y),
+                           res, "main_menu/button",
+                           _("Options"),
+                           Font::FONT_LARGE, Font::FONT_NORMAL);
+  y += dy;
 
-  std::string s("Version "+Constants::WORMUX_VERSION);
+  infos =  new ButtonText(Point2i(x_button, y),
+                          res, "main_menu/button",
+                          _("Credits"),
+                          Font::FONT_LARGE, Font::FONT_NORMAL);
+  y += dy;
+
+  quit =  new ButtonText(Point2i(x_button, y),
+                         res, "main_menu/button",
+                         _("Quit"),
+                         Font::FONT_LARGE, Font::FONT_NORMAL);
+
+  widgets.AddWidget(play);
+  if(Config::GetInstance()->IsNetworkActivated())
+    widgets.AddWidget(network);
+  widgets.AddWidget(options);
+  widgets.AddWidget(infos);
+  widgets.AddWidget(quit);
+ // widgets.AddWidget(title);
+
+  resource_manager.UnLoadXMLProfile( res);
+
+  std::string s("Version "+Constants::VERSION);
   version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
   std::string s2(Constants::WEB_SITE);
   website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
-  JukeBox::GetInstance()->PlayMusic("menu");
-
-  StatStart("Main:Menu");
+  if(!jukebox.IsPlayingMusic())
+     jukebox.PlayMusic("menu");
 }
 
 void MainMenu::button_click() const
 {
-  JukeBox::GetInstance()->Play("share", "menu/clic");
+  jukebox.Play("share", "menu/clic");
 }
 
 void MainMenu::SelectAction(const Widget *w)
@@ -113,10 +146,7 @@ void MainMenu::SelectAction(const Widget *w)
   } else if(w == options) {
     choice = OPTIONS;
     close_menu = true;
-  } else if(w == help) {
-    choice = HELP;
-    close_menu = true;
-  } else if(w == credits) {
+  } else if(w == infos) {
     choice = CREDITS;
     close_menu = true;
   } else if(w == quit) {
@@ -155,9 +185,9 @@ bool MainMenu::signal_cancel()
 
 bool MainMenu::signal_ok()
 {
-  Widget * w = widgets.GetCurrentKeyboardSelectedWidget();
+  Widget * w = widgets.GetCurrentSelectedWidget();
   if(w != NULL) {
-    SelectAction(widgets.GetCurrentKeyboardSelectedWidget());
+    SelectAction(widgets.GetCurrentSelectedWidget());
   } else {
     choice = PLAY;
   }
@@ -169,6 +199,9 @@ void MainMenu::DrawBackground()
   Surface& window = AppWormux::GetInstance()->video->window;
 
   Menu::DrawBackground();
+  // skin_left->Blit(window, 0, window.GetHeight() - skin_left->GetHeight());
+  // skin_right->Blit(window, window.GetWidth()  - skin_right->GetWidth(),
+  //                  window.GetHeight() - skin_right->GetHeight());
 
   version_text->DrawCenter( Point2i(window.GetWidth()/2,
                             window.GetHeight() + VERSION_DY));
@@ -177,3 +210,33 @@ void MainMenu::DrawBackground()
 
 }
 
+void MainMenu::Redraw(const Rectanglei& rect, Surface &window)
+{
+  Menu::Redraw(rect, window);
+
+  // we never had to redraw texts
+  // but sometimes we need to redraw the skins...
+
+  /*Rectanglei dest(0, window.GetHeight() - skin_left->GetHeight(),
+                    skin_left->GetWidth(), skin_left->GetHeight());
+  dest.Clip(rect);
+
+  Rectanglei src(rect.GetPositionX() - 0,
+                 rect.GetPositionY() - (window.GetHeight() - skin_left->GetHeight()),
+                 dest.GetSizeX(), dest.GetSizeY());
+
+  skin_left->Blit(window, src, dest.GetPosition());
+
+  Rectanglei dest2(window.GetWidth()  - skin_right->GetWidth(),
+                   window.GetHeight() - skin_right->GetHeight(),
+                   skin_right->GetWidth(), skin_right->GetHeight());
+  dest2.Clip(rect);
+
+  Rectanglei src2(dest2.GetPositionX() - (window.GetWidth()  - skin_right->GetWidth()),
+                  dest2.GetPositionY() - (window.GetHeight() - skin_right->GetHeight()),
+                  dest2.GetSizeX(), dest2.GetSizeY());
+
+  skin_right->Blit(window, src2, dest2.GetPosition());*/
+
+
+}

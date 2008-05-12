@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 
 #include "constant.h"
 
-const std::string Constants::WORMUX_VERSION = PACKAGE_VERSION;
+const std::string Constants::VERSION = PACKAGE_VERSION;
 
 const std::string Constants::ENV_DATADIR = "WORMUX_DATADIR";
 const std::string Constants::ENV_LOCALEDIR = "WORMUX_LOCALEDIR";
@@ -32,7 +32,9 @@ const std::string Constants::EMAIL = "wormux-dev .AT. gna .DOT. org";
 
 // Size min/max of the map (pixels)
 const Point2i Constants::MAP_MIN_SIZE = Point2i(100, 200);
-const int Constants::MAP_MAX_SIZE = 6000*6000;
+const int Constants::MAP_MAX_SIZE = 4000*4000;
+
+Constants * Constants::singleton = NULL;
 
 Constants::Constants()
 {
@@ -47,4 +49,11 @@ Constants::Constants()
   AUTHORS.push_back ("Yannig PERRE");
   AUTHORS.push_back ("Olivie SERRES");
   AUTHORS.push_back ("Victor STINNER");
+}
+
+Constants * Constants::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Constants();
+  }
+  return singleton;
 }

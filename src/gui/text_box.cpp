@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,125 +20,127 @@
  *****************************************************************************/
 
 #include <SDL_keyboard.h>
-#include "gui/text_box.h"
+#include "text_box.h"
 #include "graphic/text.h"
-#include "tool/text_handling.h"
-#include "tool/copynpaste.h"
 
-TextBox::TextBox (const std::string &label, uint max_width,
+TextBox::TextBox (const std::string &label, const Rectanglei &rect,
                   Font::font_size_t fsize, Font::font_style_t fstyle) :
-  Label(label, max_width, fsize, fstyle),
-  max_nb_chars(0),
+  Label(label, rect, fsize, fstyle),
   cursor_pos(label.size())
 {
-  Widget::SetBorder(defaultOptionColorRect, 1);
-  Widget::SetHighlightBgColor(highlightOptionColorBox);
-}
-
-void TextBox::BasicSetText(std::string const &new_txt)
-{
-  std::string _new_txt = new_txt;
-
-  if (max_nb_chars != 0 && _new_txt.size() > max_nb_chars)
-    _new_txt.resize(max_nb_chars);
-
-  Font* font = Font::GetInstance(GetFontSize(), GetFontStyle());
-
-  if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
-    Label::SetText(_new_txt);
-  }
-  else
-    cursor_pos = GetText().size();
 }
 
 void TextBox::SetText(std::string const &new_txt)
 {
-  BasicSetText(new_txt);
+  Font* font = Font::GetInstance(font_size, font_style);
 
-  cursor_pos = GetText().size();
-}
-
-void TextBox::SetMaxNbChars(unsigned int nb_chars)
-{
-  max_nb_chars = nb_chars;
-}
-
-bool TextBox::SendKey(const SDL_keysym& key)
-{
-  bool used = true;
-
-  NeedRedrawing();
-
-  std::string new_txt = GetText();
-
-  used = TextHandle(new_txt, cursor_pos, key);
-
-  if (new_txt != GetText())
-    BasicSetText(new_txt);
-
-  return used;
-}
-
-void TextBox::Draw(const Point2i &mousePosition) const
-{
-  Label::Draw(mousePosition);
-  txt_label->DrawCursor(position, cursor_pos);
-}
-
-Widget* TextBox::ClickUp(const Point2i &, uint button)
-{
-  bool used = true;
-
-  NeedRedrawing();
-  if (button == SDL_BUTTON_MIDDLE)
-  {
-    std::string new_txt = GetText();
-    used = RetrieveBuffer(new_txt, cursor_pos);
-
-    if (new_txt != GetText())
-      BasicSetText(new_txt);
+  if (font->GetWidth(new_txt) < GetSizeX() - 5) {
+    Label::SetText(new_txt);
+    cursor_pos = new_txt.size();
   }
-  return used ? this : NULL;
 }
 
-
-PasswordBox::PasswordBox(const std::string &label, uint max_width,
-                         Font::font_size_t fsize, Font::font_style_t fstyle)
-  : TextBox(label, max_width, fsize, fstyle)
+void TextBox::SetCursor(std::string::size_type pos)
 {
-}
-
-void PasswordBox::BasicSetText(std::string const &new_txt)
-{
-  std::string _new_txt = new_txt;
-
-  if (max_nb_chars != 0 && _new_txt.size() > max_nb_chars)
-    _new_txt.resize(max_nb_chars);
-  clear_text = _new_txt;
-
-  //printf("Real text: %s\n", clear_text.c_str());
-
-  Font* font = Font::GetInstance(GetFontSize(), GetFontStyle());
-
-  if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
-    Label::SetText( std::string(clear_text.size(), '*') );
+  if(pos > GetText().size())
+  {
+    cursor_pos = GetText().size();
   }
   else
-    cursor_pos = GetText().size();
+  {
+    cursor_pos = pos;
+  }
 }
 
-bool PasswordBox::SendKey(const SDL_keysym& key)
+void TextBox::SendKey(const SDL_keysym& key)
 {
-  bool used = true;
+  need_redrawing = true;
 
-  NeedRedrawing();
+  std::string::size_type old_cursor_pos = cursor_pos;
+  std::string::size_type length = GetText().size();
+  std::string new_txt = GetText();
 
-  std::string new_txt = clear_text;
+  switch (key.sym){
+  case SDLK_BACKSPACE:
+    if(cursor_pos != 0)
+      {
+	while((new_txt[--cursor_pos] & 0xc0) == 0x80)
+	  {
+	    new_txt.erase(cursor_pos, 1);
+	  }
+	new_txt.erase(cursor_pos, 1);
+	SetText(new_txt);
+      }
+    break;
+  case SDLK_LEFT:
+    if(cursor_pos != 0)
+      {
+	while((new_txt[--cursor_pos] & 0xc0) == 0x80);
+      }
+    break;
+  case SDLK_RIGHT:
+    if(cursor_pos < new_txt.size())
+      {
+	while((new_txt[++cursor_pos] & 0xc0) == 0x80);
+      }
+    break;
 
-  used = TextHandle(new_txt, cursor_pos, key);
+  case SDLK_TAB:
+  case SDLK_CLEAR:
+  case SDLK_ESCAPE:
+  case SDLK_DELETE:
+  case SDLK_UP:
+  case SDLK_DOWN:
+  case SDLK_INSERT:
+  case SDLK_HOME:
+  case SDLK_END:
+  case SDLK_PAGEUP:
+  case SDLK_PAGEDOWN:
+    break;
 
-  if (new_txt != GetText())
-    BasicSetText(new_txt);
+  default:
+    if(key.unicode > 0)
+    {
+      if(key.unicode < 0x80) { // 1 byte char
+        new_txt.insert(cursor_pos++, 1, (char)key.unicode);
+      }
+      else if (key.unicode < 0x800) // 2 byte char
+      {
+        new_txt.insert(cursor_pos++, 1, (char)(((key.unicode & 0x7c0) >> 6) | 0xc0));
+        new_txt.insert(cursor_pos++, 1, (char)((key.unicode & 0x3f) | 0x80));
+      }
+      else // if (key.unicode < 0x10000) // 3 byte char
+      {
+        new_txt.insert(cursor_pos++, 1, (char)(((key.unicode & 0xf000) >> 12) | 0xe0));
+        new_txt.insert(cursor_pos++, 1, (char)(((key.unicode & 0xfc0) >> 6) | 0x80));
+        new_txt.insert(cursor_pos++, 1, (char)((key.unicode & 0x3f) | 0x80));
+      }
+    }
+    SetText(new_txt);
+    break;
+  }
+  
+  if (GetText().size() == length)
+    cursor_pos = old_cursor_pos;
+}
 
-  return used;
+void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
+{
+  if (!hidden)
+    {
+      if(have_focus)
+        surf.BoxColor(*this, highlightOptionColorBox);
+
+      surf.RectangleColor(*this, defaultOptionColorRect);
+
+      Label::Draw(mousePosition, surf);
+
+      //sort of a hacky way to get the cursor pos, but I couldn't find anything better...
+      Text txt_before_cursor(*txt_label);
+      txt_before_cursor.Set(GetText().substr(0, cursor_pos));
+
+      surf.VlineColor(GetPositionX()+txt_before_cursor.GetWidth(),
+              GetPositionY()+2,
+              GetPositionY()+GetSizeY()-4, c_white);
+    }
 }

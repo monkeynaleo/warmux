@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,21 +19,21 @@
  * Blowtorch - burns holes into walls
  *****************************************************************************/
 
-#include "weapon/blowtorch.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "blowtorch.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 #include "character/character.h"
-#include "character/move.h"
-#include "character/body.h"
 #include "include/action_handler.h"
+#include "tool/i18n.h"
 #include "map/map.h"
-#include "game/game_mode.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "character/move.h"
+#include "character/body.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
@@ -43,24 +43,18 @@ class BlowtorchConfig : public WeaponConfig
 {
   public:
     BlowtorchConfig();
-    virtual void LoadXml(xmlNode* elem);
+    virtual void LoadXml(xmlpp::Element* elem);
 
     uint range;
 };
 
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
-  UpdateTranslationStrings();
-
+  m_name = _("Blowtorch");
+  m_help = _("Howto use it : keep space key pressed\nAngle : Up/Down\nan ammo per turn");
   m_category = TOOL;
   m_time_between_each_shot = MIN_TIME_BETWEEN_DIG;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile, "blowtorch_fire"));
-}
-
-void Blowtorch::UpdateTranslationStrings()
-{
-  m_name = _("Blowtorch");
-  m_help = _("Howto use it : keep space key pressed\nAngle : Up/Down\nan ammo per turn");
 }
 
 void Blowtorch::p_Deselect()
@@ -78,6 +72,7 @@ bool Blowtorch::IsInUse() const
 void Blowtorch::ActionStopUse()
 {
   SignalTurnEnd();
+  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
 bool Blowtorch::p_Shoot()
@@ -97,9 +92,18 @@ bool Blowtorch::p_Shoot()
   return true;
 }
 
+void Blowtorch::RepeatShoot() const
+{
+  uint time = Time::GetInstance()->Read() - m_last_fire_time;
+
+  if (time >= m_time_between_each_shot) {
+    NewActionWeaponShoot();
+  }
+}
+
 void Blowtorch::HandleKeyPressed_Shoot(bool shift)
 {
-  ActiveCharacter().BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
+  ActiveCharacter().BeginMovementRL(PAUSE_MOVEMENT);
   ActiveCharacter().SetRebounding(false);
   ActiveCharacter().body->StartWalk();
 
@@ -109,7 +113,7 @@ void Blowtorch::HandleKeyPressed_Shoot(bool shift)
 void Blowtorch::HandleKeyRefreshed_Shoot(bool)
 {
   if (EnoughAmmoUnit()) {
-    Weapon::RepeatShoot();
+    RepeatShoot();
   }
 }
 
@@ -125,7 +129,7 @@ BlowtorchConfig& Blowtorch::cfg()
   return static_cast<BlowtorchConfig&>(*extra_params);
 }
 
-void BlowtorchConfig::LoadXml(xmlNode* elem)
+void BlowtorchConfig::LoadXml(xmlpp::Element* elem)
 {
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);

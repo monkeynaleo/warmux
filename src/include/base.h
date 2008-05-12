@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #define BASE_H
 //-----------------------------------------------------------------------------
 
-// Debug mode can be deactivated by adding -DRELEASE when compiling
+// Mode debogage ? Peut-être désactivé en ajoutant -DRELEASE à la compilation
 #ifndef DEBUG
 #  define RELEASE
 #endif

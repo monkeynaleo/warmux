@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
  * Base classes for weapons configuration.
  *****************************************************************************/
 
-#include "weapon/weapon_cfg.h"
+#include "weapon_cfg.h"
 #include <iostream>
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
-void EmptyWeaponConfig::LoadXml(xmlNode* /*elem*/)
+void EmptyWeaponConfig::LoadXml(xmlpp::Element */*elem*/)
 {}
 
 //-----------------------------------------------------------------------------
@@ -32,7 +32,7 @@ void EmptyWeaponConfig::LoadXml(xmlNode* /*elem*/)
 WeaponConfig::WeaponConfig()
 { damage = 10; }
 
-void WeaponConfig::LoadXml(xmlNode* elem)
+void WeaponConfig::LoadXml(xmlpp::Element *elem)
 {
   XmlReader::ReadUint(elem, "damage", damage);
 }
@@ -47,10 +47,9 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
   particle_range = explosion_range;
   blast_range = 0 ;
   blast_force = 0 ;
-  speed_on_hit = 0 ;
 }
 
-void ExplosiveWeaponConfig::LoadXml(xmlNode* elem)
+void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem)
 {
   WeaponConfig::LoadXml (elem);
   XmlReader::ReadUint(elem, "timeout", timeout);
@@ -59,7 +58,6 @@ void ExplosiveWeaponConfig::LoadXml(xmlNode* elem)
   XmlReader::ReadUint(elem, "particle_range", particle_range);
   XmlReader::ReadUint(elem, "blast_range", blast_range);
   XmlReader::ReadUint(elem, "blast_force", blast_force);
-  XmlReader::ReadUint(elem, "speed_on_hit", speed_on_hit);
 }
 
 //-----------------------------------------------------------------------------

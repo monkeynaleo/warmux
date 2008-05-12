@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@
  * Calculate frame per second.
  *****************************************************************************/
 
-#include "graphic/fps.h"
-#include "graphic/text.h"
+#include "fps.h"
+#include "text.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "tool/i18n.h"
@@ -65,11 +65,11 @@ void FramePerSecond::Refresh()
 {
   uint nv_temps = SDL_GetTicks();
 
-  // Not yet time to compute: exit!
+  // Pas encore l'heure de recalculer : exit !
   if (nv_temps <= time_in_second)
     return;
 
-  // Shift position!
+  // On décale !
   while (time_in_second < nv_temps){
     time_in_second += 1000;
     nb_frames.pop_back();
@@ -78,7 +78,7 @@ void FramePerSecond::Refresh()
       nb_valid_values++;
   }
 
-  // Recompute average
+  // Recalcule la average
   if (0 < nb_valid_values){
     average = 0;
     std::list<uint>::const_iterator it=nb_frames.begin();

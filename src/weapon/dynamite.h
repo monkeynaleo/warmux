@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 #ifndef DYNAMITE_H
 #define DYNAMITE_H
 
-#include "weapon/weapon_launcher.h"
+#include "weapon_launcher.h"
 #include "include/base.h"
 
 // L'arme dynamite
@@ -35,7 +35,6 @@ class Dynamite : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
   public:
     Dynamite();
-    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
 };
 #endif /* DYNAMITE_H */

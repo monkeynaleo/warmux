@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,10 +19,19 @@
  *  Handle the game time. The game can be paused.
  *****************************************************************************/
 
-#include "game/time.h"
+#include "time.h"
 #include <SDL.h>
 #include <sstream>
 #include <iomanip>
+
+Time * Time::singleton = NULL;
+
+Time * Time::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Time();
+  }
+  return singleton;
+}
 
 bool Time::IsGamePaused() const {
   return is_game_paused;
@@ -57,7 +66,7 @@ void Time::Refresh(){
   - current node is server and game loop is not in Playing state
   - game don't use network
   if((ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()) ||
-     (Network::GetInstance()->IsServer() && Game::GetInstance()->ReadState() != Game::PLAYING) ||
+     (Network::GetInstance()->IsServer() && GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) ||
      (!Network::GetInstance()->IsServer() && !Network::GetInstance()->IsClient()) ||
      current_time < max_time)
   */
@@ -65,13 +74,12 @@ void Time::Refresh(){
   //RefreshMaxTime(current_time);
 }
 
-void Time::TogglePause()
-{
-  if (IsGamePaused())
-    Continue();
-  else
-    Pause();
+/*
+void Time::RefreshMaxTime(uint updated_max_time){
+  if(updated_max_time > max_time)
+    max_time = updated_max_time;
 }
+*/
 
 void Time::Pause(){
   if (is_game_paused)

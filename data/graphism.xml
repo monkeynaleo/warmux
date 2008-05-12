@@ -3,7 +3,7 @@
 <resources>
 
 <section name="main_menu">
-  <surface name="bg_main" file="menu/background.png" />
+  <surface name="bg_main" file="menu//background.png" />
 
   <sprite name="button">
     <image file="menu/button.png">
@@ -14,26 +14,10 @@
 
 <section name="menu">
 
-  <surface name="ico_warning" file="interface/warning.png" />
-
-  <!-- backgrounds -->
   <surface name="bg_option" file="menu/background_options.png" />
   <surface name="bg_play" file="menu/background_play.png" />
   <surface name="bg_network" file="menu/background_network.png" />
   <surface name="bg_results" file="menu/background_play.png" />
-
-  <!-- buttons to access menus -->
-  <surface name="ico_back_to_battle" file="menu/i_backtobattle.png" />
-  <surface name="ico_quit_battle" file="menu/i_quit.png" />
-
-  <surface name="ico_play" file="menu/i_play.png" />
-  <surface name="ico_options_menu" file="menu/i_options.png" />
-  <surface name="ico_network_menu" file="menu/i_network.png" />
-  <surface name="ico_credits" file="menu/i_credits.png" />
-  <surface name="ico_help" file="menu/i_help.png" />
-  <surface name="ico_quit" file="menu/i_quit.png" />
-
-  <surface name="ico_update" file="menu/i_update.png" />
 
   <surface name="video_label" file="menu/video_label.png" />
   <surface name="config_label" file="menu/config_label.png" />
@@ -41,7 +25,6 @@
   <surface name="teams_label" file="menu/teams_label.png" />
   <surface name="map_label" file="menu/map_label.png" />
   <surface name="mode_label" file="menu/mode_label.png" />
-
 
   <surface name="enabled" file="menu/enabled.png" />
   <surface name="disabled_front" file="menu/disabled_front.png" />
@@ -51,12 +34,8 @@
   <surface name="annulus_foreground" file="menu/annulus_foreground.png" />
   <color name="annulus_progress_color" r="4" g="77" b="134" a="255" />
 
-  <!-- Various options -->
-  <surface name="team_number" file="menu/team_number.png" />
-
   <!-- Sound options -->
 
-  <surface name="sound_frequency" file="menu/sound_frequency.png" />
   <surface name="music_enable" file="menu/music_enable.png" />
   <surface name="sound_effects_enable" file="menu/sound_effects_enable.png" />
 
@@ -66,7 +45,7 @@
   <surface name="display_name" file="menu/display_name.png" />
   <surface name="display_wind_particles" file="menu/display_wind_particles.png" />
   <surface name="fullscreen" file="menu/fullscreen.png" />
-  <surface name="scroll_on_border" file="menu/scroll_on_border.png" />
+  <surface name="scroll_on_border" file="menu/scroll_on_border.png" />  
   <surface name="fps" file="menu/fps.png"/>
   <surface name="resolution" file="menu/resolution.png"/>
 
@@ -79,11 +58,8 @@
   <!-- For results menu -->
   <surface name="podium" file="menu/podium.png" />
 
-  <!-- Random map -->
-  <surface name="random_map" file="map/random_map.jpg" />
-
   <!-- Buttons -->
-
+  
   <sprite name="send_txt">
     <image file="menu/send_txt.png">
       <grid pos="0,0" size="16,16" array="2,1" />
@@ -94,72 +70,61 @@
     <image file="menu/validate.png">
       <grid pos="0,0" size="32,32" array="1,2" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="annuler">
     <image file="menu/cancel.png">
       <grid pos="0,0" size="32,32" array="1,2" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="check">
     <image file="menu/check.png">
       <grid pos="0,0" size="16,16" array="1,2" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="plus">
     <image file="menu/plus.png">
       <grid pos="0,0" size="5,10" array="2,1" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="big_plus">
     <image file="menu/right.png">
       <grid pos="0,0" size="20,20" array="2,1" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="really_big_plus">
     <image file="menu/big_right.png">
       <grid pos="0,0" size="40,40" array="2,1" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="minus">
     <image file="menu/minus.png">
       <grid pos="0,0" size="5,10" array="2,1" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="big_minus">
     <image file="menu/left.png">
       <grid pos="0,0" size="20,20" array="2,1" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="really_big_minus">
     <image file="menu/big_left.png">
       <grid pos="0,0" size="40,40" array="2,1" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="up">
     <image file="menu/up.png">
       <grid pos="0,0" size="10,5" array="1,2" />
     </image>
-  </sprite>
+  </sprite> 
   <sprite name="down">
     <image file="menu/down.png">
       <grid pos="0,0" size="10,5" array="1,2" />
     </image>
-  </sprite>
-  <sprite name="refresh_small">
-    <image file="menu/refresh.png">
-      <grid pos="0,0" size="20,20" array="1,1" />
-    </image>
-  </sprite>
+  </sprite> 
  </section>
 
 <section name="credit">
   <surface name="background" file="menu/background_credits.png" />
-</section>
-
-<section name="help">
-  <surface name="background" file="menu/background_help.png" />
-  <surface name="help_shortkeys_en" file="help/en/shortkeys.png" />
-  <surface name="help_shortkeys_es" file="help/es/shortkeys.png" />
 </section>
 
 <section name="object">
@@ -201,6 +166,7 @@
   <surface name="clock" file="interface/clock.png"/>
   <surface name="wind" file="interface/wind.png"/>
   <surface name="wind_indicator" file="interface/wind_indicator.png"/>
+  <surface name="pause_screen" file="interface/pause.png"/>
   <surface name="quit_screen" file="interface/quit.png"/>
 </section>
 
@@ -209,6 +175,22 @@
   <surface name="team_icon" file="menu/ico_skins.png"/>
   <surface name="sound_icon" file="menu/ico_sounds.png"/>
   <surface name="weapon_icon" file="menu/ico_weapons.png"/>
+</section>
+
+<section name ="mouse">
+  <surface name="pointer_select" file="interface/cursors/hand-cursor.png"/>
+  <surface name="pointer_move" file="interface/cursors/hand-move.png"/>
+  <surface name="pointer_aim" file="interface/cursors/hand-fire.png"/>
+  <surface name="pointer_fire_right" file="interface/cursors/hand-fire.right.png"/>
+  <surface name="pointer_fire_left" file="interface/cursors/hand-fire.left.png"/>
+  <surface name="pointer_arrow_up" file="interface/cursors/arrow-top.png"/>
+  <surface name="pointer_arrow_right" file="interface/cursors/arrow-right.png"/>
+  <surface name="pointer_arrow_left" file="interface/cursors/arrow-left.png"/>  
+  <surface name="pointer_arrow_down" file="interface/cursors/arrow-down.png"/>
+  <surface name="pointer_arrow_up_right" file="interface/cursors/arrow-top.right.png"/>
+  <surface name="pointer_arrow_up_left" file="interface/cursors/arrow-top.left.png"/>
+  <surface name="pointer_arrow_down_right" file="interface/cursors/arrow-down.right.png"/>
+  <surface name="pointer_arrow_down_left" file="interface/cursors/arrow-down.left.png"/>
 </section>
 
 <section name="energy_bar">
@@ -227,11 +209,8 @@
     <image file="gfx/arrow.png" />
   </sprite>
 
-  <surface name="water" file="gfx/water/water.png" />
-  <surface name="water_bottom" file="gfx/water/water_bottom.png" />
-
-  <surface name="lava" file="gfx/water/lava.png" />
-  <surface name="lava_bottom" file="gfx/water/lava_bottom.png" />
+  <surface name="water" file="gfx/water.png" />
+  <surface name="water_bottom" file="gfx/water_bottom.png" />
 
 </section>
 

@@ -24,56 +24,38 @@
 #include "../../src/network/index_svr_msg.h"
 #include "net_data.h"
 
-class HostOptions {
- public:
-  std::string game_name;
-  bool        passwd;
-  bool        used;
-
-  HostOptions();
-  bool Set(const std::string & game_name, bool pwd);
-};
-
 class Client : public NetData
 {
-  std::string version;
-  HostOptions options;
+	std::string version;
+	bool handshake_done;
+	bool is_hosting;
+	int port; // port number where a game is hosted
 
-  bool handshake_done;
-  bool is_hosting;
-  int port; // port number where a game is hosted
+	bool SendSignature();
+	bool SendList();
 
-  bool HandShake(const std::string & version);
-  bool RegisterWormuxServer();
-  bool SetGameNamePasswd(const std::string & game_name,
-			 const std::string & passwd);
+	void SetVersion(const std::string & ver);
+public:
+	Client(int client_fd,unsigned int & ip);
+	~Client();
 
-  bool SendSignature();
-  bool SendList();
-  void SetVersion(const std::string & version);
+	// Return false if the client closed the connection
+	bool HandleMsg(const std::string & str);
 
-  // Tell other index server that a new wormux server just registered
-  void NotifyServers(bool joining);
- public:
-  Client(int client_fd,unsigned int & ip);
-  ~Client();
-
-  // Return false if the client closed the connection
-  bool HandleMsg(enum IndexServerMsg msg_id);
+	// Tell other index server that a new wormux server just registered
+	void NotifyServers(bool joining);
 };
 
 class FakeClient
 {
 public:
-  FakeClient(const int & _ip, const int & _port, const HostOptions & _options)
-    {
-      ip = _ip;
-      port = _port;
-      options = _options;
-    }
-  int ip;
-  int port;
-  HostOptions options;
+	FakeClient(const int & _ip, const int & _port) 
+	{
+		ip = _ip;
+		port = _port;
+	}
+	int ip;
+	int port;
 };
-
+	
 #endif

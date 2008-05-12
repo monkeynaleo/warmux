@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,9 +35,8 @@ class Airhammer : public Weapon
 {
   private:
     Surface impact;
-    void RepeatShoot();
+    void RepeatShoot() const;
     SoundSample drill_sound;
-    SoundSample select_sound;
 
   protected:
     void p_Select();
@@ -54,7 +53,6 @@ class Airhammer : public Weapon
     void HandleKeyRefreshed_Shoot(bool shift);
     void HandleKeyReleased_Shoot(bool) { NewActionWeaponStopUse(); };
     void SignalTurnEnd() { p_Deselect(); };
-    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,16 +20,15 @@
  *****************************************************************************/
 
 #include "character/character.h"
-#include "weapon/crosshair.h"
-#include "weapon/weapon.h"
-#include "game/game.h"
+#include "crosshair.h"
+#include "weapon.h"
+#include "game/game_loop.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "team/teams_list.h"
-#include "team/team.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
@@ -39,7 +38,6 @@
 CrossHair::CrossHair()
 {
   enable = false;
-  display = false;
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   image = resource_manager.LoadImage(res, "gfx/pointeur1");
   resource_manager.UnLoadXMLProfile(res);
@@ -58,13 +56,13 @@ void CrossHair::Refresh(double angle)
 
 void CrossHair::Draw() const
 {
-  if(!display || !enable)
+  if( !enable )
     return;
-  if(ActiveCharacter().IsDead())
+  if( ActiveCharacter().IsDead() )
     return;
-  if(Game::GetInstance()->ReadState() != Game::PLAYING)
+  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING )
     return;
-  Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition() + crosshair_position;
+  Point2i tmp = ActiveCharacter().GetHandPosition() + crosshair_position;
   AppWormux::GetInstance()->video->window.Blit(image, tmp - Camera::GetInstance()->GetPosition());
   world.ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
 }

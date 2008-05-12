@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,27 +19,28 @@
  * Button with text.
  *****************************************************************************/
 
-#include "gui/button_text.h"
+#include "button_text.h"
 #include "graphic/text.h"
 
 ButtonText::~ButtonText(){
   delete text;
 }
 
-ButtonText::ButtonText(const Profile *res_profile,
+ButtonText::ButtonText(const Point2i& _position,
+                       const Profile *res_profile,
                        const std::string& resource_id,
                        const std::string &new_text,
                        Font::font_size_t font_size,
                        Font::font_style_t font_style):
-  Button(res_profile, resource_id),
+  Button(_position, res_profile, resource_id),
   text(new Text(new_text, white_color, font_size, font_style))
 { }
 
-void ButtonText::Draw(const Point2i &mousePosition) const
+void ButtonText::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   Point2i textPosition = position + size/2;
 
-  Button::Draw(mousePosition);
+  Button::Draw(mousePosition, surf);
   text->DrawCenter(textPosition);
 }
 

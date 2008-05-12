@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,11 +19,11 @@
  * Refresh des armes.
  *****************************************************************************/
 
-#include "weapon/weapons_list.h"
+#include "weapons_list.h"
 //-----------------------------------------------------------------------------
 #include <algorithm>
-#include "weapon/all.h"
-#include "weapon/explosion.h"
+#include "all.h"
+#include "explosion.h"
 #include "interface/interface.h"
 #include "map/camera.h"
 #include "map/maps_list.h"
@@ -35,19 +35,38 @@
 
 //-----------------------------------------------------------------------------
 
+WeaponsList * weapon_list = NULL;
+
+WeaponsList * WeaponsList::GetInstance()
+{
+  if (weapon_list == NULL) {
+    weapon_list = new WeaponsList();
+  }
+  weapon_list->ref_counter++;
+  return weapon_list;
+}
+
 WeaponsList::~WeaponsList()
 {
-  weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
-  for (; it != end; ++it)
-    delete *it;
-
-  delete weapons_res_profile;
-  weapons_res_profile = NULL;
+  ref_counter--;
+  /* we can delete the list iif nobody has an instance somewhere */
+  if (ref_counter == 0)
+    {
+      weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
+      for (; it != end; ++it)
+        {
+          delete *it;
+        }
+      weapon_list = NULL;
+      resource_manager.UnLoadXMLProfile(weapons_res_profile);
+      weapons_res_profile = NULL;
+    }
 }
 
 //-----------------------------------------------------------------------------
 
-WeaponsList::WeaponsList()
+WeaponsList::WeaponsList():
+  ref_counter(0)
 {
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
   m_weapons_list.push_back(new Bazooka);
@@ -56,14 +75,11 @@ WeaponsList::WeaponsList()
   m_weapons_list.push_back(new Shotgun);
   m_weapons_list.push_back(new SnipeRifle);
   m_weapons_list.push_back(new RiotBomb);
-  m_weapons_list.push_back(new Cluzooka);
   m_weapons_list.push_back(new AutomaticBazooka);
   m_weapons_list.push_back(new Dynamite);
   m_weapons_list.push_back(new GrenadeLauncher);
   m_weapons_list.push_back(new DiscoGrenadeLauncher);
   m_weapons_list.push_back(new ClusterLauncher);
-  m_weapons_list.push_back(new FootBombLauncher);
-  m_weapons_list.push_back(new FlameThrower);
   m_weapons_list.push_back(new Baseball);
   m_weapons_list.push_back(new Mine);
   m_weapons_list.push_back(new AirAttack);
@@ -92,14 +108,6 @@ void WeaponsList::Refresh () const
   ActiveTeam().AccessWeapon().Manage();
 }
 
-void WeaponsList::UpdateTranslation()
-{
-  if (singleton == NULL) return;
-  weapons_list_it it = GetInstance()->m_weapons_list.begin(), end=GetInstance()->m_weapons_list.end();
-  for (; it != end; it++) {
-    (*it)->UpdateTranslationStrings();
-  }
-}
 
 //-----------------------------------------------------------------------------
 
@@ -121,7 +129,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
       } while(it != end
               && ((*it)->Category() != sort
                   || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
-                  || (!((*it)->CanBeUsedOnClosedMap()) && !(ActiveMap()->IsOpened())))
+                  || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap().IsOpened()))
               );
 
       /* Ok, a weapon was found let's return it */
@@ -146,7 +154,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
   while(it != end
       && ((*it)->Category() != sort
         || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
-        || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap()->IsOpened())))
+        || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap().IsOpened())))
     ++it;
 
   /* Ok, a weapon was found let's return it if it is not the one active */

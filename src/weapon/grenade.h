@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,14 +16,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon grenade: throw a grenade with given engle and strength. Explode
- *                 after a small while.
+ * Weapon grenade : lance une grenade avec un angle et une force donn�. Explose
+ * au bout de quelques secondes
  *****************************************************************************/
 
 #ifndef GRENADE_H
 #define GRENADE_H
 
-#include "weapon/weapon_launcher.h"
+#include "weapon_launcher.h"
 
 // La Grenade
 class Grenade : public WeaponProjectile
@@ -40,8 +40,6 @@ class GrenadeLauncher : public WeaponLauncher
 {
  public:
   GrenadeLauncher();
-
-  void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
  protected:
   WeaponProjectile * GetProjectileInstance();

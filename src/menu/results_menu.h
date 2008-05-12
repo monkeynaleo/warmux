@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,7 +30,6 @@ class ResultBox;
 class PictureWidget;
 class TeamResults;
 class Team;
-class MultiTabs;
 
 class ResultsMenu : public Menu
 {
@@ -41,8 +40,6 @@ class ResultsMenu : public Menu
     std::vector<TeamResults*>& results;
     const Team *first_team, *second_team, *third_team;
     int     index;
-
-    MultiTabs * tabs;
 
     // Box sizes
     int     max_height;
@@ -76,12 +73,17 @@ class ResultsMenu : public Menu
     void SetResult(int i);
     void OnClick(const Point2i &mousePosition, int button);
     void OnClickUp(const Point2i &mousePosition, int button);
+    void DrawTeamGraph(const Team* team,
+                       int x, int y,
+                       double energy_scale, double time_scale,
+                       const Color& color) const;
+    void DrawGraph(int x, int y, int w, int h);
     void DrawPodium(const Point2i &position) const;
     void DrawTeamOnPodium(const Team& team, const Point2i& podium_position,
                           const Point2i& relative_position) const;
     void Draw(const Point2i &mousePosition);
  public:
-    ResultsMenu(std::vector<TeamResults*>& v, bool disconnected = false);
+    ResultsMenu(std::vector<TeamResults*>& v);
     ~ResultsMenu();
 };
 

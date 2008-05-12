@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,13 +26,14 @@
 #include "gui/energy_bar.h"
 #include "include/base.h"
 #include "object/physical_obj.h"
-#include "character/body.h"
+#include "body.h"
 
 class Text;
 class Team;
 class ParticleEngine;
 class DamageStatistics;
 class Body;
+typedef enum BodyDirection BodyDirection_t;
 
 #ifdef DEBUG
 //#define DEBUG_SKIN
@@ -79,11 +80,7 @@ private:
   int channel_step;
 
   // Generates green bubbles when the character is ill
-  ParticleEngine *particle_engine;
-
-  // this is needed because of network to know
-  // if we have changed of active character
-  bool is_playing;
+  ParticleEngine *bubble_engine;
 public:
 
   // Previous strength
@@ -97,7 +94,7 @@ private:
 
   void SignalDrowning();
   void SignalGhostState(bool was_dead);
-  void SignalCollision(const Point2d& speed_vector);
+  void SignalCollision();
   void SetBody(Body* char_body);
 
   void AddFiringAngle(double angle) { SetFiringAngle(firing_angle + angle); };
@@ -113,7 +110,7 @@ public:
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);
   void SetEnergy(int new_energy);
-  inline const int & GetEnergy() const { return m_energy; };
+  inline const int & GetEnergy() const { return life_points;}
 
   bool GotInjured() const { return lost_energy < 0; };
   void Die();
@@ -140,9 +137,9 @@ public:
     else disease_damage_per_turn = 0;
   }
 
-  // Used to sync value across network
-  virtual void GetValueFromAction(Action *);
-  virtual void StoreValue(Action *);
+  // to be used by action handler
+  alive_t GetLifeState() const { return m_alive; };
+  void SetLifeState(alive_t state);
 
   void Draw();
   void Refresh();
@@ -174,7 +171,7 @@ public:
   void BackJump();
 
   // Initialise left or right movement
-  void BeginMovementRL (uint pause, bool slowly = false);
+  void BeginMovementRL (uint pause);
   bool CanStillMoveRL (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
@@ -183,7 +180,6 @@ public:
 
   // Team owner
   const Team& GetTeam() const { return m_team; };
-  Team& AccessTeam() const { return m_team; };
   uint GetTeamIndex() const;
   uint GetCharacterIndex() const;
 
@@ -201,12 +197,10 @@ public:
   // Body handling
   Body * GetBody() { return body; };
   void SetWeaponClothe();
-
-  // "force" option forces to apply the clothe/movement even if character is dead
-  void SetClothe(const std::string& name, bool force=false);
-  void SetMovement(const std::string& name, bool force=false);
-  void SetClotheOnce(const std::string& name, bool force=false);
-  void SetMovementOnce(const std::string& name, bool force=false);
+  void SetClothe(const std::string& name);
+  void SetMovement(const std::string& name);
+  void SetClotheOnce(const std::string& name);
+  void SetMovementOnce(const std::string& name);
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool shift);
@@ -225,15 +219,15 @@ public:
   void HandleKeyRefreshed_Down(bool shift);
   void HandleKeyReleased_Down(bool) const {};
 
-  void HandleKeyPressed_Jump(bool shift);
+  void HandleKeyPressed_Jump(bool shift) const;
   void HandleKeyRefreshed_Jump(bool) const {};
   void HandleKeyReleased_Jump(bool) const {};
 
-  void HandleKeyPressed_HighJump(bool shift);
+  void HandleKeyPressed_HighJump(bool shift) const;
   void HandleKeyRefreshed_HighJump(bool) const { };
   void HandleKeyReleased_HighJump(bool) const { };
 
-  void HandleKeyPressed_BackJump(bool shift);
+  void HandleKeyPressed_BackJump(bool shift) const;
   void HandleKeyRefreshed_BackJump(bool) const {};
   void HandleKeyReleased_BackJump(bool) const {};
 

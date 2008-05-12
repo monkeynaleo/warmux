@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,26 +37,31 @@ class Label : public Widget{
 
  protected:
   Text *txt_label;
+  bool hidden;
+  Font::font_size_t font_size;
+  Font::font_style_t font_style;
 
  private:
+  const Color& font_color;
   bool center;
+  bool shadowed;
 
  public:
   Label(const std::string &label,
-        uint max_width,
-        Font::font_size_t font_size = Font::FONT_SMALL,
-        Font::font_style_t font_style = Font::FONT_NORMAL,
+        const Rectanglei &rect,
+        Font::font_size_t font_size,
+        Font::font_style_t font_style,
         const Color& color = white_color,
         bool center = false,
         bool shadowed = true);
   ~Label();
 
-  virtual void Draw(const Point2i &mousePosition) const;
+  void Draw (const Point2i &mousePosition, Surface& surf) const;
+  void SetSizePosition(const Rectanglei &rect);
   void SetText(const std::string &new_txt);
   const std::string& GetText() const;
 
-  virtual void OnFontChange();
-  virtual void Pack();
+  void SetVisible(bool visible);
 };
 
 #endif

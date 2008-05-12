@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -51,22 +51,21 @@ class ComboBox : public Widget
   std::vector<std::string>::size_type m_index;
 
  public:
-
+  
   ComboBox(const std::string &label,
 	   const std::string &resource_id,
-	   const Point2i &size,
+	   const Rectanglei &rect,
 	   const std::vector<std::pair <std::string, std::string> > &choices,
 	   const std::string choice);
 
   virtual ~ComboBox();
 
-  virtual void Pack();
-  virtual void Draw(const Point2i &mousePosition) const;
-  virtual Widget* Click(const Point2i&, uint) const { return NULL; };
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  void SetSizePosition(const Rectanglei &rect);
 
+  void Draw(const Point2i &mousePosition, Surface& surf) const;
+  Widget* Click(const Point2i&, uint) const { return NULL; };
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
   const std::string GetValue() const { return m_choices[m_index].first; };
-  int GetIntValue() const;
   void SetChoice(std::vector<std::string>::size_type index);
 };
 

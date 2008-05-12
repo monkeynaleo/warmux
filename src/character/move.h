@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,12 +26,15 @@
 
 class Character;
 
+// Pause between two movements
+const uint PAUSE_MOVEMENT=30; // ms
+
 // Compute the height to fall or to walk on when moving horizontally
 // Return a boolean which says if movement is possible
 bool ComputeHeightMovement (Character &character, int &height,
                             bool falling);
 
-void MoveCharacter (Character &character, bool slowly = false);
+void MoveCharacter (Character &character);
 
 // Move the active character to the left/right
 void MoveActiveCharacterRight(bool shift);

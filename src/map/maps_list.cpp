@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,18 +19,18 @@
  * Maps list
  *****************************************************************************/
 
-#include "include/action.h"
-#include "map/maps_list.h"
+#include "maps_list.h"
 #include "game/config.h"
 #include "graphic/surface.h"
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
-#include "tool/random.h"
 #include "tool/xml_document.h"
 #include <iostream>
-#include <algorithm>
+#ifdef _MSC_VER
+#  include <algorithm>
+#endif
 
 extern const uint MAX_WIND_OBJECTS;
 
@@ -47,11 +47,11 @@ InfoMap::InfoMap(const std::string &map_name,
   nb_mine(4),
   nb_barrel(4),
   is_opened(false),
+  use_water(false),
   is_basic_info_loaded(false),
   is_data_loaded(false),
-  random_generated(false),
-  island_type(RANDOM_GENERATED),
-  water_type(Water::NO_WATER),
+  random(false),
+  island_type(RANDOM),
   res_profile(NULL)
 {
   wind.nb_sprite = 0;
@@ -59,36 +59,48 @@ InfoMap::InfoMap(const std::string &map_name,
   wind.rotation_speed = 0;
 }
 
-void InfoMap::LoadBasicInfo()
+bool InfoMap::LoadBasicInfo()
 {
   if(is_basic_info_loaded)
-    return;
+    return true;
+  std::string nomfich;
+  try
+    {
+      nomfich = m_directory + "config.xml";
 
-  std::string nomfich = m_directory + "config.xml";
+      // Load resources
+      if (!IsFileExist(nomfich))
+        return false;
+      // FIXME: not freed
+      res_profile = resource_manager.LoadXMLProfile(nomfich, true),
+      // Load preview
+      preview = resource_manager.LoadImage( res_profile, "preview");
+      // Load other informations
+      XmlReader doc;
+      is_basic_info_loaded = true;
+      if (!doc.Load(nomfich)) return false;
+      if (!ProcessXmlData(doc.GetRoot())) return false;
+    }
 
-  // Load resources
-  if (!DoesFileExist(nomfich))
-    throw _("no configuration file!");
-  // FIXME: not freed
-  res_profile = resource_manager.LoadXMLProfile(nomfich, true);
-  if (!res_profile)
-    throw _("couldn't load config");
-  // Load preview
-  preview = resource_manager.LoadImage(res_profile, "preview");
-  is_basic_info_loaded = true;
-  // Load other informations
-  XmlReader doc;
-  if (!doc.Load(nomfich) || !ProcessXmlData(doc.GetRoot()))
-    throw _("error parsing the config file");
+  catch (const xmlpp::exception &e)
+    {
+      std::cout << std::endl
+                << Format(_("XML error during loading map '%s' :"), m_map_name.c_str())
+                << std::endl
+                << e.what() << std::endl;
+      return false;
+    }
 
   MSG_DEBUG("map.load", "Map loaded: %s", m_map_name.c_str());
+
+  return true;
 }
 
-bool InfoMap::ProcessXmlData(xmlNode *xml)
+bool InfoMap::ProcessXmlData(const xmlpp::Element *xml)
 {
-  XmlReader::ReadBool(xml, "random", random_generated);
+  XmlReader::ReadBool(xml, "random", random);
   // Read author informations
-  xmlNode *author = XmlReader::GetMarker(xml, "author");
+  xmlpp::Element *author = XmlReader::GetMarker(xml, "author");
   if (author != NULL) {
     std::string
       a_name,
@@ -119,26 +131,12 @@ bool InfoMap::ProcessXmlData(xmlNode *xml)
   }
 
   XmlReader::ReadString(xml, "name", name);
+  XmlReader::ReadBool(xml, "water", use_water);
   XmlReader::ReadUint(xml, "nb_mine", nb_mine);
   XmlReader::ReadUint(xml, "nb_barrel", nb_barrel);
   XmlReader::ReadBool(xml, "is_open", is_opened);
 
-  // reading water type
-  water_type = Water::NO_WATER;
-  uint wtype;
-  XmlReader::ReadUint(xml, "water", wtype);
-  if (wtype < uint(Water::MAX_WATER_TYPE))
-    water_type = Water::Water_type(wtype);
-
-  // Load padding value
-  bool add_pad = false;
-  XmlReader::ReadBool(xml, "add_pad", add_pad);
-  if(is_opened && add_pad) {
-    upper_left_pad = resource_manager.LoadPoint2i(res_profile, "upper_left_pad");
-    lower_right_pad = resource_manager.LoadPoint2i(res_profile, "lower_right_pad");
-  }
-
-  xmlNode* xmlwind = XmlReader::GetMarker(xml, "wind");
+  xmlpp::Element *xmlwind = XmlReader::GetMarker(xml, "wind");
   if (xmlwind != NULL)
   {
     double rot_speed=0.0;
@@ -159,12 +157,6 @@ bool InfoMap::ProcessXmlData(xmlNode *xml)
   return true;
 }
 
-InfoMap::~InfoMap()
-{
-  if (res_profile)
-    delete res_profile;
-}
-
 void InfoMap::LoadData()
 {
   if (is_data_loaded)
@@ -174,7 +166,7 @@ void InfoMap::LoadData()
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
   img_sky = resource_manager.LoadImage(res_profile,"sky");
-  if(!random_generated) {
+  if(!random) {
     img_ground = resource_manager.LoadImage(res_profile, "map");
   } else {
     img_ground = resource_manager.GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
@@ -188,41 +180,40 @@ void InfoMap::FreeData()
   is_data_loaded = false;
 }
 
-Surface& InfoMap::ReadImgGround()
+Surface InfoMap::ReadImgGround()
 {
   LoadBasicInfo();
   LoadData();
   return img_ground;
 }
 
-Surface& InfoMap::ReadImgSky()
+Surface InfoMap::ReadImgSky()
 {
   LoadBasicInfo();
   LoadData();
   return img_sky;
 }
 
-std::string InfoMap::GetConfigFilepath() const
-{
-  return m_directory + PATH_SEPARATOR + "config.xml";
-}
+MapsList* MapsList::singleton = NULL;
 
-/* ========================================================================== */
-static bool compareMaps(const InfoMap* a, const InfoMap* b)
+MapsList* MapsList::GetInstance()
 {
-  return a->GetRawName() < b->GetRawName();
+  if (singleton == NULL) {
+    singleton = new MapsList();
+  }
+
+  return singleton;
 }
 
 MapsList::MapsList()
 {
-  active_map_index = 0;
-  random_map = false;
+  terrain_actif = 0;
   lst.clear() ;
 
   std::cout << "o " << _("Load maps:");
 
   const Config * config = Config::GetInstance();
-  std::string dirname = config->GetDataDir() + "map" PATH_SEPARATOR;
+  std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "map" + PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
@@ -233,7 +224,7 @@ MapsList::MapsList()
   }
 
   // Load personal maps
-  dirname = config->GetPersonalDataDir() + "map" PATH_SEPARATOR;
+  dirname = config->GetPersonalDir() + "map" + PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
     const char *name;
@@ -241,8 +232,7 @@ MapsList::MapsList()
     CloseFolder(f);
   } else {
         std::cerr << std::endl
-          << Format(_("Unable to open personal maps directory (%s)!"),
-                      dirname.c_str())
+          << Format(_("Unable to open maps directory (%s)!"), dirname.c_str())
           << std::endl;
   }
 
@@ -261,104 +251,72 @@ MapsList::MapsList()
   SelectMapByName(Config::GetInstance()->GetMapName());
 }
 
-MapsList::~MapsList()
-{
-  for (uint i=0; i < lst.size(); ++i)
-    delete lst[i];
-}
-
 void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
 {
   if (map_name[0] == '.') return;
 
   std::string fullname = dir + map_name;
   if (!IsFolderExist(fullname))
-    return;
+          return;
 
-  InfoMap *nv_terrain = new InfoMap(map_name, fullname + PATH_SEPARATOR);
+  InfoMap nv_terrain(map_name, fullname + PATH_SEPARATOR);
 
   std::cout << (lst.empty()?" ":", ") << map_name;
   std::cout.flush();
   lst.push_back(nv_terrain);
 }
 
-int MapsList::FindMapById (const std::string &id) const
+int MapsList::FindMapById (const std::string &id)
 {
+  // XXX Not used !?
+  //iterator terrain=lst.begin(), fin_terrain=lst.end();
+
   uint i=0;
   for (; i < lst.size(); ++i)
-    if (lst[i]->GetRawName() == id)
+    if (lst[i].GetRawName() == id)
       return i;
   return -1;
 }
 
-void MapsList::SelectRandomMapByName(const std::string &name)
+void MapsList::SelectMapByName (const std::string &nom)
 {
-  MSG_DEBUG("map.random", "select %s", name.c_str());
-
-  ASSERT(name != "random");
-  SelectMapByName(name);
-  random_map = true;
-}
-
-void MapsList::SelectMapByName (const std::string &name)
-{
-  // Random map!!
-  if (name == "random") {
-    active_map_index = Random::GetLong(0, lst.size()-1);
-
-    MSG_DEBUG("map.random", "select %u", active_map_index);
-    random_map = true;
-    return;
-  }
-
-  // standard case!
-  int index = FindMapById (name);
+  int index = FindMapById (nom);
 
   if (index == -1){
     index = 0;
-    if(name != "")
-      std::cout << Format(_("! Map %s not found :-("), name.c_str()) << std::endl;
+    if(nom != "")
+      std::cout << Format(_("! Map %s not found :-("), nom.c_str()) << std::endl;
   }
   SelectMapByIndex (index);
 }
 
 void MapsList::SelectMapByIndex (uint index)
 {
-  MSG_DEBUG("map", "select %u", index);
-
   ASSERT (index < lst.size());
-  if (active_map_index == (int)index)
+  if (terrain_actif == (int)index)
     return;
 
-  active_map_index = index;
-  random_map = false;
+  terrain_actif = index;
 }
 
 int MapsList::GetActiveMapIndex () const
 {
-  if (!random_map)
-    return active_map_index;
-  else
-    return lst.size();
+  return terrain_actif;
 }
 
-void MapsList::FillActionMenuSetMap(Action& a) const
+InfoMap& MapsList::ActiveMap()
 {
-  if (!random_map) {
-    a.Push(lst.at(active_map_index)->GetRawName());
-  } else {
-    a.Push("random");
-    a.Push(lst.at(active_map_index)->GetRawName());
-  }
+  ASSERT (0 <= terrain_actif);
+  return lst.at(terrain_actif);
 }
 
-InfoMap* MapsList::ActiveMap()
-{
-  ASSERT (0 <= active_map_index);
-  return lst.at(active_map_index);
-}
-
-InfoMap* ActiveMap()
+InfoMap& ActiveMap()
 {
   return MapsList::GetInstance()->ActiveMap();
 }
+
+bool compareMaps(const InfoMap& a, const InfoMap& b)
+{
+  return a.GetRawName() < b.GetRawName();
+}
+

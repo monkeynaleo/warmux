@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,13 +19,15 @@
  * Artificial intelligence stupid engine
  *****************************************************************************/
 
-#include "ai/ai_engine_stupid.h"
+#include "ai_engine_stupid.h"
 #include "character/character.h"
-#include "game/game.h"
+#include "game/game_loop.h"
 #include "game/time.h"
 #include "team/teams_list.h"
 
 #include <iostream>
+
+AIStupidEngine * AIStupidEngine::singleton = NULL;
 
 AIStupidEngine::AIStupidEngine() :
   m_movement(),
@@ -39,6 +41,14 @@ AIStupidEngine::AIStupidEngine() :
   std::cout << "o Artificial Intelligence Stupid engine initialization" << std::endl;
 }
 
+AIStupidEngine* AIStupidEngine::GetInstance()
+{
+  if (singleton == NULL)
+    singleton = new AIStupidEngine();
+
+  return singleton;
+}
+
 // --------------------------------------------------
 
 void AIStupidEngine::BeginTurn()
@@ -46,7 +56,7 @@ void AIStupidEngine::BeginTurn()
   m_last_char = &ActiveCharacter();
   m_enemy = NULL;
 
-  m_begin_turn_time = Time::GetInstance()->ReadSec();
+  m_begin_turn_time = 0;
   m_step = 0;
 
   m_movement.BeginTurn();
@@ -76,8 +86,8 @@ void AIStupidEngine::Refresh()
   if (m_shoot.Refresh(m_current_time)) {
     m_movement.Move(m_current_time);
 
-    if (!m_movement.IsProgressing())
-      m_shoot.SetStrategy(AIShootModule::SKIP_TURN);
+    if (m_movement.IsProgressing())
+      m_shoot.SetNoStrategy();
   }
 
 //   switch (m_step)
@@ -114,5 +124,5 @@ void AIStupidEngine::Refresh()
 void AIStupidEngine::ForceEndOfTurn()
 {
   m_movement.StopMoving();
-  Game::GetInstance()->SetState(Game::HAS_PLAYED);
+  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }

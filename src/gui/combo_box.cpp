@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,10 +20,10 @@
 #include <vector>
 #include <sstream>
 
-#include "gui/combo_box.h"
+#include "combo_box.h"
 #include "graphic/text.h"
 #include "graphic/video.h"
-#include "gui/button.h"
+#include "button.h"
 #include "include/app.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
@@ -32,13 +32,13 @@
 
 ComboBox::ComboBox (const std::string &label,
 		    const std::string &resource_id,
-		    const Point2i &_size,
+		    const Rectanglei &rect,
 		    const std::vector<std::pair<std::string, std::string> > &choices,
 		    const std::string choice):
   m_choices(choices), m_index(0)
 {
-  position = Point2i(-1, -1);
-  size = _size;
+  position =  rect.GetPosition();
+  size = rect.GetSize();
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_image = resource_manager.LoadImage(res, resource_id);
@@ -74,26 +74,27 @@ ComboBox::~ComboBox ()
   delete txt_value_white;
 }
 
-void ComboBox::Pack()
+void ComboBox::SetSizePosition(const Rectanglei &rect)
 {
-  txt_label->SetMaxWidth(size.x);
+  StdSetSizePosition(rect);
+  txt_label->SetMaxWidth(GetSizeX());
 }
 
-void ComboBox::Draw(const Point2i &/*mousePosition*/) const
+void ComboBox::Draw(const Point2i &/*mousePosition*/, Surface& /*surf*/) const
 {
-  Surface& video_window = AppWormux::GetInstance()->video->window;
+  Surface video_window = AppWormux::GetInstance()->video->window;
 
   //  the computed positions are to center on the image part of the widget
 
   // 1. first draw the annulus background
   uint tmp_back_x = GetPositionX() + (GetSizeX() - m_annulus_background.GetWidth())/4 ;
-  uint tmp_back_y = GetPositionY();
+  uint tmp_back_y = GetPositionY() + (GetSizeY() - m_annulus_background.GetHeight() - txt_label->GetHeight() - 5) /2;
   video_window.Blit(m_annulus_background, Point2i(tmp_back_x, tmp_back_y));
 
   // 2. then draw the progress annulus
   static uint small_r = 25;
   static uint big_r = 35;
-  static double open_angle_value = 0.96; // 55
+  static double open_angle_value = 0.96; // 55 °
   uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
   uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
   double angle;
@@ -108,8 +109,8 @@ void ComboBox::Draw(const Point2i &/*mousePosition*/) const
   delete(tmp);
 
   // 3. then draw the annulus foreground
-  uint tmp_fore_x = tmp_back_x;
-  uint tmp_fore_y = tmp_back_y;
+  uint tmp_fore_x = GetPositionX() + (GetSizeX() - m_annulus_foreground.GetWidth())/4 ;
+  uint tmp_fore_y = GetPositionY() + (GetSizeY() - m_annulus_foreground.GetHeight() - txt_label->GetHeight() - 5) /2;
   video_window.Blit(m_annulus_foreground, Point2i(tmp_fore_x, tmp_fore_y));
 
   // 4. then draw the image
@@ -133,17 +134,15 @@ void ComboBox::Draw(const Point2i &/*mousePosition*/) const
 
 Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
 {
-  NeedRedrawing();
+  need_redrawing = true;
 
   if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {
 
     SetChoice(m_index + 1);
-    return this;
 
   } else if (button == SDL_BUTTON_RIGHT && Contains(mousePosition)) {
 
     SetChoice(m_index - 1);
-    return this;
 
   } else if( button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition) ) {
 
@@ -163,19 +162,12 @@ void ComboBox::SetChoice (std::vector<std::string>::size_type index)
   std::string text;
 
   if (index >= m_choices.size ())
-    return; /* index = 0; // loop back */
-
-  m_index = index;
+    m_index = 0; // loop back
+  else
+    m_index = index;
 
   txt_value_black->Set(m_choices[m_index].second);
   txt_value_white->Set(m_choices[m_index].second);
 
-  NeedRedrawing();
-}
-
-int ComboBox::GetIntValue() const
-{
-  int tmp = 0;
-  sscanf(GetValue().c_str(),"%d", &tmp);
-  return tmp;
+  ForceRedraw();
 }

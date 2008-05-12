@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #ifndef AUTO_BAZOOKA_H
 #define AUTO_BAZOOKA_H
 
-#include "weapon/weapon_launcher.h"
+#include "weapon_launcher.h"
 #include "include/base.h"
 
 class AutomaticBazookaConfig;
@@ -33,12 +33,10 @@ class AutomaticBazooka : public WeaponLauncher
   target_t       *m_target;
   public:
     AutomaticBazooka();
-    ~AutomaticBazooka();
     void Draw ();
     bool IsReady() const;
     virtual void ChooseTarget(Point2i mouse_pos);
     AutomaticBazookaConfig &cfg();
-    void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
   protected:
     void Refresh();

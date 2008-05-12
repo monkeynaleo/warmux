@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,11 +19,13 @@
  * Credits Menu
  *****************************************************************************/
 
-#include "menu/credits_menu.h"
+#include "credits_menu.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include <iostream>
-#include <algorithm>  //std::transform
+#ifdef _MSC_VER
+#  include <algorithm>  //std::transform
+#endif
 #include "game/config.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
@@ -42,18 +44,16 @@ public:
   std::string country;
   std::string description;
 
-  bool Feed (xmlNode* node);
+  bool Feed (const xmlpp::Node *node);
   std::string PrettyString(bool with_email) const;
 };
 
 //-----------------------------------------------------------------------------
 
-bool Author::Feed (xmlNode* node)
+bool Author::Feed (const xmlpp::Node *node)
 {
-  if (!XmlReader::ReadString(node, "name", name))
-    return false;
-  if (!XmlReader::ReadString(node, "description", description))
-    return false;
+  if (!XmlReader::ReadString(node, "name", name)) return false;
+  if (!XmlReader::ReadString(node, "description", description)) return false;
   XmlReader::ReadString(node, "nickname", nickname);
   XmlReader::ReadString(node, "email", email);
   XmlReader::ReadString(node, "country", country);
@@ -88,14 +88,12 @@ std::string Author::PrettyString(bool with_email) const
 CreditsMenu::CreditsMenu()  :
   Menu("credit/background", vOk)
 {
-  ListBox * lbox_authors = new ListBox(Point2i(AppWormux::GetInstance()->video->window.GetWidth()-60,
-					       AppWormux::GetInstance()->video->window.GetHeight()-60-30),
-				       false);
+  ListBox * lbox_authors = new ListBox( Rectanglei( 30, 30,
+                                               AppWormux::GetInstance()->video->window.GetWidth()-60,
+                                               AppWormux::GetInstance()->video->window.GetHeight()-60-30),
+                                        false);
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
-  lbox_authors->SetPosition(30, 30);
-
   widgets.AddWidget(lbox_authors);
-  widgets.Pack();
 
   PrepareAuthorsList(lbox_authors);
 }
@@ -117,7 +115,7 @@ bool CreditsMenu::signal_cancel()
 
 void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
 {
-  std::string filename = Config::GetInstance()->GetDataDir() + "authors.xml";
+  std::string filename = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "authors.xml";
   XmlReader doc;
   if(!doc.Load(filename))
   {
@@ -125,14 +123,14 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
     return;
   }
   // Use an array for this is the best solution I think, but there is perhaps a better code...
-  static const std::string teams[] = { "team", "contributors", "thanks" };
+  static std::string teams[] = { "team", "contributors", "thanks" };
 
   for(uint i = 0; i < (sizeof teams / sizeof* teams); ++i)
   {
-    xmlNodeArray team = XmlReader::GetNamedNeighbours(doc.GetRoot(), teams[i]);
 
-    if (team.empty())
-      continue;
+    xmlpp::Node::NodeList team = doc.GetRoot()->get_children(teams[i]);
+
+    if(team.empty()) continue;
 
     std::string team_title = teams[i];
     std::transform( team_title.begin(), team_title.end(), team_title.begin(), static_cast<int (*)(int)>(toupper) );
@@ -146,17 +144,25 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
                            Font::FONT_BIG, Font::FONT_NORMAL, c_red);
 
     // We think there is ONLY ONE occurence of team section, so we use the first
-    xmlNodeArray sections = XmlReader::GetNamedChildren(team.front(), "section");
-    xmlNodeArray::const_iterator section=sections.begin(), end_section=sections.end();
+    xmlpp::Node::NodeList sections = team.front()->get_children("section");
+    xmlpp::Node::NodeList::iterator
+      section=sections.begin(),
+      end_section=sections.end();
 
     for (; section != end_section; ++section)
     {
-      xmlNodeArray authors = XmlReader::GetNamedChildren(*section, "author");
-      xmlNodeArray::const_iterator node=authors.begin(), end=authors.end();
+      xmlpp::Node::NodeList authors = (**section).get_children("author");
+      xmlpp::Node::NodeList::iterator
+        node=authors.begin(),
+        end=authors.end();
       std::string title;
-
-      if (!XmlReader::ReadStringAttr(*section, "title", title))
+      xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*section);
+      if (!elem)
+      {
+        std::cerr << "cast error" << std::endl;
         continue;
+      }
+      if (!XmlReader::ReadStringAttr(elem, "title", title)) continue;
 
       std::cout << "== " << title << " ==" << std::endl;
 

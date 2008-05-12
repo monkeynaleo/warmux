@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -54,8 +54,8 @@ class PolygonBuffer {
 class PolygonItem {
 
   /* if you need that, implement it (correctly)*/
-  PolygonItem( PolygonItem&);
-  PolygonItem operator=( PolygonItem&);
+  PolygonItem(const PolygonItem&);
+  PolygonItem operator=(const PolygonItem&);
   /*********************************************/
 
  public:
@@ -76,10 +76,10 @@ class PolygonItem {
   virtual ~PolygonItem();
   void SetPosition(const Point2d & pos);
   void SetAlignment(H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
-  H_align GetHAlign() const { return h_align; }
-  V_align GetVAlign() const { return v_align; }
-  Point2d & GetPosition();
-  Point2d & GetTransformedPosition();
+  const H_align GetHAlign() const { return h_align; }
+  const V_align GetVAlign() const { return v_align; }
+  const Point2d & GetPosition() const;
+  const Point2d & GetTransformedPosition() const;
   Point2i GetIntTransformedPosition() const;
   virtual bool Contains(const Point2d & p) const;
   void SetSprite(Sprite * sprite);

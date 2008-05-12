@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,20 +22,16 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
-#include <map>
 #include "graphic/surface.h"
 #include "include/base.h"
-#include "include/singleton.h"
 #include "tool/point.h"
 
 // Forward declarations
 struct SDL_event;
-class MouseCursor;
 
-class Mouse : public Singleton<Mouse>
+class Mouse
 {
 public:
-
   typedef enum {
     POINTER_STANDARD,
     POINTER_SELECT,
@@ -49,52 +45,77 @@ public:
     POINTER_ARROW_RIGHT,
     POINTER_ARROW_LEFT,
     POINTER_AIM,
+    POINTER_FIRE,
     POINTER_FIRE_LEFT,
-    POINTER_FIRE_RIGHT,
-    POINTER_FIRE // Must always be the last one
+    POINTER_FIRE_RIGHT
   } pointer_t;
 
   typedef enum {
     MOUSE_HIDDEN,
     MOUSE_VISIBLE,
+    MOUSE_HIDDEN_UNTIL_NEXT_MOVE
   } visibility_t;
-
 private:
-  static std::map<pointer_t, MouseCursor> cursors;
-  Point2i lastpos;
+  bool scroll_actif;
 
   visibility_t visible;
   pointer_t current_pointer;
 
-  void GetDesignatedCharacter() const;
+  Point2i savedPos;
+  Point2i lastPos;
+  static Mouse * singleton;
+
+  Surface pointer_select,
+    pointer_move,
+    pointer_arrow_up,
+    pointer_arrow_up_right,
+    pointer_arrow_up_left,
+    pointer_arrow_down,
+    pointer_arrow_down_right,
+    pointer_arrow_down_left,
+    pointer_arrow_right,
+    pointer_arrow_left,
+    pointer_fire_left,
+    pointer_fire_right,
+    pointer_aim;
+
+  Mouse();
+  pointer_t ScrollPointer() const;
+  bool DrawMovePointer() const;
+  void ScrollCamera() const;
+  void DrawSelectPointer() const;
+
+  const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 
   void ActionLeftClic(bool shift = false) const;
   void ActionRightClic(bool shift = false) const;
   void ActionWheelDown(bool shift = false) const;
   void ActionWheelUp(bool shift = false) const;
-  MouseCursor& GetCursor(pointer_t pointer) const;
-
-protected:
-  friend class Singleton<Mouse>;
-  Mouse();
-
 public:
+
+  static Mouse * GetInstance();
+
   bool HandleClic (const SDL_Event& event) const;
+
   void Refresh();
+  void TestCamera();
+  void ChoixVerPointe() const;
 
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
-  void CenterPointer();
 
   // Choose the pointer
-  pointer_t GetPointer() const;
   pointer_t SetPointer(pointer_t pointer);
   void Draw() const;
 
   // Hide/show mouse pointer
   void Show();
   void Hide();
+  void HideUntilNextMove();
 
-  visibility_t GetVisibility() const { return visible; };
+  // Center the pointer on the screen
+  void CenterPointer() const;
+  const visibility_t GetVisibility() const { return visible; };
 };
+
 #endif

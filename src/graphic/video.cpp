@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,22 +17,25 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include <algorithm>
+#include "video.h"
+#ifdef _MSC_VER
+#  include <algorithm>
+#endif
 #include <iostream>
 #include <SDL_image.h>
 #include "game/config.h"
-#include "graphic/video.h"
-#include "include/app.h"
+#ifdef WIN32
+#  include "include/app.h"
+#endif
+#include "tool/i18n.h"
 #include "include/constant.h"
 #include "map/camera.h"
-#include "tool/i18n.h"
 
 
 Video::Video(){
   SetMaxFps (50);
   fullscreen = false;
   SDLReady = false;
-  icon = NULL;
 
   InitSDL();
 
@@ -51,26 +54,35 @@ Video::Video(){
     exit (1);
   }
 
-  SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION );
-  SetWindowIcon( config->GetDataDir() + "wormux_32x32.xpm" );
+  SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
+  SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux_32x32.xpm" );
 
   ComputeAvailableConfigs();
 }
 
 Video::~Video(){
-  if (icon)
-    SDL_FreeSurface(icon);
   if( SDLReady )
     SDL_Quit();
-  SDLReady = false;
 }
 
 void Video::SetMaxFps(uint max_fps){
   m_max_fps = max_fps;
   if (0 < m_max_fps)
-    m_max_delay = 1000/m_max_fps;
+    m_sleep_max_fps = 1000/m_max_fps;
   else
-    m_max_delay = 0;
+    m_sleep_max_fps = 0;
+}
+
+uint Video::GetMaxFps() const {
+  return m_max_fps;
+}
+
+uint Video::GetSleepMaxFps() const {
+  return m_sleep_max_fps;
+}
+
+bool Video::IsFullScreen() const{
+  return fullscreen;
 }
 
 static bool CompareConfigs(const Point2i& a, const Point2i& b)
@@ -132,10 +144,13 @@ void Video::ComputeAvailableConfigs()
   }
 }
 
+const std::list<Point2i>& Video::GetAvailableConfigs() const
+{
+  return available_configs;
+}
+
 bool Video::SetConfig(const int width, const int height, const bool _fullscreen){
   int flag = (_fullscreen) ? SDL_FULLSCREEN : 0;
-  bool window_was_null = window.IsNull();
-
 
   // update the main window if needed
   if( window.IsNull() ||
@@ -155,11 +170,8 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
       return false;
 
     fullscreen = _fullscreen;
-    Camera::GetInstance()->SetSize(width, height);
-
-    // refresh all the map when switching to higher resolution
-    if (!window_was_null)
-      AppWormux::GetInstance()->RefreshDisplay();
+    Camera::GetInstance()->GetInstance()->SetSize(width, height);
+    Camera::GetInstance()->GetInstance()->SetXY(Camera::GetInstance()->GetPosition());
   }
 
   return true;
@@ -180,9 +192,8 @@ void Video::SetWindowCaption(const std::string& caption) const {
   SDL_WM_SetCaption( caption.c_str(), NULL );
 }
 
-void Video::SetWindowIcon(const std::string& filename) {
-  icon = IMG_Load(filename.c_str());
-  SDL_WM_SetIcon( icon, NULL );
+void Video::SetWindowIcon(const std::string& filename) const {
+  SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
 }
 
 void Video::InitSDL(){

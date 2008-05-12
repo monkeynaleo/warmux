@@ -26,41 +26,39 @@
 
 class NetData
 {
-  char*  str;
-  size_t str_size;
-  size_t msg_size;
+	char* str;
+	unsigned int str_size;
 
-  int    fd;
-  int    ip_address;
-  time_t ping_time;
-  bool   ping_sent;
+	int fd;
+	int ip_address;
+	time_t ping_time;
+	bool ping_sent;
 
-  void UpdatePing();
- protected:
-  size_t received;
-  enum IndexServerMsg msg_id;
+	void UpdatePing();
+protected:
+	int received;
+	enum IndexServerMsg msg_id;
 
-  // Return false if the client closed the connection
-  bool ReceiveStr(std::string & full_str);
-  bool ReceiveInt(int & nbr);
+	// Return false if the client closed the connection
+	bool ReceiveStr(std::string & full_str);
+	bool ReceiveInt(int & nbr);
 
-  bool SendInt(const int & nbr);
-  bool SendStr(const std::string & full_str);
- public:
-  bool connected;
+	bool SendInt(const int & nbr);
+	bool SendStr(const std::string & full_str);
+public:
+	bool connected;
 
-  NetData();
-  virtual ~NetData();
+	NetData();
+	virtual ~NetData();
 
-  const int & GetFD() { return fd; };
-  const int & GetIP() { return ip_address; };
+	const int & GetFD() { return fd; };
+	const int & GetIP() { return ip_address; };
 
-  void Host(const int & client_fd, const unsigned int & ip);
-  bool ConnectTo(const std::string & address, const int & port);
-  bool Receive();
-  bool ReceiveData();
-  virtual bool HandleMsg(enum IndexServerMsg msg_id) = 0;
-  void CheckState();
+	void Host( const int & client_fd, const unsigned int & ip );
+	bool ConnectTo( const std::string & address, const int & port);
+	bool Receive();
+	virtual bool HandleMsg(const std::string & full_str) = 0;
+	void CheckState();
 };
 
 #endif

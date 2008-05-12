@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,12 +32,16 @@ class Sprite;
 class LoadingScreen
 {
  private:
+  static LoadingScreen * singleton;
+
   Profile * res;
   Sprite * loading_bg;
 
- public:
   LoadingScreen();
+ public:
   ~LoadingScreen();
+
+  static LoadingScreen* GetInstance();
 
   void DrawBackground();
   void StartLoading(uint nb, const std::string& resource,

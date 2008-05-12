@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,15 +26,14 @@
 #include "tool/point.h"
 
 class RandomSync{
-#ifdef DEBUG
-  uint nb_get;
-#endif
+  //Pregenerated table of random number (mainly usefull for network)
+  std::list<double> rnd_table;
 
+  double GetRand();
+  void GenerateTable();
 public:
   RandomSync();
   void Init();
-
-  uint GetRand(); // public only to check synchronization
 
   bool GetBool();
   double GetDouble();
@@ -45,7 +44,8 @@ public:
   Point2i GetPoint(const Point2i &pt);
 
   //to fill the pregenerated tables
-  void SetRand(uint seed);
+  void SetRandMax(double rand_max);
+  void AddToTable(double nbr);
 };
 
 extern RandomSync randomSync;

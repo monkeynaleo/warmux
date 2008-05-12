@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,12 +19,13 @@
  * Low gravity weapon
  *****************************************************************************/
 
-#include "weapon/lowgrav.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
+#include "lowgrav.h"
+#include "explosion.h"
+#include "weapon_cfg.h"
 
 #include "character/character.h"
 #include "game/game.h"
+#include "game/game_loop.h"
 #include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "interface/game_msg.h"
@@ -37,24 +38,17 @@ const double LOW_GRAVITY_FACTOR = 0.4;
 LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",
                             new WeaponConfig(), NEVER_VISIBLE)
 {
-  UpdateTranslationStrings();
-
+  m_name = _("LowGrav");
   m_category = MOVE;
 
   use_unit_on_first_shoot = false;
-}
-
-void LowGrav::UpdateTranslationStrings()
-{
-  m_name = _("LowGrav");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
 }
 
 void LowGrav::p_Deselect()
 {
   ActiveCharacter().ResetConstants();
   ActiveCharacter().SetClothe("normal");
+  m_is_active = false;
 }
 
 bool LowGrav::p_Shoot()

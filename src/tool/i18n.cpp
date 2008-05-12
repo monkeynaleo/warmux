@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,50 +20,18 @@
  * Eg. : Format("Hello %s", "world") returns "Hello World".
  *****************************************************************************/
 
-#include "tool/i18n.h"
+#include "i18n.h"
 #include <string>
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include "tool/debug.h"
-#include "game/config.h"
-
-#ifdef USE_FRIBIDI
-#include <fribidi/fribidi.h>
-
-#if defined(FRIBIDI_MINOR_VERSION) && FRIBIDI_MINOR_VERSION == 19
-/** Needed because fribidi2 doesn't export those symbols in the 0.19.1 release */
-#define fribidi_utf8_to_unicode FRIBIDI_NAMESPACE(utf8_to_unicode)
-#define fribidi_unicode_to_utf8 FRIBIDI_NAMESPACE(unicode_to_utf8)
-extern "C" {
-FriBidiStrIndex fribidi_utf8_to_unicode (
-  const char *s,
-  FriBidiStrIndex length,
-  FriBidiChar *us
-);
-FRIBIDI_ENTRY FriBidiStrIndex fribidi_unicode_to_utf8 (
-  const FriBidiChar *us,
-  FriBidiStrIndex length,
-  char *s
-);
-};
+#include "debug.h"
+#ifdef _MSC_VER
+#  include "msvc/config.h"
+#else
+#  include "config.h"
 #endif
-
-FriBidiCharType pbase_dir = FRIBIDI_TYPE_ON;
-
-FriBidiChar unicode_buffer[16384];
-char buffer[16384];
-
-char * localization(const char * message) {
-  char * string = gettext(message);
-  int l = strlen(string);
-  int l_u;
-  l_u = fribidi_utf8_to_unicode(string, l, unicode_buffer);
-  fribidi_log2vis(unicode_buffer, l_u, &pbase_dir, unicode_buffer, NULL, NULL, NULL);
-  fribidi_unicode_to_utf8(unicode_buffer, l_u, (char *)buffer);
-  return buffer;
-}
-#endif /* USE_FRIBIDI */
+#include "game/config.h"
 
 std::string Format(const char *format, ...)
 {
@@ -95,6 +63,7 @@ std::string Format(const char *format, ...)
   }
 
   va_end(argp);
+
   return result;
 }
 
