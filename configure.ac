@@ -313,11 +313,12 @@ dnl === Display error if SDL image, mixer, etc. is missing ==================
 if test \
      x${check_sdl_image} = xno \
   -o x${check_sdl_mixer} = xno \
-  -o   x${check_sdl_ttf} = xno \
-  -o   x${check_sdl_gfx} = xno \
-  -o   x${check_sdl_net} = xno \
-  -o    x${check_libxml} = xno \
-; then
+  -o x${check_sdl_ttf} = xno \
+  -o x${check_sdl_gfx} = xno \
+  -o x${check_sdl_net} = xno \
+  -o x${check_libxml} = xno \
+  -o x${check_curl} = xno \
+  ; then
   AC_MSG_RESULT([])
   if test x${check_sdl_image} = xno; then
     AC_MSG_RESULT([ERROR: SDL_image library required])
@@ -336,6 +337,9 @@ if test \
   fi
   if test x${check_libxml} = xno; then
     AC_MSG_RESULT([ERROR: libxml2 not found!])
+  fi
+  if test x${check_curl} = xno; then
+    AC_MSG_RESULT([ERROR: libcurl not found!])
   fi
   exit 1
 fi
