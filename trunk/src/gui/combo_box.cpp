@@ -163,9 +163,9 @@ void ComboBox::SetChoice (std::vector<std::string>::size_type index)
   std::string text;
 
   if (index >= m_choices.size ())
-    m_index = 0; // loop back
-  else
-    m_index = index;
+    return; /* index = 0; // loop back */
+
+  m_index = index;
 
   txt_value_black->Set(m_choices[m_index].second);
   txt_value_white->Set(m_choices[m_index].second);
