@@ -29,8 +29,9 @@
 #include "gui/button.h"
 #include "gui/box.h"
 #include "gui/check_box.h"
-#include "gui/msg_box.h"
 #include "gui/list_box.h"
+#include "gui/msg_box.h"
+#include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/tabs.h"
 #include "gui/text_box.h"
@@ -53,8 +54,11 @@ public:
     , port(p)
     , ip_address(ip)
   {
-    AddWidget(new PictureWidget(Point2i(16, 16),
-                                (pwd) ? "menu/disabled_back" : "menu/enabled", true));
+    if (pwd) {
+      AddWidget(new PictureWidget(Point2i(16, 16), "menu/password_lock", true));
+    } else {
+      AddWidget(new NullWidget(Point2i(16, 16)));
+    }
     AddWidget(new Label(ip, 100));
     AddWidget(new Label(p, 40));
     AddWidget(new Label(dns, 340));
