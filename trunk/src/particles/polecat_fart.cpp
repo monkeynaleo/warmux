@@ -38,7 +38,7 @@ PolecatFart::PolecatFart() :
   SetSize( Point2i(10, 10) );
 }
 
-void PolecatFart::SignalObjectCollision(PhysicalObj * obj)
+void PolecatFart::SignalObjectCollision(PhysicalObj * obj, const Point2d& )
 {
   if (!is_active) return;
   Character * tmp = (Character *)obj;
