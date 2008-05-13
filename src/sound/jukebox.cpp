@@ -371,8 +371,8 @@ void JukeBox::LoadXML(const std::string& profile)
     std::string sample_filename = folder + file;
     if( !DoesFileExist(sample_filename) )
     {
-      std::cerr << "Sound error: File " << sample_filename.c_str()
-                << " does not exist !" << std::endl;
+      std::cerr << "Sound warning: File " << sample_filename.c_str()
+                << " does not exist! (probably not yet recorded)" << std::endl;
       continue;
     }
 
@@ -422,7 +422,7 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
     return Play("default", sample, loop) ; // try with default profile
   }
 
-  std::cerr << "Sound error: No sound found for sample" << category.c_str() 
+  std::cerr << "Sound error: No sound found for sample" << category.c_str()
             << "/" << sample.c_str() << std::endl;
   return -1;
 }
