@@ -34,7 +34,7 @@ class PasswordBox;
 class MsgBox;
 class CheckBox;
 class MultiTabs;
-class ListBox;
+class GameListBox;
 
 class NetworkConnectionMenu : public Menu
 {
@@ -52,7 +52,7 @@ private:
   CheckBox* srv_internet_server;
 
   Button* cl_refresh_net_games;
-  ListBox* cl_net_games_lst;
+  GameListBox* cl_net_games_lst;
   TextBox* cl_server_address;
   TextBox* cl_port_number;
   PasswordBox* cl_server_pwd;

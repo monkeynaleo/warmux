@@ -30,27 +30,11 @@
 
 class Button;
 
-class ListBoxItem : public Label
-{
-private:
-  std::string value;
-
-public:
-  ListBoxItem(const std::string& _label,
-              Font::font_size_t font_size,
-              Font::font_style_t font_style,
-              const std::string& value,
-              const Color& color = white_color);
-
-  const std::string& GetLabel() const;
-  const std::string& GetValue() const { return value; };
-};
-
-class ListBox : public Widget
+class BaseListBox : public Widget
 {
   /* If you need this, implement it (correctly)*/
-  ListBox(const ListBox&);
-  ListBox operator=(const ListBox&);
+  BaseListBox(const BaseListBox&);
+  BaseListBox operator=(const BaseListBox&);
   /*********************************************/
 
   bool always_one_selected;
@@ -60,7 +44,7 @@ protected:
   // what are the items ?
   uint first_visible_item;
   int selected_item;
-  std::vector<ListBoxItem*> m_items;
+  std::vector<Widget*> m_items;
 
   // Buttons
   Button *m_up, *m_down;
@@ -69,18 +53,19 @@ protected:
   Color selected_item_color;
   Color default_item_color;
 
-  uint margin; // for ListBoxWithLabel
+  uint margin; // for BaseListBoxWithLabel
 
   Rectanglei ScrollBarPos() const;
   virtual void __Update(const Point2i &mousePosition,
 			const Point2i &lastMousePosition);
+  void AddWidgetItem(bool selected, Widget* w);
 
 public:
   void SetSelectedItemColor(const Color & selected_item) { selected_item_color = selected_item; };
   void SetDefaultItemColor(const Color & default_item) { default_item_color = default_item; };
 
-  ListBox (const Point2i &size, bool always_one_selected_b = true);
-  ~ListBox();
+  BaseListBox (const Point2i &size, bool always_one_selected_b = true);
+  ~BaseListBox();
 
   virtual void Draw(const Point2i &mousePosition) const;
 
@@ -88,28 +73,37 @@ public:
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
   virtual void Pack();
 
-  void AddItem(bool selected, const std::string &label,
-               const std::string &value,
-               Font::font_size_t fsize = Font::FONT_SMALL,
-               Font::font_style_t fstyle = Font::FONT_NORMAL,
-               const Color& color = white_color);
   void Sort() const;
 
   int MouseIsOnWhichItem(const Point2i &mousePosition) const;
 
   void Select(uint index);
-  void Select(const std::string& val);
   int GetSelectedItem() const { return selected_item; };
   void Deselect();
   void RemoveSelected();
   void ClearItems();
 
+  uint Size() const { return m_items.size(); };
+};
+
+class ListBoxItem;
+
+class ListBox : public BaseListBox
+{
+  static const ListBoxItem* GetItem(const Widget* w) { return (const ListBoxItem*)w; }
+public:
+  ListBox(const Point2i &size, bool b = true) : BaseListBox(size, b) { }
+  void AddItem(bool selected, const std::string &label,
+               const std::string &value,
+               Font::font_size_t fsize = Font::FONT_SMALL,
+               Font::font_style_t fstyle = Font::FONT_NORMAL,
+               const Color& color = white_color);
+  void Select(const std::string& val);
+  void Select(uint index) { BaseListBox::Select(index); }
   const std::string& ReadLabel() const;
   const std::string& ReadValue() const;
   int ReadIntValue() const;
   const std::string& ReadValue(int index) const;
-
-  uint Size() const { return m_items.size(); };
 };
 
 #endif

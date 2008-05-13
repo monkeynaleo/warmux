@@ -514,7 +514,7 @@ msgstr "Panzerfaust"
 msgid "Commit Suicide"
 msgstr "Selbstmord begehen"
 
-#: src/menu/network_connection_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:196
 msgid "Connect to game"
 msgstr "Zum Spiel verbinden"
 
@@ -591,25 +591,25 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:310
+#: src/menu/network_connection_menu.cpp:346
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Fehler: Kann nicht zu %s:%s verbinden"
 
-#: src/menu/network_connection_menu.cpp:270
+#: src/menu/network_connection_menu.cpp:306
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Fehler: Kann Indexserver nicht kontaktieren um ein Spiel zu hosten"
 
-#: src/menu/network_connection_menu.cpp:217
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Fehler: Kann Indexserver nicht kontaktieren um ein Internetspiel zu suchen"
 
-#: src/menu/network_connection_menu.cpp:290
+#: src/menu/network_connection_menu.cpp:326
 msgid "Error: Unable to start server"
 msgstr "Fehler: Kann Server nicht starten"
 
-#: src/menu/network_connection_menu.cpp:284
+#: src/menu/network_connection_menu.cpp:320
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
@@ -639,7 +639,7 @@ msgstr "Vollbild?"
 msgid "Game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:76
+#: src/menu/network_connection_menu.cpp:119
 msgid "Game name:"
 msgstr "Spielname:"
 
@@ -673,7 +673,7 @@ msgstr ""
 "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:220
 msgid "Have a good game!"
 msgstr "Viel Spaß beim Spiel!"
 
@@ -690,7 +690,7 @@ msgstr "Hauptkommandant:"
 msgid "Help"
 msgstr "Hilfe"
 
-#: src/menu/network_connection_menu.cpp:99
+#: src/menu/network_connection_menu.cpp:142
 msgid "Host a game"
 msgstr "Spiel hosten"
 
@@ -779,7 +779,7 @@ msgstr "Es ist ein Geschenk!"
 msgid "Jetpack"
 msgstr "Düsenrucksack"
 
-#: src/menu/network_connection_menu.cpp:175 src/menu/network_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:218 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Komm nach #wormux auf irc.freenode.net um Gegner zu finden."
 
@@ -804,7 +804,7 @@ msgid "LowGrav"
 msgstr "Geringe Schwerkraft"
 
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:119
+#: src/menu/network_connection_menu.cpp:162
 msgid "Manual connection"
 msgstr ""
 
@@ -917,8 +917,8 @@ msgstr "Fallschirm"
 msgid "Parachute is activated automatically."
 msgstr "Fallschirm wird automatisch aktiviert."
 
-#: src/menu/network_connection_menu.cpp:88
-#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:131
+#: src/menu/network_connection_menu.cpp:191
 msgid "Password:"
 msgstr ""
 
@@ -942,12 +942,12 @@ msgstr "Spielername?"
 msgid "Polecat Launcher"
 msgstr "Stinktier-Werfer"
 
-#: src/menu/network_connection_menu.cpp:65
-#: src/menu/network_connection_menu.cpp:137
+#: src/menu/network_connection_menu.cpp:108
+#: src/menu/network_connection_menu.cpp:180
 msgid "Port:"
 msgstr "Port:"
 
-#: src/menu/network_connection_menu.cpp:112
+#: src/menu/network_connection_menu.cpp:155
 #, fuzzy
 msgid "Public battles"
 msgstr "Schlacht verlassen"
@@ -1001,12 +1001,12 @@ msgstr "Am Rand scrollen"
 msgid "Scroll on border"
 msgstr "Am Rand scrollen"
 
-#: src/menu/network_connection_menu.cpp:126
+#: src/menu/network_connection_menu.cpp:169
 msgid "Server address:"
 msgstr "Server Adresse:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:96
+#: src/menu/network_connection_menu.cpp:139
 msgid "Server available on Internet"
 msgstr "Im Internert verfügbare Server"
 
@@ -1031,7 +1031,7 @@ msgstr "Scharfschützengewehr"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Eine Sprengfalle wurde in einer Holzkiste versteckt."
 
-#: src/menu/network_connection_menu.cpp:224
+#: src/menu/network_connection_menu.cpp:269
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Im Moment gibt es leider keine offenen Spiele"
 
