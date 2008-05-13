@@ -97,7 +97,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   /* Tabs */
   tabs = new MultiTabs(Point2i(max_width,
-			       AppWormux::GetInstance()->video->window.GetHeight()-180));
+                               AppWormux::GetInstance()->video->window.GetHeight()-180));
   tabs->SetPosition(25, 25);
 
   /* server connection related widgets */
@@ -156,14 +156,16 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
   cl_tmp_box->AddWidget(cl_refresh_net_games);
-  cl_tmp_box->AddWidget(new Label(_("Public battles"), def_size.x, Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
+  cl_tmp_box->AddWidget(new Label(_("Public battles"), def_size.x,
+                                  Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
   cl_connection_box->AddWidget(cl_tmp_box);
 
   cl_net_games_lst = new GameListBox( Point2i(def_size.x, 30), false);
   cl_connection_box->AddWidget(cl_net_games_lst);
 
   // Manual connection
-  cl_connection_box->AddWidget(new Label(_("Manual connection"), def_size.x, Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
+  cl_connection_box->AddWidget(new Label(_("Manual connection"), def_size.x,
+                                         Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
 
   // Server address
   cl_tmp_box = new HBox(W_UNDEF, false, false);
@@ -205,13 +207,14 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   // Optimize height of public net games table
   uint net_games_lst_width = tabs->GetSizeX() - 2*(cl_connection_box->GetPositionX()-tabs->GetPositionX());
   uint net_games_lst_height = cl_net_games_lst->GetSizeY() +
-    (tabs->GetPositionY() + tabs->GetSizeY()) - (cl_connection_box->GetPositionY() + cl_connection_box->GetSizeY()) - 10;
+    (tabs->GetPositionY() + tabs->GetSizeY()) -
+    (cl_connection_box->GetPositionY() + cl_connection_box->GetSizeY()) - 10;
   cl_net_games_lst->SetSize(net_games_lst_width, net_games_lst_height);
 
   // Warning about experimental networking
   Point2i msg_box_pos(25, tabs->GetPositionY() + tabs->GetSizeY() + 10);
   Point2i msg_box_size(max_width,
-		       AppWormux::GetInstance()->video->window.GetHeight() - 50 - msg_box_pos.y);
+                       AppWormux::GetInstance()->video->window.GetHeight() - 50 - msg_box_pos.y);
 
   msg_box = new MsgBox(msg_box_size, Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->SetPosition(msg_box_pos);
@@ -237,8 +240,10 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 
   if (w == cl_refresh_net_games)
     RefreshList();
+#if 0
   else if (w == cl_net_games_lst)
-    printf("%s\n", cl_net_games_lst->GetAddress().c_str());
+    RefreshList();
+#endif
 }
 
 void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
@@ -253,8 +258,7 @@ void NetworkConnectionMenu::RefreshList()
   int current = cl_net_games_lst->GetSelectedItem();
 
   // Empty the list:
-  while (cl_net_games_lst->Size() != 0)
-  {
+  while (cl_net_games_lst->Size() != 0) {
     cl_net_games_lst->Select(0);
     cl_net_games_lst->RemoveSelected();
   }
@@ -294,9 +298,9 @@ void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
 }
 
 bool NetworkConnectionMenu::HostingServer(const std::string& port,
-					  const std::string& game_name,
+                                const std::string& game_name,
                                           const std::string& password,
-					  bool internet)
+                                bool internet)
 {
   bool r = false;
 
@@ -304,25 +308,23 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
     IndexServer::GetInstance()->SetHiddenServer();
 
   connection_state_t conn = IndexServer::GetInstance()->Connect();
-  if (conn != CONNECTED)
-    {
-      DisplayNetError(conn);
-      msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
-      goto out;
-    }
+  if (conn != CONNECTED) {
+    DisplayNetError(conn);
+    msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
+    goto out;
+  }
 
   conn = Network::GetInstance()->ServerStart(port, password);
-  if( conn != CONNECTED)
-    {
-      DisplayNetError(conn);
-      goto out;
-    }
+  if (conn != CONNECTED) {
+    DisplayNetError(conn);
+    goto out;
+  }
 
   r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "");
   if (false == r) {
     DisplayNetError(CONN_BAD_PORT);
-    msg_box->NewMessage(_("Error: Your server is not reachable from the internet. Check your firewall configuration")
-			, c_red);
+    msg_box->NewMessage(_("Error: Your server is not reachable from the internet. Check your firewall configuration"),
+                        c_red);
     goto out;
   }
 
@@ -337,8 +339,8 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
 }
 
 bool NetworkConnectionMenu::ConnectToClient(const std::string& srv_address,
-					    const std::string& port,
-					    const std::string& passwd)
+                                  const std::string& port,
+                                  const std::string& passwd)
 {
   bool r = true;
 
@@ -348,8 +350,7 @@ bool NetworkConnectionMenu::ConnectToClient(const std::string& srv_address,
 
     // translators: %s:%s will expand to something like "example.org:9999"
     msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
-			       srv_address.c_str(), port.c_str()),
-			c_red);
+                               srv_address.c_str(), port.c_str()), c_red);
     r = false;
   }
   return r;
@@ -374,32 +375,28 @@ bool NetworkConnectionMenu::signal_ok()
                         srv_internet_server->GetValue());
     if (!ret)
       goto out;
-  } else if (id == "TAB_client") {
-
-    if (!cl_server_address->GetText().empty())
-      { // Direct connexion to a server
-	bool ret;
-	ret = ConnectToClient(cl_server_address->GetText(),
+  } else if (id == "TAB_client") { // Direct connexion to a server    
+    if (!cl_server_address->GetText().empty()) {
+      bool ret;
+      ret = ConnectToClient(cl_server_address->GetText(),
                               cl_port_number->GetText(),
                               cl_server_pwd->GetPassword());
-	if (!ret)
-	  goto out;
+      if (!ret)
+        goto out;
 
-	// Remember the parameters
-	Config::GetInstance()->SetNetworkHost(cl_server_address->GetText());
-	Config::GetInstance()->SetNetworkPort(cl_port_number->GetText());
-      }
-    else
-      { // Connect to an internet game!
-	bool ret;
+      // Remember the parameters
+      Config::GetInstance()->SetNetworkHost(cl_server_address->GetText());
+      Config::GetInstance()->SetNetworkPort(cl_port_number->GetText());
+    } else { // Connect to an internet game! 
+      bool ret;
 
-	if (cl_net_games_lst->GetSelectedItem() == -1)
-	  goto out;
+      if (cl_net_games_lst->GetSelectedItem() == -1)
+        goto out;
 
-	ret = ConnectToClient(cl_net_games_lst->GetAddress(), cl_net_games_lst->GetPort(), "");
-	if (!ret)
-	  goto out;
-      }
+      ret = ConnectToClient(cl_net_games_lst->GetAddress(), cl_net_games_lst->GetPort(), "");
+      if (!ret)
+        goto out;
+    }
   }
 
   if (Network::IsConnected()) {
@@ -428,4 +425,3 @@ bool NetworkConnectionMenu::signal_cancel()
   Network::Disconnect();
   return true;
 }
-
