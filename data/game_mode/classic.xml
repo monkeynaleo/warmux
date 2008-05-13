@@ -364,7 +364,7 @@
     <polecatlauncher>
       <max_strength>25</max_strength>
       <nb_ammo>1</nb_ammo>
-      <damage>80</damage>
+      <damage>40</damage>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>100</explosion_range>
