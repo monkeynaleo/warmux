@@ -45,11 +45,7 @@ class ResultsMenu : public Menu
     MultiTabs *tabs;
     MultiTabs *stats;
 
-    // Box sizes
-    int     max_height;
-
     Box    *winner_box;
-
     Surface podium_img;
 
     bool signal_ok() { return true;};

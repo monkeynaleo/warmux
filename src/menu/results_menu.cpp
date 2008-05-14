@@ -328,7 +328,6 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   , second_team(NULL)
   , third_team(NULL)
   , winner_box(NULL)
-  , max_height(DEF_SIZE+3*DEF_BORDER)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   uint x = 20;
