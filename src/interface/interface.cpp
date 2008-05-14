@@ -302,7 +302,7 @@ void Interface::DrawMapPreview()
 {
   Surface& window  = AppWormux::GetInstance()->video->window;
   const Surface* preview = world.ground.GetPreview();
-  Point2i  offset(MARGIN, MARGIN);
+  Point2i  offset(window.GetWidth() - world.ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
   window.Blit(*preview, world.ground.GetPreviewRect(), offset);
   Rectanglei rect_preview(offset, world.ground.GetPreviewSize());
   world.ToRedrawOnScreen(rect_preview);
