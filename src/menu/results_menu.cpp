@@ -43,7 +43,6 @@
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
-#define DEF_MARGIN     16
 #define DEF_BORDER      8
 #define DEF_SIZE       32
 #define LINE_THICKNESS  2
@@ -58,7 +57,7 @@ class ResultBox : public HBox
 {
   void SetWidgets(const std::string& type, const char* buffer, const Character* player)
   {
-    margin = DEF_MARGIN;
+    margin = DEF_BORDER;
     border = BorderSize;
 
     AddWidget(new Label(type, TypeW, Font::FONT_BIG, Font::FONT_NORMAL));
@@ -82,9 +81,9 @@ class ResultBox : public HBox
   }
 public:
   // Label widthes and font sizes should be inferred from the resolution
-  static const uint TypeW = 120;
-  static const uint NameW = 200;
-  static const uint ScoreW = 40;
+  static const uint TypeW = 180;
+  static const uint NameW = 160;
+  static const uint ScoreW = 60;
 
   ResultBox(const std::string& type)
     : HBox(W_UNDEF, false, false)
@@ -229,7 +228,8 @@ CanvasTeamsGraph::CanvasTeamsGraph(const Point2i& size,
 
 void CanvasTeamsGraph::Draw(const Point2i& /*mousePosition*/) const
 {
-  DrawGraph(position.x, position.y, size.x, size.y);
+  DrawGraph(position.x+DEF_BORDER, position.y+DEF_BORDER,
+            size.x-2*DEF_BORDER, size.y-2*DEF_BORDER);
 }
 
 void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
@@ -299,20 +299,24 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
   double energy_scale = h / (1.1*max_value);
   MSG_DEBUG("menu", "Scaling: %.1f (duration; %u) and %.1f\n",
             duration_scale, Time::GetInstance()->ReadDuration(), energy_scale);
-#if 1
+
   static const Color clist[] =
-    { white_color, primary_red_color, c_yellow, c_grey, green_color, black_color };
+    { black_color, primary_red_color, gray_color, primary_green_color, black_color, primary_blue_color };
   uint   current_color = 0;
   for (it=results.begin(); it!=results.end(); ++it)
   {
     const Team* team = (*it)->getTeam();
     if (team)
     {
+      // Legend line
+      surface.BoxColor(Rectanglei(x+w-100, y+current_color*32,
+                                  56, LINE_THICKNESS), clist[current_color]);
+      // Legend icon
+      surface.Blit(team->GetFlag(), Point2i(x+w-40, y+current_color*40-20));
       DrawTeamGraph(team, x, y+h, duration_scale, energy_scale, clist[current_color]);
       current_color++;
     }
   }
-#endif
 }
 
 //=========================================================
@@ -361,15 +365,16 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   x+=260;
   const Point2i& wsize = AppWormux::GetInstance()->video->window.GetSize();
 
-  tabs = new MultiTabs(Point2i(wsize.x - 300, wsize.y - 90));
+  Point2i tab_size = wsize - Point2i(x, y+70);
+  tabs = new MultiTabs(tab_size);
 
   // Create tabs for each team result
-  stats = new MultiTabs(Point2i(wsize.x - 320, wsize.y - 130));
+  stats = new MultiTabs(tab_size - 2*BorderSize);
   for (uint i=0; i<v.size(); i++)
   {
     const Team* team = v[i]->getTeam();
     const char* name = (team) ? team->GetName().c_str() : _("All teams");
-    stats->AddNewTab(name, name, new ResultListBox(v[i], Point2i(wsize.x - 340, wsize.y - 170)));
+    stats->AddNewTab(name, name, new ResultListBox(v[i], tab_size - 4*BorderSize));
   }
 
   resource_manager.UnLoadXMLProfile(res);
@@ -380,9 +385,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 //   widgets.AddWidget(new Label(_("Time"), ,
 //                               Font::FONT_SMALL, Font::FONT_BOLD, black_color, true, false));
 
-  Widget * canvas = new CanvasTeamsGraph(Point2i(wsize.x/2-GRAPH_BORDER,
-                                                 wsize.y-GRAPH_BORDER-GRAPH_START_Y),
- 					 results);
+  Widget * canvas = new CanvasTeamsGraph(tab_size - 2*BorderSize, results);
 
   tabs->AddNewTab("TAB_canvas", _("Team graphs"), canvas);
   tabs->SetPosition(x, y);
