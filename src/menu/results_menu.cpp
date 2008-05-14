@@ -27,9 +27,11 @@
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
+#include "gui/box.h"
 #include "gui/button.h"
 #include "gui/label.h"
-#include "gui/box.h"
+#include "gui/list_box.h"
+#include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/tabs.h"
 #include "include/app.h"
@@ -49,87 +51,126 @@
 #define GRAPH_BORDER        20
 #define GRAPH_START_Y       400
 
-const Point2i BorderSize(DEF_BORDER, DEF_BORDER);
-const Vector2<double> Zoom(1.7321, 1.7321);
-const Point2i DefSize(DEF_SIZE, DEF_SIZE);
+static const Point2i BorderSize(DEF_BORDER, DEF_BORDER);
+static const Point2i DefSize(DEF_SIZE, DEF_SIZE);
 
 class ResultBox : public HBox
 {
-private:
-  Label *name_lbl;
-  Label *score_lbl;
-  PictureWidget *team_picture;
+  void SetWidgets(const std::string& type, const char* buffer, const Character* player)
+  {
+    margin = DEF_MARGIN;
+    border = BorderSize;
+
+    AddWidget(new Label(type, TypeW, Font::FONT_BIG, Font::FONT_NORMAL));
+
+    AddWidget(new Label((player) ? player->GetName() : _("Nobody!"),
+                        NameW, Font::FONT_BIG, Font::FONT_NORMAL));
+
+    std::string score_str(buffer);
+    AddWidget(new Label(score_str, ScoreW, Font::FONT_BIG, Font::FONT_NORMAL));
+
+    if (player)
+    {
+      PictureWidget *team_picture = new PictureWidget(DefSize);
+      team_picture->SetSurface(player->GetTeam().GetFlag());
+      AddWidget(team_picture);
+    }
+    else
+    {
+      AddWidget(new NullWidget(DefSize));
+    }
+  }
 public:
-  ResultBox(const std::string& type_name,
-            Font::font_size_t font_size,
-            Font::font_style_t font_style,
-            const Point2i& type_size,
-            const Point2i& name_size,
-            const Point2i& score_size);
-  // Hopefully no need for ~ResultBox() as it automatically
-  // destroy child widgets by inheriting from HBox
-  void SetIntResult(const std::string& name, int score, const Surface& team_logo);
-  void SetDoubleResult(const std::string& name, double score, const Surface& team_logo);
-  void SetNoResult();
+  // Label widthes and font sizes should be inferred from the resolution
+  static const uint TypeW = 120;
+  static const uint NameW = 200;
+  static const uint ScoreW = 40;
+
+  ResultBox(const std::string& type)
+    : HBox(W_UNDEF, false, false)
+  {
+    SetWidgets(type, "?", NULL);
+  }
+  ResultBox(const std::string& type, uint score, const Character* player)
+    : HBox(W_UNDEF, false, false)
+  {
+    char buffer[16];
+    snprintf(buffer, 16, "%i", score);
+    SetWidgets(type, buffer, player);
+  }
+  ResultBox(const std::string& type, double score, const Character* player)
+    : HBox(W_UNDEF, false, false)
+  {
+    char buffer[16];
+    snprintf(buffer, 16, "%.1f", score);
+    SetWidgets(type, buffer, player);
+  }
+  void Draw(const Point2i &mousePosition) const
+  {
+    HBox::Draw(mousePosition);
+    for (std::list<Widget*>::const_iterator it = widget_list.begin(); it != widget_list.end(); ++it)
+      (*it)->Draw(mousePosition);
+  }
 };
 
-ResultBox::ResultBox(const std::string& type_name,
-                     Font::font_size_t font_size,
-                     Font::font_style_t font_style,
-                     const Point2i& type_size,
-                     const Point2i& name_size,
-                     const Point2i& score_size)
-  : HBox(W_UNDEF, false, false)
+class ResultListBox : public BaseListBox
 {
-  margin = DEF_MARGIN;
-  border.SetValues(DEF_BORDER, DEF_BORDER);
+public:
+  ResultListBox(const TeamResults* res, const Point2i &size, bool b = true)
+    : BaseListBox(size, b)
+  {
+    ResultBox       *box;
+    const Character *player = res->getMostViolent();
 
-  AddWidget(new Label(type_name, type_size.x, font_size, font_style));
+    //Most violent
+    if (player)
+      box = new ResultBox(_("Most violent"), player->GetDamageStats()->GetMostDamage(), player);
+    else
+      box = new ResultBox(_("Most violent"));
+    AddWidgetItem(false, box);
 
-  name_lbl = new Label("", name_size.x, font_size, font_style);
-  AddWidget(name_lbl);
+    //Most useful
+    player = res->getMostUseful();
+    if (player)
+      box = new ResultBox(_("Most useful"), player->GetDamageStats()->GetOthersDamage(), player);
+    else
+      box = new ResultBox(_("Most useful"));
+    AddWidgetItem(false, box);
 
-  score_lbl = new Label("", score_size.x, font_size, font_style);
-  AddWidget(score_lbl);
+    //Most useless
+    player = res->getMostUseless();
+    if (player)
+      box = new ResultBox(_("Most useless"), player->GetDamageStats()->GetOthersDamage(), player);
+    else
+      box = new ResultBox(_("Most useless"));
+    AddWidgetItem(false, box);
 
-  team_picture = new PictureWidget(Point2i(48, 48) );
-  AddWidget(team_picture);
-}
+    // Biggest sold-out
+    player = res->getBiggestTraitor();
+    if (player)
+      box = new ResultBox(_("Most sold-out"), player->GetDamageStats()->GetFriendlyFireDamage(), player);
+    else
+      box = new ResultBox(_("Most sold-out"));
+    AddWidgetItem(false, box);
 
-void ResultBox::SetIntResult(const std::string& name, int score, const Surface& team_logo)
-{
-  char buffer[16];
-  std::string copy_name(name);
+    // Most clumsy
+    player = res->getMostClumsy();
+    if (player)
+      box = new ResultBox(_("Most clumsy"), player->GetDamageStats()->GetItselfDamage(), player);
+    else
+      box = new ResultBox(_("Most clumsy"));
+    AddWidgetItem(false, box);
 
-  snprintf(buffer, 16, "%i", score);
+    // Most accurate
+    player = res->getMostAccurate();
+    if (player)
+      box = new ResultBox(_("Most accurate"), player->GetDamageStats()->GetAccuracy(), player);
+    else
+      box = new ResultBox(_("Most accurate"));
+    AddWidgetItem(false, box);
+  }
+};
 
-  std::string score_str(buffer);
-
-  name_lbl->SetText(copy_name);
-  score_lbl->SetText(score_str);
-  team_picture->SetSurface(team_logo);
-}
-
-void ResultBox::SetDoubleResult(const std::string& name, double score, const Surface& team_logo)
-{
-  char buffer[16];
-  std::string copy_name(name);
-
-  snprintf(buffer, 16, "%.1f", score);
-
-  std::string score_str(buffer);
-
-  name_lbl->SetText(copy_name);
-  score_lbl->SetText(score_str);
-  team_picture->SetSurface(team_logo);
-}
-
-void ResultBox::SetNoResult()
-{
-  name_lbl->SetText(_("Nobody!"));
-  score_lbl->SetText("0");
-  team_picture->SetNoSurface();
-}
 
 //=========================================================
 
@@ -282,13 +323,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   , first_team(NULL)
   , second_team(NULL)
   , third_team(NULL)
-  , index(-1)
-  , max_height(DEF_SIZE+3*DEF_BORDER)
-  , team_size(360, 40)
-  , type_size(200, 40)
-  , name_size(150, 40)
-  , score_size(40, 40)
   , winner_box(NULL)
+  , max_height(DEF_SIZE+3*DEF_BORDER)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   uint x = 20;
@@ -323,67 +359,29 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   podium_img = resource_manager.LoadImage(res, "menu/podium");
 
   x+=260;
+  const Point2i& wsize = AppWormux::GetInstance()->video->window.GetSize();
 
-  tabs = new MultiTabs(Point2i(520, 550));
+  tabs = new MultiTabs(Point2i(wsize.x - 300, wsize.y - 90));
 
-  Box* statistics_box = new VBox(510, false);
-
-  //Team selection
-  team_box = new HBox(max_height, false);
-  team_box->SetMargin(DEF_MARGIN);
-  team_box->SetBorder(Point2i(DEF_BORDER, DEF_BORDER));
-
-  bt_prev_team = new Button(res, "menu/really_big_minus");
-  team_box->AddWidget(bt_prev_team);
-
-  team_logo = new PictureWidget(Point2i(48, 48) );
-  team_box->AddWidget(team_logo);
-
-  team_name = new Label("", team_size.x-48, Font::FONT_BIG, Font::FONT_NORMAL);
-  team_box->AddWidget(team_name);
-
-  bt_next_team = new Button(res, "menu/really_big_plus");
-  team_box->AddWidget(bt_next_team);
-
-  statistics_box->AddWidget(team_box);
-
-  most_violent = new ResultBox(_("Most violent"), Font::FONT_BIG, Font::FONT_NORMAL,
-                               type_size, name_size, score_size);
-  statistics_box->AddWidget(most_violent);
-
-  most_useful = new ResultBox(_("Most useful"), Font::FONT_BIG, Font::FONT_NORMAL,
-			      type_size, name_size, score_size);
-  statistics_box->AddWidget(most_useful);
-
-  most_useless = new ResultBox(_("Most useless"), Font::FONT_BIG, Font::FONT_NORMAL,
-                               type_size, name_size, score_size);
-  statistics_box->AddWidget(most_useless);
-
-  biggest_traitor = new ResultBox(_("Most sold-out"), Font::FONT_BIG, Font::FONT_NORMAL,
-                                  type_size, name_size, score_size);
-  statistics_box->AddWidget(biggest_traitor);
-
-  most_clumsy = new ResultBox(_("Most clumsy"), Font::FONT_BIG, Font::FONT_NORMAL,
-                              type_size, name_size, score_size);
-  statistics_box->AddWidget(most_clumsy);
-
-  most_accurate = new ResultBox(_("Most accurate"), Font::FONT_BIG, Font::FONT_NORMAL,
-                                type_size, name_size, score_size);
-  statistics_box->AddWidget(most_accurate);
-
-  statistics_box->SetPosition(x, y);
+  // Create tabs for each team result
+  stats = new MultiTabs(Point2i(wsize.x - 320, wsize.y - 130));
+  for (uint i=0; i<v.size(); i++)
+  {
+    const Team* team = v[i]->getTeam();
+    const char* name = (team) ? team->GetName().c_str() : _("All teams");
+    stats->AddNewTab(name, name, new ResultListBox(v[i], Point2i(wsize.x - 340, wsize.y - 170)));
+  }
 
   resource_manager.UnLoadXMLProfile(res);
 
-  tabs->AddNewTab("TAB_team", _("Team stats"), statistics_box);
+  tabs->AddNewTab("TAB_team", _("Team stats"), stats);
 
   // Label for graph axes
 //   widgets.AddWidget(new Label(_("Time"), ,
 //                               Font::FONT_SMALL, Font::FONT_BOLD, black_color, true, false));
 
-  Widget * canvas = new CanvasTeamsGraph(
- 					 Point2i(AppWormux::GetInstance()->video->window.GetWidth()/2-GRAPH_BORDER,
- 						 AppWormux::GetInstance()->video->window.GetHeight()-GRAPH_BORDER-GRAPH_START_Y),
+  Widget * canvas = new CanvasTeamsGraph(Point2i(wsize.x/2-GRAPH_BORDER,
+                                                 wsize.y-GRAPH_BORDER-GRAPH_START_Y),
  					 results);
 
   tabs->AddNewTab("TAB_canvas", _("Team graphs"), canvas);
@@ -435,109 +433,15 @@ void ResultsMenu::DrawPodium(const Point2i& position) const
     DrawTeamOnPodium(*third_team, position, Point2i(98,42));
 }
 
-void ResultsMenu::SetResult(int i)
-{
-  if (index == i)
-    return;
-
-  const Character* player = NULL;
-  const TeamResults* res = NULL;
-  std::string name;
-
-  DrawBackground();
-  b_ok->NeedRedrawing();
-
-  if (winner_box)
-    winner_box->NeedRedrawing();
-
-  DrawPodium(Point2i(70,250));
-
-  index = i;
-  if (index < 0)
-    index = results.size()-1;
-  else if (index > (int)results.size()-1)
-    index = 0;
-
-  res = results.at(index);
-
-  //Team header
-  if (res->getTeam() == NULL) {
-    name = _("All teams");
-    team_logo->SetNoSurface();
-  } else {
-    name = res->getTeam()->GetName()+" - "+res->getTeam()->GetPlayerName();
-    team_logo->SetSurface(res->getTeam()->GetFlag());
-  }
-
-  team_name->SetText(name);
-
-  //Most violent
-  player = res->getMostViolent();
-  if (player)
-    most_violent->SetIntResult(player->GetName(), player->GetDamageStats()->GetMostDamage(), player->GetTeam().GetFlag());
-  else
-    most_violent->SetNoResult();
-
-  //Most useful
-  player = res->getMostUseful();
-  if (player)
-    most_useful->SetIntResult(player->GetName(), player->GetDamageStats()->GetOthersDamage(), player->GetTeam().GetFlag());
-  else
-    most_useful->SetNoResult();
-
-  //Most useless
-  player = res->getMostUseless();
-  if (player)
-    most_useless->SetIntResult(player->GetName(), player->GetDamageStats()->GetOthersDamage(), player->GetTeam().GetFlag());
-  else
-    most_useless->SetNoResult();
-
-  // Biggest sold-out
-  player = res->getBiggestTraitor();
-  if (player)
-    biggest_traitor->SetIntResult(player->GetName(), player->GetDamageStats()->GetFriendlyFireDamage(), player->GetTeam().GetFlag());
-  else
-    biggest_traitor->SetNoResult();
-
-  // Most clumsy
-  player = res->getMostClumsy();
-  if (player)
-    most_clumsy->SetIntResult(player->GetName(), player->GetDamageStats()->GetItselfDamage(), player->GetTeam().GetFlag());
-  else
-    most_clumsy->SetNoResult();
-
-  // Most accurate
-  player = res->getMostAccurate();
-  if (player)
-    most_accurate->SetDoubleResult(player->GetName(), player->GetDamageStats()->GetAccuracy(), player->GetTeam(). GetFlag());
-  else
-    most_accurate->SetNoResult();
-
-  tabs->NeedRedrawing();
-}
-
 void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  Widget* w = widgets.ClickUp(mousePosition, button);
-
-  if (button == SDL_BUTTON_LEFT && w == bt_prev_team)
-    SetResult(index-1);
-  else if (button == SDL_BUTTON_LEFT && w == bt_next_team)
-    SetResult(index+1);
-  else if ( button == SDL_BUTTON_WHEELDOWN || w == statistics_box )
-    SetResult(index-1);
-  else if (button == SDL_BUTTON_WHEELUP || w == statistics_box )
-    SetResult(index+1);
+  widgets.ClickUp(mousePosition, button);
 }
 
-void ResultsMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
+void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
 {
   // Do nothing if user has not released the button
+  widgets.Click(mousePosition, button);
 }
 
-void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
-{
-  if (index == -1)
-    SetResult(results.size()-1);
-}
-
+void ResultsMenu::Draw(const Point2i &/*mousePosition*/) { }
