@@ -246,7 +246,7 @@ void NetworkConnectionMenu::RefreshList()
 {
 
   // Save the currently selected address
-  int current = cl_net_games_lst->GetSelectedItem();
+  //int current = cl_net_games_lst->GetSelectedItem();
 
   // Empty the list:
   while (cl_net_games_lst->Size() != 0)
@@ -275,8 +275,8 @@ void NetworkConnectionMenu::RefreshList()
     cl_net_games_lst->AddItem(false, it->passworded, it->ip_address,
                               it->port, it->dns_address, it->game_name);
   }
-  if (current != -1 && cl_net_games_lst->Size() != 0)
-    cl_net_games_lst->Select( current );
+  /* if (current != -1 && cl_net_games_lst->Size() != 0)
+     cl_net_games_lst->Select( current ); */
   cl_net_games_lst->NeedRedrawing();
 
   IndexServer::GetInstance()->Disconnect();
@@ -363,22 +363,28 @@ bool NetworkConnectionMenu::signal_ok()
 
   if (id == "TAB_server") {
     // Hosting your own server
-    bool ret;
-    ret = HostingServer(srv_port_number->GetText(),
-                        srv_game_name->GetText(),
-                        srv_game_pwd->GetPassword(),
-                        srv_internet_server->GetValue());
-    if (!ret)
+    r = HostingServer(srv_port_number->GetText(),
+		      srv_game_name->GetText(),
+		      srv_game_pwd->GetPassword(),
+		      srv_internet_server->GetValue());
+    if (!r)
       goto out;
   } else if (id == "TAB_client") {
 
-    if (!cl_server_address->GetText().empty())
-      { // Direct connexion to a server
-	bool ret;
-	ret = ConnectToClient(cl_server_address->GetText(),
+    if (cl_net_games_lst->GetSelectedItem() != -1)
+      {
+	// Connect to an internet game!
+	r = ConnectToClient(cl_net_games_lst->GetAddress(), cl_net_games_lst->GetPort(), "");
+	if (!r)
+	  goto out;
+      }
+    else if (!cl_server_address->GetText().empty())
+      {
+	// Direct connexion to a server
+	r = ConnectToClient(cl_server_address->GetText(),
                               cl_port_number->GetText(),
                               cl_server_pwd->GetPassword());
-	if (!ret)
+	if (!r)
 	  goto out;
 
 	// Remember the parameters
@@ -386,16 +392,7 @@ bool NetworkConnectionMenu::signal_ok()
 	Config::GetInstance()->SetNetworkPort(cl_port_number->GetText());
       }
     else
-      { // Connect to an internet game!
-	bool ret;
-
-	if (cl_net_games_lst->GetSelectedItem() == -1)
-	  goto out;
-
-	ret = ConnectToClient(cl_net_games_lst->GetAddress(), cl_net_games_lst->GetPort(), "");
-	if (!ret)
-	  goto out;
-      }
+      goto out;
   }
 
   if (Network::IsConnected()) {
