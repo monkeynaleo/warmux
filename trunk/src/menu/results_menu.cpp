@@ -60,13 +60,13 @@ class ResultBox : public HBox
     margin = DEF_BORDER;
     border = BorderSize;
 
-    AddWidget(new Label(type, TypeW, Font::FONT_BIG, Font::FONT_NORMAL));
+    AddWidget(new Label(type, TypeW, Font::FONT_MEDIUM, Font::FONT_NORMAL));
 
     AddWidget(new Label((player) ? player->GetName() : _("Nobody!"),
-                        NameW, Font::FONT_BIG, Font::FONT_NORMAL));
+                        NameW, Font::FONT_MEDIUM, Font::FONT_NORMAL));
 
     std::string score_str(buffer);
-    AddWidget(new Label(score_str, ScoreW, Font::FONT_BIG, Font::FONT_NORMAL));
+    AddWidget(new Label(score_str, ScoreW, Font::FONT_MEDIUM, Font::FONT_NORMAL));
 
     if (player)
     {
@@ -101,7 +101,8 @@ public:
     : HBox(W_UNDEF, false, false)
   {
     char buffer[16];
-    snprintf(buffer, 16, "%.1f", score);
+    if (score+0.05<100.0) snprintf(buffer, 16, "%.1f", score);
+    else                  snprintf(buffer, 16, "%.0f", score);
     SetWidgets(type, buffer, player);
   }
   void Draw(const Point2i &mousePosition) const
