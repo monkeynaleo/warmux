@@ -29,7 +29,7 @@ class Surface;
 class NullWidget : public Widget
 {
  public:
-  NullWidget(const Point2i& size) : Widget(size) {};
+  NullWidget(const Rectanglei&) {};
   virtual ~NullWidget() {};
   virtual void Draw(const Point2i&) const {};
   virtual void Pack() {};

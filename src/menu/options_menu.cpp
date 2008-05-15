@@ -38,6 +38,7 @@
 #include "gui/picture_widget.h"
 #include "gui/picture_text_cbox.h"
 #include "gui/spin_button_picture.h"
+#include "gui/list_box_w_label.h"
 #include "gui/tabs.h"
 #include "gui/question.h"
 #include "map/maps_list.h"

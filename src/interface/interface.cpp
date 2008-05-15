@@ -302,11 +302,10 @@ void Interface::DrawMapPreview()
 {
   Surface& window  = AppWormux::GetInstance()->video->window;
   const Surface* preview = world.ground.GetPreview();
-  Point2i  offset(window.GetWidth() - world.ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
+  Point2i  offset  = window.GetSize() - world.ground.GetPreviewSize() - Point2i(MARGIN/2, 2*MARGIN);
   window.Blit(*preview, world.ground.GetPreviewRect(), offset);
   Rectanglei rect_preview(offset, world.ground.GetPreviewSize());
   world.ToRedrawOnScreen(rect_preview);
-  window.RectangleColor(rect_preview, white_color);
 
   FOR_EACH_TEAM(team) {
     const Surface& icon = (*team)->GetMiniFlag();

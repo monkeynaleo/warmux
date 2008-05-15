@@ -50,7 +50,6 @@ using namespace std;
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
-#include "menu/skin_menu.h"
 #include "network/index_server.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
@@ -59,7 +58,6 @@ using namespace std;
 
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
-static const char* skin = NULL;
 //static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
 
 AppWormux *AppWormux::singleton = NULL;
@@ -153,14 +151,6 @@ int AppWormux::Main(void)
         }
         case MainMenu::QUIT:
           quit = true;
-          break;
-        case MainMenu::SKIN_VIEWER:
-        {
-          SkinMenu skin_menu(skin);
-          menu = &skin_menu;
-          skin_menu.Run();
-          break;
-        }
         default:
           break;
       }
@@ -297,13 +287,12 @@ void ParseArgs(int argc, char * argv[])
       {"internet",   no_argument,       NULL, 'i'},
       {"client",     optional_argument, NULL, 'c'},
       {"server",     no_argument,       NULL, 's'},
-      {"skin-viewer",optional_argument, NULL, 'y'},
       {"game-mode",  required_argument, NULL, 'g'},
       {"debug",      required_argument, NULL, 'd'},
       {NULL,         no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hbvpic::l::sy::g:d:",
+  while ((c = getopt_long (argc, argv, "hbvpic::l::sg:d:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
@@ -311,7 +300,7 @@ void ParseArgs(int argc, char * argv[])
         case 'h':
           printf("usage: %s [-h|--help] [-v|--version] [-p|--play]"
                  " [-i|--internet] [-s|--server] [-c|--client [ip]]\n"
-                 " [-g|--game-mode <game_mode>] [-y|--skin-viewer [team]]"
+		 " [-g|--game-mode <game_mode>]"
 #ifdef DEBUG
                  " [-d|--debug <debug_masks>|all]\n"
 #endif
@@ -363,12 +352,6 @@ void ParseArgs(int argc, char * argv[])
         case 'l':
           if (optarg) IndexServer::GetInstance()->SetLocal(optarg);
           else        IndexServer::GetInstance()->SetLocal();
-          break;
-        case 'y':
-          choice = MainMenu::SKIN_VIEWER;
-          skin = optarg;
-          //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
-          skip_menu = true;
           break;
 	case 'g':
 	  printf("Game-mode: %s\n", optarg);

@@ -520,7 +520,7 @@ msgstr "Bazuka"
 msgid "Commit Suicide"
 msgstr "Izdarīt pašnvību"
 
-#: src/menu/network_connection_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:196
 msgid "Connect to game"
 msgstr "Pieslēgties spēlei"
 
@@ -595,25 +595,25 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:310
+#: src/menu/network_connection_menu.cpp:346
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Kļūda: Nevar pieslēgties %s:%s"
 
-#: src/menu/network_connection_menu.cpp:270
+#: src/menu/network_connection_menu.cpp:306
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Kļūda: Nevar sazināties ar indeksa serveri, lai izvietotu spēli"
 
-#: src/menu/network_connection_menu.cpp:217
+#: src/menu/network_connection_menu.cpp:262
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Kļūda: Nevar sazināties ar indeksa serveri, lai meklētu interneta spēles"
 
-#: src/menu/network_connection_menu.cpp:290
+#: src/menu/network_connection_menu.cpp:326
 msgid "Error: Unable to start server"
 msgstr "Kļūda: Nevar sākt serveri"
 
-#: src/menu/network_connection_menu.cpp:284
+#: src/menu/network_connection_menu.cpp:320
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
@@ -641,7 +641,7 @@ msgstr "Pa visu ekrānu?"
 msgid "Game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:76
+#: src/menu/network_connection_menu.cpp:119
 msgid "Game name:"
 msgstr ""
 
@@ -674,7 +674,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "MĀJAS mape (vides mainīgias $HOME) nav atrasts!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:220
 msgid "Have a good game!"
 msgstr "Lai jums jauka spēle!"
 
@@ -691,7 +691,7 @@ msgstr "Virspavēlnieks: "
 msgid "Help"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:99
+#: src/menu/network_connection_menu.cpp:142
 msgid "Host a game"
 msgstr "Izveidot spēli"
 
@@ -782,7 +782,7 @@ msgstr "Tā ir dāvana!"
 msgid "Jetpack"
 msgstr "Raķešsoma"
 
-#: src/menu/network_connection_menu.cpp:175 src/menu/network_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:218 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pievienojies #wormux kanālam irc.freenode.net serverī, lai atrastu "
@@ -809,7 +809,7 @@ msgid "LowGrav"
 msgstr "Antigravitācija"
 
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:119
+#: src/menu/network_connection_menu.cpp:162
 msgid "Manual connection"
 msgstr ""
 
@@ -924,8 +924,8 @@ msgstr "Paršūts"
 msgid "Parachute is activated automatically."
 msgstr "Parašūts aktivizējas automātiski."
 
-#: src/menu/network_connection_menu.cpp:88
-#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:131
+#: src/menu/network_connection_menu.cpp:191
 msgid "Password:"
 msgstr ""
 
@@ -949,12 +949,12 @@ msgstr "Spēlētāja vārds?"
 msgid "Polecat Launcher"
 msgstr "Sesku šāvējs"
 
-#: src/menu/network_connection_menu.cpp:65
-#: src/menu/network_connection_menu.cpp:137
+#: src/menu/network_connection_menu.cpp:108
+#: src/menu/network_connection_menu.cpp:180
 msgid "Port:"
 msgstr "Ports:"
 
-#: src/menu/network_connection_menu.cpp:112
+#: src/menu/network_connection_menu.cpp:155
 msgid "Public battles"
 msgstr ""
 
@@ -1009,12 +1009,12 @@ msgstr "Ritināt karti"
 msgid "Scroll on border"
 msgstr "Ritināt karti"
 
-#: src/menu/network_connection_menu.cpp:126
+#: src/menu/network_connection_menu.cpp:169
 msgid "Server address:"
 msgstr "Servera adrese:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:96
+#: src/menu/network_connection_menu.cpp:139
 msgid "Server available on Internet"
 msgstr "Serveris pieejams internetā"
 
@@ -1039,7 +1039,7 @@ msgstr "Snaiperšautene"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:224
+#: src/menu/network_connection_menu.cpp:269
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 

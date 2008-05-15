@@ -61,14 +61,6 @@ void WidgetList::AddWidget(Widget* w)
   w->SetContainer(this);
 }
 
-void WidgetList::RemoveWidget(Widget* w)
-{
-  ASSERT(w!=NULL);
-  widget_list.remove(w);
-  w->SetContainer(NULL);
-  delete w;
-}
-
 void WidgetList::Update(const Point2i &mousePosition)
 {
   if (mouse_selection != NULL && !mouse_selection->Contains(mousePosition)) {

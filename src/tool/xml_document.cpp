@@ -78,8 +78,17 @@ std::string XmlReader::ExportToString()
   return ret;
 }
 
+#if DEBUG
+static int count = 0;
+#endif
+
 xmlNode* XmlReader::GetMarker(xmlNode* x, const std::string &name)
 {
+#ifdef DEBUG
+  if (!count)
+    MSG_DEBUG("xml", "  Getting marker %s", name.c_str());
+  count++;
+#endif
   for (; x; x = x->next)
   {
     if (x->children)
@@ -87,15 +96,27 @@ xmlNode* XmlReader::GetMarker(xmlNode* x, const std::string &name)
       xmlNode *node = GetMarker(x->children, name);
       if (node)
       {
+#ifdef DEBUG
+        count--;
+#endif
         return node;
       }
     }
 
     if (name.empty() || name == (const char*)x->name) // xmlpp::Node::get_children
     {
+#ifdef DEBUG
+      MSG_DEBUG("xml", "  Found at %p", x);
+      count--;
+#endif
       return x;
     }
   };
+#ifdef DEBUG
+  count--;
+  if (!count)
+    MSG_DEBUG("xml", "  Getting marker %s", name.c_str());
+#endif
   return NULL;
 }
 
@@ -152,6 +173,12 @@ xmlNode* XmlReader::Access(xmlNode* x,
                            const std::string &name,
                            const std::string &attr_name)
 {
+#ifdef DEBUG
+  if (!count)
+    MSG_DEBUG("xml", "Accessing attribute '%s' in element of name '%s' at %p...",
+              attr_name.c_str(), name.c_str(), x);
+  count++;
+#endif
   for (; x; x = x->next)
   {
     if (x->children)
@@ -159,6 +186,9 @@ xmlNode* XmlReader::Access(xmlNode* x,
       xmlNode* node = Access(x->children, name, attr_name);
       if (node)
       {
+#ifdef DEBUG
+        count--;
+#endif
         return node;
       }
     }
@@ -172,12 +202,21 @@ xmlNode* XmlReader::Access(xmlNode* x,
         if (attr_name == (const char*)value)
         {
           xmlFree(value);
+#ifdef DEBUG
+          MSG_DEBUG("xml", "    Found %p", x);
+          count--;
+#endif
           return x;
         }
         xmlFree(value);
       }
     }
   }
+#ifdef DEBUG
+  count--;
+  if (!count)
+    MSG_DEBUG("xml", "  Getting marker %s", name.c_str());
+#endif
 
   return NULL;
 }

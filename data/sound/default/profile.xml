@@ -30,6 +30,12 @@
   <sound sample="friendly_fire" file="crazy_04.ogg" />
   <sound sample="friendly_fire" file="crazy_05.ogg" />
 
+  <sound sample="cuss" file="cuss_01.ogg" />
+  <sound sample="cuss" file="cuss_02.ogg" />
+  <sound sample="cuss" file="cuss_03.ogg" />
+  <sound sample="cuss" file="cuss_04.ogg" />
+
+  <sound sample="laugh" file="hehe.ogg" />
   <sound sample="skip_turn" file="skip_turn.ogg" />
 
   <sound sample="weapon/jetpack" file="../share/weapon/jetpack.ogg" />

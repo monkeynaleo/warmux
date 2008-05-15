@@ -13,7 +13,7 @@ BINDIR=/mingw
 HKLM_PATH="SOFTWARE\Games\Wormux"
 
 # Version number in installer
-WORMUX_VERSION=`date +"%Y%m%d"`
+WORMUX_VERSION=0.8
 
 # Set compression and in/out
 COMPRESSION="/solid lzma"

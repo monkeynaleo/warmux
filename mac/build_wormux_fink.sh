@@ -27,9 +27,9 @@ export HERE=`pwd`
 
 export PROG_NAME=wormux
 export BUNDLE_NAME=Wormux
-export APP_VERSION=0.8svn
+export APP_VERSION=0.8
 
-export SOURCE_DIR=${HERE}/../../wormux
+export SOURCE_DIR=${HERE}/..
 export FINK_PATH=/sw/bin:/sw/sbin
 #export  OTHER_PATH=/src/usr/local-${ARCH}/bin
 export PATH=${FINK_PATH}:/bin:/sbin:/usr/bin:/usr/sbin
@@ -204,7 +204,7 @@ DMG_TARGET="${BUNDLE_NAME} ${APP_VERSION}"
 /usr/bin/hdiutil create -type SPARSE -size 85m -fs HFS+ -volname "${DMG_TARGET}" -attach ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
 /bin/cp -R ${APP_DIR} "/Volumes/${DMG_TARGET}"
 
-svn log -r ${OLD_SVN}:${NEW_SVN} > "/Volumes/${DMG_TARGET}/Changelog"
+svn log -r ${OLD_SVN}:${NEW_SVN} > "/Volumes/${DMG_TARGET}/Changelog.txt"
 
 echo ""
 echo "All files have been copied to the disk image /Volumes/${DMG_TARGET}"

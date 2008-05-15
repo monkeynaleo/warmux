@@ -104,7 +104,6 @@ wormux_SOURCES = \
         menu/options_menu.cpp menu/options_menu.h \
         menu/pause_menu.cpp menu/pause_menu.h \
         menu/results_menu.cpp menu/results_menu.h \
-        menu/skin_menu.cpp menu/skin_menu.h \
         menu/team_box.cpp menu/team_box.h \
         menu/teams_selection_box.cpp menu/teams_selection_box.h \
         network/admin_commands.cpp network/admin_commands.h \
