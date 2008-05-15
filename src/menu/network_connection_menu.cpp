@@ -240,10 +240,6 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 
   if (w == cl_refresh_net_games)
     RefreshList();
-#if 0
-  else if (w == cl_net_games_lst)
-    RefreshList();
-#endif
 }
 
 void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
@@ -253,7 +249,6 @@ void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
 
 void NetworkConnectionMenu::RefreshList()
 {
-
   // Save the currently selected address
   int current = cl_net_games_lst->GetSelectedItem();
 
@@ -298,9 +293,9 @@ void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
 }
 
 bool NetworkConnectionMenu::HostingServer(const std::string& port,
-                                const std::string& game_name,
+                                          const std::string& game_name,
                                           const std::string& password,
-                                bool internet)
+                                          bool internet)
 {
   bool r = false;
 
@@ -339,8 +334,8 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
 }
 
 bool NetworkConnectionMenu::ConnectToClient(const std::string& srv_address,
-                                  const std::string& port,
-                                  const std::string& passwd)
+                                            const std::string& port,
+                                            const std::string& passwd)
 {
   bool r = true;
 
