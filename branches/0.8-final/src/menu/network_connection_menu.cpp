@@ -158,6 +158,17 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   cl_net_games_lst = new GameListBox( Point2i(def_size.x, 30), false);
   cl_connection_box->AddWidget(cl_net_games_lst);
 
+  // Server password
+  cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box->SetMargin(0);
+  cl_tmp_box->SetBorder(Point2i(0,0));
+
+  cl_tmp_box->AddWidget(new Label(_("Password:"), def_size.x/2));
+  cl_net_server_pwd = new PasswordBox("", def_size.x/2);
+  cl_tmp_box->AddWidget(cl_net_server_pwd);
+  cl_connection_box->AddWidget(cl_tmp_box);
+
+  // #####################################
   // Manual connection
   cl_connection_box->AddWidget(new Label(_("Manual connection"), def_size.x, Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
 
@@ -374,7 +385,9 @@ bool NetworkConnectionMenu::signal_ok()
     if (cl_net_games_lst->GetSelectedItem() != -1)
       {
 	// Connect to an internet game!
-	r = ConnectToClient(cl_net_games_lst->GetAddress(), cl_net_games_lst->GetPort(), "");
+	r = ConnectToClient(cl_net_games_lst->GetAddress(),
+			    cl_net_games_lst->GetPort(),
+			    cl_net_server_pwd->GetPassword());
 	if (!r)
 	  goto out;
       }
