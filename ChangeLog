@@ -1,3 +1,22 @@
+> 2008/05/16 - 0.8 release
+
+  - Network game fixes
+  - Lot of bugfixes /cleaning code
+  - New maps: Country, Icebergs, Lonely Island
+  - New weapons: Football bomb, Cluzooka
+  - Minimap preview
+  - Camera improvements
+  - Various graphical improvements
+  - Water/lava particles added
+  - Some sounds added, useless ones deleted
+  - Menus compatible with smallest resolutions
+  - Help section added (menu explaining shortkeys and howtoplay.pdf documentation provided)
+  - "Looking for updates" option
+  - Volume control option
+  - Weapons damages tweaking
+  - User dir as XDG recommandation (Freedesktop)
+  - Translations added/updated
+
 > 2007/12/23 - 0.8beta4 release
   - Network bug fixes:
       * random number generator
