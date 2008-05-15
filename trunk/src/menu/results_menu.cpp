@@ -309,10 +309,10 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
     if (team)
     {
       // Legend line
-      surface.BoxColor(Rectanglei(x+w-100, y+current_color*32,
+      surface.BoxColor(Rectanglei(x+w-100, y+4+current_color*40,
                                   56, LINE_THICKNESS), clist[current_color]);
       // Legend icon
-      surface.Blit(team->GetFlag(), Point2i(x+w-40, y+current_color*40-20));
+      surface.Blit(team->GetFlag(), Point2i(x+w-40, y+4+current_color*40-20));
       DrawTeamGraph(team, x, y+h, duration_scale, energy_scale, clist[current_color]);
       current_color++;
     }
@@ -329,7 +329,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   , third_team(NULL)
   , winner_box(NULL)
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   uint x = 20;
   uint y = 20;
 
@@ -360,11 +360,12 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   // Load the podium img
   podium_img = resource_manager.LoadImage(res, "menu/podium");
+  resource_manager.UnLoadXMLProfile(res);
 
   x+=260;
   const Point2i& wsize = AppWormux::GetInstance()->video->window.GetSize();
 
-  Point2i tab_size = wsize - Point2i(x, y+70);
+  Point2i tab_size = wsize - Point2i(x+16, y+70);
   tabs = new MultiTabs(tab_size);
 
   // Create tabs for each team result
@@ -375,18 +376,10 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     const char* name = (team) ? team->GetName().c_str() : _("All teams");
     stats->AddNewTab(name, name, new ResultListBox(v[i], tab_size - 4*BorderSize));
   }
-
-  resource_manager.UnLoadXMLProfile(res);
-
   tabs->AddNewTab("TAB_team", _("Team stats"), stats);
 
-  // Label for graph axes
-//   widgets.AddWidget(new Label(_("Time"), ,
-//                               Font::FONT_SMALL, Font::FONT_BOLD, black_color, true, false));
-
-  Widget * canvas = new CanvasTeamsGraph(tab_size - 2*BorderSize, results);
-
-  tabs->AddNewTab("TAB_canvas", _("Team graphs"), canvas);
+  tabs->AddNewTab("TAB_canvas", _("Team graphs"),
+                  new CanvasTeamsGraph(tab_size - 2*BorderSize, results));
   tabs->SetPosition(x, y);
 
   widgets.AddWidget(tabs);
@@ -446,4 +439,7 @@ void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
   widgets.Click(mousePosition, button);
 }
 
-void ResultsMenu::Draw(const Point2i &/*mousePosition*/) { }
+void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
+{
+  DrawPodium(Point2i(70,250));
+}
