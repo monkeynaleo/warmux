@@ -53,6 +53,8 @@ private:
 
   Button* cl_refresh_net_games;
   GameListBox* cl_net_games_lst;
+  PasswordBox* cl_net_server_pwd;
+
   TextBox* cl_server_address;
   TextBox* cl_port_number;
   PasswordBox* cl_server_pwd;
