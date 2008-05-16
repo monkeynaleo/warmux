@@ -76,10 +76,12 @@ echo "Copy all frameworks"
 cd ${MAC};
 MIRROR=http://plorf.homeip.net/wormux/lib/
 
-echo "Frameworks will be downloaded from ${MIRROR} (3MB)"
-
-curl ${MIRROR}frameworks.tar.bz2 -o ${MAC}frameworks.tar.bz2
-tar xvfj ${MAC}frameworks.tar.bz2 -C ${APP}Contents/Frameworks
+if [ ! -e "${MAC}frameworks.tar.bz2" ]
+then 
+    echo "Frameworks will be downloaded from ${MIRROR} (3MB)";
+    curl ${MIRROR}frameworks.tar.bz2 -o ${MAC}frameworks.tar.bz2;
+fi
+    tar xvfj ${MAC}frameworks.tar.bz2 -C ${APP}Contents/Frameworks;
 
 echo "Remove temps files"
 #rm -rf ${MAC}tmpbuild
