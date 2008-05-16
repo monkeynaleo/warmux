@@ -204,7 +204,7 @@ DMG_TARGET="${BUNDLE_NAME} ${APP_VERSION}"
 /usr/bin/hdiutil create -type SPARSE -size 85m -fs HFS+ -volname "${DMG_TARGET}" -attach ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
 /bin/cp -R ${APP_DIR} "/Volumes/${DMG_TARGET}"
 
-svn log -r ${OLD_SVN}:${NEW_SVN} > "/Volumes/${DMG_TARGET}/Changelog.txt"
+cat ${SOURCE_DIR}/Changelog > "/Volumes/${DMG_TARGET}/Changelog.txt"
 
 echo ""
 echo "All files have been copied to the disk image /Volumes/${DMG_TARGET}"
