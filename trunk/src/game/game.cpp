@@ -338,7 +338,7 @@ void Game::Draw ()
 
   StatStop("GameDraw:other");
 
-  // Draw the interface (current team's information, weapon's ammo)
+  // Draw the interface (current team information, weapon ammo)
   StatStart("GameDraw:interface");
   Interface::GetInstance()->Draw ();
   StatStop("GameDraw:interface");
@@ -396,17 +396,17 @@ void Game::Run()
 
   } while(!IsGameFinished());
 
-  // the game is finished but we won't go at the results screen to fast!
+  // the game is finished but we won't go at the results screen too fast!
   if (IsGameFinished()) {
     EndOfGame();
   }
   // * When debug is disabled : only show the result menu if game
-  // have 'regularly' finished (only one survivor or timeout reached)
+  //   have 'regularly' finished (only one survivor or timeout reached)
   // * When debug is disabled : still show the result menu everytime the game
-  // is quit during local games (so we can still the result menu often).
-  // For network game only show the result if the game is regularly finished
-  // (elsewise when someone if someone quit the game before the end, it appears
-  // as disconnected only when if finnishes viewing the f*cking result menu)
+  //   is quit during local games (so we can still the result menu often).
+  // For network game only, show the result if the game is regularly finished
+  // (elsewise when someone quits the game before the end, it appears
+  // as disconnected only when if finishes viewing the result menu)
 #ifndef DEBUG
   if (IsGameFinished())
 #else
@@ -414,7 +414,7 @@ void Game::Run()
 #endif
     MessageEndOfGame();
 
-  // Fix bug #10613: ensure all teams are reseted as local teams
+  // Fix bug #10613: ensure all teams are reset as local teams
   FOR_EACH_TEAM(team)
     (**team).SetLocal();
 }
@@ -422,8 +422,7 @@ void Game::Run()
 bool Game::HasBeenNetworkDisconnected() const
 {
   const Network* net          = Network::GetInstance();
-  bool           disconnected = !net->IsLocal() && net->cpu.empty();
-  return disconnected;
+  return !net->IsLocal() && net->cpu.empty();
 }
 
 void Game::MessageEndOfGame() const
@@ -515,7 +514,7 @@ bool Game::NewBox()
     box = new BonusBox();
     type = 2;
   }
-  // Randomize contain
+  // Randomize container
   box->Randomize();
   // Storing value of bonus box and send it over network.
   Action * a = new Action(Action::ACTION_NEW_BONUS_BOX);
@@ -553,12 +552,12 @@ void Game::Really_SetState(game_loop_state_t new_state)
 
   switch (state)
   {
-  // Begining of a new turn:
+  // Beginning of a new turn:
   case PLAYING:
     __SetState_PLAYING();
     break;
 
-  // The character have shooted, but can still move
+  // The character has shot, but can still move
   case HAS_PLAYED:
     __SetState_HAS_PLAYED();
     break;
@@ -659,7 +658,7 @@ void Game::SignalCharacterDeath (const Character *character) const
     if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUICIDE) {
       txt = Format(_("%s commits suicide !"), character -> GetName().c_str());
 
-      // Dead in moving ?
+      // Dead while moving ?
     } else if (state == PLAYING) {
       txt = Format(_("%s has fallen off the map!"),
                    character -> GetName().c_str());

@@ -70,7 +70,7 @@ private:
 
   bool                isGameLaunched;
   ObjBox              *current_ObjBox;
-  // Set the user requested a pause/end of the game
+  // Set that the user requested a pause/end of the game
   bool                ask_for_menu;
 
   FramePerSecond      *fps;

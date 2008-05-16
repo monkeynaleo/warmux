@@ -157,7 +157,7 @@ uint GameBlitz::GetRemainingTime() const
   return times.find(&ActiveTeam())->second;
 }
 
-// Begining of a new turn
+// Beginning of a new turn
 void GameBlitz::__SetState_PLAYING()
 {
   MSG_DEBUG("game.statechange", "Playing" );
@@ -188,7 +188,7 @@ void GameBlitz::__SetState_PLAYING()
 
       if ( Network::GetInstance()->IsTurnMaster() )
         {
-          // Tell to clients which character in the team is now playing
+          // Tell clients which character in the team is now playing
           Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
           playing_char.StoreActiveCharacter();
           Network::GetInstance()->SendAction(&playing_char);
@@ -212,7 +212,7 @@ void GameBlitz::__SetState_PLAYING()
   Interface::GetInstance()->EnableDisplayTimer(true);
   pause_seconde = Time::GetInstance()->Read();
 
-  give_objbox = true; //hack make it so no more than one objbox per turn
+  give_objbox = true; //hack: make it so that no more than one objbox per turn
 }
 
 void GameBlitz::__SetState_HAS_PLAYED()

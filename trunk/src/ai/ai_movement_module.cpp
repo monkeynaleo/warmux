@@ -97,9 +97,9 @@ bool AIMovementModule::RiskGoingOutOfMap() const
 }
 
 // =================================================
-// A jump is made of many movement :
-// 1) Decect collision and prepare to go back
-// 2) Go back, then when far enought of the obstacle
+// A jump is made of many movements :
+// 1) Detect collision and prepare to go back
+// 2) Go back, then when far enough of the obstacle
 // 3) Jump!
 // 4) Detect when on the ground!
 // =================================================
@@ -161,8 +161,8 @@ void AIMovementModule::EndOfJump()
     StopMoving();
 
   } else {
-    // No more blocked !!
-    MSG_DEBUG("ai.move", "We are NO MORE blocked");
+    // No longer blocked !!
+    MSG_DEBUG("ai.move", "We are NO LONGER blocked");
     SetMovement(WALKING);
   }
 }
@@ -278,12 +278,12 @@ void AIMovementModule::Move(uint current_time)
   switch (GetCurrentMovement()) {
 
   case NO_MOVEMENT:
-    // Begin to walk
+    // Begin walking
     Walk();
     break;
 
   case WALKING:
-    // Continue to walk
+    // Continue walking
     Walk();
     break;
 

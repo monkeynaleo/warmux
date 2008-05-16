@@ -165,17 +165,6 @@ void TeamEnergy::SetValue(uint new_energy)
   energy_list.AddValue(new_energy);
 }
 
-void TeamEnergy::SetRanking(uint _rank)
-{
-  rank = _rank;
-  new_rank = _rank;
-}
-
-void TeamEnergy::NewRanking(uint _new_rank)
-{
-  new_rank = _new_rank;
-}
-
 // Move energy bar (change in ranking)
 void TeamEnergy::Move()
 {
@@ -200,7 +189,7 @@ void TeamEnergy::Move()
 
     dx = (int)(((float)new_rank - rank) * (BAR_WIDTH + BAR_SPACING) * ((global_time->Read() - move_start_time) / MOVE_DURATION));
 
-    // displacement in arc of circle only when losing place ranking
+    // displacement in arc only when losing place ranking
     if( new_rank > rank ) {
       dy = (int)((BAR_HEIGHT * ((float)rank - new_rank)) * 0.5 *
            sin( M_PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
@@ -227,11 +216,4 @@ void TeamEnergy::FinalizeMove()
   move_start_time = 0;
   status = EnergyStatusWait;
   return;
-}
-
-bool TeamEnergy::IsMoving () const
-{
-  if( dx != 0 || dy != 0 )
-    return true;
-  return false;
 }

@@ -68,7 +68,7 @@ private:
 #endif
 
   // chrono
-  uint pause_bouge_dg;  // pause pour mouvement droite/gauche
+  uint rl_motion_pause;  // pause for left/right motion
   uint do_nothing_time;
   uint walking_time;
   uint animation_time;
@@ -81,7 +81,7 @@ private:
   // Generates green bubbles when the character is ill
   ParticleEngine *particle_engine;
 
-  // this is needed because of network to know
+  // this is needed because of network needing to know
   // if we have changed of active character
   bool is_playing;
 public:

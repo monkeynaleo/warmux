@@ -41,8 +41,8 @@ BodyList::BodyList()
 
 void BodyList::FreeMem()
 {
-  // The bodies member variable are freed from here, because the playing bodies only contains
-  // to member/movement/clothes of the bodies in the body_list
+  // The bodies member variable are freed from here, because the playing bodies
+  //  only contains pointers to member/movement/clothes of the bodies in the body_list
 
   std::map<std::string, Body*>::iterator it = list.begin();
   while(it != list.end())

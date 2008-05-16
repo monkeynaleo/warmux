@@ -192,7 +192,7 @@ void Member::Draw(const Point2i & _pos, int flip_center, int direction)
 
 void Member::ApplySqueleton(Member* parent_member)
 {
-  // Place the member to shape the squeleton
+  // Place the member to shape the skeleton
   if(parent_member == NULL)
   {
     std::cerr << "Member " << name << " have no parent member!" << std::endl;
@@ -210,7 +210,7 @@ void Member::ApplySqueleton(Member* parent_member)
     pos = pos + parent->attached_members.find(type)->second[parent->spr->GetCurrentFrame()];
 }
 
-void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& squel_lst)
+void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& skel_lst)
 {
   // Apply the movment to the member,
   // And apply the movement accordingly to the child members
@@ -226,9 +226,9 @@ void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& squel_l
       child != attached_members.end();
       child++ )
   {
-    // Find this member in the squeleton:
-    for(std::vector<junction>::iterator member = squel_lst.begin();
-        member != squel_lst.end();
+    // Find this member in the skeleton:
+    for(std::vector<junction>::iterator member = skel_lst.begin();
+        member != skel_lst.end();
         member++)
     {
       if(member->member->type == child->first)
@@ -261,8 +261,8 @@ void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& squel_l
           child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
           child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
         }
-        // Apply recursively to childrens:
-        member->member->ApplyMovement(child_mvt, squel_lst);
+        // Apply recursively to children:
+        member->member->ApplyMovement(child_mvt, skel_lst);
       }
     }
   }

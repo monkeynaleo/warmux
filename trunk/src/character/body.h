@@ -72,7 +72,7 @@ class Body
   const Clothe* current_clothe;
   Movement* current_mvt;
 
-  // When a movement/clothe is played once, those variable saves the previous state;
+  // When a movement/clothe is played once, those variables save the previous state
   Movement* play_once_mvt_sauv;
   const Clothe* play_once_clothe_sauv;
   uint play_once_frame_sauv;
@@ -87,10 +87,10 @@ class Body
 
   double main_rotation_rad;
 
-  std::vector<junction> squel_lst; // Squeleton of the body:
-                                        // Order to use to build the body
-                                        // First element: member to build
-                                        // Secnd element: parent member
+  std::vector<junction> skel_lst; // Body skeleton:
+                                  // Order to use to build the body
+                                  // First element: member to build
+                                  // Secnd element: parent member
   BodyDirection_t direction;
 
   int animation_number;

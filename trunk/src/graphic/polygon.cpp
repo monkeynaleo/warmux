@@ -30,7 +30,7 @@
 //=========== POLYGON BUFFER ============ //
 // Use this structure to store transformed point
 // In affine transformation, never transform directly the original point !
-// If you do it, your point will becoming dented.
+// If you do it, your point will become dented.
 
 PolygonBuffer::PolygonBuffer()
 {
@@ -175,7 +175,7 @@ Point2i PolygonItem::GetOffsetAlignment() const
 }
 
 //=========== POLYGON ============ //
-// Store a vector of point and handle affine transformation,
+// Store a vector of points and handle affine transformation,
 // Bezier interpolation handling etc.
 
 Polygon::Polygon()
@@ -309,7 +309,7 @@ bool Polygon::IsClockWise() const
   return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y) < 0;
 }
 
-// Not accurate at 100% but sufficent for the moment
+// Not 100% accurate but sufficient for now
 bool Polygon::IsOverlapping(const Polygon & poly) const
 {
   for(int i = 0; i < GetNbOfPoint(); i++) {
@@ -353,7 +353,7 @@ void Polygon::InsertPoint(int index, const Point2d & p)
   vector_tmp.push_back(p);
   shape_buffer->vx[i] = (int)p.x;
   shape_buffer->vy[i++] = (int)p.y;
-  // And interting remaining point of previous shape
+  // And inserting remaining points of previous shape
   for(; point != original_shape.end(); point++, i++) {
     tmp = *point;
     vector_tmp.push_back(tmp);
@@ -490,8 +490,8 @@ int Polygon::GetNbOfPoint() const
   return (int)original_shape.size();
 }
 
-// And the famous Bezier curve. And this algorithme is that simple ? I'm so disappointed !
-// But now you can say to the world wormux is using Bezier curve.
+// And the famous Bezier curve. And this algorithm is that simple ? I'm so disappointed !
+// But now you can tell the world wormux is using Bezier curves.
 void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
                              const Point2d& control2, const Point2d& anchor2,
                              const int num_steps, const bool add_first_point,

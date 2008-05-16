@@ -105,7 +105,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   energy_bar(),
   survivals(0),
   name_text(NULL),
-  pause_bouge_dg(0),
+  rl_motion_pause(0),
   do_nothing_time(0),
   walking_time(0),
   animation_time(Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX)),
@@ -164,7 +164,7 @@ Character::Character (const Character& acharacter) :
   energy_bar(acharacter.energy_bar),
   survivals(acharacter.survivals),
   name_text(NULL),
-  pause_bouge_dg(acharacter.pause_bouge_dg),
+  rl_motion_pause(acharacter.rl_motion_pause),
   do_nothing_time(acharacter.do_nothing_time),
   walking_time(acharacter.walking_time),
   animation_time(acharacter.animation_time),
@@ -358,7 +358,7 @@ void Character::Draw()
   // Gone in another world ?
   if (IsGhost()) return;
 
-  // Character is visible on carema? If not, just leave the function
+  // Character is visible on camera? If not, just leave the function
   // WARNING, this optimization is disabled if it is the active character
   // because there could be some tricks in the drawing of the weapon (cf bug #10242)
   if (!IsActiveCharacter()) {
@@ -606,13 +606,13 @@ void Character::PrepareTurn()
 {
   damage_stats->HandleMostDamage();
   lost_energy = 0;
-  pause_bouge_dg = Time::GetInstance()->Read();
+  rl_motion_pause = Time::GetInstance()->Read();
 }
 
 bool Character::CanMoveRL() const
 {
   if (!IsImmobile() || IsFalling()) return false;
-  return pause_bouge_dg < Time::GetInstance()->Read();
+  return rl_motion_pause < Time::GetInstance()->Read();
 }
 
 void Character::BeginMovementRL(uint pause, bool slowly)
@@ -626,15 +626,15 @@ void Character::BeginMovementRL(uint pause, bool slowly)
   }
   CharacterCursor::GetInstance()->Hide();
   step_sound_played = true;
-  pause_bouge_dg = Time::GetInstance()->Read()+pause;
+  rl_motion_pause = Time::GetInstance()->Read()+pause;
 }
 
 bool Character::CanStillMoveRL(uint pause)
 {
-  if (pause_bouge_dg + pause < Time::GetInstance()->Read())
+  if (rl_motion_pause + pause < Time::GetInstance()->Read())
   {
     walking_time = Time::GetInstance()->Read();
-    pause_bouge_dg = pause_bouge_dg + pause;
+    rl_motion_pause = rl_motion_pause + pause;
     return true;
   }
   return false;
@@ -646,7 +646,7 @@ void Character::SignalCollision(const Point2d& speed_vector)
   // Do not manage dead characters.
   if (IsDead()) return;
 
-  pause_bouge_dg = Time::GetInstance()->Read();
+  rl_motion_pause = Time::GetInstance()->Read();
 
   GameMode * game_mode = GameMode::GetInstance();
   if (body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID()

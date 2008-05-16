@@ -53,7 +53,7 @@ Body::Body(xmlNode* xml, const Profile* res):
   current_frame(0),
   walk_events(0),
   main_rotation_rad(0),
-  squel_lst(),
+  skel_lst(),
   direction(DIRECTION_RIGHT),
   animation_number(0),
   need_rebuild(false),
@@ -155,7 +155,7 @@ Body::Body(const Body& _body):
   current_frame(0),
   walk_events(0),
   main_rotation_rad(0),
-  squel_lst(),
+  skel_lst(),
   direction(DIRECTION_RIGHT),
   animation_number(_body.animation_number),
   need_rebuild(true),
@@ -245,10 +245,10 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
 #endif
 
   // Move each member following the movement description
-  // We do it using the order of the squeleton, as the movement of each
-  // member affect the child members as well
-  std::vector<junction>::iterator member = squel_lst.begin();
-  for (;member != squel_lst.end();
+  // We do it using the order of the skeleton, as the movement of each
+  // member affects the child members as well
+  std::vector<junction>::iterator member = skel_lst.begin();
+  for (;member != skel_lst.end();
        member++)
   {
     ASSERT( frame < mvt->frames.size() );
@@ -307,11 +307,10 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
           mb_mvt.SetAngle(mb_mvt.GetAngle() + M_PI);
       }
 
-      member->member->ApplyMovement(mb_mvt, squel_lst);
+      member->member->ApplyMovement(mb_mvt, skel_lst);
 
       // This movement needs to know the position of the member before
-      // being applied so it does a second ApplyMovement afterwards
-      // to be used
+      // being applied so it does a second ApplyMovement after being used
       if(mb_mvt.follow_cursor && Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE)
       {
 	member_mvt angle_mvt;
@@ -333,7 +332,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
 	  angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
 
           angle_mvt.SetAngle(angle);
-          member->member->ApplyMovement(angle_mvt, squel_lst);
+          member->member->ApplyMovement(angle_mvt, skel_lst);
 	}
       }
     }
@@ -342,17 +341,17 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
 
 void Body::ApplySqueleton()
 {
-  // Move each member following the squeleton
-  std::vector<junction>::iterator member = squel_lst.begin();
+  // Move each member following the skeleton
+  std::vector<junction>::iterator member = skel_lst.begin();
   // The first member is the body, we set it to pos:
   member->member->pos = Point2f(0.0, 0.0);
   member->member->SetAngle(0.0);
   member++;
 
-  for(;member != squel_lst.end();
+  for(;member != skel_lst.end();
        member++)
   {
-    // Place the other members depending of the parent member:
+    // Place the other members depending on the parent member:
     member->member->ApplySqueleton(member->parent);
   }
 }
@@ -370,7 +369,7 @@ void Body::Build()
 	  current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->speed;
 	  last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->speed) * current_mvt->speed;
 
-	  // Depending on playmode loop if we have exceeded the nbr of frame of this movement
+	  // Depending on playmode loop if we have exceeded the nbr of frames of this movement
 	  if(current_frame >= current_mvt->frames.size())
 	    {
 	      if(current_mvt->play_mode == Movement::LOOP)
@@ -401,8 +400,8 @@ void Body::Build()
   ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
 
-  // Rotate each sprite, because the next part need to know the height of the sprite
-  // once he is rotated
+  // Rotate each sprite, because the next part need to know the height
+  // of the sprite once it is rotated
   for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
     if (current_clothe->layers[layer]->name != "weapon")
       current_clothe->layers[layer]->RotateSprite();
@@ -422,9 +421,9 @@ void Body::Build()
       }
   }
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->test_bottom;
-  body_mvt.pos.x = GetSize().x / 2.0 - squel_lst.front().member->spr->GetWidth() / 2.0;
+  body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front().member->spr->GetWidth() / 2.0;
   body_mvt.SetAngle(main_rotation_rad);
-  squel_lst.front().member->ApplyMovement(body_mvt, squel_lst);
+  skel_lst.front().member->ApplyMovement(body_mvt, skel_lst);
 
   need_rebuild = false;
 }
@@ -452,7 +451,7 @@ void Body::Draw(const Point2i& _pos)
 
 void Body::AddChildMembers(Member* parent)
 {
-  // Add child members of the parent member to the squeleton
+  // Add child members of the parent member to the skeleton
   // and continue recursively with child members
   for(std::map<std::string, v_attached>::iterator child = parent->attached_members.begin();
       child != parent->attached_members.end();
@@ -467,7 +466,7 @@ void Body::AddChildMembers(Member* parent)
         junction body;
         body.member = current_clothe->layers[lay];
         body.parent = parent;
-        squel_lst.push_back(body);
+        skel_lst.push_back(body);
 
         // continue recursively
         AddChildMembers(current_clothe->layers[lay]);
@@ -480,26 +479,26 @@ void Body::BuildSqueleton()
 {
   // Find each member used by the current clothe
   // and set the parent member of each member
-  squel_lst.clear();
+  skel_lst.clear();
 
-  // Find the "body" member as its the top of the squeleton
+  // Find the "body" member as it is the top of the skeleton
   for(uint lay = 0; lay < current_clothe->layers.size(); lay++)
     if(current_clothe->layers[lay]->type == "body")
     {
       junction body;
       body.member = current_clothe->layers[lay];
       body.parent = NULL;
-      squel_lst.push_back(body);
+      skel_lst.push_back(body);
       break;
     }
 
-  if(squel_lst.size() == 0)
+  if(skel_lst.size() == 0)
   {
     std::cerr << "Unable to find the \"body\" member in the current clothe" << std::endl;
     ASSERT(false);
   }
 
-  AddChildMembers(squel_lst.front().member);
+  AddChildMembers(skel_lst.front().member);
 }
 
 void Body::SetClothe(const std::string& name)

@@ -63,7 +63,7 @@ bool ComputeHeightMovement(Character &character, int &height,
         return true;
       }
     }
-    //We can go down, but the step is to big -> the character will fall.
+    //We can go down, but the step is too big -> the character will fall
     if (falling) {
       character.SetX (character.GetX() +character.GetDirection());
       character.UpdatePosition();

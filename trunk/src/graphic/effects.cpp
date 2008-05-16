@@ -24,7 +24,7 @@
 
 //Make the sdl_surface 'a', do a wave of 'nbr_frames', and last 'duration' milliseconds.
 //wave_amp is the amplitude of the wave on the left and the right side of the sprite
-//wave_per is the number of periode of the wave when it is waved at the maximum
+//wave_per is the number of periods of the wave when it is waved at the maximum
 //used on the skin during teleportation
 Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
                     unsigned int duration, float wave_amp, float wave_per){
@@ -60,7 +60,7 @@ Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
 }
 
 // Modify the scale of 'spr' to make it deform as if it was rebounding
-// dy return the offset that should be used to display the sprite
+// dy returns the offset that should be used to display the sprite
 // at the good position t0 time when we began to rebound
 // per time to do one full rebound
 // dy_max offset max of the rebound ( 0 <= dy <= dy_max )
@@ -89,9 +89,9 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
 }
 
 //Returns value of y_stretch and y, to be used on an object, to make him do
-// a gelatine like shaking.
+// a gelatin-like shaking.
 // stretch_y: number of pixel to stretch the img
-// t0 : time of begining of the effect in milliseconds
+// t0 : beginning time of the effect in milliseconds
 // amp: amplitude of the oscillation in pixel
 // dur: duration of the oscillation in milliseconds
 // per: number of oscillations
@@ -105,7 +105,7 @@ void Gelatine (int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
     return;
   }
 
-  //Amplitude decrease linearly with time
+  //Amplitude decreases linearly with time
   amp = amp * (dur - dt) / dur;
 
   //Scale

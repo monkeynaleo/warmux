@@ -35,7 +35,7 @@ AIengine::AIengine()
 
 void AIengine::Refresh() const
 {
-  // AI does not have right to play
+  // AI is not allowed to play
   if (Game::GetInstance()->ReadState() == Game::END_TURN)
     return;
 

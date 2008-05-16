@@ -272,7 +272,7 @@ void Sprite::Calculate_Rotation_Offset(const Surface& tmp_surface)
 {
   const SpriteFrame& frame = GetCurrentFrameObject();
   const Surface &surface = frame.surface;
-  // Calculate offset of the depending on hotspot rotation position :
+  // Calculate offset of the surface depending on hotspot rotation position :
 
   int surfaceHeight = surface.GetHeight();
   int surfaceWidth = surface.GetWidth();

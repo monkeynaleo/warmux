@@ -328,7 +328,7 @@ const Character* AIShootModule::FindEnemy()
 void AIShootModule::ChooseDirection() const
 {
   if ( m_enemy ) {
-    // TODO : Replace by a more clever function
+    // TODO : Replace by a cleverer function
     if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 10 )
       return;
 

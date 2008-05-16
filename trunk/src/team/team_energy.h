@@ -109,21 +109,20 @@ class TeamEnergy
 
     TeamEnergy(Team * _team);
     ~TeamEnergy();
-    void Config(uint _current_energy,
-                uint _max_energy);
+    void Config(uint _current_energy, uint _max_energy);
 
     void Refresh();
     void Draw(const Point2i& pos);
 
     void SetIcon(const Surface & icon);
-    void SetValue(uint nv_energie);
+    void SetValue(uint new_energy);
 
-    void SetRanking(uint classem); // no animation
-    void NewRanking(uint nv_classem);
+    void SetRanking(uint value) { rank = new_rank = value; }
+    void NewRanking(uint value) { new_rank = value; }
     // Move energy bar (change ranking)
     void Move();
-    bool IsMoving() const;
-    // Move energy bar immediatly to there destination
+    bool IsMoving() const { return (dx!=0 || dy!=0); }
+    // Move energy bar immediatly to its destination
     void FinalizeMove();
 };
 

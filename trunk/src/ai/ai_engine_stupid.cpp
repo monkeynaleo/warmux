@@ -84,7 +84,7 @@ void AIStupidEngine::Refresh()
 //     {
 //     case 0:
 //       if (m_nearest_enemy) {
-//         // we already knows who to shoot
+//         // we already know whom to shoot
 //         m_step = 1;
 //       } else {
 //         m_movement.Move(m_current_time);
