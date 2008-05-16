@@ -5,6 +5,7 @@ cd tmpbuild
 export CMAKE_INSTALL_PREFIX=./wormux-files
 cmake ../..
 make
+sudo make install
 
 # pwd = /mac/tmpbuild
 rm -rf ../Wormux.app
@@ -17,14 +18,17 @@ echo "Copy data into .app file"
 
 # Copy data files into .app
 mkdir -p ../Wormux.app/Contents/Resources/data
-echo "Error : i think to much data choose.. (140MB at end)"
-cp -R ../../data/ ../Wormux.app/Contents/Resources/data/
+echo "Check data copy"
+cp -R /usr/local/share/wormux ../Wormux.app/Contents/Resources/data
+#echo "Error : i think to much data choose.. (140MB at end)"
+#cp -R ../../data/ ../Wormux.app/Contents/Resources/data/
 
 # Copy locale files into .app
 mkdir -p ../Wormux.app/Contents/Resources/locale
-echo "Error : wormux in english, so i think it's not working... search where is it"
-cp -R /usr/share/locale ../Wormux.app/Contents/Resources/locale
-
+#echo "Error : wormux in english, so i think it's not working... search where is it"
+#cp -R /usr/share/locale ../Wormux.app/Contents/Resources/locale
+echo "Check locale copy"
+cp -R /usr/local/share/locale ../Wormux.app/Contents/Resources/locale
 
 # pwd = /mac
 cd ..
