@@ -1,58 +1,82 @@
 #!/bin/sh
 
-mkdir tmpbuild
-cd tmpbuild
+#
+# Set environment for compile
+#
+ 
+MAC=`pwd`/
+ROOT=${MAC}../
+SRC=${ROOT}src/
+cp libSDLmain_UB.a ${ROOT}
+cp libintl.a ${ROOT}
+mkdir ${MAC}tmpbuild
+TMP=${MAC}tmpbuild/
+
 export CMAKE_INSTALL_PREFIX=./wormux-files
+
+#
+# Compile
+#
+
+cd ${TMP}
 cmake ../..
 make
 
-# pwd = /mac/tmpbuild
-rm -rf ../Wormux.app
+#
+# Clean environment
+#
+
+rm ${ROOT}/libSDLmain_UB.a ${ROOT}/libintl.a 
+
+
+#
+# Generate .app File
+#
+
 echo "Create Wormux.app file"
-mkdir -p ../Wormux.app/Contents/Resources
-mkdir -p ../Wormux.app/Contents/MacOS
-mkdir -p ../Wormux.app/Contents/Frameworks
+
+rm -rf ${MAC}Wormux.app
+
+mkdir -p ${MAC}Wormux.app
+APP=${MAC}Wormux.app/
+mkdir -p ${APP}Contents/Resources
+mkdir -p ${APP}Contents/MacOS
+mkdir -p ${APP}Contents/Frameworks
+RES=${APP}Contents/Resources/
+mkdir -p ${RES}data
+mkdir -p ${RES}locale
 
 echo "Copy data into .app file"
 
 # Copy data files into .app
-mkdir -p ../Wormux.app/Contents/Resources/data
-echo "Error : i think to much data choose.. (140MB at end)"
-cp -R ../../data/ ../Wormux.app/Contents/Resources/data/
+echo "Error : i think to much data choose.. (140MB at end : we can have 70MB :/)"
+cp -R ${ROOT}data/ ${RES}data/
+INSTALL=/usr/local/share/
+#cp -R ${INSTALL}wormux ${RES}data
 
 # Copy locale files into .app
-mkdir -p ../Wormux.app/Contents/Resources/locale
-echo "Error : wormux in english, so i think it's not working... search where is it"
-cp -R /usr/share/locale ../Wormux.app/Contents/Resources/locale
+#echo "Error : wormux in english, so i think it's not working... search where is it"
+cp -R ${INSTALL}locale ${RES}/locale
 
-
-# pwd = /mac
-cd ..
 
 # Add icon and info.plist and PkgInfo
-cp Info.plist.in ./Wormux.app/Contents/info.plist
-cp PkgInfo.in ./Wormux.app/Contents/
-cp ../data/wormux_128x128.icns ./Wormux.app/Contents/Resources/Wormux.icns
+cp ${MAC}Info.plist.in ${APP}Contents/info.plist
+cp ${MAC}PkgInfo.in ${APP}Contents/
+cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
-
-#pwd = /mac/tmpbuild
-cd tmpbuild
 
 echo "Add bin"
-cp src/wormux ../Wormux.app/Contents/MacOS/wormux
+cp ${TMP}src/wormux ${APP}Contents/MacOS/wormux
 
 echo "Add data"
 #cp -r $INSTALL_PREFIX/share/wormux ./Wormux.app/Contents/Resources/data
-cp -r /usr/local/share/locale ../Wormux.app/Contents/Resources/locale
+cp -r /usr/local/share/locale ${RES}locale
 
-#pwd = /mac
-cd ..
-
-echo "COPY DYLIB OR FRAMEWORKS ????"
-echo "Check if write rights are ok to copy frameworks"
 echo "Copy all frameworks"
+tar xvfz ${MAC}frameworks.tar.gz -C ${APP}Contents/Frameworks
+
 
 echo "Remove temps files"
-#rm -rf tmpbuild
+#rm -rf ${MAC}tmpbuild
 echo "Build done"
 
