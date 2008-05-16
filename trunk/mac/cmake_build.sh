@@ -73,8 +73,13 @@ echo "Add data"
 cp -r /usr/local/share/locale ${RES}locale
 
 echo "Copy all frameworks"
-tar xvfz ${MAC}frameworks.tar.gz -C ${APP}Contents/Frameworks
+cd ${MAC};
+MIRROR=http://plorf.homeip.net/wormux/lib/
 
+echo "Frameworks will be downloaded from ${MIRROR} (3MB)"
+
+curl ${MIRROR}frameworks.tar.bz2 -o ${MAC}frameworks.tar.bz2
+tar xvfj ${MAC}frameworks.tar.bz2 -C ${APP}Contents/Frameworks
 
 echo "Remove temps files"
 #rm -rf ${MAC}tmpbuild
