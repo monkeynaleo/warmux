@@ -162,6 +162,8 @@ SetCompressor ${COMPRESSION}
   !include "${LOCAL_PATH}\langmacros.nsh"
   !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "ENGLISH"  "${LOCAL_PATH}\English.nsh"
   !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "FRENCH"   "${LOCAL_PATH}\French.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "GREEK"    "${LOCAL_PATH}\Greek.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "POLISH"   "${LOCAL_PATH}\Polish.nsh"
 
 ;--------------------------------
 ;Folder-selection page
