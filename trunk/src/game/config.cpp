@@ -372,7 +372,6 @@ void Config::LoadDefaultValue()
       }
     }
   }
-  else printf("Bleh...\n");
 
 #if 0 //== Team Color
   int number_of_team_color = resource_manager.LoadInt(res, "team_colors/number_of_team_color");
