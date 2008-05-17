@@ -55,18 +55,22 @@ static const Point2i DefSize(DEF_SIZE, DEF_SIZE);
 
 class ResultBox : public HBox
 {
-  void SetWidgets(const std::string& type, const char* buffer, const Character* player)
+  void SetWidgets(uint size, const std::string& type, const char* buffer, const Character* player)
   {
     margin = DEF_BORDER;
     border = BorderSize;
+    size -= 4*DEF_BORDER + 40;
+    // Should resize more depending on font size
+    Font::font_size_t font = (size > 400) ? Font::FONT_BIG : Font::FONT_MEDIUM;
+    printf("Size=%u\n", size);
 
-    AddWidget(new Label(type, TypeW, Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    AddWidget(new Label(type, (size*TypeW)/TotalW, font, Font::FONT_NORMAL));
 
     AddWidget(new Label((player) ? player->GetName() : _("Nobody!"),
-                        NameW, Font::FONT_MEDIUM, Font::FONT_NORMAL));
+                        (size*NameW)/TotalW, font, Font::FONT_NORMAL));
 
     std::string score_str(buffer);
-    AddWidget(new Label(score_str, ScoreW, Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    AddWidget(new Label(score_str, (size*ScoreW)/TotalW, font, Font::FONT_NORMAL));
 
     if (player)
     {
@@ -81,29 +85,30 @@ class ResultBox : public HBox
   }
 public:
   // Label widthes and font sizes should be inferred from the resolution
-  static const uint TypeW = 180;
-  static const uint NameW = 160;
-  static const uint ScoreW = 60;
+  static const uint TypeW  = 180;
+  static const uint NameW  = 160;
+  static const uint ScoreW = 50;
+  static const uint TotalW = TypeW + NameW + ScoreW;
 
-  ResultBox(const std::string& type)
+  ResultBox(uint size, const std::string& type)
     : HBox(W_UNDEF, false, false)
   {
-    SetWidgets(type, "?", NULL);
+    SetWidgets(size, type, "?", NULL);
   }
-  ResultBox(const std::string& type, uint score, const Character* player)
+  ResultBox(uint size, const std::string& type, uint score, const Character* player)
     : HBox(W_UNDEF, false, false)
   {
     char buffer[16];
     snprintf(buffer, 16, "%i", score);
-    SetWidgets(type, buffer, player);
+    SetWidgets(size, type, buffer, player);
   }
-  ResultBox(const std::string& type, double score, const Character* player)
+  ResultBox(uint size, const std::string& type, double score, const Character* player)
     : HBox(W_UNDEF, false, false)
   {
     char buffer[16];
     if (score+0.05<100.0) snprintf(buffer, 16, "%.1f", score);
     else                  snprintf(buffer, 16, "%.0f", score);
-    SetWidgets(type, buffer, player);
+    SetWidgets(size, type, buffer, player);
   }
   void Draw(const Point2i &mousePosition) const
   {
@@ -116,57 +121,57 @@ public:
 class ResultListBox : public BaseListBox
 {
 public:
-  ResultListBox(const TeamResults* res, const Point2i &size, bool b = true)
-    : BaseListBox(size, b)
+  ResultListBox(const TeamResults* res, const Point2i &size, bool force = true)
+    : BaseListBox(size, force)
   {
     ResultBox       *box;
     const Character *player = res->getMostViolent();
 
     //Most violent
     if (player)
-      box = new ResultBox(_("Most violent"), player->GetDamageStats()->GetMostDamage(), player);
+      box = new ResultBox(size.x, _("Most violent"), player->GetDamageStats()->GetMostDamage(), player);
     else
-      box = new ResultBox(_("Most violent"));
+      box = new ResultBox(size.x, _("Most violent"));
     AddWidgetItem(false, box);
 
     //Most useful
     player = res->getMostUseful();
     if (player)
-      box = new ResultBox(_("Most useful"), player->GetDamageStats()->GetOthersDamage(), player);
+      box = new ResultBox(size.x, _("Most useful"), player->GetDamageStats()->GetOthersDamage(), player);
     else
-      box = new ResultBox(_("Most useful"));
+      box = new ResultBox(size.x, _("Most useful"));
     AddWidgetItem(false, box);
 
     //Most useless
     player = res->getMostUseless();
     if (player)
-      box = new ResultBox(_("Most useless"), player->GetDamageStats()->GetOthersDamage(), player);
+      box = new ResultBox(size.x, _("Most useless"), player->GetDamageStats()->GetOthersDamage(), player);
     else
-      box = new ResultBox(_("Most useless"));
+      box = new ResultBox(size.x, _("Most useless"));
     AddWidgetItem(false, box);
 
     // Biggest sold-out
     player = res->getBiggestTraitor();
     if (player)
-      box = new ResultBox(_("Most sold-out"), player->GetDamageStats()->GetFriendlyFireDamage(), player);
+      box = new ResultBox(size.x, _("Most sold-out"), player->GetDamageStats()->GetFriendlyFireDamage(), player);
     else
-      box = new ResultBox(_("Most sold-out"));
+      box = new ResultBox(size.x, _("Most sold-out"));
     AddWidgetItem(false, box);
 
     // Most clumsy
     player = res->getMostClumsy();
     if (player)
-      box = new ResultBox(_("Most clumsy"), player->GetDamageStats()->GetItselfDamage(), player);
+      box = new ResultBox(size.x, _("Most clumsy"), player->GetDamageStats()->GetItselfDamage(), player);
     else
-      box = new ResultBox(_("Most clumsy"));
+      box = new ResultBox(size.x, _("Most clumsy"));
     AddWidgetItem(false, box);
 
     // Most accurate
     player = res->getMostAccurate();
     if (player)
-      box = new ResultBox(_("Most accurate"), player->GetDamageStats()->GetAccuracy(), player);
+      box = new ResultBox(size.x, _("Most accurate"), player->GetDamageStats()->GetAccuracy(), player);
     else
-      box = new ResultBox(_("Most accurate"));
+      box = new ResultBox(size.x, _("Most accurate"));
     AddWidgetItem(false, box);
   }
 };
@@ -310,10 +315,10 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
     if (team)
     {
       // Legend line
-      surface.BoxColor(Rectanglei(x+w-100, y+4+current_color*40,
+      surface.BoxColor(Rectanglei(x+w-112, y+12+current_color*40,
                                   56, LINE_THICKNESS), clist[current_color]);
       // Legend icon
-      surface.Blit(team->GetFlag(), Point2i(x+w-40, y+4+current_color*40-20));
+      surface.Blit(team->GetFlag(), Point2i(x+w-48, y+12+current_color*40-20));
       DrawTeamGraph(team, x, y+h, duration_scale, energy_scale, clist[current_color]);
       current_color++;
     }
