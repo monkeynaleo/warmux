@@ -138,10 +138,10 @@ NetworkMenu::NetworkMenu() :
   // ################################################
 
   msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, OPTIONS_BOX_H),
-			Font::FONT_SMALL, Font::FONT_NORMAL);
+                        Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
   msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
-		       options_box->GetPositionY());
+                       options_box->GetPositionY());
 
   widgets.AddWidget(msg_box);
   widgets.Pack();
