@@ -27,7 +27,7 @@
 class Team;
 class SpinButton;
 class NetworkTeamsSelectionBox;
-class MsgBox;
+class TalkBox;
 class MapSelectionBox;
 class TextBox;
 
@@ -46,7 +46,7 @@ class NetworkMenu : public Menu
   Label* initialized_players;
 
   /* Chat controllers */
-  MsgBox* msg_box;
+  TalkBox* msg_box;
   TextBox* line_to_send_tbox;
   Button* send_txt_bt;
 
