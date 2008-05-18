@@ -31,6 +31,7 @@
 #include "gui/msg_box.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
+#include "gui/talk_box.h"
 #include "gui/text_box.h"
 #include "include/action_handler.h"
 #include "include/app.h"
@@ -135,29 +136,14 @@ NetworkMenu::NetworkMenu() :
   // ################################################
   // ##  CHAT BOX
   // ################################################
-  VBox* chat_box = new VBox(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, false);
-  chat_box->SetBorder(Point2i(0,0));
 
-  msg_box = new MsgBox(Point2i(400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
+  msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, OPTIONS_BOX_H),
+			Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
+  msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
+		       options_box->GetPositionY());
 
-  chat_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
-		  options_box->GetPositionY());
-  chat_box->AddWidget(msg_box);
-
-  HBox* tmp2_box = new HBox(16, false);
-  tmp2_box->SetMargin(4);
-  tmp2_box->SetBorder(Point2i(0,0));
-  line_to_send_tbox = new TextBox(" ", chat_box->GetSizeX()-20,
-                                  Font::FONT_SMALL, Font::FONT_NORMAL);
-  tmp2_box->AddWidget(line_to_send_tbox);
-
-  send_txt_bt = new Button(res, "menu/send_txt", true);
-  tmp2_box->AddWidget(send_txt_bt);
-
-  chat_box->AddWidget(tmp2_box);
-
-  widgets.AddWidget(chat_box);
+  widgets.AddWidget(msg_box);
   widgets.Pack();
 
   resource_manager.UnLoadXMLProfile(res);
@@ -176,22 +162,11 @@ void NetworkMenu::OnClickUp(const Point2i &mousePosition, int button)
     Network::GetInstanceServer()->SetMaxNumberOfPlayers(player_number->GetValue());
     team_box->SetMaxNbLocalPlayers(player_number->GetValue()-1);
   }
-  else if (w == send_txt_bt)
-  {
-    SendChatMsg();
-  }
 }
 
 void NetworkMenu::OnClick(const Point2i &mousePosition, int button)
 {
   widgets.Click(mousePosition, button);
-}
-
-void NetworkMenu::SendChatMsg()
-{
-  std::string empty = "";
-  Network::GetInstance()->SendChatMessage(line_to_send_tbox->GetText());
-  line_to_send_tbox->SetText(empty);
 }
 
 void NetworkMenu::SaveOptions()
@@ -281,9 +256,9 @@ bool NetworkMenu::signal_ok()
 void NetworkMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
-  if (line_to_send_tbox->HasFocus())
+  if (msg_box->TextHasFocus())
   {
-    SendChatMsg();
+    msg_box->SendChatMsg();
     return;
   }
 
@@ -410,9 +385,9 @@ void NetworkMenu::WaitingForServer()
           case SDLK_ESCAPE:
             Menu::mouse_cancel();
             break;
-          case SDLK_RETURN:
+	  case SDLK_RETURN:
           case SDLK_KP_ENTER:
-            SendChatMsg();
+            msg_box->SendChatMsg();
             break;
           case SDLK_F10:
             AppWormux::GetInstance()->video->ToggleFullscreen();
@@ -424,14 +399,11 @@ void NetworkMenu::WaitingForServer()
       } else if (event.type == SDL_MOUSEBUTTONUP) {
         if (b_cancel->Contains(mousePosition))
           Menu::mouse_cancel();
-
-        if (send_txt_bt->Contains(mousePosition))
-          SendChatMsg();
       }
     }
 
     Menu::Display(mousePosition);
-    widgets.SetMouseFocusOn(line_to_send_tbox);
+    widgets.SetMouseFocusOn(msg_box->GetTextBox());
 
   } while (Network::GetInstance()->GetState() == Network::NETWORK_MENU_OK &&
            Network::GetInstance()->IsConnected());
