@@ -13,7 +13,7 @@ BINDIR=/mingw
 HKLM_PATH="SOFTWARE\Games\Wormux"
 
 # Version number in installer
-WORMUX_VERSION=`date +"%Y%m%d"`
+WORMUX_VERSION=0.8
 
 # Set compression and in/out
 COMPRESSION="/solid lzma"
@@ -64,12 +64,12 @@ cat > $NSIS <<EOF
 Name "Wormux"
 !define WORMUX_VERSION  "${WORMUX_VERSION}"
 ;Version resource
-VIProductVersion        "0.8.0.2"
+VIProductVersion        "0.8.0.0"
 VIAddVersionKey         "FileDescription"       "Wormux Installer"
 VIAddVersionKey         "ProductName"           "Wormux"
 VIAddVersionKey         "FileVersion"           "${WORMUX_VERSION}"
 VIAddVersionKey         "ProductVersion"        "${WORMUX_VERSION}"
-VIAddVersionKey         "LegalCopyright"        "(C) 2001-2007 The Wormux Project"
+VIAddVersionKey         "LegalCopyright"        "(C) 2001-2008 The Wormux Project"
 
 ;General
 OutFile "${LOCAL_PATH}\Wormux-Setup-${WORMUX_VERSION}.exe"
@@ -118,33 +118,30 @@ SetCompressor ${COMPRESSION}
 ;Languages
   !insertmacro MUI_LANGUAGE "English"
   LicenseLangString WormuxLicense "English" "${WIN_WORMUXDIR}\doc\license\COPYING.en.txt"
-  LangString TITLE_Wormux "English" "Wormux"
-  LangString DESC_Wormux  "English" "Installs the game Wormux, version ${WORMUX_VERSION}"
 
   !insertmacro MUI_LANGUAGE "French"
   LicenseLangString WormuxLicense "French" "${WIN_WORMUXDIR}\doc\license\COPYING.fr.txt"
-  LangString TITLE_Wormux "French" "Wormux"
-  LangString DESC_Wormux  "French" "Installe le jeu Wormux, en version ${WORMUX_VERSION}"
+
+  !insertmacro MUI_LANGUAGE "Greek"
+  LicenseLangString WormuxLicense "Greek" "${WIN_WORMUXDIR}\doc\license\COPYING.el.txt"
+
+  !insertmacro MUI_LANGUAGE "Polish"
+  LicenseLangString WormuxLicense "Polish" "${WIN_WORMUXDIR}\doc\license\COPYING.pl.txt"
 
   !insertmacro MUI_LANGUAGE "German"
   LicenseLangString WormuxLicense "German" "${WIN_WORMUXDIR}\doc\license\COPYING.de.txt"
   LangString TITLE_Wormux "German" "Wormux"
-  LangString DESC_Wormux  "German" "Das Spiel Wormux, Version ${WORMUX_VERSION} anbringen"
+  LangString DESC_Wormux  "German" "Wormux ${WORMUX_VERSION}"
 
   !insertmacro MUI_LANGUAGE "Spanish"
   LicenseLangString WormuxLicense "Spanish" "${WIN_WORMUXDIR}\doc\license\COPYING.es.txt"
   LangString TITLE_Wormux "Spanish" "Wormux"
-  LangString DESC_Wormux  "Spanish" "Instala el juego Wormux, versión ${WORMUX_VERSION}"
+  LangString DESC_Wormux  "Spanish" "Wormux ${WORMUX_VERSION}"
 
   !insertmacro MUI_LANGUAGE "Dutch"
   LicenseLangString WormuxLicense "Dutch" "${WIN_WORMUXDIR}\doc\license\COPYING.nl.txt"
   LangString TITLE_Wormux "Dutch" "Wormux"
   LangString DESC_Wormux  "Dutch" "Wormux ${WORMUX_VERSION}"
-
-  !insertmacro MUI_LANGUAGE "Polish"
-  LicenseLangString WormuxLicense "Polish" "${WIN_WORMUXDIR}\doc\license\COPYING.pl.txt"
-  LangString TITLE_Wormux "Polish" "Wormux"
-  LangString DESC_Wormux  "Polish" "Wormux ${WORMUX_VERSION}"
 
   !insertmacro MUI_LANGUAGE "Russian"
   LicenseLangString WormuxLicense "Russian" "${WIN_WORMUXDIR}\doc\license\COPYING.ru.txt"
@@ -160,10 +157,10 @@ SetCompressor ${COMPRESSION}
   ;Installer translations
   !define WORMUX_DEFAULT_LANGFILE "${LOCAL_PATH}\English.nsh"
   !include "${LOCAL_PATH}\langmacros.nsh"
-  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "ENGLISH"  "${LOCAL_PATH}\English.nsh"
-  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "FRENCH"   "${LOCAL_PATH}\French.nsh"
-  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "GREEK"    "${LOCAL_PATH}\Greek.nsh"
-  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "POLISH"   "${LOCAL_PATH}\Polish.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "English"  "${LOCAL_PATH}\English.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "French"   "${LOCAL_PATH}\French.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "Greek"    "${LOCAL_PATH}\Greek.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "Polish"   "${LOCAL_PATH}\Polish.nsh"
 
 ;--------------------------------
 ;Folder-selection page
@@ -244,8 +241,6 @@ cat >> $NSIS <<EOF
   CreateShortCut  "\$SMPROGRAMS\Wormux\Uninstall.lnk" "\$INSTDIR\uninstall.exe" "" "\$INSTDIR\uninstall.exe" 0
   ;Write language to the registry (for the uninstaller)
   WriteRegStr HKLM ${HKLM_PATH} "Installer Language" \$LANGUAGE
-
-  GetFullPathName /SHORT \$SHORTINSTDIR \$INSTDIR
 SectionEnd
 
 ;--------------------------------
