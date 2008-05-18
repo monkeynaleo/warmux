@@ -227,9 +227,8 @@ if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
 .rc.o:
 	@WINDRES@ -o $@ -i $<
-else
-AM_CXXFLAGS += -Werror
 endif
+AM_CXXFLAGS += -Werror
 
 if !INCLUDEDINTL
 LIBS+=@LIBINTL@
