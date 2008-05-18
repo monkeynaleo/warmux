@@ -70,6 +70,7 @@ protected:
 public:
   typedef std::vector<EnergyValue*>::const_iterator const_iterator;
   uint GetMaxValue() const { return m_max_value; };
+  uint GetDuration() const { return at(size()-1)->GetDuration(); }
 };
 
 class TeamEnergy

@@ -25,7 +25,9 @@
 #include "character/character.h"
 #include "character/damage_stats.h"
 #include "game/time.h"
+#include "graphic/font.h"
 #include "graphic/sprite.h"
+#include "graphic/text.h"
 #include "graphic/video.h"
 #include "gui/box.h"
 #include "gui/button.h"
@@ -221,6 +223,7 @@ public:
 			     int x, int y,
 			     double duration_scale,
 			     double energy_scale,
+                             uint   max_duration,
 			     const Color& color) const;
   virtual void DrawGraph(int x, int y, int w, int h) const;
 
@@ -242,6 +245,7 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
 				     int x, int y,
 				     double duration_scale,
 				     double energy_scale,
+                                     uint   max_duration,
 				     const Color& color) const
 {
   EnergyList::const_iterator it = team->energy.energy_list.begin(),
@@ -276,51 +280,68 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
     sy = ey;
     ++it;
   } while (it != end);
+
+  // Missing point
+  --it;
+  if ((*it)->GetDuration() < max_duration)
+  {
+    surface.BoxColor(Rectanglei(sx, sy, x+lround(max_duration*duration_scale)-sx, LINE_THICKNESS), color);
+  }
 }
 
 void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
 {
   // Value to determine normalization
   uint   max_value      = 0;
-  double duration_scale = w / (1.1*Time::GetInstance()->Read());
+  uint   max_duration   = 0;
+  uint   graph_h        = h-32;
+  uint   graph_w        = w-32;
+  uint   graph_x        = x+32;
   std::vector<TeamResults*>::const_iterator it;
 
   for (it=results.begin(); it!=results.end(); ++it)
   {
     const Team* team = (*it)->getTeam();
     if (team)
+    {
       if (team->energy.energy_list.GetMaxValue() > max_value)
-      {
         max_value = team->energy.energy_list.GetMaxValue();
-        MSG_DEBUG("menu", "New maximum value: %u\n", max_value);
-      }
+      if (team->energy.energy_list.GetDuration() > max_duration)
+        max_duration = team->energy.energy_list.GetDuration();
+    }
   }
 
   // Draw here the graph and stuff
   Surface &surface = AppWormux::GetInstance()->video->window;
-  surface.BoxColor(Rectanglei(x, y, LINE_THICKNESS, h), black_color);
-  surface.BoxColor(Rectanglei(x, y+h, w, LINE_THICKNESS), black_color);
+  surface.BoxColor(Rectanglei(graph_x, y, LINE_THICKNESS, graph_h), black_color);
+  surface.BoxColor(Rectanglei(graph_x, y+graph_h, graph_w, LINE_THICKNESS), black_color);
+  //DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Time"), black_color),
+               Point2i(graph_x+graph_w/2, y+graph_h+8));
+  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Energy"), black_color).RotoZoom(M_PI/2, 1.0, 1.0, false),
+               Point2i(x+4, graph_h/2));
 
   // Draw each team graph
-  double energy_scale = h / (1.1*max_value);
+  double energy_scale = graph_h / (1.05*max_value);
+  double duration_scale = graph_w / (1.05*max_duration);
   MSG_DEBUG("menu", "Scaling: %.1f (duration; %u) and %.1f\n",
             duration_scale, Time::GetInstance()->ReadDuration(), energy_scale);
 
+  uint               index   = 0;
   static const Color clist[] =
     { black_color, primary_red_color, gray_color, primary_green_color, black_color, primary_blue_color };
-  uint   current_color = 0;
   for (it=results.begin(); it!=results.end(); ++it)
   {
     const Team* team = (*it)->getTeam();
     if (team)
     {
       // Legend line
-      surface.BoxColor(Rectanglei(x+w-112, y+12+current_color*40,
-                                  56, LINE_THICKNESS), clist[current_color]);
+      surface.BoxColor(Rectanglei(x+w-112, y+12+index*40,
+                                  56, LINE_THICKNESS), clist[index]);
       // Legend icon
-      surface.Blit(team->GetFlag(), Point2i(x+w-48, y+12+current_color*40-20));
-      DrawTeamGraph(team, x, y+h, duration_scale, energy_scale, clist[current_color]);
-      current_color++;
+      surface.Blit(team->GetFlag(), Point2i(x+w-48, y+12+index*40-20));
+      DrawTeamGraph(team, graph_x, y+graph_h, duration_scale, energy_scale, max_duration, clist[index]);
+      index++;
     }
   }
 }
