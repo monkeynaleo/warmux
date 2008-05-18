@@ -66,13 +66,6 @@ The Makefiles and CMake control files will be generated inside the new
 wormux-build dir, while the source-dir stays clean.
 
 
-Wormux development:
--------------------
-
-After adding new data you can also run the script SearchFiles.sh
-in the cmake/ subdir. This is only needed for users of old cmake -
-2.4.3 and older (released in the middle of 2006).
-
 Package generation:
 -------------------
 
