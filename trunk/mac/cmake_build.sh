@@ -19,7 +19,12 @@ export CMAKE_INSTALL_PREFIX=./wormux-files
 #
 
 cd ${TMP}
+sed -i '/SET(WORMUX_PATCH/d' ../../CMakeLists.txt
 cmake ../..
+cd ../..
+svn revert CMakeLists.txt
+cd ${TMP}
+
 make
 
 #
