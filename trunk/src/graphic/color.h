@@ -34,19 +34,27 @@ class Color
     Uint8 alpha;
 
   public:
-    Color();
-    Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    Color(Uint8 r = 200, Uint8 g = 50, Uint8 b = 50, Uint8 a = 130)
+      { SetColor(r, g, b, a); }
 
-    bool operator==(const Color &color) const;
-    bool operator!=(const Color &color) const;
+    bool operator==(const Color &c) const
+      { return red==c.red && green==c.green && blue==c.blue && alpha==c.alpha; }
+    bool operator!=(const Color &c) const
+      { return red!=c.red || green!=c.green || blue!=c.blue || alpha!=c.alpha; }
     Color operator*(const Color &fact) const;
 
-    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+    {
+      red = r;
+      green = g;
+      blue = b;
+      alpha = a;
+    }
 
-    Uint8 GetRed() const { return red; };
-    Uint8 GetGreen() const { return green; };
-    Uint8 GetBlue() const { return blue; };
-    Uint8 GetAlpha() const { return alpha; };
+    Uint8 GetRed() const { return red; }
+    Uint8 GetGreen() const { return green; }
+    Uint8 GetBlue() const { return blue; }
+    Uint8 GetAlpha() const { return alpha; }
     Uint32 GetColor() const;
 
     SDL_Color GetSDLColor() const;
