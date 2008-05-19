@@ -571,6 +571,13 @@
 	<country>Germany</country>
       </author>
       <author>
+	<nickname>mrpouet</nickname>
+	<name>Romain PERIER</name>
+	<description>AI improvements</description>
+	<email>mrpouet_AT_tuxfamily_DOT_org </email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>Pascal</nickname>
 	<name>Pascal GIARD</name>
 	<description>Wrote a patch to stop configure if clanlib and/or libxml++ is missing</description>

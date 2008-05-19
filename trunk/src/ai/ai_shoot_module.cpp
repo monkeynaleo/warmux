@@ -350,8 +350,7 @@ bool AIShootModule::Refresh(uint current_time)
   }
 
   m_current_time = current_time;
-
-  FindEnemy();
+  m_enemy = FindEnemy();
   ChooseDirection();
 
   switch (m_current_strategy) {
@@ -373,6 +372,8 @@ bool AIShootModule::Refresh(uint current_time)
               }
                m_enemy = &(*character);
                Shoot();
+	       // If IA selected ProximityWeapon, he needs to go back, in the opposite direction (otherwises BOOM :-) )
+	       ActiveCharacter().SetDirection((ActiveCharacter().GetDirection()) == DIRECTION_RIGHT ? DIRECTION_LEFT : DIRECTION_RIGHT;);
       }
     }
     break;
