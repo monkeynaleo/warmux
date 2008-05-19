@@ -373,7 +373,7 @@ bool AIShootModule::Refresh(uint current_time)
                m_enemy = &(*character);
                Shoot();
 	       // If IA selected ProximityWeapon, he needs to go back, in the opposite direction (otherwises BOOM :-) )
-	       ActiveCharacter().SetDirection((ActiveCharacter().GetDirection()) == DIRECTION_RIGHT ? DIRECTION_LEFT : DIRECTION_RIGHT;);
+	       ActiveCharacter().SetDirection( (ActiveCharacter().GetDirection()==DIRECTION_RIGHT) ? DIRECTION_LEFT : DIRECTION_RIGHT);
       }
     }
     break;
