@@ -60,7 +60,6 @@ class NetworkMenu : public Menu
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
   void Draw(const Point2i &mousePosition);
-  void SendChatMsg();
   void WaitingForServer();
 
   void key_ok();
