@@ -684,6 +684,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\gui\talk_box.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\gui\talk_box.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\gui\text_box.cpp"
 					>
 				</File>
