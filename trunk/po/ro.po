@@ -27,7 +27,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -35,7 +35,7 @@ msgstr[0] "%i jucător conectat"
 msgstr[1] "%i jucători conectați"
 msgstr[2] "%i de jucători conectați"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -582,7 +582,7 @@ msgstr "Atac aerian"
 msgid "Airhammer"
 msgstr "Ciocan pnumatic"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Toate echipele"
 
@@ -662,7 +662,7 @@ msgid "Choose randomly between the different maps"
 msgstr "Alege la întâmplare una din diferitele hărți"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Mod client"
 
@@ -690,7 +690,7 @@ msgstr "Conectat!"
 msgid "Construct"
 msgstr "Construiește"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr "Controlat de: "
 
@@ -727,6 +727,11 @@ msgstr "SFÂRȘITUL JOCULUI"
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
 msgstr "Volumul efectelor"
+
+#: src/menu/results_menu.cpp:321
+#, fuzzy
+msgid "Energy"
+msgstr "Energie:"
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -992,7 +997,7 @@ msgstr "Harta %s, o creație a lui: "
 msgid "Maps"
 msgstr "Hărți"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Număr maxim de jucători:"
 
@@ -1008,27 +1013,27 @@ msgstr "Mină"
 msgid "Misc"
 msgstr "Diverse"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "Cel mai bun țintaș"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Most clumsy"
 msgstr "Cel mai stângaci"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Cel mai mare trădător"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Cel mai folositor"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Cel mai inutil"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Cel mai violent"
 
@@ -1058,7 +1063,7 @@ msgstr "Un nou joc în rețea pornit la "
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fișierul xml de configurare!"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Nimeni!"
 
@@ -1180,7 +1185,7 @@ msgid "Server available on Internet"
 msgstr "Server disponibil în internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Mod server"
 
@@ -1241,11 +1246,11 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringă"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 msgid "Team graphs"
 msgstr "Grafice echipe"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 msgid "Team stats"
 msgstr "Statistici echipe"
 
@@ -1299,7 +1304,7 @@ msgstr "Jocul s-a întrerupt pentru că v-ați deconectat."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ceilalți te-așteaptă! Trezește-te :-)"
 
@@ -1316,13 +1321,19 @@ msgstr "Serverul a refuzat conexiunea."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serverul a refuzat conexiunea: parolă greșită!"
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Există doar %i echipă."
 msgstr[1] "Există doar %i echipe."
 msgstr[2] "Există doar %i de echipe."
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+#, fuzzy
+msgid "Time"
+msgstr "Rulează jocul"
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1383,7 +1394,7 @@ msgstr "Versiunea"
 msgid "Version verification failed because: %s\n"
 msgstr "Verificare versiunii a eșuat pentru că: %s\n"
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1391,7 +1402,7 @@ msgstr[0] "Așteaptă! %i jucător nu e gata încă!"
 msgstr[1] "Așteaptă! %i jucători nu sunt gata încă!"
 msgstr[2] "Așteaptă! %i de jucători nu sunt gata încă!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Se așteaptă serverul, tot ce puteți face e să anulați sau să vorbiți!"
 
@@ -1416,7 +1427,7 @@ msgid "Wind particles?"
 msgstr "Particulele de vânt?"
 
 #
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 msgid "Winner"
 msgstr "Câștigător"
 
@@ -1428,11 +1439,11 @@ msgstr "Se lansează Wormux..."
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr "Nu mai e nimeni în afară de tine :-/"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Nu mai e nimeni altcineva..."
 
@@ -1444,7 +1455,7 @@ msgstr "Aveți nevoie de cel puțin o hartă validă !"
 msgid "You need at least two valid teams !"
 msgstr "Aveți nevoie de cel puțin două echipe valide !"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 
@@ -2214,10 +2225,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #~ msgstr "Efecte sonore?"
 
 #, fuzzy
-#~ msgid "energy"
-#~ msgstr "Energie:"
-
-#, fuzzy
 #~ msgid "explosion"
 #~ msgstr "versiunea"
 
@@ -2252,10 +2259,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "gun"
 #~ msgstr "Pistol"
-
-#, fuzzy
-#~ msgid "ingame"
-#~ msgstr "Rulează jocul"
 
 #, fuzzy
 #~ msgid "jetpack"

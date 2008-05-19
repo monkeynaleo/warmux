@@ -23,14 +23,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas :-("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i ludanto konektiĝis"
 msgstr[1] "%i ludantoj konektiĝis"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -398,7 +398,7 @@ msgstr "Aeratako"
 msgid "Airhammer"
 msgstr "Pneŭmatika martelo"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Ĉiuj teamoj"
 
@@ -477,7 +477,7 @@ msgid "Choose randomly between the different maps"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Klientmodo"
 
@@ -506,7 +506,7 @@ msgstr "Konektis !"
 msgid "Construct"
 msgstr "Konstruilo"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr "Stirato per:"
 
@@ -542,6 +542,10 @@ msgstr "LUDFINO"
 
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
+msgstr ""
+
+#: src/menu/results_menu.cpp:321
+msgid "Energy"
 msgstr ""
 
 #: src/tool/error.cpp:82
@@ -795,7 +799,7 @@ msgstr "Mapo %s, far :"
 msgid "Maps"
 msgstr "Mapoj"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Maksimuma kvanto da ludantoj :"
 
@@ -812,27 +816,27 @@ msgstr "Mino"
 msgid "Misc"
 msgstr "Muzikon ?"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "La plej akurata"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Most clumsy"
 msgstr "La plej mallerta"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "La plej perfida"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "La plej utila"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "La plej malutila"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "La plej perforta"
 
@@ -863,7 +867,7 @@ msgstr "Reta ludo"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Neniu ero <%s> trovita en la XML agorda dosiero !"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Neniu !"
 
@@ -987,7 +991,7 @@ msgid "Server available on Internet"
 msgstr "Interretebla servilo"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Servila modo"
 
@@ -1049,12 +1053,12 @@ msgstr "SuperTukso"
 msgid "Syringe"
 msgstr "Injektilo"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 #, fuzzy
 msgid "Team graphs"
 msgstr "Teamoj"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 #, fuzzy
 msgid "Team stats"
 msgstr "Teamoj"
@@ -1108,7 +1112,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "La grenado foriris de la batalejo antaŭ ol explodi"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "La alioj estas atendando vin ! Vekiĝu :-)"
 
@@ -1126,12 +1130,17 @@ msgstr "La servilo forĵetis la konekton."
 msgid "The server rejected the connection: wrong password!"
 msgstr "La servilo forĵetis la konekton."
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Sole estas %i teamo."
 msgstr[1] "Sole estas %i teamoj."
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1190,14 +1199,14 @@ msgstr "Versio"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Atendu ! %i ludanto ankoraŭ ne pretas !"
 msgstr[1] "Atendu ! %i ludantoj ankoraŭ ne pretas !"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Atende servilon, vi nur povas rezigni aŭ babili !"
 
@@ -1221,7 +1230,7 @@ msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo !"
 msgid "Wind particles?"
 msgstr "Venterojn ?"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 msgid "Winner"
 msgstr "Gajnanto"
 
@@ -1233,11 +1242,11 @@ msgstr "Wormux muntas..."
 msgid "Wormux version "
 msgstr "Wormux versio "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr "Vi estas sola :-/"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Vi estas sola..."
 
@@ -1249,7 +1258,7 @@ msgstr "Vi bezonas almenaŭ unu taŭgan mapon !"
 msgid "You need at least two valid teams !"
 msgstr "Vi bezonas almenaŭ du teamojn !"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon !"
 

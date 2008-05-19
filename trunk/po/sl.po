@@ -25,7 +25,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karta %s ni bila najdena :-("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -34,7 +34,7 @@ msgstr[1] "povezana %i igralca"
 msgstr[2] "povezani %i igralci"
 msgstr[3] "povezanih %i igralcev"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -473,7 +473,7 @@ msgstr "Zračni napad"
 msgid "Airhammer"
 msgstr "Pnevmatsko kladivo"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Vse ekipe"
 
@@ -552,7 +552,7 @@ msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Odjemalski način"
 
@@ -580,7 +580,7 @@ msgstr "Povezan!"
 msgid "Construct"
 msgstr "Tram"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr "Vodja: "
 
@@ -617,6 +617,10 @@ msgstr "KONEC IGRE"
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
 msgstr "Glasnost učinkov"
+
+#: src/menu/results_menu.cpp:321
+msgid "Energy"
+msgstr ""
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -878,7 +882,7 @@ msgstr "Karta %s je stvaritev: "
 msgid "Maps"
 msgstr "Karte"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Največje število igralcev:"
 
@@ -894,27 +898,27 @@ msgstr "Mina"
 msgid "Misc"
 msgstr "Razno"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "Najbolj natančen"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Most clumsy"
 msgstr "Najbolj neroden"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Najbolj izdan"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Najbolj uporaben"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Najbolj neuporaben"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Najbolj nasilen"
 
@@ -944,7 +948,7 @@ msgstr "Nova omrežna igra ob"
 msgid "No element <%s> found in the xml config file!"
 msgstr "V xml nastavitveni datoteki ni bil najden noben element <%s>!"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Nihče!"
 
@@ -1065,7 +1069,7 @@ msgid "Server available on Internet"
 msgstr "Strežnik naj bo viden na Internetu"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Način strežnika"
 
@@ -1126,11 +1130,11 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Injekcija"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 msgid "Team graphs"
 msgstr "Ekipni grafi"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 msgid "Team stats"
 msgstr "Ekipna statistika"
 
@@ -1182,7 +1186,7 @@ msgstr "Igra je bila prekinjena zaradi prekinitve povezave."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granata je zapustila bojišče preden je eksplodirala"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostali te čakajo! Zbudi se! :-)"
 
@@ -1199,7 +1203,7 @@ msgstr "Strežnik je zavrnil povezavo."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Strežnik je zavrnil povezavo: napačno geslo!"
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1207,6 +1211,11 @@ msgstr[0] "Tukaj je samo %i ekipa."
 msgstr[1] "Tukaj sta samo %i ekipi."
 msgstr[2] "Tukaj so samo %i ekipe."
 msgstr[3] "Tukaj je samo %i ekip."
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1267,7 +1276,7 @@ msgstr "Različica"
 msgid "Version verification failed because: %s\n"
 msgstr "Preverjanje različice je spodletelo zaradi: %s\n"
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1276,7 +1285,7 @@ msgstr[1] "Počakajte! %i igralca še nista pripravljena!"
 msgstr[2] "Počakajte! %i igralci še niso pripravljeni!"
 msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
@@ -1300,7 +1309,7 @@ msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
 msgid "Wind particles?"
 msgstr "Vetrni delci?"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 msgid "Winner"
 msgstr "Zmagovalec"
 
@@ -1312,11 +1321,11 @@ msgstr "Wormux se zaganja..."
 msgid "Wormux version "
 msgstr "Wormux različica "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr "Sami ste :-/"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Sami ste..."
 
@@ -1328,7 +1337,7 @@ msgstr "Potrebujete vsaj eno veljavno karto!"
 msgid "You need at least two valid teams !"
 msgstr "Potrebujete vsaj dve veljavni ekipi !"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 

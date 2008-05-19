@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i jogador conectado"
 msgstr[1] "%i jogadores conectados"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -406,7 +406,7 @@ msgstr "Ataque aéreo"
 msgid "Airhammer"
 msgstr "Britadeira"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Todos as equipes"
 
@@ -485,7 +485,7 @@ msgid "Choose randomly between the different maps"
 msgstr "Escolher de format aleatória entre os mapas"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Modo de cliente"
 
@@ -514,7 +514,7 @@ msgstr "Conectado !"
 msgid "Construct"
 msgstr "Construir"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr "Controlado por: "
 
@@ -550,6 +550,10 @@ msgstr "FIM DO JOGO"
 
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
+msgstr ""
+
+#: src/menu/results_menu.cpp:321
+msgid "Energy"
 msgstr ""
 
 #: src/tool/error.cpp:82
@@ -814,7 +818,7 @@ msgstr "Mapa %s, uma criação de :"
 msgid "Maps"
 msgstr "Mapas"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Número máximo de jogadores:"
 
@@ -831,27 +835,27 @@ msgstr "Mina"
 msgid "Misc"
 msgstr "Música?"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "Mais preciso"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Most clumsy"
 msgstr "Mais desajeitado"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Mais interessante"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Mais útil"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Mais inútil"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Mais violento"
 
@@ -882,7 +886,7 @@ msgstr "Jogo em Rede"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elemento <%s> não encontrado no arquivo de configuração xml!"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Ninguém"
 
@@ -1006,7 +1010,7 @@ msgid "Server available on Internet"
 msgstr "Servidor disponível na Internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Modo do Servidor"
 
@@ -1068,12 +1072,12 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringa"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 #, fuzzy
 msgid "Team graphs"
 msgstr "Equipes"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 #, fuzzy
 msgid "Team stats"
 msgstr "Equipes"
@@ -1127,7 +1131,7 @@ msgstr "O jogo foi interrompido porque você foi desconectado."
 msgid "The grenade left the battlefield before exploding"
 msgstr "A granada deixou o cenário antes que explodisse"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Os outros estão esperando por você! ACORDA!"
 
@@ -1145,12 +1149,17 @@ msgstr "O servidor rejeitou a conexão."
 msgid "The server rejected the connection: wrong password!"
 msgstr "O servidor rejeitou a conexão."
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Existe apenas %i equipe"
 msgstr[1] "Existe apenas %i equipes"
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1212,14 +1221,14 @@ msgstr "Versão"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Espere! %i jogador ainda não está pronto!"
 msgstr[1] "Espere! %i jogaderes ainda não estão prontos!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Esperando pelo servidor, tudo que você pode fazer é conversar ou cancelar!"
@@ -1244,7 +1253,7 @@ msgstr "Que vergonha para o %s - ele foi morto por uma simples arma!"
 msgid "Wind particles?"
 msgstr "Partículas de vento?"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 msgid "Winner"
 msgstr "Vencedor"
 
@@ -1256,11 +1265,11 @@ msgstr "Iniciando wormux..."
 msgid "Wormux version "
 msgstr "Wormux versão "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr "Você está sozinho :-/"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Você está sozinho..."
 
@@ -1272,7 +1281,7 @@ msgstr "Você precisa de pelo menos um mapa válido !"
 msgid "You need at least two valid teams !"
 msgstr "Você precisa de pelo menos duas equipes válidas !"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Você não vai conseguir jogar antes de selecionar uma equipe !"
 

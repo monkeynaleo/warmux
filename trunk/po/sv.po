@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Kartan %s hittades inte :-("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i spelare ansluten"
 msgstr[1] "%i spelare anslutna"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -398,7 +398,7 @@ msgstr "Luftattack"
 msgid "Airhammer"
 msgstr "Lufthammare"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Alla lag"
 
@@ -477,7 +477,7 @@ msgid "Choose randomly between the different maps"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Klientläge"
 
@@ -506,7 +506,7 @@ msgstr "Ansluten!"
 msgid "Construct"
 msgstr "Konstruera"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr "Kontrolleras av: "
 
@@ -542,6 +542,10 @@ msgstr "SPELET ÄR ÖVER"
 
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
+msgstr ""
+
+#: src/menu/results_menu.cpp:321
+msgid "Energy"
 msgstr ""
 
 #: src/tool/error.cpp:82
@@ -802,7 +806,7 @@ msgstr "Kartan %s, skapad av: "
 msgid "Maps"
 msgstr "Kartor"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Max antal spelare:"
 
@@ -819,27 +823,27 @@ msgstr "Mina"
 msgid "Misc"
 msgstr "Musik?"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "Mest träffsäker"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Most clumsy"
 msgstr "Klumpigast"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Mest utsålda"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Mest användbar"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Mest oanvändbar"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Mest våldsam"
 
@@ -870,7 +874,7 @@ msgstr "Nätverksspel"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Inget <%s>-element hittades i xml-konfigurationsfilen!"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Ingen!"
 
@@ -994,7 +998,7 @@ msgid "Server available on Internet"
 msgstr "Server tillgänglig på Internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Serverläge"
 
@@ -1056,12 +1060,12 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Spruta"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 #, fuzzy
 msgid "Team graphs"
 msgstr "Lag"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 #, fuzzy
 msgid "Team stats"
 msgstr "Lag"
@@ -1117,7 +1121,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten lämnade slagfältet innan den exploderade"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De andra väntar på dig! Vakna :-)"
 
@@ -1135,12 +1139,17 @@ msgstr "Servern nekade anslutningen."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Servern nekade anslutningen."
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Det finns endast %i lag."
 msgstr[1] "Det finns endast %i lag."
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1201,14 +1210,14 @@ msgstr "Version"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vänta! %i spelare är inte klara än!"
 msgstr[1] "Vänta! %i spelare är inte klara än!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Väntar på servern, allt du kan göra är att avbryta eller chatta!"
 
@@ -1232,7 +1241,7 @@ msgstr "Vad sorgligt för %s - han dödades av en enda pistol!"
 msgid "Wind particles?"
 msgstr "Vindpartiklar?"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 msgid "Winner"
 msgstr "Vinnare"
 
@@ -1244,11 +1253,11 @@ msgstr "Wormux startar..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr "Du är ensam :-/"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Du är ensam..."
 
@@ -1260,7 +1269,7 @@ msgstr "Du behöver åtminstone en giltig karta!"
 msgid "You need at least two valid teams !"
 msgstr "Du behöver åtminstone två giltiga lag!"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kommer inte att kunna spela innan du har valt ett lag!"
 

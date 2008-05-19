@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: src/map/maps_list.cpp:320
@@ -210,18 +210,20 @@ msgstr[2] ""
 "jestli ji můžete použít."
 
 #: src/weapon/bounce_ball.cpp:113
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "Tým %s získal %u skákací kuličku! Ping, ping, bum!"
 msgstr[1] "Tým %s získal %u skákací kuličky! Ping, ping, bum!"
+msgstr[2] "Tým %s získal %u skákací kuličky! Ping, ping, bum!"
 
 #: src/weapon/cluster_bomb.cpp:206
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Tým %s získal %u tříštivou bombu!"
 msgstr[1] "Tým %s získal %u tříštivé bomby!"
+msgstr[2] "Tým %s získal %u tříštivé bomby!"
 
 #: src/weapon/construct.cpp:81
 #, c-format
@@ -232,12 +234,13 @@ msgstr[1] "Tým %s získal %u stavitelské součásti! Nezapomeňte svou helmu."
 msgstr[2] "Tým %s získal %u stavitelských součástí! Nezapomeňte svou helmu."
 
 #: src/weapon/disco_grenade.cpp:170
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
 "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Tým %s získal %u disco granát! Rozvlň své tělo až ho budeš házet!"
 msgstr[1] "Tým %s získal %u disco granáty! Rozvlň své tělo až je budeš házet!"
+msgstr[2] "Tým %s získal %u disco granáty! Rozvlň své tělo až je budeš házet!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
@@ -264,11 +267,12 @@ msgstr[1] "Tým %s získal %u ragbyové bomby!"
 msgstr[2] "Tým %s získal %u baseballových pálek!"
 
 #: src/weapon/grapple.cpp:783
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "Tým %s získal %u lodní hák!"
 msgstr[1] "Tým %s získal %u lodní háky!"
+msgstr[2] "Tým %s získal %u lodní háky!"
 
 #: src/weapon/grenade.cpp:90
 #, c-format
@@ -295,11 +299,12 @@ msgstr[1] "Tým %s získal %u tryskové batohy! Hop, hop a letím!"
 msgstr[2] "Tým %s získal %u tryskových batohů! Hop, hop a letím!"
 
 #: src/weapon/lowgrav.cpp:78
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "Tým %s získal %u nízkou gravitaci! Jsem Neil Armstrong!"
 msgstr[1] "Tým %s získal %u nízké gravitace! Jsem Neil Armstrong!"
+msgstr[2] "Tým %s získal %u nízké gravitace! Jsem Neil Armstrong!"
 
 #: src/weapon/mine.cpp:247
 #, c-format
@@ -318,18 +323,20 @@ msgstr[1] "Tým %s získal %u padáky!"
 msgstr[2] "Tým %s získal %u padáků!"
 
 #: src/weapon/polecat.cpp:179
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] "Tým %s získal %u tchoře! Máte připravené svoje plynové masky?"
 msgstr[1] "Tým %s získal %u tchoře! Máte připravené svoje plynové masky?"
+msgstr[2] "Tým %s získal %u tchoře! Máte připravené svoje plynové masky?"
 
 #: src/weapon/riot_bomb.cpp:133
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Tým %s získal %u minomet!"
 msgstr[1] "Tým %s získal %u minomety!"
+msgstr[2] "Tým %s získal %u minomety!"
 
 #: src/weapon/shotgun.cpp:134
 #, c-format
@@ -365,11 +372,12 @@ msgstr[1] "Tým %s získal %u sebevraždy!"
 msgstr[2] "Tým %s získal %u sebevražd!"
 
 #: src/weapon/syringe.cpp:115
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
 msgstr[0] "Tým %s získal %u stříkačku!"
 msgstr[1] "Tým %s získal %u stříkačky!"
+msgstr[2] "Tým %s získal %u stříkačky!"
 
 #: src/weapon/teleportation.cpp:120
 #, c-format
@@ -388,12 +396,14 @@ msgstr[1] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete.
 msgstr[2] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete."
 
 #: src/weapon/supertux.cpp:313
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] ""
 "Tým %s získal %u odpalovač tučňáků! Nikdo neviděl jak tučňáci létají?"
 msgstr[1] ""
+"Tým %s získal %u odpalovače tučňáků! Nikdo neviděl jak tučňáci létají?"
+msgstr[2] ""
 "Tým %s získal %u odpalovače tučňáků! Nikdo neviděl jak tučňáci létají?"
 
 #: src/interface/interface.cpp:165
@@ -1157,11 +1167,12 @@ msgid "The server rejected the connection: wrong password!"
 msgstr "Server odmítl spojení: špatné heslo!"
 
 #: src/menu/network_menu.cpp:214
-#, c-format
+#, fuzzy, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Zde je jen %i tým."
 msgstr[1] "Zde jsou jen %i týmy."
+msgstr[2] "Zde jsou jen %i týmy."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:319
@@ -1228,11 +1239,12 @@ msgid "Version verification failed because: %s\n"
 msgstr "Kontrola verze selhala: %s\n"
 
 #: src/menu/network_menu.cpp:228
-#, c-format
+#, fuzzy, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Počkejte! %i hráč ještě není připraven!"
 msgstr[1] "Počkejte! %i hráči ještě nejsou připraveni!"
+msgstr[2] "Počkejte! %i hráči ještě nejsou připraveni!"
 
 #: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"

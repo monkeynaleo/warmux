@@ -23,14 +23,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Kaart %s niet gevonden :-("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i speler maakte verbinding"
 msgstr[1] "%i spelers maakten verbinding"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -418,7 +418,7 @@ msgstr "Luchtaanval"
 msgid "Airhammer"
 msgstr "Drilboor"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Alle teams"
 
@@ -497,7 +497,7 @@ msgid "Choose randomly between the different maps"
 msgstr "Kies een willekeurige kaart"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Client modus"
 
@@ -525,7 +525,7 @@ msgstr "Verbonden !"
 msgid "Construct"
 msgstr "Bouw"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr "Bestuurd door: "
 
@@ -562,6 +562,11 @@ msgstr "EINDE VAN HET SPEL"
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
 msgstr "Effecten volume"
+
+#: src/menu/results_menu.cpp:321
+#, fuzzy
+msgid "Energy"
+msgstr "Energie:"
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -818,7 +823,7 @@ msgstr "Kaart %s, gemaakt door :"
 msgid "Maps"
 msgstr "Kaarten"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Max aantal spelers:"
 
@@ -834,27 +839,27 @@ msgstr "Mijn"
 msgid "Misc"
 msgstr "Overigen"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "Nauwkeurigste"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Most clumsy"
 msgstr "Onhandigste"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Meest uitverkocht"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Meest zinvol"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Meest zinloos"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Meest gewelddadig"
 
@@ -884,7 +889,7 @@ msgstr "Nieuw netwerkspel op"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Element <%s> niet gevonden het xml config bestand!"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Niemand!"
 
@@ -1005,7 +1010,7 @@ msgid "Server available on Internet"
 msgstr "Server beschikbaar op internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Server modus"
 
@@ -1066,11 +1071,11 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Injectienaald"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 msgid "Team graphs"
 msgstr "Team grafieken"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 msgid "Team stats"
 msgstr "Team statistieken"
 
@@ -1123,7 +1128,7 @@ msgstr "Het spel is onderbroken omdat uw verbinding verbroken is."
 msgid "The grenade left the battlefield before exploding"
 msgstr "De granaat heeft het slagveld verlaten alvorens te ontploffen"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De anderen wachten op u! Wakker worden :-)"
 
@@ -1140,12 +1145,17 @@ msgstr "De server weigerde de verbinding."
 msgid "The server rejected the connection: wrong password!"
 msgstr "De server weigerde de verbinding. Verkeerd wachtwoord!"
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Er is maar %i team."
 msgstr[1] "Er zijn maar %i teams."
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1206,14 +1216,14 @@ msgstr "Versie"
 msgid "Version verification failed because: %s\n"
 msgstr "Versie verificatie mislukt omdat: %s\n"
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Wacht! %i speler is nog niet klaar!"
 msgstr[1] "Wacht! %i spelers zijn nog niet klaar!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Wachten op de server, het enige wat u nu kunt doen is annuleren of chatten!"
@@ -1238,7 +1248,7 @@ msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
 msgid "Wind particles?"
 msgstr "Wind deeltjes?"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 msgid "Winner"
 msgstr "Winaar"
 
@@ -1250,11 +1260,11 @@ msgstr "Wormux wordt gestart..."
 msgid "Wormux version "
 msgstr "Wormux versie "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr "U bent alleen :-/"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "U bent alleen..."
 
@@ -1266,7 +1276,7 @@ msgstr "U heeft minimaal één geldige kaart nodig !"
 msgid "You need at least two valid teams !"
 msgstr "U heeft minimaal twee geldige teams nodig !"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd !"
 
@@ -1574,9 +1584,6 @@ msgstr "o Audio geopend met %d Hz %d bit"
 
 #~ msgid "End of the game!\n"
 #~ msgstr "Einde van het spel!\n"
-
-#~ msgid "Energy:"
-#~ msgstr "Energie:"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Fout bij het laden van skin %s:"

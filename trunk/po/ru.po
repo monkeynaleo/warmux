@@ -28,7 +28,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -36,7 +36,7 @@ msgstr[0] "%i игрок присоединился"
 msgstr[1] "%i игрока присоединились"
 msgstr[2] "%i игроков присоединились"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -458,7 +458,7 @@ msgstr "Воздушная атака"
 msgid "Airhammer"
 msgstr "Отбойный молоток"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Все команды"
 
@@ -537,7 +537,7 @@ msgid "Choose randomly between the different maps"
 msgstr "Выбрать карту случайно"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Режим клиента"
 
@@ -565,7 +565,7 @@ msgstr "Подключен !"
 msgid "Construct"
 msgstr "Строительство"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr "Контролируется: "
 
@@ -601,6 +601,10 @@ msgstr "КОНЕЦ ИГРЫ"
 
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
+msgstr ""
+
+#: src/menu/results_menu.cpp:321
+msgid "Energy"
 msgstr ""
 
 #: src/tool/error.cpp:82
@@ -861,7 +865,7 @@ msgstr "Карту %s создал: "
 msgid "Maps"
 msgstr "Карты"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Макс. количество игроков:"
 
@@ -878,27 +882,27 @@ msgstr "Мина"
 msgid "Misc"
 msgstr "Музыка?"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "Самый точный"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Most clumsy"
 msgstr "Самый неуклюжий"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Самый продажный"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Самый полезный"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Самый бесполезный"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Самый жестокий"
 
@@ -929,7 +933,7 @@ msgstr "Игра по сети"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Никто!"
 
@@ -1052,7 +1056,7 @@ msgid "Server available on Internet"
 msgstr "Сервер доступен в интернете"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Режим сервера"
 
@@ -1114,12 +1118,12 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Шприц"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 #, fuzzy
 msgid "Team graphs"
 msgstr "Команды"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 #, fuzzy
 msgid "Team stats"
 msgstr "Команды"
@@ -1172,7 +1176,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "Граната улетела за пределы поля битвы"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Все ждут тебя! Проснись :-)"
 
@@ -1190,13 +1194,18 @@ msgstr "Сервер отклонил соединение."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Сервер отклонил соединение."
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Всего %i команда."
 msgstr[1] "Всего %i команды."
 msgstr[2] "Всего %i команд"
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1257,7 +1266,7 @@ msgstr "Версия"
 msgid "Version verification failed because: %s\n"
 msgstr "Проверка версии не удалась из-за: %s\n"
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1265,7 +1274,7 @@ msgstr[0] "Подождите! %i-й игрок пока не готов!"
 msgstr[1] "Подождите! %i игрока пока не готовы!"
 msgstr[2] "Подождите! %i игроков пока не готовы!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Ожидание действий сервера - всё что вы можете сделать, это отменить свою "
@@ -1291,7 +1300,7 @@ msgstr "Какой позор для %s - его убили из простог�
 msgid "Wind particles?"
 msgstr "Частицы в воздухе?"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 msgid "Winner"
 msgstr "Победитель"
 
@@ -1303,11 +1312,11 @@ msgstr "Запуск Wormux..."
 msgid "Wormux version "
 msgstr "Wormux версии "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr "Вы один :-/"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Вы один..."
 
@@ -1319,7 +1328,7 @@ msgstr "Вам нужна хотя бы одна карта !"
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды !"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Вы не сможете играть не выбрав команду !"
 

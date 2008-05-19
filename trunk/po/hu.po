@@ -15,14 +15,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "A(z) %s pálya nem található"
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i játékos belépett"
 msgstr[1] "%i játékos belépett"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -421,7 +421,7 @@ msgstr "Légitámadás"
 msgid "Airhammer"
 msgstr "Légkalapács"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Összes csapat"
 
@@ -498,7 +498,7 @@ msgid "Choose randomly between the different maps"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Kliens mód"
 
@@ -528,7 +528,7 @@ msgstr "Kapcsolódva!"
 msgid "Construct"
 msgstr "Épít"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr ""
 
@@ -564,6 +564,10 @@ msgstr "JÁTÉK VÉGE"
 
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
+msgstr ""
+
+#: src/menu/results_menu.cpp:321
+msgid "Energy"
 msgstr ""
 
 #: src/tool/error.cpp:82
@@ -814,7 +818,7 @@ msgstr "A(z) %s pálya készítõje: "
 msgid "Maps"
 msgstr "Pályák"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Játékosok létszáma:"
 
@@ -831,28 +835,28 @@ msgstr "Taposó akna"
 msgid "Misc"
 msgstr "Zene"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr ""
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 #, fuzzy
 msgid "Most clumsy"
 msgstr "Leghasznosabb"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Legmûvészibb"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Leghasznosabb"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Leghaszontalanabb"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Legerõszakosabb"
 
@@ -883,7 +887,7 @@ msgstr "Hálózati játék"
 msgid "No element <%s> found in the xml config file!"
 msgstr "A(z) <%s> elem nem található a konfigurációs XML fájlban!"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 #, fuzzy
 msgid "Nobody!"
 msgstr "Egy senki!"
@@ -1012,7 +1016,7 @@ msgid "Server available on Internet"
 msgstr "Interneten elérhetõ szerver"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Szerver mód"
 
@@ -1074,12 +1078,12 @@ msgstr "Szuperpingvin"
 msgid "Syringe"
 msgstr "Fecskendõ"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 #, fuzzy
 msgid "Team graphs"
 msgstr "Csapatok"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 #, fuzzy
 msgid "Team stats"
 msgstr "Csapatok"
@@ -1134,7 +1138,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "A gránát elhagyta a csatateret robbanás elõtt"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr ""
 
@@ -1152,12 +1156,17 @@ msgstr "A szerver elutasította a kapcsolatot."
 msgid "The server rejected the connection: wrong password!"
 msgstr "A szerver elutasította a kapcsolatot."
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Már csak %i csapat van."
 msgstr[1] "Már csak %i csapat van."
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1210,14 +1219,14 @@ msgstr "Verzió"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Várj! %i játékos még nem áll készen!"
 msgstr[1] "Várj! %i játékos még nem áll készen!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Várakozás a szerverre, visszaléphetsz vagy csetelhetsz!"
 
@@ -1241,7 +1250,7 @@ msgstr "Mekkora vesztes ez a %s - egy sima pisztoly kinyírta!"
 msgid "Wind particles?"
 msgstr "Hulló dísztárgyak"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 #, fuzzy
 msgid "Winner"
 msgstr "Taposó akna"
@@ -1254,12 +1263,12 @@ msgstr "Wormux indítása..."
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 #, fuzzy
 msgid "You are alone :-/"
 msgstr "Egyedül vagy..."
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Egyedül vagy..."
 
@@ -1271,7 +1280,7 @@ msgstr "Választanod kell legalább egy pályát!"
 msgid "You need at least two valid teams !"
 msgstr "Választanod kell legalább két csapatot!"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 

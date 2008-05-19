@@ -24,14 +24,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s =("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i Spieler verbunden"
 msgstr[1] "%i Spieler verbunden"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -390,7 +390,7 @@ msgstr "Бомбен набег"
 msgid "Airhammer"
 msgstr "Пневматичен чук"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Alle Mannschaften"
 
@@ -466,7 +466,7 @@ msgid "Choose randomly between the different maps"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr ""
 
@@ -496,7 +496,7 @@ msgstr "Verbinden !"
 msgid "Construct"
 msgstr "Конструкция"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr ""
 
@@ -533,6 +533,11 @@ msgstr ""
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
 msgstr ""
+
+#: src/menu/results_menu.cpp:321
+#, fuzzy
+msgid "Energy"
+msgstr "Energie:"
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -787,7 +792,7 @@ msgstr "Картата %s е творение на: "
 msgid "Maps"
 msgstr "Карти"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Maximale Anzahl an Spielern:"
 
@@ -804,29 +809,29 @@ msgstr "Противопехотна мина"
 msgid "Misc"
 msgstr "Музика?"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr ""
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 #, fuzzy
 msgid "Most clumsy"
 msgstr "Am nützlichsten"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 #, fuzzy
 msgid "Most sold-out"
 msgstr "Am verräterischsten"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Am nützlichsten"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Am nutzlosesten"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Am gewalttätigsten"
 
@@ -858,7 +863,7 @@ msgstr "Мрежова игра"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Няма такъв елемент в XML-конфигурационния фаил! <%s>"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Niemand!"
 
@@ -983,7 +988,7 @@ msgid "Server available on Internet"
 msgstr "Im Internert verfügbare Server"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 #, fuzzy
 msgid "Server mode"
 msgstr "Server Adresse:"
@@ -1046,12 +1051,12 @@ msgstr "Супер-Tux!"
 msgid "Syringe"
 msgstr "Отрова"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 #, fuzzy
 msgid "Team graphs"
 msgstr "Отбори"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 #, fuzzy
 msgid "Team stats"
 msgstr "Отбори"
@@ -1105,7 +1110,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "Ходи я търси..."
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr ""
 
@@ -1122,12 +1127,17 @@ msgstr ""
 msgid "The server rejected the connection: wrong password!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1182,14 +1192,14 @@ msgstr "версия"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
 msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
@@ -1214,7 +1224,7 @@ msgstr ""
 msgid "Wind particles?"
 msgstr "Красотички носени от вятъра?"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 #, fuzzy
 msgid "Winner"
 msgstr "Противопехотна мина"
@@ -1227,11 +1237,11 @@ msgstr "Wormux се зарежда..."
 msgid "Wormux version "
 msgstr "Версия на Wormux"
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr ""
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr ""
 
@@ -1243,7 +1253,7 @@ msgstr "Трябва ми поне една валидна карта!"
 msgid "You need at least two valid teams !"
 msgstr "Трябват ми поне два валидни отбора!"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
@@ -1484,9 +1494,6 @@ msgstr ""
 
 #~ msgid "Connected to "
 #~ msgstr "Verbunden zu "
-
-#~ msgid "Energy:"
-#~ msgstr "Energie:"
 
 #, fuzzy
 #~ msgid "Invalid top server adress!"

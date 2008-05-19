@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Banen %s blev ikke fundet :-("
 
-#: src/menu/network_menu.cpp:121 src/menu/network_menu.cpp:308
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Spiller %i er forbundet"
 msgstr[1] "Spillere %i er forbundet"
 
-#: src/menu/network_menu.cpp:125 src/menu/network_menu.cpp:316
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -402,7 +402,7 @@ msgstr "Luftangreb"
 msgid "Airhammer"
 msgstr "Tryklufthammer"
 
-#: src/menu/results_menu.cpp:382
+#: src/menu/results_menu.cpp:407
 msgid "All teams"
 msgstr "Alle hold"
 
@@ -481,7 +481,7 @@ msgid "Choose randomly between the different maps"
 msgstr "Skift tilfældigt rundt mellem de forskellige baner"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Klientmodus"
 
@@ -509,7 +509,7 @@ msgstr "Forbundet!"
 msgid "Construct"
 msgstr "Konstruér"
 
-#: src/menu/results_menu.cpp:358
+#: src/menu/results_menu.cpp:383
 msgid "Controlled by: "
 msgstr "Kontrolleret af: "
 
@@ -546,6 +546,10 @@ msgstr "SLUT PÅ SPILLET"
 #: src/menu/options_menu.cpp:152
 msgid "Effects volume"
 msgstr "Lydeffekt volume"
+
+#: src/menu/results_menu.cpp:321
+msgid "Energy"
+msgstr ""
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -801,7 +805,7 @@ msgstr "Banen %s, en kreation af: "
 msgid "Maps"
 msgstr "Baner"
 
-#: src/menu/network_menu.cpp:115
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Maksimum antal spillere:"
 
@@ -817,27 +821,27 @@ msgstr "Mine"
 msgid "Misc"
 msgstr "Andet"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "Mest præcis"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Most clumsy"
 msgstr "Mest klodset"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Mest udsolgt"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Mest brugbar"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Mest ubrugelig"
 
-#: src/menu/results_menu.cpp:132 src/menu/results_menu.cpp:134
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Mest voldelig"
 
@@ -867,7 +871,7 @@ msgstr "Nyt netværksspil på"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Intet <%s> element fundet i XML-konfigurationsfilen!"
 
-#: src/menu/results_menu.cpp:69
+#: src/menu/results_menu.cpp:71
 msgid "Nobody!"
 msgstr "Ingen!"
 
@@ -988,7 +992,7 @@ msgid "Server available on Internet"
 msgstr "Server tilgængelig på internettet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:112
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Servermodus"
 
@@ -1049,11 +1053,11 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Sprøjte"
 
-#: src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:412
 msgid "Team graphs"
 msgstr "Hold-grafer"
 
-#: src/menu/results_menu.cpp:385
+#: src/menu/results_menu.cpp:410
 msgid "Team stats"
 msgstr "Hold-statistik"
 
@@ -1105,7 +1109,7 @@ msgstr "Spillet blev afbrudt fordi din forbindelse blev brudt."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten forlod slagmarken før den eksploderede"
 
-#: src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:298
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De andre venter på dig! Vågn op :-)"
 
@@ -1122,12 +1126,17 @@ msgstr "Serveren afslog forbindelsen."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serveren afslog forbindelsen: forkert kodeord!"
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "Der er kun %i hold."
 msgstr[1] "Der er kun %i hold."
+
+#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
+#: src/menu/results_menu.cpp:319
+msgid "Time"
+msgstr ""
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
@@ -1188,14 +1197,14 @@ msgstr "Version"
 msgid "Version verification failed because: %s\n"
 msgstr "Version-verifikation fejlede fordi: %s\n"
 
-#: src/menu/network_menu.cpp:253
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent! Spiller %i er ikke klar endnu!"
 msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
-#: src/menu/network_menu.cpp:390
+#: src/menu/network_menu.cpp:365
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
@@ -1220,7 +1229,7 @@ msgstr "Hvilken skam for %s – han blev dræbt af en simpel pistol!"
 msgid "Wind particles?"
 msgstr "Vindpartikler?"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:375
 msgid "Winner"
 msgstr "Vinder"
 
@@ -1232,11 +1241,11 @@ msgstr "Wormux starter..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
 msgstr "Du er alene :-/"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Du er alene..."
 
@@ -1248,7 +1257,7 @@ msgstr "Du skal vælge mindst én gyldig bane!"
 msgid "You need at least two valid teams !"
 msgstr "Du skal vælge mindst to gyldige hold!"
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille før du har valgt et hold!"
 
