@@ -50,8 +50,8 @@ INCLUDE(CPackConfig OPTIONAL)
 INCLUDE(XmlValidityTest OPTIONAL)
 
 # Use "make run" and "make debug" to run/debug wormux
-ADD_CUSTOM_TARGET(run WORMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WORMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf src/wormux)
-ADD_CUSTOM_TARGET(debug WORMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WORMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf gdb src/wormux)
+ADD_CUSTOM_TARGET(run WORMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WORMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf src/wormux DEPENDS src/wormux)
+ADD_CUSTOM_TARGET(debug WORMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WORMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf gdb src/wormux DEPENDS src/wormux)
 
 
 # Required libraries
