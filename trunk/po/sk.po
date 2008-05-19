@@ -835,7 +835,7 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 #, fuzzy
-msgid "Most clumsy"
+msgid "Clumsiest"
 msgstr "Najužitočnejší"
 
 #: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160

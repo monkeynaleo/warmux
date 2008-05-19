@@ -821,7 +821,7 @@ msgid "Most accurate"
 msgstr "Mest treffsikker"
 
 #: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
-msgid "Most clumsy"
+msgid "Clumsiest"
 msgstr "Mest klønete"
 
 #: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160

@@ -163,9 +163,9 @@ public:
     // Most clumsy
     player = res->getMostClumsy();
     if (player)
-      box = new ResultBox(size.x, _("Most clumsy"), player->GetDamageStats()->GetItselfDamage(), player);
+      box = new ResultBox(size.x, _("Clumsiest"), player->GetDamageStats()->GetItselfDamage(), player);
     else
-      box = new ResultBox(size.x, _("Most clumsy"));
+      box = new ResultBox(size.x, _("Clumsiest"));
     AddWidgetItem(false, box);
 
     // Most accurate

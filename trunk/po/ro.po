@@ -1018,7 +1018,7 @@ msgid "Most accurate"
 msgstr "Cel mai bun țintaș"
 
 #: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
-msgid "Most clumsy"
+msgid "Clumsiest"
 msgstr "Cel mai stângaci"
 
 #: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
