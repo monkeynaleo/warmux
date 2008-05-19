@@ -620,7 +620,7 @@ msgstr "Glasnost učinkov"
 
 #: src/menu/results_menu.cpp:321
 msgid "Energy"
-msgstr ""
+msgstr "Energija"
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -941,7 +941,7 @@ msgstr "Inicializacija omrežja"
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:57
 msgid "New network game at "
-msgstr "Nova omrežna igra ob"
+msgstr "Nova omrežna igra ob "
 
 #: src/weapon/weapon.cpp:657
 #, c-format
@@ -1215,7 +1215,7 @@ msgstr[3] "Tukaj je samo %i ekip."
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:319
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 #: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
 msgid ""
