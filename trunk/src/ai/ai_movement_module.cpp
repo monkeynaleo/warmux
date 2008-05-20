@@ -246,6 +246,13 @@ void AIMovementModule::StopWalking()
 // =================================================
 void AIMovementModule::InverseDirection(bool completely_blocked)
 {
+  if ((max_reachable_x == ActiveCharacter().GetPosition().GetX())
+      || (min_reachable_x == ActiveCharacter().GetPosition().GetX()))
+    {
+      MSG_DEBUG("ai.move", "In %s : We turn around...\n", __func__);
+      StopMoving();
+      return;
+    }
   MSG_DEBUG("ai.move", "Inverse direction");
 
   if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {

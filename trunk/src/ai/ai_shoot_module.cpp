@@ -55,6 +55,42 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 // =================================================
 // Static method
 // =================================================
+// Returns true if not dangerous as the shooter pulls enemy
+// else returns false.
+// For example if the shooter with a given angle is in front of wall
+// he doesn't need to shoot the enemy (otherwises he shoots itself).
+// =================================================
+//
+//
+bool AIShootModule::IsBazookable(const Character& shooter,
+				 double& angle)
+{
+  Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition();
+  // Set the rotation of "angle" radians
+  Point2i pos = Vector2<int>::FromPolarCoordinates(double(sqrt(tmp.x * tmp.x + tmp.y * tmp.y)), double(tmp.ComputeAngle() + angle));
+
+  Point2i delta = Point2i(1, 0);
+  Point2i shoot_pos = shooter.GetCenter();
+
+  // Affine equation : y = ax + b.
+  double a = tan(angle);
+  double b = pos.y - (a * pos.x);
+  int distance = 0;
+
+  while (distance < 30)
+    {
+      if (!world.IsInVacuum(pos.x, pos.y))
+	return false;
+      pos += delta;
+      pos.y = a * pos.x + b;
+      distance = shoot_pos.Distance(pos);
+    }
+  return true;
+}
+
+// =================================================
+// Static method
+// =================================================
 // Return true if there is a straight line with no
 // collision between the shooter and a
 // potential enemy
@@ -231,17 +267,28 @@ void AIShootModule::ShootWithBazooka()
     std::cout << "Xs = " << Xs << std::endl;
     std::cout << "Ys = " << Ys << std::endl;
     double angle = atan(wind.GetStrength() * 75.0 /*wind factor */ /(30.0/* g */ *20 /* mass*/) );
-    double Xpe = (Xe - Xs) * cos(angle) - (Ye - Ys) * sin(angle) + Xs;
-    double Ype = (Xe - Xs) * sin(angle) + (Ye - Ys) * cos(angle) + Ys;
-    Xe = Xpe;
-    Ye = Ype;
-    double V0x = (Xe - Xs ) / 80;
-    double V0y = V0x * (Ye - (Ys))/ (Xe - Xs -V0x) - 1/2.0 * sqrt(30*30 /* g² */+ wind.GetStrength() * 75.0 *wind.GetStrength() * 75.0  /20.0 /20.0 /* W²/m²*/ )  / V0x * (Xe - Xs - V0x)/40 /* pixel per metre */;
+
+    if (!IsBazookable(ActiveCharacter(), angle))
+      {
+	MSG_DEBUG("ai.shoot", "%s is not bazookable !\n", m_enemy->GetName().c_str());
+	//MSG_DEBUG("ai.shoot", "%s is not bazookable !", m_enemy.GetName());
+	ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
+	Shoot();
+      }
+    else
+      {
+	double Xpe = (Xe - Xs) * cos(angle) - (Ye - Ys) * sin(angle) + Xs;
+	double Ype = (Xe - Xs) * sin(angle) + (Ye - Ys) * cos(angle) + Ys;
+	Xe = Xpe;
+	Ye = Ype;
+	double V0x = (Xe - Xs ) / 80;
+	double V0y = V0x * (Ye - (Ys))/ (Xe - Xs -V0x) - 1/2.0 * sqrt(30*30 /* g² */+ wind.GetStrength() * 75.0 *wind.GetStrength() * 75.0  /20.0 /20.0 /* W²/m²*/ )  / V0x * (Xe - Xs - V0x)/40 /* pixel per metre */;
 
 
-    std::cout << "shooting " << V0x <<" "  <<"   " << V0y << " "<< " " <<  atan(V0y/V0x) << " " <<m_enemy->GetName() << std::endl;
-    ActiveTeam().AccessWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetCenterX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
-    m_last_shoot_time = m_current_time;
+	std::cout << "shooting " << V0x <<" "  <<"   " << V0y << " "<< " " <<  atan(V0y/V0x) << " " <<m_enemy->GetName() << std::endl;
+	ActiveTeam().AccessWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetCenterX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
+	m_last_shoot_time = m_current_time;
+      }
   }
 }
 

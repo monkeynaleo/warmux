@@ -62,6 +62,9 @@ class AIShootModule
                                   const Character& enemy,
                                   double& shoot_angle);
 
+  static bool IsBazookable(const Character& shooter, 
+			   double& angle);
+
   static const Character* FindShootableEnemy(const Character& shooter,
                                              double& shoot_angle);
 

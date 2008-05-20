@@ -77,7 +77,7 @@ void AIStupidEngine::Refresh()
     m_movement.Move(m_current_time);
 
     if (!m_movement.IsProgressing())
-      m_shoot.SetStrategy(AIShootModule::SKIP_TURN);
+	Game::GetInstance()->SetState(Game::END_TURN);
   }
 
 //   switch (m_step)
