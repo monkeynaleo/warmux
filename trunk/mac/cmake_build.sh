@@ -12,6 +12,8 @@ cp libintl.a ${ROOT}
 mkdir ${MAC}tmpbuild
 TMP=${MAC}tmpbuild/
 
+ARCHIVE=${MAC}Wormux-0.8svn.tar.bz2
+
 export CMAKE_INSTALL_PREFIX=./wormux-files
 
 #
@@ -19,9 +21,9 @@ export CMAKE_INSTALL_PREFIX=./wormux-files
 #
 
 cd ${TMP}
-sed -i '/SET(WORMUX_PATCH/ s,^,#,' ../../CMakeLists.txt
+sed -i '/SET(WORMUX_PATCH/ s,^,#,' ${ROOT}CMakeLists.txt
 cmake ../..
-sed -i '/SET(WORMUX_PATCH/ s,^#,,' ../../CMakeLists.txt
+sed -i '/SET(WORMUX_PATCH/ s,^#,,' ${ROOT}CMakeLists.txt
 
 make
 
@@ -29,7 +31,7 @@ make
 # Clean environment
 #
 
-rm ${ROOT}/libSDLmain_UB.a ${ROOT}/libintl.a 
+rm ${ROOT}/libSDLmain_UB.a ${ROOT}/libintl.a ${MAC} 
 
 
 #
@@ -38,10 +40,10 @@ rm ${ROOT}/libSDLmain_UB.a ${ROOT}/libintl.a
 
 echo "Create Wormux.app file"
 
-rm -rf ${MAC}Wormux.app
-
-mkdir -p ${MAC}Wormux.app
 APP=${MAC}Wormux.app/
+rm -rf ${APP} ${ARCHIVE}
+
+mkdir -p ${APP}
 mkdir -p ${APP}Contents/Resources
 mkdir -p ${APP}Contents/MacOS
 mkdir -p ${APP}Contents/Frameworks
@@ -84,8 +86,18 @@ then
     echo "Frameworks will be downloaded from ${MIRROR} (3MB)";
     curl ${MIRROR}frameworks.tar.bz2 -o ${MAC}frameworks.tar.bz2;
 fi
-    tar xvfj ${MAC}frameworks.tar.bz2 -C ${APP}Contents/Frameworks;
+    tar xfj ${MAC}frameworks.tar.bz2 -C ${APP}Contents/Frameworks;
+    echo "Frameworks copy done"
 
+#
+# Make .dmg and .tar.bz2 file
+#
+
+    echo "Make archive ${ARCHIVE}"
+    tar cfj ${ARCHIVE} ${APP}
+    echo "Archive ${ARCHIVE} done"
+
+    
 echo "Remove temps files"
 #rm -rf ${MAC}tmpbuild
 echo "Build done"
