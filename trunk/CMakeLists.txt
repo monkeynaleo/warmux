@@ -10,7 +10,7 @@ ENDIF(COMMAND cmake_policy)
 PROJECT(Wormux)
 SET(WORMUX_MAJOR "0")
 SET(WORMUX_MINOR "8")
-SET(WORMUX_PATCH "svn")
+SET(WORMUX_PATCH "")
 SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}${WORMUX_PATCH}")
 
 # Some aliases of cmake variables
@@ -63,14 +63,27 @@ FIND_PACKAGE(SDL_ttf REQUIRED)
 FIND_PACKAGE(SDL_gfx REQUIRED)
 FIND_PACKAGE(SDL_net REQUIRED)
 FIND_PACKAGE(LibXml2 REQUIRED)
-FIND_PACKAGE(PNG REQUIRED)
 FIND_PACKAGE(CURL REQUIRED)
+
+IF(APPLE)
+  # to ease packaging, we'll use a static libintl
+  # we also need to link against the SDL_main library (required by the mac version of SDL)
+  SET(WORMUX_LDFLAGS "${PROJECT_SOURCE_DIR}/libintl.a -liconv -framework Carbon -L${PROJECT_SOURCE_DIR} -lSDLmain_UB ${WORMUX_LDFLAGS}")
+  # to ease packaging, we'll use a framework version of libpng
+  # (with a different name so there is no confusion with the UNIX version of libpng)
+  SET(WORMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WORMUX_LDFLAGS}")
+ELSE(APPLE)
+  FIND_PACKAGE(PNG REQUIRED)
+ENDIF(APPLE)
+
+
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})
 
 
 # config.h and compile-flags
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/src/config.h.cmake ${PROJECT_SOURCE_DIR}/src/config.h)
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
+
 ADD_DEFINITIONS(-DINSTALL_DATADIR=\\"${INSTALL_DATADIR}\\")
 ADD_DEFINITIONS(-DINSTALL_LOCALEDIR=\\"${INSTALL_LOCALEDIR}\\")
 ADD_DEFINITIONS(-DFONT_FILE=\\"${FONT_FILE}\\")
