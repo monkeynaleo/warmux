@@ -10,7 +10,7 @@ ENDIF(COMMAND cmake_policy)
 PROJECT(Wormux)
 SET(WORMUX_MAJOR "0")
 SET(WORMUX_MINOR "8")
-SET(WORMUX_PATCH "")
+SET(WORMUX_PATCH "svn")
 SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}${WORMUX_PATCH}")
 
 # Some aliases of cmake variables
