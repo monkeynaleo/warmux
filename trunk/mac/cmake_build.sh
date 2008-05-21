@@ -11,6 +11,8 @@ cp libSDLmain_UB.a ${ROOT}
 cp libintl.a ${ROOT}
 mkdir ${MAC}tmpbuild
 TMP=${MAC}tmpbuild/
+mkdir ${MAC}tmpdata
+TMPDATA=${MAC}tmpdata/
 
 ARCHIVE=${MAC}Wormux-0.8svn.tar.bz2
 
@@ -21,18 +23,21 @@ export CMAKE_INSTALL_PREFIX=./wormux-files
 #
 
 cd ${TMP}
+
 awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' CMakeLists.txt > tmp.$$.$$
 cp CMakeLists.txt tmp.$$.$$.2
 mv tmp.$$.$$ CMakeLists.txt
-cmake ../..
+cmake ../.. -DPREFIX:PATCH=${TMPDATA}
 mv tmp.$$.$$.2 CMakeLists.txt
+
 make
+make install
 
 #
 # Clean environment
 #
 
-rm ${ROOT}/libSDLmain_UB.a ${ROOT}/libintl.a ${MAC} 
+rm ${ROOT}/libSDLmain_UB.a ${ROOT}/libintl.a 
 
 
 #
@@ -55,8 +60,9 @@ mkdir -p ${RES}locale
 echo "Copy data into .app file"
 
 # Copy data files into .app
-echo "Error : i think to much data choose.. (140MB at end : we can have 70MB :/)"
-cp -R ${ROOT}data/ ${RES}data/
+echo "Copy /data"
+cp -R ${TMPDATA}share/wormux/* ${RES}data/
+
 INSTALL=/usr/local/share/
 #cp -R ${INSTALL}wormux ${RES}data
 
@@ -72,11 +78,8 @@ cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
 
 echo "Add bin"
-cp ${TMP}src/wormux ${APP}Contents/MacOS/wormux
-
-echo "Add data"
-#cp -r $INSTALL_PREFIX/share/wormux ./Wormux.app/Contents/Resources/data
-cp -r /usr/local/share/locale ${RES}locale
+#cp ${TMP}src/wormux ${APP}Contents/MacOS/wormux
+cp ${TMPDATA}bin/wormux ${APP}Contents/MacOs/wormux
 
 echo "Copy all frameworks"
 cd ${MAC};
@@ -95,8 +98,8 @@ fi
 #
 
     echo "Make archive ${ARCHIVE}"
-    tar cfj ${ARCHIVE} ${APP}
-    echo "Archive ${ARCHIVE} done"
+    #tar cfj ${ARCHIVE} ${APP}
+    #echo "Archive ${ARCHIVE} done"
 
     
 echo "Remove temps files"
