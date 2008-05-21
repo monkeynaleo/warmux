@@ -67,7 +67,7 @@ bool AIShootModule::IsBazookable(const Character& shooter,
 {
   Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition();
   // Set the rotation of "angle" radians
-  Point2i pos = Vector2<int>::FromPolarCoordinates(double(sqrt(tmp.x * tmp.x + tmp.y * tmp.y)), double(tmp.ComputeAngle() + angle));
+  Point2i pos = Point2i::FromPolarCoordinates(double(sqrt(tmp.x * tmp.x + tmp.y * tmp.y)), double(tmp.ComputeAngle() + angle));
 
   Point2i delta = Point2i(1, 0);
   Point2i shoot_pos = shooter.GetCenter();
@@ -85,7 +85,7 @@ bool AIShootModule::IsBazookable(const Character& shooter,
       if (!world.IsInVacuum(pos.x, pos.y))
 	return false;
       pos += delta;
-      pos.y = a * pos.x + b;
+      pos.y = int(a * pos.x + b);
       distance = shoot_pos.Distance(pos);
     }
   return true;
@@ -378,7 +378,7 @@ void AIShootModule::ChooseDirection() const
     if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 10 )
       return;
 
-    MSG_DEBUG("ai", "Character: %d, enemy %d", 
+    MSG_DEBUG("ai", "Character: %d, enemy %d",
 	      ActiveCharacter().GetCenterX(), m_enemy->GetCenterX());
 
     if ( ActiveCharacter().GetCenterX() < m_enemy->GetCenterX())
@@ -472,7 +472,7 @@ AIShootModule::AIShootModule(const AIMovementModule& to_remove) :
 void AIShootModule::SetStrategy(strategy_t new_strategy)
 {
   if (m_current_strategy != new_strategy) {
-    MSG_DEBUG("ai", "%s changes his strategy: %d -> %d", 
+    MSG_DEBUG("ai", "%s changes his strategy: %d -> %d",
 	      ActiveCharacter().GetName().c_str(), m_current_strategy, new_strategy);
     if (IsLOGGING("ai")) {
       std::cout << "SetStrategy: " << new_strategy << std::endl;
