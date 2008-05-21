@@ -79,6 +79,9 @@ bool AIShootModule::IsBazookable(const Character& shooter,
 
   while (distance < 30)
     {
+      if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) {
+        break;
+      }
       if (!world.IsInVacuum(pos.x, pos.y))
 	return false;
       pos += delta;
@@ -96,15 +99,11 @@ bool AIShootModule::IsBazookable(const Character& shooter,
 // potential enemy
 // Update the shoot_angle if it is ok
 // =================================================
-// This method is not perfect
-// It tests from the Center of the shooter
-// and not from the gun hole
-// =================================================
 bool AIShootModule::IsDirectlyShootable(const Character& shooter,
                                         const Character& enemy,
                                         double& shoot_angle)
 {
-  Point2i pos = shooter.GetCenter();
+  Point2i pos = ActiveTeam().GetWeapon().GetGunHolePosition();
   Point2i arrival = enemy.GetCenter();
   Point2i departure = pos;
   Point2i delta_pos;
