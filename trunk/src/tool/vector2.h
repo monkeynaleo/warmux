@@ -340,7 +340,7 @@ template<class T> class Vector2
     }
 
     /**
-     * [RCL]: using doubles, to keep the precision consistent with rest of 
+     * [RCL]: using doubles, to keep the precision consistent with rest of
      * functions here
     */
     Vector2<T> GetNormal() const {
@@ -396,7 +396,7 @@ template<class T> class Vector2
     }
 
     /** Transform polar coordinate */
-    static Vector2<T> FromPolarCoordinates(double norm, double angle) { return Vector2<T>(norm*cos(angle), norm*sin(angle)); }
+    static Vector2<T> FromPolarCoordinates(double norm, double angle) { return Vector2<T>(T(norm*cos(angle)), T(norm*sin(angle))); }
 
     /**
      *  Compute the angle of point M in the Cartesian plane
