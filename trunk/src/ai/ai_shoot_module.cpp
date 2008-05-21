@@ -114,14 +114,14 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   // While test is not finished
   while (pos != arrival) {
 
-    // is there a collision on the ground ??
-    if (!world.IsInVacuum(pos.x, pos.y)) {
-      return false;
-    }
-
     // the point is outside the map
     if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) {
       break;
+    }
+
+    // is there a collision on the ground ??
+    if (!world.IsInVacuum(pos.x, pos.y)) {
+      return false;
     }
 
     // is there a collision with another character ?
