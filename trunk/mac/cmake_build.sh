@@ -24,11 +24,11 @@ export CMAKE_INSTALL_PREFIX=./wormux-files
 
 cd ${TMP}
 
-awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' CMakeLists.txt > tmp.$$.$$
+awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
 cp CMakeLists.txt tmp.$$.$$.2
-mv tmp.$$.$$ CMakeLists.txt
+mv tmp.$$.$$ {ROOT}CMakeLists.txt
 cmake ../.. -DPREFIX:PATCH=${TMPDATA}
-mv tmp.$$.$$.2 CMakeLists.txt
+mv tmp.$$.$$.2 {ROOT}CMakeLists.txt
 
 make
 make install
