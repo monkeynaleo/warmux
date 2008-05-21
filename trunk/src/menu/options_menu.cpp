@@ -41,6 +41,7 @@
 #include "gui/tabs.h"
 #include "gui/question.h"
 #include "map/maps_list.h"
+#include "map/wind.h"
 #include "network/download.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
@@ -260,6 +261,7 @@ void OptionMenu::SaveOptions()
 
   // Graphic options
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
+  wind.Reset();
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
