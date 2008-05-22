@@ -140,6 +140,9 @@ public:
   const std::string &GetNetworkPort() const { return m_network_port; }
   void SetNetworkPort(std::string s) { m_network_port = s; }
 
+  const std::string &GetNetworkGameName() const { return m_network_game_name; }
+  void SetNetworkGameName(std::string s) { m_network_game_name = s; }
+
 protected:
   bool SaveXml(bool save_current_teams);
   std::string GetEnv(const std::string & name, const std::string &default_value) const;
@@ -148,6 +151,7 @@ protected:
   std::string m_game_mode;
   std::string m_network_host;
   std::string m_network_port;
+  std::string m_network_game_name;
   std::string m_filename;
 
   // Code setting it must make sure it ends with the path separator

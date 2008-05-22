@@ -121,7 +121,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   srv_tmp_box->SetBorder(Point2i(0,0));
 
   srv_tmp_box->AddWidget(new Label(_("Game name:"), def_size.x/2));
-  srv_game_name = new TextBox("Wormux party", def_size.x/2);
+  srv_game_name = new TextBox(Config::GetInstance()->GetNetworkGameName(), def_size.x/2);
   srv_game_name->SetMaxNbChars(15);
   srv_tmp_box->AddWidget(srv_game_name);
 
@@ -381,6 +381,10 @@ bool NetworkConnectionMenu::signal_ok()
                         srv_internet_server->GetValue());
     if (!r)
       goto out;
+
+    // Remember the parameter
+    Config::GetInstance()->SetNetworkGameName(srv_game_name->GetText());
+
   } else if (id == "TAB_client") { // Direct connexion to a server
 
     if (cl_net_games_lst->GetSelectedItem() != -1) {

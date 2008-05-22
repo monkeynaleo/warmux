@@ -96,6 +96,7 @@ Config::Config():
   m_game_mode("classic"),
   m_network_host("localhost"),
   m_network_port(WORMUX_NETWORK_PORT),
+  m_network_game_name("Wormux party"),
   m_filename(),
   data_dir(),
   locale_dir(),
@@ -449,9 +450,9 @@ void Config::LoadXml(xmlNode *xml)
   //=== network ===
   if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
   {
-    //XmlReader::ReadBool(elem, "enable_network", enable_network);
     XmlReader::ReadString(elem, "host", m_network_host);
     XmlReader::ReadString(elem, "port", m_network_port);
+    XmlReader::ReadString(elem, "game_name", m_network_game_name);
   }
 
   //=== misc ===
@@ -574,6 +575,7 @@ bool Config::SaveXml(bool save_current_teams)
   xmlNode *net_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"network"));
   doc.WriteElement(net_node, "host", m_network_host);
   doc.WriteElement(net_node, "port", m_network_port);
+  doc.WriteElement(net_node, "game_name", m_network_game_name);
 
   //=== Misc ===
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
