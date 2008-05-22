@@ -67,7 +67,7 @@ bool AIShootModule::IsBazookable(const Character& shooter,
 {
   Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition();
   // Set the rotation of "angle" radians
-  Point2i pos = Point2i::FromPolarCoordinates(double(sqrt(tmp.x * tmp.x + tmp.y * tmp.y)), double(tmp.ComputeAngle() + angle));
+  Point2i pos = Point2i::FromPolarCoordinates(sqrt(double(tmp.x * tmp.x + tmp.y * tmp.y)), double(tmp.ComputeAngle() + angle));
 
   Point2i delta = Point2i(1, 0);
   Point2i shoot_pos = shooter.GetCenter();
