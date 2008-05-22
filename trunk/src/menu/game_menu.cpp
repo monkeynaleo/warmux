@@ -92,14 +92,14 @@ GameMenu::GameMenu() :
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
                                                 option_size,
-                                                TPS_TOUR_MIN, 5,
+                                                TPS_TOUR_MIN, 10,
                                                 TPS_TOUR_MIN, TPS_TOUR_MAX);
   game_options->AddWidget(opt_duration_turn);
 
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
                                              option_size,
-                                             100, 5,
-                                             5, 200);
+                                             100, 10,
+                                             10, 200);
   game_options->AddWidget(opt_energy_ini);
   tabs->AddNewTab("TAB_Game", _("Game"), game_options);
 
