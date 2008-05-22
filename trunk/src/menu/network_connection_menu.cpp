@@ -156,8 +156,9 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
   cl_tmp_box->AddWidget(cl_refresh_net_games);
-  cl_tmp_box->AddWidget(new Label(_("Public battles"), def_size.x,
-                                  Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
+  refresh_net_games_label = new Label(_("Public battles"), def_size.x,
+                                  Font::FONT_MEDIUM, Font::FONT_BOLD, c_red);
+  cl_tmp_box->AddWidget(refresh_net_games_label);
   cl_connection_box->AddWidget(cl_tmp_box);
 
   cl_net_games_lst = new GameListBox( Point2i(def_size.x, 30), false);
@@ -250,7 +251,7 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget* w = widgets.ClickUp(mousePosition, button);
 
-  if (w == cl_refresh_net_games)
+  if (w == cl_refresh_net_games || w == refresh_net_games_label)
     RefreshList();
 }
 

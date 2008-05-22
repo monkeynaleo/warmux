@@ -52,6 +52,7 @@ private:
   CheckBox* srv_internet_server;
 
   Button* cl_refresh_net_games;
+  Label* refresh_net_games_label;
   GameListBox* cl_net_games_lst;
   PasswordBox* cl_net_server_pwd;
 
