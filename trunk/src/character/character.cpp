@@ -464,7 +464,7 @@ void Character::Jump(double strength, double angle /*in radian */)
 {
   Camera::GetInstance()->FollowObject(this, true);
 
-  do_nothing_time = Time::GetInstance()->Read();
+  UpdateLastMovingTime();
   walking_time = Time::GetInstance()->Read();
 
   if (!CanJump() && ActiveTeam().IsLocal()) return;
@@ -529,6 +529,11 @@ void Character::DoShoot()
   damage_stats->OneMoreShot();
   ActiveTeam().AccessWeapon().Shoot();
   MSG_DEBUG("weapon.shoot", "<- end");
+}
+
+void Character::UpdateLastMovingTime()
+{
+  do_nothing_time = Time::GetInstance()->Read();
 }
 
 void Character::Refresh()
@@ -620,7 +625,7 @@ void Character::BeginMovementRL(uint pause, bool slowly)
   Camera::GetInstance()->FollowObject(this, true);
 
   walking_time = Time::GetInstance()->Read();
-  do_nothing_time = Time::GetInstance()->Read();
+  UpdateLastMovingTime();
   if (!slowly) {
     SetMovement("walk");
   }
@@ -989,7 +994,7 @@ void Character::HandleKeyRefreshed_Up(bool shift)
     {
       if (ActiveTeam().crosshair.enable)
         {
-          do_nothing_time = Time::GetInstance()->Read();
+	  UpdateLastMovingTime();
           CharacterCursor::GetInstance()->Hide();
           if (shift) AddFiringAngle(-DELTA_CROSSHAIR/10.0);
           else       AddFiringAngle(-DELTA_CROSSHAIR);
@@ -1006,7 +1011,7 @@ void Character::HandleKeyRefreshed_Down(bool shift)
     {
       if (ActiveTeam().crosshair.enable)
         {
-          do_nothing_time = Time::GetInstance()->Read();
+	  UpdateLastMovingTime();
           CharacterCursor::GetInstance()->Hide();
           if (shift) AddFiringAngle(DELTA_CROSSHAIR/10.0);
           else       AddFiringAngle(DELTA_CROSSHAIR);

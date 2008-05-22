@@ -26,6 +26,7 @@
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "include/action_handler.h"
+#include "interface/cursor.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/network.h"
@@ -137,6 +138,13 @@ void JetPack::StartUse()
 
       Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
     }
+
+  // this avoids to show the arrow on top of character that can hide the ammo units
+  ActiveCharacter().UpdateLastMovingTime();
+
+  // do not display the character on top of the active character
+  // else it will hide the ammo unit of the jetpack (bug #11479)
+  CharacterCursor::GetInstance()->Hide();
 }
 
 void JetPack::StopUse()

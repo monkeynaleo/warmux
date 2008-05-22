@@ -163,6 +163,9 @@ public:
   void Show() { hidden = false; };
 
   // ---- Movement  -----
+
+  void UpdateLastMovingTime();
+
   // Can we move (check a timeout)
   bool CanMoveRL() const;
   bool CanJump() const { return CanMoveRL(); };
