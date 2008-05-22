@@ -242,8 +242,10 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
   // make use of their newer values in near-realtime!
   if (w == volume_music)
     Config::GetInstance()->SetVolumeMusic(toVolume(volume_music->GetValue()));
-  else if (w == volume_effects)
+  else if (w == volume_effects) {
     Config::GetInstance()->SetVolumeEffects(toVolume(volume_effects->GetValue()));
+    JukeBox::GetInstance()->Play("share", "menu/clic");
+  }
   else if (w == music_cbox)
     JukeBox::GetInstance()->ActiveMusic(music_cbox->GetValue());
   else if (w == effects_cbox)
