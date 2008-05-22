@@ -83,7 +83,7 @@ OptionMenu::OptionMenu() :
 
   opt_scroll_border_size = new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
 						     option_size,
-						     50, 2, 2, 80);
+						     50, 5, 5, 80);
   graphic_options->AddWidget(opt_scroll_border_size);
 
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
