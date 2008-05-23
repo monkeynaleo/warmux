@@ -35,7 +35,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i 玩家准備好了"
 msgstr[1] "%i 玩家都准備好了"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s)死掉了  ."
@@ -61,7 +61,7 @@ msgstr " %s 隊伍"
 msgid "%s Team - Remote"
 msgstr " %s 隊伍- 遙控"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s 自殺啦 !"
@@ -71,12 +71,12 @@ msgstr "%s 自殺啦 !"
 msgid "%s fps"
 msgstr "%s 幀fps"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s 入水---深呼吸."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s 飛出地圖邊緣---"
@@ -88,13 +88,13 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 贏得 %u 點耐久!"
 msgstr[1] "%s 贏得 %u 點耐久!"
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是個瘋子, 他幹掉了 %s 的一個!"
 
 # what about female names?
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
@@ -1209,7 +1209,7 @@ msgstr "武器"
 msgid "Website: "
 msgstr "網站Website: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 慘死在小槍之下...無法瞑目!"

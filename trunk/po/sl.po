@@ -43,7 +43,7 @@ msgstr[1] "%i igralca pripravljena"
 msgstr[2] "%i igralci pripravljeni"
 msgstr[3] "%i igralcev pripravljenih"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) je umrl/a."
@@ -69,7 +69,7 @@ msgstr "Ekipa %s"
 msgid "%s Team - Remote"
 msgstr "Ekipa %s - Oddaljena"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s je naredil/a samomor!"
@@ -79,12 +79,12 @@ msgstr "%s je naredil/a samomor!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s je padel/a v vodo."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s je padel/a s karte!"
@@ -98,12 +98,12 @@ msgstr[1] "%s je dobil %u točki energije!"
 msgstr[2] "%s je dobil %u točke energije!"
 msgstr[3] "%s je dobil %u točk energije!"
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopat, saj je ubil člana ekipe %s!"
 
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mrtev, ker je bil neroden!"
@@ -1299,7 +1299,7 @@ msgstr "Orožja"
 msgid "Website: "
 msgstr "Spletna stran: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"

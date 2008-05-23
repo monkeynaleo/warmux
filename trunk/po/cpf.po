@@ -38,7 +38,7 @@ msgid_plural "%i players ready"
 msgstr[0] " na na %i joueur que lé prêt"
 msgstr[1] " na na %i joueurs que lé prêts"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) lé mort."
@@ -64,7 +64,7 @@ msgstr "%s Équipes"
 msgid "%s Team - Remote"
 msgstr "%s équipe - loin là bas"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s la jette son corps la mer !"
@@ -74,12 +74,12 @@ msgstr "%s la jette son corps la mer !"
 msgid "%s fps"
 msgstr "%s i/s"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s la tombe dans l'eau."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s la sorte du terrain !"
@@ -91,12 +91,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Marmaille %s la gagné %u point d'vie !"
 msgstr[1] "Marmaille %s la gagné %u points d'vie !"
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s l'est gazé ça !! Boug là, la kine son camarades (%s) !"
 
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s lé mort à koz son 2 mains gauches..."
@@ -1231,7 +1231,7 @@ msgstr "Armes"
 msgid "Website: "
 msgstr "Site internet : "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : un simple pistolet la kine à lu !"

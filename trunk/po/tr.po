@@ -36,7 +36,7 @@ msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) öldü."
@@ -62,7 +62,7 @@ msgstr "Takımlar"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -72,12 +72,12 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
@@ -88,12 +88,12 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] ""
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -1164,7 +1164,7 @@ msgstr "Silahlar"
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"

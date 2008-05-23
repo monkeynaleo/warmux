@@ -39,7 +39,7 @@ msgstr[0] "%i hráč je pripravený"
 msgstr[1] "%i hráči sú pripravení"
 msgstr[2] "%i hráči sú pripravení"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s tím)  zomrel."
@@ -65,7 +65,7 @@ msgstr "Tími"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s spáchal samovraždu !"
@@ -75,12 +75,12 @@ msgstr "%s spáchal samovraždu !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s spadol do vody."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s vypadol z mapy!"
@@ -93,12 +93,12 @@ msgstr[0] "%s zvíťazil %u bodom energie!"
 msgstr[1] "%s zvíťazil %u bodmi energie! "
 msgstr[2] "%s zvíťazil %u bodmi energie! "
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychopat, zabil člena svojho %s tímu!"
 
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mŕtvy, pretože bol nemotorný!"
@@ -1234,7 +1234,7 @@ msgstr "Zbraňe"
 msgid "Website: "
 msgstr "Web stránka: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"

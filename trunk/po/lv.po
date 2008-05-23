@@ -38,7 +38,7 @@ msgstr[0] "%i spēlētājs gatavs"
 msgstr[1] "%i spēlētāji gatavi"
 msgstr[2] "%i spēlētāju gatavi"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s ) ir nomiris."
@@ -64,7 +64,7 @@ msgstr "%s komanda"
 msgid "%s Team - Remote"
 msgstr "%s komanda - attālināta"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izdara pašnāvību !"
@@ -74,12 +74,12 @@ msgstr "%s izdara pašnāvību !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s iekrita ūdenī."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s nokrita no kartes!"
@@ -92,12 +92,12 @@ msgstr[0] "%s ir ieguvis %u enerģijas punktu!"
 msgstr[1] "%s ir ieguvis %u enerģijas punktus!"
 msgstr[2] "%s ir ieguvis %u enerģijas punktus!"
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ir manjaks, viņš nogalināja %s komandas dalībnieku!"
 
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ir miris, jo bija pārāk neveikls!"
@@ -1258,7 +1258,7 @@ msgstr "Ieroči"
 msgid "Website: "
 msgstr "Mākas lapa: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kauns un negods %s - viņu nogalināja ar vienkāršu ieroci!"

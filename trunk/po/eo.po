@@ -37,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i ludanto pretas"
 msgstr[1] "%i ludantoj pretas"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s teamo) mortis."
@@ -63,7 +63,7 @@ msgstr "%s Teamo"
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -73,12 +73,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr "%s bildo po sekundo (fps)"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s droniĝis."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s falis el la mapo !"
@@ -90,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -1220,7 +1220,7 @@ msgstr "Armiloj"
 msgid "Website: "
 msgstr "TTT-ejo: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo !"

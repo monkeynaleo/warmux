@@ -43,7 +43,7 @@ msgstr[0] "%i gracz jest gotowy"
 msgstr[1] "%i graczy jest gotowych"
 msgstr[2] "%i graczy jest gotowych"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (drużyna %s) zginął."
@@ -69,7 +69,7 @@ msgstr "Drużyna %s"
 msgid "%s Team - Remote"
 msgstr "Drużyna %s - zdalna"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s popełnił samobójstwo!"
@@ -79,12 +79,12 @@ msgstr "%s popełnił samobójstwo!"
 msgid "%s fps"
 msgstr "%s kl/s"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s wpadł do wody."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s wypadł poza mapę!"
@@ -97,12 +97,12 @@ msgstr[0] "%s wygrał %u punkt energii!"
 msgstr[1] "%s wygrał %u punkty energii!"
 msgstr[2] "%s wygrał %u punktów energii!"
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s jest psychopatą, zabił %s - członka swojej drużyny!"
 
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s zginął przez swoją niezdarność!"
@@ -1293,7 +1293,7 @@ msgstr "Uzbrojenie"
 msgid "Website: "
 msgstr "Strona domowa: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Co za wstyd! %s został zabity zwykłym pistoletem!"

@@ -35,7 +35,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i spelare redo"
 msgstr[1] "%i spelare redo"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) har dött."
@@ -61,7 +61,7 @@ msgstr "Lag %s"
 msgid "%s Team - Remote"
 msgstr "%s-laget - Fjärr"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begår självmord!"
@@ -71,12 +71,12 @@ msgstr "%s begår självmord!"
 msgid "%s fps"
 msgstr "%s bilder/s"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ramlade i vattnet."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ramlade ut från kartan!"
@@ -88,13 +88,13 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har vunnit %u energipoäng!"
 msgstr[1] "%s har vunnit %u energipoäng!"
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s är en psykopat, han har dödat en medlem av %s!"
 
 # what about female names?
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s dog för att han var klumpig!"
@@ -1231,7 +1231,7 @@ msgstr "Vapen"
 msgid "Website: "
 msgstr "Webbplats: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Vad sorgligt för %s - han dödades av en enda pistol!"

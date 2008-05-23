@@ -34,7 +34,7 @@ msgid_plural "%i players ready"
 msgstr[0] "שחקן %i מוכן"
 msgstr[1] "%i שחקנים מוכנים"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) נהרג."
@@ -60,7 +60,7 @@ msgstr "צוות %s"
 msgid "%s Team - Remote"
 msgstr "צוות %s - מרוחק"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s מאבד עצמו לדעת!"
@@ -70,12 +70,12 @@ msgstr "%s מאבד עצמו לדעת!"
 msgid "%s fps"
 msgstr "%s תמונות בשניה"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s נפל למים."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s נפל מן המפה!"
@@ -87,12 +87,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s זכה ב-%u נקודת אנרגיה!"
 msgstr[1] "%s זכה ב-%u נקודות אנרגיה!"
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
 
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s מת כי הוא שלומיאל!"
@@ -1214,7 +1214,7 @@ msgstr "כלי נשק"
 msgid "Website: "
 msgstr "אתר: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"

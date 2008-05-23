@@ -43,7 +43,7 @@ msgstr[0] "%i jucător e gata"
 msgstr[1] "%i jucători sunt gata"
 msgstr[2] "%i de jucători sunt gata"
 
-#: src/game/game.cpp:679
+#: src/game/game.cpp:685
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) a murit."
@@ -69,7 +69,7 @@ msgstr "Echipa %s"
 msgid "%s Team - Remote"
 msgstr "Echipa %s - la distanță"
 
-#: src/game/game.cpp:658
+#: src/game/game.cpp:664
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -79,12 +79,12 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game.cpp:651
+#: src/game/game.cpp:657
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game.cpp:662
+#: src/game/game.cpp:668
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărții!"
@@ -97,13 +97,13 @@ msgstr[0] "%s a câștigat %u punct de energie!"
 msgstr[1] "%s a câștigat %u puncte de energie!"
 msgstr[2] "%s a câștigat %u de puncte de energie!"
 
-#: src/game/game.cpp:673
+#: src/game/game.cpp:679
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "Psihopatia sălășluiește în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game.cpp:668
+#: src/game/game.cpp:674
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -1416,7 +1416,7 @@ msgstr "Arme"
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game.cpp:676
+#: src/game/game.cpp:682
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
