@@ -39,7 +39,7 @@
 // Loop for all objects that aren't out of the screen
 #define FOR_EACH_OBJECT(object) \
   FOR_ALL_OBJECTS(object) \
-  if (!(*object)->IsGhost())
+  	if (!(*object)->IsGhost())
 
 //-----------------------------------------------------------------------------
 

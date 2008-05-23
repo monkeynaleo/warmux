@@ -609,7 +609,7 @@ PhysicalObj* Game::GetMovingObject() const
   {
     if (!character->IsImmobile() && !character->IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "%s is not ready", character->GetName().c_str());
+      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", character->GetName().c_str());
       return &(*character);
     }
   }
@@ -618,12 +618,18 @@ PhysicalObj* Game::GetMovingObject() const
   {
     if (!(*object)->IsImmobile())
     {
-      MSG_DEBUG("game.endofturn", "%s is moving", (*object)->GetName().c_str());
+      MSG_DEBUG("game.endofturn", "Object (%s) is moving", (*object)->GetName().c_str());
       return (*object);
     }
   }
 
-  return ParticleEngine::IsSomethingMoving();
+  PhysicalObj *obj = ParticleEngine::IsSomethingMoving(); 
+  if (obj != NULL)
+    {
+      MSG_DEBUG("game.endofturn", "ParticleEngine (%s) is moving", obj->GetName().c_str());
+      return obj;
+    }
+  return NULL;
 }
 
 bool Game::IsAnythingMoving() const
@@ -637,7 +643,6 @@ bool Game::IsAnythingMoving() const
 
   if (GetMovingObject() != NULL)
     return true;
-
   return false;
 }
 
