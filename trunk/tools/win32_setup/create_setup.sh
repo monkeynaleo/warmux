@@ -220,21 +220,15 @@ for gmo in "$WORMUXDIR"/po/*.gmo; do
   echo "  File /oname=wormux.mo \"$WIN_WORMUXDIR${SEP}po${SEP}$lg.gmo\"" >> $NSIS
 done
 
-## Data - I love this syntax
+## Various files
 cat >> $NSIS <<EOF
   ; Data
   SetOutPath \$INSTDIR
   File /r /x .svn /x Makefile* /x Makefile.* "${WIN_WORMUXDIR}\\data"
-EOF
-
-## License
-cat >> $NSIS <<EOF
   ; Licenses
   File /r /x .svn "${WIN_WORMUXDIR}\\doc\\license"
-EOF
-
-# End
-cat >> $NSIS <<EOF
+  ; Howto-play PDFs
+  File /r /x .svn "${WIN_WORMUXDIR}\\doc\\howto_play"
 
   ; Write the installation path into the registry
   WriteRegStr HKLM ${HKLM_PATH} "Path" "\$INSTDIR"
@@ -248,6 +242,18 @@ cat >> $NSIS <<EOF
   CreateDirectory "\$SMPROGRAMS\Wormux"
   CreateShortCut  "\$SMPROGRAMS\Wormux\Wormux.lnk" "\$INSTDIR\Wormux.exe" "" "\$INSTDIR\Wormux.exe" 0
   CreateShortCut  "\$SMPROGRAMS\Wormux\Uninstall.lnk" "\$INSTDIR\uninstall.exe" "" "\$INSTDIR\uninstall.exe" 0
+  ;CreateShortcut  "\$SMPROGRAMS\Wormux\Config.lnk" "wordpad.exe" "$APPDATA\Wormux\config.xml" "" 0
+EOF
+
+## PDF Shortcuts
+#for f in ../../../doc/howto_play/*.pdf; do
+#  lang=${f%%.pdf}
+#cat >> $NSIS <<EOF
+#  CreateShortcut  "\$SMPROGRAMS\Wormux\howto-${lang}.lnk" "\$INSTDIR\${lang}.pdf" "" "" 0
+#EOF
+#done
+
+cat >> $NSIS <<EOF
   ;Write language to the registry (for the uninstaller)
   WriteRegStr HKLM ${HKLM_PATH} "Installer Language" \$LANGUAGE
 SectionEnd
