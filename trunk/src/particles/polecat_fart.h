@@ -30,7 +30,7 @@ class PolecatFart : public Particle
   public:
     PolecatFart();
   protected:
-    void SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before);
+    void Refresh();
 };
 
 #endif /* POLECAT_FART_H */

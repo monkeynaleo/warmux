@@ -72,9 +72,9 @@
 
   <polecat_fart_particle>  <!-- Polecat Fart -->
     <mass>0.5</mass>
-    <wind_factor>0.8</wind_factor>
-    <air_resist_factor>0.2</air_resist_factor>
-    <gravity_factor>0.0</gravity_factor>
+    <wind_factor>1.5</wind_factor>
+    <air_resist_factor>0.1</air_resist_factor>
+    <gravity_factor>-0.2</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
   </polecat_fart_particle>

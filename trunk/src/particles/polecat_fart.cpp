@@ -19,18 +19,20 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "particles/polecat_fart.h"
-#include "particles/particle.h"
 #include "character/character.h"
 #include "graphic/sprite.h"
+#include "particles/polecat_fart.h"
+#include "particles/particle.h"
+#include "team/macro.h"
+#include "team/team.h"
 
 PolecatFart::PolecatFart() :
   Particle("polecat_fart_particle")
 {
-  m_initial_time_to_live = 10;
+  m_initial_time_to_live = 50;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 100;
-  SetCollisionModel(false, true, false);
+  SetCollisionModel(true, false, false);
   is_active = true;
 
   image = ParticleEngine::GetSprite(POLECAT_FART_spr);
@@ -38,11 +40,15 @@ PolecatFart::PolecatFart() :
   SetSize( Point2i(10, 10) );
 }
 
-void PolecatFart::SignalObjectCollision(PhysicalObj * obj, const Point2d& )
+void PolecatFart::Refresh()
 {
-  if (!is_active) return;
-  Character * tmp = (Character *)obj;
-  tmp->SetEnergyDelta(-10);
-  tmp->SetDiseaseDamage(5, 3);
-  is_active = false;
+  Particle::Refresh();
+
+  FOR_ALL_LIVING_CHARACTERS(team, c) {
+    if ((c->GetTestRect()).Intersect(GetTestRect())) {
+      //c->SetEnergyDelta(-10);
+      c->SetDiseaseDamage(5, 3);
+      is_active = false;
+    }
+  }
 }

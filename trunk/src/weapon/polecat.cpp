@@ -111,9 +111,11 @@ void Polecat::Refresh()
     SetSpeedXY(Point2d(m_sens * norme , -norme * 3.0));
   }
   if(last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
-    double norme = randomSync.GetLong(0, 5000) / 100;
-    double angle = randomSync.GetLong(0, 3000) / 1000;
-    ParticleEngine::AddNow(GetPosition(), 1, particle_POLECAT_FART, true, norme, angle);
+
+    // particles must be exactly the same accross the network
+    double norme = double(randomSync.GetLong(0, 500))/100;
+    double angle = double(randomSync.GetLong(0, 3000))/100;
+    ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
     last_fart_time = Time::GetInstance()->Read();
   }
   //Due to a bug in the physic engine
