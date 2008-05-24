@@ -135,13 +135,17 @@ public:
   const std::string &GetGameMode() const { return m_game_mode; }
   void SetGameMode(std::string s) { m_game_mode = s; }
 
-  const std::string &GetNetworkHost() const { return m_network_host; }
-  void SetNetworkHost(std::string s) { m_network_host = s; }
-  const std::string &GetNetworkPort() const { return m_network_port; }
-  void SetNetworkPort(std::string s) { m_network_port = s; }
+  const std::string &GetNetworkClientHost() const { return m_network_client_host; }
+  void SetNetworkClientHost(std::string s) { m_network_client_host = s; }
+  const std::string &GetNetworkClientPort() const { return m_network_client_port; }
+  void SetNetworkClientPort(std::string s) { m_network_client_port = s; }
 
-  const std::string &GetNetworkGameName() const { return m_network_game_name; }
-  void SetNetworkGameName(std::string s) { m_network_game_name = s; }
+  const std::string &GetNetworkServerPort() const { return m_network_server_port; }
+  void SetNetworkServerPort(std::string s) { m_network_server_port = s; }
+  const std::string &GetNetworkServerGameName() const { return m_network_server_game_name; }
+  void SetNetworkServerGameName(std::string s) { m_network_server_game_name = s; }
+  bool GetNetworkServerPublic() const { return m_network_server_public; }
+  void SetNetworkServerPublic(bool b) { m_network_server_public = b; }
 
 protected:
   bool SaveXml(bool save_current_teams);
@@ -149,9 +153,6 @@ protected:
 
   std::string default_language;
   std::string m_game_mode;
-  std::string m_network_host;
-  std::string m_network_port;
-  std::string m_network_game_name;
   std::string m_filename;
 
   // Code setting it must make sure it ends with the path separator
@@ -188,8 +189,16 @@ protected:
   uint volume_effects;
 
   // network
-  bool enable_network;
   bool check_updates;
+
+  // network previous connection as client
+  std::string m_network_client_host;
+  std::string m_network_client_port;
+
+  // network previous connection as server
+  std::string m_network_server_game_name;
+  std::string m_network_server_port;
+  bool m_network_server_public;
 
   // Font setting
   std::map<std::string, std::string>  fonts;

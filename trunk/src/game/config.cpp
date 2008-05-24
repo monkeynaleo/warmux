@@ -94,9 +94,6 @@ const std::string FILENAME="config.xml";
 Config::Config():
   default_language(""),
   m_game_mode("classic"),
-  m_network_host("localhost"),
-  m_network_port(WORMUX_NETWORK_PORT),
-  m_network_game_name("Wormux party"),
   m_filename(),
   data_dir(),
   locale_dir(),
@@ -121,8 +118,12 @@ Config::Config():
   sound_music(true),
   sound_effects(true),
   sound_frequency(44100),
-  enable_network(true),
   check_updates(false),
+  m_network_client_host("localhost"),
+  m_network_client_port(WORMUX_NETWORK_PORT),
+  m_network_server_game_name("Wormux party"),
+  m_network_server_port(WORMUX_NETWORK_PORT),
+  m_network_server_public(true),
   ttf_filename(),
   transparency(ALPHA),
   config_set()
@@ -450,9 +451,18 @@ void Config::LoadXml(xmlNode *xml)
   //=== network ===
   if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
   {
-    XmlReader::ReadString(elem, "host", m_network_host);
-    XmlReader::ReadString(elem, "port", m_network_port);
-    XmlReader::ReadString(elem, "game_name", m_network_game_name);
+    xmlNode *sub_elem;
+    if ((sub_elem = XmlReader::GetMarker(elem, "as_client")) != NULL)
+    {
+      XmlReader::ReadString(sub_elem, "host", m_network_client_host);
+      XmlReader::ReadString(sub_elem, "port", m_network_client_port);
+    }
+    if ((sub_elem = XmlReader::GetMarker(elem, "as_server")) != NULL)
+    {
+      XmlReader::ReadString(sub_elem, "game_name", m_network_server_game_name);
+      XmlReader::ReadString(sub_elem, "port", m_network_server_port);
+      XmlReader::ReadBool(sub_elem, "public", m_network_server_public);
+    }
   }
 
   //=== misc ===
@@ -573,9 +583,17 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== Network ===
   xmlNode *net_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"network"));
-  doc.WriteElement(net_node, "host", m_network_host);
-  doc.WriteElement(net_node, "port", m_network_port);
-  doc.WriteElement(net_node, "game_name", m_network_game_name);
+
+  // Network as client parameters
+  xmlNode *net_as_client_node = xmlAddChild(net_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"as_client"));
+  doc.WriteElement(net_as_client_node, "host", m_network_client_host);
+  doc.WriteElement(net_as_client_node, "port", m_network_client_port);
+
+  // Network as server parameters
+  xmlNode *net_as_server_node = xmlAddChild(net_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"as_server"));
+  doc.WriteElement(net_as_server_node, "game_name", m_network_server_game_name);
+  doc.WriteElement(net_as_server_node, "port", m_network_server_port);
+  doc.WriteElement(net_as_server_node, "public", ulong2str(m_network_server_public));
 
   //=== Misc ===
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));

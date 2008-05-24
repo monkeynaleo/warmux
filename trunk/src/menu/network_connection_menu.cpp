@@ -110,7 +110,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   srv_tmp_box->SetBorder(Point2i(0,0));
 
   srv_tmp_box->AddWidget(new Label(_("Port:"), def_size.x/2));
-  srv_port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), def_size.x/2);
+  srv_port_number = new TextBox(Config::GetInstance()->GetNetworkServerPort(), def_size.x/2);
   srv_tmp_box->AddWidget(srv_port_number);
 
   srv_connection_box->AddWidget(srv_tmp_box);
@@ -121,7 +121,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   srv_tmp_box->SetBorder(Point2i(0,0));
 
   srv_tmp_box->AddWidget(new Label(_("Game name:"), def_size.x/2));
-  srv_game_name = new TextBox(Config::GetInstance()->GetNetworkGameName(), def_size.x/2);
+  srv_game_name = new TextBox(Config::GetInstance()->GetNetworkServerGameName(), def_size.x/2);
   srv_game_name->SetMaxNbChars(15);
   srv_tmp_box->AddWidget(srv_game_name);
 
@@ -140,7 +140,8 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   srv_connection_box->AddWidget(srv_tmp_box);
 
   // Available on internet ?
-  srv_internet_server = new CheckBox(_("Server available on Internet"), def_size.x, true);
+  srv_internet_server = new CheckBox(_("Server available on Internet"), def_size.x,
+				     Config::GetInstance()->GetNetworkServerPublic());
   srv_connection_box->AddWidget(srv_internet_server);
 
   tabs->AddNewTab("TAB_server", _("Host a game"), srv_connection_box);
@@ -186,7 +187,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   cl_tmp_box->SetBorder(Point2i(0,0));
 
   cl_tmp_box->AddWidget(new Label(_("Server address:"), def_size.x/2));
-  cl_server_address = new TextBox(Config::GetInstance()->GetNetworkHost(), def_size.x/2);
+  cl_server_address = new TextBox(Config::GetInstance()->GetNetworkClientHost(), def_size.x/2);
   cl_tmp_box->AddWidget(cl_server_address);
 
   cl_connection_box->AddWidget(cl_tmp_box);
@@ -197,7 +198,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   cl_tmp_box->SetBorder(Point2i(0,0));
 
   cl_tmp_box->AddWidget(new Label(_("Port:"), def_size.x/2));
-  cl_port_number = new TextBox(Config::GetInstance()->GetNetworkPort(), def_size.x/2);
+  cl_port_number = new TextBox(Config::GetInstance()->GetNetworkClientPort(), def_size.x/2);
   cl_tmp_box->AddWidget(cl_port_number);
 
   cl_connection_box->AddWidget(cl_tmp_box);
@@ -383,8 +384,10 @@ bool NetworkConnectionMenu::signal_ok()
     if (!r)
       goto out;
 
-    // Remember the parameter
-    Config::GetInstance()->SetNetworkGameName(srv_game_name->GetText());
+    // Remember the parameters
+    Config::GetInstance()->SetNetworkServerPort(srv_port_number->GetText());
+    Config::GetInstance()->SetNetworkServerGameName(srv_game_name->GetText());
+    Config::GetInstance()->SetNetworkServerPublic(srv_internet_server->GetValue());
 
   } else if (id == "TAB_client") { // Direct connexion to a server
 
@@ -404,8 +407,8 @@ bool NetworkConnectionMenu::signal_ok()
         goto out;
 
       // Remember the parameters
-      Config::GetInstance()->SetNetworkHost(cl_server_address->GetText());
-      Config::GetInstance()->SetNetworkPort(cl_port_number->GetText());
+      Config::GetInstance()->SetNetworkClientHost(cl_server_address->GetText());
+      Config::GetInstance()->SetNetworkClientPort(cl_port_number->GetText());
     } else
       goto out;
   }

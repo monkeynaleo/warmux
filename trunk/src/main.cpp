@@ -356,7 +356,7 @@ void ParseArgs(int argc, char * argv[])
           //net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
           if (optarg)
             {
-              Config::GetInstance()->SetNetworkHost(optarg);
+              Config::GetInstance()->SetNetworkClientHost(optarg);
             }
           skip_menu = true;
           break;
