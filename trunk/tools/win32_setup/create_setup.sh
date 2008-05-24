@@ -57,7 +57,7 @@ fi
 # Create head
 cat > $NSIS <<EOF
 ;based on MUI Welcome/Finish Page Example Script written by Joost Verburg
-!include "MUI.nsh"
+!include "MUI2.nsh"
 !include "Sections.nsh"
 !include "LogicLib.nsh"
 
@@ -85,7 +85,7 @@ SetCompressor ${COMPRESSION}
   ; Language
   !define MUI_LANGDLL_ALWAYSSHOW
   !define MUI_LANGDLL_REGISTRY_ROOT         "HKLM"
-  !define MUI_LANGDLL_REGISTRY_KEY"         ${HKLM_PATH}"
+  !define MUI_LANGDLL_REGISTRY_KEY          ${HKLM_PATH}
   !define MUI_LANGDLL_REGISTRY_VALUENAME    "lang"
   ; Misc stuff
   !define MUI_COMPONENTSPAGE_SMALLDESC
@@ -161,6 +161,15 @@ SetCompressor ${COMPRESSION}
   !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "French"   "${LOCAL_PATH}\French.nsh"
   !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "Greek"    "${LOCAL_PATH}\Greek.nsh"
   !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "Polish"   "${LOCAL_PATH}\Polish.nsh"
+
+;--------------------------------
+;Reserve Files
+  
+  ;If you are using solid compression, files that are required before
+  ;the actual installation should be stored first in the data block,
+  ;because this will make your installer start faster.
+  
+  !insertmacro MUI_RESERVEFILE_LANGDLL
 
 ;--------------------------------
 ;Folder-selection page
@@ -299,6 +308,7 @@ SectionEnd
 Function .onInit
   ;Language selection
   !insertmacro MUI_LANGDLL_DISPLAY
+
   IntOp \$R0 \${SF_RO} | \${SF_SELECTED}
   SectionSetFlags \${Sec_Wormux} \$R0
 FunctionEnd
