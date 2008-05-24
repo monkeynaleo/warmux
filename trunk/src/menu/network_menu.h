@@ -47,8 +47,6 @@ class NetworkMenu : public Menu
 
   /* Chat controllers */
   TalkBox* msg_box;
-  TextBox* line_to_send_tbox;
-  Button* send_txt_bt;
 
   /* Team controllers */
   NetworkTeamsSelectionBox *team_box;
