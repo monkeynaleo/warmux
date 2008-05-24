@@ -36,7 +36,10 @@
 #include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/tabs.h"
+#include "gui/talk_box.h"
 #include "include/app.h"
+#include "include/action_handler.h"
+#include "network/network.h"
 #include "sound/jukebox.h"
 #include "team/results.h"
 #include "team/team.h"
@@ -64,7 +67,7 @@ class ResultBox : public HBox
     size -= 4*DEF_BORDER + 40;
     // Should resize more depending on font size
     Font::font_size_t font = (size > 400) ? Font::FONT_BIG : Font::FONT_MEDIUM;
-    printf("Size=%u\n", size);
+    //printf("Size=%u\n", size);
 
     AddWidget(new Label(type, (size*TypeW)/TotalW, font, Font::FONT_NORMAL));
 
@@ -358,6 +361,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   , first_team(NULL)
   , second_team(NULL)
   , third_team(NULL)
+  , msg_box(NULL)
   , winner_box(NULL)
 {
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
@@ -397,6 +401,16 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   const Point2i& wsize = AppWormux::GetInstance()->video->window.GetSize();
 
   Point2i tab_size = wsize - Point2i(x+16, y+70);
+
+  VBox* tmp_box = new VBox(tab_size.x, false, false);
+  tmp_box->SetNoBorder();
+
+  // Are we in network ? yes, so display a talkbox
+  if (Network::IsConnected()) {
+    msg_box = new TalkBox(Point2i(tab_size.x, 120), Font::FONT_SMALL, Font::FONT_NORMAL);
+    tab_size.y -= 125;
+  }
+
   tabs = new MultiTabs(tab_size);
 
   // Create tabs for each team result
@@ -411,9 +425,15 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   tabs->AddNewTab("TAB_canvas", _("Team graphs"),
                   new CanvasTeamsGraph(tab_size - 2*BorderSize, results));
-  tabs->SetPosition(x, y);
 
-  widgets.AddWidget(tabs);
+  tmp_box->AddWidget(tabs);
+
+  if (msg_box != NULL) {
+    tmp_box->AddWidget(msg_box);
+  }
+  tmp_box->SetPosition(x, y);
+
+  widgets.AddWidget(tmp_box);
   widgets.Pack();
 }
 
@@ -470,7 +490,30 @@ void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
   widgets.Click(mousePosition, button);
 }
 
+void ResultsMenu::key_ok()
+{
+  // return was pressed while chat texbox still had focus (player wants to send his msg)
+  if (msg_box->TextHasFocus())
+  {
+    msg_box->SendChatMsg();
+    return;
+  }
+  Menu::key_ok();
+}
+
 void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
 {
   DrawPodium(Point2i(70,250));
+
+  if (Network::IsConnected()) {
+    ActionHandler * action_handler = ActionHandler::GetInstance();
+    action_handler->ExecActions();
+  }
+}
+
+void ResultsMenu::ReceiveMsgCallback(const std::string& msg)
+{
+  if (msg_box) {
+    msg_box->NewMessage(msg);
+  }
 }

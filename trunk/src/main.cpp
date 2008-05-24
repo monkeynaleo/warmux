@@ -237,6 +237,24 @@ void AppWormux::RefreshDisplay()
   }
 }
 
+void AppWormux::DisplayError(const std::string &msg)
+{
+  if (Game::GetInstance()->IsGameLaunched()) {
+    // nothing to do
+  } else if (menu) {
+      menu->DisplayError(msg);
+  }
+}
+
+void AppWormux::ReceiveMsgCallback(const std::string& msg)
+{
+  if (Game::GetInstance()->IsGameLaunched()) {
+    // nothing to do
+  } else if (menu) {
+      menu->ReceiveMsgCallback(msg);
+  }
+}
+
 void AppWormux::End() const
 {
   cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;

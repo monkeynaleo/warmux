@@ -23,9 +23,9 @@
 //-----------------------------------------------------------------------------
 #include <SDL_thread.h>
 #include "include/action_handler.h"
+#include "include/app.h"
 #include "include/constant.h"
 #include "game/game_mode.h"
-#include "menu/network_menu.h"
 #include "network/distant_cpu.h"
 #include "network/net_error_msg.h"
 #include "tool/debug.h"
@@ -128,7 +128,7 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
     std::string str = Format(_("The client and server versions are incompatible "
 			       "(local=%s, server=%s). Please try another server."),
 			     Constants::WORMUX_VERSION.c_str(), version.c_str());
-    Network::GetInstance()->network_menu->DisplayError(str);
+    AppWormux::GetInstance()->DisplayError(str);
     goto error;
   }
 

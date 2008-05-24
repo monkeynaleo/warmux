@@ -29,6 +29,7 @@
 #include "game/game_mode.h"
 #include "game/game.h"
 #include "game/time.h"
+#include "include/app.h"
 #include "include/constant.h"
 #include "interface/game_msg.h"
 #include "network/chat.h"
@@ -323,9 +324,10 @@ void Action_ChatMessage (Action *a)
       //Add message to chat session in Game
       Game::GetInstance()->chatsession.NewMessage(msg);
     }
-    else if (Network::GetInstance()->network_menu != NULL) {
-      //Network Menu
-      Network::GetInstance()->network_menu->ReceiveMsgCallback(msg);
+    else
+    {
+      // For menu
+      AppWormux::GetInstance()->ReceiveMsgCallback(msg);
     }
   }
 }
@@ -632,8 +634,8 @@ void Action_Network_Connect(Action *a)
   if(Game::GetInstance()->IsGameLaunched())
     GameMessages::GetInstance()->Add(msg);
   else if (Network::GetInstance()->network_menu != NULL)
-    //Network Menu
-    Network::GetInstance()->network_menu->ReceiveMsgCallback(msg);
+    //Menu
+    AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 }
 
 // Only used to notify clients that someone disconnected from the server
@@ -645,7 +647,7 @@ void Action_Network_Disconnect(Action *a)
     GameMessages::GetInstance()->Add(msg);
   } else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu
-    Network::GetInstance()->network_menu->ReceiveMsgCallback(msg);
+    AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 }
 
 void Action_Explosion (Action *a)

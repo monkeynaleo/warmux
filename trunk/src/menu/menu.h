@@ -59,6 +59,9 @@ public:
 
    void DisplayError(const std::string &msg);
 
+   // for receiving message from network
+   virtual void ReceiveMsgCallback(const std::string& /*msg*/) {};
+
 private:
    Sprite *background;
 

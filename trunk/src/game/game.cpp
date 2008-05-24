@@ -106,11 +106,7 @@ void Game::Start()
   {
     JukeBox::GetInstance()->PlayMusic(ActiveMap()->ReadMusicPlaylist());
 
-    isGameLaunched = true;
-
     Run();
-
-    isGameLaunched = false;
 
     MSG_DEBUG( "game", "End of game_loop.Run()" );
     JukeBox::GetInstance()->StopAll();
@@ -378,6 +374,8 @@ void Game::PingClient() const
 
 void Game::Run()
 {
+  isGameLaunched = true;
+
   // Time to wait between 2 loops
   delay = 0;
   // Time to display the next frame
@@ -400,6 +398,9 @@ void Game::Run()
   if (IsGameFinished()) {
     EndOfGame();
   }
+
+  isGameLaunched = false;
+
   // * When debug is disabled : only show the result menu if game
   //   have 'regularly' finished (only one survivor or timeout reached)
   // * When debug is disabled : still show the result menu everytime the game
@@ -623,7 +624,7 @@ PhysicalObj* Game::GetMovingObject() const
     }
   }
 
-  PhysicalObj *obj = ParticleEngine::IsSomethingMoving(); 
+  PhysicalObj *obj = ParticleEngine::IsSomethingMoving();
   if (obj != NULL)
     {
       MSG_DEBUG("game.endofturn", "ParticleEngine (%s) is moving", obj->GetName().c_str());

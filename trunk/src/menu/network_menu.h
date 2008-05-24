@@ -45,7 +45,7 @@ class NetworkMenu : public Menu
   Label* connected_players;
   Label* initialized_players;
 
-  /* Chat controllers */
+  /* Chat controller */
   TalkBox* msg_box;
 
   /* Team controllers */

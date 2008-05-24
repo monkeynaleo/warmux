@@ -31,6 +31,7 @@ class PictureWidget;
 class TeamResults;
 class Team;
 class MultiTabs;
+class TalkBox;
 
 class ResultsMenu : public Menu
 {
@@ -45,9 +46,13 @@ class ResultsMenu : public Menu
     MultiTabs *tabs;
     MultiTabs *stats;
 
+    /* Chat controller */
+    TalkBox* msg_box;
+
     Box    *winner_box;
     Surface podium_img;
 
+    void key_ok();
     bool signal_ok() { return true;};
     bool signal_cancel() { return true;};
 
@@ -61,6 +66,8 @@ class ResultsMenu : public Menu
  public:
     ResultsMenu(std::vector<TeamResults*>& v, bool disconnected = false);
     ~ResultsMenu();
+
+    void ReceiveMsgCallback(const std::string& msg);
 };
 
 #endif //RESULTS_MENU_H
