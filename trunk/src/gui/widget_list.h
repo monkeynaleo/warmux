@@ -49,7 +49,7 @@ public:
   virtual ~WidgetList();
 
   virtual void Update(const Point2i &mousePosition);
-  virtual void Draw(const Point2i &/*mousePosition*/) const { };
+  virtual void Draw(const Point2i &mousePosition) const;
   // set need_redrawing to true for all sub widgets;
   virtual void NeedRedrawing();
 

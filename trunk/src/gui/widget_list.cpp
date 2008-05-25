@@ -182,6 +182,16 @@ bool WidgetList::SendKey(SDL_keysym key)
   return false;
 }
 
+void WidgetList::Draw(const Point2i &mousePosition) const
+{
+  for (std::list<Widget*>::const_iterator w=widget_list.begin();
+      w != widget_list.end();
+      w++)
+  {
+    (*w)->Draw(mousePosition);
+  }
+}
+
 Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
 {
   for(std::list<Widget*>::iterator w=widget_list.begin();
