@@ -270,7 +270,9 @@ for f in $lang; do
   cat >> $NSIS <<EOF
     Section $f
       SetOverwrite on
-      CreateShortcut  "\$SMPROGRAMS\\Wormux\\howto-$f.lnk" "\$INSTDIR\\howto_play\\$f.pdf" "" "" 0
+      SetOutPath \$INSTDIR
+      File "/oname=help-$f.pdf" "$WIN_WORMUXDIR${SEP}doc${SEP}howto_play${SEP}${f}.pdf"
+      CreateShortcut  "\$SMPROGRAMS\\Wormux\\howto-$f.lnk" "\$INSTDIR\\help-$f.pdf" "" "" 0
       SetOverwrite off
     SectionEnd
 EOF
@@ -334,6 +336,7 @@ Function .onInit
 
   IntOp \$R0 \${SF_RO} | \${SF_SELECTED}
   SectionSetFlags \${Sec_Wormux} \$R0
+  SectionSetFlags \${Sec_ConfigShortcut} \$R0
 FunctionEnd
 
 Function un.onInit
