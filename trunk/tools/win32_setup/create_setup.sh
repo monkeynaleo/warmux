@@ -159,8 +159,8 @@ SetCompressor ${COMPRESSION}
   !include "${LOCAL_PATH}\langmacros.nsh"
   !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "English"  "${LOCAL_PATH}\English.nsh"
   !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "French"   "${LOCAL_PATH}\French.nsh"
-  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "Greek"    "${LOCAL_PATH}\Greek.nsh"
   !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "Polish"   "${LOCAL_PATH}\Polish.nsh"
+  !insertmacro WORMUX_MACRO_INCLUDE_LANGFILE "Greek"    "${LOCAL_PATH}\Greek.nsh"
 
 ;--------------------------------
 ;Reserve Files
@@ -240,18 +240,15 @@ cat >> $NSIS <<EOF
   ; Shortcuts
   SetShellVarContext all
   CreateDirectory "\$SMPROGRAMS\Wormux"
-  CreateShortCut  "\$SMPROGRAMS\Wormux\Wormux.lnk" "\$INSTDIR\Wormux.exe" "" "\$INSTDIR\Wormux.exe" 0
-  CreateShortCut  "\$SMPROGRAMS\Wormux\Uninstall.lnk" "\$INSTDIR\uninstall.exe" "" "\$INSTDIR\uninstall.exe" 0
-  ;CreateShortcut  "\$SMPROGRAMS\Wormux\Config.lnk" "wordpad.exe" "$APPDATA\Wormux\config.xml" "" 0
+  ;CreateShortCut  "\$SMPROGRAMS\Wormux\Wormux.lnk" "\$INSTDIR\Wormux.exe" "" "\$INSTDIR\Wormux.exe" 0
+  ;CreateShortCut  "\$SMPROGRAMS\Wormux\Uninstall.lnk" "\$INSTDIR\uninstall.exe" "" "\$INSTDIR\uninstall.exe" 0
+  CreateShortcut  "\$SMPROGRAMS\Wormux\Config.lnk" "$APPDATA\Wormux\\" "" "" 0
 EOF
 
-## PDF Shortcuts
-#for f in ../../../doc/howto_play/*.pdf; do
-#  lang=${f%%.pdf}
-#cat >> $NSIS <<EOF
-#  CreateShortcut  "\$SMPROGRAMS\Wormux\howto-${lang}.lnk" "\$INSTDIR\${lang}.pdf" "" "" 0
-#EOF
-#done
+## PDF stuff
+lang=$(ls ../../doc/howto_play/*.pdf)
+lang=${lang//.pdf}
+lang=${lang//..\/..\/doc\/howto_play\/}
 
 cat >> $NSIS <<EOF
   ;Write language to the registry (for the uninstaller)
@@ -261,6 +258,26 @@ SectionEnd
 ;--------------------------------
 ;Shortcuts
 SubSection /e \$(WORMUX_SHORCUTS_TITLE) Sec_Shortcuts
+  Section \$(WORMUX_CONFIG_SC_DESC) Sec_ConfigShortcut
+    SetOverwrite on
+    CreateShortcut  "\$SMPROGRAMS\Wormux\Config.lnk" "$APPDATA\Wormux\\" "" "" 0
+    SetOverwrite off
+  SectionEnd
+  SubSection \$(WORMUX_PDF_SC_DESC) Sec_PdfShortcut
+EOF
+
+for f in $lang; do
+  cat >> $NSIS <<EOF
+    Section $f
+      SetOverwrite on
+      CreateShortcut  "\$SMPROGRAMS\\Wormux\\howto-$f.lnk" "\$INSTDIR\\howto_play\\$f.pdf" "" "" 0
+      SetOverwrite off
+    SectionEnd
+EOF
+done
+
+cat >> $NSIS <<EOF
+  SubSectionEnd
   Section /o \$(WORMUX_DESKTOP_SC_DESC) Sec_DesktopShortcut
     SetOverwrite on
     CreateShortCut "\$DESKTOP\WORMUX.lnk" "\$INSTDIR\wormux.exe" \

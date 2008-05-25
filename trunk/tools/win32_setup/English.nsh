@@ -12,4 +12,7 @@
 !define WORMUX_UNINST_SC_DESC   "Place an uninstall shortcut in the start menu, Wormux location"
 !define WORMUX_SHORCUTS_TITLE   "Shortcut installation"
 
+!define WORMUX_CONFIG_SC_DESC   "Shortcut to user config folder"
+!define WORMUX_PDF_SC_DESC      "Install howto play PDFs"
+
 !define WORMUX_VISIT            "Visit the Wormux website"

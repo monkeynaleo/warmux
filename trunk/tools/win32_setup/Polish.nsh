@@ -12,4 +12,7 @@
 !define WORMUX_UNINST_SC_DESC   "Umieœæ skrót do dezinstalacji Wormuksa w menu start"
 !define WORMUX_SHORCUTS_TITLE   "Instalacja skrótów"
 
+!define WORMUX_CONFIG_SC_DESC   "Shortcut to user config folder"
+!define WORMUX_PDF_SC_DESC      "Install howto play PDFs"
+
 !define WORMUX_VISIT            "OdwiedŸ stronê WWW projektu Wormux"
