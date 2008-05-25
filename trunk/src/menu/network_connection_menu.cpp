@@ -65,12 +65,6 @@ public:
     AddWidget(new Label(name, 200));
     Pack();
   }
-  void Draw(const Point2i &mousePosition) const
-  {
-    HBox::Draw(mousePosition);
-    for (std::list<Widget*>::const_iterator it = widget_list.begin(); it != widget_list.end(); ++it)
-      (*it)->Draw(mousePosition);
-  }
 };
 
 class GameListBox : public BaseListBox
