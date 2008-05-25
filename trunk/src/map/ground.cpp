@@ -33,6 +33,7 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "tool/i18n.h"
+#include "tool/isnan.h"
 #include "tool/resource_manager.h"
 
 Ground::Ground()
@@ -89,14 +90,7 @@ double Ground::Tangent(int x,int y) const {
    */
   Point2i p1,p2;
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
-  {
-#ifdef _MSC_VER
-    const unsigned long nan[2] ={0xffffffff, 0x7fffffff};
-    return *( double* )nan;
-#else
-    return NAN;
-#endif
-  }
+    return getNAN();
 
   if(!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y))
   {

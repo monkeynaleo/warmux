@@ -87,6 +87,17 @@
  * giving information about what platform and compiler version you're using.
  */
 
+/* Wormux addition to define NAN */
+static double inline getNAN()
+{
+#ifdef _MSC_VER
+  const unsigned long nan[2] ={0xffffffff, 0x7fffffff};
+  return *( double* )nan;
+#else
+  return NAN;
+#endif
+}
+
 
 #endif /* __ISNAN_H__ */
 
