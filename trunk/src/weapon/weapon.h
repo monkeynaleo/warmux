@@ -182,6 +182,7 @@ public:
   bool EnoughAmmoUnit() const;
   void UseAmmoUnit() const;
   int ReadInitialNbAmmo() const { return m_initial_nb_ammo; };
+  void WriteInitialNbAmmo(int nb) { m_initial_nb_ammo = nb; };
   int ReadInitialNbUnit() const { return m_initial_nb_unit_per_ammo; };
 
   bool CanBeUsedOnClosedMap() const { return can_be_used_on_closed_map; };
