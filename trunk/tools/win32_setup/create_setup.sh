@@ -30,12 +30,14 @@ if [ "$OSTYPE" == "linux-gnu" ]; then
   WIN_WORMUXDIR="$PWD/../.."
   LOCAL_PATH="$PWD"
   SEP="/"
+  i586-mingw32msvc-strip ../../src/wormux.exe
 else
   PKG_CONFIG=pkg-config
   SDL_CONFIG=sdl-config
   WIN_WORMUXDIR=$(cd "$WORMUXDIR" && cmd /c cd)
   LOCAL_PATH=$(cmd /c cd)
   SEP="\\"
+  strip ../../src/wormux.exe
 fi
 
 mkdir -p $DEST
