@@ -64,7 +64,7 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 //
 //
 bool AIShootModule::IsBazookable(const Character& shooter,
-				 double& angle)
+                                 double& angle)
 {
   Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition();
   // Set the rotation of "angle" radians
@@ -84,7 +84,7 @@ bool AIShootModule::IsBazookable(const Character& shooter,
         break;
       }
       if (!world.IsInVacuum(pos.x, pos.y))
-	return false;
+        return false;
       pos += delta;
       pos.y = int(a * pos.x + b);
       distance = shoot_pos.Distance(pos);
@@ -122,15 +122,17 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   // compute to see if there any part of ground between the 2 characters
   // While test is not finished
   while (pos != arrival) {
+    // XXX is rounding fine?
+    Point2i posi(int(pos.x+0.5), int(pos.y+0.5));
 
     // the point is outside the map
-    if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) 
+    if ( world.IsOutsideWorld(posi) ) 
       {
-	return false;
+        return false;
       }
 
     // is there a collision on the ground ??
-    if (!world.IsInVacuum(pos.x, pos.y)) {
+    if (!world.IsInVacuum(posi)) {
       return false;
     }
 
@@ -139,11 +141,11 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
       if ( &(*other_character) != &shooter
            && &(*other_character) != &enemy ) {
 
-	// Skip only if this character has the same team of shooter
-	// otherwises he's a enemy. (more reachable than the current)
-	if (other_character->GetTestRect().Contains(pos)
-	    && (&other_character->GetTeam()) == (&shooter.GetTeam()))
-	  return false;
+        // Skip only if this character has the same team of shooter
+        // otherwises he's a enemy. (more reachable than the current)
+        if (other_character->GetTestRect().Contains(pos)
+            && (&other_character->GetTeam()) == (&shooter.GetTeam()))
+          return false;
       }
     }
       pos.x += delta_x;
@@ -287,24 +289,24 @@ void AIShootModule::ShootWithBazooka()
 
     if (!IsBazookable(ActiveCharacter(), angle))
       {
-	MSG_DEBUG("ai.shoot", "%s is not bazookable !\n", m_enemy->GetName().c_str());
-	//MSG_DEBUG("ai.shoot", "%s is not bazookable !", m_enemy.GetName());
-	ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
-	Shoot();
+        MSG_DEBUG("ai.shoot", "%s is not bazookable !\n", m_enemy->GetName().c_str());
+        //MSG_DEBUG("ai.shoot", "%s is not bazookable !", m_enemy.GetName());
+        ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
+        Shoot();
       }
     else
       {
-	double Xpe = (Xe - Xs) * cos(angle) - (Ye - Ys) * sin(angle) + Xs;
-	double Ype = (Xe - Xs) * sin(angle) + (Ye - Ys) * cos(angle) + Ys;
-	Xe = Xpe;
-	Ye = Ype;
-	double V0x = (Xe - Xs ) / 80;
-	double V0y = V0x * (Ye - (Ys))/ (Xe - Xs -V0x) - 1/2.0 * sqrt(30*30 /* g² */+ wind.GetStrength() * 75.0 *wind.GetStrength() * 75.0  /20.0 /20.0 /* W²/m²*/ )  / V0x * (Xe - Xs - V0x)/40 /* pixel per metre */;
+        double Xpe = (Xe - Xs) * cos(angle) - (Ye - Ys) * sin(angle) + Xs;
+        double Ype = (Xe - Xs) * sin(angle) + (Ye - Ys) * cos(angle) + Ys;
+        Xe = Xpe;
+        Ye = Ype;
+        double V0x = (Xe - Xs ) / 80;
+        double V0y = V0x * (Ye - (Ys))/ (Xe - Xs -V0x) - 1/2.0 * sqrt(30*30 /* g   */+ wind.GetStrength() * 75.0 *wind.GetStrength() * 75.0  /20.0 /20.0 /* W  /m  */ )  / V0x * (Xe - Xs - V0x)/40 /* pixel per metre */;
 
 
-	std::cout << "shooting " << V0x <<" "  <<"   " << V0y << " "<< " " <<  atan(V0y/V0x) << " " <<m_enemy->GetName() << std::endl;
-	ActiveTeam().AccessWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetCenterX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
-	m_last_shoot_time = m_current_time;
+        std::cout << "shooting " << V0x <<" "  <<"   " << V0y << " "<< " " <<  atan(V0y/V0x) << " " <<m_enemy->GetName() << std::endl;
+        ActiveTeam().AccessWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetCenterX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
+        m_last_shoot_time = m_current_time;
       }
   }
 }
@@ -397,12 +399,12 @@ void AIShootModule::ChooseDirection() const
       return;
     if (m_enemy->GetTestRect().Intersect(ActiveCharacter().GetTestRect()))
       {
-	MSG_DEBUG("ai.shoot","%s is on or next to %s", ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str());
-	return;
+        MSG_DEBUG("ai.shoot","%s is on or next to %s", ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str());
+        return;
       }
 
     MSG_DEBUG("ai", "Character: %d, enemy %d",
-	      ActiveCharacter().GetCenterX(), m_enemy->GetCenterX());
+              ActiveCharacter().GetCenterX(), m_enemy->GetCenterX());
 
     if ( ActiveCharacter().GetCenterX() < m_enemy->GetCenterX())
       ActiveCharacter().SetDirection(DIRECTION_RIGHT);
@@ -441,8 +443,8 @@ bool AIShootModule::Refresh(uint current_time)
               }
                m_enemy = &(*character);
                Shoot();
-	       // If IA selected ProximityWeapon, he needs to go back, in the opposite direction (otherwises BOOM :-) )
-	       ActiveCharacter().SetDirection( (ActiveCharacter().GetDirection()==DIRECTION_RIGHT) ? DIRECTION_LEFT : DIRECTION_RIGHT);
+               // If IA selected ProximityWeapon, he needs to go back, in the opposite direction (otherwises BOOM :-) )
+               ActiveCharacter().SetDirection( (ActiveCharacter().GetDirection()==DIRECTION_RIGHT) ? DIRECTION_LEFT : DIRECTION_RIGHT);
       }
     }
     break;
@@ -496,7 +498,7 @@ void AIShootModule::SetStrategy(strategy_t new_strategy)
 {
   if (m_current_strategy != new_strategy) {
     MSG_DEBUG("ai", "%s changes his strategy: %d -> %d",
-	      ActiveCharacter().GetName().c_str(), m_current_strategy, new_strategy);
+              ActiveCharacter().GetName().c_str(), m_current_strategy, new_strategy);
     if (IsLOGGING("ai")) {
       std::cout << "SetStrategy: " << new_strategy << std::endl;
     }
