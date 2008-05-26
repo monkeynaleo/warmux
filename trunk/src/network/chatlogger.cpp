@@ -76,6 +76,9 @@ void ChatLogger::LogMessage(const std::string &msg)
   struct tm lt, *plt;
   std::string timestamp;
 
+  if (!m_logfilename)
+    return;
+
   if ( ((time_t) -1) == time(&t) )
   {
     timestamp = std::string (_("(unknown time)")) ;
