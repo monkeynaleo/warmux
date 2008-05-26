@@ -54,7 +54,7 @@ private:
   double firing_angle;
 
   uint disease_damage_per_turn;
-  uint disease_duration;
+  int disease_duration; // -1 means unlimited
   DamageStatistics *damage_stats;
   EnergyBar energy_bar;
 
@@ -120,8 +120,8 @@ public:
   void DisableDeathExplosion() { death_explosion = false; };
   bool IsActiveCharacter() const;
   // Disease handling
-  bool IsDiseased() const { return disease_duration > 0 && !IsDead(); };
-  void SetDiseaseDamage(const uint damage_per_turn, const uint duration)
+  bool IsDiseased() const { return ((disease_duration > 0 || disease_duration == -1) && !IsDead()); };
+  void SetDiseaseDamage(const uint damage_per_turn, const uint duration /* -1 means infinite */)
   {
     disease_damage_per_turn = damage_per_turn;
     disease_duration = duration;
@@ -133,9 +133,11 @@ public:
       return disease_damage_per_turn;
     return GetEnergy() - 1;
   }
-  uint GetDiseaseDuration() const { return disease_duration; };
+  int GetDiseaseDuration() const { return disease_duration; };
   void DecDiseaseDuration()
   {
+    if (disease_duration == -1) return; // infinite disease duration
+
     if (disease_duration > 0) disease_duration--;
     else disease_damage_per_turn = 0;
   }

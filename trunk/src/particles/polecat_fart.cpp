@@ -47,7 +47,7 @@ void PolecatFart::Refresh()
   FOR_ALL_LIVING_CHARACTERS(team, c) {
     if ((c->GetTestRect()).Intersect(GetTestRect())) {
       //c->SetEnergyDelta(-10);
-      c->SetDiseaseDamage(5, 3);
+      c->SetDiseaseDamage(5, -1);
       is_active = false;
     }
   }
