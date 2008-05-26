@@ -29,6 +29,7 @@
 #include "game/game_mode.h"
 #include "graphic/video.h"
 #include "gui/tabs.h"
+#include "gui/combo_box.h"
 #include "include/app.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
@@ -103,7 +104,11 @@ void GameMenu::OnClick(const Point2i &mousePosition, int button)
 
 void GameMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  widgets.ClickUp(mousePosition, button);
+  Widget *w = widgets.ClickUp(mousePosition, button);
+
+  if (w == game_options->GetGameModeComboBox()) {
+    game_options->LoadGameMode();
+  }
 }
 
 void GameMenu::SaveOptions()

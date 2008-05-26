@@ -19,9 +19,13 @@
  * Game mode editor
  *****************************************************************************/
 
+#include <vector>
+
 #include "menu/game_mode_editor.h"
 
+#include "game/config.h"
 #include "game/game_mode.h"
+#include "gui/combo_box.h"
 #include "gui/spin_button_picture.h"
 #include "tool/i18n.h"
 
@@ -34,6 +38,15 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
+
+  std::vector<std::pair<std::string, std::string> > game_modes;
+  game_modes.push_back(std::pair<std::string, std::string>("classic", "Classic"));
+  game_modes.push_back(std::pair<std::string, std::string>("unlimited", "Unlimited"));
+
+  opt_game_mode = new ComboBox(_("Game mode"), "menu/resolution", option_size,
+			       game_modes, Config::GetInstance()->GetGameMode());
+  AddWidget(opt_game_mode);
+
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
                                                 option_size,
                                                 TPS_TOUR_MIN, 10,
@@ -71,8 +84,10 @@ GameModeEditor::~GameModeEditor()
 {
 }
 
+
 void GameModeEditor::LoadGameMode()
 {
+  Config::GetInstance()->SetGameMode(opt_game_mode->GetValue());
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->Load();
 
@@ -81,11 +96,15 @@ void GameModeEditor::LoadGameMode()
   opt_time_before_death_mode->SetValue(game_mode->duration_before_death_mode);
   opt_damage_during_death_mode->SetValue(game_mode->damage_per_turn_during_death_mode);
   opt_gravity->SetValue((double)(game_mode->gravity));
+
+  NeedRedrawing();
 }
 
 void GameModeEditor::ValidGameMode() const
 {
   GameMode * game_mode = GameMode::GetInstance();
+  game_mode->Load();
+
   game_mode->duration_turn = opt_duration_turn->GetValue();
   game_mode->character.init_energy = opt_energy_ini->GetValue();
   game_mode->duration_before_death_mode = opt_time_before_death_mode->GetValue();

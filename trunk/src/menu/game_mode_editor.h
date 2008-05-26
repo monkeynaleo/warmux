@@ -26,23 +26,28 @@
 
 // Forward declarations
 class SpinButtonWithPicture;
+class ComboBox;
 
 class GameModeEditor : public GridBox
 {
   /* If you need this, implement it (correctly)*/
-   GameModeEditor(const GameModeEditor&);
-   GameModeEditor operator=(const GameModeEditor&);
-   /********************************************/
+  GameModeEditor(const GameModeEditor&);
+  GameModeEditor operator=(const GameModeEditor&);
+  /********************************************/
 
-   SpinButtonWithPicture *opt_duration_turn;
-   SpinButtonWithPicture *opt_energy_ini;
-   SpinButtonWithPicture *opt_time_before_death_mode;
-   SpinButtonWithPicture *opt_damage_during_death_mode;
-   SpinButtonWithPicture *opt_gravity;
+  ComboBox *opt_game_mode;
+
+  SpinButtonWithPicture *opt_duration_turn;
+  SpinButtonWithPicture *opt_energy_ini;
+  SpinButtonWithPicture *opt_time_before_death_mode;
+  SpinButtonWithPicture *opt_damage_during_death_mode;
+  SpinButtonWithPicture *opt_gravity;
 
 public:
-   GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border=true);
-   ~GameModeEditor();
+  GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border=true);
+  ~GameModeEditor();
+
+  const ComboBox* GetGameModeComboBox() const { return opt_game_mode; };
 
   void LoadGameMode();
   void ValidGameMode() const;
