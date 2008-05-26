@@ -30,7 +30,8 @@
 #include "team/macro.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-
+#include "include/app.h"
+#include "graphic/video.h"
 #include <iostream>
 
 
@@ -103,24 +104,35 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
                                         const Character& enemy,
                                         double& shoot_angle)
 {
-  Point2i pos = ActiveTeam().GetWeapon().GetGunHolePosition();
-  Point2i arrival = enemy.GetCenter();
-  Point2i departure = pos;
-  Point2i delta_pos;
+  // We need to use center point, because gunholePosition is location
+  // of last weapon of the ActiveTeam() and not the future gunholePos 
+  // which will be select.
+
+  // TODO: Please find an alternative to solve this tempory solution
+  Point2d pos = ActiveCharacter().GetCenter();
+  Point2d arrival = enemy.GetCenter();
 
   double original_angle = pos.ComputeAngle(arrival);
 
+  int delta_x = (pos.x > arrival.x) ? -1 : 1;
+  double a = tan(original_angle);
+  double b = pos.y - (a * pos.x);
+
+ 
   // compute to see if there any part of ground between the 2 characters
   // While test is not finished
   while (pos != arrival) {
 
     // the point is outside the map
-    if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) {
-      break;
-    }
+    if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) 
+      {
+	MSG_DEBUG("ai.shoot", "Point2i(%lf, %lf) is out of world !\n", pos.x, pos.y);
+	return false;
+      }
 
     // is there a collision on the ground ??
     if (!world.IsInVacuum(pos.x, pos.y)) {
+      MSG_DEBUG("ai.shoot", "Point2i(%lf, %lf) is on the ground !\n", pos.x, pos.y);
       return false;
     }
 
@@ -129,12 +141,17 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
       if ( &(*other_character) != &shooter
            && &(*other_character) != &enemy ) {
 
-        if ( other_character->GetTestRect().Contains(pos) )
-          return false;
-
+	// Skip only if this character has the same team of shooter
+	// otherwises he's a enemy. (more reachable than the current)
+	if (other_character->GetTestRect().Contains(pos)
+	    && (&other_character->GetTeam()) == (&shooter.GetTeam()))
+	  return false;
       }
     }
-
+      pos.x += delta_x;
+      pos.y = a * pos.x + b;
+  }
+    /*
     // next step
     int diff_x = pos.x - arrival.x;
     int diff_y = pos.y - arrival.y;
@@ -156,6 +173,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
     pos += delta_pos;
   }
+    
 
   // set the angle
   if (departure.x > arrival.x) {
@@ -163,7 +181,9 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   } else {
     shoot_angle = original_angle;
   }
-
+    */
+  shoot_angle = original_angle;
+  
   return true;
 }
 
@@ -377,6 +397,11 @@ void AIShootModule::ChooseDirection() const
     // TODO : Replace by a cleverer function
     if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 10 )
       return;
+    if (m_enemy->GetTestRect().Intersect(ActiveCharacter().GetTestRect()))
+      {
+	MSG_DEBUG("ai.shoot","%s is on or next to %s", ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str());
+	return;
+      }
 
     MSG_DEBUG("ai", "Character: %d, enemy %d",
 	      ActiveCharacter().GetCenterX(), m_enemy->GetCenterX());
