@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "menu/game_menu.h"
+#include "menu/game_mode_editor.h"
 #include "menu/map_selection_box.h"
 #include "menu/teams_selection_box.h"
 
@@ -27,10 +28,6 @@
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "graphic/video.h"
-#include "gui/null_widget.h"
-#include "gui/picture_text_cbox.h"
-#include "gui/picture_widget.h"
-#include "gui/spin_button_picture.h"
 #include "gui/tabs.h"
 #include "include/app.h"
 #include "tool/i18n.h"
@@ -42,10 +39,6 @@ const uint MARGIN_BOTTOM = 50;
 
 const uint TEAMS_BOX_H = 205;
 const uint OPTIONS_BOX_H = 150;
-
-
-const uint TPS_TOUR_MIN = 10;
-const uint TPS_TOUR_MAX = 120;
 
 // ################################################
 // ##  GAME MENU CLASS
@@ -88,34 +81,13 @@ GameMenu::GameMenu() :
   // ################################################
   Point2i option_size(130, 130);
 
-  game_options = new GridBox(mainBoxWidth, option_size, false);
-
-  opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
-                                                option_size,
-                                                TPS_TOUR_MIN, 10,
-                                                TPS_TOUR_MIN, TPS_TOUR_MAX);
-  game_options->AddWidget(opt_duration_turn);
-
-  opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
-                                             option_size,
-                                             100, 10,
-                                             10, 200);
-  game_options->AddWidget(opt_energy_ini);
+  game_options = new GameModeEditor(mainBoxWidth, option_size, false);
   tabs->AddNewTab("TAB_Game", _("Game"), game_options);
 
   tabs->SetPosition(MARGIN_SIDE, tabs_team->GetPositionY()+tabs_team->GetSizeY()+ MARGIN_TOP);
 
   widgets.AddWidget(tabs);
   widgets.Pack();
-
-  // Values initialization
-
-  // Load game options
-  GameMode::GetInstance()->Load();
-
-  GameMode * game_mode = GameMode::GetInstance();
-  opt_duration_turn->SetValue(game_mode->duration_turn);
-  opt_energy_ini->SetValue(game_mode->character.init_energy);
 
   resource_manager.UnLoadXMLProfile(res);
 }
@@ -145,10 +117,7 @@ void GameMenu::SaveOptions()
   //Save options in XML (including current selected teams, selected map)
   Config::GetInstance()->Save(true);
 
-  GameMode * game_mode = GameMode::GetInstance();
-  game_mode->duration_turn = opt_duration_turn->GetValue() ;
-  game_mode->character.init_energy = opt_energy_ini->GetValue() ;
-
+  game_options->ValidGameMode();
 }
 
 bool GameMenu::signal_ok()

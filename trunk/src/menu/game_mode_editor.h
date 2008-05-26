@@ -16,48 +16,36 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game menu
+ * Game mode editor
  *****************************************************************************/
 
-#ifndef GAME_MENU_H
-#define GAME_MENU_H
+#ifndef GAME_MODE_EDITOR_H
+#define GAME_MODE_EDITOR_H
 
-#include "menu.h"
+#include "gui/box.h"
 
 // Forward declarations
-class TeamsSelectionBox;
-class MapSelectionBox;
-class GameModeEditor;
+class SpinButtonWithPicture;
 
-class GameMenu : public Menu
+class GameModeEditor : public GridBox
 {
   /* If you need this, implement it (correctly)*/
-   GameMenu(const GameMenu&);
-   GameMenu operator=(const GameMenu&);
+   GameModeEditor(const GameModeEditor&);
+   GameModeEditor operator=(const GameModeEditor&);
    /********************************************/
 
-   /* Team controllers */
-   TeamsSelectionBox * team_box;
-
-   /* Map controllers */
-   MapSelectionBox * map_box;
-
-   /* Game options controllers */
-   GameModeEditor * game_options;
-
-   void SaveOptions();
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
-   void Draw(const Point2i &mousePosition);
-
-   bool signal_ok();
-   bool signal_cancel();
-   void key_left();
-   void key_right();
+   SpinButtonWithPicture *opt_duration_turn;
+   SpinButtonWithPicture *opt_energy_ini;
+   SpinButtonWithPicture *opt_time_before_death_mode;
+   SpinButtonWithPicture *opt_damage_during_death_mode;
+   SpinButtonWithPicture *opt_gravity;
 
 public:
-   GameMenu();
-   ~GameMenu();
+   GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border=true);
+   ~GameModeEditor();
+
+  void LoadGameMode();
+  void ValidGameMode() const;
 };
 
 #endif
