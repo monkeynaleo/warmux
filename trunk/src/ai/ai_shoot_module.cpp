@@ -126,13 +126,11 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
     // the point is outside the map
     if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) 
       {
-	MSG_DEBUG("ai.shoot", "Point2i(%lf, %lf) is out of world !\n", pos.x, pos.y);
 	return false;
       }
 
     // is there a collision on the ground ??
     if (!world.IsInVacuum(pos.x, pos.y)) {
-      MSG_DEBUG("ai.shoot", "Point2i(%lf, %lf) is on the ground !\n", pos.x, pos.y);
       return false;
     }
 
@@ -210,7 +208,7 @@ bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
   double angle = InRange_Double(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
                              - (ActiveTeam().GetWeapon().GetMinAngle()) );
 
-  if (AbsoluteValue(angle-m_angle) > 0.08726/* 5 degree */) {
+  if (AbsoluteValue(angle-m_angle) > 0.03490/* 2 degrees */) { 
     // angle is too wide for the weapon
     return false;
   }
