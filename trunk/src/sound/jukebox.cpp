@@ -359,13 +359,16 @@ void JukeBox::LoadXML(const std::string& profile)
   for (; it != end; ++it)
   {
     // reads XML
-    std::string sample="no_sample";
-    std::string file="no_file";
+    std::string sample = "no_sample";
+    std::string file   = "no_file";
+    double      level  = 1.0;
+
     XmlReader::ReadStringAttr(*it, "sample", sample);
     XmlReader::ReadStringAttr(*it, "file", file);
+    XmlReader::ReadDoubleAttr(*it, "level", level);
 
-    MSG_DEBUG("jukebox", "Load sound sample %s/%s: %s",
-              profile.c_str(), sample.c_str(), file.c_str());
+    MSG_DEBUG("jukebox", "Load sound sample %s/%s: %s (%.3f)",
+              profile.c_str(), sample.c_str(), file.c_str(), level);
 
     // Load sound
     std::string sample_filename = folder + file;
@@ -377,7 +380,8 @@ void JukeBox::LoadXML(const std::string& profile)
     }
 
     // Inserting sound sample in list
-    m_soundsamples.insert(sound_sample(profile+"/"+sample, sample_filename));
+    sample_info inf = { sample_filename, level };
+    m_soundsamples.insert(sound_sample(profile+"/"+sample, inf));
 
     // Precache
     m_cache.Precache( sample_filename.c_str() );
@@ -411,11 +415,11 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
     }
 
     // Play the sound
-    Mix_Chunk * sampleChunk = m_cache.LoadSound( it->second.c_str() );
+    Mix_Chunk * sampleChunk = m_cache.LoadSound( it->second.filename.c_str() );
     MSG_DEBUG("jukebox.play", "Playing sample %s/%s",
               category.c_str(), sample.c_str());
 
-    return PlaySample(sampleChunk, loop);
+    return PlaySample(sampleChunk, it->second.level, loop);
   }
   else if (category != "default")
   {
@@ -442,11 +446,11 @@ int JukeBox::StopAll() const
   return Mix_HaltChannel(-1);
 }
 
-int JukeBox::PlaySample (Mix_Chunk * sample, int loop)
+int JukeBox::PlaySample (Mix_Chunk * sample, double level, int loop)
 {
   if (loop != -1) loop--;
 
-  Mix_VolumeChunk(sample, Config::GetInstance()->GetVolumeEffects());
+  Mix_VolumeChunk(sample, int(0.5+level*Config::GetInstance()->GetVolumeEffects()));
   int channel = Mix_PlayChannel(-1, sample, loop);
 
   if (channel == -1)

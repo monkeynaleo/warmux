@@ -76,12 +76,16 @@ private:
   JukeBox operator=(const JukeBox&);
   /**********************************************/
 
-  typedef std::multimap<std::string, std::string>::value_type
+  typedef struct
+  {
+    std::string filename;
+    double      level;
+  } sample_info;
+  typedef std::multimap<std::string, sample_info>::value_type
     sound_sample;
-  typedef std::multimap<std::string, std::string>::iterator
+  typedef std::multimap<std::string, sample_info>::iterator
     sample_iterator;
-
-  std::multimap<std::string, std::string> m_soundsamples;
+  std::multimap<std::string, sample_info> m_soundsamples;
 
   std::map<int, Mix_Chunk*> chunks;
   Mix_Music* music;
@@ -169,7 +173,7 @@ private:
    * @return the channel used to play the sample
    * <i>loop</i>: -1 for loop forever, else number of times -1 to play
    */
-  int PlaySample (Mix_Chunk * sample, int loop=0);
+  int PlaySample (Mix_Chunk * sample, double level=1.0, int loop=0);
 };
 //-----------------------------------------------------------------------------
 #endif
