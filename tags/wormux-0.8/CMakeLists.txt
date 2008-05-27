@@ -55,9 +55,22 @@ FIND_PACKAGE(SDL_ttf REQUIRED)
 FIND_PACKAGE(SDL_gfx REQUIRED)
 FIND_PACKAGE(SDL_net REQUIRED)
 FIND_PACKAGE(LibXml2 REQUIRED)
-FIND_PACKAGE(PNG REQUIRED)
 FIND_PACKAGE(CURL REQUIRED)
+
+IF(APPLE)
+  # to ease packaging, we'll use a static libintl
+  # we also need to link against the SDL_main library (required by the mac version of SDL)
+  SET(WORMUX_LDFLAGS "${PROJECT_SOURCE_DIR}/libintl.a -liconv -framework Carbon -L${PROJECT_SOURCE_DIR} -lSDLmain_UB ${WORMUX_LDFLAGS}")
+  # to ease packaging, we'll use a framework version of libpng
+  # (with a different name so there is no confusion with the UNIX version of libpng)
+  SET(WORMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WORMUX_LDFLAGS}")
+ELSE(APPLE)
+  FIND_PACKAGE(PNG REQUIRED)
+ENDIF(APPLE)
+
+
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})
+
 
 
 # config.h and compile-flags
