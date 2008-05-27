@@ -79,6 +79,7 @@ Weapon::Weapon(Weapon_type type,
   m_is_active = false;
 
   m_time_anim_begin = Time::GetInstance()->Read();
+  m_available_after_turn = 0;
   m_initial_nb_ammo = INFINITE_AMMO;
   m_initial_nb_unit_per_ammo = 1;
   use_unit_on_first_shoot = true;
@@ -660,6 +661,7 @@ bool Weapon::LoadXml(xmlNode*  weapon)
     return false;
   }
 
+  XmlReader::ReadInt(elem, "available_after_turn", m_available_after_turn);
   XmlReader::ReadInt(elem, "nb_ammo", m_initial_nb_ammo);
   XmlReader::ReadInt(elem, "unit_per_ammo", m_initial_nb_unit_per_ammo);
 

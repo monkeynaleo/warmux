@@ -102,7 +102,8 @@
     </air_attack>
 
     <anvil_launcher>
-      <nb_ammo>0</nb_ammo>
+      <available_after_turn>5</available_after_turn>
+      <nb_ammo>1</nb_ammo>
       <damage>200</damage>
       <mass>1000</mass>
       <speed>0</speed>
@@ -215,8 +216,9 @@
     </cluster_bomb>
 
     <disco_grenade>
+      <available_after_turn>3</available_after_turn>
+      <nb_ammo>1</nb_ammo>
       <max_strength>40</max_strength>
-      <nb_ammo>0</nb_ammo>
       <damage>80</damage>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
@@ -435,7 +437,8 @@
     </teleportation>
 
     <tux>
-      <nb_ammo>0</nb_ammo>
+      <available_after_turn>7</available_after_turn>
+      <nb_ammo>1</nb_ammo>
       <damage>50</damage>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>

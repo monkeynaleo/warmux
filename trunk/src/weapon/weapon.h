@@ -130,6 +130,7 @@ protected:
   weapon_visibility_t m_unit_visibility;
 
   // how many times can we use this weapon (since the beginning of the game) ?
+  int m_available_after_turn; // -1 means NEVER
   int m_initial_nb_ammo;
   int m_initial_nb_unit_per_ammo;
   bool use_unit_on_first_shoot;
@@ -181,6 +182,8 @@ public:
   void UseAmmo() const;
   bool EnoughAmmoUnit() const;
   void UseAmmoUnit() const;
+
+  int AvailableAfterTurn() const { return m_available_after_turn; };
   int ReadInitialNbAmmo() const { return m_initial_nb_ammo; };
   void WriteInitialNbAmmo(int nb) { m_initial_nb_ammo = nb; };
   int ReadInitialNbUnit() const { return m_initial_nb_unit_per_ammo; };

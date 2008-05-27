@@ -248,6 +248,8 @@ int Team::NbAliveCharacter() const
 // Prepare a new team turn
 void Team::PrepareTurn()
 {
+  current_turn++;
+
   // Get a living character if possible
   if (ActiveCharacter().IsDead())
   {
@@ -259,6 +261,18 @@ void Team::PrepareTurn()
   Camera::GetInstance()->FollowObject (&ActiveCharacter(),
                           !is_camera_saved);
   CharacterCursor::GetInstance()->FollowActiveCharacter();
+
+  // Updating weapon ammos (some weapons are not available from the beginning)
+  std::list<Weapon *> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
+  std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
+  end = l_weapons_list.end();
+  for (; itw != end ; ++itw) {
+    if ((*itw)->AvailableAfterTurn() == (int)current_turn) {
+      // this weapon is available now
+      m_nb_ammos[ (*itw)->GetType() ] += (*itw)->ReadInitialNbAmmo();
+      m_nb_units[ (*itw)->GetType() ] += (*itw)->ReadInitialNbUnit();
+    }
+  }
 
   // Active last weapon use if EnoughAmmo
   if (AccessWeapon().EnoughAmmo())
@@ -340,6 +354,8 @@ Character* Team::FindByIndex(uint index)
 
 void Team::LoadGamingData()
 {
+  current_turn = 0;
+
   // Reset ammos
   m_nb_ammos.clear();
   m_nb_units.clear();
@@ -351,8 +367,15 @@ void Team::LoadGamingData()
   m_nb_units.assign(l_weapons_list.size(), 0);
 
   for (; itw != end ; ++itw) {
-    m_nb_ammos[ (*itw)->GetType() ] = (*itw)->ReadInitialNbAmmo();
-    m_nb_units[ (*itw)->GetType() ] = (*itw)->ReadInitialNbUnit();
+    if ((*itw)->AvailableAfterTurn() == 0) {
+      // this weapon is available now
+      m_nb_ammos[ (*itw)->GetType() ] = (*itw)->ReadInitialNbAmmo();
+      m_nb_units[ (*itw)->GetType() ] = (*itw)->ReadInitialNbUnit();
+    } else {
+      // this weapon will be available later
+      m_nb_ammos[ (*itw)->GetType() ] = 0;
+      m_nb_units[ (*itw)->GetType() ] = 0;
+    }
   }
 
   // Disable non-working weapons in network games

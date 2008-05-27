@@ -74,6 +74,7 @@ class Team
     iterator active_character;
     Weapon *active_weapon;
     uint nb_characters;
+    uint current_turn;
 
     team_player_type_t type_of_player;
 
