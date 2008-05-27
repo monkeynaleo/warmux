@@ -117,7 +117,7 @@ Member::Member(xmlNode* xml, const Profile* res):
       }
       (attached_members.find(att_type)->second)[frame] = d;
     }
-  } 
+  }
 
   ResetMovement();
 }
@@ -288,9 +288,10 @@ WeaponMember::~WeaponMember()
 
 void WeaponMember::Draw(const Point2i & /*_pos*/, int /*flip_center*/, int /*direction*/)
 {
-  if (!ActiveCharacter().IsDead() && Game::GetInstance()->ReadState() != Game::END_TURN)
-  {
-        ActiveTeam().crosshair.Draw();
-        ActiveTeam().AccessWeapon().Draw();
-  }
+  // Temporary *UGLY* fix for bug #11479 - Jetpack timer and skin is invisible
+//   if (!ActiveCharacter().IsDead() && Game::GetInstance()->ReadState() != Game::END_TURN)
+//   {
+//         ActiveTeam().crosshair.Draw();
+//         ActiveTeam().AccessWeapon().Draw();
+//   }
 }

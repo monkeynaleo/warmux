@@ -311,6 +311,11 @@ void Game::Draw ()
   StatStop("GameDraw:active_character");
   StatStop("GameDraw:characters");
 
+  // Temporary *UGLY* fix for bug #11479 - Jetpack timer and skin is invisible
+  // Should be done normally in WeaponMember::Draw
+  ActiveTeam().crosshair.Draw();
+  ActiveTeam().AccessWeapon().Draw();
+
   // Draw arrow on top of character
   StatStart("GameDraw:arrow_character");
   CharacterCursor::GetInstance()->Draw();
