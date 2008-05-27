@@ -964,6 +964,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\menu\game_mode_editor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\menu\game_mode_editor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\menu\help_menu.cpp"
 					>
 				</File>
@@ -1513,6 +1521,10 @@
 				</File>
 				<File
 					RelativePath="..\src\tool\i18n.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\tool\isnan.h"
 					>
 				</File>
 				<File
