@@ -849,8 +849,8 @@ void Character::StoreValue(Action *a)
   PhysicalObj::StoreValue(a);
   a->Push((int)GetDirection());
   a->Push(GetAbsFiringAngle());
-  a->Push((int)GetDiseaseDamage());
-  a->Push((int)GetDiseaseDuration());
+  a->Push((int)disease_damage_per_turn);
+  a->Push((int)disease_duration);
   if (IsActiveCharacter()) { // If active character, store step animation
     a->Push((int)true);
     a->Push(GetBody()->GetClothe());
@@ -922,8 +922,8 @@ void Character::GetValueFromAction(Action *a)
     }
   }
 
-  int disease_damage_per_turn = (a->PopInt());
-  int disease_duration = (a->PopInt());
+  uint disease_damage_per_turn = (a->PopInt());
+  uint disease_duration = (a->PopInt());
   SetDiseaseDamage(disease_damage_per_turn, disease_duration);
   if (a->PopInt()) { // If active characters, retrieve stored animation
     if (GetTeam().IsActiveTeam())

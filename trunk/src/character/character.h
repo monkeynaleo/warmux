@@ -22,6 +22,7 @@
 #ifndef _CHARACTER_H
 #define _CHARACTER_H
 
+#include <limits>
 #include <string>
 #include "gui/energy_bar.h"
 #include "include/base.h"
@@ -54,7 +55,7 @@ private:
   double firing_angle;
 
   uint disease_damage_per_turn;
-  int disease_duration; // -1 means unlimited
+  uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
   DamageStatistics *damage_stats;
   EnergyBar energy_bar;
 
@@ -120,8 +121,9 @@ public:
   void DisableDeathExplosion() { death_explosion = false; };
   bool IsActiveCharacter() const;
   // Disease handling
-  bool IsDiseased() const { return ((disease_duration > 0 || disease_duration == -1) && !IsDead()); };
-  void SetDiseaseDamage(const uint damage_per_turn, const uint duration /* -1 means infinite */)
+  bool IsDiseased() const { return (disease_duration > 0 && !IsDead()); };
+
+  void SetDiseaseDamage(const uint damage_per_turn, const uint duration)
   {
     disease_damage_per_turn = damage_per_turn;
     disease_duration = duration;
@@ -133,10 +135,9 @@ public:
       return disease_damage_per_turn;
     return GetEnergy() - 1;
   }
-  int GetDiseaseDuration() const { return disease_duration; };
   void DecDiseaseDuration()
   {
-    if (disease_duration == -1) return; // infinite disease duration
+    if (disease_duration == std::numeric_limits<uint>::max()) return; // infinite disease duration
 
     if (disease_duration > 0) disease_duration--;
     else disease_damage_per_turn = 0;
