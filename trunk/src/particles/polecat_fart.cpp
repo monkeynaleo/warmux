@@ -19,6 +19,8 @@
  * Particle Engine
  *****************************************************************************/
 
+#include <limits>
+
 #include "character/character.h"
 #include "graphic/sprite.h"
 #include "particles/polecat_fart.h"
@@ -46,8 +48,9 @@ void PolecatFart::Refresh()
 
   FOR_ALL_LIVING_CHARACTERS(team, c) {
     if ((c->GetTestRect()).Intersect(GetTestRect())) {
+        unsigned int maxuint = std::numeric_limits<uint>::max();
       //c->SetEnergyDelta(-10);
-      c->SetDiseaseDamage(5, -1);
+      c->SetDiseaseDamage(5, maxuint);
       is_active = false;
     }
   }
