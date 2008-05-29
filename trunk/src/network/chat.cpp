@@ -113,16 +113,17 @@ void Chat::HandleKey(const SDL_Event& event)
   } else {
 
     switch (key.sym){
-      
+
     case SDLK_RETURN:
     case SDLK_KP_ENTER:
       check_input = false; //Hide input widget
       if ( txt[0] == '/' )
 	ProcessCommand(txt);
-      else
-	if (txt != "" )
-	  Network::GetInstance()->SendChatMessage(txt); //Send 'txt' to other players
+      else if (txt != "" )
+	Network::GetInstance()->SendChatMessage(txt); //Send 'txt' to other players
+
       input->Set("");
+      cursor_pos = 0;
       break;
 
     default:
