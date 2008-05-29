@@ -154,6 +154,9 @@ void JukeBox::ActiveMusic (bool on)
 
 void JukeBox::LoadMusicXML()
 {
+  if (!m_init) // the sound device has not be initialized (was busy?)
+    return;
+
   // is xml_file already loaded ?
   std::set<std::string>::iterator it_profile = m_profiles_loaded.find("music") ;
   if (it_profile !=  m_profiles_loaded.end())
@@ -327,6 +330,9 @@ bool JukeBox::PlayMusicSample(const std::vector<std::string>::const_iterator& fi
 
 void JukeBox::LoadXML(const std::string& profile)
 {
+  if (!m_init) // the sound device has not be initialized (was busy?)
+    return;
+
   // is xml_file already loaded ?
   std::set<std::string>::iterator it_profile = m_profiles_loaded.find(profile);
   if (it_profile !=  m_profiles_loaded.end())
@@ -394,7 +400,7 @@ void JukeBox::LoadXML(const std::string& profile)
 int JukeBox::Play (const std::string& category, const std::string& sample,
                    const int loop)
 {
-  if (!UseEffects()) return -1;
+  if (!UseEffects() || !m_init) return -1;
 
   uint nb_sons= m_soundsamples.count(category+"/"+sample);
   if (nb_sons)
@@ -433,13 +439,15 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
 
 int JukeBox::Stop (int channel) const
 {
-  if(!m_config.music && !m_config.effects) return 0;
+  if (!m_init) return 0;
+  if (!m_config.music && !m_config.effects) return 0;
   if (channel == -1) return 0;
   return Mix_HaltChannel(channel);
 }
 
 int JukeBox::StopAll() const
 {
+  if (!m_init) return 0;
   if (!m_config.music && !m_config.effects) return 0;
 
   // halt playback on all channels
