@@ -82,7 +82,15 @@ connection_state_t IndexServer::Connect()
   // Until we find one running
   while (GetServerAddress(addr, port, nb_servers_tried))
   {
-    if( ConnectTo( addr, port) )
+    connection_state_t r = Network::CheckHost(addr, port);
+    if (r != CONNECTED)
+      return r;
+
+    // CheckHost opens and closes a connection to the server, so before reconnecting
+    // wait a bit, so the connection really gets closed ..
+    SDL_Delay(500);
+
+    if (ConnectTo( addr, port))
       return CONNECTED;
   }
 

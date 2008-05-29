@@ -312,7 +312,8 @@ typedef int SOCKET;
 # define closesocket(fd) close(fd)
 #endif
 
-connection_state_t Network::GetError() const
+// static method
+connection_state_t Network::GetError()
 {
 #ifdef WIN32
   int code = WSAGetLastError();
@@ -338,7 +339,8 @@ connection_state_t Network::GetError() const
 #endif
 }
 
-connection_state_t Network::CheckHost(const std::string &host, int prt) const
+// static method
+connection_state_t Network::CheckHost(const std::string &host, int prt)
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 

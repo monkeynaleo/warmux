@@ -81,7 +81,7 @@ private:
   friend class DistantComputer;
 
   std::string password;
-  connection_state_t GetError() const;
+  static connection_state_t GetError();
 
   static bool sdlnet_initialized;
   static int  num_objects;
@@ -153,7 +153,7 @@ public:
 					const std::string& password);
 
   // Manage network state
-  connection_state_t CheckHost(const std::string &host, int prt) const;
+  static connection_state_t CheckHost(const std::string &host, int prt);
   void SetState(Network::network_state_t state);
   Network::network_state_t GetState() const;
   void SendNetworkState() const;
