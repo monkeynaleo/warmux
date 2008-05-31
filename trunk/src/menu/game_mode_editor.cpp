@@ -95,7 +95,7 @@ void GameModeEditor::LoadGameMode()
   opt_energy_ini->SetValue(game_mode->character.init_energy);
   opt_time_before_death_mode->SetValue(game_mode->duration_before_death_mode);
   opt_damage_during_death_mode->SetValue(game_mode->damage_per_turn_during_death_mode);
-  opt_gravity->SetValue((double)(game_mode->gravity));
+  opt_gravity->SetValue((int)(game_mode->gravity));
 
   NeedRedrawing();
 }
