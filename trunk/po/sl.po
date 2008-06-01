@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-04-25 18:30+0100\n"
+"PO-Revision-Date: 2008-06-01 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -441,7 +441,7 @@ msgstr[3] ""
 #: src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
-msgstr ""
+msgstr "Ekipa %s je bila uničena."
 
 #: src/interface/interface.cpp:165
 msgid "(dead)"
@@ -613,7 +613,7 @@ msgstr "Zasluge"
 
 #: src/menu/game_mode_editor.cpp:68
 msgid "Damage per turn during death mode"
-msgstr ""
+msgstr "Škoda na potezo v fatalnem načinu"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -621,11 +621,11 @@ msgstr "Disko Granata"
 
 #: src/network/admin_commands.cpp:34
 msgid "Displays this message"
-msgstr ""
+msgstr "Prikaže to sporočilo"
 
 #: src/menu/game_mode_editor.cpp:62
 msgid "Duration before death mode"
-msgstr ""
+msgstr "Čas do fatalnega načina"
 
 #: src/menu/game_mode_editor.cpp:50
 msgid "Duration of a turn"
@@ -724,9 +724,8 @@ msgid "Game"
 msgstr "Igra"
 
 #: src/menu/game_mode_editor.cpp:46
-#, fuzzy
 msgid "Game mode"
-msgstr "Ime igre:"
+msgstr "Vrsta igre"
 
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
@@ -746,7 +745,7 @@ msgstr "Kavelj"
 
 #: src/menu/game_mode_editor.cpp:74
 msgid "Gravity"
-msgstr ""
+msgstr "Gravitacija"
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -883,7 +882,7 @@ msgstr ""
 
 #: src/network/admin_commands.cpp:36
 msgid "Kicks the players designated by <nickname> out of the game"
-msgstr ""
+msgstr "Brcne igralca z imenom <nickname> iz igre"
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1312,7 +1311,7 @@ msgstr "Ni bilo mogoče uporabiti teh vrat!"
 
 #: src/network/admin_commands.cpp:57
 msgid "Unknown command"
-msgstr ""
+msgstr "Neznan ukaz"
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
