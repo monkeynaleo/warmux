@@ -365,6 +365,11 @@ msgstr[0] ""
 msgstr[1] ""
 "%s teamo gajnis %u tuksĵetilojn ! Ĉu vi neniam vidis flugantan sfeniskon ?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mortinta)"
@@ -401,6 +406,10 @@ msgstr "Pneŭmatika martelo"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Ĉiuj teamoj"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "Kaj la gajnanto estas..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -707,6 +716,10 @@ msgid ""
 msgstr ""
 "Kiel uzi ĝin : maldekstrklaku sur celo\n"
 "Unu amunicio vice"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Rapidegu, vi tro malrapidas !"
 
 #: src/main.cpp:271
 msgid ""
@@ -1341,12 +1354,6 @@ msgstr "o Malferminte %d Hz %d bit-an sonon"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s provas konetiĝi kun alia versio: kliento=%s, mi=%s."
-
-#~ msgid "And the winner is..."
-#~ msgstr "Kaj la gajnanto estas..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Rapidegu, vi tro malrapidas !"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Ĉu vi volas vere forlasi (J/N) ?"

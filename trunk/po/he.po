@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2008-05-26 21:06+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team:  <he@li.org>\n"
@@ -355,6 +354,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "צוות %s זכה במשגר טאקס! אף פעם לא ראית פינגווין מעופף?"
 msgstr[1] "צוות %s זכה ב-%u משגרי טאקס! אף פעם לא ראית פינגווין מעופף?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(מת)"
@@ -391,6 +395,10 @@ msgstr "פטיש אוויר"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "כל הצוותים"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "והמנצח..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -699,6 +707,10 @@ msgid ""
 msgstr ""
 "לשימוש: קליק שמאלי על המטרה\n"
 "תחמושת לתור"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "קדימה, אתה איטי מדי!!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1331,12 +1343,6 @@ msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s מנסה להתחבר לגרסה אחרת: לקוח=%s, אני=%s."
-
-#~ msgid "And the winner is..."
-#~ msgstr "והמנצח..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "קדימה, אתה איטי מדי!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Voulez-vous vraiment quitter ? (O/N)"

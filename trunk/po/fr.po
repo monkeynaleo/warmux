@@ -375,6 +375,11 @@ msgstr[1] ""
 "L'équipe %s a gagné %u lanceurs de Tux ! Depuis quand les pingouins savent "
 "voler ??"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mort)"
@@ -414,6 +419,10 @@ msgstr "Marteau piqueur"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Toutes les équipes"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr ""
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -727,6 +736,10 @@ msgid ""
 msgstr ""
 "Usage : clic gauche sur la cible\n"
 "une munition par tour"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr ""
 
 #: src/main.cpp:271
 msgid ""

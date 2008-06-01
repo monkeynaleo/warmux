@@ -39,6 +39,10 @@ POTFILES = \
         src/game/game_init.cpp \
         src/game/game_mode.cpp \
         src/game/game_mode.h \
+        src/game/game_classic.cpp \
+        src/game/game_classic.h \
+        src/game/game_blitz.cpp \
+        src/game/game_blitz.h \
         src/game/time.cpp \
         src/game/time.h \
         src/graphic/color.cpp \

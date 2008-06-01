@@ -438,6 +438,11 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u SuperTux-ov! Še niste videli letečega pingvina?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mrtev)"
@@ -476,6 +481,10 @@ msgstr "Pnevmatsko kladivo"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Vse ekipe"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "In zmagali so ..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -789,6 +798,10 @@ msgid ""
 msgstr ""
 "Uporaba: kliknite na tarčo\n"
 "ena uporaba na potezo"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Pohitite, prepočasni ste!!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1424,12 +1437,6 @@ msgstr "o Odprt avdio na %d Hz %d bit"
 #~ msgstr ""
 #~ "Različice odjemalca in strežnika niso združljive (odjemalec=%s, strežnik=%"
 #~ "s)! Prosimo poskusite z drugim strežnikom."
-
-#~ msgid "And the winner is..."
-#~ msgstr "In zmagali so ..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Pohitite, prepočasni ste!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Ali resnično želite končati? (Y/N)"

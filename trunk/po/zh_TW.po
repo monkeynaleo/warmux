@@ -355,6 +355,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s 隊得到 %u 企鵝發射器! 沒見過滿天飛的企鵝嗎?"
 msgstr[1] "%s 隊得到 %u 企鵝發射器! 沒見過滿天飛的企鵝嗎?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(死掉的)"
@@ -392,6 +397,10 @@ msgstr "飛錘"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "全部的隊伍"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "生者是..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -699,6 +708,10 @@ msgid ""
 msgstr ""
 "如何使用: 滑鼠左鍵點擊目標\n"
 "每回合一個彈夾"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "快點,伙計你也太慢了!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1330,12 +1343,6 @@ msgstr "o音樂 %d Hz %d bit"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s 試着連線一個不同版本 : client=%s, me=%s."
-
-#~ msgid "And the winner is..."
-#~ msgstr "生者是..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "快點,伙計你也太慢了!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "您真的想結束嗎? (\"Y\"是 或 \"N\"不)"

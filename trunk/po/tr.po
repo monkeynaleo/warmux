@@ -321,6 +321,11 @@ msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s takımı %u %s kazandı!"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(ölü)"
@@ -358,6 +363,10 @@ msgstr "Hava çekici"
 #, fuzzy
 msgid "All teams"
 msgstr "Takımları yükle:"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr ""
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -656,6 +665,10 @@ msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
 msgstr ""
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Çabuk ol, çok yavaşsın !!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1273,9 +1286,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "'%s' haritası yüklenirken XML hatası :"
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Çabuk ol, çok yavaşsın !!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"

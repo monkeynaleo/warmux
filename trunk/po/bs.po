@@ -363,6 +363,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s tim je dobio %u tux lanser! Nikad nisi vidio pingvina koji leti?"
 msgstr[1] "%s tim je dobio %u tux lanser! Nikad nisi vidio pingvina koji leti?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mrtav)"
@@ -399,6 +404,10 @@ msgstr "Zračni čekić"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Svi timovi"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "I pobjednik je ..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -712,6 +721,10 @@ msgid ""
 msgstr ""
 "Kako koristiti : lijevi klik na metu\n"
 "municija po redu"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Požuri, previše si spor !!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1354,12 +1367,6 @@ msgstr "o Otvoren audio na %d Hz %d bit"
 #, fuzzy
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "Wormux verzije su drugačije : klijent=%s, server=%s."
-
-#~ msgid "And the winner is..."
-#~ msgstr "I pobjednik je ..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Požuri, previše si spor !!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Da li želite da izađete? (Y/N)"

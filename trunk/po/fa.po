@@ -327,6 +327,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] ""
 "تیم %s برنده‌ی %u سوپرتاکس شد! چیه؟ تاحالا پنگوئن ندیدی که پرواز کنه؟"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(مرده)"
@@ -363,6 +368,10 @@ msgstr "بیل مکانیکی"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "همه‌ی تیمها"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "و بالاخره برنده معرفی می‌شود..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -669,6 +678,10 @@ msgid ""
 msgstr ""
 "چگونگی استفاده از آن: کلیک چپ روی هدف\n"
 "یک بار در هر نوبت"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "بجنب، خیلی کندی! بابا صد رحمت به لاک‌پشت!!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1292,12 +1305,6 @@ msgstr "صدا با %d هرتز و %d بیت باز شد"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s می‌خواهد به شما وصل شود، ولی نسخه‌ی او فرق دارد: من=%s او=%s."
-
-#~ msgid "And the winner is..."
-#~ msgstr "و بالاخره برنده معرفی می‌شود..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "بجنب، خیلی کندی! بابا صد رحمت به لاک‌پشت!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "واقعا می‌خواهید از بازی خارج شوید؟ (Y/N)"

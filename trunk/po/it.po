@@ -376,6 +376,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "La squadra %s ha vinto %u Lancia-Tux! Mai visto un pinguino volare?"
 msgstr[1] "La squadra %s ha vinto %u Lancia-Tux! Mai visto un pinguino volare?"
 
+#: src/game/game_blitz.cpp:70
+#, fuzzy, c-format
+msgid "%s team was fragged down."
+msgstr "La squadra %s vince.\n"
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(morto)"
@@ -414,6 +419,10 @@ msgstr "Martello Pneumatico"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Tutte le squadre"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "ed il vincitore è..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -728,6 +737,10 @@ msgid ""
 msgstr ""
 "Utilizzo: Click Sinitro sull'obbiettivo\n"
 "una munizione al turno"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Muoviti, sei troppo lento !!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1357,12 +1370,6 @@ msgstr "o File audio aperto a %d Hz %d bit"
 #~ "%s cerca di connettersi con una versione differente: cliente=%s, server=%"
 #~ "s."
 
-#~ msgid "And the winner is..."
-#~ msgstr "ed il vincitore è..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Muoviti, sei troppo lento !!"
-
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Sei sicuro di voler uscire ? (S/N)"
 
@@ -1484,9 +1491,6 @@ msgstr "o File audio aperto a %d Hz %d bit"
 #~ msgid_plural "%s has lost %u points of energy."
 #~ msgstr[0] "Il giocatore '%s' ha perso %u punto di vita."
 #~ msgstr[1] "Il giocatore '%s' ha perso %u punti di vita."
-
-#~ msgid "%s team has won.\n"
-#~ msgstr "La squadra %s vince.\n"
 
 #, fuzzy
 #~ msgid "'%s has won %u Anvil"

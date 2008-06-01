@@ -357,6 +357,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "Отборът на %s спечели %u %s !"
 msgstr[1] "Отборът на %s спечели %u %sи !"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(мъртъв)"
@@ -393,6 +398,10 @@ msgstr "Пневматичен чук"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Alle Mannschaften"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr ""
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -699,6 +708,10 @@ msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
 msgstr ""
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Хабиш време за убиване за други неща!!!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1336,9 +1349,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Хабиш време за убиване за други неща!!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Тръгваш ли си? (Y/N)"

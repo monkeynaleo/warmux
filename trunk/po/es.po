@@ -371,6 +371,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "¡El equipo %s ha conseguido %u lanzador de Tux!"
 msgstr[1] "¡El equipo %s ha ganado %u lanzadores de Tux!"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr "El equipo %s ha ganado."
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(muerto)"
@@ -409,6 +414,10 @@ msgstr "Martillo aéreo"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Todos los equipos"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "El ganador es..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -721,6 +730,10 @@ msgid ""
 msgstr ""
 "Como usarlo: botón derecho sobre el objetivo\n"
 "un arma por turno"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Date prisa, eres demasiado lento"
 
 #: src/main.cpp:271
 msgid ""
@@ -1351,9 +1364,6 @@ msgstr "o Abierto audio a %d Hz %d bit"
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "Error XML durante la carga del mapa '%s':"
 
-#~ msgid "%s team was fragged down."
-#~ msgstr "El equipo %s ha ganado."
-
 #~ msgid "%s: illegal option -- %c\n"
 #~ msgstr "%s: opción ilegal -- %c\n"
 
@@ -1387,14 +1397,8 @@ msgstr "o Abierto audio a %d Hz %d bit"
 #~ msgid "%s: unrecognized option `--%s'\n"
 #~ msgstr "%s: opcion no reconocida `--%s'\n"
 
-#~ msgid "And the winner is..."
-#~ msgstr "El ganador es..."
-
 #~ msgid "Displays this message"
 #~ msgstr "Muestra este mensaje"
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Date prisa, eres demasiado lento"
 
 #~ msgid "Kicks the players designated by <nickname> out of the game"
 #~ msgstr "Hecha los jugadores designados por <nickname> fuera del juego"

@@ -375,6 +375,11 @@ msgstr[0] ""
 msgstr[1] ""
 "A equipa %s ganhou %u lançadores de tux! Nunca viste um penguim voador?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(morto)"
@@ -411,6 +416,10 @@ msgstr "Martelo Pneumático"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Todas as equipas"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "E o vencedor é..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -724,6 +733,10 @@ msgid ""
 msgstr ""
 "Como usá-lo : click esquerdo no alvo\n"
 "uma munição por turno"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Rápido, tu és lento demais !!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1362,11 +1375,5 @@ msgstr "o Audio aberto a %d Hz %d bit"
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s tenta ligar com uma versão diferente : cliente=%s, eu=%s."
 
-#~ msgid "And the winner is..."
-#~ msgstr "E o vencedor é..."
-
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Você quer mesmo sair ?(Y/N)"
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Rápido, tu és lento demais !!"

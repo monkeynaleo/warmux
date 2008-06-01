@@ -382,6 +382,11 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
+#: src/game/game_blitz.cpp:70
+#, fuzzy, c-format
+msgid "%s team was fragged down."
+msgstr "%s tím vyhral.\n"
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mŕtvy)"
@@ -418,6 +423,10 @@ msgstr "Vŕtačka"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Všetky tímy"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr ""
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -721,6 +730,10 @@ msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
 msgstr ""
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Ponáhľaj sa, si príliš pomalý  !!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1359,9 +1372,6 @@ msgstr ""
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "Wormux verzie sú rozdielne: klient=%s, server=%s."
 
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Ponáhľaj sa, si príliš pomalý  !!"
-
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Skutočne chceš skončiť(A/N) ?"
 
@@ -1495,9 +1505,6 @@ msgstr ""
 
 #~ msgid "%s is stupidly dead because he gone out of the map ..."
 #~ msgstr "%s je hlúpo mŕtvy, lebo sa dostal mimo mapy ..."
-
-#~ msgid "%s team has won.\n"
-#~ msgstr "%s tím vyhral.\n"
 
 #, fuzzy
 #~ msgid "'%s has won %u Anvil"

@@ -382,6 +382,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "O equipo %s gañou %u SuperTux! Nunca antes viras voar un pingüín?"
 msgstr[1] "O equipo %s gañou %u SuperTux! Nunca antes viras voar un pingüín?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(morto)"
@@ -420,6 +425,10 @@ msgstr "Taladradora"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Todos os equipos"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr ""
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -733,6 +742,10 @@ msgid ""
 msgstr ""
 "Modo de uso: clic dereito no obxectivo\n"
 "Un uso por turno"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr ""
 
 #: src/main.cpp:271
 msgid ""

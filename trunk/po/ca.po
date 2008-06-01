@@ -358,6 +358,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'equip %s aconsegueix %u llançador de tux!"
 msgstr[1] "L'equip %s aconsegueix %u llançador de tux!"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr "L'equip %s ha guanyat."
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mort)"
@@ -396,6 +401,10 @@ msgstr "Martell aeri"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Tots els equips "
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "El guanyador és..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -709,6 +718,10 @@ msgid ""
 msgstr ""
 "Com usar-lo: botó dret sobre l'objectiu\n"
 " un arma per torn "
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Apressa't, ets massa lent"
 
 #: src/main.cpp:271
 msgid ""
@@ -1336,9 +1349,6 @@ msgstr "o Obert àudio a %d Hz %d bit "
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "Error XML durant la carrega del mapa '%s':"
 
-#~ msgid "%s team was fragged down."
-#~ msgstr "L'equip %s ha guanyat."
-
 #~ msgid "%s: illegal option -- %c\n"
 #~ msgstr "%s: opció il·legal -- %c\n"
 
@@ -1372,14 +1382,8 @@ msgstr "o Obert àudio a %d Hz %d bit "
 #~ msgid "%s: unrecognized option `--%s'\n"
 #~ msgstr "%s: opció no reconeguda`--%s'\n"
 
-#~ msgid "And the winner is..."
-#~ msgstr "El guanyador és..."
-
 #~ msgid "Displays this message"
 #~ msgstr "Mostra aquest missatge"
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Apressa't, ets massa lent"
 
 #~ msgid "Kicks the players designated by <nickname> out of the game"
 #~ msgstr "Treu els jugadors designats per <nickname> fora del joc"

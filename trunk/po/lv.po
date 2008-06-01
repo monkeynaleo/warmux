@@ -391,6 +391,11 @@ msgstr[0] "%s komanda ir ieguvusi %u tux šāvēju!"
 msgstr[1] "%s komanda ir ieguvusi %u tux šāvējus!"
 msgstr[2] "%s komanda ir ieguvusi %u tux šāvējus!"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mirusi)"
@@ -427,6 +432,10 @@ msgstr "Perforators"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Visas komandas"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "Un uzvarētājs ir..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -738,6 +747,10 @@ msgid ""
 msgstr ""
 "Kā to izmantot : kreizais klikšķis uz mērķa\n"
 "munīcija gājienā"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Pasteidzies, tu esi par lēnu !!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1382,12 +1395,6 @@ msgstr "o Atver skaņu %d Hz %d bit"
 #~ msgstr ""
 #~ "%s mēģina pieslēgties ar atšķirīgu programmas versiju : klientam=%s, man=%"
 #~ "s."
-
-#~ msgid "And the winner is..."
-#~ msgstr "Un uzvarētājs ir..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Pasteidzies, tu esi par lēnu !!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Vai tiešām vēlaties iziet? (Y/N)"

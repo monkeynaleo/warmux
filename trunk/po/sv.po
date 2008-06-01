@@ -365,6 +365,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "%s-laget har vunnit %u tuxkastare! Aldrig sett en flygande pingvin?"
 msgstr[1] "%s-laget har vunnit %u tuxkastare! Aldrig sett en flygande pingvin?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(död)"
@@ -401,6 +406,10 @@ msgstr "Lufthammare"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Alla lag"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "Och vinnaren är..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -712,6 +721,10 @@ msgid ""
 msgstr ""
 "Hur man använder den : vänsterklicka på målet\n"
 "ett skott per omgång"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Skynda dig, du är för långsam!!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1352,12 +1365,6 @@ msgstr "o Öppnade ljud med %d Hz, %d bitar"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s försöker ansluta med en annan version : klient=%s, jag=%s."
-
-#~ msgid "And the winner is..."
-#~ msgstr "Och vinnaren är..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Skynda dig, du är för långsam!!"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Vill du verkligen avsluta spelet? (J/N)"

@@ -365,6 +365,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'équipe %s a gagné %u !"
 msgstr[1] "L'équipe %s a gagné %u !"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(kapoute)"
@@ -401,6 +406,10 @@ msgstr "Marteau piqueur"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Toutes bandes marmailles"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "Voilà quissa la gagné..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -711,6 +720,10 @@ msgid ""
 msgstr ""
 "Comment utilises à lu: pese ek le bouton gauche de oute souris sur la cible."
 "une munition par tour"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Grouille oute calbasse !"
 
 #: src/main.cpp:271
 msgid ""
@@ -1349,12 +1362,6 @@ msgstr "o Démarrage du son à %d Hz %d bit"
 #~ msgstr ""
 #~ "%s... Hein, ou'te client et serveur na point la même version de Wormux : "
 #~ "client=%s, serveur=%s."
-
-#~ msgid "And the winner is..."
-#~ msgstr "Voilà quissa la gagné..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Grouille oute calbasse !"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Ou lé sur vouloit allé ? (O/N)"

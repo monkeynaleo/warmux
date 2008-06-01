@@ -546,6 +546,11 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
 
+#: src/game/game_blitz.cpp:70
+#, fuzzy, c-format
+msgid "%s team was fragged down."
+msgstr "Echipa %s a câștigat.\n"
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mort)"
@@ -585,6 +590,10 @@ msgstr "Ciocan pnumatic"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Toate echipele"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr "Iar câștigătorul este..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -902,6 +911,10 @@ msgid ""
 msgstr ""
 "Cum se folosește : clic stânga pe țintă\n"
 "un proiectil per rundă"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Grăbește-te te miști prea încet!!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1546,12 +1559,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #~ "Versiunile de client și de server sunt incompatibile (local=%s, server=%"
 #~ "s). Încercați alt server."
 
-#~ msgid "And the winner is..."
-#~ msgstr "Iar câștigătorul este..."
-
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Grăbește-te te miști prea încet!!"
-
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Chiar doriți să abandonați? (D/N)"
 
@@ -1747,9 +1754,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "%s is not ready"
 #~ msgstr "%i jucător e gata"
-
-#~ msgid "%s team has won.\n"
-#~ msgstr "Echipa %s a câștigat.\n"
 
 #~ msgid "'%s has won %u Anvil"
 #~ msgid_plural "'%s has won %u Anvil"

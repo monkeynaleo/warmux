@@ -423,6 +423,11 @@ msgstr[2] ""
 "Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего "
 "пингвина?"
 
+#: src/game/game_blitz.cpp:70
+#, c-format
+msgid "%s team was fragged down."
+msgstr ""
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(мёртв)"
@@ -461,6 +466,10 @@ msgstr "Отбойный молоток"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Все команды"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr ""
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -772,6 +781,10 @@ msgid ""
 msgstr ""
 "Правила использования : щелкните левой кнопкой мыши на цели\n"
 "патрон за ход"
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr ""
 
 #: src/main.cpp:271
 msgid ""

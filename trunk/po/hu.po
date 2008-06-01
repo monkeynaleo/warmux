@@ -388,6 +388,11 @@ msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
+#: src/game/game_blitz.cpp:70
+#, fuzzy, c-format
+msgid "%s team was fragged down."
+msgstr "%s csapata nyert."
+
 #: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(halott)"
@@ -424,6 +429,10 @@ msgstr "L�gkalap�cs"
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "�sszes csapat"
+
+#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+msgid "And the winner is..."
+msgstr ""
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -728,6 +737,10 @@ msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
 msgstr ""
+
+#: src/game/game_classic.cpp:223
+msgid "Hurry up, you are too slow !!"
+msgstr "Siess, t�l lass� vagy!!"
 
 #: src/main.cpp:271
 msgid ""
@@ -1364,9 +1377,6 @@ msgstr "Hangmin�s�g: %d Hz, %d bit"
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s elt�r� verzi�val pr�b�l csatlakozni: kliens=%s, helyi=%s."
 
-#~ msgid "Hurry up, you are too slow !!"
-#~ msgstr "Siess, t�l lass� vagy!!"
-
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Biztosan ki szeretn�l l�pni? (Y/N)"
 
@@ -1497,10 +1507,6 @@ msgstr "Hangmin�s�g: %d Hz, %d bit"
 #~ msgstr[1] ""
 #~ "%s energiaszintje %u egysĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ ggel "
 #~ "csĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂkkent."
-
-#, fuzzy
-#~ msgid "%s team has won.\n"
-#~ msgstr "%s csapata nyert."
 
 #, fuzzy
 #~ msgid "'%s has won %u Anvil"
