@@ -402,7 +402,7 @@ msgstr "Martell aeri"
 msgid "All teams"
 msgstr "Tots els equips "
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "El guanyador és..."
 
@@ -467,7 +467,7 @@ msgstr "Equip %s no disponible!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
@@ -531,9 +531,25 @@ msgstr "No es va poder obrir l'arxiu %s"
 msgid "Credits"
 msgstr "Crèdits"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disc explosiu"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr "Mostra aquest missatge"
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Duració del torn"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -626,6 +642,11 @@ msgstr "Pantalla completa?"
 msgid "Game"
 msgstr "Joc"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Nom de joc:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "Nom de joc:"
@@ -641,6 +662,10 @@ msgstr "Opcions gràfiques"
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Atac"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -731,6 +756,10 @@ msgstr ""
 "Si trobes un bug o tens una petició de funcionalitat, envia'ns un email (amb "
 "engles, per favor): "
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Energia inicial"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -770,6 +799,10 @@ msgstr "Jetpack"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Entra #en wormux en irc.freenode.net per a trobar algun contrincant."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr "Treu els jugadors designats per <nickname> fora del joc"
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1100,6 +1133,15 @@ msgstr "El coet automàtic ha anat a altre món... "
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilota ha abandonat el camp de batalla abans d'explotar."
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+"El client i el servidor tenen la versió incompatible (client=%s, servidor=%"
+"s). Porfavor escull un altre servidor. "
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Ha passat el temps de connexió. Mira si no hi ha algun firewall."
@@ -1145,7 +1187,7 @@ msgstr[1] "Solament hi ha %i equips."
 msgid "Time"
 msgstr "Temps"
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1190,6 +1232,10 @@ msgstr "Impossible obrir el directori dels mapes (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Impossible usar aquest port!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr "Comando desconegut"
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1319,12 +1365,6 @@ msgstr "o Carregant perfil de so: %s "
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Obert àudio a %d Hz %d bit "
 
-#~ msgid "Duration of a turn"
-#~ msgstr "Duració del torn"
-
-#~ msgid "Initial energy"
-#~ msgstr "Energia inicial"
-
 #~ msgid "Connect !"
 #~ msgstr "Connexió!"
 
@@ -1381,22 +1421,6 @@ msgstr "o Obert àudio a %d Hz %d bit "
 
 #~ msgid "%s: unrecognized option `--%s'\n"
 #~ msgstr "%s: opció no reconeguda`--%s'\n"
-
-#~ msgid "Displays this message"
-#~ msgstr "Mostra aquest missatge"
-
-#~ msgid "Kicks the players designated by <nickname> out of the game"
-#~ msgstr "Treu els jugadors designats per <nickname> fora del joc"
-
-#~ msgid ""
-#~ "The client and server versions are incompatible (local=%s, server=%s). "
-#~ "Please try another server."
-#~ msgstr ""
-#~ "El client i el servidor tenen la versió incompatible (client=%s, servidor="
-#~ "%s). Porfavor escull un altre servidor. "
-
-#~ msgid "Unknown command"
-#~ msgstr "Comando desconegut"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr ""

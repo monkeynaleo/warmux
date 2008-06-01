@@ -474,7 +474,7 @@ msgstr "Młot pneumatyczny"
 msgid "All teams"
 msgstr "Wszystkie drużyny:"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr ""
 
@@ -539,7 +539,7 @@ msgstr "Odnalezienie drużyny %s nie powiodło się!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nie można otworzyć dodatkowego katalogu drużyn (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nie można otworzyć katalogu drużyn (%s)!"
@@ -603,9 +603,25 @@ msgstr "Nie można otworzyć pliku %s"
 msgid "Credits"
 msgstr "Podziękowania"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Granat Disco"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Czas trwania tury"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -700,6 +716,11 @@ msgstr "Pełny ekran"
 msgid "Game"
 msgstr "Gra"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Nazwa gry:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "Nazwa gry:"
@@ -715,6 +736,10 @@ msgstr "Grafika"
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Wyciągarka"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -805,6 +830,10 @@ msgstr ""
 "Jeśli znalazłeś błąd lub brakuje Ci jakiejś funkcjonalności to wyślij do nas "
 "e-mail (prosimy aby był w języku angielskim):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Energia początkowa"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -844,6 +873,10 @@ msgstr "Plecak odrzutowy"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Wejdź na kanał #wormux na serwerze irc.freenode.net aby znaleźć przeciwników"
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1168,6 +1201,15 @@ msgstr "Kierowana rakieta opuściła pole bitwy..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Kula opuściła pole bitwy zanim wybuchła"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+"Wersje oprogramowania serwera i klienta są niezgodne (wersja klienta: %s, "
+"wersja serwera: %s). Spróbuj połączyć się z innym serwerem."
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1216,7 +1258,7 @@ msgstr[2] "Jest tylko %i drużyn."
 msgid "Time"
 msgstr "Czas"
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1261,6 +1303,10 @@ msgstr "Nie można otworzyć osobistego katalogu map (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Nie można użyć tego portu!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1392,12 +1438,6 @@ msgstr "o Wczytywanie profilu dźwięków: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otworzono plik audio - %d Hz %d bit"
 
-#~ msgid "Duration of a turn"
-#~ msgstr "Czas trwania tury"
-
-#~ msgid "Initial energy"
-#~ msgstr "Energia początkowa"
-
 #~ msgid "Connect !"
 #~ msgstr "Dołącz!"
 
@@ -1421,10 +1461,3 @@ msgstr "o Otworzono plik audio - %d Hz %d bit"
 
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "Błąd XML podczas wczytywania mapy '%s': "
-
-#~ msgid ""
-#~ "The client and server versions are incompatible (local=%s, server=%s). "
-#~ "Please try another server."
-#~ msgstr ""
-#~ "Wersje oprogramowania serwera i klienta są niezgodne (wersja klienta: %s, "
-#~ "wersja serwera: %s). Spróbuj połączyć się z innym serwerem."

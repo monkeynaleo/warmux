@@ -482,7 +482,7 @@ msgstr "Pnevmatsko kladivo"
 msgid "All teams"
 msgstr "Vse ekipe"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "In zmagali so ..."
 
@@ -547,7 +547,7 @@ msgstr "Ni mogoče najti ekipe %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
@@ -611,9 +611,25 @@ msgstr "Ni bilo mogoče odpreti datoteke %s"
 msgid "Credits"
 msgstr "Zasluge"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disko Granata"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Trajanje poteze"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -707,6 +723,11 @@ msgstr "Celozaslonski način?"
 msgid "Game"
 msgstr "Igra"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Ime igre:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "Ime igre:"
@@ -722,6 +743,10 @@ msgstr "Grafika"
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Kavelj"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -811,6 +836,10 @@ msgstr ""
 "Če ste našli hrošča ali imate željo po novi funkciji, nam pošljite\n"
 "elektronsko sporočilo (v angleščini) na:"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Začetna energija"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -851,6 +880,10 @@ msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pridružite se kanalu #wormux na irc.freenode.net in si poiščite nekaj "
 "nasprotnikov."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1175,6 +1208,15 @@ msgstr "Avtomatska raketa je zapustila bojišče..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Žoga je zapustila bojišče preden je eksplodirala"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+"Različice odjemalca in strežnika niso združljive (odjemalec=%s, strežnik=%"
+"s)! Prosimo poskusite z drugim strežnikom."
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Povezava se je iztekla. Preverite da ni kriv požarni zid!"
@@ -1222,7 +1264,7 @@ msgstr[3] "Tukaj je samo %i ekip."
 msgid "Time"
 msgstr "Čas"
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1267,6 +1309,10 @@ msgstr "Ni bilo mogoče odpreti zasebnega imenika s kartami (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Ni bilo mogoče uporabiti teh vrat!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1398,12 +1444,6 @@ msgstr "o Nalaganje zvočnega profila: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
 
-#~ msgid "Duration of a turn"
-#~ msgstr "Trajanje poteze"
-
-#~ msgid "Initial energy"
-#~ msgstr "Začetna energija"
-
 #~ msgid "Connect !"
 #~ msgstr "Poveži !"
 
@@ -1430,13 +1470,6 @@ msgstr "o Odprt avdio na %d Hz %d bit"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
-
-#~ msgid ""
-#~ "The client and server versions are incompatible (local=%s, server=%s). "
-#~ "Please try another server."
-#~ msgstr ""
-#~ "Različice odjemalca in strežnika niso združljive (odjemalec=%s, strežnik=%"
-#~ "s)! Prosimo poskusite z drugim strežnikom."
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Ali resnično želite končati? (Y/N)"

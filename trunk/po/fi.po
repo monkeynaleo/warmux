@@ -414,7 +414,7 @@ msgstr "Katupora"
 msgid "All teams"
 msgstr "Kaikki joukkueet"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr ""
 
@@ -479,7 +479,7 @@ msgstr "Ei löydy joukkuetta %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ei voida avata henkilökohtaista joukkue hakemistoa (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
@@ -543,9 +543,25 @@ msgstr "Ei voitu avata tiedostoa %s"
 msgid "Credits"
 msgstr "Kiitokset"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Diskokranaatti"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Vuoron kesto:"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -633,6 +649,11 @@ msgstr "Kokoruutu"
 msgid "Game"
 msgstr "Peli"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Pelin nimi:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "Pelin nimi:"
@@ -648,6 +669,10 @@ msgstr "Grafiikka asetukset"
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Kiipeilykoukku"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -736,6 +761,10 @@ msgstr ""
 "Jos löysit bugin tai sinulla on parannusehdotuksia, lähetä sähköpostia "
 "(englanniksi): "
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Aloitus voimat:"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -774,6 +803,10 @@ msgstr "Lentoreppu"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Liity #wormux kanavalle irc.freenode.netissä löytääksesi vastustajia."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1098,6 +1131,13 @@ msgstr "Automaattiohjus on poistunut taistelukentältä..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Pallo on poistunut taistelukentältä..."
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Yhteyden aikakatkaisu. Tarkista ettei palomuuri ole tiellä!"
@@ -1143,7 +1183,7 @@ msgstr[1] "On olemassa vain %i joukkuetta."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1188,6 +1228,10 @@ msgstr "Henkilökohtaisten karttojen avaaminen epäonnistui (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Tätä porttia ei voida käyttää!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1315,9 +1359,3 @@ msgstr "o Ladataan ääniprofiili: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."
-
-#~ msgid "Duration of a turn"
-#~ msgstr "Vuoron kesto:"
-
-#~ msgid "Initial energy"
-#~ msgstr "Aloitus voimat:"

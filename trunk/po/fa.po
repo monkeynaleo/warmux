@@ -369,7 +369,7 @@ msgstr "بیل مکانیکی"
 msgid "All teams"
 msgstr "همه‌ی تیمها"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "و بالاخره برنده معرفی می‌شود..."
 
@@ -434,7 +434,7 @@ msgstr "نمی‌توان تیم %s را پیدا کرد!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی شخصی تیم‌ها را باز کرد (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی تیم‌ها را باز کرد (%s)!"
@@ -499,9 +499,25 @@ msgstr ""
 msgid "Credits"
 msgstr "دست اندر کاران"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "نارنجک دیسکو"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "زمان یک نوبت"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -589,6 +605,11 @@ msgstr "تمام صفحه؟"
 msgid "Game"
 msgstr ""
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "حالت کارگیر (کلاینت)"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr ""
@@ -604,6 +625,10 @@ msgstr ""
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "چنگک"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -691,6 +716,10 @@ msgstr ""
 "اگر شما یک باگ پیدا کردید و یا درخواست اضافه شدن یک قابلیت به بازی را دارید "
 "لطفا به ما ایمیل بزنید (لطفا به زبان انگلیسی)"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "انرژی آغازی"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -730,6 +759,10 @@ msgstr "پک پرواز"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "به #wormux در irc.freenode.net بپیوندید."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1063,6 +1096,13 @@ msgstr "بازوکای اتوماتیک از زمین جنگ خارج شد..."
 msgid "The ball left the battlefield before exploding"
 msgstr "شیطونک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "اتصال وصل نشد. بررسی کنید که آیا دیوار آتشی در راه است!"
@@ -1108,7 +1148,7 @@ msgstr[0] "فقط %i تیم وجود دارد."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1145,6 +1185,10 @@ msgstr "ناتوان در بازکردن پرونده‌ی نقشه‌های ش�
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "ناتوان در استفاده از این پورت!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1271,12 +1315,6 @@ msgstr "در حال بارگذاری پرونده‌ی موسیقی: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "صدا با %d هرتز و %d بیت باز شد"
-
-#~ msgid "Duration of a turn"
-#~ msgstr "زمان یک نوبت"
-
-#~ msgid "Initial energy"
-#~ msgstr "انرژی آغازی"
 
 #~ msgid "Connect !"
 #~ msgstr "اتصال!"

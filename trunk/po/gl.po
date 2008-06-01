@@ -426,7 +426,7 @@ msgstr "Taladradora"
 msgid "All teams"
 msgstr "Todos os equipos"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr ""
 
@@ -491,7 +491,7 @@ msgstr "Non se pode atopar o equipo %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Non se pode abrir o directorio de equipos personalizados (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Non se pode abrir o directorio de equipos (%s)!"
@@ -555,9 +555,25 @@ msgstr "Non se puido abrir o ficheiro %s"
 msgid "Credits"
 msgstr "Créditos"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Aleluia"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Duración dun turno"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -651,6 +667,11 @@ msgstr "Pantalla completa?"
 msgid "Game"
 msgstr ""
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Nome da partida:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "Nome da partida:"
@@ -666,6 +687,10 @@ msgstr ""
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Gancho"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -755,6 +780,10 @@ msgstr ""
 "Se atopas un erro ou tes en mente algunha mellora ou nova característica que "
 "farías no xogo, envíanos un correo electrónico (en inglés, por favor):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Enerxía inicial"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -793,6 +822,10 @@ msgstr "Jetpack"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Únete a #wormux no irc.freenode.net para atopar algún adversario."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1125,6 +1158,15 @@ msgstr "O cohete automático saíu do campo de batalla..."
 msgid "The ball left the battlefield before exploding"
 msgstr "A saltariña deixou o campo de batalla antes de explotar"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+"As versións do cliente e mailo servidor non son compatibles (local=%s, "
+"servidor=%s). Por favor, proba con outro servidor."
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1173,7 +1215,7 @@ msgstr[1] "Hai só %i equipos."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1218,6 +1260,10 @@ msgstr "Imposible abrir o directorio persoal de mapas (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Imposible usar este porto!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1347,12 +1393,6 @@ msgstr "o A cargar o perfil de son: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Son aberto a %d Hz e %d bit"
 
-#~ msgid "Duration of a turn"
-#~ msgstr "Duración dun turno"
-
-#~ msgid "Initial energy"
-#~ msgstr "Enerxía inicial"
-
 #~ msgid "Connect !"
 #~ msgstr "Conectar !"
 
@@ -1379,10 +1419,3 @@ msgstr "o Son aberto a %d Hz e %d bit"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s tenta conectar cunha versión diferente: cliente=%s, eu=%s."
-
-#~ msgid ""
-#~ "The client and server versions are incompatible (local=%s, server=%s). "
-#~ "Please try another server."
-#~ msgstr ""
-#~ "As versións do cliente e mailo servidor non son compatibles (local=%s, "
-#~ "servidor=%s). Por favor, proba con outro servidor."

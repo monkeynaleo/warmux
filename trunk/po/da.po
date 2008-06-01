@@ -411,7 +411,7 @@ msgstr "Tryklufthammer"
 msgid "All teams"
 msgstr "Alle hold"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr ""
 
@@ -476,7 +476,7 @@ msgstr "Kan ikke finde holdet %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan ikke åbne det personlige holdkatalog (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
@@ -540,9 +540,25 @@ msgstr "Kunne ikke åbne filen %s"
 msgid "Credits"
 msgstr "Udviklere"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Diskogranat"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Længden af en tur"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -632,6 +648,11 @@ msgstr "Fuld skærm?"
 msgid "Game"
 msgstr "Spil"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Spil navn:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "Spil navn:"
@@ -647,6 +668,10 @@ msgstr "Grafik"
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Klo"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -736,6 +761,10 @@ msgstr ""
 "Hvis du har fundet en fejl eller du har en idé til nye ting, så send os en e-"
 "mail (på engelsk, tak):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Energi som udgangspunkt"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -774,6 +803,10 @@ msgstr "Jetpack"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1098,6 +1131,13 @@ msgstr "Den laserstyrede raket forlod slagmarken..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bolden forlod slagmarken før den eksploderede"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Forbindelsen udløb. Check at der ikke er nogen firewall i vejen!"
@@ -1143,7 +1183,7 @@ msgstr[1] "Der er kun %i hold."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1188,6 +1228,10 @@ msgstr "Kan ikke åbne det personlige banekatalog (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Kan ikke bruge denne port!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1317,9 +1361,3 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
-
-#~ msgid "Duration of a turn"
-#~ msgstr "Længden af en tur"
-
-#~ msgid "Initial energy"
-#~ msgstr "Energi som udgangspunkt"

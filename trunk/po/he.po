@@ -396,7 +396,7 @@ msgstr "פטיש אוויר"
 msgid "All teams"
 msgstr "כל הצוותים"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "והמנצח..."
 
@@ -461,7 +461,7 @@ msgstr "לא ניתן למצוא את צוות %s !"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית הצוותים האישית (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית הצוותים (%s)!"
@@ -526,9 +526,25 @@ msgstr "לא ניתן לטעון הגדרות"
 msgid "Credits"
 msgstr "קרדיטים"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "רימון דיסקו"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "משך תור"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -616,6 +632,11 @@ msgstr "Plein Ã©cran ?"
 msgid "Game"
 msgstr ""
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "מצב לקוח"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr ""
@@ -631,6 +652,10 @@ msgstr ""
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "וו אחיזה"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -720,6 +745,10 @@ msgstr ""
 "אם מצאת באג, או אם אתה מעוניין לבקש הוספת תכונה חדשה, שלח אלינו מסר(באנגלית "
 "בבקשה):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "אנרגיה ראשונית"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -758,6 +787,10 @@ msgstr "רתמת טיסה"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "הצטרף אל #wormux ב-irc.freenode.net כדי למצוא יריבים."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1091,6 +1124,13 @@ msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 msgid "The ball left the battlefield before exploding"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "זמן ההמתנה לחיבור עבר. בדוק אם אין חומת-אש שמפריעה!"
@@ -1137,7 +1177,7 @@ msgstr[1] "יש רק %i צוותים."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1182,6 +1222,10 @@ msgstr "לא ניתן לפתוח את תיקיית המפות האישית (%s)!
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "לא ניתן להשתמש בפורט זה!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1310,12 +1354,6 @@ msgstr "o טוען פרופיל סאונד: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
-
-#~ msgid "Duration of a turn"
-#~ msgstr "משך תור"
-
-#~ msgid "Initial energy"
-#~ msgstr "אנרגיה ראשונית"
 
 #~ msgid "Connect !"
 #~ msgstr "התחבר!"

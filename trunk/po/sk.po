@@ -424,7 +424,7 @@ msgstr "Vŕtačka"
 msgid "All teams"
 msgstr "Všetky tímy"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr ""
 
@@ -486,7 +486,7 @@ msgstr "Nemôžem nájsť tím %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
@@ -552,9 +552,25 @@ msgstr "Nedá sa inicializovať SDL knižnca: %s"
 msgid "Credits"
 msgstr "O programe"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disco Granát"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Trvanie ťahu"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -647,6 +663,11 @@ msgstr "Celá obrazovka?"
 msgid "Game"
 msgstr "Meno:"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Nastavenie hry"
+
 #: src/menu/network_connection_menu.cpp:117
 #, fuzzy
 msgid "Game name:"
@@ -663,6 +684,10 @@ msgstr "Nastavenie grafiky"
 
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
 msgstr ""
 
 #: src/weapon/grenade.cpp:76
@@ -743,6 +768,10 @@ msgstr ""
 "Ak nájdeš nejakú chybu aebo máš nejaký nápad ohľadom hry napíš nám email "
 "(anglicky, prosím):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Základná energia"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -780,6 +809,10 @@ msgstr "Vznášadlo"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Pripoj sa na kanál #wormux na irc.freenode.net a nájdi si súperov."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1118,6 +1151,13 @@ msgstr "Automatická raketa opustila bojisko ..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Lopta opustila bojisko pred výbuchom"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Pripojenie vypršalo. Skontroluj či nie je povolený firewall!"
@@ -1166,7 +1206,7 @@ msgstr[2] "Sú tu len %i tímy."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1203,6 +1243,11 @@ msgstr "Nedá sa otvoriť adresár máp (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Nedá sa použiť tento port!"
+
+#: src/network/admin_commands.cpp:57
+#, fuzzy
+msgid "Unknown command"
+msgstr "Neznáma akcia"
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1335,12 +1380,6 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
-
-#~ msgid "Duration of a turn"
-#~ msgstr "Trvanie ťahu"
-
-#~ msgid "Initial energy"
-#~ msgstr "Základná energia"
 
 #~ msgid "Connect !"
 #~ msgstr "Pripájam !"
@@ -1637,9 +1676,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Unable to join the game..."
 #~ msgstr "Vcucnutie do vákua ..."
-
-#~ msgid "Unknow action"
-#~ msgstr "Neznáma akcia"
 
 #, fuzzy
 #~ msgid "Use sound?"

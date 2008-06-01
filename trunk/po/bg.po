@@ -399,7 +399,7 @@ msgstr "Пневматичен чук"
 msgid "All teams"
 msgstr "Alle Mannschaften"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr ""
 
@@ -461,7 +461,7 @@ msgstr "Не мога да намеря отборът на %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
@@ -528,9 +528,25 @@ msgstr ""
 msgid "Credits"
 msgstr "Благодарности на"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Диско-граната!"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Продължение на хода"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -626,6 +642,11 @@ msgstr "Цял екран?"
 msgid "Game"
 msgstr "Name:"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Spiel Einstellungen:"
+
 #: src/menu/network_connection_menu.cpp:117
 #, fuzzy
 msgid "Game name:"
@@ -641,6 +662,10 @@ msgstr ""
 
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
 msgstr ""
 
 #: src/weapon/grenade.cpp:76
@@ -721,6 +746,10 @@ msgstr ""
 "Ако намерите проблем с играта, или имате идея за това какво би я подобрила "
 "ни пишете на този адрес (на Английски):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Начално здраве"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -759,6 +788,10 @@ msgstr "Реактивна раница"
 #, fuzzy
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Komm nach #wormux auf irc.freenode.net"
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1099,6 +1132,13 @@ msgstr "Пазете се! Смарт-бомба на свобода!"
 msgid "The ball left the battlefield before exploding"
 msgstr "Топката може да попадне в детски ръчички!"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1144,7 +1184,7 @@ msgstr[1] ""
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1183,6 +1223,10 @@ msgstr "Не мога да отворя директорията за карти
 #, fuzzy
 msgid "Unable to use this port!"
 msgstr "Kann Server nicht starten!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1313,12 +1357,6 @@ msgstr "Проблем при зареждането на конфигураци
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
-
-#~ msgid "Duration of a turn"
-#~ msgstr "Продължение на хода"
-
-#~ msgid "Initial energy"
-#~ msgstr "Начално здраве"
 
 #~ msgid "Connect !"
 #~ msgstr "Verbinden !"

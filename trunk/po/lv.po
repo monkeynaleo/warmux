@@ -433,7 +433,7 @@ msgstr "Perforators"
 msgid "All teams"
 msgstr "Visas komandas"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "Un uzvarētājs ir..."
 
@@ -498,7 +498,7 @@ msgstr "Nevar atrast komandu %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
@@ -563,9 +563,25 @@ msgstr ""
 msgid "Credits"
 msgstr "Veidotāji"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disko granāta"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Gājiena ilgums"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -654,6 +670,11 @@ msgstr "Pa visu ekrānu?"
 msgid "Game"
 msgstr ""
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Klienta režīms"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr ""
@@ -669,6 +690,10 @@ msgstr ""
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Āķis"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -760,6 +785,10 @@ msgstr ""
 "Ja esat atraduši kādu kļūdu vai jums ir kādi ieteikumi vai vēlmes sūtiet "
 "mums epastu (angļu valodā lūdzu):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Enerģija"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -800,6 +829,10 @@ msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pievienojies #wormux kanālam irc.freenode.net serverī, lai atrastu "
 "pretiniekus."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1135,6 +1168,13 @@ msgstr "Automātiksā raķete izgāja no spēles laukuma..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bumba nokrita no spēles laukuma pirms paguva uzsprāgt"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Savienojuma noildze. Pārbaudiet vai tam netraucē ugunssiena!"
@@ -1182,7 +1222,7 @@ msgstr[2] "Ir tikai %i komandas."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1227,6 +1267,10 @@ msgstr "Nevar atvērt karšu mapi (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Nevar izmantot šo portu!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1358,12 +1402,6 @@ msgstr "o Ielādē skaņas profilu: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Atver skaņu %d Hz %d bit"
-
-#~ msgid "Duration of a turn"
-#~ msgstr "Gājiena ilgums"
-
-#~ msgid "Initial energy"
-#~ msgstr "Enerģija"
 
 #~ msgid "Connect !"
 #~ msgstr "Pieslēgties !"

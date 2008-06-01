@@ -591,7 +591,7 @@ msgstr "Ciocan pnumatic"
 msgid "All teams"
 msgstr "Toate echipele"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "Iar câștigătorul este..."
 
@@ -657,7 +657,7 @@ msgstr "Echipa %s nu poate fi găsită!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Directorul personal cu echipe nu poate fi deschis (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
@@ -721,9 +721,25 @@ msgstr "Nu a fost posibilă deschiderea fișierului %s"
 msgid "Credits"
 msgstr "Merite"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Grenadă disco"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Durata unei ture"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -819,6 +835,11 @@ msgstr "Tot ecranul?"
 msgid "Game"
 msgstr "Joc"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Numele jocului:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "Numele jocului:"
@@ -834,6 +855,10 @@ msgstr "Grafică"
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Ghiară de agățare"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -924,6 +949,10 @@ msgstr ""
 "Dacă găsiți probleme sau doriți noi capabilități, trimiteți-ne un mesaj "
 "electronic (vă rugăm, în engleză):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Energie inițială"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -965,6 +994,10 @@ msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Intrați pe #wormux în rețeaua irc.freenode.net pentru a găsi parteneri de "
 "joc."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1291,6 +1324,15 @@ msgstr "Racheta automată a părăsit câmpul de luptă ..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Mingea a părăsit câmpul de luptă înainte de a exploda"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+"Versiunile de client și de server sunt incompatibile (local=%s, server=%s). "
+"Încercați alt server."
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1340,7 +1382,7 @@ msgstr[2] "Există doar %i de echipe."
 msgid "Time"
 msgstr "Rulează jocul"
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1385,6 +1427,10 @@ msgstr "Nu a fost posibilă deschiderea directorului personal cu hărți (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Nu a fost posibilă folosirea acestui port!"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1518,12 +1564,6 @@ msgstr "o Se încarcă profilul de sunet: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
 
-#~ msgid "Duration of a turn"
-#~ msgstr "Durata unei ture"
-
-#~ msgid "Initial energy"
-#~ msgstr "Energie inițială"
-
 #~ msgid "Connect !"
 #~ msgstr "Conectat!"
 
@@ -1551,13 +1591,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr ""
 #~ "%s încearcă să se conecteze cu o versiune diferită: client=%s, eu=%s."
-
-#~ msgid ""
-#~ "The client and server versions are incompatible (local=%s, server=%s). "
-#~ "Please try another server."
-#~ msgstr ""
-#~ "Versiunile de client și de server sunt incompatibile (local=%s, server=%"
-#~ "s). Încercați alt server."
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Chiar doriți să abandonați? (D/N)"

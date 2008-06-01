@@ -427,7 +427,7 @@ msgstr "Drilboor"
 msgid "All teams"
 msgstr "Alle teams"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "En de winnaar is..."
 
@@ -492,7 +492,7 @@ msgstr "Kan team %s niet vinden!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan persoonlijke-teamsdirectory niet openen (%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan teams directory niet openen (%s)!"
@@ -556,9 +556,25 @@ msgstr "Kon bestand %s niet openen"
 msgid "Credits"
 msgstr "Credits"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disco Granaat"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "Duur van een beurt"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -649,6 +665,11 @@ msgstr "Volledig scherm?"
 msgid "Game"
 msgstr "Spel"
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "Spel naam:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "Spel naam:"
@@ -664,6 +685,10 @@ msgstr "Grafisch"
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Haak"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -753,6 +778,10 @@ msgstr ""
 "Als u een bug hebt gevonden of een feature wilt aanvragen stuur ons dan een "
 "e-mail (graag in het Engels):"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "Initiële energie"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -791,6 +820,10 @@ msgstr "Jetpack"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Bezoek #wormux op irc.freenode.net om tegenstanders te vinden."
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1115,6 +1148,13 @@ msgstr "De automatische raket heeft het slagveld verlaten..."
 msgid "The ball left the battlefield before exploding"
 msgstr "De bal heeft het slagveld verlaten alvorens te ontploffen"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
@@ -1161,7 +1201,7 @@ msgstr[1] "Er zijn maar %i teams."
 msgid "Time"
 msgstr "Tijd"
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1206,6 +1246,11 @@ msgstr "Kon persoonlijke-kaartendirectory niet openen (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Kon deze poort niet gebruiken!"
+
+#: src/network/admin_commands.cpp:57
+#, fuzzy
+msgid "Unknown command"
+msgstr "Onbekende actie"
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1335,12 +1380,6 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
-
-#~ msgid "Duration of a turn"
-#~ msgstr "Duur van een beurt"
-
-#~ msgid "Initial energy"
-#~ msgstr "Initiële energie"
 
 #~ msgid "Connect !"
 #~ msgstr "Verbind !"
@@ -1655,9 +1694,6 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #, fuzzy
 #~ msgid "Unable to join the game..."
 #~ msgstr "Kon skins directory niet openen (%s)!"
-
-#~ msgid "Unknow action"
-#~ msgstr "Onbekende actie"
 
 #, fuzzy
 #~ msgid "Use sound?"

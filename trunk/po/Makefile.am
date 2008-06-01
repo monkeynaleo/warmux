@@ -25,6 +25,8 @@ POTFILES = \
         src/character/character.h \
         src/character/clothe.cpp \
         src/character/clothe.h \
+        src/character/damage_stats.cpp \
+        src/character/damage_stats.h \
         src/character/member.cpp \
         src/character/member.h \
         src/character/move.cpp \
@@ -34,22 +36,26 @@ POTFILES = \
         src/config.h \
         src/game/config.cpp \
         src/game/config.h \
+        src/game/game_blitz.cpp \
+        src/game/game_blitz.h \
+        src/game/game_classic.cpp \
+        src/game/game_classic.h \
         src/game/game.cpp \
         src/game/game.h \
         src/game/game_init.cpp \
+        src/game/game_init.h \
         src/game/game_mode.cpp \
         src/game/game_mode.h \
-        src/game/game_classic.cpp \
-        src/game/game_classic.h \
-        src/game/game_blitz.cpp \
-        src/game/game_blitz.h \
         src/game/time.cpp \
         src/game/time.h \
         src/graphic/color.cpp \
         src/graphic/color.h \
         src/graphic/colors.h \
+        src/graphic/composite_shape.cpp \
+        src/graphic/composite_shape.h \
         src/graphic/effects.cpp \
         src/graphic/effects.h \
+        src/graphic/fading_effect.h \
         src/graphic/font.cpp \
         src/graphic/font.h \
         src/graphic/fps.cpp \
@@ -75,6 +81,9 @@ POTFILES = \
         src/graphic/textured_polygon.h \
         src/graphic/video.cpp \
         src/graphic/video.h \
+        src/gui/abstract_spin_button.h \
+        src/gui/big/button_pic.cpp \
+        src/gui/big/button_pic.h \
         src/gui/box.cpp \
         src/gui/box.h \
         src/gui/button.cpp \
@@ -83,9 +92,13 @@ POTFILES = \
         src/gui/button_text.h \
         src/gui/check_box.cpp \
         src/gui/check_box.h \
+        src/gui/combo_box.cpp \
+        src/gui/combo_box.h \
         src/gui/container.h \
         src/gui/energy_bar.cpp \
         src/gui/energy_bar.h \
+        src/gui/file_list_box.cpp \
+        src/gui/file_list_box.h \
         src/gui/label.cpp \
         src/gui/label.h \
         src/gui/list_box.cpp \
@@ -109,8 +122,10 @@ POTFILES = \
         src/gui/spin_button.h \
         src/gui/spin_button_picture.cpp \
         src/gui/spin_button_picture.h \
-	src/gui/tabs.cpp \
-	src/gui/tabs.h \
+        src/gui/tabs.cpp \
+        src/gui/tabs.h \
+        src/gui/talk_box.cpp \
+        src/gui/talk_box.h \
         src/gui/text_box.cpp \
         src/gui/text_box.h \
         src/gui/widget.cpp \
@@ -126,17 +141,25 @@ POTFILES = \
         src/include/binreloc.h \
         src/include/constant.cpp \
         src/include/constant.h \
+        src/include/singleton.cpp \
+        src/include/singleton.h \
         src/interface/cursor.cpp \
         src/interface/cursor.h \
         src/interface/game_msg.cpp \
         src/interface/game_msg.h \
         src/interface/interface.cpp \
         src/interface/interface.h \
+        src/interface/joystick.cpp \
+        src/interface/joystick.h \
         src/interface/keyboard.cpp \
         src/interface/keyboard.h \
         src/interface/loading_screen.cpp \
         src/interface/loading_screen.h \
+        src/interface/man_machine_interface.cpp \
+        src/interface/man_machine_interface.h \
         src/interface/mouse.cpp \
+        src/interface/mouse_cursor.cpp \
+        src/interface/mouse_cursor.h \
         src/interface/mouse.h \
         src/interface/weapon_menu.cpp \
         src/interface/weapon_menu.h \
@@ -149,6 +172,8 @@ POTFILES = \
         src/map/map.h \
         src/map/maps_list.cpp \
         src/map/maps_list.h \
+        src/map/random_map.cpp \
+        src/map/random_map.h \
         src/map/sky.cpp \
         src/map/sky.h \
         src/map/tile.cpp \
@@ -163,6 +188,10 @@ POTFILES = \
         src/menu/credits_menu.h \
         src/menu/game_menu.cpp \
         src/menu/game_menu.h \
+        src/menu/game_mode_editor.cpp \
+        src/menu/game_mode_editor.h \
+        src/menu/help_menu.cpp \
+        src/menu/help_menu.h \
         src/menu/main_menu.cpp \
         src/menu/main_menu.h \
         src/menu/map_selection_box.cpp \
@@ -181,10 +210,16 @@ POTFILES = \
         src/menu/pause_menu.h \
         src/menu/results_menu.cpp \
         src/menu/results_menu.h \
+        src/menu/skin_menu.cpp \
+        src/menu/skin_menu.h \
         src/menu/team_box.cpp \
         src/menu/team_box.h \
         src/menu/teams_selection_box.cpp \
         src/menu/teams_selection_box.h \
+        src/msvc/config.h \
+        src/msvc/getopt.h \
+        src/network/admin_commands.cpp \
+        src/network/admin_commands.h \
         src/network/chat.cpp \
         src/network/chat.h \
         src/network/chatlogger.cpp \
@@ -196,12 +231,22 @@ POTFILES = \
         src/network/index_server.cpp \
         src/network/index_server.h \
         src/network/index_svr_msg.h \
+        src/network/irc.cpp \
+        src/network/irc.h \
         src/network/net_error_msg.cpp \
         src/network/net_error_msg.h \
+        src/network/network_client.cpp \
+        src/network/network_client.h \
         src/network/network.cpp \
         src/network/network.h \
+        src/network/network_local.cpp \
+        src/network/network_local.h \
+        src/network/network_server.cpp \
+        src/network/network_server.h \
         src/network/randomsync.cpp \
         src/network/randomsync.h \
+        src/network/socket.cpp \
+        src/network/socket.h \
         src/object/barrel.cpp \
         src/object/barrel.h \
         src/object/bonus_box.cpp \
@@ -246,8 +291,14 @@ POTFILES = \
         src/particles/star.h \
         src/particles/teleport_member.cpp \
         src/particles/teleport_member.h \
+        src/particles/water_drop.cpp \
+        src/particles/water_drop.h \
         src/sound/jukebox.cpp \
         src/sound/jukebox.h \
+        src/sound/sample_cache.cpp \
+        src/sound/sample_cache.h \
+        src/sound/sound_sample.cpp \
+        src/sound/sound_sample.h \
         src/team/macro.h \
         src/team/results.cpp \
         src/team/results.h \
@@ -260,6 +311,8 @@ POTFILES = \
         src/team/teams_list.h \
         src/tool/affine_transform.cpp \
         src/tool/affine_transform.h \
+        src/tool/copynpaste.cpp \
+        src/tool/copynpaste.h \
         src/tool/debug.cpp \
         src/tool/debug.h \
         src/tool/error.cpp \
@@ -270,6 +323,7 @@ POTFILES = \
         src/tool/file_tools.h \
         src/tool/i18n.cpp \
         src/tool/i18n.h \
+        src/tool/isnan.h \
         src/tool/math_tools.h \
         src/tool/point.h \
         src/tool/random.cpp \
@@ -281,6 +335,8 @@ POTFILES = \
         src/tool/stats.h \
         src/tool/string_tools.cpp \
         src/tool/string_tools.h \
+        src/tool/text_handling.cpp \
+        src/tool/text_handling.h \
         src/tool/vector2.h \
         src/tool/xml_document.cpp \
         src/tool/xml_document.h \
@@ -301,10 +357,10 @@ POTFILES = \
         src/weapon/blowtorch.h \
         src/weapon/bounce_ball.cpp \
         src/weapon/bounce_ball.h \
-        src/weapon/cluzooka.cpp src/weapon/cluzooka.h \
-        src/weapon/footbomb.cpp src/weapon/footbomb.h \
         src/weapon/cluster_bomb.cpp \
         src/weapon/cluster_bomb.h \
+        src/weapon/cluzooka.cpp \
+        src/weapon/cluzooka.h \
         src/weapon/construct.cpp \
         src/weapon/construct.h \
         src/weapon/crosshair.cpp \
@@ -317,6 +373,8 @@ POTFILES = \
         src/weapon/explosion.h \
         src/weapon/flamethrower.cpp \
         src/weapon/flamethrower.h \
+        src/weapon/footbomb.cpp \
+        src/weapon/footbomb.h \
         src/weapon/gnu.cpp \
         src/weapon/gnu.h \
         src/weapon/grapple.cpp \
@@ -361,6 +419,7 @@ POTFILES = \
         src/weapon/weapon_launcher.h \
         src/weapon/weapons_list.cpp \
         src/weapon/weapons_list.h \
+        src/weapon/weapon_strength_bar.h \
         tools/index_server/client.cpp \
         tools/index_server/client.h \
         tools/index_server/clock.cpp \
@@ -378,7 +437,7 @@ POTFILES = \
         tools/index_server/stat.cpp \
         tools/index_server/stat.h \
         tools/index_server/sync_slave.cpp \
-        tools/index_server/sync_slave.h
+        tools/index_server/sync_slave.h 
 
 DOMAIN = $(PACKAGE)
 

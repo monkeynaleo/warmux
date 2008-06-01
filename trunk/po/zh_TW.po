@@ -398,7 +398,7 @@ msgstr "飛錘"
 msgid "All teams"
 msgstr "全部的隊伍"
 
-#: src/game/game_classic.cpp:56 src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "生者是..."
 
@@ -463,7 +463,7 @@ msgstr "沒找到隊伍 %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "打不開個人團隊目錄(%s)!"
 
-#: src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "打不開團隊目錄 (%s)!"
@@ -527,9 +527,25 @@ msgstr "無法開啟檔案%s"
 msgid "Credits"
 msgstr "鳴謝"
 
+#: src/menu/game_mode_editor.cpp:68
+msgid "Damage per turn during death mode"
+msgstr ""
+
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "躍動手雷"
+
+#: src/network/admin_commands.cpp:34
+msgid "Displays this message"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:62
+msgid "Duration before death mode"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:50
+msgid "Duration of a turn"
+msgstr "回合時間長度"
 
 #: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
@@ -616,6 +632,11 @@ msgstr "全屏?"
 msgid "Game"
 msgstr ""
 
+#: src/menu/game_mode_editor.cpp:46
+#, fuzzy
+msgid "Game mode"
+msgstr "游戲名:"
+
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
 msgstr "游戲名:"
@@ -631,6 +652,10 @@ msgstr ""
 #: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "飛索"
+
+#: src/menu/game_mode_editor.cpp:74
+msgid "Gravity"
+msgstr ""
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -719,6 +744,10 @@ msgid ""
 "please):"
 msgstr "假如你發現Bug或想要什么游戲特徴, 請發英文郵件給我們"
 
+#: src/menu/game_mode_editor.cpp:56
+msgid "Initial energy"
+msgstr "初始耐久"
+
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
@@ -758,6 +787,10 @@ msgstr "噴射包"
 #: src/menu/network_connection_menu.cpp:233 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "加入#wormux IRC irc.freenode.net 找對手"
+
+#: src/network/admin_commands.cpp:36
+msgid "Kicks the players designated by <nickname> out of the game"
+msgstr ""
 
 #: src/menu/options_menu.cpp:125
 msgid "Language"
@@ -1089,6 +1122,13 @@ msgstr "制導火箭離開戰場..."
 msgid "The ball left the battlefield before exploding"
 msgstr "球膨脹前離開戰場"
 
+#: src/network/network_client.cpp:128
+#, c-format
+msgid ""
+"The client and server versions are incompatible (local=%s, server=%s). "
+"Please try another server."
+msgstr ""
+
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "連線逾時. 請檢查防火牆!"
@@ -1134,7 +1174,7 @@ msgstr[1] "只有%i隊"
 msgid "Time"
 msgstr ""
 
-#: src/weapon/footbomb.cpp:159 src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1179,6 +1219,10 @@ msgstr "無法開啟個人地圖目錄 (%s)!"
 #: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "通訊埠不可用"
+
+#: src/network/admin_commands.cpp:57
+msgid "Unknown command"
+msgstr ""
 
 #: src/network/network.cpp:110
 msgid "Unnamed"
@@ -1310,12 +1354,6 @@ msgstr "o讀取音樂檔案 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
-
-#~ msgid "Duration of a turn"
-#~ msgstr "回合時間長度"
-
-#~ msgid "Initial energy"
-#~ msgstr "初始耐久"
 
 #~ msgid "Connect !"
 #~ msgstr "連線!"
