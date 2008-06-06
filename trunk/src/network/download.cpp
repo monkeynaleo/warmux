@@ -74,7 +74,7 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 
 std::string Downloader::GetLatestVersion()
 {
-  static const char url[] = "http://kurosu.free.fr/last";
+  static const char url[] = "http://www.wormux.org/last";
   const std::string last_file = Config::GetInstance()->GetPersonalDataDir() + "last";
   if( !Get(url, last_file.c_str()) )
   {
