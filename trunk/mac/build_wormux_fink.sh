@@ -29,7 +29,7 @@ export PROG_NAME=wormux
 export BUNDLE_NAME=Wormux
 export APP_VERSION=0.8svn
 
-export SOURCE_DIR=${HERE}/../../wormux
+export SOURCE_DIR=${HERE}/../
 export FINK_PATH=/sw/bin:/sw/sbin
 #export  OTHER_PATH=/src/usr/local-${ARCH}/bin
 export PATH=${FINK_PATH}:/bin:/sbin:/usr/bin:/usr/sbin
