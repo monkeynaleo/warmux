@@ -92,7 +92,8 @@ MainMenu::MainMenu() :
   std::string s2(Constants::WEB_SITE);
   website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
-  JukeBox::GetInstance()->PlayMusic("menu");
+  if (!JukeBox::GetInstance()->IsPlayingMusic())
+    JukeBox::GetInstance()->PlayMusic("menu");
 
   StatStart("Main:Menu");
 }
