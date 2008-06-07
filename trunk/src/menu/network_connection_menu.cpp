@@ -259,6 +259,7 @@ void NetworkConnectionMenu::RefreshList()
 {
   // Save the currently selected address
   int current = cl_net_games_lst->GetSelectedItem();
+  if (current == -1) current = 0;
 
   // Empty the list:
   while (cl_net_games_lst->Size() != 0) {
@@ -286,7 +287,7 @@ void NetworkConnectionMenu::RefreshList()
     cl_net_games_lst->AddItem(false, it->passworded, it->ip_address,
                               it->port, it->dns_address, it->game_name);
   }
-  if (current != -1 && cl_net_games_lst->Size() != 0)
+  if (cl_net_games_lst->Size() != 0)
     cl_net_games_lst->Select( current );
   cl_net_games_lst->NeedRedrawing();
 
