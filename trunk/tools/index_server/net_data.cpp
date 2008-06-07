@@ -120,7 +120,7 @@ bool NetData::ReceiveStr(std::string & full_str)
     {
       // We don't know the string size -> read it
       if (received < 4) {
-        DPRINT(TRAFFIC, "Not enough data to store string length: %lu", received);
+        DPRINT(TRAFFIC, "Not enough data to store string length: %zu", received);
         return false;
       }
 
@@ -263,7 +263,7 @@ bool NetData::Receive()
         }
 
       msg_size = lsize;
-      DPRINT(TRAFFIC, "Message of id %i and size %lu\n", id, msg_size);
+      DPRINT(TRAFFIC, "Message of id %i and size %zu\n", id, msg_size);
     }
 
   // Check that enough data has been received
