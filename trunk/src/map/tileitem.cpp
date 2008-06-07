@@ -27,6 +27,7 @@
 #include "include/app.h"
 #include "map/camera.h"
 #include "tool/error.h"
+#include "tool/math_tools.h"
 #include "tool/point.h"
 //#include "tool/stats.h"
 #ifdef DBG_TILE
@@ -144,8 +145,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
     int dac = center.y - y;
 
     //Darken the border of the removed ground
-    int blength = sqrt((radius+EXPLOSION_BORDER_SIZE) * (radius+EXPLOSION_BORDER_SIZE)
-                       - dac * dac) + 0.5;
+    int blength = lround(sqrt((radius+EXPLOSION_BORDER_SIZE)*(radius+EXPLOSION_BORDER_SIZE) - dac*dac));
 
     //Nothing to empty, just darken
     if ((uint)abs(dac) > radius) {
@@ -154,7 +154,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
     }
 
     //Zone of the line which needs to be emptied
-    int length = sqrt(radius*radius - dac*dac) + 0.5;
+    int length = lround(sqrt(radius*radius - dac*dac));
 
     // Left half of the circle
     Darken(center.x-blength, center.x-length, buf, bpp);
