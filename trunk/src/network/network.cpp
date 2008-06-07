@@ -58,6 +58,7 @@
 #  include <arpa/nameser.h>
 #  include <resolv.h>
 #  include <errno.h>
+#  include <unistd.h>
 #endif
 
 //-----------------------------------------------------------------------------
