@@ -86,8 +86,10 @@ OptionMenu::OptionMenu() :
 						     50, 5, 5, 80);
   graphic_options->AddWidget(opt_scroll_border_size);
 
+#ifndef __APPLE__
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
+#endif
 
   opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
 					  option_size,
@@ -184,7 +186,9 @@ OptionMenu::OptionMenu() :
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
   opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
   opt_scroll_border_size->SetValue(config->GetScrollBorderSize());
+#ifndef __APPLE__
   full_screen->SetValue(app->video->IsFullScreen());
+#endif
   music_cbox->SetValue(config->GetSoundMusic());
   effects_cbox->SetValue(config->GetSoundEffects());
 

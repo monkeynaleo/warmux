@@ -51,7 +51,9 @@ private:
    CheckBox *opt_display_name;
    CheckBox *opt_scroll_on_border;
    SpinButtonWithPicture * opt_scroll_border_size;
+#ifndef __APPLE__
    CheckBox *full_screen;
+#endif
    SpinButtonWithPicture *opt_max_fps;
 
    /* Sound options controllers */
