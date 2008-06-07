@@ -33,6 +33,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "network/network.h"
+#include "sound/jukebox.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/file_tools.h"
@@ -281,6 +282,10 @@ void Team::PrepareTurn()
     active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_BAZOOKA);
     AccessWeapon().Select();
   }
+
+  // Sound the bell, so the local players know when it is their turn
+  if (IsLocal())
+    JukeBox::GetInstance()->Play("share", "start_turn");
 }
 
 Character& Team::ActiveCharacter() const
