@@ -288,7 +288,9 @@ void OptionMenu::SaveOptions()
 
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
+#ifndef __APPLE__
   app->video->SetConfig(w, h, full_screen->GetValue());
+#endif
 
   uint x = app->video->window.GetWidth() / 2;
   uint y = app->video->window.GetHeight() - 50;
