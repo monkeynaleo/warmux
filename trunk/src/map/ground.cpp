@@ -90,7 +90,7 @@ double Ground::Tangent(int x,int y) const {
    */
   Point2i p1,p2;
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
-    return getNAN();
+    return getNaN();
 
   if(!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y))
   {
