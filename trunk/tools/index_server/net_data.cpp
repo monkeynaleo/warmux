@@ -36,6 +36,7 @@ NetData::NetData()
   , str_size(0)
   , msg_size(0)
   , ping_sent(false)
+  , received(0)
   , msg_id(TS_NO_MSG)
   , connected(false)
 {
@@ -119,7 +120,7 @@ bool NetData::ReceiveStr(std::string & full_str)
     {
       // We don't know the string size -> read it
       if (received < 4) {
-        DPRINT(TRAFFIC, "Not enough data to store string length: %i", received);
+        DPRINT(TRAFFIC, "Not enough data to store string length: %lu", received);
         return false;
       }
 
@@ -262,11 +263,11 @@ bool NetData::Receive()
         }
 
       msg_size = lsize;
-      DPRINT(TRAFFIC, "Message of id %i and size %u\n", id, msg_size);
+      DPRINT(TRAFFIC, "Message of id %i and size %lu\n", id, msg_size);
     }
 
   // Check that enough data has been received
-  if (received < msg_size-8)
+  if (received+8 < msg_size)
     return false;
 
   switch(msg_id) {
