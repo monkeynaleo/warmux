@@ -133,9 +133,12 @@ void Video::ComputeAvailableConfigs()
 }
 
 bool Video::SetConfig(const int width, const int height, const bool _fullscreen){
+#ifdef __APPLE__
+  int flag = 0; // Never set fullscreen with OSX, as it's buggy
+#else
   int flag = (_fullscreen) ? SDL_FULLSCREEN : 0;
+#endif
   bool window_was_null = window.IsNull();
-
 
   // update the main window if needed
   if( window.IsNull() ||
@@ -168,8 +171,10 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
 void Video::ToggleFullscreen()
 {
 #ifndef WIN32
+#  ifndef __APPLE__ // Prevent buggy fullscreen under OSX
   SDL_WM_ToggleFullScreen( window.GetSurface() );
   fullscreen = !fullscreen;
+#  endif
 #else
   SetConfig(window.GetWidth(), window.GetHeight(), !fullscreen);
   AppWormux::GetInstance()->RefreshDisplay();
