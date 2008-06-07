@@ -132,44 +132,37 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
   const uint line_size = m_surface.GetPitch();
   const uint bpp       = m_surface.GetBytesPerPixel();
 
-  int y = (center.y - (int)radius - (int)EXPLOSION_BORDER_SIZE >= 0) ? (center.y - (int)radius - EXPLOSION_BORDER_SIZE) : 0;
+  int y = center.y - (int)(radius+EXPLOSION_BORDER_SIZE);
+  if (y < 0) y = 0;
   buf += y * line_size;
 
   //Empties each line of the tile horizontaly that are in the circle
-  while ( (uint) y <= center.y + radius + EXPLOSION_BORDER_SIZE&& y < CELL_SIZE.y )
+  for (; (uint)y <= center.y + radius + EXPLOSION_BORDER_SIZE && y < CELL_SIZE.y;
+       buf += line_size, y++)
   {
     //Abscisse distance from the center of the circle to the circle
     int dac = center.y - y;
 
-    //Angle on the circle
-    float angle = asin( (float)dac / (float)radius);
+    //Darken the border of the removed ground
+    int blength = sqrt((radius+EXPLOSION_BORDER_SIZE) * (radius+EXPLOSION_BORDER_SIZE)
+                       - dac * dac) + 0.5;
+
+    //Nothing to empty, just darken
+    if ((uint)abs(dac) > radius) {
+	Darken(center.x-blength, center.x+blength, buf, bpp);
+	continue;
+    }
 
     //Zone of the line which needs to be emptied
-    int start_x, end_x, lenght;
-    lenght = (int) ((float) radius * cos (angle));
-    lenght = lenght > 0 ? lenght : - lenght;
-    start_x = center.x - lenght;
-    lenght *= 2;
-    end_x = start_x + lenght;
-    Empty(start_x, end_x, buf, bpp);
+    int length = sqrt(radius*radius - dac*dac) + 0.5;
 
-    //Darken the border of the removed ground
     // Left half of the circle
-    int bstart_x, bend_x, blenght;
-    angle = asin( (float)dac / (float)(radius + EXPLOSION_BORDER_SIZE));
-    blenght = (int) ((float) (radius + EXPLOSION_BORDER_SIZE) * cos (angle));
-    blenght = blenght > 0 ? blenght : - blenght;
-    bstart_x = center.x - blenght;
-    bend_x = bstart_x + (blenght - lenght/2);
-    Darken(bstart_x, bend_x, buf, bpp);
+    Darken(center.x-blength, center.x-length, buf, bpp);
 
-    // Right half of the circle
-    bstart_x = center.x + lenght/2 + 1;
-    bend_x = bstart_x + (blenght - lenght/2);
-    Darken(bstart_x, bend_x, buf, bpp);
+    // Rigth half of the circle
+    Darken(center.x+length, center.x+blength, buf, bpp);
 
-    buf += line_size;
-    y++;
+    Empty(center.x-length, center.x+length, buf, bpp);
   }
 }
 
