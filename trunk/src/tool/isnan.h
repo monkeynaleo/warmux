@@ -53,7 +53,7 @@
 # define isNaN(_a) (__isnan(_a))    /* MacOSX/Darwin definition < 10.4 */
 #elif defined(WIN32) || defined(_isnan)
 # define isNaN(_a) (_isnan(_a))     /* Win32 definition */
-#elif defined(isnan) || defined(__FreeBSD__) || defined(__osf__)
+#elif defined(isnan) || defined(__OpenBSD__) || defined(__FreeBSD__) || defined(__osf__)
 # define isNaN(_a) (isnan(_a))      /* GNU definition */
 #elif defined (SOLARIS_2_8) && __GNUC__ == 3 && __GNUC_MINOR__ == 2
 # define isNaN(_a) (isnan(_a))      /* GNU definition */
