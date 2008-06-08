@@ -278,3 +278,4 @@ void Water::Smoke(const Point2i& pos) const
 {
   ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 2, particle_SMOKE, true, 0, 1);
 }
+
