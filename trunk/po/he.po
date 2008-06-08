@@ -304,6 +304,13 @@ msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "צוות %s זכה בשוטגאן!"
 msgstr[1] "צוות %s זכה ב-%u רובי שוטגאן!"
 
+#: src/weapon/slap.cpp:85
+#, fuzzy, c-format
+msgid "%s team has won %u slap!"
+msgid_plural "%s team has won %u slaps! Dodge this!"
+msgstr[0] "צוות %s זכה בוו אחיזה!"
+msgstr[1] "צוות %s זכה ב-%u ווי אחיזה!"
+
 #: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
@@ -347,7 +354,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "צוות %s זכה בדילוג תור! ידעתי שתאהב את זה."
 msgstr[1] "צוות %s זכה ב-%u דילוגי תור! בטוח שתאהב את זה."
 
-#: src/weapon/supertux.cpp:313
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -364,7 +371,7 @@ msgid "(dead)"
 msgstr "(מת)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:192
+#: src/menu/options_menu.cpp:196
 msgid "(system language)"
 msgstr "(שפת מערכת)"
 
@@ -377,7 +384,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
-#: src/menu/options_menu.cpp:339
+#: src/menu/options_menu.cpp:345
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -466,7 +473,7 @@ msgstr "לא ניתן לפתוח את תיקיית הצוותים האישית (
 msgid "Cannot open teams directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית הצוותים (%s)!"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:131
 msgid "Check updates online?"
 msgstr ""
 
@@ -554,7 +561,7 @@ msgstr "דינמיט"
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
-#: src/menu/options_menu.cpp:153
+#: src/menu/options_menu.cpp:155
 msgid "Effects volume"
 msgstr ""
 
@@ -587,30 +594,30 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:355
+#: src/menu/network_connection_menu.cpp:356
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "לא ניתן להתחבר ל-%s : %s"
 
-#: src/menu/network_connection_menu.cpp:316
+#: src/menu/network_connection_menu.cpp:317
 msgid "Error: Unable to contact index server to host a game"
 msgstr "שגיאה: לא ניתן ליצור קשר עם שרת אינדקסים כדי לארח משחק"
 
-#: src/menu/network_connection_menu.cpp:273
+#: src/menu/network_connection_menu.cpp:274
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "שגיאה: לא ניתן ליצור קשר עם שרת אינדקסים כדי לחפש משחק באינטרנט"
 
-#: src/menu/network_connection_menu.cpp:335
+#: src/menu/network_connection_menu.cpp:336
 msgid "Error: Unable to start server"
 msgstr "שגיאה: לא ניתן להפעיל את השרת"
 
-#: src/menu/network_connection_menu.cpp:329
+#: src/menu/network_connection_menu.cpp:330
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
 msgstr ""
 
-#: src/team/team.cpp:116
+#: src/team/team.cpp:117
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "שגיאה: לא ניתן למצוא את הגוף \"%s\" עבור צוות \"%s\"."
@@ -624,7 +631,7 @@ msgstr "להביור"
 msgid "Football Bomb"
 msgstr "מפזר הפגנות"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:90
 msgid "Fullscreen?"
 msgstr "Plein Ã©cran ?"
 
@@ -645,7 +652,7 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "משגר גנו"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:120
 msgid "Graphic"
 msgstr ""
 
@@ -792,7 +799,7 @@ msgstr "הצטרף אל #wormux ב-irc.freenode.net כדי למצוא יריבי
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr "שפה"
 
@@ -836,7 +843,7 @@ msgstr "מפות"
 msgid "Max number of players:"
 msgstr "מספר שחקנים מירבי:"
 
-#: src/menu/options_menu.cpp:92
+#: src/menu/options_menu.cpp:94
 msgid "Maximum FPS"
 msgstr "ערך FPS מקסימלי"
 
@@ -844,7 +851,7 @@ msgstr "ערך FPS מקסימלי"
 msgid "Mine"
 msgstr "מוקש"
 
-#: src/menu/options_menu.cpp:133
+#: src/menu/options_menu.cpp:135
 #, fuzzy
 msgid "Misc"
 msgstr "מוסיקה?"
@@ -869,11 +876,11 @@ msgstr "חסר התועלת ביותר"
 msgid "Most violent"
 msgstr "האלים ביותר"
 
-#: src/menu/options_menu.cpp:143
+#: src/menu/options_menu.cpp:145
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:139
+#: src/menu/options_menu.cpp:141
 msgid "Music?"
 msgstr "מוסיקה?"
 
@@ -881,7 +888,7 @@ msgstr "מוסיקה?"
 msgid "Network Game"
 msgstr "משחק רשת"
 
-#: src/network/network.cpp:261
+#: src/network/network.cpp:262
 msgid "Network initialization"
 msgstr "אתחול רשת"
 
@@ -984,7 +991,7 @@ msgstr "קורא הגדרות מקובץ ברירת מחדל"
 msgid "Reading personal config file"
 msgstr "קורא הגדרות מקובץ אישי"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:116
 msgid "Resolution"
 msgstr "אבחנה"
 
@@ -1031,6 +1038,14 @@ msgstr "שוטגאן"
 msgid "Skip turn"
 msgstr "דלג על תור"
 
+#: src/weapon/slap.cpp:73
+msgid "Slap"
+msgstr ""
+
+#: src/weapon/slap.cpp:74
+msgid "Slap the enemy to make him jump a bit."
+msgstr ""
+
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "רובה צלפים"
@@ -1039,20 +1054,20 @@ msgstr "רובה צלפים"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:281
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "עמך הסליחה, אין כרגע משחק הממתין לשחקנים"
 
-#: src/menu/options_menu.cpp:178
+#: src/menu/options_menu.cpp:180
 #, fuzzy
 msgid "Sound"
 msgstr "סאונד"
 
-#: src/menu/options_menu.cpp:149
+#: src/menu/options_menu.cpp:151
 msgid "Sound effects?"
 msgstr "אפקטים קוליים?"
 
-#: src/menu/options_menu.cpp:174
+#: src/menu/options_menu.cpp:176
 msgid "Sound frequency"
 msgstr "תדירות הסאונד"
 
@@ -1227,7 +1242,7 @@ msgstr "לא ניתן להשתמש בפורט זה!"
 msgid "Unknown command"
 msgstr ""
 
-#: src/network/network.cpp:110
+#: src/network/network.cpp:111
 msgid "Unnamed"
 msgstr "ללא שם"
 
@@ -1235,7 +1250,7 @@ msgstr "ללא שם"
 msgid "Version"
 msgstr "גירסה"
 
-#: src/menu/options_menu.cpp:348
+#: src/menu/options_menu.cpp:354
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
