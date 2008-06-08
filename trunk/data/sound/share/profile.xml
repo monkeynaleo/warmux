@@ -9,7 +9,7 @@
   <sound sample="character/change_in_same_team" file="character_change.ogg" />
 
   <sound sample="end_turn" file="end_turn.ogg" />
-  <sound sample="start_turn" file="start_turn.wav" />
+  <sound sample="start_turn" file="start_turn.ogg" />
 
   <sound sample="menu/cancel" file="menu/cancel.ogg" />
   <sound sample="menu/clic" file="menu/clic.ogg" />
