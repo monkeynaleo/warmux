@@ -402,6 +402,17 @@
       <nb_ammo>-1</nb_ammo>
     </skip_turn>
 
+    <slap>
+      <min_angle>-45</min_angle>
+      <max_angle>45</max_angle>
+      <nb_ammo>-1</nb_ammo>
+      <damage>5</damage>
+      <range>25</range>
+      <strength>300</strength>
+      <display_crosshair>0</display_crosshair>
+      <speed_on_hit>1000</speed_on_hit> 
+    </slap>
+
     <snipe_rifle>
       <min_angle>-30</min_angle>
       <max_angle>45</max_angle>

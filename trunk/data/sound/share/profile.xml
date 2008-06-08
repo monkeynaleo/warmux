@@ -56,6 +56,7 @@
   <sound sample="weapon/rocket_flying" file="weapon/supertux_flying.ogg" />
   <sound sample="weapon/shotgun" file="weapon/shotgun.ogg" />
   <sound sample="weapon/suicide" file="weapon/commit_suicide.ogg" />
+  <sound sample="weapon/slap" file="weapon/slap.ogg" />
   <sound sample="weapon/supertux_flying" file="weapon/supertux_flying.ogg" />
   <sound sample="weapon/supertux_swimming" file="weapon/supertux_swimming.ogg" />
   <sound sample="weapon/teleport_end" file="weapon/teleport_land.ogg" />

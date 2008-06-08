@@ -399,6 +399,8 @@ POTFILES = \
         src/weapon/shotgun.h \
         src/weapon/skip_turn.cpp \
         src/weapon/skip_turn.h \
+        src/weapon/slap.cpp \
+        src/weapon/slap.h \
         src/weapon/snipe_rifle.cpp \
         src/weapon/snipe_rifle.h \
         src/weapon/submachine_gun.cpp \

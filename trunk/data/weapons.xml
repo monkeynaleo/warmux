@@ -300,6 +300,12 @@
   <surface name="skip_turn" file="weapon/skip_turn/skipturn.png" />
   <position name="skip_turn" origin="over" x="0" y="5" />
 
+<!-- Slap resources -->
+
+  <surface name="slap_ico" file="weapon/slap/slap_ico.png" />
+  <surface name="slap" file="weapon/slap/slap.png" />
+  <position name="slap" origin="hand" x="4" y="7" />
+
 <!-- Suicide ressources -->
 
   <surface name="suicide_ico" file="weapon/suicide/suicide_ico.png" />

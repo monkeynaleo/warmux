@@ -48,6 +48,7 @@
 #include "weapon/shotgun.h"
 #include "weapon/skip_turn.h"
 #include "weapon/snipe_rifle.h"
+#include "weapon/slap.h"
 #include "weapon/submachine_gun.h"
 #include "weapon/suicide.h"
 #include "weapon/supertux.h"

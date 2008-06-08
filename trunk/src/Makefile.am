@@ -203,6 +203,7 @@ wormux_SOURCES = \
         weapon/riot_bomb.cpp weapon/riot_bomb.h \
         weapon/shotgun.cpp weapon/shotgun.h \
         weapon/skip_turn.cpp weapon/skip_turn.h \
+        weapon/slap.cpp weapon/slap.h \
         weapon/snipe_rifle.cpp weapon/snipe_rifle.h \
         weapon/submachine_gun.cpp weapon/submachine_gun.h \
         weapon/suicide.cpp weapon/suicide.h \

@@ -72,6 +72,7 @@ WeaponsList::WeaponsList()
   m_weapons_list.push_back(new GnuLauncher);
   m_weapons_list.push_back(new PolecatLauncher);
   m_weapons_list.push_back(new BounceBallLauncher);
+  m_weapons_list.push_back(new Slap);
   m_weapons_list.push_back(new Teleportation);
   m_weapons_list.push_back(new Parachute);
   m_weapons_list.push_back(new Suicide);
