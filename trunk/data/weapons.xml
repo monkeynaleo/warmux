@@ -264,6 +264,7 @@
     <image file="weapon/mine/mine_anim.png">
       <grid pos="0,0" size="16,16" array="2,1" />
     </image>
+    <animation speed="300" loop_mode="1" />
   </sprite>
   <surface name="mine_impact" file="weapon/mine/mine_impact.png" />
 
