@@ -74,26 +74,10 @@ void Slap::UpdateTranslationStrings()
   m_help = _("Slap the enemy to make him jump a bit.");
 }
 
-/*bool Slap::p_Shoot()
-{
-  JukeBox::GetInstance()->Play ("share","weapon/slap");
-
-  return true;
-}*/
-
 void Slap::Refresh()
 {
   if (IsInUse()) m_is_active = false;
-  /*if(m_last_fire_time > 0 && !slap_sound.IsPlaying()) {
-    ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
-    SendActiveCharacterInfo();
-  }*/
 }
-
-/*bool Slap::IsInUse() const
-{
-  return m_last_fire_time > 0
-}*/
 
 std::string Slap::GetWeaponWinString(const char *TeamName, uint items_count) const
 {

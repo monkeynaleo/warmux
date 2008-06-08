@@ -29,8 +29,6 @@ class SlapConfig;
 
 class Slap : public Weapon
 {
-//  private:
-//    SoundSample slap_sound;
   protected:
     bool p_Shoot();
     void Refresh();
@@ -43,6 +41,3 @@ class Slap : public Weapon
 };
 
 #endif /* SLAP_H */
-/*  protected:
-    void Draw() { Weapon::Draw(); };
-*/
