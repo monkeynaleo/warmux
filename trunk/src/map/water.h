@@ -61,5 +61,6 @@ public:
   int GetHeight(int x) const;
 
   void Splash(const Point2i& pos) const;
+  void Smoke(const Point2i& pos) const;
 };
 #endif

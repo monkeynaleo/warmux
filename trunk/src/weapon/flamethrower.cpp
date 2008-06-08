@@ -68,6 +68,7 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
   WeaponBullet("flamethrower_bullet", cfg, p_launcher), particle(40)
 {
   explode_colliding_character = true;
+  m_is_fire = true;
   can_drown = false;
 }
 
@@ -102,7 +103,6 @@ void FlameThrowerBullet::SignalGroundCollision(const Point2d& speed_before)
 
 void FlameThrowerBullet::SignalDrowning()
 {
-  particle.AddNow(GetPosition(), 2, particle_SMOKE, true, 0, 1);
   launcher->IncMissedShots();
   Ghost();
 }

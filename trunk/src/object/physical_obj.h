@@ -64,6 +64,7 @@ protected:
   uint m_minimum_overlapse_time;
   bool m_ignore_movements;
   bool m_is_character;
+  bool m_is_fire;
 
   virtual void CheckOverlapping();
 
@@ -193,6 +194,7 @@ public:
   bool IsGhost() const { return (m_alive == GHOST); };
   bool IsDrowned() const { return (m_alive == DROWNED); };
   bool IsDead() const { return (IsGhost() || IsDrowned() || (m_alive == DEAD)); };
+  bool IsFire() const { return m_is_fire; }
 
   // Are the two object in contact ? (uses test rectangles)
   bool Overlapse(const PhysicalObj &b) const { return GetTestRect().Intersect( b.GetTestRect() ); };

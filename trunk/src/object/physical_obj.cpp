@@ -66,6 +66,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_minimum_overlapse_time(0),
   m_ignore_movements(false),
   m_is_character(false),
+  m_is_fire(false),
   m_name(name),
   m_test_left(0),
   m_test_right(0),
@@ -556,8 +557,11 @@ void PhysicalObj::Drown()
   if (EqualsZero(GetGravityFactor()))
     SetGravityFactor(0.1);
 
+  // If fire, do smoke...
+  if (m_is_fire)
+    world.water.Smoke(GetPosition());
   // make a splash in the water :-)
-  if (GetMass() >= 2)
+  else if (GetMass() >= 2)
     world.water.Splash(GetPosition());
 
   StopMoving();
