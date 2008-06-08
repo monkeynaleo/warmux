@@ -230,6 +230,8 @@ void DistantComputer::ManageTeam(Action* team)
   {
     std::list<std::string>::iterator it;
     it = find(owned_teams.begin(), owned_teams.end(), name);
+    printf("size of owned teams: %d\n", owned_teams.size());
+
     NET_ASSERT(it != owned_teams.end())
     {
       force_disconnect = true;

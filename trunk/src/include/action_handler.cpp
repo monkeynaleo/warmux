@@ -139,6 +139,7 @@ void Action_Network_Check_Phase1 (Action */*a*/)
 
   Action b(Action::ACTION_NETWORK_CHECK_PHASE2);
   b.Push(ActiveMap()->GetRawName());
+  b.Push(int(ActiveMap()->ReadImgGround().ComputeCRC()));
 
   TeamsList::iterator it = GetTeamsList().playing_list.begin();
   for (; it != GetTeamsList().playing_list.end() ; ++it) {
@@ -157,7 +158,7 @@ static void Error_in_Network_Check_Phase2 (Action *a)
   std::cerr << str << std::endl;
 
   // this client has been checked, it is NOT ok, it will be disconnected
-  a->creator->SetState(DistantComputer::STATE_CHECKED); // If not, it creates a deadlock.
+  a->creator->SetState(DistantComputer::STATE_ERROR); // If not, it creates a deadlock.
 }
 
 void Action_Network_Check_Phase2 (Action *a)
@@ -166,10 +167,19 @@ void Action_Network_Check_Phase2 (Action *a)
   if (Network::GetInstance()->IsClient())
     return;
 
-  // Check the map
+  // Check the map name
   std::string map = a->PopString();
   if (map != ActiveMap()->GetRawName()) {
     std::cerr << map << " != " << ActiveMap()->GetRawName() << std::endl;
+    Error_in_Network_Check_Phase2(a);
+    return;
+  }
+
+  // Check the map CRC
+  int crc = int(ActiveMap()->ReadImgGround().ComputeCRC());
+  int remote_crc = a->PopInt();
+  if (crc != remote_crc) {
+    std::cerr << map << " is different (crc=" << crc << ", remote crc="<< remote_crc << ")" << std::endl;
     Error_in_Network_Check_Phase2(a);
     return;
   }

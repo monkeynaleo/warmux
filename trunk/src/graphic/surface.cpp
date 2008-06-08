@@ -863,3 +863,41 @@ SDL_Rect Surface::GetSDLRect(const Point2i &pt) const
 
   return sdlRect;
 }
+
+Uint32 Surface::ComputeCRC()
+{
+  Uint32 crc = 0;
+  Uint32 current_pix;
+  SDL_PixelFormat * current_fmt = surface->format;
+  Uint8 r, g, b, a;
+
+  Point2i offset;
+  int current_offset;
+
+  Lock();
+  // for each pixel of the image
+  for (offset.x = 0; offset.x < GetWidth(); offset.x++) {
+    for (offset.y = 0; offset.y < GetHeight(); offset.y++) {
+
+      current_offset = offset.y * surface->w + offset.x;
+
+      // Retrieving a pixel of sprite to merge
+      current_pix = ((Uint32*)surface->pixels)[current_offset];
+
+      // Retreiving each chanel of the pixel using pixel format
+      r = (Uint8)(((current_pix & current_fmt->Rmask) >> current_fmt->Rshift) << current_fmt->Rloss);
+      g = (Uint8)(((current_pix & current_fmt->Gmask) >> current_fmt->Gshift) << current_fmt->Gloss);
+      b = (Uint8)(((current_pix & current_fmt->Bmask) >> current_fmt->Bshift) << current_fmt->Bloss);
+      a = (Uint8)(((current_pix & current_fmt->Amask) >> current_fmt->Ashift) << current_fmt->Aloss);
+
+      // Computing CRC - each time, we had at most 255*4, the biggest storable value
+      // on a Uint32 is 4294967296
+      // avoid integer overflow with a stupid modulo
+      crc += (r + g + b + a); // each time, we had at most 255*4
+      crc = crc % 429496000;
+    }
+  }
+
+  Unlock();
+  return crc;
+}
