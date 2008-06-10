@@ -313,11 +313,11 @@ msgstr[0] "%s-laget har vunnet %u hagle !"
 msgstr[1] "%s-laget har vunnet %u hagler !"
 
 #: src/weapon/slap.cpp:85
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
-msgstr[0] "%s-laget har vunnet %u entrehake !"
-msgstr[1] "%s-laget har vunnet %u entrehaker !"
+msgstr[0] "%s-laget har vunnet %u slag !"
+msgstr[1] "%s-laget har vunnet %u slag !"
 
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
@@ -378,7 +378,7 @@ msgstr[1] ""
 #: src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
-msgstr ""
+msgstr "%s laget ble meiet ned"
 
 #: src/interface/interface.cpp:165
 msgid "(dead)"
@@ -421,7 +421,7 @@ msgstr "Alle lag"
 
 #: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
-msgstr ""
+msgstr "Og vinneren er..."
 
 #: src/weapon/baseball.cpp:58
 msgid ""
@@ -549,7 +549,7 @@ msgstr "Heder og ære"
 
 #: src/menu/game_mode_editor.cpp:68
 msgid "Damage per turn during death mode"
-msgstr ""
+msgstr "Skade per runde i dødsmodus"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -557,11 +557,11 @@ msgstr "Diskogranat"
 
 #: src/network/admin_commands.cpp:34
 msgid "Displays this message"
-msgstr ""
+msgstr "Viser denne meldingen"
 
 #: src/menu/game_mode_editor.cpp:62
 msgid "Duration before death mode"
-msgstr ""
+msgstr "Tidsrom før dødsmodus"
 
 #: src/menu/game_mode_editor.cpp:50
 msgid "Duration of a turn"
@@ -658,9 +658,8 @@ msgid "Game"
 msgstr "Spill"
 
 #: src/menu/game_mode_editor.cpp:46
-#, fuzzy
 msgid "Game mode"
-msgstr "Spill navn:"
+msgstr "Spill modus:"
 
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
@@ -680,7 +679,7 @@ msgstr "Entrehaker"
 
 #: src/menu/game_mode_editor.cpp:74
 msgid "Gravity"
-msgstr ""
+msgstr "Tyngdekraft"
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -753,7 +752,7 @@ msgstr "Hvordan bruke den : venstreklikk på måleten ammo per runde"
 
 #: src/game/game_classic.cpp:223
 msgid "Hurry up, you are too slow !!"
-msgstr ""
+msgstr "Kjapp deg, du er for treg !!"
 
 #: src/main.cpp:271
 msgid ""
@@ -807,7 +806,7 @@ msgstr "Oppsøk #wormux-fr på  irc.freenode.net for å finne motstandere."
 
 #: src/network/admin_commands.cpp:36
 msgid "Kicks the players designated by <nickname> out of the game"
-msgstr ""
+msgstr "Spillerne som <nickname> har valgt ut er sparket ut av spillet"
 
 #: src/menu/options_menu.cpp:127
 msgid "Language"
@@ -827,7 +826,7 @@ msgstr "Lokale lag :"
 
 #: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
-msgstr "Lav gravitet"
+msgstr "Lav tyngdekraft"
 
 #. #############################
 #. Manual connection
@@ -1045,11 +1044,11 @@ msgstr "Hopp over en runde"
 
 #: src/weapon/slap.cpp:73
 msgid "Slap"
-msgstr ""
+msgstr "Slag"
 
 #: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
-msgstr ""
+msgstr "Slå fienden for å få han til å hoppe litt"
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1146,12 +1145,13 @@ msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
+"Tjener og klientversjonene er ukompatible (klient=%s, tjener=%s)."
+"Vennligst prøv en annen tjener."
 
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
-"Tilkoblingen brukte for lang tid. Sjekk om en brannmur blokkerer for "
-"tilkoblingen !"
+"Tilkoblingen brukte for lang tid. Sjekk om en brannmur blokkerer!"
 
 #: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
@@ -1240,7 +1240,7 @@ msgstr "Kunne ikke bruke denne porten  !"
 
 #: src/network/admin_commands.cpp:57
 msgid "Unknown command"
-msgstr ""
+msgstr "Ukjent kommando"
 
 #: src/network/network.cpp:111
 msgid "Unnamed"
