@@ -9,14 +9,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-05-11 13:50+0300\n"
+"PO-Revision-Date: 2008-06-11 00:28+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
@@ -177,9 +176,9 @@ msgstr[2] ""
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
-msgstr[0] "Echipa %s a câștigat %u nicovală! Storcoșește tot cu ea!"
-msgstr[1] "Echipa %s a câștigat %u nicovale! Storcoșește tot cu ele!"
-msgstr[2] "Echipa %s a câștigat %u de nicovale! Storcoșește tot cu ele!"
+msgstr[0] "Echipa %s a câștigat %u nicovală! Storcește tot cu ea!"
+msgstr[1] "Echipa %s a câștigat %u nicovale! Storcește tot cu ele!"
+msgstr[2] "Echipa %s a câștigat %u de nicovale! Storcește tot cu ele!"
 
 #: src/weapon/auto_bazooka.cpp:329
 #, c-format
@@ -213,8 +212,7 @@ msgstr[2] "Echipa %s a câștigat %u de rachete!"
 
 #: src/weapon/blowtorch.cpp:137
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -222,10 +220,10 @@ msgstr[0] ""
 "Echipa %s a câștigat %u lampă cu carbid! Dacă ai sub 18 ani, cere părinților "
 "voie să o folosești!"
 msgstr[1] ""
-"Echipa %s a câștigat %u lampi cu carbid! Dacă ai sub 18 ani, cere părinților "
+"Echipa %s a câștigat %u lămpi cu carbid! Dacă ai sub 18 ani, cere părinților "
 "voie să le folosești!"
 msgstr[2] ""
-"Echipa %s a câștigat %u de lampi cu carbid! Dacă ai sub 18 ani, cere "
+"Echipa %s a câștigat %u de lămpi cu carbid! Dacă ai sub 18 ani, cere "
 "părinților voie să le folosești!"
 
 #: src/weapon/bounce_ball.cpp:113
@@ -273,12 +271,10 @@ msgstr[2] "Echipa %s a câștigat %u de construcții! Nu-ți uita casca."
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Echipa %s a câștigat %u grenadă disco! Dă din fund când o arunci!"
 msgstr[1] "Echipa %s a câștigat %u grenade disco! Dă din fund când le arunci!"
-msgstr[2] ""
-"Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
+msgstr[2] "Echipa %s a câștigat %u de grenade disco! Dă din fund când le arunci!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
@@ -451,12 +447,12 @@ msgstr[2] "Echipa %s a câștigat %u de puști!"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/slap.cpp:85
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
-msgstr[0] "Echipa %s a câștigat %u ghiară de agățare!"
-msgstr[1] "Echipa %s a câștigat %u ghiare de agățare!"
-msgstr[2] "Echipa %s a câștigat %u de ghiare de agățare!"
+msgstr[0] "Echipa %s a câștigat %u plesneală!"
+msgstr[1] "Echipa %s a câștigat %u plesneli!"
+msgstr[2] "Echipa %s a câștigat %u de plesneli!"
 
 # XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
 # XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
@@ -467,12 +463,9 @@ msgstr[2] "Echipa %s a câștigat %u de ghiare de agățare!"
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural ""
-"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
-msgstr[0] ""
-"Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
-msgstr[1] ""
-"Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgstr[0] "Echipa %s a câștigat %u pușcă cu lunetă! Țintește și trage direct între ochi!"
+msgstr[1] "Echipa %s a câștigat %u puști cu lunetă! Țintește și trage direct între ochi!"
 msgstr[2] ""
 "Echipa %s a câștigat %u de puști cu lunetă! Țintește și trage direct între "
 "ochi!"
@@ -551,8 +544,7 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] ""
-"Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
+msgstr[0] "Echipa %s a câștigat %u lansator de tux! N-ai mai văzut un pinguin zburător?"
 msgstr[1] ""
 "Echipa %s a câștigat %u lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
@@ -561,9 +553,9 @@ msgstr[2] ""
 "zburător?"
 
 #: src/game/game_blitz.cpp:70
-#, fuzzy, c-format
+#, c-format
 msgid "%s team was fragged down."
-msgstr "Echipa %s a câștigat.\n"
+msgstr "Echipa %s a fost nimicită."
 
 #: src/interface/interface.cpp:165
 msgid "(dead)"
@@ -599,7 +591,7 @@ msgstr "Atac aerian"
 
 #: src/weapon/airhammer.cpp:74
 msgid "Airhammer"
-msgstr "Ciocan pnumatic"
+msgstr "Ciocan pneumatic"
 
 #: src/menu/results_menu.cpp:421
 msgid "All teams"
@@ -737,7 +729,7 @@ msgstr "Merite"
 
 #: src/menu/game_mode_editor.cpp:68
 msgid "Damage per turn during death mode"
-msgstr ""
+msgstr "Sănătatea pierdută la fiecare tură în modul mortal"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -745,11 +737,11 @@ msgstr "Grenadă disco"
 
 #: src/network/admin_commands.cpp:34
 msgid "Displays this message"
-msgstr ""
+msgstr "Afișează acest mesaj"
 
 #: src/menu/game_mode_editor.cpp:62
 msgid "Duration before death mode"
-msgstr ""
+msgstr "Durata până la modul mortal"
 
 #: src/menu/game_mode_editor.cpp:50
 msgid "Duration of a turn"
@@ -768,9 +760,8 @@ msgid "Effects volume"
 msgstr "Volumul efectelor"
 
 #: src/menu/results_menu.cpp:324
-#, fuzzy
 msgid "Energy"
-msgstr "Energie:"
+msgstr "Energie"
 
 #: src/tool/error.cpp:82
 #, c-format
@@ -783,8 +774,7 @@ msgstr "Eroare la încărcarea echipei:"
 
 #: src/game/config.cpp:490
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
@@ -825,7 +815,7 @@ msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
 msgstr ""
-"Eroare: Serverul nu este aceesibil din internet. Verificați configurația "
+"Eroare: Serverul nu este accesibil din internet. Verificați configurația "
 "firewall-ului"
 
 #: src/team/team.cpp:117
@@ -850,9 +840,8 @@ msgid "Game"
 msgstr "Joc"
 
 #: src/menu/game_mode_editor.cpp:46
-#, fuzzy
 msgid "Game mode"
-msgstr "Numele jocului:"
+msgstr "Modul jocului"
 
 #: src/menu/network_connection_menu.cpp:117
 msgid "Game name:"
@@ -872,7 +861,7 @@ msgstr "Ghiară de agățare"
 
 #: src/menu/game_mode_editor.cpp:74
 msgid "Gravity"
-msgstr ""
+msgstr "Gravitație"
 
 #: src/weapon/grenade.cpp:76
 msgid "Grenade"
@@ -1011,7 +1000,7 @@ msgstr ""
 
 #: src/network/admin_commands.cpp:36
 msgid "Kicks the players designated by <nickname> out of the game"
-msgstr ""
+msgstr "Aruncă afară din joc jucătorii indicați de <nickname>"
 
 #: src/menu/options_menu.cpp:127
 msgid "Language"
@@ -1251,11 +1240,11 @@ msgstr "Sare rândul"
 
 #: src/weapon/slap.cpp:73
 msgid "Slap"
-msgstr ""
+msgstr "Plesneală"
 
 #: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
-msgstr ""
+msgstr "Plesnește inamicul să sară un pic."
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1324,11 +1313,11 @@ msgstr "Teleportare"
 
 #: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr "Bomba cu schije a parăsit câmpul de luptă înainte de a exploda."
+msgstr "Bomba cu schije a părăsit câmpul de luptă înainte de a exploda."
 
 #: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
-msgstr "Bomba-minge a parăsit câmpul de luptă înainte de a exploda."
+msgstr "Bomba-minge a părăsit câmpul de luptă înainte de a exploda."
 
 #: src/weapon/gnu.cpp:143
 msgid "The Gnu left the battlefield before exploding"
@@ -1400,9 +1389,8 @@ msgstr[2] "Există doar %i de echipe."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:322
-#, fuzzy
 msgid "Time"
-msgstr "Rulează jocul"
+msgstr "Timp"
 
 #: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
@@ -1411,7 +1399,7 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Temporizare: rotița mausului sau paginăsus/paginăjos\n"
+"Temporizare: rotița mausului sau pagină-sus/pagină-jos\n"
 "Unghiul : sus/jos\n"
 "Foc : țineți tasta spațiu apăsată până la puterea dorită\n"
 "un proiectil per rundă"
@@ -1423,7 +1411,7 @@ msgid ""
 "Fire : space key\n"
 "an ammo per turn"
 msgstr ""
-"Temporizare: rotița mausului sau paginăsus/paginăjos\n"
+"Temporizare: rotița mausului sau pagină-sus/pagină-jos\n"
 "Unghiul : sus/jos\n"
 "Foc : țineți tasta spațiu\n"
 "un proiectil per rundă"
@@ -1452,7 +1440,7 @@ msgstr "Nu a fost posibilă folosirea acestui port!"
 
 #: src/network/admin_commands.cpp:57
 msgid "Unknown command"
-msgstr ""
+msgstr "Comandă necunoscută"
 
 #: src/network/network.cpp:111
 msgid "Unnamed"
@@ -1487,7 +1475,7 @@ msgstr "Arme"
 
 #: src/main.cpp:288
 msgid "Website: "
-msgstr "Situl web: "
+msgstr "Saitul web: "
 
 #: src/game/game.cpp:688
 #, c-format
@@ -2549,3 +2537,4 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
+
