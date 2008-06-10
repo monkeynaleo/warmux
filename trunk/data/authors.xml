@@ -229,7 +229,7 @@
       <author>
 	<nickname>eddyp</nickname>
 	<name>Eddy PETRIȘOR </name>
-	<description>Translated Wormux in Romanian</description>
+	<description>Translated Wormux in Romanian; added chat logging; Debian packaging</description>
 	<email>eddy.petrisor_AT_gmail_DOT_com</email>
 	<country>Romania</country>
       </author>
