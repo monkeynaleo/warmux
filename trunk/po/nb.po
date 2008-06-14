@@ -1145,13 +1145,12 @@ msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
-"Tjener og klientversjonene er ukompatible (klient=%s, tjener=%s)."
-"Vennligst prøv en annen tjener."
+"Tjener og klientversjonene er ukompatible (klient=%s, tjener=%s).Vennligst "
+"prøv en annen tjener."
 
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
-msgstr ""
-"Tilkoblingen brukte for lang tid. Sjekk om en brannmur blokkerer!"
+msgstr "Tilkoblingen brukte for lang tid. Sjekk om en brannmur blokkerer!"
 
 #: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
