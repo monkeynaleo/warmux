@@ -39,15 +39,15 @@ else
 fi
 
 # Set the good release of CMakeLists
-if [ -e CMakeLists.mac.txt ]
-then
-    cd ${ROOT}
-    mv ${ROOT}CMakeLists.txt ${ROOT}tmp.$$
-    cp ${MAC}CMakeLists.mac.txt ${ROOT}CMakeLists.txt
-else
-    echo "*** ${MAC}CMakeLists.mac.txt Not Found ***"
-    exit
-fi
+#if [ -e CMakeLists.mac.txt ]
+#then
+#    cd ${ROOT}
+#    mv ${ROOT}CMakeLists.txt ${ROOT}tmp.$$
+#    cp ${MAC}CMakeLists.mac.txt ${ROOT}CMakeLists.txt
+#else
+#    echo "*** ${MAC}CMakeLists.mac.txt Not Found ***"
+#    exit
+#fi
 
 
 #
@@ -58,7 +58,7 @@ TMP=${MAC}tmpbuild/
 if [ -e ${TMP} ]
 then
     echo "*****************"
-    echo "  Clean tmpbuild"
+    echo "Clean tmpbuild"
 #    rm -rf ${TMP}*
     echo "*****************"
 else
@@ -207,10 +207,10 @@ then
 fi
 
 # Remove and reset default CMakeLists.txt
-if [ -e ${ROOT}tmp.$$ ]
-then
-    mv ${ROOT}tmp.$$ ${ROOT}CMakeLists.txt
-fi
+#if [ -e ${ROOT}tmp.$$ ]
+#then
+#    mv ${ROOT}tmp.$$ ${ROOT}CMakeLists.txt
+#fi
 
 # Remove tmp files
 #rm -rf ${MAC}tmpbuild
