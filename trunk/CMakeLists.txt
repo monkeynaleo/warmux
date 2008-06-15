@@ -28,21 +28,30 @@ ENDIF(PREFIX)
 SET(WORMUX_CFLAGS "-Wall")	# additional compile flags for wormux
 SET(WORMUX_LDFLAGS "")		# additional linking flags for wormux
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-IF(UNIX AND NOT WIN32)
+IF(UNIX AND NOT WIN32 AND NOT APPLE)
   SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/wormux/)
   SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale/)
   SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
   SET(DATA_DESTINATION "share/wormux")
   SET(PO_DESTINATION "share/locale")
   SET(BIN_DESTINATION "bin")
-ELSE(UNIX AND NOT WIN32)
+ELSE(UNIX AND NOT WIN32 AND NOT APPLE)
   SET(INSTALL_DATADIR data/)
   SET(INSTALL_LOCALEDIR locale/)
   SET(FONT_FILE data/font/DejaVuSans.ttf)
   SET(DATA_DESTINATION "data")
   SET(PO_DESTINATION "locale")
   SET(BIN_DESTINATION ${CMAKE_BINARY_DIR})
-ENDIF(UNIX AND NOT WIN32)
+ENDIF(UNIX AND NOT WIN32 AND NOT APPLE)
+#add apple case
+IF(APPLE)
+  SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/wormux/)
+  SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale/)
+  SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
+  SET(DATA_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/Resources/data/)
+  SET(PO_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/Resources/locale/)
+  SET(BIN_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/MacOS/)
+ENDIF(APPLE)
 
 
 # Optional package CPack
@@ -68,7 +77,7 @@ FIND_PACKAGE(CURL REQUIRED)
 IF(APPLE)
   # to ease packaging, we'll use a static libintl
   # we also need to link against the SDL_main library (required by the mac version of SDL)
-  SET(WORMUX_LDFLAGS "${PROJECT_SOURCE_DIR}/libintl.a -liconv -framework Carbon -L${PROJECT_SOURCE_DIR} -lSDLmain_UB ${WORMUX_LDFLAGS}")
+  SET(WORMUX_LDFLAGS "-L${PROJECT_SOURCE_DIR} -lintl -liconv -framework Carbon -lSDLmain_UB ${WORMUX_LDFLAGS}")
   # to ease packaging, we'll use a framework version of libpng
   # (with a different name so there is no confusion with the UNIX version of libpng)
   SET(WORMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WORMUX_LDFLAGS}")
@@ -88,6 +97,7 @@ ADD_DEFINITIONS(-DINSTALL_DATADIR=\\"${INSTALL_DATADIR}\\")
 ADD_DEFINITIONS(-DINSTALL_LOCALEDIR=\\"${INSTALL_LOCALEDIR}\\")
 ADD_DEFINITIONS(-DFONT_FILE=\\"${FONT_FILE}\\")
 ADD_DEFINITIONS(-DPACKAGE_VERSION=\\"${VERSION}\\")
+
 IF(NOT WIN32)
   INCLUDE(CheckCXXCompilerFlag)
   CHECK_CXX_COMPILER_FLAG("-Wextra" COMPILER_SUPPORTS_WEXTRA)
@@ -122,7 +132,7 @@ INSTALL(DIRECTORY data/ DESTINATION ${DATA_DESTINATION}
 )
 
 # Install desktop file and icon
-IF(UNIX)
+IF(UNIX AND NOT APPLE)
   INSTALL(FILES data/wormux.desktop DESTINATION share/applications)
   INSTALL(FILES data/wormux_128x128.png DESTINATION share/pixmaps)
-ENDIF(UNIX)
+ENDIF(UNIX AND NOT APPLE)

@@ -38,17 +38,6 @@ else
     exit
 fi
 
-# Set the good release of CMakeLists
-#if [ -e CMakeLists.mac.txt ]
-#then
-#    cd ${ROOT}
-#    mv ${ROOT}CMakeLists.txt ${ROOT}tmp.$$
-#    cp ${MAC}CMakeLists.mac.txt ${ROOT}CMakeLists.txt
-#else
-#    echo "*** ${MAC}CMakeLists.mac.txt Not Found ***"
-#    exit
-#fi
-
 
 #
 # Clean temps files, and create Folders
@@ -59,7 +48,7 @@ if [ -e ${TMP} ]
 then
     echo "*****************"
     echo "Clean tmpbuild"
-#    rm -rf ${TMP}*
+    rm -rf ${TMP}*
     echo "*****************"
 else
     mkdir ${TMP}
@@ -69,7 +58,7 @@ APP=${MAC}Wormux.app/
 if [ -e ${APP} ]
 then
     echo "******************"
-    echo "Clean Package .app"
+    echo "Clean package .app"
     rm -rf ${APP}/*
     echo "******************"
 fi
@@ -86,7 +75,7 @@ ARCHIVE=${MAC}Wormux-0.8svn.tar.bz2
 if [ -e ${ARCHIVE} ]
 then
     echo "******************"
-    echo "Remove old Archive" 
+    echo "Remove old archive" 
     rm -f ${ARCHIVE}
     echo "******************"
 fi
@@ -98,46 +87,19 @@ export CMAKE_INSTALL_PREFIX=./wormux-files
 #
 
 cd ${TMP}
-#awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
-#cp ${ROOT}CMakeLists.txt tmp.$$.$$.2
-#mv tmp.$$.$$ ${ROOT}CMakeLists.txt
+awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
+cp ${ROOT}CMakeLists.txt tmp.$$.$$.2
+mv tmp.$$.$$ ${ROOT}CMakeLists.txt
 cmake ../..
-#mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
+mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
 
 make
 make install
 
+
 #
 # Generate .app File
 #
-
-#echo "Copy data into .app file"
-
-# Copy data files into .app
-#echo "Copy /data"
-#cp -R ${TMPDATA}wdata/* ${RES}data/
-#INSTALL=/usr/local/share/
-#cp -R ${INSTALL}wormux/* ${RES}data
-
-# Copy locale files into .app
-#echo "Error : wormux in english, so i think it's not working... search where is it"
-#cp -R ${INSTALL}locale ${RES}locale
-
-
-# Install the locale files
-#echo "Copying locale files to           ${RES}/locale"
-#make -w -C ${ROOT}/po -e all-local-yes DESTDIR=${RES}
-#make -w -C ${ROOT}/po -e install-data-local-yes localedir=${RES}/locale
-
-TMPLOCALE=;
-#for TMPLOCALE in /usr/share/locale/??;
-#do [[ -e $lang/LC_MESSAGES/wormux.mo ]] || continue;
-#    mkdir -p $target/$lang/LC_MESSAGES;
-#    cp $lang/LC_MESSAGES/wormux.mo $target/$lang/LC_MESSAGES/wormux.mo;
-#    mkdir -p ${RES}locale/$lang/LC_MESSAGES/wormux.mo
-#    cp $lang/LC_MESSAGES/wormux.mo ${RES}locale/$lang/LC_MESSAGES/wormux.mo
-#done 
-
 
 # Add icon and info.plist and PkgInfo
 cp ${MAC}Info.plist.in ${APP}Contents/info.plist
@@ -147,16 +109,11 @@ cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 # Do a simple test for check if data is well copied
 if [ -e ${RES}/data/wormux_default_config.xml ]
 then
-    echo "Default_config OK"
+    echo "Default_config ok"
 else
     echo "*** ERROR : No Default_config ! : Probably no datas copied ***"
     exit 
 fi
-
-
-#echo "Add bin"
-#cp ${TMP}src/wormux ${APP}Contents/MacOS/wormux
-#cp ${TMPDATA}bin/wormux ${APP}Contents/MacOs/wormux
 
 
 #
@@ -185,9 +142,12 @@ fi
 # TODO THERE MAKE .DMG
 #
 
-    echo "Make archive ${ARCHIVE}"
-    #tar cfj ${ARCHIVE} ${APP}
-    #echo "Archive ${ARCHIVE} done"
+#
+# Create Archive
+#
+echo "Make archive ${ARCHIVE}"
+tar cfj ${ARCHIVE} ${APP}
+echo "Archive ${ARCHIVE} done"
     
 
 #
@@ -206,14 +166,8 @@ then
     rm ${ROOT}libintl.a
 fi
 
-# Remove and reset default CMakeLists.txt
-#if [ -e ${ROOT}tmp.$$ ]
-#then
-#    mv ${ROOT}tmp.$$ ${ROOT}CMakeLists.txt
-#fi
-
 # Remove tmp files
-#rm -rf ${MAC}tmpbuild
+rm -rf ${MAC}tmpbuild
 
 echo "Build done"
 
