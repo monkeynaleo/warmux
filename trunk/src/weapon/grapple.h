@@ -51,6 +51,8 @@ class Grapple : public Weapon
     Sprite* m_hook_sprite;
     Sprite* m_node_sprite;
 
+    SoundSample cable_sound;
+
   protected:
     void Refresh();
     void p_Deselect() { DetachRope(); };
@@ -60,6 +62,8 @@ class Grapple : public Weapon
     void GoDown();
     void GoLeft();
     void GoRight();
+    void StopUp();
+    void StopDown();
     void StopLeft();
     void StopRight();
 

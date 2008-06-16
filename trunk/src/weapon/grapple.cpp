@@ -58,7 +58,7 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
 
   posd.x += ((double)skip) * x_step;
   posd.y += ((double)skip) * y_step;
-  
+
   from.x = (int)round(posd.x) ;
   from.y = (int)round(posd.y) ;
 
@@ -81,7 +81,7 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
         if ( contact_point_uncertain && !world.IsInVacuum( contact_point ) )
         {
            // it's not, so try our best to return a contact point in vacuum
-           // try searching in area NxN around our original point and return 
+           // try searching in area NxN around our original point and return
            // the closest pixel in vacuum
 
            // FIXME: can be optimized!
@@ -275,7 +275,7 @@ bool Grapple::TryAddNode(int CurrentSense)
            (fabs(last_broken_node_angle - rope_angle) < 0.1))
         return false ;
 
-      // if contact point is the same as position of the last node 
+      // if contact point is the same as position of the last node
       // (can happen because of jitter applied in find_first_contact_point),
       // give up adding such node
       if ( rope_nodes.size() > 0 && rope_nodes.back().pos == contact_point )
@@ -537,6 +537,8 @@ void Grapple::DetachRope()
   ActiveCharacter().UnsetPhysFixationPoint() ;
   rope_nodes.clear();
   m_is_active = false;
+
+  cable_sound.Stop();
 }
 
 void Grapple::AttachNode(const Point2i& contact_point,
@@ -612,6 +614,11 @@ void Grapple::GoUp()
   delta_len = 0 ;
 }
 
+void Grapple::StopUp()
+{
+  cable_sound.Stop();
+}
+
 void Grapple::GoDown()
 {
   if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
@@ -627,8 +634,16 @@ void Grapple::GoDown()
   delta_len = 0 ;
 }
 
+void Grapple::StopDown()
+{
+  cable_sound.Stop();
+}
+
 void Grapple::GoRight()
 {
+  if (!go_right) {
+    cable_sound.Play("share", "weapon/grapple_cable");
+  }
   go_right = true ;
   ActiveCharacter().SetExternForce(cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_RIGHT);
@@ -647,6 +662,9 @@ void Grapple::StopRight()
 
 void Grapple::GoLeft()
 {
+  if (!go_left) {
+    cable_sound.Play("share", "weapon/grapple_cable");
+  }
   go_left = true ;
   ActiveCharacter().SetExternForce(-cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_LEFT);
@@ -667,8 +685,10 @@ void Grapple::StopLeft()
 
 void Grapple::HandleKeyPressed_Up(bool shift)
 {
-  if (IsInUse())
+  if (IsInUse())  {
+    cable_sound.Play("share", "weapon/grapple_cable", -1);
     GoUp();
+  }
   else
     ActiveCharacter().HandleKeyPressed_Up(shift);
 }
@@ -683,15 +703,18 @@ void Grapple::HandleKeyRefreshed_Up(bool shift)
 
 void Grapple::HandleKeyReleased_Up(bool shift)
 {
-  if (!IsInUse())
+  if (IsInUse())
+    StopUp();
+  else
     ActiveCharacter().HandleKeyReleased_Up(shift);
 }
 
 void Grapple::HandleKeyPressed_Down(bool shift)
 {
-  if (IsInUse())
+  if (IsInUse()) {
+    cable_sound.Play("share", "weapon/grapple_cable", -1);
     GoDown();
-  else
+  } else
     ActiveCharacter().HandleKeyPressed_Down(shift);
 }
 
@@ -705,7 +728,9 @@ void Grapple::HandleKeyRefreshed_Down(bool shift)
 
 void Grapple::HandleKeyReleased_Down(bool shift)
 {
-  if (!IsInUse())
+  if (IsInUse())
+    StopDown();
+  else
     ActiveCharacter().HandleKeyReleased_Down(shift);
 }
 

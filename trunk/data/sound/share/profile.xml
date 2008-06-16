@@ -40,7 +40,7 @@
   <sound sample="weapon/flamethrower" file="weapon/flame.ogg" />
   <sound sample="weapon/gnu_bounce" file="weapon/gnu_bounce.ogg" />
   <sound sample="weapon/grapple_attaching" file="weapon/grapple_attaching.ogg" />
-  <sound sample="weapon/grapple_balancing" file="weapon/grapple_balancing.ogg" />
+  <sound sample="weapon/grapple_cable" file="weapon/grapple_cable.ogg" />
   <sound sample="weapon/grapple_detaching" file="weapon/grapple_detaching.ogg" />
   <sound sample="weapon/grenade_bounce"  file="weapon/grenade_bounce.ogg" />
   <sound sample="weapon/footbomb_bounce"  file="weapon/footbomb_bounce.ogg" />
