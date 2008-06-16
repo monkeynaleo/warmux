@@ -34,7 +34,8 @@ class SoundSample
  public:
   SoundSample();
 
-  void Play(const std::string& category,
+  // return false if sound can't be played because it is already playing
+  bool Play(const std::string& category,
             const std::string& sample,
             const int loop = 1);
   void Stop();

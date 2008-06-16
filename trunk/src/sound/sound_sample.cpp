@@ -27,11 +27,15 @@
 SoundSample::SoundSample() : channel(-1)
 {}
 
-void SoundSample::Play(const std::string& category,
+bool SoundSample::Play(const std::string& category,
                        const std::string& sample,
                        const int loop)
 {
-  channel = JukeBox::GetInstance()->Play(category, sample, loop);
+  if (!IsPlaying()) {
+    channel = JukeBox::GetInstance()->Play(category, sample, loop);
+    return true;
+  }
+  return false;
 }
 
 void SoundSample::Stop()
