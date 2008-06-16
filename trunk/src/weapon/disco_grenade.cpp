@@ -64,12 +64,12 @@ DiscoGrenade::DiscoGrenade(ExplosiveWeaponConfig& cfg,
 }
 
 void DiscoGrenade::Shoot(double strength)
-{   
+{
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield
   // during WeaponProjectile::Shoot (#bug 10241)
   disco_sound.Play("share","weapon/disco_grenade_music", -1);
-  
+
   WeaponProjectile::Shoot(strength);
 }
 
@@ -89,7 +89,7 @@ void DiscoGrenade::Explosion()
                                 1,particle_MAGIC_STAR,false,angle,2.5);
   }
   disco_sound.Stop();
-  
+
   WeaponProjectile::Explosion();
 }
 
@@ -116,7 +116,7 @@ void DiscoGrenade::Refresh()
   double tmp = Time::GetInstance()->Read() - begin_time;
   // Ah ! Ah ! Ah ! Staying Alive, staying alive ...
   if (GetTotalTimeout() >= 2 && tmp > (1000 * GetTotalTimeout() - 2000) && !have_played_music) {
-    JukeBox::GetInstance()->Play("share","weapon/alleluia") ;
+    //JukeBox::GetInstance()->Play("share","weapon/alleluia") ;
     have_played_music = true;
   }
   image->SetRotation_rad(GetSpeedAngle());
@@ -125,7 +125,7 @@ void DiscoGrenade::Refresh()
 void DiscoGrenade::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The disco grenade has left the dance floor before exploding"));
-  WeaponProjectile::SignalOutOfMap();  
+  WeaponProjectile::SignalOutOfMap();
 
   disco_sound.Stop();
 }
