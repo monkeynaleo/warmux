@@ -51,6 +51,7 @@ private:
   Surface bottom;
   Surface wpattern;
   Water_type water_type;
+  std::string water_name;
 
 public:
   void Init();
@@ -60,6 +61,7 @@ public:
   void Draw();
   bool IsActive() const { return water_type != NO_WATER; }
   int GetHeight(int x) const;
+  static Water_type GetWaterType(std::string & water);
 
   void Splash(const Point2i& pos) const;
   void Smoke(const Point2i& pos) const;

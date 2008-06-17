@@ -52,6 +52,7 @@ InfoMap::InfoMap(const std::string &map_name,
   random_generated(false),
   island_type(RANDOM_GENERATED),
   water_type(Water::NO_WATER),
+  water_name(),
   res_profile(NULL)
 {
   wind.nb_sprite = 0;
@@ -124,19 +125,8 @@ bool InfoMap::ProcessXmlData(xmlNode *xml)
   XmlReader::ReadBool(xml, "is_open", is_opened);
 
   // reading water type
-  water_type = Water::NO_WATER;
-  uint wtype;
-/*
-    NO_WATER = 0
-    WATER = 1
-    LAVA = 2
-    RADIOACTIVE = 3
-    MAX_WATER_TYPE = 4
-*/
-
-  XmlReader::ReadUint(xml, "water", wtype);
-  if (wtype < uint(Water::MAX_WATER_TYPE))
-    water_type = Water::Water_type(wtype);
+  XmlReader::ReadString(xml, "water", water_name);
+  water_type = (Water::Water_type)Water::GetWaterType(water_name);
 
   // Load padding value
   bool add_pad = false;
