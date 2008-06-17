@@ -36,6 +36,7 @@ public:
     NO_WATER,
     WATER,
     LAVA,
+    RADIOACTIVE,
     MAX_WATER_TYPE
   } Water_type;
 

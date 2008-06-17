@@ -62,6 +62,9 @@ void Water::Init()
   case LAVA:
     image += "lava";
     break;
+  case RADIOACTIVE:
+    image += "radioactive";
+    break;
   default:
     ASSERT(false);
     break;

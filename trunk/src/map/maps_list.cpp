@@ -126,6 +126,14 @@ bool InfoMap::ProcessXmlData(xmlNode *xml)
   // reading water type
   water_type = Water::NO_WATER;
   uint wtype;
+/*
+    NO_WATER = 0
+    WATER = 1
+    LAVA = 2
+    RADIOACTIVE = 3
+    MAX_WATER_TYPE = 4
+*/
+
   XmlReader::ReadUint(xml, "water", wtype);
   if (wtype < uint(Water::MAX_WATER_TYPE))
     water_type = Water::Water_type(wtype);
