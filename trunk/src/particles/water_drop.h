@@ -41,4 +41,10 @@ public:
   LavaParticle();
 };
 
+class RadioactiveParticle : public WaterParticle
+{
+public:
+  RadioactiveParticle();
+};
+
 #endif /* WATER_DROP_H */

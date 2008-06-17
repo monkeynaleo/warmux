@@ -54,7 +54,11 @@
     <image file="gfx/water/lava_drop.png" />
   </sprite>
 
-<!-- Air attack ressources -->
+  <sprite name="radioactive_drop">
+    <image file="gfx/water/radioactive_drop.png" />
+  </sprite>
+
+  <!-- Air attack ressources -->
 
   <surface name="air_attack_ico" file="weapon/air_attack/air_attack_ico.png" />
   <surface name="air_attack" file="weapon/air_attack/air_attack.png" />

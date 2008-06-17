@@ -84,3 +84,10 @@ LavaParticle::LavaParticle()
   delete image;
   image = ParticleEngine::GetSprite(LAVA_spr);
 }
+
+RadioactiveParticle::RadioactiveParticle()
+{
+  // delete std water image
+  delete image;
+  image = ParticleEngine::GetSprite(LAVA_spr);
+}

@@ -162,6 +162,7 @@ void ParticleEngine::Load()
   particle_sprite[POLECAT_FART_spr] = resource_manager.LoadSprite(res,"polecat_fart");
   particle_sprite[WATER_spr] = resource_manager.LoadSprite(res,"water_drop");
   particle_sprite[LAVA_spr] = resource_manager.LoadSprite(res,"lava_drop");
+  particle_sprite[RADIOACTIVE_spr] = resource_manager.LoadSprite(res,"radioactive_drop");
   resource_manager.UnLoadXMLProfile(res);
 
   sprites_loaded = true;
@@ -222,6 +223,8 @@ void ParticleEngine::AddNow(const Point2i &position,
     case particle_WATER : particle = new WaterParticle();
       break;
     case particle_LAVA: particle = new LavaParticle();
+      break;
+    case particle_RADIOACTIVE: particle = new RadioactiveParticle();
       break;
     default : particle = NULL;
       ASSERT(0);
