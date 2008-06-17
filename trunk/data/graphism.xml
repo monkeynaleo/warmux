@@ -236,6 +236,9 @@
   <surface name="lava" file="gfx/water/lava.png" />
   <surface name="lava_bottom" file="gfx/water/lava_bottom.png" />
 
+  <surface name="radioactive" file="gfx/water/radioactive.png" />
+  <surface name="radioactive_bottom" file="gfx/water/radioactive_bottom.png" />
+
 </section>
 
 </resources>
