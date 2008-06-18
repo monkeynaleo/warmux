@@ -128,7 +128,7 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
     std::string str = Format(_("The client and server versions are incompatible "
 			       "(local=%s, server=%s). Please try another server."),
 			     Constants::WORMUX_VERSION.c_str(), version.c_str());
-    AppWormux::GetInstance()->DisplayError(str);
+    AppWormux::DisplayError(str);
     goto error;
   }
 

@@ -177,7 +177,7 @@ static std::string NetErrorId_2_String(enum net_error error)
 void Action_Network_Disconnect_On_Error(Action *a)
 {
   enum net_error error = (enum net_error)a->PopInt();
-  AppWormux::GetInstance()->DisplayError(NetErrorId_2_String(error));
+  AppWormux::DisplayError(NetErrorId_2_String(error));
   Network::Disconnect();
 }
 
@@ -196,7 +196,7 @@ static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
 			   NetErrorId_2_String(error).c_str());
   std::cerr << str << std::endl;
   DisconnectOnError(error);
-  AppWormux::GetInstance()->DisplayError(str);
+  AppWormux::DisplayError(str);
 }
 
 void Action_Network_Check_Phase2 (Action *a)
