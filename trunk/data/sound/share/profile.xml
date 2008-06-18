@@ -8,6 +8,7 @@
   <sound sample="change_weapon" file="menu/weapon_menu_toggled.ogg" />
   <sound sample="character/change_in_same_team" file="character_change.ogg" />
 
+  <sound sample="countdown-end_turn" file="countdown-endturn.ogg" />
   <sound sample="end_turn" file="end_turn.ogg" />
   <sound sample="start_turn" file="start_turn.ogg" />
 
@@ -20,7 +21,6 @@
 
   <sound sample="music/grenouilles" file="frog_music.ogg" />
   <sound sample="sink" file="../default/sink.ogg" />
-  <sound sample="time/bip" file="time_bip.ogg" />
 
   <sound sample="victory" file="victory.ogg" />
 
