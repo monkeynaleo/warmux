@@ -56,7 +56,7 @@ ChatLogger::ChatLogger() :
   std::string fn = logdir + logfile ;
 
   m_logfilename.open(fn.c_str(), std::ios::out | std::ios::app);
-  if(!m_logfilename)
+  if(m_logfilename.fail())
     Error(Format(_("Couldn't open file %s"), fn.c_str()));
   else
     this->LogMessage(timestamp);
@@ -73,7 +73,7 @@ void ChatLogger::LogMessage(const std::string &msg)
   struct tm lt, *plt;
   std::string timestamp;
 
-  if (!m_logfilename)
+  if (m_logfilename.fail())
     return;
 
   if ( ((time_t) -1) == time(&t) )
