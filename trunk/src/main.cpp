@@ -178,6 +178,7 @@ int AppWormux::Main(void)
     cerr << endl
       << "C++ exception caught:" << endl
       << e.what() << endl << endl;
+    AppWormux::DisplayError(e.what());
     WakeUpDebugger();
   }
   catch(...)
@@ -239,10 +240,15 @@ void AppWormux::RefreshDisplay()
 
 void AppWormux::DisplayError(const std::string &msg)
 {
+  if (singleton == NULL) {
+    std::cerr << msg << std::endl;
+    return;
+  }
+
   if (Game::GetInstance()->IsGameLaunched()) {
     // nothing to do
-  } else if (menu) {
-      menu->DisplayError(msg);
+  } else if (singleton->menu) {
+      singleton->menu->DisplayError(msg);
   }
 }
 

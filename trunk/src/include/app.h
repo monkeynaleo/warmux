@@ -47,7 +47,7 @@ private:
 public:
   void SetCurrentMenu(Menu *menu);
   void RefreshDisplay();
-  void DisplayError(const std::string &msg);
+  static void DisplayError(const std::string &msg);
   void ReceiveMsgCallback(const std::string& msg);
   static AppWormux * GetInstance();
   ~AppWormux();
