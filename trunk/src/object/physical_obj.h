@@ -117,10 +117,11 @@ public:
   void SetTestRect (uint left, uint right, uint top, uint bottom);
   const Rectanglei GetTestRect() const
   {
-    return Rectanglei(GetX()+m_test_left,
-                      GetY()+m_test_top,
-                      m_width-m_test_right-m_test_left,
-                      m_height-m_test_bottom-m_test_top);
+    int width = m_width - m_test_right - m_test_left;
+    int height = m_height - m_test_bottom - m_test_top;
+    width = (width == 0 ? 1 : width);
+    height = (height == 0 ? 1 : height);
+    return Rectanglei(GetX() + m_test_left, GetY() + m_test_top, width, height);
   }
   int GetTestWidth() const { return m_width -m_test_left -m_test_right; };
   int GetTestHeight() const { return m_height -m_test_top -m_test_bottom; };
@@ -190,7 +191,7 @@ public:
   void Drown();
   void GoOutOfWater(); // usefull for supertux.
 
-  virtual bool IsImmobile() const { return m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST); };
+  virtual bool IsImmobile() const { return IsSleeping() || m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST); };
   bool IsGhost() const { return (m_alive == GHOST); };
   bool IsDrowned() const { return (m_alive == DROWNED); };
   bool IsDead() const { return (IsGhost() || IsDrowned() || (m_alive == DEAD)); };

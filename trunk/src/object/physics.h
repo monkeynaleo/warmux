@@ -158,6 +158,9 @@ public:
 
   // The object is moving ?
   bool IsMoving() const;
+  // Is this object not moving ?
+  virtual bool IsSleeping() const;
+  void UpdateTimeOfLastMove();
 
   // The object is falling ?
   bool IsFalling() const { return (m_motion_type==FreeFall) && (m_pos_y.x1 > 0.1); };

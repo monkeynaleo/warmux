@@ -96,6 +96,7 @@ PhysicalObj::~PhysicalObj ()
 
 void PhysicalObj::SetXY(const Point2i &position)
 {
+  UpdateTimeOfLastMove();
   CheckOverlapping();
 
   if( IsOutsideWorldXY( position ) )
@@ -115,6 +116,7 @@ void PhysicalObj::SetXY(const Point2i &position)
 
 void PhysicalObj::SetXY(const Point2d &position)
 {
+  UpdateTimeOfLastMove();
   CheckOverlapping();
 
   if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) )
@@ -661,8 +663,12 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   if( check_object && CollidedObjectXY(position) )
     return false;
 
+  int width = m_width - m_test_right - m_test_left;
+  int height = m_height -m_test_bottom - m_test_top;
+  width = (width == 0 ? 1 : width);
+  height = (height == 0 ? 1 : height);
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-                  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
+                  width, height);
 
   return world.RectIsInVacuum (rect);
 }
