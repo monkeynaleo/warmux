@@ -21,6 +21,7 @@
 
 #include "include/action.h"
 #include "map/maps_list.h"
+#include "map/water.h"
 #include "game/config.h"
 #include "graphic/surface.h"
 #include "tool/resource_manager.h"
@@ -28,6 +29,7 @@
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
+#include "tool/string_tools.h"
 #include "tool/xml_document.h"
 #include <iostream>
 #include <algorithm>
@@ -360,3 +362,21 @@ InfoMap* ActiveMap()
 {
   return MapsList::GetInstance()->ActiveMap();
 }
+
+std::string InfoMap::GetWaterName() 
+{ 
+  LoadBasicInfo();
+  int water;
+  if(str2int(water_name, water) && water < Water::MAX_WATER_TYPE) {
+    if(water == Water::WATER) {
+      return "water";
+    } else if(water == Water::LAVA) {
+      return "lava";
+    } else if(water == Water::RADIOACTIVE) {
+      return "radioactive";
+    }
+  } 
+  // not an old water definition or invalid type
+  return water_name;
+}
+

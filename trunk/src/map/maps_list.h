@@ -31,6 +31,7 @@
 // Forward declarations
 class Action;
 class Profile;
+class Water;
 typedef struct _xmlNode xmlNode;
 
 class InfoMap {
@@ -107,7 +108,7 @@ public:
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; };
   bool IsRandomGenerated() { LoadBasicInfo(); return random_generated; };
-  std::string GetWaterName() { LoadBasicInfo(); return water_name; };
+  std::string GetWaterName();
 
   Point2i GetUpperLeftPad() { return upper_left_pad; };
   Point2i GetLowerRightPad() { return lower_right_pad; };
