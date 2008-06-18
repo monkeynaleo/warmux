@@ -23,9 +23,7 @@
 #include <stdlib.h>
 #include "tool/random.h"
 
-Random randomObj;
-
-Random::Random()
+void Random::InitLocalRandom()
 {
   srand(time(NULL));
 }

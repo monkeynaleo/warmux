@@ -56,6 +56,7 @@ using namespace std;
 #include "sound/jukebox.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
+#include "tool/random.h"
 
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
@@ -78,7 +79,7 @@ AppWormux::AppWormux():
   menu(NULL)
 {
   JukeBox::GetInstance()->Init();
-
+  Random::InitLocalRandom();
   cout << "[ " << _("Run game") << " ]" << endl;
 }
 

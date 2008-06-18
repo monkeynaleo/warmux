@@ -85,8 +85,8 @@ void Character::SetBody(Body* char_body)
   SetClothe("normal");
   SetMovement("breathe");
 
-  SetDirection(randomObj.GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
-  body->SetFrame(randomObj.GetLong(0, body->GetFrameCount() - 1));
+  SetDirection(Random::GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
+  body->SetFrame(Random::GetLong(0, body->GetFrameCount() - 1));
   SetSize(body->GetSize());
 }
 
@@ -108,7 +108,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   rl_motion_pause(0),
   do_nothing_time(0),
   walking_time(0),
-  animation_time(Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX)),
+  animation_time(Time::GetInstance()->Read() + Random::GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX)),
   lost_energy(0),
   hidden(false),
   channel_step(-1),
@@ -380,7 +380,7 @@ void Character::Draw()
       &&  body->GetClothe().substr(0,9) != "animation")
   {
     body->PlayAnimation();
-    animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
+    animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + Random::GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   }
 
   // Stop the animation or the black skin if we are playing

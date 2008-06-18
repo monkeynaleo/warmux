@@ -36,8 +36,8 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   dx = 0;
 
   image = ParticleEngine::GetSprite(EXPLOSION_SMOKE_spr);
-  mvt_freq = randomObj.GetDouble(-2.0, 2.0);
-  SetGravityFactor(randomObj.GetDouble(-1.0,-2.0));
+  mvt_freq = Random::GetDouble(-2.0, 2.0);
+  SetGravityFactor(Random::GetDouble(-1.0,-2.0));
 
   image->ScaleSize(m_initial_size, m_initial_size);
   SetSize( Point2i(1, 1) );

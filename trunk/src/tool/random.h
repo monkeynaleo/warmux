@@ -27,7 +27,7 @@
 
 class Random{
  public:
-  Random();
+  static void InitLocalRandom();
 
   static bool GetBool();
   static long GetLong(long min, long max);
@@ -39,7 +39,5 @@ class Random{
   static Point2i GetPoint(const Point2i &pt);
   static int GetSign();
 };
-
-extern Random randomObj;
 
 #endif

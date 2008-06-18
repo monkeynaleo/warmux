@@ -33,7 +33,7 @@ MagicStarParticle::MagicStarParticle() :
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 25;
 
-  uint color=randomObj.GetLong(0,2);
+  uint color=Random::GetLong(0,2);
   switch(color)
   {
     case 0 : image = ParticleEngine::GetSprite(MAGIC_STAR_R_spr); break;

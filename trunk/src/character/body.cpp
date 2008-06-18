@@ -74,7 +74,7 @@ Body::Body(xmlNode* xml, const Profile* res):
       std::cerr << "Warning !! The member \""<< name << "\" is defined twice in the xml file" << std::endl;
     else
       members_lst[name] = member;
-  } 
+  }
 
   members_lst["weapon"] = weapon_member;
 
@@ -547,7 +547,7 @@ void Body::SetMovement(const std::string& name)
 void Body::PlayAnimation()
 {
   std::ostringstream name;
-  name << "animation" << randomObj.GetLong(0, animation_number - 1);
+  name << "animation" << Random::GetLong(0, animation_number - 1);
   SetClotheOnce(name.str());
   SetMovementOnce(name.str());
 }
