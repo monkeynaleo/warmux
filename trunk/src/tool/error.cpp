@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "include/base.h"
+#include "include/constant.h"
 #include <cstdlib>
 #include <iostream>
 #include <signal.h>
@@ -56,6 +57,13 @@ void MissedAssertion (const char *filename, unsigned long line,
 #endif
 }
 
+std::string FormatError(const char *filename, unsigned long line,
+			const std::string &txt)
+{
+  return Format(_("Error in %s:%lu (Wormux %s) : %s"), filename, line, Constants::WORMUX_VERSION.c_str(), txt.c_str());
+}
+
+
 CError::CError (const char *filename, unsigned long line,
                 const std::string &txt)
   : m_filename(filename), m_txt(txt), m_line(line)
@@ -66,21 +74,19 @@ CError::~CError() throw()
 
 const char* CError::what() const throw()
 {
-  return m_txt.c_str();
+  return FormatError(m_filename.c_str(), m_line, m_txt).c_str();
 }
 
 std::ostream& CError::operator<< (std::ostream &os) const
 {
-  os << m_txt;
+  os << FormatError(m_filename.c_str(), m_line, m_txt);
   return os;
 }
 
 void TriggerError (const char *filename, unsigned long line,
                    const std::string &txt)
 {
-  std::cerr << "! "
-            << Format(_("Error in %s:%lu"), filename, line)
-            << ": " << txt << std::endl;
+  std::cerr << "! " << FormatError(filename, line, txt) << std::endl;
 
   ASSERT(false);
   throw CError (filename, line, txt);
