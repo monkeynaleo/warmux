@@ -150,15 +150,53 @@ void Action_Network_Check_Phase1 (Action */*a*/)
   Network::GetInstance()->SendAction(&b);
 }
 
-static void Error_in_Network_Check_Phase2 (Action *a)
-{
-  a->creator->force_disconnect = true;
-  std::string str = Format("Error initializing network: Client %s does not agree with you!!\n",
-			   a->creator->GetAddress().c_str());
-  std::cerr << str << std::endl;
+enum net_error {
+  WRONG_MAP_NAME,
+  WRONG_MAP_CRC,
+  WRONG_TEAM
+};
 
-  // this client has been checked, it is NOT ok, it will be disconnected
-  a->creator->SetState(DistantComputer::STATE_ERROR); // If not, it creates a deadlock.
+static std::string NetErrorId_2_String(enum net_error error)
+{
+  std::string s;
+
+  switch (error) {
+  case WRONG_MAP_NAME:
+    s = _("Wrong map name!");
+    break;
+  case WRONG_MAP_CRC:
+    s = _("Wrong map CRC!");
+    break;
+  case WRONG_TEAM:
+    s = _("Wrong team!");
+    break;
+  }
+  return s;
+}
+
+void Action_Network_Disconnect_On_Error(Action *a)
+{
+  enum net_error error = (enum net_error)a->PopInt();
+  AppWormux::GetInstance()->DisplayError(NetErrorId_2_String(error));
+  Network::Disconnect();
+}
+
+void DisconnectOnError(enum net_error error)
+{
+  Action a(Action::ACTION_NETWORK_DISCONNECT_ON_ERROR);
+  a.Push(int(error));
+  Network::GetInstance()->SendAction(&a);
+  Network::Disconnect();
+}
+
+static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
+{
+  std::string str = Format(_("Error initializing network: Client %s does not agree with you!! - %s"),
+			   a->creator->GetAddress().c_str(),
+			   NetErrorId_2_String(error).c_str());
+  std::cerr << str << std::endl;
+  DisconnectOnError(error);
+  AppWormux::GetInstance()->DisplayError(str);
 }
 
 void Action_Network_Check_Phase2 (Action *a)
@@ -171,7 +209,7 @@ void Action_Network_Check_Phase2 (Action *a)
   std::string map = a->PopString();
   if (map != ActiveMap()->GetRawName()) {
     std::cerr << map << " != " << ActiveMap()->GetRawName() << std::endl;
-    Error_in_Network_Check_Phase2(a);
+    Error_in_Network_Check_Phase2(a, WRONG_MAP_NAME);
     return;
   }
 
@@ -180,7 +218,7 @@ void Action_Network_Check_Phase2 (Action *a)
   int remote_crc = a->PopInt();
   if (crc != remote_crc) {
     std::cerr << map << " is different (crc=" << crc << ", remote crc="<< remote_crc << ")" << std::endl;
-    Error_in_Network_Check_Phase2(a);
+    Error_in_Network_Check_Phase2(a, WRONG_MAP_CRC);
     return;
   }
 
@@ -190,7 +228,7 @@ void Action_Network_Check_Phase2 (Action *a)
   for (; it != GetTeamsList().playing_list.end() ; ++it) {
     team = a->PopString();
     if (team != (*it)->GetId()) {
-      Error_in_Network_Check_Phase2(a);
+      Error_in_Network_Check_Phase2(a, WRONG_TEAM);
       return;
     }
   }
@@ -792,6 +830,7 @@ ActionHandler::ActionHandler():
   Register (Action::ACTION_NETWORK_CHANGE_STATE, "NETWORK_change_state", &Action_Network_ChangeState);
   Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check1", &Action_Network_Check_Phase1);
   Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check2", &Action_Network_Check_Phase2);
+  Register (Action::ACTION_NETWORK_DISCONNECT_ON_ERROR, "NETWORK_disconnect_on_error", &Action_Network_Disconnect_On_Error);
 
   // ########################################################
   Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
