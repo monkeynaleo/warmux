@@ -316,7 +316,7 @@ void Interface::DrawMapPreview()
          ++character) {
       if (!character -> IsDead()) {
         Point2i     coord = world.ground.PreviewCoordinates((*character).GetPosition()) + offset;
-        
+
         window.Blit(icon, coord - icon.GetSize()/2);
         if (character->IsActiveCharacter()) {
           uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
@@ -414,8 +414,9 @@ void Interface::Hide()
     start_hide_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_hide_display));
 }
 
-void Interface::UpdateTimer(uint utimer)
+void Interface::UpdateTimer(uint utimer, const Color& color)
 {
+  timer->SetColor(color);
   timer->Set(ulong2str(utimer));
   remaining_turn_time = utimer;
 }

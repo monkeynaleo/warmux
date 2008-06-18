@@ -78,9 +78,13 @@ void GameClassic::RefreshClock()
 	  SetState(END_TURN);
         } else {
           duration--;
-          Interface::GetInstance()->UpdateTimer(duration);
 	  if (duration == 12) {
 	    JukeBox::GetInstance()->Play("share", "countdown-end_turn");
+	  }
+	  if (duration > 10) {
+	    Interface::GetInstance()->UpdateTimer(duration, black_color);
+	  } else {
+	    Interface::GetInstance()->UpdateTimer(duration, primary_red_color);
 	  }
         }
         break;

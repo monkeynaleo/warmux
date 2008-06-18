@@ -25,6 +25,7 @@
 #include "include/base.h"
 #include "include/singleton.h"
 #include "weapon_menu.h"
+#include "graphic/colors.h"
 #include "gui/energy_bar.h"
 #include "gui/energy_bar.h"
 #include "gui/progress_bar.h"
@@ -119,7 +120,7 @@ protected:
    Point2i GetSize() const;
 
    void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; };
-   void UpdateTimer(uint utimer);
+   void UpdateTimer(uint utimer, const Color& color = black_color);
    void UpdateWindIndicator(int wind_value) { wind_bar.UpdateValue(wind_value); };
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
    void ToggleMinimap() { display_minimap = !display_minimap; };
