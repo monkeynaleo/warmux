@@ -4,15 +4,12 @@
 #include "include/base.h"
 #include "tool/error.h"
 #include "tool/i18n.h"
+#ifdef DEBUG
+#include "tool/random.h"
+#endif
 #include "network/chatlogger.h"
 #include "game/config.h"
 #include <time.h>
-#ifdef DEBUG
-#  include <stdlib.h>
-#endif
-#ifdef _WIN32
-#  define random rand  // random more secure but unavailable under Windows
-#endif
 
 // the year that time has as base; although time(2)
 // says the reference is 1970, tests show is 1900. WHY?
@@ -49,7 +46,7 @@ ChatLogger::ChatLogger() :
 #ifndef DEBUG
     logfile = Format ( "%s.log" , timestamp.c_str() );
 #else // DEBUG
-    logfile = Format ( "%s-%c.log" , timestamp.c_str(), (char)((random() % 10)+'a') );
+    logfile = Format ( "%s-%c.log" , timestamp.c_str(), (char)(Random::GetInt(0,10)+'a') );
 #endif // DEBUG
   }
 
