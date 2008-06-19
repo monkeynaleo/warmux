@@ -25,6 +25,7 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "game/game_mode.h"
+#include "game/game.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "graphic/font.h"
@@ -267,7 +268,9 @@ void OptionMenu::SaveOptions()
 
   // Graphic options
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
-  wind.Reset();
+  // bug #11826 : Segmentation fault while exiting the menu.
+  if(!Game::GetInstance()->IsGameFinished())
+    wind.Reset();
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
