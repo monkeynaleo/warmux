@@ -664,7 +664,8 @@ msgstr "Napaka v %s:%lu (Wormux %s) : %s"
 #: src/include/action_handler.cpp:194
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
-msgstr "Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
+msgstr ""
+"Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
