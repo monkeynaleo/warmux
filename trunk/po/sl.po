@@ -657,14 +657,14 @@ msgid "Energy"
 msgstr "Energija"
 
 #: src/tool/error.cpp:63
-#, fuzzy, c-format
+#, c-format
 msgid "Error in %s:%lu (Wormux %s) : %s"
-msgstr "Napaka v %s:%lu"
+msgstr "Napaka v %s:%lu (Wormux %s) : %s"
 
 #: src/include/action_handler.cpp:194
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
-msgstr ""
+msgstr "Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -1395,15 +1395,15 @@ msgstr "Wormux različica "
 
 #: src/include/action_handler.cpp:168
 msgid "Wrong map CRC!"
-msgstr ""
+msgstr "Napačna kartna vsota CRC"
 
 #: src/include/action_handler.cpp:165
 msgid "Wrong map name!"
-msgstr ""
+msgstr "Napačno ime karte!"
 
 #: src/include/action_handler.cpp:171
 msgid "Wrong team!"
-msgstr ""
+msgstr "Napačna ekipa!"
 
 #: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
