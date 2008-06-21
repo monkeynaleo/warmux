@@ -48,12 +48,12 @@ msgstr[3] "%i igralcev pripravljenih"
 msgid "%s (%s) has died."
 msgstr "%s (%s) je umrl/a."
 
-#: src/map/maps_list.cpp:108
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> znan kot %s iz %s"
 
-#: src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:118
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz <%s>"
@@ -276,7 +276,7 @@ msgstr[1] "Ekipa %s je osvojila %u nogometni bombi!"
 msgstr[2] "Ekipa %s je osvojila %u nogometne bombe!"
 msgstr[3] "Ekipa %s je osvojila %u nogometnih bomb!"
 
-#: src/weapon/grapple.cpp:783
+#: src/weapon/grapple.cpp:808
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -457,11 +457,11 @@ msgid "(dead)"
 msgstr "(mrtev)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:196
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
-#: src/network/chatlogger.cpp:37 src/network/chatlogger.cpp:84
+#: src/network/chatlogger.cpp:34 src/network/chatlogger.cpp:81
 msgid "(unknown time)"
 msgstr "(čas ni znan)"
 
@@ -470,7 +470,7 @@ msgstr "(čas ni znan)"
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
-#: src/menu/options_menu.cpp:345
+#: src/menu/options_menu.cpp:348
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -509,7 +509,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovalo"
 
-#: src/main.cpp:279
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Avtorji:"
 
@@ -561,7 +561,7 @@ msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr "Preveri možno posodobitev?"
 
@@ -611,7 +611,7 @@ msgstr "Vodja: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Ni bilo mogoče pridobiti zadnje različice iz %s"
 
-#: src/network/chatlogger.cpp:63 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:60 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Ni bilo mogoče odpreti datoteke %s"
@@ -648,7 +648,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr "KONEC IGRE"
 
-#: src/menu/options_menu.cpp:155
+#: src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr "Glasnost učinkov"
 
@@ -656,10 +656,15 @@ msgstr "Glasnost učinkov"
 msgid "Energy"
 msgstr "Energija"
 
-#: src/tool/error.cpp:82
-#, c-format
-msgid "Error in %s:%lu"
+#: src/tool/error.cpp:63
+#, fuzzy, c-format
+msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "Napaka v %s:%lu"
+
+#: src/include/action_handler.cpp:194
+#, c-format
+msgid "Error initializing network: Client %s does not agree with you!! - %s"
+msgstr ""
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -724,7 +729,7 @@ msgstr "Metalec plamenov"
 msgid "Football Bomb"
 msgstr "Nogometna bomba"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "Celozaslonski način?"
 
@@ -744,7 +749,7 @@ msgstr "Ime igre:"
 msgid "Gnu Launcher"
 msgstr "Metalec gnuja"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr "Grafika"
 
@@ -832,11 +837,11 @@ msgstr ""
 "Uporaba: kliknite na tarčo\n"
 "ena uporaba na potezo"
 
-#: src/game/game_classic.cpp:223
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr "Pohitite, prepočasni ste!!"
 
-#: src/main.cpp:271
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -893,7 +898,7 @@ msgstr ""
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Brcne igralca z imenom <nickname> iz igre"
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "Jezik"
 
@@ -936,7 +941,7 @@ msgstr "Karte"
 msgid "Max number of players:"
 msgstr "Največje število igralcev:"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "Največji FPS"
 
@@ -944,7 +949,7 @@ msgstr "Največji FPS"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:136
 msgid "Misc"
 msgstr "Razno"
 
@@ -968,11 +973,11 @@ msgstr "Najbolj neuporaben"
 msgid "Most violent"
 msgstr "Najbolj nasilen"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr "Glasnost glasbe"
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "Glasba?"
 
@@ -985,7 +990,7 @@ msgid "Network initialization"
 msgstr "Inicializacija omrežja"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:54
 msgid "New network game at "
 msgstr "Nova omrežna igra ob "
 
@@ -1036,11 +1041,11 @@ msgstr "Igra"
 msgid "Player"
 msgstr "Igralec"
 
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "Energija igralca?"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "Ime igralca?"
 
@@ -1061,7 +1066,7 @@ msgstr "Javne bitke"
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/main.cpp:260
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
@@ -1081,7 +1086,7 @@ msgstr "Branje privzete nastavitvene datoteke"
 msgid "Reading personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "Ločljivost"
 
@@ -1089,7 +1094,7 @@ msgstr "Ločljivost"
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: src/main.cpp:82
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "Poženi igro"
 
@@ -1097,11 +1102,11 @@ msgstr "Poženi igro"
 msgid "Say: "
 msgstr "Reci: "
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 msgid "Scroll border size"
 msgstr "Meja drsenja na robu"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "Drsenje na robu"
 
@@ -1147,15 +1152,15 @@ msgstr "Nekdo je v zaboj podtaknil bombo!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
-#: src/menu/options_menu.cpp:180
+#: src/menu/options_menu.cpp:181
 msgid "Sound"
 msgstr "Zvok"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "Zvočni učinki?"
 
-#: src/menu/options_menu.cpp:176
+#: src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "Frekvenca zvoka"
 
@@ -1334,11 +1339,11 @@ msgstr "Neznan ukaz"
 msgid "Unnamed"
 msgstr "Brezimjek"
 
-#: src/main.cpp:198
+#: src/main.cpp:200
 msgid "Version"
 msgstr "Različica"
 
-#: src/menu/options_menu.cpp:354
+#: src/menu/options_menu.cpp:357
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Preverjanje različice je spodletelo zaradi: %s\n"
@@ -1362,7 +1367,7 @@ msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 msgid "Weapons"
 msgstr "Orožja"
 
-#: src/main.cpp:288
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Spletna stran: "
 
@@ -1372,7 +1377,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
 
 #. Various options
-#: src/menu/options_menu.cpp:72
+#: src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "Vetrni delci?"
 
@@ -1380,13 +1385,25 @@ msgstr "Vetrni delci?"
 msgid "Winner"
 msgstr "Zmagovalec"
 
-#: src/main.cpp:210
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "Wormux se zaganja..."
 
-#: src/main.cpp:278
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux različica "
+
+#: src/include/action_handler.cpp:168
+msgid "Wrong map CRC!"
+msgstr ""
+
+#: src/include/action_handler.cpp:165
+msgid "Wrong map name!"
+msgstr ""
+
+#: src/include/action_handler.cpp:171
+msgid "Wrong team!"
+msgstr ""
 
 #: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
@@ -1426,7 +1443,7 @@ msgstr ""
 "Bombardiranje: levi klik na tarčo\n"
 "eno bombardiranje na potezo"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "nalaganje nastavitev ni bilo mogoče"
 
@@ -1434,7 +1451,7 @@ msgstr "nalaganje nastavitev ni bilo mogoče"
 msgid "done"
 msgstr "opravljeno"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "napaka pri razčlenjevanju nastavitvene datoteke"
 
@@ -1442,7 +1459,7 @@ msgstr "napaka pri razčlenjevanju nastavitvene datoteke"
 msgid "from"
 msgstr "iz"
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "ni nastavitvene datoteke!"
 

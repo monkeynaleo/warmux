@@ -37,12 +37,12 @@ msgstr[0] "بازیکن %i آماده است."
 msgid "%s (%s) has died."
 msgstr "%s (%s) مرد."
 
-#: src/map/maps_list.cpp:108
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> مشهور به %s از %s"
 
-#: src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:118
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> از %s"
@@ -217,7 +217,7 @@ msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "تیم %s برنده‌ی %u بمب تخریبی شد!"
 
-#: src/weapon/grapple.cpp:783
+#: src/weapon/grapple.cpp:808
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -343,11 +343,11 @@ msgid "(dead)"
 msgstr "(مرده)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:196
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(زبان سیستم)"
 
-#: src/network/chatlogger.cpp:37 src/network/chatlogger.cpp:84
+#: src/network/chatlogger.cpp:34 src/network/chatlogger.cpp:81
 msgid "(unknown time)"
 msgstr ""
 
@@ -356,7 +356,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(بی‌نهایت)"
 
-#: src/menu/options_menu.cpp:345
+#: src/menu/options_menu.cpp:348
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -393,7 +393,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "سندان"
 
-#: src/main.cpp:279
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "نویسندگان:"
 
@@ -445,7 +445,7 @@ msgstr "نمی‌توان پوشه‌ی شخصی تیم‌ها را باز کر�
 msgid "Cannot open teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی تیم‌ها را باز کرد (%s)!"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr ""
 
@@ -496,7 +496,7 @@ msgstr "کنترل شده بوسیله‌ی: "
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:63 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:60 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr ""
@@ -533,7 +533,7 @@ msgstr "دینامیت"
 msgid "END OF GAME"
 msgstr "پایان بازی"
 
-#: src/menu/options_menu.cpp:155
+#: src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr ""
 
@@ -541,10 +541,15 @@ msgstr ""
 msgid "Energy"
 msgstr ""
 
-#: src/tool/error.cpp:82
-#, c-format
-msgid "Error in %s:%lu"
+#: src/tool/error.cpp:63
+#, fuzzy, c-format
+msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "مشکل در %s:%lu"
+
+#: src/include/action_handler.cpp:194
+#, c-format
+msgid "Error initializing network: Client %s does not agree with you!! - %s"
+msgstr ""
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -603,7 +608,7 @@ msgstr "اسلحه‌ی آتیشی"
 msgid "Football Bomb"
 msgstr "بمب تخریبی"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "تمام صفحه؟"
 
@@ -624,7 +629,7 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "گنو"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr ""
 
@@ -710,11 +715,11 @@ msgstr ""
 "چگونگی استفاده از آن: کلیک چپ روی هدف\n"
 "یک بار در هر نوبت"
 
-#: src/game/game_classic.cpp:223
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr "بجنب، خیلی کندی! بابا صد رحمت به لاک‌پشت!!"
 
-#: src/main.cpp:271
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -770,7 +775,7 @@ msgstr "به #wormux در irc.freenode.net بپیوندید."
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "زبان"
 
@@ -814,7 +819,7 @@ msgstr "نقشه‌ها"
 msgid "Max number of players:"
 msgstr "حداکثر تعداد بازیکنان: "
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "حداکثر فریم بر ثانیه"
 
@@ -822,7 +827,7 @@ msgstr "حداکثر فریم بر ثانیه"
 msgid "Mine"
 msgstr "مین"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:136
 #, fuzzy
 msgid "Misc"
 msgstr "موسیقی؟"
@@ -847,11 +852,11 @@ msgstr "بی‌مصرف‌ترین"
 msgid "Most violent"
 msgstr "وحشی‌ترین"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "موسیقی؟"
 
@@ -864,7 +869,7 @@ msgid "Network initialization"
 msgstr "در حال آغاز شبکه"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:54
 #, fuzzy
 msgid "New network game at "
 msgstr "بازی شبکه‌ای"
@@ -917,11 +922,11 @@ msgstr "شروع"
 msgid "Player"
 msgstr "بازیکن"
 
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "انرژی بازیکن؟"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "نام بازیکن؟"
 
@@ -942,7 +947,7 @@ msgstr ""
 msgid "Quit"
 msgstr "خروج"
 
-#: src/main.cpp:260
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "خروج از ورموکس"
 
@@ -962,7 +967,7 @@ msgstr "درحال خواندن پرونده‌ی تنظیمات پیش‌فرض
 msgid "Reading personal config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات شخصی"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "رزولوشن"
 
@@ -970,7 +975,7 @@ msgstr "رزولوشن"
 msgid "Riot Bomb"
 msgstr "بمب تخریبی"
 
-#: src/main.cpp:82
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "اجرای بازی"
 
@@ -978,12 +983,12 @@ msgstr "اجرای بازی"
 msgid "Say: "
 msgstr "بگو: "
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 #, fuzzy
 msgid "Scroll border size"
 msgstr "اسکرول روی خط"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "اسکرول روی خط"
 
@@ -1029,16 +1034,16 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
-#: src/menu/options_menu.cpp:180
+#: src/menu/options_menu.cpp:181
 #, fuzzy
 msgid "Sound"
 msgstr "صداها"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "افکت‌های صدا؟"
 
-#: src/menu/options_menu.cpp:176
+#: src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "فرکانس صدا"
 
@@ -1208,11 +1213,11 @@ msgstr ""
 msgid "Unnamed"
 msgstr "بدون نام"
 
-#: src/main.cpp:198
+#: src/main.cpp:200
 msgid "Version"
 msgstr "نسخه"
 
-#: src/menu/options_menu.cpp:354
+#: src/menu/options_menu.cpp:357
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1233,7 +1238,7 @@ msgstr "در انتظار کارگزار، شما فقط می‌توانید ر�
 msgid "Weapons"
 msgstr "اسلحه‌ها"
 
-#: src/main.cpp:288
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "وب‌سایت: "
 
@@ -1243,7 +1248,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "چه افتضاحی، %s با یک اسلحه‌ی ساده کشته شد!"
 
 #. Various options
-#: src/menu/options_menu.cpp:72
+#: src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "باد؟"
 
@@ -1251,13 +1256,25 @@ msgstr "باد؟"
 msgid "Winner"
 msgstr "برنده"
 
-#: src/main.cpp:210
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "ورموکس در حال اجراست..."
 
-#: src/main.cpp:278
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "نسخه‌ی ورموکس"
+
+#: src/include/action_handler.cpp:168
+msgid "Wrong map CRC!"
+msgstr ""
+
+#: src/include/action_handler.cpp:165
+msgid "Wrong map name!"
+msgstr ""
+
+#: src/include/action_handler.cpp:171
+msgid "Wrong team!"
+msgstr ""
 
 #: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
@@ -1294,7 +1311,7 @@ msgid ""
 "a bombing per turn"
 msgstr ""
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr ""
 
@@ -1302,7 +1319,7 @@ msgstr ""
 msgid "done"
 msgstr "تمام"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:85
 #, fuzzy
 msgid "error parsing the config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات پیش‌فرض"
@@ -1311,7 +1328,7 @@ msgstr "درحال خواندن پرونده‌ی تنظیمات پیش‌فرض
 msgid "from"
 msgstr "از"
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:74
 #, fuzzy
 msgid "no configuration file!"
 msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"

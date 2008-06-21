@@ -44,12 +44,12 @@ msgstr[1] "%i pelaajaa valmiina"
 msgid "%s (%s) has died."
 msgstr "%s (joukkue %s) kuoli."
 
-#: src/map/maps_list.cpp:108
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s < %s > aka %s %s:stä"
 
-#: src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:118
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
@@ -248,7 +248,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Joukkue %s voitti %u jalkapallopommin!"
 msgstr[1] "Joukkue %s voitti %u jalkapallopommia!"
 
-#: src/weapon/grapple.cpp:783
+#: src/weapon/grapple.cpp:808
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -387,11 +387,11 @@ msgid "(dead)"
 msgstr "(kuollut)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:196
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(järjestelmän kieli)"
 
-#: src/network/chatlogger.cpp:37 src/network/chatlogger.cpp:84
+#: src/network/chatlogger.cpp:34 src/network/chatlogger.cpp:81
 msgid "(unknown time)"
 msgstr "(tuntematon aika)"
 
@@ -400,7 +400,7 @@ msgstr "(tuntematon aika)"
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
-#: src/menu/options_menu.cpp:345
+#: src/menu/options_menu.cpp:348
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -439,7 +439,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Alasin"
 
-#: src/main.cpp:279
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Tekijät:"
 
@@ -491,7 +491,7 @@ msgstr "Ei voida avata henkilökohtaista joukkue hakemistoa (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr "Tarkista päivitykset"
 
@@ -541,7 +541,7 @@ msgstr "Hallitsee: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Ei voitu hakea uusinta versiota osoitteesta %s"
 
-#: src/network/chatlogger.cpp:63 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:60 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Ei voitu avata tiedostoa %s"
@@ -578,7 +578,7 @@ msgstr "Dynamiitti"
 msgid "END OF GAME"
 msgstr "PELI LOPPUI"
 
-#: src/menu/options_menu.cpp:155
+#: src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr "Efektien voimakkuus"
 
@@ -586,10 +586,15 @@ msgstr "Efektien voimakkuus"
 msgid "Energy"
 msgstr ""
 
-#: src/tool/error.cpp:82
-#, c-format
-msgid "Error in %s:%lu"
+#: src/tool/error.cpp:63
+#, fuzzy, c-format
+msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "Virhe kohdassa %s:%lu"
+
+#: src/include/action_handler.cpp:194
+#, c-format
+msgid "Error initializing network: Client %s does not agree with you!! - %s"
+msgstr ""
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -648,7 +653,7 @@ msgstr "Liekinheitin"
 msgid "Football Bomb"
 msgstr "Jalkapallopommi"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "Kokoruutu"
 
@@ -669,7 +674,7 @@ msgstr "Pelin nimi:"
 msgid "Gnu Launcher"
 msgstr "Gnu"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr "Grafiikka asetukset"
 
@@ -756,11 +761,11 @@ msgstr ""
 "Käyttöohje : valitse kohde vasemmalla hiirennapilla\n"
 "yksi ammus per vuoro"
 
-#: src/game/game_classic.cpp:223
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:271
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -815,7 +820,7 @@ msgstr "Liity #wormux kanavalle irc.freenode.netissä löytääksesi vastustajia
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "Kieli"
 
@@ -858,7 +863,7 @@ msgstr "Kartat"
 msgid "Max number of players:"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "Maksimi FPS"
 
@@ -866,7 +871,7 @@ msgstr "Maksimi FPS"
 msgid "Mine"
 msgstr "Miina"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:136
 msgid "Misc"
 msgstr "Sekalaiset"
 
@@ -890,11 +895,11 @@ msgstr "Hyödyttömin"
 msgid "Most violent"
 msgstr "Väkivaltaisin"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr "Musiikin voimakkuus"
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "Musiikki"
 
@@ -907,7 +912,7 @@ msgid "Network initialization"
 msgstr "Verkon alustus..."
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:54
 msgid "New network game at "
 msgstr "Uusi verkkopeli paikassa"
 
@@ -958,11 +963,11 @@ msgstr "Pelaa"
 msgid "Player"
 msgstr "Pelaaja"
 
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "Näytä voimat"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "Näytä nimi"
 
@@ -983,7 +988,7 @@ msgstr "Julkiset taistelut"
 msgid "Quit"
 msgstr "Lopeta"
 
-#: src/main.cpp:260
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
@@ -1003,7 +1008,7 @@ msgstr "Luetaan oletus asetuksia"
 msgid "Reading personal config file"
 msgstr "Luetaan henkilökohtaisia asetuksia"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "Tarkkuus"
 
@@ -1011,7 +1016,7 @@ msgstr "Tarkkuus"
 msgid "Riot Bomb"
 msgstr "Mellakkapommi"
 
-#: src/main.cpp:82
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "Aloita peli"
 
@@ -1019,11 +1024,11 @@ msgstr "Aloita peli"
 msgid "Say: "
 msgstr "Sano: "
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 msgid "Scroll border size"
 msgstr "Reunuksen koko"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "Vieritä ruudun reunoista"
 
@@ -1069,15 +1074,15 @@ msgstr "Joku viritti ansan laatikkoon!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Valitettavasti tällähetkellä yksikään peli ei odota pelaajia"
 
-#: src/menu/options_menu.cpp:180
+#: src/menu/options_menu.cpp:181
 msgid "Sound"
 msgstr "Ääni asetukset"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "Ääniefektit"
 
-#: src/menu/options_menu.cpp:176
+#: src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "Äänitaajuus"
 
@@ -1252,11 +1257,11 @@ msgstr ""
 msgid "Unnamed"
 msgstr "Nimetön"
 
-#: src/main.cpp:198
+#: src/main.cpp:200
 msgid "Version"
 msgstr "Versio"
 
-#: src/menu/options_menu.cpp:354
+#: src/menu/options_menu.cpp:357
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Versiontarkistus epäonnistui koska: %s\n"
@@ -1278,7 +1283,7 @@ msgstr "Odotetaan palvelinta, voit ainoastaan keskeyttää tai jutella!"
 msgid "Weapons"
 msgstr "Aseet"
 
-#: src/main.cpp:288
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Verkkosivu:"
 
@@ -1288,7 +1293,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 
 #. Various options
-#: src/menu/options_menu.cpp:72
+#: src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "Näytä tuuli"
 
@@ -1296,13 +1301,25 @@ msgstr "Näytä tuuli"
 msgid "Winner"
 msgstr "Voittaja"
 
-#: src/main.cpp:210
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "Wormux käynnistyy..."
 
-#: src/main.cpp:278
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux versio"
+
+#: src/include/action_handler.cpp:168
+msgid "Wrong map CRC!"
+msgstr ""
+
+#: src/include/action_handler.cpp:165
+msgid "Wrong map name!"
+msgstr ""
+
+#: src/include/action_handler.cpp:171
+msgid "Wrong team!"
+msgstr ""
 
 #: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
@@ -1341,7 +1358,7 @@ msgstr ""
 "hyökkässuunta: Vasen/Oikea\n"
 "Pommitus : valitse kohde vasemmalla hiirennapilla yksi pommitus per vuoro"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "ei voitu lukea asetuksia"
 
@@ -1349,7 +1366,7 @@ msgstr "ei voitu lukea asetuksia"
 msgid "done"
 msgstr "valmis"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "virhe luettaessa asetustiedostoa"
 
@@ -1357,7 +1374,7 @@ msgstr "virhe luettaessa asetustiedostoa"
 msgid "from"
 msgstr ", "
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "ei asetustiedostoa!"
 

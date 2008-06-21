@@ -39,12 +39,12 @@ msgstr[1] " %i spillere klare"
 msgid "%s (%s) has died."
 msgstr "%s (%s) døde."
 
-#: src/map/maps_list.cpp:108
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> dit %s fra %s"
 
-#: src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:118
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
@@ -241,7 +241,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s-laget har vunnet %u fotballbombe !"
 msgstr[1] "%s-laget har vunnet %u fotballbomber !"
 
-#: src/weapon/grapple.cpp:783
+#: src/weapon/grapple.cpp:808
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -385,11 +385,11 @@ msgid "(dead)"
 msgstr "(død)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:196
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(systemspråk)"
 
-#: src/network/chatlogger.cpp:37 src/network/chatlogger.cpp:84
+#: src/network/chatlogger.cpp:34 src/network/chatlogger.cpp:81
 msgid "(unknown time)"
 msgstr "(ukjent tid)"
 
@@ -398,7 +398,7 @@ msgstr "(ukjent tid)"
 msgid "(unlimited)"
 msgstr "(uendelig)"
 
-#: src/menu/options_menu.cpp:345
+#: src/menu/options_menu.cpp:348
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -436,7 +436,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:279
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Forfattere :"
 
@@ -488,7 +488,7 @@ msgstr "Kan ikke åpne den personlige lagmappen (%s) !"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åpne lagmappen (%s) !"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr "Sjekke oppdateringer online?"
 
@@ -538,7 +538,7 @@ msgstr "Kontrollert av: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Kunne ikke hente siste versjon fra %s"
 
-#: src/network/chatlogger.cpp:63 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:60 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Kunne ikke laste filen %s"
@@ -575,7 +575,7 @@ msgstr "Dynamitt"
 msgid "END OF GAME"
 msgstr "Spillet er slutt"
 
-#: src/menu/options_menu.cpp:155
+#: src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr "Effektsvolum"
 
@@ -583,10 +583,15 @@ msgstr "Effektsvolum"
 msgid "Energy"
 msgstr "Liv"
 
-#: src/tool/error.cpp:82
-#, c-format
-msgid "Error in %s:%lu"
+#: src/tool/error.cpp:63
+#, fuzzy, c-format
+msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "Feil i %s:%lu"
+
+#: src/include/action_handler.cpp:194
+#, c-format
+msgid "Error initializing network: Client %s does not agree with you!! - %s"
+msgstr ""
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -649,7 +654,7 @@ msgstr "Flammekaster"
 msgid "Football Bomb"
 msgstr "Fotballbombe"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "Full skjerm ?"
 
@@ -669,7 +674,7 @@ msgstr "Spill navn:"
 msgid "Gnu Launcher"
 msgstr "Gnu-kaster"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr "Grafikk"
 
@@ -750,11 +755,11 @@ msgid ""
 "an ammo per turn"
 msgstr "Hvordan bruke den : venstreklikk på måleten ammo per runde"
 
-#: src/game/game_classic.cpp:223
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr "Kjapp deg, du er for treg !!"
 
-#: src/main.cpp:271
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -808,7 +813,7 @@ msgstr "Oppsøk #wormux-fr på  irc.freenode.net for å finne motstandere."
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Spillerne som <nickname> har valgt ut er sparket ut av spillet"
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "språk"
 
@@ -851,7 +856,7 @@ msgstr "Kart"
 msgid "Max number of players:"
 msgstr "Maksimalt antall deltagere :"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "Maksimum BPS"
 
@@ -859,7 +864,7 @@ msgstr "Maksimum BPS"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:136
 msgid "Misc"
 msgstr "Diverse"
 
@@ -883,11 +888,11 @@ msgstr "Mest ubrukbar"
 msgid "Most violent"
 msgstr "Mest voldelig"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr "Musikkvolum"
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "Musikk?"
 
@@ -900,7 +905,7 @@ msgid "Network initialization"
 msgstr "Starter nettverk ..."
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:54
 msgid "New network game at "
 msgstr "Nytt nettverksspill på"
 
@@ -951,11 +956,11 @@ msgstr "Spill"
 msgid "Player"
 msgstr "Spiller"
 
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "Spillers livsenergi ?"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "Spillers navn ?"
 
@@ -976,7 +981,7 @@ msgstr "Offentlige kamper"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/main.cpp:260
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
@@ -996,7 +1001,7 @@ msgstr "Laster standard konfigurasjonsfil"
 msgid "Reading personal config file"
 msgstr "Laster personlig konfigurasjonsfil"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "Resolusjon"
 
@@ -1004,7 +1009,7 @@ msgstr "Resolusjon"
 msgid "Riot Bomb"
 msgstr "Opprørsbombe"
 
-#: src/main.cpp:82
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "Spill spillet"
 
@@ -1012,11 +1017,11 @@ msgstr "Spill spillet"
 msgid "Say: "
 msgstr "Si: "
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 msgid "Scroll border size"
 msgstr "Størrelse på rullekant"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "Rull på kanten"
 
@@ -1062,15 +1067,15 @@ msgstr "Noen har plassert en felle i krateret!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Beklager, for øyeblikket er det ingen spill som venter på spillere"
 
-#: src/menu/options_menu.cpp:180
+#: src/menu/options_menu.cpp:181
 msgid "Sound"
 msgstr "Lyder"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "Lydeffekter?"
 
-#: src/menu/options_menu.cpp:176
+#: src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "Lydstyrke ?"
 
@@ -1245,11 +1250,11 @@ msgstr "Ukjent kommando"
 msgid "Unnamed"
 msgstr "Uten navn"
 
-#: src/main.cpp:198
+#: src/main.cpp:200
 msgid "Version"
 msgstr "Versjon"
 
-#: src/menu/options_menu.cpp:354
+#: src/menu/options_menu.cpp:357
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Versjonsjekken feilet fordi: %s\n"
@@ -1271,7 +1276,7 @@ msgstr "Venter på server, alt du kan gjøre er å avbryte eller chatte"
 msgid "Weapons"
 msgstr "Våpen"
 
-#: src/main.cpp:288
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Webside : "
 
@@ -1281,7 +1286,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "For en skam for %s : han ble drept av en liten pistol !"
 
 #. Various options
-#: src/menu/options_menu.cpp:72
+#: src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "Vindpartikler ?"
 
@@ -1289,13 +1294,25 @@ msgstr "Vindpartikler ?"
 msgid "Winner"
 msgstr "Vinner"
 
-#: src/main.cpp:210
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "Laster Wormux ..."
 
-#: src/main.cpp:278
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux versjon "
+
+#: src/include/action_handler.cpp:168
+msgid "Wrong map CRC!"
+msgstr ""
+
+#: src/include/action_handler.cpp:165
+msgid "Wrong map name!"
+msgstr ""
+
+#: src/include/action_handler.cpp:171
+msgid "Wrong team!"
+msgstr ""
 
 #: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
@@ -1333,7 +1350,7 @@ msgid ""
 msgstr ""
 "angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per runde"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "Kunne ikke laste konfigurasjonsfilen"
 
@@ -1341,7 +1358,7 @@ msgstr "Kunne ikke laste konfigurasjonsfilen"
 msgid "done"
 msgstr "ferdig"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "Feil under lasting av konfigurasjonsfil"
 
@@ -1349,7 +1366,7 @@ msgstr "Feil under lasting av konfigurasjonsfil"
 msgid "from"
 msgstr "fra"
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "Konfigurasjonsfilen ble ikke funnet!"
 

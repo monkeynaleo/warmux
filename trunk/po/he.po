@@ -39,12 +39,12 @@ msgstr[1] "%i שחקנים מוכנים"
 msgid "%s (%s) has died."
 msgstr "%s (%s) נהרג."
 
-#: src/map/maps_list.cpp:108
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> נקרא %s מ-%s"
 
-#: src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:118
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> מ-%s"
@@ -234,7 +234,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "צוות %s זכה במפזר הפגנות!"
 msgstr[1] "צוות %s זכה ב-%u מפזרי הפגנות!"
 
-#: src/weapon/grapple.cpp:783
+#: src/weapon/grapple.cpp:808
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -371,11 +371,11 @@ msgid "(dead)"
 msgstr "(מת)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:196
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(שפת מערכת)"
 
-#: src/network/chatlogger.cpp:37 src/network/chatlogger.cpp:84
+#: src/network/chatlogger.cpp:34 src/network/chatlogger.cpp:81
 msgid "(unknown time)"
 msgstr ""
 
@@ -384,7 +384,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
-#: src/menu/options_menu.cpp:345
+#: src/menu/options_menu.cpp:348
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -421,7 +421,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "סדן"
 
-#: src/main.cpp:279
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "מחברים:"
 
@@ -473,7 +473,7 @@ msgstr "לא ניתן לפתוח את תיקיית הצוותים האישית (
 msgid "Cannot open teams directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית הצוותים (%s)!"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr ""
 
@@ -524,7 +524,7 @@ msgstr "מבוקר על ידי:"
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: src/network/chatlogger.cpp:63 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:60 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "לא ניתן לטעון הגדרות"
@@ -561,7 +561,7 @@ msgstr "דינמיט"
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
-#: src/menu/options_menu.cpp:155
+#: src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr ""
 
@@ -569,10 +569,15 @@ msgstr ""
 msgid "Energy"
 msgstr ""
 
-#: src/tool/error.cpp:82
-#, c-format
-msgid "Error in %s:%lu"
+#: src/tool/error.cpp:63
+#, fuzzy, c-format
+msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "שגיאה ב-%s:%lu"
+
+#: src/include/action_handler.cpp:194
+#, c-format
+msgid "Error initializing network: Client %s does not agree with you!! - %s"
+msgstr ""
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -631,7 +636,7 @@ msgstr "להביור"
 msgid "Football Bomb"
 msgstr "מפזר הפגנות"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "Plein Ã©cran ?"
 
@@ -652,7 +657,7 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "משגר גנו"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr ""
 
@@ -740,11 +745,11 @@ msgstr ""
 "לשימוש: קליק שמאלי על המטרה\n"
 "תחמושת לתור"
 
-#: src/game/game_classic.cpp:223
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr "קדימה, אתה איטי מדי!!"
 
-#: src/main.cpp:271
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -799,7 +804,7 @@ msgstr "הצטרף אל #wormux ב-irc.freenode.net כדי למצוא יריבי
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "שפה"
 
@@ -843,7 +848,7 @@ msgstr "מפות"
 msgid "Max number of players:"
 msgstr "מספר שחקנים מירבי:"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "ערך FPS מקסימלי"
 
@@ -851,7 +856,7 @@ msgstr "ערך FPS מקסימלי"
 msgid "Mine"
 msgstr "מוקש"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:136
 #, fuzzy
 msgid "Misc"
 msgstr "מוסיקה?"
@@ -876,11 +881,11 @@ msgstr "חסר התועלת ביותר"
 msgid "Most violent"
 msgstr "האלים ביותר"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "מוסיקה?"
 
@@ -893,7 +898,7 @@ msgid "Network initialization"
 msgstr "אתחול רשת"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:54
 #, fuzzy
 msgid "New network game at "
 msgstr "משחק רשת"
@@ -945,11 +950,11 @@ msgstr "שחק"
 msgid "Player"
 msgstr "שחקן"
 
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "אנרגיה לשחקן?"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "שם השחקן?"
 
@@ -971,7 +976,7 @@ msgstr "יציאה מן הקרב"
 msgid "Quit"
 msgstr "יציאה"
 
-#: src/main.cpp:260
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "יציאה מ-Wormux"
 
@@ -991,7 +996,7 @@ msgstr "קורא הגדרות מקובץ ברירת מחדל"
 msgid "Reading personal config file"
 msgstr "קורא הגדרות מקובץ אישי"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "אבחנה"
 
@@ -999,7 +1004,7 @@ msgstr "אבחנה"
 msgid "Riot Bomb"
 msgstr "מפזר הפגנות"
 
-#: src/main.cpp:82
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "הרץ משחק"
 
@@ -1007,12 +1012,12 @@ msgstr "הרץ משחק"
 msgid "Say: "
 msgstr "אמור: "
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 #, fuzzy
 msgid "Scroll border size"
 msgstr "גלול על גבול המסך"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "גלול על גבול המסך"
 
@@ -1058,16 +1063,16 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "עמך הסליחה, אין כרגע משחק הממתין לשחקנים"
 
-#: src/menu/options_menu.cpp:180
+#: src/menu/options_menu.cpp:181
 #, fuzzy
 msgid "Sound"
 msgstr "סאונד"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "אפקטים קוליים?"
 
-#: src/menu/options_menu.cpp:176
+#: src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "תדירות הסאונד"
 
@@ -1246,11 +1251,11 @@ msgstr ""
 msgid "Unnamed"
 msgstr "ללא שם"
 
-#: src/main.cpp:198
+#: src/main.cpp:200
 msgid "Version"
 msgstr "גירסה"
 
-#: src/menu/options_menu.cpp:354
+#: src/menu/options_menu.cpp:357
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1272,7 +1277,7 @@ msgstr "ממתין לשרת, כרגע תוכל רק לבטל או להשתמש �
 msgid "Weapons"
 msgstr "כלי נשק"
 
-#: src/main.cpp:288
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "אתר: "
 
@@ -1282,7 +1287,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"
 
 #. Various options
-#: src/menu/options_menu.cpp:72
+#: src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "חלקיקי רוח?"
 
@@ -1290,13 +1295,25 @@ msgstr "חלקיקי רוח?"
 msgid "Winner"
 msgstr "מנצח"
 
-#: src/main.cpp:210
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "Wormux נטען..."
 
-#: src/main.cpp:278
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "גירסת Wormux "
+
+#: src/include/action_handler.cpp:168
+msgid "Wrong map CRC!"
+msgstr ""
+
+#: src/include/action_handler.cpp:165
+msgid "Wrong map name!"
+msgstr ""
+
+#: src/include/action_handler.cpp:171
+msgid "Wrong team!"
+msgstr ""
 
 #: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
@@ -1336,7 +1353,7 @@ msgstr ""
 "התקפה: קליק שמאלי על המטרה\n"
 "הפצצה לתור"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "לא ניתן לטעון הגדרות"
 
@@ -1344,7 +1361,7 @@ msgstr "לא ניתן לטעון הגדרות"
 msgid "done"
 msgstr "בוצע"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "שגיאה בקריאת קובץ הגדרות"
 
@@ -1352,7 +1369,7 @@ msgstr "שגיאה בקריאת קובץ הגדרות"
 msgid "from"
 msgstr "מ-"
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "אין קובץ הגדרות!"
 

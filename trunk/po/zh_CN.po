@@ -40,12 +40,12 @@ msgstr[1] "%i 玩家都准备好了"
 msgid "%s (%s) has died."
 msgstr "%s (%s)死掉了  ."
 
-#: src/map/maps_list.cpp:108
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s 从 %s"
 
-#: src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:118
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 从 %s"
@@ -235,7 +235,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s 队得到 %u 足球炸弹!"
 msgstr[1] "%s 队得到 %u 足球炸弹!"
 
-#: src/weapon/grapple.cpp:783
+#: src/weapon/grapple.cpp:808
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -372,11 +372,11 @@ msgid "(dead)"
 msgstr "(死掉的)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:196
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(系统语言)"
 
-#: src/network/chatlogger.cpp:37 src/network/chatlogger.cpp:84
+#: src/network/chatlogger.cpp:34 src/network/chatlogger.cpp:81
 msgid "(unknown time)"
 msgstr "(未知时间)"
 
@@ -385,7 +385,7 @@ msgstr "(未知时间)"
 msgid "(unlimited)"
 msgstr "(无限的)"
 
-#: src/menu/options_menu.cpp:345
+#: src/menu/options_menu.cpp:348
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "铁砧"
 
-#: src/main.cpp:279
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "作者:"
 
@@ -475,7 +475,7 @@ msgstr "打不开个人团队目录(%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "打不开团队目录 (%s)!"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr "网上检查升级？"
 
@@ -525,7 +525,7 @@ msgstr "控制者: "
 msgid "Couldn't fetch last version from %s"
 msgstr "不能从 %s获取最新版本"
 
-#: src/network/chatlogger.cpp:63 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:60 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "无法打开文件%s"
@@ -562,7 +562,7 @@ msgstr "炸药"
 msgid "END OF GAME"
 msgstr "游戏结束"
 
-#: src/menu/options_menu.cpp:155
+#: src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr "音效大小"
 
@@ -570,10 +570,15 @@ msgstr "音效大小"
 msgid "Energy"
 msgstr ""
 
-#: src/tool/error.cpp:82
-#, c-format
-msgid "Error in %s:%lu"
+#: src/tool/error.cpp:63
+#, fuzzy, c-format
+msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "错误出现%s:%lu"
+
+#: src/include/action_handler.cpp:194
+#, c-format
+msgid "Error initializing network: Client %s does not agree with you!! - %s"
+msgstr ""
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -631,7 +636,7 @@ msgstr "喷火器"
 msgid "Football Bomb"
 msgstr "足球炸弹"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "全屏?"
 
@@ -652,7 +657,7 @@ msgstr "游戏名:"
 msgid "Gnu Launcher"
 msgstr "Gnu-北美野牛发射器"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr ""
 
@@ -741,11 +746,11 @@ msgstr ""
 "如何使用: 鼠标左键点击目标\n"
 "每回合一个弹夹"
 
-#: src/game/game_classic.cpp:223
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr "快点,伙计你也太慢了!"
 
-#: src/main.cpp:271
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -799,7 +804,7 @@ msgstr "加入#wormux IRC irc.freenode.net 找对手"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "语言"
 
@@ -843,7 +848,7 @@ msgstr "地图"
 msgid "Max number of players:"
 msgstr "玩家满员:"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
@@ -851,7 +856,7 @@ msgstr "最大 FPS"
 msgid "Mine"
 msgstr "地雷"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:136
 #, fuzzy
 msgid "Misc"
 msgstr "音乐?"
@@ -876,11 +881,11 @@ msgstr "最失败的"
 msgid "Most violent"
 msgstr "最暴力的"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr "音乐音量:"
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "音乐?"
 
@@ -893,7 +898,7 @@ msgid "Network initialization"
 msgstr "网络初始化"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:54
 msgid "New network game at "
 msgstr "网上游戏"
 
@@ -944,11 +949,11 @@ msgstr "要玩了哦"
 msgid "Player"
 msgstr "玩家"
 
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "耐久度?"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "请问尊姓大名?"
 
@@ -970,7 +975,7 @@ msgstr "推出战斗"
 msgid "Quit"
 msgstr "退出"
 
-#: src/main.cpp:260
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "退出"
 
@@ -990,7 +995,7 @@ msgstr "正读取默认设置文件"
 msgid "Reading personal config file"
 msgstr "正读取个人设置文件"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "分辨率"
 
@@ -998,7 +1003,7 @@ msgstr "分辨率"
 msgid "Riot Bomb"
 msgstr "爆炸弹"
 
-#: src/main.cpp:82
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "运行游戏"
 
@@ -1006,12 +1011,12 @@ msgstr "运行游戏"
 msgid "Say: "
 msgstr "说: "
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 #, fuzzy
 msgid "Scroll border size"
 msgstr "滚动边界"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "滚动边界"
 
@@ -1057,16 +1062,16 @@ msgstr "有人在箱子里布置了炸弹作礼物!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 没人等你."
 
-#: src/menu/options_menu.cpp:180
+#: src/menu/options_menu.cpp:181
 #, fuzzy
 msgid "Sound"
 msgstr "声音"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "音效?"
 
-#: src/menu/options_menu.cpp:176
+#: src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "声频"
 
@@ -1243,11 +1248,11 @@ msgstr ""
 msgid "Unnamed"
 msgstr "未命名"
 
-#: src/main.cpp:198
+#: src/main.cpp:200
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:354
+#: src/menu/options_menu.cpp:357
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "版本改变失败原因: %s\n"
@@ -1269,7 +1274,7 @@ msgstr "等着接受服务吧, 现在先聊天 !"
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:288
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "网站Website: "
 
@@ -1279,7 +1284,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 惨死在小枪之下...不能瞑目!"
 
 #. Various options
-#: src/menu/options_menu.cpp:72
+#: src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "风来了?"
 
@@ -1288,13 +1293,25 @@ msgstr "风来了?"
 msgid "Winner"
 msgstr "胜者"
 
-#: src/main.cpp:210
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "准备中, Wormux!!!"
 
-#: src/main.cpp:278
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr " Wormux 版本"
+
+#: src/include/action_handler.cpp:168
+msgid "Wrong map CRC!"
+msgstr ""
+
+#: src/include/action_handler.cpp:165
+msgid "Wrong map name!"
+msgstr ""
+
+#: src/include/action_handler.cpp:171
+msgid "Wrong team!"
+msgstr ""
 
 #: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
@@ -1335,7 +1352,7 @@ msgstr ""
 "爆炸 : 左键点击目标\n"
 "每回合一次"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "无法读取设置"
 
@@ -1343,7 +1360,7 @@ msgstr "无法读取设置"
 msgid "done"
 msgstr "成"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "粘贴配置文件出错"
 
@@ -1352,7 +1369,7 @@ msgstr "粘贴配置文件出错"
 msgid "from"
 msgstr "从"
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "没有配置文件！"
 

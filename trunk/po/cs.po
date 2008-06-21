@@ -43,12 +43,12 @@ msgstr[2] "%i hráčů připraveno"
 msgid "%s (%s) has died."
 msgstr "%s (%s) zemřel."
 
-#: src/map/maps_list.cpp:108
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> jako %s z %s"
 
-#: src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:118
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
@@ -266,7 +266,7 @@ msgstr[0] "Tým %s získal %u ragbyovou bombu!"
 msgstr[1] "Tým %s získal %u ragbyové bomby!"
 msgstr[2] "Tým %s získal %u baseballových pálek!"
 
-#: src/weapon/grapple.cpp:783
+#: src/weapon/grapple.cpp:808
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -424,11 +424,11 @@ msgid "(dead)"
 msgstr "(mrtvý)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:196
+#: src/menu/options_menu.cpp:197
 msgid "(system language)"
 msgstr "(systémový jazyk)"
 
-#: src/network/chatlogger.cpp:37 src/network/chatlogger.cpp:84
+#: src/network/chatlogger.cpp:34 src/network/chatlogger.cpp:81
 msgid "(unknown time)"
 msgstr "(neznámý čas)"
 
@@ -437,7 +437,7 @@ msgstr "(neznámý čas)"
 msgid "(unlimited)"
 msgstr "(neomezeně)"
 
-#: src/menu/options_menu.cpp:345
+#: src/menu/options_menu.cpp:348
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -476,7 +476,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/main.cpp:279
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Autoři:"
 
@@ -528,7 +528,7 @@ msgstr "Nepodařilo se otevřít osobní adresář týmů (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nepodařilo se otevřít adresář týmů (%s)!"
 
-#: src/menu/options_menu.cpp:131
+#: src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr "Zjistit online aktualizace?"
 
@@ -578,7 +578,7 @@ msgstr "Řízeno: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Nepodařilo se získat poslední verzi z %s"
 
-#: src/network/chatlogger.cpp:63 src/network/download.cpp:90
+#: src/network/chatlogger.cpp:60 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Nepodařilo otevřít soubor %s"
@@ -615,7 +615,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "KONEC HRY"
 
-#: src/menu/options_menu.cpp:155
+#: src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr "Hlasitost efektů"
 
@@ -623,10 +623,15 @@ msgstr "Hlasitost efektů"
 msgid "Energy"
 msgstr "Zdraví"
 
-#: src/tool/error.cpp:82
-#, c-format
-msgid "Error in %s:%lu"
+#: src/tool/error.cpp:63
+#, fuzzy, c-format
+msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "Chyba v %s:%lu"
+
+#: src/include/action_handler.cpp:194
+#, c-format
+msgid "Error initializing network: Client %s does not agree with you!! - %s"
+msgstr ""
 
 #: src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -688,7 +693,7 @@ msgstr "Plamenomet"
 msgid "Football Bomb"
 msgstr "Ragbyová bomba"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "Celá obrazovka?"
 
@@ -709,7 +714,7 @@ msgstr "Jméno hry:"
 msgid "Gnu Launcher"
 msgstr "Odpalovač GNU"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr "Grafika"
 
@@ -797,11 +802,11 @@ msgstr ""
 "Použití: kliknout levým tlačítkem na cíl\n"
 "munice letí obloukem"
 
-#: src/game/game_classic.cpp:223
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:271
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -856,7 +861,7 @@ msgstr "Připojte se k #wormux na irc.freenode.net a najděte protihráče."
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "Jazyk"
 
@@ -899,7 +904,7 @@ msgstr "Mapy"
 msgid "Max number of players:"
 msgstr "Maximální počet hráčů:"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
@@ -907,7 +912,7 @@ msgstr "Maximum FPS"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:135
+#: src/menu/options_menu.cpp:136
 msgid "Misc"
 msgstr "Ostatní"
 
@@ -931,11 +936,11 @@ msgstr "Nejzbytečnější"
 msgid "Most violent"
 msgstr "Nejnásilnější"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr "Hlasitost hudby"
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "Hudba?"
 
@@ -948,7 +953,7 @@ msgid "Network initialization"
 msgstr "Inicializace sítě"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:54
 msgid "New network game at "
 msgstr "Nová síťová hra na "
 
@@ -999,11 +1004,11 @@ msgstr "Hrát"
 msgid "Player"
 msgstr "Hráč"
 
-#: src/menu/options_menu.cpp:75
+#: src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "Životy hráče?"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "Jméno hráče?"
 
@@ -1024,7 +1029,7 @@ msgstr "Veřejné hry"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/main.cpp:260
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Ukončit Wormux"
 
@@ -1044,7 +1049,7 @@ msgstr "Čtu výchozí konfigurační soubor"
 msgid "Reading personal config file"
 msgstr "Čtu osobní konfigurační soubor"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "Rozlišení"
 
@@ -1052,7 +1057,7 @@ msgstr "Rozlišení"
 msgid "Riot Bomb"
 msgstr "Minomet"
 
-#: src/main.cpp:82
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "Spustit hru"
 
@@ -1060,11 +1065,11 @@ msgstr "Spustit hru"
 msgid "Say: "
 msgstr "Řekni: "
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:85
 msgid "Scroll border size"
 msgstr "Velikost posuvníků"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "Posuvníky na okrajích"
 
@@ -1110,15 +1115,15 @@ msgstr "Někdo dal dítě do bedny!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
-#: src/menu/options_menu.cpp:180
+#: src/menu/options_menu.cpp:181
 msgid "Sound"
 msgstr "Zvuk"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "Zvukové efekty?"
 
-#: src/menu/options_menu.cpp:176
+#: src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "Kvalita zvuku"
 
@@ -1294,11 +1299,11 @@ msgstr ""
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
-#: src/main.cpp:198
+#: src/main.cpp:200
 msgid "Version"
 msgstr "Verze"
 
-#: src/menu/options_menu.cpp:354
+#: src/menu/options_menu.cpp:357
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Kontrola verze selhala: %s\n"
@@ -1321,7 +1326,7 @@ msgstr "Čeká se na server, jediné co můžete je zrušit to, nebo chatovat!"
 msgid "Weapons"
 msgstr "Zbraně"
 
-#: src/main.cpp:288
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Webová stránka: "
 
@@ -1331,7 +1336,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Jaká hanba pro %s - zabil se tak hloupou zbraní!"
 
 #. Various options
-#: src/menu/options_menu.cpp:72
+#: src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "Poletující částice?"
 
@@ -1339,13 +1344,25 @@ msgstr "Poletující částice?"
 msgid "Winner"
 msgstr "Vítěz"
 
-#: src/main.cpp:210
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "Spouští se Wormux..."
 
-#: src/main.cpp:278
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux verze"
+
+#: src/include/action_handler.cpp:168
+msgid "Wrong map CRC!"
+msgstr ""
+
+#: src/include/action_handler.cpp:165
+msgid "Wrong map name!"
+msgstr ""
+
+#: src/include/action_handler.cpp:171
+msgid "Wrong team!"
+msgstr ""
 
 #: src/menu/network_menu.cpp:301
 msgid "You are alone :-/"
@@ -1385,7 +1402,7 @@ msgstr ""
 "Bombardování : kliknout levým tlačítkem na cíl\n"
 "bombardování letí obloukem"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "nepodařilo se načíst konfigurační soubor"
 
@@ -1393,7 +1410,7 @@ msgstr "nepodařilo se načíst konfigurační soubor"
 msgid "done"
 msgstr "hotovo"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "chyba při zpracovávání konfiguračního souboru"
 
@@ -1401,7 +1418,7 @@ msgstr "chyba při zpracovávání konfiguračního souboru"
 msgid "from"
 msgstr "z"
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "žádný konfigurační soubor!"
 
