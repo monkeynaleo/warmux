@@ -1836,6 +1836,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\weapon\slap.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\weapon\slap.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\weapon\snipe_rifle.cpp"
 					>
 				</File>
