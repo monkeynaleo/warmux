@@ -28,6 +28,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>lynxlynxlynx</nickname>
+	<name>Jaka KRANJC</name>
+	<description>i18n manager, misc</description>
+	<email>svn_AT_lynxlynx_DOT_info</email>
+	<country>Slovenia</country>
+      </author>
+      <author>
 	<nickname>yeKcim</nickname>
 	<name>Anthony CARRÉ</name>
 	<description>Graphic artist</description>
@@ -378,6 +385,7 @@
         <country>Hungary</country>
       </author>
       <author>
+        <nickname>Adrián</nickname>
 	<name>Adrián Chaves</name>
 	<description>Translated Wormux in Galician</description>
 	<email>adriyetichaves_AT_gmail_DOT_com</email>
@@ -555,13 +563,6 @@
 	<name>Larry COW</name>
 	<description>Patch for Linux</description>
 	<email>larry_AT_doubidou_DOT_net</email>
-      </author>
-      <author>
-	<nickname>lynxlynxlynx</nickname>
-	<name>Jaka KRANJC</name>
-	<description>Patch that enables cycling through characters backwards. G++ 4.2 support</description>
-	<email>svn_AT_lynxlynx_DOT_info</email>
-	<country>Slovenia</country>
       </author>
       <author>
 	<nickname>Mathias</nickname>
