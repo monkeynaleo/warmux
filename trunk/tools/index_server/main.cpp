@@ -182,6 +182,7 @@ int main(int argc, void** argv)
           if( ! client->second->connected )
             {
               // Connection closed
+              DPRINT(CONN, "Closind FD %u from client %p\n", client->second->GetFD(), client->second);
               listen_sock.CloseConnection( client->second->GetFD() );
               delete client->second;
               clients.erase(client);
@@ -191,7 +192,7 @@ int main(int argc, void** argv)
           if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
             {
               if( ! client->second->Receive() ) {
-                DPRINT(CONN, "Nothing received, disconnecting!");
+                DPRINT(CONN, "Nothing received from client %p, disconnecting!", client->second);
                 client->second->connected = false;
               }
               // Exit as the clients list may have changed
