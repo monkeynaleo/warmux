@@ -665,7 +665,7 @@ void Game::SignalCharacterDeath (const Character *character) const
     JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "out");
 
   } else if (character->IsDrowned() ) {
-    txt = Format(_("%s from %s team has fallen in water."),
+    txt = Format(_("%s from %s team has fallen into the water!"),
                  character->GetName().c_str(),
                  character->GetTeam().GetName().c_str());
 
@@ -680,7 +680,7 @@ void Game::SignalCharacterDeath (const Character *character) const
 
       // Dead while moving ?
     } else if (state == PLAYING) {
-      txt = Format(_("%s from %s team has hurted the ground too hardly!"),
+      txt = Format(_("%s from %s team has hit the ground too hard!"),
                    character->GetName().c_str(),
                    character->GetTeam().GetName().c_str());
        JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "out");
@@ -692,10 +692,10 @@ void Game::SignalCharacterDeath (const Character *character) const
                    character->GetTeam().GetName().c_str());
     }
   } 
-  // Does active player killed someone of his own team ?
+  // Did the active player kill someone of his own team ?
   else if ( character->GetTeam().IsSameAs(ActiveTeam()) ) {
     if (ActiveCharacter().IsDead()) {
-      txt = Format(_("%s brought a member of the %s team in grave with him!"),
+      txt = Format(_("%s took a member of the %s team to the grave with him!"),
                    ActiveCharacter().GetName().c_str(), 
                    character->GetTeam().GetName().c_str());
     } else {

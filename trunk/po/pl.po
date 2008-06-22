@@ -43,11 +43,6 @@ msgstr[0] "%i gracz jest gotowy"
 msgstr[1] "%i graczy jest gotowych"
 msgstr[2] "%i graczy jest gotowych"
 
-#: src/game/game.cpp:691
-#, c-format
-msgid "%s (%s) has died."
-msgstr "%s (drużyna %s) zginął."
-
 #: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
@@ -69,25 +64,40 @@ msgstr "Drużyna %s"
 msgid "%s Team - Remote"
 msgstr "Drużyna %s - zdalna"
 
-#: src/game/game.cpp:670
-#, c-format
-msgid "%s commits suicide !"
-msgstr "%s popełnił samobójstwo!"
-
 #: src/graphic/fps.cpp:102
 #, c-format
 msgid "%s fps"
 msgstr "%s kl/s"
 
-#: src/game/game.cpp:663
-#, c-format
-msgid "%s has fallen in water."
+#: src/game/game.cpp:677
+#, fuzzy, c-format
+msgid "%s from %s team commited suicide!"
+msgstr "%s popełnił samobójstwo!"
+
+#: src/game/game.cpp:710
+#, fuzzy, c-format
+msgid "%s from %s team has died."
+msgstr "%s (drużyna %s) zginął."
+
+#: src/game/game.cpp:668
+#, fuzzy, c-format
+msgid "%s from %s team has fallen into the water!"
 msgstr "%s wpadł do wody."
 
-#: src/game/game.cpp:674
-#, c-format
-msgid "%s has fallen off the map!"
+#: src/game/game.cpp:662
+#, fuzzy, c-format
+msgid "%s from %s team has fallen off the map!"
 msgstr "%s wypadł poza mapę!"
+
+#: src/game/game.cpp:683
+#, c-format
+msgid "%s from %s team has hit the ground too hard!"
+msgstr ""
+
+#: src/game/game.cpp:690
+#, fuzzy, c-format
+msgid "%s from %s team is dead because he is clumsy!"
+msgstr "%s zginął przez swoją niezdarność!"
 
 #: src/object/medkit.cpp:68
 #, c-format
@@ -97,15 +107,10 @@ msgstr[0] "%s wygrał %u punkt energii!"
 msgstr[1] "%s wygrał %u punkty energii!"
 msgstr[2] "%s wygrał %u punktów energii!"
 
-#: src/game/game.cpp:685
+#: src/game/game.cpp:702
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s jest psychopatą, zabił %s - członka swojej drużyny!"
-
-#: src/game/game.cpp:680
-#, c-format
-msgid "%s is dead because he is clumsy!"
-msgstr "%s zginął przez swoją niezdarność!"
 
 #: src/weapon/mine.cpp:121
 #, c-format
@@ -442,6 +447,11 @@ msgstr[2] ""
 #, c-format
 msgid "%s team was fragged down."
 msgstr "Drużyna %s została unicestwiona."
+
+#: src/game/game.cpp:698
+#, c-format
+msgid "%s took a member of the %s team to the grave with him!"
+msgstr ""
 
 #: src/interface/interface.cpp:165
 msgid "(dead)"
@@ -1364,7 +1374,7 @@ msgstr "Uzbrojenie"
 msgid "Website: "
 msgstr "Strona domowa: "
 
-#: src/game/game.cpp:688
+#: src/game/game.cpp:707
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Co za wstyd! %s został zabity zwykłym pistoletem!"
@@ -1456,16 +1466,16 @@ msgstr "do"
 msgid "no configuration file!"
 msgstr "brak pliku konfiguracyjnego!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:166
 msgid "o Loading music"
 msgstr "o Wczytywanie muzyki"
 
-#: src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:342
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Wczytywanie profilu dźwięków: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:88
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otworzono plik audio - %d Hz %d bit"

@@ -43,11 +43,6 @@ msgstr[0] "%i jucător e gata"
 msgstr[1] "%i jucători sunt gata"
 msgstr[2] "%i de jucători sunt gata"
 
-#: src/game/game.cpp:691
-#, c-format
-msgid "%s (%s) has died."
-msgstr "%s (%s) a murit."
-
 #: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
@@ -69,25 +64,41 @@ msgstr "Echipa %s"
 msgid "%s Team - Remote"
 msgstr "Echipa %s - la distanță"
 
-#: src/game/game.cpp:670
-#, c-format
-msgid "%s commits suicide !"
-msgstr "%s se sinucide !"
-
 #: src/graphic/fps.cpp:102
 #, c-format
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game.cpp:663
-#, c-format
-msgid "%s has fallen in water."
+#: src/game/game.cpp:677
+#, fuzzy, c-format
+msgid "%s from %s team commited suicide!"
+msgstr "%s se sinucide !"
+
+#: src/game/game.cpp:710
+#, fuzzy, c-format
+msgid "%s from %s team has died."
+msgstr "%s (%s) a murit."
+
+#: src/game/game.cpp:668
+#, fuzzy, c-format
+msgid "%s from %s team has fallen into the water!"
 msgstr "%s a căzut în apă."
 
-#: src/game/game.cpp:674
-#, c-format
-msgid "%s has fallen off the map!"
+#: src/game/game.cpp:662
+#, fuzzy, c-format
+msgid "%s from %s team has fallen off the map!"
 msgstr "%s a căzut în afara hărții!"
+
+#: src/game/game.cpp:683
+#, c-format
+msgid "%s from %s team has hit the ground too hard!"
+msgstr ""
+
+# what about female names?
+#: src/game/game.cpp:690
+#, fuzzy, c-format
+msgid "%s from %s team is dead because he is clumsy!"
+msgstr "%s decedat prin propria stângăcie!"
 
 #: src/object/medkit.cpp:68
 #, c-format
@@ -97,16 +108,10 @@ msgstr[0] "%s a câștigat %u punct de energie!"
 msgstr[1] "%s a câștigat %u puncte de energie!"
 msgstr[2] "%s a câștigat %u de puncte de energie!"
 
-#: src/game/game.cpp:685
+#: src/game/game.cpp:702
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "Psihopatia sălășluiește în %s, a omorât un membru al echipei %s!"
-
-# what about female names?
-#: src/game/game.cpp:680
-#, c-format
-msgid "%s is dead because he is clumsy!"
-msgstr "%s decedat prin propria stângăcie!"
 
 #: src/weapon/mine.cpp:121
 #, c-format
@@ -564,6 +569,11 @@ msgstr[2] ""
 #, c-format
 msgid "%s team was fragged down."
 msgstr "Echipa %s a fost nimicită."
+
+#: src/game/game.cpp:698
+#, c-format
+msgid "%s took a member of the %s team to the grave with him!"
+msgstr ""
 
 #: src/interface/interface.cpp:165
 msgid "(dead)"
@@ -1491,7 +1501,7 @@ msgstr "Arme"
 msgid "Website: "
 msgstr "Saitul web: "
 
-#: src/game/game.cpp:688
+#: src/game/game.cpp:707
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -1586,16 +1596,16 @@ msgstr "de la:"
 msgid "no configuration file!"
 msgstr "nu există nici un fișier de configurare!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:166
 msgid "o Loading music"
 msgstr "o Se încarcă muzica"
 
-#: src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:342
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Se încarcă profilul de sunet: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:88
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"

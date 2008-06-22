@@ -29,11 +29,6 @@ msgid_plural "%i players ready"
 msgstr[0] "%i játékos kész"
 msgstr[1] "%i játékos kész"
 
-#: src/game/game.cpp:691
-#, c-format
-msgid "%s (%s) has died."
-msgstr "%s (%s csapat) meghalt."
-
 #: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
@@ -55,25 +50,40 @@ msgstr "Csapatok"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:670
-#, c-format
-msgid "%s commits suicide !"
-msgstr "%s öngyilkos lett!"
-
 #: src/graphic/fps.cpp:102
 #, c-format
 msgid "%s fps"
 msgstr "%s képkocka/másodperc"
 
-#: src/game/game.cpp:663
-#, c-format
-msgid "%s has fallen in water."
+#: src/game/game.cpp:677
+#, fuzzy, c-format
+msgid "%s from %s team commited suicide!"
+msgstr "%s öngyilkos lett!"
+
+#: src/game/game.cpp:710
+#, fuzzy, c-format
+msgid "%s from %s team has died."
+msgstr "%s (%s csapat) meghalt."
+
+#: src/game/game.cpp:668
+#, fuzzy, c-format
+msgid "%s from %s team has fallen into the water!"
 msgstr "%s vízbe esett."
 
-#: src/game/game.cpp:674
-#, c-format
-msgid "%s has fallen off the map!"
+#: src/game/game.cpp:662
+#, fuzzy, c-format
+msgid "%s from %s team has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
+
+#: src/game/game.cpp:683
+#, c-format
+msgid "%s from %s team has hit the ground too hard!"
+msgstr ""
+
+#: src/game/game.cpp:690
+#, fuzzy, c-format
+msgid "%s from %s team is dead because he is clumsy!"
+msgstr "%s egy kicsit ügyefogyott volt, ezért távozott az élõk sorából!"
 
 #: src/object/medkit.cpp:68
 #, c-format
@@ -82,15 +92,10 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s nyert %u energiapontot!"
 msgstr[1] "%s energiája %u egységgel nõtt!"
 
-#: src/game/game.cpp:685
+#: src/game/game.cpp:702
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s egy pszichopata, megölte a(z) %s csapat egy tagját!"
-
-#: src/game/game.cpp:680
-#, c-format
-msgid "%s is dead because he is clumsy!"
-msgstr "%s egy kicsit ügyefogyott volt, ezért távozott az élõk sorából!"
 
 #: src/weapon/mine.cpp:121
 #, c-format
@@ -399,6 +404,11 @@ msgstr[1] "A(z) %s csapat nyert %u %st!"
 #, fuzzy, c-format
 msgid "%s team was fragged down."
 msgstr "%s csapata nyert."
+
+#: src/game/game.cpp:698
+#, c-format
+msgid "%s took a member of the %s team to the grave with him!"
+msgstr ""
 
 #: src/interface/interface.cpp:165
 msgid "(dead)"
@@ -1311,7 +1321,7 @@ msgstr "Fegyverek"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game.cpp:688
+#: src/game/game.cpp:707
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s - egy sima pisztoly kinyírta!"
@@ -1406,16 +1416,16 @@ msgstr "a következõtõl:"
 msgid "no configuration file!"
 msgstr "Hiba a konfigurációs fájl betöltése közben: %s"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:166
 msgid "o Loading music"
 msgstr "Zene betöltése"
 
-#: src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:342
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Hangprofil betöltése: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:88
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Hangminõség: %d Hz, %d bit"

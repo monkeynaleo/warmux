@@ -38,11 +38,6 @@ msgstr[0] "%i hráč připraven"
 msgstr[1] "%i hráči připraveni"
 msgstr[2] "%i hráčů připraveno"
 
-#: src/game/game.cpp:691
-#, c-format
-msgid "%s (%s) has died."
-msgstr "%s (%s) zemřel."
-
 #: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> aka %s from %s"
@@ -64,25 +59,40 @@ msgstr "%s Tým"
 msgid "%s Team - Remote"
 msgstr "%s Tým - Vzdálený"
 
-#: src/game/game.cpp:670
-#, c-format
-msgid "%s commits suicide !"
-msgstr "%s spáchal sebevraždu !"
-
 #: src/graphic/fps.cpp:102
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:663
-#, c-format
-msgid "%s has fallen in water."
+#: src/game/game.cpp:677
+#, fuzzy, c-format
+msgid "%s from %s team commited suicide!"
+msgstr "%s spáchal sebevraždu !"
+
+#: src/game/game.cpp:710
+#, fuzzy, c-format
+msgid "%s from %s team has died."
+msgstr "%s (%s) zemřel."
+
+#: src/game/game.cpp:668
+#, fuzzy, c-format
+msgid "%s from %s team has fallen into the water!"
 msgstr "%s se utopil."
 
-#: src/game/game.cpp:674
-#, c-format
-msgid "%s has fallen off the map!"
+#: src/game/game.cpp:662
+#, fuzzy, c-format
+msgid "%s from %s team has fallen off the map!"
 msgstr "%s zmizel z mapy!"
+
+#: src/game/game.cpp:683
+#, c-format
+msgid "%s from %s team has hit the ground too hard!"
+msgstr ""
+
+#: src/game/game.cpp:690
+#, fuzzy, c-format
+msgid "%s from %s team is dead because he is clumsy!"
+msgstr "%s je mrtvý, protože je trdlo!"
 
 #: src/object/medkit.cpp:68
 #, c-format
@@ -92,15 +102,10 @@ msgstr[0] "%s získal %u život!"
 msgstr[1] "%s získal %u životy!"
 msgstr[2] "%s získal %u životů!"
 
-#: src/game/game.cpp:685
+#: src/game/game.cpp:702
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychouš, zabil člena týmu %s!"
-
-#: src/game/game.cpp:680
-#, c-format
-msgid "%s is dead because he is clumsy!"
-msgstr "%s je mrtvý, protože je trdlo!"
 
 #: src/weapon/mine.cpp:121
 #, c-format
@@ -417,6 +422,11 @@ msgstr[2] ""
 #: src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
+msgstr ""
+
+#: src/game/game.cpp:698
+#, c-format
+msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
 
 #: src/interface/interface.cpp:165
@@ -1330,7 +1340,7 @@ msgstr "Zbraně"
 msgid "Website: "
 msgstr "Webová stránka: "
 
-#: src/game/game.cpp:688
+#: src/game/game.cpp:707
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Jaká hanba pro %s - zabil se tak hloupou zbraní!"
@@ -1422,16 +1432,16 @@ msgstr "z"
 msgid "no configuration file!"
 msgstr "žádný konfigurační soubor!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:166
 msgid "o Loading music"
 msgstr "o Nahrávám hudbu"
 
-#: src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:342
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Načítám hudební profil: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:88
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otevřena hudba o %d Hz %d bitech"
