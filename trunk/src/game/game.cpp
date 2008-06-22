@@ -658,39 +658,58 @@ void Game::SignalCharacterDeath (const Character *character) const
   std::string txt;
 
   ASSERT(IsGameLaunched());
+  if (character->IsGhost()) {
+    txt = Format(_("%s from %s team has fallen off the map!"),
+                 character->GetName().c_str(),
+                 character->GetTeam().GetName().c_str());
+    JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "out");
 
-  if (character -> IsDrowned()) {
-    txt = Format(_("%s has fallen in water."), character -> GetName().c_str());
+  } else if (character->IsDrowned() ) {
+    txt = Format(_("%s from %s team has fallen in water."),
+                 character->GetName().c_str(),
+                 character->GetTeam().GetName().c_str());
 
   } else if (&ActiveCharacter() == character) { // Active Character is dead
     CharacterCursor::GetInstance()->Hide();
 
     // Is this a suicide ?
     if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUICIDE) {
-      txt = Format(_("%s commits suicide !"), character -> GetName().c_str());
+      txt = Format(_("%s from %s team commited suicide!"),
+                   character->GetName().c_str(),
+                   character->GetTeam().GetName().c_str());
 
       // Dead while moving ?
     } else if (state == PLAYING) {
-      txt = Format(_("%s has fallen off the map!"),
-                   character -> GetName().c_str());
+      txt = Format(_("%s from %s team has hurted the ground too hardly!"),
+                   character->GetName().c_str(),
+                   character->GetTeam().GetName().c_str());
        JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "out");
 
-      // The playing character killed hisself
+      // The playing character killed himself
     } else {
-      txt = Format(_("%s is dead because he is clumsy!"),
-                   character -> GetName().c_str());
+      txt = Format(_("%s from %s team is dead because he is clumsy!"),
+                   character->GetName().c_str(),
+                   character->GetTeam().GetName().c_str());
     }
-  } else if (!ActiveCharacter().IsDead()
-             && character->GetTeam().IsSameAs(ActiveTeam()) ) {
-    txt = Format(_("%s is a psychopath, he has killed a member of the %s team!"),
-                 ActiveCharacter().GetName().c_str(), character->GetTeam().GetName().c_str());
+  } 
+  // Does active player killed someone of his own team ?
+  else if ( character->GetTeam().IsSameAs(ActiveTeam()) ) {
+    if (ActiveCharacter().IsDead()) {
+      txt = Format(_("%s brought a member of the %s team in grave with him!"),
+                   ActiveCharacter().GetName().c_str(), 
+                   character->GetTeam().GetName().c_str());
+    } else {
+      txt = Format(_("%s is a psychopath, he has killed a member of the %s team!"),
+                   ActiveCharacter().GetName().c_str(), 
+                   character->GetTeam().GetName().c_str());
+    }
   } else if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_GUN) {
     txt = Format(_("What a shame for %s - he was killed by a simple gun!"),
-                 character -> GetName().c_str());
+                 character->GetName().c_str());
   } else {
-    txt = Format(_("%s (%s) has died."),
-                 character -> GetName().c_str(),
-                 character -> GetTeam().GetName().c_str());
+    txt = Format(_("%s from %s team has died."),
+                 character->GetName().c_str(),
+                 character->GetTeam().GetName().c_str());
   }
 
   GameMessages::GetInstance()->Add (txt);
