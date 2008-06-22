@@ -61,6 +61,10 @@ void JukeBox::Init()
   JukeBox::GetInstance()->SetFrequency(Config::GetInstance()->GetSoundFrequency());
 
   if (m_init) return;
+  if (!m_config.music && !m_config.effects) {
+    End();
+    return;
+  }
 
   Uint16 audio_format = MIX_DEFAULT_FORMAT;
 
@@ -88,11 +92,6 @@ void JukeBox::Init()
   Mix_HookMusicFinished(JukeBox::EndMusic);
 
   m_init = true;
-
-  if (!m_config.music && !m_config.effects) {
-    End();
-    return;
-  }
 
   LoadXML("share");
   LoadMusicXML();
