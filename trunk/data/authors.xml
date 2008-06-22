@@ -537,6 +537,13 @@
 	<country>France</country>
       </author>
       <author>
+        <nickname>Jim++</nickname>
+        <name>Jean-Marie Traissard</name>
+        <description>Patch</description>
+        <email>jim_AT_lapin_DOT_org</email>
+        <country>France</country>
+      </author>
+      <author>
 	<nickname>Johannes</nickname>
 	<name>Johannes KRUDE</name>
 	<description>Patch, bug report</description>
