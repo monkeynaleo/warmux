@@ -127,13 +127,13 @@ static bool CheckHost(const int ip, int prt)
   if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
     {
       fprintf(stderr, "Setting receive timeout on socket failed\n");
-      return false /*CONN_BAD_SOCKET*/;
+      goto error /*CONN_BAD_SOCKET*/;
     }
 
   if (setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
     {
       fprintf(stderr, "Setting send timeout on socket failed\n");
-      return false /*CONN_BAD_SOCKET*/;
+      goto error /*CONN_BAD_SOCKET*/;
     }
 
   struct sockaddr_in addr;
@@ -148,12 +148,16 @@ static bool CheckHost(const int ip, int prt)
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
     {
-      return false /*GetError()*/;
+      goto error /*GetError()*/;
     }
   closesocket(fd);
 
   DPRINT(CONN, "Checking connection to %s:%i : OK", host.c_str(), prt);
   return true /*CONNECTED*/;
+
+error:
+  closesocket(fd);
+  return false;
 }
 
 bool Client::HandShake(const std::string & version)
