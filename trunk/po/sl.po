@@ -70,34 +70,34 @@ msgid "%s fps"
 msgstr "%s fps"
 
 #: src/game/game.cpp:677
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team commited suicide!"
-msgstr "%s je naredil/a samomor!"
+msgstr "%s iz ekipe %s je naredil/a samomor!"
 
 #: src/game/game.cpp:710
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has died."
-msgstr "%s (%s) je umrl/a."
+msgstr "%s iz ekipe %s je umrl/a."
 
 #: src/game/game.cpp:668
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has fallen into the water!"
-msgstr "%s je padel/a v vodo."
+msgstr "%s iz ekipe %s je padel/a v vodo."
 
 #: src/game/game.cpp:662
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has fallen off the map!"
-msgstr "%s je padel/a s karte!"
+msgstr "%s iz ekipe %s je padel/a s karte!"
 
 #: src/game/game.cpp:683
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
-msgstr ""
+msgstr "%s iz ekipe %s je premočno zadel tla!"
 
 #: src/game/game.cpp:690
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team is dead because he is clumsy!"
-msgstr "%s je mrtev, ker je bil neroden!"
+msgstr "%s iz ekipe %s je mrtev, ker je bil neroden!"
 
 #: src/object/medkit.cpp:68
 #, c-format
@@ -460,7 +460,7 @@ msgstr "Ekipa %s je bila uničena."
 #: src/game/game.cpp:698
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
-msgstr ""
+msgstr "%s je s sabo v grob vzel še člana skupine %s!"
 
 #: src/interface/interface.cpp:165
 msgid "(dead)"
