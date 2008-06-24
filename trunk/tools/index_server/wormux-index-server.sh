@@ -1,4 +1,12 @@
 #!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          wormux-index-server
+# Required-Start:    $network
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:      0 6
+# Short-Description: Raise Wormux index server
+### END INIT INFO
 
 WMX_SERVER=/usr/bin/wormux_index_server
 WMX_RUN_PID=/var/run/wormux_index_server.pid
