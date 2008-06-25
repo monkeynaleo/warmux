@@ -866,6 +866,7 @@ void Character::GetValueFromAction(Action *a)
   // those 2 parameters will be retrieved by PhysicalObj::GetValueFromAction
   alive_t prev_live_state = m_alive;
   int prev_energy = m_energy;
+  Point2d prev_position = Physics::GetPos();
 
   PhysicalObj::GetValueFromAction(a);
   SetDirection((BodyDirection_t)(a->PopInt()));
@@ -933,6 +934,13 @@ void Character::GetValueFromAction(Action *a)
     GetBody()->SetFrame((uint)(a->PopInt()));
 
     GetBody()->UpdateWeaponPosition(GetPosition());
+  }
+
+  // If the player has moved, the camera should follow it!
+  Point2d current_position = Physics::GetPos();
+  if (IsActiveCharacter() && prev_position != current_position) {
+    Camera::GetInstance()->FollowObject(this, true);
+    HideGameInterface();
   }
 }
 
