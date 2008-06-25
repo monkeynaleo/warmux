@@ -133,7 +133,12 @@ int main(int argc, void** argv)
 
   // Ignore broken pipe signal (elsewise we would break,
   // as soon as we are trying to write on client that closed)
-  if( signal(SIGPIPE, SIG_IGN) == SIG_ERR )
+  sigset_t sigpipe_mask;
+  if (sigemptyset(&sigpipe_mask) == -1)
+    TELL_ERROR;
+  if (sigaddset(&sigpipe_mask, SIGPIPE) == -1)
+    TELL_ERROR;
+  if (sigprocmask(SIG_BLOCK, &sigpipe_mask, NULL) == -1)
     TELL_ERROR;
 
   // Set the maximum number of connection
