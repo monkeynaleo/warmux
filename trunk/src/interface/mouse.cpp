@@ -219,7 +219,7 @@ void Mouse::Refresh()
     {
       Show();
       lastpos = pos;
-      counter = NB_LOOP_BEFORE_HIDE;  
+      counter = NB_LOOP_BEFORE_HIDE;
       ShowGameInterface();
     }
   else
@@ -310,6 +310,7 @@ void Mouse::Hide()
 {
   visible = MOUSE_HIDDEN;
   SDL_ShowCursor(false); // be sure cursor is invisible
+  CenterPointer();
 }
 
 // Center the pointer on the screen
