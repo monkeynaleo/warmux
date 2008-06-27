@@ -62,6 +62,7 @@ then
     rm -rf ${APP}/*
     echo "******************"
 fi
+
 echo "Create Wormux.app file"
 mkdir -p ${APP}
 mkdir -p ${APP}Contents/MacOS/
@@ -90,10 +91,10 @@ cd ${TMP}
 awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
 cp ${ROOT}CMakeLists.txt tmp.$$.$$.2
 mv tmp.$$.$$ ${ROOT}CMakeLists.txt
-cmake ../..
+cmake ../.. --graphviz=viz.dot
 mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
 
-make
+make -j2
 make install
 
 
@@ -102,7 +103,7 @@ make install
 #
 
 # Add icon and info.plist and PkgInfo
-cp ${MAC}Info.plist.in ${APP}Contents/info.plist
+cp ${MAC}Info.plist.in ${APP}Contents/Info.plist
 cp ${MAC}PkgInfo.in ${APP}Contents/
 cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
@@ -145,9 +146,9 @@ fi
 #
 # Create Archive
 #
-echo "Make archive ${ARCHIVE}"
-tar cfj ${ARCHIVE} ${APP}
-echo "Archive ${ARCHIVE} done"
+#echo "Make archive ${ARCHIVE}"
+#tar cfj ${ARCHIVE} ${APP}
+#echo "Archive ${ARCHIVE} done"
     
 
 #

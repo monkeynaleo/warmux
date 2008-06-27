@@ -48,9 +48,9 @@ IF(APPLE)
   SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/wormux/)
   SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale/)
   SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
-  SET(DATA_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/Resources/data/)
-  SET(PO_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/Resources/locale/)
-  SET(BIN_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/MacOS/)
+  SET(DATA_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/Resources/data)
+  SET(PO_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/Resources/locale)
+  SET(BIN_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/MacOS)
 ENDIF(APPLE)
 
 
