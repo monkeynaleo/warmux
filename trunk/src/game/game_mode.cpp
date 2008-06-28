@@ -188,7 +188,7 @@ bool GameMode::Load(void)
   std::string fullname;
   Config * config = Config::GetInstance();
   m_current = config->GetGameMode();
-  
+
   // Game mode objects configuration file
   fullname = config->GetPersonalDataDir() + GetObjectsFilename();
 
@@ -196,7 +196,7 @@ bool GameMode::Load(void)
     fullname = config->GetDataDir() + GetObjectsFilename();
 
   if(!DoesFileExist(fullname)) {
-    Error(Format("Can not find file %s\n", fullname.c_str()));
+    Error(Format("Can not find file %s", fullname.c_str()));
     return false;
   }
 
@@ -212,7 +212,7 @@ bool GameMode::Load(void)
     fullname = config->GetDataDir() + GetFilename();
 
   if(!DoesFileExist(fullname)) {
-    Error(Format("Can not find file %s\n", fullname.c_str()));
+    Error(Format("Can not find file %s", fullname.c_str()));
     return false;
   }
 
