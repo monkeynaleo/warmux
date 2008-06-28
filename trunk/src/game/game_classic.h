@@ -23,10 +23,14 @@
 #define GAME_CLASSIC_H
 
 #include "game/game.h"
+#include "sound/sound_sample.h"
 
 class GameClassic : public Game
 {
   uint duration;
+
+  SoundSample countdown_sample;
+
   /* If you need this, implement it (correctly)*/
   GameClassic(const GameClassic&);
   GameClassic operator=(const GameClassic&);

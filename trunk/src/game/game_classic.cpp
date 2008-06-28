@@ -79,7 +79,7 @@ void GameClassic::RefreshClock()
         } else {
           duration--;
 	  if (duration == 12) {
-	    JukeBox::GetInstance()->Play("share", "countdown-end_turn");
+	    countdown_sample.Play("share", "countdown-end_turn");
 	  }
 	  if (duration > 10) {
 	    Interface::GetInstance()->UpdateTimer(duration, black_color);
@@ -206,6 +206,7 @@ void GameClassic::__SetState_HAS_PLAYED()
 void GameClassic::__SetState_END_TURN()
 {
   MSG_DEBUG("game.statechange", "End of turn");
+  countdown_sample.Stop();
   ActiveTeam().AccessWeapon().SignalTurnEnd();
   ActiveTeam().AccessWeapon().Deselect();
   CharacterCursor::GetInstance()->Hide();
