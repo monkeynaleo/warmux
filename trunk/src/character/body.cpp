@@ -438,15 +438,40 @@ void Body::UpdateWeaponPosition(const Point2i& _pos)
   weapon_pos += _pos;
 }
 
+void Body::DrawWeaponMember(const Point2i& _pos)
+{
+  UpdateWeaponPosition(_pos);
+
+  weapon_member->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
+}
+
 void Body::Draw(const Point2i& _pos)
 {
   Build();
 
-  UpdateWeaponPosition(_pos);
+  int draw_weapon_member = 0;
 
   // Finally draw each layer one by one
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-    current_clothe->layers[layer]->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
+  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
+
+    if (current_clothe->layers[layer]->name == "weapon") {
+      // We draw the weapon member only if currently drawing the active character
+      if (owner->IsActiveCharacter()) {
+	ASSERT(draw_weapon_member == 0);
+	ASSERT(current_clothe->layers[layer] == weapon_member);
+	DrawWeaponMember(_pos);
+	draw_weapon_member++;
+      }
+    } else {
+      current_clothe->layers[layer]->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
+    }
+  }
+
+  // if we are drawing the active character but current clothe does not contain a weapon member,
+  // we should draw it else weapon ammos number will be not displayed (see bug #11479)
+  if (owner->IsActiveCharacter() && draw_weapon_member == 0) {
+    DrawWeaponMember(_pos);
+  }
 }
 
 void Body::AddChildMembers(Member* parent)

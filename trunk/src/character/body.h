@@ -104,6 +104,8 @@ class Body
   void AddChildMembers(Member* parent);
   const Character* owner;
 
+  void DrawWeaponMember(const Point2i& _pos);
+
 public:
 
   Body(xmlNode* xml, const Profile* res);

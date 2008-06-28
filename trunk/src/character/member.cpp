@@ -288,10 +288,9 @@ WeaponMember::~WeaponMember()
 
 void WeaponMember::Draw(const Point2i & /*_pos*/, int /*flip_center*/, int /*direction*/)
 {
-  // Temporary *UGLY* fix for bug #11479 - Jetpack timer and skin is invisible
-//   if (!ActiveCharacter().IsDead() && Game::GetInstance()->ReadState() != Game::END_TURN)
-//   {
-//         ActiveTeam().crosshair.Draw();
-//         ActiveTeam().AccessWeapon().Draw();
-//   }
+  if (!ActiveCharacter().IsDead() && Game::GetInstance()->ReadState() != Game::END_TURN)
+    {
+      ActiveTeam().crosshair.Draw();
+      ActiveTeam().AccessWeapon().Draw();
+    }
 }

@@ -311,11 +311,6 @@ void Game::Draw ()
   StatStop("GameDraw:active_character");
   StatStop("GameDraw:characters");
 
-  // Temporary *UGLY* fix for bug #11479 - Jetpack timer and skin is invisible
-  // Should be done normally in WeaponMember::Draw
-  ActiveTeam().crosshair.Draw();
-  ActiveTeam().AccessWeapon().Draw();
-
   // Draw arrow on top of character
   StatStart("GameDraw:arrow_character");
   CharacterCursor::GetInstance()->Draw();
@@ -691,16 +686,16 @@ void Game::SignalCharacterDeath (const Character *character) const
                    character->GetName().c_str(),
                    character->GetTeam().GetName().c_str());
     }
-  } 
+  }
   // Did the active player kill someone of his own team ?
   else if ( character->GetTeam().IsSameAs(ActiveTeam()) ) {
     if (ActiveCharacter().IsDead()) {
       txt = Format(_("%s took a member of the %s team to the grave with him!"),
-                   ActiveCharacter().GetName().c_str(), 
+                   ActiveCharacter().GetName().c_str(),
                    character->GetTeam().GetName().c_str());
     } else {
       txt = Format(_("%s is a psychopath, he has killed a member of the %s team!"),
-                   ActiveCharacter().GetName().c_str(), 
+                   ActiveCharacter().GetName().c_str(),
                    character->GetTeam().GetName().c_str());
     }
   } else if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_GUN) {
