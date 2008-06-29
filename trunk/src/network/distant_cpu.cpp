@@ -40,8 +40,8 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
   sock(new_sock),
   owned_teams(),
   state(DistantComputer::STATE_ERROR),
-  force_disconnect(false),
-  nickname("this is not initialized")
+  nickname("this is not initialized"),
+  force_disconnect(false)
 {
   packet_size = 0;
   packet_received = 0;
@@ -202,6 +202,16 @@ std::string DistantComputer::GetAddress()
   return address;
 }
 
+void DistantComputer::SetNickname(const std::string& _nickname)
+{
+  nickname = _nickname;
+}
+
+const std::string& DistantComputer::GetNickname() const
+{
+  return nickname;
+}
+
 void DistantComputer::ManageTeam(Action* team)
 {
   std::string name = team->PopString();
@@ -251,7 +261,7 @@ void DistantComputer::SendChatMessage(Action* a) const
 {
   std::string txt = a->PopString();
   if (txt == "") return;
-  if(Network::GetInstance()->IsServer())
+  if (Network::GetInstance()->IsServer())
   {
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + "> "+txt));
   }

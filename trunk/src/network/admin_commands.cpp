@@ -44,7 +44,7 @@ void ProcessCommand(const std::string & cmd)
         cpu != Network::GetInstance()->cpu.end();
 	++cpu)
     {
-      if((*cpu)->nickname == nick)
+      if((*cpu)->GetNickname() == nick)
       {
         (*cpu)->force_disconnect = true;
         msg = std::string(Format("%s kicked", nick.c_str()));

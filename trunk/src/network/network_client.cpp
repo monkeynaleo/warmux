@@ -76,7 +76,7 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* sender) const
     {
       std::string nickname = a->PopString();
       std::cout<<"New nickname: " + nickname<< std::endl;
-      sender->nickname = nickname;
+      sender->SetNickname(nickname);
       delete a;
     }
     break;
@@ -200,7 +200,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
   cpu.push_back(server);
   //Send nickname to server
-  Action a(Action::ACTION_NICKNAME, nickname);
+  Action a(Action::ACTION_NICKNAME, GetNickname());
   SendAction(&a);
 
   //Control to net_thread_func

@@ -56,6 +56,8 @@ class DistantComputer
   int packet_size;
   int packet_received;
   char* packet;
+  std::string nickname;
+
 public:
   bool force_disconnect;
 
@@ -67,7 +69,9 @@ public:
   void SendDatas(char* paket, int size);
 
   std::string GetAddress();
-  std::string nickname;
+
+  void SetNickname(const std::string& nickname);
+  const std::string& GetNickname() const;
 
   void ManageTeam(Action* team);
   void SendChatMessage(Action* a) const;

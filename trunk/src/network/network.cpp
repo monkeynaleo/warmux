@@ -136,6 +136,18 @@ Network::~Network()
 
 //-----------------------------------------------------------------------------
 
+void Network::SetNickname(const std::string& _nickname)
+{
+  nickname = _nickname;
+}
+
+const std::string& Network::GetNickname() const
+{
+  return nickname;
+}
+
+//-----------------------------------------------------------------------------
+
 bool Network::ThreadToContinue() const
 {
   return !stop_thread;

@@ -67,11 +67,11 @@
 
 void Action_Nickname(Action *a)
 {
-  if(Network::GetInstance()->IsServer() && a->creator)
+  if (Network::GetInstance()->IsServer() && a->creator)
   {
       std::string nickname = a->PopString();
       std::cout<<"New nickname: " + nickname<< std::endl;
-      a->creator->nickname = nickname;
+      a->creator->SetNickname(nickname);
   }
 }
 
@@ -359,7 +359,7 @@ void SendGameMode()
 
 void Action_ChatMessage (Action *a)
 {
-  if(Network::GetInstance()->IsServer() && a->creator)
+  if (Network::GetInstance()->IsServer() && a->creator)
   {
     a->creator->SendChatMessage(a);
   }
@@ -367,7 +367,7 @@ void Action_ChatMessage (Action *a)
   {
     std::string msg = a->PopString();
     ChatLogger::GetInstance()->LogMessage(msg);
-    if(Game::GetInstance()->IsGameLaunched())
+    if (Game::GetInstance()->IsGameLaunched())
     {
       //Add message to chat session in Game
       Game::GetInstance()->chatsession.NewMessage(msg);
@@ -418,6 +418,13 @@ void Action_Menu_AddTeam (Action *a)
   {
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
   }
+
+  if (Network::IsConnected()) {
+    if (a->creator)
+      a->creator->SetNickname(the_team.player_name);
+    else
+      Network::GetInstance()->SetNickname(the_team.player_name);
+  }
 }
 
 void Action_Menu_UpdateTeam (Action *a)
@@ -432,6 +439,13 @@ void Action_Menu_UpdateTeam (Action *a)
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id);
+
+  if (Network::IsConnected()) {
+    if (a->creator)
+      a->creator->SetNickname(the_team.player_name);
+    else
+      Network::GetInstance()->SetNickname(the_team.player_name);
+  }
 }
 
 void Action_Menu_DelTeam (Action *a)

@@ -55,7 +55,7 @@ NetworkServer::~NetworkServer()
 void NetworkServer::SendChatMessage(const std::string& txt)
 {
   if (txt == "") return;
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + std::string("> ") + txt));
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, GetNickname() + std::string("> ") + txt));
 }
 
 void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const

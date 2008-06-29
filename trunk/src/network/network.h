@@ -89,6 +89,9 @@ private:
   static bool stop_thread;
   bool turn_master_player;
 
+  std::string nickname; //Clients: Send to Server at connect
+                        //Server: Send in chat messages
+
   void ReceiveActions();
 
 protected:
@@ -119,8 +122,6 @@ public:
 
   std::list<DistantComputer*> cpu; // list of the connected computer
   bool sync_lock;
-  std::string nickname; //Clients: Send to Server at connect
-                        //Server: Send in chat messages
 
   virtual ~Network();
 
@@ -136,6 +137,9 @@ public:
   virtual bool IsClient() const { return false ; }
   uint GetPort() const;
   const std::string& GetPassword() const { return password; }
+
+  void SetNickname(const std::string& nickname);
+  const std::string& GetNickname() const;
 
   // Action handling
   void SendPacket(char* packet, int size) const;
