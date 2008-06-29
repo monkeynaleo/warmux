@@ -26,34 +26,46 @@
 #include "tool/i18n.h"
 #include "game/game.h"
 
+static void PrintHelp()
+{
+  std::string msg = "help: " + std::string(_("Displays this message"));
+  Game::GetInstance()->chatsession.NewMessage(msg);
+  msg = "kick <nickname>: " + std::string(_("Kicks the players designated by <nickname> out of the game"));
+  Game::GetInstance()->chatsession.NewMessage(msg);
+}
+
 void ProcessCommand(const std::string & cmd)
 {
-  std::string msg;
   if(cmd == "/help")
   {
-    msg = "help: " + std::string(_("Displays this message"));
-    Game::GetInstance()->chatsession.NewMessage(msg);
-    msg = "kick <nickname>: " + std::string(_("Kicks the players designated by <nickname> out of the game"));
-    Game::GetInstance()->chatsession.NewMessage(msg);
+    PrintHelp();
   }
   else
-  if(cmd.substr(0, 6) == "/kick ")
   {
-    std::string nick = cmd.substr(6, cmd.size() - 6);
-    for(std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
-        cpu != Network::GetInstance()->cpu.end();
-	++cpu)
+    std::string msg;
+    if(cmd.substr(0, 6) == "/kick ")
     {
-      if((*cpu)->GetNickname() == nick)
+      std::string nick = cmd.substr(6, cmd.size() - 6);
+      for(std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
+          cpu != Network::GetInstance()->cpu.end();
+	  ++cpu)
       {
-        (*cpu)->force_disconnect = true;
-        msg = std::string(Format("%s kicked", nick.c_str()));
-        Game::GetInstance()->chatsession.NewMessage(msg);
-	break;
+        if((*cpu)->GetNickname() == nick)
+        {
+          (*cpu)->force_disconnect = true;
+          msg = std::string(Format("%s kicked", nick.c_str()));
+          Game::GetInstance()->chatsession.NewMessage(msg);
+	  return;
+        }
       }
+      msg = std::string(Format("%s: no such nickame", nick.c_str()));
+      Game::GetInstance()->chatsession.NewMessage(msg);
+    }
+    else
+    {
+      Game::GetInstance()->chatsession.NewMessage(_("Unknown command"));
+      PrintHelp();
     }
   }
-  else
-    Game::GetInstance()->chatsession.NewMessage(_("Unknown command"));
 }
 
