@@ -23,36 +23,50 @@ IF(PREFIX)
   SET(CMAKE_INSTALL_PREFIX ${PREFIX})
 ENDIF(PREFIX)
 
-
 # Set some global variables
 SET(WORMUX_CFLAGS "-Wall")	# additional compile flags for wormux
 SET(WORMUX_LDFLAGS "")		# additional linking flags for wormux
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-IF(UNIX AND NOT WIN32 AND NOT APPLE)
-  SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/wormux/)
-  SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale/)
-  SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
-  SET(DATA_DESTINATION "share/wormux")
-  SET(PO_DESTINATION "share/locale")
-  SET(BIN_DESTINATION "bin")
-ELSE(UNIX AND NOT WIN32 AND NOT APPLE)
-  SET(INSTALL_DATADIR data/)
-  SET(INSTALL_LOCALEDIR locale/)
-  SET(FONT_FILE data/font/DejaVuSans.ttf)
-  SET(DATA_DESTINATION "data")
-  SET(PO_DESTINATION "locale")
-  SET(BIN_DESTINATION ${CMAKE_BINARY_DIR})
-ENDIF(UNIX AND NOT WIN32 AND NOT APPLE)
-#add apple case
-IF(APPLE)
-  SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/wormux/)
-  SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale/)
-  SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
-  SET(DATA_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/Resources/data)
-  SET(PO_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/Resources/locale)
-  SET(BIN_DESTINATION ${PROJECT_SOURCE_DIR}/mac/Wormux.app/Contents/MacOS)
-ENDIF(APPLE)
 
+IF(BIN_PATH)
+  # If user specified a path for binary, use it
+  SET(BIN_DESTINATION ${BIN_PATH})
+ELSE(BIN_PATH)
+  # Otherwise use defaults
+  IF(UNIX AND NOT WIN32)
+    SET(BIN_DESTINATION "bin")
+  ELSE(UNIX AND NOT WIN32)
+    SET(BIN_DESTINATION ${CMAKE_BINARY_DIR})
+  ENDIF(UNIX AND NOT WIN32)
+ENDIF(BIN_PATH)
+
+IF(DATA_PATH)
+  # If user specified a path for data, use it
+  
+  SET(INSTALL_DATADIR ${DATA_PATH}/data/)
+  SET(INSTALL_LOCALEDIR ${DATA_PATH}/locale/)
+  SET(DATA_DESTINATION ${DATA_PATH}/data)
+  SET(PO_DESTINATION ${DATA_PATH}/locale)
+  SET(FONT_FILE ${DATA_PATH}/data/font/DejaVuSans.ttf)
+  
+ELSE(DATA_PATH)
+
+  # Otherwise use defaults
+  IF(UNIX AND NOT WIN32)
+    SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/wormux/)
+    SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale/)
+    SET(DATA_DESTINATION "share/wormux")
+    SET(PO_DESTINATION "share/locale")
+    SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
+  ELSE(UNIX AND NOT WIN32)
+    SET(INSTALL_DATADIR data/)
+    SET(INSTALL_LOCALEDIR locale/)
+    SET(DATA_DESTINATION "data")
+    SET(PO_DESTINATION "locale")
+    SET(FONT_FILE data/font/DejaVuSans.ttf)
+  ENDIF(UNIX AND NOT WIN32)
+  
+ENDIF(DATA_PATH)
 
 # Optional package CPack
 INCLUDE(CPackConfig OPTIONAL)
