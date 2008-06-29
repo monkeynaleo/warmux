@@ -30,9 +30,11 @@ class SoundSample
 {
  private:
   int channel;
+  friend void channel_finished(int channel);
 
  public:
   SoundSample();
+  ~SoundSample();
 
   // return false if sound can't be played because it is already playing
   bool Play(const std::string& category,
