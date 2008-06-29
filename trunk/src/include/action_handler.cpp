@@ -367,16 +367,7 @@ void Action_ChatMessage (Action *a)
   {
     std::string msg = a->PopString();
     ChatLogger::GetInstance()->LogMessage(msg);
-    if (Game::GetInstance()->IsGameLaunched())
-    {
-      //Add message to chat session in Game
-      Game::GetInstance()->chatsession.NewMessage(msg);
-    }
-    else
-    {
-      // For menu
-      AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-    }
+    AppWormux::GetInstance()->ReceiveMsgCallback(msg);
   }
 }
 

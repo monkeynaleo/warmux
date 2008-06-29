@@ -25,6 +25,7 @@
 #include "gui/msg_box.h"
 #include "gui/text_box.h"
 #include "include/app.h"
+#include "network/admin_commands.h"
 #include "network/network.h"
 #include "tool/resource_manager.h"
 
@@ -42,7 +43,7 @@ TalkBox::TalkBox(const Point2i& size, Font::font_size_t fsize, Font::font_style_
   HBox* tmp2_box = new HBox(16, false);
   tmp2_box->SetMargin(4);
   tmp2_box->SetBorder(Point2i(0,0));
-  line_to_send_tbox = new TextBox(" ", size.x-20, fsize, fstyle);
+  line_to_send_tbox = new TextBox("", size.x-20, fsize, fstyle);
   tmp2_box->AddWidget(line_to_send_tbox);
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
@@ -61,7 +62,12 @@ void TalkBox::NewMessage(const std::string &msg, const Color& color)
 void TalkBox::SendChatMsg()
 {
   std::string empty = "";
-  Network::GetInstance()->SendChatMessage(line_to_send_tbox->GetText());
+  std::string txt = line_to_send_tbox->GetText();
+  if (txt[0] == '/')
+    ProcessCommand(txt);
+  else if (txt != "" )
+    Network::GetInstance()->SendChatMessage(txt);
+
   line_to_send_tbox->SetText(empty);
 }
 

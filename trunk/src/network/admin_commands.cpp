@@ -20,18 +20,18 @@
  *****************************************************************************/
 
 #include <string>
+#include "include/app.h"
 #include "network/admin_commands.h"
 #include "network/distant_cpu.h"
 #include "network/network.h"
 #include "tool/i18n.h"
-#include "game/game.h"
 
 static void PrintHelp()
 {
   std::string msg = "help: " + std::string(_("Displays this message"));
-  Game::GetInstance()->chatsession.NewMessage(msg);
+  AppWormux::GetInstance()->ReceiveMsgCallback(msg);
   msg = "kick <nickname>: " + std::string(_("Kicks the players designated by <nickname> out of the game"));
-  Game::GetInstance()->chatsession.NewMessage(msg);
+  AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 }
 
 void ProcessCommand(const std::string & cmd)
@@ -54,17 +54,17 @@ void ProcessCommand(const std::string & cmd)
         {
           (*cpu)->force_disconnect = true;
           msg = std::string(Format("%s kicked", nick.c_str()));
-          Game::GetInstance()->chatsession.NewMessage(msg);
+          AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 	  return;
         }
-        printf("Nick: %s\n", (*cpu)->GetNickname());
+        printf("Nick: %s\n", (*cpu)->GetNickname().c_str());
       }
       msg = std::string(Format("%s: no such nickame", nick.c_str()));
-      Game::GetInstance()->chatsession.NewMessage(msg);
+      AppWormux::GetInstance()->ReceiveMsgCallback(msg);
     }
     else
     {
-      Game::GetInstance()->chatsession.NewMessage(_("Unknown command"));
+      AppWormux::GetInstance()->ReceiveMsgCallback(_("Unknown command"));
       PrintHelp();
     }
   }

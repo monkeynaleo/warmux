@@ -256,9 +256,10 @@ void AppWormux::DisplayError(const std::string &msg)
 void AppWormux::ReceiveMsgCallback(const std::string& msg)
 {
   if (Game::GetInstance()->IsGameLaunched()) {
-    // nothing to do
+    //Add message to chat session in Game
+    Game::GetInstance()->chatsession.NewMessage(msg);
   } else if (menu) {
-      menu->ReceiveMsgCallback(msg);
+    menu->ReceiveMsgCallback(msg);
   }
 }
 
