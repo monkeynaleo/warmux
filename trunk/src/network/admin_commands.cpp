@@ -57,6 +57,7 @@ void ProcessCommand(const std::string & cmd)
           Game::GetInstance()->chatsession.NewMessage(msg);
 	  return;
         }
+        printf("Nick: %s\n", (*cpu)->GetNickname());
       }
       msg = std::string(Format("%s: no such nickame", nick.c_str()));
       Game::GetInstance()->chatsession.NewMessage(msg);

@@ -167,7 +167,7 @@ void Network::ReceiveActions()
 
   while (ThreadToContinue()) // While the connection is up
   {
-    if (state == NETWORK_PLAYING && cpu.size() == 0)
+    if (state == NETWORK_PLAYING && cpu.empty())
     {
       // If while playing everybody disconnected, just quit
       break;
@@ -178,15 +178,6 @@ void Network::ReceiveActions()
     {
       WaitActionSleep();
 
-      if (cpu.empty()) {
-        if (IsClient()) {
-          fprintf(stderr, "you are alone!\n");
-	  stop_thread = true;
-        }
-        // Even for server, as Visual Studio in debug mode has trouble with that loop
-	continue;
-      }
-
       // Check forced disconnections
       for (dst_cpu = cpu.begin();
            ThreadToContinue() && dst_cpu != cpu.end();
@@ -195,10 +186,21 @@ void Network::ReceiveActions()
         if((*dst_cpu)->force_disconnect)
         {
           dst_cpu = CloseConnection(dst_cpu);
-          continue;
+          if (cpu.empty())
+            break; // Let it be handled afterwards
         }
       }
 
+      // List is now maybe empty
+      if (cpu.empty()) {
+        if (IsClient()) {
+          fprintf(stderr, "you are alone!\n");
+	  stop_thread = true;
+          return; // We really don't need to go through the loops
+        }
+        // Even for server, as Visual Studio in debug mode has trouble with that loop
+	continue;
+      }
       int num_ready = SDLNet_CheckSockets(socket_set, 100);
       // Means something is available
       if (num_ready>0)
@@ -222,8 +224,14 @@ void Network::ReceiveActions()
         if( packet_size == -1) { // An error occured during the reception
           dst_cpu = CloseConnection(dst_cpu);
           // Please Visual Studio that in debug mode has trouble with continuing
-          if (cpu.empty())
+          if (cpu.empty()) {
+            if (IsClient()) {
+              fprintf(stderr, "you are alone!\n");
+	      stop_thread = true;
+              return; // We really don't need to go through the loops
+            }
             break;
+          }
           continue;
         } else
         if (packet_size == 0) // We didn't receive the full packet yet
@@ -251,6 +259,15 @@ void Network::ReceiveActions()
           HandleAction(a, *dst_cpu);
         }
         free(packet);
+
+        if (cpu.empty()) {
+          if (IsClient()) {
+            fprintf(stderr, "you are alone!\n");
+            stop_thread = true;
+            return; // We really don't need to go through the loops
+          }
+          break;
+        }
       }
     }
   }
