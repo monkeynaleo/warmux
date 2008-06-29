@@ -145,7 +145,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
     int dac = center.y - y;
 
     //Darken the border of the removed ground
-    int blength = lround(sqrt((radius+EXPLOSION_BORDER_SIZE)*(radius+EXPLOSION_BORDER_SIZE) - dac*dac));
+    int blength = lround(sqrt((double)(radius+EXPLOSION_BORDER_SIZE)*(radius+EXPLOSION_BORDER_SIZE) - dac*dac));
 
     //Nothing to empty, just darken
     if ((uint)abs(dac) > radius) {
@@ -154,7 +154,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
     }
 
     //Zone of the line which needs to be emptied
-    int length = lround(sqrt(radius*radius - dac*dac));
+    int length = lround(sqrt((double)radius*radius - dac*dac));
 
     // Left half of the circle
     Darken(center.x-blength, center.x-length, buf, bpp);
