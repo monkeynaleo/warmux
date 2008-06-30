@@ -30,7 +30,7 @@
 #include "tool/i18n.h"
 
 const uint TPS_TOUR_MIN = 10;
-const uint TPS_TOUR_MAX = 120;
+const uint TPS_TOUR_MAX = 240;
 
 GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border) :
   GridBox(max_line_width, option_size, _draw_border)
@@ -42,6 +42,7 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   std::vector<std::pair<std::string, std::string> > game_modes;
   game_modes.push_back(std::pair<std::string, std::string>("classic", "Classic"));
   game_modes.push_back(std::pair<std::string, std::string>("unlimited", "Unlimited"));
+  game_modes.push_back(std::pair<std::string, std::string>("blitz", "Blitz"));
 
   opt_game_mode = new ComboBox(_("Game mode"), "menu/resolution", option_size,
 			       game_modes, Config::GetInstance()->GetGameMode());
