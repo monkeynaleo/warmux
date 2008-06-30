@@ -129,7 +129,7 @@ bool GameMenu::signal_ok()
 {
   SaveOptions();
   play_ok_sound();
-  Game::GetInstance()->Start();
+  Game::UpdateGameMode()->Start();
   return true;
 }
 
