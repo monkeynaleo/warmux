@@ -66,7 +66,6 @@
 //#define USE_VALGRIND
 #endif
 
-
 std::string Game::current_mode_name = "none";
 
 Game * Game::GetInstance()
@@ -98,7 +97,7 @@ Game * Game::UpdateGameMode()
   printf("Current mode: %s\n", config_mode_name.c_str());
   if (singleton != NULL && current_mode_name != config_mode_name)
   {
-    printf("Mode change! -> %s\n", config_mode_name.c_str(), current_mode_name.c_str());
+    printf("Mode change! -> %s %s\n", config_mode_name.c_str(), current_mode_name.c_str());
     delete singleton;
   }
 
