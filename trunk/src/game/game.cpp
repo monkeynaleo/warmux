@@ -67,25 +67,45 @@
 #endif
 
 
-Game::game_mode_t Game::mode = CLASSIC;
+std::string Game::current_mode_name = "none";
 
 Game * Game::GetInstance()
 {
-  if (singleton == NULL) {
-    switch (mode) {
-    case CLASSIC:
+  if (singleton == NULL)
+  {
+    if (current_mode_name == "none")
+      current_mode_name = Config::GetInstance()->GetGameMode();
+
+    if (current_mode_name == "classic" || current_mode_name == "unlimited")
       singleton = new GameClassic();
-      break;
-    case BLITZ:
+    else if (current_mode_name == "blitz")
+    {
+      //printf(">>>> Starting in blitz!\n");
       singleton = new GameBlitz();
-      break;
-    default:
-      fprintf(stderr, "Non-classic game not implemented\n");
+    }
+    else
+    {
+      fprintf(stderr, "%s game mode not implemented\n", current_mode_name.c_str());
       exit(1);
     }
   }
   return singleton;
 }
+
+Game * Game::UpdateGameMode()
+{
+  const std::string& config_mode_name = Config::GetInstance()->GetGameMode();
+  printf("Current mode: %s\n", config_mode_name.c_str());
+  if (singleton != NULL && current_mode_name != config_mode_name)
+  {
+    printf("Mode change! -> %s\n", config_mode_name.c_str(), current_mode_name.c_str());
+    delete singleton;
+  }
+
+  current_mode_name = config_mode_name;
+  return GetInstance();
+}
+
 
 void Game::MessageLoading() const
 {

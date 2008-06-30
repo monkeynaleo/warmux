@@ -348,9 +348,6 @@ void ParseArgs(int argc, char * argv[])
 #endif
           exit(0);
           break;
-        case 'b':
-          Game::SetMode(Game::BLITZ);
-          break;
         case 'v':
           DisplayWelcomeMessage();
           exit(0);

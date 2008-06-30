@@ -42,11 +42,6 @@ public:
     END_TURN = 2
   } game_loop_state_t;
 
-  typedef enum {
-    CLASSIC = 0,
-    BLITZ   = 1
-  } game_mode_t;
-
 protected:
   virtual void Run();         // Main loop
 
@@ -65,8 +60,7 @@ protected:
   virtual ~Game();
 
 private:
-  static game_mode_t  mode;
-
+  static std::string  current_mode_name;
 
   bool                isGameLaunched;
   ObjBox              *current_ObjBox;
@@ -113,12 +107,14 @@ private:
 
 public:
   static Game * GetInstance();
-  static void SetMode(game_mode_t m) { CleanUp(); mode = m; };
   static std::string GetUniqueId();
   static void ResetUniqueIds();
 
   bool                character_already_chosen;
   Chat                chatsession;
+
+  // Set mode
+  static Game * UpdateGameMode();
 
   void Start();
   void Init();
