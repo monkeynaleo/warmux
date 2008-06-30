@@ -99,6 +99,7 @@ void GameBlitz::RefreshClock()
       counter--;
     } else {
       time_iterator cur = GetCurrentTeam();
+
       uint duration = cur->second;
 
       switch (state) {
@@ -147,7 +148,8 @@ void GameBlitz::RefreshClock()
         }
       } // switch
 
-      cur->second = duration;
+      if (cur != times.end())
+        cur->second = duration;
     }// if !counter
   }
 }
@@ -239,12 +241,10 @@ bool GameBlitz::IsGameFinished() const
   uint num = 0;
 
   for (std::map<Team*, uint>::const_iterator it = times.begin(); it != times.end(); ++it) {
-    if (it->second != 0)
+    if (it->second != 0 && it->first->NbAliveCharacter())
       num++;
-
-    // If more than one team with time left > 0, not finished
-    if (num>1)
-      return false;
   }
-  return true;
+
+  // If more than one team with time left > 0 and alive character, game not finished
+  return (num < 2);
 }
