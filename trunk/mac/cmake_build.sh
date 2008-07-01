@@ -28,7 +28,7 @@ export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -a
 
 APP_VERSION=0.8svn
 BUNDLE_NAME=Wormux
-DMG_TARGET="${BUNDLE_NAME} ${APP_VERSION}"
+DMG_TARGET="${BUNDLE_NAME}-${APP_VERSION}"
 DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-`uname -p`
 
 if [ "$1" = "universal" ]
@@ -184,7 +184,7 @@ echo "Creating the distributable disk image"
 echo ""
 
 /bin/mv ${APP} ${DMG_OUT}.app
-APP= ${DMG_OUT}.app
+APP=${DMG_OUT}.app
 
 /usr/bin/hdiutil create -type SPARSE -size 85m -fs HFS+ -volname "${DMG_TARGET}" -attach ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
 /bin/cp -R ${APP} "/Volumes/${DMG_TARGET}"
