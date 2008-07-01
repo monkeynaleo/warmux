@@ -27,7 +27,7 @@ export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i38
 export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 
 APP_VERSION=0.8svn
-BUNDLE_NAME=Wormux-${APP_VERSION}-`uname -p`
+BUNDLE_NAME=Wormux
 DMG_TARGET="${BUNDLE_NAME} ${APP_VERSION}"
 DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-`uname -p`
 
@@ -41,7 +41,7 @@ then
     export CFLAGS="${FAT_CFLAGS} ${CFLAGS}"
     export CXXFLAGS="${CFLAGS}"
     export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
-    BUNDLE_NAME=Wormux-${APP_VERSION}-Universal
+    BUNDLE_NAME=Wormux
     DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
 fi
 
@@ -179,13 +179,12 @@ fi
 # Make .dmg and .tar.bz2 file
 #
 
-#
-# TODO THERE MAKE .DMG
-#
-
 echo ""
 echo "Creating the distributable disk image"
 echo ""
+
+/bin/mv ${APP} ${DMG_OUT}.app
+APP= ${DMG_OUT}.app
 
 /usr/bin/hdiutil create -type SPARSE -size 85m -fs HFS+ -volname "${DMG_TARGET}" -attach ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
 /bin/cp -R ${APP} "/Volumes/${DMG_TARGET}"
@@ -198,9 +197,9 @@ echo ""
 #
 # Create Archive
 #
-echo "Make archive ${ARCHIVE}"
-tar cfj ${ARCHIVE} ${APP}
-echo "Archive ${ARCHIVE} done"
+#echo "Make archive ${ARCHIVE}"
+#tar cfj ${ARCHIVE} ${APP}
+#echo "Archive ${ARCHIVE} done"
     
 
 #
