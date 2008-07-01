@@ -24,7 +24,7 @@ IF(PREFIX)
 ENDIF(PREFIX)
 
 # Set some global variables
-SET(WORMUX_CFLAGS "-Wall")	# additional compile flags for wormux
+SET(WORMUX_CFLAGS "-Wall -O2")	# additional compile flags for wormux
 SET(WORMUX_LDFLAGS "")		# additional linking flags for wormux
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
@@ -97,6 +97,7 @@ IF(APPLE)
   SET(WORMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WORMUX_LDFLAGS}")
 ELSE(APPLE)
   FIND_PACKAGE(PNG REQUIRED)
+  SET(WORMUX_CFLAGS "-march=native ${WORMUX_CFLAGS}") # native only works on x86 and x86_64
 ENDIF(APPLE)
 
 
