@@ -3,7 +3,8 @@
 #################################################
 #  Script for compile with cmake under MacOS X  #
 #           For     W O R M U X                 #
-#    done by Plorf, Auria and lynxlynxlynx      #
+#           done by Plorf, Auria,               #
+#         lynxlynxlynx and Snaggle              #
 #################################################
 
 
@@ -14,6 +15,25 @@
 MAC=`pwd`/
 ROOT=${MAC}../
 SRC=${ROOT}src/
+
+
+# Set up build flags
+# to build as universal, add 'universal' as the first
+# command line parameter when running this script
+# eg ./cmake_build.sh universal
+
+export MACOSX_DEPLOYMENT_TARGET=10.4
+export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include"
+export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
+
+if [ "$1" = "universal" ]
+then
+    echo "Universal build mode enabled !"
+    export CFLAGS="${FAT_CFLAGS} ${CFLAGS}"
+    export CXXFLAGS="${CFLAGS}"
+    export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
+fi
+
 
 
 #
@@ -83,16 +103,17 @@ fi
 
 #export CMAKE_INSTALL_PREFIX=./wormux-files
 
+
 #
 # Compile
 #
 
 cd ${TMP}
-awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
-cp ${ROOT}CMakeLists.txt tmp.$$.$$.2
-mv tmp.$$.$$ ${ROOT}CMakeLists.txt
+#awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
+#cp ${ROOT}CMakeLists.txt tmp.$$.$$.2
+#mv tmp.$$.$$ ${ROOT}CMakeLists.txt
 cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}Contents/MacOS/
-mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
+#mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
 
 make -j2
 make install
@@ -104,7 +125,7 @@ make install
 
 # Add icon and info.plist and PkgInfo
 cp ${MAC}Info.plist.in ${APP}Contents/Info.plist
-cp ${MAC}PkgInfo.in ${APP}Contents/
+cp ${MAC}PkgInfo.in ${APP}Contents/PkgInfo
 cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
 # Do a simple test for check if data is well copied
@@ -113,7 +134,7 @@ then
     echo "Default_config ok"
 else
     echo "*** ERROR : No Default_config ! : Probably no datas copied ***"
-    exit 
+    exit 2 
 fi
 
 
@@ -146,9 +167,9 @@ fi
 #
 # Create Archive
 #
-#echo "Make archive ${ARCHIVE}"
-#tar cfj ${ARCHIVE} ${APP}
-#echo "Archive ${ARCHIVE} done"
+echo "Make archive ${ARCHIVE}"
+tar cfj ${ARCHIVE} ${APP}
+echo "Archive ${ARCHIVE} done"
     
 
 #
@@ -167,8 +188,6 @@ then
     rm ${ROOT}libintl.a
 fi
 
-# Remove tmp files
-rm -rf ${MAC}tmpbuild
-
 echo "Build done"
 
+exit 0
