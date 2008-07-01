@@ -65,7 +65,7 @@ enum particle_spr
   LAVA_spr,
   RADIOACTIVE_spr
 };
-const int particle_spr_nbr = LAVA_spr + 1;
+const int particle_spr_nbr = RADIOACTIVE_spr + 1;
 
 class Particle : public PhysicalObj
 {
