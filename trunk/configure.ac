@@ -24,6 +24,10 @@ AM_INIT_AUTOMAKE([foreign 1.5])
 
 AM_GNU_GETTEXT([external])
 
+if test "x$USE_NLS" != "xyes"; then
+  AC_MSG_WARN([gettext is disabled. If you want internationalisation, please install gettext package.])
+fi
+
 dnl ========================================================================
 dnl === Check for tools                                                    =
 dnl ========================================================================
@@ -394,7 +398,8 @@ else
    echo "* Game locale will be installed into $LOCALEDIR"
    echo "* Font file will be $FONTFILE"
    echo ""
-   echo "* [[Optional]] Bi-directional rendering : ${enable_fribidi:-no}"
+   echo "* [[Optional]] Bi-directional rendering (fribidi) : ${enable_fribidi:-no}"
+   echo "* [[Optional]] Internationalisation (gettext)     : ${USE_NLS:-no}"
 fi
 echo ""
 echo "Execute make to compile then execute make install to install..."
