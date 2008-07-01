@@ -81,9 +81,14 @@ void Gnu::Shoot(double strength)
 
 void Gnu::Refresh()
 {
-  WeaponProjectile::Refresh();
+  if (m_energy == 0) {
+    Explosion();
+    return;
+  }
+  int tmp = Time::GetInstance()->Read() - begin_time;
+  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 
-  double norme, angle;
+  double norm, angle;
   //When we hit the ground, jump !
   if(!IsMoving()&& !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
@@ -92,6 +97,7 @@ void Gnu::Refresh()
       return;
     }
     last_rebound_time = Time::GetInstance()->Read();
+    MSG_DEBUG("weapon.gnu", "Jump ! (time = %d)", last_rebound_time);
     //If the GNU is stuck in ground -> change direction
     int x = GetX();
     int y = GetY();
@@ -101,15 +107,15 @@ void Gnu::Refresh()
     save_y = y;
 
     //Do the jump
-    norme = randomSync.GetDouble(2.0, 5.0);
+    norm = randomSync.GetDouble(2.0, 5.0);
     PutOutOfGround();
-    SetSpeedXY(Point2d(m_sens * norme , - norme * 3.0));
+    SetSpeedXY(Point2d(m_sens * norm , - norm * 3.0));
     JukeBox::GetInstance()->Play("share", "weapon/gnu_bounce");
   }
 
   //Due to a bug in the physic engine
   //sometimes, angle==infinite (according to gdb) ??
-  GetSpeed(norme, angle);
+  GetSpeed(norm, angle);
 
   while(angle < -M_PI)
     angle += M_PI;
@@ -131,11 +137,6 @@ void Gnu::Refresh()
   image->SetRotation_rad(angle);
   image->Scale((double)m_sens,1.0);
   image->Update();
-  // Fixes test rectangle ??
-  SetTestRect(image->GetWidth() / 2 - 1,
-              image->GetWidth() / 2 - 1,
-              image->GetHeight() / 2 - 1,
-              image->GetHeight() / 2 - 1);
 }
 
 void Gnu::SignalOutOfMap()

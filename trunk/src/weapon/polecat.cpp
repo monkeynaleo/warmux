@@ -39,7 +39,7 @@
 #include "weapon/explosion.h"
 
 const uint TIME_BETWEEN_FART = 500;
-const uint TIME_BETWEEN_REBOUND = 600;
+const uint TIME_BETWEEN_REBOUND = 400;
 
 class Polecat : public WeaponProjectile
 {
@@ -86,9 +86,21 @@ void Polecat::Shoot(double strength)
 
 void Polecat::Refresh()
 {
-  WeaponProjectile::Refresh();
+  if (m_energy == 0) {
+    Explosion();
+    return;
+  }
+  int tmp = Time::GetInstance()->Read() - begin_time;
+  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 
-  double norme, angle;
+  double norm, angle;
+  if(last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
+    // particles must be exactly the same accross the network
+    double norme = double(randomSync.GetLong(0, 500))/100;
+    double angle = double(randomSync.GetLong(0, 3000))/100;
+    ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
+    last_fart_time = Time::GetInstance()->Read();
+  }
   //When we hit the ground, jump !
   if(!IsMoving() && !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
@@ -97,6 +109,7 @@ void Polecat::Refresh()
       return;
     }
     last_rebound_time = Time::GetInstance()->Read();
+    MSG_DEBUG("weapon.polecat", "Jump ! (time = %d)", last_rebound_time);
     //If the GNU is stuck in ground -> change direction
     int x = GetX();
     int y = GetY();
@@ -106,21 +119,13 @@ void Polecat::Refresh()
     save_y = y;
 
     //Do the jump
-    norme = randomSync.GetDouble(1.0, 2.0);
+    norm = randomSync.GetDouble(1.0, 2.0);
     PutOutOfGround();
-    SetSpeedXY(Point2d(m_sens * norme , -norme * 3.0));
-  }
-  if(last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
-
-    // particles must be exactly the same accross the network
-    double norme = double(randomSync.GetLong(0, 500))/100;
-    double angle = double(randomSync.GetLong(0, 3000))/100;
-    ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
-    last_fart_time = Time::GetInstance()->Read();
+    SetSpeedXY(Point2d(m_sens * norm , -norm * 3.0));
   }
   //Due to a bug in the physic engine
   //sometimes, angle==infinite (according to gdb) ??
-  GetSpeed(norme, angle);
+  GetSpeed(norm, angle);
 
   while(angle < -M_PI)
     angle += M_PI;
@@ -138,11 +143,6 @@ void Polecat::Refresh()
   image->SetRotation_rad(angle);
   image->Scale((double)m_sens,1.0);
   image->Update();
-  // Set the test area ?
-  SetTestRect(image->GetWidth() / 2 - 1,
-              image->GetWidth() / 2 - 1,
-              image->GetHeight() / 2 - 1,
-              image->GetHeight() / 2 - 1);
 }
 
 void Polecat::SignalOutOfMap()
