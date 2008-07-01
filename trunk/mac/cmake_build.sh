@@ -26,12 +26,23 @@ export MACOSX_DEPLOYMENT_TARGET=10.4
 export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include"
 export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 
+APP_VERSION=0.8svn
+BUNDLE_NAME=Wormux-${APP_VERSION}-`uname -p`
+DMG_TARGET="${BUNDLE_NAME} ${APP_VERSION}"
+DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-`uname -p`
+
 if [ "$1" = "universal" ]
 then
+    echo "*******************************"
+    echo ""
     echo "Universal build mode enabled !"
+    echo ""
+    echo "*******************************"
     export CFLAGS="${FAT_CFLAGS} ${CFLAGS}"
     export CXXFLAGS="${CFLAGS}"
     export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
+    BUNDLE_NAME=Wormux-${APP_VERSION}-Universal
+    DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
 fi
 
 
@@ -74,7 +85,7 @@ else
     mkdir ${TMP}
 fi
 
-APP=${MAC}Wormux.app/
+APP=${MAC}Wormux.app
 if [ -e ${APP} ]
 then
     echo "******************"
@@ -83,11 +94,19 @@ then
     echo "******************"
 fi
 
+if [ -e ${DMG_OUT}* ]
+then
+    echo "******************"
+    echo "Clean package ${DMG_OUT}"
+    rm -rf ${DMG_OUT}*
+    echo "******************"
+fi
+
 echo "Create Wormux.app file"
 mkdir -p ${APP}
-mkdir -p ${APP}Contents/MacOS/
-mkdir -p ${APP}Contents/Frameworks/
-RES=${APP}Contents/Resources/
+mkdir -p ${APP}/Contents/MacOS/
+mkdir -p ${APP}/Contents/Frameworks/
+RES=${APP}/Contents/Resources/
 mkdir -p ${RES}data/
 mkdir -p ${RES}locale/
 
@@ -112,7 +131,7 @@ cd ${TMP}
 #awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
 #cp ${ROOT}CMakeLists.txt tmp.$$.$$.2
 #mv tmp.$$.$$ ${ROOT}CMakeLists.txt
-cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}Contents/MacOS/
+cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/
 #mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
 
 make -j2
@@ -124,8 +143,8 @@ make install
 #
 
 # Add icon and info.plist and PkgInfo
-cp ${MAC}Info.plist.in ${APP}Contents/Info.plist
-cp ${MAC}PkgInfo.in ${APP}Contents/PkgInfo
+cp ${MAC}Info.plist.in ${APP}/Contents/Info.plist
+cp ${MAC}PkgInfo.in ${APP}/Contents/PkgInfo
 cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
 # Do a simple test for check if data is well copied
@@ -152,7 +171,7 @@ then
     echo "Frameworks will be downloaded from ${MIRROR} (3MB)";
     curl ${MIRROR}frameworks.tar.bz2 -o ${MAC}frameworks.tar.bz2;
 fi
-    tar xfj ${MAC}frameworks.tar.bz2 -C ${APP}Contents/Frameworks;
+    tar xfj ${MAC}frameworks.tar.bz2 -C ${APP}/Contents/Frameworks;
     echo "Frameworks copy done"
 
 
@@ -163,6 +182,18 @@ fi
 #
 # TODO THERE MAKE .DMG
 #
+
+echo ""
+echo "Creating the distributable disk image"
+echo ""
+
+/usr/bin/hdiutil create -type SPARSE -size 85m -fs HFS+ -volname "${DMG_TARGET}" -attach ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
+/bin/cp -R ${APP} "/Volumes/${DMG_TARGET}"
+
+/usr/bin/hdiutil unmount "/Volumes/${DMG_TARGET}"
+/usr/bin/hdiutil convert -imagekey zlib-level=9 -format UDZO ${BUNDLE_NAME}-${APP_VERSION}.sparseimage -o ${DMG_OUT}.dmg
+/bin/rm -f ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
+
 
 #
 # Create Archive
