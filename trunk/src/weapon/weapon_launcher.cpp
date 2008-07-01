@@ -196,7 +196,7 @@ void WeaponProjectile::Refresh()
   }
   SetSize(image->GetSizeMax());
   // Explose after timeout
-  double tmp = Time::GetInstance()->Read() - begin_time;
+  int tmp = Time::GetInstance()->Read() - begin_time;
 
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 }
