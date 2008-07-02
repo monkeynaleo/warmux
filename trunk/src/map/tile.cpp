@@ -26,14 +26,20 @@
 #include "include/app.h"
 #include "map/camera.h"
 
+// We need only one empty tile
+TileItem_Empty EmptyTile;
+
 Tile::Tile()
 : m_preview(NULL)
 {
 }
 
 void Tile::FreeMem(){
-  for (uint i=0; i<nbr_cell; ++i)
-    delete item[i];
+  for (uint i=0; i<nbr_cell; ++i) {
+    // Don't delete empty tile as we use only one instance for empty tile
+    if(item[i] != &EmptyTile)
+      delete item[i];
+  }
   nbr_cell = 0;
   item.clear();
   if (m_preview)
@@ -178,7 +184,8 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf){
       TileItem *ti = item[c.y*nbCells.x + c.x];
       Point2i offset = position - c * CELL_SIZE;
       if(ti->IsTotallyEmpty()) {
-        delete item[c.y*nbCells.x + c.x];
+        // Don't delete the old item as we use only one empty tile
+        // delete item[c.y*nbCells.x + c.x];
         ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(CELL_SIZE);
         ti->GetSurface().SetAlpha(0,0);
         ti->GetSurface().Fill(0x00000000);
@@ -277,7 +284,7 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
       printf("\nDeleting tile %i",i);
 #endif
       delete item[i];
-      item[i] = (TileItem*)new TileItem_Empty;
+      item[i] = (TileItem*)&EmptyTile;
     }
 #ifdef DBG_TILE
     else
@@ -388,7 +395,8 @@ void Tile::CheckEmptyTiles()
      printf("Deleting tile %i\n",i);
 #endif
       delete item[i];
-      item[i] = (TileItem*)new TileItem_Empty;
+      // Don't instanciate a new empty tile but use the already existing one
+      item[i] = (TileItem*)&EmptyTile;
     }
   }
 }
