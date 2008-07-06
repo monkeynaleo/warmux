@@ -178,6 +178,9 @@ OptionMenu::OptionMenu() :
 				 option_size, sound_freqs, current_sound_freq);
   sound_options->AddWidget(cbox_sound_freq);
 
+  warn_cbox = new PictureTextCBox(_("Warn when a new player joins?"), "menu/warn_on_new_player", option_size);
+  sound_options->AddWidget(warn_cbox);
+
   tabs->AddNewTab("unused", _("Sound"), sound_options);
 
   // Values initialization
@@ -192,6 +195,7 @@ OptionMenu::OptionMenu() :
 #endif
   music_cbox->SetValue(config->GetSoundMusic());
   effects_cbox->SetValue(config->GetSoundEffects());
+  warn_cbox->SetValue(config->GetWarnOnNewPlayer());
 
   // Setting language selection
   lbox_languages->AddItem(config->GetLanguage() == "",    _("(system language)"),  "");
@@ -308,6 +312,7 @@ void OptionMenu::SaveOptions()
   std::string sfreq = cbox_sound_freq->GetValue();
   long freq;
   if (str2long(sfreq,freq)) JukeBox::GetInstance()->SetFrequency(freq);
+  config->SetWarnOnNewPlayer(warn_cbox->GetValue());
 
   JukeBox::GetInstance()->Init(); // commit modification on sound options
 

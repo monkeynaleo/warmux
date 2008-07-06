@@ -64,6 +64,7 @@ private:
    SpinButtonWithPicture *volume_effects;
    CheckBox *music_cbox;
    CheckBox *effects_cbox;
+   CheckBox *warn_cbox;
 
    /* Misc options controllers */
    CheckBox *opt_updates;
