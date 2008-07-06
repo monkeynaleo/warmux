@@ -18,6 +18,7 @@
   <sound sample="menu/ok" file="menu/ok.ogg" />
   <sound sample="menu/weapon_menu_hide" file="menu/weapon_menu_toggled.ogg" />
   <sound sample="menu/weapon_menu_show" file="menu/weapon_menu_toggled.ogg" />
+  <sound sample="menu/newcomer" file="weapon/teleport_start.ogg" />
 
   <sound sample="music/grenouilles" file="frog_music.ogg" />
   <sound sample="sink" file="../default/sink.ogg" />

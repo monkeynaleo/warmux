@@ -686,9 +686,12 @@ void Action_Network_Connect(Action *a)
   ChatLogger::LogMessageIfOpen(msg);
   if(Game::GetInstance()->IsGameLaunched())
     GameMessages::GetInstance()->Add(msg);
-  else if (Network::GetInstance()->network_menu != NULL)
-    //Menu
+  else if (Network::GetInstance()->network_menu != NULL) {
+    // Play some sound to warn server player
+    JukeBox::GetInstance()->Play("share", "menu/newcomer");
+    // Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+  }
 }
 
 // Only used to notify clients that someone disconnected from the server
