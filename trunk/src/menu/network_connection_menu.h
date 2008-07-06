@@ -26,6 +26,7 @@
 #include <list>
 #include "menu.h"
 #include "network/network.h"
+#include "network/index_server.h" // for GameServerInfo
 
 // Forward declarations
 class Button;
@@ -71,6 +72,7 @@ private:
   bool signal_ok();
   bool signal_cancel();
 
+  std::list<GameServerInfo> GetList();
   void RefreshList();
   bool HostingServer(const std::string& port,
 		     const std::string& game_name,

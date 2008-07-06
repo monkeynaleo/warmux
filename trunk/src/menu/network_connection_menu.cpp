@@ -37,7 +37,6 @@
 #include "gui/text_box.h"
 #include "include/app.h"
 #include "network/net_error_msg.h"
-#include "network/index_server.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
@@ -93,6 +92,11 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   tabs = new MultiTabs(Point2i(max_width,
                                AppWormux::GetInstance()->video->window.GetHeight()-180));
   tabs->SetPosition(25, 25);
+
+  // #############################
+  // Automatic connection - we have nothing to display here!
+  tabs->AddNewTab("TAB_automatic", _("Automatically join a game (if possible)"),
+                  new VBox(W_UNDEF, false, false));
 
   /* server connection related widgets */
   Box * srv_connection_box = new VBox(W_UNDEF, false, false);
@@ -255,6 +259,23 @@ void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
   widgets.Click(mousePosition, button);
 }
 
+std::list<GameServerInfo> NetworkConnectionMenu::GetList()
+{
+  std::list<GameServerInfo> lst;
+
+  // Connect to the index server
+  connection_state_t conn = IndexServer::GetInstance()->Connect();
+  if (conn != CONNECTED) {
+    DisplayNetError(conn);
+    msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
+    return lst;
+  }
+
+  lst = IndexServer::GetInstance()->GetHostList();
+  IndexServer::GetInstance()->Disconnect();
+  return lst;
+}
+
 void NetworkConnectionMenu::RefreshList()
 {
   // Save the currently selected address
@@ -267,19 +288,9 @@ void NetworkConnectionMenu::RefreshList()
     cl_net_games_lst->RemoveSelected();
   }
 
-  // Connect to the index server
-  connection_state_t conn = IndexServer::GetInstance()->Connect();
-  if (conn != CONNECTED) {
-    DisplayNetError(conn);
-    msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
-    return;
-  }
-
-  std::list<GameServerInfo> lst = IndexServer::GetInstance()->GetHostList();
-
-  if (lst.size() == 0) {
+  std::list<GameServerInfo> lst = GetList();
+  if (lst.empty()) {
     Menu::DisplayError(_("Sorry, currently, no game is waiting for players"));
-    IndexServer::GetInstance()->Disconnect();
     return;
   }
 
@@ -290,8 +301,6 @@ void NetworkConnectionMenu::RefreshList()
   if (cl_net_games_lst->Size() != 0)
     cl_net_games_lst->Select( current );
   cl_net_games_lst->NeedRedrawing();
-
-  IndexServer::GetInstance()->Disconnect();
 }
 
 void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/){}
@@ -363,6 +372,7 @@ bool NetworkConnectionMenu::ConnectToClient(const std::string& srv_address,
 bool NetworkConnectionMenu::signal_ok()
 {
   bool r = false;
+  std::list<GameServerInfo> lst;
 
   // Hack: force loading of teams before creating threads.
   GetTeamsList();
@@ -396,8 +406,8 @@ bool NetworkConnectionMenu::signal_ok()
 
     } else if (!cl_server_address->GetText().empty()) {
       r = ConnectToClient(cl_server_address->GetText(),
-                              cl_port_number->GetText(),
-                              cl_server_pwd->GetPassword());
+                          cl_port_number->GetText(),
+                          cl_server_pwd->GetPassword());
       if (!r)
         goto out;
 
@@ -406,6 +416,31 @@ bool NetworkConnectionMenu::signal_ok()
       Config::GetInstance()->SetNetworkClientPort(cl_port_number->GetText());
     } else
       goto out;
+  } else if (id == "TAB_automatic") {
+    lst = GetList();
+    // Try list of online servers
+    for (std::list<GameServerInfo>::iterator it = lst.begin(); it != lst.end(); ++it) {
+      if (!it->passworded) {
+        // Try connecting to this internet game!
+        r = ConnectToClient(it->ip_address, it->port, "");
+        if (r)
+          break;
+      }
+    }
+
+    // Last, try local game
+    if (!r) {
+      // Password not saved, try anyway...
+      printf("Trying %s:%s\n", Config::GetInstance()->GetNetworkClientHost().c_str(),
+                          Config::GetInstance()->GetNetworkClientPort().c_str());
+
+      r = ConnectToClient(Config::GetInstance()->GetNetworkClientHost(),
+                          Config::GetInstance()->GetNetworkClientPort(), "");
+      if (!r) {
+        Menu::DisplayError(_("No unpassworded public server and uncorrect previous manual connection settings. Try connecting manually."));
+        goto out;
+      }
+    }
   }
 
   if (Network::IsConnected()) {
