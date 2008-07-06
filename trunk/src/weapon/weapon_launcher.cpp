@@ -76,25 +76,26 @@ void WeaponBullet::SignalOutOfMap()
 
 void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before)
 {
-#if 0
+#if 1
   if (!obj->IsCharacter())
     Explosion();
   obj->SetEnergyDelta(-(int)cfg.damage);
   obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
   Ghost();
 #else
-  double total_mass = GetMass() + obj->GetMass();
+  // multiply by ten to get something more funny
+  double bullet_mass = GetMass()/* * 10*/;
+  double total_mass = bullet_mass + obj->GetMass();
   // computing new speed of character
-  Point2d v2 = (my_speed_before * (1 + 0.8) * GetMass() +
-                obj->GetSpeed() * (obj->GetMass() - 0.8 * GetMass())) / total_mass;
-  //obj->SetSpeed(v2.x, v2.y);
-  obj->SetSpeedXY(v2);
-  obj->SetEnergyDelta(-(int)cfg.damage);
+  Point2d v2 = (my_speed_before * (1 + 0.8) * bullet_mass +
+                obj->GetSpeed() * (obj->GetMass() - 0.8 * bullet_mass)) / total_mass;
   // Pushing a little upward character to allow him to be pushed by the projectile
   obj->SetXY(Point2i(obj->GetX(), obj->GetY() - 3));
+  obj->SetSpeedXY(v2);
+  obj->SetEnergyDelta(-(int)cfg.damage);
   if (!obj->IsCharacter())
     Explosion();
-  Ghost(); 
+  Ghost();
 #endif
 }
 
