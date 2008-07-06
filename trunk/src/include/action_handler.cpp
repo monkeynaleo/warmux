@@ -26,6 +26,7 @@
 #include "character/character.h"
 #include "character/body.h"
 #include "character/move.h"
+#include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game.h"
 #include "game/time.h"
@@ -688,7 +689,8 @@ void Action_Network_Connect(Action *a)
     GameMessages::GetInstance()->Add(msg);
   else if (Network::GetInstance()->network_menu != NULL) {
     // Play some sound to warn server player
-    JukeBox::GetInstance()->Play("share", "menu/newcomer");
+    if (Config::GetInstance()->GetWarnOnNewPlayer())
+      JukeBox::GetInstance()->Play("share", "menu/newcomer");
     // Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
   }

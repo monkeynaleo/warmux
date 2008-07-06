@@ -114,6 +114,8 @@ public:
   uint GetVolumeEffects() const { return volume_effects; }
   void SetVolumeEffects(uint vol) { volume_effects = vol; }
   static uint GetMaxVolume();
+  bool GetWarnOnNewPlayer() const { return warn_on_new_player; }
+  void SetWarnOnNewPlayer(bool w) { warn_on_new_player = w; }
 
   bool GetCheckUpdates() const { return check_updates; }
   void SetCheckUpdates(const bool check) { check_updates = check; }
@@ -187,6 +189,7 @@ protected:
   uint sound_frequency;
   uint volume_music;
   uint volume_effects;
+  bool warn_on_new_player;
 
   // network
   bool check_updates;

@@ -118,6 +118,7 @@ Config::Config():
   sound_music(true),
   sound_effects(true),
   sound_frequency(44100),
+  warn_on_new_player(true),
   check_updates(false),
   m_network_client_host("localhost"),
   m_network_client_port(WORMUX_NETWORK_PORT),
