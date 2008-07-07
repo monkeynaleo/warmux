@@ -53,7 +53,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 
   // Previews
   Box* previews_box = new HBox(map_preview_height+10, false);
-  previews_box->SetBorder( Point2i(10,0) );
+  previews_box->SetNoBorder();
 
    // compute margin width between previews
   uint map_preview_width = map_preview_height*4/3;
@@ -61,14 +61,15 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 
   uint margin = 0;
 
-  if ( uint(size.x - 20) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX())) {
-    margin = (size.x - 20 -
-              (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
+  if ( uint(size.x) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()
+			   + border.x)) {
+    margin = (size.x -
+              (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX() + border.x) ) / 6;
   }
 
   if (margin < 5) {
     margin = 5;
-    uint total_size_wo_margin = size.x - 20 - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX();
+    uint total_size_wo_margin = size.x - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX() - border.x;
     map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
     map_preview_height = 3/4 * map_preview_width;
   }
