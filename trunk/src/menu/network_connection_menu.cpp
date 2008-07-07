@@ -95,7 +95,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 
   // #############################
   // Automatic connection - we have nothing to display here!
-  tabs->AddNewTab("TAB_automatic", _("Automatically join a game (if possible)"),
+  tabs->AddNewTab("TAB_automatic", _("Automatically join a game"),
                   new VBox(W_UNDEF, false, false));
 
   /* server connection related widgets */
@@ -267,7 +267,7 @@ std::list<GameServerInfo> NetworkConnectionMenu::GetList()
   connection_state_t conn = IndexServer::GetInstance()->Connect();
   if (conn != CONNECTED) {
     DisplayNetError(conn);
-    msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
+    msg_box->NewMessage(_("Error: Unable to contact the index server to search for an internet game"), c_red);
     return lst;
   }
 
@@ -323,7 +323,7 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
   connection_state_t conn = IndexServer::GetInstance()->Connect();
   if (conn != CONNECTED) {
     DisplayNetError(conn);
-    msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
+    msg_box->NewMessage(_("Error: Unable to contact the index server to host a game"), c_red);
     goto out;
   }
 
@@ -437,7 +437,7 @@ bool NetworkConnectionMenu::signal_ok()
       r = ConnectToClient(Config::GetInstance()->GetNetworkClientHost(),
                           Config::GetInstance()->GetNetworkClientPort(), "");
       if (!r) {
-        Menu::DisplayError(_("No unpassworded public server and uncorrect previous manual connection settings. Try connecting manually."));
+        Menu::DisplayError(_("No public servers available and incorrect manual connection settings. Try connecting manually."));
         goto out;
       }
     }

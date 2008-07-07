@@ -178,7 +178,7 @@ OptionMenu::OptionMenu() :
 				 option_size, sound_freqs, current_sound_freq);
   sound_options->AddWidget(cbox_sound_freq);
 
-  warn_cbox = new PictureTextCBox(_("Warn when a new player joins?"), "menu/warn_on_new_player", option_size);
+  warn_cbox = new PictureTextCBox(_("New player warning?"), "menu/warn_on_new_player", option_size);
   sound_options->AddWidget(warn_cbox);
 
   tabs->AddNewTab("unused", _("Sound"), sound_options);
