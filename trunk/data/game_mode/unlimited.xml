@@ -79,6 +79,15 @@
       <snipe_rifle ammo="1">1</snipe_rifle>
       <teleportation ammo="2">1</teleportation>
       <tux ammo="1">0.8</tux>
+
+      <bazooka ammo="1">0.0</bazooka>
+      <gun ammo="1">0.0</gun>
+      <grenade ammo="1">0.0</grenade>
+      <minelauncher ammo="1">0.0</minelauncher>
+      <slap ammo="1">0.0</slap>
+      <suicide ammo="1">0.0</suicide>
+      <skip_turn ammo="1">0.0</skip_turn>
+      <syringe ammo="1">0.0</syringe>
     </probability>
     <life_points>20</life_points>
   </bonus_box>

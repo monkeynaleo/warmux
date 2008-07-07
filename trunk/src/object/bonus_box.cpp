@@ -147,9 +147,12 @@ void BonusBox::LoadXml(xmlNode* object)
   for(; itw != end; ++itw) {
     w.weapon = *itw;
 
-    if (!XmlReader::ReadDouble(node, w.weapon->GetID().c_str(), w.probability) || w.probability == 0.0) {
+    if (!XmlReader::ReadDouble(node, w.weapon->GetID().c_str(), w.probability)) {
       std::cerr << "No bonus probability defined for weapon "
 		<< w.weapon->GetID().c_str() << std::endl;
+      continue;
+    }
+    if (w.probability == 0.0) {
       continue;
     }
     total_probability += w.probability;
