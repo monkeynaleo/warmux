@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-06-08 18:30+0100\n"
+"PO-Revision-Date: 2008-07-07 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -531,7 +531,7 @@ msgstr "Avtomatska Bazuka"
 #. Automatic connection - we have nothing to display here!
 #: src/menu/network_connection_menu.cpp:98
 msgid "Automatically join a game"
-msgstr ""
+msgstr "Samodejna priključitev k igri"
 
 #: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
@@ -711,19 +711,17 @@ msgid "Error: Unable to connect to %s:%s"
 msgstr "Napaka: Ni se bilo mogoče povezati na %s:%s"
 
 #: src/menu/network_connection_menu.cpp:326
-#, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko gostili "
 "igro"
 
 #: src/menu/network_connection_menu.cpp:270
-#, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko iskali "
-"internetno igro"
+"internetne igre"
 
 #: src/menu/network_connection_menu.cpp:345
 msgid "Error: Unable to start server"
@@ -1016,7 +1014,7 @@ msgstr "Nova omrežna igra ob "
 
 #: src/menu/options_menu.cpp:181
 msgid "New player warning?"
-msgstr ""
+msgstr "Opozori na nove igralce?"
 
 #: src/weapon/weapon.cpp:658
 #, c-format
@@ -1028,6 +1026,8 @@ msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
 msgstr ""
+"Na voljo ni nobenih javnih strežnikov, ročne nastavitve pa so napačne. "
+"Poskusite se povezati ročno."
 
 #: src/menu/results_menu.cpp:74
 msgid "Nobody!"
