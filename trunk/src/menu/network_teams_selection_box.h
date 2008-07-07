@@ -40,6 +40,8 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   void RemoveLocalTeam(uint i);
   void SetLocalTeam(uint i, Team& team, bool remove_previous_team);
 
+  void SetDefaultPlayerName(Team& team);
+
   void PrevTeam(uint i);
   void NextTeam(uint i, bool check_null_prev_team = true);
 

@@ -468,6 +468,26 @@ void Config::LoadXml(xmlNode *xml)
       XmlReader::ReadString(sub_elem, "port", m_network_server_port);
       XmlReader::ReadBool(sub_elem, "public", m_network_server_public);
     }
+
+    //=== personal teams used in last network game ===
+    if ((sub_elem = XmlReader::GetMarker(elem, "local_teams")) != NULL)
+    {
+      int i = 0;
+      xmlNode *team;
+
+      while ((team = XmlReader::GetMarker(sub_elem, "team_" + ulong2str(i))) != NULL)
+	{
+	  ConfigTeam one_team;
+	  XmlReader::ReadString(team, "id", one_team.id);
+	  XmlReader::ReadString(team, "player_name", one_team.player_name);
+	  XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
+
+	  network_local_teams.push_back(one_team);
+
+	  // get next team
+	  i++;
+	}
+    }
   }
 
   //=== misc ===
@@ -600,6 +620,22 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(net_as_server_node, "port", m_network_server_port);
   doc.WriteElement(net_as_server_node, "public", ulong2str(m_network_server_public));
 
+  // personal teams used durint last network game
+  xmlNode *net_teams = xmlAddChild(net_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"local_teams"));
+  std::list<ConfigTeam>::iterator
+    it = network_local_teams.begin(),
+    end = network_local_teams.end();
+
+  for (int i=0; it != end; ++it, i++)
+    {
+       std::string name = "team_"+ulong2str(i);
+       xmlNode* a_team = xmlAddChild(net_teams,
+                                     xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
+       doc.WriteElement(a_team, "id", (*it).id);
+       doc.WriteElement(a_team, "player_name", (*it).player_name);
+       doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
+    }
+
   //=== Misc ===
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
   doc.WriteElement(misc_node, "check_updates", ulong2str(check_updates));
@@ -634,4 +670,27 @@ const std::string& Config::GetTtfFilename()
 {
   if (fonts.find(default_language) == fonts.end()) return ttf_filename;
   else                                             return fonts[default_language];
+}
+
+void Config::SetNetworkLocalTeams()
+{
+  // personal teams used durint last network game
+  network_local_teams.clear();
+
+  TeamsList::iterator
+    it = GetTeamsList().playing_list.begin(),
+    end = GetTeamsList().playing_list.end();
+
+  for (int i=0; it != end; ++it, i++)
+    {
+      if ((**it).IsLocal())
+	{
+	  ConfigTeam config;
+	  config.id = (**it).GetId();
+	  config.player_name = (**it).GetPlayerName();
+	  config.nb_characters = (**it).GetNbCharacters();
+
+	  network_local_teams.push_back(config);
+	}
+    }
 }

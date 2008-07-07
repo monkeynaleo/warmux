@@ -149,6 +149,9 @@ public:
   bool GetNetworkServerPublic() const { return m_network_server_public; }
   void SetNetworkServerPublic(bool b) { m_network_server_public = b; }
 
+  void SetNetworkLocalTeams();
+  const std::list<ConfigTeam>& AccessNetworkTeamsList() const { return network_local_teams; };
+
 protected:
   bool SaveXml(bool save_current_teams);
   std::string GetEnv(const std::string & name, const std::string &default_value) const;
@@ -202,6 +205,9 @@ protected:
   std::string m_network_server_game_name;
   std::string m_network_server_port;
   bool m_network_server_public;
+
+  // personal teams used durint last network game
+  std::list<ConfigTeam> network_local_teams;
 
   // Font setting
   std::map<std::string, std::string>  fonts;
