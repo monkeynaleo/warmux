@@ -35,6 +35,7 @@ NetData::NetData()
   : str(NULL)
   , str_size(0)
   , msg_size(0)
+  , fd(-1)
   , ping_sent(false)
   , received(0)
   , msg_id(TS_NO_MSG)
@@ -75,6 +76,8 @@ bool NetData::ConnectTo(const std::string & address, const int & port)
     {
       PRINT_ERROR;
       DPRINT(INFO, "Rejected");
+      close(fd);
+      fd = -1;
       return false;
     }
 
@@ -86,6 +89,8 @@ bool NetData::ConnectTo(const std::string & address, const int & port)
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
     {
       PRINT_ERROR;
+      close(fd);
+      fd = -1;
       return false;
     }
 
