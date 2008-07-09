@@ -31,11 +31,21 @@
 #include "net_data.h"
 #include "debug.h"
 
+#ifdef WIN32
+# define SOCKET_PARAM    char
+#else
+typedef int SOCKET;
+# define SOCKET_PARAM    void
+# define SOCKET_ERROR    (-1)
+# define INVALID_SOCKET  (-1)
+# define closesocket(fd) close(fd)
+#endif
+
 NetData::NetData()
   : str(NULL)
   , str_size(0)
   , msg_size(0)
-  , fd(-1)
+  , fd(INVALID_SOCKET)
   , ping_sent(false)
   , received(0)
   , msg_id(TS_NO_MSG)
@@ -47,8 +57,16 @@ NetData::NetData()
 NetData::~NetData()
 {
   // WARNING: potential bug here... to clean!!
-  // if (connected)
-  //  close(fd);
+  if (fd != INVALID_SOCKET)
+    {
+      if (connected)
+        DPRINT(INFO, "Certainly leaking FD %i: still connected", fd);
+      else
+        DPRINT(INFO, "Probably leaking FD %i: not connected", fd);
+    }
+  else if (connected)
+    DPRINT(INFO, "Inconsistant state: connected but no FD");
+    
   DPRINT(CONN, "Disconnected.");
 }
 
@@ -58,16 +76,6 @@ void NetData::Host(const int & client_fd, const unsigned int & ip)
   ip_address = *(int*)&ip;
   connected = true;
 }
-
-#ifdef WIN32
-# define SOCKET_PARAM    char
-#else
-typedef int SOCKET;
-# define SOCKET_PARAM    void
-# define SOCKET_ERROR    (-1)
-# define INVALID_SOCKET  (-1)
-# define closesocket(fd) close(fd)
-#endif
 
 int NetData::GetConnection(const char* host, int prt)
 {
