@@ -24,9 +24,9 @@
 #include "sound/sound_sample.h"
 #include "sound/jukebox.h"
 
-static std::map<int, SoundSample*> sound_samples_channel;
+std::map<int, SoundSample*> SoundSample::sound_samples_channel;
 
-void channel_finished(int channel)
+void SoundSample::ChannelFinished(int channel)
 {
   std::map<int, SoundSample*>::iterator it=sound_samples_channel.find(channel);
 

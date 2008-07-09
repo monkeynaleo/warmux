@@ -25,6 +25,7 @@
 #include <fstream>
 
 #include "game/config.h"
+#include "sound/sound_sample.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
@@ -474,6 +475,7 @@ void JukeBox::EndChunk(int channel)
 {
   JukeBox *jukebox = JukeBox::GetInstance();
   Mix_Chunk* chk = jukebox->chunks[channel];
+  SoundSample::ChannelFinished(channel);
 
   if(!chk) return;
 

@@ -24,13 +24,14 @@
 #define SOUND_SAMPLE_H
 //-----------------------------------------------------------------------------
 #include <string>
+#include <map>
 //-----------------------------------------------------------------------------
 
 class SoundSample
 {
  private:
+  static std::map<int, SoundSample*> sound_samples_channel;
   int channel;
-  friend void channel_finished(int channel);
 
  public:
   SoundSample();
@@ -43,6 +44,9 @@ class SoundSample
   void Stop();
 
   bool IsPlaying();
+
+
+  static void ChannelFinished(int channel);
 };
 //-----------------------------------------------------------------------------
 #endif
