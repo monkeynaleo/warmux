@@ -56,6 +56,7 @@ class NetData
   const int & GetIP() { return ip_address; };
 
   void Host(const int & client_fd, const unsigned int & ip);
+  static int GetConnection(const char* host, int port);
   bool ConnectTo(const std::string & address, const int & port);
   bool Receive();
   bool ReceiveData();

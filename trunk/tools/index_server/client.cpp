@@ -87,79 +87,6 @@ Client::~Client()
     }
 }
 
-typedef int SOCKET;
-#define SOCKET_PARAM    void
-#define SOCKET_ERROR    (-1)
-#define INVALID_SOCKET  (-1)
-#define closesocket(fd) close(fd)
-
-/* Nearly copy/paste from wormux/src/network/network.cpp::CheckHost */
-static bool CheckHost(const int ip, int prt)
-{
-  unsigned char* str_ip = (unsigned char*)&ip;
-  char formated_ip[16];
-  snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
-           (int)str_ip[1],
-           (int)str_ip[2],
-           (int)str_ip[3]);
-
-  std::string host = std::string(formated_ip);
-
-  DPRINT(CONN, "Checking connection to %s:%i", host.c_str(), prt);
-
-  struct hostent* hostinfo;
-  hostinfo = gethostbyname(host.c_str());
-  if( ! hostinfo )
-    return false /*CONN_BAD_HOST*/;
-
-  SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
-  if( fd == INVALID_SOCKET )
-    return false /*CONN_BAD_SOCKET*/;
-
-  // Set the timeout
-#ifdef WIN32
-  int timeout = 5000; //ms
-#else
-  struct timeval timeout;
-  memset(&timeout, 0, sizeof(timeout));
-  timeout.tv_sec = 5; // 5seconds timeout
-#endif
-  if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
-    {
-      fprintf(stderr, "Setting receive timeout on socket failed\n");
-      goto error /*CONN_BAD_SOCKET*/;
-    }
-
-  if (setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
-    {
-      fprintf(stderr, "Setting send timeout on socket failed\n");
-      goto error /*CONN_BAD_SOCKET*/;
-    }
-
-  struct sockaddr_in addr;
-  memset(&addr, 0, sizeof(addr));
-  addr.sin_family = AF_INET;
-  addr.sin_port = htons(prt);
-#ifndef WIN32
-  addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
-#else
-  addr.sin_addr.s_addr = inet_addr(inet_ntoa (*(struct in_addr *)*hostinfo->h_addr_list));
-#endif
-
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
-    {
-      goto error /*GetError()*/;
-    }
-  closesocket(fd);
-
-  DPRINT(CONN, "Checking connection to %s:%i : OK", host.c_str(), prt);
-  return true /*CONNECTED*/;
-
-error:
-  closesocket(fd);
-  return false;
-}
-
 bool Client::HandShake(const std::string & version)
 {
   if (handshake_done)
@@ -206,15 +133,25 @@ bool Client::RegisterWormuxServer()
   if (!ReceiveInt(port))
     return false;
 
-  // try opening a connection to see if it's
-  // firewalled or not
-  if (!CheckHost(GetIP(), port)) {
+  // try opening a connection to see if it's firewalled or not
+  unsigned char* str_ip = (unsigned char*)&(GetIP());
+  char formated_ip[16];
+  snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
+           (int)str_ip[1],
+           (int)str_ip[2],
+           (int)str_ip[3]);
+
+  int lfd = NetData::GetConnection(formated_ip, port);
+
+  if (lfd == -1) {
     DPRINT(MSG, "server is not reachable");
     // answer to the server
     SendStr("UNREACHABLE");
     return false;
   }
+  close(lfd);
 
+  DPRINT(INFO, "Connection to %s:%i : OK", formated_ip, port);
   SendStr("OK");
   NotifyServers(true);
   stats.NewServer();

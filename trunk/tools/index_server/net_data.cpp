@@ -59,6 +59,77 @@ void NetData::Host(const int & client_fd, const unsigned int & ip)
   connected = true;
 }
 
+#ifdef WIN32
+# define SOCKET_PARAM    char
+#else
+typedef int SOCKET;
+# define SOCKET_PARAM    void
+# define SOCKET_ERROR    (-1)
+# define INVALID_SOCKET  (-1)
+# define closesocket(fd) close(fd)
+#endif
+
+int NetData::GetConnection(const char* host, int prt)
+{
+  struct hostent* hostinfo;
+  hostinfo = gethostbyname(host);
+  if( ! hostinfo )
+    {
+      DPRINT(INFO, "Couldn't get a socket");
+      return -1 /*CONN_BAD_HOST*/;
+    }
+
+  SOCKET lfd = socket(AF_INET, SOCK_STREAM, 0);
+  if( lfd == INVALID_SOCKET )
+    {
+      DPRINT(INFO, "Couldn't get a socket");
+      return -1 /*CONN_BAD_SOCKET*/;
+    }
+
+  // Set the timeout
+#ifdef WIN32
+  int timeout = 5000; //ms
+#else
+  struct timeval timeout;
+  memset(&timeout, 0, sizeof(timeout));
+  timeout.tv_sec = 5; // 5seconds timeout
+#endif
+  if (setsockopt(lfd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
+    {
+      DPRINT(INFO, "Setting receive timeout on socket failed\n");
+      goto error /*CONN_BAD_SOCKET*/;
+    }
+
+  if (setsockopt(lfd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
+    {
+      DPRINT(INFO, "Setting send timeout on socket failed\n");
+      goto error /*CONN_BAD_SOCKET*/;
+    }
+
+  struct sockaddr_in addr;
+  memset(&addr, 0, sizeof(addr));
+  addr.sin_family = AF_INET;
+  addr.sin_port = htons(prt);
+#ifndef WIN32
+  addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
+#else
+  addr.sin_addr.s_addr = inet_addr(inet_ntoa (*(struct in_addr *)*hostinfo->h_addr_list));
+#endif
+
+  if( connect(lfd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
+    {
+      DPRINT(INFO, "Connection to %s:%i : failed", host, prt);
+      goto error /*GetError()*/;
+    }
+
+  return lfd;
+
+error:
+  closesocket(lfd);
+  return -1;
+}
+
+
 bool NetData::ConnectTo(const std::string & address, const int & port)
 {
   // Resolve the name of the host:
@@ -70,27 +141,10 @@ bool NetData::ConnectTo(const std::string & address, const int & port)
       return false;
     }
 
-  fd = socket(AF_INET, SOCK_STREAM, 0);
-
+  fd = GetConnection(address.c_str(), port);
   if(fd == -1)
     {
       PRINT_ERROR;
-      DPRINT(INFO, "Rejected");
-      close(fd);
-      fd = -1;
-      return false;
-    }
-
-  struct sockaddr_in addr;
-  addr.sin_family = AF_INET;
-  addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
-  addr.sin_port = htons(port);
-
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
-    {
-      PRINT_ERROR;
-      close(fd);
-      fd = -1;
       return false;
     }
 
