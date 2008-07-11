@@ -46,6 +46,11 @@
 #include "tool/string_tools.h"
 #include "weapon/explosion.h"
 
+#ifdef DEBUG
+#include "include/app.h"
+#include "graphic/video.h"
+#endif
+
 const uint HAUT_FONT_MIX = 13;
 
 // Space between the name, the skin and the energy bar
@@ -132,10 +137,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   else
     name_text = NULL;
 
-#ifdef DEBUG_SKIN
-    name_text = new Text(" ");
-#endif
-
   // Energy
   m_energy = GameMode::GetInstance()->character.init_energy;
   energy_bar.InitVal (GameMode::GetInstance()->character.init_energy,
@@ -180,11 +181,6 @@ Character::Character (const Character& acharacter) :
     SetBody(new Body(*acharacter.body));
   if(acharacter.name_text)
     name_text = new Text(*acharacter.name_text);
-
-#ifdef DEBUG_SKIN
-    skin_text = new Text(" ");
-#endif
-
 }
 
 Character::~Character()
@@ -199,9 +195,6 @@ Character::~Character()
   body          = NULL;
   name_text     = NULL;
   particle_engine = NULL;
-#ifdef DEBUG_SKIN
-  delete skin_text;
-#endif
 }
 
 void Character::SignalDrowning()
@@ -440,13 +433,6 @@ void Character::Draw()
     dy -= ESPACE;
   }
 
-#ifdef DEBUG_SKIN
-  dy -= HAUT_FONT_MIX;
-  skin_text->Set(body->GetClothe() + " " + body->GetMovement());
-  skin_text->DrawCenterTopOnMap(Point2i(GetX(), GetY() - dy));
-  dy -= ESPACE;
-#endif
-
   // Draw lost energy
   if (draw_loosing_energy)
   {
@@ -458,6 +444,26 @@ void Character::Draw()
         ss.str(), white_color);
   }
 
+#ifdef DEBUG
+
+  if (IsLOGGING("body"))
+  {
+    dy -= HAUT_FONT_MIX;
+    std::string txt = body->GetClothe() + " " + body->GetMovement();
+    Text skin_text(txt);
+    skin_text.DrawCenterTopOnMap(Point2i(GetX(), GetY() - dy));
+  }
+
+  if (IsLOGGING("test_rectangle"))
+  {
+    Rectanglei test_rect(GetTestRect());
+    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+    AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
+
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), GetSize());
+    AppWormux::GetInstance()->video->window.RectangleColor(rect, primary_blue_color, 1);
+  }
+#endif
 }
 
 void Character::Jump(double strength, double angle /*in radian */)

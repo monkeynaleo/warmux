@@ -64,9 +64,6 @@ private:
 
   // name
   Text* name_text;
-#ifdef DEBUG_SKIN
-  Text* skin_text;
-#endif
 
   // chrono
   uint rl_motion_pause;  // pause for left/right motion
