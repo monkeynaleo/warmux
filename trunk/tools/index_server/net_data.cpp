@@ -59,14 +59,16 @@ NetData::~NetData()
   // WARNING: potential bug here... to clean!!
   if (fd != INVALID_SOCKET)
     {
-      if (connected)
+      if (connected) {
         DPRINT(INFO, "Certainly leaking FD %i: still connected", fd);
-      else
+      } else {
         DPRINT(INFO, "Probably leaking FD %i: not connected", fd);
+      }
     }
-  else if (connected)
+  else if (connected) {
     DPRINT(INFO, "Inconsistant state: connected but no FD");
-    
+  }
+
   DPRINT(CONN, "Disconnected.");
 }
 
@@ -174,7 +176,7 @@ bool NetData::ReceiveInt(int & nbr)
   unsigned int u_nbr = ntohl(packet);
   nbr = *((int*)&u_nbr);
   DPRINT(TRAFFIC, "Received int: %i", nbr);
-  received -= 4;
+  received -= sizeof(uint32_t);
   UpdatePing();
   return true;
 }
@@ -296,6 +298,9 @@ bool NetData::ReceiveData()
   return true;
 }
 
+/*
+ * returns false if client must be disconnected
+ */
 bool NetData::Receive()
 {
   int r = true;
@@ -308,7 +313,13 @@ bool NetData::Receive()
   if(msg_id == TS_NO_MSG)
     {
       int id;
-      if( !ReceiveInt(id) )
+      if (received <= sizeof(uint32_t))
+	{
+	  DPRINT(TRAFFIC, "Not yet ready to read msg id!");
+	  return true;
+	}
+
+      if (!ReceiveInt(id) )
         {
           DPRINT(TRAFFIC, "Didn't received msg id!");
           return false;
@@ -316,7 +327,13 @@ bool NetData::Receive()
       msg_id = (IndexServerMsg)id;
 
       int lsize;
-      if( !ReceiveInt(lsize) )
+      if (received <= sizeof(uint32_t))
+	{
+	  DPRINT(TRAFFIC, "Not yet ready to read msg size!");
+	  return true;
+	}
+
+      if (!ReceiveInt(lsize))
         {
           DPRINT(TRAFFIC, "Didn't received msg size!");
           return false;
@@ -334,8 +351,8 @@ bool NetData::Receive()
     }
 
   // Check that enough data has been received
-  if (received+8 < msg_size)
-    return false;
+  if (received+2*sizeof(uint32_t) < msg_size)
+    return true;
 
   switch(msg_id) {
   case TS_MSG_PING:

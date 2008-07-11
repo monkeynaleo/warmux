@@ -46,7 +46,7 @@
       }                                                                 \
   }
 #else
-#define DPRINT(LEVEL, ARGS...)
+#define DPRINT(LEVEL, ARGS...) do {} while (0)
 #endif
 
 #define TELL_ERROR         \
