@@ -241,6 +241,10 @@ bool NetworkMenu::signal_ok()
     // Starting the game :-)
     SaveOptions();
     play_ok_sound();
+
+    if (Network::GetInstance()->IsServer())
+      IndexServer::GetInstance()->Disconnect();
+
     Game::GetInstance()->Start();
     Network::GetInstance()->network_menu = NULL;
   }
