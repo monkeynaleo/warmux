@@ -368,3 +368,4 @@ void Client::NotifyServers(bool joining)
     }
   return /*true*/;
 }
+

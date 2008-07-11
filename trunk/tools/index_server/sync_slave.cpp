@@ -238,7 +238,7 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
               std::string game_name;
               if (!ReceiveStr(game_name))
                 return false;
-              
+
               int passwd;
               if (!ReceiveInt(passwd))
                 return false;
@@ -257,3 +257,4 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
   msg_id = TS_NO_MSG;
   return true;
 }
+

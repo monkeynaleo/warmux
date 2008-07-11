@@ -48,7 +48,8 @@ void ConnectionStats::OpenFile()
   time_t now = time(NULL);
   t = localtime(&now);
   char time_str[1024];
-  snprintf(time_str, 1024, "%4i-%02i-%02i_", 1900 + t->tm_year, 1 + t->tm_mon,t->tm_mday);
+  snprintf(time_str, 1024, "%4i-%02i-%02i_",
+           1900 + t->tm_year, 1 + t->tm_mon,t->tm_mday);
 
   full_name = std::string(time_str) + full_name + '_' + filename;
 

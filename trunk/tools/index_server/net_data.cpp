@@ -314,10 +314,10 @@ bool NetData::Receive()
     {
       int id;
       if (received <= sizeof(uint32_t))
-	{
-	  DPRINT(TRAFFIC, "Not yet ready to read msg id!");
-	  return true;
-	}
+        {
+          DPRINT(TRAFFIC, "Not yet ready to read msg id!");
+          return true;
+        }
 
       if (!ReceiveInt(id) )
         {
@@ -328,10 +328,10 @@ bool NetData::Receive()
 
       int lsize;
       if (received <= sizeof(uint32_t))
-	{
-	  DPRINT(TRAFFIC, "Not yet ready to read msg size!");
-	  return true;
-	}
+        {
+          DPRINT(TRAFFIC, "Not yet ready to read msg size!");
+          return true;
+        }
 
       if (!ReceiveInt(lsize))
         {

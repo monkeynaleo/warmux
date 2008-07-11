@@ -92,10 +92,12 @@ void Clock::ShowUpTime()
   t /= 24;
   day = (unsigned short) t % 31;
   t /= 31;
-  DPRINT(INFO, "Up since %i months, %i days and %i:%02i:%02i hours (%i days)",(int)t,
+  DPRINT(INFO, "Up since %i months, %i days and %i:%02i:%02i hours (%i days)",
+         (int)t,
          (int)day,
          (int)hr,
          (int)min,
          (int)sec,
          (int)t*31+day);
 }
+
