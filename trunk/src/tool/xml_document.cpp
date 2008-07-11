@@ -80,7 +80,19 @@ std::string XmlReader::ExportToString()
 
 xmlNode* XmlReader::GetMarker(xmlNode* x, const std::string &name)
 {
+  xmlNode* first = x;
+
+  // First search at the same level
   for (; x; x = x->next)
+  {
+    if (name.empty() || name == (const char*)x->name) // xmlpp::Node::get_children
+    {
+      return x;
+    }
+  };
+
+  // Then at the levels below
+  for (x=first; x; x = x->next)
   {
     if (x->children)
     {
@@ -90,12 +102,8 @@ xmlNode* XmlReader::GetMarker(xmlNode* x, const std::string &name)
         return node;
       }
     }
+  }
 
-    if (name.empty() || name == (const char*)x->name) // xmlpp::Node::get_children
-    {
-      return x;
-    }
-  };
   return NULL;
 }
 
@@ -152,17 +160,11 @@ xmlNode* XmlReader::Access(xmlNode* x,
                            const std::string &name,
                            const std::string &attr_name)
 {
+  xmlNode* first = x;
+
+  // Search at the same level
   for (; x; x = x->next)
   {
-    if (x->children)
-    {
-      xmlNode* node = Access(x->children, name, attr_name);
-      if (node)
-      {
-        return node;
-      }
-    }
-
     if (!xmlStrcmp(x->name, (const xmlChar *)name.c_str()))
     {
       xmlAttr* attr = xmlHasProp(x, (const xmlChar*)"name");
@@ -175,6 +177,19 @@ xmlNode* XmlReader::Access(xmlNode* x,
           return x;
         }
         xmlFree(value);
+      }
+    }
+  }
+
+  // Then in the children
+  for (x = first; x; x = x->next)
+  {
+    if (x->children)
+    {
+      xmlNode* node = Access(x->children, name, attr_name);
+      if (node)
+      {
+        return node;
       }
     }
   }
