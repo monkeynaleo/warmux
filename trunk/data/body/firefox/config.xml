@@ -62,6 +62,7 @@
 	<anchor dx="9" dy="16"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
 	<attached member_type="head" frame="*" dx="6" dy="3"/>
+	<attached member_type="back" frame="*" dx="5" dy="13"/>
 	<attached member_type="arm-right" frame="*" dx="4" dy="7"/>
 	<attached member_type="arm-left" frame="*" dx="9" dy="7"/>
 	<attached member_type="foot-left" frame="*" dx="11" dy="24"/>
@@ -89,11 +90,18 @@
 	<anchor dx="19" dy="19"/>
 </sprite>
 
+<!-- ###### Back ###### -->
+<sprite name="back" type="back" >
+	<image file="back.png"/>
+	<anchor dx="18" dy="15"/>
+</sprite>
+
 <!-- ###### Head ###### -->
 <sprite name="head" type="head">
 	<image file="head.png"/>
 	<anchor dx="10" dy="20"/>
 	<attached member_type="horns" frame="*" dx="12" dy="12"/>
+	<attached member_type="hair" frame="*" dx="14" dy="15"/>
 	<attached member_type="helmet" frame="*" dx="11" dy="10"/>
 	<attached member_type="construct" frame="*" dx="13" dy="9"/>
 	<attached member_type="noze" frame="*" dx="14" dy="13"/>
@@ -104,6 +112,12 @@
 <sprite name="noze" type="noze">
 	<image file="noze.png"/>
 	<anchor dx="1" dy="0"/>
+</sprite>
+
+<!-- ###### Hair ###### -->
+<sprite name="hair" type="hair">
+	<image file="hair.png"/>
+	<anchor dx="23" dy="23"/>
 </sprite>
 
 <!-- ###### Horns ###### -->
@@ -227,6 +241,7 @@
 	<anchor dx="9" dy="16"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
 	<attached member_type="head" frame="*" dx="4" dy="2"/>
+	<attached member_type="back" frame="*" dx="5" dy="13"/>
 	<attached member_type="arm-right" frame="*" dx="5" dy="8"/>
 	<attached member_type="arm-left" frame="*" dx="10" dy="7"/>
 	<attached member_type="foot-left" frame="*" dx="9" dy="22"/>
@@ -243,15 +258,28 @@
 	<anchor dx="19" dy="19"/>
 </sprite>
 
+<!-- ###### Back ###### -->
+<sprite name="back-black" type="back" >
+	<image file="black_back.png"/>
+	<anchor dx="18" dy="15"/>
+</sprite>
+
 <!-- ###### Head ###### -->
 <sprite name="head-black" type="head">
 	<image file="black_head.png"/>
 	<anchor dx="10" dy="20"/>
 	<attached member_type="horns" frame="*" dx="12" dy="12"/>
+	<attached member_type="hair" frame="*" dx="23" dy="23"/>
 	<attached member_type="helmet" frame="*" dx="11" dy="10"/>
 	<attached member_type="construct" frame="*" dx="13" dy="9"/>
 	<attached member_type="noze" frame="*" dx="16" dy="13"/>
 	<attached member_type="eyes" frame="*" dx="15" dy="11"/>
+</sprite>
+
+<!-- ###### Hair ###### -->
+<sprite name="hair-black" type="hair">
+	<image file="black_hair.png"/>
+	<anchor dx="12" dy="12"/>
 </sprite>
 
 <!-- ###### Horns ###### -->
@@ -412,8 +440,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -438,6 +468,7 @@
 	<c_member name="foot-right"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -464,6 +495,7 @@
 	<c_member name="foot-right"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -485,6 +517,7 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
 	<c_member name="head"/>
@@ -507,8 +540,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -530,8 +565,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -558,8 +595,10 @@
 	<c_member name="foot-left-black"/>
 	<c_member name="tail-black"/>
 	<c_member name="foot-right-black"/>
+	<c_member name="back-black"/>
 	<c_member name="body-black"/>
 	<c_member name="horns-black"/>
+	<c_member name="hair-black"/>
 	<c_member name="head-black"/>
 	<c_member name="noze-black"/>
 	<c_member name="eyes-black"/>
@@ -580,8 +619,10 @@
 	<c_member name="foot-left-black"/>
 	<c_member name="tail-black"/>
 	<c_member name="foot-right-black"/>
+	<c_member name="back-black"/>
 	<c_member name="body-black"/>
 	<c_member name="horns-black"/>
+	<c_member name="hair-black"/>
 	<c_member name="head-black"/>
 	<c_member name="noze-black"/>
 	<c_member name="eyes-black"/>
@@ -603,6 +644,7 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
@@ -625,6 +667,7 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
@@ -646,8 +689,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -668,8 +713,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -690,8 +737,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -712,8 +761,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -734,8 +785,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -756,8 +809,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -778,8 +833,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
@@ -800,8 +857,10 @@
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
+	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
