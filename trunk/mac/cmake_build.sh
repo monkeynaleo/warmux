@@ -94,11 +94,11 @@ then
     echo "******************"
 fi
 
-if [ -e ${DMG_OUT}* ]
+if [ -e ${DMG_OUT}.dmg ]
 then
     echo "******************"
-    echo "Clean package ${DMG_OUT}"
-    rm -rf ${DMG_OUT}*
+    echo "Clean package ${DMG_OUT}.dmg"
+    rm -rf ${DMG_OUT}.dmg
     echo "******************"
 fi
 
@@ -109,6 +109,12 @@ mkdir -p ${APP}/Contents/Frameworks/
 RES=${APP}/Contents/Resources/
 mkdir -p ${RES}data/
 mkdir -p ${RES}locale/
+
+# Add icon and info.plist and PkgInfo
+cp ${MAC}Info.plist.in ${APP}/Contents/Info.plist
+cp ${MAC}PkgInfo.in ${APP}/Contents/PkgInfo
+cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
+
 
 
 ARCHIVE=${MAC}Wormux-0.8svn.tar.bz2
@@ -141,11 +147,6 @@ make install
 #
 # Generate .app File
 #
-
-# Add icon and info.plist and PkgInfo
-cp ${MAC}Info.plist.in ${APP}/Contents/Info.plist
-cp ${MAC}PkgInfo.in ${APP}/Contents/PkgInfo
-cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
 # Do a simple test for check if data is well copied
 if [ -e ${RES}/data/wormux_default_config.xml ]
