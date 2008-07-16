@@ -140,17 +140,6 @@ static void getAny(const xmlNode* father, const std::string& name, xmlNodeArray&
   }
 }
 
-// Return any child matching name
-xmlNodeArray XmlReader::GetNamed(const xmlNode* father, const std::string& name)
-{
-  xmlNodeArray tab;
-
-  // Load members
-  getAny(father, name, tab);
-
-  return tab;
-}
-
 xmlNodeArray XmlReader::GetNamedChildren(const xmlNode* father, const std::string& name)
 {
   xmlNodeArray tab;
@@ -161,19 +150,6 @@ xmlNodeArray XmlReader::GetNamedChildren(const xmlNode* father, const std::strin
   {
     if (name == (const char*)father->name)
       tab.push_back(father);
-  }
-  return tab;
-}
-xmlNodeArray XmlReader::GetNamedNeighbours(const xmlNode* first, const std::string& name)
-{
-  xmlNodeArray tab;
-  MSG_DEBUG("xml", "Search neighbours of name %s", name.c_str());
-
-  // Load members
-  for (; first; first = first->next)
-  {
-    if (name == (const char*)first->name)
-      tab.push_back(first);
   }
   return tab;
 }

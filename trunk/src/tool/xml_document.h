@@ -33,12 +33,8 @@ public:
   // Return the *exploitable* root (use root->parent for the real one) */
   const xmlNode* GetRoot() const;
 
-  // Return any child matching name
-  static xmlNodeArray GetNamed(const xmlNode* father, const std::string& name);
-  // Return the Children matching name
+  // Return the direct children matching name
   static xmlNodeArray GetNamedChildren(const xmlNode* father, const std::string& name);
-  // Return the neighbours node matching name
-  static xmlNodeArray GetNamedNeighbours(const xmlNode* first, const std::string& name);
 
   // get a attribute marker
   static bool ReadString(const xmlNode* father,
