@@ -129,17 +129,6 @@ const xmlNode* XmlReader::GetMarker(const xmlNode* x, const std::string &name)
   return NULL;
 }
 
-static void getAny(const xmlNode* father, const std::string& name, xmlNodeArray& tab)
-{
-  for (father = father; father; father = father->next)
-  {
-    if (father->children)
-      getAny(father->children, name, tab);
-    if (name == (const char*)father->name)
-      tab.push_back(father);
-  }
-}
-
 xmlNodeArray XmlReader::GetNamedChildren(const xmlNode* father, const std::string& name)
 {
   xmlNodeArray tab;
