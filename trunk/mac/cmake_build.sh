@@ -137,7 +137,7 @@ cd ${TMP}
 #awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
 #cp ${ROOT}CMakeLists.txt tmp.$$.$$.2
 #mv tmp.$$.$$ ${ROOT}CMakeLists.txt
-cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/
+cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release
 #mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
 
 make -j2
