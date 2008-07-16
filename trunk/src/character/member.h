@@ -57,7 +57,7 @@ public:
   bool go_through_ground;
 
   virtual ~Member();
-  Member(xmlNode* xml, const Profile* res);
+  Member(const xmlNode* xml, const Profile* res);
   Member(const Member& m);
   virtual void Draw(const Point2i & _pos, int flip_x, int direction);
   void RotateSprite();

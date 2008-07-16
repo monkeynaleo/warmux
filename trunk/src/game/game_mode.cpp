@@ -74,7 +74,7 @@ const std::string& GameMode::GetName() const
 }
 
 // Load data options from the selected game_mode
-bool GameMode::LoadXml(xmlNode* xml)
+bool GameMode::LoadXml(const xmlNode* xml)
 {
   std::string txt;
   if (XmlReader::ReadString(xml, "allow_character_selection", txt))
@@ -103,10 +103,10 @@ bool GameMode::LoadXml(xmlNode* xml)
   XmlReader::ReadDouble(xml, "damage_per_fall_unit", damage_per_fall_unit);
 
   // Character options
-  xmlNode* character_xml = XmlReader::GetMarker(xml, "character");
+  const xmlNode* character_xml = XmlReader::GetMarker(xml, "character");
   if (character_xml != NULL)
   {
-    xmlNode* item = XmlReader::GetMarker(character_xml, "energy");
+    const xmlNode* item = XmlReader::GetMarker(character_xml, "energy");
     if (item != NULL) {
       XmlReader::ReadUintAttr(item, "initial", character.init_energy);
       XmlReader::ReadUintAttr(item, "maximum", character.max_energy);
@@ -138,21 +138,21 @@ bool GameMode::LoadXml(xmlNode* xml)
       character.back_jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
     XmlReader::ReadUint(character_xml, "walking_pause", character.walking_pause);
-    xmlNode* explosion = XmlReader::GetMarker(character_xml, "death_explosion");
+    const xmlNode* explosion = XmlReader::GetMarker(character_xml, "death_explosion");
     if (explosion != NULL)
       death_explosion_cfg.LoadXml(explosion);
   }
 
   // Barrel explosion
-  xmlNode* barrel_xml = XmlReader::GetMarker(xml, "barrel");
+  const xmlNode* barrel_xml = XmlReader::GetMarker(xml, "barrel");
   if(barrel_xml != NULL) {
-    xmlNode* barrel_explosion = XmlReader::GetMarker(barrel_xml, "explosion");
+    const xmlNode* barrel_explosion = XmlReader::GetMarker(barrel_xml, "explosion");
     if (barrel_explosion != NULL)
       barrel_explosion_cfg.LoadXml(barrel_explosion);
   }
 
   //=== Weapons ===
-  xmlNode* weapons_xml = XmlReader::GetMarker(xml, "weapons");
+  const xmlNode* weapons_xml = XmlReader::GetMarker(xml, "weapons");
   if (weapons_xml != NULL)
   {
     std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
@@ -165,17 +165,17 @@ bool GameMode::LoadXml(xmlNode* xml)
   }
 
   // Bonus box explosion - must be loaded after the weapons.
-  xmlNode* bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
+  const xmlNode* bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
   if(bonus_box_xml != NULL) {
     BonusBox::LoadXml(bonus_box_xml);
 
-    xmlNode* bonus_box_explosion = XmlReader::GetMarker(bonus_box_xml, "explosion");
+    const xmlNode* bonus_box_explosion = XmlReader::GetMarker(bonus_box_xml, "explosion");
     if (bonus_box_explosion != NULL)
       bonus_box_explosion_cfg.LoadXml(bonus_box_explosion);
   }
 
   // Medkit - reuses the bonus_box explosion.
-  xmlNode* medkit_xml = XmlReader::GetMarker(xml, "medkit");
+  const xmlNode* medkit_xml = XmlReader::GetMarker(xml, "medkit");
   if(medkit_xml != NULL) {
     Medkit::LoadXml(medkit_xml);
   }

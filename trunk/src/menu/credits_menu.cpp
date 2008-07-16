@@ -42,13 +42,13 @@ public:
   std::string country;
   std::string description;
 
-  bool Feed (xmlNode* node);
+  bool Feed (const xmlNode* node);
   std::string PrettyString(bool with_email) const;
 };
 
 //-----------------------------------------------------------------------------
 
-bool Author::Feed (xmlNode* node)
+bool Author::Feed (const xmlNode* node)
 {
   if (!XmlReader::ReadString(node, "name", name))
     return false;
@@ -129,7 +129,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
 
   for(uint i = 0; i < (sizeof teams / sizeof* teams); ++i)
   {
-    xmlNodeArray team = XmlReader::GetNamedNeighbours(doc.GetRoot(), teams[i]);
+    xmlNodeArray team = XmlReader::GetNamedChildren(doc.GetRoot(), teams[i]);
 
     if (team.empty())
       continue;

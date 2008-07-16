@@ -180,7 +180,7 @@ void JukeBox::LoadMusicXML()
   if(!doc.Load(xml_filename))
     return;
 
-  xmlNodeArray nodes = XmlReader::GetNamedNeighbours(doc.GetRoot(), "music");
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(doc.GetRoot(), "music");
   xmlNodeArray::const_iterator
     it = nodes.begin(),
     end = nodes.end();
@@ -357,7 +357,7 @@ void JukeBox::LoadXML(const std::string& profile)
   if(!doc.Load(xml_filename))
     return;
 
-  xmlNodeArray nodes = XmlReader::GetNamedNeighbours(doc.GetRoot(), "sound");
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(doc.GetRoot(), "sound");
   xmlNodeArray::const_iterator
     it = nodes.begin(),
     end = nodes.end();

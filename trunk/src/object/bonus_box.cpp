@@ -132,13 +132,13 @@ std::vector<struct WeaponProba> BonusBox::weapon_list;
   and retrieved by weapon.GetBonusProbability() and weapon.GetBonusAmmo()
   however, this is not the way that was chosen.
 */
-void BonusBox::LoadXml(xmlNode* object)
+void BonusBox::LoadXml(const xmlNode* object)
 {
   total_probability = 0;
   struct WeaponProba w;
 
   XmlReader::ReadInt(object, "life_points", start_life_points);
-  xmlNode* node = XmlReader::GetMarker(object, "probability");
+  const xmlNode* node = XmlReader::GetMarker(object, "probability");
   std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList();
   std::list<Weapon*>::iterator
     itw = l_weapons_list.begin(),
@@ -157,7 +157,7 @@ void BonusBox::LoadXml(xmlNode* object)
     }
     total_probability += w.probability;
 
-    xmlNode* elem = XmlReader::GetMarker(node, w.weapon->GetID());
+    const xmlNode* elem = XmlReader::GetMarker(node, w.weapon->GetID());
     ASSERT(elem != NULL);
     XmlReader::ReadIntAttr (elem, "ammo", w.nb_ammos);
 

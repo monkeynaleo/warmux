@@ -31,7 +31,7 @@ class EmptyWeaponConfig
 {
 public:
    virtual ~EmptyWeaponConfig() {};
-   virtual void LoadXml(xmlNode* elem) = 0;
+   virtual void LoadXml(const xmlNode* elem) = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -43,7 +43,7 @@ public:
 public:
   WeaponConfig();
   virtual ~WeaponConfig() {};
-  virtual void LoadXml(xmlNode* elem);
+  virtual void LoadXml(const xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
@@ -61,7 +61,7 @@ public:
 public:
   ExplosiveWeaponConfig();
   virtual ~ExplosiveWeaponConfig() {};
-  virtual void LoadXml(xmlNode* elem);
+  virtual void LoadXml(const xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------

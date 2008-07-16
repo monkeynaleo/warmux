@@ -24,7 +24,7 @@
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
-void EmptyWeaponConfig::LoadXml(xmlNode* /*elem*/)
+void EmptyWeaponConfig::LoadXml(const xmlNode* /*elem*/)
 {}
 
 //-----------------------------------------------------------------------------
@@ -32,7 +32,7 @@ void EmptyWeaponConfig::LoadXml(xmlNode* /*elem*/)
 WeaponConfig::WeaponConfig()
 { damage = 10; }
 
-void WeaponConfig::LoadXml(xmlNode* elem)
+void WeaponConfig::LoadXml(const xmlNode* elem)
 {
   XmlReader::ReadUint(elem, "damage", damage);
 }
@@ -50,7 +50,7 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
   speed_on_hit = 0 ;
 }
 
-void ExplosiveWeaponConfig::LoadXml(xmlNode* elem)
+void ExplosiveWeaponConfig::LoadXml(const xmlNode* elem)
 {
   WeaponConfig::LoadXml (elem);
   XmlReader::ReadUint(elem, "timeout", timeout);

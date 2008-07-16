@@ -87,11 +87,11 @@ void InfoMap::LoadBasicInfo()
   MSG_DEBUG("map.load", "Map loaded: %s", m_map_name.c_str());
 }
 
-bool InfoMap::ProcessXmlData(xmlNode *xml)
+bool InfoMap::ProcessXmlData(const xmlNode *xml)
 {
   XmlReader::ReadBool(xml, "random", random_generated);
   // Read author informations
-  xmlNode *author = XmlReader::GetMarker(xml, "author");
+  const xmlNode *author = XmlReader::GetMarker(xml, "author");
   if (author != NULL) {
     std::string
       a_name,
@@ -138,7 +138,7 @@ bool InfoMap::ProcessXmlData(xmlNode *xml)
     lower_right_pad = resource_manager.LoadPoint2i(res_profile, "lower_right_pad");
   }
 
-  xmlNode* xmlwind = XmlReader::GetMarker(xml, "wind");
+  const xmlNode* xmlwind = XmlReader::GetMarker(xml, "wind");
   if (xmlwind != NULL)
   {
     double rot_speed=0.0;
@@ -363,8 +363,8 @@ InfoMap* ActiveMap()
   return MapsList::GetInstance()->ActiveMap();
 }
 
-std::string InfoMap::GetWaterName() 
-{ 
+std::string InfoMap::GetWaterName()
+{
   LoadBasicInfo();
   int water;
   if(str2int(water_name, water) && water < Water::MAX_WATER_TYPE) {
@@ -375,7 +375,7 @@ std::string InfoMap::GetWaterName()
     } else if(water == Water::RADIOACTIVE) {
       return "radioactive";
     }
-  } 
+  }
   // not an old water definition or invalid type
   return water_name;
 }

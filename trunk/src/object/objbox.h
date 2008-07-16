@@ -48,7 +48,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     ~ObjBox();
 
     void DropBox();
-    static void LoadXml(xmlNode*  /*object*/){};
+    static void LoadXml(const xmlNode*  /*object*/){};
 
     void Draw();
     virtual void Refresh();

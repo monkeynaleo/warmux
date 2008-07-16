@@ -121,7 +121,7 @@ Weapon::Weapon(Weapon_type type,
 
   mouse_character_selection = true;
 
-  xmlNode* elem = resource_manager.GetElement(weapons_res_profile, "position", m_id);
+  const xmlNode* elem = resource_manager.GetElement(weapons_res_profile, "position", m_id);
   if (elem != NULL) {
     // E.g. <position name="my_weapon_id" origin="hand" x="-1" y="0" />
     std::string origin_xml;
@@ -650,9 +650,9 @@ void Weapon::DrawAmmoUnits() const
   }
 }
 
-bool Weapon::LoadXml(xmlNode*  weapon)
+bool Weapon::LoadXml(const xmlNode*  weapon)
 {
-  xmlNode* elem = XmlReader::GetMarker(weapon, m_id)->children;
+  const xmlNode* elem = XmlReader::GetMarker(weapon, m_id);
   if (elem == NULL)
   {
       std::cout << Format(_("No element <%s> found in the xml config file!"),

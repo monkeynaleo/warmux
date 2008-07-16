@@ -299,7 +299,7 @@ public:
 
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
-  bool LoadXml(xmlNode*  weapon);
+  bool LoadXml(const xmlNode*  weapon);
 
   // return the strength of the weapon
   double ReadStrength() const { return m_strength; };

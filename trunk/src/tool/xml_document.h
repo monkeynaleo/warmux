@@ -12,7 +12,7 @@
 // Forward declaration
 typedef struct _xmlNode xmlNode;
 typedef struct _xmlDoc xmlDoc;
-typedef std::vector<xmlNode*> xmlNodeArray;
+typedef std::vector<const xmlNode*> xmlNodeArray;
 
 class XmlReader
 {
@@ -26,65 +26,65 @@ public:
 
   // Load an XML document from a string in memory
   bool LoadFromString(const std::string &contents);
-  std::string ExportToString();
+  std::string ExportToString() const;
 
   bool IsOk() const;
 
   // Return the *exploitable* root (use root->parent for the real one) */
-  xmlNode* GetRoot() const;
+  const xmlNode* GetRoot() const;
 
   // Return any child matching name
-  static xmlNodeArray GetNamed(xmlNode* father, const std::string& name);
+  static xmlNodeArray GetNamed(const xmlNode* father, const std::string& name);
   // Return the Children matching name
-  static xmlNodeArray GetNamedChildren(xmlNode* father, const std::string& name);
+  static xmlNodeArray GetNamedChildren(const xmlNode* father, const std::string& name);
   // Return the neighbours node matching name
-  static xmlNodeArray GetNamedNeighbours(xmlNode* first, const std::string& name);
+  static xmlNodeArray GetNamedNeighbours(const xmlNode* first, const std::string& name);
 
   // get a attribute marker
-  static bool ReadString(xmlNode* father,
+  static bool ReadString(const xmlNode* father,
                          const std::string &name,
                          std::string &output);
-  static bool ReadDouble(xmlNode* father,
+  static bool ReadDouble(const xmlNode* father,
                          const std::string &name,
                          double &output);
-  static bool ReadInt(xmlNode* father,
+  static bool ReadInt(const xmlNode* father,
                       const std::string &name,
                       int &output);
-  static bool ReadUint(xmlNode* father,
+  static bool ReadUint(const xmlNode* father,
                        const std::string &name,
                        unsigned int &output);
-  static bool ReadBool(xmlNode* father,
+  static bool ReadBool(const xmlNode* father,
                        const std::string &name,
                        bool &output);
 
   // get an XML element
-  static xmlNode* GetMarker(xmlNode* x,
-                              const std::string &name);
+  static const xmlNode* GetMarker(const xmlNode* x,
+				  const std::string &name);
 
   // Access to the 'anchor' <[name] name="[attr_name]"> : have to be uniq !
-  static xmlNode* Access(xmlNode* x,
-                         const std::string &name,
-                         const std::string &attr_name);
+  static const xmlNode* Access(const xmlNode* x,
+			       const std::string &name,
+			       const std::string &attr_name);
 
   // Lit un attribut d'un noeud
-  static bool ReadStringAttr(xmlNode* x,
+  static bool ReadStringAttr(const xmlNode* x,
                              const std::string &name,
                              std::string &output);
-  static bool ReadDoubleAttr(xmlNode* x,
+  static bool ReadDoubleAttr(const xmlNode* x,
                              const std::string &name,
                              double &output);
-  static bool ReadIntAttr(xmlNode* x,
+  static bool ReadIntAttr(const xmlNode* x,
                           const std::string &name,
                           int &output);
-  static bool ReadUintAttr(xmlNode* x,
+  static bool ReadUintAttr(const xmlNode* x,
                            const std::string &name,
                            unsigned int &output);
-  static bool ReadBoolAttr(xmlNode* x,
+  static bool ReadBoolAttr(const xmlNode* x,
                            const std::string &name,
                            bool &output);
 private:
   // Read marker value
-  static bool ReadMarkerValue(xmlNode* marker, std::string &output);
+  static bool ReadMarkerValue(const xmlNode* marker, std::string &output);
   void Reset();
 };
 
@@ -114,7 +114,7 @@ public:
 
   bool IsOk() const;
 
-  xmlNode* GetRoot();
+  xmlNode* GetRoot() const;
 
   void WriteElement(xmlNode* x,
                     const std::string &name,
@@ -125,7 +125,7 @@ public:
 
   bool Save();
 
-  std::string SaveToString();
+  std::string SaveToString() const;
 };
 
 #endif /* XML_DOCUMENT_H */

@@ -78,7 +78,7 @@ void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) const {
 // Static methods
 int Medkit::nbr_health = 24;
 
-void Medkit::LoadXml(xmlNode*  object)
+void Medkit::LoadXml(const xmlNode*  object)
 {
   XmlReader::ReadInt(object,"life_points",start_life_points);
   XmlReader::ReadInt(object,"energy_boost",nbr_health);

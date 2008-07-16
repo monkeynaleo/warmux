@@ -80,7 +80,8 @@ class ResourceManager
    Surface LoadImage(const Profile *profile, const std::string& resource_name) const;
    Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
    Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height) const;
-   xmlNode*  GetElement(const Profile *profile, const std::string& ressource_type, const std::string& ressource_name) const;
+   const xmlNode*  GetElement(const Profile *profile, const std::string& ressource_type,
+			      const std::string& ressource_name) const;
 
  private:
    std::string base_path;

@@ -39,7 +39,7 @@ HelpMenu::HelpMenu()  :
 
   std::string lang = Config::GetInstance()->GetLanguage();
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  xmlNode *elem = resource_manager.GetElement (res, "surface", "help/help_shortkeys_" + lang);
+  const xmlNode *elem = resource_manager.GetElement (res, "surface", "help/help_shortkeys_" + lang);
   std::string filename;
   if (elem == NULL || !res->doc->ReadStringAttr(elem, "file", filename))
     lang = "en";

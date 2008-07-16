@@ -42,7 +42,7 @@ ObjectConfig::ObjectConfig()
 
 void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &config_file)
 {
-  xmlNode* elem = NULL;
+  const xmlNode* elem = NULL;
   XmlReader doc;
 
   if (config_file == "") {

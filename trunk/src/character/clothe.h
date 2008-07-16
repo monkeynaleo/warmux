@@ -33,7 +33,7 @@ public:
   std::vector<Member*> layers;
 
   ~Clothe();
-  Clothe(xmlNode* xml, std::map<std::string, Member*>& members_lst);
+  Clothe(const xmlNode* xml, std::map<std::string, Member*>& members_lst);
   Clothe(Clothe* c, std::map<std::string, Member*>& members_lst);
 };
 

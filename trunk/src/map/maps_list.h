@@ -80,7 +80,7 @@ private:
 
   Profile *res_profile;
 
-  bool ProcessXmlData(xmlNode* xml);
+  bool ProcessXmlData(const xmlNode* xml);
   void LoadData();
   void LoadBasicInfo(); // Fails with abort if error
 

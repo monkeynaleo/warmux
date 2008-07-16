@@ -38,7 +38,7 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-Body::Body(xmlNode* xml, const Profile* res):
+Body::Body(const xmlNode* xml, const Profile* res):
   members_lst(),
   clothes_lst(),
   mvt_lst(),
@@ -59,7 +59,7 @@ Body::Body(xmlNode* xml, const Profile* res):
   need_rebuild(false),
   owner(NULL)
 {
-  xmlNodeArray nodes = XmlReader::GetNamedNeighbours(xml, "sprite");
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "sprite");
   xmlNodeArray::const_iterator it;
 
   // Load members
@@ -79,7 +79,7 @@ Body::Body(xmlNode* xml, const Profile* res):
   members_lst["weapon"] = weapon_member;
 
   // Load clothes
-  nodes = XmlReader::GetNamed(xml, "clothe");
+  nodes = XmlReader::GetNamedChildren(xml, "clothe");
   MSG_DEBUG("body", "Found %i clothes\n", nodes.size());
   for (it = nodes.begin(); it != nodes.end(); ++it)
   {
@@ -95,7 +95,7 @@ Body::Body(xmlNode* xml, const Profile* res):
 
   // Load movements alias
   std::map<std::string, std::string> mvt_alias;
-  nodes = XmlReader::GetNamedNeighbours(xml, "alias");
+  nodes = XmlReader::GetNamedChildren(xml, "alias");
   MSG_DEBUG("body", "Found %i aliases\n", nodes.size());
   for (it = nodes.begin(); it != nodes.end(); ++it)
   {
@@ -107,7 +107,7 @@ Body::Body(xmlNode* xml, const Profile* res):
   }
 
   // Load movements
-  nodes = XmlReader::GetNamedNeighbours(xml, "movement");
+  nodes = XmlReader::GetNamedChildren(xml, "movement");
   MSG_DEBUG("body", "Found %i movements\n", nodes.size());
   for (it = nodes.begin(); it != nodes.end(); ++it)
   {

@@ -24,7 +24,7 @@
 #include "tool/xml_document.h"
 #include "tool/debug.h"
 
-Movement::Movement(xmlNode* xml)
+Movement::Movement(const xmlNode* xml)
 {
   frames.clear();
   play_mode = LOOP;
@@ -44,7 +44,7 @@ Movement::Movement(xmlNode* xml)
 
    // Load the test rectangle
   test_left = test_right = test_top = test_bottom = 0;
-  xmlNode* collision_rect = XmlReader::GetMarker(xml, "collision_rect");
+  const xmlNode* collision_rect = XmlReader::GetMarker(xml, "collision_rect");
   if (collision_rect == NULL)
   {
     fprintf(stderr, "No collision rect for %s\n", type.c_str());
@@ -56,7 +56,7 @@ Movement::Movement(xmlNode* xml)
   XmlReader::ReadUintAttr(collision_rect, "bottom", test_bottom);
   MSG_DEBUG("body.movement", "Collision rect set to (%u,%u) -> (%u,%u)\n",
             test_left, test_top, test_left, test_bottom);
-  
+
   xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "frame");
   xmlNodeArray::const_iterator it = nodes.begin(), end = nodes.end();
   MSG_DEBUG("body.movement", "  Found %i movement frames\n", nodes.size());
@@ -73,7 +73,7 @@ Movement::Movement(xmlNode* xml)
 
     for (it2 = members.begin(); it2 != members.end(); ++it2)
     {
-      xmlNode *child = *it2;
+      const xmlNode *child = *it2;
       std::string member_type;
       XmlReader::ReadStringAttr(child, "type", member_type);
 

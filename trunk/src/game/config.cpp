@@ -340,7 +340,6 @@ bool Config::DoLoading(void)
     return false;
 
   LoadXml(doc.GetRoot());
-
   return true;
 }
 
@@ -365,7 +364,7 @@ void Config::LoadDefaultValue()
   }
 
   //=== Default fonts value ===
-  xmlNode *node = resource_manager.GetElement(res, "section", "default_language_fonts");
+  const xmlNode *node = resource_manager.GetElement(res, "section", "default_language_fonts");
   if (node) {
     xmlNodeArray list = XmlReader::GetNamedChildren(node, "language");
     for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it) {
@@ -395,8 +394,10 @@ void Config::LoadDefaultValue()
 }
 
 // Read personal config file
-void Config::LoadXml(xmlNode *xml)
+void Config::LoadXml(const xmlNode *xml)
 {
+  const xmlNode *elem;
+
   std::cout << "o " << _("Reading personal config file") << std::endl;
 
   //=== Map ===
@@ -407,22 +408,24 @@ void Config::LoadXml(xmlNode *xml)
   SetLanguage(default_language);
 
   //=== Teams ===
-  xmlNode *elem = XmlReader::GetMarker(xml, "teams");
-  int i = 0;
-
-  xmlNode *team;
-
-  while ((team = XmlReader::GetMarker(elem, "team_" + ulong2str(i))) != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "teams")) != NULL)
   {
-    ConfigTeam one_team;
-    XmlReader::ReadString(team, "id", one_team.id);
-    XmlReader::ReadString(team, "player_name", one_team.player_name);
-    XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
+    int i = 0;
 
-    teams.push_back(one_team);
+    const xmlNode *team;
 
-    // get next team
-    i++;
+    while ((team = XmlReader::GetMarker(elem, "team_" + ulong2str(i))) != NULL)
+      {
+	ConfigTeam one_team;
+	XmlReader::ReadString(team, "id", one_team.id);
+	XmlReader::ReadString(team, "player_name", one_team.player_name);
+	XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
+
+	teams.push_back(one_team);
+
+	// get next team
+	i++;
+      }
   }
 
   //=== Video ===
@@ -456,7 +459,7 @@ void Config::LoadXml(xmlNode *xml)
   //=== network ===
   if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
   {
-    xmlNode *sub_elem;
+    const xmlNode *sub_elem;
     if ((sub_elem = XmlReader::GetMarker(elem, "as_client")) != NULL)
     {
       XmlReader::ReadString(sub_elem, "host", m_network_client_host);
@@ -473,7 +476,7 @@ void Config::LoadXml(xmlNode *xml)
     if ((sub_elem = XmlReader::GetMarker(elem, "local_teams")) != NULL)
     {
       int i = 0;
-      xmlNode *team;
+      const xmlNode *team;
 
       while ((team = XmlReader::GetMarker(sub_elem, "team_" + ulong2str(i))) != NULL)
 	{

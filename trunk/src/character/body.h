@@ -108,7 +108,7 @@ class Body
 
 public:
 
-  Body(xmlNode* xml, const Profile* res);
+  Body(const xmlNode* xml, const Profile* res);
   Body(const Body&);
   ~Body();
 

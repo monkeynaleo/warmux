@@ -42,7 +42,7 @@ class Medkit : public ObjBox//public PhysicalObj
   public:
     Medkit();
 
-    static void LoadXml(xmlNode * object);
+    static void LoadXml(const xmlNode * object);
     void ApplyBonus(Character *);
     void GetValueFromAction(Action *);
     void StoreValue(Action *);

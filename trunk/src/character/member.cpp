@@ -32,7 +32,7 @@
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 
-Member::Member(xmlNode* xml, const Profile* res):
+Member::Member(const xmlNode* xml, const Profile* res):
   parent(NULL),
   angle_rad(0),
   anchor(0,0),
@@ -60,8 +60,8 @@ Member::Member(xmlNode* xml, const Profile* res):
   XmlReader::ReadStringAttr(xml, "type", type);
   ASSERT(type!="");
 
-  xmlNode* el = XmlReader::GetMarker(xml, "anchor");
-  if(el != 0)
+  const xmlNode* el = XmlReader::GetMarker(xml, "anchor");
+  if (el != NULL)
   {
     int dx = 0, dy = 0;
     XmlReader::ReadIntAttr(el, "dx", dx);

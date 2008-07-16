@@ -77,7 +77,7 @@ private:
 
   XmlReader* doc_objects;
 
-  bool LoadXml (xmlNode* xml);
+  bool LoadXml (const xmlNode* xml);
   bool ExportFileToString(const std::string& filename, std::string& contents) const;
 
   std::string GetFilename() const;

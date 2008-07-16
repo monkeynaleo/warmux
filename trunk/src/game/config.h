@@ -223,7 +223,7 @@ protected:
 private:
   bool DoLoading(void);
   void LoadDefaultValue();
-  void LoadXml(xmlNode* xml);
+  void LoadXml(const xmlNode* xml);
 
   // return true if the directory is created
   bool MkdirPersonalConfigDir();

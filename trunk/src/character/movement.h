@@ -76,7 +76,7 @@ public:
   std::string type;
 
   ~Movement();
-  Movement(xmlNode* xml);
+  Movement(const xmlNode* xml);
 };
 
 #endif //MEMBER_H

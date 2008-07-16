@@ -25,7 +25,7 @@
 #include <map>
 #include <iostream>
 
-Clothe::Clothe(xmlNode* xml, std::map<std::string, Member*>& members_lst):
+Clothe::Clothe(const xmlNode* xml, std::map<std::string, Member*>& members_lst):
   name(),
   layers()
 {
@@ -55,7 +55,7 @@ Clothe::Clothe(xmlNode* xml, std::map<std::string, Member*>& members_lst):
     }
 
     layers.push_back( member );
-  } 
+  }
 
   std::vector<Member*>::iterator i = layers.begin();
   while( i != layers.end())
