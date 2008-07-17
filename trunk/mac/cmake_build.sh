@@ -121,18 +121,25 @@ if [ -e ${TMP} ]
 then
     echo "*****************"
     echo "Clean tmpbuild"
-    rm -rf ${TMP}*
+    rm -rf ${TMP}
     echo "*****************"
-else
-    mkdir ${TMP}
 fi
+mkdir ${TMP}
 
 APP=${MAC}Wormux.app
 if [ -e ${APP} ]
 then
     echo "******************"
-    echo "Clean package .app"
-    rm -rf ${APP}/*
+    echo "Clean package Wormux.app"
+    rm -rf ${APP}
+    echo "******************"
+fi
+
+if [ -e ${DMG_OUT}.app ]
+then
+    echo "******************"
+    echo "Clean package ${DMG_OUT}.app"
+    rm -rf ${DMG_OUT}.app
     echo "******************"
 fi
 
@@ -176,14 +183,23 @@ fi
 #
 
 cd ${TMP}
-#awk '/^SET\(WORMUX_PATCH/ { sub(/^/,"#") } { print }' ${ROOT}CMakeLists.txt > tmp.$$.$$
-#cp ${ROOT}CMakeLists.txt tmp.$$.$$.2
-#mv tmp.$$.$$ ${ROOT}CMakeLists.txt
-cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release
-#mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
 
-make ${NBTHREADS} 
-make install
+if ! cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release
+then
+    echo "CMake error"
+    exit 1
+fi
+
+if ! make ${NBTHREADS} 
+then
+    echo "make ${NBTHREADS} error"
+    exit 1
+fi
+if ! make install
+then
+    echo "make install error"
+    exit 1
+fi
 
 
 #
