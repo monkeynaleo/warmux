@@ -147,8 +147,6 @@ const xmlNode* XmlReader::Access(const xmlNode* x,
 				 const std::string &name,
 				 const std::string &attr_name)
 {
-  const xmlNode* tmp;
-
   ASSERT(x->type == XML_ELEMENT_NODE);
 
   // is it already the right xmlNode ?
@@ -162,7 +160,7 @@ const xmlNode* XmlReader::Access(const xmlNode* x,
         if (attr_name == (const char*)value)
 	  {
 	    xmlFree(value);
-	    return tmp;
+        return x;
 	  }
         xmlFree(value);
       }

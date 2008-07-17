@@ -140,7 +140,7 @@ cd ${TMP}
 cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release
 #mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
 
-make -j2
+make 
 make install
 
 
