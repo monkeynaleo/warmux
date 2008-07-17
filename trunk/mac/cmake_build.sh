@@ -11,7 +11,7 @@
 #
 # Set environment for compile
 #
- 
+
 MAC=`pwd`/
 ROOT=${MAC}../
 SRC=${ROOT}src/
@@ -31,20 +31,62 @@ BUNDLE_NAME=Wormux
 DMG_TARGET="${BUNDLE_NAME}-${APP_VERSION}"
 DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-`uname -p`
 
-if [ "$1" = "universal" ]
+
+if [ "$1" = "--help" ]
 then
-    echo "*******************************"
-    echo ""
-    echo "Universal build mode enabled !"
-    echo ""
-    echo "*******************************"
-    export CFLAGS="${FAT_CFLAGS} ${CFLAGS}"
-    export CXXFLAGS="${CFLAGS}"
-    export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
-    BUNDLE_NAME=Wormux
-    DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
+    echo "targets :"
+    echo "./cmake_build universal : build a universal app and his dmg file"
+    echo "./cmake_build -j<x> : launch make with x threads"
+    echo "./cmake_build universal -j<x> : launch make with x threads for build universal"
+    exit 1
 fi
 
+
+
+if [ $# = 1 ]
+then
+    if [ "$1" = "universal" ]
+    then
+        echo "*******************************"
+        echo ""
+        echo "Universal build mode enabled !"
+        echo ""
+        echo "*******************************"
+        export CFLAGS="${FAT_CFLAGS} ${CFLAGS}"
+        export CXXFLAGS="${CFLAGS}"
+        export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
+        BUNDLE_NAME=Wormux
+        DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
+    else
+        NBTHREADS=$1
+        echo "Launch with ${NBTHREADS} !"
+    fi
+fi
+
+if [ $# = 2 ]
+then
+    if [ "$1" = "universal" ]
+    then
+        TMP1=${1}
+        TMP2=${2}
+    else
+        TMP2=${1}
+        TMP1=${2}
+    fi
+        echo "*******************************"
+        echo ""
+        echo "Universal build mode enabled !"
+        echo ""
+        echo "*******************************"
+        export CFLAGS="${FAT_CFLAGS} ${CFLAGS}"
+        export CXXFLAGS="${CFLAGS}"
+        export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
+        BUNDLE_NAME=Wormux
+        DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
+
+        NBTHREADS=$TMP2
+        echo "Launch with ${NBTHREADS} !"
+fi
 
 
 #
@@ -140,7 +182,7 @@ cd ${TMP}
 cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release
 #mv tmp.$$.$$.2 ${ROOT}CMakeLists.txt
 
-make 
+make ${NBTHREADS} 
 make install
 
 
