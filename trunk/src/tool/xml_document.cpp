@@ -160,7 +160,7 @@ const xmlNode* XmlReader::Access(const xmlNode* x,
         if (attr_name == (const char*)value)
 	  {
 	    xmlFree(value);
-        return x;
+	    return x;
 	  }
         xmlFree(value);
       }
