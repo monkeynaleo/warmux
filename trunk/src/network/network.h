@@ -165,12 +165,12 @@ public:
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
 
-  static void Send(TCPsocket& socket, const int& nbr);
-  static void Send(TCPsocket& socket, const std::string &str);
+  static bool Send(TCPsocket& socket, const int& nbr);
+  static bool Send(TCPsocket& socket, const std::string &str);
 
   static uint Batch(void* buffer, const int& nbr);
   static uint Batch(void* buffer, const std::string &str);
-  static void SendBatch(TCPsocket& socket, void* data, size_t len);
+  static bool SendBatch(TCPsocket& socket, void* data, size_t len);
 
   static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
   static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str);

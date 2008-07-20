@@ -571,20 +571,31 @@ bool Network::IsTurnMaster() const
 // Static methods usefull to communicate without action
 // (index server, handshake, ...)
 
-void Network::Send(TCPsocket& socket, const int& nbr)
+bool Network::Send(TCPsocket& socket, const int& nbr)
 {
   char packet[4];
   // this is not cute, but we don't want an int -> uint conversion here
   Uint32 u_nbr = *((const Uint32*)&nbr);
 
   SDLNet_Write32(u_nbr, packet);
-  SDLNet_TCP_Send(socket, packet, sizeof(packet));
+  int len = SDLNet_TCP_Send(socket, packet, sizeof(packet));
+  if (len < int(sizeof(packet)))
+    return false;
+
+  return true;
 }
 
-void Network::Send(TCPsocket& socket, const std::string &str)
+bool Network::Send(TCPsocket& socket, const std::string &str)
 {
-  Send(socket, str.size());
-  SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
+  bool r = Send(socket, str.size());
+  if (!r)
+    return false;
+
+  int len = SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
+  if (len < int(str.size()))
+    return false;
+
+  return true;
 }
 
 uint Network::Batch(void* buffer, const int& nbr)
@@ -607,10 +618,16 @@ uint Network::Batch(void* buffer, const std::string &str)
 
 // A batch consists in a msg id, a size, and the batch itself.
 // Size wasn't known yet, so write it now.
-void Network::SendBatch(TCPsocket& socket, void* data, size_t len)
+bool Network::SendBatch(TCPsocket& socket, void* data, size_t len)
 {
   SDLNet_Write32(len, (void*)( ((char*)data)+4 ) );
-  SDLNet_TCP_Send(socket, data, len);
+
+  int size = SDLNet_TCP_Send(socket, data, len);
+  if (size < int(len)) {
+    MSG_DEBUG("network", "size = %d", size);
+    return false;
+  }
+  return true;
 }
 
 int Network::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
