@@ -273,6 +273,10 @@ std::list<GameServerInfo> NetworkConnectionMenu::GetList()
 
   lst = IndexServer::GetInstance()->GetHostList();
   IndexServer::GetInstance()->Disconnect();
+
+  if (lst.empty()) {
+    Menu::DisplayError(_("Sorry, currently, no game is waiting for players"));
+  }
   return lst;
 }
 
@@ -290,7 +294,6 @@ void NetworkConnectionMenu::RefreshList()
 
   std::list<GameServerInfo> lst = GetList();
   if (lst.empty()) {
-    Menu::DisplayError(_("Sorry, currently, no game is waiting for players"));
     return;
   }
 
