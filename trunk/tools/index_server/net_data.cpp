@@ -193,7 +193,7 @@ bool NetData::ReceiveStr(std::string & full_str)
         return false;
       }
 
-      int size;
+      int size = 0;
       if (!ReceiveInt(size))
         return false;
 
@@ -310,15 +310,17 @@ bool NetData::Receive()
 
   // Get the ID of the message
   // if we don't already know it
-  if(msg_id == TS_NO_MSG)
+  if (msg_id == TS_NO_MSG)
     {
-      int id;
-      if (received <= sizeof(uint32_t))
+
+      // Waiting for the msg id + size
+      if (received <= 2 * sizeof(uint32_t))
         {
-          DPRINT(TRAFFIC, "Not yet ready to read msg id!");
+          DPRINT(TRAFFIC, "Not yet ready to read (msg id + size)!");
           return true;
         }
 
+      int id = 0;
       if (!ReceiveInt(id) )
         {
           DPRINT(TRAFFIC, "Didn't received msg id!");
@@ -326,13 +328,7 @@ bool NetData::Receive()
         }
       msg_id = (IndexServerMsg)id;
 
-      int lsize;
-      if (received <= sizeof(uint32_t))
-        {
-          DPRINT(TRAFFIC, "Not yet ready to read msg size!");
-          return true;
-        }
-
+      int lsize = 0;
       if (!ReceiveInt(lsize))
         {
           DPRINT(TRAFFIC, "Didn't received msg size!");
@@ -340,7 +336,7 @@ bool NetData::Receive()
         }
 
       // Message is at least id+length
-      if (lsize<8 || lsize > 65535)
+      if (lsize < 8 || lsize > 65535)
         {
           DPRINT(TRAFFIC, "Incorrect msg size of %i!", lsize);
           return false;
@@ -354,7 +350,7 @@ bool NetData::Receive()
   if (received+2*sizeof(uint32_t) < msg_size)
     return true;
 
-  switch(msg_id) {
+  switch (msg_id) {
   case TS_MSG_PING:
     r = SendInt(TS_MSG_PONG);
     break;
@@ -384,8 +380,10 @@ void NetData::CheckState()
       return;
     }
 
-  SendInt(TS_MSG_PING);
-  ping_sent = true;
+  if (SendInt(TS_MSG_PING))
+    ping_sent = true;
+  else
+    ping_sent = false;
 }
 
 void NetData::UpdatePing()
