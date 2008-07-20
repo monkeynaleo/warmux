@@ -50,7 +50,7 @@ class Client : public NetData
 
   bool SendSignature();
   bool SendList();
-  void SetVersion(const std::string & version);
+  void AddMeToClientsList(const std::string & version);
 
   // Tell other index server that a new wormux server just registered
   void NotifyServers(bool joining);

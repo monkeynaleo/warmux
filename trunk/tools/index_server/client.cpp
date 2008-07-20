@@ -73,6 +73,8 @@ Client::Client(int client_fd, unsigned int & ip)
   handshake_done = false;
   is_hosting = false;
   Host(client_fd, ip);
+
+  DPRINT(MSG, "Client: Creation of client(%d, %d)\n", client_fd, ip);
 }
 
 Client::~Client()
@@ -85,6 +87,8 @@ Client::~Client()
           NotifyServers( false );
         }
     }
+
+  DPRINT(MSG, "Client: Deletion of client(%d, %d)\n", GetFD(), GetIP());
 }
 
 bool Client::HandShake(const std::string & version)
@@ -95,25 +99,30 @@ bool Client::HandShake(const std::string & version)
   if (version == "0.8"
       || version == "0.8svn")
     {
-      DPRINT(MSG, "Version checked successfully");
-      handshake_done = true;
-      SetVersion( version );
-      msg_id = TS_NO_MSG;
       stats.NewClient();
-      return SendSignature();
+      if (!SendSignature())
+	goto error;
     }
   else if (version == "WIS")
     {
       DPRINT(MSG, "New index server connected");
-      // Send our version, the distant server will shutdown if he has a lower version
-      SetVersion( version );
-      SendInt((int) TS_MSG_WIS_VERSION );
-      SendInt( VERSION );
-      // We are ready to read a new message
-      msg_id = TS_NO_MSG;
-      handshake_done = true;
-      return true;
+
+      if (!SendInt((int) TS_MSG_WIS_VERSION ))
+	goto error;
+
+      if (!SendInt( VERSION ))
+	goto error;
     }
+
+  AddMeToClientsList( version );
+  msg_id = TS_NO_MSG;
+
+  handshake_done = true;
+  DPRINT(MSG, "Handshake : OK");
+  return true;
+
+ error:
+  DPRINT(MSG, "Handshake failure");
   return false;
 }
 
@@ -146,16 +155,24 @@ bool Client::RegisterWormuxServer()
   if (lfd == -1) {
     DPRINT(MSG, "server is not reachable");
     // answer to the server
-    SendStr("UNREACHABLE");
+    if (!SendStr("UNREACHABLE"))
+      goto err_send;
+
     return false;
   }
   close(lfd);
 
   DPRINT(INFO, "Connection to %s:%i : OK", formated_ip, port);
-  SendStr("OK");
+  if (!SendStr("OK"))
+    goto err_send;
+
   NotifyServers(true);
   stats.NewServer();
   return true;
+
+ err_send:
+  DPRINT(MSG, "Fail to register new game server");
+  return false;
 }
 
 bool Client::HandleMsg(enum IndexServerMsg msg_id)
@@ -225,7 +242,7 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
   return r;
 }
 
-void Client::SetVersion(const std::string & ver)
+void Client::AddMeToClientsList(const std::string & ver)
 {
   DPRINT(MSG, "Setting version to %s", ver.c_str());
   version = ver;
@@ -251,9 +268,21 @@ void Client::SetVersion(const std::string & ver)
 
 bool Client::SendSignature()
 {
+  bool r;
   DPRINT(MSG, "Sending signature");
-  SendInt((int)TS_MSG_VERSION);
-  return SendStr("MassMurder!");
+
+  r = SendInt((int)TS_MSG_VERSION);
+  if (!r)
+    goto err_send;
+  r = SendStr("MassMurder!");
+  if (!r)
+    goto err_send;
+
+  return true;
+
+ err_send:
+  DPRINT(MSG, "Fail to send signature");
+  return false;
 }
 
 bool Client::SendList()
