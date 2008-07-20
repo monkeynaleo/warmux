@@ -74,7 +74,7 @@ class IndexServer : public Singleton<IndexServer>
   void NewMsg(IndexServerMsg msg_id);
   void Batch(const int &nbr);
   void Batch(const std::string &str);
-  void SendMsg();
+  bool SendMsg();
   int ReceiveInt();
   std::string ReceiveStr();
 

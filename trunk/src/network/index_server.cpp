@@ -217,10 +217,11 @@ void IndexServer::Batch(const std::string &str)
   used += Network::Batch(buffer+used, str);
 }
 
-void IndexServer::SendMsg()
+bool IndexServer::SendMsg()
 {
-  Network::SendBatch(socket, buffer, used);
+  bool r = Network::SendBatch(socket, buffer, used);
   used = 0;
+  return r;
 }
 
 int IndexServer::ReceiveInt()
@@ -259,24 +260,41 @@ std::string IndexServer::ReceiveStr()
 
 bool IndexServer::HandShake()
 {
-  NewMsg(TS_MSG_VERSION);
-  Batch(Constants::WORMUX_VERSION);
-  SendMsg();
-
-  int msg = ReceiveInt();
-  if(msg == -1)
-    return false;
+  bool r;
+  int msg;
   std::string sign;
 
-  if(msg == TS_MSG_VERSION)
-    sign = ReceiveStr();
+  MSG_DEBUG("index_server", "Beginning handshake...");
 
-  if(msg != TS_MSG_VERSION || sign != "MassMurder!")
-  {
-    Disconnect();
-    return false;
-  }
+  NewMsg(TS_MSG_VERSION);
+  Batch(Constants::WORMUX_VERSION);
+
+  MSG_DEBUG("index_server", "Sending information...");
+
+  r = SendMsg();
+  if (!r)
+    goto error;
+
+  MSG_DEBUG("index_server", "Receiving...");
+
+  msg = ReceiveInt();
+  if (msg == -1 || msg != TS_MSG_VERSION)
+    goto error;
+
+  MSG_DEBUG("index_server", "Receiving...");
+  sign = ReceiveStr();
+
+  if (sign != "MassMurder!")
+    goto error;
+
+  MSG_DEBUG("index_server", "Handshake : OK");
+
   return true;
+
+ error:
+  MSG_DEBUG("index_server", "Handshake : ERROR!");
+  Disconnect();
+  return false;
 }
 
 bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd)
