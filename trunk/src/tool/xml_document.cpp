@@ -28,6 +28,7 @@
 #include <libxml/parser.h>
 
 #ifdef DEBUG
+#include <cstring>
 void display_xml_tree(const xmlNode* root, uint level, bool neigh)
 {
   char space[1024] = "";
