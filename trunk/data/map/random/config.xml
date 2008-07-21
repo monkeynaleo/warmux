@@ -2,6 +2,7 @@
 <!-- <!DOCTYPE resources SYSTEM "../random.dtd" []> -->
 <resources>
   <random>1</random>
+  <generator>1</generator>
   <author>
     <name>Yannig Perré</name>
     <nickname>drayan</nickname>

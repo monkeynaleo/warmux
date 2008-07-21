@@ -89,7 +89,13 @@ void InfoMap::LoadBasicInfo()
 
 bool InfoMap::ProcessXmlData(const xmlNode *xml)
 {
+    uint tmpisle = (uint) island_type;
+
   XmlReader::ReadBool(xml, "random", random_generated);
+
+  XmlReader::ReadUint(xml, "generator", tmpisle);
+  island_type = (Island_type) tmpisle;
+
   // Read author informations
   const xmlNode *author = XmlReader::GetMarker(xml, "author");
   if (author != NULL) {
