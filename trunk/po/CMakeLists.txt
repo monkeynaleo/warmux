@@ -6,17 +6,11 @@ SET(POT_FILE ${CMAKE_CURRENT_BINARY_DIR}/wormux.pot)
 
 # Create PO Template file 'wormux.pot'
 
-SET(_SOURCE_FILES)
-SET(_POT_DEPS)
-FOREACH(_src ${WORMUX_SRCS})
-  LIST(APPEND _SOURCE_FILES ${_src})
-  LIST(APPEND _POT_DEPS ${_src})
-ENDFOREACH(_src ${WORMUX_SRCS})
 ADD_CUSTOM_COMMAND(
   OUTPUT ${POT_FILE}
   COMMAND ${XGETTEXT_EXECUTABLE}
-  ARGS -o ${POT_FILE} -s --directory=${CMAKE_SOURCE_DIR} --omit-header --msgid-bugs-address=${BUGS_ADDRESS} -c --keyword=_ --keyword=N_ --copyright-holder=${COPYRIGHT_HOLDER} ${_SOURCE_FILES}
-  DEPENDS ${_POT_DEPS}
+  ARGS -o ${POT_FILE} -s --directory=${CMAKE_SOURCE_DIR} --omit-header --msgid-bugs-address=${BUGS_ADDRESS} -c --keyword=_ --keyword=N_ --copyright-holder=${COPYRIGHT_HOLDER} ${WORMUX_SRCS}
+  DEPENDS ${WORMUX_SRCS}
 )
 
 
