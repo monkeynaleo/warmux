@@ -1,11 +1,5 @@
 cmake_minimum_required(VERSION 2.4.4)
 
-# new stuff in 2.6; remove when it is widespread enough and we switch
-# CMP0005 - ADD_DEFINITION is now properly autoescaped
-IF(COMMAND cmake_policy)
-  cmake_policy(SET CMP0005 OLD)
-ENDIF(COMMAND cmake_policy)
-
 # Project name
 PROJECT(Wormux)
 SET(WORMUX_MAJOR "0")
@@ -99,6 +93,11 @@ ELSE(APPLE)
   FIND_PACKAGE(PNG REQUIRED)
 ENDIF(APPLE)
 
+# new stuff in 2.6; remove when it is widespread enough and we switch (see top)
+# CMP0005 - ADD_DEFINITION is now properly autoescaped
+IF(COMMAND cmake_policy)
+  cmake_policy(SET CMP0005 OLD)
+ENDIF(COMMAND cmake_policy)
 
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})
 
