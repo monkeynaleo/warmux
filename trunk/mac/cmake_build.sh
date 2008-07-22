@@ -175,8 +175,7 @@ then
     echo "******************"
 fi
 
-#export CMAKE_INSTALL_PREFIX=./wormux-files
-
+#export CMAKE_INSTALL_PREFIX=${RES}
 
 #
 # Compile
@@ -184,7 +183,7 @@ fi
 
 cd ${TMP}
 
-if ! cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release
+if ! cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES}
 then
     echo "CMake error"
     exit 1
