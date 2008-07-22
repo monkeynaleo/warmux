@@ -7,6 +7,9 @@ SET(WORMUX_MINOR "8")
 SET(WORMUX_PATCH "svn")
 SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}${WORMUX_PATCH}")
 
+# change the default install prefix to /usr
+SET(CMAKE_INSTALL_PREFIX /usr)
+
 # Some aliases of cmake variables
 IF(BUILD)
   SET(BUILD CACHE STRING "Abbreviation for CMAKE_BUILD_TYPE.")
