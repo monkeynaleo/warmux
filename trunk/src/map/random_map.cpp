@@ -237,6 +237,50 @@ void RandomMap::GenerateIsland()
   DrawElement();
 }
 
+void RandomMap::GenerateGridElements()
+{
+    uint grid_wid = 300, grid_hei = 300;
+    uint elemchance = 75;
+    uint elem_adj_x_min = 0, elem_adj_x_max = 0;
+    uint elem_adj_y_min = 0, elem_adj_y_max = 0;
+
+    uint dx, dy;
+
+    if (number_of_element < 1) return;
+
+    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_grid_wid", grid_wid);
+    if (grid_wid < 1) grid_wid = 1;
+
+    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_grid_hei", grid_hei);
+    if (grid_hei < 1) grid_hei = 1;
+
+    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_chance", elemchance);
+
+    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_x_min", elem_adj_x_min);
+    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_x_max", elem_adj_x_max);
+    if (elem_adj_x_min > elem_adj_x_max) elem_adj_x_min = elem_adj_x_max;
+
+    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_y_min", elem_adj_y_min);
+    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_y_max", elem_adj_y_max);
+    if (elem_adj_y_min > elem_adj_y_max) elem_adj_y_min = elem_adj_y_max;
+
+    result.Fill(0);
+
+    for (dx = grid_wid; dx < (uint)width; dx += grid_wid)
+	for (dy = grid_hei; dy < (uint)height; dy += grid_hei)
+	    if (Random::GetInt(0,99) < (int)elemchance) {
+		Surface * random_element = random_element_list.GetRandomElement();
+		if (random_element != NULL) {
+		    uint ex = dx + Random::GetInt(elem_adj_x_min, elem_adj_x_max);
+		    uint ey = dy + Random::GetInt(elem_adj_y_min, elem_adj_y_max);
+		    Surface * tmp_surf = new Surface(random_element->GetSurface());
+		    AddElement(tmp_surf, Point2i(ex, ey));
+		}
+	    }
+
+    DrawElement();
+}
+
 void RandomMap::Generate(InfoMap::Island_type generator)
 {
   srand(time(NULL));
@@ -247,6 +291,7 @@ void RandomMap::Generate(InfoMap::Island_type generator)
   switch (generator) {
     case InfoMap::PLATEFORMS: GeneratePlatforms(); break;
     case InfoMap::SINGLE_ISLAND: GenerateIsland(); break;
+    case InfoMap::GRID_ELEMENTS: GenerateGridElements(); break;
     default: GenerateIsland(); break;
   }
 }

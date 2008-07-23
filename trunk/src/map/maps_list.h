@@ -40,6 +40,7 @@ class InfoMap {
     RANDOM_GENERATED,
     SINGLE_ISLAND,
     PLATEFORMS,
+    GRID_ELEMENTS,
     DEFAULT
   } Island_type;
 

@@ -98,6 +98,7 @@ class RandomMap {
    void Generate(InfoMap::Island_type generator);
    void GenerateIsland();
    void GeneratePlatforms();
+   void GenerateGridElements();
    void SaveMap();
    Surface GetRandomMap() const { return result; };
 };
