@@ -205,6 +205,10 @@ fi
 # Generate .app File
 #
 
+
+mv ${RES}/share/locale ${RES}
+rm -rf ${RES}/share
+
 # Do a simple test for check if data is well copied
 if [ -e ${RES}/data/wormux_default_config.xml ]
 then
