@@ -22,6 +22,8 @@
 #include "tool/file_tools.h"
 #include <fstream>
 #include <sys/stat.h>
+#include <errno.h>
+
 #ifdef WIN32
    // To get SHGetSpecialFolderPath
 #  define _WIN32_IE   0x400
@@ -49,6 +51,42 @@ bool IsFolderExist(const std::string &name)
   if (stat(name.c_str(), &stat_file) != 0)
         return false;
   return (stat_file.st_mode & S_IFMT) == S_IFDIR;
+}
+
+#ifndef WIN32
+#define MKDIR(dir) (mkdir(dir, 0750))
+#else
+#define MKDIR(dir) (_mkdir(dir))
+#endif
+
+bool CreateFolder(const std::string &name)
+{
+  if (IsFolderExist(name))
+    return true; // folder is already existing, nothing to do :-)
+
+  std::string dir = name;
+  std::string subdir;
+  std::size_t pos;
+
+  // Create the needed parent folders
+  pos = dir.find("/");
+  while (pos != dir.npos) {
+    subdir = dir.substr(0, pos);
+    printf("%s\n", subdir.c_str());
+
+    if (subdir.size() != 0) {
+      // Create the directory if it doesn't exist
+      if (MKDIR(subdir.c_str()) != 0 && errno != EEXIST)
+	return false;
+    }
+    pos = dir.find("/", pos+1);
+  }
+
+  // Create the directory if it doesn't exist
+  if (MKDIR(dir.c_str()) != 0 && errno != EEXIST)
+    return false;
+
+  return true;
 }
 
 // Find the extension part of a filename

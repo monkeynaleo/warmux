@@ -27,7 +27,6 @@
 #include <sstream>
 #include <string>
 #include <iostream>
-#include <sys/stat.h>
 #include <errno.h>
 #include <libxml/tree.h>
 #ifdef WIN32
@@ -54,12 +53,6 @@
 #include "weapon/weapons_list.h"
 #ifdef USE_AUTOPACKAGE
 #  include "include/binreloc.h"
-#endif
-
-#ifndef WIN32
-#define MKDIR_P(dir) (mkdir(dir, 0750))
-#else
-#define MKDIR_P(dir) (_mkdir(dir))
 #endif
 
 #ifdef _WIN32
@@ -212,9 +205,6 @@ Config::Config():
 
   if (c_data_dir == NULL) {
     personal_data_dir = GetHome() + "/.local";
-    MKDIR_P(personal_data_dir.c_str());
-    personal_data_dir = GetHome() + "/.local/share";
-    MKDIR_P(personal_data_dir.c_str());
   }
   else
     personal_data_dir = c_data_dir;
@@ -257,29 +247,17 @@ Config::Config():
 
 bool Config::MkdirChatLogDir()
 {
-  // Create the directory if it doesn't exist
-  if (MKDIR_P(chat_log_dir.c_str()) == 0 || errno == EEXIST)
-    return true;
-
-  return false;
+  return CreateFolder(chat_log_dir);
 }
 
 bool Config::MkdirPersonalConfigDir()
 {
-  // Create the directory if it doesn't exist
-  if (MKDIR_P(personal_config_dir.c_str()) == 0 || errno == EEXIST)
-    return true;
-
-  return false;
+  return CreateFolder(personal_config_dir);
 }
 
 bool Config::MkdirPersonalDataDir()
 {
-  // Create the directory if it doesn't exist
-  if ( MKDIR_P(personal_data_dir.c_str()) == 0 || errno == EEXIST)
-      return true;
-
-  return false;
+  return CreateFolder(personal_data_dir);
 }
 
 void Config::SetLanguage(const std::string language)
