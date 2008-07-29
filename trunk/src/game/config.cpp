@@ -204,7 +204,7 @@ Config::Config():
   personal_config_dir += "/wormux/";
 
   if (c_data_dir == NULL) {
-    personal_data_dir = GetHome() + "/.local";
+    personal_data_dir = GetHome() + "/.local/share";
   }
   else
     personal_data_dir = c_data_dir;
