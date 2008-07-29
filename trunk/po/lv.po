@@ -17,12 +17,12 @@ msgstr ""
 "2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:320
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nav atrasta :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -30,7 +30,7 @@ msgstr[0] "%i spēlētājs pieslēdzies"
 msgstr[1] "%i spēlētāji pieslēgušies"
 msgstr[2] "%i spēlētāju pieslēgušies"
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -38,12 +38,12 @@ msgstr[0] "%i spēlētājs gatavs"
 msgstr[1] "%i spēlētāji gatavi"
 msgstr[2] "%i spēlētāju gatavi"
 
-#: src/map/maps_list.cpp:111
+#: src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s no %s"
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> no %s"
@@ -511,8 +511,8 @@ msgstr "Lēkājosā bumba"
 msgid "Bye bye tux..."
 msgstr "Attā attā tux..."
 
-#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
-#: src/team/teams_list.cpp:544
+#: src/menu/network_teams_selection_box.cpp:240 src/team/teams_list.cpp:475
+#: src/team/teams_list.cpp:497 src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nevar atrast komandu %s!"
@@ -531,7 +531,7 @@ msgstr "Nevar atvēŗt komandas mapi (%s)!"
 msgid "Check updates online?"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:234
+#: src/menu/map_selection_box.cpp:235
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -637,7 +637,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Kļūda ielādējot komandu :"
 
-#: src/game/config.cpp:491
+#: src/game/config.cpp:492
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -653,12 +653,12 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:365
+#: src/menu/network_connection_menu.cpp:368
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Kļūda: Nevar pieslēgties %s:%s"
 
-#: src/menu/network_connection_menu.cpp:326
+#: src/menu/network_connection_menu.cpp:329
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Kļūda: Nevar sazināties ar indeksa serveri, lai izvietotu spēli"
@@ -670,11 +670,11 @@ msgid ""
 msgstr ""
 "Kļūda: Nevar sazināties ar indeksa serveri, lai meklētu interneta spēles"
 
-#: src/menu/network_connection_menu.cpp:345
+#: src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to start server"
 msgstr "Kļūda: Nevar sākt serveri"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:342
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
@@ -739,7 +739,7 @@ msgstr "Laukuma veidošana..."
 msgid "Gun"
 msgstr "Pistole"
 
-#: src/tool/file_tools.cpp:125
+#: src/tool/file_tools.cpp:163
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "MĀJAS mape (vides mainīgias $HOME) nav atrasts!"
 
@@ -870,7 +870,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:222
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Ielādē kartes:"
 
@@ -974,7 +974,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "<%s> elementi nav atrasti xml konfigurācijas failā!"
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:443
 msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
@@ -1056,17 +1056,17 @@ msgstr "Iziet no Wormux"
 msgid "Quit battle"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:233
+#: src/menu/map_selection_box.cpp:234
 #, fuzzy
 msgid "Random map"
 msgstr "Ielādē kartes:"
 
-#: src/game/config.cpp:353
+#: src/game/config.cpp:330
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
-#: src/game/config.cpp:400
+#: src/game/config.cpp:379
 msgid "Reading personal config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
@@ -1133,7 +1133,7 @@ msgstr "Snaiperšautene"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:293
+#: src/menu/network_connection_menu.cpp:278
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
@@ -1241,7 +1241,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granāta nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/menu/network_menu.cpp:298
+#: src/menu/network_menu.cpp:302
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Citi gaida uz tevi! Dari kaut ko :-)"
 
@@ -1304,12 +1304,12 @@ msgstr "Rīki"
 msgid "Unable to contact host."
 msgstr "Nevar pieslēgties."
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nevar atvērt karšu mapi (%s)!"
 
-#: src/map/maps_list.cpp:244
+#: src/map/maps_list.cpp:250
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nevar atvērt karšu mapi (%s)!"
@@ -1343,7 +1343,7 @@ msgstr[0] "Pagaidi! %i spēlētājs vēl nav gatavs!"
 msgstr[1] "Pagaidi! %i spēlētāji vēl nav gatavs!"
 msgstr[2] "Pagaidi! %i spēlētāju vēl nav gatavs!"
 
-#: src/menu/network_menu.cpp:365
+#: src/menu/network_menu.cpp:369
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Gaida uz serveri, jūs varat atcelt vai tērzēt!"
 
@@ -1391,7 +1391,7 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:301
+#: src/menu/network_menu.cpp:305
 msgid "You are alone :-/"
 msgstr "Jūs esat viens pats :-/"
 
@@ -1399,7 +1399,7 @@ msgstr "Jūs esat viens pats :-/"
 msgid "You are alone..."
 msgstr "Jūs esat viens pats..."
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "Jums nepieciešama vismaz viena derīga karte !"
 
@@ -1451,16 +1451,16 @@ msgstr "no"
 msgid "no configuration file!"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o Ielādē mūsiku"
 
-#: src/sound/jukebox.cpp:342
+#: src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Ielādē skaņas profilu: %s"
 
-#: src/sound/jukebox.cpp:88
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Atver skaņu %d Hz %d bit"

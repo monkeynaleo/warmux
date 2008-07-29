@@ -15,31 +15,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:320
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! O mapa %s não encontrado :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i jogador ligado"
 msgstr[1] "%i jogadores ligados"
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "%i jogador pronto"
 msgstr[1] "%i jogadores prontos"
 
-#: src/map/maps_list.cpp:111
+#: src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> também conhecido por %s de %s"
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
@@ -494,8 +494,8 @@ msgstr "Bola Saltitona"
 msgid "Bye bye tux..."
 msgstr "Adeus adeus tux..."
 
-#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
-#: src/team/teams_list.cpp:544
+#: src/menu/network_teams_selection_box.cpp:240 src/team/teams_list.cpp:475
+#: src/team/teams_list.cpp:497 src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Incapaz de encontrar a equipa %s!"
@@ -514,7 +514,7 @@ msgstr "Incapaz de abrir o directório dA equipa (%s)!"
 msgid "Check updates online?"
 msgstr "Procurar por actualizações online?"
 
-#: src/menu/map_selection_box.cpp:234
+#: src/menu/map_selection_box.cpp:235
 msgid "Choose randomly between the different maps"
 msgstr "Escolher aleatóriamente entre os diferentes mapas"
 
@@ -619,7 +619,7 @@ msgstr "Erro ao iniciar rede: O cliente %s não concorda consigo!! - %s"
 msgid "Error loading team :"
 msgstr "Erro ao carregar a equipa :"
 
-#: src/game/config.cpp:491
+#: src/game/config.cpp:492
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -637,12 +637,12 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:365
+#: src/menu/network_connection_menu.cpp:368
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Erro: Incapaz de ligar a %s:%s"
 
-#: src/menu/network_connection_menu.cpp:326
+#: src/menu/network_connection_menu.cpp:329
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Erro: Incapaz de contactar o servidor de index para receber um jogo"
@@ -655,11 +655,11 @@ msgstr ""
 "Erro: Incapaz de contactar o servidor de index para procurar por um jogo na "
 "internet"
 
-#: src/menu/network_connection_menu.cpp:345
+#: src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to start server"
 msgstr "Erro: Incapaz de iniciar servidor"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:342
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
@@ -724,7 +724,7 @@ msgstr "Iniciando o jogo..."
 msgid "Gun"
 msgstr "Pistola"
 
-#: src/tool/file_tools.cpp:125
+#: src/tool/file_tools.cpp:163
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directório HOME (variável de ambiente $HOME) não pode ser encontrada!"
 
@@ -853,7 +853,7 @@ msgstr "Expulsa os jogadores designados por <nickname> do jogo"
 msgid "Language"
 msgstr "Linguagem"
 
-#: src/map/maps_list.cpp:222
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Carregar mapas:"
 
@@ -954,7 +954,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenhum elemento <%s> encontrado no ficheiro de configuração xml!"
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:443
 msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
@@ -1035,15 +1035,15 @@ msgstr "Sair do Wormux"
 msgid "Quit battle"
 msgstr "Sair da batalha"
 
-#: src/menu/map_selection_box.cpp:233
+#: src/menu/map_selection_box.cpp:234
 msgid "Random map"
 msgstr "Mapa aleatório"
 
-#: src/game/config.cpp:353
+#: src/game/config.cpp:330
 msgid "Reading default config file"
 msgstr "Lendo o ficheiro de configuração por defeito"
 
-#: src/game/config.cpp:400
+#: src/game/config.cpp:379
 msgid "Reading personal config file"
 msgstr "Lendo ficheiro de configuração pessoal"
 
@@ -1109,7 +1109,7 @@ msgstr "Espingarda de Precisão"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Alguém colocou uma armadilha no baú!"
 
-#: src/menu/network_connection_menu.cpp:293
+#: src/menu/network_connection_menu.cpp:278
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desculpa, de momento, nenhum jogo está à espera de jogadores"
 
@@ -1215,7 +1215,7 @@ msgstr "O jogo foi interrompido porque você foi desligado."
 msgid "The grenade left the battlefield before exploding"
 msgstr "A granada saiu do campo de batalha antes de explodir"
 
-#: src/menu/network_menu.cpp:298
+#: src/menu/network_menu.cpp:302
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Os outros estão à sua espera! Acorda :-)"
 
@@ -1277,12 +1277,12 @@ msgstr "Ferramentas"
 msgid "Unable to contact host."
 msgstr "Incapaz de contactar servidor."
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 
-#: src/map/maps_list.cpp:244
+#: src/map/maps_list.cpp:250
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Incapaz de abrir o diretório dos mapas pessoais (%s)!"
@@ -1315,7 +1315,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Espere. A equipa %i ainda não está pronta!"
 msgstr[1] "Espere. A equipa %i ainda não estão prontas."
 
-#: src/menu/network_menu.cpp:365
+#: src/menu/network_menu.cpp:369
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "À espera do servidor, tudo que pode fazer é cancelar ou conversar!"
 
@@ -1363,7 +1363,7 @@ msgstr "Nome de mapa errado!"
 msgid "Wrong team!"
 msgstr "Equipa errada!"
 
-#: src/menu/network_menu.cpp:301
+#: src/menu/network_menu.cpp:305
 msgid "You are alone :-/"
 msgstr "Você está sozinho :-/"
 
@@ -1371,7 +1371,7 @@ msgstr "Você está sozinho :-/"
 msgid "You are alone..."
 msgstr "Você está sozinho..."
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "Você precisa no mínimo de um mapa válido!"
 
@@ -1421,16 +1421,16 @@ msgstr "de"
 msgid "no configuration file!"
 msgstr "nenhum ficheiro de configuração!"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o A carregar música"
 
-#: src/sound/jukebox.cpp:342
+#: src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o carregar o perfil de som : %s"
 
-#: src/sound/jukebox.cpp:88
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio aberto a %d Hz %d bit"

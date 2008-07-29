@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:320
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebyla nalezena :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -30,7 +30,7 @@ msgstr[0] "%i hráč připojen"
 msgstr[1] "%i hráči připojeni"
 msgstr[2] "%i hráčů připojeno"
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -38,12 +38,12 @@ msgstr[0] "%i hráč připraven"
 msgstr[1] "%i hráči připraveni"
 msgstr[2] "%i hráčů připraveno"
 
-#: src/map/maps_list.cpp:111
+#: src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> jako %s z %s"
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
@@ -528,8 +528,8 @@ msgstr "Skákací kulička"
 msgid "Bye bye tux..."
 msgstr "Pá pá tuxi..."
 
-#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
-#: src/team/teams_list.cpp:544
+#: src/menu/network_teams_selection_box.cpp:240 src/team/teams_list.cpp:475
+#: src/team/teams_list.cpp:497 src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nelze najít tým %s!"
@@ -548,7 +548,7 @@ msgstr "Nepodařilo se otevřít adresář týmů (%s)!"
 msgid "Check updates online?"
 msgstr "Zjistit online aktualizace?"
 
-#: src/menu/map_selection_box.cpp:234
+#: src/menu/map_selection_box.cpp:235
 msgid "Choose randomly between the different maps"
 msgstr "Vyber náhodně mezi mapami"
 
@@ -653,7 +653,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Chyba při nahrávání týmu :"
 
-#: src/game/config.cpp:491
+#: src/game/config.cpp:492
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -670,12 +670,12 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:365
+#: src/menu/network_connection_menu.cpp:368
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Chyba: Nepodařilo se připojit k %s:%s"
 
-#: src/menu/network_connection_menu.cpp:326
+#: src/menu/network_connection_menu.cpp:329
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Chyba: Nepodařilo se kontaktovat index server k hostování hry"
@@ -687,11 +687,11 @@ msgid ""
 msgstr ""
 "Chyba: Nepodařilo se kontaktovat index server pro vyhledání internetové hry"
 
-#: src/menu/network_connection_menu.cpp:345
+#: src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to start server"
 msgstr "Chyba: Nepodařilo se spustit herní server"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:342
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
@@ -757,7 +757,7 @@ msgstr "Inicializace teréhu..."
 msgid "Gun"
 msgstr "Pistole"
 
-#: src/tool/file_tools.cpp:125
+#: src/tool/file_tools.cpp:163
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nemůžu nalézt domovský adresář (proměnná prostředí $HOME)!"
 
@@ -884,7 +884,7 @@ msgstr ""
 msgid "Language"
 msgstr "Jazyk"
 
-#: src/map/maps_list.cpp:222
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Nahrát mapy:"
 
@@ -985,7 +985,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "V konfiguračním xml souboru nebyl nalezen žádný element <%s>!"
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:443
 msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
@@ -1066,15 +1066,15 @@ msgstr "Ukončit Wormux"
 msgid "Quit battle"
 msgstr "Ukončit hru"
 
-#: src/menu/map_selection_box.cpp:233
+#: src/menu/map_selection_box.cpp:234
 msgid "Random map"
 msgstr "Náhodná mapa"
 
-#: src/game/config.cpp:353
+#: src/game/config.cpp:330
 msgid "Reading default config file"
 msgstr "Čtu výchozí konfigurační soubor"
 
-#: src/game/config.cpp:400
+#: src/game/config.cpp:379
 msgid "Reading personal config file"
 msgstr "Čtu osobní konfigurační soubor"
 
@@ -1140,7 +1140,7 @@ msgstr "Ostřelovací puška"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Někdo dal dítě do bedny!"
 
-#: src/menu/network_connection_menu.cpp:293
+#: src/menu/network_connection_menu.cpp:278
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
@@ -1244,7 +1244,7 @@ msgstr "Hra byla ukončena, protože jste byl odpojen."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granát opustil bitevní pole předtím, než explodoval"
 
-#: src/menu/network_menu.cpp:298
+#: src/menu/network_menu.cpp:302
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostatní na vás čekají! Vstávat :-)"
 
@@ -1306,12 +1306,12 @@ msgstr "Nástroje"
 msgid "Unable to contact host."
 msgstr "Nepodařilo kontaktovat hostitele."
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nepodařilo se otevřít adresář s mapami (%s)!"
 
-#: src/map/maps_list.cpp:244
+#: src/map/maps_list.cpp:250
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář s mapami (%s)!"
@@ -1345,7 +1345,7 @@ msgstr[0] "Počkejte! %i hráč ještě není připraven!"
 msgstr[1] "Počkejte! %i hráči ještě nejsou připraveni!"
 msgstr[2] "Počkejte! %i hráčů ještě není připraveno!"
 
-#: src/menu/network_menu.cpp:365
+#: src/menu/network_menu.cpp:369
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čeká se na server, jediné co můžete je zrušit to, nebo chatovat!"
 
@@ -1393,7 +1393,7 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:301
+#: src/menu/network_menu.cpp:305
 msgid "You are alone :-/"
 msgstr "Jste sám :-/"
 
@@ -1401,7 +1401,7 @@ msgstr "Jste sám :-/"
 msgid "You are alone..."
 msgstr "Jste sám..."
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "Potřebujete nejméně jednu použitelnou mapu!"
 
@@ -1451,16 +1451,16 @@ msgstr "z"
 msgid "no configuration file!"
 msgstr "žádný konfigurační soubor!"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o Nahrávám hudbu"
 
-#: src/sound/jukebox.cpp:342
+#: src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Načítám hudební profil: %s"
 
-#: src/sound/jukebox.cpp:88
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otevřena hudba o %d Hz %d bitech"

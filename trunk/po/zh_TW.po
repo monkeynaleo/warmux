@@ -16,31 +16,31 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/map/maps_list.cpp:320
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! 地圖 %s未找到 :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i 玩家已連線"
 msgstr[1] "%i 玩家均已連線"
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "%i 玩家准備好了"
 msgstr[1] "%i 玩家都准備好了"
 
-#: src/map/maps_list.cpp:111
+#: src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s 從 %s"
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 從 %s"
@@ -475,8 +475,8 @@ msgstr "彈力球"
 msgid "Bye bye tux..."
 msgstr "Bye bye 企鵝..."
 
-#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
-#: src/team/teams_list.cpp:544
+#: src/menu/network_teams_selection_box.cpp:240 src/team/teams_list.cpp:475
+#: src/team/teams_list.cpp:497 src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "沒找到隊伍 %s!"
@@ -495,7 +495,7 @@ msgstr "打不開團隊目錄 (%s)!"
 msgid "Check updates online?"
 msgstr "網上檢查升級？"
 
-#: src/menu/map_selection_box.cpp:234
+#: src/menu/map_selection_box.cpp:235
 msgid "Choose randomly between the different maps"
 msgstr "在地圖中隨機選取"
 
@@ -600,7 +600,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "讀取隊伍出錯 :"
 
-#: src/game/config.cpp:491
+#: src/game/config.cpp:492
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -616,12 +616,12 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:365
+#: src/menu/network_connection_menu.cpp:368
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "錯誤: 連不到%s:%s"
 
-#: src/menu/network_connection_menu.cpp:326
+#: src/menu/network_connection_menu.cpp:329
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "錯誤: 無法聯繫索引伺服器建立游戲"
@@ -632,11 +632,11 @@ msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "錯誤: 無法聯繫索引伺服器搜尋游戲"
 
-#: src/menu/network_connection_menu.cpp:345
+#: src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to start server"
 msgstr "錯誤: 無法開始伺服器"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:342
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
@@ -700,7 +700,7 @@ msgstr "地面搆建中..."
 msgid "Gun"
 msgstr "槍"
 
-#: src/tool/file_tools.cpp:125
+#: src/tool/file_tools.cpp:163
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr " 找不到家目錄 (environment variable $HOME) !"
 
@@ -827,7 +827,7 @@ msgstr ""
 msgid "Language"
 msgstr "語言"
 
-#: src/map/maps_list.cpp:222
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "讀取地圖:"
 
@@ -930,7 +930,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "沒找到 <%s>重點 xml配置檔案 !"
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:443
 msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
@@ -1012,15 +1012,15 @@ msgstr "結束"
 msgid "Quit battle"
 msgstr "推出戰斗"
 
-#: src/menu/map_selection_box.cpp:233
+#: src/menu/map_selection_box.cpp:234
 msgid "Random map"
 msgstr "隨機讀取地圖"
 
-#: src/game/config.cpp:353
+#: src/game/config.cpp:330
 msgid "Reading default config file"
 msgstr "正讀取預設設定檔案"
 
-#: src/game/config.cpp:400
+#: src/game/config.cpp:379
 msgid "Reading personal config file"
 msgstr "正讀取個人設定檔案"
 
@@ -1087,7 +1087,7 @@ msgstr "狙擊步槍"
 msgid "Someone put a booby trap into the crate!"
 msgstr "有人在箱子裡布置了炸彈作禮物!"
 
-#: src/menu/network_connection_menu.cpp:293
+#: src/menu/network_connection_menu.cpp:278
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 沒人等你."
 
@@ -1194,7 +1194,7 @@ msgstr "您斷線了."
 msgid "The grenade left the battlefield before exploding"
 msgstr "手榴彈離開戰場前發生爆炸"
 
-#: src/menu/network_menu.cpp:298
+#: src/menu/network_menu.cpp:302
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "別人在等你! 快醒吧:-)"
 
@@ -1255,12 +1255,12 @@ msgstr "工具"
 msgid "Unable to contact host."
 msgstr "連不上主機"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "打不開地圖目錄(%s)!"
 
-#: src/map/maps_list.cpp:244
+#: src/map/maps_list.cpp:250
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "無法開啟個人地圖目錄 (%s)!"
@@ -1293,7 +1293,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "請等待! %i沒准備好!"
 msgstr[1] "請等待! %i沒准備好!"
 
-#: src/menu/network_menu.cpp:365
+#: src/menu/network_menu.cpp:369
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "等着接受服務吧, 現在先聊天 !"
 
@@ -1342,7 +1342,7 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:301
+#: src/menu/network_menu.cpp:305
 msgid "You are alone :-/"
 msgstr "你是孤單的 :-/"
 
@@ -1350,7 +1350,7 @@ msgstr "你是孤單的 :-/"
 msgid "You are alone..."
 msgstr "你是孤單的..."
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "你需要可用的地圖!"
 
@@ -1402,16 +1402,16 @@ msgstr "從"
 msgid "no configuration file!"
 msgstr "沒有配置檔案！"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o 讀取音樂"
 
-#: src/sound/jukebox.cpp:342
+#: src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o讀取音樂檔案 : %s"
 
-#: src/sound/jukebox.cpp:88
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"

@@ -19,29 +19,29 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:320
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:283
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 
-#: src/map/maps_list.cpp:111
+#: src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s'den %s <%s> aka %s"
 
-#: src/map/maps_list.cpp:118
+#: src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
@@ -437,8 +437,8 @@ msgstr "Zıplayan Top"
 msgid "Bye bye tux..."
 msgstr "Bay bay tux..."
 
-#: src/team/teams_list.cpp:475 src/team/teams_list.cpp:497
-#: src/team/teams_list.cpp:544
+#: src/menu/network_teams_selection_box.cpp:240 src/team/teams_list.cpp:475
+#: src/team/teams_list.cpp:497 src/team/teams_list.cpp:544
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
@@ -457,7 +457,7 @@ msgstr "Takım dizini açılamadı (%s)!"
 msgid "Check updates online?"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:234
+#: src/menu/map_selection_box.cpp:235
 msgid "Choose randomly between the different maps"
 msgstr ""
 
@@ -564,7 +564,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "%s takımı yüklenirken hata:"
 
-#: src/game/config.cpp:491
+#: src/game/config.cpp:492
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -580,12 +580,12 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:365
+#: src/menu/network_connection_menu.cpp:368
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:326
+#: src/menu/network_connection_menu.cpp:329
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "(%s) harita dizini açılamadı!"
@@ -596,12 +596,12 @@ msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:345
+#: src/menu/network_connection_menu.cpp:348
 #, fuzzy
 msgid "Error: Unable to start server"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:342
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
@@ -665,7 +665,7 @@ msgstr "Alan oluşturuluyor..."
 msgid "Gun"
 msgstr "Tabanca"
 
-#: src/tool/file_tools.cpp:125
+#: src/tool/file_tools.cpp:163
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 
@@ -780,7 +780,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/map/maps_list.cpp:222
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Haritaları yükle:"
 
@@ -886,7 +886,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:443
 msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
@@ -969,17 +969,17 @@ msgstr "Wormux'dan çıkılıyor"
 msgid "Quit battle"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:233
+#: src/menu/map_selection_box.cpp:234
 #, fuzzy
 msgid "Random map"
 msgstr "Haritaları yükle:"
 
-#: src/game/config.cpp:353
+#: src/game/config.cpp:330
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
-#: src/game/config.cpp:400
+#: src/game/config.cpp:379
 msgid "Reading personal config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
@@ -1046,7 +1046,7 @@ msgstr "Suikast Tüfeği"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:293
+#: src/menu/network_connection_menu.cpp:278
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
@@ -1154,7 +1154,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "El bombası, patlamadan savaş alanını terketti"
 
-#: src/menu/network_menu.cpp:298
+#: src/menu/network_menu.cpp:302
 msgid "The others are waiting for you! Wake up :-)"
 msgstr ""
 
@@ -1207,12 +1207,12 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/map/maps_list.cpp:244
+#: src/map/maps_list.cpp:250
 #, fuzzy, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
@@ -1244,7 +1244,7 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 
-#: src/menu/network_menu.cpp:365
+#: src/menu/network_menu.cpp:369
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
@@ -1293,7 +1293,7 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:301
+#: src/menu/network_menu.cpp:305
 msgid "You are alone :-/"
 msgstr ""
 
@@ -1301,7 +1301,7 @@ msgstr ""
 msgid "You are alone..."
 msgstr ""
 
-#: src/map/maps_list.cpp:253
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
@@ -1351,16 +1351,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/sound/jukebox.cpp:166
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:342
+#: src/sound/jukebox.cpp:343
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/sound/jukebox.cpp:88
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
