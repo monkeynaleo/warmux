@@ -153,6 +153,7 @@ void Game::Start()
 void Game::UnloadDatas() const
 {
   world.FreeMem();
+  ActiveMap()->FreeData();
   lst_objects.FreeMem();
   ParticleEngine::Stop();
   GetTeamsList().UnloadGamingData();
