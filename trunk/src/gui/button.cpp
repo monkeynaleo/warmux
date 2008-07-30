@@ -40,11 +40,11 @@ Button::~Button()
   delete image;
 }
 
-void Button::Draw(const Point2i &/*mousePosition*/) const
+void Button::Draw(const Point2i &mousePosition) const
 {
   Surface& surf = AppWormux::GetInstance()->video->window;
 
-  uint frame = (IsHighlighted());
+  uint frame = (IsHighlighted() || Contains(mousePosition));
 
   // Check that there are enough frames in the image...
   if (image->GetFrameCount() <= frame) {
