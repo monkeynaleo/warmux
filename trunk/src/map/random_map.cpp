@@ -24,21 +24,18 @@
 #include "graphic/polygon_generator.h"
 #include "graphic/sprite.h"
 #include "map/maps_list.h"
+#include "network/randomsync.h"
 #include "tool/affine_transform.h"
-#include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
 #include "tool/xml_document.h"
 #include <sstream>
-#ifdef _WIN32
-#  include <time.h>
-#endif
 
 Surface * RandomElementList::GetRandomElement()
 {
   if(size() == 0)
     return NULL;
-  return (*this)[Random::GetInt(0, size() - 1)];
+  return (*this)[randomSync.GetInt(0, size() - 1)];
 }
 
 RandomElementList::~RandomElementList()
@@ -126,20 +123,20 @@ void RandomMap::GeneratePlatforms()
 
   XmlReader::ReadUint(profile->doc->GetRoot(), "platform_element_chance", elemchance);
 
-  uint nplats = Random::GetInt(minplats, maxplats);
+  uint nplats = randomSync.GetInt(minplats, maxplats);
 
   result.Fill(0);
 
   for (uint i = 0; i < nplats; i++) {
-    double wid = Random::GetDouble(minwidth, maxwidth);
-    double hei = Random::GetDouble(minhei, maxhei);
-    if (Random::GetInt(0,99) < (int) vertchance) {
+    double wid = randomSync.GetDouble(minwidth, maxwidth);
+    double hei = randomSync.GetDouble(minhei, maxhei);
+    if (randomSync.GetInt(0,99) < (int) vertchance) {
       double tmp = wid;
       wid = hei;
       hei = tmp;
     }
-    double x = Random::GetDouble(0, (width - wid));
-    double y = Random::GetDouble(0, (height - hei));
+    double x = randomSync.GetDouble(0, (width - wid));
+    double y = randomSync.GetDouble(0, (height - hei));
 
     Polygon *tmp = new Polygon();
 
@@ -148,9 +145,9 @@ void RandomMap::GeneratePlatforms()
     tmp->AddPoint(Point2d(x+wid, y+hei));
     tmp->AddPoint(Point2d(x, y+hei));
 
-    if (Random::GetInt(0,99) < (int)elemchance) {
+    if (randomSync.GetInt(0,99) < (int)elemchance) {
       Surface * random_element = random_element_list.GetRandomElement();
-      int dx = Random::GetInt((int)(x+10), (int)(x+wid-10));
+      int dx = randomSync.GetInt((int)(x+10), (int)(x+wid-10));
       int dy = (int) (y+(minhei / 2));
       if (random_element != NULL) {
         Surface * tmp_surf = new Surface(random_element->GetSurface());
@@ -158,7 +155,7 @@ void RandomMap::GeneratePlatforms()
       }
     }
 
-    bezier_shape = tmp->GetBezierInterpolation(1.0, 30, Random::GetDouble(0.0, 0.5));
+    bezier_shape = tmp->GetBezierInterpolation(1.0, 30, randomSync.GetDouble(0.0, 0.5));
 
     // Expand
     expanded_bezier_shape = new Polygon(*bezier_shape);
@@ -185,11 +182,11 @@ void RandomMap::GeneratePlatforms()
 
 void RandomMap::GenerateIsland()
 {
-  double minhei = height / Random::GetDouble(7, 5);
-  double maxhei = height / Random::GetDouble(1.5, 4);
+  double minhei = height / randomSync.GetDouble(7, 5);
+  double maxhei = height / randomSync.GetDouble(1.5, 4);
 
-  double current_y_pos = height - Random::GetDouble(minhei, maxhei);
-  int num_of_points = Random::GetInt(5, 20);
+  double current_y_pos = height - randomSync.GetDouble(minhei, maxhei);
+  int num_of_points = randomSync.GetInt(5, 20);
 
   result.Fill(0);
 
@@ -199,10 +196,10 @@ void RandomMap::GenerateIsland()
   tmp->AddPoint(Point2d(-100, height + 100));
 
   for (int i = 1; i < num_of_points - 1; i++) {
-    current_y_pos = height - Random::GetDouble(minhei, maxhei);
+    current_y_pos = height - randomSync.GetDouble(minhei, maxhei);
     double current_x_pos = (((double)i / (double) num_of_points) * (double)width);
     tmp->AddPoint(Point2d(current_x_pos, current_y_pos));
-    if (Random::GetInt(0, 5) < 1) {
+    if (randomSync.GetInt(0, 5) < 1) {
       Surface * random_element = random_element_list.GetRandomElement();
       if(random_element != NULL) {
         Point2i position((int)current_x_pos, (int)(current_y_pos + 20.0));
@@ -217,7 +214,9 @@ void RandomMap::GenerateIsland()
   tmp->AddPoint(Point2d(width / 2, height + 100));
 
   // Get bezier interpolation
-  bezier_shape = tmp->GetBezierInterpolation(1.0, 30, Random::GetDouble(0.0, 0.5));
+  double nb = randomSync.GetDouble(0.0, 0.5);
+  MSG_DEBUG("ground_generator.island", "bezier interpolation: 1.0, 30, %f", nb);
+  bezier_shape = tmp->GetBezierInterpolation(1.0, 30, nb);
   delete tmp;
 
   // Expand
@@ -268,11 +267,11 @@ void RandomMap::GenerateGridElements()
 
     for (dx = grid_wid; dx < (uint)width; dx += grid_wid)
 	for (dy = grid_hei; dy < (uint)height; dy += grid_hei)
-	    if (Random::GetInt(0,99) < (int)elemchance) {
+	    if (randomSync.GetInt(0,99) < (int)elemchance) {
 		Surface * random_element = random_element_list.GetRandomElement();
 		if (random_element != NULL) {
-		    uint ex = dx + Random::GetInt(elem_adj_x_min, elem_adj_x_max);
-		    uint ey = dy + Random::GetInt(elem_adj_y_min, elem_adj_y_max);
+		    uint ex = dx + randomSync.GetInt(elem_adj_x_min, elem_adj_x_max);
+		    uint ey = dy + randomSync.GetInt(elem_adj_y_min, elem_adj_y_max);
 		    Surface * tmp_surf = new Surface(random_element->GetSurface());
 		    AddElement(tmp_surf, Point2i(ex, ey));
 		}
@@ -283,9 +282,10 @@ void RandomMap::GenerateGridElements()
 
 void RandomMap::Generate(InfoMap::Island_type generator)
 {
-  srand(time(NULL));
+  MSG_DEBUG("map.generation", "> Begin creation of random generated map");
+
   if(generator == InfoMap::RANDOM_GENERATED) {
-    generator = (InfoMap::Island_type) Random::GetInt(InfoMap::SINGLE_ISLAND, InfoMap::DEFAULT);
+    generator = (InfoMap::Island_type) randomSync.GetInt(InfoMap::SINGLE_ISLAND, InfoMap::DEFAULT);
     generator = InfoMap::PLATEFORMS;
   }
   switch (generator) {
@@ -294,6 +294,8 @@ void RandomMap::Generate(InfoMap::Island_type generator)
     case InfoMap::GRID_ELEMENTS: GenerateGridElements(); break;
     default: GenerateIsland(); break;
   }
+
+  MSG_DEBUG("map.generation", "< End creation of random generated map");
 }
 
 void RandomMap::SaveMap()
