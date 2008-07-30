@@ -11,10 +11,7 @@
 #include "game/config.h"
 #include <time.h>
 
-// the year that time has as base; although time(2)
-// says the reference is 1970, tests show is 1900. WHY?
-#define TIME_BASE_YEAR 1900 //FIXME: find out why this is not 1970
-
+#define TIME_BASE_YEAR 1900
 
 ChatLogger::ChatLogger() :
         logdir(Config::GetInstance()->GetChatLogDir()),
