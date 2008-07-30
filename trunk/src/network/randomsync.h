@@ -21,33 +21,22 @@
 
 #ifndef RANDOMSYNC_H
 #define RANDOMSYNC_H
-#include <list>
-#include "tool/rectangle.h"
-#include "tool/point.h"
 
-class RandomSync{
+#include "include/singleton.h"
+#include "tool/random.h"
+
+class RandomSyncGen : public RandomGenerator, public Singleton<RandomSyncGen>
+{
 #ifdef DEBUG
   uint nb_get;
 #endif
 
 public:
-  RandomSync();
-  void Init();
-
-  uint GetRand(); // public only to check synchronization
-
-  bool GetBool();
-  double GetDouble();
-  double GetDouble(double max);
-  double GetDouble(double min, double max);
-  long GetLong(long min, long max);
-  Point2i GetPoint(const Rectanglei &rect);
-  Point2i GetPoint(const Point2i &pt);
-
-  //to fill the pregenerated tables
+  void InitRandom();
+  uint GetRand();
   void SetRand(uint seed);
 };
 
-extern RandomSync randomSync;
+RandomSyncGen& RandomSync();
 
 #endif

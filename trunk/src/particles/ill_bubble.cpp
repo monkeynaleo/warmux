@@ -35,7 +35,7 @@ IllBubble::IllBubble() : ExplosionSmoke(20)
   delete image;
   image = ParticleEngine::GetSprite(ILL_BUBBLE_spr);
   SetAirResistFactor( GetAirResistFactor() * 3.0 );
-  vib_phi = Random::GetLong(0, vib_period);
+  vib_phi = RandomLocal().GetLong(0, vib_period);
 }
 
 void IllBubble::Draw()

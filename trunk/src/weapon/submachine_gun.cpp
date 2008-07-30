@@ -65,7 +65,7 @@ SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
 
 void SubMachineGunBullet::RandomizeShoot(double &angle,double &/*strength*/)
 {
-  angle += M_PI * randomSync.GetDouble(-SUBMACHINE_RANDOM_ANGLE,SUBMACHINE_RANDOM_ANGLE);
+  angle += M_PI * RandomSync().GetDouble(-SUBMACHINE_RANDOM_ANGLE,SUBMACHINE_RANDOM_ANGLE);
 }
 
 void SubMachineGunBullet::ShootSound()

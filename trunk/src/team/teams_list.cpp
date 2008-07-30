@@ -193,7 +193,7 @@ void TeamsList::LoadGamingData()
 void TeamsList::RandomizeFirstPlayer()
 {
   active_team = playing_list.begin();
-  int skip = randomSync.GetLong(0, playing_list.size() - 1);
+  int skip = RandomSync().GetLong(0, playing_list.size() - 1);
   for(int i = 0; i < skip; i++)
     active_team++;
 }

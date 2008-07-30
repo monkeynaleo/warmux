@@ -127,8 +127,8 @@ void FootBomb::DoExplosion()
   for (uint i = 0; i < fragments; ++i )
   {
     double angle = -M_PI / 2; // this angle is "upwards" here
-    double cluster_deviation = randomSync.GetDouble( -half_angle_range, half_angle_range );
-    double speed = randomSync.GetDouble( static_cast<FootBombConfig &>(cfg).nb_min_speed,
+    double cluster_deviation = RandomSync().GetDouble( -half_angle_range, half_angle_range );
+    double speed = RandomSync().GetDouble( static_cast<FootBombConfig &>(cfg).nb_min_speed,
         static_cast<FootBombConfig &>(cfg).nb_max_speed );
 
     cluster = new FootBomb(static_cast<FootBombConfig &>(cfg), launcher);

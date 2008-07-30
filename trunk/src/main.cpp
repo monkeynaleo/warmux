@@ -79,7 +79,7 @@ AppWormux::AppWormux():
   menu(NULL)
 {
   JukeBox::GetInstance()->Init();
-  Random::InitLocalRandom();
+  RandomLocal().InitRandom();
   cout << "[ " << _("Run game") << " ]" << endl;
 }
 

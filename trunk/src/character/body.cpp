@@ -572,7 +572,7 @@ void Body::SetMovement(const std::string& name)
 void Body::PlayAnimation()
 {
   std::ostringstream name;
-  name << "animation" << Random::GetLong(0, animation_number - 1);
+  name << "animation" << RandomLocal().GetLong(0, animation_number - 1);
   SetClotheOnce(name.str());
   SetMovementOnce(name.str());
 }

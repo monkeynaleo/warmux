@@ -43,7 +43,7 @@ ChatLogger::ChatLogger() :
 #ifndef DEBUG
     logfile = Format ( "%s.log" , timestamp.c_str() );
 #else // DEBUG
-    logfile = Format ( "%s-%c.log" , timestamp.c_str(), (char)(Random::GetInt(0,10)+'a') );
+    logfile = Format ( "%s-%c.log" , timestamp.c_str(), (char)(RandomLocal().GetInt(0,10)+'a') );
 #endif // DEBUG
   }
 

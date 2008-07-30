@@ -80,7 +80,7 @@ bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
 {
-  angle += M_PI * randomSync.GetDouble(-FLAMETHROWER_RANDOM_ANGLE, FLAMETHROWER_RANDOM_ANGLE);
+  angle += M_PI * RandomSync().GetDouble(-FLAMETHROWER_RANDOM_ANGLE, FLAMETHROWER_RANDOM_ANGLE);
 }
 
 void FlameThrowerBullet::ShootSound()

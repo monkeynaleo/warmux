@@ -839,15 +839,15 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     if (on_top_of_world) {
       // Give a random position for x
       if(net_sync)
-        position.x = randomSync.GetLong(0, world.GetWidth() - GetWidth());
+        position.x = RandomSync().GetLong(0, world.GetWidth() - GetWidth());
       else
-        position.x = Random::GetLong(0, world.GetWidth() - GetWidth());
+        position.x = RandomLocal().GetLong(0, world.GetWidth() - GetWidth());
       position.y = -GetHeight()+1;
     } else {
       if(net_sync)
-        position = randomSync.GetPoint(world.GetSize() - GetSize() + 1);
+        position = RandomSync().GetPoint(world.GetSize() - GetSize() + 1);
       else
-        position = Random::GetPoint(world.GetSize() - GetSize() + 1);
+        position = RandomLocal().GetPoint(world.GetSize() - GetSize() + 1);
     }
     SetXY(position);
     MSG_DEBUG("physic.position", "%s (try %u/%u) - Test in %d, %d",

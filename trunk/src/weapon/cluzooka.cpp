@@ -149,7 +149,7 @@ void CluzookaCluster::Shoot(const Point2i & start_pos, double strength, double a
   m_time_before_spawn = 750;
   // make time a bit random to unsychronize particles
 
-  m_time_before_spawn += randomSync.GetDouble( -300, 100 );
+  m_time_before_spawn += RandomSync().GetDouble( -300, 100 );
 }
 
 void CluzookaCluster::Refresh()

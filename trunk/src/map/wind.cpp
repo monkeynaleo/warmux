@@ -51,13 +51,13 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   double mass, wind_factor ;
   //Mass = mass_mean + or - 25%
   mass = GetMass();
-  mass *= (1.0 + Random::GetLong(-100, 100)/400.0);
+  mass *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
   SetMass (mass);
   SetSize( Point2i(20,20) );
   wind_factor = GetWindFactor() ;
-  wind_factor *= (1.0 + Random::GetLong(-100, 100)/400.0);
+  wind_factor *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
   SetWindFactor(wind_factor);
-  SetAirResistFactor(GetAirResistFactor() * (1.0 + Random::GetLong(-100, 100)/400.0));
+  SetAirResistFactor(GetAirResistFactor() * (1.0 + RandomLocal().GetLong(-100, 100)/400.0));
 
   MSG_DEBUG("wind", "Create wind particle: %s, %f, %f", xml_file.c_str(), mass, wind_factor);
 
@@ -75,24 +75,24 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   sprite->Scale(scale, scale);
   sprite->RefreshSurface();
   sprite->SetAlpha(scale);
-  sprite->SetCurrentFrame(Random::GetLong(0, sprite->GetFrameCount() - 1));
+  sprite->SetCurrentFrame(RandomLocal().GetLong(0, sprite->GetFrameCount() - 1));
 
   if(ActiveMap()->GetWind().need_flip) {
     flipped = new Sprite(*sprite);
     flipped->Scale(-scale, scale);
     flipped->RefreshSurface();
     flipped->SetAlpha(scale);
-    flipped->SetCurrentFrame(Random::GetLong(0, sprite->GetFrameCount()-1));
+    flipped->SetCurrentFrame(RandomLocal().GetLong(0, sprite->GetFrameCount()-1));
   } else {
     flipped = NULL;
   }
 
   if(ActiveMap()->GetWind().rotation_speed != 0.0) {
     sprite->EnableRotationCache(64);
-    sprite->SetRotation_rad(Random::GetLong(0,628)/100.0); // 0 < angle < 2PI
+    sprite->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
     if(flipped) {
       flipped->EnableRotationCache(64);
-      flipped->SetRotation_rad(Random::GetLong(0,628)/100.0); // 0 < angle < 2PI
+      flipped->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
     }
   }
 }
@@ -199,7 +199,7 @@ void Wind::Reset(){
 }
 
 void Wind::ChooseRandomVal() const{
-  int val = Random::GetLong(-100, 100);
+  int val = RandomLocal().GetLong(-100, 100);
   ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_WIND, val));
 }
 
@@ -234,8 +234,8 @@ void Wind::RandomizeParticlesPos()
 
   for (; it != end; ++it)
   {
-    (*it)->SetXY(Point2i( Random::GetLong(Camera::GetInstance()->GetPositionX(), Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX()),
-                          Random::GetLong(Camera::GetInstance()->GetPositionY(), Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY())));
+    (*it)->SetXY(Point2i( RandomLocal().GetLong(Camera::GetInstance()->GetPositionX(), Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX()),
+                          RandomLocal().GetLong(Camera::GetInstance()->GetPositionY(), Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY())));
     MSG_DEBUG("wind", "new particule position: %d, %d", (*it)->GetX(), (*it)->GetY());
   }
 }

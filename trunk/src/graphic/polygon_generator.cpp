@@ -69,7 +69,7 @@ Polygon * PolygonGenerator::GenerateDentedCircle(double diameter, int nb_point, 
   AffineTransform2D trans = AffineTransform2D();
   Point2d top;
   for(int i = 0; i < nb_point; i++) {
-    top = Point2d(0.0, (diameter + Random::GetDouble(-rand_offset, rand_offset)) / 2.0);
+    top = Point2d(0.0, (diameter + RandomLocal().GetDouble(-rand_offset, rand_offset)) / 2.0);
     trans.SetRotation((2.0 * M_PI * -i) / nb_point);
     tmp->AddPoint(trans * top);
   }
@@ -101,10 +101,10 @@ Polygon * PolygonGenerator::GenerateRoundedRectangle(double width, double height
 
 Polygon * PolygonGenerator::GenerateRandomShape()
 {
-  double height = Random::GetDouble(400.0, 600.0);
-  double width  = Random::GetDouble(400.0, 2000.0);
-  return GenerateRandomTrapeze(width, height, Random::GetDouble(10.0, 15.0), Random::GetDouble(10.0, 15.0),
-                               Random::GetSign() * Random::GetDouble(0.5, 1.0));
+  double height = RandomLocal().GetDouble(400.0, 600.0);
+  double width  = RandomLocal().GetDouble(400.0, 2000.0);
+  return GenerateRandomTrapeze(width, height, RandomLocal().GetDouble(10.0, 15.0), RandomLocal().GetDouble(10.0, 15.0),
+                               RandomLocal().GetSign() * RandomLocal().GetDouble(0.5, 1.0));
 }
 
 Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const double height,
@@ -116,23 +116,23 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const doub
   // XXX Unused !?
   // int number_of_upper_point;
   Polygon * tmp = new Polygon();
-  number_of_side_point = 1 + (int)Random::GetDouble((height * 0.25) / MIN_SPACE_BETWEEN_POINT,
+  number_of_side_point = 1 + (int)RandomLocal().GetDouble((height * 0.25) / MIN_SPACE_BETWEEN_POINT,
                                      height / MIN_SPACE_BETWEEN_POINT);
   if(coef > 0.0) {
     upper_width = width;
     lower_width = width * coef;
-    upper_offset = Random::GetDouble(0.0, width - lower_width);
+    upper_offset = RandomLocal().GetDouble(0.0, width - lower_width);
     lower_offset = 0.0;
   } else {
     upper_width = - width * coef;
     lower_width = width;
     upper_offset = 0.0;
-    lower_offset = Random::GetDouble(0.0, width - upper_width);
+    lower_offset = RandomLocal().GetDouble(0.0, width - upper_width);
   }
   // XXX Unused !?
-  //number_of_upper_point = Random::GetInt(1 + (int)((upper_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
+  //number_of_upper_point = RandomLocal().GetInt(1 + (int)((upper_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
   //                                       (int)(upper_width / MIN_SPACE_BETWEEN_POINT));
-  number_of_bottom_point = Random::GetInt(1 + (int)((lower_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
+  number_of_bottom_point = RandomLocal().GetInt(1 + (int)((lower_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
                                           (int)((coef * lower_width) / MIN_SPACE_BETWEEN_POINT));
   tmp->AddRandomCurve(Point2d(upper_offset, 0.0), Point2d(lower_offset, height),
                       x_rand_offset, y_rand_offset, number_of_side_point, false, false);

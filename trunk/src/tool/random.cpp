@@ -20,44 +20,49 @@
  *****************************************************************************/
 
 #include <time.h>
-#include <stdlib.h>
+#include "tool/debug.h"
 #include "tool/random.h"
 
-void Random::InitLocalRandom()
+RandomGenerator::RandomGenerator() :
+  next(0), initialized(false)
 {
-  srand(time(NULL));
 }
 
-int Random::GetSign()
+void RandomGenerator::InitRandom()
 {
-  if(rand() % 2) return 1;
-  else return -1;
+  SetRand(time(NULL));
 }
 
-bool Random::GetBool()
+void RandomGenerator::SetRand(uint seed)
 {
-  return rand() % 2 == 0;
+  MSG_DEBUG("random", "srand: %d", seed);
+  next = seed;
+  initialized = true;
 }
 
-// Get a random value between min and max
-long Random::GetLong(long min, long max)
+
+/******************************************************************************
+ * From "man 3 rand"
+ * POSIX.1-2001  gives the following example of an implementation of rand() and
+ * srand(), possibly useful when one needs the same sequence on two different
+ * machines.
+ ******************************************************************************/
+
+/* RAND_MAX assumed to be 32767 */
+uint RandomGenerator::GetRand()
 {
-  return min + (long)GetDouble(max - min + 1);
+  ASSERT(initialized == true);
+
+  next = next * 1103515245 + 12345;
+  return((uint)(next/65536) % 32768);
 }
 
-int Random::GetInt(int min, int max)
-{
-  return GetLong(min, max);
-}
+#define WORMUX_RAND_MAX 32767
 
-double Random::GetDouble(double min, double max)
+bool RandomGenerator::GetBool()
 {
-  return min + GetDouble(max - min);
-}
-
-double Random::GetDouble(double max)
-{
-  return max * GetDouble();
+  double middle = WORMUX_RAND_MAX/2;
+  return (GetRand() <= middle);
 }
 
 /**
@@ -65,9 +70,37 @@ double Random::GetDouble(double max)
  *
  * @return A number between 0.0 and 1.0
  */
-double Random::GetDouble()
+double RandomGenerator::GetDouble()
 {
-  return 1.0 * rand() / (RAND_MAX + 1.0);
+  return 1.0*GetRand()/(WORMUX_RAND_MAX + 1.0);
+}
+
+/**
+ *  Get a random number between min and max
+ */
+long RandomGenerator::GetLong(long min, long max)
+{
+  return min + (long)GetDouble(max - min + 1);
+}
+
+int RandomGenerator::GetInt(int min, int max)
+{
+  return GetLong(min, max);
+}
+
+uint RandomGenerator::GetUint(uint min, uint max)
+{
+  return (uint)GetLong(min, max);
+}
+
+double RandomGenerator::GetDouble(double min, double max)
+{
+  return min + GetDouble(max - min);
+}
+
+double RandomGenerator::GetDouble(double max)
+{
+  return max * GetDouble();
 }
 
 /**
@@ -76,16 +109,31 @@ double Random::GetDouble()
  * @param rect The rectangle in which the returned point will be.
  * @return a random point.
  */
-Point2i Random::GetPoint(const Rectanglei &rect)
+Point2i RandomGenerator::GetPoint(const Rectanglei &rect)
 {
   Point2i topPoint = rect.GetPosition();
   Point2i bottomPoint = rect.GetBottomRightPoint();
-
-  return Point2i( GetLong(topPoint.x, bottomPoint.x),
-      GetLong(topPoint.y, bottomPoint.y) );
+  long x = GetLong(topPoint.x, bottomPoint.x);
+  long y = GetLong(topPoint.y, bottomPoint.y);
+  return Point2i( x, y );
 }
 
-Point2i Random::GetPoint(const Point2i &pt)
+Point2i RandomGenerator::GetPoint(const Point2i &pt)
 {
-  return Point2i( GetLong(0, pt.x - 1), GetLong(0, pt.y - 1) );
+  long x = GetLong(0, pt.x - 1);
+  long y = GetLong(0, pt.y - 1);
+  return Point2i( x, y );
+}
+
+int RandomGenerator::GetSign()
+{
+  if (GetBool()) return 1;
+  else return -1;
+}
+
+// =============================================================
+
+RandomLocalGen& RandomLocal()
+{
+  return *(RandomLocalGen::GetInstance());
 }

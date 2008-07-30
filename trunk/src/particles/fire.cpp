@@ -36,7 +36,7 @@ FireParticle::FireParticle() :
   Particle("fire_particle"),
   creation_time(Time::GetInstance()->Read()),
   on_ground(false),
-  oscil_delta(Random::GetLong(0, dig_ground_time))
+  oscil_delta(RandomLocal().GetLong(0, dig_ground_time))
 {
   SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;

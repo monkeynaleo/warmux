@@ -50,7 +50,7 @@ void GameInit::InitGameData_NetServer()
 {
   Network::GetInstanceServer()->RejectIncoming();
 
-  randomSync.Init();
+  RandomSync().InitRandom();
 
   GameMode::GetInstance()->Load();
   SendGameMode();
@@ -157,7 +157,7 @@ void GameInit::InitData()
   if (Network::GetInstance()->IsServer())
     InitGameData_NetServer();
   else if (Network::GetInstance()->IsLocal())
-    randomSync.Init();
+    RandomSync().InitRandom();
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
   // done in action_handler for clients

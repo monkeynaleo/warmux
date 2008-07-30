@@ -22,22 +22,41 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#include "rectangle.h"
-#include "point.h"
+#include "include/singleton.h"
+#include "tool/point.h"
+#include "tool/rectangle.h"
 
-class Random{
- public:
-  static void InitLocalRandom();
+class RandomGenerator
+{
+private:
+  uint next;
+  bool initialized;
 
-  static bool GetBool();
-  static long GetLong(long min, long max);
-  static int GetInt(int min, int max);
-  static double GetDouble();
-  static double GetDouble(double max);
-  static double GetDouble(double min, double max);
-  static Point2i GetPoint(const Rectanglei &rect);
-  static Point2i GetPoint(const Point2i &pt);
-  static int GetSign();
+protected:
+  virtual void SetRand(uint seed);
+  virtual uint GetRand();
+
+public:
+  RandomGenerator();
+  virtual void InitRandom();
+
+  bool GetBool();
+  double GetDouble();
+  double GetDouble(double max);
+  double GetDouble(double min, double max);
+  int GetInt(int min, int max);
+  uint GetUint(uint min, uint max);
+  long GetLong(long min, long max);
+  Point2i GetPoint(const Rectanglei &rect);
+  Point2i GetPoint(const Point2i &pt);
+  int GetSign();
 };
+
+
+class RandomLocalGen : public RandomGenerator, public Singleton<RandomLocalGen>
+{
+};
+
+RandomLocalGen& RandomLocal();
 
 #endif

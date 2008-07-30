@@ -137,9 +137,9 @@ void Plane::DropBomb()
 
   Point2d speed_vector = GetSpeedXY();
 
-  int fx = randomSync.GetLong(FORCE_X_MIN, FORCE_X_MAX);
+  int fx = RandomSync().GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
-  int fy = randomSync.GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
+  int fy = RandomSync().GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
 
   speed_vector.SetValues(speed_vector.x + fx/30.0, speed_vector.y + fy/30.0);
   instance->SetSpeedXY(speed_vector);

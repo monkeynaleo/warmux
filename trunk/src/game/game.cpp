@@ -519,7 +519,7 @@ bool Game::NewBox()
   // if started with "-d box", get one box per turn
   if (!IsLOGGING("box")) {
     // .7 is a magic number to get the probability of boxes falling once every round close to .333
-    double randValue = Random::GetDouble();
+    double randValue = RandomLocal().GetDouble();
     if(randValue > (1 - pow(.5, 1.0 / nbr_teams))) {
       return false;
     }
@@ -528,7 +528,7 @@ bool Game::NewBox()
   // Type of box : 1 = MedKit, 2 = Bonus Box.
   ObjBox * box;
   int type;
-  if(Random::GetBool()) {
+  if(RandomLocal().GetBool()) {
     box = new Medkit();
     type = 1;
   } else {
@@ -612,7 +612,7 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
   MSG_DEBUG("game", "Ask for state %d", new_state);
 
   Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE);
-  int seed = randomSync.GetRand();
+  int seed = RandomSync().GetRand();
   a->Push(seed);
   a->Push(new_state);
   ActionHandler::GetInstance()->NewAction(a);

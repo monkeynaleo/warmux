@@ -61,8 +61,8 @@ ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
 
 void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
 {
-  angle += M_PI * randomSync.GetDouble(-SHOTGUN_RANDOM_ANGLE,SHOTGUN_RANDOM_ANGLE);
-  strength += randomSync.GetDouble(-SHOTGUN_RANDOM_STRENGTH,SHOTGUN_RANDOM_STRENGTH);
+  angle += M_PI * RandomSync().GetDouble(-SHOTGUN_RANDOM_ANGLE,SHOTGUN_RANDOM_ANGLE);
+  strength += RandomSync().GetDouble(-SHOTGUN_RANDOM_STRENGTH,SHOTGUN_RANDOM_STRENGTH);
 }
 
 bool ShotgunBuckshot::IsOverlapping(const PhysicalObj* obj) const

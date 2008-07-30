@@ -60,7 +60,7 @@ void BonusBox::PickRandomWeapon()
   weapon_num = 0;
   int nb_try = 0;
   do {
-    double num = Random::GetDouble(0, total_probability);
+    double num = RandomLocal().GetDouble(0, total_probability);
     double total_bf_weapon = 0, total_after_weapon = 0;
 
     for (uint i=0; i < weapon_list.size(); i++) {
@@ -114,7 +114,7 @@ bool BonusBox::ExplodesInsteadOfBonus(Character * c)
   else if ( explosion_probability > 40.0f )
     explosion_probability = 40.0f;
 
-  float randval = randomSync.GetDouble( 1, 100 );
+  float randval = RandomSync().GetDouble( 1, 100 );
   bool exploding = randval < explosion_probability;
   MSG_DEBUG("bonus","explosion chance: %.2f%%, actual value: %.2f, %s",
     explosion_probability, randval, exploding ? "exploding!" : "not exploding");

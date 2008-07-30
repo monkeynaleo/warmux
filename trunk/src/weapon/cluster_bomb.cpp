@@ -160,7 +160,7 @@ void ClusterBomb::DoExplosion()
   {
     double angle = -M_PI / 2; // this angle is "upwards" here
     double cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
-    double speed = randomSync.GetDouble(10, 25);
+    double speed = RandomSync().GetDouble(10, 25);
 
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
     cluster->Shoot( pos, speed, angle + cluster_deviation );

@@ -107,7 +107,7 @@ void Gnu::Refresh()
     save_y = y;
 
     //Do the jump
-    norm = randomSync.GetDouble(2.0, 5.0);
+    norm = RandomSync().GetDouble(2.0, 5.0);
     PutOutOfGround();
     SetSpeedXY(Point2d(m_sens * norm , - norm * 3.0));
     JukeBox::GetInstance()->Play("share", "weapon/gnu_bounce");

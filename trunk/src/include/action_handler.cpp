@@ -304,7 +304,7 @@ void Action_Game_SetState (Action *a)
 {
   // to re-synchronize random number generator
   uint seed = a->PopInt();
-  randomSync.SetRand(seed);
+  RandomSync().SetRand(seed);
 
   Game::game_loop_state_t state = Game::game_loop_state_t(a->PopInt());
   Game::GetInstance()->Really_SetState(state);
@@ -660,7 +660,7 @@ void Action_Wind (Action *a)
 void Action_Network_RandomInit (Action *a)
 {
   MSG_DEBUG("random", "Initialization from network");
-  randomSync.SetRand(a->PopInt());
+  RandomSync().SetRand(a->PopInt());
 }
 
 void Action_Network_SyncBegin (Action */*a*/)

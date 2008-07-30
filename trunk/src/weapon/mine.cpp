@@ -86,7 +86,7 @@ void ObjMine::StartTimeout()
 
     // is it a fake mine ? (here because Constructor is called before random
     // number generator is synchronized over the network)
-    fake = !(randomSync.GetLong(0, 9));
+    fake = !(RandomSync().GetLong(0, 9));
 
     Camera::GetInstance()->FollowObject(this, true);
 

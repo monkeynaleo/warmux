@@ -96,8 +96,8 @@ void Polecat::Refresh()
   double norm, angle;
   if(last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
     // particles must be exactly the same accross the network
-    double norme = double(randomSync.GetLong(0, 500))/100;
-    double angle = double(randomSync.GetLong(0, 3000))/100;
+    double norme = double(RandomSync().GetLong(0, 500))/100;
+    double angle = double(RandomSync().GetLong(0, 3000))/100;
     ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
     last_fart_time = Time::GetInstance()->Read();
   }
@@ -119,7 +119,7 @@ void Polecat::Refresh()
     save_y = y;
 
     //Do the jump
-    norm = randomSync.GetDouble(1.0, 2.0);
+    norm = RandomSync().GetDouble(1.0, 2.0);
     PutOutOfGround();
     SetSpeedXY(Point2d(m_sens * norm , -norm * 3.0));
   }

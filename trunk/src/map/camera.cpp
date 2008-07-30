@@ -362,8 +362,8 @@ Point2i Camera::ComputeShake() const
         func_val = ( 1 - t ) * sin( arg ) / arg;
     };
 
-    float x_ampl = ( float )Random::GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
-    float y_ampl = ( float )Random::GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
+    float x_ampl = ( float )RandomLocal().GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
+    float y_ampl = ( float )RandomLocal().GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
     m_shake.x = ( int )( x_ampl * func_val//( float )m_shake_amplitude.x * func_val
         + ( float )m_shake_centerpoint.x );
     m_shake.y = ( int )( y_ampl * func_val//( float )m_shake_amplitude.y * func_val

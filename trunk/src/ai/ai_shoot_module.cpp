@@ -190,7 +190,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
 {
   // we choose between gun, sniper_rifle, shotgun and submachine gun
-  uint selected = uint(randomSync.GetDouble(0.0, 3.5));
+  uint selected = uint(RandomSync().GetDouble(0.0, 3.5));
   switch (selected) {
   case 0:
     ActiveTeam().SetWeapon(Weapon::WEAPON_SHOTGUN);
@@ -479,7 +479,7 @@ void AIShootModule::BeginTurn()
   SetStrategy(NO_STRATEGY);
 
   // Choose random direction for the moment
-  ActiveCharacter().SetDirection( randomSync.GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
+  ActiveCharacter().SetDirection( RandomSync().GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
 }
 
 AIShootModule::AIShootModule(const AIMovementModule& to_remove) :
