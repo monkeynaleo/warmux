@@ -20,12 +20,13 @@ msgstr ""
 "n%100==4 ? 2 : 3);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:326
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karta %s ni bila najdena :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:122
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:287
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -34,7 +35,8 @@ msgstr[1] "povezana %i igralca"
 msgstr[2] "povezani %i igralci"
 msgstr[3] "povezanih %i igralcev"
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:126
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:295
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -43,63 +45,63 @@ msgstr[1] "%i igralca pripravljena"
 msgstr[2] "%i igralci pripravljeni"
 msgstr[3] "%i igralcev pripravljenih"
 
-#: src/map/maps_list.cpp:117
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> znan kot %s iz %s"
 
-#: src/map/maps_list.cpp:124
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz <%s>"
 
-#: src/menu/team_box.cpp:79
+#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:79
 #, c-format
 msgid "%s Team"
 msgstr "Ekipa %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:77
+#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:77
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Ekipa %s - Oddaljena"
 
-#: src/graphic/fps.cpp:102
+#: /home/yekcim/Dev/wormux/trunk/src/graphic/fps.cpp:102
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:691
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:692
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s iz ekipe %s je naredil/a samomor!"
 
-#: src/game/game.cpp:724
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:725
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s iz ekipe %s je umrl/a."
 
-#: src/game/game.cpp:682
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:683
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s iz ekipe %s je padel/a v vodo."
 
-#: src/game/game.cpp:676
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:677
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s iz ekipe %s je padel/a s karte!"
 
-#: src/game/game.cpp:697
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:698
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s iz ekipe %s je premočno zadel tla!"
 
-#: src/game/game.cpp:704
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:705
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s iz ekipe %s je mrtev, ker je bil neroden!"
 
-#: src/object/medkit.cpp:68
+#: /home/yekcim/Dev/wormux/trunk/src/object/medkit.cpp:68
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -108,28 +110,28 @@ msgstr[1] "%s je dobil %u točki energije!"
 msgstr[2] "%s je dobil %u točke energije!"
 msgstr[3] "%s je dobil %u točk energije!"
 
-#: src/game/game.cpp:716
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:717
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopat, saj je ubil člana ekipe %s!"
 
-#: src/weapon/mine.cpp:121
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s je blizu mine!"
 
-#: src/object/bonus_box.cpp:97
+#: /home/yekcim/Dev/wormux/trunk/src/object/bonus_box.cpp:97
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Ekipa %s že ima neskončno streliva za %s!"
 
 #. Show message
-#: src/weapon/skip_turn.cpp:57
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:57
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "Ekipa %s je preskočila svojo potezo."
 
-#: src/weapon/cluzooka.cpp:396
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:396
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -138,7 +140,7 @@ msgstr[1] "Ekipa %s je osvojila %u kasetni bazuki!"
 msgstr[2] "Ekipa %s je osvojila %u kasetne bazuke!"
 msgstr[3] "Ekipa %s je osvojila %u kasetnih bazuk!"
 
-#: src/weapon/gnu.cpp:175
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:175
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -147,7 +149,7 @@ msgstr[1] "Ekipa %s je osvojila %u gnuja! Razstreli jih, kavboj!"
 msgstr[2] "Ekipa %s je osvojila %u gnuje! Razstreli jih, kavboj!"
 msgstr[3] "Ekipa %s je osvojila %u gnujev! Razstreli jih, kavboj!"
 
-#: src/weapon/air_attack.cpp:260
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:260
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -156,7 +158,7 @@ msgstr[1] "Ekipa %s je osvojila %u zračna napada!"
 msgstr[2] "Ekipa %s je osvojila %u zračne napade!"
 msgstr[3] "Ekipa %s je osvojila %u zračnih napadov!"
 
-#: src/weapon/airhammer.cpp:174
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:174
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -169,7 +171,7 @@ msgstr[1] "Ekipa %s je osvojila %u pnevmatično kladivi!"
 msgstr[2] "Ekipa %s je osvojila %u pnevmatično kladiva!"
 msgstr[3] "Ekipa %s je osvojila %u pnevmatično kladiv!"
 
-#: src/weapon/anvil.cpp:188
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:188
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -178,7 +180,7 @@ msgstr[1] "Ekipa %s je osvojila %u nakovali! Speštajte jih!"
 msgstr[2] "Ekipa %s je osvojila %u nakovala! Speštajte jih!"
 msgstr[3] "Ekipa %s je osvojila %u nakoval! Speštajte jih!"
 
-#: src/weapon/auto_bazooka.cpp:329
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:329
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -187,7 +189,7 @@ msgstr[1] "Ekipa %s je osvojila %u avtomatski bazuki!"
 msgstr[2] "Ekipa %s je osvojila %u avtomatske bazuke!"
 msgstr[3] "Ekipa %s je osvojila %u avtomatskih bazuk!"
 
-#: src/weapon/baseball.cpp:116
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:116
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
@@ -196,7 +198,7 @@ msgstr[1] "Ekipa %s je osvojila %u kija!"
 msgstr[2] "Ekipa %s je osvojila %u kije!"
 msgstr[3] "Ekipa %s je osvojila %u kijev!"
 
-#: src/weapon/bazooka.cpp:130
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:130
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -205,7 +207,7 @@ msgstr[1] "Ekipa %s je osvojila %u bazuki!"
 msgstr[2] "Ekipa %s je osvojila %u bazuke!"
 msgstr[3] "Ekipa %s je osvojila %u bazuk!"
 
-#: src/weapon/blowtorch.cpp:137
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:137
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -217,7 +219,7 @@ msgstr[1] "Ekipa %s je osvojila %u varilnika!"
 msgstr[2] "Ekipa %s je osvojila %u varilnike!"
 msgstr[3] "Ekipa %s je osvojila %u varilnikov!"
 
-#: src/weapon/bounce_ball.cpp:113
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -226,7 +228,7 @@ msgstr[1] "Ekipa %s je osvojila %u skokici! Boing!"
 msgstr[2] "Ekipa %s je osvojila %u skokice! Boing!"
 msgstr[3] "Ekipa %s je osvojila %u skokic! Boing!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -235,7 +237,7 @@ msgstr[1] "Ekipa %s je osvojila %u kasetni bombi!"
 msgstr[2] "Ekipa %s je osvojila %u kasetne bombe!"
 msgstr[3] "Ekipa %s je osvojila %u kasetnih bomb!"
 
-#: src/weapon/construct.cpp:81
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:81
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -244,7 +246,7 @@ msgstr[1] "Ekipa %s je osvojila %u trama! Ne pozabite na čelado!"
 msgstr[2] "Ekipa %s je osvojila %u trame! Ne pozabite na čelado!"
 msgstr[3] "Ekipa %s je osvojila %u tramov! Ne pozabite na čelado!"
 
-#: src/weapon/disco_grenade.cpp:170
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -254,7 +256,7 @@ msgstr[1] "Ekipa %s je osvojila %u Disko granati! Ples do smrti!"
 msgstr[2] "Ekipa %s je osvojila %u Disko granate! Ples do smrti!"
 msgstr[3] "Ekipa %s je osvojila %u Disko granat! Ples do smrti!"
 
-#: src/weapon/dynamite.cpp:145
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/dynamite.cpp:145
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -263,7 +265,7 @@ msgstr[1] "Ekipa %s je osvojila %u dinamita!"
 msgstr[2] "Ekipa %s je osvojila %u dinamite!"
 msgstr[3] "Ekipa %s je osvojila %u dinamitov!"
 
-#: src/weapon/flamethrower.cpp:178
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/flamethrower.cpp:178
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -272,7 +274,7 @@ msgstr[1] "Ekipa %s je osvojila %u metalca plamenov!"
 msgstr[2] "Ekipa %s je osvojila %u metalce plamenov!"
 msgstr[3] "Ekipa %s je osvojila %u metalcev plamenov!"
 
-#: src/weapon/footbomb.cpp:176
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:176
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -281,7 +283,7 @@ msgstr[1] "Ekipa %s je osvojila %u nogometni bombi!"
 msgstr[2] "Ekipa %s je osvojila %u nogometne bombe!"
 msgstr[3] "Ekipa %s je osvojila %u nogometnih bomb!"
 
-#: src/weapon/grapple.cpp:809
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/grapple.cpp:809
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -290,7 +292,7 @@ msgstr[1] "Ekipa %s je osvojila %u kavlja!"
 msgstr[2] "Ekipa %s je osvojila %u kavlje!"
 msgstr[3] "Ekipa %s je osvojila %u kavljev!"
 
-#: src/weapon/grenade.cpp:90
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:90
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -299,7 +301,7 @@ msgstr[1] "Ekipa %s je osvojila %u granati!"
 msgstr[2] "Ekipa %s je osvojila %u granate!"
 msgstr[3] "Ekipa %s je osvojila %u granat!"
 
-#: src/weapon/gun.cpp:99
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/gun.cpp:99
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
@@ -308,7 +310,7 @@ msgstr[1] "Ekipa %s je osvojila %u pištoli!"
 msgstr[2] "Ekipa %s je osvojila %u pištole!"
 msgstr[3] "Ekipa %s je osvojila %u pištol!"
 
-#: src/weapon/jetpack.cpp:247
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/jetpack.cpp:247
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -317,7 +319,7 @@ msgstr[1] "Ekipa %s je osvojila %u raketna nahrbtnika! Juuuhu!"
 msgstr[2] "Ekipa %s je osvojila %u raketne nahrbtnike! Juuuhu!"
 msgstr[3] "Ekipa %s je osvojila %u raketnih nahrbtnikov! Juuuhu!"
 
-#: src/weapon/lowgrav.cpp:78
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/lowgrav.cpp:78
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -326,7 +328,7 @@ msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije!"
 msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije!"
 msgstr[3] "Ekipa %s je osvojila %u zmanjševalnikov gravitacije!"
 
-#: src/weapon/mine.cpp:247
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:247
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -335,7 +337,7 @@ msgstr[1] "Ekipa %s je osvojila %u mini!"
 msgstr[2] "Ekipa %s je osvojila %u mine!"
 msgstr[3] "Ekipa %s je osvojila %u min!"
 
-#: src/weapon/parachute.cpp:165
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:165
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -344,7 +346,7 @@ msgstr[1] "Ekipa %s je osvojila %u padali!"
 msgstr[2] "Ekipa %s je osvojila %u padala!"
 msgstr[3] "Ekipa %s je osvojila %u padal!"
 
-#: src/weapon/polecat.cpp:181
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:181
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -357,7 +359,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u dihurjemetov! Bolje da imajo s sabo gas maske!"
 
-#: src/weapon/riot_bomb.cpp:133
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:133
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -366,7 +368,7 @@ msgstr[1] "Ekipa %s je osvojila %u kopaški granati!"
 msgstr[2] "Ekipa %s je osvojila %u kopaške granate!"
 msgstr[3] "Ekipa %s je osvojila %u kopaških granat!"
 
-#: src/weapon/shotgun.cpp:134
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/shotgun.cpp:134
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -375,7 +377,7 @@ msgstr[1] "Ekipa %s je osvojila %u šibrovki!"
 msgstr[2] "Ekipa %s je osvojila %u šibrovke!"
 msgstr[3] "Ekipa %s je osvojila %u šibrovk!"
 
-#: src/weapon/slap.cpp:85
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:85
 #, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
@@ -384,7 +386,7 @@ msgstr[1] "Ekipa %s je osvojila %u klofuto!"
 msgstr[2] "Ekipa %s je osvojila %u klofuti!"
 msgstr[3] "Ekipa %s je osvojila %u klofute!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -394,7 +396,7 @@ msgstr[1] "Ekipa %s je osvojila %u ostrostrelski puški! Merite med oči!"
 msgstr[2] "Ekipa %s je osvojila %u ostrostrelske puške! Merite med oči!"
 msgstr[3] "Ekipa %s je osvojila %u ostrostrelskih pušk! Merite med oči!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/submachine_gun.cpp:144
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -403,7 +405,7 @@ msgstr[1] "Ekipa %s je osvojila %u brzostrelki!"
 msgstr[2] "Ekipa %s je osvojila %u brzostrelke!"
 msgstr[3] "Ekipa %s je osvojila %u brzostrelk!"
 
-#: src/weapon/suicide.cpp:77
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
@@ -412,7 +414,7 @@ msgstr[1] "Ekipa %s je osvojila %u samomora!"
 msgstr[2] "Ekipa %s je osvojila %u samomore!"
 msgstr[3] "Ekipa %s je osvojila %u samomorov!"
 
-#: src/weapon/syringe.cpp:115
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/syringe.cpp:115
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
@@ -421,7 +423,7 @@ msgstr[1] "Ekipa %s je osvojila %u injekciji!"
 msgstr[2] "Ekipa %s je osvojila %u injekcije!"
 msgstr[3] "Ekipa %s je osvojila %u injekcij!"
 
-#: src/weapon/teleportation.cpp:120
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/teleportation.cpp:120
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -430,7 +432,7 @@ msgstr[1] "Ekipa %s je osvojila %u teleprenosa!"
 msgstr[2] "Ekipa %s je osvojila %u teleprenose!"
 msgstr[3] "Ekipa %s je osvojila %u teleprenosov!"
 
-#: src/weapon/skip_turn.cpp:68
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:68
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
@@ -439,7 +441,7 @@ msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 
-#: src/weapon/supertux.cpp:316
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -452,35 +454,97 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u SuperTux-ov! Še niste videli letečega pingvina?"
 
-#: src/game/game_blitz.cpp:70
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
 msgstr "Ekipa %s je bila uničena."
 
-#: src/game/game.cpp:712
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:713
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s je s sabo v grob vzel še člana skupine %s!"
 
-#: src/interface/interface.cpp:165
+#. 1003.2 specifies the format of this message.
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:794
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr ""
+
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:797
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr ""
+
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:717
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr ""
+
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:687
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr ""
+
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:735
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:908
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr ""
+
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:712
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
+
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:892
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr ""
+
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:874
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:827
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:957
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr ""
+
+#. +option or -option
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:768
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr ""
+
+#. --option
+#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:764
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr ""
+
+#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mrtev)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:201
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:201
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
-#: src/network/chatlogger.cpp:34 src/network/chatlogger.cpp:81
+#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:31
+#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:78
 msgid "(unknown time)"
 msgstr "(čas ni znan)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:196
+#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:196
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
-#: src/menu/options_menu.cpp:353
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:353
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -489,23 +553,24 @@ msgstr ""
 "Na voljo je nova različica %s, vaša je pa %s. Preverite, če je za vaš "
 "operacijski sistem že na voljo posodobitev!"
 
-#: src/weapon/air_attack.cpp:209
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:209
 msgid "Air Attack"
 msgstr "Zračni napad"
 
-#: src/weapon/airhammer.cpp:74
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:74
 msgid "Airhammer"
 msgstr "Pnevmatsko kladivo"
 
-#: src/menu/results_menu.cpp:421
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Vse ekipe"
 
-#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_classic.cpp:56
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_blitz.cpp:50
 msgid "And the winner is..."
 msgstr "In zmagali so ..."
 
-#: src/weapon/baseball.cpp:58
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
 "Fire : space key\n"
@@ -515,179 +580,185 @@ msgstr ""
 "Strel : Preslednica\n"
 "en udarec na potezo"
 
-#: src/weapon/anvil.cpp:132
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:132
 msgid "Anvil"
 msgstr "Nakovalo"
 
-#: src/main.cpp:287
+#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:287
 msgid "Authors:"
 msgstr "Avtorji:"
 
-#: src/weapon/auto_bazooka.cpp:220
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:220
 msgid "Automatic Bazooka"
 msgstr "Avtomatska Bazuka"
 
 #. #############################
 #. Automatic connection - we have nothing to display here!
-#: src/menu/network_connection_menu.cpp:98
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:98
 msgid "Automatically join a game"
 msgstr "Samodejna priključitev k igri"
 
-#: src/menu/pause_menu.cpp:51
+#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr "Nazaj v bitko"
 
-#: src/network/net_error_msg.cpp:42
+#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:42
 msgid "Bad socket ..."
 msgstr "Slab vtičnik..."
 
-#: src/weapon/baseball.cpp:57
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:57
 msgid "Baseball Bat"
 msgstr "Kij"
 
-#: src/weapon/bazooka.cpp:123
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:123
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/weapon/blowtorch.cpp:62
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Varilnik"
 
-#: src/weapon/bounce_ball.cpp:89
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:89
 msgid "Bounce Ball"
 msgstr "Skokica"
 
-#: src/weapon/supertux.cpp:177
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Adijo tux..."
 
-#: src/menu/network_teams_selection_box.cpp:240 src/team/teams_list.cpp:475
-#: src/team/teams_list.cpp:497 src/team/teams_list.cpp:544
+#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:475
+#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:497
+#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:544
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_teams_selection_box.cpp:240
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ni mogoče najti ekipe %s!"
 
-#: src/team/teams_list.cpp:160
+#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 
-#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
+#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:148
+#: /home/yekcim/Dev/wormux/trunk/src/menu/skin_menu.cpp:77
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
-#: src/menu/options_menu.cpp:132
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr "Preveri možno posodobitev?"
 
-#: src/menu/map_selection_box.cpp:235
+#: /home/yekcim/Dev/wormux/trunk/src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:104
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Odjemalski način"
 
-#: src/menu/results_menu.cpp:169 src/menu/results_menu.cpp:171
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:169
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:171
 msgid "Clumsiest"
 msgstr "Najbolj neroden"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "Kasetna granata"
 
-#: src/weapon/cluzooka.cpp:389
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:389
 msgid "Cluzooka"
 msgstr "Kasetna bazuka"
 
-#: src/weapon/suicide.cpp:42
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Samomor"
 
-#: src/menu/network_connection_menu.cpp:214
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:214
 msgid "Connect to game"
 msgstr "Povezava do igre"
 
-#: src/network/net_error_msg.cpp:33
+#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:33
 msgid "Connected !"
 msgstr "Povezan!"
 
-#: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:59
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:67
 msgid "Construct"
 msgstr "Tram"
 
-#: src/menu/results_menu.cpp:387
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:387
 msgid "Controlled by: "
 msgstr "Vodja: "
 
-#: src/network/download.cpp:81
+#: /home/yekcim/Dev/wormux/trunk/src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Ni bilo mogoče pridobiti zadnje različice iz %s"
 
-#: src/network/chatlogger.cpp:60 src/network/download.cpp:90
+#: /home/yekcim/Dev/wormux/trunk/src/network/download.cpp:90
+#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:57
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Ni bilo mogoče odpreti datoteke %s"
 
-#: src/menu/main_menu.cpp:72
+#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Zasluge"
 
-#: src/menu/game_mode_editor.cpp:69
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:69
 msgid "Damage per turn during death mode"
 msgstr "Škoda na potezo v fatalnem načinu"
 
-#: src/weapon/disco_grenade.cpp:157
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disko Granata"
 
-#: src/network/admin_commands.cpp:31
+#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:31
 msgid "Displays this message"
 msgstr "Prikaže to sporočilo"
 
-#: src/menu/game_mode_editor.cpp:63
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:63
 msgid "Duration before death mode"
 msgstr "Čas do fatalnega načina"
 
-#: src/menu/game_mode_editor.cpp:51
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:51
 msgid "Duration of a turn"
 msgstr "Trajanje poteze"
 
-#: src/weapon/dynamite.cpp:116
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/dynamite.cpp:116
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:243
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:244
 msgid "END OF GAME"
 msgstr "KONEC IGRE"
 
-#: src/menu/options_menu.cpp:156
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr "Glasnost učinkov"
 
-#: src/menu/results_menu.cpp:324
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr "Energija"
 
-#: src/tool/error.cpp:63
+#: /home/yekcim/Dev/wormux/trunk/src/tool/error.cpp:63
 #, c-format
 msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "Napaka v %s:%lu (Wormux %s) : %s"
 
-#: src/include/action_handler.cpp:195
+#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:195
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
 
-#: src/team/teams_list.cpp:124
+#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe:"
 
-#: src/game/config.cpp:492
+#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:492
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -695,7 +766,7 @@ msgstr ""
 "Napaka pri ustvarjanju imenika \"%s\": ni bilo mogoče shraniti datoteke z "
 "nastavitvami."
 
-#: src/game/game.cpp:143
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:143
 #, c-format
 msgid ""
 "Error:\n"
@@ -705,119 +776,120 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:368
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:368
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Napaka: Ni se bilo mogoče povezati na %s:%s"
 
-#: src/menu/network_connection_menu.cpp:329
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:329
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko gostili "
 "igro"
 
-#: src/menu/network_connection_menu.cpp:270
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:270
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko iskali "
 "internetne igre"
 
-#: src/menu/network_connection_menu.cpp:348
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to start server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
-#: src/menu/network_connection_menu.cpp:342
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:342
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
 msgstr ""
 "Napaka: Vaš strežnik ni dosegljiv preko Interneta. Preverite vaš požarni zid"
 
-#: src/team/team.cpp:117
+#: /home/yekcim/Dev/wormux/trunk/src/team/team.cpp:117
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
 
-#: src/weapon/flamethrower.cpp:134
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Metalec plamenov"
 
-#: src/weapon/footbomb.cpp:158
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "Nogometna bomba"
 
-#: src/menu/options_menu.cpp:91
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "Celozaslonski način?"
 
-#: src/menu/game_menu.cpp:86
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:86
 msgid "Game"
 msgstr "Igra"
 
-#: src/menu/game_mode_editor.cpp:47
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:47
 msgid "Game mode"
 msgstr "Vrsta igre"
 
-#: src/menu/network_connection_menu.cpp:121
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:121
 msgid "Game name:"
 msgstr "Ime igre:"
 
-#: src/weapon/gnu.cpp:161
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
 msgstr "Metalec gnuja"
 
-#: src/menu/options_menu.cpp:121
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr "Grafika"
 
-#: src/weapon/grapple.cpp:166
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Kavelj"
 
-#: src/menu/game_mode_editor.cpp:75
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:75
 msgid "Gravity"
 msgstr "Gravitacija"
 
-#: src/weapon/grenade.cpp:76
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:76
 msgid "Grenade"
 msgstr "Granata"
 
-#: src/map/ground.cpp:44
+#: /home/yekcim/Dev/wormux/trunk/src/map/ground.cpp:44
 msgid "Ground initialization..."
 msgstr "Inicializacija tal..."
 
-#: src/weapon/gun.cpp:74
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/gun.cpp:74
 msgid "Gun"
 msgstr "Pištola"
 
-#: src/tool/file_tools.cpp:163
+#: /home/yekcim/Dev/wormux/trunk/src/tool/file_tools.cpp:163
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Imenik HOME (okoljska spremenljivka $HOME) ni bila najden!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:239
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:239
 msgid "Have a good game!"
 msgstr "Uživajte v igri!"
 
-#: src/menu/team_box.cpp:54
+#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:54
 msgid "Head commander"
 msgstr "Poveljnik"
 
 #. Display player's name
-#: src/interface/interface.cpp:156
+#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:156
 msgid "Head commander: "
 msgstr "Poveljnik: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:59
+#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:69
 msgid "Help"
 msgstr "Pomoč"
 
-#: src/menu/network_connection_menu.cpp:145
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:145
 msgid "Host a game"
 msgstr "Gostite igro"
 
-#: src/weapon/blowtorch.cpp:63
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:63
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -827,7 +899,7 @@ msgstr ""
 "Kot: Gor/Dol\n"
 "ena uporaba na potezo"
 
-#: src/weapon/airhammer.cpp:75
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:75
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -835,7 +907,7 @@ msgstr ""
 "Uporaba: držite preslednico\n"
 "ena uporaba na potezo"
 
-#: src/weapon/auto_bazooka.cpp:221
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:221
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -847,7 +919,7 @@ msgstr ""
 "Strel: držite preslednico dokler raketa ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: src/weapon/anvil.cpp:133
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:133
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -855,11 +927,11 @@ msgstr ""
 "Uporaba: kliknite na tarčo\n"
 "ena uporaba na potezo"
 
-#: src/game/game_classic.cpp:228
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_classic.cpp:228
 msgid "Hurry up, you are too slow !!"
 msgstr "Pohitite, prepočasni ste!!"
 
-#: src/main.cpp:279
+#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:279
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -867,12 +939,13 @@ msgstr ""
 "Če ste našli hrošča ali imate željo po novi funkciji, nam pošljite\n"
 "elektronsko sporočilo (v angleščini) na:"
 
-#: src/menu/game_mode_editor.cpp:57
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:57
 msgid "Initial energy"
 msgstr "Začetna energija"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
-#: src/weapon/riot_bomb.cpp:121
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:124
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:390
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -882,146 +955,152 @@ msgstr ""
 "Strel: držite preslednico dokler raketa ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: src/game/game_init.cpp:155
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "Inicializacija"
 
-#: src/game/game_init.cpp:106
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:106
 msgid "Initialise map"
 msgstr "Inicializacija karte"
 
-#: src/game/game_init.cpp:142
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:140
 msgid "Initialise sounds"
 msgstr "Inicializacija zvokov"
 
-#: src/game/game_init.cpp:118
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:116
 msgid "Initialise teams"
 msgstr "Inicializacija ekip"
 
-#: src/game/game.cpp:560
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:561
 msgid "It's a present!"
 msgstr "To je darilo!"
 
-#: src/weapon/jetpack.cpp:60
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Raketni nahrbtnik"
 
-#: src/menu/network_connection_menu.cpp:237 src/menu/network_menu.cpp:142
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:142
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:237
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pridružite se kanalu #wormux na irc.freenode.net in si poiščite nekaj "
 "nasprotnikov."
 
-#: src/network/admin_commands.cpp:33
+#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Brcne igralca z imenom <nickname> iz igre"
 
-#: src/menu/options_menu.cpp:128
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "Jezik"
 
-#: src/map/maps_list.cpp:228
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Nalaganje kart:"
 
-#: src/team/teams_list.cpp:136
+#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Nalaganje ekip:"
 
-#: src/menu/teams_selection_box.cpp:42
+#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:42
 msgid "Local teams:"
 msgstr "Krajevne ekipe:"
 
-#: src/weapon/lowgrav.cpp:49
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
 msgstr "Zmanjševalnik gravitacije"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:179
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:179
 msgid "Manual connection"
 msgstr "Ročna povezava"
 
-#: src/menu/game_menu.cpp:78
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:78
 msgid "Map"
 msgstr "Karta"
 
-#: src/map/map.cpp:294
+#: /home/yekcim/Dev/wormux/trunk/src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Karta %s je stvaritev: "
 
-#: src/game/game_init.cpp:109
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:109
 msgid "Maps"
 msgstr "Karte"
 
-#: src/menu/network_menu.cpp:116
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Največje število igralcev:"
 
-#: src/menu/options_menu.cpp:95
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "Največji FPS"
 
-#: src/weapon/mine.cpp:213
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:213
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:136
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:136
 msgid "Misc"
 msgstr "Razno"
 
-#: src/menu/results_menu.cpp:177 src/menu/results_menu.cpp:179
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:177
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:179
 msgid "Most accurate"
 msgstr "Najbolj natančen"
 
-#: src/menu/results_menu.cpp:161 src/menu/results_menu.cpp:163
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:161
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:163
 msgid "Most sold-out"
 msgstr "Najbolj izdan"
 
-#: src/menu/results_menu.cpp:145 src/menu/results_menu.cpp:147
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:145
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:147
 msgid "Most useful"
 msgstr "Najbolj uporaben"
 
-#: src/menu/results_menu.cpp:153 src/menu/results_menu.cpp:155
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:153
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:155
 msgid "Most useless"
 msgstr "Najbolj neuporaben"
 
-#: src/menu/results_menu.cpp:137 src/menu/results_menu.cpp:139
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:137
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:139
 msgid "Most violent"
 msgstr "Najbolj nasilen"
 
-#: src/menu/options_menu.cpp:146
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr "Glasnost glasbe"
 
-#: src/menu/options_menu.cpp:142
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "Glasba?"
 
-#: src/menu/main_menu.cpp:63
+#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:63
 msgid "Network Game"
 msgstr "Omrežna igra"
 
-#: src/network/network.cpp:291
+#: /home/yekcim/Dev/wormux/trunk/src/network/network.cpp:291
 msgid "Network initialization"
 msgstr "Inicializacija omrežja"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:54
+#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:51
 msgid "New network game at "
 msgstr "Nova omrežna igra ob "
 
-#: src/menu/options_menu.cpp:181
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:181
 msgid "New player warning?"
 msgstr "Opozori na nove igralce?"
 
-#: src/weapon/weapon.cpp:658
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "V xml nastavitveni datoteki ni bil najden noben element <%s>!"
 
-#: src/menu/network_connection_menu.cpp:443
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:443
 msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
@@ -1029,237 +1108,238 @@ msgstr ""
 "Na voljo ni nobenih javnih strežnikov, ročne nastavitve pa so napačne. "
 "Poskusite se povezati ročno."
 
-#: src/menu/results_menu.cpp:74
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:74
 msgid "Nobody!"
 msgstr "Nihče!"
 
-#: src/menu/team_box.cpp:60
+#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:60
 msgid "Number of characters"
 msgstr "Število članov"
 
-#: src/menu/teams_selection_box.cpp:48
+#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:48
 msgid "Number of teams:"
 msgstr "Število ekip:"
 
-#: src/menu/main_menu.cpp:66
+#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "Nastavitve"
 
-#: src/menu/pause_menu.cpp:55
+#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:55
 msgid "Options menu"
 msgstr "Nastavitve"
 
-#: src/weapon/parachute.cpp:68
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Padalo"
 
-#: src/weapon/parachute.cpp:100
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:100
 msgid "Parachute is activated automatically."
 msgstr "Padalo se samodejno odpre."
 
-#: src/menu/network_connection_menu.cpp:133
-#: src/menu/network_connection_menu.cpp:171
-#: src/menu/network_connection_menu.cpp:209
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:133
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:171
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:209
 msgid "Password:"
 msgstr "Geslo:"
 
-#: src/menu/main_menu.cpp:60
+#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:60
 msgid "Play"
 msgstr "Igra"
 
-#: src/menu/teams_selection_box.cpp:63
+#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:63
 msgid "Player"
 msgstr "Igralec"
 
-#: src/menu/options_menu.cpp:76
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "Energija igralca?"
 
-#: src/menu/options_menu.cpp:79
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "Ime igralca?"
 
-#: src/weapon/polecat.cpp:167
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:167
 msgid "Polecat Launcher"
 msgstr "Dihurjemet"
 
-#: src/menu/network_connection_menu.cpp:110
-#: src/menu/network_connection_menu.cpp:198
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:110
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:198
 msgid "Port:"
 msgstr "Vrata:"
 
-#: src/menu/network_connection_menu.cpp:158
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:158
 msgid "Public battles"
 msgstr "Javne bitke"
 
-#: src/menu/main_menu.cpp:75
+#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/main.cpp:268
+#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:268
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
-#: src/menu/pause_menu.cpp:63
+#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr "Končaj bitko"
 
-#: src/menu/map_selection_box.cpp:234
+#: /home/yekcim/Dev/wormux/trunk/src/menu/map_selection_box.cpp:228
 msgid "Random map"
 msgstr "Naključna karta"
 
-#: src/game/config.cpp:330
+#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:330
 msgid "Reading default config file"
 msgstr "Branje privzete nastavitvene datoteke"
 
-#: src/game/config.cpp:379
+#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:379
 msgid "Reading personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
-#: src/menu/options_menu.cpp:117
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "Ločljivost"
 
-#: src/weapon/riot_bomb.cpp:120
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:120
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: src/main.cpp:83
+#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:83
 msgid "Run game"
 msgstr "Poženi igro"
 
-#: src/network/chat.cpp:80
+#: /home/yekcim/Dev/wormux/trunk/src/network/chat.cpp:80
 msgid "Say: "
 msgstr "Reci: "
 
-#: src/menu/options_menu.cpp:85
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:85
 msgid "Scroll border size"
 msgstr "Meja drsenja na robu"
 
-#: src/menu/options_menu.cpp:82
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "Drsenje na robu"
 
-#: src/menu/network_connection_menu.cpp:187
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:187
 msgid "Server address:"
 msgstr "Naslov strežnika:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:141
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:141
 msgid "Server available on Internet"
 msgstr "Strežnik naj bo viden na Internetu"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:113
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Način strežnika"
 
-#: src/weapon/shotgun.cpp:91
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/shotgun.cpp:91
 msgid "Shotgun"
 msgstr "Šibrovka"
 
-#: src/weapon/skip_turn.cpp:47
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Preskoči potezo"
 
-#: src/weapon/slap.cpp:73
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:73
 msgid "Slap"
 msgstr "Klofuta"
 
-#: src/weapon/slap.cpp:74
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Klofni sovražnika, da bo kar poskočil."
 
-#: src/weapon/snipe_rifle.cpp:93
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Ostrostrelska puška"
 
-#: src/object/bonus_box.cpp:86
+#: /home/yekcim/Dev/wormux/trunk/src/object/bonus_box.cpp:86
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nekdo je v zaboj podtaknil bombo!"
 
-#: src/menu/network_connection_menu.cpp:278
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:278
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
-#: src/menu/options_menu.cpp:184
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:184
 msgid "Sound"
 msgstr "Zvok"
 
-#: src/menu/options_menu.cpp:152
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "Zvočni učinki?"
 
-#: src/menu/options_menu.cpp:177
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "Frekvenca zvoka"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:145
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:143
 msgid "Sounds"
 msgstr "Zvoki"
 
-#: src/game/game.cpp:114
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:114
 msgid "Starting a new game"
 msgstr "Zagon nove igre"
 
-#: src/interface/interface.cpp:196
+#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:196
 msgid "Stock:"
 msgstr "Zaloga:"
 
-#: src/weapon/submachine_gun.cpp:99
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/submachine_gun.cpp:99
 msgid "Submachine Gun"
 msgstr "Brzostrelka"
 
-#: src/weapon/supertux.cpp:229
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
-#: src/weapon/syringe.cpp:70
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Injekcija"
 
-#: src/menu/results_menu.cpp:426
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:426
 msgid "Team graphs"
 msgstr "Ekipni grafi"
 
-#: src/menu/results_menu.cpp:424
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:424
 msgid "Team stats"
 msgstr "Ekipna statistika"
 
-#: src/game/game_init.cpp:120 src/menu/game_menu.cpp:66
+#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:66
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:118
 msgid "Teams"
 msgstr "Ekipe"
 
-#: src/weapon/teleportation.cpp:50
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/teleportation.cpp:50
 msgid "Teleportation"
 msgstr "Teleprenos"
 
-#: src/weapon/cluster_bomb.cpp:146
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Kasetna granata je zapustila bojišče še preden jo je razneslo."
 
-#: src/weapon/footbomb.cpp:111
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Nogometna bomba je zapustila bojišče še preden jo je razneslo."
 
-#: src/weapon/gnu.cpp:144
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:144
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Gnu je zapustil bojišče preden ga je razneslo"
 
-#: src/weapon/polecat.cpp:150
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:150
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Dihur je zapustil bojišče preden ga je razneslo"
 
-#: src/weapon/auto_bazooka.cpp:175
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Avtomatska raketa je zapustila bojišče..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:72
 msgid "The ball left the battlefield before exploding"
 msgstr "Žoga je zapustila bojišče preden je eksplodirala"
 
-#: src/network/network_client.cpp:128
+#: /home/yekcim/Dev/wormux/trunk/src/network/network_client.cpp:128
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1268,40 +1348,41 @@ msgstr ""
 "Različice odjemalca in strežnika niso združljive (odjemalec=%s, strežnik=%"
 "s)! Prosimo poskusite z drugim strežnikom."
 
-#: src/network/net_error_msg.cpp:48
+#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Povezava se je iztekla. Preverite da ni kriv požarni zid!"
 
-#: src/weapon/disco_grenade.cpp:127
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disko granata je zapustila plesišče preden je eksplodirala"
 
-#: src/game/game.cpp:455
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:456
 msgid "The game was interrupted because you got disconnected."
 msgstr "Igra je bila prekinjena zaradi prekinitve povezave."
 
-#: src/weapon/grenade.cpp:58
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granata je zapustila bojišče preden je eksplodirala"
 
-#: src/menu/network_menu.cpp:302
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:302
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostali te čakajo! Zbudi se! :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
-#: src/weapon/riot_bomb.cpp:86
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:83
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:336
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je zapustila bojišče..."
 
-#: src/network/net_error_msg.cpp:45
+#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
 msgstr "Strežnik je zavrnil povezavo."
 
-#: src/network/net_error_msg.cpp:51
+#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:51
 msgid "The server rejected the connection: wrong password!"
 msgstr "Strežnik je zavrnil povezavo: napačno geslo!"
 
-#: src/menu/network_menu.cpp:214
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1311,11 +1392,12 @@ msgstr[2] "Tukaj so samo %i ekipe."
 msgstr[3] "Tukaj je samo %i ekip."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:322
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr "Čas"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:159
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:189
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1327,7 +1409,7 @@ msgstr ""
 "Strel: držite preslednico dokler bomba ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: src/weapon/bounce_ball.cpp:90
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:90
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1339,46 +1421,46 @@ msgstr ""
 "Strel: pritisnite preslednico\n"
 "ena uporaba na potezo"
 
-#: src/interface/weapon_menu.cpp:169
+#: /home/yekcim/Dev/wormux/trunk/src/interface/weapon_menu.cpp:169
 msgid "Tools"
 msgstr "Orodja"
 
-#: src/network/net_error_msg.cpp:36
+#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:36
 msgid "Unable to contact host."
 msgstr "Ni bilo mogoče kontaktirati gostitelja."
 
-#: src/map/maps_list.cpp:238
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti imenika s kartami (%s)!"
 
-#: src/map/maps_list.cpp:250
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:250
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti zasebnega imenika s kartami (%s)!"
 
-#: src/network/net_error_msg.cpp:39
+#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Ni bilo mogoče uporabiti teh vrat!"
 
-#: src/network/admin_commands.cpp:67
+#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr "Neznan ukaz"
 
-#: src/network/network.cpp:111
+#: /home/yekcim/Dev/wormux/trunk/src/network/network.cpp:111
 msgid "Unnamed"
 msgstr "Brezimjek"
 
-#: src/main.cpp:200
+#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:200
 msgid "Version"
 msgstr "Različica"
 
-#: src/menu/options_menu.cpp:362
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:362
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Preverjanje različice je spodletelo zaradi: %s\n"
 
-#: src/menu/network_menu.cpp:228
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1387,83 +1469,85 @@ msgstr[1] "Počakajte! %i igralca še nista pripravljena!"
 msgstr[2] "Počakajte! %i igralci še niso pripravljeni!"
 msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 
-#: src/menu/network_menu.cpp:369
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:369
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
-#. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:167
+#. Initialization of teams' energy
+#: /home/yekcim/Dev/wormux/trunk/src/interface/weapon_menu.cpp:167
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:129
 msgid "Weapons"
 msgstr "Orožja"
 
-#: src/main.cpp:296
+#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:296
 msgid "Website: "
 msgstr "Spletna stran: "
 
-#: src/game/game.cpp:721
+#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:722
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
 
 #. Various options
-#: src/menu/options_menu.cpp:73
+#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "Vetrni delci?"
 
-#: src/menu/results_menu.cpp:379
+#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:379
 msgid "Winner"
 msgstr "Zmagovalec"
 
-#: src/main.cpp:212
+#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "Wormux se zaganja..."
 
-#: src/main.cpp:286
+#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:286
 msgid "Wormux version "
 msgstr "Wormux različica "
 
-#: src/include/action_handler.cpp:169
+#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:169
 msgid "Wrong map CRC!"
 msgstr "Napačna kartna vsota CRC"
 
-#: src/include/action_handler.cpp:166
+#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:166
 msgid "Wrong map name!"
 msgstr "Napačno ime karte!"
 
-#: src/include/action_handler.cpp:172
+#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:172
 msgid "Wrong team!"
 msgstr "Napačna ekipa!"
 
-#: src/menu/network_menu.cpp:305
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:305
 msgid "You are alone :-/"
 msgstr "Sami ste :-/"
 
-#: src/menu/network_menu.cpp:222
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Sami ste..."
 
-#: src/map/maps_list.cpp:259
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "Potrebujete vsaj eno veljavno karto!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:168
+#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:168
+#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:122
 msgid "You need at least two valid teams !"
 msgstr "Potrebujete vsaj dve veljavni ekipi !"
 
-#: src/menu/network_menu.cpp:202
+#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:496
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/weapon_launcher.cpp:496
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 
-#: src/menu/credits_menu.cpp:75
+#: /home/yekcim/Dev/wormux/trunk/src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "kot"
 
-#: src/weapon/air_attack.cpp:210
+#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:210
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1473,90 +1557,39 @@ msgstr ""
 "Bombardiranje: levi klik na tarčo\n"
 "eno bombardiranje na potezo"
 
-#: src/map/maps_list.cpp:78
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "nalaganje nastavitev ni bilo mogoče"
 
-#: src/map/ground.cpp:61
+#: /home/yekcim/Dev/wormux/trunk/src/map/ground.cpp:61
 msgid "done"
 msgstr "opravljeno"
 
-#: src/map/maps_list.cpp:85
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "napaka pri razčlenjevanju nastavitvene datoteke"
 
-#: src/menu/credits_menu.cpp:79
+#: /home/yekcim/Dev/wormux/trunk/src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "iz"
 
-#: src/map/maps_list.cpp:74
+#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "ni nastavitvene datoteke!"
 
-#: src/sound/jukebox.cpp:167
+#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o Nalaganje glasbe"
 
-#: src/sound/jukebox.cpp:343
+#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Nalaganje zvočnega profila: %s"
 
-#: src/sound/jukebox.cpp:89
+#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
-
-#~ msgid "Connect !"
-#~ msgstr "Poveži !"
-
-#~ msgid "Connect to an internet game"
-#~ msgstr "Povezava na igro preko interneta"
-
-#~ msgid "Refresh"
-#~ msgstr "Osveži"
-
-#~ msgid "Error loading team's data %s:"
-#~ msgstr "Napaka pri nalaganju podatkov ekipe %s:"
-
-#~ msgid "Error while loading configuration file: %s"
-#~ msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
-
-#~ msgid "Error while loading default configuration file: %s"
-#~ msgstr "Napaka pri nalaganju datoteke s privzetimi nastavitvami: %s"
-
-#~ msgid "Error while loading game mode %s (file %s):"
-#~ msgstr "Napaka pri nalaganju igralskega načina %s (datoteka %s):"
-
-#~ msgid "XML error during loading map '%s': "
-#~ msgstr "Napaka v XML med nalaganjem karte '%s': "
-
-#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
-#~ msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
-
-#~ msgid "Do you really want to quit? (Y/N)"
-#~ msgstr "Ali resnično želite končati? (Y/N)"
-
-#, fuzzy
-#~ msgid "Network deinitialization"
-#~ msgstr "Inicializacija omrežja"
-
-#~ msgid "(current)"
-#~ msgstr "(trenutna)"
-
-#~ msgid ""
-#~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "
-#~ "blowtorch, submachine gun) and surely many other things don't work either!"
-#~ msgstr ""
-#~ "Nekatera orožja so zaradi znanih hroščev izključena (kavelj, zračno "
-#~ "kladivo, varilnik, brzostrelka) in zagotovo tudi dosti drugih stvari ne "
-#~ "deluje!"
-
-#~ msgid ""
-#~ "WARNING!! Network is still under developement and therefore a little "
-#~ "experimental."
-#~ msgstr ""
-#~ "OPOZORILO!! Omrežna igra je še vedno v delu in je zato malo poskusna."
 
 #~ msgid "%s team has won %u Gnu!"
 #~ msgid_plural "%s team has won %u Gnus!"
@@ -1572,9 +1605,60 @@ msgstr "o Odprt avdio na %d Hz %d bit"
 #~ msgstr[2] "Ekipa %s je osvojila %u nepričakovana orožja!"
 #~ msgstr[3] "Ekipa %s je osvojila %u nepričakovanih orožij!"
 
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s se poskuša povezati z drugačno različico : odjemalec=%s, vi=%s."
+
+#~ msgid "(current)"
+#~ msgstr "(trenutna)"
+
+#~ msgid "Connect !"
+#~ msgstr "Poveži !"
+
+#~ msgid "Connect to an internet game"
+#~ msgstr "Povezava na igro preko interneta"
+
+#~ msgid "Do you really want to quit? (Y/N)"
+#~ msgstr "Ali resnično želite končati? (Y/N)"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Napaka pri nalaganju podatkov ekipe %s:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Napaka pri nalaganju datoteke z nastavitvami: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Napaka pri nalaganju datoteke s privzetimi nastavitvami: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Napaka pri nalaganju igralskega načina %s (datoteka %s):"
+
+#, fuzzy
+#~ msgid "Network deinitialization"
+#~ msgstr "Inicializacija omrežja"
+
+#~ msgid "Refresh"
+#~ msgstr "Osveži"
+
+#~ msgid ""
+#~ "Some weapons are disabled, because of known bugs (grapple, airhammer, "
+#~ "blowtorch, submachine gun) and surely many other things don't work either!"
+#~ msgstr ""
+#~ "Nekatera orožja so zaradi znanih hroščev izključena (kavelj, zračno "
+#~ "kladivo, varilnik, brzostrelka) in zagotovo tudi dosti drugih stvari ne "
+#~ "deluje!"
+
 #~ msgid ""
 #~ "WARNING! Disconnections are not yet handled. So you have to restart "
 #~ "Wormux after each disconnection!"
 #~ msgstr ""
 #~ "OPOZORILO! Z odklopi se še ne ravna. Tako da morate ponovno zagnati "
 #~ "Wormux po vsakem odklopu!"
+
+#~ msgid ""
+#~ "WARNING!! Network is still under developement and therefore a little "
+#~ "experimental."
+#~ msgstr ""
+#~ "OPOZORILO!! Omrežna igra je še vedno v delu in je zato malo poskusna."
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "Napaka v XML med nalaganjem karte '%s': "
