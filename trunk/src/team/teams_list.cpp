@@ -551,7 +551,7 @@ void TeamsList::UpdateTeam (const std::string& old_team_id,
 
 void TeamsList::DelTeam(Team* the_team)
 {
-  uint pos;
+  uint pos = 0;
 
   ASSERT(the_team != NULL);
 
