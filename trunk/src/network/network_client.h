@@ -39,8 +39,6 @@ public:
   //virtual const bool IsConnected() const { return true; }
   virtual bool IsClient() const { return true; }
 
-  virtual void SendChatMessage(const std::string& txt);
-
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator);
 
   // Client specific methods

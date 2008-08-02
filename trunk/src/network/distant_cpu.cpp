@@ -260,20 +260,6 @@ bool DistantComputer::UpdateTeam(const std::string& old_team_id, const std::stri
   return true;
 }
 
-void DistantComputer::SendChatMessage(Action* a) const
-{
-  std::string txt = a->PopString();
-  if (txt == "") return;
-  if (Network::GetInstance()->IsServer())
-  {
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + "> "+txt));
-  }
-  else
-  {
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, txt), false);
-  }
-}
-
 void DistantComputer::SetState(DistantComputer::state_t _state)
 {
   state = _state;

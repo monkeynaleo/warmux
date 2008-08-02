@@ -26,7 +26,7 @@
 #include "gui/text_box.h"
 #include "include/app.h"
 #include "network/admin_commands.h"
-#include "network/network.h"
+#include "network/chat.h"
 #include "tool/resource_manager.h"
 
 #include "talk_box.h"
@@ -66,7 +66,7 @@ void TalkBox::SendChatMsg()
   if (txt[0] == '/')
     ProcessCommand(txt);
   else if (txt != "" )
-    Network::GetInstance()->SendChatMessage(txt);
+    Chat::SendMessage(txt);
 
   line_to_send_tbox->SetText(empty);
 }

@@ -61,6 +61,9 @@
 #  include <unistd.h>
 #endif
 
+#include "team/team.h"
+#include "team/teams_list.h"
+
 //-----------------------------------------------------------------------------
 
 int  Network::num_objects = 0;
@@ -99,16 +102,7 @@ Network::Network(const std::string& passwd):
   cpu(),
   sync_lock(false)
 {
-  const char *nick = NULL;
-#ifdef WIN32
-  char  buffer[32];
-  DWORD size = 32;
-  if (GetUserName(buffer, &size))
-    nick = buffer;
-#else
-  nick = getenv("USER");
-#endif
-  nickname = (nick) ? nick : _("Unnamed");
+  nickname = GetDefaultNickname();
   sdlnet_initialized = false;
   num_objects++;
 }
@@ -135,6 +129,22 @@ Network::~Network()
 }
 
 //-----------------------------------------------------------------------------
+
+std::string Network::GetDefaultNickname() const
+{
+  std::string s_nick;
+  const char *nick = NULL;
+#ifdef WIN32
+  char  buffer[32];
+  DWORD size = 32;
+  if (GetUserName(buffer, &size))
+    nick = buffer;
+#else
+  nick = getenv("USER");
+#endif
+  s_nick = (nick) ? nick : _("Unnamed");
+  return s_nick;
+}
 
 void Network::SetNickname(const std::string& _nickname)
 {

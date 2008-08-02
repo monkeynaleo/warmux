@@ -52,18 +52,11 @@ NetworkServer::~NetworkServer()
   SDLNet_TCP_Close(server_socket);
 }
 
-void NetworkServer::SendChatMessage(const std::string& txt)
-{
-  if (txt == "") return;
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, GetNickname() + std::string("> ") + txt));
-}
-
 void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
 {
   // Repeat the packet to other clients:
   if (a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
-      && a->GetType() != Action::ACTION_NETWORK_CHECK_PHASE2
-      && a->GetType() != Action::ACTION_CHAT_MESSAGE)
+      && a->GetType() != Action::ACTION_NETWORK_CHECK_PHASE2)
   {
     char* packet;
     int packet_size;

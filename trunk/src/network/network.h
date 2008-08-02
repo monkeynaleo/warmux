@@ -140,12 +140,12 @@ public:
 
   void SetNickname(const std::string& nickname);
   const std::string& GetNickname() const;
+  std::string GetDefaultNickname() const;
 
   // Action handling
   void SendPacket(char* packet, int size) const;
   virtual void SendAction(const Action* action) const;
 
-  virtual void SendChatMessage(const std::string& txt) = 0;
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
 
   // Start a client

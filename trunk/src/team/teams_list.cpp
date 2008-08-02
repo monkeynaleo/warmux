@@ -603,6 +603,25 @@ void TeamsList::SetActive(const std::string &id)
 
 //-----------------------------------------------------------------------------
 
+std::string TeamsList::GetLocalHeadCommanders() const
+{
+  std::string nickname;
+
+  for (std::vector<Team*>::iterator it = GetTeamsList().playing_list.begin();
+       it != GetTeamsList().playing_list.end();
+       it++) {
+    if ((*it)->IsLocal()) {
+      if (nickname != "") nickname += "+";
+
+      nickname += (*it)->GetPlayerName();
+    }
+  }
+
+  return nickname;
+}
+
+//-----------------------------------------------------------------------------
+
 Team& ActiveTeam()
 {
   return GetTeamsList().ActiveTeam();

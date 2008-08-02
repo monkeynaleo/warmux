@@ -86,6 +86,9 @@ public:
   // Find a team by its id or index (in playing full_list)
   Team* FindPlayingById(const std::string &id, int &index);
   Team* FindPlayingByIndex(uint index);
+
+  // returns name1+name2+name3
+  std::string GetLocalHeadCommanders() const;
 };
 
 //-----------------------------------------------------------------------------

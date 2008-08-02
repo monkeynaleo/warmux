@@ -40,7 +40,6 @@ public:
 
   virtual void SendAction(Action* action);
 
-  virtual void SendChatMessage(const std::string& txt);
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
 
 };

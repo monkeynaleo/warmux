@@ -360,16 +360,14 @@ void SendGameMode()
 
 void Action_ChatMessage (Action *a)
 {
+  std::string nickname = a->PopString();
+  std::string message = a->PopString();
+
   if (Network::GetInstance()->IsServer() && a->creator)
-  {
-    a->creator->SendChatMessage(a);
-  }
-  else
-  {
-    std::string msg = a->PopString();
-    ChatLogger::GetInstance()->LogMessage(msg);
-    AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-  }
+    a->creator->SetNickname(nickname);
+
+  ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
+  AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message);
 }
 
 void Action_Menu_SetMap (Action *a)
@@ -386,6 +384,15 @@ void Action_Menu_SetMap (Action *a)
   if (Network::GetInstance()->network_menu != NULL) {
     Network::GetInstance()->network_menu->ChangeMapCallback();
   }
+}
+
+void UpdateLocalNickname()
+{
+  std::string nickname = GetTeamsList().GetLocalHeadCommanders();
+  if (nickname == "")
+    nickname = Network::GetInstance()->GetDefaultNickname();
+
+  Network::GetInstance()->SetNickname(nickname);
 }
 
 void Action_Menu_AddTeam (Action *a)
@@ -406,12 +413,10 @@ void Action_Menu_AddTeam (Action *a)
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
 
   if (Network::IsConnected()) {
-    if (!local_team) {
+    if (!local_team)
       a->creator->AddTeam(the_team.id);
-      a->creator->SetNickname(the_team.player_name);
-    }
     else
-      Network::GetInstance()->SetNickname(the_team.player_name);
+      UpdateLocalNickname();
   }
 }
 
@@ -431,12 +436,10 @@ void Action_Menu_UpdateTeam (Action *a)
     Network::GetInstance()->network_menu->UpdateTeamCallback(old_team_id, the_team.id);
 
   if (Network::IsConnected()) {
-    if (a->creator) {
+    if (a->creator)
       a->creator->UpdateTeam(old_team_id, the_team.id);
-      a->creator->SetNickname(the_team.player_name);
-    }
     else
-      Network::GetInstance()->SetNickname(the_team.player_name);
+      UpdateLocalNickname();
   }
 }
 
@@ -457,6 +460,9 @@ void Action_Menu_DelTeam (Action *a)
   }
 
   GetTeamsList().DelTeam(team_id);
+
+  if (!a->creator)
+    UpdateLocalNickname();
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->DelTeamCallback(team_id);

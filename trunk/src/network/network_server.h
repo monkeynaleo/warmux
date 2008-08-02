@@ -42,8 +42,6 @@ public:
   //virtual const bool IsConnected() const { return true; }
   virtual bool IsServer() const { return true; }
 
-  virtual void SendChatMessage(const std::string& txt);
-
   // Serveur specific methods
   connection_state_t ServerStart(const std::string &port);
 

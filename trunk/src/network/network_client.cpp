@@ -53,14 +53,6 @@ NetworkClient::~NetworkClient()
 {
 }
 
-void NetworkClient::SendChatMessage(const std::string& txt)
-{
-  if (txt == "") return;
-
-  Action a(Action::ACTION_CHAT_MESSAGE, txt);
-  SendAction(&a);
-}
-
 std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
   printf("Client disconnected\n");
@@ -69,26 +61,9 @@ std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<D
   return cpu.erase(closed);
 }
 
-void NetworkClient::HandleAction(Action* a, DistantComputer* sender) const
+void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/) const
 {
-  switch (a->GetType()) {
-  case Action::ACTION_NICKNAME:
-    {
-      std::string nickname = a->PopString();
-      std::cout<<"New nickname: " + nickname<< std::endl;
-      sender->SetNickname(nickname);
-      delete a;
-    }
-    break;
-
-  case Action::ACTION_CHAT_MESSAGE:
-    sender->SendChatMessage(a);
-    delete a;
-    break;
-
-  default:
-    ActionHandler::GetInstance()->NewAction(a, false);
-  }
+  ActionHandler::GetInstance()->NewAction(a, false);
 }
 
 //-----------------------------------------------------------------------------
@@ -193,6 +168,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   DistantComputer * server = new DistantComputer(socket);
 
   cpu.push_back(server);
+
   //Send nickname to server
   Action a(Action::ACTION_NICKNAME, GetNickname());
   SendAction(&a);

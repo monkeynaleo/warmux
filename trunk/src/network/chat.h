@@ -58,6 +58,8 @@ class Chat
   void Clear();
   void NewMessage(const std::string& msg);
   void HandleKey(const SDL_Event& event);
+
+  static void SendMessage(const std::string& msg);
 };
 
 #endif
