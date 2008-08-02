@@ -135,5 +135,5 @@ int RandomGenerator::GetSign()
 
 RandomLocalGen& RandomLocal()
 {
-  return *(RandomLocalGen::GetInstance());
+  return RandomLocalGen::GetRef();
 }
