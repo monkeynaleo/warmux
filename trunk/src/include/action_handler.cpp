@@ -390,12 +390,6 @@ void Action_Menu_SetMap (Action *a)
 
 void Action_Menu_AddTeam (Action *a)
 {
-  if(Network::GetInstance()->IsServer() && a->creator)
-  {
-    a->creator->ManageTeam(a);
-    return;
-  }
-
   ConfigTeam the_team;
 
   the_team.id = a->PopString();
@@ -407,13 +401,13 @@ void Action_Menu_AddTeam (Action *a)
   GetTeamsList().AddTeam(the_team);
 
   if (Network::GetInstance()->network_menu != NULL)
-  {
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
-  }
 
   if (Network::IsConnected()) {
-    if (a->creator)
+    if (a->creator) {
+      a->creator->AddTeam(the_team.id);
       a->creator->SetNickname(the_team.player_name);
+    }
     else
       Network::GetInstance()->SetNickname(the_team.player_name);
   }
@@ -427,7 +421,7 @@ void Action_Menu_UpdateTeam (Action *a)
   the_team.player_name = a->PopString();
   the_team.nb_characters = uint(a->PopInt());
 
-  GetTeamsList().UpdateTeam (the_team);
+  GetTeamsList().UpdateTeam(the_team);
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id);
@@ -442,26 +436,24 @@ void Action_Menu_UpdateTeam (Action *a)
 
 void Action_Menu_DelTeam (Action *a)
 {
-  if (Network::GetInstance()->IsServer() && a->creator)
-  {
-    a->creator->ManageTeam(a);
-    return;
+  std::string team_id = a->PopString();
+
+  if (Network::GetInstance()->IsServer() && a->creator) {
+    a->creator->RemoveTeam(team_id);
   }
 
-  std::string team = a->PopString();
-
-  MSG_DEBUG("action_handler.menu", "- %s", team.c_str());
+  MSG_DEBUG("action_handler.menu", "- %s", team_id.c_str());
   if (Game::GetInstance()->IsGameLaunched() && Network::GetInstance()->IsServer()) {
     int i;
-    Team* t = GetTeamsList().FindById(team, i);
-    if (t == &ActiveTeam()) // we have loose the turn master!!
+    Team* the_team = GetTeamsList().FindById(team_id, i);
+    if (the_team == &ActiveTeam()) // we have loose the turn master!!
       Network::GetInstance()->SetTurnMaster(true);
   }
 
-  GetTeamsList().DelTeam (team);
+  GetTeamsList().DelTeam(team_id);
 
   if (Network::GetInstance()->network_menu != NULL)
-    Network::GetInstance()->network_menu->DelTeamCallback(team);
+    Network::GetInstance()->network_menu->DelTeamCallback(team_id);
 }
 
 // ########################################################

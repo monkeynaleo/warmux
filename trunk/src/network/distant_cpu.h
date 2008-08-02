@@ -73,7 +73,9 @@ public:
   void SetNickname(const std::string& nickname);
   const std::string& GetNickname() const;
 
-  void ManageTeam(Action* team);
+  bool AddTeam(const std::string& team_id);
+  bool RemoveTeam(const std::string& team_id);
+
   void SendChatMessage(Action* a) const;
 
   void SetState(DistantComputer::state_t _state);

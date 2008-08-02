@@ -81,12 +81,6 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* sender) const
     }
     break;
 
-  case Action::ACTION_MENU_ADD_TEAM:
-  case Action::ACTION_MENU_DEL_TEAM:
-    sender->ManageTeam(a);
-    delete a;
-    break;
-
   case Action::ACTION_CHAT_MESSAGE:
     sender->SendChatMessage(a);
     delete a;

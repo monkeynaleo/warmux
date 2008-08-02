@@ -212,49 +212,39 @@ const std::string& DistantComputer::GetNickname() const
   return nickname;
 }
 
-void DistantComputer::ManageTeam(Action* team)
+bool DistantComputer::AddTeam(const std::string& team_id)
 {
-  std::string name = team->PopString();
-  if(team->GetType() == Action::ACTION_MENU_ADD_TEAM)
-  {
-    owned_teams.push_back(name);
+  int index = 0;
+  Team * the_team = GetTeamsList().FindById(team_id, index);
 
-    int index = 0;
-    Team * tmp = GetTeamsList().FindById(name, index);
-    if (tmp != NULL)
-    {
-      tmp->SetRemote();
-
-      Action* copy = new Action(Action::ACTION_MENU_ADD_TEAM, name);
-      copy->Push( team->PopString() );
-      copy->Push( team->PopInt() );
-      ActionHandler::GetInstance()->NewAction(copy, false);
-    }
-    else
-    {
-      std::cerr << "Team "<< name << "does not exist!" << std::endl;
-      ASSERT(false);
-    }
+  if (the_team) {
+    owned_teams.push_back(team_id);
+    the_team->SetRemote();
+    return true;
   }
-  else if(team->GetType() == Action::ACTION_MENU_DEL_TEAM)
-  {
-    std::list<std::string>::iterator it;
-    it = find(owned_teams.begin(), owned_teams.end(), name);
-    printf("size of owned teams: %d\n", (int)owned_teams.size());
 
-    NET_ASSERT(it != owned_teams.end())
-    {
-      force_disconnect = true;
-      return;
-    }
-    if (it != owned_teams.end())
-    {
-      owned_teams.erase(it);
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, name), false);
-    }
+  force_disconnect = true;
+
+  std::cerr << "Team "<< team_id << "does not exist!" << std::endl;
+  ASSERT(false);
+  return false;
+}
+
+bool DistantComputer::RemoveTeam(const std::string& team_id)
+{
+  std::list<std::string>::iterator it;
+  it = find(owned_teams.begin(), owned_teams.end(), team_id);
+  printf("size of owned teams: %d\n", (int)owned_teams.size());
+
+  if (it != owned_teams.end()) {
+    owned_teams.erase(it);
+    return true;
   }
-  else
-    ASSERT(false);
+
+  force_disconnect = true;
+
+  ASSERT(false);
+  return false;
 }
 
 void DistantComputer::SendChatMessage(Action* a) const
