@@ -166,12 +166,16 @@ class Team
   // true if the team belong to a local AI
     bool IsLocalAI() const { return (type_of_player == TEAM_ai_local); };
 
+    bool IsRemote() const { return (type_of_player == TEAM_remote); };
+
     bool IsActiveTeam() const;
 
     void SetLocal() { type_of_player = TEAM_human_local; };
     void SetLocalAI() { type_of_player = TEAM_ai_local; };
     void SetRemote() { type_of_player = TEAM_remote; };
 
+  // reset characters number, type_of_player and player name
+    void SetDefaultPlayingConfig();
 };
 
 #endif /* TEAM_H */

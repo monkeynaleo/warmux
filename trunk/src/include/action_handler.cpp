@@ -398,13 +398,15 @@ void Action_Menu_AddTeam (Action *a)
 
   MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
 
-  GetTeamsList().AddTeam(the_team);
+  bool local_team = (!Network::IsConnected() || !a->creator);
+
+  GetTeamsList().AddTeam(the_team, local_team);
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
 
   if (Network::IsConnected()) {
-    if (a->creator) {
+    if (!local_team) {
       a->creator->AddTeam(the_team.id);
       a->creator->SetNickname(the_team.player_name);
     }
@@ -415,20 +417,24 @@ void Action_Menu_AddTeam (Action *a)
 
 void Action_Menu_UpdateTeam (Action *a)
 {
+  std::string old_team_id = a->PopString();
+
   ConfigTeam the_team;
 
   the_team.id = a->PopString();
   the_team.player_name = a->PopString();
   the_team.nb_characters = uint(a->PopInt());
 
-  GetTeamsList().UpdateTeam(the_team);
+  GetTeamsList().UpdateTeam(old_team_id, the_team);
 
   if (Network::GetInstance()->network_menu != NULL)
-    Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id);
+    Network::GetInstance()->network_menu->UpdateTeamCallback(old_team_id, the_team.id);
 
   if (Network::IsConnected()) {
-    if (a->creator)
+    if (a->creator) {
+      a->creator->UpdateTeam(old_team_id, the_team.id);
       a->creator->SetNickname(the_team.player_name);
+    }
     else
       Network::GetInstance()->SetNickname(the_team.player_name);
   }

@@ -38,12 +38,12 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   void SetNbLocalTeams(uint nb_teams, uint previous_nb);
   void AddLocalTeam(uint i);
   void RemoveLocalTeam(uint i);
-  void SetLocalTeam(uint i, Team& team, bool remove_previous_team);
+  void SetLocalTeam(uint i, Team& team);
 
   void SetDefaultPlayerName(Team& team);
 
   void PrevTeam(uint i);
-  void NextTeam(uint i, bool check_null_prev_team = true);
+  void NextTeam(uint i);
 
  public:
   NetworkTeamsSelectionBox(const Point2i &size);
@@ -53,7 +53,7 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void AddTeamCallback(const std::string& team_id);
-  void UpdateTeamCallback(const std::string& team_id);
+  void UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id);
   void DelTeamCallback(const std::string& team_id);
 
   void SetMaxNbLocalPlayers(uint nb);

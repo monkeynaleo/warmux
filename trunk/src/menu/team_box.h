@@ -40,7 +40,7 @@ class TeamBox : public HBox
   /**********************************************/
 
   bool is_local; // local/remote team
-  std::string previous_name; // only for network
+  std::string previous_player_name; // only for network
 
   Team * associated_team;
   PictureWidget *team_logo;
@@ -48,12 +48,16 @@ class TeamBox : public HBox
   TextBox * player_name;
   SpinButton * nb_characters;
 
+
+  void UpdateTeam(const std::string& old_team_id) const;
+
  public:
   TeamBox(const std::string& player_name, const Point2i &size);
 
   void SetTeam(Team& _team, bool read_team_values=false);
   void ClearTeam();
   Team* GetTeam() const;
+
   void ValidOptions() const;
 
   bool IsLocal() const;

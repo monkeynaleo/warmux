@@ -69,7 +69,7 @@ public:
   ~NetworkMenu();
 
   void AddTeamCallback(const std::string& team_id);
-  void UpdateTeamCallback(const std::string& team_id);
+  void UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id);
   void DelTeamCallback(const std::string& team_id);
   void ChangeMapCallback();
 

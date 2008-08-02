@@ -437,7 +437,7 @@ void Game::Run()
 
   // Fix bug #10613: ensure all teams are reset as local teams
   FOR_EACH_TEAM(team)
-    (**team).SetLocal();
+    (**team).SetDefaultPlayingConfig();
 }
 
 bool Game::HasBeenNetworkDisconnected() const

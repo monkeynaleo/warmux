@@ -75,6 +75,7 @@ public:
 
   bool AddTeam(const std::string& team_id);
   bool RemoveTeam(const std::string& team_id);
+  bool UpdateTeam(const std::string& old_team_id, const std::string& team_id);
 
   void SendChatMessage(Action* a) const;
 

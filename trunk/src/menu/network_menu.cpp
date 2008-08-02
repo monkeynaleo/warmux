@@ -334,12 +334,12 @@ void NetworkMenu::AddTeamCallback(const std::string& team_id)
 //  msg_box->NewMessage(team_id + " selected");
 }
 
-void NetworkMenu::UpdateTeamCallback(const std::string& team_id)
+void NetworkMenu::UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id)
 {
   if ( close_menu )
     return;
 
-  team_box->UpdateTeamCallback(team_id);
+  team_box->UpdateTeamCallback(old_team_id, team_id);
 }
 
 void NetworkMenu::ChangeMapCallback()

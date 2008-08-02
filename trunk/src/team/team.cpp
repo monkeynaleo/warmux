@@ -430,3 +430,10 @@ bool Team::IsActiveTeam() const
 {
   return this == &ActiveTeam();
 }
+
+void Team::SetDefaultPlayingConfig()
+{
+  SetLocal();
+  SetPlayerName("");
+  SetNbCharacters(GameMode::GetInstance()->nb_characters);
+}

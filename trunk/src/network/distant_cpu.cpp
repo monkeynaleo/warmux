@@ -219,7 +219,6 @@ bool DistantComputer::AddTeam(const std::string& team_id)
 
   if (the_team) {
     owned_teams.push_back(team_id);
-    the_team->SetRemote();
     return true;
   }
 
@@ -245,6 +244,20 @@ bool DistantComputer::RemoveTeam(const std::string& team_id)
 
   ASSERT(false);
   return false;
+}
+
+bool DistantComputer::UpdateTeam(const std::string& old_team_id, const std::string& team_id)
+{
+  if (old_team_id == team_id) // nothing to do !
+    return true;
+
+  if (!RemoveTeam(old_team_id))
+    return false;
+
+  if (!AddTeam(team_id))
+    return false;
+
+  return true;
 }
 
 void DistantComputer::SendChatMessage(Action* a) const
