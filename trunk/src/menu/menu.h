@@ -64,6 +64,7 @@ public:
 
 private:
    Sprite *background;
+   Widget *selected_widget;
 
    bool BasicOnClickUp(const Point2i &mousePosition);
 

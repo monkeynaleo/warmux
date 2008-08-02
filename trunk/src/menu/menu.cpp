@@ -35,7 +35,8 @@
 static const int MENU_DELAY = 100;  // 10 fps, much sufficient for menu
 
 Menu::Menu(const std::string& bg, t_action _actions) :
-  actions(_actions)
+  actions(_actions),
+  selected_widget(NULL)
 {
   close_menu = false ;
   AppWormux * app = AppWormux::GetInstance();
@@ -140,13 +141,13 @@ void Menu::key_cancel()
 
 void Menu::key_up()
 {
-  widgets.SetKeyboardFocusOnPreviousWidget();
+  widgets.SetFocusOnPreviousWidget();
   RedrawMenu();
 }
 
 void Menu::key_down()
 {
-  widgets.SetKeyboardFocusOnNextWidget();
+  widgets.SetFocusOnNextWidget();
   RedrawMenu();
 }
 
@@ -290,7 +291,8 @@ void Menu::Display(const Point2i& mousePosition)
     SDL_Delay(delay);
 }
 
-void Menu::SetActionButtonsXY(int x, int y){
+void Menu::SetActionButtonsXY(int x, int y)
+{
   if (actions_buttons != NULL) {
     actions_buttons->SetPosition(x, y);
   }

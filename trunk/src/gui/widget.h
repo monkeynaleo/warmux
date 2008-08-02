@@ -111,6 +111,7 @@ class Widget : public Rectanglei, public Container
 
   void SetContainer(Container * _ct) { ct = _ct; };
 
+  virtual bool IsWidgetList() const { return false; };
   virtual void Pack() = 0;
 };
 

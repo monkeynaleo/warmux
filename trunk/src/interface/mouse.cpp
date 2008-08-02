@@ -316,10 +316,15 @@ void Mouse::Hide()
 // Center the pointer on the screen
 void Mouse::CenterPointer()
 {
+  SetPosition(Point2i(AppWormux::GetInstance()->video->window.GetWidth() / 2,
+		      AppWormux::GetInstance()->video->window.GetHeight() / 2));
+}
+
+void Mouse::SetPosition(Point2i pos)
+{
   MSG_DEBUG("mouse", "1) %d, %d\n", GetPosition().GetX(), GetPosition().GetY());
 
-  SDL_WarpMouse(AppWormux::GetInstance()->video->window.GetWidth() / 2,
-                AppWormux::GetInstance()->video->window.GetHeight() / 2);
+  SDL_WarpMouse(pos.x, pos.y);
   SDL_PumpEvents(); // force new position else GetPosition does not return new position
 
   lastpos = GetPosition();

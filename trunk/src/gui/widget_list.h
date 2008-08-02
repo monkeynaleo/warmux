@@ -36,8 +36,10 @@ private:
 
   Point2i lastMousePosition;
   Widget* last_clicked;
-  Widget* keyboard_selection;
-  Widget* mouse_selection;
+  Widget* selected_widget;
+
+  Widget* GetFirstWidget() const;
+  Widget* GetLastWidget() const;
 
 protected:
   std::list<Widget*> widget_list;
@@ -63,13 +65,17 @@ public:
   void RemoveWidget(Widget* w);
 
   // Navigate between widget with keyboard
-  virtual void SetKeyboardFocusOnNextWidget();
-  virtual void SetKeyboardFocusOnPreviousWidget();
-  Widget * GetCurrentKeyboardSelectedWidget() const { return keyboard_selection; };
+  virtual void SetFocusOnNextWidget();
+  virtual void SetFocusOnPreviousWidget();
+  Widget * GetCurrentKeyboardSelectedWidget() const { return selected_widget; };
+
+  Widget* GetNextWidget(const Widget *w, bool loop) const;
+  Widget* GetPreviousWidget(const Widget *w, bool loop) const;
 
   // set focus on a widget
   void SetMouseFocusOn(Widget* widget);
 
+  virtual bool IsWidgetList() const { return true; };
   virtual void Pack();
 };
 

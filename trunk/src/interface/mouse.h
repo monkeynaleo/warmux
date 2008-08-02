@@ -85,6 +85,7 @@ public:
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
   void CenterPointer();
+  void SetPosition(Point2i pos);
 
   // Choose the pointer
   pointer_t GetPointer() const;
