@@ -87,7 +87,7 @@
 <!-- ###### Tail ###### -->
 <sprite name="tail" type="tail" >
 	<image file="tail.png"/>
-	<anchor dx="19" dy="19"/>
+	<anchor dx="19" dy="29"/>
 </sprite>
 
 <!-- ###### Back ###### -->
