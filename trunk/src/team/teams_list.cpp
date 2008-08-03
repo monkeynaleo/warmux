@@ -187,7 +187,14 @@ void TeamsList::LoadGamingData()
   iterator it=playing_list.begin(), end=playing_list.end();
 
   // Load the data of all teams
-  for (; it != end; ++it) (**it).LoadGamingData();
+  for (; it != end; ++it) {
+
+    // Local or AI ?
+    if ( (*it)->IsLocal() && (*it)->GetPlayerName() == "AI-stupid")
+      (*it)->SetLocalAI();
+
+    (**it).LoadGamingData();
+  }
 }
 
 void TeamsList::RandomizeFirstPlayer()
@@ -503,10 +510,6 @@ void TeamsList::UpdateTeam(Team* the_team, const ConfigTeam &the_team_cfg)
   // set the player name and number of characters
   the_team->SetPlayerName(the_team_cfg.player_name);
   the_team->SetNbCharacters(the_team_cfg.nb_characters);
-
-  // Local or AI ?
-  if (the_team->IsLocal() && the_team_cfg.player_name == "AI-stupid")
-    the_team->SetLocalAI();
 }
 
 void TeamsList::UpdateTeam (const std::string& old_team_id,
