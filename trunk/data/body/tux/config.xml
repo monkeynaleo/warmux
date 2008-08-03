@@ -255,7 +255,7 @@
 <!-- ###### Tail ###### -->
 <sprite name="tail-black" type="tail" >
 	<image file="black_tail.png"/>
-	<anchor dx="19" dy="19"/>
+	<anchor dx="19" dy="29"/>
 </sprite>
 
 <!-- ###### Back ###### -->
