@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="460.53107"
+   height="270.87976"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   version="1.0"
+   sodipodi:docname="water.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/yekcim/Desktop/lava_part.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3194">
+      <stop
+         id="stop3196"
+         offset="0"
+         style="stop-color:#436b15;stop-opacity:0.89411765" />
+      <stop
+         id="stop3198"
+         offset="1"
+         style="stop-color:#253c0c;stop-opacity:0.99215686;" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 135.43988 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="460.53107 : 135.43988 : 1"
+       inkscape:persp3d-origin="230.26553 : 90.293254 : 1"
+       id="perspective51" />
+    <linearGradient
+       id="linearGradient3251">
+      <stop
+         style="stop-color:#436b15;stop-opacity:0.90588236"
+         offset="0"
+         id="stop3253" />
+      <stop
+         style="stop-color:#253c0c;stop-opacity:0.99215686;"
+         offset="1"
+         id="stop3255" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3328">
+      <stop
+         id="stop3330"
+         offset="0"
+         style="stop-color:#006dc1;stop-opacity:0.7764706" />
+      <stop
+         id="stop3332"
+         offset="1"
+         style="stop-color:#d2ecfc;stop-opacity:0.81568629" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3231">
+      <stop
+         id="stop3233"
+         offset="0"
+         style="stop-color:#ffff2b;stop-opacity:1;" />
+      <stop
+         id="stop3235"
+         offset="1"
+         style="stop-color:#7ad400;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3198">
+      <stop
+         style="stop-color:#b5e0fb;stop-opacity:1"
+         offset="0"
+         id="stop3200" />
+      <stop
+         style="stop-color:#0d72c1;stop-opacity:1;"
+         offset="1"
+         id="stop3202" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3198"
+       id="radialGradient3208"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.374188,0,0,3.0293576,67.834344,-719.28632)"
+       cx="128.64561"
+       cy="358.38165"
+       fx="128.64561"
+       fy="358.38165"
+       r="1.4413463" />
+    <linearGradient
+       id="linearGradient3201">
+      <stop
+         style="stop-color:#ffe312;stop-opacity:1;"
+         offset="0"
+         id="stop3203" />
+      <stop
+         style="stop-color:#ffa817;stop-opacity:1;"
+         offset="1"
+         id="stop3205" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3328"
+       id="linearGradient3338"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1374046e-2,0,0,1.2129285,148.21634,160.88867)"
+       x1="65.35714"
+       y1="269.14789"
+       x2="65.357147"
+       y2="252.00504" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3201"
+       id="radialGradient3349"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.374188,0,0,3.0293576,-174.69217,-719.28632)"
+       cx="128.64561"
+       cy="358.38165"
+       fx="128.64561"
+       fy="358.38165"
+       r="1.4413463" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3251"
+       id="radialGradient3360"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.374188,0,0,3.0293576,-174.69217,-862.16608)"
+       spreadMethod="pad"
+       cx="128.64561"
+       cy="358.38165"
+       fx="128.64561"
+       fy="358.38165"
+       r="1.4413463" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3194"
+       id="linearGradient3362"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(4.2728804,0.2340342)"
+       x1="-203.09258"
+       y1="3185.7683"
+       x2="-203.09258"
+       y2="3274.6145" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3201"
+       id="linearGradient3364"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1374046e-2,0,0,1.2129285,93.438671,-53.659019)"
+       x1="68.035645"
+       y1="252.00005"
+       x2="68.035645"
+       y2="269.14786" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3231"
+       id="radialGradient2476"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.374188,0,0,3.0293576,65.152816,-862.16609)"
+       spreadMethod="pad"
+       cx="128.64561"
+       cy="358.38165"
+       fx="128.64561"
+       fy="358.38165"
+       r="1.4413463" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3231"
+       id="linearGradient2479"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(4.2728804,0.2340342)"
+       x1="107.68967"
+       y1="3185.7683"
+       x2="107.68967"
+       y2="3274.6145" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.728988"
+     inkscape:cx="56.543159"
+     inkscape:cy="178.30996"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1279"
+     inkscape:window-height="725"
+     inkscape:window-x="0"
+     inkscape:window-y="25">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2385"
+       visible="true"
+       enabled="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-126.07473,-158.18604)">
+    <path
+       style="fill:url(#radialGradient3208);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 372.5195,360.34106 C 358.93223,372.9404 386.1451,372.9404 372.5195,360.34106 z"
+       id="path3206"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:url(#radialGradient3349);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 129.99299,360.34106 C 116.40572,372.9404 143.61859,372.9404 129.99299,360.34106 z"
+       id="path2383"
+       sodipodi:nodetypes="cc" />
+    <g
+       id="g3195"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/yekcim/water.png"
+       transform="translate(54.777063,81.096491)">
+      <rect
+         y="252.00504"
+         x="94.392868"
+         height="63.92857"
+         width="1"
+         id="rect2409"
+         style="opacity:0.98999999;fill:#ff9400;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         y="252.00504"
+         x="94.392868"
+         height="20.793056"
+         width="1"
+         id="rect3183"
+         style="opacity:0.81651378;fill:url(#linearGradient3364);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <rect
+       style="opacity:0.98999999;fill:#ff9400;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3193"
+       width="180"
+       height="128"
+       x="164.07928"
+       y="301.0658"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/yekcim/water_bottom.png" />
+    <path
+       style="fill:url(#radialGradient3360);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 129.99299,217.4613 C 116.40572,230.06064 143.61859,230.06064 129.99299,217.4613 z"
+       id="path2457"
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/yekcim/Desktop/boue_part.png" />
+    <g
+       id="g3192"
+       transform="matrix(2.6341482e-3,0,0,1,148.45784,-555.35698)"
+       inkscape:export-filename="/home/yekcim/Desktop/boue.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="745.57874"
+         x="270.33038"
+         height="63.92857"
+         width="379.62936"
+         id="rect3186"
+         style="opacity:0.98999999000000005;fill:#436b15;fill-opacity:0.89411765;fill-rule:nonzero;stroke:none;stroke-width:0.20000000000000001;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         y="745.57874"
+         x="270.33038"
+         height="20.793056"
+         width="379.62936"
+         id="rect3188"
+         style="opacity:0.81651378;fill:url(#linearGradient3362);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <rect
+       style="opacity:0.98999999000000005;fill:#436b15;fill-opacity:0.90342677;fill-rule:nonzero;stroke:none;stroke-width:0.20000000000000001;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3190"
+       width="180"
+       height="128"
+       x="164.07928"
+       y="158.18604"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/yekcim/Desktop/boue_bottom.png" />
+    <rect
+       inkscape:export-filename="/home/yekcim/water_bottom.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       y="301.0658"
+       x="406.6058"
+       height="128"
+       width="180"
+       id="rect3320"
+       style="opacity:0.98999999;fill:#006cc1;fill-opacity:0.49803922;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <g
+       id="g3334"
+       transform="translate(242.52591,-133.45121)">
+      <rect
+         y="466.55273"
+         x="149.17053"
+         height="63.92857"
+         width="1"
+         id="rect3318"
+         style="opacity:0.98999999;fill:#006bc1;fill-opacity:0.49411765;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         y="466.55273"
+         x="149.17053"
+         height="20.793056"
+         width="1"
+         id="rect3324"
+         style="opacity:0.81651378;fill:url(#linearGradient3338);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <path
+       style="fill:url(#radialGradient2476);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 369.83798,217.46129 C 356.25071,230.06063 383.46358,230.06063 369.83798,217.46129 z"
+       id="path2466"
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g2468"
+       transform="matrix(2.6341482e-3,0,0,1,388.30283,-555.35698)"
+       inkscape:export-filename="/home/yekcim/radioactive.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="745.57874"
+         x="270.33038"
+         height="63.92857"
+         width="379.62936"
+         id="rect2470"
+         style="opacity:0.98999999;fill:#aad400;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         y="745.57874"
+         x="270.33038"
+         height="20.793056"
+         width="379.62936"
+         id="rect2472"
+         style="opacity:0.81651378;fill:url(#linearGradient2479);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <rect
+       style="opacity:0.98999999;fill:#aad400;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect2474"
+       width="180"
+       height="128"
+       x="403.92426"
+       y="158.18604"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/yekcim/radioactive_bottom.png" />
+  </g>
+</svg>
