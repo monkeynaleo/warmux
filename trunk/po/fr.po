@@ -1054,7 +1054,7 @@ msgstr "Personne !"
 
 #: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:60
 msgid "Number of characters"
-msgstr "Nombre de joueurs par équipe"
+msgstr "Nombre de personnages par équipe"
 
 #: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:48
 msgid "Number of teams:"
