@@ -240,6 +240,9 @@
   <surface name="radioactive" file="gfx/water/radioactive.png" />
   <surface name="radioactive_bottom" file="gfx/water/radioactive_bottom.png" />
 
+  <surface name="dirtywater" file="gfx/water/dirtywater.png" />
+  <surface name="dirtywater_bottom" file="gfx/water/dirtywater_bottom.png" />
+
 </section>
 
 </resources>
