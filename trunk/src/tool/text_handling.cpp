@@ -22,7 +22,7 @@
 #include "tool/text_handling.h"
 #include "tool/copynpaste.h"
 
-bool MoveCursorLeft(const std::string& text, std::string::size_type& pos)
+static bool MoveCursorLeft(const std::string& text, std::string::size_type& pos)
 {
   if (pos != 0)
     {
@@ -33,7 +33,7 @@ bool MoveCursorLeft(const std::string& text, std::string::size_type& pos)
   return false;
 }
 
-bool MoveCursorRight(const std::string& text, std::string::size_type& pos)
+static bool MoveCursorRight(const std::string& text, std::string::size_type& pos)
 {
   if (pos < text.size())
     {
@@ -44,7 +44,7 @@ bool MoveCursorRight(const std::string& text, std::string::size_type& pos)
   return false;
 }
 
-bool RemoveUTF8CharBefore(std::string& text, std::string::size_type& pos)
+static bool RemoveUTF8CharBefore(std::string& text, std::string::size_type& pos)
 {
   if (pos != 0) {
     while ((text[--pos] & 0xc0) == 0x80)
@@ -53,11 +53,11 @@ bool RemoveUTF8CharBefore(std::string& text, std::string::size_type& pos)
       }
     text.erase(pos, 1);
     return true;
-  } 
+  }
   return false;
 }
 
-bool RemoveUTF8CharAfter(std::string& text, std::string::size_type& pos)
+static bool RemoveUTF8CharAfter(std::string& text, std::string::size_type& pos)
 {
   if (pos < text.size()) {
     MoveCursorRight(text, pos);
@@ -68,7 +68,7 @@ bool RemoveUTF8CharAfter(std::string& text, std::string::size_type& pos)
 }
 
 
-bool InsertUTF8Char(std::string& text, std::string::size_type& pos, const SDL_keysym& key)
+static bool InsertUTF8Char(std::string& text, std::string::size_type& pos, const SDL_keysym& key)
 {
   // check cursor position
   if (pos > text.size()) {
@@ -94,15 +94,18 @@ bool InsertUTF8Char(std::string& text, std::string::size_type& pos, const SDL_ke
 	}
       return true;
     }
+
+  // this is not a valid char
   return false;
 }
 
-bool processModifier(std::string& text, std::string::size_type& pos, const SDL_keysym& key)
+static bool processModifier(std::string& text, std::string::size_type& pos, const SDL_keysym& key)
 {
   switch (key.sym)
     {
     case SDLK_v:
     case SDLK_y:
+      // copy/paste
       return RetrieveBuffer(text, pos);
     default:
       return false;
@@ -111,7 +114,7 @@ bool processModifier(std::string& text, std::string::size_type& pos, const SDL_k
 
 bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym& key)
 {
-  bool r = false;
+  bool r = true;
 
   switch (key.sym) {
 
@@ -130,19 +133,22 @@ bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym
     // all those keys are forbidden!
     r = false;
     break;
-    
+
+    // we return true for all the following cases because even if action has failed,
+    // the action has not be handled by something else
   case SDLK_LEFT:
-    r = MoveCursorLeft(text, pos);
+    MoveCursorLeft(text, pos);
     break;
   case SDLK_RIGHT:
-    r = MoveCursorRight(text, pos);
+    MoveCursorRight(text, pos);
     break;
   case SDLK_BACKSPACE:
-    r = RemoveUTF8CharBefore(text, pos);
+    RemoveUTF8CharBefore(text, pos);
     break;
   case SDLK_DELETE:
-    r = RemoveUTF8CharAfter(text, pos);
+    RemoveUTF8CharAfter(text, pos);
     break;
+
   default:
     if (SDL_GetModState()&(KMOD_CTRL|KMOD_META))
       r = processModifier(text, pos, key);
