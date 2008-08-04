@@ -19,13 +19,17 @@
  * Tabs
  *****************************************************************************/
 
+#include "include/app.h"
 #include "graphic/colors.h"
 #include "graphic/font.h"
 #include "graphic/text.h"
+#include "graphic/video.h"
 #include "gui/box.h"
 #include "gui/button.h"
 #include "gui/tabs.h"
 #include "tool/resource_manager.h"
+
+#define TAB_MIN_WIDTH 200
 
 static Point2i widget_size(150, 150);
 
@@ -48,10 +52,10 @@ public:
   const std::string& GetId() const { return id; };
 };
 
-#define CIRCULAR_TABS   1
+#define CIRCULAR_TABS   0
 
 MultiTabs::MultiTabs(const Point2i& size):
-  Widget(size), current_tab(NULL)
+  Widget(size), current_tab(-1), first_tab(0), nb_visible_tabs(1), tab_header_width(TAB_MIN_WIDTH)
 {
   tab_size = Point2i(size.x, size.y - 32);
 
@@ -59,8 +63,6 @@ MultiTabs::MultiTabs(const Point2i& size):
 
   prev_tab_bt = new Button(res, "menu/really_big_minus", false);
   next_tab_bt = new Button(res, "menu/really_big_plus", false);
-
-  current_tab_title = new Text("No tab!", primary_red_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true);
 
   Widget::SetBorder(defaultOptionColorRect, 2);
   Widget::SetBackgroundColor(defaultOptionColorBox);
@@ -70,7 +72,7 @@ MultiTabs::MultiTabs(const Point2i& size):
 
 MultiTabs::~MultiTabs()
 {
-  for(std::list<Tab>::iterator t=tabs.begin();
+  for(std::vector<Tab>::iterator t=tabs.begin();
       t != tabs.end();
       t++)
     delete t->box;
@@ -78,53 +80,56 @@ MultiTabs::~MultiTabs()
   tabs.clear();
 }
 
-void MultiTabs::SetCurrentTab(Tab* _tab)
+void MultiTabs::SelectTab(uint current)
 {
-  ASSERT(_tab != NULL);
+  ASSERT(!tabs.empty());
 
-  if (current_tab != _tab) {
-    current_tab = _tab;
-    current_tab_title->Set(current_tab->GetTitle());
+  if (current >= tabs.size())
+    return;
+
+  if (current_tab != (int)current) {
+    current_tab = current;
+
+    // update first_tab to be sure that current tab will be visible
+    if (current_tab < int(first_tab))
+      first_tab = current_tab;
+    else if (current_tab > int(first_tab + nb_visible_tabs -1))
+      first_tab = current_tab - nb_visible_tabs + 1;
+
+    NeedRedrawing();
   }
-  NeedRedrawing();
 }
 
 void MultiTabs::PrevTab()
 {
-  if (current_tab == &(tabs.front()))
+  if (tabs.empty())
+    return;
+
+  if (current_tab == 0)
   {
 #if CIRCULAR_TABS
-    SetCurrentTab(&tabs.back());
+    SelectTab(tabs.size()-1);
 #endif
     return;
   }
 
-  std::list<Tab>::reverse_iterator it;
-  for (it = tabs.rbegin(); it != tabs.rend(); it++)
-    if ( &(*it) == current_tab)
-      break;
-
-  it++;
-  SetCurrentTab( &(*it));
+  SelectTab(current_tab-1);
 }
 
 void MultiTabs::NextTab()
 {
-  if (current_tab == &(tabs.back()))
+  if (tabs.empty())
+    return;
+
+  if (current_tab == int(tabs.size()-1))
   {
 #if CIRCULAR_TABS
-    SetCurrentTab(&tabs.front());
+    SelectTab(0);
 #endif
     return;
   }
 
-  std::list<Tab>::iterator it;
-  for (it = tabs.begin(); it != tabs.end(); it++) {
-    if ( &(*it) == current_tab)
-      break;
-  }
-  it++;
-  SetCurrentTab( &(*it));
+  SelectTab(current_tab+1);
 }
 
 void MultiTabs::AddNewTab(const std::string& id, const std::string& title, Widget * w)
@@ -133,38 +138,57 @@ void MultiTabs::AddNewTab(const std::string& id, const std::string& title, Widge
   tabs.push_back(tab);
   w->SetContainer(this);
 
-  SetCurrentTab(&(tabs.front()));
+  SelectTab(0);
 }
 
 void MultiTabs::DrawHeader(const Point2i &mousePosition) const
 {
+  if (tabs.empty())
+    return;
+
   // Draw the buttons to change tab
-  if (tabs.size() != 1)
+  if (nb_visible_tabs < tabs.size()) {
 #if !CIRCULAR_TABS
-  if (current_tab != &(tabs.front()))
+    if (first_tab != 0)
 #endif
-    prev_tab_bt->Draw(mousePosition);
+      prev_tab_bt->Draw(mousePosition);
 
-  if (tabs.size() != 1)
 #if !CIRCULAR_TABS
-  if (current_tab != &(tabs.back()))
+    if (first_tab + nb_visible_tabs -1 != tabs.size()-1)
 #endif
-    next_tab_bt->Draw(mousePosition);
+      next_tab_bt->Draw(mousePosition);
+  }
 
-  // Draw the title of the current tab
-  uint center_x = (prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX()
-		 + next_tab_bt->GetPositionX() )/2;
-  current_tab_title->DrawCenterTop(Point2i(center_x, position.y) + 5);
+  for (uint i = first_tab; i < first_tab + nb_visible_tabs; i++) {
+
+    // Draw the title
+    uint pos_x = prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX() + 5
+      + (i-first_tab)*tab_header_width + tab_header_width/2;
+
+    if (int(i) == current_tab) {
+      Text tab_title(tabs.at(i).GetTitle(), primary_red_color,
+		     Font::FONT_MEDIUM, Font::FONT_BOLD, true);
+
+      tab_title.DrawCenterTop(Point2i(pos_x, position.y + 3) + 5);
+    } else {
+      Text tab_title(tabs.at(i).GetTitle(), dark_gray_color,
+		     Font::FONT_MEDIUM, Font::FONT_BOLD, true);
+
+      tab_title.DrawCenterTop(Point2i(pos_x, position.y + 3) + 5);
+    }
+  }
 }
 
 void MultiTabs::Draw(const Point2i &mousePosition) const
 {
+  if (tabs.empty())
+    return;
+
   // Draw the header
   DrawHeader(mousePosition);
 
   // Draw the current tab
-  if (current_tab)
-    current_tab->box->Draw(mousePosition);
+  tabs.at(current_tab).box->Draw(mousePosition);
 }
 
 void MultiTabs::Update(const Point2i &mousePosition,
@@ -183,8 +207,8 @@ void MultiTabs::Update(const Point2i &mousePosition,
     DrawHeader(mousePosition);
   }
 
-  if (current_tab)
-    current_tab->box->Update(mousePosition, lastMousePosition);
+  if (!tabs.empty())
+    tabs.at(current_tab).box->Update(mousePosition, lastMousePosition);
 
   need_redrawing = false;
 }
@@ -193,8 +217,8 @@ void MultiTabs::Pack()
 {
   // Update buttons position
   uint margin = 5;
-  prev_tab_bt->SetPosition(position.x + margin, position.y);
-  next_tab_bt->SetPosition(position.x + size.x - margin - next_tab_bt->GetSizeX(), position.y);
+  prev_tab_bt->SetPosition(position.x + margin, position.y + 2);
+  next_tab_bt->SetPosition(position.x + size.x - margin - next_tab_bt->GetSizeX(), position.y + 2);
 
   // Update tabs position
   Point2i tab_pos(position.x + margin,
@@ -202,35 +226,44 @@ void MultiTabs::Pack()
   Point2i tab_size(size.x - 2*margin,
 		   size.y - GetHeaderHeight() - margin);
 
-  std::list<Tab>::iterator it;
+  std::vector<Tab>::iterator it;
   for (it = tabs.begin(); it != tabs.end(); it++)
     {
       (*it).box->SetPosition(tab_pos);
       (*it).box->SetSize(tab_size);
       (*it).box->Pack();
     }
+
+  // Compute how many tabs can be displayed
+  nb_visible_tabs = std::min(tabs.size(), uint(GetSizeX() / TAB_MIN_WIDTH));
+  if (nb_visible_tabs == 0)
+    nb_visible_tabs = 1;
+
+  // Compute tab size in the header
+  tab_header_width = ((next_tab_bt->GetPositionX() -
+		       (prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX()) - 10))/ nb_visible_tabs;
 }
 
 void MultiTabs::NeedRedrawing()
 {
   need_redrawing = true;
 
-  if (current_tab)
-    current_tab->box->NeedRedrawing();
+  if (!tabs.empty())
+    tabs.at(current_tab).box->NeedRedrawing();
 }
 
 bool MultiTabs::SendKey(const SDL_keysym& key)
 {
-  if (current_tab)
-    return current_tab->box->SendKey(key);
+  if (!tabs.empty())
+    return tabs.at(current_tab).box->SendKey(key);
 
   return false;
 }
 
 Widget* MultiTabs::Click(const Point2i &mousePosition, uint button)
 {
-  if (current_tab)
-    return current_tab->box->Click(mousePosition, button);
+  if (!tabs.empty())
+    return tabs.at(current_tab).box->Click(mousePosition, button);
 
   return NULL;
 }
@@ -244,40 +277,44 @@ Widget* MultiTabs::ClickUp(const Point2i &mousePosition, uint button)
 			   size.x,
 			   prev_tab_bt->GetSizeY());
 
-    if (button == SDL_BUTTON_LEFT && prev_tab_bt->Contains(mousePosition)) {
-      PrevTab();
-      return this;
+    if (rect_header.Contains(mousePosition)) {
 
-    } else if (button == SDL_BUTTON_LEFT && next_tab_bt->Contains(mousePosition)) {
-      NextTab();
-      return this;
+	if (button == SDL_BUTTON_LEFT && prev_tab_bt->Contains(mousePosition)) {
+	  PrevTab();
 
-    } else if (button == SDL_BUTTON_WHEELDOWN && rect_header.Contains(mousePosition)) {
-      PrevTab();
-      return this;
+	} else if (button == SDL_BUTTON_LEFT && next_tab_bt->Contains(mousePosition)) {
+	  NextTab();
 
-    } else if (button == SDL_BUTTON_WHEELUP && rect_header.Contains(mousePosition)) {
-      NextTab();
-      return this;
-    }
+	} else if (button == SDL_BUTTON_WHEELDOWN) {
+	  PrevTab();
+
+	} else if (button == SDL_BUTTON_WHEELUP) {
+	  NextTab();
+
+	} else if (nb_visible_tabs > 1 && button == SDL_BUTTON_LEFT) {
+	  uint clicked_tab = (mousePosition.x - position.x)/tab_header_width + first_tab;
+	  SelectTab(clicked_tab);
+
+	}
+	return this;
+      }
   }
 
-  if (current_tab)
-    return current_tab->box->ClickUp(mousePosition, button);
+  if (!tabs.empty())
+    return tabs.at(current_tab).box->ClickUp(mousePosition, button);
 
   return NULL;
 }
 
 const std::string& MultiTabs::GetCurrentTabId() const
 {
-  ASSERT(current_tab);
-  return current_tab->GetId();
+  ASSERT(!tabs.empty());
+  return tabs.at(current_tab).GetId();
 }
 
 uint MultiTabs::GetHeaderHeight() const
 {
-  uint header_h = std::max(current_tab_title->GetHeight(),
-			   prev_tab_bt->GetSizeY());
+  uint header_h = prev_tab_bt->GetSizeY();
   header_h += 5;
   return header_h;
 }

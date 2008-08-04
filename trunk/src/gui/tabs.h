@@ -22,7 +22,7 @@
 #ifndef GUI_TABS_H
 #define GUI_TABS_H
 
-#include <list>
+#include <vector>
 #include "include/base.h"
 #include "gui/widget.h"
 
@@ -34,15 +34,18 @@ class Tab;
 class MultiTabs : public Widget
 {
 private:
-  std::list<Tab> tabs;
-  Tab* current_tab;
-  Text *current_tab_title;
+  std::vector<Tab> tabs;
+
+  int current_tab;
+  uint first_tab;
+  uint nb_visible_tabs;
+  uint tab_header_width;
 
   Button* prev_tab_bt;
   Button* next_tab_bt;
   Point2i tab_size;
 
-  void SetCurrentTab(Tab* _tab);
+  void SelectTab(uint current);
 
   void PrevTab();
   void NextTab();
