@@ -269,7 +269,7 @@
 	<image file="black_head.png"/>
 	<anchor dx="10" dy="20"/>
 	<attached member_type="horns" frame="*" dx="12" dy="12"/>
-	<attached member_type="hair" frame="*" dx="23" dy="23"/>
+	<attached member_type="hair" frame="*" dx="14" dy="15"/>
 	<attached member_type="helmet" frame="*" dx="11" dy="10"/>
 	<attached member_type="construct" frame="*" dx="13" dy="9"/>
 	<attached member_type="noze" frame="*" dx="16" dy="13"/>
@@ -279,7 +279,7 @@
 <!-- ###### Hair ###### -->
 <sprite name="hair-black" type="hair">
 	<image file="black_hair.png"/>
-	<anchor dx="12" dy="12"/>
+	<anchor dx="23" dy="23"/>
 </sprite>
 
 <!-- ###### Horns ###### -->
