@@ -9,7 +9,10 @@
   </sprite>
 
   <sprite name="smoke_explosion">
-    <image file="object/smoke3.png" />
+    <image file="object/smoke3.png">
+      <grid pos="0,0" size="150,150" array="4,1"/>
+    </image>
+    <animation speed="50"/>
   </sprite>
 
   <sprite name="ill_bubble">
