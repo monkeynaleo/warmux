@@ -42,7 +42,7 @@ Button::~Button()
 
 void Button::Draw(const Point2i &mousePosition) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  Surface& surf = GetMainWindow();
 
   uint frame = (IsHighlighted() || Contains(mousePosition));
 

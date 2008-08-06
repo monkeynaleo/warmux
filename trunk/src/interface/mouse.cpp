@@ -291,7 +291,7 @@ void Mouse::Draw() const
 
   const MouseCursor& cursor = GetCursor(current_pointer);
   const Surface& surf = cursor.GetSurface();
-  AppWormux::GetInstance()->video->window.Blit(surf, GetPosition() - cursor.GetClicPos());
+  GetMainWindow().Blit(surf, GetPosition() - cursor.GetClicPos());
   world.ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetClicPos().x,
                                     GetPosition().y - cursor.GetClicPos().y,
 				    surf.GetWidth(), surf.GetHeight()));
@@ -316,8 +316,8 @@ void Mouse::Hide()
 // Center the pointer on the screen
 void Mouse::CenterPointer()
 {
-  SetPosition(Point2i(AppWormux::GetInstance()->video->window.GetWidth() / 2,
-		      AppWormux::GetInstance()->video->window.GetHeight() / 2));
+  SetPosition(Point2i(GetMainWindow().GetWidth() / 2,
+		      GetMainWindow().GetHeight() / 2));
 }
 
 void Mouse::SetPosition(Point2i pos)

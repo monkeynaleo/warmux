@@ -51,7 +51,7 @@ void Sky::Draw(bool redraw_all)
 {
   if(last_pos != Camera::GetInstance()->GetPosition() || redraw_all) {
     last_pos = Camera::GetInstance()->GetPosition();
-    RedrawParticle(Rectanglei(Camera::GetInstance()->GetPosition(), AppWormux::GetInstance()->video->window.GetSize()));
+    RedrawParticle(Rectanglei(Camera::GetInstance()->GetPosition(), GetMainWindow().GetSize()));
     return;
   }
 
@@ -71,18 +71,18 @@ void Sky::RedrawParticle(const Rectanglei &particle) const
 {
   Rectanglei ds(GetSkyPos() + particle.GetPosition() - Camera::GetInstance()->GetPosition(),
                 particle.GetSize());
-  AppWormux::GetInstance()->video->window.Blit(image, ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
+  GetMainWindow().Blit(image, ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
 }
 
 Point2i Sky::GetSkyPos() const
 {
   Point2i min(0, 0);
-  Point2i max = image.GetSize() - AppWormux::GetInstance()->video->window.GetSize();
+  Point2i max = image.GetSize() - GetMainWindow().GetSize();
   Point2i tmp = Camera::GetInstance()->GetPosition();
   int w_w = world.GetWidth();
   int w_h = world.GetHeight();
-  int v_w = AppWormux::GetInstance()->video->window.GetWidth();
-  int v_h = AppWormux::GetInstance()->video->window.GetHeight();
+  int v_w = GetMainWindow().GetWidth();
+  int v_h = GetMainWindow().GetHeight();
   double x_sky = (double)(tmp.x) / (double)(w_w - v_w);
   double y_sky = (double)(tmp.y) / (double)(w_h - v_h);
   return max * Point2d(x_sky, y_sky);

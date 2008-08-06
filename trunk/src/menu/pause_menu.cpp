@@ -41,12 +41,12 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
   Menu("interface/quit_screen", vNo),
   exit_game(_exit_game)
 {
-  uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
-  uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
+  uint center_x = GetMainWindow().GetWidth()/2;
+  uint center_y = GetMainWindow().GetHeight()/2;
 
   Point2i size(100,100);
 
-  Box* box = new GridBox(AppWormux::GetInstance()->video->window.GetWidth()/2, size, true);
+  Box* box = new GridBox(GetMainWindow().GetWidth()/2, size, true);
 
   bt_continue_play = new ButtonPic(_("Back to battle"),
 				   "menu/ico_back_to_battle", size);

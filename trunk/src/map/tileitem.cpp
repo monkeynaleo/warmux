@@ -49,14 +49,14 @@ void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 void TileItem_AlphaSoftware::Draw(const Point2i &pos){
-  AppWormux::GetInstance()->video->window.Blit(GetSurface(),
+  GetMainWindow().Blit(GetSurface(),
         pos * CELL_SIZE - Camera::GetInstance()->GetPosition());
 }
 
 void TileItem_Empty::Draw(const Point2i &/*pos*/)
 {
 #ifdef DBG_TILE
-  AppWormux::GetInstance()->video->window.FillRect(Rectanglei(pos * CELL_SIZE - Camera::GetInstance()->GetPosition(),CELL_SIZE), c_red);
+  GetMainWindow().FillRect(Rectanglei(pos * CELL_SIZE - Camera::GetInstance()->GetPosition(),CELL_SIZE), c_red);
 #endif
 }
 // === Implemenation of TileItem_Software_ALpha ==============================

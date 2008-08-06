@@ -203,7 +203,7 @@ void Tile::InitPreview()
 {
   Point2i offset     =  m_upper_left_offset + m_lower_right_offset;
   Point2i world_size = size - offset;
-  m_last_video_size = AppWormux::GetInstance()->video->window.GetSize();
+  m_last_video_size = GetMainWindow().GetSize();
   m_shift = 0;
   while (world_size > m_last_video_size/4)
   {
@@ -223,7 +223,7 @@ void Tile::InitPreview()
 // Rerender all of the preview
 void Tile::CheckPreview()
 {
-  if (AppWormux::GetInstance()->video->window.GetSize() == m_last_video_size)
+  if (GetMainWindow().GetSize() == m_last_video_size)
     return;
 
   InitPreview();
@@ -336,7 +336,7 @@ void Tile::DrawTile_Clipped(Rectanglei worldClip) const
         Point2i ptDest = destRect.GetPosition() - Camera::GetInstance()->GetPosition();
         Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
 
-        AppWormux::GetInstance()->video->window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest);
+        GetMainWindow().Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest);
       }
     }
 }

@@ -68,7 +68,7 @@ void SpinButtonWithPicture::Pack()
 
 void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  Surface& surf = GetMainWindow();
 
   //  the computed positions are to center on the image part of the widget
 

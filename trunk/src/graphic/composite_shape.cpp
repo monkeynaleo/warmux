@@ -65,7 +65,7 @@ void CompositeShape::DrawOnScreen()
   int i = 0;
   for(std::vector<Polygon *>::iterator poly = layers.begin();
       poly != layers.end(); poly++, i++) {
-    (*poly)->Draw(&AppWormux::GetInstance()->video->window);
+    (*poly)->Draw(&GetMainWindow());
     if(i == 0) {
       min = (*poly)->GetMin();
       max = (*poly)->GetMax();

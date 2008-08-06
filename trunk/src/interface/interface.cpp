@@ -300,7 +300,7 @@ void Interface::DrawTeamEnergy() const
 // Draw map preview
 void Interface::DrawMapPreview()
 {
-  Surface& window  = AppWormux::GetInstance()->video->window;
+  Surface& window  = GetMainWindow();
   const Surface* preview = world.ground.GetPreview();
   Point2i  offset(window.GetWidth() - world.ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
   window.Blit(*preview, world.ground.GetPreviewRect(), offset);
@@ -435,7 +435,7 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
   Rectanglei rectSource(rectSurface.GetPosition() - pos, rectSurface.GetSize());
   Point2i ptDest = rectSurface.GetPosition() - Camera::GetInstance()->GetPosition();
 
-  AppWormux::GetInstance()->video->window.Blit(s, rectSource, ptDest);
+  GetMainWindow().Blit(s, rectSource, ptDest);
 }
 
 void HideGameInterface()

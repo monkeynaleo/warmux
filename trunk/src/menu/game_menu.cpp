@@ -50,7 +50,7 @@ GameMenu::GameMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i stdSize(130, W_UNDEF);
 
-  Surface& window = AppWormux::GetInstance()->video->window;
+  Surface& window = GetMainWindow();
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;

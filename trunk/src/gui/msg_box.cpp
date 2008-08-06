@@ -80,7 +80,7 @@ void MsgBox::NewMessage(const std::string &msg, const Color& color)
 
 void MsgBox::Draw(const Point2i &/*mousePosition*/) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  Surface& surf = GetMainWindow();
 
   // Draw the border
   surf.BoxColor(*this, defaultOptionColorBox);

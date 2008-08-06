@@ -290,8 +290,8 @@ void WeaponsMenu::RefreshWeaponList()
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 {
   // Init animation parameter
-  Point2d start(AppWormux::GetInstance()->video->window.GetWidth(), 0);
-  Point2i pos(AppWormux::GetInstance()->video->window.GetSize() / 2 + Point2i((int)(tools_menu->GetWidth() / 2) + 10, 0));
+  Point2d start(GetMainWindow().GetWidth(), 0);
+  Point2i pos(GetMainWindow().GetSize() / 2 + Point2i((int)(tools_menu->GetWidth() / 2) + 10, 0));
   Point2d end(POINT2I_2_POINT2D(pos));
   double zoom_start = 0.2, zoom_end = 1.0;
   double angle_start = M_PI * GetRotationTime(), angle_end = 0.0;
@@ -308,7 +308,7 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 {
   // Init animation parameter
   Point2d start(0, 0);
-  Point2i pos(AppWormux::GetInstance()->video->window.GetSize() / 2 - Point2i((int)(weapons_menu->GetWidth() / 2) + 10, 0));
+  Point2i pos(GetMainWindow().GetSize() / 2 - Point2i((int)(weapons_menu->GetWidth() / 2) + 10, 0));
   Point2d end(POINT2I_2_POINT2D(pos));
   double zoom_start = 0.2, zoom_end = 1.0;
   double angle_start = -M_PI * GetRotationTime(), angle_end = 0.0;

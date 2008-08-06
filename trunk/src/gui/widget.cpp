@@ -68,7 +68,7 @@ Widget::Widget(const Point2i &size):
 // From Container: it redraws the border and the background
 void Widget::RedrawBackground(const Rectanglei& rect)
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  Surface& surf = GetMainWindow();
 
   if (ct != NULL)
     ct->RedrawBackground(rect);

@@ -107,7 +107,7 @@ void Construct::Draw()
     {
       Rectanglei test_rect(dst - construct_spr->GetSizeMax() / 2, construct_spr->GetSizeMax());
       test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-      AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
+      GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
     }
 #endif
   }

@@ -270,7 +270,7 @@ void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos
     txt_before_cursor.Set(GetText().substr(0, cursor_pos));
     txt_width = txt_before_cursor.GetWidth();
   }
-  AppWormux::GetInstance()->video->window.VlineColor(text_pos.GetX()+txt_width,
+  GetMainWindow().VlineColor(text_pos.GetX()+txt_width,
 						     text_pos.GetY()+2,
 						     text_pos.GetY()+GetHeight()-4, c_white);
 }

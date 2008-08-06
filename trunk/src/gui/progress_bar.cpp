@@ -133,7 +133,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
     image.FillRect( r_marq, it->color);
   }
   Rectanglei dst(pos.x, pos.y, larg, haut);
-  AppWormux::GetInstance()->video->window.Blit(image, pos);
+  GetMainWindow().Blit(image, pos);
 
   world.ToRedrawOnScreen(dst);
 }

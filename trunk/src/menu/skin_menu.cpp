@@ -44,7 +44,7 @@ SkinMenu::SkinMenu(const char* name)
  , frame(NULL)
  , body(NULL)
 {
-  uint size = AppWormux::GetInstance()->video->window.GetHeight()
+  uint size = GetMainWindow().GetHeight()
             - (2*BORDER+CHECKBOX_SIZE+SKIN_SIZE);
   Box  *box = new HBox(size);
 

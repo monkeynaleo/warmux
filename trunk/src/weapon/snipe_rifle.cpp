@@ -185,10 +185,10 @@ void SnipeRifle::DrawBeam()
   Point2i pos2 = targeted_point - Camera::GetInstance()->GetPosition();
   float dst = laser_beam_start.Distance(targeted_point);
 
-  AppWormux::GetInstance()->video->window.
+  GetMainWindow().
     AAFadingLineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color, Color(255, 0, 0, 0));
 
-  // AppWormux::GetInstance()->video->window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
+  // GetMainWindow().AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
 
   // Set area of the screen to be redrawn:
   // Splited into little rectangles to avoid too large area of redraw

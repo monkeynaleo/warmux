@@ -553,7 +553,7 @@ void Weapon::Draw(){
   }
 
   if ( m_image )
-    m_image->Blit( AppWormux::GetInstance()->video->window, Point2i(x, y) - Camera::GetInstance()->GetPosition());
+    m_image->Blit( GetMainWindow(), Point2i(x, y) - Camera::GetInstance()->GetPosition());
 
 #ifdef DEBUG
   if (IsLOGGING("weapon")) {
@@ -564,7 +564,7 @@ void Weapon::Draw(){
 
     world.ToRedrawOnMap(rect);
 
-    AppWormux::GetInstance()->video->window.RectangleColor(rect, c_red);
+    GetMainWindow().RectangleColor(rect, c_red);
 
     MSG_DEBUG("weapon.handposition", "Position: %d, %d - hand: %d, %d",
 	      ActiveCharacter().GetX(),
@@ -579,7 +579,7 @@ void Weapon::Draw(){
       	    	  3, 3);
 
   world.ToRedrawOnMap(rect);
-  AppWormux::GetInstance()->video->window.RectangleColor(rect, c_red);
+  GetMainWindow().RectangleColor(rect, c_red);
 
 //  rect = Rectangle(
 #endif

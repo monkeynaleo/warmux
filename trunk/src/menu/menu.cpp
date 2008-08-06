@@ -172,13 +172,13 @@ void Menu::DisplayError(const std::string &msg)
 
 void Menu::DrawBackground()
 {
-  background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());
-  background->Blit(AppWormux::GetInstance()->video->window, 0, 0);
+  background->ScaleSize(GetMainWindow().GetSize());
+  background->Blit(GetMainWindow(), 0, 0);
 }
 
 void Menu::RedrawBackground(const Rectanglei& rect)
 {
-  background->Blit(AppWormux::GetInstance()->video->window, rect, rect.GetPosition());
+  background->Blit(GetMainWindow(), rect, rect.GetPosition());
 }
 
 void Menu::RedrawMenu()

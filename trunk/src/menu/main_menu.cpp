@@ -52,7 +52,7 @@ MainMenu::~MainMenu()
 MainMenu::MainMenu() :
     Menu("main_menu/bg_main", vNo)
 {
-  uint window_width = AppWormux::GetInstance()->video->window.GetWidth();
+  uint window_width = GetMainWindow().GetWidth();
 
   Point2i size(120,110);
   Box* box = new GridBox(window_width, size, true);
@@ -80,8 +80,8 @@ MainMenu::MainMenu() :
   // We must "pack" all the widgets before centering the box to compute its size
   box->Pack();
 
-  uint center_x = AppWormux::GetInstance()->video->window.GetWidth()/2;
-  uint center_y = AppWormux::GetInstance()->video->window.GetHeight()/2;
+  uint center_x = GetMainWindow().GetWidth()/2;
+  uint center_y = GetMainWindow().GetHeight()/2;
   box->SetPosition(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
 
   widgets.Pack();
@@ -167,7 +167,7 @@ bool MainMenu::signal_ok()
 
 void MainMenu::DrawBackground()
 {
-  Surface& window = AppWormux::GetInstance()->video->window;
+  Surface& window = GetMainWindow();
 
   Menu::DrawBackground();
 

@@ -28,7 +28,8 @@
 #include "tool/i18n.h"
 
 
-Video::Video(){
+Video::Video()
+{
   SetMaxFps (50);
   fullscreen = false;
   SDLReady = false;
@@ -57,7 +58,8 @@ Video::Video(){
   ComputeAvailableConfigs();
 }
 
-Video::~Video(){
+Video::~Video()
+{
   if (icon)
     SDL_FreeSurface(icon);
   if( SDLReady )
@@ -65,7 +67,8 @@ Video::~Video(){
   SDLReady = false;
 }
 
-void Video::SetMaxFps(uint max_fps){
+void Video::SetMaxFps(uint max_fps)
+{
   m_max_fps = max_fps;
   if (0 < m_max_fps)
     m_max_delay = 1000/m_max_fps;
@@ -132,7 +135,8 @@ void Video::ComputeAvailableConfigs()
   }
 }
 
-bool Video::SetConfig(const int width, const int height, const bool _fullscreen){
+bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
+{
 #ifdef __APPLE__
   int flag = 0; // Never set fullscreen with OSX, as it's buggy
 #else
@@ -181,16 +185,19 @@ void Video::ToggleFullscreen()
 #endif
 }
 
-void Video::SetWindowCaption(const std::string& caption) const {
+void Video::SetWindowCaption(const std::string& caption) const
+{
   SDL_WM_SetCaption( caption.c_str(), NULL );
 }
 
-void Video::SetWindowIcon(const std::string& filename) {
+void Video::SetWindowIcon(const std::string& filename)
+{
   icon = IMG_Load(filename.c_str());
   SDL_WM_SetIcon( icon, NULL );
 }
 
-void Video::InitSDL(){
+void Video::InitSDL()
+{
   if( SDLReady )
     return;
 
@@ -203,7 +210,12 @@ void Video::InitSDL(){
   SDLReady = true;
 }
 
-void Video::Flip(){
+void Video::Flip()
+{
   window.Flip();
 }
 
+Surface& GetMainWindow()
+{
+  return AppWormux::GetInstance()->video->window;
+}

@@ -156,7 +156,7 @@ void Font::SetItalic()
 }
 
 void Font::Write(const Point2i& pos, const Surface &surface) const {
-  AppWormux::GetInstance()->video->window.Blit(surface, pos);
+  GetMainWindow().Blit(surface, pos);
 
   // TODO: Remove this line! (and use GameFont instead of Font)
   world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );

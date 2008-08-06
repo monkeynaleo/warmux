@@ -176,11 +176,11 @@ void Question::Set (const std::string &pmessage,
     Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
     background = new Sprite(resource_manager.LoadImage(res,bg_sprite), true);
     background->cache.EnableLastFrameCache();
-    background->ScaleSize(AppWormux::GetInstance()->video->window.GetSize());
+    background->ScaleSize(GetMainWindow().GetSize());
     resource_manager.UnLoadXMLProfile( res);
   }
   else
   {
-    text->SetMaxWidth(AppWormux::GetInstance()->video->window.GetWidth()/2);
+    text->SetMaxWidth(GetMainWindow().GetWidth()/2);
   }
 }

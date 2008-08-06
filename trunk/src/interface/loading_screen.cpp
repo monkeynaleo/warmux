@@ -54,8 +54,8 @@ LoadingScreen::~LoadingScreen()
 
 void LoadingScreen::DrawBackground()
 {
-  loading_bg->ScaleSize(AppWormux::GetInstance()->video->window.GetWidth(), AppWormux::GetInstance()->video->window.GetHeight());
-  loading_bg->Blit( AppWormux::GetInstance()->video->window, 0, 0);
+  loading_bg->ScaleSize(GetMainWindow().GetWidth(), GetMainWindow().GetHeight());
+  loading_bg->Blit( GetMainWindow(), 0, 0);
   AppWormux::GetInstance()->video->Flip();
 }
 
@@ -65,14 +65,14 @@ void LoadingScreen::StartLoading(uint nb, const std::string& resource,
   const Surface& image = resource_manager.LoadImage(res, "loading_screen/"+resource);
 
   int slot_margin_x = (120/2 - image.GetWidth()/2);
-  int x = (AppWormux::GetInstance()->video->window.GetWidth()/2)- (3*120) + nb*120;
-  int y = (AppWormux::GetInstance()->video->window.GetHeight()/2)+40;
+  int x = (GetMainWindow().GetWidth()/2)- (3*120) + nb*120;
+  int y = (GetMainWindow().GetHeight()/2)+40;
 
   Rectanglei dest ( x+slot_margin_x,
                     y,
                     image.GetWidth(),
                     image.GetHeight() );
-  AppWormux::GetInstance()->video->window.Blit( image, dest.GetPosition());
+  GetMainWindow().Blit( image, dest.GetPosition());
 
   Font::GetInstance(Font::FONT_MEDIUM)->WriteCenter(Point2i(x+120/2, y+80), label, white_color);
 

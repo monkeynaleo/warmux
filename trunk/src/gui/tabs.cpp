@@ -172,7 +172,7 @@ void MultiTabs::DrawHeader(const Point2i &mousePosition) const
       tab_title.DrawCenterTop(Point2i(pos_x, position.y + 3) + 5);
     } else {
       Text tab_title(tabs.at(i).GetTitle(), dark_gray_color,
-		     Font::FONT_MEDIUM, Font::FONT_BOLD, true);
+		     Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
       tab_title.DrawCenterTop(Point2i(pos_x, position.y + 3) + 5);
     }

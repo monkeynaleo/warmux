@@ -78,7 +78,7 @@ void PictureWidget::SetNoSurface()
 
 void PictureWidget::Draw(const Point2i &/*mousePosition*/) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  Surface& surf = GetMainWindow();
 
   if (spr != NULL) {
     int x = GetPositionX() + ( GetSizeX()/2 ) - (spr->GetWidth()/2);

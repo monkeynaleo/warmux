@@ -248,10 +248,10 @@ void WeaponProjectile::Draw()
   {
     Rectanglei test_rect(GetTestRect());
     test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    AppWormux::GetInstance()->video->window.RectangleColor(test_rect, primary_red_color, 1);
+    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
 
     Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSizeMax());
-    AppWormux::GetInstance()->video->window.RectangleColor(rect, primary_blue_color, 1);
+    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
   }
 #endif
 }
@@ -471,11 +471,11 @@ void WeaponLauncher::Draw()
   {
     Point2i p = ActiveCharacter().GetHandPosition() - Camera::GetInstance()->GetPosition();
     // Red color for the blast range (should be superior to the explosion_range)
-    AppWormux::GetInstance()->video->window.CircleColor(p.x, p.y, (int)cfg->blast_range, c_red);
+    GetMainWindow().CircleColor(p.x, p.y, (int)cfg->blast_range, c_red);
     // Yellow color for the blast range (should be superior to the explosion_range)
-    AppWormux::GetInstance()->video->window.CircleColor(p.x, p.y, (int)cfg->explosion_range, c_black);
+    GetMainWindow().CircleColor(p.x, p.y, (int)cfg->explosion_range, c_black);
   }
-  AppWormux::GetInstance()->video->window.CircleColor(GetGunHolePosition().x-Camera::GetInstance()->GetPositionX(), GetGunHolePosition().y-Camera::GetInstance()->GetPositionY(), 5, c_black);
+  GetMainWindow().CircleColor(GetGunHolePosition().x-Camera::GetInstance()->GetPositionX(), GetGunHolePosition().y-Camera::GetInstance()->GetPositionY(), 5, c_black);
 #endif
 }
 

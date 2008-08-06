@@ -53,7 +53,7 @@ void GameMessages::Draw(){
   uint msgy = 50;
 
   for( iterator i=liste.begin(); i != liste.end(); ++i ){
-    (*i)->DrawCenterTop(Point2i(AppWormux::GetInstance()->video->window.GetWidth()/2, msgy));
+    (*i)->DrawCenterTop(Point2i(GetMainWindow().GetWidth()/2, msgy));
     msgy += HAUT_POLICE_MINI + INTERLIGNE_MINI;
   }
 }

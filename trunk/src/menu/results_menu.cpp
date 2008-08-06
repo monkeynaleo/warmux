@@ -261,7 +261,7 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
 
   int sx = x+lround((*it)->GetDuration()*duration_scale)+LINE_THICKNESS,
     sy = y-lround((*it)->GetValue()*energy_scale);
-  Surface &surface = AppWormux::GetInstance()->video->window;
+  Surface &surface = GetMainWindow();
   MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)\n",
             (*it)->GetDuration(), (*it)->GetValue(), sx, sy);
 
@@ -315,7 +315,7 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
   }
 
   // Draw here the graph and stuff
-  Surface &surface = AppWormux::GetInstance()->video->window;
+  Surface &surface = GetMainWindow();
   surface.BoxColor(Rectanglei(graph_x, y, LINE_THICKNESS, graph_h), black_color);
   surface.BoxColor(Rectanglei(graph_x, y+graph_h, graph_w, LINE_THICKNESS), black_color);
   //DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
@@ -398,7 +398,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   resource_manager.UnLoadXMLProfile(res);
 
   x+=260;
-  const Point2i& wsize = AppWormux::GetInstance()->video->window.GetSize();
+  const Point2i& wsize = GetMainWindow().GetSize();
 
   Point2i tab_size = wsize - Point2i(x+16, y+70);
 
@@ -462,12 +462,12 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_posit
   Surface team_character(team.GetFlag());
   //team_character.Flip(); ==> Why does it not work ?
 
-  AppWormux::GetInstance()->video->window.Blit(team_character, position);
+  GetMainWindow().Blit(team_character, position);
 }
 
 void ResultsMenu::DrawPodium(const Point2i& position) const
 {
-  AppWormux::GetInstance()->video->window.Blit(podium_img, position);
+  GetMainWindow().Blit(podium_img, position);
 
   if (first_team)
     DrawTeamOnPodium(*first_team, position, Point2i(60,8));

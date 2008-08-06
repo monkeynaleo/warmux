@@ -71,7 +71,7 @@ void CheckBox::Pack()
 
 void CheckBox::Draw(const Point2i &/*mousePosition*/) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  Surface& surf = GetMainWindow();
 
   txt_label->DrawTopLeft( GetPosition() );
 

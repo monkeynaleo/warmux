@@ -413,7 +413,7 @@ void Sprite::DrawXY(const Point2i &pos)
   if( !show )
     return;
 
-  Blit(AppWormux::GetInstance()->video->window, pos);
+  Blit(GetMainWindow(), pos);
 }
 
 void Sprite::Show() { show = true; }

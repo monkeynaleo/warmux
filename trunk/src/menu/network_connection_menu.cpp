@@ -86,11 +86,11 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i def_size(300, 20);
 
-  uint max_width = AppWormux::GetInstance()->video->window.GetWidth()-50;
+  uint max_width = GetMainWindow().GetWidth()-50;
 
   /* Tabs */
   tabs = new MultiTabs(Point2i(max_width,
-                               AppWormux::GetInstance()->video->window.GetHeight()-180));
+                               GetMainWindow().GetHeight()-180));
   tabs->SetPosition(25, 25);
 
   // #############################
@@ -226,7 +226,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   // Warning about experimental networking
   Point2i msg_box_pos(25, tabs->GetPositionY() + tabs->GetSizeY() + 10);
   Point2i msg_box_size(max_width,
-                       AppWormux::GetInstance()->video->window.GetHeight() - 50 - msg_box_pos.y);
+                       GetMainWindow().GetHeight() - 50 - msg_box_pos.y);
 
   msg_box = new MsgBox(msg_box_size, Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->SetPosition(msg_box_pos);

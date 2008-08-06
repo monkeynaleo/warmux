@@ -60,4 +60,6 @@ public:
   void Flip(void);
 };
 
+Surface& GetMainWindow();
+
 #endif

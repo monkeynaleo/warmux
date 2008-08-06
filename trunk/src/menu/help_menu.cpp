@@ -34,7 +34,7 @@ static const uint CHECKBOX_SIZE = 50;
 HelpMenu::HelpMenu()  :
   Menu("help/background", vOk)
 {
-  Point2i size = AppWormux::GetInstance()->video->window.GetSize()
+  Point2i size = GetMainWindow().GetSize()
                - Point2i(2*BORDER,2*BORDER+CHECKBOX_SIZE);
 
   std::string lang = Config::GetInstance()->GetLanguage();

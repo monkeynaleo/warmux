@@ -695,6 +695,6 @@ void Polygon::Draw(Surface * dest)
 
 void Polygon::DrawOnScreen()
 {
-  Draw(&AppWormux::GetInstance()->video->window);
+  Draw(&GetMainWindow());
   world.ToRedrawOnScreen(GetRectangleToRefresh());
 }

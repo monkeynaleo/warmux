@@ -152,7 +152,7 @@ void BaseListBox::__Update(const Point2i &mousePosition,
 
 void BaseListBox::Draw(const Point2i &mousePosition) const
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  Surface& surf = GetMainWindow();
   int item = MouseIsOnWhichItem(mousePosition);
 
   // Draw items
