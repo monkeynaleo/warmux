@@ -171,17 +171,19 @@ void MultiTabs::DrawHeader(const Point2i &mousePosition) const
 
       tab_title.DrawCenterTop(Point2i(pos_x + tab_header_width/2, position.y + 3) + 5);
 
-      GetMainWindow().LineColor(pos_x,
-				pos_x,
-				position.y +1,
-				position.y + GetHeaderHeight() - 2,
-				GetBorderColor());
+      if (nb_visible_tabs > 1) {
+	GetMainWindow().LineColor(pos_x,
+				  pos_x,
+				  position.y +1,
+				  position.y + GetHeaderHeight() - 2,
+				  GetBorderColor());
 
-      GetMainWindow().LineColor(pos_x + tab_header_width,
-				pos_x + tab_header_width,
-				position.y +1,
-				position.y + GetHeaderHeight() - 2,
-				GetBorderColor());
+	GetMainWindow().LineColor(pos_x + tab_header_width,
+				  pos_x + tab_header_width,
+				  position.y +1,
+				  position.y + GetHeaderHeight() - 2,
+				  GetBorderColor());
+      }
     } else {
       Text tab_title(tabs.at(i).GetTitle(), dark_gray_color,
 		     Font::FONT_MEDIUM, Font::FONT_BOLD, false);
@@ -194,6 +196,19 @@ void MultiTabs::DrawHeader(const Point2i &mousePosition) const
 				position.y + GetHeaderHeight() - 2,
 				GetBorderColor());
     }
+  }
+
+  if (nb_visible_tabs > 1) {
+    GetMainWindow().LineColor(position.x,
+			      prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX() + 5,
+			      position.y + GetHeaderHeight() - 2,
+			      position.y + GetHeaderHeight() - 2,
+			      GetBorderColor());
+    GetMainWindow().LineColor(next_tab_bt->GetPositionX() - 7,
+			      position.x + size.x - 2,
+			      position.y + GetHeaderHeight() - 2,
+			      position.y + GetHeaderHeight() - 2,
+			      GetBorderColor());
   }
 }
 
