@@ -43,7 +43,7 @@ class BlowtorchConfig : public WeaponConfig
 {
   public:
     BlowtorchConfig();
-    virtual void LoadXml(xmlNode* elem);
+    virtual void LoadXml(const xmlNode* elem);
 
     uint range;
 };
@@ -125,7 +125,7 @@ BlowtorchConfig& Blowtorch::cfg()
   return static_cast<BlowtorchConfig&>(*extra_params);
 }
 
-void BlowtorchConfig::LoadXml(xmlNode* elem)
+void BlowtorchConfig::LoadXml(const xmlNode* elem)
 {
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);

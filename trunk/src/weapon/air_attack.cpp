@@ -52,7 +52,7 @@ class AirAttackConfig : public ExplosiveWeaponConfig
     double speed;
     uint nbr_obus;
     AirAttackConfig();
-    virtual void LoadXml(xmlNode* elem);
+    virtual void LoadXml(const xmlNode* elem);
 };
 
 class Obus : public WeaponProjectile
@@ -271,7 +271,7 @@ AirAttackConfig::AirAttackConfig()
   speed = 7;
 }
 
-void AirAttackConfig::LoadXml(xmlNode* elem)
+void AirAttackConfig::LoadXml(const xmlNode* elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "nbr_obus", nbr_obus);

@@ -47,7 +47,7 @@ class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
   public:
     uint speed;
     SuperTuxWeaponConfig();
-    virtual void LoadXml(xmlNode* elem);
+    virtual void LoadXml(const xmlNode* elem);
 };
 //-----------------------------------------------------------------------------
 
@@ -200,7 +200,7 @@ SuperTuxWeaponConfig::SuperTuxWeaponConfig()
   speed = 2;
 }
 
-void SuperTuxWeaponConfig::LoadXml(xmlNode* elem)
+void SuperTuxWeaponConfig::LoadXml(const xmlNode* elem)
 {
   ExplosiveWeaponConfig::LoadXml (elem);
   XmlReader::ReadUint(elem, "speed", speed);

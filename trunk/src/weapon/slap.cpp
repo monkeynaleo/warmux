@@ -41,7 +41,7 @@ class SlapConfig : public WeaponConfig
     uint damage;
     uint strength;
     SlapConfig();
-    void LoadXml(xmlNode* elem);
+    void LoadXml(const xmlNode* elem);
 };
 
 SlapConfig& Slap::cfg() {
@@ -54,7 +54,7 @@ SlapConfig::SlapConfig(){
   strength = 10;
 }
 
-void SlapConfig::LoadXml(xmlNode* elem){
+void SlapConfig::LoadXml(const xmlNode* elem){
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
   XmlReader::ReadUint(elem, "damage", damage);

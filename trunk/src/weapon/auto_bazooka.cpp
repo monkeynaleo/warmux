@@ -49,7 +49,7 @@ class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
     double fuel_time;
     double rocket_force;
     AutomaticBazookaConfig();
-    void LoadXml(xmlNode* elem);
+    void LoadXml(const xmlNode* elem);
 };
 
 class RPG : public WeaponProjectile
@@ -315,7 +315,7 @@ AutomaticBazookaConfig::AutomaticBazookaConfig() {
     rocket_force = 2500;
 }
 
-void AutomaticBazookaConfig::LoadXml(xmlNode* elem) {
+void AutomaticBazookaConfig::LoadXml(const xmlNode* elem) {
     ExplosiveWeaponConfig::LoadXml(elem);
     XmlReader::ReadDouble(elem, "uncontrolled_turn_speed", uncontrolled_turn_speed);
     XmlReader::ReadDouble(elem, "max_controlled_turn_speed", max_controlled_turn_speed);
