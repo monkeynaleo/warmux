@@ -163,18 +163,36 @@ void MultiTabs::DrawHeader(const Point2i &mousePosition) const
 
     // Draw the title
     uint pos_x = prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX() + 5
-      + (i-first_tab)*tab_header_width + tab_header_width/2;
+      + (i-first_tab)*tab_header_width;
 
     if (int(i) == current_tab) {
       Text tab_title(tabs.at(i).GetTitle(), primary_red_color,
 		     Font::FONT_MEDIUM, Font::FONT_BOLD, true);
 
-      tab_title.DrawCenterTop(Point2i(pos_x, position.y + 3) + 5);
+      tab_title.DrawCenterTop(Point2i(pos_x + tab_header_width/2, position.y + 3) + 5);
+
+      GetMainWindow().LineColor(pos_x,
+				pos_x,
+				position.y +1,
+				position.y + GetHeaderHeight() - 2,
+				GetBorderColor());
+
+      GetMainWindow().LineColor(pos_x + tab_header_width,
+				pos_x + tab_header_width,
+				position.y +1,
+				position.y + GetHeaderHeight() - 2,
+				GetBorderColor());
     } else {
       Text tab_title(tabs.at(i).GetTitle(), dark_gray_color,
 		     Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
-      tab_title.DrawCenterTop(Point2i(pos_x, position.y + 3) + 5);
+      tab_title.DrawCenterTop(Point2i(pos_x + tab_header_width/2, position.y + 3) + 5);
+
+      GetMainWindow().LineColor(pos_x,
+				pos_x + tab_header_width,
+				position.y + GetHeaderHeight() - 2,
+				position.y + GetHeaderHeight() - 2,
+				GetBorderColor());
     }
   }
 }

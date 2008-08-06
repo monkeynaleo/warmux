@@ -98,12 +98,13 @@ class Widget : public Rectanglei, public Container
 
   // border, background color
   void SetBorder(const Color &border_color, uint boder_size);
+  const Color& GetBorderColor() const { return border_color; };
 
   void SetBackgroundColor(const Color &background_color);
-  const Color GetBackgroundColor() { return background_color; };
+  const Color& GetBackgroundColor() const { return background_color; };
 
   void SetHighlightBgColor(const Color &highlight_bg_color);
-  const Color GetHighlightBgColor() { return highlight_bg_color; };
+  const Color& GetHighlightBgColor() const { return highlight_bg_color; };
 
   // font color
   // If (update_now == true), we call OnFontChange()
