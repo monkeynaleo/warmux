@@ -169,13 +169,13 @@
 <section name="object">
   <sprite name="bonus_box">
     <image file="object/bonus_box.png">
-      <grid pos="0,0" size="84,88" array="4,1" />
+      <grid pos="0,0" size="65,102" array="4,1" />
     </image>
     <animation loop_mode="false"/>
   </sprite>
   <sprite name="medkit">
     <image file="object/medkit.png">
-      <grid pos="0,0" size="84,88" array="4,1" />
+      <grid pos="0,0" size="65,102" array="4,1" />
     </image>
     <animation loop_mode="false"/>
   </sprite>
