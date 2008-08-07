@@ -127,7 +127,7 @@ void SuperTux::Refresh()
     Action a(Action::ACTION_WEAPON_SUPERTUX);
     a.Push(angle_rad);
     a.Push(GetPos());
-    Network::GetInstance()->SendAction(&a);
+    Network::GetInstance()->SendAction(a);
   }
 
   if (!swimming)

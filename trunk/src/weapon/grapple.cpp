@@ -291,7 +291,7 @@ bool Grapple::TryAddNode(int CurrentSense)
       a.Push(contact_point);
       a.Push(rope_angle);
       a.Push(CurrentSense);
-      Network::GetInstance()->SendAction(&a);
+      Network::GetInstance()->SendAction(a);
 
       return true;
     }
@@ -361,7 +361,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
      // Send node suppression over the network
      Action a(Action::ACTION_WEAPON_GRAPPLE);
      a.Push(DETACH_NODE);
-     Network::GetInstance()->SendAction(&a);
+     Network::GetInstance()->SendAction(a);
   }
 
   return nodes_to_remove > 0;

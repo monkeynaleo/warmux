@@ -71,7 +71,7 @@ void GameInit::EndInitGameData_NetServer()
 
   // Before playing we should check that init phase happens correctly on all clients
   Action a(Action::ACTION_NETWORK_CHECK_PHASE1);
-  Network::GetInstance()->SendAction(&a);
+  Network::GetInstance()->SendAction(a);
 
   while (Network::IsConnected()
          && Network::GetInstanceServer()->GetNbCheckedPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())

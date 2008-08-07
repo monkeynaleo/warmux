@@ -193,7 +193,7 @@ void GameBlitz::__SetState_PLAYING()
           // Tell clients which character in the team is now playing
           Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
           playing_char.StoreActiveCharacter();
-          Network::GetInstance()->SendAction(&playing_char);
+          Network::GetInstance()->SendAction(playing_char);
 
           printf("Action_ChangeCharacter:\n");
           printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());

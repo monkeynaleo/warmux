@@ -171,7 +171,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
   //Send nickname to server
   Action a(Action::ACTION_NICKNAME, GetNickname());
-  SendAction(&a);
+  SendAction(a);
 
   //Control to net_thread_func
   thread = SDL_CreateThread(Network::ThreadRun, NULL);

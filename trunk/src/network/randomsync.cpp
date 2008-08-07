@@ -46,7 +46,7 @@ void RandomSyncGen::InitRandom()
     MSG_DEBUG("random", "Server sending seed %d", seed);
 
     Action a(Action::ACTION_NETWORK_RANDOM_INIT, seed);
-    Network::GetInstance()->SendAction(&a);
+    Network::GetInstance()->SendAction(a);
   }
 }
 

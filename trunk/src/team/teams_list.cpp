@@ -76,7 +76,7 @@ void TeamsList::NextTeam ()
   Team* next = GetNextTeam();
   GetTeamsList().SetActive (next->GetId());
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
-  Network::GetInstance()->SendAction(&a);
+  Network::GetInstance()->SendAction(a);
 }
 
 //-----------------------------------------------------------------------------

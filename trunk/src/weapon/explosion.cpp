@@ -220,7 +220,7 @@ void ApplyExplosion_master (const Point2i &pos,
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendAction(&a_begin_sync);
+  Network::GetInstance()->SendAction(a_begin_sync);
 
   TeamsList::iterator
     it=GetTeamsList().playing_list.begin(),
@@ -250,7 +250,7 @@ void ApplyExplosion_master (const Point2i &pos,
     }
   }
   // send characters infos on network
-  Network::GetInstance()->SendAction(&a_characters_info);
+  Network::GetInstance()->SendAction(a_characters_info);
 
   Action* a = new Action(Action::ACTION_EXPLOSION);
   a->Push(pos);
@@ -267,7 +267,7 @@ void ApplyExplosion_master (const Point2i &pos,
 
   action_handler->NewAction(a);
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendAction(&a_sync_end);
+  Network::GetInstance()->SendAction(a_sync_end);
 }
 
 

@@ -433,14 +433,14 @@ connection_state_t Network::CheckHost(const std::string &host, int prt)
 //-----------------------------------------------------------------------------
 
 // Send Messages
-void Network::SendAction(const Action* a) const
+void Network::SendAction(const Action& a) const
 {
   MSG_DEBUG("network.traffic","Send action %s",
-            ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+            ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str());
 
   int size;
   char* packet;
-  a->WriteToPacket(packet, size);
+  a.WriteToPacket(packet, size);
 
   ASSERT(packet != NULL);
   SendPacket(packet, size);
@@ -558,7 +558,7 @@ void Network::SendNetworkState() const
 {
   Action a(Action::ACTION_NETWORK_CHANGE_STATE);
   a.Push(state);
-  SendAction(&a);
+  SendAction(a);
 }
 
 void Network::SetTurnMaster(bool master)
