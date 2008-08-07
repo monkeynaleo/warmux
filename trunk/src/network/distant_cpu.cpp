@@ -59,7 +59,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
 
     Action a(Action::ACTION_MENU_SET_MAP);
     MapsList::GetInstance()->FillActionMenuSetMap(a);
-    a.WritePacket(pack, size);
+    a.WriteToPacket(pack, size);
     SendDatas(pack, size);
     free(pack);
 
@@ -73,7 +73,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
       Action b(Action::ACTION_MENU_ADD_TEAM, (*team)->GetId());
       b.Push((*team)->GetPlayerName());
       b.Push((int)(*team)->GetNbCharacters());
-      b.WritePacket(pack, size);
+      b.WriteToPacket(pack, size);
       SendDatas(pack, size);
       free(pack);
     }

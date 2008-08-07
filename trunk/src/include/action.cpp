@@ -82,19 +82,19 @@ Action::Action (const char *is, DistantComputer* _creator)
 
 uint Action::ComputeCRC() const
 {
-  uint crc = 0;
+  uint _crc = 0;
   for(std::list<uint32_t>::const_iterator it = var.begin(); it != var.end(); it++)
-    crc += *it;
-  return crc;
+    _crc += *it;
+  return _crc;
 }
 
 bool Action::CheckCRC() const
 {
-  uint32_t crc;
-  crc = 0;
-  for(std::list<uint32_t>::const_iterator it = var.begin(); it != var.end(); it++)
-    crc += *it;
-  return this->crc == crc;
+  uint32_t _crc = ComputeCRC();
+
+  MSG_DEBUG("network.crc", "CRC : received %d, computed %d", crc, _crc);
+
+  return _crc == crc;
 }
 
 void Action::Init(Action_t type)
@@ -106,7 +106,7 @@ void Action::Init(Action_t type)
   crc = 0;
 }
 
-void Action::Write(char *os) const
+void Action::WriteTo(char *os) const
 {
   SDLNet_Write32(m_type, os);
   os += 4;
@@ -125,11 +125,11 @@ void Action::Write(char *os) const
 }
 
 // Convert the action to a packet
-void Action::WritePacket(char* &packet, int & size) const
+void Action::WriteToPacket(char* &packet, int & size) const
 {
   size = GetSize();
   packet = (char*)malloc(size);
-  Write(packet);
+  WriteTo(packet);
 }
 
 //-------------  Add datas to the action  ----------------

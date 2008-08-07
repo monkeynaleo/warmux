@@ -60,7 +60,7 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
   {
     char* packet;
     int packet_size;
-    a->WritePacket(packet, packet_size);
+    a->WriteToPacket(packet, packet_size);
 
     for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
          client != cpu.end();

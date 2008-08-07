@@ -257,9 +257,6 @@ void Network::ReceiveActions()
 #endif
 
         Action* a = new Action(packet, (*dst_cpu));
-#ifdef DEBUG
-        MSG_DEBUG("network.crc", "CRC : received %d, computed %d", a->GetCRC(), a->ComputeCRC());
-#endif
         if(!a->CheckCRC()) {
           MSG_DEBUG("network.crc_bad","!!! Bad CRC for action received !!!");
           delete a;
@@ -443,7 +440,7 @@ void Network::SendAction(const Action* a) const
 
   int size;
   char* packet;
-  a->WritePacket(packet, size);
+  a->WriteToPacket(packet, size);
 
   ASSERT(packet != NULL);
   SendPacket(packet, size);

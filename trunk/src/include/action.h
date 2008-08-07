@@ -106,13 +106,18 @@ public:
     // ########################################################
   } Action_t;
 
-protected:
+private:
   std::list<uint32_t> var;
   Action_t m_type;
   uint m_timestamp;
   uint crc;
   Action(const Action& an_action);
   const Action& operator=(const Action&);
+
+  void WriteTo(char *packet) const;
+
+  uint ComputeCRC() const;
+
 public:
 
   DistantComputer* creator;
@@ -172,11 +177,8 @@ public:
            + 4 // crc
            + int(var.size()) * 4;
   }
-  uint ComputeCRC() const;
   bool CheckCRC() const;
-  uint GetCRC() const { return crc; };
-  void Write(char *packet) const;
-  void WritePacket(char* & packet, int & size) const;
+  void WriteToPacket(char* & packet, int & size) const;
   Action_t GetType() const { return m_type; };
 };
 
