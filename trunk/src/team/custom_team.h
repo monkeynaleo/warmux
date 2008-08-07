@@ -29,7 +29,9 @@
 
 class CustomTeam
 {
-
+  public :
+    CustomTeam();
+    ~CustomTeam();
 
 };
 

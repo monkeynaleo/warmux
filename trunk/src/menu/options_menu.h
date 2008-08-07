@@ -23,11 +23,15 @@
 #define OPTIONS_MENU_H
 
 #include "menu.h"
+#include <vector>
 
+class Button;
 class ListBox;
 class CheckBox;
 class ComboBox;
 class SpinButtonWithPicture;
+class TextBox;
+
 
 class OptionMenu : public Menu
 {
@@ -75,6 +79,14 @@ private:
    void Draw(const Point2i &mousePosition);
    static uint fromVolume(uint vol);
    static uint toVolume(uint level);
+
+   /* Teams controllers */
+
+   ListBox *lbox_teams;
+   Button *add_team, *delete_team;
+   TextBox *tbox_team_name;
+   Label *team_name;
+   std::vector<TextBox *> *tbox_character_name_list;
 
    bool signal_ok();
    bool signal_cancel();

@@ -150,7 +150,9 @@ wormux_SOURCES = \
         sound/jukebox.cpp sound/jukebox.h \
         sound/sound_sample.cpp sound/sound_sample.h \
         sound/sample_cache.cpp sound/sample_cache.h \
-        team/macro.h \
+        team/custom_team.cpp team/custom_team.h \
+        team/custom_teams_list.cpp team/custom_teams_list.h \
+		team/macro.h \
         team/results.cpp team/results.h \
         team/team_config.h \
         team/team.cpp team/team.h \

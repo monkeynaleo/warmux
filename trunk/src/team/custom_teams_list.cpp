@@ -21,6 +21,7 @@
 
  #include "team/custom_teams_list.h"
  #include "team/custom_team.h"
+ #include <iostream>
 
 CustomTeamsList::CustomTeamsList()
 {
@@ -32,7 +33,7 @@ CustomTeamsList::~CustomTeamsList()
 
   if (!singleton)
   {
-    fprintf(stderr, "Destructor still called on unexisting TeamsList\n");
+    fprintf(stderr, "Destructor still called on unexisting CustomTeamsList\n");
     return;
   }
 
@@ -48,10 +49,9 @@ void CustomTeamsList::LoadList()
 {
   full_list.clear() ;
 
-  std::cout << "o " << _("Load custom teams:");
+  //std::cout << "o " << _("Load custom teams:");
 
-  const Config * config = Config::GetInstance();
-
+ /* const Config * config = Config::GetInstance();
   // Load Wormux teams
   std::string dirname = config->GetDataDir() + "team" PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
@@ -89,5 +89,5 @@ void CustomTeamsList::LoadList()
   ChangeSelection (nv_selection);
 
   std::cout << std::endl;
-  InitList(Config::GetInstance()->AccessTeamList());
+  InitList(Config::GetInstance()->AccessTeamList());*/
 }

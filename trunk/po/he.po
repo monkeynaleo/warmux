@@ -15,133 +15,131 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! המפה %s לא נמצאה :-("
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:122
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:287
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "שחקן %i מחובר"
 msgstr[1] "%i שחקנים מחוברים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:126
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:295
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "שחקן %i מוכן"
 msgstr[1] "%i שחקנים מוכנים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> נקרא %s מ-%s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> מ-%s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:79
+#: src/menu/team_box.cpp:147
 #, c-format
 msgid "%s Team"
 msgstr "צוות %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:77
+#: src/menu/team_box.cpp:144
 #, c-format
 msgid "%s Team - Remote"
 msgstr "צוות %s - מרוחק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/graphic/fps.cpp:102
+#: src/graphic/fps.cpp:102
 #, c-format
 msgid "%s fps"
 msgstr "%s תמונות בשניה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:692
+#: src/game/game.cpp:692
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s מאבד עצמו לדעת!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:725
+#: src/game/game.cpp:725
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) נהרג."
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:683
+#: src/game/game.cpp:683
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s נפל למים."
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:677
+#: src/game/game.cpp:677
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s נפל מן המפה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:698
+#: src/game/game.cpp:698
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:705
+#: src/game/game.cpp:705
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s מת כי הוא שלומיאל!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/object/medkit.cpp:68
+#: src/object/medkit.cpp:68
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s זכה ב-%u נקודת אנרגיה!"
 msgstr[1] "%s זכה ב-%u נקודות אנרגיה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:717
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:121
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s סמוך למוקש!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:97
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "לצוות %s יש כבר תחמושת בלתי מוגבלת עבור ה-%s!"
 
 #. Show message
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:57
+#: src/weapon/skip_turn.cpp:57
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "צוות %s ויתר על תורו."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:396
 #, fuzzy, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "צוות %s זכה בבזוקה!"
 msgstr[1] "צוות %s זכה ב-%u בזוקות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:175
+#: src/weapon/gnu.cpp:175
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "צוות %s זכה בגנו! חסל אותם, קאובוי!"
 msgstr[1] "צוות %s זכה ב-%u גנואים! חסל אותם, קאובוי!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:260
+#: src/weapon/air_attack.cpp:260
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
 msgstr[0] "צוות %s זכה בהתקפה אווירית!"
 msgstr[1] "צוות %s זכה ב-%u התקפות אוויריות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:174
+#: src/weapon/airhammer.cpp:174
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -153,35 +151,35 @@ msgstr[0] "צוות %s זכה בפטיש אוויר! נא לשמור על השק
 msgstr[1] ""
 "צוות %s זכה ב-%u פטיש אוויר! נא לשמור על השקט בעת השימוש! תודה, השכנים."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:188
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "צוות %s זכה בסדן! שטח אותם!"
 msgstr[1] "צוות %s זכה ב-%u סדנים! שטח אותם!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:329
+#: src/weapon/auto_bazooka.cpp:329
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "צוות %s זכה בבזוקה אוטומטית!"
 msgstr[1] "צוות %s זכה ב-%u בזוקות אוטומטיות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:116
+#: src/weapon/baseball.cpp:116
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "צוות %s זכה באלת בייסבול!"
 msgstr[1] "צוות %s זכה ב-%u אלות בייסבול!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:130
+#: src/weapon/bazooka.cpp:130
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "צוות %s זכה בבזוקה!"
 msgstr[1] "צוות %s זכה ב-%u בזוקות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:137
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -191,28 +189,28 @@ msgid_plural ""
 msgstr[0] "צוות %s זכה במבער! אם אתה קטין, בקש את רשות הוריך."
 msgstr[1] "צוות %s זכה ב-%u מבערים! אם אתה קטין, בקש את רשות הוריך."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "צוות %s זכה בכדור מקפץ! בוינג!"
 msgstr[1] "צוות %s זכה ב-%u כדורים מקפצים! בוינג!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "צוות %s זכה בפצצת מצרר!"
 msgstr[1] "צוות %s זכה ב-%u פצצות מצרר!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:81
+#: src/weapon/construct.cpp:81
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "צוות %s זכה בכלי בנייה! זכור לחבוש קסדה."
 msgstr[1] "צוות %s זכה ב-%u כלי בנייה! זכור לחבוש קסדה."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:170
+#: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -220,105 +218,105 @@ msgid_plural ""
 msgstr[0] "צוות %s זכה ברימון דיסקו! טלטל את הישבן!"
 msgstr[1] "צוות %s זכה ב-%u רימוני דיסקו! טלטל את הישבן!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:145
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "צוות %s זכה בדינמיט!"
 msgstr[1] "צוות %s זכה ב-%u מקלות דינמיט!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/flamethrower.cpp:178
+#: src/weapon/flamethrower.cpp:178
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "צוות %s זכה בלהביור!"
 msgstr[1] "צוות %s זכה ב-%u להביורים!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:176
 #, fuzzy, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "צוות %s זכה במפזר הפגנות!"
 msgstr[1] "צוות %s זכה ב-%u מפזרי הפגנות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grapple.cpp:809
+#: src/weapon/grapple.cpp:809
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "צוות %s זכה בוו אחיזה!"
 msgstr[1] "צוות %s זכה ב-%u ווי אחיזה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:90
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
 msgstr[0] "צוות %s זכה ברימון!"
 msgstr[1] "צוות %s זכה ב-%u רימונים!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gun.cpp:99
+#: src/weapon/gun.cpp:99
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
 msgstr[0] "צוות %s זכה באקדח!"
 msgstr[1] "צוות %s זכה ב-%u אקדחים!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/jetpack.cpp:247
+#: src/weapon/jetpack.cpp:247
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "צוות %s זכה ברתמת טיסה! מגניב!"
 msgstr[1] "צוות %s זכה ב-%u רתמות טיסה! מגניב!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/lowgrav.cpp:78
+#: src/weapon/lowgrav.cpp:78
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "צוות %s זכה באנטי-גרביטציה! אני ניל ארמסטרונג!"
 msgstr[1] "צוות %s זכה ב-%u מתקני אנטי-גרביטציה! אני ניל ארמסטרונג!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:247
+#: src/weapon/mine.cpp:247
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "צוות %s זכה במוקש!"
 msgstr[1] "צוות %s זכה ב-%u מוקשים!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:165
+#: src/weapon/parachute.cpp:165
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "צוות %s זכה במצנח!"
 msgstr[1] "צוות %s זכה ב-%u מצנחים!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:181
+#: src/weapon/polecat.cpp:181
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] "צוות %s זכה בחמוס! שמרת על מסכת הגז שלך?"
 msgstr[1] "צוות %s זכה ב-%u חמוסים! שמרת על מסכת הגז שלך?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:133
+#: src/weapon/riot_bomb.cpp:133
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "צוות %s זכה במפזר הפגנות!"
 msgstr[1] "צוות %s זכה ב-%u מפזרי הפגנות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/shotgun.cpp:134
+#: src/weapon/shotgun.cpp:134
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "צוות %s זכה בשוטגאן!"
 msgstr[1] "צוות %s זכה ב-%u רובי שוטגאן!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:85
+#: src/weapon/slap.cpp:85
 #, fuzzy, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "צוות %s זכה בוו אחיזה!"
 msgstr[1] "צוות %s זכה ב-%u ווי אחיזה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:246
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -326,163 +324,100 @@ msgid_plural ""
 msgstr[0] "צוות %s זכה ברובה צלפים! כוון אל בין העיניים!"
 msgstr[1] "צוות %s זכה ב-%u רובי צלפים! כוון אל בין העיניים!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:144
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
 msgstr[0] "צוות %s זכה בתת-מקלע!"
 msgstr[1] "צוות %s זכה ב-%u תת-מקלעים!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/suicide.cpp:77
+#: src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "צוות %s זכה בחגורת נפץ!"
 msgstr[1] "צוות %s זכה ב-%u חגורות נפץ!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/syringe.cpp:115
+#: src/weapon/syringe.cpp:115
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
 msgstr[0] "צוות %s זכה במזרק!"
 msgstr[1] "צוות %s זכה ב-%u מזרקים!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/teleportation.cpp:120
+#: src/weapon/teleportation.cpp:120
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
 msgstr[0] "צוות %s זכה בטלפורטציה!"
 msgstr[1] "צוות %s זכה ב-%u מתקני טלפורטציה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:68
+#: src/weapon/skip_turn.cpp:68
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "צוות %s זכה בדילוג תור! ידעתי שתאהב את זה."
 msgstr[1] "צוות %s זכה ב-%u דילוגי תור! בטוח שתאהב את זה."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "צוות %s זכה במשגר טאקס! אף פעם לא ראית פינגווין מעופף?"
 msgstr[1] "צוות %s זכה ב-%u משגרי טאקס! אף פעם לא ראית פינגווין מעופף?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_blitz.cpp:70
+#: src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:713
+#: src/game/game.cpp:713
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
 
-#. 1003.2 specifies the format of this message.
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:794
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:797
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:717
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:687
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:735
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:908
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:712
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:892
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:874
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr ""
-
-#. 1003.2 specifies the format of this message.
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:827
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:957
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr ""
-
-#. +option or -option
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:768
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr ""
-
-#. --option
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:764
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:165
+#: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(מת)"
 
 #. Setting language selection
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:201
+#: src/menu/options_menu.cpp:201
 msgid "(system language)"
 msgstr "(שפת מערכת)"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:31
-#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:78
+#: src/network/chatlogger.cpp:31 src/network/chatlogger.cpp:78
 msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:196
+#: src/interface/interface.cpp:196
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:353
+#: src/menu/options_menu.cpp:353
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:209
+#: src/weapon/air_attack.cpp:209
 msgid "Air Attack"
 msgstr "התקפה אווירית"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:74
+#: src/weapon/airhammer.cpp:74
 msgid "Airhammer"
 msgstr "פטיש אוויר"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:421
+#: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "כל הצוותים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_classic.cpp:56
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "והמנצח..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:58
+#: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
 "Fire : space key\n"
@@ -492,191 +427,186 @@ msgstr ""
 "אש: מקש הרווח\n"
 "פגיעה אחת לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:132
 msgid "Anvil"
 msgstr "סדן"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:287
+#: src/main.cpp:287
 msgid "Authors:"
 msgstr "מחברים:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:220
+#: src/weapon/auto_bazooka.cpp:220
 msgid "Automatic Bazooka"
 msgstr "בזוקה אוטומטית"
 
 #. #############################
 #. Automatic connection - we have nothing to display here!
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:98
+#: src/menu/network_connection_menu.cpp:98
 msgid "Automatically join a game"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr "בחזרה אל הקרב"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:42
+#: src/network/net_error_msg.cpp:42
 msgid "Bad socket ..."
 msgstr "Socket לא תקין..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:57
+#: src/weapon/baseball.cpp:57
 msgid "Baseball Bat"
 msgstr "אלת בייסבול"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:123
+#: src/weapon/bazooka.cpp:123
 msgid "Bazooka"
 msgstr "בזוקה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "מבער"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:89
 msgid "Bounce Ball"
 msgstr "כדור מקפץ"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "היה שלום, טאקס..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:475
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:497
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:544
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_teams_selection_box.cpp:240
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:496
+#: src/team/teams_list.cpp:527 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:542 src/team/teams_list.cpp:604
 #, c-format
 msgid "Can't find team %s!"
 msgstr "לא ניתן למצוא את צוות %s !"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:160
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית הצוותים האישית (%s)!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:148
-#: /home/yekcim/Dev/wormux/trunk/src/menu/skin_menu.cpp:77
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית הצוותים (%s)!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:132
 msgid "Check updates online?"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/map_selection_box.cpp:229
+#: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "בחר באחת המפות באופן אקראי"
 
 #. Client Mode
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "מצב לקוח"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:169
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:171
+#: src/menu/results_menu.cpp:169 src/menu/results_menu.cpp:171
 msgid "Clumsiest"
 msgstr "המגושם ביותר"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "פצצת מצרר"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:389
 #, fuzzy
 msgid "Cluzooka"
 msgstr "בזוקה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/suicide.cpp:42
+#: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "התאבד"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:214
+#: src/menu/network_connection_menu.cpp:214
 msgid "Connect to game"
 msgstr "התחבר למשחק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:33
+#: src/network/net_error_msg.cpp:33
 msgid "Connected !"
 msgstr "מחובר!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:59
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:67
+#: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
 msgstr "בנייה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:387
 msgid "Controlled by: "
 msgstr "מבוקר על ידי:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/download.cpp:81
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/download.cpp:90
-#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:57 src/network/download.cpp:90
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "לא ניתן לטעון הגדרות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:72
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "קרדיטים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:69
+#: src/menu/game_mode_editor.cpp:69
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:157
+#: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "רימון דיסקו"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:31
+#: src/network/admin_commands.cpp:31
 msgid "Displays this message"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:63
+#: src/menu/game_mode_editor.cpp:63
 msgid "Duration before death mode"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:51
+#: src/menu/game_mode_editor.cpp:51
 msgid "Duration of a turn"
 msgstr "משך תור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
 msgstr "דינמיט"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:244
+#: src/game/game.cpp:244
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:156
 msgid "Effects volume"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:324
+#: src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/tool/error.cpp:63
+#: src/tool/error.cpp:63
 #, fuzzy, c-format
 msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "שגיאה ב-%s:%lu"
 
-#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:195
+#: src/include/action_handler.cpp:195
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:124
+#: src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "שגיאה בטעינת צוות:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:492
+#: src/game/config.cpp:492
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "שגיאה בעת טעינת תיקיית \"%s\": לא ניתן לאחסן קובץ הגדרות."
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:143
+#: src/game/game.cpp:143
 #, c-format
 msgid ""
 "Error:\n"
@@ -686,119 +616,118 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:368
+#: src/menu/network_connection_menu.cpp:368
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "לא ניתן להתחבר ל-%s : %s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:329
+#: src/menu/network_connection_menu.cpp:329
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "שגיאה: לא ניתן ליצור קשר עם שרת אינדקסים כדי לארח משחק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:270
+#: src/menu/network_connection_menu.cpp:270
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "שגיאה: לא ניתן ליצור קשר עם שרת אינדקסים כדי לחפש משחק באינטרנט"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:348
+#: src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to start server"
 msgstr "שגיאה: לא ניתן להפעיל את השרת"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:342
+#: src/menu/network_connection_menu.cpp:342
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/team.cpp:117
+#: src/team/team.cpp:117
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "שגיאה: לא ניתן למצוא את הגוף \"%s\" עבור צוות \"%s\"."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/flamethrower.cpp:134
+#: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "להביור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:158
 #, fuzzy
 msgid "Football Bomb"
 msgstr "מפזר הפגנות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:91
+#: src/menu/options_menu.cpp:91
 msgid "Fullscreen?"
 msgstr "Plein Ã©cran ?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:86
+#: src/menu/game_menu.cpp:86
 msgid "Game"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:47
+#: src/menu/game_mode_editor.cpp:47
 #, fuzzy
 msgid "Game mode"
 msgstr "מצב לקוח"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:121
 msgid "Game name:"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:161
+#: src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
 msgstr "משגר גנו"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:121
 msgid "Graphic"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grapple.cpp:166
+#: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "וו אחיזה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:75
+#: src/menu/game_mode_editor.cpp:75
 msgid "Gravity"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:76
 msgid "Grenade"
 msgstr "רימון"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/ground.cpp:44
+#: src/map/ground.cpp:44
 msgid "Ground initialization..."
 msgstr "אתחול פני השטח..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gun.cpp:74
+#: src/weapon/gun.cpp:74
 msgid "Gun"
 msgstr "אקדח"
 
-#: /home/yekcim/Dev/wormux/trunk/src/tool/file_tools.cpp:163
+#: src/tool/file_tools.cpp:163
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "לא ניתן למצוא את תיקיית הבית (משתנה סביבה $HOME)!"
 
 #. Skip a line
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:239
 msgid "Have a good game!"
 msgstr "משחק מוצלח!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:54
+#: src/menu/team_box.cpp:54
 msgid "Head commander"
 msgstr "מפקד"
 
 #. Display player's name
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:156
+#: src/interface/interface.cpp:156
 msgid "Head commander: "
 msgstr "מפקד: "
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:59
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:69
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "עזרה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:145
 msgid "Host a game"
 msgstr "ארח משחק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:63
+#: src/weapon/blowtorch.cpp:63
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -808,7 +737,7 @@ msgstr ""
 "זווית: מעלה-מטה\n"
 "תחמושת לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:75
+#: src/weapon/airhammer.cpp:75
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -816,7 +745,7 @@ msgstr ""
 "לשימוש: החזק את מקש הרווח לחוץ\n"
 "תחמושת לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:221
+#: src/weapon/auto_bazooka.cpp:221
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -828,7 +757,7 @@ msgstr ""
 "ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
 "תחמושת לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:133
+#: src/weapon/anvil.cpp:133
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -836,11 +765,11 @@ msgstr ""
 "לשימוש: קליק שמאלי על המטרה\n"
 "תחמושת לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_classic.cpp:228
+#: src/game/game_classic.cpp:228
 msgid "Hurry up, you are too slow !!"
 msgstr "קדימה, אתה איטי מדי!!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:279
+#: src/main.cpp:279
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -848,13 +777,12 @@ msgstr ""
 "אם מצאת באג, או אם אתה מעוניין לבקש הוספת תכונה חדשה, שלח אלינו מסר(באנגלית "
 "בבקשה):"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:57
+#: src/menu/game_mode_editor.cpp:57
 msgid "Initial energy"
 msgstr "אנרגיה ראשונית"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:124
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:390
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:121
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -864,438 +792,430 @@ msgstr ""
 "ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
 "תחמושת לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:153
+#: src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "אתחול"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:106
+#: src/game/game_init.cpp:106
 msgid "Initialise map"
 msgstr "מאתחל מפה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:140
+#: src/game/game_init.cpp:140
 msgid "Initialise sounds"
 msgstr "מאתחל סאונד"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:116
+#: src/game/game_init.cpp:116
 msgid "Initialise teams"
 msgstr "מאתחל צוותים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:561
+#: src/game/game.cpp:561
 msgid "It's a present!"
 msgstr "קיבלת מתנה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/jetpack.cpp:60
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "רתמת טיסה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:142
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:237 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "הצטרף אל #wormux ב-irc.freenode.net כדי למצוא יריבים."
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:33
+#: src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:128
 msgid "Language"
 msgstr "שפה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:228
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "טען מפות:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:136
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "טען צוותים:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:42
+#: src/menu/teams_selection_box.cpp:42
 msgid "Local teams:"
 msgstr "צוותים מקומיים:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/lowgrav.cpp:49
+#: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
 msgstr "אנטי-גרביטציה"
 
 #. #############################
 #. Manual connection
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:179
+#: src/menu/network_connection_menu.cpp:179
 msgid "Manual connection"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:78
+#: src/menu/game_menu.cpp:78
 #, fuzzy
 msgid "Map"
 msgstr "מפות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/map.cpp:294
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "מפה %s, דרך יצירתה:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:109
+#: src/game/game_init.cpp:109
 msgid "Maps"
 msgstr "מפות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:116
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "מספר שחקנים מירבי:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:95
 msgid "Maximum FPS"
 msgstr "ערך FPS מקסימלי"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:213
+#: src/weapon/mine.cpp:213
 msgid "Mine"
 msgstr "מוקש"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:136
+#: src/menu/options_menu.cpp:136
 #, fuzzy
 msgid "Misc"
 msgstr "מוסיקה?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:177
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:179
+#: src/menu/results_menu.cpp:177 src/menu/results_menu.cpp:179
 msgid "Most accurate"
 msgstr "המדויק ביותר"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:161
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:163
+#: src/menu/results_menu.cpp:161 src/menu/results_menu.cpp:163
 msgid "Most sold-out"
 msgstr "החסר ביותר"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:145
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:147
+#: src/menu/results_menu.cpp:145 src/menu/results_menu.cpp:147
 msgid "Most useful"
 msgstr "השימושי ביותר"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:153
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:155
+#: src/menu/results_menu.cpp:153 src/menu/results_menu.cpp:155
 msgid "Most useless"
 msgstr "חסר התועלת ביותר"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:137
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:139
+#: src/menu/results_menu.cpp:137 src/menu/results_menu.cpp:139
 msgid "Most violent"
 msgstr "האלים ביותר"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:146
 msgid "Music volume"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:142
 msgid "Music?"
 msgstr "מוסיקה?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:63
+#: src/menu/main_menu.cpp:63
 msgid "Network Game"
 msgstr "משחק רשת"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/network.cpp:291
+#: src/network/network.cpp:301
 msgid "Network initialization"
 msgstr "אתחול רשת"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:51
+#: src/network/chatlogger.cpp:51
 #, fuzzy
 msgid "New network game at "
 msgstr "משחק רשת"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:181
 msgid "New player warning?"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/weapon.cpp:658
+#: src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "לא נמצא אלמנט <%s> בקובץ ה-xml!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:443
+#: src/menu/network_connection_menu.cpp:443
 msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:74
+#: src/menu/results_menu.cpp:74
 msgid "Nobody!"
 msgstr "אף אחד!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:60
+#: src/menu/team_box.cpp:60
 msgid "Number of characters"
 msgstr "מספר דמויותe"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:48
+#: src/menu/teams_selection_box.cpp:48
 msgid "Number of teams:"
 msgstr "מספר צוותים:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:66
+#: src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "אפשרויות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:55
 msgid "Options menu"
 msgstr "תפריט אפשרויות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:68
+#: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "מצנח"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:100
+#: src/weapon/parachute.cpp:100
 msgid "Parachute is activated automatically."
 msgstr "המצנח מופעל אוטומטית."
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:133
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:171
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:133
+#: src/menu/network_connection_menu.cpp:171
+#: src/menu/network_connection_menu.cpp:209
 msgid "Password:"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:60
+#: src/menu/main_menu.cpp:60
 msgid "Play"
 msgstr "שחק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:63
+#: src/menu/teams_selection_box.cpp:63
 msgid "Player"
 msgstr "שחקן"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:76
+#: src/menu/options_menu.cpp:76
 msgid "Player energy?"
 msgstr "אנרגיה לשחקן?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:79
 msgid "Player's name?"
 msgstr "שם השחקן?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:167
+#: src/weapon/polecat.cpp:167
 msgid "Polecat Launcher"
 msgstr "משגר חמוסים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:110
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:110
+#: src/menu/network_connection_menu.cpp:198
 msgid "Port:"
 msgstr "פורט:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:158
 #, fuzzy
 msgid "Public battles"
 msgstr "יציאה מן הקרב"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:75
+#: src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "יציאה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:268
+#: src/main.cpp:268
 msgid "Quit Wormux"
 msgstr "יציאה מ-Wormux"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr "יציאה מן הקרב"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/map_selection_box.cpp:228
+#: src/menu/map_selection_box.cpp:228
 msgid "Random map"
 msgstr "מפה אקראית"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:330
+#: src/game/config.cpp:330
 msgid "Reading default config file"
 msgstr "קורא הגדרות מקובץ ברירת מחדל"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:379
+#: src/game/config.cpp:379
 msgid "Reading personal config file"
 msgstr "קורא הגדרות מקובץ אישי"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:117
+#: src/menu/options_menu.cpp:117
 msgid "Resolution"
 msgstr "אבחנה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:120
+#: src/weapon/riot_bomb.cpp:120
 msgid "Riot Bomb"
 msgstr "מפזר הפגנות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:83
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "הרץ משחק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/chat.cpp:80
+#: src/network/chat.cpp:82
 msgid "Say: "
 msgstr "אמור: "
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:85
 #, fuzzy
 msgid "Scroll border size"
 msgstr "גלול על גבול המסך"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:82
 msgid "Scroll on border"
 msgstr "גלול על גבול המסך"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:187
+#: src/menu/network_connection_menu.cpp:187
 msgid "Server address:"
 msgstr "כתובת שרת:"
 
 #. Available on internet ?
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:141
+#: src/menu/network_connection_menu.cpp:141
 msgid "Server available on Internet"
 msgstr "שרת זמין באינטרנט"
 
 #. Server Mode
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:113
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "מצב שרת"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/shotgun.cpp:91
+#: src/weapon/shotgun.cpp:91
 msgid "Shotgun"
 msgstr "שוטגאן"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:47
+#: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "דלג על תור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:73
+#: src/weapon/slap.cpp:73
 msgid "Slap"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:74
+#: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/snipe_rifle.cpp:93
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "רובה צלפים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:86
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:278
+#: src/menu/network_connection_menu.cpp:278
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "עמך הסליחה, אין כרגע משחק הממתין לשחקנים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:184
 #, fuzzy
 msgid "Sound"
 msgstr "סאונד"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:152
+#: src/menu/options_menu.cpp:152
 msgid "Sound effects?"
 msgstr "אפקטים קוליים?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:177
+#: src/menu/options_menu.cpp:177
 msgid "Sound frequency"
 msgstr "תדירות הסאונד"
 
 #. Load teams' sound profiles
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:143
+#: src/game/game_init.cpp:143
 msgid "Sounds"
 msgstr "סאונד"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:114
+#: src/game/game.cpp:114
 msgid "Starting a new game"
 msgstr "מתחיל משחק חדש"
 
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:196
+#: src/interface/interface.cpp:196
 msgid "Stock:"
 msgstr "מלאי:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/submachine_gun.cpp:99
+#: src/weapon/submachine_gun.cpp:99
 msgid "Submachine Gun"
 msgstr "תת מקלע"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "סופרטאקס"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/syringe.cpp:70
+#: src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "מזרק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:426
 #, fuzzy
 msgid "Team graphs"
 msgstr "צוותים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:424
+#: src/menu/results_menu.cpp:424
 #, fuzzy
 msgid "Team stats"
 msgstr "צוותים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:66
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:118
+#: src/game/game_init.cpp:118 src/menu/game_menu.cpp:66
 msgid "Teams"
 msgstr "צוותים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/teleportation.cpp:50
+#: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
 msgstr "טלפורטציה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:146
+#: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "פצצת המצרר יצאה משדה הקרב לפני שהתפוצצה."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:111
 #, fuzzy
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "פצצת המצרר יצאה משדה הקרב לפני שהתפוצצה."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:144
+#: src/weapon/gnu.cpp:144
 msgid "The Gnu left the battlefield before exploding"
 msgstr "הגנו יצא משדה הקרב לפני שהתפוצץ."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:150
+#: src/weapon/polecat.cpp:150
 msgid "The Polecat left the battlefield before exploding"
 msgstr "החמוס יצא משדה הקרב לפני שהתפוצץ."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:175
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:72
 msgid "The ball left the battlefield before exploding"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/network_client.cpp:128
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:48
+#: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "זמן ההמתנה לחיבור עבר. בדוק אם אין חומת-אש שמפריעה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:127
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "רימון הדיסקו יצא משדה הקרב לפני שהתפוצץ."
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:456
+#: src/game/game.cpp:456
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
 msgstr "הרימון יצא משדה הקרב לפני שהתפוצץ."
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:302
+#: src/menu/network_menu.cpp:302
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "כולם מחכים רק לך! זמן לקום :-)"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:83
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:336
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:86
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "הרקטה יצאה משדה הקרב..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:45
+#: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
 msgstr "השרת סירב לבקשת החיבור."
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:51
+#: src/network/net_error_msg.cpp:51
 #, fuzzy
 msgid "The server rejected the connection: wrong password!"
 msgstr "השרת סירב לבקשת החיבור."
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:214
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1303,12 +1223,11 @@ msgstr[0] "יש רק %i צוות."
 msgstr[1] "יש רק %i צוותים."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:322
+#: src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:159
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1320,7 +1239,7 @@ msgstr ""
 "ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
 "תחמושת לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:90
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1332,131 +1251,129 @@ msgstr ""
 "ירי: מקש הרווח\n"
 "תחמושת לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/interface/weapon_menu.cpp:169
+#: src/interface/weapon_menu.cpp:169
 msgid "Tools"
 msgstr "כלים"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:36
+#: src/network/net_error_msg.cpp:36
 msgid "Unable to contact host."
 msgstr "לא ניתן ליצור קשר עם השרת."
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:238
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית המפות (%s)!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:250
+#: src/map/maps_list.cpp:250
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית המפות האישית (%s)!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:39
+#: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "לא ניתן להשתמש בפורט זה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:67
+#: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/network.cpp:111
+#: src/network/network.cpp:145
 msgid "Unnamed"
 msgstr "ללא שם"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:200
+#: src/main.cpp:200
 msgid "Version"
 msgstr "גירסה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:362
+#: src/menu/options_menu.cpp:362
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:228
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "רגע! שחקן %i אינו מוכן עדיין!"
 msgstr[1] "רגע! %i שחקנים אינם מוכנים עדיין!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:369
+#: src/menu/network_menu.cpp:369
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "ממתין לשרת, כרגע תוכל רק לבטל או להשתמש בצ'אט!"
 
-#. Adding label
 #. Initialization of teams' energy
-#: /home/yekcim/Dev/wormux/trunk/src/interface/weapon_menu.cpp:167
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:129
+#. Adding label
+#: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "כלי נשק"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:296
+#: src/main.cpp:296
 msgid "Website: "
 msgstr "אתר: "
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:722
+#: src/game/game.cpp:722
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"
 
 #. Various options
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:73
+#: src/menu/options_menu.cpp:73
 msgid "Wind particles?"
 msgstr "חלקיקי רוח?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:379
+#: src/menu/results_menu.cpp:379
 msgid "Winner"
 msgstr "מנצח"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:212
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "Wormux נטען..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:286
+#: src/main.cpp:286
 msgid "Wormux version "
 msgstr "גירסת Wormux "
 
-#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:169
+#: src/include/action_handler.cpp:169
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:166
+#: src/include/action_handler.cpp:166
 msgid "Wrong map name!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:172
+#: src/include/action_handler.cpp:172
 msgid "Wrong team!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:305
+#: src/menu/network_menu.cpp:305
 msgid "You are alone :-/"
 msgstr "אתה לבדך :-/"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:222
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "אתה לבדך..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:259
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "אתה זקוק למפה תקינה אחת לפחות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:168
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:122
+#: src/game/game_init.cpp:122 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:202
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/weapon_launcher.cpp:496
+#: src/weapon/weapon_launcher.cpp:496
 msgid "Your shot has missed!"
 msgstr "הירייה שלך החטיאה!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/credits_menu.cpp:75
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "המכונה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:210
+#: src/weapon/air_attack.cpp:210
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1466,36 +1383,36 @@ msgstr ""
 "התקפה: קליק שמאלי על המטרה\n"
 "הפצצה לתור"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "לא ניתן לטעון הגדרות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/ground.cpp:61
+#: src/map/ground.cpp:61
 msgid "done"
 msgstr "בוצע"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "שגיאה בקריאת קובץ הגדרות"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/credits_menu.cpp:79
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "מ-"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "אין קובץ הגדרות!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o טוען מוסיקה"
 
-#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o טוען פרופיל סאונד: %s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o נפתח שמע ב-%d Hz ו-%d bit"

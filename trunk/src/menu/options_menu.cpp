@@ -33,6 +33,7 @@
 #include "gui/button.h"
 #include "gui/label.h"
 #include "gui/box.h"
+#include "gui/button.h"
 #include "gui/list_box.h"
 #include "gui/combo_box.h"
 #include "gui/check_box.h"
@@ -40,12 +41,14 @@
 #include "gui/picture_text_cbox.h"
 #include "gui/spin_button_picture.h"
 #include "gui/tabs.h"
+#include "gui/text_box.h"
 #include "gui/question.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
 #include "network/download.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
+#include "team/custom_teams_list.h"
 #include "tool/i18n.h"
 #include "tool/string_tools.h"
 #include "tool/resource_manager.h"
@@ -126,6 +129,65 @@ OptionMenu::OptionMenu() :
   language_options->AddWidget(lbox_languages);
 
   tabs->AddNewTab("unused", _("Language"), language_options);
+
+  /* Team editor */
+  Box * teams_editor = new VBox(max_width, false, true);
+  Box * teams_editor_sup = new GridBox(max_width, option_size, true);
+  Box * teams_editor_inf = new VBox(max_width, true,false);
+
+
+
+  add_team = new Button(res, "menu/plus");
+  teams_editor_sup->AddWidget(add_team);
+
+  delete_team = new Button(res, "menu/minus");
+  teams_editor_sup->AddWidget(delete_team);
+
+  lbox_teams = new ListBox(option_size);
+  teams_editor_sup->AddWidget(lbox_teams);
+
+  team_name = new Label("Team name : ", 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  teams_editor_inf->AddWidget(team_name);
+
+  tbox_team_name = new TextBox("", 100,
+                            Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  teams_editor_inf->AddWidget(tbox_team_name);
+
+ Point2i names_size(140, 50);
+
+  Box * teams_editor_names = new GridBox(max_width, names_size, false);
+
+  tbox_character_name_list = new std::vector<TextBox *>;
+
+
+  for(unsigned i=0; i < 10 ; i++)
+  {
+    std::ostringstream oss;
+    oss << i+1;
+    tbox_character_name_list->push_back(new TextBox("",100,Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    Label * lab = new Label("Character "+oss.str()+" : ",0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+
+    Box * name_box = new VBox(max_width, true, true);
+
+    name_box->AddWidget(lab);
+    name_box->AddWidget((*tbox_character_name_list)[i]);
+
+    teams_editor_names->AddWidget(name_box);
+
+  }
+
+  teams_editor_inf->AddWidget(teams_editor_names);
+
+
+
+  lbox_teams->AddItem(false,   "Test team",  "tt");
+
+
+  teams_editor_inf->Pack();
+  teams_editor->AddWidget(teams_editor_sup);
+  teams_editor->AddWidget(teams_editor_inf);
+  tabs->AddNewTab("unused", _("Teams editor"), teams_editor);
+
 
   /* Misc options */
   Box * misc_options = new GridBox(max_width, option_size, false);
@@ -241,6 +303,7 @@ OptionMenu::OptionMenu() :
 
 OptionMenu::~OptionMenu()
 {
+  delete tbox_character_name_list;
 }
 
 void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)

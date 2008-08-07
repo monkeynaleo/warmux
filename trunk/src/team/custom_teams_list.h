@@ -32,20 +32,20 @@ class CustomTeam;
 class CustomTeamsList : public Singleton<CustomTeamsList>
 {
 
-//public:
+public:
 
-  //std::list<CustomTeam *> GetList();
-
-//protected:
-  //std::list<CustomTeam *> full_list;
-
-//  void LoadList();
+  CustomTeamsList();
+  ~CustomTeamsList();
+  void LoadList();
 
 
+protected :
+  typedef std::list<CustomTeam *>::iterator full_iterator;
+  std::list<CustomTeam *> full_list;
 };
 
 
-inline CustomTeamList &GetCustomTeamsList(void) { return CustomTeamsList::GetRef(); };
+inline CustomTeamsList &GetCustomTeamsList(void) { return CustomTeamsList::GetRef(); };
 
 //-----------------------------------------------------------------------------
 #endif
