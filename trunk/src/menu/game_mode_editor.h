@@ -38,7 +38,10 @@ class GameModeEditor : public GridBox
   ComboBox *opt_game_mode;
 
   SpinButtonWithPicture *opt_duration_turn;
+
   SpinButtonWithPicture *opt_energy_ini;
+  SpinButtonWithPicture *opt_energy_max;
+
   SpinButtonWithPicture *opt_time_before_death_mode;
   SpinButtonWithPicture *opt_damage_during_death_mode;
   SpinButtonWithPicture *opt_gravity;

@@ -54,11 +54,21 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
                                                 TPS_TOUR_MIN, TPS_TOUR_MAX);
   AddWidget(opt_duration_turn);
 
+  /* Characters energy */
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
                                              option_size,
                                              10, 10,
-                                             10, 200);
+                                             10, 500);
   AddWidget(opt_energy_ini);
+
+  opt_energy_max = new SpinButtonWithPicture(_("Max energy"), "menu/energy",
+                                             option_size,
+                                             10, 10,
+                                             10, 500);
+  AddWidget(opt_energy_max);
+
+
+  /* some death mode options */
 
   opt_time_before_death_mode = new SpinButtonWithPicture(_("Duration before death mode"), "menu/timing_turn",
 							 option_size,
@@ -94,6 +104,7 @@ void GameModeEditor::LoadGameMode()
 
   opt_duration_turn->SetValue(game_mode->duration_turn);
   opt_energy_ini->SetValue(game_mode->character.init_energy);
+  opt_energy_max->SetValue(game_mode->character.max_energy);
   opt_time_before_death_mode->SetValue(game_mode->duration_before_death_mode);
   opt_damage_during_death_mode->SetValue(game_mode->damage_per_turn_during_death_mode);
   opt_gravity->SetValue((int)(game_mode->gravity));
@@ -108,6 +119,7 @@ void GameModeEditor::ValidGameMode() const
 
   game_mode->duration_turn = opt_duration_turn->GetValue();
   game_mode->character.init_energy = opt_energy_ini->GetValue();
+  game_mode->character.max_energy = opt_energy_max->GetValue();
   game_mode->duration_before_death_mode = opt_time_before_death_mode->GetValue();
   game_mode->damage_per_turn_during_death_mode = opt_damage_during_death_mode->GetValue();
   game_mode->gravity = opt_gravity->GetValue();
