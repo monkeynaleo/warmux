@@ -68,11 +68,11 @@
 
 void Action_Nickname(Action *a)
 {
-  if (Network::GetInstance()->IsServer() && a->creator)
+  if (Network::GetInstance()->IsServer() && a->GetCreator())
   {
       std::string nickname = a->PopString();
       std::cout<<"New nickname: " + nickname<< std::endl;
-      a->creator->SetNickname(nickname);
+      a->GetCreator()->SetNickname(nickname);
   }
 }
 
@@ -87,19 +87,19 @@ void Action_Network_ChangeState (Action *a)
     switch (Network::GetInstance()->GetState())
     {
     case Network::NO_NETWORK:
-      a->creator->SetState(DistantComputer::STATE_INITIALIZED);
+      a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
       ASSERT(client_state == Network::NETWORK_MENU_OK);
       break;
 
     case Network::NETWORK_LOADING_DATA:
-      a->creator->SetState(DistantComputer::STATE_READY);
+      a->GetCreator()->SetState(DistantComputer::STATE_READY);
       ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
       break;
 
     default:
       NET_ASSERT(false)
       {
-        if(a->creator) a->creator->force_disconnect = true;
+        if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
         return;
       }
       break;
@@ -125,7 +125,7 @@ void Action_Network_ChangeState (Action *a)
     default:
        NET_ASSERT(false)
        {
-         if(a->creator) a->creator->force_disconnect = true;
+         if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
          return;
        }
     }
@@ -193,7 +193,7 @@ void DisconnectOnError(enum net_error error)
 static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
 {
   std::string str = Format(_("Error initializing network: Client %s does not agree with you!! - %s"),
-			   a->creator->GetAddress().c_str(),
+			   a->GetCreator()->GetAddress().c_str(),
 			   NetErrorId_2_String(error).c_str());
   std::cerr << str << std::endl;
   DisconnectOnError(error);
@@ -235,7 +235,7 @@ void Action_Network_Check_Phase2 (Action *a)
   }
 
   // this client has been checked, it's ok :-)
-  a->creator->SetState(DistantComputer::STATE_CHECKED);
+  a->GetCreator()->SetState(DistantComputer::STATE_CHECKED);
 }
 
 // ########################################################
@@ -316,8 +316,8 @@ void Action_Rules_SetGameMode (Action *a)
 {
   NET_ASSERT(Network::GetInstance()->IsClient())
   {
-    if (a->creator)
-      a->creator->force_disconnect = true;
+    if (a->GetCreator())
+      a->GetCreator()->force_disconnect = true;
     return;
   }
 
@@ -363,8 +363,8 @@ void Action_ChatMessage (Action *a)
   std::string nickname = a->PopString();
   std::string message = a->PopString();
 
-  if (Network::GetInstance()->IsServer() && a->creator)
-    a->creator->SetNickname(nickname);
+  if (Network::GetInstance()->IsServer() && a->GetCreator())
+    a->GetCreator()->SetNickname(nickname);
 
   ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
   AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message);
@@ -405,7 +405,7 @@ void Action_Menu_AddTeam (Action *a)
 
   MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
 
-  bool local_team = (!Network::IsConnected() || !a->creator);
+  bool local_team = (!Network::IsConnected() || !a->GetCreator());
 
   GetTeamsList().AddTeam(the_team, local_team);
 
@@ -414,7 +414,7 @@ void Action_Menu_AddTeam (Action *a)
 
   if (Network::IsConnected()) {
     if (!local_team)
-      a->creator->AddTeam(the_team.id);
+      a->GetCreator()->AddTeam(the_team.id);
     else
       UpdateLocalNickname();
   }
@@ -436,8 +436,8 @@ void Action_Menu_UpdateTeam (Action *a)
     Network::GetInstance()->network_menu->UpdateTeamCallback(old_team_id, the_team.id);
 
   if (Network::IsConnected()) {
-    if (a->creator)
-      a->creator->UpdateTeam(old_team_id, the_team.id);
+    if (a->GetCreator())
+      a->GetCreator()->UpdateTeam(old_team_id, the_team.id);
     else
       UpdateLocalNickname();
   }
@@ -447,8 +447,8 @@ void Action_Menu_DelTeam (Action *a)
 {
   std::string team_id = a->PopString();
 
-  if (Network::GetInstance()->IsServer() && a->creator) {
-    a->creator->RemoveTeam(team_id);
+  if (Network::GetInstance()->IsServer() && a->GetCreator()) {
+    a->GetCreator()->RemoveTeam(team_id);
   }
 
   MSG_DEBUG("action_handler.menu", "- %s", team_id.c_str());
@@ -461,7 +461,7 @@ void Action_Menu_DelTeam (Action *a)
 
   GetTeamsList().DelTeam(team_id);
 
-  if (!a->creator)
+  if (!a->GetCreator())
     UpdateLocalNickname();
 
   if (Network::GetInstance()->network_menu != NULL)
@@ -816,7 +816,7 @@ void ActionHandler::Exec(Action *a)
   handler_it it=handler.find(a->GetType());
   NET_ASSERT(it != handler.end())
   {
-    if(a->creator) a->creator->force_disconnect = true;
+    if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
     return;
   }
   (*it->second) (a);

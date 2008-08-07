@@ -111,6 +111,9 @@ private:
   Action_t m_type;
   uint m_timestamp;
   uint crc;
+
+  DistantComputer* creator;
+
   Action(const Action& an_action);
   const Action& operator=(const Action&);
 
@@ -119,8 +122,6 @@ private:
   uint ComputeCRC() const;
 
 public:
-
-  DistantComputer* creator;
 
   //inline Action_t &operator++() { ;}
 
@@ -180,6 +181,8 @@ public:
   bool CheckCRC() const;
   void WriteToPacket(char* & packet, int & size) const;
   Action_t GetType() const { return m_type; };
+
+  DistantComputer* GetCreator() const { return creator; } ;
 };
 
 //-----------------------------------------------------------------------------
