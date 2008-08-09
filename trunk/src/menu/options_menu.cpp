@@ -54,6 +54,7 @@
 #include "tool/string_tools.h"
 #include "tool/resource_manager.h"
 #include <sstream>
+#include <string>
 
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
@@ -132,6 +133,9 @@ OptionMenu::OptionMenu() :
   tabs->AddNewTab("unused", _("Language"), language_options);
 
   /* Team editor */
+
+
+
   Box * teams_editor = new VBox(max_width, false, true);
   Box * teams_editor_sup = new GridBox(max_width, option_size, true);
   Box * teams_editor_inf = new VBox(max_width, true,false);
@@ -158,20 +162,20 @@ OptionMenu::OptionMenu() :
 
   Box * teams_editor_names = new GridBox(max_width, names_size, false);
 
-  tbox_character_name_list = new std::vector<TextBox *>;
+
 
 
   for(unsigned i=0; i < 10 ; i++)
   {
     std::ostringstream oss;
     oss << i+1;
-    tbox_character_name_list->push_back(new TextBox("",100,Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    tbox_character_name_list.push_back(new TextBox("",100,Font::FONT_MEDIUM, Font::FONT_NORMAL));
     Label * lab = new Label("Character "+oss.str()+" : ",0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
     Box * name_box = new VBox(max_width, true, true);
 
     name_box->AddWidget(lab);
-    name_box->AddWidget((*tbox_character_name_list)[i]);
+    name_box->AddWidget(tbox_character_name_list[i]);
 
     teams_editor_names->AddWidget(name_box);
 
@@ -185,16 +189,8 @@ OptionMenu::OptionMenu() :
   tabs->AddNewTab("unused", _("Teams editor"), teams_editor);
 
 
-  lbox_teams->AddItem(false,   "Test team",  "tt");
-
-  GetCustomTeamsList().LoadList();
-  std::vector<CustomTeam *> custom_team_list = GetCustomTeamsList().GetList();
-
-  for(unsigned i=0; i< custom_team_list.size() ; i++)
-  {
-      lbox_teams->AddItem(false,   custom_team_list[i]->GetName(),  "tt");
-  }
-
+  selected_team = NULL;
+  ReloadTeamList();
 
   /* Misc options */
   Box * misc_options = new GridBox(max_width, option_size, false);
@@ -306,11 +302,12 @@ OptionMenu::OptionMenu() :
 
   widgets.AddWidget(tabs);
   widgets.Pack();
+
 }
 
 OptionMenu::~OptionMenu()
 {
-  delete tbox_character_name_list;
+
 }
 
 void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
@@ -325,10 +322,23 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
     Config::GetInstance()->SetVolumeEffects(toVolume(volume_effects->GetValue()));
     JukeBox::GetInstance()->Play("share", "menu/clic");
   }
-  else if (w == music_cbox)
+  else if (w == music_cbox) {
     JukeBox::GetInstance()->ActiveMusic(music_cbox->GetValue());
-  else if (w == effects_cbox)
+  }
+  else if (w == effects_cbox) {
     JukeBox::GetInstance()->ActiveEffects(effects_cbox->GetValue());
+  }
+  else if (w == lbox_teams) {
+
+    SelectTeam();
+
+  }
+  else if (w ==add_team){
+    AddTeam();
+  }
+  else if (w ==delete_team){
+    DeleteTeam();
+  }
 }
 
 void OptionMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
@@ -442,4 +452,75 @@ uint OptionMenu::fromVolume(uint vol)
 {
   uint max = Config::GetMaxVolume();
   return (vol*100 + max/2) / max;
+}
+
+
+// Team editor function
+
+void OptionMenu::AddTeam()
+{
+  CustomTeam *new_team = new CustomTeam();
+  new_team->NewTeam();
+  new_team->Save();
+  selected_team = new_team;
+  ReloadTeamList();
+
+}
+
+void OptionMenu::DeleteTeam()
+{
+
+}
+
+void OptionMenu::LoadTeam()
+{
+std::cout<<"LoadTeam"<<std::endl;
+
+    if(selected_team != NULL){
+      std::cout<<"Plop"<<std::endl;
+      tbox_team_name->SetText(selected_team->GetName());
+      std::cout<<selected_team->GetName()<<std::endl;
+      std::vector<std::string> character_names = selected_team->GetCharactersNameList();
+
+      for(unsigned i=0; i< character_names.size(); i++)
+      {
+        tbox_character_name_list[i]->SetText(character_names[i]);
+        std::cout<<character_names[i]<<std::endl;
+      }
+
+    }
+}
+
+void OptionMenu::ReloadTeamList()
+{
+
+  lbox_teams->ClearItems();
+  std::string selected_team_name ="";
+  if(selected_team != NULL){
+    selected_team_name = selected_team->GetName();
+  }
+
+  GetCustomTeamsList().LoadList();
+  std::vector<CustomTeam *> custom_team_list = GetCustomTeamsList().GetList();
+
+  for(unsigned i=0; i< custom_team_list.size() ; i++)
+  {
+      if( custom_team_list[i]->GetName() == selected_team_name){
+          selected_team = custom_team_list[i];
+          LoadTeam();
+      }
+
+      lbox_teams->AddItem((selected_team == custom_team_list[i]),   custom_team_list[i]->GetName(),  custom_team_list[i]->GetName());
+
+  }
+
+
+}
+
+void OptionMenu::SelectTeam()
+{
+  std::string s_selected_team = lbox_teams->ReadValue();
+  selected_team = GetCustomTeamsList().GetByName(s_selected_team);
+  LoadTeam();
+
 }

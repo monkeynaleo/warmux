@@ -389,7 +389,7 @@ bool XmlWriter::IsOk() const
   return (m_doc != NULL) && (m_root != NULL);
 }
 
-void XmlWriter::WriteElement(xmlNode* x,
+xmlNode *XmlWriter::WriteElement(xmlNode* x,
                              const std::string &name,
                              const std::string &value)
 {
@@ -398,6 +398,7 @@ void XmlWriter::WriteElement(xmlNode* x,
   xmlNode *text = xmlNewText((const xmlChar*)value.c_str());
   xmlAddChild(node, text);
   m_save = false;
+  return node;
 }
 
 void XmlWriter::WriteComment(xmlNode* x,

@@ -141,7 +141,9 @@ int AppWormux::Main(void)
         case MainMenu::OPTIONS:
         {
           OptionMenu options_menu;
-          menu = &options_menu;
+          //Random segsig here
+          //Uncomment if needed
+          //menu = &options_menu;
           options_menu.Run();
           break;
         }

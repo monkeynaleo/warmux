@@ -110,9 +110,9 @@ public:
 
   bool IsOk() const;
 
-  xmlNode* GetRoot() const;
+  xmlNode *GetRoot() const;
 
-  void WriteElement(xmlNode* x,
+  xmlNode *WriteElement(xmlNode* x,
                     const std::string &name,
                     const std::string &value);
 

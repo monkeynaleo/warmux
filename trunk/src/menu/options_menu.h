@@ -25,10 +25,12 @@
 #include "menu.h"
 #include <vector>
 
+
 class ButtonPic;
 class ListBox;
 class CheckBox;
 class ComboBox;
+class CustomTeam;
 class SpinButtonWithPicture;
 class TextBox;
 
@@ -36,9 +38,9 @@ class TextBox;
 class OptionMenu : public Menu
 {
 public:
-   OptionMenu();
-   ~OptionMenu();
-   static void CheckUpdates();
+    OptionMenu();
+    ~OptionMenu();
+    static void CheckUpdates();
 
 private:
 
@@ -74,19 +76,29 @@ private:
    CheckBox *opt_updates;
 
    void SaveOptions();
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
+  void OnClick(const Point2i &mousePosition, int button);
+  void OnClickUp(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
    static uint fromVolume(uint vol);
    static uint toVolume(uint level);
 
    /* Teams controllers */
 
-   ListBox *lbox_teams;
-   ButtonPic *add_team, *delete_team;
-   TextBox *tbox_team_name;
-   Label *team_name;
-   std::vector<TextBox *> *tbox_character_name_list;
+    ListBox *lbox_teams;
+    ButtonPic *add_team;
+    ButtonPic *delete_team;
+    CustomTeam  *selected_team;
+    TextBox *tbox_team_name;
+    Label *team_name;
+    std::vector<TextBox *> tbox_character_name_list;
+
+    void AddTeam();
+    void DeleteTeam();
+    void LoadTeam();
+    void ReloadTeamList();
+    void SelectTeam();
+
+
 
    bool signal_ok();
    bool signal_cancel();

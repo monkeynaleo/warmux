@@ -40,12 +40,27 @@ CustomTeamsList::~CustomTeamsList()
     return;
   }
 
-  for(unsigned i = 0; i <  full_list.size(); i++)
+Clear();
+  singleton = NULL;
+}
+
+void CustomTeamsList::Clear(){
+   for(unsigned i = 0; i <  full_list.size(); i++)
   {
     delete full_list[i];
   }
   full_list.clear();
-  singleton = NULL;
+}
+
+CustomTeam *CustomTeamsList::GetByName(std::string name)
+{
+  for(unsigned i = 0; i <  full_list.size(); i++)
+  {
+    if(full_list[i]->GetName() == name){
+      return full_list[i];
+    }
+  }
+  return NULL;
 }
 
 std::vector<CustomTeam *> CustomTeamsList::GetList(){
@@ -54,16 +69,19 @@ std::vector<CustomTeam *> CustomTeamsList::GetList(){
 
 }
 
+unsigned CustomTeamsList::GetNumCustomTeam()
+{
+ return full_list.size();
+}
+
 void CustomTeamsList::LoadList()
 {
 
-  //Delete ?
-  full_list.clear();
-
+  Clear();
   const Config *config = Config::GetInstance();
 
   // Load personal custom teams
-  std::string dirname = config->GetPersonalDataDir() + "custom_team" PATH_SEPARATOR;
+  std::string dirname = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
@@ -75,7 +93,9 @@ void CustomTeamsList::LoadList()
       << std::endl;
   }
 
-  std::cout << std::endl;
+
+
+  Sort();
 
 }
 
@@ -91,8 +111,7 @@ void CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &cus
   // Add the team
   try {
     full_list.push_back(new CustomTeam(dir, custom_team_name));
-    std::cout << ((1<full_list.size())?", ":" ") << custom_team_name;
-    std::cout.flush();
+
   }
 
   catch (char const *error) {
@@ -102,4 +121,16 @@ void CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &cus
     return;
   }
 }
+
+void CustomTeamsList::Sort()
+{
+  std::sort( full_list.begin(), full_list.end(), CustomTeamsList::CompareItems );
+}
+
+bool CustomTeamsList::CompareItems( CustomTeam* p1, CustomTeam* p2 )
+{
+return ( p1->GetName().compare(p2->GetName())< 0);
+
+}
+
 

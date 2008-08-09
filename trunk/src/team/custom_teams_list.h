@@ -22,8 +22,11 @@
 #ifndef CUSTOM_TEAMS_LIST_H
 #define CUSTOM_TEAMS_LIST_H
 //-----------------------------------------------------------------------------
-#include <vector>
+
 #include "include/singleton.h"
+#include <string>
+#include <vector>
+
 //-----------------------------------------------------------------------------
 
 // Forward declarations
@@ -38,12 +41,15 @@ public:
   ~CustomTeamsList();
   void LoadList();
   std::vector<CustomTeam *> GetList();
-
+  CustomTeam* GetByName(std::string name);
+  unsigned GetNumCustomTeam();
 
 protected :
-
+  void Clear();
+  void Sort();
   std::vector<CustomTeam *> full_list;
   void LoadOneTeam (const std::string &dir, const std::string &file);
+  static bool CompareItems( CustomTeam* p1, CustomTeam* p2 );
 };
 
 

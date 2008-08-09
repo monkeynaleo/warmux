@@ -131,6 +131,7 @@ public:
   std::string GetDataDir() const { return data_dir; };
   std::string GetLocaleDir() const { return locale_dir; };
   std::string GetPersonalDataDir() const { return personal_data_dir; };
+  std::string GetPersonalConfigDir() const { return personal_config_dir; };
   std::string GetChatLogDir() const { return chat_log_dir; };
 
   bool Save(bool save_current_teams = false);
@@ -151,6 +152,11 @@ public:
 
   void SetNetworkLocalTeams();
   const std::list<ConfigTeam>& AccessNetworkTeamsList() const { return network_local_teams; };
+
+  // return true if the directory is created
+  bool MkdirPersonalConfigDir();
+  bool MkdirPersonalDataDir();
+  bool MkdirChatLogDir();
 
 protected:
   bool SaveXml(bool save_current_teams);
@@ -225,10 +231,7 @@ private:
   void LoadDefaultValue();
   void LoadXml(const xmlNode* xml);
 
-  // return true if the directory is created
-  bool MkdirPersonalConfigDir();
-  bool MkdirPersonalDataDir();
-  bool MkdirChatLogDir();
+
 
   /* this is mutable in order to be able to load config on fly when calling
    * GetObjectConfig() witch is not supposed to modify the object itself */
