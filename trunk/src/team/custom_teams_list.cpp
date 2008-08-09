@@ -19,9 +19,12 @@
  * Team handling
  *****************************************************************************/
 
- #include "team/custom_teams_list.h"
- #include "team/custom_team.h"
- #include <iostream>
+#include "game/config.h"
+#include "team/custom_teams_list.h"
+#include "team/custom_team.h"
+#include "tool/file_tools.h"
+#include "tool/i18n.h"
+#include <iostream>
 
 CustomTeamsList::CustomTeamsList()
 {
@@ -37,57 +40,66 @@ CustomTeamsList::~CustomTeamsList()
     return;
   }
 
-  for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
+  for(unsigned i = 0; i <  full_list.size(); i++)
   {
-    delete (*it);
+    delete full_list[i];
   }
   full_list.clear();
   singleton = NULL;
 }
 
+std::vector<CustomTeam *> CustomTeamsList::GetList(){
+
+  return full_list;
+
+}
+
 void CustomTeamsList::LoadList()
 {
-  full_list.clear() ;
 
-  //std::cout << "o " << _("Load custom teams:");
+  //Delete ?
+  full_list.clear();
 
- /* const Config * config = Config::GetInstance();
-  // Load Wormux teams
-  std::string dirname = config->GetDataDir() + "team" PATH_SEPARATOR;
+  const Config *config = Config::GetInstance();
+
+  // Load personal custom teams
+  std::string dirname = config->GetPersonalDataDir() + "custom_team" PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
     while ((name = FolderSearchNext(f)) != NULL) LoadOneTeam(dirname, name);
     CloseFolder(f);
   } else {
-    Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
-  }
-
-  // Load personal teams
-  dirname = config->GetPersonalDataDir() + "team" PATH_SEPARATOR;
-  f = OpenFolder(dirname);
-  if (f) {
-    const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) LoadOneTeam(dirname, name);
-    CloseFolder(f);
-  } else {
     std::cerr << std::endl
-      << Format(_("Cannot open personal teams directory (%s)!"), dirname.c_str())
+      << Format(_("Cannot open personal custom teams directory (%s)!"), dirname.c_str())
       << std::endl;
   }
 
-  full_list.sort(compareTeams);
-
-  // We need at least 2 teams
-  if (full_list.size() < 2)
-    Error(_("You need at least two valid teams !"));
-
-  // Default selection
-  std::list<uint> nv_selection;
-  nv_selection.push_back (0);
-  nv_selection.push_back (1);
-  ChangeSelection (nv_selection);
-
   std::cout << std::endl;
-  InitList(Config::GetInstance()->AccessTeamList());*/
+
 }
+
+
+void CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &custom_team_name)
+{
+  // Skip '.', '..' and hidden files
+  if (custom_team_name[0] == '.') return;
+
+  // Is it a directory ?
+  if (!IsFolderExist(dir+custom_team_name)) return;
+
+  // Add the team
+  try {
+    full_list.push_back(new CustomTeam(dir, custom_team_name));
+    std::cout << ((1<full_list.size())?", ":" ") << custom_team_name;
+    std::cout.flush();
+  }
+
+  catch (char const *error) {
+    std::cerr << std::endl
+              << Format(_("Error loading team :")) << custom_team_name <<":"<< error
+              << std::endl;
+    return;
+  }
+}
+

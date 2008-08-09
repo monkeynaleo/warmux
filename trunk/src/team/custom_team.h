@@ -23,6 +23,7 @@
 #define CUSTOM_TEAM_H
 //-----------------------------------------------------------------------------
 #include <list>
+#include <string>
 
 //-----------------------------------------------------------------------------
 
@@ -31,7 +32,13 @@ class CustomTeam
 {
   public :
     CustomTeam();
+    CustomTeam (const std::string &teams_dir, const std::string &id);
     ~CustomTeam();
+    std::string GetName();
+    protected :
+    uint nb_characters;
+    std::string name;
+    std::list<std::string> characters_name_list;
 
 };
 

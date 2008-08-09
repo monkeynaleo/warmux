@@ -22,7 +22,7 @@
 #ifndef CUSTOM_TEAMS_LIST_H
 #define CUSTOM_TEAMS_LIST_H
 //-----------------------------------------------------------------------------
-#include <list>
+#include <vector>
 #include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
@@ -37,11 +37,13 @@ public:
   CustomTeamsList();
   ~CustomTeamsList();
   void LoadList();
+  std::vector<CustomTeam *> GetList();
 
 
 protected :
-  typedef std::list<CustomTeam *>::iterator full_iterator;
-  std::list<CustomTeam *> full_list;
+
+  std::vector<CustomTeam *> full_list;
+  void LoadOneTeam (const std::string &dir, const std::string &file);
 };
 
 

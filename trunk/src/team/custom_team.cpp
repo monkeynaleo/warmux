@@ -19,11 +19,60 @@
  * Custom Team
  *****************************************************************************/
 
- #include "team/custom_team.h"
+#include "game/config.h"
+#include "team/custom_team.h"
+#include "tool/xml_document.h"
 
 CustomTeam::CustomTeam()
 {
 
+}
+
+CustomTeam::CustomTeam (const std::string &custom_teams_dir, const std::string &id){
+std::string nomfich;
+  XmlReader   doc;
+
+  // Load XML
+  nomfich = custom_teams_dir+id+ PATH_SEPARATOR "team.xml";
+
+  if (!doc.Load(nomfich))
+    throw "unable to load file of team data";
+
+  if (!XmlReader::ReadString(doc.GetRoot(), "name", name))
+    throw "Invalid file structure: cannot find a name for team ";
+
+
+  // Load character names
+  nb_characters = 10;
+
+
+  // Create the characters
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
+  xmlNodeArray::const_iterator it = nodes.begin();
+
+  do
+  {
+
+    std::string character_name = "Unknown Soldier (it's all over)";
+    std::string body_name = "";
+    XmlReader::ReadStringAttr(*it, "name", character_name);
+
+    characters_name_list.push_back(character_name);
+
+
+    MSG_DEBUG("team", "Add %s in  custom team %s", character_name.c_str(), name.c_str());
+
+    // Did we reach the end ?
+    ++it;
+  } while (it != nodes.end() && characters_name_list.size() < nb_characters );
+
+
+
+}
+
+
+std::string CustomTeam::GetName(){
+  return name;
 }
 
 CustomTeam::~CustomTeam()

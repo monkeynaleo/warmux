@@ -33,7 +33,7 @@
 #include "gui/button.h"
 #include "gui/label.h"
 #include "gui/box.h"
-#include "gui/button.h"
+#include "gui/big/button_pic.h"
 #include "gui/list_box.h"
 #include "gui/combo_box.h"
 #include "gui/check_box.h"
@@ -48,6 +48,7 @@
 #include "network/download.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
+#include "team/custom_team.h"
 #include "team/custom_teams_list.h"
 #include "tool/i18n.h"
 #include "tool/string_tools.h"
@@ -137,10 +138,10 @@ OptionMenu::OptionMenu() :
 
 
 
-  add_team = new Button(res, "menu/plus");
+  add_team = new ButtonPic(_("Add custom team"), "menu/add_custom_team",Point2i(100,100));
   teams_editor_sup->AddWidget(add_team);
 
-  delete_team = new Button(res, "menu/minus");
+  delete_team = new ButtonPic(_("Delete custom team"), "menu/del_custom_team",Point2i(100,100));
   teams_editor_sup->AddWidget(delete_team);
 
   lbox_teams = new ListBox(option_size);
@@ -178,15 +179,21 @@ OptionMenu::OptionMenu() :
 
   teams_editor_inf->AddWidget(teams_editor_names);
 
-
-
-  lbox_teams->AddItem(false,   "Test team",  "tt");
-
-
   teams_editor_inf->Pack();
   teams_editor->AddWidget(teams_editor_sup);
   teams_editor->AddWidget(teams_editor_inf);
   tabs->AddNewTab("unused", _("Teams editor"), teams_editor);
+
+
+  lbox_teams->AddItem(false,   "Test team",  "tt");
+
+  GetCustomTeamsList().LoadList();
+  std::vector<CustomTeam *> custom_team_list = GetCustomTeamsList().GetList();
+
+  for(unsigned i=0; i< custom_team_list.size() ; i++)
+  {
+      lbox_teams->AddItem(false,   custom_team_list[i]->GetName(),  "tt");
+  }
 
 
   /* Misc options */

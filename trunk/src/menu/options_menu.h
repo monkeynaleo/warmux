@@ -25,7 +25,7 @@
 #include "menu.h"
 #include <vector>
 
-class Button;
+class ButtonPic;
 class ListBox;
 class CheckBox;
 class ComboBox;
@@ -83,7 +83,7 @@ private:
    /* Teams controllers */
 
    ListBox *lbox_teams;
-   Button *add_team, *delete_team;
+   ButtonPic *add_team, *delete_team;
    TextBox *tbox_team_name;
    Label *team_name;
    std::vector<TextBox *> *tbox_character_name_list;

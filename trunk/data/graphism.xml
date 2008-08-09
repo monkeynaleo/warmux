@@ -86,6 +86,13 @@
   <!-- For nework menu  -->
   <surface name="password_lock" file="menu/padlock.png" />
 
+  <!-- For team editor menu -->
+
+ <surface name="add_custom_team" file="menu/add_custom_team.png" />
+ <surface name="del_custom_team" file="menu/del_custom_team.png" />
+
+ 
+
   <!-- Buttons -->
 
   <sprite name="send_txt">
