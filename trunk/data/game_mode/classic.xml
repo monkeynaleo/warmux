@@ -99,10 +99,10 @@
 
   <weapons>
     <air_attack>
-      <nb_ammo>-1</nb_ammo>
+      <nb_ammo>1</nb_ammo>
       <nbr_obus>4</nbr_obus>
       <damage>30</damage>
-      <mass>1</mass>
+      <mass>300</mass>
       <speed>10</speed>
       <explosion_range>80</explosion_range>
       <particle_range>80</particle_range>
