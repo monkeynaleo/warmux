@@ -167,8 +167,6 @@ void Plane::Refresh()
     next_height = RandomLocal().GetInt(20,300);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
-    /* afficher un nombre aleatoire entre 0 et variable*/
-    std::cout<<RandomLocal().GetInt(20,300)<<RandomLocal().GetInt(20,300)<<RandomLocal().GetInt(20,300)<<std::endl;
     if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height )
     {
       next_height = RandomLocal().GetInt(20,100);
