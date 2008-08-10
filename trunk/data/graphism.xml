@@ -35,11 +35,6 @@
 
   <surface name="ico_update" file="menu/i_update.png" />
 
-  <surface name="video_label" file="menu/video_label.png" />
-  <surface name="config_label" file="menu/config_label.png" />
-  <surface name="audio_label" file="menu/audio_label.png" />
-  <surface name="teams_label" file="menu/teams_label.png" />
-  <surface name="map_label" file="menu/map_label.png" />
   <surface name="mode_label" file="menu/mode_label.png" />
 
 
