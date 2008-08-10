@@ -32,6 +32,13 @@ bool IsFolderExist(const std::string &name);
 // Create the folder if it does not exist yet
 bool CreateFolder(const std::string &name);
 
+// Delete the folder if it exists
+bool DeleteFolder(const std::string &name);
+
+
+// Delete the file if it exists
+bool DeleteFile(const std::string &name);
+
 // Find the extension part of a filename
 std::string FileExtension(const std::string &name);
 
@@ -46,5 +53,7 @@ typedef struct _FolderSearch FolderSearch;
 FolderSearch *OpenFolder(const std::string& dirname);
 const char* FolderSearchNext(FolderSearch *f);
 void CloseFolder(FolderSearch *f);
+
+std::string FormatFileName(const std::string &name);
 
 #endif

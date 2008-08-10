@@ -43,6 +43,7 @@ class CustomTeam
     protected :
     uint nb_characters;
     std::string name;
+    std::string directory_name;
     std::vector<std::string> characters_name_list;
 
     bool SaveXml();

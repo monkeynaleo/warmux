@@ -89,6 +89,26 @@ bool CreateFolder(const std::string &name)
   return true;
 }
 
+
+// Delete the folder if it exists
+bool DeleteFolder(const std::string &name)
+{
+  if (IsFolderExist(name)){
+    return (rmdir(name.c_str())==0);
+  }
+  return false;
+
+}
+
+
+// Delete the file if it exists
+bool DeleteFile(const std::string &name)
+{
+
+    return (remove(name.c_str()) == 0);
+
+
+}
 // Find the extension part of a filename
 std::string FileExtension (const std::string &name)
 {
@@ -215,4 +235,26 @@ std::string TranslateDirectory(const std::string &directory)
     txt.replace(pos,1,home);
   }
   return txt;
+}
+
+std::string FormatFileName(const std::string &name)
+{
+ std::string formated_name = name;
+
+    for(unsigned i = 0;i<formated_name.size();i++)
+    {
+      if(formated_name[i] == ' '){
+          formated_name[i] = '_';
+      }
+      if(formated_name[i] == '.'){
+          formated_name[i] = '_';
+      }
+      if(formated_name[i] == '/'){
+          formated_name[i] = '_';
+      }
+      if(formated_name[i] == '\\'){
+          formated_name[i] = '_';
+      }
+    }
+  return formated_name;
 }

@@ -40,6 +40,8 @@ CustomTeam::CustomTeam (const std::string &custom_teams_dir, const std::string &
 std::string nomfich;
   XmlReader   doc;
 
+  directory_name = custom_teams_dir+id+PATH_SEPARATOR;
+
   // Load XML
   nomfich = custom_teams_dir+id+ PATH_SEPARATOR "team.xml";
 
@@ -85,7 +87,30 @@ CustomTeam::~CustomTeam()
 
 void CustomTeam::Delete()
 {
+  if(!DeleteFile(directory_name+"team.xml")){
+    std::string file = directory_name + "team.xml";
+    std::cerr << "o "
+	      << Format(_("Error while deleting file \"%s\": unable to delete custom team."),
+			file.c_str())
+	      << " " << strerror(errno)
+	      << std::endl;
 
+  }else{
+   std::cout << "Custom team file succefuly deleted" <<std::endl;
+  }
+
+
+  if(!DeleteFolder(directory_name))
+  {
+    std::cerr << "o "
+	      << Format(_("Error while deleting directory \"%s\": unable to delete custom team."),
+			directory_name.c_str())
+	      << " " << strerror(errno)
+	      << std::endl;
+
+  }else{
+   std::cout << "Custom team directory succefuly deleted" <<std::endl;
+  }
 }
 
 
@@ -101,11 +126,25 @@ std::string CustomTeam::GetName()
 
 void CustomTeam::NewTeam()
 {
+  Config *config = Config::GetInstance();
 
-  std::ostringstream oss;
-    oss << GetCustomTeamsList().GetNumCustomTeam()+1;
+int team_count = 0;
+do
+{
+
+    team_count++;
+    std::ostringstream oss;
+    oss << team_count;
 
     name = "team "+oss.str();
+
+
+    directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name) + PATH_SEPARATOR;
+
+
+
+}while(IsFolderExist(directory_name));
+
     for(unsigned i = 1; i<11; i++)
     {
       std::ostringstream oss2;
@@ -140,9 +179,9 @@ std::string rep = config->GetPersonalConfigDir();
     return false;
   }
 
-    rep = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + name + PATH_SEPARATOR;
+    rep = directory_name;
 
-  if (!CreateFolder(config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + name + PATH_SEPARATOR))
+  if (!CreateFolder(directory_name))
   {
     std::cerr << "o "
 	      << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
@@ -158,9 +197,20 @@ std::string rep = config->GetPersonalConfigDir();
 bool CustomTeam::SaveXml()
 {
 
-    const Config *config = Config::GetInstance();
+
   XmlWriter doc;
-  std::string m_filename = config->GetPersonalConfigDir()  + "custom_team" PATH_SEPARATOR+ name + PATH_SEPARATOR + "team.xml";
+
+   std::string unix_name = name;
+
+    for(unsigned i = 0;i<unix_name.size();i++)
+    {
+      if(unix_name[i] == ' '){
+          unix_name[i] = '_';
+      }
+    }
+
+
+  std::string m_filename = directory_name + "team.xml";
   doc.Create(m_filename, "resources", "1.0", "utf-8");
   xmlNode *root = doc.GetRoot();
   doc.WriteElement(root, "name", name);

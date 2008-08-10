@@ -469,26 +469,39 @@ void OptionMenu::AddTeam()
 
 void OptionMenu::DeleteTeam()
 {
-
+  if(selected_team !=NULL)
+  {
+    selected_team->Delete();
+    selected_team = NULL;
+    ReloadTeamList();
+    LoadTeam();
+    lbox_teams->Deselect();
+  }
 }
 
 void OptionMenu::LoadTeam()
 {
 std::cout<<"LoadTeam"<<std::endl;
 
-    if(selected_team != NULL){
-      std::cout<<"Plop"<<std::endl;
+    if(selected_team != NULL)
+    {
       tbox_team_name->SetText(selected_team->GetName());
-      std::cout<<selected_team->GetName()<<std::endl;
       std::vector<std::string> character_names = selected_team->GetCharactersNameList();
 
-      for(unsigned i=0; i< character_names.size(); i++)
+      for(unsigned i=0; i< character_names.size() && i<tbox_character_name_list.size(); i++)
       {
         tbox_character_name_list[i]->SetText(character_names[i]);
-        std::cout<<character_names[i]<<std::endl;
       }
 
-    }
+    }else{
+      tbox_team_name->SetText("");
+
+      for(unsigned i=0; i< tbox_character_name_list.size(); i++)
+      {
+        tbox_character_name_list[i]->SetText("");
+
+      }
+  }
 }
 
 void OptionMenu::ReloadTeamList()
