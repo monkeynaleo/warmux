@@ -392,7 +392,10 @@ void OptionMenu::SaveOptions()
   config->Save();
 
   //Team editor
-
+  if((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0))
+  {
+    AddTeam();
+  }
   SaveTeam();
 }
 
@@ -455,13 +458,18 @@ uint OptionMenu::fromVolume(uint vol)
 
 void OptionMenu::AddTeam()
 {
-  SaveTeam();
-  CustomTeam *new_team = new CustomTeam();
-  new_team->NewTeam();
-  new_team->Save();
-  selected_team = new_team;
-  ReloadTeamList();
-  lbox_teams->NeedRedrawing();
+    SaveTeam();
+    CustomTeam *new_team = new CustomTeam();
+    new_team->NewTeam();
+    new_team->Save();
+    if((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0))
+    {
+      selected_team = new_team;
+      SaveTeam();
+    }
+    selected_team = new_team;
+    ReloadTeamList();
+    lbox_teams->NeedRedrawing();
 }
 
 void OptionMenu::DeleteTeam()

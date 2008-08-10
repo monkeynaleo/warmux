@@ -135,9 +135,8 @@ do
 
     for(unsigned i = 1; i<(nb_characters+1); i++)
     {
-      std::ostringstream oss2;
-      oss2<<i;
-     characters_name_list.push_back("character "+oss2.str());
+
+     characters_name_list.push_back("");
     }
 }
 
