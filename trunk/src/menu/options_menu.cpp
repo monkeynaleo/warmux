@@ -144,7 +144,7 @@ OptionMenu::OptionMenu() :
   delete_team = new ButtonPic(_("Delete custom team"), "menu/del_custom_team",Point2i(100,100));
   teams_editor_sup->AddWidget(delete_team);
 
-  lbox_teams = new ListBox(option_size);
+  lbox_teams = new ListBox(option_size,false);
   teams_editor_sup->AddWidget(lbox_teams);
 
   team_name = new Label("Team name : ", 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
@@ -470,12 +470,13 @@ void OptionMenu::DeleteTeam()
   {
     selected_team->Delete();
     selected_team = NULL;
-    ReloadTeamList();
-    LoadTeam();
     if(lbox_teams->IsSelectedItem())
     {
       lbox_teams->Deselect();
+
     }
+    ReloadTeamList();
+    LoadTeam();
     lbox_teams->NeedRedrawing();
   }
 
