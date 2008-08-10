@@ -40,7 +40,11 @@ class CustomTeam
     bool Save();
     void Delete();
 
+    void SetName(const std::string &new_name);
+    void SetCharacterName(unsigned id, const std::string &new_name);
+
     protected :
+    bool is_name_changed;
     uint nb_characters;
     std::string name;
     std::string directory_name;

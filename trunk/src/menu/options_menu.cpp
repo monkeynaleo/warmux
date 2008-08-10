@@ -134,13 +134,9 @@ OptionMenu::OptionMenu() :
 
   /* Team editor */
 
-
-
   Box * teams_editor = new VBox(max_width, false, true);
   Box * teams_editor_sup = new GridBox(max_width, option_size, true);
   Box * teams_editor_inf = new VBox(max_width, true,false);
-
-
 
   add_team = new ButtonPic(_("Add custom team"), "menu/add_custom_team",Point2i(100,100));
   teams_editor_sup->AddWidget(add_team);
@@ -161,9 +157,6 @@ OptionMenu::OptionMenu() :
  Point2i names_size(140, 50);
 
   Box * teams_editor_names = new GridBox(max_width, names_size, false);
-
-
-
 
   for(unsigned i=0; i < 10 ; i++)
   {
@@ -329,9 +322,7 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
     JukeBox::GetInstance()->ActiveEffects(effects_cbox->GetValue());
   }
   else if (w == lbox_teams) {
-
     SelectTeam();
-
   }
   else if (w ==add_team){
     AddTeam();
@@ -348,6 +339,7 @@ void OptionMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
 
 void OptionMenu::SaveOptions()
 {
+
   Config * config = Config::GetInstance();
 
   // Graphic options
@@ -398,6 +390,10 @@ void OptionMenu::SaveOptions()
 
   //Save options in XML
   config->Save();
+
+  //Team editor
+
+  SaveTeam();
 }
 
 bool OptionMenu::signal_ok()
@@ -459,12 +455,13 @@ uint OptionMenu::fromVolume(uint vol)
 
 void OptionMenu::AddTeam()
 {
+  SaveTeam();
   CustomTeam *new_team = new CustomTeam();
   new_team->NewTeam();
   new_team->Save();
   selected_team = new_team;
   ReloadTeamList();
-
+  lbox_teams->NeedRedrawing();
 }
 
 void OptionMenu::DeleteTeam()
@@ -475,13 +472,17 @@ void OptionMenu::DeleteTeam()
     selected_team = NULL;
     ReloadTeamList();
     LoadTeam();
-    lbox_teams->Deselect();
+    if(lbox_teams->IsSelectedItem())
+    {
+      lbox_teams->Deselect();
+    }
+    lbox_teams->NeedRedrawing();
   }
+
 }
 
 void OptionMenu::LoadTeam()
 {
-std::cout<<"LoadTeam"<<std::endl;
 
     if(selected_team != NULL)
     {
@@ -501,12 +502,11 @@ std::cout<<"LoadTeam"<<std::endl;
         tbox_character_name_list[i]->SetText("");
 
       }
-  }
+    }
 }
 
 void OptionMenu::ReloadTeamList()
 {
-
   lbox_teams->ClearItems();
   std::string selected_team_name ="";
   if(selected_team != NULL){
@@ -526,14 +526,37 @@ void OptionMenu::ReloadTeamList()
       lbox_teams->AddItem((selected_team == custom_team_list[i]),   custom_team_list[i]->GetName(),  custom_team_list[i]->GetName());
 
   }
+}
 
 
+bool OptionMenu::SaveTeam(){
+if(selected_team !=NULL)
+  {
+    bool is_name_changed = (selected_team->GetName().compare(tbox_team_name->GetText()) != 0);
+    selected_team->SetName(tbox_team_name->GetText());
+    for(unsigned i=0; i<tbox_character_name_list.size(); i++)
+      {
+        selected_team->SetCharacterName(i,tbox_character_name_list[i]->GetText());
+      }
+    selected_team->Save();
+    return is_name_changed;
+  }
+
+    return false;
 }
 
 void OptionMenu::SelectTeam()
 {
-  std::string s_selected_team = lbox_teams->ReadValue();
-  selected_team = GetCustomTeamsList().GetByName(s_selected_team);
-  LoadTeam();
+  if(lbox_teams->IsSelectedItem())
+  {
+    bool is_changed_name = SaveTeam();
+    std::string s_selected_team = lbox_teams->ReadValue();
+    selected_team = GetCustomTeamsList().GetByName(s_selected_team);
+    LoadTeam();
+    if(is_changed_name)
+    {
+        ReloadTeamList();
+    }
 
+  }
 }

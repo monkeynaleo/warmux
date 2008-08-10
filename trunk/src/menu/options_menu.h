@@ -96,6 +96,7 @@ private:
     void DeleteTeam();
     void LoadTeam();
     void ReloadTeamList();
+    bool SaveTeam();
     void SelectTeam();
 
 

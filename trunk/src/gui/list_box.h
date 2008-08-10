@@ -82,6 +82,7 @@ public:
   void Deselect();
   void RemoveSelected();
   void ClearItems();
+  bool IsSelectedItem();
 
   uint Size() const { return m_items.size(); };
 };

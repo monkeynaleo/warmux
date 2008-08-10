@@ -33,7 +33,8 @@
 
 CustomTeam::CustomTeam()
 {
-
+ nb_characters = 10;
+ is_name_changed = false;
 }
 
 CustomTeam::CustomTeam (const std::string &custom_teams_dir, const std::string &id){
@@ -58,7 +59,7 @@ std::string nomfich;
   // Create the characters
   xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
   xmlNodeArray::const_iterator it = nodes.begin();
-
+  is_name_changed = false;
   do
   {
 
@@ -95,11 +96,7 @@ void CustomTeam::Delete()
 	      << " " << strerror(errno)
 	      << std::endl;
 
-  }else{
-   std::cout << "Custom team file succefuly deleted" <<std::endl;
   }
-
-
   if(!DeleteFolder(directory_name))
   {
     std::cerr << "o "
@@ -108,8 +105,6 @@ void CustomTeam::Delete()
 	      << " " << strerror(errno)
 	      << std::endl;
 
-  }else{
-   std::cout << "Custom team directory succefuly deleted" <<std::endl;
   }
 }
 
@@ -127,25 +122,18 @@ std::string CustomTeam::GetName()
 void CustomTeam::NewTeam()
 {
   Config *config = Config::GetInstance();
-
-int team_count = 0;
+  int team_count = 0;
 do
 {
-
     team_count++;
     std::ostringstream oss;
     oss << team_count;
-
     name = "team "+oss.str();
-
-
     directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name) + PATH_SEPARATOR;
-
-
 
 }while(IsFolderExist(directory_name));
 
-    for(unsigned i = 1; i<11; i++)
+    for(unsigned i = 1; i<(nb_characters+1); i++)
     {
       std::ostringstream oss2;
       oss2<<i;
@@ -155,9 +143,16 @@ do
 
 bool CustomTeam::Save()
 {
+  Config *config = Config::GetInstance();
+  if(is_name_changed){
+      Delete();
 
- Config *config = Config::GetInstance();
-std::string rep = config->GetPersonalConfigDir();
+      directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name) + PATH_SEPARATOR;
+      is_name_changed = false;
+  }
+
+
+  std::string rep = config->GetPersonalConfigDir();
   // Create the directory if it doesn't exist
   if (!config->MkdirPersonalConfigDir())
   {
@@ -227,6 +222,24 @@ bool CustomTeam::SaveXml()
   return doc.Save();
 }
 
+
+void CustomTeam::SetName(const std::string &new_name)
+{
+  if(name.compare(new_name) != 0){
+    is_name_changed = true;
+  }
+  name = new_name;
+
+}
+
+void CustomTeam::SetCharacterName(unsigned id, const std::string &new_name)
+{
+  if(id < nb_characters)
+  {
+    characters_name_list[id]=new_name;
+  }
+
+}
 
 
 

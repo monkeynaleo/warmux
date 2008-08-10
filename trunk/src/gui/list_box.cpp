@@ -247,6 +247,11 @@ void BaseListBox::AddWidgetItem(bool selected, Widget* item)
     Select (pos);
 }
 
+bool BaseListBox::IsSelectedItem()
+{
+  return (selected_item != -1);
+}
+
 void BaseListBox::Sort() const
 {
   //std::sort( m_items.begin(), m_items.end(), CompareItems() );
@@ -301,6 +306,8 @@ ListBoxItem::ListBoxItem(const std::string& _label,
   value(_value)
 {
 }
+
+
 
 const std::string& ListBoxItem::GetLabel() const
 {
