@@ -99,15 +99,15 @@
 
   <weapons>
     <air_attack>
-      <nb_ammo>1</nb_ammo>
-      <nbr_obus>3</nbr_obus>
+      <nb_ammo>-1</nb_ammo>
+      <nbr_obus>4</nbr_obus>
       <damage>30</damage>
-      <mass>300</mass>
+      <mass>1</mass>
       <speed>10</speed>
       <explosion_range>80</explosion_range>
       <particle_range>80</particle_range>
-      <blast_range>75</blast_range>
-      <blast_force>2500</blast_force>
+      <blast_range>85</blast_range>
+      <blast_force>1500</blast_force>
     </air_attack>
 
     <anvil_launcher>

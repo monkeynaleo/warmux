@@ -38,7 +38,7 @@ class Plane : public PhysicalObj
 
     int obus_dx, obus_dy;
     Sprite *image;
-
+    int next_height;
     int cible_x;
     int distance_to_release;
     AirAttackConfig &cfg;

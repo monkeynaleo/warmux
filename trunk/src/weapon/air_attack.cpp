@@ -36,7 +36,9 @@
 #include "team/teams_list.h"
 #include "tool/i18n.h"
 #include "tool/resource_manager.h"
+#include "tool/random.h"
 #include "tool/xml_document.h"
+
 
 const int FORCE_X_MIN = -50;
 const uint FORCE_X_MAX = 0;
@@ -162,10 +164,16 @@ void Plane::Refresh()
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
     DropBomb();
     m_ignore_movements = true;
+    next_height = RandomLocal().GetInt(20,300);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
-    if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+10 )
+    /* afficher un nombre aleatoire entre 0 et variable*/
+    std::cout<<RandomLocal().GetInt(20,300)<<RandomLocal().GetInt(20,300)<<RandomLocal().GetInt(20,300)<<std::endl;
+    if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height )
+    {
+      next_height = RandomLocal().GetInt(20,100);
       DropBomb();
+    }
   }
 }
 
