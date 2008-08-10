@@ -57,19 +57,32 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   Box * tmp_player_box = new HBox(W_UNDEF, false, false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetNoBorder();
-  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-60-100,
-                                      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
+
+  custom_team_list = GetCustomTeamsList().GetList();
+  custom_team_current_id = 0;
+
   player_name = new TextBox(_player_name, 100,
                             Font::FONT_SMALL, Font::FONT_NORMAL);
 
-  next_custom_team = new Button(res, "menu/plus");
+  if(custom_team_list.size()==0){
+  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
+                                      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
 
-  previous_custom_team = new Button(res, "menu/minus");
+    tmp_player_box->AddWidget(player_name);
+  }
+  else
+  {
+    tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-60-100,
+                                      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
 
+    next_custom_team = new Button(res, "menu/plus");
 
-  tmp_player_box->AddWidget(previous_custom_team);
-  tmp_player_box->AddWidget(player_name);
-  tmp_player_box->AddWidget(next_custom_team);
+    previous_custom_team = new Button(res, "menu/minus");
+
+    tmp_player_box->AddWidget(previous_custom_team);
+    tmp_player_box->AddWidget(player_name);
+    tmp_player_box->AddWidget(next_custom_team);
+  }
 
   nb_characters = new SpinButton(_("Number of characters"), _size.GetX()-50,
                                  6,1,1,10,
@@ -79,8 +92,6 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   tmp_box->AddWidget(tmp_player_box);
   tmp_box->AddWidget(nb_characters);
 
-  custom_team_list = GetCustomTeamsList().GetList();
-  custom_team_current_id = 0;
 
   AddWidget(tmp_box);
 }
@@ -139,30 +150,33 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
     if (w == player_name) {
       return w;
     }
-    if (w == next_custom_team)
+    if(custom_team_list.size()>0)
     {
-      player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
+      if (w == next_custom_team)
+      {
+        player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
 
-      if(custom_team_current_id == custom_team_list.size()-1)
-      {
-        custom_team_current_id = 0;
+        if(custom_team_current_id == custom_team_list.size()-1)
+        {
+          custom_team_current_id = 0;
+        }
+        else
+        {
+          custom_team_current_id++;
+        }
       }
-      else
+      if (w == previous_custom_team)
       {
-        custom_team_current_id++;
-      }
-    }
-    if (w == previous_custom_team)
-    {
-      player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
+        player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
 
-      if(custom_team_current_id == 0)
-      {
-        custom_team_current_id = custom_team_list.size()-1;
-      }
-      else
-      {
-        custom_team_current_id--;
+        if(custom_team_current_id == 0)
+        {
+          custom_team_current_id = custom_team_list.size()-1;
+        }
+        else
+        {
+          custom_team_current_id--;
+        }
       }
     }
   }
