@@ -23,13 +23,17 @@
 #define TEAM_BOX_H
 
 #include <string>
+#include <vector>
 #include "gui/box.h"
 
+class Button;
+class CustomTeam;
 class Team;
 class SpinButton;
 class Label;
 class PictureWidget;
 class TextBox;
+
 
 class TeamBox : public HBox
 {
@@ -46,7 +50,12 @@ class TeamBox : public HBox
   PictureWidget *team_logo;
   Label * team_name;
   TextBox * player_name;
+  Button * next_custom_team;
+  Button * previous_custom_team;
   SpinButton * nb_characters;
+
+  std::vector<CustomTeam *> custom_team_list;
+  unsigned custom_team_current_id;
 
 
   void UpdateTeam(const std::string& old_team_id) const;

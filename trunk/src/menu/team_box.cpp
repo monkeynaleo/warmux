@@ -19,6 +19,7 @@
  *  Teams selection box
  *****************************************************************************/
 
+#include "gui/button.h"
 #include "gui/label.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
@@ -27,7 +28,10 @@
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "team/team.h"
+#include "team/custom_team.h"
+#include "team/custom_teams_list.h"
 #include "tool/i18n.h"
+#include "tool/resource_manager.h"
 
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   HBox(W_UNDEF, false, false)
@@ -36,6 +40,8 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
   SetMargin(2);
   SetNoBorder();
+
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
   team_logo = new PictureWidget(Point2i(48, 48));
   AddWidget(team_logo);
@@ -51,11 +57,19 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   Box * tmp_player_box = new HBox(W_UNDEF, false, false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetNoBorder();
-  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
+  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-60-100,
                                       Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
   player_name = new TextBox(_player_name, 100,
                             Font::FONT_SMALL, Font::FONT_NORMAL);
+
+  next_custom_team = new Button(res, "menu/plus");
+
+  previous_custom_team = new Button(res, "menu/minus");
+
+
+  tmp_player_box->AddWidget(previous_custom_team);
   tmp_player_box->AddWidget(player_name);
+  tmp_player_box->AddWidget(next_custom_team);
 
   nb_characters = new SpinButton(_("Number of characters"), _size.GetX()-50,
                                  6,1,1,10,
@@ -64,6 +78,9 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   tmp_box->AddWidget(team_name);
   tmp_box->AddWidget(tmp_player_box);
   tmp_box->AddWidget(nb_characters);
+
+  custom_team_list = GetCustomTeamsList().GetList();
+  custom_team_current_id = 0;
 
   AddWidget(tmp_box);
 }
@@ -121,6 +138,32 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
     }
     if (w == player_name) {
       return w;
+    }
+    if (w == next_custom_team)
+    {
+      player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
+
+      if(custom_team_current_id == custom_team_list.size()-1)
+      {
+        custom_team_current_id = 0;
+      }
+      else
+      {
+        custom_team_current_id++;
+      }
+    }
+    if (w == previous_custom_team)
+    {
+      player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
+
+      if(custom_team_current_id == 0)
+      {
+        custom_team_current_id = custom_team_list.size()-1;
+      }
+      else
+      {
+        custom_team_current_id--;
+      }
     }
   }
   return NULL;
