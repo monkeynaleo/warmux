@@ -47,6 +47,7 @@ private:
   /**********************************************/
 
   std::string character_name;
+
   Team &m_team;
   bool step_sound_played;
   bool prepare_shoot;
@@ -191,10 +192,10 @@ public:
   uint GetCharacterIndex() const;
 
   // Access to character info
-  const std::string& GetName() const { return character_name; }
+  const std::string& GetName() const;
   bool IsSameAs(const Character& other) const { return (GetName() == other.GetName()); }
-
-  // Hand position
+  void SetCustomName(const std::string name);
+   // Hand position
   const Point2i & GetHandPosition() const;
 
   // Damage report

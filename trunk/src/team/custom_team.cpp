@@ -31,13 +31,13 @@
 #include "tool/i18n.h"
 #include "tool/xml_document.h"
 
-CustomTeam::CustomTeam()
+CustomTeam::CustomTeam():characters_name_list()
 {
  nb_characters = 10;
  is_name_changed = false;
 }
 
-CustomTeam::CustomTeam (const std::string &custom_teams_dir, const std::string &id){
+CustomTeam::CustomTeam (const std::string &custom_teams_dir, const std::string &id):characters_name_list(){
 std::string nomfich;
   XmlReader   doc;
 
@@ -111,7 +111,10 @@ void CustomTeam::Delete()
 
 std::vector<std::string> CustomTeam::GetCharactersNameList()
 {
-  return characters_name_list;
+  std::cout<<"plop"<<std::endl;
+  std::vector<std::string> list = characters_name_list;
+  std::cout<<"plip"<<std::endl;
+  return list;
 }
 
 std::string CustomTeam::GetName()

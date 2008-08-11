@@ -40,6 +40,7 @@
 #include "particles/fading_text.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
+#include "team/custom_team.h"
 #include "team/macro.h"
 #include "tool/math_tools.h"
 #include "tool/random.h"
@@ -122,6 +123,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   previous_strength(0),
   body(NULL)
 {
+
   m_is_character = true;
   SetCollisionModel(false, true, true);
   /* body stuff */
@@ -950,6 +952,24 @@ void Character::GetValueFromAction(Action *a)
   }
 }
 
+
+const std::string& Character::GetName() const
+{
+    return character_name;
+ }
+
+void Character::SetCustomName(const std::string name)
+{
+  std::cout<<"Character::SetCustomName "<<name<<std::endl;
+
+  if(name.size()>0)
+  {
+    name_text->Set(name);
+    character_name = name;
+  }
+
+
+}
 // ###################################################################
 // ###################################################################
 // ###################################################################
@@ -1067,4 +1087,6 @@ void Character::HandleKeyPressed_BackJump(bool)
     SendActiveCharacterAction(a);
   }
 }
+
+
 

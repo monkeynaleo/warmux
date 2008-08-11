@@ -31,6 +31,7 @@
 #include "weapon/weapon.h"
 
 class Character;
+class CustomTeam;
 
 typedef enum {
   TEAM_human_local,
@@ -75,6 +76,8 @@ class Team
     Weapon *active_weapon;
     uint nb_characters;
     uint current_turn;
+
+    CustomTeam *attached_custom_team;
 
     team_player_type_t type_of_player;
 
@@ -176,6 +179,9 @@ class Team
 
   // reset characters number, type_of_player and player name
     void SetDefaultPlayingConfig();
+
+  // Custom team
+    void AttachCustomTeam(CustomTeam*);
 };
 
 #endif /* TEAM_H */

@@ -66,6 +66,7 @@ class TeamBox : public HBox
   void SetTeam(Team& _team, bool read_team_values=false);
   void ClearTeam();
   Team* GetTeam() const;
+  CustomTeam *GetCustomTeam();
 
   void ValidOptions() const;
 

@@ -31,6 +31,8 @@
 #include "team/team.h"
 #include "tool/i18n.h"
 
+#include <iostream>
+
 TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network) :
   HBox(_size.y, network)
 {
@@ -245,24 +247,34 @@ void TeamsSelectionBox::SetNbTeams(uint nb_teams)
 
 void TeamsSelectionBox::ValidTeamsSelection()
 {
+  std::cout<<"TeamsSelectionBox::ValidTeamsSelection"<<std::endl;
   uint nb_teams=0;
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() != NULL)
+    {
       nb_teams++;
+      teams_selections.at(i)->GetTeam()->AttachCustomTeam(teams_selections.at(i)->GetCustomTeam());
+    }
   }
 
   if (nb_teams >= 2) {
     std::list<uint> selection;
 
     for (uint i=0; i < teams_selections.size(); i++) {
+
       if (teams_selections.at(i)->GetTeam() != NULL) {
+
         int index = -1;
         teams_selections.at(i)->ValidOptions();
         GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
         if (index > -1)
+        {
           selection.push_back(uint(index));
+
+        }
       }
     }
     GetTeamsList().ChangeSelection (selection);
+
   }
 }

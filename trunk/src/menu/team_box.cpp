@@ -108,6 +108,19 @@ Team* TeamBox::GetTeam() const
   return associated_team;
 }
 
+CustomTeam* TeamBox::GetCustomTeam()
+{
+  std::cout<<"TeamBox::GetCustomTeam"<<std::endl;
+  if( custom_team_list.size() == 0)
+  {
+    return NULL;
+  }
+  else
+  {
+    return GetCustomTeamsList().GetByName(player_name->GetText());
+  }
+}
+
 void TeamBox::Update(const Point2i &mousePosition,
                      const Point2i &lastMousePosition)
 {
