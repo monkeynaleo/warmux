@@ -50,7 +50,7 @@ Interface::Interface()
   display = true;
   start_hide_display = 0;
   start_show_display = 0;
-  display_minimap = false;
+  display_minimap = true;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   game_menu = resource_manager.LoadImage( res, "interface/background_interface");
