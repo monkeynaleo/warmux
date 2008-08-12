@@ -9,7 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-08-13 00:03+0300\n"
+"POT-Creation-Date: 2008-08-13 00:08+0300\n"
+"PO-Revision-Date: 2008-08-13 00:11+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,22 +70,22 @@ msgstr "Echipa %s - la distanță"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:692
+#: src/game/game.cpp:692
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s din echipa %s s-a sinucis !"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:725
+#: src/game/game.cpp:725
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s din echipa %s a murit."
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:683
+#: src/game/game.cpp:683
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s din echipa %s a căzut în apă!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:677
+#: src/game/game.cpp:677
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s din echipa %s a căzut în afara hărții!"
@@ -95,7 +96,7 @@ msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s din echipa %s a lovit prea tare pământul!"
 
 # what about female names?
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:705
+#: src/game/game.cpp:705
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s din echipa %s decedat prin propria stângăcie!"
@@ -575,68 +576,7 @@ msgstr "Echipa %s a fost nimicită."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a luat cu el în mormânt un membru al echipei %s!"
 
-#. 1003.2 specifies the format of this message.
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:794
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr "%s: opțiune ilegală -- %c\n"
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:797
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr "%s: opțiune nevalidă -- %c\n"
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:717
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: opțiunea „%c%s” nu are argument\n"
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:687
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s: opțiunea „%s” e ambiguă\n"
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:735
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:908
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: opțiunea „%s” are nevoie de un argument\n"
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:712
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: opțiunea „--%s” nu are argument\n"
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:892
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr "%s: opțiunea „-W %s” nu are argument\n"
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:874
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr "%s: opțiunea „-W %s” este ambiguă\n"
-
-#. 1003.2 specifies the format of this message.
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:827
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:957
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: opțiunea are nevoie de un argument -- %c\n"
-
-#. +option or -option
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:768
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: opțiunea „%c%s” nu este recunoscută\n"
-
-#. --option
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:764
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: opțiune nerecunoscută „--%s”\n"
-
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:165
+#: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(mort)"
 
@@ -664,7 +604,11 @@ msgstr ""
 "doriți să verificați dacă există o versiune actualizată pentru sistemul de "
 "operare folosit."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:209
+#: src/menu/options_menu.cpp:141
+msgid "Add custom team"
+msgstr "Adaugă o echipă particularizată"
+
+#: src/weapon/air_attack.cpp:215
 msgid "Air Attack"
 msgstr "Atac aerian"
 
@@ -859,7 +803,7 @@ msgstr "Volumul efectelor"
 msgid "Energy"
 msgstr "Energie"
 
-#: /home/yekcim/Dev/wormux/trunk/src/tool/error.cpp:63
+#: src/tool/error.cpp:63
 #, c-format
 msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "Eroare în %s:%lu (Wormux %s) : %s"
@@ -912,13 +856,13 @@ msgstr ""
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Nu a fost posibilă conectarea la %s:%s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:329
+#: src/menu/network_connection_menu.cpp:329
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a găzdui un "
 "joc"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:270
+#: src/menu/network_connection_menu.cpp:270
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
@@ -1607,7 +1551,6 @@ msgstr[2] "Așteaptă! %i de jucători nu sunt gata încă!"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Se așteaptă serverul, tot ce puteți face e să anulați sau să vorbiți!"
 
-#. Adding label
 #. Initialization of teams' energy
 #. Adding label
 #: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:167
@@ -1726,6 +1669,39 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: opțiune ilegală -- %c\n"
+
+#~ msgid "%s: invalid option -- %c\n"
+#~ msgstr "%s: opțiune nevalidă -- %c\n"
+
+#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
+#~ msgstr "%s: opțiunea „%c%s” nu are argument\n"
+
+#~ msgid "%s: option `%s' is ambiguous\n"
+#~ msgstr "%s: opțiunea „%s” e ambiguă\n"
+
+#~ msgid "%s: option `%s' requires an argument\n"
+#~ msgstr "%s: opțiunea „%s” are nevoie de un argument\n"
+
+#~ msgid "%s: option `--%s' doesn't allow an argument\n"
+#~ msgstr "%s: opțiunea „--%s” nu are argument\n"
+
+#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
+#~ msgstr "%s: opțiunea „-W %s” nu are argument\n"
+
+#~ msgid "%s: option `-W %s' is ambiguous\n"
+#~ msgstr "%s: opțiunea „-W %s” este ambiguă\n"
+
+#~ msgid "%s: option requires an argument -- %c\n"
+#~ msgstr "%s: opțiunea are nevoie de un argument -- %c\n"
+
+#~ msgid "%s: unrecognized option `%c%s'\n"
+#~ msgstr "%s: opțiunea „%c%s” nu este recunoscută\n"
+
+#~ msgid "%s: unrecognized option `--%s'\n"
+#~ msgstr "%s: opțiune nerecunoscută „--%s”\n"
 
 #, fuzzy
 #~ msgid ""
