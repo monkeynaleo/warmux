@@ -92,16 +92,16 @@ void CustomTeam::Delete()
   if(!DeleteFile(directory_name+"team.xml")){
     std::string file = directory_name + "team.xml";
     std::cerr << "o "
-	      << Format(_("Error while deleting file \"%s\": unable to delete custom team."),
+	      << Format(_("Error while deleting the file \"%s\". Unable to delete the custom team."),
 			file.c_str())
 	      << " " << strerror(errno)
 	      << std::endl;
-
+    return;
   }
   if(!DeleteFolder(directory_name))
   {
     std::cerr << "o "
-	      << Format(_("Error while deleting directory \"%s\": unable to delete custom team."),
+	      << Format(_("Error while deleting the directory \"%s\". Unable to delete the custom team."),
 			directory_name.c_str())
 	      << " " << strerror(errno)
 	      << std::endl;

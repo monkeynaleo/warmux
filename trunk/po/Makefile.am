@@ -299,6 +299,10 @@ POTFILES = \
         src/sound/sample_cache.h \
         src/sound/sound_sample.cpp \
         src/sound/sound_sample.h \
+        src/team/custom_team.cpp \
+        src/team/custom_team.h \
+        src/team/custom_teams_list.cpp \
+        src/team/custom_teams_list.h \
         src/team/macro.h \
         src/team/results.cpp \
         src/team/results.h \

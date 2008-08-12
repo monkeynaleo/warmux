@@ -90,7 +90,7 @@ void CustomTeamsList::LoadList()
     CloseFolder(f);
   } else {
     std::cerr << std::endl
-      << Format(_("Cannot open personal custom teams directory (%s)!"), dirname.c_str())
+      << Format(_("Cannot open the custom teams directory (%s)!"), dirname.c_str())
       << std::endl;
   }
 
