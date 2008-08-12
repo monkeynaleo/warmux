@@ -25,6 +25,7 @@
 #include "tool/file_tools.h"
 #include "tool/i18n.h"
 #include <iostream>
+#include <algorithm>
 
 CustomTeamsList::CustomTeamsList()
 {

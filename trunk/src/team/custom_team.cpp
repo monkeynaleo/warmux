@@ -19,6 +19,7 @@
  * Custom Team
  *****************************************************************************/
 
+#include <cstring>
 #include <sstream>
 #include <iostream>
 #include <errno.h>
