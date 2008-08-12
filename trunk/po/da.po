@@ -16,133 +16,131 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:326
+#: src/map/maps_list.cpp:326
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Banen %s blev ikke fundet :-("
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:122
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:287
+#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Spiller %i er forbundet"
 msgstr[1] "Spillere %i er forbundet"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:126
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:295
+#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "Spiller %i er klar"
 msgstr[1] "Spillere %i er klar"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> også kendt som %s fra %s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:79
+#: src/menu/team_box.cpp:217
 #, c-format
 msgid "%s Team"
 msgstr "Hold %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:77
+#: src/menu/team_box.cpp:214
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Hold %s – Fjernt"
 
-#: /home/yekcim/Dev/wormux/trunk/src/graphic/fps.cpp:102
+#: src/graphic/fps.cpp:102
 #, c-format
 msgid "%s fps"
 msgstr "%s FPS"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:692
+#: src/game/game.cpp:692
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s begår selvmord!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:725
+#: src/game/game.cpp:725
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) døde."
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:683
+#: src/game/game.cpp:683
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s faldt i vandet."
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:677
+#: src/game/game.cpp:677
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s faldt ud af banen!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:698
+#: src/game/game.cpp:698
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:705
+#: src/game/game.cpp:705
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s døde fordi han var klodset!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/object/medkit.cpp:68
+#: src/object/medkit.cpp:68
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har fået %u point ekstra energi!"
 msgstr[1] "%s har fået %u point ekstra energi!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:717
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er en psykopat; han dræbte en fra holdet %s!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:121
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s trådte på en mine!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:97
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Holdet %s har allerede uendelig ammunition for %s!"
 
 #. Show message
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:57
+#: src/weapon/skip_turn.cpp:57
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "Holdet %s sprang dets tur over."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:396
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "Holdet %s har fået %u klyngebazooka!"
 msgstr[1] "Holdet %s har fået %u klyngebazookaer!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:175
+#: src/weapon/gnu.cpp:175
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "Holdet %s har fået %u gnu! Spræng dem alle i luften, cowboy!"
 msgstr[1] "Holdet %s har fået %u gnuer! Spræng dem alle i luften, cowboy!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:260
+#: src/weapon/air_attack.cpp:266
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
 msgstr[0] "Holdet %s har fået %u luftangreb!"
 msgstr[1] "Holdet %s har fået %u luftangreb!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:174
+#: src/weapon/airhammer.cpp:174
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -157,35 +155,35 @@ msgstr[1] ""
 "Holdet %s har fået %u tryklufthammere! Lav ikke for meget larm med dem! På "
 "forhånd tak. Hilsen, dine naboer."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:188
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Holdet %s har fået %u ambolt! Kvas dem alle!"
 msgstr[1] "Holdet %s har fået %u ambolte! Kvas dem alle!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:329
+#: src/weapon/auto_bazooka.cpp:329
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "Holdet %s har fået %u laserstyret bazooka!"
 msgstr[1] "Holdet %s har fået %u laserstyrede bazookaer!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:116
+#: src/weapon/baseball.cpp:116
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "Holdet %s har fået %u baseballbat!"
 msgstr[1] "Holdet %s har fået %u baseballbat!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:130
+#: src/weapon/bazooka.cpp:130
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "Holdet %s har fået %u bazooka!"
 msgstr[1] "Holdet %s har fået %u bazookaer!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:137
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -199,28 +197,28 @@ msgstr[1] ""
 "Holdet %s har fået %u blæselamper! Hvis du er under 18, så husk at spørge "
 "dine forældre om lov til at bruge dem."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "Holdet %s har fået %u hoppebold! Boing!"
 msgstr[1] "Holdet %s har fået %u hoppebolde! Boing!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Holdet %s har fået %u klyngebombe!"
 msgstr[1] "Holdet %s har fået %u klyngebomber!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:81
+#: src/weapon/construct.cpp:81
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "Holdet %s har fået %u konstruktionsvåben! Glem ikke hjelmen!"
 msgstr[1] "Holdet %s har fået %u konstruktionsvåben! Glem ikke hjelmen!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:170
+#: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -229,56 +227,56 @@ msgstr[0] "Holdet %s har fået %u diskogranat! Husk at danse når du kaster den!
 msgstr[1] ""
 "Holdet %s har fået %u diskogranater! Husk at danse når du kaster dem!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:145
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Holdet %s har fået %u dynamit!"
 msgstr[1] "Holdet %s har fået %u dynamitter!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/flamethrower.cpp:178
+#: src/weapon/flamethrower.cpp:178
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "Holdet %s har fået %u flammekaster!"
 msgstr[1] "Holdet %s har fået %u flammekastere!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:176
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Holdet %s har fået %u fodboldbombe!"
 msgstr[1] "Holdet %s har fået %u fodboldbomber!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grapple.cpp:809
+#: src/weapon/grapple.cpp:809
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "Holdet %s har fået %u klo!"
 msgstr[1] "Holdet %s har fået %u klør!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:90
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
 msgstr[0] "Holdet %s har fået %u granat!"
 msgstr[1] "Holdet %s har fået %u granater!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gun.cpp:99
+#: src/weapon/gun.cpp:99
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
 msgstr[0] "Holdet %s har fået %u pistol!"
 msgstr[1] "Holdet %s har fået %u pistoler!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/jetpack.cpp:247
+#: src/weapon/jetpack.cpp:247
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "Holdet %s har fået %u jetpack! Svedigt!"
 msgstr[1] "Holdet %s har fået %u jetpacks! Svedigt!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/lowgrav.cpp:78
+#: src/weapon/lowgrav.cpp:78
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -287,49 +285,49 @@ msgstr[0] ""
 msgstr[1] ""
 "Holdet %s har fået %u svage tyngdekræfter! Se mig, jeg er Neil Armstrong!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:247
+#: src/weapon/mine.cpp:247
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "Holdet %s har fået %u mine!"
 msgstr[1] "Holdet %s har fået %u miner!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:165
+#: src/weapon/parachute.cpp:165
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "Holdet %s har fået %u faldskærm!"
 msgstr[1] "Holdet %s har fået %u faldskærme!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:181
+#: src/weapon/polecat.cpp:181
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] "Holdet %s har fået %u stinkdyr! Du har husket gasmasken, ikke?"
 msgstr[1] "Holdet %s har fået %u stinkdyr! Du har husket gasmasken, ikke?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:133
+#: src/weapon/riot_bomb.cpp:133
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Holdet %s har fået %u oprørsbombe!"
 msgstr[1] "Holdet %s har fået %u oprørsbomber!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/shotgun.cpp:134
+#: src/weapon/shotgun.cpp:134
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "Holdet %s har fået %u haglgevær!"
 msgstr[1] "Holdet %s har fået %u haglgeværer!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:85
+#: src/weapon/slap.cpp:85
 #, fuzzy, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "Holdet %s har fået %u klo!"
 msgstr[1] "Holdet %s har fået %u klør!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:246
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -337,42 +335,42 @@ msgid_plural ""
 msgstr[0] "Holdet %s har fået %u sniper-riffel! Skyd dem mellem øjnene!"
 msgstr[1] "Holdet %s har fået %u sniper-rifler! Skyd dem mellem øjnene!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:144
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
 msgstr[0] "Holdet %s har fået %u maskinpistol!"
 msgstr[1] "Holdet %s har fået %u maskinpistoler!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/suicide.cpp:77
+#: src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "Holdet %s har fået %u selvmord!"
 msgstr[1] "Holdet %s har fået %u selvmord!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/syringe.cpp:115
+#: src/weapon/syringe.cpp:115
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
 msgstr[0] "Holdet %s har fået %u sprøjte!"
 msgstr[1] "Holdet %s har fået %u sprøjter!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/teleportation.cpp:120
+#: src/weapon/teleportation.cpp:120
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
 msgstr[0] "Holdet %s har fået %u teleportation!"
 msgstr[1] "Holdet %s har fået %u teleportationer!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:68
+#: src/weapon/skip_turn.cpp:68
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Holdet %s har fået %u \"spring turen over\"! Jeg ved du elsker dem."
 msgstr[1] "Holdet %s har fået %u \"spring turen over\"! Jeg ved du elsker dem."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -381,97 +379,35 @@ msgstr[0] ""
 msgstr[1] ""
 "Holdet %s har fået %u Tux-affyringer! Har du aldrig set en flyvende pingvin?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_blitz.cpp:70
+#: src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:713
+#: src/game/game.cpp:713
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
 
-#. 1003.2 specifies the format of this message.
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:794
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:797
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:717
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:687
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:735
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:908
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:712
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:892
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:874
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr ""
-
-#. 1003.2 specifies the format of this message.
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:827
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:957
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr ""
-
-#. +option or -option
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:768
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr ""
-
-#. --option
-#: /home/yekcim/Dev/wormux/trunk/src/msvc/getopt.c:764
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr ""
-
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:165
+#: src/interface/interface.cpp:165
 msgid "(dead)"
 msgstr "(død)"
 
 #. Setting language selection
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:201
+#: src/menu/options_menu.cpp:259
 msgid "(system language)"
 msgstr "(systemsprog)"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:31
-#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:78
+#: src/network/chatlogger.cpp:31 src/network/chatlogger.cpp:78
 msgid "(unknown time)"
 msgstr "(ukendt tid)"
 
 #. Display number of ammo
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:196
+#: src/interface/interface.cpp:196
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:353
+#: src/menu/options_menu.cpp:432
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -480,24 +416,27 @@ msgstr ""
 "En ny version (%s) er tilgængelig. Din nuværende version er %s. Du kan "
 "chekke om der er en ny version tilgængelig for dit operativsystem."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:209
+#: src/menu/options_menu.cpp:141
+msgid "Add custom team"
+msgstr ""
+
+#: src/weapon/air_attack.cpp:215
 msgid "Air Attack"
 msgstr "Luftangreb"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:74
+#: src/weapon/airhammer.cpp:74
 msgid "Airhammer"
 msgstr "Tryklufthammer"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:421
+#: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Alle hold"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_classic.cpp:56
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:58
+#: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
 "Fire : space key\n"
@@ -507,191 +446,210 @@ msgstr ""
 "Affyr: mellemrum\n"
 "Et skud per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:132
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:287
+#: src/main.cpp:287
 msgid "Authors:"
 msgstr "Forfattere:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:220
+#: src/weapon/auto_bazooka.cpp:220
 msgid "Automatic Bazooka"
 msgstr "Laserstyret bazooka"
 
 #. #############################
 #. Automatic connection - we have nothing to display here!
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:98
+#: src/menu/network_connection_menu.cpp:98
 msgid "Automatically join a game"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
 msgstr "Tilbage til kampen"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:42
+#: src/network/net_error_msg.cpp:42
 msgid "Bad socket ..."
 msgstr "Dårlig socket..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/baseball.cpp:57
+#: src/weapon/baseball.cpp:57
 msgid "Baseball Bat"
 msgstr "Baseballbat"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:123
+#: src/weapon/bazooka.cpp:123
 msgid "Bazooka"
 msgstr "Bazooka"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Blæselampe"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:89
 msgid "Bounce Ball"
 msgstr "Hoppebold"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Faaarvel Tux..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:475
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:497
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:544
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_teams_selection_box.cpp:240
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:496
+#: src/team/teams_list.cpp:527 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:542 src/team/teams_list.cpp:604
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan ikke finde holdet %s!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:160
+#: src/team/teams_list.cpp:160
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan ikke åbne det personlige holdkatalog (%s)!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:148
-#: /home/yekcim/Dev/wormux/trunk/src/menu/skin_menu.cpp:77
+#: src/menu/skin_menu.cpp:77 src/team/teams_list.cpp:148
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:132
+#: src/team/custom_teams_list.cpp:93
+#, fuzzy, c-format
+msgid "Cannot open the custom teams directory (%s)!"
+msgstr "Kan ikke åbne det personlige holdkatalog (%s)!"
+
+#: src/menu/options_menu.cpp:190
 msgid "Check updates online?"
 msgstr "Check for opdateringer på nettet?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/map_selection_box.cpp:229
+#: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Skift tilfældigt rundt mellem de forskellige baner"
 
 #. Client Mode
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:104
 msgid "Client mode"
 msgstr "Klientmodus"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:169
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:171
+#: src/menu/results_menu.cpp:169 src/menu/results_menu.cpp:171
 msgid "Clumsiest"
 msgstr "Mest klodset"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "Klyngebombe"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:389
 msgid "Cluzooka"
 msgstr "Cluzooka"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/suicide.cpp:42
+#: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Begå selvmord"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:214
+#: src/menu/network_connection_menu.cpp:214
 msgid "Connect to game"
 msgstr "Forbind til spil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:33
+#: src/network/net_error_msg.cpp:33
 msgid "Connected !"
 msgstr "Forbundet!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:59
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/construct.cpp:67
+#: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
 msgstr "Konstruér"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:387
+#: src/menu/results_menu.cpp:387
 msgid "Controlled by: "
 msgstr "Kontrolleret af: "
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/download.cpp:81
+#: src/network/download.cpp:81
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Kunne ikke checkke efter ny version på %s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/download.cpp:90
-#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:57
+#: src/network/chatlogger.cpp:57 src/network/download.cpp:90
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Kunne ikke åbne filen %s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:72
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Udviklere"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:69
+#: src/menu/game_mode_editor.cpp:79
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:157
+#: src/menu/options_menu.cpp:144
+msgid "Delete custom team"
+msgstr ""
+
+#: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Diskogranat"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:31
+#: src/network/admin_commands.cpp:31
 msgid "Displays this message"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:63
+#. some death mode options
+#: src/menu/game_mode_editor.cpp:73
 msgid "Duration before death mode"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:51
+#: src/menu/game_mode_editor.cpp:51
 msgid "Duration of a turn"
 msgstr "Længden af en tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:244
+#: src/game/game.cpp:244
 msgid "END OF GAME"
 msgstr "SLUT PÅ SPILLET"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:214
 msgid "Effects volume"
 msgstr "Lydeffekt volume"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:324
+#: src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/tool/error.cpp:63
+#: src/tool/error.cpp:63
 #, fuzzy, c-format
 msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "Fejl i %s: %lu"
 
-#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:195
+#: src/include/action_handler.cpp:195
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:124
+#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Fejl under indlæsning af hold:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:492
+#: src/game/config.cpp:492 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:143
+#: src/team/custom_team.cpp:104
+#, fuzzy, c-format
+msgid ""
+"Error while deleting the directory \"%s\". Unable to delete the custom team."
+msgstr ""
+"Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
+
+#: src/team/custom_team.cpp:95
+#, fuzzy, c-format
+msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
+msgstr ""
+"Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
+
+#: src/game/game.cpp:143
 #, c-format
 msgid ""
 "Error:\n"
@@ -701,27 +659,27 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:368
+#: src/menu/network_connection_menu.cpp:368
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Fejl: Kan ikke forbinde til %s:%s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:329
+#: src/menu/network_connection_menu.cpp:329
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Fejl: Kan ikke kontakte indeksserveren for at starte et spil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:270
+#: src/menu/network_connection_menu.cpp:270
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Fejl: Kan ikke kontakte indeksserveren for at søge efter internetspil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:348
+#: src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to start server"
 msgstr "Fejl: Kan ikke starte server"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:342
+#: src/menu/network_connection_menu.cpp:342
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration"
@@ -729,92 +687,91 @@ msgstr ""
 "Fejl: Din server er ikke tilgængelig fra internettet. Check din firewall-"
 "konfiguration"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fejl: Kan ikke finde kroppen \"%s\" for holdet \"%s\"."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/flamethrower.cpp:134
+#: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Flammekaster"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "Fodboldbombe"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:91
+#: src/menu/options_menu.cpp:96
 msgid "Fullscreen?"
 msgstr "Fuld skærm?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:86
+#: src/menu/game_menu.cpp:86
 msgid "Game"
 msgstr "Spil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:47
+#: src/menu/game_mode_editor.cpp:47
 #, fuzzy
 msgid "Game mode"
 msgstr "Spil navn:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:121
 msgid "Game name:"
 msgstr "Spil navn:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:161
+#: src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
 msgstr "Gnukaster"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:126
 msgid "Graphic"
 msgstr "Grafik"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grapple.cpp:166
+#: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Klo"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:75
+#: src/menu/game_mode_editor.cpp:85
 msgid "Gravity"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:76
 msgid "Grenade"
 msgstr "Granat"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/ground.cpp:44
+#: src/map/ground.cpp:44
 msgid "Ground initialization..."
 msgstr "Banen klargøres..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gun.cpp:74
+#: src/weapon/gun.cpp:74
 msgid "Gun"
 msgstr "Pistol"
 
-#: /home/yekcim/Dev/wormux/trunk/src/tool/file_tools.cpp:163
+#: src/tool/file_tools.cpp:183
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 
 #. Skip a line
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:239
 msgid "Have a good game!"
 msgstr "Hav et godt spil!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:54
+#: src/menu/team_box.cpp:68 src/menu/team_box.cpp:75
 msgid "Head commander"
 msgstr "Hovedkommandør"
 
 #. Display player's name
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:156
+#: src/interface/interface.cpp:156
 msgid "Head commander: "
 msgstr "Hovedkommandør: "
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:59
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:69
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "Hjælp"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:145
 msgid "Host a game"
 msgstr "Vær vært for et spil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/blowtorch.cpp:63
+#: src/weapon/blowtorch.cpp:63
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -824,7 +781,7 @@ msgstr ""
 "Vinkel: Op/ned piletaster\n"
 "Et stykke ammunition per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/airhammer.cpp:75
+#: src/weapon/airhammer.cpp:75
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -832,7 +789,7 @@ msgstr ""
 "Hvordan man bruger det: Hold mellemrum nede\n"
 "Et stykke ammunition per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:221
+#: src/weapon/auto_bazooka.cpp:221
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -844,7 +801,7 @@ msgstr ""
 "Affyr: Hold mellemrum nede indtil den ønskede styrke er nået\n"
 "Et stykke ammunition per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/anvil.cpp:133
+#: src/weapon/anvil.cpp:133
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -852,11 +809,11 @@ msgstr ""
 "Hvordan man bruger det: Venstreklik på målet\n"
 "Et stykke ammunition per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_classic.cpp:228
+#: src/game/game_classic.cpp:228
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:279
+#: src/main.cpp:279
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -864,13 +821,13 @@ msgstr ""
 "Hvis du har fundet en fejl eller du har en idé til nye ting, så send os en e-"
 "mail (på engelsk, tak):"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_mode_editor.cpp:57
+#. Characters energy
+#: src/menu/game_mode_editor.cpp:58
 msgid "Initial energy"
 msgstr "Energi som udgangspunkt"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:124
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:390
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:121
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -880,428 +837,429 @@ msgstr ""
 "Affyr: Hold mellemrum nede indtil den ønskede styrke er nået\n"
 "Et stykke ammunition per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:153
+#: src/game/game_init.cpp:153
 msgid "Initialisation"
 msgstr "Klargører"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:106
+#: src/game/game_init.cpp:106
 msgid "Initialise map"
 msgstr "Klargører banen"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:140
+#: src/game/game_init.cpp:140
 msgid "Initialise sounds"
 msgstr "Klargører lyde"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:116
+#: src/game/game_init.cpp:116
 msgid "Initialise teams"
 msgstr "Klargører hold"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:561
+#: src/game/game.cpp:561
 msgid "It's a present!"
 msgstr "Det er en gave!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/jetpack.cpp:60
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:142
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:237 src/menu/network_menu.cpp:142
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:33
+#: src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:133
 msgid "Language"
 msgstr "Sprog"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:228
+#: src/map/maps_list.cpp:228
 msgid "Load maps:"
 msgstr "Indlæser baner:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:136
+#: src/team/teams_list.cpp:136
 msgid "Load teams:"
 msgstr "Indlæser hold:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:42
+#: src/menu/teams_selection_box.cpp:44
 msgid "Local teams:"
 msgstr "Lokale hold:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/lowgrav.cpp:49
+#: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
 msgstr "Svag tyngdekraft"
 
 #. #############################
 #. Manual connection
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:179
+#: src/menu/network_connection_menu.cpp:179
 msgid "Manual connection"
 msgstr "Manuel forbindelse"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:78
+#: src/menu/game_menu.cpp:78
 msgid "Map"
 msgstr "Bane"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/map.cpp:294
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Banen %s, en kreation af: "
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:109
+#: src/game/game_init.cpp:109
 msgid "Maps"
 msgstr "Baner"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:116
+#: src/menu/game_mode_editor.cpp:64
+#, fuzzy
+msgid "Max energy"
+msgstr "Energi som udgangspunkt"
+
+#: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
 msgstr "Maksimum antal spillere:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:100
 msgid "Maximum FPS"
 msgstr "Maksimum FPS"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/mine.cpp:213
+#: src/weapon/mine.cpp:213
 msgid "Mine"
 msgstr "Mine"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:136
+#: src/menu/options_menu.cpp:194
 msgid "Misc"
 msgstr "Andet"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:177
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:179
+#: src/menu/results_menu.cpp:177 src/menu/results_menu.cpp:179
 msgid "Most accurate"
 msgstr "Mest præcis"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:161
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:163
+#: src/menu/results_menu.cpp:161 src/menu/results_menu.cpp:163
 msgid "Most sold-out"
 msgstr "Mest udsolgt"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:145
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:147
+#: src/menu/results_menu.cpp:145 src/menu/results_menu.cpp:147
 msgid "Most useful"
 msgstr "Mest brugbar"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:153
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:155
+#: src/menu/results_menu.cpp:153 src/menu/results_menu.cpp:155
 msgid "Most useless"
 msgstr "Mest ubrugelig"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:137
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:139
+#: src/menu/results_menu.cpp:137 src/menu/results_menu.cpp:139
 msgid "Most violent"
 msgstr "Mest voldelig"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:204
 msgid "Music volume"
 msgstr "Musik volume"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:200
 msgid "Music?"
 msgstr "Musik?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:63
+#: src/menu/main_menu.cpp:63
 msgid "Network Game"
 msgstr "Netværksspil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/network.cpp:291
+#: src/network/network.cpp:298
 msgid "Network initialization"
 msgstr "Netværksinitialisation"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: /home/yekcim/Dev/wormux/trunk/src/network/chatlogger.cpp:51
+#: src/network/chatlogger.cpp:51
 msgid "New network game at "
 msgstr "Nyt netværksspil på"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:239
 msgid "New player warning?"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/weapon.cpp:658
+#: src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Intet <%s> element fundet i XML-konfigurationsfilen!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:443
+#: src/menu/network_connection_menu.cpp:443
 msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:74
+#: src/menu/results_menu.cpp:74
 msgid "Nobody!"
 msgstr "Ingen!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/team_box.cpp:60
+#: src/menu/team_box.cpp:87
 msgid "Number of characters"
 msgstr "Antal krigere"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:48
+#: src/menu/teams_selection_box.cpp:50
 msgid "Number of teams:"
 msgstr "Antal hold:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:66
+#: src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "Instillinger"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:55
 msgid "Options menu"
 msgstr "Instillinger menu"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:68
+#: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Faldskærm"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/parachute.cpp:100
+#: src/weapon/parachute.cpp:100
 msgid "Parachute is activated automatically."
 msgstr "Faldskærmen er automatisk aktiveret."
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:133
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:171
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:133
+#: src/menu/network_connection_menu.cpp:171
+#: src/menu/network_connection_menu.cpp:209
 msgid "Password:"
 msgstr "Kodeord:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:60
+#: src/menu/main_menu.cpp:60
 msgid "Play"
 msgstr "Spil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/teams_selection_box.cpp:63
+#: src/menu/teams_selection_box.cpp:65
 msgid "Player"
 msgstr "Spiller"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:76
+#: src/menu/options_menu.cpp:81
 msgid "Player energy?"
 msgstr "Vis krigernes energi?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:84
 msgid "Player's name?"
 msgstr "Vis krigernes navne?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:167
+#: src/weapon/polecat.cpp:167
 msgid "Polecat Launcher"
 msgstr "Stinkdyrskaster"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:110
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:110
+#: src/menu/network_connection_menu.cpp:198
 msgid "Port:"
 msgstr "Port:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:158
 msgid "Public battles"
 msgstr "Offentlige kampe"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/main_menu.cpp:75
+#: src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "Afslut"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:268
+#: src/main.cpp:268
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
 msgstr "Forlad kampen"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/map_selection_box.cpp:228
+#: src/menu/map_selection_box.cpp:228
 msgid "Random map"
 msgstr "Tilfældig bane"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:330
+#: src/game/config.cpp:330
 msgid "Reading default config file"
 msgstr "Læser standard konfigureringsfil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/config.cpp:379
+#: src/game/config.cpp:379
 msgid "Reading personal config file"
 msgstr "Læser personlig konfigureringsfil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:117
+#: src/menu/options_menu.cpp:122
 msgid "Resolution"
 msgstr "Opløsning"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:120
+#: src/weapon/riot_bomb.cpp:120
 msgid "Riot Bomb"
 msgstr "Oprørsbombe"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:83
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "Kører spillet"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/chat.cpp:80
+#: src/network/chat.cpp:82
 msgid "Say: "
 msgstr "Sig: "
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:90
 msgid "Scroll border size"
 msgstr "Scroll-kant-størrelse"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:87
 msgid "Scroll on border"
 msgstr "Rul ved kanten"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:187
+#: src/menu/network_connection_menu.cpp:187
 msgid "Server address:"
 msgstr "Serveradresse:"
 
 #. Available on internet ?
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:141
+#: src/menu/network_connection_menu.cpp:141
 msgid "Server available on Internet"
 msgstr "Server tilgængelig på internettet"
 
 #. Server Mode
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:113
+#: src/menu/network_menu.cpp:113
 msgid "Server mode"
 msgstr "Servermodus"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/shotgun.cpp:91
+#: src/weapon/shotgun.cpp:91
 msgid "Shotgun"
 msgstr "Haglgevær"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/skip_turn.cpp:47
+#: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Spring denne tur over"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:73
+#: src/weapon/slap.cpp:73
 msgid "Slap"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/slap.cpp:74
+#: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/snipe_rifle.cpp:93
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Sniper-riffel"
 
-#: /home/yekcim/Dev/wormux/trunk/src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:86
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nogen har puttet en fælde i kassen!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_connection_menu.cpp:278
+#: src/menu/network_connection_menu.cpp:278
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desværre, men der er ingen tilgængelige spil som venter på spillere"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:242
 msgid "Sound"
 msgstr "Lyd"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:152
+#: src/menu/options_menu.cpp:210
 msgid "Sound effects?"
 msgstr "Lydeffekter?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:177
+#: src/menu/options_menu.cpp:235
 msgid "Sound frequency"
 msgstr "Lydfrekvens"
 
 #. Load teams' sound profiles
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:143
+#: src/game/game_init.cpp:143
 msgid "Sounds"
 msgstr "Lyde"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:114
+#: src/game/game.cpp:114
 msgid "Starting a new game"
 msgstr "Starter et nyt spil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/interface/interface.cpp:196
+#: src/interface/interface.cpp:196
 msgid "Stock:"
 msgstr "Lager:"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/submachine_gun.cpp:99
+#: src/weapon/submachine_gun.cpp:99
 msgid "Submachine Gun"
 msgstr "Maskinpistol"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/syringe.cpp:70
+#: src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Sprøjte"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:426
 msgid "Team graphs"
 msgstr "Hold-grafer"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:424
+#: src/menu/results_menu.cpp:424
 msgid "Team stats"
 msgstr "Hold-statistik"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/game_menu.cpp:66
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:118
+#: src/game/game_init.cpp:118 src/menu/game_menu.cpp:66
 msgid "Teams"
 msgstr "Hold"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/teleportation.cpp:50
+#: src/menu/options_menu.cpp:182
+msgid "Teams editor"
+msgstr ""
+
+#: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
 msgstr "Teleportation"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:146
+#: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Klyngebomben forlod slagmarken før den eksploderede."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Fodboldbomben forlod slagmarken før den eksploderede."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/gnu.cpp:144
+#: src/weapon/gnu.cpp:144
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Gnuen forlod slagmarken før den eksploderede"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/polecat.cpp:150
+#: src/weapon/polecat.cpp:150
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Stinkdyret forlod slagmarken før det eksploderede"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/auto_bazooka.cpp:175
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Den laserstyrede raket forlod slagmarken..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:72
 msgid "The ball left the battlefield before exploding"
 msgstr "Bolden forlod slagmarken før den eksploderede"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/network_client.cpp:128
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:48
+#: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Forbindelsen udløb. Check at der ikke er nogen firewall i vejen!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/disco_grenade.cpp:127
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Diskogranaten forlod dansegulvet før den eksploderede"
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:456
+#: src/game/game.cpp:456
 msgid "The game was interrupted because you got disconnected."
 msgstr "Spillet blev afbrudt fordi din forbindelse blev brudt."
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten forlod slagmarken før den eksploderede"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:302
+#: src/menu/network_menu.cpp:302
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De andre venter på dig! Vågn op :-)"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bazooka.cpp:83
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluzooka.cpp:336
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/riot_bomb.cpp:86
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raketten forlod slagmarken..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:45
+#: src/network/net_error_msg.cpp:45
 msgid "The server rejected the connection."
 msgstr "Serveren afslog forbindelsen."
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:51
+#: src/network/net_error_msg.cpp:51
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serveren afslog forbindelsen: forkert kodeord!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:214
+#: src/menu/network_menu.cpp:214
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1309,12 +1267,11 @@ msgstr[0] "Der er kun %i hold."
 msgstr[1] "Der er kun %i hold."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:322
+#: src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/footbomb.cpp:159
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/cluster_bomb.cpp:189
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1326,7 +1283,7 @@ msgstr ""
 "Affyr: Hold mellemrum nede indtil den ønskede styrke er nået\n"
 "Et stykke ammunition per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:90
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1338,132 +1295,130 @@ msgstr ""
 "Affyr: Mellemrum\n"
 "Et stykke ammunition per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/interface/weapon_menu.cpp:169
+#: src/interface/weapon_menu.cpp:169
 msgid "Tools"
 msgstr "Værktøj"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:36
+#: src/network/net_error_msg.cpp:36
 msgid "Unable to contact host."
 msgstr "Kan ikke kontakte værten."
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:238
+#: src/map/maps_list.cpp:238
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kan ikke åbne banekataloget (%s)!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:250
+#: src/map/maps_list.cpp:250
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Kan ikke åbne det personlige banekatalog (%s)!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/net_error_msg.cpp:39
+#: src/network/net_error_msg.cpp:39
 msgid "Unable to use this port!"
 msgstr "Kan ikke bruge denne port!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/admin_commands.cpp:67
+#: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/network/network.cpp:111
+#: src/network/network.cpp:145
 msgid "Unnamed"
 msgstr "Unavngivet"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:200
+#: src/main.cpp:200
 msgid "Version"
 msgstr "Version"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:362
+#: src/menu/options_menu.cpp:441
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Version-verifikation fejlede fordi: %s\n"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:228
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent! Spiller %i er ikke klar endnu!"
 msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:369
+#: src/menu/network_menu.cpp:369
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
 
-#. Adding label
 #. Initialization of teams' energy
-#: /home/yekcim/Dev/wormux/trunk/src/interface/weapon_menu.cpp:167
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:129
+#. Adding label
+#: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:167
 msgid "Weapons"
 msgstr "Våben"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:296
+#: src/main.cpp:296
 msgid "Website: "
 msgstr "Hjemmeside: "
 
-#: /home/yekcim/Dev/wormux/trunk/src/game/game.cpp:722
+#: src/game/game.cpp:722
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hvilken skam for %s – han blev dræbt af en simpel pistol!"
 
 #. Various options
-#: /home/yekcim/Dev/wormux/trunk/src/menu/options_menu.cpp:73
+#: src/menu/options_menu.cpp:78
 msgid "Wind particles?"
 msgstr "Vindpartikler?"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/results_menu.cpp:379
+#: src/menu/results_menu.cpp:379
 msgid "Winner"
 msgstr "Vinder"
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:212
+#: src/main.cpp:212
 msgid "Wormux launching..."
 msgstr "Wormux starter..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/main.cpp:286
+#: src/main.cpp:286
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:169
+#: src/include/action_handler.cpp:169
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:166
+#: src/include/action_handler.cpp:166
 msgid "Wrong map name!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/include/action_handler.cpp:172
+#: src/include/action_handler.cpp:172
 msgid "Wrong team!"
 msgstr ""
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:305
+#: src/menu/network_menu.cpp:305
 msgid "You are alone :-/"
 msgstr "Du er alene :-/"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:222
+#: src/menu/network_menu.cpp:222
 msgid "You are alone..."
 msgstr "Du er alene..."
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:259
+#: src/map/maps_list.cpp:259
 msgid "You need at least one valid map !"
 msgstr "Du skal vælge mindst én gyldig bane!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/team/teams_list.cpp:168
-#: /home/yekcim/Dev/wormux/trunk/src/game/game_init.cpp:122
+#: src/game/game_init.cpp:122 src/team/teams_list.cpp:168
 msgid "You need at least two valid teams !"
 msgstr "Du skal vælge mindst to gyldige hold!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/network_menu.cpp:202
+#: src/menu/network_menu.cpp:202
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille før du har valgt et hold!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/weapon_launcher.cpp:496
+#: src/weapon/weapon_launcher.cpp:496
 msgid "Your shot has missed!"
 msgstr "Du ramte ved siden af!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/credits_menu.cpp:75
+#: src/menu/credits_menu.cpp:75
 msgid "aka"
 msgstr "også kendt som"
 
-#: /home/yekcim/Dev/wormux/trunk/src/weapon/air_attack.cpp:210
+#: src/weapon/air_attack.cpp:216
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1473,36 +1428,36 @@ msgstr ""
 "Bombning: Venstreklik på målet\n"
 "En bombning per tur"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "kunne ikke indlæse konfiguration"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/ground.cpp:61
+#: src/map/ground.cpp:61
 msgid "done"
 msgstr "færdig"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "fejl under fortolkning af konfigurationsfil"
 
-#: /home/yekcim/Dev/wormux/trunk/src/menu/credits_menu.cpp:79
+#: src/menu/credits_menu.cpp:79
 msgid "from"
 msgstr "fra"
 
-#: /home/yekcim/Dev/wormux/trunk/src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "ingen konfigurationsfil!"
 
-#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o Indlæser musik"
 
-#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Indlæser lydprofilen: %s"
 
-#: /home/yekcim/Dev/wormux/trunk/src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
