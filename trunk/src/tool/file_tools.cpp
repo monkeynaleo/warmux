@@ -28,6 +28,8 @@
    // To get SHGetSpecialFolderPath
 #  define _WIN32_IE   0x400
 #  include <shlobj.h>
+#  include <io.h>
+#  undef DeleteFile  // windows.h defines it I think
 #else
 #  include <stdlib.h> // getenv
 #endif
@@ -54,9 +56,9 @@ bool IsFolderExist(const std::string &name)
 }
 
 #ifndef WIN32
-#define MKDIR(dir) (mkdir(dir, 0750))
+#  define MKDIR(dir) (mkdir(dir, 0750))
 #else
-#define MKDIR(dir) (_mkdir(dir))
+#  define MKDIR(dir) (_mkdir(dir))
 #endif
 
 bool CreateFolder(const std::string &name)
@@ -77,7 +79,7 @@ bool CreateFolder(const std::string &name)
     if (subdir.size() != 0) {
       // Create the directory if it doesn't exist
       if (MKDIR(subdir.c_str()) != 0 && errno != EEXIST)
-	return false;
+        return false;
     }
     pos = dir.find("/", pos+1);
   }
@@ -97,18 +99,16 @@ bool DeleteFolder(const std::string &name)
     return (rmdir(name.c_str())==0);
   }
   return false;
-
 }
 
 
 // Delete the file if it exists
 bool DeleteFile(const std::string &name)
 {
-
-    return (remove(name.c_str()) == 0);
-
-
+  return (remove(name.c_str()) == 0);
 }
+
+
 // Find the extension part of a filename
 std::string FileExtension (const std::string &name)
 {
@@ -258,3 +258,4 @@ std::string FormatFileName(const std::string &name)
     }
   return formated_name;
 }
+
