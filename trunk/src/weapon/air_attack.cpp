@@ -164,7 +164,7 @@ void Plane::Refresh()
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
     DropBomb();
     m_ignore_movements = true;
-    next_height = RandomLocal().GetInt(20,300);
+    next_height = RandomLocal().GetInt(20,100);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
     if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height )
