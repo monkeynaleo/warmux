@@ -82,6 +82,9 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
+  m_last_x = 0.0;
+  m_last_y = 0.0;
+
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
 
@@ -96,39 +99,50 @@ PhysicalObj::~PhysicalObj ()
 
 void PhysicalObj::SetXY(const Point2i &position)
 {
-  UpdateTimeOfLastMove();
-  CheckOverlapping();
 
-  if( IsOutsideWorldXY( position ) )
+  if((position.GetX()!=GetX()) || (position.GetY()!=GetY()))
   {
-    Point2d physPos(position.x, position.y);
-    SetPhysXY( physPos / PIXEL_PER_METER );
-    Ghost();
-    SignalOutOfMap();
-  }
-  else
-  {
-    Point2d physPos(position.x, position.y);
-    SetPhysXY( physPos / PIXEL_PER_METER );
-    if( FootsInVacuum() ) StartMoving();
+    UpdateTimeOfLastMove();
+    CheckOverlapping();
+
+    if( IsOutsideWorldXY( position ) )
+    {
+      Point2d physPos(position.x, position.y);
+      SetPhysXY( physPos / PIXEL_PER_METER );
+      Ghost();
+      SignalOutOfMap();
+    }
+    else
+    {
+      Point2d physPos(position.x, position.y);
+      SetPhysXY( physPos / PIXEL_PER_METER );
+      if( FootsInVacuum() ) StartMoving();
+    }
+
   }
 }
 
 void PhysicalObj::SetXY(const Point2d &position)
 {
-  UpdateTimeOfLastMove();
-  CheckOverlapping();
 
-  if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) )
+  if((m_last_x != GetPhysX()) || (m_last_y != GetPhysY()))
   {
-    SetPhysXY( position / PIXEL_PER_METER );
-    Ghost();
-    SignalOutOfMap();
-  }
-  else
-  {
-    SetPhysXY( position / PIXEL_PER_METER );
-    if( FootsInVacuum() ) StartMoving();
+    m_last_x = GetPhysX();
+    m_last_y = GetPhysY();
+    UpdateTimeOfLastMove();
+    CheckOverlapping();
+
+    if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) )
+    {
+      SetPhysXY( position / PIXEL_PER_METER );
+      Ghost();
+      SignalOutOfMap();
+    }
+    else
+    {
+      SetPhysXY( position / PIXEL_PER_METER );
+      if( FootsInVacuum() ) StartMoving();
+    }
   }
 }
 

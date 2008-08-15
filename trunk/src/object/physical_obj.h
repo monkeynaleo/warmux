@@ -65,6 +65,8 @@ protected:
   bool m_ignore_movements;
   bool m_is_character;
   bool m_is_fire;
+  double m_last_x;
+  double m_last_y;
 
   virtual void CheckOverlapping();
 
@@ -192,6 +194,7 @@ public:
   void GoOutOfWater(); // usefull for supertux.
 
   virtual bool IsImmobile() const { return IsSleeping() || m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST); };
+
   bool IsGhost() const { return (m_alive == GHOST); };
   bool IsDrowned() const { return (m_alive == DROWNED); };
   bool IsDead() const { return (IsGhost() || IsDrowned() || (m_alive == DEAD)); };
