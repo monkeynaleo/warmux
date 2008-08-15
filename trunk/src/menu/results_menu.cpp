@@ -415,6 +415,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   // Create tabs for each team result
   stats = new MultiTabs(tab_size - 2*BorderSize);
+  stats->SetMaxVisibleTabs(1);
   for (uint i=0; i<v.size(); i++)
   {
     const Team* team = v[i]->getTeam();

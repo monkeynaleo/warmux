@@ -19,6 +19,8 @@
  * Tabs
  *****************************************************************************/
 
+#include <algorithm> // std::min/max
+
 #include "include/app.h"
 #include "graphic/colors.h"
 #include "graphic/font.h"
@@ -55,7 +57,7 @@ public:
 #define CIRCULAR_TABS   0
 
 MultiTabs::MultiTabs(const Point2i& size):
-  Widget(size), current_tab(-1), first_tab(0), nb_visible_tabs(1), tab_header_width(TAB_MIN_WIDTH)
+  Widget(size), max_visible_tabs(50), current_tab(-1), first_tab(0), nb_visible_tabs(1), tab_header_width(TAB_MIN_WIDTH)
 {
   tab_size = Point2i(size.x, size.y - 32);
 
@@ -269,6 +271,8 @@ void MultiTabs::Pack()
 
   // Compute how many tabs can be displayed
   nb_visible_tabs = std::min(tabs.size(), uint(GetSizeX() / TAB_MIN_WIDTH));
+  nb_visible_tabs = std::min(nb_visible_tabs, max_visible_tabs);
+
   if (nb_visible_tabs == 0)
     nb_visible_tabs = 1;
 
@@ -350,4 +354,9 @@ uint MultiTabs::GetHeaderHeight() const
   uint header_h = prev_tab_bt->GetSizeY();
   header_h += 5;
   return header_h;
+}
+
+void MultiTabs::SetMaxVisibleTabs(uint max)
+{
+  max_visible_tabs = max;
 }

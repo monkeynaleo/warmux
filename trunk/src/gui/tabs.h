@@ -36,6 +36,8 @@ class MultiTabs : public Widget
 private:
   std::vector<Tab> tabs;
 
+  uint max_visible_tabs;
+
   int current_tab;
   uint first_tab;
   uint nb_visible_tabs;
@@ -71,6 +73,8 @@ public:
   virtual bool SendKey(const SDL_keysym&);
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+
+  void SetMaxVisibleTabs(uint max);
 };
 
 #endif // GUI_TABS_H
