@@ -147,8 +147,12 @@ OptionMenu::OptionMenu() :
   lbox_teams = new ListBox(option_size,false);
   teams_editor_sup->AddWidget(lbox_teams);
 
-  team_name = new Label("Team name : ", 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  std::string s = _("Player name");
+  s +=" : ";
+
+  team_name = new Label(s, 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   teams_editor_inf->AddWidget(team_name);
+
 
   tbox_team_name = new TextBox("", 100,
                             Font::FONT_MEDIUM, Font::FONT_NORMAL);
@@ -157,13 +161,13 @@ OptionMenu::OptionMenu() :
  Point2i names_size(140, 50);
 
   Box * teams_editor_names = new GridBox(max_width, names_size, false);
-
+s = _("Character");
   for(unsigned i=0; i < 10 ; i++)
   {
     std::ostringstream oss;
     oss << i+1;
     tbox_character_name_list.push_back(new TextBox("",100,Font::FONT_MEDIUM, Font::FONT_NORMAL));
-    Label * lab = new Label("Character "+oss.str()+" : ",0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+    Label * lab = new Label(s+oss.str()+" : ",0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
     Box * name_box = new VBox(max_width, true, true);
 

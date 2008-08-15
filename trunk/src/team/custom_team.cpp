@@ -132,7 +132,8 @@ do
     team_count++;
     std::ostringstream oss;
     oss << team_count;
-    name = "team "+oss.str();
+    name = _("custom player");
+    name +="  "+oss.str();
     directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name) + PATH_SEPARATOR;
 
 }while(IsFolderExist(directory_name));
