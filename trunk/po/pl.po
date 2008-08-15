@@ -1,6 +1,6 @@
 # translation of pl.po to
 # Bartosz Feński aka fEnIo <fenio@debian.org>, 2004-2005.
-# Paweł Dyda <pawel.dyda@gazeta.pl>, 2007.
+# Paweł Dyda <pawel.dyda@gazeta.pl>, 2007, 2008.
 # Michał D. <emdek@epf.pl>, 2007.
 # translation of wormux.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2008-08-13 00:08+0300\n"
-"PO-Revision-Date: 2008-08-15 15:25+0100\n"
+"PO-Revision-Date: 2008-08-15 18:33+0200\n"
 "Last-Translator: Paweł Dyda <pawel.dyda@gazeta.pl>\n"
 "Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -835,7 +835,7 @@ msgstr "Pospieszcie się, jesteście zbyt wolni!!!"
 
 #: src/main.cpp:279
 msgid "If you found a bug or have a feature request send us a email (in english, please):"
-msgstr "Jeśli znalazłeś błąd lub brakuje Ci jakiejś funkcjonalności to wyślij do nas e-mail (prosimy aby był w języku angielskim):"
+msgstr "Jeżeli znajdziesz błąd lub brakuje Ci jakiejś funkcjonalności to wyślij do nas e-mail (prosimy aby był w języku angielskim):"
 
 #. Characters energy
 #: src/menu/game_mode_editor.cpp:58
@@ -1074,7 +1074,7 @@ msgstr "Wyjdź"
 
 #: src/main.cpp:268
 msgid "Quit Wormux"
-msgstr "Wyjdź z programu Wormux"
+msgstr "Wyjście z programu Wormux"
 
 #: src/menu/pause_menu.cpp:63
 msgid "Quit battle"
@@ -1485,21 +1485,4 @@ msgstr "o Wczytywanie profilu dźwięków: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otworzono plik audio - %d Hz %d bit"
-
-#~ msgid "Connect !"
-#~ msgstr "Dołącz!"
-#~ msgid "Connect to an internet game"
-#~ msgstr "Dołącz do gry internetowej"
-#~ msgid "Error loading team's data %s:"
-#~ msgstr "Błąd wczytywania danych drużyny %s:"
-#~ msgid "Error while loading configuration file: %s"
-#~ msgstr "Błąd podczas wczytywania pliku konfiguracyjnego %s"
-#~ msgid "Error while loading default configuration file: %s"
-#~ msgstr "Błąd podczas wczytywania domyślnego pliku konfiguracyjnego (%s)"
-#~ msgid "Error while loading game mode %s (file %s):"
-#~ msgstr "Błąd podczas wczytywania trybu gry %s (plik %s):"
-#~ msgid "Refresh"
-#~ msgstr "Odśwież"
-#~ msgid "XML error during loading map '%s': "
-#~ msgstr "Błąd XML podczas wczytywania mapy '%s': "
 
