@@ -38,7 +38,8 @@ class DistantComputer
     STATE_ERROR,
     STATE_INITIALIZED,
     STATE_READY,
-    STATE_CHECKED
+    STATE_CHECKED,
+    STATE_NEXT_GAME
   } state_t;
 
  private:

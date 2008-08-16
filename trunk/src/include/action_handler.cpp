@@ -96,6 +96,21 @@ void Action_Network_ChangeState (Action *a)
       ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
       break;
 
+    case Network::NETWORK_PLAYING:
+      a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
+      ASSERT(client_state == Network::NETWORK_NEXT_GAME);
+      break;
+
+    case Network::NETWORK_NEXT_GAME:
+      if (client_state == Network::NETWORK_MENU_OK) {
+	a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
+      } else if (client_state == Network::NETWORK_NEXT_GAME) {
+	a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
+      } else {
+	ASSERT(false);
+      }
+      break;
+
     default:
       NET_ASSERT(false)
       {

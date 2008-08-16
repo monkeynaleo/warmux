@@ -29,7 +29,7 @@ class SpinButton;
 class NetworkTeamsSelectionBox;
 class TalkBox;
 class MapSelectionBox;
-class TextBox;
+class CheckBox;
 
 class NetworkMenu : public Menu
 {
@@ -40,10 +40,9 @@ class NetworkMenu : public Menu
 
   /* Options controllers */
   SpinButton* player_number;
-  Box* options_box;
-  Label* mode;
   Label* connected_players;
   Label* initialized_players;
+  CheckBox* play_in_loop;
 
   /* Chat controller */
   TalkBox* msg_box;
@@ -54,6 +53,7 @@ class NetworkMenu : public Menu
   /* Map controllers */
   MapSelectionBox *map_box;
 
+  void PrepareForNewGame();
   void SaveOptions();
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);

@@ -71,7 +71,8 @@ public:
       NETWORK_MENU_OK,
       NETWORK_LOADING_DATA,
       NETWORK_READY_TO_PLAY,
-      NETWORK_PLAYING
+      NETWORK_PLAYING,
+      NETWORK_NEXT_GAME
     } network_state_t;
 
 private:

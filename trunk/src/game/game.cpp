@@ -417,6 +417,10 @@ void Game::Run()
   // the game is finished but we won't go at the results screen too fast!
   if (IsGameFinished()) {
     EndOfGame();
+  } else if (Network::IsConnected()) {
+    // the user has asked for the end of game
+    // if it's a network game, it's time to disconnect!!
+    Network::Disconnect();
   }
 
   isGameLaunched = false;
