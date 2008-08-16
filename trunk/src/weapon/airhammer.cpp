@@ -88,9 +88,6 @@ bool Airhammer::p_Shoot()
   // initiate movement ;-)
   ActiveCharacter().SetRebounding(false);
 
-  // Little hack, so the character notices he is in the vaccum and begins to fall in the hole
-  ActiveCharacter().SetXY( ActiveCharacter().GetPosition() );
-
   Point2i pos = Point2i(ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 - impact.GetWidth()/2,
                         ActiveCharacter().GetTestRect().GetPositionY() +
                         ActiveCharacter().GetHeight()  -16);
