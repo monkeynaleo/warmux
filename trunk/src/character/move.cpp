@@ -65,7 +65,7 @@ bool ComputeHeightMovement(Character &character, int &height,
     }
     //We can go down, but the step is too big -> the character will fall
     if (falling) {
-      character.SetX (character.GetX() +character.GetDirection());
+      character.SetX (character.GetXdouble() +character.GetDirection());
       character.UpdatePosition();
       character.SetMovement("fall");
     }
@@ -87,10 +87,10 @@ void MoveCharacter(Character &character, bool slowly)
   int height;
   bool ghost;
   uint walking_pause = GameMode::GetInstance()->character.walking_pause;
-  
+
   if (slowly)
     walking_pause *= 10;
-  else 
+  else
     ActiveCharacter().SetMovement("walk"); // avoid sliding effect when not right or left key is released while releasing shift
 
   // If character moves out of the world, no need to go further: it is dead

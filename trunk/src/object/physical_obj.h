@@ -95,12 +95,14 @@ public:
   //-------- Set position and size -------
 
   // Set/Get position
-  void SetX (int x) { SetXY( Point2i(x, GetY()) ); };
-  void SetY (int y) { SetXY( Point2i(GetX(), y) ); };
+  void SetX(double x) { SetXY( Point2d(x, GetYdouble()) ); };
+  void SetY(double y) { SetXY( Point2d(GetXdouble(), y) ); };
   void SetXY(const Point2i &position);
   void SetXY(const Point2d &position);
   int GetX() const;
   int GetY() const;
+  double GetXdouble() const;
+  double GetYdouble() const;
   const Point2i GetPosition() const { return Point2i(GetX(), GetY()); };
 
   // Used to sync value across network

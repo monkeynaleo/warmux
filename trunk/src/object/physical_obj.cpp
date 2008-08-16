@@ -116,8 +116,11 @@ void PhysicalObj::SetXY(const Point2d &position)
     }
 }
 
-int PhysicalObj::GetX() const { return (int)round(GetPhysX() * PIXEL_PER_METER); };
-int PhysicalObj::GetY() const { return (int)round(GetPhysY() * PIXEL_PER_METER); };
+double PhysicalObj::GetXdouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
+double PhysicalObj::GetYdouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
+
+int PhysicalObj::GetX() const { return (int)GetXdouble(); };
+int PhysicalObj::GetY() const { return (int)GetYdouble(); };
 
 void PhysicalObj::SetSize(const Point2i &newSize){
   if( newSize == Point2i(0, 0) )
@@ -735,7 +738,7 @@ bool PhysicalObj::IsInWater () const
 void PhysicalObj::DirectFall()
 {
   while (!IsGhost() && !IsInWater() && FootsInVacuum())
-    SetY((int)(GetY()+1.0));
+    SetY(GetYdouble()+1.0);
 }
 
 bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
