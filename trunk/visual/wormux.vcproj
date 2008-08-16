@@ -1424,6 +1424,22 @@
 				Name="team"
 				>
 				<File
+					RelativePath="..\src\team\custom_team.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\team\custom_team.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\team\custom_teams_list.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\team\custom_teams_list.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\team\macro.h"
 					>
 				</File>
