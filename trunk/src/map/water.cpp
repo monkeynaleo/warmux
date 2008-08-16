@@ -39,7 +39,8 @@ const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
 const float t = (GO_UP_OSCILLATION_TIME*1000.0);
 const float a = GO_UP_STEP/t;
 const float b = 1.0;
-int pattern_height = 0; // TODO: relocate
+
+int Water::pattern_height = 0;
 
 /*
  * Water consists of 1) water.png texture, which is the actual wave and
@@ -58,7 +59,7 @@ void Water::Init()
   std::string image = "gfx/";
   image += water_name;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
 
   surface = resource_manager.LoadImage(res, image);
   surface.SetAlpha(0, 0);

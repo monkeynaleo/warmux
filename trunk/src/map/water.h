@@ -41,6 +41,7 @@ public:
   } Water_type;
 
 private:
+  static int pattern_height;
   int height_mvt;
   double shift1;
   uint water_height;
@@ -61,6 +62,7 @@ public:
   void Draw();
   bool IsActive() const { return water_type != NO_WATER; }
   int GetHeight(int x) const;
+  uint GetSelfHeight() const { return water_height+(pattern_height/2); }
   static Water_type GetWaterType(std::string & water);
 
   void Splash(const Point2i& pos) const;
