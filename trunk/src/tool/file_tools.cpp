@@ -29,6 +29,7 @@
 #  define _WIN32_IE   0x400
 #  include <shlobj.h>
 #  include <io.h>
+#  include <direct.h>
 #  undef DeleteFile  // windows.h defines it I think
 #else
 #  include <stdlib.h> // getenv
@@ -59,6 +60,7 @@ bool IsFolderExist(const std::string &name)
 #  define MKDIR(dir) (mkdir(dir, 0750))
 #else
 #  define MKDIR(dir) (_mkdir(dir))
+#  define rmdir(dir) (_rmdir(dir))
 #endif
 
 bool CreateFolder(const std::string &name)
