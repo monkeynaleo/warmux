@@ -90,31 +90,32 @@ public:
   ~InfoMap();
   void FreeData();
 
-  const std::string& GetRawName() const { return m_map_name; };
-  const std::string& GetDirectory() const { return m_directory; };
-  const std::string& ReadFullMapName() { LoadBasicInfo(); return name; };
-  const std::string& ReadAuthorInfo() { LoadBasicInfo(); return author_info; };
-  const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; };
+  const std::string& GetRawName() const { return m_map_name; }
+  const std::string& GetDirectory() const { return m_directory; }
+  const std::string& ReadFullMapName() { LoadBasicInfo(); return name; }
+  const std::string& ReadAuthorInfo() { LoadBasicInfo(); return author_info; }
+  const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; }
   std::string GetConfigFilepath() const;
 
   Surface& ReadImgGround();
   Surface& ReadImgSky();
-  const Surface& ReadPreview() { LoadBasicInfo(); return preview; };
+  const Surface& ReadPreview() { LoadBasicInfo(); return preview; }
 
-  const struct s_wind& GetWind() const { return wind; };
+  const struct s_wind& GetWind() const { return wind; }
 
-  uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; };
-  uint GetNbMine() { LoadBasicInfo(); return nb_mine; };
-  Profile * ResProfile() const { return res_profile; };
+  uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; }
+  uint GetNbMine() { LoadBasicInfo(); return nb_mine; }
+  Profile * ResProfile() const { return res_profile; }
 
-  bool IsOpened() { LoadBasicInfo(); return is_opened; };
-  bool IsRandomGenerated() { LoadBasicInfo(); return random_generated; };
+  bool IsOpened() { LoadBasicInfo(); return is_opened; }
+  bool IsRandomGenerated() { LoadBasicInfo(); return random_generated; }
   std::string GetWaterName();
+  const Water::Water_type& GetWaterType() { return water_type; }
 
-  Point2i GetUpperLeftPad() { return upper_left_pad; };
-  Point2i GetLowerRightPad() { return lower_right_pad; };
-  void SetUpperLeftPad(const Point2i & value) { upper_left_pad = value; };
-  void SetLowerRightPad(const Point2i & value) { lower_right_pad = value; };
+  Point2i GetUpperLeftPad() { return upper_left_pad; }
+  Point2i GetLowerRightPad() { return lower_right_pad; }
+  void SetUpperLeftPad(const Point2i & value) { upper_left_pad = value; }
+  void SetLowerRightPad(const Point2i & value) { lower_right_pad = value; }
 
 };
 
