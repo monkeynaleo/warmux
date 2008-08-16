@@ -790,8 +790,8 @@ void Grapple::HandleKeyPressed_Shoot(bool)
 void Grapple::PrintDebugRope()
 {
   printf("%05d %05d %03.3f\n",
-         ActiveCharacter().GetPosition().GetX(),
-         ActiveCharacter().GetPosition().GetY(),
+         ActiveCharacter().GetX(),
+         ActiveCharacter().GetY(),
          ActiveCharacter().GetRopeAngle());
 
   for (std::list<rope_node_t>::iterator it = rope_nodes.begin();

@@ -103,7 +103,7 @@ public:
   int GetY() const;
   double GetXdouble() const;
   double GetYdouble() const;
-  const Point2i GetPosition() const { return Point2i(GetX(), GetY()); };
+  const Point2d GetPosition() const { return Point2d(GetXdouble(), GetYdouble()) ;};
 
   // Used to sync value across network
   virtual void GetValueFromAction(Action *);
