@@ -300,11 +300,32 @@ void Interface::DrawTeamEnergy() const
 // Draw map preview
 void Interface::DrawMapPreview()
 {
-  Surface& window  = GetMainWindow();
+  Surface&       window  = GetMainWindow();
   const Surface* preview = world.ground.GetPreview();
-  Point2i  offset(window.GetWidth() - world.ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
+  Point2i        offset(window.GetWidth() - world.ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
+  Rectanglei     rect_preview(offset, world.ground.GetPreviewSize());
+
   window.Blit(*preview, world.ground.GetPreviewRect(), offset);
-  Rectanglei rect_preview(offset, world.ground.GetPreviewSize());
+
+  // Draw water
+  if (ActiveMap()->GetWaterType()!= Water::NO_WATER && world.water.IsActive()) {
+    // Colors following Water::Water_type and the files in data/gfx/water
+    // alpha>224 set to 224
+    static const Color water_colors[Water::MAX_WATER_TYPE-1] = {
+      Color(  0, 109, 193, 127), // WATER
+      Color(255, 148,   0, 224), // LAVA
+      Color(170, 212,   0, 224), // RADIOACTIVE
+    };
+
+    // Scale water height according to preview size
+    uint       h = (world.water.GetSelfHeight() * rect_preview.GetSizeY() + (world.GetSize().GetY()/2))
+                 / world.GetSize().GetY();
+    Rectanglei water(offset.x, offset.y+rect_preview.GetSizeY()-h, rect_preview.GetSizeX(), h);
+
+    // Draw box with color according to water type
+    window.BoxColor(water, water_colors[ActiveMap()->GetWaterType()-1]);
+  }
+
   world.ToRedrawOnScreen(rect_preview);
   window.RectangleColor(rect_preview, white_color);
 
