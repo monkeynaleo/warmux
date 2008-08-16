@@ -35,6 +35,11 @@ MsgBox::MsgBox(const Point2i& size, Font::font_size_t fsize, Font::font_style_t 
 
 MsgBox::~MsgBox()
 {
+  Clear();
+}
+
+void MsgBox::Clear()
+{
   for (std::list<Text*>::iterator t=messages.begin(); t != messages.end(); t++)
     delete *t;
   messages.clear();

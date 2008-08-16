@@ -49,6 +49,7 @@ class TalkBox : public VBox
 
   void NewMessage(const std::string &msg, const Color& color = white_color);
   void SendChatMsg();
+  void Clear();
 
   bool TextHasFocus() const;
   TextBox* GetTextBox() const {return line_to_send_tbox; };

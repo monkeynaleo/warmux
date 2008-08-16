@@ -105,3 +105,8 @@ bool TalkBox::SendKey(SDL_keysym key)
 
   return r;
 }
+
+void TalkBox::Clear()
+{
+  msg_box->Clear();
+}

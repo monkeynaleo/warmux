@@ -44,6 +44,8 @@ class MsgBox : public Widget
 
   void NewMessage(const std::string& msg, const Color& color = white_color);
 
+  void Clear();
+
   virtual void Draw (const Point2i &mousePosition) const;
   virtual void Pack();
 };
