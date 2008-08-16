@@ -66,6 +66,15 @@ Physics::Physics ():
 //--                         Class Parameters SET/GET                      --//
 //---------------------------------------------------------------------------//
 
+void Physics::SetPhysXY(double x, double y)
+{
+  if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
+    m_pos_x.x0 = x;
+    m_pos_y.x0 = y;
+    UpdateTimeOfLastMove();
+  }
+}
+
 // Set the air resist factor
 void Physics::SetSpeedXY (Point2d vector)
 {
@@ -376,8 +385,6 @@ void Physics::ComputePendulumNextXY (double delta_t)
                       /* d */ -GameMode::GetInstance()->gravity / m_rope_length.x0 * sin (m_rope_angle.x0)
                               +m_extern_force.x / m_rope_length.x0 * cos (m_rope_angle.x0),
                       delta_t);
-
-  UpdateTimeOfLastMove();
 
   double x = m_fix_point_gnd.x - m_fix_point_dxy.x
              + m_rope_length.x0 * sin(m_rope_angle.x0);

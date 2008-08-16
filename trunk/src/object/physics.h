@@ -78,7 +78,7 @@ public:
   virtual ~Physics () {};
 
   // Set/Get position
-  void SetPhysXY (double x, double y) { m_pos_x.x0 = x; m_pos_y.x0 = y; }
+  void SetPhysXY(double x, double y);
   void SetPhysXY(const Point2d &position) { SetPhysXY(position.x, position.y); };
 
   double GetPhysX() const { return m_pos_x.x0; };
@@ -160,7 +160,6 @@ public:
   bool IsMoving() const;
   // Is this object not moving ?
   virtual bool IsSleeping() const;
-  void UpdateTimeOfLastMove();
 
   // The object is falling ?
   bool IsFalling() const { return (m_motion_type==FreeFall) && (m_pos_y.x1 > 0.1); };
@@ -182,6 +181,8 @@ private:
   void ComputeFallNextXY (double delta_t);
 
   void ComputePendulumNextXY (double delta_t);
+
+  void UpdateTimeOfLastMove();
 };
 
 #endif

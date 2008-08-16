@@ -65,8 +65,6 @@ protected:
   bool m_ignore_movements;
   bool m_is_character;
   bool m_is_fire;
-  double m_last_x;
-  double m_last_y;
 
   virtual void CheckOverlapping();
 
