@@ -172,41 +172,36 @@ void MultiTabs::DrawHeader(const Point2i &mousePosition) const
 		     Font::FONT_MEDIUM, Font::FONT_BOLD, true);
 
       tab_title.DrawCenterTop(Point2i(pos_x + tab_header_width/2, position.y + 3) + 5);
-
-      if (nb_visible_tabs > 1) {
-	GetMainWindow().LineColor(pos_x,
-				  pos_x,
-				  position.y +1,
-				  position.y + GetHeaderHeight() - 2,
-				  GetBorderColor());
-
-	GetMainWindow().LineColor(pos_x + tab_header_width,
-				  pos_x + tab_header_width,
-				  position.y +1,
-				  position.y + GetHeaderHeight() - 2,
-				  GetBorderColor());
-      }
     } else {
       Text tab_title(tabs.at(i).GetTitle(), dark_gray_color,
 		     Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
       tab_title.DrawCenterTop(Point2i(pos_x + tab_header_width/2, position.y + 3) + 5);
-
-      GetMainWindow().LineColor(pos_x,
-				pos_x + tab_header_width,
-				position.y + GetHeaderHeight() - 2,
-				position.y + GetHeaderHeight() - 2,
-				GetBorderColor());
     }
   }
 
   if (nb_visible_tabs > 1) {
+    uint current_tab_pos_x = prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX() + 5 +
+      (current_tab-first_tab)*tab_header_width;
+
+    GetMainWindow().LineColor(current_tab_pos_x,
+			      current_tab_pos_x,
+			      position.y +1,
+			      position.y + GetHeaderHeight() - 2,
+			      GetBorderColor());
+    GetMainWindow().LineColor(current_tab_pos_x + tab_header_width,
+			      current_tab_pos_x + tab_header_width,
+			      position.y +1,
+			      position.y + GetHeaderHeight() - 2,
+			      GetBorderColor());
+
     GetMainWindow().LineColor(position.x,
-			      prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX() + 5,
+			      current_tab_pos_x,
 			      position.y + GetHeaderHeight() - 2,
 			      position.y + GetHeaderHeight() - 2,
 			      GetBorderColor());
-    GetMainWindow().LineColor(next_tab_bt->GetPositionX() - 7,
+
+    GetMainWindow().LineColor(current_tab_pos_x + tab_header_width,
 			      position.x + size.x - 2,
 			      position.y + GetHeaderHeight() - 2,
 			      position.y + GetHeaderHeight() - 2,
