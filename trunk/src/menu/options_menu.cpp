@@ -573,3 +573,8 @@ void OptionMenu::SelectTeam()
 
   }
 }
+
+void OptionMenu::key_tab()
+{
+  Menu::key_tab();
+}

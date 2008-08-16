@@ -159,6 +159,11 @@ void Menu::key_right()
 {
 }
 
+void Menu::key_tab()
+{
+  widgets.SetFocusOnNextWidget();
+}
+
 void Menu::DisplayError(const std::string &msg)
 {
   play_error_sound();
@@ -245,6 +250,9 @@ void Menu::Run (bool skip_menu)
 	      break;
 	    case SDLK_RIGHT:
 	      key_right();
+	      break;
+	    case SDLK_TAB:
+	      key_tab();
 	      break;
 	    case SDLK_F10:
 	      AppWormux::GetInstance()->video->ToggleFullscreen();
