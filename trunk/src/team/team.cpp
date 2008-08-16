@@ -124,7 +124,7 @@ bool Team::LoadCharacters()
 
     // Create a new character and add him to the team
     Character new_character(*this, character_name, body);
-    if((attached_custom_team != NULL) && (IsLocal()))
+    if((attached_custom_team != NULL) && (IsLocal()) && !Network::IsConnected())
     {
       new_character.SetCustomName(attached_custom_team->GetCharactersNameList().at(characters.size()));
     }
