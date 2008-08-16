@@ -226,6 +226,13 @@
   <color name="energy_color_100_percent" r="21" g="100" b="136" a="255" />
 </section>
 
+<section name="water_colors">
+  <color name="water" r="0" g="109" b="193" a="127" />
+  <color name="lava" r="255" g="148" b="0" a="224" />
+  <color name="radioactive" r="255" g="212" b="212" a="224" />
+  <color name="dirtywater" r="67" g="107" b="21" a="64" />
+</section>
+
 <section name="gfx">
   <surface name="pointeur1" file="gfx/pointer.png" />
 

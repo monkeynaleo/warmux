@@ -42,6 +42,12 @@ const float b = 1.0;
 
 int Water::pattern_height = 0;
 
+Water::~Water()
+{
+  if (type_color)
+    delete type_color;
+}
+
 /*
  * Water consists of 1) water.png texture, which is the actual wave and
  * 2) water_bottom.png, which is water below the wave. Composing the water in
@@ -66,6 +72,10 @@ void Water::Init()
 
   image += "_bottom";
 
+  if (water_type != NO_WATER)
+    type_color = new Color(resource_manager.LoadColor(res, "water_colors/" + water_name));
+  else
+    type_color = NULL;
   bottom = resource_manager.LoadImage(res, image);
   bottom.SetAlpha(0, 0);
 
@@ -114,6 +124,9 @@ void Water::Reset()
 {
   water_name = ActiveMap()->GetWaterName();
   water_type = GetWaterType(water_name);
+  if (type_color)
+    delete type_color;
+  type_color = NULL;
 
   if (!IsActive())
     return;
