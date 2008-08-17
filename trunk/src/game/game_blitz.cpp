@@ -73,7 +73,7 @@ GameBlitz::time_iterator GameBlitz::KillTeam(GameBlitz::time_iterator cur)
   return times.end();
 }
 
-void GameBlitz::Run()
+bool GameBlitz::Run()
 {
   // Make sure map is empty
   times.clear();
@@ -83,7 +83,7 @@ void GameBlitz::Run()
   }
 
   counter = 0;;
-  Game::Run();
+  return Game::Run();
 }
 
 void GameBlitz::RefreshClock()

@@ -125,12 +125,12 @@ void Game::Start()
   {
     JukeBox::GetInstance()->PlayMusic(ActiveMap()->ReadMusicPlaylist());
 
-    Run();
+    bool game_finished = Run();
 
     MSG_DEBUG( "game", "End of game_loop.Run()" );
     JukeBox::GetInstance()->StopAll();
 
-    UnloadDatas();
+    UnloadDatas(game_finished);
 
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
     JukeBox::GetInstance()->PlayMusic("menu");
@@ -150,13 +150,39 @@ void Game::Start()
 
 }
 
-void Game::UnloadDatas() const
+void Game::UnloadDatas(bool game_finished) const
 {
   world.FreeMem();
   ActiveMap()->FreeData();
   lst_objects.FreeMem();
   ParticleEngine::Stop();
+
+  if (!Network::IsConnected() || !game_finished) {
+    // Fix bug #10613: ensure all teams are reseted as local teams
+    FOR_EACH_TEAM(team)
+      (**team).SetDefaultPlayingConfig();
+  }
+
+  if (Network::IsConnected()) {
+    if (!game_finished) {
+      // the user has asked for the end of game
+      // if it's a network game, it's time to disconnect!!
+      Network::Disconnect();
+
+      // Fix bug #10613: ensure all teams are reseted as local teams
+      FOR_EACH_TEAM(team)
+	(**team).SetDefaultPlayingConfig();
+    }
+    // else: we will start a new round!
+  } else {
+
+    // Fix bug #10613: ensure all teams are reseted as local teams
+    FOR_EACH_TEAM(team)
+      (**team).SetDefaultPlayingConfig();
+  }
+
   GetTeamsList().UnloadGamingData();
+
   JukeBox::GetInstance()->StopAll();
 }
 
@@ -392,8 +418,9 @@ void Game::PingClient() const
 // ####################################################################
 // ####################################################################
 
-void Game::Run()
+bool Game::Run()
 {
+  bool game_finished = false;
   isGameLaunched = true;
 
   // Time to wait between 2 loops
@@ -417,10 +444,7 @@ void Game::Run()
   // the game is finished but we won't go at the results screen too fast!
   if (IsGameFinished()) {
     EndOfGame();
-  } else if (Network::IsConnected()) {
-    // the user has asked for the end of game
-    // if it's a network game, it's time to disconnect!!
-    Network::Disconnect();
+    game_finished = true;
   }
 
   isGameLaunched = false;
@@ -433,15 +457,13 @@ void Game::Run()
   // (elsewise when someone quits the game before the end, it appears
   // as disconnected only when if finishes viewing the result menu)
 #ifndef DEBUG
-  if (IsGameFinished())
+  if (game_finished)
 #else
-  if (IsGameFinished() || Network::GetInstance()->IsLocal())
+  if (game_finished || Network::GetInstance()->IsLocal())
 #endif
     MessageEndOfGame();
 
-  // Fix bug #10613: ensure all teams are reset as local teams
-  FOR_EACH_TEAM(team)
-    (**team).SetDefaultPlayingConfig();
+  return game_finished;
 }
 
 bool Game::HasBeenNetworkDisconnected() const

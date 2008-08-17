@@ -43,7 +43,7 @@ public:
   } game_loop_state_t;
 
 protected:
-  virtual void Run();         // Main loop
+  virtual bool Run();         // Main loop
 
   bool IsAnythingMoving() const;
   void MainLoop();
@@ -80,7 +80,7 @@ private:
 
   void Draw();        // Draw to screen
   void MessageLoading() const;
-  void UnloadDatas() const;
+  void UnloadDatas(bool game_finished) const;
 
   // Input management (keyboard/mouse)
   void RefreshInput();

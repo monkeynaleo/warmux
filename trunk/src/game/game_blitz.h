@@ -34,9 +34,9 @@ public:
   uint    counter;
 
   GameBlitz();
-  
+
   // Overload it to retrieve teams.
-  void Run();
+  bool Run();
 
   // Get remaining time to play
   uint GetRemainingTime() const;
