@@ -1,7 +1,7 @@
 ; Polish NSIS installer translation
 
-!define WORMUX_PROMPT_NO_RIGHTS "Not enough rights to install, aborting"
-!define WORMUX_PROMPT_CONTINUE  "Unable to uninstall the currently installed version of Wormux. The new version will be installed without removing the currently installed version."
+!define WORMUX_PROMPT_NO_RIGHTS "Brak uprawnieñ do instalacji, koñczenie pracy"
+!define WORMUX_PROMPT_CONTINUE  "Nie mo¿na odinstalowaæ bie¿¹cej wersji Wormuksa. Nowa wersja zostanie zainstalowana bez usuwania wersji bie¿¹cej."
 
 ; License Page
 !define WORMUX_TITLE            "Wormux"
@@ -14,9 +14,9 @@
 !define WORMUX_STARTM_SC_DESC   "Umieœæ skrót w menu start, w grupie Wormux"
 !define WORMUX_UNINST_SC_DESC   "Umieœæ skrót do dezinstalacji Wormuksa w menu start"
 !define WORMUX_SHORCUTS_TITLE   "Instalacja skrótów"
-!define WORMUX_REMOVE_TITLE     "Uninstall previous version"
+!define WORMUX_REMOVE_TITLE     "Odinstaluj poprzedni¹ wersjê"
 
-!define WORMUX_CONFIG_SC_DESC   "Shortcut to user config folder"
-!define WORMUX_PDF_SC_DESC      "Install howto play PDFs"
+!define WORMUX_CONFIG_SC_DESC   "Skrót do folderu konfiguracji u¿ytkownika"
+!define WORMUX_PDF_SC_DESC      "Zainstaluj podrêczniki w formacie PDF"
 
 !define WORMUX_VISIT            "OdwiedŸ stronê WWW projektu Wormux"
