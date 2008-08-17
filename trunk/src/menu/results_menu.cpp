@@ -494,7 +494,7 @@ void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
 void ResultsMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
-  if (msg_box->TextHasFocus())
+  if (msg_box != NULL && msg_box->TextHasFocus())
   {
     msg_box->SendChatMsg();
     return;
