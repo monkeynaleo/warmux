@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE resources SYSTEM "../body.dtd" []>
+<!DOCTYPE resources SYSTEM "body.dtd">
 <resources>
 
 <!--   ###########################################
@@ -10,7 +10,7 @@
 
 <author>
   <name>yeKcim</name>
-  <email>yekcim AT crocobox.org</email>
+  <email>yekcim AT crocobox DOT org</email>
 </author>
 
 
@@ -57,7 +57,7 @@
        ###########################################   -->
 
 <!-- ###### Body ###### -->
-<sprite name="body" type="body" >
+<sprite name="body" type="body">
 	<image file="body.png"/>
 	<anchor dx="9" dy="16"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
@@ -73,25 +73,25 @@
 </sprite>
 
 <!-- ###### Hoop (foreground part) ###### -->
-<sprite name="hoop" type="hoop" >
+<sprite name="hoop" type="hoop">
 	<image file="hoop.png"/>
 	<anchor dx="18" dy="3"/>
 </sprite>
 
 <!-- ###### Hula (foreground part) ###### -->
-<sprite name="hula" type="hula" >
+<sprite name="hula" type="hula">
 	<image file="hula.png"/>
 	<anchor dx="18" dy="6"/>
 </sprite>
 
 <!-- ###### Tail ###### -->
-<sprite name="tail" type="tail" >
+<sprite name="tail" type="tail">
 	<image file="tail.png"/>
 	<anchor dx="19" dy="29"/>
 </sprite>
 
 <!-- ###### Back ###### -->
-<sprite name="back" type="back" >
+<sprite name="back" type="back">
 	<image file="back.png"/>
 	<anchor dx="18" dy="15"/>
 </sprite>
@@ -135,12 +135,12 @@
 	<attached member_type="pupil-left" frame="*" dx="5" dy="3"/>
 </sprite>
 
-<sprite name="pupil-right" type="pupil-right" >
+<sprite name="pupil-right" type="pupil-right">
 	<image file="pupil.png"/>
 	<anchor dx="-1" dy="0"/>
 </sprite>
 
-<sprite name="pupil-left" type="pupil-left" >
+<sprite name="pupil-left" type="pupil-left">
 	<image file="pupil.png"/>
 	<anchor dx="-1" dy="0"/>
 </sprite>
@@ -154,67 +154,67 @@
 </sprite>
 
 <!-- ###### Arm left ###### -->
-<sprite name="arm-left" type="arm-left" >
+<sprite name="arm-left" type="arm-left">
 	<image file="arm1left.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="arm2-left" frame="*" dx="5" dy="7"/>
 </sprite>
 
-<sprite name="arm2-left" type="arm2-left" >
+<sprite name="arm2-left" type="arm2-left">
 	<image file="arm2left.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="arm3-left" frame="*" dx="5" dy="6"/>
 </sprite>
 
-<sprite name="arm3-left-L" type="arm3-left" >
+<sprite name="arm3-left-L" type="arm3-left">
 	<image file="arm3left.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="weapon" frame="*" dx="5" dy="5"/>
 	<attached member_type="yoyo" frame="*" dx="-18" dy="0"/>
 </sprite>
 
-<sprite name="arm3-left-R" type="arm3-left" >
+<sprite name="arm3-left-R" type="arm3-left">
 	<image file="arm3left.png"/>
 	<anchor dx="5" dy="0"/>
 </sprite>
 
 <!-- ###### Arm right ###### -->
-<sprite name="arm-right" type="arm-right" >
+<sprite name="arm-right" type="arm-right">
 	<image file="arm1right.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="arm2-right" frame="*" dx="5" dy="7"/>
 </sprite>
 
-<sprite name="arm2-right" type="arm2-right" >
+<sprite name="arm2-right" type="arm2-right">
 	<image file="arm2right.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="arm3-right" frame="*" dx="5" dy="6"/>
 </sprite>
 
-<sprite name="arm3-right-R" type="arm3-right" >
+<sprite name="arm3-right-R" type="arm3-right">
 	<image file="arm3left.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="weapon" frame="*" dx="5" dy="5"/>
 	<attached member_type="yoyo" frame="*" dx="-18" dy="0"/>
 </sprite>
 
-<sprite name="arm3-right-L" type="arm3-right" >
+<sprite name="arm3-right-L" type="arm3-right">
 	<image file="arm3right.png"/>
 	<anchor dx="5" dy="0"/>
 </sprite>
 
 <!-- ###### Legs ###### -->
-<sprite name="foot-left" type="foot-left" >
+<sprite name="foot-left" type="foot-left">
 	<image file="footleft.png"/>
 	<anchor dx="4" dy="3"/>
 </sprite>
-<sprite name="foot-right" type="foot-right" >
+<sprite name="foot-right" type="foot-right">
 	<image file="footright.png"/>
 	<anchor dx="4" dy="3"/>
 </sprite>
 
 <!-- ###### Helmet ###### -->
-<sprite name="helmet" type="helmet" >
+<sprite name="helmet" type="helmet">
 	<image file="helmet.png"/>
 	<anchor dx="15" dy="15"/>
 </sprite>
@@ -229,14 +229,14 @@
 </sprite>
 
 <!-- ###### Dead ###### -->
-<sprite name="body-dead" type="body" >
+<sprite name="body-dead" type="body">
 	<image file="dead.png"/>
 	<anchor dx="12" dy="15"/>
 </sprite>
 
 <!-- ###### Black ###### -->
 <!-- ###### Body ###### -->
-<sprite name="body-black" type="body" >
+<sprite name="body-black" type="body">
 	<image file="black_body.png"/>
 	<anchor dx="9" dy="16"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
@@ -253,13 +253,13 @@
 </sprite>
 
 <!-- ###### Tail ###### -->
-<sprite name="tail-black" type="tail" >
+<sprite name="tail-black" type="tail">
 	<image file="black_tail.png"/>
 	<anchor dx="19" dy="29"/>
 </sprite>
 
 <!-- ###### Back ###### -->
-<sprite name="back-black" type="back" >
+<sprite name="back-black" type="back">
 	<image file="black_back.png"/>
 	<anchor dx="18" dy="15"/>
 </sprite>
@@ -303,12 +303,12 @@
 	<attached member_type="pupil-left" frame="*" dx="6" dy="3"/>
 </sprite>
 
-<sprite name="pupil-right-black" type="pupil-right" >
+<sprite name="pupil-right-black" type="pupil-right">
 	<image file="black_pupil.png"/>
 	<anchor dx="-1" dy="0"/>
 </sprite>
 
-<sprite name="pupil-left-black" type="pupil-left" >
+<sprite name="pupil-left-black" type="pupil-left">
 	<image file="black_pupil.png"/>
 	<anchor dx="-1" dy="0"/>
 </sprite>
@@ -322,49 +322,49 @@
 </sprite>
 
 <!-- ###### Arm left ###### -->
-<sprite name="arm-left-black" type="arm-left" >
+<sprite name="arm-left-black" type="arm-left">
 	<image file="black_arm1left.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="arm2-left" frame="*" dx="5" dy="7"/>
 </sprite>
 
-<sprite name="arm2-left-black" type="arm2-left" >
+<sprite name="arm2-left-black" type="arm2-left">
 	<image file="black_arm2left.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="arm3-left" frame="*" dx="5" dy="6"/>
 </sprite>
 
-<sprite name="arm3-left-black-L" type="arm3-left" >
+<sprite name="arm3-left-black-L" type="arm3-left">
 	<image file="black_arm3left.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="weapon" frame="*" dx="5" dy="5"/>
 	<attached member_type="yoyo" frame="*" dx="-18" dy="0"/>
 </sprite>
 
-<sprite name="arm3-left-black-R" type="arm3-left" >
+<sprite name="arm3-left-black-R" type="arm3-left">
 	<image file="black_arm3left.png"/>
 	<anchor dx="5" dy="0"/>
 </sprite>
 
 <!-- ###### Arm right ###### -->
-<sprite name="arm-right-black" type="arm-right" >
+<sprite name="arm-right-black" type="arm-right">
 	<image file="black_arm1right.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="arm2-right" frame="*" dx="5" dy="7"/>
 </sprite>
 
-<sprite name="arm2-right-black" type="arm2-right" >
+<sprite name="arm2-right-black" type="arm2-right">
 	<image file="black_arm2right.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="arm3-right" frame="*" dx="5" dy="6"/>
 </sprite>
 
-<sprite name="arm3-right-black-L" type="arm3-right" >
+<sprite name="arm3-right-black-L" type="arm3-right">
 	<image file="black_arm3right.png"/>
 	<anchor dx="5" dy="0"/>
 </sprite>
 
-<sprite name="arm3-right-black-R" type="arm3-right" >
+<sprite name="arm3-right-black-R" type="arm3-right">
 	<image file="black_arm3right.png"/>
 	<anchor dx="5" dy="0"/>
 	<attached member_type="weapon" frame="*" dx="5" dy="5"/>
@@ -372,53 +372,53 @@
 </sprite>
 
 <!-- ###### Legs ###### -->
-<sprite name="foot-left-black" type="foot-left" >
+<sprite name="foot-left-black" type="foot-left">
 	<image file="black_footleft.png"/>
 	<anchor dx="1" dy="1"/>
 </sprite>
-<sprite name="foot-right-black" type="foot-right" >
+<sprite name="foot-right-black" type="foot-right">
 	<image file="black_footright.png"/>
 	<anchor dx="1" dy="1"/>
 </sprite>
 
 <!-- ###### Construct ###### -->
-<sprite name="construct" type="construct" >
+<sprite name="construct" type="construct">
 	<image file="c1.png"/>
 	<anchor dx="17" dy="12"/>
 	<attached member_type="c2" frame="*" dx="17" dy="12"/>
 </sprite>
 
-<sprite name="c2" type="c2" >
+<sprite name="c2" type="c2">
 	<image file="c2.png"/>
 	<anchor dx="17" dy="12"/>
 </sprite>
 
 <!-- ###### Jetpack ###### -->
-<sprite name="jetpack" type="jetpack" >
+<sprite name="jetpack" type="jetpack">
 	<image file="belt.png"/>
 	<anchor dx="10" dy="4"/>
 	<attached member_type="jetpack-left" frame="*" dx="9" dy="-5"/>
 	<attached member_type="jetpack-right" frame="*" dx="-1" dy="-3"/>
 </sprite>
 
-<sprite name="jetpack-left" type="jetpack-left" >
+<sprite name="jetpack-left" type="jetpack-left">
 	<image file="jetpack.png"/>
 	<anchor dx="5" dy="11"/>
 	<attached member_type="jetpack-left-fire" frame="*" dx="4" dy="5"/>
 </sprite>
 
-<sprite name="jetpack-left-fire" type="jetpack-left-fire" >
+<sprite name="jetpack-left-fire" type="jetpack-left-fire">
 	<image file="jetpack-fire.png"/>
 	<anchor dx="5" dy="1"/>
 </sprite>
 
-<sprite name="jetpack-right" type="jetpack-right" >
+<sprite name="jetpack-right" type="jetpack-right">
 	<image file="jetpack.png"/>
 	<anchor dx="5" dy="11"/>
 	<attached member_type="jetpack-right-fire" frame="*" dx="4" dy="5"/>
 </sprite>
 
-<sprite name="jetpack-right-fire" type="jetpack-right-fire" >
+<sprite name="jetpack-right-fire" type="jetpack-right-fire">
 	<image file="jetpack-fire.png"/>
 	<anchor dx="5" dy="1"/>
 </sprite>
@@ -1232,7 +1232,7 @@
 </movement>
 
 <!-- ###### Hard land ###### -->
-<movement name="hard-land" speed="50" play_mode="play_once" >
+<movement name="hard-land" speed="50" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="foot-left" dy="-2"/>
@@ -1530,7 +1530,7 @@
        ###########################################   -->
 
 <!-- ###### Yoyo ###### -->
-<movement name="animation0" speed="5400" play_mode="play_once" > <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
+<movement name="animation0" speed="5400" play_mode="play_once"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="arm-left" angle="-90"/>
@@ -1539,7 +1539,7 @@
 </movement>
 
 <!-- ###### Tired ###### -->
-<movement name="animation1" speed="100" play_mode="play_once" >
+<movement name="animation1" speed="100" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="body" angle="0"/>
@@ -1633,7 +1633,7 @@
 
 
 <!-- ###### Hula-hoop ###### -->
-<movement name="animation2" speed="50" play_mode="play_once" >
+<movement name="animation2" speed="50" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<!-- begining -->
 	<frame>
@@ -2049,7 +2049,7 @@
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="arm-left" follow_speed="true"/>
-		<member type="arm-right" follow_speed="true" />
+		<member type="arm-right" follow_speed="true"/>
 		<member type="foot-left" follow_speed="true"/>
 		<member type="foot-right" follow_speed="true"/>
 	</frame>
@@ -2084,7 +2084,7 @@
 
 
 <!-- ###### Airhammer ###### -->
-<movement name="weapon-airhammer-begin-shoot" speed="100" play_mode="play_once" >
+<movement name="weapon-airhammer-begin-shoot" speed="100" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="construct" angle="12" dy="-4"/>
@@ -2092,7 +2092,7 @@
 </movement>
 
 <!-- ###### Grenade ###### -->
-<movement name="weapon-grenade-begin-shoot" speed="30" play_mode="play_once" >
+<movement name="weapon-grenade-begin-shoot" speed="30" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -2178,7 +2178,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-grenade-end-shoot" speed="30" play_mode="play_once" >
+<movement name="weapon-grenade-end-shoot" speed="30" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -2201,7 +2201,7 @@
 </movement>
 
 <!-- ###### Bounceball ###### -->
-<movement name="weapon-bounce_ball-begin-shoot" speed="50" play_mode="play_once" >
+<movement name="weapon-bounce_ball-begin-shoot" speed="50" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" angle="0"/>
@@ -2291,7 +2291,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-bounce_ball-end-shoot" speed="50" play_mode="play_once" >
+<movement name="weapon-bounce_ball-end-shoot" speed="50" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" angle="40"/>
@@ -2441,7 +2441,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-bazooka-end-shoot" speed="70" play_mode="play_once" >
+<movement name="weapon-bazooka-end-shoot" speed="70" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="foot-left" dy="-4"/>
@@ -2548,7 +2548,7 @@
 
 
 <!-- ###### Dynamite ###### -->
-<movement name="weapon-dynamite-begin-shoot" speed="30" play_mode="play_once" >
+<movement name="weapon-dynamite-begin-shoot" speed="30" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -2592,7 +2592,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-dynamite-end-shoot" speed="30" play_mode="play_once" >
+<movement name="weapon-dynamite-end-shoot" speed="30" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -2613,7 +2613,7 @@
 </movement>
 
 <!-- ###### Mine ###### -->
-<movement name="weapon-minelauncher-begin-shoot" speed="60" play_mode="play_once" >
+<movement name="weapon-minelauncher-begin-shoot" speed="60" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -2641,7 +2641,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-minelauncher-end-shoot" speed="30" play_mode="play_once" >
+<movement name="weapon-minelauncher-end-shoot" speed="30" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -2674,7 +2674,7 @@
 </movement>
 
 <!-- ###### SuperTux ###### -->
-<movement name="weapon-tux-end-shoot" speed="50" play_mode="play_once" >
+<movement name="weapon-tux-end-shoot" speed="50" play_mode="play_once">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" angle="-90"/>
