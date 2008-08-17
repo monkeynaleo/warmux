@@ -286,10 +286,23 @@ void MultiTabs::NeedRedrawing()
 
 bool MultiTabs::SendKey(const SDL_keysym& key)
 {
-  if (!tabs.empty())
-    return tabs.at(current_tab).box->SendKey(key);
+  if (tabs.empty())
+    return false;
 
-  return false;
+  if (SDL_GetModState()&(KMOD_CTRL|KMOD_META)) {
+    switch (key.sym) {
+    case SDLK_PAGEUP:
+      PrevTab();
+      return true;
+    case SDLK_PAGEDOWN:
+      NextTab();
+      return true;
+    default:
+      break;
+    }
+  }
+
+  return tabs.at(current_tab).box->SendKey(key);
 }
 
 Widget* MultiTabs::Click(const Point2i &mousePosition, uint button)
@@ -324,7 +337,7 @@ Widget* MultiTabs::ClickUp(const Point2i &mousePosition, uint button)
 	  NextTab();
 
 	} else if (nb_visible_tabs > 1 && button == SDL_BUTTON_LEFT) {
-	  uint clicked_tab = (mousePosition.x - position.x)/tab_header_width + first_tab;
+	  uint clicked_tab = (mousePosition.x - prev_tab_bt->GetPositionX() - prev_tab_bt->GetSizeX() - 5)/tab_header_width + first_tab;
 	  SelectTab(clicked_tab);
 
 	}
