@@ -105,7 +105,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
                                         double& shoot_angle)
 {
   // We need to use center point, because gunholePosition is location
-  // of last weapon of the ActiveTeam() and not the future gunholePos 
+  // of last weapon of the ActiveTeam() and not the future gunholePos
   // which will be select.
 
   // TODO: Please find an alternative to solve this tempory solution
@@ -118,7 +118,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   double a = tan(original_angle);
   double b = pos.y - (a * pos.x);
 
- 
+
   // compute to see if there any part of ground between the 2 characters
   // While test is not finished
   while (pos != arrival) {
@@ -126,7 +126,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
     Point2i posi(int(pos.x+0.5), int(pos.y+0.5));
 
     // the point is outside the map
-    if ( world.IsOutsideWorld(posi) ) 
+    if ( world.IsOutsideWorld(posi) )
       {
         return false;
       }
@@ -173,7 +173,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
     pos += delta_pos;
   }
-    
+
 
   // set the angle
   if (departure.x > arrival.x) {
@@ -183,7 +183,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   }
     */
   shoot_angle = original_angle;
-  
+
   return true;
 }
 
@@ -210,7 +210,7 @@ bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
   double angle = InRange_Double(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
                              - (ActiveTeam().GetWeapon().GetMinAngle()) );
 
-  if (AbsoluteValue(angle-m_angle) > 0.03490/* 2 degrees */) { 
+  if (AbsoluteValue(angle-m_angle) > 0.03490/* 2 degrees */) {
     // angle is too wide for the weapon
     return false;
   }
@@ -301,7 +301,7 @@ void AIShootModule::ShootWithBazooka()
         Xe = Xpe;
         Ye = Ype;
         double V0x = (Xe - Xs ) / 80;
-        double V0y = V0x * (Ye - (Ys))/ (Xe - Xs -V0x) - 1/2.0 * sqrt(30*30 /* g   */+ wind.GetStrength() * 75.0 *wind.GetStrength() * 75.0  /20.0 /20.0 /* W  /m  */ )  / V0x * (Xe - Xs - V0x)/40 /* pixel per metre */;
+        double V0y = V0x * (Ye - (Ys))/ (Xe - Xs -V0x) - 1/2.0 * sqrt(30*30 /* g */+ wind.GetStrength() * 75.0 *wind.GetStrength() * 75.0  /20.0 /20.0 /* W/m*/ )  / V0x * (Xe - Xs - V0x)/40 /* pixel per metre */;
 
 
         std::cout << "shooting " << V0x <<" "  <<"   " << V0y << " "<< " " <<  atan(V0y/V0x) << " " <<m_enemy->GetName() << std::endl;
@@ -436,7 +436,7 @@ bool AIShootModule::Refresh(uint current_time)
     FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
 //      if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
 //                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
-        if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 30) {
+        if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 40) {
               if (&(*character) != m_enemy) {
                 GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
                                                  + (*character).GetName());
