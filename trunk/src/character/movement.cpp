@@ -35,7 +35,9 @@ Movement::Movement(const xmlNode* xml)
   MSG_DEBUG("body.movement", "  Loading movement %s\n", type.c_str());
 
   speed = 15;
+  repeat = 1;
   XmlReader::ReadIntAttr(xml, "speed", speed);
+  XmlReader::ReadIntAttr(xml, "repeat", repeat);
 
   std::string pm;
   if (XmlReader::ReadStringAttr(xml, "play_mode", pm))
@@ -60,53 +62,57 @@ Movement::Movement(const xmlNode* xml)
   xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "frame");
   xmlNodeArray::const_iterator it = nodes.begin(), end = nodes.end();
   MSG_DEBUG("body.movement", "  Found %i movement frames\n", nodes.size());
+    MSG_DEBUG("body.movement", "  Repeat %i times\n", repeat);
 
   /* We know the number of member frame that are being read so we can resize
    * thr array to be able to get all of them. */
-  frames.resize(nodes.size());
-
-  for (int frame_number=0; it != end; ++it, frame_number++)
+  frames.resize(nodes.size()*repeat);
+  for(int repeat_number =0; repeat_number < repeat; repeat_number++)
   {
-    xmlNodeArray members = XmlReader::GetNamedChildren(*it, "member");
-    xmlNodeArray::const_iterator it2;
-    MSG_DEBUG("body.movement", "    Found %i frame members\n", members.size());
-
-    for (it2 = members.begin(); it2 != members.end(); ++it2)
+    it = nodes.begin();
+    for (int frame_number=0; it != end; ++it, frame_number++)
     {
-      const xmlNode *child = *it2;
-      std::string member_type;
-      XmlReader::ReadStringAttr(child, "type", member_type);
+      xmlNodeArray members = XmlReader::GetNamedChildren(*it, "member");
+      xmlNodeArray::const_iterator it2;
+      MSG_DEBUG("body.movement", "    Found %i frame members\n", members.size());
 
-      member_mvt mvt;
-      int dx = 0, dy = 0, angle_deg = 0;
-      double scale_x = 1.0, scale_y = 1.0, tmp_alpha = 1.0;
+      for (it2 = members.begin(); it2 != members.end(); ++it2)
+      {
+        const xmlNode *child = *it2;
+        std::string member_type;
+        XmlReader::ReadStringAttr(child, "type", member_type);
 
-      XmlReader::ReadIntAttr(child, "dx", dx);
-      XmlReader::ReadIntAttr(child, "dy", dy);
-      XmlReader::ReadDoubleAttr(child, "scale_x", scale_x);
-      XmlReader::ReadDoubleAttr(child, "scale_y", scale_y);
-      XmlReader::ReadDoubleAttr(child, "alpha", tmp_alpha);
-      XmlReader::ReadIntAttr(child, "angle", angle_deg);
-      XmlReader::ReadBoolAttr(child, "follow_crosshair", mvt.follow_crosshair);
-      XmlReader::ReadBoolAttr(child, "follow_half_crosshair", mvt.follow_half_crosshair);
-      XmlReader::ReadBoolAttr(child, "follow_speed", mvt.follow_speed);
-      XmlReader::ReadBoolAttr(child, "follow_direction", mvt.follow_direction);
-      if( XmlReader::ReadBoolAttr(child, "follow_cursor", mvt.follow_cursor)
-          && !XmlReader::ReadIntAttr(child, "follow_cursor_limit", mvt.follow_cursor_limit))
-        printf("Warning ! \"follow_cursor\" flag used while \"follow_cursor_limit\" isn't defined, this won't do anything!\n");
-      if(tmp_alpha < 0.0 || tmp_alpha > 1.0) tmp_alpha = 1.0;
-      mvt.SetAngle(angle_deg * M_PI / 180);
-      mvt.pos.x = dx;
-      mvt.pos.y = dy;
-      mvt.alpha = tmp_alpha;
-      mvt.scale = Point2f(scale_x, scale_y);
+        member_mvt mvt;
+        int dx = 0, dy = 0, angle_deg = 0;
+        double scale_x = 1.0, scale_y = 1.0, tmp_alpha = 1.0;
 
-      always_moving |= mvt.follow_cursor;
-      always_moving |= mvt.follow_crosshair;
-      always_moving |= mvt.follow_half_crosshair;
-      always_moving |= mvt.follow_speed;
-      always_moving |= mvt.follow_direction;
-      frames[frame_number][member_type] = mvt;
+        XmlReader::ReadIntAttr(child, "dx", dx);
+        XmlReader::ReadIntAttr(child, "dy", dy);
+        XmlReader::ReadDoubleAttr(child, "scale_x", scale_x);
+        XmlReader::ReadDoubleAttr(child, "scale_y", scale_y);
+        XmlReader::ReadDoubleAttr(child, "alpha", tmp_alpha);
+        XmlReader::ReadIntAttr(child, "angle", angle_deg);
+        XmlReader::ReadBoolAttr(child, "follow_crosshair", mvt.follow_crosshair);
+        XmlReader::ReadBoolAttr(child, "follow_half_crosshair", mvt.follow_half_crosshair);
+        XmlReader::ReadBoolAttr(child, "follow_speed", mvt.follow_speed);
+        XmlReader::ReadBoolAttr(child, "follow_direction", mvt.follow_direction);
+        if( XmlReader::ReadBoolAttr(child, "follow_cursor", mvt.follow_cursor)
+            && !XmlReader::ReadIntAttr(child, "follow_cursor_limit", mvt.follow_cursor_limit))
+          printf("Warning ! \"follow_cursor\" flag used while \"follow_cursor_limit\" isn't defined, this won't do anything!\n");
+        if(tmp_alpha < 0.0 || tmp_alpha > 1.0) tmp_alpha = 1.0;
+        mvt.SetAngle(angle_deg * M_PI / 180);
+        mvt.pos.x = dx;
+        mvt.pos.y = dy;
+        mvt.alpha = tmp_alpha;
+        mvt.scale = Point2f(scale_x, scale_y);
+
+        always_moving |= mvt.follow_cursor;
+        always_moving |= mvt.follow_crosshair;
+        always_moving |= mvt.follow_half_crosshair;
+        always_moving |= mvt.follow_speed;
+        always_moving |= mvt.follow_direction;
+        frames[frame_number+repeat_number*nodes.size()][member_type] = mvt;
+      }
     }
   }
 }
