@@ -116,7 +116,13 @@ class Widget : public Rectanglei, public Container
 
   void SetContainer(Container * _ct) { ct = _ct; };
 
-  virtual bool IsWidgetList() const { return false; };
+  // to manage browsing between the widgets with keyboard
+  virtual Widget* GetFirstWidget() const { return NULL; };
+  virtual Widget* GetLastWidget() const { return NULL; };
+  virtual Widget* GetNextWidget(const Widget */*w*/, bool /*loop*/) const { return NULL; };
+  virtual Widget* GetPreviousWidget(const Widget */*w*/, bool /*loop*/) const { return NULL; };
+  virtual bool IsWidgetBrowser() const { return false; };
+
   virtual void Pack() = 0;
 };
 

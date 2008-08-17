@@ -38,9 +38,6 @@ private:
   Widget* last_clicked;
   Widget* selected_widget;
 
-  Widget* GetFirstWidget() const;
-  Widget* GetLastWidget() const;
-
 protected:
   std::list<Widget*> widget_list;
   virtual void DelFirstWidget(); // usefull only for message_box
@@ -69,13 +66,15 @@ public:
   virtual void SetFocusOnPreviousWidget();
   Widget * GetCurrentKeyboardSelectedWidget() const { return selected_widget; };
 
-  Widget* GetNextWidget(const Widget *w, bool loop) const;
-  Widget* GetPreviousWidget(const Widget *w, bool loop) const;
+  // to implement WidgetBrowser
+  virtual Widget* GetFirstWidget() const;
+  virtual Widget* GetLastWidget() const;
+  virtual Widget* GetNextWidget(const Widget *w, bool loop) const;
+  virtual Widget* GetPreviousWidget(const Widget *w, bool loop) const;
+  virtual bool IsWidgetBrowser() const { return true; };
 
   // set focus on a widget
   void SetMouseFocusOn(Widget* widget);
-
-  virtual bool IsWidgetList() const { return true; };
   virtual void Pack();
 };
 

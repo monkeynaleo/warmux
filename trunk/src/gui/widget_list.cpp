@@ -103,11 +103,15 @@ Widget* WidgetList::GetFirstWidget() const
   for (std::list<Widget*>::const_iterator it = widget_list.begin();
        it != widget_list.end();
        it++) {
-    if ((*it)->IsWidgetList()) {
-      first = static_cast<WidgetList*>(*it)->GetFirstWidget();
+    if ((*it)->IsWidgetBrowser()) {
+      MSG_DEBUG("widgetlist", "%s:%p is a widget browser!\n", typeid(*it).name(), (*it));
+
+      first = (*it)->GetFirstWidget();
       if (first != NULL)
 	return first;
     } else {
+      MSG_DEBUG("widgetlist", "%s:%p is NOT a widget browser!\n", typeid(*it).name(), (*it));
+
       return (*it);
     }
   }
@@ -122,8 +126,8 @@ Widget* WidgetList::GetLastWidget() const
   for (std::list<Widget*>::const_reverse_iterator it = widget_list.rbegin();
        it != widget_list.rend();
        it++) {
-    if ((*it)->IsWidgetList()) {
-      last = static_cast<WidgetList*>(*it)->GetLastWidget();
+    if ((*it)->IsWidgetBrowser()) {
+      last = (*it)->GetLastWidget();
       if (last != NULL)
 	return last;
     } else {
@@ -138,7 +142,7 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
 {
   Widget *r = NULL;
 
-  ASSERT(!w || !w->IsWidgetList());
+  ASSERT(!w || !w->IsWidgetBrowser());
 
   MSG_DEBUG("widgetlist", "%p::GetNextWidget(%s:%p)", this, typeid(w).name(), w);
 
@@ -170,8 +174,10 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
       break;
     }
 
-    if ((*it)->IsWidgetList()) {
-      r = static_cast<WidgetList*>(*it)->GetNextWidget(w, false);
+    if ((*it)->IsWidgetBrowser()) {
+      MSG_DEBUG("widgetlist", "%s:%p is a widget browser!\n", typeid(*it).name(), (*it));
+
+      r = (*it)->GetNextWidget(w, false);
 
       if (r && r == w && it != widget_list.end()) {
 	MSG_DEBUG("widgetlist", "r == w %s:%p", typeid(r).name(), (r));
@@ -179,8 +185,8 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
 	if (it != widget_list.end()) {
 	  r = (*it);
 	  MSG_DEBUG("widgetlist", "r ==>  %s:%p", typeid(r).name(), (r));
-	  if (r->IsWidgetList()) {
-	    r = static_cast<WidgetList*>(r)->GetFirstWidget();
+	  if (r->IsWidgetBrowser()) {
+	    r = r->GetFirstWidget();
 	  }
 	} else if (loop) {
 	  r = GetFirstWidget();
@@ -188,10 +194,12 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
       }
       if (r)
 	break;
+    } else {
+      MSG_DEBUG("widgetlist", "%s:%p is NOT a widget browser!\n", typeid(*it).name(), (*it));
     }
   }
 
-  ASSERT(!r || !r->IsWidgetList());
+  ASSERT(!r || !r->IsWidgetBrowser());
 
   MSG_DEBUG("widgetlist", "%p::GetNextWidget(%s:%p) ==> %s%p", this, typeid(w).name(), w, typeid(r).name(), r);
 
