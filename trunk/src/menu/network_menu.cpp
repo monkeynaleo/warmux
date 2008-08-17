@@ -394,6 +394,8 @@ void NetworkMenu::WaitingForServer()
 
   msg_box->NewMessage(_("Waiting for server, all you can do is cancel or chat!"), c_red);
 
+  widgets.SetFocusOn(msg_box->GetTextBox());
+
   int x=0, y=0;
   SDL_GetMouseState( &x, &y );
   Point2i mousePosition(x, y);
@@ -433,7 +435,6 @@ void NetworkMenu::WaitingForServer()
     }
 
     Menu::Display(mousePosition);
-    widgets.SetMouseFocusOn(msg_box->GetTextBox());
 
   } while (Network::GetInstance()->GetState() == Network::NETWORK_MENU_OK &&
            Network::GetInstance()->IsConnected());

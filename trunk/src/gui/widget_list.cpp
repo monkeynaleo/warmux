@@ -27,13 +27,11 @@
 
 WidgetList::WidgetList()
 {
-  last_clicked = NULL;
   selected_widget = NULL;
 }
 
 WidgetList::WidgetList(const Point2i &size) : Widget(size)
 {
-  last_clicked = NULL;
   selected_widget = NULL;
 }
 
@@ -70,28 +68,39 @@ void WidgetList::RemoveWidget(Widget* w)
 
 void WidgetList::Update(const Point2i &mousePosition)
 {
-  // if (selected_widget != NULL && !selected_widget->Contains(mousePosition)) {
-  //   selected_widget->SetFocus(false);
-  //   selected_widget = NULL;
-  // }
-
   for (std::list<Widget*>::iterator w=widget_list.begin();
       w != widget_list.end();
       w++)
   {
     // Then redraw the widget
     (*w)->Update(mousePosition, lastMousePosition);
-    // if (lastMousePosition != mousePosition && (*w)->Contains(mousePosition)) {
-    //   selected_widget = (*w);
-    //   selected_widget->SetHighlighted(true);
-    // }
-
-    // if ((*w) != selected_widget && !(*w)->Contains(mousePosition)) {
-    //   (*w)->SetHighlighted(false);
-    // }
   }
 
   lastMousePosition = mousePosition;
+}
+
+void WidgetList::SetFocusOn(Widget* widget, bool force_mouse_position)
+{
+  if (widget == selected_widget)
+    return;
+
+  // Previous selection ?
+  if (selected_widget != NULL) {
+    selected_widget->SetFocus(false);
+  }
+
+  selected_widget = widget;
+
+  if (selected_widget) {
+    selected_widget->SetFocus(true);
+
+    if (force_mouse_position &&
+	!selected_widget->Contains(Mouse::GetInstance()->GetPosition())) {
+
+      Mouse::GetInstance()->SetPosition(selected_widget->GetPosition() +
+					selected_widget->GetSize()/2);
+    }
+  }
 }
 
 Widget* WidgetList::GetFirstWidget() const
@@ -214,21 +223,10 @@ void WidgetList::SetFocusOnNextWidget()
     return;
   }
 
-  // Previous selection ?
-  if (selected_widget != NULL) {
-    selected_widget->SetFocus(false);
-  }
-
   MSG_DEBUG("widgetlist", "before %s:%p", typeid(selected_widget).name(), selected_widget);
 
-  selected_widget = GetNextWidget(selected_widget, true);
-  if (selected_widget != NULL) {
-    selected_widget->SetFocus(true);
-    Mouse::GetInstance()->SetPosition(selected_widget->GetPosition() +
-				      selected_widget->GetSize()/2);
-  }
-  MSG_DEBUG("widgetlist", "after %s:%p", typeid(selected_widget).name(), selected_widget);
-
+  Widget* w = GetNextWidget(selected_widget, true);
+  SetFocusOn(w, true);
 }
 
 Widget* WidgetList::GetPreviousWidget(const Widget *w, bool loop) const
@@ -270,23 +268,14 @@ void WidgetList::SetFocusOnPreviousWidget()
     return;
   }
 
-  // Previous selection ?
-  if (selected_widget != NULL) {
-    selected_widget->SetFocus(false);
-  }
-
-  selected_widget = GetPreviousWidget(selected_widget, true);
-  if (selected_widget != NULL) {
-    selected_widget->SetFocus(true);
-    Mouse::GetInstance()->SetPosition(selected_widget->GetPosition() +
-				      selected_widget->GetSize()/2);
-  }
+  Widget* w = GetPreviousWidget(selected_widget, true);
+  SetFocusOn(w, true);
 }
 
 bool WidgetList::SendKey(SDL_keysym key)
 {
-  if (last_clicked != NULL)
-    return last_clicked->SendKey(key);
+  if (selected_widget != NULL)
+    return selected_widget->SendKey(key);
 
   return false;
 }
@@ -312,7 +301,7 @@ Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
       Widget* child = (*w)->ClickUp(mousePosition,button);
       if(child != NULL)
       {
-        SetMouseFocusOn(child);
+        SetFocusOn(child);
         return child;
       }
     }
@@ -343,18 +332,6 @@ void WidgetList::NeedRedrawing()
       w++)
   {
     (*w)->NeedRedrawing();
-  }
-}
-
-void WidgetList::SetMouseFocusOn(Widget* w)
-{
-  if(last_clicked != NULL) {
-    last_clicked->SetFocus(false);
-  }
-
-  if (w != NULL) {
-    last_clicked = w ;
-    last_clicked->SetFocus(true);
   }
 }
 

@@ -35,7 +35,6 @@ private:
   /*********************************************/
 
   Point2i lastMousePosition;
-  Widget* last_clicked;
   Widget* selected_widget;
 
 protected:
@@ -73,8 +72,7 @@ public:
   virtual Widget* GetPreviousWidget(const Widget *w, bool loop) const;
   virtual bool IsWidgetBrowser() const { return true; };
 
-  // set focus on a widget
-  void SetMouseFocusOn(Widget* widget);
+  void SetFocusOn(Widget* widget, bool force_mouse_position = false);
   virtual void Pack();
 };
 
