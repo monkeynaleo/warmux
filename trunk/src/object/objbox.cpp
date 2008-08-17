@@ -160,7 +160,7 @@ void ObjBox::GetValueFromAction(Action * a)
 {
   PhysicalObj::GetValueFromAction(a);
   start_life_points = a->PopInt();
-  SetXY(a->PopPoint2i());
+  SetXY(a->PopPoint2d());
   SetSpeedXY(a->PopPoint2d());
 }
 
