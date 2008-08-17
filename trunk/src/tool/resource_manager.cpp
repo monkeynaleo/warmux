@@ -319,6 +319,18 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& r
       else
         std::cerr << "Unrecognized xml option loop_mode=\"" << str << "\" in resource " << resource_name;
     }
+
+    if(profile->doc->ReadStringAttr(elem, "loop_wait", str))
+    {
+        sprite->animation.SetLoopWait(atoi(str.c_str()));
+    }
+
+    if(profile->doc->ReadStringAttr(elem, "loop_wait_random", str))
+    {
+        sprite->animation.SetLoopWaitRandom(atoi(str.c_str()));
+    }
+
+
   }
   return sprite;
 }

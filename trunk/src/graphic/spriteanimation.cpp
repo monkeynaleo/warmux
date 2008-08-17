@@ -25,6 +25,7 @@
 #include "graphic/spriteanimation.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "tool/random.h"
 
 SpriteAnimation::SpriteAnimation(Sprite &p_sprite) :
   sprite(p_sprite)
@@ -36,6 +37,8 @@ SpriteAnimation::SpriteAnimation(Sprite &p_sprite) :
    show_on_finish = show_last_frame;
    loop = true;
    pingpong = false;
+   loop_wait = 0;
+   loop_wait_random = 0;
 }
 
 SpriteAnimation::SpriteAnimation(const SpriteAnimation &other, Sprite &p_sprite) :
@@ -48,6 +51,8 @@ SpriteAnimation::SpriteAnimation(const SpriteAnimation &other, Sprite &p_sprite)
    show_on_finish = other.show_on_finish;
    loop = other.loop;
    pingpong = other.pingpong;
+   loop_wait = other.loop_wait;
+   loop_wait_random = other.loop_wait_random;
 }
 
 void SpriteAnimation::SetSpeedFactor( float nv_speed){
@@ -84,6 +89,7 @@ void SpriteAnimation::Update(){
   int delta_to_next_f = (int)((float)((global_time->Read() - last_update) / sprite.GetCurrentFrameObject().delay) * speed_factor);
   last_update += (int)((float)(delta_to_next_f * sprite.GetCurrentFrameObject().delay) / speed_factor);
 
+
   //Animation is finished, when last frame have been fully played
   bool finish;
   if (frame_delta < 0)
@@ -99,6 +105,7 @@ void SpriteAnimation::Update(){
 
     if(pingpong)
     {
+
       if( frame_delta>0 && ( current_frame + frame_delta * delta_to_next_f ) >= frame_count)
       {
         next_frame = frame_count - next_frame -2;
@@ -109,13 +116,16 @@ void SpriteAnimation::Update(){
       {
         next_frame = (-((int)current_frame + frame_delta * delta_to_next_f )) % frame_count;
         frame_delta = - frame_delta;
+        CalculateWait();
       }
     }
 
     if(next_frame != current_frame)
     {
-      if(next_frame >= frame_count)
+      if(next_frame >= frame_count){
         next_frame = 0;
+        CalculateWait();
+      }
       sprite.SetCurrentFrame(next_frame);
     }
   }
@@ -142,3 +152,26 @@ SpriteAnimation::SpriteShowOnFinish SpriteAnimation::GetShowOnFinish() const {
   return show_on_finish;
 }
 
+void SpriteAnimation::SetLoopWaitRandom(int time)
+{
+  MSG_DEBUG("eye", "SetLoopWaitRandom  : %d -> %d", loop_wait_random, time);
+  loop_wait_random = time;
+}
+
+void SpriteAnimation::SetLoopWait(int time)
+{
+  MSG_DEBUG("eye", "SetLoopWait  : %d -> %d", loop_wait, time);
+  loop_wait = time;
+}
+
+void SpriteAnimation::CalculateWait()
+{
+  MSG_DEBUG("eye", "CalculateWait stat   :  wait = %d , random = %d", loop_wait, loop_wait_random);
+  MSG_DEBUG("eye", "CalculateWait 1 : %d", last_update);
+
+  if(loop_wait !=0)
+  {
+  last_update += loop_wait - loop_wait_random/2 + RandomLocal().GetInt(0, loop_wait_random);
+  }
+  MSG_DEBUG("eye", "CalculateWait 2 : %d", last_update);
+}

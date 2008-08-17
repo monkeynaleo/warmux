@@ -150,7 +150,7 @@
 		<grid pos="0,0" size="9,7" array="7,1"/>
 	</image>
 	<anchor dx="0" dy="0"/>
-	<animation speed="200" loop_mode="pingpong"/>
+	<animation speed="200" loop_mode="pingpong" loop_wait="500" loop_wait_random="200"/>
 </sprite>
 
 <!-- ###### Arm left ###### -->
@@ -318,7 +318,7 @@
 		<grid pos="0,0" size="9,7" array="7,1"/>
 	</image>
 	<anchor dx="0" dy="0"/>
-	<animation speed="200" loop_mode="pingpong"/>
+	<animation speed="200" loop_mode="pingpong" loop_wait="500" loop_wait_random="200"/>
 </sprite>
 
 <!-- ###### Arm left ###### -->

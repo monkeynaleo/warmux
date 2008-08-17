@@ -45,6 +45,8 @@ private:
   unsigned int last_update;
   float speed_factor;
   int frame_delta; // Used in Update() to get next frame
+  int loop_wait;
+  int loop_wait_random;
 
   // State
   bool finished;
@@ -63,6 +65,7 @@ public:
   void Update();
   void Finish();
   bool IsFinished() const;
+  void CalculateWait();
 
   // Control speed
   void SetSpeedFactor(float nv_speed);
@@ -71,6 +74,8 @@ public:
   void SetPlayBackward(bool enable);
   void SetLoopMode(bool enable);
   void SetPingPongMode(bool enable);
+  void SetLoopWaitRandom(int time);
+  void SetLoopWait(int time);
   void SetShowOnFinish(SpriteShowOnFinish show);
   SpriteShowOnFinish GetShowOnFinish() const;
 };
