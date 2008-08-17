@@ -102,11 +102,13 @@ Plane::~Plane()
 
 void Plane::Shoot(double speed, const Point2i& target)
 {
+  MSG_DEBUG("weapon.shoot", "Plane Shoot");
   nb_dropped_bombs = 0;
   last_dropped_bomb = NULL;
 
   Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
+
   cible_x = target.x;
   SetY(0);
   distance_to_release =(int)(speed * sqrt(2.0 * (GetY() + target.y)));
@@ -115,9 +117,12 @@ void Plane::Shoot(double speed, const Point2i& target)
 
   if (dir == 1) {
     speed_vector.SetValues(speed, 0);
-    SetX(double(-image->GetWidth() + 1));
+    int i = -(image->GetWidth()) + 1;
+    double d = double(i);
+    SetX(d);
     //distance_to_release -= obus_dx;
-    if(distance_to_release > cible_x) distance_to_release=0;
+   if(distance_to_release > cible_x) distance_to_release=0;
+
   } else {
     speed_vector.SetValues(-speed, 0) ;
     SetX(double(world.GetWidth() - 1));
@@ -158,6 +163,7 @@ void Plane::DropBomb()
 
 void Plane::Refresh()
 {
+
   UpdatePosition();
   image->Update();
   // First shoot !!
@@ -225,6 +231,7 @@ void AirAttack::ChooseTarget(Point2i mouse_pos)
 
 bool AirAttack::p_Shoot ()
 {
+  MSG_DEBUG("weapon.shoot", "AirAttack p_Shoot");
   if(!target_chosen)
     return false;
 
