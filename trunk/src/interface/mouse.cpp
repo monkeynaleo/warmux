@@ -75,6 +75,19 @@ Mouse::Mouse():
   resource_manager.UnLoadXMLProfile(res);
 }
 
+bool Mouse::HasFocus() const
+{
+  Uint8 state = SDL_GetAppState();
+
+  if ((state & SDL_APPMOUSEFOCUS) &&
+      (state & SDL_APPINPUTFOCUS) &&
+      (state & SDL_APPACTIVE)) {
+    return true;
+  }
+
+  return false;
+}
+
 void Mouse::ActionLeftClic(bool) const
 {
   const Point2i pos_monde = GetWorldPosition();
@@ -148,9 +161,13 @@ void Mouse::ActionWheelDown(bool shift) const
 
 bool Mouse::HandleClic (const SDL_Event& event) const
 {
+  if (!HasFocus()) {
+    return false;
+  }
+
   if ( event.type != SDL_MOUSEBUTTONDOWN &&
        event.type != SDL_MOUSEBUTTONUP ) {
-    return false ;
+    return false;
   }
 
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
@@ -322,6 +339,9 @@ void Mouse::CenterPointer()
 
 void Mouse::SetPosition(Point2i pos)
 {
+  if (!HasFocus()) // The application has not the focus, don't move the mouse cursor!
+    return;
+
   MSG_DEBUG("mouse", "1) %d, %d\n", GetPosition().GetX(), GetPosition().GetY());
 
   SDL_WarpMouse(pos.x, pos.y);

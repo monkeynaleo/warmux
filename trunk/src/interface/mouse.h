@@ -96,6 +96,8 @@ public:
   void Show();
   void Hide();
 
+  bool HasFocus() const;
+
   visibility_t GetVisibility() const { return visible; };
 };
 #endif

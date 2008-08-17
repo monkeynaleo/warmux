@@ -215,6 +215,9 @@ void Camera::RestoreMouseCursor()
 
 void Camera::ScrollCamera()
 {
+  if (!Mouse::GetInstance()->HasFocus()) // The application has not the focus, don't move the camera!!
+    return;
+
   Point2i mousePos = Mouse::GetInstance()->GetPosition();
 
   uint zone_size = Config::GetInstance()->GetScrollBorderSize();
