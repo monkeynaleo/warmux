@@ -117,9 +117,9 @@ void Plane::Shoot(double speed, const Point2i& target)
 
   if (dir == 1) {
     speed_vector.SetValues(speed, 0);
-    int i = -(image->GetWidth()) + 1;
-    double d = double(i);
-    SetX(d);
+    //int i = -(image->GetWidth()) + 1;
+    //double d = double(-(image->GetWidth()) + 1);
+    SetX(1.0 - double(image->GetWidth()));
     //distance_to_release -= obus_dx;
    if(distance_to_release > cible_x) distance_to_release=0;
 
