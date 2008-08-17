@@ -150,7 +150,7 @@ public:
 
 protected:
   virtual void p_Select() { m_last_fire_time = 0; };
-  virtual void p_Deselect() { };
+  virtual void p_Deselect();
   virtual void Refresh() = 0;
   virtual bool p_Shoot() = 0;
 

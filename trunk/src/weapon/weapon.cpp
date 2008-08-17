@@ -739,6 +739,11 @@ void Weapon::HandleKeyReleased_Shoot(bool)
   NewActionWeaponShoot();
 }
 
+void Weapon::p_Deselect()
+{
+  ActiveCharacter().SetMovement("breathe");
+}
+
 void Weapon::HandleKeyPressed_MoveRight(bool shift)
 {
   ActiveCharacter().HandleKeyPressed_MoveRight(shift);

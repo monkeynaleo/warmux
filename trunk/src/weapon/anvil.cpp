@@ -174,6 +174,7 @@ void AnvilLauncher::p_Deselect()
 {
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  ActiveCharacter().SetMovement("breathe");
 }
 
 WeaponProjectile * AnvilLauncher::GetProjectileInstance()

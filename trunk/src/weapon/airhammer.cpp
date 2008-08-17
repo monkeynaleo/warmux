@@ -144,6 +144,7 @@ void Airhammer::p_Deselect()
 {
   drill_sound.Stop();
   select_sound.Stop();
+  ActiveCharacter().SetMovement("breathe");
 }
 
 //-----------------------------------------------------------------------------

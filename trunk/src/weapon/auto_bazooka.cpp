@@ -71,7 +71,7 @@ public:
   void Shoot(double strength);
   void Explosion();
   void SetTarget (int x,int y);
-  
+
 protected:
   void SignalOutOfMap();
   void SignalDrowning();

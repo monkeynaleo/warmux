@@ -177,6 +177,7 @@ void SnipeRifle::ComputeCrossPoint(bool force = false)
 void SnipeRifle::p_Deselect()
 {
   ActiveCharacter().SetFiringAngle(0.);
+  ActiveCharacter().SetMovement("breathe");
 }
 
 void SnipeRifle::DrawBeam()

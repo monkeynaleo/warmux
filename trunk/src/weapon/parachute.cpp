@@ -87,6 +87,7 @@ void Parachute::p_Select()
 void Parachute::p_Deselect()
 {
   ActiveCharacter().ResetConstants();
+  ActiveCharacter().SetMovement("breathe");
 }
 
 bool Parachute::IsInUse() const

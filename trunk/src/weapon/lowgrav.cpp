@@ -55,6 +55,7 @@ void LowGrav::p_Deselect()
 {
   ActiveCharacter().ResetConstants();
   ActiveCharacter().SetClothe("normal");
+  ActiveCharacter().SetMovement("breathe");
 }
 
 bool LowGrav::p_Shoot()

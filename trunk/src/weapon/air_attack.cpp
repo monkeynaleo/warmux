@@ -258,6 +258,7 @@ void AirAttack::p_Deselect()
 {
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  ActiveCharacter().SetMovement("breathe");
 }
 
 AirAttackConfig& AirAttack::cfg()
