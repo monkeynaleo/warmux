@@ -35,6 +35,8 @@
 #include "tool/debug.h"
 //-----------------------------------------------------------------------------
 
+static const int MAX_PACKET_SIZE = 250*1024;
+
 DistantComputer::DistantComputer(TCPsocket new_sock) :
   sock_lock(SDL_CreateMutex()),
   sock(new_sock),
@@ -130,7 +132,18 @@ int DistantComputer::ReceiveDatas(char* & buf)
       return -1;
     }
 
+    if (packet_size > MAX_PACKET_SIZE)
+    {
+        MSG_DEBUG("network", "packet is too big");
+        return -1;
+    }
+
     packet = (char*)malloc(packet_size);
+    if (!packet)
+    {
+        MSG_DEBUG("network", "memory allocated failed");
+        return -1;
+    }
   }
 
 
