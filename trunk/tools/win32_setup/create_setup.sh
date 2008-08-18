@@ -85,10 +85,10 @@ ShowInstDetails show
 ShowUninstDetails show
 SetDateSave on
 
-!define WORMUX_REG_KEY				"${HKLM_PATH}"
-!define WORMUX_UNINSTALL_KEY			"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Wormux"
-!define HKLM_APP_PATHS_KEY			"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wormux.exe"
-!define STARTUP_RUN_KEY				"SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+!define WORMUX_REG_KEY          "${HKLM_PATH}"
+!define WORMUX_UNINSTALL_KEY    "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Wormux"
+!define HKLM_APP_PATHS_KEY      "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wormux.exe"
+!define STARTUP_RUN_KEY         "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modern UI Configuration ;;
@@ -183,7 +183,7 @@ SetDateSave on
   ;If you are using solid compression, files that are required before
   ;the actual installation should be stored first in the data block,
   ;because this will make your installer start faster.
-  
+
   !insertmacro MUI_RESERVEFILE_LANGDLL
 
   ;--------------------------------
@@ -316,6 +316,13 @@ Section \$(TITLE_Wormux) Sec_Wormux
   ; Executing in tmpdir, looking for file in folder below
   File "${LOCAL_PATH}\uninstall.ico"
   File "${WIN_WORMUXDIR}\src\wormux.exe"
+  WriteUninstaller "uninstall.exe"
+  ; data
+  File /r /x .svn /x Makefile* /x Makefile.* "${WIN_WORMUXDIR}\\data"
+  ; Licenses
+  File /r /x .svn "${WIN_WORMUXDIR}\\doc\\license"
+  ; Howto-play PDFs
+  File /r /x .svn "${WIN_WORMUXDIR}\\doc\\howto_play"
 EOF
 
 # Glib (gobject, gthread, glib & gmodule)
@@ -374,15 +381,8 @@ cat >> $NSIS <<EOF
     ;Write language to the registry (for the uninstaller)
     WriteRegStr HKCU "\${WORMUX_REG_KEY}" "Installer Language" \$LANGUAGE
     ;SetShellVarContext "current"
- 
+
   _next:
-    WriteUninstaller "uninstall.exe"
-    ; data
-    File /r /x .svn /x Makefile* /x Makefile.* "${WIN_WORMUXDIR}\\data"
-    ; Licenses
-    File /r /x .svn "${WIN_WORMUXDIR}\\doc\\license"
-    ; Howto-play PDFs
-    File /r /x .svn "${WIN_WORMUXDIR}\\doc\\howto_play"
 SectionEnd ; Installer section
 
 ;--------------------------------
@@ -412,7 +412,7 @@ for f in $lang; do
       SetOutPath "\$INSTDIR"
       SetOverwrite on
       File "/oname=help-$f.pdf" "${WIN_WORMUXDIR}${SEP}doc${SEP}howto_play${SEP}${f}.pdf"
-     !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Wormux"
+      !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Wormux"
       CreateShortcut  "\$SMPROGRAMS\\Wormux\\howto-$f.lnk" "\$INSTDIR\\help-$f.pdf" "" "" 0
       SetOverwrite off
     SectionEnd
