@@ -84,6 +84,7 @@ SetCompressor ${COMPRESSION}
 ShowInstDetails show
 ShowUninstDetails show
 SetDateSave on
+RequestExecutionLevel highest
 
 !define WORMUX_REG_KEY          "${HKLM_PATH}"
 !define WORMUX_UNINSTALL_KEY    "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Wormux"
@@ -471,13 +472,12 @@ Section "Uninstall"
   ; Set install path according to user rights
   Call un.CheckUserInstallRights
   Pop \$R0
-  StrCmp \$R0 "NONE" _none
   StrCmp \$R0 "HKLM" _hklm
 
   ; Also used as fallback by HKLM case
   _hkcu:
     ReadRegStr \$R0 HKCU "\${WORMUX_REG_KEY}" ""
-    StrCmp \$R0 "\$INSTDIR" 0 _none
+    StrCmp \$R0 "\$INSTDIR" 0 _next
       ; HKCU install path matches our INSTDIR so uninstall
       DeleteRegKey HKCU "\${WORMUX_REG_KEY}"
       DeleteRegKey HKCU "\${WORMUX_UNINSTALL_KEY}"
@@ -491,12 +491,6 @@ Section "Uninstall"
       DeleteRegKey HKLM "\${WORMUX_REG_KEY}"
       DeleteRegKey HKLM "\${WORMUX_UNINSTALL_KEY}"
       SetShellVarContext all
-      Goto _next
-
-  _none:
-   ; Not going to bother
-   MessageBox MB_OK \$(WORMUX_PROMPT_NO_RIGHTS) /SD IDOK
-   Quit
 
   _next:
     ; Remove Language preference info
@@ -525,7 +519,7 @@ Function .onInit
   StrCmp \$R0 "NONE" _none
   StrCmp \$R0 "HKLM" 0 _hkcu
     StrCpy \$INSTDIR "\$PROGRAMFILES\\Wormux"
-    Goto instdir_done
+    Goto _done
 
   _hkcu:
     Push \$SMPROGRAMS
@@ -536,19 +530,31 @@ Function .onInit
     ; the alternative are complex for the user
     IntOp \$R0 \${SF_RO} | \${SF_SELECTED}
     SectionSetFlags \${Sec_UninstallShortCut} \$R0
-    Goto instdir_done
+    Goto _done
 
   _none:
    ; Not going to bother
    MessageBox MB_OK \$(WORMUX_PROMPT_NO_RIGHTS) /SD IDOK
    Quit
 
-  instdir_done:
+  _done:
 FunctionEnd
 
+; INSTDIR will be determined by reading a registry key
 Function un.onInit
   !insertmacro MUI_UNGETLANGUAGE
-  ; INSTDIR will be determined by reading a registry key
+  ; Set install path according to user rights
+  Call un.CheckUserInstallRights
+  Pop \$R0
+  StrCmp \$R0 "NONE" _none
+    Goto _end
+
+  _none:
+   ; Not going to bother
+   MessageBox MB_OK \$(WORMUX_PROMPT_NO_RIGHTS) /SD IDOK
+   Quit
+
+  _end:
 FunctionEnd
 EOF
 
