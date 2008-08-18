@@ -125,7 +125,7 @@ void AIMovementModule::GoBackToJump()
   int height;
   bool blocked = !(ObstacleHeight(height));
 
-  if ( abs(last_position.GetX() - ActiveCharacter().GetPosition().GetX()) >= 20
+  if ( fabs(last_position.GetX() - ActiveCharacter().GetPosition().GetX()) >= 20.0
        || time_at_last_position +1 < m_current_time
        || blocked) {
     //it's time to jump!
@@ -153,9 +153,9 @@ void AIMovementModule::EndOfJump()
     // we have not moved since last movement
 
     if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
-      max_reachable_x = ActiveCharacter().GetPosition().GetX();
+      max_reachable_x = (int)ActiveCharacter().GetPosition().GetX();
     } else {
-      min_reachable_x = ActiveCharacter().GetPosition().GetX();
+      min_reachable_x = (int)ActiveCharacter().GetPosition().GetX();
     }
     MSG_DEBUG("ai.move", "We are blocked");
     StopMoving();
@@ -259,13 +259,13 @@ void AIMovementModule::InverseDirection(bool completely_blocked)
 
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
     if (completely_blocked)
-      max_reachable_x = ActiveCharacter().GetPosition().GetX();
+      max_reachable_x = (int)ActiveCharacter().GetPosition().GetX();
 
   } else {
 
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     if (completely_blocked)
-      min_reachable_x = ActiveCharacter().GetPosition().GetX();
+      min_reachable_x = (int)ActiveCharacter().GetPosition().GetX();
 
   }
 }
@@ -315,7 +315,7 @@ void AIMovementModule::Move(uint current_time)
 void AIMovementModule::StopMoving()
 {
   //  GameMessages::GetInstance()->Add("stop moving");
-  
+
   StopWalking();
   SetMovement(BLOCKED);
   //m_step++;
@@ -399,13 +399,13 @@ void AIMovementModule::SetDestinationPoint(const Point2i& _destination_point)
 bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
                                           const Character& enemy) const
 {
-  int delta_x = abs(shooter.GetX() - enemy.GetX());
-  int delta_y = abs(shooter.GetY() - enemy.GetY());
+  double delta_x = fabs(shooter.GetX() - enemy.GetX());
+  double delta_y = fabs(shooter.GetY() - enemy.GetY());
 
-  if (delta_x > 300)
+  if (delta_x > 300.0)
     return false;
 
-  if (delta_y > 100)
+  if (delta_y > 100.0)
     return false;
 
   if (min_reachable_x>enemy.GetX() || enemy.GetX()>max_reachable_x)
