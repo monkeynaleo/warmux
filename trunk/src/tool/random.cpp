@@ -28,6 +28,9 @@ RandomGenerator::RandomGenerator() :
 {
 }
 
+RandomGenerator::~RandomGenerator()
+{}
+
 void RandomGenerator::InitRandom()
 {
   SetRand(time(NULL));

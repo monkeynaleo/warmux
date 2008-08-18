@@ -38,6 +38,7 @@ protected:
 
 public:
   RandomGenerator();
+  virtual ~RandomGenerator();
   virtual void InitRandom();
 
   bool GetBool();
