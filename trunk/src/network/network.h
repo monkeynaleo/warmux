@@ -174,7 +174,7 @@ public:
   static bool SendBatch(TCPsocket& socket, void* data, size_t len);
 
   static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
-  static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str);
+  static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str, size_t maxlen);
 };
 
 //-----------------------------------------------------------------------------

@@ -242,7 +242,7 @@ int IndexServer::ReceiveInt()
   return nbr;
 }
 
-std::string IndexServer::ReceiveStr()
+std::string IndexServer::ReceiveStr(size_t maxlen)
 {
   if (!connected)
     return "";
@@ -250,7 +250,7 @@ std::string IndexServer::ReceiveStr()
   int r;
   std::string str("");
 
-  r = Network::ReceiveStr(sock_set, socket, str);
+  r = Network::ReceiveStr(sock_set, socket, str, maxlen);
   if (r == -2) {
     Disconnect();
   }
@@ -282,7 +282,7 @@ bool IndexServer::HandShake()
     goto error;
 
   MSG_DEBUG("index_server", "Receiving...");
-  sign = ReceiveStr();
+  sign = ReceiveStr(20);
 
   if (sign != "MassMurder!")
     goto error;
@@ -313,7 +313,7 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd)
   Batch(Network::GetInstance()->GetPort());
   SendMsg();
 
-  ack = ReceiveStr();
+  ack = ReceiveStr(5);
   if (ack == "OK")
     return true;
 
@@ -336,7 +336,7 @@ std::list<GameServerInfo> IndexServer::GetHostList()
     ip.host = ReceiveInt();
     ip.port = ReceiveInt();
     game_server_info.passworded = !!ReceiveInt();
-    game_server_info.game_name = ReceiveStr();
+    game_server_info.game_name = ReceiveStr(40);
 
     const char* dns_addr = SDLNet_ResolveIP(&ip);
     char port[10];

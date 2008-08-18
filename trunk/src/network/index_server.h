@@ -76,7 +76,7 @@ class IndexServer : public Singleton<IndexServer>
   void Batch(const std::string &str);
   bool SendMsg();
   int ReceiveInt();
-  std::string ReceiveStr();
+  std::string ReceiveStr(size_t maxlen);
 
   // Gives the address of a server in the list
   bool GetServerAddress(std::string & address, int & port, uint& nb_tries);

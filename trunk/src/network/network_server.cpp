@@ -91,7 +91,7 @@ bool NetworkServer::HandShake(TCPsocket& client_socket)
   // 1) Receive the version number
   MSG_DEBUG("network", "Server: waiting for client version number");
 
-  r = Network::ReceiveStr(tmp_socket_set, client_socket, version);
+  r = Network::ReceiveStr(tmp_socket_set, client_socket, version, 40);
   if (r) {
     std::cerr << "Error " << r << " when receiving version number"
 	      << std::endl;
@@ -111,7 +111,7 @@ bool NetworkServer::HandShake(TCPsocket& client_socket)
   // 2) Check the password
   MSG_DEBUG("network", "Server: waiting for password");
 
-  r = Network::ReceiveStr(tmp_socket_set, client_socket, _password);
+  r = Network::ReceiveStr(tmp_socket_set, client_socket, _password, 100);
   if (r)
     goto error;
 

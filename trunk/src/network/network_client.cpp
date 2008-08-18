@@ -86,7 +86,7 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
   Network::Send(server_socket, Constants::WORMUX_VERSION);
 
   // is it ok ?
-  r = Network::ReceiveStr(tmp_socket_set, server_socket, version);
+  r = Network::ReceiveStr(tmp_socket_set, server_socket, version, 40);
 
   MSG_DEBUG("network", "Client: server version number is %s", version.c_str());
 

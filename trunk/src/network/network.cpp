@@ -66,7 +66,6 @@
 
 //-----------------------------------------------------------------------------
 
-const uint NETWORK_MAX_STRLEN = 10*1024;    /* 10 KB */
 int  Network::num_objects = 0;
 bool Network::sdlnet_initialized = false;
 bool Network::stop_thread = true;
@@ -668,7 +667,7 @@ int Network::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
   return r;
 }
 
-int Network::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &_str)
+int Network::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &_str, size_t maxlen)
 {
   int r;
   uint size = 0;
@@ -684,7 +683,7 @@ int Network::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::stri
     goto out;
   }
 
-  if (size > NETWORK_MAX_STRLEN) {
+  if (size > maxlen) {
     r = -1;
     goto out;
   }
