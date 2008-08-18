@@ -66,6 +66,7 @@
 
 //-----------------------------------------------------------------------------
 
+const uint NETWORK_MAX_STRLEN = 10*1024;    /* 10 KB */
 int  Network::num_objects = 0;
 bool Network::sdlnet_initialized = false;
 bool Network::stop_thread = true;
@@ -680,6 +681,11 @@ int Network::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::stri
 
   if (size == 0) {
     _str = "";
+    goto out;
+  }
+
+  if (size > NETWORK_MAX_STRLEN) {
+    r = -1;
     goto out;
   }
 
