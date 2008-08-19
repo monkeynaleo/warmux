@@ -67,7 +67,7 @@
 	<attached member_type="arm-left" frame="*" dx="9" dy="7"/>
 	<attached member_type="foot-left" frame="*" dx="11" dy="24"/>
 	<attached member_type="foot-right" frame="*" dx="6" dy="25"/>
-	<attached member_type="jetpack" frame="*" dx="9" dy="20"/>
+	<attached member_type="belt" frame="*" dx="9" dy="20"/>
 	<attached member_type="tail" frame="*" dx="3" dy="21"/>
 	<attached member_type="hula" frame="*" dx="14" dy="20"/>
 </sprite>
@@ -133,6 +133,13 @@
 	<attached member_type="eyelid" frame="*" dx="0" dy="1"/>
 	<attached member_type="pupil-right" frame="*" dx="3" dy="3"/>
 	<attached member_type="pupil-left" frame="*" dx="5" dy="3"/>
+	<attached member_type="hat" frame="*" dx="2" dy="-1"/>
+</sprite>
+
+<!-- ###### Hair ###### -->
+<sprite name="hat" type="hat">
+	<image file="hat.png"/>
+	<anchor dx="14" dy="12"/>
 </sprite>
 
 <sprite name="pupil-right" type="pupil-right">
@@ -246,7 +253,7 @@
 	<attached member_type="arm-left" frame="*" dx="10" dy="7"/>
 	<attached member_type="foot-left" frame="*" dx="9" dy="22"/>
 	<attached member_type="foot-right" frame="*" dx="4" dy="24"/>
-	<attached member_type="jetpack" frame="*" dx="9" dy="20"/>
+	<attached member_type="belt" frame="*" dx="9" dy="20"/>
 	<attached member_type="construct" frame="*" dx="12" dy="0"/>
 	<attached member_type="tail" frame="*" dx="1" dy="21"/>
 	<attached member_type="hula" frame="*" dx="14" dy="20"/>
@@ -393,8 +400,8 @@
 	<anchor dx="17" dy="12"/>
 </sprite>
 
-<!-- ###### Jetpack ###### -->
-<sprite name="jetpack" type="jetpack">
+<!-- ###### Belt ###### -->
+<sprite name="belt" type="belt">
 	<image file="belt.png"/>
 	<anchor dx="10" dy="4"/>
 	<attached member_type="jetpack-left" frame="*" dx="9" dy="-5"/>
@@ -475,7 +482,7 @@
 	<c_member name="pupil-right"/>
 	<c_member name="pupil-left"/>
 	<c_member name="eyelid"/>
-	<c_member name="jetpack"/>
+	<c_member name="belt"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
 	<c_member name="arm3-right-R"/>
@@ -502,7 +509,7 @@
 	<c_member name="pupil-right"/>
 	<c_member name="pupil-left"/>
 	<c_member name="eyelid"/>
-	<c_member name="jetpack"/>
+	<c_member name="belt"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
 	<c_member name="arm3-right-R"/>
@@ -895,6 +902,29 @@
 	<c_member name="arm3-right-R"/>
 </clothe>
 
+<!-- ###### Gun ###### -->
+<clothe name="weapon-gun">
+	<c_member name="arm-left"/>
+	<c_member name="arm2-left"/>
+	<c_member name="arm3-left-L"/>
+	<c_member name="weapon"/>
+	<c_member name="foot-left"/>
+	<c_member name="tail"/>
+	<c_member name="foot-right"/>
+	<c_member name="back"/>
+	<c_member name="body"/>
+	<c_member name="head"/>
+	<c_member name="noze"/>
+	<c_member name="eyes"/>
+	<c_member name="pupil-right"/>
+	<c_member name="pupil-left"/>
+	<c_member name="eyelid"/>
+	<c_member name="belt"/>
+	<c_member name="hat"/>
+	<c_member name="arm-right"/>
+	<c_member name="arm2-right"/>
+	<c_member name="arm3-right-L"/>
+</clothe>
 
 <!--   ###########################################
        ##############               ##############

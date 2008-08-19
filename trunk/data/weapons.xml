@@ -198,8 +198,8 @@
 
   <surface name="gun_ico" file="weapon/gun/gun_ico.png" />
   <surface name="gun" file="weapon/gun/gun.png" />
-  <position name="gun" origin="hand" x="4" y="8" />
-  <hole name="gun" dx="18" dy="-5" />
+  <position name="gun" origin="hand" x="5" y="10" />
+  <hole name="gun" dx="18" dy="-6" />
   <surface name="gun_fire" file="weapon/gun/gun_fire.png" />
   <sprite name="gun_bullet">
     <image file="weapon/gun/gun_bullet.png" />
