@@ -891,6 +891,8 @@
 	<c_member name="foot-right"/>
 	<c_member name="back"/>
 	<c_member name="body"/>
+	<c_member name="horns"/>
+	<c_member name="hair"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
 	<c_member name="eyes"/>
