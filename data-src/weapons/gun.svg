@@ -15,7 +15,7 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    sodipodi:docbase="/home/olivier/inkscape/wormux"
-   sodipodi:docname="armes01.svg"
+   sodipodi:docname="gun.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0">
   <defs
@@ -1583,7 +1583,7 @@
            ry="25.07827" />
       </g>
       <path
-         style="fill:url(#linearGradient3119);fill-opacity:1;fill-rule:evenodd;stroke:#dde385;stroke-width:1.00487494;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         style="fill:url(#linearGradient3119);fill-opacity:1;fill-rule:evenodd;stroke:#c8c300;stroke-width:1.00487494000000011;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
          d="M 1058.5837,12.959196 C 1058.7026,12.987597 1058.7684,13.150078 1058.7313,13.3264 L 1057.8223,17.660532 C 1057.7848,17.838944 1057.6567,17.96205 1057.5351,17.936541 L 1052.8829,16.960582 C 1052.8814,16.960287 1052.8802,16.960038 1052.8788,16.959711 C 1052.8786,16.959701 1052.8786,16.959697 1052.8786,16.95969 C 1052.7944,16.949477 1052.7136,16.899207 1052.6618,16.815419 L 1050.3396,14.29357 C 1050.2501,14.148576 1050.3772,13.508559 1050.5071,13.418965 L 1053.6843,12.017117 C 1053.7491,11.972486 1053.8254,11.961134 1053.8968,11.978924 L 1058.5795,12.958304 C 1058.5808,12.958604 1058.5824,12.958858 1058.5837,12.959196 z"
          id="path3181"
          sodipodi:nodetypes="cccccscccccccc" />
@@ -1591,7 +1591,7 @@
          sodipodi:nodetypes="cccccscccccccc"
          id="path3164"
          d="M 1059.6853,21.800306 C 1059.8041,21.828708 1059.8699,21.991188 1059.8331,22.16751 L 1058.9238,26.501641 C 1058.8863,26.680055 1058.7582,26.803159 1058.6366,26.777651 L 1053.9844,25.801693 C 1053.9831,25.801397 1053.9817,25.801148 1053.9803,25.800821 C 1053.9803,25.800811 1053.9802,25.800808 1053.9802,25.8008 C 1053.896,25.790588 1053.8151,25.740318 1053.7633,25.656528 L 1051.4411,23.134679 C 1051.3516,22.989686 1051.4788,22.349669 1051.6087,22.260075 L 1054.7859,20.858226 C 1054.8506,20.813597 1054.927,20.802243 1054.9985,20.820034 L 1059.681,21.799414 C 1059.6825,21.799714 1059.6839,21.799968 1059.6853,21.800306 z"
-         style="fill:url(#linearGradient3116);fill-opacity:1;fill-rule:evenodd;stroke:#dde385;stroke-width:1.00487494;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
+         style="fill:url(#linearGradient3116);fill-opacity:1;fill-rule:evenodd;stroke:#c8c300;stroke-width:1.00487494000000011;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
     </g>
   </g>
 </svg>
