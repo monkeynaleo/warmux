@@ -265,7 +265,7 @@ void MultiTabs::Pack()
     }
 
   // Compute how many tabs can be displayed
-  nb_visible_tabs = std::min(tabs.size(), uint(GetSizeX() / TAB_MIN_WIDTH));
+  nb_visible_tabs = std::min(uint(tabs.size()), uint(GetSizeX() / TAB_MIN_WIDTH));
   nb_visible_tabs = std::min(nb_visible_tabs, max_visible_tabs);
 
   if (nb_visible_tabs == 0)
