@@ -234,13 +234,6 @@
 	<country>England</country>
       </author>
       <author>
-	<nickname>eddyp</nickname>
-	<name>Eddy PETRIȘOR </name>
-	<description>Translated Wormux in Romanian</description>
-	<email>eddy.petrisor_AT_gmail_DOT_com</email>
-	<country>Romania</country>
-      </author>
-      <author>
 	<nickname>Frank</nickname>
 	<name>Frank VAN DER LOO</name>
 	<description>First Dutch version of Wormux</description>
@@ -395,13 +388,6 @@
 
     <section title="Package maintainers">
       <author>
-        <nickname>AbsintheSyringe</nickname>
-	<name>Adnan Hodzic</name>
-	<description>Prepares Wormux SlackBuilds for Slackware</description>
-	<email>AbsintheSyringe_AT_gmail_DOT_com</email>
-	<country>Bosnia-Herzegovina</country>
-      </author>
-      <author>
 	<nickname>artefact</nickname>
 	<name>Jean PARPAILLON</name>
 	<description>Debian GNU/Linux and Ubuntu packages of Wormux 0.7. Also: Some scripts</description>
@@ -433,7 +419,7 @@
       <author>
 	<nickname>eddyp</nickname>
 	<name>Eddy PETRIȘOR </name>
-	<description>Debian packaging as part of the Debian Games Team</description>
+	<description>Debian packaging (in the Debian Games Team); Translated Wormux in Romanian; added chat logging</description>
 	<email>eddy.petrisor_AT_gmail_DOT_com</email>
 	<country>Romania</country>
       </author>
@@ -490,16 +476,9 @@
       <author>
 	<nickname>AbsintheSyringe</nickname>
 	<name>Adnan HODZIC</name>
-	<description>Physics constant for wind particles, Bug fixes, First Bosnian translation of Wormux.</description>
+	<description>Physics constant for wind particles, Bug fixes, Prepares Wormux SlackBuilds for Slackware, First Bosnian translation of Wormux.</description>
 	<email>AbsintheSyringe_AT_gmail_DOT_com</email>
 	<country>Bosnia-Herzegovina</country>
-      </author>
-      <author>
-	<nickname>eddyp</nickname>
-	<name>Eddy PETRIȘOR </name>
-        <description>added chat logging</description>
-	<email>eddy.petrisor_AT_gmail_DOT_com</email>
-	<country>Romania</country>
       </author>
       <author>
 	<nickname>Eric</nickname>
