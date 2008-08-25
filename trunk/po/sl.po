@@ -492,7 +492,7 @@ msgstr ""
 
 #: src/menu/options_menu.cpp:141
 msgid "Add custom team"
-msgstr ""
+msgstr "Dodaj ekipo"
 
 #: src/weapon/air_attack.cpp:215
 msgid "Air Attack"
@@ -584,9 +584,9 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
 #: src/team/custom_teams_list.cpp:93
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open the custom teams directory (%s)!"
-msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
+msgstr "Ni mogoče odpreti osebnega ekipnega imenika (%s)!"
 
 #: src/menu/options_menu.cpp:190
 msgid "Check updates online?"
@@ -653,7 +653,7 @@ msgstr "Škoda na potezo v fatalnem načinu"
 
 #: src/menu/options_menu.cpp:144
 msgid "Delete custom team"
-msgstr ""
+msgstr "Izbriši ekipo"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -713,19 +713,17 @@ msgstr ""
 "nastavitvami."
 
 #: src/team/custom_team.cpp:104
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
-"Napaka pri ustvarjanju imenika \"%s\": ni bilo mogoče shraniti datoteke z "
-"nastavitvami."
+"Napaka pri brisanju imenika \"%s\". Ni bilo mogoče izbrisati ekipe."
 
 #: src/team/custom_team.cpp:95
-#, fuzzy, c-format
+#, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
-"Napaka pri ustvarjanju imenika \"%s\": ni bilo mogoče shraniti datoteke z "
-"nastavitvami."
+"Napaka pri brisanju datoteke \"%s\". Ni bilo mogoče izbrisati ekipe."
 
 #: src/game/game.cpp:143
 #, c-format
@@ -989,9 +987,8 @@ msgid "Maps"
 msgstr "Karte"
 
 #: src/menu/game_mode_editor.cpp:64
-#, fuzzy
 msgid "Max energy"
-msgstr "Začetna energija"
+msgstr "Max energije"
 
 #: src/menu/network_menu.cpp:116
 msgid "Max number of players:"
@@ -1271,7 +1268,7 @@ msgstr "Ekipe"
 
 #: src/menu/options_menu.cpp:182
 msgid "Teams editor"
-msgstr ""
+msgstr "Urejevalnik ekip"
 
 #: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
