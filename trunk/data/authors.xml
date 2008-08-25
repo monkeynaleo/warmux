@@ -236,7 +236,7 @@
       <author>
 	<nickname>eddyp</nickname>
 	<name>Eddy PETRIȘOR </name>
-	<description>Translated Wormux in Romanian; added chat logging; Debian packaging</description>
+	<description>Translated Wormux in Romanian</description>
 	<email>eddy.petrisor_AT_gmail_DOT_com</email>
 	<country>Romania</country>
       </author>
@@ -431,6 +431,13 @@
 	<country>Germany</country>
       </author>
       <author>
+	<nickname>eddyp</nickname>
+	<name>Eddy PETRIȘOR </name>
+	<description>Debian packaging as part of the Debian Games Team</description>
+	<email>eddy.petrisor_AT_gmail_DOT_com</email>
+	<country>Romania</country>
+      </author>
+      <author>
 	<nickname>Emily</nickname>
 	<name>Emily BRANTLEY</name>
 	<description>Wormux 0.7beta2 package for Fedora Core 4</description>
@@ -486,6 +493,13 @@
 	<description>Physics constant for wind particles, Bug fixes, First Bosnian translation of Wormux.</description>
 	<email>AbsintheSyringe_AT_gmail_DOT_com</email>
 	<country>Bosnia-Herzegovina</country>
+      </author>
+      <author>
+	<nickname>eddyp</nickname>
+	<name>Eddy PETRIȘOR </name>
+        <description>added chat logging</description>
+	<email>eddy.petrisor_AT_gmail_DOT_com</email>
+	<country>Romania</country>
       </author>
       <author>
 	<nickname>Eric</nickname>
