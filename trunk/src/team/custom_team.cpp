@@ -132,6 +132,7 @@ do
     team_count++;
     std::ostringstream oss;
     oss << team_count;
+    // the default player name for custom teams
     name = _("custom player");
     name +="  "+oss.str();
     directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name) + PATH_SEPARATOR;

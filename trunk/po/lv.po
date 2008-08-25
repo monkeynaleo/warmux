@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-lv\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-08-13 00:08+0300\n"
 "PO-Revision-Date: 2007-08-25 12:48+0300\n"
 "Last-Translator: Raivis Dejus <orvils@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -23,7 +22,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nav atrasta :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:287
+#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:313
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -31,7 +30,7 @@ msgstr[0] "%i spēlētājs pieslēdzies"
 msgstr[1] "%i spēlētāji pieslēgušies"
 msgstr[2] "%i spēlētāju pieslēgušies"
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:295
+#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:321
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -65,32 +64,32 @@ msgstr "%s komanda - attālināta"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:692
+#: src/game/game.cpp:718
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s izdara pašnāvību !"
 
-#: src/game/game.cpp:725
+#: src/game/game.cpp:751
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s ) ir nomiris."
 
-#: src/game/game.cpp:683
+#: src/game/game.cpp:709
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s iekrita ūdenī."
 
-#: src/game/game.cpp:677
+#: src/game/game.cpp:703
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s nokrita no kartes!"
 
-#: src/game/game.cpp:698
+#: src/game/game.cpp:724
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:705
+#: src/game/game.cpp:731
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s ir miris, jo bija pārāk neveikls!"
@@ -103,7 +102,7 @@ msgstr[0] "%s ir ieguvis %u enerģijas punktu!"
 msgstr[1] "%s ir ieguvis %u enerģijas punktus!"
 msgstr[2] "%s ir ieguvis %u enerģijas punktus!"
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:743
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ir manjaks, viņš nogalināja %s komandas dalībnieku!"
@@ -140,7 +139,7 @@ msgstr[0] "%s komanda ir ieguvusi %u lēkājošo bumbu!"
 msgstr[1] "%s komanda ir ieguvusi %u lēkājošās bumbas!"
 msgstr[2] "%s komanda ir ieguvusi %u lēkājošās bumbas!"
 
-#: src/weapon/air_attack.cpp:266
+#: src/weapon/air_attack.cpp:272
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -148,7 +147,7 @@ msgstr[0] "%s komanda ir ieguvusi %u gaisa uzlidojumu!"
 msgstr[1] "%s komanda ir ieguvusi %u gaisa uzlidojumus!"
 msgstr[2] "%s komanda ir ieguvusi %u gaisa uzlidojumus!"
 
-#: src/weapon/airhammer.cpp:174
+#: src/weapon/airhammer.cpp:172
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -160,7 +159,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:189
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -292,7 +291,7 @@ msgstr[0] "%s komanda ir ieguvusi %u raķešsomu!"
 msgstr[1] "%s komanda ir ieguvusi %u raķešsomas!"
 msgstr[2] "%s komanda ir ieguvusi %u raķešsomas!"
 
-#: src/weapon/lowgrav.cpp:78
+#: src/weapon/lowgrav.cpp:79
 #, fuzzy, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -308,7 +307,7 @@ msgstr[0] "%s komanda ir ieguvusi %u mīnu!"
 msgstr[1] "%s komanda ir ieguvusi %u mīnas!"
 msgstr[2] "%s komanda ir ieguvusi %u mīnas!"
 
-#: src/weapon/parachute.cpp:165
+#: src/weapon/parachute.cpp:166
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -348,7 +347,7 @@ msgstr[0] "%s komanda ir ieguvusi %u āķi!"
 msgstr[1] "%s komanda ir ieguvusi %u āķus!"
 msgstr[2] "%s komanda ir ieguvusi %u āķus!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:247
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -410,7 +409,7 @@ msgstr[2] "%s komanda ir ieguvusi %u tux šāvējus!"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -420,7 +419,7 @@ msgid "(dead)"
 msgstr "(mirusi)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:259
+#: src/menu/options_menu.cpp:263
 msgid "(system language)"
 msgstr ""
 
@@ -433,7 +432,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(bezgalība)"
 
-#: src/menu/options_menu.cpp:432
+#: src/menu/options_menu.cpp:436
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -444,7 +443,7 @@ msgstr ""
 msgid "Add custom team"
 msgstr ""
 
-#: src/weapon/air_attack.cpp:215
+#: src/weapon/air_attack.cpp:219
 msgid "Air Attack"
 msgstr "Gaisa uzlidojums"
 
@@ -452,7 +451,7 @@ msgstr "Gaisa uzlidojums"
 msgid "Airhammer"
 msgstr "Perforators"
 
-#: src/menu/results_menu.cpp:421
+#: src/menu/results_menu.cpp:422
 msgid "All teams"
 msgstr "Visas komandas"
 
@@ -538,7 +537,12 @@ msgstr "Nevar atvēŗt komandas mapi (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nevar atvēŗt komandas mapi (%s)!"
 
-#: src/menu/options_menu.cpp:190
+#: src/menu/options_menu.cpp:164
+#, fuzzy
+msgid "Character"
+msgstr "Paršūts"
+
+#: src/menu/options_menu.cpp:194
 msgid "Check updates online?"
 msgstr ""
 
@@ -547,7 +551,7 @@ msgid "Choose randomly between the different maps"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:105
 msgid "Client mode"
 msgstr "Klienta režīms"
 
@@ -627,11 +631,11 @@ msgstr "Gājiena ilgums"
 msgid "Dynamite"
 msgstr "Dinamīts"
 
-#: src/game/game.cpp:244
+#: src/game/game.cpp:270
 msgid "END OF GAME"
 msgstr "SPĒLES BEIGAS"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:218
 msgid "Effects volume"
 msgstr ""
 
@@ -644,7 +648,7 @@ msgstr ""
 msgid "Error in %s:%lu (Wormux %s) : %s"
 msgstr "Kļūda %s:%lu"
 
-#: src/include/action_handler.cpp:195
+#: src/include/action_handler.cpp:210
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -653,8 +657,8 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Kļūda ielādējot komandu :"
 
-#: src/game/config.cpp:492 src/team/custom_team.cpp:163
-#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
+#: src/game/config.cpp:492 src/team/custom_team.cpp:165
+#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -767,7 +771,7 @@ msgstr "Laukuma veidošana..."
 msgid "Gun"
 msgstr "Pistole"
 
-#: src/tool/file_tools.cpp:183
+#: src/tool/file_tools.cpp:185
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "MĀJAS mape (vides mainīgias $HOME) nav atrasts!"
 
@@ -877,7 +881,7 @@ msgstr "Gatavo skaņas"
 msgid "Initialise teams"
 msgstr "Gatavo komandas"
 
-#: src/game/game.cpp:561
+#: src/game/game.cpp:587
 msgid "It's a present!"
 msgstr "Tā ir dāvana!"
 
@@ -885,7 +889,7 @@ msgstr "Tā ir dāvana!"
 msgid "Jetpack"
 msgstr "Raķešsoma"
 
-#: src/menu/network_connection_menu.cpp:237 src/menu/network_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:237 src/menu/network_menu.cpp:144
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pievienojies #wormux kanālam irc.freenode.net serverī, lai atrastu "
@@ -940,7 +944,7 @@ msgstr "Kartes"
 msgid "Max energy"
 msgstr "Enerģija"
 
-#: src/menu/network_menu.cpp:116
+#: src/menu/network_menu.cpp:117
 msgid "Max number of players:"
 msgstr "MAksimālais spēlētāju skaits:"
 
@@ -952,7 +956,7 @@ msgstr "Maksimālais FPS"
 msgid "Mine"
 msgstr "Mīna"
 
-#: src/menu/options_menu.cpp:194
+#: src/menu/options_menu.cpp:198
 #, fuzzy
 msgid "Misc"
 msgstr "Mūzika?"
@@ -977,11 +981,11 @@ msgstr "Vis bezjēdzīgākais"
 msgid "Most violent"
 msgstr "Vis asiņainākais"
 
-#: src/menu/options_menu.cpp:204
+#: src/menu/options_menu.cpp:208
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:200
+#: src/menu/options_menu.cpp:204
 msgid "Music?"
 msgstr "Mūzika?"
 
@@ -999,7 +1003,7 @@ msgstr "Tīkla inicializācija"
 msgid "New network game at "
 msgstr "Tīkla spēle"
 
-#: src/menu/options_menu.cpp:239
+#: src/menu/options_menu.cpp:243
 msgid "New player warning?"
 msgstr ""
 
@@ -1039,7 +1043,7 @@ msgstr "Iestatījumi"
 msgid "Parachute"
 msgstr "Paršūts"
 
-#: src/weapon/parachute.cpp:100
+#: src/weapon/parachute.cpp:101
 msgid "Parachute is activated automatically."
 msgstr "Parašūts aktivizējas automātiski."
 
@@ -1053,6 +1057,10 @@ msgstr ""
 msgid "Play"
 msgstr "Spēlēt"
 
+#: src/menu/network_menu.cpp:132
+msgid "Play several times"
+msgstr ""
+
 #: src/menu/teams_selection_box.cpp:65
 msgid "Player"
 msgstr "Spēlētājs"
@@ -1060,6 +1068,11 @@ msgstr "Spēlētājs"
 #: src/menu/options_menu.cpp:81
 msgid "Player energy?"
 msgstr "Spēlētāja enerģija?"
+
+#: src/menu/options_menu.cpp:150
+#, fuzzy
+msgid "Player name"
+msgstr "Spēlētāja vārds?"
 
 #: src/menu/options_menu.cpp:84
 msgid "Player's name?"
@@ -1139,7 +1152,7 @@ msgid "Server available on Internet"
 msgstr "Serveris pieejams internetā"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:113
+#: src/menu/network_menu.cpp:114
 msgid "Server mode"
 msgstr "Servera režīms"
 
@@ -1171,16 +1184,16 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/options_menu.cpp:242
+#: src/menu/options_menu.cpp:246
 #, fuzzy
 msgid "Sound"
 msgstr "Skaņas"
 
-#: src/menu/options_menu.cpp:210
+#: src/menu/options_menu.cpp:214
 msgid "Sound effects?"
 msgstr "Skaņas efekti?"
 
-#: src/menu/options_menu.cpp:235
+#: src/menu/options_menu.cpp:239
 msgid "Sound frequency"
 msgstr "Skaņas frekvence"
 
@@ -1209,12 +1222,12 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Šļirce"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:427
 #, fuzzy
 msgid "Team graphs"
 msgstr "Komandas"
 
-#: src/menu/results_menu.cpp:424
+#: src/menu/results_menu.cpp:425
 #, fuzzy
 msgid "Team stats"
 msgstr "Komandas"
@@ -1223,7 +1236,7 @@ msgstr "Komandas"
 msgid "Teams"
 msgstr "Komandas"
 
-#: src/menu/options_menu.cpp:182
+#: src/menu/options_menu.cpp:186
 msgid "Teams editor"
 msgstr ""
 
@@ -1271,7 +1284,7 @@ msgstr "Savienojuma noildze. Pārbaudiet vai tam netraucē ugunssiena!"
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disko granāta nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/game/game.cpp:456
+#: src/game/game.cpp:482
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
@@ -1279,7 +1292,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granāta nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/menu/network_menu.cpp:302
+#: src/menu/network_menu.cpp:328
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Citi gaida uz tevi! Dari kaut ko :-)"
 
@@ -1297,7 +1310,7 @@ msgstr "Serveris noraidīja savienojumu."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serveris noraidīja savienojumu."
 
-#: src/menu/network_menu.cpp:214
+#: src/menu/network_menu.cpp:233
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1368,12 +1381,12 @@ msgstr ""
 msgid "Version"
 msgstr "Versija"
 
-#: src/menu/options_menu.cpp:441
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:228
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1381,7 +1394,7 @@ msgstr[0] "Pagaidi! %i spēlētājs vēl nav gatavs!"
 msgstr[1] "Pagaidi! %i spēlētāji vēl nav gatavs!"
 msgstr[2] "Pagaidi! %i spēlētāju vēl nav gatavs!"
 
-#: src/menu/network_menu.cpp:369
+#: src/menu/network_menu.cpp:395
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Gaida uz serveri, jūs varat atcelt vai tērzēt!"
 
@@ -1395,7 +1408,7 @@ msgstr "Ieroči"
 msgid "Website: "
 msgstr "Mākas lapa: "
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:748
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kauns un negods %s - viņu nogalināja ar vienkāršu ieroci!"
@@ -1417,23 +1430,23 @@ msgstr "Wormux ielādējas..."
 msgid "Wormux version "
 msgstr "Wormux versija "
 
-#: src/include/action_handler.cpp:169
+#: src/include/action_handler.cpp:184
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:166
+#: src/include/action_handler.cpp:181
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:172
+#: src/include/action_handler.cpp:187
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:305
+#: src/menu/network_menu.cpp:331
 msgid "You are alone :-/"
 msgstr "Jūs esat viens pats :-/"
 
-#: src/menu/network_menu.cpp:222
+#: src/menu/network_menu.cpp:241
 msgid "You are alone..."
 msgstr "Jūs esat viens pats..."
 
@@ -1445,7 +1458,7 @@ msgstr "Jums nepieciešama vismaz viena derīga karte !"
 msgid "You need at least two valid teams !"
 msgstr "Jums nepieciešamas vismaz divas derīgas komandas !"
 
-#: src/menu/network_menu.cpp:202
+#: src/menu/network_menu.cpp:221
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
@@ -1457,7 +1470,7 @@ msgstr "Jūs netrāpijāt!"
 msgid "aka"
 msgstr "aka"
 
-#: src/weapon/air_attack.cpp:216
+#: src/weapon/air_attack.cpp:220
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1469,6 +1482,11 @@ msgstr ""
 
 #: src/map/maps_list.cpp:78
 msgid "couldn't load config"
+msgstr ""
+
+#. the default player name for custom teams
+#: src/team/custom_team.cpp:136
+msgid "custom player"
 msgstr ""
 
 #: src/map/ground.cpp:61
