@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-08-13 00:11+0300\n"
+"PO-Revision-Date: 2008-08-25 22:46+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -703,9 +703,8 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Directorul cu echipe particularizate nu poate fi deschis (%s)!"
 
 #: src/menu/options_menu.cpp:164
-#, fuzzy
 msgid "Character"
-msgstr "Parașută"
+msgstr "Personaj"
 
 #: src/menu/options_menu.cpp:194
 msgid "Check updates online?"
@@ -1229,7 +1228,7 @@ msgstr "Pornește jocul"
 
 #: src/menu/network_menu.cpp:132
 msgid "Play several times"
-msgstr ""
+msgstr "Joacă de câteva ori"
 
 #: src/menu/teams_selection_box.cpp:65
 msgid "Player"
@@ -1240,9 +1239,8 @@ msgid "Player energy?"
 msgstr "Energia jucătorului?"
 
 #: src/menu/options_menu.cpp:150
-#, fuzzy
 msgid "Player name"
-msgstr "Numele jucătorului?"
+msgstr "Numele jucătorului"
 
 #: src/menu/options_menu.cpp:84
 msgid "Player's name?"
@@ -1654,9 +1652,8 @@ msgstr "configurația nu a putut fi încărcată"
 
 #. the default player name for custom teams
 #: src/team/custom_team.cpp:136
-#, fuzzy
 msgid "custom player"
-msgstr "Bombă cu schije"
+msgstr "jucător personalizat"
 
 #: src/map/ground.cpp:61
 msgid "done"
