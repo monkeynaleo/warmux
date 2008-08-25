@@ -1,25 +1,26 @@
+# translation of wormux_ca.po to Catalan
+# Eduard BERMEJO <templer@iespana.es>, 2005?.
+# artefact <artefact@altern.org>, 2007.
+# Juan Pujol Rojas <jua56@hotmail.com>, 2008.
+# Joan  <ca@li.org>, 2008.
 # Catalan translation of Wormux.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Wormux package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Eduard BERMEJO <templer@iespana.es>, 2005?
-# artefact <artefact@altern.org>, 2007
-# Juan Pujol Rojas <jua56@hotmail.com>, 2008
 msgid ""
 msgstr ""
-"Project-Id-Version: Wormux\n"
+"Project-Id-Version: wormux_ca\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-08-13 00:08+0300\n"
-"PO-Revision-Date: 2008-06-22 08:32+0100\n"
-"Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2008-08-11 22:10+0200\n"
+"Last-Translator: Joan <ca@li.org>\n"
+"Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Catalan\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: src/map/maps_list.cpp:326
 #, c-format
@@ -67,34 +68,34 @@ msgid "%s fps"
 msgstr "%s fps"
 
 #: src/game/game.cpp:692
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team commited suicide!"
-msgstr "%s es suicida!"
+msgstr "%s de l'equip %s és un suicida!"
 
 #: src/game/game.cpp:725
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has died."
-msgstr "%s (equip %s) ha mort."
+msgstr "%s de l'equip %s ha mort."
 
 #: src/game/game.cpp:683
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has fallen into the water!"
-msgstr "%s ha caigut dins l'aigua."
+msgstr "%s de l'equip %s ha caigut dins l'aigua!"
 
 #: src/game/game.cpp:677
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has fallen off the map!"
-msgstr "%s ha caigut del mapa!"
+msgstr "%s de l'equip %s ha caigut del mapa!"
 
 #: src/game/game.cpp:698
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
-msgstr ""
+msgstr "%s de l'equip %s ha picat massa fort a terra!"
 
 #: src/game/game.cpp:705
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team is dead because he is clumsy!"
-msgstr "%s ha mort!"
+msgstr "%s de l'equip %s s'ha mort per pocatraça!"
 
 #: src/object/medkit.cpp:68
 #, c-format
@@ -379,7 +380,7 @@ msgstr "L'equip %s ha guanyat."
 #: src/game/game.cpp:713
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
-msgstr ""
+msgstr "%s s'ha emportat un membre de %s a la tomba amb ell!"
 
 #: src/interface/interface.cpp:165
 msgid "(dead)"
@@ -454,7 +455,7 @@ msgstr "Bazooka automatic"
 #. Automatic connection - we have nothing to display here!
 #: src/menu/network_connection_menu.cpp:98
 msgid "Automatically join a game"
-msgstr ""
+msgstr "Unir-se automàticament a la partida"
 
 #: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
@@ -665,7 +666,6 @@ msgid "Error: Unable to contact the index server to host a game"
 msgstr "Error: No es pot contactar amb el servidor on s'allotja la partida"
 
 #: src/menu/network_connection_menu.cpp:270
-#, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
@@ -970,7 +970,7 @@ msgstr "Nou joc de la xarxa en"
 
 #: src/menu/options_menu.cpp:239
 msgid "New player warning?"
-msgstr ""
+msgstr "Avís de nou jugador?"
 
 #: src/weapon/weapon.cpp:658
 #, c-format
@@ -982,6 +982,8 @@ msgid ""
 "No public servers available and incorrect manual connection settings. Try "
 "connecting manually."
 msgstr ""
+"No hi ha servidors públics disponibles i la connexió manual està mal "
+"configurada. Prova connectant-te manualment."
 
 #: src/menu/results_menu.cpp:74
 msgid "Nobody!"
@@ -1499,90 +1501,3 @@ msgstr "o Obert àudio a %d Hz %d bit "
 
 #~ msgid "%s: unrecognized option `--%s'\n"
 #~ msgstr "%s: opció no reconeguda`--%s'\n"
-
-#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
-#~ msgstr ""
-#~ "%s intenta a connectar-se amb una version diferent: client=%s, servidor=%"
-#~ "s. "
-
-#~ msgid "C++ exception caught:"
-#~ msgstr "Excepció C++ interceptada :"
-
-#~ msgid "Connect !"
-#~ msgstr "Connexió!"
-
-#~ msgid "Connect to an internet game"
-#~ msgstr "Connectat a una partida a internet"
-
-#~ msgid "Do you really want to quit? (Y/N)"
-#~ msgstr "Estar segur que vol sortir? (Y/N)"
-
-#~ msgid "Duration of the end of a turn:"
-#~ msgstr "Duracio del temps despres del torn:"
-
-#~ msgid "End of the game!\n"
-#~ msgstr "Final de la partida !\n"
-
-#~ msgid "Error during loading skin %s:"
-#~ msgstr "Error durant la carrega del skin %s :"
-
-#~ msgid "Error loading team's data %s:"
-#~ msgstr "Error carregant dades de l'equip %s:"
-
-#~ msgid "Error while loading configuration file: %s"
-#~ msgstr "Error carregant el fitxer de configuració: %s"
-
-#~ msgid "Error while loading default configuration file: %s"
-#~ msgstr "Error carregant el fitxer de configuració: %s"
-
-#~ msgid "Error while loading game mode %s (file %s):"
-#~ msgstr "Error carregant la manera de joc %s (fitxer %s):"
-
-#~ msgid "Info"
-#~ msgstr "Informació"
-
-#~ msgid "Load game data..."
-#~ msgstr "Carregant les dades del joc ..."
-
-#~ msgid "Load weapon %s"
-#~ msgstr "Carregant l'arma %s"
-
-#, fuzzy
-#~ msgid "Network deinitialization"
-#~ msgstr "Inicialització..."
-
-#~ msgid "Number of players per team:"
-#~ msgstr "Nombre de jugadors per equip:"
-
-#~ msgid "Pause"
-#~ msgstr "Pausa"
-
-#~ msgid "Please tell us your opinion of Wormux via email:"
-#~ msgstr "Siusplau dona'ns la teva opinió de Wormux per correu electrónic:"
-
-#~ msgid "Refresh"
-#~ msgstr "Actualitzar"
-
-#~ msgid "Sound error :"
-#~ msgstr "Error de so :"
-
-#~ msgid "The game has ended as a draw.\n"
-#~ msgstr "El joc ha acabat en empat.\n"
-
-#~ msgid "Use sound?"
-#~ msgstr "Utilitza so?"
-
-#~ msgid "XML error during loading map '%s': "
-#~ msgstr "Error XML durant la carrega del mapa '%s':"
-
-#~ msgid "You need at least two teams to play: change this in 'Options menu' !"
-#~ msgstr ""
-#~ "Necesites almenys dos equips per jugar, canvia això en 'Opcions del menú'!"
-
-#, fuzzy
-#~ msgid "[Music] Error : file %s does not exist"
-#~ msgstr "Arxiu \"%s\" no existeix !"
-
-#, fuzzy
-#~ msgid "[Sound] Error: File %s does not exist"
-#~ msgstr "Arxiu \"%s\" no existeix !"
