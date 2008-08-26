@@ -339,7 +339,7 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
   r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "");
   if (false == r) {
     DisplayNetError(CONN_BAD_PORT);
-    msg_box->NewMessage(_("Error: Your server is not reachable from the internet. Check your firewall configuration"),
+    msg_box->NewMessage(Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connection from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port.c_str(), port.c_str()),
                         c_red);
     goto out;
   }
