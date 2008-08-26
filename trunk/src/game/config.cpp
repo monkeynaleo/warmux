@@ -104,7 +104,7 @@ Config::Config():
   video_width(800),
   video_height(600),
   video_fullscreen(false),
-  max_fps(0),
+  max_fps(50),
   bling_bling_interface(false),
   scroll_on_border(true),
   scroll_border_size(50),
