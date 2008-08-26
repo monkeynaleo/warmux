@@ -245,19 +245,38 @@ Config::Config():
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
 
-bool Config::MkdirChatLogDir()
+bool Config::MkdirChatLogDir() const
 {
   return CreateFolder(chat_log_dir);
 }
 
-bool Config::MkdirPersonalConfigDir()
+bool Config::MkdirPersonalConfigDir() const
 {
   return CreateFolder(personal_config_dir);
 }
 
-bool Config::MkdirPersonalDataDir()
+bool Config::MkdirPersonalDataDir() const
 {
   return CreateFolder(personal_data_dir);
+}
+
+bool Config::RemovePersonalConfigFile() const
+{
+  std::string personal_config_file = personal_config_dir + FILENAME;
+
+  int r = unlink(personal_config_file.c_str());
+  if (r) {
+    if (errno == -ENOENT) {
+      r = 0;
+    } else {
+      perror((Format("Fail to remove personal config file %s", personal_config_file.c_str())).c_str());
+    }
+  }
+
+  if (r)
+    return false;
+
+  return true;
 }
 
 void Config::SetLanguage(const std::string language)
@@ -649,8 +668,10 @@ uint Config::GetMaxVolume()
 
 const std::string& Config::GetTtfFilename()
 {
-  if (fonts.find(default_language) == fonts.end()) return ttf_filename;
-  else                                             return fonts[default_language];
+  if (fonts.find(default_language) == fonts.end())
+    return ttf_filename;
+  else
+    return fonts[default_language];
 }
 
 void Config::SetNetworkLocalTeams()
