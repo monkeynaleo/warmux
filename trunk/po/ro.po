@@ -702,6 +702,27 @@ msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Directorul cu echipe particularizate nu poate fi deschis (%s)!"
 
+#: src/menu/help_menu.cpp:90
+#, fuzzy
+msgid "Center camera to character"
+msgstr "Numărul de personaje"
+
+#: src/menu/help_menu.cpp:89
+msgid "Change active character"
+msgstr ""
+
+#: src/menu/help_menu.cpp:78
+msgid "Change aim angle"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Change weapon category"
+msgstr ""
+
+#: src/menu/help_menu.cpp:77
+msgid "Change weapon countdown"
+msgstr ""
+
 #: src/menu/options_menu.cpp:164
 msgid "Character"
 msgstr "Personaj"
@@ -713,6 +734,10 @@ msgstr "Se verifică actualizările online?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Alege la întâmplare una din diferitele hărți"
+
+#: src/menu/help_menu.cpp:76
+msgid "Click: Center camera on character"
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:105
@@ -734,6 +759,11 @@ msgstr "Proiectil reactiv cu schije"
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Comite suicid"
+
+#: src/menu/help_menu.cpp:73
+#, fuzzy
+msgid "Configuration menu"
+msgstr "nu există nici un fișier de configurare!"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Connect to game"
@@ -781,6 +811,10 @@ msgstr "Grenadă disco"
 msgid "Displays this message"
 msgstr "Afișează acest mesaj"
 
+#: src/menu/help_menu.cpp:75
+msgid "Drag&drop: Move camera"
+msgstr ""
+
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:73
 msgid "Duration before death mode"
@@ -820,7 +854,7 @@ msgstr "Eroare de inițializare a rețelei: Clientul %s nu este de acord!! - %s"
 msgid "Error loading team :"
 msgstr "Eroare la încărcarea echipei:"
 
-#: src/game/config.cpp:492 src/team/custom_team.cpp:165
+#: src/game/config.cpp:511 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -877,12 +911,13 @@ msgid "Error: Unable to start server"
 msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
 #: src/menu/network_connection_menu.cpp:342
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration"
+"configuration: TCP Port %s must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %s must be forwarded on your computer."
 msgstr ""
-"Eroare: Serverul nu este accesibil din internet. Verificați configurația "
-"firewall-ului"
 
 #: src/team/team.cpp:118
 #, c-format
@@ -896,6 +931,11 @@ msgstr "Aruncător de flăcări"
 #: src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "Bombă-minge de fotbal"
+
+#: src/menu/help_menu.cpp:69
+#, fuzzy
+msgid "Fullscreen / window"
+msgstr "Tot ecranul?"
 
 #: src/menu/options_menu.cpp:96
 msgid "Fullscreen?"
@@ -963,6 +1003,10 @@ msgstr "Comandant șef: "
 #: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "Ajutor"
+
+#: src/menu/help_menu.cpp:70
+msgid "High jump"
+msgstr ""
 
 #: src/menu/network_connection_menu.cpp:145
 msgid "Host a game"
@@ -1065,6 +1109,14 @@ msgstr ""
 "Intrați pe #wormux în rețeaua irc.freenode.net pentru a găsi parteneri de "
 "joc."
 
+#: src/menu/help_menu.cpp:74
+msgid "Jump"
+msgstr ""
+
+#: src/menu/help_menu.cpp:84
+msgid "Jump backwards"
+msgstr ""
+
 #: src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Aruncă afară din joc jucătorii indicați de <nickname>"
@@ -1149,6 +1201,15 @@ msgstr "Cel mai inutil"
 msgid "Most violent"
 msgstr "Cel mai violent"
 
+#: src/menu/help_menu.cpp:86
+msgid "Move camera with mouse or arrows"
+msgstr ""
+
+#: src/menu/help_menu.cpp:79
+#, fuzzy
+msgid "Move character"
+msgstr "Numărul de personaje"
+
 #: src/menu/options_menu.cpp:208
 msgid "Music volume"
 msgstr "Volumul muzicii"
@@ -1199,6 +1260,14 @@ msgstr "Numărul de personaje"
 msgid "Number of teams:"
 msgstr "Numărul de echipe:"
 
+#: src/menu/help_menu.cpp:81
+msgid "On a character: Changes active one"
+msgstr ""
+
+#: src/menu/help_menu.cpp:80
+msgid "On map: Select a target"
+msgstr ""
+
 #: src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "Opțiuni"
@@ -1221,6 +1290,11 @@ msgstr "Parașuta se activează automat."
 #: src/menu/network_connection_menu.cpp:209
 msgid "Password:"
 msgstr "Parola:"
+
+#: src/menu/help_menu.cpp:85
+#, fuzzy
+msgid "Pause"
+msgstr "Pauză"
 
 #: src/menu/main_menu.cpp:60
 msgid "Play"
@@ -1271,15 +1345,20 @@ msgstr "Ieșire din Wormux"
 msgid "Quit battle"
 msgstr "Părăsește bătălia"
 
+#: src/menu/help_menu.cpp:64
+#, fuzzy
+msgid "Quit game"
+msgstr "Rulează jocul"
+
 #: src/menu/map_selection_box.cpp:228
 msgid "Random map"
 msgstr "Hartă aleatoare"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:349
 msgid "Reading default config file"
 msgstr "Se citește fișierul implicit de configurare"
 
-#: src/game/config.cpp:379
+#: src/game/config.cpp:398
 msgid "Reading personal config file"
 msgstr "Se citește fișierul personal de configurare"
 
@@ -1325,6 +1404,20 @@ msgstr "Mod server"
 msgid "Shotgun"
 msgstr "Pușcă"
 
+# XXX: nu-mi place cum sună; probabil am să revin la "Opțiuni"
+#: src/menu/help_menu.cpp:82
+#, fuzzy
+msgid "Show weapons menu"
+msgstr "Meniul de opțiuni"
+
+#: src/menu/help_menu.cpp:68
+msgid "Show/hide interface"
+msgstr ""
+
+#: src/menu/help_menu.cpp:88
+msgid "Show/hide minimap"
+msgstr ""
+
 #: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Sare rândul"
@@ -1336,6 +1429,10 @@ msgstr "Plesneală"
 #: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Plesnește inamicul să sară un pic."
+
+#: src/menu/help_menu.cpp:83
+msgid "Smaller aim angle and walk step"
+msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1385,6 +1482,11 @@ msgstr "SuperTux"
 #: src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Seringă"
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Talk in network battle"
+msgstr "Înapoi pe câmpul de bătălie"
 
 #: src/menu/results_menu.cpp:427
 msgid "Team graphs"
@@ -1562,6 +1664,10 @@ msgstr[2] "Așteaptă! %i de jucători nu sunt gata încă!"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Se așteaptă serverul, tot ce puteți face e să anulați sau să vorbiți!"
 
+#: src/menu/help_menu.cpp:87
+msgid "Weapon: Fire Bonus box: falls fast"
+msgstr ""
+
 #. Initialization of teams' energy
 #. Adding label
 #: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:167
@@ -1685,6 +1791,13 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration"
+#~ msgstr ""
+#~ "Eroare: Serverul nu este accesibil din internet. Verificați configurația "
+#~ "firewall-ului"
 
 #~ msgid "%s: illegal option -- %c\n"
 #~ msgstr "%s: opțiune ilegală -- %c\n"
@@ -2028,10 +2141,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 
 #~ msgid "Is it a gift?"
 #~ msgstr "Oare e un cadou?"
-
-#, fuzzy
-#~ msgid "Load character %s"
-#~ msgstr "Numărul de personaje"
 
 #, fuzzy
 #~ msgid "Load music sample %s"
@@ -2533,10 +2642,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "parachute_sprite"
 #~ msgstr "Parașută"
-
-#, fuzzy
-#~ msgid "pause"
-#~ msgstr "Pauză"
 
 #, fuzzy
 #~ msgid "physic.position"

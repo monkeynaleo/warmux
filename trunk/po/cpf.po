@@ -509,6 +509,27 @@ msgstr "Gaingne pas ouvrir le répertoire des équipes (%s) !"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Gaingne pas ouvrir le répertoire des équipes (%s)!"
 
+#: src/menu/help_menu.cpp:90
+#, fuzzy
+msgid "Center camera to character"
+msgstr "Nombre de joueurs par équipe"
+
+#: src/menu/help_menu.cpp:89
+msgid "Change active character"
+msgstr ""
+
+#: src/menu/help_menu.cpp:78
+msgid "Change aim angle"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Change weapon category"
+msgstr ""
+
+#: src/menu/help_menu.cpp:77
+msgid "Change weapon countdown"
+msgstr ""
+
 #: src/menu/options_menu.cpp:164
 #, fuzzy
 msgid "Character"
@@ -521,6 +542,10 @@ msgstr ""
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "choisi une carte n'importe comment"
+
+#: src/menu/help_menu.cpp:76
+msgid "Click: Center camera on character"
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:105
@@ -543,6 +568,11 @@ msgstr "Bazooka"
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Suicide"
+
+#: src/menu/help_menu.cpp:73
+#, fuzzy
+msgid "Configuration menu"
+msgstr "Gaingne pas charge lo fichier de configuration!"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Connect to game"
@@ -591,6 +621,10 @@ msgstr "Grenade boite de nuit"
 msgid "Displays this message"
 msgstr ""
 
+#: src/menu/help_menu.cpp:75
+msgid "Drag&drop: Move camera"
+msgstr ""
+
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:73
 msgid "Duration before death mode"
@@ -631,7 +665,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Pas gagné charger l'équipe %s:"
 
-#: src/game/config.cpp:492 src/team/custom_team.cpp:165
+#: src/game/config.cpp:511 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -686,9 +720,12 @@ msgid "Error: Unable to start server"
 msgstr "Tééé, le serveur y veut pas démarrer."
 
 #: src/menu/network_connection_menu.cpp:342
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration"
+"configuration: TCP Port %s must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %s must be forwarded on your computer."
 msgstr ""
 
 #: src/team/team.cpp:118
@@ -704,6 +741,11 @@ msgstr "lance-flammes"
 #, fuzzy
 msgid "Football Bomb"
 msgstr "Bombe lacrimogène"
+
+#: src/menu/help_menu.cpp:69
+#, fuzzy
+msgid "Fullscreen / window"
+msgstr "Plein écran ?"
 
 #: src/menu/options_menu.cpp:96
 msgid "Fullscreen?"
@@ -774,6 +816,10 @@ msgstr "Lo chef:"
 #: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "de l'aide !"
+
+#: src/menu/help_menu.cpp:70
+msgid "High jump"
+msgstr ""
 
 #: src/menu/network_connection_menu.cpp:145
 msgid "Host a game"
@@ -872,6 +918,14 @@ msgstr ""
 "ou su #wormux-fr a irc.freenode.net pou rode d'autres camarades pou jouer "
 "avec."
 
+#: src/menu/help_menu.cpp:74
+msgid "Jump"
+msgstr ""
+
+#: src/menu/help_menu.cpp:84
+msgid "Jump backwards"
+msgstr ""
+
 #: src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
@@ -959,6 +1013,15 @@ msgstr "Sa ki serve le moins"
 msgid "Most violent"
 msgstr "Le plus violent"
 
+#: src/menu/help_menu.cpp:86
+msgid "Move camera with mouse or arrows"
+msgstr ""
+
+#: src/menu/help_menu.cpp:79
+#, fuzzy
+msgid "Move character"
+msgstr "Parachute"
+
 #: src/menu/options_menu.cpp:208
 msgid "Music volume"
 msgstr ""
@@ -1008,6 +1071,14 @@ msgstr "Nombre de joueurs par équipe"
 msgid "Number of teams:"
 msgstr "Nombre d'équipe :"
 
+#: src/menu/help_menu.cpp:81
+msgid "On a character: Changes active one"
+msgstr ""
+
+#: src/menu/help_menu.cpp:80
+msgid "On map: Select a target"
+msgstr ""
+
 #: src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "Options"
@@ -1028,6 +1099,10 @@ msgstr "Parachute là y ouvre tout seul."
 #: src/menu/network_connection_menu.cpp:171
 #: src/menu/network_connection_menu.cpp:209
 msgid "Password:"
+msgstr ""
+
+#: src/menu/help_menu.cpp:85
+msgid "Pause"
 msgstr ""
 
 #: src/menu/main_menu.cpp:60
@@ -1081,15 +1156,20 @@ msgstr "Quitte Wormux"
 msgid "Quit battle"
 msgstr "Allons barer"
 
+#: src/menu/help_menu.cpp:64
+#, fuzzy
+msgid "Quit game"
+msgstr "Lancement du jeu"
+
 #: src/menu/map_selection_box.cpp:228
 msgid "Random map"
 msgstr "carte choisi n'importe comment"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:349
 msgid "Reading default config file"
 msgstr "An train'e lire ou'te fichier de configuration"
 
-#: src/game/config.cpp:379
+#: src/game/config.cpp:398
 msgid "Reading personal config file"
 msgstr "An train'e lire oute fichier de configuration a ou même"
 
@@ -1136,6 +1216,19 @@ msgstr "Mode serveur"
 msgid "Shotgun"
 msgstr "Fusil à pompe"
 
+#: src/menu/help_menu.cpp:82
+#, fuzzy
+msgid "Show weapons menu"
+msgstr "Options du menu"
+
+#: src/menu/help_menu.cpp:68
+msgid "Show/hide interface"
+msgstr ""
+
+#: src/menu/help_menu.cpp:88
+msgid "Show/hide minimap"
+msgstr ""
+
 #: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Passer son tour"
@@ -1146,6 +1239,10 @@ msgstr ""
 
 #: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
+msgstr ""
+
+#: src/menu/help_menu.cpp:83
+msgid "Smaller aim angle and walk step"
 msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:93
@@ -1198,6 +1295,11 @@ msgstr "SuperTux"
 #: src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Seringue"
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Talk in network battle"
+msgstr "Allons bataille"
 
 #: src/menu/results_menu.cpp:427
 #, fuzzy
@@ -1374,6 +1476,10 @@ msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Nous y attende lo server. Alors reste trankil. La seule chose ou gaingne fé "
 "c'est koze ek de moune, ou quitter le zaffaire."
+
+#: src/menu/help_menu.cpp:87
+msgid "Weapon: Fire Bonus box: falls fast"
+msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label

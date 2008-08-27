@@ -587,6 +587,27 @@ msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebnega ekipnega imenika (%s)!"
 
+#: src/menu/help_menu.cpp:90
+#, fuzzy
+msgid "Center camera to character"
+msgstr "Število članov"
+
+#: src/menu/help_menu.cpp:89
+msgid "Change active character"
+msgstr ""
+
+#: src/menu/help_menu.cpp:78
+msgid "Change aim angle"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Change weapon category"
+msgstr ""
+
+#: src/menu/help_menu.cpp:77
+msgid "Change weapon countdown"
+msgstr ""
+
 #: src/menu/options_menu.cpp:164
 msgid "Character"
 msgstr "Junak"
@@ -598,6 +619,10 @@ msgstr "Preveri možno posodobitev?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
+
+#: src/menu/help_menu.cpp:76
+msgid "Click: Center camera on character"
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:105
@@ -619,6 +644,11 @@ msgstr "Kasetna bazuka"
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Samomor"
+
+#: src/menu/help_menu.cpp:73
+#, fuzzy
+msgid "Configuration menu"
+msgstr "ni nastavitvene datoteke!"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Connect to game"
@@ -666,6 +696,10 @@ msgstr "Disko Granata"
 msgid "Displays this message"
 msgstr "Prikaže to sporočilo"
 
+#: src/menu/help_menu.cpp:75
+msgid "Drag&drop: Move camera"
+msgstr ""
+
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:73
 msgid "Duration before death mode"
@@ -706,7 +740,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe:"
 
-#: src/game/config.cpp:492 src/team/custom_team.cpp:165
+#: src/game/config.cpp:511 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -759,11 +793,13 @@ msgid "Error: Unable to start server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
 #: src/menu/network_connection_menu.cpp:342
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration"
+"configuration: TCP Port %s must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %s must be forwarded on your computer."
 msgstr ""
-"Napaka: Vaš strežnik ni dosegljiv preko Interneta. Preverite vaš požarni zid"
 
 #: src/team/team.cpp:118
 #, c-format
@@ -777,6 +813,11 @@ msgstr "Metalec plamenov"
 #: src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "Nogometna bomba"
+
+#: src/menu/help_menu.cpp:69
+#, fuzzy
+msgid "Fullscreen / window"
+msgstr "Celozaslonski način?"
 
 #: src/menu/options_menu.cpp:96
 msgid "Fullscreen?"
@@ -843,6 +884,10 @@ msgstr "Poveljnik: "
 #: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
 msgid "Help"
 msgstr "Pomoč"
+
+#: src/menu/help_menu.cpp:70
+msgid "High jump"
+msgstr ""
 
 #: src/menu/network_connection_menu.cpp:145
 msgid "Host a game"
@@ -944,6 +989,14 @@ msgstr ""
 "Pridružite se kanalu #wormux na irc.freenode.net in si poiščite nekaj "
 "nasprotnikov."
 
+#: src/menu/help_menu.cpp:74
+msgid "Jump"
+msgstr ""
+
+#: src/menu/help_menu.cpp:84
+msgid "Jump backwards"
+msgstr ""
+
 #: src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Brcne igralca z imenom <nickname> iz igre"
@@ -1027,6 +1080,15 @@ msgstr "Najbolj neuporaben"
 msgid "Most violent"
 msgstr "Najbolj nasilen"
 
+#: src/menu/help_menu.cpp:86
+msgid "Move camera with mouse or arrows"
+msgstr ""
+
+#: src/menu/help_menu.cpp:79
+#, fuzzy
+msgid "Move character"
+msgstr "Junak"
+
 #: src/menu/options_menu.cpp:208
 msgid "Music volume"
 msgstr "Glasnost glasbe"
@@ -1077,6 +1139,14 @@ msgstr "Število članov"
 msgid "Number of teams:"
 msgstr "Število ekip:"
 
+#: src/menu/help_menu.cpp:81
+msgid "On a character: Changes active one"
+msgstr ""
+
+#: src/menu/help_menu.cpp:80
+msgid "On map: Select a target"
+msgstr ""
+
 #: src/menu/main_menu.cpp:66
 msgid "Options"
 msgstr "Nastavitve"
@@ -1098,6 +1168,10 @@ msgstr "Padalo se samodejno odpre."
 #: src/menu/network_connection_menu.cpp:209
 msgid "Password:"
 msgstr "Geslo:"
+
+#: src/menu/help_menu.cpp:85
+msgid "Pause"
+msgstr ""
 
 #: src/menu/main_menu.cpp:60
 msgid "Play"
@@ -1148,15 +1222,20 @@ msgstr "Končaj Wormux"
 msgid "Quit battle"
 msgstr "Končaj bitko"
 
+#: src/menu/help_menu.cpp:64
+#, fuzzy
+msgid "Quit game"
+msgstr "Poženi igro"
+
 #: src/menu/map_selection_box.cpp:228
 msgid "Random map"
 msgstr "Naključna karta"
 
-#: src/game/config.cpp:330
+#: src/game/config.cpp:349
 msgid "Reading default config file"
 msgstr "Branje privzete nastavitvene datoteke"
 
-#: src/game/config.cpp:379
+#: src/game/config.cpp:398
 msgid "Reading personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
@@ -1202,6 +1281,19 @@ msgstr "Način strežnika"
 msgid "Shotgun"
 msgstr "Šibrovka"
 
+#: src/menu/help_menu.cpp:82
+#, fuzzy
+msgid "Show weapons menu"
+msgstr "Nastavitve"
+
+#: src/menu/help_menu.cpp:68
+msgid "Show/hide interface"
+msgstr ""
+
+#: src/menu/help_menu.cpp:88
+msgid "Show/hide minimap"
+msgstr ""
+
 #: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Preskoči potezo"
@@ -1213,6 +1305,10 @@ msgstr "Klofuta"
 #: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Klofni sovražnika, da bo kar poskočil."
+
+#: src/menu/help_menu.cpp:83
+msgid "Smaller aim angle and walk step"
+msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1262,6 +1358,11 @@ msgstr "SuperTux"
 #: src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Injekcija"
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Talk in network battle"
+msgstr "Nazaj v bitko"
 
 #: src/menu/results_menu.cpp:427
 msgid "Team graphs"
@@ -1439,6 +1540,10 @@ msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
+#: src/menu/help_menu.cpp:87
+msgid "Weapon: Fire Bonus box: falls fast"
+msgstr ""
+
 #. Initialization of teams' energy
 #. Adding label
 #: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:167
@@ -1559,6 +1664,13 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration"
+#~ msgstr ""
+#~ "Napaka: Vaš strežnik ni dosegljiv preko Interneta. Preverite vaš požarni "
+#~ "zid"
 
 #~ msgid "%s team has won %u Gnu!"
 #~ msgid_plural "%s team has won %u Gnus!"
