@@ -399,8 +399,8 @@ void AIMovementModule::SetDestinationPoint(const Point2i& _destination_point)
 bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
                                           const Character& enemy) const
 {
-  double delta_x = fabs(shooter.GetX() - enemy.GetX());
-  double delta_y = fabs(shooter.GetY() - enemy.GetY());
+  double delta_x = abs(shooter.GetX() - enemy.GetX());
+  double delta_y = abs(shooter.GetY() - enemy.GetY());
 
   if (delta_x > 300.0)
     return false;
