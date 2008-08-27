@@ -161,8 +161,7 @@
 
 <section name="help">
   <surface name="background" file="menu/background_help.png" />
-  <surface name="help_shortkeys_en" file="help/en/shortkeys.png" />
-  <surface name="help_shortkeys_es" file="help/es/shortkeys.png" />
+  <surface name="shortkeys" file="menu/help_shortkeys.png" />
 </section>
 
 <section name="object">

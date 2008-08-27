@@ -20,11 +20,12 @@
  *****************************************************************************/
 
 #include "include/app.h"
+#include "graphic/text.h"
+#include "graphic/sprite.h"
 #include "graphic/video.h"
-#include "gui/box.h"
-#include "gui/picture_widget.h"
 #include "menu/help_menu.h"
 #include "game/config.h"
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
@@ -34,23 +35,10 @@ static const uint CHECKBOX_SIZE = 50;
 HelpMenu::HelpMenu()  :
   Menu("help/background", vOk)
 {
-  Point2i size = GetMainWindow().GetSize()
-               - Point2i(2*BORDER,2*BORDER+CHECKBOX_SIZE);
-
-  std::string lang = Config::GetInstance()->GetLanguage();
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  const xmlNode *elem = resource_manager.GetElement (res, "surface", "help/help_shortkeys_" + lang);
-  std::string filename;
-  if (elem == NULL || !res->doc->ReadStringAttr(elem, "file", filename))
-    lang = "en";
+  img_keyboard = new Sprite(resource_manager.LoadImage(res, "help/shortkeys"), true);
+  img_keyboard->cache.EnableLastFrameCache();
   resource_manager.UnLoadXMLProfile(res);
-  PictureWidget *help_image = new PictureWidget(size, "help/help_shortkeys_" + lang, true);
-
-  VBox *help = new VBox(size.x);
-  help->SetPosition(BORDER, BORDER);
-  help->AddWidget(help_image);
-  widgets.AddWidget(help);
-  widgets.Pack();
 }
 
 HelpMenu::~HelpMenu()
@@ -65,6 +53,41 @@ bool HelpMenu::signal_ok()
 bool HelpMenu::signal_cancel()
 {
   return true;
+}
+
+void HelpMenu::DrawBackground()
+{
+  Menu::DrawBackground();
+
+  img_keyboard->Blit(GetMainWindow(), BORDER, BORDER);
+
+  Text tmp(_("Quit game"), dark_gray_color, Font::FONT_SMALL, Font::FONT_NORMAL, false);
+  tmp.SetMaxWidth(130);
+
+  tmp.DrawTopLeft(Point2i(12+BORDER, 31));
+  tmp.Set(_("Show/hide interface")); tmp.DrawTopLeft(Point2i(147+BORDER, 31));
+  tmp.Set(_("Fullscreen / window")); tmp.DrawTopLeft(Point2i(311+BORDER, 31));
+  tmp.Set(_("High jump")); tmp.DrawTopLeft(Point2i(459+BORDER, 31));
+  tmp.Set(_("Talk in network battle")); tmp.DrawTopLeft(Point2i(12+BORDER, 59));
+  tmp.Set(_("Change weapon category")); tmp.DrawTopLeft(Point2i(147+BORDER, 59));
+  tmp.Set(_("Configuration menu")); tmp.DrawTopLeft(Point2i(311+BORDER, 59));
+  tmp.Set(_("Jump")); tmp.DrawTopLeft(Point2i(459+BORDER, 59));
+  tmp.Set(_("Drag&drop: Move camera")); tmp.DrawTopLeft(Point2i(539+BORDER, 108));
+  tmp.Set(_("Click: Center camera on character")); tmp.DrawTopLeft(Point2i(539+BORDER, 137));
+  tmp.Set(_("Change weapon countdown")); tmp.DrawTopLeft(Point2i(539+BORDER, 166));
+  tmp.Set(_("Change aim angle")); tmp.DrawTopLeft(Point2i(539+BORDER, 195));
+  tmp.Set(_("Move character")); tmp.DrawTopLeft(Point2i(539+BORDER, 224));
+  tmp.Set(_("On map: Select a target")); tmp.DrawTopLeft(Point2i(539+BORDER, 253));
+  tmp.Set(_("On a character: Changes active one")); tmp.DrawTopLeft(Point2i(539+BORDER, 281));
+  tmp.Set(_("Show weapons menu")); tmp.DrawTopLeft(Point2i(539+BORDER, 310));
+  tmp.Set(_("Smaller aim angle and walk step")); tmp.DrawTopLeft(Point2i(25+BORDER, 271));
+  tmp.Set(_("Jump backwards")); tmp.DrawTopLeft(Point2i(188+BORDER, 271));
+  tmp.Set(_("Pause")); tmp.DrawTopLeft(Point2i(338+BORDER, 271));
+  tmp.Set(_("Move camera with mouse or arrows")); tmp.DrawTopLeft(Point2i(25+BORDER, 308));
+  tmp.Set(_("Weapon: Fire Bonus box: falls fast")); tmp.DrawTopLeft(Point2i(188+BORDER, 308));
+  tmp.Set(_("Show/hide minimap")); tmp.DrawTopLeft(Point2i(338+BORDER, 308));
+  tmp.Set(_("Change active character")); tmp.DrawTopLeft(Point2i(25+BORDER, 336));
+  tmp.Set(_("Center camera to character")); tmp.DrawTopLeft(Point2i(188+BORDER, 336));
 }
 
 void HelpMenu::Draw(const Point2i& /*mousePosition*/)

@@ -26,14 +26,18 @@
 
 // Forward declarations
 class ListBox;
+class Sprite;
 
 class HelpMenu : public Menu
 {
  private:
+  Sprite* img_keyboard;
+
   bool signal_ok();
   bool signal_cancel();
 
   void Draw(const Point2i &mousePosition);
+  void DrawBackground();
 
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
