@@ -27,6 +27,7 @@
 // Forward declarations
 class SpinButtonWithPicture;
 class ComboBox;
+class CheckBox;
 
 class GameModeEditor : public GridBox
 {
@@ -36,6 +37,8 @@ class GameModeEditor : public GridBox
   /********************************************/
 
   ComboBox *opt_game_mode;
+
+  ComboBox *opt_allow_character_selection;
 
   SpinButtonWithPicture *opt_duration_turn;
 

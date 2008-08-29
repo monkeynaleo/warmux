@@ -54,6 +54,15 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
                                                 TPS_TOUR_MIN, TPS_TOUR_MAX);
   AddWidget(opt_duration_turn);
 
+  std::vector<std::pair<std::string, std::string> > character_selections;
+  character_selections.push_back(std::pair<std::string, std::string>("always", _("Always")));
+  character_selections.push_back(std::pair<std::string, std::string>("before_action", _("Before action")));
+  character_selections.push_back(std::pair<std::string, std::string>("never", _("Never")));
+
+  opt_allow_character_selection = new ComboBox(_("Character switching"), "menu/character_selection", option_size,
+					       character_selections, "always");
+  AddWidget(opt_allow_character_selection);
+
   /* Characters energy */
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
                                              option_size,
@@ -82,7 +91,7 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
 							   1, 20);
   AddWidget(opt_damage_during_death_mode);
 
-  opt_gravity = new SpinButtonWithPicture(_("Gravity"), "menu/energy",
+  opt_gravity = new SpinButtonWithPicture(_("Gravity"), "menu/gravity",
 							   option_size,
 							   10, 5,
 							   10, 60);
@@ -102,6 +111,16 @@ void GameModeEditor::LoadGameMode()
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->Load();
 
+  if (game_mode->allow_character_selection == GameMode::ALWAYS) {
+    opt_allow_character_selection->SetChoice(0); // "always"
+  } else if (game_mode->allow_character_selection == GameMode::BEFORE_FIRST_ACTION) {
+    opt_allow_character_selection->SetChoice(1); // "before_action"
+  } else if (game_mode->allow_character_selection == GameMode::NEVER) {
+    opt_allow_character_selection->SetChoice(2); // "never"
+  } else {
+    ASSERT(false);
+  }
+
   opt_duration_turn->SetValue(game_mode->duration_turn);
   opt_energy_ini->SetValue(game_mode->character.init_energy);
   opt_energy_max->SetValue(game_mode->character.max_energy);
@@ -116,6 +135,16 @@ void GameModeEditor::ValidGameMode() const
 {
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->Load();
+
+  if (opt_allow_character_selection->GetValue() == "always") {
+    game_mode->allow_character_selection = GameMode::ALWAYS;
+  } else if (opt_allow_character_selection->GetValue() == "before_action") {
+    game_mode->allow_character_selection = GameMode::BEFORE_FIRST_ACTION;
+  } else if (opt_allow_character_selection->GetValue() == "never") {
+    game_mode->allow_character_selection = GameMode::NEVER;
+  } else {
+    ASSERT(false);
+  }
 
   game_mode->duration_turn = opt_duration_turn->GetValue();
   game_mode->character.init_energy = opt_energy_ini->GetValue();

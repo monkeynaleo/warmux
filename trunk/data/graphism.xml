@@ -68,6 +68,8 @@
   <surface name="timing_turn" file="menu/timing_turn.png" />
   <surface name="timing_end_of_turn" file="menu/timing_end_turn.png" />
   <surface name="energy" file="menu/display_energy.png" />
+  <surface name="character_selection" file="menu/timing_turn.png" />
+  <surface name="gravity" file="menu/gravity.png" />
 
   <!-- For results menu -->
   <surface name="podium" file="menu/podium.png" />
