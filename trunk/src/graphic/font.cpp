@@ -35,7 +35,7 @@ bool  Font::LIB_INIT = false;
  * Constants
  */
 // Size
-const int Font::FONT_SIZE[] = {40, 32, 24, 16, 12, 8};
+const int Font::FONT_SIZE[] = {40, 32, 24, 16, 12, 10};
 
 Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
   Font * font = NULL;
