@@ -180,8 +180,7 @@ void GameBlitz::__SetState_PLAYING()
     {
       GetTeamsList().NextTeam();
 
-      if ( GameMode::GetInstance()->allow_character_selection==GameMode::CHANGE_ON_END_TURN
-           || GameMode::GetInstance()->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
+      if ( GameMode::GetInstance()->auto_change_character )
         {
           ActiveTeam().NextCharacter();
         }

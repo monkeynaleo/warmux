@@ -46,7 +46,8 @@ GameMode::GameMode():
   barrel_explosion_cfg(),
   bonus_box_explosion_cfg(),
   character(),
-  allow_character_selection(BEFORE_FIRST_ACTION_AND_END_TURN),
+  auto_change_character(true),
+  allow_character_selection(BEFORE_FIRST_ACTION),
   m_current("classic"),
   doc_objects(new XmlReader)
 {
@@ -76,6 +77,8 @@ const std::string& GameMode::GetName() const
 // Load data options from the selected game_mode
 bool GameMode::LoadXml(const xmlNode* xml)
 {
+  XmlReader::ReadBool(xml, "auto_change_character", auto_change_character);
+
   std::string txt;
   if (XmlReader::ReadString(xml, "allow_character_selection", txt))
   {
@@ -83,12 +86,10 @@ bool GameMode::LoadXml(const xmlNode* xml)
       allow_character_selection = ALWAYS;
     else if (txt == "never")
       allow_character_selection = NEVER;
-    else if (txt == "change_on_end_turn")
-      allow_character_selection = CHANGE_ON_END_TURN;
-    else if (txt == "before_first_action_and_end_turn")
-      allow_character_selection = BEFORE_FIRST_ACTION_AND_END_TURN;
     else if (txt == "before_first_action")
       allow_character_selection = BEFORE_FIRST_ACTION;
+    else
+      fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
   }
 
   XmlReader::ReadUint(xml, "duration_turn", duration_turn);
@@ -288,15 +289,14 @@ bool GameMode::AllowCharacterSelection() const
 {
   switch (allow_character_selection)
   {
-  case GameMode::ALWAYS: break;
+  case GameMode::ALWAYS:
+    break;
 
   case GameMode::BEFORE_FIRST_ACTION:
-  case GameMode::BEFORE_FIRST_ACTION_AND_END_TURN:
-          return (Game::GetInstance()->ReadState() == Game::PLAYING) && !Game::GetInstance()->character_already_chosen;
+    return (Game::GetInstance()->ReadState() == Game::PLAYING) && !Game::GetInstance()->character_already_chosen;
 
-  case GameMode::CHANGE_ON_END_TURN:
   case GameMode::NEVER:
-          return false;
+    return false;
   }
 
   return true;
