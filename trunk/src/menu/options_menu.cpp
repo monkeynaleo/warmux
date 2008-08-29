@@ -158,36 +158,35 @@ OptionMenu::OptionMenu() :
                             Font::FONT_MEDIUM, Font::FONT_NORMAL);
   teams_editor_inf->AddWidget(tbox_team_name);
 
- Point2i names_size(140, 50);
+  Point2i names_size(140, 50);
 
-  Box * teams_editor_names = new GridBox(max_width, names_size, false);
-s = _("Character");
-  for(unsigned i=0; i < 10 ; i++)
-  {
-    std::ostringstream oss;
-    oss << i+1;
-    tbox_character_name_list.push_back(new TextBox("",100,Font::FONT_MEDIUM, Font::FONT_NORMAL));
-    Label * lab = new Label(s+oss.str()+" : ",0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  // bug #12193 : Missed assertion in game option (custom team editor) while playing
+  if(Game::GetInstance()->IsGameFinished()) {
+    Box * teams_editor_names = new GridBox(max_width, names_size, false);
+    s = _("Character");
+    for(unsigned i=0; i < 10 ; i++) {
+      std::ostringstream oss;
+      oss << i+1;
+      tbox_character_name_list.push_back(new TextBox("",100,Font::FONT_MEDIUM, Font::FONT_NORMAL));
+      Label * lab = new Label(s+oss.str()+" : ",0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
-    Box * name_box = new VBox(max_width, true, true);
+      Box * name_box = new VBox(max_width, true, true);
 
-    name_box->AddWidget(lab);
-    name_box->AddWidget(tbox_character_name_list[i]);
+      name_box->AddWidget(lab);
+      name_box->AddWidget(tbox_character_name_list[i]);
 
-    teams_editor_names->AddWidget(name_box);
+      teams_editor_names->AddWidget(name_box);
+    }
 
+    teams_editor_inf->AddWidget(teams_editor_names);
+
+    teams_editor_inf->Pack();
+    teams_editor->AddWidget(teams_editor_sup);
+    teams_editor->AddWidget(teams_editor_inf);
+    tabs->AddNewTab("unused", _("Teams editor"), teams_editor);
+    selected_team = NULL;
+    ReloadTeamList();
   }
-
-  teams_editor_inf->AddWidget(teams_editor_names);
-
-  teams_editor_inf->Pack();
-  teams_editor->AddWidget(teams_editor_sup);
-  teams_editor->AddWidget(teams_editor_inf);
-  tabs->AddNewTab("unused", _("Teams editor"), teams_editor);
-
-
-  selected_team = NULL;
-  ReloadTeamList();
 
   /* Misc options */
   Box * misc_options = new GridBox(max_width, option_size, false);
