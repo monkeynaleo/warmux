@@ -128,7 +128,7 @@ bool Client::HandShake(const std::string & version)
 
 bool Client::RegisterWormuxServer()
 {
-  if (received < 4)
+  if (BytesReceived() < 4)
     return true;
 
   DPRINT(MSG, "This is a server (%s)", version.c_str());

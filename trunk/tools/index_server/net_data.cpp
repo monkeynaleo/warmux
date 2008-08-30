@@ -47,7 +47,7 @@ NetData::NetData()
   , msg_size(0)
   , fd(INVALID_SOCKET)
   , ping_sent(false)
-  , received(0)
+  , bytes_received(0)
   , msg_id(TS_NO_MSG)
   , connected(false)
 {
@@ -176,7 +176,7 @@ bool NetData::ReceiveInt(int & nbr)
   unsigned int u_nbr = ntohl(packet);
   nbr = *((int*)&u_nbr);
   DPRINT(TRAFFIC, "Received int: %i", nbr);
-  received -= sizeof(uint32_t);
+  bytes_received -= sizeof(uint32_t);
   UpdatePing();
   return true;
 }
@@ -188,8 +188,8 @@ bool NetData::ReceiveStr(std::string & full_str)
   if (str_size == 0)
     {
       // We don't know the string size -> read it
-      if (received < 4) {
-        DPRINT(TRAFFIC, "Not enough data to store string length: %zu", received);
+      if (bytes_received < sizeof(uint32_t)) {
+        DPRINT(TRAFFIC, "Not enough data to store string length: %zu", bytes_received);
         return false;
       }
 
@@ -230,7 +230,7 @@ bool NetData::ReceiveStr(std::string & full_str)
   if( strlen(str) != old_size + str_received )
     return false;
 
-  received -= str_received;
+  bytes_received -= str_received;
   DPRINT(TRAFFIC, "Received string: %s", str);
 
   if(strlen(str) == str_size)
@@ -293,7 +293,7 @@ bool NetData::ReceiveData()
       DPRINT(TRAFFIC, "Nothing received");
       return false;
     }
-  received += packet_size;
+  bytes_received += packet_size;
 
   return true;
 }
@@ -314,7 +314,7 @@ bool NetData::Receive()
     {
 
       // Waiting for the msg id + size
-      if (received <= 2 * sizeof(uint32_t))
+      if (bytes_received <= 2 * sizeof(uint32_t))
         {
           DPRINT(TRAFFIC, "Not yet ready to read (msg id + size)!");
           return true;
@@ -347,7 +347,7 @@ bool NetData::Receive()
     }
 
   // Check that enough data has been received
-  if (received+2*sizeof(uint32_t) < msg_size)
+  if (bytes_received + 2*sizeof(uint32_t) < msg_size)
     return true;
 
   switch (msg_id) {

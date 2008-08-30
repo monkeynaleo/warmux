@@ -175,7 +175,7 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
     case TS_MSG_WIS_VERSION:
       {
         int version;
-        if (received < 4) // The message is not completely received
+        if (BytesReceived() < sizeof(uint32_t)) // The message is not completely received
           return true;
         if (!ReceiveInt(version)) // Receive the version number of the server index
           return false;
@@ -202,7 +202,7 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
         if (!ReceiveStr(server_id))
             return false;
 
-        if (received < 8) // The message is not completely received
+        if (BytesReceived() < 2*sizeof(uint32_t)) // The message is not completely received
           return true;
         if (!ReceiveInt(ip)) // Receive the IP of the wormux server
           return false;
