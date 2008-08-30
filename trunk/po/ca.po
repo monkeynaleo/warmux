@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_ca\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-08-11 22:10+0200\n"
-"Last-Translator: Joan <ca@li.org>\n"
+"PO-Revision-Date: 2008-08-30 11:02+0100\n"
+"Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -387,7 +387,7 @@ msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:263
+#: src/menu/options_menu.cpp:262
 msgid "(system language)"
 msgstr "(idioma del sistema)"
 
@@ -400,7 +400,7 @@ msgstr "(temps desconegut)"
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
-#: src/menu/options_menu.cpp:436
+#: src/menu/options_menu.cpp:435
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -411,7 +411,7 @@ msgstr ""
 
 #: src/menu/options_menu.cpp:141
 msgid "Add custom team"
-msgstr ""
+msgstr "Afegir equip personalitzat"
 
 #: src/weapon/air_attack.cpp:219
 msgid "Air Attack"
@@ -425,6 +425,10 @@ msgstr "Martell aeri"
 msgid "All teams"
 msgstr "Tots els equips "
 
+#: src/menu/game_mode_editor.cpp:58
+msgid "Always"
+msgstr "Sempre "
+
 #: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "El guanyador és..."
@@ -435,7 +439,7 @@ msgid ""
 "Fire : space key\n"
 "a hit per turn"
 msgstr ""
-"Angulo: Dalt/Baix\n"
+"Angle: Dalt/Baix\n"
 "Foc: barra espaciadora\n"
 "un tir per torn "
 
@@ -473,6 +477,10 @@ msgstr "Baseball"
 msgid "Bazooka"
 msgstr "Bazooka"
 
+#: src/menu/game_mode_editor.cpp:59
+msgid "Before action"
+msgstr "Abans de començar"
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Bufador"
@@ -503,37 +511,39 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
 #: src/team/custom_teams_list.cpp:93
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open the custom teams directory (%s)!"
-msgstr "No es pot obrir el directori d'equips (%s)!"
+msgstr "No es pot obrir el directori d'equips personalitzats (%s)!"
 
-#: src/menu/help_menu.cpp:90
-#, fuzzy
+#: src/menu/help_menu.cpp:92
 msgid "Center camera to character"
-msgstr "Nombre de jugadors"
+msgstr "Centrar la càmera al personatge"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:91
 msgid "Change active character"
-msgstr ""
+msgstr "Canvia el personatge actiu"
 
-#: src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:80
 msgid "Change aim angle"
-msgstr ""
+msgstr "Canviar l'angle de tir"
 
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:74
 msgid "Change weapon category"
-msgstr ""
+msgstr "Canviar la categoria d'arma "
 
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:79
 msgid "Change weapon countdown"
-msgstr ""
+msgstr "Cambiar el valor de algunas armas"
 
-#: src/menu/options_menu.cpp:164
-#, fuzzy
+#: src/menu/options_menu.cpp:166
 msgid "Character"
-msgstr "Paracaigudes"
+msgstr "Personatge"
 
-#: src/menu/options_menu.cpp:194
+#: src/menu/game_mode_editor.cpp:62
+msgid "Character switching"
+msgstr "Canviar de personatge"
+
+#: src/menu/options_menu.cpp:193
 msgid "Check updates online?"
 msgstr "Comprovar actualitzacions a Internet? "
 
@@ -541,9 +551,9 @@ msgstr "Comprovar actualitzacions a Internet? "
 msgid "Choose randomly between the different maps"
 msgstr "Tria a l'atzar entre els diferents mapes"
 
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
-msgstr ""
+msgstr "Clic: Centra la càmera al personatge"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:105
@@ -566,10 +576,9 @@ msgstr "Bazooka"
 msgid "Commit Suicide"
 msgstr "Suïcidi"
 
-#: src/menu/help_menu.cpp:73
-#, fuzzy
+#: src/menu/help_menu.cpp:75
 msgid "Configuration menu"
-msgstr "no hi ha un fitxer de configuració"
+msgstr "Menú de configuració"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Connect to game"
@@ -601,13 +610,13 @@ msgstr "No es va poder obrir l'arxiu %s"
 msgid "Credits"
 msgstr "Crèdits"
 
-#: src/menu/game_mode_editor.cpp:79
+#: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr "Energia per torn de la mort sobtada"
 
 #: src/menu/options_menu.cpp:144
 msgid "Delete custom team"
-msgstr ""
+msgstr "Elimina l'equip personalitzat "
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -617,12 +626,12 @@ msgstr "Disc explosiu"
 msgid "Displays this message"
 msgstr "Mostra aquest missatge"
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:77
 msgid "Drag&drop: Move camera"
-msgstr ""
+msgstr "Prémer i arrossegar: Mou la càmera"
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:73
+#: src/menu/game_mode_editor.cpp:82
 msgid "Duration before death mode"
 msgstr "Durada de la mort sobtada"
 
@@ -638,7 +647,7 @@ msgstr "Dinamita"
 msgid "END OF GAME"
 msgstr "Fi del joc"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:217
 msgid "Effects volume"
 msgstr "Volum dels efectes"
 
@@ -670,19 +679,19 @@ msgstr ""
 "configuració."
 
 #: src/team/custom_team.cpp:104
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
-"Error mentre es creava el directori \"%s\": no es pot guardar el fitxer de "
-"configuració."
+"Error mentre s'esborrava el directori \"%s\". No es pot esborrar l'equip "
+"personalitzat."
 
 #: src/team/custom_team.cpp:95
-#, fuzzy, c-format
+#, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
-"Error mentre es creava el directori \"%s\": no es pot guardar el fitxer de "
-"configuració."
+"Error mentre s'esborrava l'arxiu \"%s\". No es pot esborrar l'equip "
+"personalitzat."
 
 #: src/game/game.cpp:143
 #, c-format
@@ -700,7 +709,6 @@ msgid "Error: Unable to connect to %s:%s"
 msgstr "Error: No es pot connectar a %s:%s"
 
 #: src/menu/network_connection_menu.cpp:329
-#, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Error: No es pot contactar amb el servidor on s'allotja la partida"
 
@@ -723,6 +731,10 @@ msgid ""
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
+"Error: El servidor no és accessible des de la Internet. Mira la configuració "
+"del firewall: El Port TCP %s ha d'acceptar connexió des de l'exterior. Si no "
+"està directament connectat a Internet, comprova la configuració de la teva "
+"router: Port TCP %s ha de ser dirigit al teu ordinador."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -737,10 +749,9 @@ msgstr "Llançaflames"
 msgid "Football Bomb"
 msgstr "Pantalla completa?"
 
-#: src/menu/help_menu.cpp:69
-#, fuzzy
+#: src/menu/help_menu.cpp:71
 msgid "Fullscreen / window"
-msgstr "Pantalla completa?"
+msgstr "Pantalla completa / finestra"
 
 #: src/menu/options_menu.cpp:96
 msgid "Fullscreen?"
@@ -770,7 +781,7 @@ msgstr "Opcions gràfiques"
 msgid "Grapple"
 msgstr "Atac"
 
-#: src/menu/game_mode_editor.cpp:85
+#: src/menu/game_mode_editor.cpp:94
 msgid "Gravity"
 msgstr "Gravetat"
 
@@ -808,9 +819,9 @@ msgstr "Comandant cap:"
 msgid "Help"
 msgstr "Ajuda"
 
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:72
 msgid "High jump"
-msgstr ""
+msgstr "Salt gran"
 
 #: src/menu/network_connection_menu.cpp:145
 msgid "Host a game"
@@ -842,7 +853,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 "Com usar-lo: clic esquerre sobre l'objectiu\n"
-"Angulo de foc inicial: Dalt/Baix\n"
+"Angle de foc inicial: Dalt/Baix\n"
 "Foc: mantingues premuda la barra espaciadora fins a arribar a la força "
 "desitjada\n"
 "un arma per torn "
@@ -855,7 +866,7 @@ msgstr ""
 "Com usar-lo: botó dret sobre l'objectiu\n"
 " un arma per torn "
 
-#: src/game/game_classic.cpp:228
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr "Apressa't, ets massa lent"
 
@@ -868,7 +879,7 @@ msgstr ""
 "engles, per favor): "
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:58
+#: src/menu/game_mode_editor.cpp:67
 msgid "Initial energy"
 msgstr "Energia inicial"
 
@@ -912,13 +923,13 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Entra #en wormux en irc.freenode.net per a trobar algun contrincant."
 
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:76
 msgid "Jump"
-msgstr ""
+msgstr "Salt"
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:86
 msgid "Jump backwards"
-msgstr ""
+msgstr "Salt d'esquena"
 
 #: src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
@@ -963,10 +974,9 @@ msgstr "Mapa %s, fet per:"
 msgid "Maps"
 msgstr "Mapes"
 
-#: src/menu/game_mode_editor.cpp:64
-#, fuzzy
+#: src/menu/game_mode_editor.cpp:73
 msgid "Max energy"
-msgstr "Energia inicial"
+msgstr "Energia màxima"
 
 #: src/menu/network_menu.cpp:117
 msgid "Max number of players:"
@@ -980,7 +990,7 @@ msgstr "Numero màxim de FPS"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:197
 msgid "Misc"
 msgstr "Miscel·lània"
 
@@ -1004,20 +1014,19 @@ msgstr "El més inutil"
 msgid "Most violent"
 msgstr "El més violent"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:88
 msgid "Move camera with mouse or arrows"
-msgstr ""
+msgstr "Mou la càmera amb el ratolí o amb les fletxes "
 
-#: src/menu/help_menu.cpp:79
-#, fuzzy
+#: src/menu/help_menu.cpp:81
 msgid "Move character"
-msgstr "Paracaigudes"
+msgstr "Moure el personatge"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:207
 msgid "Music volume"
 msgstr "Volum de la música"
 
-#: src/menu/options_menu.cpp:204
+#: src/menu/options_menu.cpp:203
 msgid "Music?"
 msgstr "Música?"
 
@@ -1029,12 +1038,16 @@ msgstr "Joc en xarxa"
 msgid "Network initialization"
 msgstr "Inicialització de la xarxa"
 
+#: src/menu/game_mode_editor.cpp:60
+msgid "Never"
+msgstr "Mai"
+
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:51
 msgid "New network game at "
 msgstr "Nou joc de la xarxa en"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:242
 msgid "New player warning?"
 msgstr "Avís de nou jugador?"
 
@@ -1063,13 +1076,13 @@ msgstr "Nombre de jugadors"
 msgid "Number of teams:"
 msgstr "Nombre de equips:"
 
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:83
 msgid "On a character: Changes active one"
-msgstr ""
+msgstr "En el personatge: Canvia el jugador actiu "
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:82
 msgid "On map: Select a target"
-msgstr ""
+msgstr "En el mapa: Selecciona un personatge "
 
 #: src/menu/main_menu.cpp:66
 msgid "Options"
@@ -1093,9 +1106,9 @@ msgstr "El paracaigudes s'activa automàticament."
 msgid "Password:"
 msgstr "Clau:"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:87
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: src/menu/main_menu.cpp:60
 msgid "Play"
@@ -1103,7 +1116,7 @@ msgstr "Jugar"
 
 #: src/menu/network_menu.cpp:132
 msgid "Play several times"
-msgstr ""
+msgstr "Jugar diverses partides"
 
 #: src/menu/teams_selection_box.cpp:65
 msgid "Player"
@@ -1114,9 +1127,8 @@ msgid "Player energy?"
 msgstr "Energia del jugador?"
 
 #: src/menu/options_menu.cpp:150
-#, fuzzy
 msgid "Player name"
-msgstr "¿Nom del jugador?"
+msgstr "Nom del jugador"
 
 #: src/menu/options_menu.cpp:84
 msgid "Player's name?"
@@ -1147,10 +1159,9 @@ msgstr "Sortir de Wormux"
 msgid "Quit battle"
 msgstr "Sortir de la batalla"
 
-#: src/menu/help_menu.cpp:64
-#, fuzzy
+#: src/menu/help_menu.cpp:66
 msgid "Quit game"
-msgstr "Arrenca el joc"
+msgstr "Sortir del joc "
 
 #: src/menu/map_selection_box.cpp:228
 msgid "Random map"
@@ -1206,18 +1217,17 @@ msgstr "Servidor"
 msgid "Shotgun"
 msgstr "Escopeta"
 
-#: src/menu/help_menu.cpp:82
-#, fuzzy
+#: src/menu/help_menu.cpp:84
 msgid "Show weapons menu"
-msgstr "Menú de opcions"
+msgstr "Veure el menú d'armes "
 
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:70
 msgid "Show/hide interface"
-msgstr ""
+msgstr "Veure/ocultar la informació"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:90
 msgid "Show/hide minimap"
-msgstr ""
+msgstr "Veure/ocultar minimapa "
 
 #: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
@@ -1231,9 +1241,11 @@ msgstr "Manotada"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Manotada a l'enemic per fer-li donar un petit salt. "
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:85
 msgid "Smaller aim angle and walk step"
 msgstr ""
+"Angle lent\n"
+"Salt petit"
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1247,15 +1259,15 @@ msgstr "Algú va posar un parany explosiu camuflat a caixa! "
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Lo siento, actualmente, ningún juego está esperando a jugadores"
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:245
 msgid "Sound"
 msgstr "So"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:213
 msgid "Sound effects?"
 msgstr "Efectes sonors?"
 
-#: src/menu/options_menu.cpp:239
+#: src/menu/options_menu.cpp:238
 msgid "Sound frequency"
 msgstr "Freqüència del so"
 
@@ -1284,10 +1296,9 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Xeringa"
 
-#: src/menu/help_menu.cpp:71
-#, fuzzy
+#: src/menu/help_menu.cpp:73
 msgid "Talk in network battle"
-msgstr "Tornar a la lluita"
+msgstr "Parla en la batalla en xarxa"
 
 #: src/menu/results_menu.cpp:427
 msgid "Team graphs"
@@ -1303,7 +1314,7 @@ msgstr "Equips"
 
 #: src/menu/options_menu.cpp:186
 msgid "Teams editor"
-msgstr ""
+msgstr "Editor d'equips"
 
 #: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
@@ -1451,7 +1462,7 @@ msgstr "Sense nom"
 msgid "Version"
 msgstr "Versió"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "La verificació de versió ha fallat per: %s\n"
@@ -1467,9 +1478,11 @@ msgstr[1] "Espera! %i jugadors no estan preparats encara! "
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Esperant al servidor, tot el que pots fer és cancel·lar o xerrar!"
 
-#: src/menu/help_menu.cpp:87
-msgid "Weapon: Fire Bonus box: falls fast"
+#: src/menu/help_menu.cpp:89
+msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
+"Arma: Dispara\n"
+" Caixes: Accelera la caiguda"
 
 #. Initialization of teams' energy
 #. Adding label
@@ -1560,7 +1573,7 @@ msgstr "No es pot carregar el fitxer de configuració"
 #. the default player name for custom teams
 #: src/team/custom_team.cpp:136
 msgid "custom player"
-msgstr ""
+msgstr "jugador personalitzat"
 
 #: src/map/ground.cpp:61
 msgid "done"

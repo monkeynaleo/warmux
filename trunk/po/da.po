@@ -394,7 +394,7 @@ msgid "(dead)"
 msgstr "(død)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:263
+#: src/menu/options_menu.cpp:262
 msgid "(system language)"
 msgstr "(systemsprog)"
 
@@ -407,7 +407,7 @@ msgstr "(ukendt tid)"
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
-#: src/menu/options_menu.cpp:436
+#: src/menu/options_menu.cpp:435
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -431,6 +431,11 @@ msgstr "Tryklufthammer"
 #: src/menu/results_menu.cpp:422
 msgid "All teams"
 msgstr "Alle hold"
+
+#: src/menu/game_mode_editor.cpp:58
+#, fuzzy
+msgid "Always"
+msgstr "Spil"
 
 #: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
@@ -480,6 +485,11 @@ msgstr "Baseballbat"
 msgid "Bazooka"
 msgstr "Bazooka"
 
+#: src/menu/game_mode_editor.cpp:59
+#, fuzzy
+msgid "Before action"
+msgstr "Teleportation"
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Blæselampe"
@@ -514,33 +524,38 @@ msgstr "Kan ikke åbne holdkataloget (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan ikke åbne det personlige holdkatalog (%s)!"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Center camera to character"
 msgstr "Antal krigere"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:91
 msgid "Change active character"
 msgstr ""
 
-#: src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:80
 msgid "Change aim angle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:74
 msgid "Change weapon category"
 msgstr ""
 
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:79
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:166
 #, fuzzy
 msgid "Character"
 msgstr "Faldskærm"
 
-#: src/menu/options_menu.cpp:194
+#: src/menu/game_mode_editor.cpp:62
+#, fuzzy
+msgid "Character switching"
+msgstr "Faldskærm"
+
+#: src/menu/options_menu.cpp:193
 msgid "Check updates online?"
 msgstr "Check for opdateringer på nettet?"
 
@@ -548,7 +563,7 @@ msgstr "Check for opdateringer på nettet?"
 msgid "Choose randomly between the different maps"
 msgstr "Skift tilfældigt rundt mellem de forskellige baner"
 
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
 msgstr ""
 
@@ -573,7 +588,7 @@ msgstr "Cluzooka"
 msgid "Commit Suicide"
 msgstr "Begå selvmord"
 
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:75
 #, fuzzy
 msgid "Configuration menu"
 msgstr "ingen konfigurationsfil!"
@@ -608,7 +623,7 @@ msgstr "Kunne ikke åbne filen %s"
 msgid "Credits"
 msgstr "Udviklere"
 
-#: src/menu/game_mode_editor.cpp:79
+#: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr ""
 
@@ -624,12 +639,12 @@ msgstr "Diskogranat"
 msgid "Displays this message"
 msgstr ""
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:77
 msgid "Drag&drop: Move camera"
 msgstr ""
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:73
+#: src/menu/game_mode_editor.cpp:82
 msgid "Duration before death mode"
 msgstr ""
 
@@ -645,7 +660,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "SLUT PÅ SPILLET"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:217
 msgid "Effects volume"
 msgstr "Lydeffekt volume"
 
@@ -740,7 +755,7 @@ msgstr "Flammekaster"
 msgid "Football Bomb"
 msgstr "Fodboldbombe"
 
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Fullscreen / window"
 msgstr "Fuld skærm?"
@@ -774,7 +789,7 @@ msgstr "Grafik"
 msgid "Grapple"
 msgstr "Klo"
 
-#: src/menu/game_mode_editor.cpp:85
+#: src/menu/game_mode_editor.cpp:94
 msgid "Gravity"
 msgstr ""
 
@@ -812,7 +827,7 @@ msgstr "Hovedkommandør: "
 msgid "Help"
 msgstr "Hjælp"
 
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:72
 msgid "High jump"
 msgstr ""
 
@@ -858,7 +873,7 @@ msgstr ""
 "Hvordan man bruger det: Venstreklik på målet\n"
 "Et stykke ammunition per tur"
 
-#: src/game/game_classic.cpp:228
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -871,7 +886,7 @@ msgstr ""
 "mail (på engelsk, tak):"
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:58
+#: src/menu/game_mode_editor.cpp:67
 msgid "Initial energy"
 msgstr "Energi som udgangspunkt"
 
@@ -914,11 +929,11 @@ msgstr "Jetpack"
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
 
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:76
 msgid "Jump"
 msgstr ""
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr ""
 
@@ -965,7 +980,7 @@ msgstr "Banen %s, en kreation af: "
 msgid "Maps"
 msgstr "Baner"
 
-#: src/menu/game_mode_editor.cpp:64
+#: src/menu/game_mode_editor.cpp:73
 #, fuzzy
 msgid "Max energy"
 msgstr "Energi som udgangspunkt"
@@ -982,7 +997,7 @@ msgstr "Maksimum FPS"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:197
 msgid "Misc"
 msgstr "Andet"
 
@@ -1006,20 +1021,20 @@ msgstr "Mest ubrugelig"
 msgid "Most violent"
 msgstr "Mest voldelig"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:88
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:81
 #, fuzzy
 msgid "Move character"
 msgstr "Faldskærm"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:207
 msgid "Music volume"
 msgstr "Musik volume"
 
-#: src/menu/options_menu.cpp:204
+#: src/menu/options_menu.cpp:203
 msgid "Music?"
 msgstr "Musik?"
 
@@ -1031,12 +1046,16 @@ msgstr "Netværksspil"
 msgid "Network initialization"
 msgstr "Netværksinitialisation"
 
+#: src/menu/game_mode_editor.cpp:60
+msgid "Never"
+msgstr ""
+
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:51
 msgid "New network game at "
 msgstr "Nyt netværksspil på"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:242
 msgid "New player warning?"
 msgstr ""
 
@@ -1063,11 +1082,11 @@ msgstr "Antal krigere"
 msgid "Number of teams:"
 msgstr "Antal hold:"
 
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:83
 msgid "On a character: Changes active one"
 msgstr ""
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:82
 msgid "On map: Select a target"
 msgstr ""
 
@@ -1093,7 +1112,7 @@ msgstr "Faldskærmen er automatisk aktiveret."
 msgid "Password:"
 msgstr "Kodeord:"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:87
 msgid "Pause"
 msgstr ""
 
@@ -1147,7 +1166,7 @@ msgstr "Afslut Wormux"
 msgid "Quit battle"
 msgstr "Forlad kampen"
 
-#: src/menu/help_menu.cpp:64
+#: src/menu/help_menu.cpp:66
 #, fuzzy
 msgid "Quit game"
 msgstr "Kører spillet"
@@ -1206,16 +1225,16 @@ msgstr "Servermodus"
 msgid "Shotgun"
 msgstr "Haglgevær"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:84
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Instillinger menu"
 
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:70
 msgid "Show/hide interface"
 msgstr ""
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:90
 msgid "Show/hide minimap"
 msgstr ""
 
@@ -1231,7 +1250,7 @@ msgstr ""
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:85
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
@@ -1247,15 +1266,15 @@ msgstr "Nogen har puttet en fælde i kassen!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desværre, men der er ingen tilgængelige spil som venter på spillere"
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:245
 msgid "Sound"
 msgstr "Lyd"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:213
 msgid "Sound effects?"
 msgstr "Lydeffekter?"
 
-#: src/menu/options_menu.cpp:239
+#: src/menu/options_menu.cpp:238
 msgid "Sound frequency"
 msgstr "Lydfrekvens"
 
@@ -1284,7 +1303,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Sprøjte"
 
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Talk in network battle"
 msgstr "Tilbage til kampen"
@@ -1443,7 +1462,7 @@ msgstr "Unavngivet"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Version-verifikation fejlede fordi: %s\n"
@@ -1460,8 +1479,8 @@ msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
 
-#: src/menu/help_menu.cpp:87
-msgid "Weapon: Fire Bonus box: falls fast"
+#: src/menu/help_menu.cpp:89
+msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
 
 #. Initialization of teams' energy

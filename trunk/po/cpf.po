@@ -392,7 +392,7 @@ msgid "(dead)"
 msgstr "(kapoute)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:263
+#: src/menu/options_menu.cpp:262
 msgid "(system language)"
 msgstr "ça c'est la langue du système"
 
@@ -405,7 +405,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(illimitées)"
 
-#: src/menu/options_menu.cpp:436
+#: src/menu/options_menu.cpp:435
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -427,6 +427,11 @@ msgstr "Marteau piqueur"
 #: src/menu/results_menu.cpp:422
 msgid "All teams"
 msgstr "Toutes bandes marmailles"
+
+#: src/menu/game_mode_editor.cpp:58
+#, fuzzy
+msgid "Always"
+msgstr "Jouer"
 
 #: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
@@ -475,6 +480,11 @@ msgstr "Batte de Base-ball"
 msgid "Bazooka"
 msgstr "Bazooka"
 
+#: src/menu/game_mode_editor.cpp:59
+#, fuzzy
+msgid "Before action"
+msgstr "Téléportation"
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Chalumeau"
@@ -509,33 +519,38 @@ msgstr "Gaingne pas ouvrir le répertoire des équipes (%s) !"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Gaingne pas ouvrir le répertoire des équipes (%s)!"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Center camera to character"
 msgstr "Nombre de joueurs par équipe"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:91
 msgid "Change active character"
 msgstr ""
 
-#: src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:80
 msgid "Change aim angle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:74
 msgid "Change weapon category"
 msgstr ""
 
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:79
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:166
 #, fuzzy
 msgid "Character"
 msgstr "Parachute"
 
-#: src/menu/options_menu.cpp:194
+#: src/menu/game_mode_editor.cpp:62
+#, fuzzy
+msgid "Character switching"
+msgstr "Parachute"
+
+#: src/menu/options_menu.cpp:193
 msgid "Check updates online?"
 msgstr ""
 
@@ -543,7 +558,7 @@ msgstr ""
 msgid "Choose randomly between the different maps"
 msgstr "choisi une carte n'importe comment"
 
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
 msgstr ""
 
@@ -569,7 +584,7 @@ msgstr "Bazooka"
 msgid "Commit Suicide"
 msgstr "Suicide"
 
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:75
 #, fuzzy
 msgid "Configuration menu"
 msgstr "Gaingne pas charge lo fichier de configuration!"
@@ -604,7 +619,7 @@ msgstr "* Na un n'affaire y s'ar pas ek le son:"
 msgid "Credits"
 msgstr "Crédits"
 
-#: src/menu/game_mode_editor.cpp:79
+#: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr ""
 
@@ -621,12 +636,12 @@ msgstr "Grenade boite de nuit"
 msgid "Displays this message"
 msgstr ""
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:77
 msgid "Drag&drop: Move camera"
 msgstr ""
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:73
+#: src/menu/game_mode_editor.cpp:82
 msgid "Duration before death mode"
 msgstr ""
 
@@ -642,7 +657,7 @@ msgstr "Dynamite"
 msgid "END OF GAME"
 msgstr "LE JEU LA FINI"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:217
 msgid "Effects volume"
 msgstr ""
 
@@ -742,7 +757,7 @@ msgstr "lance-flammes"
 msgid "Football Bomb"
 msgstr "Bombe lacrimogène"
 
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Fullscreen / window"
 msgstr "Plein écran ?"
@@ -778,7 +793,7 @@ msgstr ""
 msgid "Grapple"
 msgstr "grappin"
 
-#: src/menu/game_mode_editor.cpp:85
+#: src/menu/game_mode_editor.cpp:94
 msgid "Gravity"
 msgstr ""
 
@@ -817,7 +832,7 @@ msgstr "Lo chef:"
 msgid "Help"
 msgstr "de l'aide !"
 
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:72
 msgid "High jump"
 msgstr ""
 
@@ -860,7 +875,7 @@ msgstr ""
 "Comment utilises à lu: pese ek le bouton gauche de oute souris sur la cible."
 "une munition par tour"
 
-#: src/game/game_classic.cpp:228
+#: src/game/game_classic.cpp:227
 msgid "Hurry up, you are too slow !!"
 msgstr "Grouille oute calbasse !"
 
@@ -873,7 +888,7 @@ msgstr ""
 "mail (en anglais seulement) si ou plait :"
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:58
+#: src/menu/game_mode_editor.cpp:67
 msgid "Initial energy"
 msgstr "Énergie initiale"
 
@@ -918,11 +933,11 @@ msgstr ""
 "ou su #wormux-fr a irc.freenode.net pou rode d'autres camarades pou jouer "
 "avec."
 
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:76
 msgid "Jump"
 msgstr ""
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr ""
 
@@ -971,7 +986,7 @@ msgstr "Terrain %s, une création de :"
 msgid "Maps"
 msgstr "Terrains"
 
-#: src/menu/game_mode_editor.cpp:64
+#: src/menu/game_mode_editor.cpp:73
 #, fuzzy
 msgid "Max energy"
 msgstr "Énergie initiale"
@@ -988,7 +1003,7 @@ msgstr "Nbr. max. d'images/sec"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:197
 #, fuzzy
 msgid "Misc"
 msgstr "Musique ?"
@@ -1013,20 +1028,20 @@ msgstr "Sa ki serve le moins"
 msgid "Most violent"
 msgstr "Le plus violent"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:88
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:81
 #, fuzzy
 msgid "Move character"
 msgstr "Parachute"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:207
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:204
+#: src/menu/options_menu.cpp:203
 msgid "Music?"
 msgstr "Musique ?"
 
@@ -1038,13 +1053,17 @@ msgstr "Jeu en réseau"
 msgid "Network initialization"
 msgstr "Prépare lo rézo"
 
+#: src/menu/game_mode_editor.cpp:60
+msgid "Never"
+msgstr ""
+
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:51
 #, fuzzy
 msgid "New network game at "
 msgstr "Jeu en réseau"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:242
 msgid "New player warning?"
 msgstr ""
 
@@ -1071,11 +1090,11 @@ msgstr "Nombre de joueurs par équipe"
 msgid "Number of teams:"
 msgstr "Nombre d'équipe :"
 
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:83
 msgid "On a character: Changes active one"
 msgstr ""
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:82
 msgid "On map: Select a target"
 msgstr ""
 
@@ -1101,7 +1120,7 @@ msgstr "Parachute là y ouvre tout seul."
 msgid "Password:"
 msgstr ""
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:87
 msgid "Pause"
 msgstr ""
 
@@ -1156,7 +1175,7 @@ msgstr "Quitte Wormux"
 msgid "Quit battle"
 msgstr "Allons barer"
 
-#: src/menu/help_menu.cpp:64
+#: src/menu/help_menu.cpp:66
 #, fuzzy
 msgid "Quit game"
 msgstr "Lancement du jeu"
@@ -1216,16 +1235,16 @@ msgstr "Mode serveur"
 msgid "Shotgun"
 msgstr "Fusil à pompe"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:84
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Options du menu"
 
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:70
 msgid "Show/hide interface"
 msgstr ""
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:90
 msgid "Show/hide minimap"
 msgstr ""
 
@@ -1241,7 +1260,7 @@ msgstr ""
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:85
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
@@ -1258,16 +1277,16 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 "Scuze, seulement, là, na point personne y attende pour d'autres joueurs"
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:245
 #, fuzzy
 msgid "Sound"
 msgstr "Options sonores"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:213
 msgid "Sound effects?"
 msgstr "Effets sonores ?"
 
-#: src/menu/options_menu.cpp:239
+#: src/menu/options_menu.cpp:238
 msgid "Sound frequency"
 msgstr "Fréquence d'échantillonage ?"
 
@@ -1296,7 +1315,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringue"
 
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Talk in network battle"
 msgstr "Allons bataille"
@@ -1459,7 +1478,7 @@ msgstr "pas de nom"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1477,8 +1496,8 @@ msgstr ""
 "Nous y attende lo server. Alors reste trankil. La seule chose ou gaingne fé "
 "c'est koze ek de moune, ou quitter le zaffaire."
 
-#: src/menu/help_menu.cpp:87
-msgid "Weapon: Fire Bonus box: falls fast"
+#: src/menu/help_menu.cpp:89
+msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
 
 #. Initialization of teams' energy
