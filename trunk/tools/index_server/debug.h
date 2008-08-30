@@ -40,7 +40,7 @@
   {                                                                     \
     if((LEVEL) >= LOG_LEVEL )                                           \
       {                                                                 \
-        printf("%s| %10s,%3i : ", wx_clock.TimeStr(),__FILE__,__LINE__); \
+        printf("%s %s| %10s,%3i : ", wx_clock.DateStr(), wx_clock.TimeStr(),__FILE__,__LINE__); \
         printf(ARGS);                                                   \
         printf("\n");                                                   \
       }                                                                 \

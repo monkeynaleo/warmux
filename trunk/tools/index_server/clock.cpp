@@ -65,16 +65,17 @@ const char* Clock::TimeStr()
   struct tm* t;
   time_t now = time(NULL);
   t = localtime(&now);
-  snprintf(time_str, 1024, "%2i:%02i", t->tm_hour,
-           t->tm_min);
+  snprintf(time_str, 1024, "%2i:%02i:%02i", t->tm_hour,
+           t->tm_min, t->tm_sec);
   return time_str;
 }
 
 const char* Clock::DateStr()
 {
+  struct tm* t;
   time_t now = time(NULL);
-  char* d = ctime(&now);
-  strncpy(date_str, d, 1024);
+  t = localtime(&now);
+  snprintf(date_str, 1024, "%2i/%02i/%04i", t->tm_mday, t->tm_mon, t->tm_year+1900);
   return date_str;
 }
 
