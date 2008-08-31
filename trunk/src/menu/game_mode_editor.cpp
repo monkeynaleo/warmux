@@ -85,7 +85,7 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
 							 200, 3000);
   AddWidget(opt_time_before_death_mode);
 
-  opt_damage_during_death_mode = new SpinButtonWithPicture(_("Damage per turn during death mode"), "menu/energy",
+  opt_damage_during_death_mode = new SpinButtonWithPicture(_("Damage per turn during death mode"), "menu/death_energy",
 							   option_size,
 							   1, 1,
 							   1, 20);
