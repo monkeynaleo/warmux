@@ -100,6 +100,11 @@ int SetMaxConnection()
   return limit.rlim_cur;
 }
 
+static void signal_handler(int sig, siginfo_t */*si*/, void */*unused*/)
+{
+  DPRINT(INFO, "Signal received: %d", sig);
+}
+
 int main(int argc, void** argv)
 {
   DPRINT(INFO, "Wormux index server version %i", VERSION);
@@ -130,15 +135,12 @@ int main(int argc, void** argv)
       exit(EXIT_FAILURE);
     }
 
-
-  // Ignore broken pipe signal (elsewise we would break,
-  // as soon as we are trying to write on client that closed)
-  sigset_t sigpipe_mask;
-  if (sigemptyset(&sigpipe_mask) == -1)
-    TELL_ERROR;
-  if (sigaddset(&sigpipe_mask, SIGPIPE) == -1)
-    TELL_ERROR;
-  if (sigprocmask(SIG_BLOCK, &sigpipe_mask, NULL) == -1)
+  // silently handle SIGPIPE... (not sure it is needed :-/)
+  struct sigaction sa;
+  sa.sa_flags = SA_SIGINFO;
+  sigemptyset(&sa.sa_mask);
+  sa.sa_sigaction = signal_handler;
+  if (sigaction(SIGPIPE, &sa, NULL) == -1)
     TELL_ERROR;
 
   // Set the maximum number of connection
