@@ -28,6 +28,7 @@
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
+#include "interface/interface.h"
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -99,17 +100,20 @@ void Construct::Draw()
   if (!IsInUse()) {
     Weapon::Draw();
 
-    dst = Mouse::GetInstance()->GetWorldPosition();
-    construct_spr->SetRotation_rad(angle);
-    construct_spr->Draw(dst - construct_spr->GetSize() / 2);
+    if (EnoughAmmo() && EnoughAmmoUnit() && !Interface::GetInstance()->weapons_menu.IsDisplayed()) {
+      dst = Mouse::GetInstance()->GetWorldPosition();
+      construct_spr->SetRotation_rad(angle);
+      construct_spr->Draw(dst - construct_spr->GetSize() / 2);
+
 #ifdef DEBUG
-    if (IsLOGGING("test_rectangle"))
-    {
-      Rectanglei test_rect(dst - construct_spr->GetSizeMax() / 2, construct_spr->GetSizeMax());
-      test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-      GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
-    }
+      if (IsLOGGING("test_rectangle"))
+	{
+	  Rectanglei test_rect(dst - construct_spr->GetSizeMax() / 2, construct_spr->GetSizeMax());
+	  test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+	  GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
+	}
 #endif
+    }
   }
 }
 
