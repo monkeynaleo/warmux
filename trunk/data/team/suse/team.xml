@@ -7,7 +7,7 @@
   <surface name="big_flag" file="flag64.png" />
   <team>
 	<character name="Geeko" body="suse"/>
-	<character name="opensuse'" body="suse"/>
+	<character name="opensuse" body="suse"/>
 	<character name="suse_LE" body="suse"/>
 	<character name="ZYpp" body="suse"/>
 	<character name="Microsuse" body="suse"/>
