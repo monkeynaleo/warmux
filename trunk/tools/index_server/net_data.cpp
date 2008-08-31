@@ -167,11 +167,11 @@ bool NetData::ConnectTo(const std::string & address, const int & port)
 bool NetData::ReceiveInt(int & nbr)
 {
   uint32_t packet;
-  if( read(fd, &packet, sizeof(packet)) == -1 )
-    {
-      PRINT_ERROR;
-      return false;
-    }
+
+  if (recv(fd, &packet, sizeof(packet), MSG_DONTWAIT) != sizeof(packet)) {
+    PRINT_ERROR;
+    return false;
+  }
 
   unsigned int u_nbr = ntohl(packet);
   nbr = *((int*)&u_nbr);
@@ -205,30 +205,22 @@ bool NetData::ReceiveStr(std::string & full_str)
       memset(str, 0, str_size+1);
     }
 
-  // Check if the string is already arrived
- //  if (received == 0)
-//     {
-//       printf("the string is already arrived\n");
-//       full_str = "";
-//       return true;
-//     }
-
   unsigned int old_size = strlen(str);
   unsigned int to_receive = str_size - old_size;
   int str_received;
 
-  str_received = read(fd, str + old_size, to_receive);
+  str_received = recv(fd, str + old_size, to_receive, MSG_DONTWAIT);
 
-  if( str_received == -1 )
+  if (str_received == -1 )
     {
       PRINT_ERROR;
-      return false;
+      goto err_rcv;
     }
 
   // Check the client is not sending some 0
   // that could lock us
   if( strlen(str) != old_size + str_received )
-    return false;
+    goto err_rcv;
 
   bytes_received -= str_received;
   DPRINT(TRAFFIC, "Received string: %s", str);
@@ -241,6 +233,10 @@ bool NetData::ReceiveStr(std::string & full_str)
     }
   UpdatePing();
   return true;
+
+ err_rcv:
+  delete []str;
+  return false;
 }
 
 bool NetData::SendInt(const int &nbr)
@@ -250,11 +246,10 @@ bool NetData::SendInt(const int &nbr)
   unsigned int u_nbr = *((unsigned int*)&nbr);
   packet = htonl(u_nbr);
 
-  if( write(fd, &packet, sizeof(packet)) == -1 )
-    {
-      PRINT_ERROR;
-      return false;
-    }
+  if ( send(fd, &packet, sizeof(packet), MSG_NOSIGNAL) != sizeof(packet) ) {
+    PRINT_ERROR;
+    return false;
+  }
 
   DPRINT(TRAFFIC, "Sent int: %i", nbr);
   UpdatePing();
@@ -263,14 +258,13 @@ bool NetData::SendInt(const int &nbr)
 
 bool NetData::SendStr(const std::string &full_str)
 {
-  if( ! SendInt((int)full_str.size()) )
+  if (!SendInt((int)full_str.size()))
     return false;
 
-  if( write(fd, full_str.c_str(), full_str.size()) == -1 )
-    {
-      PRINT_ERROR;
-      return false;
-    }
+  if ( send(fd, full_str.c_str(), full_str.size(), MSG_NOSIGNAL) != ssize_t(full_str.size()) ) {
+    PRINT_ERROR;
+    return false;
+  }
 
   DPRINT(TRAFFIC, "Sent string: %s", full_str.c_str());
   UpdatePing();
@@ -347,8 +341,10 @@ bool NetData::Receive()
     }
 
   // Check that enough data has been received
-  if (bytes_received + 2*sizeof(uint32_t) < msg_size)
+  if (bytes_received + 2*sizeof(uint32_t) < msg_size) {
+    DPRINT(TRAFFIC, "Not enough data: %zu / %zu", bytes_received + 2*sizeof(uint32_t), msg_size);
     return true;
+  }
 
   switch (msg_id) {
   case TS_MSG_PING:
