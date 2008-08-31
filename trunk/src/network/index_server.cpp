@@ -25,12 +25,13 @@
 #include "network/download.h"
 #include "game/config.h"
 #include "graphic/video.h"
+#include "include/app.h"
+#include "include/constant.h"
 #include "network/index_server.h"
 #include "network/index_svr_msg.h"
 #include "network/network.h"
-#include "include/app.h"
-#include "include/constant.h"
 #include "tool/debug.h"
+#include "tool/i18n.h"
 #include "tool/random.h"
 
 IndexServer::IndexServer():
@@ -56,6 +57,8 @@ IndexServer::~IndexServer()
 /*************  Connection  /  Disconnection  ******************/
 connection_state_t IndexServer::Connect()
 {
+  connection_state_t r = CONN_REJECTED;
+
   MSG_DEBUG("index_server", "Connecting..");
   ASSERT(!connected);
 
@@ -72,7 +75,7 @@ connection_state_t IndexServer::Connect()
 
   // If it's still empty, then something went wrong when downloading it
   if( server_lst.size() == 0 )
-    return CONN_REJECTED;
+    return CONN_BAD_HOST;
 
   std::string addr;
   int port;
@@ -82,62 +85,84 @@ connection_state_t IndexServer::Connect()
   // Until we find one running
   while (GetServerAddress(addr, port, nb_servers_tried))
   {
-    connection_state_t r = Network::CheckHost(addr, port);
+    r = Network::CheckHost(addr, port);
     if (r != CONNECTED)
-      return r;
+      continue;
 
     // CheckHost opens and closes a connection to the server, so before reconnecting
     // wait a bit, so the connection really gets closed ..
     SDL_Delay(500);
 
-    if (ConnectTo( addr, port))
-      return CONNECTED;
+    r = ConnectTo(addr, port);
+    if (r == CONNECTED)
+      return r;
   }
 
   // Undo what was done
   Disconnect();
 
-  return CONN_REJECTED;
+  return r;
 }
 
-bool IndexServer::ConnectTo(const std::string & address, const int & port)
+connection_state_t IndexServer::ConnectTo(const std::string & address, const int & port)
 {
+  connection_state_t status = CONN_REJECTED;
+  int r;
+
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
-  AppWormux::GetInstance()->video->Flip();
 
   Network::Init(); // To get SDL_net initialized
 
   MSG_DEBUG("index_server", "Opening connection");
 
-  if( SDLNet_ResolveHost(&ip, address.c_str() , port) == -1 )
-  {
+  if (SDLNet_ResolveHost(&ip, address.c_str() , port) == -1 ) {
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return false;
+    status = CONN_BAD_HOST;
+    goto err;
   }
 
   socket = SDLNet_TCP_Open(&ip);
-  if(!socket)
-  {
+  if (!socket) {
     printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
-    return false;
+    status = CONN_REJECTED;
+    goto err;
   }
 
   sock_set = SDLNet_AllocSocketSet(1);
-  if(!sock_set)
-  {
+  if (!sock_set) {
     printf("SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
-    return false;
+    status = CONN_REJECTED;
+    goto err_alloc_socket_set;
   }
-  SDLNet_TCP_AddSocket(sock_set, socket);
 
-  connected = true;
+  r = SDLNet_TCP_AddSocket(sock_set, socket);
+  if (r != 1) {
+    printf("SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
+    status = CONN_REJECTED;
+    goto err_add_socket;
+  }
 
-  return HandShake();
+  connected = true; // we need it before HandShake
+  status = HandShake();
+  if (status != CONNECTED)
+    goto err_handshake;
+
+  return status;
+
+ err_handshake:
+  connected = false;
+  SDLNet_TCP_DelSocket(sock_set, socket);
+ err_add_socket:
+  SDLNet_FreeSocketSet(sock_set);
+ err_alloc_socket_set:
+  SDLNet_TCP_Close(socket);
+ err:
+  return status;
 }
 
 void IndexServer::Disconnect()
 {
-  if( hidden_server )
+  if (hidden_server)
   {
     hidden_server = false;
     return;
@@ -227,8 +252,10 @@ bool IndexServer::SendMsg()
 int IndexServer::ReceiveInt()
 {
   //somehow we can get here while being disconnected... this should not be
-  if (!connected)
+  if (!connected) {
+    MSG_DEBUG("index_server", "Not connected!!\n");
     return -1;
+  }
 
   int r, nbr;
   r = Network::ReceiveInt(sock_set, socket, nbr);
@@ -258,8 +285,9 @@ std::string IndexServer::ReceiveStr(size_t maxlen)
   return str;
 }
 
-bool IndexServer::HandShake()
+connection_state_t IndexServer::HandShake()
 {
+  connection_state_t status = CONN_REJECTED;
   bool r;
   int msg;
   std::string sign;
@@ -278,23 +306,38 @@ bool IndexServer::HandShake()
   MSG_DEBUG("index_server", "Receiving...");
 
   msg = ReceiveInt();
+  MSG_DEBUG("index_server", "Received: %d", msg);
+
   if (msg == -1 || msg != TS_MSG_VERSION)
     goto error;
 
   MSG_DEBUG("index_server", "Receiving...");
   sign = ReceiveStr(20);
 
+  MSG_DEBUG("index_server", "Received: %s", sign.c_str());
+
+  if (sign == "Bad version") {
+    status = CONN_WRONG_VERSION;
+    sign = ReceiveStr(20);
+    AppWormux::DisplayError(Format(_("Sorry, your version is not supported anymore. "
+				     "Supported version are %s. "
+				     "You can download a updated version "
+				     "on http://www.wormux.org/wiki/download.php"),
+				   sign.c_str()));
+    goto error;
+  }
+
   if (sign != "MassMurder!")
     goto error;
 
   MSG_DEBUG("index_server", "Handshake : OK");
 
-  return true;
+  status = CONNECTED;
+  return status;
 
  error:
   MSG_DEBUG("index_server", "Handshake : ERROR!");
-  Disconnect();
-  return false;
+  return status;
 }
 
 bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd)

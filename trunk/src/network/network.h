@@ -60,6 +60,7 @@ typedef enum
   CONN_REJECTED,
   CONN_TIMEOUT,
   CONN_WRONG_PASSWORD,
+  CONN_WRONG_VERSION
 } connection_state_t;
 
 class Network : public Singleton<Network>

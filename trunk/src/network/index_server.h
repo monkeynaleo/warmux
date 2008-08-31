@@ -81,10 +81,10 @@ class IndexServer : public Singleton<IndexServer>
   // Gives the address of a server in the list
   bool GetServerAddress(std::string & address, int & port, uint& nb_tries);
   // Connect to a server
-  bool ConnectTo(const std::string & address, const int & port);
+  connection_state_t ConnectTo(const std::string & address, const int & port);
 
   // Perform a handshake with the server
-  bool HandShake();
+  connection_state_t HandShake();
 public:
   IndexServer();
   ~IndexServer();

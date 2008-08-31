@@ -266,7 +266,9 @@ std::list<GameServerInfo> NetworkConnectionMenu::GetList()
   // Connect to the index server
   connection_state_t conn = IndexServer::GetInstance()->Connect();
   if (conn != CONNECTED) {
-    DisplayNetError(conn);
+    if (conn != CONN_WRONG_VERSION) {
+      DisplayNetError(conn);
+    }
     msg_box->NewMessage(_("Error: Unable to contact the index server to search for an internet game"), c_red);
     return lst;
   }

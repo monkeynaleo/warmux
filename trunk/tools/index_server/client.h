@@ -49,6 +49,7 @@ class Client : public NetData
 			 const std::string & passwd);
 
   bool SendSignature();
+  bool RejectBadVersion();
   bool SendList();
   void AddMeToClientsList(const std::string & version);
 

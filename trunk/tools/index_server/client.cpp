@@ -113,6 +113,12 @@ bool Client::HandShake(const std::string & version)
       if (!SendInt( VERSION ))
 	goto error;
     }
+  else
+    {
+      DPRINT(MSG, "Bad client version: %s", version.c_str());
+      RejectBadVersion();
+      goto error;
+    }
 
   AddMeToClientsList( version );
   msg_id = TS_NO_MSG;
@@ -282,6 +288,28 @@ bool Client::SendSignature()
 
  err_send:
   DPRINT(MSG, "Fail to send signature");
+  return false;
+}
+
+bool Client::RejectBadVersion()
+{
+  bool r;
+  DPRINT(MSG, "Rejecting wrong version client");
+
+  r = SendInt((int)TS_MSG_VERSION);
+  if (!r)
+    goto err_send;
+  r = SendStr("Bad version");
+  if (!r)
+    goto err_send;
+  r = SendStr("0.8, 0.8svn");
+  if (!r)
+    goto err_send;
+
+  return true;
+
+ err_send:
+  DPRINT(MSG, "Fail to send bad version msg");
   return false;
 }
 
