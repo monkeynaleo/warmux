@@ -2,7 +2,7 @@
 <!DOCTYPE game_mode SYSTEM "game_mode.dtd" []>
 <game_mode>
 
-  <auto_change_character>false</auto_change_character>
+  <auto_change_character>true</auto_change_character>
   <allow_character_selection>before_first_action</allow_character_selection>
   <!-- either 'always','never','before_first_action' -->
 
