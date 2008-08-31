@@ -2,9 +2,9 @@
 <!DOCTYPE game_mode SYSTEM "game_mode.dtd" []>
 <game_mode>
 
-
+  <auto_change_character>true</auto_change_character>
   <allow_character_selection>before_first_action_and_end_turn</allow_character_selection>
-  <!-- either 'always','never','before_first_action','change_on_end_turn','before_first_action_and_end_turn'-->
+  <!-- either 'always','never','before_first_action' -->
 
   <duration_turn>30</duration_turn>
   <duration_move_player>2</duration_move_player>
@@ -419,7 +419,7 @@
       <range>25</range>
       <strength>300</strength>
       <display_crosshair>0</display_crosshair>
-      <speed_on_hit>1000</speed_on_hit> 
+      <speed_on_hit>1000</speed_on_hit>
     </slap>
 
     <snipe_rifle>
