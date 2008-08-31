@@ -144,7 +144,8 @@ WeaponsMenu::WeaponsMenu():
   jelly_time(JELLY_TIME),
   rotation_time(ROTATION_TIME),
   nbr_weapon_type(0),
-  nb_weapon_type(new int[MAX_NUMBER_OF_WEAPON])
+  nb_weapon_type(new int[MAX_NUMBER_OF_WEAPON]),
+  old_pointer(Mouse::POINTER_SELECT)
 {
   // Loading value from XML
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
@@ -220,7 +221,7 @@ void WeaponsMenu::Show()
 
     JukeBox::GetInstance()->Play("share", "menu/weapon_menu_show");
 
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+    old_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   }
 }
 
@@ -236,6 +237,8 @@ void WeaponsMenu::Hide(bool play_sound)
 
     if (play_sound)
       JukeBox::GetInstance()->Play("share", "menu/weapon_menu_hide");
+
+    Mouse::GetInstance()->SetPointer(old_pointer);
   }
 }
 
