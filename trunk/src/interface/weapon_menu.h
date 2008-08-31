@@ -23,8 +23,9 @@
 #define WEAPON_MENU_H
 
 #include "include/base.h"
-#include "tool/affine_transform.h"
 #include "graphic/polygon.h"
+#include "tool/affine_transform.h"
+
 #include <vector>
 
 // Forward declaration

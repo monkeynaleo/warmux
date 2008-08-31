@@ -219,6 +219,8 @@ void WeaponsMenu::Show()
     show = true;
 
     JukeBox::GetInstance()->Play("share", "menu/weapon_menu_show");
+
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   }
 }
 
