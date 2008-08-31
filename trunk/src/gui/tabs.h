@@ -47,8 +47,6 @@ private:
   Button* next_tab_bt;
   Point2i tab_size;
 
-  void SelectTab(uint current);
-
   void PrevTab();
   void NextTab();
 
@@ -62,6 +60,8 @@ public:
   const std::string& GetCurrentTabId() const;
 
   uint GetHeaderHeight() const;
+
+  void SelectTab(uint current);
 
   // from widget
   virtual void NeedRedrawing();

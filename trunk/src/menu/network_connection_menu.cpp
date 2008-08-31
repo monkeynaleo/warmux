@@ -80,7 +80,7 @@ public:
   const std::string& GetPort() { return ((GameInfoBox*)m_items[selected_item])->port; }
 };
 
-NetworkConnectionMenu::NetworkConnectionMenu() :
+NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Menu("menu/bg_network", vOkCancel)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
@@ -240,6 +240,17 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   msg_box->NewMessage(""); // Skip a line
 
   resource_manager.UnLoadXMLProfile(res);
+
+  switch (action) {
+  case NET_HOST:
+    tabs->SelectTab(1);
+    break;
+  case NET_CONNECT:
+    tabs->SelectTab(2);
+    break;
+  default:
+    break;
+  }
 }
 
 NetworkConnectionMenu::~NetworkConnectionMenu()

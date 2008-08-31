@@ -39,6 +39,13 @@ class GameListBox;
 
 class NetworkConnectionMenu : public Menu
 {
+public:
+  typedef enum {
+    NET_NOTHING,
+    NET_HOST,
+    NET_CONNECT
+  } network_menu_action_t;
+
 private:
   /* If you need this, implement it (correctly)*/
   NetworkConnectionMenu(const NetworkConnectionMenu&);
@@ -83,8 +90,8 @@ private:
 		       const std::string& passwd);
 
 public:
-   NetworkConnectionMenu();
-   ~NetworkConnectionMenu();
+  NetworkConnectionMenu(network_menu_action_t action);
+  ~NetworkConnectionMenu();
 };
 
 #endif

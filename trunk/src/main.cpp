@@ -61,7 +61,7 @@ using namespace std;
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
 static const char* skin = NULL;
-//static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_NOTHING;
 
 AppWormux *AppWormux::singleton = NULL;
 
@@ -125,9 +125,8 @@ int AppWormux::Main(void)
         }
         case MainMenu::NETWORK:
         {
-          NetworkConnectionMenu network_connection_menu;
+          NetworkConnectionMenu network_connection_menu(net_action);
           menu = &network_connection_menu;
-          //network_connection_menu.SetAction(net_action);
           network_connection_menu.Run(skip_menu);
           break;
         }
@@ -168,7 +167,7 @@ int AppWormux::Main(void)
       menu = NULL;
       choice = MainMenu::NONE;
       skip_menu = false;
-      //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+      net_action = NetworkConnectionMenu::NET_NOTHING;
     }
     while (!quit);
 
@@ -318,7 +317,7 @@ void PrintUsage(const char* cmd_name)
   printf("%s -r|--reset-config : reset the configuration to default\n", cmd_name);
   printf("%s -y|--skin-viewer [team] : start the skin viewer (for development only)\n", cmd_name);
   printf("%s [-p|--play] [-g|--game-mode <game_mode>]"
-	 " [-i|--internet] [-s|--server] [-c|--client [ip]]\n"
+	 " [-s|--server] [-c|--client [ip]]\n"
 	 " [-l [ip/hostname of index server]]\n"
 #ifdef DEBUG
 	 " [-d|--debug <debug_masks>|all]\n"
@@ -340,7 +339,6 @@ void ParseArgs(int argc, char * argv[])
       {"blitz",      no_argument,       NULL, 'b'},
       {"version",    no_argument,       NULL, 'v'},
       {"play",       no_argument,       NULL, 'p'},
-      {"internet",   no_argument,       NULL, 'i'},
       {"client",     optional_argument, NULL, 'c'},
       {"server",     no_argument,       NULL, 's'},
       {"skin-viewer",optional_argument, NULL, 'y'},
@@ -350,7 +348,7 @@ void ParseArgs(int argc, char * argv[])
       {NULL,         no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hbvpic::l::sy::g:d:",
+  while ((c = getopt_long (argc, argv, "hbvpc::l::sy::g:d:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
@@ -369,7 +367,7 @@ void ParseArgs(int argc, char * argv[])
           break;
         case 'c':
           choice = MainMenu::NETWORK;
-          //net_action = NetworkConnectionMenu::NET_CONNECT_LOCAL;
+          net_action = NetworkConnectionMenu::NET_CONNECT;
           if (optarg)
             {
               Config::GetInstance()->SetNetworkClientHost(optarg);
@@ -386,12 +384,7 @@ void ParseArgs(int argc, char * argv[])
           break;
         case 's':
           choice = MainMenu::NETWORK;
-          //net_action = NetworkConnectionMenu::NET_HOST;
-          skip_menu = true;
-          break;
-        case 'i':
-          choice = MainMenu::NETWORK;
-          //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
+          net_action = NetworkConnectionMenu::NET_HOST;
           skip_menu = true;
           break;
         case 'l':
@@ -401,7 +394,6 @@ void ParseArgs(int argc, char * argv[])
         case 'y':
           choice = MainMenu::SKIN_VIEWER;
           skin = optarg;
-          //net_action = NetworkConnectionMenu::NET_BROWSE_INTERNET;
           skip_menu = true;
           break;
 	case 'g':
