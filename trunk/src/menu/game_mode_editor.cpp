@@ -44,7 +44,7 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   game_modes.push_back(std::pair<std::string, std::string>("unlimited", "Unlimited"));
   game_modes.push_back(std::pair<std::string, std::string>("blitz", "Blitz"));
 
-  opt_game_mode = new ComboBox(_("Game mode"), "menu/resolution", option_size,
+  opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
 			       game_modes, Config::GetInstance()->GetGameMode());
   AddWidget(opt_game_mode);
 
@@ -64,13 +64,13 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   AddWidget(opt_allow_character_selection);
 
   /* Characters energy */
-  opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
+  opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/init_energy",
                                              option_size,
                                              10, 10,
                                              10, 500);
   AddWidget(opt_energy_ini);
 
-  opt_energy_max = new SpinButtonWithPicture(_("Max energy"), "menu/energy",
+  opt_energy_max = new SpinButtonWithPicture(_("Max energy"), "menu/max_energy",
                                              option_size,
                                              10, 10,
                                              10, 500);
@@ -79,7 +79,7 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
 
   /* some death mode options */
 
-  opt_time_before_death_mode = new SpinButtonWithPicture(_("Duration before death mode"), "menu/timing_turn",
+  opt_time_before_death_mode = new SpinButtonWithPicture(_("Duration before death mode"), "menu/timing_death",
 							 option_size,
 							 200, 50,
 							 200, 3000);

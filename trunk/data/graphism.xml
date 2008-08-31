@@ -65,9 +65,13 @@
 
   <!-- Game mode options -->
 
+  <surface name="game_mode" file="menu/game_mode.png" />
   <surface name="timing_turn" file="menu/timing_turn.png" />
   <surface name="timing_end_of_turn" file="menu/timing_end_turn.png" />
+  <surface name="timing_death" file="menu/timing_death.png" />
   <surface name="energy" file="menu/display_energy.png" />
+  <surface name="init_energy" file="menu/init_energy.png" />
+  <surface name="max_energy" file="menu/max_energy.png" />
   <surface name="character_selection" file="menu/timing_switch.png" />
   <surface name="gravity" file="menu/gravity.png" />
 
