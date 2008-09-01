@@ -1,80 +1,96 @@
 #!/bin/sh
 
-print_usage() {
-    echo "Usage: $0 lang"
-    exit 1
-}
+# WARNING: It runs only with xulrunner 1.8 ...
+# http://releases.mozilla.org/pub/mozilla.org/xulrunner/releases/
 
-check_binaries() {
-    bins="wget xulrunner awk ps2pdf"
-    for bin in $bins; do
-	echo "looking for $bin..."
-	which $bin
-	if [ $? -ne 0 ]; then
-	    echo "ERROR: you need to install $bin"
-	    exit
-	fi
-    done
+print_usage() {
+    echo "Usage: $0 lang lang2 lang3 ..."
+    exit 1
 }
 
 if [ "$1" = "" ]; then
     print_usage
 fi
 
-check_binaries
+generate_doc() {
 
-lang=$1
-page=www.wormux.org/wiki/howto/$lang/play
+    echo "** Generating documentation for lang $lang"
 
-toolsdir=`dirname $0`
-outdir=`pwd`/wormux-doc
+    lang=$1
+    page=www.wormux.org/wiki/howto/$lang/play
+    outdir=`pwd`/wormux-doc
 
-# create the output directory
-mkdir -p $outdir
+    # create the output directory
+    mkdir -p $outdir
 
-# creating a temporary directory
-tmpdir=`mktemp -d /tmp/wormux.XXXXXX`
+    # creating a temporary directory
+    tmpdir=`mktemp -d /tmp/wormux.XXXXXX`
 
-# downloading the page
-echo "* downloading the page"
+    # downloading the page
+    echo "* downloading the page"
 
-wget -q -p -k http://${page}.php -P ${tmpdir}
-if [ $? -ne 0 ]; then
-	echo "Doc for language ${lang} does not exist: failed to download ${page}"
+    wget -q -p -k http://${page}.php -P ${tmpdir}
+    if [ $? -ne 0 ]; then
+	echo "ERROR: Doc for language ${lang} does not exist: failed to download ${page}"
 	exit 2
-fi
+    fi
 
-# removing headers
-echo "* removing headers"
-mv ${tmpdir}/${page}.php ${tmpdir}/${page}_all.html || exit 3
-awk -f ${toolsdir}/getdoc.awk ${tmpdir}/${page}_all.html > ${tmpdir}/${page}.html || exit 4
+    # removing headers
+    echo "* removing headers"
+    mv ${tmpdir}/${page}.php ${tmpdir}/${page}_all.html
+    awk -f `dirname $0`/getdoc.awk ${tmpdir}/${page}_all.html > ${tmpdir}/${page}.html
 
-# temporaly installing mozilla2ps
-echo "* installing mozilla2ps in a temporary directory"
-xulrunner --install-app ${toolsdir}/mozilla2ps-*.xulapp ${tmpdir}/ || exit 5
+    if [ $? -ne 0 ]; then
+	echo "ERROR: Fail to remove headers!"
+	exit 3
+    fi
 
-# exporting to ps using mozilla2ps (output path must be absolute path)
-echo "* exporting to .ps"
-html2ps="xulrunner ${tmpdir}/mozilla2ps/application.ini file://${tmpdir}/${page}.html ${outdir}/${lang}.ps"
-#echo $html2ps
-$html2ps || exit 6
+    # temporaly installing mozilla2ps
+    echo "* installing mozilla2ps"
+    ./xulrunner/xulrunner --install-app ./mozilla2ps-*.xulapp ${tmpdir}/
 
-if [ -f ${outdir}/${lang}.ps ]; then
-    echo "File created: ${outdir}/${lang}.ps"
-else
-    echo "ERROR: file .ps has not been generated"
-    exit 1
-fi
+    if [ $? -ne 0 ]; then
+	echo "ERROR: Fail to install mozilla2ps"
+	exit 3
+    fi
 
-# convert ps to pdf
-echo "* converting to .pdf"
-ps2pdf ${outdir}/${lang}.ps ${outdir}/${lang}.pdf
 
-if [ -f ${outdir}/${lang}.pdf ]; then
-    echo "File created: ${outdir}/${lang}.pdf"
-else
-    echo "ERROR: file .pdf has not been generated"
-fi
+    # exporting to ps using mozilla2ps (output path must be absolute path)
+    echo "* exporting to .ps"
+    ./xulrunner/xulrunner ${tmpdir}/mozilla2ps/application.ini file://${tmpdir}/${page}.html ${outdir}/${lang}.ps
 
-# removing temp directory
-rm -rf ${tmpdir}
+    if [ $? -ne 0 ]; then
+	echo "ERROR: Fail to convert to .ps"
+	exit 4
+    fi
+
+    if [ -f ${outdir}/${lang}.ps ]; then
+	echo "File created: ${outdir}/${lang}.ps"
+    else
+	echo "ERROR file ${outdir}/${lang}.ps does not exist"
+    fi
+
+    # convert ps to pdf
+    echo "* converting to .pdf"
+    ps2pdf ${outdir}/${lang}.ps ${outdir}/${lang}.pdf
+
+    if [ $? -ne 0 ]; then
+	echo "ERROR: Fail to convert to .pdf"
+	exit 4
+    fi
+
+    if [ -f ${outdir}/${lang}.pdf ]; then
+	echo "File created: ${outdir}/${lang}.pdf"
+    else
+	echo "ERROR file ${outdir}/${lang}.pdf does not exist"
+    fi
+
+    # removing temp directory
+    rm -rf ${tmpdir}
+
+    echo ""
+}
+
+for lang in $@; do
+    generate_doc $lang
+done
