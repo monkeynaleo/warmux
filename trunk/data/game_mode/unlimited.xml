@@ -127,7 +127,7 @@
     </airhammer>
 
     <automatic_bazooka>
-      <max_strength>75</max_strength>
+      <max_strength>55</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
       <min_angle>-60</min_angle>
@@ -155,7 +155,7 @@
     </baseball>
 
     <bazooka>
-      <max_strength>75</max_strength>
+      <max_strength>55</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
       <min_angle>-60</min_angle>
@@ -167,7 +167,7 @@
     </bazooka>
 
     <cluzooka>
-      <max_strength>75</max_strength>
+      <max_strength>55</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>25</damage>
       <min_angle>-60</min_angle>
@@ -209,7 +209,7 @@
     </construct>
 
     <cluster_bomb>
-      <max_strength>75</max_strength>
+      <max_strength>55</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>20</damage>
       <min_angle>-89</min_angle>
@@ -303,7 +303,7 @@
     </grapple>
 
     <grenade>
-      <max_strength>75</max_strength>
+      <max_strength>55</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
       <min_angle>-89</min_angle>

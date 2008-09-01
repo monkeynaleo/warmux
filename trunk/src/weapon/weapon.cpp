@@ -53,7 +53,7 @@
 extern Profile *weapons_res_profile;
 
 const int INFINITE_AMMO = -1;
-const uint MAX_TIME_LOADING = 2000;
+const uint MAX_TIME_LOADING = 3500;
 
 // XXX Unused ?
 //const uint WEAPON_BOX_BUTTON_DX = 20;
@@ -436,7 +436,7 @@ void Weapon::UpdateStrength(){
     return ;
 
   uint time = Time::GetInstance()->Read() - m_first_time_loading;
-  double val = (max_strength * time) / MAX_TIME_LOADING;
+  double val = (max_strength * time*time) / (MAX_TIME_LOADING*MAX_TIME_LOADING);
 
   m_strength = InRange_Double (val, 0.0, max_strength);
 
