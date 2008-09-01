@@ -38,6 +38,7 @@
 #include "tool/point.h"
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
+#include "game/time.h"
 
 std::string __pointers[] = {
   "mouse/pointer_standard",
@@ -58,7 +59,8 @@ std::string __pointers[] = {
 std::map<Mouse::pointer_t, MouseCursor> Mouse::cursors;
 
 Mouse::Mouse():
-  lastpos(-1,-1)
+  lastpos(-1,-1),
+  last_hide_time(0)
 {
   visible = MOUSE_VISIBLE;
 
@@ -316,18 +318,24 @@ void Mouse::Draw() const
 
 void Mouse::Show()
 {
+  if(((Time::GetInstance()->Read()-last_hide_time) > 2000) && (visible == MOUSE_HIDDEN))
+  {
+      CenterPointer();
+  }
   visible = MOUSE_VISIBLE;
 
   if (Config::GetInstance()->GetDefaultMouseCursor()) {
     SDL_ShowCursor(true); // be sure cursor is visible
   }
+
 }
 
 void Mouse::Hide()
 {
   visible = MOUSE_HIDDEN;
   SDL_ShowCursor(false); // be sure cursor is invisible
-  CenterPointer();
+
+  last_hide_time = Time::GetInstance()->Read();
 }
 
 // Center the pointer on the screen
