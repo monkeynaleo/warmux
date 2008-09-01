@@ -477,6 +477,7 @@
 
 <!-- ###### Jetpack ###### -->
 <clothe name="jetpack">
+	<c_member name="tail"/>
 	<c_member name="jetpack-left"/>
 	<c_member name="jetpack-right"/>
 	<c_member name="arm-left"/>
@@ -484,7 +485,6 @@
 	<c_member name="arm3-left-R"/>
 	<c_member name="weapon"/>
 	<c_member name="foot-left"/>
-	<c_member name="tail"/>
 	<c_member name="foot-right"/>
 	<c_member name="body"/>
 	<c_member name="hair"/>
@@ -503,6 +503,7 @@
 </clothe>
 
 <clothe name="jetpack-fire"> <!-- When jetpack weapon is selected and used -->
+	<c_member name="tail"/>
 	<c_member name="jetpack-left-fire"/>
 	<c_member name="jetpack-left"/>
 	<c_member name="jetpack-right-fire"/>
@@ -512,7 +513,6 @@
 	<c_member name="arm3-left-R"/>
 	<c_member name="weapon"/>
 	<c_member name="foot-left"/>
-	<c_member name="tail"/>
 	<c_member name="foot-right"/>
 	<c_member name="body"/>
 	<c_member name="hair"/>
