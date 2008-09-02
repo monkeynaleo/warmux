@@ -40,9 +40,9 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   // ################################################
 
   std::vector<std::pair<std::string, std::string> > game_modes;
-  game_modes.push_back(std::pair<std::string, std::string>("classic", "Classic"));
-  game_modes.push_back(std::pair<std::string, std::string>("unlimited", "Unlimited"));
-  game_modes.push_back(std::pair<std::string, std::string>("blitz", "Blitz"));
+  game_modes.push_back(std::pair<std::string, std::string>("classic", _("Classic")));
+  game_modes.push_back(std::pair<std::string, std::string>("unlimited", _("Unlimited")));
+  game_modes.push_back(std::pair<std::string, std::string>("blitz", _("Blitz")));
 
   opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
 			       game_modes, Config::GetInstance()->GetGameMode());

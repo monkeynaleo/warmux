@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-05-19 18:09+0200\n"
 "Last-Translator: Vojtěch Gondžala <vojtech.gondzala@gmail.com>\n"
 "Language-Team: Čeština\n"
@@ -230,7 +231,7 @@ msgstr[0] "Tým %s získal %u tříštivou bombu!"
 msgstr[1] "Tým %s získal %u tříštivé bomby!"
 msgstr[2] "Tým %s získal %u tříštivých bomb!"
 
-#: src/weapon/construct.cpp:81
+#: src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -495,19 +496,13 @@ msgstr ""
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/main.cpp:287
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Autoři:"
 
 #: src/weapon/auto_bazooka.cpp:220
 msgid "Automatic Bazooka"
 msgstr "Automatická bazuka"
-
-#. #############################
-#. Automatic connection - we have nothing to display here!
-#: src/menu/network_connection_menu.cpp:98
-msgid "Automatically join a game"
-msgstr ""
 
 #: src/menu/pause_menu.cpp:51
 msgid "Back to battle"
@@ -529,6 +524,10 @@ msgstr "Bazuka"
 #, fuzzy
 msgid "Before action"
 msgstr "Teleport"
+
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
 
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
@@ -603,6 +602,10 @@ msgstr "Zjistit online aktualizace?"
 msgid "Choose randomly between the different maps"
 msgstr "Vyber náhodně mezi mapami"
 
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
+
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
 msgstr ""
@@ -633,7 +636,7 @@ msgstr "Spáchat sebevraždu"
 msgid "Configuration menu"
 msgstr "žádný konfigurační soubor!"
 
-#: src/menu/network_connection_menu.cpp:214
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Připojit ke hře"
 
@@ -641,7 +644,7 @@ msgstr "Připojit ke hře"
 msgid "Connected !"
 msgstr "Připojeno !"
 
-#: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
+#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Stavba"
 
@@ -753,28 +756,28 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:368
+#: src/menu/network_connection_menu.cpp:379
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Chyba: Nepodařilo se připojit k %s:%s"
 
-#: src/menu/network_connection_menu.cpp:329
+#: src/menu/network_connection_menu.cpp:340
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Chyba: Nepodařilo se kontaktovat index server k hostování hry"
 
-#: src/menu/network_connection_menu.cpp:270
+#: src/menu/network_connection_menu.cpp:281
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Chyba: Nepodařilo se kontaktovat index server pro vyhledání internetové hry"
 
-#: src/menu/network_connection_menu.cpp:348
+#: src/menu/network_connection_menu.cpp:359
 msgid "Error: Unable to start server"
 msgstr "Chyba: Nepodařilo se spustit herní server"
 
-#: src/menu/network_connection_menu.cpp:342
+#: src/menu/network_connection_menu.cpp:353
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -814,7 +817,7 @@ msgstr "Hra"
 msgid "Game mode"
 msgstr "Jméno hry:"
 
-#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Jméno hry:"
 
@@ -851,7 +854,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nemůžu nalézt domovský adresář (proměnná prostředí $HOME)!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Přeji dobrou hru!"
 
@@ -872,7 +875,7 @@ msgstr "Nápověda"
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Hostovat hru"
 
@@ -918,7 +921,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:279
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -966,7 +969,7 @@ msgstr "To je dáreček!"
 msgid "Jetpack"
 msgstr "Tryskový batoh"
 
-#: src/menu/network_connection_menu.cpp:237 src/menu/network_menu.cpp:144
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:144
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Připojte se k #wormux na irc.freenode.net a najděte protihráče."
 
@@ -1004,7 +1007,7 @@ msgstr "Nízká gravitace"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:179
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Připojit se ručně"
 
@@ -1105,12 +1108,6 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "V konfiguračním xml souboru nebyl nalezen žádný element <%s>!"
 
-#: src/menu/network_connection_menu.cpp:443
-msgid ""
-"No public servers available and incorrect manual connection settings. Try "
-"connecting manually."
-msgstr ""
-
 #: src/menu/results_menu.cpp:74
 msgid "Nobody!"
 msgstr "Nikdo!"
@@ -1147,9 +1144,9 @@ msgstr "Padák"
 msgid "Parachute is activated automatically."
 msgstr "Padák je aktivován automaticky."
 
-#: src/menu/network_connection_menu.cpp:133
-#: src/menu/network_connection_menu.cpp:171
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Heslo:"
 
@@ -1186,12 +1183,12 @@ msgstr "Jméno hráče?"
 msgid "Polecat Launcher"
 msgstr "Odpalovač tchořů"
 
-#: src/menu/network_connection_menu.cpp:110
-#: src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Port:"
 
-#: src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Veřejné hry"
 
@@ -1199,7 +1196,7 @@ msgstr "Veřejné hry"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/main.cpp:268
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Ukončit Wormux"
 
@@ -1248,12 +1245,12 @@ msgstr "Velikost posuvníků"
 msgid "Scroll on border"
 msgstr "Posuvníky na okrajích"
 
-#: src/menu/network_connection_menu.cpp:187
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Adresa serveru:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:141
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Server přístupný z Internetu"
 
@@ -1303,9 +1300,16 @@ msgstr "Ostřelovací puška"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Někdo dal dítě do bedny!"
 
-#: src/menu/network_connection_menu.cpp:278
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
+
+#: src/network/index_server.cpp:322
+#, c-format
+msgid ""
+"Sorry, your version is not supported anymore. Supported version are %s. You "
+"can download a updated version on http://www.wormux.org/wiki/download.php"
+msgstr ""
 
 #: src/menu/options_menu.cpp:245
 msgid "Sound"
@@ -1470,7 +1474,7 @@ msgstr ""
 "Odpálení : Mezerník\n"
 "munice letí obloukem"
 
-#: src/interface/weapon_menu.cpp:169
+#: src/interface/weapon_menu.cpp:170
 msgid "Tools"
 msgstr "Nástroje"
 
@@ -1496,11 +1500,16 @@ msgstr "Tento port nelze použít!"
 msgid "Unknown command"
 msgstr ""
 
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(neomezeně)"
+
 #: src/network/network.cpp:145
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
-#: src/main.cpp:200
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Verze"
 
@@ -1527,11 +1536,11 @@ msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:167
+#: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:168
 msgid "Weapons"
 msgstr "Zbraně"
 
-#: src/main.cpp:296
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Webová stránka: "
 
@@ -1549,11 +1558,11 @@ msgstr "Poletující částice?"
 msgid "Winner"
 msgstr "Vítěz"
 
-#: src/main.cpp:212
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Spouští se Wormux..."
 
-#: src/main.cpp:286
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux verze"
 
