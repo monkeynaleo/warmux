@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux. gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-08-01 03:04+0100\n"
 "Last-Translator: Adrián Chaves <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
@@ -493,6 +494,10 @@ msgstr "Bazuca"
 msgid "Before action"
 msgstr "Teleportación"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Soplete"
@@ -565,6 +570,10 @@ msgstr "Buscar actualizacións en liña?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Elixir un dos mapas ao chou"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1467,6 +1476,11 @@ msgstr "Imposible usar este porto!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr "Comando descoñecido"
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(ilimitada)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

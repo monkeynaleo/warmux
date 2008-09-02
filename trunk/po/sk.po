@@ -6,6 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.7\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2007-03-07 15:07+0100\n"
 "Last-Translator: Martin Vojčík <stryco@gmail.com>\n"
 "Language-Team: sk <stryco@gmail.com>\n"
@@ -495,6 +496,10 @@ msgstr "Raketomet"
 msgid "Before action"
 msgstr "Teleport"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Plameňomet"
@@ -566,6 +571,10 @@ msgstr ""
 
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
 msgstr ""
 
 #: src/menu/help_menu.cpp:78
@@ -1467,6 +1476,11 @@ msgstr "Nedá sa použiť tento port!"
 #, fuzzy
 msgid "Unknown command"
 msgstr "Neznáma akcia"
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(neobmedzene)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

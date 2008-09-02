@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2007-05-15 12:00+0200\n"
 "Last-Translator: Varga Istvan\n"
 "Language-Team: Hungarian\n"
@@ -501,6 +502,10 @@ msgstr "Rakétavetõ"
 msgid "Before action"
 msgstr "Teleport"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Lángvágó"
@@ -572,6 +577,10 @@ msgstr ""
 
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
 msgstr ""
 
 #: src/menu/help_menu.cpp:78
@@ -1475,6 +1484,11 @@ msgstr "Nem sikerült megnyitni a portot!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr ""
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(korlátlan)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

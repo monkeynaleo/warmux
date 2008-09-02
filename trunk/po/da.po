@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-05-06 23:44+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
@@ -484,6 +485,10 @@ msgstr "Bazooka"
 msgid "Before action"
 msgstr "Teleportation"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Blæselampe"
@@ -556,6 +561,10 @@ msgstr "Check for opdateringer på nettet?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Skift tilfældigt rundt mellem de forskellige baner"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1448,6 +1457,11 @@ msgstr "Kan ikke bruge denne port!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr ""
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(ubegrænset)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

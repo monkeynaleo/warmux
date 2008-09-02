@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2007-12-14 18:03+0100\n"
 "Last-Translator: Behdad Pournader <behdadp@farsiweb.info>\n"
 "Language-Team: Wormux Fa <behdadp@farsiweb.info>\n"
@@ -441,6 +442,10 @@ msgstr "باوکا"
 msgid "Before action"
 msgstr "جابجایی"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "مشعل"
@@ -513,6 +518,10 @@ msgstr ""
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "به صورت تصادفی یک نقشه از بین نقشه‌های مختلف انتخاب کن"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1403,6 +1412,11 @@ msgstr "ناتوان در استفاده از این پورت!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr ""
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(بی‌نهایت)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

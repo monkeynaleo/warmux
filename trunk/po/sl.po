@@ -10,6 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-07-07 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -555,6 +556,10 @@ msgstr "Bazuka"
 msgid "Before action"
 msgstr "Pred premikom"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr "Blitz"
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Varilnik"
@@ -624,6 +629,10 @@ msgstr "Preveri možno posodobitev?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr "Klasični"
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -804,10 +813,10 @@ msgid ""
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
-"Napaka: vaš strežnik ni dosegljiv preko interneta. Preverite nastavitve vašega "
-"požarnega zidu: vrata TCP %s morajo biti odprta za zunanje povezave. Če na "
-"internet niste povezani neposredno, preverite nastavitve usmerjevalnika:  "
-"vrata TCP %s morajo biti posredovana."
+"Napaka: vaš strežnik ni dosegljiv preko interneta. Preverite nastavitve "
+"vašega požarnega zidu: vrata TCP %s morajo biti odprta za zunanje povezave. "
+"Če na internet niste povezani neposredno, preverite nastavitve "
+"usmerjevalnika:  vrata TCP %s morajo biti posredovana."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1328,8 +1337,9 @@ msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
-"Oprostite, vaša različica ni več podprta. Podprte različice so %s. Posodobljeno "
-"različico lahko dobite na http://www.wormux.org/wiki/download.php"
+"Oprostite, vaša različica ni več podprta. Podprte različice so %s. "
+"Posodobljeno različico lahko dobite na http://www.wormux.org/wiki/download."
+"php"
 
 #: src/menu/options_menu.cpp:245
 msgid "Sound"
@@ -1521,6 +1531,10 @@ msgstr "Ni bilo mogoče uporabiti teh vrat!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr "Neznan ukaz"
+
+#: src/menu/game_mode_editor.cpp:44
+msgid "Unlimited"
+msgstr "Neomejen"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

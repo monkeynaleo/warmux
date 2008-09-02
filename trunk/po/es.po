@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-08-30 11:04+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: \n"
@@ -486,6 +487,10 @@ msgstr "Bazooka"
 msgid "Before action"
 msgstr "Antes de empezar"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Soplete"
@@ -555,6 +560,10 @@ msgstr "¿Comprobar actualizaciones en Internet? "
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Elige al azar entre los distintos mapas"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1458,6 +1467,11 @@ msgstr "¡Imposible usar este puerto!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr "Comando desconocido"
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(ilimitado)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

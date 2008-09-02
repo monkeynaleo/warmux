@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-03-15 23:43+0100\n"
 "Last-Translator: Nikolas Becker <post-AT-nikolasbecker-DOT-de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -500,6 +501,10 @@ msgstr "Panzerfaust"
 msgid "Before action"
 msgstr "Teleportation"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Schneidbrenner"
@@ -572,6 +577,10 @@ msgstr "Online nach neuen Versionen suchen?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Eine Karte zufällig auswählen"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1489,6 +1498,11 @@ msgstr "Kann diesen Port nicht verwenden!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr ""
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(unbegrenzt)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

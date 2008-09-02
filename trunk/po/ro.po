@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-08-25 22:46+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -672,6 +673,10 @@ msgstr "Proiectil reactiv"
 msgid "Before action"
 msgstr "Acțiune necunoscută"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Lampă de sudură"
@@ -743,6 +748,10 @@ msgstr "Se verifică actualizările online?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Alege la întâmplare una din diferitele hărți"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1650,6 +1659,11 @@ msgstr "Nu a fost posibilă folosirea acestui port!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr "Comandă necunoscută"
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(infinit)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

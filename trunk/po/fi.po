@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-05-14 13:38+0300\n"
 "Last-Translator: Bastian Salmela <basse@kulma.org>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -487,6 +488,10 @@ msgstr "Sinko"
 msgid "Before action"
 msgstr "Teleportaatio"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Puhalluslamppu"
@@ -559,6 +564,10 @@ msgstr "Tarkista päivitykset"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Valitse sattumanvaraisesti eri karttojen välillä"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1447,6 +1456,11 @@ msgstr "Tätä porttia ei voida käyttää!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr ""
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(rajaton)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

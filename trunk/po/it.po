@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-08-13 17:47+0100\n"
 "Last-Translator: _Uno <uno@p2pforum.it>\n"
 "Language-Team: RebelCode <info@rebelcoders.org>; TeMpLeR <LL@li.org>\n"
@@ -493,6 +494,10 @@ msgstr "Bazooka"
 msgid "Before action"
 msgstr "Teletrasporto"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Fiamma Ossidrica"
@@ -565,6 +570,10 @@ msgstr "Ricerca aggiornamenti online?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Scegli casualmente tra le mappe disponibili"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1469,6 +1478,11 @@ msgstr "Impossibile usare questa porta!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr "Comando sconosciuto"
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(illimitato)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

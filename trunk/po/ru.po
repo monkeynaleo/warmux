@@ -11,6 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-06-07 15:39+0400\n"
 "Last-Translator: Ilya Rusyanov <unachievable@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -542,6 +543,10 @@ msgstr "Базука"
 msgid "Before action"
 msgstr "Телепортация"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Паяльная лампа"
@@ -614,6 +619,10 @@ msgstr "Проверить по сети, нет ли обновлений?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Выбрать карту случайно"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1517,6 +1526,11 @@ msgstr "Не получается использовать этот порт!"
 #, fuzzy
 msgid "Unknown command"
 msgstr "Неизвестная команда"
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(бесконечно)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"

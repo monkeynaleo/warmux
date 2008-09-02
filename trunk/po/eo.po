@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eo_new\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-09-02 04:03+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -480,6 +481,10 @@ msgstr "Bazuko"
 msgid "Before action"
 msgstr "Antaŭ ago"
 
+#: src/menu/game_mode_editor.cpp:45
+msgid "Blitz"
+msgstr ""
+
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
 msgstr "Torĉo"
@@ -549,6 +554,10 @@ msgstr "Ĉu kontroli la ĝisdatigaĵoj enrete?"
 #: src/menu/map_selection_box.cpp:229
 msgid "Choose randomly between the different maps"
 msgstr "Elekti hazarde el la malsamaj mapoj"
+
+#: src/menu/game_mode_editor.cpp:43
+msgid "Classic"
+msgstr ""
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
@@ -1433,6 +1442,11 @@ msgstr "Ne eblas uzi ĉi tiun pordon!"
 #: src/network/admin_commands.cpp:67
 msgid "Unknown command"
 msgstr "Nekonata komando"
+
+#: src/menu/game_mode_editor.cpp:44
+#, fuzzy
+msgid "Unlimited"
+msgstr "(senlimaj)"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"
