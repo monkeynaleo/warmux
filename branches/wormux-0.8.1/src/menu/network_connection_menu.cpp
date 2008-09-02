@@ -94,56 +94,6 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   tabs->SetPosition(25, 25);
 
   // #############################
-  // Automatic connection - we have nothing to display here!
-  tabs->AddNewTab("TAB_automatic", _("Automatically join a game"),
-                  new VBox(W_UNDEF, false, false));
-
-  /* server connection related widgets */
-  Box * srv_connection_box = new VBox(W_UNDEF, false, false);
-  srv_connection_box->SetBorder(Point2i(0,0));
-
-  // Server port
-  Box * srv_tmp_box = new HBox(W_UNDEF, false, false);
-  srv_tmp_box->SetMargin(0);
-  srv_tmp_box->SetBorder(Point2i(0,0));
-
-  srv_tmp_box->AddWidget(new Label(_("Port:"), def_size.x/2));
-  srv_port_number = new TextBox(Config::GetInstance()->GetNetworkServerPort(), def_size.x/2);
-  srv_tmp_box->AddWidget(srv_port_number);
-
-  srv_connection_box->AddWidget(srv_tmp_box);
-
-  // Game name
-  srv_tmp_box = new HBox(W_UNDEF, false, false);
-  srv_tmp_box->SetMargin(0);
-  srv_tmp_box->SetBorder(Point2i(0,0));
-
-  srv_tmp_box->AddWidget(new Label(_("Game name:"), def_size.x/2));
-  srv_game_name = new TextBox(Config::GetInstance()->GetNetworkServerGameName(), def_size.x/2);
-  srv_game_name->SetMaxNbChars(15);
-  srv_tmp_box->AddWidget(srv_game_name);
-
-  srv_connection_box->AddWidget(srv_tmp_box);
-
-  // Server password
-  srv_tmp_box = new HBox(W_UNDEF, false, false);
-  srv_tmp_box->SetMargin(0);
-  srv_tmp_box->SetBorder(Point2i(0,0));
-
-  srv_tmp_box->AddWidget(new Label(_("Password:"), def_size.x/2));
-  srv_game_pwd = new PasswordBox("", def_size.x/2);
-  srv_game_pwd->SetMaxNbChars(15);
-  srv_tmp_box->AddWidget(srv_game_pwd);
-
-  srv_connection_box->AddWidget(srv_tmp_box);
-
-  // Available on internet ?
-  srv_internet_server = new CheckBox(_("Server available on Internet"), def_size.x,
-				     Config::GetInstance()->GetNetworkServerPublic());
-  srv_connection_box->AddWidget(srv_internet_server);
-
-  tabs->AddNewTab("TAB_server", _("Host a game"), srv_connection_box);
-
   /* client connection related widgets */
   Box * cl_connection_box = new VBox(W_UNDEF, false, false);
   cl_connection_box->SetBorder(Point2i(0,0));
@@ -213,6 +163,54 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_connection_box->AddWidget(cl_tmp_box);
   tabs->AddNewTab("TAB_client", _("Connect to game"), cl_connection_box);
 
+  // #############################
+  /* server connection related widgets */
+  Box * srv_connection_box = new VBox(W_UNDEF, false, false);
+  srv_connection_box->SetBorder(Point2i(0,0));
+
+  // Server port
+  Box * srv_tmp_box = new HBox(W_UNDEF, false, false);
+  srv_tmp_box->SetMargin(0);
+  srv_tmp_box->SetBorder(Point2i(0,0));
+
+  srv_tmp_box->AddWidget(new Label(_("Port:"), def_size.x/2));
+  srv_port_number = new TextBox(Config::GetInstance()->GetNetworkServerPort(), def_size.x/2);
+  srv_tmp_box->AddWidget(srv_port_number);
+
+  srv_connection_box->AddWidget(srv_tmp_box);
+
+  // Game name
+  srv_tmp_box = new HBox(W_UNDEF, false, false);
+  srv_tmp_box->SetMargin(0);
+  srv_tmp_box->SetBorder(Point2i(0,0));
+
+  srv_tmp_box->AddWidget(new Label(_("Game name:"), def_size.x/2));
+  srv_game_name = new TextBox(Config::GetInstance()->GetNetworkServerGameName(), def_size.x/2);
+  srv_game_name->SetMaxNbChars(15);
+  srv_tmp_box->AddWidget(srv_game_name);
+
+  srv_connection_box->AddWidget(srv_tmp_box);
+
+  // Server password
+  srv_tmp_box = new HBox(W_UNDEF, false, false);
+  srv_tmp_box->SetMargin(0);
+  srv_tmp_box->SetBorder(Point2i(0,0));
+
+  srv_tmp_box->AddWidget(new Label(_("Password:"), def_size.x/2));
+  srv_game_pwd = new PasswordBox("", def_size.x/2);
+  srv_game_pwd->SetMaxNbChars(15);
+  srv_tmp_box->AddWidget(srv_game_pwd);
+
+  srv_connection_box->AddWidget(srv_tmp_box);
+
+  // Available on internet ?
+  srv_internet_server = new CheckBox(_("Server available on Internet"), def_size.x,
+				     Config::GetInstance()->GetNetworkServerPublic());
+  srv_connection_box->AddWidget(srv_internet_server);
+
+  tabs->AddNewTab("TAB_server", _("Host a game"), srv_connection_box);
+
+  // #############################
   widgets.AddWidget(tabs);
   widgets.Pack();
 
@@ -246,7 +244,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
     tabs->SelectTab(1);
     break;
   case NET_CONNECT:
-    tabs->SelectTab(2);
+    tabs->SelectTab(0);
     break;
   default:
     break;
@@ -432,31 +430,6 @@ bool NetworkConnectionMenu::signal_ok()
       Config::GetInstance()->SetNetworkClientPort(cl_port_number->GetText());
     } else
       goto out;
-  } else if (id == "TAB_automatic") {
-    lst = GetList();
-    // Try list of online servers
-    for (std::list<GameServerInfo>::iterator it = lst.begin(); it != lst.end(); ++it) {
-      if (!it->passworded) {
-        // Try connecting to this internet game!
-        r = ConnectToClient(it->ip_address, it->port, "");
-        if (r)
-          break;
-      }
-    }
-
-    // Last, try local game
-    if (!r) {
-      // Password not saved, try anyway...
-      printf("Trying %s:%s\n", Config::GetInstance()->GetNetworkClientHost().c_str(),
-                          Config::GetInstance()->GetNetworkClientPort().c_str());
-
-      r = ConnectToClient(Config::GetInstance()->GetNetworkClientHost(),
-                          Config::GetInstance()->GetNetworkClientPort(), "");
-      if (!r) {
-        Menu::DisplayError(_("No public servers available and incorrect manual connection settings. Try connecting manually."));
-        goto out;
-      }
-    }
   }
 
   if (Network::IsConnected()) {

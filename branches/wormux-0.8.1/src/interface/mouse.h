@@ -65,6 +65,7 @@ private:
 
   visibility_t visible;
   pointer_t current_pointer;
+  uint last_hide_time;
 
   void GetDesignatedCharacter() const;
 
