@@ -18,12 +18,11 @@ EXTRA_DIST = data/wormux.desktop                   \
              doc/howto_play/pl.pdf                 \
              doc/howto_play/sk.pdf                 \
              doc/howto_play/sv.pdf                 \
-			 mac/Info.plist.in					   \
-			 mac/PkgInfo.in						   \
-			 mac/README-mac.txt					   \
-			 mac/build_wormux_fink.sh			   \
-			 mac/build_wormux_first.sh			   \
-			 mac/build_wormux_macports.sh		   \
+	     mac/Info.plist.in			   \
+	     mac/PkgInfo.in			   \
+	     mac/README-mac.txt			   \
+	     mac/README-mac.txt			   \
+	     mac/cmake_build.sh                    \
              visual/wormux.vcproj                  \
              src/msvc/config.h                     \
              src/msvc/getopt.c                     \
