@@ -318,7 +318,7 @@ void Mouse::Draw() const
 
 void Mouse::Show()
 {
-  if(((Time::GetInstance()->Read()-last_hide_time) > 2000) && (visible == MOUSE_HIDDEN))
+  if(((Time::GetInstance()->Read()-last_hide_time) > 10000) && (visible == MOUSE_HIDDEN))
   {
       CenterPointer();
   }
