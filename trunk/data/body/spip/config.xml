@@ -1595,7 +1595,7 @@
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="arm-left" angle="-90"/>
-		<member type="yoyo" angle="90"/>
+		<member type="yoyo" dx="4" angle="90"/>
 	</frame>
 </movement>
 
