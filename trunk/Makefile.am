@@ -1,4 +1,4 @@
-SUBDIRS = data src po doc lib/box2d/
+SUBDIRS = data lib/box2d/ src po doc
 
 EXTRA_DIST = data/wormux.desktop                   \
              doc/license/COPYING.de.txt            \
