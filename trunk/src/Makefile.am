@@ -243,3 +243,5 @@ LIBS += -lssl -lcrypto -lz -lpthread
 else
 LIBS += @LIBCURL@
 endif
+
+LIBS += $(top_srcdir)/lib/box2d/src/Gen/fixed/libbox2d.a $(top_srcdir)/lib/box2d/src/Gen/float/libbox2d.a
