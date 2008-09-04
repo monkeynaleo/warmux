@@ -21,9 +21,9 @@ IF(PREFIX)
 ENDIF(PREFIX)
 
 # Set some global variables
-SET(WORMUX_CFLAGS "-Wall")	# additional compile flags for wormux
+SET(WORMUX_CFLAGS "-Wall -Werror") # additional compile flags for wormux
 SET(WORMUX_LDFLAGS "")		# additional linking flags for wormux
-SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/build/cmake)
 
 IF(BIN_PATH)
   # If user specified a path for binary, use it
@@ -39,13 +39,13 @@ ENDIF(BIN_PATH)
 
 IF(DATA_PATH)
   # If user specified a path for data, use it
-  
+
   SET(INSTALL_DATADIR ${DATA_PATH}/data/)
   SET(INSTALL_LOCALEDIR ${DATA_PATH}/locale/)
   SET(DATA_DESTINATION ${DATA_PATH}/data)
   SET(PO_DESTINATION ${DATA_PATH}/locale)
   SET(FONT_FILE ${DATA_PATH}/data/font/DejaVuSans.ttf)
-  
+
 ELSE(DATA_PATH)
 
   # Otherwise use defaults
@@ -62,7 +62,7 @@ ELSE(DATA_PATH)
     SET(PO_DESTINATION "locale")
     SET(FONT_FILE data/font/DejaVuSans.ttf)
   ENDIF(UNIX AND NOT WIN32)
-  
+
 ENDIF(DATA_PATH)
 
 # Optional package CPack
@@ -145,7 +145,7 @@ ADD_SUBDIRECTORY(po)
 # install data/
 INSTALL(DIRECTORY data/ DESTINATION ${DATA_DESTINATION}
   FILE_PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ
-  DIRECTORY_PERMISSIONS OWNER_WRITE OWNER_READ OWNER_EXECUTE GROUP_READ 
+  DIRECTORY_PERMISSIONS OWNER_WRITE OWNER_READ OWNER_EXECUTE GROUP_READ
                         GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
   PATTERN ".svn" EXCLUDE
   PATTERN "Makefile.am" EXCLUDE
