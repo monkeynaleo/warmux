@@ -27,6 +27,8 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
+#include <Box2D.h>
+
 #include "include/base.h"
 #include "tool/euler_vector.h"
 #include "tool/point.h"

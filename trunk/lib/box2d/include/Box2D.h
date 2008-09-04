@@ -31,22 +31,22 @@ For discussion please visit http://www.box2d.org/forum
 
 // These include files constitute the main Box2D API
 
-#include "../Source/Common/b2Settings.h"
+#include "Common/b2Settings.h"
 
-#include "../Source/Collision/Shapes/b2CircleShape.h"
-#include "../Source/Collision/Shapes/b2PolygonShape.h"
-#include "../Source/Collision/b2BroadPhase.h"
-#include "../Source/Dynamics/b2WorldCallbacks.h"
-#include "../Source/Dynamics/b2World.h"
-#include "../Source/Dynamics/b2Body.h"
+#include "Collision/Shapes/b2CircleShape.h"
+#include "Collision/Shapes/b2PolygonShape.h"
+#include "Collision/b2BroadPhase.h"
+#include "Dynamics/b2WorldCallbacks.h"
+#include "Dynamics/b2World.h"
+#include "Dynamics/b2Body.h"
 
-#include "../Source/Dynamics/Contacts/b2Contact.h"
+#include "Dynamics/Contacts/b2Contact.h"
 
-#include "../Source/Dynamics/Joints/b2DistanceJoint.h"
-#include "../Source/Dynamics/Joints/b2MouseJoint.h"
-#include "../Source/Dynamics/Joints/b2PrismaticJoint.h"
-#include "../Source/Dynamics/Joints/b2RevoluteJoint.h"
-#include "../Source/Dynamics/Joints/b2PulleyJoint.h"
-#include "../Source/Dynamics/Joints/b2GearJoint.h"
+#include "Dynamics/Joints/b2DistanceJoint.h"
+#include "Dynamics/Joints/b2MouseJoint.h"
+#include "Dynamics/Joints/b2PrismaticJoint.h"
+#include "Dynamics/Joints/b2RevoluteJoint.h"
+#include "Dynamics/Joints/b2PulleyJoint.h"
+#include "Dynamics/Joints/b2GearJoint.h"
 
 #endif
