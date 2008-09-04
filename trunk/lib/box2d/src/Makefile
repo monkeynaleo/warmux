@@ -4,7 +4,7 @@ ifdef DEVKITPRO
 TARGETS += Gen/nds-float/lib/libbox2d.a Gen/nds-fixed/lib/libbox2d.a
 endif
 
-CXXFLAGS=	-g -O2
+CXXFLAGS= -Wall -Werror -g -O2
 
 SOURCES = \
 	./Dynamics/b2Body.cpp \
@@ -37,14 +37,14 @@ SOURCES = \
 	./Collision/b2PairManager.cpp \
 	./Collision/b2CollidePoly.cpp \
 	./Collision/b2CollideCircle.cpp \
-	./Collision/b2BroadPhase.cpp 
+	./Collision/b2BroadPhase.cpp
 #	./Contrib/b2Polygon.cpp \
 #	./Contrib/b2Triangle.cpp
 
 
 ifneq ($(INCLUDE_DEPENDENCIES),yes)
 
-all:	
+all:
 	@make --no-print-directory INCLUDE_DEPENDENCIES=yes $(TARGETS)
 
 .PHONY:	clean
@@ -70,7 +70,7 @@ Gen/float/%.o:		%.cpp
 
 Gen/float/libbox2d.a:	$(addprefix Gen/float/,$(SOURCES:.cpp=.o))
 	ar cr $@ $^
-	ranlib $@ 
+	ranlib $@
 
 Gen/float/%.d:		%.cpp
 	@mkdir -p $(dir $@)
@@ -82,9 +82,9 @@ Gen/fixed/%.o:		%.cpp
 	c++ $(CXXFLAGS) -DTARGET_FLOAT32_IS_FIXED -c -o $@ $<
 
 
-Gen/fixed/libbox2d.a:	$(addprefix Gen/fixed/,$(SOURCES:.cpp=.o)) 
+Gen/fixed/libbox2d.a:	$(addprefix Gen/fixed/,$(SOURCES:.cpp=.o))
 	ar cr $@ $^
-	ranlib $@ 
+	ranlib $@
 
 
 Gen/fixed/%.d:		%.cpp
@@ -97,17 +97,17 @@ NDS_COMPILE_FLAGS= -g -O2 -fomit-frame-pointer -ffast-math \
 		-march=armv5te -mtune=arm946e-s -mthumb-interwork \
 		-DARM9 -fno-rtti -fno-exceptions -c \
 		-DTARGET_IS_NDS \
-		-I$(DEVKITPRO)/libnds/include 
+		-I$(DEVKITPRO)/libnds/include
 
 
 Gen/nds-fixed/%.o:		%.cpp
 	@mkdir -p $(dir $@)
 	arm-eabi-g++ $(NDS_COMPILE_FLAGS) -DTARGET_FLOAT32_IS_FIXED -o $@ $<
 
-Gen/nds-fixed/lib/libbox2d.a:	$(addprefix Gen/nds-fixed/,$(SOURCES:.cpp=.o)) 
+Gen/nds-fixed/lib/libbox2d.a:	$(addprefix Gen/nds-fixed/,$(SOURCES:.cpp=.o))
 	@mkdir -p $(dir $@)
 	arm-eabi-ar cr $@ $^
-	arm-eabi-ranlib $@ 
+	arm-eabi-ranlib $@
 
 Gen/nds-fixed/%.d:		%.cpp
 	@mkdir -p $(dir $@)
@@ -123,11 +123,11 @@ Gen/nds-float/%.o:		%.cpp
 Gen/nds-float/lib/libbox2d.a:	$(addprefix Gen/nds-float/,$(SOURCES:.cpp=.o))
 	@mkdir -p $(dir $@)
 	arm-eabi-ar cr $@ $^
-	arm-eabi-ranlib $@ 
+	arm-eabi-ranlib $@
 
 
 Gen/nds-float/%.d:		%.cpp
-	@mkdir -p $(dir $@) 
+	@mkdir -p $(dir $@)
 	arm-eabi-g++ -MM -MT $(@:.d=.o) $(NDS_COMPILE_FLAGS) -o $@ $<
 
 

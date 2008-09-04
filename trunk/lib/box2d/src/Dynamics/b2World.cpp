@@ -458,7 +458,7 @@ void b2World::Solve(const b2TimeStep& step)
 		{
 			continue;
 		}
-		
+
 		// Update shapes (for broad-phase). If the shapes go out of
 		// the world AABB then shapes and contacts may be destroyed,
 		// including contacts that are
@@ -533,7 +533,7 @@ void b2World::SolveTOI(const b2TimeStep& step)
 
 				// Put the sweeps onto the same time interval.
 				float32 t0 = b1->m_sweep.t0;
-				
+
 				if (b1->m_sweep.t0 < b2->m_sweep.t0)
 				{
 					t0 = b2->m_sweep.t0;
@@ -750,7 +750,7 @@ void b2World::Step(float32 dt, int32 iterations)
 
 	step.positionCorrection = m_positionCorrection;
 	step.warmStarting = m_warmStarting;
-	
+
 	// Update contacts.
 	m_contactManager.Collide();
 
@@ -838,6 +838,9 @@ void b2World::DrawShape(b2Shape* shape, const b2XForm& xf, const b2Color& color,
 			}
 		}
 		break;
+	default:
+	  fprintf(stderr, "b2World::DrawShape %d not supported\n", shape->GetType());
+	  break;
 	}
 }
 

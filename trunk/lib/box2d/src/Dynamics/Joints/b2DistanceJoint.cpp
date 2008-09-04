@@ -26,7 +26,7 @@
 // x2 = x1 + h * v2
 
 // 1-D mass-damper-spring system
-// m (v2 - v1) + h * d * v2 + h * k * 
+// m (v2 - v1) + h * d * v2 + h * k *
 
 // C = norm(p2 - p1) - L
 // u = (p2 - p1) / norm(p2 - p1)
@@ -125,10 +125,8 @@ void b2DistanceJoint::InitVelocityConstraints(const b2TimeStep& step)
 	}
 }
 
-void b2DistanceJoint::SolveVelocityConstraints(const b2TimeStep& step)
+void b2DistanceJoint::SolveVelocityConstraints(const b2TimeStep& /*step*/)
 {
-	B2_NOT_USED(step);
-
 	b2Body* b1 = m_body1;
 	b2Body* b2 = m_body2;
 

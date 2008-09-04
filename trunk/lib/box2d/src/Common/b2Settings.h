@@ -22,11 +22,11 @@
 #include <assert.h>
 #include <math.h>
 
-#define B2_NOT_USED(x) x
+#define B2_NOT_USED(x) x = x
 #define b2Assert(A) assert(A)
 
 
-// need to include NDS jtypes.h instead of 
+// need to include NDS jtypes.h instead of
 // usual typedefs because NDS jtypes defines
 // them slightly differently, oh well.
 #ifdef TARGET_IS_NDS
