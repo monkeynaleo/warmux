@@ -4,7 +4,7 @@ ifdef DEVKITPRO
 TARGETS += Gen/nds-float/lib/libbox2d.a Gen/nds-fixed/lib/libbox2d.a
 endif
 
-CXXFLAGS= -Wall -Werror -g -O2
+CXXFLAGS= -Wall -Werror -Wextra -g -O2
 
 SOURCES = \
 	./Dynamics/b2Body.cpp \

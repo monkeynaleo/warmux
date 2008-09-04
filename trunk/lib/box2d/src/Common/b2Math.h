@@ -43,7 +43,7 @@ inline Fixed b2Clamp(Fixed a, Fixed low, Fixed high)
 	return b2Max(low, b2Min(a, high));
 }
 
-inline bool b2IsValid(Fixed x)
+inline bool b2IsValid(Fixed /*x*/)
 {
 	return true;
 }
@@ -109,13 +109,13 @@ struct b2Vec2
 
 	/// Negate this vector.
 	b2Vec2 operator -() const { b2Vec2 v; v.Set(-x, -y); return v; }
-	
+
 	/// Add a vector to this vector.
 	void operator += (const b2Vec2& v)
 	{
 		x += v.x; y += v.y;
 	}
-	
+
 	/// Subtract a vector from this vector.
 	void operator -= (const b2Vec2& v)
 	{
@@ -144,7 +144,7 @@ struct b2Vec2
 		}
 #else
 		return b2Sqrt(x * x + y * y);
-#endif 
+#endif
 	}
 
 	/// Get the length squared. For performance, use this instead of
@@ -162,7 +162,7 @@ struct b2Vec2
 		if (length < B2_FLT_EPSILON)
 		{
 			return 0.0f;
-		} 
+		}
 #ifdef NORMALIZE_BY_INVERT_MULTIPLY
 		if (length < (1.0/16.0)) {
 			x = x << 4;
@@ -286,14 +286,14 @@ struct b2Mat22
 		if(b2Abs(det) <= (B2_FLT_EPSILON<<8))
 		{
 			n = 3;
-			a = a<<n; b = b<<n; 
+			a = a<<n; b = b<<n;
 			c = c<<n; d = d<<n;
 			det = a * d - b * c;
 			b2Assert(det != 0.0f);
 			det = float32(1) / det;
 			B.col1.x = ( det * d) << n;	B.col2.x = (-det * b) << n;
 			B.col1.y = (-det * c) << n;	B.col2.y = ( det * a) << n;
-		} 
+		}
 		else
 		{
 			n = (b2Abs(det) >= 16.0)? 4 : 0;
@@ -302,7 +302,7 @@ struct b2Mat22
 			B.col1.x = ( det * d) >> n;	B.col2.x = (-det * b) >> n;
 			B.col1.y = (-det * c) >> n;	B.col2.y = ( det * a) >> n;
 		}
-		
+
 		return B;
 	}
 
@@ -314,7 +314,7 @@ struct b2Mat22
 		int n = 0;
 		b2Vec2 x;
 
-		
+
 		if(b2Abs(det) <= (B2_FLT_EPSILON<<8))
 		{
 			n = 3;
@@ -325,8 +325,8 @@ struct b2Mat22
 			det = float32(1) / det;
 			x.x = (det * (a22 * b.x - a12 * b.y)) << n;
 			x.y = (det * (a11 * b.y - a21 * b.x)) << n;
-		} 
-		else 
+		}
+		else
 		{
 			n = (b2Abs(det) >= 16.0) ? 4 : 0;
 			b2Assert(det != 0.0f);
