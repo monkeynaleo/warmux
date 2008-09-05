@@ -318,6 +318,7 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow,
   MSG_DEBUG( "camera.tracking", "Following object %s",
                                  obj->GetName().c_str());
 
+  Mouse::GetInstance()->Hide();
   if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
     auto_crop = follow;
 

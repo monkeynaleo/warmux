@@ -132,6 +132,7 @@ wormux_SOURCES = \
         object/objects_list.cpp object/objects_list.h \
         object/physical_obj.cpp object/physical_obj.h \
         object/physics.cpp object/physics.h \
+        object/physical_engine.cpp object/physical_engine.h \
         particles/body_member.cpp particles/body_member.h \
         particles/bullet.cpp particles/bullet.h \
         particles/dark_smoke.cpp particles/dark_smoke.h \
@@ -244,4 +245,4 @@ else
 LIBS += @LIBCURL@
 endif
 
-LIBS += $(top_srcdir)/lib/box2d/src/Gen/fixed/libbox2d.a $(top_srcdir)/lib/box2d/src/Gen/float/libbox2d.a
+LIBS += $(top_srcdir)/lib/box2d/src/Gen/float/libbox2d.a
