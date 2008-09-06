@@ -146,7 +146,7 @@ void AddRemovedContactPoint(b2ContactPoint contact);
   Point2d GetSpeedXY () const { return (!IsMoving()) ? Point2d(0.0, 0.0) : Point2d(m_body->GetLinearVelocity().x,m_body->GetLinearVelocity().y); };
   Point2d GetSpeed() const { return GetSpeedXY(); };
   double GetAngularSpeed() const { return m_body->GetAngularVelocity(); };
-  double GetAngle() const { return m_body->GetAngle();};
+  double GetAngle() const;
   double GetSpeedAngle() const { return GetSpeedXY().ComputeAngle(); };
 
 

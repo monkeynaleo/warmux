@@ -55,7 +55,7 @@
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 40;
 
-const double PIXEL_PER_METER = 40;
+const double PIXEL_PER_METER = 20;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2)
 {
@@ -93,6 +93,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   shapeDef.friction = 0.8f;
   shapeDef.restitution = 0.8f;
   shapeDef.filter.categoryBits = 0x0001;
+  shapeDef.filter.maskBits = 0xFFFF;
   m_shape = m_body->CreateShape(&shapeDef);
   m_body->SetMassFromShapes();
 
@@ -608,19 +609,19 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
 
   if(m_collides_with_objects)
     {
-      data.maskBits &= 0x0001;
+      data.maskBits |= 0x0001;
 
     }
 
   if(m_collides_with_characters)
     {
-      data.maskBits &= 0x0002;
+      data.maskBits |= 0x0002;
 
     }
 
   if(!m_goes_through_wall)
     {
-      data.maskBits &= 0x0004;
+      data.maskBits |= 0x0004;
 
     }
 
