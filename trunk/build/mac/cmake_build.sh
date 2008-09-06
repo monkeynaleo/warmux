@@ -13,7 +13,7 @@
 #
 
 MAC=`pwd`/
-ROOT=${MAC}../
+ROOT=${MAC}../../
 SRC=${ROOT}src/
 
 
@@ -183,7 +183,7 @@ cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
 cd ${TMP}
 
-if ! cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES}
+if ! cmake ../../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES}
 then
     echo "CMake error"
     exit 1
