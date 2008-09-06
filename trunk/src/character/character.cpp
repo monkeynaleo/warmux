@@ -554,6 +554,8 @@ void Character::Refresh()
 
   Time * global_time = Time::GetInstance();
 
+  body->SetRotation(GetAngle());
+
   // center on character who is falling
   if (FootsInVacuum()) {
     Camera::GetInstance()->FollowObject(this, true);

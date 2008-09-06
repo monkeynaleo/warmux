@@ -34,7 +34,7 @@ PhysicalEngine::PhysicalEngine()
   physic_world = new b2World(worldAABB, gravity, doSleep);
 
   b2BodyDef groundBodyDef;
-  groundBodyDef.position.Set(0.0f, 40.0f);
+  groundBodyDef.position.Set(0.0f, 80.0f);
   b2Body* ground;
 
   ground= physic_world->CreateBody(&groundBodyDef);
@@ -42,6 +42,8 @@ PhysicalEngine::PhysicalEngine()
   groundShapeDef1.SetAsBox(500.0f, 10.0f);
   groundShapeDef1.friction = 0.8f;
   groundShapeDef1.restitution = 0.1f;
+  groundShapeDef1.filter.categoryBits = 0x0004;
+  groundShapeDef1.filter.maskBits = 0xFFFF;
   ground->CreateShape(&groundShapeDef1);
 
   frame_rate = 60;

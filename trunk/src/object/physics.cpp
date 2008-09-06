@@ -414,3 +414,8 @@ void Physics::ClearContact()
   removed_contact_list.clear();
   result_contact_list.clear();
 }
+
+double Physics::GetAngle() const
+{
+   return -m_body->GetAngle();
+ }
