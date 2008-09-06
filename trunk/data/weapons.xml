@@ -241,13 +241,13 @@
 
   <surface name="polecatlauncher_ico" file="weapon/polecat/polecat_ico.png" />
   <surface name="polecatlauncher" file="weapon/polecat/polecatlauncher.png" />
-  <position name="polecatlauncher" origin="hand" x="20" y="20" />
+  <position name="polecatlauncher" origin="hand" x="26" y="18" />
   <sprite name="polecat_fart">
     <image file="weapon/polecat/polecat_fart.png" />
   </sprite>
   <sprite name="polecat">
     <image file="weapon/polecat/polecat.png">
-      <grid pos="0,0" size="47,38" array="1,1" />
+      <grid pos="0,0" size="52,25" array="1,1" />
     </image>
     <animation speed="35" loop_mode="pingpong" />
   </sprite>

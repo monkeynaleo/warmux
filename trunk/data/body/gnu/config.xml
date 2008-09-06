@@ -46,7 +46,7 @@
 <alias movement="weapon-snipe_rifle-select" correspond_to="weapon-gun-select"/>
 <alias movement="weapon-flamethrower-select" correspond_to="weapon-gun-select"/>
 <alias movement="fly-black" correspond_to="fly"/>
-
+<alias movement="weapon-polecatlauncher-select" correspond_to="weapon-gnulauncher-select"/>
 
 
 
@@ -860,6 +860,31 @@
 
 <!-- ###### weapon-gnulauncher ###### -->
 <clothe name="weapon-gnulauncher">
+	<c_member name="arm-left"/>
+	<c_member name="arm2-left"/>
+	<c_member name="arm3-left-R"/>
+	<c_member name="foot-left"/>
+	<c_member name="tail"/>
+	<c_member name="foot-right"/>
+	<c_member name="back"/>
+	<c_member name="body"/>
+	<c_member name="hair"/>
+	<c_member name="hornleft"/>
+	<c_member name="head"/>
+	<c_member name="hornright"/>
+	<c_member name="noze"/>
+	<c_member name="eyes"/>
+	<c_member name="pupil-right"/>
+	<c_member name="pupil-left"/>
+	<c_member name="eyelid"/>
+	<c_member name="weapon"/>
+	<c_member name="arm-right"/>
+	<c_member name="arm2-right"/>
+	<c_member name="arm3-right-R"/>
+</clothe>
+
+<!-- ###### weapon-polecatlauncher ###### -->
+<clothe name="weapon-polecatlauncher">
 	<c_member name="arm-left"/>
 	<c_member name="arm2-left"/>
 	<c_member name="arm3-left-R"/>
