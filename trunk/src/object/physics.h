@@ -54,14 +54,15 @@ class Physics : private ObjectConfig
 {
 private:
   MotionType_t m_motion_type ;
-  EulerVector m_pos_x;          // x0 = pos, x1 = speed, x2 = acc on the X axys
-  EulerVector m_pos_y;          // x0 = pos, x1 = speed, x2 = acc on the Y axys
+
   Point2d m_extern_force;  // External strength applyed to the object
+  double m_angle;
+
 
 protected:
   uint m_last_move;             // Time since last move
   double m_phys_width, m_phys_height;
-
+  b2Shape* m_shape;
   Point2d m_fix_point_gnd;   // Rope fixation point to the ground.
   Point2d m_fix_point_dxy;   // Rope delta to fixation point to the object
   EulerVector m_rope_angle;       // Rope angle.
@@ -72,6 +73,8 @@ protected:
 
   // Define if the rope is elastic or not.
   bool m_elasticity_off ;
+  b2BodyDef *m_body_def;
+  b2Body *m_body;
 
   // Other physics constants stored there :
   ObjectConfig m_cfg;
@@ -83,13 +86,14 @@ public:
   void SetPhysXY(double x, double y);
   void SetPhysXY(const Point2d &position) { SetPhysXY(position.x, position.y); };
 
-  double GetPhysX() const { return m_pos_x.x0; };
-  double GetPhysY() const { return m_pos_y.x0; };
-  Point2d GetPos() const { return Point2d( m_pos_x.x0, m_pos_y.x0); };
+  b2Body *GetBody() { return m_body;};
+  //double GetPhysX() const { return m_pos_x.x0; };
+  double GetPhysX() const { return m_body->GetPosition().x; };
+  //double GetPhysY() const { return m_pos_y.x0; };
+  double GetPhysY() const { return m_body->GetPosition().y; };
+  Point2d GetPos() const { return Point2d( m_body->GetPosition().x,m_body->GetPosition().y); };
 
   // Set size
-  void SetPhysSize (double width, double height) { m_phys_width = width; m_phys_height = height ; };
-
   void SetMass (double mass) { m_mass = mass ; };
   double GetMass() const { return m_mass; }
 
@@ -122,10 +126,12 @@ public:
 
   // Get current object speed
   void GetSpeed (double &norm, double &angle) const;
-  Point2d GetSpeedXY () const { return (!IsMoving()) ? Point2d(0.0, 0.0) : Point2d(m_pos_x.x1, m_pos_y.x1); };
+  Point2d GetSpeedXY () const { return (!IsMoving()) ? Point2d(0.0, 0.0) : Point2d(m_body->GetLinearVelocity().x,m_body->GetLinearVelocity().y); };
   Point2d GetSpeed() const { return GetSpeedXY(); };
-  double GetAngularSpeed() const { return m_rope_angle.x1; };
+  double GetAngularSpeed() const { return m_body->GetAngularVelocity(); };
+  double GetAngle() const { return m_body->GetAngle();};
   double GetSpeedAngle() const { return GetSpeedXY().ComputeAngle(); };
+
 
   // Add new strength
   void SetExternForceXY (const Point2d& vector);
@@ -133,10 +139,10 @@ public:
   Point2d GetExternForce() const { return m_extern_force; };
 
   // Add / Remove a fixation point.
-  void SetPhysFixationPointXY(double g_x, double g_y,
-                              double dx, double dy) ;
+ /* void SetPhysFixationPointXY(double g_x, double g_y,
+                              double dx, double dy) ;*/
   void UnsetPhysFixationPoint() ;
-  void ChangePhysRopeSize(double delta) ;
+ // void ChangePhysRopeSize(double delta) ;
 
   double GetRopeAngle() const { return m_rope_angle.x0; };
   void SetRopeAngle(double angle) { m_rope_angle.x0 = angle; };
@@ -150,7 +156,7 @@ public:
   void RunPhysicalEngine();
 
   // Notify the son class that the object has moved.
-  virtual collision_t NotifyMove(Point2d oldPos, Point2d newPos) = 0;
+//  virtual collision_t NotifyMove(Point2d oldPos, Point2d newPos) = 0;
 
   // Start moving
   void StartMoving();
@@ -164,7 +170,9 @@ public:
   virtual bool IsSleeping() const;
 
   // The object is falling ?
-  bool IsFalling() const { return (m_motion_type==FreeFall) && (m_pos_y.x1 > 0.1); };
+  bool IsFalling() const;
+
+  b2BodyDef *GetBodyDef();
 
 protected:
   // Compute current (x,y) position
@@ -175,7 +183,6 @@ protected:
   virtual void SignalDrowning() { };
   virtual void SignalGoingOutOfWater() { };
   virtual void SignalRebound() { };
-
   // Make the object rebound
   void Rebound(Point2d contactPos, double contact_angle);
 private:

@@ -119,7 +119,7 @@ void Camera::AutoCrop()
      * it takes the physical object direction into account
      */
     obj_pos = followed_object->GetPosition();
-    obj_size = followed_object->GetSize();
+    //obj_size = followed_object->GetSize();
 
     if (followed_object->IsMoving() && in_advance)
     {
@@ -183,7 +183,8 @@ void Camera::AutoCrop()
 
   // BR-> bottom right
   Point2i cameraBR = GetSize() + position;
-  Point2i objectBRmargin = obj_pos + obj_size + GetSize()/2;
+  //Point2i objectBRmargin = obj_pos + obj_size + GetSize()/2;
+  Point2i objectBRmargin = obj_pos  + GetSize()/2;
   Point2i dst(0, 0);
 
   dst += cameraBR.inf(objectBRmargin) * (objectBRmargin - cameraBR);
@@ -308,8 +309,8 @@ void Camera::Refresh(){
   // Check if player wants the camera to move
   TestCamera();
 
-  if (auto_crop && followed_object != NULL)
-    AutoCrop();
+  //if (auto_crop && followed_object != NULL)
+ //   AutoCrop();
 }
 
 void Camera::FollowObject(const PhysicalObj *obj, bool follow,
@@ -318,7 +319,7 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow,
   MSG_DEBUG( "camera.tracking", "Following object %s",
                                  obj->GetName().c_str());
 
-  Mouse::GetInstance()->Hide();
+ // Mouse::GetInstance()->Hide();
   if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
     auto_crop = follow;
 

@@ -89,7 +89,7 @@ class Grapple : public Weapon
     Grapple();
     ~Grapple();
     void Draw();
-    virtual void NotifyMove(bool collision);
+//    virtual void NotifyMove(bool collision);
 
     virtual void ActionStopUse() { DetachRope(); };
     // force detaching rope if time is out

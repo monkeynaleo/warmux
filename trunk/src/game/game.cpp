@@ -47,6 +47,7 @@
 #include "menu/results_menu.h"
 #include "network/network.h"
 #include "network/randomsync.h"
+#include "object/physical_engine.h"
 #include "object/objbox.h"
 #include "object/bonus_box.h"
 #include "object/medkit.h"
@@ -319,6 +320,7 @@ void Game::RefreshObject() const
   GetTeamsList().RefreshEnergy();
 
   ActiveTeam().AccessWeapon().Manage();
+
   lst_objects.Refresh();
   ParticleEngine::Refresh();
   CharacterCursor::GetInstance()->Refresh();
@@ -503,6 +505,9 @@ void Game::MainLoop()
     PingClient();
   StatStart("Game:RefreshInput()");
   RefreshInput();
+  StatStop("Game:RefreshInput()");
+  StatStart("Game:RefreshObject()");
+  PhysicalEngine::GetInstance()->Step();
   StatStop("Game:RefreshInput()");
   StatStart("Game:RefreshObject()");
   RefreshObject();

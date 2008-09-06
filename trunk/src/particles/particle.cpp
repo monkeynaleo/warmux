@@ -56,6 +56,9 @@ Particle::Particle(const std::string &name) :
   m_last_refresh(Time::GetInstance()->Read()),
   image(NULL)
 {
+
+
+
   SetCollisionModel(true, false, false);
 }
 
@@ -94,7 +97,7 @@ void Particle::Refresh()
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
-      SetSize(image->GetSize());
+      //SetSize(image->GetSize());
       image->SetAlpha(1.0);
     }
     else

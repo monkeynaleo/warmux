@@ -40,7 +40,7 @@ TeleportMemberParticle::TeleportMemberParticle(const Sprite* spr, const Point2i&
   SetXY(position);
   m_left_time_to_live = 1;
 
-  SetSize(image->GetSize());
+ // SetSize(image->GetSize());
   SetOnTop(true);
   destination = dest;
   start = position;

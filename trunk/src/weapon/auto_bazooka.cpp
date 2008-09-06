@@ -127,8 +127,8 @@ void RPG::Refresh()
     SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
 
     if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
-      smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
-                                       GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+     // smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
+      //                                 GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
       double wish_angle = GetPosition().ComputeAngle( m_targetPoint );
       double max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
       double diff = fmod(wish_angle-angle_local, M_PI*2);

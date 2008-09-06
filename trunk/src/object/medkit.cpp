@@ -50,7 +50,7 @@ Medkit::Medkit()
   anim = resource_manager.LoadSprite( res, "object/medkit");
   resource_manager.UnLoadXMLProfile(res);
 
-  SetSize(anim->GetSize());
+  //SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
   std::cout<<"anim set"<<std::endl;

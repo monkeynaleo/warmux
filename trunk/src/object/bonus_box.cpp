@@ -46,7 +46,7 @@ BonusBox::BonusBox():
   resource_manager.UnLoadXMLProfile(res);
   weapon_num = 0;
 
-  SetSize(anim->GetSize());
+  //SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
 }

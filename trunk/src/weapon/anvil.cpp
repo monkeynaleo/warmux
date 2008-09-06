@@ -135,12 +135,20 @@ void AnvilLauncher::UpdateTranslationStrings()
 
 void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 {
-  target.x = mouse_pos.x - (projectile->GetWidth() / 2);
+  /*target.x = mouse_pos.x - (projectile->GetWidth() / 2);
   target.y = 0 - projectile->GetHeight();
 
   if (!world.ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
      !projectile->IsInVacuumXY(target))
     return;
+
+  target_chosen = true;
+  Shoot();*/
+
+  target.x = mouse_pos.x ;
+  target.y = 0 ;
+
+
 
   target_chosen = true;
   Shoot();

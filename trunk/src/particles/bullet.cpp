@@ -34,9 +34,10 @@ BulletParticle::BulletParticle() :
   m_left_time_to_live = 1;
   start_to_fade = 0;
 
+
   image = ParticleEngine::GetSprite(BULLET_spr);
   image->Scale(1.0,1.0);
-  SetSize(Point2i(1, 1));
+ // SetSize(Point2i(1, 1));
 }
 
 void BulletParticle::Refresh()

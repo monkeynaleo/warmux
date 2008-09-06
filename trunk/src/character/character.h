@@ -60,6 +60,10 @@ private:
   DamageStatistics *damage_stats;
   EnergyBar energy_bar;
 
+
+ // Object size and position.
+  uint m_width, m_height;
+
   // survived games
   int survivals;
 
@@ -87,6 +91,14 @@ public:
 
   // Previous strength
   double previous_strength;
+
+
+
+  // Set/Get size
+  void SetSize(const Point2i &newSize);
+  int GetWidth() const { return m_width; };
+  int GetHeight() const { return m_height; };
+  Point2i GetSize() const { return Point2i(m_width, m_height); };
 
   Body* body;
 

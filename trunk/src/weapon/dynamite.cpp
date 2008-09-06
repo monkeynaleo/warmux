@@ -57,7 +57,7 @@ DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
 
   image->animation.SetLoopMode(false);
-  SetSize(image->GetSize());
+  //SetSize(image->GetSize());
   SetTestRect (0, 0, 2, 3);
 }
 

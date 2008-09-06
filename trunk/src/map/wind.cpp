@@ -53,7 +53,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   mass = GetMass();
   mass *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
   SetMass (mass);
-  SetSize( Point2i(20,20) );
+  //SetSize( Point2i(20,20) );
   wind_factor = GetWindFactor() ;
   wind_factor *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
   SetWindFactor(wind_factor);
@@ -146,6 +146,7 @@ void WindParticle::Refresh()
   if (m_alive != ALIVE || x!=GetX() || y!=GetY())
   {
     m_alive = ALIVE;
+    StopMoving();
     StartMoving();
     SetXY( Point2i(x, y) );
     MSG_DEBUG("wind", "new position %d, %d - mass %f, wind_factor %f", x, y, GetMass(), GetWindFactor());

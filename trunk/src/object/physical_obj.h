@@ -31,6 +31,7 @@
 #include "tool/point.h"
 #include "tool/rectangle.h"
 
+
 // Alive state
 typedef enum
 {
@@ -74,8 +75,6 @@ protected:
   // Rectangle used for collision tests
   uint m_test_left, m_test_right, m_test_top, m_test_bottom;
 
-  // Object size and position.
-  uint m_width, m_height;
 
   std::string m_rebound_sound;
 
@@ -83,6 +82,7 @@ protected:
   int m_energy;
 
   bool m_allow_negative_y;
+
 
 public:
   PhysicalObj (const std::string &name, const std::string &xml_config="");
@@ -109,24 +109,18 @@ public:
   virtual void GetValueFromAction(Action *);
   virtual void StoreValue(Action *);
 
-  // Set/Get size
-  void SetSize(const Point2i &newSize);
-  int GetWidth() const { return m_width; };
-  int GetHeight() const { return m_height; };
-  Point2i GetSize() const { return Point2i(m_width, m_height); };
-
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
   const Rectanglei GetTestRect() const
   {
-    int width = m_width - m_test_right - m_test_left;
-    int height = m_height - m_test_bottom - m_test_top;
+    int width = 1 - m_test_right - m_test_left;
+    int height = 1 - m_test_bottom - m_test_top;
     width = (width == 0 ? 1 : width);
     height = (height == 0 ? 1 : height);
     return Rectanglei(GetX() + m_test_left, GetY() + m_test_top, width, height);
   }
-  int GetTestWidth() const { return m_width -m_test_left -m_test_right; };
-  int GetTestHeight() const { return m_height -m_test_top -m_test_bottom; };
+  int GetTestWidth() const { return 1 -m_test_left -m_test_right; };
+  int GetTestHeight() const { return 1 -m_test_top -m_test_bottom; };
 
   //----------- Access to datas (read only) ----------
   virtual const std::string &GetName() const { return m_name; }
@@ -137,7 +131,7 @@ public:
   int GetCenterX() const { return GetX() +m_test_left +GetTestWidth()/2; };
   int GetCenterY() const { return GetY() +m_test_top +GetTestHeight()/2; };
   const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
-  const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), m_width, m_height); };
+  const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), 1, 1); };
   bool GoesThroughWall() const { return m_goes_through_wall; }
   bool IsCharacter() const { return m_is_character; }
 
@@ -163,9 +157,9 @@ public:
   bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
   // Relative to current position
   bool IsInVacuum(const Point2i &offset, bool check_objects = true) const { return IsInVacuumXY(GetPosition() + offset, check_objects); };
-  PhysicalObj* CollidedObjectXY(const Point2i & position) const;
+//  PhysicalObj* CollidedObjectXY(const Point2i & position) const;
   // Relative to current position
-  PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const { return CollidedObjectXY(GetPosition() + offset); };
+ // PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const { return CollidedObjectXY(GetPosition() + offset); };
   bool FootsInVacuumXY(const Point2i & position) const;
   bool FootsInVacuum() const { return FootsInVacuumXY(GetPosition()); };
 
@@ -208,7 +202,7 @@ public:
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
 
-  collision_t NotifyMove(Point2d oldPos, Point2d newPos);
+//  collision_t NotifyMove(Point2d oldPos, Point2d newPos);
 
 protected:
   virtual void SignalRebound();

@@ -35,7 +35,7 @@ WaterParticle::WaterParticle() :
 
   image = ParticleEngine::GetSprite(WATER_spr);
   image->SetRotation_HotSpot(bottom_center);
-  SetSize(image->GetSize());
+ // SetSize(image->GetSize());
 }
 
 WaterParticle::~WaterParticle()
@@ -48,13 +48,13 @@ void WaterParticle::Refresh()
   UpdatePosition();
   image->Update();
 
-  if (image->GetSize().x != 0 && image->GetSize().y != 0)
+  /*if (image->GetSize().x != 0 && image->GetSize().y != 0)
   {
     int dx = (GetWidth() - image->GetWidth()) / 2;
 
     SetTestRect(dx, dx-1, GetHeight() - 2,1);
   }
-
+*/
   double angle = GetSpeedAngle();
   image->SetRotation_rad((angle - M_PI_2));
 
@@ -64,7 +64,7 @@ void WaterParticle::Refresh()
 void WaterParticle::Draw()
 {
   Point2i draw_pos = GetPosition();
-  draw_pos.y += GetHeight()/2;
+  //draw_pos.y += GetHeight()/2;
   image->Draw( draw_pos );
 }
 

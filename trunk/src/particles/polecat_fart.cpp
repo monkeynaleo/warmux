@@ -37,7 +37,7 @@ PolecatFart::PolecatFart() :
 
   image = ParticleEngine::GetSprite(POLECAT_FART_spr);
   image->Scale(1.0,1.0);
-  SetSize( Point2i(10, 10) );
+ // SetSize( Point2i(10, 10) );
 }
 
 void PolecatFart::Refresh()

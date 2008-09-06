@@ -118,6 +118,17 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
                                     WeaponLauncher * p_launcher)
   : PhysicalObj(name), cfg(p_cfg)
 {
+
+
+  b2PolygonDef shapeDef;
+  shapeDef.SetAsBox(0.05f, 0.1f);
+  shapeDef.density = 15.0f;
+  shapeDef.friction = 0.8f;
+  m_body->CreateShape(&shapeDef);
+  m_body->SetMassFromShapes();
+  m_body->SetBullet(true);
+
+
   m_allow_negative_y = true;
   SetCollisionModel(false, true, true);
   launcher = p_launcher;
@@ -130,7 +141,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
-  SetSize(image->GetSize());
+  //SetSize(image->GetSize());
 
   // Set rectangle test
   int dx = image->GetWidth()/2-1;
@@ -184,19 +195,23 @@ void WeaponProjectile::Shoot(double strength)
 
   // bug #10236 : problem with flamethrower collision detection
   // Check if the object is colliding something between hand position and gun hole
-  Point2i hand_position = ActiveCharacter().GetHandPosition() - GetSize() / 2;
-  Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
+  Point2i hand_position = ActiveCharacter().GetHandPosition() ;
+  Point2i hole_position = launcher->GetGunHolePosition();
   Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
+  /*Point2i hand_position = ActiveCharacter().GetHandPosition() - GetSize() / 2;
+  Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
+  Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
+  Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);*/
   SetXY(hand_position);
   SetSpeed(strength, angle);
-  collision_t collision = NotifyMove(f_hand_position, f_hole_position);
-  if (collision == NO_COLLISION) {
+//  collision_t collision = NotifyMove(f_hand_position, f_hole_position);
+ // if (collision == NO_COLLISION) {
     // Set the initial position and speed.
     SetXY(hole_position);
     SetSpeed(strength, angle);
     PutOutOfGround(angle);
-  }
+  //}
 }
 
 void WeaponProjectile::ShootSound()
@@ -210,7 +225,7 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
-  SetSize(image->GetSizeMax());
+ // SetSize(image->GetSizeMax());
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -236,8 +251,10 @@ void WeaponProjectile::Draw()
     {
       std::ostringstream ss;
       ss << tmp ;
-      int txt_x = GetX() + GetWidth() / 2;
-      int txt_y = GetY() - GetHeight();
+    //  int txt_x = GetX() + GetWidth() / 2;
+     // int txt_y = GetY() - GetHeight();
+       int txt_x = GetX()  ;
+      int txt_y = GetY() ;
       (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition(),
       ss.str(), white_color);
     }

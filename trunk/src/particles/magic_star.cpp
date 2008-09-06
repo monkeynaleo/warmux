@@ -42,7 +42,7 @@ MagicStarParticle::MagicStarParticle() :
     default: ASSERT(false);
   }
   image->Scale(0.0, 0.0);
-  SetSize( Point2i(1, 1) );
+ // SetSize( Point2i(1, 1) );
 }
 
 void MagicStarParticle::Refresh()

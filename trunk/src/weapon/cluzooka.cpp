@@ -55,15 +55,15 @@ protected:
         ASSERT(recursion_depth == 0);
 #endif
 
-        // fake explosion 
+        // fake explosion
         JukeBox::GetInstance()->Play( "share", "weapon/cluzooka_shot" );
-        ParticleEngine::AddExplosionSmoke( pos, 
-            50, 
+        ParticleEngine::AddExplosionSmoke( pos,
+            50,
             ParticleEngine::LittleESmoke );
 
         ClusterType * cluster;
 
-        for (uint i = 0; i < fragments; ++i ) 
+        for (uint i = 0; i < fragments; ++i )
         {
             float cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
 
@@ -175,7 +175,7 @@ void CluzookaCluster::Refresh()
 }
 
 void CluzookaCluster::DoSpawn()
-{  
+{
   const uint fragments = 2;
   double angle;
   double speed;
@@ -267,7 +267,7 @@ void CluzookaRocket::Refresh()
         // rotate speed is max when t is close to 0, and slows down to 1
         // when t is approaching 1
         //float rotate_speed = 1 + num_of_full_rotates * ( 1.0f - t );
-        image->SetRotation_rad( speed_angle + 
+        image->SetRotation_rad( speed_angle +
                  2 * M_PI * num_of_full_rotates * inv_t * inv_t * inv_t * inv_t );
     }
     else
@@ -275,8 +275,8 @@ void CluzookaRocket::Refresh()
         image->SetRotation_rad( speed_angle );
     }
 
-    smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
-                                     GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+   // smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
+     //                                GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
   }
   else
   {
@@ -285,7 +285,7 @@ void CluzookaRocket::Refresh()
 }
 
 void CluzookaRocket::DoSpawn()
-{  
+{
   const uint fragments = static_cast<CluzookaConfig &>(cfg).m_fragments;
   const float angle_range = static_cast<CluzookaConfig &>(cfg).m_angle_dispersion * M_PI / 180.0f;
 

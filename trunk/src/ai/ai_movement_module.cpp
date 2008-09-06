@@ -89,7 +89,8 @@ bool AIMovementModule::RiskGoingOutOfMap() const
        ActiveCharacter().GetX() <= 5 ) {
     return true;
   } else if ( ActiveCharacter().GetDirection() == DIRECTION_RIGHT &&
-              world.GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
+              //world.GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
+              world.GetWidth() - 5 <= ActiveCharacter().GetX() +10 ) {
     return true;
   }
 

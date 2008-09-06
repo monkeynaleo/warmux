@@ -34,7 +34,7 @@ BodyMemberParticle::BodyMemberParticle(const Sprite* spr, const Point2i& positio
   ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
   SetXY(position);
 
-  SetSize(image->GetSize());
+ //SetSize(image->GetSize());
   SetOnTop(true);
   SetSpeed( (double)RandomLocal().GetLong(10, 15),
         - (double)RandomLocal().GetLong(0, 3000)/1000.0);

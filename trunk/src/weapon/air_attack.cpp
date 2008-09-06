@@ -88,9 +88,9 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   SetCollisionModel(true, false, false);
 
   image = resource_manager.LoadSprite(weapons_res_profile, "air_attack_plane");
-  SetSize(image->GetSize());
+  //SetSize(image->GetSize());
   obus_dx = 100;
-  obus_dy = GetY() + GetHeight();
+  obus_dy = GetY();
 
   flying_sound.Play("share", "weapon/aircraft_flying");
 }
@@ -171,7 +171,7 @@ void Plane::Refresh()
     next_height = RandomLocal().GetInt(20,100);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
-    if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height )
+    if ( last_dropped_bomb->GetY() > GetY()+next_height )
     {
       next_height = RandomLocal().GetInt(20,100);
       DropBomb();

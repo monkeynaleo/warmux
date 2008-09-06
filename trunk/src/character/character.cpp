@@ -93,7 +93,7 @@ void Character::SetBody(Body* char_body)
 
   SetDirection(RandomLocal().GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
   body->SetFrame(RandomLocal().GetLong(0, body->GetFrameCount() - 1));
-  SetSize(body->GetSize());
+  //SetSize(body->GetSize());
 }
 
 Character::Character (Team& my_team, const std::string &name, Body *char_body) :
@@ -123,6 +123,14 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   previous_strength(0),
   body(NULL)
 {
+//Physical shape
+ b2PolygonDef shapeDef;
+  shapeDef.SetAsBox(0.5f, 1.0f);
+  shapeDef.density = 1.0f;
+  shapeDef.friction = 0.8f;
+  m_body->CreateShape(&shapeDef);
+  m_body->SetMassFromShapes();
+
 
   m_is_character = true;
   SetCollisionModel(false, true, true);
@@ -550,10 +558,12 @@ void Character::Refresh()
 
   UpdatePosition();
 
+
   if (IsDead()) return;
 
   Time * global_time = Time::GetInstance();
 
+  body->SetRotation(GetAngle());
   // center on character who is falling
   if (FootsInVacuum()) {
     Camera::GetInstance()->FollowObject(this, true);

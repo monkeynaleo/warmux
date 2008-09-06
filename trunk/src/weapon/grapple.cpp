@@ -367,7 +367,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
   return nodes_to_remove > 0;
 }
 
-void Grapple::NotifyMove(bool collision)
+/*void Grapple::NotifyMove(bool collision)
 {
   bool addNode = false;
   int currentSense;
@@ -386,7 +386,7 @@ void Grapple::NotifyMove(bool collision)
         {
           // The character tryed to change the rope size.
           // There has been a collision, so we cancel the rope length change.
-          ActiveCharacter().ChangePhysRopeSize (-delta_len);
+      //    ActiveCharacter().ChangePhysRopeSize (-delta_len);
           delta_len = 0;
         }
       return;
@@ -405,7 +405,7 @@ void Grapple::NotifyMove(bool collision)
 
   TryRemoveNodes( currentSense );
 }
-
+*/
 void Grapple::Refresh()
 {
   if (!IsInUse())
@@ -508,12 +508,12 @@ void Grapple::AttachRope(const Point2i& contact_point)
   Point2i pos(handPos.x - ActiveCharacter().GetX(),
               handPos.y - ActiveCharacter().GetY());
 
-  ActiveCharacter().SetPhysFixationPointXY(
+  /*ActiveCharacter().SetPhysFixationPointXY(
                                            contact_point.x / PIXEL_PER_METER,
                                            contact_point.y / PIXEL_PER_METER,
                                            (double)pos.x / PIXEL_PER_METER,
                                            (double)pos.y / PIXEL_PER_METER);
-
+*/
   m_fixation_point = contact_point;
 
   rope_node_t root_node;
@@ -522,7 +522,7 @@ void Grapple::AttachRope(const Point2i& contact_point)
   root_node.sense = 0;
   rope_nodes.push_back(root_node);
 
-  ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
+  //ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
   m_hooked_time = Time::GetInstance()->Read();
   ActiveCharacter().SetMovement("ninja-rope");
 
@@ -553,11 +553,11 @@ void Grapple::AttachNode(const Point2i& contact_point,
   Point2i pos(handPos.x - ActiveCharacter().GetX(),
               handPos.y - ActiveCharacter().GetY());
 
-  ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
+  /*ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
                                            contact_point.y / PIXEL_PER_METER,
                                            (double)pos.x / PIXEL_PER_METER,
                                            (double)pos.y / PIXEL_PER_METER);
-
+*/
   m_fixation_point = contact_point;
   rope_node_t node;
   node.pos = m_fixation_point;
@@ -586,13 +586,14 @@ void Grapple::DetachNode()
   m_fixation_point = rope_nodes.back().pos ;
 
   Point2i handPos = ActiveCharacter().GetHandPosition();
-  int dx = handPos.x - ActiveCharacter().GetX();
-  int dy = handPos.y - ActiveCharacter().GetY();
+ // int dx = handPos.x - ActiveCharacter().GetX();
+  //int dy = handPos.y - ActiveCharacter().GetY();
 
-  ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
+  /*ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
                                            m_fixation_point.y / PIXEL_PER_METER,
                                            (double)dx / PIXEL_PER_METER,
                                            (double)dy / PIXEL_PER_METER);
+                                           */
 }
 
 // =========================== Moves management
@@ -600,7 +601,8 @@ void Grapple::DetachNode()
 void Grapple::SetRopeSize(double length) const
 {
   double delta = length - ActiveCharacter().GetRopeLength();
-  ActiveCharacter().ChangePhysRopeSize (delta);
+   delta = delta + 1.0;
+  //ActiveCharacter().ChangePhysRopeSize (delta);
 }
 
 void Grapple::GoUp()
@@ -610,7 +612,7 @@ void Grapple::GoUp()
   last_mvt = Time::GetInstance()->Read();
 
   delta_len = -0.1 ;
-  ActiveCharacter().ChangePhysRopeSize (delta_len);
+  //ActiveCharacter().ChangePhysRopeSize (delta_len);
   ActiveCharacter().UpdatePosition();
   delta_len = 0 ;
 }
@@ -630,7 +632,7 @@ void Grapple::GoDown()
     return;
 
   delta_len = 0.1 ;
-  ActiveCharacter().ChangePhysRopeSize (delta_len) ;
+  //ActiveCharacter().ChangePhysRopeSize (delta_len) ;
   ActiveCharacter().UpdatePosition() ;
   delta_len = 0 ;
 }

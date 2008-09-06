@@ -89,7 +89,7 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 {
   swimming = false;
   explode_colliding_character = true;
-  SetSize(image->GetSize());
+  //SetSize(image->GetSize());
   SetTestRect(1, 1, 2, 2);
 }
 

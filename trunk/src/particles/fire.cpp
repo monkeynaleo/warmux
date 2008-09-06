@@ -51,7 +51,7 @@ FireParticle::FireParticle() :
 
   image = ParticleEngine::GetSprite(FIRE_spr);
   image->SetRotation_HotSpot(bottom_center);
-  SetSize(image->GetSize());
+  //SetSize(image->GetSize());
 }
 
 FireParticle::~FireParticle()
@@ -71,13 +71,13 @@ void FireParticle::Refresh()
   scale = 1.0 - scale;
   image->Scale(scale, scale);
 
-  if(image->GetSize().x != 0 && image->GetSize().y != 0)
+ /* if(image->GetSize().x != 0 && image->GetSize().y != 0)
   {
     int dx = (GetWidth() - image->GetWidth()) / 2;
 
     SetTestRect(dx, dx - 1, GetHeight() - 2,1);
   }
-
+*/
   // The position of the object represents its top left corner
   // So, since we are resizing the object, we have to move it
   // to make it appear at the same place
@@ -87,8 +87,8 @@ void FireParticle::Refresh()
     on_ground = true;
     if((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
     {
-      Point2i expl_pos = GetPosition() + GetSize();
-      expl_pos.x -= GetWidth()/2;
+      Point2i expl_pos = GetPosition() ;
+      //expl_pos.x -= G;
 
       ApplyExplosion(expl_pos, fire_cfg, "", false, ParticleEngine::LittleESmoke);
       fire_cfg.explosion_range = (uint)(scale * image->GetWidth()) + 1;
@@ -110,7 +110,7 @@ void FireParticle::Refresh()
 void FireParticle::Draw()
 {
   Point2i draw_pos = GetPosition();
-  draw_pos.y += GetHeight()/2;
+  //draw_pos.y += GetHeight()/2;
   image->Draw( draw_pos );
 }
 
