@@ -33,6 +33,7 @@
 #include "tool/euler_vector.h"
 #include "tool/point.h"
 #include "object_cfg.h"
+#include <vector>
 
 enum MotionType_t
 {
@@ -49,6 +50,7 @@ typedef enum {
 
 class Game;
 class Action;
+
 
 class Physics : private ObjectConfig
 {
@@ -70,6 +72,13 @@ protected:
   double m_rope_elasticity;       // The smallest, the more elastic.
   double m_elasticity_damping;    // 0 means perpetual motion.
   double m_balancing_damping;     // 0 means perpetual balancing.
+
+  std::vector<b2ContactPoint> added_contact_list;
+  std::vector<b2ContactPoint> persist_contact_list;
+  std::vector<b2ContactPoint> removed_contact_list;
+  std::vector<b2ContactResult> result_contact_list;
+
+
 
   // Define if the rope is elastic or not.
   bool m_elasticity_off ;
@@ -108,6 +117,14 @@ public:
 
   void SetRebounding (bool rebounding) { m_rebounding = rebounding; }
   bool GetRebounding () const { return m_rebounding; }
+
+void AddAddedContactPoint(b2ContactPoint contact);
+void AddPersistContactPoint(b2ContactPoint contact);
+void AddRemovedContactPoint(b2ContactPoint contact);
+ void AddContactResult(b2ContactResult contact);
+
+  void ClearContact();
+
 
   // Used to sync value across network
   virtual void GetValueFromAction(Action *);

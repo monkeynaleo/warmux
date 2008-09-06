@@ -387,3 +387,30 @@ bool Physics::IsFalling() const
 }
 
 
+void Physics::AddAddedContactPoint(b2ContactPoint contact)
+{
+    added_contact_list.push_back(contact);
+}
+
+void Physics::AddPersistContactPoint(b2ContactPoint contact)
+{
+    persist_contact_list.push_back(contact);
+}
+
+void Physics::AddRemovedContactPoint(b2ContactPoint contact)
+{
+    removed_contact_list.push_back(contact);
+}
+
+void Physics::AddContactResult(b2ContactResult contact)
+{
+  result_contact_list.push_back(contact);
+}
+
+void Physics::ClearContact()
+{
+  added_contact_list.clear();
+  persist_contact_list.clear();
+  removed_contact_list.clear();
+  result_contact_list.clear();
+}

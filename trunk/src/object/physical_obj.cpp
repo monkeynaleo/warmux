@@ -669,6 +669,12 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
   return false;
 }
 
+void PhysicalObj::SetSize(const Point2i &newSize)
+{
+  m_width = newSize.x;
+ m_height = newSize.y;
+}
+
 bool PhysicalObj::FootsOnFloor(int y) const
 {
   //TODO : calculate collision with water
