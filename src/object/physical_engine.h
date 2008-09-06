@@ -25,6 +25,7 @@
 #include "include/singleton.h"
 #include <Box2D.h>
 #include <map>
+#include <vector>
 //-----------------------------------------------------------------------------
 
 class Physics;
@@ -40,6 +41,13 @@ PhysicalEngine();
   void RemoveObject(Physics *obj);
   void Step();
 
+  typedef enum {ADD,PERSIST,REMOVE} ContactType;
+
+
+  void AddContactPoint(b2ContactPoint contact,ContactType type);
+  void AddContactResult(b2ContactResult contact);
+
+
 protected:
 
   uint frame_rate;
@@ -50,29 +58,42 @@ protected:
 
   std::map<b2Body *,Physics *> objects_list;
 
+  std::vector<b2ContactPoint> added_contact_list;
+  std::vector<b2ContactPoint> persist_contact_list;
+  std::vector<b2ContactPoint> removed_contact_list;
+  std::vector<b2ContactResult> result_contact_list;
+
+  void ClearContact();
+
+
+
 
   friend class Singleton<PhysicalEngine>;
 
 
 
 };
-/*
+
  class ContactListener : public b2ContactListener
-  {
+{
   public:
-    ContactListener(PhysicalEngine *){};
+    ContactListener(PhysicalEngine *);
 
-    void Add(const b2ContactPoint* point){};
+    void Add(const b2ContactPoint* point);
 
-    void Persist(const b2ContactPoint* point){};
-
-
-    void Remove(const b2ContactPoint* point){};
+    void Persist(const b2ContactPoint* point);
 
 
-      void Result(const b2ContactResult* point){};
+    void Remove(const b2ContactPoint* point);
 
-  };*/
+
+      void Result(const b2ContactResult* point);
+
+      protected:
+
+      PhysicalEngine *engine;
+
+};
 
 
 

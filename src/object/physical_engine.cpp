@@ -69,17 +69,83 @@ void PhysicalEngine::RemoveObject(Physics *obj)
 
 void PhysicalEngine::Step()
 {
-  MSG_DEBUG("fred", "step ?");
   float32 timeStep = 1.0f / frame_rate;
 
   if ((Time::GetInstance()->Read()-last_step_time) < timeStep)
     {
       return;
     }
-  MSG_DEBUG("fred", "Engine step");
+  MSG_DEBUG("physical.step", "Engine step");
+
+
 
   physic_world->Step(timeStep, iterations);
+
+
   last_step_time = last_step_time-timeStep;
+}
+
+void PhysicalEngine::ClearContact()
+{
+  added_contact_list.clear();
+  persist_contact_list.clear();
+  removed_contact_list.clear();
+  result_contact_list.clear();
+}
+
+void PhysicalEngine::AddContactPoint(b2ContactPoint contact,ContactType type)
+{
+
+  switch(type)
+  {
+      case ADD:
+        added_contact_list.push_back(contact);
+      break;
+         case PERSIST:
+       persist_contact_list.push_back(contact);
+      break;
+      case REMOVE:
+        removed_contact_list.push_back(contact);
+      break;
+  }
+}
+
+
+void PhysicalEngine::AddContactResult(b2ContactResult contact)
+{
+  result_contact_list.push_back(contact);
+}
+
+
+
+ContactListener::ContactListener(PhysicalEngine *e)
+{
+    engine = e;
+}
+
+void ContactListener::Add(const b2ContactPoint* point)
+{
+  b2ContactPoint contact = *point;
+  engine->AddContactPoint(contact,PhysicalEngine::ADD);
+}
+
+void ContactListener::Persist(const b2ContactPoint* point)
+{
+  b2ContactPoint contact = *point;
+  engine->AddContactPoint(contact,PhysicalEngine::PERSIST);
+}
+
+
+void ContactListener::Remove(const b2ContactPoint* point)
+{
+  b2ContactPoint contact = *point;
+  engine->AddContactPoint(contact,PhysicalEngine::REMOVE);
+}
+
+void ContactListener::Result(const b2ContactResult* point)
+{
+  b2ContactResult contact = *point;
+  engine->AddContactResult(contact);
 }
 
 

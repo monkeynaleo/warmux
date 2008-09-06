@@ -190,13 +190,13 @@ void WeaponProjectile::Shoot(double strength)
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
   SetXY(hand_position);
   SetSpeed(strength, angle);
-  collision_t collision = NotifyMove(f_hand_position, f_hole_position);
-  if (collision == NO_COLLISION) {
+  //collision_t collision = NotifyMove(f_hand_position, f_hole_position);
+  //if (collision == NO_COLLISION) {
     // Set the initial position and speed.
     SetXY(hole_position);
     SetSpeed(strength, angle);
     PutOutOfGround(angle);
-  }
+ // }
 }
 
 void WeaponProjectile::ShootSound()

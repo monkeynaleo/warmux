@@ -67,6 +67,11 @@ protected:
   bool m_is_character;
   bool m_is_fire;
 
+  // Object size and position.
+  uint m_width, m_height;
+
+
+
   virtual void CheckOverlapping();
 
   std::string m_name;
@@ -93,6 +98,12 @@ public:
   virtual ~PhysicalObj ();
 
   //-------- Set position and size -------
+
+  // Set/Get size
+  void SetSize(const Point2i &newSize);
+  int GetWidth() const { return m_width; };
+  int GetHeight() const { return m_height; };
+  Point2i GetSize() const { return Point2i(m_width, m_height); };
 
   // Set/Get position
   void SetX(double x) { SetXY( Point2d(x, GetYdouble()) ); };
