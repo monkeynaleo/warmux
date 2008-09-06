@@ -23,9 +23,9 @@
 #include "object/physical_engine.h"
 #include "object/physical_obj.h"
 #include <iostream>
+
 PhysicalEngine::PhysicalEngine()
 {
-
   worldAABB.lowerBound.Set(-1000.0f, -1000.0f);
   worldAABB.upperBound.Set(1000.0f, 1000.0f);
   b2Vec2 gravity(0.0f, 10.0f);
@@ -47,13 +47,11 @@ PhysicalEngine::PhysicalEngine()
   frame_rate = 60;
   last_step_time = 0;
   iterations = 10;
-
-
 }
 
 PhysicalEngine::~PhysicalEngine()
 {
-    delete physic_world;
+  delete physic_world;
 }
 
 b2Body *PhysicalEngine::AddObject(Physics *new_obj)
@@ -61,32 +59,27 @@ b2Body *PhysicalEngine::AddObject(Physics *new_obj)
   b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
   objects_list[body] = new_obj;
   return body;
-
-
 }
 
 void PhysicalEngine::RemoveObject(Physics *obj)
 {
-    objects_list.erase(obj->GetBody());
+  objects_list.erase(obj->GetBody());
 }
 
 
 void PhysicalEngine::Step()
 {
-
-    MSG_DEBUG("fred", "step ?");
+  MSG_DEBUG("fred", "step ?");
   float32 timeStep = 1.0f / frame_rate;
-  if((Time::GetInstance()->Read()-last_step_time) < timeStep)
-  {
+
+  if ((Time::GetInstance()->Read()-last_step_time) < timeStep)
+    {
       return;
-  }
-   std::cout<<"step"<<std::endl;
+    }
   MSG_DEBUG("fred", "Engine step");
 
   physic_world->Step(timeStep, iterations);
   last_step_time = last_step_time-timeStep;
-
-
 }
 
 

@@ -80,13 +80,13 @@ Physics::Physics ():
 
 void Physics::SetPhysXY(double x, double y)
 {
- /* if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
-    m_pos_x.x0 = x;
-    m_pos_y.x0 = y;*/
-    m_body->SetXForm(b2Vec2(x,y),m_body->GetAngle());
+  /* if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
+     m_pos_x.x0 = x;
+     m_pos_y.x0 = y;*/
+  m_body->SetXForm(b2Vec2(x,y),m_body->GetAngle());
 
-    /*UpdateTimeOfLastMove();
-  }*/
+  /*UpdateTimeOfLastMove();
+    }*/
 }
 
 // Set the air resist factor
@@ -110,7 +110,7 @@ void Physics::AddSpeedXY (Point2d vector)
   if (EqualsZero(vector.y)) vector.y = 0;
   bool was_moving = IsMoving();
 
- m_body->SetLinearVelocity(m_body->GetLinearVelocity()+b2Vec2(vector.x,vector.y));
+  m_body->SetLinearVelocity(m_body->GetLinearVelocity()+b2Vec2(vector.x,vector.y));
   // setting to FreeFall is done in StartMoving()
 
   if (!was_moving && IsMoving()) {
@@ -124,34 +124,34 @@ void Physics::GetSpeed(double &norm, double &angle) const
   Point2d speed ;
 
   switch (m_motion_type) {
-    case FreeFall:
-      speed = GetSpeedXY();
-      norm = speed.Norm();
-      angle = speed.ComputeAngle();
-      break ;
+  case FreeFall:
+    speed = GetSpeedXY();
+    norm = speed.Norm();
+    angle = speed.ComputeAngle();
+    break ;
 
-    case Pendulum:
-      // Transform angular speed to linear speed.
+  case Pendulum:
+    // Transform angular speed to linear speed.
 
-      norm = fabs(m_rope_length.x0 * m_rope_angle.x1);
+    norm = fabs(m_rope_length.x0 * m_rope_angle.x1);
 
-      if (m_rope_angle.x1 > 0)
-        angle = fabs(m_rope_angle.x0) ;
-      else
-        angle = fabs(m_rope_angle.x0) - M_PI ;
+    if (m_rope_angle.x1 > 0)
+      angle = fabs(m_rope_angle.x0) ;
+    else
+      angle = fabs(m_rope_angle.x0) - M_PI ;
 
-      if (m_rope_angle.x0 < 0)
-        angle = -angle ;
-      break;
+    if (m_rope_angle.x0 < 0)
+      angle = -angle ;
+    break;
 
-    case NoMotion:
-      norm = 0.0;
-      angle = 0.0;
-      break;
+  case NoMotion:
+    norm = 0.0;
+    angle = 0.0;
+    break;
 
-    default:
-      ASSERT(false);
-      break ;
+  default:
+    ASSERT(false);
+    break ;
   }
 }
 
@@ -178,10 +178,10 @@ void Physics::StoreValue(Action *a)
   a->Push(m_elasticity_off);
 
   /*MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
-	     typeid(*this).name(),
-             m_body->GetPosition().x, m_pos_x.x1, m_pos_x.x2,
-             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-             m_extern_force.x, m_extern_force.y);*/
+    typeid(*this).name(),
+    m_body->GetPosition().x, m_pos_x.x1, m_pos_x.x2,
+    m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+    m_extern_force.x, m_extern_force.y);*/
 }
 
 void Physics::GetValueFromAction(Action *a)
@@ -200,11 +200,11 @@ void Physics::GetValueFromAction(Action *a)
   m_balancing_damping  = a->PopDouble();
   m_elasticity_off     = !!a->PopInt();
 
-/*  MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
-	     typeid(*this).name(),
-             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
-             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-             m_extern_force.x, m_extern_force.y);*/
+  /*  MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
+      typeid(*this).name(),
+      m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
+      m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+      m_extern_force.x, m_extern_force.y);*/
 }
 
 void Physics::SetExternForceXY (const Point2d& vector)
@@ -224,8 +224,8 @@ void Physics::SetExternForceXY (const Point2d& vector)
 
 // Set fixation point positions
 /*void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
-                                     double dy)
-{
+  double dy)
+  {
   double fix_point_x, fix_point_y ;
   double old_length ;
 
@@ -245,63 +245,63 @@ void Physics::SetExternForceXY (const Point2d& vector)
   m_rope_length.x0 = Point2d(fix_point_x,fix_point_y).Distance( Point2d(g_x,g_y) );
 
   if (m_motion_type == Pendulum)
-    {
-      // We were already fixed. By changing the fixation point, we have
-      // to recompute the angular speed depending of the new rope length.
-      // And don't forget to recompute the angle, too!
-      V.x = fix_point_x - g_x ;
-      V.y = fix_point_y - g_y ;
-      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle() ;
+  {
+  // We were already fixed. By changing the fixation point, we have
+  // to recompute the angular speed depending of the new rope length.
+  // And don't forget to recompute the angle, too!
+  V.x = fix_point_x - g_x ;
+  V.y = fix_point_y - g_y ;
+  m_rope_angle.x0 = M_PI_2 - V.ComputeAngle() ;
 
-      m_rope_angle.x1 = m_rope_angle.x1 * old_length / m_rope_length.x0 ;
-    }
+  m_rope_angle.x1 = m_rope_angle.x1 * old_length / m_rope_length.x0 ;
+  }
   else
-    {
-      // We switch from a regular move to a pendulum move.
-      // Compute the initial angle
-      V.x = fix_point_x - g_x ;
-      V.y = fix_point_y - g_y ;
-      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle() ;
+  {
+  // We switch from a regular move to a pendulum move.
+  // Compute the initial angle
+  V.x = fix_point_x - g_x ;
+  V.y = fix_point_y - g_y ;
+  m_rope_angle.x0 = M_PI_2 - V.ComputeAngle() ;
 
-      // Convert the linear speed to angular speed.
-      m_rope_angle.x1 = (m_pos_x.x1 * cos(m_rope_angle.x0) +
-                         m_pos_y.x1 * sin(m_rope_angle.x0) ) / m_rope_length.x0;
+  // Convert the linear speed to angular speed.
+  m_rope_angle.x1 = (m_pos_x.x1 * cos(m_rope_angle.x0) +
+  m_pos_y.x1 * sin(m_rope_angle.x0) ) / m_rope_length.x0;
 
-      // Reset the angular acceleration.
-      m_rope_angle.x2 = 0 ;
+  // Reset the angular acceleration.
+  m_rope_angle.x2 = 0 ;
 
-      bool was_moving = IsMoving();
-      m_motion_type = Pendulum ;
-      if (!was_moving && IsMoving())
-        StartMoving();
-    }
-}
+  bool was_moving = IsMoving();
+  m_motion_type = Pendulum ;
+  if (!was_moving && IsMoving())
+  StartMoving();
+  }
+  }
 */
 void Physics::UnsetPhysFixationPoint()
 {
- /* double speed_norm, angle ;
+  /* double speed_norm, angle ;
 
-  GetSpeed (speed_norm, angle);
+     GetSpeed (speed_norm, angle);
 
-  angle = -angle ;
+     angle = -angle ;
 
-  SetSpeed(speed_norm, angle);
+     SetSpeed(speed_norm, angle);
 
-  UpdateTimeOfLastMove();
+     UpdateTimeOfLastMove();
 
-  m_pos_x.x2 = 0 ;
-  m_pos_y.x2 = 0 ;
+     m_pos_x.x2 = 0 ;
+     m_pos_y.x2 = 0 ;
 
-  m_rope_angle.Clear();
-  m_rope_length.Clear();
+     m_rope_angle.Clear();
+     m_rope_length.Clear();
 
-  m_motion_type = FreeFall ;*/
+     m_motion_type = FreeFall ;*/
 }
 
 /*void Physics::ChangePhysRopeSize(double dl)
-{
+  {
   if ((dl < 0) && (m_rope_length.x0 < 0.5))
-    return ;
+  return ;
 
   bool was_moving = IsMoving();
 
@@ -311,8 +311,8 @@ void Physics::UnsetPhysFixationPoint()
   m_rope_angle.x1 = m_rope_angle.x1 * (m_rope_length.x0 - dl) / m_rope_length.x0 ;
 
   if (!was_moving && IsMoving())
-    StartMoving();
-}*/
+  StartMoving();
+  }*/
 
 
 //---------------------------------------------------------------------------//
@@ -335,30 +335,30 @@ void Physics::StopMoving()
 
   if (IsMoving()) MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
   // Always called by PhysicalObj::StopMoving
-std::cout<<"Stops moving:"<< typeid(*this).name()<<std::endl;
+  std::cout<<"Stops moving:"<< typeid(*this).name()<<std::endl;
   SetSpeedXY(Point2d(0.0,0.0));
   UpdateTimeOfLastMove();
   /*if (m_motion_type != Pendulum)
     m_motion_type = NoMotion ;
 
-  m_extern_force.Clear();*/
+    m_extern_force.Clear();*/
 }
 
 bool Physics::IsMoving() const
 {
- /* return !EqualsZero(m_pos_x.x1)  ||
-         !EqualsZero(m_pos_y.x1)  ||
-         !m_extern_force.IsNull() ||
-         m_motion_type != NoMotion;
-*/
-     bool is_moving;
+  /* return !EqualsZero(m_pos_x.x1)  ||
+     !EqualsZero(m_pos_y.x1)  ||
+     !m_extern_force.IsNull() ||
+     m_motion_type != NoMotion;
+  */
+  bool is_moving;
 
-     is_moving = m_body->GetLinearVelocity().x == 0.0;
-     is_moving &= m_body->GetLinearVelocity().y == 0.0;
-     is_moving &= m_body->GetAngularVelocity() == 0.0;
+  is_moving = m_body->GetLinearVelocity().x == 0.0;
+  is_moving &= m_body->GetLinearVelocity().y == 0.0;
+  is_moving &= m_body->GetAngularVelocity() == 0.0;
 
 
-         return is_moving;
+  return is_moving;
 }
 
 bool Physics::IsSleeping() const
@@ -368,8 +368,8 @@ bool Physics::IsSleeping() const
   // return true if not moving since 1 sec.
   int delta = Time::GetInstance()->Read() - m_last_move;
   if(delta > 400) {
-    MSG_DEBUG( "physic.sleep", "%s is sleeping since %d ms.", typeid(*this).name(), delta);
-    return true;
+  MSG_DEBUG( "physic.sleep", "%s is sleeping since %d ms.", typeid(*this).name(), delta);
+  return true;
   }
   MSG_DEBUG( "physic.notsleeping", "%s is not sleeping.", typeid(*this).name());
   return false;
