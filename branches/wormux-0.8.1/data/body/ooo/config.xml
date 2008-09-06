@@ -46,7 +46,7 @@
 <alias movement="weapon-snipe_rifle-select" correspond_to="weapon-gun-select"/>
 <alias movement="weapon-flamethrower-select" correspond_to="weapon-gun-select"/>
 <alias movement="fly-black" correspond_to="fly"/>
-
+<alias movement="weapon-polecatlauncher-select" correspond_to="weapon-gnulauncher-select"/>
 
 
 
@@ -835,6 +835,56 @@
 
 <!-- ###### weapon-grenade ###### -->
 <clothe name="weapon-grenade">
+	<c_member name="arm-left"/>
+	<c_member name="arm2-left"/>
+	<c_member name="arm3-left-R"/>
+	<c_member name="foot-left"/>
+	<c_member name="tail"/>
+	<c_member name="foot-right"/>
+	<c_member name="back"/>
+	<c_member name="body"/>
+	<c_member name="hair"/>
+	<c_member name="hornleft"/>
+	<c_member name="head"/>
+	<c_member name="hornright"/>
+	<c_member name="noze"/>
+	<c_member name="eyes"/>
+	<c_member name="pupil-right"/>
+	<c_member name="pupil-left"/>
+	<c_member name="eyelid"/>
+	<c_member name="weapon"/>
+	<c_member name="arm-right"/>
+	<c_member name="arm2-right"/>
+	<c_member name="arm3-right-R"/>
+</clothe>
+
+<!-- ###### weapon-gnulauncher ###### -->
+<clothe name="weapon-gnulauncher">
+	<c_member name="arm-left"/>
+	<c_member name="arm2-left"/>
+	<c_member name="arm3-left-R"/>
+	<c_member name="foot-left"/>
+	<c_member name="tail"/>
+	<c_member name="foot-right"/>
+	<c_member name="back"/>
+	<c_member name="body"/>
+	<c_member name="hair"/>
+	<c_member name="hornleft"/>
+	<c_member name="head"/>
+	<c_member name="hornright"/>
+	<c_member name="noze"/>
+	<c_member name="eyes"/>
+	<c_member name="pupil-right"/>
+	<c_member name="pupil-left"/>
+	<c_member name="eyelid"/>
+	<c_member name="weapon"/>
+	<c_member name="arm-right"/>
+	<c_member name="arm2-right"/>
+	<c_member name="arm3-right-R"/>
+</clothe>
+
+<!-- ###### weapon-polecatlauncher ###### -->
+<clothe name="weapon-polecatlauncher">
 	<c_member name="arm-left"/>
 	<c_member name="arm2-left"/>
 	<c_member name="arm3-left-R"/>
@@ -2838,4 +2888,58 @@
 		<member type="arm-right" angle="-60"/>
 	</frame>
 </movement>
+
+<!-- ###### gnu ###### -->
+<movement name="weapon-gnulauncher-select" speed="40" play_mode="play_once">
+	<collision_rect left="0" right="0" top="0" bottom="2"/>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-15"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-15"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-30"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-30"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-45"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-45"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-60"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-60"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-75"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-75"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-90"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-90"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-105"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-105"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-120"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-120"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-135"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-135"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-150"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-150"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-165"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-165"/>
+	</frame>
+	<frame>
+		<member type="arm-left" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+	</frame>
+</movement>
+
 </resources>
