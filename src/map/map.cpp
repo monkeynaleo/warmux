@@ -39,14 +39,12 @@ const uint AUTHOR_INFO_TIME = 5000; // ms
 const uint AUTHOR_INFO_X = 100;
 const uint AUTHOR_INFO_Y = 50;
 
-Map world;
-
 Map& GetWorld()
 {
-  return world;
+  return Map::GetRef();
 }
 
-Map::Map()
+Map::Map() : author_info1(NULL), author_info2(NULL)
 {
   min_distance_between_characters = MINIMUM_DISTANCE_BETWEEN_CHARACTERS;
 
@@ -62,8 +60,10 @@ Map::~Map()
   delete to_redraw_now;
   delete to_redraw_particles;
   delete to_redraw_particles_now;
-  if (author_info1) delete author_info1;
-  if (author_info2) delete author_info2;
+  if (author_info1)
+    delete author_info1;
+  if (author_info2)
+    delete author_info2;
 }
 
 void Map::Reset()
@@ -73,8 +73,12 @@ void Map::Reset()
   water.Reset();
   wind.Reset();
 
-  delete author_info1; author_info1 = NULL;
-  delete author_info2; author_info2 = NULL;
+  if (author_info1)
+    delete author_info1;
+  author_info1 = NULL;
+  if (author_info2)
+    delete author_info2;
+  author_info2 = NULL;
 
   to_redraw->clear();
   to_redraw_now->clear();
@@ -379,7 +383,7 @@ bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, 
   Point2d iterated_point = ( Point2d )( start );
   while( !IsOutsideWorld( new_point ) && ( length >= 0 ) )
   {
-    if (!world.IsInVacuum( new_point ))
+    if (!IsInVacuum( new_point ))
     {
       if ( trace_flags & COMPUTE_HIT )
       {
