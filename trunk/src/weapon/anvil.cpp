@@ -95,7 +95,7 @@ void Anvil::SignalOutOfMap()
 void Anvil::Refresh()
 {
   if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
-    world.MergeSprite(GetPosition(), image);
+    GetWorld().MergeSprite(GetPosition(), image);
     Ghost();
   } else {
     WeaponProjectile::Refresh();
@@ -138,7 +138,7 @@ void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
   target.x = mouse_pos.x - (projectile->GetWidth() / 2);
   target.y = 0 - projectile->GetHeight();
 
-  if (!world.ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
+  if (!GetWorld().ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
      !projectile->IsInVacuumXY(target))
     return;
 

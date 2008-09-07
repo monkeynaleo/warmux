@@ -70,15 +70,15 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
   // make it return the last point still in vacuum
   Point2i new_contact_point = contact_point;
   bool contact_point_uncertain = true;
-  while(!world.IsOutsideWorld(new_contact_point) &&
+  while(!GetWorld().IsOutsideWorld(new_contact_point) &&
         (length > 0))
     {
-      if ( !world.IsInVacuum( new_contact_point ) )
+      if ( !GetWorld().IsInVacuum( new_contact_point ) )
       {
-        ASSERT( contact_point_uncertain || world.IsInVacuum( contact_point ) );
+        ASSERT( contact_point_uncertain || GetWorld().IsInVacuum( contact_point ) );
 
         // for uncertain contact points, see if it's in vacuum
-        if ( contact_point_uncertain && !world.IsInVacuum( contact_point ) )
+        if ( contact_point_uncertain && !GetWorld().IsInVacuum( contact_point ) )
         {
            // it's not, so try our best to return a contact point in vacuum
            // try searching in area NxN around our original point and return
@@ -97,7 +97,7 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
              for ( int j = -search_radius; j <= search_radius; j ++ )
              {
                cur = contact_point + Point2i( i, j );
-               if ( world.IsInVacuum( cur ) )
+               if ( GetWorld().IsInVacuum( cur ) )
                {
                  // check for new closest
                  int distance = i * i + j * j;
@@ -325,7 +325,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
     // (NOTE: since nodes are often in ground, we're ignoring traces hitting ground
     // right at the end)
     const float end_proximity_threshold = 0.95f;
-    if ( world.TraceRay( mapRopeStart, it->pos, tr ) && tr.m_fraction < end_proximity_threshold )
+    if ( GetWorld().TraceRay( mapRopeStart, it->pos, tr ) && tr.m_fraction < end_proximity_threshold )
     {
         // collision detected!
         if ( nodes_to_remove > 0 )

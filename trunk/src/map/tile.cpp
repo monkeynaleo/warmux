@@ -30,7 +30,7 @@
 TileItem_Empty EmptyTile;
 
 Tile::Tile()
-: m_preview(NULL)
+  : nbr_cell(0), m_preview(NULL)
 {
 }
 

@@ -212,7 +212,7 @@ void Interface::DrawTimeInfo() const
 
   // Draw background interface
   app->video->window.Blit(clock_background, turn_time_pos);
-  world.ToRedrawOnScreen(dr);
+  GetWorld().ToRedrawOnScreen(dr);
   DrawClock(turn_time_pos + clock_background.GetSize() / 2);
 }
 
@@ -248,7 +248,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
   // draw wind icon
   if(draw_icon) {
     app->video->window.Blit(wind_icon, wind_bar_pos);
-    world.ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_icon.GetSize()));
+    GetWorld().ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_icon.GetSize()));
     height = wind_icon.GetHeight() - wind_indicator.GetHeight();
   } else {
     height = MARGIN;
@@ -259,7 +259,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
   Point2i tmp = wind_bar_pos + wind_bar_offset + Point2i(2, 2);
   app->video->window.Blit(wind_indicator, wind_bar_pos + wind_bar_offset);
   wind_bar.DrawXY(tmp);
-  world.ToRedrawOnScreen(Rectanglei(wind_bar_pos + wind_bar_offset, wind_indicator.GetSize()));
+  GetWorld().ToRedrawOnScreen(Rectanglei(wind_bar_pos + wind_bar_offset, wind_indicator.GetSize()));
 }
 
 // display wind info
@@ -280,7 +280,7 @@ void Interface::DrawSmallInterface() const
   height = (height < small_background_interface.GetHeight() ? height : small_background_interface.GetHeight());
   Point2i small_interface_position = Point2i(app->video->window.GetWidth() / 2 - small_background_interface.GetWidth() / 2, app->video->window.GetHeight() - height);
   app->video->window.Blit(small_background_interface,small_interface_position);
-  world.ToRedrawOnScreen(Rectanglei(small_interface_position,small_background_interface.GetSize()));
+  GetWorld().ToRedrawOnScreen(Rectanglei(small_interface_position,small_background_interface.GetSize()));
   DrawWindIndicator(small_interface_position + Point2i(MARGIN, 0), false);
   if (display_timer)
     timer->DrawTopLeft(small_interface_position + Point2i(MARGIN * 2 + wind_bar.GetWidth(), MARGIN));
@@ -301,27 +301,27 @@ void Interface::DrawTeamEnergy() const
 void Interface::DrawMapPreview()
 {
   Surface&       window  = GetMainWindow();
-  const Surface* preview = world.ground.GetPreview();
-  Point2i        offset(window.GetWidth() - world.ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
-  Rectanglei     rect_preview(offset, world.ground.GetPreviewSize());
+  const Surface* preview = GetWorld().ground.GetPreview();
+  Point2i        offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
+  Rectanglei     rect_preview(offset, GetWorld().ground.GetPreviewSize());
 
-  window.Blit(*preview, world.ground.GetPreviewRect(), offset);
+  window.Blit(*preview, GetWorld().ground.GetPreviewRect(), offset);
 
   // Draw water
-  if (world.water.IsActive()) {
-    const Color *color = world.water.GetColor();
+  if (GetWorld().water.IsActive()) {
+    const Color *color = GetWorld().water.GetColor();
     ASSERT(color);
 
     // Scale water height according to preview size
-    uint       h = (world.water.GetSelfHeight() * rect_preview.GetSizeY() + (world.GetSize().GetY()/2))
-                 / world.GetSize().GetY();
+    uint       h = (GetWorld().water.GetSelfHeight() * rect_preview.GetSizeY() + (GetWorld().GetSize().GetY()/2))
+                 / GetWorld().GetSize().GetY();
     Rectanglei water(offset.x, offset.y+rect_preview.GetSizeY()-h, rect_preview.GetSizeX(), h);
 
     // Draw box with color according to water type
     window.BoxColor(water, *color);
   }
 
-  world.ToRedrawOnScreen(rect_preview);
+  GetWorld().ToRedrawOnScreen(rect_preview);
   window.RectangleColor(rect_preview, white_color);
 
   FOR_EACH_TEAM(team) {
@@ -331,17 +331,17 @@ void Interface::DrawMapPreview()
          character != end_character;
          ++character) {
       if (!character -> IsDead()) {
-        Point2i     coord = world.ground.PreviewCoordinates((*character).GetPosition()) + offset;
+        Point2i     coord = GetWorld().ground.PreviewCoordinates((*character).GetPosition()) + offset;
 
         window.Blit(icon, coord - icon.GetSize()/2);
         if (character->IsActiveCharacter()) {
           uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
           radius = (radius/2) + 1;
           window.CircleColor(coord.x, coord.y, radius, c_white);
-          world.ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
+          GetWorld().ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
         }
 	else
-          world.ToRedrawOnScreen(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()));
+          GetWorld().ToRedrawOnScreen(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()));
       }
     }
   }
@@ -368,7 +368,7 @@ void Interface::Draw()
   Rectanglei dr(bottom_bar_pos, game_menu.GetSize());
   app->video->window.Blit(game_menu, bottom_bar_pos);
 
-  world.ToRedrawOnScreen(dr);
+  GetWorld().ToRedrawOnScreen(dr);
 
   // display wind, character and weapon info
   DrawWindInfo();
@@ -444,7 +444,7 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
   if( !rectSurface.Intersect(*Camera::GetInstance()))
     return;
 
-  world.ToRedrawOnMap(rectSurface);
+  GetWorld().ToRedrawOnMap(rectSurface);
 
   rectSurface.Clip(*Camera::GetInstance());
 

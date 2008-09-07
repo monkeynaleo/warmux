@@ -276,12 +276,12 @@ do
 {
 Point2i tmpPos( lround(pos.x), lround(pos.y) );
 
-// Check if we exit the world. If so, we stop moving and return.
+// Check if we exit the GetWorld(). If so, we stop moving and return.
 if( IsOutsideWorldXY(tmpPos) ){
 
-if( !world.IsOpen() ){
-tmpPos.x = InRange_Long(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
-tmpPos.y = InRange_Long(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
+if( !GetWorld().IsOpen() ){
+tmpPos.x = InRange_Long(tmpPos.x, 0, GetWorld().GetWidth() - GetWidth() - 1);
+tmpPos.y = InRange_Long(tmpPos.y, 0, GetWorld().GetHeight() - GetHeight() - 1);
 MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
 collision = COLLISION_ON_GROUND;
 break;
@@ -415,7 +415,7 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
   int cx, cy;
 
   if (ContactPoint(cx, cy)) {
-    contactAngle = world.ground.Tangent(cx, cy);
+    contactAngle = GetWorld().ground.Tangent(cx, cy);
     if(!isNaN(contactAngle)) {
       contactPos.x = (double)cx / PIXEL_PER_METER;
       contactPos.y = (double)cy / PIXEL_PER_METER;
@@ -493,10 +493,10 @@ bool PhysicalObj::PutOutOfGround()
     return true;
 
   bool left,right,top,bottom;
-  left   = world.IsInVacuum_left(*this, 0, 0);
-  right  = world.IsInVacuum_right(*this, 0, 0);
-  top    = world.IsInVacuum_top(*this, 0, 0);
-  bottom = world.IsInVacuum_bottom(*this, 0, 0);
+  left   = GetWorld().IsInVacuum_left(*this, 0, 0);
+  right  = GetWorld().IsInVacuum_right(*this, 0, 0);
+  top    = GetWorld().IsInVacuum_top(*this, 0, 0);
+  bottom = GetWorld().IsInVacuum_bottom(*this, 0, 0);
 
   int dx = (int)GetTestRect().GetSizeX() * (right-left);
   int dy = (int)GetTestRect().GetSizeY() * (top-bottom);
@@ -553,10 +553,10 @@ void PhysicalObj::Drown()
 
   // If fire, do smoke...
   if (m_is_fire)
-    world.water.Smoke(GetPosition());
+    GetWorld().water.Smoke(GetPosition());
   // make a splash in the water :-)
   else if (GetMass() >= 2)
-    world.water.Splash(GetPosition());
+    GetWorld().water.Splash(GetPosition());
 
   StopMoving();
   StartMoving();
@@ -651,9 +651,9 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
-  if( world.IsOutsideWorldXwidth(x, GetTestWidth()) )
+  if( GetWorld().IsOutsideWorldXwidth(x, GetTestWidth()) )
     return true;
-  if( world.IsOutsideWorldYheight(y, GetTestHeight()) ){
+  if( GetWorld().IsOutsideWorldYheight(y, GetTestHeight()) ){
     if( m_allow_negative_y )
       if( (Y_OBJET_MIN <= y) && (y + GetTestHeight() - 1 < 0) )
 	return false;
@@ -710,16 +710,16 @@ bool PhysicalObj::FootsOnFloor(int y) const
 {
   //TODO : calculate collision with water
   // If outside is empty, the object can't hit the ground !
-  if ( world.IsOpen() ) return false;
+  if ( GetWorld().IsOpen() ) return false;
 
-  const int y_max = world.GetHeight() +m_test_bottom;
+  const int y_max = GetWorld().GetHeight() +m_test_bottom;
   return (y_max <= y);
 }
 
 bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
 {
   if( IsOutsideWorldXY(position) )
-    return world.IsOpen();
+    return GetWorld().IsOpen();
 
   if( FootsOnFloor(position.y - 1) )
     return false;
@@ -737,7 +737,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
                   width, height);
 
-  return world.RectIsInVacuum (rect);
+  return GetWorld().RectIsInVacuum (rect);
 }
 
 
@@ -745,7 +745,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 {
   if( IsOutsideWorldXY(position) ){
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
-    return world.IsOpen();
+    return GetWorld().IsOpen();
   }
 
   if( FootsOnFloor(position.y) ){
@@ -768,15 +768,15 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
   // if(CollidedObjectXY( position + Point2i(0, 1)) != NULL )
   //  return false;
 
-  return world.RectIsInVacuum (rect);
+  return GetWorld().RectIsInVacuum (rect);
 }
 
 bool PhysicalObj::IsInWater () const
 {
   ASSERT (!IsGhost());
-  if (!world.water.IsActive()) return false;
-  int x = InRange_Long(GetCenterX(), 0, world.GetWidth()-1);
-  return (int)world.water.GetHeight(x) < GetCenterY();
+  if (!GetWorld().water.IsActive()) return false;
+  int x = InRange_Long(GetCenterX(), 0, GetWorld().GetWidth()-1);
+  return (int)GetWorld().water.GetHeight(x) < GetCenterY();
 }
 
 void PhysicalObj::DirectFall()
@@ -794,8 +794,8 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   y2 = y1-1;
   for (uint x=GetX()+ m_test_left; x<=(GetX()+0)-m_test_right; x++)
     {
-      if(!world.IsOutsideWorld(Point2i(x,y1)) && !world.IsOutsideWorld(Point2i(x,y2))
-	 && world.ground.IsEmpty(Point2i(x,y2)) && !world.ground.IsEmpty(Point2i(x,y1)))
+      if(!GetWorld().IsOutsideWorld(Point2i(x,y1)) && !GetWorld().IsOutsideWorld(Point2i(x,y2))
+	 && GetWorld().ground.IsEmpty(Point2i(x,y2)) && !GetWorld().ground.IsEmpty(Point2i(x,y1)))
 	{
 	  contact_x = x;
 	  contact_y = GetY() +0-m_test_bottom;
@@ -808,8 +808,8 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   x2 = x1+1;
   for(uint y=GetY()+m_test_top;y<=GetY()+0-m_test_bottom;y++)
     {
-      if(!world.IsOutsideWorld(Point2i(x1,y)) && !world.IsOutsideWorld(Point2i(x2,y))
-	 && !world.ground.IsEmpty(Point2i(x1,y)) &&  world.ground.IsEmpty(Point2i(x2,y)))
+      if(!GetWorld().IsOutsideWorld(Point2i(x1,y)) && !GetWorld().IsOutsideWorld(Point2i(x2,y))
+	 && !GetWorld().ground.IsEmpty(Point2i(x1,y)) &&  GetWorld().ground.IsEmpty(Point2i(x2,y)))
 	{
 	  contact_x = GetX() +m_test_left;
 	  contact_y = y;
@@ -822,8 +822,8 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   x2 = x1-1;
   for(uint y=GetY()+m_test_top;y<=GetY()+0-m_test_bottom;y++)
     {
-      if(!world.IsOutsideWorld(Point2i(x1, y)) && !world.IsOutsideWorld(Point2i(x2, y))
-	 && !world.ground.IsEmpty(Point2i(x1, y)) && world.ground.IsEmpty(Point2i(x2, y)))
+      if(!GetWorld().IsOutsideWorld(Point2i(x1, y)) && !GetWorld().IsOutsideWorld(Point2i(x2, y))
+	 && !GetWorld().ground.IsEmpty(Point2i(x1, y)) && GetWorld().ground.IsEmpty(Point2i(x2, y)))
 	{
 	  contact_x = GetX() + 0 - m_test_right;
 	  contact_y = y;
@@ -836,8 +836,8 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   y2 = y1 - 1;
   for(uint x=GetX()+m_test_left;x<=GetX()+0-m_test_right;x++)
     {
-      if(!world.IsOutsideWorld(Point2i(x,y1)) && !world.IsOutsideWorld(Point2i(x,y2))
-	 && !world.ground.IsEmpty(Point2i(x, y1)) && world.ground.IsEmpty(Point2i(x, y2)))
+      if(!GetWorld().IsOutsideWorld(Point2i(x,y1)) && !GetWorld().IsOutsideWorld(Point2i(x,y2))
+	 && !GetWorld().ground.IsEmpty(Point2i(x, y1)) && GetWorld().ground.IsEmpty(Point2i(x, y2)))
 	{
 	  contact_x =x;
 	  contact_y = GetY() +m_test_top;
@@ -870,29 +870,29 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
       if (on_top_of_world) {
 	// Give a random position for x
 	if(net_sync)
-	  position.x = RandomSync().GetLong(0, world.GetWidth() - 0);
+	  position.x = RandomSync().GetLong(0, GetWorld().GetWidth() - 0);
 	else
-	  position.x = RandomLocal().GetLong(0, world.GetWidth() - 0);
+	  position.x = RandomLocal().GetLong(0, GetWorld().GetWidth() - 0);
 	position.y = -0+1;
       } else {
 	if(net_sync)
-	  position = RandomSync().GetPoint(world.GetSize() - 0 + 1);
+	  position = RandomSync().GetPoint(GetWorld().GetSize() - 0 + 1);
 	else
-	  position = RandomLocal().GetPoint(world.GetSize() - 0 + 1);
+	  position = RandomLocal().GetPoint(GetWorld().GetSize() - 0 + 1);
       }
       MSG_DEBUG("physic.position", "%s (try %u/%u) - Test in %d, %d",
 		m_name.c_str(), bcl, NB_MAX_TRY, position.x, position.y);
       SetXY(position);
 
       // Check physical object is not in the ground
-      ok &= !IsGhost() && world.ParanoiacRectIsInVacuum(GetTestRect())  && IsInVacuum( Point2i(0, 1) );
+      ok &= !IsGhost() && GetWorld().ParanoiacRectIsInVacuum(GetTestRect())  && IsInVacuum( Point2i(0, 1) );
       if (!ok) {
 	MSG_DEBUG("physic.position", "%s - Put it in the ground -> try again !", m_name.c_str());
 	continue;
       }
 
       /* check if the area rigth under the object has a bottom on the ground */
-      ok &= !world.ParanoiacRectIsInVacuum(Rectanglei(GetCenter().x, position.y, 1, world.GetHeight() -
+      ok &= !GetWorld().ParanoiacRectIsInVacuum(Rectanglei(GetCenter().x, position.y, 1, GetWorld().GetHeight() -
 						      (WATER_INITIAL_HEIGHT + 30) - position.y));
       if (!ok) {
 	MSG_DEBUG("physic.position", "%s - Put in outside the map or in water -> try again", m_name.c_str());

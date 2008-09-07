@@ -135,7 +135,7 @@ void ProgressBar::DrawXY(const Point2i &pos) const{
   Rectanglei dst(pos.x, pos.y, larg, haut);
   GetMainWindow().Blit(image, pos);
 
-  world.ToRedrawOnScreen(dst);
+  GetWorld().ToRedrawOnScreen(dst);
 }
 
 // Ajoute/supprime un marqueur

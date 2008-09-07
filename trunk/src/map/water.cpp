@@ -181,7 +181,7 @@ void Water::Draw()
     return;
 
   int screen_bottom = (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
-  int water_top = world.GetHeight() - (water_height + height_mvt) - 20;
+  int water_top = GetWorld().GetHeight() - (water_height + height_mvt) - 20;
 
   if ( screen_bottom < water_top )
     return; // save precious CPU time
@@ -277,10 +277,10 @@ int Water::GetHeight(int x) const
 {
   if (IsActive())
     return height[x % pattern_width]
-           + world.GetHeight()
+           + GetWorld().GetHeight()
            - (water_height + height_mvt);
   else
-    return world.GetHeight();
+    return GetWorld().GetHeight();
 }
 
 void Water::Splash(const Point2i& pos) const

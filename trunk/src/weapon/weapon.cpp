@@ -562,7 +562,7 @@ void Weapon::Draw(){
 		    3,
 		    3);
 
-    world.ToRedrawOnMap(rect);
+    GetWorld().ToRedrawOnMap(rect);
 
     GetMainWindow().RectangleColor(rect, c_red);
 
@@ -578,7 +578,7 @@ void Weapon::Draw(){
                   GetGunHolePosition().GetY() - Camera::GetInstance()->GetPositionY()- 1,
       	    	  3, 3);
 
-  world.ToRedrawOnMap(rect);
+  GetWorld().ToRedrawOnMap(rect);
   GetMainWindow().RectangleColor(rect, c_red);
 
 //  rect = Rectangle(
