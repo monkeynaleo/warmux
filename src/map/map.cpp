@@ -418,4 +418,4 @@ bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, 
   }
 
   return false;
-};
+}

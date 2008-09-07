@@ -23,6 +23,9 @@
 #include "tool/point.h"
 #include "graphic/surface.h"
 
+class b2Body;
+class b2Shape;
+
 const Point2i CELL_SIZE(64, 64);
 
 #ifdef DEBUG
@@ -32,8 +35,8 @@ const Point2i CELL_SIZE(64, 64);
 class TileItem
 {
 public:
-  TileItem () {};
-  virtual ~TileItem () {};
+  TileItem() {};
+  virtual ~TileItem() {};
 
   bool IsEmpty ();
   virtual unsigned char GetAlpha(const Point2i &pos) = 0;
@@ -52,8 +55,8 @@ public:
 class TileItem_Empty : public TileItem
 {
 public:
-  TileItem_Empty () { empty = NULL; };
-  ~TileItem_Empty () { if (empty) delete empty; };
+  TileItem_Empty();
+  virtual ~TileItem_Empty();
 
   Surface *empty;
   unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
@@ -69,6 +72,9 @@ public:
 
 class TileItem_AlphaSoftware : public TileItem
 {
+  b2Body* m_tile_body;
+  b2Shape* m_shape;
+
   unsigned char* last_filled_pixel;
   const TileItem_AlphaSoftware& operator=(const TileItem_AlphaSoftware&);
 
@@ -76,9 +82,10 @@ public:
   bool need_check_empty;
   bool need_delete;
 
-  TileItem_AlphaSoftware(const Point2i &size);
-  ~TileItem_AlphaSoftware();
+  TileItem_AlphaSoftware(b2Body* tile_body, const Point2i &size);
+  virtual ~TileItem_AlphaSoftware();
 
+  void InitShape(const Rectanglei& img_rect);
   unsigned char GetAlpha(const Point2i &pos);
   void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
@@ -91,6 +98,7 @@ public:
   void ResetEmptyCheck();
 
   bool IsTotallyEmpty() const {return false;};
+  Surface GetSurface() { return m_surface; };
 
 private:
   TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
@@ -98,7 +106,6 @@ private:
   unsigned char GetAlpha_Index0(const Point2i &pos) const;
   inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
   inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
-  Surface GetSurface() { return m_surface; };
 
   void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
   void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
