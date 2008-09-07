@@ -90,7 +90,7 @@ bool Blowtorch::p_Shoot()
   double dy = sin(angle) * h;
 
   Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
-  world.Dig(pos, ActiveCharacter().GetHeight()/2);
+  GetWorld().Dig(pos, ActiveCharacter().GetHeight()/2);
 
   MoveCharacter(ActiveCharacter());
 

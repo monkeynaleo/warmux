@@ -136,5 +136,6 @@ public:
   void OptimizeCache(std::list<Rectanglei>& rectangleCache) const;
 };
 
-extern Map world;
+Map& GetWorld();
+
 #endif

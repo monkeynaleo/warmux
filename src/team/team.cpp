@@ -130,10 +130,10 @@ bool Team::LoadCharacters()
     }
     characters.push_back(new_character);
     active_character = characters.begin(); // we need active_character to be initialized here !!
-    if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters()))
+    if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters()))
     {
       // We haven't found any place to put the characters!!
-      if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
+      if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
         std::cerr << std::endl;
         std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
         std::cerr << std::endl;

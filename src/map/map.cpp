@@ -41,6 +41,11 @@ const uint AUTHOR_INFO_Y = 50;
 
 Map world;
 
+Map& GetWorld()
+{
+  return world;
+}
+
 Map::Map()
 {
   min_distance_between_characters = MINIMUM_DISTANCE_BETWEEN_CHARACTERS;
