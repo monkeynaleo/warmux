@@ -88,6 +88,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   ResetConstants();       // Set physics constants from the xml file
 
   SetSize(Point2i(10,10));
+
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
 
@@ -662,8 +663,12 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
   return false;
 }
 
+
+int count = 0;
+
 void PhysicalObj::SetSize(const Point2i &newSize)
 {
+
   m_width = newSize.x;
   m_height = newSize.y;
   m_phys_height = m_height/PIXEL_PER_METER;
@@ -672,33 +677,43 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   std::cout<<m_name<<" phys "<<m_phys_width<<" "<<m_phys_height<<std::endl;
   //Physical shape
   if(m_shape !=NULL)
+  {
+    //TODO : correct this very strange fix
+    if(m_name != "bounce_ball")
     {
-      b2FilterData filter_data =  m_shape->GetFilterData();
 
-      m_body->DestroyShape(m_shape);
+        b2FilterData filter_data =  m_shape->GetFilterData();
 
-      b2PolygonDef shapeDef;
-      shapeDef.SetAsBox(m_phys_width, m_phys_height);
-      shapeDef.density = 1.0f;
-      shapeDef.friction = 0.8f;
-      shapeDef.restitution = 0.1f;
-      shapeDef.filter.categoryBits = filter_data.categoryBits;
-      shapeDef.filter.maskBits = filter_data.maskBits;
-      m_shape = m_body->CreateShape(&shapeDef);
-      m_body->SetMassFromShapes();
+        m_body->DestroyShape(m_shape);
+
+        b2PolygonDef shapeDef;
+        shapeDef.SetAsBox(m_phys_width, m_phys_height);
+
+
+
+        shapeDef.density = 1.0f;
+        shapeDef.friction = 0.8f;
+        shapeDef.restitution = 0.1f;
+        shapeDef.filter.categoryBits = filter_data.categoryBits;
+        shapeDef.filter.maskBits = filter_data.maskBits;
+        m_shape = m_body->CreateShape(&shapeDef);
+        m_body->SetMassFromShapes();
+        std::cout<<m_name<<" size ok "<<GetSize().x<<" "<<GetSize().y<<std::endl;
     }
+  }
   else
-    {
-      b2PolygonDef shapeDef;
-      shapeDef.SetAsBox(m_phys_width, m_phys_height);
-      shapeDef.density = 1.0f;
-      shapeDef.friction = 0.8f;
-      shapeDef.restitution = 0.1f;
-      shapeDef.filter.categoryBits = 0x0001;
-      shapeDef.filter.maskBits = 0xFFFF;
-      m_shape = m_body->CreateShape(&shapeDef);
-      m_body->SetMassFromShapes();
-    }
+  {
+    b2PolygonDef shapeDef;
+    shapeDef.SetAsBox(m_phys_width, m_phys_height);
+    shapeDef.density = 1.0f;
+    shapeDef.friction = 0.8f;
+    shapeDef.restitution = 0.1f;
+    shapeDef.filter.categoryBits = 0x0001;
+    shapeDef.filter.maskBits = 0x0000;
+    m_shape = m_body->CreateShape(&shapeDef);
+    m_body->SetMassFromShapes();
+  }
+
 }
 
 bool PhysicalObj::FootsOnFloor(int y) const
