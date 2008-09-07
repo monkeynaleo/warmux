@@ -35,16 +35,8 @@ PhysicalEngine::PhysicalEngine()
 
   b2BodyDef groundBodyDef;
   groundBodyDef.position.Set(0.0f, 80.0f);
-  b2Body* ground;
 
-  ground= physic_world->CreateBody(&groundBodyDef);
-  b2PolygonDef groundShapeDef1;
-  groundShapeDef1.SetAsBox(500.0f, 10.0f);
-  groundShapeDef1.friction = 0.8f;
-  groundShapeDef1.restitution = 0.1f;
-  groundShapeDef1.filter.categoryBits = 0x0004;
-  groundShapeDef1.filter.maskBits = 0xFFFF;
-  ground->CreateShape(&groundShapeDef1);
+  ground = physic_world->CreateBody(&groundBodyDef);
 
   frame_rate = 30;
   last_step_time = 0;
@@ -54,6 +46,11 @@ PhysicalEngine::PhysicalEngine()
 PhysicalEngine::~PhysicalEngine()
 {
   delete physic_world;
+}
+
+b2Body *PhysicalEngine::GetGroundBody() const
+{
+  return ground;
 }
 
 b2Body *PhysicalEngine::AddObject(Physics *new_obj)
@@ -97,18 +94,17 @@ void PhysicalEngine::ClearContact()
 
 void PhysicalEngine::AddContactPoint(b2ContactPoint contact,ContactType type)
 {
-
   switch(type)
   {
-      case ADD:
-        added_contact_list.push_back(contact);
-      break;
-         case PERSIST:
-       persist_contact_list.push_back(contact);
-      break;
-      case REMOVE:
-        removed_contact_list.push_back(contact);
-      break;
+  case ADD:
+    added_contact_list.push_back(contact);
+    break;
+  case PERSIST:
+    persist_contact_list.push_back(contact);
+    break;
+  case REMOVE:
+    removed_contact_list.push_back(contact);
+    break;
   }
 }
 
@@ -122,7 +118,7 @@ void PhysicalEngine::AddContactResult(b2ContactResult contact)
 
 ContactListener::ContactListener(PhysicalEngine *e)
 {
-    engine = e;
+  engine = e;
 }
 
 void ContactListener::Add(const b2ContactPoint* point)
