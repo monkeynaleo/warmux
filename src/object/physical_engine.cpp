@@ -81,7 +81,7 @@ void PhysicalEngine::Step()
   MSG_DEBUG("physical.step", "Engine step");
 std::cout<<"step"<<std::endl;
 
-  physic_world->Step(timeStep, iterations);
+//physic_world->Step(timeStep, iterations);
 
 
   last_step_time = last_step_time-timeStep;
