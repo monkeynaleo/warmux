@@ -46,7 +46,7 @@ PhysicalEngine::PhysicalEngine()
   groundShapeDef1.filter.maskBits = 0xFFFF;
   ground->CreateShape(&groundShapeDef1);
 
-  frame_rate = 60;
+  frame_rate = 30;
   last_step_time = 0;
   iterations = 10;
 }
@@ -71,15 +71,15 @@ void PhysicalEngine::RemoveObject(Physics *obj)
 
 void PhysicalEngine::Step()
 {
+
   float32 timeStep = 1.0f / frame_rate;
 
-  if ((Time::GetInstance()->Read()-last_step_time) < timeStep)
+ if ((Time::GetInstance()->Read()-last_step_time) < timeStep)
     {
       return;
     }
   MSG_DEBUG("physical.step", "Engine step");
-
-
+std::cout<<"step"<<std::endl;
 
   physic_world->Step(timeStep, iterations);
 

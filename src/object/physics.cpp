@@ -50,6 +50,7 @@ Physics::Physics ():
   m_last_move(Time::GetInstance()->Read()),
   m_phys_width(),
   m_phys_height(),
+  m_shape(NULL),
   m_fix_point_gnd(),
   m_fix_point_dxy(),
   m_rope_angle(),
@@ -59,6 +60,7 @@ Physics::Physics ():
   m_balancing_damping(0.40),
   m_elasticity_off(true),
   m_cfg()
+
 {
 
   m_body_def = new b2BodyDef;
@@ -335,7 +337,7 @@ void Physics::StopMoving()
 
   if (IsMoving()) MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
   // Always called by PhysicalObj::StopMoving
-  std::cout<<"Stops moving:"<< typeid(*this).name()<<std::endl;
+
   SetSpeedXY(Point2d(0.0,0.0));
   UpdateTimeOfLastMove();
   /*if (m_motion_type != Pendulum)

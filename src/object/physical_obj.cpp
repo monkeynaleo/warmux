@@ -37,6 +37,7 @@
 #include "game/time.h"
 #include "map/map.h"
 #include "network/randomsync.h"
+#include "object/physical_engine.h"
 #include "object/physical_obj.h"
 #include "object/physics.h"
 #include "object/objects_list.h"
@@ -86,17 +87,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
-  //Physical shape
-  b2PolygonDef shapeDef;
-  shapeDef.SetAsBox(0.5f, 1.0f);
-  shapeDef.density = 1.0f;
-  shapeDef.friction = 0.8f;
-  shapeDef.restitution = 0.8f;
-  shapeDef.filter.categoryBits = 0x0001;
-  shapeDef.filter.maskBits = 0xFFFF;
-  m_shape = m_body->CreateShape(&shapeDef);
-  m_body->SetMassFromShapes();
-
+  SetSize(Point2i(10,10));
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
 
@@ -597,7 +588,8 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
                                     bool collides_with_objects)
 {
 
-
+  // SetSize() must be called before
+  ASSERT(m_shape != NULL);
 
 
   m_goes_through_wall = goes_through_wall;
@@ -674,6 +666,44 @@ void PhysicalObj::SetSize(const Point2i &newSize)
 {
   m_width = newSize.x;
  m_height = newSize.y;
+ m_phys_height = m_height/PIXEL_PER_METER;
+ m_phys_width = m_width/PIXEL_PER_METER;
+ std::cout<<m_name<<" size "<<m_width<<" "<<m_height<<std::endl;
+ std::cout<<m_name<<" phys "<<m_phys_width<<" "<<m_phys_height<<std::endl;
+ //Physical shape
+ if(m_shape !=NULL)
+ {
+    b2FilterData filter_data =  m_shape->GetFilterData();
+
+    m_body->DestroyShape(m_shape);
+
+    b2PolygonDef shapeDef;
+    shapeDef.SetAsBox(m_phys_width, m_phys_height);
+    shapeDef.density = 1.0f;
+    shapeDef.friction = 0.8f;
+    shapeDef.restitution = 0.1f;
+    shapeDef.filter.categoryBits = filter_data.categoryBits;
+    shapeDef.filter.maskBits = filter_data.maskBits;
+    m_shape = m_body->CreateShape(&shapeDef);
+    m_body->SetMassFromShapes();
+
+
+ }
+ else
+ {
+  b2PolygonDef shapeDef;
+  shapeDef.SetAsBox(m_phys_width, m_phys_height);
+  shapeDef.density = 1.0f;
+  shapeDef.friction = 0.8f;
+  shapeDef.restitution = 0.1f;
+  shapeDef.filter.categoryBits = 0x0001;
+  shapeDef.filter.maskBits = 0xFFFF;
+  m_shape = m_body->CreateShape(&shapeDef);
+  m_body->SetMassFromShapes();
+ }
+
+
+
 }
 
 bool PhysicalObj::FootsOnFloor(int y) const
