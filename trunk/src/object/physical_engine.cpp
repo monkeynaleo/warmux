@@ -34,11 +34,11 @@ PhysicalEngine::PhysicalEngine()
   physic_world = new b2World(worldAABB, gravity, doSleep);
 
   b2BodyDef groundBodyDef;
-  groundBodyDef.position.Set(0.0f, 80.0f);
+  groundBodyDef.position.Set(0.0f, 100.0f);
 
   ground = physic_world->CreateBody(&groundBodyDef);
 
-  frame_rate = 30;
+  frame_rate = 60;
   last_step_time = 0;
   iterations = 10;
 }
@@ -76,9 +76,9 @@ void PhysicalEngine::Step()
       return;
     }
   MSG_DEBUG("physical.step", "Engine step");
-std::cout<<"step"<<std::endl;
 
-//physic_world->Step(timeStep, iterations);
+
+physic_world->Step(timeStep, iterations);
 
 
   last_step_time = last_step_time-timeStep;

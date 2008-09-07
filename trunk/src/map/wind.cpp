@@ -195,6 +195,7 @@ void Wind::Reset(){
     WindParticle *tmp = new WindParticle(config_file, (float)i / nb);
     particles.push_back(tmp);
   }
+
   RandomizeParticlesPos();
 }
 
