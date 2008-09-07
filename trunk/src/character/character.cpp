@@ -125,10 +125,11 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 {
 
   m_is_character = true;
-  SetCollisionModel(false, true, true);
+
   /* body stuff */
   ASSERT(char_body);
   SetBody(char_body);
+  SetCollisionModel(false, true, true);
 
   ResetConstants();
   // Allow player to go outside of map by upper bound (bug #10420)
