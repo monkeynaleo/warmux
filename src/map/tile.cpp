@@ -27,6 +27,12 @@
 #include "include/app.h"
 #include "map/camera.h"
 
+
+/******************************************************************************/
+// MUST BE DEFINED ONLY ONCE AND SOMEWHERE ELSE
+const double PIXEL_PER_METER = 20;
+/******************************************************************************/
+
 // We need only one empty tile
 TileItem_Empty EmptyTile;
 
@@ -253,6 +259,8 @@ void Tile::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, con
   FreeMem();
   InitTile(ground_img.GetSize(), upper_left_offset, lower_right_offset);
   ASSERT(nbCells.x != 0 && nbCells.y != 0);
+
+  m_tile_body->SetXForm(b2Vec2(upper_left_offset.x/PIXEL_PER_METER, upper_left_offset.y/PIXEL_PER_METER), m_tile_body->GetAngle());
 
   InitPreview();
   uint8_t *dst  = m_preview->GetPixels();

@@ -115,17 +115,17 @@ void TileItem_AlphaSoftware::InitShape(const Rectanglei& img_rect)
   b2PolygonDef rect;
   rect.vertexCount = 4;
 
-  rect.vertices[0].Set(int(img_rect.GetPositionX() / PIXEL_PER_METER),
-		       int(img_rect.GetPositionY() / PIXEL_PER_METER));
+  rect.vertices[0].Set((img_rect.GetPositionX() / PIXEL_PER_METER),
+		      (img_rect.GetPositionY() / PIXEL_PER_METER));
 
-  rect.vertices[1].Set(int((img_rect.GetPositionX() + CELL_SIZE.x) / PIXEL_PER_METER),
-		       int(img_rect.GetPositionY() / PIXEL_PER_METER));
+  rect.vertices[1].Set(((img_rect.GetPositionX() + CELL_SIZE.x) / PIXEL_PER_METER),
+		      (img_rect.GetPositionY() / PIXEL_PER_METER));
 
-  rect.vertices[2].Set(int((img_rect.GetPositionX() + CELL_SIZE.x) / PIXEL_PER_METER),
-		       int((img_rect.GetPositionY() + CELL_SIZE.y) / PIXEL_PER_METER));
+  rect.vertices[2].Set(((img_rect.GetPositionX() + CELL_SIZE.x) / PIXEL_PER_METER),
+		      ((img_rect.GetPositionY() + CELL_SIZE.y) / PIXEL_PER_METER));
 
-  rect.vertices[3].Set(int(img_rect.GetPositionX() / PIXEL_PER_METER),
-		       int((img_rect.GetPositionY() + CELL_SIZE.y) / PIXEL_PER_METER));
+  rect.vertices[3].Set((img_rect.GetPositionX() / PIXEL_PER_METER),
+		       ((img_rect.GetPositionY() + CELL_SIZE.y) / PIXEL_PER_METER));
 
 
   // rect.SetAsBox(double(CELL_SIZE.x)*PIXEL_PER_METER, double(CELL_SIZE.y)*PIXEL_PER_METER);

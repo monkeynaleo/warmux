@@ -34,7 +34,7 @@ PhysicalEngine::PhysicalEngine()
   physic_world = new b2World(worldAABB, gravity, doSleep);
 
   b2BodyDef groundBodyDef;
-  groundBodyDef.position.Set(0.0f, 100.0f);
+  groundBodyDef.position.Set(0.0f, 0.0f);
 
   ground = physic_world->CreateBody(&groundBodyDef);
 
