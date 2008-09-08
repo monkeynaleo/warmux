@@ -436,6 +436,12 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
 void PhysicalObj::UpdatePosition ()
 {
 
+   if( IsOutsideWorldXY( Point2i( GetX(),GetY()) ) )
+    {
+      Ghost();
+      SignalOutOfMap();
+    }
+
   // No ghost allowed here !
   if (IsGhost()) return;
 
@@ -524,6 +530,7 @@ void PhysicalObj::Init()
 
 void PhysicalObj::Ghost ()
 {
+
   if (m_alive == GHOST)
     return;
 
@@ -536,7 +543,7 @@ void PhysicalObj::Ghost ()
 
   /*****************************************************************************/
   /* TODO REMOVE THIS TEST AS SOON AS PHYSICAL ENGINE IS REPAIRED */
-  if (Game::GetInstance()->IsGameLaunched())
+ // if (Game::GetInstance()->IsGameLaunched())
     /*****************************************************************************/
     SignalGhostState(was_dead);
 }
