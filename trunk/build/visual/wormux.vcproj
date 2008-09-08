@@ -52,7 +52,7 @@
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\include&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\src&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
 				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\LiberationSans-Regular.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -149,7 +149,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\include&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\src&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -444,19 +444,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\graphic\..\polygon.cpp"
+					RelativePath="..\..\src\graphic\polygon.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\graphic\..\polygon.h"
+					RelativePath="..\..\src\graphic\polygon.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\graphic\..\polygon_generator.cpp"
+					RelativePath="..\..\src\graphic\polygon_generator.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\graphic\..\polygon_generator.h"
+					RelativePath="..\..\src\graphic\polygon_generator.h"
 					>
 				</File>
 				<File
@@ -1284,11 +1284,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\particles\..\polecat_fart.cpp"
+					RelativePath="..\..\src\particles\polecat_fart.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\particles\..\polecat_fart.h"
+					RelativePath="..\..\src\particles\polecat_fart.h"
 					>
 				</File>
 				<File
@@ -1820,11 +1820,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\weapon\..\polecat.cpp"
+					RelativePath="..\..\src\weapon\polecat.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\weapon\..\polecat.h"
+					RelativePath="..\..\src\weapon\polecat.h"
 					>
 				</File>
 				<File
