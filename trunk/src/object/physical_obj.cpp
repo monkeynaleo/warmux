@@ -112,6 +112,7 @@ void PhysicalObj::SetXY(const Point2d &position)
 
   if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) )
     {
+
       SetPhysXY( position / PIXEL_PER_METER );
       Ghost();
       SignalOutOfMap();
@@ -121,10 +122,14 @@ void PhysicalObj::SetXY(const Point2d &position)
       SetPhysXY( position / PIXEL_PER_METER );
       if( FootsInVacuum() ) StartMoving();
     }
+
+
 }
 
 double PhysicalObj::GetXdouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
-double PhysicalObj::GetYdouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
+double PhysicalObj::GetYdouble() const {
+ /return round(GetPhysY() * PIXEL_PER_METER);
+   };
 
 int PhysicalObj::GetX() const { return (int)GetXdouble(); };
 int PhysicalObj::GetY() const { return (int)GetYdouble(); };
@@ -856,7 +861,6 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
     }
   return false;
 }
-
 bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync)
 {
   uint bcl=0;
@@ -867,74 +871,75 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
   MSG_DEBUG("physic.position", "%s - Search a position...", m_name.c_str());
 
   do
+  {
+    bcl++;
+    ok = true;
+    Init();
+
+    if (bcl >= NB_MAX_TRY) {
+      MSG_DEBUG("physic.position", "%s - Impossible to find an initial position !!", m_name.c_str());
+      return false;
+    }
+
+    if (on_top_of_world) {
+      // Give a random position for x
+      if(net_sync)
+        position.x = RandomSync().GetLong(0, GetWorld().GetWidth() - GetWidth());
+      else
+        position.x = RandomLocal().GetLong(0, GetWorld().GetWidth() - GetWidth());
+      position.y = -GetHeight()+1;
+    } else {
+      if(net_sync)
+        position = RandomSync().GetPoint(GetWorld().GetSize() - GetSize() + 1);
+      else
+        position = RandomLocal().GetPoint(GetWorld().GetSize() - GetSize() + 1);
+    }
+    SetXY(position);
+    MSG_DEBUG("physic.position", "%s (try %u/%u) - Test in %d, %d",
+              m_name.c_str(), bcl, NB_MAX_TRY, position.x, position.y);
+
+    // Check physical object is not in the ground
+    ok &= !IsGhost() && GetWorld().ParanoiacRectIsInVacuum(GetTestRect())  && IsInVacuum( Point2i(0, 1) );
+    if (!ok) {
+      MSG_DEBUG("physic.position", "%s - Put it in the ground -> try again !", m_name.c_str());
+      continue;
+    }
+
+    /* check if the area rigth under the object has a bottom on the ground */
+    ok &= !GetWorld().ParanoiacRectIsInVacuum(Rectanglei(GetCenter().x, position.y, 1, GetWorld().GetHeight() -
+             (WATER_INITIAL_HEIGHT + 30) - position.y));
+    if (!ok) {
+      MSG_DEBUG("physic.position", "%s - Put in outside the map or in water -> try again", m_name.c_str());
+      continue;
+    }
+
+    DirectFall();
+
+    // Check distance with characters
+    FOR_ALL_LIVING_CHARACTERS(team, character) if (&(*character) != this)
     {
-      bcl++;
-      ok = true;
-      Init();
+      if (min_dst_with_characters == 0) {
 
-      if (bcl >= NB_MAX_TRY) {
-	MSG_DEBUG("physic.position", "%s - Impossible to find an initial position !!", m_name.c_str());
-	return false;
-      }
-
-      if (on_top_of_world) {
-	// Give a random position for x
-	if(net_sync)
-	  position.x = RandomSync().GetLong(0, GetWorld().GetWidth() - 0);
-	else
-	  position.x = RandomLocal().GetLong(0, GetWorld().GetWidth() - 0);
-	position.y = -0+1;
+        if(Overlapse(*character)) {
+            MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*character).m_name.c_str());
+            ok = false;
+        }
       } else {
-	if(net_sync)
-	  position = RandomSync().GetPoint(GetWorld().GetSize() - 0 + 1);
-	else
-	  position = RandomLocal().GetPoint(GetWorld().GetSize() - 0 + 1);
+        Point2i p1 = character->GetCenter();
+        Point2i p2 = GetCenter();
+        double dst = p1.Distance( p2 );
+
+        // ok this test is not perfect but quite efficient ;-)
+        // else we need to check each distance between each "corner"
+        if (dst < min_dst_with_characters) ok = false;
       }
-      MSG_DEBUG("physic.position", "%s (try %u/%u) - Test in %d, %d",
-		m_name.c_str(), bcl, NB_MAX_TRY, position.x, position.y);
-      SetXY(position);
+    }
 
-      // Check physical object is not in the ground
-      ok &= !IsGhost() && GetWorld().ParanoiacRectIsInVacuum(GetTestRect())  && IsInVacuum( Point2i(0, 1) );
-      if (!ok) {
-	MSG_DEBUG("physic.position", "%s - Put it in the ground -> try again !", m_name.c_str());
-	continue;
-      }
-
-      /* check if the area rigth under the object has a bottom on the ground */
-      ok &= !GetWorld().ParanoiacRectIsInVacuum(Rectanglei(GetCenter().x, position.y, 1, GetWorld().GetHeight() -
-						      (WATER_INITIAL_HEIGHT + 30) - position.y));
-      if (!ok) {
-	MSG_DEBUG("physic.position", "%s - Put in outside the map or in water -> try again", m_name.c_str());
-	continue;
-      }
-
-      DirectFall();
-
-      // Check distance with characters
-      FOR_ALL_LIVING_CHARACTERS(team, character) if (&(*character) != this)
-	{
-	  if (min_dst_with_characters == 0) {
-
-	    if(Overlapse(*character)) {
-	      MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*character).m_name.c_str());
-	      ok = false;
-	    }
-	  } else {
-	    Point2i p1 = character->GetCenter();
-	    Point2i p2 = GetCenter();
-	    double dst = p1.Distance( p2 );
-
-	    // ok this test is not perfect but quite efficient ;-)
-	    // else we need to check each distance between each "corner"
-	    if (dst < min_dst_with_characters) ok = false;
-	  }
-	}
-
-      if (ok && on_top_of_world) SetXY(position);
-    } while (!ok);
+    if (ok && on_top_of_world) SetXY(position);
+  } while (!ok);
 
   MSG_DEBUG("physic.position", "Put '%s' after %u tries", m_name.c_str(), bcl);
 
   return true;
 }
+
