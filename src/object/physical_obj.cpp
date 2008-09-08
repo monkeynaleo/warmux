@@ -127,9 +127,7 @@ void PhysicalObj::SetXY(const Point2d &position)
 }
 
 double PhysicalObj::GetXdouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
-double PhysicalObj::GetYdouble() const {
- /return round(GetPhysY() * PIXEL_PER_METER);
-   };
+double PhysicalObj::GetYdouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
 
 int PhysicalObj::GetX() const { return (int)GetXdouble(); };
 int PhysicalObj::GetY() const { return (int)GetYdouble(); };
@@ -437,12 +435,13 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
 
 void PhysicalObj::UpdatePosition ()
 {
-  /*
+
   // No ghost allowed here !
   if (IsGhost()) return;
 
   if ( !m_goes_through_wall )
   {
+
   // object is not moving and has no reason to move
   if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
 
@@ -450,19 +449,17 @@ void PhysicalObj::UpdatePosition ()
   if ( !IsMoving() && FootsInVacuum() ) StartMoving();
   }
 
-  // Compute new position.
-  RunPhysicalEngine();
-
   if (IsGhost()) return;
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
   if ( !m_goes_through_wall )
   {
+
   if ( IsInWater() && m_alive != DROWNED && m_alive != DEAD) Drown();
   else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
   }
-  */
-  //Obsolete
+
+
 }
 
 bool PhysicalObj::PutOutOfGround(double direction, double max_distance)
@@ -546,6 +543,7 @@ void PhysicalObj::Ghost ()
 
 void PhysicalObj::Drown()
 {
+
   ASSERT (m_alive != DROWNED);
   MSG_DEBUG("physic.state", "%s - Drowned...", m_name.c_str());
   m_alive = DROWNED;
@@ -678,8 +676,6 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   m_height = newSize.y;
   m_phys_height = m_height/PIXEL_PER_METER;
   m_phys_width = m_width/PIXEL_PER_METER;
-  std::cout<<m_name<<" size "<<m_width<<" "<<m_height<<std::endl;
-  std::cout<<m_name<<" phys "<<m_phys_width<<" "<<m_phys_height<<std::endl;
   //Physical shape
   if(m_shape !=NULL)
   {
@@ -703,7 +699,7 @@ void PhysicalObj::SetSize(const Point2i &newSize)
         shapeDef.filter.maskBits = filter_data.maskBits;
         m_shape = m_body->CreateShape(&shapeDef);
         m_body->SetMassFromShapes();
-        std::cout<<m_name<<" size ok "<<GetSize().x<<" "<<GetSize().y<<std::endl;
+
     }
   }
   else
