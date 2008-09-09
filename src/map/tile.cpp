@@ -27,6 +27,9 @@
 #include "include/app.h"
 #include "map/camera.h"
 
+#ifdef DEBUG
+#include "graphic/colors.h"
+#endif
 
 /******************************************************************************/
 // MUST BE DEFINED ONLY ONCE AND SOMEWHERE ELSE
@@ -317,6 +320,24 @@ void Tile::DrawTile()
   for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
     for( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
       item[i.y*nbCells.x + i.x]->Draw( i );
+
+#ifdef DEBUG
+  if (IsLOGGING("map")) {
+    for ( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
+      GetMainWindow().LineColor(i.x*CELL_SIZE.x - Camera::GetInstance()->GetPosition().x,
+				i.x*CELL_SIZE.x - Camera::GetInstance()->GetPosition().x,
+				0, GetMainWindow().GetHeight(),
+				primary_green_color);
+
+    for ( i.y = firstCell.y; i.y <= lastCell.y; i.y++)
+      GetMainWindow().LineColor(0, GetMainWindow().GetWidth(),
+				i.y*CELL_SIZE.y - Camera::GetInstance()->GetPosition().y,
+				i.y*CELL_SIZE.y - Camera::GetInstance()->GetPosition().y,
+				primary_green_color);
+  }
+
+
+#endif
 }
 
 void Tile::DrawTile_Clipped(Rectanglei worldClip) const
