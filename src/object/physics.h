@@ -78,8 +78,6 @@ protected:
   std::vector<b2ContactPoint> removed_contact_list;
   std::vector<b2ContactResult> result_contact_list;
 
-
-
   // Define if the rope is elastic or not.
   bool m_elasticity_off ;
   b2BodyDef *m_body_def;
@@ -103,7 +101,7 @@ public:
   Point2d GetPos() const { return Point2d( m_body->GetPosition().x,m_body->GetPosition().y); };
 
   // Set size
-  void SetMass (double mass) { m_mass = mass ; };
+  void SetMass(double mass);
   double GetMass() const { return m_mass; }
 
   void SetWindFactor (double wind_factor) { m_wind_factor = wind_factor; };
@@ -118,10 +116,10 @@ public:
   void SetRebounding (bool rebounding) { m_rebounding = rebounding; }
   bool GetRebounding () const { return m_rebounding; }
 
-void AddAddedContactPoint(b2ContactPoint contact);
-void AddPersistContactPoint(b2ContactPoint contact);
-void AddRemovedContactPoint(b2ContactPoint contact);
- void AddContactResult(b2ContactResult contact);
+  void AddAddedContactPoint(b2ContactPoint contact);
+  void AddPersistContactPoint(b2ContactPoint contact);
+  void AddRemovedContactPoint(b2ContactPoint contact);
+  void AddContactResult(b2ContactResult contact);
 
   void ClearContact();
 
