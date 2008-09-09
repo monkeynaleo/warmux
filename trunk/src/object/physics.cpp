@@ -62,7 +62,6 @@ Physics::Physics ():
   m_cfg()
 
 {
-
   m_body_def = new b2BodyDef;
   m_body_def->allowSleep = true;
   m_body_def->linearDamping = 0.0f;
@@ -70,10 +69,6 @@ Physics::Physics ():
 
   m_body_def->position.Set(0.0f, 4.0f);
   m_body = PhysicalEngine::GetInstance()->AddObject(this);
-
-
-
-
 }
 
 //---------------------------------------------------------------------------//
@@ -207,6 +202,18 @@ void Physics::GetValueFromAction(Action *a)
       m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
       m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
       m_extern_force.x, m_extern_force.y);*/
+}
+
+void Physics::SetMass(double mass)
+{
+  m_mass = mass;
+
+  b2MassData massData;
+  massData.mass = m_mass;
+  massData.center.SetZero();
+  massData.I = 0.0f;
+
+  m_body->SetMass(&massData);
 }
 
 void Physics::SetExternForceXY (const Point2d& vector)
