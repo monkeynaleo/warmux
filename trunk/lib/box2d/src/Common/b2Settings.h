@@ -89,7 +89,7 @@ const float32 b2_angularSlop = 2.0f / 180.0f * b2_pi;			// 2 degrees
 /// Continuous collision detection (CCD) works with core, shrunken shapes. This is the
 /// amount by which shapes are automatically shrunk to work with CCD. This must be
 /// larger than b2_linearSlop.
-const float32 b2_toiSlop = 8.0f * b2_linearSlop;
+const float32 b2_toiSlop = 2.0f * b2_linearSlop;
 
 /// Maximum number of contacts to be handled to solve a TOI island.
 const int32 b2_maxTOIContactsPerIsland = 32;
