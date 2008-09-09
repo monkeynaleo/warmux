@@ -598,10 +598,8 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
                                     bool collides_with_characters,
                                     bool collides_with_objects)
 {
-
   // SetSize() must be called before
   ASSERT(m_shape != NULL);
-
 
   m_goes_through_wall = goes_through_wall;
   m_collides_with_characters = collides_with_characters;
@@ -683,45 +681,35 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   m_height = newSize.y;
   m_phys_height = m_height/PIXEL_PER_METER;
   m_phys_width = m_width/PIXEL_PER_METER;
+
   //Physical shape
-  if(m_shape !=NULL)
+  b2FilterData filter_data;
+  filter_data.categoryBits = 0x0001;
+  filter_data.maskBits = 0x0000;
+
+  if (m_shape != NULL)
   {
-    //TODO : correct this very strange fix
-    if(m_name != "bounce_ball")
-    {
-
-        b2FilterData filter_data =  m_shape->GetFilterData();
-
-        m_body->DestroyShape(m_shape);
-
-        b2PolygonDef shapeDef;
-        shapeDef.SetAsBox(m_phys_width, m_phys_height);
-
-
-
-        shapeDef.density = 1.0f;
-        shapeDef.friction = 0.8f;
-        shapeDef.restitution = 0.1f;
-        shapeDef.filter.categoryBits = filter_data.categoryBits;
-        shapeDef.filter.maskBits = filter_data.maskBits;
-        m_shape = m_body->CreateShape(&shapeDef);
-        m_body->SetMassFromShapes();
-
-    }
-  }
-  else
-  {
-    b2PolygonDef shapeDef;
-    shapeDef.SetAsBox(m_phys_width, m_phys_height);
-    shapeDef.density = 1.0f;
-    shapeDef.friction = 0.8f;
-    shapeDef.restitution = 0.1f;
-    shapeDef.filter.categoryBits = 0x0001;
-    shapeDef.filter.maskBits = 0x0000;
-    m_shape = m_body->CreateShape(&shapeDef);
-    m_body->SetMassFromShapes();
+    filter_data = m_shape->GetFilterData();
+    m_body->DestroyShape(m_shape);
   }
 
+  b2PolygonDef shapeDef;
+  shapeDef.vertexCount = 4;
+  shapeDef.vertices[0].Set(GetPhysX(), GetPhysY());
+  shapeDef.vertices[1].Set(GetPhysX() + m_phys_width, GetPhysY());
+  shapeDef.vertices[2].Set(GetPhysX() + m_phys_width, GetPhysY() + m_phys_height);
+  shapeDef.vertices[3].Set(GetPhysX(), GetPhysY() + m_phys_height);
+
+  shapeDef.density = 1.0f;
+  shapeDef.friction = 0.8f;
+  shapeDef.restitution = 0.1f;
+  shapeDef.filter.categoryBits = filter_data.categoryBits;
+  shapeDef.filter.maskBits = filter_data.maskBits;
+
+  m_shape = m_body->CreateShape(&shapeDef);
+  //
+  SetMass(GetMass());
+  //m_body->SetMassFromShapes();
 }
 
 bool PhysicalObj::FootsOnFloor(int y) const
