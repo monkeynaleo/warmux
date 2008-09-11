@@ -39,7 +39,7 @@
 
 Ground::Ground()
 {
-  m_tile_body = PhysicalEngine::GetInstance()->GetGroundBody();
+
 }
 
 void Ground::Init()

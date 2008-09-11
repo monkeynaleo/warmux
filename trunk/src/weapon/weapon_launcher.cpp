@@ -34,6 +34,7 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
+#include "object/physical_engine.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"

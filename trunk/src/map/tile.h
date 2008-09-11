@@ -29,7 +29,6 @@ class Surface;
 class Sprite;
 class TileItem;
 class TileItem_Empty;
-class b2Body;
 
 extern TileItem_Empty EmptyTile;
 
@@ -98,7 +97,6 @@ protected:
   Point2i m_upper_left_offset;
   Point2i m_lower_right_offset;
 
-  b2Body* m_tile_body;
 
   // Canvas giving access to tiles
   std::vector<TileItem *> item;

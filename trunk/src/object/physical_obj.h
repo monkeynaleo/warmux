@@ -43,7 +43,6 @@ typedef enum
 
 class Action;
 
-extern const double PIXEL_PER_METER;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2);
 

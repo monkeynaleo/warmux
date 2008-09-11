@@ -87,6 +87,7 @@ wormux_SOURCES = \
         map/ground.cpp map/ground.h \
         map/map.cpp map/map.h \
         map/maps_list.cpp map/maps_list.h \
+		map/physic_tile.cpp map/physic_tile.h \
         map/random_map.cpp map/random_map.h \
         map/sky.cpp map/sky.h \
         map/tile.cpp map/tile.h \
@@ -95,7 +96,7 @@ wormux_SOURCES = \
         map/wind.cpp map/wind.h \
         menu/credits_menu.cpp menu/credits_menu.h \
         menu/game_menu.cpp menu/game_menu.h \
-	menu/game_mode_editor.cpp menu/game_mode_editor.h \
+		menu/game_mode_editor.cpp menu/game_mode_editor.h \
         menu/help_menu.cpp menu/help_menu.h \
         menu/main_menu.cpp menu/main_menu.h \
         menu/map_selection_box.cpp menu/map_selection_box.h \
@@ -130,7 +131,7 @@ wormux_SOURCES = \
         object/objbox.cpp object/objbox.h \
         object/object_cfg.cpp object/object_cfg.h \
         object/objects_list.cpp object/objects_list.h \
-	object/physical_engine.cpp object/physical_engine.h \
+		object/physical_engine.cpp object/physical_engine.h \
         object/physical_obj.cpp object/physical_obj.h \
         object/physics.cpp object/physics.h \
         particles/body_member.cpp particles/body_member.h \

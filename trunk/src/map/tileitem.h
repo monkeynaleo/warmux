@@ -24,7 +24,7 @@
 #include "graphic/surface.h"
 
 class b2Body;
-class b2Shape;
+class PhysicTile;
 
 const Point2i CELL_SIZE(64, 64);
 
@@ -47,6 +47,7 @@ public:
   virtual Surface GetSurface() = 0;
   virtual void Draw(const Point2i &pos) = 0;
   virtual bool IsTotallyEmpty() const = 0;
+  virtual b2Body *GetBody() const =0;
 #ifdef DBG_TILE
   virtual void FillWithRGB(Uint8 /*r*/, Uint8 /*g*/, Uint8 /*b*/) {};
 #endif
@@ -68,12 +69,14 @@ public:
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i &pos);
   bool IsTotallyEmpty() const {return true;};
+  b2Body *GetBody() const {return NULL;};
 };
 
 class TileItem_AlphaSoftware : public TileItem
 {
   b2Body* m_tile_body;
-  b2Shape* m_shape;
+  PhysicTile *m_physic_tile;
+
 
   unsigned char* last_filled_pixel;
   const TileItem_AlphaSoftware& operator=(const TileItem_AlphaSoftware&);
@@ -82,17 +85,17 @@ public:
   bool need_check_empty;
   bool need_delete;
 
-  TileItem_AlphaSoftware(b2Body* tile_body, const Point2i &size);
+  TileItem_AlphaSoftware( const Point2i &size);
   virtual ~TileItem_AlphaSoftware();
 
-  void InitShape(const Rectanglei& img_rect);
+  void InitShape(int level, Point2d &offset);
   unsigned char GetAlpha(const Point2i &pos);
   void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
   void MergeSprite(const Point2i &position, Surface& spr);
   void ScalePreview(uint8_t *odata, uint opitch, uint shift);
   void Draw(const Point2i &pos);
-
+  b2Body *GetBody() const;
   bool NeedDelete() const {return need_delete; };
   void CheckEmpty();
   void ResetEmptyCheck();

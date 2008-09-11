@@ -27,6 +27,8 @@
 #include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
+#include "map/physic_tile.h"
+#include "object/physical_engine.h"
 #include "tool/error.h"
 #include "tool/math_tools.h"
 #include "tool/point.h"
@@ -34,11 +36,6 @@
 #ifdef DBG_TILE
 #include "graphic/colors.h"
 #endif
-
-/******************************************************************************/
-// MUST BE DEFINED ONLY ONCE AND SOMEWHERE ELSE
-const double PIXEL_PER_METER = 20;
-/******************************************************************************/
 
 static const uint TRANSPARENT_WHITE = 0x40FFFFFF;
 
@@ -78,13 +75,16 @@ void TileItem_Empty::Draw(const Point2i &/*pos*/)
 }
 
 // === Implemenation of TileItem_Software_ALpha ==============================
-TileItem_AlphaSoftware::TileItem_AlphaSoftware(b2Body* tile_body, const Point2i &size) :
-  TileItem(), m_tile_body(tile_body), m_shape(NULL)
+TileItem_AlphaSoftware::TileItem_AlphaSoftware( const Point2i &size) :
+  TileItem()
 {
+  m_physic_tile = NULL;
     m_size = size;
     m_surface = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
     need_delete = false;
     ResetEmptyCheck();
+
+    m_tile_body = PhysicalEngine::GetInstance()->GetNewGroundBody();
 
     _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
     if( m_surface.GetBytesPerPixel() == 4 ){
@@ -106,34 +106,12 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(b2Body* tile_body, const Point2i 
 
 TileItem_AlphaSoftware::~TileItem_AlphaSoftware()
 {
-  if (m_shape)
-    m_tile_body->DestroyShape(m_shape);
+  delete m_physic_tile;
 }
 
-void TileItem_AlphaSoftware::InitShape(const Rectanglei& img_rect)
+void TileItem_AlphaSoftware::InitShape(int level, Point2d &offset)
 {
-  b2PolygonDef rect;
-  rect.vertexCount = 4;
-
-  rect.vertices[0].Set((img_rect.GetPositionX() / PIXEL_PER_METER),
-		      (img_rect.GetPositionY() / PIXEL_PER_METER));
-
-  rect.vertices[1].Set(((img_rect.GetPositionX() + CELL_SIZE.x) / PIXEL_PER_METER),
-		      (img_rect.GetPositionY() / PIXEL_PER_METER));
-
-  rect.vertices[2].Set(((img_rect.GetPositionX() + CELL_SIZE.x) / PIXEL_PER_METER),
-		      ((img_rect.GetPositionY() + CELL_SIZE.y) / PIXEL_PER_METER));
-
-  rect.vertices[3].Set((img_rect.GetPositionX() / PIXEL_PER_METER),
-		       ((img_rect.GetPositionY() + CELL_SIZE.y) / PIXEL_PER_METER));
-
-
-  // rect.SetAsBox(double(CELL_SIZE.x)*PIXEL_PER_METER, double(CELL_SIZE.y)*PIXEL_PER_METER);
-  // rect.friction = 0.8f;
-  // rect.restitution = 0.1f;
-  // rect.filter.categoryBits = 0x0004;
-  // rect.filter.maskBits = 0xFFFF;
-  m_shape = m_tile_body->CreateShape(&rect);
+ m_physic_tile = new  PhysicTile(m_size, offset, this,NULL, level);
 }
 
 void TileItem_AlphaSoftware::ResetEmptyCheck()
@@ -379,4 +357,9 @@ void TileItem_AlphaSoftware::CheckEmpty()
   {
     need_check_empty = false;
   }
+}
+
+b2Body * TileItem_AlphaSoftware::GetBody() const
+{
+    return m_tile_body;
 }
