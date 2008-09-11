@@ -56,7 +56,6 @@
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 40;
 
-const double PIXEL_PER_METER = 20;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2)
 {

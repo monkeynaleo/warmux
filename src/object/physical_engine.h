@@ -41,7 +41,7 @@ public:
   PhysicalEngine();
   ~PhysicalEngine();
 
-  b2Body *GetGroundBody() const;
+  b2Body *GetNewGroundBody() ;
   b2Body *AddObject(Physics *new_obj);
   void RemoveObject(Physics *obj);
   void Step();

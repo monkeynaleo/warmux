@@ -24,6 +24,8 @@
 #include "object/physical_obj.h"
 #include <iostream>
 
+const double PIXEL_PER_METER = 20;
+
 PhysicalEngine::PhysicalEngine()
 {
   worldAABB.lowerBound.Set(-1000.0f, -1000.0f);
@@ -33,10 +35,7 @@ PhysicalEngine::PhysicalEngine()
 
   physic_world = new b2World(worldAABB, gravity, doSleep);
 
-  b2BodyDef groundBodyDef;
-  groundBodyDef.position.Set(0.0f, 0.0f);
 
-  ground = physic_world->CreateBody(&groundBodyDef);
 
   frame_rate = 60;
   last_step_time = 0;
@@ -48,9 +47,13 @@ PhysicalEngine::~PhysicalEngine()
   delete physic_world;
 }
 
-b2Body *PhysicalEngine::GetGroundBody() const
+b2Body *PhysicalEngine::GetNewGroundBody()
 {
-  return ground;
+  b2BodyDef groundBodyDef;
+  groundBodyDef.position.Set(0.0f, 0.0f);
+
+  return physic_world->CreateBody(&groundBodyDef);
+
 }
 
 b2Body *PhysicalEngine::AddObject(Physics *new_obj)
@@ -70,6 +73,7 @@ void PhysicalEngine::Step()
 {
 
   float32 timeStep = 1.0f / frame_rate;
+
 
  if ((Time::GetInstance()->Read()-last_step_time) < timeStep)
     {

@@ -150,7 +150,7 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
       if(ti->IsTotallyEmpty())
       {
         delete item[c.y*nbCells.x + c.x];
-        ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(m_tile_body, CELL_SIZE);
+        ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(CELL_SIZE);
         ti->GetSurface().SetAlpha(0,0);
         ti->GetSurface().Fill(0x00000000);
         ti->GetSurface().SetAlpha(SDL_SRCALPHA,0);
@@ -200,7 +200,7 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
       if(ti->IsTotallyEmpty()) {
         // Don't delete the old item as we use only one empty tile
         // delete item[c.y*nbCells.x + c.x];
-        ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(m_tile_body, CELL_SIZE);
+        ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware( CELL_SIZE);
         ti->GetSurface().SetAlpha(0,0);
         ti->GetSurface().Fill(0x00000000);
         ti->GetSurface().SetAlpha(SDL_SRCALPHA,0);
@@ -263,7 +263,7 @@ void Tile::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, con
   InitTile(ground_img.GetSize(), upper_left_offset, lower_right_offset);
   ASSERT(nbCells.x != 0 && nbCells.y != 0);
 
-  m_tile_body->SetXForm(b2Vec2(upper_left_offset.x/PIXEL_PER_METER, upper_left_offset.y/PIXEL_PER_METER), m_tile_body->GetAngle());
+  //m_tile_body->SetXForm(b2Vec2(upper_left_offset.x/PIXEL_PER_METER, upper_left_offset.y/PIXEL_PER_METER), m_tile_body->GetAngle());
 
   InitPreview();
   uint8_t *dst  = m_preview->GetPixels();
@@ -277,7 +277,7 @@ void Tile::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, con
     {
       Rectanglei sr(i * CELL_SIZE - upper_left_offset, CELL_SIZE);
 
-      TileItem_AlphaSoftware* t = new TileItem_AlphaSoftware(m_tile_body, CELL_SIZE);
+      TileItem_AlphaSoftware* t = new TileItem_AlphaSoftware( CELL_SIZE);
       ground_img.SetAlpha(0, 0);
       t->GetSurface().Blit(ground_img, sr, Point2i(0, 0));
       t->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
@@ -298,7 +298,8 @@ void Tile::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, con
 	else
 	  item[i]->FillWithRGB(0, 255, 0);
 #endif
-	t->InitShape(sr);
+Point2d offset = i * CELL_SIZE;
+	t->InitShape(1,offset);
 	item.push_back(t);
       }
     }
