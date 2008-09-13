@@ -20,11 +20,12 @@
  *****************************************************************************/
 
 #include "game/time.h"
+#include "object/force.h"
 #include "object/physical_engine.h"
 #include "object/physical_obj.h"
 #include <iostream>
 
-const double PIXEL_PER_METER = 10;
+const double PIXEL_PER_METER = 20;
 
 PhysicalEngine::PhysicalEngine()
 {
@@ -81,6 +82,9 @@ void PhysicalEngine::Step()
     }
   MSG_DEBUG("physical.step", "Engine step");
 
+  for(unsigned i = 0; i< m_force_list.size();i++){
+    m_force_list[i]->ComputeForce();
+  }
 
 physic_world->Step(timeStep, iterations);
 
@@ -95,6 +99,27 @@ void PhysicalEngine::ClearContact()
   removed_contact_list.clear();
   result_contact_list.clear();
 }
+
+
+void PhysicalEngine::AddForce(Force * force)
+{
+    m_force_list.push_back(force);
+}
+
+void PhysicalEngine::RemoveForce(Force *force)
+{
+
+  std::vector<Force *>::iterator it;
+  for(it = m_force_list.begin(); it!=m_force_list.end();it++){
+    if(*it == force){
+      m_force_list.erase(it);
+      break;
+    }
+
+  }
+
+}
+
 
 void PhysicalEngine::AddContactPoint(b2ContactPoint contact,ContactType type)
 {

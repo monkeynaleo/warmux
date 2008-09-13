@@ -51,6 +51,8 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
   use_unit_on_first_shoot = false;
 
+  m_force_index =0;
+
   m_x_force = 0.0;
   m_y_force = 0.0;
 }
@@ -74,7 +76,8 @@ void JetPack::Refresh()
     F.x = m_x_force ;
     F.y = m_y_force ;
 
-    ActiveCharacter().SetExternForceXY(F);
+    ActiveCharacter().RemoveExternForce(m_force_index);
+    m_force_index = ActiveCharacter().AddExternForceXY(F);
     SendActiveCharacterInfo();
 
     if (!F.IsNull())
@@ -116,7 +119,9 @@ void JetPack::p_Deselect()
 {
   m_x_force = 0;
   m_y_force = 0;
-  ActiveCharacter().SetExternForce(0,0);
+   ActiveCharacter().RemoveExternForce(m_force_index);
+
+
   StopUse();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");

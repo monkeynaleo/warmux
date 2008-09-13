@@ -482,7 +482,8 @@ void Character::Jump(double strength, double angle /*in radian */)
 
   // Jump !
   if (GetDirection() == DIRECTION_LEFT) angle = InverseAngle(angle);
-  SetSpeed (strength, angle);
+//  SetSpeed (strength, angle);
+Impulse(100 + strength,angle);
 }
 
 void Character::Jump()

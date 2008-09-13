@@ -64,6 +64,7 @@ protected:
   bool m_targeted;
   double m_force;
   uint m_lastrefresh;
+  unsigned m_force_index;
 public:
   RPG(AutomaticBazookaConfig& cfg,
       WeaponLauncher * p_launcher);
@@ -80,6 +81,7 @@ protected:
 RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
   WeaponProjectile("rocket", cfg, p_launcher), smoke_engine(20), m_lastrefresh(0)
 {
+  m_force_index = 0;
   m_targeted = false;
   explode_colliding_character = true;
 }
@@ -117,14 +119,16 @@ void RPG::Refresh()
       SetSpeed(0,0);
       angle_local = GetPosition().ComputeAngle( m_targetPoint );
       m_force = acfg.rocket_force;
-      SetExternForce(m_force, angle_local);
+      RemoveExternForce(m_force_index);
+      m_force_index = AddExternForce(m_force, angle_local);
       SetGravityFactor(0);
       SetWindFactor(0);
     }
   }
   else
   {
-    SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
+    RemoveExternForce(m_force_index);
+    //SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
 
     if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
@@ -156,7 +160,7 @@ void RPG::Refresh()
       }
     }
 
-    SetExternForce(m_force, angle_local);
+    m_force_index = AddExternForce(m_force, angle_local);
 
   }
   image->SetRotation_rad(angle_local);

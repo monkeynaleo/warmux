@@ -34,7 +34,7 @@ class Parachute : public Weapon
   private:
     bool open;
     bool closing;
-
+    unsigned m_force_index;
     struct {
       double x_extern;
       bool changing;

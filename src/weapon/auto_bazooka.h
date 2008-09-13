@@ -47,6 +47,7 @@ class AutomaticBazooka : public WeaponLauncher
 
     void DrawTarget() const;
 
+
     WeaponProjectile * GetProjectileInstance();
 };
 

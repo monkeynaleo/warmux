@@ -34,6 +34,7 @@
 #include "tool/point.h"
 #include "object_cfg.h"
 #include <vector>
+#include <map>
 
 enum MotionType_t
 {
@@ -50,6 +51,7 @@ typedef enum {
 
 class Game;
 class Action;
+class Force;
 
 
 class Physics : private ObjectConfig
@@ -57,7 +59,9 @@ class Physics : private ObjectConfig
 private:
   MotionType_t m_motion_type ;
 
-  Point2d m_extern_force;  // External strength applyed to the object
+ // Point2d m_extern_force;  // External strength applyed to the object
+  std::map<unsigned,Force *> m_extern_force_map;
+  unsigned m_extern_force_index;
   double m_angle;
 
 
@@ -149,9 +153,14 @@ public:
 
 
   // Add new strength
-  void SetExternForceXY (const Point2d& vector);
-  void SetExternForce (double norm, double angle) { SetExternForceXY(Point2d::FromPolarCoordinates(norm, angle)); };
-  Point2d GetExternForce() const { return m_extern_force; };
+  unsigned AddExternForceXY (const Point2d& vector);
+  unsigned AddExternForce (double norm, double angle) { return AddExternForceXY(Point2d::FromPolarCoordinates(norm, angle)); };
+  void RemoveExternForce(unsigned force_index);
+  void ImpulseXY(const Point2d& vector);
+  void Impulse(double norm, double angle){ ImpulseXY(Point2d::FromPolarCoordinates(norm, angle)); };
+
+
+  //Point2d GetExternForce() const { return m_extern_force; };
 
   // Add / Remove a fixation point.
  /* void SetPhysFixationPointXY(double g_x, double g_y,
