@@ -127,6 +127,7 @@ wormux_SOURCES = \
         network/socket.cpp network/socket.h \
         object/barrel.cpp object/barrel.h \
         object/bonus_box.cpp object/bonus_box.h \
+        object/force.cpp object/force.h \
         object/medkit.cpp  object/medkit.h \
         object/objbox.cpp object/objbox.h \
         object/object_cfg.cpp object/object_cfg.h \
