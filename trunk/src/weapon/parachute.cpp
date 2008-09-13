@@ -59,7 +59,7 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
   m_x_strength.x_extern = 0.0;
   m_x_strength.changing = false;
   use_unit_on_first_shoot = false;
-
+  m_force_index = 0;
   img = resource_manager.LoadSprite(weapons_res_profile, "parachute_sprite");
 }
 
@@ -152,7 +152,8 @@ void Parachute::Refresh()
   }
   // If parachute is open => character can move a little to the left or to the right
   if (open && Network::GetInstance()->IsTurnMaster()) {
-    ActiveCharacter().SetExternForce(m_x_strength.x_extern, 0.0);
+     ActiveCharacter().RemoveExternForce(m_force_index);
+    m_force_index = ActiveCharacter().AddExternForce(m_x_strength.x_extern, 0.0);
     if (m_x_strength.changing) {
       m_x_strength.changing = false;
       SendActiveCharacterInfo(false);

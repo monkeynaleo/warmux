@@ -24,6 +24,7 @@
  * If the object go outside of the world, it become a ghost.
  *****************************************************************************/
 
+#include "object/force.h"
 #include "object/physical_engine.h"
 #include "object/physics.h"
 #include <stdlib.h>
@@ -45,7 +46,7 @@ const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 
 Physics::Physics ():
   m_motion_type(NoMotion),
-  m_extern_force(),
+  m_extern_force_index(1),
   m_angle(0.0f),
   m_last_move(Time::GetInstance()->Read()),
   m_phys_width(),
@@ -161,7 +162,7 @@ b2BodyDef *Physics::GetBodyDef()
 void Physics::StoreValue(Action *a)
 {
   a->Push((int)m_motion_type);
-  a->Push(m_extern_force);
+  //a->Push(m_extern_force);
   a->Push((int)m_last_move);
   a->Push(m_phys_width);
   a->Push(m_phys_height);
@@ -184,7 +185,7 @@ void Physics::StoreValue(Action *a)
 void Physics::GetValueFromAction(Action *a)
 {
   m_motion_type        = (MotionType_t)a->PopInt();
-  m_extern_force       = a->PopPoint2d();
+// m_extern_force       = a->PopPoint2d();
   m_last_move          = (uint)a->PopInt();
   m_phys_width         = a->PopDouble();
   m_phys_height        = a->PopDouble();
@@ -216,8 +217,12 @@ void Physics::SetMass(double mass)
   m_body->SetMass(&massData);
 }
 
-void Physics::SetExternForceXY (const Point2d& vector)
+unsigned Physics::AddExternForceXY (const Point2d& vector)
 {
+
+  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPos(), vector, false) ;
+  PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
+  m_extern_force_index++;
 
 
   //bool was_moving = IsMoving();
@@ -225,10 +230,27 @@ void Physics::SetExternForceXY (const Point2d& vector)
   UpdateTimeOfLastMove();
   MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
 
-  m_extern_force.SetValues(vector);
+//  m_extern_force.SetValues(vector);
 
   /*if (!was_moving && IsMoving())
     StartMoving();*/
+
+    return m_extern_force_index-1;
+}
+
+void Physics::RemoveExternForce(unsigned index)
+{
+  if(index!=0){
+  PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
+  delete m_extern_force_map[index];
+  m_extern_force_map.erase(index);
+  }
+}
+
+void Physics::ImpulseXY(const Point2d& vector)
+{
+  std::cout<<"Impulse x="<<vector.x<<" y ="<<vector.y<<std::endl;
+    m_body->ApplyImpulse(b2Vec2(vector.x,vector.y),b2Vec2(GetPhysX(),GetPhysY()));
 }
 
 // Set fixation point positions

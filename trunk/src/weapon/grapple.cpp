@@ -648,7 +648,7 @@ void Grapple::GoRight()
     cable_sound.Play("share", "weapon/grapple_cable");
   }
   go_right = true ;
-  ActiveCharacter().SetExternForce(cfg().push_force,0);
+  //ActiveCharacter().SetExternForce(cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_RIGHT);
   ActiveCharacter().UpdatePosition() ;
 }
@@ -660,7 +660,7 @@ void Grapple::StopRight()
   if (go_left || go_right)
     return ;
 
-  ActiveCharacter().SetExternForce(0,0);
+  //ActiveCharacter().SetExternForce(0,0);
 }
 
 void Grapple::GoLeft()
@@ -669,7 +669,7 @@ void Grapple::GoLeft()
     cable_sound.Play("share", "weapon/grapple_cable");
   }
   go_left = true ;
-  ActiveCharacter().SetExternForce(-cfg().push_force,0);
+  //ActiveCharacter().SetExternForce(-cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_LEFT);
   ActiveCharacter().UpdatePosition() ;
 }
@@ -681,7 +681,7 @@ void Grapple::StopLeft()
   if (go_left || go_right)
     return ;
 
-  ActiveCharacter().SetExternForce(0,0);
+ // ActiveCharacter().SetExternForce(0,0);
 }
 
 // =========================== Keys management

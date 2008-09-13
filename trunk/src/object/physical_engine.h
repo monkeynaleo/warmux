@@ -32,7 +32,7 @@
 extern const double PIXEL_PER_METER;
 
 class Physics;
-//class ContactListener;
+class Force;
 
 class PhysicalEngine : public Singleton<PhysicalEngine>
 {
@@ -45,6 +45,9 @@ public:
   b2Body *AddObject(Physics *new_obj);
   void RemoveObject(Physics *obj);
   void Step();
+
+  void AddForce(Force * force);
+  void RemoveForce(Force *force);
 
   typedef enum {ADD,PERSIST,REMOVE} ContactType;
 
@@ -67,6 +70,7 @@ protected:
   std::vector<b2ContactPoint> removed_contact_list;
   std::vector<b2ContactResult> result_contact_list;
 
+  std::vector<Force *> m_force_list;
   void ClearContact();
 
   friend class Singleton<PhysicalEngine>;

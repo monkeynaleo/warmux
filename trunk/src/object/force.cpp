@@ -20,11 +20,11 @@
  *****************************************************************************/
 
 #include "object/force.h"
-#include "object/physical_obj.h"
+#include "object/physics.h"
 #include "object/physical_engine.h"
 
 
-Force::Force(PhysicalObj *target, Point2i target_point, Point2i force, bool is_local)
+Force::Force(Physics *target, Point2d target_point, Point2d force, bool is_local)
 {
 
   m_target = target;
@@ -38,11 +38,14 @@ Force::Force(PhysicalObj *target, Point2i target_point, Point2i force, bool is_l
    m_target_point =  target->GetBody()->GetWorldPoint(m_target_point);
   }
 
+  PhysicalEngine::GetInstance()->AddForce(this);
+
 }
 
-Force::~Force(){
-
- }
+Force::~Force()
+{
+  PhysicalEngine::GetInstance()->RemoveForce(this);
+}
 
 
 void Force::ComputeForce()
