@@ -24,7 +24,7 @@
 #include "object/physical_obj.h"
 #include <iostream>
 
-const double PIXEL_PER_METER = 20;
+const double PIXEL_PER_METER = 10;
 
 PhysicalEngine::PhysicalEngine()
 {
