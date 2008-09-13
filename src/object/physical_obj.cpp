@@ -678,8 +678,8 @@ void PhysicalObj::SetSize(const Point2i &newSize)
 
   m_width = newSize.x;
   m_height = newSize.y;
-  m_phys_height = m_height/PIXEL_PER_METER;
-  m_phys_width = m_width/PIXEL_PER_METER;
+  m_phys_height = double(m_height)/PIXEL_PER_METER;
+  m_phys_width = double(m_width)/PIXEL_PER_METER;
 
   //Physical shape
   b2FilterData filter_data;
@@ -694,10 +694,14 @@ void PhysicalObj::SetSize(const Point2i &newSize)
 
   b2PolygonDef shapeDef;
   shapeDef.vertexCount = 4;
-  shapeDef.vertices[0].Set(GetPhysX(), GetPhysY());
+ /* shapeDef.vertices[0].Set(GetPhysX() - m_phys_width/2, GetPhysY() - m_phys_height/2);
+  shapeDef.vertices[1].Set(GetPhysX() + m_phys_width/2, GetPhysY() - m_phys_height/2);
+  shapeDef.vertices[2].Set(GetPhysX() + m_phys_width/2, GetPhysY() + m_phys_height/2);
+  shapeDef.vertices[3].Set(GetPhysX() - m_phys_width/2, GetPhysY() + m_phys_height/2);*/
+  shapeDef.vertices[0].Set(GetPhysX() , GetPhysY() );
   shapeDef.vertices[1].Set(GetPhysX() + m_phys_width, GetPhysY());
   shapeDef.vertices[2].Set(GetPhysX() + m_phys_width, GetPhysY() + m_phys_height);
-  shapeDef.vertices[3].Set(GetPhysX(), GetPhysY() + m_phys_height);
+  shapeDef.vertices[3].Set(GetPhysX() , GetPhysY() + m_phys_height);
 
   shapeDef.density = 1.0f;
   shapeDef.friction = 0.8f;

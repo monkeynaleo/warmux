@@ -317,13 +317,17 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow,
 {
   MSG_DEBUG( "camera.tracking", "Following object %s",
                                  obj->GetName().c_str());
+if(follow && _in_advance)
+{
 
-  Mouse::GetInstance()->Hide();
-  if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
-    auto_crop = follow;
+}
 
-  in_advance = _in_advance;
-  followed_object = obj;
+ // Mouse::GetInstance()->Hide();
+ // if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
+ //   auto_crop = follow;
+
+ // in_advance = _in_advance;
+ // followed_object = obj;
 }
 
 void Camera::StopFollowingObj(const PhysicalObj* obj){

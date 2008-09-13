@@ -111,7 +111,7 @@ TileItem_AlphaSoftware::~TileItem_AlphaSoftware()
 
 void TileItem_AlphaSoftware::InitShape(int level, Point2d &offset)
 {
- m_physic_tile = new  PhysicTile(m_size, offset, this,NULL, level);
+ m_physic_tile = new  PhysicTile(m_size, Point2d(0,0),offset, this,NULL, level);
 }
 
 void TileItem_AlphaSoftware::ResetEmptyCheck()

@@ -47,6 +47,7 @@ private:
 
   Point2i m_size;
   Point2i m_offset;
+  Point2i m_tile_offset;
 
 
   int m_level;
@@ -55,7 +56,7 @@ private:
 
 public:
 
-  PhysicTile(Point2i size, Point2i offset, TileItem *tile, PhysicTile *parent_physic_tile, int level);
+  PhysicTile(Point2i size, Point2i offset , Point2i tile_offset, TileItem *tile, PhysicTile *parent_physic_tile, int level);
   ~PhysicTile();
   void Generate();
   void GeneratePolygone();

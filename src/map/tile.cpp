@@ -31,11 +31,6 @@
 #include "graphic/colors.h"
 #endif
 
-/******************************************************************************/
-// MUST BE DEFINED ONLY ONCE AND SOMEWHERE ELSE
-const double PIXEL_PER_METER = 20;
-/******************************************************************************/
-
 // We need only one empty tile
 TileItem_Empty EmptyTile;
 
@@ -298,7 +293,7 @@ void Tile::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, con
 	else
 	  item[i]->FillWithRGB(0, 255, 0);
 #endif
-Point2d offset = i * CELL_SIZE;
+Point2d offset = Point2d((i.x) * CELL_SIZE.x,(i.y) * CELL_SIZE.y) ;
 	t->InitShape(1,offset);
 	item.push_back(t);
       }
