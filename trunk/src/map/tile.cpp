@@ -293,7 +293,8 @@ void Tile::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, con
 	else
 	  item[i]->FillWithRGB(0, 255, 0);
 #endif
-Point2d offset = Point2d((i.x) * CELL_SIZE.x,(i.y+1) * CELL_SIZE.y) ;
+Point2d offset = Point2d((i.x) * CELL_SIZE.x,(i.y+1) * CELL_SIZE.y+10) ;
+//Point2d offset = i* CELL_SIZE ;
 	t->InitShape(1,offset);
 	item.push_back(t);
       }

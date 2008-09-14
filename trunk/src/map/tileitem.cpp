@@ -111,6 +111,12 @@ TileItem_AlphaSoftware::~TileItem_AlphaSoftware()
 
 void TileItem_AlphaSoftware::InitShape(int level, Point2d &offset)
 {
+  m_shape_level = level;
+  m_shape_offset = offset;
+  if(m_physic_tile != NULL){
+   delete m_physic_tile;
+  }
+
  m_physic_tile = new  PhysicTile(m_size, Point2d(0,0),offset, this,NULL, level);
 }
 
@@ -157,6 +163,8 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig)
         for( int px = starting_x ; px < ending_x ; px++)
             if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
                 *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
+
+                InitShape(m_shape_level,m_shape_offset);
 }
 
 void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius)
@@ -197,6 +205,8 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius)
 
     Empty(center.x-length, center.x+length, buf, bpp);
   }
+
+  InitShape(m_shape_level,m_shape_offset);
 }
 
 void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
