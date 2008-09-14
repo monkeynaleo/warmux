@@ -76,6 +76,8 @@ class TileItem_AlphaSoftware : public TileItem
 {
   b2Body* m_tile_body;
   PhysicTile *m_physic_tile;
+  Point2d m_shape_offset;
+  int m_shape_level;
 
 
   unsigned char* last_filled_pixel;
