@@ -76,6 +76,7 @@ protected:
   double m_rope_elasticity;       // The smallest, the more elastic.
   double m_elasticity_damping;    // 0 means perpetual motion.
   double m_balancing_damping;     // 0 means perpetual balancing.
+  bool m_is_physical_obj;
 
   std::vector<b2ContactPoint> added_contact_list;
   std::vector<b2ContactPoint> persist_contact_list;
@@ -91,7 +92,7 @@ protected:
   ObjectConfig m_cfg;
 public:
   Physics ();
-  virtual ~Physics () {};
+  virtual ~Physics ();
 
   // Set/Get position
   void SetPhysXY(double x, double y);
@@ -119,6 +120,8 @@ public:
 
   void SetRebounding (bool rebounding) { m_rebounding = rebounding; }
   bool GetRebounding () const { return m_rebounding; }
+
+  bool IsPhysicalObj() const { return m_is_physical_obj; }
 
   void AddAddedContactPoint(b2ContactPoint contact);
   void AddPersistContactPoint(b2ContactPoint contact);
@@ -179,6 +182,7 @@ public:
   // Physical engine : update position (and state) with current time
   void RunPhysicalEngine();
 
+  void SetBullet(bool is_bullet);
   // Notify the son class that the object has moved.
 //  virtual collision_t NotifyMove(Point2d oldPos, Point2d newPos) = 0;
 
@@ -198,6 +202,12 @@ public:
 
   b2BodyDef *GetBodyDef();
 
+  virtual void SignalRebound();
+  virtual void SignalObjectCollision(Physics *,const Point2d&) { };
+  virtual void SignalGroundCollision(const Point2d&) { };
+  virtual void SignalCollision(const Point2d&) { };
+
+
 protected:
   // Compute current (x,y) position
   Point2d ComputeNextXY(double delta_t);
@@ -206,7 +216,7 @@ protected:
   virtual void SignalGhostState (bool) { };
   virtual void SignalDrowning() { };
   virtual void SignalGoingOutOfWater() { };
-  virtual void SignalRebound() { };
+
   // Make the object rebound
   void Rebound(Point2d contactPos, double contact_angle);
 private:

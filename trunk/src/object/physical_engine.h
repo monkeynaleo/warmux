@@ -33,6 +33,7 @@ extern const double PIXEL_PER_METER;
 
 class Physics;
 class Force;
+class ContactListener;
 
 class PhysicalEngine : public Singleton<PhysicalEngine>
 {
@@ -62,6 +63,7 @@ protected:
   b2AABB worldAABB;
   b2World *physic_world;
   b2Body *ground;
+  ContactListener *m_contact_listener;
 
   std::map<b2Body *,Physics *> objects_list;
 
@@ -81,15 +83,15 @@ class ContactListener : public b2ContactListener
 public:
   ContactListener(PhysicalEngine *);
 
-  void Add(const b2ContactPoint* point);
+  virtual void Add(const b2ContactPoint* point);
 
-  void Persist(const b2ContactPoint* point);
-
-
-  void Remove(const b2ContactPoint* point);
+  virtual void Persist(const b2ContactPoint* point);
 
 
-  void Result(const b2ContactResult* point);
+  virtual void Remove(const b2ContactPoint* point);
+
+
+  virtual void Result(const b2ContactResult* point);
 
 protected:
 

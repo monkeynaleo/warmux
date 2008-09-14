@@ -243,7 +243,7 @@ void Game::Init()
   ActionHandler::GetInstance()->ExecActions();
 
   FOR_ALL_CHARACTERS(team, character)
-    (*character).ResetDamageStats();
+    (*character)->ResetDamageStats();
 
   SetState(END_TURN, true); // begin with a small pause
 }
@@ -312,7 +312,7 @@ void Game::RefreshInput()
 void Game::RefreshObject() const
 {
   FOR_ALL_CHARACTERS(team,character)
-    character->Refresh();
+    (*character)->Refresh();
 
   // Recompute energy of each team
   FOR_EACH_TEAM(team)
@@ -346,8 +346,8 @@ void Game::Draw ()
   // Draw the characters
   StatStart("GameDraw:characters");
   FOR_ALL_CHARACTERS(team,character)
-    if (!character->IsActiveCharacter())
-      character->Draw();
+    if (!(*character)->IsActiveCharacter())
+      (*character)->Draw();
 
   StatStart("GameDraw:particles_behind_active_character");
   ParticleEngine::Draw(false);
@@ -659,10 +659,10 @@ PhysicalObj* Game::GetMovingObject() const
 
   FOR_ALL_CHARACTERS(team,character)
   {
-    if (!character->IsImmobile() && !character->IsGhost())
+    if (!(*character)->IsImmobile() && !(*character)->IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", character->GetName().c_str());
-      return &(*character);
+      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", (*character)->GetName().c_str());
+      return (*character);
     }
   }
 
@@ -779,9 +779,9 @@ void Game::SignalCharacterDamage(const Character *character) const
 void Game::ApplyDiseaseDamage() const
 {
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if (character->IsDiseased()) {
-      character->SetEnergyDelta(-(int)character->GetDiseaseDamage());
-      character->DecDiseaseDuration();
+    if ((*character)->IsDiseased()) {
+      (*character)->SetEnergyDelta(-(int)(*character)->GetDiseaseDamage());
+      (*character)->DecDiseaseDuration();
     }
   }
 }

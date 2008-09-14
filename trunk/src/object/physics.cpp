@@ -59,6 +59,7 @@ Physics::Physics ():
   m_rope_elasticity(10.0),
   m_elasticity_damping(0.20),
   m_balancing_damping(0.40),
+  m_is_physical_obj(false),
   m_elasticity_off(true),
   m_cfg()
 
@@ -70,6 +71,12 @@ Physics::Physics ():
 
   m_body_def->position.Set(0.0f, 4.0f);
   m_body = PhysicalEngine::GetInstance()->AddObject(this);
+}
+
+Physics::~Physics()
+{
+  std::cout<<"Delete physics"<<std::endl;
+  PhysicalEngine::GetInstance()->RemoveObject(this);
 }
 
 //---------------------------------------------------------------------------//
@@ -253,6 +260,10 @@ void Physics::ImpulseXY(const Point2d& vector)
     m_body->ApplyImpulse(b2Vec2(vector.x,vector.y),b2Vec2(GetPhysX(),GetPhysY()));
 }
 
+void Physics::SetBullet(bool is_bullet)
+{
+    m_body->SetBullet(is_bullet);
+}
 // Set fixation point positions
 /*void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
   double dy)
@@ -450,3 +461,6 @@ double Physics::GetAngle() const
 {
    return -m_body->GetAngle();
  }
+
+
+void Physics::SignalRebound() {}

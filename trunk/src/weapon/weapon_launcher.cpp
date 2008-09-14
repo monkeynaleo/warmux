@@ -75,14 +75,20 @@ void WeaponBullet::SignalOutOfMap()
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
-void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before)
+void WeaponBullet::SignalObjectCollision(Physics * obj, const Point2d& my_speed_before)
 {
 #if 1
-  if (!obj->IsCharacter())
-    Explosion();
-  obj->SetEnergyDelta(-(int)cfg.damage);
-  obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
-  Ghost();
+  if(obj->IsPhysicalObj())
+  {
+    PhysicalObj *p_obj = (PhysicalObj *) obj;
+    if (!p_obj->IsCharacter())
+    {
+      Explosion();
+    }
+    p_obj->SetEnergyDelta(-(int)cfg.damage);
+    p_obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
+    Ghost();
+  }
 #else
   // multiply by ten to get something more funny
   double bullet_mass = GetMass()/* * 10*/;
@@ -122,6 +128,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   m_allow_negative_y = true;
   SetCollisionModel(false, true, true);
   launcher = p_launcher;
+  SetBullet(true);
 
   explode_colliding_character = false;
   explode_with_timeout = true;
@@ -211,7 +218,8 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
-  SetSize(image->GetSizeMax());
+  //std::cout<<"GetSizeMax "<<image->GetSizeMax().x<<" "<<image->GetSizeMax().y<<std::endl;
+  //SetSize(image->GetSizeMax());
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -265,13 +273,16 @@ bool WeaponProjectile::IsImmobile() const
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* my_speed_before */)
+void WeaponProjectile::SignalObjectCollision(Physics * obj, const Point2d& /* my_speed_before */)
 {
-  ASSERT(obj != NULL);
-  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
-	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
-  if (explode_colliding_character)
-    Explosion();
+   if(obj->IsPhysicalObj()){
+      PhysicalObj *p_obj = (PhysicalObj *)obj;
+      ASSERT(p_obj != NULL);
+      MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
+          m_name.c_str(), p_obj->GetName().c_str(), GetX(), GetY());
+      if (explode_colliding_character)
+        Explosion();
+   }
 }
 
 // projectile explode when hiting the ground
