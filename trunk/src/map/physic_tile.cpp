@@ -46,7 +46,7 @@ PhysicTile::~PhysicTile()
 
 void PhysicTile::Generate()
 {
-  std::cout<<"PhysicTile::Generate"<<std::endl;
+ // std::cout<<"PhysicTile::Generate"<<std::endl;
   Clean();
   CalculateFullness();
 
@@ -54,26 +54,26 @@ void PhysicTile::Generate()
   if(m_fullness == EMPTY) {
       is_subdivised = false;
       is_containing_polygon = false;
-      std::cout<<"PhysicTile::m_fullness = EMPTY, level"<<m_level<<std::endl;
+   //   std::cout<<"PhysicTile::m_fullness = EMPTY, level"<<m_level<<std::endl;
   }
 
   if(m_fullness == FULL) {
-std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
+//std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
     is_subdivised = false;
     is_containing_polygon = true;
 
     b2PolygonDef rect;
     rect.vertexCount = 4;
-    std::cout<<"PhysicTile::m_fullness = FULL, vert 1 "<<m_offset.x+m_tile_offset.x<<" "<<m_offset.y+m_tile_offset.y<<std::endl;
+  //  std::cout<<"PhysicTile::m_fullness = FULL, vert 1 "<<m_offset.x+m_tile_offset.x<<" "<<m_offset.y+m_tile_offset.y<<std::endl;
     rect.vertices[0].Set((double(m_offset.x+m_tile_offset.x) / PIXEL_PER_METER),
             (double(m_offset.y+m_tile_offset.y)/ PIXEL_PER_METER));
     std::cout<<"PhysicTile::m_fullness = FULL, vert 2 "<<m_offset.x + m_tile_offset.x + m_size.x-1<<" "<<m_offset.y+ m_tile_offset.y<<std::endl;
     rect.vertices[1].Set((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
             (double(m_offset.y+ m_tile_offset.y)/ PIXEL_PER_METER));
-std::cout<<"PhysicTile::m_fullness = FULL, vert 3 "<<m_offset.x + m_size.x-1 + m_tile_offset.x<<" "<<m_offset.y + m_size.y-1 + m_tile_offset.y<<std::endl;
+//std::cout<<"PhysicTile::m_fullness = FULL, vert 3 "<<m_offset.x + m_size.x-1 + m_tile_offset.x<<" "<<m_offset.y + m_size.y-1 + m_tile_offset.y<<std::endl;
             rect.vertices[2].Set((double(m_offset.x + m_size.x-1 + m_tile_offset.x)/ PIXEL_PER_METER),
             ((double(m_offset.y + m_size.y-1 + m_tile_offset.y))/ PIXEL_PER_METER));
-std::cout<<"PhysicTile::m_fullness = FULL, vert 4 "<<m_offset.x +  m_tile_offset.x<<" "<<m_offset.y + m_size.y-1 + m_tile_offset.y<<std::endl;
+//std::cout<<"PhysicTile::m_fullness = FULL, vert 4 "<<m_offset.x +  m_tile_offset.x<<" "<<m_offset.y + m_size.y-1 + m_tile_offset.y<<std::endl;
             rect.vertices[3].Set((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
             ((double(m_offset.y + m_size.y-1 + m_tile_offset.y))/ PIXEL_PER_METER));
 
@@ -85,7 +85,7 @@ std::cout<<"PhysicTile::m_fullness = FULL, vert 4 "<<m_offset.x +  m_tile_offset
   }
 
   if(m_fullness == MIXTE) {
-    std::cout<<"PhysicTile::m_fullness = MIXTE, level"<<m_level<<std::endl;
+   // std::cout<<"PhysicTile::m_fullness = MIXTE, level"<<m_level<<std::endl;
     if(m_level == 0){
       is_containing_polygon = false; //GeneratePolygone will set to true
       GeneratePolygone();
@@ -100,14 +100,14 @@ std::cout<<"PhysicTile::m_fullness = FULL, vert 4 "<<m_offset.x +  m_tile_offset
       int new_height1 = m_size.y/2;;
       int new_height2 = m_size.y - new_height1;
 
-std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width1<<" "<<new_height1<<" m_offset "<<m_offset.x<<""<<m_offset.y<<std::endl;
+//std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width1<<" "<<new_height1<<" m_offset "<<m_offset.x<<""<<m_offset.y<<std::endl;
 
       m_physic_tiles[0] = new PhysicTile(Point2d(new_width1,new_height1),m_offset,m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
-std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width2<<" "<<new_height1<<" m_offset "<<m_offset.x + new_width1<<" "<<m_offset.y<<std::endl;
+//std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width2<<" "<<new_height1<<" m_offset "<<m_offset.x + new_width1<<" "<<m_offset.y<<std::endl;
       m_physic_tiles[1] = new PhysicTile(Point2d(new_width2,new_height1),Point2d(m_offset.x + new_width1, m_offset.y),m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
-      std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width1<<" "<<new_height2<<" m_offset "<<m_offset.x<<" "<< m_offset.y+ new_height1<<std::endl;
+     // std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width1<<" "<<new_height2<<" m_offset "<<m_offset.x<<" "<< m_offset.y+ new_height1<<std::endl;
       m_physic_tiles[2] = new PhysicTile(Point2d(new_width1,new_height2),Point2d(m_offset.x , m_offset.y+ new_height1),m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
-      std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width2<<" "<<new_height2<<" m_offset "<<m_offset.x + new_width1<<" "<< m_offset.y+ new_height1<<std::endl;
+    //  std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width2<<" "<<new_height2<<" m_offset "<<m_offset.x + new_width1<<" "<< m_offset.y+ new_height1<<std::endl;
       m_physic_tiles[3] = new PhysicTile(Point2d(new_width2,new_height2),Point2d(m_offset.x + new_width1, m_offset.y+ new_height1),m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
 
     }
@@ -176,7 +176,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
       }
     }
   }
-  std::cout<<"PhysicTile::pt2 done"<<std::endl;
+ // std::cout<<"PhysicTile::pt2 done"<<std::endl;
 
    //(2) search ground between (b) and (c)
   pts[2] = m_offset;
@@ -188,7 +188,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
       pts[2].y++;
     }
   }
-  std::cout<<"PhysicTile::pt3 done"<<std::endl;
+  //std::cout<<"PhysicTile::pt3 done"<<std::endl;
 
   //if (2) found ground, send (3) from (c) to (b)
   if(pts_state[2]){
@@ -203,7 +203,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
       }
     }
   }
-  std::cout<<"PhysicTile::pt4 done"<<std::endl;
+  //std::cout<<"PhysicTile::pt4 done"<<std::endl;
 
    //(4) search ground between (c) and (d)
   pts[4] = m_offset + m_size;
@@ -216,7 +216,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
       pts[4].x--;
     }
   }
-  std::cout<<"PhysicTile::pt5 done"<<std::endl;
+  //std::cout<<"PhysicTile::pt5 done"<<std::endl;
 
   //if (4) found ground, send (5) from (d) to (c)
   if(pts_state[4]){
@@ -230,7 +230,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
       }
     }
   }
-  std::cout<<"PhysicTile::pt6 done"<<std::endl;
+  //std::cout<<"PhysicTile::pt6 done"<<std::endl;
 
      //(6) search ground between (d) and (a)
   pts[6] = m_offset;
@@ -242,7 +242,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
       pts[6].y--;
     }
   }
-  std::cout<<"PhysicTile::pt7 done"<<std::endl;
+  //std::cout<<"PhysicTile::pt7 done"<<std::endl;
   //if (6) found ground, send (7) from (a) to (d)
   if(pts_state[6]){
     pts[7] = m_offset;
@@ -254,7 +254,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
       }
     }
   }
-  std::cout<<"PhysicTile::pt8 done"<<std::endl;
+ // std::cout<<"PhysicTile::pt8 done"<<std::endl;
 
   //TODO : Second pass
 
@@ -300,8 +300,8 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
 
     for(unsigned i=0;i<8; i++){
       if(pts_state[i])      {
-          std::cout<<"PhysicTile::Add pt"<<i<<" x "<<pts[i].x<<" y "<<pts[i].y<<std::endl;
-          std::cout<<"PhysicTile::Add ph"<<i<<" x "<<pts[i].x+m_tile_offset.x<<" y "<<pts[i].y+m_tile_offset.y<<std::endl;
+      //    std::cout<<"PhysicTile::Add pt"<<i<<" x "<<pts[i].x<<" y "<<pts[i].y<<std::endl;
+       //   std::cout<<"PhysicTile::Add ph"<<i<<" x "<<pts[i].x+m_tile_offset.x<<" y "<<pts[i].y+m_tile_offset.y<<std::endl;
           rect.vertices[index].Set((double(pts[i].x+m_tile_offset.x) / PIXEL_PER_METER),
 		      (double(pts[i].y + m_tile_offset.y) / PIXEL_PER_METER));
 		      index++;

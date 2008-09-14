@@ -117,6 +117,30 @@ void PhysicalEngine::Step()
 
     }
 
+    if((objects_list.count(contact.shape2->GetBody()) == 1) && (objects_list[contact.shape2->GetBody()]!=NULL)){
+      Physics  *collider =  objects_list[contact.shape2->GetBody()];
+
+      collider->SignalRebound();
+
+      Point2d vel = Point2d(contact.velocity.x*PIXEL_PER_METER,contact.velocity.y*PIXEL_PER_METER);
+
+      collider->SignalCollision(vel);
+
+      if(objects_list.count(contact.shape1->GetBody()) >0){
+
+        collider->SignalObjectCollision(objects_list[contact.shape1->GetBody()],vel );
+      }else{
+
+        collider->SignalGroundCollision(vel);
+      }
+
+
+  }
+
+
+
+
+
   }
 
 
