@@ -94,7 +94,7 @@ void Particle::Refresh()
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
-      SetSize(image->GetSize());
+      //SetSize(image->GetSize());
       image->SetAlpha(1.0);
     }
     else
@@ -333,7 +333,7 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
 
   if(style == NoESmoke) return;
   AddLittleESmoke (position, radius);
-  if(style == BigESmoke) AddBigESmoke (position, radius);
+  //if(style == BigESmoke) AddBigESmoke (position, radius);
 }
 
 void ParticleEngine::Draw(bool upper)

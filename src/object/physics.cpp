@@ -75,7 +75,6 @@ Physics::Physics ():
 
 Physics::~Physics()
 {
-  std::cout<<"Delete physics"<<std::endl;
   PhysicalEngine::GetInstance()->RemoveObject(this);
 }
 
@@ -373,13 +372,17 @@ void Physics::StartMoving()
 
 void Physics::StopMoving()
 {
+
   if(!IsMoving()) return;
 
   if (IsMoving()) MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
   // Always called by PhysicalObj::StopMoving
 
   SetSpeedXY(Point2d(0.0,0.0));
+
   UpdateTimeOfLastMove();
+
+
   /*if (m_motion_type != Pendulum)
     m_motion_type = NoMotion ;
 
@@ -393,14 +396,14 @@ bool Physics::IsMoving() const
      !m_extern_force.IsNull() ||
      m_motion_type != NoMotion;
   */
-  bool is_moving;
+  bool is_not_moving;
 
-  is_moving = m_body->GetLinearVelocity().x == 0.0;
-  is_moving &= m_body->GetLinearVelocity().y == 0.0;
-  is_moving &= m_body->GetAngularVelocity() == 0.0;
+  is_not_moving = m_body->GetLinearVelocity().x == 0.0;
+  is_not_moving &= m_body->GetLinearVelocity().y == 0.0;
+  is_not_moving &= m_body->GetAngularVelocity() == 0.0;
 
 
-  return is_moving;
+  return !is_not_moving;
 }
 
 bool Physics::IsSleeping() const
