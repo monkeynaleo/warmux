@@ -220,6 +220,9 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
   m_test_right = right;
   m_test_top = top;
   m_test_bottom = bottom;
+
+
+
 }
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
@@ -699,9 +702,16 @@ void PhysicalObj::SetSize(const Point2i &newSize)
     m_body->DestroyShape(m_shape);
   }
 
+
+
   b2PolygonDef shapeDef;
   shapeDef.vertexCount = 4;
- /* shapeDef.vertices[0].Set(GetPhysX() - m_phys_width/2, GetPhysY() - m_phys_height/2);
+
+  /*shapeDef.vertices[0].Set(GetPhysX() + m_test_left/PIXEL_PER_METER , GetPhysY() + m_test_top/PIXEL_PER_METER);
+  shapeDef.vertices[1].Set(GetPhysX() + m_test_left/PIXEL_PER_METER, GetPhysY() + m_test_bottom/PIXEL_PER_METER);
+  shapeDef.vertices[2].Set(GetPhysX() + m_test_right/PIXEL_PER_METER, GetPhysY() + m_test_bottom/PIXEL_PER_METER);
+  shapeDef.vertices[3].Set(GetPhysX() + m_test_right/PIXEL_PER_METER, GetPhysY() + m_test_top/PIXEL_PER_METER);*/
+  /*shapeDef.vertices[0].Set(GetPhysX() - m_phys_width/2, GetPhysY() - m_phys_height/2);
   shapeDef.vertices[1].Set(GetPhysX() + m_phys_width/2, GetPhysY() - m_phys_height/2);
   shapeDef.vertices[2].Set(GetPhysX() + m_phys_width/2, GetPhysY() + m_phys_height/2);
   shapeDef.vertices[3].Set(GetPhysX() - m_phys_width/2, GetPhysY() + m_phys_height/2);*/
