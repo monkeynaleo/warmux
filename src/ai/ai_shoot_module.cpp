@@ -46,8 +46,8 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character)
   {
-    if ( IsDirectlyShootable(shooter, *character, shoot_angle) ) {
-      return &(*character);
+    if ( IsDirectlyShootable(shooter, **character, shoot_angle) ) {
+      return &(**character);
     }
   }
   return NULL;
@@ -138,13 +138,13 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
     // is there a collision with another character ?
     FOR_ALL_CHARACTERS(team, other_character) {
-      if ( &(*other_character) != &shooter
-           && &(*other_character) != &enemy ) {
+      if ( &(**other_character) != &shooter
+           && &(**other_character) != &enemy ) {
 
         // Skip only if this character has the same team of shooter
         // otherwises he's a enemy. (more reachable than the current)
-        if (other_character->GetTestRect().Contains(pos)
-            && (&other_character->GetTeam()) == (&shooter.GetTeam()))
+        if ((*other_character)->GetTestRect().Contains(pos)
+            && (&(*other_character)->GetTeam()) == (&shooter.GetTeam()))
           return false;
       }
     }
@@ -230,8 +230,8 @@ bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
 const Character* AIShootModule::FindProximityEnemy(const Character& shooter) const
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character) {
-    if ( m_AIMovementModule.SeemsToBeReachable(shooter, *character) ) {
-      return &(*character);
+    if ( m_AIMovementModule.SeemsToBeReachable(shooter, **character) ) {
+      return &(**character);
     }
   }
   return NULL;
@@ -331,7 +331,7 @@ void AIShootModule::Shoot()
 const Character* AIShootModule::FindBazookaShootableEnemy(const Character& shooter) const
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character)
-    return &(*character);
+    return &(**character);
   return NULL;
 }
 const Character* AIShootModule::FindEnemy()
@@ -436,12 +436,12 @@ bool AIShootModule::Refresh(uint current_time)
     FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
 //      if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
 //                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
-        if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 40) {
-              if (&(*character) != m_enemy) {
+        if ( (**character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 40) {
+              if (&(**character) != m_enemy) {
                 GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
-                                                 + (*character).GetName());
+                                                 + (**character).GetName());
               }
-               m_enemy = &(*character);
+               m_enemy = &(**character);
                Shoot();
                // If IA selected ProximityWeapon, he needs to go back, in the opposite direction (otherwises BOOM :-) )
                ActiveCharacter().SetDirection( (ActiveCharacter().GetDirection()==DIRECTION_RIGHT) ? DIRECTION_LEFT : DIRECTION_RIGHT);

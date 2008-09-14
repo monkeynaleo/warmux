@@ -29,15 +29,15 @@ const double PIXEL_PER_METER = 20;
 
 PhysicalEngine::PhysicalEngine()
 {
-  worldAABB.lowerBound.Set(-1000.0f, -1000.0f);
-  worldAABB.upperBound.Set(1000.0f, 1000.0f);
+  worldAABB.lowerBound.Set(-10000.0f, -10000.0f);
+  worldAABB.upperBound.Set(10000.0f, 10000.0f);
   b2Vec2 gravity(0.0f, 10.0f);
   bool doSleep = true;
 
   physic_world = new b2World(worldAABB, gravity, doSleep);
 
-
-
+  m_contact_listener = new ContactListener(this);
+  physic_world->SetContactListener(m_contact_listener);
   frame_rate = 60;
   last_step_time = 0;
   iterations = 10;
@@ -45,6 +45,7 @@ PhysicalEngine::PhysicalEngine()
 
 PhysicalEngine::~PhysicalEngine()
 {
+  delete m_contact_listener;
   delete physic_world;
 }
 
@@ -67,6 +68,8 @@ b2Body *PhysicalEngine::AddObject(Physics *new_obj)
 void PhysicalEngine::RemoveObject(Physics *obj)
 {
   objects_list.erase(obj->GetBody());
+  physic_world->DestroyBody(obj->GetBody());
+
 }
 
 
@@ -86,7 +89,36 @@ void PhysicalEngine::Step()
     m_force_list[i]->ComputeForce();
   }
 
-physic_world->Step(timeStep, iterations);
+  ClearContact();
+  physic_world->Step(timeStep, iterations);
+
+  for(unsigned i = 0;i<added_contact_list.size();i++){
+
+
+    b2ContactPoint contact = added_contact_list[i];
+
+    if((objects_list.count(contact.shape1->GetBody()) == 1) && (objects_list[contact.shape1->GetBody()]!=NULL)){
+      Physics  *collider =  objects_list[contact.shape1->GetBody()];
+
+      collider->SignalRebound();
+
+      Point2d vel = Point2d(contact.velocity.x*PIXEL_PER_METER,contact.velocity.y*PIXEL_PER_METER);
+
+      collider->SignalCollision(vel);
+
+      if(objects_list.count(contact.shape2->GetBody()) >0){
+
+        collider->SignalObjectCollision(objects_list[contact.shape2->GetBody()],vel );
+      }else{
+
+        collider->SignalGroundCollision(vel);
+      }
+
+
+    }
+
+  }
+
 
 
   last_step_time = last_step_time-timeStep;
@@ -145,7 +177,7 @@ void PhysicalEngine::AddContactResult(b2ContactResult contact)
 
 
 
-ContactListener::ContactListener(PhysicalEngine *e)
+ContactListener::ContactListener(PhysicalEngine *e):b2ContactListener()
 {
   engine = e;
 }

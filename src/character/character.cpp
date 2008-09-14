@@ -845,7 +845,7 @@ uint Character::GetCharacterIndex() const
   for (Team::iterator it = m_team.begin();
        it != m_team.end() ; ++it, ++index )
   {
-    if (&(*it) == this)
+    if ((*it) == this)
       return index;
   }
   ASSERT(false);

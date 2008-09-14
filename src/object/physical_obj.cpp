@@ -83,10 +83,11 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_energy(-1),
   m_allow_negative_y(false)
 {
+  m_is_physical_obj = true;
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
-  SetSize(Point2i(10,10));
+  SetSize(Point2i(1,1));
 
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
@@ -455,6 +456,12 @@ void PhysicalObj::UpdatePosition ()
   }
 
   if (IsGhost()) return;
+
+  if(IsInWater())
+  {
+      SetCollisionModel(true,false,false);
+  }
+
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
   if ( !m_goes_through_wall )
@@ -910,16 +917,16 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     DirectFall();
 
     // Check distance with characters
-    FOR_ALL_LIVING_CHARACTERS(team, character) if (&(*character) != this)
+    FOR_ALL_LIVING_CHARACTERS(team, character) if ((*character) != this)
     {
       if (min_dst_with_characters == 0) {
 
-        if(Overlapse(*character)) {
-            MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*character).m_name.c_str());
+        if(Overlapse(**character)) {
+            MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*character)->m_name.c_str());
             ok = false;
         }
       } else {
-        Point2i p1 = character->GetCenter();
+        Point2i p1 = (*character)->GetCenter();
         Point2i p2 = GetCenter();
         double dst = p1.Distance( p2 );
 
@@ -936,4 +943,6 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 
   return true;
 }
+
+
 

@@ -215,12 +215,8 @@ public:
 //  collision_t NotifyMove(Point2d oldPos, Point2d newPos);
 
 protected:
-  virtual void SignalRebound();
-  virtual void SignalObjectCollision(PhysicalObj *, const Point2d& /* my_speed_before */) { };
-  virtual void SignalGroundCollision(const Point2d& /* my_speed_before */) { };
-  virtual void SignalCollision(const Point2d& /* my_speed_before */) { };
   virtual void SignalOutOfMap() { };
-
+  virtual void SignalRebound();
 private:
   //Retrun the position of the point of contact of the obj on the ground
   bool ContactPoint (int &x, int &y) const;

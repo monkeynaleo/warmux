@@ -129,7 +129,7 @@ void Construct::ChooseTarget(Point2i mouse_pos)
 
   // Check collision with characters and other physical objects
   FOR_ALL_CHARACTERS(team, c) {
-    if ((c->GetTestRect()).Intersect(rect))
+    if (((*c)->GetTestRect()).Intersect(rect))
       return;
   }
 

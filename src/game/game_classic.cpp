@@ -153,7 +153,7 @@ void GameClassic::__SetState_PLAYING()
 
   // Prepare each character for a new turn
   FOR_ALL_LIVING_CHARACTERS(team,character)
-    character->PrepareTurn();
+    (*character)->PrepareTurn();
 
   // Select the next team
   ASSERT (!IsGameFinished());
@@ -229,12 +229,12 @@ void GameClassic::ApplyDeathMode () const
     {
       // If the character energy is lower than damage
       // per turn we reduce the character's health to 1
-      if (static_cast<uint>(character->GetEnergy()) >
+      if (static_cast<uint>((*character)->GetEnergy()) >
           GameMode::GetInstance()->damage_per_turn_during_death_mode)
         // Don't report damage to the active character, it's not the responsible for this damage
-        character->SetEnergyDelta(-(int)GameMode::GetInstance()->damage_per_turn_during_death_mode, false);
+        (*character)->SetEnergyDelta(-(int)GameMode::GetInstance()->damage_per_turn_during_death_mode, false);
       else
-        character->SetEnergy(1);
+        (*character)->SetEnergy(1);
     }
   }
 }
