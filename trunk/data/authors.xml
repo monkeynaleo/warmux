@@ -13,6 +13,14 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>Fredb219</nickname>
+	<name>Frédéric BERTOLUS</name>
+	<description>Programmer</description>
+	<website>http://fred.b219.org/</website>
+	<email>fredb219_AT_gmail_DOT_com</email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>gentildemon</nickname>
 	<name>Matthieu FERTRÉ</name>
 	<description>Programmer</description>
@@ -492,13 +500,6 @@
 	<name>François BLEIBEL</name>
 	<description>Write first network patch with Jerome Glatigny</description>
 	<email>maisola_AT_gmail_DOT_com</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>Fredb219</nickname>
-	<name>Frédéric BERTOLUS</name>
-	<description>Code</description>
-	<email>fredb219_AT_gmail_DOT_com</email>
 	<country>France</country>
       </author>
       <author>
