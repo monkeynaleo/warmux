@@ -1,3 +1,18 @@
+> 2008/09/16 - 0.8.1 release
+  - Game mode editor for local game (allows you to choose some game options)
+  - Team editor for local game (allows you to personalize characters names)
+  - Better menus: tabs, basic keyboard control, more options,...
+  - All characters redrawn: better graphisms, new positions, new clothes,...
+  - 2 new skins: Pidgin and Suse
+  - New maps: Lonely island and oktopus
+  - New waters: add lava, dirty water,...
+  - Better minimap
+  - New weapon: slap
+  - Some sounds added (thanks a lot to wesnoth project)
+  - A lot of bug fixes
+  - A lot of improvements (code and graphism)
+  - Translations updates
+
 > 2008/05/16 - 0.8 release
   - Network game fixes
   - Lot of bugfixes /cleaning code
