@@ -97,7 +97,8 @@ bool Client::HandShake(const std::string & version)
     return false;
 
   if (version == "0.8"
-      || version == "0.8svn")
+      || version == "0.8.1"
+      || version == "0.8.1svn")
     {
       stats.NewClient();
       if (!SendSignature())
@@ -302,7 +303,7 @@ bool Client::RejectBadVersion()
   r = SendStr("Bad version");
   if (!r)
     goto err_send;
-  r = SendStr("0.8, 0.8svn");
+  r = SendStr("0.8, 0.8.1, 0.8.1svn");
   if (!r)
     goto err_send;
 
