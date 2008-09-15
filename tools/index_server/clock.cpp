@@ -75,7 +75,7 @@ const char* Clock::DateStr()
   struct tm* t;
   time_t now = time(NULL);
   t = localtime(&now);
-  snprintf(date_str, 1024, "%2i/%02i/%04i", t->tm_mday, t->tm_mon, t->tm_year+1900);
+  snprintf(date_str, 1024, "%2i/%02i/%04i", t->tm_mday, t->tm_mon+1, t->tm_year+1900);
   return date_str;
 }
 
