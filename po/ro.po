@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2008-09-02 13:06+0200\n"
-"PO-Revision-Date: 2008-08-25 22:46+0300\n"
+"PO-Revision-Date: 2008-09-16 00:51+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -621,9 +621,8 @@ msgid "All teams"
 msgstr "Toate echipele"
 
 #: src/menu/game_mode_editor.cpp:58
-#, fuzzy
 msgid "Always"
-msgstr "Pornește jocul"
+msgstr "Întotdeauna"
 
 #: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
@@ -669,13 +668,12 @@ msgid "Bazooka"
 msgstr "Proiectil reactiv"
 
 #: src/menu/game_mode_editor.cpp:59
-#, fuzzy
 msgid "Before action"
-msgstr "Acțiune necunoscută"
+msgstr "Înaintea acțiunii"
 
 #: src/menu/game_mode_editor.cpp:45
 msgid "Blitz"
-msgstr ""
+msgstr "Bliț"
 
 #: src/weapon/blowtorch.cpp:62
 msgid "Blowtorch"
@@ -712,34 +710,32 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Directorul cu echipe particularizate nu poate fi deschis (%s)!"
 
 #: src/menu/help_menu.cpp:92
-#, fuzzy
 msgid "Center camera to character"
-msgstr "Numărul de personaje"
+msgstr "Centrează camera pe personaj"
 
 #: src/menu/help_menu.cpp:91
 msgid "Change active character"
-msgstr ""
+msgstr "Schimbă personajul curent"
 
 #: src/menu/help_menu.cpp:80
 msgid "Change aim angle"
-msgstr ""
+msgstr "Schimbă unghiul de țintire"
 
 #: src/menu/help_menu.cpp:74
 msgid "Change weapon category"
-msgstr ""
+msgstr "Schimbă categoria armei"
 
 #: src/menu/help_menu.cpp:79
 msgid "Change weapon countdown"
-msgstr ""
+msgstr "Schimbă cronometrul armei"
 
 #: src/menu/options_menu.cpp:166
 msgid "Character"
 msgstr "Personaj"
 
 #: src/menu/game_mode_editor.cpp:62
-#, fuzzy
 msgid "Character switching"
-msgstr "Personaj"
+msgstr "Schimb de personaje"
 
 #: src/menu/options_menu.cpp:193
 msgid "Check updates online?"
@@ -751,11 +747,11 @@ msgstr "Alege la întâmplare una din diferitele hărți"
 
 #: src/menu/game_mode_editor.cpp:43
 msgid "Classic"
-msgstr ""
+msgstr "Clasic"
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
-msgstr ""
+msgstr "Click: Centrează camera pe personaj"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:105
@@ -779,9 +775,8 @@ msgid "Commit Suicide"
 msgstr "Comite suicid"
 
 #: src/menu/help_menu.cpp:75
-#, fuzzy
 msgid "Configuration menu"
-msgstr "nu există nici un fișier de configurare!"
+msgstr "Meniu de configurare"
 
 #: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
@@ -831,7 +826,7 @@ msgstr "Afișează acest mesaj"
 
 #: src/menu/help_menu.cpp:77
 msgid "Drag&drop: Move camera"
-msgstr ""
+msgstr "Tragere cu mausul: Mută camera"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
@@ -936,6 +931,11 @@ msgid ""
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
+"Eroare: Serverul tău nu poate fi accesat din internet. Verificați "
+"configurația firewall -ului: Portul TCP %s trebuie să accepte conexiuni "
+"dinspre exterior. Dacă nu aveți conexiune directă la internet, verificați "
+"configurația router-ului: Portul TCP %s trebuie să fie redirectat către "
+"calculatorul tău."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -951,9 +951,8 @@ msgid "Football Bomb"
 msgstr "Bombă-minge de fotbal"
 
 #: src/menu/help_menu.cpp:71
-#, fuzzy
 msgid "Fullscreen / window"
-msgstr "Tot ecranul?"
+msgstr "Tot ecranul / fereastră"
 
 #: src/menu/options_menu.cpp:96
 msgid "Fullscreen?"
@@ -1024,7 +1023,7 @@ msgstr "Ajutor"
 
 #: src/menu/help_menu.cpp:72
 msgid "High jump"
-msgstr ""
+msgstr "Salt înalt"
 
 #: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
@@ -1129,11 +1128,11 @@ msgstr ""
 
 #: src/menu/help_menu.cpp:76
 msgid "Jump"
-msgstr ""
+msgstr "Salt"
 
 #: src/menu/help_menu.cpp:86
 msgid "Jump backwards"
-msgstr ""
+msgstr "Salt înapoi"
 
 #: src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
@@ -1221,12 +1220,11 @@ msgstr "Cel mai violent"
 
 #: src/menu/help_menu.cpp:88
 msgid "Move camera with mouse or arrows"
-msgstr ""
+msgstr "Mută camera cu mausul sau săgețile"
 
 #: src/menu/help_menu.cpp:81
-#, fuzzy
 msgid "Move character"
-msgstr "Numărul de personaje"
+msgstr "Mută personajul"
 
 #: src/menu/options_menu.cpp:207
 msgid "Music volume"
@@ -1246,7 +1244,7 @@ msgstr "Inițializare rețea"
 
 #: src/menu/game_mode_editor.cpp:60
 msgid "Never"
-msgstr ""
+msgstr "Niciodată"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:51
@@ -1276,11 +1274,11 @@ msgstr "Numărul de echipe:"
 
 #: src/menu/help_menu.cpp:83
 msgid "On a character: Changes active one"
-msgstr ""
+msgstr "Pe un personaj: Îl schimbă pe cel activ"
 
 #: src/menu/help_menu.cpp:82
 msgid "On map: Select a target"
-msgstr ""
+msgstr "Pe hartă: Selectează ținta"
 
 #: src/menu/main_menu.cpp:66
 msgid "Options"
@@ -1306,7 +1304,6 @@ msgid "Password:"
 msgstr "Parola:"
 
 #: src/menu/help_menu.cpp:87
-#, fuzzy
 msgid "Pause"
 msgstr "Pauză"
 
@@ -1360,9 +1357,8 @@ msgid "Quit battle"
 msgstr "Părăsește bătălia"
 
 #: src/menu/help_menu.cpp:66
-#, fuzzy
 msgid "Quit game"
-msgstr "Rulează jocul"
+msgstr "Părăsește jocul"
 
 #: src/menu/map_selection_box.cpp:228
 msgid "Random map"
@@ -1420,17 +1416,16 @@ msgstr "Pușcă"
 
 # XXX: nu-mi place cum sună; probabil am să revin la "Opțiuni"
 #: src/menu/help_menu.cpp:84
-#, fuzzy
 msgid "Show weapons menu"
-msgstr "Meniul de opțiuni"
+msgstr "Arată meniul de arme"
 
 #: src/menu/help_menu.cpp:70
 msgid "Show/hide interface"
-msgstr ""
+msgstr "Arată/ascunde interfața"
 
 #: src/menu/help_menu.cpp:90
 msgid "Show/hide minimap"
-msgstr ""
+msgstr "Arată/ascunde mini-harta"
 
 #: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
@@ -1446,7 +1441,7 @@ msgstr "Plesnește inamicul să sară un pic."
 
 #: src/menu/help_menu.cpp:85
 msgid "Smaller aim angle and walk step"
-msgstr ""
+msgstr "Unghi de țintire și pași mai mici"
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1466,6 +1461,9 @@ msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
+"Ne pare rău, versiunea ta nu mai este suportată. Versiuni suportate sunt %s. "
+"Poți descărca o versiune actualizată de la http://www.wormux.org/wiki/"
+"download.php"
 
 #: src/menu/options_menu.cpp:245
 msgid "Sound"
@@ -1505,9 +1503,8 @@ msgid "Syringe"
 msgstr "Seringă"
 
 #: src/menu/help_menu.cpp:73
-#, fuzzy
 msgid "Talk in network battle"
-msgstr "Înapoi pe câmpul de bătălie"
+msgstr "Discuție pe câmpul de bătălie în rețea"
 
 #: src/menu/results_menu.cpp:427
 msgid "Team graphs"
@@ -1661,9 +1658,8 @@ msgid "Unknown command"
 msgstr "Comandă necunoscută"
 
 #: src/menu/game_mode_editor.cpp:44
-#, fuzzy
 msgid "Unlimited"
-msgstr "(infinit)"
+msgstr "nelimitat"
 
 #: src/network/network.cpp:145
 msgid "Unnamed"
@@ -1692,7 +1688,7 @@ msgstr "Se așteaptă serverul, tot ce puteți face e să anulați sau să vorbi
 
 #: src/menu/help_menu.cpp:89
 msgid "Weapon: Fire / Bonus box: falls fast"
-msgstr ""
+msgstr "Armă: Foc / Cutie cu bonus: cade repede"
 
 #. Initialization of teams' energy
 #. Adding label
