@@ -105,6 +105,7 @@ void Physics::SetSpeedXY (Point2d vector)
   if (!was_moving && IsMoving()) {
     UpdateTimeOfLastMove();
     StartMoving();
+    m_body->WakeUp();
   }
 }
 
@@ -120,6 +121,7 @@ void Physics::AddSpeedXY (Point2d vector)
   if (!was_moving && IsMoving()) {
     UpdateTimeOfLastMove();
     StartMoving();
+    m_body->WakeUp();
   }
 }
 
@@ -366,6 +368,7 @@ void Physics::StartMoving()
 
   if (m_motion_type == NoMotion)
     m_motion_type = FreeFall ;
+
 
   MSG_DEBUG ("physic.physic", "Starting to move: %s.", typeid(*this).name());
 }
