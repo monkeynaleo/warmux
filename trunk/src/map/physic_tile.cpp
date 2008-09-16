@@ -67,7 +67,7 @@ void PhysicTile::Generate()
   //  std::cout<<"PhysicTile::m_fullness = FULL, vert 1 "<<m_offset.x+m_tile_offset.x<<" "<<m_offset.y+m_tile_offset.y<<std::endl;
     rect.vertices[0].Set((double(m_offset.x+m_tile_offset.x) / PIXEL_PER_METER),
             (double(m_offset.y+m_tile_offset.y)/ PIXEL_PER_METER));
-    std::cout<<"PhysicTile::m_fullness = FULL, vert 2 "<<m_offset.x + m_tile_offset.x + m_size.x-1<<" "<<m_offset.y+ m_tile_offset.y<<std::endl;
+   // std::cout<<"PhysicTile::m_fullness = FULL, vert 2 "<<m_offset.x + m_tile_offset.x + m_size.x-1<<" "<<m_offset.y+ m_tile_offset.y<<std::endl;
     rect.vertices[1].Set((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
             (double(m_offset.y+ m_tile_offset.y)/ PIXEL_PER_METER));
 //std::cout<<"PhysicTile::m_fullness = FULL, vert 3 "<<m_offset.x + m_size.x-1 + m_tile_offset.x<<" "<<m_offset.y + m_size.y-1 + m_tile_offset.y<<std::endl;
@@ -77,7 +77,7 @@ void PhysicTile::Generate()
             rect.vertices[3].Set((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
             ((double(m_offset.y + m_size.y-1 + m_tile_offset.y))/ PIXEL_PER_METER));
 
-     rect.friction = 0.8f;
+     rect.friction = 0.9f;
      rect.restitution = 0.1f;
      rect.filter.categoryBits = 0x000B;
      rect.filter.maskBits = 0xFFFF;
@@ -162,7 +162,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
       pts[0].x++;
     }
   }
-  std::cout<<"PhysicTile::pt1 done"<<std::endl;
+ // std::cout<<"PhysicTile::pt1 done"<<std::endl;
 
   //if (0) found ground, send (1) from (b) to (a)
   if(pts_state[0]){
@@ -307,7 +307,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
 		      index++;
       }
     }
-    rect.friction = 0.8f;
+    rect.friction = 0.9f;
     rect.restitution = 0.1f;
     rect.filter.categoryBits = 0x0004;
     rect.filter.maskBits = 0xFFFB;

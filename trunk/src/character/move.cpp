@@ -84,7 +84,7 @@ bool ComputeHeightMovement(Character &character, int &height,
 // Moves a character to the right/left depending the signess of direction
 void MoveCharacter(Character &character, bool slowly)
 {
-  int height;
+ // int height;
   bool ghost;
   uint walking_pause = GameMode::GetInstance()->character.walking_pause;
 
@@ -104,8 +104,23 @@ void MoveCharacter(Character &character, bool slowly)
     return;
   }
 
+
+if(character.GetDirection() == DIRECTION_LEFT){
+  if(character.GetSpeedXY().x>-2){
+    character.AddSpeedXY(Point2d(0,-1));
+  }
+  character.SetSpeedXY(Point2d(-5,character.GetSpeedXY().y ));
+}else{
+  if(character.GetSpeedXY().x<2){
+    character.AddSpeedXY(Point2d(0,-1));
+  }
+  character.SetSpeedXY(Point2d(5,character.GetSpeedXY().y));
+
+}
+
+
   // Compute fall height
-  if (!ComputeHeightMovement (character, height, true)) return;
+  /*if (!ComputeHeightMovement (character, height, true)) return;
 
   // Check we can move (to go not too fast)
   while (character.CanStillMoveRL(walking_pause) && ComputeHeightMovement (character, height, true))
@@ -119,13 +134,13 @@ void MoveCharacter(Character &character, bool slowly)
 
     // If no collision, let gravity do its job
     character.UpdatePosition();
-  }
+  }*/
 }
 
 // Move the active character to the left
 void MoveActiveCharacterLeft(bool shift){
   // character is ready to move ?
-  if (!ActiveCharacter().CanMoveRL()) return;
+  //if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_LEFT);
   if (move) {
@@ -144,7 +159,7 @@ void MoveActiveCharacterLeft(bool shift){
 void MoveActiveCharacterRight(bool shift)
 {
   // character is ready to move ?
-  if (!ActiveCharacter().CanMoveRL()) return;
+ // if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_RIGHT);
   if (move) {

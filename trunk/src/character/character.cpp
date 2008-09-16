@@ -180,6 +180,7 @@ Character::Character (const Character& acharacter) :
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
+  std::cout<<"CLONE CHARACTER"<<std::endl;
   if (acharacter.body)
     SetBody(new Body(*acharacter.body));
   if(acharacter.name_text)
@@ -688,7 +689,7 @@ void Character::SignalCollision(const Point2d& speed_vector)
   MSG_DEBUG("character.collision", "%s collides with speed %f, %f (norm = %f)",
 	    character_name.c_str(), speed_vector.x, speed_vector.y, norm);
 
-  if (norm > game_mode->safe_fall && speed_vector.y>0.0)
+  if (norm > game_mode->safe_fall && speed_vector.y>0.0 && false)//TODO : REMOVE LAST PART OF TEST
   {
     norm -= game_mode->safe_fall;
     double degat = norm * game_mode->damage_per_fall_unit;
@@ -991,13 +992,14 @@ void Character::HandleKeyRefreshed_MoveRight(bool shift) const
 {
   HideGameInterface();
 
-  if (ActiveCharacter().IsImmobile())
+  //if (ActiveCharacter().IsImmobile())
     MoveActiveCharacterRight(shift);
 }
 
 void Character::HandleKeyReleased_MoveRight(bool)
 {
   body->StopWalk();
+  SetSpeedXY(Point2d(GetSpeedXY().x/5,GetSpeedXY().y));
   SendActiveCharacterInfo();
 }
 
@@ -1014,7 +1016,7 @@ void Character::HandleKeyRefreshed_MoveLeft(bool shift) const
 {
   HideGameInterface();
 
-  if (ActiveCharacter().IsImmobile())
+ // if (ActiveCharacter().IsImmobile())
     MoveActiveCharacterLeft(shift);
 }
 
@@ -1022,6 +1024,7 @@ void Character::HandleKeyReleased_MoveLeft(bool)
 {
   body->StopWalk();
   SendActiveCharacterInfo();
+  SetSpeedXY(Point2d(GetSpeedXY().x/5,GetSpeedXY().y));
 }
 
 // #################### UP
