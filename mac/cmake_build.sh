@@ -13,7 +13,7 @@
 #
 
 MAC=`pwd`/
-ROOT=${MAC}../../
+ROOT=${MAC}../
 SRC=${ROOT}src/
 
 
@@ -26,7 +26,7 @@ export MACOSX_DEPLOYMENT_TARGET=10.4
 export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include"
 export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 
-APP_VERSION=0.8.1svn
+APP_VERSION=0.8.1
 BUNDLE_NAME=Wormux
 DMG_TARGET="${BUNDLE_NAME}-${APP_VERSION}"
 DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-`uname -p`
@@ -165,16 +165,6 @@ cp ${MAC}PkgInfo.in ${APP}/Contents/PkgInfo
 cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
 
-
-#ARCHIVE=${MAC}Wormux-0.8.1svn.tar.bz2
-#if [ -e ${ARCHIVE} ]
-#then
-#    echo "******************"
-#    echo "Remove old archive" 
-#    rm -f ${ARCHIVE}
-#    echo "******************"
-#fi
-
 #export CMAKE_INSTALL_PREFIX=${RES}
 
 #
@@ -183,7 +173,7 @@ cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
 cd ${TMP}
 
-if ! cmake ../../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES}
+if ! cmake ../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES}
 then
     echo "CMake error"
     exit 1
@@ -238,7 +228,7 @@ fi
 
 
 #
-# Make .dmg and .tar.bz2 file
+# Make .dmg file
 #
 
 echo ""
@@ -255,14 +245,6 @@ APP=${DMG_OUT}.app
 /usr/bin/hdiutil convert -imagekey zlib-level=9 -format UDZO ${BUNDLE_NAME}-${APP_VERSION}.sparseimage -o ${DMG_OUT}.dmg
 /bin/rm -f ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
 
-
-#
-# Create Archive
-#
-#echo "Make archive ${ARCHIVE}"
-#tar cfj ${ARCHIVE} ${APP}
-#echo "Archive ${ARCHIVE} done"
-    
 
 #
 # Clean environment

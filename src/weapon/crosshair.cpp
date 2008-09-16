@@ -66,5 +66,5 @@ void CrossHair::Draw() const
     return;
   Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition() + crosshair_position;
   GetMainWindow().Blit(image, tmp - Camera::GetInstance()->GetPosition());
-  GetWorld().ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
+  world.ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
 }

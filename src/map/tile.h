@@ -34,8 +34,7 @@ extern TileItem_Empty EmptyTile;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
-class Tile : public Rectanglei
-{
+class Tile : public Rectanglei{
 public:
   Tile ();
   ~Tile ();
@@ -86,6 +85,7 @@ protected:
 
   // Ground dimensions
   Point2i nbCells;
+  unsigned int nbr_cell;
 
   void InitPreview();
   Surface*   m_preview;
@@ -96,7 +96,6 @@ protected:
 
   Point2i m_upper_left_offset;
   Point2i m_lower_right_offset;
-
 
   // Canvas giving access to tiles
   std::vector<TileItem *> item;

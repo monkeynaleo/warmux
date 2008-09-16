@@ -17,7 +17,6 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include <Box2D.h>
 #include "map/tile.h"
 #include "map/tileitem.h"
 #include "game/game.h"
@@ -27,39 +26,32 @@
 #include "include/app.h"
 #include "map/camera.h"
 
-#ifdef DEBUG
-#include "graphic/colors.h"
-#endif
-
 // We need only one empty tile
 TileItem_Empty EmptyTile;
 
 Tile::Tile()
-  : nbCells(0,0), m_preview(NULL)
+: m_preview(NULL)
 {
 }
 
-void Tile::FreeMem()
-{
-  for (int i=0; i < (nbCells.x * nbCells.y); ++i) {
+void Tile::FreeMem(){
+  for (uint i=0; i<nbr_cell; ++i) {
     // Don't delete empty tile as we use only one instance for empty tile
     if(item[i] != &EmptyTile)
       delete item[i];
   }
-  nbCells.SetValues(0, 0);
+  nbr_cell = 0;
   item.clear();
   if (m_preview)
     delete m_preview;
   m_preview = NULL;
 }
 
-Tile::~Tile()
-{
+Tile::~Tile(){
   FreeMem();
 }
 
-void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset)
-{
+void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
   m_upper_left_offset = upper_left_offset;
   m_lower_right_offset = lower_right_offset;
   size = pSize + upper_left_offset + lower_right_offset;
@@ -70,10 +62,11 @@ void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, con
 
   if((size.y % CELL_SIZE.y) != 0)
     nbCells.y++;
+
+  nbr_cell = nbCells.x * nbCells.y;
 }
 
-void Tile::Dig(const Point2i &position, const Surface& dig)
-{
+void Tile::Dig(const Point2i &position, const Surface& dig){
   Point2i firstCell = Clamp(position / CELL_SIZE);
   Point2i lastCell = Clamp((position + dig.GetSize()) / CELL_SIZE);
   Point2i c;
@@ -97,8 +90,7 @@ void Tile::Dig(const Point2i &position, const Surface& dig)
   }
 }
 
-void Tile::Dig(const Point2i &center, const uint radius)
-{
+void Tile::Dig(const Point2i &center, const uint radius){
   Point2i size = Point2i(2 * (radius + EXPLOSION_BORDER_SIZE),
                          2 * (radius + EXPLOSION_BORDER_SIZE));
   Point2i position = center - Point2i(radius + EXPLOSION_BORDER_SIZE,
@@ -177,8 +169,7 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
   s.SetAlpha(SDL_SRCALPHA, 0);
 }
 
-void Tile::MergeSprite(const Point2i &position, Surface& surf)
-{
+void Tile::MergeSprite(const Point2i &position, Surface& surf){
   Point2i firstCell = Clamp(position/CELL_SIZE);
   Point2i lastCell = Clamp((position + surf.GetSize())/CELL_SIZE);
   Point2i c;
@@ -195,7 +186,7 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
       if(ti->IsTotallyEmpty()) {
         // Don't delete the old item as we use only one empty tile
         // delete item[c.y*nbCells.x + c.x];
-        ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware( CELL_SIZE);
+        ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(CELL_SIZE);
         ti->GetSurface().SetAlpha(0,0);
         ti->GetSurface().Fill(0x00000000);
         ti->GetSurface().SetAlpha(SDL_SRCALPHA,0);
@@ -251,90 +242,74 @@ void Tile::CheckPreview()
   }
 }
 
-void Tile::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, const Point2i & lower_right_offset)
-{
+void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
   Point2i offset = upper_left_offset + lower_right_offset;
   FreeMem();
-  InitTile(ground_img.GetSize(), upper_left_offset, lower_right_offset);
-  ASSERT(nbCells.x != 0 && nbCells.y != 0);
-
-  //m_tile_body->SetXForm(b2Vec2(upper_left_offset.x/PIXEL_PER_METER, upper_left_offset.y/PIXEL_PER_METER), m_tile_body->GetAngle());
+  InitTile(terrain.GetSize(), upper_left_offset, lower_right_offset);
+  ASSERT(nbr_cell != 0);
 
   InitPreview();
   uint8_t *dst  = m_preview->GetPixels();
   uint    pitch = m_preview->GetPitch();
 
-  // Create and fill the TileItem objects
+  // Create the TileItem objects
+  for (uint i=0; i<nbr_cell; ++i)
+    item.push_back ( new TileItem_AlphaSoftware(CELL_SIZE) );
+
+  // Fill the TileItem objects
   Point2i i;
   for( i.y = 0; i.y < nbCells.y; i.y++ )
   {
     for( i.x = 0; i.x < nbCells.x; i.x++ )
     {
+      int piece = i.y * nbCells.x + i.x;
       Rectanglei sr(i * CELL_SIZE - upper_left_offset, CELL_SIZE);
 
-      TileItem_AlphaSoftware* t = new TileItem_AlphaSoftware( CELL_SIZE);
-      ground_img.SetAlpha(0, 0);
-      t->GetSurface().Blit(ground_img, sr, Point2i(0, 0));
-      t->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
-
-      while (t->need_check_empty)
-	t->CheckEmpty();
-
-      if (t->NeedDelete()) {
-#ifdef DBG_TILE
-	printf("\nDeleting tile %i",i);
-#endif
-	delete t;
-	item.push_back((TileItem*)&EmptyTile);
-      } else {
-#ifdef DBG_TILE
-	if (i % nbCells.x % 2 == (i / nbCells.x) % 2)
-	  item[i]->FillWithRGB(0, 0, 255);
-	else
-	  item[i]->FillWithRGB(0, 255, 0);
-#endif
-Point2d offset = Point2d((i.x) * CELL_SIZE.x,(i.y+1) * CELL_SIZE.y+10) ;
-//Point2d offset = i* CELL_SIZE ;
-	t->InitShape(1,offset);
-	item.push_back(t);
-      }
+      terrain.SetAlpha(0, 0);
+      item[piece]->GetSurface().Blit(terrain, sr, Point2i(0, 0));
+      item[piece]->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
     }
     dst += (CELL_SIZE.y>>m_shift)*pitch;
   }
+
+  // Replace transparent tiles by TileItem_Empty tiles
+  for( uint i=0; i<nbr_cell; ++i )
+  {
+    TileItem_AlphaSoftware* t = static_cast<TileItem_AlphaSoftware*>(item[i]);
+    while(t->need_check_empty)
+      t->CheckEmpty();
+    if(t->NeedDelete())
+    {
+#ifdef DBG_TILE
+      printf("\nDeleting tile %i",i);
+#endif
+      delete item[i];
+      item[i] = (TileItem*)&EmptyTile;
+    }
+#ifdef DBG_TILE
+    else
+    {
+      if(i % nbCells.x % 2 == (i / nbCells.x) % 2)
+        item[i]->FillWithRGB(0, 0, 255);
+      else
+        item[i]->FillWithRGB(0, 255, 0);
+    }
+#endif
+  }
 }
 
-uchar Tile::GetAlpha(const Point2i &pos) const
-{
+uchar Tile::GetAlpha(const Point2i &pos) const{
   int cell = pos.y / CELL_SIZE.y * nbCells.x + pos.x / CELL_SIZE.x;
   return item[cell]->GetAlpha(pos % CELL_SIZE);
 }
 
-void Tile::DrawTile()
-{
+void Tile::DrawTile() {
   Point2i firstCell = Clamp(Camera::GetInstance()->GetPosition() / CELL_SIZE);
   Point2i lastCell = Clamp((Camera::GetInstance()->GetPosition() + Camera::GetInstance()->GetSize()) / CELL_SIZE);
   Point2i i;
   for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
     for( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
       item[i.y*nbCells.x + i.x]->Draw( i );
-
-#ifdef DEBUG
-  if (IsLOGGING("map")) {
-    for ( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
-      GetMainWindow().LineColor(i.x*CELL_SIZE.x - Camera::GetInstance()->GetPosition().x,
-				i.x*CELL_SIZE.x - Camera::GetInstance()->GetPosition().x,
-				0, GetMainWindow().GetHeight(),
-				primary_green_color);
-
-    for ( i.y = firstCell.y; i.y <= lastCell.y; i.y++)
-      GetMainWindow().LineColor(0, GetMainWindow().GetWidth(),
-				i.y*CELL_SIZE.y - Camera::GetInstance()->GetPosition().y,
-				i.y*CELL_SIZE.y - Camera::GetInstance()->GetPosition().y,
-				primary_green_color);
-  }
-
-
-#endif
 }
 
 void Tile::DrawTile_Clipped(Rectanglei worldClip) const

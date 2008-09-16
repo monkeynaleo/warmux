@@ -107,7 +107,7 @@ void GameInit::InitMap()
 
   Camera::GetInstance()->ResetShake();
   loading_sreen.StartLoading(1, "map_icon", _("Maps"));
-  GetWorld().Reset();
+  world.Reset();
   lst_objects.PlaceBarrels();
 }
 

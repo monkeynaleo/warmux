@@ -125,11 +125,10 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 {
 
   m_is_character = true;
-
+  SetCollisionModel(false, true, true);
   /* body stuff */
   ASSERT(char_body);
   SetBody(char_body);
-  SetCollisionModel(false, true, true);
 
   ResetConstants();
   // Allow player to go outside of map by upper bound (bug #10420)
@@ -482,8 +481,7 @@ void Character::Jump(double strength, double angle /*in radian */)
 
   // Jump !
   if (GetDirection() == DIRECTION_LEFT) angle = InverseAngle(angle);
-//  SetSpeed (strength, angle);
-Impulse(100 + strength,angle);
+  SetSpeed (strength, angle);
 }
 
 void Character::Jump()
@@ -555,8 +553,6 @@ void Character::Refresh()
   if (IsDead()) return;
 
   Time * global_time = Time::GetInstance();
-
-  body->SetRotation(GetAngle());
 
   // center on character who is falling
   if (FootsInVacuum()) {
@@ -845,7 +841,7 @@ uint Character::GetCharacterIndex() const
   for (Team::iterator it = m_team.begin();
        it != m_team.end() ; ++it, ++index )
   {
-    if ((*it) == this)
+    if (&(*it) == this)
       return index;
   }
   ASSERT(false);

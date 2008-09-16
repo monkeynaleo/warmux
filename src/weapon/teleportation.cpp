@@ -107,7 +107,7 @@ void Teleportation::p_Deselect()
 void Teleportation::ChooseTarget(Point2i mouse_pos)
 {
   dst = mouse_pos - ActiveCharacter().GetSize()/2;
-  if(!GetWorld().ParanoiacRectIsInVacuum(Rectanglei(dst,ActiveCharacter().GetSize())) ||
+  if(!world.ParanoiacRectIsInVacuum(Rectanglei(dst,ActiveCharacter().GetSize())) ||
      !ActiveCharacter().IsInVacuumXY(dst))
     return;
   target_chosen = true;

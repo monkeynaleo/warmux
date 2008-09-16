@@ -22,7 +22,6 @@
 #include "object/objects_list.h"
 //-----------------------------------------------------------------------------
 #include "object/barrel.h"
-#include "object/physical_engine.h"
 #include "include/app.h"
 #include "map/map.h"
 #include "map/maps_list.h"

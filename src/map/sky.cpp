@@ -55,8 +55,8 @@ void Sky::Draw(bool redraw_all)
     return;
   }
 
-  RedrawParticleList(*GetWorld().to_redraw_now);
-  RedrawParticleList(*GetWorld().to_redraw_particles_now);
+  RedrawParticleList(*world.to_redraw_now);
+  RedrawParticleList(*world.to_redraw_particles_now);
 }
 
 void Sky::RedrawParticleList(std::list<Rectanglei> &list) const
@@ -79,8 +79,8 @@ Point2i Sky::GetSkyPos() const
   Point2i min(0, 0);
   Point2i max = image.GetSize() - GetMainWindow().GetSize();
   Point2i tmp = Camera::GetInstance()->GetPosition();
-  int w_w = GetWorld().GetWidth();
-  int w_h = GetWorld().GetHeight();
+  int w_w = world.GetWidth();
+  int w_h = world.GetHeight();
   int v_w = GetMainWindow().GetWidth();
   int v_h = GetMainWindow().GetHeight();
   double x_sky = (double)(tmp.x) / (double)(w_w - v_w);

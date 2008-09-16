@@ -89,15 +89,11 @@ void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
   CloseParachute();
 }
 
-void ObjBox::SignalObjectCollision(Physics * obj, const Point2d& /*my_speed_before*/)
+void ObjBox::SignalObjectCollision(PhysicalObj * obj, const Point2d& /*my_speed_before*/)
 {
   //  SignalCollision(); // this is done by the physical engine...
-  if(obj->IsPhysicalObj()){
-      PhysicalObj *p_obj = (PhysicalObj *)obj;
-    if (p_obj->IsCharacter()){
-      ApplyBonus((Character *)obj);
-    }
-  }
+  if (obj->IsCharacter())
+    ApplyBonus((Character *)obj);
 }
 void ObjBox::SignalDrowning()
 {
@@ -137,8 +133,8 @@ void ObjBox::Refresh()
   // If we touch a character, we remove the medkit
   FOR_ALL_LIVING_CHARACTERS(team, character)
   {
-    if(Overlapse(**character)) {
-      ApplyBonus((*character));
+    if(Overlapse(*character)) {
+      ApplyBonus(&(*character));
       Ghost();
       return;
     }

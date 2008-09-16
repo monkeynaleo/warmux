@@ -85,19 +85,6 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   type_of_player = TEAM_human_local;
 }
 
-Team::~Team()
-{
-
- const_iterator it = characters.begin(), end = characters.end();
-
-  for (; it != end; ++it) {
-    delete(*it);
-
-  }
-
-
-}
-
 bool Team::LoadCharacters()
 {
   ASSERT (nb_characters <= 10);
@@ -136,26 +123,26 @@ bool Team::LoadCharacters()
     }
 
     // Create a new character and add him to the team
-    Character *new_character = new Character(*this, character_name, body);
+    Character new_character(*this, character_name, body);
     if((attached_custom_team != NULL) && (IsLocal()) && !Network::IsConnected())
     {
-      new_character->SetCustomName(attached_custom_team->GetCharactersNameList().at(characters.size()));
+      new_character.SetCustomName(attached_custom_team->GetCharactersNameList().at(characters.size()));
     }
     characters.push_back(new_character);
     active_character = characters.begin(); // we need active_character to be initialized here !!
-    if (!characters.back()->PutRandomly(false, GetWorld().GetDistanceBetweenCharacters()))
+    if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters()))
     {
       // We haven't found any place to put the characters!!
-      if (!characters.back()->PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
+      if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
         std::cerr << std::endl;
         std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
         std::cerr << std::endl;
 
         // Put it with no space...
-        characters.back()->PutRandomly(false, 0);
+        characters.back().PutRandomly(false, 0);
       }
     }
-    characters.back()->Init();
+    characters.back().Init();
 
     MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 
@@ -180,8 +167,8 @@ uint Team::ReadEnergy () const
   const_iterator it = characters.begin(), end = characters.end();
 
   for (; it != end; ++it) {
-    if ( !(*it)->IsDead() )
-      total_energy += (*it)->GetEnergy();
+    if ( !(*it).IsDead() )
+      total_energy += (*it).GetEnergy();
   }
 
   return total_energy;
@@ -259,7 +246,7 @@ int Team::NbAliveCharacter() const
   const_iterator it= characters.begin(), end=characters.end();
 
   for (; it!=end; ++it)
-    if ( !(*it)->IsDead() ) nbr++;
+    if ( !(*it).IsDead() ) nbr++;
 
   return nbr;
 }
@@ -308,7 +295,7 @@ void Team::PrepareTurn()
 
 Character& Team::ActiveCharacter() const
 {
-  return (**active_character);
+  return (*active_character);
 }
 
 void Team::SetWeapon (Weapon::Weapon_type type)
@@ -372,7 +359,7 @@ Character* Team::FindByIndex(uint index)
     index--;
     it++;
   }
-  return (*it);
+  return &(*it);
 }
 
 void Team::LoadGamingData()

@@ -75,5 +75,5 @@ void CompositeShape::DrawOnScreen()
     }
   }
   tmp = POINT2D_2_POINT2I(max) - POINT2D_2_POINT2I(min) + Point2i(1, 1);
-  GetWorld().ToRedrawOnScreen(Rectanglei(POINT2D_2_POINT2I(min), POINT2D_2_POINT2I(tmp) + Point2i(2, 2)));
+  world.ToRedrawOnScreen(Rectanglei(POINT2D_2_POINT2I(min), POINT2D_2_POINT2I(tmp) + Point2i(2, 2)));
 }

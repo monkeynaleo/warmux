@@ -94,7 +94,7 @@ void Particle::Refresh()
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
-      //SetSize(image->GetSize());
+      SetSize(image->GetSize());
       image->SetAlpha(1.0);
     }
     else
@@ -305,7 +305,7 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
   const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
 
-  //Particle *particle = NULL;
+  Particle *particle = NULL;
   float norme;
   uint size;
   for(uint i=0; i < big_partic_nbr ; i++)
@@ -318,11 +318,11 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
       pos = pos - size / 2;       //Set the center of the smoke to the center..
       pos = pos + Point2i(int(norme * big_cos[i]),int(norme * big_sin[i])); //Put inside the circle of the explosion
 
-      //particle = new ExplosionSmoke(size);
-      //particle->SetXY(pos);
-      //particle->SetOnTop(true);
+      particle = new ExplosionSmoke(size);
+      particle->SetXY(pos);
+      particle->SetOnTop(true);
 
-    //  lst_particles.push_back(particle);
+      lst_particles.push_back(particle);
   }
 }
 
@@ -333,7 +333,7 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
 
   if(style == NoESmoke) return;
   AddLittleESmoke (position, radius);
-  //if(style == BigESmoke) AddBigESmoke (position, radius);
+  if(style == BigESmoke) AddBigESmoke (position, radius);
 }
 
 void ParticleEngine::Draw(bool upper)

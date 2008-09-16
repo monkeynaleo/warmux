@@ -64,7 +64,6 @@ protected:
   bool m_targeted;
   double m_force;
   uint m_lastrefresh;
-  unsigned m_force_index;
 public:
   RPG(AutomaticBazookaConfig& cfg,
       WeaponLauncher * p_launcher);
@@ -81,7 +80,6 @@ protected:
 RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
   WeaponProjectile("rocket", cfg, p_launcher), smoke_engine(20), m_lastrefresh(0)
 {
-  m_force_index = 0;
   m_targeted = false;
   explode_colliding_character = true;
 }
@@ -119,16 +117,14 @@ void RPG::Refresh()
       SetSpeed(0,0);
       angle_local = GetPosition().ComputeAngle( m_targetPoint );
       m_force = acfg.rocket_force;
-      RemoveExternForce(m_force_index);
-      m_force_index = AddExternForce(m_force, angle_local);
+      SetExternForce(m_force, angle_local);
       SetGravityFactor(0);
       SetWindFactor(0);
     }
   }
   else
   {
-    RemoveExternForce(m_force_index);
-    //SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
+    SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
 
     if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
@@ -160,7 +156,7 @@ void RPG::Refresh()
       }
     }
 
-    m_force_index = AddExternForce(m_force, angle_local);
+    SetExternForce(m_force, angle_local);
 
   }
   image->SetRotation_rad(angle_local);
@@ -262,7 +258,7 @@ void AutomaticBazooka::p_Deselect()
   WeaponLauncher::p_Deselect();
   if (m_target->selected) {
     // need to clear the old target
-    GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
+    world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
                         m_target->pos.y-m_target->image.GetHeight()/2,
                         m_target->image.GetWidth(),
                         m_target->image.GetHeight()));
@@ -275,7 +271,7 @@ void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 {
   if (m_target->selected) {
     // need to clear the old target
-    GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
+    world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
                         m_target->pos.y-m_target->image.GetHeight()/2,
                         m_target->image.GetWidth(),
                         m_target->image.GetHeight()));
@@ -296,7 +292,7 @@ void AutomaticBazooka::DrawTarget() const
 
   GetMainWindow().Blit(m_target->image, m_target->pos - m_target->image.GetSize()/2 - Camera::GetInstance()->GetPosition());
 
-  GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
+  world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
                                  m_target->pos.y-m_target->image.GetHeight()/2,
                                  m_target->image.GetWidth(),
                                  m_target->image.GetHeight()));

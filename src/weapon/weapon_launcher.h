@@ -68,7 +68,7 @@ class WeaponProjectile : public PhysicalObj
     void ResetTimeOut() { m_timeout_modifier = 0; };
     bool change_timeout_allowed() const;
   protected:
-    virtual void SignalObjectCollision(Physics * obj, const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before);
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalCollision(const Point2d& speed_before);
     virtual void SignalOutOfMap();
@@ -96,7 +96,7 @@ class WeaponBullet : public WeaponProjectile
   protected:
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalOutOfMap();
-    virtual void SignalObjectCollision(Physics * obj, const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before);
     void DoExplosion();
 };
 

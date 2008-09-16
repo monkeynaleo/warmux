@@ -89,7 +89,7 @@ bool AIMovementModule::RiskGoingOutOfMap() const
        ActiveCharacter().GetX() <= 5 ) {
     return true;
   } else if ( ActiveCharacter().GetDirection() == DIRECTION_RIGHT &&
-              GetWorld().GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
+              world.GetWidth() - 5 <= ActiveCharacter().GetX() + ActiveCharacter().GetSize().GetX() ) {
     return true;
   }
 
@@ -348,7 +348,7 @@ void AIMovementModule::BeginTurn()
   last_blocked_position = Point2i(0,0);
 
   min_reachable_x = 0;
-  max_reachable_x = GetWorld().GetWidth();
+  max_reachable_x = world.GetWidth();
 }
 
 AIMovementModule::AIMovementModule() :

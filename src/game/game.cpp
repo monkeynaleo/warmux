@@ -47,7 +47,6 @@
 #include "menu/results_menu.h"
 #include "network/network.h"
 #include "network/randomsync.h"
-#include "object/physical_engine.h"
 #include "object/objbox.h"
 #include "object/bonus_box.h"
 #include "object/medkit.h"
@@ -153,7 +152,7 @@ void Game::Start()
 
 void Game::UnloadDatas(bool game_finished) const
 {
-  GetWorld().FreeMem();
+  world.FreeMem();
   ActiveMap()->FreeData();
   lst_objects.FreeMem();
   ParticleEngine::Stop();
@@ -243,7 +242,7 @@ void Game::Init()
   ActionHandler::GetInstance()->ExecActions();
 
   FOR_ALL_CHARACTERS(team, character)
-    (*character)->ResetDamageStats();
+    (*character).ResetDamageStats();
 
   SetState(END_TURN, true); // begin with a small pause
 }
@@ -312,7 +311,7 @@ void Game::RefreshInput()
 void Game::RefreshObject() const
 {
   FOR_ALL_CHARACTERS(team,character)
-    (*character)->Refresh();
+    character->Refresh();
 
   // Recompute energy of each team
   FOR_EACH_TEAM(team)
@@ -329,12 +328,12 @@ void Game::Draw ()
 {
   // Draw the sky
   StatStart("GameDraw:sky");
-  GetWorld().DrawSky();
+  world.DrawSky();
   StatStop("GameDraw:sky");
 
   // Draw the map
   StatStart("GameDraw:world");
-  GetWorld().Draw();
+  world.Draw();
   StatStop("GameDraw:world");
 
   // Draw objects
@@ -346,8 +345,8 @@ void Game::Draw ()
   // Draw the characters
   StatStart("GameDraw:characters");
   FOR_ALL_CHARACTERS(team,character)
-    if (!(*character)->IsActiveCharacter())
-      (*character)->Draw();
+    if (!character->IsActiveCharacter())
+      character->Draw();
 
   StatStart("GameDraw:particles_behind_active_character");
   ParticleEngine::Draw(false);
@@ -365,7 +364,7 @@ void Game::Draw ()
 
   // Draw waters
   StatStart("GameDraw:water");
-  GetWorld().DrawWater();
+  world.DrawWater();
   StatStop("GameDraw:water");
 
   // Draw game messages
@@ -375,7 +374,7 @@ void Game::Draw ()
 
   // Draw optionals
   StatStart("GameDraw:fps_and_map_author_name");
-  GetWorld().DrawAuthorName();
+  world.DrawAuthorName();
   fps->Draw();
   StatStop("GameDraw:fps_and_map_author_name");
 
@@ -505,16 +504,12 @@ void Game::MainLoop()
   StatStart("Game:RefreshInput()");
   RefreshInput();
   StatStop("Game:RefreshInput()");
-  StatStart("Game:PhysicalEngine::GetInstance()->Step()");
-  PhysicalEngine::GetInstance()->Step();
-  StatStop("Game:PhysicalEngine::GetInstance()->Step()");
-
   StatStart("Game:RefreshObject()");
   RefreshObject();
   StatStop("Game:RefreshObject()");
 
   // Refresh the map
-  GetWorld().Refresh();
+  world.Refresh();
 
   // try to adjust to max Frame by seconds
 #ifndef USE_VALGRIND
@@ -659,10 +654,10 @@ PhysicalObj* Game::GetMovingObject() const
 
   FOR_ALL_CHARACTERS(team,character)
   {
-    if (!(*character)->IsImmobile() && !(*character)->IsGhost())
+    if (!character->IsImmobile() && !character->IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", (*character)->GetName().c_str());
-      return (*character);
+      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", character->GetName().c_str());
+      return &(*character);
     }
   }
 
@@ -779,9 +774,9 @@ void Game::SignalCharacterDamage(const Character *character) const
 void Game::ApplyDiseaseDamage() const
 {
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if ((*character)->IsDiseased()) {
-      (*character)->SetEnergyDelta(-(int)(*character)->GetDiseaseDamage());
-      (*character)->DecDiseaseDuration();
+    if (character->IsDiseased()) {
+      character->SetEnergyDelta(-(int)character->GetDiseaseDamage());
+      character->DecDiseaseDuration();
     }
   }
 }

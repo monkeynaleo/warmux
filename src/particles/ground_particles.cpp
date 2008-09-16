@@ -37,7 +37,7 @@ GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
   Rectanglei rec;
   rec.SetPosition( position - size / 2);
   rec.SetSize( size );
-  image = new Sprite(GetWorld().ground.GetPart(rec));
+  image = new Sprite(world.ground.GetPart(rec));
 }
 
 void GroundParticle::Refresh()

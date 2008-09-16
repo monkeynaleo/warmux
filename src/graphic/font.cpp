@@ -159,7 +159,7 @@ void Font::Write(const Point2i& pos, const Surface &surface) const {
   GetMainWindow().Blit(surface, pos);
 
   // TODO: Remove this line! (and use GameFont instead of Font)
-  GetWorld().ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
+  world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
 }
 
 void Font::WriteLeft(const Point2i &pos, const std::string &txt,

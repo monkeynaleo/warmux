@@ -696,5 +696,5 @@ void Polygon::Draw(Surface * dest)
 void Polygon::DrawOnScreen()
 {
   Draw(&GetMainWindow());
-  GetWorld().ToRedrawOnScreen(GetRectangleToRefresh());
+  world.ToRedrawOnScreen(GetRectangleToRefresh());
 }

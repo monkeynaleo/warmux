@@ -64,17 +64,17 @@ void Camera::Reset()
   auto_crop = true;
   in_advance = false;
   followed_object = NULL;
-  SetXYabs(GetWorld().GetSize() / 2);
+  SetXYabs(world.GetSize() / 2);
 }
 
 bool Camera::HasFixedX() const
 {
-  return (int)GetWorld().GetWidth() <= GetSizeX();
+  return (int)world.GetWidth() <= GetSizeX();
 }
 
 bool Camera::HasFixedY() const
 {
-  return (int)GetWorld().GetHeight() <= GetSizeY();
+  return (int)world.GetHeight() <= GetSizeY();
 }
 
 void Camera::SetXYabs(int x, int y)
@@ -82,14 +82,14 @@ void Camera::SetXYabs(int x, int y)
   AppWormux * app = AppWormux::GetInstance();
 
   if(!HasFixedX())
-    position.x = InRange_Long(x, 0, GetWorld().GetWidth() - GetSizeX());
+    position.x = InRange_Long(x, 0, world.GetWidth() - GetSizeX());
   else
-    position.x = - (app->video->window.GetWidth() - GetWorld().GetWidth())/2;
+    position.x = - (app->video->window.GetWidth() - world.GetWidth())/2;
 
   if(!HasFixedY())
-    position.y = InRange_Long(y, 0, GetWorld().GetHeight() - GetSizeY());
+    position.y = InRange_Long(y, 0, world.GetHeight() - GetSizeY());
   else
-    position.y = - (app->video->window.GetHeight() - GetWorld().GetHeight())/2;
+    position.y = - (app->video->window.GetHeight() - world.GetHeight())/2;
 
 }
 
@@ -317,17 +317,13 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow,
 {
   MSG_DEBUG( "camera.tracking", "Following object %s",
                                  obj->GetName().c_str());
-if(follow && _in_advance)
-{
 
-}
+  Mouse::GetInstance()->Hide();
+  if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
+    auto_crop = follow;
 
- // Mouse::GetInstance()->Hide();
- // if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
- //   auto_crop = follow;
-
- // in_advance = _in_advance;
- // followed_object = obj;
+  in_advance = _in_advance;
+  followed_object = obj;
 }
 
 void Camera::StopFollowingObj(const PhysicalObj* obj){

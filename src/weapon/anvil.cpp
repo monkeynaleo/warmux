@@ -54,7 +54,7 @@ class Anvil : public WeaponProjectile
     void PlayCollisionSound();
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
   protected:
-    virtual void SignalObjectCollision(Physics * obj, const Point2d& /* speed_before */);
+    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */);
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
     virtual void SignalOutOfMap();
 };
@@ -74,14 +74,11 @@ Anvil::~Anvil()
   falling_sound.Stop(); // paranoiac sound stop
 }
 
-void Anvil::SignalObjectCollision(Physics * obj, const Point2d& /* speed_before */)
+void Anvil::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */)
 {
-   if(obj->IsPhysicalObj()){
-      PhysicalObj *p_obj = (PhysicalObj *)obj;
-    merge_time = Time::GetInstance()->Read() + 5000;
-    p_obj->SetEnergyDelta(-200);
-    PlayCollisionSound();
-   }
+  merge_time = Time::GetInstance()->Read() + 5000;
+  obj->SetEnergyDelta(-200);
+  PlayCollisionSound();
 }
 
 void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
@@ -98,7 +95,7 @@ void Anvil::SignalOutOfMap()
 void Anvil::Refresh()
 {
   if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
-    GetWorld().MergeSprite(GetPosition(), image);
+    world.MergeSprite(GetPosition(), image);
     Ghost();
   } else {
     WeaponProjectile::Refresh();
@@ -141,7 +138,7 @@ void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
   target.x = mouse_pos.x - (projectile->GetWidth() / 2);
   target.y = 0 - projectile->GetHeight();
 
-  if (!GetWorld().ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
+  if (!world.ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
      !projectile->IsInVacuumXY(target))
     return;
 

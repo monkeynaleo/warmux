@@ -376,7 +376,7 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   }
 
   // For the cache mechanism
-  GetWorld().ToRedrawOnScreen(dstRect);
+  world.ToRedrawOnScreen(dstRect);
 }
 
 void Sprite::Finish()

@@ -58,7 +58,7 @@ class SuperTux : public WeaponProjectile
     ParticleEngine particle_engine;
     double angle_rad;
     SoundSample flying_sound;
-    unsigned m_force_index;
+
   public:
     uint speed;
     uint time_now;
@@ -91,7 +91,6 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
   explode_colliding_character = true;
   SetSize(image->GetSize());
   SetTestRect(1, 1, 2, 2);
-  m_force_index = 0;
 }
 
 void SuperTux::Shoot(double strength)
@@ -118,8 +117,7 @@ void SuperTux::Refresh()
   image->SetRotation_rad(angle_rad + M_PI_2);
   if ((last_move+animation_deltat)<Time::GetInstance()->Read())
   {
-    ActiveCharacter().RemoveExternForce(m_force_index);
-    m_force_index = ActiveCharacter().AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
+    SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
     image->Update();
     last_move = Time::GetInstance()->Read();
   }

@@ -116,10 +116,10 @@ void ObjMine::Detection()
   double detection_range = static_cast<MineConfig&>(cfg).detection_range;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if (MeterDistance(GetCenter(), (*character)->GetCenter()) < detection_range &&
+    if (MeterDistance(GetCenter(), character->GetCenter()) < detection_range &&
         !animation) {
       std::string txt = Format(_("%s is next to a mine!"),
-                               (*character)->GetName().c_str());
+                               character->GetName().c_str());
       GameMessages::GetInstance()->Add(txt);
       StartTimeout();
       return;

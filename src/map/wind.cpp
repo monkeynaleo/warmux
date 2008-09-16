@@ -105,7 +105,6 @@ WindParticle::~WindParticle()
 
 void WindParticle::Refresh()
 {
-
   if(flipped && GetSpeed().x < 0)
     flipped->Update();
   else
@@ -136,10 +135,8 @@ void WindParticle::Refresh()
   if(GetX() + (int)sprite->GetWidth() < Camera::GetInstance()->GetPositionX() )
     x += Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
 
-  if(GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY()){
+  if(GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY())
     y -= Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
-    StopMoving();
-  }
 
   if(GetY() + (int)sprite->GetHeight() < Camera::GetInstance()->GetPositionY() )
     y += Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
@@ -198,7 +195,6 @@ void Wind::Reset(){
     WindParticle *tmp = new WindParticle(config_file, (float)i / nb);
     particles.push_back(tmp);
   }
-
   RandomizeParticlesPos();
 }
 

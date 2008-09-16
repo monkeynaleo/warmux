@@ -259,8 +259,6 @@ POTFILES = \
         src/object/object_cfg.h \
         src/object/objects_list.cpp \
         src/object/objects_list.h \
-        src/object/physical_engine.cpp \
-        src/object/physical_engine.h \
         src/object/physical_obj.cpp \
         src/object/physical_obj.h \
         src/object/physics.cpp \
