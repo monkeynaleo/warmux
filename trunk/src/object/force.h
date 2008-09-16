@@ -26,7 +26,7 @@
 #include "tool/point.h"
 #include <Box2D.h>
 class Physics;
-class b2Vec2;
+struct b2Vec2;
 
 class Force
 {
