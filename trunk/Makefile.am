@@ -30,6 +30,8 @@ EXTRA_DIST = data/wormux.desktop                   \
              tools/win32_setup/create_setup.sh     \
              tools/win32_setup/English.nsh         \
              tools/win32_setup/French.nsh          \
+             tools/win32_setup/Greek.nsh           \
+             tools/win32_setup/Polish.nsh          \
              tools/win32_setup/langmacros.nsh      \
              tools/win32_setup/install.ico         \
              tools/win32_setup/uninstall.ico
