@@ -54,6 +54,11 @@
   ; Installer Finish Page
   !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_VISIT              ${CUR_LANG}
 
+  ; Uninstall Components Page
+  !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_REM_GAME_DESC      ${CUR_LANG}
+  !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_REM_CFG_DESC       ${CUR_LANG}
+  !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_REM_ALL_CFG_DESC   ${CUR_LANG}
+
   !undef CUR_LANG
 !macroend
 

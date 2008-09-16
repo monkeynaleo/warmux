@@ -19,4 +19,8 @@
 !define WORMUX_CONFIG_SC_DESC   "Raccourci vers le répertoire de config utilisateur"
 !define WORMUX_PDF_SC_DESC      "Installation des raccourcis vers les fichiers d'aide"
 
+!define WORMUX_REM_GAME_DESC    "Effacer tous les fichiers installés"
+!define WORMUX_REM_CFG_DESC     "Effacer le fichier de configuration uniquement"
+!define WORMUX_REM_ALL_CFG_DESC "Effacer le répertoire de configuration de Wormux"
+
 !define WORMUX_VISIT            "Visiter le site web de Wormux"

@@ -19,4 +19,8 @@
 !define WORMUX_CONFIG_SC_DESC   "Skrót do folderu konfiguracji u¿ytkownika"
 !define WORMUX_PDF_SC_DESC      "Zainstaluj podrêczniki w formacie PDF"
 
+!define WORMUX_REM_GAME_DESC    "Remove all installed files"
+!define WORMUX_REM_CFG_DESC     "Remove the configuration file and only it"
+!define WORMUX_REM_ALL_CFG_DESC "Remove Wormux configuration folder"
+
 !define WORMUX_VISIT            "OdwiedŸ stronê WWW projektu Wormux"
