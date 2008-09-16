@@ -454,18 +454,6 @@ cat >> $NSIS <<EOF
 SectionGroupEnd
 
 ;--------------------------------
-;Descriptions
-
-!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-  !insertmacro MUI_DESCRIPTION_TEXT     \${Sec_Wormux}             \$(WORMUX_DESC)
-  !insertmacro MUI_DESCRIPTION_TEXT     \${Sec_Shortcuts}          \$(WORMUX_SHORTCUTS_DESC)
-    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_DesktopShortcut}    \$(WORMUX_DESKTOP_SC_DESC)
-    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_StartMenuShortcut}  \$(WORMUX_STARTM_SC_DESC)
-    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_UninstallShortcut}  \$(WORMUX_UNINST_SC_DESC)
-!insertmacro MUI_FUNCTION_DESCRIPTION_END
-
-
-;--------------------------------
 ;Uninstaller Section
 
 Section "Uninstall"
@@ -503,6 +491,32 @@ Section "Uninstall"
     ; remove files
     RMDir /r "\$INSTDIR"
 SectionEnd
+
+;Section \$(WORMUX_UNINST_REM_CFG) Sec_RemConfig
+;  Delete "\$APPDATA\\Wormux\\config.xml"
+;SectionEnd
+
+;Section \$(WORMUX_UNINST_REM_ALL_CFG) Sec_RemAllConfig
+;  RMDir /r "\$APPDATA\\Wormux"
+;SectionEnd
+
+
+;--------------------------------
+;Descriptions
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+  !insertmacro MUI_DESCRIPTION_TEXT     \${Sec_Wormux}             \$(WORMUX_DESC)
+  !insertmacro MUI_DESCRIPTION_TEXT     \${Sec_Shortcuts}          \$(WORMUX_SHORTCUTS_DESC)
+    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_DesktopShortcut}    \$(WORMUX_DESKTOP_SC_DESC)
+    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_StartMenuShortcut}  \$(WORMUX_STARTM_SC_DESC)
+    !insertmacro MUI_DESCRIPTION_TEXT   \${Sec_UninstallShortcut}  \$(WORMUX_UNINST_SC_DESC)
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+;!insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
+;  !insertmacro MUI_DESCRIPTION_TEXT     "Uninstall"                \$(WORMUX_REM_GAME_DESC)
+;  !insertmacro MUI_DESCRIPTION_TEXT     \${Sec_RemConfig}          \$(WORMUX_REM_CFG_DESC)
+;  !insertmacro MUI_DESCRIPTION_TEXT     \${Sec_RemAllConfig}       \$(WORMUX_REM_ALL_CFG_DESC)
+;!insertmacro MUI_UNFUNCTION_DESCRIPTION_END
 
 Function .onInit
   ;Language selection
@@ -555,6 +569,10 @@ Function un.onInit
    Quit
 
   _end:
+  ; Not sure how to have section in uninstaller.
+  ;IntOp \$R0 \${SF_RO} | \${SF_SELECTED}
+  ;SectionSetFlags \${Sec_RemGame} \$R0
+  ;SectionSetFlags \${Sec_RemAllConfig} \${SF_SELECTED}
 FunctionEnd
 EOF
 
