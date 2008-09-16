@@ -463,13 +463,13 @@
 	<country>Germany</country>
       </author>
       <author>
-    <nickname>Plorf</nickname>
-    <name>Yoann Katchourine</name>
-    <description>Prepare Mac OS X (Intel) packages</description>
-    <website>http://plorf.homeip.net/</website>
-    <email>yplorf_AT_gmail_DOT_com</email>
-    <country>France</country>
-        </author>
+   	<nickname>Plorf</nickname>
+   	<name>Yoann Katchourine</name>
+   	<description>Prepare Mac OS X (Intel) packages</description>
+   	<website>http://plorf.homeip.net/</website>
+   	<email>yplorf_AT_gmail_DOT_com</email>
+   	<country>France</country>
+      </author>
         <author>
 	<nickname>Serge</nickname>
 	<name>Serge CLAUS</name>
@@ -477,6 +477,14 @@
 	<website>http://serge.claus.free.fr/</website>
 	<email>serge.claus_AT_free_DOT_fr</email>
 	<country>France</country>
+      </author>
+      <author>
+	<nickname>yaloki</nickname>
+	<name>Pascal BLESER</name>
+	<description>openSUSE packager</description>
+	<website>http://dev-loki.blogspot.com</website>
+	<email>pascal.bleser_AT_opensuse_DOT_org</email>
+	<country>Belgique</country>
       </author>
     </section>
 
