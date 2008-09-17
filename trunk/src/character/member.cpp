@@ -274,6 +274,31 @@ void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& skel_ls
   scale = scale * mvt.scale;
 }
 
+void Member::ResetMovement()
+{
+  pos.x = 0;
+  pos.y = 0;
+  angle_rad = 0;
+  alpha = 1.0;
+  scale.x = 1.0;
+  scale.y = 1.0;
+}
+
+void Member::SetAngle(const double &angle)
+{
+  angle_rad = angle;
+}
+
+const Point2i Member::GetPos() const
+{
+  return Point2i((int)pos.x, (int)pos.y);
+}
+
+const Point2i Member::GetAnchorPos() const
+{
+  return Point2i((int)anchor.x, (int)anchor.y);
+}
+
 const std::string& Member::GetName() const
 {
   return name;
