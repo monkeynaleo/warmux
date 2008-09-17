@@ -45,7 +45,7 @@ SOURCES = \
 ifneq ($(INCLUDE_DEPENDENCIES),yes)
 
 all:
-	@make --no-print-directory INCLUDE_DEPENDENCIES=yes $(TARGETS)
+	@$(MAKE) --no-print-directory INCLUDE_DEPENDENCIES=yes $(TARGETS)
 
 .PHONY:	clean
 clean:
