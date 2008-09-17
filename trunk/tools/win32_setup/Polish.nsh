@@ -15,6 +15,7 @@
 !define WORMUX_UNINST_SC_DESC   "Umieœæ skrót do dezinstalacji Wormuksa w menu start"
 !define WORMUX_SHORCUTS_TITLE   "Instalacja skrótów"
 !define WORMUX_REMOVE_TITLE     "Odinstaluj poprzedni¹ wersjê"
+!define WORMUX_MANUAL_UNINST    "No uninstaller exe found, please uninstall manually"
 
 !define WORMUX_CONFIG_SC_DESC   "Skrót do folderu konfiguracji u¿ytkownika"
 !define WORMUX_PDF_SC_DESC      "Zainstaluj podrêczniki w formacie PDF"

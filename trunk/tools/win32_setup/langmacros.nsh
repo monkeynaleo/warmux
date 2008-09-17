@@ -50,6 +50,7 @@
 
   ; Force uninstall
   !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_REMOVE_TITLE       ${CUR_LANG}
+  !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_MANUAL_UNINST      ${CUR_LANG}
 
   ; Installer Finish Page
   !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_VISIT              ${CUR_LANG}

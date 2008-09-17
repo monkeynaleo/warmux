@@ -15,6 +15,7 @@
 !define WORMUX_UNINST_SC_DESC   "Τοποθέτηση συντόμευσης κατάργησης στο μενού έναρξης"
 !define WORMUX_SHORCUTS_TITLE   "Εγκατάσταση συντομεύσεων"
 !define WORMUX_REMOVE_TITLE     "Uninstall previous version"
+!define WORMUX_MANUAL_UNINST    "No uninstaller exe found, please uninstall manually"
 
 !define WORMUX_CONFIG_SC_DESC   "Shortcut to user config folder"
 !define WORMUX_PDF_SC_DESC      "Install howto play PDFs"

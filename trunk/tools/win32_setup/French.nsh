@@ -15,6 +15,7 @@
 !define WORMUX_UNINST_SC_DESC   "Raccourci de désinstallation dans le menu Démarrer\Wormux"
 !define WORMUX_SHORCUTS_TITLE   "Installation des raccourcis"
 !define WORMUX_REMOVE_TITLE     "Désinstallation de la version précédente"
+!define WORMUX_MANUAL_UNINST    "Pas de désinstallateur trouvé, veuillez désinstaller manuellement au préalable"
 
 !define WORMUX_CONFIG_SC_DESC   "Raccourci vers le répertoire de config utilisateur"
 !define WORMUX_PDF_SC_DESC      "Installation des raccourcis vers les fichiers d'aide"
