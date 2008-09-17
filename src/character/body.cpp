@@ -321,7 +321,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
 	if( owner->GetDirection() == DIRECTION_LEFT)
 	{
 		v.x = 2 * (int)owner->GetPosition().x + GetSize().x/2 - v.x;
-		//v.x -= member->member->spr->GetWidth();
+		//v.x -= member->member->GetSprite().GetWidth();
 	}
 	v = Mouse::GetInstance()->GetWorldPosition() - v;
 
@@ -415,13 +415,13 @@ void Body::Build()
     if (current_clothe->GetLayers()[lay]->GetName() != "weapon")
       {
 	Member* member = current_clothe->GetLayers()[lay];
-	if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
+	if (member->pos.y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y > y_max
 	   && !member->IsGoingThroughGround())
-	  y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
+	  y_max = member->pos.y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y;
       }
   }
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->GetTestBottom();
-  body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front().member->spr->GetWidth() / 2.0;
+  body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front().member->GetSprite().GetWidth() / 2.0;
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front().member->ApplyMovement(body_mvt, skel_lst);
 
@@ -691,7 +691,7 @@ void Body::MakeParticles(const Point2i& pos)
 
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
     if (current_clothe->GetLayers()[layer]->GetType() != "weapon")
-      ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->GetLayers()[layer]->spr,
+      ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->GetLayers()[layer]->GetSprite(),
 						    current_clothe->GetLayers()[layer]->GetPos()+pos));
   }
 }
@@ -702,7 +702,7 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
     if (current_clothe->GetLayers()[layer]->GetType() != "weapon")
-      ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->GetLayers()[layer]->spr,
+      ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->GetLayers()[layer]->GetSprite(),
 							current_clothe->GetLayers()[layer]->GetPos()+pos,
 							current_clothe->GetLayers()[layer]->GetPos()+dst,
 							int(direction)));
