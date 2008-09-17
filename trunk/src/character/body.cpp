@@ -416,7 +416,7 @@ void Body::Build()
       {
 	Member* member = current_clothe->GetLayers()[lay];
 	if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
-	   && !member->go_through_ground)
+	   && !member->IsGoingThroughGround())
 	  y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
       }
   }
