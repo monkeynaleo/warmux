@@ -168,7 +168,7 @@ Body::Body(const Body& _body):
   std::map<std::string, Member*>::const_iterator it1 = _body.members_lst.begin();
   while (it1 != _body.members_lst.end())
     {
-      if(it1->second->name != "weapon")
+      if (it1->second->GetName() != "weapon")
 	{
 	  std::pair<std::string,Member*> p;
 	  p.first = it1->first;
@@ -239,7 +239,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
   if (mvt->GetType() != "breathe")
     MSG_DEBUG("body_anim", " %s uses %s-%s:%u",
 	      owner->GetName().c_str(),
-	      current_clothe->name.c_str(),
+	      current_clothe->GetName().c_str(),
 	      mvt->GetType().c_str(),
 	      frame);
 #endif
@@ -252,10 +252,10 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
        member++)
   {
     ASSERT( frame < mvt->GetFrames().size() );
-    if(mvt->GetFrames()[frame].find(member->member->type) != mvt->GetFrames()[frame].end())
+    if (mvt->GetFrames()[frame].find(member->member->GetType()) != mvt->GetFrames()[frame].end())
     {
       // This member needs to be moved :
-      member_mvt mb_mvt = mvt->GetFrames()[frame].find(member->member->type)->second;
+      member_mvt mb_mvt = mvt->GetFrames()[frame].find(member->member->GetType())->second;
       if(mb_mvt.follow_crosshair && ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
       {
         // Use the movement of the crosshair
@@ -403,7 +403,7 @@ void Body::Build()
   // Rotate each sprite, because the next part need to know the height
   // of the sprite once it is rotated
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
-    if (current_clothe->GetLayers()[layer]->name != "weapon")
+    if (current_clothe->GetLayers()[layer]->GetName() != "weapon")
       current_clothe->GetLayers()[layer]->RotateSprite();
   }
 
@@ -412,7 +412,7 @@ void Body::Build()
   float y_max = 0;
 
   for (int lay=0;lay < (int)current_clothe->GetLayers().size() ;lay++) {
-    if (current_clothe->GetLayers()[lay]->name != "weapon")
+    if (current_clothe->GetLayers()[lay]->GetName() != "weapon")
       {
 	Member* member = current_clothe->GetLayers()[lay];
 	if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
@@ -454,7 +454,7 @@ void Body::Draw(const Point2i& _pos)
   // Finally draw each layer one by one
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
 
-    if (current_clothe->GetLayers()[layer]->name == "weapon") {
+    if (current_clothe->GetLayers()[layer]->GetName() == "weapon") {
       // We draw the weapon member only if currently drawing the active character
       if (owner->IsActiveCharacter()) {
 	ASSERT(draw_weapon_member == 0);
@@ -478,14 +478,14 @@ void Body::AddChildMembers(Member* parent)
 {
   // Add child members of the parent member to the skeleton
   // and continue recursively with child members
-  for(std::map<std::string, v_attached>::iterator child = parent->attached_members.begin();
+  for (std::map<std::string, v_attached>::iterator child = parent->attached_members.begin();
       child != parent->attached_members.end();
       child++)
   {
     // Find if the current clothe uses this member:
-    for(uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
+    for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
     {
-      if(current_clothe->GetLayers()[lay]->type == child->first)
+      if (current_clothe->GetLayers()[lay]->GetType() == child->first)
       {
         // This child member is attached to his parent
         junction body;
@@ -507,8 +507,8 @@ void Body::BuildSqueleton()
   skel_lst.clear();
 
   // Find the "body" member as it is the top of the skeleton
-  for(uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
-    if (current_clothe->GetLayers()[lay]->type == "body")
+  for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
+    if (current_clothe->GetLayers()[lay]->GetType() == "body")
     {
       junction body;
       body.member = current_clothe->GetLayers()[lay];
@@ -690,7 +690,7 @@ void Body::MakeParticles(const Point2i& pos)
   Build();
 
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
-    if (current_clothe->GetLayers()[layer]->type != "weapon")
+    if (current_clothe->GetLayers()[layer]->GetType() != "weapon")
       ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->GetLayers()[layer]->spr,
 						    current_clothe->GetLayers()[layer]->GetPos()+pos));
   }
@@ -701,7 +701,7 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
   Build();
 
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
-    if (current_clothe->GetLayers()[layer]->type != "weapon")
+    if (current_clothe->GetLayers()[layer]->GetType() != "weapon")
       ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->GetLayers()[layer]->spr,
 							current_clothe->GetLayers()[layer]->GetPos()+pos,
 							current_clothe->GetLayers()[layer]->GetPos()+dst,
