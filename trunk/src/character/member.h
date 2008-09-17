@@ -46,6 +46,8 @@ private:
   float alpha;
   bool go_through_ground;
   std::map<std::string, v_attached> attached_members;
+  Point2f pos;
+  Point2f scale;
 
 protected:
   Sprite* spr;
@@ -56,9 +58,6 @@ protected:
   Point2f anchor;
 
 public:
-
-  Point2f pos;
-  Point2f scale;
 
   virtual ~Member();
   Member(const xmlNode* xml, const Profile* res);
@@ -71,10 +70,13 @@ public:
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(const member_mvt& mvt, std::vector<class c_junction>& skel_lst);
   void SetAngle(const double &angle);
+  void SetPos(const Point2f &pos);
 
   const Sprite& GetSprite() const;
 
   const Point2i GetPos() const;
+  const Point2f& GetPosFloat() const;
+
   const Point2i GetAnchorPos() const;
 
   const std::string& GetName() const;
