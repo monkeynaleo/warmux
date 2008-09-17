@@ -190,7 +190,7 @@ RequestExecutionLevel highest
   ;--------------------------------
   ;Folder-selection page
   InstallDir "\$PROGRAMFILES\Wormux"
-  ; Registry key to check for directory (so if you install again, it will 
+  ; Registry key to check for directory (so if you install again, it will
   ; overwrite the old one automatically)
   InstallDirRegKey HKLM "\${WORMUX_REG_KEY}" "Path"
   AutoCloseWindow false
@@ -273,7 +273,11 @@ Section \$(WORMUX_REMOVE_TITLE) SecUninstallOldWormux
     ; If first string is unavailable, Wormux was probably not installed
     StrCmp \$R1 "" done
       ; Check if we have uninstall string..
-      IfFileExists \$R2 0 no_file
+      IfFileExists \$R2 have_file
+      StrCpy \$R2 "\$PROGRAMFILES\\Wormux\\uninstall.exe"
+      ; Check if we have a classical uninstaller
+      IfFileExists \$R2 have_file no_file
+      have_file:
         ; Have uninstall string, go ahead and uninstall.
         SetOverwrite on
         ; Need to copy uninstaller outside of the install dir
@@ -293,7 +297,8 @@ Section \$(WORMUX_REMOVE_TITLE) SecUninstallOldWormux
             Goto uninstall_problem
 
   no_file:
-    MessageBox MB_OK "No uninstaller exe found" /SD IDOK IDOK done
+    MessageBox MB_OK \$(WORMUX_MANUAL_UNINST) /SD IDOK IDOK done
+    Quit
 
   uninstall_problem:
     ; We cant uninstall. Either the user must manually uninstall or
