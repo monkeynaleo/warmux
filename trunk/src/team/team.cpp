@@ -87,15 +87,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
 
 Team::~Team()
 {
-
- const_iterator it = characters.begin(), end = characters.end();
-
-  for (; it != end; ++it) {
-    delete(*it);
-
-  }
-
-
+  UnloadGamingData();
 }
 
 bool Team::LoadCharacters()
@@ -415,7 +407,12 @@ void Team::LoadGamingData()
 
 void Team::UnloadGamingData()
 {
-  // Clear list of characters
+  const_iterator it = characters.begin(), end = characters.end();
+
+  for (; it != end; ++it) {
+    delete(*it);
+  }
+
   characters.clear();
 }
 
@@ -458,7 +455,6 @@ void Team::SetDefaultPlayingConfig()
 
 void Team::AttachCustomTeam(CustomTeam *custom_team)
 {
-      std::cout<<"Team::Attach"<<std::endl;
- attached_custom_team = custom_team;
+  attached_custom_team = custom_team;
 }
 
