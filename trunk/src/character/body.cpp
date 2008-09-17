@@ -420,7 +420,7 @@ void Body::Build()
 	  y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
       }
   }
-  body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->test_bottom;
+  body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->GetTestBottom();
   body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front().member->spr->GetWidth() / 2.0;
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front().member->ApplyMovement(body_mvt, skel_lst);
@@ -629,16 +629,16 @@ void Body::GetTestRect(uint &l, uint&r, uint &t, uint &b) const
 {
   if(direction == DIRECTION_RIGHT)
   {
-    l = current_mvt->test_left;
-    r = current_mvt->test_right;
+    l = current_mvt->GetTestLeft();
+    r = current_mvt->GetTestRight();
   }
   else
   {
-    r = current_mvt->test_left;
-    l = current_mvt->test_right;
+    r = current_mvt->GetTestLeft();
+    l = current_mvt->GetTestRight();
   }
-  t = current_mvt->test_top;
-  b = current_mvt->test_bottom;
+  t = current_mvt->GetTestTop();
+  b = current_mvt->GetTestBottom();
 }
 
 void Body::StartWalk()
