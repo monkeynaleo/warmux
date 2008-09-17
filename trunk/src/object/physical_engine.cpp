@@ -23,6 +23,7 @@
 #include "object/force.h"
 #include "object/physical_engine.h"
 #include "object/physical_obj.h"
+#include "tool/math_tools.h"
 #include <iostream>
 
 const double PIXEL_PER_METER = 20;
@@ -69,17 +70,14 @@ void PhysicalEngine::RemoveObject(Physics *obj)
 {
   objects_list.erase(obj->GetBody());
   physic_world->DestroyBody(obj->GetBody());
-
 }
 
 
 void PhysicalEngine::Step()
 {
-
   float32 timeStep = 1.0f / frame_rate;
 
-
- if ((Time::GetInstance()->Read()-last_step_time) < timeStep)
+  if ((Time::GetInstance()->Read()-last_step_time) < (unsigned)lround(timeStep))
     {
       return;
     }
@@ -145,7 +143,7 @@ void PhysicalEngine::Step()
 
 
 
-  last_step_time = last_step_time-timeStep;
+  last_step_time = last_step_time-lround(timeStep);
 }
 
 void PhysicalEngine::ClearContact()
