@@ -139,3 +139,8 @@ bool Movement::IsAlwaysMoving() const
 {
   return always_moving;
 }
+
+const std::vector<Movement::member_def> & Movement::GetFrames() const
+{
+  return frames;
+}
