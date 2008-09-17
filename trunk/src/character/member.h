@@ -45,6 +45,7 @@ private:
   double angle_rad;
   float alpha;
   bool go_through_ground;
+  std::map<std::string, v_attached> attached_members;
 
 protected:
   std::string name;
@@ -54,8 +55,6 @@ protected:
 
 public:
   Sprite* spr;
-
-  std::map<std::string, v_attached> attached_members;
 
   Point2f pos;
   Point2f scale;
@@ -79,6 +78,8 @@ public:
   const std::string& GetType() const;
 
   bool IsGoingThroughGround() const;
+
+  const std::map<std::string, v_attached> & GetAttachedMembers() const;
 };
 
 class WeaponMember : public Member

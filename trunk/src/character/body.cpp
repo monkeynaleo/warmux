@@ -478,9 +478,9 @@ void Body::AddChildMembers(Member* parent)
 {
   // Add child members of the parent member to the skeleton
   // and continue recursively with child members
-  for (std::map<std::string, v_attached>::iterator child = parent->attached_members.begin();
-      child != parent->attached_members.end();
-      child++)
+  for (std::map<std::string, v_attached>::const_iterator child = parent->GetAttachedMembers().begin();
+       child != parent->GetAttachedMembers().end();
+       child++)
   {
     // Find if the current clothe uses this member:
     for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
