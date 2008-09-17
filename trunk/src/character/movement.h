@@ -64,10 +64,11 @@ private:
   typedef std::map<std::string, class member_mvt> member_def; // Describe the position of each member for a given frame
   std::string type;
   uint speed;
+  bool always_moving;
+
 public:
   std::vector<member_def> frames;
   uint test_left, test_right, test_top, test_bottom;
-  bool always_moving;
   enum
   {
     LOOP,
@@ -81,6 +82,8 @@ public:
   void SetType(const std::string& type);
   const std::string& GetType() const;
   uint GetSpeed() const;
+
+  bool IsAlwaysMoving() const;
 };
 
 #endif //MEMBER_H
