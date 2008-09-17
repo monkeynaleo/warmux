@@ -391,7 +391,7 @@ void Body::Build()
 	}
     }
   need_rebuild |= (last_frame != current_frame);
-  need_rebuild |= current_mvt->always_moving;
+  need_rebuild |= current_mvt->IsAlwaysMoving();
 
   if (!need_rebuild)
     return;

@@ -134,3 +134,8 @@ uint Movement::GetSpeed() const
 {
   return speed;
 }
+
+bool Movement::IsAlwaysMoving() const
+{
+  return always_moving;
+}
