@@ -48,13 +48,14 @@ private:
   std::map<std::string, v_attached> attached_members;
 
 protected:
+  Sprite* spr;
+
   std::string name;
   std::string type;
 
   Point2f anchor;
 
 public:
-  Sprite* spr;
 
   Point2f pos;
   Point2f scale;
@@ -70,6 +71,8 @@ public:
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(const member_mvt& mvt, std::vector<class c_junction>& skel_lst);
   void SetAngle(const double &angle);
+
+  const Sprite& GetSprite() const;
 
   const Point2i GetPos() const;
   const Point2i GetAnchorPos() const;

@@ -38,10 +38,10 @@ Member::Member(const xmlNode* xml, const Profile* res):
   alpha(0),
   go_through_ground(false),
   attached_members(),
+  spr(NULL),
   name(""),
   type(""),
   anchor(0,0),
-  spr(NULL),
   pos(0,0),
   scale(0,0)
 {
@@ -128,10 +128,10 @@ Member::Member(const Member& m):
   alpha(m.alpha),
   go_through_ground(m.go_through_ground),
   attached_members(),
+  spr(new Sprite(*m.spr)),
   name(m.name),
   type(m.type),
   anchor(m.anchor),
-  spr(new Sprite(*m.spr)),
   pos(m.pos),
   scale(m.scale)
 {
@@ -287,6 +287,11 @@ void Member::ResetMovement()
 void Member::SetAngle(const double &angle)
 {
   angle_rad = angle;
+}
+
+const Sprite& Member::GetSprite() const
+{
+  return *spr;
 }
 
 const Point2i Member::GetPos() const
