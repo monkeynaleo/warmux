@@ -312,16 +312,11 @@ void Camera::Refresh(){
     AutoCrop();
 }
 
-void Camera::FollowObject(const PhysicalObj *obj, bool follow,
-			  bool _in_advance)
+void Camera::FollowObject(const PhysicalObj */*obj*/, bool /*follow*/,
+			  bool /*_in_advance*/)
 {
-  MSG_DEBUG( "camera.tracking", "Following object %s",
-                                 obj->GetName().c_str());
-if(follow && _in_advance)
-{
-
-}
-
+  /*MSG_DEBUG( "camera.tracking", "Following object %s",
+    obj->GetName().c_str());*/
  // Mouse::GetInstance()->Hide();
  // if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
  //   auto_crop = follow;
