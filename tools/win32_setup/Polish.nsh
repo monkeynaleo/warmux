@@ -15,13 +15,13 @@
 !define WORMUX_UNINST_SC_DESC   "Umieœæ skrót do dezinstalacji Wormuksa w menu start"
 !define WORMUX_SHORCUTS_TITLE   "Instalacja skrótów"
 !define WORMUX_REMOVE_TITLE     "Odinstaluj poprzedni¹ wersjê"
-!define WORMUX_MANUAL_UNINST    "No uninstaller exe found, please uninstall manually"
+!define WORMUX_MANUAL_UNINST    "Dezinstalator nieodnalezion, prosimy odinstalowaæ rêcznie"
 
 !define WORMUX_CONFIG_SC_DESC   "Skrót do folderu konfiguracji u¿ytkownika"
 !define WORMUX_PDF_SC_DESC      "Zainstaluj podrêczniki w formacie PDF"
 
-!define WORMUX_REM_GAME_DESC    "Remove all installed files"
-!define WORMUX_REM_CFG_DESC     "Remove the configuration file and only it"
-!define WORMUX_REM_ALL_CFG_DESC "Remove Wormux configuration folder"
+!define WORMUX_REM_GAME_DESC    "Usuñ wszystkie zainstalowane pliki"
+!define WORMUX_REM_CFG_DESC     "Usuñ wy³¹cznie plik konfiguracyjny"
+!define WORMUX_REM_ALL_CFG_DESC "Usuñ katalog konfiguracji Wormuksa"
 
 !define WORMUX_VISIT            "OdwiedŸ stronê WWW projektu Wormux"
