@@ -264,6 +264,14 @@
 				RelativePath="..\..\lib\box2d\src\Common\b2StackAllocator.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\lib\box2d\src\Common\Fixed.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lib\box2d\src\Common\jtypes.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Dynamics"
