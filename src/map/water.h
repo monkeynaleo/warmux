@@ -40,6 +40,7 @@ public:
     WATER,
     LAVA,
     RADIOACTIVE,
+    DIRTY,
     MAX_WATER_TYPE
   } Water_type;
 
