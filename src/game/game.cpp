@@ -42,7 +42,6 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
-#include "map/wind.h"
 #include "menu/pause_menu.h"
 #include "menu/results_menu.h"
 #include "network/network.h"
