@@ -1,0 +1,67 @@
+/******************************************************************************
+ *  Wormux is a convivial mass murder game.
+ *  Copyright (C) 2001-2008 Wormux Team.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+ ******************************************************************************
+ * Physical Shape
+ *****************************************************************************/
+
+#ifndef PHYSICAL_SHAPE_H
+#define PHYSICAL_SHAPE_H
+
+#include "tool/point.h"
+#include <vector>
+
+#include <Box2D.h>
+
+class PhysicalShape
+{
+    public:
+      PhysicalShape(b2Body *body);
+      ~PhysicalShape();
+      virtual void Generate() = 0;
+      void SetFilter(b2FilterData filter);
+      void SetMass(int mass);
+    protected:
+      b2FilterData m_filter;
+      b2Body *m_body;
+      b2Shape *m_shape;
+      int m_mass;
+};
+
+
+class PhysicalPolygone:public PhysicalShape
+{
+    public:
+    PhysicalPolygone(b2Body *body);
+    void AddPoint(Point2d point);
+    virtual void Generate();
+    protected:
+    std::vector<Point2d> m_point_list;
+};
+
+class PhysicalRectangle:public PhysicalPolygone
+{
+    public:
+    PhysicalRectangle(b2Body *body,double width, double height);
+      virtual void Generate();
+    protected:
+    double m_width;
+    double m_height;
+};
+
+
+ #endif

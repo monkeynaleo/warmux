@@ -135,6 +135,11 @@ void PhysicalEngine::Step()
 
   }
 
+  for(unsigned i = 0;i<persist_contact_list.size();i++){
+     // std::cout<<"Pesist"<<std::endl;
+  }
+
+
 
 
 
