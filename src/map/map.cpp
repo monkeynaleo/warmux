@@ -71,7 +71,7 @@ void Map::Reset()
   sky.Reset();
   ground.Reset();
   water.Reset();
-  wind.Reset();
+  Wind::GetRef().Reset();
 
   if (author_info1)
     delete author_info1;
@@ -89,7 +89,7 @@ void Map::Reset()
 void Map::Refresh()
 {
   water.Refresh();
-  wind.Refresh();
+  Wind::GetRef().Refresh();
 }
 
 void Map::FreeMem()
@@ -163,7 +163,9 @@ void Map::DrawSky(bool redraw_all)
 }
 
 void Map::DrawWater()
-{ water.Draw(); }
+{
+  water.Draw();
+}
 
 void Map::Draw(bool redraw_all)
 {
@@ -171,7 +173,7 @@ void Map::Draw(bool redraw_all)
   to_redraw_particles->clear();
   to_redraw = to_redraw_particles;
 
-  wind.DrawParticles();
+  Wind::GetRef().DrawParticles();
   to_redraw = tmp;
 
 //  Done from DrawSky
