@@ -14,7 +14,7 @@
 
 
 	<name>Catacombes</name>
-	<water>1</water>
+	<water>water</water>
 	<nb_mine>7</nb_mine>
 	<is_open>0</is_open>
 </resources>
