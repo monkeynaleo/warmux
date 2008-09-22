@@ -56,23 +56,27 @@ private:
   Surface bottom;
   Surface wpattern;
   Water_type water_type;
-  std::string water_name;
+
+  void Init();
+
 
 public:
   Water() : type_color(NULL) { }
   ~Water();
-  void Init();
   void Reset();
   void Free();
   void Refresh();
   void Draw();
-  bool IsActive() const { return water_type != NO_WATER; }
+
+  bool IsActive() const;
   int GetHeight(int x) const;
-  uint GetSelfHeight() const { return water_height+(pattern_height/2); }
-  static Water_type GetWaterType(std::string & water);
-  const Color* GetColor() { return type_color; }
+  uint GetSelfHeight() const;
+  const Color* GetColor() const;
 
   void Splash(const Point2i& pos) const;
   void Smoke(const Point2i& pos) const;
+
+  static Water_type GetWaterType(const std::string & water);
+  static const std::string GetWaterName(const Water_type water_type);
 };
 #endif
