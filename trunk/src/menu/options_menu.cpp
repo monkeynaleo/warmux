@@ -355,7 +355,8 @@ void OptionMenu::SaveOptions()
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   // bug #11826 : Segmentation fault while exiting the menu.
   if(!Game::GetInstance()->IsGameFinished())
-    wind.Reset();
+    Wind::GetRef().Reset();
+
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
