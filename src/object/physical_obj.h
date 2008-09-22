@@ -121,16 +121,9 @@ public:
 
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
-  const Rectanglei GetTestRect() const
-  {
-    int width = 1 - m_test_right - m_test_left;
-    int height = 1 - m_test_bottom - m_test_top;
-    width = (width == 0 ? 1 : width);
-    height = (height == 0 ? 1 : height);
-    return Rectanglei(GetX() + m_test_left, GetY() + m_test_top, width, height);
-  }
-  int GetTestWidth() const { return 1 -m_test_left -m_test_right; };
-  int GetTestHeight() const { return 1 -m_test_top -m_test_bottom; };
+  const Rectanglei GetTestRect() const;
+  int GetTestWidth() const;
+  int GetTestHeight() const;
 
   //----------- Access to datas (read only) ----------
   virtual const std::string &GetName() const { return m_name; }

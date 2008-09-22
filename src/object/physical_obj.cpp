@@ -132,6 +132,22 @@ double PhysicalObj::GetYdouble() const { return round(GetPhysY() * PIXEL_PER_MET
 int PhysicalObj::GetX() const { return (int)GetXdouble(); };
 int PhysicalObj::GetY() const { return (int)GetYdouble(); };
 
+const Rectanglei PhysicalObj::GetTestRect() const
+{
+  int width = m_width - m_test_right - m_test_left;
+  int height = m_height - m_test_bottom - m_test_top;
+  return Rectanglei(GetX() + m_test_left, GetY() + m_test_top, width, height);
+}
+
+int PhysicalObj::GetTestWidth() const
+{
+  return m_width - m_test_left - m_test_right;
+}
+
+int PhysicalObj::GetTestHeight() const
+{
+  return m_height - m_test_top - m_test_bottom;
+}
 
 void PhysicalObj::StoreValue(Action *a)
 {
