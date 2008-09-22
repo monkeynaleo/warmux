@@ -527,5 +527,10 @@ double Physics::GetAngle() const
    return -m_body->GetAngle();
  }
 
+void Physics::SetAngle(double angle)
+{
+  m_body->SetXForm(m_body->GetPosition(), -angle/180.0f * b2_pi);
+
+}
 
 void Physics::SignalRebound() {}

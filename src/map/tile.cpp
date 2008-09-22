@@ -295,7 +295,7 @@ void Tile::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, con
 #endif
 Point2d offset = Point2d((i.x) * CELL_SIZE.x,(i.y+1) * CELL_SIZE.y+20) ;
 //Point2d offset = i* CELL_SIZE ;
-	t->InitShape(1,offset);
+	t->InitShape(2,offset);
 	item.push_back(t);
       }
     }

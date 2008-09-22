@@ -139,7 +139,7 @@ public:
   // Set initial speed.
   void SetSpeedXY (Point2d vector);
   void SetSpeed (double norm, double angle);
-
+  void SetAngle(double angle);
   // Add a initial speed to the current speed.
   void AddSpeedXY (Point2d vector);
   void AddSpeed (double norm, double angle);

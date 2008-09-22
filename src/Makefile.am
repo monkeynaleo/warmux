@@ -134,6 +134,7 @@ wormux_SOURCES = \
         object/objects_list.cpp object/objects_list.h \
 		object/physical_engine.cpp object/physical_engine.h \
         object/physical_obj.cpp object/physical_obj.h \
+        object/physical_shape.cpp object/physical_shape.h \
         object/physics.cpp object/physics.h \
         particles/body_member.cpp particles/body_member.h \
         particles/bullet.cpp particles/bullet.h \
