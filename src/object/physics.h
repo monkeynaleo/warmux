@@ -96,14 +96,12 @@ public:
 
   // Set/Get position
   void SetPhysXY(double x, double y);
-  void SetPhysXY(const Point2d &position) { SetPhysXY(position.x, position.y); };
+  void SetPhysXY(const Point2d &position);
 
   b2Body *GetBody() { return m_body;};
-  //double GetPhysX() const { return m_pos_x.x0; };
-  double GetPhysX() const { return m_body->GetPosition().x; };
-  //double GetPhysY() const { return m_pos_y.x0; };
-  double GetPhysY() const { return m_body->GetPosition().y; };
-  Point2d GetPos() const { return Point2d( m_body->GetPosition().x,m_body->GetPosition().y); };
+  double GetPhysX() const;
+  double GetPhysY() const;
+  Point2d GetPos() const;
 
   // Set size
   void SetMass(double mass);
@@ -140,27 +138,27 @@ public:
 
   // Set initial speed.
   void SetSpeedXY (Point2d vector);
-  void SetSpeed (double norm, double angle) { SetSpeedXY(Point2d::FromPolarCoordinates(norm, angle)); };
+  void SetSpeed (double norm, double angle);
 
   // Add a initial speed to the current speed.
   void AddSpeedXY (Point2d vector);
-  void AddSpeed (double norm, double angle) { AddSpeedXY(Point2d::FromPolarCoordinates(norm, angle)); };
+  void AddSpeed (double norm, double angle);
 
   // Get current object speed
   void GetSpeed (double &norm, double &angle) const;
-  Point2d GetSpeedXY () const { return (!IsMoving()) ? Point2d(0.0, 0.0) : Point2d(m_body->GetLinearVelocity().x,m_body->GetLinearVelocity().y); };
-  Point2d GetSpeed() const { return GetSpeedXY(); };
-  double GetAngularSpeed() const { return m_body->GetAngularVelocity(); };
+  Point2d GetSpeedXY () const;
+  Point2d GetSpeed() const;
+  double GetAngularSpeed() const;
   double GetAngle() const;
-  double GetSpeedAngle() const { return GetSpeedXY().ComputeAngle(); };
+  double GetSpeedAngle() const;
 
 
   // Add new strength
-  unsigned AddExternForceXY (const Point2d& vector);
-  unsigned AddExternForce (double norm, double angle) { return AddExternForceXY(Point2d::FromPolarCoordinates(norm, angle)); };
+  uint AddExternForceXY (const Point2d& vector);
+  uint AddExternForce (double norm, double angle);
   void RemoveExternForce(unsigned force_index);
   void ImpulseXY(const Point2d& vector);
-  void Impulse(double norm, double angle){ ImpulseXY(Point2d::FromPolarCoordinates(norm, angle)); };
+  void Impulse(double norm, double angle);
 
 
   //Point2d GetExternForce() const { return m_extern_force; };

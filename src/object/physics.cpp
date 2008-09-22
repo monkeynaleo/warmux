@@ -81,6 +81,21 @@ Physics::~Physics()
 //--                         Class Parameters SET/GET                      --//
 //---------------------------------------------------------------------------//
 
+double Physics::GetPhysX() const
+{
+  return m_body->GetPosition().x;
+}
+
+double Physics::GetPhysY() const
+{
+  return m_body->GetPosition().y;
+}
+
+Point2d Physics::GetPos() const
+{
+  return Point2d( m_body->GetPosition().x,m_body->GetPosition().y);
+}
+
 void Physics::SetPhysXY(double x, double y)
 {
   /* if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
@@ -90,6 +105,11 @@ void Physics::SetPhysXY(double x, double y)
 
   /*UpdateTimeOfLastMove();
     }*/
+}
+
+void Physics::SetPhysXY(const Point2d &position)
+{
+  SetPhysXY(position.x, position.y);
 }
 
 // Set the air resist factor
@@ -108,6 +128,11 @@ void Physics::SetSpeedXY (Point2d vector)
   }
 }
 
+void Physics::SetSpeed (double norm, double angle)
+{
+  SetSpeedXY(Point2d::FromPolarCoordinates(norm, angle));
+}
+
 void Physics::AddSpeedXY (Point2d vector)
 {
   if (EqualsZero(vector.x)) vector.x = 0;
@@ -122,6 +147,11 @@ void Physics::AddSpeedXY (Point2d vector)
     StartMoving();
     m_body->WakeUp();
   }
+}
+
+void Physics::AddSpeed(double norm, double angle)
+{
+  AddSpeedXY(Point2d::FromPolarCoordinates(norm, angle));
 }
 
 void Physics::GetSpeed(double &norm, double &angle) const
@@ -158,6 +188,26 @@ void Physics::GetSpeed(double &norm, double &angle) const
     ASSERT(false);
     break ;
   }
+}
+
+Point2d Physics::GetSpeedXY () const
+{
+  return (!IsMoving()) ? Point2d(0.0, 0.0) : Point2d(m_body->GetLinearVelocity().x,m_body->GetLinearVelocity().y);
+}
+
+Point2d Physics::GetSpeed() const
+{
+  return GetSpeedXY();
+}
+
+double Physics::GetAngularSpeed() const
+{
+  return m_body->GetAngularVelocity();
+}
+
+double Physics::GetSpeedAngle() const
+{
+  return GetSpeedXY().ComputeAngle();
 }
 
 b2BodyDef *Physics::GetBodyDef()
@@ -224,7 +274,7 @@ void Physics::SetMass(double mass)
   m_body->SetMass(&massData);
 }
 
-unsigned Physics::AddExternForceXY (const Point2d& vector)
+uint Physics::AddExternForceXY (const Point2d& vector)
 {
 
   m_extern_force_map[m_extern_force_index] =  new Force(this, GetPos(), vector, false) ;
@@ -245,6 +295,11 @@ unsigned Physics::AddExternForceXY (const Point2d& vector)
     return m_extern_force_index-1;
 }
 
+uint Physics::AddExternForce (double norm, double angle)
+{
+  return AddExternForceXY(Point2d::FromPolarCoordinates(norm, angle));
+}
+
 void Physics::RemoveExternForce(unsigned index)
 {
   if(index!=0){
@@ -258,6 +313,11 @@ void Physics::ImpulseXY(const Point2d& vector)
 {
   std::cout<<"Impulse x="<<vector.x<<" y ="<<vector.y<<std::endl;
     m_body->ApplyImpulse(b2Vec2(vector.x,vector.y),b2Vec2(GetPhysX(),GetPhysY()));
+}
+
+void Physics::Impulse(double norm, double angle)
+{
+  ImpulseXY(Point2d::FromPolarCoordinates(norm, angle));
 }
 
 void Physics::SetBullet(bool is_bullet)
