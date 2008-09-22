@@ -35,11 +35,11 @@ typedef struct _xmlNode xmlNode;
 
 class WindParticle : public PhysicalObj
 {
+private:
   /* You should not need this */
   WindParticle(const WindParticle&);
   const WindParticle& operator=(const WindParticle&);
 
-public:
   Sprite *sprite;
   Sprite *flipped;
 
@@ -52,22 +52,23 @@ public:
 
 class Wind
 {
+private:
   long m_val, m_nv_val;
   uint m_last_move;
   uint m_last_part_mvt;
 
-private:
   std::list<WindParticle *> particles;
   typedef std::list<WindParticle *>::iterator iterator;
   void RemoveAllParticles();
   void RandomizeParticlesPos(); // Put particles randomly on the screen
 
 public:
-  Wind() { m_val = m_nv_val = 0; };
-  ~Wind() { RemoveAllParticles(); };
-  double GetStrength() const { return m_nv_val * WIND_STRENGTH / 100.0; };
+  Wind();
+  ~Wind();
+  double GetStrength() const;
   void ChooseRandomVal() const;
-  void SetVal (long val) { m_nv_val = val; };
+
+  void SetVal(long val);
   void Refresh();
   void Reset();
   void DrawParticles();
