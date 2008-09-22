@@ -33,7 +33,6 @@
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "map/wind.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"

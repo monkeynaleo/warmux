@@ -36,6 +36,8 @@ struct SDL_keysym;
 
 class Widget : public Rectanglei, public Container
 {
+private:
+  bool can_get_focus;
   bool has_focus;
   bool visible;
   bool is_highlighted;
