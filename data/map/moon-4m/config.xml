@@ -12,7 +12,7 @@
   <surface name="preview" file="preview.jpg" />
 
   <name>Moon-4M</name>
-  <water>0</water>
+  <water>no</water>
   <nb_mine>10</nb_mine>
   <is_open>1</is_open>
   <!-- pad is given in pixel count. -->
