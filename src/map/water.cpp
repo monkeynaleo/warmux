@@ -62,7 +62,11 @@ Water::~Water()
  */
 void Water::Init()
 {
+  if (water_type == NO_WATER)
+    return;
+
   std::string image = "gfx/";
+  std::string water_name = GetWaterName(water_type);
   image += water_name;
 
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
@@ -103,27 +107,9 @@ void Water::Init()
   resource_manager.UnLoadXMLProfile(res);
 }
 
-Water::Water_type Water::GetWaterType(std::string & water)
-{
-  if(water == "water") {
-    return WATER;
-  } else if(water == "lava") {
-    return LAVA;
-  } else if(water == "radioactive") {
-    return RADIOACTIVE;
-  } else { // Old water definition (aka 0 = no water, 1 = water, 2 = lava etc)
-    int water_t;
-    if(str2int(water, water_t) && water_t < MAX_WATER_TYPE) {
-      return (Water_type)water_t;
-    }
-  }
-  return NO_WATER;
-}
-
 void Water::Reset()
 {
-  water_name = ActiveMap()->GetWaterName();
-  water_type = GetWaterType(water_name);
+  water_type = ActiveMap()->GetWaterType();
   if (type_color)
     delete type_color;
   type_color = NULL;
@@ -273,6 +259,11 @@ void Water::Draw()
   }
 }
 
+bool Water::IsActive() const
+{
+  return water_type != NO_WATER;
+}
+
 int Water::GetHeight(int x) const
 {
   if (IsActive())
@@ -283,9 +274,21 @@ int Water::GetHeight(int x) const
     return GetWorld().GetHeight();
 }
 
+uint Water::GetSelfHeight() const
+{
+  return water_height+(pattern_height/2);
+}
+
+const Color* Water::GetColor() const
+{
+  return type_color;
+}
+
 void Water::Splash(const Point2i& pos) const
 {
   switch (water_type) {
+  case NO_WATER:
+    break;
   case WATER:
     ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_WATER, true, -1, 20);
     break;
@@ -295,7 +298,8 @@ void Water::Splash(const Point2i& pos) const
   case RADIOACTIVE:
     ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_RADIOACTIVE, true, -1, 20);
     break;
-  default:
+  case MAX_WATER_TYPE:
+    ASSERT(false);
     break;
   }
 }
@@ -305,3 +309,44 @@ void Water::Smoke(const Point2i& pos) const
   ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 2, particle_SMOKE, true, 0, 1);
 }
 
+// =================== static methods
+
+Water::Water_type Water::GetWaterType(const std::string & water)
+{
+  if (water == "no") {
+    return NO_WATER;
+  } else if (water == "water") {
+    return WATER;
+  } else if (water == "lava") {
+    return LAVA;
+  } else if (water == "radioactive") {
+    return RADIOACTIVE;
+  } else { // Unsupported water type
+    fprintf(stderr, "WARNING: map using invalid water type %s: valid water types are no, water, lava, radioactive\n",
+	    water.c_str());
+  }
+  return NO_WATER;
+}
+
+const std::string Water::GetWaterName(const Water::Water_type water_type)
+{
+  switch (water_type) {
+  case NO_WATER:
+    return "no";
+    break;
+  case WATER:
+    return "water";
+    break;
+  case LAVA:
+    return "lava";
+    break;
+  case RADIOACTIVE:
+    return "radioactive";
+    break;
+  case MAX_WATER_TYPE:
+    ASSERT(false);
+    break;
+  }
+  ASSERT(false);
+  return "";
+}
