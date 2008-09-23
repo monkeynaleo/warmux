@@ -36,7 +36,7 @@ public:
 
   const b2FilterData& GetFilter() const;
   void SetFilter(b2FilterData filter);
-
+  void SetFriction(double friction);
   void SetMass(int mass);
 
 protected:
@@ -44,6 +44,7 @@ protected:
   b2Body *m_body;
   b2Shape *m_shape;
   int m_mass;
+  double m_friction;
 };
 
 
@@ -52,6 +53,7 @@ class PhysicalPolygone : public PhysicalShape
 public:
   PhysicalPolygone(b2Body *body);
   void AddPoint(Point2d point);
+  void Clear();
   virtual void Generate();
 protected:
   std::vector<Point2d> m_point_list;

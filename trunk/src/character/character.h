@@ -109,6 +109,8 @@ public:
 
   void SignalExplosion();
 
+  void SetSize(const Point2i &newSize);
+
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);
   void SetEnergy(int new_energy);

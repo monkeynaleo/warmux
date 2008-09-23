@@ -36,6 +36,7 @@
 #include "map/camera.h"
 #include "network/network.h"
 #include "network/randomsync.h"
+#include "object/physical_shape.h"
 #include "particles/particle.h"
 #include "particles/fading_text.h"
 #include "sound/jukebox.h"
@@ -973,6 +974,41 @@ void Character::SetCustomName(const std::string name)
     character_name = name;
   }
 
+
+}
+
+void Character::SetSize(const Point2i &newSize)
+{
+
+PhysicalObj::SetSize(newSize);
+ //Physical shape
+  PhysicalPolygone *shape = new PhysicalPolygone(m_body);
+
+ shape->AddPoint(Point2d(GetPhysX() , GetPhysY()));
+ shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY()));
+ shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY() + 3*m_phys_height/4));
+ shape->AddPoint(Point2d(GetPhysX() + 2*m_phys_width/3, GetPhysY() + m_phys_height));
+ shape->AddPoint(Point2d(GetPhysX() + 1*m_phys_width/3, GetPhysY() + m_phys_height));
+ shape->AddPoint(Point2d(GetPhysX() , GetPhysY() + 3*m_phys_height/4));
+ shape->SetMass(GetMass());
+
+  //Physical shape
+
+  b2FilterData filter_data;
+  filter_data.categoryBits = 0x0001;
+  filter_data.maskBits = 0x0000;
+  if (m_shape != NULL) {
+    filter_data = m_shape->GetFilter();
+  }
+  shape->SetFriction(1.2f);
+  shape->SetFilter(filter_data);
+  shape->Generate();
+
+  if (m_shape)
+    delete m_shape;
+
+  m_shape = shape;
+  shape->Generate();
 
 }
 // ###################################################################
