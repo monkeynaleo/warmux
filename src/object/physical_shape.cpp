@@ -21,38 +21,39 @@
 
 #include "object/physical_shape.h"
 
-
-
-PhysicalShape::PhysicalShape(b2Body *body)
+PhysicalShape::PhysicalShape(b2Body *body) :
+  m_body(body),
+  m_shape(NULL),
+  m_mass(-1)
 {
-  m_body = body;
-  m_shape = NULL;
-  m_mass = -1;
 }
 
 PhysicalShape::~PhysicalShape()
 {
-  if(m_shape){
+  if (m_shape) {
     m_body->DestroyShape(m_shape);
   }
 }
 
-void PhysicalShape::SetFilter(b2FilterData filter){
- m_filter = filter;
+const b2FilterData& PhysicalShape::GetFilter() const
+{
+  return m_filter;
+}
 
+void PhysicalShape::SetFilter(b2FilterData filter)
+{
+  m_filter = filter;
 }
 
 void PhysicalShape::SetMass(int mass)
 {
- m_mass = mass;
+  m_mass = mass;
 }
-
-
 
 /////////////////////////////////
 // PhysicalPolygone
 
-PhysicalPolygone::PhysicalPolygone(b2Body *body):PhysicalShape(body)
+PhysicalPolygone::PhysicalPolygone(b2Body *body) : PhysicalShape(body)
 {
 
 }
@@ -64,16 +65,16 @@ void PhysicalPolygone::AddPoint(Point2d point)
 
 void PhysicalPolygone::Generate()
 {
-  if(m_shape){
+  if (m_shape) {
     m_body->DestroyShape(m_shape);
+    m_shape = NULL;
   }
 
   b2PolygonDef shapeDef;
   shapeDef.vertexCount = m_point_list.size();
 
-
-  for(unsigned i = 0; i<m_point_list.size();i++){
-   shapeDef.vertices[i].Set(m_point_list[i].x ,m_point_list[i].y);
+  for (unsigned i = 0; i<m_point_list.size();i++) {
+    shapeDef.vertices[i].Set(m_point_list[i].x, m_point_list[i].y);
   }
 
   shapeDef.density = 1.0f;
@@ -90,13 +91,12 @@ void PhysicalPolygone::Generate()
   massData.I = 0.0f;
 
   m_body->SetMass(&massData);
-
 }
 
 /////////////////////////////////
 // PhysicalRectangle
 
-PhysicalRectangle::PhysicalRectangle(b2Body *body, double width, double height):PhysicalPolygone(body)
+PhysicalRectangle::PhysicalRectangle(b2Body *body, double width, double height) : PhysicalPolygone(body)
 {
   m_width = width;
   m_height = height;

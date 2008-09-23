@@ -29,38 +29,42 @@
 
 class PhysicalShape
 {
-    public:
-      PhysicalShape(b2Body *body);
-      ~PhysicalShape();
-      virtual void Generate() = 0;
-      void SetFilter(b2FilterData filter);
-      void SetMass(int mass);
-    protected:
-      b2FilterData m_filter;
-      b2Body *m_body;
-      b2Shape *m_shape;
-      int m_mass;
+public:
+  PhysicalShape(b2Body *body);
+  virtual ~PhysicalShape();
+  virtual void Generate() = 0;
+
+  const b2FilterData& GetFilter() const;
+  void SetFilter(b2FilterData filter);
+
+  void SetMass(int mass);
+
+protected:
+  b2FilterData m_filter;
+  b2Body *m_body;
+  b2Shape *m_shape;
+  int m_mass;
 };
 
 
-class PhysicalPolygone:public PhysicalShape
+class PhysicalPolygone : public PhysicalShape
 {
-    public:
-    PhysicalPolygone(b2Body *body);
-    void AddPoint(Point2d point);
-    virtual void Generate();
-    protected:
-    std::vector<Point2d> m_point_list;
+public:
+  PhysicalPolygone(b2Body *body);
+  void AddPoint(Point2d point);
+  virtual void Generate();
+protected:
+  std::vector<Point2d> m_point_list;
 };
 
-class PhysicalRectangle:public PhysicalPolygone
+class PhysicalRectangle : public PhysicalPolygone
 {
-    public:
-    PhysicalRectangle(b2Body *body,double width, double height);
-      virtual void Generate();
-    protected:
-    double m_width;
-    double m_height;
+public:
+  PhysicalRectangle(b2Body *body, double width, double height);
+  virtual void Generate();
+protected:
+  double m_width;
+  double m_height;
 };
 
 
