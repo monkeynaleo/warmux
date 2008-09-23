@@ -159,12 +159,12 @@ public:
 
   bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
   // Relative to current position
-  bool IsInVacuum(const Point2i &offset, bool check_objects = true) const { return IsInVacuumXY(GetPosition() + offset, check_objects); };
+  bool IsInVacuum(const Point2i &offset, bool check_objects = true) const;
 //  PhysicalObj* CollidedObjectXY(const Point2i & position) const;
   // Relative to current position
  // PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const { return CollidedObjectXY(GetPosition() + offset); };
   bool FootsInVacuumXY(const Point2i & position) const;
-  bool FootsInVacuum() const { return FootsInVacuumXY(GetPosition()); };
+  bool FootsInVacuum() const;
 
   bool FootsOnFloor(int y) const;
 
@@ -173,7 +173,7 @@ public:
   // The object is outside of the world
   bool IsOutsideWorldXY(const Point2i& position) const;
   // Relative to current position
-  bool IsOutsideWorld(const Point2i &offset = Point2i(0,0)) const { return IsOutsideWorldXY( GetPosition() + offset ); };
+  bool IsOutsideWorld(const Point2i &offset = Point2i(0,0)) const;
 
   // Refresh datas
   virtual void Refresh() = 0;
