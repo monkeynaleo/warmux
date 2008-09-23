@@ -209,7 +209,7 @@ void TeamsList::RandomizeFirstPlayer()
 
 void TeamsList::UnloadGamingData()
 {
-  body_list.FreeMem();
+  BodyList::GetRef().FreeMem();
   iterator it=playing_list.begin(), end = playing_list.end();
 
   // Unload the data of all teams
