@@ -63,7 +63,7 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
 }
 
 PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config) :
-  m_goes_through_wall(false),
+  m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
   // No collision with this object until we have gone out of his collision rectangle
@@ -169,7 +169,7 @@ int PhysicalObj::GetTestHeight() const
 void PhysicalObj::StoreValue(Action *a)
 {
   Physics::StoreValue(a);
-  a->Push(m_goes_through_wall);
+  a->Push(m_collides_with_ground);
   a->Push(m_collides_with_characters);
   a->Push(m_collides_with_objects);
   a->Push((int)m_minimum_overlapse_time);
@@ -187,7 +187,7 @@ void PhysicalObj::StoreValue(Action *a)
 void PhysicalObj::GetValueFromAction(Action *a)
 {
   Physics::GetValueFromAction(a);
-  m_goes_through_wall        = !!a->PopInt();
+  m_collides_with_ground     = !!a->PopInt();
   m_collides_with_characters = !!a->PopInt();
   m_collides_with_objects    = !!a->PopInt();
   m_minimum_overlapse_time   = (uint)a->PopInt();
@@ -277,43 +277,40 @@ void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
 
 void PhysicalObj::UpdatePosition ()
 {
-
-   if( IsOutsideWorldXY( Point2i( GetX(),GetY()) ) )
-    {
-      Ghost();
-      SignalOutOfMap();
-    }
-
-  // No ghost allowed here !
-  if (IsGhost()) return;
-
-  if ( !m_goes_through_wall )
-  {
-
-  // object is not moving and has no reason to move
-  if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
-
-  // object is not moving BUT it should fall !
-  if ( !IsMoving() && FootsInVacuum() ) StartMoving();
+  if ( IsOutsideWorldXY( Point2i( GetX(),GetY()) )) {
+    Ghost();
+    SignalOutOfMap();
   }
 
-  if (IsGhost()) return;
+  // No ghost allowed here !
+  if (IsGhost())
+    return;
 
-  if(IsInWater())
-  {
-      SetCollisionModel(true,false,false);
+  if (m_collides_with_ground) {
+
+    // object is not moving and has no reason to move
+    if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
+
+    // object is not moving BUT it should fall !
+    if ( !IsMoving() && FootsInVacuum() ) StartMoving();
+  }
+
+  if (IsGhost())
+    return;
+
+  if (IsInWater()) {
+    SetCollisionModel(false,false,false);
   }
 
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
-  if ( !m_goes_through_wall )
-  {
+  if (m_collides_with_ground) {
 
-  if ( IsInWater() && m_alive != DROWNED && m_alive != DEAD) Drown();
-  else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
+    if ( IsInWater() && m_alive != DROWNED && m_alive != DEAD)
+      Drown();
+    else if ( !IsInWater() && m_alive == DROWNED )
+      GoOutOfWater();
   }
-
-
 }
 
 bool PhysicalObj::PutOutOfGround(double direction, double max_distance)
@@ -438,14 +435,14 @@ void PhysicalObj::SignalRebound()
     JukeBox::GetInstance()->Play("share", m_rebound_sound) ;
 }
 
-void PhysicalObj::SetCollisionModel(bool goes_through_wall,
+void PhysicalObj::SetCollisionModel(bool collides_with_ground,
                                     bool collides_with_characters,
                                     bool collides_with_objects)
 {
   // SetSize() must be called before
   ASSERT(m_shape != NULL);
 
-  m_goes_through_wall = goes_through_wall;
+  m_collides_with_ground = collides_with_ground;
   m_collides_with_characters = collides_with_characters;
   m_collides_with_objects = collides_with_objects;
 
@@ -456,11 +453,11 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
     data.maskBits |= 0x0001;
   }
 
-  if(m_collides_with_characters) {
+  if (m_collides_with_characters) {
     data.maskBits |= 0x0002;
   }
 
-  if(!m_goes_through_wall) {
+  if (m_collides_with_ground) {
     data.maskBits |= 0x0004;
   }
 
@@ -468,11 +465,11 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
   // Check boolean values
 #ifdef DEBUG
   if (m_collides_with_characters || m_collides_with_objects)
-    ASSERT(m_goes_through_wall == false);
+    ASSERT(m_collides_with_ground);
 
-  if (m_goes_through_wall) {
-    ASSERT(m_collides_with_characters == false);
-    ASSERT(m_collides_with_objects == false);
+  if (!m_collides_with_ground) {
+    ASSERT(!m_collides_with_characters);
+    ASSERT(!m_collides_with_objects);
   }
 #endif
 }

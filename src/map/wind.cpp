@@ -43,7 +43,7 @@ const uint bar_speed = 20;
 WindParticle::WindParticle(const std::string &xml_file, float scale) :
   PhysicalObj("wind", xml_file)
 {
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(false, false, false);
 
   // Physic constants
   double mass, wind_factor ;

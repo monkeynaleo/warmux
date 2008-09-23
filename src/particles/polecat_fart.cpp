@@ -32,7 +32,7 @@ PolecatFart::PolecatFart() :
   m_initial_time_to_live = 50;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 100;
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(false, false, false);
   is_active = true;
 
   image = ParticleEngine::GetSprite(POLECAT_FART_spr);

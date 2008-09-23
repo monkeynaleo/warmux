@@ -29,7 +29,7 @@ const uint living_time = 5000;
 WaterParticle::WaterParticle() :
   Particle("water_particle")
 {
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = false;
 

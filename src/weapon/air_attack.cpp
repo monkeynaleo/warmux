@@ -85,7 +85,7 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   PhysicalObj("air_attack_plane"),
   cfg(p_cfg)
 {
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(false, false, false);
 
   image = resource_manager.LoadSprite(weapons_res_profile, "air_attack_plane");
   SetSize(image->GetSize());

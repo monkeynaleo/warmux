@@ -53,7 +53,8 @@ const uint SPEED = 5; // meter / seconde
 // const uint SPEED_PARACHUTE = 170; // ms par image
 
 ObjBox::ObjBox(const std::string &name)
-  : PhysicalObj(name) {
+  : PhysicalObj(name)
+{
   m_allow_negative_y = true;
 
   parachute = true;
@@ -61,7 +62,7 @@ ObjBox::ObjBox(const std::string &name)
   m_energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
-  SetCollisionModel(false, false, true);
+  SetCollisionModel(true, false, true);
   std::cout<<"super called"<<std::endl;
 }
 

@@ -129,7 +129,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   /* body stuff */
   ASSERT(char_body);
   SetBody(char_body);
-  SetCollisionModel(false, true, true);
+  SetCollisionModel(true, true, true);
 
   ResetConstants();
   // Allow player to go outside of map by upper bound (bug #10420)
@@ -335,7 +335,7 @@ void Character::Die()
     body->SetRotation(0.0);
     SetClothe("dead");
     SetMovement("breathe");
-    SetCollisionModel(false, false, false);
+    SetCollisionModel(true, false, false);
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
