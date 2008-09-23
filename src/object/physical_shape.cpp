@@ -24,7 +24,8 @@
 PhysicalShape::PhysicalShape(b2Body *body) :
   m_body(body),
   m_shape(NULL),
-  m_mass(-1)
+  m_mass(-1),
+  m_friction(0.8f)
 {
 }
 
@@ -48,6 +49,11 @@ void PhysicalShape::SetFilter(b2FilterData filter)
 void PhysicalShape::SetMass(int mass)
 {
   m_mass = mass;
+}
+
+void PhysicalShape::SetFriction(double friction)
+{
+    m_friction = friction;
 }
 
 /////////////////////////////////
@@ -78,7 +84,7 @@ void PhysicalPolygone::Generate()
   }
 
   shapeDef.density = 1.0f;
-  shapeDef.friction = 0.8f;
+  shapeDef.friction = m_friction;
   shapeDef.restitution = 0.1f;
   shapeDef.filter.categoryBits = m_filter.categoryBits;
   shapeDef.filter.maskBits = m_filter.maskBits;
@@ -91,6 +97,13 @@ void PhysicalPolygone::Generate()
   massData.I = 0.0f;
 
   m_body->SetMass(&massData);
+}
+
+
+
+void PhysicalPolygone::Clear()
+{
+  m_point_list.clear();
 }
 
 /////////////////////////////////

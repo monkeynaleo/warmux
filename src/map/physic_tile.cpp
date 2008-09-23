@@ -77,7 +77,7 @@ void PhysicTile::Generate()
             rect.vertices[3].Set((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
             ((double(m_offset.y + m_size.y-1 + m_tile_offset.y))/ PIXEL_PER_METER));
 
-     rect.friction = 0.9f;
+     rect.friction = 1.0f;
      rect.restitution = 0.1f;
      rect.filter.categoryBits = 0x000B;
      rect.filter.maskBits = 0xFFFF;
@@ -307,7 +307,7 @@ std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
 		      index++;
       }
     }
-    rect.friction = 0.9f;
+    rect.friction = 1.0f;
     rect.restitution = 0.1f;
     rect.filter.categoryBits = 0x0004;
     rect.filter.maskBits = 0xFFFB;
