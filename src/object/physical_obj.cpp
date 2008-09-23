@@ -126,16 +126,34 @@ void PhysicalObj::SetXY(const Point2d &position)
 
 }
 
-double PhysicalObj::GetXdouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
-double PhysicalObj::GetYdouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
+double PhysicalObj::GetXdouble() const
+{
+  return round(GetPhysX() * PIXEL_PER_METER);
+}
 
-int PhysicalObj::GetX() const { return (int)GetXdouble(); };
-int PhysicalObj::GetY() const { return (int)GetYdouble(); };
+double PhysicalObj::GetYdouble() const
+{
+  return round(GetPhysY() * PIXEL_PER_METER);
+}
+
+int PhysicalObj::GetX() const
+{
+  return (int)GetXdouble();
+}
+
+int PhysicalObj::GetY() const
+{
+  return (int)GetYdouble();
+}
 
 const Rectanglei PhysicalObj::GetTestRect() const
 {
   int width = m_width - m_test_right - m_test_left;
   int height = m_height - m_test_bottom - m_test_top;
+  if (width < 1)
+    width = 1;
+  if (height < 1)
+    height = 1;
   return Rectanglei(GetX() + m_test_left, GetY() + m_test_top, width, height);
 }
 
@@ -236,9 +254,6 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
   m_test_right = right;
   m_test_top = top;
   m_test_bottom = bottom;
-
-
-
 }
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
@@ -566,11 +581,7 @@ void PhysicalObj::Ghost ()
   // The object became a gost
   StopMoving();
 
-  /*****************************************************************************/
-  /* TODO REMOVE THIS TEST AS SOON AS PHYSICAL ENGINE IS REPAIRED */
- // if (Game::GetInstance()->IsGameLaunched())
-    /*****************************************************************************/
-    SignalGhostState(was_dead);
+  SignalGhostState(was_dead);
 }
 
 void PhysicalObj::Drown()
@@ -681,16 +692,20 @@ void PhysicalObj::CheckRebound()
   m_rebound_position = GetPosition();
 }
 
-bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
+bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
+{
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
-  if( GetWorld().IsOutsideWorldXwidth(x, GetTestWidth()) )
+  if (GetWorld().IsOutsideWorldXwidth(x, GetTestWidth()))
     return true;
-  if( GetWorld().IsOutsideWorldYheight(y, GetTestHeight()) ){
-    if( m_allow_negative_y )
-      if( (Y_OBJET_MIN <= y) && (y + GetTestHeight() - 1 < 0) )
+
+  if (GetWorld().IsOutsideWorldYheight(y, GetTestHeight())) {
+    if (m_allow_negative_y &&
+	Y_OBJET_MIN <= y &&
+	y + GetTestHeight() - 1 < 0 )
 	return false;
+
     return true;
   }
   return false;
@@ -758,49 +773,42 @@ bool PhysicalObj::FootsOnFloor(int y) const
   return (y_max <= y);
 }
 
-bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
+bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool /*check_object*/) const
 {
-  if( IsOutsideWorldXY(position) )
+  if (IsOutsideWorldXY(position))
     return GetWorld().IsOpen();
 
-  if( FootsOnFloor(position.y - 1) )
+  if (FootsOnFloor(position.y - 1))
     return false;
 
-  //if( check_object && CollidedObjectXY(position) )
-  //return false;
+  // if (check_object && CollidedObjectXY(position))
+  //   return false;
 
-  if( check_object)
-    return false;
-
-  int width = 0 - m_test_right - m_test_left;
-  int height = 0 -m_test_bottom - m_test_top;
-  width = (width == 0 ? 1 : width);
-  height = (height == 0 ? 1 : height);
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-                  width, height);
+		  GetTestWidth(), GetTestHeight());
 
-  return GetWorld().RectIsInVacuum (rect);
+  return GetWorld().RectIsInVacuum(rect);
 }
 
 
 bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 {
-  if( IsOutsideWorldXY(position) ){
+  if (IsOutsideWorldXY(position)) {
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
     return GetWorld().IsOpen();
   }
 
-  if( FootsOnFloor(position.y) ){
+  if (FootsOnFloor(position.y)) {
     MSG_DEBUG("physical", "%s - physobj is on floor", m_name.c_str());
     return false;
   }
 
-  int y_test = position.y + 0 - m_test_bottom;
+  int y_test = position.y + m_height - m_test_bottom;
 
   Rectanglei rect( position.x + m_test_left, y_test,
-                   0 - m_test_right - m_test_left, 1);
+                   m_width - m_test_right - m_test_left, 1);
 
-  if( m_allow_negative_y && rect.GetPositionY() < 0){
+  if (m_allow_negative_y && rect.GetPositionY() < 0) {
     int b = rect.GetPositionY() + rect.GetSizeY();
 
     rect.SetPositionY( 0 );
