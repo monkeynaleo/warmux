@@ -227,6 +227,16 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
   CheckOverlapping();
 }
 
+const PhysicalObj* PhysicalObj::GetOverlappingObject() const
+{
+  return m_overlapping_object;
+}
+
+bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
+{
+  return m_overlapping_object == obj;
+}
+
 void PhysicalObj::CheckOverlapping()
 {
   if (m_overlapping_object == NULL)
@@ -892,6 +902,52 @@ void PhysicalObj::DirectFall()
     SetY(GetYdouble()+1.0);
 }
 
+bool PhysicalObj::IsImmobile() const
+{
+  bool r = IsSleeping()
+    || m_ignore_movements
+    || (!IsMoving() && !FootsInVacuum())
+    || IsGhost();
+
+  return r;
+}
+
+bool PhysicalObj::IsGhost() const
+{
+  return (m_alive == GHOST);
+}
+
+bool PhysicalObj::IsDrowned() const
+{
+  return (m_alive == DROWNED);
+}
+
+bool PhysicalObj::IsDead() const
+{
+  bool r = IsGhost()
+    || IsDrowned()
+    || m_alive == DEAD;
+
+  return r;
+}
+
+bool PhysicalObj::IsFire() const
+{
+  return m_is_fire;
+}
+
+// Are the two object in contact ? (uses test rectangles)
+bool PhysicalObj::Overlapse(const PhysicalObj &b) const
+{
+  return GetTestRect().Intersect( b.GetTestRect() );
+}
+
+// Do the point p touch the object ?
+bool PhysicalObj::Contain(const Point2i &p) const
+{
+  return  GetTestRect().Contains( p );
+}
+
 bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
 {
   int x1, x2, y1, y2;
@@ -953,6 +1009,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
     }
   return false;
 }
+
 bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync)
 {
   uint bcl=0;

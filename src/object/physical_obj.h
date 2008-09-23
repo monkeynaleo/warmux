@@ -154,8 +154,8 @@ public:
                          bool collides_with_characters,
                          bool collides_with_objects);
   void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
-  const PhysicalObj* GetOverlappingObject() const { return m_overlapping_object; };
-  virtual bool IsOverlapping(const PhysicalObj* obj) const { return m_overlapping_object == obj; };
+  const PhysicalObj* GetOverlappingObject() const;
+  virtual bool IsOverlapping(const PhysicalObj* obj) const;
 
   bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
   // Relative to current position
@@ -191,18 +191,18 @@ public:
   void Drown();
   void GoOutOfWater(); // usefull for supertux.
 
-  virtual bool IsImmobile() const { return IsSleeping() || m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST); };
+  virtual bool IsImmobile() const;
 
-  bool IsGhost() const { return (m_alive == GHOST); };
-  bool IsDrowned() const { return (m_alive == DROWNED); };
-  bool IsDead() const { return (IsGhost() || IsDrowned() || (m_alive == DEAD)); };
-  bool IsFire() const { return m_is_fire; }
+  bool IsGhost() const;
+  bool IsDrowned() const;
+  bool IsDead() const;
+  bool IsFire() const;
 
   // Are the two object in contact ? (uses test rectangles)
-  bool Overlapse(const PhysicalObj &b) const { return GetTestRect().Intersect( b.GetTestRect() ); };
+  bool Overlapse(const PhysicalObj &b) const;
 
   // Do the point p touch the object ?
-  bool Contain(const Point2i &p) const { return  GetTestRect().Contains( p ); };
+  bool Contain(const Point2i &p) const;
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
 
