@@ -117,7 +117,7 @@ bool Team::LoadCharacters()
     XmlReader::ReadStringAttr(*it, "name", character_name);
     XmlReader::ReadStringAttr(*it, "body", body_name);
 
-    if (!(body = body_list.GetBody(body_name)) )
+    if (!(body = BodyList::GetRef().GetBody(body_name)) )
     {
       std::cerr
           << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
