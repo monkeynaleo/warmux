@@ -38,7 +38,7 @@ FireParticle::FireParticle() :
   on_ground(false),
   oscil_delta(RandomLocal().GetLong(0, dig_ground_time))
 {
-  SetCollisionModel(false, false, false);
+  SetCollisionModel(true, false, false);
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = true;
   m_is_fire = true;

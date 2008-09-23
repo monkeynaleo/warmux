@@ -29,7 +29,7 @@ const int BULLET_PARTICLE_FADE_TIME = 2000;
 BulletParticle::BulletParticle() :
   Particle("bullet_particle")
 {
-  SetCollisionModel(false, false, false);
+  SetCollisionModel(true, false, false);
   m_rebound_sound = "weapon/grenade_bounce";
   m_left_time_to_live = 1;
   start_to_fade = 0;
@@ -61,7 +61,7 @@ void BulletParticle::Refresh()
 void BulletParticle::SignalRebound()
 {
   PhysicalObj::SignalRebound();
-  //SetCollisionModel(true, false, false);
+  //SetCollisionModel(false, false, false);
   StopMoving();
   start_to_fade = Time::GetInstance()->Read();
 }

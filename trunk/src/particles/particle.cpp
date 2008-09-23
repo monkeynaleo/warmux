@@ -56,7 +56,7 @@ Particle::Particle(const std::string &name) :
   m_last_refresh(Time::GetInstance()->Read()),
   image(NULL)
 {
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(false, false, false);
 }
 
 Particle::~Particle()
