@@ -66,7 +66,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_goes_through_wall(false),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
-  m_rebound_position(-1,-1),
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
@@ -173,7 +172,6 @@ void PhysicalObj::StoreValue(Action *a)
   a->Push(m_goes_through_wall);
   a->Push(m_collides_with_characters);
   a->Push(m_collides_with_objects);
-  a->Push(m_rebound_position);
   a->Push((int)m_minimum_overlapse_time);
   a->Push(m_ignore_movements);
   a->Push(m_is_character);
@@ -192,7 +190,6 @@ void PhysicalObj::GetValueFromAction(Action *a)
   m_goes_through_wall        = !!a->PopInt();
   m_collides_with_characters = !!a->PopInt();
   m_collides_with_objects    = !!a->PopInt();
-  m_rebound_position         = a->PopPoint2i();
   m_minimum_overlapse_time   = (uint)a->PopInt();
   m_ignore_movements         = !!a->PopInt();
   m_is_character             = !!a->PopInt();
@@ -455,35 +452,29 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
   b2FilterData data = m_shape->GetFilterData();
   data.maskBits = 0x0000;
 
-  if(m_collides_with_objects)
-    {
-      data.maskBits |= 0x0001;
+  if (m_collides_with_objects) {
+    data.maskBits |= 0x0001;
+  }
 
-    }
+  if(m_collides_with_characters) {
+    data.maskBits |= 0x0002;
+  }
 
-  if(m_collides_with_characters)
-    {
-      data.maskBits |= 0x0002;
-
-    }
-
-  if(!m_goes_through_wall)
-    {
-      data.maskBits |= 0x0004;
-
-    }
+  if(!m_goes_through_wall) {
+    data.maskBits |= 0x0004;
+  }
 
   m_shape->SetFilterData(data);
   // Check boolean values
-  {
-    if (m_collides_with_characters || m_collides_with_objects)
-      ASSERT(m_goes_through_wall == false);
+#ifdef DEBUG
+  if (m_collides_with_characters || m_collides_with_objects)
+    ASSERT(m_goes_through_wall == false);
 
-    if (m_goes_through_wall) {
-      ASSERT(m_collides_with_characters == false);
-      ASSERT(m_collides_with_objects == false);
-    }
+  if (m_goes_through_wall) {
+    ASSERT(m_collides_with_characters == false);
+    ASSERT(m_collides_with_objects == false);
   }
+#endif
 }
 
 bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
