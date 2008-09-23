@@ -40,9 +40,9 @@ CrossHair::CrossHair()
 {
   enable = false;
   display = false;
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  image = resource_manager.LoadImage(res, "gfx/pointeur1");
-  resource_manager.UnLoadXMLProfile(res);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  image = GetResourceManager().LoadImage(res, "gfx/pointeur1");
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 void CrossHair::Reset() const

@@ -364,7 +364,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   , msg_box(NULL)
   , winner_box(NULL)
 {
-  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   uint x = 20;
   uint y = 20;
 
@@ -394,8 +394,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   }
 
   // Load the podium img
-  podium_img = resource_manager.LoadImage(res, "menu/podium");
-  resource_manager.UnLoadXMLProfile(res);
+  podium_img = GetResourceManager().LoadImage(res, "menu/podium");
+  GetResourceManager().UnLoadXMLProfile(res);
 
   x+=260;
   const Point2i& wsize = GetMainWindow().GetSize();

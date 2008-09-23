@@ -51,7 +51,7 @@ Member::Member(const xmlNode* xml, const Profile* res):
   ASSERT(name!="");
 
   // Load the sprite
-  spr = resource_manager.LoadSprite( res, name);
+  spr = GetResourceManager().LoadSprite( res, name);
   //spr->EnableRotationCache(32);
   //spr->EnableFlippingCache();
   spr->cache.EnableLastFrameCache();

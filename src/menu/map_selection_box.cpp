@@ -37,16 +37,16 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 {
   display_only = _display_only;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
 
   // PreviousMap/NextMap buttons
   bt_map_plus = new Button(res, "menu/big_plus", false);
   bt_map_minus = new Button(res, "menu/big_minus", false);
 
   // random map
-  random_map_preview = resource_manager.LoadImage(res, "menu/random_map");
+  random_map_preview = GetResourceManager().LoadImage(res, "menu/random_map");
 
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 
   // compute margin width between previews
   uint map_preview_height = _size.GetY() -2*10 -40;

@@ -45,9 +45,9 @@ CheckBox::CheckBox(Text *text, uint width, bool value):
 
 void CheckBox::Init(uint width)
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  m_checked_image = resource_manager.LoadSprite( res, "menu/check");
-  resource_manager.UnLoadXMLProfile( res);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  m_checked_image = GetResourceManager().LoadSprite( res, "menu/check");
+  GetResourceManager().UnLoadXMLProfile( res);
 
   m_checked_image->cache.EnableLastFrameCache();
 

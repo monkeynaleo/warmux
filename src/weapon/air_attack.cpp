@@ -87,7 +87,7 @@ Plane::Plane(AirAttackConfig &p_cfg) :
 {
   SetCollisionModel(false, false, false);
 
-  image = resource_manager.LoadSprite(weapons_res_profile, "air_attack_plane");
+  image = GetResourceManager().LoadSprite(weapons_res_profile, "air_attack_plane");
   SetSize(image->GetSize());
   obus_dx = 100;
   obus_dy = GetY() + GetHeight();

@@ -59,7 +59,7 @@ NetworkMenu::NetworkMenu() :
 {
   waiting_for_server = false;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
   Point2i pointZero(W_UNDEF, W_UNDEF);
 
   Surface& window = GetMainWindow();
@@ -151,7 +151,7 @@ NetworkMenu::NetworkMenu() :
   widgets.AddWidget(bottom_box);
   widgets.Pack();
 
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 NetworkMenu::~NetworkMenu()

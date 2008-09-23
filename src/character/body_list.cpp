@@ -57,12 +57,12 @@ void BodyList::Load(const std::string &name)
      return;
   }
 
-  Profile *res = resource_manager.LoadXMLProfile( fn, true);
+  Profile *res = GetResourceManager().LoadXMLProfile( fn, true);
 
   Body* body = new Body(doc.GetRoot(), res);
   list[name] = body;
 
-  resource_manager.UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile( res);
 }
 
 Body* BodyList::GetBody(const std::string &name)
