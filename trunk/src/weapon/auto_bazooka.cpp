@@ -214,7 +214,7 @@ AutomaticBazooka::AutomaticBazooka() :
   m_allow_change_timeout = true;
   m_target = new target_t;
   m_target->selected = false;
-  m_target->image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
+  m_target->image = GetResourceManager().LoadImage( weapons_res_profile, "baz_cible");
   ReloadLauncher();
 }
 

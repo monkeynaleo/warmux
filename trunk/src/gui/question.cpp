@@ -33,16 +33,16 @@ Question::Question(type _type)
   background = NULL;
   text = NULL;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   switch (_type) {
   case WARNING:
-    icon = new Sprite(resource_manager.LoadImage(res,"menu/ico_warning"));
+    icon = new Sprite(GetResourceManager().LoadImage(res,"menu/ico_warning"));
     break;
   case NO_TYPE:
     icon = NULL;
     break;
   }
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 Question::~Question()
@@ -173,11 +173,11 @@ void Question::Set (const std::string &pmessage,
 
   if(bg_sprite != "")
   {
-    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-    background = new Sprite(resource_manager.LoadImage(res,bg_sprite), true);
+    Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+    background = new Sprite(GetResourceManager().LoadImage(res,bg_sprite), true);
     background->cache.EnableLastFrameCache();
     background->ScaleSize(GetMainWindow().GetSize());
-    resource_manager.UnLoadXMLProfile( res);
+    GetResourceManager().UnLoadXMLProfile( res);
   }
   else
   {

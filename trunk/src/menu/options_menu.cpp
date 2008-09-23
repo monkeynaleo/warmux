@@ -61,7 +61,7 @@ OptionMenu::OptionMenu() :
 {
   AppWormux * app = AppWormux::GetInstance();
   Config * config = Config::GetInstance();
-  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   Point2i option_size(140, 130);
 
   uint max_width = app->video->window.GetWidth()-50;
@@ -300,7 +300,7 @@ OptionMenu::OptionMenu() :
 
   opt_updates->SetValue(config->GetCheckUpdates());
 
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 
   widgets.AddWidget(tabs);
   widgets.Pack();

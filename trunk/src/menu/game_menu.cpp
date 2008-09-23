@@ -47,7 +47,7 @@ const uint OPTIONS_BOX_H = 150;
 GameMenu::GameMenu() :
   Menu("menu/bg_play")
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
   Point2i stdSize(130, W_UNDEF);
 
   Surface& window = GetMainWindow();
@@ -90,7 +90,7 @@ GameMenu::GameMenu() :
   widgets.AddWidget(tabs);
   widgets.Pack();
 
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 GameMenu::~GameMenu()

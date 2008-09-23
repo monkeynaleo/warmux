@@ -151,9 +151,9 @@ Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
   m_category = MOVE;
   use_unit_on_first_shoot = false;
 
-  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"grapple_hook");
+  m_hook_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_hook");
   m_hook_sprite->EnableRotationCache(32);
-  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"grapple_node");
+  m_node_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_node");
 
   m_is_active = false;
   m_attaching = false;

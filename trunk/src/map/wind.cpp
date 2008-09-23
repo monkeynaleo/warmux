@@ -69,7 +69,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   // Sprite loading
   scale = 0.5 + scale / 2.0;
 
-  sprite = resource_manager.LoadSprite( ActiveMap()->ResProfile(), "wind_particle");
+  sprite = GetResourceManager().LoadSprite( ActiveMap()->ResProfile(), "wind_particle");
   sprite->Scale(scale, scale);
   sprite->RefreshSurface();
   sprite->SetAlpha(scale);

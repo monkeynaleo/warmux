@@ -69,18 +69,18 @@ void Water::Init()
   std::string water_name = GetWaterName(water_type);
   image += water_name;
 
-  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
-  surface = resource_manager.LoadImage(res, image);
+  surface = GetResourceManager().LoadImage(res, image);
   surface.SetAlpha(0, 0);
 
   image += "_bottom";
 
   if (water_type != NO_WATER)
-    type_color = new Color(resource_manager.LoadColor(res, "water_colors/" + water_name));
+    type_color = new Color(GetResourceManager().LoadColor(res, "water_colors/" + water_name));
   else
     type_color = NULL;
-  bottom = resource_manager.LoadImage(res, image);
+  bottom = GetResourceManager().LoadImage(res, image);
   bottom.SetAlpha(0, 0);
 
   pattern_height = bottom.GetHeight();
@@ -104,7 +104,7 @@ void Water::Init()
 
 
   shift1 = 0;
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 void Water::Reset()

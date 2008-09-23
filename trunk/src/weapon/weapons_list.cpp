@@ -49,7 +49,7 @@ WeaponsList::~WeaponsList()
 
 WeaponsList::WeaponsList()
 {
-  weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
+  weapons_res_profile = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
   m_weapons_list.push_back(new Bazooka);
   m_weapons_list.push_back(new SubMachineGun);
   m_weapons_list.push_back(new Gun);

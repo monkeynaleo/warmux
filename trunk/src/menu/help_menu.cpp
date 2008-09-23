@@ -35,10 +35,10 @@ static const uint CHECKBOX_SIZE = 50;
 HelpMenu::HelpMenu()  :
   Menu("help/background", vOk)
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  img_keyboard = new Sprite(resource_manager.LoadImage(res, "help/shortkeys"), true);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  img_keyboard = new Sprite(GetResourceManager().LoadImage(res, "help/shortkeys"), true);
   img_keyboard->cache.EnableLastFrameCache();
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 HelpMenu::~HelpMenu()

@@ -55,7 +55,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
 {
   UpdateTranslationStrings();
 
-  construct_spr = resource_manager.LoadSprite( weapons_res_profile, "construct_spr");
+  construct_spr = GetResourceManager().LoadSprite( weapons_res_profile, "construct_spr");
   construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / DELTA_ANGLE));
   m_name = _("Construct");
   m_category = TOOL;

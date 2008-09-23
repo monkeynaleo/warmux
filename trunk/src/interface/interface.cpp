@@ -52,13 +52,13 @@ Interface::Interface()
   start_show_display = 0;
   display_minimap = true;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  game_menu = resource_manager.LoadImage( res, "interface/background_interface");
-  small_background_interface = resource_manager.LoadImage( res, "interface/small_background_interface");
-  clock_background = resource_manager.LoadImage( res, "interface/clock_background");
-  clock = new Sprite(resource_manager.LoadImage( res, "interface/clock"));
-  wind_icon = resource_manager.LoadImage( res, "interface/wind");
-  wind_indicator = resource_manager.LoadImage( res, "interface/wind_indicator");
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  game_menu = GetResourceManager().LoadImage( res, "interface/background_interface");
+  small_background_interface = GetResourceManager().LoadImage( res, "interface/small_background_interface");
+  clock_background = GetResourceManager().LoadImage( res, "interface/clock_background");
+  clock = new Sprite(GetResourceManager().LoadImage( res, "interface/clock"));
+  wind_icon = GetResourceManager().LoadImage( res, "interface/wind");
+  wind_indicator = GetResourceManager().LoadImage( res, "interface/wind_indicator");
 
   // energy bar
   energy_bar.InitVal(0, 0, GameMode::GetInstance()->character.init_energy);
@@ -76,15 +76,15 @@ Interface::Interface()
   weapon_strength_bar.InitPos (0, 0, 400, 20);
   weapon_strength_bar.InitVal (0, 0, 100);
 
-  weapon_strength_bar.SetValueColor(resource_manager.LoadColor(res, "interface/weapon_strength_bar_value"));
-  weapon_strength_bar.SetBorderColor(resource_manager.LoadColor(res, "interface/weapon_strength_bar_border"));
-  weapon_strength_bar.SetBackgroundColor(resource_manager.LoadColor(res, "interface/weapon_strength_bar_background"));
+  weapon_strength_bar.SetValueColor(GetResourceManager().LoadColor(res, "interface/weapon_strength_bar_value"));
+  weapon_strength_bar.SetBorderColor(GetResourceManager().LoadColor(res, "interface/weapon_strength_bar_border"));
+  weapon_strength_bar.SetBackgroundColor(GetResourceManager().LoadColor(res, "interface/weapon_strength_bar_background"));
 
-  Color text_color = resource_manager.LoadColor(res, "interface/text_color");
-  Color energy_text_color = resource_manager.LoadColor(res, "interface/energy_text_color");
+  Color text_color = GetResourceManager().LoadColor(res, "interface/text_color");
+  Color energy_text_color = GetResourceManager().LoadColor(res, "interface/energy_text_color");
   // XXX Unused !?
-  // Color turn_timer_text_color = resource_manager.LoadColor(res, "interface/turn_timer_text_color");
-  // Color global_clock_text_color = resource_manager.LoadColor(res, "interface/global_clock_text_color");
+  // Color turn_timer_text_color = GetResourceManager().LoadColor(res, "interface/turn_timer_text_color");
+  // Color global_clock_text_color = GetResourceManager().LoadColor(res, "interface/global_clock_text_color");
 
   global_timer = new Text(ulong2str(0), gray_color, Font::FONT_BIG, Font::FONT_NORMAL, false);
   timer = new Text(ulong2str(0), black_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
@@ -96,7 +96,7 @@ Interface::Interface()
   t_weapon_stock = new Text("0", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   t_character_energy = new Text("Dead", energy_text_color, Font::FONT_SMALL, Font::FONT_BOLD);
 
-  resource_manager.UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile( res);
 }
 
 Interface::~Interface()

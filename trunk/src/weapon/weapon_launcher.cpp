@@ -136,7 +136,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   can_drown = true;
   camera_in_advance = true;
 
-  image = resource_manager.LoadSprite( weapons_res_profile, name);
+  image = GetResourceManager().LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
   SetSize(image->GetSize());
 

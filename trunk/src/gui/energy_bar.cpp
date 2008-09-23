@@ -29,13 +29,13 @@ static const int energy_step[EnergyBar::NB_OF_ENERGY_COLOR] = { 16, 33, 50, 67, 
 
 EnergyBar::EnergyBar() : ProgressBar()
 {
-  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   for(int i = 0; i < NB_OF_ENERGY_COLOR ;i++) {
     std::ostringstream color_name;
     color_name << "energy_bar/energy_color_" << energy_step[i] << "_percent";
-    colors_value[i] = resource_manager.LoadColor(res, color_name.str());
+    colors_value[i] = GetResourceManager().LoadColor(res, color_name.str());
   }
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 Color EnergyBar::GetColorValue(long app_energy) const

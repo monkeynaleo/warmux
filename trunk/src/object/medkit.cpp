@@ -46,9 +46,9 @@ Medkit::Medkit()
   : ObjBox("medkit") {
   SetTestRect (29, 29, 63, 6);
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  anim = resource_manager.LoadSprite( res, "object/medkit");
-  resource_manager.UnLoadXMLProfile(res);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  anim = GetResourceManager().LoadSprite( res, "object/medkit");
+  GetResourceManager().UnLoadXMLProfile(res);
 
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);

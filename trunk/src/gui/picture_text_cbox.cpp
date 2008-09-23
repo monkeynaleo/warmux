@@ -34,12 +34,12 @@ PictureTextCBox::PictureTextCBox(const std::string &label,
   CheckBox(new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false),
 	   _size.x, value)
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  m_image = resource_manager.LoadImage(res, resource_id);
-  m_enabled = resource_manager.LoadImage(res, "menu/enabled");
-  m_disabled_front = resource_manager.LoadImage(res, "menu/disabled_front");
-  m_disabled_back = resource_manager.LoadImage(res, "menu/disabled_back");
-  resource_manager.UnLoadXMLProfile( res);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  m_image = GetResourceManager().LoadImage(res, resource_id);
+  m_enabled = GetResourceManager().LoadImage(res, "menu/enabled");
+  m_disabled_front = GetResourceManager().LoadImage(res, "menu/disabled_front");
+  m_disabled_back = GetResourceManager().LoadImage(res, "menu/disabled_back");
+  GetResourceManager().UnLoadXMLProfile( res);
   m_value = value;
 
   txt_label->SetMaxWidth(size.x);
