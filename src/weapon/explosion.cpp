@@ -149,7 +149,7 @@ void ApplyExplosion_common (const Point2i &pos,
        continue; // hack to fix bug #8529
      }
 
-     if (!obj->GoesThroughWall() && !obj->IsGhost())
+     if (obj->CollidesWithGround() && !obj->IsGhost())
      {
        double distance = pos.Distance(obj->GetCenter());
        if(distance < 1.0)
