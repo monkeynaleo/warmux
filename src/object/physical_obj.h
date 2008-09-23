@@ -212,21 +212,9 @@ protected:
   virtual void SignalOutOfMap() { };
   virtual void SignalRebound();
 private:
-  //Retrun the position of the point of contact of the obj on the ground
-  bool ContactPoint (int &x, int &y) const;
-
 
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();
-
-  // Directly after a rebound, if we are stuck in a wall, we stop moving
-  void CheckRebound();
-
-  void Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position);
-
-  void ContactPointAngleOnGround(const Point2d& oldPos,
-				 Point2d& contactPos,
-				 double& contactAngle) const;
 };
 
 #endif
