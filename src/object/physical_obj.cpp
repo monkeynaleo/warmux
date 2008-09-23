@@ -777,7 +777,7 @@ bool PhysicalObj::FootsOnFloor(int y) const
   return (y_max <= y);
 }
 
-bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool /*check_object*/) const
+bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
 {
   if (IsOutsideWorldXY(position))
     return GetWorld().IsOpen();
@@ -785,8 +785,8 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool /*check_object*/) c
   if (FootsOnFloor(position.y - 1))
     return false;
 
-  // if (check_object && CollidedObjectXY(position))
-  //   return false;
+  if (check_object && CollidedObjectXY(position))
+    return false;
 
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
 		  GetTestWidth(), GetTestHeight());
@@ -823,8 +823,8 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
     rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
   }
 
-  // if (CollidedObjectXY( position + Point2i(0, 1)) != NULL )
-  //   return false;
+  if (CollidedObjectXY( position + Point2i(0, 1)) != NULL )
+    return false;
 
   return GetWorld().RectIsInVacuum (rect);
 }
@@ -832,6 +832,50 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 bool PhysicalObj::FootsInVacuum() const
 {
   return FootsInVacuumXY(GetPosition());
+}
+
+PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
+{
+  if( IsOutsideWorldXY(position) )
+    return NULL;
+
+  Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
+		  GetTestWidth(), GetTestHeight());
+
+  if (m_collides_with_characters)
+    {
+      FOR_ALL_LIVING_CHARACTERS(team,character)
+      {
+        // We check both objet if one overlapse the other
+        if ( (PhysicalObj*)(*character) != this &&
+	     !IsOverlapping(*character) &&
+	     !(*character)->IsOverlapping(this) &&
+	     (*character)->GetTestRect().Intersect( rect ))
+          return (PhysicalObj*)(*character);
+      }
+    }
+
+  if (m_collides_with_objects)
+    {
+      FOR_EACH_OBJECT(it)
+      {
+        PhysicalObj * object=*it;
+        // We check both objet if one overlapse the other
+        if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this)
+            && object->m_collides_with_objects
+            && object->GetTestRect().Intersect(rect) )
+	  {
+	    if (!m_is_character || object->m_collides_with_characters)
+            return object;
+	  }
+      }
+    }
+  return NULL;
+}
+
+PhysicalObj* PhysicalObj::CollidedObject(const Point2i & offset) const
+{
+  return CollidedObjectXY(GetPosition() + offset);
 }
 
 bool PhysicalObj::IsInWater () const
