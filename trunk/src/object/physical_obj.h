@@ -134,7 +134,7 @@ public:
   int GetCenterY() const { return GetY() +m_test_top +GetTestHeight()/2; };
   const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
   const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), 1, 1); };
-  bool GoesThroughWall() const { return !m_collides_with_ground; }
+  bool CollidesWithGround() const { return m_collides_with_ground; }
   bool IsCharacter() const { return m_is_character; }
 
   //----------- Physics related function ----------
