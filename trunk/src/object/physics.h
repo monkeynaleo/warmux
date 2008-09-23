@@ -52,7 +52,7 @@ typedef enum {
 class Game;
 class Action;
 class Force;
-
+class PhysicalShape;
 
 class Physics : private ObjectConfig
 {
@@ -68,7 +68,6 @@ private:
 protected:
   uint m_last_move;             // Time since last move
   double m_phys_width, m_phys_height;
-  b2Shape* m_shape;
   Point2d m_fix_point_gnd;   // Rope fixation point to the ground.
   Point2d m_fix_point_dxy;   // Rope delta to fixation point to the object
   EulerVector m_rope_angle;       // Rope angle.
@@ -87,6 +86,7 @@ protected:
   bool m_elasticity_off ;
   b2BodyDef *m_body_def;
   b2Body *m_body;
+  PhysicalShape *m_shape;
 
   // Other physics constants stored there :
   ObjectConfig m_cfg;

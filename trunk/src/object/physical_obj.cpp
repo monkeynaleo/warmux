@@ -39,6 +39,7 @@
 #include "network/randomsync.h"
 #include "object/physical_engine.h"
 #include "object/physical_obj.h"
+#include "object/physical_shape.h"
 #include "object/physics.h"
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
@@ -66,17 +67,16 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
-  // No collision with this object until we have gone out of his collision rectangle
+  m_test_left(0),
+  m_test_right(0),
+  m_test_top(0),
+  m_test_bottom(0),
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
   m_ignore_movements(false),
   m_is_character(false),
   m_is_fire(false),
   m_name(name),
-  m_test_left(0),
-  m_test_right(0),
-  m_test_top(0),
-  m_test_bottom(0),
   m_rebound_sound(""),
   m_alive(ALIVE),
   m_energy(-1),
@@ -255,12 +255,13 @@ void PhysicalObj::CheckOverlapping()
     }
 }
 
-void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
+// WARNING: MUST BE REMOVED
+void PhysicalObj::SetTestRect (uint /*left*/, uint /*right*/, uint /*top*/, uint /*bottom*/)
 {
-  m_test_left =  left;
-  m_test_right = right;
-  m_test_top = top;
-  m_test_bottom = bottom;
+  // m_test_left = left;
+  // m_test_right = right;
+  // m_test_top = top;
+  // m_test_bottom = bottom;
 }
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
@@ -446,7 +447,7 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
   m_collides_with_characters = collides_with_characters;
   m_collides_with_objects = collides_with_objects;
 
-  b2FilterData data = m_shape->GetFilterData();
+  b2FilterData data = m_shape->GetFilter();
   data.maskBits = 0x0000;
 
   if (m_collides_with_objects) {
@@ -461,7 +462,9 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
     data.maskBits |= 0x0004;
   }
 
-  m_shape->SetFilterData(data);
+  m_shape->SetFilter(data);
+  m_shape->Generate();
+
   // Check boolean values
 #ifdef DEBUG
   if (m_collides_with_characters || m_collides_with_objects)
@@ -502,51 +505,35 @@ int count = 0;
 
 void PhysicalObj::SetSize(const Point2i &newSize)
 {
-
   m_width = newSize.x;
   m_height = newSize.y;
   m_phys_height = double(m_height)/PIXEL_PER_METER;
   m_phys_width = double(m_width)/PIXEL_PER_METER;
 
   //Physical shape
+  PhysicalPolygone *shape = new PhysicalPolygone(m_body);
+
+  shape->AddPoint(Point2d(GetPhysX() , GetPhysY()));
+  shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY()));
+  shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY() + m_phys_height));
+  shape->AddPoint(Point2d(GetPhysX() , GetPhysY() + m_phys_height));
+  shape->SetMass(GetMass());
+
+  //Physical shape
+
   b2FilterData filter_data;
   filter_data.categoryBits = 0x0001;
   filter_data.maskBits = 0x0000;
-
-  if (m_shape != NULL)
-  {
-    filter_data = m_shape->GetFilterData();
-    m_body->DestroyShape(m_shape);
+  if (m_shape != NULL) {
+    filter_data = m_shape->GetFilter();
   }
+  shape->SetFilter(filter_data);
+  shape->Generate();
 
+  if (m_shape)
+    delete m_shape;
 
-
-  b2PolygonDef shapeDef;
-  shapeDef.vertexCount = 4;
-
-  /*shapeDef.vertices[0].Set(GetPhysX() + m_test_left/PIXEL_PER_METER , GetPhysY() + m_test_top/PIXEL_PER_METER);
-  shapeDef.vertices[1].Set(GetPhysX() + m_test_left/PIXEL_PER_METER, GetPhysY() + m_test_bottom/PIXEL_PER_METER);
-  shapeDef.vertices[2].Set(GetPhysX() + m_test_right/PIXEL_PER_METER, GetPhysY() + m_test_bottom/PIXEL_PER_METER);
-  shapeDef.vertices[3].Set(GetPhysX() + m_test_right/PIXEL_PER_METER, GetPhysY() + m_test_top/PIXEL_PER_METER);*/
-  /*shapeDef.vertices[0].Set(GetPhysX() - m_phys_width/2, GetPhysY() - m_phys_height/2);
-  shapeDef.vertices[1].Set(GetPhysX() + m_phys_width/2, GetPhysY() - m_phys_height/2);
-  shapeDef.vertices[2].Set(GetPhysX() + m_phys_width/2, GetPhysY() + m_phys_height/2);
-  shapeDef.vertices[3].Set(GetPhysX() - m_phys_width/2, GetPhysY() + m_phys_height/2);*/
-  shapeDef.vertices[0].Set(GetPhysX() , GetPhysY() );
-  shapeDef.vertices[1].Set(GetPhysX() + m_phys_width, GetPhysY());
-  shapeDef.vertices[2].Set(GetPhysX() + m_phys_width, GetPhysY() + m_phys_height);
-  shapeDef.vertices[3].Set(GetPhysX() , GetPhysY() + m_phys_height);
-
-  shapeDef.density = 1.0f;
-  shapeDef.friction = 0.8f;
-  shapeDef.restitution = 0.1f;
-  shapeDef.filter.categoryBits = filter_data.categoryBits;
-  shapeDef.filter.maskBits = filter_data.maskBits;
-
-  m_shape = m_body->CreateShape(&shapeDef);
-  //
-  SetMass(GetMass());
-  //m_body->SetMassFromShapes();
+  m_shape = shape;
 }
 
 bool PhysicalObj::FootsOnFloor(int y) const

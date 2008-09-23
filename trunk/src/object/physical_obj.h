@@ -43,7 +43,6 @@ typedef enum
 
 class Action;
 
-
 double MeterDistance (const Point2i &p1, const Point2i &p2);
 
 class PhysicalObj : public Physics
@@ -58,6 +57,10 @@ private:
   bool m_collides_with_characters;
   bool m_collides_with_objects;
 
+  // WARNING: MUST BE REMOVED
+  // Rectangle used for collision tests
+  uint m_test_left, m_test_right, m_test_top, m_test_bottom;
+
 protected:
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
@@ -65,20 +68,15 @@ protected:
   bool m_is_character;
   bool m_is_fire;
 
+  // WARNING: MUST BE REMOVED
+  // Probably to replace with methods from PhysicalShape
   // Object size and position.
   uint m_width, m_height;
-
-
 
   virtual void CheckOverlapping();
 
   std::string m_name;
   std::string m_unique_id;
-
-  // Rectangle used for collision tests
-  uint m_test_left, m_test_right, m_test_top, m_test_bottom;
-
-
   std::string m_rebound_sound;
 
   alive_t m_alive;
@@ -118,6 +116,7 @@ public:
   virtual void GetValueFromAction(Action *);
   virtual void StoreValue(Action *);
 
+  // WARNING: MUST BE REMOVED
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
   const Rectanglei GetTestRect() const;
