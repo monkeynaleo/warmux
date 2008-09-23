@@ -26,6 +26,7 @@
 
 #include "object/force.h"
 #include "object/physical_engine.h"
+#include "object/physical_shape.h"
 #include "object/physics.h"
 #include <stdlib.h>
 #include <iostream>
@@ -50,7 +51,6 @@ Physics::Physics ():
   m_last_move(Time::GetInstance()->Read()),
   m_phys_width(),
   m_phys_height(),
-  m_shape(NULL),
   m_fix_point_gnd(),
   m_fix_point_dxy(),
   m_rope_angle(),
@@ -60,10 +60,11 @@ Physics::Physics ():
   m_balancing_damping(0.40),
   m_is_physical_obj(false),
   m_elasticity_off(true),
+  m_shape(NULL),
   m_cfg()
 
 {
-  m_body_def = new b2BodyDef;
+  m_body_def = new b2BodyDef();
   m_body_def->allowSleep = true;
   m_body_def->linearDamping = 0.0f;
   m_body_def->angularDamping = 0.01f;
@@ -74,6 +75,9 @@ Physics::Physics ():
 
 Physics::~Physics()
 {
+  if (m_shape)
+    delete m_shape;
+
   PhysicalEngine::GetInstance()->RemoveObject(this);
 }
 
