@@ -711,6 +711,10 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
   return false;
 }
 
+bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const
+{
+  return IsOutsideWorldXY( GetPosition() + offset );
+}
 
 int count = 0;
 
@@ -790,6 +794,10 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool /*check_object*/) c
   return GetWorld().RectIsInVacuum(rect);
 }
 
+bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_objects) const
+{
+  return IsInVacuumXY(GetPosition() + offset, check_objects);
+}
 
 bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 {
@@ -815,10 +823,15 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
     rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
   }
 
-  // if(CollidedObjectXY( position + Point2i(0, 1)) != NULL )
-  //  return false;
+  // if (CollidedObjectXY( position + Point2i(0, 1)) != NULL )
+  //   return false;
 
   return GetWorld().RectIsInVacuum (rect);
+}
+
+bool PhysicalObj::FootsInVacuum() const
+{
+  return FootsInVacuumXY(GetPosition());
 }
 
 bool PhysicalObj::IsInWater () const
