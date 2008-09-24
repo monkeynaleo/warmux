@@ -170,7 +170,7 @@ void WeaponProjectile::Shoot(double strength)
 
   // Set the initial position.
   SetOverlappingObject(&ActiveCharacter(), 100);
-  lst_objects.AddObject(this);
+  ObjectsList::GetRef().AddObject(this);
   Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
 
   double angle = ActiveCharacter().GetFiringAngle();

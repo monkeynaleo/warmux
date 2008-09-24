@@ -108,7 +108,7 @@ void GameInit::InitMap()
   Camera::GetInstance()->ResetShake();
   loading_sreen.StartLoading(1, "map_icon", _("Maps"));
   GetWorld().Reset();
-  lst_objects.PlaceBarrels();
+  ObjectsList::GetRef().PlaceBarrels();
 }
 
 void GameInit::InitTeams()
@@ -132,7 +132,7 @@ void GameInit::InitTeams()
   // Randomize first player
   GetTeamsList().RandomizeFirstPlayer();
 
-  lst_objects.PlaceMines();
+  ObjectsList::GetRef().PlaceMines();
 }
 
 void GameInit::InitSounds()

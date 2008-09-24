@@ -238,7 +238,7 @@ void Mine::Add(int x, int y)
   projectile->SetOverlappingObject(&ActiveCharacter());
 
   projectile -> SetSpeedXY (ActiveCharacter().GetSpeedXY());
-  lst_objects.AddObject (projectile);
+  ObjectsList::GetRef().AddObject (projectile);
   projectile = NULL;
   ReloadLauncher();
 }

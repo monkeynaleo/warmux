@@ -154,7 +154,7 @@ void Game::UnloadDatas(bool game_finished) const
 {
   GetWorld().FreeMem();
   ActiveMap()->FreeData();
-  lst_objects.FreeMem();
+  ObjectsList::GetRef().FreeMem();
   ParticleEngine::Stop();
 
   if (!Network::IsConnected() || !game_finished) {
@@ -319,7 +319,7 @@ void Game::RefreshObject() const
   GetTeamsList().RefreshEnergy();
 
   ActiveTeam().AccessWeapon().Manage();
-  lst_objects.Refresh();
+  ObjectsList::GetRef().Refresh();
   ParticleEngine::Refresh();
   CharacterCursor::GetInstance()->Refresh();
 }
@@ -338,7 +338,7 @@ void Game::Draw ()
 
   // Draw objects
   StatStart("GameDraw:objects");
-  lst_objects.Draw();
+  ObjectsList::GetRef().Draw();
   ParticleEngine::Draw(true);
   StatStart("GameDraw:objects");
 
@@ -586,7 +586,7 @@ bool Game::NewBox()
 
 void Game::AddNewBox(ObjBox * box)
 {
-  lst_objects.AddObject(box);
+  ObjectsList::GetRef().AddObject(box);
   Camera::GetInstance()->FollowObject(box, true, true);
   GameMessages::GetInstance()->Add(_("It's a present!"));
   SetCurrentBox(box);

@@ -23,14 +23,15 @@
 #define OBJECTS_LIST_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
+#include "include/singleton.h"
 #include "object/physical_obj.h"
 #include <list>
 //-----------------------------------------------------------------------------
 
 // Loop for all objects
 #define FOR_ALL_OBJECTS(object) \
-  for (ObjectsList::iterator object=lst_objects.begin(), \
-       end=lst_objects.end(); \
+  for (ObjectsList::iterator object=ObjectsList::GetRef().begin(), \
+       end=ObjectsList::GetRef().end(); \
        object != end; \
        ++object)
 
@@ -43,15 +44,18 @@
 
 //-----------------------------------------------------------------------------
 
-class ObjectsList : public std::list<PhysicalObj*>
+class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList>
 {
+  private:
+    ObjectsList();
+    ~ObjectsList();
+    friend class Singleton<ObjectsList>;
+
   public:
     typedef std::list<PhysicalObj*>::iterator iterator;
     std::list<PhysicalObj*> overlapped_objects;
-  public:
-    ~ObjectsList() { FreeMem(); };
-    inline void AddObject(PhysicalObj * obj) { push_back(obj);};
 
+  public:
     // Call the Refresh method of all the objects
     void Refresh();
     // Call the Draw method of all the objects
@@ -66,6 +70,8 @@ class ObjectsList : public std::list<PhysicalObj*>
 
     void FreeMem();
 
+    inline void AddObject(PhysicalObj * obj) { push_back(obj);};
+
     // Overlapse handling
     inline void RemoveObject(PhysicalObj * obj)
     {
@@ -77,6 +83,5 @@ class ObjectsList : public std::list<PhysicalObj*>
     void RemoveOverlappedObject(PhysicalObj * obj) { overlapped_objects.remove(obj); };
 };
 
-extern ObjectsList lst_objects;
 //-----------------------------------------------------------------------------
 #endif

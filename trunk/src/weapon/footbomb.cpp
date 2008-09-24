@@ -135,7 +135,7 @@ void FootBomb::DoExplosion()
     cluster->Shoot( pos, speed, angle + cluster_deviation, m_recursions - 1 );
     cluster->SetTimeOut( cfg.timeout + m_timeout_modifier );
 
-    lst_objects.AddObject(cluster);
+    ObjectsList::GetRef().AddObject(cluster);
   }
 }
 
