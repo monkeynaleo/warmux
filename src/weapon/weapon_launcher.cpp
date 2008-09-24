@@ -46,8 +46,7 @@
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
-#include "graphic/video.h"
-#include "include/app.h"
+#include "object/physical_shape.h"
 #endif
 
 WeaponBullet::WeaponBullet(const std::string &name,
@@ -253,14 +252,8 @@ void WeaponProjectile::Draw()
   }
 
 #ifdef DEBUG
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSizeMax());
-    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
+  if (IsLOGGING("polygon.weapon")) {
+    m_shape->DrawBorder(primary_red_color);
   }
 #endif
 }
