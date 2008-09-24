@@ -60,7 +60,7 @@ void PhysicalShape::SetMass(int mass)
 
 void PhysicalShape::SetFriction(double friction)
 {
-    m_friction = friction;
+  m_friction = friction;
 }
 
 /////////////////////////////////
