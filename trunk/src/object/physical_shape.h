@@ -39,6 +39,15 @@ public:
   void SetFriction(double friction);
   void SetMass(int mass);
 
+  // returns current max width (taking angle into account)
+  virtual double GetCurrentWidth() const = 0;
+
+  // returns current max height (taking angle into account)
+  virtual double GetCurrentHeight() const = 0;
+
+  virtual double GetInitialWidth() const = 0;
+  virtual double GetInitialHeight() const = 0;
+
 protected:
   b2FilterData m_filter;
   b2Body *m_body;
@@ -55,6 +64,10 @@ public:
   void AddPoint(Point2d point);
   void Clear();
   virtual void Generate();
+  virtual double GetCurrentWidth() const;
+  virtual double GetCurrentHeight() const;
+  virtual double GetInitialWidth() const;
+  virtual double GetInitialHeight() const;
 protected:
   std::vector<Point2d> m_point_list;
 };

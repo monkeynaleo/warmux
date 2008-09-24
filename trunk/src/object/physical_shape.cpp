@@ -19,6 +19,7 @@
  * Physical shape
  *****************************************************************************/
 
+#include "include/base.h"
 #include "object/physical_shape.h"
 
 PhysicalShape::PhysicalShape(b2Body *body) :
@@ -79,7 +80,7 @@ void PhysicalPolygone::Generate()
   b2PolygonDef shapeDef;
   shapeDef.vertexCount = m_point_list.size();
 
-  for (unsigned i = 0; i<m_point_list.size();i++) {
+  for (uint i = 0; i<m_point_list.size();i++) {
     shapeDef.vertices[i].Set(m_point_list[i].x, m_point_list[i].y);
   }
 
@@ -99,11 +100,92 @@ void PhysicalPolygone::Generate()
   m_body->SetMass(&massData);
 }
 
-
-
 void PhysicalPolygone::Clear()
 {
   m_point_list.clear();
+}
+
+double PhysicalPolygone::GetCurrentWidth() const
+{
+  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+  ASSERT(polygon->GetVertexCount() > 0);
+
+  double width = 0;
+  double minx = (polygon->GetVertices())[0].x;
+  double maxx = (polygon->GetVertices())[0].x;
+
+  for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+
+    if ((polygon->GetVertices())[i].x > maxx)
+      maxx = (polygon->GetVertices())[i].x;
+
+    if ((polygon->GetVertices())[i].x < minx)
+      minx = (polygon->GetVertices())[i].x;
+  }
+  width = maxx - minx;
+  return width;
+}
+double PhysicalPolygone::GetCurrentHeight() const
+{
+  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+  ASSERT(polygon->GetVertexCount() > 0);
+
+  double height = 0;
+  double miny = (polygon->GetVertices())[0].y;
+  double maxy = (polygon->GetVertices())[0].y;
+
+  for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+
+    if ((polygon->GetVertices())[i].y > maxy)
+      maxy = (polygon->GetVertices())[i].y;
+
+    if ((polygon->GetVertices())[i].y < miny)
+      miny = (polygon->GetVertices())[i].y;
+  }
+  height = maxy - miny;
+  return height;
+}
+
+double PhysicalPolygone::GetInitialWidth() const
+{
+  ASSERT(m_point_list.size() > 0);
+
+  double width = 0;
+  double minx = m_point_list[0].x;
+  double maxx = m_point_list[0].x;
+
+  for (uint i = 1; i<m_point_list.size(); i++) {
+
+    if (m_point_list[i].x > maxx)
+      maxx = m_point_list[i].x;
+
+    if (m_point_list[i].x < minx)
+      minx = m_point_list[i].x;
+  }
+  width = maxx - minx;
+  return width;
+}
+
+double PhysicalPolygone::GetInitialHeight() const
+{
+  ASSERT(m_point_list.size() > 0);
+
+  double height = 0;
+  double miny = m_point_list[0].y;
+  double maxy = m_point_list[0].y;
+
+  for (uint i = 1; i<m_point_list.size(); i++) {
+
+    if (m_point_list[i].y > maxy)
+      maxy = m_point_list[i].y;
+
+    if (m_point_list[i].y < miny)
+      miny = m_point_list[i].y;
+  }
+  height = maxy - miny;
+  return height;
 }
 
 /////////////////////////////////
@@ -113,12 +195,10 @@ PhysicalRectangle::PhysicalRectangle(b2Body *body, double width, double height) 
 {
   m_width = width;
   m_height = height;
-
 }
 
 void PhysicalRectangle::Generate()
 {
-
   m_point_list.clear();
   AddPoint(Point2d(0,0));
   AddPoint(Point2d(m_width,0));
@@ -126,6 +206,5 @@ void PhysicalRectangle::Generate()
   AddPoint(Point2d(0,m_height));
 
   PhysicalPolygone::Generate();
-
 }
 
