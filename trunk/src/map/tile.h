@@ -30,8 +30,6 @@ class Sprite;
 class TileItem;
 class TileItem_Empty;
 
-extern TileItem_Empty EmptyTile;
-
 const uint EXPLOSION_BORDER_SIZE = 10;
 
 class Tile : public Rectanglei
