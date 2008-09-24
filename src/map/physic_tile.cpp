@@ -398,11 +398,14 @@ void PhysicTile::CalculateFullness()
 #ifdef DEBUG
 void PhysicTile::DrawBorder(const Color& color) const
 {
-  if (m_fullness == FULL) {
+  if (m_fullness != EMPTY && !is_subdivised && is_containing_polygon) {
     ASSERT(m_shape != NULL);
     m_shape->DrawBorder(color);
-  } else if (m_fullness == MIXTE) {
-    // TODO
+  } else if (m_fullness == MIXTE && is_subdivised) {
+    for (uint i=0; i < 4; i++) {
+      if (m_physic_tiles[i] != NULL)
+	m_physic_tiles[i]->DrawBorder(color);
+    }
   }
 }
 #endif
