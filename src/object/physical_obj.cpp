@@ -148,13 +148,13 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   double phys_width = double(newSize.x)/PIXEL_PER_METER;
   double phys_height = double(newSize.y)/PIXEL_PER_METER;
 
-  //Physical shape
+  // Shape position is relative to body
   PhysicalPolygone *shape = new PhysicalPolygone(m_body);
 
-  shape->AddPoint(Point2d(GetPhysX() , GetPhysY()));
-  shape->AddPoint(Point2d(GetPhysX() + phys_width, GetPhysY()));
-  shape->AddPoint(Point2d(GetPhysX() + phys_width, GetPhysY() + phys_height));
-  shape->AddPoint(Point2d(GetPhysX() , GetPhysY() + phys_height));
+  shape->AddPoint(Point2d(0 , 0));
+  shape->AddPoint(Point2d(phys_width, 0));
+  shape->AddPoint(Point2d(phys_width, phys_height));
+  shape->AddPoint(Point2d(0 , phys_height));
   shape->SetMass(GetMass());
 
   //Physical shape
