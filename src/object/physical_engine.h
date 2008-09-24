@@ -34,6 +34,7 @@ extern const double PIXEL_PER_METER;
 class Physics;
 class Force;
 class ContactListener;
+class DebugDraw;
 
 class PhysicalEngine : public Singleton<PhysicalEngine>
 {
@@ -64,6 +65,7 @@ protected:
   b2World *physic_world;
   b2Body *ground;
   ContactListener *m_contact_listener;
+  DebugDraw *m_debug_draw;
 
   std::map<b2Body *,Physics *> objects_list;
 

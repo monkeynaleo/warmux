@@ -87,7 +87,7 @@ wormux_SOURCES = \
         map/ground.cpp map/ground.h \
         map/map.cpp map/map.h \
         map/maps_list.cpp map/maps_list.h \
-		map/physic_tile.cpp map/physic_tile.h \
+	map/physic_tile.cpp map/physic_tile.h \
         map/random_map.cpp map/random_map.h \
         map/sky.cpp map/sky.h \
         map/tile.cpp map/tile.h \
@@ -96,7 +96,7 @@ wormux_SOURCES = \
         map/wind.cpp map/wind.h \
         menu/credits_menu.cpp menu/credits_menu.h \
         menu/game_menu.cpp menu/game_menu.h \
-		menu/game_mode_editor.cpp menu/game_mode_editor.h \
+	menu/game_mode_editor.cpp menu/game_mode_editor.h \
         menu/help_menu.cpp menu/help_menu.h \
         menu/main_menu.cpp menu/main_menu.h \
         menu/map_selection_box.cpp menu/map_selection_box.h \
@@ -132,7 +132,7 @@ wormux_SOURCES = \
         object/objbox.cpp object/objbox.h \
         object/object_cfg.cpp object/object_cfg.h \
         object/objects_list.cpp object/objects_list.h \
-		object/physical_engine.cpp object/physical_engine.h \
+	object/physical_engine.cpp object/physical_engine.h \
         object/physical_obj.cpp object/physical_obj.h \
         object/physical_shape.cpp object/physical_shape.h \
         object/physics.cpp object/physics.h \
@@ -156,7 +156,7 @@ wormux_SOURCES = \
         sound/sample_cache.cpp sound/sample_cache.h \
         team/custom_team.cpp team/custom_team.h \
         team/custom_teams_list.cpp team/custom_teams_list.h \
-		team/macro.h \
+	team/macro.h \
         team/results.cpp team/results.h \
         team/team_config.h \
         team/team.cpp team/team.h \
@@ -165,7 +165,8 @@ wormux_SOURCES = \
         tool/affine_transform.cpp tool/affine_transform.h \
         tool/copynpaste.cpp tool/copynpaste.h \
         tool/debug.cpp tool/debug.h \
-        tool/error.cpp tool/error.h \
+        tool/debug_physics.cpp tool/debug_physics.h \
+	tool/error.cpp tool/error.h \
         tool/euler_vector.cpp tool/euler_vector.h \
         tool/file_tools.cpp tool/file_tools.h \
         tool/i18n.cpp tool/i18n.h \
