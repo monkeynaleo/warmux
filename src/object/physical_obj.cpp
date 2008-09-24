@@ -135,12 +135,12 @@ double PhysicalObj::GetYdouble() const
 
 int PhysicalObj::GetX() const
 {
-  return (int)GetXdouble();
+  return (int)(GetXdouble()+0.5f);//Round
 }
 
 int PhysicalObj::GetY() const
 {
-  return (int)GetYdouble();
+  return (int)(GetYdouble()+0.5f);//Round
 }
 
 void PhysicalObj::SetSize(const Point2i &newSize)
@@ -184,7 +184,7 @@ double PhysicalObj::GetWdouble() const
 
 int PhysicalObj::GetWidth() const
 {
-  return int(GetWdouble());
+  return int(GetWdouble()+0.5f);//Round
 }
 
 double PhysicalObj::GetHdouble() const
@@ -197,7 +197,7 @@ double PhysicalObj::GetHdouble() const
 
 int PhysicalObj::GetHeight() const
 {
-  return int(GetHdouble());
+  return int(GetHdouble()+0.5f);//Round
 }
 
 Point2d PhysicalObj::GetSizeDouble() const
