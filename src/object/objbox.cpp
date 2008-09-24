@@ -42,9 +42,7 @@
 #include "weapon/explosion.h"
 
 #ifdef DEBUG
-#include "graphic/video.h"
-#include "include/app.h"
-#include "map/camera.h"
+#include "object/physical_shape.h"
 #endif
 
 const uint SPEED = 5; // meter / seconde
@@ -66,7 +64,8 @@ ObjBox::ObjBox(const std::string &name)
   std::cout<<"super called"<<std::endl;
 }
 
-ObjBox::~ObjBox(){
+ObjBox::~ObjBox()
+{
   delete anim;
   Game::GetInstance()->SetCurrentBox(NULL);
 }
@@ -121,14 +120,8 @@ void ObjBox::Draw()
   anim->Draw(GetPosition());
 
 #ifdef DEBUG
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), anim->GetSize());
-    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
+  if (IsLOGGING("polygon.box")) {
+    m_shape->DrawBorder(primary_red_color);
   }
 #endif
 }
