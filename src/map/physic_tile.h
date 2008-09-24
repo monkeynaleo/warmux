@@ -24,8 +24,7 @@
 
 #include "tool/point.h"
 class TileItem;
-class b2Shape;
-class b2Body;
+class PhysicalShape;
 
 #ifdef DEBUG
 class Color;
@@ -42,7 +41,7 @@ private:
   bool is_subdivised;
   bool is_containing_polygon;
 
-  b2Shape* m_shape;
+  PhysicalShape *m_shape;
   PhysicTile *m_physic_tiles[4];
 
   PhysicTile * m_parent_physic_tile;

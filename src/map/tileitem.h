@@ -74,14 +74,28 @@ public:
 
 class TileItem_AlphaSoftware : public TileItem
 {
+  Point2i m_size;
+  Surface m_surface;
   b2Body* m_tile_body;
   PhysicTile *m_physic_tile;
   Point2d m_shape_offset;
   int m_shape_level;
-
-
   unsigned char* last_filled_pixel;
+
   const TileItem_AlphaSoftware& operator=(const TileItem_AlphaSoftware&);
+
+  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
+  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos) const;
+  unsigned char GetAlpha_Index0(const Point2i &pos) const;
+  inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
+  inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
+
+  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
+  void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
+
+#ifdef DBG_TILE
+  void FillWithRGB(Uint8 r, Uint8 g, Uint8 b);
+#endif
 
 public:
   bool need_check_empty;
@@ -104,23 +118,6 @@ public:
 
   bool IsTotallyEmpty() const {return false;};
   Surface GetSurface() { return m_surface; };
-
-private:
-  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
-  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos) const;
-  unsigned char GetAlpha_Index0(const Point2i &pos) const;
-  inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
-  inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
-
-  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
-  void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
-
-  Point2i m_size;
-  Surface m_surface;
-
-#ifdef DBG_TILE
-  void FillWithRGB(Uint8 r, Uint8 g, Uint8 b);
-#endif
 };
 
 #endif
