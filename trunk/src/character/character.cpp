@@ -977,12 +977,13 @@ void Character::SetSize(const Point2i &newSize)
 
   PhysicalPolygone *shape = new PhysicalPolygone(m_body);
 
-  shape->AddPoint(Point2d(GetPhysX() , GetPhysY()));
-  shape->AddPoint(Point2d(GetPhysX() + phys_width, GetPhysY()));
-  shape->AddPoint(Point2d(GetPhysX() + phys_width, GetPhysY() + 3*phys_height/4));
-  shape->AddPoint(Point2d(GetPhysX() + 2*phys_width/3, GetPhysY() + phys_height));
-  shape->AddPoint(Point2d(GetPhysX() + 1*phys_width/3, GetPhysY() + phys_height));
-  shape->AddPoint(Point2d(GetPhysX() , GetPhysY() + 3*phys_height/4));
+  // Shape position is relative to body
+  shape->AddPoint(Point2d(0, 0));
+  shape->AddPoint(Point2d(phys_width, 0));
+  shape->AddPoint(Point2d(phys_width, 3*phys_height/4));
+  shape->AddPoint(Point2d(2*phys_width/3, phys_height));
+  shape->AddPoint(Point2d(1*phys_width/3, phys_height));
+  shape->AddPoint(Point2d(0, 3*phys_height/4));
   shape->SetMass(GetMass());
 
   //Physical shape
