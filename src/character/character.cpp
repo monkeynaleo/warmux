@@ -450,7 +450,6 @@ void Character::Draw()
   }
 
 #ifdef DEBUG
-
   if (IsLOGGING("body"))
   {
     dy -= HAUT_FONT_MIX;
@@ -459,14 +458,8 @@ void Character::Draw()
     skin_text.DrawCenterTopOnMap(Point2i(GetX(), GetY() - dy));
   }
 
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), GetSize());
-    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
+  if (IsLOGGING("polygon.character")) {
+    m_shape->DrawBorder(primary_red_color);
   }
 #endif
 }
