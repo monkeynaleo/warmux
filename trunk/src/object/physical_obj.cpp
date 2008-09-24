@@ -121,8 +121,6 @@ void PhysicalObj::SetXY(const Point2d &position)
       SetPhysXY( position / PIXEL_PER_METER );
       if( FootsInVacuum() ) StartMoving();
     }
-
-
 }
 
 double PhysicalObj::GetXdouble() const
