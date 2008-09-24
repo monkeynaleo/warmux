@@ -145,10 +145,79 @@ int PhysicalObj::GetY() const
   return (int)GetYdouble();
 }
 
+void PhysicalObj::SetSize(const Point2i &newSize)
+{
+  int pixel_width = newSize.x;
+  int pixel_height = newSize.y;
+  m_phys_height = double(pixel_height)/PIXEL_PER_METER;
+  m_phys_width = double(pixel_width)/PIXEL_PER_METER;
+
+  //Physical shape
+  PhysicalPolygone *shape = new PhysicalPolygone(m_body);
+
+  shape->AddPoint(Point2d(GetPhysX() , GetPhysY()));
+  shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY()));
+  shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY() + m_phys_height));
+  shape->AddPoint(Point2d(GetPhysX() , GetPhysY() + m_phys_height));
+  shape->SetMass(GetMass());
+
+  //Physical shape
+
+  b2FilterData filter_data;
+  filter_data.categoryBits = 0x0001;
+  filter_data.maskBits = 0x0000;
+  if (m_shape != NULL) {
+    filter_data = m_shape->GetFilter();
+  }
+  shape->SetFilter(filter_data);
+  shape->Generate();
+
+  if (m_shape)
+    delete m_shape;
+
+  m_shape = shape;
+}
+
+double PhysicalObj::GetWdouble() const
+{
+  ASSERT(m_shape);
+  double phys_width = m_shape->GetCurrentWidth();
+  double pixel_width = phys_width * PIXEL_PER_METER;
+  return pixel_width;
+}
+
+int PhysicalObj::GetWidth() const
+{
+  return int(GetWdouble());
+}
+
+double PhysicalObj::GetHdouble() const
+{
+  ASSERT(m_shape);
+  double phys_height = m_shape->GetCurrentHeight();
+  double pixel_height = phys_height * PIXEL_PER_METER;
+  return pixel_height;
+}
+
+int PhysicalObj::GetHeight() const
+{
+  return int(GetHdouble());
+}
+
+Point2d PhysicalObj::GetSizeDouble() const
+{
+  return Point2d(GetWdouble(), GetHdouble());
+}
+
+Point2i PhysicalObj::GetSize() const
+{
+  return Point2i(GetWidth(), GetHeight());
+}
+
 const Rectanglei PhysicalObj::GetTestRect() const
 {
-  int width = m_width - m_test_right - m_test_left;
-  int height = m_height - m_test_bottom - m_test_top;
+  int width = GetWidth() - m_test_right - m_test_left;
+  int height = GetHeight() - m_test_bottom - m_test_top;
   if (width < 1)
     width = 1;
   if (height < 1)
@@ -158,12 +227,12 @@ const Rectanglei PhysicalObj::GetTestRect() const
 
 int PhysicalObj::GetTestWidth() const
 {
-  return m_width - m_test_left - m_test_right;
+  return GetWidth() - m_test_left - m_test_right;
 }
 
 int PhysicalObj::GetTestHeight() const
 {
-  return m_height - m_test_top - m_test_bottom;
+  return GetHeight() - m_test_top - m_test_bottom;
 }
 
 void PhysicalObj::StoreValue(Action *a)
@@ -503,39 +572,6 @@ bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const
 
 int count = 0;
 
-void PhysicalObj::SetSize(const Point2i &newSize)
-{
-  m_width = newSize.x;
-  m_height = newSize.y;
-  m_phys_height = double(m_height)/PIXEL_PER_METER;
-  m_phys_width = double(m_width)/PIXEL_PER_METER;
-
-  //Physical shape
-  PhysicalPolygone *shape = new PhysicalPolygone(m_body);
-
-  shape->AddPoint(Point2d(GetPhysX() , GetPhysY()));
-  shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY()));
-  shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY() + m_phys_height));
-  shape->AddPoint(Point2d(GetPhysX() , GetPhysY() + m_phys_height));
-  shape->SetMass(GetMass());
-
-  //Physical shape
-
-  b2FilterData filter_data;
-  filter_data.categoryBits = 0x0001;
-  filter_data.maskBits = 0x0000;
-  if (m_shape != NULL) {
-    filter_data = m_shape->GetFilter();
-  }
-  shape->SetFilter(filter_data);
-  shape->Generate();
-
-  if (m_shape)
-    delete m_shape;
-
-  m_shape = shape;
-}
-
 bool PhysicalObj::FootsOnFloor(int y) const
 {
   //TODO : calculate collision with water
@@ -580,10 +616,10 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
     return false;
   }
 
-  int y_test = position.y + m_height - m_test_bottom;
+  int y_test = position.y + GetHeight() - m_test_bottom;
 
   Rectanglei rect( position.x + m_test_left, y_test,
-                   m_width - m_test_right - m_test_left, 1);
+                   GetWidth() - m_test_right - m_test_left, 1);
 
   if (m_allow_negative_y && rect.GetPositionY() < 0) {
     int b = rect.GetPositionY() + rect.GetSizeY();
