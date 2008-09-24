@@ -102,7 +102,7 @@ public:
   const Point2d GetPosition() const { return Point2d(GetXdouble(), GetYdouble()) ;};
 
   // Set/Get size
-  void SetSize(const Point2i &newSize);
+  virtual void SetSize(const Point2i &newSize);
   int GetWidth() const;
   int GetHeight() const;
   Point2i GetSize() const;
