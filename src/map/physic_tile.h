@@ -27,6 +27,10 @@ class TileItem;
 class b2Shape;
 class b2Body;
 
+#ifdef DEBUG
+class Color;
+#endif
+
 class PhysicTile
 {
 private:
@@ -38,7 +42,6 @@ private:
   bool is_subdivised;
   bool is_containing_polygon;
 
-
   b2Shape* m_shape;
   PhysicTile *m_physic_tiles[4];
 
@@ -49,10 +52,7 @@ private:
   Point2i m_offset;
   Point2i m_tile_offset;
 
-
   int m_level;
-
-
 
 public:
 
@@ -62,9 +62,9 @@ public:
   void GeneratePolygone();
   void Clean();
   void CalculateFullness();
-
-
-
+#ifdef DEBUG
+  void DrawBorder(const Color& color) const;
+#endif
 };
 
 #endif

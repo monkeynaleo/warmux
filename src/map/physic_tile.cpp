@@ -18,22 +18,27 @@
  ******************************************************************************
  * PhysicTile
  *****************************************************************************/
-
-#include "map/physic_tile.h"
-#include "object/physical_engine.h"
 #include <Box2D.h>
-#include "map/tileitem.h"
 #include <iostream>
 
-PhysicTile::PhysicTile(Point2i size, Point2i offset, Point2i tile_offset, TileItem *tile, PhysicTile *parent_physic_tile, int level):
-m_parent_physic_tile(parent_physic_tile),
-m_parent_tile(tile),
-m_size(size),
-m_offset(offset),
-m_tile_offset(tile_offset),
-m_level(level)
-{
+#include "map/physic_tile.h"
+#include "map/tileitem.h"
+#include "object/physical_engine.h"
 
+#ifdef DEBUG
+#include "graphic/color.h"
+#include "graphic/video.h"
+#include "map/camera.h"
+#endif
+
+PhysicTile::PhysicTile(Point2i size, Point2i offset, Point2i tile_offset, TileItem *tile, PhysicTile *parent_physic_tile, int level):
+  m_parent_physic_tile(parent_physic_tile),
+  m_parent_tile(tile),
+  m_size(size),
+  m_offset(offset),
+  m_tile_offset(tile_offset),
+  m_level(level)
+{
   is_subdivised = false;
   is_containing_polygon = false;
   Generate();
@@ -150,7 +155,7 @@ void PhysicTile::GeneratePolygone()
   }
 
   // pts 0 in 1;
-std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
+  //std::cout<<"PhysicTile::GeneratePolygone"<<std::endl;
 
 
   //(0) search ground between (a) and (b)
@@ -374,11 +379,44 @@ void PhysicTile::CalculateFullness()
   }
 
 
-if(is_full == false){
-  m_fullness =  EMPTY;
-}else{
-  m_fullness = FULL;
-}
+  if(is_full == false){
+    m_fullness =  EMPTY;
+  }else{
+    m_fullness = FULL;
+  }
   return;
 }
 
+#ifdef DEBUG
+void PhysicTile::DrawBorder(const Color& color) const
+{
+  if (m_fullness == FULL) {
+
+    // Mostly Copy/paste from PhysicalPolygone::DrawBorder
+    b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+    ASSERT(polygon->GetVertexCount() > 2);
+    b2Body* tmp_body = m_parent_tile->GetBody();
+
+    int init_x = (tmp_body->GetPosition().x + (polygon->GetVertices())[0].x)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x;
+    int init_y = (tmp_body->GetPosition().y + (polygon->GetVertices())[0].y)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y;
+    int prev_x = init_x;
+    int prev_y = init_y;
+    int x, y;
+
+    for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+
+      x = (tmp_body->GetPosition().x + (polygon->GetVertices())[i].x)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x;
+      y = (tmp_body->GetPosition().y + (polygon->GetVertices())[i].y)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y;
+
+      GetMainWindow().LineColor(prev_x, x, prev_y, y, color);
+      prev_x = x;
+      prev_y = y;
+    }
+
+    GetMainWindow().LineColor(prev_x, init_x, prev_y, init_y, color);
+  } else if (m_fullness == MIXTE) {
+    // TODO
+  }
+}
+#endif
