@@ -61,6 +61,7 @@ void PhysicTile::Generate()
     is_containing_polygon = false;
     // std::cout<<"PhysicTile::m_fullness = EMPTY, level"<<m_level<<std::endl;
   }
+    
 
   if (m_fullness == FULL) {
     //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
