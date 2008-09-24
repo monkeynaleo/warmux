@@ -979,18 +979,18 @@ void Character::SetCustomName(const std::string name)
 
 void Character::SetSize(const Point2i &newSize)
 {
+  double phys_width = double(newSize.x)/PIXEL_PER_METER;
+  double phys_height = double(newSize.y)/PIXEL_PER_METER;
 
-PhysicalObj::SetSize(newSize);
- //Physical shape
   PhysicalPolygone *shape = new PhysicalPolygone(m_body);
 
- shape->AddPoint(Point2d(GetPhysX() , GetPhysY()));
- shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY()));
- shape->AddPoint(Point2d(GetPhysX() + m_phys_width, GetPhysY() + 3*m_phys_height/4));
- shape->AddPoint(Point2d(GetPhysX() + 2*m_phys_width/3, GetPhysY() + m_phys_height));
- shape->AddPoint(Point2d(GetPhysX() + 1*m_phys_width/3, GetPhysY() + m_phys_height));
- shape->AddPoint(Point2d(GetPhysX() , GetPhysY() + 3*m_phys_height/4));
- shape->SetMass(GetMass());
+  shape->AddPoint(Point2d(GetPhysX() , GetPhysY()));
+  shape->AddPoint(Point2d(GetPhysX() + phys_width, GetPhysY()));
+  shape->AddPoint(Point2d(GetPhysX() + phys_width, GetPhysY() + 3*phys_height/4));
+  shape->AddPoint(Point2d(GetPhysX() + 2*phys_width/3, GetPhysY() + phys_height));
+  shape->AddPoint(Point2d(GetPhysX() + 1*phys_width/3, GetPhysY() + phys_height));
+  shape->AddPoint(Point2d(GetPhysX() , GetPhysY() + 3*phys_height/4));
+  shape->SetMass(GetMass());
 
   //Physical shape
 
@@ -1009,8 +1009,8 @@ PhysicalObj::SetSize(newSize);
 
   m_shape = shape;
   shape->Generate();
-
 }
+
 // ###################################################################
 // ###################################################################
 // ###################################################################

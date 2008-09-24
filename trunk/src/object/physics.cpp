@@ -49,8 +49,6 @@ Physics::Physics ():
   m_extern_force_index(1),
   m_angle(0.0f),
   m_last_move(Time::GetInstance()->Read()),
-  m_phys_width(),
-  m_phys_height(),
   m_fix_point_gnd(),
   m_fix_point_dxy(),
   m_rope_angle(),
@@ -225,8 +223,6 @@ void Physics::StoreValue(Action *a)
   a->Push((int)m_motion_type);
   //a->Push(m_extern_force);
   a->Push((int)m_last_move);
-  a->Push(m_phys_width);
-  a->Push(m_phys_height);
   a->Push(m_fix_point_gnd);
   a->Push(m_fix_point_dxy);
   a->Push(m_rope_angle);
@@ -248,8 +244,6 @@ void Physics::GetValueFromAction(Action *a)
   m_motion_type        = (MotionType_t)a->PopInt();
 // m_extern_force       = a->PopPoint2d();
   m_last_move          = (uint)a->PopInt();
-  m_phys_width         = a->PopDouble();
-  m_phys_height        = a->PopDouble();
   m_fix_point_gnd      = a->PopPoint2d();
   m_fix_point_dxy      = a->PopPoint2d();
   m_rope_angle         = a->PopEulerVector();
