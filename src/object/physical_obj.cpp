@@ -207,13 +207,13 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
   m_minimum_overlapse_time = 0;
   if(obj != NULL) {
     m_overlapping_object = obj;
-    lst_objects.AddOverlappedObject(this);
+    ObjectsList::GetRef().AddOverlappedObject(this);
     MSG_DEBUG("physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore during %d ms",
               GetName().c_str(), obj->GetName().c_str(), timeout);
   } else {
     if(m_overlapping_object != NULL) {
       m_overlapping_object = NULL;
-      lst_objects.RemoveOverlappedObject(this);
+      ObjectsList::GetRef().RemoveOverlappedObject(this);
       MSG_DEBUG( "physic.overlapping", "clearing overlapping object in \"%s\"", GetName().c_str());
     }
     return;
