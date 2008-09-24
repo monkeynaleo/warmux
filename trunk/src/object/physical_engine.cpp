@@ -24,6 +24,7 @@
 #include "object/physical_engine.h"
 #include "object/physical_obj.h"
 #include "tool/math_tools.h"
+#include "tool/debug_physics.h"
 #include <iostream>
 
 const double PIXEL_PER_METER = 20;
@@ -39,6 +40,10 @@ PhysicalEngine::PhysicalEngine()
 
   m_contact_listener = new ContactListener(this);
   physic_world->SetContactListener(m_contact_listener);
+
+  m_debug_draw = new DebugDraw();
+  physic_world->SetDebugDraw(m_debug_draw);
+
   frame_rate = 60;
   last_step_time = 0;
   iterations = 10;
@@ -47,6 +52,7 @@ PhysicalEngine::PhysicalEngine()
 PhysicalEngine::~PhysicalEngine()
 {
   delete m_contact_listener;
+  delete m_debug_draw;
   delete physic_world;
 }
 
