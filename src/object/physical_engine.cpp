@@ -44,6 +44,16 @@ PhysicalEngine::PhysicalEngine()
   m_debug_draw = new DebugDraw();
   physic_world->SetDebugDraw(m_debug_draw);
 
+  // uint32 flags = 0;
+  // flags += 0 * b2DebugDraw::e_shapeBit;
+  // flags += 0 * b2DebugDraw::e_jointBit;
+  // flags += 0 * b2DebugDraw::e_coreShapeBit;
+  // flags += 0 * b2DebugDraw::e_aabbBit;
+  // flags += 0 * b2DebugDraw::e_obbBit;
+  // flags += 0 * b2DebugDraw::e_pairBit;
+  // flags += 0 * b2DebugDraw::e_centerOfMassBit;
+  // m_debug_draw->SetFlags(flags);
+
   frame_rate = 60;
   last_step_time = 0;
   iterations = 10;
@@ -77,7 +87,6 @@ void PhysicalEngine::RemoveObject(Physics *obj)
   objects_list.erase(obj->GetBody());
   physic_world->DestroyBody(obj->GetBody());
 }
-
 
 void PhysicalEngine::Step()
 {
