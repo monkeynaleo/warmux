@@ -22,6 +22,12 @@
 #include "include/base.h"
 #include "object/physical_shape.h"
 
+#ifdef DEBUG
+#include "graphic/color.h"
+#include "graphic/video.h"
+#include "map/camera.h"
+#endif
+
 PhysicalShape::PhysicalShape(b2Body *body) :
   m_body(body),
   m_shape(NULL),
@@ -126,6 +132,7 @@ double PhysicalPolygone::GetCurrentWidth() const
   width = maxx - minx;
   return width;
 }
+
 double PhysicalPolygone::GetCurrentHeight() const
 {
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
@@ -187,6 +194,33 @@ double PhysicalPolygone::GetInitialHeight() const
   height = maxy - miny;
   return height;
 }
+
+#ifdef DEBUG
+void PhysicalPolygone::DrawBorder(const Color& color) const
+{
+  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+  ASSERT(polygon->GetVertexCount() > 2);
+
+  int init_x = (m_body->GetPosition().x + (polygon->GetVertices())[0].x)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x;
+  int init_y = (m_body->GetPosition().y + (polygon->GetVertices())[0].y)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y;
+  int prev_x = init_x;
+  int prev_y = init_y;
+  int x, y;
+
+  for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+
+    x = (m_body->GetPosition().x + (polygon->GetVertices())[i].x)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x;
+    y = (m_body->GetPosition().y + (polygon->GetVertices())[i].y)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y;
+
+    GetMainWindow().LineColor(prev_x, x, prev_y, y, color);
+    prev_x = x;
+    prev_y = y;
+  }
+
+  GetMainWindow().LineColor(prev_x, init_x, prev_y, init_y, color);
+}
+#endif
 
 /////////////////////////////////
 // PhysicalRectangle
