@@ -28,6 +28,9 @@
 #include <Box2D.h>
 
 extern const double PIXEL_PER_METER;
+#ifdef DEBUG
+class Color;
+#endif
 
 class PhysicalShape
 {
@@ -50,6 +53,10 @@ public:
   virtual double GetInitialWidth() const = 0;
   virtual double GetInitialHeight() const = 0;
 
+#ifdef DEBUG
+  virtual void DrawBorder(const Color &color) const = 0;
+#endif
+
 protected:
   b2FilterData m_filter;
   b2Body *m_body;
@@ -70,6 +77,10 @@ public:
   virtual double GetCurrentHeight() const;
   virtual double GetInitialWidth() const;
   virtual double GetInitialHeight() const;
+
+#ifdef DEBUG
+  void DrawBorder(const Color &color) const;
+#endif
 protected:
   std::vector<Point2d> m_point_list;
 };
