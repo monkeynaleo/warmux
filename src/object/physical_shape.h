@@ -27,6 +27,8 @@
 
 #include <Box2D.h>
 
+extern const double PIXEL_PER_METER;
+
 class PhysicalShape
 {
 public:
