@@ -68,11 +68,6 @@ protected:
   bool m_is_character;
   bool m_is_fire;
 
-  // WARNING: MUST BE REMOVED
-  // Probably to replace with methods from PhysicalShape
-  // Object size and position.
-  uint m_width, m_height;
-
   virtual void CheckOverlapping();
 
   std::string m_name;
@@ -95,12 +90,6 @@ public:
 
   //-------- Set position and size -------
 
-  // Set/Get size
-  void SetSize(const Point2i &newSize);
-  int GetWidth() const { return m_width; };
-  int GetHeight() const { return m_height; };
-  Point2i GetSize() const { return Point2i(m_width, m_height); };
-
   // Set/Get position
   void SetX(double x) { SetXY( Point2d(x, GetYdouble()) ); };
   void SetY(double y) { SetXY( Point2d(GetXdouble(), y) ); };
@@ -111,6 +100,16 @@ public:
   double GetXdouble() const;
   double GetYdouble() const;
   const Point2d GetPosition() const { return Point2d(GetXdouble(), GetYdouble()) ;};
+
+  // Set/Get size
+  void SetSize(const Point2i &newSize);
+  int GetWidth() const;
+  int GetHeight() const;
+  Point2i GetSize() const;
+
+  double GetWdouble() const;
+  double GetHdouble() const;
+  Point2d GetSizeDouble() const;
 
   // Used to sync value across network
   virtual void GetValueFromAction(Action *);
