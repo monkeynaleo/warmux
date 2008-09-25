@@ -24,6 +24,7 @@
 #include "graphic/video.h"
 #include "map/camera.h"
 #include "tool/debug_physics.h"
+#include "tool/math_tools.h"
 
 extern const double PIXEL_PER_METER;
 
@@ -33,8 +34,8 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
 
   std::list<Point2i> points;
   for (int32 i = 0; i < vertexCount; i++) {
-    points.push_back(Point2i(vertices[i].x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x,
-			     vertices[i].y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y));
+    points.push_back(Point2i(lround(vertices[i].x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x,
+                             lround(vertices[i].y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y));
   }
 
   GetMainWindow().AAPolygonColor(points, mycolor);
@@ -46,8 +47,8 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
 
   std::list<Point2i> points;
   for (int32 i = 0; i < vertexCount; i++) {
-    points.push_back(Point2i(vertices[i].x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x,
-			     vertices[i].y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y));
+    points.push_back(Point2i(lround(vertices[i].x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x,
+                             lround(vertices[i].y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y));
   }
 
   GetMainWindow().FilledPolygon(points, mycolor);
@@ -57,31 +58,31 @@ void DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& 
 {
   Color mycolor(color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 
-  GetMainWindow().CircleColor(center.x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x,
-			      center.y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y,
-			      radius*PIXEL_PER_METER,
-			      mycolor);
+  GetMainWindow().CircleColor(lround(center.x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x,
+                              lround(center.y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y,
+                              lround(radius*PIXEL_PER_METER),
+                              mycolor);
 }
 
 void DebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& /*axis*/, const b2Color& color)
 {
   Color mycolor(color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 
-  GetMainWindow().FilledCircleColor(center.x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x,
-				    center.y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y,
-				    radius*PIXEL_PER_METER,
-				    mycolor);
+  GetMainWindow().FilledCircleColor(lround(center.x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x,
+                                    lround(center.y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y,
+                                    lround(radius*PIXEL_PER_METER),
+                                    mycolor);
 }
 
 void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color)
 {
   Color mycolor(color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 
-  GetMainWindow().LineColor(p1.x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x,
-			    p2.x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x,
-			    p1.y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y,
-			    p2.y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y,
-			    mycolor);
+  GetMainWindow().LineColor(lround(p1.x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x,
+                            lround(p2.x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x,
+                            lround(p1.y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y,
+                            lround(p2.y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y,
+                            mycolor);
 }
 
 void DebugDraw::DrawXForm(const b2XForm& /*xf*/)
@@ -93,14 +94,14 @@ void DrawPoint(const b2Vec2& p, float32 /*size*/, const b2Color& color)
 {
   Color mycolor(color.r, color.g, color.b, SDL_ALPHA_OPAQUE);
 
-  GetMainWindow().LineColor(p.x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x -1,
-			    p.x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x -1,
-			    p.y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y +1,
-			    p.y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y +1,
-			    mycolor);
-  GetMainWindow().LineColor(p.x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x +1,
-			    p.x*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x +1,
-			    p.y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y -1,
-			    p.y*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y -1,
-			    mycolor);
+  GetMainWindow().LineColor(lround(p.x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x -1,
+                            lround(p.x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x -1,
+                            lround(p.y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y +1,
+                            lround(p.y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y +1,
+                            mycolor);
+  GetMainWindow().LineColor(lround(p.x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x +1,
+                            lround(p.x*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x +1,
+                            lround(p.y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y -1,
+                            lround(p.y*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y -1,
+                            mycolor);
 }
