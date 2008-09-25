@@ -21,6 +21,7 @@
 
 #include "include/base.h"
 #include "object/physical_shape.h"
+#include "tool/math_tools.h"
 
 #ifdef DEBUG
 #include "graphic/color.h"
@@ -202,16 +203,16 @@ void PhysicalPolygone::DrawBorder(const Color& color) const
 
   ASSERT(polygon->GetVertexCount() > 2);
 
-  int init_x = ((m_body->GetPosition().x + (polygon->GetVertices())[0].x)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x)+0.5f;
-  int init_y = ((m_body->GetPosition().y + (polygon->GetVertices())[0].y)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y)+0.5f;
+  int init_x = lround((m_body->GetPosition().x + (polygon->GetVertices())[0].x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+  int init_y = lround((m_body->GetPosition().y + (polygon->GetVertices())[0].y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
   int prev_x = init_x;
   int prev_y = init_y;
   int x, y;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    x = ((m_body->GetPosition().x + (polygon->GetVertices())[i].x)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().x)+0.5f;
-    y = ((m_body->GetPosition().y + (polygon->GetVertices())[i].y)*PIXEL_PER_METER - Camera::GetInstance()->GetPosition().y)+0.5f;
+    x = lround((m_body->GetPosition().x + (polygon->GetVertices())[i].x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+    y = lround((m_body->GetPosition().y + (polygon->GetVertices())[i].y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
 
     GetMainWindow().LineColor(prev_x, x, prev_y, y, color);
     prev_x = x;
