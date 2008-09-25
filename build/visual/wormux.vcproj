@@ -1408,6 +1408,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\object\physical_shape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\object\physical_shape.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\object\physics.cpp"
 					>
 				</File>
@@ -1529,6 +1537,14 @@
 				</File>
 				<File
 					RelativePath="..\..\src\tool\debug.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\tool\debug_physics.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\tool\debug_physics.h"
 					>
 				</File>
 				<File
