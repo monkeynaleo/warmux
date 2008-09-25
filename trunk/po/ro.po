@@ -9,7 +9,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-09-16 00:51+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -44,12 +43,12 @@ msgstr[0] "%i jucător e gata"
 msgstr[1] "%i jucători sunt gata"
 msgstr[2] "%i de jucători sunt gata"
 
-#: src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:116
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> cunoscut și ca %s din %s"
 
-#: src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:123
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
@@ -70,33 +69,33 @@ msgstr "Echipa %s - la distanță"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:722
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s din echipa %s s-a sinucis !"
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:755
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s din echipa %s a murit."
 
-#: src/game/game.cpp:709
+#: src/game/game.cpp:713
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s din echipa %s a căzut în apă!"
 
-#: src/game/game.cpp:703
+#: src/game/game.cpp:707
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s din echipa %s a căzut în afara hărții!"
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:728
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s din echipa %s a lovit prea tare pământul!"
 
 # what about female names?
-#: src/game/game.cpp:731
+#: src/game/game.cpp:735
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s din echipa %s decedat prin propria stângăcie!"
@@ -109,12 +108,12 @@ msgstr[0] "%s a câștigat %u punct de energie!"
 msgstr[1] "%s a câștigat %u puncte de energie!"
 msgstr[2] "%s a câștigat %u de puncte de energie!"
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "Psihopatia sălășluiește în %s, a omorât un membru al echipei %s!"
 
-#: src/weapon/mine.cpp:121
+#: src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
@@ -179,7 +178,7 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de ciocane pneumatice! Nu face prea mult zgomot cu "
 "ele! Îți mulțumim, vecinii tăi."
 
-#: src/weapon/anvil.cpp:189
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -187,7 +186,7 @@ msgstr[0] "Echipa %s a câștigat %u nicovală! Storcește tot cu ea!"
 msgstr[1] "Echipa %s a câștigat %u nicovale! Storcește tot cu ele!"
 msgstr[2] "Echipa %s a câștigat %u de nicovale! Storcește tot cu ele!"
 
-#: src/weapon/auto_bazooka.cpp:329
+#: src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -322,7 +321,7 @@ msgstr[2] "Echipa %s a câștigat %u de mingii de fotbal american!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/grapple.cpp:809
+#: src/weapon/grapple.cpp:811
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -358,7 +357,7 @@ msgstr[0] "Echipa %s a câștigat %u pistol!"
 msgstr[1] "Echipa %s a câștigat %u pistoale!"
 msgstr[2] "Echipa %s a câștigat %u de pistoale!"
 
-#: src/weapon/jetpack.cpp:247
+#: src/weapon/jetpack.cpp:252
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -386,7 +385,7 @@ msgstr[2] "Echipa %s a câștigat %u de gravitații scăzute! Sunt Neil Armstron
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/mine.cpp:247
+#: src/weapon/mine.cpp:249
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -400,7 +399,7 @@ msgstr[2] "Echipa %s a câștigat %u de mine!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/parachute.cpp:166
+#: src/weapon/parachute.cpp:167
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -553,7 +552,7 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:318
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -571,7 +570,7 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr "Echipa %s a fost nimicită."
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a luat cu el în mormânt un membru al echipei %s!"
@@ -581,7 +580,7 @@ msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:262
+#: src/menu/options_menu.cpp:268
 msgid "(system language)"
 msgstr "(limba sistemului)"
 
@@ -594,7 +593,7 @@ msgstr "(un moment necunoscut)"
 msgid "(unlimited)"
 msgstr "(infinit)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -604,7 +603,7 @@ msgstr ""
 "doriți să verificați dacă există o versiune actualizată pentru sistemul de "
 "operare folosit."
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:143
 msgid "Add custom team"
 msgstr "Adaugă o echipă particularizată"
 
@@ -638,7 +637,7 @@ msgstr ""
 "Foc : tasta spațiu\n"
 "o lovitură per rundă"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "Nicovală"
 
@@ -646,11 +645,11 @@ msgstr "Nicovală"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/weapon/auto_bazooka.cpp:220
+#: src/weapon/auto_bazooka.cpp:223
 msgid "Automatic Bazooka"
 msgstr "Rachetă automată"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:48
 msgid "Back to battle"
 msgstr "Înapoi pe câmpul de bătălie"
 
@@ -683,7 +682,7 @@ msgstr "Lampă de sudură"
 msgid "Bounce Ball"
 msgstr "Minge săltăreață"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:179
 msgid "Bye bye tux..."
 msgstr "Pa pa tux..."
 
@@ -729,7 +728,7 @@ msgstr "Schimbă categoria armei"
 msgid "Change weapon countdown"
 msgstr "Schimbă cronometrul armei"
 
-#: src/menu/options_menu.cpp:166
+#: src/menu/options_menu.cpp:165
 msgid "Character"
 msgstr "Personaj"
 
@@ -737,7 +736,7 @@ msgstr "Personaj"
 msgid "Character switching"
 msgstr "Schimb de personaje"
 
-#: src/menu/options_menu.cpp:193
+#: src/menu/options_menu.cpp:199
 msgid "Check updates online?"
 msgstr "Se verifică actualizările online?"
 
@@ -812,7 +811,7 @@ msgstr "Merite"
 msgid "Damage per turn during death mode"
 msgstr "Sănătatea pierdută la fiecare tură în modul mortal"
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:146
 msgid "Delete custom team"
 msgstr "Șterge echipa particularizată"
 
@@ -845,7 +844,7 @@ msgstr "Dinamită"
 msgid "END OF GAME"
 msgstr "SFÂRȘITUL JOCULUI"
 
-#: src/menu/options_menu.cpp:217
+#: src/menu/options_menu.cpp:223
 msgid "Effects volume"
 msgstr "Volumul efectelor"
 
@@ -937,7 +936,7 @@ msgstr ""
 "configurația router-ului: Portul TCP %s trebuie să fie redirectat către "
 "calculatorul tău."
 
-#: src/team/team.cpp:118
+#: src/team/team.cpp:123
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: corpul „%s” pentru echipa „%s” nu poate fi găsit."
@@ -978,7 +977,7 @@ msgstr "Lansator de antilope gnu"
 msgid "Graphic"
 msgstr "Grafică"
 
-#: src/weapon/grapple.cpp:166
+#: src/weapon/grapple.cpp:167
 msgid "Grapple"
 msgstr "Ghiară de agățare"
 
@@ -990,7 +989,7 @@ msgstr "Gravitație"
 msgid "Grenade"
 msgstr "Grenadă"
 
-#: src/map/ground.cpp:44
+#: src/map/ground.cpp:47
 msgid "Ground initialization..."
 msgstr "Inițializare teren..."
 
@@ -1017,7 +1016,7 @@ msgstr "Comandant șef"
 msgid "Head commander: "
 msgstr "Comandant șef: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Ajutor"
 
@@ -1047,7 +1046,7 @@ msgstr ""
 "Cum se folosește : țineți tasta spațiu apăsată\n"
 "un proiectil per rundă"
 
-#: src/weapon/auto_bazooka.cpp:221
+#: src/weapon/auto_bazooka.cpp:224
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1059,7 +1058,7 @@ msgstr ""
 "Foc : țineți tasta spațiu apăsată până la puterea dorită\n"
 "un proiectil per rundă"
 
-#: src/weapon/anvil.cpp:133
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1111,11 +1110,11 @@ msgstr "Inițializare sunete"
 msgid "Initialise teams"
 msgstr "Inițializare echipe"
 
-#: src/game/game.cpp:587
+#: src/game/game.cpp:591
 msgid "It's a present!"
 msgstr "E un cadou!"
 
-#: src/weapon/jetpack.cpp:60
+#: src/weapon/jetpack.cpp:62
 msgid "Jetpack"
 msgstr "Propulsor personal"
 
@@ -1169,7 +1168,7 @@ msgstr "Conectare manuală"
 msgid "Map"
 msgstr "Hartă"
 
-#: src/map/map.cpp:294
+#: src/map/map.cpp:305
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Harta %s, o creație a lui: "
@@ -1190,11 +1189,11 @@ msgstr "Număr maxim de jucători:"
 msgid "Maximum FPS"
 msgstr "Numărul maxim de C/S"
 
-#: src/weapon/mine.cpp:213
+#: src/weapon/mine.cpp:215
 msgid "Mine"
 msgstr "Mină"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:203
 msgid "Misc"
 msgstr "Diverse"
 
@@ -1226,11 +1225,11 @@ msgstr "Mută camera cu mausul sau săgețile"
 msgid "Move character"
 msgstr "Mută personajul"
 
-#: src/menu/options_menu.cpp:207
+#: src/menu/options_menu.cpp:213
 msgid "Music volume"
 msgstr "Volumul muzicii"
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:209
 msgid "Music?"
 msgstr "Muzică?"
 
@@ -1251,7 +1250,7 @@ msgstr "Niciodată"
 msgid "New network game at "
 msgstr "Un nou joc în rețea pornit la "
 
-#: src/menu/options_menu.cpp:242
+#: src/menu/options_menu.cpp:248
 msgid "New player warning?"
 msgstr "Avertisment la jucător nou?"
 
@@ -1285,7 +1284,7 @@ msgid "Options"
 msgstr "Opțiuni"
 
 # XXX: nu-mi place cum sună; probabil am să revin la "Opțiuni"
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:52
 msgid "Options menu"
 msgstr "Meniul de opțiuni"
 
@@ -1323,7 +1322,7 @@ msgstr "Jucător"
 msgid "Player energy?"
 msgstr "Energia jucătorului?"
 
-#: src/menu/options_menu.cpp:150
+#: src/menu/options_menu.cpp:152
 msgid "Player name"
 msgstr "Numele jucătorului"
 
@@ -1352,7 +1351,7 @@ msgstr "Ieșire"
 msgid "Quit Wormux"
 msgstr "Ieșire din Wormux"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:60
 msgid "Quit battle"
 msgstr "Părăsește bătălia"
 
@@ -1465,15 +1464,15 @@ msgstr ""
 "Poți descărca o versiune actualizată de la http://www.wormux.org/wiki/"
 "download.php"
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:251
 msgid "Sound"
 msgstr "Sunet"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:219
 msgid "Sound effects?"
 msgstr "Efecte sonore?"
 
-#: src/menu/options_menu.cpp:238
+#: src/menu/options_menu.cpp:244
 msgid "Sound frequency"
 msgstr "Frecvența sunetului"
 
@@ -1494,7 +1493,7 @@ msgstr "Stoc:"
 msgid "Submachine Gun"
 msgstr "Mitralieră semiautomată"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:231
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1518,7 +1517,7 @@ msgstr "Statistici echipe"
 msgid "Teams"
 msgstr "Echipe"
 
-#: src/menu/options_menu.cpp:186
+#: src/menu/options_menu.cpp:185
 msgid "Teams editor"
 msgstr "Editor de echipe"
 
@@ -1542,7 +1541,7 @@ msgstr "Antilopa gnu a părăsit câmpul de luptă înainte de a exploda"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Sconcsul a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/weapon/auto_bazooka.cpp:175
+#: src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Racheta automată a părăsit câmpul de luptă ..."
 
@@ -1669,7 +1668,7 @@ msgstr "Fără nume"
 msgid "Version"
 msgstr "Versiunea"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:453
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Verificare versiunii a eșuat pentru că: %s\n"
@@ -1700,7 +1699,7 @@ msgstr "Arme"
 msgid "Website: "
 msgstr "Saitul web: "
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:752
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -1755,7 +1754,7 @@ msgstr "Aveți nevoie de cel puțin două echipe valide !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 
-#: src/weapon/weapon_launcher.cpp:496
+#: src/weapon/weapon_launcher.cpp:501
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
@@ -1774,7 +1773,7 @@ msgstr ""
 "bombardare : clic stânga pe țintă\n"
 "un proiectil per rundă"
 
-#: src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "configurația nu a putut fi încărcată"
 
@@ -1783,11 +1782,11 @@ msgstr "configurația nu a putut fi încărcată"
 msgid "custom player"
 msgstr "jucător personalizat"
 
-#: src/map/ground.cpp:61
+#: src/map/ground.cpp:64
 msgid "done"
 msgstr "finalizat"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
 msgstr "eroare la analiza fișierului de configurare"
 
@@ -1796,7 +1795,7 @@ msgstr "eroare la analiza fișierului de configurare"
 msgid "from"
 msgstr "de la:"
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "nu există nici un fișier de configurare!"
 

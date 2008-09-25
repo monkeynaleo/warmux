@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-05-26 21:06+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team:  <he@li.org>\n"
@@ -35,12 +34,12 @@ msgid_plural "%i players ready"
 msgstr[0] "שחקן %i מוכן"
 msgstr[1] "%i שחקנים מוכנים"
 
-#: src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:116
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> נקרא %s מ-%s"
 
-#: src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:123
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> מ-%s"
@@ -61,32 +60,32 @@ msgstr "צוות %s - מרוחק"
 msgid "%s fps"
 msgstr "%s תמונות בשניה"
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:722
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s מאבד עצמו לדעת!"
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:755
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) נהרג."
 
-#: src/game/game.cpp:709
+#: src/game/game.cpp:713
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s נפל למים."
 
-#: src/game/game.cpp:703
+#: src/game/game.cpp:707
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s נפל מן המפה!"
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:728
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:731
+#: src/game/game.cpp:735
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s מת כי הוא שלומיאל!"
@@ -98,12 +97,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s זכה ב-%u נקודת אנרגיה!"
 msgstr[1] "%s זכה ב-%u נקודות אנרגיה!"
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
 
-#: src/weapon/mine.cpp:121
+#: src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s סמוך למוקש!"
@@ -152,14 +151,14 @@ msgstr[0] "צוות %s זכה בפטיש אוויר! נא לשמור על השק
 msgstr[1] ""
 "צוות %s זכה ב-%u פטיש אוויר! נא לשמור על השקט בעת השימוש! תודה, השכנים."
 
-#: src/weapon/anvil.cpp:189
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "צוות %s זכה בסדן! שטח אותם!"
 msgstr[1] "צוות %s זכה ב-%u סדנים! שטח אותם!"
 
-#: src/weapon/auto_bazooka.cpp:329
+#: src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -240,7 +239,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "צוות %s זכה במפזר הפגנות!"
 msgstr[1] "צוות %s זכה ב-%u מפזרי הפגנות!"
 
-#: src/weapon/grapple.cpp:809
+#: src/weapon/grapple.cpp:811
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -261,7 +260,7 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "צוות %s זכה באקדח!"
 msgstr[1] "צוות %s זכה ב-%u אקדחים!"
 
-#: src/weapon/jetpack.cpp:247
+#: src/weapon/jetpack.cpp:252
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -275,14 +274,14 @@ msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "צוות %s זכה באנטי-גרביטציה! אני ניל ארמסטרונג!"
 msgstr[1] "צוות %s זכה ב-%u מתקני אנטי-גרביטציה! אני ניל ארמסטרונג!"
 
-#: src/weapon/mine.cpp:247
+#: src/weapon/mine.cpp:249
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "צוות %s זכה במוקש!"
 msgstr[1] "צוות %s זכה ב-%u מוקשים!"
 
-#: src/weapon/parachute.cpp:166
+#: src/weapon/parachute.cpp:167
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -360,7 +359,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "צוות %s זכה בדילוג תור! ידעתי שתאהב את זה."
 msgstr[1] "צוות %s זכה ב-%u דילוגי תור! בטוח שתאהב את זה."
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:318
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -372,7 +371,7 @@ msgstr[1] "צוות %s זכה ב-%u משגרי טאקס! אף פעם לא ראי
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -382,7 +381,7 @@ msgid "(dead)"
 msgstr "(מת)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:262
+#: src/menu/options_menu.cpp:268
 msgid "(system language)"
 msgstr "(שפת מערכת)"
 
@@ -395,14 +394,14 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:143
 msgid "Add custom team"
 msgstr ""
 
@@ -437,7 +436,7 @@ msgstr ""
 "אש: מקש הרווח\n"
 "פגיעה אחת לתור"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "סדן"
 
@@ -445,11 +444,11 @@ msgstr "סדן"
 msgid "Authors:"
 msgstr "מחברים:"
 
-#: src/weapon/auto_bazooka.cpp:220
+#: src/weapon/auto_bazooka.cpp:223
 msgid "Automatic Bazooka"
 msgstr "בזוקה אוטומטית"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:48
 msgid "Back to battle"
 msgstr "בחזרה אל הקרב"
 
@@ -482,7 +481,7 @@ msgstr "מבער"
 msgid "Bounce Ball"
 msgstr "כדור מקפץ"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:179
 msgid "Bye bye tux..."
 msgstr "היה שלום, טאקס..."
 
@@ -529,7 +528,7 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:166
+#: src/menu/options_menu.cpp:165
 #, fuzzy
 msgid "Character"
 msgstr "מצנח"
@@ -539,7 +538,7 @@ msgstr "מצנח"
 msgid "Character switching"
 msgstr "מצנח"
 
-#: src/menu/options_menu.cpp:193
+#: src/menu/options_menu.cpp:199
 msgid "Check updates online?"
 msgstr ""
 
@@ -616,7 +615,7 @@ msgstr "קרדיטים"
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:146
 msgid "Delete custom team"
 msgstr ""
 
@@ -649,7 +648,7 @@ msgstr "דינמיט"
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
-#: src/menu/options_menu.cpp:217
+#: src/menu/options_menu.cpp:223
 msgid "Effects volume"
 msgstr ""
 
@@ -728,7 +727,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:118
+#: src/team/team.cpp:123
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "שגיאה: לא ניתן למצוא את הגוף \"%s\" עבור צוות \"%s\"."
@@ -772,7 +771,7 @@ msgstr "משגר גנו"
 msgid "Graphic"
 msgstr ""
 
-#: src/weapon/grapple.cpp:166
+#: src/weapon/grapple.cpp:167
 msgid "Grapple"
 msgstr "וו אחיזה"
 
@@ -784,7 +783,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "רימון"
 
-#: src/map/ground.cpp:44
+#: src/map/ground.cpp:47
 msgid "Ground initialization..."
 msgstr "אתחול פני השטח..."
 
@@ -810,7 +809,7 @@ msgstr "מפקד"
 msgid "Head commander: "
 msgstr "מפקד: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "עזרה"
 
@@ -840,7 +839,7 @@ msgstr ""
 "לשימוש: החזק את מקש הרווח לחוץ\n"
 "תחמושת לתור"
 
-#: src/weapon/auto_bazooka.cpp:221
+#: src/weapon/auto_bazooka.cpp:224
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -852,7 +851,7 @@ msgstr ""
 "ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
 "תחמושת לתור"
 
-#: src/weapon/anvil.cpp:133
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -904,11 +903,11 @@ msgstr "מאתחל סאונד"
 msgid "Initialise teams"
 msgstr "מאתחל צוותים"
 
-#: src/game/game.cpp:587
+#: src/game/game.cpp:591
 msgid "It's a present!"
 msgstr "קיבלת מתנה!"
 
-#: src/weapon/jetpack.cpp:60
+#: src/weapon/jetpack.cpp:62
 msgid "Jetpack"
 msgstr "רתמת טיסה"
 
@@ -959,7 +958,7 @@ msgstr ""
 msgid "Map"
 msgstr "מפות"
 
-#: src/map/map.cpp:294
+#: src/map/map.cpp:305
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "מפה %s, דרך יצירתה:"
@@ -981,11 +980,11 @@ msgstr "מספר שחקנים מירבי:"
 msgid "Maximum FPS"
 msgstr "ערך FPS מקסימלי"
 
-#: src/weapon/mine.cpp:213
+#: src/weapon/mine.cpp:215
 msgid "Mine"
 msgstr "מוקש"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:203
 #, fuzzy
 msgid "Misc"
 msgstr "מוסיקה?"
@@ -1019,11 +1018,11 @@ msgstr ""
 msgid "Move character"
 msgstr "מצנח"
 
-#: src/menu/options_menu.cpp:207
+#: src/menu/options_menu.cpp:213
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:209
 msgid "Music?"
 msgstr "מוסיקה?"
 
@@ -1045,7 +1044,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "משחק רשת"
 
-#: src/menu/options_menu.cpp:242
+#: src/menu/options_menu.cpp:248
 msgid "New player warning?"
 msgstr ""
 
@@ -1078,7 +1077,7 @@ msgstr ""
 msgid "Options"
 msgstr "אפשרויות"
 
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:52
 msgid "Options menu"
 msgstr "תפריט אפשרויות"
 
@@ -1116,7 +1115,7 @@ msgstr "שחקן"
 msgid "Player energy?"
 msgstr "אנרגיה לשחקן?"
 
-#: src/menu/options_menu.cpp:150
+#: src/menu/options_menu.cpp:152
 #, fuzzy
 msgid "Player name"
 msgstr "שם השחקן?"
@@ -1147,7 +1146,7 @@ msgstr "יציאה"
 msgid "Quit Wormux"
 msgstr "יציאה מ-Wormux"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:60
 msgid "Quit battle"
 msgstr "יציאה מן הקרב"
 
@@ -1259,16 +1258,16 @@ msgid ""
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:251
 #, fuzzy
 msgid "Sound"
 msgstr "סאונד"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:219
 msgid "Sound effects?"
 msgstr "אפקטים קוליים?"
 
-#: src/menu/options_menu.cpp:238
+#: src/menu/options_menu.cpp:244
 msgid "Sound frequency"
 msgstr "תדירות הסאונד"
 
@@ -1289,7 +1288,7 @@ msgstr "מלאי:"
 msgid "Submachine Gun"
 msgstr "תת מקלע"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:231
 msgid "SuperTux"
 msgstr "סופרטאקס"
 
@@ -1316,7 +1315,7 @@ msgstr "צוותים"
 msgid "Teams"
 msgstr "צוותים"
 
-#: src/menu/options_menu.cpp:186
+#: src/menu/options_menu.cpp:185
 msgid "Teams editor"
 msgstr ""
 
@@ -1341,7 +1340,7 @@ msgstr "הגנו יצא משדה הקרב לפני שהתפוצץ."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "החמוס יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/weapon/auto_bazooka.cpp:175
+#: src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
 msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 
@@ -1465,7 +1464,7 @@ msgstr "ללא שם"
 msgid "Version"
 msgstr "גירסה"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:453
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1495,7 +1494,7 @@ msgstr "כלי נשק"
 msgid "Website: "
 msgstr "אתר: "
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:752
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"
@@ -1549,7 +1548,7 @@ msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
-#: src/weapon/weapon_launcher.cpp:496
+#: src/weapon/weapon_launcher.cpp:501
 msgid "Your shot has missed!"
 msgstr "הירייה שלך החטיאה!"
 
@@ -1567,7 +1566,7 @@ msgstr ""
 "התקפה: קליק שמאלי על המטרה\n"
 "הפצצה לתור"
 
-#: src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "לא ניתן לטעון הגדרות"
 
@@ -1576,11 +1575,11 @@ msgstr "לא ניתן לטעון הגדרות"
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:61
+#: src/map/ground.cpp:64
 msgid "done"
 msgstr "בוצע"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
 msgstr "שגיאה בקריאת קובץ הגדרות"
 
@@ -1588,7 +1587,7 @@ msgstr "שגיאה בקריאת קובץ הגדרות"
 msgid "from"
 msgstr "מ-"
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "אין קובץ הגדרות!"
 
