@@ -600,8 +600,10 @@ bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_objects) const
   return IsInVacuumXY(GetPosition() + offset, check_objects);
 }
 
-bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
+bool PhysicalObj::FootsInVacuum() const
 {
+  Point2i position = GetPosition();
+
   if (IsOutsideWorldXY(position)) {
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
     return GetWorld().IsOpen();
@@ -628,11 +630,6 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
     return false;
 
   return GetWorld().RectIsInVacuum (rect);
-}
-
-bool PhysicalObj::FootsInVacuum() const
-{
-  return FootsInVacuumXY(GetPosition());
 }
 
 PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
