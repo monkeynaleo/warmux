@@ -96,13 +96,13 @@ void PhysicTile::Generate()
 
   if(m_fullness == MIXTE) {
    // std::cout<<"PhysicTile::m_fullness = MIXTE, level"<<m_level<<std::endl;
-    if(m_level == 0){
-      is_containing_polygon = false; //GeneratePolygone will set to true
-      GeneratePolygone();
-      is_subdivised = false;
+    bool is_generation_work;
+    if(m_level<=0){
+      is_generation_work = GeneratePolygone();
+    }
 
-    } else {
-      //Subdivise
+    if(m_level > 0  || !is_generation_work ){
+     //Subdivise
       is_subdivised = true;
       is_containing_polygon = false;
       int new_width1 = m_size.x/2;
@@ -150,8 +150,9 @@ d  5->            <-4  c
 */
 
 
-void PhysicTile::GeneratePolygone()
+bool PhysicTile::GeneratePolygone()
 {
+  is_containing_polygon = false;
   //8 verticles max
   Point2d pts[8];
   bool pts_state[8];
@@ -267,6 +268,18 @@ void PhysicTile::GeneratePolygone()
  // std::cout<<"PhysicTile::pt8 done"<<std::endl;
 
   //TODO : Second pass
+  if(!pts_state[0]){
+    //(0) search ground between (e) and (j)
+    pts[0] = m_offset;
+    pts[0].x += m_size.x/3;
+    while((pts[2].y <  m_size.y+m_offset.y ) && !pts_state[2]){
+      if( m_parent_tile->GetAlpha(pts[2])!= SDL_ALPHA_TRANSPARENT){
+	pts_state[2] = true; //lock position
+      }else{
+	pts[2].y++;
+      }
+    }
+  }
 
   //Stop to try to place points and now generate the polygone
   b2PolygonDef rect;
@@ -305,6 +318,24 @@ void PhysicTile::GeneratePolygone()
   }
 
   if (rect.vertexCount >2) {
+
+
+    //Verify
+    if(m_level >-1){
+      for(uint i = 0;i<8;i++){
+	if(pts_state[i]){
+	  for(uint j = i;j<8;j++){
+	    if(pts_state[j]){
+	      if(m_parent_tile->GetAlpha(Point2i(m_offset.x+abs(pts[i].x-pts[j].x),m_offset.y+abs(pts[i].y-pts[j].y))) == SDL_ALPHA_TRANSPARENT){
+		return false;
+	      }
+	    }
+	  }
+	}
+      }
+    }
+	
+
     is_containing_polygon = true;
     int index = 0;
 
@@ -331,8 +362,11 @@ void PhysicTile::GeneratePolygone()
     m_shape = shape;
 
   }else{
-    is_containing_polygon = false;
+    return true;
   }
+
+  return true;
+
 
 }
 
