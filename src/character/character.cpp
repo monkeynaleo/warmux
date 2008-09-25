@@ -980,10 +980,12 @@ void Character::SetSize(const Point2i &newSize)
   // Shape position is relative to body
   shape->AddPoint(Point2d(0, 0));
   shape->AddPoint(Point2d(phys_width, 0));
-  shape->AddPoint(Point2d(phys_width, 3*phys_height/4));
-  shape->AddPoint(Point2d(2*phys_width/3, phys_height));
-  shape->AddPoint(Point2d(1*phys_width/3, phys_height));
-  shape->AddPoint(Point2d(0, 3*phys_height/4));
+  shape->AddPoint(Point2d(phys_width, 3*phys_height/8));
+  shape->AddPoint(Point2d(9*phys_width/10, 6*phys_height/8));
+  shape->AddPoint(Point2d(6*phys_width/10, phys_height));
+  shape->AddPoint(Point2d(4*phys_width/10, phys_height));
+  shape->AddPoint(Point2d(1*phys_width/10, 6*phys_height/8));
+  shape->AddPoint(Point2d(0, 3*phys_height/8));
   shape->SetMass(GetMass());
 
   //Physical shape
