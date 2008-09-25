@@ -2,7 +2,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2007-05-15 12:00+0200\n"
 "Last-Translator: Varga Istvan\n"
 "Language-Team: Hungarian\n"
@@ -30,12 +29,12 @@ msgid_plural "%i players ready"
 msgstr[0] "%i játékos kész"
 msgstr[1] "%i játékos kész"
 
-#: src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:116
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s>, ismertebb nevén %s a(z) %s csapatból"
 
-#: src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:123
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a(z) %s csapatból"
@@ -56,32 +55,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s képkocka/másodperc"
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:722
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s öngyilkos lett!"
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:755
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s csapat) meghalt."
 
-#: src/game/game.cpp:709
+#: src/game/game.cpp:713
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s vízbe esett."
 
-#: src/game/game.cpp:703
+#: src/game/game.cpp:707
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:728
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:731
+#: src/game/game.cpp:735
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s egy kicsit ügyefogyott volt, ezért távozott az élõk sorából!"
@@ -93,12 +92,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s nyert %u energiapontot!"
 msgstr[1] "%s energiája %u egységgel nõtt!"
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s egy pszichopata, megölte a(z) %s csapat egy tagját!"
 
-#: src/weapon/mine.cpp:121
+#: src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s egy taposóakna mellett ténfereg!"
@@ -158,7 +157,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/weapon/anvil.cpp:189
+#: src/weapon/anvil.cpp:192
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -171,7 +170,7 @@ msgstr[1] ""
 "lÄ‚Â„Ã‚Â‚Ä‚Â‚Ã‚Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â‚Ã„Â‚Ã‚Â„Ã„Å¡Ã„Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â gitÄ‚Â„Ã‚Â‚Ä‚Â‚Ã‚Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â‚Ä‚Â„Ã‚Â‚Ä‚Â‚Ã‚Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â„madÄ‚Â„Ã‚Â‚Ä‚Â‚Ã‚Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â‚Ä‚Â„Ã‚Â‚Ä‚Â‚Ã‚Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â„s "
 "nyert!"
 
-#: src/weapon/auto_bazooka.cpp:329
+#: src/weapon/auto_bazooka.cpp:332
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -268,7 +267,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
-#: src/weapon/grapple.cpp:809
+#: src/weapon/grapple.cpp:811
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -289,7 +288,7 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
-#: src/weapon/jetpack.cpp:247
+#: src/weapon/jetpack.cpp:252
 #, fuzzy, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -309,14 +308,14 @@ msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
-#: src/weapon/mine.cpp:247
+#: src/weapon/mine.cpp:249
 #, fuzzy, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
-#: src/weapon/parachute.cpp:166
+#: src/weapon/parachute.cpp:167
 #, fuzzy, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -394,7 +393,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "A(z) %s csapat nyert %u %st!"
 msgstr[1] "A(z) %s csapat nyert %u %st!"
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:318
 #, fuzzy, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -406,7 +405,7 @@ msgstr[1] "A(z) %s csapat nyert %u %st!"
 msgid "%s team was fragged down."
 msgstr "%s csapata nyert."
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -416,7 +415,7 @@ msgid "(dead)"
 msgstr "(halott)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:262
+#: src/menu/options_menu.cpp:268
 msgid "(system language)"
 msgstr ""
 
@@ -429,14 +428,14 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:143
 msgid "Add custom team"
 msgstr ""
 
@@ -468,7 +467,7 @@ msgid ""
 "a hit per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "Üllõ"
 
@@ -476,11 +475,11 @@ msgstr "Üllõ"
 msgid "Authors:"
 msgstr "Szerzõk:"
 
-#: src/weapon/auto_bazooka.cpp:220
+#: src/weapon/auto_bazooka.cpp:223
 msgid "Automatic Bazooka"
 msgstr "Autómata rakétavetõ"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:48
 msgid "Back to battle"
 msgstr ""
 
@@ -514,7 +513,7 @@ msgstr "Lángvágó"
 msgid "Bounce Ball"
 msgstr "Gumilabda"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:179
 msgid "Bye bye tux..."
 msgstr "Viszlát, pingvin..."
 
@@ -561,7 +560,7 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:166
+#: src/menu/options_menu.cpp:165
 #, fuzzy
 msgid "Character"
 msgstr "Ejtõernyõ"
@@ -571,7 +570,7 @@ msgstr "Ejtõernyõ"
 msgid "Character switching"
 msgstr "Ejtõernyõ"
 
-#: src/menu/options_menu.cpp:193
+#: src/menu/options_menu.cpp:199
 msgid "Check updates online?"
 msgstr ""
 
@@ -650,7 +649,7 @@ msgstr "Szerzõk"
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:146
 msgid "Delete custom team"
 msgstr ""
 
@@ -683,7 +682,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr "JÁTÉK VÉGE"
 
-#: src/menu/options_menu.cpp:217
+#: src/menu/options_menu.cpp:223
 msgid "Effects volume"
 msgstr ""
 
@@ -768,7 +767,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:118
+#: src/team/team.cpp:123
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem találom a(z) \"%s\" testet a(z) \"%s\" csapathoz."
@@ -818,7 +817,7 @@ msgstr "Gnú-lövõ"
 msgid "Graphic"
 msgstr ""
 
-#: src/weapon/grapple.cpp:166
+#: src/weapon/grapple.cpp:167
 msgid "Grapple"
 msgstr ""
 
@@ -830,7 +829,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "Gránát"
 
-#: src/map/ground.cpp:44
+#: src/map/ground.cpp:47
 #, fuzzy
 msgid "Ground initialization..."
 msgstr "Pálya elõkészítése..."
@@ -857,7 +856,7 @@ msgstr "Parancsnok"
 msgid "Head commander: "
 msgstr "Parancsnok: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr ""
 
@@ -882,7 +881,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:221
+#: src/weapon/auto_bazooka.cpp:224
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -890,7 +889,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:133
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -936,11 +935,11 @@ msgstr "Hangok elõkészítése"
 msgid "Initialise teams"
 msgstr "Csapatok elõkészítése"
 
-#: src/game/game.cpp:587
+#: src/game/game.cpp:591
 msgid "It's a present!"
 msgstr "Ez egy ajándék!"
 
-#: src/weapon/jetpack.cpp:60
+#: src/weapon/jetpack.cpp:62
 #, fuzzy
 msgid "Jetpack"
 msgstr "Sugárhajtású hátizsák"
@@ -994,7 +993,7 @@ msgstr "VÄ‚Â„Ã‚Â‚Ä‚Â‚Ã‚Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â‚Ã„Â‚Ã‚Â„Ã„Å¡Ã„Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â ge!"
 msgid "Map"
 msgstr "Pályák"
 
-#: src/map/map.cpp:294
+#: src/map/map.cpp:305
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "A(z) %s pálya készítõje: "
@@ -1016,11 +1015,11 @@ msgstr "Játékosok létszáma:"
 msgid "Maximum FPS"
 msgstr "Maximum képkocka/másodperc"
 
-#: src/weapon/mine.cpp:213
+#: src/weapon/mine.cpp:215
 msgid "Mine"
 msgstr "Taposó akna"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:203
 #, fuzzy
 msgid "Misc"
 msgstr "Zene"
@@ -1054,11 +1053,11 @@ msgstr ""
 msgid "Move character"
 msgstr "Ejtõernyõ"
 
-#: src/menu/options_menu.cpp:207
+#: src/menu/options_menu.cpp:213
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:209
 msgid "Music?"
 msgstr "Zene"
 
@@ -1080,7 +1079,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "Hálózati játék"
 
-#: src/menu/options_menu.cpp:242
+#: src/menu/options_menu.cpp:248
 msgid "New player warning?"
 msgstr ""
 
@@ -1114,7 +1113,7 @@ msgstr ""
 msgid "Options"
 msgstr "Beállítások"
 
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:52
 #, fuzzy
 msgid "Options menu"
 msgstr "Beállítások"
@@ -1154,7 +1153,7 @@ msgstr "Játékos"
 msgid "Player energy?"
 msgstr "Játékos energiája"
 
-#: src/menu/options_menu.cpp:150
+#: src/menu/options_menu.cpp:152
 #, fuzzy
 msgid "Player name"
 msgstr "Játékos neve"
@@ -1184,7 +1183,7 @@ msgstr "Kilépés"
 msgid "Quit Wormux"
 msgstr "Kilépés a Wormuxból"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:60
 msgid "Quit battle"
 msgstr ""
 
@@ -1300,16 +1299,16 @@ msgid ""
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:251
 #, fuzzy
 msgid "Sound"
 msgstr "Hangok"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:219
 msgid "Sound effects?"
 msgstr "Hanghatások"
 
-#: src/menu/options_menu.cpp:238
+#: src/menu/options_menu.cpp:244
 msgid "Sound frequency"
 msgstr "Hangfrekvencia"
 
@@ -1330,7 +1329,7 @@ msgstr "Tartalék:"
 msgid "Submachine Gun"
 msgstr "Géppisztoly"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:231
 msgid "SuperTux"
 msgstr "Szuperpingvin"
 
@@ -1356,7 +1355,7 @@ msgstr "Csapatok"
 msgid "Teams"
 msgstr "Csapatok"
 
-#: src/menu/options_menu.cpp:186
+#: src/menu/options_menu.cpp:185
 msgid "Teams editor"
 msgstr ""
 
@@ -1381,7 +1380,7 @@ msgstr "A gnú elhagyta a csatateret robbanás elõtt"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "A borz elhagyta a csatateret robbanás elõtt"
 
-#: src/weapon/auto_bazooka.cpp:175
+#: src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Az autómatikus rakéta elhagyta a csatamezõt..."
 
@@ -1498,7 +1497,7 @@ msgstr ""
 msgid "Version"
 msgstr "Verzió"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:453
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1528,7 +1527,7 @@ msgstr "Fegyverek"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:752
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s - egy sima pisztoly kinyírta!"
@@ -1584,7 +1583,7 @@ msgstr "Választanod kell legalább két csapatot!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:496
+#: src/weapon/weapon_launcher.cpp:501
 msgid "Your shot has missed!"
 msgstr "Ez mellé ment!"
 
@@ -1600,7 +1599,7 @@ msgid ""
 "a bombing per turn"
 msgstr ""
 
-#: src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr ""
 
@@ -1609,11 +1608,11 @@ msgstr ""
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:61
+#: src/map/ground.cpp:64
 msgid "done"
 msgstr "kész"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:84
 #, fuzzy
 msgid "error parsing the config file"
 msgstr "Személyes konfigurációs fájl olvasása"
@@ -1623,7 +1622,7 @@ msgstr "Személyes konfigurációs fájl olvasása"
 msgid "from"
 msgstr "a következõtõl:"
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 #, fuzzy
 msgid "no configuration file!"
 msgstr "Hiba a konfigurációs fájl betöltése közben: %s"

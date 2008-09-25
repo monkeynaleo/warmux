@@ -172,6 +172,8 @@ POTFILES = \
         src/map/map.h \
         src/map/maps_list.cpp \
         src/map/maps_list.h \
+        src/map/physic_tile.cpp \
+        src/map/physic_tile.h \
         src/map/random_map.cpp \
         src/map/random_map.h \
         src/map/sky.cpp \
@@ -251,6 +253,8 @@ POTFILES = \
         src/object/barrel.h \
         src/object/bonus_box.cpp \
         src/object/bonus_box.h \
+        src/object/force.cpp \
+        src/object/force.h \
         src/object/medkit.cpp \
         src/object/medkit.h \
         src/object/objbox.cpp \
@@ -263,6 +267,8 @@ POTFILES = \
         src/object/physical_engine.h \
         src/object/physical_obj.cpp \
         src/object/physical_obj.h \
+        src/object/physical_shape.cpp \
+        src/object/physical_shape.h \
         src/object/physics.cpp \
         src/object/physics.h \
         src/particles/body_member.cpp \
@@ -321,6 +327,8 @@ POTFILES = \
         src/tool/copynpaste.h \
         src/tool/debug.cpp \
         src/tool/debug.h \
+        src/tool/debug_physics.cpp \
+        src/tool/debug_physics.h \
         src/tool/error.cpp \
         src/tool/error.h \
         src/tool/euler_vector.cpp \

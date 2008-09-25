@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-04-25 13:48+1000\n"
 "Last-Translator: luojie-dune <luojie-dune@operamail.com>\n"
 "Language-Team: Chinese (China) <luojie-dune@operamail.com>\n"
@@ -36,12 +35,12 @@ msgid_plural "%i players ready"
 msgstr[0] "%i 玩家准備好了"
 msgstr[1] "%i 玩家都准備好了"
 
-#: src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:116
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s 從 %s"
 
-#: src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:123
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 從 %s"
@@ -62,33 +61,33 @@ msgstr " %s 隊伍- 遙控"
 msgid "%s fps"
 msgstr "%s 幀fps"
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:722
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s 自殺啦 !"
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:755
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s)死掉了  ."
 
-#: src/game/game.cpp:709
+#: src/game/game.cpp:713
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s 入水---深呼吸."
 
-#: src/game/game.cpp:703
+#: src/game/game.cpp:707
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s 飛出地圖邊緣---"
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:728
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
 # what about female names?
-#: src/game/game.cpp:731
+#: src/game/game.cpp:735
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
@@ -100,12 +99,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 贏得 %u 點耐久!"
 msgstr[1] "%s 贏得 %u 點耐久!"
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是個瘋子, 他幹掉了 %s 的一個!"
 
-#: src/weapon/mine.cpp:121
+#: src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s 靠近地雷了!"
@@ -153,14 +152,14 @@ msgid_plural ""
 msgstr[0] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 msgstr[1] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 
-#: src/weapon/anvil.cpp:189
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "%s組得到了 %u 鐵砧! 貼扁他們!"
 msgstr[1] "%s組得到了 %u 鐵砧! 貼扁他們!"
 
-#: src/weapon/auto_bazooka.cpp:329
+#: src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -241,7 +240,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s 隊得到 %u 足球炸彈!"
 msgstr[1] "%s 隊得到 %u 足球炸彈!"
 
-#: src/weapon/grapple.cpp:809
+#: src/weapon/grapple.cpp:811
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -262,7 +261,7 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "%s 隊得到 %u 槍了!"
 msgstr[1] "%s 隊得到 %u 槍了!"
 
-#: src/weapon/jetpack.cpp:247
+#: src/weapon/jetpack.cpp:252
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -276,14 +275,14 @@ msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "%s 隊得到 %u 低重力了!"
 msgstr[1] "%s 隊得到 %u 低重力了!"
 
-#: src/weapon/mine.cpp:247
+#: src/weapon/mine.cpp:249
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "%s 隊得到 %u 地雷!"
 msgstr[1] "%s 隊得到 %u 地雷!"
 
-#: src/weapon/parachute.cpp:166
+#: src/weapon/parachute.cpp:167
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -361,7 +360,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s 隊得到 %u 暫停! 我知道你喜歡."
 msgstr[1] "%s 隊得到 %u 暫停! 我知道你喜歡."
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:318
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -373,7 +372,7 @@ msgstr[1] "%s 隊得到 %u 企鵝發射器! 沒見過滿天飛的企鵝嗎?"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -383,7 +382,7 @@ msgid "(dead)"
 msgstr "(死掉的)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:262
+#: src/menu/options_menu.cpp:268
 msgid "(system language)"
 msgstr "(系統語言)"
 
@@ -396,7 +395,7 @@ msgstr "(未知時間)"
 msgid "(unlimited)"
 msgstr "(無限的)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -404,7 +403,7 @@ msgid ""
 msgstr ""
 "新版本 %s 可用，您的版本是 %s。也許您想查下，是否有針對您的作業系統的升級。"
 
-#: src/menu/options_menu.cpp:141
+#: src/menu/options_menu.cpp:143
 msgid "Add custom team"
 msgstr ""
 
@@ -439,7 +438,7 @@ msgstr ""
 "開火 : 白字元鍵\n"
 "每回合一擊"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "鐵砧"
 
@@ -447,11 +446,11 @@ msgstr "鐵砧"
 msgid "Authors:"
 msgstr "作者:"
 
-#: src/weapon/auto_bazooka.cpp:220
+#: src/weapon/auto_bazooka.cpp:223
 msgid "Automatic Bazooka"
 msgstr "制導火箭炮"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:48
 msgid "Back to battle"
 msgstr "傳回戰斗"
 
@@ -484,7 +483,7 @@ msgstr "吹管"
 msgid "Bounce Ball"
 msgstr "彈力球"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:179
 msgid "Bye bye tux..."
 msgstr "Bye bye 企鵝..."
 
@@ -531,7 +530,7 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:166
+#: src/menu/options_menu.cpp:165
 #, fuzzy
 msgid "Character"
 msgstr "降落傘"
@@ -541,7 +540,7 @@ msgstr "降落傘"
 msgid "Character switching"
 msgstr "降落傘"
 
-#: src/menu/options_menu.cpp:193
+#: src/menu/options_menu.cpp:199
 msgid "Check updates online?"
 msgstr "網上檢查升級？"
 
@@ -617,7 +616,7 @@ msgstr "鳴謝"
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: src/menu/options_menu.cpp:144
+#: src/menu/options_menu.cpp:146
 msgid "Delete custom team"
 msgstr ""
 
@@ -650,7 +649,7 @@ msgstr "炸藥"
 msgid "END OF GAME"
 msgstr "游戲結束"
 
-#: src/menu/options_menu.cpp:217
+#: src/menu/options_menu.cpp:223
 msgid "Effects volume"
 msgstr "音效大小"
 
@@ -729,7 +728,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:118
+#: src/team/team.cpp:123
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "錯誤: 找不到 body\"%s\" 隊伍 \"%s\"."
@@ -772,7 +771,7 @@ msgstr "Gnu-北美野牛發射器"
 msgid "Graphic"
 msgstr ""
 
-#: src/weapon/grapple.cpp:166
+#: src/weapon/grapple.cpp:167
 msgid "Grapple"
 msgstr "飛索"
 
@@ -784,7 +783,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "手雷"
 
-#: src/map/ground.cpp:44
+#: src/map/ground.cpp:47
 msgid "Ground initialization..."
 msgstr "地面搆建中..."
 
@@ -811,7 +810,7 @@ msgstr "指揮官"
 msgid "Head commander: "
 msgstr "指揮官: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "輔助說明"
 
@@ -841,7 +840,7 @@ msgstr ""
 "如何使用: 按住白字元鍵\n"
 "每回合一個彈夾"
 
-#: src/weapon/auto_bazooka.cpp:221
+#: src/weapon/auto_bazooka.cpp:224
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -853,7 +852,7 @@ msgstr ""
 "開火: 按住白字元鍵積攢到需要的力量\n"
 "每回合一個彈夾"
 
-#: src/weapon/anvil.cpp:133
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -903,11 +902,11 @@ msgstr "音響起始化"
 msgid "Initialise teams"
 msgstr "隊伍起始化"
 
-#: src/game/game.cpp:587
+#: src/game/game.cpp:591
 msgid "It's a present!"
 msgstr "就是現在!"
 
-#: src/weapon/jetpack.cpp:60
+#: src/weapon/jetpack.cpp:62
 msgid "Jetpack"
 msgstr "噴射包"
 
@@ -959,7 +958,7 @@ msgstr ""
 msgid "Map"
 msgstr "地圖"
 
-#: src/map/map.cpp:294
+#: src/map/map.cpp:305
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "地圖 %s, 靈感 : "
@@ -981,11 +980,11 @@ msgstr "玩家滿員:"
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
-#: src/weapon/mine.cpp:213
+#: src/weapon/mine.cpp:215
 msgid "Mine"
 msgstr "地雷"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:203
 #, fuzzy
 msgid "Misc"
 msgstr "音樂?"
@@ -1019,11 +1018,11 @@ msgstr ""
 msgid "Move character"
 msgstr "降落傘"
 
-#: src/menu/options_menu.cpp:207
+#: src/menu/options_menu.cpp:213
 msgid "Music volume"
 msgstr "音樂音量:"
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:209
 msgid "Music?"
 msgstr "音樂?"
 
@@ -1044,7 +1043,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "網上游戲"
 
-#: src/menu/options_menu.cpp:242
+#: src/menu/options_menu.cpp:248
 msgid "New player warning?"
 msgstr ""
 
@@ -1077,7 +1076,7 @@ msgstr ""
 msgid "Options"
 msgstr "選項 "
 
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:52
 msgid "Options menu"
 msgstr "選項功能表"
 
@@ -1115,7 +1114,7 @@ msgstr "玩家"
 msgid "Player energy?"
 msgstr "耐久度?"
 
-#: src/menu/options_menu.cpp:150
+#: src/menu/options_menu.cpp:152
 #, fuzzy
 msgid "Player name"
 msgstr "請問尊姓大名?"
@@ -1146,7 +1145,7 @@ msgstr "結束"
 msgid "Quit Wormux"
 msgstr "結束"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:60
 msgid "Quit battle"
 msgstr "推出戰斗"
 
@@ -1258,16 +1257,16 @@ msgid ""
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:251
 #, fuzzy
 msgid "Sound"
 msgstr "音響"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:219
 msgid "Sound effects?"
 msgstr "音效?"
 
-#: src/menu/options_menu.cpp:238
+#: src/menu/options_menu.cpp:244
 msgid "Sound frequency"
 msgstr "聲訊"
 
@@ -1288,7 +1287,7 @@ msgstr "箱子:"
 msgid "Submachine Gun"
 msgstr "沖鋒槍"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:231
 msgid "SuperTux"
 msgstr "SuperTux-超級企鵝"
 
@@ -1315,7 +1314,7 @@ msgstr "隊伍"
 msgid "Teams"
 msgstr "隊伍"
 
-#: src/menu/options_menu.cpp:186
+#: src/menu/options_menu.cpp:185
 msgid "Teams editor"
 msgstr ""
 
@@ -1339,7 +1338,7 @@ msgstr "Gnu-野牛離開戰場..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "臭鼬離開了戰場..."
 
-#: src/weapon/auto_bazooka.cpp:175
+#: src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
 msgstr "制導火箭離開戰場..."
 
@@ -1462,7 +1461,7 @@ msgstr "未命名"
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:453
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "版本改變失敗原因: %s\n"
@@ -1492,7 +1491,7 @@ msgstr "武器"
 msgid "Website: "
 msgstr "網站Website: "
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:752
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 慘死在小槍之下...無法瞑目!"
@@ -1547,7 +1546,7 @@ msgstr "至少有2組才能開始 !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "沒有隊伍，就不會有戰斗!"
 
-#: src/weapon/weapon_launcher.cpp:496
+#: src/weapon/weapon_launcher.cpp:501
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 
@@ -1566,7 +1565,7 @@ msgstr ""
 "爆炸 : 左鍵點擊目標\n"
 "每回合一次"
 
-#: src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "無法讀取設定"
 
@@ -1575,11 +1574,11 @@ msgstr "無法讀取設定"
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:61
+#: src/map/ground.cpp:64
 msgid "done"
 msgstr "成"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
 msgstr "黏貼配置檔案出錯"
 
@@ -1588,7 +1587,7 @@ msgstr "黏貼配置檔案出錯"
 msgid "from"
 msgstr "從"
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "沒有配置檔案！"
 
