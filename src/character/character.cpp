@@ -975,7 +975,7 @@ void Character::SetSize(const Point2i &newSize)
   double phys_width = double(newSize.x)/PIXEL_PER_METER;
   double phys_height = double(newSize.y)/PIXEL_PER_METER;
 
-  PhysicalPolygone *shape = new PhysicalPolygone(m_body);
+  PhysicalPolygon *shape = new PhysicalPolygon(m_body);
 
   // Shape position is relative to body
   shape->AddPoint(Point2d(0, 0));

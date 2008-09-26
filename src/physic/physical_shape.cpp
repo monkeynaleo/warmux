@@ -65,19 +65,19 @@ void PhysicalShape::SetFriction(double friction)
 }
 
 /////////////////////////////////
-// PhysicalPolygone
+// PhysicalPolygon
 
-PhysicalPolygone::PhysicalPolygone(b2Body *body) : PhysicalShape(body)
+PhysicalPolygon::PhysicalPolygon(b2Body *body) : PhysicalShape(body)
 {
 
 }
 
-void PhysicalPolygone::AddPoint(Point2d point)
+void PhysicalPolygon::AddPoint(Point2d point)
 {
   m_point_list.push_back(point);
 }
 
-void PhysicalPolygone::Generate()
+void PhysicalPolygon::Generate()
 {
   if (m_shape) {
     m_body->DestroyShape(m_shape);
@@ -107,12 +107,12 @@ void PhysicalPolygone::Generate()
   m_body->SetMass(&massData);
 }
 
-void PhysicalPolygone::Clear()
+void PhysicalPolygon::Clear()
 {
   m_point_list.clear();
 }
 
-double PhysicalPolygone::GetCurrentWidth() const
+double PhysicalPolygon::GetCurrentWidth() const
 {
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
@@ -134,7 +134,7 @@ double PhysicalPolygone::GetCurrentWidth() const
   return width;
 }
 
-double PhysicalPolygone::GetCurrentHeight() const
+double PhysicalPolygon::GetCurrentHeight() const
 {
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
@@ -156,7 +156,7 @@ double PhysicalPolygone::GetCurrentHeight() const
   return height;
 }
 
-double PhysicalPolygone::GetInitialWidth() const
+double PhysicalPolygon::GetInitialWidth() const
 {
   ASSERT(m_point_list.size() > 0);
 
@@ -176,7 +176,7 @@ double PhysicalPolygone::GetInitialWidth() const
   return width;
 }
 
-double PhysicalPolygone::GetInitialHeight() const
+double PhysicalPolygon::GetInitialHeight() const
 {
   ASSERT(m_point_list.size() > 0);
 
@@ -197,7 +197,7 @@ double PhysicalPolygone::GetInitialHeight() const
 }
 
 #ifdef DEBUG
-void PhysicalPolygone::DrawBorder(const Color& color) const
+void PhysicalPolygon::DrawBorder(const Color& color) const
 {
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
@@ -226,7 +226,7 @@ void PhysicalPolygone::DrawBorder(const Color& color) const
 /////////////////////////////////
 // PhysicalRectangle
 
-PhysicalRectangle::PhysicalRectangle(b2Body *body, double width, double height) : PhysicalPolygone(body)
+PhysicalRectangle::PhysicalRectangle(b2Body *body, double width, double height) : PhysicalPolygon(body)
 {
   m_width = width;
   m_height = height;
@@ -240,6 +240,6 @@ void PhysicalRectangle::Generate()
   AddPoint(Point2d(m_width,m_height));
   AddPoint(Point2d(0,m_height));
 
-  PhysicalPolygone::Generate();
+  PhysicalPolygon::Generate();
 }
 
