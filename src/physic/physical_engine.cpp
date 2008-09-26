@@ -113,6 +113,8 @@ void PhysicalEngine::Step()
     if((objects_list.count(contact.shape1->GetBody()) == 1) && (objects_list[contact.shape1->GetBody()]!=NULL)){
       Physics  *collider =  objects_list[contact.shape1->GetBody()];
 
+      collider->AddContact();
+
       collider->SignalRebound();
 
       Point2d vel = Point2d(contact.velocity.x*PIXEL_PER_METER,contact.velocity.y*PIXEL_PER_METER);
@@ -133,6 +135,8 @@ void PhysicalEngine::Step()
     if((objects_list.count(contact.shape2->GetBody()) == 1) && (objects_list[contact.shape2->GetBody()]!=NULL)){
       Physics  *collider =  objects_list[contact.shape2->GetBody()];
 
+      collider->AddContact();
+
       collider->SignalRebound();
 
       Point2d vel = Point2d(contact.velocity.x*PIXEL_PER_METER,contact.velocity.y*PIXEL_PER_METER);
@@ -146,7 +150,7 @@ void PhysicalEngine::Step()
 
         collider->SignalGroundCollision(vel);
       }
-
+    }
 
   }
 
@@ -154,14 +158,24 @@ void PhysicalEngine::Step()
      // std::cout<<"Pesist"<<std::endl;
   }
 
+ 
+  for(unsigned i = 0;i<removed_contact_list.size();i++){
 
 
+    b2ContactPoint contact = removed_contact_list[i];
 
+    if((objects_list.count(contact.shape1->GetBody()) == 1) && (objects_list[contact.shape1->GetBody()]!=NULL)){
+      Physics  *collider =  objects_list[contact.shape1->GetBody()];
 
+      collider->RemoveContact();
+    }
 
+    if((objects_list.count(contact.shape2->GetBody()) == 1) && (objects_list[contact.shape2->GetBody()]!=NULL)){
+      Physics  *collider =  objects_list[contact.shape2->GetBody()];
+
+      collider->RemoveContact();
+    }
   }
-
-
 
   last_step_time = last_step_time-lround(timeStep);
 }

@@ -520,6 +520,17 @@ void Physics::ClearContact()
   result_contact_list.clear();
 }
 
+void Physics::AddContact()
+{
+  m_nbr_contact++;
+}
+
+void Physics::RemoveContact()
+{
+  m_nbr_contact--;
+}
+
+
 double Physics::GetAngle() const
 {
    return -m_body->GetAngle();

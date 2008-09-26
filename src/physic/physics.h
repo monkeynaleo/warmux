@@ -61,8 +61,9 @@ private:
 
  // Point2d m_extern_force;  // External strength applyed to the object
   std::map<unsigned,Force *> m_extern_force_map;
-  unsigned m_extern_force_index;
+  uint m_extern_force_index;
   double m_angle;
+ 
 
 
 protected:
@@ -75,6 +76,7 @@ protected:
   double m_elasticity_damping;    // 0 means perpetual motion.
   double m_balancing_damping;     // 0 means perpetual balancing.
   bool m_is_physical_obj;
+  uint m_nbr_contact;
 
   std::vector<b2ContactPoint> added_contact_list;
   std::vector<b2ContactPoint> persist_contact_list;
@@ -125,6 +127,8 @@ public:
   void AddRemovedContactPoint(b2ContactPoint contact);
   void AddContactResult(b2ContactResult contact);
 
+  void AddContact();
+  void RemoveContact();
   void ClearContact();
 
 
