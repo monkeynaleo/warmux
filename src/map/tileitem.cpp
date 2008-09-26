@@ -72,18 +72,9 @@ void TileItem_AlphaSoftware::Draw(const Point2i &pos)
 #endif
 }
 
-#ifdef DEBUG
-void TileItem_Empty::Draw(const Point2i &pos)
-{
-  if (IsLOGGING("polygon.tile")) {
-    GetMainWindow().RectangleColor(Rectanglei(pos * CELL_SIZE - Camera::GetInstance()->GetPosition(),CELL_SIZE), primary_blue_color);
-  }
-}
-#else
 void TileItem_Empty::Draw(const Point2i &/*pos*/)
 {
 }
-#endif
 
 // === Implemenation of TileItem_Software_ALpha ==============================
 TileItem_AlphaSoftware::TileItem_AlphaSoftware( const Point2i &size) :
