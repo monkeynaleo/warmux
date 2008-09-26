@@ -23,7 +23,7 @@
 #define WEAPON_LAUNCHER_H
 
 #include "weapon.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 
 class Sprite;
 class WeaponLauncher;

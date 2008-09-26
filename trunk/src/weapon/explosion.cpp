@@ -30,7 +30,7 @@
 #include "map/map.h"
 #include "network/network.h"
 #include "object/objects_list.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"

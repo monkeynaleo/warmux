@@ -21,7 +21,7 @@
 
 #include <iostream>
 #include "map/map.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"

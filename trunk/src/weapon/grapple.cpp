@@ -33,7 +33,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "network/network.h"
-#include "object/physical_engine.h"
+#include "physic/physical_engine.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"

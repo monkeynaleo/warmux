@@ -30,7 +30,7 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/network.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"

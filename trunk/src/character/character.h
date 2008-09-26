@@ -26,7 +26,7 @@
 #include <string>
 #include "gui/energy_bar.h"
 #include "include/base.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "character/body.h"
 
 class Text;

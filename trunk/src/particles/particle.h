@@ -23,7 +23,7 @@
 #define PARTICLE_H
 
 #include <list>
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "include/base.h"
 
 // Forward declarations

@@ -21,7 +21,7 @@
 
 #include "object/barrel.h"
 #include "object/objects_list.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "game/game_mode.h"
 #include "graphic/sprite.h"
 #include "particles/particle.h"

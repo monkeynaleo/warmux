@@ -23,8 +23,8 @@
 
 #include "map/physic_tile.h"
 #include "map/tileitem.h"
-#include "object/physical_engine.h"
-#include "object/physical_shape.h"
+#include "physic/physical_engine.h"
+#include "physic/physical_shape.h"
 
 #ifdef DEBUG
 #include "graphic/color.h"

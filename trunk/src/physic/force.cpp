@@ -19,9 +19,9 @@
  * A force.
  *****************************************************************************/
 
-#include "object/force.h"
-#include "object/physics.h"
-#include "object/physical_engine.h"
+#include "physic/force.h"
+#include "physic/physics.h"
+#include "physic/physical_engine.h"
 
 
 Force::Force(Physics *target, Point2d target_point, Point2d force, bool is_local)
