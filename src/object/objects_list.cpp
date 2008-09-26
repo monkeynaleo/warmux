@@ -34,6 +34,10 @@
 #include <vector>
 #include <iostream>
 
+#ifdef DEBUG
+#include "graphic/colors.h"
+#endif
+
 ObjectsList::ObjectsList()
 {}
 
@@ -102,8 +106,14 @@ void ObjectsList::Draw()
   {
     ASSERT((*it) != NULL);
 
-    if (!(*it)->IsGhost())
+    if (!(*it)->IsGhost()) {
       (*it)->Draw();
+#ifdef DEBUG
+      if (IsLOGGING("polygon.object")) {
+	(*it)->DrawPolygon(primary_red_color);
+      }
+#endif
+    }
   }
 }
 

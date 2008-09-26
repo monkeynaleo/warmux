@@ -54,6 +54,10 @@
 #include "tool/rectangle.h"
 #include "weapon/weapon_launcher.h"
 
+#ifdef DEBUG
+#include "graphic/color.h"
+#endif
+
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 40;
 
@@ -818,5 +822,9 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
   return true;
 }
 
-
-
+#ifdef DEBUG
+void PhysicalObj::DrawPolygon(const Color& color) const
+{
+  m_shape->DrawBorder(color);
+}
+#endif

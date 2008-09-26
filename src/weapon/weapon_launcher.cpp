@@ -46,7 +46,6 @@
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
-#include "physic/physical_shape.h"
 #endif
 
 WeaponBullet::WeaponBullet(const std::string &name,
@@ -250,12 +249,6 @@ void WeaponProjectile::Draw()
       ss.str(), white_color);
     }
   }
-
-#ifdef DEBUG
-  if (IsLOGGING("polygon.weapon")) {
-    m_shape->DrawBorder(primary_red_color);
-  }
-#endif
 }
 
 bool WeaponProjectile::IsImmobile() const
