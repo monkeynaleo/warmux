@@ -42,6 +42,7 @@ typedef enum
 } alive_t;
 
 class Action;
+class Color;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2);
 
@@ -178,6 +179,9 @@ public:
 
   // Draw the object
   virtual void Draw() = 0;
+#ifdef DEBUG
+  void DrawPolygon(const Color& color) const;
+#endif
 
   // Damage handling
   virtual void SetEnergyDelta(int delta, bool do_report = true);

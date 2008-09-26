@@ -41,10 +41,6 @@
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
 
-#ifdef DEBUG
-#include "physic/physical_shape.h"
-#endif
-
 const uint SPEED = 5; // meter / seconde
 // XXX Unused !?
 // const uint NB_MAX_TRY = 20;
@@ -118,12 +114,6 @@ void ObjBox::DropBox()
 void ObjBox::Draw()
 {
   anim->Draw(GetPosition());
-
-#ifdef DEBUG
-  if (IsLOGGING("polygon.box")) {
-    m_shape->DrawBorder(primary_red_color);
-  }
-#endif
 }
 
 void ObjBox::Refresh()

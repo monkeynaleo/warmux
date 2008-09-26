@@ -459,7 +459,7 @@ void Character::Draw()
   }
 
   if (IsLOGGING("polygon.character")) {
-    m_shape->DrawBorder(primary_red_color);
+    DrawPolygon(primary_red_color);
   }
 #endif
 }
