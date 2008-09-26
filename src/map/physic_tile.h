@@ -53,14 +53,15 @@ private:
 
   int m_level;
 
+  Fullness IsFull() const;
+  bool GeneratePolygone();
+  void Generate();
+  void Clean();
+
 public:
 
   PhysicTile(Point2i size, Point2i offset , Point2i tile_offset, TileItem *tile, PhysicTile *parent_physic_tile, int level);
   ~PhysicTile();
-  void Generate();
-  bool GeneratePolygone();
-  void Clean();
-  void CalculateFullness();
 #ifdef DEBUG
   void DrawBorder(const Color& color) const;
 #endif
