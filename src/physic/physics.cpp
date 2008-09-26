@@ -24,10 +24,10 @@
  * If the object go outside of the world, it become a ghost.
  *****************************************************************************/
 
-#include "object/force.h"
-#include "object/physical_engine.h"
-#include "object/physical_shape.h"
-#include "object/physics.h"
+#include "physic/force.h"
+#include "physic/physical_engine.h"
+#include "physic/physical_shape.h"
+#include "physic/physics.h"
 #include <stdlib.h>
 #include <iostream>
 #include "game/config.h"

@@ -253,8 +253,6 @@ POTFILES = \
         src/object/barrel.h \
         src/object/bonus_box.cpp \
         src/object/bonus_box.h \
-        src/object/force.cpp \
-        src/object/force.h \
         src/object/medkit.cpp \
         src/object/medkit.h \
         src/object/objbox.cpp \
@@ -263,14 +261,6 @@ POTFILES = \
         src/object/object_cfg.h \
         src/object/objects_list.cpp \
         src/object/objects_list.h \
-        src/object/physical_engine.cpp \
-        src/object/physical_engine.h \
-        src/object/physical_obj.cpp \
-        src/object/physical_obj.h \
-        src/object/physical_shape.cpp \
-        src/object/physical_shape.h \
-        src/object/physics.cpp \
-        src/object/physics.h \
         src/particles/body_member.cpp \
         src/particles/body_member.h \
         src/particles/bullet.cpp \
@@ -301,6 +291,16 @@ POTFILES = \
         src/particles/teleport_member.h \
         src/particles/water_drop.cpp \
         src/particles/water_drop.h \
+        src/physic/force.cpp \
+        src/physic/force.h \
+        src/physic/physical_engine.cpp \
+        src/physic/physical_engine.h \
+        src/physic/physical_obj.cpp \
+        src/physic/physical_obj.h \
+        src/physic/physical_shape.cpp \
+        src/physic/physical_shape.h \
+        src/physic/physics.cpp \
+        src/physic/physics.h \
         src/sound/jukebox.cpp \
         src/sound/jukebox.h \
         src/sound/sample_cache.cpp \
@@ -453,7 +453,7 @@ POTFILES = \
         tools/index_server/stat.cpp \
         tools/index_server/stat.h \
         tools/index_server/sync_slave.cpp \
-        tools/index_server/sync_slave.h 
+        tools/index_server/sync_slave.h
 
 DOMAIN = $(PACKAGE)
 

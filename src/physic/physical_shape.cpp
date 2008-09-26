@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "include/base.h"
-#include "object/physical_shape.h"
+#include "physic/physical_shape.h"
 #include "tool/math_tools.h"
 
 #ifdef DEBUG

@@ -36,7 +36,7 @@
 #include "map/camera.h"
 #include "network/network.h"
 #include "network/randomsync.h"
-#include "object/physical_shape.h"
+#include "physic/physical_shape.h"
 #include "particles/particle.h"
 #include "particles/fading_text.h"
 #include "sound/jukebox.h"

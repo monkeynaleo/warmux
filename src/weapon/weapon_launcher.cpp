@@ -34,7 +34,7 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
-#include "object/physical_engine.h"
+#include "physic/physical_engine.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
@@ -46,7 +46,7 @@
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
-#include "object/physical_shape.h"
+#include "physic/physical_shape.h"
 #endif
 
 WeaponBullet::WeaponBullet(const std::string &name,

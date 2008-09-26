@@ -22,7 +22,7 @@
 #ifndef OBJBOX_H
 #define OBJBOX_H
 //-----------------------------------------------------------------------------
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "sound/sound_sample.h"
 
 class Team;

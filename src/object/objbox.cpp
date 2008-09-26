@@ -42,7 +42,7 @@
 #include "weapon/explosion.h"
 
 #ifdef DEBUG
-#include "object/physical_shape.h"
+#include "physic/physical_shape.h"
 #endif
 
 const uint SPEED = 5; // meter / seconde

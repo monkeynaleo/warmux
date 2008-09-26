@@ -25,7 +25,7 @@
 
 #include "character/character.h"
 #include "game/game.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "sound/jukebox.h"
 #include "interface/game_msg.h"
 #include "team/teams_list.h"

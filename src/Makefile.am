@@ -127,15 +127,10 @@ wormux_SOURCES = \
         network/socket.cpp network/socket.h \
         object/barrel.cpp object/barrel.h \
         object/bonus_box.cpp object/bonus_box.h \
-        object/force.cpp object/force.h \
         object/medkit.cpp  object/medkit.h \
         object/objbox.cpp object/objbox.h \
         object/object_cfg.cpp object/object_cfg.h \
         object/objects_list.cpp object/objects_list.h \
-	object/physical_engine.cpp object/physical_engine.h \
-        object/physical_obj.cpp object/physical_obj.h \
-        object/physical_shape.cpp object/physical_shape.h \
-        object/physics.cpp object/physics.h \
         particles/body_member.cpp particles/body_member.h \
         particles/bullet.cpp particles/bullet.h \
         particles/dark_smoke.cpp particles/dark_smoke.h \
@@ -151,6 +146,11 @@ wormux_SOURCES = \
         particles/star.cpp particles/star.h \
         particles/teleport_member.cpp particles/teleport_member.h \
         particles/water_drop.cpp particles/water_drop.h \
+        physic/force.cpp physic/force.h \
+	physic/physical_engine.cpp physic/physical_engine.h \
+        physic/physical_obj.cpp physic/physical_obj.h \
+        physic/physical_shape.cpp physic/physical_shape.h \
+        physic/physics.cpp physic/physics.h \
         sound/jukebox.cpp sound/jukebox.h \
         sound/sound_sample.cpp sound/sound_sample.h \
         sound/sample_cache.cpp sound/sample_cache.h \

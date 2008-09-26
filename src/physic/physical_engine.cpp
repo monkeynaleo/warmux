@@ -20,9 +20,9 @@
  *****************************************************************************/
 
 #include "game/time.h"
-#include "object/force.h"
-#include "object/physical_engine.h"
-#include "object/physical_obj.h"
+#include "physic/force.h"
+#include "physic/physical_engine.h"
+#include "physic/physical_obj.h"
 #include "tool/math_tools.h"
 #include "tool/debug_physics.h"
 #include <iostream>
