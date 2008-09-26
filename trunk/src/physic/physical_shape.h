@@ -66,10 +66,10 @@ protected:
 };
 
 
-class PhysicalPolygone : public PhysicalShape
+class PhysicalPolygon : public PhysicalShape
 {
 public:
-  PhysicalPolygone(b2Body *body);
+  PhysicalPolygon(b2Body *body);
   void AddPoint(Point2d point);
   void Clear();
   virtual void Generate();
@@ -85,7 +85,7 @@ protected:
   std::vector<Point2d> m_point_list;
 };
 
-class PhysicalRectangle : public PhysicalPolygone
+class PhysicalRectangle : public PhysicalPolygon
 {
 public:
   PhysicalRectangle(b2Body *body, double width, double height);

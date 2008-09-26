@@ -69,7 +69,7 @@ void PhysicTile::Generate()
     is_subdivised = false;
     is_containing_polygon = true;
     {
-      PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+      PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
 			      (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
@@ -143,7 +143,7 @@ void PhysicTile::Generate()
 	  m_physic_tiles[2] = NULL;
 
 	  //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-	  PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+	  PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
 	  shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
 				  (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
@@ -193,7 +193,7 @@ void PhysicTile::Generate()
 	  m_physic_tiles[3] = NULL;
 
 	  //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-	  PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+	  PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
 	  shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
 				  (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
@@ -243,7 +243,7 @@ void PhysicTile::Generate()
 	  m_physic_tiles[3] = NULL;
 
 	  //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-	  PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+	  PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
 	  shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
 				  (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
@@ -293,7 +293,7 @@ void PhysicTile::Generate()
 	  m_physic_tiles[3] = NULL;
 
 	  //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-	  PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+	  PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
 	  shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1) / PIXEL_PER_METER),
 				  (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
@@ -340,7 +340,7 @@ void PhysicTile::Generate()
 	    m_physic_tiles[1] = NULL;
 
 	    //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-	    PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+	    PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
 	    shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
 				    (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
@@ -378,7 +378,7 @@ void PhysicTile::Generate()
 	    m_physic_tiles[3] = NULL;
 
 	    //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-	    PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+	    PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
 	    shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
 				    (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
@@ -418,7 +418,7 @@ void PhysicTile::Generate()
 	    m_physic_tiles[2] = NULL;
 
 	    //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-	    PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+	    PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
 	    shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
 				    (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
@@ -458,7 +458,7 @@ void PhysicTile::Generate()
 	    m_physic_tiles[3] = NULL;
 
 	    //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-	    PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+	    PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
 	    shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1) / PIXEL_PER_METER),
 				    (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
@@ -702,7 +702,7 @@ bool PhysicTile::GeneratePolygone()
     is_containing_polygon = true;
     int index = 0;
 
-    PhysicalPolygone* shape = new PhysicalPolygone(m_parent_tile->GetBody());
+    PhysicalPolygon* shape = new PhysicalPolygon(m_parent_tile->GetBody());
 
     for (uint i=0; i < 8; i++) {
       if(pts_state[i])      {
