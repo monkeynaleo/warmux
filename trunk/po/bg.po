@@ -348,7 +348,7 @@ msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "Отборът %s спечели %u Самоубийство !"
 msgstr[1] ""
-"Отборът %s спечели %u самоубийства! Използвай ги всичките за екстра бонус!\v"
+"Отборът %s спечели %u самоубийства! Използвай ги всичките за екстра бонус!"
 
 #: src/weapon/syringe.cpp:115
 #, c-format
@@ -1553,7 +1553,7 @@ msgstr "Трябват ми поне два валидни отбора!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Не може да играеш без отбор. Избери един!"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Не точно там..."
 
