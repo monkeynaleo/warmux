@@ -53,7 +53,7 @@
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\include&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\src&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\LiberationSans-Regular.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI;TARGET_FLOAT32_IS_FIXED"
+				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\LiberationSans-Regular.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -63,7 +63,7 @@
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="4"
-				DisableSpecificWarnings="4005;4138;4244;4267;4305;4312;4251;4996"
+				DisableSpecificWarnings="4005;4138;4244;4267;4305;4312;4251;4996;4099"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -150,7 +150,7 @@
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\include&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\src&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI;TARGET_FLOAT32_IS_FIXED"
+				PreprocessorDefinitions="WIN32;NDEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI"
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="0"
@@ -163,7 +163,7 @@
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
-				DisableSpecificWarnings="4005;4138;4244;4267;4305;4312;4251;4996"
+				DisableSpecificWarnings="4005;4138;4244;4267;4305;4312;4251;4996;4099"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -1352,14 +1352,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\object\force.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\force.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\object\medkit.cpp"
 					>
 				</File>
@@ -1389,38 +1381,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\object\objects_list.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\physical_engine.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\physical_engine.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\physical_obj.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\physical_obj.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\physical_shape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\physical_shape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\physics.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\physics.h"
 					>
 				</File>
 			</Filter>
@@ -1993,6 +1953,68 @@
 				</File>
 				<File
 					RelativePath="..\..\src\msvc\getopt.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="physic"
+				>
+				<File
+					RelativePath="..\..\src\physic\force.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\force.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\physical_engine.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\physical_engine.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\physical_obj.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\physical_obj.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\physical_shape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\physical_shape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\physics.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\physics.h"
 					>
 				</File>
 			</Filter>
