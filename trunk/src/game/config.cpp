@@ -28,6 +28,7 @@
 #include <string>
 #include <iostream>
 #include <errno.h>
+#include <unistd.h>
 #include <libxml/tree.h>
 #ifdef WIN32
 #  include <direct.h>
