@@ -23,7 +23,6 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <errno.h>
-#include <unistd.h>
 
 #ifdef WIN32
    // To get SHGetSpecialFolderPath
@@ -34,6 +33,7 @@
 #  undef DeleteFile  // windows.h defines it I think
 #else
 #  include <stdlib.h> // getenv
+#  include <unistd.h> // not needed by mingw
 #endif
 
 #include "tool/i18n.h"
