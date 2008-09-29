@@ -128,7 +128,7 @@ void SuperTux::Refresh()
   {
     Action a(Action::ACTION_WEAPON_SUPERTUX);
     a.Push(angle_rad);
-    a.Push(GetPos());
+    a.Push(GetPhysXY());
     Network::GetInstance()->SendAction(a);
   }
 

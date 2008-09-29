@@ -47,7 +47,6 @@ const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 Physics::Physics ():
   m_motion_type(NoMotion),
   m_extern_force_index(1),
-  m_angle(0.0f),
   m_last_move(Time::GetInstance()->Read()),
   m_fix_point_gnd(),
   m_fix_point_dxy(),
@@ -93,7 +92,7 @@ double Physics::GetPhysY() const
   return m_body->GetPosition().y;
 }
 
-Point2d Physics::GetPos() const
+Point2d Physics::GetPhysXY() const
 {
   return Point2d( m_body->GetPosition().x,m_body->GetPosition().y);
 }
@@ -220,6 +219,20 @@ b2BodyDef *Physics::GetBodyDef()
 
 void Physics::StoreValue(Action *a)
 {
+  // Position
+  a->Push(GetPhysXY());
+  a->Push(GetAngle());
+
+  // Mass
+  a->Push(GetMass());
+
+  // Speed
+  double norm, angle;
+  GetSpeed(norm, angle);
+  a->Push(norm);
+  a->Push(angle);
+
+  // other information (mostly about rope)
   a->Push((int)m_motion_type);
   //a->Push(m_extern_force);
   a->Push((int)m_last_move);
@@ -231,17 +244,33 @@ void Physics::StoreValue(Action *a)
   a->Push(m_elasticity_damping);
   a->Push(m_balancing_damping);
   a->Push(m_elasticity_off);
-  a->Push(GetPos());
 
-  /*MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
-    typeid(*this).name(),
-    m_body->GetPosition().x, m_pos_x.x1, m_pos_x.x2,
-    m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-    m_extern_force.x, m_extern_force.y);*/
+
+  MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
+	    typeid(*this).name(), m_body->GetPosition().x, m_body->GetPosition().y, GetMass(),
+	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y, m_body->GetAngularVelocity());
 }
 
 void Physics::GetValueFromAction(Action *a)
 {
+  // Position
+  Point2d position = a->PopPoint2d();
+  SetPhysXY(position);
+  double angle = a->PopDouble();
+  SetAngle(angle);
+
+  // Mass
+  double mass = a->PopDouble();
+  SetMass(mass);
+
+  // Speed
+  double norm = a->PopDouble();
+  double speed_angle = a->PopDouble();
+  SetSpeed(norm, speed_angle);
+
+
+  // other information (mostly about rope)
+
   m_motion_type        = (MotionType_t)a->PopInt();
 // m_extern_force       = a->PopPoint2d();
   m_last_move          = (uint)a->PopInt();
@@ -254,14 +283,9 @@ void Physics::GetValueFromAction(Action *a)
   m_balancing_damping  = a->PopDouble();
   m_elasticity_off     = !!a->PopInt();
 
-  Point2d position = a->PopPoint2d();
-  SetPhysXY(position);
-
-  /*  MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
-      typeid(*this).name(),
-      m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
-      m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-      m_extern_force.x, m_extern_force.y);*/
+  MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
+	    typeid(*this).name(), m_body->GetPosition().x, m_body->GetPosition().y, GetMass(),
+	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y, m_body->GetAngularVelocity());
 }
 
 void Physics::SetMass(double mass)
@@ -279,7 +303,7 @@ void Physics::SetMass(double mass)
 uint Physics::AddExternForceXY (const Point2d& vector)
 {
 
-  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPos(), vector, false) ;
+  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
   PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
   m_extern_force_index++;
 
