@@ -256,9 +256,12 @@ void PhysicalObj::StoreValue(Action *a)
 void PhysicalObj::GetValueFromAction(Action *a)
 {
   Physics::GetValueFromAction(a);
-  m_collides_with_ground     = !!a->PopInt();
-  m_collides_with_characters = !!a->PopInt();
-  m_collides_with_objects    = !!a->PopInt();
+  bool collides_with_ground, collides_with_characters, collides_with_objects;
+  collides_with_ground     = !!a->PopInt();
+  collides_with_characters = !!a->PopInt();
+  collides_with_objects    = !!a->PopInt();
+  SetCollisionModel(collides_with_ground, collides_with_characters, collides_with_objects);
+
   m_minimum_overlapse_time   = (uint)a->PopInt();
   m_ignore_movements         = !!a->PopInt();
   m_is_character             = !!a->PopInt();
@@ -456,7 +459,11 @@ void PhysicalObj::Ghost ()
   // The object became a gost
   StopMoving();
 
-  SignalGhostState(was_dead);
+  ////////////////////////////////////////////////////////////////////////////////
+  // WARNING : to remove as soon as possible when Box2D is correctly integrated...
+  if (Game::GetInstance()->IsGameLaunched())
+    /////////////////////////////////////////////////////////////////////////////
+    SignalGhostState(was_dead);
 }
 
 void PhysicalObj::Drown()
