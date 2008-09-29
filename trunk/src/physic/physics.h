@@ -62,9 +62,6 @@ private:
  // Point2d m_extern_force;  // External strength applyed to the object
   std::map<unsigned,Force *> m_extern_force_map;
   uint m_extern_force_index;
-  double m_angle;
- 
-
 
 protected:
   uint m_last_move;             // Time since last move
@@ -102,7 +99,7 @@ public:
   b2Body *GetBody() { return m_body;};
   double GetPhysX() const;
   double GetPhysY() const;
-  Point2d GetPos() const;
+  Point2d GetPhysXY() const;
 
   // Set size
   void SetMass(double mass);
@@ -149,7 +146,7 @@ public:
 
   // Get current object speed
   void GetSpeed (double &norm, double &angle) const;
-  Point2d GetSpeedXY () const;
+  Point2d GetSpeedXY() const;
   Point2d GetSpeed() const;
   double GetAngularSpeed() const;
   double GetAngle() const;
