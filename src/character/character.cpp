@@ -1099,9 +1099,9 @@ void Character::HandleKeyPressed_Jump(bool)
 {
   HideGameInterface();
   if (ActiveCharacter().IsImmobile()) {
-    Jump();
     Action a(Action::ACTION_CHARACTER_JUMP);
     SendActiveCharacterAction(a);
+    Jump();
   }
 }
 
@@ -1110,9 +1110,9 @@ void Character::HandleKeyPressed_HighJump(bool)
 {
   HideGameInterface();
   if (ActiveCharacter().IsImmobile()) {
-    HighJump();
     Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
     SendActiveCharacterAction(a);
+    HighJump();
   }
 }
 
@@ -1121,9 +1121,9 @@ void Character::HandleKeyPressed_BackJump(bool)
 {
   HideGameInterface();
   if (ActiveCharacter().IsImmobile()) {
-    BackJump();
     Action a(Action::ACTION_CHARACTER_BACK_JUMP);
     SendActiveCharacterAction(a);
+    BackJump();
   }
 }
 
