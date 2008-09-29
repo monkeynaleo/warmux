@@ -231,6 +231,7 @@ void Physics::StoreValue(Action *a)
   a->Push(m_elasticity_damping);
   a->Push(m_balancing_damping);
   a->Push(m_elasticity_off);
+  a->Push(GetPos());
 
   /*MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
     typeid(*this).name(),
@@ -252,6 +253,9 @@ void Physics::GetValueFromAction(Action *a)
   m_elasticity_damping = a->PopDouble();
   m_balancing_damping  = a->PopDouble();
   m_elasticity_off     = !!a->PopInt();
+
+  Point2d position = a->PopPoint2d();
+  SetPhysXY(position);
 
   /*  MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
       typeid(*this).name(),
