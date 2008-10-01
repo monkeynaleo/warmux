@@ -642,7 +642,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "مشکل در بارگذاری تیم: "
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -763,7 +763,7 @@ msgstr "در حال شروع زمین..."
 msgid "Gun"
 msgstr "اسلحه"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "پوشه‌ی خانگی پیدا نشد!"
 
@@ -1130,11 +1130,11 @@ msgstr "اجرای بازی"
 msgid "Random map"
 msgstr "نقشه تصادفی"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات پیش‌فرض"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات شخصی"
 
@@ -1508,7 +1508,7 @@ msgstr "شما حداقل به ۲ تیم نیاز دارید!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "شما قبل از اینکه تیمی انتخاب کنید نمی‌توانید بازی کنید!"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "شلیک شما از دست رفت!"
 

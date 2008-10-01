@@ -681,7 +681,7 @@ msgstr "Virhe alustettaessa verkkoa: Client %s ei hyväksy sinua!! - %s"
 msgid "Error loading team :"
 msgstr "Virhe ladattessa joukkuetta :"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -805,7 +805,7 @@ msgstr "Maaston alustus..."
 msgid "Gun"
 msgstr "Pyssy"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 
@@ -1164,11 +1164,11 @@ msgstr "Lopeta peli"
 msgid "Random map"
 msgstr "Satunnainen kartta"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Luetaan oletus asetuksia"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Luetaan henkilökohtaisia asetuksia"
 
@@ -1548,7 +1548,7 @@ msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Et voi aloittaa peliä ennenkuin olet olet valinnut joukkueen!"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 

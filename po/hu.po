@@ -704,7 +704,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Hiba a csapat bet�lt�se k�zben:"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -838,7 +838,7 @@ msgstr "P�lya el�k�sz�t�se..."
 msgid "Gun"
 msgstr "Pisztoly"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nem tal�lhat� a felhaszn�l� k�nyvt�ra!"
 
@@ -1199,12 +1199,12 @@ msgstr ""
 "%s tĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ rkĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ p "
 "betĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂltĂÂĂÂÄÂĂÂÄÂÄšÄÄÂĂÂ se"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Szem�lyes konfigur�ci�s f�jl olvas�sa"
 
@@ -1583,7 +1583,7 @@ msgstr "V�lasztanod kell legal�bb k�t csapatot!"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Ez mell� ment!"
 

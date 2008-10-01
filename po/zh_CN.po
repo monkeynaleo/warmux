@@ -671,7 +671,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "读取队伍出错 :"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -791,7 +791,7 @@ msgstr "地面构建中..."
 msgid "Gun"
 msgstr "枪"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr " 找不到家目录 (environment variable $HOME) !"
 
@@ -1158,11 +1158,11 @@ msgstr "运行游戏"
 msgid "Random map"
 msgstr "随机读取地图"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "正读取默认设置文件"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "正读取个人设置文件"
 
@@ -1546,7 +1546,7 @@ msgstr "至少有2组才能开始 !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "没有队伍，就不会有战斗!"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 

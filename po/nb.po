@@ -684,7 +684,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Lasting av %s-laget feilet :"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -808,7 +808,7 @@ msgstr "Laster kart ..."
 msgid "Gun"
 msgstr "Pistol"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME mappen(miljøvariabel $HOME) kunne ikke bli funnet !"
 
@@ -1164,11 +1164,11 @@ msgstr "Spill spillet"
 msgid "Random map"
 msgstr "Tilfeldig kart"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Laster standard konfigurasjonsfil"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Laster personlig konfigurasjonsfil"
 
@@ -1547,7 +1547,7 @@ msgstr "Du må ha minst to godkjente lag!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille uten å ha valgt et lag"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Du bommet"
 

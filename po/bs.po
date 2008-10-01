@@ -680,7 +680,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Greška kod očitavanja tima:"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -810,7 +810,7 @@ msgstr "Inicijalizacija zemljišta ..."
 msgid "Gun"
 msgstr "Pištolj"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME direktor (okolina promjenjiva $HOME) nije mogla biti pronađena!"
 
@@ -1177,12 +1177,12 @@ msgstr "Pokreni igru"
 msgid "Random map"
 msgstr "Učitaj mape:"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Čita lični konfiguracioni podatak"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Čita lični konfiguracioni podatak"
 
@@ -1569,7 +1569,7 @@ msgstr "Trebate barem dva važeća tima !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nećeš biti u stanju da igraš prije nego izabereš tim!"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 

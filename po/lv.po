@@ -708,7 +708,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Kļūda ielādējot komandu :"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -830,7 +830,7 @@ msgstr "Laukuma veidošana..."
 msgid "Gun"
 msgstr "Pistole"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "MĀJAS mape (vides mainīgias $HOME) nav atrasts!"
 
@@ -1203,12 +1203,12 @@ msgstr "Sākt spēli"
 msgid "Random map"
 msgstr "Ielādē kartes:"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 #, fuzzy
 msgid "Reading default config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Lasa personisko konfigurācijas failu"
 
@@ -1594,7 +1594,7 @@ msgstr "Jums nepieciešamas vismaz divas derīgas komandas !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Jūs netrāpijāt!"
 

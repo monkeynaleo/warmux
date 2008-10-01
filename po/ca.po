@@ -671,7 +671,7 @@ msgstr "Error en iniciar la xarxa: Client %s no està d'acord amb vostè - %s "
 msgid "Error loading team :"
 msgstr "Error carregant l'equip:"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -799,7 +799,7 @@ msgstr "Inicialització..."
 msgid "Gun"
 msgstr "Pistola"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "El directori HOME (la variable d'entorn $HOME) no pot ser trobat!"
 
@@ -1161,11 +1161,11 @@ msgstr "Sortir del joc "
 msgid "Random map"
 msgstr "Mapa aleatori"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Llegint fitxer de configuració"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Llegint fitxer de configuració personal"
 
@@ -1556,7 +1556,7 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "No podràs jugar abans de seleccionar un equip!"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
