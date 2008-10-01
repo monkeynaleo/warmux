@@ -381,6 +381,7 @@ AC_SUBST([BUILD_ENV])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
+		 lib/box2d/Makefile
                  doc/Makefile
                  po/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
