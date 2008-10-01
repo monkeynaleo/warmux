@@ -1,4 +1,4 @@
-TARGETS= Gen/float/libbox2d.a Gen/fixed/libbox2d.a
+TARGETS= Gen/float/libbox2d.a
 
 CXXFLAGS= -Wall -Werror -Wextra -g -O2
 
@@ -48,10 +48,7 @@ clean:
 	rm -rf Gen
 
 else
-
 -include $(addprefix Gen/float/,$(SOURCES:.cpp=.d))
--include $(addprefix Gen/fixed/,$(SOURCES:.cpp=.d))
-
 endif
 
 Gen/float/%.o:		%.cpp
@@ -66,21 +63,6 @@ Gen/float/libbox2d.a:	$(addprefix Gen/float/,$(SOURCES:.cpp=.o))
 Gen/float/%.d:		%.cpp
 	@mkdir -p $(dir $@)
 	c++ -MM -MT $(@:.d=.o) $(CXXFLAGS) -o $@ $<
-
-
-Gen/fixed/%.o:		%.cpp
-	@mkdir -p $(dir $@)
-	c++ $(CXXFLAGS) -DTARGET_FLOAT32_IS_FIXED -c -o $@ $<
-
-
-Gen/fixed/libbox2d.a:	$(addprefix Gen/fixed/,$(SOURCES:.cpp=.o))
-	ar cr $@ $^
-	ranlib $@
-
-
-Gen/fixed/%.d:		%.cpp
-	@mkdir -p $(dir $@)
-	c++ -MM -MT $(@:.d=.o) $(CXXFLAGS) -DTARGET_FLOAT32_IS_FIXED -o $@ $<
 
 
 
