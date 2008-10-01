@@ -237,7 +237,6 @@ wormux_SOURCES += wormux.rc wormux.ico
 .rc.o:
 	@WINDRES@ -o $@ -i $<
 endif
-AM_CXXFLAGS += -Werror
 
 if !INCLUDEDINTL
 LIBS+=@LIBINTL@
