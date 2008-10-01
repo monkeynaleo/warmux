@@ -691,7 +691,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Erro ao carregar a equipe :"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -821,7 +821,7 @@ msgstr "Inicialização do terreno..."
 msgid "Gun"
 msgstr "Pistola"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directório HOME (variável de ambiente $HOME) não pode ser encontrado!"
 
@@ -1190,11 +1190,11 @@ msgstr "Iniciar jogo"
 msgid "Random map"
 msgstr "Mapa aleatório:"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Lendo arquivo de configuração padrão"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Lendo arquivo de configuração pessoal"
 
@@ -1580,7 +1580,7 @@ msgstr "Você precisa de pelo menos duas equipes válidas !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Você não vai conseguir jogar antes de selecionar uma equipe !"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Você errou o tiro!"
 

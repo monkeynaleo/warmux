@@ -696,7 +696,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Errore nel caricamento della squadra:"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -823,7 +823,7 @@ msgstr "Inizializzazione terreno..."
 msgid "Gun"
 msgstr "Pistola"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directory HOME (environment variable $HOME) non esiste!"
 
@@ -1186,11 +1186,11 @@ msgstr "Avvia il gioco"
 msgid "Random map"
 msgstr "mappa casuale"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Lettura del file di configurazione default"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Lettura di un file di configurazione personale"
 
@@ -1575,7 +1575,7 @@ msgstr "Hai bisogno almeno di due squadre valide !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Non puoi giocare senza scegliere una squadra!"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "Bersaglio mancato!"
 

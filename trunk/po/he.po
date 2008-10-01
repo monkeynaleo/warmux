@@ -670,7 +670,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "שגיאה בטעינת צוות:"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -791,7 +791,7 @@ msgstr "אתחול פני השטח..."
 msgid "Gun"
 msgstr "אקדח"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "לא ניתן למצוא את תיקיית הבית (משתנה סביבה $HOME)!"
 
@@ -1159,11 +1159,11 @@ msgstr "הרץ משחק"
 msgid "Random map"
 msgstr "מפה אקראית"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "קורא הגדרות מקובץ ברירת מחדל"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "קורא הגדרות מקובץ אישי"
 
@@ -1548,7 +1548,7 @@ msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
-#: src/weapon/weapon_launcher.cpp:501
+#: src/weapon/weapon_launcher.cpp:494
 msgid "Your shot has missed!"
 msgstr "הירייה שלך החטיאה!"
 

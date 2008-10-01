@@ -1,9 +1,5 @@
 TARGETS= Gen/float/libbox2d.a Gen/fixed/libbox2d.a
 
-ifdef DEVKITPRO
-TARGETS += Gen/nds-float/lib/libbox2d.a Gen/nds-fixed/lib/libbox2d.a
-endif
-
 CXXFLAGS= -Wall -Werror -Wextra -g -O2
 
 SOURCES = \
@@ -56,11 +52,6 @@ else
 -include $(addprefix Gen/float/,$(SOURCES:.cpp=.d))
 -include $(addprefix Gen/fixed/,$(SOURCES:.cpp=.d))
 
-ifdef DEVKITPRO
--include $(addprefix Gen/nds-fixed/,$(SOURCES:.cpp=.d))
--include $(addprefix Gen/nds-float/,$(SOURCES:.cpp=.d))
-endif
-
 endif
 
 Gen/float/%.o:		%.cpp
@@ -91,44 +82,6 @@ Gen/fixed/%.d:		%.cpp
 	@mkdir -p $(dir $@)
 	c++ -MM -MT $(@:.d=.o) $(CXXFLAGS) -DTARGET_FLOAT32_IS_FIXED -o $@ $<
 
-
-
-NDS_COMPILE_FLAGS= -g -O2 -fomit-frame-pointer -ffast-math \
-		-march=armv5te -mtune=arm946e-s -mthumb-interwork \
-		-DARM9 -fno-rtti -fno-exceptions -c \
-		-DTARGET_IS_NDS \
-		-I$(DEVKITPRO)/libnds/include
-
-
-Gen/nds-fixed/%.o:		%.cpp
-	@mkdir -p $(dir $@)
-	arm-eabi-g++ $(NDS_COMPILE_FLAGS) -DTARGET_FLOAT32_IS_FIXED -o $@ $<
-
-Gen/nds-fixed/lib/libbox2d.a:	$(addprefix Gen/nds-fixed/,$(SOURCES:.cpp=.o))
-	@mkdir -p $(dir $@)
-	arm-eabi-ar cr $@ $^
-	arm-eabi-ranlib $@
-
-Gen/nds-fixed/%.d:		%.cpp
-	@mkdir -p $(dir $@)
-	arm-eabi-g++ -MM -MT $(@:.d=.o) $(NDS_COMPILE_FLAGS) \
-		-DTARGET_FLOAT32_IS_FIXED -o $@ $<
-
-
-
-Gen/nds-float/%.o:		%.cpp
-	@mkdir -p $(dir $@)
-	arm-eabi-g++ $(NDS_COMPILE_FLAGS) -o $@ $<
-
-Gen/nds-float/lib/libbox2d.a:	$(addprefix Gen/nds-float/,$(SOURCES:.cpp=.o))
-	@mkdir -p $(dir $@)
-	arm-eabi-ar cr $@ $^
-	arm-eabi-ranlib $@
-
-
-Gen/nds-float/%.d:		%.cpp
-	@mkdir -p $(dir $@)
-	arm-eabi-g++ -MM -MT $(@:.d=.o) $(NDS_COMPILE_FLAGS) -o $@ $<
 
 
 
