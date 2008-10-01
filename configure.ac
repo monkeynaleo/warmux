@@ -359,6 +359,12 @@ CFLAGS="$CFLAGS $LIBXML_CFLAGS $LIBPNG_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBXML_CFLAGS $LIBPNG_CFLAGS"
 LIBS="$LIBS $LIBXML_LIBS $LIBPNG_LIBS"
 
+dnl === Add Werror flag for gcc/g++ if debug mode is enabled ==============
+if test "x${debug}" = "xyes"; then
+   CFLAGS="$CFLAGS -Werror"
+   CXXFLAGS="$CXXFLAGS -Werror"
+fi
+
 dnl ========================================================================
 dnl == Check for header files                                              =
 dnl ========================================================================
