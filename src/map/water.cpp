@@ -42,6 +42,19 @@ const float b = 1.0;
 
 int Water::pattern_height = 0;
 
+Water::Water() :
+  type_color(NULL),
+  height_mvt(0),
+  shift1(0),
+  water_height(0),
+  temps_montee(0),
+  water_type(NO_WATER)
+{
+  for (uint i = 0; i < pattern_width; i++) {
+    height[i] = 0;
+  }
+}
+
 Water::~Water()
 {
   if (type_color)
