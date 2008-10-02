@@ -175,9 +175,7 @@ if test "x$GCC" = "xyes"; then
   fi
 
   if test "x${debug}" = "xyes"; then
-    GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG -DWMX_LOG"
-  else
-    GCC_FLAGS="$GCC_FLAGS -O2"
+    GCC_FLAGS="$GCC_FLAGS -g -DDEBUG -DWMX_LOG"
   fi
 
   if test "x${logging}" = "xyes"; then
@@ -189,6 +187,14 @@ if test "x$GCC" = "xyes"; then
   CFLAGS="$GCC_FLAGS"
   dnl CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
   CXXFLAGS="$GCC_FLAGS"
+
+  dnl Set default optimization flag: change it for a specific target if needed with target_CXXFLAGS
+  AC_SUBST([AM_CXXFLAGS])
+  if test "x${debug}" = "xyes"; then
+     AM_CXXFLAGS=-O0
+  else
+     AM_CXXFLAGS=-O2
+  fi
 
 else
   if test "x${debug}" = "xyes"; then
