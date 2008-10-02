@@ -37,6 +37,7 @@ AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_CPP
 AC_PROG_INSTALL
+AC_PROG_RANLIB
 
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
@@ -388,6 +389,7 @@ AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
 		 lib/box2d/Makefile
+		 lib/box2d/src/Makefile
                  doc/Makefile
                  po/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
