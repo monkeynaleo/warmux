@@ -248,4 +248,4 @@ else
 LIBS += @LIBCURL@
 endif
 
-LIBS += $(top_srcdir)/lib/box2d/src/Gen/float/libbox2d.a
+LIBS += $(top_srcdir)/lib/box2d/src/libbox2d.a
