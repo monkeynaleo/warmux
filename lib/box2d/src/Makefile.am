@@ -36,3 +36,5 @@ libbox2d_a_SOURCES = \
 	./Collision/b2BroadPhase.cpp
 #	./Contrib/b2Polygon.cpp \
 #	./Contrib/b2Triangle.cpp
+
+libbox2d_a_CXXFLAGS = -O2
