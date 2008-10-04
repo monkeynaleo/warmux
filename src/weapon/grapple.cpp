@@ -270,7 +270,7 @@ bool Grapple::TryAddNode(int CurrentSense)
 
   if (find_first_contact_point(m_fixation_point, angle, lg, 2, contact_point))
     {
-      rope_angle = ActiveCharacter().GetRopeAngle() ;
+//       rope_angle = ActiveCharacter().GetRopeAngle() ; //TODO : Box2d
 
       if ( (last_broken_node_sense * CurrentSense > 0) &&
            (fabs(last_broken_node_angle - rope_angle) < 0.1))
@@ -307,7 +307,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
 
   // [RCL]: nodeSense check seems to be useless... either remove node senses at all or
   // find an example where it is required
-  double currentAngle = ActiveCharacter().GetRopeAngle();
+  //  double currentAngle = ActiveCharacter().GetRopeAngle(); //TODO : Box2d
   Point2i mapRopeStart = ActiveCharacter().GetHandPosition();
 
   const int max_nodes_per_turn = 100; // safe value to avoid network congestion
@@ -339,7 +339,8 @@ bool Grapple::TryRemoveNodes(int currentSense)
 
     double nodeAngle = it->angle;
 
-    int currentAngleSign = ( currentAngle < 0 ) ? -1 : 1;
+    //    int currentAngleSign = ( currentAngle < 0 ) ? -1 : 1;
+    int currentAngleSign = 0;
     int nodeAngleSign = ( nodeAngle < 0 ) ? -1 : 1;
 
     if ( currentAngleSign != nodeAngleSign && rope_nodes.size() > 2 )
@@ -354,7 +355,8 @@ bool Grapple::TryRemoveNodes(int currentSense)
 
   for ( int i = 0; i < nodes_to_remove; i ++ )
   {
-     last_broken_node_angle = currentAngle;
+    //     last_broken_node_angle = currentAngle;
+    last_broken_node_angle = 0;
      last_broken_node_sense = currentSense;
 
      // remove last node
@@ -444,7 +446,7 @@ void Grapple::Draw()
     angle = m_initial_angle + M_PI/2;
   }
   else {
-    angle = ActiveCharacter().GetRopeAngle();
+    //    angle = ActiveCharacter().GetRopeAngle();
   }
 
   prev_angle = angle;
@@ -535,8 +537,8 @@ void Grapple::AttachRope(const Point2i& contact_point)
 
 void Grapple::DetachRope()
 {
-  if(m_is_active)
-    ActiveCharacter().UnsetPhysFixationPoint() ;
+  //  if(m_is_active)
+  // ActiveCharacter().UnsetPhysFixationPoint() ;
   rope_nodes.clear();
   m_is_active = false;
 
@@ -600,7 +602,8 @@ void Grapple::DetachNode()
 
 void Grapple::SetRopeSize(double length) const
 {
-  double delta = length - ActiveCharacter().GetRopeLength();
+  //  double delta = length - ActiveCharacter().GetRopeLength();
+  double delta = 0;  
   length = delta;//TODO : REMOVE THIS VERY BAD COMPIL FIX
  // ActiveCharacter().ChangePhysRopeSize (delta);
 }
@@ -628,8 +631,8 @@ void Grapple::GoDown()
     return;
   last_mvt = Time::GetInstance()->Read();
 
-  if (ActiveCharacter().GetRopeLength() >= cfg().max_rope_length / PIXEL_PER_METER)
-    return;
+  //if (ActiveCharacter().GetRopeLength() >= cfg().max_rope_length / PIXEL_PER_METER)
+  //return;
 
   delta_len = 0.1 ;
  // ActiveCharacter().ChangePhysRopeSize (delta_len) ;
@@ -791,11 +794,12 @@ void Grapple::HandleKeyPressed_Shoot(bool)
 
 void Grapple::PrintDebugRope()
 {
-  printf("%05d %05d %03.3f\n",
-         ActiveCharacter().GetX(),
-         ActiveCharacter().GetY(),
-         ActiveCharacter().GetRopeAngle());
+//   printf("%05d %05d %03.3f\n",
+//          ActiveCharacter().GetX(),
+//          ActiveCharacter().GetY(),
+// 	          ActiveCharacter().GetRopeAngle());
 
+	 
   for (std::list<rope_node_t>::iterator it = rope_nodes.begin();
        it != rope_nodes.end();
        it++) {

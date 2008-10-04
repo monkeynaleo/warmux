@@ -150,7 +150,6 @@ wormux_SOURCES = \
 	physic/physical_engine.cpp physic/physical_engine.h \
         physic/physical_obj.cpp physic/physical_obj.h \
         physic/physical_shape.cpp physic/physical_shape.h \
-        physic/physics.cpp physic/physics.h \
         sound/jukebox.cpp sound/jukebox.h \
         sound/sound_sample.cpp sound/sound_sample.h \
         sound/sample_cache.cpp sound/sample_cache.h \
@@ -158,7 +157,7 @@ wormux_SOURCES = \
         team/custom_teams_list.cpp team/custom_teams_list.h \
 	team/macro.h \
         team/results.cpp team/results.h \
-        team/team_config.h \
+nn        team/team_config.h \
         team/team.cpp team/team.h \
         team/team_energy.cpp team/team_energy.h \
         team/teams_list.cpp team/teams_list.h \

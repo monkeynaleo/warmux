@@ -108,11 +108,18 @@ void MoveCharacter(Character &character, bool slowly)
 if(character.GetDirection() == DIRECTION_LEFT){
   if(character.GetSpeedXY().x>-2){
     character.AddSpeedXY(Point2d(0,-1));
+    if(character.GetSpeedXY().x<-1){
+      character.Jump();
+    }
+
   }
   character.SetSpeedXY(Point2d(-5,character.GetSpeedXY().y ));
 }else{
   if(character.GetSpeedXY().x<2){
     character.AddSpeedXY(Point2d(0,-1));
+    if(character.GetSpeedXY().x>1){
+      character.Jump();
+    }
   }
   character.SetSpeedXY(Point2d(5,character.GetSpeedXY().y));
 
@@ -140,7 +147,7 @@ if(character.GetDirection() == DIRECTION_LEFT){
 // Move the active character to the left
 void MoveActiveCharacterLeft(bool shift){
   // character is ready to move ?
-  //if (!ActiveCharacter().CanMoveRL()) return;
+    //if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_LEFT);
   if (move) {

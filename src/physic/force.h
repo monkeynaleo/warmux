@@ -25,16 +25,16 @@
 
 #include "tool/point.h"
 #include <Box2D.h>
-class Physics;
+class PhysicalObj;
 struct b2Vec2;
 
 class Force
 {
 
 public:
-  Force(Physics *target, Point2d target_point, Point2d force, bool is_local = true);
+  Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_local = true);
   ~Force();
-  Physics *m_target;
+  PhysicalObj *m_target;
   b2Vec2 m_target_point;
   b2Vec2 m_force;
 
