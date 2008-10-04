@@ -196,7 +196,14 @@
 	<nickname>basse</nickname>
 	<name>Bastian SALMELA</name>
 	<description>Translate Wormux 0.7 in Finnish</description>
-	<email>asse_AT_kulma_DOT_org</email>
+	<email>basse_AT_kulma_DOT_org</email>
+	<country>Finland</country>
+      </author>
+      <author>
+	<nickname>Ramse</nickname>
+	<name>Rami SELIN</name>
+	<description>Translated Wormux 0.8 in Finnish</description>
+	<email>rami_DOT_selin_AT_gmail_DOT_com</email>
 	<country>Finland</country>
       </author>
       <author>
