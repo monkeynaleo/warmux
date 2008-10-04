@@ -37,10 +37,10 @@
 #include "game/time.h"
 #include "map/map.h"
 #include "network/randomsync.h"
+#include "physic/force.h"
 #include "physic/physical_engine.h"
 #include "physic/physical_obj.h"
 #include "physic/physical_shape.h"
-#include "physic/physics.h"
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
@@ -80,13 +80,26 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_ignore_movements(false),
   m_is_character(false),
   m_is_fire(false),
+  m_shape(NULL),
+  m_last_move(Time::GetInstance()->Read()),
   m_name(name),
   m_rebound_sound(""),
+  m_nbr_contact(0),
+  m_cfg(),
+  m_extern_force_index(1),
   m_alive(ALIVE),
   m_energy(-1),
   m_allow_negative_y(false)
 {
-  m_is_physical_obj = true;
+
+  m_body_def = new b2BodyDef();
+  m_body_def->allowSleep = true;
+  m_body_def->linearDamping = 0.0f;
+  m_body_def->angularDamping = 0.01f;
+
+  m_body_def->position.Set(0.0f, 4.0f);
+  m_body = PhysicalEngine::GetInstance()->AddObject(this);
+
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
@@ -113,13 +126,12 @@ void PhysicalObj::SetXY(const Point2d &position)
 {
   CheckOverlapping();
 
-  if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) )
-    {
+  if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) ) {
 
-      SetPhysXY( position / PIXEL_PER_METER );
-      Ghost();
-      SignalOutOfMap();
-    }
+    SetPhysXY( position / PIXEL_PER_METER );
+    //  Ghost();
+    SignalOutOfMap();
+  }
   else
     {
       SetPhysXY( position / PIXEL_PER_METER );
@@ -145,6 +157,113 @@ int PhysicalObj::GetX() const
 int PhysicalObj::GetY() const
 {
   return (int)(GetYdouble()+0.5f);//Round
+}
+
+
+double PhysicalObj::GetPhysX() const
+{
+  return m_body->GetPosition().x;
+}
+
+double PhysicalObj::GetPhysY() const
+{
+  return m_body->GetPosition().y;
+}
+
+Point2d PhysicalObj::GetPhysXY() const
+{
+  return Point2d( m_body->GetPosition().x,m_body->GetPosition().y);
+}
+
+void PhysicalObj::SetPhysXY(double x, double y)
+{
+  /* if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
+     m_pos_x.x0 = x;
+     m_pos_y.x0 = y;*/
+  m_body->SetXForm(b2Vec2(x,y),m_body->GetAngle());
+
+  /*UpdateTimeOfLastMove();
+    }*/
+}
+
+void PhysicalObj::SetPhysXY(const Point2d &position)
+{
+  SetPhysXY(position.x, position.y);
+}
+
+// Set the air resist factor
+void PhysicalObj::SetSpeedXY (Point2d vector)
+{
+  if (EqualsZero(vector.x)) vector.x = 0;
+  if (EqualsZero(vector.y)) vector.y = 0;
+  bool was_moving = IsMoving();
+
+  // setting to FreeFall is done in StartMoving()
+  m_body->SetLinearVelocity(b2Vec2(vector.x,vector.y));
+  if (!was_moving && IsMoving()) {
+    UpdateTimeOfLastMove();
+    StartMoving();
+    m_body->WakeUp();
+  }
+}
+
+void PhysicalObj::SetSpeed (double norm, double angle)
+{
+  SetSpeedXY(Point2d::FromPolarCoordinates(norm, angle));
+}
+
+void PhysicalObj::AddSpeedXY (Point2d vector)
+{
+  if (EqualsZero(vector.x)) vector.x = 0;
+  if (EqualsZero(vector.y)) vector.y = 0;
+  bool was_moving = IsMoving();
+
+  m_body->SetLinearVelocity(m_body->GetLinearVelocity()+b2Vec2(vector.x,vector.y));
+  // setting to FreeFall is done in StartMoving()
+
+  if (!was_moving && IsMoving()) {
+    UpdateTimeOfLastMove();
+    StartMoving();
+    m_body->WakeUp();
+  }
+}
+
+void PhysicalObj::AddSpeed(double norm, double angle)
+{
+  AddSpeedXY(Point2d::FromPolarCoordinates(norm, angle));
+}
+
+void PhysicalObj::GetSpeed(double &norm, double &angle) const
+{
+  Point2d speed ;
+
+
+    speed = GetSpeedXY();
+    norm = speed.Norm();
+    angle = speed.ComputeAngle();
+
+
+
+}
+
+Point2d PhysicalObj::GetSpeedXY () const
+{
+  return (!IsMoving()) ? Point2d(0.0, 0.0) : Point2d(m_body->GetLinearVelocity().x,m_body->GetLinearVelocity().y);
+}
+
+Point2d PhysicalObj::GetSpeed() const
+{
+  return GetSpeedXY();
+}
+
+double PhysicalObj::GetAngularSpeed() const
+{
+  return m_body->GetAngularVelocity();
+}
+
+double PhysicalObj::GetSpeedAngle() const
+{
+  return GetSpeedXY().ComputeAngle();
 }
 
 void PhysicalObj::SetSize(const Point2i &newSize)
@@ -237,7 +356,38 @@ int PhysicalObj::GetTestHeight() const
 
 void PhysicalObj::StoreValue(Action *a)
 {
-  Physics::StoreValue(a);
+
+
+ // Position
+  a->Push(GetPhysXY());
+  a->Push(GetAngle());
+
+  // Mass
+  a->Push(GetMass());
+
+  // Speed
+  double norm, angle;
+  GetSpeed(norm, angle);
+  a->Push(norm);
+  a->Push(angle);
+
+  // other information (mostly about rope)
+  //  a->Push((int)m_motion_type);
+  //a->Push(m_extern_force);
+  a->Push((int)m_last_move);
+  //  a->Push(m_fix_point_gnd);
+  //  a->Push(m_fix_point_dxy);
+  //  a->Push(m_rope_angle);
+  //  a->Push(m_rope_length);
+  //  a->Push(m_rope_elasticity);
+  //  a->Push(m_elasticity_damping);
+  //  a->Push(m_balancing_damping);
+  //  a->Push(m_elasticity_off);
+
+  MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
+	    typeid(*this).name(), m_body->GetPosition().x, m_body->GetPosition().y, GetMass(),
+	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y, m_body->GetAngularVelocity());
+
   a->Push(m_collides_with_ground);
   a->Push(m_collides_with_characters);
   a->Push(m_collides_with_objects);
@@ -255,7 +405,41 @@ void PhysicalObj::StoreValue(Action *a)
 
 void PhysicalObj::GetValueFromAction(Action *a)
 {
-  Physics::GetValueFromAction(a);
+  // Position
+  Point2d position = a->PopPoint2d();
+  SetPhysXY(position);
+  double angle = a->PopDouble();
+  SetAngle(angle);
+
+  // Mass
+  double mass = a->PopDouble();
+  SetMass(mass);
+
+  // Speed
+  double norm = a->PopDouble();
+  double speed_angle = a->PopDouble();
+  SetSpeed(norm, speed_angle);
+
+  // other information (mostly about rope)
+
+  //  m_motion_type        = (MotionType_t)a->PopInt();
+  // m_extern_force       = a->PopPoint2d();
+  m_last_move          = (uint)a->PopInt();
+  //  m_fix_point_gnd      = a->PopPoint2d();
+  //  m_fix_point_dxy      = a->PopPoint2d();
+  //  m_rope_angle         = a->PopEulerVector();
+  //  m_rope_length        = a->PopEulerVector();
+  //  m_rope_elasticity    = a->PopDouble();
+  //  m_elasticity_damping = a->PopDouble();
+  //  m_balancing_damping  = a->PopDouble();
+  //  m_elasticity_off     = !!a->PopInt();
+
+  MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
+	    typeid(*this).name(), m_body->GetPosition().x, m_body->GetPosition().y, GetMass(),
+	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y, m_body->GetAngularVelocity());
+
+
+
   bool collides_with_ground, collides_with_characters, collides_with_objects;
   collides_with_ground     = !!a->PopInt();
   collides_with_characters = !!a->PopInt();
@@ -272,6 +456,16 @@ void PhysicalObj::GetValueFromAction(Action *a)
   m_alive                    = (alive_t)a->PopInt();
   m_energy                   = a->PopInt();
   m_allow_negative_y         = !!a->PopInt();
+}
+void PhysicalObj::UpdateTimeOfLastMove()
+{
+  m_last_move = Time::GetInstance()->Read();
+}
+
+
+void PhysicalObj::SetBullet(bool is_bullet)
+{
+    m_body->SetBullet(is_bullet);
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
@@ -295,12 +489,27 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
 
   CheckOverlapping();
 }
-
+uint PhysicalObj::AddExternForce (double norm, double angle)
+{
+  return AddExternForceXY(Point2d::FromPolarCoordinates(norm, angle));
+}
+void PhysicalObj::RemoveExternForce(uint index)
+{
+  if(index!=0){
+  PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
+  delete m_extern_force_map[index];
+  m_extern_force_map.erase(index);
+  }
+}
 const PhysicalObj* PhysicalObj::GetOverlappingObject() const
 {
   return m_overlapping_object;
 }
 
+bool PhysicalObj::IsSleeping() const
+{
+  return m_body->IsSleeping();
+}
 bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
 {
   return m_overlapping_object == obj;
@@ -800,7 +1009,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
       continue;
     }
 
-    DirectFall();
+    //   DirectFall();
 
     // Check distance with characters
     FOR_ALL_LIVING_CHARACTERS(team, character) if ((*character) != this)
@@ -836,3 +1045,190 @@ void PhysicalObj::DrawPolygon(const Color& color) const
   m_shape->DrawBorder(color);
 }
 #endif
+
+
+
+
+
+void PhysicalObj::SetMass(double mass)
+{
+  m_mass = mass;
+
+  b2MassData massData;
+  massData.mass = m_mass;
+  massData.center.SetZero();
+  massData.I = 0.0f;
+
+  m_body->SetMass(&massData);
+}
+
+uint PhysicalObj::AddExternForceXY (const Point2d& vector)
+{
+
+  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
+  PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
+  m_extern_force_index++;
+
+
+  //bool was_moving = IsMoving();
+
+  UpdateTimeOfLastMove();
+  MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
+
+//  m_extern_force.SetValues(vector);
+
+  /*if (!was_moving && IsMoving())
+    StartMoving();*/
+
+    return m_extern_force_index-1;
+}
+
+
+
+void PhysicalObj::ImpulseXY(const Point2d& vector)
+{
+  std::cout<<"Impulse x="<<vector.x<<" y ="<<vector.y<<std::endl;
+    m_body->ApplyImpulse(b2Vec2(vector.x,vector.y),b2Vec2(GetPhysX(),GetPhysY()));
+}
+
+void PhysicalObj::Impulse(double norm, double angle)
+{
+  ImpulseXY(Point2d::FromPolarCoordinates(norm, angle));
+}
+
+
+
+b2BodyDef *PhysicalObj::GetBodyDef()
+{
+  return m_body_def;
+}
+
+
+/*
+void PhysicalObj::UnsetPhysFixationPoint()
+{
+  double speed_norm, angle ;
+
+     GetSpeed (speed_norm, angle);
+
+     angle = -angle ;
+
+     SetSpeed(speed_norm, angle);
+
+     UpdateTimeOfLastMove();
+
+     m_pos_x.x2 = 0 ;
+     m_pos_y.x2 = 0 ;
+
+     m_rope_angle.Clear();
+     m_rope_length.Clear();
+
+     m_motion_type = FreeFall ;
+}
+*/
+
+/*void PhysicalObj::ChangePhysRopeSize(double dl)
+  {
+  if ((dl < 0) && (m_rope_length.x0 < 0.5))
+  return ;
+
+  bool was_moving = IsMoving();
+
+  m_rope_length.x0 += dl ;
+
+  // Recompute angular speed depending on the new rope length.
+  m_rope_angle.x1 = m_rope_angle.x1 * (m_rope_length.x0 - dl) / m_rope_length.x0 ;
+
+  if (!was_moving && IsMoving())
+  StartMoving();
+  }*/
+
+
+//---------------------------------------------------------------------------//
+//--                            Physical Simulation                        --//
+//---------------------------------------------------------------------------//
+
+void PhysicalObj::StartMoving()
+{
+  UpdateTimeOfLastMove();
+
+//   if (m_motion_type == NoMotion)
+//     m_motion_type = FreeFall ;
+
+
+  MSG_DEBUG ("physic.physic", "Starting to move: %s.", typeid(*this).name());
+}
+
+void PhysicalObj::StopMoving()
+{
+
+  if(!IsMoving()) return;
+
+  if (IsMoving()) MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
+  // Always called by PhysicalObj::StopMoving
+
+  SetSpeedXY(Point2d(0.0,0.0));
+
+  UpdateTimeOfLastMove();
+
+
+  /*if (m_motion_type != Pendulum)
+    m_motion_type = NoMotion ;
+
+    m_extern_force.Clear();*/
+}
+
+bool PhysicalObj::IsMoving() const
+{
+  /* return !EqualsZero(m_pos_x.x1)  ||
+     !EqualsZero(m_pos_y.x1)  ||
+     !m_extern_force.IsNull() ||
+     m_motion_type != NoMotion;
+  */
+  bool is_not_moving;
+
+  is_not_moving = m_body->GetLinearVelocity().x == 0.0;
+  is_not_moving &= m_body->GetLinearVelocity().y == 0.0;
+  is_not_moving &= m_body->GetAngularVelocity() == 0.0;
+
+
+  return !is_not_moving;
+}
+
+bool PhysicalObj::IsFalling() const
+{
+  return (m_body->GetLinearVelocity().x  > 0.1);
+}
+
+
+void PhysicalObj::ClearContact()
+{
+  added_contact_list.clear();
+  persist_contact_list.clear();
+  removed_contact_list.clear();
+  result_contact_list.clear();
+}
+
+void PhysicalObj::AddContact()
+{
+  m_nbr_contact++;
+  std::cout<<"Add "<<m_nbr_contact<<std::endl;
+}
+
+void PhysicalObj::RemoveContact()
+{
+  m_nbr_contact--;
+  std::cout<<"Remove "<<m_nbr_contact<<std::endl;
+}
+
+
+double PhysicalObj::GetAngle() const
+{
+   return -m_body->GetAngle();
+ }
+
+void PhysicalObj::SetAngle(double angle)
+{
+  m_body->SetXForm(m_body->GetPosition(), -angle/180.0f * b2_pi);
+
+}

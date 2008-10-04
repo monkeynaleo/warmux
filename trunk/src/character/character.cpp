@@ -1024,8 +1024,9 @@ void Character::HandleKeyRefreshed_MoveRight(bool shift) const
 {
   HideGameInterface();
 
-  //if (ActiveCharacter().IsImmobile())
+  if (!ActiveCharacter().FootsInVacuum()){
     MoveActiveCharacterRight(shift);
+  }
 }
 
 void Character::HandleKeyReleased_MoveRight(bool)
@@ -1048,8 +1049,9 @@ void Character::HandleKeyRefreshed_MoveLeft(bool shift) const
 {
   HideGameInterface();
 
- // if (ActiveCharacter().IsImmobile())
+  if (!ActiveCharacter().FootsInVacuum()){
     MoveActiveCharacterLeft(shift);
+  }
 }
 
 void Character::HandleKeyReleased_MoveLeft(bool)

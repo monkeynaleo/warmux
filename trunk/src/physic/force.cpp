@@ -20,11 +20,11 @@
  *****************************************************************************/
 
 #include "physic/force.h"
-#include "physic/physics.h"
+#include "physic/physical_obj.h"
 #include "physic/physical_engine.h"
 
 
-Force::Force(Physics *target, Point2d target_point, Point2d force, bool is_local)
+Force::Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_local)
 {
 
   m_target = target;

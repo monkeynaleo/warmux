@@ -75,14 +75,14 @@ b2Body *PhysicalEngine::GetNewGroundBody()
 
 }
 
-b2Body *PhysicalEngine::AddObject(Physics *new_obj)
+b2Body *PhysicalEngine::AddObject(PhysicalObj *new_obj)
 {
   b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
   objects_list[body] = new_obj;
   return body;
 }
 
-void PhysicalEngine::RemoveObject(Physics *obj)
+void PhysicalEngine::RemoveObject(PhysicalObj *obj)
 {
   objects_list.erase(obj->GetBody());
   physic_world->DestroyBody(obj->GetBody());
@@ -111,7 +111,7 @@ void PhysicalEngine::Step()
     b2ContactPoint contact = added_contact_list[i];
 
     if((objects_list.count(contact.shape1->GetBody()) == 1) && (objects_list[contact.shape1->GetBody()]!=NULL)){
-      Physics  *collider =  objects_list[contact.shape1->GetBody()];
+      PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
 
       collider->AddContact();
 
@@ -133,7 +133,7 @@ void PhysicalEngine::Step()
     }
 
     if((objects_list.count(contact.shape2->GetBody()) == 1) && (objects_list[contact.shape2->GetBody()]!=NULL)){
-      Physics  *collider =  objects_list[contact.shape2->GetBody()];
+      PhysicalObj  *collider =  objects_list[contact.shape2->GetBody()];
 
       collider->AddContact();
 
@@ -165,13 +165,13 @@ void PhysicalEngine::Step()
     b2ContactPoint contact = removed_contact_list[i];
 
     if((objects_list.count(contact.shape1->GetBody()) == 1) && (objects_list[contact.shape1->GetBody()]!=NULL)){
-      Physics  *collider =  objects_list[contact.shape1->GetBody()];
+      PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
 
       collider->RemoveContact();
     }
 
     if((objects_list.count(contact.shape2->GetBody()) == 1) && (objects_list[contact.shape2->GetBody()]!=NULL)){
-      Physics  *collider =  objects_list[contact.shape2->GetBody()];
+      PhysicalObj  *collider =  objects_list[contact.shape2->GetBody()];
 
       collider->RemoveContact();
     }

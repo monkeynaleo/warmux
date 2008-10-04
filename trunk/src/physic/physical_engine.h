@@ -31,7 +31,7 @@
 
 extern const double PIXEL_PER_METER;
 
-class Physics;
+class PhysicalObj;
 class Force;
 class ContactListener;
 class DebugDraw;
@@ -44,8 +44,8 @@ public:
   ~PhysicalEngine();
 
   b2Body *GetNewGroundBody() ;
-  b2Body *AddObject(Physics *new_obj);
-  void RemoveObject(Physics *obj);
+  b2Body *AddObject(PhysicalObj *new_obj);
+  void RemoveObject(PhysicalObj *obj);
   void Step();
 
   void AddForce(Force * force);
@@ -67,7 +67,7 @@ protected:
   ContactListener *m_contact_listener;
   DebugDraw *m_debug_draw;
 
-  std::map<b2Body *,Physics *> objects_list;
+  std::map<b2Body *,PhysicalObj *> objects_list;
 
   std::vector<b2ContactPoint> added_contact_list;
   std::vector<b2ContactPoint> persist_contact_list;

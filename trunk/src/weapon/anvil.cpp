@@ -54,7 +54,7 @@ class Anvil : public WeaponProjectile
     void PlayCollisionSound();
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
   protected:
-    virtual void SignalObjectCollision(Physics * obj, const Point2d& /* speed_before */);
+    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */);
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
     virtual void SignalOutOfMap();
 };
@@ -74,14 +74,13 @@ Anvil::~Anvil()
   falling_sound.Stop(); // paranoiac sound stop
 }
 
-void Anvil::SignalObjectCollision(Physics * obj, const Point2d& /* speed_before */)
+void Anvil::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */)
 {
-   if(obj->IsPhysicalObj()){
-      PhysicalObj *p_obj = (PhysicalObj *)obj;
+
     merge_time = Time::GetInstance()->Read() + 5000;
-    p_obj->SetEnergyDelta(-200);
+    obj->SetEnergyDelta(-200);
     PlayCollisionSound();
-   }
+   
 }
 
 void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
