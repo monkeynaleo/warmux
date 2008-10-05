@@ -299,8 +299,6 @@ POTFILES = \
         src/physic/physical_obj.h \
         src/physic/physical_shape.cpp \
         src/physic/physical_shape.h \
-        src/physic/physics.cpp \
-        src/physic/physics.h \
         src/sound/jukebox.cpp \
         src/sound/jukebox.h \
         src/sound/sample_cache.cpp \
