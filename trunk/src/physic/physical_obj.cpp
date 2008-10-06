@@ -181,7 +181,7 @@ void PhysicalObj::SetPhysXY(double x, double y)
      m_pos_x.x0 = x;
      m_pos_y.x0 = y;*/
   m_body->SetXForm(b2Vec2(x,y),m_body->GetAngle());
-
+  PhysicalEngine::GetInstance()->StaticStep();
   /*UpdateTimeOfLastMove();
     }*/
 }
@@ -716,7 +716,7 @@ void PhysicalObj::GoOutOfWater()
 
 void PhysicalObj::SignalRebound()
 {
-  // TO CLEAN...
+  // TO CLEAN...:
   if (!m_rebound_sound.empty())
     JukeBox::GetInstance()->Play("share", m_rebound_sound) ;
 }
@@ -1009,7 +1009,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
       continue;
     }
 
-    //   DirectFall();
+      DirectFall();
 
     // Check distance with characters
     FOR_ALL_LIVING_CHARACTERS(team, character) if ((*character) != this)
