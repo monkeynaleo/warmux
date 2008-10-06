@@ -47,6 +47,7 @@ public:
   b2Body *AddObject(PhysicalObj *new_obj);
   void RemoveObject(PhysicalObj *obj);
   void Step();
+  void StaticStep();
 
   void AddForce(Force * force);
   void RemoveForce(Force *force);
@@ -66,6 +67,8 @@ protected:
   b2Body *ground;
   ContactListener *m_contact_listener;
   DebugDraw *m_debug_draw;
+
+  void ComputeContacts();
 
   std::map<b2Body *,PhysicalObj *> objects_list;
 

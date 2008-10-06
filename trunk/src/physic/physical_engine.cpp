@@ -102,9 +102,27 @@ void PhysicalEngine::Step()
     m_force_list[i]->ComputeForce();
   }
 
-  ClearContact();
+ 
   physic_world->Step(timeStep, iterations);
+  
+  ComputeContacts();
 
+  last_step_time = last_step_time-lround(timeStep);
+}
+
+void PhysicalEngine::StaticStep()
+{
+ 
+  physic_world->Step(0,0);
+  
+  ComputeContacts();
+
+}
+
+
+
+void PhysicalEngine::ComputeContacts()
+{
   for(unsigned i = 0;i<added_contact_list.size();i++){
 
 
@@ -176,9 +194,10 @@ void PhysicalEngine::Step()
       collider->RemoveContact();
     }
   }
+ ClearContact();
 
-  last_step_time = last_step_time-lround(timeStep);
 }
+
 
 void PhysicalEngine::ClearContact()
 {
