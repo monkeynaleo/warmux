@@ -67,8 +67,9 @@ void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
 
 bool ShotgunBuckshot::IsOverlapping(const PhysicalObj* obj) const
 {
-  if(GetName() == obj->GetName()) return true;
-  return m_overlapping_object == obj;
+  if (GetName() == obj->GetName()) return true;
+
+  return (GetOverlappingObject() == obj);
 }
 
 //-----------------------------------------------------------------------------

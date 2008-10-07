@@ -74,8 +74,10 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
 
 bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
 {
-  if(GetName() == obj->GetName()) return true;
-  return m_overlapping_object == obj;
+  if (GetName() == obj->GetName())
+    return true;
+
+  return (GetOverlappingObject() == obj);
 }
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
