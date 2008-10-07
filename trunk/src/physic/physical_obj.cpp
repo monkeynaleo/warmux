@@ -77,6 +77,9 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_test_bottom(0),
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
+  m_nbr_contact(0),
+  m_cfg(),
+  m_extern_force_index(1),
   m_ignore_movements(false),
   m_is_character(false),
   m_is_fire(false),
@@ -84,9 +87,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_last_move(Time::GetInstance()->Read()),
   m_name(name),
   m_rebound_sound(""),
-  m_nbr_contact(0),
-  m_cfg(),
-  m_extern_force_index(1),
   m_alive(ALIVE),
   m_energy(-1),
   m_allow_negative_y(false)
@@ -950,11 +950,6 @@ bool PhysicalObj::IsDead() const
     || m_alive == DEAD;
 
   return r;
-}
-
-bool PhysicalObj::IsFire() const
-{
-  return m_is_fire;
 }
 
 // Are the two object in contact ? (uses test rectangles)

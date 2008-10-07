@@ -52,11 +52,11 @@ double MeterDistance (const Point2i &p1, const Point2i &p2);
 
 class PhysicalObj : private ObjectConfig
 {
+private:
   /* If you need this, implement it (correctly)*/
   const PhysicalObj& operator=(const PhysicalObj&);
   /*********************************************/
 
-private:
   // collision management
   bool m_collides_with_ground;
   bool m_collides_with_characters;
@@ -66,9 +66,17 @@ private:
   // Rectangle used for collision tests
   uint m_test_left, m_test_right, m_test_top, m_test_bottom;
 
-protected:
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
+  uint m_nbr_contact;
+
+  // Other physics constants stored there :
+  ObjectConfig m_cfg;
+
+  std::map<unsigned,Force *> m_extern_force_map;
+  uint m_extern_force_index;
+
+protected:
   bool m_ignore_movements;
   bool m_is_character;
   bool m_is_fire;
@@ -80,12 +88,7 @@ protected:
   std::string m_name;
   std::string m_unique_id;
   std::string m_rebound_sound;
-  uint m_nbr_contact;
-  // Other physics constants stored there :
-  ObjectConfig m_cfg;
 
-  std::map<unsigned,Force *> m_extern_force_map;
-  uint m_extern_force_index;
   alive_t m_alive;
   int m_energy;
 
@@ -95,8 +98,6 @@ protected:
   std::vector<b2ContactPoint> persist_contact_list;
   std::vector<b2ContactPoint> removed_contact_list;
   std::vector<b2ContactResult> result_contact_list;
-
-
 
 public:
   PhysicalObj (const std::string &name, const std::string &xml_config="");
@@ -246,7 +247,7 @@ public:
   PhysicalObj* CollidedObjectXY(const Point2i & position) const;
   // Relative to current position
   PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const;
-  bool FootsInVacuumXY(const Point2i & position) const;
+
   bool FootsInVacuum() const;
 
   bool FootsOnFloor(int y) const;
@@ -291,7 +292,6 @@ public:
   bool IsGhost() const;
   bool IsDrowned() const;
   bool IsDead() const;
-  bool IsFire() const;
 
   // The object is moving ?
   bool IsMoving() const;
