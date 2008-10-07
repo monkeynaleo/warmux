@@ -76,7 +76,7 @@ protected:
   b2BodyDef *m_body_def;
   PhysicalShape *m_shape;
   virtual void CheckOverlapping();
-  uint m_last_move;  
+  uint m_last_move;
   std::string m_name;
   std::string m_unique_id;
   std::string m_rebound_sound;
@@ -186,7 +186,7 @@ public:
   bool IsCharacter() const { return m_is_character; }
 
   //----------- Physics related function ----------
- 
+
   void SetMass(double mass);
   double GetMass() const { return m_mass; }
 
@@ -199,7 +199,7 @@ public:
   void SetGravityFactor (double factor) { m_gravity_factor = factor; };
   double GetGravityFactor () const { return m_gravity_factor; }
 
-void AddAddedContactPoint(b2ContactPoint contact);
+  void AddAddedContactPoint(b2ContactPoint contact);
   void AddPersistContactPoint(b2ContactPoint contact);
   void AddRemovedContactPoint(b2ContactPoint contact);
   void AddContactResult(b2ContactResult contact);
@@ -208,7 +208,7 @@ void AddAddedContactPoint(b2ContactPoint contact);
   void RemoveContact();
   void ClearContact();
 
- void SetBullet(bool is_bullet);
+  void SetBullet(bool is_bullet);
 
   // Add new strength
   uint AddExternForceXY (const Point2d& vector);
@@ -280,7 +280,7 @@ void AddAddedContactPoint(b2ContactPoint contact);
   void Ghost();
   void Drown();
   void GoOutOfWater(); // usefull for supertux.
- 
+
   // Start moving
   void StartMoving();
 
