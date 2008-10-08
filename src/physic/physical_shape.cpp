@@ -32,8 +32,10 @@
 PhysicalShape::PhysicalShape(b2Body *body) :
   m_body(body),
   m_shape(NULL),
+  m_position(0,0),
   m_mass(-1),
   m_friction(0.8f)
+
 {
 }
 
@@ -62,6 +64,11 @@ void PhysicalShape::SetMass(int mass)
 void PhysicalShape::SetFriction(double friction)
 {
   m_friction = friction;
+}
+
+void PhysicalShape::SetPosition(Point2d position)
+{
+  m_position = position;
 }
 
 /////////////////////////////////
@@ -264,8 +271,8 @@ void PhysicalCircle::Generate()
   }
 
   b2CircleDef shapeDef;
-  shapeDef.radius = m_radius;
-  
+  shapeDef.radius = m_radius*100;
+  shapeDef.localPosition.Set(m_position.x, m_position.y);
   shapeDef.density = 1.0f;
   shapeDef.friction = m_friction;
   shapeDef.restitution = 0.1f;
@@ -305,8 +312,27 @@ double PhysicalCircle::GetInitialHeight() const
 #ifdef DEBUG
 void PhysicalCircle::DrawBorder(const Color& color) const
 {
-  //TODO : Implement
-  Color temp = color;
-  temp = temp;
-}
+ 
+;  
+  Point2d a,b,c,d;
+
+
+  a.x = lround((m_body->GetPosition().x + m_radius + m_position.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+  a.y = lround((m_body->GetPosition().y + m_position.y )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+
+  b.x = lround((m_body->GetPosition().x + m_position.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+  b.y = lround((m_body->GetPosition().y + m_radius +m_position.y )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+
+  c.x = lround((m_body->GetPosition().x - m_radius + m_position.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+  c.y = lround((m_body->GetPosition().y + m_position.y )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+ 
+  d.x = lround((m_body->GetPosition().x + m_position.x )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+  d.y = lround((m_body->GetPosition().y - m_radius + m_position.y )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+
+
+  GetMainWindow().LineColor(a.x, b.x, a.y, b.y, color);
+  GetMainWindow().LineColor(b.x, c.x, b.y, c.y, color);
+  GetMainWindow().LineColor(c.x, d.x, c.y, d.y, color);
+  GetMainWindow().LineColor(d.x, a.x, d.y, a.y, color);
+} 
 #endif
