@@ -96,4 +96,24 @@ protected:
 };
 
 
+class PhysicalCircle : public PhysicalShape
+{
+public:
+  PhysicalCircle(b2Body *body);
+  void SetRadius(double radius);
+  virtual void Generate();
+  virtual double GetCurrentWidth() const;
+  virtual double GetCurrentHeight() const;
+  virtual double GetInitialWidth() const;
+  virtual double GetInitialHeight() const;
+
+#ifdef DEBUG
+  void DrawBorder(const Color &color) const;
+#endif
+protected:
+  double m_radius;
+};
+
+
+
  #endif
