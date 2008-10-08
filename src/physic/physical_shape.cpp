@@ -243,3 +243,70 @@ void PhysicalRectangle::Generate()
   PhysicalPolygon::Generate();
 }
 
+/////////////////////////////////
+// PhysicalCircle
+
+PhysicalCircle::PhysicalCircle(b2Body *body) : PhysicalShape(body)
+{
+
+}
+
+void PhysicalCircle::SetRadius(double radius)
+{
+  m_radius = radius;
+}
+
+void PhysicalCircle::Generate()
+{
+  if (m_shape) {
+    m_body->DestroyShape(m_shape);
+    m_shape = NULL;
+  }
+
+  b2CircleDef shapeDef;
+  shapeDef.radius = m_radius;
+  
+  shapeDef.density = 1.0f;
+  shapeDef.friction = m_friction;
+  shapeDef.restitution = 0.1f;
+  shapeDef.filter.categoryBits = m_filter.categoryBits;
+  shapeDef.filter.maskBits = m_filter.maskBits;
+
+  m_shape = m_body->CreateShape(&shapeDef);
+
+  b2MassData massData;
+  massData.mass = m_mass;
+  massData.center.SetZero();
+  massData.I = 0.0f;
+
+  m_body->SetMass(&massData);
+}
+
+double PhysicalCircle::GetCurrentWidth() const
+{
+  return m_radius*2;
+}
+
+double PhysicalCircle::GetCurrentHeight() const
+{
+  return m_radius*2;
+}
+
+double PhysicalCircle::GetInitialWidth() const
+{
+  return m_radius*2;
+}
+
+double PhysicalCircle::GetInitialHeight() const
+{
+  return m_radius*2;
+}
+
+#ifdef DEBUG
+void PhysicalCircle::DrawBorder(const Color& color) const
+{
+  //TODO : Implement
+  Color temp = color;
+  temp = temp;
+}
+#endif
