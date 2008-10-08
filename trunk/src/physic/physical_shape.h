@@ -43,6 +43,7 @@ public:
   void SetFilter(b2FilterData filter);
   void SetFriction(double friction);
   void SetMass(int mass);
+  void SetPosition(Point2d position);
 
   // returns current max width (taking angle into account)
   virtual double GetCurrentWidth() const = 0;
@@ -61,6 +62,7 @@ protected:
   b2FilterData m_filter;
   b2Body *m_body;
   b2Shape *m_shape;
+  Point2d m_position;
   int m_mass;
   double m_friction;
 };

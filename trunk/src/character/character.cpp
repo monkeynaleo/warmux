@@ -106,6 +106,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   back_jumping(false),
   death_explosion(true),
   firing_angle(0),
+  m_feet_shape(NULL),
   disease_damage_per_turn(0),
   disease_duration(0),
   damage_stats(new DamageStatistics(*this)),
@@ -460,6 +461,7 @@ void Character::Draw()
 
   if (IsLOGGING("polygon.character")) {
     DrawPolygon(primary_red_color);
+    m_feet_shape->DrawBorder(primary_red_color);
   }
 #endif
 }
@@ -982,8 +984,8 @@ void Character::SetSize(const Point2i &newSize)
   shape->AddPoint(Point2d(phys_width, 0));
   shape->AddPoint(Point2d(phys_width, 3*phys_height/8));
   shape->AddPoint(Point2d(9*phys_width/10, 6*phys_height/8));
-  shape->AddPoint(Point2d(6*phys_width/10, phys_height));
-  shape->AddPoint(Point2d(4*phys_width/10, phys_height));
+  //  shape->AddPoint(Point2d(6*phys_width/10, phys_height));
+  //  shape->AddPoint(Point2d(4*phys_width/10, phys_height));
   shape->AddPoint(Point2d(1*phys_width/10, 6*phys_height/8));
   shape->AddPoint(Point2d(0, 3*phys_height/8));
   shape->SetMass(GetMass());
@@ -1004,7 +1006,36 @@ void Character::SetSize(const Point2i &newSize)
     delete m_shape;
 
   m_shape = shape;
-  shape->Generate();
+  m_shape->Generate();
+
+  //Feet shape
+
+  PhysicalCircle *feet_shape = new PhysicalCircle(m_body);
+
+  // Shape position is relative to body
+  feet_shape->SetRadius(phys_width/2);
+  feet_shape->SetMass(GetMass());
+  feet_shape->SetPosition(Point2d(phys_width/2, phys_height - phys_width/2));
+  //Physical shape
+
+  b2FilterData filter_data_feet;
+  filter_data_feet.categoryBits = 0x0001;
+  filter_data_feet.maskBits = 0x0000;
+  if (m_feet_shape != NULL) {
+    filter_data_feet = m_feet_shape->GetFilter();
+  }
+  feet_shape->SetFriction(1.2f);
+  feet_shape->SetFilter(filter_data_feet);
+  feet_shape->Generate();
+
+  if (m_feet_shape)
+    delete m_feet_shape;
+
+  m_feet_shape = feet_shape;
+  feet_shape->Generate();
+
+
+
 }
 
 // ###################################################################
