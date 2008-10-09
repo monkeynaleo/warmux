@@ -112,7 +112,6 @@ protected:
    void EnableDisplay(bool _display);
    void Show();
    void Hide();
-   bool IsVisible() const { return display; };
 
    int GetWidth() const { return game_menu.GetWidth(); };
    int GetHeight() const;

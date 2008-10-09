@@ -100,7 +100,10 @@ void Construct::Draw()
   if (!IsInUse()) {
     Weapon::Draw();
 
-    if (EnoughAmmo() && EnoughAmmoUnit() && !Interface::GetInstance()->weapons_menu.IsDisplayed()) {
+    if (EnoughAmmo()
+	&& EnoughAmmoUnit()
+	&& !Interface::GetInstance()->weapons_menu.IsDisplayed()
+	&& Interface::GetInstance()->IsDisplayed()) {
       dst = Mouse::GetInstance()->GetWorldPosition();
       construct_spr->SetRotation_rad(angle);
       construct_spr->Draw(dst - construct_spr->GetSize() / 2);
