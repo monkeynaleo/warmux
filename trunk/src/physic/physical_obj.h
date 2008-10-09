@@ -250,8 +250,6 @@ public:
 
   bool FootsInVacuum() const;
 
-  bool FootsOnFloor(int y) const;
-
   bool IsInWater() const;
 
 

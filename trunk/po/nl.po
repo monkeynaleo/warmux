@@ -157,7 +157,7 @@ msgstr[1] ""
 "Team %s heeft %u drilboren gekregen! Maak er niet te veel herrie mee! "
 "Bedankt, uw buren."
 
-#: src/weapon/anvil.cpp:192
+#: src/weapon/anvil.cpp:191
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -239,7 +239,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Team %s heeft %u staaf dynamiet gekregen!"
 msgstr[1] "Team %s heeft %u staven dynamiet gekregen!"
 
-#: src/weapon/flamethrower.cpp:178
+#: src/weapon/flamethrower.cpp:180
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -253,7 +253,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Team %s heeft %u voetbalbom gekregen!"
 msgstr[1] "Team %s heeft %u voetbalbommen gekregen!"
 
-#: src/weapon/grapple.cpp:811
+#: src/weapon/grapple.cpp:815
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -319,7 +319,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Team %s heeft %u rellenbom gekregen!"
 msgstr[1] "Team %s heeft %u rellenbommen gekregen!"
 
-#: src/weapon/shotgun.cpp:134
+#: src/weapon/shotgun.cpp:135
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -467,7 +467,7 @@ msgstr ""
 "Vuur : spatiebalk\n"
 "een slag per beurt"
 
-#: src/weapon/anvil.cpp:135
+#: src/weapon/anvil.cpp:134
 msgid "Anvil"
 msgstr "Aambeeld"
 
@@ -767,7 +767,7 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
 
-#: src/weapon/flamethrower.cpp:134
+#: src/weapon/flamethrower.cpp:136
 msgid "Flame Thrower"
 msgstr "Vlammenwerper"
 
@@ -883,7 +883,7 @@ msgstr ""
 "Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
 "een schot per beurt"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/anvil.cpp:135
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -891,7 +891,7 @@ msgstr ""
 "Hoe te gebruiken : klik met de linkermuisknop op het doel\n"
 "slechts een per beurt"
 
-#: src/game/game_classic.cpp:227
+#: src/game/game_classic.cpp:229
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
@@ -1229,7 +1229,7 @@ msgstr "Server beschikbaar op internet"
 msgid "Server mode"
 msgstr "Server modus"
 
-#: src/weapon/shotgun.cpp:91
+#: src/weapon/shotgun.cpp:92
 msgid "Shotgun"
 msgstr "Jachtgeweer"
 
@@ -1570,7 +1570,7 @@ msgstr "U heeft minimaal twee geldige teams nodig !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd !"
 
-#: src/weapon/weapon_launcher.cpp:494
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 

@@ -72,7 +72,6 @@ b2Body *PhysicalEngine::GetNewGroundBody()
   groundBodyDef.position.Set(0.0f, 0.0f);
 
   return physic_world->CreateBody(&groundBodyDef);
-
 }
 
 b2Body *PhysicalEngine::AddObject(PhysicalObj *new_obj)
@@ -176,7 +175,7 @@ void PhysicalEngine::ComputeContacts()
      // std::cout<<"Pesist"<<std::endl;
   }
 
- 
+
   for(unsigned i = 0;i<removed_contact_list.size();i++){
 
 

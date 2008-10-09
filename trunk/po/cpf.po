@@ -158,7 +158,7 @@ msgstr[1] ""
 "bande %s la gagne %u marteaux pneumatiques! Fé pas trop désorde avec ça "
 "sinon oute bandes voisins y ça totoshe à ou."
 
-#: src/weapon/anvil.cpp:192
+#: src/weapon/anvil.cpp:191
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -236,7 +236,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "L'équipe %s a gagné %u baton de dynamite !"
 msgstr[1] "L'équipe %s a gagné %u batons de dynamite !!"
 
-#: src/weapon/flamethrower.cpp:178
+#: src/weapon/flamethrower.cpp:180
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -250,7 +250,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "L'équipe %s a gagné %u !"
 msgstr[1] "L'équipe %s a gagné %u !!"
 
-#: src/weapon/grapple.cpp:811
+#: src/weapon/grapple.cpp:815
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -313,7 +313,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "L'équipe %s a gagné %u !"
 msgstr[1] "L'équipe %s a gagné %u !!"
 
-#: src/weapon/shotgun.cpp:134
+#: src/weapon/shotgun.cpp:135
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -446,7 +446,7 @@ msgstr ""
 "Angle: en haut/en basFeu: appui sur la grosse bar en basou gaingne pas fé "
 "plus d'une action par tour"
 
-#: src/weapon/anvil.cpp:135
+#: src/weapon/anvil.cpp:134
 msgid "Anvil"
 msgstr "Enclume"
 
@@ -750,7 +750,7 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : le skin \"%s\" pour l'équipe \"%s\" la fané ça..."
 
-#: src/weapon/flamethrower.cpp:134
+#: src/weapon/flamethrower.cpp:136
 msgid "Flame Thrower"
 msgstr "lance-flammes"
 
@@ -869,7 +869,7 @@ msgstr ""
 "feu de début: en haut/en basfeu: pese sur la grande barre juska la force ou "
 "veutune munition par tour"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/anvil.cpp:135
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -877,7 +877,7 @@ msgstr ""
 "Comment utilises à lu: pese ek le bouton gauche de oute souris sur la cible."
 "une munition par tour"
 
-#: src/game/game_classic.cpp:227
+#: src/game/game_classic.cpp:229
 msgid "Hurry up, you are too slow !!"
 msgstr "Grouille oute calbasse !"
 
@@ -1227,7 +1227,7 @@ msgstr "Serveur ok sur Internet"
 msgid "Server mode"
 msgstr "Mode serveur"
 
-#: src/weapon/shotgun.cpp:91
+#: src/weapon/shotgun.cpp:92
 msgid "Shotgun"
 msgstr "Fusil à pompe"
 
@@ -1572,7 +1572,7 @@ msgstr "Il faut au minimum deux équipes correctes !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Gaingne pas joué avant de prendre une équipe !"
 
-#: src/weapon/weapon_launcher.cpp:494
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 
