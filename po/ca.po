@@ -157,7 +157,7 @@ msgid_plural ""
 msgstr[0] "L'equip %s aconsegueix %u martell volador!"
 msgstr[1] "L'equip %s aconsegueix %u martells voladors!"
 
-#: src/weapon/anvil.cpp:192
+#: src/weapon/anvil.cpp:191
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -231,7 +231,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "L'equip %s aconsegueix %u dinamita!"
 msgstr[1] "L'equip %s aconsegueix %u dinamitaes!"
 
-#: src/weapon/flamethrower.cpp:178
+#: src/weapon/flamethrower.cpp:180
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -245,7 +245,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "L'equip %s aconsegueix %u  football bomb!"
 msgstr[1] "L'equip %s aconsegueix %u football bombs!"
 
-#: src/weapon/grapple.cpp:811
+#: src/weapon/grapple.cpp:815
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -308,7 +308,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "L'equip %s aconsegueix %u bomba antidisturbis!"
 msgstr[1] "L'equip %s aconsegueix %u bomba antidisturbis!"
 
-#: src/weapon/shotgun.cpp:134
+#: src/weapon/shotgun.cpp:135
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -443,7 +443,7 @@ msgstr ""
 "Foc: barra espaciadora\n"
 "un tir per torn "
 
-#: src/weapon/anvil.cpp:135
+#: src/weapon/anvil.cpp:134
 msgid "Anvil"
 msgstr "Enclusa"
 
@@ -743,7 +743,7 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 
-#: src/weapon/flamethrower.cpp:134
+#: src/weapon/flamethrower.cpp:136
 msgid "Flame Thrower"
 msgstr "Llançaflames"
 
@@ -860,7 +860,7 @@ msgstr ""
 "desitjada\n"
 "un arma per torn "
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/anvil.cpp:135
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -868,7 +868,7 @@ msgstr ""
 "Com usar-lo: botó dret sobre l'objectiu\n"
 " un arma per torn "
 
-#: src/game/game_classic.cpp:227
+#: src/game/game_classic.cpp:229
 msgid "Hurry up, you are too slow !!"
 msgstr "Apressa't, ets massa lent"
 
@@ -1207,7 +1207,7 @@ msgstr "Servidor disponible a internet"
 msgid "Server mode"
 msgstr "Servidor"
 
-#: src/weapon/shotgun.cpp:91
+#: src/weapon/shotgun.cpp:92
 msgid "Shotgun"
 msgstr "Escopeta"
 
@@ -1556,7 +1556,7 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "No podràs jugar abans de seleccionar un equip!"
 
-#: src/weapon/weapon_launcher.cpp:494
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 

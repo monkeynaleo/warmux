@@ -129,7 +129,7 @@ void PhysicalObj::SetXY(const Point2d &position)
   if (IsOutsideWorldXY(Point2i(int(position.x), int(position.y)))) {
 
     SetPhysXY( position / PIXEL_PER_METER );
-    //  Ghost();
+    Ghost();
     SignalOutOfMap();
 
   } else {
@@ -496,29 +496,11 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
   CheckOverlapping();
 }
 
-uint PhysicalObj::AddExternForce (double norm, double angle)
-{
-  return AddExternForceXY(Point2d::FromPolarCoordinates(norm, angle));
-}
-
-void PhysicalObj::RemoveExternForce(uint index)
-{
-  if (index != 0) {
-    PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
-    delete m_extern_force_map[index];
-    m_extern_force_map.erase(index);
-  }
-}
-
 const PhysicalObj* PhysicalObj::GetOverlappingObject() const
 {
   return m_overlapping_object;
 }
 
-bool PhysicalObj::IsSleeping() const
-{
-  return m_body->IsSleeping();
-}
 
 bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
 {
@@ -544,6 +526,25 @@ void PhysicalObj::CheckOverlapping()
       MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\"",
 		GetName().c_str(), m_overlapping_object->GetName().c_str());
     }
+}
+
+uint PhysicalObj::AddExternForce (double norm, double angle)
+{
+  return AddExternForceXY(Point2d::FromPolarCoordinates(norm, angle));
+}
+
+void PhysicalObj::RemoveExternForce(uint index)
+{
+  if (index != 0) {
+    PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
+    delete m_extern_force_map[index];
+    m_extern_force_map.erase(index);
+  }
+}
+
+bool PhysicalObj::IsSleeping() const
+{
+  return m_body->IsSleeping();
 }
 
 // WARNING: MUST BE REMOVED
@@ -794,25 +795,10 @@ bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const
   return IsOutsideWorldXY( GetPosition() + offset );
 }
 
-int count = 0;
-
-bool PhysicalObj::FootsOnFloor(int y) const
-{
-  //TODO : calculate collision with water
-  // If outside is empty, the object can't hit the ground !
-  if ( GetWorld().IsOpen() ) return false;
-
-  const int y_max = GetWorld().GetHeight() +m_test_bottom;
-  return (y_max <= y);
-}
-
 bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
 {
   if (IsOutsideWorldXY(position))
     return GetWorld().IsOpen();
-
-  if (FootsOnFloor(position.y - 1))
-    return false;
 
   if (check_object && CollidedObjectXY(position))
     return false;
@@ -830,37 +816,44 @@ bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_objects) const
 
 bool PhysicalObj::FootsInVacuum() const
 {
-  /*  Point2i position = GetPosition();
+  Point2i position = GetPosition();
 
   if (IsOutsideWorldXY(position)) {
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
-    return GetWorld().IsOpen();
+    return GetWorld().IsOpen(); // WARNING: it's quite strange...
   }
 
-  if (FootsOnFloor(position.y)) {
-    MSG_DEBUG("physical", "%s - physobj is on floor", m_name.c_str());
-    return false;
-  }
+  // ===========================================================
+  // WARNING: Not sure those tests have to be removed completely
+  // ===========================================================
+  // {
+  //   Rectanglei rect(position.x + m_test_left,
+  // 		    position.y + m_test_top + GetTestHeight(),
+  // 		    GetTestWidth(),
+  // 		  GetTestHeight());
 
-  int y_test = position.y + GetHeight() - m_test_bottom;
+  //   if (m_allow_negative_y && rect.GetPositionY() < 0) {
+  //     int b = rect.GetPositionY() + rect.GetSizeY();
 
-  Rectanglei rect( position.x + m_test_left, y_test,
-                   GetWidth() - m_test_right - m_test_left, 1);
+  //     rect.SetPositionY( 0 );
+  //     rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
+  //   }
 
-  if (m_allow_negative_y && rect.GetPositionY() < 0) {
-    int b = rect.GetPositionY() + rect.GetSizeY();
+  //   if (CollidedObjectXY(position + Point2i(0, 1)) != NULL ) {
+  //     return false;
+  //   }
 
-    rect.SetPositionY( 0 );
-    rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
-  }
+  //   if (!GetWorld().RectIsInVacuum (rect)) {
+  //     return false;
+  //   }
+  // }
 
-  if (CollidedObjectXY( position + Point2i(0, 1)) != NULL )
-    return false;
-
-    return GetWorld().RectIsInVacuum (rect);*/
   return (m_nbr_contact == 0);
 }
 
+// ====================================================
+// WARNING: To rewrite using Box2D shapes and contacts
+// ====================================================
 PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
 {
   if (IsOutsideWorldXY(position))
@@ -919,8 +912,10 @@ bool PhysicalObj::IsInWater () const
 
 void PhysicalObj::DirectFall()
 {
-  while (!IsGhost() && !IsInWater() && FootsInVacuum())
+  while (!IsGhost() && !IsInWater() && FootsInVacuum()) {
+    MSG_DEBUG("physic.fall", "%s - x=%f, y=%f\n", m_name.c_str(), GetXdouble(), GetYdouble());
     SetY(GetYdouble()+1.0);
+  }
 }
 
 bool PhysicalObj::IsImmobile() const

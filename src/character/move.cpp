@@ -44,21 +44,18 @@ const uint PAUSE_CHG_DIRECTION=80; // ms
 bool ComputeHeightMovement(Character &character, int &height,
                            bool falling)
 {
-  int y_floor=character.GetY();
-
-  if( character.IsInVacuum( Point2i(character.GetDirection(), 0))
-  && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) ){
+  if (character.IsInVacuum( Point2i(character.GetDirection(), 0))
+      && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) ) {
     //Land is flat, we can move!
     height = 0;
     return true;
   }
 
   //Compute height of the step:
-  if( character.IsInVacuum( Point2i(character.GetDirection(), 0)) ){
+  if (character.IsInVacuum( Point2i(character.GetDirection(), 0)) ) {
     //Try to go down:
-    for(height = 2; height <= MAX_FALLING_HEIGHT ; height++){
-      if( !character.IsInVacuum(Point2i(character.GetDirection(), height))
-      ||  character.FootsOnFloor(y_floor+height)){
+    for (height = 2; height <= MAX_FALLING_HEIGHT ; height++) {
+      if (!character.IsInVacuum(Point2i(character.GetDirection(), height))) {
         height--;
         return true;
       }
@@ -70,12 +67,14 @@ bool ComputeHeightMovement(Character &character, int &height,
       character.SetMovement("fall");
     }
     return false;
-  }
-  else{
+
+  } else{
     //Try to go up:
-    for(height = -1; height >= -MAX_CLIMBING_HEIGHT ; height--)
-      if( character.IsInVacuum( Point2i(character.GetDirection(), height) ) )
+    for (height = -1; height >= -MAX_CLIMBING_HEIGHT ; height--) {
+      if (character.IsInVacuum( Point2i(character.GetDirection(), height))) {
         return true;
+      }
+    }
   }
   //We can't move!
   return false;

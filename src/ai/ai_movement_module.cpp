@@ -60,7 +60,6 @@ bool AIMovementModule::ObstacleHeight(int& height) const
   if (ComputeHeightMovement(ActiveCharacter(), height, false))
     return true;
 
-  int y_floor=ActiveCharacter().GetY();
   if (height < 0) {
 
     for (height = -15; height >= -150 ; height--) {
@@ -73,8 +72,7 @@ bool AIMovementModule::ObstacleHeight(int& height) const
 
     // Compute exact whole size
     for (height = 15; height <= 150 ; height++){
-      if ( !ActiveCharacter().IsInVacuum(Point2i(ActiveCharacter().GetDirection(), height))
-          ||  ActiveCharacter().FootsOnFloor(y_floor+height)){
+      if ( !ActiveCharacter().IsInVacuum(Point2i(ActiveCharacter().GetDirection(), height))) {
         break;
       }
     }
