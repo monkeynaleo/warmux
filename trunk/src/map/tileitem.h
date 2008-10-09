@@ -74,6 +74,11 @@ public:
 
 class TileItem_AlphaSoftware : public TileItem
 {
+  /* If you need this, implement it (correctly)*/
+  const TileItem_AlphaSoftware& operator=(const TileItem_AlphaSoftware&);
+  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
+  /*********************************************/
+
   Point2i m_size;
   Surface m_surface;
   b2Body* m_tile_body;
@@ -82,9 +87,6 @@ class TileItem_AlphaSoftware : public TileItem
   int m_shape_level;
   unsigned char* last_filled_pixel;
 
-  const TileItem_AlphaSoftware& operator=(const TileItem_AlphaSoftware&);
-
-  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
   unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos) const;
   unsigned char GetAlpha_Index0(const Point2i &pos) const;
   inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
@@ -101,10 +103,10 @@ public:
   bool need_check_empty;
   bool need_delete;
 
-  TileItem_AlphaSoftware( const Point2i &size);
+  TileItem_AlphaSoftware(const Point2i &size, const Point2d &offset);
   virtual ~TileItem_AlphaSoftware();
 
-  void InitShape(int level, Point2d &offset);
+  void InitShape();
   unsigned char GetAlpha(const Point2i &pos);
   void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
