@@ -37,6 +37,8 @@
 #include "graphic/colors.h"
 #endif
 
+static const uint TILE_MAX_LEVEL = 2;
+
 static const uint TRANSPARENT_WHITE = 0x40FFFFFF;
 
 void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
@@ -77,13 +79,16 @@ void TileItem_Empty::Draw(const Point2i &/*pos*/)
 }
 
 // === Implemenation of TileItem_Software_ALpha ==============================
-TileItem_AlphaSoftware::TileItem_AlphaSoftware( const Point2i &size) :
-  TileItem()
+TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size, const Point2d &shape_offset) :
+  TileItem(),
+  m_size(size),
+  m_physic_tile(NULL),
+  m_shape_offset(shape_offset),
+  last_filled_pixel(NULL),
+  need_delete(false)
 {
-  m_physic_tile = NULL;
   m_size = size;
   m_surface = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
-  need_delete = false;
   ResetEmptyCheck();
 
   m_tile_body = PhysicalEngine::GetInstance()->GetNewGroundBody();
@@ -111,16 +116,13 @@ TileItem_AlphaSoftware::~TileItem_AlphaSoftware()
   delete m_physic_tile;
 }
 
-void TileItem_AlphaSoftware::InitShape(int level, Point2d &offset)
+void TileItem_AlphaSoftware::InitShape()
 {
-  m_shape_level = level;
-  m_shape_offset = offset;
-
   if (m_physic_tile != NULL) {
     delete m_physic_tile;
   }
 
-  m_physic_tile = new PhysicTile(m_size, Point2d(0,0), offset, this, NULL, level);
+  m_physic_tile = new PhysicTile(m_size, Point2d(0,0), m_shape_offset, this, NULL, TILE_MAX_LEVEL);
 }
 
 void TileItem_AlphaSoftware::ResetEmptyCheck()
@@ -167,7 +169,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig)
       if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
 	*(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
 
-  InitShape(m_shape_level,m_shape_offset);
+  InitShape();
 }
 
 void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius)
@@ -209,12 +211,13 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius)
     Empty(center.x-length, center.x+length, buf, bpp);
   }
 
-  InitShape(m_shape_level,m_shape_offset);
+  InitShape();
 }
 
 void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
 {
   m_surface.MergeSurface(spr, position);
+  InitShape();
 }
 
 void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shift)

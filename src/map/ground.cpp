@@ -64,13 +64,15 @@ void Ground::Init()
   std::cout << _("done") << std::endl;
 }
 
-void Ground::Reset(){
+void Ground::Reset()
+{
   Init();
   lastPos.SetValues(INT_MAX, INT_MAX);
 }
 
 // Read the alpha channel of the pixel
-bool Ground::IsEmpty(const Point2i &pos) const{
+bool Ground::IsEmpty(const Point2i &pos) const
+{
         ASSERT( !GetWorld().IsOutsideWorldXY(pos.x, pos.y) );
 
         return GetAlpha( pos ) != 255; // IsTransparent
