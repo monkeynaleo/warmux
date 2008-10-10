@@ -126,9 +126,9 @@ void PhysicalEngine::ComputeContacts()
     b2ContactPoint contact = added_contact_list.at(i);
 
     if ((objects_list.count(contact.shape1->GetBody()) == 1)
-	&& (objects_list.at(contact.shape1->GetBody()) != NULL)) {
+	&& (objects_list[contact.shape1->GetBody()] != NULL)) {
 
-      PhysicalObj  *collider =  objects_list.at(contact.shape1->GetBody());
+      PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
 
       collider->AddContact();
 
@@ -140,7 +140,7 @@ void PhysicalEngine::ComputeContacts()
 
       if (objects_list.count(contact.shape2->GetBody()) > 0) {
 
-        collider->SignalObjectCollision(objects_list.at(contact.shape2->GetBody()), vel);
+        collider->SignalObjectCollision(objects_list[contact.shape2->GetBody()], vel);
       } else {
 
         collider->SignalGroundCollision(vel);
@@ -148,9 +148,9 @@ void PhysicalEngine::ComputeContacts()
     }
 
     if ((objects_list.count(contact.shape2->GetBody()) == 1)
-	&& (objects_list.at(contact.shape2->GetBody()) != NULL)) {
+	&& (objects_list[contact.shape2->GetBody()] != NULL)) {
 
-      PhysicalObj  *collider = objects_list.at(contact.shape2->GetBody());
+      PhysicalObj  *collider = objects_list[contact.shape2->GetBody()];
 
       collider->AddContact();
 
@@ -162,7 +162,7 @@ void PhysicalEngine::ComputeContacts()
 
       if (objects_list.count(contact.shape1->GetBody()) > 0) {
 
-        collider->SignalObjectCollision(objects_list.at(contact.shape1->GetBody()), vel);
+        collider->SignalObjectCollision(objects_list[contact.shape1->GetBody()], vel);
       } else {
 
         collider->SignalGroundCollision(vel);
@@ -182,15 +182,15 @@ void PhysicalEngine::ComputeContacts()
     b2ContactPoint contact = removed_contact_list[i];
 
     if ((objects_list.count(contact.shape1->GetBody()) == 1)
-	&& (objects_list.at(contact.shape1->GetBody()) != NULL)) {
-      PhysicalObj  *collider =  objects_list.at(contact.shape1->GetBody());
+	&& (objects_list[contact.shape1->GetBody()] != NULL)) {
+      PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
 
       collider->RemoveContact();
     }
 
     if ((objects_list.count(contact.shape2->GetBody()) == 1)
-	&& (objects_list.at(contact.shape2->GetBody()) != NULL)) {
-      PhysicalObj  *collider =  objects_list.at(contact.shape2->GetBody());
+	&& (objects_list[contact.shape2->GetBody()] != NULL)) {
+      PhysicalObj  *collider =  objects_list[contact.shape2->GetBody()];
 
       collider->RemoveContact();
     }
