@@ -91,19 +91,18 @@ void PhysicalEngine::Step()
 {
   float32 timeStep = 1.0f / frame_rate;
 
-  if ((Time::GetInstance()->Read()-last_step_time) < (unsigned)lround(timeStep))
-    {
-      return;
-    }
+  if ((Time::GetInstance()->Read()-last_step_time) < (uint)lround(timeStep)) {
+    return;
+  }
   MSG_DEBUG("physical.step", "Engine step");
 
-  for(unsigned i = 0; i< m_force_list.size();i++){
+  for (uint i = 0; i< m_force_list.size();i++) {
     m_force_list[i]->ComputeForce();
   }
 
- 
+
   physic_world->Step(timeStep, iterations);
-  
+
   ComputeContacts();
 
   last_step_time = last_step_time-lround(timeStep);
@@ -111,24 +110,21 @@ void PhysicalEngine::Step()
 
 void PhysicalEngine::StaticStep()
 {
- 
   physic_world->Step(0,0);
-  
+
   ComputeContacts();
-
 }
-
-
 
 void PhysicalEngine::ComputeContacts()
 {
-  for(unsigned i = 0;i<added_contact_list.size();i++){
+  for (uint i = 0; i < added_contact_list.size(); i++) {
 
+    b2ContactPoint contact = added_contact_list.at(i);
 
-    b2ContactPoint contact = added_contact_list[i];
+    if ((objects_list.count(contact.shape1->GetBody()) == 1)
+	&& (objects_list.at(contact.shape1->GetBody()) != NULL)) {
 
-    if((objects_list.count(contact.shape1->GetBody()) == 1) && (objects_list[contact.shape1->GetBody()]!=NULL)){
-      PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
+      PhysicalObj  *collider =  objects_list.at(contact.shape1->GetBody());
 
       collider->AddContact();
 
@@ -138,19 +134,19 @@ void PhysicalEngine::ComputeContacts()
 
       collider->SignalCollision(vel);
 
-      if(objects_list.count(contact.shape2->GetBody()) >0){
+      if (objects_list.count(contact.shape2->GetBody()) > 0) {
 
-        collider->SignalObjectCollision(objects_list[contact.shape2->GetBody()],vel );
-      }else{
+        collider->SignalObjectCollision(objects_list.at(contact.shape2->GetBody()), vel);
+      } else {
 
         collider->SignalGroundCollision(vel);
       }
-
-
     }
 
-    if((objects_list.count(contact.shape2->GetBody()) == 1) && (objects_list[contact.shape2->GetBody()]!=NULL)){
-      PhysicalObj  *collider =  objects_list[contact.shape2->GetBody()];
+    if ((objects_list.count(contact.shape2->GetBody()) == 1)
+	&& (objects_list.at(contact.shape2->GetBody()) != NULL)) {
+
+      PhysicalObj  *collider = objects_list.at(contact.shape2->GetBody());
 
       collider->AddContact();
 
@@ -160,10 +156,10 @@ void PhysicalEngine::ComputeContacts()
 
       collider->SignalCollision(vel);
 
-      if(objects_list.count(contact.shape1->GetBody()) >0){
+      if (objects_list.count(contact.shape1->GetBody()) > 0) {
 
-        collider->SignalObjectCollision(objects_list[contact.shape1->GetBody()],vel );
-      }else{
+        collider->SignalObjectCollision(objects_list.at(contact.shape1->GetBody()), vel);
+      } else {
 
         collider->SignalGroundCollision(vel);
       }
@@ -171,29 +167,31 @@ void PhysicalEngine::ComputeContacts()
 
   }
 
-  for(unsigned i = 0;i<persist_contact_list.size();i++){
+  for (uint i = 0; i < persist_contact_list.size(); i++) {
      // std::cout<<"Pesist"<<std::endl;
   }
 
 
-  for(unsigned i = 0;i<removed_contact_list.size();i++){
+  for (uint i = 0; i < removed_contact_list.size(); i++) {
 
 
     b2ContactPoint contact = removed_contact_list[i];
 
-    if((objects_list.count(contact.shape1->GetBody()) == 1) && (objects_list[contact.shape1->GetBody()]!=NULL)){
-      PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
+    if ((objects_list.count(contact.shape1->GetBody()) == 1)
+	&& (objects_list.at(contact.shape1->GetBody()) != NULL)) {
+      PhysicalObj  *collider =  objects_list.at(contact.shape1->GetBody());
 
       collider->RemoveContact();
     }
 
-    if((objects_list.count(contact.shape2->GetBody()) == 1) && (objects_list[contact.shape2->GetBody()]!=NULL)){
-      PhysicalObj  *collider =  objects_list[contact.shape2->GetBody()];
+    if ((objects_list.count(contact.shape2->GetBody()) == 1)
+	&& (objects_list.at(contact.shape2->GetBody()) != NULL)) {
+      PhysicalObj  *collider =  objects_list.at(contact.shape2->GetBody());
 
       collider->RemoveContact();
     }
   }
- ClearContact();
+  ClearContact();
 
 }
 
@@ -216,8 +214,8 @@ void PhysicalEngine::RemoveForce(Force *force)
 {
 
   std::vector<Force *>::iterator it;
-  for(it = m_force_list.begin(); it!=m_force_list.end();it++){
-    if(*it == force){
+  for (it = m_force_list.begin(); it != m_force_list.end(); it++){
+    if (*it == force) {
       m_force_list.erase(it);
       break;
     }
@@ -229,8 +227,7 @@ void PhysicalEngine::RemoveForce(Force *force)
 
 void PhysicalEngine::AddContactPoint(b2ContactPoint contact,ContactType type)
 {
-  switch(type)
-  {
+  switch(type) {
   case ADD:
     added_contact_list.push_back(contact);
     break;
@@ -267,7 +264,6 @@ void ContactListener::Persist(const b2ContactPoint* point)
   b2ContactPoint contact = *point;
   engine->AddContactPoint(contact,PhysicalEngine::PERSIST);
 }
-
 
 void ContactListener::Remove(const b2ContactPoint* point)
 {
