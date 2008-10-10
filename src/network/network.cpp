@@ -50,7 +50,17 @@
 
 // Standard header, only needed for the following method
 #ifdef WIN32
-#  include <winsock.h>
+#  include <winsock2.h>
+#  ifdef __MINGW32__
+#    define _WIN32_WINNT 0x501
+#    include <ws2tcpip.h>
+#  else
+#    include <ws2tcpip.h>
+#    include <wspiapi.h>
+#  endif
+#  define AI_NUMERICSERV   0x0400  /* Don't use name resolution. */
+#  define EAI_ADDRFAMILY   -9      /* Address family for NAME not supported. */
+#  define EAI_SYSTEM       -11	   /* System error returned in `errno'. */
 #else
 #  include <sys/socket.h>
 #  include <netdb.h>
@@ -423,10 +433,12 @@ connection_state_t Network::CheckHost(const std::string &host, int prt)
     case EAI_NODATA:
       fprintf(stderr, "The specified network host exists, but does not have any network addresses defined.\n");
       break;
+#ifndef WIN32 // AI_NUMERICSERV not defined under Windows
     case EAI_NONAME:
       fprintf(stderr, "The node or service is not known; or both node and service are NULL; "
 	      "or AI_NUMERICSERV was specified in hints.ai_flags and  service  was  not  a  numeric port-number string.\n");
       break;
+#endif
     case EAI_SERVICE:
       fprintf(stderr, "The requested service is not available for the requested socket type.  It may be available through another socket type.\n");
       break;
