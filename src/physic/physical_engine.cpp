@@ -29,7 +29,11 @@
 
 const double PIXEL_PER_METER = 20;
 
-PhysicalEngine::PhysicalEngine()
+PhysicalEngine::PhysicalEngine() :
+  frame_rate(60),
+  last_step_time(0),
+  iterations(10),
+  m_static_step_in_progress(false)
 {
   worldAABB.lowerBound.Set(-10000.0f, -10000.0f);
   worldAABB.upperBound.Set(10000.0f, 10000.0f);
@@ -54,9 +58,6 @@ PhysicalEngine::PhysicalEngine()
   // flags += 0 * b2DebugDraw::e_centerOfMassBit;
   // m_debug_draw->SetFlags(flags);
 
-  frame_rate = 60;
-  last_step_time = 0;
-  iterations = 10;
 }
 
 PhysicalEngine::~PhysicalEngine()
@@ -110,9 +111,12 @@ void PhysicalEngine::Step()
 
 void PhysicalEngine::StaticStep()
 {
-  physic_world->Step(0,0);
-
-  ComputeContacts();
+  if (!m_static_step_in_progress) {
+    m_static_step_in_progress = true;
+    physic_world->Step(0,0);
+    ComputeContacts();
+    m_static_step_in_progress = false;
+  }
 }
 
 void PhysicalEngine::ComputeContacts()
