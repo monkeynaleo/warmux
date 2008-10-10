@@ -83,7 +83,7 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_sp
   obj->SetEnergyDelta(-(int)cfg.damage);
   obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
   Ghost();
-  
+
 #else
   // multiply by ten to get something more funny
   double bullet_mass = GetMass()/* * 10*/;
@@ -131,7 +131,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   can_drown = true;
   camera_in_advance = true;
 
-  image = GetResourceManager().LoadSprite( weapons_res_profile, name);
+  image = GetResourceManager().LoadSprite(weapons_res_profile, name);
   image->EnableRotationCache(32);
   SetSize(image->GetSize());
 
@@ -250,7 +250,7 @@ void WeaponProjectile::Draw()
 
 bool WeaponProjectile::IsImmobile() const
 {
-  if(explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
+  if (explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
     return false;
   return PhysicalObj::IsImmobile();
 }
@@ -259,7 +259,7 @@ bool WeaponProjectile::IsImmobile() const
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* my_speed_before */)
 {
 
-      
+
       ASSERT(obj != NULL);
       MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
           m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
