@@ -67,6 +67,7 @@ protected:
   b2Body *ground;
   ContactListener *m_contact_listener;
   DebugDraw *m_debug_draw;
+  bool m_static_step_in_progress;
 
   void ComputeContacts();
 
