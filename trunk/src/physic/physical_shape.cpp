@@ -312,27 +312,11 @@ double PhysicalCircle::GetInitialHeight() const
 #ifdef DEBUG
 void PhysicalCircle::DrawBorder(const Color& color) const
 {
- 
-;  
-  Point2d a,b,c,d;
+  int radius = m_radius * PIXEL_PER_METER;
 
+  int x = lround((m_body->GetPosition().x + m_position.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+  int y = lround((m_body->GetPosition().y + m_position.y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
 
-  a.x = lround((m_body->GetPosition().x + m_radius + m_position.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-  a.y = lround((m_body->GetPosition().y + m_position.y )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
-
-  b.x = lround((m_body->GetPosition().x + m_position.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-  b.y = lround((m_body->GetPosition().y + m_radius +m_position.y )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
-
-  c.x = lround((m_body->GetPosition().x - m_radius + m_position.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-  c.y = lround((m_body->GetPosition().y + m_position.y )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
- 
-  d.x = lround((m_body->GetPosition().x + m_position.x )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-  d.y = lround((m_body->GetPosition().y - m_radius + m_position.y )*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
-
-
-  GetMainWindow().LineColor(a.x, b.x, a.y, b.y, color);
-  GetMainWindow().LineColor(b.x, c.x, b.y, c.y, color);
-  GetMainWindow().LineColor(c.x, d.x, c.y, d.y, color);
-  GetMainWindow().LineColor(d.x, a.x, d.y, a.y, color);
-} 
+  GetMainWindow().CircleColor(x, y, radius, color);
+}
 #endif
