@@ -30,9 +30,6 @@
 #include <errno.h>
 #include <unistd.h>
 #include <libxml/tree.h>
-#ifdef WIN32
-#  include <direct.h>
-#endif
 #ifdef __APPLE__
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
@@ -58,6 +55,7 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#include <direct.h>
 
 // Under windows, binary may be relocated
 static std::string GetWormuxPath()
@@ -81,6 +79,8 @@ static std::string GetWormuxPath()
   }
   return std::string(buffer);
 }
+#else
+#  include <unistd.h> // not needed by mingw
 #endif
 
 const std::string FILENAME="config.xml";
