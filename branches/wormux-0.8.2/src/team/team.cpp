@@ -445,7 +445,6 @@ void Team::SetDefaultPlayingConfig()
 
 void Team::AttachCustomTeam(CustomTeam *custom_team)
 {
-      std::cout<<"Team::Attach"<<std::endl;
  attached_custom_team = custom_team;
 }
 
