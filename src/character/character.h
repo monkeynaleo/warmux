@@ -54,7 +54,6 @@ private:
   bool back_jumping;
   bool death_explosion;
   double firing_angle;
-  PhysicalShape *m_feet_shape;
 
   uint disease_damage_per_turn;
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
@@ -74,8 +73,8 @@ private:
   uint animation_time;
   int lost_energy;
   bool hidden; //The character is hidden (needed by teleportation)
-  
-  
+
+
   // Channel used for sound
   int channel_step;
 

@@ -27,11 +27,13 @@
 #ifndef PHYSICAL_OBJECT_H
 #define PHYSICAL_OBJECT_H
 
+#include <list>
+#include <map>
+#include <vector>
+
 #include <Box2D.h>
 #include "tool/point.h"
 #include "tool/rectangle.h"
-#include <map>
-#include <vector>
 #include "object/object_cfg.h"
 
 // Alive state
@@ -82,7 +84,7 @@ protected:
   bool m_is_fire;
   b2Body *m_body;
   b2BodyDef *m_body_def;
-  PhysicalShape *m_shape;
+  std::list<PhysicalShape *> m_shapes;
   uint m_last_move;
   std::string m_name;
   std::string m_unique_id;
@@ -317,12 +319,18 @@ protected:
   virtual void SignalGhostState (bool) { };
   virtual void SignalDrowning() { };
   virtual void SignalGoingOutOfWater() { };
+
+  void ClearShapes();
+  const b2FilterData& GetCollisionFilter() const;
+
 private:
 
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();
   void UpdateTimeOfLastMove();
   void CheckOverlapping();
+
+  void SetCollisionFilter(const b2FilterData& filter);
 };
 
 #endif

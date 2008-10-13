@@ -271,7 +271,7 @@ void PhysicalCircle::Generate()
   }
 
   b2CircleDef shapeDef;
-  shapeDef.radius = m_radius*100;
+  shapeDef.radius = m_radius;
   shapeDef.localPosition.Set(m_position.x, m_position.y);
   shapeDef.density = 1.0f;
   shapeDef.friction = m_friction;

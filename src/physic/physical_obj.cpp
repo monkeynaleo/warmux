@@ -83,7 +83,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_ignore_movements(false),
   m_is_character(false),
   m_is_fire(false),
-  m_shape(NULL),
   m_last_move(Time::GetInstance()->Read()),
   m_name(name),
   m_rebound_sound(""),
@@ -111,6 +110,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
 PhysicalObj::~PhysicalObj ()
 {
   MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());
+  //ClearShapes();
   PhysicalEngine::GetInstance()->RemoveObject(this);
 }
 
@@ -283,27 +283,26 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   shape->AddPoint(Point2d(0 , phys_height));
   shape->SetMass(GetMass());
 
-  //Physical shape
-
   b2FilterData filter_data;
   filter_data.categoryBits = 0x0001;
   filter_data.maskBits = 0x0000;
-  if (m_shape != NULL) {
-    filter_data = m_shape->GetFilter();
+  if (m_shapes.size() > 0) {
+    filter_data = GetCollisionFilter();
   }
   shape->SetFilter(filter_data);
   shape->Generate();
 
-  if (m_shape)
-    delete m_shape;
+  ClearShapes();
 
-  m_shape = shape;
+  m_shapes.push_back(shape);
 }
 
 double PhysicalObj::GetWdouble() const
 {
-  ASSERT(m_shape);
-  double phys_width = m_shape->GetCurrentWidth();
+  ASSERT(m_shapes.size() != 0);
+
+  // WARNING: TODO manage multiple shapes
+  double phys_width = m_shapes.front()->GetCurrentWidth();
   double pixel_width = phys_width * PIXEL_PER_METER;
   return pixel_width;
 }
@@ -315,8 +314,10 @@ int PhysicalObj::GetWidth() const
 
 double PhysicalObj::GetHdouble() const
 {
-  ASSERT(m_shape);
-  double phys_height = m_shape->GetCurrentHeight();
+  ASSERT(m_shapes.size() != 0);
+
+  // WARNING: TODO manage multiple shapes
+  double phys_height = m_shapes.front()->GetCurrentHeight();
   double pixel_height = phys_height * PIXEL_PER_METER;
   return pixel_height;
 }
@@ -472,6 +473,31 @@ void PhysicalObj::SetBullet(bool is_bullet)
   m_body->SetBullet(is_bullet);
 }
 
+void PhysicalObj::ClearShapes()
+{
+  std::list<PhysicalShape*>::iterator it;
+  for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
+    delete (*it);
+  }
+  m_shapes.clear();
+}
+
+const b2FilterData& PhysicalObj::GetCollisionFilter() const
+{
+  ASSERT(m_shapes.size() > 0);
+
+  return (m_shapes.front()->GetFilter());
+}
+
+void PhysicalObj::SetCollisionFilter(const b2FilterData& filter)
+{
+  std::list<PhysicalShape*>::iterator it;
+  for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
+    (*it)->SetFilter(filter);
+    (*it)->Generate();
+  }
+}
+
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
 {
   ASSERT(obj != NULL);
@@ -485,15 +511,13 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
   if (timeout > 0)
     m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
 
-  b2FilterData data = m_shape->GetFilter();
-  data.groupIndex = -1;
-  m_shape->SetFilter(data);
-  m_shape->Generate();
+  b2FilterData filter = GetCollisionFilter();
+  filter.groupIndex = -1;
+  SetCollisionFilter(filter);
 
-  b2FilterData data_obj = obj->m_shape->GetFilter();
-  data_obj.groupIndex = -1;
-  obj->m_shape->SetFilter(data_obj);
-  obj->m_shape->Generate();
+  b2FilterData filter2 = obj->GetCollisionFilter();
+  filter2.groupIndex = -1;
+  obj->SetCollisionFilter(filter2);
 
   CheckOverlapping();
 }
@@ -502,17 +526,15 @@ void PhysicalObj::ClearOverlappingObject()
 {
   m_minimum_overlapse_time = 0;
 
-  b2FilterData data = m_shape->GetFilter();
+  b2FilterData data = GetCollisionFilter();
   data.groupIndex = 0;
-  m_shape->SetFilter(data);
-  m_shape->Generate();
+  SetCollisionFilter(data);
 
   if (m_overlapping_object != NULL) {
 
-    b2FilterData data_obj = m_overlapping_object->m_shape->GetFilter();
+    b2FilterData data_obj = m_overlapping_object->GetCollisionFilter();
     data_obj.groupIndex = 0;
-    m_overlapping_object->m_shape->SetFilter(data_obj);
-    m_overlapping_object->m_shape->Generate();
+    m_overlapping_object->SetCollisionFilter(data_obj);
 
     m_overlapping_object = NULL;
     ObjectsList::GetRef().RemoveOverlappedObject(this);
@@ -759,13 +781,12 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
                                     bool collides_with_objects)
 {
   // SetSize() must be called before
-  ASSERT(m_shape != NULL);
 
   m_collides_with_ground = collides_with_ground;
   m_collides_with_characters = collides_with_characters;
   m_collides_with_objects = collides_with_objects;
 
-  b2FilterData data = m_shape->GetFilter();
+  b2FilterData data = GetCollisionFilter();
   data.maskBits = 0x0000;
 
   if (m_collides_with_objects) {
@@ -780,8 +801,7 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
     data.maskBits |= 0x0004;
   }
 
-  m_shape->SetFilter(data);
-  m_shape->Generate();
+  SetCollisionFilter(data);
 
   // Check boolean values
 #ifdef DEBUG
@@ -1076,7 +1096,11 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 #ifdef DEBUG
 void PhysicalObj::DrawPolygon(const Color& color) const
 {
-  m_shape->DrawBorder(color);
+  std::list<PhysicalShape*>::const_iterator it;
+
+  for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
+    (*it)->DrawBorder(color);
+  }
 }
 #endif
 
