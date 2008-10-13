@@ -960,9 +960,7 @@ const std::string& Character::GetName() const
 
 void Character::SetCustomName(const std::string name)
 {
-  std::cout<<"Character::SetCustomName "<<name<<std::endl;
-
-  if(name.size()>0)
+   if(name.size()>0)
   {
     name_text->Set(name);
     character_name = name;

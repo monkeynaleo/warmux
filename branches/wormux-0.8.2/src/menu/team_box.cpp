@@ -110,7 +110,6 @@ Team* TeamBox::GetTeam() const
 
 CustomTeam* TeamBox::GetCustomTeam()
 {
-  std::cout<<"TeamBox::GetCustomTeam"<<std::endl;
   if( custom_team_list.size() == 0)
   {
     return NULL;
