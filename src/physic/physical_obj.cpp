@@ -485,13 +485,35 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
   if (timeout > 0)
     m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
 
+  b2FilterData data = m_shape->GetFilter();
+  data.groupIndex = -1;
+  m_shape->SetFilter(data);
+  m_shape->Generate();
+
+  b2FilterData data_obj = obj->m_shape->GetFilter();
+  data_obj.groupIndex = -1;
+  obj->m_shape->SetFilter(data_obj);
+  obj->m_shape->Generate();
+
   CheckOverlapping();
 }
 
 void PhysicalObj::ClearOverlappingObject()
 {
   m_minimum_overlapse_time = 0;
-  if(m_overlapping_object != NULL) {
+
+  b2FilterData data = m_shape->GetFilter();
+  data.groupIndex = 0;
+  m_shape->SetFilter(data);
+  m_shape->Generate();
+
+  if (m_overlapping_object != NULL) {
+
+    b2FilterData data_obj = m_overlapping_object->m_shape->GetFilter();
+    data_obj.groupIndex = 0;
+    m_overlapping_object->m_shape->SetFilter(data_obj);
+    m_overlapping_object->m_shape->Generate();
+
     m_overlapping_object = NULL;
     ObjectsList::GetRef().RemoveOverlappedObject(this);
     MSG_DEBUG( "physic.overlapping", "clearing overlapping object in \"%s\"", GetName().c_str());
