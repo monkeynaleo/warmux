@@ -1,3 +1,11 @@
+> 2008/10/15 - 0.8.2 release
+  - Fix Blowtorch weapon
+  - Fix behavior of floor on closed maps
+  - Compile with -Werror flag only in debug mode
+  - Fix code to make it possible to do a static version on Linux (remove gethostbyname usage)
+  - Fix compilation on OpenBSD
+  - Other minor bug fixes
+
 > 2008/09/16 - 0.8.1 release
   - Game mode editor for local game (allows you to choose some game options)
   - Team editor for local game (allows you to personalize characters names)
