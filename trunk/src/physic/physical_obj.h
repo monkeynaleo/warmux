@@ -83,7 +83,6 @@ protected:
   b2Body *m_body;
   b2BodyDef *m_body_def;
   PhysicalShape *m_shape;
-  virtual void CheckOverlapping();
   uint m_last_move;
   std::string m_name;
   std::string m_unique_id;
@@ -323,6 +322,7 @@ private:
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();
   void UpdateTimeOfLastMove();
+  void CheckOverlapping();
 };
 
 #endif
