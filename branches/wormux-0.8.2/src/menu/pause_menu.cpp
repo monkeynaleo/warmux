@@ -41,9 +41,6 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
   Menu("interface/quit_screen", vNo),
   exit_game(_exit_game)
 {
-  uint center_x = GetMainWindow().GetWidth()/2;
-  uint center_y = GetMainWindow().GetHeight()/2;
-
   Point2i size(100,100);
 
   Box* box = new GridBox(GetMainWindow().GetWidth()/2, size, true);
@@ -66,7 +63,8 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
 
   widgets.AddWidget(box);
   widgets.Pack();
-  box->SetPosition(center_x - box->GetSizeX()/2, center_y - box->GetSizeY()/2);
+  box->SetPosition(GetMainWindow().GetWidth()/2 - box->GetSizeX()/2,
+		   280 * GetMainWindow().GetHeight() / 768); // those constants comes from the image "quit_screen"
   widgets.Pack();
 }
 
