@@ -106,7 +106,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   back_jumping(false),
   death_explosion(true),
   firing_angle(0),
-  m_feet_shape(NULL),
   disease_damage_per_turn(0),
   disease_duration(0),
   damage_stats(new DamageStatistics(*this)),
@@ -461,7 +460,6 @@ void Character::Draw()
 
   if (IsLOGGING("polygon.character")) {
     DrawPolygon(primary_red_color);
-    m_feet_shape->DrawBorder(primary_red_color);
   }
 #endif
 }
@@ -478,9 +476,11 @@ void Character::Jump(double strength, double angle /*in radian */)
   SetMovement("jump");
 
   // Jump !
-  if (GetDirection() == DIRECTION_LEFT) angle = InverseAngle(angle);
+  if (GetDirection() == DIRECTION_LEFT)
+    angle = InverseAngle(angle);
+
 //  SetSpeed (strength, angle);
-Impulse(100 + strength,angle);
+  Impulse(100 + strength,angle);
 }
 
 void Character::Jump()
@@ -974,12 +974,13 @@ void Character::SetCustomName(const std::string name)
 
 void Character::SetSize(const Point2i &newSize)
 {
+
   double phys_width = double(newSize.x)/PIXEL_PER_METER;
   double phys_height = double(newSize.y)/PIXEL_PER_METER;
 
+  // Shape position is relative to body
   PhysicalPolygon *shape = new PhysicalPolygon(m_body);
 
-  // Shape position is relative to body
   shape->AddPoint(Point2d(0, 0));
   shape->AddPoint(Point2d(phys_width, 0));
   shape->AddPoint(Point2d(phys_width, 3*phys_height/8));
@@ -988,54 +989,35 @@ void Character::SetSize(const Point2i &newSize)
   //  shape->AddPoint(Point2d(4*phys_width/10, phys_height));
   shape->AddPoint(Point2d(1*phys_width/10, 6*phys_height/8));
   shape->AddPoint(Point2d(0, 3*phys_height/8));
-  shape->SetMass(GetMass());
 
-  //Physical shape
+  shape->SetMass(GetMass()/2); // There are 2 shapes, divide the mass of body by 2
 
   b2FilterData filter_data;
   filter_data.categoryBits = 0x0001;
   filter_data.maskBits = 0x0000;
-  if (m_shape != NULL) {
-    filter_data = m_shape->GetFilter();
+
+  if (m_shapes.size() > 0) {
+    filter_data = GetCollisionFilter();
   }
-  shape->SetFriction(1.2f);
   shape->SetFilter(filter_data);
+  shape->SetFriction(1.2f);
   shape->Generate();
 
-  if (m_shape)
-    delete m_shape;
-
-  m_shape = shape;
-  m_shape->Generate();
-
   //Feet shape
-
   PhysicalCircle *feet_shape = new PhysicalCircle(m_body);
 
   // Shape position is relative to body
   feet_shape->SetRadius(phys_width/2);
-  feet_shape->SetMass(GetMass());
+  feet_shape->SetMass(GetMass()/2);
   feet_shape->SetPosition(Point2d(phys_width/2, phys_height - phys_width/2));
-  //Physical shape
-
-  b2FilterData filter_data_feet;
-  filter_data_feet.categoryBits = 0x0001;
-  filter_data_feet.maskBits = 0x0000;
-  if (m_feet_shape != NULL) {
-    filter_data_feet = m_feet_shape->GetFilter();
-  }
   feet_shape->SetFriction(1.2f);
-  feet_shape->SetFilter(filter_data_feet);
+  feet_shape->SetFilter(filter_data);
   feet_shape->Generate();
 
-  if (m_feet_shape)
-    delete m_feet_shape;
+  ClearShapes();
 
-  m_feet_shape = feet_shape;
-  feet_shape->Generate();
-
-
-
+  m_shapes.push_back(shape);
+  m_shapes.push_back(feet_shape);
 }
 
 // ###################################################################
