@@ -474,27 +474,28 @@ void PhysicalObj::SetBullet(bool is_bullet)
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
 {
-  m_minimum_overlapse_time = 0;
-
-  if (obj == NULL) {
-    if(m_overlapping_object != NULL) {
-      m_overlapping_object = NULL;
-      ObjectsList::GetRef().RemoveOverlappedObject(this);
-      MSG_DEBUG( "physic.overlapping", "clearing overlapping object in \"%s\"", GetName().c_str());
-    }
-
-    return;
-  }
+  ASSERT(obj != NULL);
 
   m_overlapping_object = obj;
   ObjectsList::GetRef().AddOverlappedObject(this);
   MSG_DEBUG("physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore during %d ms",
 	    GetName().c_str(), obj->GetName().c_str(), timeout);
 
+  m_minimum_overlapse_time = 0;
   if (timeout > 0)
     m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
 
   CheckOverlapping();
+}
+
+void PhysicalObj::ClearOverlappingObject()
+{
+  m_minimum_overlapse_time = 0;
+  if(m_overlapping_object != NULL) {
+    m_overlapping_object = NULL;
+    ObjectsList::GetRef().RemoveOverlappedObject(this);
+    MSG_DEBUG( "physic.overlapping", "clearing overlapping object in \"%s\"", GetName().c_str());
+  }
 }
 
 const PhysicalObj* PhysicalObj::GetOverlappingObject() const
@@ -520,7 +521,7 @@ void PhysicalObj::CheckOverlapping()
       MSG_DEBUG("physic.overlapping", "\"%s\" just stopped overlapping with \"%s\" (%d ms left)",
 		GetName().c_str(), m_overlapping_object->GetName().c_str(),
 		(m_minimum_overlapse_time - Time::GetInstance()->Read()));
-      SetOverlappingObject(NULL);
+      ClearOverlappingObject();
     }
   else
     {
@@ -662,7 +663,7 @@ void PhysicalObj::Init()
     MSG_DEBUG( "physic.state", "%s - Init.", m_name.c_str());
 
   m_alive = ALIVE;
-  SetOverlappingObject(NULL);
+  ClearOverlappingObject();
   StopMoving();
 }
 
