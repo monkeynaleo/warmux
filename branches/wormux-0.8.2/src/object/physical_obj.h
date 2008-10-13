@@ -169,8 +169,6 @@ public:
   bool FootsInVacuumXY(const Point2i & position) const;
   bool FootsInVacuum() const { return FootsInVacuumXY(GetPosition()); };
 
-  bool FootsOnFloor(int y) const;
-
   bool IsInWater() const;
 
   // The object is outside of the world

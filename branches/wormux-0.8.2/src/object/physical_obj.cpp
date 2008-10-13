@@ -630,22 +630,10 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
   return false;
 }
 
-bool PhysicalObj::FootsOnFloor(int y) const
-{
-  // If outside is empty, the object can't hit the ground !
-  if ( world.IsOpen() ) return false;
-
-  const int y_max = world.GetHeight()-m_height +m_test_bottom;
-  return (y_max <= y);
-}
-
 bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
 {
   if( IsOutsideWorldXY(position) )
     return world.IsOpen();
-
-  if( FootsOnFloor(position.y - 1) )
-    return false;
 
   if( check_object && CollidedObjectXY(position) )
     return false;
@@ -702,11 +690,6 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
   if( IsOutsideWorldXY(position) ){
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
     return world.IsOpen();
-  }
-
-  if( FootsOnFloor(position.y) ){
-    MSG_DEBUG("physical", "%s - physobj is on floor", m_name.c_str());
-    return false;
   }
 
   int y_test = position.y + m_height - m_test_bottom;
