@@ -222,6 +222,8 @@ void GameClassic::__SetState_END_TURN()
 // Reduce energy of each character if we are in death mode
 void GameClassic::ApplyDeathMode () const
 {
+  if (IsGameFinished()) return;
+
   if(Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000)
   {
     GameMessages::GetInstance()->Add (_("Hurry up, you are too slow !!"));
