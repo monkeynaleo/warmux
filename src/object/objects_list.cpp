@@ -153,7 +153,7 @@ void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
     if((*it)->GetOverlappingObject() == obj) {
       MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" in \"%s\"",
                 obj->GetName().c_str(), (*it)->GetName().c_str());
-      (*it)->SetOverlappingObject(NULL);
+      (*it)->ClearOverlappingObject();
       it = overlapped_objects.erase(it);
     }
   }
