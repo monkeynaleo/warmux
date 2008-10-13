@@ -376,8 +376,9 @@ connection_state_t Network::GetError()
 #endif
 }
 
-// static method
-connection_state_t Network::CheckHost(const std::string &host, int prt)
+#ifdef WIN32
+
+connection_state_t WIN32_CheckHost(const std::string &host, int prt)
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 
@@ -391,13 +392,8 @@ connection_state_t Network::CheckHost(const std::string &host, int prt)
     return CONN_BAD_SOCKET;
 
   // Set the timeout
-#ifdef WIN32
   int timeout = 5000; //ms
-#else
-  struct timeval timeout;
-  memset(&timeout, 0, sizeof(timeout));
-  timeout.tv_sec = 5; // 5seconds timeout
-#endif
+
   if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
   {
     fprintf(stderr, "Setting receive timeout on socket failed\n");
@@ -414,11 +410,7 @@ connection_state_t Network::CheckHost(const std::string &host, int prt)
   memset(&addr, 0, sizeof(addr));
   addr.sin_family = AF_INET;
   addr.sin_port = htons(prt);
-#ifndef WIN32
-  addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
-#else
   addr.sin_addr.s_addr = inet_addr(inet_ntoa (*(struct in_addr *)*hostinfo->h_addr_list));
-#endif
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
   {
@@ -426,6 +418,140 @@ connection_state_t Network::CheckHost(const std::string &host, int prt)
   }
   closesocket(fd);
   return CONNECTED;
+}
+
+#else
+
+connection_state_t POSIX_CheckHost(const std::string &host, int prt)
+{
+  MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
+
+  connection_state_t s;
+  int r;
+  SOCKET sfd;
+  char port[10];
+  struct addrinfo hints;
+  struct addrinfo *result, *rp;
+
+  memset(&hints, 0, sizeof(struct addrinfo));
+  hints.ai_family = AF_UNSPEC;      /* Allow IPv4 or IPv6 */
+  hints.ai_socktype = SOCK_STREAM;  /* TCP protocol only */
+  hints.ai_flags =  AI_NUMERICSERV; /* Service is a numeric port number */
+  hints.ai_protocol = IPPROTO_TCP;
+
+  snprintf(port, 10, "%d", prt);
+
+  r = getaddrinfo(host.c_str(), port, &hints, &result);
+  if (r != 0) {
+
+    fprintf(stderr, "getaddrinfo returns %d\n", r);
+
+    switch (r) {
+    case EAI_ADDRFAMILY:
+      fprintf(stderr, "The specified network host does not have any network addresses in the requested address family.\n");
+      break;
+    case EAI_AGAIN:
+      fprintf(stderr, "The name server returned a temporary failure indication.  Try again later.\n");
+      break;
+    case EAI_BADFLAGS:
+      fprintf(stderr, "ai_flags contains invalid flags.\n");
+      break;
+    case EAI_FAIL:
+      fprintf(stderr, "The name server returned a permanent failure indication.\n");
+      break;
+    case EAI_FAMILY:
+      fprintf(stderr, "The requested address family is not supported at all.\n");
+      break;
+    case EAI_MEMORY:
+      fprintf(stderr, "Out of memory.\n");
+      break;
+    case EAI_NODATA:
+      fprintf(stderr, "The specified network host exists, but does not have any network addresses defined.\n");
+      break;
+#ifndef WIN32 // AI_NUMERICSERV not defined under Windows
+    case EAI_NONAME:
+      fprintf(stderr, "The node or service is not known; or both node and service are NULL; "
+	      "or AI_NUMERICSERV was specified in hints.ai_flags and  service  was  not  a  numeric port-number string.\n");
+      break;
+#endif
+    case EAI_SERVICE:
+      fprintf(stderr, "The requested service is not available for the requested socket type.  It may be available through another socket type.\n");
+      break;
+    case EAI_SOCKTYPE:
+      fprintf(stderr, "The requested socket type is not supported at all.\n");
+      break;
+    case EAI_SYSTEM:
+      fprintf(stderr, "Other system error, check errno for details.\n");
+      break;
+    }
+
+    if (r == EAI_NONAME) {
+      s = CONN_BAD_HOST;
+      goto error;
+    }
+
+    s = CONN_BAD_SOCKET;
+    goto error;
+  }
+
+  /* getaddrinfo() returns a list of address structures.
+     Try each address until we successfully connect(2).
+     If socket(2) (or connect(2)) fails, we (close the socket
+     and) try the next address. */
+  for (rp = result; rp != NULL; rp = rp->ai_next) {
+
+    sfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+
+    if (sfd == -1)
+      continue;
+
+    // Try to set the timeout
+    struct timeval timeout;
+    memset(&timeout, 0, sizeof(timeout));
+    timeout.tv_sec = 5; // 5seconds timeout
+
+    if (setsockopt(sfd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR) {
+      fprintf(stderr, "Setting receive timeout on socket failed\n");
+      closesocket(sfd);
+      continue;
+    }
+
+    if (setsockopt(sfd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR) {
+      fprintf(stderr, "Setting send timeout on socket failed\n");
+      closesocket(sfd);
+      continue;
+    }
+
+    if (connect(sfd, rp->ai_addr, rp->ai_addrlen) != -1)
+      break; /* Success */
+
+    closesocket(sfd);
+  }
+
+  if (rp == NULL) { /* No address succeeded */
+    fprintf(stderr, "Could not connect\n");
+    s = CONN_BAD_SOCKET;
+    goto error;
+  }
+
+  closesocket(sfd);
+
+  MSG_DEBUG("network", "CheckHost %s:%d : OK", host.c_str(), prt);
+  s = CONNECTED;
+
+ error:
+  freeaddrinfo(result); /* No longer needed */
+  return s;
+}
+#endif
+
+connection_state_t Network::CheckHost(const std::string &host, int prt)
+{
+#ifdef WIN32
+  return WIN32_CheckHost(host, prt);
+#else
+  return POSIX_CheckHost(host, prt);
+#endif
 }
 
 //-----------------------------------------------------------------------------
