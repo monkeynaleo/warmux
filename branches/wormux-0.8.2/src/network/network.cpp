@@ -347,6 +347,12 @@ typedef int SOCKET;
 # define SOCKET_ERROR    (-1)
 # define INVALID_SOCKET  (-1)
 # define closesocket(fd) close(fd)
+
+// For Mac OS X
+#ifndef AI_NUMERICSERV
+#define AI_NUMERICSERV 0
+#endif
+
 #endif
 
 // static method
