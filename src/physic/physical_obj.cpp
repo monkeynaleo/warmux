@@ -162,7 +162,6 @@ int PhysicalObj::GetY() const
   return (int)(GetYdouble()+0.5f);//Round
 }
 
-
 double PhysicalObj::GetPhysX() const
 {
   return m_body->GetPosition().x;
@@ -301,8 +300,19 @@ double PhysicalObj::GetWdouble() const
 {
   ASSERT(m_shapes.size() != 0);
 
-  // WARNING: TODO manage multiple shapes
-  double phys_width = m_shapes.front()->GetCurrentWidth();
+  std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
+  double phys_min_x = (*it)->GetCurrentMinX();
+  double phys_max_x = (*it)->GetCurrentMaxX();
+
+  for (it++; it != m_shapes.end(); it++) {
+    if ((*it)->GetCurrentMinX() < phys_min_x)
+      phys_min_x = (*it)->GetCurrentMinX();
+
+    if ((*it)->GetCurrentMaxX() > phys_max_x)
+      phys_max_x = (*it)->GetCurrentMaxX();
+  }
+  double phys_width = phys_max_x - phys_min_x;
+
   double pixel_width = phys_width * PIXEL_PER_METER;
   return pixel_width;
 }
@@ -316,8 +326,20 @@ double PhysicalObj::GetHdouble() const
 {
   ASSERT(m_shapes.size() != 0);
 
-  // WARNING: TODO manage multiple shapes
-  double phys_height = m_shapes.front()->GetCurrentHeight();
+  std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
+  double phys_min_y = (*it)->GetCurrentMinY();
+  double phys_max_y = (*it)->GetCurrentMaxY();
+
+  for (it++; it != m_shapes.end(); it++) {
+
+    if ((*it)->GetCurrentMinY() < phys_min_y)
+      phys_min_y = (*it)->GetCurrentMinY();
+
+    if ((*it)->GetCurrentMaxY() > phys_max_y)
+      phys_max_y = (*it)->GetCurrentMaxY();
+  }
+  double phys_height = phys_max_y - phys_min_y;
+
   double pixel_height = phys_height * PIXEL_PER_METER;
   return pixel_height;
 }
@@ -1094,6 +1116,10 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 }
 
 #ifdef DEBUG
+#include "map/camera.h"
+#include "graphic/colors.h"
+#include "graphic/video.h"
+
 void PhysicalObj::DrawPolygon(const Color& color) const
 {
   std::list<PhysicalShape*>::const_iterator it;
@@ -1101,6 +1127,13 @@ void PhysicalObj::DrawPolygon(const Color& color) const
   for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
     (*it)->DrawBorder(color);
   }
+
+  Rectanglei test_rect = GetTestRect();
+
+  Rectanglei rect(test_rect.GetPosition() - Camera::GetRef().GetPosition(),
+		  test_rect.GetSize());
+
+  GetMainWindow().RectangleColor(rect, primary_blue_color);
 }
 #endif
 
