@@ -51,6 +51,11 @@ public:
   // returns current max height (taking angle into account)
   virtual double GetCurrentHeight() const = 0;
 
+  virtual double GetCurrentMinX() const = 0;
+  virtual double GetCurrentMaxX() const = 0;
+  virtual double GetCurrentMinY() const = 0;
+  virtual double GetCurrentMaxY() const = 0;
+
   virtual double GetInitialWidth() const = 0;
   virtual double GetInitialHeight() const = 0;
 
@@ -80,6 +85,11 @@ public:
   virtual double GetInitialWidth() const;
   virtual double GetInitialHeight() const;
 
+  virtual double GetCurrentMinX() const;
+  virtual double GetCurrentMaxX() const;
+  virtual double GetCurrentMinY() const;
+  virtual double GetCurrentMaxY() const;
+
 #ifdef DEBUG
   void DrawBorder(const Color &color) const;
 #endif
@@ -108,6 +118,11 @@ public:
   virtual double GetCurrentHeight() const;
   virtual double GetInitialWidth() const;
   virtual double GetInitialHeight() const;
+
+  virtual double GetCurrentMinX() const;
+  virtual double GetCurrentMaxX() const;
+  virtual double GetCurrentMinY() const;
+  virtual double GetCurrentMaxY() const;
 
 #ifdef DEBUG
   void DrawBorder(const Color &color) const;

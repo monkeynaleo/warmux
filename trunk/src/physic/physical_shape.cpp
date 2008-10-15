@@ -119,6 +119,73 @@ void PhysicalPolygon::Clear()
   m_point_list.clear();
 }
 
+double PhysicalPolygon::GetCurrentMinX() const
+{
+  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+  ASSERT(polygon->GetVertexCount() > 0);
+
+  double minx = (polygon->GetVertices())[0].x;
+
+  for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+
+    if ((polygon->GetVertices())[i].x < minx)
+      minx = (polygon->GetVertices())[i].x;
+  }
+
+  return m_body->GetPosition().x + minx;
+}
+
+double PhysicalPolygon::GetCurrentMaxX() const
+{
+  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+  ASSERT(polygon->GetVertexCount() > 0);
+
+  double maxx = (polygon->GetVertices())[0].x;
+
+  for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+
+    if ((polygon->GetVertices())[i].x > maxx)
+      maxx = (polygon->GetVertices())[i].x;
+  }
+
+  return m_body->GetPosition().x + maxx;
+}
+
+double PhysicalPolygon::GetCurrentMinY() const
+{
+  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+  ASSERT(polygon->GetVertexCount() > 0);
+
+  double miny = (polygon->GetVertices())[0].y;
+
+  for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+
+    if ((polygon->GetVertices())[i].y < miny)
+      miny = (polygon->GetVertices())[i].y;
+  }
+
+  return m_body->GetPosition().y + miny;
+}
+
+double PhysicalPolygon::GetCurrentMaxY() const
+{
+  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+  ASSERT(polygon->GetVertexCount() > 0);
+
+  double maxy = (polygon->GetVertices())[0].y;
+
+  for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+
+    if ((polygon->GetVertices())[i].y > maxy)
+      maxy = (polygon->GetVertices())[i].y;
+  }
+
+  return m_body->GetPosition().y + maxy;
+}
+
 double PhysicalPolygon::GetCurrentWidth() const
 {
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
@@ -287,6 +354,26 @@ void PhysicalCircle::Generate()
   massData.I = 0.0f;
 
   m_body->SetMass(&massData);
+}
+
+double PhysicalCircle::GetCurrentMinX() const
+{
+  return m_body->GetPosition().x + m_position.x - m_radius;
+}
+
+double PhysicalCircle::GetCurrentMaxX() const
+{
+  return m_body->GetPosition().x + m_position.x + m_radius;
+}
+
+double PhysicalCircle::GetCurrentMinY() const
+{
+  return m_body->GetPosition().y + m_position.y - m_radius;
+}
+
+double PhysicalCircle::GetCurrentMaxY() const
+{
+  return m_body->GetPosition().y + m_position.y + m_radius;
 }
 
 double PhysicalCircle::GetCurrentWidth() const
