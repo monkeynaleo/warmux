@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-09-05 18:21+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
@@ -186,7 +185,8 @@ msgstr[1] "Holdet %s har fået %u bazookaer!"
 
 #: src/weapon/blowtorch.cpp:137
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid ""
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -221,9 +221,11 @@ msgstr[1] "Holdet %s har fået %u konstruktionsvåben! Glem ikke hjelmen!"
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural ""
+"%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "Holdet %s har fået %u diskogranat! Husk at danse når du kaster den!"
-msgstr[1] "Holdet %s har fået %u diskogranater! Husk at danse når du kaster dem!"
+msgstr[1] ""
+"Holdet %s har fået %u diskogranater! Husk at danse når du kaster dem!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
@@ -278,8 +280,10 @@ msgstr[1] "Holdet %s har fået %u jetpacks! Svedigt!"
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] "Holdet %s har fået %u svag tyngdekraft! Se mig, jeg er Neil Armstrong!"
-msgstr[1] "Holdet %s har fået %u svage tyngdekræfter! Se mig, jeg er Neil Armstrong!"
+msgstr[0] ""
+"Holdet %s har fået %u svag tyngdekraft! Se mig, jeg er Neil Armstrong!"
+msgstr[1] ""
+"Holdet %s har fået %u svage tyngdekræfter! Se mig, jeg er Neil Armstrong!"
 
 #: src/weapon/mine.cpp:247
 #, c-format
@@ -326,7 +330,8 @@ msgstr[1] "Holdet %s har fået %u slag! Smag lidt på den her!"
 #: src/weapon/snipe_rifle.cpp:247
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgid_plural ""
+"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] "Holdet %s har fået %u sniper-riffel! Sigt og skyd mellem øjnene!"
 msgstr[1] "Holdet %s har fået %u sniper-rifler! Skyd dem mellem øjnene!"
 
@@ -369,8 +374,10 @@ msgstr[1] "Holdet %s har fået %u \"spring turen over\"! Jeg ved du elsker dem."
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "Holdet %s har fået %u Tux-affyring! Har du aldrig set en flyvende pingvin?"
-msgstr[1] "Holdet %s har fået %u Tux-affyringer! Har du aldrig set en flyvende pingvin?"
+msgstr[0] ""
+"Holdet %s har fået %u Tux-affyring! Har du aldrig set en flyvende pingvin?"
+msgstr[1] ""
+"Holdet %s har fået %u Tux-affyringer! Har du aldrig set en flyvende pingvin?"
 
 #: src/game/game_blitz.cpp:70
 #, c-format
@@ -455,7 +462,7 @@ msgstr "Forfattere:"
 msgid "Automatic Bazooka"
 msgstr "Laserstyret bazooka"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:48
 msgid "Back to battle"
 msgstr "Tilbage til kampen"
 
@@ -665,27 +672,35 @@ msgstr "Fejl i %s: %lu (Wormux %s) : %s"
 #: src/include/action_handler.cpp:210
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
-msgstr "Fejl under initialisering af netværk: Klienten %s er ikke enig med dig! - %s"
+msgstr ""
+"Fejl under initialisering af netværk: Klienten %s er ikke enig med dig! - %s"
 
 #: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Fejl under indlæsning af hold:"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:512 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
 
 #: src/team/custom_team.cpp:104
 #, c-format
-msgid "Error while deleting the directory \"%s\". Unable to delete the custom team."
-msgstr "Fejl under sletning af kataloget \"%s\". Kan ikke slette det brugerdefinerede hold."
+msgid ""
+"Error while deleting the directory \"%s\". Unable to delete the custom team."
+msgstr ""
+"Fejl under sletning af kataloget \"%s\". Kan ikke slette det "
+"brugerdefinerede hold."
 
 #: src/team/custom_team.cpp:95
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
-msgstr "Fejl under sletning af filen \"%s\". Kan ikke slette det brugerdefinerede hold."
+msgstr ""
+"Fejl under sletning af filen \"%s\". Kan ikke slette det brugerdefinerede "
+"hold."
 
 #: src/game/game.cpp:143
 #, c-format
@@ -707,7 +722,8 @@ msgid "Error: Unable to contact the index server to host a game"
 msgstr "Fejl: Kan ikke kontakte indeksserveren for at starte et spil"
 
 #: src/menu/network_connection_menu.cpp:281
-msgid "Error: Unable to contact the index server to search for an internet game"
+msgid ""
+"Error: Unable to contact the index server to search for an internet game"
 msgstr "Fejl: Kan ikke kontakte indeksserveren for at søge efter internetspil"
 
 #: src/menu/network_connection_menu.cpp:359
@@ -721,7 +737,11 @@ msgid ""
 "configuration: TCP Port %s must accept connection from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr "Fejl: Din server er ikke tilgængelig fra internettet. Check at din firewall-konfiguration: TCP-port %s skal acceptere forbindelser udefra. Hvis du ikke er forbundet direkte til internettet, så check din routerkonfiguration i stedet. I så fald skal du forwarde TCP-port %s til din computer."
+msgstr ""
+"Fejl: Din server er ikke tilgængelig fra internettet. Check at din firewall-"
+"konfiguration: TCP-port %s skal acceptere forbindelser udefra. Hvis du ikke "
+"er forbundet direkte til internettet, så check din routerkonfiguration i "
+"stedet. I så fald skal du forwarde TCP-port %s til din computer."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -784,7 +804,7 @@ msgstr "Banen klargøres..."
 msgid "Gun"
 msgstr "Pistol"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 
@@ -802,7 +822,7 @@ msgstr "Hovedkommandør"
 msgid "Head commander: "
 msgstr "Hovedkommandør: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Hjælp"
 
@@ -852,7 +872,7 @@ msgstr ""
 "Hvordan man bruger det: Venstreklik på målet\n"
 "Et stykke ammunition per tur"
 
-#: src/game/game_classic.cpp:227
+#: src/game/game_classic.cpp:229
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynd dig, du er for langsom!"
 
@@ -1065,7 +1085,7 @@ msgstr "Med kortet: Vælger et mål"
 msgid "Options"
 msgstr "Instillinger"
 
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:52
 msgid "Options menu"
 msgstr "Instillinger menu"
 
@@ -1132,7 +1152,7 @@ msgstr "Afslut"
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:60
 msgid "Quit battle"
 msgstr "Forlad kampen"
 
@@ -1144,11 +1164,11 @@ msgstr "Afslut spillet"
 msgid "Random map"
 msgstr "Tilfældig bane"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "Læser standard konfigureringsfil"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:399
 msgid "Reading personal config file"
 msgstr "Læser personlig konfigureringsfil"
 
@@ -1239,7 +1259,10 @@ msgstr "Desværre, men der er ingen tilgængelige spil som venter på spillere"
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr "Desværre, men din version er ikke supportet mere. Den nyeste supportede version er %s. Du kan downloade en opdateret version af Wormux på http://www.wormux.org/wiki/download.php"
+msgstr ""
+"Desværre, men din version er ikke supportet mere. Den nyeste supportede "
+"version er %s. Du kan downloade en opdateret version af Wormux på http://www."
+"wormux.org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:245
 msgid "Sound"
@@ -1331,7 +1354,9 @@ msgstr "Bolden forlod slagmarken før den eksploderede"
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
-msgstr "Klient- og serverversionerne er inkompatible (lokal version: %s, server version: %s) Prøv venligst en anden server."
+msgstr ""
+"Klient- og serverversionerne er inkompatible (lokal version: %s, server "
+"version: %s) Prøv venligst en anden server."
 
 #: src/network/net_error_msg.cpp:48
 msgid "The connection timed out. Check there is no firewall in the way!"
@@ -1454,7 +1479,8 @@ msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
 #: src/menu/network_menu.cpp:395
 msgid "Waiting for server, all you can do is cancel or chat!"
-msgstr "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
+msgstr ""
+"Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
 
 #: src/menu/help_menu.cpp:89
 msgid "Weapon: Fire / Bonus box: falls fast"
@@ -1580,4 +1606,3 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
-

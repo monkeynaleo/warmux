@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-05-26 21:38+0100\n"
 "Last-Translator: Christian Lomsdalen <christian@vindstille.net>\n"
 "Language-Team: \n"
@@ -464,7 +463,7 @@ msgstr "Forfattere :"
 msgid "Automatic Bazooka"
 msgstr "Automatisk rakettkaster"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:48
 msgid "Back to battle"
 msgstr "Tilbake til slaget"
 
@@ -685,7 +684,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Lasting av %s-laget feilet :"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:512 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -809,7 +808,7 @@ msgstr "Laster kart ..."
 msgid "Gun"
 msgstr "Pistol"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME mappen(miljøvariabel $HOME) kunne ikke bli funnet !"
 
@@ -827,7 +826,7 @@ msgstr "Kommandant"
 msgid "Head commander: "
 msgstr "Kommandant"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Hjelp"
 
@@ -870,7 +869,7 @@ msgid ""
 "an ammo per turn"
 msgstr "Hvordan bruke den : venstreklikk på måleten ammo per runde"
 
-#: src/game/game_classic.cpp:227
+#: src/game/game_classic.cpp:229
 msgid "Hurry up, you are too slow !!"
 msgstr "Kjapp deg, du er for treg !!"
 
@@ -1084,7 +1083,7 @@ msgstr ""
 msgid "Options"
 msgstr "Alternativer"
 
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:52
 msgid "Options menu"
 msgstr "Alternativer"
 
@@ -1152,7 +1151,7 @@ msgstr "Avslutt"
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:60
 msgid "Quit battle"
 msgstr "Forlat slaget"
 
@@ -1165,11 +1164,11 @@ msgstr "Spill spillet"
 msgid "Random map"
 msgstr "Tilfeldig kart"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "Laster standard konfigurasjonsfil"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:399
 msgid "Reading personal config file"
 msgstr "Laster personlig konfigurasjonsfil"
 

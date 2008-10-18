@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eo_new\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-09-02 04:03+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -461,7 +460,7 @@ msgstr "Aŭtoroj:"
 msgid "Automatic Bazooka"
 msgstr "Aŭtomatika bazuko"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:48
 msgid "Back to battle"
 msgstr "Reiri al la batalo"
 
@@ -677,7 +676,7 @@ msgstr "Eraro iniciatante reton: la kliento %s ne akordiĝas kun vi! - %s"
 msgid "Error loading team :"
 msgstr "Eraro ŝargante teamon:"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:512 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -799,7 +798,7 @@ msgstr "Preparante la grundon..."
 msgid "Gun"
 msgstr "Pistolo"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME dosiero (mediovariablo $HOME) ne troveblas!"
 
@@ -817,7 +816,7 @@ msgstr "Ĉefkomandoro"
 msgid "Head commander: "
 msgstr "Ĉefkomandoro:"
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Helpo"
 
@@ -865,7 +864,7 @@ msgstr ""
 "Kiel uzi ĝin: maldekstrklaku sur celo\n"
 "Unu amunicio vice"
 
-#: src/game/game_classic.cpp:227
+#: src/game/game_classic.cpp:229
 msgid "Hurry up, you are too slow !!"
 msgstr "Rapidegu, vi tro malrapidas!"
 
@@ -1078,7 +1077,7 @@ msgstr "Sur mapo: elekti celon"
 msgid "Options"
 msgstr "Opcioj"
 
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:52
 msgid "Options menu"
 msgstr "Opciomenuo"
 
@@ -1145,7 +1144,7 @@ msgstr "Forlasi"
 msgid "Quit Wormux"
 msgstr "Foriri el Wormux"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:60
 msgid "Quit battle"
 msgstr "Foriri el batalo"
 
@@ -1157,11 +1156,11 @@ msgstr "Foriri el ludo"
 msgid "Random map"
 msgstr "Hazarda mapo"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "Legante norman agordaron"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:399
 msgid "Reading personal config file"
 msgstr "Legante personan agordaron"
 

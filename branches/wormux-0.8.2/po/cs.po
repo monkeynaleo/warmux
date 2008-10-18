@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2008-09-02 13:06+0200\n"
 "PO-Revision-Date: 2008-05-19 18:09+0200\n"
 "Last-Translator: Vojtěch Gondžala <vojtech.gondzala@gmail.com>\n"
 "Language-Team: Čeština\n"
@@ -504,7 +503,7 @@ msgstr "Autoři:"
 msgid "Automatic Bazooka"
 msgstr "Automatická bazuka"
 
-#: src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:48
 msgid "Back to battle"
 msgstr "Zpět do hry"
 
@@ -725,7 +724,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Chyba při nahrávání týmu :"
 
-#: src/game/config.cpp:511 src/team/custom_team.cpp:165
+#: src/game/config.cpp:512 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -849,7 +848,7 @@ msgstr "Inicializace teréhu..."
 msgid "Gun"
 msgstr "Pistole"
 
-#: src/tool/file_tools.cpp:185
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nemůžu nalézt domovský adresář (proměnná prostředí $HOME)!"
 
@@ -867,7 +866,7 @@ msgstr "Velitel"
 msgid "Head commander: "
 msgstr "Velitel: "
 
-#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:59
+#: src/menu/main_menu.cpp:69 src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Nápověda"
 
@@ -917,7 +916,7 @@ msgstr ""
 "Použití: kliknout levým tlačítkem na cíl\n"
 "munice letí obloukem"
 
-#: src/game/game_classic.cpp:227
+#: src/game/game_classic.cpp:229
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -1132,7 +1131,7 @@ msgstr ""
 msgid "Options"
 msgstr "Volby"
 
-#: src/menu/pause_menu.cpp:55
+#: src/menu/pause_menu.cpp:52
 msgid "Options menu"
 msgstr "Volby menu"
 
@@ -1200,7 +1199,7 @@ msgstr "Ukončit"
 msgid "Quit Wormux"
 msgstr "Ukončit Wormux"
 
-#: src/menu/pause_menu.cpp:63
+#: src/menu/pause_menu.cpp:60
 msgid "Quit battle"
 msgstr "Ukončit hru"
 
@@ -1213,11 +1212,11 @@ msgstr "Spustit hru"
 msgid "Random map"
 msgstr "Náhodná mapa"
 
-#: src/game/config.cpp:349
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "Čtu výchozí konfigurační soubor"
 
-#: src/game/config.cpp:398
+#: src/game/config.cpp:399
 msgid "Reading personal config file"
 msgstr "Čtu osobní konfigurační soubor"
 
