@@ -1,0 +1,5 @@
+open -u user,password ftp.wormux.org
+cd www/php/
+rm -rf po_status
+mirror -R po_status
+

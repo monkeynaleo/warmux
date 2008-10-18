@@ -1,0 +1,3 @@
+Run update.sh to update page http://wormux.org/php/po-status.php
+
+(You need to change user, password in file wormux.ftp before)
