@@ -1,7 +1,8 @@
 ; Greek NSIS installer translation
 
-!define WORMUX_PROMPT_NO_RIGHTS "Not enough rights to install, aborting"
-!define WORMUX_PROMPT_CONTINUE  "Unable to uninstall the currently installed version of Wormux. The new version will be installed without removing the currently installed version."
+!define WORMUX_PROMPT_NO_RIGHTS "Όχι αρκετά δικαιώματα για εγκατάσταση, ματαίωση"
+!define WORMUX_PROMPT_CONTINUE  "Αδύνατη η κατάργηση της τρέχουσας έκδοσης του Wormux. Η νέα έκδοση θα εγκατασταθεί χωρίς την αφαίρεση της τρέχουσας έκδοσης."
+
 
 ; License Page
 !define WORMUX_TITLE            "Wormux"
@@ -14,14 +15,9 @@
 !define WORMUX_STARTM_SC_DESC   "Τοποθέτηση συντόμευσης στο μενού έναρξης"
 !define WORMUX_UNINST_SC_DESC   "Τοποθέτηση συντόμευσης κατάργησης στο μενού έναρξης"
 !define WORMUX_SHORCUTS_TITLE   "Εγκατάσταση συντομεύσεων"
-!define WORMUX_REMOVE_TITLE     "Uninstall previous version"
-!define WORMUX_MANUAL_UNINST    "No uninstaller exe found, please uninstall manually"
+!define WORMUX_REMOVE_TITLE     "Κατάργηση προηγούμενης έκδοσης"
 
-!define WORMUX_CONFIG_SC_DESC   "Shortcut to user config folder"
-!define WORMUX_PDF_SC_DESC      "Install howto play PDFs"
+!define WORMUX_CONFIG_SC_DESC   "Συντόμευση προς τον κατάλογο διαμόρφωσης χρήστη"
+!define WORMUX_PDF_SC_DESC      "Εγκατάσταση αρχείων οδηγιών (PDF)"
 
-!define WORMUX_REM_GAME_DESC    "Remove all installed files"
-!define WORMUX_REM_CFG_DESC     "Remove the configuration file and only it"
-!define WORMUX_REM_ALL_CFG_DESC "Remove Wormux configuration folder"
-
-!define WORMUX_VISIT            "Επισκεφτείτε την ιστοσελίδα του Σκουλίκιουξ Wormux"
+!define WORMUX_VISIT            "Επισκεφτείτε την ιστοσελίδα του Σκουλήκιουξ Wormux"
