@@ -1,0 +1,5 @@
+open -u user,password sftp://b219.org
+cd wormux_index_server
+mirror wormux_log
+
+

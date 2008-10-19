@@ -1,0 +1,8 @@
+open -u user,password ftp.wormux.org
+cd www/php/net_stats/
+rm -rf hourly.csv
+put hourly.csv
+rm -rf daily.csv
+put daily.csv
+
+
