@@ -48,7 +48,7 @@ Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
   UpdateTranslationStrings();
 
   m_category = DUEL;
-  m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
+  m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
 }
 
@@ -83,15 +83,15 @@ bool Baseball::p_Shoot()
     Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if ((*character) != &ActiveCharacter())
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(pos_to_check) )
+      if( character->Contain(pos_to_check) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        (*character)->SetSpeed(cfg().strength / (*character)->GetMass(), angle);
-        (*character)->SetMovement("fly");
-        Camera::GetInstance()->FollowObject((*character), true, true);
+        character->SetSpeed(cfg().strength / character->GetMass(), angle);
+        character->SetMovement("fly");
+        Camera::GetInstance()->FollowObject(&(*character), true, true);
         return true;
       }
     }

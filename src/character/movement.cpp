@@ -24,18 +24,20 @@
 #include "tool/xml_document.h"
 #include "tool/debug.h"
 
-Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(false), play_mode(LOOP)
+Movement::Movement(const xmlNode* xml)
 {
-  uint repeat = 1;
-
   frames.clear();
+  play_mode = LOOP;
+  always_moving = false;
 
   XmlReader::ReadStringAttr(xml, "name", type);
   ASSERT(type!="");
   MSG_DEBUG("body.movement", "  Loading movement %s\n", type.c_str());
 
-  XmlReader::ReadUintAttr(xml, "speed", speed);
-  XmlReader::ReadUintAttr(xml, "repeat", repeat);
+  speed = 15;
+  repeat = 1;
+  XmlReader::ReadIntAttr(xml, "speed", speed);
+  XmlReader::ReadIntAttr(xml, "repeat", repeat);
 
   std::string pm;
   if (XmlReader::ReadStringAttr(xml, "play_mode", pm))
@@ -65,10 +67,9 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(
   /* We know the number of member frame that are being read so we can resize
    * thr array to be able to get all of them. */
   frames.resize(nodes.size()*repeat);
-  for (uint repeat_number =0; repeat_number < repeat; repeat_number++)
+  for(int repeat_number =0; repeat_number < repeat; repeat_number++)
   {
     it = nodes.begin();
-
     for (int frame_number=0; it != end; ++it, frame_number++)
     {
       xmlNodeArray members = XmlReader::GetNamedChildren(*it, "member");
@@ -118,65 +119,4 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(
 
 Movement::~Movement()
 {
-}
-
-void Movement::SetType(const std::string& _type)
-{
-  type = _type;
-}
-
-const std::string& Movement::GetType() const
-{
-  return type;
-}
-
-uint Movement::GetSpeed() const
-{
-  return speed;
-}
-
-bool Movement::IsAlwaysMoving() const
-{
-  return always_moving;
-}
-
-const std::vector<Movement::member_def> & Movement::GetFrames() const
-{
-  return frames;
-}
-
-uint Movement::GetTestLeft() const
-{
-  return test_left;
-}
-
-uint Movement::GetTestRight() const
-{
-  return test_right;
-}
-
-uint Movement::GetTestTop() const
-{
-  return test_top;
-}
-
-uint Movement::GetTestBottom() const
-{
-  return test_bottom;
-}
-
-// ===============================================================
-
-void Movement::ShareMovement(Movement* mvt)
-{
-  ASSERT(mvt);
-  mvt->ref_count++;
-}
-
-void Movement::UnshareMovement(Movement* mvt)
-{
-  mvt->ref_count--;
-
-  if (mvt->ref_count == 0)
-    delete mvt;
 }

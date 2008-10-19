@@ -62,12 +62,12 @@ Team::Team (const std::string& teams_dir, const std::string& id)
     throw "Invalid file structure: cannot find a name for team ";
 
   // Load flag
-  Profile *res = GetResourceManager().LoadXMLProfile(nomfich, true);
-  flag = GetResourceManager().LoadImage(res, "flag");
+  Profile *res = resource_manager.LoadXMLProfile(nomfich, true);
+  flag = resource_manager.LoadImage(res, "flag");
   mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
-  death_flag = GetResourceManager().LoadImage(res, "death_flag");
-  big_flag = GetResourceManager().LoadImage(res, "big_flag");
-  GetResourceManager().UnLoadXMLProfile(res);
+  death_flag = resource_manager.LoadImage(res, "death_flag");
+  big_flag = resource_manager.LoadImage(res, "big_flag");
+  resource_manager.UnLoadXMLProfile(res);
 
   // Get sound profile
   if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", m_sound_profile))
@@ -83,11 +83,6 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   nb_characters = GameMode::GetInstance()->nb_characters;
 
   type_of_player = TEAM_human_local;
-}
-
-Team::~Team()
-{
-  UnloadGamingData();
 }
 
 bool Team::LoadCharacters()
@@ -117,7 +112,7 @@ bool Team::LoadCharacters()
     XmlReader::ReadStringAttr(*it, "name", character_name);
     XmlReader::ReadStringAttr(*it, "body", body_name);
 
-    if (!(body = BodyList::GetRef().GetBody(body_name)) )
+    if (!(body = body_list.GetBody(body_name)) )
     {
       std::cerr
           << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
@@ -128,26 +123,26 @@ bool Team::LoadCharacters()
     }
 
     // Create a new character and add him to the team
-    Character *new_character = new Character(*this, character_name, body);
+    Character new_character(*this, character_name, body);
     if((attached_custom_team != NULL) && (IsLocal()) && !Network::IsConnected())
     {
-      new_character->SetCustomName(attached_custom_team->GetCharactersNameList().at(characters.size()));
+      new_character.SetCustomName(attached_custom_team->GetCharactersNameList().at(characters.size()));
     }
     characters.push_back(new_character);
     active_character = characters.begin(); // we need active_character to be initialized here !!
-    if (!characters.back()->PutRandomly(false, GetWorld().GetDistanceBetweenCharacters()))
+    if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters()))
     {
       // We haven't found any place to put the characters!!
-      if (!characters.back()->PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
+      if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
         std::cerr << std::endl;
         std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
         std::cerr << std::endl;
 
         // Put it with no space...
-        characters.back()->PutRandomly(false, 0);
+        characters.back().PutRandomly(false, 0);
       }
     }
-    characters.back()->Init();
+    characters.back().Init();
 
     MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 
@@ -172,8 +167,8 @@ uint Team::ReadEnergy () const
   const_iterator it = characters.begin(), end = characters.end();
 
   for (; it != end; ++it) {
-    if ( !(*it)->IsDead() )
-      total_energy += (*it)->GetEnergy();
+    if ( !(*it).IsDead() )
+      total_energy += (*it).GetEnergy();
   }
 
   return total_energy;
@@ -251,7 +246,7 @@ int Team::NbAliveCharacter() const
   const_iterator it= characters.begin(), end=characters.end();
 
   for (; it!=end; ++it)
-    if ( !(*it)->IsDead() ) nbr++;
+    if ( !(*it).IsDead() ) nbr++;
 
   return nbr;
 }
@@ -300,7 +295,7 @@ void Team::PrepareTurn()
 
 Character& Team::ActiveCharacter() const
 {
-  return (**active_character);
+  return (*active_character);
 }
 
 void Team::SetWeapon (Weapon::Weapon_type type)
@@ -364,7 +359,7 @@ Character* Team::FindByIndex(uint index)
     index--;
     it++;
   }
-  return (*it);
+  return &(*it);
 }
 
 void Team::LoadGamingData()
@@ -407,12 +402,7 @@ void Team::LoadGamingData()
 
 void Team::UnloadGamingData()
 {
-  const_iterator it = characters.begin(), end = characters.end();
-
-  for (; it != end; ++it) {
-    delete(*it);
-  }
-
+  // Clear list of characters
   characters.clear();
 }
 
@@ -455,6 +445,6 @@ void Team::SetDefaultPlayingConfig()
 
 void Team::AttachCustomTeam(CustomTeam *custom_team)
 {
-  attached_custom_team = custom_team;
+ attached_custom_team = custom_team;
 }
 

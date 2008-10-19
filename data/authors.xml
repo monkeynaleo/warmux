@@ -13,14 +13,6 @@
 	<country>France</country>
       </author>
       <author>
-	<nickname>Fredb219</nickname>
-	<name>Frédéric BERTOLUS</name>
-	<description>Programmer</description>
-	<website>http://fred.b219.org/</website>
-	<email>fredb219_AT_gmail_DOT_com</email>
-	<country>France</country>
-      </author>
-      <author>
 	<nickname>gentildemon</nickname>
 	<name>Matthieu FERTRÉ</name>
 	<description>Programmer</description>
@@ -196,14 +188,7 @@
 	<nickname>basse</nickname>
 	<name>Bastian SALMELA</name>
 	<description>Translate Wormux 0.7 in Finnish</description>
-	<email>basse_AT_kulma_DOT_org</email>
-	<country>Finland</country>
-      </author>
-      <author>
-	<nickname>Ramse</nickname>
-	<name>Rami SELIN</name>
-	<description>Translated Wormux 0.8 in Finnish</description>
-	<email>rami_DOT_selin_AT_gmail_DOT_com</email>
+	<email>asse_AT_kulma_DOT_org</email>
 	<country>Finland</country>
       </author>
       <author>
@@ -222,8 +207,8 @@
       <author>
 	<nickname>LnxSlck</nickname>
 	<name>Bruno QUEIRÓS</name>
-	<description>Translate Wormux in Portuguese</description>
-	<email>brunoqueiros_AT_portugalmail_DOT_com</email>
+	<description>Translate Wormux 0.7.3 in Portuguese</description>
+	<email>brunomiguelqueiros_AT_gmail_DOT_com</email>
 	<country>Portugal</country>
       </author>
       <author>
@@ -253,13 +238,6 @@
 	<name>Frank VAN DER LOO</name>
 	<description>First Dutch version of Wormux</description>
 	<email>frank_l_AT_linuxmail_DOT_org</email>
-	<country>Netherlands</country>
-      </author>
-      <author>
-	<nickname>Pauluzz</nickname>
-	<name>Paul Smits</name>
-	<description>Dutch version of Wormux, sounds</description>
-	<email>paul_DOT_l_DOT_smits_AT_gmail_DOT_com</email>
 	<country>Netherlands</country>
       </author>
       <author>
@@ -387,13 +365,6 @@
 	<country>Bulgaria</country>
       </author>
       <author>
-	<nickname>TheDeadly91</nickname>
-	<name>Dragomir Todorov</name>
-	<description>Bulgarian translation of 0.8</description>
-	<email>thedeadly91_AT_yahoo_DOT_com</email>
-	<country>Bulgaria</country>
-      </author>
-      <author>
 	<nickname>Ignacio</nickname>
 	<name>Ignacio Casal Quinteiro</name>
 	<description>Translated Wormux in Galician</description>
@@ -407,8 +378,8 @@
         <country>Hungary</country>
       </author>
       <author>
-        <nickname>Gallaecio</nickname>
-	<name>Adrián Chaves Fernández</name>
+        <nickname>Adrián</nickname>
+	<name>Adrián Chaves</name>
 	<description>Translated Wormux in Galician</description>
 	<email>adriyetichaves_AT_gmail_DOT_com</email>
 	<country>Spain</country>
@@ -484,13 +455,13 @@
 	<country>Germany</country>
       </author>
       <author>
-   	<nickname>Plorf</nickname>
-   	<name>Yoann Katchourine</name>
-   	<description>Prepare Mac OS X (Intel) packages</description>
-   	<website>http://plorf.homeip.net/</website>
-   	<email>yplorf_AT_gmail_DOT_com</email>
-   	<country>France</country>
-      </author>
+    <nickname>Plorf</nickname>
+    <name>Yoann Katchourine</name>
+    <description>Prepare Mac OS X (Intel) packages</description>
+    <website>http://plorf.homeip.net/</website>
+    <email>yplorf_AT_gmail_DOT_com</email>
+    <country>France</country>
+        </author>
         <author>
 	<nickname>Serge</nickname>
 	<name>Serge CLAUS</name>
@@ -498,14 +469,6 @@
 	<website>http://serge.claus.free.fr/</website>
 	<email>serge.claus_AT_free_DOT_fr</email>
 	<country>France</country>
-      </author>
-      <author>
-	<nickname>yaloki</nickname>
-	<name>Pascal BLESER</name>
-	<description>openSUSE packager</description>
-	<website>http://dev-loki.blogspot.com</website>
-	<email>pascal.bleser_AT_opensuse_DOT_org</email>
-	<country>Belgique</country>
       </author>
     </section>
 
@@ -529,6 +492,13 @@
 	<name>François BLEIBEL</name>
 	<description>Write first network patch with Jerome Glatigny</description>
 	<email>maisola_AT_gmail_DOT_com</email>
+	<country>France</country>
+      </author>
+      <author>
+	<nickname>Fredb219</nickname>
+	<name>Frédéric BERTOLUS</name>
+	<description>Code</description>
+	<email>fredb219_AT_gmail_DOT_com</email>
 	<country>France</country>
       </author>
       <author>

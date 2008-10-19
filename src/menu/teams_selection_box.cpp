@@ -247,7 +247,6 @@ void TeamsSelectionBox::SetNbTeams(uint nb_teams)
 
 void TeamsSelectionBox::ValidTeamsSelection()
 {
-  std::cout<<"TeamsSelectionBox::ValidTeamsSelection"<<std::endl;
   uint nb_teams=0;
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() != NULL)

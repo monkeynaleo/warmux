@@ -29,7 +29,7 @@ const uint living_time = 5000;
 WaterParticle::WaterParticle() :
   Particle("water_particle")
 {
-  SetCollisionModel(false, false, false);
+  SetCollisionModel(true, false, false);
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = false;
 
@@ -89,12 +89,5 @@ RadioactiveParticle::RadioactiveParticle()
 {
   // delete std water image
   delete image;
-  image = ParticleEngine::GetSprite(RADIOACTIVE_spr);
-}
-
-DirtyWaterParticle::DirtyWaterParticle()
-{
-  // delete std water image
-  delete image;
-  image = ParticleEngine::GetSprite(DIRTYWATER_spr);
+  image = ParticleEngine::GetSprite(LAVA_spr);
 }

@@ -30,7 +30,7 @@
 #include "map/map.h"
 #include "network/network.h"
 #include "object/objects_list.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
@@ -70,7 +70,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
   // Make a hole in the ground
   if(config.explosion_range != 0)
-    GetWorld().Dig(pos, config.explosion_range);
+    world.Dig(pos, config.explosion_range);
 
   // Play a sound
   if (son != "") {
@@ -83,14 +83,14 @@ void ApplyExplosion_common (const Point2i &pos,
   Character* fastest_character = NULL;
   FOR_ALL_CHARACTERS(team, character)
   {
-    double distance = pos.Distance((*character) -> GetCenter());
+    double distance = pos.Distance(character -> GetCenter());
     if(distance < 1.0)
       distance = 1.0;
 
     // If the character is in the explosion range, apply damage on it !
     if (distance <= config.explosion_range)
     {
-      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", (*character)->GetName().c_str(), distance);
+      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", character->GetName().c_str(), distance);
       double dmg;
       if( config.explosion_range != 0)
         dmg = cos(M_PI_2 * distance / (float)config.explosion_range);
@@ -98,8 +98,8 @@ void ApplyExplosion_common (const Point2i &pos,
         dmg = cos(M_PI_2 * distance);
 
       dmg *= config.damage;
-      MSG_DEBUG("explosion", "hit_point_loss energy= %i", (*character)->GetName().c_str(), dmg);
-      (*character) -> SetEnergyDelta (-(int)dmg);
+      MSG_DEBUG("explosion", "hit_point_loss energy= %i", character->GetName().c_str(), dmg);
+      character -> SetEnergyDelta (-(int)dmg);
     }
 
     // If the character is in the blast range, apply the blast on it !
@@ -115,13 +115,13 @@ void ApplyExplosion_common (const Point2i &pos,
 
       if ( force > highest_force )
       {
-        fastest_character = (*character);
+        fastest_character = &(*character);
         highest_force = force;
       }
 
       if (!EqualsZero(distance))
       {
-        angle  = pos.ComputeAngle((*character) -> GetCenter());
+        angle  = pos.ComputeAngle(character -> GetCenter());
         if( angle > 0 )
           angle  = - angle;
       }
@@ -130,9 +130,9 @@ void ApplyExplosion_common (const Point2i &pos,
 
 
       MSG_DEBUG("explosion", "force = %f", force);
-      ASSERT((*character)->GetMass() != 0);
-      (*character)->AddSpeed (force / (*character)->GetMass(), angle);
-      (*character)->SignalExplosion();
+      ASSERT(character->GetMass() != 0);
+      character->AddSpeed (force / character->GetMass(), angle);
+      character->SignalExplosion();
     }
   }
 
@@ -149,7 +149,7 @@ void ApplyExplosion_common (const Point2i &pos,
        continue; // hack to fix bug #8529
      }
 
-     if (obj->CollidesWithGround() && !obj->IsGhost())
+     if (!obj->GoesThroughWall() && !obj->IsGhost())
      {
        double distance = pos.Distance(obj->GetCenter());
        if(distance < 1.0)
@@ -195,8 +195,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
   // Do we need to generate some fire particles ?
   if (fire_particle)
-    fire_particle = fire_particle; // COMPILATION Fix
-    // ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
+     ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
 
   // Shake the camera (FIXME: use actual vectors?)
   if ( config.explosion_range > 25 && config.damage > 0 )
@@ -238,7 +237,7 @@ void ApplyExplosion_master (const Point2i &pos,
 
     for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
-      Character &character = **tit;
+      Character &character = *tit;
 
       double distance = pos.Distance( character.GetCenter());
 

@@ -73,11 +73,9 @@ void ObjMine::FakeExplosion()
     animation = false;
     image->SetCurrentFrame(0);
   }
-  if (launcher != NULL)
-    launcher->SignalProjectileTimeout();
-
+  if (launcher != NULL) launcher->SignalProjectileTimeout();
   // Mine fall into the ground after a fake explosion
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(false, false, false);
 }
 
 void ObjMine::StartTimeout()
@@ -118,10 +116,10 @@ void ObjMine::Detection()
   double detection_range = static_cast<MineConfig&>(cfg).detection_range;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if (MeterDistance(GetCenter(), (*character)->GetCenter()) < detection_range &&
+    if (MeterDistance(GetCenter(), character->GetCenter()) < detection_range &&
         !animation) {
       std::string txt = Format(_("%s is next to a mine!"),
-                               (*character)->GetName().c_str());
+                               character->GetName().c_str());
       GameMessages::GetInstance()->Add(txt);
       StartTimeout();
       return;
@@ -238,7 +236,7 @@ void Mine::Add(int x, int y)
   projectile->SetOverlappingObject(&ActiveCharacter());
 
   projectile -> SetSpeedXY (ActiveCharacter().GetSpeedXY());
-  ObjectsList::GetRef().AddObject (projectile);
+  lst_objects.AddObject (projectile);
   projectile = NULL;
   ReloadLauncher();
 }

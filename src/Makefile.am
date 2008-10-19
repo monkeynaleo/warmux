@@ -87,7 +87,6 @@ wormux_SOURCES = \
         map/ground.cpp map/ground.h \
         map/map.cpp map/map.h \
         map/maps_list.cpp map/maps_list.h \
-	map/physic_tile.cpp map/physic_tile.h \
         map/random_map.cpp map/random_map.h \
         map/sky.cpp map/sky.h \
         map/tile.cpp map/tile.h \
@@ -131,6 +130,8 @@ wormux_SOURCES = \
         object/objbox.cpp object/objbox.h \
         object/object_cfg.cpp object/object_cfg.h \
         object/objects_list.cpp object/objects_list.h \
+        object/physical_obj.cpp object/physical_obj.h \
+        object/physics.cpp object/physics.h \
         particles/body_member.cpp particles/body_member.h \
         particles/bullet.cpp particles/bullet.h \
         particles/dark_smoke.cpp particles/dark_smoke.h \
@@ -146,26 +147,21 @@ wormux_SOURCES = \
         particles/star.cpp particles/star.h \
         particles/teleport_member.cpp particles/teleport_member.h \
         particles/water_drop.cpp particles/water_drop.h \
-        physic/force.cpp physic/force.h \
-	physic/physical_engine.cpp physic/physical_engine.h \
-        physic/physical_obj.cpp physic/physical_obj.h \
-        physic/physical_shape.cpp physic/physical_shape.h \
         sound/jukebox.cpp sound/jukebox.h \
         sound/sound_sample.cpp sound/sound_sample.h \
         sound/sample_cache.cpp sound/sample_cache.h \
         team/custom_team.cpp team/custom_team.h \
         team/custom_teams_list.cpp team/custom_teams_list.h \
-	team/macro.h \
+		team/macro.h \
         team/results.cpp team/results.h \
-nn        team/team_config.h \
+        team/team_config.h \
         team/team.cpp team/team.h \
         team/team_energy.cpp team/team_energy.h \
         team/teams_list.cpp team/teams_list.h \
         tool/affine_transform.cpp tool/affine_transform.h \
         tool/copynpaste.cpp tool/copynpaste.h \
         tool/debug.cpp tool/debug.h \
-        tool/debug_physics.cpp tool/debug_physics.h \
-	tool/error.cpp tool/error.h \
+        tool/error.cpp tool/error.h \
         tool/euler_vector.cpp tool/euler_vector.h \
         tool/file_tools.cpp tool/file_tools.h \
         tool/i18n.cpp tool/i18n.h \
@@ -226,10 +222,10 @@ if AUTOPACKAGE
 DEFINE_AUTOPACKAGE=-DUSE_AUTOPACKAGE
 endif
 
-AM_CXXFLAGS += -DINSTALL_DATADIR=\"@DATADIR@\"      \
+AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
   -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
-  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/box2d/include/ -I$(top_srcdir)/lib/box2d/src/
+  @LIBCURL_CPPFLAGS@
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
@@ -246,5 +242,3 @@ LIBS += -lssl -lcrypto -lz -lpthread
 else
 LIBS += @LIBCURL@
 endif
-
-LIBS += $(top_srcdir)/lib/box2d/src/libbox2d.a

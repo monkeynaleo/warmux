@@ -31,7 +31,7 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Point2i &_size,
   position = Point2i(-1, -1);
   size = _size;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
@@ -47,7 +47,7 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Point2i &_size,
   m_plus->SetPosition(position.x + size.x - margin, position.y);
   m_minus = new Button(res, "menu/big_minus");
   m_minus->SetPosition(position.x + size.x - max_value_w - margin - 2 * margin, position.y);
-  GetResourceManager().UnLoadXMLProfile( res);
+  resource_manager.UnLoadXMLProfile( res);
 
   ValueHasChanged();
 }

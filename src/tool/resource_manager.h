@@ -30,7 +30,6 @@
 
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
 #include "graphic/surface.h"
 #include "interface/mouse.h"
 #include "map/maps_list.h"
@@ -60,15 +59,13 @@ class Profile
   ~Profile();
 };
 
-class ResourceManager : public Singleton<ResourceManager>
+class ResourceManager
 {
-private:
+ public:
    ResourceManager();
    ~ResourceManager();
-   friend class Singleton<ResourceManager>;
-public:
 
-   void SetDataPath(const std::string& base_path);
+   void AddDataPath(const std::string& base_path);
    Surface LoadImage(const std::string& ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0) const;
 
    Profile *LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const;
@@ -90,6 +87,6 @@ public:
    std::string base_path;
 };
 
-ResourceManager& GetResourceManager();
+extern ResourceManager resource_manager;
 
 #endif /* _RESOURCE_MANAGER_H */

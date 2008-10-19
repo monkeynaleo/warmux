@@ -82,7 +82,7 @@ FootBomb::FootBomb(FootBombConfig& cfg,
 void FootBomb::Shoot(const Point2i & pos, double strength, double angle, int recursions)
 {
   m_recursions = recursions;
-  SetCollisionModel( true, true, false ); // a bit hackish...
+  SetCollisionModel( false, true, false ); // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
 
@@ -135,7 +135,7 @@ void FootBomb::DoExplosion()
     cluster->Shoot( pos, speed, angle + cluster_deviation, m_recursions - 1 );
     cluster->SetTimeOut( cfg.timeout + m_timeout_modifier );
 
-    ObjectsList::GetRef().AddObject(cluster);
+    lst_objects.AddObject(cluster);
   }
 }
 

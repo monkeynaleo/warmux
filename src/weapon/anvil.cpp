@@ -42,11 +42,13 @@
 class Anvil : public WeaponProjectile
 {
   private:
+    uint merge_time;
     SoundSample falling_sound;
   public:
     Anvil(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
     ~Anvil();
+    void Refresh();
 
     void PlayFallSound();
     void PlayCollisionSound();
@@ -62,8 +64,8 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   WeaponProjectile ("anvil", cfg, p_launcher)
 {
   explode_with_collision = false;
-  explode_with_timeout = false;
   explode_colliding_character = false;
+  merge_time = 0;
   SetTestRect(0, 0, 0, 0);
 }
 
@@ -74,18 +76,30 @@ Anvil::~Anvil()
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */)
 {
+  merge_time = Time::GetInstance()->Read() + 5000;
   obj->SetEnergyDelta(-200);
   PlayCollisionSound();
 }
 
 void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
 {
+  merge_time = Time::GetInstance()->Read() + 5000;
   PlayCollisionSound();
 }
 
 void Anvil::SignalOutOfMap()
 {
   falling_sound.Stop();
+}
+
+void Anvil::Refresh()
+{
+  if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
+    world.MergeSprite(GetPosition(), image);
+    Ghost();
+  } else {
+    WeaponProjectile::Refresh();
+  }
 }
 
 void Anvil::PlayFallSound()
@@ -124,7 +138,7 @@ void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
   target.x = mouse_pos.x - (projectile->GetWidth() / 2);
   target.y = 0 - projectile->GetHeight();
 
-  if (!GetWorld().ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
+  if (!world.ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
      !projectile->IsInVacuumXY(target))
     return;
 
@@ -139,7 +153,7 @@ bool AnvilLauncher::p_Shoot ()
 
   projectile->SetXY(target);
   ((Anvil*)projectile)->PlayFallSound();
-  ObjectsList::GetRef().AddObject(projectile);
+  lst_objects.AddObject(projectile);
   Camera::GetInstance()->FollowObject(projectile, true);
   projectile = NULL;
   ReloadLauncher();

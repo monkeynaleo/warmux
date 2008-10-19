@@ -22,26 +22,24 @@
 #define BODY_LIST_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include "include/singleton.h"
 #include <map>
 #include <string>
 //-----------------------------------------------------------------------------
 class Body;
 
-class BodyList : public Singleton<BodyList>
+class BodyList
 {
-private:
   std::map<std::string, Body*> list;
 
   void Load (const std::string &name);
 
-  BodyList();
-  friend class Singleton<BodyList>;
-
 public:
+  BodyList();
   void FreeMem();
   Body* GetBody(const std::string &body);
 };
+
+extern BodyList body_list;
 
 //-----------------------------------------------------------------------------
 #endif

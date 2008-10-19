@@ -26,7 +26,7 @@
 #include <string>
 #include "gui/energy_bar.h"
 #include "include/base.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "character/body.h"
 
 class Text;
@@ -34,7 +34,7 @@ class Team;
 class ParticleEngine;
 class DamageStatistics;
 class Body;
-class PhysicalShape;
+
 #ifdef DEBUG
 //#define DEBUG_SKIN
 #endif
@@ -74,7 +74,6 @@ private:
   int lost_energy;
   bool hidden; //The character is hidden (needed by teleportation)
 
-
   // Channel used for sound
   int channel_step;
 
@@ -109,8 +108,6 @@ public:
   ~Character();
 
   void SignalExplosion();
-
-  void SetSize(const Point2i &newSize);
 
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);

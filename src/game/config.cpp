@@ -28,12 +28,11 @@
 #include <string>
 #include <iostream>
 #include <errno.h>
+#include <unistd.h>
 #include <libxml/tree.h>
-
 #ifdef __APPLE__
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
-
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "include/app.h"
@@ -63,14 +62,14 @@ static std::string GetWormuxPath()
 {
   char  buffer[MAX_PATH];
   DWORD size = MAX_PATH;
-#  if 0
+#if 0
   HKEY  hK;
   DWORD type;
 
   buffer[0] = 0;
   if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "SOFTWARE\\Games\\Wormux", 0, KEY_READ, &hK) != ERROR_SUCCESS ||
       RegQueryValueEx(hK, "Path", NULL, &type, buffer, &size) != ERROR_SUCCESS && type != REG_SZ)
-#  endif
+#endif
   {
     size = GetModuleFileName(NULL, buffer, MAX_PATH);
     if (size<1) return std::string("");
@@ -244,7 +243,7 @@ Config::Config():
   }
 
   dir = TranslateDirectory(data_dir);
-  GetResourceManager().SetDataPath(dir + PATH_SEPARATOR);
+  resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
 
 bool Config::MkdirChatLogDir() const
@@ -346,24 +345,24 @@ void Config::LoadDefaultValue()
 {
   // Load default XML conf
   m_default_config = GetDataDir() + "wormux_default_config.xml";
-  Profile *res = GetResourceManager().LoadXMLProfile(m_default_config, true);
+  Profile *res = resource_manager.LoadXMLProfile(m_default_config, true);
 
   std::cout << "o " << _("Reading default config file") << std::endl;
   std::ostringstream section;
   Point2i tmp;
 
   //=== Default video value ===
-  int number_of_resolution_available = GetResourceManager().LoadInt(res, "default_video_mode/number_of_resolution_available");
+  int number_of_resolution_available = resource_manager.LoadInt(res, "default_video_mode/number_of_resolution_available");
   for(int i = 1; i <= number_of_resolution_available; i++) {
     tmp = Point2i(0, 0);
     std::ostringstream section; section << "default_video_mode/" << i;
-    tmp = GetResourceManager().LoadPoint2i(res, section.str());
+    tmp = resource_manager.LoadPoint2i(res, section.str());
     if(tmp.GetX() > 0 && tmp.GetY() > 0)
       resolution_available.push_back(tmp);
   }
 
   //=== Default fonts value ===
-  const xmlNode *node = GetResourceManager().GetElement(res, "section", "default_language_fonts");
+  const xmlNode *node = resource_manager.GetElement(res, "section", "default_language_fonts");
   if (node) {
     xmlNodeArray list = XmlReader::GetNamedChildren(node, "language");
     for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it) {
@@ -379,17 +378,17 @@ void Config::LoadDefaultValue()
   }
 
 #if 0 //== Team Color
-  int number_of_team_color = GetResourceManager().LoadInt(res, "team_colors/number_of_team_color");
+  int number_of_team_color = resource_manager.LoadInt(res, "team_colors/number_of_team_color");
   for(int i = 1; i <= number_of_team_color; i++) {
     tmp = Point2i(0, 0);
     std::ostringstream section; section << "team_colors/" << i;
-    tmp = GetResourceManager().LoadPoint2i(res, section.str());
+    tmp = resource_manager.LoadPoint2i(res, section.str());
     if(tmp.GetX() > 0 && tmp.GetY() > 0)
       resolution_available.push_back(tmp);
   }
 #endif
 
-  GetResourceManager().UnLoadXMLProfile(res);
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 // Read personal config file

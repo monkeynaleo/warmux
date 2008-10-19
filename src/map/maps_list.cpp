@@ -54,6 +54,7 @@ InfoMap::InfoMap(const std::string &map_name,
   random_generated(false),
   island_type(RANDOM_GENERATED),
   water_type(Water::NO_WATER),
+  water_name(),
   res_profile(NULL)
 {
   wind.nb_sprite = 0;
@@ -72,11 +73,11 @@ void InfoMap::LoadBasicInfo()
   if (!DoesFileExist(nomfich))
     throw _("no configuration file!");
   // FIXME: not freed
-  res_profile = GetResourceManager().LoadXMLProfile(nomfich, true);
+  res_profile = resource_manager.LoadXMLProfile(nomfich, true);
   if (!res_profile)
     throw _("couldn't load config");
   // Load preview
-  preview = GetResourceManager().LoadImage(res_profile, "preview");
+  preview = resource_manager.LoadImage(res_profile, "preview");
   is_basic_info_loaded = true;
   // Load other informations
   XmlReader doc;
@@ -132,7 +133,6 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   XmlReader::ReadBool(xml, "is_open", is_opened);
 
   // reading water type
-  std::string water_name;
   XmlReader::ReadString(xml, "water", water_name);
   water_type = (Water::Water_type)Water::GetWaterType(water_name);
 
@@ -140,8 +140,8 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   bool add_pad = false;
   XmlReader::ReadBool(xml, "add_pad", add_pad);
   if(is_opened && add_pad) {
-    upper_left_pad = GetResourceManager().LoadPoint2i(res_profile, "upper_left_pad");
-    lower_right_pad = GetResourceManager().LoadPoint2i(res_profile, "lower_right_pad");
+    upper_left_pad = resource_manager.LoadPoint2i(res_profile, "upper_left_pad");
+    lower_right_pad = resource_manager.LoadPoint2i(res_profile, "lower_right_pad");
   }
 
   const xmlNode* xmlwind = XmlReader::GetMarker(xml, "wind");
@@ -179,11 +179,11 @@ void InfoMap::LoadData()
 
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
-  img_sky = GetResourceManager().LoadImage(res_profile,"sky");
+  img_sky = resource_manager.LoadImage(res_profile,"sky");
   if(!random_generated) {
-    img_ground = GetResourceManager().LoadImage(res_profile, "map");
+    img_ground = resource_manager.LoadImage(res_profile, "map");
   } else {
-    img_ground = GetResourceManager().GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
+    img_ground = resource_manager.GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
   }
 }
 
@@ -367,5 +367,22 @@ InfoMap* MapsList::ActiveMap()
 InfoMap* ActiveMap()
 {
   return MapsList::GetInstance()->ActiveMap();
+}
+
+std::string InfoMap::GetWaterName()
+{
+  LoadBasicInfo();
+  int water;
+  if(str2int(water_name, water) && water < Water::MAX_WATER_TYPE) {
+    if(water == Water::WATER) {
+      return "water";
+    } else if(water == Water::LAVA) {
+      return "lava";
+    } else if(water == Water::RADIOACTIVE) {
+      return "radioactive";
+    }
+  }
+  // not an old water definition or invalid type
+  return water_name;
 }
 

@@ -41,7 +41,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   SetMargin(2);
   SetNoBorder();
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
   team_logo = new PictureWidget(Point2i(48, 48));
   AddWidget(team_logo);
@@ -110,7 +110,6 @@ Team* TeamBox::GetTeam() const
 
 CustomTeam* TeamBox::GetCustomTeam()
 {
-  std::cout<<"TeamBox::GetCustomTeam"<<std::endl;
   if( custom_team_list.size() == 0)
   {
     return NULL;

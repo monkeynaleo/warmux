@@ -34,7 +34,6 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
-#include "physic/physical_engine.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
@@ -46,6 +45,8 @@
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
+#include "graphic/video.h"
+#include "include/app.h"
 #endif
 
 WeaponBullet::WeaponBullet(const std::string &name,
@@ -77,13 +78,10 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_sp
 {
 #if 1
   if (!obj->IsCharacter())
-  {
     Explosion();
-  }
   obj->SetEnergyDelta(-(int)cfg.damage);
   obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
   Ghost();
-
 #else
   // multiply by ten to get something more funny
   double bullet_mass = GetMass()/* * 10*/;
@@ -121,9 +119,8 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   : PhysicalObj(name), cfg(p_cfg)
 {
   m_allow_negative_y = true;
-  SetCollisionModel(true, true, true);
+  SetCollisionModel(false, true, true);
   launcher = p_launcher;
-  SetBullet(true);
 
   explode_colliding_character = false;
   explode_with_timeout = true;
@@ -131,7 +128,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   can_drown = true;
   camera_in_advance = true;
 
-  image = GetResourceManager().LoadSprite(weapons_res_profile, name);
+  image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
   SetSize(image->GetSize());
 
@@ -165,7 +162,7 @@ void WeaponProjectile::Shoot(double strength)
 
   // Set the initial position.
   SetOverlappingObject(&ActiveCharacter(), 100);
-  ObjectsList::GetRef().AddObject(this);
+  lst_objects.AddObject(this);
   Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
 
   double angle = ActiveCharacter().GetFiringAngle();
@@ -193,13 +190,13 @@ void WeaponProjectile::Shoot(double strength)
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
   SetXY(hand_position);
   SetSpeed(strength, angle);
-  //collision_t collision = NotifyMove(f_hand_position, f_hole_position);
-  //if (collision == NO_COLLISION) {
+  collision_t collision = NotifyMove(f_hand_position, f_hole_position);
+  if (collision == NO_COLLISION) {
     // Set the initial position and speed.
     SetXY(hole_position);
     SetSpeed(strength, angle);
     PutOutOfGround(angle);
- // }
+  }
 }
 
 void WeaponProjectile::ShootSound()
@@ -213,8 +210,7 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
-  //std::cout<<"GetSizeMax "<<image->GetSizeMax().x<<" "<<image->GetSizeMax().y<<std::endl;
-  //SetSize(image->GetSizeMax());
+  SetSize(image->GetSizeMax());
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -246,11 +242,23 @@ void WeaponProjectile::Draw()
       ss.str(), white_color);
     }
   }
+
+#ifdef DEBUG
+  if (IsLOGGING("test_rectangle"))
+  {
+    Rectanglei test_rect(GetTestRect());
+    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
+
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSizeMax());
+    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
+  }
+#endif
 }
 
 bool WeaponProjectile::IsImmobile() const
 {
-  if (explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
+  if(explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
     return false;
   return PhysicalObj::IsImmobile();
 }
@@ -258,14 +266,11 @@ bool WeaponProjectile::IsImmobile() const
 // projectile explode and signal to the launcher the collision
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* my_speed_before */)
 {
-
-
-      ASSERT(obj != NULL);
-      MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
-          m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
-      if (explode_colliding_character)
-        Explosion();
-
+  ASSERT(obj != NULL);
+  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
+	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
+  if (explode_colliding_character)
+    Explosion();
 }
 
 // projectile explode when hiting the ground

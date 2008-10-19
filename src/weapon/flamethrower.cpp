@@ -74,10 +74,8 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
 
 bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
 {
-  if (GetName() == obj->GetName())
-    return true;
-
-  return (GetOverlappingObject() == obj);
+  if(GetName() == obj->GetName()) return true;
+  return m_overlapping_object == obj;
 }
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
@@ -125,7 +123,7 @@ FlameThrower::FlameThrower() : WeaponLauncher(WEAPON_FLAMETHROWER, "flamethrower
   announce_missed_shots = false;
   m_time_between_each_shot = FLAMETHROWER_TIME_BETWEEN_SHOOT;
 
-  m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile, m_id+"_fire"));
+  m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile, m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
 
   ReloadLauncher();

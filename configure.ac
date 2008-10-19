@@ -12,7 +12,7 @@ dnl ========================================================================
 dnl = Require at least automake 2.52
 AC_PREREQ(2.52)
 
-AC_INIT([Wormux], [0.8svn], [wormux-dev@gna.org], [wormux])
+AC_INIT([Wormux], [0.8.2], [wormux-dev@gna.org], [wormux])
 AC_CONFIG_SRCDIR([src/main.cpp])
 
 dnl Detect the canonical host and target build environment
@@ -37,7 +37,6 @@ AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_CPP
 AC_PROG_INSTALL
-AC_PROG_RANLIB
 
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
@@ -175,7 +174,9 @@ if test "x$GCC" = "xyes"; then
   fi
 
   if test "x${debug}" = "xyes"; then
-    GCC_FLAGS="$GCC_FLAGS -g -DDEBUG -DWMX_LOG"
+    GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG -DWMX_LOG"
+  else
+    GCC_FLAGS="$GCC_FLAGS -O2"
   fi
 
   if test "x${logging}" = "xyes"; then
@@ -187,14 +188,6 @@ if test "x$GCC" = "xyes"; then
   CFLAGS="$GCC_FLAGS"
   dnl CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
   CXXFLAGS="$GCC_FLAGS"
-
-  dnl Set default optimization flag: change it for a specific target if needed with target_CXXFLAGS
-  AC_SUBST([AM_CXXFLAGS])
-  if test "x${debug}" = "xyes"; then
-     AM_CXXFLAGS=-O0
-  else
-     AM_CXXFLAGS=-O2
-  fi
 
 else
   if test "x${debug}" = "xyes"; then
@@ -394,8 +387,6 @@ AC_SUBST([BUILD_ENV])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
-		 lib/box2d/Makefile
-		 lib/box2d/src/Makefile
                  doc/Makefile
                  po/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])

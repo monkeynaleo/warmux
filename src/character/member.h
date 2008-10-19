@@ -29,62 +29,52 @@ typedef std::vector<Point2f> v_attached;
 // Forward declaration
 class Sprite;
 class c_junction; //defined in body.h
-class Movement;
 class member_mvt; //defined in movement.h
 class Profile;
 typedef struct _xmlNode xmlNode;
 
 class Member
 {
-private:
   /* If you need this, implement it (correctly) */
   Member operator=(const Member&);
   /**********************************************/
 
   Member* parent;
   double angle_rad;
-  float alpha;
-  bool go_through_ground;
-  std::map<std::string, v_attached> attached_members;
-  Point2f pos;
-  Point2f scale;
-
 protected:
-  Sprite* spr;
-
-  std::string name;
-  std::string type;
-
   Point2f anchor;
 
 public:
+  Sprite* spr;
+
+  std::string name;
+  std::map<std::string, v_attached> attached_members;
+
+  Point2f pos;
+  Point2f scale;
+  float alpha;
+  std::string type;
+  bool go_through_ground;
 
   virtual ~Member();
   Member(const xmlNode* xml, const Profile* res);
   Member(const Member& m);
-
   virtual void Draw(const Point2i & _pos, int flip_x, int direction);
-
   void RotateSprite();
-  void ResetMovement();
+  void ResetMovement()
+  {
+    pos.x = 0;
+    pos.y = 0;
+    angle_rad = 0;
+    alpha = 1.0;
+    scale.x = 1.0;
+    scale.y = 1.0;
+  }
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(const member_mvt& mvt, std::vector<class c_junction>& skel_lst);
-  void SetAngle(const double &angle);
-  void SetPos(const Point2f &pos);
-
-  const Sprite& GetSprite() const;
-
-  const Point2i GetPos() const;
-  const Point2f& GetPosFloat() const;
-
-  const Point2i GetAnchorPos() const;
-
-  const std::string& GetName() const;
-  const std::string& GetType() const;
-
-  bool IsGoingThroughGround() const;
-
-  const std::map<std::string, v_attached> & GetAttachedMembers() const;
+  const Point2i GetPos() { return Point2i((int)pos.x, (int)pos.y); };
+  const Point2i GetAnchorPos() { return Point2i((int)anchor.x, (int)anchor.y); };
+  void SetAngle(const double &angle) { angle_rad = angle; };
 };
 
 class WeaponMember : public Member

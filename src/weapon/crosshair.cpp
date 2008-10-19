@@ -40,9 +40,9 @@ CrossHair::CrossHair()
 {
   enable = false;
   display = false;
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  image = GetResourceManager().LoadImage(res, "gfx/pointeur1");
-  GetResourceManager().UnLoadXMLProfile(res);
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  image = resource_manager.LoadImage(res, "gfx/pointeur1");
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 void CrossHair::Reset() const
@@ -66,5 +66,5 @@ void CrossHair::Draw() const
     return;
   Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition() + crosshair_position;
   GetMainWindow().Blit(image, tmp - Camera::GetInstance()->GetPosition());
-  GetWorld().ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
+  world.ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
 }

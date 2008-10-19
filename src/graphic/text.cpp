@@ -242,11 +242,11 @@ void Text::DrawTopLeft(const Point2i &position) const
     app->video->window.Blit(background, shad_rect.GetPosition());
     app->video->window.Blit(surf, dst_rect.GetPosition());
 
-    GetWorld().ToRedrawOnScreen(Rectanglei(dst_rect.GetPosition(),
+    world.ToRedrawOnScreen(Rectanglei(dst_rect.GetPosition(),
                                       shad_rect.GetSize() + bg_offset));
   }else{
     app->video->window.Blit(surf, dst_rect.GetPosition());
-    GetWorld().ToRedrawOnScreen(dst_rect);
+    world.ToRedrawOnScreen(dst_rect);
   }
 }
 
@@ -313,7 +313,7 @@ void DrawTmpBoxText(Font& font, Point2i pos,
   app->video->window.BoxColor(rect, boxColor);
   app->video->window.RectangleColor(rect, rectColor);
 
-  GetWorld().ToRedrawOnScreen( rect );
+  world.ToRedrawOnScreen( rect );
 
   pos.y += font.GetHeight(txt)/2;
   font.WriteCenter( pos, txt, white_color);

@@ -21,7 +21,7 @@
 
 #include "object/barrel.h"
 #include "object/objects_list.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "game/game_mode.h"
 #include "graphic/sprite.h"
 #include "particles/particle.h"
@@ -30,14 +30,14 @@
 
 PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
 {
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  img = GetResourceManager().LoadSprite(res, "object/barrel");
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  img = resource_manager.LoadSprite(res, "object/barrel");
   ASSERT(img);
-  GetResourceManager().UnLoadXMLProfile(res);
+  resource_manager.UnLoadXMLProfile(res);
 
   m_energy = 25;
 
-  SetCollisionModel(true, true, true);
+  SetCollisionModel(false, true, true);
   SetSize(img->GetSize());
   SetTestRect (1, 1, 2, 2);
 }

@@ -42,10 +42,10 @@ BaseListBox::BaseListBox (const Point2i &_size, bool always_one_selected_b):
   default_item_color(defaultListColor3),
   margin(0)
 {
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_up = new Button(res, "menu/up");
   m_down = new Button(res, "menu/down");
-  GetResourceManager().UnLoadXMLProfile(res);
+  resource_manager.UnLoadXMLProfile(res);
 
   Widget::SetBorder(white_color, 1);
   Widget::SetBackgroundColor(defaultListColor1);

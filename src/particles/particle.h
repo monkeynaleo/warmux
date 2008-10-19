@@ -23,7 +23,7 @@
 #define PARTICLE_H
 
 #include <list>
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "include/base.h"
 
 // Forward declarations
@@ -45,8 +45,7 @@ typedef enum {
   particle_POLECAT_FART,
   particle_WATER,
   particle_LAVA,
-  particle_RADIOACTIVE,
-  particle_DIRTYWATER,
+  particle_RADIOACTIVE
 } particle_t;
 
 enum particle_spr
@@ -64,10 +63,9 @@ enum particle_spr
   POLECAT_FART_spr,
   WATER_spr,
   LAVA_spr,
-  RADIOACTIVE_spr,
-  DIRTYWATER_spr
+  RADIOACTIVE_spr
 };
-const int particle_spr_nbr = DIRTYWATER_spr + 1;
+const int particle_spr_nbr = RADIOACTIVE_spr + 1;
 
 class Particle : public PhysicalObj
 {

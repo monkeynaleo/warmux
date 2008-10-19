@@ -22,30 +22,23 @@
 #include "object/objects_list.h"
 //-----------------------------------------------------------------------------
 #include "object/barrel.h"
-#include "physic/physical_engine.h"
 #include "include/app.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "map/camera.h"
 #include "tool/debug.h"
+//#include "tool/random.h"
 #include "tool/rectangle.h"
 #include "game/time.h"
 #include "weapon/mine.h"
 #include <vector>
 #include <iostream>
 
-#ifdef DEBUG
-#include "graphic/colors.h"
-#endif
+//-----------------------------------------------------------------------------
+ObjectsList lst_objects;
+//-----------------------------------------------------------------------------
 
-ObjectsList::ObjectsList()
-{}
-
-ObjectsList::~ObjectsList()
-{
-  FreeMem();
-}
-
+// Initialise la liste des objets standards
 void ObjectsList::PlaceMines()
 {
   MSG_DEBUG("lst_objects","Placing mines");
@@ -106,14 +99,8 @@ void ObjectsList::Draw()
   {
     ASSERT((*it) != NULL);
 
-    if (!(*it)->IsGhost()) {
+    if (!(*it)->IsGhost())
       (*it)->Draw();
-#ifdef DEBUG
-      if (IsLOGGING("polygon.object")) {
-	(*it)->DrawPolygon(primary_red_color);
-      }
-#endif
-    }
   }
 }
 
@@ -124,7 +111,7 @@ bool ObjectsList::AllReady() const
   {
     if (!(*object)->IsImmobile())
     {
-      MSG_DEBUG("lst_objects", "\"%s\" is not ready ( IsImmobile()==false )", (*object)->GetName().c_str());
+      MSG_DEBUG("lst_objects", "\"%s\" is not ready ( IsImmobile()==fasle )", (*object)->GetName().c_str());
       return false;
     }
   }
@@ -153,7 +140,7 @@ void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
     if((*it)->GetOverlappingObject() == obj) {
       MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" in \"%s\"",
                 obj->GetName().c_str(), (*it)->GetName().c_str());
-      (*it)->ClearOverlappingObject();
+      (*it)->SetOverlappingObject(NULL);
       it = overlapped_objects.erase(it);
     }
   }

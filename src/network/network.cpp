@@ -50,7 +50,7 @@
 
 // Standard header, only needed for the following method
 #ifdef WIN32
-#  include <winsock2.h>
+#  include <winsock.h>
 #else
 #  include <sys/socket.h>
 #  include <netdb.h>
@@ -382,10 +382,9 @@ connection_state_t Network::GetError()
 #endif
 }
 
-// static method
 #ifdef WIN32
 
-static connection_state_t WIN32_CheckHost(const std::string &host, int prt)
+connection_state_t WIN32_CheckHost(const std::string &host, int prt)
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 
@@ -421,7 +420,7 @@ static connection_state_t WIN32_CheckHost(const std::string &host, int prt)
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
   {
-    return Network::GetError();
+    return GetError();
   }
   closesocket(fd);
   return CONNECTED;
@@ -429,7 +428,7 @@ static connection_state_t WIN32_CheckHost(const std::string &host, int prt)
 
 #else
 
-static connection_state_t POSIX_CheckHost(const std::string &host, int prt)
+connection_state_t POSIX_CheckHost(const std::string &host, int prt)
 {
   MSG_DEBUG("network", "Checking connection to %s:%i", host.c_str(), prt);
 
@@ -475,10 +474,12 @@ static connection_state_t POSIX_CheckHost(const std::string &host, int prt)
     case EAI_NODATA:
       fprintf(stderr, "The specified network host exists, but does not have any network addresses defined.\n");
       break;
+#ifndef WIN32 // AI_NUMERICSERV not defined under Windows
     case EAI_NONAME:
       fprintf(stderr, "The node or service is not known; or both node and service are NULL; "
 	      "or AI_NUMERICSERV was specified in hints.ai_flags and  service  was  not  a  numeric port-number string.\n");
       break;
+#endif
     case EAI_SERVICE:
       fprintf(stderr, "The requested service is not available for the requested socket type.  It may be available through another socket type.\n");
       break;
@@ -514,6 +515,7 @@ static connection_state_t POSIX_CheckHost(const std::string &host, int prt)
     struct timeval timeout;
     memset(&timeout, 0, sizeof(timeout));
     timeout.tv_sec = 5; // 5seconds timeout
+
     if (setsockopt(sfd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR) {
       fprintf(stderr, "Setting receive timeout on socket failed\n");
       closesocket(sfd);

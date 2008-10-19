@@ -24,8 +24,7 @@
 
 #include <list>
 #include "include/base.h"
-#include "include/singleton.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 
 // Forward declarations
 class Sprite;
@@ -36,11 +35,11 @@ typedef struct _xmlNode xmlNode;
 
 class WindParticle : public PhysicalObj
 {
-private:
   /* You should not need this */
   WindParticle(const WindParticle&);
   const WindParticle& operator=(const WindParticle&);
 
+public:
   Sprite *sprite;
   Sprite *flipped;
 
@@ -51,31 +50,29 @@ public:
   void Refresh();
 };
 
-class Wind : public Singleton<Wind>
+class Wind
 {
-private:
   long m_val, m_nv_val;
   uint m_last_move;
   uint m_last_part_mvt;
 
+private:
   std::list<WindParticle *> particles;
   typedef std::list<WindParticle *>::iterator iterator;
   void RemoveAllParticles();
   void RandomizeParticlesPos(); // Put particles randomly on the screen
 
-  Wind();
-  ~Wind();
-  friend class Singleton<Wind>;
-
 public:
-  double GetStrength() const;
+  Wind() { m_val = m_nv_val = 0; };
+  ~Wind() { RemoveAllParticles(); };
+  double GetStrength() const { return m_nv_val * WIND_STRENGTH / 100.0; };
   void ChooseRandomVal() const;
-
-  void SetVal(long val);
+  void SetVal (long val) { m_nv_val = val; };
   void Refresh();
   void Reset();
   void DrawParticles();
 };
 
+extern Wind wind;
 #endif
 

@@ -16,7 +16,7 @@
   <surface name="texture" file="texture.png" />
   <color name="border_color" r="175" g="100" b="100" a="255" />
   <name>Random Amoebas</name>
-  <water>water</water>
+  <water>1</water>
   <nb_mine>10</nb_mine>
   <is_open>1</is_open>
 

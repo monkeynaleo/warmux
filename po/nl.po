@@ -37,12 +37,12 @@ msgid_plural "%i players ready"
 msgstr[0] "%i speler is gereed"
 msgstr[1] "%i spelers zijn gereed"
 
-#: src/map/maps_list.cpp:116
+#: src/map/maps_list.cpp:117
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s uit %s"
 
-#: src/map/maps_list.cpp:123
+#: src/map/maps_list.cpp:124
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> uit %s"
@@ -63,32 +63,32 @@ msgstr "Team %s - Op afstand"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:718
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s van team %s pleegde zelfmoord!"
 
-#: src/game/game.cpp:755
+#: src/game/game.cpp:751
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s van team %s is overleden."
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:709
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s van team %s is in het water gevallen."
 
-#: src/game/game.cpp:707
+#: src/game/game.cpp:703
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s van team %s is van de kaart gevallen!"
 
-#: src/game/game.cpp:728
+#: src/game/game.cpp:724
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s van team %s heeft de grond te hard geraakt!"
 
-#: src/game/game.cpp:735
+#: src/game/game.cpp:731
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s van team %s is dood door zijn onhandigheid!"
@@ -100,12 +100,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s heeft %u punt energie gekregen!"
 msgstr[1] "%s heeft %u punten energie gekregen!"
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:743
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van team %s!"
 
-#: src/weapon/mine.cpp:123
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s staat naast een mijn!"
@@ -157,14 +157,14 @@ msgstr[1] ""
 "Team %s heeft %u drilboren gekregen! Maak er niet te veel herrie mee! "
 "Bedankt, uw buren."
 
-#: src/weapon/anvil.cpp:191
+#: src/weapon/anvil.cpp:189
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Team %s heeft %u aambeeld gekregen! Plet ze allemaal!"
 msgstr[1] "Team %s heeft %u aambeelden gekregen! Plet ze allemaal!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:329
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -239,7 +239,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Team %s heeft %u staaf dynamiet gekregen!"
 msgstr[1] "Team %s heeft %u staven dynamiet gekregen!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:178
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -253,7 +253,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Team %s heeft %u voetbalbom gekregen!"
 msgstr[1] "Team %s heeft %u voetbalbommen gekregen!"
 
-#: src/weapon/grapple.cpp:815
+#: src/weapon/grapple.cpp:809
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -274,7 +274,7 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "Team %s heeft %u geweer gekregen!"
 msgstr[1] "Team %s heeft %u geweren gekregen!"
 
-#: src/weapon/jetpack.cpp:252
+#: src/weapon/jetpack.cpp:247
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -289,14 +289,14 @@ msgstr[0] "Team %s heeft %u lagezwaartekracht gekregen! Ik ben Neil Armstrong!"
 msgstr[1] ""
 "Team %s heeft %u lagezwaartekrachten gekregen! Ik ben Neil Armstrong!"
 
-#: src/weapon/mine.cpp:249
+#: src/weapon/mine.cpp:247
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "Team %s heeft %u mijn gekregen!"
 msgstr[1] "Team %s heeft %u mijnen gekregen!"
 
-#: src/weapon/parachute.cpp:167
+#: src/weapon/parachute.cpp:166
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -319,7 +319,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Team %s heeft %u rellenbom gekregen!"
 msgstr[1] "Team %s heeft %u rellenbommen gekregen!"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:134
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -386,7 +386,7 @@ msgstr[1] ""
 "Team %s heeft %u keer een beurt overslaan gekregen! Ik weet dat u daar gek "
 "op bent."
 
-#: src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -401,7 +401,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Team %s is afgeslacht."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s nam een lid van team %s met zich mee in het graf!"
@@ -411,7 +411,7 @@ msgid "(dead)"
 msgstr "(dood)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:268
+#: src/menu/options_menu.cpp:262
 msgid "(system language)"
 msgstr "(systeemtaal)"
 
@@ -424,7 +424,7 @@ msgstr "(onbekende tijd)"
 msgid "(unlimited)"
 msgstr "(onbegrensd)"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:435
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -433,7 +433,7 @@ msgstr ""
 "Er is een nieuwe versie, %s, beschikbaar. Uw versie is %s. Controleer of er "
 "een update beschikbaar is voor uw besturingssysteem!"
 
-#: src/menu/options_menu.cpp:143
+#: src/menu/options_menu.cpp:141
 msgid "Add custom team"
 msgstr "Aangepast team toevoegen"
 
@@ -467,7 +467,7 @@ msgstr ""
 "Vuur : spatiebalk\n"
 "een slag per beurt"
 
-#: src/weapon/anvil.cpp:134
+#: src/weapon/anvil.cpp:132
 msgid "Anvil"
 msgstr "Aambeeld"
 
@@ -475,7 +475,7 @@ msgstr "Aambeeld"
 msgid "Authors:"
 msgstr "Auteurs:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:220
 msgid "Automatic Bazooka"
 msgstr "Automatische Bazooka"
 
@@ -511,7 +511,7 @@ msgstr "Snijbrander"
 msgid "Bounce Ball"
 msgstr "Stuiterbal"
 
-#: src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Dag dag tux..."
 
@@ -557,7 +557,7 @@ msgstr "Wapencategorie veranderen"
 msgid "Change weapon countdown"
 msgstr "Wapenteller veranderen"
 
-#: src/menu/options_menu.cpp:165
+#: src/menu/options_menu.cpp:166
 msgid "Character"
 msgstr "Karakter"
 
@@ -565,7 +565,7 @@ msgstr "Karakter"
 msgid "Character switching"
 msgstr "Karakter schakeling"
 
-#: src/menu/options_menu.cpp:199
+#: src/menu/options_menu.cpp:193
 msgid "Check updates online?"
 msgstr "Online op updates controleren?"
 
@@ -640,7 +640,7 @@ msgstr "Credits"
 msgid "Damage per turn during death mode"
 msgstr "Schade per beurt tijdens doodsmodus"
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:144
 msgid "Delete custom team"
 msgstr "Aangepast team verwijderen"
 
@@ -673,7 +673,7 @@ msgstr "Dynamiet"
 msgid "END OF GAME"
 msgstr "EINDE VAN HET SPEL"
 
-#: src/menu/options_menu.cpp:223
+#: src/menu/options_menu.cpp:217
 msgid "Effects volume"
 msgstr "Effecten volume"
 
@@ -697,7 +697,7 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Fout bij het laden van team :"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:165
+#: src/game/config.cpp:512 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
@@ -762,12 +762,12 @@ msgstr ""
 "Contoleer uw router configuratie wanneer u niet direct met het internet "
 "verbonden bent: TCP Poort %s moet doorgestuurd worden naar deze computer."
 
-#: src/team/team.cpp:123
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Vlammenwerper"
 
@@ -803,7 +803,7 @@ msgstr "Gnu Lanceren"
 msgid "Graphic"
 msgstr "Grafisch"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:166
 msgid "Grapple"
 msgstr "Haak"
 
@@ -815,7 +815,7 @@ msgstr "Zwaartekracht"
 msgid "Grenade"
 msgstr "Granaat"
 
-#: src/map/ground.cpp:47
+#: src/map/ground.cpp:44
 msgid "Ground initialization..."
 msgstr "Initialiseren van de grond..."
 
@@ -871,7 +871,7 @@ msgstr ""
 "Hoe te gebruiken : houd de spatiebalk ingedrukt\n"
 "eenmaal per beurt"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:221
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -883,7 +883,7 @@ msgstr ""
 "Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
 "een schot per beurt"
 
-#: src/weapon/anvil.cpp:135
+#: src/weapon/anvil.cpp:133
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -935,11 +935,11 @@ msgstr "Initialiseer geluiden"
 msgid "Initialise teams"
 msgstr "Initialiseer teams"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:587
 msgid "It's a present!"
 msgstr "Het is een cadeau!"
 
-#: src/weapon/jetpack.cpp:62
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Jetpack"
 
@@ -989,7 +989,7 @@ msgstr "Handmatige verbinding"
 msgid "Map"
 msgstr "Kaart"
 
-#: src/map/map.cpp:305
+#: src/map/map.cpp:294
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Kaart %s, gemaakt door :"
@@ -1010,11 +1010,11 @@ msgstr "Max aantal spelers:"
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
-#: src/weapon/mine.cpp:215
+#: src/weapon/mine.cpp:213
 msgid "Mine"
 msgstr "Mijn"
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:197
 msgid "Misc"
 msgstr "Overigen"
 
@@ -1046,11 +1046,11 @@ msgstr "Camera met muis of pijltjestoetsen bewegen"
 msgid "Move character"
 msgstr "Bewegen"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:207
 msgid "Music volume"
 msgstr "Muziek volume"
 
-#: src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:203
 msgid "Music?"
 msgstr "Muziek?"
 
@@ -1071,7 +1071,7 @@ msgstr "Nooit"
 msgid "New network game at "
 msgstr "Nieuw netwerkspel op"
 
-#: src/menu/options_menu.cpp:248
+#: src/menu/options_menu.cpp:242
 msgid "New player warning?"
 msgstr "Waarschuwing bij nieuwe speler?"
 
@@ -1142,7 +1142,7 @@ msgstr "Speler"
 msgid "Player energy?"
 msgstr "Energie van speler?"
 
-#: src/menu/options_menu.cpp:152
+#: src/menu/options_menu.cpp:150
 msgid "Player name"
 msgstr "Naam van speler"
 
@@ -1183,11 +1183,11 @@ msgstr "Spel afsluiten"
 msgid "Random map"
 msgstr "Willekeurige kaart"
 
-#: src/game/config.cpp:351
+#: src/game/config.cpp:350
 msgid "Reading default config file"
 msgstr "Standaard configbestand wordt gelezen"
 
-#: src/game/config.cpp:400
+#: src/game/config.cpp:399
 msgid "Reading personal config file"
 msgstr "Persoonlijk config bestand wordt gelezen"
 
@@ -1229,7 +1229,7 @@ msgstr "Server beschikbaar op internet"
 msgid "Server mode"
 msgstr "Server modus"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:91
 msgid "Shotgun"
 msgstr "Jachtgeweer"
 
@@ -1283,15 +1283,15 @@ msgstr ""
 "U kunt een nieuwere versie downloaden op http://www.wormux.org/wiki/download."
 "php"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:245
 msgid "Sound"
 msgstr "Geluid"
 
-#: src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:213
 msgid "Sound effects?"
 msgstr "Geluidseffecten?"
 
-#: src/menu/options_menu.cpp:244
+#: src/menu/options_menu.cpp:238
 msgid "Sound frequency"
 msgstr "Geluids- frequentie"
 
@@ -1312,7 +1312,7 @@ msgstr "Voorraad:"
 msgid "Submachine Gun"
 msgstr "Automatisch Geweer"
 
-#: src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1336,7 +1336,7 @@ msgstr "Team statistieken"
 msgid "Teams"
 msgstr "Teams"
 
-#: src/menu/options_menu.cpp:185
+#: src/menu/options_menu.cpp:186
 msgid "Teams editor"
 msgstr "Team-editor"
 
@@ -1360,7 +1360,7 @@ msgstr "De Gnu heeft het slagveld verlaten alvorens te ontploffen"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Het Stinkdier heeft het slagveld verlaten alvorens te ontploffen"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "De automatische raket heeft het slagveld verlaten..."
 
@@ -1485,7 +1485,7 @@ msgstr "Naamloos"
 msgid "Version"
 msgstr "Versie"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Versie verificatie mislukt omdat: %s\n"
@@ -1516,7 +1516,7 @@ msgstr "Wapens"
 msgid "Website: "
 msgstr "Website: "
 
-#: src/game/game.cpp:752
+#: src/game/game.cpp:748
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
@@ -1570,7 +1570,7 @@ msgstr "U heeft minimaal twee geldige teams nodig !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd !"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:496
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 
@@ -1588,7 +1588,7 @@ msgstr ""
 "Bombarderen: klik met de linkermuisknop op het doel\n"
 "een bombardement per beurt"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:78
 msgid "couldn't load config"
 msgstr "kan de configuratie niet laden"
 
@@ -1597,11 +1597,11 @@ msgstr "kan de configuratie niet laden"
 msgid "custom player"
 msgstr "aangepaste speler"
 
-#: src/map/ground.cpp:64
+#: src/map/ground.cpp:61
 msgid "done"
 msgstr "klaar"
 
-#: src/map/maps_list.cpp:84
+#: src/map/maps_list.cpp:85
 msgid "error parsing the config file"
 msgstr "fout bij het analyseren van het configuratiebestand"
 
@@ -1609,7 +1609,7 @@ msgstr "fout bij het analyseren van het configuratiebestand"
 msgid "from"
 msgstr "uit"
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "geen configuratiebestand!"
 

@@ -83,7 +83,7 @@ public:
 NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Menu("menu/bg_network", vOkCancel)
 {
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i def_size(300, 20);
 
   uint max_width = GetMainWindow().GetWidth()-50;
@@ -237,7 +237,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   msg_box->NewMessage(_("Have a good game!"));
   msg_box->NewMessage(""); // Skip a line
 
-  GetResourceManager().UnLoadXMLProfile(res);
+  resource_manager.UnLoadXMLProfile(res);
 
   switch (action) {
   case NET_HOST:

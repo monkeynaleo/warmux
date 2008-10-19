@@ -61,7 +61,7 @@ OptionMenu::OptionMenu() :
 {
   AppWormux * app = AppWormux::GetInstance();
   Config * config = Config::GetInstance();
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   Point2i option_size(140, 130);
 
   uint max_width = app->video->window.GetWidth()-50;
@@ -134,33 +134,34 @@ OptionMenu::OptionMenu() :
 
   /* Team editor */
 
+  Box * teams_editor = new VBox(max_width, false, true);
+  Box * teams_editor_sup = new GridBox(max_width, option_size, true);
+  Box * teams_editor_inf = new VBox(max_width, true,false);
+
+  add_team = new ButtonPic(_("Add custom team"), "menu/add_custom_team",Point2i(100,100));
+  teams_editor_sup->AddWidget(add_team);
+
+  delete_team = new ButtonPic(_("Delete custom team"), "menu/del_custom_team",Point2i(100,100));
+  teams_editor_sup->AddWidget(delete_team);
+
+  lbox_teams = new ListBox(option_size,false);
+  teams_editor_sup->AddWidget(lbox_teams);
+
+  std::string s = _("Player name");
+  s +=" : ";
+
+  team_name = new Label(s, 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  teams_editor_inf->AddWidget(team_name);
+
+
+  tbox_team_name = new TextBox("", 100,
+                            Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  teams_editor_inf->AddWidget(tbox_team_name);
+
+  Point2i names_size(140, 50);
+
   // bug #12193 : Missed assertion in game option (custom team editor) while playing
-  if (Game::GetInstance()->IsGameFinished()) {
-    Box * teams_editor = new VBox(max_width, false, true);
-    Box * teams_editor_sup = new GridBox(max_width, option_size, true);
-    Box * teams_editor_inf = new VBox(max_width, true,false);
-
-    add_team = new ButtonPic(_("Add custom team"), "menu/add_custom_team",Point2i(100,100));
-    teams_editor_sup->AddWidget(add_team);
-
-    delete_team = new ButtonPic(_("Delete custom team"), "menu/del_custom_team",Point2i(100,100));
-    teams_editor_sup->AddWidget(delete_team);
-
-    lbox_teams = new ListBox(option_size,false);
-    teams_editor_sup->AddWidget(lbox_teams);
-
-    std::string s = _("Player name");
-    s +=" : ";
-
-    team_name = new Label(s, 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-    teams_editor_inf->AddWidget(team_name);
-
-    tbox_team_name = new TextBox("", 100,
-				 Font::FONT_MEDIUM, Font::FONT_NORMAL);
-    teams_editor_inf->AddWidget(tbox_team_name);
-
-    Point2i names_size(140, 50);
-
+  if(Game::GetInstance()->IsGameFinished()) {
     Box * teams_editor_names = new GridBox(max_width, names_size, false);
     s = _("Character");
     for(unsigned i=0; i < 10 ; i++) {
@@ -185,13 +186,6 @@ OptionMenu::OptionMenu() :
     tabs->AddNewTab("unused", _("Teams editor"), teams_editor);
     selected_team = NULL;
     ReloadTeamList();
-  } else {
-    lbox_teams = NULL;
-    add_team = NULL;
-    delete_team = NULL;
-    selected_team = NULL;
-    tbox_team_name = NULL;
-    team_name = NULL;
   }
 
   /* Misc options */
@@ -301,7 +295,7 @@ OptionMenu::OptionMenu() :
 
   opt_updates->SetValue(config->GetCheckUpdates());
 
-  GetResourceManager().UnLoadXMLProfile(res);
+  resource_manager.UnLoadXMLProfile(res);
 
   widgets.AddWidget(tabs);
   widgets.Pack();
@@ -356,8 +350,7 @@ void OptionMenu::SaveOptions()
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   // bug #11826 : Segmentation fault while exiting the menu.
   if(!Game::GetInstance()->IsGameFinished())
-    Wind::GetRef().Reset();
-
+    wind.Reset();
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
@@ -403,13 +396,11 @@ void OptionMenu::SaveOptions()
   config->Save();
 
   //Team editor
-  if (Game::GetInstance()->IsGameFinished()) {
-    if((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0))
-      {
-	AddTeam();
-      }
-    SaveTeam();
+  if((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0))
+  {
+    AddTeam();
   }
+  SaveTeam();
 }
 
 bool OptionMenu::signal_ok()
@@ -471,65 +462,55 @@ uint OptionMenu::fromVolume(uint vol)
 
 void OptionMenu::AddTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
-    return;
-
-  SaveTeam();
-  CustomTeam *new_team = new CustomTeam();
-  new_team->NewTeam();
-  new_team->Save();
-  if((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0))
+    SaveTeam();
+    CustomTeam *new_team = new CustomTeam();
+    new_team->NewTeam();
+    new_team->Save();
+    if((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0))
     {
       selected_team = new_team;
       SaveTeam();
     }
-  selected_team = new_team;
-  ReloadTeamList();
-  lbox_teams->NeedRedrawing();
+    selected_team = new_team;
+    ReloadTeamList();
+    lbox_teams->NeedRedrawing();
 }
 
 void OptionMenu::DeleteTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
-    return;
-
-
   if(selected_team !=NULL)
+  {
+    selected_team->Delete();
+    selected_team = NULL;
+    if(lbox_teams->IsSelectedItem())
     {
-      selected_team->Delete();
-      selected_team = NULL;
-      if(lbox_teams->IsSelectedItem())
-	{
-	  lbox_teams->Deselect();
+      lbox_teams->Deselect();
 
-	}
-      ReloadTeamList();
-      LoadTeam();
-      lbox_teams->NeedRedrawing();
     }
+    ReloadTeamList();
+    LoadTeam();
+    lbox_teams->NeedRedrawing();
+  }
+
 }
 
 void OptionMenu::LoadTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
-    return;
 
-  if(selected_team != NULL)
+    if(selected_team != NULL)
     {
       tbox_team_name->SetText(selected_team->GetName());
       std::vector<std::string> character_names = selected_team->GetCharactersNameList();
 
       for(unsigned i=0; i< character_names.size() && i<tbox_character_name_list.size(); i++)
-	{
-	  tbox_character_name_list[i]->SetText(character_names[i]);
-	}
+      {
+        tbox_character_name_list[i]->SetText(character_names[i]);
+      }
 
-    }
-  else
-    {
-    tbox_team_name->SetText("");
+    }else{
+      tbox_team_name->SetText("");
 
-    for(unsigned i=0; i< tbox_character_name_list.size(); i++)
+      for(unsigned i=0; i< tbox_character_name_list.size(); i++)
       {
         tbox_character_name_list[i]->SetText("");
 
@@ -539,9 +520,6 @@ void OptionMenu::LoadTeam()
 
 void OptionMenu::ReloadTeamList()
 {
-  if (!Game::GetInstance()->IsGameFinished())
-    return;
-
   lbox_teams->ClearItems();
   std::string selected_team_name ="";
   if(selected_team != NULL){
@@ -564,40 +542,39 @@ void OptionMenu::ReloadTeamList()
 }
 
 
-bool OptionMenu::SaveTeam()
-{
-  if (!Game::GetInstance()->IsGameFinished())
+bool OptionMenu::SaveTeam(){
+if(selected_team !=NULL)
+  {
+    bool is_name_changed = (selected_team->GetName().compare(tbox_team_name->GetText()) != 0);
+    selected_team->SetName(tbox_team_name->GetText());
+    for(unsigned i=0; i<tbox_character_name_list.size(); i++)
+      {
+        selected_team->SetCharacterName(i,tbox_character_name_list[i]->GetText());
+      }
+    selected_team->Save();
+    return is_name_changed;
+  }
+
     return false;
-
-  if (selected_team !=NULL)
-    {
-      bool is_name_changed = (selected_team->GetName().compare(tbox_team_name->GetText()) != 0);
-      selected_team->SetName(tbox_team_name->GetText());
-      for(unsigned i=0; i<tbox_character_name_list.size(); i++)
-	{
-	  selected_team->SetCharacterName(i,tbox_character_name_list[i]->GetText());
-	}
-      selected_team->Save();
-      return is_name_changed;
-    }
-
-  return false;
 }
 
 void OptionMenu::SelectTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
-    return;
-
-
   if(lbox_teams->IsSelectedItem())
+  {
+    bool is_changed_name = SaveTeam();
+    std::string s_selected_team = lbox_teams->ReadValue();
+    selected_team = GetCustomTeamsList().GetByName(s_selected_team);
+    LoadTeam();
+    if(is_changed_name)
     {
-      bool is_changed_name = SaveTeam();
-      std::string s_selected_team = lbox_teams->ReadValue();
-      selected_team = GetCustomTeamsList().GetByName(s_selected_team);
-      LoadTeam();
-      if (is_changed_name) {
-	ReloadTeamList();
-      }
+        ReloadTeamList();
     }
+
+  }
+}
+
+void OptionMenu::key_tab()
+{
+  Menu::key_tab();
 }

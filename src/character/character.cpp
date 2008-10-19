@@ -36,7 +36,6 @@
 #include "map/camera.h"
 #include "network/network.h"
 #include "network/randomsync.h"
-#include "physic/physical_shape.h"
 #include "particles/particle.h"
 #include "particles/fading_text.h"
 #include "sound/jukebox.h"
@@ -126,11 +125,10 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 {
 
   m_is_character = true;
-
+  SetCollisionModel(false, true, true);
   /* body stuff */
   ASSERT(char_body);
   SetBody(char_body);
-  SetCollisionModel(true, true, true);
 
   ResetConstants();
   // Allow player to go outside of map by upper bound (bug #10420)
@@ -181,7 +179,6 @@ Character::Character (const Character& acharacter) :
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
-  std::cout<<"CLONE CHARACTER"<<std::endl;
   if (acharacter.body)
     SetBody(new Body(*acharacter.body));
   if(acharacter.name_text)
@@ -336,7 +333,7 @@ void Character::Die()
     body->SetRotation(0.0);
     SetClothe("dead");
     SetMovement("breathe");
-    SetCollisionModel(true, false, false);
+    SetCollisionModel(false, false, false);
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
@@ -450,6 +447,7 @@ void Character::Draw()
   }
 
 #ifdef DEBUG
+
   if (IsLOGGING("body"))
   {
     dy -= HAUT_FONT_MIX;
@@ -458,8 +456,14 @@ void Character::Draw()
     skin_text.DrawCenterTopOnMap(Point2i(GetX(), GetY() - dy));
   }
 
-  if (IsLOGGING("polygon.character")) {
-    DrawPolygon(primary_red_color);
+  if (IsLOGGING("test_rectangle"))
+  {
+    Rectanglei test_rect(GetTestRect());
+    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
+
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), GetSize());
+    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
   }
 #endif
 }
@@ -476,11 +480,8 @@ void Character::Jump(double strength, double angle /*in radian */)
   SetMovement("jump");
 
   // Jump !
-  if (GetDirection() == DIRECTION_LEFT)
-    angle = InverseAngle(angle);
-
-//  SetSpeed (strength, angle);
-  Impulse(100 + strength,angle);
+  if (GetDirection() == DIRECTION_LEFT) angle = InverseAngle(angle);
+  SetSpeed (strength, angle);
 }
 
 void Character::Jump()
@@ -552,8 +553,6 @@ void Character::Refresh()
   if (IsDead()) return;
 
   Time * global_time = Time::GetInstance();
-
-  body->SetRotation(GetAngle());
 
   // center on character who is falling
   if (FootsInVacuum()) {
@@ -685,7 +684,7 @@ void Character::SignalCollision(const Point2d& speed_vector)
   MSG_DEBUG("character.collision", "%s collides with speed %f, %f (norm = %f)",
 	    character_name.c_str(), speed_vector.x, speed_vector.y, norm);
 
-  if (norm > game_mode->safe_fall && speed_vector.y>0.0 && false)//TODO : REMOVE LAST PART OF TEST
+  if (norm > game_mode->safe_fall && speed_vector.y>0.0)
   {
     norm -= game_mode->safe_fall;
     double degat = norm * game_mode->damage_per_fall_unit;
@@ -842,7 +841,7 @@ uint Character::GetCharacterIndex() const
   for (Team::iterator it = m_team.begin();
        it != m_team.end() ; ++it, ++index )
   {
-    if ((*it) == this)
+    if (&(*it) == this)
       return index;
   }
   ASSERT(false);
@@ -875,7 +874,7 @@ void Character::GetValueFromAction(Action *a)
   // those 2 parameters will be retrieved by PhysicalObj::GetValueFromAction
   alive_t prev_live_state = m_alive;
   int prev_energy = m_energy;
-  Point2d prev_position = GetPhysXY();
+  Point2d prev_position = Physics::GetPos();
 
   PhysicalObj::GetValueFromAction(a);
   SetDirection((BodyDirection_t)(a->PopInt()));
@@ -946,7 +945,7 @@ void Character::GetValueFromAction(Action *a)
   }
 
   // If the player has moved, the camera should follow it!
-  Point2d current_position = GetPhysXY();
+  Point2d current_position = Physics::GetPos();
   if (IsActiveCharacter() && prev_position != current_position) {
     Camera::GetInstance()->FollowObject(this, true);
     HideGameInterface();
@@ -961,9 +960,7 @@ const std::string& Character::GetName() const
 
 void Character::SetCustomName(const std::string name)
 {
-  std::cout<<"Character::SetCustomName "<<name<<std::endl;
-
-  if(name.size()>0)
+   if(name.size()>0)
   {
     name_text->Set(name);
     character_name = name;
@@ -971,55 +968,6 @@ void Character::SetCustomName(const std::string name)
 
 
 }
-
-void Character::SetSize(const Point2i &newSize)
-{
-
-  double phys_width = double(newSize.x)/PIXEL_PER_METER;
-  double phys_height = double(newSize.y)/PIXEL_PER_METER;
-
-  // Shape position is relative to body
-  PhysicalPolygon *shape = new PhysicalPolygon(m_body);
-
-  shape->AddPoint(Point2d(0, 0));
-  shape->AddPoint(Point2d(phys_width, 0));
-  shape->AddPoint(Point2d(phys_width, 3*phys_height/8));
-  shape->AddPoint(Point2d(9*phys_width/10, 6*phys_height/8));
-  //  shape->AddPoint(Point2d(6*phys_width/10, phys_height));
-  //  shape->AddPoint(Point2d(4*phys_width/10, phys_height));
-  shape->AddPoint(Point2d(1*phys_width/10, 6*phys_height/8));
-  shape->AddPoint(Point2d(0, 3*phys_height/8));
-
-  shape->SetMass(GetMass()/2); // There are 2 shapes, divide the mass of body by 2
-
-  b2FilterData filter_data;
-  filter_data.categoryBits = 0x0001;
-  filter_data.maskBits = 0x0000;
-
-  if (m_shapes.size() > 0) {
-    filter_data = GetCollisionFilter();
-  }
-  shape->SetFilter(filter_data);
-  shape->SetFriction(1.2f);
-  shape->Generate();
-
-  //Feet shape
-  PhysicalCircle *feet_shape = new PhysicalCircle(m_body);
-
-  // Shape position is relative to body
-  feet_shape->SetRadius(phys_width/2);
-  feet_shape->SetMass(GetMass()/2);
-  feet_shape->SetPosition(Point2d(phys_width/2, phys_height - phys_width/2));
-  feet_shape->SetFriction(1.2f);
-  feet_shape->SetFilter(filter_data);
-  feet_shape->Generate();
-
-  ClearShapes();
-
-  m_shapes.push_back(shape);
-  m_shapes.push_back(feet_shape);
-}
-
 // ###################################################################
 // ###################################################################
 // ###################################################################
@@ -1037,15 +985,13 @@ void Character::HandleKeyRefreshed_MoveRight(bool shift) const
 {
   HideGameInterface();
 
-  if (!ActiveCharacter().FootsInVacuum()){
+  if (ActiveCharacter().IsImmobile())
     MoveActiveCharacterRight(shift);
-  }
 }
 
 void Character::HandleKeyReleased_MoveRight(bool)
 {
   body->StopWalk();
-  SetSpeedXY(Point2d(GetSpeedXY().x/5,GetSpeedXY().y));
   SendActiveCharacterInfo();
 }
 
@@ -1062,16 +1008,14 @@ void Character::HandleKeyRefreshed_MoveLeft(bool shift) const
 {
   HideGameInterface();
 
-  if (!ActiveCharacter().FootsInVacuum()){
+  if (ActiveCharacter().IsImmobile())
     MoveActiveCharacterLeft(shift);
-  }
 }
 
 void Character::HandleKeyReleased_MoveLeft(bool)
 {
   body->StopWalk();
   SendActiveCharacterInfo();
-  SetSpeedXY(Point2d(GetSpeedXY().x/5,GetSpeedXY().y));
 }
 
 // #################### UP
@@ -1114,9 +1058,9 @@ void Character::HandleKeyPressed_Jump(bool)
 {
   HideGameInterface();
   if (ActiveCharacter().IsImmobile()) {
+    Jump();
     Action a(Action::ACTION_CHARACTER_JUMP);
     SendActiveCharacterAction(a);
-    Jump();
   }
 }
 
@@ -1125,9 +1069,9 @@ void Character::HandleKeyPressed_HighJump(bool)
 {
   HideGameInterface();
   if (ActiveCharacter().IsImmobile()) {
+    HighJump();
     Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
     SendActiveCharacterAction(a);
-    HighJump();
   }
 }
 
@@ -1136,9 +1080,9 @@ void Character::HandleKeyPressed_BackJump(bool)
 {
   HideGameInterface();
   if (ActiveCharacter().IsImmobile()) {
+    BackJump();
     Action a(Action::ACTION_CHARACTER_BACK_JUMP);
     SendActiveCharacterAction(a);
-    BackJump();
   }
 }
 

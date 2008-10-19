@@ -55,7 +55,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
 {
   UpdateTranslationStrings();
 
-  construct_spr = GetResourceManager().LoadSprite( weapons_res_profile, "construct_spr");
+  construct_spr = resource_manager.LoadSprite( weapons_res_profile, "construct_spr");
   construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / DELTA_ANGLE));
   m_name = _("Construct");
   m_category = TOOL;
@@ -89,7 +89,7 @@ bool Construct::p_Shoot ()
   if(!target_chosen)
     return false;
   JukeBox::GetInstance()->Play("share", "weapon/construct");
-  GetWorld().MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
+  world.MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
 
   target_chosen = false; // ensure next shoot cannot be done pressing key space
   return true;
@@ -127,12 +127,12 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   Point2i test_target = dst - construct_spr->GetSizeMax() / 2;
   Rectanglei rect(test_target, construct_spr->GetSizeMax());
 
-  if (!GetWorld().ParanoiacRectIsInVacuum(rect))
+  if (!world.ParanoiacRectIsInVacuum(rect))
     return;
 
   // Check collision with characters and other physical objects
   FOR_ALL_CHARACTERS(team, c) {
-    if (((*c)->GetTestRect()).Intersect(rect))
+    if ((c->GetTestRect()).Intersect(rect))
       return;
   }
 

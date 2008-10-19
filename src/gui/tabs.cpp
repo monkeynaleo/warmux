@@ -61,7 +61,7 @@ MultiTabs::MultiTabs(const Point2i& size):
 {
   tab_size = Point2i(size.x, size.y - 32);
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
 
   prev_tab_bt = new Button(res, "menu/really_big_minus", false);
   next_tab_bt = new Button(res, "menu/really_big_plus", false);
@@ -69,7 +69,7 @@ MultiTabs::MultiTabs(const Point2i& size):
   Widget::SetBorder(defaultOptionColorRect, 2);
   Widget::SetBackgroundColor(defaultOptionColorBox);
 
-  GetResourceManager().UnLoadXMLProfile(res);
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 MultiTabs::~MultiTabs()

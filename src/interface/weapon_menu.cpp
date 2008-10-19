@@ -148,17 +148,17 @@ WeaponsMenu::WeaponsMenu():
   old_pointer(Mouse::POINTER_SELECT)
 {
   // Loading value from XML
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  cross = new Sprite(GetResourceManager().LoadImage(res, "interface/cross"));
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  cross = new Sprite(resource_manager.LoadImage(res, "interface/cross"));
   // Polygon Size
-  Point2i size = GetResourceManager().LoadPoint2i(res, "interface/weapons_interface_size");
+  Point2i size = resource_manager.LoadPoint2i(res, "interface/weapons_interface_size");
   weapons_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
-  size = GetResourceManager().LoadPoint2i(res, "interface/tools_interface_size");
+  size = resource_manager.LoadPoint2i(res, "interface/tools_interface_size");
   tools_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
   help = NULL;
   // Setting colors
-  Color plane_color = GetResourceManager().LoadColor(res, "interface/background_color");
-  Color border_color = GetResourceManager().LoadColor(res, "interface/border_color");
+  Color plane_color = resource_manager.LoadColor(res, "interface/background_color");
+  Color border_color = resource_manager.LoadColor(res, "interface/border_color");
   weapons_menu->SetPlaneColor(plane_color);
   weapons_menu->SetBorderColor(border_color);
   tools_menu->SetPlaneColor(plane_color);
@@ -170,7 +170,7 @@ WeaponsMenu::WeaponsMenu():
   tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), dark_gray_color, Font::FONT_BIG)),
                       tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
 
-  GetResourceManager().UnLoadXMLProfile(res);
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 WeaponsMenu::~WeaponsMenu()

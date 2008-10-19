@@ -21,7 +21,7 @@
 
 #include <iostream>
 #include "map/map.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
@@ -39,12 +39,9 @@ const uint AUTHOR_INFO_TIME = 5000; // ms
 const uint AUTHOR_INFO_X = 100;
 const uint AUTHOR_INFO_Y = 50;
 
-Map& GetWorld()
-{
-  return Map::GetRef();
-}
+Map world;
 
-Map::Map() : author_info1(NULL), author_info2(NULL)
+Map::Map()
 {
   min_distance_between_characters = MINIMUM_DISTANCE_BETWEEN_CHARACTERS;
 
@@ -60,10 +57,8 @@ Map::~Map()
   delete to_redraw_now;
   delete to_redraw_particles;
   delete to_redraw_particles_now;
-  if (author_info1)
-    delete author_info1;
-  if (author_info2)
-    delete author_info2;
+  if (author_info1) delete author_info1;
+  if (author_info2) delete author_info2;
 }
 
 void Map::Reset()
@@ -71,14 +66,10 @@ void Map::Reset()
   sky.Reset();
   ground.Reset();
   water.Reset();
-  Wind::GetRef().Reset();
+  wind.Reset();
 
-  if (author_info1)
-    delete author_info1;
-  author_info1 = NULL;
-  if (author_info2)
-    delete author_info2;
-  author_info2 = NULL;
+  delete author_info1; author_info1 = NULL;
+  delete author_info2; author_info2 = NULL;
 
   to_redraw->clear();
   to_redraw_now->clear();
@@ -89,7 +80,7 @@ void Map::Reset()
 void Map::Refresh()
 {
   water.Refresh();
-  Wind::GetRef().Refresh();
+  wind.Refresh();
 }
 
 void Map::FreeMem()
@@ -139,6 +130,12 @@ void Map::Dig(const Point2i& center, const uint radius)
                                    Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
+void Map::PutSprite(const Point2i& pos, const Sprite* spr)
+{
+   ground.PutSprite(pos, spr);
+   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
+}
+
 void Map::MergeSprite(const Point2i& pos, const Sprite * spr)
 {
   Surface tmp = spr->GetSurface();
@@ -157,9 +154,7 @@ void Map::DrawSky(bool redraw_all)
 }
 
 void Map::DrawWater()
-{
-  water.Draw();
-}
+{ water.Draw(); }
 
 void Map::Draw(bool redraw_all)
 {
@@ -167,7 +162,7 @@ void Map::Draw(bool redraw_all)
   to_redraw_particles->clear();
   to_redraw = to_redraw_particles;
 
-  Wind::GetRef().DrawParticles();
+  wind.DrawParticles();
   to_redraw = tmp;
 
 //  Done from DrawSky
@@ -379,7 +374,7 @@ bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, 
   Point2d iterated_point = ( Point2d )( start );
   while( !IsOutsideWorld( new_point ) && ( length >= 0 ) )
   {
-    if (!IsInVacuum( new_point ))
+    if (!world.IsInVacuum( new_point ))
     {
       if ( trace_flags & COMPUTE_HIT )
       {
@@ -414,4 +409,4 @@ bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, 
   }
 
   return false;
-}
+};

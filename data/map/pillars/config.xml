@@ -12,7 +12,7 @@
   <surface name="preview" file="preview.jpg" />
 
   <name>Octopillars</name>
-  <water>water</water>
+  <water>1</water>
   <nb_mine>8</nb_mine>
   <is_open>1</is_open>
   <!-- pad is given in pixel count. -->

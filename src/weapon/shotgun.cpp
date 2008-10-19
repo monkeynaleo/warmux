@@ -67,9 +67,8 @@ void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
 
 bool ShotgunBuckshot::IsOverlapping(const PhysicalObj* obj) const
 {
-  if (GetName() == obj->GetName()) return true;
-
-  return (GetOverlappingObject() == obj);
+  if(GetName() == obj->GetName()) return true;
+  return m_overlapping_object == obj;
 }
 
 //-----------------------------------------------------------------------------
@@ -81,7 +80,7 @@ Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeap
   m_category = RIFLE;
 
   announce_missed_shots = false;
-  m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
+  m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
 
   ReloadLauncher();

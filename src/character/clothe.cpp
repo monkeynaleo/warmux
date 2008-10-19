@@ -73,21 +73,11 @@ Clothe::Clothe(Clothe* c, std::map<std::string, Member*>& members_lst):
       it != c->layers.end();
       ++it)
   {
-    layers.push_back(members_lst.find((*it)->GetName())->second);
+    layers.push_back(members_lst.find((*it)->name)->second);
   }
 }
 
 Clothe::~Clothe()
 {
   layers.clear();
-}
-
-const std::string & Clothe::GetName() const
-{
-  return name;
-}
-
-const std::vector<Member*>& Clothe::GetLayers() const
-{
-  return layers;
 }

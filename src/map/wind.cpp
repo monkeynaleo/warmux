@@ -40,10 +40,12 @@
 const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 20;
 
+Wind wind;
+
 WindParticle::WindParticle(const std::string &xml_file, float scale) :
   PhysicalObj("wind", xml_file)
 {
-  SetCollisionModel(false, false, false);
+  SetCollisionModel(true, false, false);
 
   // Physic constants
   double mass, wind_factor ;
@@ -69,7 +71,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   // Sprite loading
   scale = 0.5 + scale / 2.0;
 
-  sprite = GetResourceManager().LoadSprite( ActiveMap()->ResProfile(), "wind_particle");
+  sprite = resource_manager.LoadSprite( ActiveMap()->ResProfile(), "wind_particle");
   sprite->Scale(scale, scale);
   sprite->RefreshSurface();
   sprite->SetAlpha(scale);
@@ -103,7 +105,6 @@ WindParticle::~WindParticle()
 
 void WindParticle::Refresh()
 {
-
   if(flipped && GetSpeed().x < 0)
     flipped->Update();
   else
@@ -134,10 +135,8 @@ void WindParticle::Refresh()
   if(GetX() + (int)sprite->GetWidth() < Camera::GetInstance()->GetPositionX() )
     x += Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
 
-  if(GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY()){
+  if(GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY())
     y -= Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
-    StopMoving();
-  }
 
   if(GetY() + (int)sprite->GetHeight() < Camera::GetInstance()->GetPositionY() )
     y += Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
@@ -166,25 +165,6 @@ void WindParticle::Draw()
 
 //---------------------------------------------------
 
-Wind::Wind() : m_val(0), m_nv_val(0), m_last_move(0), m_last_part_mvt(0)
-{
-}
-
-Wind::~Wind()
-{
-  RemoveAllParticles();
-}
-
-double Wind::GetStrength() const
-{
-  return m_nv_val * WIND_STRENGTH / 100.0;
-}
-
-void Wind::SetVal(long val)
-{
-  m_nv_val = val;
-}
-
 void Wind::RemoveAllParticles()
 {
   iterator it=particles.begin(), end=particles.end();
@@ -194,8 +174,7 @@ void Wind::RemoveAllParticles()
   }
 }
 
-void Wind::Reset()
-{
+void Wind::Reset(){
   m_last_move = 0;
   m_last_part_mvt = 0;
   m_val = m_nv_val = 0;
@@ -216,25 +195,21 @@ void Wind::Reset()
     WindParticle *tmp = new WindParticle(config_file, (float)i / nb);
     particles.push_back(tmp);
   }
-
   RandomizeParticlesPos();
 }
 
-void Wind::ChooseRandomVal() const
-{
+void Wind::ChooseRandomVal() const{
   int val = RandomLocal().GetLong(-100, 100);
   ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_WIND, val));
 }
 
-void Wind::DrawParticles()
-{
+void Wind::DrawParticles(){
   iterator it=particles.begin(), end=particles.end();
   for (; it != end; ++it)
     (*it)->Draw();
 }
 
-void Wind::Refresh()
-{
+void Wind::Refresh(){
   if(m_last_move + bar_speed < Time::GetInstance()->Read()){
     if(m_val>m_nv_val)
       --m_val;
@@ -255,15 +230,12 @@ void Wind::RandomizeParticlesPos()
   iterator it=particles.begin(), end=particles.end();
 
   MSG_DEBUG("wind", "camera position: %d, %d - %d, %d", Camera::GetInstance()->GetPositionX(),
-            Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX(),
-	    Camera::GetInstance()->GetPositionY(), Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY());
+            Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX(), Camera::GetInstance()->GetPositionY(), Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY());
 
   for (; it != end; ++it)
   {
-    (*it)->SetXY(Point2i( RandomLocal().GetLong(Camera::GetInstance()->GetPositionX(),
-						Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX()),
-                          RandomLocal().GetLong(Camera::GetInstance()->GetPositionY(),
-						Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY())));
+    (*it)->SetXY(Point2i( RandomLocal().GetLong(Camera::GetInstance()->GetPositionX(), Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX()),
+                          RandomLocal().GetLong(Camera::GetInstance()->GetPositionY(), Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY())));
     MSG_DEBUG("wind", "new particule position: %d, %d", (*it)->GetX(), (*it)->GetY());
   }
 }

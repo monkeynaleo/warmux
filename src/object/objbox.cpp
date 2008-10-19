@@ -41,14 +41,19 @@
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
 
+#ifdef DEBUG
+#include "graphic/video.h"
+#include "include/app.h"
+#include "map/camera.h"
+#endif
+
 const uint SPEED = 5; // meter / seconde
 // XXX Unused !?
 // const uint NB_MAX_TRY = 20;
 // const uint SPEED_PARACHUTE = 170; // ms par image
 
 ObjBox::ObjBox(const std::string &name)
-  : PhysicalObj(name)
-{
+  : PhysicalObj(name) {
   m_allow_negative_y = true;
 
   parachute = true;
@@ -56,12 +61,11 @@ ObjBox::ObjBox(const std::string &name)
   m_energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
-  SetCollisionModel(true, false, true);
+  SetCollisionModel(false, false, true);
   std::cout<<"super called"<<std::endl;
 }
 
-ObjBox::~ObjBox()
-{
+ObjBox::~ObjBox(){
   delete anim;
   Game::GetInstance()->SetCurrentBox(NULL);
 }
@@ -88,10 +92,8 @@ void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
 void ObjBox::SignalObjectCollision(PhysicalObj * obj, const Point2d& /*my_speed_before*/)
 {
   //  SignalCollision(); // this is done by the physical engine...
-
-   if (obj->IsCharacter()){
-     ApplyBonus((Character *)obj);
-   }
+  if (obj->IsCharacter())
+    ApplyBonus((Character *)obj);
 }
 void ObjBox::SignalDrowning()
 {
@@ -112,6 +114,18 @@ void ObjBox::DropBox()
 void ObjBox::Draw()
 {
   anim->Draw(GetPosition());
+
+#ifdef DEBUG
+  if (IsLOGGING("test_rectangle"))
+  {
+    Rectanglei test_rect(GetTestRect());
+    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
+
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), anim->GetSize());
+    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
+  }
+#endif
 }
 
 void ObjBox::Refresh()
@@ -119,8 +133,8 @@ void ObjBox::Refresh()
   // If we touch a character, we remove the medkit
   FOR_ALL_LIVING_CHARACTERS(team, character)
   {
-    if(Overlapse(**character)) {
-      ApplyBonus((*character));
+    if(Overlapse(*character)) {
+      ApplyBonus(&(*character));
       Ghost();
       return;
     }

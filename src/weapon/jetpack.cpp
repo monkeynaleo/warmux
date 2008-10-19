@@ -30,7 +30,7 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/network.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
@@ -50,8 +50,6 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
   use_unit_on_first_shoot = false;
-
-  m_force_index =0;
 
   m_x_force = 0.0;
   m_y_force = 0.0;
@@ -76,8 +74,7 @@ void JetPack::Refresh()
     F.x = m_x_force ;
     F.y = m_y_force ;
 
-    ActiveCharacter().RemoveExternForce(m_force_index);
-    m_force_index = ActiveCharacter().AddExternForceXY(F);
+    ActiveCharacter().SetExternForceXY(F);
     SendActiveCharacterInfo();
 
     if (!F.IsNull())
@@ -119,9 +116,7 @@ void JetPack::p_Deselect()
 {
   m_x_force = 0;
   m_y_force = 0;
-   ActiveCharacter().RemoveExternForce(m_force_index);
-
-
+  ActiveCharacter().SetExternForce(0,0);
   StopUse();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");

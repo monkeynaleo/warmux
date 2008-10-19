@@ -28,18 +28,13 @@ typedef struct _xmlNode xmlNode;
 
 class Clothe
 {
-private:
+public:
   std::string name;
   std::vector<Member*> layers;
 
-public:
   ~Clothe();
   Clothe(const xmlNode* xml, std::map<std::string, Member*>& members_lst);
   Clothe(Clothe* c, std::map<std::string, Member*>& members_lst);
-
-  const std::string & GetName() const;
-
-  const std::vector<Member*>& GetLayers() const;
 };
 
 #endif //CLOTHE_H

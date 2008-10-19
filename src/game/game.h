@@ -26,7 +26,6 @@
 #include "include/base.h"
 #include "include/singleton.h"
 #include "network/chat.h"
-#include "sound/sound_sample.h"
 
 // Forward declarations
 class Character;
@@ -52,7 +51,6 @@ protected:
   int  NbrRemainingTeams() const;
   bool MenuQuitPause() const;
 
-  SoundSample         countdown_sample;
   game_loop_state_t   state;
   bool                give_objbox;
   uint                pause_seconde;

@@ -21,9 +21,9 @@
 
   <character>
     <energy initial="100" maximum="200" />
-    <jump strength="800" angle="-60" />
-    <super_jump strength="1100" angle="-80" />
-    <back_jump strength="900" angle="-100" />
+    <jump strength="8" angle="-60" />
+    <super_jump strength="11" angle="-80" />
+    <back_jump strength="9" angle="-100" />
     <death_explosion>
       <damage>10</damage>
       <explosion_range>50</explosion_range>
@@ -188,7 +188,7 @@
       <min_angle>-45</min_angle>
       <max_angle>45</max_angle>
       <unit_per_ammo>20</unit_per_ammo>
-      <range>2</range>
+      <range>10</range>
     </blowtorch>
 
     <bounce_ball>

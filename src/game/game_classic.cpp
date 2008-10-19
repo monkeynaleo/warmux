@@ -113,7 +113,7 @@ void GameClassic::RefreshClock()
             break;
           }
 
-          if (Network::GetInstance()->IsTurnMaster() && give_objbox && GetWorld().IsOpen()) {
+          if (Network::GetInstance()->IsTurnMaster() && give_objbox && world.IsOpen()) {
             NewBox();
             give_objbox = false;
             break;
@@ -147,13 +147,13 @@ void GameClassic::__SetState_PLAYING()
   pause_seconde = Time::GetInstance()->Read();
 
   if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
-    Wind::GetRef().ChooseRandomVal();
+    wind.ChooseRandomVal();
 
   character_already_chosen = false;
 
   // Prepare each character for a new turn
   FOR_ALL_LIVING_CHARACTERS(team,character)
-    (*character)->PrepareTurn();
+    character->PrepareTurn();
 
   // Select the next team
   ASSERT (!IsGameFinished());
@@ -224,19 +224,19 @@ void GameClassic::ApplyDeathMode () const
 {
   if (IsGameFinished()) return;
 
-  if (Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000)
+  if(Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000)
   {
     GameMessages::GetInstance()->Add (_("Hurry up, you are too slow !!"));
     FOR_ALL_LIVING_CHARACTERS(team, character)
     {
       // If the character energy is lower than damage
       // per turn we reduce the character's health to 1
-      if (static_cast<uint>((*character)->GetEnergy()) >
+      if (static_cast<uint>(character->GetEnergy()) >
           GameMode::GetInstance()->damage_per_turn_during_death_mode)
         // Don't report damage to the active character, it's not the responsible for this damage
-        (*character)->SetEnergyDelta(-(int)GameMode::GetInstance()->damage_per_turn_during_death_mode, false);
+        character->SetEnergyDelta(-(int)GameMode::GetInstance()->damage_per_turn_during_death_mode, false);
       else
-        (*character)->SetEnergy(1);
+        character->SetEnergy(1);
     }
   }
 }

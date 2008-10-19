@@ -63,7 +63,7 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfi
 
   m_category = TOOL;
 
-  impact = GetResourceManager().LoadImage( weapons_res_profile, "airhammer_impact");
+  impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
   m_time_between_each_shot = MIN_TIME_BETWEEN_JOLT;
 }
 
@@ -96,7 +96,7 @@ bool Airhammer::p_Shoot()
                          true, -3.0 * M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
   ParticleEngine::AddNow(pos + Point2i(3*impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
                          true, -M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
-  GetWorld().Dig( pos, impact );
+  world.Dig( pos, impact );
 
   uint range = 0;
   int x,y; // Testing coordinates
@@ -116,13 +116,13 @@ bool Airhammer::p_Shoot()
     x = ActiveCharacter().GetHandPosition().x;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if ((*character) != &ActiveCharacter())
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(Point2i(x, y)) )
+      if( character->Contain(Point2i(x, y)) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        (*character)->SetEnergyDelta(-(int)cfg().damage);
+        character->SetEnergyDelta(-(int)cfg().damage);
         end = true;
       }
     }

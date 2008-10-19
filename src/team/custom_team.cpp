@@ -112,9 +112,7 @@ void CustomTeam::Delete()
 
 std::vector<std::string> CustomTeam::GetCharactersNameList()
 {
-  std::cout<<"plop"<<std::endl;
   std::vector<std::string> list = characters_name_list;
-  std::cout<<"plip"<<std::endl;
   return list;
 }
 

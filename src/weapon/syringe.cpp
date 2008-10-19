@@ -94,13 +94,13 @@ bool Syringe::p_Shoot (){
                          static_cast<int>(radius * sin(angle)) );
     Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if ((*character) != &ActiveCharacter())
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(pos_to_check) )
+      if( character->Contain(pos_to_check) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        (*character)->SetDiseaseDamage(cfg().damage, cfg().turns);
+        character->SetDiseaseDamage(cfg().damage, cfg().turns);
         end = true;
       }
     }

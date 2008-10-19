@@ -23,7 +23,6 @@
 #define MAP_H
 
 #include "include/base.h"
-#include "include/singleton.h"
 #include "map/ground.h"
 #include "map/sky.h"
 #include "map/water.h"
@@ -50,20 +49,18 @@ enum // trace flags
 };
 
 
-class Map : public Singleton<Map>
-{
-private:
-  /* if you need it, implement it*/
+class Map{
   Map(const Map&);
   const Map& operator=(const Map&);
 
+ private:
   Text * author_info1;
   Text * author_info2;
 
+public:
   Map();
   ~Map();
 
-public:
   Ground ground;
   Sky sky;
   double min_distance_between_characters;
@@ -120,6 +117,8 @@ public:
   // Dig a circle hole in the map
   void Dig(const Point2i& center, const uint radius);
 
+  // Insert a sprite into the ground
+  void PutSprite(const Point2i& pos, const Sprite* spr);
   // Merge a sprite into the ground
   void MergeSprite(const Point2i& pos, const Sprite* spr);
 
@@ -135,10 +134,7 @@ public:
   void SwitchDrawingCache();
   void SwitchDrawingCacheParticles();
   void OptimizeCache(std::list<Rectanglei>& rectangleCache) const;
-
-  friend class Singleton<Map>;
 };
 
-Map& GetWorld();
-
+extern Map world;
 #endif

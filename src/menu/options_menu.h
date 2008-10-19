@@ -101,6 +101,7 @@ class OptionMenu : public Menu
 
    bool signal_ok();
    bool signal_cancel();
+   void key_tab();
 };
 
 #endif

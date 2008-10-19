@@ -14,7 +14,7 @@
 
 
 	<name>Champignon</name>
-	<water>water</water>
+	<water>1</water>
 	<nb_mine>10</nb_mine>
 	<is_open>1</is_open>
 	<!-- pad is given in pixel count. -->

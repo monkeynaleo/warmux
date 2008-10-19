@@ -109,16 +109,16 @@ bool Slap::p_Shoot (){
                          static_cast<int>(radius * sin(angle)) );
     Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if ((*character) != &ActiveCharacter())
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(pos_to_check) )
+      if( character->Contain(pos_to_check) )
       {
         // Apply damage
-        (*character)->SetEnergyDelta(-(int)cfg().damage);
-        (*character)->SetSpeed(cfg().strength / (*character)->GetMass(), angle);
-        (*character)->SetMovement("fly");
-        Camera::GetInstance()->FollowObject((*character), true, true);
+        character->SetEnergyDelta(-(int)cfg().damage);
+        character->SetSpeed(cfg().strength / character->GetMass(), angle);
+        character->SetMovement("fly");
+        Camera::GetInstance()->FollowObject(&(*character), true, true);
 
         end = true;
       }

@@ -65,16 +65,16 @@ Mouse::Mouse():
   visible = MOUSE_VISIBLE;
 
   // Load the different pointers
-  Profile *res = GetResourceManager().LoadXMLProfile("cursors.xml", false);
+  Profile *res = resource_manager.LoadXMLProfile("cursors.xml", false);
 
   for (int i=POINTER_SELECT; i < POINTER_FIRE; i++) {
     cursors.insert(std::make_pair(Mouse::pointer_t(i),
-				  GetResourceManager().LoadMouseCursor(res, __pointers[i],
+				  resource_manager.LoadMouseCursor(res, __pointers[i],
 								   Mouse::pointer_t(i))));
   }
 
   current_pointer = POINTER_STANDARD;
-  GetResourceManager().UnLoadXMLProfile(res);
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 bool Mouse::HasFocus() const
@@ -108,9 +108,9 @@ void Mouse::ActionLeftClic(bool) const
                          end = ActiveTeam().end();
 
     for( ; it != end; ++it) {
-      if( (*it) != &ActiveCharacter()
-        && !(*it) -> IsDead()
-        && (*it)->GetRect().Contains( pos_monde ) ){
+      if( &(*it) != &ActiveCharacter()
+        && !it -> IsDead()
+        && it->GetRect().Contains( pos_monde ) ){
 
         character_found = true;
         break;
@@ -121,7 +121,7 @@ void Mouse::ActionLeftClic(bool) const
       Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
       next_character->StoreActiveCharacter();
 
-      while ( (*it) != &ActiveCharacter() )
+      while ( &(*it) != &ActiveCharacter() )
         ActiveTeam().NextCharacter ();
 
       next_character->StoreActiveCharacter();
@@ -210,9 +210,9 @@ void Mouse::GetDesignatedCharacter() const
   // Which character is pointed by the mouse ? (appart from the active one)
   Interface::GetInstance()->character_under_cursor = NULL;
   FOR_ALL_LIVING_CHARACTERS(team, character){
-    if (((*character) != &ActiveCharacter())
-       && (*character)->GetRect().Contains(pos_monde) ){
-      Interface::GetInstance()->character_under_cursor = (*character);
+    if ((&(*character) != &ActiveCharacter())
+       && character->GetRect().Contains(pos_monde) ){
+      Interface::GetInstance()->character_under_cursor = &(*character);
     }
   }
 
@@ -311,7 +311,7 @@ void Mouse::Draw() const
   const MouseCursor& cursor = GetCursor(current_pointer);
   const Surface& surf = cursor.GetSurface();
   GetMainWindow().Blit(surf, GetPosition() - cursor.GetClicPos());
-  GetWorld().ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetClicPos().x,
+  world.ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetClicPos().x,
                                     GetPosition().y - cursor.GetClicPos().y,
 				    surf.GetWidth(), surf.GetHeight()));
 }

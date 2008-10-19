@@ -33,9 +33,9 @@ ButtonPic::ButtonPic(const std::string &label,
 		     const Point2i &_size) :
   Widget(_size)
 {
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  m_img_normal = GetResourceManager().LoadImage(res, resource_id);
-  GetResourceManager().UnLoadXMLProfile(res);
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  m_img_normal = resource_manager.LoadImage(res, resource_id);
+  resource_manager.UnLoadXMLProfile(res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(size.x);

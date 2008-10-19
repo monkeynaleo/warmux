@@ -47,12 +47,7 @@ Profile::~Profile()
   if (doc != NULL) delete doc;
 }
 
-ResourceManager& GetResourceManager()
-{
-  return ResourceManager::GetRef();
-}
-
-ResourceManager::ResourceManager() : base_path("")
+ResourceManager::ResourceManager()
 {
 }
 
@@ -60,7 +55,7 @@ ResourceManager::~ResourceManager()
 {
 }
 
-void ResourceManager::SetDataPath(const std::string& base_path)
+void ResourceManager::AddDataPath(const std::string& base_path)
 {
   this->base_path = base_path;
 }
@@ -348,6 +343,7 @@ Surface ResourceManager::GenerateMap(Profile *profile, InfoMap::Island_type gene
   return random_map.GetRandomMap();
 }
 
+ResourceManager resource_manager;
 
 
 

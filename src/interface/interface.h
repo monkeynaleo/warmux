@@ -86,19 +86,7 @@ public:
    Surface wind_icon;
    Surface wind_indicator;
    Point2i bottom_bar_pos;
-   
-   //Styled box
-   Surface rounding_style [3][3];
-   /*Surface rounding_bottom;
-   Surface rounding_bottom_left;
-   Surface rounding_bottom_right;
-   Surface rounding_top;
-   Surface rounding_top_left;
-   Surface rounding_top_right;
-   Surface rounding_center;
-   Surface rounding_left;
-   Surface rounding_right;
-*/
+
 protected:
   friend class Singleton<Interface>;
    Interface();
@@ -119,12 +107,12 @@ protected:
    void DrawTimeInfo() const;
    void DrawMapPreview();
    void DrawSmallInterface() const;
-   void DrawStyledBox(const Rectanglei &rect) const;
 
    bool IsDisplayed () const { return display; };
    void EnableDisplay(bool _display);
    void Show();
    void Hide();
+   bool IsVisible() const { return display; };
 
    int GetWidth() const { return game_menu.GetWidth(); };
    int GetHeight() const;

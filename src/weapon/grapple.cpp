@@ -33,7 +33,6 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "network/network.h"
-#include "physic/physical_engine.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"
@@ -71,15 +70,15 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
   // make it return the last point still in vacuum
   Point2i new_contact_point = contact_point;
   bool contact_point_uncertain = true;
-  while(!GetWorld().IsOutsideWorld(new_contact_point) &&
+  while(!world.IsOutsideWorld(new_contact_point) &&
         (length > 0))
     {
-      if ( !GetWorld().IsInVacuum( new_contact_point ) )
+      if ( !world.IsInVacuum( new_contact_point ) )
       {
-        ASSERT( contact_point_uncertain || GetWorld().IsInVacuum( contact_point ) );
+        ASSERT( contact_point_uncertain || world.IsInVacuum( contact_point ) );
 
         // for uncertain contact points, see if it's in vacuum
-        if ( contact_point_uncertain && !GetWorld().IsInVacuum( contact_point ) )
+        if ( contact_point_uncertain && !world.IsInVacuum( contact_point ) )
         {
            // it's not, so try our best to return a contact point in vacuum
            // try searching in area NxN around our original point and return
@@ -98,7 +97,7 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
              for ( int j = -search_radius; j <= search_radius; j ++ )
              {
                cur = contact_point + Point2i( i, j );
-               if ( GetWorld().IsInVacuum( cur ) )
+               if ( world.IsInVacuum( cur ) )
                {
                  // check for new closest
                  int distance = i * i + j * j;
@@ -151,9 +150,9 @@ Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
   m_category = MOVE;
   use_unit_on_first_shoot = false;
 
-  m_hook_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_hook");
+  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"grapple_hook");
   m_hook_sprite->EnableRotationCache(32);
-  m_node_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_node");
+  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"grapple_node");
 
   m_is_active = false;
   m_attaching = false;
@@ -270,7 +269,7 @@ bool Grapple::TryAddNode(int CurrentSense)
 
   if (find_first_contact_point(m_fixation_point, angle, lg, 2, contact_point))
     {
-//       rope_angle = ActiveCharacter().GetRopeAngle() ; //TODO : Box2d
+      rope_angle = ActiveCharacter().GetRopeAngle() ;
 
       if ( (last_broken_node_sense * CurrentSense > 0) &&
            (fabs(last_broken_node_angle - rope_angle) < 0.1))
@@ -307,7 +306,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
 
   // [RCL]: nodeSense check seems to be useless... either remove node senses at all or
   // find an example where it is required
-  //  double currentAngle = ActiveCharacter().GetRopeAngle(); //TODO : Box2d
+  double currentAngle = ActiveCharacter().GetRopeAngle();
   Point2i mapRopeStart = ActiveCharacter().GetHandPosition();
 
   const int max_nodes_per_turn = 100; // safe value to avoid network congestion
@@ -326,7 +325,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
     // (NOTE: since nodes are often in ground, we're ignoring traces hitting ground
     // right at the end)
     const float end_proximity_threshold = 0.95f;
-    if ( GetWorld().TraceRay( mapRopeStart, it->pos, tr ) && tr.m_fraction < end_proximity_threshold )
+    if ( world.TraceRay( mapRopeStart, it->pos, tr ) && tr.m_fraction < end_proximity_threshold )
     {
         // collision detected!
         if ( nodes_to_remove > 0 )
@@ -339,8 +338,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
 
     double nodeAngle = it->angle;
 
-    //    int currentAngleSign = ( currentAngle < 0 ) ? -1 : 1;
-    int currentAngleSign = 0;
+    int currentAngleSign = ( currentAngle < 0 ) ? -1 : 1;
     int nodeAngleSign = ( nodeAngle < 0 ) ? -1 : 1;
 
     if ( currentAngleSign != nodeAngleSign && rope_nodes.size() > 2 )
@@ -355,8 +353,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
 
   for ( int i = 0; i < nodes_to_remove; i ++ )
   {
-    //     last_broken_node_angle = currentAngle;
-    last_broken_node_angle = 0;
+     last_broken_node_angle = currentAngle;
      last_broken_node_sense = currentSense;
 
      // remove last node
@@ -389,7 +386,7 @@ void Grapple::NotifyMove(bool collision)
         {
           // The character tryed to change the rope size.
           // There has been a collision, so we cancel the rope length change.
-     //     ActiveCharacter().ChangePhysRopeSize (-delta_len);
+          ActiveCharacter().ChangePhysRopeSize (-delta_len);
           delta_len = 0;
         }
       return;
@@ -446,7 +443,7 @@ void Grapple::Draw()
     angle = m_initial_angle + M_PI/2;
   }
   else {
-    //    angle = ActiveCharacter().GetRopeAngle();
+    angle = ActiveCharacter().GetRopeAngle();
   }
 
   prev_angle = angle;
@@ -510,13 +507,13 @@ void Grapple::AttachRope(const Point2i& contact_point)
   Point2i handPos = ActiveCharacter().GetHandPosition();
   Point2i pos(handPos.x - ActiveCharacter().GetX(),
               handPos.y - ActiveCharacter().GetY());
-/*
+
   ActiveCharacter().SetPhysFixationPointXY(
                                            contact_point.x / PIXEL_PER_METER,
                                            contact_point.y / PIXEL_PER_METER,
                                            (double)pos.x / PIXEL_PER_METER,
                                            (double)pos.y / PIXEL_PER_METER);
-*/
+
   m_fixation_point = contact_point;
 
   rope_node_t root_node;
@@ -525,7 +522,7 @@ void Grapple::AttachRope(const Point2i& contact_point)
   root_node.sense = 0;
   rope_nodes.push_back(root_node);
 
-  //ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
+  ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
   m_hooked_time = Time::GetInstance()->Read();
   ActiveCharacter().SetMovement("ninja-rope");
 
@@ -537,8 +534,8 @@ void Grapple::AttachRope(const Point2i& contact_point)
 
 void Grapple::DetachRope()
 {
-  //  if(m_is_active)
-  // ActiveCharacter().UnsetPhysFixationPoint() ;
+  if(m_is_active)
+    ActiveCharacter().UnsetPhysFixationPoint() ;
   rope_nodes.clear();
   m_is_active = false;
 
@@ -556,11 +553,11 @@ void Grapple::AttachNode(const Point2i& contact_point,
   Point2i pos(handPos.x - ActiveCharacter().GetX(),
               handPos.y - ActiveCharacter().GetY());
 
-  /*ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
+  ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
                                            contact_point.y / PIXEL_PER_METER,
                                            (double)pos.x / PIXEL_PER_METER,
                                            (double)pos.y / PIXEL_PER_METER);
-*/
+
   m_fixation_point = contact_point;
   rope_node_t node;
   node.pos = m_fixation_point;
@@ -589,23 +586,21 @@ void Grapple::DetachNode()
   m_fixation_point = rope_nodes.back().pos ;
 
   Point2i handPos = ActiveCharacter().GetHandPosition();
-  //int dx = handPos.x - ActiveCharacter().GetX();
- // int dy = handPos.y - ActiveCharacter().GetY();
+  int dx = handPos.x - ActiveCharacter().GetX();
+  int dy = handPos.y - ActiveCharacter().GetY();
 
-  /*ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
+  ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
                                            m_fixation_point.y / PIXEL_PER_METER,
                                            (double)dx / PIXEL_PER_METER,
-                                           (double)dy / PIXEL_PER_METER);*/
+                                           (double)dy / PIXEL_PER_METER);
 }
 
 // =========================== Moves management
 
 void Grapple::SetRopeSize(double length) const
 {
-  //  double delta = length - ActiveCharacter().GetRopeLength();
-  double delta = 0;  
-  length = delta;//TODO : REMOVE THIS VERY BAD COMPIL FIX
- // ActiveCharacter().ChangePhysRopeSize (delta);
+  double delta = length - ActiveCharacter().GetRopeLength();
+  ActiveCharacter().ChangePhysRopeSize (delta);
 }
 
 void Grapple::GoUp()
@@ -615,7 +610,7 @@ void Grapple::GoUp()
   last_mvt = Time::GetInstance()->Read();
 
   delta_len = -0.1 ;
- // ActiveCharacter().ChangePhysRopeSize (delta_len);
+  ActiveCharacter().ChangePhysRopeSize (delta_len);
   ActiveCharacter().UpdatePosition();
   delta_len = 0 ;
 }
@@ -631,11 +626,11 @@ void Grapple::GoDown()
     return;
   last_mvt = Time::GetInstance()->Read();
 
-  //if (ActiveCharacter().GetRopeLength() >= cfg().max_rope_length / PIXEL_PER_METER)
-  //return;
+  if (ActiveCharacter().GetRopeLength() >= cfg().max_rope_length / PIXEL_PER_METER)
+    return;
 
   delta_len = 0.1 ;
- // ActiveCharacter().ChangePhysRopeSize (delta_len) ;
+  ActiveCharacter().ChangePhysRopeSize (delta_len) ;
   ActiveCharacter().UpdatePosition() ;
   delta_len = 0 ;
 }
@@ -651,7 +646,7 @@ void Grapple::GoRight()
     cable_sound.Play("share", "weapon/grapple_cable");
   }
   go_right = true ;
-  //ActiveCharacter().SetExternForce(cfg().push_force,0);
+  ActiveCharacter().SetExternForce(cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_RIGHT);
   ActiveCharacter().UpdatePosition() ;
 }
@@ -663,7 +658,7 @@ void Grapple::StopRight()
   if (go_left || go_right)
     return ;
 
-  //ActiveCharacter().SetExternForce(0,0);
+  ActiveCharacter().SetExternForce(0,0);
 }
 
 void Grapple::GoLeft()
@@ -672,7 +667,7 @@ void Grapple::GoLeft()
     cable_sound.Play("share", "weapon/grapple_cable");
   }
   go_left = true ;
-  //ActiveCharacter().SetExternForce(-cfg().push_force,0);
+  ActiveCharacter().SetExternForce(-cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_LEFT);
   ActiveCharacter().UpdatePosition() ;
 }
@@ -684,7 +679,7 @@ void Grapple::StopLeft()
   if (go_left || go_right)
     return ;
 
- // ActiveCharacter().SetExternForce(0,0);
+  ActiveCharacter().SetExternForce(0,0);
 }
 
 // =========================== Keys management
@@ -794,12 +789,11 @@ void Grapple::HandleKeyPressed_Shoot(bool)
 
 void Grapple::PrintDebugRope()
 {
-//   printf("%05d %05d %03.3f\n",
-//          ActiveCharacter().GetX(),
-//          ActiveCharacter().GetY(),
-// 	          ActiveCharacter().GetRopeAngle());
+  printf("%05d %05d %03.3f\n",
+         ActiveCharacter().GetX(),
+         ActiveCharacter().GetY(),
+         ActiveCharacter().GetRopeAngle());
 
-	 
   for (std::list<rope_node_t>::iterator it = rope_nodes.begin();
        it != rope_nodes.end();
        it++) {

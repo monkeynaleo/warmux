@@ -32,18 +32,15 @@
 #include "graphic/colors.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include "physic/physical_engine.h"
 #include "tool/i18n.h"
 #include "tool/isnan.h"
 #include "tool/resource_manager.h"
 
 Ground::Ground()
-{
-
+{ //FIXME (to erase)
 }
 
-void Ground::Init()
-{
+void Ground::Init(){
   std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
 
@@ -64,16 +61,14 @@ void Ground::Init()
   std::cout << _("done") << std::endl;
 }
 
-void Ground::Reset()
-{
+void Ground::Reset(){
   Init();
   lastPos.SetValues(INT_MAX, INT_MAX);
 }
 
 // Read the alpha channel of the pixel
-bool Ground::IsEmpty(const Point2i &pos) const
-{
-        ASSERT( !GetWorld().IsOutsideWorldXY(pos.x, pos.y) );
+bool Ground::IsEmpty(const Point2i &pos) const{
+        ASSERT( !world.IsOutsideWorldXY(pos.x, pos.y) );
 
         return GetAlpha( pos ) != 255; // IsTransparent
 }
@@ -85,8 +80,7 @@ bool Ground::IsEmpty(const Point2i &pos) const
  * returns -1.0 if no tangent was found (pixel (x,y) does not touch any
  * other piece of ground
  */
-double Ground::Tangent(int x,int y) const
-{
+double Ground::Tangent(int x,int y) const {
   //Approximation : returns the chord instead of the tangent to the ground
 
   /* We try to find 2 points on the ground on each side of (x,y)
@@ -140,10 +134,10 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //Look for a pixel around (x,y) that is at the edge of the ground
   //and vaccum
   //return true (and set p_x and p_y) if this point have been found
-  if(GetWorld().IsOutsideWorld(Point2i(x-1,y))
-  || GetWorld().IsOutsideWorld(Point2i(x+1,y))
-  || GetWorld().IsOutsideWorld(Point2i(x,y-1))
-  || GetWorld().IsOutsideWorld(Point2i(x,y+1)) )
+  if(world.IsOutsideWorld(Point2i(x-1,y))
+  || world.IsOutsideWorld(Point2i(x+1,y))
+  || world.IsOutsideWorld(Point2i(x,y-1))
+  || world.IsOutsideWorld(Point2i(x,y+1)) )
     return false;
 
   // check adjacents pixels one by one:
@@ -263,13 +257,13 @@ void Ground::Draw(bool redraw_all)
     return;
   }
 
-  RedrawParticleList(*GetWorld().to_redraw_now);
+  RedrawParticleList(*world.to_redraw_now);
 
   // Draw on top of sky (redisplayed on top of particles)
-  RedrawParticleList(*GetWorld().to_redraw_particles_now);
+  RedrawParticleList(*world.to_redraw_particles_now);
 
   // Draw on top of new position of particles (redisplayed on top of particles)
-  RedrawParticleList(*GetWorld().to_redraw_particles);
+  RedrawParticleList(*world.to_redraw_particles);
 
   CheckPreview();
 }

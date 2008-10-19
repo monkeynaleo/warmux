@@ -82,7 +82,7 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot(const Point2i & pos, double strength, double angle)
 {
-  SetCollisionModel( true, true, false ); // a bit hackish...
+  SetCollisionModel( false, true, false ); // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
 
@@ -156,7 +156,7 @@ void ClusterBomb::DoExplosion()
 
   const float angle_range = M_PI / 2;
   Point2i pos = GetPosition();
-  for (uint i = 0; i < fragments; ++i )
+  for (uint i = 0; i < fragments; ++i ) 
   {
     double angle = -M_PI / 2; // this angle is "upwards" here
     double cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
@@ -165,7 +165,7 @@ void ClusterBomb::DoExplosion()
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
     cluster->Shoot( pos, speed, angle + cluster_deviation );
 
-    ObjectsList::GetRef().AddObject(cluster);
+    lst_objects.AddObject(cluster);
   }
 }
 

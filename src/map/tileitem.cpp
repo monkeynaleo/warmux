@@ -21,23 +21,18 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_endian.h>
-#include <Box2D.h>
 #include "map/tile.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
-#include "map/physic_tile.h"
-#include "physic/physical_engine.h"
 #include "tool/error.h"
 #include "tool/math_tools.h"
 #include "tool/point.h"
 //#include "tool/stats.h"
-#ifdef DEBUG
+#ifdef DBG_TILE
 #include "graphic/colors.h"
 #endif
-
-static const uint TILE_MAX_LEVEL = 2;
 
 static const uint TRANSPARENT_WHITE = 0x40FFFFFF;
 
@@ -51,78 +46,45 @@ void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
   }
 }
 
-TileItem_Empty::TileItem_Empty() : TileItem()
-{
-  empty = NULL;
-}
-
-TileItem_Empty::~TileItem_Empty()
-{
-  if (empty)
-    delete empty;
-}
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
-void TileItem_AlphaSoftware::Draw(const Point2i &pos)
-{
+void TileItem_AlphaSoftware::Draw(const Point2i &pos){
   GetMainWindow().Blit(GetSurface(),
-		       pos * CELL_SIZE - Camera::GetInstance()->GetPosition());
-#ifdef DEBUG
-  if (IsLOGGING("polygon.tile")) {
-    m_physic_tile->DrawBorder(primary_green_color);
-  }
-#endif
+        pos * CELL_SIZE - Camera::GetInstance()->GetPosition());
 }
 
 void TileItem_Empty::Draw(const Point2i &/*pos*/)
 {
+#ifdef DBG_TILE
+  GetMainWindow().FillRect(Rectanglei(pos * CELL_SIZE - Camera::GetInstance()->GetPosition(),CELL_SIZE), c_red);
+#endif
 }
-
 // === Implemenation of TileItem_Software_ALpha ==============================
-TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size, const Point2d &shape_offset) :
-  TileItem(),
-  m_size(size),
-  m_physic_tile(NULL),
-  m_shape_offset(shape_offset),
-  last_filled_pixel(NULL),
-  need_delete(false)
-{
-  m_size = size;
-  m_surface = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
-  ResetEmptyCheck();
+TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size){
+    m_size = size;
+    m_surface = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
+    need_delete = false;
+    ResetEmptyCheck();
 
-  m_tile_body = PhysicalEngine::GetInstance()->GetNewGroundBody();
-
-  _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
-  if( m_surface.GetBytesPerPixel() == 4 ){
-    if( m_surface.GetSurface()->format->Amask == 0x000000ff ){
-      if( SDL_BYTEORDER == SDL_LIL_ENDIAN )
-	_GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
-      else
-	_GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
-    }else{
-      if( m_surface.GetSurface()->format->Amask == 0xff000000 ){
-	if (SDL_BYTEORDER == SDL_LIL_ENDIAN )
-	  _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
-	else
-	  _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
-      }
+    _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
+    if( m_surface.GetBytesPerPixel() == 4 ){
+       if( m_surface.GetSurface()->format->Amask == 0x000000ff ){
+           if( SDL_BYTEORDER == SDL_LIL_ENDIAN )
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
+           else
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
+       }else{
+           if( m_surface.GetSurface()->format->Amask == 0xff000000 ){
+                if (SDL_BYTEORDER == SDL_LIL_ENDIAN )
+                    _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
+                else
+                    _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
+            }
+        }
     }
-  }
 }
 
-TileItem_AlphaSoftware::~TileItem_AlphaSoftware()
-{
-  delete m_physic_tile;
-}
-
-void TileItem_AlphaSoftware::InitShape()
-{
-  if (m_physic_tile != NULL) {
-    delete m_physic_tile;
-  }
-
-  m_physic_tile = new PhysicTile(m_size, Point2d(0,0), m_shape_offset, this, NULL, TILE_MAX_LEVEL);
+TileItem_AlphaSoftware::~TileItem_AlphaSoftware(){
 }
 
 void TileItem_AlphaSoftware::ResetEmptyCheck()
@@ -131,49 +93,41 @@ void TileItem_AlphaSoftware::ResetEmptyCheck()
   last_filled_pixel = m_surface.GetPixels();
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha(const Point2i &pos)
-{
-  return (this->*_GetAlpha)(pos);
+unsigned char TileItem_AlphaSoftware::GetAlpha(const Point2i &pos){
+    return (this->*_GetAlpha)(pos);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const Point2i &pos) const
-{
-  return *(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x * 4 + 0);
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const Point2i &pos) const {
+    return *(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x * 4 + 0);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const Point2i &pos) const
-{
-  return *(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x * 4 + 3);
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const Point2i &pos) const {
+    return *(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x * 4 + 3);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos) const
-{
-  unsigned char r, g, b, a;
+unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos) const {
+    unsigned char r, g, b, a;
 
-  Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x*m_surface.GetBytesPerPixel());
-  m_surface.GetRGBA(pixel, r, g, b, a);
+    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + pos.y*m_surface.GetPitch() + pos.x*m_surface.GetBytesPerPixel());
+    m_surface.GetRGBA(pixel, r, g, b, a);
 
-  return a;
+    return a;
 }
 
-void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig)
-{
-  need_check_empty = true;
-  int starting_x = position.x >= 0 ? position.x : 0;
-  int starting_y = position.y >= 0 ? position.y : 0;
-  int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
-  int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
+void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig){
+    need_check_empty = true;
+    int starting_x = position.x >= 0 ? position.x : 0;
+    int starting_y = position.y >= 0 ? position.y : 0;
+    int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
+    int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
 
-  for( int py = starting_y ; py < ending_y ; py++)
-    for( int px = starting_x ; px < ending_x ; px++)
-      if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
-	*(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
-
-  InitShape();
+    for( int py = starting_y ; py < ending_y ; py++)
+        for( int px = starting_x ; px < ending_x ; px++)
+            if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
+                *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
 }
 
-void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius)
-{
+void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
   need_check_empty = true;
   unsigned char* buf   = m_surface.GetPixels();
   const uint line_size = m_surface.GetPitch();
@@ -210,14 +164,11 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius)
 
     Empty(center.x-length, center.x+length, buf, bpp);
   }
-
-  InitShape();
 }
 
 void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
 {
   m_surface.MergeSurface(spr, position);
-  InitShape();
 }
 
 void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shift)
@@ -373,9 +324,4 @@ void TileItem_AlphaSoftware::CheckEmpty()
   {
     need_check_empty = false;
   }
-}
-
-b2Body * TileItem_AlphaSoftware::GetBody() const
-{
-    return m_tile_body;
 }

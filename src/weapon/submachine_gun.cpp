@@ -88,7 +88,7 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   announce_missed_shots = false;
   m_time_between_each_shot = SUBMACHINE_TIME_BETWEEN_SHOOT;
 
-  m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
+  m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
 
   ReloadLauncher();

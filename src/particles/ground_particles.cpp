@@ -28,7 +28,7 @@
 GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
   Particle("ground_particle")
 {
-  SetCollisionModel(false, false, false);
+  SetCollisionModel(true, false, false);
   SetSize(Point2i(1,1));
   m_initial_time_to_live = 1; // used as a boolean because we redefine Refresh!
   m_left_time_to_live = 1; // used as a boolean because we redefine Refresh!
@@ -37,7 +37,7 @@ GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
   Rectanglei rec;
   rec.SetPosition( position - size / 2);
   rec.SetSize( size );
-  image = new Sprite(GetWorld().ground.GetPart(rec));
+  image = new Sprite(world.ground.GetPart(rec));
 }
 
 void GroundParticle::Refresh()

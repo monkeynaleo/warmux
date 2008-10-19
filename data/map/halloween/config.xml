@@ -13,7 +13,7 @@
   <surface name="preview" file="preview.jpg" />
 
   <name>Halloween 2</name>
-  <water>no</water>
+  <water>0</water>
   <nb_mine>3</nb_mine>
   <is_open>1</is_open>
   <!-- pad is given in pixel count. -->
