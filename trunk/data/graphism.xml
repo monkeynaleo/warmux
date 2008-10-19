@@ -221,6 +221,10 @@
   <surface name="rounding_center" file="interface/rounding_center.png" />
   <surface name="rounding_left" file="interface/rounding_left.png" />
   <surface name="rounding_right" file="interface/rounding_right.png" />
+  <surface name="rounding_mask_bottom_left" file="interface/hide_bottomleft.png" />
+  <surface name="rounding_mask_bottom_right" file="interface/hide_bottomright.png" />
+  <surface name="rounding_mask_top_left" file="interface/hide_topleft.png" />
+  <surface name="rounding_mask_top_right" file="interface/hide_topright.png" />
 </section>
 
 <section name="loading_screen">

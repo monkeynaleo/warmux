@@ -305,7 +305,7 @@ int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &
  * @param spr
  * @param position
  */
-void Surface::MergeSurface(Surface &spr, const Point2i &pos)
+void Surface::MergeSurface( Surface &spr, const Point2i &pos)
 {
   Uint32 spr_pix, cur_pix;
   Uint8 r, g, b, a, p_r, p_g, p_b, p_a;
@@ -435,7 +435,7 @@ void Surface::Flip()
   SDL_Flip( surface );
 }
 
-int Surface::BoxColor(const Rectanglei &rect, const Color &color)
+  int Surface::BoxColor(const Rectanglei &rect, const Color &color)
 {
   if( rect.IsSizeZero() )
     return 0;
@@ -900,4 +900,60 @@ Uint32 Surface::ComputeCRC()
 
   Unlock();
   return crc;
+}
+
+
+/**
+ * Set an alpha . This's alpha is set to red value off mask
+ *
+ * @param mask
+ * @param position
+ */
+void Surface::MergeAlphaSurface(const Surface &mask, const Point2i &pos)
+{
+  int dest_x = pos.x;
+  int dest_y = pos.y;
+  int size_x = mask.GetWidth();
+  int size_y = mask.GetHeight();
+  int mask_x = 0;
+  int mask_y = 0;	
+
+  if(dest_x<0){
+    dest_x = 0;
+    mask_x = -pos.x;
+	}
+  if(dest_y<0){
+    dest_y = 0;
+    mask_y = -pos.y;
+  }
+  
+  if((size_x + dest_x) > GetWidth()){
+    size_x = GetWidth()- dest_x; 
+  }
+  
+  if((size_y + dest_y) > GetHeight()){
+    size_y = GetHeight() - dest_y; 
+  }
+  Uint32 temp_pix;
+  
+  Uint32 mask_color, this_color;
+  Uint8 mask_r, mask_g, mask_b, mask_a;
+  Uint8 this_r, this_g, this_b, this_a;
+   
+  for(int i = 0; i<size_x;i++){
+    for(int j = 0;j<size_y;j++){
+      //Copy red pixel of mask in alpha pixel of this 
+      mask_color  = mask.GetPixel(i + mask_x, j + mask_y);
+      this_color = GetPixel(i + dest_x, j + dest_y) ;
+      
+      GetRGBA(this_color, this_r, this_g, this_b, this_a);
+      mask.GetRGBA(mask_color,mask_r,mask_g,mask_b,mask_a);
+      
+      if(mask_r < this_a){
+        temp_pix = MapRGBA(this_r, this_g, this_b, mask_r);
+        PutPixel(i+ dest_x, j + dest_y, temp_pix);  
+      }
+
+    }
+  }
 }
