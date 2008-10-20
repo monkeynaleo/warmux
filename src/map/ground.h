@@ -23,9 +23,23 @@
 #define GROUND_H
 
 #include <list>
-#include "tile.h"
 
-class Ground : public Tile
+
+#include <vector>
+#include "tool/point.h"
+#include "tool/rectangle.h"
+
+// Forward declarations
+class Surface;
+class Sprite;
+class TileItem;
+class TileItem_Empty; 
+
+
+const uint EXPLOSION_BORDER_SIZE = 10;
+
+
+class Ground : public Rectanglei
 {
 private:
   bool open;
@@ -37,6 +51,7 @@ private:
 
 public:
   Ground();
+  ~Ground ();
   void Init();
   void Draw(bool redraw_all);
   void Reset();
@@ -52,6 +67,70 @@ public:
   double Tangent(int x,int y) const ;
 
   void RedrawParticleList(std::list<Rectanglei> &list) const;
+  
+  
+  // Dig a hole
+  void Dig(const Point2i &position, const Surface& provider);
+  // Dig a circle hole
+  void Dig(const Point2i &center, const uint radius);
+
+  // Insert a sprite into the ground
+  void PutSprite(const Point2i& pos, const Sprite* spr);
+  // Merge a sprite into map (using alpha information)
+  void MergeSprite(const Point2i &position, Surface & provider);
+
+  // Load an image
+  void LoadImage(Surface& ground_surface, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
+
+  // Get alpha value of a pixel
+  unsigned char GetAlpha(const Point2i &pos) const;
+
+  // Draw it (on the entire visible part)
+  void DrawTile();
+
+  // Draw a part that is inside the given clipping rectangle
+  // Clipping rectangle is in World corrdinate not screen coordinates
+  // usefull to redraw only a part that is under a sprite that has moved,...
+  void DrawTile_Clipped(Rectanglei clip_rectangle) const;
+
+  // Return a surface of the ground inside the rect
+  Surface GetPart(const Rectanglei& rec);
+
+  // Return the preview
+  const Surface* GetPreview() const { return m_preview; };
+  void  CheckPreview();
+  const Point2i& GetPreviewSize() const { return m_preview_size; };
+  const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
+  // Translate world coordinates into a preview ones
+  // @warning assumes CELL_SIZE is 64x64
+  Point2i PreviewCoordinates(const Point2i& pos) { return (pos-m_upper_left_offset)>>m_shift; };
+
+  // Check if a title is empty, so we can delete it
+  void CheckEmptyTiles();
+  
+  protected:
+    void InitGround(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
+
+  void FreeMem();
+  Point2i Clamp(const Point2i &v) const { return v.clamp(Point2i(0, 0), nbCells - 1); };
+
+  // Ground dimensions
+  Point2i nbCells;
+
+  void InitPreview();
+  Surface*   m_preview;
+  uint       m_shift;
+  Point2i    m_last_video_size;
+  Point2i    m_preview_size;
+  Rectanglei m_preview_rect;
+
+  Point2i m_upper_left_offset;
+  Point2i m_lower_right_offset;
+
+
+  // Canvas giving access to tiles
+  std::vector<TileItem *> item;
+  
 };
 
 #endif
