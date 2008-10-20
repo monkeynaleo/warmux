@@ -90,7 +90,6 @@ wormux_SOURCES = \
 	map/physic_tile.cpp map/physic_tile.h \
         map/random_map.cpp map/random_map.h \
         map/sky.cpp map/sky.h \
-        map/tile.cpp map/tile.h \
         map/tileitem.cpp map/tileitem.h \
         map/water.cpp map/water.h \
         map/wind.cpp map/wind.h \

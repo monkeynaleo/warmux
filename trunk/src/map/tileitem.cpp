@@ -22,7 +22,7 @@
 #include <SDL.h>
 #include <SDL_endian.h>
 #include <Box2D.h>
-#include "map/tile.h"
+#include "map/ground.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
