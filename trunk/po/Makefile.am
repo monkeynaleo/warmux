@@ -178,8 +178,6 @@ POTFILES = \
         src/map/random_map.h \
         src/map/sky.cpp \
         src/map/sky.h \
-        src/map/tile.cpp \
-        src/map/tile.h \
         src/map/tileitem.cpp \
         src/map/tileitem.h \
         src/map/water.cpp \
