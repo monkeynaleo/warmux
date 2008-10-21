@@ -14,8 +14,9 @@ HKLM_PATH="SOFTWARE\Games\Wormux"
 
 # Version number in installer
 WORMUX_VERSION=r$(LC_ALL=C svn info 2> /dev/null | grep Revision | cut -d' ' -f2)
-
-#0.8.1
+if [ "$WORMUX_VERSION" -eq "r" ]; then
+  WORMUX_VERSION=$(grep PACKAGE_VERSION src/config.h | cut -d'"' -f2)
+fi
 
 # Set compression and in/out
 COMPRESSION="/solid lzma"
