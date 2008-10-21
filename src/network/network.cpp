@@ -420,7 +420,7 @@ connection_state_t WIN32_CheckHost(const std::string &host, int prt)
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
   {
-    return GetError();
+    return Network::GetError();
   }
   closesocket(fd);
   return CONNECTED;
