@@ -45,7 +45,8 @@ const Point2i BORDER_POSITION(5, 5);
 
 const uint MARGIN = 4;
 
-Interface::Interface()
+Interface::Interface():
+m_last_minimap_redraw(0)
 {
   display = true;
   start_hide_display = 0;
@@ -322,7 +323,13 @@ void Interface::DrawMapPreview()
   Point2i        offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
   Rectanglei     rect_preview(offset, GetWorld().ground.GetPreviewSize());
  
-  if(minimap == NULL){
+  if(minimap == NULL || 
+      GetWorld().ground.GetLastPreviewRedrawTime()>m_last_minimap_redraw ||
+      GetWorld().water.GetLastPreviewRedrawTime()>m_last_minimap_redraw){
+    
+    m_last_minimap_redraw = Time::GetInstance()->Read();
+    
+    if (minimap) delete minimap;
     
     Surface preview(*GetWorld().ground.GetPreview());
     minimap = new Surface(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));

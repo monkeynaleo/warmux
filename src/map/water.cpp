@@ -48,7 +48,8 @@ Water::Water() :
   shift1(0),
   water_height(0),
   temps_montee(0),
-  water_type(NO_WATER)
+  water_type(NO_WATER),
+  m_last_preview_redraw(0)
 {
   for (uint i = 0; i < pattern_width; i++) {
     height[i] = 0;
@@ -133,6 +134,7 @@ void Water::Reset()
   Init();
   water_height = WATER_INITIAL_HEIGHT;
   temps_montee = GO_UP_TIME * 60 * 1000;
+  
   Refresh(); // Calculate first height position
 }
 
@@ -158,6 +160,7 @@ void Water::Refresh()
   Time * global_time = Time::GetInstance();
   if (temps_montee < global_time->Read())
   {
+    m_last_preview_redraw = Time::GetInstance()->Read();
     if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > global_time->Read()){
       uint dt=global_time->Read()- temps_montee;
       height_mvt = GO_UP_STEP +
