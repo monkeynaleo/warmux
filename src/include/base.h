@@ -23,13 +23,6 @@
 #define BASE_H
 //-----------------------------------------------------------------------------
 
-// Debug mode can be deactivated by adding -DRELEASE when compiling
-#ifndef DEBUG
-#  define RELEASE
-#endif
-
-//-----------------------------------------------------------------------------
-
 #ifndef _MSC_VER
 typedef unsigned char  uchar;
 typedef unsigned short ushort;
@@ -52,11 +45,6 @@ typedef long int         ssize_t;
 typedef signed   __int16  int16_t;
 typedef unsigned __int32  uint32_t;
 #endif
-
-//-----------------------------------------------------------------------------
-
-#define XSTR(x) #x
-#define STR(x) XSTR(x)
 
 //-----------------------------------------------------------------------------
 #include "tool/error.h"
