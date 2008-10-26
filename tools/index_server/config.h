@@ -19,16 +19,18 @@
 
 #ifndef CONFIG_H
 #define CONFIG_H
+#include <list>
 #include <map>
 #include <string>
 
-const int VERSION = 1;
+const int VERSION = 2;
 
 class Config
 {
   std::map<std::string, std::string> str_value;
   std::map<std::string, int> int_value;
   std::map<std::string, bool> bool_value;
+  std::list<std::string> supported_versions;
 
   void SetDefault(const std::string & name, const std::string & value);
   void SetDefault(const std::string & name, const int & value);
@@ -39,12 +41,12 @@ class Config
  public:
   Config();
 
-  bool Get( const std::string & name,
-            std::string & value);
-  bool Get( const std::string & name,
-            int & value);
-  bool Get( const std::string & name,
-            bool & value);
+  bool Get( const std::string & name, std::string & value) const;
+  bool Get( const std::string & name, int & value) const;
+  bool Get( const std::string & name, bool & value) const;
+
+  bool IsVersionSupported(const std::string & version) const;
+  const std::string SupportedVersions2Str() const;
 };
 
 extern Config config;
