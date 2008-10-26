@@ -25,7 +25,7 @@
 #include "download.h"
 #include "debug.h"
 #include "config.h"
-#include "../../src/network/index_svr_msg.h"
+#include "index_svr_msg.h"
 
 class Downloader
 {

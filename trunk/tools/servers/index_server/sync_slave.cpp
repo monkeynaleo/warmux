@@ -29,7 +29,7 @@
 #include "download.h"
 #include "debug.h"
 #include "stat.h"
-#include "../../src/network/index_svr_msg.h"
+#include "index_svr_msg.h"
 
 SyncSlave sync_slave;
 

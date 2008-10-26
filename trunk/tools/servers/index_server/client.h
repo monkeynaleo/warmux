@@ -21,7 +21,7 @@
 #define CLIENT_H
 #include <netinet/in.h>
 #include <string>
-#include "../../src/network/index_svr_msg.h"
+#include "index_svr_msg.h"
 #include "net_data.h"
 
 class HostOptions {
