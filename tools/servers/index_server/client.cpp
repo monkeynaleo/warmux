@@ -34,7 +34,7 @@
 #include "debug.h"
 #include "sync_slave.h"
 #include "stat.h"
-#include "../../src/network/index_svr_msg.h"
+#include "index_svr_msg.h"
 
 // map < version, client >
 extern std::multimap<std::string,Client*> clients;

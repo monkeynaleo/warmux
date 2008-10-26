@@ -4,7 +4,7 @@ CXXFLAGS:=-g -DDEBUG -Wall -Werror $(CXXFLAGS)
 OBJ=main.o server.o client.o config.o net_data.o download.o sync_slave.o clock.o stat.o
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -MMD -I../common/ -c -o $@ $<
 
 wormux_server: $(OBJ)
 	$(CXX) $(CXXFLAGS) -o wormux_server $(OBJ) $(LDFLAGS)
