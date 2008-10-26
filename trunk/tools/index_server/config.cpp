@@ -80,6 +80,30 @@ void Config::Load()
       std::string opt = line.substr(0, equ_pos);
       std::string val = line.substr(equ_pos+1);
 
+      if (opt == "versions")
+	{
+	  // split the string on ','
+	  std::string::size_type prev_pos = 0;
+	  std::string::size_type comma_pos = 0;
+	  std::string version;
+
+	  do {
+	    comma_pos = val.find(',', prev_pos);
+
+	    if  (comma_pos != std::string::npos) {
+	      version = val.substr(prev_pos, comma_pos - prev_pos);
+	      prev_pos = comma_pos+1;
+	    } else {
+	      version = val.substr(prev_pos);
+	    }
+	    supported_versions.push_back(version);
+
+	  } while (comma_pos != std::string::npos);
+
+
+	  continue;
+	}
+
       // val is considered to be an int if it doesn't contain
       // a '.' (ip address have to be handled as string...
       if(val.find('.',0) == std::string::npos
@@ -104,6 +128,11 @@ void Config::Load()
   fin.close();
 
   DPRINT(INFO, "Config loaded");
+
+  if (supported_versions.empty()) {
+    DPRINT(INFO, "No supported versions ?!? You must fill option 'versions'");
+    exit(EXIT_FAILURE);
+  }
 }
 
 void Config::Display()
@@ -129,41 +158,46 @@ void Config::Display()
     {
       DPRINT(INFO, "(str) %s = %s", cfg->first.c_str(), cfg->second.c_str());
     }
+
+  DPRINT(INFO, "Supported versions: %s", SupportedVersions2Str().c_str());
 }
 
-bool Config::Get(const std::string & name, bool & value)
+bool Config::Get(const std::string & name, bool & value) const
 {
-  if( bool_value.find(name) == bool_value.end() )
-    {
-      DPRINT(INFO, "Configuration option not found: %s", name.c_str());
-      return false;
-    }
+  std::map<std::string, bool>::const_iterator it = bool_value.find(name);
 
-  value = bool_value[ name ];
+  if (it == bool_value.end()) {
+    DPRINT(INFO, "Configuration option not found: %s", name.c_str());
+    return false;
+  }
+
+  value = it->second;
   return true;
 }
 
-bool Config::Get(const std::string & name, int & value)
+bool Config::Get(const std::string & name, int & value) const
 {
-  if( int_value.find(name) == int_value.end() )
-    {
-      DPRINT(INFO, "Unknown config option: %s", name.c_str());
-      return false;
-    }
+  std::map<std::string, int>::const_iterator it = int_value.find(name);
 
-  value = int_value[ name ];
+  if (it == int_value.end()) {
+    DPRINT(INFO, "Unknown config option: %s", name.c_str());
+    return false;
+  }
+
+  value = it->second;
   return true;
 }
 
-bool Config::Get(const std::string & name, std::string & value)
+bool Config::Get(const std::string & name, std::string & value) const
 {
-  if( str_value.find(name) == str_value.end() )
-    {
-      DPRINT(INFO, "Unknown config option: %s", name.c_str());
-      return false;
-    }
+  std::map<std::string, std::string>::const_iterator it = str_value.find(name);
 
-  value = str_value[ name ];
+  if (it == str_value.end()) {
+    DPRINT(INFO, "Unknown config option: %s", name.c_str());
+    return false;
+  }
+
+  value = it->second;
   return true;
 }
 
@@ -197,3 +231,29 @@ void Config::SetDefault(const std::string & name, const std::string & value)
     }
 }
 
+
+bool Config::IsVersionSupported(const std::string & version) const
+{
+  std::list<std::string>::const_iterator it;
+  for (it = supported_versions.begin();
+       it != supported_versions.end();
+       it++) {
+    if (version == *it)
+      return true;
+  }
+
+  return false;
+}
+
+const std::string Config::SupportedVersions2Str() const
+{
+  std::string versions = "";
+  std::list<std::string>::const_iterator it;
+  for (it = supported_versions.begin();
+       it != supported_versions.end();
+       it++) {
+    versions += *it + ',';
+  }
+
+  return versions.substr(0, versions.size()-1);
+}

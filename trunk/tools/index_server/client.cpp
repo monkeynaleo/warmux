@@ -96,10 +96,7 @@ bool Client::HandShake(const std::string & version)
   if (handshake_done)
     return false;
 
-  if (version == "0.8"
-      || version == "0.8.1"
-      || version == "0.8.2"
-      || version == "0.8.1svn")
+  if (config.IsVersionSupported(version))
     {
       stats.NewClient();
       if (!SendSignature())
@@ -304,7 +301,7 @@ bool Client::RejectBadVersion()
   r = SendStr("Bad version");
   if (!r)
     goto err_send;
-  r = SendStr("0.8, 0.8.1, 0.8.2, 0.8.1svn");
+  r = SendStr(config.SupportedVersions2Str());
   if (!r)
     goto err_send;
 
