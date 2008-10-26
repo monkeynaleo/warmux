@@ -17,22 +17,23 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#include <string>
-#include <fstream>
-#include "config.h"
-#include "debug.h"
+#ifndef BASIC_CLOCK_H
+#define BASIC_CLOCK_H
+#include <time.h>
 
-Config config;
-
-Config::Config() : BasicConfig("wormux_server.conf")
+class BasicClock
 {
-  Load();
-  SetDefault("port", 9997);
-  SetDefault("working_dir", "wormux_log/");
-  SetDefault("chroot", true);
-  SetDefault("chroot_gid", 500);
-  SetDefault("chroot_uid", 500);
-  SetDefault("connexion_max", -2);
-  SetDefault("local", false);
-  Display();
-}
+private:
+  time_t start_time;
+  char uptime_str[256];
+
+public:
+  BasicClock();
+  const char* UpTimeStr();
+
+  static const char* TimeStr();
+  static const char* DateStr();
+};
+
+#endif //BASIC_CLOCK_H
+

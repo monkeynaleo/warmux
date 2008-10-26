@@ -17,22 +17,37 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
+#ifndef BASIC_CONFIG_H
+#define BASIC_CONFIG_H
+#include <list>
+#include <map>
 #include <string>
-#include <fstream>
-#include "config.h"
-#include "debug.h"
 
-Config config;
-
-Config::Config() : BasicConfig("wormux_server.conf")
+class BasicConfig
 {
-  Load();
-  SetDefault("port", 9997);
-  SetDefault("working_dir", "wormux_log/");
-  SetDefault("chroot", true);
-  SetDefault("chroot_gid", 500);
-  SetDefault("chroot_uid", 500);
-  SetDefault("connexion_max", -2);
-  SetDefault("local", false);
-  Display();
-}
+  std::string config_file;
+
+  std::map<std::string, std::string> str_value;
+  std::map<std::string, int> int_value;
+  std::map<std::string, bool> bool_value;
+  std::list<std::string> supported_versions;
+
+protected:
+  void SetDefault(const std::string & name, const std::string & value);
+  void SetDefault(const std::string & name, const int & value);
+  void SetDefault(const std::string & name, const bool & value);
+
+  void Load();
+  void Display() const;
+public:
+  BasicConfig(const std::string & config_file);
+
+  bool Get(const std::string & name, std::string & value) const;
+  bool Get(const std::string & name, int & value) const;
+  bool Get(const std::string & name, bool & value) const;
+
+  bool IsVersionSupported(const std::string & version) const;
+  const std::string SupportedVersions2Str() const;
+};
+
+#endif

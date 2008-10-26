@@ -24,7 +24,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-#include "clock.h"
+#include "basic_clock.h"
 
 #define ALL        0
 #define TRAFFIC    1
@@ -40,7 +40,7 @@
   {                                                                     \
     if((LEVEL) >= LOG_LEVEL )                                           \
       {                                                                 \
-        printf("%s %s| %14s,%4i : ", wx_clock.DateStr(), wx_clock.TimeStr(),__FILE__,__LINE__); \
+        printf("%s %s| %18s,%4i : ", BasicClock::DateStr(), BasicClock::TimeStr(),__FILE__,__LINE__); \
         printf(ARGS);                                                   \
         printf("\n");                                                   \
       }                                                                 \

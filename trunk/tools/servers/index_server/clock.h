@@ -19,22 +19,16 @@
 
 #ifndef CLOCK_H
 #define CLOCK_H
-#include <time.h>
+#include "basic_clock.h"
 
-class Clock
+class Clock : public BasicClock
 {
-  time_t start_time;
+private:
   time_t last_refresh;
 
-  char time_str[1024];
-  char date_str[1024];
-
- public:
+public:
   Clock();
   void HandleJobs(bool local=false);
-  const char* TimeStr();
-  const char* DateStr();
-  void ShowUpTime();
 };
 
 extern Clock wx_clock;
