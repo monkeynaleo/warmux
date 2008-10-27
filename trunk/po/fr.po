@@ -381,9 +381,9 @@ msgstr[1] ""
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] ""
-"L'équipe %s a gagné %u Lance-Tux ! Depuis quand les pingouins savent voler ??"
+"L'équipe %s a gagné %u Lance-Tux ! Depuis quand les manchots savent voler ??"
 msgstr[1] ""
-"L'équipe %s a gagné %u Lances-Tux ! Depuis quand les pingouins savent "
+"L'équipe %s a gagné %u Lances-Tux ! Depuis quand les manchots savent "
 "voler ??"
 
 #: src/game/game_blitz.cpp:70
