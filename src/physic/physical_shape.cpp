@@ -103,7 +103,7 @@ void PhysicalPolygon::Generate()
   shapeDef.restitution = 0.1f;
   shapeDef.filter.categoryBits = m_filter.categoryBits;
   shapeDef.filter.maskBits = m_filter.maskBits;
-
+  shapeDef.filter.groupIndex = m_filter.groupIndex;
   m_shape = m_body->CreateShape(&shapeDef);
 
   b2MassData massData;
@@ -345,7 +345,7 @@ void PhysicalCircle::Generate()
   shapeDef.restitution = 0.1f;
   shapeDef.filter.categoryBits = m_filter.categoryBits;
   shapeDef.filter.maskBits = m_filter.maskBits;
-
+  shapeDef.filter.groupIndex = m_filter.groupIndex;
   m_shape = m_body->CreateShape(&shapeDef);
 
   b2MassData massData;
