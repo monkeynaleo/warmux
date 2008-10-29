@@ -70,14 +70,10 @@ class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList
 
     void FreeMem();
 
-    inline void AddObject(PhysicalObj * obj) { push_back(obj);};
+    void AddObject(PhysicalObj * obj);
 
     // Overlapse handling
-    inline void RemoveObject(PhysicalObj * obj)
-    {
-      remove(obj);
-      RemoveOverlappedObjectReference(obj);
-    };
+    void RemoveObject(PhysicalObj * obj);
     void AddOverlappedObject(PhysicalObj * obj) { overlapped_objects.push_back(obj); };
     void RemoveOverlappedObjectReference(const PhysicalObj * obj);
     void RemoveOverlappedObject(PhysicalObj * obj) { overlapped_objects.remove(obj); };

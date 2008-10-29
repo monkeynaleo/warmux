@@ -55,7 +55,7 @@ void ObjectsList::PlaceMines()
 
     if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range * PIXEL_PER_METER *1.5 ))
       // detection range is in meter
-      push_back(obj);
+      AddObject(obj);
     else
       delete obj;
   }
@@ -69,12 +69,26 @@ void ObjectsList::PlaceBarrels()
     PetrolBarrel *obj = new PetrolBarrel();
 
     if (obj->PutRandomly(false, 20.0))
-      push_back(obj);
+      AddObject(obj);
     else
       delete obj;
   }
 }
 
+//-----------------------------------------------------------------------------
+void ObjectsList::AddObject(PhysicalObj * obj)
+{
+  push_back(obj);
+  obj->Activate();
+}
+
+//-----------------------------------------------------------------------------
+void ObjectsList::RemoveObject(PhysicalObj * obj)
+{
+  obj->Desactivate();
+  remove(obj);
+  RemoveOverlappedObjectReference(obj);
+};
 
 //-----------------------------------------------------------------------------
 void ObjectsList::Refresh()

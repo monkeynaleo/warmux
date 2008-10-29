@@ -979,7 +979,7 @@ void Character::SetSize(const Point2i &newSize)
   double phys_height = double(newSize.y)/PIXEL_PER_METER;
 
   // Shape position is relative to body
-  PhysicalPolygon *shape = new PhysicalPolygon(m_body);
+  PhysicalPolygon *shape = new PhysicalPolygon();
 
   shape->AddPoint(Point2d(0, 0));
   shape->AddPoint(Point2d(phys_width, 0));
@@ -1001,10 +1001,11 @@ void Character::SetSize(const Point2i &newSize)
   }
   shape->SetFilter(filter_data);
   shape->SetFriction(1.2f);
-  shape->Generate();
+  
+ 
 
   //Feet shape
-  PhysicalCircle *feet_shape = new PhysicalCircle(m_body);
+  PhysicalCircle *feet_shape = new PhysicalCircle();
 
   // Shape position is relative to body
   feet_shape->SetRadius(phys_width/2);
@@ -1012,12 +1013,14 @@ void Character::SetSize(const Point2i &newSize)
   feet_shape->SetPosition(Point2d(phys_width/2, phys_height - phys_width/2));
   feet_shape->SetFriction(1.2f);
   feet_shape->SetFilter(filter_data);
-  feet_shape->Generate();
+  
 
   ClearShapes();
 
   m_shapes.push_back(shape);
   m_shapes.push_back(feet_shape);
+  
+  Generate();
 }
 
 // ###################################################################

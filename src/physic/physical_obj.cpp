@@ -80,12 +80,15 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_nbr_contact(0),
   m_cfg(),
   m_extern_force_index(1),
+  m_is_active(false),
   m_ignore_movements(false),
   m_is_character(false),
   m_is_fire(false),
+  m_is_bullet(false),
   m_last_move(Time::GetInstance()->Read()),
   m_name(name),
   m_rebound_sound(""),
+  m_initial_speed(0,0),
   m_alive(ALIVE),
   m_energy(-1),
   m_allow_negative_y(false)
@@ -97,7 +100,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_body_def->angularDamping = 0.01f;
 
   m_body_def->position.Set(0.0f, 4.0f);
-  m_body = PhysicalEngine::GetInstance()->AddObject(this);
+  
 
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
@@ -111,7 +114,45 @@ PhysicalObj::~PhysicalObj ()
 {
   MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());
   //ClearShapes();
+  Desactivate();
+}
+
+//-----------------------------------------------------------------------------
+void PhysicalObj::Activate()
+{
+  if(!m_is_active){
+    m_is_active =true;
+    m_body = PhysicalEngine::GetInstance()->AddObject(this);
+    SetSpeedXY(m_initial_speed);
+    Generate();
+  }
+}
+
+void PhysicalObj::Generate()
+{
+  if(m_is_active){
+    m_body->SetBullet(m_is_bullet);
+    
+    b2MassData massData;
+    massData.mass = m_mass;
+    massData.center.SetZero();
+    massData.I = 0.0f;
+    m_body->SetMass(&massData);
+    
+    std::list<PhysicalShape*>::iterator it;
+    for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
+      (*it)->SetBody(m_body);
+      (*it)->Generate();
+    }
+  }
+}
+
+void PhysicalObj::Desactivate()
+{
+  if(m_is_active){
+  m_is_active = false;
   PhysicalEngine::GetInstance()->RemoveObject(this);
+  }
 }
 
 //---------------------------------------------------------------------------//
@@ -125,20 +166,25 @@ void PhysicalObj::SetXY(const Point2i &position)
 
 void PhysicalObj::SetXY(const Point2d &position)
 {
-  CheckOverlapping();
-
-  if (IsOutsideWorldXY(Point2i(int(position.x), int(position.y)))) {
-
-    SetPhysXY( position / PIXEL_PER_METER );
-    Ghost();
-    SignalOutOfMap();
-
-  } else {
-    SetPhysXY( position / PIXEL_PER_METER );
-
-    if (FootsInVacuum()) {
-      StartMoving();
+  if(m_is_active){
+    
+    CheckOverlapping();
+  
+    if (IsOutsideWorldXY(Point2i(int(position.x), int(position.y)))) {
+  
+      SetPhysXY( position / PIXEL_PER_METER );
+      Ghost();
+      SignalOutOfMap();
+  
+    } else {
+      SetPhysXY( position / PIXEL_PER_METER );
+  
+      if (FootsInVacuum()) {
+        StartMoving();
+      }
     }
+  }else{
+    SetPhysXY( position / PIXEL_PER_METER ); 
   }
 }
 
@@ -164,12 +210,20 @@ int PhysicalObj::GetY() const
 
 double PhysicalObj::GetPhysX() const
 {
-  return m_body->GetPosition().x;
+  if(m_is_active){
+    return m_body->GetPosition().x;
+  }else{
+   return m_body_def->position.x; 
+  }
 }
 
 double PhysicalObj::GetPhysY() const
 {
-  return m_body->GetPosition().y;
+  if(m_is_active){
+    return m_body->GetPosition().y;
+  }else{
+   return m_body_def->position.y; 
+  }
 }
 
 Point2d PhysicalObj::GetPhysXY() const
@@ -179,6 +233,7 @@ Point2d PhysicalObj::GetPhysXY() const
 
 void PhysicalObj::SetPhysXY(double x, double y)
 {
+  if(m_is_active){
   /* if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
      m_pos_x.x0 = x;
      m_pos_y.x0 = y;*/
@@ -186,6 +241,9 @@ void PhysicalObj::SetPhysXY(double x, double y)
   PhysicalEngine::GetInstance()->StaticStep();
   /*UpdateTimeOfLastMove();
     }*/
+  }else{
+    m_body_def->position.Set(x,y); 
+  }
 }
 
 void PhysicalObj::SetPhysXY(const Point2d &position)
@@ -196,16 +254,20 @@ void PhysicalObj::SetPhysXY(const Point2d &position)
 
 void PhysicalObj::SetSpeedXY (Point2d vector)
 {
+  if(m_is_active){
   if (EqualsZero(vector.x)) vector.x = 0;
   if (EqualsZero(vector.y)) vector.y = 0;
   bool was_moving = IsMoving();
-
-  // setting to FreeFall is done in StartMoving()
-  m_body->SetLinearVelocity(b2Vec2(vector.x,vector.y));
-  if (!was_moving && IsMoving()) {
-    UpdateTimeOfLastMove();
-    StartMoving();
-    m_body->WakeUp();
+  
+    // setting to FreeFall is done in StartMoving()
+    m_body->SetLinearVelocity(b2Vec2(vector.x,vector.y));
+    if (!was_moving && IsMoving()) {
+      UpdateTimeOfLastMove();
+      StartMoving();
+      m_body->WakeUp();
+    }
+  }else{
+    m_initial_speed = vector; 
   }
 }
 
@@ -273,27 +335,28 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   double phys_width = double(newSize.x)/PIXEL_PER_METER;
   double phys_height = double(newSize.y)/PIXEL_PER_METER;
 
-  // Shape position is relative to body
-  PhysicalPolygon *shape = new PhysicalPolygon(m_body);
+ // Shape position is relative to body
+    PhysicalPolygon *shape = new PhysicalPolygon();
+    
+    shape->AddPoint(Point2d(0 , 0));
+    shape->AddPoint(Point2d(phys_width, 0));
+    shape->AddPoint(Point2d(phys_width, phys_height));
+    shape->AddPoint(Point2d(0 , phys_height));
+    shape->SetMass(GetMass());
+  
+    b2FilterData filter_data;
+    filter_data.categoryBits = 0x0001;
+    filter_data.maskBits = 0x0000;
+    if (m_shapes.size() > 0) {
+      filter_data = GetCollisionFilter();
+    }
+    shape->SetFilter(filter_data);
+  
+    ClearShapes();
+  
+    m_shapes.push_back(shape);
 
-  shape->AddPoint(Point2d(0 , 0));
-  shape->AddPoint(Point2d(phys_width, 0));
-  shape->AddPoint(Point2d(phys_width, phys_height));
-  shape->AddPoint(Point2d(0 , phys_height));
-  shape->SetMass(GetMass());
-
-  b2FilterData filter_data;
-  filter_data.categoryBits = 0x0001;
-  filter_data.maskBits = 0x0000;
-  if (m_shapes.size() > 0) {
-    filter_data = GetCollisionFilter();
-  }
-  shape->SetFilter(filter_data);
-  shape->Generate();
-
-  ClearShapes();
-
-  m_shapes.push_back(shape);
+    Generate();
 }
 
 double PhysicalObj::GetWdouble() const
@@ -492,7 +555,13 @@ void PhysicalObj::UpdateTimeOfLastMove()
 
 void PhysicalObj::SetBullet(bool is_bullet)
 {
-  m_body->SetBullet(is_bullet);
+  m_is_bullet = is_bullet;
+  Generate();
+}
+
+void PhysicalObj::AddShape(PhysicalShape *shape)
+{
+  m_shapes.push_back(shape);
 }
 
 void PhysicalObj::ClearShapes()
@@ -516,8 +585,8 @@ void PhysicalObj::SetCollisionFilter(const b2FilterData& filter)
   std::list<PhysicalShape*>::iterator it;
   for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
     (*it)->SetFilter(filter);
-    (*it)->Generate();
   }
+  Generate();
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
@@ -725,6 +794,7 @@ bool PhysicalObj::PutOutOfGround()
 
 void PhysicalObj::Init()
 {
+  Activate();
   if (m_alive != ALIVE)
     MSG_DEBUG( "physic.state", "%s - Init.", m_name.c_str());
 
@@ -1031,7 +1101,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
   uint NB_MAX_TRY = 60;
   bool ok;
   Point2i position;
-
+  
   MSG_DEBUG("physic.position", "%s - Search a position...", m_name.c_str());
 
   do {
@@ -1111,7 +1181,6 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
   } while (!ok);
 
   MSG_DEBUG("physic.position", "Put '%s' after %u tries", m_name.c_str(), bcl);
-
   return true;
 }
 
@@ -1140,13 +1209,7 @@ void PhysicalObj::DrawPolygon(const Color& color) const
 void PhysicalObj::SetMass(double mass)
 {
   m_mass = mass;
-
-  b2MassData massData;
-  massData.mass = m_mass;
-  massData.center.SetZero();
-  massData.I = 0.0f;
-
-  m_body->SetMass(&massData);
+  Generate();
 }
 
 uint PhysicalObj::AddExternForceXY (const Point2d& vector)
