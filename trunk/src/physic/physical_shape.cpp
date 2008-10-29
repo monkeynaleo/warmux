@@ -29,8 +29,8 @@
 #include "map/camera.h"
 #endif
 
-PhysicalShape::PhysicalShape(b2Body *body) :
-  m_body(body),
+PhysicalShape::PhysicalShape() :
+  m_body(NULL),
   m_shape(NULL),
   m_position(0,0),
   m_mass(-1),
@@ -41,7 +41,7 @@ PhysicalShape::PhysicalShape(b2Body *body) :
 
 PhysicalShape::~PhysicalShape()
 {
-  if (m_shape) {
+  if (m_shape && m_body) {
     m_body->DestroyShape(m_shape);
   }
 }
@@ -71,10 +71,15 @@ void PhysicalShape::SetPosition(Point2d position)
   m_position = position;
 }
 
+void PhysicalShape::SetBody(b2Body *body)
+{
+  m_body = body;
+}
+
 /////////////////////////////////
 // PhysicalPolygon
 
-PhysicalPolygon::PhysicalPolygon(b2Body *body) : PhysicalShape(body)
+PhysicalPolygon::PhysicalPolygon() : PhysicalShape()
 {
 
 }
@@ -300,7 +305,7 @@ void PhysicalPolygon::DrawBorder(const Color& color) const
 /////////////////////////////////
 // PhysicalRectangle
 
-PhysicalRectangle::PhysicalRectangle(b2Body *body, double width, double height) : PhysicalPolygon(body)
+PhysicalRectangle::PhysicalRectangle( double width, double height) : PhysicalPolygon()
 {
   m_width = width;
   m_height = height;
@@ -320,7 +325,7 @@ void PhysicalRectangle::Generate()
 /////////////////////////////////
 // PhysicalCircle
 
-PhysicalCircle::PhysicalCircle(b2Body *body) : PhysicalShape(body)
+PhysicalCircle::PhysicalCircle() : PhysicalShape()
 {
 
 }

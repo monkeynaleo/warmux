@@ -578,6 +578,7 @@ bool Game::NewBox()
        using action handling (see include/action_handler.cpp */
     box->StoreValue(a);
     ActionHandler::GetInstance()->NewAction(a);
+    
     delete box;
     return true;
   }

@@ -93,6 +93,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
       flipped->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
     }
   }
+  Activate();
 }
 
 WindParticle::~WindParticle()

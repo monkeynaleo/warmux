@@ -35,7 +35,7 @@ class Color;
 class PhysicalShape
 {
 public:
-  PhysicalShape(b2Body *body);
+  PhysicalShape();
   virtual ~PhysicalShape();
   virtual void Generate() = 0;
 
@@ -45,6 +45,7 @@ public:
   void SetMass(int mass);
   void SetPosition(Point2d position);
 
+  void SetBody(b2Body *body);
   // returns current max width (taking angle into account)
   virtual double GetCurrentWidth() const = 0;
 
@@ -76,7 +77,7 @@ protected:
 class PhysicalPolygon : public PhysicalShape
 {
 public:
-  PhysicalPolygon(b2Body *body);
+  PhysicalPolygon();
   void AddPoint(Point2d point);
   void Clear();
   virtual void Generate();
@@ -100,7 +101,7 @@ protected:
 class PhysicalRectangle : public PhysicalPolygon
 {
 public:
-  PhysicalRectangle(b2Body *body, double width, double height);
+  PhysicalRectangle( double width, double height);
   virtual void Generate();
 protected:
   double m_width;
@@ -111,7 +112,7 @@ protected:
 class PhysicalCircle : public PhysicalShape
 {
 public:
-  PhysicalCircle(b2Body *body);
+  PhysicalCircle();
   void SetRadius(double radius);
   virtual void Generate();
   virtual double GetCurrentWidth() const;

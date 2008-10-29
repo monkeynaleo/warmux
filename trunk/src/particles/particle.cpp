@@ -57,6 +57,7 @@ Particle::Particle(const std::string &name) :
   image(NULL)
 {
   SetCollisionModel(false, false, false);
+  Activate();
 }
 
 Particle::~Particle()

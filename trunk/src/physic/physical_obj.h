@@ -59,6 +59,7 @@ private:
   const PhysicalObj& operator=(const PhysicalObj&);
   /*********************************************/
 
+ 
   // collision management
   bool m_collides_with_ground;
   bool m_collides_with_characters;
@@ -79,9 +80,11 @@ private:
   uint m_extern_force_index;
 
 protected:
+  bool m_is_active;
   bool m_ignore_movements;
   bool m_is_character;
   bool m_is_fire;
+  bool m_is_bullet;
   b2Body *m_body;
   b2BodyDef *m_body_def;
   std::list<PhysicalShape *> m_shapes;
@@ -89,7 +92,8 @@ protected:
   std::string m_name;
   std::string m_unique_id;
   std::string m_rebound_sound;
-
+  Point2d m_initial_speed;
+  
   alive_t m_alive;
   int m_energy;
 
@@ -107,6 +111,11 @@ public:
    * object does not own it.
    * FIXME what happen if the object is deleted meanwhile ???*/
   virtual ~PhysicalObj ();
+
+
+  void Activate();
+  void Generate();
+  void Desactivate();
 
   // Used to sync value across network
   virtual void GetValueFromAction(Action *);
@@ -313,14 +322,17 @@ public:
   virtual void SignalObjectCollision(PhysicalObj *,const Point2d&) { };
   virtual void SignalGroundCollision(const Point2d&) { };
   virtual void SignalCollision(const Point2d&) { };
+  
 protected:
+  void AddShape( PhysicalShape *shape);
+  void ClearShapes();
   virtual void SignalOutOfMap() { };
   virtual void SignalDeath() { };
   virtual void SignalGhostState (bool) { };
   virtual void SignalDrowning() { };
   virtual void SignalGoingOutOfWater() { };
 
-  void ClearShapes();
+ 
   const b2FilterData& GetCollisionFilter() const;
 
 private:
