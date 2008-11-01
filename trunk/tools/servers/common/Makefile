@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS:=-g -DDEBUG -Wall -Werror $(CXXFLAGS)
 
-OBJ=basic_config.o basic_clock.o
+OBJ=basic_config.o basic_clock.o env.o
 
 common.a: $(OBJ)
 	ar rcs wormux_server_common.a $(OBJ)
