@@ -27,8 +27,6 @@
 #include "include/base.h"
 #include "network/download.h"
 #include "tool/debug.h"
-#include "tool/error.h"
-#include "tool/i18n.h"
 
 Downloader::Downloader():
   curl(curl_easy_init())

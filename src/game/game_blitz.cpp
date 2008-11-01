@@ -19,6 +19,7 @@
  * Specialization of Game methods for the blitz mode.
  *****************************************************************************/
 
+
 #include "character/character.h"
 #include "game/game_blitz.h"
 #include "game/game_mode.h"
@@ -36,7 +37,6 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
 
 // Should be read from game mode
 GameBlitz::GameBlitz()

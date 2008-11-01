@@ -19,7 +19,6 @@
  *  Starting file. (the 'main' function is here.)
  *****************************************************************************/
 
-#include "include/app.h"
 #include <algorithm>
 #include <exception>
 #include <sstream>
@@ -30,8 +29,6 @@
 #ifndef WIN32
 #include <signal.h>
 #endif
-using namespace std;
-
 #include <SDL.h>
 #include "game/config.h"
 #include "game/game.h"
@@ -41,6 +38,8 @@ using namespace std;
 #include "graphic/text.h"
 #include "graphic/video.h"
 #include "include/action_handler.h"
+#include "include/app.h"
+#include "include/base.h"
 #include "include/constant.h"
 #include "include/singleton.h"
 #include "map/map.h"
@@ -55,7 +54,6 @@ using namespace std;
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 #include "tool/random.h"
 
 static MainMenu::menu_item choice = MainMenu::NONE;
@@ -80,7 +78,7 @@ AppWormux::AppWormux():
 {
   JukeBox::GetInstance()->Init();
   RandomLocal().InitRandom();
-  cout << "[ " << _("Run game") << " ]" << endl;
+  std::cout << "[ " << _("Run game") << " ]" << std::endl;
 }
 
 AppWormux::~AppWormux()
@@ -173,18 +171,18 @@ int AppWormux::Main(void)
 
     End();
   }
-  catch(const exception & e)
+  catch(const std::exception & e)
   {
-    cerr << endl
-	 << "C++ exception caught:" << endl
-	 << e.what() << endl << endl;
+    std::cerr << std::endl
+	 << "C++ exception caught:" << std::endl
+	 << e.what() << std::endl << std::endl;
     AppWormux::DisplayError(e.what());
     WakeUpDebugger();
   }
   catch(...)
   {
-    cerr << endl
-      << "Unexpected exception caught..." << endl << endl;
+    std::cerr << std::endl
+      << "Unexpected exception caught..." << std::endl << std::endl;
     WakeUpDebugger();
   }
 
@@ -195,9 +193,9 @@ void AppWormux::DisplayLoadingPicture()
 {
   Config *config = Config::GetInstance();
 
-  string txt_version =
-    _("Version") + string(" ") + Constants::WORMUX_VERSION;
-  string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "loading.png";
+  std::string txt_version =
+    _("Version") + std::string(" ") + Constants::WORMUX_VERSION;
+  std::string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "loading.png";
 
   Surface surfaceLoading(filename.c_str());
   Sprite loading_image(surfaceLoading, true);
@@ -264,7 +262,7 @@ void AppWormux::ReceiveMsgCallback(const std::string& msg)
 
 void AppWormux::End() const
 {
-  cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
+  std::cout << std::endl << "[ " << _("Quit Wormux") << " ]" << std::endl;
 
   /* FIXME calling Config->Save here sucks: it nothing was ever done, it loads
    * the whole stuff just before exiting... This should be moved, but where? */
@@ -275,37 +273,37 @@ void AppWormux::End() const
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
 #endif
-  cout << "o " << _("If you found a bug or have a feature request "
+  std::cout << "o " << _("If you found a bug or have a feature request "
                     "send us a email (in english, please):")
-    << " " << Constants::EMAIL << endl;
+    << " " << Constants::EMAIL << std::endl;
 }
 
 void DisplayWelcomeMessage()
 {
-  cout << "=== " << _("Wormux version ") << Constants::WORMUX_VERSION << endl;
-  cout << "=== " << _("Authors:") << ' ';
-  for (vector < string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
+  std::cout << "=== " << _("Wormux version ") << Constants::WORMUX_VERSION << std::endl;
+  std::cout << "=== " << _("Authors:") << ' ';
+  for (std::vector < std::string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
        fin = Constants::GetInstance()->AUTHORS.end(); it != fin; ++it)
     {
       if (it != Constants::GetInstance()->AUTHORS.begin())
-        cout << ", ";
-      cout << *it;
+        std::cout << ", ";
+      std::cout << *it;
     }
-  cout << endl
-    << "=== " << _("Website: ") << Constants::WEB_SITE << endl
-    << endl;
+  std::cout << std::endl
+    << "=== " << _("Website: ") << Constants::WEB_SITE << std::endl
+    << std::endl;
 
   // print the disclaimer
-  cout << "Wormux version " << Constants::WORMUX_VERSION
-    << ", Copyright (C) 2001-2008 Wormux Team" << endl
-    << "Wormux comes with ABSOLUTELY NO WARRANTY." << endl
-    << "This is free software and you are welcome to redistribute it" << endl
-    << "under certain conditions." << endl << endl
-    << "Read the file COPYING for details." << endl << endl;
+  std::cout << "Wormux version " << Constants::WORMUX_VERSION
+    << ", Copyright (C) 2001-2008 Wormux Team" << std::endl
+    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
+    << "This is free software and you are welcome to redistribute it" << std::endl
+    << "under certain conditions." << std::endl << std::endl
+    << "Read the file COPYING for details." << std::endl << std::endl;
 
 #ifdef DEBUG
-  cout << "This program was compiled in DEBUG mode (development version)"
-       << endl << endl;
+  std::cout << "This program was compiled in DEBUG mode (development version)"
+       << std::endl << std::endl;
 #endif
 }
 

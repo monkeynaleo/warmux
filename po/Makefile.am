@@ -325,14 +325,10 @@ POTFILES = \
         src/tool/debug.h \
         src/tool/debug_physics.cpp \
         src/tool/debug_physics.h \
-        src/tool/error.cpp \
-        src/tool/error.h \
         src/tool/euler_vector.cpp \
         src/tool/euler_vector.h \
         src/tool/file_tools.cpp \
         src/tool/file_tools.h \
-        src/tool/i18n.cpp \
-        src/tool/i18n.h \
         src/tool/isnan.h \
         src/tool/math_tools.h \
         src/tool/point.h \
@@ -431,25 +427,7 @@ POTFILES = \
         src/weapon/weapon_launcher.h \
         src/weapon/weapons_list.cpp \
         src/weapon/weapons_list.h \
-        src/weapon/weapon_strength_bar.h \
-        tools/index_server/client.cpp \
-        tools/index_server/client.h \
-        tools/index_server/clock.cpp \
-        tools/index_server/clock.h \
-        tools/index_server/config.cpp \
-        tools/index_server/config.h \
-        tools/index_server/debug.h \
-        tools/index_server/download.cpp \
-        tools/index_server/download.h \
-        tools/index_server/main.cpp \
-        tools/index_server/net_data.cpp \
-        tools/index_server/net_data.h \
-        tools/index_server/server.cpp \
-        tools/index_server/server.h \
-        tools/index_server/stat.cpp \
-        tools/index_server/stat.h \
-        tools/index_server/sync_slave.cpp \
-        tools/index_server/sync_slave.h
+        src/weapon/weapon_strength_bar.h
 
 DOMAIN = $(PACKAGE)
 

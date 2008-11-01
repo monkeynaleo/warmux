@@ -29,7 +29,7 @@
 #include "sound/jukebox.h"
 #include "interface/game_msg.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
+
 #include "include/action_handler.h"
 
 const double LOW_GRAVITY_FACTOR = 0.4;

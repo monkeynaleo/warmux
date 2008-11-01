@@ -19,6 +19,7 @@
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
 #include <iostream>
+
 #include "ai/ai_engine.h"
 #include "character/character.h"
 #include "game/config.h"
@@ -56,7 +57,6 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/results.h"
-#include "tool/i18n.h"
 #include "tool/random.h"
 #include "tool/stats.h"
 

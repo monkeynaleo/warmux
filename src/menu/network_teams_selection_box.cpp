@@ -30,7 +30,6 @@
 #include "include/action_handler.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-#include "tool/i18n.h"
 #include "tool/string_tools.h"
 
 NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size) :

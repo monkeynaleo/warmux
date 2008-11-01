@@ -35,7 +35,7 @@
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-#include "tool/i18n.h"
+
 #include "tool/resource_manager.h"
 
 const uint TIME_BETWEEN_REBOUND = 600;

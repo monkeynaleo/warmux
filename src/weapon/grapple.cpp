@@ -38,7 +38,7 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-#include "tool/i18n.h"
+
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 

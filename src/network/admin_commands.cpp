@@ -24,7 +24,6 @@
 #include "network/admin_commands.h"
 #include "network/distant_cpu.h"
 #include "network/network.h"
-#include "tool/i18n.h"
 
 static void PrintHelp()
 {

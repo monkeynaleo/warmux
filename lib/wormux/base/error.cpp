@@ -19,17 +19,19 @@
  * Refresh des erreurs, exceptions, assertions, etc.
  *****************************************************************************/
 
-#include "include/base.h"
-#include "include/constant.h"
 #include <cstdlib>
 #include <iostream>
 #include <signal.h>
-#include "tool/i18n.h"
+#include "../include/WORMUX_error.h"
+#include "../include/WORMUX_i18n.h"
+#include "../include/WORMUX_types.h"
 
 #if !defined WIN32 || defined __MINGW32__
 #include <sys/types.h>
 #include <unistd.h>
 #endif
+
+static const std::string WORMUX_VERSION = PACKAGE_VERSION;
 
 void WakeUpDebugger()
 {
@@ -60,7 +62,7 @@ void MissedAssertion (const char *filename, unsigned long line,
 std::string FormatError(const char *filename, unsigned long line,
 			const std::string &txt)
 {
-  return Format(_("Error in %s:%lu (Wormux %s) : %s"), filename, line, Constants::WORMUX_VERSION.c_str(), txt.c_str());
+  return Format(_("Error in %s:%lu (Wormux %s) : %s"), filename, line, WORMUX_VERSION.c_str(), txt.c_str());
 }
 
 

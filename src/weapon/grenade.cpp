@@ -31,7 +31,7 @@
 #include "weapon/explosion.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-#include "tool/i18n.h"
+
 #include "object/objects_list.h"
 //-----------------------------------------------------------------------------
 

@@ -35,7 +35,6 @@
 #include "team/team.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
-#include "tool/i18n.h"
 #include "weapon/weapon.h"
 #include "weapon/weapon_strength_bar.h"
 
@@ -322,45 +321,45 @@ void Interface::DrawMapPreview()
   Surface&       window  = GetMainWindow();
   Point2i        offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
   Rectanglei     rect_preview(offset, GetWorld().ground.GetPreviewSize());
- 
-  if(minimap == NULL || 
+
+  if(minimap == NULL ||
       GetWorld().ground.GetLastPreviewRedrawTime()>m_last_minimap_redraw ||
       GetWorld().water.GetLastPreviewRedrawTime()>m_last_minimap_redraw){
-    
+
     m_last_minimap_redraw = Time::GetInstance()->Read();
-    
+
     if (minimap) delete minimap;
-    
+
     Surface preview(*GetWorld().ground.GetPreview());
     minimap = new Surface(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));
     Point2i mergePos = GetWorld().ground.GetPreviewRect().GetPosition();
     mergePos = -mergePos;
     minimap->MergeSurface(preview,mergePos);
-    
-    
+
+
     // Draw water
     if (GetWorld().water.IsActive()) {
       const Color *color = GetWorld().water.GetColor();
       ASSERT(color);
-      
+
       // Scale water height according to preview size
       uint       h = (GetWorld().water.GetSelfHeight() * rect_preview.GetSizeY() + (GetWorld().GetSize().GetY()/2))
                   / GetWorld().GetSize().GetY();
-                  
+
       Rectanglei water(0, rect_preview.GetSizeY()-h, rect_preview.GetSizeX(), h);
-     
-  
+
+
       Surface water_surf(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));
-    
+
       // Draw box with color according to water type
       water_surf.BoxColor(water, *color);
       minimap->MergeSurface(water_surf,Point2i(0,0));
     }
     GenerateStyledBox(*minimap);
   }
- 
+
   window.Blit(*minimap, offset);
-  
+
   FOR_EACH_TEAM(team) {
     const Surface& icon = (*team)->GetMiniFlag();
     for (Team::iterator character = (*(team))->begin(),
@@ -383,74 +382,74 @@ void Interface::DrawMapPreview()
     }
   }
   GetWorld().ToRedrawOnScreen(rect_preview);
- 
+
 
 }
 
 void Interface::GenerateStyledBox(Surface & source)
 {
-  
+
   Surface save_surf(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));
-  save_surf.MergeSurface(source, Point2i(0,0)); 
+  save_surf.MergeSurface(source, Point2i(0,0));
   Rectanglei temp_rect;
-  
+
   source = Surface(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));
-  
+
   temp_rect.SetPosition(Point2i(0,0));
   temp_rect.SetSize(source.GetSize());
- 
+
   Point2i temp_position;
 
   temp_position = temp_rect.GetPosition();
   source.MergeSurface(rounding_style[0][0], temp_position);
-  
+
   temp_position = temp_rect.GetPosition();
   temp_position.x += temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
   source.MergeSurface(rounding_style[2][0],temp_position);
-  
+
   temp_position = temp_rect.GetPosition();
   temp_position.y += temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
   source.MergeSurface(rounding_style[0][2],temp_position);
-  
+
   temp_position = temp_rect.GetPosition();
   temp_position.x += temp_rect.GetSize().x - rounding_style[2][2].GetSize().x;
   temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
   source.MergeSurface(rounding_style[2][2],temp_position);
-  
-  
+
+
   for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
     temp_position = temp_rect.GetPosition();
     temp_position.x += i;
     source.MergeSurface(rounding_style[1][0],temp_position);
-    
+
     temp_position.y += temp_rect.GetSize().y - rounding_style[1][2].GetSize().y;
     source.MergeSurface(rounding_style[1][2],temp_position);
-  	
+
   }
-  
+
   for(int i = rounding_style[0][0].GetSize().y; i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);i++){
     temp_position = temp_rect.GetPosition();
     temp_position.y += i;
     source.MergeSurface(rounding_style[0][1],temp_position);
-    
+
     temp_position.x += temp_rect.GetSize().x - rounding_style[2][1].GetSize().x;
     source.MergeSurface(rounding_style[2][1],temp_position);
-  	
+
   }
-  
+
   for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
-     
+
     for(int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
       temp_position = temp_rect.GetPosition() + Point2i(i,j);
       source.MergeSurface(rounding_style[1][1],temp_position);
-    }	
+    }
   }
-  
+
   save_surf.MergeAlphaSurface(rounding_style_mask[0][0],Point2i(0,0));
   save_surf.MergeAlphaSurface(rounding_style_mask[2][0],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,0));
   save_surf.MergeAlphaSurface(rounding_style_mask[0][2],Point2i(0,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
   save_surf.MergeAlphaSurface(rounding_style_mask[2][2],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
-  
+
    source.MergeSurface(save_surf, Point2i(0,0));
 }
 

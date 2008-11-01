@@ -38,7 +38,6 @@
 #include "include/app.h"
 #include "network/net_error_msg.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 class GameInfoBox : public HBox

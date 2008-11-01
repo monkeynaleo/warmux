@@ -27,7 +27,6 @@
 #include "game/game_mode.h"
 #include "gui/combo_box.h"
 #include "gui/spin_button_picture.h"
-#include "tool/i18n.h"
 
 const uint TPS_TOUR_MIN = 10;
 const uint TPS_TOUR_MAX = 240;

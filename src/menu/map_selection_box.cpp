@@ -29,7 +29,6 @@
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "network/network.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :

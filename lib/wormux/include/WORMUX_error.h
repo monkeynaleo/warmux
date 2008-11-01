@@ -22,10 +22,6 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-#ifndef BASE_H
-#  error "You have to include base.h only (not the error.h file)"
-#endif
-
 #include <string>
 
 void MissedAssertion (const char *filename, unsigned long line,

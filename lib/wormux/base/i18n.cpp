@@ -20,13 +20,12 @@
  * Eg. : Format("Hello %s", "world") returns "Hello World".
  *****************************************************************************/
 
-#include "tool/i18n.h"
+#include "../include/WORMUX_i18n.h"
+#include "../include/WORMUX_error.h"
 #include <string>
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include "tool/debug.h"
-#include "game/config.h"
 
 #ifdef USE_FRIBIDI
 #include <fribidi/fribidi.h>

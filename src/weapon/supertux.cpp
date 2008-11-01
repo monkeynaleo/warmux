@@ -36,7 +36,7 @@
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/math_tools.h"
-#include "tool/i18n.h"
+
 #include "tool/xml_document.h"
 
 const uint time_delta = 40;

@@ -30,7 +30,6 @@
 #include "team/team.h"
 #include "team/custom_team.h"
 #include "team/custom_teams_list.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :

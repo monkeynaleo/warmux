@@ -19,26 +19,26 @@
  * Terrain de jeu.
  *****************************************************************************/
 
-#include "map/ground.h"
 #include <iostream>
 #include <SDL_video.h>
 #include <SDL_gfxPrimitives.h>
 #include <limits.h>
 #include <Box2D.h>
-#include "map/tileitem.h"
+
 #include "game/game.h"
 #include "game/time.h"
+#include "graphic/colors.h"
 #include "graphic/sprite.h"
-#include "map/camera.h"
-#include "map/map.h"
-#include "map/maps_list.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
-#include "graphic/colors.h"
 #include "include/app.h"
 #include "include/constant.h"
+#include "map/camera.h"
+#include "map/ground.h"
+#include "map/map.h"
+#include "map/maps_list.h"
+#include "map/tileitem.h"
 #include "physic/physical_engine.h"
-#include "tool/i18n.h"
 #include "tool/isnan.h"
 #include "tool/resource_manager.h"
 
@@ -368,7 +368,7 @@ void Ground::Dig(const Point2i &center, const uint radius)
   uint    pitch = m_preview->GetPitch();
   dst += firstCell.y*(CELL_SIZE.y>>m_shift)*pitch;
   m_last_preview_redraw = Time::GetInstance()->Read();
-  
+
   for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
   {
     for( c.x = firstCell.x; c.x <= lastCell.x; c.x++)
@@ -391,7 +391,7 @@ void Ground::MergeSprite(const Point2i &position, Surface& surf)
   uint    pitch = m_preview->GetPitch();
   dst += firstCell.y*(CELL_SIZE.y>>m_shift)*pitch;
   m_last_preview_redraw = Time::GetInstance()->Read();
-  
+
   for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ ) {
 
     for( c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
@@ -436,7 +436,7 @@ void Ground::InitPreview()
 
   m_preview_size = m_preview->GetSize() - (offset / (1<<m_shift));
   m_preview_rect = Rectanglei(m_upper_left_offset / (1<<m_shift), m_preview_size);
-  m_last_preview_redraw = Time::GetInstance()->Read(); 
+  m_last_preview_redraw = Time::GetInstance()->Read();
 }
 
 // Rerender all of the preview
@@ -445,7 +445,7 @@ void Ground::CheckPreview()
   if(m_last_preview_redraw ==0){
     m_last_preview_redraw = Time::GetInstance()->Read();
   }
-  
+
   if (GetMainWindow().GetSize() == m_last_video_size)
     return;
 
@@ -475,7 +475,7 @@ void Ground::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, c
   //m_tile_body->SetXForm(b2Vec2(upper_left_offset.x/PIXEL_PER_METER, upper_left_offset.y/PIXEL_PER_METER), m_tile_body->GetAngle());
 
   InitPreview();
-  
+
   uint8_t *dst  = m_preview->GetPixels();
   uint    pitch = m_preview->GetPitch();
 

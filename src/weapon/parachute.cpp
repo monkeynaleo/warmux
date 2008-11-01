@@ -35,7 +35,7 @@
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-#include "tool/i18n.h"
+
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 

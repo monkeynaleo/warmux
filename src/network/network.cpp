@@ -21,6 +21,7 @@
 
 #include <SDL_thread.h>
 #include <SDL_timer.h>
+
 #include "network/network.h"
 #include "network/network_local.h"
 #include "network/network_client.h"
@@ -36,7 +37,6 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK

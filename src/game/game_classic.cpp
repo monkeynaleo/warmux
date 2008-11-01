@@ -19,6 +19,7 @@
  * Specialization of Game methods for the classic mode.
  *****************************************************************************/
 
+
 #include "character/character.h"
 #include "game/game_classic.h"
 #include "game/game_mode.h"
@@ -40,7 +41,6 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 #include "tool/random.h"
 
 GameClassic::GameClassic()

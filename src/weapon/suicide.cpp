@@ -27,7 +27,7 @@
 #include "character/character.h"
 #include "character/body.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
+
 #include "include/action_handler.h"
 
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())

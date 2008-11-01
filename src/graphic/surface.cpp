@@ -19,14 +19,14 @@
  * Handle a SDL Surface
  *****************************************************************************/
 
-#include "graphic/surface.h"
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
 #include <iostream>
 #include <png.h>
-#include "tool/i18n.h"
+
+#include "graphic/surface.h"
 #include "tool/math_tools.h"
 
 /* texturedPolygon import from SDL_gfx v2.0.15 */
@@ -916,7 +916,7 @@ void Surface::MergeAlphaSurface(const Surface &mask, const Point2i &pos)
   int size_x = mask.GetWidth();
   int size_y = mask.GetHeight();
   int mask_x = 0;
-  int mask_y = 0;	
+  int mask_y = 0;
 
   if(dest_x<0){
     dest_x = 0;
@@ -926,32 +926,32 @@ void Surface::MergeAlphaSurface(const Surface &mask, const Point2i &pos)
     dest_y = 0;
     mask_y = -pos.y;
   }
-  
+
   if((size_x + dest_x) > GetWidth()){
-    size_x = GetWidth()- dest_x; 
+    size_x = GetWidth()- dest_x;
   }
-  
+
   if((size_y + dest_y) > GetHeight()){
-    size_y = GetHeight() - dest_y; 
+    size_y = GetHeight() - dest_y;
   }
   Uint32 temp_pix;
-  
+
   Uint32 mask_color, this_color;
   Uint8 mask_r, mask_g, mask_b, mask_a;
   Uint8 this_r, this_g, this_b, this_a;
-   
+
   for(int i = 0; i<size_x;i++){
     for(int j = 0;j<size_y;j++){
-      //Copy red pixel of mask in alpha pixel of this 
+      //Copy red pixel of mask in alpha pixel of this
       mask_color  = mask.GetPixel(i + mask_x, j + mask_y);
       this_color = GetPixel(i + dest_x, j + dest_y) ;
-      
+
       GetRGBA(this_color, this_r, this_g, this_b, this_a);
       mask.GetRGBA(mask_color,mask_r,mask_g,mask_b,mask_a);
-      
+
       if(mask_r < this_a){
         temp_pix = MapRGBA(this_r, this_g, this_b, mask_r);
-        PutPixel(i+ dest_x, j + dest_y, temp_pix);  
+        PutPixel(i+ dest_x, j + dest_y, temp_pix);
       }
 
     }
