@@ -36,7 +36,7 @@
 #  include <unistd.h> // not needed by mingw
 #endif
 
-#include "tool/i18n.h"
+
 
 // Test if a file exists
 bool DoesFileExist(const std::string &name)

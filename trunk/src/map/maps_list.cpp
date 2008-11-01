@@ -19,6 +19,7 @@
  * Maps list
  *****************************************************************************/
 
+
 #include "include/action.h"
 #include "map/maps_list.h"
 #include "map/water.h"
@@ -27,12 +28,9 @@
 #include "tool/resource_manager.h"
 #include "tool/debug.h"
 #include "tool/file_tools.h"
-#include "tool/i18n.h"
 #include "tool/random.h"
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
-#include <iostream>
-#include <algorithm>
 
 extern const uint MAX_WIND_OBJECTS;
 

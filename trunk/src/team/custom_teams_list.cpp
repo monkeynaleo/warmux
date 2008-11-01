@@ -23,7 +23,7 @@
 #include "team/custom_teams_list.h"
 #include "team/custom_team.h"
 #include "tool/file_tools.h"
-#include "tool/i18n.h"
+
 #include <iostream>
 #include <algorithm>
 

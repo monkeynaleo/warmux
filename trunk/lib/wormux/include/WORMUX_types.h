@@ -15,36 +15,33 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Function used to format string.
- * Eg. : Format("Hello %s", "world") returns "Hello World".
- *****************************************************************************/
+ ******************************************************************************/
 
-#ifndef FORMAT_H
-#define FORMAT_H
+#ifndef WORMUX_TYPES_H
+#define WORMUX_TYPES_H
+//-----------------------------------------------------------------------------
 
-#include "include/base.h"
-#include <string>
-#include <libintl.h>
-
-#ifdef _MSC_VER
-#  include "msvc/config.h"
+#ifndef _MSC_VER
+typedef unsigned char  uchar;
+typedef unsigned short ushort;
+typedef unsigned int   uint;
+typedef unsigned long  ulong;
+typedef unsigned char  uint8;
+//typedef unsigned long uint32;
+typedef signed char    sint8;
+typedef signed long    sint32;
 #else
-#  include "config.h"
+typedef unsigned __int8  uchar;
+typedef unsigned __int16 ushort;
+typedef unsigned int     uint;
+typedef unsigned long    ulong;
+typedef unsigned __int8  uint8;
+typedef signed __int8    sint8;
+typedef signed __int32   sint32;
+typedef long int         ssize_t;
+
+typedef signed   __int16  int16_t;
+typedef unsigned __int32  uint32_t;
 #endif
 
-#ifdef USE_FRIBIDI
-#define _(X) localization(X)
-char * localization(const char * buffer);
-#else
-#ifdef ENABLE_NLS /* gettext */
-#define _(X) gettext(X)
-#else
-#define _(X) X
-#endif /* ENABLE_NLS aka gettext */
-#endif /* USE_FRIBIDI */
-
-std::string Format (const char *format, ...);
-void InitI18N(const std::string &dir, const std::string &default_language);
-
-#endif /* FORMAT_H */
+#endif

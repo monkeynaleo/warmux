@@ -28,7 +28,7 @@
 #include "tool/resource_manager.h"
 #include <string>
 #include <iostream>
-#include "tool/error.h"
+
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
 #include "game/config.h"

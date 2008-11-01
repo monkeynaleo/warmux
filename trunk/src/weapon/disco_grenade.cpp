@@ -32,7 +32,7 @@
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-#include "tool/i18n.h"
+
 
 // The Disco Grenade
 class DiscoGrenade : public WeaponProjectile

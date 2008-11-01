@@ -156,7 +156,7 @@ wormux_SOURCES = \
         team/custom_teams_list.cpp team/custom_teams_list.h \
 	team/macro.h \
         team/results.cpp team/results.h \
-nn        team/team_config.h \
+        team/team_config.h \
         team/team.cpp team/team.h \
         team/team_energy.cpp team/team_energy.h \
         team/teams_list.cpp team/teams_list.h \
@@ -164,10 +164,8 @@ nn        team/team_config.h \
         tool/copynpaste.cpp tool/copynpaste.h \
         tool/debug.cpp tool/debug.h \
         tool/debug_physics.cpp tool/debug_physics.h \
-	tool/error.cpp tool/error.h \
         tool/euler_vector.cpp tool/euler_vector.h \
         tool/file_tools.cpp tool/file_tools.h \
-        tool/i18n.cpp tool/i18n.h \
         tool/isnan.h \
         tool/math_tools.h \
         tool/random.cpp tool/random.h \
@@ -228,7 +226,8 @@ endif
 AM_CXXFLAGS += -DINSTALL_DATADIR=\"@DATADIR@\"      \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
   -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
-  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/box2d/include/ -I$(top_srcdir)/lib/box2d/src/
+  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/box2d/include/ -I$(top_srcdir)/lib/box2d/src/ \
+  -I$(top_srcdir)/lib/wormux/include
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
@@ -246,4 +245,4 @@ else
 LIBS += @LIBCURL@
 endif
 
-LIBS += $(top_srcdir)/lib/box2d/src/libbox2d.a
+LIBS += $(top_srcdir)/lib/box2d/src/libbox2d.a $(top_srcdir)/lib/wormux/libwormux.a

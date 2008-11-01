@@ -32,7 +32,7 @@
 #include "network/randomsync.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
+
 #include "tool/resource_manager.h"
 
 const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;

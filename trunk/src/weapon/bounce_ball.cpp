@@ -30,7 +30,7 @@
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
+
 #include "tool/math_tools.h"
 #include "weapon/explosion.h"
 //-----------------------------------------------------------------------------

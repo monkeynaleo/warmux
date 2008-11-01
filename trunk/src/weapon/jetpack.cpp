@@ -34,7 +34,7 @@
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-#include "tool/i18n.h"
+
 
 const double JETPACK_FORCE = 1800.0;
 

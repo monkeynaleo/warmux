@@ -29,7 +29,7 @@
 #include "game/config.h"
 #include "network/network.h"
 #include "tool/file_tools.h"
-#include "tool/i18n.h"
+
 #include "team/team_energy.h"
 #include <algorithm>
 #include <iostream>

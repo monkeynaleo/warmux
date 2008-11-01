@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "character/move.h"
-//#include <math.h>
 #include "character/character.h"
 #include "game/game.h"
 #include "game/game_mode.h"

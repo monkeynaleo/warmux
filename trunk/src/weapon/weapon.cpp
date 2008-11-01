@@ -36,7 +36,7 @@
 #include "map/camera.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/i18n.h"
+
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"

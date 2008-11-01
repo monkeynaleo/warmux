@@ -29,7 +29,6 @@
 #include "network/distant_cpu.h"
 #include "network/net_error_msg.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK

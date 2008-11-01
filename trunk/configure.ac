@@ -396,6 +396,7 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
 		 lib/box2d/Makefile
 		 lib/box2d/src/Makefile
+		 lib/wormux/Makefile
                  doc/Makefile
                  po/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])

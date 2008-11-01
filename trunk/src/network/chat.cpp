@@ -30,7 +30,6 @@
 #include "network/chat.h"
 #include "network/admin_commands.h"
 #include "network/network.h"
-#include "tool/i18n.h"
 #include "tool/text_handling.h"
 
 const uint HEIGHT=15;

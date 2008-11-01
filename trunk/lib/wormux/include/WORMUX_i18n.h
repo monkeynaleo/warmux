@@ -16,14 +16,34 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Declare types and error functions
+ * Function used to format string.
+ * Eg. : Format("Hello %s", "world") returns "Hello World".
  *****************************************************************************/
 
-#ifndef BASE_H
-#define BASE_H
+#ifndef FORMAT_H
+#define FORMAT_H
 
-#include <WORMUX_types.h>
-#include <WORMUX_i18n.h>
-#include <WORMUX_error.h>
+#include <string>
+#include <libintl.h>
 
+#ifdef _MSC_VER
+#  include "msvc/config.h"
+#else
+#  include "config.h"
 #endif
+
+#ifdef USE_FRIBIDI
+#define _(X) localization(X)
+char * localization(const char * buffer);
+#else
+#ifdef ENABLE_NLS /* gettext */
+#define _(X) gettext(X)
+#else
+#define _(X) X
+#endif /* ENABLE_NLS aka gettext */
+#endif /* USE_FRIBIDI */
+
+std::string Format (const char *format, ...);
+void InitI18N(const std::string &dir, const std::string &default_language);
+
+#endif /* FORMAT_H */

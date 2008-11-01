@@ -25,7 +25,6 @@
 #include "graphic/video.h"
 #include "menu/help_menu.h"
 #include "game/config.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 

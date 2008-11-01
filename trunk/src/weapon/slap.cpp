@@ -30,7 +30,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
+
 #include "tool/xml_document.h"
 #include "include/action_handler.h"
 

@@ -31,7 +31,6 @@
 #include "network/index_svr_msg.h"
 #include "network/network.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 #include "tool/random.h"
 
 IndexServer::IndexServer():

@@ -44,7 +44,6 @@
 #include "team/results.h"
 #include "team/team.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 

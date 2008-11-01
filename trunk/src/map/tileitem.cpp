@@ -26,13 +26,13 @@
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
+#include "include/base.h"
 #include "map/camera.h"
 #include "map/physic_tile.h"
 #include "physic/physical_engine.h"
-#include "tool/error.h"
 #include "tool/math_tools.h"
 #include "tool/point.h"
-//#include "tool/stats.h"
+//tot "tool/stats.h"
 #ifdef DEBUG
 #include "graphic/colors.h"
 #endif

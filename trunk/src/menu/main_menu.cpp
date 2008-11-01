@@ -29,7 +29,6 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/stats.h"
 

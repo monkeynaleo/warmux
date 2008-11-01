@@ -29,7 +29,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/point.h"
-#include "tool/i18n.h"
+
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/explosion.h"

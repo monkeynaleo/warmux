@@ -28,7 +28,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/point.h"
-#include "tool/i18n.h"
+
 #include "tool/xml_document.h"
 
 class SyringeConfig : public WeaponConfig

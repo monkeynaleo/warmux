@@ -20,17 +20,17 @@
  *****************************************************************************/
 
 #include <iostream>
-#include "map/map.h"
-#include "physic/physical_obj.h"
+
+#include "game/time.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
 #include "map/camera.h"
+#include "map/map.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
-#include "game/time.h"
 #include "object/objbox.h"
-#include "tool/i18n.h"
+#include "physic/physical_obj.h"
 #include "tool/math_tools.h"
 
 const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;

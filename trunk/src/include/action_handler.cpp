@@ -22,6 +22,7 @@
 #include <iostream>
 #include <SDL_mutex.h>
 
+
 #include "action_handler.h"
 #include "character/character.h"
 #include "character/body.h"
@@ -52,7 +53,6 @@
 #include "team/team.h"
 #include "team/team_config.h"
 #include "tool/debug.h"
-#include "tool/i18n.h"
 #include "tool/vector2.h"
 #include "sound/jukebox.h"
 #include "weapon/construct.h"

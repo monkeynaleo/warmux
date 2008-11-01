@@ -29,7 +29,6 @@
 #include "graphic/video.h"
 #include "gui/list_box.h"
 #include "include/app.h"
-#include "tool/i18n.h"
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 

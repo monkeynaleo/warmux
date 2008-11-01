@@ -23,6 +23,7 @@
 #define MENU_H
 
 #include "gui/widget_list.h"
+#include "include/base.h"
 
 // Forward declarations
 class Button;
