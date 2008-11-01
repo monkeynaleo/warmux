@@ -283,16 +283,14 @@ void Network::ReceiveActions()
 
 void Network::Init()
 {
-  if (sdlnet_initialized)
-  {
-      std::cout << "Network already initialized!" << std::endl;
+  if (sdlnet_initialized) {
       return;
   }
+
   if (SDLNet_Init()) {
       Error("Failed to initialize network library! (SDL_Net)");
       exit(1);
   }
-  //printf("###  SDL_net start\n");
   sdlnet_initialized = true;
 
   std::cout << "o " << _("Network initialization") << std::endl;

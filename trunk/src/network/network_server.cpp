@@ -210,25 +210,24 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 
 bool NetworkServer::AcceptIncoming()
 {
-  if (!IsServer()) return false;
-
   server_socket = SDLNet_TCP_Open(&ip);
   if (!server_socket)
   {
-    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    fprintf(stderr, "SDLNet_TCP_Open: %s\n", SDLNet_GetError());
     return false;
   }
-  printf("\nStart listening");
+  fprintf(stderr, "\n-> Start listening");
   return true;
 }
 
 void NetworkServer::RejectIncoming()
 {
-  ASSERT(IsServer());
-  if (!server_socket) return;
+  if (!server_socket)
+    return;
+
   SDLNet_TCP_Close(server_socket);
   server_socket = NULL;
-  printf("\noo Stop listening\n");
+  fprintf(stderr, "\n<- Stop listening\n");
 }
 
 void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
