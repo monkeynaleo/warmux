@@ -33,119 +33,42 @@
 #include <list>
 #include <map>
 
-#include "server.h"
-#include "client.h"
 #include "config.h"
-#include "debug.h"
-#include "sync_slave.h"
+#include "client.h"
 #include "clock.h"
+#include "debug.h"
 #include "download.h"
+#include "env.h"
+#include "server.h"
+#include "sync_slave.h"
 #include "stat.h"
 
 // map < version, client >
 std::multimap<std::string, Client*> clients;
 
-void SetChroot()
-{
-  // If root, do chroot
-  if(chroot("./") == -1)
-    TELL_ERROR;
-  if(chdir("/") == -1)
-    TELL_ERROR;
-
-  int uid, gid;
-  config.Get("chroot_uid", uid);
-  config.Get("chroot_gid", gid);
-
-  if(setgid(gid) == -1)
-    TELL_ERROR;
-  if(setuid(uid) == -1)
-    TELL_ERROR;
-}
-
-int SetMaxConnection()
-{
-  // Set the maximum number of file descriptor allowed
-  int max_conn;
-  config.Get("connexion_max", max_conn);
-
-  struct rlimit limit;
-
-  if( getrlimit(RLIMIT_NOFILE, &limit) == -1 )
-    TELL_ERROR;
-
-  // Keep the system default
-  if(max_conn == -2)
-    {
-      DPRINT(INFO, "Number of connexions allowed : system default");
-      return limit.rlim_cur;
-    }
 
 
-  // Use the max allowed
-  if(max_conn == -1)
-    {
-      DPRINT(INFO, "Number of connexions allowed : maximum allowed");
-      limit.rlim_cur = limit.rlim_max;
-    }
-  else
-    {
-      DPRINT(INFO, "Number of connexions allowed : user defined");
-      limit.rlim_cur = max_conn;
-      limit.rlim_max = max_conn;
-    }
-
-  if( setrlimit(RLIMIT_NOFILE, &limit) == -1 )
-    TELL_ERROR;
-  return limit.rlim_cur;
-}
-
-static void signal_handler(int sig, siginfo_t */*si*/, void */*unused*/)
-{
-  DPRINT(INFO, "Signal received: %d", sig);
-}
-
-int main(int argc, void** argv)
+int main(int argc, char* argv[])
 {
   DPRINT(INFO, "Wormux index server version %i", VERSION);
   DPRINT(INFO, "%s", wx_clock.DateStr());
+  Env::SetConfigClass(config);
+  Env::SetWorkingDir();
 
-  std::string working_dir;
-  config.Get("working_dir", working_dir);
-
-  DPRINT(INFO, "Entering folder %s", working_dir.c_str());
-  if(chdir(working_dir.c_str()) == -1)
+  bool local, r;
+  r = config.Get("local", local);
+  if (!r)
     TELL_ERROR;
 
-  bool local;
-  config.Get("local", local);
   if (!local)
     DownloadServerList();
 
-  bool chroot_opt;
-  config.Get("chroot", chroot_opt);
+  Env::SetChroot();
 
-  // Attempt chroot only when root
-  if (chroot_opt && !getgid())
-    SetChroot();
-
-  if(getuid() == 0)
-    {
-      DPRINT(INFO, "Don't start me as root user!!");
-      exit(EXIT_FAILURE);
-    }
-
-  // silently handle SIGPIPE... (not sure it is needed :-/)
-  struct sigaction sa;
-  sa.sa_flags = SA_SIGINFO;
-  sigemptyset(&sa.sa_mask);
-  sa.sa_sigaction = signal_handler;
-  if (sigaction(SIGPIPE, &sa, NULL) == -1)
-    TELL_ERROR;
+  Env::MaskSigPipe();
 
   // Set the maximum number of connection
-  int max_conn = SetMaxConnection();
-  DPRINT(INFO, "Number of connexions allowed : %i", max_conn);
+  Env::SetMaxConnection();
 
   stats.Init();
 
