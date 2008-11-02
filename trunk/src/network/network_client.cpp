@@ -82,10 +82,10 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
   // 1) Send the version number
   MSG_DEBUG("network", "Client: sending version number");
 
-  Network::Send(server_socket, Constants::WORMUX_VERSION);
+  WNet::Send(server_socket, Constants::WORMUX_VERSION);
 
   // is it ok ?
-  r = Network::ReceiveStr(tmp_socket_set, server_socket, version, 40);
+  r = WNet::ReceiveStr(tmp_socket_set, server_socket, version, 40);
 
   MSG_DEBUG("network", "Client: server version number is %s", version.c_str());
 
@@ -103,10 +103,10 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
   // 2) Send the password
 
   MSG_DEBUG("network", "Client: sending password");
-  Network::Send(server_socket, GetPassword());
+  WNet::Send(server_socket, GetPassword());
 
   // is it ok ?
-  r = Network::ReceiveInt(tmp_socket_set, server_socket, ack);
+  r = WNet::ReceiveInt(tmp_socket_set, server_socket, ack);
   if (r)
     goto error;
 
@@ -130,13 +130,13 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
 connection_state_t
 NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 {
-  Init();
+  WNet::Init();
 
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
   int prt = strtol(port.c_str(), NULL, 10);
 
-  connection_state_t r = CheckHost(host, prt);
+  connection_state_t r = WNet::CheckHost(host, prt);
   if (r != CONNECTED)
     return r;
 

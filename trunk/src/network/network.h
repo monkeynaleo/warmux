@@ -22,7 +22,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 //-----------------------------------------------------------------------------
-#include <SDL_net.h>
+#include <WORMUX_network.h>
 #include <list>
 #include <string>
 #include "include/base.h"
@@ -41,27 +41,12 @@
 #  define O_SYNC  O_BINARY
 #endif
 
-const std::string WORMUX_NETWORK_PORT = "3826";
-const uint WORMUX_NETWORK_PORT_INT = 3826;
-
 // Some forward declarations
 struct SDL_Thread;
 class Action;
 class DistantComputer;
 class NetworkServer;
 class NetworkMenu;
-
-typedef enum
-{
-  CONNECTED,
-  CONN_BAD_HOST,
-  CONN_BAD_PORT,
-  CONN_BAD_SOCKET,
-  CONN_REJECTED,
-  CONN_TIMEOUT,
-  CONN_WRONG_PASSWORD,
-  CONN_WRONG_VERSION
-} connection_state_t;
 
 class Network : public Singleton<Network>
 {
@@ -84,7 +69,6 @@ private:
 
   std::string password;
 
-  static bool sdlnet_initialized;
   static int  num_objects;
 
   static bool stop_thread;
@@ -129,7 +113,6 @@ public:
   static Network* GetInstance();
   static NetworkServer* GetInstanceServer(); // WARNING: return NULL if not server!!
 
-  static void Init();
   static void Disconnect();
 
   static bool IsConnected();
@@ -158,7 +141,6 @@ public:
 					const std::string& password);
 
   // Manage network state
-  static connection_state_t CheckHost(const std::string &host, int prt);
   void SetState(Network::network_state_t state);
   Network::network_state_t GetState() const;
   void SendNetworkState() const;
@@ -166,16 +148,6 @@ public:
 
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
-
-  static bool Send(TCPsocket& socket, const int& nbr);
-  static bool Send(TCPsocket& socket, const std::string &str);
-
-  static uint Batch(void* buffer, const int& nbr);
-  static uint Batch(void* buffer, const std::string &str);
-  static bool SendBatch(TCPsocket& socket, void* data, size_t len);
-
-  static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
-  static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str, size_t maxlen);
 };
 
 //-----------------------------------------------------------------------------
