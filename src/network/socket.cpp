@@ -46,11 +46,11 @@ connection_state_t Socket::Connect(std::string host, int port)
 {
   ASSERT(!connected);
 
-  //Network::GetInstance()->Init();
+  //WNet::Init();
 
   MSG_DEBUG("socket", "Client connect to %s:%s", host.c_str(), port);
 
-  connection_state_t r = Network::GetInstance()->CheckHost(host, port);
+  connection_state_t r = WNet::CheckHost(host, port);
   if (r != CONNECTED)
     return r;
 
@@ -150,7 +150,7 @@ connection_state_t Socket::Receive()
         }
 
         int r = SDLNet_TCP_Recv(*sock, buf + buf_size, to_receive);
-        
+
         if(r <= 0)
         {
           free(buf);

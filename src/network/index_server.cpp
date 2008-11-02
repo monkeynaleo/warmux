@@ -84,7 +84,7 @@ connection_state_t IndexServer::Connect()
   // Until we find one running
   while (GetServerAddress(addr, port, nb_servers_tried))
   {
-    r = Network::CheckHost(addr, port);
+    r = WNet::CheckHost(addr, port);
     if (r != CONNECTED)
       continue;
 
@@ -110,7 +110,7 @@ connection_state_t IndexServer::ConnectTo(const std::string & address, const int
 
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
 
-  Network::Init(); // To get SDL_net initialized
+  WNet::Init(); // To get SDL_net initialized
 
   MSG_DEBUG("index_server", "Opening connection");
 
@@ -232,18 +232,18 @@ void IndexServer::NewMsg(IndexServerMsg msg_id)
 void IndexServer::Batch(const int& nbr)
 {
   assert(used+4 < INDEX_SERVER_BUFFER_LENGTH);
-  used += Network::Batch(buffer+used, nbr);
+  used += WNet::Batch(buffer+used, nbr);
 }
 
 void IndexServer::Batch(const std::string &str)
 {
   assert(used+4+str.size() < INDEX_SERVER_BUFFER_LENGTH);
-  used += Network::Batch(buffer+used, str);
+  used += WNet::Batch(buffer+used, str);
 }
 
 bool IndexServer::SendMsg()
 {
-  bool r = Network::SendBatch(socket, buffer, used);
+  bool r = WNet::SendBatch(socket, buffer, used);
   used = 0;
   return r;
 }
@@ -257,7 +257,7 @@ int IndexServer::ReceiveInt()
   }
 
   int r, nbr;
-  r = Network::ReceiveInt(sock_set, socket, nbr);
+  r = WNet::ReceiveInt(sock_set, socket, nbr);
   if (r == -2) {
     Disconnect();
     return 0;
@@ -276,7 +276,7 @@ std::string IndexServer::ReceiveStr(size_t maxlen)
   int r;
   std::string str("");
 
-  r = Network::ReceiveStr(sock_set, socket, str, maxlen);
+  r = WNet::ReceiveStr(sock_set, socket, str, maxlen);
   if (r == -2) {
     Disconnect();
   }

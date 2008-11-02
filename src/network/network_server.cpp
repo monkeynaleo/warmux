@@ -91,7 +91,7 @@ bool NetworkServer::HandShake(TCPsocket& client_socket)
   // 1) Receive the version number
   MSG_DEBUG("network", "Server: waiting for client version number");
 
-  r = Network::ReceiveStr(tmp_socket_set, client_socket, version, 40);
+  r = WNet::ReceiveStr(tmp_socket_set, client_socket, version, 40);
   if (r) {
     std::cerr << "Error " << r << " when receiving version number"
 	      << std::endl;
@@ -100,7 +100,7 @@ bool NetworkServer::HandShake(TCPsocket& client_socket)
 
   MSG_DEBUG("network", "Server: sending version number to client");
 
-  Network::Send(client_socket, Constants::WORMUX_VERSION);
+  WNet::Send(client_socket, Constants::WORMUX_VERSION);
 
   if (Constants::WORMUX_VERSION != version) {
     std::cerr << "Client disconnected: wrong version " << version.c_str()
@@ -111,19 +111,19 @@ bool NetworkServer::HandShake(TCPsocket& client_socket)
   // 2) Check the password
   MSG_DEBUG("network", "Server: waiting for password");
 
-  r = Network::ReceiveStr(tmp_socket_set, client_socket, _password, 100);
+  r = WNet::ReceiveStr(tmp_socket_set, client_socket, _password, 100);
   if (r)
     goto error;
 
   if (_password != GetPassword()) {
     std::cerr << "Client disconnected: wrong password " << _password.c_str()
 	      << std::endl;
-    Network::Send(client_socket, 1);
+    WNet::Send(client_socket, 1);
     goto error;
   }
   MSG_DEBUG("network", "Server: password OK");
 
-  Network::Send(client_socket, 0);
+  WNet::Send(client_socket, 0);
 
   MSG_DEBUG("network", "server: Handshake done successfully :)");
   ret = true;
@@ -164,7 +164,7 @@ void NetworkServer::WaitActionSleep()
 
 connection_state_t NetworkServer::ServerStart(const std::string &port)
 {
-  Init();
+  WNet::Init();
 
   // The server starts listening for clients
   MSG_DEBUG("network", "Start server on port %s", port.c_str());
