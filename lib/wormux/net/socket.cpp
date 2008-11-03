@@ -80,7 +80,7 @@ connection_state_t WSocket::ConnectTo(const std::string &host, const int &port)
   IPaddress ip;
   TCPsocket tcp_socket;
 
-  if (SDLNet_ResolveHost(&ip, host.c_str(), (Uint16)port) == -1) {
+  if (SDLNet_ResolveHost(&ip, host.c_str(), (Uint16)port) != 0) {
     fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), port);
     r = CONN_BAD_HOST;
     goto error;
@@ -104,6 +104,43 @@ connection_state_t WSocket::ConnectTo(const std::string &host, const int &port)
  error:
   UnLock();
   return r;
+}
+
+bool WSocket::AcceptIncoming(const int& port)
+{
+  bool r = false;
+  WNet::Init();
+
+  Lock();
+  ASSERT(socket == NULL);
+
+  IPaddress ip;
+  if (SDLNet_ResolveHost(&ip, NULL, (Uint16)port) != 0) {
+    fprintf(stderr, "SDLNet_ResolveHost: %s\n", SDLNet_GetError());
+    goto error;
+  }
+
+  socket = SDLNet_TCP_Open(&ip);
+  if (!socket) {
+    fprintf(stderr, "SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    goto error;
+  }
+
+  r = true;
+
+ error:
+  UnLock();
+  return r;
+}
+
+WSocket* WSocket::LookForClient()
+{
+  TCPsocket client_sock = SDLNet_TCP_Accept(socket);
+  if (!client_sock)
+    return NULL;
+
+  WSocket* client = new WSocket(client_sock);
+  return client;
 }
 
 void WSocket::Disconnect()
@@ -430,6 +467,8 @@ bool WSocket::IsReady(int timeout) const
 
 std::string WSocket::GetAddress() const
 {
+  ASSERT(socket != NULL);
+
   IPaddress* ip = SDLNet_TCP_GetPeerAddress(socket);
   std::string address;
   const char* resolved_ip = SDLNet_ResolveIP(ip);

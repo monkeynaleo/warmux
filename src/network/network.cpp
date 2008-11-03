@@ -92,7 +92,6 @@ Network::Network(const std::string& passwd):
   state(NO_NETWORK),// useless value at beginning
   thread(NULL),
   socket_set(NULL),
-  ip(),
 #ifdef LOG_NETWORK
   fout(0),
   fin(0),

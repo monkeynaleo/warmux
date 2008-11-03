@@ -86,8 +86,6 @@ protected:
 
   SDL_Thread* thread; // network thread, where we receive data from network
   SDLNet_SocketSet socket_set;
-  IPaddress ip; // for server : store listening port
-                // for client : store server address/port
 
 #ifdef LOG_NETWORK
   int fout;

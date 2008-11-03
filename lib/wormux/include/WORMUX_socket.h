@@ -46,7 +46,13 @@ public:
   void Lock();
   void UnLock();
 
+  // For clients
   connection_state_t ConnectTo(const std::string &host, const int &port);
+
+  // For servers
+  bool AcceptIncoming(const int &port);
+  WSocket* LookForClient();
+
   void Disconnect();
   bool IsConnected() const;
 
