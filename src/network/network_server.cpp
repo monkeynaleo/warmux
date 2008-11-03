@@ -77,64 +77,7 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
 
 bool NetworkServer::HandShake(TCPsocket& client_socket) const
 {
-  int r;
-  bool ret = false;
-  std::string version;
-  std::string _password;
-
-  MSG_DEBUG("network", "server: Handshake!");
-
-  // Adding the socket to a temporary socket set
-  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
-  SDLNet_TCP_AddSocket(tmp_socket_set, client_socket);
-
-  // 1) Receive the version number
-  MSG_DEBUG("network", "Server: waiting for client version number");
-
-  r = WNet::ReceiveStr(tmp_socket_set, client_socket, version, 40);
-  if (r) {
-    std::cerr << "Error " << r << " when receiving version number"
-	      << std::endl;
-    goto error;
-  }
-
-  MSG_DEBUG("network", "Server: sending version number to client");
-
-  WNet::Send(client_socket, Constants::WORMUX_VERSION);
-
-  if (Constants::WORMUX_VERSION != version) {
-    std::cerr << "Client disconnected: wrong version " << version.c_str()
-	     << std::endl;
-    goto error;
-  }
-
-  // 2) Check the password
-  MSG_DEBUG("network", "Server: waiting for password");
-
-  r = WNet::ReceiveStr(tmp_socket_set, client_socket, _password, 100);
-  if (r)
-    goto error;
-
-  if (_password != GetPassword()) {
-    std::cerr << "Client disconnected: wrong password " << _password.c_str()
-	      << std::endl;
-    WNet::Send(client_socket, 1);
-    goto error;
-  }
-  MSG_DEBUG("network", "Server: password OK");
-
-  WNet::Send(client_socket, 0);
-
-  MSG_DEBUG("network", "server: Handshake done successfully :)");
-  ret = true;
-
- error:
-  if (!ret) {
-    std::cerr << "Server: HandShake with client has failed!" << std::endl;
-  }
-  SDLNet_TCP_DelSocket(tmp_socket_set, client_socket);
-  SDLNet_FreeSocketSet(tmp_socket_set);
-  return ret;
+  return WNet::Server_HandShake(client_socket, GetPassword());
 }
 
 void NetworkServer::WaitActionSleep()

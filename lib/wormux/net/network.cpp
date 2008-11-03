@@ -51,6 +51,8 @@
 
 //-----------------------------------------------------------------------------
 
+static const std::string WORMUX_VERSION = PACKAGE_VERSION;
+
 bool WNet::sdlnet_initialized = false;
 
 //-----------------------------------------------------------------------------
@@ -448,4 +450,61 @@ int WNet::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string 
   delete []str;
  out:
   return r;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+bool WNet::Server_HandShake(TCPsocket& client_socket, const std::string& password)
+{
+  int r;
+  bool ret = false;
+  std::string version;
+  std::string _password;
+
+  // Adding the socket to a temporary socket set
+  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
+  SDLNet_TCP_AddSocket(tmp_socket_set, client_socket);
+
+  // 1) Receive the version number
+  r = WNet::ReceiveStr(tmp_socket_set, client_socket, version, 40);
+  if (r) {
+    std::cerr << "Error " << r << " when receiving version number"
+	      << std::endl;
+    goto error;
+  }
+
+  WNet::Send(client_socket, WORMUX_VERSION);
+
+  if (WORMUX_VERSION != version) {
+    std::cerr << "Client disconnected: wrong version " << version.c_str()
+	     << std::endl;
+    goto error;
+  }
+
+  // 2) Check the password
+  r = WNet::ReceiveStr(tmp_socket_set, client_socket, _password, 100);
+  if (r)
+    goto error;
+
+  if (_password != password) {
+    std::cerr << "Client disconnected: wrong password " << _password.c_str()
+	      << std::endl;
+    WNet::Send(client_socket, 1);
+    goto error;
+  }
+
+  // Server: password OK
+  WNet::Send(client_socket, 0);
+
+  // Server: Handshake done successfully :)
+  ret = true;
+
+ error:
+  if (!ret) {
+    std::cerr << "Server: HandShake with client has failed!" << std::endl;
+  }
+  SDLNet_TCP_DelSocket(tmp_socket_set, client_socket);
+  SDLNet_FreeSocketSet(tmp_socket_set);
+  return ret;
 }
