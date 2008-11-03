@@ -21,6 +21,7 @@
 
 #include "network/network_server.h"
 //-----------------------------------------------------------------------------
+#include <WORMUX_socket.h>
 #include <SDL_thread.h>
 #include "include/action_handler.h"
 #include "include/constant.h"
@@ -91,7 +92,9 @@ void NetworkServer::WaitActionSleep()
       if (!HandShake(incoming))
  	return;
 
-      DistantComputer * client = new DistantComputer(incoming);
+      WSocket* socket = new WSocket(incoming, socket_set);
+
+      DistantComputer * client = new DistantComputer(socket);
       cpu.push_back(client);
 
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT,

@@ -22,7 +22,7 @@
 #include <algorithm>  //std::find
 #include "network/distant_cpu.h"
 //-----------------------------------------------------------------------------
-#include <SDL_mutex.h>
+#include <WORMUX_socket.h>
 #include <SDL_thread.h>
 #include "network/network.h"
 #include "include/action.h"
@@ -37,23 +37,16 @@
 
 static const int MAX_PACKET_SIZE = 250*1024;
 
-DistantComputer::DistantComputer(TCPsocket new_sock) :
-  sock_lock(SDL_CreateMutex()),
+DistantComputer::DistantComputer(WSocket* new_sock) :
   sock(new_sock),
   owned_teams(),
   state(DistantComputer::STATE_ERROR),
   nickname("this is not initialized"),
   force_disconnect(false)
 {
-  packet_size = 0;
-  packet_received = 0;
-  packet = NULL;
-  SDLNet_TCP_AddSocket(Network::GetInstance()->socket_set, sock);
-
   // If we are the server, we have to tell this new computer
   // what teams / maps have already been selected
-  if( Network::GetInstance()->IsServer() )
-  {
+  if (Network::GetInstance()->IsServer()) {
     int size;
     char* pack;
 
@@ -70,8 +63,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock) :
     // Teams infos of already connected computers
     for(TeamsList::iterator team = GetTeamsList().playing_list.begin();
       team != GetTeamsList().playing_list.end();
-      ++team)
-    {
+      ++team) {
       Action b(Action::ACTION_MENU_ADD_TEAM, (*team)->GetId());
       b.Push((*team)->GetPlayerName());
       b.Push((int)(*team)->GetNbCharacters());
@@ -100,119 +92,90 @@ DistantComputer::~DistantComputer()
   }
   owned_teams.clear();
 
-  SDLNet_TCP_Close(sock);
-  SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
-  SDL_DestroyMutex(sock_lock);
+  delete sock;
 }
 
 bool DistantComputer::SocketReady() const
 {
-  return SDLNet_SocketReady(sock);
+  return sock->IsReady();
 }
 
 int DistantComputer::ReceiveDatas(char* & buf)
 {
-  SDL_LockMutex(sock_lock);
-  MSG_DEBUG("network","locked");
+  bool r;
+  int ret;
 
-  if( packet_size == 0)
-  {
-    // Firstly, we read the size of the incoming packet
-    Uint32 net_size;
-    if (SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
-    {
-      SDL_UnlockMutex(sock_lock);
-      return -1;
-    }
+  sock->Lock();
+  MSG_DEBUG("network", "locked");
 
-    packet_size = (int)SDLNet_Read32(&net_size);
-    NET_ASSERT(packet_size > 0)
-    {
-      // force_disconnect = true; // hum.. in this case we will assume it's a network error
-      return -1;
-    }
+  int packet_size;
+  char* packet;
 
-    if (packet_size > MAX_PACKET_SIZE)
-    {
-        MSG_DEBUG("network", "packet is too big");
-        return -1;
-    }
-
-    packet = (char*)malloc(packet_size);
-    if (!packet)
-    {
-        MSG_DEBUG("network", "memory allocated failed");
-        return -1;
-    }
+  // Firstly, we read the size of the incoming packet
+  r = sock->ReceiveInt_NoLock(packet_size);
+  if (!r) {
+    ret = -1;
+    goto out_unlock;
   }
 
-
-  int sdl_received = 0;
-  do
-  {
-    sdl_received = SDLNet_TCP_Recv(sock, packet + packet_received, packet_size - packet_received);
-    if (sdl_received > 0)
-    {
-      MSG_DEBUG("network", "%i received", sdl_received);
-      packet_received += sdl_received;
-    }
-
-    if (sdl_received < 0)
-    {
-      std::cerr << "Malformed packet" << std::endl;
-      packet_received = 0;
-      packet_size = 0;
-      free(packet);
-      packet = NULL;
-      NET_ASSERT(false)
-      {
-        return -1;
-      }
-    }
+  if (packet_size > MAX_PACKET_SIZE) {
+    MSG_DEBUG("network", "packet is too big");
+    ret = -1;
+    goto out_unlock;
   }
-  while( sdl_received > 0 && packet_received != packet_size);
 
-  SDL_UnlockMutex(sock_lock);
-  MSG_DEBUG("network","unlocked");
+  packet = (char*)malloc(packet_size);
+  if (!packet) {
+    MSG_DEBUG("network", "memory allocated failed");
+    ret = -1;
+    goto out_unlock;
+  }
 
-  if( packet_received == packet_size )
-  {
-    int size = packet_size;
-    buf = packet;
+  r = sock->ReceiveBuffer_NoLock(packet, packet_size);
+  if (!r) {
+    std::cerr << "Malformed packet" << std::endl;
+    free(packet);
     packet = NULL;
-    packet_size = 0;
-    packet_received = 0;
-    return size;
+    NET_ASSERT(false) {
+      ret = -1;
+      goto out_unlock;
+    }
   }
 
-  buf = NULL;
-  return 0;
+  buf = packet;
+  ret = packet_size;
+
+ out_unlock:
+  sock->UnLock();
+  MSG_DEBUG("network", "unlocked");
+  return ret;
 }
 
-void DistantComputer::SendDatas(char* packet, int size_tmp)
+bool DistantComputer::SendDatas(char* packet, int size)
 {
-  SDL_LockMutex(sock_lock);
-  MSG_DEBUG("network","locked");
-  Uint32 size;
-  SDLNet_Write32(size_tmp, &size);
-  SDLNet_TCP_Send(sock,&size,4);
-  SDLNet_TCP_Send(sock,packet, size_tmp);
-  MSG_DEBUG("network","%i sent", 4 + size_tmp);
+  bool r;
+  sock->Lock();
+  MSG_DEBUG("network", "locked");
 
-  SDL_UnlockMutex(sock_lock);
-  MSG_DEBUG("network","unlocked");
+  r = sock->SendInt_NoLock(size);
+  if (!r)
+    goto out_unlock;
+
+  r = sock->SendBuffer_NoLock(packet, size);
+  if (!r)
+    goto out_unlock;
+
+  MSG_DEBUG("network", "%i sent", 4 + size);
+
+ out_unlock:
+  sock->UnLock();
+  MSG_DEBUG("network", "unlocked");
+  return r;
 }
 
 std::string DistantComputer::GetAddress()
 {
-  IPaddress* ip = SDLNet_TCP_GetPeerAddress(sock);
-  std::string address;
-  const char* resolved_ip = SDLNet_ResolveIP(ip);
-  if(resolved_ip)
-    address = resolved_ip;
-  else
-    return "Unresolved address";
-  return address;
+  return sock->GetAddress();
 }
 
 void DistantComputer::SetNickname(const std::string& _nickname)

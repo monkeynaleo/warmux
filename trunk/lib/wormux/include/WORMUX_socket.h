@@ -31,7 +31,7 @@ class WSocket
 {
 private:
   TCPsocket socket;
-  SDLNet_SocketSet& socket_set;
+  SDLNet_SocketSet socket_set;
   SDL_mutex* lock;
 
 public:
@@ -42,6 +42,7 @@ public:
   void UnLock();
 
   std::string GetAddress() const;
+  bool IsReady() const;
 
   bool SendInt_NoLock(const int& nbr);
   bool SendInt(const int& nbr);
