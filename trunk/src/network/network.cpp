@@ -359,13 +359,6 @@ bool Network::IsConnected()
   return (!GetInstance()->IsLocal() && !stop_thread);
 }
 
-uint Network::GetPort() const
-{
-  Uint16 prt;
-  prt = SDLNet_Read16(&ip.port);
-  return (uint)prt;
-}
-
 //-----------------------------------------------------------------------------
 
 // Static method
