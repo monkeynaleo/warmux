@@ -68,9 +68,9 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/) const
 
 //-----------------------------------------------------------------------------
 
-connection_state_t NetworkClient::HandShake(TCPsocket& server_socket) const
+connection_state_t NetworkClient::HandShake(WSocket& server_socket) const
 {
-  int r, ack;
+  int ack;
   connection_state_t ret = CONN_REJECTED;
   std::string version;
 
@@ -78,20 +78,19 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket) const
 
   // Adding the socket to a temporary socket set
   SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
-  SDLNet_TCP_AddSocket(tmp_socket_set, server_socket);
+  server_socket.AddToSocketSet(tmp_socket_set);
 
   // 1) Send the version number
   MSG_DEBUG("network", "Client: sending version number");
 
-  WNet::Send(server_socket, Constants::WORMUX_VERSION);
+  if (!server_socket.SendStr(Constants::WORMUX_VERSION))
+    goto error;
 
   // is it ok ?
-  r = WNet::ReceiveStr(tmp_socket_set, server_socket, version, 40);
+  if (!server_socket.ReceiveStr(version, 40))
+    goto error;
 
   MSG_DEBUG("network", "Client: server version number is %s", version.c_str());
-
-  if (r)
-    goto error;
 
   if (Constants::WORMUX_VERSION != version) {
     std::string str = Format(_("The client and server versions are incompatible "
@@ -104,11 +103,11 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket) const
   // 2) Send the password
 
   MSG_DEBUG("network", "Client: sending password");
-  WNet::Send(server_socket, GetPassword());
+  if (!server_socket.SendStr(GetPassword()))
+    goto error;
 
   // is it ok ?
-  r = WNet::ReceiveInt(tmp_socket_set, server_socket, ack);
-  if (r)
+  if (!server_socket.ReceiveInt(ack))
     goto error;
 
   if (ack) {
@@ -123,7 +122,7 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket) const
   if (ret != CONNECTED)
     std::cerr << "Client: HandShake with server has failed!" << std::endl;
 
-  SDLNet_TCP_DelSocket(tmp_socket_set, server_socket);
+  server_socket.RemoveFromSocketSet();
   SDLNet_FreeSocketSet(tmp_socket_set);
   return ret;
 }
@@ -159,17 +158,19 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
     return CONN_REJECTED;
   }
 
-  r = HandShake(tcp_socket);
+  WSocket* socket = new WSocket(tcp_socket);
+
+  r = HandShake(*socket);
   if (r != CONNECTED)
     return r;
 
   socket_set = SDLNet_AllocSocketSet(1);
   if (!socket_set) {
-    SDLNet_TCP_Close(tcp_socket);
+    delete socket;
     return CONN_REJECTED;
   }
 
-  WSocket* socket = new WSocket(tcp_socket, socket_set);
+  socket->AddToSocketSet(socket_set);
   DistantComputer* server = new DistantComputer(socket);
 
   cpu.push_back(server);

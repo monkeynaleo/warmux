@@ -76,7 +76,7 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
-bool NetworkServer::HandShake(TCPsocket& client_socket) const
+bool NetworkServer::HandShake(WSocket& client_socket) const
 {
   return WNet::Server_HandShake(client_socket, GetPassword());
 }
@@ -89,10 +89,12 @@ void NetworkServer::WaitActionSleep()
     TCPsocket incoming = SDLNet_TCP_Accept(server_socket);
     if (incoming)
     {
-      if (!HandShake(incoming))
+      WSocket* socket = new WSocket(incoming);
+
+      if (!HandShake(*socket))
  	return;
 
-      WSocket* socket = new WSocket(incoming, socket_set);
+      socket->AddToSocketSet(socket_set);
 
       DistantComputer * client = new DistantComputer(socket);
       cpu.push_back(client);

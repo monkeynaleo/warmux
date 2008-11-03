@@ -42,11 +42,50 @@ WSocket::WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set) :
   }
 }
 
+WSocket::WSocket(TCPsocket _socket):
+  socket(_socket),
+  socket_set(NULL),
+  lock(SDL_CreateMutex())
+{
+}
+
 WSocket::~WSocket()
 {
   SDLNet_TCP_Close(socket);
-  SDLNet_TCP_DelSocket(socket_set, socket);
+  if (socket_set)
+    SDLNet_TCP_DelSocket(socket_set, socket);
   SDL_DestroyMutex(lock);
+}
+
+void WSocket::AddToSocketSet(SDLNet_SocketSet _socket_set)
+{
+  int r;
+
+  Lock();
+  ASSERT(socket_set == NULL);
+  socket_set = _socket_set;
+
+  r = SDLNet_TCP_AddSocket(socket_set, socket);
+  if (r == -1) {
+    fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
+    ASSERT(false);
+  }
+
+  UnLock();
+}
+
+void WSocket::RemoveFromSocketSet()
+{
+  int r;
+
+  Lock();
+  r = SDLNet_TCP_DelSocket(socket_set, socket);
+  if (r == -1) {
+    fprintf(stderr, "SDLNet_TCP_DelSocket: %s\n", SDLNet_GetError());
+    ASSERT(false);
+  }
+  socket_set = NULL;
+  UnLock();
 }
 
 void WSocket::Lock()
@@ -149,6 +188,8 @@ bool WSocket::ReceiveBuffer(void* data, size_t len)
 {
   bool r;
 
+  ASSERT(socket_set != NULL);
+
   if (SDLNet_CheckSockets(socket_set, 5000) == 0) {
     return false;
   }
@@ -182,6 +223,7 @@ bool WSocket::ReceiveInt_NoLock(int& nbr)
 bool WSocket::ReceiveInt(int& nbr)
 {
   bool r;
+  ASSERT(socket_set != NULL);
 
   if (SDLNet_CheckSockets(socket_set, 5000) == 0) {
     return false;
@@ -234,6 +276,7 @@ bool WSocket::ReceiveStr_NoLock(std::string &_str, size_t maxlen)
 bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
 {
   bool r = false;
+  ASSERT(socket_set != NULL);
 
   if (SDLNet_CheckSockets(socket_set, 5000) == 0) {
     goto out;

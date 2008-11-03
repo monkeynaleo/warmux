@@ -24,6 +24,7 @@
 #include "../include/WORMUX_error.h"
 #include "../include/WORMUX_i18n.h"
 #include "../include/WORMUX_network.h"
+#include "../include/WORMUX_socket.h"
 
 #include <iostream>
 #include <sys/types.h>
@@ -445,26 +446,22 @@ int WNet::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-bool WNet::Server_HandShake(TCPsocket& client_socket, const std::string& password)
+bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password)
 {
-  int r;
   bool ret = false;
   std::string version;
   std::string _password;
 
   // Adding the socket to a temporary socket set
   SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
-  SDLNet_TCP_AddSocket(tmp_socket_set, client_socket);
+  client_socket.AddToSocketSet(tmp_socket_set);
 
   // 1) Receive the version number
-  r = WNet::ReceiveStr(tmp_socket_set, client_socket, version, 40);
-  if (r) {
-    std::cerr << "Error " << r << " when receiving version number"
-	      << std::endl;
+  if (!client_socket.ReceiveStr(version, 40))
     goto error;
-  }
 
-  WNet::Send(client_socket, WORMUX_VERSION);
+  if (!client_socket.SendStr(WORMUX_VERSION))
+    goto error;
 
   if (WORMUX_VERSION != version) {
     std::cerr << "Client disconnected: wrong version " << version.c_str()
@@ -473,19 +470,19 @@ bool WNet::Server_HandShake(TCPsocket& client_socket, const std::string& passwor
   }
 
   // 2) Check the password
-  r = WNet::ReceiveStr(tmp_socket_set, client_socket, _password, 100);
-  if (r)
+  if (!client_socket.ReceiveStr(_password, 100))
     goto error;
 
   if (_password != password) {
     std::cerr << "Client disconnected: wrong password " << _password.c_str()
 	      << std::endl;
-    WNet::Send(client_socket, 1);
+    client_socket.SendInt(1);
     goto error;
   }
 
   // Server: password OK
-  WNet::Send(client_socket, 0);
+  if (!client_socket.SendInt(0))
+    goto error;
 
   // Server: Handshake done successfully :)
   ret = true;
@@ -494,7 +491,7 @@ bool WNet::Server_HandShake(TCPsocket& client_socket, const std::string& passwor
   if (!ret) {
     std::cerr << "Server: HandShake with client has failed!" << std::endl;
   }
-  SDLNet_TCP_DelSocket(tmp_socket_set, client_socket);
+  client_socket.RemoveFromSocketSet();
   SDLNet_FreeSocketSet(tmp_socket_set);
   return ret;
 }

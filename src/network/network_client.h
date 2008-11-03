@@ -25,10 +25,12 @@
 #include "network.h"
 //-----------------------------------------------------------------------------
 
+class WSocket;
+
 class NetworkClient : public Network
 {
 protected:
-  connection_state_t HandShake(TCPsocket& server_socket) const;
+  connection_state_t HandShake(WSocket& server_socket) const;
   virtual void HandleAction(Action* a, DistantComputer* sender) const;
   virtual void WaitActionSleep() {};
 
