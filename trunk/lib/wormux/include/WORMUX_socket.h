@@ -34,6 +34,8 @@ private:
   SDLNet_SocketSet socket_set;
   SDL_mutex* lock;
 
+  bool using_tmp_socket_set;
+
 public:
   WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set);
   WSocket(TCPsocket _socket);
@@ -42,8 +44,11 @@ public:
   void Lock();
   void UnLock();
 
-  void AddToSocketSet(SDLNet_SocketSet _socket_set);
+  bool AddToSocketSet(SDLNet_SocketSet _socket_set);
   void RemoveFromSocketSet();
+
+  bool AddToTmpSocketSet();
+  void RemoveFromTmpSocketSet();
 
   std::string GetAddress() const;
   bool IsReady() const;

@@ -32,7 +32,8 @@
 WSocket::WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set) :
   socket(_socket),
   socket_set(_socket_set),
-  lock(SDL_CreateMutex())
+  lock(SDL_CreateMutex()),
+  using_tmp_socket_set(false)
 {
   int r;
   r = SDLNet_TCP_AddSocket(socket_set, socket);
@@ -45,37 +46,47 @@ WSocket::WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set) :
 WSocket::WSocket(TCPsocket _socket):
   socket(_socket),
   socket_set(NULL),
-  lock(SDL_CreateMutex())
+  lock(SDL_CreateMutex()),
+  using_tmp_socket_set(false)
 {
 }
 
 WSocket::~WSocket()
 {
   SDLNet_TCP_Close(socket);
-  if (socket_set)
+
+  if (socket_set) {
     SDLNet_TCP_DelSocket(socket_set, socket);
+    if (using_tmp_socket_set)
+      SDLNet_FreeSocketSet(socket_set);
+  }
+
   SDL_DestroyMutex(lock);
 }
 
-void WSocket::AddToSocketSet(SDLNet_SocketSet _socket_set)
+bool WSocket::AddToSocketSet(SDLNet_SocketSet _socket_set)
 {
+  ASSERT(socket_set == NULL);
   int r;
 
   Lock();
-  ASSERT(socket_set == NULL);
   socket_set = _socket_set;
 
   r = SDLNet_TCP_AddSocket(socket_set, socket);
   if (r == -1) {
     fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
-    ASSERT(false);
+    UnLock();
+    return false;
   }
 
   UnLock();
+  return true;
 }
 
 void WSocket::RemoveFromSocketSet()
 {
+  ASSERT(!using_tmp_socket_set);
+
   int r;
 
   Lock();
@@ -85,6 +96,52 @@ void WSocket::RemoveFromSocketSet()
     ASSERT(false);
   }
   socket_set = NULL;
+  UnLock();
+}
+
+bool WSocket::AddToTmpSocketSet()
+{
+  ASSERT(socket_set == NULL);
+  int r;
+
+  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
+  if (!tmp_socket_set) {
+    fprintf(stderr, "SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
+    return false;
+  }
+
+  Lock();
+  socket_set = tmp_socket_set;
+
+  r = SDLNet_TCP_AddSocket(socket_set, socket);
+  if (r == -1) {
+    fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
+    UnLock();
+    return false;
+  }
+
+  using_tmp_socket_set = true;
+  UnLock();
+
+  return true;
+}
+
+void WSocket::RemoveFromTmpSocketSet()
+{
+  ASSERT(using_tmp_socket_set);
+  int r;
+
+  Lock();
+
+  r = SDLNet_TCP_DelSocket(socket_set, socket);
+  if (r == -1) {
+    fprintf(stderr, "SDLNet_TCP_DelSocket: %s\n", SDLNet_GetError());
+    ASSERT(false);
+  }
+  SDLNet_FreeSocketSet(socket_set);
+  socket_set = NULL;
+  using_tmp_socket_set = false;
+
   UnLock();
 }
 

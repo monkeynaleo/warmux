@@ -77,8 +77,8 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket) const
   MSG_DEBUG("network", "Client: Handshake !");
 
   // Adding the socket to a temporary socket set
-  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
-  server_socket.AddToSocketSet(tmp_socket_set);
+  if (!server_socket.AddToTmpSocketSet())
+    goto error_no_socket_set;
 
   // 1) Send the version number
   MSG_DEBUG("network", "Client: sending version number");
@@ -119,11 +119,11 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket) const
   ret = CONNECTED;
 
  error:
+  server_socket.RemoveFromTmpSocketSet();
+
+ error_no_socket_set:
   if (ret != CONNECTED)
     std::cerr << "Client: HandShake with server has failed!" << std::endl;
-
-  server_socket.RemoveFromSocketSet();
-  SDLNet_FreeSocketSet(tmp_socket_set);
   return ret;
 }
 
