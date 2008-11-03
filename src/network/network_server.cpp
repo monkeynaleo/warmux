@@ -75,7 +75,7 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
-bool NetworkServer::HandShake(TCPsocket& client_socket)
+bool NetworkServer::HandShake(TCPsocket& client_socket) const
 {
   int r;
   bool ret = false;

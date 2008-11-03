@@ -67,7 +67,7 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/) const
 
 //-----------------------------------------------------------------------------
 
-connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
+connection_state_t NetworkClient::HandShake(TCPsocket& server_socket) const
 {
   int r, ack;
   connection_state_t ret = CONN_REJECTED;
