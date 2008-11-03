@@ -36,10 +36,14 @@ private:
 
 public:
   WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set);
+  WSocket(TCPsocket _socket);
   ~WSocket();
 
   void Lock();
   void UnLock();
+
+  void AddToSocketSet(SDLNet_SocketSet _socket_set);
+  void RemoveFromSocketSet();
 
   std::string GetAddress() const;
   bool IsReady() const;

@@ -42,6 +42,8 @@ typedef enum
   CONN_WRONG_VERSION
 } connection_state_t;
 
+class WSocket;
+
 class WNet
 {
 private:
@@ -66,7 +68,7 @@ public:
   static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
   static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str, size_t maxlen);
 
-  static bool Server_HandShake(TCPsocket& client_socket, const std::string& password);
+  static bool Server_HandShake(WSocket& client_socket, const std::string& password);
 };
 
 //-----------------------------------------------------------------------------
