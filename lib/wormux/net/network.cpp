@@ -338,8 +338,8 @@ bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password)
   std::string _password;
 
   // Adding the socket to a temporary socket set
-  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
-  client_socket.AddToSocketSet(tmp_socket_set);
+  if (!client_socket.AddToTmpSocketSet())
+    goto error_no_socket_set;
 
   // 1) Receive the version number
   if (!client_socket.ReceiveStr(version, 40))
@@ -373,10 +373,10 @@ bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password)
   ret = true;
 
  error:
+  client_socket.RemoveFromTmpSocketSet();
+ error_no_socket_set:
   if (!ret) {
     std::cerr << "Server: HandShake with client has failed!" << std::endl;
   }
-  client_socket.RemoveFromSocketSet();
-  SDLNet_FreeSocketSet(tmp_socket_set);
   return ret;
 }
