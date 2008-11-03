@@ -16,57 +16,50 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Network basic layer for Wormux.
+ * Socket abstraction
  *****************************************************************************/
 
-#ifndef WORMUX_NETWORK_H
-#define WORMUX_NETWORK_H
+#ifndef WORMUX_SOCKET_H
+#define WORMUX_SOCKET_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <string>
 #include "WORMUX_types.h"
 //-----------------------------------------------------------------------------
 
-const std::string WORMUX_NETWORK_PORT = "3826";
-const uint WORMUX_NETWORK_PORT_INT = 3826;
-
-typedef enum
-{
-  CONNECTED,
-  CONN_BAD_HOST,
-  CONN_BAD_PORT,
-  CONN_BAD_SOCKET,
-  CONN_REJECTED,
-  CONN_TIMEOUT,
-  CONN_WRONG_PASSWORD,
-  CONN_WRONG_VERSION
-} connection_state_t;
-
-class WNet
+class WSocket
 {
 private:
-  static bool sdlnet_initialized;
+  TCPsocket socket;
+  SDLNet_SocketSet& socket_set;
+  SDL_mutex* lock;
 
 public:
-  static void Init();
-  static void Quit();
+  WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set);
+  ~WSocket();
 
-  static connection_state_t CheckHost(const std::string &host, int prt);
-  static connection_state_t GetError();
+  void Lock();
+  void UnLock();
 
-  static bool Send(TCPsocket& socket, const int& nbr);
-  static bool Send(TCPsocket& socket, const std::string &str);
+  std::string GetAddress() const;
 
-  // A batch consists in a msg id, a size, and the batch itself.
-  // Size wasn't known yet, so write it now.
-  static uint Batch(void* buffer, const int& nbr);
-  static uint Batch(void* buffer, const std::string &str);
-  static void FinalizeBatch(void* buffer, size_t len);
+  bool SendInt_NoLock(const int& nbr);
+  bool SendInt(const int& nbr);
 
-  static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
-  static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str, size_t maxlen);
+  bool SendStr_NoLock(const std::string &str);
+  bool SendStr(const std::string &str);
 
-  static bool Server_HandShake(TCPsocket& client_socket, const std::string& password);
+  bool SendBuffer_NoLock(void* data, size_t len);
+  bool SendBuffer(void* data, size_t len);
+
+  bool ReceiveBuffer_NoLock(void* data, size_t len);
+  bool ReceiveBuffer(void* data, size_t len);
+
+  bool ReceiveInt_NoLock(int& nbr);
+  bool ReceiveInt(int& nbr);
+
+  bool ReceiveStr_NoLock(std::string &_str, size_t maxlen);
+  bool ReceiveStr(std::string &_str, size_t maxlen);
 };
 
 //-----------------------------------------------------------------------------

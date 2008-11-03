@@ -336,7 +336,7 @@ bool WNet::Send(TCPsocket& socket, const std::string &str)
   return true;
 }
 
-unsigned int WNet::Batch(void* buffer, const int& nbr)
+uint WNet::Batch(void* buffer, const int& nbr)
 {
   ASSERT(sdlnet_initialized);
 
@@ -350,25 +350,15 @@ unsigned int WNet::Batch(void* buffer, const int& nbr)
 
 unsigned int WNet::Batch(void* buffer, const std::string &str)
 {
-  unsigned int size = str.size();
+  uint size = str.size();
   Batch(buffer, size);
   memcpy(((char*)buffer)+sizeof(Uint32), str.c_str(), size);
   return sizeof(Uint32)+size;
 }
 
-// A batch consists in a msg id, a size, and the batch itself.
-// Size wasn't known yet, so write it now.
-bool WNet::SendBatch(TCPsocket& socket, void* data, size_t len)
+void WNet::FinalizeBatch(void* data, size_t len)
 {
-  ASSERT(sdlnet_initialized);
-
   SDLNet_Write32(len, (void*)( ((char*)data)+4 ) );
-
-  int size = SDLNet_TCP_Send(socket, data, len);
-  if (size < int(len)) {
-    return false;
-  }
-  return true;
 }
 
 int WNet::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
