@@ -34,24 +34,29 @@
 #include "tool/random.h"
 
 IndexServer::IndexServer():
-  socket(),
+  socket(NULL),
   ip(),
   sock_set(),
   used(0),
   server_lst(),
   first_server(server_lst.end()),
   current_server(server_lst.end()),
-  hidden_server(false),
-  connected(false)
+  hidden_server(false)
 {
 }
 
 IndexServer::~IndexServer()
 {
   server_lst.clear();
-  if(connected)
+  if (IsConnected())
     Disconnect();
 }
+
+bool IndexServer::IsConnected()
+{
+  return (socket != NULL);
+}
+
 
 /*************  Connection  /  Disconnection  ******************/
 connection_state_t IndexServer::Connect()
@@ -59,21 +64,20 @@ connection_state_t IndexServer::Connect()
   connection_state_t r = CONN_REJECTED;
 
   MSG_DEBUG("index_server", "Connecting..");
-  ASSERT(!connected);
+  ASSERT(!IsConnected());
 
-  if( hidden_server )
+  if (hidden_server)
     return CONNECTED;
 
   // Download the server if it's empty
-  if( server_lst.size() == 0 )
-  {
+  if (server_lst.size() == 0) {
     server_lst = Downloader::GetInstance()->GetServerList("server_list");
     first_server = server_lst.end();
     current_server = server_lst.end();
   }
 
   // If it's still empty, then something went wrong when downloading it
-  if( server_lst.size() == 0 )
+  if (server_lst.size() == 0)
     return CONN_BAD_HOST;
 
   std::string addr;
@@ -106,7 +110,7 @@ connection_state_t IndexServer::Connect()
 connection_state_t IndexServer::ConnectTo(const std::string & address, const int & port)
 {
   connection_state_t status = CONN_REJECTED;
-  int r;
+  TCPsocket tcp_socket;
 
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
 
@@ -120,8 +124,8 @@ connection_state_t IndexServer::ConnectTo(const std::string & address, const int
     goto err;
   }
 
-  socket = SDLNet_TCP_Open(&ip);
-  if (!socket) {
+  tcp_socket = SDLNet_TCP_Open(&ip);
+  if (!tcp_socket) {
     printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
     status = CONN_REJECTED;
     goto err;
@@ -134,14 +138,8 @@ connection_state_t IndexServer::ConnectTo(const std::string & address, const int
     goto err_alloc_socket_set;
   }
 
-  r = SDLNet_TCP_AddSocket(sock_set, socket);
-  if (r != 1) {
-    printf("SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
-    status = CONN_REJECTED;
-    goto err_add_socket;
-  }
+  socket = new WSocket(tcp_socket, sock_set);
 
-  connected = true; // we need it before HandShake
   status = HandShake();
   if (status != CONNECTED)
     goto err_handshake;
@@ -149,12 +147,12 @@ connection_state_t IndexServer::ConnectTo(const std::string & address, const int
   return status;
 
  err_handshake:
-  connected = false;
-  SDLNet_TCP_DelSocket(sock_set, socket);
- err_add_socket:
+  Disconnect();
   SDLNet_FreeSocketSet(sock_set);
+  return status;
+
  err_alloc_socket_set:
-  SDLNet_TCP_Close(socket);
+  SDLNet_TCP_Close(tcp_socket);
  err:
   return status;
 }
@@ -170,15 +168,13 @@ void IndexServer::Disconnect()
   first_server = server_lst.end();
   current_server = server_lst.end();
 
-  if (!connected)
+  if (!IsConnected())
     return;
 
   MSG_DEBUG("index_server", "Closing connection");
 
-  SDLNet_TCP_DelSocket(sock_set, socket);
-  SDLNet_TCP_Close(socket);
-  connected = false;
-  SDLNet_FreeSocketSet(sock_set);
+  delete socket;
+  socket = NULL;
 }
 
 bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb_servers_tried)
@@ -243,45 +239,11 @@ void IndexServer::Batch(const std::string &str)
 
 bool IndexServer::SendMsg()
 {
-  bool r = WNet::SendBatch(socket, buffer, used);
+  WNet::FinalizeBatch(buffer, used);
+
+  bool r = socket->SendBuffer(buffer, used);
   used = 0;
   return r;
-}
-
-int IndexServer::ReceiveInt()
-{
-  //somehow we can get here while being disconnected... this should not be
-  if (!connected) {
-    MSG_DEBUG("index_server", "Not connected!!\n");
-    return -1;
-  }
-
-  int r, nbr;
-  r = WNet::ReceiveInt(sock_set, socket, nbr);
-  if (r == -2) {
-    Disconnect();
-    return 0;
-  } else if (r != 0) {
-    return r;
-  }
-
-  return nbr;
-}
-
-std::string IndexServer::ReceiveStr(size_t maxlen)
-{
-  if (!connected)
-    return "";
-
-  int r;
-  std::string str("");
-
-  r = WNet::ReceiveStr(sock_set, socket, str, maxlen);
-  if (r == -2) {
-    Disconnect();
-  }
-
-  return str;
 }
 
 connection_state_t IndexServer::HandShake()
@@ -304,20 +266,24 @@ connection_state_t IndexServer::HandShake()
 
   MSG_DEBUG("index_server", "Receiving...");
 
-  msg = ReceiveInt();
-  MSG_DEBUG("index_server", "Received: %d", msg);
-
-  if (msg == -1 || msg != TS_MSG_VERSION)
+  r = socket->ReceiveInt(msg);
+  if (!r || msg != TS_MSG_VERSION)
     goto error;
 
+  MSG_DEBUG("index_server", "Received: %d", msg);
+
   MSG_DEBUG("index_server", "Receiving...");
-  sign = ReceiveStr(20);
+  r = socket->ReceiveStr(sign, 20);
+  if (!r)
+    goto error;
 
   MSG_DEBUG("index_server", "Received: %s", sign.c_str());
 
   if (sign == "Bad version") {
     status = CONN_WRONG_VERSION;
-    sign = ReceiveStr(20);
+    r = socket->ReceiveStr(sign, 20);
+    if (!r)
+      sign = "";
     AppWormux::DisplayError(Format(_("Sorry, your version is not supported anymore. "
 				     "Supported version are %s. "
 				     "You can download a updated version "
@@ -355,8 +321,8 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd)
   Batch(Network::GetInstance()->GetPort());
   SendMsg();
 
-  ack = ReceiveStr(5);
-  if (ack == "OK")
+  bool r = socket->ReceiveStr(ack, 5);
+  if (r && ack == "OK")
     return true;
 
   Disconnect();
@@ -365,20 +331,41 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd)
 
 std::list<GameServerInfo> IndexServer::GetHostList()
 {
+  std::list<GameServerInfo> lst;
+  bool r;
+
   NewMsg(TS_MSG_GET_LIST);
   SendMsg();
-  int lst_size = ReceiveInt();
-  std::list<GameServerInfo> lst;
-  if(lst_size == -1)
+
+  int lst_size;
+  r = socket->ReceiveInt(lst_size);
+  if (!r || lst_size == 0)
     return lst;
-  while(lst_size--)
+
+  while (lst_size--)
   {
     GameServerInfo game_server_info;
     IPaddress ip;
-    ip.host = ReceiveInt();
-    ip.port = ReceiveInt();
-    game_server_info.passworded = !!ReceiveInt();
-    game_server_info.game_name = ReceiveStr(40);
+    int nb;
+    r = socket->ReceiveInt(nb);
+    if (!r)
+      return lst;
+    ip.host = nb;
+
+    r = socket->ReceiveInt(nb);
+    if (!r)
+      return lst;
+    ip.port = nb;
+
+    r = socket->ReceiveInt(nb);
+    if (!r)
+      return lst;
+
+    game_server_info.passworded = !!(nb);
+
+    r = socket->ReceiveStr(game_server_info.game_name, 40);
+    if (!r)
+      return lst;
 
     const char* dns_addr = SDLNet_ResolveIP(&ip);
     char port[10];
@@ -413,24 +400,24 @@ std::list<GameServerInfo> IndexServer::GetHostList()
 
 void IndexServer::Refresh()
 {
-  if(!connected)
+  if (!IsConnected())
     return;
 
-  if(SDLNet_CheckSockets(sock_set, 100) == 0)
+  if (SDLNet_CheckSockets(sock_set, 100) == 0)
     return;
 
-  if(!SDLNet_SocketReady(socket))
+  if (!SDLNet_SocketReady(socket))
     return;
 
-  int msg_id = ReceiveInt();
-  if(msg_id == -1)
-    return;
+  int msg_id;
+  bool r;
+  r = socket->ReceiveInt(msg_id);
 
-  if( msg_id == TS_MSG_PING )
-  {
+  if (r && msg_id == TS_MSG_PING) {
     NewMsg(TS_MSG_PONG);
     SendMsg();
+    return;
   }
-  else
-    Disconnect();
+
+  Disconnect();
 }

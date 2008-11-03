@@ -23,7 +23,7 @@
 #ifndef INDEX_SERVER_H
 #define INDEX_SERVER_H
 //-----------------------------------------------------------------------------
-#include <SDL_net.h>
+#include <WORMUX_socket.h>
 #include <map>
 #include <list>
 #include <string>
@@ -52,7 +52,7 @@ class IndexServer : public Singleton<IndexServer>
   /*********************************************/
 
   // Connection to the server
-  TCPsocket socket;
+  WSocket* socket;
   IPaddress ip;
   SDLNet_SocketSet sock_set;
   char    buffer[INDEX_SERVER_BUFFER_LENGTH];
@@ -75,8 +75,6 @@ class IndexServer : public Singleton<IndexServer>
   void Batch(const int &nbr);
   void Batch(const std::string &str);
   bool SendMsg();
-  int ReceiveInt();
-  std::string ReceiveStr(size_t maxlen);
 
   // Gives the address of a server in the list
   bool GetServerAddress(std::string & address, int & port, uint& nb_tries);
@@ -85,6 +83,9 @@ class IndexServer : public Singleton<IndexServer>
 
   // Perform a handshake with the server
   connection_state_t HandShake();
+
+  bool IsConnected();
+
 public:
   IndexServer();
   ~IndexServer();
