@@ -30,6 +30,7 @@
 #include "network/distant_cpu.h"
 #include "network/net_error_msg.h"
 #include "tool/debug.h"
+#include "tool/string_tools.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK
@@ -130,56 +131,47 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket) const
 connection_state_t
 NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 {
-  WNet::Init();
+  connection_state_t r;
+  WSocket* socket;
+  DistantComputer* server;
+  Action a(Action::ACTION_NICKNAME, GetNickname());
+  int prt;
 
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
-  int prt = strtol(port.c_str(), NULL, 10);
+  if (!str2int(port, prt)) {
+    r = CONN_BAD_PORT;
+    goto error;
+  }
 
-  connection_state_t r = WNet::CheckHost(host, prt);
+  socket = new WSocket();
+  r = socket->ConnectTo(host, prt);
   if (r != CONNECTED)
-    return r;
-
-  if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt) == -1)
-  {
-    fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), prt);
-    return CONN_BAD_HOST;
-  }
-
-  // CheckHost opens and closes a connection to the server, so before reconnecting
-  // wait a bit, so the connection really gets closed ..
-  SDL_Delay(500);
-
-  TCPsocket tcp_socket = SDLNet_TCP_Open(&ip);
-
-  if (!tcp_socket)
-  {
-    fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), prt);
-    return CONN_REJECTED;
-  }
-
-  WSocket* socket = new WSocket(tcp_socket);
+    goto error;
 
   r = HandShake(*socket);
   if (r != CONNECTED)
-    return r;
+    goto error;
 
   socket_set = SDLNet_AllocSocketSet(1);
   if (!socket_set) {
-    delete socket;
-    return CONN_REJECTED;
+    r = CONN_REJECTED;
+    goto error;
   }
 
   socket->AddToSocketSet(socket_set);
-  DistantComputer* server = new DistantComputer(socket);
+  server = new DistantComputer(socket);
 
   cpu.push_back(server);
 
   //Send nickname to server
-  Action a(Action::ACTION_NICKNAME, GetNickname());
   SendAction(a);
 
   //Control to net_thread_func
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
   return CONNECTED;
+
+ error:
+  delete socket;
+  return r;
 }

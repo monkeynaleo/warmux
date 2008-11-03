@@ -52,9 +52,7 @@ class IndexServer : public Singleton<IndexServer>
   /*********************************************/
 
   // Connection to the server
-  WSocket* socket;
-  IPaddress ip;
-  SDLNet_SocketSet sock_set;
+  WSocket socket;
   char    buffer[INDEX_SERVER_BUFFER_LENGTH];
   uint    used;
 
@@ -67,8 +65,6 @@ class IndexServer : public Singleton<IndexServer>
 
   // If we are a server, tell if we are visible on internet
   bool hidden_server;
-
-  bool connected;
 
   // Transfer functions
   void NewMsg(IndexServerMsg msg_id);
@@ -104,7 +100,7 @@ public:
   void SetHiddenServer() { hidden_server = true; };
 
   // Notify the top server we are hosting a game
-  bool SendServerStatus(const std::string& game_name, bool passwd);
+  bool SendServerStatus(const std::string& game_name, bool passwd, int port);
 
   // returns a list with string pairs: first element = hostname/ip, second element = port
   std::list<GameServerInfo> GetHostList();
