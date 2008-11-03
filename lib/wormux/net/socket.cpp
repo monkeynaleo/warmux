@@ -118,6 +118,7 @@ bool WSocket::SendBuffer_NoLock(void* data, size_t len)
   if (size < int(len)) {
     return false;
   }
+
   return true;
 }
 
@@ -244,6 +245,11 @@ bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
 
  out:
   return r;
+}
+
+bool WSocket::IsReady() const
+{
+  return SDLNet_SocketReady(socket);
 }
 
 std::string WSocket::GetAddress() const

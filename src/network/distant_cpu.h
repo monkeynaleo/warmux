@@ -22,14 +22,13 @@
 #ifndef DISTANT_CPU_H
 #define DISTANT_CPU_H
 //-----------------------------------------------------------------------------
-#include <SDL_net.h>
 #include "include/base.h"
 #include <list>
 #include <string>
 //-----------------------------------------------------------------------------
 
-struct SDL_mutex;
 class Action;
+class WSocket;
 
 class DistantComputer
 {
@@ -48,26 +47,21 @@ class DistantComputer
   const DistantComputer& operator=(const DistantComputer&);
   /*********************************************/
 
-  SDL_mutex* sock_lock;
-  TCPsocket sock;
+  WSocket* sock;
   std::list<std::string> owned_teams;
 
   DistantComputer::state_t state;
-
-  int packet_size;
-  int packet_received;
-  char* packet;
   std::string nickname;
 
 public:
   bool force_disconnect;
 
-  DistantComputer(TCPsocket new_sock);
+  DistantComputer(WSocket* new_sock);
   ~DistantComputer();
 
   bool SocketReady() const;
   int ReceiveDatas(char* & buf);
-  void SendDatas(char* paket, int size);
+  bool SendDatas(char* packet, int size);
 
   std::string GetAddress();
 

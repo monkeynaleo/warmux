@@ -21,6 +21,7 @@
 
 #include "network/network_client.h"
 //-----------------------------------------------------------------------------
+#include <WORMUX_socket.h>
 #include <SDL_thread.h>
 #include "include/action_handler.h"
 #include "include/app.h"
@@ -150,21 +151,26 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   // wait a bit, so the connection really gets closed ..
   SDL_Delay(500);
 
-  TCPsocket socket = SDLNet_TCP_Open(&ip);
+  TCPsocket tcp_socket = SDLNet_TCP_Open(&ip);
 
-  if (!socket)
+  if (!tcp_socket)
   {
     fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), prt);
     return CONN_REJECTED;
   }
 
-  r = HandShake(socket);
+  r = HandShake(tcp_socket);
   if (r != CONNECTED)
     return r;
 
   socket_set = SDLNet_AllocSocketSet(1);
+  if (!socket_set) {
+    SDLNet_TCP_Close(tcp_socket);
+    return CONN_REJECTED;
+  }
 
-  DistantComputer * server = new DistantComputer(socket);
+  WSocket* socket = new WSocket(tcp_socket, socket_set);
+  DistantComputer* server = new DistantComputer(socket);
 
   cpu.push_back(server);
 
