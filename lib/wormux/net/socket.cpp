@@ -51,17 +51,84 @@ WSocket::WSocket(TCPsocket _socket):
 {
 }
 
+WSocket::WSocket():
+  socket(NULL),
+  socket_set(NULL),
+  lock(SDL_CreateMutex()),
+  using_tmp_socket_set(false)
+{
+}
+
 WSocket::~WSocket()
 {
-  SDLNet_TCP_Close(socket);
+  Disconnect();
+
+  SDL_DestroyMutex(lock);
+}
+
+connection_state_t WSocket::ConnectTo(const std::string &host, const int &port)
+{
+  WNet::Init();
+
+  connection_state_t r = WNet::CheckHost(host, port);
+  if (r != CONNECTED)
+    return r;
+
+  Lock();
+  ASSERT(socket == NULL);
+
+  IPaddress ip;
+  TCPsocket tcp_socket;
+
+  if (SDLNet_ResolveHost(&ip, host.c_str(), (Uint16)port) == -1) {
+    fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), port);
+    r = CONN_BAD_HOST;
+    goto error;
+  }
+
+  // CheckHost opens and closes a connection to the server, so before reconnecting
+  // wait a bit, so the connection really gets closed ..
+  SDL_Delay(500);
+
+  tcp_socket = SDLNet_TCP_Open(&ip);
+
+  if (!tcp_socket) {
+    fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), port);
+    r = CONN_REJECTED;
+    goto error;
+  }
+
+  socket = tcp_socket;
+  r = CONNECTED;
+
+ error:
+  UnLock();
+  return r;
+}
+
+void WSocket::Disconnect()
+{
+  Lock();
+
+  if (socket) {
+    SDLNet_TCP_Close(socket);
+    socket = NULL;
+  }
 
   if (socket_set) {
     SDLNet_TCP_DelSocket(socket_set, socket);
-    if (using_tmp_socket_set)
+    if (using_tmp_socket_set) {
       SDLNet_FreeSocketSet(socket_set);
+    }
+    socket_set = NULL;
   }
 
-  SDL_DestroyMutex(lock);
+  UnLock();
+}
+
+bool WSocket::IsConnected() const
+{
+  return (socket != NULL);
 }
 
 bool WSocket::AddToSocketSet(SDLNet_SocketSet _socket_set)
@@ -347,8 +414,17 @@ bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
   return r;
 }
 
-bool WSocket::IsReady() const
+bool WSocket::IsReady(int timeout) const
 {
+  if (socket == NULL)
+    return false;
+
+  if (timeout != 0) {
+    ASSERT(socket_set != NULL);
+    if (SDLNet_CheckSockets(socket_set, timeout) == 0)
+      return false;
+  }
+
   return SDLNet_SocketReady(socket);
 }
 

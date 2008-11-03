@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <string>
+#include "WORMUX_network.h"
 #include "WORMUX_types.h"
 //-----------------------------------------------------------------------------
 
@@ -39,10 +40,15 @@ private:
 public:
   WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set);
   WSocket(TCPsocket _socket);
+  WSocket();
   ~WSocket();
 
   void Lock();
   void UnLock();
+
+  connection_state_t ConnectTo(const std::string &host, const int &port);
+  void Disconnect();
+  bool IsConnected() const;
 
   bool AddToSocketSet(SDLNet_SocketSet _socket_set);
   void RemoveFromSocketSet();
@@ -51,7 +57,7 @@ public:
   void RemoveFromTmpSocketSet();
 
   std::string GetAddress() const;
-  bool IsReady() const;
+  bool IsReady(int timeout = 0) const;
 
   bool SendInt_NoLock(const int& nbr);
   bool SendInt(const int& nbr);
