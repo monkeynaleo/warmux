@@ -141,7 +141,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
   if (!str2int(port, prt)) {
     r = CONN_BAD_PORT;
-    goto error;
+    goto err_no_socket;
   }
 
   socket = new WSocket();
@@ -173,5 +173,6 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
  error:
   delete socket;
+ err_no_socket:
   return r;
 }
