@@ -303,40 +303,6 @@ connection_state_t WNet::CheckHost(const std::string &host, int prt)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-// Static methods usefull to communicate without action
-// (index server, handshake, ...)
-
-bool WNet::Send(TCPsocket& socket, const int& nbr)
-{
-  ASSERT(sdlnet_initialized);
-
-  char packet[4];
-  // this is not cute, but we don't want an int -> uint conversion here
-  Uint32 u_nbr = *((const Uint32*)&nbr);
-
-  SDLNet_Write32(u_nbr, packet);
-  int len = SDLNet_TCP_Send(socket, packet, sizeof(packet));
-  if (len < int(sizeof(packet)))
-    return false;
-
-  return true;
-}
-
-bool WNet::Send(TCPsocket& socket, const std::string &str)
-{
-  ASSERT(sdlnet_initialized);
-
-  bool r = Send(socket, str.size());
-  if (!r)
-    return false;
-
-  int len = SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
-  if (len < int(str.size()))
-    return false;
-
-  return true;
-}
-
 uint WNet::Batch(void* buffer, const int& nbr)
 {
   ASSERT(sdlnet_initialized);
@@ -360,87 +326,6 @@ unsigned int WNet::Batch(void* buffer, const std::string &str)
 void WNet::FinalizeBatch(void* data, size_t len)
 {
   SDLNet_Write32(len, (void*)( ((char*)data)+4 ) );
-}
-
-int WNet::ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr)
-{
-  ASSERT(sdlnet_initialized);
-
-  char packet[4];
-  int r = 0;
-  Uint32 u_nbr;
-
-  if (SDLNet_CheckSockets(sock_set, 5000) == 0) {
-    r = 1;
-    goto out;
-  }
-
-  if (!SDLNet_SocketReady(socket)) {
-    r = -1;
-    goto out;
-  }
-
-  if (SDLNet_TCP_Recv(socket, packet, sizeof(packet)) < 1)
-  {
-    r = -2;
-    goto out;
-  }
-
-  u_nbr = SDLNet_Read32(packet);
-  nbr = *((int*)&u_nbr);
-
- out:
-  return r;
-}
-
-int WNet::ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &_str, size_t maxlen)
-{
-  ASSERT(sdlnet_initialized);
-
-  int r;
-  unsigned int size = 0;
-  char* str;
-
-  r = ReceiveInt(sock_set, socket, (int&)size);
-  if (r) {
-    goto out;
-  }
-
-  if (size == 0) {
-    _str = "";
-    goto out;
-  }
-
-  if (size > maxlen) {
-    r = -1;
-    goto out;
-  }
-
-  if (SDLNet_CheckSockets(sock_set, 5000) == 0) {
-    r = -1;
-    goto out;
-  }
-
-  if (!SDLNet_SocketReady(socket)) {
-    r = -1;
-    goto out;
-  }
-
-  str = new char[size+1];
-  if( SDLNet_TCP_Recv(socket, str, size) < 1 )
-  {
-    r = -2;
-    goto out_delete;
-  }
-
-  str[size] = '\0';
-
-  _str = str;
-
- out_delete:
-  delete []str;
- out:
-  return r;
 }
 
 //-----------------------------------------------------------------------------

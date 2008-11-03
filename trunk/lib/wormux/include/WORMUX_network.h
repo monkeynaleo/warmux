@@ -56,17 +56,11 @@ public:
   static connection_state_t CheckHost(const std::string &host, int prt);
   static connection_state_t GetError();
 
-  static bool Send(TCPsocket& socket, const int& nbr);
-  static bool Send(TCPsocket& socket, const std::string &str);
-
   // A batch consists in a msg id, a size, and the batch itself.
   // Size wasn't known yet, so write it now.
   static uint Batch(void* buffer, const int& nbr);
   static uint Batch(void* buffer, const std::string &str);
   static void FinalizeBatch(void* buffer, size_t len);
-
-  static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
-  static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str, size_t maxlen);
 
   static bool Server_HandShake(WSocket& client_socket, const std::string& password);
 };
