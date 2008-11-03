@@ -22,13 +22,15 @@
 #ifndef NETWORK_SERVER_H
 #define NETWORK_SERVER_H
 //-----------------------------------------------------------------------------
+#include <WORMUX_socket.h>
 #include "network.h"
 //-----------------------------------------------------------------------------
 
 class NetworkServer : public Network
 {
   uint max_nb_players;
-  TCPsocket server_socket; // Wait for incoming connections on this socket
+  WSocket server_socket; // Wait for incoming connections on this socket
+  int port; // store listening port
 
 protected:
   bool HandShake(WSocket& client_socket) const;
@@ -45,7 +47,6 @@ public:
   // Serveur specific methods
   connection_state_t ServerStart(const std::string &port);
 
-  bool AcceptIncoming();
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);

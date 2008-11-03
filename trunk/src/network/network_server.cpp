@@ -26,8 +26,9 @@
 #include "include/action_handler.h"
 #include "include/constant.h"
 #include "game/game_mode.h"
-#include "tool/debug.h"
 #include "network/distant_cpu.h"
+#include "tool/debug.h"
+#include "tool/string_tools.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK
@@ -40,7 +41,9 @@
 
 //-----------------------------------------------------------------------------
 
-NetworkServer::NetworkServer(const std::string& password) : Network(password)
+NetworkServer::NetworkServer(const std::string& password) :
+  Network(password),
+  port(0)
 {
 #ifdef LOG_NETWORK
   fin = open("./network_server.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
@@ -50,7 +53,6 @@ NetworkServer::NetworkServer(const std::string& password) : Network(password)
 
 NetworkServer::~NetworkServer()
 {
-  SDLNet_TCP_Close(server_socket);
 }
 
 void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
@@ -83,20 +85,18 @@ bool NetworkServer::HandShake(WSocket& client_socket) const
 
 void NetworkServer::WaitActionSleep()
 {
-  if (server_socket)
-  {
-    // Check for an incoming connection
-    TCPsocket incoming = SDLNet_TCP_Accept(server_socket);
-    if (incoming)
-    {
-      WSocket* socket = new WSocket(incoming);
+  if (server_socket.IsConnected()) {
 
-      if (!HandShake(*socket))
+    // Check for an incoming connection
+    WSocket* incoming = server_socket.LookForClient();
+    if (incoming) {
+
+      if (!HandShake(*incoming))
  	return;
 
-      socket->AddToSocketSet(socket_set);
+      incoming->AddToSocketSet(socket_set);
 
-      DistantComputer * client = new DistantComputer(socket);
+      DistantComputer* client = new DistantComputer(incoming);
       cpu.push_back(client);
 
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT,
@@ -108,33 +108,35 @@ void NetworkServer::WaitActionSleep()
     SDL_Delay(100);
   }
 }
+
+void NetworkServer::RejectIncoming()
+{
+  server_socket.Disconnect();
+}
+
 //-----------------------------------------------------------------------------
 
-connection_state_t NetworkServer::ServerStart(const std::string &port)
+connection_state_t NetworkServer::ServerStart(const std::string &net_port)
 {
   WNet::Init();
 
   // The server starts listening for clients
-  MSG_DEBUG("network", "Start server on port %s", port.c_str());
+  MSG_DEBUG("network", "Start server on port %s", net_port.c_str());
 
   cpu.clear();
   // Convert port number (std::string port) into SDL port number format:
-  int prt = strtol(port.c_str(), NULL, 10);
-
-  if (SDLNet_ResolveHost(&ip,NULL,(Uint16)prt) != 0)
-  {
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
+  if (!str2int(net_port, port)) {
     return CONN_BAD_PORT;
   }
-
-  max_nb_players = GameMode::GetInstance()->max_teams;
 
   // Open the port to listen to
-  if (!AcceptIncoming()) {
+  if (!server_socket.AcceptIncoming(port)) {
     return CONN_BAD_PORT;
   }
+
   printf("\nConnected\n");
-  socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
+  max_nb_players = GameMode::GetInstance()->max_teams;
+  socket_set = SDLNet_AllocSocketSet(max_nb_players);
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
   MSG_DEBUG("network", "Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
   return CONNECTED;
@@ -150,32 +152,10 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections
     printf("Allowing new connections\n");
-    AcceptIncoming();
+    server_socket.AcceptIncoming(port);
   }
 
   return cpu.erase(closed);
-}
-
-bool NetworkServer::AcceptIncoming()
-{
-  server_socket = SDLNet_TCP_Open(&ip);
-  if (!server_socket)
-  {
-    fprintf(stderr, "SDLNet_TCP_Open: %s\n", SDLNet_GetError());
-    return false;
-  }
-  fprintf(stderr, "\n-> Start listening");
-  return true;
-}
-
-void NetworkServer::RejectIncoming()
-{
-  if (!server_socket)
-    return;
-
-  SDLNet_TCP_Close(server_socket);
-  server_socket = NULL;
-  fprintf(stderr, "\n<- Stop listening\n");
 }
 
 void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
