@@ -119,7 +119,6 @@ public:
   virtual bool IsLocal() const { return false ; }
   virtual bool IsServer() const { return false ; }
   virtual bool IsClient() const { return false ; }
-  uint GetPort() const;
   const std::string& GetPassword() const { return password; }
 
   void SetNickname(const std::string& nickname);
