@@ -244,4 +244,5 @@ else
 LIBS += @LIBCURL@
 endif
 
-LIBS += $(top_srcdir)/lib/box2d/src/libbox2d.a $(top_srcdir)/lib/wormux/libwormux.a
+wormux_LDADD=$(top_srcdir)/lib/box2d/src/libbox2d.a $(top_srcdir)/lib/wormux/libwormux.a
+wormux_DEPENDENCIES=$(top_srcdir)/lib/box2d/src/libbox2d.a $(top_srcdir)/lib/wormux/libwormux.a
