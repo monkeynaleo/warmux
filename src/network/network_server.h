@@ -45,7 +45,7 @@ public:
   virtual bool IsServer() const { return true; }
 
   // Serveur specific methods
-  connection_state_t ServerStart(const std::string &port);
+  connection_state_t ServerStart(const std::string &port, uint max_nb_players);
 
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
