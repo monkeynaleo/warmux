@@ -21,8 +21,8 @@
 
 #include <SDL_thread.h>
 #include <SDL_timer.h>
-#include "../include/WORMUX_error.h"
-#include "../include/WORMUX_socket.h"
+#include <WORMUX_error.h>
+#include <WORMUX_socket.h>
 
 #include <iostream>
 #include <sys/types.h>

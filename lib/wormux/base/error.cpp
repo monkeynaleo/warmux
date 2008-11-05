@@ -22,9 +22,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <signal.h>
-#include "../include/WORMUX_error.h"
-#include "../include/WORMUX_i18n.h"
-#include "../include/WORMUX_types.h"
+#include <WORMUX_error.h>
+#include <WORMUX_i18n.h>
+#include <WORMUX_types.h>
 
 #if !defined WIN32 || defined __MINGW32__
 #include <sys/types.h>

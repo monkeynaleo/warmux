@@ -24,7 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <string>
-#include "WORMUX_types.h"
+#include <WORMUX_types.h>
 //-----------------------------------------------------------------------------
 
 const std::string WORMUX_NETWORK_PORT = "3826";
