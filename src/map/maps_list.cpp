@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 
+#include <algorithm>
 #include "include/action.h"
 #include "map/maps_list.h"
 #include "map/water.h"
