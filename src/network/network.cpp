@@ -431,9 +431,17 @@ Network::network_state_t Network::GetState() const
 
 void Network::SendNetworkState() const
 {
-  Action a(Action::ACTION_NETWORK_CHANGE_STATE);
-  a.Push(state);
-  SendAction(a);
+  ASSERT(!IsLocal());
+
+  if (IsServer()) {
+    Action a(Action::ACTION_NETWORK_SERVER_CHANGE_STATE);
+    a.Push(state);
+    SendAction(a);
+  } else { // IsClient()
+    Action a(Action::ACTION_NETWORK_CLIENT_CHANGE_STATE);
+    a.Push(state);
+    SendAction(a);
+  }
 }
 
 void Network::SetTurnMaster(bool master)
