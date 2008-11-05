@@ -76,7 +76,7 @@ DistantComputer::DistantComputer(WSocket* new_sock) :
 
 DistantComputer::~DistantComputer()
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAddress()));
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_INFO_CLIENT_DISCONNECT, GetAddress()));
 
   if (force_disconnect)
     std::cerr << GetAddress() << " have been kicked" << std::endl;

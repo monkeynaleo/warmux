@@ -22,7 +22,6 @@
 #include <iostream>
 #include <SDL_mutex.h>
 
-
 #include "action_handler.h"
 #include "character/character.h"
 #include "character/body.h"
@@ -63,11 +62,37 @@
 #include "weapon/weapons_list.h"
 #include "weapon/explosion.h"
 
-// ########################################################
-// ########################################################
+// #############################################################################
+// #############################################################################
+// A client may receive an Action, that is intended to be handled only by the
+// server, because the server stupidely repeat it to all clients.
+// BUT a server must never receive an Action which concern only clients.
+
+void FAIL_IF_SERVER(Action *a)
+{
+  if (!a->GetCreator()) {
+    fprintf(stderr, "%s", ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+  }
+
+  ASSERT(a->GetCreator());
+
+  if (Network::GetInstance()->IsServer()) {
+    fprintf(stderr,
+	    "Server received an action (%s) that is normally sent only by the server only to a client,"
+	    " we are going to force disconnection of evil client: %s (%s)",
+	    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str(),
+	    a->GetCreator()->GetAddress().c_str(),
+	    a->GetCreator()->GetNickname().c_str());
+    a->GetCreator()->force_disconnect = true;
+  }
+}
+
+// #############################################################################
+// #############################################################################
 
 void Action_Nickname(Action *a)
 {
+  // Useful for admin commands like "/kick"
   if (Network::GetInstance()->IsServer() && a->GetCreator())
   {
       std::string nickname = a->PopString();
@@ -76,82 +101,78 @@ void Action_Nickname(Action *a)
   }
 }
 
-void Action_Network_ChangeState (Action *a)
+void Action_Network_ClientChangeState (Action *a)
 {
-  MSG_DEBUG("action_handler", "ChangeState");
+  if (Network::GetInstance()->IsClient())
+    return;
 
-  if (Network::GetInstance()->IsServer())
-  {
-    Network::network_state_t client_state = (Network::network_state_t)a->PopInt();
+  Network::network_state_t client_state = (Network::network_state_t)a->PopInt();
 
-    switch (Network::GetInstance()->GetState())
-    {
-    case Network::NO_NETWORK:
+  switch (Network::GetInstance()->GetState()) {
+  case Network::NO_NETWORK:
+    a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
+    ASSERT(client_state == Network::NETWORK_MENU_OK);
+    break;
+
+  case Network::NETWORK_LOADING_DATA:
+    a->GetCreator()->SetState(DistantComputer::STATE_READY);
+    ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
+    break;
+
+  case Network::NETWORK_PLAYING:
+    a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
+    ASSERT(client_state == Network::NETWORK_NEXT_GAME);
+    break;
+
+  case Network::NETWORK_NEXT_GAME:
+    if (client_state == Network::NETWORK_MENU_OK) {
       a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
-      ASSERT(client_state == Network::NETWORK_MENU_OK);
-      break;
-
-    case Network::NETWORK_LOADING_DATA:
-      a->GetCreator()->SetState(DistantComputer::STATE_READY);
-      ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
-      break;
-
-    case Network::NETWORK_PLAYING:
+    } else if (client_state == Network::NETWORK_NEXT_GAME) {
       a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
-      ASSERT(client_state == Network::NETWORK_NEXT_GAME);
-      break;
+    } else {
+      ASSERT(false);
+    }
+    break;
 
-    case Network::NETWORK_NEXT_GAME:
-      if (client_state == Network::NETWORK_MENU_OK) {
-	a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
-      } else if (client_state == Network::NETWORK_NEXT_GAME) {
-	a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
-      } else {
-	ASSERT(false);
-      }
-      break;
-
-    default:
-      NET_ASSERT(false)
+  default:
+    NET_ASSERT(false)
       {
         if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
         return;
       }
-      break;
-    }
-  }
-
-  if (Network::GetInstance()->IsClient())
-  {
-    Network::network_state_t server_state = (Network::network_state_t)a->PopInt();
-
-    switch (Network::GetInstance()->GetState())
-    {
-    case Network::NETWORK_MENU_OK:
-      Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
-      ASSERT(server_state == Network::NETWORK_LOADING_DATA);
-      break;
-
-    case Network::NETWORK_READY_TO_PLAY:
-      Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
-      ASSERT(server_state == Network::NETWORK_PLAYING);
-      break;
-
-    default:
-       NET_ASSERT(false)
-       {
-         if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
-         return;
-       }
-    }
+    break;
   }
 }
 
-void Action_Network_Check_Phase1 (Action */*a*/)
+void Action_Network_ServerChangeState (Action *a)
 {
-  // Client receives information request from the server
-  if (Network::GetInstance()->IsServer())
-    return;
+  FAIL_IF_SERVER(a);
+
+  Network::network_state_t server_state = (Network::network_state_t)a->PopInt();
+
+  switch (Network::GetInstance()->GetState()) {
+  case Network::NETWORK_MENU_OK:
+    Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
+    ASSERT(server_state == Network::NETWORK_LOADING_DATA);
+    break;
+
+  case Network::NETWORK_READY_TO_PLAY:
+    Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
+    ASSERT(server_state == Network::NETWORK_PLAYING);
+    break;
+
+  default:
+    NET_ASSERT(false)
+      {
+	if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
+	return;
+      }
+  }
+}
+
+void Action_Network_Check_Phase1 (Action *a)
+{
+  FAIL_IF_SERVER(a);
 
   Action b(Action::ACTION_NETWORK_CHECK_PHASE2);
   b.Push(ActiveMap()->GetRawName());
@@ -329,12 +350,7 @@ void Action_Game_SetState (Action *a)
 
 void Action_Rules_SetGameMode (Action *a)
 {
-  NET_ASSERT(Network::GetInstance()->IsClient())
-  {
-    if (a->GetCreator())
-      a->GetCreator()->force_disconnect = true;
-    return;
-  }
+  FAIL_IF_SERVER(a);
 
   std::string game_mode_name = a->PopString();
   std::string game_mode = a->PopString();
@@ -378,6 +394,7 @@ void Action_ChatMessage (Action *a)
   std::string nickname = a->PopString();
   std::string message = a->PopString();
 
+  // Useful for admin commands like "/kick"
   if (Network::GetInstance()->IsServer() && a->GetCreator())
     a->GetCreator()->SetNickname(nickname);
 
@@ -387,7 +404,7 @@ void Action_ChatMessage (Action *a)
 
 void Action_Menu_SetMap (Action *a)
 {
-  if (!Network::GetInstance()->IsClient()) return;
+  FAIL_IF_SERVER(a);
 
   std::string map_name = a->PopString();
   if (map_name != "random") {
@@ -699,8 +716,8 @@ static void Action_Network_Ping(Action */*a*/)
 {
 }
 
-// Only used to notify clients that someone connected to the server
-void Action_Network_Connect(Action *a)
+// Only used to notify clients (and server) that someone connected to the server
+void Action_Info_ClientConnect(Action *a)
 {
   std::string msg = Format("%s just connected", a->PopString().c_str());
   ChatLogger::LogMessageIfOpen(msg);
@@ -715,8 +732,8 @@ void Action_Network_Connect(Action *a)
   }
 }
 
-// Only used to notify clients that someone disconnected from the server
-void Action_Network_Disconnect(Action *a)
+// Only used to notify clients (and server) that someone disconnected from the server
+void Action_Info_ClientDisconnect(Action *a)
 {
   std::string msg = Format("%s just disconnected", a->PopString().c_str());
   ChatLogger::LogMessageIfOpen(msg);
@@ -858,7 +875,8 @@ ActionHandler::ActionHandler():
 
   // ########################################################
   Register (Action::ACTION_NICKNAME, "nickname", Action_Nickname);
-  Register (Action::ACTION_NETWORK_CHANGE_STATE, "NETWORK_change_state", &Action_Network_ChangeState);
+  Register (Action::ACTION_NETWORK_CLIENT_CHANGE_STATE, "NETWORK_client_change_state", &Action_Network_ClientChangeState);
+  Register (Action::ACTION_NETWORK_SERVER_CHANGE_STATE, "NETWORK_server_change_state", &Action_Network_ServerChangeState);
   Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check1", &Action_Network_Check_Phase1);
   Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check2", &Action_Network_Check_Phase2);
   Register (Action::ACTION_NETWORK_DISCONNECT_ON_ERROR, "NETWORK_disconnect_on_error", &Action_Network_Disconnect_On_Error);
@@ -920,8 +938,8 @@ ActionHandler::ActionHandler():
   Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
   Register (Action::ACTION_WIND, "wind", &Action_Wind);
   Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
-  Register (Action::ACTION_NETWORK_DISCONNECT, "NETWORK_disconnect", &Action_Network_Disconnect);
-  Register (Action::ACTION_NETWORK_CONNECT, "NETWORK_connect", &Action_Network_Connect);
+  Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_disconnect", &Action_Info_ClientDisconnect);
+  Register (Action::ACTION_INFO_CLIENT_CONNECT, "INFO_connect", &Action_Info_ClientConnect);
 
   // ########################################################
   SDL_UnlockMutex(mutex);

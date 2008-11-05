@@ -55,7 +55,7 @@ NetworkServer::~NetworkServer()
 void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
 {
   // Repeat the packet to other clients:
-  if (a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
+  if (a->GetType() != Action::ACTION_NETWORK_CLIENT_CHANGE_STATE
       && a->GetType() != Action::ACTION_NETWORK_CHECK_PHASE2)
   {
     char* packet;
@@ -96,7 +96,7 @@ void NetworkServer::WaitActionSleep()
       DistantComputer* client = new DistantComputer(incoming);
       cpu.push_back(client);
 
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT,
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_INFO_CLIENT_CONNECT,
 							 client->GetAddress()));
       printf("New client connected\n");
       if (GetNbConnectedPlayers() >= max_nb_players)

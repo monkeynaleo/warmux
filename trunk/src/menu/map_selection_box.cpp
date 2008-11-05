@@ -152,9 +152,9 @@ void MapSelectionBox::ChangeMap(uint index)
       MapsList::GetInstance()->SelectMapByIndex(index);
     }
 
-    Action* a = new Action(Action::ACTION_MENU_SET_MAP);
-    MapsList::GetInstance()->FillActionMenuSetMap(*a);
-    ActionHandler::GetInstance()->NewAction(a);
+    Action a(Action::ACTION_MENU_SET_MAP);
+    MapsList::GetInstance()->FillActionMenuSetMap(a);
+    Network::GetInstance()->SendAction(a);
   } else {
     selected_map_index = index;
   }
