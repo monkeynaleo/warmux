@@ -133,7 +133,10 @@ connection_state_t NetworkServer::ServerStart(const std::string &net_port, uint 
 
   printf("o Server successfully started\n");
   max_nb_players = _max_nb_players;
-  socket_set = new WSocketSet(max_nb_players);
+  socket_set = WSocketSet::GetSocketSet(max_nb_players);
+  if (!socket_set) {
+    return CONN_REJECTED;
+  }
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
 
   return CONNECTED;

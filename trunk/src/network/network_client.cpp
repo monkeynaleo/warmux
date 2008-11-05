@@ -153,7 +153,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   if (r != CONNECTED)
     goto error;
 
-  socket_set = new WSocketSet(1);
+  socket_set = WSocketSet::GetSocketSet(1);
   if (!socket_set) {
     r = CONN_REJECTED;
     goto error;

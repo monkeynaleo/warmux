@@ -28,15 +28,22 @@
 #include <sys/types.h>
 
 //-----------------------------------------------------------------------------
+// static method
+WSocketSet* WSocketSet::GetSocketSet(int maxsockets)
+{
+  SDLNet_SocketSet sdl_socket_set = SDLNet_AllocSocketSet(maxsockets);
+  if (!sdl_socket_set) {
+    fprintf(stderr, "SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
+    return NULL;
+  }
+  return new WSocketSet(sdl_socket_set);
+}
 
-WSocketSet::WSocketSet(int maxsockets) :
+
+WSocketSet::WSocketSet(SDLNet_SocketSet sdl_socket_set) :
+  socket_set(sdl_socket_set),
   lock(SDL_CreateMutex())
 {
-  socket_set = SDLNet_AllocSocketSet(maxsockets);
-  if (!socket_set) {
-    fprintf(stderr, "SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
-    ASSERT(false);
-  }
 }
 
 WSocketSet::~WSocketSet()
@@ -274,7 +281,7 @@ bool WSocket::AddToTmpSocketSet()
 
   Lock();
 
-  WSocketSet* tmp_socket_set = new WSocketSet(1);
+  WSocketSet* tmp_socket_set = WSocketSet::GetSocketSet(1);
   socket_set = tmp_socket_set;
 
   socket_set->Lock();
