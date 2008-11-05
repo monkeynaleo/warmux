@@ -64,32 +64,32 @@ msgstr "Ομάδα %s - Απομακρυσμένη"
 msgid "%s fps"
 msgstr "%s εικ./δευτ."
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "O %s από την ομάδα %s αυτοκτόνησε!"
 
-#: src/game/game.cpp:755
+#: src/game/game.cpp:756
 #, c-format
 msgid "%s from %s team has died."
 msgstr "O %s από την ομάδα %s πέθανε."
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:714
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "O %s από την ομάδα %s έπεσε στο νερό!"
 
-#: src/game/game.cpp:707
+#: src/game/game.cpp:708
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "O %s από την ομάδα %s έπεσε εκτός χάρτη!"
 
-#: src/game/game.cpp:728
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "Ο %s από την ομάδα %s χτύπησε στο έδαφος πολύ δυνατά!"
 
-#: src/game/game.cpp:735
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "O %s από την ομάδα %s πέθανε από αδεξιότητα!"
@@ -101,7 +101,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Ο παίκτης %s κέρδισε %u πόντο ζωής!"
 msgstr[1] "Ο παίκτης %s κέρδισε %u πόντους ζωής!"
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "O %s είναι ψυχοπαθής, σκότωσε ένα μέλος της ομάδας του (%s)!"
@@ -402,7 +402,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Η ομάδα %s αποδεκατίστηκε."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "Ο %s πήρε ένα μέλος της ομάδας %s μαζί του στον τάφο!"
@@ -611,7 +611,7 @@ msgstr "Αυτοκτονία"
 msgid "Configuration menu"
 msgstr "Μενού Διαμόρφωσης"
 
-#: src/menu/network_connection_menu.cpp:163
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Συνδεθείτε σε παιχνίδι"
 
@@ -688,7 +688,7 @@ msgstr "Ένταση ηχητικών εφέ"
 msgid "Energy"
 msgstr "Ενέργεια"
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:231
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Λάθος αρχικοποίησης δικτύου: Ο πελάτης %s δεν συμφωνεί μαζί σου!! - %s"
@@ -731,18 +731,18 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:378
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Αδύνατη η σύνδεση στο %s:%s"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:341
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Αδύνατη η επικοινωνία με το δείκτη διακομιστή για τη δημιουργία ενός "
 "παιχνιδιού."
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:281
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
@@ -750,12 +750,12 @@ msgstr ""
 "διαδίκτυο."
 
 # Impossible de se connecter à %s : %s
-#: src/menu/network_connection_menu.cpp:358
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Αδύνατη η έναρξη του διακομιστή."
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
-#: src/menu/network_connection_menu.cpp:352
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -799,7 +799,7 @@ msgstr "Παιχνίδι"
 msgid "Game mode"
 msgstr "Κατάσταση παιχνιδιού"
 
-#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Όνομα παιχνιδιού:"
 
@@ -836,7 +836,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Φάκελος HOME (μεταβλητή περιβάλλοντος $HOME) δεν μπορεί να βρεθεί!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:236
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Καλό παιχνίδι!"
 
@@ -857,7 +857,7 @@ msgstr "Βοήθεια"
 msgid "High jump"
 msgstr "Ψηλό άλμα"
 
-#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Δημιουργήστε ένα παιχνίδι"
 
@@ -946,7 +946,7 @@ msgstr "Αρχικοποίηση ήχων"
 msgid "Initialise teams"
 msgstr "Αρχικοποίηση ομάδων"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "Πάρε ένα δωράκι!"
 
@@ -955,7 +955,7 @@ msgid "Jetpack"
 msgstr "Σακίδιο Τζετ"
 
 # Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires.
-#: src/menu/network_connection_menu.cpp:234 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Μπείτε στο #wormux-fr στο irc.freenode.net για να βρείτε αντίπαλους."
 
@@ -993,7 +993,7 @@ msgstr "Αντιβαρύτητα"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Χειροποίητη σύνδεση"
 
@@ -1070,10 +1070,6 @@ msgstr "Μουσική;"
 msgid "Network Game"
 msgstr "Δικτυακό Παιχνίδι"
 
-#: src/network/network.cpp:296
-msgid "Network initialization"
-msgstr "Αρχικοποίηση Δικτύου"
-
 #: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr "Ποτέ"
@@ -1128,9 +1124,9 @@ msgstr "Αλεξίπτωτο"
 msgid "Parachute is activated automatically."
 msgstr "Το αλεξίπτωτο ενεργοποιείται αυτομάτως."
 
-#: src/menu/network_connection_menu.cpp:120
-#: src/menu/network_connection_menu.cpp:158
-#: src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Κωδικός:"
 
@@ -1167,12 +1163,12 @@ msgstr "Ονόματα παικτών;"
 msgid "Polecat Launcher"
 msgstr "Εκτόξευση Ασβού"
 
-#: src/menu/network_connection_menu.cpp:147
-#: src/menu/network_connection_menu.cpp:175
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Θύρα:"
 
-#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Δημόσιες μάχες"
 
@@ -1230,12 +1226,12 @@ msgstr "Μέγεθος ξετυλίγματος στα όρια"
 msgid "Scroll on border"
 msgstr "Ξετύλιγμα στα όρια"
 
-#: src/menu/network_connection_menu.cpp:136
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Διεύθυνση διακομιστή:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Διακομιστής διαθέσιμος στο διαδίκτυο"
 
@@ -1287,11 +1283,11 @@ msgid "Someone put a booby trap into the crate!"
 msgstr "Κάποιος παγίδευσε το κιβώτιο!"
 
 # Désolé, il n'y a actuellement aucun jeu en attente de joueurs
-#: src/menu/network_connection_menu.cpp:288
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
-#: src/network/index_server.cpp:321
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1391,7 +1387,7 @@ msgstr "Η αυτόματη ρουκέτα έφυγε για άλλους κόσ
 msgid "The ball left the battlefield before exploding"
 msgstr "Η μπάλα αναπήδησης εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
-#: src/network/network_client.cpp:96
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1507,7 +1503,7 @@ msgstr "Άγνωστη εντολή"
 msgid "Unlimited"
 msgstr "Απεριόριστο"
 
-#: src/network/network.cpp:145
+#: src/network/network.cpp:137
 msgid "Unnamed"
 msgstr "Ανώνυμος"
 
@@ -1547,7 +1543,7 @@ msgid "Website: "
 msgstr "Ιστοσελίδα: "
 
 # Trop la honte pour %s : il a été tué par un simple pistolet !
-#: src/game/game.cpp:752
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Τι ντροπή για τον %s: σκοτώθηκε από ένα απλό πιστολάκι!"
@@ -1569,15 +1565,15 @@ msgstr "Έναρξη του Wormux..."
 msgid "Wormux version "
 msgstr "Έκδοση του Wormux"
 
-#: src/include/action_handler.cpp:184
+#: src/include/action_handler.cpp:205
 msgid "Wrong map CRC!"
 msgstr "Λάθος χάρτης CRC!"
 
-#: src/include/action_handler.cpp:181
+#: src/include/action_handler.cpp:202
 msgid "Wrong map name!"
 msgstr "Λάθος όνομα χάρτη!"
 
-#: src/include/action_handler.cpp:187
+#: src/include/action_handler.cpp:208
 msgid "Wrong team!"
 msgstr "Λάθος ομάδα!"
 
@@ -1659,6 +1655,9 @@ msgstr "o Φόρτωση ηχητικού προφίλ: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
+
+#~ msgid "Network initialization"
+#~ msgstr "Αρχικοποίηση Δικτύου"
 
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Λάθος στο %s:%lu (Wormux %s) : %s"

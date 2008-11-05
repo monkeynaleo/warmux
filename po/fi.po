@@ -65,32 +65,32 @@ msgstr "%s Joukkue - Etä"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s joukkueesta %s suoritti itsemurhan !"
 
-#: src/game/game.cpp:755
+#: src/game/game.cpp:756
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s joukkueesta %s kuoli."
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:714
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s joukkueesta %s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:707
+#: src/game/game.cpp:708
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s joukkueesta %s tipahti ulos kartalta!"
 
-#: src/game/game.cpp:728
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s joukkueesta %s osui maahan liian lujaa!"
 
-#: src/game/game.cpp:735
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s joukkueesta %s kuoli kömpelyyteensä!"
@@ -102,7 +102,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
@@ -387,7 +387,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Joukkue %s tapettiin."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
@@ -592,7 +592,7 @@ msgstr "Itsemurhaisku"
 msgid "Configuration menu"
 msgstr "Asetusvalikko"
 
-#: src/menu/network_connection_menu.cpp:163
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Yhdistä peliin"
 
@@ -667,7 +667,7 @@ msgstr "Efektien voimakkuus"
 msgid "Energy"
 msgstr "Energia"
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:231
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Virhe alustettaessa verkkoa: Client %s ei hyväksy sinua!! - %s"
@@ -708,25 +708,25 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:378
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Virhe: Ei voitu yhdistää: %s:%s"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:341
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Virhe: Ei saatu yhteyttä palvelimeen pelin isännöimiseksi"
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:281
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Virhe: Ei saatu yhteyttä palvelimeen pelien etsimiseksi"
 
-#: src/menu/network_connection_menu.cpp:358
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Virhe: Palvelimen käynnistäminen epäonnistui"
 
-#: src/menu/network_connection_menu.cpp:352
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -768,7 +768,7 @@ msgstr "Peli"
 msgid "Game mode"
 msgstr "Pelitila"
 
-#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Pelin nimi:"
 
@@ -805,7 +805,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:236
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Pidähän hauskaa!"
 
@@ -826,7 +826,7 @@ msgstr "Ohje"
 msgid "High jump"
 msgstr "Korkea hyppy"
 
-#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Isännöi peli"
 
@@ -911,7 +911,7 @@ msgstr "Alusta äänet"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "Taivaalta sataa lahjoja!"
 
@@ -919,7 +919,7 @@ msgstr "Taivaalta sataa lahjoja!"
 msgid "Jetpack"
 msgstr "Lentoreppu"
 
-#: src/menu/network_connection_menu.cpp:234 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Liity #wormux kanavalle irc.freenode.netissä löytääksesi vastustajia."
 
@@ -957,7 +957,7 @@ msgstr "Painottomuus"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Manuaalinen yhteys"
 
@@ -1034,10 +1034,6 @@ msgstr "Musiikki"
 msgid "Network Game"
 msgstr "Nettipeli"
 
-#: src/network/network.cpp:296
-msgid "Network initialization"
-msgstr "Verkon alustus..."
-
 #: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr "Ei koskaan"
@@ -1092,9 +1088,9 @@ msgstr "Laskuvarjo"
 msgid "Parachute is activated automatically."
 msgstr "Laskuvarjo aukeaa automaattisesti."
 
-#: src/menu/network_connection_menu.cpp:120
-#: src/menu/network_connection_menu.cpp:158
-#: src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Salasana:"
 
@@ -1130,12 +1126,12 @@ msgstr "Näytä nimi"
 msgid "Polecat Launcher"
 msgstr "Haisunäätä"
 
-#: src/menu/network_connection_menu.cpp:147
-#: src/menu/network_connection_menu.cpp:175
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Portti:"
 
-#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Julkiset taistelut"
 
@@ -1191,12 +1187,12 @@ msgstr "Reunuksen koko"
 msgid "Scroll on border"
 msgstr "Vieritä ruudun reunoista"
 
-#: src/menu/network_connection_menu.cpp:136
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Palvelimen osoite:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Palvelimelle on pääsy internetistä"
 
@@ -1245,11 +1241,11 @@ msgstr "Tarkkuuskivääri"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Joku viritti ansan laatikkoon!"
 
-#: src/menu/network_connection_menu.cpp:288
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Valitettavasti tällähetkellä yksikään peli ei odota pelaajia"
 
-#: src/network/index_server.cpp:321
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1343,7 +1339,7 @@ msgstr "Automaattiohjus on poistunut taistelukentältä..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Pallo on poistunut taistelukentältä..."
 
-#: src/network/network_client.cpp:96
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1451,7 +1447,7 @@ msgstr "Tuntematon komento"
 msgid "Unlimited"
 msgstr "Rajaton"
 
-#: src/network/network.cpp:145
+#: src/network/network.cpp:137
 msgid "Unnamed"
 msgstr "Nimetön"
 
@@ -1489,7 +1485,7 @@ msgstr "Aseet"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game.cpp:752
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -1511,15 +1507,15 @@ msgstr "Wormux käynnistyy..."
 msgid "Wormux version "
 msgstr "Wormux versio"
 
-#: src/include/action_handler.cpp:184
+#: src/include/action_handler.cpp:205
 msgid "Wrong map CRC!"
 msgstr "Väärä kartta CRC!"
 
-#: src/include/action_handler.cpp:181
+#: src/include/action_handler.cpp:202
 msgid "Wrong map name!"
 msgstr "Väärä kartan nimi!"
 
-#: src/include/action_handler.cpp:187
+#: src/include/action_handler.cpp:208
 msgid "Wrong team!"
 msgstr "Väärä joukkue!"
 
@@ -1598,6 +1594,9 @@ msgstr "o Ladataan ääniprofiili: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."
+
+#~ msgid "Network initialization"
+#~ msgstr "Verkon alustus..."
 
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Virhe kohdassa %s:%lu (Wormux %s) : %s"
