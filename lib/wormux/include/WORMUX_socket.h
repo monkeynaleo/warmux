@@ -43,8 +43,12 @@ private:
   void Lock();
   void UnLock();
 
+  WSocketSet(SDLNet_SocketSet socket_set);
+
 public:
-  WSocketSet(int maxsockets);
+  // may return NULL in case of problem
+  static WSocketSet* GetSocketSet(int max_sockets);
+
   ~WSocketSet();
   bool AddSocket(WSocket* socket);
   void RemoveSocket(WSocket* socket);
