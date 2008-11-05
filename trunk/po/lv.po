@@ -64,32 +64,32 @@ msgstr "%s komanda - attālināta"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s izdara pašnāvību !"
 
-#: src/game/game.cpp:755
+#: src/game/game.cpp:756
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s ) ir nomiris."
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:714
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s iekrita ūdenī."
 
-#: src/game/game.cpp:707
+#: src/game/game.cpp:708
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s nokrita no kartes!"
 
-#: src/game/game.cpp:728
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:735
+#: src/game/game.cpp:736
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s ir miris, jo bija pārāk neveikls!"
@@ -102,7 +102,7 @@ msgstr[0] "%s ir ieguvis %u enerģijas punktu!"
 msgstr[1] "%s ir ieguvis %u enerģijas punktus!"
 msgstr[2] "%s ir ieguvis %u enerģijas punktus!"
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:748
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ir manjaks, viņš nogalināja %s komandas dalībnieku!"
@@ -409,7 +409,7 @@ msgstr[2] "%s komanda ir ieguvusi %u tux šāvējus!"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -619,7 +619,7 @@ msgstr "Izdarīt pašnvību"
 msgid "Configuration menu"
 msgstr "Kļūda ielādējot konfigurācijas failu: %s"
 
-#: src/menu/network_connection_menu.cpp:163
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Pieslēgties spēlei"
 
@@ -694,7 +694,7 @@ msgstr ""
 msgid "Energy"
 msgstr ""
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:231
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -731,28 +731,28 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:378
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Kļūda: Nevar pieslēgties %s:%s"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:341
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Kļūda: Nevar sazināties ar indeksa serveri, lai izvietotu spēli"
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:281
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Kļūda: Nevar sazināties ar indeksa serveri, lai meklētu interneta spēles"
 
-#: src/menu/network_connection_menu.cpp:358
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Kļūda: Nevar sākt serveri"
 
-#: src/menu/network_connection_menu.cpp:352
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -793,7 +793,7 @@ msgstr ""
 msgid "Game mode"
 msgstr "Klienta režīms"
 
-#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr ""
 
@@ -830,7 +830,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "MĀJAS mape (vides mainīgias $HOME) nav atrasts!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:236
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Lai jums jauka spēle!"
 
@@ -851,7 +851,7 @@ msgstr ""
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Izveidot spēli"
 
@@ -939,7 +939,7 @@ msgstr "Gatavo skaņas"
 msgid "Initialise teams"
 msgstr "Gatavo komandas"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "Tā ir dāvana!"
 
@@ -947,7 +947,7 @@ msgstr "Tā ir dāvana!"
 msgid "Jetpack"
 msgstr "Raķešsoma"
 
-#: src/menu/network_connection_menu.cpp:234 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pievienojies #wormux kanālam irc.freenode.net serverī, lai atrastu "
@@ -987,7 +987,7 @@ msgstr "Antigravitācija"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr ""
 
@@ -1068,10 +1068,6 @@ msgstr "Mūzika?"
 msgid "Network Game"
 msgstr "Tīkla spēle"
 
-#: src/network/network.cpp:296
-msgid "Network initialization"
-msgstr "Tīkla inicializācija"
-
 #: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr ""
@@ -1128,9 +1124,9 @@ msgstr "Paršūts"
 msgid "Parachute is activated automatically."
 msgstr "Parašūts aktivizējas automātiski."
 
-#: src/menu/network_connection_menu.cpp:120
-#: src/menu/network_connection_menu.cpp:158
-#: src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr ""
 
@@ -1167,12 +1163,12 @@ msgstr "Spēlētāja vārds?"
 msgid "Polecat Launcher"
 msgstr "Sesku šāvējs"
 
-#: src/menu/network_connection_menu.cpp:147
-#: src/menu/network_connection_menu.cpp:175
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Ports:"
 
-#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr ""
 
@@ -1232,12 +1228,12 @@ msgstr "Ritināt karti"
 msgid "Scroll on border"
 msgstr "Ritināt karti"
 
-#: src/menu/network_connection_menu.cpp:136
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Servera adrese:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Serveris pieejams internetā"
 
@@ -1287,11 +1283,11 @@ msgstr "Snaiperšautene"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:288
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/network/index_server.cpp:321
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1387,7 +1383,7 @@ msgstr "Automātiksā raķete izgāja no spēles laukuma..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bumba nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/network/network_client.cpp:96
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1496,7 +1492,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(bezgalība)"
 
-#: src/network/network.cpp:145
+#: src/network/network.cpp:137
 msgid "Unnamed"
 msgstr ""
 
@@ -1535,7 +1531,7 @@ msgstr "Ieroči"
 msgid "Website: "
 msgstr "Mākas lapa: "
 
-#: src/game/game.cpp:752
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kauns un negods %s - viņu nogalināja ar vienkāršu ieroci!"
@@ -1557,15 +1553,15 @@ msgstr "Wormux ielādējas..."
 msgid "Wormux version "
 msgstr "Wormux versija "
 
-#: src/include/action_handler.cpp:184
+#: src/include/action_handler.cpp:205
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:181
+#: src/include/action_handler.cpp:202
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:187
+#: src/include/action_handler.cpp:208
 msgid "Wrong team!"
 msgstr ""
 
@@ -1647,6 +1643,9 @@ msgstr "o Ielādē skaņas profilu: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Atver skaņu %d Hz %d bit"
+
+#~ msgid "Network initialization"
+#~ msgstr "Tīkla inicializācija"
 
 #, fuzzy
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"

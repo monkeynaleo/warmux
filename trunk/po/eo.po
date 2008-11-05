@@ -61,32 +61,32 @@ msgstr "%s Teamo - Defore"
 msgid "%s fps"
 msgstr "%s bildoj po sekundo (fps)"
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s (teamo %s) mortigis sin!"
 
-#: src/game/game.cpp:755
+#: src/game/game.cpp:756
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (teamo %s) mortis."
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:714
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (teamo %s) droniĝis!"
 
-#: src/game/game.cpp:707
+#: src/game/game.cpp:708
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (teamo %s) falis el la mapo!"
 
-#: src/game/game.cpp:728
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (teamo %s) grundtrafis tro perforte!"
 
-#: src/game/game.cpp:735
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (teamo %s) estas mortinta pro lia mallerteco."
@@ -98,7 +98,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo: %s!"
@@ -382,7 +382,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s teamo primurditis."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s entombigis membron de la %s teamo kun li!"
@@ -587,7 +587,7 @@ msgstr "Sinmortigi"
 msgid "Configuration menu"
 msgstr "Agordmenuo"
 
-#: src/menu/network_connection_menu.cpp:163
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Konekti al ludo"
 
@@ -662,7 +662,7 @@ msgstr "Laŭteco de efektoj"
 msgid "Energy"
 msgstr "Energio"
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:231
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Eraro iniciatante reton: la kliento %s ne akordiĝas kun vi! - %s"
@@ -701,25 +701,25 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:378
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ne eblas konekti al %s: %s"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:341
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por gastigi ludon"
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:281
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por serĉi interretan ludon"
 
-#: src/menu/network_connection_menu.cpp:358
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Eraro: Ne eblas starti servilon"
 
-#: src/menu/network_connection_menu.cpp:352
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -761,7 +761,7 @@ msgstr "Ludo"
 msgid "Game mode"
 msgstr "Ludmodo"
 
-#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Ludnomo:"
 
@@ -798,7 +798,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME dosiero (mediovariablo $HOME) ne troveblas!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:236
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Bone amuzu!"
 
@@ -819,7 +819,7 @@ msgstr "Helpo"
 msgid "High jump"
 msgstr "Supersalti"
 
-#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Gastigi ludon"
 
@@ -903,7 +903,7 @@ msgstr "Preparante sonojn"
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "Tio estas donaco!"
 
@@ -911,7 +911,7 @@ msgstr "Tio estas donaco!"
 msgid "Jetpack"
 msgstr "Jetpako"
 
-#: src/menu/network_connection_menu.cpp:234 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Aliĝu #wormux en irc.freenode.net por trovi oponantojn."
 
@@ -949,7 +949,7 @@ msgstr "Malpezigilo"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Manuma konekto"
 
@@ -1026,10 +1026,6 @@ msgstr "Muziko?"
 msgid "Network Game"
 msgstr "Reta ludo"
 
-#: src/network/network.cpp:296
-msgid "Network initialization"
-msgstr "Preparado de reto"
-
 #: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr "Neniam"
@@ -1084,9 +1080,9 @@ msgstr "Paraŝuto"
 msgid "Parachute is activated automatically."
 msgstr "Paraŝuto aŭtomatike uziĝis."
 
-#: src/menu/network_connection_menu.cpp:120
-#: src/menu/network_connection_menu.cpp:158
-#: src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Pasvorto:"
 
@@ -1122,12 +1118,12 @@ msgstr "Nomo de ludanto?"
 msgid "Polecat Launcher"
 msgstr "Putorĵetilo"
 
-#: src/menu/network_connection_menu.cpp:147
-#: src/menu/network_connection_menu.cpp:175
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Pordo:"
 
-#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Publikaj bataloj"
 
@@ -1183,12 +1179,12 @@ msgstr "Grandeco de rulumrando"
 msgid "Scroll on border"
 msgstr "Rulumi sur randoj"
 
-#: src/menu/network_connection_menu.cpp:136
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Servila adreso:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Interretebla servilo"
 
@@ -1237,11 +1233,11 @@ msgstr "Tiraljora fusilo"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Iu metis insidon en la skatolo!"
 
-#: src/menu/network_connection_menu.cpp:288
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
-#: src/network/index_server.cpp:321
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1335,7 +1331,7 @@ msgstr "La aŭtomatika raketo foriris de la batalejo..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilko foriris de la batalejo antaŭ ol explodi."
 
-#: src/network/network_client.cpp:96
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1442,7 +1438,7 @@ msgstr "Nekonata komando"
 msgid "Unlimited"
 msgstr "(senlimaj)"
 
-#: src/network/network.cpp:145
+#: src/network/network.cpp:137
 msgid "Unnamed"
 msgstr "Sennoma"
 
@@ -1480,7 +1476,7 @@ msgstr "Armiloj"
 msgid "Website: "
 msgstr "TTT-ejo: "
 
-#: src/game/game.cpp:752
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s: li estis mortigita per simpla pafilo!"
@@ -1502,15 +1498,15 @@ msgstr "Wormux ŝargante..."
 msgid "Wormux version "
 msgstr "Wormux versio "
 
-#: src/include/action_handler.cpp:184
+#: src/include/action_handler.cpp:205
 msgid "Wrong map CRC!"
 msgstr "Malbona mapa CRC!"
 
-#: src/include/action_handler.cpp:181
+#: src/include/action_handler.cpp:202
 msgid "Wrong map name!"
 msgstr "Malbona mapnomo!"
 
-#: src/include/action_handler.cpp:187
+#: src/include/action_handler.cpp:208
 msgid "Wrong team!"
 msgstr "Malbona teamo!"
 
@@ -1590,6 +1586,9 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#~ msgid "Network initialization"
+#~ msgstr "Preparado de reto"
 
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Eraro en %s:%lu (Wormux %s) : %s"

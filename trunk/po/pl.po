@@ -69,32 +69,32 @@ msgstr "Drużyna %s - zdalna"
 msgid "%s fps"
 msgstr "%s kl/s"
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s z drużyny %s popełnił samobójstwo!"
 
-#: src/game/game.cpp:755
+#: src/game/game.cpp:756
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s z drużyny %s zginął."
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:714
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s z drużyny %s wpadł do wody!"
 
-#: src/game/game.cpp:707
+#: src/game/game.cpp:708
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s z drużyny %s wypadł poza mapę!"
 
-#: src/game/game.cpp:728
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s z drużyny %s uderzył w ziemię zbyt mocno!"
 
-#: src/game/game.cpp:735
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s z drużyny %s zginął przez swoją niezdarność!"
@@ -107,7 +107,7 @@ msgstr[0] "%s wygrał %u punkt energii!"
 msgstr[1] "%s wygrał %u punkty energii!"
 msgstr[2] "%s wygrał %u punktów energii!"
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s jest psychopatą, zabił %s - członka swojej drużyny!"
@@ -448,7 +448,7 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr "Drużyna %s została unicestwiona."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s zabrał ze sobą członka drużyny %s w wieczną podróż!"
@@ -653,7 +653,7 @@ msgstr "Pas samobójcy"
 msgid "Configuration menu"
 msgstr "Menu konfiguracji"
 
-#: src/menu/network_connection_menu.cpp:163
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Dołącz do gry"
 
@@ -728,7 +728,7 @@ msgstr "Głośność efektów"
 msgid "Energy"
 msgstr "Energia"
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:231
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Błąd inicjalizacji sieci: Klient %s nie jest zgodny z Twoim - %s"
@@ -768,29 +768,29 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:378
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Błąd: Połączenie z %s:%s nie powiodło się"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:341
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Błąd: nie udało się skontaktować z serwerem indeksującym w celu "
 "zarejestrowania serwera gry"
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:281
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Błąd: nie udało się skontaktować z serwerem indeksującym w celu znalezienia "
 "gry internetowej"
 
-#: src/menu/network_connection_menu.cpp:358
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Błąd: Nie można uruchomić serwera"
 
-#: src/menu/network_connection_menu.cpp:352
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -832,7 +832,7 @@ msgstr "Gra"
 msgid "Game mode"
 msgstr "Tryb gry"
 
-#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Nazwa gry:"
 
@@ -870,7 +870,7 @@ msgstr ""
 "Katalog domowy (zmienna środowiskowa $HOME) nie mógł zostać odnaleziony!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:236
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Życzymy miłej gry!"
 
@@ -891,7 +891,7 @@ msgstr "Pomoc"
 msgid "High jump"
 msgstr "Wysoki skok"
 
-#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Uruchom serwer gry"
 
@@ -977,7 +977,7 @@ msgstr "Inicjalizacja dźwięków"
 msgid "Initialise teams"
 msgstr "Inicjalizacja drużyn"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "To prezent!"
 
@@ -985,7 +985,7 @@ msgstr "To prezent!"
 msgid "Jetpack"
 msgstr "Plecak odrzutowy"
 
-#: src/menu/network_connection_menu.cpp:234 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Wejdź na kanał #wormux na serwerze irc.freenode.net aby znaleźć przeciwników"
@@ -1024,7 +1024,7 @@ msgstr "Obniżona grawitacja"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Połączenie manualne"
 
@@ -1101,10 +1101,6 @@ msgstr "Odtwarzanie muzyki"
 msgid "Network Game"
 msgstr "Gra sieciowa"
 
-#: src/network/network.cpp:296
-msgid "Network initialization"
-msgstr "Inicjalizacja sieci"
-
 #: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr "Nigdy"
@@ -1159,9 +1155,9 @@ msgstr "Spadochron"
 msgid "Parachute is activated automatically."
 msgstr "Spadochron jest aktywowany automatycznie."
 
-#: src/menu/network_connection_menu.cpp:120
-#: src/menu/network_connection_menu.cpp:158
-#: src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Hasło:"
 
@@ -1197,12 +1193,12 @@ msgstr "Wyświetlanie imion graczy"
 msgid "Polecat Launcher"
 msgstr "Wyrzutnia skunksów"
 
-#: src/menu/network_connection_menu.cpp:147
-#: src/menu/network_connection_menu.cpp:175
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Port:"
 
-#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Bitwy publiczne"
 
@@ -1258,12 +1254,12 @@ msgstr "Rozmiar obramowania"
 msgid "Scroll on border"
 msgstr "Przewijaj na obramowaniu"
 
-#: src/menu/network_connection_menu.cpp:136
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Adres serwera:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Serwer dostępny w Internecie"
 
@@ -1312,11 +1308,11 @@ msgstr "Snajperka"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Ktoś wsadził minę pułapkę do kontenera!"
 
-#: src/menu/network_connection_menu.cpp:288
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Przykro nam, ale aktualnie nie ma gry oczekującej na graczy"
 
-#: src/network/index_server.cpp:321
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1411,7 +1407,7 @@ msgstr "Kierowana rakieta opuściła pole bitwy..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Kula opuściła pole bitwy zanim wybuchła"
 
-#: src/network/network_client.cpp:96
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1522,7 +1518,7 @@ msgstr "Nieznane polecenie"
 msgid "Unlimited"
 msgstr "Bez ograniczeń"
 
-#: src/network/network.cpp:145
+#: src/network/network.cpp:137
 msgid "Unnamed"
 msgstr "Nienazwane"
 
@@ -1562,7 +1558,7 @@ msgstr "Uzbrojenie"
 msgid "Website: "
 msgstr "Strona domowa: "
 
-#: src/game/game.cpp:752
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Co za wstyd! %s został zabity zwykłym pistoletem!"
@@ -1584,15 +1580,15 @@ msgstr "Wormux - uruchamianie..."
 msgid "Wormux version "
 msgstr "Wormux - wersja programu"
 
-#: src/include/action_handler.cpp:184
+#: src/include/action_handler.cpp:205
 msgid "Wrong map CRC!"
 msgstr "Nieprawidłowa suma kontrolna mapy!"
 
-#: src/include/action_handler.cpp:181
+#: src/include/action_handler.cpp:202
 msgid "Wrong map name!"
 msgstr "Nieprawidłowa nazwa mapy!"
 
-#: src/include/action_handler.cpp:187
+#: src/include/action_handler.cpp:208
 msgid "Wrong team!"
 msgstr "Nieprawidłowa drużyna!"
 
@@ -1672,6 +1668,9 @@ msgstr "o Wczytywanie profilu dźwięków: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otworzono plik audio - %d Hz %d bit"
+
+#~ msgid "Network initialization"
+#~ msgstr "Inicjalizacja sieci"
 
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Błąd w %s:%lu (Wormux w wersji %s): %s"

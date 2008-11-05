@@ -64,32 +64,32 @@ msgstr "%s Tým - Vzdálený"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s spáchal sebevraždu !"
 
-#: src/game/game.cpp:755
+#: src/game/game.cpp:756
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) zemřel."
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:714
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s se utopil."
 
-#: src/game/game.cpp:707
+#: src/game/game.cpp:708
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s zmizel z mapy!"
 
-#: src/game/game.cpp:728
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:735
+#: src/game/game.cpp:736
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s je mrtvý, protože je trdlo!"
@@ -102,7 +102,7 @@ msgstr[0] "%s získal %u život!"
 msgstr[1] "%s získal %u životy!"
 msgstr[2] "%s získal %u životů!"
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychouš, zabil člena týmu %s!"
@@ -424,7 +424,7 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -635,7 +635,7 @@ msgstr "Spáchat sebevraždu"
 msgid "Configuration menu"
 msgstr "žádný konfigurační soubor!"
 
-#: src/menu/network_connection_menu.cpp:163
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Připojit ke hře"
 
@@ -710,7 +710,7 @@ msgstr "Hlasitost efektů"
 msgid "Energy"
 msgstr "Zdraví"
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:231
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -750,28 +750,28 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:378
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Chyba: Nepodařilo se připojit k %s:%s"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:341
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Chyba: Nepodařilo se kontaktovat index server k hostování hry"
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:281
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Chyba: Nepodařilo se kontaktovat index server pro vyhledání internetové hry"
 
-#: src/menu/network_connection_menu.cpp:358
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Chyba: Nepodařilo se spustit herní server"
 
-#: src/menu/network_connection_menu.cpp:352
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -811,7 +811,7 @@ msgstr "Hra"
 msgid "Game mode"
 msgstr "Jméno hry:"
 
-#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Jméno hry:"
 
@@ -848,7 +848,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nemůžu nalézt domovský adresář (proměnná prostředí $HOME)!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:236
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Přeji dobrou hru!"
 
@@ -869,7 +869,7 @@ msgstr "Nápověda"
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Hostovat hru"
 
@@ -955,7 +955,7 @@ msgstr "Inicializovat zvuky"
 msgid "Initialise teams"
 msgstr "Inicializovat týmy"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "To je dáreček!"
 
@@ -963,7 +963,7 @@ msgstr "To je dáreček!"
 msgid "Jetpack"
 msgstr "Tryskový batoh"
 
-#: src/menu/network_connection_menu.cpp:234 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Připojte se k #wormux na irc.freenode.net a najděte protihráče."
 
@@ -1001,7 +1001,7 @@ msgstr "Nízká gravitace"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Připojit se ručně"
 
@@ -1080,10 +1080,6 @@ msgstr "Hudba?"
 msgid "Network Game"
 msgstr "Síťová hra"
 
-#: src/network/network.cpp:296
-msgid "Network initialization"
-msgstr "Inicializace sítě"
-
 #: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr ""
@@ -1138,9 +1134,9 @@ msgstr "Padák"
 msgid "Parachute is activated automatically."
 msgstr "Padák je aktivován automaticky."
 
-#: src/menu/network_connection_menu.cpp:120
-#: src/menu/network_connection_menu.cpp:158
-#: src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Heslo:"
 
@@ -1177,12 +1173,12 @@ msgstr "Jméno hráče?"
 msgid "Polecat Launcher"
 msgstr "Odpalovač tchořů"
 
-#: src/menu/network_connection_menu.cpp:147
-#: src/menu/network_connection_menu.cpp:175
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Port:"
 
-#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Veřejné hry"
 
@@ -1239,12 +1235,12 @@ msgstr "Velikost posuvníků"
 msgid "Scroll on border"
 msgstr "Posuvníky na okrajích"
 
-#: src/menu/network_connection_menu.cpp:136
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Adresa serveru:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Server přístupný z Internetu"
 
@@ -1294,11 +1290,11 @@ msgstr "Ostřelovací puška"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Někdo dal dítě do bedny!"
 
-#: src/menu/network_connection_menu.cpp:288
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
-#: src/network/index_server.cpp:321
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1391,7 +1387,7 @@ msgstr "Naváděná raketa opustila bitevní pole..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Míč opustil bitevní pole předtím, než explodoval"
 
-#: src/network/network_client.cpp:96
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1499,7 +1495,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(neomezeně)"
 
-#: src/network/network.cpp:145
+#: src/network/network.cpp:137
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
@@ -1538,7 +1534,7 @@ msgstr "Zbraně"
 msgid "Website: "
 msgstr "Webová stránka: "
 
-#: src/game/game.cpp:752
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Jaká hanba pro %s - zabil se tak hloupou zbraní!"
@@ -1560,15 +1556,15 @@ msgstr "Spouští se Wormux..."
 msgid "Wormux version "
 msgstr "Wormux verze"
 
-#: src/include/action_handler.cpp:184
+#: src/include/action_handler.cpp:205
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:181
+#: src/include/action_handler.cpp:202
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:187
+#: src/include/action_handler.cpp:208
 msgid "Wrong team!"
 msgstr ""
 
@@ -1648,6 +1644,9 @@ msgstr "o Načítám hudební profil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otevřena hudba o %d Hz %d bitech"
+
+#~ msgid "Network initialization"
+#~ msgstr "Inicializace sítě"
 
 #, fuzzy
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"

@@ -61,33 +61,33 @@ msgstr " %s 隊伍- 遙控"
 msgid "%s fps"
 msgstr "%s 幀fps"
 
-#: src/game/game.cpp:722
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s 自殺啦 !"
 
-#: src/game/game.cpp:755
+#: src/game/game.cpp:756
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s)死掉了  ."
 
-#: src/game/game.cpp:713
+#: src/game/game.cpp:714
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s 入水---深呼吸."
 
-#: src/game/game.cpp:707
+#: src/game/game.cpp:708
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s 飛出地圖邊緣---"
 
-#: src/game/game.cpp:728
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
 # what about female names?
-#: src/game/game.cpp:735
+#: src/game/game.cpp:736
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
@@ -99,7 +99,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 贏得 %u 點耐久!"
 msgstr[1] "%s 贏得 %u 點耐久!"
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是個瘋子, 他幹掉了 %s 的一個!"
@@ -372,7 +372,7 @@ msgstr[1] "%s 隊得到 %u 企鵝發射器! 沒見過滿天飛的企鵝嗎?"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -582,7 +582,7 @@ msgstr "自殺"
 msgid "Configuration menu"
 msgstr "沒有配置檔案！"
 
-#: src/menu/network_connection_menu.cpp:163
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "連上游戲"
 
@@ -657,7 +657,7 @@ msgstr "音效大小"
 msgid "Energy"
 msgstr ""
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:231
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -694,27 +694,27 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:378
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "錯誤: 連不到%s:%s"
 
-#: src/menu/network_connection_menu.cpp:339
+#: src/menu/network_connection_menu.cpp:341
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "錯誤: 無法聯繫索引伺服器建立游戲"
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:281
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "錯誤: 無法聯繫索引伺服器搜尋游戲"
 
-#: src/menu/network_connection_menu.cpp:358
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "錯誤: 無法開始伺服器"
 
-#: src/menu/network_connection_menu.cpp:352
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -754,7 +754,7 @@ msgstr ""
 msgid "Game mode"
 msgstr "游戲名:"
 
-#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "游戲名:"
 
@@ -791,7 +791,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr " 找不到家目錄 (environment variable $HOME) !"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:236
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "來吧!"
 
@@ -813,7 +813,7 @@ msgstr "輔助說明"
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "建立游戲"
 
@@ -897,7 +897,7 @@ msgstr "音響起始化"
 msgid "Initialise teams"
 msgstr "隊伍起始化"
 
-#: src/game/game.cpp:591
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "就是現在!"
 
@@ -906,7 +906,7 @@ msgid "Jetpack"
 msgstr "噴射包"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:234 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "加入#wormux IRC irc.freenode.net 找對手"
 
@@ -944,7 +944,7 @@ msgstr "漫步-低重力"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr ""
 
@@ -1025,10 +1025,6 @@ msgstr "音樂?"
 msgid "Network Game"
 msgstr "網路游戲"
 
-#: src/network/network.cpp:296
-msgid "Network initialization"
-msgstr "網路起始化"
-
 #: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr ""
@@ -1083,9 +1079,9 @@ msgstr "降落傘"
 msgid "Parachute is activated automatically."
 msgstr "自動使用"
 
-#: src/menu/network_connection_menu.cpp:120
-#: src/menu/network_connection_menu.cpp:158
-#: src/menu/network_connection_menu.cpp:198
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr ""
 
@@ -1122,12 +1118,12 @@ msgstr "請問尊姓大名?"
 msgid "Polecat Launcher"
 msgstr "臭鼬發射器"
 
-#: src/menu/network_connection_menu.cpp:147
-#: src/menu/network_connection_menu.cpp:175
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "通訊埠:"
 
-#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_connection_menu.cpp:108
 #, fuzzy
 msgid "Public battles"
 msgstr "推出戰斗"
@@ -1186,12 +1182,12 @@ msgstr "捲動邊線"
 msgid "Scroll on border"
 msgstr "捲動邊線"
 
-#: src/menu/network_connection_menu.cpp:136
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "伺服器位址"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Internet可用伺服器"
 
@@ -1241,11 +1237,11 @@ msgstr "狙擊步槍"
 msgid "Someone put a booby trap into the crate!"
 msgstr "有人在箱子裡布置了炸彈作禮物!"
 
-#: src/menu/network_connection_menu.cpp:288
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 沒人等你."
 
-#: src/network/index_server.cpp:321
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1341,7 +1337,7 @@ msgstr "制導火箭離開戰場..."
 msgid "The ball left the battlefield before exploding"
 msgstr "球膨脹前離開戰場"
 
-#: src/network/network_client.cpp:96
+#: src/network/network_client.cpp:97
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1448,7 +1444,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(無限的)"
 
-#: src/network/network.cpp:145
+#: src/network/network.cpp:137
 msgid "Unnamed"
 msgstr "未命名"
 
@@ -1486,7 +1482,7 @@ msgstr "武器"
 msgid "Website: "
 msgstr "網站Website: "
 
-#: src/game/game.cpp:752
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 慘死在小槍之下...無法瞑目!"
@@ -1509,15 +1505,15 @@ msgstr "准備中, Wormux!!!"
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
-#: src/include/action_handler.cpp:184
+#: src/include/action_handler.cpp:205
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:181
+#: src/include/action_handler.cpp:202
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:187
+#: src/include/action_handler.cpp:208
 msgid "Wrong team!"
 msgstr ""
 
@@ -1599,6 +1595,9 @@ msgstr "o讀取音樂檔案 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
+
+#~ msgid "Network initialization"
+#~ msgstr "網路起始化"
 
 #, fuzzy
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
