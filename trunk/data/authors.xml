@@ -413,6 +413,12 @@
 	<email>adriyetichaves_AT_gmail_DOT_com</email>
 	<country>Spain</country>
       </author>
+      <author>
+	<nickname>Steve</nickname>
+	<name>Steve</name>
+	<description>Greek translation of Wormux</description>
+	<email>gba2211_AT_gmail_DOT_com</email>
+	<country>Greece</country>
     </section>
 
     <section title="Package maintainers">
