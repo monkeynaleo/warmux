@@ -164,7 +164,6 @@ wormux_SOURCES = \
         tool/copynpaste.cpp tool/copynpaste.h \
         tool/debug.cpp tool/debug.h \
         tool/debug_physics.cpp tool/debug_physics.h \
-        tool/euler_vector.cpp tool/euler_vector.h \
         tool/file_tools.cpp tool/file_tools.h \
         tool/isnan.h \
         tool/math_tools.h \

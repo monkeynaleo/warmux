@@ -325,8 +325,6 @@ POTFILES = \
         src/tool/debug.h \
         src/tool/debug_physics.cpp \
         src/tool/debug_physics.h \
-        src/tool/euler_vector.cpp \
-        src/tool/euler_vector.h \
         src/tool/file_tools.cpp \
         src/tool/file_tools.h \
         src/tool/isnan.h \
