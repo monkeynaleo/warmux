@@ -24,10 +24,7 @@
 #include <WORMUX_socket.h>
 #include <SDL_thread.h>
 #include "include/action_handler.h"
-#include "include/constant.h"
-#include "game/game_mode.h"
 #include "network/distant_cpu.h"
-#include "tool/debug.h"
 #include "tool/string_tools.h"
 
 #include <sys/types.h>
@@ -116,12 +113,12 @@ void NetworkServer::RejectIncoming()
 
 //-----------------------------------------------------------------------------
 
-connection_state_t NetworkServer::ServerStart(const std::string &net_port)
+connection_state_t NetworkServer::ServerStart(const std::string &net_port, uint _max_nb_players)
 {
   WNet::Init();
 
   // The server starts listening for clients
-  MSG_DEBUG("network", "Start server on port %s", net_port.c_str());
+  printf("o Starting server on port %s...\n", net_port.c_str());
 
   cpu.clear();
   // Convert port number (std::string port) into SDL port number format:
@@ -134,19 +131,24 @@ connection_state_t NetworkServer::ServerStart(const std::string &net_port)
     return CONN_BAD_PORT;
   }
 
-  printf("\nConnected\n");
-  max_nb_players = GameMode::GetInstance()->max_teams;
+  printf("o Server successfully started\n");
+  max_nb_players = _max_nb_players;
   socket_set = new WSocketSet(max_nb_players);
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
-  MSG_DEBUG("network", "Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
+
   return CONNECTED;
 }
 
 std::list<DistantComputer*>::iterator
 NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
-  printf("Client disconnected\n");
+  std::list<DistantComputer*>::iterator it;
+
+  printf("- client disconnected: %s(%s)\n", (*closed)->GetAddress().c_str(), (*closed)->GetNickname().c_str());
+
+  it = cpu.erase(closed);
   delete *closed;
+
   if (GetNbConnectedPlayers() == max_nb_players)
   {
     // A new player will be able to connect, so we reopen the socket
@@ -155,21 +157,17 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
     server_socket.AcceptIncoming(port);
   }
 
-  return cpu.erase(closed);
+  return it;
 }
 
 void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
 {
-  if (_max_nb_players <= GameMode::GetInstance()->max_teams) {
-    max_nb_players = _max_nb_players;
-  } else {
-    max_nb_players = GameMode::GetInstance()->max_teams;
-  }
+  max_nb_players = _max_nb_players;
 }
 
 uint NetworkServer::GetNbConnectedPlayers() const
 {
-  return cpu.size() + 1;
+  return cpu.size() + 1; // WARNING: is the server playing ?
 }
 
 uint NetworkServer::GetNbInitializedPlayers() const

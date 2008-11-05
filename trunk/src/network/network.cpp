@@ -401,7 +401,7 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
 
   // try to connect
   stop_thread = false;
-  const connection_state_t error = net->ServerStart(port);
+  const connection_state_t error = net->ServerStart(port, GameMode::GetInstance()->max_teams);
 
   if (error != CONNECTED) {
     // revert change
