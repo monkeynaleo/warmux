@@ -153,13 +153,12 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   if (r != CONNECTED)
     goto error;
 
-  socket_set = SDLNet_AllocSocketSet(1);
+  socket_set = new WSocketSet(1);
   if (!socket_set) {
     r = CONN_REJECTED;
     goto error;
   }
-
-  socket->AddToSocketSet(socket_set);
+  socket_set->AddSocket(socket);
   server = new DistantComputer(socket);
 
   cpu.push_back(server);

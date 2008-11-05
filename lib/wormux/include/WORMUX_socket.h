@@ -23,22 +23,51 @@
 #define WORMUX_SOCKET_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
+#include <list>
 #include <string>
 #include <WORMUX_network.h>
 #include <WORMUX_types.h>
 //-----------------------------------------------------------------------------
 
+class WSocket;
+
+class WSocketSet
+{
+  friend class WSocket;
+
+private:
+  SDLNet_SocketSet socket_set;
+  std::list<WSocket*> sockets;
+  SDL_mutex* lock;
+
+  void Lock();
+  void UnLock();
+
+public:
+  WSocketSet(int maxsockets);
+  ~WSocketSet();
+  bool AddSocket(WSocket* socket);
+  void RemoveSocket(WSocket* socket);
+
+  int CheckActivity(int timeout);
+};
+
 class WSocket
 {
+  friend class WSocketSet;
+
 private:
   TCPsocket socket;
-  SDLNet_SocketSet socket_set;
+  WSocketSet* socket_set;
   SDL_mutex* lock;
 
   bool using_tmp_socket_set;
 
+  bool AddToSocketSet(WSocketSet* _socket_set);
+  void RemoveFromSocketSet();
+
 public:
-  WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set);
+  WSocket(TCPsocket _socket, WSocketSet* _socket_set);
   WSocket(TCPsocket _socket);
   WSocket();
   ~WSocket();
@@ -55,9 +84,6 @@ public:
 
   void Disconnect();
   bool IsConnected() const;
-
-  bool AddToSocketSet(SDLNet_SocketSet _socket_set);
-  void RemoveFromSocketSet();
 
   bool AddToTmpSocketSet();
   void RemoveFromTmpSocketSet();

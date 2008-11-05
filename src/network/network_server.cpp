@@ -94,7 +94,7 @@ void NetworkServer::WaitActionSleep()
       if (!HandShake(*incoming))
  	return;
 
-      incoming->AddToSocketSet(socket_set);
+      socket_set->AddSocket(incoming);
 
       DistantComputer* client = new DistantComputer(incoming);
       cpu.push_back(client);
@@ -136,7 +136,7 @@ connection_state_t NetworkServer::ServerStart(const std::string &net_port)
 
   printf("\nConnected\n");
   max_nb_players = GameMode::GetInstance()->max_teams;
-  socket_set = SDLNet_AllocSocketSet(max_nb_players);
+  socket_set = new WSocketSet(max_nb_players);
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
   MSG_DEBUG("network", "Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
   return CONNECTED;
