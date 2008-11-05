@@ -13,3 +13,4 @@ libwormux_a_SOURCES = \
 	./net/network.cpp \
 	./net/socket.cpp
 
+AM_CXXFLAGS += -I$(top_srcdir)/lib/wormux/include
