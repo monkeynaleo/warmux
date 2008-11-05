@@ -116,13 +116,13 @@ private:
   Action(const Action& an_action);
   const Action& operator=(const Action&);
 
+  void Init (Action_t type);
+
   void WriteTo(char *packet) const;
 
   uint ComputeCRC() const;
 
 public:
-
-  //inline Action_t &operator++() { ;}
 
   // Action without parameter
   Action (Action_t type) { Init(type); };
@@ -140,7 +140,6 @@ public:
 
   ~Action() { };
 
-  void Init (Action_t type);
   std::ostream& out(std::ostream &os) const;
 
   // Push / Back functions to add / retreive datas
