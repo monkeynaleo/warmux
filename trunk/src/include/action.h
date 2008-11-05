@@ -29,7 +29,6 @@
 #include "tool/point.h"
 
 class DistantComputer;
-class EulerVector;
 //-----------------------------------------------------------------------------
 
 class Action
@@ -151,14 +150,12 @@ public:
   void Push(const std::string& val);
   void Push(const Point2i& val);
   void Push(const Point2d& val);
-  void Push(const EulerVector& val);
 
   int PopInt();
   double PopDouble();
   std::string PopString();
   Point2i PopPoint2i();
   Point2d PopPoint2d();
-  EulerVector PopEulerVector();
 
   bool IsEmpty() const { return var.empty(); };
 
