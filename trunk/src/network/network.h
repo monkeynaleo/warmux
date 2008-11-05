@@ -47,6 +47,7 @@ class Action;
 class DistantComputer;
 class NetworkServer;
 class NetworkMenu;
+class WSocketSet;
 
 class Network : public Singleton<Network>
 {
@@ -85,7 +86,7 @@ protected:
   Network(const std::string& password); // pattern singleton
 
   SDL_Thread* thread; // network thread, where we receive data from network
-  SDLNet_SocketSet socket_set;
+  WSocketSet* socket_set;
 
 #ifdef LOG_NETWORK
   int fout;

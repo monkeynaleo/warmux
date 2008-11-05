@@ -29,14 +29,78 @@
 
 //-----------------------------------------------------------------------------
 
-WSocket::WSocket(TCPsocket _socket, SDLNet_SocketSet _socket_set) :
+WSocketSet::WSocketSet(int maxsockets) :
+  lock(SDL_CreateMutex())
+{
+  socket_set = SDLNet_AllocSocketSet(maxsockets);
+  if (!socket_set) {
+    fprintf(stderr, "SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
+    ASSERT(false);
+  }
+}
+
+WSocketSet::~WSocketSet()
+{
+  ASSERT(sockets.empty());
+
+  SDLNet_FreeSocketSet(socket_set);
+  SDL_DestroyMutex(lock);
+}
+
+void WSocketSet::Lock()
+{
+  SDL_LockMutex(lock);
+}
+
+void WSocketSet::UnLock()
+{
+  SDL_UnlockMutex(lock);
+}
+
+bool WSocketSet::AddSocket(WSocket* socket)
+{
+  Lock();
+
+  ASSERT(socket_set != NULL);
+
+  if (!socket->AddToSocketSet(this))
+    return false;
+
+  sockets.push_back(socket);
+
+  UnLock();
+
+  return true;
+}
+
+void WSocketSet::RemoveSocket(WSocket* socket)
+{
+  Lock();
+
+  ASSERT(socket_set != NULL);
+  sockets.remove(socket);
+
+  socket->RemoveFromSocketSet();
+
+  UnLock();
+}
+
+int WSocketSet::CheckActivity(int timeout)
+{
+  return SDLNet_CheckSockets(socket_set, timeout);
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+WSocket::WSocket(TCPsocket _socket, WSocketSet* _socket_set) :
   socket(_socket),
   socket_set(_socket_set),
   lock(SDL_CreateMutex()),
   using_tmp_socket_set(false)
 {
   int r;
-  r = SDLNet_TCP_AddSocket(socket_set, socket);
+  r = socket_set->AddSocket(this);
   if (r == -1) {
     fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
     ASSERT(false);
@@ -147,17 +211,17 @@ void WSocket::Disconnect()
 {
   Lock();
 
+  if (socket_set) {
+    socket_set->RemoveSocket(this);
+    if (using_tmp_socket_set) {
+      delete socket_set;
+    }
+    socket_set = NULL;
+  }
+
   if (socket) {
     SDLNet_TCP_Close(socket);
     socket = NULL;
-  }
-
-  if (socket_set) {
-    SDLNet_TCP_DelSocket(socket_set, socket);
-    if (using_tmp_socket_set) {
-      SDLNet_FreeSocketSet(socket_set);
-    }
-    socket_set = NULL;
   }
 
   UnLock();
@@ -168,7 +232,7 @@ bool WSocket::IsConnected() const
   return (socket != NULL);
 }
 
-bool WSocket::AddToSocketSet(SDLNet_SocketSet _socket_set)
+bool WSocket::AddToSocketSet(WSocketSet* _socket_set)
 {
   ASSERT(socket_set == NULL);
   int r;
@@ -176,7 +240,7 @@ bool WSocket::AddToSocketSet(SDLNet_SocketSet _socket_set)
   Lock();
   socket_set = _socket_set;
 
-  r = SDLNet_TCP_AddSocket(socket_set, socket);
+  r = SDLNet_TCP_AddSocket(socket_set->socket_set, socket);
   if (r == -1) {
     fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
     UnLock();
@@ -194,7 +258,7 @@ void WSocket::RemoveFromSocketSet()
   int r;
 
   Lock();
-  r = SDLNet_TCP_DelSocket(socket_set, socket);
+  r = SDLNet_TCP_DelSocket(socket_set->socket_set, socket);
   if (r == -1) {
     fprintf(stderr, "SDLNet_TCP_DelSocket: %s\n", SDLNet_GetError());
     ASSERT(false);
@@ -208,21 +272,21 @@ bool WSocket::AddToTmpSocketSet()
   ASSERT(socket_set == NULL);
   int r;
 
-  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
-  if (!tmp_socket_set) {
-    fprintf(stderr, "SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
-    return false;
-  }
-
   Lock();
+
+  WSocketSet* tmp_socket_set = new WSocketSet(1);
   socket_set = tmp_socket_set;
 
-  r = SDLNet_TCP_AddSocket(socket_set, socket);
+  socket_set->Lock();
+  r = SDLNet_TCP_AddSocket(socket_set->socket_set, socket);
   if (r == -1) {
     fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
+    delete tmp_socket_set;
     UnLock();
     return false;
   }
+  socket_set->sockets.push_back(this);
+  socket_set->UnLock();
 
   using_tmp_socket_set = true;
   UnLock();
@@ -236,14 +300,17 @@ void WSocket::RemoveFromTmpSocketSet()
   int r;
 
   Lock();
-
-  r = SDLNet_TCP_DelSocket(socket_set, socket);
+  socket_set->Lock();
+  r = SDLNet_TCP_DelSocket(socket_set->socket_set, socket);
   if (r == -1) {
     fprintf(stderr, "SDLNet_TCP_DelSocket: %s\n", SDLNet_GetError());
     ASSERT(false);
   }
-  SDLNet_FreeSocketSet(socket_set);
+  socket_set->sockets.remove(this);
+  socket_set->UnLock();
+  delete socket_set;
   socket_set = NULL;
+
   using_tmp_socket_set = false;
 
   UnLock();
@@ -351,7 +418,7 @@ bool WSocket::ReceiveBuffer(void* data, size_t len)
 
   ASSERT(socket_set != NULL);
 
-  if (SDLNet_CheckSockets(socket_set, 5000) == 0) {
+  if (!IsReady(5000)) {
     return false;
   }
 
@@ -366,10 +433,6 @@ bool WSocket::ReceiveInt_NoLock(int& nbr)
 {
   char packet[4];
   Uint32 u_nbr;
-
-  if (!SDLNet_SocketReady(socket)) {
-    return false;
-  }
 
   if (!ReceiveBuffer_NoLock(packet, sizeof(packet))) {
     return false;
@@ -386,7 +449,7 @@ bool WSocket::ReceiveInt(int& nbr)
   bool r;
   ASSERT(socket_set != NULL);
 
-  if (SDLNet_CheckSockets(socket_set, 5000) == 0) {
+  if (!IsReady(5000)) {
     return false;
   }
 
@@ -436,18 +499,17 @@ bool WSocket::ReceiveStr_NoLock(std::string &_str, size_t maxlen)
 
 bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
 {
-  bool r = false;
+  bool r;
   ASSERT(socket_set != NULL);
 
-  if (SDLNet_CheckSockets(socket_set, 5000) == 0) {
-    goto out;
+  if (!IsReady(5000)) {
+    return false;
   }
 
   Lock();
   r = ReceiveStr_NoLock(_str, maxlen);
   UnLock();
 
- out:
   return r;
 }
 
@@ -458,7 +520,7 @@ bool WSocket::IsReady(int timeout) const
 
   if (timeout != 0) {
     ASSERT(socket_set != NULL);
-    if (SDLNet_CheckSockets(socket_set, timeout) == 0)
+    if (socket_set->CheckActivity(timeout) == 0)
       return false;
   }
 

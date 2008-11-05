@@ -203,7 +203,7 @@ void Network::ReceiveActions()
         // Even for server, as Visual Studio in debug mode has trouble with that loop
 	continue;
       }
-      int num_ready = SDLNet_CheckSockets(socket_set, 100);
+      int num_ready = socket_set->CheckActivity(100);
       // Means something is available
       if (num_ready>0)
         break;
@@ -306,8 +306,7 @@ void Network::DisconnectNetwork()
   cpu.clear();
 
   if (socket_set != NULL) {
-    SDLNet_FreeSocketSet(socket_set);
-    socket_set = NULL;
+    delete socket_set;
   }
 }
 
