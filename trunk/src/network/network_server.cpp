@@ -54,23 +54,19 @@ NetworkServer::~NetworkServer()
 
 void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
 {
-  // Repeat the packet to other clients:
-  if (a->GetType() != Action::ACTION_NETWORK_CLIENT_CHANGE_STATE
-      && a->GetType() != Action::ACTION_NETWORK_CHECK_PHASE2)
-  {
-    char* packet;
-    int packet_size;
-    a->WriteToPacket(packet, packet_size);
+  // Repeat the packet to other clients
+  char* packet;
+  int packet_size;
+  a->WriteToPacket(packet, packet_size);
 
-    for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-         client != cpu.end();
-         client++)
-      if (*client != sender)
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++)
+    if (*client != sender)
       {
         (*client)->SendDatas(packet, packet_size);
       }
-    free(packet);
-  }
+  free(packet);
 
   ActionHandler::GetInstance()->NewAction(a, false);
 }
