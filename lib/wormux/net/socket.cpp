@@ -345,8 +345,10 @@ bool WSocket::SendInt_NoLock(const int& nbr)
 
   SDLNet_Write32(u_nbr, packet);
   int len = SDLNet_TCP_Send(socket, packet, sizeof(packet));
-  if (len < int(sizeof(packet)))
+  if (len < int(sizeof(packet))) {
+    fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
     return false;
+  }
 
   return true;
 }
@@ -369,8 +371,10 @@ bool WSocket::SendStr_NoLock(const std::string &str)
     return false;
 
   int len = SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
-  if (len < int(str.size()))
+  if (len < int(str.size())) {
+    fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
     return false;
+  }
 
   return true;
 }
@@ -390,6 +394,7 @@ bool WSocket::SendBuffer_NoLock(void* data, size_t len)
 {
   int size = SDLNet_TCP_Send(socket, data, len);
   if (size < int(len)) {
+    fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
     return false;
   }
 
@@ -415,8 +420,12 @@ bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
   // into the memory pointed to by "data".
   // => no need to make a loop to receive all the data (see documentation)
   received = SDLNet_TCP_Recv(socket, data, len);
+  if (received != int(len)) {
+    fprintf(stderr, "SDLNet_TCP_Recv: %d\n", received);
+    return false;
+  }
 
-  return (received == int(len));
+  return true;
 }
 
 bool WSocket::ReceiveBuffer(void* data, size_t len)
