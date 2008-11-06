@@ -133,13 +133,10 @@ int DistantComputer::ReceiveDatas(char* & buf)
 
   r = sock->ReceiveBuffer_NoLock(packet, packet_size);
   if (!r) {
-    std::cerr << "Malformed packet" << std::endl;
     free(packet);
     packet = NULL;
-    NET_ASSERT(false) {
-      ret = -1;
-      goto out_unlock;
-    }
+    ret = -1;
+    goto out_unlock;
   }
 
   buf = packet;

@@ -297,13 +297,14 @@ void Network::DisconnectNetwork()
   thread = NULL;
   stop_thread = true;
 
-  for(std::list<DistantComputer*>::iterator client = cpu.begin();
-      client != cpu.end();
-      client++)
-  {
-    delete *client;
+  DistantComputer* tmp;
+  std::list<DistantComputer*>::iterator client = cpu.begin();
+
+  while (client != cpu.end()) {
+    tmp = (*client);
+    client = cpu.erase(client);
+    delete tmp;
   }
-  cpu.clear();
 
   if (socket_set != NULL) {
     delete socket_set;
