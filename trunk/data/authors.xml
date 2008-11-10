@@ -179,6 +179,13 @@
 	<country>Russia</country>
       </author>
       <author>
+	<nickname>Rhot</nickname>
+	<name>Vladimir Naumov</name>
+	<description>Translated Wormux into Russian</description>
+	<email>rhot_AT_rambler_DOR_ru</email>
+	<country>Russia</country>
+      </author>
+      <author>
 	<nickname>Pierre-Marie</nickname>
 	<name>Pierre-Marie Pédrot</name>
 	<description>Update translation of Wormux in Esperanto</description>
@@ -357,6 +364,13 @@
 	<name>Nightz</name>
 	<description>Update Brazilian translation</description>
 	<email>abra185_AT_gmail_DOT_com</email>
+	<country>Brazil</country>
+      </author>
+      <author>
+	<nickname>rvr777</nickname>
+	<name>Renan Valente Rangel</name>
+	<description>Updated the Brazilian translation</description>
+	<email>rvr777_AT_gmail_DOT_com</email>
 	<country>Brazil</country>
       </author>
       <author>
