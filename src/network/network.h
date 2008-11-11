@@ -54,9 +54,14 @@ class NetworkThread
 {
 private:
   static SDL_Thread* thread; // network thread, where we receive data from network
+  static bool stop_thread;
+
   static int ThreadRun(void* no_param);
 public:
   static void Start();
+  static void Stop();
+
+  static bool Continue();
   static void Wait();
 };
 
@@ -88,9 +93,6 @@ private:
 
   std::string nickname; //Clients: Send to Server at connect
                         //Server: Send in chat messages
-
-  static bool stop_thread;
-  bool ThreadToContinue() const;
 
 protected:
   network_state_t state;
