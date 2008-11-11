@@ -49,6 +49,18 @@ class NetworkServer;
 class NetworkMenu;
 class WSocketSet;
 
+
+class NetworkThread
+{
+private:
+  static SDL_Thread* thread; // network thread, where we receive data from network
+  static int ThreadRun(void* no_param);
+public:
+  static void Start();
+  static void Wait();
+};
+
+
 class Network : public Singleton<Network>
 {
 public:
@@ -72,29 +84,25 @@ private:
 
   static int  num_objects;
 
-  static bool stop_thread;
   bool turn_master_player;
 
   std::string nickname; //Clients: Send to Server at connect
                         //Server: Send in chat messages
 
-  void ReceiveActions();
+  static bool stop_thread;
+  bool ThreadToContinue() const;
 
 protected:
   network_state_t state;
 
   Network(const std::string& password); // pattern singleton
 
-  SDL_Thread* thread; // network thread, where we receive data from network
   WSocketSet* socket_set;
 
 #ifdef LOG_NETWORK
   int fout;
   int fin;
 #endif
-
-  bool ThreadToContinue() const;
-  static int ThreadRun(void* no_param);
 
   virtual void HandleAction(Action* a, DistantComputer* sender) const = 0;
   virtual void WaitActionSleep() = 0;
@@ -146,6 +154,8 @@ public:
 
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
+
+  void ReceiveActions();
 };
 
 //-----------------------------------------------------------------------------
