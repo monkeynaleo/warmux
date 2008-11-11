@@ -53,9 +53,9 @@ class DistantComputer
   DistantComputer::state_t state;
   std::string nickname;
 
-public:
   bool force_disconnect;
 
+public:
   DistantComputer(WSocket* new_sock);
   ~DistantComputer();
 
@@ -74,6 +74,9 @@ public:
 
   void SetState(DistantComputer::state_t _state);
   DistantComputer::state_t GetState() const;
+
+  void ForceDisconnection();
+  bool MustBeDisconnected();
 };
 
 #endif

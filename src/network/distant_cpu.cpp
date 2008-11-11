@@ -78,9 +78,6 @@ DistantComputer::~DistantComputer()
 {
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_INFO_CLIENT_DISCONNECT, GetAddress()));
 
-  if (force_disconnect)
-    std::cerr << GetAddress() << " have been kicked" << std::endl;
-
   if (Network::GetInstance()->IsConnected())
   {
     for (std::list<std::string>::iterator team = owned_teams.begin();
@@ -195,7 +192,7 @@ bool DistantComputer::AddTeam(const std::string& team_id)
     return true;
   }
 
-  force_disconnect = true;
+  ForceDisconnection();
 
   std::cerr << "Team "<< team_id << "does not exist!" << std::endl;
   ASSERT(false);
@@ -213,7 +210,7 @@ bool DistantComputer::RemoveTeam(const std::string& team_id)
     return true;
   }
 
-  force_disconnect = true;
+  ForceDisconnection();
 
   ASSERT(false);
   return false;
@@ -241,4 +238,15 @@ void DistantComputer::SetState(DistantComputer::state_t _state)
 DistantComputer::state_t DistantComputer::GetState() const
 {
   return state;
+}
+
+void DistantComputer::ForceDisconnection()
+{
+  state = STATE_ERROR;
+  force_disconnect = true;
+}
+
+bool DistantComputer::MustBeDisconnected()
+{
+  return force_disconnect;
 }

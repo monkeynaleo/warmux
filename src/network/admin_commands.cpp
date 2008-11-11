@@ -51,7 +51,7 @@ void ProcessCommand(const std::string & cmd)
       {
         if((*cpu)->GetNickname() == nick)
         {
-          (*cpu)->force_disconnect = true;
+          (*cpu)->ForceDisconnection();
           msg = std::string(Format("%s kicked", nick.c_str()));
           AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 	  return;

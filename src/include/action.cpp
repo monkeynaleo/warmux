@@ -202,7 +202,7 @@ int Action::PopInt()
 {
   NET_ASSERT(var.size() > 0)
   {
-    if(creator) creator->force_disconnect = true;
+    if(creator) creator->ForceDisconnection();
     return 0;
   }
 
@@ -219,7 +219,7 @@ double Action::PopDouble()
 {
   NET_ASSERT(var.size() > 0)
   {
-    if(creator) creator->force_disconnect = true;
+    if(creator) creator->ForceDisconnection();
     return 0.0;
   }
 
@@ -246,7 +246,7 @@ std::string Action::PopString()
 {
   NET_ASSERT(var.size() > 1)
   {
-    if(creator) creator->force_disconnect = true;
+    if(creator) creator->ForceDisconnection();
     return "";
   }
 
@@ -256,7 +256,7 @@ std::string Action::PopString()
 
   NET_ASSERT((int)var.size() >= length/4)
   {
-    if(creator) creator->force_disconnect = true;
+    if(creator) creator->ForceDisconnection();
     return "";
   }
 
@@ -264,7 +264,7 @@ std::string Action::PopString()
   {
     NET_ASSERT(var.size() > 0)
     {
-      if(creator) creator->force_disconnect = true;
+      if(creator) creator->ForceDisconnection();
       return "";
     }
 

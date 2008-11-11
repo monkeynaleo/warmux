@@ -83,7 +83,7 @@ void FAIL_IF_SERVER(Action *a)
 	    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str(),
 	    a->GetCreator()->GetAddress().c_str(),
 	    a->GetCreator()->GetNickname().c_str());
-    a->GetCreator()->force_disconnect = true;
+    a->GetCreator()->ForceDisconnection();
   }
 }
 
@@ -137,7 +137,7 @@ void Action_Network_ClientChangeState (Action *a)
   default:
     NET_ASSERT(false)
       {
-        if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
+        if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
         return;
       }
     break;
@@ -164,7 +164,7 @@ void Action_Network_ServerChangeState (Action *a)
   default:
     NET_ASSERT(false)
       {
-	if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
+	if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
 	return;
       }
   }
@@ -848,7 +848,7 @@ void ActionHandler::Exec(Action *a)
   handler_it it=handler.find(a->GetType());
   NET_ASSERT(it != handler.end())
   {
-    if(a->GetCreator()) a->GetCreator()->force_disconnect = true;
+    if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
     return;
   }
   (*it->second) (a);
