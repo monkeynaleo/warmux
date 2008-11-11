@@ -57,6 +57,8 @@ public:
   int CheckActivity(int timeout);
   uint MaxNbSockets() const;
   uint NbSockets() const;
+
+  std::list<WSocket*>& GetSockets();
 };
 
 class WSocket
@@ -104,8 +106,8 @@ public:
   bool SendStr_NoLock(const std::string &str);
   bool SendStr(const std::string &str);
 
-  bool SendBuffer_NoLock(void* data, size_t len);
-  bool SendBuffer(void* data, size_t len);
+  bool SendBuffer_NoLock(const void* data, size_t len);
+  bool SendBuffer(const void* data, size_t len);
 
   bool ReceiveBuffer_NoLock(void* data, size_t len);
   bool ReceiveBuffer(void* data, size_t len);
@@ -115,6 +117,10 @@ public:
 
   bool ReceiveStr_NoLock(std::string &_str, size_t maxlen);
   bool ReceiveStr(std::string &_str, size_t maxlen);
+
+  // Packet is composed of [ size (4 bytes),  data ]
+  bool SendPacket(const void* data, size_t len);
+  bool ReceivePacket(void* &data, size_t& len);
 };
 
 //-----------------------------------------------------------------------------

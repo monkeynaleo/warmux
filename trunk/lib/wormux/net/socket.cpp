@@ -28,6 +28,10 @@
 #include <sys/types.h>
 
 //-----------------------------------------------------------------------------
+
+static const int MAX_PACKET_SIZE = 250*1024;
+
+//-----------------------------------------------------------------------------
 // static method
 WSocketSet* WSocketSet::GetSocketSet(uint maxsockets)
 {
@@ -91,6 +95,11 @@ void WSocketSet::RemoveSocket(WSocket* socket)
   socket->RemoveFromSocketSet();
 
   UnLock();
+}
+
+std::list<WSocket*>& WSocketSet::GetSockets()
+{
+  return sockets;
 }
 
 int WSocketSet::CheckActivity(int timeout)
@@ -401,7 +410,7 @@ bool WSocket::SendStr(const std::string &str)
   return r;
 }
 
-bool WSocket::SendBuffer_NoLock(void* data, size_t len)
+bool WSocket::SendBuffer_NoLock(const void* data, size_t len)
 {
   int size = SDLNet_TCP_Send(socket, data, len);
   if (size < int(len)) {
@@ -412,7 +421,7 @@ bool WSocket::SendBuffer_NoLock(void* data, size_t len)
   return true;
 }
 
-bool WSocket::SendBuffer(void* data, size_t len)
+bool WSocket::SendBuffer(const void* data, size_t len)
 {
   bool r;
 
@@ -432,7 +441,7 @@ bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
   // => no need to make a loop to receive all the data (see documentation)
   received = SDLNet_TCP_Recv(socket, data, len);
   if (received != int(len)) {
-    fprintf(stderr, "SDLNet_TCP_Recv: %d\n", received);
+    fprintf(stderr, "ERROR: SDLNet_TCP_Recv: %d\n", received);
     return false;
   }
 
@@ -537,6 +546,65 @@ bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
   r = ReceiveStr_NoLock(_str, maxlen);
   UnLock();
 
+  return r;
+}
+
+bool WSocket::SendPacket(const void* data, size_t len)
+{
+  bool r;
+  Lock();
+
+  r = SendInt_NoLock(len);
+  if (!r)
+    goto out_unlock;
+
+  r = SendBuffer_NoLock(data, len);
+  if (!r)
+    goto out_unlock;
+
+ out_unlock:
+  UnLock();
+  return r;
+}
+
+bool WSocket::ReceivePacket(void* &data, size_t& len)
+{
+  bool r;
+
+  Lock();
+
+  int packet_size;
+  char* packet;
+
+  // Firstly, we read the size of the incoming packet
+  r = ReceiveInt_NoLock(packet_size);
+  if (!r) {
+    goto out_unlock;
+  }
+
+  if (packet_size > MAX_PACKET_SIZE) {
+    fprintf(stderr, "ERROR: network packet is too big\n");
+    goto out_unlock;
+  }
+
+  packet = (char*)malloc(packet_size);
+  if (!packet) {
+    fprintf(stderr, "ERROR: memory allocation failed\n");
+    goto out_unlock;
+  }
+
+  r = ReceiveBuffer_NoLock(packet, packet_size);
+  if (!r) {
+    free(packet);
+    packet = NULL;
+    goto out_unlock;
+  }
+
+  data = packet;
+  len = packet_size;
+
+ out_unlock:
+  UnLock();
   return r;
 }
 
