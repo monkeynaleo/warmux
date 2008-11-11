@@ -19,6 +19,20 @@
  * Network layer for Wormux.
  *****************************************************************************/
 
+// Standard header, only needed for the following method
+#ifdef WIN32
+#  include <winsock2.h>
+#else
+#  include <sys/socket.h>
+#  include <netdb.h>
+#  include <netinet/in.h>
+#  include <arpa/nameser.h>
+#  include <resolv.h>
+#  include <errno.h>
+#  include <unistd.h>
+#endif
+
+//-----------------------------------------------------------------------------
 #include <SDL_thread.h>
 #include <SDL_timer.h>
 #include <WORMUX_error.h>
@@ -35,21 +49,6 @@
 #    include <io.h>
 #  endif
 #endif
-//-----------------------------------------------------------------------------
-
-// Standard header, only needed for the following method
-#ifdef WIN32
-#  include <winsock2.h>
-#else
-#  include <sys/socket.h>
-#  include <netdb.h>
-#  include <netinet/in.h>
-#  include <arpa/nameser.h>
-#  include <resolv.h>
-#  include <errno.h>
-#  include <unistd.h>
-#endif
-
 //-----------------------------------------------------------------------------
 
 static const std::string WORMUX_VERSION = PACKAGE_VERSION;
@@ -166,7 +165,7 @@ static connection_state_t WIN32_CheckHost(const std::string &host, int prt)
 
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
   {
-    return Network::GetError();
+    return WNet::GetError();
   }
   closesocket(fd);
   return CONNECTED;
