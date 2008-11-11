@@ -137,7 +137,7 @@ public:
   Action (Action_t type, double value1, double value2);
 
   // Build an action from a network packet
-  Action (const char* is, DistantComputer* _creator);
+  Action (const char* buffer, DistantComputer* _creator);
 
   ~Action() { };
 
