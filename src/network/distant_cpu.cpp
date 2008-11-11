@@ -97,74 +97,14 @@ bool DistantComputer::SocketReady() const
   return sock->IsReady();
 }
 
-int DistantComputer::ReceiveDatas(char* & buf)
+bool DistantComputer::ReceiveDatas(void* & data, size_t & len)
 {
-  bool r;
-  int ret;
-
-  sock->Lock();
-  MSG_DEBUG("network", "locked");
-
-  int packet_size;
-  char* packet;
-
-  // Firstly, we read the size of the incoming packet
-  r = sock->ReceiveInt_NoLock(packet_size);
-  if (!r) {
-    ret = -1;
-    goto out_unlock;
-  }
-
-  if (packet_size > MAX_PACKET_SIZE) {
-    MSG_DEBUG("network", "packet is too big");
-    ret = -1;
-    goto out_unlock;
-  }
-
-  packet = (char*)malloc(packet_size);
-  if (!packet) {
-    MSG_DEBUG("network", "memory allocated failed");
-    ret = -1;
-    goto out_unlock;
-  }
-
-  r = sock->ReceiveBuffer_NoLock(packet, packet_size);
-  if (!r) {
-    free(packet);
-    packet = NULL;
-    ret = -1;
-    goto out_unlock;
-  }
-
-  buf = packet;
-  ret = packet_size;
-
- out_unlock:
-  sock->UnLock();
-  MSG_DEBUG("network", "unlocked");
-  return ret;
+  return sock->ReceivePacket(data, len);
 }
 
-bool DistantComputer::SendDatas(char* packet, int size)
+bool DistantComputer::SendDatas(const void* data, size_t len)
 {
-  bool r;
-  sock->Lock();
-  MSG_DEBUG("network", "locked");
-
-  r = sock->SendInt_NoLock(size);
-  if (!r)
-    goto out_unlock;
-
-  r = sock->SendBuffer_NoLock(packet, size);
-  if (!r)
-    goto out_unlock;
-
-  MSG_DEBUG("network", "%i sent", 4 + size);
-
- out_unlock:
-  sock->UnLock();
-  MSG_DEBUG("network", "unlocked");
-  return r;
+  return sock->SendPacket(data, len);
 }
 
 std::string DistantComputer::GetAddress()
