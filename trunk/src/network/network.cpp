@@ -185,7 +185,7 @@ void Network::ReceiveActions()
            ThreadToContinue() && dst_cpu != cpu.end();
            dst_cpu++)
       {
-        if((*dst_cpu)->force_disconnect)
+        if((*dst_cpu)->MustBeDisconnected())
         {
           dst_cpu = CloseConnection(dst_cpu);
           if (cpu.empty())
