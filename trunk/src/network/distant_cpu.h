@@ -60,8 +60,8 @@ public:
   ~DistantComputer();
 
   bool SocketReady() const;
-  int ReceiveDatas(char* & buf);
-  bool SendDatas(char* packet, int size);
+  bool ReceiveDatas(void* & data, size_t& len);
+  bool SendDatas(const void* data, size_t len);
 
   std::string GetAddress();
 

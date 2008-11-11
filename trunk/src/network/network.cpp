@@ -188,7 +188,8 @@ const std::string& Network::GetNickname() const
 
 void Network::ReceiveActions()
 {
-  char* packet;
+  char* buffer;
+  size_t packet_size;
   std::list<DistantComputer*>::iterator dst_cpu;
 
   while (NetworkThread::Continue()) // While the connection is up
@@ -244,10 +245,11 @@ void Network::ReceiveActions()
     {
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
-        // Read the size of the packet
-        int packet_size = (*dst_cpu)->ReceiveDatas(packet);
-        if( packet_size == -1) { // An error occured during the reception
+
+	if (!(*dst_cpu)->ReceiveDatas((void* &)(buffer), packet_size)) {
+	  // An error occured during the reception
           dst_cpu = CloseConnection(dst_cpu);
+
           // Please Visual Studio that in debug mode has trouble with continuing
           if (cpu.empty()) {
             if (IsClient()) {
@@ -258,20 +260,18 @@ void Network::ReceiveActions()
             break;
           }
           continue;
-        } else
-        if (packet_size == 0) // We didn't receive the full packet yet
-          continue;
+        }
 
 #ifdef LOG_NETWORK
         if (fin != 0) {
           int tmp = 0xFFFFFFFF;
           write(fin, &packet_size, 4);
-          write(fin, packet, packet_size);
+          write(fin, buffer, packet_size);
           write(fin, &tmp, 4);
         }
 #endif
 
-        Action* a = new Action(packet, (*dst_cpu));
+        Action* a = new Action(buffer, (*dst_cpu));
         if (!a->CheckCRC()) {
           MSG_DEBUG("network.crc_bad","!!! Bad CRC for action received !!!");
           delete a;
@@ -280,7 +280,7 @@ void Network::ReceiveActions()
                     ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
           HandleAction(a, *dst_cpu);
         }
-        free(packet);
+        free(buffer);
 
         if (cpu.empty()) {
           if (IsClient()) {
