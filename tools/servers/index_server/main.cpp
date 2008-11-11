@@ -33,12 +33,12 @@
 #include <list>
 #include <map>
 
+#include <WSERVER_debug.h>
+#include <WSERVER_env.h>
 #include "config.h"
 #include "client.h"
 #include "clock.h"
-#include "debug.h"
 #include "download.h"
-#include "env.h"
 #include "server.h"
 #include "sync_slave.h"
 #include "stat.h"
@@ -48,7 +48,7 @@ std::multimap<std::string, Client*> clients;
 
 
 
-int main(int argc, char* argv[])
+int main(int /*argc*/, char* /*argv*/[])
 {
   DPRINT(INFO, "Wormux index server version %i", VERSION);
   DPRINT(INFO, "%s", wx_clock.DateStr());

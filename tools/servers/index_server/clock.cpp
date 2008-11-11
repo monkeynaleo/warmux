@@ -19,9 +19,9 @@
 
 #include <time.h>
 #include <stdio.h>
+#include <WSERVER_debug.h>
 #include "clock.h"
 #include "sync_slave.h"
-#include "debug.h"
 #include "stat.h"
 
 Clock wx_clock;

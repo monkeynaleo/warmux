@@ -397,8 +397,11 @@ AC_CONFIG_FILES([Makefile
 		 lib/box2d/Makefile
 		 lib/box2d/src/Makefile
 		 lib/wormux/Makefile
+		 lib/wormux-server/Makefile
                  doc/Makefile
                  po/Makefile
+		 tools/servers/headless_server/Makefile
+		 tools/servers/index_server/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)

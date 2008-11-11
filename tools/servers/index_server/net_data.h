@@ -22,7 +22,7 @@
 #include <netinet/in.h>
 #include <string>
 #include <time.h>
-#include "index_svr_msg.h"
+#include <WSERVER_index_msg.h>
 
 class NetData
 {

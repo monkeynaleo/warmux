@@ -28,8 +28,9 @@
 #include <unistd.h>
 #include <list>
 #include <time.h>
+#include <WSERVER_debug.h>
+
 #include "net_data.h"
-#include "debug.h"
 
 #ifdef WIN32
 # define SOCKET_PARAM    char

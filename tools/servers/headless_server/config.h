@@ -17,21 +17,19 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#include <string>
-#include <fstream>
-#include "config.h"
+#ifndef CONFIG_H
+#define CONFIG_H
 
-Config config;
+#include <WSERVER_config.h>
 
-Config::Config() : BasicConfig("wormux_server.conf")
+const int VERSION = 1;
+
+class Config : public BasicConfig
 {
-  Load();
-  SetDefault("port", 9997);
-  SetDefault("working_dir", "wormux_log/");
-  SetDefault("chroot", true);
-  SetDefault("chroot_gid", 500);
-  SetDefault("chroot_uid", 500);
-  SetDefault("connexion_max", -2);
-  SetDefault("local", false);
-  Display();
-}
+public:
+  Config();
+};
+
+extern Config config;
+
+#endif

@@ -23,9 +23,9 @@
 #include <netdb.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <WSERVER_debug.h>
 #include "server.h"
 #include "client.h"
-#include "debug.h"
 
 Server::Server(int port)
 {

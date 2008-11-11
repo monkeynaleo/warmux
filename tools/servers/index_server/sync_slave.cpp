@@ -22,14 +22,14 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
+#include <WSERVER_debug.h>
+#include <WSERVER_index_msg.h>
 #include "sync_slave.h"
 #include "config.h"
 #include "client.h"
 #include "net_data.h"
 #include "download.h"
-#include "debug.h"
 #include "stat.h"
-#include "index_svr_msg.h"
 
 SyncSlave sync_slave;
 

@@ -20,7 +20,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "basic_config.h"
+#include <WSERVER_config.h>
 
 const int VERSION = 2;
 

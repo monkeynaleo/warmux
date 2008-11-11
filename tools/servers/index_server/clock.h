@@ -19,7 +19,7 @@
 
 #ifndef CLOCK_H
 #define CLOCK_H
-#include "basic_clock.h"
+#include <WSERVER_clock.h>
 
 class Clock : public BasicClock
 {

@@ -19,8 +19,8 @@
 
 #include <string>
 #include <fstream>
-#include "basic_config.h"
-#include "debug.h"
+#include <WSERVER_config.h>
+#include <WSERVER_debug.h>
 
 BasicConfig::BasicConfig(const std::string & _config_file) :
   config_file(_config_file)

@@ -24,7 +24,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-#include "basic_clock.h"
+#include <WSERVER_clock.h>
 
 #define ALL        0
 #define TRAFFIC    1
