@@ -133,8 +133,8 @@ connection_state_t NetworkServer::ServerStart(const std::string &net_port, uint 
   if (!socket_set) {
     return CONN_REJECTED;
   }
-  thread = SDL_CreateThread(Network::ThreadRun, NULL);
 
+  NetworkThread::Start();
   return CONNECTED;
 }
 

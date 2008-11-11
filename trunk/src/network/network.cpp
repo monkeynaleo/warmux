@@ -66,6 +66,31 @@
 
 //-----------------------------------------------------------------------------
 
+SDL_Thread* NetworkThread::thread = NULL;
+
+int NetworkThread::ThreadRun(void* /*no_param*/)
+{
+  MSG_DEBUG("network", "Thread created: %u", SDL_ThreadID());
+  Network::GetInstance()->ReceiveActions();
+  return 0;
+}
+
+void NetworkThread::Start()
+{
+  thread = SDL_CreateThread(NetworkThread::ThreadRun, NULL);
+}
+
+void NetworkThread::Wait()
+{
+  if (thread != NULL && SDL_ThreadID() != SDL_GetThreadID(thread)) {
+    SDL_WaitThread(thread, NULL);
+  }
+
+  thread = NULL;
+}
+
+//-----------------------------------------------------------------------------
+
 int  Network::num_objects = 0;
 bool Network::stop_thread = true;
 
@@ -90,7 +115,6 @@ Network::Network(const std::string& passwd):
   password(passwd),
   turn_master_player(false),
   state(NO_NETWORK),// useless value at beginning
-  thread(NULL),
   socket_set(NULL),
 #ifdef LOG_NETWORK
   fout(0),
@@ -153,13 +177,6 @@ const std::string& Network::GetNickname() const
 bool Network::ThreadToContinue() const
 {
   return !stop_thread;
-}
-
-int Network::ThreadRun(void*/*no_param*/)
-{
-  MSG_DEBUG("network", "Thread created: %u", SDL_ThreadID());
-  GetInstance()->ReceiveActions();
-  return 1;
 }
 
 void Network::ReceiveActions()
@@ -289,11 +306,7 @@ void Network::Disconnect()
 // Protected method for client and server
 void Network::DisconnectNetwork()
 {
-  if (thread != NULL && SDL_ThreadID() != SDL_GetThreadID(thread)) {
-    SDL_WaitThread(thread, NULL);
-  }
-
-  thread = NULL;
+  NetworkThread::Wait();
   stop_thread = true;
 
   DistantComputer* tmp;
