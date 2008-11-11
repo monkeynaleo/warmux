@@ -56,10 +56,14 @@ NetworkClient::~NetworkClient()
 
 std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
-  printf("Client disconnected\n");
+  std::list<DistantComputer*>::iterator it;
+
+  printf("- client disconnected: %s(%s)\n", (*closed)->GetAddress().c_str(), (*closed)->GetNickname().c_str());
+
+  it = cpu.erase(closed);
   delete *closed;
 
-  return cpu.erase(closed);
+  return it;
 }
 
 void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/) const
