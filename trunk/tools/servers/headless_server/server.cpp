@@ -21,13 +21,15 @@
 
 GameServer::GameServer() :
   password(""),
+  port(0),
   clients_socket_set(NULL)
 {
 }
 
-bool GameServer::ServerStart(uint port, uint max_nb_clients, std::string& _password)
+bool GameServer::ServerStart(uint _port, uint max_nb_clients, std::string& _password)
 {
   password = _password;
+  port = _port;
 
   // Open the port to listen to
   if (!server_socket.AcceptIncoming(port)) {
@@ -77,5 +79,72 @@ void GameServer::WaitClients()
 	RejectIncoming();
     }
     SDL_Delay(100);
+  }
+}
+
+std::list<WSocket*>::iterator GameServer::CloseConnection(std::list<WSocket*>::iterator closed)
+{
+  std::list<WSocket*>::iterator it;
+
+  DPRINT(INFO, "Client disconnected: %s", (*closed)->GetAddress().c_str());
+
+  it = clients_socket_set->GetSockets().erase(closed);
+  delete *closed;
+
+  if (clients_socket_set->NbSockets() + 1 == clients_socket_set->MaxNbSockets()) {
+    // A new player will be able to connect, so we reopen the socket
+    // For incoming connections
+    DPRINT(INFO, "Allowing new connections");
+    server_socket.AcceptIncoming(port);
+  }
+
+  return it;
+}
+
+void GameServer::ForwardPacket(void * buffer, size_t len, const WSocket* sender)
+{
+  std::list<WSocket*>::iterator it;
+
+  for (it = clients_socket_set->GetSockets().begin();
+       it != clients_socket_set->GetSockets().end() ;
+       it++) {
+
+    if ((*it) != sender) {
+      (*it)->SendPacket(buffer, len);
+    }
+  }
+}
+
+void GameServer::RunLoop()
+{
+  while (true) {
+
+    WaitClients();
+
+    int num_ready = clients_socket_set->CheckActivity(100);
+
+    if (num_ready == -1) { // Means an error
+      fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
+      continue; //Or break?
+    }
+
+    void * buffer;
+    size_t packet_size;
+    std::list<WSocket*>::iterator it = clients_socket_set->GetSockets().begin();
+
+    while (it != clients_socket_set->GetSockets().end()) {
+
+      if ((*it)->IsReady()) { // Check if this socket contains data to receive
+
+        if ((*it)->ReceivePacket(buffer, packet_size)) {
+	  ForwardPacket(buffer, packet_size, *it);
+	  free(buffer);
+	} else {
+	  it = CloseConnection(it);
+	  break;
+	}
+      }
+      it++;
+    }
   }
 }

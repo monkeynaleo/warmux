@@ -32,18 +32,23 @@ class GameServer
 {
 private:
   std::string password;
+  uint port;
 
   WSocket server_socket;
   WSocketSet* clients_socket_set;
 
   bool HandShake(WSocket& client_socket);
+  void WaitClients();
   void RejectIncoming();
+  std::list<WSocket*>::iterator CloseConnection(std::list<WSocket*>::iterator closed);
+
+  void ForwardPacket(void * buffer, size_t len, const WSocket* sender);
 
 public:
   GameServer();
 
   bool ServerStart(uint port, uint max_nb_clients, std::string& password);
-  void WaitClients();
+  void RunLoop();
 };
 
 #endif
