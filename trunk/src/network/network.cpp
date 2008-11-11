@@ -186,8 +186,6 @@ const std::string& Network::GetNickname() const
 
 //-----------------------------------------------------------------------------
 
-
-
 void Network::ReceiveActions()
 {
   char* packet;
