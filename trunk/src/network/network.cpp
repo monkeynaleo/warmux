@@ -185,11 +185,9 @@ void Network::ReceiveActions()
            ThreadToContinue() && dst_cpu != cpu.end();
            dst_cpu++)
       {
-        if((*dst_cpu)->MustBeDisconnected())
-        {
+	// Disconnection is in 2 phases to be handled by one thread
+        if ((*dst_cpu)->MustBeDisconnected()) {
           dst_cpu = CloseConnection(dst_cpu);
-          if (cpu.empty())
-            break; // Let it be handled afterwards
         }
       }
 
@@ -203,6 +201,7 @@ void Network::ReceiveActions()
         // Even for server, as Visual Studio in debug mode has trouble with that loop
 	continue;
       }
+
       int num_ready = socket_set->CheckActivity(100);
       // Means something is available
       if (num_ready>0)
@@ -249,7 +248,7 @@ void Network::ReceiveActions()
 #endif
 
         Action* a = new Action(packet, (*dst_cpu));
-        if(!a->CheckCRC()) {
+        if (!a->CheckCRC()) {
           MSG_DEBUG("network.crc_bad","!!! Bad CRC for action received !!!");
           delete a;
         } else {
