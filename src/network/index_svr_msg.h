@@ -23,6 +23,8 @@
 #ifndef TOP_SERVER_MSG_H
 #define TOP_SERVER_MSG_H
 
+#include <string>
+
 enum IndexServerMsg
 {
   TS_NO_MSG, // Don't send this
