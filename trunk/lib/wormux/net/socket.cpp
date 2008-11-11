@@ -29,18 +29,19 @@
 
 //-----------------------------------------------------------------------------
 // static method
-WSocketSet* WSocketSet::GetSocketSet(int maxsockets)
+WSocketSet* WSocketSet::GetSocketSet(uint maxsockets)
 {
   SDLNet_SocketSet sdl_socket_set = SDLNet_AllocSocketSet(maxsockets);
   if (!sdl_socket_set) {
     fprintf(stderr, "SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
     return NULL;
   }
-  return new WSocketSet(sdl_socket_set);
+  return new WSocketSet(maxsockets, sdl_socket_set);
 }
 
 
-WSocketSet::WSocketSet(SDLNet_SocketSet sdl_socket_set) :
+WSocketSet::WSocketSet(uint maxsockets, SDLNet_SocketSet sdl_socket_set) :
+  max_nb_sockets(maxsockets),
   socket_set(sdl_socket_set),
   lock(SDL_CreateMutex())
 {
@@ -95,6 +96,16 @@ void WSocketSet::RemoveSocket(WSocket* socket)
 int WSocketSet::CheckActivity(int timeout)
 {
   return SDLNet_CheckSockets(socket_set, timeout);
+}
+
+uint WSocketSet::MaxNbSockets() const
+{
+  return max_nb_sockets;
+}
+
+uint WSocketSet::NbSockets() const
+{
+  return sockets.size();
 }
 
 //-----------------------------------------------------------------------------

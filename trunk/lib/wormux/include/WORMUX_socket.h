@@ -36,6 +36,7 @@ class WSocketSet
   friend class WSocket;
 
 private:
+  uint max_nb_sockets;
   SDLNet_SocketSet socket_set;
   std::list<WSocket*> sockets;
   SDL_mutex* lock;
@@ -43,17 +44,19 @@ private:
   void Lock();
   void UnLock();
 
-  WSocketSet(SDLNet_SocketSet socket_set);
+  WSocketSet(uint max_sockets, SDLNet_SocketSet socket_set);
 
 public:
   // may return NULL in case of problem
-  static WSocketSet* GetSocketSet(int max_sockets);
+  static WSocketSet* GetSocketSet(uint max_sockets);
 
   ~WSocketSet();
   bool AddSocket(WSocket* socket);
   void RemoveSocket(WSocket* socket);
 
   int CheckActivity(int timeout);
+  uint MaxNbSockets() const;
+  uint NbSockets() const;
 };
 
 class WSocket

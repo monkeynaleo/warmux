@@ -40,6 +40,7 @@
 #include <WSERVER_debug.h>
 #include <WSERVER_env.h>
 #include "config.h"
+#include "server.h"
 
 BasicClock wx_clock;
 
@@ -55,19 +56,20 @@ int main(int /*argc*/, char* /*argv*/[])
 
   int port = 0;
   if (!config.Get("port", port)) {
-    fprintf(stderr, "ERROR: No port specified\n");
+    DPRINT(INFO, "ERROR: No port specified");
     exit(EXIT_FAILURE);
   }
 
-  WSocket server_socket;
-
-  // Open the port to listen to
-  if (!server_socket.AcceptIncoming(port)) {
-    fprintf(stderr, "ERROR %d: Impossible to use port %d\n", CONN_BAD_PORT, port);
+  std::string password = "";
+  uint max_nb_clients = 4;
+  GameServer server;
+  if (!server.ServerStart(uint(port), max_nb_clients, password)) {
+    DPRINT(INFO, "ERROR: Server not started");
     exit(EXIT_FAILURE);
   }
 
-  printf("o Server successfully started\n");
-
+  while (true) {
+    server.WaitClients();
+  }
 }
 
