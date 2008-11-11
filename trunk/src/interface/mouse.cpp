@@ -119,12 +119,12 @@ void Mouse::ActionLeftClic(bool) const
 
     if (character_found) {
       Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
-      next_character->StoreActiveCharacter();
+      Character::StoreActiveCharacter(next_character);
 
       while ( (*it) != &ActiveCharacter() )
         ActiveTeam().NextCharacter ();
 
-      next_character->StoreActiveCharacter();
+      Character::StoreActiveCharacter(next_character);
       ActionHandler::GetInstance()->NewAction(next_character);
 
       return;

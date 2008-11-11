@@ -953,6 +953,33 @@ void Character::GetValueFromAction(Action *a)
   }
 }
 
+// Static method
+void Character::RetrieveCharacterFromAction(Action *a)
+{
+  int team_no = a->PopInt();
+  int char_no = a->PopInt();
+  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->GetValueFromAction(a);
+}
+
+// Static method
+void Character::StoreActiveCharacter(Action *a)
+{
+  Character::StoreCharacter(a, ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+}
+
+// Static method
+void Character::StoreCharacter(Action *a, uint team_no, uint char_no)
+{
+  a->Push((int)team_no);
+  a->Push((int)char_no);
+  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->StoreValue(a);
+}
+
+// ###################################################################
+// ###################################################################
+// ###################################################################
 
 const std::string& Character::GetName() const
 {
@@ -1001,8 +1028,8 @@ void Character::SetSize(const Point2i &newSize)
   }
   shape->SetFilter(filter_data);
   shape->SetFriction(1.2f);
-  
- 
+
+
 
   //Feet shape
   PhysicalCircle *feet_shape = new PhysicalCircle();
@@ -1013,13 +1040,13 @@ void Character::SetSize(const Point2i &newSize)
   feet_shape->SetPosition(Point2d(phys_width/2, phys_height - phys_width/2));
   feet_shape->SetFriction(1.2f);
   feet_shape->SetFilter(filter_data);
-  
+
 
   ClearShapes();
 
   m_shapes.push_back(shape);
   m_shapes.push_back(feet_shape);
-  
+
   Generate();
 }
 

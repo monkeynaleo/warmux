@@ -379,15 +379,15 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
           SDLMod mod = SDL_GetModState();
           if (mod & KMOD_CTRL) {
             Action * previous_character = new Action(Action::ACTION_PLAYER_PREVIOUS_CHARACTER);
-            previous_character->StoreActiveCharacter();
+	    Character::StoreActiveCharacter(previous_character);
             ActiveTeam().PreviousCharacter();
-            previous_character->StoreActiveCharacter();
+	    Character::StoreActiveCharacter(previous_character);
             ActionHandler::GetInstance()->NewAction(previous_character);
           } else {
             Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
-            next_character->StoreActiveCharacter();
+            Character::StoreActiveCharacter(next_character);
             ActiveTeam().NextCharacter();
-            next_character->StoreActiveCharacter();
+            Character::StoreActiveCharacter(next_character);
             ActionHandler::GetInstance()->NewAction(next_character);
           }
         }
