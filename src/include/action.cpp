@@ -54,25 +54,25 @@ Action::Action (Action_t type, double value1, int value2)
 }
 
 // Build an action from a network packet
-Action::Action (const char *is, DistantComputer* _creator)
+Action::Action(const char *buffer, DistantComputer* _creator)
 {
   creator = _creator;
 
   var.clear();
-  m_type = (Action_t)SDLNet_Read32(is);
-  is += 4;
-  m_timestamp = (uint)SDLNet_Read32(is);
-  is += 4;
-  int m_length = SDLNet_Read32(is);
-  is += 4;
+  m_type = (Action_t)SDLNet_Read32(buffer);
+  buffer += 4;
+  m_timestamp = (uint)SDLNet_Read32(buffer);
+  buffer += 4;
+  int m_length = SDLNet_Read32(buffer);
+  buffer += 4;
 
   for(int i=0; i < m_length; i++)
   {
-    uint32_t val = SDLNet_Read32(is);
+    uint32_t val = SDLNet_Read32(buffer);
     var.push_back(val);
-    is += 4;
+    buffer += 4;
   }
-  crc = SDLNet_Read32(is);
+  crc = SDLNet_Read32(buffer);
 }
 
 uint Action::ComputeCRC() const
