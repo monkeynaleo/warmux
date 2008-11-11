@@ -4,9 +4,12 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wormux", "wormux.vcproj", "{1CD2A0F2-9AD5-48AD-89E1-7102811A81B8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7A2DFC3D-516A-471D-A215-BD40E5E5AD9A} = {7A2DFC3D-516A-471D-A215-BD40E5E5AD9A}
+		{11D2F161-F3C3-4149-91DE-F987A62F6AB8} = {11D2F161-F3C3-4149-91DE-F987A62F6AB8}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Box2D", "Box2D.vcproj", "{7A2DFC3D-516A-471D-A215-BD40E5E5AD9A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwormux", "libwormux.vcproj", "{11D2F161-F3C3-4149-91DE-F987A62F6AB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +25,10 @@ Global
 		{7A2DFC3D-516A-471D-A215-BD40E5E5AD9A}.Debug|Win32.Build.0 = Debug|Win32
 		{7A2DFC3D-516A-471D-A215-BD40E5E5AD9A}.Release|Win32.ActiveCfg = Release|Win32
 		{7A2DFC3D-516A-471D-A215-BD40E5E5AD9A}.Release|Win32.Build.0 = Release|Win32
+		{11D2F161-F3C3-4149-91DE-F987A62F6AB8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11D2F161-F3C3-4149-91DE-F987A62F6AB8}.Debug|Win32.Build.0 = Debug|Win32
+		{11D2F161-F3C3-4149-91DE-F987A62F6AB8}.Release|Win32.ActiveCfg = Release|Win32
+		{11D2F161-F3C3-4149-91DE-F987A62F6AB8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
