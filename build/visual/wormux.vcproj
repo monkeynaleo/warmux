@@ -52,8 +52,8 @@
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\include&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\src&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;TARGET_FLOAT32_IS_FIXED;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\LiberationSans-Regular.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8.1svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\include&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\src&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
+				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\LiberationSans-Regular.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -149,8 +149,8 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\include&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\src&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;TARGET_FLOAT32_IS_FIXED;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8.1svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS;USE_FRIBIDI"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\include&quot;;&quot;$(ProjectDir)..\..\lib\Box2d\src&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;PACKAGE_VERSION=\&quot;0.8.1svn\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="0"
@@ -920,14 +920,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\map\tile.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\map\tile.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\map\tileitem.cpp"
 					>
 				</File>
@@ -1052,10 +1044,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\menu\replay_menu.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\menu\results_menu.cpp"
 					>
 				</File>
@@ -1141,14 +1129,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\network\index_svr_msg.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\network\irc.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\network\irc.h"
 					>
 				</File>
 				<File
@@ -1508,35 +1488,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\tool\error.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\tool\error.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\tool\euler_vector.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\tool\euler_vector.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\tool\file_tools.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\src\tool\file_tools.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\tool\i18n.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\tool\i18n.h"
 					>
 				</File>
 				<File
