@@ -4,6 +4,7 @@ bin_PROGRAMS = wormux-server
 
 wormux_server_SOURCES = \
 	config.h config.cpp \
+	server.h server.cpp \
 	main.cpp
 
 AM_CXXFLAGS += -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" \
