@@ -19,9 +19,9 @@
 
 #include <stdio.h>
 #include <string>
+#include <WSERVER_debug.h>
 #include "stat.h"
 #include "clock.h"
-#include "debug.h"
 #include "config.h"
 
 Stats stats;

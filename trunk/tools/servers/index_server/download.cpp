@@ -22,10 +22,10 @@
 #include <curl/curl.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <WSERVER_debug.h>
+#include <WSERVER_index_msg.h>
 #include "download.h"
-#include "debug.h"
 #include "config.h"
-#include "index_svr_msg.h"
 
 class Downloader
 {

@@ -1,0 +1,14 @@
+SUBDIRS = .
+
+bin_PROGRAMS = wormux-server
+
+wormux_server_SOURCES = \
+	config.h config.cpp \
+	main.cpp
+
+AM_CXXFLAGS += -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" \
+	  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/wormux-server/include \
+	-I$(top_srcdir)/lib/wormux/include
+
+wormux_server_LDADD=$(top_srcdir)/lib/wormux-server/libwormux-server.a $(top_srcdir)/lib/wormux/libwormux.a
+wormux_server_DEPENDENCIES=$(top_srcdir)/lib/wormux-server/libwormux-server.a $(top_srcdir)/lib/wormux/libwormux.a

@@ -19,19 +19,19 @@
 
 #include <string>
 #include <fstream>
-#include "config.h"
+#include <WSERVER_debug.h>
+#include <config.h>
 
 Config config;
 
 Config::Config() : BasicConfig("wormux_server.conf")
 {
   Load();
-  SetDefault("port", 9997);
+  SetDefault("port", 3826);
   SetDefault("working_dir", "wormux_log/");
   SetDefault("chroot", true);
   SetDefault("chroot_gid", 500);
   SetDefault("chroot_uid", 500);
   SetDefault("connexion_max", -2);
-  SetDefault("local", false);
   Display();
 }

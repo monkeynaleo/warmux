@@ -28,13 +28,13 @@
 #include <unistd.h>
 #include <string.h>
 #include <map>
+#include <WSERVER_debug.h>
+#include <WSERVER_index_msg.h>
 #include "client.h"
 #include "config.h"
 #include "net_data.h"
-#include "debug.h"
 #include "sync_slave.h"
 #include "stat.h"
-#include "index_svr_msg.h"
 
 // map < version, client >
 extern std::multimap<std::string,Client*> clients;

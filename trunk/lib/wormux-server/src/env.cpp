@@ -20,9 +20,9 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 
-#include "env.h"
-#include "basic_config.h"
-#include "debug.h"
+#include <WSERVER_env.h>
+#include <WSERVER_config.h>
+#include <WSERVER_debug.h>
 
 static BasicConfig* config = NULL;
 

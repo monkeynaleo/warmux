@@ -19,7 +19,7 @@
 
 #include <time.h>
 #include <stdio.h>
-#include "basic_clock.h"
+#include <WSERVER_clock.h>
 
 static char time_str[16];
 static char date_str[16];
