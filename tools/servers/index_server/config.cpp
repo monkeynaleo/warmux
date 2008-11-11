@@ -23,7 +23,7 @@
 
 Config config;
 
-Config::Config() : BasicConfig("wormux_server.conf")
+Config::Config() : BasicConfig("wormux_index_server.conf")
 {
   Load();
   SetDefault("port", 9997);
