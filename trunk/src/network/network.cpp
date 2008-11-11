@@ -67,6 +67,7 @@
 //-----------------------------------------------------------------------------
 
 SDL_Thread* NetworkThread::thread = NULL;
+bool NetworkThread::stop_thread = false;
 
 int NetworkThread::ThreadRun(void* /*no_param*/)
 {
@@ -78,6 +79,17 @@ int NetworkThread::ThreadRun(void* /*no_param*/)
 void NetworkThread::Start()
 {
   thread = SDL_CreateThread(NetworkThread::ThreadRun, NULL);
+  stop_thread = false;
+}
+
+void NetworkThread::Stop()
+{
+  stop_thread = true;
+}
+
+bool NetworkThread::Continue()
+{
+  return !stop_thread;
 }
 
 void NetworkThread::Wait()
@@ -87,12 +99,12 @@ void NetworkThread::Wait()
   }
 
   thread = NULL;
+  stop_thread = false;
 }
 
 //-----------------------------------------------------------------------------
 
 int  Network::num_objects = 0;
-bool Network::stop_thread = true;
 
 Network * Network::GetInstance()
 {
@@ -174,17 +186,14 @@ const std::string& Network::GetNickname() const
 
 //-----------------------------------------------------------------------------
 
-bool Network::ThreadToContinue() const
-{
-  return !stop_thread;
-}
+
 
 void Network::ReceiveActions()
 {
   char* packet;
   std::list<DistantComputer*>::iterator dst_cpu;
 
-  while (ThreadToContinue()) // While the connection is up
+  while (NetworkThread::Continue()) // While the connection is up
   {
     if (state == NETWORK_PLAYING && cpu.empty())
     {
@@ -193,13 +202,13 @@ void Network::ReceiveActions()
     }
 
     //Loop while nothing is received
-    while (ThreadToContinue())
+    while (NetworkThread::Continue())
     {
       WaitActionSleep();
 
       // Check forced disconnections
       for (dst_cpu = cpu.begin();
-           ThreadToContinue() && dst_cpu != cpu.end();
+           NetworkThread::Continue() && dst_cpu != cpu.end();
            dst_cpu++)
       {
 	// Disconnection is in 2 phases to be handled by one thread
@@ -212,7 +221,7 @@ void Network::ReceiveActions()
       if (cpu.empty()) {
         if (IsClient()) {
           fprintf(stderr, "you are alone!\n");
-	  stop_thread = true;
+	  NetworkThread::Stop();
           return; // We really don't need to go through the loops
         }
         // Even for server, as Visual Studio in debug mode has trouble with that loop
@@ -232,7 +241,7 @@ void Network::ReceiveActions()
     }
 
     for (dst_cpu = cpu.begin();
-         ThreadToContinue() && dst_cpu != cpu.end();
+         NetworkThread::Continue() && dst_cpu != cpu.end();
          dst_cpu++)
     {
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
@@ -245,7 +254,7 @@ void Network::ReceiveActions()
           if (cpu.empty()) {
             if (IsClient()) {
               fprintf(stderr, "you are alone!\n");
-	      stop_thread = true;
+	      NetworkThread::Stop();
               return; // We really don't need to go through the loops
             }
             break;
@@ -278,7 +287,7 @@ void Network::ReceiveActions()
         if (cpu.empty()) {
           if (IsClient()) {
             fprintf(stderr, "you are alone!\n");
-            stop_thread = true;
+            NetworkThread::Stop();
             return; // We really don't need to go through the loops
           }
           break;
@@ -296,7 +305,7 @@ void Network::Disconnect()
   AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION);
 
   if (singleton != NULL) {
-    singleton->stop_thread = true;
+    NetworkThread::Stop();
     singleton->DisconnectNetwork();
     delete singleton;
     ChatLogger::CloseIfOpen();
@@ -307,7 +316,6 @@ void Network::Disconnect()
 void Network::DisconnectNetwork()
 {
   NetworkThread::Wait();
-  stop_thread = true;
 
   DistantComputer* tmp;
   std::list<DistantComputer*>::iterator client = cpu.begin();
@@ -367,7 +375,7 @@ void Network::SendPacket(char* packet, int size) const
 // Static method
 bool Network::IsConnected()
 {
-  return (!GetInstance()->IsLocal() && !stop_thread);
+  return (!GetInstance()->IsLocal() && NetworkThread::Continue());
 }
 
 //-----------------------------------------------------------------------------
@@ -385,12 +393,10 @@ connection_state_t Network::ClientStart(const std::string& host,
   singleton = net;
 
   // try to connect
-  stop_thread = false;
   const connection_state_t error = net->ClientConnect(host, port);
 
   if (error != CONNECTED) {
     // revert change if connection failed
-    stop_thread = true;
     singleton = prev;
     delete net;
   } else if (prev != NULL) {
@@ -413,12 +419,10 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
   singleton = net;
 
   // try to connect
-  stop_thread = false;
   const connection_state_t error = net->ServerStart(port, GameMode::GetInstance()->max_teams);
 
   if (error != CONNECTED) {
     // revert change
-    stop_thread = true;
     singleton = prev;
     delete net;
   } else if (prev != NULL) {
