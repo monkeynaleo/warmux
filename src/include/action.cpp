@@ -23,13 +23,9 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include "action_handler.h"
-#include "character/body.h"
-#include "character/character.h"
 #include "game/game.h"
 #include "game/time.h"
 #include "network/distant_cpu.h"
-#include "team/team.h"
-#include "team/teams_list.h"
 #include "tool/debug.h"
 //-----------------------------------------------------------------------------
 
@@ -302,29 +298,3 @@ Point2d Action::PopPoint2d()
   y = PopDouble();
   return Point2d(x, y);
 }
-
-//-------------  Send/Retrieve datas about Character
-
-void Action::StoreActiveCharacter()
-{
-  StoreCharacter(ActiveCharacter().GetTeamIndex() ,ActiveCharacter().GetCharacterIndex());
-}
-
-void Action::StoreCharacter(uint team_no, uint char_no)
-{
-  Push((int)team_no);
-  Push((int)char_no);
-  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->StoreValue(this);
-}
-
-void Action::RetrieveCharacter()
-{
-  int team_no = PopInt();
-  int char_no = PopInt();
-  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->GetValueFromAction(this);
-}
-
-
-//-----------------------------------------------------------------------------

@@ -246,7 +246,7 @@ void ApplyExplosion_master (const Point2i &pos,
       if (distance <= config.explosion_range || distance < config.blast_range)
       {
         // clients : Place characters
-        a_characters_info.StoreCharacter(team_no, char_no);
+	Character::StoreCharacter(&a_characters_info, team_no, char_no);
       }
     }
   }

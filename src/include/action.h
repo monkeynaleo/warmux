@@ -159,11 +159,6 @@ public:
 
   bool IsEmpty() const { return var.empty(); };
 
-  // Store character's information
-  void StoreCharacter(uint team_no, uint char_no);
-  void StoreActiveCharacter();
-  void RetrieveCharacter();
-
   // Timestamp handling
   uint GetTimestamp() const { return m_timestamp; };
 

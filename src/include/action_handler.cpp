@@ -285,22 +285,22 @@ void Action_Player_ChangeWeapon (Action *a)
 void Action_Player_NextCharacter (Action *a)
 {
   JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
-  a->RetrieveCharacter();       // Retrieve current character's informations
-  a->RetrieveCharacter();       // Retrieve next character information
+  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's informations
+  Character::RetrieveCharacterFromAction(a);       // Retrieve next character information
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
 void Action_Player_PreviousCharacter (Action *a)
 {
   JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
-  a->RetrieveCharacter();       // Retrieve current character's informations
-  a->RetrieveCharacter();       // Retrieve previous character's information
+  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's informations
+  Character::RetrieveCharacterFromAction(a);       // Retrieve previous character's information
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
 void Action_Game_ChangeCharacter (Action *a)
 {
-  a->RetrieveCharacter();
+  Character::RetrieveCharacterFromAction(a);
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
@@ -554,7 +554,7 @@ void Action_Character_BackJump (Action */*a*/)
 void Action_Character_SetPhysics (Action *a)
 {
   while(!a->IsEmpty())
-    a->RetrieveCharacter();
+    Character::RetrieveCharacterFromAction(a);
 }
 
 void SendActiveCharacterAction(const Action& a)
@@ -572,7 +572,7 @@ void SendActiveCharacterAction(const Action& a)
 void SendCharacterInfo(int team_no, int char_no)
 {
   Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
-  a.StoreCharacter(team_no, char_no);
+  Character::StoreCharacter(&a, team_no, char_no);
   Network::GetInstance()->SendAction(a);
 }
 
