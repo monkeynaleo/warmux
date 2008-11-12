@@ -271,7 +271,7 @@ bool Grapple::TryAddNode(int CurrentSense)
   if (find_first_contact_point(m_fixation_point, angle, lg, 2, contact_point))
     {
 //       rope_angle = ActiveCharacter().GetRopeAngle() ; //TODO : Box2d
-
+		rope_angle = 0;
       if ( (last_broken_node_sense * CurrentSense > 0) &&
            (fabs(last_broken_node_angle - rope_angle) < 0.1))
         return false ;
@@ -446,6 +446,7 @@ void Grapple::Draw()
     angle = m_initial_angle + M_PI/2;
   }
   else {
+	angle = 0;
     //    angle = ActiveCharacter().GetRopeAngle();
   }
 
@@ -603,7 +604,7 @@ void Grapple::DetachNode()
 void Grapple::SetRopeSize(double length) const
 {
   //  double delta = length - ActiveCharacter().GetRopeLength();
-  double delta = 0;  
+  double delta = 0;
   length = delta;//TODO : REMOVE THIS VERY BAD COMPIL FIX
  // ActiveCharacter().ChangePhysRopeSize (delta);
 }
@@ -799,7 +800,7 @@ void Grapple::PrintDebugRope()
 //          ActiveCharacter().GetY(),
 // 	          ActiveCharacter().GetRopeAngle());
 
-	 
+
   for (std::list<rope_node_t>::iterator it = rope_nodes.begin();
        it != rope_nodes.end();
        it++) {
