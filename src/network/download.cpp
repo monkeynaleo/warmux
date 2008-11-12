@@ -41,7 +41,6 @@ Downloader::~Downloader()
 size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
 {
   return fwrite(buf, size, nmemb, (FILE*)fd);
-  //return nmemb;
 }
 
 bool Downloader::Get(const char* url, const char* save_as)
