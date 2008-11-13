@@ -246,7 +246,8 @@ void Network::ReceiveActions()
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
 
-	if (!(*dst_cpu)->ReceiveDatas((void* &)(buffer), packet_size)) {
+    	  if (!(*dst_cpu)->ReceiveDatas(reinterpret_cast<void* &>(buffer), packet_size)) {
+
 	  // An error occured during the reception
           dst_cpu = CloseConnection(dst_cpu);
 
