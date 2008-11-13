@@ -225,7 +225,11 @@ double PhysicalObj::GetPhysY() const
 
 Point2d PhysicalObj::GetPhysXY() const
 {
-  return Point2d( m_body->GetPosition().x, m_body->GetPosition().y);
+  if(m_is_active){
+    return Point2d( m_body->GetPosition().x, m_body->GetPosition().y);
+  }else{
+    return Point2d(0.0,0.0);
+  }
 }
 
 void PhysicalObj::SetPhysXY(double x, double y)
@@ -305,7 +309,8 @@ void PhysicalObj::GetSpeed(double &norm, double &angle) const
 
 Point2d PhysicalObj::GetSpeedXY () const
 {
-  if (!IsMoving()) {
+
+  if (!IsMoving() || !m_is_active) {
     return Point2d(0.0, 0.0);
   }
 
@@ -483,8 +488,8 @@ void PhysicalObj::StoreValue(Action *a)
   //  a->Push(m_elasticity_off);
 
   MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
-	    typeid(*this).name(), m_body->GetPosition().x, m_body->GetPosition().y, GetMass(),
-	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y,GetAngularSpeed());
+	    typeid(*this).name(), GetPhysXY().x, GetPhysXY().y, GetMass(),
+	    GetSpeed().x,  GetSpeed().y,GetAngularSpeed());
 
   a->Push(m_ignore_movements);
   a->Push(m_is_character);
@@ -538,8 +543,8 @@ void PhysicalObj::GetValueFromAction(Action *a)
   //  m_elasticity_off     = !!a->PopInt();
 
   MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
-	    typeid(*this).name(), m_body->GetPosition().x, m_body->GetPosition().y, GetMass(),
-	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y, GetAngularSpeed());
+	    typeid(*this).name(),  GetPhysXY().x, GetPhysXY().y, GetMass(),
+	    GetSpeed().x, GetSpeed().y, GetAngularSpeed());
 
   m_ignore_movements         = !!a->PopInt();
   m_is_character             = !!a->PopInt();
