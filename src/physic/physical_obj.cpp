@@ -309,12 +309,16 @@ void PhysicalObj::GetSpeed(double &norm, double &angle) const
 
 Point2d PhysicalObj::GetSpeedXY () const
 {
+  if(m_is_active)
+  {
+    if (!IsMoving()) {
+      return Point2d(0.0, 0.0);
+    }
 
-  if (!IsMoving() || !m_is_active) {
-    return Point2d(0.0, 0.0);
+    return Point2d(m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y);
+  }else{
+    return Point2d(0.0,0.0);
   }
-
-  return Point2d(m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y);
 }
 
 Point2d PhysicalObj::GetSpeed() const
