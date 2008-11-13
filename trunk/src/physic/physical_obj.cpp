@@ -29,10 +29,6 @@
 #include "include/action.h"
 #include "game/config.h"
 
-/*****************************************************************************/
-/* TODO REMOVE THIS INCLUDE AS SOON AS PHYSICAL ENGINE IS REPAIRED */
-#include "game/game.h"
-/*****************************************************************************/
 
 #include "game/time.h"
 #include "map/map.h"
@@ -100,7 +96,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_body_def->angularDamping = 0.01f;
 
   m_body_def->position.Set(0.0f, 4.0f);
-  
+
 
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
@@ -123,6 +119,7 @@ void PhysicalObj::Activate()
   if(!m_is_active){
     m_is_active =true;
     m_body = PhysicalEngine::GetInstance()->AddObject(this);
+
     SetSpeedXY(m_initial_speed);
     Generate();
   }
@@ -132,13 +129,13 @@ void PhysicalObj::Generate()
 {
   if(m_is_active){
     m_body->SetBullet(m_is_bullet);
-    
+
     b2MassData massData;
     massData.mass = m_mass;
     massData.center.SetZero();
     massData.I = 0.0f;
     m_body->SetMass(&massData);
-    
+
     std::list<PhysicalShape*>::iterator it;
     for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
       (*it)->SetBody(m_body);
@@ -167,24 +164,24 @@ void PhysicalObj::SetXY(const Point2i &position)
 void PhysicalObj::SetXY(const Point2d &position)
 {
   if(m_is_active){
-    
+
     CheckOverlapping();
-  
+
     if (IsOutsideWorldXY(Point2i(int(position.x), int(position.y)))) {
-  
+
       SetPhysXY( position / PIXEL_PER_METER );
       Ghost();
       SignalOutOfMap();
-  
+
     } else {
       SetPhysXY( position / PIXEL_PER_METER );
-  
+
       if (FootsInVacuum()) {
         StartMoving();
       }
     }
   }else{
-    SetPhysXY( position / PIXEL_PER_METER ); 
+    SetPhysXY( position / PIXEL_PER_METER );
   }
 }
 
@@ -213,7 +210,7 @@ double PhysicalObj::GetPhysX() const
   if(m_is_active){
     return m_body->GetPosition().x;
   }else{
-   return m_body_def->position.x; 
+   return m_body_def->position.x;
   }
 }
 
@@ -222,7 +219,7 @@ double PhysicalObj::GetPhysY() const
   if(m_is_active){
     return m_body->GetPosition().y;
   }else{
-   return m_body_def->position.y; 
+   return m_body_def->position.y;
   }
 }
 
@@ -242,7 +239,7 @@ void PhysicalObj::SetPhysXY(double x, double y)
   /*UpdateTimeOfLastMove();
     }*/
   }else{
-    m_body_def->position.Set(x,y); 
+    m_body_def->position.Set(x,y);
   }
 }
 
@@ -258,7 +255,7 @@ void PhysicalObj::SetSpeedXY (Point2d vector)
   if (EqualsZero(vector.x)) vector.x = 0;
   if (EqualsZero(vector.y)) vector.y = 0;
   bool was_moving = IsMoving();
-  
+
     // setting to FreeFall is done in StartMoving()
     m_body->SetLinearVelocity(b2Vec2(vector.x,vector.y));
     if (!was_moving && IsMoving()) {
@@ -267,7 +264,7 @@ void PhysicalObj::SetSpeedXY (Point2d vector)
       m_body->WakeUp();
     }
   }else{
-    m_initial_speed = vector; 
+    m_initial_speed = vector;
   }
 }
 
@@ -337,13 +334,13 @@ void PhysicalObj::SetSize(const Point2i &newSize)
 
  // Shape position is relative to body
     PhysicalPolygon *shape = new PhysicalPolygon();
-    
+
     shape->AddPoint(Point2d(0 , 0));
     shape->AddPoint(Point2d(phys_width, 0));
     shape->AddPoint(Point2d(phys_width, phys_height));
     shape->AddPoint(Point2d(0 , phys_height));
     shape->SetMass(GetMass());
-  
+
     b2FilterData filter_data;
     filter_data.categoryBits = 0x0001;
     filter_data.maskBits = 0x0000;
@@ -351,9 +348,9 @@ void PhysicalObj::SetSize(const Point2i &newSize)
       filter_data = GetCollisionFilter();
     }
     shape->SetFilter(filter_data);
-  
+
     ClearShapes();
-  
+
     m_shapes.push_back(shape);
 
     Generate();
@@ -814,12 +811,6 @@ void PhysicalObj::Ghost ()
 
   // The object became a gost
   StopMoving();
-
-  ////////////////////////////////////////////////////////////////////////////////
-  // WARNING : to remove as soon as possible when Box2D is correctly integrated...
-  if (Game::GetInstance()->IsGameLaunched())
-    /////////////////////////////////////////////////////////////////////////////
-    SignalGhostState(was_dead);
 }
 
 void PhysicalObj::Drown()
@@ -1101,7 +1092,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
   uint NB_MAX_TRY = 60;
   bool ok;
   Point2i position;
-  
+
   MSG_DEBUG("physic.position", "%s - Search a position...", m_name.c_str());
 
   do {
@@ -1377,5 +1368,9 @@ double PhysicalObj::GetAngle() const
 
 void PhysicalObj::SetAngle(double angle)
 {
-  m_body->SetXForm(m_body->GetPosition(), -angle/180.0f * b2_pi);
+  if(m_is_active){
+    m_body->SetXForm(m_body->GetPosition(), -angle/180.0f * b2_pi);
+  }else{
+    m_body_def->angle = -angle/180.0f * b2_pi;
+  }
 }
