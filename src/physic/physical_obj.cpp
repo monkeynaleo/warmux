@@ -319,7 +319,11 @@ Point2d PhysicalObj::GetSpeed() const
 
 double PhysicalObj::GetAngularSpeed() const
 {
+  if(m_is_active){
   return m_body->GetAngularVelocity();
+  }else{
+    return 0;
+  }
 }
 
 double PhysicalObj::GetSpeedAngle() const
@@ -480,7 +484,7 @@ void PhysicalObj::StoreValue(Action *a)
 
   MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
 	    typeid(*this).name(), m_body->GetPosition().x, m_body->GetPosition().y, GetMass(),
-	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y, m_body->GetAngularVelocity());
+	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y,GetAngularSpeed());
 
   a->Push(m_ignore_movements);
   a->Push(m_is_character);
@@ -535,7 +539,7 @@ void PhysicalObj::GetValueFromAction(Action *a)
 
   MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
 	    typeid(*this).name(), m_body->GetPosition().x, m_body->GetPosition().y, GetMass(),
-	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y, m_body->GetAngularVelocity());
+	    m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y, GetAngularSpeed());
 
   m_ignore_movements         = !!a->PopInt();
   m_is_character             = !!a->PopInt();
