@@ -656,7 +656,9 @@ bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
 
 void PhysicalObj::CheckOverlapping()
 {
-  if (m_overlapping_object == NULL)
+  if ( m_overlapping_object == NULL )
+    return;
+  if ( !m_is_active )
     return;
 
   // Check if we are still overlapping with this object
@@ -913,6 +915,9 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
 
 bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
 {
+  if(!m_is_active){
+    return true;
+  }
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
