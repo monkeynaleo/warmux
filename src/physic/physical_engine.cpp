@@ -37,7 +37,7 @@ PhysicalEngine::PhysicalEngine() :
 {
   worldAABB.lowerBound.Set(-10000.0f, -10000.0f);
   worldAABB.upperBound.Set(10000.0f, 10000.0f);
-  b2Vec2 gravity(0.0f, 10.0f);
+  b2Vec2 gravity(0.0f, 30.0f);
   bool doSleep = true;
 
   physic_world = new b2World(worldAABB, gravity, doSleep);
