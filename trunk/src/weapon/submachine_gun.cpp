@@ -41,7 +41,7 @@
 #include "weapon/submachine_gun.h"
 #include "weapon/weapon_cfg.h"
 
-const uint    SUBMACHINE_BULLET_SPEED       = 30;
+const uint    SUBMACHINE_BULLET_SPEED       = 60;
 const uint    SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
 const double  SUBMACHINE_RANDOM_ANGLE       = 0.01;
 
