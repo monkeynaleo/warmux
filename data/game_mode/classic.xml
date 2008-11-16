@@ -21,9 +21,9 @@
 
   <character>
     <energy initial="100" maximum="200" />
-    <jump strength="800" angle="-60" />
-    <super_jump strength="1100" angle="-80" />
-    <back_jump strength="900" angle="-100" />
+    <jump strength="600" angle="-60" />
+    <super_jump strength="775" angle="-80" />
+    <back_jump strength="675" angle="-100" />
     <death_explosion>
       <damage>10</damage>
       <explosion_range>50</explosion_range>
@@ -305,7 +305,7 @@
     </grapple>
 
     <grenade>
-      <max_strength>55</max_strength>
+      <max_strength>105</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
       <min_angle>-89</min_angle>
@@ -327,7 +327,7 @@
       <explosion_range>5</explosion_range>
       <particle_range>5</particle_range>
       <blast_range>2</blast_range>
-      <blast_force>5</blast_force>
+      <blast_force>15</blast_force>
     </gun>
 
     <jetpack>

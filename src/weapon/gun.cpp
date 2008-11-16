@@ -35,7 +35,7 @@
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
-const uint GUN_BULLET_SPEED = 20;
+const uint GUN_BULLET_SPEED = 40;
 
 class GunBullet : public WeaponBullet
 {
