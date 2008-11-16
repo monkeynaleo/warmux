@@ -412,7 +412,8 @@ bool WSocket::SendStr(const std::string &str)
 
 bool WSocket::SendBuffer_NoLock(const void* data, size_t len)
 {
-  int size = SDLNet_TCP_Send(socket, data, len);
+  // cast is needed to please SDL that does not use const keyword.
+  int size = SDLNet_TCP_Send(socket, (void*)(data), len);
   if (size < int(len)) {
     fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
     return false;
