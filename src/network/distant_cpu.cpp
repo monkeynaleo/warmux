@@ -35,11 +35,13 @@
 
 static const int MAX_PACKET_SIZE = 250*1024;
 
-DistantComputer::DistantComputer(WSocket* new_sock) :
+DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname) :
   sock(new_sock),
   state(DistantComputer::STATE_ERROR),
   force_disconnect(false)
 {
+  player.SetNickname(nickname);
+
   // If we are the server, we have to tell this new computer
   // what teams / maps have already been selected
   if (Network::GetInstance()->IsServer()) {
@@ -91,7 +93,11 @@ DistantComputer::DistantComputer(WSocket* new_sock) :
 
 DistantComputer::~DistantComputer()
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_INFO_CLIENT_DISCONNECT, GetAddress()));
+  Action *a = new Action(Action::ACTION_INFO_CLIENT_DISCONNECT);
+  a->Push(GetAddress());
+  a->Push(GetPlayer().GetNickname());
+
+  ActionHandler::GetInstance()->NewAction(a);
 
   player.Disconnect();
 

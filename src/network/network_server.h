@@ -33,7 +33,7 @@ class NetworkServer : public Network
   int port; // store listening port
 
 protected:
-  bool HandShake(WSocket& client_socket) const;
+  bool HandShake(WSocket& client_socket, std::string& nickname) const;
   virtual void HandleAction(Action* a, DistantComputer* sender) const;
   virtual void WaitActionSleep();
 

@@ -37,7 +37,7 @@ private:
   WSocket server_socket;
   WSocketSet* clients_socket_set;
 
-  bool HandShake(WSocket& client_socket);
+  bool HandShake(WSocket& client_socket, std::string& client_nickname);
   void WaitClients();
   void RejectIncoming();
   std::list<WSocket*>::iterator CloseConnection(std::list<WSocket*>::iterator closed);
