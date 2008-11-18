@@ -34,7 +34,7 @@
 #include <string>
 #include <map>
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "tool/point.h"
 #include "team/team_config.h"
 

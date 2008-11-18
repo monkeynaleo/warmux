@@ -22,7 +22,7 @@
 #ifndef RANDOMSYNC_H
 #define RANDOMSYNC_H
 
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "tool/random.h"
 
 class RandomSyncGen : public RandomGenerator, public Singleton<RandomSyncGen>

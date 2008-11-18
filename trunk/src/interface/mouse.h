@@ -25,7 +25,7 @@
 #include <map>
 #include "graphic/surface.h"
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "tool/point.h"
 
 // Forward declarations

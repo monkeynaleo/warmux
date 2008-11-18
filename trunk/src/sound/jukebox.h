@@ -31,7 +31,7 @@
 #include <SDL_mixer.h>
 
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "sample_cache.h"
 
 //-----------------------------------------------------------------------------

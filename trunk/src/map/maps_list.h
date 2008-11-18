@@ -24,7 +24,7 @@
 
 #include <vector>
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "graphic/surface.h"
 #include "map/water.h"
 

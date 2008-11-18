@@ -24,7 +24,7 @@
 
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 
 // XXX uint wrap-around (or at least system timer) not handled
 class Time : public Singleton<Time>

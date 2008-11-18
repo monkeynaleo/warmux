@@ -30,7 +30,7 @@
 #include <utility>
 #include "network/network.h"
 #include "network/index_svr_msg.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 
 class GameServerInfo
 {

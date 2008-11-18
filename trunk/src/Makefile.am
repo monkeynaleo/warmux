@@ -72,7 +72,6 @@ wormux_SOURCES = \
         include/base.h \
         include/binreloc.h include/binreloc.c \
         include/constant.cpp include/constant.h \
-        include/singleton.cpp include/singleton.h \
         interface/cursor.cpp interface/cursor.h \
         interface/game_msg.cpp interface/game_msg.h \
         interface/interface.cpp interface/interface.h \

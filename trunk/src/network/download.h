@@ -23,7 +23,7 @@
 #define DOWNLOAD_H
 #include <map>
 #include <curl/curl.h>
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 
 class Downloader : public Singleton<Downloader>
 {

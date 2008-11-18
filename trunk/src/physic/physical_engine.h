@@ -23,7 +23,7 @@
 #define PHYSICAL_ENGINE_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include <Box2D.h>
 #include <map>
 #include <vector>

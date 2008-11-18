@@ -26,7 +26,7 @@
 #include <list>
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "network/player.h"
 //-----------------------------------------------------------------------------
 

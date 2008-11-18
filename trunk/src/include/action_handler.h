@@ -26,7 +26,7 @@
 #include <list>
 #include "include/action.h"
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
 // Forward declarations
