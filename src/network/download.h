@@ -34,16 +34,17 @@ class Downloader : public Singleton<Downloader>
 
   CURL* curl;
 
+  // Return true if the download was successful
+  bool Get(const char* url, const char* save_as) const;
+
 protected:
   friend class Singleton<Downloader>;
   Downloader();
   ~Downloader();
 
 public:
-  // Return true if the download was successful
-  std::string GetLatestVersion();
-  bool Get(const char* url, const char* save_as);
-  std::map<std::string, int> GetServerList(std::string list_name);
+  std::string GetLatestVersion() const;
+  std::map<std::string, int> GetServerList(std::string list_name) const;
 };
 
 #endif

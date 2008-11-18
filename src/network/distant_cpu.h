@@ -28,9 +28,7 @@
 #include <string>
 //-----------------------------------------------------------------------------
 
-class Action;
 class WSocket;
-class ConfigTeam;
 
 class DistantComputer
 {
