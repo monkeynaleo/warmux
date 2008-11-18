@@ -72,9 +72,9 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
-bool NetworkServer::HandShake(WSocket& client_socket) const
+bool NetworkServer::HandShake(WSocket& client_socket, std::string& nickname) const
 {
-  return WNet::Server_HandShake(client_socket, GetPassword(), false);
+  return WNet::Server_HandShake(client_socket, GetPassword(), nickname, false);
 }
 
 void NetworkServer::WaitActionSleep()
@@ -84,17 +84,22 @@ void NetworkServer::WaitActionSleep()
     // Check for an incoming connection
     WSocket* incoming = server_socket.LookForClient();
     if (incoming) {
+      std::string nickname;
 
-      if (!HandShake(*incoming))
+      if (!HandShake(*incoming, nickname))
  	return;
 
       socket_set->AddSocket(incoming);
 
-      DistantComputer* client = new DistantComputer(incoming);
+      DistantComputer* client = new DistantComputer(incoming, nickname);
       cpu.push_back(client);
 
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_INFO_CLIENT_CONNECT,
-							 client->GetAddress()));
+      Action *a = new Action(Action::ACTION_INFO_CLIENT_CONNECT);
+      a->Push(client->GetAddress());
+      a->Push(client->GetPlayer().GetNickname());
+
+      ActionHandler::GetInstance()->NewAction(a);
+
       printf("New client connected\n");
       if (GetNbConnectedPlayers() >= max_nb_players)
         RejectIncoming();

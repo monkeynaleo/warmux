@@ -54,7 +54,7 @@ class DistantComputer
   Player player;
 
 public:
-  DistantComputer(WSocket* new_sock);
+  DistantComputer(WSocket* new_sock, const std::string& nickname);
   ~DistantComputer();
 
   bool SocketReady() const;

@@ -120,7 +120,7 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
     goto error;
   }
 
-  // Am I the game master ?
+  // 3) Am I the game master ?
   if (!server_socket.ReceiveInt(ack))
     goto error;
 
@@ -128,6 +128,10 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
     game_master_player = true;
     MSG_DEBUG("network", "Client will be master! (%d)", ack);
   }
+
+  // 4) Send my nickname
+  if (!server_socket.SendStr(GetPlayer().GetNickname()))
+    goto error;
 
   MSG_DEBUG("network", "Client: Handshake done successfully :)");
   ret = CONNECTED;
@@ -147,8 +151,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   connection_state_t r;
   WSocket* socket;
   DistantComputer* server;
-  Action a(Action::ACTION_NICKNAME, GetPlayer().GetNickname());
-   int prt;
+  int prt;
 
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
@@ -172,12 +175,9 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
     goto error;
   }
   socket_set->AddSocket(socket);
-  server = new DistantComputer(socket);
+  server = new DistantComputer(socket, "server");
 
   cpu.push_back(server);
-
-  //Send nickname to server
-  SendAction(a);
 
   NetworkThread::Start();
   return CONNECTED;

@@ -28,7 +28,7 @@
 #include "team/team_config.h"
 //-----------------------------------------------------------------------------
 
-Player::Player() : nickname("this is not initialized")
+Player::Player() : nickname("unknown")
 {
 }
 

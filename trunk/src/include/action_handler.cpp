@@ -90,17 +90,6 @@ void FAIL_IF_GAMEMASTER(Action *a)
 // #############################################################################
 // #############################################################################
 
-void Action_Nickname(Action *a)
-{
-  // Useful for admin commands like "/kick"
-  if (Network::GetInstance()->IsServer() && a->GetCreator())
-  {
-      std::string nickname = a->PopString();
-      std::cout<<"New nickname: " + nickname<< std::endl;
-      a->GetCreator()->GetPlayer().SetNickname(nickname);
-  }
-}
-
 void Action_Network_ClientChangeState (Action *a)
 {
   if (!Network::GetInstance()->IsGameMaster())
@@ -732,11 +721,18 @@ static void Action_Network_Ping(Action */*a*/)
 // Only used to notify clients (and server) that someone connected to the server
 void Action_Info_ClientConnect(Action *a)
 {
-  std::string msg = Format("%s just connected", a->PopString().c_str());
+  std::string host = a->PopString();
+  std::string nickname = a->PopString();
+
+  // For translators: extended in "<nickname> (<host>) just connected
+  std::string msg = Format("%s (%s) just connected", nickname.c_str(), host.c_str());
+
   ChatLogger::LogMessageIfOpen(msg);
-  if(Game::GetInstance()->IsGameLaunched())
+
+  if (Game::GetInstance()->IsGameLaunched()) {
+    ASSERT(false); // Nobody can connect to a running game!!
     GameMessages::GetInstance()->Add(msg);
-  else if (Network::GetInstance()->network_menu != NULL) {
+  } else if (Network::GetInstance()->network_menu != NULL) {
     // Play some sound to warn server player
     if (Config::GetInstance()->GetWarnOnNewPlayer())
       JukeBox::GetInstance()->Play("share", "menu/newcomer");
@@ -748,11 +744,17 @@ void Action_Info_ClientConnect(Action *a)
 // Only used to notify clients (and server) that someone disconnected from the server
 void Action_Info_ClientDisconnect(Action *a)
 {
-  std::string msg = Format("%s just disconnected", a->PopString().c_str());
+  std::string host = a->PopString();
+  std::string nickname = a->PopString();
+
+  // For translators: extended in "<nickname> (<host>) just connected
+  std::string msg = Format("%s (%s) just disconnected", nickname.c_str(), host.c_str());
+
   ChatLogger::LogMessageIfOpen(msg);
-  if (Game::GetInstance()->IsGameLaunched()) {
+
+  if (Game::GetInstance()->IsGameLaunched())
     GameMessages::GetInstance()->Add(msg);
-  } else if (Network::GetInstance()->network_menu != NULL)
+  else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 }
@@ -887,7 +889,6 @@ ActionHandler::ActionHandler():
   SDL_LockMutex(mutex);
 
   // ########################################################
-  Register (Action::ACTION_NICKNAME, "nickname", Action_Nickname);
   Register (Action::ACTION_NETWORK_CLIENT_CHANGE_STATE, "NETWORK_client_change_state", &Action_Network_ClientChangeState);
   Register (Action::ACTION_NETWORK_MASTER_CHANGE_STATE, "NETWORK_master_change_state", &Action_Network_MasterChangeState);
   Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check1", &Action_Network_Check_Phase1);

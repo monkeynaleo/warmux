@@ -331,7 +331,7 @@ void WNet::FinalizeBatch(void* data, size_t len)
 //-----------------------------------------------------------------------------
 
 bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password,
-			    bool client_will_be_master)
+			    std::string& nickname, bool client_will_be_master)
 {
   bool ret = false;
   std::string version;
@@ -365,12 +365,16 @@ bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password,
     goto error;
   }
 
-  // Server: password OK
+  // 3) Server: password OK
   if (!client_socket.SendInt(0))
     goto error;
 
-  // Server: client will be master ?
+  // 4) Server: client will be master ?
   if (!client_socket.SendInt(client_will_be_master))
+    goto error;
+
+  // 5) Get nickname of the client
+  if (!client_socket.ReceiveStr(nickname, 100))
     goto error;
 
   // Server: Handshake done successfully :)

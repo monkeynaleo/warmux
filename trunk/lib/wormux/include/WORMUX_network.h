@@ -63,7 +63,7 @@ public:
   static void FinalizeBatch(void* buffer, size_t len);
 
   static bool Server_HandShake(WSocket& client_socket, const std::string& password,
-			       bool client_will_be_master);
+			       std::string& client_nickname, bool client_will_be_master);
 };
 
 //-----------------------------------------------------------------------------

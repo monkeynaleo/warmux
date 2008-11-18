@@ -47,14 +47,14 @@ bool GameServer::ServerStart(uint _port, uint max_nb_clients, std::string& _pass
   return true;
 }
 
-bool GameServer::HandShake(WSocket& client_socket)
+bool GameServer::HandShake(WSocket& client_socket, std::string& nickname)
 {
   bool client_will_be_master = false;
   if (clients_socket_set->NbSockets() == 0)
     client_will_be_master = true;
 
   DPRINT(INFO, "%s will be master ? %d", client_socket.GetAddress().c_str(), client_will_be_master);
-  return WNet::Server_HandShake(client_socket, password, client_will_be_master);
+  return WNet::Server_HandShake(client_socket, password, nickname, client_will_be_master);
 }
 
 void GameServer::RejectIncoming()
@@ -69,16 +69,16 @@ void GameServer::WaitClients()
     // Check for an incoming connection
     WSocket* incoming = server_socket.LookForClient();
     if (incoming) {
+      std::string client_nickname;
 
-      if (!HandShake(*incoming))
+      if (!HandShake(*incoming, client_nickname))
  	return;
 
       clients_socket_set->AddSocket(incoming);
 
-
       // ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_INFO_CLIENT_CONNECT,
       // 							 client->GetAddress()));
-      DPRINT(INFO, "New client connected: %s", incoming->GetAddress().c_str());
+      DPRINT(INFO, "New client connected: %s (%s)", client_nickname.c_str(), incoming->GetAddress().c_str());
 
       if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
 	RejectIncoming();
