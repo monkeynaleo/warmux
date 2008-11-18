@@ -50,10 +50,6 @@ public:
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);
-  uint GetNbConnectedPlayers() const;
-  uint GetNbInitializedPlayers() const;
-  uint GetNbReadyPlayers() const;
-  uint GetNbCheckedPlayers() const;
 };
 
 //-----------------------------------------------------------------------------

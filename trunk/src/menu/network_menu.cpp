@@ -79,7 +79,7 @@ NetworkMenu::NetworkMenu() :
   // ################################################
   // ##  MAP SELECTION
   // ################################################
-  if(Network::GetInstance()->IsServer()) {
+  if (Network::GetInstance()->IsGameMaster()) {
     map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight));
   } else {
     map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true);
@@ -99,7 +99,7 @@ NetworkMenu::NetworkMenu() :
 
   Label* mode = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_BOLD, primary_red_color);
 
-  if (Network::GetInstance()->IsClient()) {
+  if (!Network::GetInstance()->IsGameMaster()) {
     // Client Mode
     mode->SetText(_("Client mode"));
     options_box->AddWidget(mode);
@@ -110,12 +110,21 @@ NetworkMenu::NetworkMenu() :
   } else {
 
     // Server Mode
-    mode->SetText(_("Server mode"));
+    if (Network::GetInstance()->IsServer()) {
+      mode->SetText(_("Server mode"));
+    } else {
+      mode->SetText(_("Master mode"));
+    }
     options_box->AddWidget(mode);
 
-    player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
-                                   GameMode::GetInstance()->max_teams, 1, 2,
-                                   GameMode::GetInstance()->max_teams);
+    if  (Network::GetInstance()->IsServer()) {
+      player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
+				     GameMode::GetInstance()->max_teams, 1, 2,
+				     GameMode::GetInstance()->max_teams);
+    } else {
+      player_number = NULL;
+    }
+
     team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
     options_box->AddWidget(player_number);
 
@@ -192,7 +201,7 @@ void NetworkMenu::PrepareForNewGame()
 
   Network::GetInstance()->SetState(Network::NETWORK_NEXT_GAME);
 
-  if (Network::GetInstance()->IsClient()) {
+  if (!Network::GetInstance()->IsGameMaster()) {
     Network::GetInstance()->SendNetworkState();
   }
 
@@ -201,7 +210,7 @@ void NetworkMenu::PrepareForNewGame()
 
 bool NetworkMenu::signal_ok()
 {
-  if (Network::GetInstance()->IsClient())
+  if (!Network::GetInstance()->IsGameMaster())
   {
     // Check the user have selected a team:
     bool found = false;
@@ -225,7 +234,7 @@ bool NetworkMenu::signal_ok()
     WaitingForServer();
 
   }
-  else if (Network::GetInstance()->IsServer())
+  else
   {
     if (GetTeamsList().playing_list.size() <= 1)
     {
@@ -235,14 +244,14 @@ bool NetworkMenu::signal_ok()
                                  GetTeamsList().playing_list.size()), c_red);
       goto error;
     }
-    if (Network::GetInstanceServer()->GetNbConnectedPlayers() <= 1)
+    if (Network::GetInstance()->GetNbConnectedPlayers() <= 1)
     {
       msg_box->NewMessage(_("You are alone..."), c_red);
       goto error;
     }
-    if (Network::GetInstanceServer()->GetNbConnectedPlayers() != Network::GetInstanceServer()->GetNbInitializedPlayers()+1)
+    if (Network::GetInstance()->GetNbConnectedPlayers() != Network::GetInstance()->GetNbInitializedPlayers()+1)
     {
-      int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers() - Network::GetInstanceServer()->GetNbInitializedPlayers() - 1;
+      int nbr = Network::GetInstance()->GetNbConnectedPlayers() - Network::GetInstance()->GetNbInitializedPlayers() - 1;
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl, c_red);
       goto error;
@@ -308,7 +317,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
   {
     if (connected_players != NULL) {
       //Refresh the number of connected players:
-      int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers();
+      int nbr = Network::GetInstance()->GetNbConnectedPlayers();
       std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
       if (connected_players->GetText() != pl)
         connected_players->SetText(pl);
@@ -316,17 +325,17 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
 
     if (initialized_players != NULL) {
       //Refresh the number of players ready:
-      int nbr = Network::GetInstanceServer()->GetNbInitializedPlayers();
+      int nbr = Network::GetInstance()->GetNbInitializedPlayers();
       std::string pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
       if (initialized_players->GetText() != pl) {
         initialized_players->SetText(pl);
         msg_box->NewMessage(pl, c_red);
-        if (Network::GetInstanceServer()->GetNbConnectedPlayers() -
-            Network::GetInstanceServer()->GetNbInitializedPlayers() == 1
-            && Network::GetInstanceServer()->GetNbConnectedPlayers() >= 1) {
+        if (Network::GetInstance()->GetNbConnectedPlayers() -
+            Network::GetInstance()->GetNbInitializedPlayers() == 1
+            && Network::GetInstance()->GetNbConnectedPlayers() >= 1) {
           msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
         }
-        else if (Network::GetInstanceServer()->GetNbConnectedPlayers() == 1) {
+        else if (Network::GetInstance()->GetNbConnectedPlayers() == 1) {
           msg_box->NewMessage(_("You are alone :-/"), c_red);
         }
       }

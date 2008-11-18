@@ -46,6 +46,7 @@ NetworkServer::NetworkServer(const std::string& password) :
   fin = open("./network_server.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
   fout = open("./network_server.out", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
 #endif
+  game_master_player = true;
 }
 
 NetworkServer::~NetworkServer()
@@ -162,51 +163,4 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
 {
   max_nb_players = _max_nb_players;
-}
-
-uint NetworkServer::GetNbConnectedPlayers() const
-{
-  return cpu.size() + 1; // WARNING: is the server playing ?
-}
-
-uint NetworkServer::GetNbInitializedPlayers() const
-{
-  uint r = 0;
-
-  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-       client != cpu.end();
-       client++) {
-    if ((*client)->GetState() == DistantComputer::STATE_INITIALIZED)
-      r++;
-  }
-
-  return r;
-}
-
-uint NetworkServer::GetNbReadyPlayers() const
-{
-  uint r = 0;
-
-  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-       client != cpu.end();
-       client++) {
-    if ((*client)->GetState() == DistantComputer::STATE_READY)
-      r++;
-  }
-
-  return r;
-}
-
-uint NetworkServer::GetNbCheckedPlayers() const
-{
-  uint r = 0;
-
-  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-       client != cpu.end();
-       client++) {
-    if ((*client)->GetState() == DistantComputer::STATE_CHECKED)
-      r++;
-  }
-
-  return r;
 }

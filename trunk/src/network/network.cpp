@@ -449,11 +449,11 @@ void Network::SendNetworkState() const
 {
   ASSERT(!IsLocal());
 
-  if (IsServer()) {
-    Action a(Action::ACTION_NETWORK_SERVER_CHANGE_STATE);
+  if (IsGameMaster()) {
+    Action a(Action::ACTION_NETWORK_MASTER_CHANGE_STATE);
     a.Push(state);
     SendAction(a);
-  } else { // IsClient()
+  } else {
     Action a(Action::ACTION_NETWORK_CLIENT_CHANGE_STATE);
     a.Push(state);
     SendAction(a);
@@ -471,3 +471,56 @@ bool Network::IsTurnMaster() const
   return turn_master_player;
 }
 
+//-----------------------------------------------------------------------------
+
+uint Network::GetNbConnectedPlayers() const
+{
+  ASSERT(IsGameMaster());
+
+  return cpu.size() + 1;
+}
+
+uint Network::GetNbInitializedPlayers() const
+{
+  ASSERT(IsGameMaster());
+  uint r = 0;
+
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->GetState() == DistantComputer::STATE_INITIALIZED)
+      r++;
+  }
+
+  return r;
+}
+
+uint Network::GetNbReadyPlayers() const
+{
+  ASSERT(IsGameMaster());
+  uint r = 0;
+
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->GetState() == DistantComputer::STATE_READY)
+      r++;
+  }
+
+  return r;
+}
+
+uint Network::GetNbCheckedPlayers() const
+{
+  ASSERT(IsGameMaster());
+  uint r = 0;
+
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->GetState() == DistantComputer::STATE_CHECKED)
+      r++;
+  }
+
+  return r;
+}
