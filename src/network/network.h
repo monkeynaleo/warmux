@@ -90,11 +90,11 @@ private:
   static int  num_objects;
 
   bool turn_master_player;
-
   std::string nickname; //Clients: Send to Server at connect
                         //Server: Send in chat messages
 
 protected:
+  bool game_master_player;
   network_state_t state;
 
   Network(const std::string& password); // pattern singleton
@@ -125,9 +125,12 @@ public:
   static void Disconnect();
 
   static bool IsConnected();
-  virtual bool IsLocal() const { return false ; }
-  virtual bool IsServer() const { return false ; }
-  virtual bool IsClient() const { return false ; }
+  virtual bool IsLocal() const { return false; }
+  virtual bool IsServer() const { return false; }
+  virtual bool IsClient() const { return false; }
+
+  virtual bool IsGameMaster() const { return game_master_player; }
+
   const std::string& GetPassword() const { return password; }
 
   void SetNickname(const std::string& nickname);
@@ -157,6 +160,11 @@ public:
   bool IsTurnMaster() const;
 
   void ReceiveActions();
+
+  uint GetNbConnectedPlayers() const;
+  uint GetNbInitializedPlayers() const;
+  uint GetNbReadyPlayers() const;
+  uint GetNbCheckedPlayers() const;
 };
 
 //-----------------------------------------------------------------------------

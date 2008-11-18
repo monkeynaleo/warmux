@@ -140,7 +140,7 @@ void MapSelectionBox::ChangeMap(uint index)
   if (index > MapsList::GetInstance()->lst.size()+1) return;
 
   // Callback other network players
-  if (Network::GetInstance()->IsServer()) {
+  if (Network::GetInstance()->IsGameMaster()) {
 
     selected_map_index = index;
     // We need to do it here to send the right map to still not connected clients

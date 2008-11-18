@@ -37,9 +37,7 @@ void RandomSyncGen::InitRandom()
   if (Network::GetInstance()->IsLocal()) {
     int seed = time(NULL);
     SetRand(seed);
-  }
-
-  if (Network::GetInstance()->IsServer()) {
+  } else if (Network::GetInstance()->IsGameMaster()) {
     int seed = time(NULL);
     SetRand(seed);
 

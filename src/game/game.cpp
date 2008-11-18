@@ -499,7 +499,7 @@ void Game::MainLoop()
   RefreshClock();
   time_of_next_phy_frame = Time::GetInstance()->Read() + Time::GetInstance()->GetDelta();
 
-  if(Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsServer())
+  if (Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
     PingClient();
   StatStart("Game:RefreshInput()");
   RefreshInput();
@@ -578,7 +578,7 @@ bool Game::NewBox()
        using action handling (see include/action_handler.cpp */
     box->StoreValue(a);
     ActionHandler::GetInstance()->NewAction(a);
-    
+
     delete box;
     return true;
   }
@@ -624,7 +624,7 @@ void Game::Really_SetState(game_loop_state_t new_state)
 void Game::SetState(game_loop_state_t new_state, bool begin_game) const
 {
   if (begin_game &&
-      (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()))
+      (Network::GetInstance()->IsGameMaster() || Network::GetInstance()->IsLocal()))
     Network::GetInstance()->SetTurnMaster(true);
 
   if (!Network::GetInstance()->IsTurnMaster())

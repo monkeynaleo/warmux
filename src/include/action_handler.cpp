@@ -68,7 +68,7 @@
 // server, because the server stupidely repeat it to all clients.
 // BUT a server must never receive an Action which concern only clients.
 
-void FAIL_IF_SERVER(Action *a)
+void FAIL_IF_GAMEMASTER(Action *a)
 {
   if (!a->GetCreator()) {
     fprintf(stderr, "%s", ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
@@ -76,9 +76,9 @@ void FAIL_IF_SERVER(Action *a)
 
   ASSERT(a->GetCreator());
 
-  if (Network::GetInstance()->IsServer()) {
+  if (Network::GetInstance()->IsGameMaster()) {
     fprintf(stderr,
-	    "Server received an action (%s) that is normally sent only by the server only to a client,"
+	    "Game Master received an action (%s) that is normally sent only by the game master only to a client,"
 	    " we are going to force disconnection of evil client: %s (%s)",
 	    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str(),
 	    a->GetCreator()->GetAddress().c_str(),
@@ -103,7 +103,7 @@ void Action_Nickname(Action *a)
 
 void Action_Network_ClientChangeState (Action *a)
 {
-  if (Network::GetInstance()->IsClient())
+  if (!Network::GetInstance()->IsGameMaster())
     return;
 
   Network::network_state_t client_state = (Network::network_state_t)a->PopInt();
@@ -144,9 +144,9 @@ void Action_Network_ClientChangeState (Action *a)
   }
 }
 
-void Action_Network_ServerChangeState (Action *a)
+void Action_Network_MasterChangeState (Action *a)
 {
-  FAIL_IF_SERVER(a);
+  FAIL_IF_GAMEMASTER(a);
 
   Network::network_state_t server_state = (Network::network_state_t)a->PopInt();
 
@@ -172,7 +172,7 @@ void Action_Network_ServerChangeState (Action *a)
 
 void Action_Network_Check_Phase1 (Action *a)
 {
-  FAIL_IF_SERVER(a);
+  FAIL_IF_GAMEMASTER(a);
 
   Action b(Action::ACTION_NETWORK_CHECK_PHASE2);
   b.Push(ActiveMap()->GetRawName());
@@ -238,8 +238,8 @@ static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
 
 void Action_Network_Check_Phase2 (Action *a)
 {
-  // Server receives information from the client
-  if (Network::GetInstance()->IsClient())
+  // Game master receives information from the client
+  if (!Network::GetInstance()->IsGameMaster())
     return;
 
   // Check the map name
@@ -320,9 +320,13 @@ void Action_NewBonusBox (Action *a)
 {
   ObjBox * box;
   switch(a->PopInt()) {
-    case 2 :               box = new BonusBox(); break;
-    default: /* case 1 */  box = new Medkit(); break;
-  };
+    case 2 :
+      box = new BonusBox();
+      break;
+    default: /* case 1 */
+      box = new Medkit();
+      break;
+  }
   box->GetValueFromAction(a);
   Game::GetInstance()->AddNewBox(box);
 }
@@ -330,7 +334,7 @@ void Action_NewBonusBox (Action *a)
 void Action_DropBonusBox (Action *a)
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
-  if(current_box != NULL) {
+  if (current_box != NULL) {
     current_box->GetValueFromAction(a);
     current_box->DropBox();
   }
@@ -350,7 +354,7 @@ void Action_Game_SetState (Action *a)
 
 void Action_Rules_SetGameMode (Action *a)
 {
-  FAIL_IF_SERVER(a);
+  FAIL_IF_GAMEMASTER(a);
 
   std::string game_mode_name = a->PopString();
   std::string game_mode = a->PopString();
@@ -365,7 +369,7 @@ void Action_Rules_SetGameMode (Action *a)
 
 void SendGameMode()
 {
-  ASSERT(Network::GetInstance()->IsServer());
+  ASSERT(Network::GetInstance()->IsGameMaster());
 
   Action a(Action::ACTION_RULES_SET_GAME_MODE);
 
@@ -404,7 +408,7 @@ void Action_ChatMessage (Action *a)
 
 void Action_Menu_SetMap (Action *a)
 {
-  FAIL_IF_SERVER(a);
+  FAIL_IF_GAMEMASTER(a);
 
   std::string map_name = a->PopString();
   if (map_name != "random") {
@@ -479,12 +483,12 @@ void Action_Menu_DelTeam (Action *a)
 {
   std::string team_id = a->PopString();
 
-  if (Network::GetInstance()->IsServer() && a->GetCreator()) {
+  if (Network::GetInstance()->IsGameMaster() && a->GetCreator()) {
     a->GetCreator()->RemoveTeam(team_id);
   }
 
   MSG_DEBUG("action_handler.menu", "- %s", team_id.c_str());
-  if (Game::GetInstance()->IsGameLaunched() && Network::GetInstance()->IsServer()) {
+  if (Game::GetInstance()->IsGameLaunched() && Network::GetInstance()->IsGameMaster()) {
     int i;
     Team* the_team = GetTeamsList().FindById(team_id, i);
     if (the_team == &ActiveTeam()) // we have loose the turn master!!
@@ -876,7 +880,7 @@ ActionHandler::ActionHandler():
   // ########################################################
   Register (Action::ACTION_NICKNAME, "nickname", Action_Nickname);
   Register (Action::ACTION_NETWORK_CLIENT_CHANGE_STATE, "NETWORK_client_change_state", &Action_Network_ClientChangeState);
-  Register (Action::ACTION_NETWORK_SERVER_CHANGE_STATE, "NETWORK_server_change_state", &Action_Network_ServerChangeState);
+  Register (Action::ACTION_NETWORK_MASTER_CHANGE_STATE, "NETWORK_master_change_state", &Action_Network_MasterChangeState);
   Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check1", &Action_Network_Check_Phase1);
   Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check2", &Action_Network_Check_Phase2);
   Register (Action::ACTION_NETWORK_DISCONNECT_ON_ERROR, "NETWORK_disconnect_on_error", &Action_Network_Disconnect_On_Error);

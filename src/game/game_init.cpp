@@ -46,7 +46,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 
-void GameInit::InitGameData_NetServer()
+void GameInit::InitGameData_NetGameMaster()
 {
   Network::GetInstanceServer()->RejectIncoming();
 
@@ -59,11 +59,11 @@ void GameInit::InitGameData_NetServer()
   Network::GetInstance()->SendNetworkState();
 }
 
-void GameInit::EndInitGameData_NetServer()
+void GameInit::EndInitGameData_NetGameMaster()
 {
   // Wait for all clients to be ready to play
   while (Network::IsConnected()
-         && Network::GetInstanceServer()->GetNbReadyPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())
+         && Network::GetInstance()->GetNbReadyPlayers() + 1  != Network::GetInstance()->GetNbConnectedPlayers())
   {
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(200);
@@ -74,7 +74,7 @@ void GameInit::EndInitGameData_NetServer()
   Network::GetInstance()->SendAction(a);
 
   while (Network::IsConnected()
-         && Network::GetInstanceServer()->GetNbCheckedPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())
+         && Network::GetInstance()->GetNbCheckedPlayers() + 1  != Network::GetInstance()->GetNbConnectedPlayers())
     {
       ActionHandler::GetInstance()->ExecActions();
       SDL_Delay(200);
@@ -154,8 +154,8 @@ void GameInit::InitData()
   Time::GetInstance()->Reset();
 
   // initialize gaming data
-  if (Network::GetInstance()->IsServer())
-    InitGameData_NetServer();
+  if (Network::GetInstance()->IsGameMaster())
+    InitGameData_NetGameMaster();
   else if (Network::GetInstance()->IsLocal())
     RandomSync().InitRandom();
 
@@ -203,10 +203,12 @@ GameInit::GameInit():
   JukeBox::GetInstance()->ActiveEffects(enable_sound);
 
   // Waiting for others players
-  if  (Network::GetInstance()->IsServer())
-    EndInitGameData_NetServer();
-  else if (Network::GetInstance()->IsClient())
-    EndInitGameData_NetClient();
+  if (!Network::GetInstance()->IsLocal()) {
+    if  (Network::GetInstance()->IsGameMaster())
+      EndInitGameData_NetGameMaster();
+    else
+      EndInitGameData_NetClient();
+  }
 
   Game::GetInstance()->Init();
 
