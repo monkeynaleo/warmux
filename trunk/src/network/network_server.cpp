@@ -74,7 +74,7 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
 
 bool NetworkServer::HandShake(WSocket& client_socket) const
 {
-  return WNet::Server_HandShake(client_socket, GetPassword());
+  return WNet::Server_HandShake(client_socket, GetPassword(), false);
 }
 
 void NetworkServer::WaitActionSleep()

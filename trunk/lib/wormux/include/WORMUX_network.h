@@ -62,7 +62,8 @@ public:
   static uint Batch(void* buffer, const std::string &str);
   static void FinalizeBatch(void* buffer, size_t len);
 
-  static bool Server_HandShake(WSocket& client_socket, const std::string& password);
+  static bool Server_HandShake(WSocket& client_socket, const std::string& password,
+			       bool client_will_be_master);
 };
 
 //-----------------------------------------------------------------------------

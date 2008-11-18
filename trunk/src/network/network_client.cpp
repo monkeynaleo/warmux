@@ -73,7 +73,7 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/) const
 
 //-----------------------------------------------------------------------------
 
-connection_state_t NetworkClient::HandShake(WSocket& server_socket) const
+connection_state_t NetworkClient::HandShake(WSocket& server_socket)
 {
   int ack;
   connection_state_t ret = CONN_REJECTED;
@@ -118,6 +118,15 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket) const
   if (ack) {
     ret = CONN_WRONG_PASSWORD;
     goto error;
+  }
+
+  // Am I the game master ?
+  if (!server_socket.ReceiveInt(ack))
+    goto error;
+
+  if (ack) {
+    game_master_player = true;
+    MSG_DEBUG("network", "Client will be master! (%d)", ack);
   }
 
   MSG_DEBUG("network", "Client: Handshake done successfully :)");

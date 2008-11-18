@@ -121,12 +121,12 @@ NetworkMenu::NetworkMenu() :
       player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
 				     GameMode::GetInstance()->max_teams, 1, 2,
 				     GameMode::GetInstance()->max_teams);
+      options_box->AddWidget(player_number);
     } else {
       player_number = NULL;
     }
 
     team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
-    options_box->AddWidget(player_number);
 
     connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
 				  0, Font::FONT_SMALL, Font::FONT_NORMAL);
