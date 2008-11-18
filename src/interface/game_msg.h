@@ -23,7 +23,7 @@
 #define GAME_MESSAGES_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "graphic/text.h"
 #include <string>
 #include <list>

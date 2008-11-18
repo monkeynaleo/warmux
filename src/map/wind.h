@@ -24,7 +24,7 @@
 
 #include <list>
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "physic/physical_obj.h"
 
 // Forward declarations

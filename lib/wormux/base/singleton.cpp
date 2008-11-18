@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <SDL_mutex.h>
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 
 SingletonList singletons;
 

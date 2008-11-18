@@ -25,7 +25,7 @@
 
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "weapon/weapon_cfg.h"
 
 typedef struct _xmlNode xmlNode;

@@ -19,8 +19,8 @@
  * Declare base classes for singleton pattern design implementation.
  *****************************************************************************/
 
-#ifndef SINGLETON_H
-#define SINGLETON_H
+#ifndef WORMUX_SINGLETON_H
+#define WORMUX_SINGLETON_H
 
 #include <typeinfo>
 #include <list>

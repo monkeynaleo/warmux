@@ -41,7 +41,7 @@
 #include "include/app.h"
 #include "include/base.h"
 #include "include/constant.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "map/map.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"

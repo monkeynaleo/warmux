@@ -22,7 +22,7 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "tool/point.h"
 #include "tool/rectangle.h"
 
