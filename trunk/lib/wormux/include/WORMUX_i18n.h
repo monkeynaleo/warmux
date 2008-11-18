@@ -20,8 +20,8 @@
  * Eg. : Format("Hello %s", "world") returns "Hello World".
  *****************************************************************************/
 
-#ifndef FORMAT_H
-#define FORMAT_H
+#ifndef WORMUX_FORMAT_H
+#define WORMUX_FORMAT_H
 
 #include <string>
 #include <libintl.h>

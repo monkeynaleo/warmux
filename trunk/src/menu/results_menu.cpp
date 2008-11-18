@@ -43,7 +43,7 @@
 #include "sound/jukebox.h"
 #include "team/results.h"
 #include "team/team.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 

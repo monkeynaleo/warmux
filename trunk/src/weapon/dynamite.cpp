@@ -31,7 +31,7 @@
 #include "team/teams_list.h"
 
 #include "tool/resource_manager.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 class DynamiteStick : public WeaponProjectile
 {

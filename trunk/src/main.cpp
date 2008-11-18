@@ -53,7 +53,7 @@
 #include "network/index_server.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/random.h"
 
 static MainMenu::menu_item choice = MainMenu::NONE;

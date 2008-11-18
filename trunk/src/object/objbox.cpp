@@ -36,7 +36,7 @@
 #include "object/objects_list.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"

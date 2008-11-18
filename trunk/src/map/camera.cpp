@@ -31,7 +31,7 @@
 #include "interface/interface.h"
 #include "physic/physical_obj.h"
 #include "team/teams_list.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/math_tools.h"
 #include "game/time.h"
 #include "tool/random.h"

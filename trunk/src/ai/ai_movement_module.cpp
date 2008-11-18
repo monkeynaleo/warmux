@@ -27,7 +27,7 @@
 #include "character/move.h"
 #include "map/map.h"
 #include "team/teams_list.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 // TODO:
 // - Be sure to not go out of the map

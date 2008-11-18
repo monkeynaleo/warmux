@@ -26,7 +26,7 @@
 #include "game/game.h"
 #include "game/time.h"
 #include "network/distant_cpu.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 //-----------------------------------------------------------------------------
 
 

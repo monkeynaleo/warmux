@@ -29,8 +29,7 @@
 #else
 #  include <unistd.h>
 #endif
-#include "include/base.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 bool debug_all = false;
 /**
@@ -50,11 +49,11 @@ bool IsLOGGING(const char* mode)
   for (i = 0; i < debugModes.size(); i++) {
     int modeSize = debugModes[i].size();
     const char *strMode = debugModes[i].c_str();
-    
+
     if (strncmp(strMode, mode, modeSize) == 0) {
       if ( (mSize != modeSize) && ( mode[modeSize] != '.' ) && modeSize != 0)
 	continue;
-      
+
       return true;
     }
   }

@@ -17,8 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#ifndef DEBUG_H
-#define DEBUG_H
+#ifndef WORMUX_DEBUG_H
+#define WORMUX_DEBUG_H
 
 #include <string>
 

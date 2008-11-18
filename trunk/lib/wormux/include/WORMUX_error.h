@@ -19,8 +19,8 @@
  * Refresh des erreurs, exceptions, ASSERTions, etc.
  *****************************************************************************/
 
-#ifndef ERROR_H
-#define ERROR_H
+#ifndef WORMUX_ERROR_H
+#define WORMUX_ERROR_H
 
 #include <string>
 

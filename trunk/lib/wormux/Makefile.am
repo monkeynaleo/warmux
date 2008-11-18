@@ -3,6 +3,7 @@ SUBDIRS = .
 noinst_LIBRARIES = libwormux.a
 
 libwormux_a_SOURCES = \
+	./include/WORMUX_debug.h \
 	./include/WORMUX_error.h \
 	./include/WORMUX_i18n.h \
 	./include/WORMUX_network.h \
@@ -11,6 +12,7 @@ libwormux_a_SOURCES = \
 	./base/error.cpp \
 	./base/i18n.cpp \
 	./net/network.cpp \
-	./net/socket.cpp
+	./net/socket.cpp \
+	./tools/debug.cpp
 
 AM_CXXFLAGS += -I$(top_srcdir)/lib/wormux/include

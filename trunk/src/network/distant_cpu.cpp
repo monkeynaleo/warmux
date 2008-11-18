@@ -30,7 +30,7 @@
 #include "map/maps_list.h"
 #include "menu/network_menu.h"
 #include "team/team_config.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 //-----------------------------------------------------------------------------
 
 static const int MAX_PACKET_SIZE = 250*1024;
