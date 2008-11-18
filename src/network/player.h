@@ -16,62 +16,40 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Handle distant computers
+ * A network player (local or remote)
  *****************************************************************************/
 
-#ifndef DISTANT_CPU_H
-#define DISTANT_CPU_H
+#ifndef NET_PLAYER_H
+#define NET_PLAYER_H
 //-----------------------------------------------------------------------------
+#include <SDL_net.h>
 #include "include/base.h"
-#include "network/player.h"
+#include "team/team_config.h"
 #include <map>
 #include <string>
 //-----------------------------------------------------------------------------
 
-class Action;
-class WSocket;
 class ConfigTeam;
 
-class DistantComputer
+class Player
 {
- public:
-  typedef enum {
-    STATE_ERROR,
-    STATE_INITIALIZED,
-    STATE_READY,
-    STATE_CHECKED,
-    STATE_NEXT_GAME
-  } state_t;
-
- private:
-  /* If you need this, implement it (correctly)*/
-  DistantComputer(const DistantComputer&);
-  const DistantComputer& operator=(const DistantComputer&);
-  /*********************************************/
-
-  WSocket* sock;
-  DistantComputer::state_t state;
-  bool force_disconnect;
-
-  Player player;
+private:
+  std::string nickname;
+  std::map<const std::string, ConfigTeam> owned_teams;
 
 public:
-  DistantComputer(WSocket* new_sock);
-  ~DistantComputer();
+  Player();
+  ~Player();
+  void Disconnect();
 
-  bool SocketReady() const;
-  bool ReceiveDatas(void* & data, size_t& len);
-  bool SendDatas(const void* data, size_t len);
+  void SetNickname(const std::string& nickname);
+  const std::string& GetNickname() const;
 
-  std::string GetAddress();
+  bool AddTeam(const ConfigTeam& team_conf);
+  bool RemoveTeam(const std::string& team_id);
+  bool UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_conf);
 
-  Player& GetPlayer();
-
-  void SetState(DistantComputer::state_t _state);
-  DistantComputer::state_t GetState() const;
-
-  void ForceDisconnection();
-  bool MustBeDisconnected();
+  const std::map<const std::string, ConfigTeam>& GetTeams() const;
 };
 
 #endif

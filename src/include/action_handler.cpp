@@ -82,7 +82,7 @@ void FAIL_IF_GAMEMASTER(Action *a)
 	    " we are going to force disconnection of evil client: %s (%s)",
 	    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str(),
 	    a->GetCreator()->GetAddress().c_str(),
-	    a->GetCreator()->GetNickname().c_str());
+	    a->GetCreator()->GetPlayer().GetNickname().c_str());
     a->GetCreator()->ForceDisconnection();
   }
 }
@@ -97,7 +97,7 @@ void Action_Nickname(Action *a)
   {
       std::string nickname = a->PopString();
       std::cout<<"New nickname: " + nickname<< std::endl;
-      a->GetCreator()->SetNickname(nickname);
+      a->GetCreator()->GetPlayer().SetNickname(nickname);
   }
 }
 
@@ -400,7 +400,7 @@ void Action_ChatMessage (Action *a)
 
   // Useful for admin commands like "/kick"
   if (Network::GetInstance()->IsServer() && a->GetCreator())
-    a->GetCreator()->SetNickname(nickname);
+    a->GetCreator()->GetPlayer().SetNickname(nickname);
 
   ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
   AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message);
@@ -428,7 +428,7 @@ void UpdateLocalNickname()
   if (nickname == "")
     nickname = Network::GetInstance()->GetDefaultNickname();
 
-  Network::GetInstance()->SetNickname(nickname);
+  Network::GetInstance()->GetPlayer().SetNickname(nickname);
 }
 
 void Action_Menu_AddTeam (Action *a)
@@ -449,10 +449,12 @@ void Action_Menu_AddTeam (Action *a)
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
 
   if (Network::IsConnected()) {
-    if (!local_team)
-      a->GetCreator()->AddTeam(the_team);
-    else
+    if (!local_team) {
+      a->GetCreator()->GetPlayer().AddTeam(the_team);
+    } else {
+      Network::GetInstance()->GetPlayer().AddTeam(the_team);
       UpdateLocalNickname();
+    }
   }
 }
 
@@ -473,9 +475,11 @@ void Action_Menu_UpdateTeam (Action *a)
 
   if (Network::IsConnected()) {
     if (a->GetCreator())
-      a->GetCreator()->UpdateTeam(old_team_id, the_team);
-    else
+      a->GetCreator()->GetPlayer().UpdateTeam(old_team_id, the_team);
+    else {
+      Network::GetInstance()->GetPlayer().UpdateTeam(old_team_id, the_team);
       UpdateLocalNickname();
+    }
   }
 }
 
@@ -483,8 +487,13 @@ void Action_Menu_DelTeam (Action *a)
 {
   std::string team_id = a->PopString();
 
-  if (Network::GetInstance()->IsGameMaster() && a->GetCreator()) {
-    a->GetCreator()->RemoveTeam(team_id);
+  if (Network::IsConnected()) {
+    if (a->GetCreator())
+      a->GetCreator()->GetPlayer().RemoveTeam(team_id);
+    else {
+      Network::GetInstance()->GetPlayer().RemoveTeam(team_id);
+      UpdateLocalNickname();
+    }
   }
 
   MSG_DEBUG("action_handler.menu", "- %s", team_id.c_str());

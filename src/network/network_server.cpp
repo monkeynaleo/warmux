@@ -144,7 +144,7 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
   std::list<DistantComputer*>::iterator it;
 
-  printf("- client disconnected: %s(%s)\n", (*closed)->GetAddress().c_str(), (*closed)->GetNickname().c_str());
+  printf("- client disconnected: %s(%s)\n", (*closed)->GetAddress().c_str(), (*closed)->GetPlayer().GetNickname().c_str());
 
   it = cpu.erase(closed);
   delete *closed;

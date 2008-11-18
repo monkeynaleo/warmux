@@ -27,6 +27,7 @@
 #include <string>
 #include "include/base.h"
 #include "include/singleton.h"
+#include "network/player.h"
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file
@@ -90,8 +91,7 @@ private:
   static int  num_objects;
 
   bool turn_master_player;
-  std::string nickname; //Clients: Send to Server at connect
-                        //Server: Send in chat messages
+  Player player;
 
 protected:
   bool game_master_player;
@@ -132,9 +132,8 @@ public:
   virtual bool IsGameMaster() const { return game_master_player; }
 
   const std::string& GetPassword() const { return password; }
+  Player& GetPlayer();
 
-  void SetNickname(const std::string& nickname);
-  const std::string& GetNickname() const;
   std::string GetDefaultNickname() const;
 
   // Action handling

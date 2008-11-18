@@ -137,7 +137,7 @@ Network::Network(const std::string& passwd):
   cpu(),
   sync_lock(false)
 {
-  nickname = GetDefaultNickname();
+  player.SetNickname(GetDefaultNickname());
   num_objects++;
 }
 //-----------------------------------------------------------------------------
@@ -173,16 +173,6 @@ std::string Network::GetDefaultNickname() const
 #endif
   s_nick = (nick) ? nick : _("Unnamed");
   return s_nick;
-}
-
-void Network::SetNickname(const std::string& _nickname)
-{
-  nickname = _nickname;
-}
-
-const std::string& Network::GetNickname() const
-{
-  return nickname;
 }
 
 //-----------------------------------------------------------------------------
@@ -465,6 +455,11 @@ void Network::SetTurnMaster(bool master)
 bool Network::IsTurnMaster() const
 {
   return turn_master_player;
+}
+
+Player& Network::GetPlayer()
+{
+  return player;
 }
 
 //-----------------------------------------------------------------------------
