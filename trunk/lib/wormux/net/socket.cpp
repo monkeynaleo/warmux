@@ -31,13 +31,19 @@
 
 static const int MAX_PACKET_SIZE = 250*1024;
 
+static void print_net_error(const std::string& text)
+{
+  perror(text.c_str());
+  fprintf(stderr, "%s: %s\n", text.c_str(), SDLNet_GetError());
+}
+
 //-----------------------------------------------------------------------------
 // static method
 WSocketSet* WSocketSet::GetSocketSet(uint maxsockets)
 {
   SDLNet_SocketSet sdl_socket_set = SDLNet_AllocSocketSet(maxsockets);
   if (!sdl_socket_set) {
-    fprintf(stderr, "SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_AllocSocketSet");
     return NULL;
   }
   return new WSocketSet(maxsockets, sdl_socket_set);
@@ -129,7 +135,7 @@ WSocket::WSocket(TCPsocket _socket, WSocketSet* _socket_set) :
   int r;
   r = socket_set->AddSocket(this);
   if (r == -1) {
-    fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_AddSocket");
     ASSERT(false);
   }
 }
@@ -172,6 +178,7 @@ connection_state_t WSocket::ConnectTo(const std::string &host, const int &port)
   TCPsocket tcp_socket;
 
   if (SDLNet_ResolveHost(&ip, host.c_str(), (Uint16)port) != 0) {
+    print_net_error("SDLNet_ResolveHost");
     fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), port);
     r = CONN_BAD_HOST;
     goto error;
@@ -184,6 +191,7 @@ connection_state_t WSocket::ConnectTo(const std::string &host, const int &port)
   tcp_socket = SDLNet_TCP_Open(&ip);
 
   if (!tcp_socket) {
+    print_net_error("SDLNet_TCP_Open");
     fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), port);
     r = CONN_REJECTED;
     goto error;
@@ -207,13 +215,13 @@ bool WSocket::AcceptIncoming(const int& port)
 
   IPaddress ip;
   if (SDLNet_ResolveHost(&ip, NULL, (Uint16)port) != 0) {
-    fprintf(stderr, "SDLNet_ResolveHost: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_ResolveHost");
     goto error;
   }
 
   socket = SDLNet_TCP_Open(&ip);
   if (!socket) {
-    fprintf(stderr, "SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_Open");
     goto error;
   }
 
@@ -269,7 +277,7 @@ bool WSocket::AddToSocketSet(WSocketSet* _socket_set)
 
   r = SDLNet_TCP_AddSocket(socket_set->socket_set, socket);
   if (r == -1) {
-    fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_AddSocket");
     UnLock();
     return false;
   }
@@ -287,7 +295,7 @@ void WSocket::RemoveFromSocketSet()
   Lock();
   r = SDLNet_TCP_DelSocket(socket_set->socket_set, socket);
   if (r == -1) {
-    fprintf(stderr, "SDLNet_TCP_DelSocket: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_DelSocket");
     ASSERT(false);
   }
   socket_set = NULL;
@@ -307,7 +315,7 @@ bool WSocket::AddToTmpSocketSet()
   socket_set->Lock();
   r = SDLNet_TCP_AddSocket(socket_set->socket_set, socket);
   if (r == -1) {
-    fprintf(stderr, "SDLNet_TCP_AddSocket: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_AddSocket");
     delete tmp_socket_set;
     UnLock();
     return false;
@@ -330,7 +338,7 @@ void WSocket::RemoveFromTmpSocketSet()
   socket_set->Lock();
   r = SDLNet_TCP_DelSocket(socket_set->socket_set, socket);
   if (r == -1) {
-    fprintf(stderr, "SDLNet_TCP_DelSocket: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_DelSocket");
     ASSERT(false);
   }
   socket_set->sockets.remove(this);
@@ -366,7 +374,7 @@ bool WSocket::SendInt_NoLock(const int& nbr)
   SDLNet_Write32(u_nbr, packet);
   int len = SDLNet_TCP_Send(socket, packet, sizeof(packet));
   if (len < int(sizeof(packet))) {
-    fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_Send");
     return false;
   }
 
@@ -392,7 +400,7 @@ bool WSocket::SendStr_NoLock(const std::string &str)
 
   int len = SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
   if (len < int(str.size())) {
-    fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_Send");
     return false;
   }
 
@@ -415,7 +423,7 @@ bool WSocket::SendBuffer_NoLock(const void* data, size_t len)
   // cast is needed to please SDL that does not use const keyword.
   int size = SDLNet_TCP_Send(socket, (void*)(data), len);
   if (size < int(len)) {
-    fprintf(stderr, "SDLNet_TCP_Send: %s\n", SDLNet_GetError());
+    print_net_error("SDLNet_TCP_Send");
     return false;
   }
 
@@ -442,7 +450,8 @@ bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
   // => no need to make a loop to receive all the data (see documentation)
   received = SDLNet_TCP_Recv(socket, data, len);
   if (received != int(len)) {
-    fprintf(stderr, "ERROR: SDLNet_TCP_Recv: %d\n", received);
+    print_net_error("SDLNet_TCP_Recv");
+    fprintf(stderr, "ERROR: SDLNet_TCP_Recv: %d, %d\n", received, len);
     return false;
   }
 
