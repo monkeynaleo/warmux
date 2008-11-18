@@ -23,12 +23,13 @@
 #define DISTANT_CPU_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include <list>
+#include <map>
 #include <string>
 //-----------------------------------------------------------------------------
 
 class Action;
 class WSocket;
+class ConfigTeam;
 
 class DistantComputer
 {
@@ -48,12 +49,11 @@ class DistantComputer
   /*********************************************/
 
   WSocket* sock;
-  std::list<std::string> owned_teams;
-
   DistantComputer::state_t state;
-  std::string nickname;
-
   bool force_disconnect;
+
+  std::string nickname;
+  std::map<const std::string, ConfigTeam> owned_teams;
 
 public:
   DistantComputer(WSocket* new_sock);
@@ -68,9 +68,9 @@ public:
   void SetNickname(const std::string& nickname);
   const std::string& GetNickname() const;
 
-  bool AddTeam(const std::string& team_id);
+  bool AddTeam(const ConfigTeam& team);
+  bool UpdateTeam(const std::string& old_team_id, const ConfigTeam& team);
   bool RemoveTeam(const std::string& team_id);
-  bool UpdateTeam(const std::string& old_team_id, const std::string& team_id);
 
   void SetState(DistantComputer::state_t _state);
   DistantComputer::state_t GetState() const;
