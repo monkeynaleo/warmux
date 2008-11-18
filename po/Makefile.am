@@ -141,8 +141,6 @@ POTFILES = \
         src/include/binreloc.h \
         src/include/constant.cpp \
         src/include/constant.h \
-        src/include/singleton.cpp \
-        src/include/singleton.h \
         src/interface/cursor.cpp \
         src/interface/cursor.h \
         src/interface/game_msg.cpp \
@@ -321,8 +319,6 @@ POTFILES = \
         src/tool/affine_transform.h \
         src/tool/copynpaste.cpp \
         src/tool/copynpaste.h \
-        src/tool/debug.cpp \
-        src/tool/debug.h \
         src/tool/debug_physics.cpp \
         src/tool/debug_physics.h \
         src/tool/file_tools.cpp \
