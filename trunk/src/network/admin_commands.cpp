@@ -31,41 +31,58 @@ static void PrintHelp()
   AppWormux::GetInstance()->ReceiveMsgCallback(msg);
   msg = "kick <nickname>: " + std::string(_("Kicks the players designated by <nickname> out of the game"));
   AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+  msg = "list: " + std::string(_("List the connected players"));
+  AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+}
+
+static void Kick(const std::string& nick)
+{
+  std::string msg;
+  for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
+       cpu != Network::GetInstance()->cpu.end();
+       ++cpu) {
+
+    if ((*cpu)->GetPlayer().GetNickname() == nick) {
+      (*cpu)->ForceDisconnection();
+      msg = std::string(Format("%s kicked", nick.c_str()));
+      AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+      return;
+    }
+  }
+
+  msg = std::string(Format("%s: no such nickame", nick.c_str()));
+  AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+}
+
+static void ListPlayers()
+{
+  if (Network::GetInstance()->cpu.empty()) {
+    AppWormux::GetInstance()->ReceiveMsgCallback(_("No player connected"));
+    return;
+  }
+
+  AppWormux::GetInstance()->ReceiveMsgCallback(_("Connected players: "));
+
+  for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
+      cpu != Network::GetInstance()->cpu.end();
+      ++cpu) {
+    AppWormux::GetInstance()->ReceiveMsgCallback((*cpu)->GetPlayer().GetNickname());
+  }
+
 }
 
 void ProcessCommand(const std::string & cmd)
 {
-  if(cmd == "/help")
-  {
+  if (cmd == "/help") {
     PrintHelp();
-  }
-  else
-  {
-    std::string msg;
-    if(cmd.substr(0, 6) == "/kick ")
-    {
-      std::string nick = cmd.substr(6, cmd.size() - 6);
-      for(std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
-          cpu != Network::GetInstance()->cpu.end();
-	  ++cpu)
-      {
-        if((*cpu)->GetPlayer().GetNickname() == nick)
-        {
-          (*cpu)->ForceDisconnection();
-          msg = std::string(Format("%s kicked", nick.c_str()));
-          AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-	  return;
-        }
-        printf("Nick: %s\n", (*cpu)->GetPlayer().GetNickname().c_str());
-      }
-      msg = std::string(Format("%s: no such nickame", nick.c_str()));
-      AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-    }
-    else
-    {
-      AppWormux::GetInstance()->ReceiveMsgCallback(_("Unknown command"));
-      PrintHelp();
-    }
+  } else if (cmd.substr(0, 6) == "/kick ") {
+    std::string nick = cmd.substr(6, cmd.size() - 6);
+    Kick(nick);
+  } else if (cmd.substr(0, 5) == "/list") {
+    ListPlayers();
+  } else {
+    AppWormux::GetInstance()->ReceiveMsgCallback(_("Unknown command"));
+    PrintHelp();
   }
 }
 
