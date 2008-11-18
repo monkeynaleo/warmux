@@ -31,6 +31,7 @@
 #include "map/maps_list.h"
 #include "menu/network_menu.h"
 #include "team/team.h"
+#include "team/team_config.h"
 #include "team/teams_list.h"
 #include "tool/debug.h"
 //-----------------------------------------------------------------------------
@@ -39,10 +40,10 @@ static const int MAX_PACKET_SIZE = 250*1024;
 
 DistantComputer::DistantComputer(WSocket* new_sock) :
   sock(new_sock),
-  owned_teams(),
   state(DistantComputer::STATE_ERROR),
+  force_disconnect(false),
   nickname("this is not initialized"),
-  force_disconnect(false)
+  owned_teams()
 {
   // If we are the server, we have to tell this new computer
   // what teams / maps have already been selected
@@ -80,11 +81,11 @@ DistantComputer::~DistantComputer()
 
   if (Network::GetInstance()->IsConnected())
   {
-    for (std::list<std::string>::iterator team = owned_teams.begin();
+    for (std::map<const std::string, ConfigTeam>::iterator team = owned_teams.begin();
          team != owned_teams.end();
          ++team)
     {
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, *team));
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, team->first));
     }
   }
   owned_teams.clear();
@@ -122,49 +123,52 @@ const std::string& DistantComputer::GetNickname() const
   return nickname;
 }
 
-bool DistantComputer::AddTeam(const std::string& team_id)
+bool DistantComputer::AddTeam(const ConfigTeam& team_conf)
 {
-  int index = 0;
-  Team * the_team = GetTeamsList().FindById(team_id, index);
+  std::pair<std::map<const std::string, ConfigTeam>::iterator, bool> r;
+  r = owned_teams.insert(std::make_pair(team_conf.id, team_conf));
+  if (!r.second) {
+    ForceDisconnection();
 
-  if (the_team) {
-    owned_teams.push_back(team_id);
-    return true;
+    ASSERT(false);
+    return false;
   }
-
-  ForceDisconnection();
-
-  std::cerr << "Team "<< team_id << "does not exist!" << std::endl;
-  ASSERT(false);
-  return false;
+  return r.second;
 }
 
 bool DistantComputer::RemoveTeam(const std::string& team_id)
 {
-  std::list<std::string>::iterator it;
-  it = find(owned_teams.begin(), owned_teams.end(), team_id);
-  printf("size of owned teams: %d\n", (int)owned_teams.size());
+  size_t size, previous_size;
+  previous_size = owned_teams.size();
+  size = owned_teams.erase(team_id);
 
-  if (it != owned_teams.end()) {
-    owned_teams.erase(it);
-    return true;
+  if (size == previous_size) {
+    ForceDisconnection();
+
+    ASSERT(false);
+    return false;
   }
 
-  ForceDisconnection();
-
-  ASSERT(false);
-  return false;
+  return true;
 }
 
-bool DistantComputer::UpdateTeam(const std::string& old_team_id, const std::string& team_id)
+bool DistantComputer::UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_conf)
 {
-  if (old_team_id == team_id) // nothing to do !
+  if (old_team_id == team_conf.id) {
+
+    if (owned_teams.find(team_conf.id) == owned_teams.end()) {
+      ASSERT(false);
+      return false;
+    }
+
+    owned_teams[team_conf.id] = team_conf;
     return true;
+  }
 
   if (!RemoveTeam(old_team_id))
     return false;
 
-  if (!AddTeam(team_id))
+  if (!AddTeam(team_conf))
     return false;
 
   return true;

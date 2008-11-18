@@ -450,7 +450,7 @@ void Action_Menu_AddTeam (Action *a)
 
   if (Network::IsConnected()) {
     if (!local_team)
-      a->GetCreator()->AddTeam(the_team.id);
+      a->GetCreator()->AddTeam(the_team);
     else
       UpdateLocalNickname();
   }
@@ -473,7 +473,7 @@ void Action_Menu_UpdateTeam (Action *a)
 
   if (Network::IsConnected()) {
     if (a->GetCreator())
-      a->GetCreator()->UpdateTeam(old_team_id, the_team.id);
+      a->GetCreator()->UpdateTeam(old_team_id, the_team);
     else
       UpdateLocalNickname();
   }
