@@ -19,21 +19,21 @@
  * Team handling
  *****************************************************************************/
 
-#include "team/team.h"
-#include "team/team_config.h"
-#include "team/teams_list.h"
-//-----------------------------------------------------------------------------
+#include <algorithm>
+#include <iostream>
 #include "character/character.h"
 #include "character/body_list.h"
 #include "include/action.h"
 #include "game/config.h"
+#include "game/game_mode.h"
 #include "network/network.h"
-#include "tool/file_tools.h"
-
-#include "team/team_energy.h"
-#include <algorithm>
-#include <iostream>
 #include "network/randomsync.h"
+#include "tool/file_tools.h"
+#include "team/team.h"
+#include "team/team_config.h"
+#include "team/team_energy.h"
+#include "team/teams_list.h"
+
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -74,9 +74,19 @@ TeamsList::~TeamsList()
 void TeamsList::NextTeam ()
 {
   Team* next = GetNextTeam();
-  GetTeamsList().SetActive (next->GetId());
+  SetActive (next->GetId());
+
+  if (GameMode::GetInstance()->auto_change_character) {
+    ActiveTeam().NextCharacter();
+  }
+
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
+  Character::StoreActiveCharacter(&a);
   Network::GetInstance()->SendAction(a);
+
+  printf("\nPlaying character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
+  printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
+  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
 }
 
 //-----------------------------------------------------------------------------
@@ -610,8 +620,8 @@ std::string TeamsList::GetLocalHeadCommanders() const
 {
   std::string nickname;
 
-  for (std::vector<Team*>::iterator it = GetTeamsList().playing_list.begin();
-       it != GetTeamsList().playing_list.end();
+  for (std::vector<Team*>::const_iterator it = playing_list.begin();
+       it != playing_list.end();
        it++) {
     if ((*it)->IsLocal()) {
       if (nickname != "") nickname += "+";

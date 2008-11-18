@@ -377,19 +377,15 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       {
         if (GameMode::GetInstance()->AllowCharacterSelection()) {
           SDLMod mod = SDL_GetModState();
+	  Action * change_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
+	  Character::StoreActiveCharacter(change_character);
           if (mod & KMOD_CTRL) {
-            Action * previous_character = new Action(Action::ACTION_PLAYER_PREVIOUS_CHARACTER);
-	    Character::StoreActiveCharacter(previous_character);
             ActiveTeam().PreviousCharacter();
-	    Character::StoreActiveCharacter(previous_character);
-            ActionHandler::GetInstance()->NewAction(previous_character);
           } else {
-            Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
-            Character::StoreActiveCharacter(next_character);
             ActiveTeam().NextCharacter();
-            Character::StoreActiveCharacter(next_character);
-            ActionHandler::GetInstance()->NewAction(next_character);
-          }
+	  }
+	  Character::StoreActiveCharacter(change_character);
+	  ActionHandler::GetInstance()->NewAction(change_character);
         }
       }
       return;
