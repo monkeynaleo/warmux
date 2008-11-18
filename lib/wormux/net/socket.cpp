@@ -550,9 +550,22 @@ bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
   return r;
 }
 
+uint32_t WSocket::ComputeCRC(const void* data, size_t len)
+{
+  uint32_t crc = 0;
+  const uint32_t* buf = reinterpret_cast<const uint*>(data);
+
+  for (uint i = 0; i < len/sizeof(uint32_t); i++) {
+    crc += buf[i];
+  }
+
+  return crc;
+}
+
 bool WSocket::SendPacket(const void* data, size_t len)
 {
   bool r;
+  uint32_t crc;
   Lock();
 
   r = SendInt_NoLock(len);
@@ -560,6 +573,12 @@ bool WSocket::SendPacket(const void* data, size_t len)
     goto out_unlock;
 
   r = SendBuffer_NoLock(data, len);
+  if (!r)
+    goto out_unlock;
+
+  // Send a CRC check
+  crc = ComputeCRC(data, len);
+  r = SendInt_NoLock(crc);
   if (!r)
     goto out_unlock;
 
@@ -575,6 +594,7 @@ bool WSocket::ReceivePacket(void* &data, size_t& len)
   Lock();
 
   int packet_size;
+  int crc;
   char* packet;
 
   // Firstly, we read the size of the incoming packet
@@ -596,17 +616,33 @@ bool WSocket::ReceivePacket(void* &data, size_t& len)
 
   r = ReceiveBuffer_NoLock(packet, packet_size);
   if (!r) {
-    free(packet);
-    packet = NULL;
-    goto out_unlock;
+    fprintf(stderr, "ERROR: fail to receive data\n");
+    goto error;
+  }
+
+  // Check the CRC
+  r = ReceiveInt_NoLock(crc);
+  if (!r) {
+    fprintf(stderr, "ERROR: fail to receive CRC\n");
+    goto error;
   }
 
   data = packet;
   len = packet_size;
 
+  if (uint32_t(crc) != ComputeCRC(data, len)) {
+    fprintf(stderr, "ERROR: wrong CRC check\n");
+    goto error;
+  }
+
  out_unlock:
   UnLock();
   return r;
+
+ error:
+  free(packet);
+  packet = NULL;
+  goto out_unlock;
 }
 
 bool WSocket::IsReady(int timeout) const

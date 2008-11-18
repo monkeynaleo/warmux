@@ -74,6 +74,7 @@ private:
 
   bool AddToSocketSet(WSocketSet* _socket_set);
   void RemoveFromSocketSet();
+  uint32_t ComputeCRC(const void* data, size_t len);
 
 public:
   WSocket(TCPsocket _socket, WSocketSet* _socket_set);
