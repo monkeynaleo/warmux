@@ -148,7 +148,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   WSocket* socket;
   DistantComputer* server;
   Action a(Action::ACTION_NICKNAME, GetPlayer().GetNickname());
-  int prt;
+   int prt;
 
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 

@@ -43,7 +43,7 @@ size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
   return fwrite(buf, size, nmemb, (FILE*)fd);
 }
 
-bool Downloader::Get(const char* url, const char* save_as)
+bool Downloader::Get(const char* url, const char* save_as) const
 {
   FILE* fd = fopen( save_as, "w");
   if (fd == NULL) {
@@ -62,14 +62,14 @@ bool Downloader::Get(const char* url, const char* save_as)
 
 static ssize_t getline(std::string& line, std::ifstream& file)
 {
-	  line.clear();
-	    std::getline(file, line);
-	      if(file.eof())
-		          return -1;
-	        return line.size();
+  line.clear();
+  std::getline(file, line);
+  if(file.eof())
+    return -1;
+  return line.size();
 }
 
-std::string Downloader::GetLatestVersion()
+std::string Downloader::GetLatestVersion() const
 {
   static const char url[] = "http://www.wormux.org/last";
   const std::string last_file = Config::GetInstance()->GetPersonalDataDir() + "last";
@@ -95,7 +95,7 @@ std::string Downloader::GetLatestVersion()
   return line;
 }
 
-std::map<std::string, int> Downloader::GetServerList(std::string list_name)
+std::map<std::string, int> Downloader::GetServerList(std::string list_name) const
 {
   std::map<std::string, int> server_lst;
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
