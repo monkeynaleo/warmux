@@ -118,7 +118,7 @@ void Mouse::ActionLeftClic(bool) const
     }
 
     if (character_found) {
-      Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
+      Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
       Character::StoreActiveCharacter(next_character);
 
       while ( (*it) != &ActiveCharacter() )

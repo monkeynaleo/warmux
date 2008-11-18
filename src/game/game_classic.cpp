@@ -158,37 +158,18 @@ void GameClassic::__SetState_PLAYING()
   // Select the next team
   ASSERT (!IsGameFinished());
 
-  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
-    {
-      GetTeamsList().NextTeam();
+  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal()) {
 
-      if ( GameMode::GetInstance()->auto_change_character)
-        {
-          ActiveTeam().NextCharacter();
-        }
+    GetTeamsList().NextTeam();
 
-      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
+    Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
 
-      if ( Network::GetInstance()->IsTurnMaster() )
-        {
-          // Tell clients which character in the team is now playing
-          Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
-	  Character::StoreActiveCharacter(&playing_char);
-          Network::GetInstance()->SendAction(playing_char);
-
-          printf("Action_ChangeCharacter:\n");
-          printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());
-          printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
-          printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
-          printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
-        }
-
-      // Are we turn master for next turn ?
-      if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-        Network::GetInstance()->SetTurnMaster(true);
-      else
-        Network::GetInstance()->SetTurnMaster(false);
-    }
+    // Are we turn master for next turn ?
+    if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+      Network::GetInstance()->SetTurnMaster(true);
+    else
+      Network::GetInstance()->SetTurnMaster(false);
+  }
 
   give_objbox = true; //hack: make it so that there is no more than one objbox per turn
 }

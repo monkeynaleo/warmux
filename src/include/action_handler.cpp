@@ -271,31 +271,21 @@ void Action_Player_ChangeWeapon (Action *a)
   ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
 }
 
-void Action_Player_NextCharacter (Action *a)
+void Action_Player_ChangeCharacter (Action *a)
 {
   JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
-  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's informations
+  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
   Character::RetrieveCharacterFromAction(a);       // Retrieve next character information
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
-}
-
-void Action_Player_PreviousCharacter (Action *a)
-{
-  JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
-  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's informations
-  Character::RetrieveCharacterFromAction(a);       // Retrieve previous character's information
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
-}
-
-void Action_Game_ChangeCharacter (Action *a)
-{
-  Character::RetrieveCharacterFromAction(a);
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
 void Action_Game_NextTeam (Action *a)
 {
-  GetTeamsList().SetActive (a->PopString());
+  std::string team = a->PopString();
+  GetTeamsList().SetActive(team);
+
+  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
+
   ASSERT (!ActiveCharacter().IsDead());
 
   // Are we turn master for next turn ?
@@ -897,9 +887,7 @@ ActionHandler::ActionHandler():
 
   // ########################################################
   Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
-  Register (Action::ACTION_PLAYER_NEXT_CHARACTER, "PLAYER_next_character", &Action_Player_NextCharacter);
-  Register (Action::ACTION_PLAYER_PREVIOUS_CHARACTER, "PLAYER_previous_character", &Action_Player_PreviousCharacter);
-  Register (Action::ACTION_GAMELOOP_CHANGE_CHARACTER, "GAMELOOP_change_character", &Action_Game_ChangeCharacter);
+  Register (Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
   Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_Game_NextTeam);
   Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_Game_SetState);
 
