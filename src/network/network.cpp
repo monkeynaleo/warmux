@@ -126,6 +126,7 @@ NetworkServer * Network::GetInstanceServer()
 Network::Network(const std::string& passwd):
   password(passwd),
   turn_master_player(false),
+  game_master_player(false),
   state(NO_NETWORK),// useless value at beginning
   socket_set(NULL),
 #ifdef LOG_NETWORK

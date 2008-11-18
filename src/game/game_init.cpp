@@ -48,7 +48,9 @@
 
 void GameInit::InitGameData_NetGameMaster()
 {
-  Network::GetInstanceServer()->RejectIncoming();
+  if (Network::GetInstance()->IsServer()) {
+    Network::GetInstanceServer()->RejectIncoming();
+  }
 
   RandomSync().InitRandom();
 

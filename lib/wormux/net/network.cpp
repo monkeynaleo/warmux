@@ -330,7 +330,8 @@ void WNet::FinalizeBatch(void* data, size_t len)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password)
+bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password,
+			    bool client_will_be_master)
 {
   bool ret = false;
   std::string version;
@@ -368,8 +369,13 @@ bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password)
   if (!client_socket.SendInt(0))
     goto error;
 
+  // Server: client will be master ?
+  if (!client_socket.SendInt(client_will_be_master))
+    goto error;
+
   // Server: Handshake done successfully :)
   ret = true;
+
 
  error:
   client_socket.RemoveFromTmpSocketSet();
