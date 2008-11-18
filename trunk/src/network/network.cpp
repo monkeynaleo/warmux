@@ -274,14 +274,9 @@ void Network::ReceiveActions()
 #endif
 
         Action* a = new Action(buffer, (*dst_cpu));
-        if (!a->CheckCRC()) {
-          MSG_DEBUG("network.crc_bad","!!! Bad CRC for action received !!!");
-          delete a;
-        } else {
-          MSG_DEBUG("network.traffic", "Received action %s",
-                    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
-          HandleAction(a, *dst_cpu);
-        }
+	MSG_DEBUG("network.traffic", "Received action %s",
+		  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+	HandleAction(a, *dst_cpu);
         free(buffer);
 
         if (cpu.empty()) {

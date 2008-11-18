@@ -110,7 +110,6 @@ private:
   std::list<uint32_t> var;
   Action_t m_type;
   uint m_timestamp;
-  uint crc;
 
   DistantComputer* creator;
 
@@ -120,8 +119,6 @@ private:
   void Init (Action_t type);
 
   void WriteTo(char *packet) const;
-
-  uint ComputeCRC() const;
 
 public:
 
@@ -167,10 +164,8 @@ public:
     return 4  //Size of the type;
            + 4 //Size of the timestamp
            + 4 //Size of the number of variable
-           + 4 // crc
            + int(var.size()) * 4;
   }
-  bool CheckCRC() const;
   void WriteToPacket(char* & packet, int & size) const;
   Action_t GetType() const { return m_type; };
 
