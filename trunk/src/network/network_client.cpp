@@ -58,7 +58,7 @@ std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<D
 {
   std::list<DistantComputer*>::iterator it;
 
-  printf("- client disconnected: %s(%s)\n", (*closed)->GetAddress().c_str(), (*closed)->GetNickname().c_str());
+  printf("- client disconnected: %s(%s)\n", (*closed)->GetAddress().c_str(), (*closed)->GetPlayer().GetNickname().c_str());
 
   it = cpu.erase(closed);
   delete *closed;
@@ -147,7 +147,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   connection_state_t r;
   WSocket* socket;
   DistantComputer* server;
-  Action a(Action::ACTION_NICKNAME, GetNickname());
+  Action a(Action::ACTION_NICKNAME, GetPlayer().GetNickname());
   int prt;
 
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());

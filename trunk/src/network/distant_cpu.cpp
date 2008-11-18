@@ -27,12 +27,9 @@
 #include "network/network.h"
 #include "include/action.h"
 #include "include/action_handler.h"
-#include "include/constant.h"
 #include "map/maps_list.h"
 #include "menu/network_menu.h"
-#include "team/team.h"
 #include "team/team_config.h"
-#include "team/teams_list.h"
 #include "tool/debug.h"
 //-----------------------------------------------------------------------------
 
@@ -41,9 +38,7 @@ static const int MAX_PACKET_SIZE = 250*1024;
 DistantComputer::DistantComputer(WSocket* new_sock) :
   sock(new_sock),
   state(DistantComputer::STATE_ERROR),
-  force_disconnect(false),
-  nickname("this is not initialized"),
-  owned_teams()
+  force_disconnect(false)
 {
   // If we are the server, we have to tell this new computer
   // what teams / maps have already been selected
@@ -62,12 +57,31 @@ DistantComputer::DistantComputer(WSocket* new_sock) :
     MSG_DEBUG("network", "Server: Sending teams information");
 
     // Teams infos of already connected computers
-    for(TeamsList::iterator team = GetTeamsList().playing_list.begin();
-      team != GetTeamsList().playing_list.end();
-      ++team) {
-      Action b(Action::ACTION_MENU_ADD_TEAM, (*team)->GetId());
-      b.Push((*team)->GetPlayerName());
-      b.Push((int)(*team)->GetNbCharacters());
+    std::list<DistantComputer*>::iterator it;
+    std::map<std::string, ConfigTeam>::const_iterator team;
+
+    for (it = Network::GetInstance()->cpu.begin();
+        it != Network::GetInstance()->cpu.end();
+        it++) {
+      for (team = (*it)->GetPlayer().GetTeams().begin();
+	   team != (*it)->GetPlayer().GetTeams().end();
+	   team++) {
+
+	Action b(Action::ACTION_MENU_ADD_TEAM, team->first);
+	b.Push(team->second.player_name);
+	b.Push(int(team->second.nb_characters));
+	b.WriteToPacket(pack, size);
+	SendDatas(pack, size);
+	free(pack);
+      }
+    }
+
+    for (team = Network::GetInstance()->GetPlayer().GetTeams().begin();
+	 team != Network::GetInstance()->GetPlayer().GetTeams().end();
+	 team++) {
+      Action b(Action::ACTION_MENU_ADD_TEAM, team->first);
+      b.Push(team->second.player_name);
+      b.Push(int(team->second.nb_characters));
       b.WriteToPacket(pack, size);
       SendDatas(pack, size);
       free(pack);
@@ -79,18 +93,14 @@ DistantComputer::~DistantComputer()
 {
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_INFO_CLIENT_DISCONNECT, GetAddress()));
 
-  if (Network::GetInstance()->IsConnected())
-  {
-    for (std::map<const std::string, ConfigTeam>::iterator team = owned_teams.begin();
-         team != owned_teams.end();
-         ++team)
-    {
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, team->first));
-    }
-  }
-  owned_teams.clear();
+  player.Disconnect();
 
   delete sock;
+}
+
+Player& DistantComputer::GetPlayer()
+{
+  return player;
 }
 
 bool DistantComputer::SocketReady() const
@@ -111,67 +121,6 @@ bool DistantComputer::SendDatas(const void* data, size_t len)
 std::string DistantComputer::GetAddress()
 {
   return sock->GetAddress();
-}
-
-void DistantComputer::SetNickname(const std::string& _nickname)
-{
-  nickname = _nickname;
-}
-
-const std::string& DistantComputer::GetNickname() const
-{
-  return nickname;
-}
-
-bool DistantComputer::AddTeam(const ConfigTeam& team_conf)
-{
-  std::pair<std::map<const std::string, ConfigTeam>::iterator, bool> r;
-  r = owned_teams.insert(std::make_pair(team_conf.id, team_conf));
-  if (!r.second) {
-    ForceDisconnection();
-
-    ASSERT(false);
-    return false;
-  }
-  return r.second;
-}
-
-bool DistantComputer::RemoveTeam(const std::string& team_id)
-{
-  size_t size, previous_size;
-  previous_size = owned_teams.size();
-  size = owned_teams.erase(team_id);
-
-  if (size == previous_size) {
-    ForceDisconnection();
-
-    ASSERT(false);
-    return false;
-  }
-
-  return true;
-}
-
-bool DistantComputer::UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_conf)
-{
-  if (old_team_id == team_conf.id) {
-
-    if (owned_teams.find(team_conf.id) == owned_teams.end()) {
-      ASSERT(false);
-      return false;
-    }
-
-    owned_teams[team_conf.id] = team_conf;
-    return true;
-  }
-
-  if (!RemoveTeam(old_team_id))
-    return false;
-
-  if (!AddTeam(team_conf))
-    return false;
-
-  return true;
 }
 
 void DistantComputer::SetState(DistantComputer::state_t _state)

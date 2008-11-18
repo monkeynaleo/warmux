@@ -49,14 +49,14 @@ void ProcessCommand(const std::string & cmd)
           cpu != Network::GetInstance()->cpu.end();
 	  ++cpu)
       {
-        if((*cpu)->GetNickname() == nick)
+        if((*cpu)->GetPlayer().GetNickname() == nick)
         {
           (*cpu)->ForceDisconnection();
           msg = std::string(Format("%s kicked", nick.c_str()));
           AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 	  return;
         }
-        printf("Nick: %s\n", (*cpu)->GetNickname().c_str());
+        printf("Nick: %s\n", (*cpu)->GetPlayer().GetNickname().c_str());
       }
       msg = std::string(Format("%s: no such nickame", nick.c_str()));
       AppWormux::GetInstance()->ReceiveMsgCallback(msg);

@@ -110,7 +110,7 @@ void Chat::SendMessage(const std::string &msg)
     return;
 
   Action* a = new Action(Action::ACTION_CHAT_MESSAGE);
-  a->Push(Network::GetInstance()->GetNickname());
+  a->Push(Network::GetInstance()->GetPlayer().GetNickname());
   a->Push(msg);
   ActionHandler::GetInstance()->NewAction(a);
 }
