@@ -23,7 +23,7 @@
 #include "include/base.h"
 #include "network/network.h"
 #include "network/socket.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 Socket::Socket()
 {

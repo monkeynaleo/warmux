@@ -26,7 +26,7 @@
 
 #include "game/config.h"
 #include "sound/sound_sample.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 #include "tool/random.h"
 #include "tool/file_tools.h"

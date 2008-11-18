@@ -22,7 +22,7 @@
 #include <iostream>
 #include "character/movement.h"
 #include "tool/xml_document.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(false), play_mode(LOOP)
 {

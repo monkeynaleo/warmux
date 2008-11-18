@@ -26,7 +26,7 @@
 #include "game/config.h"
 #include "include/base.h"
 #include "network/download.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 Downloader::Downloader():
   curl(curl_easy_init())

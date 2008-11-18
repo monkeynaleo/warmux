@@ -29,7 +29,7 @@
 #include "game/game_mode.h"
 #include "network/distant_cpu.h"
 #include "network/net_error_msg.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/string_tools.h"
 
 #include <sys/types.h>

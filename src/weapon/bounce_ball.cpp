@@ -29,7 +29,7 @@
 #include "map/camera.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 #include "tool/math_tools.h"
 #include "weapon/explosion.h"

@@ -30,7 +30,7 @@
 #include "network/index_server.h"
 #include "network/index_svr_msg.h"
 #include "network/network.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/random.h"
 
 IndexServer::IndexServer():

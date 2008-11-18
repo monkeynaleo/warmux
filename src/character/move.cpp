@@ -27,7 +27,7 @@
 #include "network/network.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 // Max climbing height walking
 const int MAX_CLIMBING_HEIGHT=30;

@@ -42,7 +42,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
 #include "tool/point.h"

@@ -36,7 +36,7 @@
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK

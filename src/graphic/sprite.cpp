@@ -32,7 +32,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "tool/rectangle.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "graphic/spriteframe.h"
 
 Sprite::Sprite(bool _smooth) :
