@@ -59,7 +59,7 @@ private:
   const PhysicalObj& operator=(const PhysicalObj&);
   /*********************************************/
 
- 
+
   // collision management
   bool m_collides_with_ground;
   bool m_collides_with_characters;
@@ -80,7 +80,7 @@ private:
   uint m_extern_force_index;
 
 protected:
-  bool m_is_active;
+
   bool m_ignore_movements;
   bool m_is_character;
   bool m_is_fire;
@@ -93,7 +93,7 @@ protected:
   std::string m_unique_id;
   std::string m_rebound_sound;
   Point2d m_initial_speed;
-  
+
   alive_t m_alive;
   int m_energy;
 
@@ -225,6 +225,7 @@ public:
   uint AddExternForceXY (const Point2d& vector);
   uint AddExternForce (double nonrm, double angle);
   void RemoveExternForce(unsigned force_index);
+  void RemoveAllExternForce();
   void ImpulseXY(const Point2d& vector);
   void Impulse(double norm, double angle);
 
@@ -322,7 +323,7 @@ public:
   virtual void SignalObjectCollision(PhysicalObj *,const Point2d&) { };
   virtual void SignalGroundCollision(const Point2d&) { };
   virtual void SignalCollision(const Point2d&) { };
-  
+
 protected:
   void AddShape( PhysicalShape *shape);
   void ClearShapes();
@@ -332,7 +333,7 @@ protected:
   virtual void SignalDrowning() { };
   virtual void SignalGoingOutOfWater() { };
 
- 
+
   const b2FilterData& GetCollisionFilter() const;
 
 private:

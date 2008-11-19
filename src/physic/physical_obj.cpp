@@ -76,11 +76,11 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_nbr_contact(0),
   m_cfg(),
   m_extern_force_index(1),
-  m_is_active(false),
   m_ignore_movements(false),
   m_is_character(false),
   m_is_fire(false),
   m_is_bullet(false),
+  m_body(NULL),
   m_last_move(Time::GetInstance()->Read()),
   m_name(name),
   m_rebound_sound(""),
@@ -116,8 +116,8 @@ PhysicalObj::~PhysicalObj ()
 //-----------------------------------------------------------------------------
 void PhysicalObj::Activate()
 {
-  if(!m_is_active){
-    m_is_active =true;
+  if(!m_body){
+
     m_body = PhysicalEngine::GetInstance()->AddObject(this);
 
     SetSpeedXY(m_initial_speed);
@@ -127,7 +127,7 @@ void PhysicalObj::Activate()
 
 void PhysicalObj::Generate()
 {
-  if(m_is_active){
+  if(m_body){
     m_body->SetBullet(m_is_bullet);
 
     b2MassData massData;
@@ -146,9 +146,10 @@ void PhysicalObj::Generate()
 
 void PhysicalObj::Desactivate()
 {
-  if(m_is_active){
-  m_is_active = false;
+  if(m_body){
+  RemoveAllExternForce();
   PhysicalEngine::GetInstance()->RemoveObject(this);
+  m_body = NULL;
   }
 }
 
@@ -163,7 +164,7 @@ void PhysicalObj::SetXY(const Point2i &position)
 
 void PhysicalObj::SetXY(const Point2d &position)
 {
-  if(m_is_active){
+  if(m_body){
 
     CheckOverlapping();
 
@@ -207,7 +208,7 @@ int PhysicalObj::GetY() const
 
 double PhysicalObj::GetPhysX() const
 {
-  if(m_is_active){
+  if(m_body){
     return m_body->GetPosition().x;
   }else{
    return m_body_def->position.x;
@@ -216,7 +217,7 @@ double PhysicalObj::GetPhysX() const
 
 double PhysicalObj::GetPhysY() const
 {
-  if(m_is_active){
+  if(m_body){
     return m_body->GetPosition().y;
   }else{
    return m_body_def->position.y;
@@ -225,7 +226,7 @@ double PhysicalObj::GetPhysY() const
 
 Point2d PhysicalObj::GetPhysXY() const
 {
-  if(m_is_active){
+  if(m_body){
     return Point2d( m_body->GetPosition().x, m_body->GetPosition().y);
   }else{
     return Point2d(0.0,0.0);
@@ -234,7 +235,7 @@ Point2d PhysicalObj::GetPhysXY() const
 
 void PhysicalObj::SetPhysXY(double x, double y)
 {
-  if(m_is_active){
+  if(m_body){
   /* if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
      m_pos_x.x0 = x;
      m_pos_y.x0 = y;*/
@@ -255,7 +256,7 @@ void PhysicalObj::SetPhysXY(const Point2d &position)
 
 void PhysicalObj::SetSpeedXY (Point2d vector)
 {
-  if(m_is_active){
+  if(m_body){
   if (EqualsZero(vector.x)) vector.x = 0;
   if (EqualsZero(vector.y)) vector.y = 0;
   bool was_moving = IsMoving();
@@ -309,8 +310,7 @@ void PhysicalObj::GetSpeed(double &norm, double &angle) const
 
 Point2d PhysicalObj::GetSpeedXY () const
 {
-  if(m_is_active)
-  {
+  if( m_body ) {
     if (!IsMoving()) {
       return Point2d(0.0, 0.0);
     }
@@ -328,7 +328,7 @@ Point2d PhysicalObj::GetSpeed() const
 
 double PhysicalObj::GetAngularSpeed() const
 {
-  if(m_is_active){
+  if(m_body){
   return m_body->GetAngularVelocity();
   }else{
     return 0;
@@ -658,7 +658,7 @@ void PhysicalObj::CheckOverlapping()
 {
   if ( m_overlapping_object == NULL )
     return;
-  if ( !m_is_active )
+  if ( !m_body )
     return;
 
   // Check if we are still overlapping with this object
@@ -690,6 +690,35 @@ void PhysicalObj::RemoveExternForce(uint index)
     m_extern_force_map.erase(index);
   }
 }
+
+uint PhysicalObj::AddExternForceXY (const Point2d& vector)
+{
+
+  if ( m_body ) {
+  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
+  PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
+  m_extern_force_index++;
+
+  UpdateTimeOfLastMove();
+  MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
+
+
+  return m_extern_force_index-1;
+
+  }else{
+    return 0;
+  }
+}
+
+
+void PhysicalObj::RemoveAllExternForce()
+{
+  std::map<uint,Force *>::iterator it;
+  for( it = m_extern_force_map.begin() ; it != m_extern_force_map.end() ; it++ ) {
+    RemoveExternForce(it->first);
+  }
+}
+
 
 bool PhysicalObj::IsSleeping() const
 {
@@ -915,7 +944,7 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
 
 bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
 {
-  if(!m_is_active){
+  if(!m_body){
     return true;
   }
   int x = position.x + m_test_left;
@@ -1221,25 +1250,6 @@ void PhysicalObj::SetMass(double mass)
   Generate();
 }
 
-uint PhysicalObj::AddExternForceXY (const Point2d& vector)
-{
-
-  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
-  PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
-  m_extern_force_index++;
-
-  //bool was_moving = IsMoving();
-
-  UpdateTimeOfLastMove();
-  MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
-
-  //  m_extern_force.SetValues(vector);
-
-  /*if (!was_moving && IsMoving())
-    StartMoving();*/
-
-  return m_extern_force_index-1;
-}
 
 void PhysicalObj::ImpulseXY(const Point2d& vector)
 {
@@ -1386,7 +1396,7 @@ double PhysicalObj::GetAngle() const
 
 void PhysicalObj::SetAngle(double angle)
 {
-  if(m_is_active){
+  if(m_body){
     m_body->SetXForm(m_body->GetPosition(), -angle/180.0f * b2_pi);
   }else{
     m_body_def->angle = -angle/180.0f * b2_pi;

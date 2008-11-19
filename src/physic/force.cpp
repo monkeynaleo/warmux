@@ -26,7 +26,7 @@
 
 Force::Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_local)
 {
-
+  ASSERT(target);
   m_target = target;
 
    m_force = b2Vec2(force.x/ PIXEL_PER_METER, force.y/PIXEL_PER_METER);
