@@ -609,18 +609,18 @@ bool WSocket::ReceivePacket(void* &data, size_t& len)
   // Firstly, we read the size of the incoming packet
   r = ReceiveInt_NoLock(packet_size);
   if (!r) {
-    goto out_unlock;
+    goto err_no_free;
   }
 
   if (packet_size > MAX_PACKET_SIZE) {
     fprintf(stderr, "ERROR: network packet is too big\n");
-    goto out_unlock;
+    goto err_no_free;
   }
 
   packet = (char*)malloc(packet_size);
   if (!packet) {
-    fprintf(stderr, "ERROR: memory allocation failed\n");
-    goto out_unlock;
+    fprintf(stderr, "ERROR: memory allocation failed (%d bytes)\n", packet_size);
+    goto err_no_free;
   }
 
   r = ReceiveBuffer_NoLock(packet, packet_size);
@@ -651,6 +651,9 @@ bool WSocket::ReceivePacket(void* &data, size_t& len)
  error:
   free(packet);
   packet = NULL;
+
+ err_no_free:
+  r = false;
   goto out_unlock;
 }
 
