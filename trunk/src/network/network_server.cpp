@@ -24,6 +24,7 @@
 #include <WORMUX_socket.h>
 #include <SDL_thread.h>
 #include "include/action_handler.h"
+#include "map/maps_list.h"
 #include "network/distant_cpu.h"
 #include "tool/string_tools.h"
 
@@ -61,6 +62,56 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
+static inline void add_team_config_to_action(Action& a, std::map<std::string, ConfigTeam>::const_iterator &team)
+{
+  a.Push(team->first);
+  a.Push(team->second.player_name);
+  a.Push(int(team->second.nb_characters));
+}
+
+void NetworkServer::SendInitialGameInfo(DistantComputer* client)
+{
+  // we have to tell this new computer
+  // what teams / maps have already been selected
+
+  MSG_DEBUG("network", "Server: Sending map information");
+
+  Action a(Action::ACTION_GAME_INFO);
+  MapsList::GetInstance()->FillActionMenuSetMap(a);
+
+  MSG_DEBUG("network", "Server: Sending teams information");
+
+  // count the number of already selected teams
+  int nb_teams = 0;
+
+  std::list<DistantComputer*>::const_iterator it;
+  for (it = cpu.begin(); it != cpu.end(); it++) {
+    nb_teams += (*it)->GetPlayer().GetNbTeams();
+  }
+
+  nb_teams += GetPlayer().GetNbTeams();
+
+  a.Push(nb_teams);
+
+  // Teams infos of already connected computers
+  std::map<std::string, ConfigTeam>::const_iterator team;
+
+  for (it = cpu.begin(); it != cpu.end(); it++) {
+    for (team = (*it)->GetPlayer().GetTeams().begin();
+	 team != (*it)->GetPlayer().GetTeams().end();
+	 team++) {
+
+      add_team_config_to_action(a, team);
+    }
+  }
+
+  for (team = GetPlayer().GetTeams().begin(); team != GetPlayer().GetTeams().end(); team++) {
+    add_team_config_to_action(a, team);
+  }
+
+  SendActionToOne(a, client);
+}
+
 bool NetworkServer::HandShake(WSocket& client_socket, std::string& nickname) const
 {
   return WNet::Server_HandShake(client_socket, GetPassword(), nickname, false);
@@ -81,6 +132,7 @@ void NetworkServer::WaitActionSleep()
       socket_set->AddSocket(incoming);
 
       DistantComputer* client = new DistantComputer(incoming, nickname);
+      SendInitialGameInfo(client);
       cpu.push_back(client);
 
       Action *a = new Action(Action::ACTION_INFO_CLIENT_CONNECT);

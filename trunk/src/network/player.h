@@ -23,10 +23,10 @@
 #define NET_PLAYER_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
-#include "include/base.h"
-#include "team/team_config.h"
 #include <map>
 #include <string>
+#include "include/base.h"
+#include "team/team_config.h"
 //-----------------------------------------------------------------------------
 
 class ConfigTeam;
@@ -49,6 +49,7 @@ public:
   bool RemoveTeam(const std::string& team_id);
   bool UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_conf);
 
+  uint GetNbTeams() const;
   const std::map<const std::string, ConfigTeam>& GetTeams() const;
 };
 

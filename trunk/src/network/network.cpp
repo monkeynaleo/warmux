@@ -264,10 +264,11 @@ void Network::ReceiveActions()
 #endif
 
         Action* a = new Action(buffer, (*dst_cpu));
+        free(buffer);
+
 	MSG_DEBUG("network.traffic", "Received action %s",
 		  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 	HandleAction(a, *dst_cpu);
-        free(buffer);
 
         if (cpu.empty()) {
           if (IsClient()) {

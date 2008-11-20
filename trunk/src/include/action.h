@@ -56,13 +56,16 @@ public:
     // Chat message
     ACTION_CHAT_MESSAGE,
 
+    // Initial information about the game: game name, map, teams already selected, ...
+    ACTION_GAME_INFO,
+
     // Map selection in network menu
-    ACTION_MENU_SET_MAP,
+    ACTION_GAME_SET_MAP,
 
     // Teams selection in network menu
-    ACTION_MENU_ADD_TEAM,
-    ACTION_MENU_DEL_TEAM,
-    ACTION_MENU_UPDATE_TEAM,
+    ACTION_GAME_ADD_TEAM,
+    ACTION_GAME_DEL_TEAM,
+    ACTION_GAME_UPDATE_TEAM,
 
     // ########################################################
     // Character's move
@@ -153,7 +156,7 @@ public:
 
   void WriteToPacket(char* & packet, int & size) const;
 
-  bool IsEmpty() const { return var.empty(); };
+  bool IsEmpty() const;
 
   DistantComputer* GetCreator() const;
   int  GetSize() const;

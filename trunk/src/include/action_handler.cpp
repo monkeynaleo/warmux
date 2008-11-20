@@ -385,11 +385,10 @@ void Action_ChatMessage (Action *a)
   AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message);
 }
 
-void Action_Menu_SetMap (Action *a)
+void _Action_SelectMap(Action *a)
 {
-  FAIL_IF_GAMEMASTER(a);
-
   std::string map_name = a->PopString();
+
   if (map_name != "random") {
     MapsList::GetInstance()->SelectMapByName(map_name);
   } else {
@@ -410,7 +409,7 @@ void UpdateLocalNickname()
   Network::GetInstance()->GetPlayer().SetNickname(nickname);
 }
 
-void Action_Menu_AddTeam (Action *a)
+void _Action_AddTeam(Action *a)
 {
   ConfigTeam the_team;
 
@@ -437,7 +436,31 @@ void Action_Menu_AddTeam (Action *a)
   }
 }
 
-void Action_Menu_UpdateTeam (Action *a)
+void Action_Game_Info(Action *a)
+{
+  FAIL_IF_GAMEMASTER(a);
+
+  _Action_SelectMap(a);
+
+  uint nb_teams = a->PopInt();
+  for (uint i = 0; i < nb_teams; i++) {
+    _Action_AddTeam(a);
+  }
+}
+
+void Action_Game_SetMap (Action *a)
+{
+  FAIL_IF_GAMEMASTER(a);
+
+  _Action_SelectMap(a);
+}
+
+void Action_Game_AddTeam (Action *a)
+{
+  _Action_AddTeam(a);
+}
+
+void Action_Game_UpdateTeam (Action *a)
 {
   std::string old_team_id = a->PopString();
 
@@ -462,7 +485,7 @@ void Action_Menu_UpdateTeam (Action *a)
   }
 }
 
-void Action_Menu_DelTeam (Action *a)
+void Action_Game_DelTeam (Action *a)
 {
   std::string team_id = a->PopString();
 
@@ -899,13 +922,16 @@ ActionHandler::ActionHandler():
   // Chat message
   Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
 
+  // Initial information about the game: game name, map, teams already selected, ...
+  Register (Action::ACTION_GAME_INFO, "GAME_info", &Action_Game_Info);
+
   // Map selection in network menu
-  Register (Action::ACTION_MENU_SET_MAP, "MENU_set_map", &Action_Menu_SetMap);
+  Register (Action::ACTION_GAME_SET_MAP, "GAME_set_map", &Action_Game_SetMap);
 
   // Teams selection in network menu
-  Register (Action::ACTION_MENU_ADD_TEAM, "MENU_add_team", &Action_Menu_AddTeam);
-  Register (Action::ACTION_MENU_DEL_TEAM, "MENU_del_team", &Action_Menu_DelTeam);
-  Register (Action::ACTION_MENU_UPDATE_TEAM, "MENU_update_team", &Action_Menu_UpdateTeam);
+  Register (Action::ACTION_GAME_ADD_TEAM, "GAME_add_team", &Action_Game_AddTeam);
+  Register (Action::ACTION_GAME_DEL_TEAM, "GAME_del_team", &Action_Game_DelTeam);
+  Register (Action::ACTION_GAME_UPDATE_TEAM, "GAME_update_team", &Action_Game_UpdateTeam);
 
   // ########################################################
   // Character's move

@@ -152,7 +152,7 @@ void MapSelectionBox::ChangeMap(uint index)
       MapsList::GetInstance()->SelectMapByIndex(index);
     }
 
-    Action a(Action::ACTION_MENU_SET_MAP);
+    Action a(Action::ACTION_GAME_SET_MAP);
     MapsList::GetInstance()->FillActionMenuSetMap(a);
     Network::GetInstance()->SendActionToAll(a);
   } else {
