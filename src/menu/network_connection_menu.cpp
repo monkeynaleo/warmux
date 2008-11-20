@@ -342,7 +342,7 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
     goto out;
   }
 
-  conn = Network::GetInstance()->ServerStart(port, password);
+  conn = Network::ServerStart(port, game_name, password);
   if (conn != CONNECTED) {
     DisplayNetError(conn);
     goto out;
@@ -404,9 +404,9 @@ bool NetworkConnectionMenu::signal_ok()
   if (id == "TAB_server") {
     // Hosting your own server
     r = HostingServer(srv_port_number->GetText(),
-                        srv_game_name->GetText(),
-                        srv_game_pwd->GetPassword(),
-                        srv_internet_server->GetValue());
+		      srv_game_name->GetText(),
+		      srv_game_pwd->GetPassword(),
+		      srv_internet_server->GetValue());
     if (!r)
       goto out;
 
