@@ -24,14 +24,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Scuse à moins, mais y gaingne pas trouve terrain là : %s"
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i marmaille lé en train de jouer"
 msgstr[1] "%i marmailles lé en train de jouer"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -928,7 +928,7 @@ msgstr "Trape kado là pou ou !"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Venez sur #wormux-fr à irc.freenode.net pour trouver des adversaires.Vien a "
@@ -1405,7 +1405,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "La grenade la vole chemin avant lu pête."
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Hého, band'na y attendent a ou! alors, grouille oute calbasse !"
 
@@ -1423,7 +1423,7 @@ msgstr "Le serveur la envoy'e chié oute connexion"
 msgid "The server rejected the connection: wrong password!"
 msgstr "Le serveur la envoy'e chié oute connexion"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1488,7 +1488,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(illimitées)"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "pas de nom"
 
@@ -1501,14 +1501,14 @@ msgstr "Version"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Attend tééééé ! %i joueur lé pas encore prêt !"
 msgstr[1] "Attend à zot tééééé ! %i joueurs lé pas encore prêt !"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Nous y attende lo server. Alors reste trankil. La seule chose ou gaingne fé "
@@ -1527,6 +1527,11 @@ msgstr "Armes"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "Site internet : "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1562,11 +1567,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "Ou lé tout seul."
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "Ou lé sur vouloir jouer tout seul ?!"
 
@@ -1578,7 +1583,7 @@ msgstr "Ou na na besoin d'au moins un terrain correct..."
 msgid "You need at least two valid teams !"
 msgstr "Il faut au minimum deux équipes correctes !"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "Gaingne pas joué avant de prendre une équipe !"
 

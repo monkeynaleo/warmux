@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Banen %s blev ikke fundet :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Spiller %i er forbundet"
 msgstr[1] "Spillere %i er forbundet"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -924,7 +924,7 @@ msgstr "Det er en gave!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
 
@@ -1384,7 +1384,7 @@ msgstr "Spillet blev afbrudt fordi din forbindelse blev brudt."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten forlod slagmarken før den eksploderede"
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De andre venter på dig! Vågn op :-)"
 
@@ -1401,7 +1401,7 @@ msgstr "Serveren afslog forbindelsen."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serveren afslog forbindelsen: forkert kodeord!"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1467,7 +1467,7 @@ msgstr "Ukendt kommando"
 msgid "Unlimited"
 msgstr "Ubegrænset"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "Unavngivet"
 
@@ -1480,14 +1480,14 @@ msgstr "Version"
 msgid "Version verification failed because: %s\n"
 msgstr "Version-verifikation fejlede fordi: %s\n"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent! Spiller %i er ikke klar endnu!"
 msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
@@ -1505,6 +1505,11 @@ msgstr "Våben"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "Hjemmeside: "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1540,11 +1545,11 @@ msgstr "Ugyldigt banenavn!"
 msgid "Wrong team!"
 msgstr "Ugyldigt hold!"
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "Du er alene :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "Du er alene..."
 
@@ -1556,7 +1561,7 @@ msgstr "Du skal vælge mindst én gyldig bane!"
 msgid "You need at least two valid teams !"
 msgstr "Du skal vælge mindst to gyldige hold!"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille før du har valgt et hold!"
 

@@ -330,8 +330,11 @@ void WNet::FinalizeBatch(void* data, size_t len)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password,
-			    std::string& nickname, bool client_will_be_master)
+bool WNet::Server_HandShake(WSocket& client_socket,
+			    const std::string& game_name,
+			    const std::string& password,
+			    std::string& nickname,
+			    bool client_will_be_master)
 {
   bool ret = false;
   std::string version;
@@ -377,9 +380,12 @@ bool WNet::Server_HandShake(WSocket& client_socket, const std::string& password,
   if (!client_socket.ReceiveStr(nickname, 100))
     goto error;
 
+  // 5) Send gamename to the client
+  if (!client_socket.SendStr(game_name))
+    goto error;
+
   // Server: Handshake done successfully :)
   ret = true;
-
 
  error:
   client_socket.RemoveFromTmpSocketSet();

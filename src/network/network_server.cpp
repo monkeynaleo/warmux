@@ -39,8 +39,8 @@
 
 //-----------------------------------------------------------------------------
 
-NetworkServer::NetworkServer(const std::string& password) :
-  Network(password),
+NetworkServer::NetworkServer(const std::string& game_name, const std::string& password) :
+  Network(game_name, password),
   port(0)
 {
 #ifdef LOG_NETWORK
@@ -114,7 +114,7 @@ void NetworkServer::SendInitialGameInfo(DistantComputer* client)
 
 bool NetworkServer::HandShake(WSocket& client_socket, std::string& nickname) const
 {
-  return WNet::Server_HandShake(client_socket, GetPassword(), nickname, false);
+  return WNet::Server_HandShake(client_socket, GetGameName(), GetPassword(), nickname, false);
 }
 
 void NetworkServer::WaitActionSleep()
@@ -156,7 +156,7 @@ void NetworkServer::RejectIncoming()
 
 //-----------------------------------------------------------------------------
 
-connection_state_t NetworkServer::ServerStart(const std::string &net_port, uint _max_nb_players)
+connection_state_t NetworkServer::StartServer(const std::string &net_port, uint _max_nb_players)
 {
   WNet::Init();
 

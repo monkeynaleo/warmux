@@ -22,14 +22,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i Spieler verbunden"
 msgstr[1] "%i Spieler verbunden"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -948,7 +948,7 @@ msgstr "Es ist ein Geschenk!"
 msgid "Jetpack"
 msgstr "Düsenrucksack"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Komm nach #wormux auf irc.freenode.net um Gegner zu finden."
 
@@ -1424,7 +1424,7 @@ msgid "The grenade left the battlefield before exploding"
 msgstr ""
 "Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Die Anderen warten auf dich! Aufwachen :-)"
 
@@ -1441,7 +1441,7 @@ msgstr "Der Server hat die Verbindung zurückgesetzt."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Der Server hat die Verbindung nicht akzeptiert: Falsches Passwort!"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1507,7 +1507,7 @@ msgstr "Unbekannter Befehl"
 msgid "Unlimited"
 msgstr "unbegrenzt"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "Namenlos"
 
@@ -1520,14 +1520,14 @@ msgstr "Version"
 msgid "Version verification failed because: %s\n"
 msgstr "Die Überprüfung der Version schlug fehl, da: %s\n"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
 msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Auf Server warten. Du kannst abbrechen oder chatten!"
 
@@ -1544,6 +1544,11 @@ msgstr "Waffen"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "Webseite: "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1579,11 +1584,11 @@ msgstr "Falscher Kartenname!"
 msgid "Wrong team!"
 msgstr "Falsches Team!"
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "Du bist alleine :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "Du bist alleine..."
 
@@ -1595,7 +1600,7 @@ msgstr "Du brauchst mindestens eine gültige Karte!"
 msgid "You need at least two valid teams !"
 msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kannst nicht spielen bevor du eine Mannschaft gewählt hast!"
 

@@ -20,14 +20,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! המפה %s לא נמצאה :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "שחקן %i מחובר"
 msgstr[1] "%i שחקנים מחוברים"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -911,7 +911,7 @@ msgstr "קיבלת מתנה!"
 msgid "Jetpack"
 msgstr "רתמת טיסה"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "הצטרף אל #wormux ב-irc.freenode.net כדי למצוא יריבים."
 
@@ -1381,7 +1381,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "הרימון יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "כולם מחכים רק לך! זמן לקום :-)"
 
@@ -1399,7 +1399,7 @@ msgstr "השרת סירב לבקשת החיבור."
 msgid "The server rejected the connection: wrong password!"
 msgstr "השרת סירב לבקשת החיבור."
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1466,7 +1466,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(ללא הגבלה)"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "ללא שם"
 
@@ -1479,14 +1479,14 @@ msgstr "גירסה"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "רגע! שחקן %i אינו מוכן עדיין!"
 msgstr[1] "רגע! %i שחקנים אינם מוכנים עדיין!"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "ממתין לשרת, כרגע תוכל רק לבטל או להשתמש בצ'אט!"
 
@@ -1503,6 +1503,11 @@ msgstr "כלי נשק"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "אתר: "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1538,11 +1543,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "אתה לבדך :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "אתה לבדך..."
 
@@ -1554,7 +1559,7 @@ msgstr "אתה זקוק למפה תקינה אחת לפחות!"
 msgid "You need at least two valid teams !"
 msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 

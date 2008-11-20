@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas:-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i ludanto konektiĝis"
 msgstr[1] "%i ludantoj konektiĝis"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -916,7 +916,7 @@ msgstr "Tio estas donaco!"
 msgid "Jetpack"
 msgstr "Jetpako"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Aliĝu #wormux en irc.freenode.net por trovi oponantojn."
 
@@ -1375,7 +1375,7 @@ msgstr "La ludo ĉesis pro ke, vi estis malkonektita."
 msgid "The grenade left the battlefield before exploding"
 msgstr "La grenado foriris de la batalejo antaŭ ol explodi"
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "La alioj estas atendando vin! Vekiĝu:-)"
 
@@ -1392,7 +1392,7 @@ msgstr "La servilo forĵetis la konekton."
 msgid "The server rejected the connection: wrong password!"
 msgstr "La servilo forĵetis la konekton pro malbona pasvorto!"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1457,7 +1457,7 @@ msgstr "Nekonata komando"
 msgid "Unlimited"
 msgstr "(senlimaj)"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "Sennoma"
 
@@ -1470,14 +1470,14 @@ msgstr "Versio"
 msgid "Version verification failed because: %s\n"
 msgstr "Versiokontrolo fiaskis pro: %s\n"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Atendu! %i ludanto ankoraŭ ne pretas!"
 msgstr[1] "Atendu! %i ludantoj ankoraŭ ne pretas!"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Atende servilon, vi povas nur rezigni aŭ babili!"
 
@@ -1494,6 +1494,11 @@ msgstr "Armiloj"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "TTT-ejo: "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1529,11 +1534,11 @@ msgstr "Malbona mapnomo!"
 msgid "Wrong team!"
 msgstr "Malbona teamo!"
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "Vi estas sola:-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "Vi estas sola..."
 
@@ -1545,7 +1550,7 @@ msgstr "Vi bezonas almenaŭ unu taŭgan mapon!"
 msgid "You need at least two valid teams !"
 msgstr "Vi bezonas almenaŭ du teamojn!"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon!"
 

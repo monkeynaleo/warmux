@@ -23,14 +23,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Kaart %s niet gevonden :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i speler maakte verbinding"
 msgstr[1] "%i spelers maakten verbinding"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -943,7 +943,7 @@ msgstr "Het is een cadeau!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Bezoek #wormux op irc.freenode.net om tegenstanders te vinden."
 
@@ -1404,7 +1404,7 @@ msgstr "Het spel is onderbroken omdat uw verbinding verbroken is."
 msgid "The grenade left the battlefield before exploding"
 msgstr "De granaat heeft het slagveld verlaten alvorens te ontploffen"
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De anderen wachten op u! Wakker worden :-)"
 
@@ -1421,7 +1421,7 @@ msgstr "De server weigerde de verbinding."
 msgid "The server rejected the connection: wrong password!"
 msgstr "De server weigerde de verbinding. Verkeerd wachtwoord!"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1487,7 +1487,7 @@ msgstr "Onbekend commando"
 msgid "Unlimited"
 msgstr "Onbegrensd"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "Naamloos"
 
@@ -1500,14 +1500,14 @@ msgstr "Versie"
 msgid "Version verification failed because: %s\n"
 msgstr "Versie verificatie mislukt omdat: %s\n"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Wacht! %i speler is nog niet klaar!"
 msgstr[1] "Wacht! %i spelers zijn nog niet klaar!"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Wachten op de server, het enige wat u nu kunt doen is annuleren of chatten!"
@@ -1525,6 +1525,11 @@ msgstr "Wapens"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "Website: "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1560,11 +1565,11 @@ msgstr "Verkeerde kaartnaam!"
 msgid "Wrong team!"
 msgstr "Verkeerd team!"
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "U bent alleen :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "U bent alleen..."
 
@@ -1576,7 +1581,7 @@ msgstr "U heeft minimaal één geldige kaart nodig !"
 msgid "You need at least two valid teams !"
 msgstr "U heeft minimaal twee geldige teams nodig !"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd !"
 
