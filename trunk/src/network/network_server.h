@@ -32,6 +32,8 @@ class NetworkServer : public Network
   WSocket server_socket; // Wait for incoming connections on this socket
   int port; // store listening port
 
+  void ForwardAction(Action* a, DistantComputer* sender) const;
+
 protected:
   bool HandShake(WSocket& client_socket, std::string& nickname) const;
   virtual void HandleAction(Action* a, DistantComputer* sender) const;
