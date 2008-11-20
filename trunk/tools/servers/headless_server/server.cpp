@@ -26,8 +26,9 @@ GameServer::GameServer() :
 {
 }
 
-bool GameServer::ServerStart(uint _port, uint max_nb_clients, std::string& _password)
+bool GameServer::ServerStart(uint _port, uint max_nb_clients, const std::string& _game_name, std::string& _password)
 {
+  game_name = _game_name;
   password = _password;
   port = _port;
 
@@ -54,7 +55,7 @@ bool GameServer::HandShake(WSocket& client_socket, std::string& nickname)
     client_will_be_master = true;
 
   DPRINT(INFO, "%s will be master ? %d", client_socket.GetAddress().c_str(), client_will_be_master);
-  return WNet::Server_HandShake(client_socket, password, nickname, client_will_be_master);
+  return WNet::Server_HandShake(client_socket, game_name, password, nickname, client_will_be_master);
 }
 
 void GameServer::RejectIncoming()
