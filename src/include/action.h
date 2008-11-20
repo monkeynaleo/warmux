@@ -56,7 +56,7 @@ public:
     // Chat message
     ACTION_CHAT_MESSAGE,
 
-    // Initial information about the game: game name, map, teams already selected, ...
+    // Initial information about the game: map, teams already selected, ...
     ACTION_GAME_INFO,
 
     // Map selection in network menu
