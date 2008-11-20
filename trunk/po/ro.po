@@ -27,7 +27,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -35,7 +35,7 @@ msgstr[0] "%i jucător conectat"
 msgstr[1] "%i jucători conectați"
 msgstr[2] "%i de jucători conectați"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -1119,7 +1119,7 @@ msgid "Jetpack"
 msgstr "Propulsor personal"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Intrați pe #wormux în rețeaua irc.freenode.net pentru a găsi parteneri de "
@@ -1586,7 +1586,7 @@ msgstr "Jocul s-a întrerupt pentru că v-ați deconectat."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ceilalți te-așteaptă! Trezește-te :-)"
 
@@ -1603,7 +1603,7 @@ msgstr "Serverul a refuzat conexiunea."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serverul a refuzat conexiunea: parolă greșită!"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1670,7 +1670,7 @@ msgstr "Comandă necunoscută"
 msgid "Unlimited"
 msgstr "nelimitat"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "Fără nume"
 
@@ -1683,7 +1683,7 @@ msgstr "Versiunea"
 msgid "Version verification failed because: %s\n"
 msgstr "Verificare versiunii a eșuat pentru că: %s\n"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1691,7 +1691,7 @@ msgstr[0] "Așteaptă! %i jucător nu e gata încă!"
 msgstr[1] "Așteaptă! %i jucători nu sunt gata încă!"
 msgstr[2] "Așteaptă! %i de jucători nu sunt gata încă!"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Se așteaptă serverul, tot ce puteți face e să anulați sau să vorbiți!"
 
@@ -1708,6 +1708,11 @@ msgstr "Arme"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "Saitul web: "
+
+#: src/menu/network_menu.cpp:156
+#, fuzzy, c-format
+msgid "Welcome to %s!"
+msgstr "Selectați echipele:"
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1744,11 +1749,11 @@ msgstr "Numele hărții e greșit!"
 msgid "Wrong team!"
 msgstr "Echipa e greșită!"
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "Nu mai e nimeni în afară de tine :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "Nu mai e nimeni altcineva..."
 
@@ -1760,7 +1765,7 @@ msgstr "Aveți nevoie de cel puțin o hartă validă !"
 msgid "You need at least two valid teams !"
 msgstr "Aveți nevoie de cel puțin două echipe valide !"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 
@@ -2247,10 +2252,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 
 #~ msgid "Remote"
 #~ msgstr "la distanță"
-
-#, fuzzy
-#~ msgid "Select %s"
-#~ msgstr "Selectați echipele:"
 
 #~ msgid "Select the world:"
 #~ msgstr "Selectați lumea:"

@@ -42,7 +42,7 @@
 #endif
 //-----------------------------------------------------------------------------
 
-NetworkClient::NetworkClient(const std::string& password) : Network(password)
+NetworkClient::NetworkClient(const std::string& password) : Network("-", password)
 {
 #ifdef LOG_NETWORK
   fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
@@ -78,6 +78,7 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
   int ack;
   connection_state_t ret = CONN_REJECTED;
   std::string version;
+  std::string game_name;
 
   MSG_DEBUG("network", "Client: Handshake !");
 
@@ -132,6 +133,12 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
   // 4) Send my nickname
   if (!server_socket.SendStr(GetPlayer().GetNickname()))
     goto error;
+
+  // Receive the game name
+  if (!server_socket.ReceiveStr(game_name, 100))
+    goto error;
+
+  SetGameName(game_name);
 
   MSG_DEBUG("network", "Client: Handshake done successfully :)");
   ret = CONNECTED;

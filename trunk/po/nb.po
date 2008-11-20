@@ -20,14 +20,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! %s-kartet ble ikke funnet :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i spiller tilkoblet"
 msgstr[1] "%i spillere tilkoblet"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -920,7 +920,7 @@ msgstr "Det er en gave !"
 msgid "Jetpack"
 msgstr "Rakettryggsekk"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Oppsøk #wormux-fr på  irc.freenode.net for å finne motstandere."
 
@@ -1383,7 +1383,7 @@ msgstr "Spillet ble avbrutt fordi du ble frakoblet."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten forsvant fra kampplassen uten å eksplodere."
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De andre venter på deg, Våkn opp :-)"
 
@@ -1400,7 +1400,7 @@ msgstr "Tjeneren nektet tilkoblingen"
 msgid "The server rejected the connection: wrong password!"
 msgstr "Tjeneren nektet tilkoblingen: feil passord!"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1465,7 +1465,7 @@ msgstr "Ukjent kommando"
 msgid "Unlimited"
 msgstr "(uendelig)"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "Uten navn"
 
@@ -1478,14 +1478,14 @@ msgstr "Versjon"
 msgid "Version verification failed because: %s\n"
 msgstr "Versjonsjekken feilet fordi: %s\n"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent ! %i spiller er ikke klar enda !"
 msgstr[1] "Vent ! %i spillere er ikke klare enda !"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Venter på server, alt du kan gjøre er å avbryte eller chatte"
 
@@ -1502,6 +1502,11 @@ msgstr "Våpen"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "Webside : "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1537,11 +1542,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "Du er alene :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "Du er alene..."
 
@@ -1553,7 +1558,7 @@ msgstr "Du må ha i hvert fall ett godkjent kart !"
 msgid "You need at least two valid teams !"
 msgstr "Du må ha minst to godkjente lag!"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille uten å ha valgt et lag"
 

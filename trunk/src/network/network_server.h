@@ -40,14 +40,14 @@ protected:
   virtual void WaitActionSleep();
 
 public:
-  NetworkServer(const std::string& password);
+  NetworkServer(const std::string& game_name, const std::string& password);
   ~NetworkServer();
 
   //virtual const bool IsConnected() const { return true; }
   virtual bool IsServer() const { return true; }
 
   // Serveur specific methods
-  connection_state_t ServerStart(const std::string &port, uint max_nb_players);
+  connection_state_t StartServer(const std::string &port, uint max_nb_players);
 
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);

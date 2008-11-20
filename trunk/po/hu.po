@@ -15,14 +15,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "A(z) %s pálya nem található"
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i játékos lépett be"
 msgstr[1] "%i játékos lépett be"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -916,7 +916,7 @@ msgstr "Ez egy ajándék!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Lépj be a #wormux szobába az irc.freenode.net-en, hogy ellenfeleket találj."
@@ -1378,7 +1378,7 @@ msgstr "Megszakadt a játék, mert kijelentkeztél."
 msgid "The grenade left the battlefield before exploding"
 msgstr "A gránát elhagyta a csatateret robbanás elõtt"
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "A többiek várnak rád! Ébresztõ :-)"
 
@@ -1395,7 +1395,7 @@ msgstr "A szerver elutasította a kapcsolatot."
 msgid "The server rejected the connection: wrong password!"
 msgstr "A szerver elutasította a kapcsolatot: hibás jelszó!"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1461,7 +1461,7 @@ msgstr "Ismeretlen parancs"
 msgid "Unlimited"
 msgstr "Korlátlan"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "Névtelen"
 
@@ -1474,14 +1474,14 @@ msgstr "Verzió"
 msgid "Version verification failed because: %s\n"
 msgstr "Verzió-ellenõrzés sikertelen: %s\n"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Várj! %i játékos még nem áll készen!"
 msgstr[1] "Várj! %i játékos még nem áll készen!"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Várakozás a szerverre, visszaléphetsz vagy csetelhetsz!"
 
@@ -1498,6 +1498,11 @@ msgstr "Fegyverek"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "Honlap: "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1533,11 +1538,11 @@ msgstr "Hibás pályanév!"
 msgid "Wrong team!"
 msgstr "Hibás csapat!"
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "Egyedül vagy :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "Egyedül vagy..."
 
@@ -1549,7 +1554,7 @@ msgstr "Választanod kell legalább egy pályát!"
 msgid "You need at least two valid teams !"
 msgstr "Választanod kell legalább két csapatot!"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nem tudsz játszani csapatválasztás nélkül!"
 

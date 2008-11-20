@@ -150,7 +150,12 @@ NetworkMenu::NetworkMenu() :
 
   msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, OPTIONS_BOX_H),
                         Font::FONT_SMALL, Font::FONT_NORMAL);
-  msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
+  if (Network::GetInstance()->IsGameMaster()) {
+    msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."), c_red);
+  } else {
+    msg_box->NewMessage(Format(_("Welcome to %s!"), Network::GetInstance()->GetGameName().c_str()), c_red);
+  }
+
   msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
                        options_box->GetPositionY());
 

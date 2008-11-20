@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! 地圖 %s未找到 :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i 玩家已連線"
 msgstr[1] "%i 玩家均已連線"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -911,7 +911,7 @@ msgid "Jetpack"
 msgstr "噴射包"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "加入#wormux IRC irc.freenode.net 找對手"
 
@@ -1379,7 +1379,7 @@ msgstr "您斷線了."
 msgid "The grenade left the battlefield before exploding"
 msgstr "手榴彈離開戰場前發生爆炸"
 
-#: src/menu/network_menu.cpp:337
+#: src/menu/network_menu.cpp:342
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "別人在等你! 快醒吧:-)"
 
@@ -1396,7 +1396,7 @@ msgstr "伺服器拒絕"
 msgid "The server rejected the connection: wrong password!"
 msgstr "伺服器拒絕: 密碼錯了."
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:247
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1463,7 +1463,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(無限的)"
 
-#: src/network/network.cpp:174
+#: src/network/network.cpp:175
 msgid "Unnamed"
 msgstr "未命名"
 
@@ -1476,14 +1476,14 @@ msgstr "版本"
 msgid "Version verification failed because: %s\n"
 msgstr "版本改變失敗原因: %s\n"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "請等待! %i沒准備好!"
 msgstr[1] "請等待! %i沒准備好!"
 
-#: src/menu/network_menu.cpp:404
+#: src/menu/network_menu.cpp:409
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "等着接受服務吧, 現在先聊天 !"
 
@@ -1500,6 +1500,11 @@ msgstr "武器"
 #: src/main.cpp:293
 msgid "Website: "
 msgstr "網站Website: "
+
+#: src/menu/network_menu.cpp:156
+#, c-format
+msgid "Welcome to %s!"
+msgstr ""
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1536,11 +1541,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:340
+#: src/menu/network_menu.cpp:345
 msgid "You are alone :-/"
 msgstr "你是孤單的 :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "你是孤單的..."
 
@@ -1552,7 +1557,7 @@ msgstr "你需要可用的地圖!"
 msgid "You need at least two valid teams !"
 msgstr "至少有2組才能開始 !"
 
-#: src/menu/network_menu.cpp:230
+#: src/menu/network_menu.cpp:235
 msgid "You won't be able to play before selecting a team !"
 msgstr "沒有隊伍，就不會有戰斗!"
 

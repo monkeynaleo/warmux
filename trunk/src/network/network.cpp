@@ -123,7 +123,8 @@ NetworkServer * Network::GetInstanceServer()
   return (NetworkServer*)singleton;
 }
 
-Network::Network(const std::string& passwd):
+Network::Network(const std::string& _game_name, const std::string& passwd) :
+  game_name(_game_name),
   password(passwd),
   turn_master_player(false),
   game_master_player(false),
@@ -236,8 +237,7 @@ void Network::ReceiveActions()
     {
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
-
-    	  if (!(*dst_cpu)->ReceiveDatas(reinterpret_cast<void* &>(buffer), packet_size)) {
+	if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
 
 	  // An error occured during the reception
           dst_cpu = CloseConnection(dst_cpu);
@@ -424,9 +424,9 @@ connection_state_t Network::ClientStart(const std::string& host,
 //-----------------------------------------------------------------------------
 
 // Static method
-connection_state_t Network::ServerStart(const std::string& port, const std::string& password)
+connection_state_t Network::ServerStart(const std::string& port, const std::string& game_name, const std::string& password)
 {
-  NetworkServer* net = new NetworkServer(password);
+  NetworkServer* net = new NetworkServer(game_name, password);
   MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkServer'\n", net);
 
   // replace current singleton
@@ -434,7 +434,7 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
   singleton = net;
 
   // try to connect
-  const connection_state_t error = net->ServerStart(port, GameMode::GetInstance()->max_teams);
+  const connection_state_t error = net->StartServer(port, GameMode::GetInstance()->max_teams);
 
   if (error != CONNECTED) {
     // revert change
@@ -487,9 +487,29 @@ bool Network::IsTurnMaster() const
   return turn_master_player;
 }
 
+bool Network::IsGameMaster() const
+{
+  return game_master_player;
+}
+
 Player& Network::GetPlayer()
 {
   return player;
+}
+
+void Network::SetGameName(const std::string& _game_name)
+{
+  game_name = _game_name;
+}
+
+const std::string& Network::GetGameName() const
+{
+  return game_name;
+}
+
+const std::string& Network::GetPassword() const
+{
+  return password;
 }
 
 //-----------------------------------------------------------------------------

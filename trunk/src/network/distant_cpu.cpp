@@ -66,7 +66,7 @@ bool DistantComputer::SocketReady() const
   return sock->IsReady();
 }
 
-bool DistantComputer::ReceiveDatas(void* & data, size_t & len)
+bool DistantComputer::ReceiveData(void* & data, size_t & len)
 {
   return sock->ReceivePacket(data, len);
 }

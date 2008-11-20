@@ -81,23 +81,25 @@ public:
     } network_state_t;
 
 private:
-
+  /* if you need that, implement it (correctly)*/
   Network(const Network&);
   const Network& operator=(const Network&);
+  /*********************************************/
   friend class DistantComputer;
-
-  std::string password;
 
   static int num_objects;
 
-  bool turn_master_player;
+  std::string game_name;
+  std::string password;
+
   Player player;
+  bool turn_master_player;
 
 protected:
   bool game_master_player;
   network_state_t state;
 
-  Network(const std::string& password); // pattern singleton
+  Network(const std::string& game_name, const std::string& password); // pattern singleton
 
   WSocketSet* socket_set;
 
@@ -112,6 +114,7 @@ protected:
 
   void DisconnectNetwork();
 
+  void SetGameName(const std::string& game_name);
 public:
   NetworkMenu* network_menu;
 
@@ -123,16 +126,25 @@ public:
   static Network* GetInstance();
   static NetworkServer* GetInstanceServer(); // WARNING: return NULL if not server!!
 
-  static void Disconnect();
+  // Start a client
+  static connection_state_t ClientStart(const std::string &host, const std::string &port,
+					const std::string& password);
 
+  // Start a server
+  static connection_state_t ServerStart(const std::string &port,
+					const std::string& game_name,
+					const std::string& password);
+
+  static void Disconnect();
   static bool IsConnected();
+
   virtual bool IsLocal() const { return false; }
   virtual bool IsServer() const { return false; }
   virtual bool IsClient() const { return false; }
 
-  virtual bool IsGameMaster() const { return game_master_player; }
-
-  const std::string& GetPassword() const { return password; }
+  bool IsGameMaster() const;
+  const std::string& GetGameName() const;
+  const std::string& GetPassword() const;
   Player& GetPlayer();
 
   std::string GetDefaultNickname() const;
@@ -142,15 +154,9 @@ public:
   void SendActionToOne(const Action& action, DistantComputer* client) const;
   void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
 
+  void ReceiveActions();
+
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
-
-  // Start a client
-  static connection_state_t ClientStart(const std::string &host, const std::string &port,
-					const std::string& password);
-
-  // Start a server
-  static connection_state_t ServerStart(const std::string &port,
-					const std::string& password);
 
   // Manage network state
   void SetState(Network::network_state_t state);
@@ -159,8 +165,6 @@ public:
 
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
-
-  void ReceiveActions();
 
   uint GetNbConnectedPlayers() const;
   uint GetNbInitializedPlayers() const;

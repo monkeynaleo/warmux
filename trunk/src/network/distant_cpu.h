@@ -58,7 +58,7 @@ public:
   ~DistantComputer();
 
   bool SocketReady() const;
-  bool ReceiveDatas(void* & data, size_t& len);
+  bool ReceiveData(void* & data, size_t& len);
   bool SendData(const void* data, size_t len);
 
   std::string GetAddress() const;
