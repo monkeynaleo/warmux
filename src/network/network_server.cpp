@@ -53,9 +53,8 @@ NetworkServer::~NetworkServer()
 {
 }
 
-void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
+void NetworkServer::ForwardAction(Action* a, DistantComputer* sender) const
 {
-  // Repeat the packet to other clients
   char* packet;
   int packet_size;
   a->WriteToPacket(packet, packet_size);
@@ -63,11 +62,17 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
        client != cpu.end();
        client++)
-    if (*client != sender)
-      {
+    if (*client != sender) {
         (*client)->SendDatas(packet, packet_size);
       }
+
   free(packet);
+}
+
+void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
+{
+  // Repeat the packet to other clients
+  ForwardAction(a, sender);
 
   ActionHandler::GetInstance()->NewAction(a, false);
 }
