@@ -19,31 +19,31 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 # Ελληνικά
-#: src/map/maps_list.cpp:324
+#: src/map/maps_list.cpp:325
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Ο χάρτης %s δεν βρέθηκε :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:312
+#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:321
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i παίκτης συνδέθηκε"
 msgstr[1] "%i παίκτες συνδέθηκαν"
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:320
+#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:329
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "%i παίκτης έτοιμος"
 msgstr[1] "%i παίκτες έτοιμοι"
 
-#: src/map/maps_list.cpp:114
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> γνωστός και ως %s από %s"
 
-#: src/map/maps_list.cpp:121
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> από %s"
@@ -258,7 +258,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Η ομάδα %s κέρδισε %u εκρηκτική μπάλα!"
 msgstr[1] "Η ομάδα %s κέρδισε %u εκρηκτικές μπάλες!"
 
-#: src/weapon/grapple.cpp:815
+#: src/weapon/grapple.cpp:816
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -518,19 +518,19 @@ msgstr "Μπάλα Αναπήδησης"
 msgid "Bye bye tux..."
 msgstr "Άντε γεια tux..."
 
-#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:496
-#: src/team/teams_list.cpp:527 src/team/teams_list.cpp:536
-#: src/team/teams_list.cpp:542 src/team/teams_list.cpp:604
+#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:506
+#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
+#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Αδύνατον να βρεθεί η ομάδα %s!"
 
-#: src/team/teams_list.cpp:160
+#: src/team/teams_list.cpp:170
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τις προσωπικές ομάδες (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τις ομάδες (%s)!"
@@ -619,6 +619,11 @@ msgstr "Συνδεθείτε σε παιχνίδι"
 msgid "Connected !"
 msgstr "Συνδεδεμένος!"
 
+#: src/network/admin_commands.cpp:64
+#, fuzzy
+msgid "Connected players: "
+msgstr "Συνδεδεμένος!"
+
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Κατασκευή"
@@ -628,12 +633,12 @@ msgstr "Κατασκευή"
 msgid "Controlled by: "
 msgstr "Ελεγχόμενος από:"
 
-#: src/network/download.cpp:79
+#: src/network/download.cpp:78
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Δεν μπόρεσε να πάρει την τελευταία έκδοση από τον %s"
 
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55 src/network/download.cpp:87
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Αδύνατον να ανοίξει το αρχείο %s"
@@ -688,12 +693,12 @@ msgstr "Ένταση ηχητικών εφέ"
 msgid "Energy"
 msgstr "Ενέργεια"
 
-#: src/include/action_handler.cpp:231
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Λάθος αρχικοποίησης δικτύου: Ο πελάτης %s δεν συμφωνεί μαζί σου!! - %s"
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:124
+#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Λάθος στη φόρτωση της ομάδας:"
 
@@ -901,7 +906,7 @@ msgstr ""
 "Χρήση: αριστερό κλικ στο στόχο\n"
 "ένα από τα πολεμοφόδια ανά γύρο"
 
-#: src/game/game_classic.cpp:229
+#: src/game/game_classic.cpp:210
 msgid "Hurry up, you are too slow !!"
 msgstr "Κάνε γρήγορα, είσαι πολύ αργός!!"
 
@@ -930,19 +935,19 @@ msgstr ""
 "Πυρ: κράτησε το πλήκτρο space μέχρι την επιθυμητή δύναμη\n"
 "ένα από τα πυρομαχικά ανά γύρο"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:155
 msgid "Initialisation"
 msgstr "Αρχικοποίηση"
 
-#: src/game/game_init.cpp:106
+#: src/game/game_init.cpp:108
 msgid "Initialise map"
 msgstr "Αρχικοποίηση χάρτη"
 
-#: src/game/game_init.cpp:140
+#: src/game/game_init.cpp:142
 msgid "Initialise sounds"
 msgstr "Αρχικοποίηση ήχων"
 
-#: src/game/game_init.cpp:116
+#: src/game/game_init.cpp:118
 msgid "Initialise teams"
 msgstr "Αρχικοποίηση ομάδων"
 
@@ -955,7 +960,7 @@ msgid "Jetpack"
 msgstr "Σακίδιο Τζετ"
 
 # Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires.
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:152
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Μπείτε στο #wormux-fr στο irc.freenode.net για να βρείτε αντίπαλους."
 
@@ -975,11 +980,15 @@ msgstr "Διώχνει τους παίκτες με το όνομα <ψευδώ�
 msgid "Language"
 msgstr "Γλώσσα"
 
-#: src/map/maps_list.cpp:226
+#: src/network/admin_commands.cpp:34
+msgid "List the connected players"
+msgstr ""
+
+#: src/map/maps_list.cpp:227
 msgid "Load maps:"
 msgstr "Φόρτωση χαρτών:"
 
-#: src/team/teams_list.cpp:136
+#: src/team/teams_list.cpp:146
 msgid "Load teams:"
 msgstr "Φόρτωση ομάδων:"
 
@@ -1006,15 +1015,20 @@ msgstr "Χάρτης"
 msgid "Map %s, a creation of: "
 msgstr "Χάρτης %s. Δημιουργός:"
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Χάρτες"
+
+#: src/menu/network_menu.cpp:116
+#, fuzzy
+msgid "Master mode"
+msgstr "Κατάσταση παιχνιδιού"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
 msgstr "Μέγιστη ενέργεια"
 
-#: src/menu/network_menu.cpp:116
+#: src/menu/network_menu.cpp:121
 msgid "Max number of players:"
 msgstr "Μέγιστο πλήθος παικτών:"
 
@@ -1088,6 +1102,11 @@ msgstr "Προειδοποίηση νέου παίκτη;"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Κανένα στοιχείο <%s> δεν βρέθηκε στο αρχείο διαμόρφωσης XML!"
 
+#: src/network/admin_commands.cpp:60
+#, fuzzy
+msgid "No player connected"
+msgstr "%i παίκτης συνδέθηκε"
+
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
 msgstr "Κανένας!"
@@ -1138,7 +1157,7 @@ msgstr "Παύση"
 msgid "Play"
 msgstr "Παίξε"
 
-#: src/menu/network_menu.cpp:131
+#: src/menu/network_menu.cpp:140
 msgid "Play several times"
 msgstr "Παίξτε πολλές φορές"
 
@@ -1235,8 +1254,7 @@ msgstr "Διεύθυνση διακομιστή:"
 msgid "Server available on Internet"
 msgstr "Διακομιστής διαθέσιμος στο διαδίκτυο"
 
-#. Server Mode
-#: src/menu/network_menu.cpp:113
+#: src/menu/network_menu.cpp:114
 msgid "Server mode"
 msgstr "Κατάσταση διακομιστή"
 
@@ -1310,7 +1328,7 @@ msgid "Sound frequency"
 msgstr "Συχνότητα ήχου"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:143
+#: src/game/game_init.cpp:145
 msgid "Sounds"
 msgstr "Ηχητικές επιλογές"
 
@@ -1346,7 +1364,7 @@ msgstr "Γράφημα ομάδων"
 msgid "Team stats"
 msgstr "Στατιστικά ομάδας"
 
-#: src/game/game_init.cpp:118 src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:120 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Ομάδες"
 
@@ -1387,7 +1405,7 @@ msgstr "Η αυτόματη ρουκέτα έφυγε για άλλους κόσ
 msgid "The ball left the battlefield before exploding"
 msgstr "Η μπάλα αναπήδησης εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
-#: src/network/network_client.cpp:97
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1416,7 +1434,7 @@ msgid "The grenade left the battlefield before exploding"
 msgstr "Η χειροβομβίδα εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
 # Les autres t'attendent ! Réveille-toi :-)
-#: src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:336
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Εσένα θα περιμένουμε; Ξύπνα :-)"
 
@@ -1437,7 +1455,7 @@ msgid "The server rejected the connection: wrong password!"
 msgstr "Ο διακομιστής απέρριψε τη σύνδεση: λάθος κωδικός!"
 
 # Il n'y a que %i équipe.
-#: src/menu/network_menu.cpp:232
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1481,12 +1499,12 @@ msgstr "Εργαλεία"
 msgid "Unable to contact host."
 msgstr "Αδύνατη η σύνδεση στο διακομιστή."
 
-#: src/map/maps_list.cpp:236
+#: src/map/maps_list.cpp:237
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τους χάρτες (%s)!"
 
-#: src/map/maps_list.cpp:248
+#: src/map/maps_list.cpp:249
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τους προσωπικούς χάρτες (%s)!"
@@ -1495,7 +1513,7 @@ msgstr "Αδύνατον να ανοίξει ο φάκελος με τους π�
 msgid "Unable to use this port!"
 msgstr "Αδύνατον να χρησιμοποιηθεί αυτή η θύρα!"
 
-#: src/network/admin_commands.cpp:66
+#: src/network/admin_commands.cpp:84
 msgid "Unknown command"
 msgstr "Άγνωστη εντολή"
 
@@ -1503,7 +1521,7 @@ msgstr "Άγνωστη εντολή"
 msgid "Unlimited"
 msgstr "Απεριόριστο"
 
-#: src/network/network.cpp:137
+#: src/network/network.cpp:174
 msgid "Unnamed"
 msgstr "Ανώνυμος"
 
@@ -1516,7 +1534,7 @@ msgstr "Έκδοση"
 msgid "Version verification failed because: %s\n"
 msgstr "Επαλήθευση έκδοσης απέτυχε διότι: %s\n"
 
-#: src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1524,7 +1542,7 @@ msgstr[0] "Περίμενε! %i παίκτης δεν είναι έτοιμος 
 msgstr[1] "Περίμενε! %i παίκτες δεν είναι έτοιμοι ακόμα!"
 
 # Attente du serveur, vous pouvez annuler ou discuter !
-#: src/menu/network_menu.cpp:394
+#: src/menu/network_menu.cpp:403
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
@@ -1534,7 +1552,7 @@ msgstr "Όπλο: Πυρ / Κουτί δώρο: πέφτει γρήγορα"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:168
 msgid "Weapons"
 msgstr "Όπλα"
 
@@ -1565,36 +1583,36 @@ msgstr "Έναρξη του Wormux..."
 msgid "Wormux version "
 msgstr "Έκδοση του Wormux"
 
-#: src/include/action_handler.cpp:205
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Λάθος χάρτης CRC!"
 
-#: src/include/action_handler.cpp:202
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Λάθος όνομα χάρτη!"
 
-#: src/include/action_handler.cpp:208
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Λάθος ομάδα!"
 
 # T'es tout seul :-/
-#: src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:339
 msgid "You are alone :-/"
 msgstr "Είσαι μονάχος :-/"
 
-#: src/menu/network_menu.cpp:240
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Θέλετε σίγουρα να παίξετε μόνος σας;!"
 
-#: src/map/maps_list.cpp:257
+#: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
 msgstr "Χρειάζεται τουλάχιστον ένας έγκυρος χάρτης!"
 
-#: src/game/game_init.cpp:122 src/team/teams_list.cpp:168
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:178
 msgid "You need at least two valid teams !"
 msgstr "Χρειάζονται τουλάχιστον δύο έγκυρες ομάδες!"
 
-#: src/menu/network_menu.cpp:220
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Δεν μπορείτε να παίξετε χωρίς να διαλέξετε ομάδα!"
 
@@ -1616,7 +1634,7 @@ msgstr ""
 "Επίθεση: αριστερό κλικ στο στόχο\n"
 "ένας βομβαρδισμός ανά γύρο"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:76
 msgid "couldn't load config"
 msgstr "δεν φορτώθηκε το αρχείο διαμόρφωσης"
 
@@ -1629,7 +1647,7 @@ msgstr "Προσωπικός παίκτης"
 msgid "done"
 msgstr "τελείωσε"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:83
 msgid "error parsing the config file"
 msgstr "Λάθος εξαιτίας του διαβάσματος του αρχείου διαμόρφωσης"
 
@@ -1637,7 +1655,7 @@ msgstr "Λάθος εξαιτίας του διαβάσματος του αρχ�
 msgid "from"
 msgstr "από"
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:72
 msgid "no configuration file!"
 msgstr "δεν υπάρχει αρχείο διαμόρφωσης!"
 

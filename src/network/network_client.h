@@ -31,7 +31,7 @@ class NetworkClient : public Network
 {
 protected:
   connection_state_t HandShake(WSocket& server_socket);
-  virtual void HandleAction(Action* a, DistantComputer* sender) const;
+  virtual void HandleAction(Action* a, DistantComputer* sender);
   virtual void WaitActionSleep() {};
 
 public:

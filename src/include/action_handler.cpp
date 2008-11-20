@@ -79,10 +79,10 @@ void FAIL_IF_GAMEMASTER(Action *a)
   if (Network::GetInstance()->IsGameMaster()) {
     fprintf(stderr,
 	    "Game Master received an action (%s) that is normally sent only by the game master only to a client,"
-	    " we are going to force disconnection of evil client: %s (%s)",
+	    " we are going to force disconnection of evil client: %s",
 	    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str(),
-	    a->GetCreator()->GetAddress().c_str(),
-	    a->GetCreator()->GetPlayer().GetNickname().c_str());
+	    a->GetCreator()->ToString().c_str());
+
     a->GetCreator()->ForceDisconnection();
   }
 }
@@ -173,7 +173,7 @@ void Action_Network_Check_Phase1 (Action *a)
   }
 
   // send information to the server
-  Network::GetInstance()->SendAction(b);
+  Network::GetInstance()->SendActionToAll(b);
 }
 
 enum net_error {
@@ -211,7 +211,7 @@ void DisconnectOnError(enum net_error error)
 {
   Action a(Action::ACTION_NETWORK_DISCONNECT_ON_ERROR);
   a.Push(int(error));
-  Network::GetInstance()->SendAction(a);
+  Network::GetInstance()->SendActionToAll(a);
   Network::Disconnect();
 }
 
@@ -367,7 +367,7 @@ void SendGameMode()
 
   MSG_DEBUG("game_mode", "Sending game_mode: %s", game_mode_name.c_str());
 
-  Network::GetInstance()->SendAction(a);
+  Network::GetInstance()->SendActionToAll(a);
 }
 
 // ########################################################
@@ -500,7 +500,7 @@ void SyncCharacters()
   ASSERT(Network::GetInstance()->IsTurnMaster());
 
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendAction(a_begin_sync);
+  Network::GetInstance()->SendActionToAll(a_begin_sync);
   TeamsList::iterator
     it=GetTeamsList().playing_list.begin(),
     end=GetTeamsList().playing_list.end();
@@ -519,7 +519,7 @@ void SyncCharacters()
     }
   }
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendAction(a_sync_end);
+  Network::GetInstance()->SendActionToAll(a_sync_end);
 }
 
 void Action_Character_Jump (Action */*a*/)
@@ -553,11 +553,11 @@ void SendActiveCharacterAction(const Action& a)
 {
   ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendAction(a_begin_sync);
+  Network::GetInstance()->SendActionToAll(a_begin_sync);
   SendActiveCharacterInfo();
-  Network::GetInstance()->SendAction(a);
+  Network::GetInstance()->SendActionToAll(a);
   Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendAction(a_end_sync);
+  Network::GetInstance()->SendActionToAll(a_end_sync);
 }
 
 // Send character information over the network (it's totally stupid to send it locally ;-)
@@ -565,7 +565,7 @@ void SendCharacterInfo(int team_no, int char_no)
 {
   Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
   Character::StoreCharacter(&a, team_no, char_no);
-  Network::GetInstance()->SendAction(a);
+  Network::GetInstance()->SendActionToAll(a);
 }
 
 uint last_time = 0;
@@ -821,18 +821,18 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   SDL_UnlockMutex(mutex);
 
   if (repeat_to_network)
-    Network::GetInstance()->SendAction(*a);
+    Network::GetInstance()->SendActionToAll(*a);
 }
 
 void ActionHandler::NewActionActiveCharacter(Action* a)
 {
   ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendAction(a_begin_sync);
+  Network::GetInstance()->SendActionToAll(a_begin_sync);
   SendActiveCharacterInfo();
   NewAction(a);
   Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendAction(a_end_sync);
+  Network::GetInstance()->SendActionToAll(a_end_sync);
 }
 
 void ActionHandler::Register (Action::Action_t action,

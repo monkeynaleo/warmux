@@ -19,31 +19,31 @@ msgstr ""
 "X-Poedit-Language: Bulgarian\n"
 "X-Poedit-Country: BULGARIA\n"
 
-#: src/map/maps_list.cpp:324
+#: src/map/maps_list.cpp:325
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s :-("
 
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:312
+#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:321
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Играчът %i се свърза"
 msgstr[1] "Играчите %i се свързаха"
 
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:320
+#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:329
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "Играчът %i е готов"
 msgstr[1] "Играчите %i са готови"
 
-#: src/map/maps_list.cpp:114
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> познат и като %s от %s"
 
-#: src/map/maps_list.cpp:121
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> от %s"
@@ -250,7 +250,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Отборът %s спечели %u Футбол-бомба!"
 msgstr[1] "Отборът %s спечели %u Футбол-бомби!"
 
-#: src/weapon/grapple.cpp:815
+#: src/weapon/grapple.cpp:816
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -501,19 +501,19 @@ msgstr "Супер-топче"
 msgid "Bye bye tux..."
 msgstr "Tux e свободен!!!"
 
-#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:496
-#: src/team/teams_list.cpp:527 src/team/teams_list.cpp:536
-#: src/team/teams_list.cpp:542 src/team/teams_list.cpp:604
+#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:506
+#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
+#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не мога да намеря отборът на %s!"
 
-#: src/team/teams_list.cpp:160
+#: src/team/teams_list.cpp:170
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Не мога да отворя личната директория на отборите (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:148
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
@@ -600,6 +600,11 @@ msgstr "Свържи се към игра"
 msgid "Connected !"
 msgstr "Свързан !"
 
+#: src/network/admin_commands.cpp:64
+#, fuzzy
+msgid "Connected players: "
+msgstr "Verbunden zu "
+
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Конструкция"
@@ -608,12 +613,12 @@ msgstr "Конструкция"
 msgid "Controlled by: "
 msgstr "Контролиран от:"
 
-#: src/network/download.cpp:79
+#: src/network/download.cpp:78
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Не може да добие последната версия от %s"
 
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55 src/network/download.cpp:87
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Не мога да отворя файла %s"
@@ -667,13 +672,13 @@ msgstr "Сила на звуковите ефекти"
 msgid "Energy"
 msgstr "Здраве:"
 
-#: src/include/action_handler.cpp:231
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Грешка при стартиране на мрежата: Клиентът %s не е съгласен с теб!! - %s"
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:124
+#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Грешка при зареждането на отбор %s:"
 
@@ -870,7 +875,7 @@ msgstr ""
 "Как да се използва : ляв клик на целта\n"
 "муниция на ход"
 
-#: src/game/game_classic.cpp:229
+#: src/game/game_classic.cpp:210
 msgid "Hurry up, you are too slow !!"
 msgstr "Хабиш време за убиване за други неща!!!"
 
@@ -898,19 +903,19 @@ msgstr ""
 "Огън : дръж space натиснат до достигане на желаната сила\n"
 "муниция на ход"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:155
 msgid "Initialisation"
 msgstr "Инициализация..."
 
-#: src/game/game_init.cpp:106
+#: src/game/game_init.cpp:108
 msgid "Initialise map"
 msgstr "Инициализирам карта..."
 
-#: src/game/game_init.cpp:140
+#: src/game/game_init.cpp:142
 msgid "Initialise sounds"
 msgstr "Инициализирам звук..."
 
-#: src/game/game_init.cpp:116
+#: src/game/game_init.cpp:118
 msgid "Initialise teams"
 msgstr "Инициализирам отборите..."
 
@@ -922,7 +927,7 @@ msgstr "Подаръче..."
 msgid "Jetpack"
 msgstr "Реактивна раница"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:143
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:152
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Свържи се с #wormux на  irc.freenode.net за опоненти"
 
@@ -942,11 +947,15 @@ msgstr "Kick-ва играчите избрани от <nickname> от игра�
 msgid "Language"
 msgstr "Език"
 
-#: src/map/maps_list.cpp:226
+#: src/network/admin_commands.cpp:34
+msgid "List the connected players"
+msgstr ""
+
+#: src/map/maps_list.cpp:227
 msgid "Load maps:"
 msgstr "Карти които да заредя:"
 
-#: src/team/teams_list.cpp:136
+#: src/team/teams_list.cpp:146
 msgid "Load teams:"
 msgstr "Отбори които да заредя:"
 
@@ -973,15 +982,20 @@ msgstr "Карта"
 msgid "Map %s, a creation of: "
 msgstr "Картата %s е творение на: "
 
-#: src/game/game_init.cpp:109
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Карти"
+
+#: src/menu/network_menu.cpp:116
+#, fuzzy
+msgid "Master mode"
+msgstr "Режим"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
 msgstr "Максимално здраве"
 
-#: src/menu/network_menu.cpp:116
+#: src/menu/network_menu.cpp:121
 msgid "Max number of players:"
 msgstr "Максимален брой играчи:"
 
@@ -1055,6 +1069,11 @@ msgstr "Предупреждение за нов играч?"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Няма такъв елемент в XML-конфигурационния фаил! <%s>"
 
+#: src/network/admin_commands.cpp:60
+#, fuzzy
+msgid "No player connected"
+msgstr "Играчът %i се свърза"
+
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
 msgstr "Никой!"
@@ -1105,7 +1124,7 @@ msgstr "Пауза"
 msgid "Play"
 msgstr "Играй!"
 
-#: src/menu/network_menu.cpp:131
+#: src/menu/network_menu.cpp:140
 msgid "Play several times"
 msgstr "Играй няколко пъти"
 
@@ -1199,8 +1218,7 @@ msgstr "Адрес на Сървъра:"
 msgid "Server available on Internet"
 msgstr "Достъпен сървър в интернет"
 
-#. Server Mode
-#: src/menu/network_menu.cpp:113
+#: src/menu/network_menu.cpp:114
 msgid "Server mode"
 msgstr "Сървъров режим"
 
@@ -1270,7 +1288,7 @@ msgid "Sound frequency"
 msgstr "Честота на семплиране"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:143
+#: src/game/game_init.cpp:145
 msgid "Sounds"
 msgstr "Звуци"
 
@@ -1306,7 +1324,7 @@ msgstr "Графика на Отбора"
 msgid "Team stats"
 msgstr "Статистика на Отбора"
 
-#: src/game/game_init.cpp:118 src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:120 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Отбори"
 
@@ -1342,7 +1360,7 @@ msgstr "Пазете се! Смарт-бомба на свобода!"
 msgid "The ball left the battlefield before exploding"
 msgstr "Топката може да попадне в детски ръчички!"
 
-#: src/network/network_client.cpp:97
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1367,7 +1385,7 @@ msgstr "Играта беше прекъсната, защото ти излез
 msgid "The grenade left the battlefield before exploding"
 msgstr "Ходи я търси..."
 
-#: src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:336
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Другите те чакат! Събуди се :-)"
 
@@ -1384,7 +1402,7 @@ msgstr "Сървърът отказа връзката."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Сървърът отказа връзката: Грешна парола!"
 
-#: src/menu/network_menu.cpp:232
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1428,12 +1446,12 @@ msgstr "Други"
 msgid "Unable to contact host."
 msgstr "Не може да се свърже!"
 
-#: src/map/maps_list.cpp:236
+#: src/map/maps_list.cpp:237
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Не мога да отворя директорията за карти! (%s)"
 
-#: src/map/maps_list.cpp:248
+#: src/map/maps_list.cpp:249
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Не мога да отворя личната директорията за карти (%s) !"
@@ -1442,7 +1460,7 @@ msgstr "Не мога да отворя личната директорията 
 msgid "Unable to use this port!"
 msgstr "Не може да ползва този порт!"
 
-#: src/network/admin_commands.cpp:66
+#: src/network/admin_commands.cpp:84
 msgid "Unknown command"
 msgstr "Непозната команда"
 
@@ -1450,7 +1468,7 @@ msgstr "Непозната команда"
 msgid "Unlimited"
 msgstr "Безкраен"
 
-#: src/network/network.cpp:137
+#: src/network/network.cpp:174
 msgid "Unnamed"
 msgstr "Неименуван"
 
@@ -1463,14 +1481,14 @@ msgstr "версия"
 msgid "Version verification failed because: %s\n"
 msgstr "Проверка на версията се провали заради: %s\n"
 
-#: src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Чакай! %i играч не е готов!"
 msgstr[1] "Чакай! %i играчи не са готови!"
 
-#: src/menu/network_menu.cpp:394
+#: src/menu/network_menu.cpp:403
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Изчаквам за сървър, всичко което може да правиш е да откажеш или да си чатиш!"
@@ -1481,7 +1499,7 @@ msgstr "Оръжие: Огън / Бонус кутия: пада бързо"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:168
 msgid "Weapons"
 msgstr "Оръжия"
 
@@ -1512,35 +1530,35 @@ msgstr "Wormux се зарежда..."
 msgid "Wormux version "
 msgstr "Версия на Wormux"
 
-#: src/include/action_handler.cpp:205
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Грешка при CRC на картата!"
 
-#: src/include/action_handler.cpp:202
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Грешно име на картата."
 
-#: src/include/action_handler.cpp:208
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Грешен отбор."
 
-#: src/menu/network_menu.cpp:330
+#: src/menu/network_menu.cpp:339
 msgid "You are alone :-/"
 msgstr "Ти си сам :-/"
 
-#: src/menu/network_menu.cpp:240
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Ти си сам..."
 
-#: src/map/maps_list.cpp:257
+#: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
 msgstr "Трябва ми поне една валидна карта!"
 
-#: src/game/game_init.cpp:122 src/team/teams_list.cpp:168
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:178
 msgid "You need at least two valid teams !"
 msgstr "Трябват ми поне два валидни отбора!"
 
-#: src/menu/network_menu.cpp:220
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Не може да играеш без отбор. Избери един!"
 
@@ -1562,7 +1580,7 @@ msgstr ""
 "Bombing : Ляв клик на целта\n"
 "едно бомбиране на ход"
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:76
 msgid "couldn't load config"
 msgstr "не мога да заредя конфигурацията"
 
@@ -1575,7 +1593,7 @@ msgstr "личен играч"
 msgid "done"
 msgstr "готово"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:83
 msgid "error parsing the config file"
 msgstr "грешка при четенето на персоналния конфигурационен файл"
 
@@ -1583,7 +1601,7 @@ msgstr "грешка при четенето на персоналния кон�
 msgid "from"
 msgstr "от"
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:72
 msgid "no configuration file!"
 msgstr "конфигурационният файл липсва!"
 
@@ -1697,9 +1715,6 @@ msgstr "o Отварям аудио на %d Hz %d бита"
 
 #~ msgid "Connect to an internet game"
 #~ msgstr "Zu einem Internet Spiel verbinden"
-
-#~ msgid "Connected to "
-#~ msgstr "Verbunden zu "
 
 #~ msgid "Contacting main server..."
 #~ msgstr "Kontaktiere Hauptserver..."

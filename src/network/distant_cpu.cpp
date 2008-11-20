@@ -53,7 +53,7 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
     Action a(Action::ACTION_MENU_SET_MAP);
     MapsList::GetInstance()->FillActionMenuSetMap(a);
     a.WriteToPacket(pack, size);
-    SendDatas(pack, size);
+    SendData(pack, size);
     free(pack);
 
     MSG_DEBUG("network", "Server: Sending teams information");
@@ -73,7 +73,7 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
 	b.Push(team->second.player_name);
 	b.Push(int(team->second.nb_characters));
 	b.WriteToPacket(pack, size);
-	SendDatas(pack, size);
+	SendData(pack, size);
 	free(pack);
       }
     }
@@ -85,7 +85,7 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
       b.Push(team->second.player_name);
       b.Push(int(team->second.nb_characters));
       b.WriteToPacket(pack, size);
-      SendDatas(pack, size);
+      SendData(pack, size);
       free(pack);
     }
   }
@@ -119,12 +119,12 @@ bool DistantComputer::ReceiveDatas(void* & data, size_t & len)
   return sock->ReceivePacket(data, len);
 }
 
-bool DistantComputer::SendDatas(const void* data, size_t len)
+bool DistantComputer::SendData(const void* data, size_t len)
 {
   return sock->SendPacket(data, len);
 }
 
-std::string DistantComputer::GetAddress()
+std::string DistantComputer::GetAddress() const
 {
   return sock->GetAddress();
 }
@@ -148,4 +148,10 @@ void DistantComputer::ForceDisconnection()
 bool DistantComputer::MustBeDisconnected()
 {
   return force_disconnect;
+}
+
+const std::string DistantComputer::ToString() const
+{
+  std::string str = GetAddress() + std::string(" (") + player.GetNickname() + std::string(" )");
+  return str;
 }

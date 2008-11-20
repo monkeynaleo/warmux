@@ -321,23 +321,43 @@ void Network::DisconnectNetwork()
 //-----------------------------------------------------------------------------
 
 // Send Messages
-void Network::SendAction(const Action& a) const
+void Network::SendActionToAll(const Action& a) const
 {
-  MSG_DEBUG("network.traffic","Send action %s",
+  MSG_DEBUG("network.traffic","Send action %s to all remote computers",
             ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str());
 
-  int size;
-  char* packet;
-  a.WriteToPacket(packet, size);
-
-  ASSERT(packet != NULL);
-  SendPacket(packet, size);
-
-  free(packet);
+  SendAction(a, NULL, false);
 }
 
-void Network::SendPacket(char* packet, int size) const
+void Network::SendActionToOne(const Action& a, DistantComputer* client) const
 {
+  MSG_DEBUG("network.traffic","Send action %s to %s (%s)",
+            ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
+	    client->ToString().c_str());
+
+  SendAction(a, client, true);
+}
+
+void Network::SendActionToAllExceptOne(const Action& a, DistantComputer* client) const
+{
+  MSG_DEBUG("network.traffic","Send action %s to all EXCEPT %s",
+            ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
+	    client->ToString().c_str());
+
+  SendAction(a, client, false);
+}
+
+// if (client == NULL) sending to every clients
+// if (clt_as_rcver) sending only to client 'client'
+// if (!clt_as_rcver) sending to all EXCEPT client 'client'
+void Network::SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const
+{
+  char* packet;
+  int size;
+
+  a.WriteToPacket(packet, size);
+  ASSERT(packet != NULL);
+
 #ifdef LOG_NETWORK
   if (fout != 0) {
     int tmp = 0xFFFFFFFF;
@@ -347,12 +367,21 @@ void Network::SendPacket(char* packet, int size) const
   }
 #endif
 
-  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-       client != cpu.end();
-       client++)
-  {
-    (*client)->SendDatas(packet, size);
+  if (clt_as_rcver) {
+    ASSERT(client);
+    client->SendData(packet, size);
+  } else {
+
+    for (std::list<DistantComputer*>::const_iterator it = cpu.begin();
+	 it != cpu.end(); it++) {
+
+      if ((*it) != client) {
+	(*it)->SendData(packet, size);
+      }
+    }
   }
+
+  free(packet);
 }
 
 //-----------------------------------------------------------------------------
@@ -431,18 +460,18 @@ Network::network_state_t Network::GetState() const
   return state;
 }
 
-void Network::SendNetworkState() const
+void Network::SendNetworkState()
 {
   ASSERT(!IsLocal());
 
   if (IsGameMaster()) {
     Action a(Action::ACTION_NETWORK_MASTER_CHANGE_STATE);
     a.Push(state);
-    SendAction(a);
+    SendActionToAll(a);
   } else {
     Action a(Action::ACTION_NETWORK_CLIENT_CHANGE_STATE);
     a.Push(state);
-    SendAction(a);
+    SendActionToAll(a);
   }
 }
 
