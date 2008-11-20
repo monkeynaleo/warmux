@@ -304,6 +304,8 @@ void Network::DisconnectNetwork()
 {
   NetworkThread::Wait();
 
+  player.Disconnect();
+
   DistantComputer* tmp;
   std::list<DistantComputer*>::iterator client = cpu.begin();
 
