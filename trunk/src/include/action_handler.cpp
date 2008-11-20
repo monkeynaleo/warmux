@@ -922,7 +922,7 @@ ActionHandler::ActionHandler():
   // Chat message
   Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
 
-  // Initial information about the game: game name, map, teams already selected, ...
+  // Initial information about the game: map, teams already selected, ...
   Register (Action::ACTION_GAME_INFO, "GAME_info", &Action_Game_Info);
 
   // Map selection in network menu
