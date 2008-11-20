@@ -24,14 +24,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s :-("
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:321
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Играчът %i се свърза"
 msgstr[1] "Играчите %i се свързаха"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:329
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -927,7 +927,7 @@ msgstr "Подаръче..."
 msgid "Jetpack"
 msgstr "Реактивна раница"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:152
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Свържи се с #wormux на  irc.freenode.net за опоненти"
 
@@ -986,7 +986,8 @@ msgstr "Картата %s е творение на: "
 msgid "Maps"
 msgstr "Карти"
 
-#: src/menu/network_menu.cpp:116
+#. The first player to connect to a headless server asumes the game master role
+#: src/menu/network_menu.cpp:117
 #, fuzzy
 msgid "Master mode"
 msgstr "Режим"
@@ -995,7 +996,7 @@ msgstr "Режим"
 msgid "Max energy"
 msgstr "Максимално здраве"
 
-#: src/menu/network_menu.cpp:121
+#: src/menu/network_menu.cpp:122
 msgid "Max number of players:"
 msgstr "Максимален брой играчи:"
 
@@ -1124,7 +1125,7 @@ msgstr "Пауза"
 msgid "Play"
 msgstr "Играй!"
 
-#: src/menu/network_menu.cpp:140
+#: src/menu/network_menu.cpp:141
 msgid "Play several times"
 msgstr "Играй няколко пъти"
 
@@ -1385,7 +1386,7 @@ msgstr "Играта беше прекъсната, защото ти излез
 msgid "The grenade left the battlefield before exploding"
 msgstr "Ходи я търси..."
 
-#: src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:337
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Другите те чакат! Събуди се :-)"
 
@@ -1402,7 +1403,7 @@ msgstr "Сървърът отказа връзката."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Сървърът отказа връзката: Грешна парола!"
 
-#: src/menu/network_menu.cpp:241
+#: src/menu/network_menu.cpp:242
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1481,14 +1482,14 @@ msgstr "версия"
 msgid "Version verification failed because: %s\n"
 msgstr "Проверка на версията се провали заради: %s\n"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Чакай! %i играч не е готов!"
 msgstr[1] "Чакай! %i играчи не са готови!"
 
-#: src/menu/network_menu.cpp:403
+#: src/menu/network_menu.cpp:404
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Изчаквам за сървър, всичко което може да правиш е да откажеш или да си чатиш!"
@@ -1542,11 +1543,11 @@ msgstr "Грешно име на картата."
 msgid "Wrong team!"
 msgstr "Грешен отбор."
 
-#: src/menu/network_menu.cpp:339
+#: src/menu/network_menu.cpp:340
 msgid "You are alone :-/"
 msgstr "Ти си сам :-/"
 
-#: src/menu/network_menu.cpp:249
+#: src/menu/network_menu.cpp:250
 msgid "You are alone..."
 msgstr "Ти си сам..."
 
@@ -1558,7 +1559,7 @@ msgstr "Трябва ми поне една валидна карта!"
 msgid "You need at least two valid teams !"
 msgstr "Трябват ми поне два валидни отбора!"
 
-#: src/menu/network_menu.cpp:229
+#: src/menu/network_menu.cpp:230
 msgid "You won't be able to play before selecting a team !"
 msgstr "Не може да играеш без отбор. Избери един!"
 

@@ -113,6 +113,7 @@ NetworkMenu::NetworkMenu() :
     if (Network::GetInstance()->IsServer()) {
       mode->SetText(_("Server mode"));
     } else {
+      // The first player to connect to a headless server asumes the game master role
       mode->SetText(_("Master mode"));
     }
     options_box->AddWidget(mode);
