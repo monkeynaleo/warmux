@@ -31,6 +31,7 @@
 class GameServer
 {
 private:
+  std::string game_name;
   std::string password;
   uint port;
 
@@ -47,7 +48,7 @@ private:
 public:
   GameServer();
 
-  bool ServerStart(uint port, uint max_nb_clients, std::string& password);
+  bool ServerStart(uint port, uint max_nb_clients, const std::string& game_name, std::string& password);
   void RunLoop();
 };
 
