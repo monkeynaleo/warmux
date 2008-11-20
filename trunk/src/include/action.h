@@ -104,29 +104,29 @@ public:
   } Action_t;
 
 private:
+  /* if you need that, implement it (correctly)*/
+  Action(const Action& an_action);
+  const Action& operator=(const Action&);
+  /*********************************************/
+
   std::list<uint32_t> var;
   Action_t m_type;
   uint m_timestamp;
 
   DistantComputer* creator;
 
-  Action(const Action& an_action);
-  const Action& operator=(const Action&);
-
   void Init (Action_t type);
-
   void WriteTo(char *packet) const;
 
 public:
 
   // Action without parameter
-  Action (Action_t type) { Init(type); };
+  Action (Action_t type);
 
   // Action with various parameter
-  Action (Action_t type, int value) { Init(type); Push(value); };
-  Action (Action_t type, double value) { Init(type); Push(value); };
-  Action (Action_t type, const std::string& value) { Init(type); Push(value); };
-
+  Action (Action_t type, int value);
+  Action (Action_t type, double value);
+  Action (Action_t type, const std::string& value);
   Action (Action_t type, double value1, int value2);
   Action (Action_t type, double value1, double value2);
 
@@ -151,22 +151,14 @@ public:
   Point2i PopPoint2i();
   Point2d PopPoint2d();
 
+  void WriteToPacket(char* & packet, int & size) const;
+
   bool IsEmpty() const { return var.empty(); };
 
-  // Timestamp handling
-  uint GetTimestamp() const { return m_timestamp; };
-
-  int  GetSize() const
-  {
-    return 4  //Size of the type;
-           + 4 //Size of the timestamp
-           + 4 //Size of the number of variable
-           + int(var.size()) * 4;
-  }
-  void WriteToPacket(char* & packet, int & size) const;
-  Action_t GetType() const { return m_type; };
-
-  DistantComputer* GetCreator() const { return creator; } ;
+  DistantComputer* GetCreator() const;
+  int  GetSize() const;
+  uint GetTimestamp() const;
+  Action_t GetType() const;
 };
 
 //-----------------------------------------------------------------------------

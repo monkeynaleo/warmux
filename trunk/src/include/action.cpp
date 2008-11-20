@@ -38,7 +38,30 @@ static inline uint TimeStamp()
   return 0;
 }
 
-// Action with various parameters
+
+Action (Action_t type)
+{
+  Init(type);
+}
+
+Action (Action_t type, int value)
+{
+  Init(type);
+  Push(value);
+}
+
+Action (Action_t type, double value)
+{
+  Init(type);
+  Push(value);
+}
+
+Action (Action_t type, const std::string& value)
+{
+  Init(type);
+  Push(value);
+}
+
 Action::Action (Action_t type, double value1, double value2)
 {
   Init(type);
@@ -278,3 +301,35 @@ Point2d Action::PopPoint2d()
   y = PopDouble();
   return Point2d(x, y);
 }
+
+//-----------------------------------------------------------------------------
+
+bool Action::IsEmpty() const
+{
+  return var.empty();
+}
+
+DistantComputer* Action::GetCreator() const
+{
+  return creator;
+}
+
+int  Action::GetSize() const
+{
+  return 4  //Size of the type;
+    + 4 //Size of the timestamp
+    + 4 //Size of the number of variable
+    + int(var.size()) * 4;
+}
+
+uint Action::GetTimestamp() const
+{
+  return m_timestamp;
+}
+
+Action_t Action::GetType() const
+{
+  return m_type;
+}
+
+
