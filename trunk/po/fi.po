@@ -25,14 +25,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:321
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:322
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i pelaaja liittyneenä"
 msgstr[1] "%i pelaajaa liittyneenä"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:329
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:330
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -924,7 +924,7 @@ msgstr "Taivaalta sataa lahjoja!"
 msgid "Jetpack"
 msgstr "Lentoreppu"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:152
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:153
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Liity #wormux kanavalle irc.freenode.netissä löytääksesi vastustajia."
 
@@ -983,7 +983,8 @@ msgstr "Kartta %s, tehnyt :"
 msgid "Maps"
 msgstr "Kartat"
 
-#: src/menu/network_menu.cpp:116
+#. The first player to connect to a headless server asumes the game master role
+#: src/menu/network_menu.cpp:117
 #, fuzzy
 msgid "Master mode"
 msgstr "Pelitila"
@@ -992,7 +993,7 @@ msgstr "Pelitila"
 msgid "Max energy"
 msgstr "Maksimi energia"
 
-#: src/menu/network_menu.cpp:121
+#: src/menu/network_menu.cpp:122
 msgid "Max number of players:"
 msgstr "Pelaajien määrä joukkueessa:"
 
@@ -1121,7 +1122,7 @@ msgstr "Tauko"
 msgid "Play"
 msgstr "Pelaa"
 
-#: src/menu/network_menu.cpp:140
+#: src/menu/network_menu.cpp:141
 msgid "Play several times"
 msgstr "Pelaa useita kertoja"
 
@@ -1382,7 +1383,7 @@ msgstr "Peli keskeytyi koska yhteytesi katkesi."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Kranaatti on poistunut taistelukentältä..."
 
-#: src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:337
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Kaikki muut odottavat sinua! Herätys!! :)"
 
@@ -1399,7 +1400,7 @@ msgstr "Palvelimen hylkäsi yhteyden."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Palvelin hylkäsi yhteyden: väärä salasana!"
 
-#: src/menu/network_menu.cpp:241
+#: src/menu/network_menu.cpp:242
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1478,14 +1479,14 @@ msgstr "Versio"
 msgid "Version verification failed because: %s\n"
 msgstr "Versiontarkistus epäonnistui koska: %s\n"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Hetkinen! %i pelaaja ei ole vielä valmis!"
 msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 
-#: src/menu/network_menu.cpp:403
+#: src/menu/network_menu.cpp:404
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta, voit ainoastaan keskeyttää tai jutella!"
 
@@ -1537,11 +1538,11 @@ msgstr "Väärä kartan nimi!"
 msgid "Wrong team!"
 msgstr "Väärä joukkue!"
 
-#: src/menu/network_menu.cpp:339
+#: src/menu/network_menu.cpp:340
 msgid "You are alone :-/"
 msgstr "Olet yksin :-/"
 
-#: src/menu/network_menu.cpp:249
+#: src/menu/network_menu.cpp:250
 msgid "You are alone..."
 msgstr "Olet yksin..."
 
@@ -1553,7 +1554,7 @@ msgstr "Tarvitset ainakin yhden toimivan kartan !"
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
-#: src/menu/network_menu.cpp:229
+#: src/menu/network_menu.cpp:230
 msgid "You won't be able to play before selecting a team !"
 msgstr "Et voi aloittaa peliä ennenkuin olet olet valinnut joukkueen!"
 
