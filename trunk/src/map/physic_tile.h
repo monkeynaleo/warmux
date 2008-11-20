@@ -24,7 +24,7 @@
 
 #include "tool/point.h"
 class TileItem;
-class PhysicalShape;
+class PhysicalPolygon;
 
 #ifdef DEBUG
 class Color;
@@ -41,7 +41,7 @@ private:
   bool is_subdivised;
   bool is_containing_polygon;
 
-  PhysicalShape *m_shape;
+  PhysicalPolygon *m_shape;
   PhysicTile *m_physic_tiles[4];
 
   PhysicTile * m_parent_physic_tile;
@@ -56,7 +56,11 @@ private:
   Fullness IsFull() const;
   bool GeneratePolygone();
   void Generate();
+  void GenerateEmpty();
+  void GenerateFull();
+  void GenerateMixte();
   void Clean();
+  void InitShape();
 
 public:
 

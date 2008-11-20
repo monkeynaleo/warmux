@@ -344,6 +344,7 @@ private:
   void CheckOverlapping();
 
   void SetCollisionFilter(const b2FilterData& filter);
+
 };
 
 #endif
