@@ -32,8 +32,10 @@ class NetworkServer : public Network
   WSocket server_socket; // Wait for incoming connections on this socket
   int port; // store listening port
 
-protected:
   bool HandShake(WSocket& client_socket, std::string& nickname) const;
+  void SendInitialGameInfo(DistantComputer* client);
+
+protected:
   virtual void HandleAction(Action* a, DistantComputer* sender);
   virtual void WaitActionSleep();
 
@@ -50,6 +52,7 @@ public:
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);
+
 };
 
 //-----------------------------------------------------------------------------

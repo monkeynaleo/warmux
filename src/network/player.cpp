@@ -44,7 +44,7 @@ void Player::Disconnect()
     for (std::map<const std::string, ConfigTeam>::iterator team = owned_teams.begin();
          team != owned_teams.end();
          ++team) {
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, team->first));
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_GAME_DEL_TEAM, team->first));
     }
   }
 }
@@ -110,6 +110,11 @@ bool Player::UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_c
     return false;
 
   return true;
+}
+
+uint Player::GetNbTeams() const
+{
+  return owned_teams.size();
 }
 
 const std::map<const std::string, ConfigTeam>& Player::GetTeams() const

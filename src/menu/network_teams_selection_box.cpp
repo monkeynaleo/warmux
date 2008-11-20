@@ -245,7 +245,7 @@ void NetworkTeamsSelectionBox::RemoveLocalTeam(uint i)
 {
   ASSERT(teams_selections.at(i)->GetTeam() != NULL);
 
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM,
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_GAME_DEL_TEAM,
 						     teams_selections.at(i)->GetTeam()->GetId()));
   ActionHandler::GetInstance()->ExecActions();
 }
@@ -259,7 +259,7 @@ void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team)
     teams_selections.at(i)->SetTeam(team, false);
 
   } else {
-    Action* a = new Action(Action::ACTION_MENU_ADD_TEAM, team.GetId());
+    Action* a = new Action(Action::ACTION_GAME_ADD_TEAM, team.GetId());
     a->Push(team.GetPlayerName());
     a->Push(int(team.GetNbCharacters()));
     ActionHandler::GetInstance()->NewAction(a);

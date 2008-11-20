@@ -39,37 +39,37 @@ static inline uint TimeStamp()
 }
 
 
-Action (Action_t type)
+Action::Action(Action_t type)
 {
   Init(type);
 }
 
-Action (Action_t type, int value)
-{
-  Init(type);
-  Push(value);
-}
-
-Action (Action_t type, double value)
+Action::Action(Action_t type, int value)
 {
   Init(type);
   Push(value);
 }
 
-Action (Action_t type, const std::string& value)
+Action::Action(Action_t type, double value)
 {
   Init(type);
   Push(value);
 }
 
-Action::Action (Action_t type, double value1, double value2)
+Action::Action(Action_t type, const std::string& value)
+{
+  Init(type);
+  Push(value);
+}
+
+Action::Action(Action_t type, double value1, double value2)
 {
   Init(type);
   Push(value1);
   Push(value2);
 }
 
-Action::Action (Action_t type, double value1, int value2)
+Action::Action(Action_t type, double value1, int value2)
 {
   Init(type);
   Push(value1);
@@ -314,7 +314,7 @@ DistantComputer* Action::GetCreator() const
   return creator;
 }
 
-int  Action::GetSize() const
+int Action::GetSize() const
 {
   return 4  //Size of the type;
     + 4 //Size of the timestamp
@@ -327,7 +327,7 @@ uint Action::GetTimestamp() const
   return m_timestamp;
 }
 
-Action_t Action::GetType() const
+Action::Action_t Action::GetType() const
 {
   return m_type;
 }

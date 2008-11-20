@@ -41,46 +41,6 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
   force_disconnect(false)
 {
   player.SetNickname(nickname);
-
-  // If we are the server, we have to tell this new computer
-  // what teams / maps have already been selected
-  if (Network::GetInstance()->IsServer()) {
-
-    MSG_DEBUG("network", "Server: Sending map information");
-
-    Action a(Action::ACTION_MENU_SET_MAP);
-    MapsList::GetInstance()->FillActionMenuSetMap(a);
-    Network::GetInstance()->SendActionToOne(a, this);
-
-    MSG_DEBUG("network", "Server: Sending teams information");
-
-    // Teams infos of already connected computers
-    std::list<DistantComputer*>::iterator it;
-    std::map<std::string, ConfigTeam>::const_iterator team;
-
-    for (it = Network::GetInstance()->cpu.begin();
-        it != Network::GetInstance()->cpu.end();
-        it++) {
-      for (team = (*it)->GetPlayer().GetTeams().begin();
-	   team != (*it)->GetPlayer().GetTeams().end();
-	   team++) {
-
-	Action b(Action::ACTION_MENU_ADD_TEAM, team->first);
-	b.Push(team->second.player_name);
-	b.Push(int(team->second.nb_characters));
-	Network::GetInstance()->SendActionToOne(b, this);
-      }
-    }
-
-    for (team = Network::GetInstance()->GetPlayer().GetTeams().begin();
-	 team != Network::GetInstance()->GetPlayer().GetTeams().end();
-	 team++) {
-      Action b(Action::ACTION_MENU_ADD_TEAM, team->first);
-      b.Push(team->second.player_name);
-      b.Push(int(team->second.nb_characters));
-      Network::GetInstance()->SendActionToOne(b, this);
-    }
-  }
 }
 
 DistantComputer::~DistantComputer()
