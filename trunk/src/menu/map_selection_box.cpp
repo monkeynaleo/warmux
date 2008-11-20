@@ -154,7 +154,7 @@ void MapSelectionBox::ChangeMap(uint index)
 
     Action a(Action::ACTION_MENU_SET_MAP);
     MapsList::GetInstance()->FillActionMenuSetMap(a);
-    Network::GetInstance()->SendAction(a);
+    Network::GetInstance()->SendActionToAll(a);
   } else {
     selected_map_index = index;
   }

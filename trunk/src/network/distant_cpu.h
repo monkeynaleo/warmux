@@ -59,9 +59,9 @@ public:
 
   bool SocketReady() const;
   bool ReceiveDatas(void* & data, size_t& len);
-  bool SendDatas(const void* data, size_t len);
+  bool SendData(const void* data, size_t len);
 
-  std::string GetAddress();
+  std::string GetAddress() const;
 
   Player& GetPlayer();
 
@@ -70,6 +70,8 @@ public:
 
   void ForceDisconnection();
   bool MustBeDisconnected();
+
+  const std::string ToString() const;
 };
 
 #endif

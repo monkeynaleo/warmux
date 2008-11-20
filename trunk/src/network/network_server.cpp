@@ -53,26 +53,10 @@ NetworkServer::~NetworkServer()
 {
 }
 
-void NetworkServer::ForwardAction(Action* a, DistantComputer* sender) const
-{
-  char* packet;
-  int packet_size;
-  a->WriteToPacket(packet, packet_size);
-
-  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-       client != cpu.end();
-       client++)
-    if (*client != sender) {
-        (*client)->SendDatas(packet, packet_size);
-      }
-
-  free(packet);
-}
-
-void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
+void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
 {
   // Repeat the packet to other clients
-  ForwardAction(a, sender);
+  SendActionToAllExceptOne(*a, sender);
 
   ActionHandler::GetInstance()->NewAction(a, false);
 }
@@ -154,7 +138,7 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
   std::list<DistantComputer*>::iterator it;
 
-  printf("- client disconnected: %s(%s)\n", (*closed)->GetAddress().c_str(), (*closed)->GetPlayer().GetNickname().c_str());
+  printf("- client disconnected: %s\n", (*closed)->ToString().c_str());
 
   it = cpu.erase(closed);
   delete *closed;

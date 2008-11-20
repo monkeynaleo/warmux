@@ -58,7 +58,7 @@ std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<D
 {
   std::list<DistantComputer*>::iterator it;
 
-  printf("- client disconnected: %s(%s)\n", (*closed)->GetAddress().c_str(), (*closed)->GetPlayer().GetNickname().c_str());
+  printf("- client disconnected: %s\n", (*closed)->ToString().c_str());
 
   it = cpu.erase(closed);
   delete *closed;
@@ -66,7 +66,7 @@ std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<D
   return it;
 }
 
-void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/) const
+void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/)
 {
   ActionHandler::GetInstance()->NewAction(a, false);
 }

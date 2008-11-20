@@ -22,11 +22,11 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_network.h>
 #include <list>
 #include <string>
-#include "include/base.h"
+#include <WORMUX_network.h>
 #include <WORMUX_singleton.h>
+#include "include/base.h"
 #include "network/player.h"
 //-----------------------------------------------------------------------------
 
@@ -88,7 +88,7 @@ private:
 
   std::string password;
 
-  static int  num_objects;
+  static int num_objects;
 
   bool turn_master_player;
   Player player;
@@ -106,8 +106,9 @@ protected:
   int fin;
 #endif
 
-  virtual void HandleAction(Action* a, DistantComputer* sender) const = 0;
+  virtual void HandleAction(Action* a, DistantComputer* sender) = 0;
   virtual void WaitActionSleep() = 0;
+  virtual void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
 
   void DisconnectNetwork();
 
@@ -137,8 +138,9 @@ public:
   std::string GetDefaultNickname() const;
 
   // Action handling
-  void SendPacket(char* packet, int size) const;
-  virtual void SendAction(const Action& action) const;
+  void SendActionToAll(const Action& action) const;
+  void SendActionToOne(const Action& action, DistantComputer* client) const;
+  void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
 
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
 
@@ -153,7 +155,7 @@ public:
   // Manage network state
   void SetState(Network::network_state_t state);
   Network::network_state_t GetState() const;
-  void SendNetworkState() const;
+  void SendNetworkState();
 
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
