@@ -45,16 +45,12 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
   // If we are the server, we have to tell this new computer
   // what teams / maps have already been selected
   if (Network::GetInstance()->IsServer()) {
-    int size;
-    char* pack;
 
     MSG_DEBUG("network", "Server: Sending map information");
 
     Action a(Action::ACTION_MENU_SET_MAP);
     MapsList::GetInstance()->FillActionMenuSetMap(a);
-    a.WriteToPacket(pack, size);
-    SendData(pack, size);
-    free(pack);
+    Network::GetInstance()->SendActionToOne(a, this);
 
     MSG_DEBUG("network", "Server: Sending teams information");
 
@@ -72,9 +68,7 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
 	Action b(Action::ACTION_MENU_ADD_TEAM, team->first);
 	b.Push(team->second.player_name);
 	b.Push(int(team->second.nb_characters));
-	b.WriteToPacket(pack, size);
-	SendData(pack, size);
-	free(pack);
+	Network::GetInstance()->SendActionToOne(b, this);
       }
     }
 
@@ -84,9 +78,7 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
       Action b(Action::ACTION_MENU_ADD_TEAM, team->first);
       b.Push(team->second.player_name);
       b.Push(int(team->second.nb_characters));
-      b.WriteToPacket(pack, size);
-      SendData(pack, size);
-      free(pack);
+      Network::GetInstance()->SendActionToOne(b, this);
     }
   }
 }
