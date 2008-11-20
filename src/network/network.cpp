@@ -21,6 +21,7 @@
 
 #include <SDL_thread.h>
 #include <SDL_timer.h>
+#include <WORMUX_debug.h>
 
 #include "network/network.h"
 #include "network/network_local.h"
@@ -28,6 +29,7 @@
 #include "network/network_server.h"
 #include "network/distant_cpu.h"
 #include "network/chatlogger.h"
+#include "network/player.h"
 //-----------------------------------------------------------------------------
 #include "game/game_mode.h"
 #include "game/game.h"
@@ -36,7 +38,6 @@
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include <WORMUX_debug.h>
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK
