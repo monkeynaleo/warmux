@@ -140,7 +140,7 @@ void PhysicalEngine::ComputeContacts()
 
       if (objects_list.count(contact.shape2->GetBody()) > 0) {
 
-        collider->SignalObjectCollision(objects_list[contact.shape2->GetBody()], vel);
+        collider->SignalObjectCollision(objects_list[contact.shape2->GetBody()],collider->GetShape(contact.shape1), vel);
       } else {
 
         collider->SignalGroundCollision(vel);
@@ -162,7 +162,7 @@ void PhysicalEngine::ComputeContacts()
 
       if (objects_list.count(contact.shape1->GetBody()) > 0) {
 
-        collider->SignalObjectCollision(objects_list[contact.shape1->GetBody()], vel);
+        collider->SignalObjectCollision(objects_list[contact.shape1->GetBody()],collider->GetShape(contact.shape2), vel);
       } else {
 
         collider->SignalGroundCollision(vel);

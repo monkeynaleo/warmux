@@ -33,6 +33,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "object/objects_list.h"
+#include "physic/physical_shape.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 
@@ -52,7 +53,7 @@ class Anvil : public WeaponProjectile
     void PlayCollisionSound();
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
   protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */);
+    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /* speed_before */);
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
     virtual void SignalOutOfMap();
 };
@@ -72,8 +73,9 @@ Anvil::~Anvil()
   falling_sound.Stop(); // paranoiac sound stop
 }
 
-void Anvil::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */)
+void Anvil::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /* speed_before */)
 {
+  shape->SetName(shape->GetName()); //Ugly compilation fix
   obj->SetEnergyDelta(-200);
   PlayCollisionSound();
 }

@@ -24,6 +24,7 @@
 
 #include "tool/point.h"
 #include <vector>
+#include <string>
 
 #include <Box2D.h>
 
@@ -44,8 +45,12 @@ public:
   void SetFriction(double friction);
   void SetMass(int mass);
   void SetPosition(Point2d position);
+  void SetName(const std::string &name);
 
   void SetBody(b2Body *body);
+
+  const std::string &GetName() const;
+  const b2Shape *GetShape() const;
   // returns current max width (taking angle into account)
   virtual double GetCurrentWidth() const = 0;
 
@@ -60,6 +65,8 @@ public:
   virtual double GetInitialWidth() const = 0;
   virtual double GetInitialHeight() const = 0;
 
+
+
 #ifdef DEBUG
   virtual void DrawBorder(const Color &color) const = 0;
 #endif
@@ -71,6 +78,7 @@ protected:
   Point2d m_position;
   int m_mass;
   double m_friction;
+  std::string m_name;
 };
 
 

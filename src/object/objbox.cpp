@@ -34,6 +34,7 @@
 #include "map/map.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
+#include "physic/physical_shape.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include <WORMUX_debug.h>
@@ -85,10 +86,10 @@ void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
   CloseParachute();
 }
 
-void ObjBox::SignalObjectCollision(PhysicalObj * obj, const Point2d& /*my_speed_before*/)
+void ObjBox::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /*my_speed_before*/)
 {
   //  SignalCollision(); // this is done by the physical engine...
-
+  shape->SetName(shape->GetName()); //Ugly compilation fix
    if (obj->IsCharacter()){
      ApplyBonus((Character *)obj);
    }

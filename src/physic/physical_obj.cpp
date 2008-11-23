@@ -1402,3 +1402,16 @@ void PhysicalObj::SetAngle(double angle)
     m_body_def->angle = -angle/180.0f * b2_pi;
   }
 }
+
+PhysicalShape *PhysicalObj::GetShape(b2Shape *shape)
+{
+  std::list<PhysicalShape *>::iterator it;
+
+  for(it = m_shapes.begin(); it != m_shapes.end();it++){
+    if((*it)->GetShape() == shape){
+      return *it;
+    }
+  }
+  return NULL;
+}
+

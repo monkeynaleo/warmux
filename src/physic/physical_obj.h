@@ -319,8 +319,9 @@ public:
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
 
+  PhysicalShape *GetShape(b2Shape *);
   virtual void SignalRebound();
-  virtual void SignalObjectCollision(PhysicalObj *,const Point2d&) { };
+  virtual void SignalObjectCollision(PhysicalObj *,PhysicalShape *, const Point2d&) { };
   virtual void SignalGroundCollision(const Point2d&) { };
   virtual void SignalCollision(const Point2d&) { };
 

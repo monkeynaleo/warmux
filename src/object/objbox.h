@@ -30,6 +30,7 @@ class Character;
 class Sprite;
 typedef struct _xmlNode xmlNode;
 class Action;
+class PhysicalShape;
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
@@ -64,7 +65,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     void Explode();
     // Signal Fall ending
     virtual void SignalCollision(const Point2d& my_speed_before);
-    virtual void SignalObjectCollision(PhysicalObj *,const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(PhysicalObj *,PhysicalShape *,const Point2d& my_speed_before);
     virtual void SignalDrowning();
     virtual void SignalGhostState(bool was_already_dead);
 };
