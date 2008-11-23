@@ -34,8 +34,8 @@ PhysicalShape::PhysicalShape() :
   m_shape(NULL),
   m_position(0,0),
   m_mass(-1),
-  m_friction(0.8f)
-
+  m_friction(0.8f),
+  m_name("")
 {
 }
 
@@ -76,6 +76,19 @@ void PhysicalShape::SetBody(b2Body *body)
   m_body = body;
 }
 
+void PhysicalShape::SetName(const std::string &name)
+{
+  m_name = name;
+}
+
+const std::string &PhysicalShape::GetName() const
+{
+  return m_name;
+}
+const b2Shape *PhysicalShape::GetShape() const
+{
+  return m_shape;
+}
 /////////////////////////////////
 // PhysicalPolygon
 
