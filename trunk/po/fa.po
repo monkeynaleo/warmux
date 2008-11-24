@@ -20,13 +20,13 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "نقشه‌ی %s پیدا نشد."
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "بازیکن %i وصل شد"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -145,7 +145,7 @@ msgstr[0] ""
 "تیم %s برنده‌ی %u بیل مکانیکی شد! لطفا زیادی سر و صدا نکنید! مرسی،از طرف "
 "همسایه‌ها!"
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -408,7 +408,7 @@ msgstr ""
 "شلیک : کلید Space\n"
 "یک ضربه در هر نوبت"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "سندان"
 
@@ -821,7 +821,7 @@ msgstr ""
 "دارید\n"
 "یک بار در هر نوبت"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1328,7 +1328,7 @@ msgstr "بازوکای اتوماتیک از زمین جنگ خارج شد..."
 msgid "The ball left the battlefield before exploding"
 msgstr "شیطونک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1351,7 +1351,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "نارنجک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "بقیه منتظر شما هستند! بجنب دیگه!"
 
@@ -1369,7 +1369,7 @@ msgstr "کارگزار اتصال را رد کرد."
 msgid "The server rejected the connection: wrong password!"
 msgstr "کارگزار اتصال را رد کرد."
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1427,7 +1427,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(بی‌نهایت)"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "بدون نام"
 
@@ -1440,13 +1440,13 @@ msgstr "نسخه"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "صبر کنید! بازیکن %i آماده نیست!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "در انتظار کارگزار، شما فقط می‌توانید رد کنید و یا گپ بزنید!"
 
@@ -1464,7 +1464,8 @@ msgstr "اسلحه‌ها"
 msgid "Website: "
 msgstr "وب‌سایت: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1503,11 +1504,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "شما تنهایید!"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "شما تنهایید..."
 
@@ -1519,11 +1520,11 @@ msgstr "شما حداقل یک نقشه‌ که به درستی کار کند ن
 msgid "You need at least two valid teams !"
 msgstr "شما حداقل به ۲ تیم نیاز دارید!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "شما قبل از اینکه تیمی انتخاب کنید نمی‌توانید بازی کنید!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "شلیک شما از دست رفت!"
 

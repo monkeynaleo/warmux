@@ -22,7 +22,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebyla nalezena :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -30,7 +30,7 @@ msgstr[0] "%i hráč připojen"
 msgstr[1] "%i hráči připojeni"
 msgstr[2] "%i hráčů připojeno"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -165,7 +165,7 @@ msgstr[2] ""
 "Tým %s získal %u pneumatických kladiv. Nedělejte s nimi moc hluku! Vaši "
 "sousedé vám poděkují."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -491,7 +491,7 @@ msgstr ""
 "Střelba: mezerník\n"
 "zásah obloukem"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Kovadlina"
 
@@ -908,7 +908,7 @@ msgstr ""
 "Odpálení : držet mezerník až na požadovanou sílu\n"
 "munice letí obloukem"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1406,7 +1406,7 @@ msgstr "Naváděná raketa opustila bitevní pole..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Míč opustil bitevní pole předtím, než explodoval"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1429,7 +1429,7 @@ msgstr "Hra byla ukončena, protože jste byl odpojen."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granát opustil bitevní pole předtím, než explodoval"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostatní na vás čekají! Vstávat :-)"
 
@@ -1446,7 +1446,7 @@ msgstr "Server odmítl spojení."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Server odmítl spojení: špatné heslo!"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1514,7 +1514,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(neomezeně)"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
@@ -1527,7 +1527,7 @@ msgstr "Verze"
 msgid "Version verification failed because: %s\n"
 msgstr "Kontrola verze selhala: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1535,7 +1535,7 @@ msgstr[0] "Počkejte! %i hráč ještě není připraven!"
 msgstr[1] "Počkejte! %i hráči ještě nejsou připraveni!"
 msgstr[2] "Počkejte! %i hráčů ještě není připraveno!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čeká se na server, jediné co můžete je zrušit to, nebo chatovat!"
 
@@ -1553,7 +1553,8 @@ msgstr "Zbraně"
 msgid "Website: "
 msgstr "Webová stránka: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1592,11 +1593,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Jste sám :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Jste sám..."
 
@@ -1608,11 +1609,11 @@ msgstr "Potřebujete nejméně jednu použitelnou mapu!"
 msgid "You need at least two valid teams !"
 msgstr "Potřebujete nejméně dva použitelné týmy!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nebudete schopen hrát, dokud si nevyberete tým!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Vaše střela minula!"
 

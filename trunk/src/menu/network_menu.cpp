@@ -153,6 +153,7 @@ NetworkMenu::NetworkMenu() :
   if (Network::GetInstance()->IsGameMaster()) {
     msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."), c_red);
   } else {
+    // %s will be replaced with the name of the network game
     msg_box->NewMessage(Format(_("Welcome to %s!"), Network::GetInstance()->GetGameName().c_str()), c_red);
   }
 

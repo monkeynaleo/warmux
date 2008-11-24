@@ -22,14 +22,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i igrač konektovan"
 msgstr[1] "%i igrač konektovan"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -156,7 +156,7 @@ msgstr[1] ""
 "%s tim je dobio %u zračnih čekića! Ne pravi previše buke sa njim! Hvala, "
 "tvoje komšije."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -445,7 +445,7 @@ msgstr ""
 "Pucanje: space\n"
 "udarac po redu"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Nakovanj"
 
@@ -868,7 +868,7 @@ msgstr ""
 "Pucaj : drži space do željene jačine udarca\n"
 "municija po redu"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -1375,7 +1375,7 @@ msgstr "Automatksa rakete je napustila bojište..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Odskočica je napustila bojište prije nego je explodirala"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1398,7 +1398,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granata napušta bojište prije explozije"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Drugi te čekaju! Probudi se :)"
 
@@ -1417,7 +1417,7 @@ msgstr "Server odbio konekciju."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Server odbio konekciju."
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1484,7 +1484,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(neograničeno)"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Bezimeni"
 
@@ -1497,14 +1497,14 @@ msgstr "Verzija"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Čekaj! %i igrač još nije spreman!"
 msgstr[1] "Čekaj! %i igrač nije još spreman!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čekanje za server, sve što sad možeš uraditi je odustati ili chatati!"
 
@@ -1522,7 +1522,8 @@ msgstr "Oružje:"
 msgid "Website: "
 msgstr "Web stranica:"
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1562,12 +1563,12 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 #, fuzzy
 msgid "You are alone :-/"
 msgstr "Sami ste ..."
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Sami ste ..."
 
@@ -1579,11 +1580,11 @@ msgstr "Trebate barem jednu važeće mapu!"
 msgid "You need at least two valid teams !"
 msgstr "Trebate barem dva važeća tima !"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nećeš biti u stanju da igraš prije nego izabereš tim!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 

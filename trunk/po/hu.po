@@ -15,14 +15,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "A(z) %s pálya nem található"
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i játékos lépett be"
 msgstr[1] "%i játékos lépett be"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -149,7 +149,7 @@ msgstr[1] ""
 "%s csapat %u légkalapácsot kapott! Ne csapj túl nagy zajt velük! Kösz, a "
 "szomszédok."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -442,7 +442,7 @@ msgstr ""
 "Tûz : space\n"
 "egy ütés körönként"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Üllõ"
 
@@ -857,7 +857,7 @@ msgstr ""
 "Tûz : tartsd lenyomva a space-t a kíván erõsség eléréséig\n"
 "egy lövés körönként"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1352,7 +1352,7 @@ msgstr "Az automatikus rakéta elhagyta a csatamezõt..."
 msgid "The ball left the battlefield before exploding"
 msgstr "A labda elhagyta a csatateret robbanás elõtt"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1378,7 +1378,7 @@ msgstr "Megszakadt a játék, mert kijelentkeztél."
 msgid "The grenade left the battlefield before exploding"
 msgstr "A gránát elhagyta a csatateret robbanás elõtt"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "A többiek várnak rád! Ébresztõ :-)"
 
@@ -1395,7 +1395,7 @@ msgstr "A szerver elutasította a kapcsolatot."
 msgid "The server rejected the connection: wrong password!"
 msgstr "A szerver elutasította a kapcsolatot: hibás jelszó!"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1461,7 +1461,7 @@ msgstr "Ismeretlen parancs"
 msgid "Unlimited"
 msgstr "Korlátlan"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Névtelen"
 
@@ -1474,14 +1474,14 @@ msgstr "Verzió"
 msgid "Version verification failed because: %s\n"
 msgstr "Verzió-ellenõrzés sikertelen: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Várj! %i játékos még nem áll készen!"
 msgstr[1] "Várj! %i játékos még nem áll készen!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Várakozás a szerverre, visszaléphetsz vagy csetelhetsz!"
 
@@ -1499,7 +1499,8 @@ msgstr "Fegyverek"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1538,11 +1539,11 @@ msgstr "Hibás pályanév!"
 msgid "Wrong team!"
 msgstr "Hibás csapat!"
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Egyedül vagy :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Egyedül vagy..."
 
@@ -1554,11 +1555,11 @@ msgstr "Választanod kell legalább egy pályát!"
 msgid "You need at least two valid teams !"
 msgstr "Választanod kell legalább két csapatot!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nem tudsz játszani csapatválasztás nélkül!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Ez mellé ment!"
 

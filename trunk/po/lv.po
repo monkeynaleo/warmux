@@ -22,7 +22,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nav atrasta :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -30,7 +30,7 @@ msgstr[0] "%i spēlētājs pieslēdzies"
 msgstr[1] "%i spēlētāji pieslēgušies"
 msgstr[2] "%i spēlētāju pieslēgušies"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -159,7 +159,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -474,7 +474,7 @@ msgstr ""
 "Šaušana : platais taustiņš (atstarpe)\n"
 "šāviens gājienā"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Lakta"
 
@@ -891,7 +891,7 @@ msgstr ""
 "spēks\n"
 "munīcija gājienā"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -1402,7 +1402,7 @@ msgstr "Automātiksā raķete izgāja no spēles laukuma..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bumba nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1425,7 +1425,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granāta nokrita no spēles laukuma pirms paguva uzsprāgt"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Citi gaida uz tevi! Dari kaut ko :-)"
 
@@ -1443,7 +1443,7 @@ msgstr "Serveris noraidīja savienojumu."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serveris noraidīja savienojumu."
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1511,7 +1511,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(bezgalība)"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr ""
 
@@ -1524,7 +1524,7 @@ msgstr "Versija"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1532,7 +1532,7 @@ msgstr[0] "Pagaidi! %i spēlētājs vēl nav gatavs!"
 msgstr[1] "Pagaidi! %i spēlētāji vēl nav gatavs!"
 msgstr[2] "Pagaidi! %i spēlētāju vēl nav gatavs!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Gaida uz serveri, jūs varat atcelt vai tērzēt!"
 
@@ -1550,7 +1550,8 @@ msgstr "Ieroči"
 msgid "Website: "
 msgstr "Mākas lapa: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1589,11 +1590,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Jūs esat viens pats :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Jūs esat viens pats..."
 
@@ -1605,11 +1606,11 @@ msgstr "Jums nepieciešama vismaz viena derīga karte !"
 msgid "You need at least two valid teams !"
 msgstr "Jums nepieciešamas vismaz divas derīgas komandas !"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Jūs netrāpijāt!"
 

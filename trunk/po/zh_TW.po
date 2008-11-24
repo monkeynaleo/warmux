@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! 地圖 %s未找到 :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i 玩家已連線"
 msgstr[1] "%i 玩家均已連線"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -152,7 +152,7 @@ msgid_plural ""
 msgstr[0] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 msgstr[1] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -438,7 +438,7 @@ msgstr ""
 "開火 : 白字元鍵\n"
 "每回合一擊"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "鐵砧"
 
@@ -852,7 +852,7 @@ msgstr ""
 "開火: 按住白字元鍵積攢到需要的力量\n"
 "每回合一個彈夾"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1356,7 +1356,7 @@ msgstr "制導火箭離開戰場..."
 msgid "The ball left the battlefield before exploding"
 msgstr "球膨脹前離開戰場"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1379,7 +1379,7 @@ msgstr "您斷線了."
 msgid "The grenade left the battlefield before exploding"
 msgstr "手榴彈離開戰場前發生爆炸"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "別人在等你! 快醒吧:-)"
 
@@ -1396,7 +1396,7 @@ msgstr "伺服器拒絕"
 msgid "The server rejected the connection: wrong password!"
 msgstr "伺服器拒絕: 密碼錯了."
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1463,7 +1463,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(無限的)"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "未命名"
 
@@ -1476,14 +1476,14 @@ msgstr "版本"
 msgid "Version verification failed because: %s\n"
 msgstr "版本改變失敗原因: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "請等待! %i沒准備好!"
 msgstr[1] "請等待! %i沒准備好!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "等着接受服務吧, 現在先聊天 !"
 
@@ -1501,7 +1501,8 @@ msgstr "武器"
 msgid "Website: "
 msgstr "網站Website: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1541,11 +1542,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "你是孤單的 :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "你是孤單的..."
 
@@ -1557,11 +1558,11 @@ msgstr "你需要可用的地圖!"
 msgid "You need at least two valid teams !"
 msgstr "至少有2組才能開始 !"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "沒有隊伍，就不會有戰斗!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 

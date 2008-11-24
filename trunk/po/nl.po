@@ -23,14 +23,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Kaart %s niet gevonden :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i speler maakte verbinding"
 msgstr[1] "%i spelers maakten verbinding"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -157,7 +157,7 @@ msgstr[1] ""
 "Team %s heeft %u drilboren gekregen! Maak er niet te veel herrie mee! "
 "Bedankt, uw buren."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -467,7 +467,7 @@ msgstr ""
 "Vuur : spatiebalk\n"
 "een slag per beurt"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Aambeeld"
 
@@ -883,7 +883,7 @@ msgstr ""
 "Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
 "een schot per beurt"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1378,7 +1378,7 @@ msgstr "De automatische raket heeft het slagveld verlaten..."
 msgid "The ball left the battlefield before exploding"
 msgstr "De bal heeft het slagveld verlaten alvorens te ontploffen"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1404,7 +1404,7 @@ msgstr "Het spel is onderbroken omdat uw verbinding verbroken is."
 msgid "The grenade left the battlefield before exploding"
 msgstr "De granaat heeft het slagveld verlaten alvorens te ontploffen"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De anderen wachten op u! Wakker worden :-)"
 
@@ -1421,7 +1421,7 @@ msgstr "De server weigerde de verbinding."
 msgid "The server rejected the connection: wrong password!"
 msgstr "De server weigerde de verbinding. Verkeerd wachtwoord!"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1487,7 +1487,7 @@ msgstr "Onbekend commando"
 msgid "Unlimited"
 msgstr "Onbegrensd"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Naamloos"
 
@@ -1500,14 +1500,14 @@ msgstr "Versie"
 msgid "Version verification failed because: %s\n"
 msgstr "Versie verificatie mislukt omdat: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Wacht! %i speler is nog niet klaar!"
 msgstr[1] "Wacht! %i spelers zijn nog niet klaar!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Wachten op de server, het enige wat u nu kunt doen is annuleren of chatten!"
@@ -1526,7 +1526,8 @@ msgstr "Wapens"
 msgid "Website: "
 msgstr "Website: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1565,11 +1566,11 @@ msgstr "Verkeerde kaartnaam!"
 msgid "Wrong team!"
 msgstr "Verkeerd team!"
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "U bent alleen :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "U bent alleen..."
 
@@ -1581,11 +1582,11 @@ msgstr "U heeft minimaal één geldige kaart nodig !"
 msgid "You need at least two valid teams !"
 msgstr "U heeft minimaal twee geldige teams nodig !"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd !"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 

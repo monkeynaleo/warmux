@@ -25,7 +25,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karta %s ni bila najdena :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -34,7 +34,7 @@ msgstr[1] "povezana %i igralca"
 msgstr[2] "povezani %i igralci"
 msgstr[3] "povezanih %i igralcev"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -169,7 +169,7 @@ msgstr[1] "Ekipa %s je osvojila %u pnevmatično kladivi!"
 msgstr[2] "Ekipa %s je osvojila %u pnevmatično kladiva!"
 msgstr[3] "Ekipa %s je osvojila %u pnevmatično kladiv!"
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -523,7 +523,7 @@ msgstr ""
 "Strel : Preslednica\n"
 "en udarec na potezo"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Nakovalo"
 
@@ -937,7 +937,7 @@ msgstr ""
 "Strel: držite preslednico dokler raketa ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1432,7 +1432,7 @@ msgstr "Avtomatska raketa je zapustila bojišče..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Žoga je zapustila bojišče preden je eksplodirala"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1457,7 +1457,7 @@ msgstr "Igra je bila prekinjena zaradi prekinitve povezave."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granata je zapustila bojišče preden je eksplodirala"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostali te čakajo! Zbudi se! :-)"
 
@@ -1474,7 +1474,7 @@ msgstr "Strežnik je zavrnil povezavo."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Strežnik je zavrnil povezavo: napačno geslo!"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1542,7 +1542,7 @@ msgstr "Neznan ukaz"
 msgid "Unlimited"
 msgstr "Neomejen"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Brezimjek"
 
@@ -1555,7 +1555,7 @@ msgstr "Različica"
 msgid "Version verification failed because: %s\n"
 msgstr "Preverjanje različice je spodletelo zaradi: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1564,7 +1564,7 @@ msgstr[1] "Počakajte! %i igralca še nista pripravljena!"
 msgstr[2] "Počakajte! %i igralci še niso pripravljeni!"
 msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
@@ -1582,10 +1582,11 @@ msgstr "Orožja"
 msgid "Website: "
 msgstr "Spletna stran: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Dobrodošli v %s!"
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1621,11 +1622,11 @@ msgstr "Napačno ime karte!"
 msgid "Wrong team!"
 msgstr "Napačna ekipa!"
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Sami ste :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Sami ste..."
 
@@ -1637,11 +1638,11 @@ msgstr "Potrebujete vsaj eno veljavno karto!"
 msgid "You need at least two valid teams !"
 msgstr "Potrebujete vsaj dve veljavni ekipi !"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 

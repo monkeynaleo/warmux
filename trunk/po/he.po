@@ -20,14 +20,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! המפה %s לא נמצאה :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "שחקן %i מחובר"
 msgstr[1] "%i שחקנים מחוברים"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -151,7 +151,7 @@ msgstr[0] "צוות %s זכה בפטיש אוויר! נא לשמור על השק
 msgstr[1] ""
 "צוות %s זכה ב-%u פטיש אוויר! נא לשמור על השקט בעת השימוש! תודה, השכנים."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -436,7 +436,7 @@ msgstr ""
 "אש: מקש הרווח\n"
 "פגיעה אחת לתור"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "סדן"
 
@@ -851,7 +851,7 @@ msgstr ""
 "ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
 "תחמושת לתור"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1358,7 +1358,7 @@ msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 msgid "The ball left the battlefield before exploding"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1381,7 +1381,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "הרימון יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "כולם מחכים רק לך! זמן לקום :-)"
 
@@ -1399,7 +1399,7 @@ msgstr "השרת סירב לבקשת החיבור."
 msgid "The server rejected the connection: wrong password!"
 msgstr "השרת סירב לבקשת החיבור."
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1466,7 +1466,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(ללא הגבלה)"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "ללא שם"
 
@@ -1479,14 +1479,14 @@ msgstr "גירסה"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "רגע! שחקן %i אינו מוכן עדיין!"
 msgstr[1] "רגע! %i שחקנים אינם מוכנים עדיין!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "ממתין לשרת, כרגע תוכל רק לבטל או להשתמש בצ'אט!"
 
@@ -1504,7 +1504,8 @@ msgstr "כלי נשק"
 msgid "Website: "
 msgstr "אתר: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1543,11 +1544,11 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "אתה לבדך :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "אתה לבדך..."
 
@@ -1559,11 +1560,11 @@ msgstr "אתה זקוק למפה תקינה אחת לפחות!"
 msgid "You need at least two valid teams !"
 msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "הירייה שלך החטיאה!"
 

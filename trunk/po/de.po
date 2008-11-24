@@ -22,14 +22,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i Spieler verbunden"
 msgstr[1] "%i Spieler verbunden"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -156,7 +156,7 @@ msgstr[1] ""
 "Mannschaft %s hat %u Presslufthammer gewonnen! Mach nicht zuviel Lärm damit! "
 "Danke, die Nachbarschaft."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -467,7 +467,7 @@ msgstr ""
 "Feuer : Leertaste\n"
 "ein Schuss pro Runde"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Amboss"
 
@@ -888,7 +888,7 @@ msgstr ""
 "Feuer : Leertaste gedrückt halten bis die gewünschte Stärke erreicht ist\n"
 "eine Munition pro Runde"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1395,7 +1395,7 @@ msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Der Ball hat das Schlachtfeld verlassen bevor er explodieren konnte."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1424,7 +1424,7 @@ msgid "The grenade left the battlefield before exploding"
 msgstr ""
 "Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Die Anderen warten auf dich! Aufwachen :-)"
 
@@ -1441,7 +1441,7 @@ msgstr "Der Server hat die Verbindung zurückgesetzt."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Der Server hat die Verbindung nicht akzeptiert: Falsches Passwort!"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1507,7 +1507,7 @@ msgstr "Unbekannter Befehl"
 msgid "Unlimited"
 msgstr "unbegrenzt"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Namenlos"
 
@@ -1520,14 +1520,14 @@ msgstr "Version"
 msgid "Version verification failed because: %s\n"
 msgstr "Die Überprüfung der Version schlug fehl, da: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
 msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Auf Server warten. Du kannst abbrechen oder chatten!"
 
@@ -1545,7 +1545,8 @@ msgstr "Waffen"
 msgid "Website: "
 msgstr "Webseite: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1584,11 +1585,11 @@ msgstr "Falscher Kartenname!"
 msgid "Wrong team!"
 msgstr "Falsches Team!"
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Du bist alleine :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Du bist alleine..."
 
@@ -1600,11 +1601,11 @@ msgstr "Du brauchst mindestens eine gültige Karte!"
 msgid "You need at least two valid teams !"
 msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kannst nicht spielen bevor du eine Mannschaft gewählt hast!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 
