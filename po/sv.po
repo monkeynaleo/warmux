@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Banan %s hittades inte :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i spelare ansluten"
 msgstr[1] "%i spelare anslutna"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -156,7 +156,7 @@ msgstr[1] ""
 "Lag %s har belönats med %u tryckluftsborr. För inte för mycket oväsen med "
 "dem! Tack, kära granne."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -454,7 +454,7 @@ msgstr ""
 "Eld : mellanslag\n"
 "en träff per omgång"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Städ"
 
@@ -869,7 +869,7 @@ msgstr ""
 "Eld : håll ner mellanslag tills önskad kraft uppnås\n"
 "ett skott per omgång"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1367,7 +1367,7 @@ msgstr "Den målsökande raketen har lämnat slagfältet..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bollen har lämnat slagfältet innan den exploderade"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1394,7 +1394,7 @@ msgstr "Spelet avbröts eftersom anslutningen bröts."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten lämnade slagfältet innan den exploderade"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De andra väntar på dig! Vakna :-)"
 
@@ -1411,7 +1411,7 @@ msgstr "Servern nekade anslutningen."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Servern nekade anslutningen: fel lösenord!"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1477,7 +1477,7 @@ msgstr "Okänt kommando"
 msgid "Unlimited"
 msgstr "Obegränsat"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -1490,14 +1490,14 @@ msgstr "Version"
 msgid "Version verification failed because: %s\n"
 msgstr "Versionsverifikationen misslyckades pga: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vänta! %i spelare är inte klara än!"
 msgstr[1] "Vänta! %i spelare är inte klara än!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Väntar på servern, allt du kan göra är att avbryta eller chatta!"
 
@@ -1515,7 +1515,8 @@ msgstr "Vapen"
 msgid "Website: "
 msgstr "Webbplats: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1554,11 +1555,11 @@ msgstr "Fel bannamn!"
 msgid "Wrong team!"
 msgstr "Fel lag!"
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Du är ensam :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Du är ensam..."
 
@@ -1570,11 +1571,11 @@ msgstr "Du behöver åtminstone en giltig bana!"
 msgid "You need at least two valid teams !"
 msgstr "Du behöver åtminstone två giltiga lag!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kommer inte att kunna spela innan du har valt ett lag!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Ditt skott missade!"
 

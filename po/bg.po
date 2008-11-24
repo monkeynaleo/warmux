@@ -24,14 +24,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Играчът %i се свърза"
 msgstr[1] "Играчите %i се свързаха"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -158,7 +158,7 @@ msgstr[1] ""
 "Отборът %s спечели %u Пневматични чукове! Не вдигай много шум с тях! "
 "Благодаря,съседите ти."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -453,7 +453,7 @@ msgstr ""
 "Огън : space\n"
 "един удар на ход"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Наковалня"
 
@@ -867,7 +867,7 @@ msgstr ""
 "Огън : дръж space до постигане на желаната сила\n"
 "муниция на ход"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1361,7 +1361,7 @@ msgstr "Пазете се! Смарт-бомба на свобода!"
 msgid "The ball left the battlefield before exploding"
 msgstr "Топката може да попадне в детски ръчички!"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1386,7 +1386,7 @@ msgstr "Играта беше прекъсната, защото ти излез
 msgid "The grenade left the battlefield before exploding"
 msgstr "Ходи я търси..."
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Другите те чакат! Събуди се :-)"
 
@@ -1403,7 +1403,7 @@ msgstr "Сървърът отказа връзката."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Сървърът отказа връзката: Грешна парола!"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1469,7 +1469,7 @@ msgstr "Непозната команда"
 msgid "Unlimited"
 msgstr "Безкраен"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Неименуван"
 
@@ -1482,14 +1482,14 @@ msgstr "версия"
 msgid "Version verification failed because: %s\n"
 msgstr "Проверка на версията се провали заради: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Чакай! %i играч не е готов!"
 msgstr[1] "Чакай! %i играчи не са готови!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Изчаквам за сървър, всичко което може да правиш е да откажеш или да си чатиш!"
@@ -1508,7 +1508,8 @@ msgstr "Оръжия"
 msgid "Website: "
 msgstr "Страница: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1548,11 +1549,11 @@ msgstr "Грешно име на картата."
 msgid "Wrong team!"
 msgstr "Грешен отбор."
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Ти си сам :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Ти си сам..."
 
@@ -1564,11 +1565,11 @@ msgstr "Трябва ми поне една валидна карта!"
 msgid "You need at least two valid teams !"
 msgstr "Трябват ми поне два валидни отбора!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Не може да играеш без отбор. Избери един!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Не точно там..."
 

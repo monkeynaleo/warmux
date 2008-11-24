@@ -25,14 +25,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i pelaaja liittyneenä"
 msgstr[1] "%i pelaajaa liittyneenä"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -159,7 +159,7 @@ msgstr[1] ""
 "Joukkue %s voitti %u katuporaa! Älä metelöi liikaa! Kiitoksia, terveisin "
 "naapurit."
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -453,7 +453,7 @@ msgstr ""
 "Ammu : välilyönti\n"
 "osuma per vuoro"
 
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Alasin"
 
@@ -864,7 +864,7 @@ msgstr ""
 "Lähtökulma: Ylös/Alas Ammu : pidä välilyönti painettuna\n"
 "yksi ammus per vuoro"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1358,7 +1358,7 @@ msgstr "Automaattiohjus on poistunut taistelukentältä..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Pallo on poistunut taistelukentältä..."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1383,7 +1383,7 @@ msgstr "Peli keskeytyi koska yhteytesi katkesi."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Kranaatti on poistunut taistelukentältä..."
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Kaikki muut odottavat sinua! Herätys!! :)"
 
@@ -1400,7 +1400,7 @@ msgstr "Palvelimen hylkäsi yhteyden."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Palvelin hylkäsi yhteyden: väärä salasana!"
 
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1466,7 +1466,7 @@ msgstr "Tuntematon komento"
 msgid "Unlimited"
 msgstr "Rajaton"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Nimetön"
 
@@ -1479,14 +1479,14 @@ msgstr "Versio"
 msgid "Version verification failed because: %s\n"
 msgstr "Versiontarkistus epäonnistui koska: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Hetkinen! %i pelaaja ei ole vielä valmis!"
 msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta, voit ainoastaan keskeyttää tai jutella!"
 
@@ -1504,7 +1504,8 @@ msgstr "Aseet"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1543,11 +1544,11 @@ msgstr "Väärä kartan nimi!"
 msgid "Wrong team!"
 msgstr "Väärä joukkue!"
 
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Olet yksin :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Olet yksin..."
 
@@ -1559,11 +1560,11 @@ msgstr "Tarvitset ainakin yhden toimivan kartan !"
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Et voi aloittaa peliä ennenkuin olet olet valinnut joukkueen!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 

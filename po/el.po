@@ -24,14 +24,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Ο χάρτης %s δεν βρέθηκε :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:327
+#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i παίκτης συνδέθηκε"
 msgstr[1] "%i παίκτες συνδέθηκαν"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -158,7 +158,7 @@ msgstr[1] ""
 "Η ομάδα %s κέρδισε %u τρυπάνια! Μην κάνεις πολύ φασαρία θα ξυπνήσεις τους "
 "γείτονες!"
 
-#: src/weapon/anvil.cpp:175
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -470,7 +470,7 @@ msgstr ""
 "ένα χτύπημα ανά γύρο"
 
 # Enclume
-#: src/weapon/anvil.cpp:118
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Αμόνι"
 
@@ -898,7 +898,7 @@ msgstr ""
 
 # Usage : clic gauche sur la cible\n
 # une munition par tour
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1406,7 +1406,7 @@ msgstr "Η αυτόματη ρουκέτα έφυγε για άλλους κόσ
 msgid "The ball left the battlefield before exploding"
 msgstr "Η μπάλα αναπήδησης εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1435,7 +1435,7 @@ msgid "The grenade left the battlefield before exploding"
 msgstr "Η χειροβομβίδα εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
 # Les autres t'attendent ! Réveille-toi :-)
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:343
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Εσένα θα περιμένουμε; Ξύπνα :-)"
 
@@ -1456,7 +1456,7 @@ msgid "The server rejected the connection: wrong password!"
 msgstr "Ο διακομιστής απέρριψε τη σύνδεση: λάθος κωδικός!"
 
 # Il n'y a que %i équipe.
-#: src/menu/network_menu.cpp:247
+#: src/menu/network_menu.cpp:248
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1522,7 +1522,7 @@ msgstr "Άγνωστη εντολή"
 msgid "Unlimited"
 msgstr "Απεριόριστο"
 
-#: src/network/network.cpp:175
+#: src/network/network.cpp:176
 msgid "Unnamed"
 msgstr "Ανώνυμος"
 
@@ -1535,7 +1535,7 @@ msgstr "Έκδοση"
 msgid "Version verification failed because: %s\n"
 msgstr "Επαλήθευση έκδοσης απέτυχε διότι: %s\n"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:262
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1543,7 +1543,7 @@ msgstr[0] "Περίμενε! %i παίκτης δεν είναι έτοιμος 
 msgstr[1] "Περίμενε! %i παίκτες δεν είναι έτοιμοι ακόμα!"
 
 # Attente du serveur, vous pouvez annuler ou discuter !
-#: src/menu/network_menu.cpp:409
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
@@ -1561,7 +1561,8 @@ msgstr "Όπλα"
 msgid "Website: "
 msgstr "Ιστοσελίδα: "
 
-#: src/menu/network_menu.cpp:156
+#. %s will be replaced with the name of the network game
+#: src/menu/network_menu.cpp:157
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1602,11 +1603,11 @@ msgid "Wrong team!"
 msgstr "Λάθος ομάδα!"
 
 # T'es tout seul :-/
-#: src/menu/network_menu.cpp:345
+#: src/menu/network_menu.cpp:346
 msgid "You are alone :-/"
 msgstr "Είσαι μονάχος :-/"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:256
 msgid "You are alone..."
 msgstr "Θέλετε σίγουρα να παίξετε μόνος σας;!"
 
@@ -1618,11 +1619,11 @@ msgstr "Χρειάζεται τουλάχιστον ένας έγκυρος χά
 msgid "You need at least two valid teams !"
 msgstr "Χρειάζονται τουλάχιστον δύο έγκυρες ομάδες!"
 
-#: src/menu/network_menu.cpp:235
+#: src/menu/network_menu.cpp:236
 msgid "You won't be able to play before selecting a team !"
 msgstr "Δεν μπορείτε να παίξετε χωρίς να διαλέξετε ομάδα!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Αστόχησες..."
 
