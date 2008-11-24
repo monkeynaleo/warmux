@@ -74,9 +74,9 @@ void WeaponBullet::SignalOutOfMap()
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
-void WeaponBullet::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before)
+void WeaponBullet::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& my_speed_before)
 {
-  shape->SetName(shape->GetName()); //Ugly compilation fix
+
 #if 1
   if (!obj->IsCharacter())
   {
@@ -258,10 +258,10 @@ bool WeaponProjectile::IsImmobile() const
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /* my_speed_before */)
+void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& /* my_speed_before */)
 {
 
-  shape->SetName(shape->GetName()); //Ugly compilation fix
+
       ASSERT(obj != NULL);
       MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
           m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());

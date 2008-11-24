@@ -54,12 +54,12 @@ private:
   bool back_jumping;
   bool death_explosion;
   double firing_angle;
-
+  uint m_nbr_foot_contact;
   uint disease_damage_per_turn;
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
   DamageStatistics *damage_stats;
   EnergyBar energy_bar;
-
+  uint m_force_walk_index;
   // survived games
   int survivals;
 
@@ -179,6 +179,19 @@ public:
   // Can we move (check a timeout)
   bool CanMoveRL() const;
   bool CanJump() const { return CanMoveRL(); };
+  bool FootsInVacuum() const;
+
+  virtual void AddContact(const PhysicalShape * shape);
+  virtual void RemoveContact(const PhysicalShape * shape);
+
+
+
+  void Move (bool slowly);
+  void StopMove();
+
+  // Move the active character to the left/right
+  void MoveRight(bool shift);
+  void MoveLeft(bool shift);
 
   // Jumps
   void Jump(double strength, double angle);
@@ -223,11 +236,11 @@ public:
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool shift);
-  void HandleKeyRefreshed_MoveRight(bool shift) const;
+  void HandleKeyRefreshed_MoveRight(bool shift) ;
   void HandleKeyReleased_MoveRight(bool shift);
 
   void HandleKeyPressed_MoveLeft(bool shift);
-  void HandleKeyRefreshed_MoveLeft(bool shift) const;
+  void HandleKeyRefreshed_MoveLeft(bool shift) ;
   void HandleKeyReleased_MoveLeft(bool shift);
 
   void HandleKeyPressed_Up(bool shift) { HandleKeyRefreshed_Up(shift); };

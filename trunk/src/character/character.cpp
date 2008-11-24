@@ -76,6 +76,18 @@ const double MIN_SPEED_TO_FLY = 15.0;
 //#define DEBUG_STATS
 #endif
 
+
+  // Max climbing height walking
+  const int MAX_CLIMBING_HEIGHT=30;
+
+  // Max height for which we do not need to call the Physical Engine with gravity features
+  const int MAX_FALLING_HEIGHT=20;
+
+  // Pause between changing direction
+  const uint PAUSE_CHG_DIRECTION=80; // ms
+
+
+
 // Energy bar
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
@@ -106,10 +118,12 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   back_jumping(false),
   death_explosion(true),
   firing_angle(0),
+  m_nbr_foot_contact(0),
   disease_damage_per_turn(0),
   disease_duration(0),
   damage_stats(new DamageStatistics(*this)),
   energy_bar(),
+  m_force_walk_index(0),
   survivals(0),
   name_text(NULL),
   rl_motion_pause(0),
@@ -480,7 +494,7 @@ void Character::Jump(double strength, double angle /*in radian */)
     angle = InverseAngle(angle);
 
 //  SetSpeed (strength, angle);
-  Impulse(100 + strength,angle);
+  Impulse( strength,angle);
 }
 
 void Character::Jump()
@@ -507,6 +521,121 @@ void Character::BackJump()
   Jump(GameMode::GetInstance()->character.back_jump_strength,
        GameMode::GetInstance()->character.back_jump_angle);
 }
+
+
+void Character::Move( bool slowly)
+{
+ // int height;
+  bool ghost;
+  uint walking_pause = GameMode::GetInstance()->character.walking_pause;
+
+  if (slowly)
+    walking_pause *= 10;
+  else
+    SetMovement("walk"); // avoid sliding effect when not right or left key is released while releasing shift
+
+  // If character moves out of the world, no need to go further: it is dead
+  if (GetDirection() == DIRECTION_LEFT)
+    ghost = IsOutsideWorld ( Point2i(-1, 0) );
+  else
+    ghost = IsOutsideWorld ( Point2i(1, 0) );
+  if (ghost){
+    MSG_DEBUG("ghost", "%s will be a ghost.", GetName().c_str());
+    Ghost();
+    return;
+  }
+
+  double speed;
+
+  if(slowly){
+    speed = 1;
+  }else{
+    speed = 5;
+  }
+
+  if(!m_force_walk_index){
+
+    PhysicalShape * feet = GetShape("feet");
+       feet->SetFriction(0.0);
+       feet->Generate();
+
+
+
+    if(GetDirection() == DIRECTION_LEFT){
+
+      m_force_walk_index = AddExternForceXY(Point2d(-40000,0000));
+
+    }else{
+      m_force_walk_index = AddExternForceXY(Point2d(40000,0000));
+
+
+    }
+  }
+
+  if(GetDirection() == DIRECTION_LEFT){
+
+       if(GetSpeedXY().x<-speed){
+                SetSpeedXY(Point2d(-speed,GetSpeedXY().y));
+         }
+      }else{
+
+        if(GetSpeedXY().x>speed){
+          SetSpeedXY(Point2d(speed,GetSpeedXY().y));
+        }
+      }
+
+}
+
+void Character::StopMove(){
+    RemoveExternForce(m_force_walk_index);
+
+    m_force_walk_index = 0;
+    body->StopWalk();
+    PhysicalShape * feet = GetShape("feet");
+    feet->SetFriction(10.0);
+    feet->Generate();
+    SendActiveCharacterInfo();
+    SetSpeedXY(Point2d(GetSpeedXY().x/5,GetSpeedXY().y));
+}
+
+
+void Character::MoveLeft(bool shift){
+  // character is ready to move ?
+    //if (!ActiveCharacter().CanMoveRL()) return;
+
+  bool move = (GetDirection() == DIRECTION_LEFT);
+  if (move) {
+    Move( shift);
+  } else {
+    SetDirection(DIRECTION_LEFT);
+    BeginMovementRL(PAUSE_CHG_DIRECTION, shift);
+  }
+
+  //Refresh skin position across network
+  if (!Network::GetInstance()->IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
+    SendActiveCharacterInfo();
+}
+
+
+void Character::MoveRight(bool shift)
+{
+  // character is ready to move ?
+ // if (!ActiveCharacter().CanMoveRL()) return;
+
+  bool move = (GetDirection() == DIRECTION_RIGHT);
+  if (move) {
+    Move( shift);
+  } else {
+    SetDirection(DIRECTION_RIGHT);
+    BeginMovementRL(PAUSE_CHG_DIRECTION, shift);
+  }
+
+  //Refresh skin position across network
+  if (!Network::GetInstance()->IsLocal() && ActiveTeam().IsLocal())
+    SendActiveCharacterInfo();
+}
+
+
 
 void Character::PrepareShoot()
 {
@@ -625,9 +754,27 @@ void Character::PrepareTurn()
 
 bool Character::CanMoveRL() const
 {
-  if (!IsImmobile() || IsFalling()) return false;
+  if (FootsInVacuum()) return false;
   return rl_motion_pause < Time::GetInstance()->Read();
 }
+bool Character::FootsInVacuum() const
+{
+  return (m_nbr_foot_contact == 0);
+}
+
+void Character::AddContact(const PhysicalShape * shape)
+{
+  PhysicalObj::AddContact(shape);
+  m_nbr_foot_contact++;
+}
+
+void Character::RemoveContact(const PhysicalShape * shape)
+{
+  PhysicalObj::RemoveContact(shape);
+  m_nbr_foot_contact--;
+}
+
+
 
 void Character::BeginMovementRL(uint pause, bool slowly)
 {
@@ -1008,14 +1155,14 @@ void Character::SetSize(const Point2i &newSize)
   // Shape position is relative to body
   PhysicalPolygon *shape = new PhysicalPolygon();
 
-  shape->AddPoint(Point2d(0, 0));
-  shape->AddPoint(Point2d(phys_width, 0));
-  shape->AddPoint(Point2d(phys_width, 3*phys_height/8));
-  shape->AddPoint(Point2d(9*phys_width/10, 6*phys_height/8));
+  shape->AddPoint(Point2d(3*phys_width/10, 0));
+  shape->AddPoint(Point2d(7*phys_width/10, 0));
+
+  shape->AddPoint(Point2d(7*phys_width/10, 6*phys_height/8));
   //  shape->AddPoint(Point2d(6*phys_width/10, phys_height));
   //  shape->AddPoint(Point2d(4*phys_width/10, phys_height));
-  shape->AddPoint(Point2d(1*phys_width/10, 6*phys_height/8));
-  shape->AddPoint(Point2d(0, 3*phys_height/8));
+  shape->AddPoint(Point2d(3*phys_width/10, 6*phys_height/8));
+
 
   shape->SetMass(GetMass()/2); // There are 2 shapes, divide the mass of body by 2
 
@@ -1028,7 +1175,7 @@ void Character::SetSize(const Point2i &newSize)
   }
   shape->SetFilter(filter_data);
   shape->SetFriction(1.2f);
-
+  shape->SetName("body");
 
 
   //Feet shape
@@ -1038,9 +1185,9 @@ void Character::SetSize(const Point2i &newSize)
   feet_shape->SetRadius(phys_width/2);
   feet_shape->SetMass(GetMass()/2);
   feet_shape->SetPosition(Point2d(phys_width/2, phys_height - phys_width/2));
-  feet_shape->SetFriction(1.2f);
+  feet_shape->SetFriction(10.2f);
   feet_shape->SetFilter(filter_data);
-
+  feet_shape->SetName("feet");
 
   ClearShapes();
 
@@ -1063,20 +1210,21 @@ void Character::HandleKeyPressed_MoveRight(bool shift)
   HandleKeyRefreshed_MoveRight(shift);
 }
 
-void Character::HandleKeyRefreshed_MoveRight(bool shift) const
+void Character::HandleKeyRefreshed_MoveRight(bool shift)
 {
   HideGameInterface();
 
   if (!ActiveCharacter().FootsInVacuum()){
-    MoveActiveCharacterRight(shift);
+    MoveRight(shift);
+  }else{
+    RemoveExternForce(m_force_walk_index);
+    m_force_walk_index = 0;
   }
 }
 
 void Character::HandleKeyReleased_MoveRight(bool)
 {
-  body->StopWalk();
-  SetSpeedXY(Point2d(GetSpeedXY().x/5,GetSpeedXY().y));
-  SendActiveCharacterInfo();
+  StopMove();
 }
 
 // #################### MOVE_LEFT
@@ -1084,32 +1232,31 @@ void Character::HandleKeyPressed_MoveLeft(bool shift)
 {
   BeginMovementRL(GameMode::GetInstance()->character.walking_pause, shift);
   body->StartWalk();
-
   HandleKeyRefreshed_MoveLeft(shift);
 }
 
-void Character::HandleKeyRefreshed_MoveLeft(bool shift) const
+void Character::HandleKeyRefreshed_MoveLeft(bool shift)
 {
   HideGameInterface();
 
   if (!ActiveCharacter().FootsInVacuum()){
-    MoveActiveCharacterLeft(shift);
+    MoveLeft(shift);
+  }else{
+    RemoveExternForce(m_force_walk_index);
+    m_force_walk_index = 0;
   }
 }
 
 void Character::HandleKeyReleased_MoveLeft(bool)
 {
-  body->StopWalk();
-  SendActiveCharacterInfo();
-  SetSpeedXY(Point2d(GetSpeedXY().x/5,GetSpeedXY().y));
+  StopMove();
 }
 
 // #################### UP
 void Character::HandleKeyRefreshed_Up(bool shift)
 {
   HideGameInterface();
-  if (ActiveCharacter().IsImmobile())
-    {
+
       if (ActiveTeam().crosshair.enable)
         {
 	  UpdateLastMovingTime();
@@ -1118,15 +1265,14 @@ void Character::HandleKeyRefreshed_Up(bool shift)
           else       AddFiringAngle(-DELTA_CROSSHAIR);
           SendActiveCharacterInfo();
         }
-    }
+
 }
 
 // #################### DOWN
 void Character::HandleKeyRefreshed_Down(bool shift)
 {
   HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    {
+
       if (ActiveTeam().crosshair.enable)
         {
 	  UpdateLastMovingTime();
@@ -1135,7 +1281,7 @@ void Character::HandleKeyRefreshed_Down(bool shift)
           else       AddFiringAngle(DELTA_CROSSHAIR);
           SendActiveCharacterInfo();
         }
-    }
+
 }
 
 // #################### JUMP
@@ -1143,33 +1289,32 @@ void Character::HandleKeyRefreshed_Down(bool shift)
 void Character::HandleKeyPressed_Jump(bool)
 {
   HideGameInterface();
-  if (ActiveCharacter().IsImmobile()) {
+
     Action a(Action::ACTION_CHARACTER_JUMP);
     SendActiveCharacterAction(a);
     Jump();
-  }
+
 }
+
 
 // #################### HIGH JUMP
 void Character::HandleKeyPressed_HighJump(bool)
 {
   HideGameInterface();
-  if (ActiveCharacter().IsImmobile()) {
-    Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
-    SendActiveCharacterAction(a);
-    HighJump();
-  }
+  Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
+  SendActiveCharacterAction(a);
+  HighJump();
+
 }
 
 // #################### BACK JUMP
 void Character::HandleKeyPressed_BackJump(bool)
 {
   HideGameInterface();
-  if (ActiveCharacter().IsImmobile()) {
-    Action a(Action::ACTION_CHARACTER_BACK_JUMP);
-    SendActiveCharacterAction(a);
-    BackJump();
-  }
+  Action a(Action::ACTION_CHARACTER_BACK_JUMP);
+  SendActiveCharacterAction(a);
+  BackJump();
+
 }
 
 
