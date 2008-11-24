@@ -57,7 +57,6 @@
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 40;
 
-
 double MeterDistance (const Point2i &p1, const Point2i &p2)
 {
   return p1.Distance(p2) / PIXEL_PER_METER;
@@ -177,7 +176,7 @@ void PhysicalObj::SetXY(const Point2d &position)
     } else {
       SetPhysXY( position / PIXEL_PER_METER );
 
-      if (FootsInVacuum()) {
+      if (!IsColliding()) {
         StartMoving();
       }
     }
@@ -685,9 +684,12 @@ uint PhysicalObj::AddExternForce (double norm, double angle)
 void PhysicalObj::RemoveExternForce(uint index)
 {
   if (index != 0) {
+
+    if(m_extern_force_map.count(index)){
     PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
     delete m_extern_force_map[index];
     m_extern_force_map.erase(index);
+    }
   }
 }
 
@@ -760,10 +762,10 @@ void PhysicalObj::UpdatePosition ()
   if (m_collides_with_ground) {
 
     // object is not moving and has no reason to move
-    if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
+    if ( !IsMoving() && IsColliding() && !IsInWater() ) return;
 
     // object is not moving BUT it should fall !
-    if ( !IsMoving() && FootsInVacuum() ) StartMoving();
+    if ( !IsMoving() && IsColliding() ) StartMoving();
   }
 
   if (IsGhost())
@@ -988,42 +990,7 @@ bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_objects) const
   return IsInVacuumXY(GetPosition() + offset, check_objects);
 }
 
-bool PhysicalObj::FootsInVacuum() const
-{
-  Point2i position = GetPosition();
 
-  if (IsOutsideWorldXY(position)) {
-    MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
-    return GetWorld().IsOpen(); // WARNING: it's quite strange...
-  }
-
-  // ===========================================================
-  // WARNING: Not sure those tests have to be removed completely
-  // ===========================================================
-  // {
-  //   Rectanglei rect(position.x + m_test_left,
-  // 		    position.y + m_test_top + GetTestHeight(),
-  // 		    GetTestWidth(),
-  // 		  GetTestHeight());
-
-  //   if (m_allow_negative_y && rect.GetPositionY() < 0) {
-  //     int b = rect.GetPositionY() + rect.GetSizeY();
-
-  //     rect.SetPositionY( 0 );
-  //     rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
-  //   }
-
-  //   if (CollidedObjectXY(position + Point2i(0, 1)) != NULL ) {
-  //     return false;
-  //   }
-
-  //   if (!GetWorld().RectIsInVacuum (rect)) {
-  //     return false;
-  //   }
-  // }
-
-  return (m_nbr_contact == 0);
-}
 
 // ====================================================
 // WARNING: To rewrite using Box2D shapes and contacts
@@ -1086,7 +1053,7 @@ bool PhysicalObj::IsInWater () const
 
 void PhysicalObj::DirectFall()
 {
-  while (!IsGhost() && !IsInWater() && FootsInVacuum()) {
+  while (!IsGhost() && !IsInWater() && IsColliding()) {
     MSG_DEBUG("physic.fall", "%s - x=%f, y=%f\n", m_name.c_str(), GetXdouble(), GetYdouble());
     SetY(GetYdouble()+1.0);
   }
@@ -1096,7 +1063,7 @@ bool PhysicalObj::IsImmobile() const
 {
   bool r = IsSleeping()
     || m_ignore_movements
-    || (!IsMoving() && !FootsInVacuum())
+    || (!IsMoving() && IsColliding())
     || IsGhost();
 
   return r;
@@ -1376,18 +1343,22 @@ void PhysicalObj::ClearContact()
   result_contact_list.clear();
 }
 
-void PhysicalObj::AddContact()
+void PhysicalObj::AddContact(const PhysicalShape * /*shape*/)
 {
   m_nbr_contact++;
   MSG_DEBUG("physic.contact", "%s - Adding contact %d\n", m_name.c_str(), m_nbr_contact);
 }
 
-void PhysicalObj::RemoveContact()
+void PhysicalObj::RemoveContact(const PhysicalShape * /*shape*/)
 {
   m_nbr_contact--;
   MSG_DEBUG("physic.contact", "%s - Removing contact %d\n", m_name.c_str(), m_nbr_contact);
 }
 
+bool PhysicalObj::IsColliding() const
+{
+  return (m_nbr_contact !=0);
+}
 
 double PhysicalObj::GetAngle() const
 {
@@ -1415,3 +1386,14 @@ PhysicalShape *PhysicalObj::GetShape(b2Shape *shape)
   return NULL;
 }
 
+PhysicalShape *PhysicalObj::GetShape(std::string name)
+{
+  std::list<PhysicalShape *>::iterator it;
+
+  for(it = m_shapes.begin(); it != m_shapes.end();it++){
+    if((*it)->GetName() == name){
+      return *it;
+    }
+  }
+  return NULL;
+}

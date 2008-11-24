@@ -215,9 +215,9 @@ public:
   void AddRemovedContactPoint(b2ContactPoint contact);
   void AddContactResult(b2ContactResult contact);
 
-  void AddContact();
-  void RemoveContact();
-  void ClearContact();
+  virtual void AddContact(const PhysicalShape * shape);
+  virtual void RemoveContact(const PhysicalShape * shape);
+  virtual void ClearContact();
 
   void SetBullet(bool is_bullet);
 
@@ -255,11 +255,12 @@ public:
   // Relative to current position
   bool IsInVacuum(const Point2i &offset, bool check_objects = true) const;
 
+  bool IsColliding() const;
+
   PhysicalObj* CollidedObjectXY(const Point2i & position) const;
   // Relative to current position
   PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const;
 
-  bool FootsInVacuum() const;
 
   bool IsInWater() const;
 
@@ -320,6 +321,8 @@ public:
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
 
   PhysicalShape *GetShape(b2Shape *);
+  PhysicalShape *GetShape(std::string name);
+
   virtual void SignalRebound();
   virtual void SignalObjectCollision(PhysicalObj *,PhysicalShape *, const Point2d&) { };
   virtual void SignalGroundCollision(const Point2d&) { };

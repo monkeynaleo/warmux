@@ -86,11 +86,10 @@ void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
   CloseParachute();
 }
 
-void ObjBox::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /*my_speed_before*/)
+void ObjBox::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& /*my_speed_before*/)
 {
   //  SignalCollision(); // this is done by the physical engine...
-  shape->SetName(shape->GetName()); //Ugly compilation fix
-   if (obj->IsCharacter()){
+  if (obj->IsCharacter()){
      ApplyBonus((Character *)obj);
    }
 }

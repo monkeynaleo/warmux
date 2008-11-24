@@ -82,7 +82,7 @@ void FireParticle::Refresh()
   // So, since we are resizing the object, we have to move it
   // to make it appear at the same place
 
-  if(on_ground || !FootsInVacuum())
+  if(on_ground || IsColliding())
   {
     on_ground = true;
     if((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)

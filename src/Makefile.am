@@ -60,8 +60,8 @@ wormux_SOURCES = \
         gui/spin_button_big.cpp gui/spin_button_big.h \
         gui/spin_button.cpp gui/spin_button.h \
         gui/spin_button_picture.cpp gui/spin_button_picture.h \
-	gui/tabs.cpp gui/tabs.h \
-	gui/talk_box.cpp gui/talk_box.h \
+        gui/tabs.cpp gui/tabs.h \
+        gui/talk_box.cpp gui/talk_box.h \
         gui/text_box.cpp gui/text_box.h \
         gui/widget.cpp gui/widget.h \
         gui/widget_list.cpp gui/widget_list.h \
@@ -86,7 +86,7 @@ wormux_SOURCES = \
         map/ground.cpp map/ground.h \
         map/map.cpp map/map.h \
         map/maps_list.cpp map/maps_list.h \
-	map/physic_tile.cpp map/physic_tile.h \
+	    map/physic_tile.cpp map/physic_tile.h \
         map/random_map.cpp map/random_map.h \
         map/sky.cpp map/sky.h \
         map/tileitem.cpp map/tileitem.h \
@@ -94,7 +94,7 @@ wormux_SOURCES = \
         map/wind.cpp map/wind.h \
         menu/credits_menu.cpp menu/credits_menu.h \
         menu/game_menu.cpp menu/game_menu.h \
-	menu/game_mode_editor.cpp menu/game_mode_editor.h \
+	    menu/game_mode_editor.cpp menu/game_mode_editor.h \
         menu/help_menu.cpp menu/help_menu.h \
         menu/main_menu.cpp menu/main_menu.h \
         menu/map_selection_box.cpp menu/map_selection_box.h \

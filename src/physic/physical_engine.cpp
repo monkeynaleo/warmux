@@ -130,7 +130,7 @@ void PhysicalEngine::ComputeContacts()
 
       PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
 
-      collider->AddContact();
+      collider->AddContact(collider->GetShape(contact.shape1));
 
       collider->SignalRebound();
 
@@ -152,7 +152,7 @@ void PhysicalEngine::ComputeContacts()
 
       PhysicalObj  *collider = objects_list[contact.shape2->GetBody()];
 
-      collider->AddContact();
+      collider->AddContact(collider->GetShape(contact.shape2));
 
       collider->SignalRebound();
 
@@ -185,14 +185,14 @@ void PhysicalEngine::ComputeContacts()
 	&& (objects_list[contact.shape1->GetBody()] != NULL)) {
       PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
 
-      collider->RemoveContact();
+      collider->RemoveContact(collider->GetShape(contact.shape1));
     }
 
     if ((objects_list.count(contact.shape2->GetBody()) == 1)
 	&& (objects_list[contact.shape2->GetBody()] != NULL)) {
       PhysicalObj  *collider =  objects_list[contact.shape2->GetBody()];
 
-      collider->RemoveContact();
+      collider->RemoveContact(collider->GetShape(contact.shape2));
     }
   }
   ClearContact();
