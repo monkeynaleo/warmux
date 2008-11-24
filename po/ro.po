@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-09-16 00:51+0300\n"
+"PO-Revision-Date: 2008-11-25 00:14+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -786,9 +786,8 @@ msgid "Connected !"
 msgstr "Conectat!"
 
 #: src/network/admin_commands.cpp:64
-#, fuzzy
 msgid "Connected players: "
-msgstr "Conectat!"
+msgstr "Jucători conectați: "
 
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
@@ -1143,7 +1142,7 @@ msgstr "Limba"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Afișează jucătorii conectați"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1183,9 +1182,8 @@ msgstr "Hărți"
 
 #. The first player to connect to a headless server asumes the game master role
 #: src/menu/network_menu.cpp:117
-#, fuzzy
 msgid "Master mode"
-msgstr "Modul jocului"
+msgstr "Modul server"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1266,9 +1264,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fișierul xml de configurare!"
 
 #: src/network/admin_commands.cpp:60
-#, fuzzy
 msgid "No player connected"
-msgstr "%i jucător conectat"
+msgstr "Nici un jucător conectat"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1711,9 +1708,9 @@ msgstr "Saitul web: "
 
 #. %s will be replaced with the name of the network game
 #: src/menu/network_menu.cpp:157
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to %s!"
-msgstr "Selectați echipele:"
+msgstr "Bine ați venit la %s!"
 
 #: src/game/game.cpp:753
 #, c-format
