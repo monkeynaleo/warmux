@@ -20,25 +20,19 @@
  *****************************************************************************/
 
 #include <algorithm>  //std::find
+#include <SDL_thread.h>
+#include <WORMUX_socket.h>
 #include "network/distant_cpu.h"
 //-----------------------------------------------------------------------------
-#include <WORMUX_socket.h>
-#include <SDL_thread.h>
-#include "network/network.h"
 #include "include/action.h"
 #include "include/action_handler.h"
-#include "map/maps_list.h"
-#include "menu/network_menu.h"
-#include "team/team_config.h"
-#include <WORMUX_debug.h>
 //-----------------------------------------------------------------------------
 
 static const int MAX_PACKET_SIZE = 250*1024;
 
 DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname) :
   sock(new_sock),
-  state(DistantComputer::STATE_ERROR),
-  force_disconnect(false)
+  state(DistantComputer::STATE_NOT_INITIALIZED)
 {
   player.SetNickname(nickname);
 }
@@ -94,12 +88,11 @@ DistantComputer::state_t DistantComputer::GetState() const
 void DistantComputer::ForceDisconnection()
 {
   state = STATE_ERROR;
-  force_disconnect = true;
 }
 
 bool DistantComputer::MustBeDisconnected()
 {
-  return force_disconnect;
+  return (state == STATE_ERROR);
 }
 
 const std::string DistantComputer::ToString() const
