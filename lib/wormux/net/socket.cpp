@@ -443,16 +443,24 @@ bool WSocket::SendBuffer(const void* data, size_t len)
 
 bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
 {
+  size_t total_received = 0;
   int received = 0;
 
-  // Receive data of *exactly* length "len" bytes from the socket "socket",
-  // into the memory pointed to by "data".
-  // => no need to make a loop to receive all the data (see documentation)
-  received = SDLNet_TCP_Recv(socket, data, len);
-  if (received != int(len)) {
-    print_net_error("SDLNet_TCP_Recv");
-    fprintf(stderr, "ERROR: SDLNet_TCP_Recv: %d, %d\n", received, len);
-    return false;
+  while (total_received != len) {
+    // Documentation says that SDLNet_TCP_Recv receives data of *exactly* length "len" bytes
+    // from the socket "socket" into the memory pointed to by "data".
+    // BUT I have observed the contrary if len is big (len > 16384)
+    // => A loop fixes this behavior
+    //
+    //                 Gentildemon.
+
+    received = SDLNet_TCP_Recv(socket, data, len);
+    if (received <= 0) {
+      print_net_error("SDLNet_TCP_Recv");
+      fprintf(stderr, "ERROR: SDLNet_TCP_Recv: %d\n", received);
+      return false;
+    }
+    total_received += received;
   }
 
   return true;
