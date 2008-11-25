@@ -35,6 +35,7 @@ class DistantComputer
  public:
   typedef enum {
     STATE_ERROR,
+    STATE_NOT_INITIALIZED,
     STATE_INITIALIZED,
     STATE_READY,
     STATE_CHECKED,
@@ -49,8 +50,6 @@ class DistantComputer
 
   WSocket* sock;
   DistantComputer::state_t state;
-  bool force_disconnect;
-
   Player player;
 
 public:
