@@ -36,6 +36,7 @@
   <sound sample="weapon/anvil_fall" file="weapon/anvil_fall.ogg" />
   <sound sample="weapon/automatic_rocket_flying" file="weapon/supertux_flying.ogg" />
   <sound sample="weapon/baseball" file="weapon/baseball.ogg" />
+  <sound sample="weapon/blowtorch" file="weapon/blowtorch.ogg" />
   <sound sample="weapon/construct" file="weapon/construct.ogg" />
   <sound sample="weapon/disco_grenade_bounce" file="weapon/grenade_bounce.ogg" />
   <sound sample="weapon/disco_grenade_music" file="weapon/disco_grenade_music.ogg" />
