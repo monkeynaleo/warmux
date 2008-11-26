@@ -23,7 +23,7 @@
 #define DISTANT_CPU_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include "network/player.h"
+#include <WORMUX_player.h>
 #include <map>
 #include <string>
 //-----------------------------------------------------------------------------

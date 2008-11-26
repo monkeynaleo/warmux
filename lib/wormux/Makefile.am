@@ -7,6 +7,7 @@ libwormux_a_SOURCES = \
 	./include/WORMUX_error.h \
 	./include/WORMUX_i18n.h \
 	./include/WORMUX_network.h \
+	./include/WORMUX_player.h \
 	./include/WORMUX_point.h \
 	./include/WORMUX_rectangle.h \
 	./include/WORMUX_singleton.h \
@@ -18,6 +19,7 @@ libwormux_a_SOURCES = \
 	./base/i18n.cpp \
 	./base/singleton.cpp \
 	./net/network.cpp \
+	./net/player.cpp \
 	./net/socket.cpp \
 	./tools/debug.cpp
 

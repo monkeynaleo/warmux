@@ -121,7 +121,6 @@ wormux_SOURCES = \
         network/network.cpp network/network.h \
         network/network_local.cpp network/network_local.h \
         network/network_server.cpp network/network_server.h \
-	network/player.cpp network/player.h \
         network/randomsync.cpp network/randomsync.h \
         network/socket.cpp network/socket.h \
         object/barrel.cpp object/barrel.h \

@@ -19,14 +19,8 @@
  * A network player (local or remote)
  *****************************************************************************/
 
-#include "network/player.h"
-//-----------------------------------------------------------------------------
-#include "network/network.h"
-#include "include/action.h"
-#include "include/action_handler.h"
-#include "menu/network_menu.h"
-#include <WORMUX_team_config.h>
-//-----------------------------------------------------------------------------
+#include <WORMUX_error.h>
+#include <WORMUX_player.h>
 
 Player::Player() : nickname("unknown")
 {
@@ -34,19 +28,6 @@ Player::Player() : nickname("unknown")
 
 Player::~Player()
 {
-  Disconnect();
-}
-
-void Player::Disconnect()
-{
-  if (Network::GetInstance()->IsConnected()) {
-
-    for (std::map<const std::string, ConfigTeam>::iterator team = owned_teams.begin();
-         team != owned_teams.end();
-         ++team) {
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_GAME_DEL_TEAM, team->first));
-    }
-  }
 }
 
 void Player::SetNickname(const std::string& _nickname)

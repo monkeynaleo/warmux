@@ -241,8 +241,6 @@ POTFILES = \
         src/network/network_local.h \
         src/network/network_server.cpp \
         src/network/network_server.h \
-        src/network/player.cpp \
-        src/network/player.h \
         src/network/randomsync.cpp \
         src/network/randomsync.h \
         src/network/socket.cpp \

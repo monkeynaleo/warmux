@@ -19,17 +19,15 @@
  * A network player (local or remote)
  *****************************************************************************/
 
-#ifndef NET_PLAYER_H
-#define NET_PLAYER_H
+#ifndef WORMUX_PLAYER_H
+#define WORMUX_PLAYER_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <map>
 #include <string>
-#include "include/base.h"
+#include <WORMUX_types.h>
 #include <WORMUX_team_config.h>
 //-----------------------------------------------------------------------------
-
-class ConfigTeam;
 
 class Player
 {
@@ -40,7 +38,6 @@ private:
 public:
   Player();
   ~Player();
-  void Disconnect();
 
   void SetNickname(const std::string& nickname);
   const std::string& GetNickname() const;
