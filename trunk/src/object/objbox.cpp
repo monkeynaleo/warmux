@@ -35,6 +35,7 @@
 #include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "physic/physical_shape.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include <WORMUX_debug.h>
@@ -59,6 +60,7 @@ ObjBox::ObjBox(const std::string &name)
   SetSpeed (SPEED, M_PI_2);
   SetCollisionModel(true, false, true);
   std::cout<<"super called"<<std::endl;
+  JukeBox::GetInstance()->Play("share","box/falling");
 }
 
 ObjBox::~ObjBox()
