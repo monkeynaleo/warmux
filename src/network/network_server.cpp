@@ -62,7 +62,7 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
-static inline void add_team_config_to_action(Action& a, std::map<std::string, ConfigTeam>::const_iterator &team)
+static inline void add_team_config_to_action(Action& a, std::map<const std::string, ConfigTeam>::const_iterator &team)
 {
   a.Push(team->first);
   a.Push(team->second.player_name);
@@ -94,7 +94,7 @@ void NetworkServer::SendInitialGameInfo(DistantComputer* client)
   a.Push(nb_teams);
 
   // Teams infos of already connected computers
-  std::map<std::string, ConfigTeam>::const_iterator team;
+  std::map<const std::string, ConfigTeam>::const_iterator team;
 
   for (it = cpu.begin(); it != cpu.end(); it++) {
     for (team = (*it)->GetPlayer().GetTeams().begin();
