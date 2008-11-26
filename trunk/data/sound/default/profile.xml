@@ -4,6 +4,7 @@
   <sound sample="step" file="step.ogg" />
   <sound sample="jump" file="hop_01.ogg" />
   <sound sample="superjump" file="superjump_01.ogg" />
+  <sound sample="back_jump" file="back_jump_01.ogg" />
 
   <sound sample="death" file="death_01.ogg" />
   <sound sample="death" file="death_02.ogg" />

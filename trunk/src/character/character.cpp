@@ -517,7 +517,7 @@ void Character::BackJump()
 {
   MSG_DEBUG("character", "BackJump");
   back_jumping = true;
-  JukeBox::GetInstance()->Play (ActiveTeam().GetSoundProfile(), "jump");
+  JukeBox::GetInstance()->Play (ActiveTeam().GetSoundProfile(), "back_jump");
   Jump(GameMode::GetInstance()->character.back_jump_strength,
        GameMode::GetInstance()->character.back_jump_angle);
 }
