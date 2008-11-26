@@ -60,6 +60,7 @@
   <sound sample="weapon/slap" file="weapon/slap.ogg" />
   <sound sample="weapon/supertux_flying" file="weapon/supertux_flying.ogg" />
   <sound sample="weapon/supertux_swimming" file="weapon/supertux_swimming.ogg" />
+  <sound sample="weapon/syringe_shot" file="weapon/syring_shot.ogg" />
   <sound sample="weapon/teleport_end" file="weapon/teleport_land.ogg" />
   <sound sample="weapon/teleport_start" file="weapon/teleport_start.ogg" />
   <sound sample="weapon/cluzooka_shot" file="weapon/cluzooka_shot.ogg" />
