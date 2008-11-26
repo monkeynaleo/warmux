@@ -54,6 +54,7 @@
   <sound sample="weapon/lowgrav" file="weapon/lowgrav.ogg" />
   <sound sample="weapon/m16" file="weapon/m16.ogg" />
   <sound sample="weapon/mine_beep" file="weapon/mine_beep.ogg" />
+  <sound sample="weapon/polecat_fart" file="weapon/polecat_fart.ogg" />
   <sound sample="weapon/ricoche1" file="weapon/ricoche1.ogg" />
   <sound sample="weapon/ricoche2" file="weapon/ricoche2.ogg" />
   <sound sample="weapon/ricoche3" file="weapon/ricoche3.ogg" />
