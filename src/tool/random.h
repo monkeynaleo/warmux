@@ -23,8 +23,8 @@
 #define RANDOM_H
 
 #include <WORMUX_singleton.h>
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
 
 class RandomGenerator
 {

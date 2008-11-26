@@ -20,7 +20,7 @@
 #ifndef TILEITEM_H
 #define TILEITEM_H
 
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include "graphic/surface.h"
 
 class b2Body;

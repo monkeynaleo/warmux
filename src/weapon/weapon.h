@@ -26,7 +26,7 @@
 #include "include/base.h"
 #include "sound/sound_sample.h"
 #include <WORMUX_debug.h>
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 class Character;
 class Sprite;

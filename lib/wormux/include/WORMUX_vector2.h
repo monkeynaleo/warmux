@@ -1,5 +1,5 @@
-#ifndef _VECTOR2_H
-#define _VECTOR2_H
+#ifndef WORMUX_VECTOR2_H
+#define WORMUX_VECTOR2_H
 
 #include <math.h>
 #undef min

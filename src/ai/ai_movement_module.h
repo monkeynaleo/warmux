@@ -22,7 +22,7 @@
 #define AI_MOVEMENT_MODULE
 
 #include "include/base.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include <set>
 
 class Character;

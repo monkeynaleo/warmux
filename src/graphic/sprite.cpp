@@ -31,7 +31,7 @@
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "tool/rectangle.h"
+#include <WORMUX_rectangle.h>
 #include <WORMUX_debug.h>
 #include "graphic/spriteframe.h"
 

@@ -45,9 +45,9 @@
 #include <WORMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include "tool/random.h"
-#include "tool/rectangle.h"
+#include <WORMUX_rectangle.h>
 #include "weapon/weapon_launcher.h"
 
 #ifdef DEBUG

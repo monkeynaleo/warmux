@@ -411,7 +411,7 @@ msgstr "(tiempo desconocido)"
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -673,7 +673,7 @@ msgstr "Volumen de los efectos"
 msgid "Energy"
 msgstr "Energia"
 
-#: src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:219
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Error al iniciar la red: Cliente %s no está de acuerdo con usted - %s"
@@ -1492,7 +1492,7 @@ msgstr "Sin nombre"
 msgid "Version"
 msgstr "Versión"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "La verificación de versión ha fallado por: %s\n"
@@ -1553,15 +1553,15 @@ msgstr "Arrancando Wormux..."
 msgid "Wormux version "
 msgstr "Versión de Wormux"
 
-#: src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:193
 msgid "Wrong map CRC!"
 msgstr "¡Mapa incorrecto CRC!"
 
-#: src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:190
 msgid "Wrong map name!"
 msgstr "¡Nombre de mapa incorrecto!"
 
-#: src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:196
 msgid "Wrong team!"
 msgstr "¡Equipo incorrecto!"
 

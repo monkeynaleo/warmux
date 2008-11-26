@@ -28,7 +28,7 @@
 #include "map/maps_list.h"
 #include "map/camera.h"
 #include <WORMUX_debug.h>
-#include "tool/rectangle.h"
+#include <WORMUX_rectangle.h>
 #include "game/time.h"
 #include "weapon/mine.h"
 #include <vector>

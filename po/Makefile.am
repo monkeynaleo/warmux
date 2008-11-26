@@ -327,10 +327,8 @@ POTFILES = \
         src/tool/file_tools.h \
         src/tool/isnan.h \
         src/tool/math_tools.h \
-        src/tool/point.h \
         src/tool/random.cpp \
         src/tool/random.h \
-        src/tool/rectangle.h \
         src/tool/resource_manager.cpp \
         src/tool/resource_manager.h \
         src/tool/stats.cpp \
@@ -339,7 +337,6 @@ POTFILES = \
         src/tool/string_tools.h \
         src/tool/text_handling.cpp \
         src/tool/text_handling.h \
-        src/tool/vector2.h \
         src/tool/xml_document.cpp \
         src/tool/xml_document.h \
         src/weapon/air_attack.cpp \

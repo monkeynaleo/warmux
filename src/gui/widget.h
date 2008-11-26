@@ -26,8 +26,8 @@
 #include "graphic/color.h"
 #include "graphic/font.h"
 #include "gui/container.h"
-#include "tool/rectangle.h"
-#include "tool/point.h"
+#include <WORMUX_rectangle.h>
+#include <WORMUX_point.h>
 
 class Surface;
 struct SDL_keysym;

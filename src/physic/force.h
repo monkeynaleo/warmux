@@ -23,7 +23,7 @@
 #ifndef FORCE_H
 #define FORCE_H
 
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include <Box2D.h>
 class PhysicalObj;
 struct b2Vec2;

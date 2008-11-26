@@ -24,7 +24,7 @@
 
 #include "graphic/surface.h"
 #include "interface/mouse.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 class MouseCursor
 {

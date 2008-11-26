@@ -86,7 +86,7 @@ wormux_SOURCES = \
         map/ground.cpp map/ground.h \
         map/map.cpp map/map.h \
         map/maps_list.cpp map/maps_list.h \
-	    map/physic_tile.cpp map/physic_tile.h \
+	map/physic_tile.cpp map/physic_tile.h \
         map/random_map.cpp map/random_map.h \
         map/sky.cpp map/sky.h \
         map/tileitem.cpp map/tileitem.h \
@@ -94,7 +94,7 @@ wormux_SOURCES = \
         map/wind.cpp map/wind.h \
         menu/credits_menu.cpp menu/credits_menu.h \
         menu/game_menu.cpp menu/game_menu.h \
-	    menu/game_mode_editor.cpp menu/game_mode_editor.h \
+	menu/game_mode_editor.cpp menu/game_mode_editor.h \
         menu/help_menu.cpp menu/help_menu.h \
         menu/main_menu.cpp menu/main_menu.h \
         menu/map_selection_box.cpp menu/map_selection_box.h \
@@ -167,12 +167,10 @@ wormux_SOURCES = \
         tool/isnan.h \
         tool/math_tools.h \
         tool/random.cpp tool/random.h \
-        tool/rectangle.h tool/point.h \
         tool/resource_manager.cpp tool/resource_manager.h \
         tool/stats.cpp tool/stats.h \
         tool/string_tools.cpp tool/string_tools.h \
         tool/text_handling.cpp tool/text_handling.h \
-        tool/vector2.h \
         tool/xml_document.cpp tool/xml_document.h \
         weapon/air_attack.cpp weapon/air_attack.h \
         weapon/airhammer.cpp weapon/airhammer.h \

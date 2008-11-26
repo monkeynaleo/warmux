@@ -31,7 +31,7 @@
 #include "map/physic_tile.h"
 #include "physic/physical_engine.h"
 #include "tool/math_tools.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 //tot "tool/stats.h"
 #ifdef DEBUG
 #include "graphic/colors.h"

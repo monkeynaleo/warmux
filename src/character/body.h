@@ -25,7 +25,7 @@
 
 #include <vector>
 #include "include/base.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 // Forward declarations
 class Character;

@@ -27,7 +27,7 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 #include "tool/xml_document.h"
 

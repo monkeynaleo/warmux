@@ -22,12 +22,14 @@
  *              Initial version
  *****************************************************************************/
 
-#ifndef _RECTANGLE_H
-#define _RECTANGLE_H
+#ifndef WORMUX_RECTANGLE_H
+#define WORMUX_RECTANGLE_H
 
 #include <cmath>
-#include "include/base.h"
-#include "vector2.h"
+#include <WORMUX_error.h>
+#include <WORMUX_types.h>
+#include <WORMUX_vector2.h>
+
 
 /**
  * This template handle rectangles.

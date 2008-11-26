@@ -22,7 +22,7 @@
 #ifndef PHYSIC_TILE_H
 #define PHYSIC_TILE_H
 
-#include "tool/point.h"
+#include <WORMUX_point.h>
 class TileItem;
 class PhysicalPolygon;
 

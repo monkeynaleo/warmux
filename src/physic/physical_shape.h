@@ -22,7 +22,7 @@
 #ifndef PHYSICAL_SHAPE_H
 #define PHYSICAL_SHAPE_H
 
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include <vector>
 #include <string>
 

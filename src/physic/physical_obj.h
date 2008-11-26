@@ -32,8 +32,8 @@
 #include <vector>
 
 #include <Box2D.h>
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
 #include "object/object_cfg.h"
 
 // Alive state
