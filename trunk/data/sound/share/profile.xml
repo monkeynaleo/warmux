@@ -13,6 +13,8 @@
   <sound sample="end_turn" file="end_turn.ogg" />
   <sound sample="start_turn" file="start_turn.ogg" />
 
+  <sound sample="fire/touch_ground" file="touch_ground.ogg" />
+
   <sound sample="menu/cancel" file="menu/cancel.ogg" />
   <sound sample="menu/clic" file="menu/clic.ogg" />
   <sound sample="menu/error" file="menu/error.ogg" />
