@@ -44,7 +44,7 @@
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "team/team_config.h"
+#include <WORMUX_team_config.h>
 #include "tool/resource_manager.h"
 #include "tool/file_tools.h"
 #include "tool/string_tools.h"

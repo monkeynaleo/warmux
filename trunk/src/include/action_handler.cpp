@@ -51,7 +51,7 @@
 #include "object/objbox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "team/team_config.h"
+#include <WORMUX_team_config.h>
 #include "sound/jukebox.h"
 #include "weapon/construct.h"
 #include "weapon/weapon_launcher.h"

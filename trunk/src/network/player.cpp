@@ -25,7 +25,7 @@
 #include "include/action.h"
 #include "include/action_handler.h"
 #include "menu/network_menu.h"
-#include "team/team_config.h"
+#include <WORMUX_team_config.h>
 //-----------------------------------------------------------------------------
 
 Player::Player() : nickname("unknown")

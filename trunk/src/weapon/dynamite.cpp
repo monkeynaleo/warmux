@@ -129,7 +129,7 @@ bool Dynamite::p_Shoot ()
 {
   projectile->Shoot(0);
   // add the character speed
-  if(ActiveCharacter().GetDirection() == 1)
+  if (ActiveCharacter().GetDirection() == 1)
     projectile->SetSpeed(3.0, -M_PI_4);
   else
     projectile->SetSpeed(3.0, -3.0 * M_PI_4);
@@ -142,8 +142,8 @@ bool Dynamite::p_Shoot ()
 std::string Dynamite::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
   return Format(ngettext(
-            "%s team has won %u dynamite!",
-            "%s team has won %u dynamites!",
-            items_count), TeamName, items_count);
+                         "%s team has won %u dynamite!",
+                         "%s team has won %u dynamites!",
+                         items_count), TeamName, items_count);
 }
 

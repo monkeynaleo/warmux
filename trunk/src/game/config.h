@@ -36,7 +36,7 @@
 #include "include/base.h"
 #include <WORMUX_singleton.h>
 #include <WORMUX_point.h>
-#include "team/team_config.h"
+#include <WORMUX_team_config.h>
 
 // Forward declarations
 class ObjectConfig;

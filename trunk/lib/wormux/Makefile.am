@@ -11,6 +11,7 @@ libwormux_a_SOURCES = \
 	./include/WORMUX_rectangle.h \
 	./include/WORMUX_singleton.h \
 	./include/WORMUX_socket.h \
+	./include/WORMUX_team_config.h \
 	./include/WORMUX_types.h \
 	./include/WORMUX_vector2.h \
 	./base/error.cpp \
