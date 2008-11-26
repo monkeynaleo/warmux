@@ -29,7 +29,7 @@
 #include "network/network_server.h"
 #include "network/distant_cpu.h"
 #include "network/chatlogger.h"
-#include "network/player.h"
+#include <WORMUX_player.h>
 //-----------------------------------------------------------------------------
 #include "game/game_mode.h"
 #include "game/game.h"
@@ -304,7 +304,8 @@ void Network::DisconnectNetwork()
 {
   NetworkThread::Wait();
 
-  player.Disconnect();
+  // WARNING: We must add relevant call to send ACTION_GAME_DEL_TEAM
+  // player.Disconnect();
 
   DistantComputer* tmp;
   std::list<DistantComputer*>::iterator client = cpu.begin();

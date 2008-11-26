@@ -45,7 +45,8 @@ DistantComputer::~DistantComputer()
 
   ActionHandler::GetInstance()->NewAction(a);
 
-  player.Disconnect();
+  // WARNING: We must add relevant call to send ACTION_GAME_DEL_TEAM
+  //player.Disconnect();
 
   delete sock;
 }
