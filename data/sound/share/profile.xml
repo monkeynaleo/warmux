@@ -4,6 +4,7 @@
   <sound sample="box/falling" file="box_falling.ogg" />
   <sound sample="box/hitting_ground" file="box_hitting_ground.ogg" />
   <sound sample="box/picking_up" file="box_picking_up.ogg" />
+  <sound sample="box/medkit_picking_up" file="box_picking_up.ogg" />
 
   <sound sample="change_weapon" file="menu/weapon_menu_toggled.ogg" />
   <sound sample="character/change_in_same_team" file="character_change.ogg" />
