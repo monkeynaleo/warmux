@@ -76,7 +76,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllibd.lib png.lib xml2.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib fribidid.lib $(NOINHERIT)"
+				UseLibraryDependencyInputs="true"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib png.lib xml2.lib curllibd.lib fribidid.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib;libcmt.lib"
@@ -176,7 +177,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllib.lib png.lib xml2.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib fribidi.lib $(NOINHERIT)"
+				UseLibraryDependencyInputs="true"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib png.lib xml2.lib curllib.lib fribidi.lib"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName).exe"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="msvcrtd.lib;libcmt.lib"
@@ -765,14 +767,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\include\constant.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\include\singleton.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\include\singleton.h"
 					>
 				</File>
 			</Filter>
@@ -1472,14 +1466,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\tool\debug.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\tool\debug.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\tool\debug_physics.cpp"
 					>
 				</File>
@@ -1504,19 +1490,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\tool\..\point.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\tool\random.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\src\tool\random.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\tool\rectangle.h"
 					>
 				</File>
 				<File
@@ -1549,10 +1527,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\tool\text_handling.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\tool\vector2.h"
 					>
 				</File>
 				<File
