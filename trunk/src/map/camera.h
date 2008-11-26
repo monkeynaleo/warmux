@@ -24,8 +24,8 @@
 
 #include "include/base.h"
 #include "interface/mouse.h"
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
 
 class PhysicalObj;
 

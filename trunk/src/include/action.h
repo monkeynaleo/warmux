@@ -26,7 +26,7 @@
 #include <iostream>
 #include <list>
 #include "base.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 class DistantComputer;
 //-----------------------------------------------------------------------------

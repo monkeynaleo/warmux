@@ -413,7 +413,7 @@ msgstr "(temps inconnu)"
 msgid "(unlimited)"
 msgstr "(illimitées)"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -677,7 +677,7 @@ msgstr "Volume des effets sonores"
 msgid "Energy"
 msgstr "Energie"
 
-#: src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:219
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -1497,7 +1497,7 @@ msgstr "Anonyme"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "La vérification de la version a échoué : %s\n"
@@ -1555,15 +1555,15 @@ msgstr "Lancement de Wormux..."
 msgid "Wormux version "
 msgstr "version de Wormux"
 
-#: src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:193
 msgid "Wrong map CRC!"
 msgstr "CRC terrain erroné !"
 
-#: src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:190
 msgid "Wrong map name!"
 msgstr "Nom du terrain erroné !"
 
-#: src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:196
 msgid "Wrong team!"
 msgstr "Equipe erronée !"
 

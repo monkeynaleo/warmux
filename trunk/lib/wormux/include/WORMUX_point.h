@@ -22,10 +22,10 @@
  *             Initial version
  *****************************************************************************/
 
-#ifndef _POINT_H
-#define _POINT_H
+#ifndef WORMUX_POINT_H
+#define WORMUX_POINT_H
 
-#include "vector2.h"
+#include <WORMUX_vector2.h>
 
 typedef Vector2<int>    Point2i;
 typedef Vector2<float>  Point2f;
@@ -39,4 +39,4 @@ typedef Vector2<double> Point2d;
     (Point2d)( point )
 //  Point2d((double)point.x, (double)point.y)
 
-#endif // _POINT_H
+#endif // WORMUX_POINT_H

@@ -24,7 +24,7 @@
 
 #include <math.h>
 #include <stdio.h>
-#include "point.h"
+#include <WORMUX_point.h>
 
 class AffineTransform2D {
  protected:

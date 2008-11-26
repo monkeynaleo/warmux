@@ -407,7 +407,7 @@ msgstr "(ukendt tid)"
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -669,7 +669,7 @@ msgstr "Lydeffekt volume"
 msgid "Energy"
 msgstr "Energi"
 
-#: src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:219
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -1475,7 +1475,7 @@ msgstr "Unavngivet"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Version-verifikation fejlede fordi: %s\n"
@@ -1534,15 +1534,15 @@ msgstr "Wormux starter..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:193
 msgid "Wrong map CRC!"
 msgstr "Banen har en ugyldig CRC-checksum!"
 
-#: src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:190
 msgid "Wrong map name!"
 msgstr "Ugyldigt banenavn!"
 
-#: src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:196
 msgid "Wrong team!"
 msgstr "Ugyldigt hold!"
 

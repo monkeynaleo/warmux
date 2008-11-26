@@ -25,7 +25,7 @@
 #include <string>
 #include <vector>
 #include <WORMUX_singleton.h>
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 class Constants : public Singleton<Constants>
 {

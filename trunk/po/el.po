@@ -425,7 +425,7 @@ msgstr "(άγνωστο χρόνο)"
 msgid "(unlimited)"
 msgstr "(απεριόριστο)"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -693,7 +693,7 @@ msgstr "Ένταση ηχητικών εφέ"
 msgid "Energy"
 msgstr "Ενέργεια"
 
-#: src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:219
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Λάθος αρχικοποίησης δικτύου: Ο πελάτης %s δεν συμφωνεί μαζί σου!! - %s"
@@ -1530,7 +1530,7 @@ msgstr "Ανώνυμος"
 msgid "Version"
 msgstr "Έκδοση"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Επαλήθευση έκδοσης απέτυχε διότι: %s\n"
@@ -1590,15 +1590,15 @@ msgstr "Έναρξη του Wormux..."
 msgid "Wormux version "
 msgstr "Έκδοση του Wormux"
 
-#: src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:193
 msgid "Wrong map CRC!"
 msgstr "Λάθος χάρτης CRC!"
 
-#: src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:190
 msgid "Wrong map name!"
 msgstr "Λάθος όνομα χάρτη!"
 
-#: src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:196
 msgid "Wrong team!"
 msgstr "Λάθος ομάδα!"
 

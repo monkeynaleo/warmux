@@ -25,8 +25,8 @@
 #include "graphic/surface.h"
 #include "gui/box.h"
 #include "include/base.h"
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
 
 // Forward declarations
 class Button;

@@ -35,7 +35,7 @@
 #include <map>
 #include "include/base.h"
 #include <WORMUX_singleton.h>
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include "team/team_config.h"
 
 // Forward declarations

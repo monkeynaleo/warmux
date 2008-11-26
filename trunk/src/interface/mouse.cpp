@@ -35,7 +35,7 @@
 #include "map/map.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 #include "game/time.h"

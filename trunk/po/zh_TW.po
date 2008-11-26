@@ -395,7 +395,7 @@ msgstr "(未知時間)"
 msgid "(unlimited)"
 msgstr "(無限的)"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -662,7 +662,7 @@ msgstr "音效大小"
 msgid "Energy"
 msgstr ""
 
-#: src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:219
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -1471,7 +1471,7 @@ msgstr "未命名"
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "版本改變失敗原因: %s\n"
@@ -1530,15 +1530,15 @@ msgstr "准備中, Wormux!!!"
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
-#: src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:193
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:190
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:196
 msgid "Wrong team!"
 msgstr ""
 

@@ -471,7 +471,7 @@ msgstr "(brak danych)"
 msgid "(unlimited)"
 msgstr "(bez ograniczeń)"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -733,7 +733,7 @@ msgstr "Głośność efektów"
 msgid "Energy"
 msgstr "Energia"
 
-#: src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:219
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Błąd inicjalizacji sieci: Klient %s nie jest zgodny z Twoim - %s"
@@ -1545,7 +1545,7 @@ msgstr "Nienazwane"
 msgid "Version"
 msgstr "Wersja"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Weryfikacja wersji nie powiodła się, gdyż: %s\n"
@@ -1605,15 +1605,15 @@ msgstr "Wormux - uruchamianie..."
 msgid "Wormux version "
 msgstr "Wormux - wersja programu"
 
-#: src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:193
 msgid "Wrong map CRC!"
 msgstr "Nieprawidłowa suma kontrolna mapy!"
 
-#: src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:190
 msgid "Wrong map name!"
 msgstr "Nieprawidłowa nazwa mapy!"
 
-#: src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:196
 msgid "Wrong team!"
 msgstr "Nieprawidłowa drużyna!"
 

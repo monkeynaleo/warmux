@@ -25,7 +25,7 @@
 #include <vector>
 #include "weapon/weapon_launcher.h"
 #include "include/base.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 class Shotgun : public WeaponLauncher
 {
