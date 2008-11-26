@@ -26,7 +26,7 @@
 #include <map>
 #include <string>
 #include "include/base.h"
-#include "team/team_config.h"
+#include <WORMUX_team_config.h>
 //-----------------------------------------------------------------------------
 
 class ConfigTeam;

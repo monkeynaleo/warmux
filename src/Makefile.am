@@ -156,7 +156,6 @@ wormux_SOURCES = \
         team/custom_teams_list.cpp team/custom_teams_list.h \
 	team/macro.h \
         team/results.cpp team/results.h \
-        team/team_config.h \
         team/team.cpp team/team.h \
         team/team_energy.cpp team/team_energy.h \
         team/teams_list.cpp team/teams_list.h \

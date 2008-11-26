@@ -310,7 +310,6 @@ POTFILES = \
         src/team/macro.h \
         src/team/results.cpp \
         src/team/results.h \
-        src/team/team_config.h \
         src/team/team.cpp \
         src/team/team_energy.cpp \
         src/team/team_energy.h \

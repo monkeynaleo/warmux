@@ -30,7 +30,7 @@
 #include "network/randomsync.h"
 #include "tool/file_tools.h"
 #include "team/team.h"
-#include "team/team_config.h"
+#include <WORMUX_team_config.h>
 #include "team/team_energy.h"
 #include "team/teams_list.h"
 
