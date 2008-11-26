@@ -34,6 +34,7 @@
 #include "map/map.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include <WORMUX_debug.h>
@@ -58,6 +59,7 @@ Medkit::Medkit()
 
 void Medkit::ApplyBonus(Character * c)
 {
+  JukeBox::GetInstance()->Play("share","box/medkit_picking_up");
   ApplyMedkit(c->AccessTeam(), *c);
   Ghost();
 }
