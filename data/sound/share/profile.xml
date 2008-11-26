@@ -51,6 +51,7 @@
   <sound sample="weapon/footbomb_bounce"  file="weapon/footbomb_bounce.ogg" />
   <sound sample="weapon/gun" file="weapon/gun.ogg" />
   <sound sample="weapon/load" file="weapon/load.ogg" />
+  <sound sample="weapon/lowgrav" file="weapon/lowgrav.ogg" />
   <sound sample="weapon/m16" file="weapon/m16.ogg" />
   <sound sample="weapon/mine_beep" file="weapon/mine_beep.ogg" />
   <sound sample="weapon/ricoche1" file="weapon/ricoche1.ogg" />

@@ -62,15 +62,20 @@ bool LowGrav::p_Shoot()
 {
   ActiveCharacter().SetGravityFactor(LOW_GRAVITY_FACTOR);
   ActiveCharacter().SetClothe("helmet");
+  use.Play("share","weapon/lowgrav",-1);
+
   return true;
 }
 
 void LowGrav::HandleKeyPressed_Shoot(bool)
 {
-  if (!IsInUse())
+  if (!IsInUse()){
     NewActionWeaponShoot();
-  else
+
+  }else{
     NewActionWeaponStopUse();
+    use.Stop();
+  }
 }
 
 std::string LowGrav::GetWeaponWinString(const char *TeamName, uint items_count ) const
