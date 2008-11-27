@@ -73,7 +73,7 @@ static inline void add_player_info_to_action(Action& a, const Player& player)
   a.Push(int(player.GetId()));
   a.Push(int(player.GetNbTeams()));
 
-  std::map<std::string, ConfigTeam>::const_iterator team;
+  std::map<const std::string, ConfigTeam>::const_iterator team;
   for (team = player.GetTeams().begin(); team != player.GetTeams().end(); team++) {
     add_team_config_to_action(a, team->second);
   }
