@@ -9,7 +9,7 @@ LOG=valgrind.log
 valgrind \
     --verbose \
     --show-reachable=yes \
-    --log-file-exactly=$LOG \
+    --log-file=$LOG \
     --leak-check=full \
     --run-libc-freeres=no \
     $APP
