@@ -85,8 +85,6 @@ private:
   Network(const Network&);
   const Network& operator=(const Network&);
   /*********************************************/
-  friend class DistantComputer;
-
   static int num_objects;
 
   std::string game_name;
