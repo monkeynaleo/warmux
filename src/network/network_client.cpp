@@ -26,7 +26,6 @@
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include "game/game_mode.h"
 #include <WORMUX_distant_cpu.h>
 #include "network/net_error_msg.h"
 #include <WORMUX_debug.h>

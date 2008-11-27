@@ -484,17 +484,10 @@ static void Action_Game_UpdateTeam (Action *a)
   }
 }
 
-static void Action_Game_DelTeam (Action *a)
+static void _Action_DelTeam(Player *player, const std::string& team_id)
 {
-  std::string team_id = a->PopString();
-
-  if (Network::IsConnected()) {
-    if (a->GetCreator())
-      a->GetCreator()->GetPlayer().RemoveTeam(team_id);
-    else {
-      Network::GetInstance()->GetPlayer().RemoveTeam(team_id);
-      UpdateLocalNickname();
-    }
+  if (player) {
+    player->RemoveTeam(team_id);
   }
 
   MSG_DEBUG("action_handler.menu", "- %s", team_id.c_str());
@@ -506,12 +499,35 @@ static void Action_Game_DelTeam (Action *a)
   }
 
   GetTeamsList().DelTeam(team_id);
-
-  if (!a->GetCreator())
-    UpdateLocalNickname();
+  UpdateLocalNickname();
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->DelTeamCallback(team_id);
+}
+
+static void Action_Game_DelTeam (Action *a)
+{
+  Player *player = NULL;
+  std::string team_id = a->PopString();
+
+  if (Network::IsConnected()) {
+    if (a->GetCreator())
+      player = &(a->GetCreator()->GetPlayer());
+    else
+      player = &(Network::GetInstance()->GetPlayer());
+  }
+
+  _Action_DelTeam(player, team_id);
+}
+
+void WORMUX_DisconnectPlayer(Player& player)
+{
+  std::map<const std::string, ConfigTeam>::iterator it = player.owned_teams.begin();
+  while (it != player.owned_teams.end()) {
+    std::string team_id = it->first;
+    _Action_DelTeam(&player, team_id);
+    it = player.owned_teams.begin();
+  }
 }
 
 // ########################################################
@@ -753,14 +769,10 @@ static void Action_Info_ClientConnect(Action *a)
   }
 }
 
-// Only used to notify clients (and server) that someone disconnected from the server
-static void Action_Info_ClientDisconnect(Action *a)
+static void _Info_DisconnectHost(const std::string& hostname, const std::string& nickname)
 {
-  std::string host = a->PopString();
-  std::string nickname = a->PopString();
-
   // For translators: extended in "<nickname> (<host>) just connected
-  std::string msg = Format("%s (%s) just disconnected", nickname.c_str(), host.c_str());
+  std::string msg = Format("%s (%s) just disconnected", nickname.c_str(), hostname.c_str());
 
   ChatLogger::LogMessageIfOpen(msg);
 
@@ -769,6 +781,30 @@ static void Action_Info_ClientDisconnect(Action *a)
   else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+}
+
+// Only used to notify clients (and server) that someone disconnected from the server
+static void Action_Info_ClientDisconnect(Action *a)
+{
+  std::string hostname = a->PopString();
+  std::string nickname = a->PopString();
+
+  _Info_DisconnectHost(hostname, nickname);
+}
+
+void WORMUX_DisconnectHost(DistantComputer& host)
+{
+  std::string hostname = host.GetAddress();
+  std::string nickname = host.GetPlayer().GetNickname();
+
+  _Info_DisconnectHost(hostname, nickname);
+
+  if (Network::GetInstance()->IsServer()) {
+    Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
+    a.Push(hostname);
+    a.Push(nickname);
+    Network::GetInstance()->SendActionToAllExceptOne(a, &host);
+  }
 }
 
 static void Action_Explosion (Action *a)

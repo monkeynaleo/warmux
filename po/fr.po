@@ -1381,7 +1381,7 @@ msgstr "La Roquette Automatique est partie dans un autre monde..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La Balle a quitté le champ de bataille avant d'exploser."
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "

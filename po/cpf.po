@@ -1382,7 +1382,7 @@ msgstr "La roquette que lé automatique la barré ailleurs ..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La balle ki rebondi la sorte du champs de bataille avant lu pête."
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "

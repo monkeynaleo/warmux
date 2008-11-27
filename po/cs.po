@@ -1406,7 +1406,7 @@ msgstr "Naváděná raketa opustila bitevní pole..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Míč opustil bitevní pole předtím, než explodoval"
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "

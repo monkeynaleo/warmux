@@ -28,6 +28,13 @@ Player::Player() : nickname("unknown")
 
 Player::~Player()
 {
+  Disconnect();
+}
+
+void Player::Disconnect()
+{
+  // It's up to the program using class Player to define WORMUX_DisconnectPlayer();
+  WORMUX_DisconnectPlayer(*this);
 }
 
 void Player::SetNickname(const std::string& _nickname)

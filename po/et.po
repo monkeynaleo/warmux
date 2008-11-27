@@ -1347,7 +1347,7 @@ msgstr "Automaatmürsk lahkus mänguväljalt..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Pall lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "

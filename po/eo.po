@@ -1350,7 +1350,7 @@ msgstr "La aŭtomatika raketo foriris de la batalejo..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilko foriris de la batalejo antaŭ ol explodi."
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "

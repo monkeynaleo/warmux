@@ -304,9 +304,6 @@ void Network::DisconnectNetwork()
 {
   NetworkThread::Wait();
 
-  // WARNING: We must add relevant call to send ACTION_GAME_DEL_TEAM
-  // player.Disconnect();
-
   DistantComputer* tmp;
   std::list<DistantComputer*>::iterator client = cpu.begin();
 

@@ -35,15 +35,9 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
 
 DistantComputer::~DistantComputer()
 {
-  // WARNING: We must add relevant call to send ACTION_INFO_CLIENT_DISCONNECT
-  // Action *a = new Action(Action::ACTION_INFO_CLIENT_DISCONNECT);
-  // a->Push(GetAddress());
-  // a->Push(GetPlayer().GetNickname());
+  WORMUX_DisconnectHost(*this);
 
-  // ActionHandler::GetInstance()->NewAction(a);
-
-  // WARNING: We must add relevant call to send ACTION_GAME_DEL_TEAM
-  //player.Disconnect();
+  player.Disconnect();
 
   delete sock;
 }
