@@ -139,7 +139,7 @@ Network::Network(const std::string& _game_name, const std::string& passwd) :
   cpu(),
   sync_lock(false)
 {
-  player.SetNickname(GetDefaultNickname());
+  player.SetNickname(Player::GetDefaultNickname());
   num_objects++;
 }
 //-----------------------------------------------------------------------------
@@ -157,24 +157,6 @@ Network::~Network()
   if (num_objects == 0) {
     WNet::Quit();
   }
-}
-
-//-----------------------------------------------------------------------------
-
-std::string Network::GetDefaultNickname() const
-{
-  std::string s_nick;
-  const char *nick = NULL;
-#ifdef WIN32
-  char  buffer[32];
-  DWORD size = 32;
-  if (GetUserName(buffer, &size))
-    nick = buffer;
-#else
-  nick = getenv("USER");
-#endif
-  s_nick = (nick) ? nick : _("Unnamed");
-  return s_nick;
 }
 
 //-----------------------------------------------------------------------------

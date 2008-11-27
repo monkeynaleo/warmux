@@ -399,13 +399,18 @@ static void _Action_SelectMap(Action *a)
   }
 }
 
-static void UpdateLocalNickname()
+static Player* _Action_GetPlayer(Action *a)
 {
-  std::string nickname = GetTeamsList().GetLocalHeadCommanders();
-  if (nickname == "")
-    nickname = Network::GetInstance()->GetDefaultNickname();
+  Player *player = NULL;
 
-  Network::GetInstance()->GetPlayer().SetNickname(nickname);
+  if (Network::IsConnected()) {
+    if (a->GetCreator())
+      player = &(a->GetCreator()->GetPlayer());
+    else
+      player = &(Network::GetInstance()->GetPlayer());
+  }
+
+  return player;
 }
 
 static void _Action_AddTeam(Action *a)
@@ -425,13 +430,9 @@ static void _Action_AddTeam(Action *a)
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
 
-  if (Network::IsConnected()) {
-    if (!local_team) {
-      a->GetCreator()->GetPlayer().AddTeam(the_team);
-    } else {
-      Network::GetInstance()->GetPlayer().AddTeam(the_team);
-      UpdateLocalNickname();
-    }
+  Player* player = _Action_GetPlayer(a);
+  if (player) {
+    player->AddTeam(the_team);
   }
 }
 
@@ -474,13 +475,9 @@ static void Action_Game_UpdateTeam (Action *a)
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->UpdateTeamCallback(old_team_id, the_team.id);
 
-  if (Network::IsConnected()) {
-    if (a->GetCreator())
-      a->GetCreator()->GetPlayer().UpdateTeam(old_team_id, the_team);
-    else {
-      Network::GetInstance()->GetPlayer().UpdateTeam(old_team_id, the_team);
-      UpdateLocalNickname();
-    }
+  Player* player = _Action_GetPlayer(a);
+  if (player) {
+    player->UpdateTeam(old_team_id, the_team);
   }
 }
 
@@ -499,7 +496,6 @@ static void _Action_DelTeam(Player *player, const std::string& team_id)
   }
 
   GetTeamsList().DelTeam(team_id);
-  UpdateLocalNickname();
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->DelTeamCallback(team_id);
@@ -510,13 +506,7 @@ static void Action_Game_DelTeam (Action *a)
   Player *player = NULL;
   std::string team_id = a->PopString();
 
-  if (Network::IsConnected()) {
-    if (a->GetCreator())
-      player = &(a->GetCreator()->GetPlayer());
-    else
-      player = &(Network::GetInstance()->GetPlayer());
-  }
-
+  player = _Action_GetPlayer(a);
   _Action_DelTeam(player, team_id);
 }
 
