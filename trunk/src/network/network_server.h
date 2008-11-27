@@ -34,7 +34,6 @@ class NetworkServer : public Network
 
   uint NextPlayerId() const;
   bool HandShake(WSocket& client_socket, std::string& nickname, uint player_id) const;
-  void SendInitialGameInfo(DistantComputer* client) const;
 
 protected:
   virtual void HandleAction(Action* a, DistantComputer* sender);

@@ -73,6 +73,7 @@ public:
   typedef enum
     {
       NO_NETWORK,
+      NETWORK_MENU_INIT,
       NETWORK_MENU_OK,
       NETWORK_LOADING_DATA,
       NETWORK_READY_TO_PLAY,

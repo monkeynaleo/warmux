@@ -17,6 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
+#include <WORMUX_error.h>
 #include <server.h>
 
 GameServer::GameServer() :
@@ -48,14 +49,86 @@ bool GameServer::ServerStart(uint _port, uint max_nb_clients, const std::string&
   return true;
 }
 
-bool GameServer::HandShake(WSocket& client_socket, std::string& nickname)
+// Send Messages
+void GameServer::SendActionToAll(const Action& a) const
+{
+  SendAction(a, NULL, false);
+}
+
+void GameServer::SendActionToOne(const Action& a, DistantComputer* client) const
+{
+  SendAction(a, client, true);
+}
+
+void GameServer::SendActionToAllExceptOne(const Action& a, DistantComputer* client) const
+{
+  SendAction(a, client, false);
+}
+
+// if (client == NULL) sending to every clients
+// if (clt_as_rcver) sending only to client 'client'
+// if (!clt_as_rcver) sending to all EXCEPT client 'client'
+void GameServer::SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const
+{
+  char* packet;
+  int size;
+
+  a.WriteToPacket(packet, size);
+  ASSERT(packet != NULL);
+
+#ifdef LOG_NETWORK
+  if (fout != 0) {
+    int tmp = 0xFFFFFFFF;
+    write(fout, &size, 4);
+    write(fout, packet, size);
+    write(fout, &tmp, 4);
+  }
+#endif
+
+  if (clt_as_rcver) {
+    ASSERT(client);
+    client->SendData(packet, size);
+  } else {
+
+    for (std::list<DistantComputer*>::const_iterator it = cpu.begin();
+	 it != cpu.end(); it++) {
+
+      if ((*it) != client) {
+	(*it)->SendData(packet, size);
+      }
+    }
+  }
+
+  free(packet);
+}
+
+uint GameServer::NextPlayerId() const
+{
+  uint player_id = 1;
+
+  std::list<DistantComputer*>::const_iterator it;
+  std::list<Player>::const_iterator player;
+  for (it = cpu.begin(); it != cpu.end(); it++) {
+
+    const std::list<Player>& players = (*it)->GetPlayers();
+
+    for (player = players.begin(); player != players.end(); player++) {
+      if (player_id <= player->GetId()) {
+	player_id = player->GetId() + 1;
+      }
+    }
+  }
+  return player_id;
+}
+
+bool GameServer::HandShake(WSocket& client_socket, std::string& nickname, uint player_id)
 {
   bool client_will_be_master = false;
   if (clients_socket_set->NbSockets() == 0)
     client_will_be_master = true;
 
   DPRINT(INFO, "%s will be master ? %d", client_socket.GetAddress().c_str(), client_will_be_master);
-  return WNet::Server_HandShake(client_socket, game_name, password, nickname, client_will_be_master);
+  return WNet::Server_HandShake(client_socket, game_name, password, nickname, player_id, client_will_be_master);
 }
 
 void GameServer::RejectIncoming()
@@ -71,15 +144,15 @@ void GameServer::WaitClients()
     WSocket* incoming = server_socket.LookForClient();
     if (incoming) {
       std::string client_nickname;
+      uint player_id = NextPlayerId();
 
-      if (!HandShake(*incoming, client_nickname))
+      if (!HandShake(*incoming, client_nickname, player_id))
  	return;
 
       clients_socket_set->AddSocket(incoming);
 
-      // ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_INFO_CLIENT_CONNECT,
-      // 							 client->GetAddress()));
-      DPRINT(INFO, "New client connected: %s (%s)", client_nickname.c_str(), incoming->GetAddress().c_str());
+      DistantComputer* client = new DistantComputer(incoming, client_nickname, player_id);
+      cpu.push_back(client);
 
       if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
 	RejectIncoming();
@@ -88,13 +161,12 @@ void GameServer::WaitClients()
   }
 }
 
-std::list<WSocket*>::iterator GameServer::CloseConnection(std::list<WSocket*>::iterator closed)
+std::list<DistantComputer*>::iterator
+GameServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
-  std::list<WSocket*>::iterator it;
+  std::list<DistantComputer*>::iterator it;
 
-  DPRINT(INFO, "Client disconnected: %s", (*closed)->GetAddress().c_str());
-
-  it = clients_socket_set->GetSockets().erase(closed);
+  it = cpu.erase(closed);
   delete *closed;
 
   if (clients_socket_set->NbSockets() + 1 == clients_socket_set->MaxNbSockets()) {
@@ -107,16 +179,14 @@ std::list<WSocket*>::iterator GameServer::CloseConnection(std::list<WSocket*>::i
   return it;
 }
 
-void GameServer::ForwardPacket(void * buffer, size_t len, const WSocket* sender)
+void GameServer::ForwardPacket(void * buffer, size_t len, const DistantComputer* sender)
 {
-  std::list<WSocket*>::iterator it;
+  std::list<DistantComputer*>::iterator it;
 
-  for (it = clients_socket_set->GetSockets().begin();
-       it != clients_socket_set->GetSockets().end() ;
-       it++) {
+  for (it = cpu.begin(); it != cpu.end(); it++) {
 
     if ((*it) != sender) {
-      (*it)->SendPacket(buffer, len);
+      (*it)->SendData(buffer, len);
     }
   }
 }
@@ -136,21 +206,68 @@ void GameServer::RunLoop()
 
     void * buffer;
     size_t packet_size;
-    std::list<WSocket*>::iterator it = clients_socket_set->GetSockets().begin();
 
-    while (it != clients_socket_set->GetSockets().end()) {
+    std::list<DistantComputer*>::iterator dst_cpu;
 
-      if ((*it)->IsReady()) { // Check if this socket contains data to receive
+    for (dst_cpu = cpu.begin(); dst_cpu != cpu.end(); dst_cpu++) {
 
-        if ((*it)->ReceivePacket(buffer, packet_size)) {
-	  ForwardPacket(buffer, packet_size, *it);
-	  free(buffer);
+      if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
+
+	if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
+
+	  // An error occured during the reception
+          dst_cpu = CloseConnection(dst_cpu);
+
 	} else {
-	  it = CloseConnection(it);
-	  break;
+
+	  ForwardPacket(buffer, packet_size, *dst_cpu);
+	  free(buffer);
 	}
       }
-      it++;
-    }
+    } // for
   }
 }
+
+uint Action_TimeStamp()
+{
+  return 0;
+}
+
+void WORMUX_ConnectHost(DistantComputer& host)
+{
+  std::string hostname = host.GetAddress();
+  std::string nicknames = host.GetNicknames();
+
+  DPRINT(INFO, "New client connected: %s (%s)", nicknames.c_str(), hostname.c_str());
+
+  Action a(Action::ACTION_INFO_CLIENT_CONNECT);
+  a.Push(hostname);
+  a.Push(nicknames);
+
+  GameServer::GetInstance()->SendActionToAllExceptOne(a, &host);
+}
+
+void WORMUX_DisconnectHost(DistantComputer& host)
+{
+  std::string hostname = host.GetAddress();
+  std::string nicknames = host.GetNicknames();
+
+  DPRINT(INFO, "Client disconnected: %s (%s)", nicknames.c_str(), hostname.c_str());
+
+  Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
+  a.Push(hostname);
+  a.Push(nicknames);
+  a.Push(int(host.GetPlayers().size()));
+
+  std::list<Player>::const_iterator player_it;
+  for (player_it = host.GetPlayers().begin(); player_it != host.GetPlayers().end(); player_it++) {
+    a.Push(int(player_it->GetId()));
+  }
+  GameServer::GetInstance()->SendActionToAll(a); // host is already removed from the list
+}
+
+void WORMUX_DisconnectPlayer(Player& /*player*/)
+{
+
+}
+
