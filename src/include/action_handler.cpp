@@ -796,6 +796,86 @@ void Action_Explosion (Action *a)
 // ########################################################
 // ########################################################
 
+void Action_Handler_Init()
+{
+  ActionHandler::GetInstance()->Lock();
+
+  // ########################################################
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_CLIENT_CHANGE_STATE, "NETWORK_client_change_state", &Action_Network_ClientChangeState);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_MASTER_CHANGE_STATE, "NETWORK_master_change_state", &Action_Network_MasterChangeState);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check1", &Action_Network_Check_Phase1);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check2", &Action_Network_Check_Phase2);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_DISCONNECT_ON_ERROR, "NETWORK_disconnect_on_error", &Action_Network_Disconnect_On_Error);
+
+  // ########################################################
+  ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
+  ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_Game_NextTeam);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_Game_SetState);
+
+  // ########################################################
+  // To be sure that rules will be the same on each computer
+  ActionHandler::GetInstance()->Register (Action::ACTION_RULES_SET_GAME_MODE, "RULES_set_game_mode", &Action_Rules_SetGameMode);
+
+  // ########################################################
+  // Chat message
+  ActionHandler::GetInstance()->Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
+
+  // Initial information about the game: map, teams already selected, ...
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_INFO, "GAME_info", &Action_Game_Info);
+
+  // Map selection in network menu
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_SET_MAP, "GAME_set_map", &Action_Game_SetMap);
+
+  // Teams selection in network menu
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_ADD_TEAM, "GAME_add_team", &Action_Game_AddTeam);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_DEL_TEAM, "GAME_del_team", &Action_Game_DelTeam);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_UPDATE_TEAM, "GAME_update_team", &Action_Game_UpdateTeam);
+
+  // ########################################################
+  // Character's move
+  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
+  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
+  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
+
+  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_SET_PHYSICS, "CHARACTER_set_physics", &Action_Character_SetPhysics);
+
+  // ########################################################
+  // Using Weapon
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SHOOT, "WEAPON_shoot", &Action_Weapon_Shoot);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_USE, "WEAPON_stop_use", &Action_Weapon_StopUse);
+
+  // Quite standard weapon options
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SET_TIMEOUT, "WEAPON_set_timeout", &Action_Weapon_SetTimeout);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SET_TARGET, "WEAPON_set_target", &Action_Weapon_SetTarget);
+
+  // Special weapon options
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_GRAPPLE, "WEAPON_grapple", &Action_Weapon_Grapple);
+
+  // Bonus box
+  ActionHandler::GetInstance()->Register (Action::ACTION_NEW_BONUS_BOX, "BONUSBOX_new_box", &Action_NewBonusBox);
+  ActionHandler::GetInstance()->Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);
+  // ########################################################
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_SYNC_END, "NETWORK_sync_end", &Action_Network_SyncEnd);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
+
+  ActionHandler::GetInstance()->Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WIND, "wind", &Action_Wind);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
+  ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_disconnect", &Action_Info_ClientDisconnect);
+  ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_CONNECT, "INFO_connect", &Action_Info_ClientConnect);
+
+  // ########################################################
+  ActionHandler::GetInstance()->UnLock();
+}
+
+// ########################################################
+// ########################################################
+// ########################################################
+
 void ActionHandler::Flush()
 {
   std::list<Action*>::iterator it;
@@ -857,6 +937,7 @@ void ActionHandler::NewActionActiveCharacter(Action* a)
   Network::GetInstance()->SendActionToAll(a_end_sync);
 }
 
+// To call when locked
 void ActionHandler::Register (Action::Action_t action,
                               const std::string &name,
                               callback_t fct)
@@ -892,6 +973,16 @@ const std::string &ActionHandler::GetActionName (Action::Action_t action) const
   return it->second;
 }
 
+void ActionHandler::Lock()
+{
+  SDL_LockMutex(mutex);
+}
+
+void ActionHandler::UnLock()
+{
+  SDL_UnlockMutex(mutex);
+}
+
 ActionHandler::ActionHandler():
   handler(),
   action_name(),
@@ -900,75 +991,7 @@ ActionHandler::ActionHandler():
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
 
-  // ########################################################
-  Register (Action::ACTION_NETWORK_CLIENT_CHANGE_STATE, "NETWORK_client_change_state", &Action_Network_ClientChangeState);
-  Register (Action::ACTION_NETWORK_MASTER_CHANGE_STATE, "NETWORK_master_change_state", &Action_Network_MasterChangeState);
-  Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check1", &Action_Network_Check_Phase1);
-  Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check2", &Action_Network_Check_Phase2);
-  Register (Action::ACTION_NETWORK_DISCONNECT_ON_ERROR, "NETWORK_disconnect_on_error", &Action_Network_Disconnect_On_Error);
 
-  // ########################################################
-  Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
-  Register (Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
-  Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_Game_NextTeam);
-  Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_Game_SetState);
-
-  // ########################################################
-  // To be sure that rules will be the same on each computer
-  Register (Action::ACTION_RULES_SET_GAME_MODE, "RULES_set_game_mode", &Action_Rules_SetGameMode);
-
-  // ########################################################
-  // Chat message
-  Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
-
-  // Initial information about the game: map, teams already selected, ...
-  Register (Action::ACTION_GAME_INFO, "GAME_info", &Action_Game_Info);
-
-  // Map selection in network menu
-  Register (Action::ACTION_GAME_SET_MAP, "GAME_set_map", &Action_Game_SetMap);
-
-  // Teams selection in network menu
-  Register (Action::ACTION_GAME_ADD_TEAM, "GAME_add_team", &Action_Game_AddTeam);
-  Register (Action::ACTION_GAME_DEL_TEAM, "GAME_del_team", &Action_Game_DelTeam);
-  Register (Action::ACTION_GAME_UPDATE_TEAM, "GAME_update_team", &Action_Game_UpdateTeam);
-
-  // ########################################################
-  // Character's move
-  Register (Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
-  Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
-  Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
-
-  Register (Action::ACTION_CHARACTER_SET_PHYSICS, "CHARACTER_set_physics", &Action_Character_SetPhysics);
-
-  // ########################################################
-  // Using Weapon
-  Register (Action::ACTION_WEAPON_SHOOT, "WEAPON_shoot", &Action_Weapon_Shoot);
-  Register (Action::ACTION_WEAPON_STOP_USE, "WEAPON_stop_use", &Action_Weapon_StopUse);
-
-  // Quite standard weapon options
-  Register (Action::ACTION_WEAPON_SET_TIMEOUT, "WEAPON_set_timeout", &Action_Weapon_SetTimeout);
-  Register (Action::ACTION_WEAPON_SET_TARGET, "WEAPON_set_target", &Action_Weapon_SetTarget);
-
-  // Special weapon options
-  Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
-  Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
-  Register (Action::ACTION_WEAPON_GRAPPLE, "WEAPON_grapple", &Action_Weapon_Grapple);
-
-  // Bonus box
-  Register (Action::ACTION_NEW_BONUS_BOX, "BONUSBOX_new_box", &Action_NewBonusBox);
-  Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);
-  // ########################################################
-  Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
-  Register (Action::ACTION_NETWORK_SYNC_END, "NETWORK_sync_end", &Action_Network_SyncEnd);
-  Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
-
-  Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
-  Register (Action::ACTION_WIND, "wind", &Action_Wind);
-  Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
-  Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_disconnect", &Action_Info_ClientDisconnect);
-  Register (Action::ACTION_INFO_CLIENT_CONNECT, "INFO_connect", &Action_Info_ClientConnect);
-
-  // ########################################################
   SDL_UnlockMutex(mutex);
 }
 

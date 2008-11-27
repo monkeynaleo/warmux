@@ -35,6 +35,11 @@ struct SDL_mutex;
 class ActionHandler : public Singleton<ActionHandler>
 {
 private:
+  /* If you need this, you probably made an error in your code... */
+  ActionHandler(const ActionHandler&);
+  const ActionHandler& operator=(const ActionHandler&);
+  /****************************************************************/
+
   // Mutex needed to be thread safe for the network
   SDL_mutex* mutex;
 
@@ -50,28 +55,30 @@ private:
   // Action queue
   std::list<Action*> queue;
 
-public:
-  void NewAction(Action* a, bool repeat_to_network=true);
-  void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
-
-  void Flush();
-  void ExecActions();
-  const std::string &GetActionName(Action::Action_t action) const;
+  void Exec(Action *a);
 
 protected:
   friend class Singleton<ActionHandler>;
   ActionHandler();
   ~ActionHandler();
 
-private:
-  /* If you need this, you probably made an error in your code... */
-  ActionHandler(const ActionHandler&);
-  const ActionHandler& operator=(const ActionHandler&);
-  /****************************************************************/
+public:
+  void NewAction(Action* a, bool repeat_to_network=true);
+  void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
 
-  void Exec(Action *a);
+  void Flush();
+  void ExecActions();
+
+  void Lock();
+  void UnLock();
+
+  // To call when locked
   void Register(Action::Action_t action, const std::string &name, callback_t fct);
+
+  const std::string &GetActionName(Action::Action_t action) const;
 };
+
+void Action_Handler_Init();
 
 // TODO: Move it in an object !
 
