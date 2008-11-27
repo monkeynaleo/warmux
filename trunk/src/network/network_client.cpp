@@ -75,6 +75,7 @@ void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/)
 connection_state_t NetworkClient::HandShake(WSocket& server_socket)
 {
   int ack;
+  int player_id;
   connection_state_t ret = CONN_REJECTED;
   std::string version;
   std::string game_name;
@@ -133,9 +134,15 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
   if (!server_socket.SendStr(GetPlayer().GetNickname()))
     goto error;
 
-  // Receive the game name
+  // 5) Receive the game name
   if (!server_socket.ReceiveStr(game_name, 100))
     goto error;
+
+  // 6) Receive my player id
+  if (!server_socket.ReceiveInt(player_id))
+    goto error;
+
+  GetPlayer().SetId(uint(player_id));
 
   SetGameName(game_name);
 
@@ -181,7 +188,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
     goto error;
   }
   socket_set->AddSocket(socket);
-  server = new DistantComputer(socket, "server");
+  server = new DistantComputer(socket, "server", 0);
 
   cpu.push_back(server);
 

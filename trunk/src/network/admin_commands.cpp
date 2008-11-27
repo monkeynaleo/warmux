@@ -42,7 +42,7 @@ static void Kick(const std::string& nick)
        cpu != Network::GetInstance()->cpu.end();
        ++cpu) {
 
-    if ((*cpu)->GetPlayer().GetNickname() == nick) {
+    if ((*cpu)->GetNicknames() == nick) {
       (*cpu)->ForceDisconnection();
       msg = std::string(Format("%s kicked", nick.c_str()));
       AppWormux::GetInstance()->ReceiveMsgCallback(msg);
@@ -66,7 +66,8 @@ static void ListPlayers()
   for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
       cpu != Network::GetInstance()->cpu.end();
       ++cpu) {
-    AppWormux::GetInstance()->ReceiveMsgCallback((*cpu)->GetPlayer().GetNickname());
+    std::string msg = std::string(Format("%s (%s)", (*cpu)->GetNicknames().c_str(), (*cpu)->GetAddress().c_str()));
+    AppWormux::GetInstance()->ReceiveMsgCallback(msg);
   }
 
 }

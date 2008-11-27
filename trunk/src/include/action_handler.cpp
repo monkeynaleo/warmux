@@ -376,10 +376,6 @@ static void Action_ChatMessage (Action *a)
   std::string nickname = a->PopString();
   std::string message = a->PopString();
 
-  // Useful for admin commands like "/kick"
-  if (Network::GetInstance()->IsServer() && a->GetCreator())
-    a->GetCreator()->GetPlayer().SetNickname(nickname);
-
   ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
   AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message);
 }
@@ -399,21 +395,24 @@ static void _Action_SelectMap(Action *a)
   }
 }
 
-static Player* _Action_GetPlayer(Action *a)
+static Player* _Action_GetPlayer(Action *a, uint player_id)
 {
   Player *player = NULL;
 
   if (Network::IsConnected()) {
-    if (a->GetCreator())
-      player = &(a->GetCreator()->GetPlayer());
-    else
+    if (a->GetCreator()) {
+      player = a->GetCreator()->GetPlayer(player_id);
+      ASSERT(player);
+    } else {
       player = &(Network::GetInstance()->GetPlayer());
+      ASSERT(player->GetId() == player_id);
+    }
   }
 
   return player;
 }
 
-static void _Action_AddTeam(Action *a)
+static void _Action_AddTeam(Action *a, uint player_id)
 {
   ConfigTeam the_team;
 
@@ -430,7 +429,7 @@ static void _Action_AddTeam(Action *a)
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
 
-  Player* player = _Action_GetPlayer(a);
+  Player* player = _Action_GetPlayer(a, player_id);
   if (player) {
     player->AddTeam(the_team);
   }
@@ -442,9 +441,19 @@ static void Action_Game_Info(Action *a)
 
   _Action_SelectMap(a);
 
-  uint nb_teams = a->PopInt();
-  for (uint i = 0; i < nb_teams; i++) {
-    _Action_AddTeam(a);
+  uint nb_players = a->PopInt();
+  for (uint i = 0; i < nb_players; i++) {
+    uint player_id = a->PopInt();
+
+    if (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL) {
+      a->GetCreator()->AddPlayer(player_id);
+    }
+
+    uint nb_teams = a->PopInt();
+
+    for (uint j = 0; j < nb_teams; j++) {
+      _Action_AddTeam(a, player_id);
+    }
   }
 }
 
@@ -457,11 +466,13 @@ static void Action_Game_SetMap (Action *a)
 
 static void Action_Game_AddTeam (Action *a)
 {
-  _Action_AddTeam(a);
+  uint player_id = a->PopInt();
+  _Action_AddTeam(a, player_id);
 }
 
 static void Action_Game_UpdateTeam (Action *a)
 {
+  uint player_id = a->PopInt();
   std::string old_team_id = a->PopString();
 
   ConfigTeam the_team;
@@ -475,7 +486,7 @@ static void Action_Game_UpdateTeam (Action *a)
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->UpdateTeamCallback(old_team_id, the_team.id);
 
-  Player* player = _Action_GetPlayer(a);
+  Player* player = _Action_GetPlayer(a, player_id);
   if (player) {
     player->UpdateTeam(old_team_id, the_team);
   }
@@ -504,9 +515,10 @@ static void _Action_DelTeam(Player *player, const std::string& team_id)
 static void Action_Game_DelTeam (Action *a)
 {
   Player *player = NULL;
+  uint player_id = a->PopInt();
   std::string team_id = a->PopString();
 
-  player = _Action_GetPlayer(a);
+  player = _Action_GetPlayer(a, player_id);
   _Action_DelTeam(player, team_id);
 }
 
@@ -759,10 +771,10 @@ static void Action_Info_ClientConnect(Action *a)
   }
 }
 
-static void _Info_DisconnectHost(const std::string& hostname, const std::string& nickname)
+static void _Info_DisconnectHost(const std::string& hostname, const std::string& nicknames)
 {
   // For translators: extended in "<nickname> (<host>) just connected
-  std::string msg = Format("%s (%s) just disconnected", nickname.c_str(), hostname.c_str());
+  std::string msg = Format("%s (%s) just disconnected", nicknames.c_str(), hostname.c_str());
 
   ChatLogger::LogMessageIfOpen(msg);
 
@@ -777,22 +789,22 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
 static void Action_Info_ClientDisconnect(Action *a)
 {
   std::string hostname = a->PopString();
-  std::string nickname = a->PopString();
+  std::string nicknames = a->PopString();
 
-  _Info_DisconnectHost(hostname, nickname);
+  _Info_DisconnectHost(hostname, nicknames);
 }
 
 void WORMUX_DisconnectHost(DistantComputer& host)
 {
   std::string hostname = host.GetAddress();
-  std::string nickname = host.GetPlayer().GetNickname();
+  std::string nicknames = host.GetNicknames();
 
-  _Info_DisconnectHost(hostname, nickname);
+  _Info_DisconnectHost(hostname, nicknames);
 
   if (Network::GetInstance()->IsServer()) {
     Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
     a.Push(hostname);
-    a.Push(nickname);
+    a.Push(nicknames);
     Network::GetInstance()->SendActionToAllExceptOne(a, &host);
   }
 }

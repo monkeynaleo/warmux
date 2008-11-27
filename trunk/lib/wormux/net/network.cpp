@@ -334,6 +334,7 @@ bool WNet::Server_HandShake(WSocket& client_socket,
 			    const std::string& game_name,
 			    const std::string& password,
 			    std::string& nickname,
+			    uint client_player_id,
 			    bool client_will_be_master)
 {
   bool ret = false;
@@ -368,20 +369,24 @@ bool WNet::Server_HandShake(WSocket& client_socket,
     goto error;
   }
 
-  // 3) Server: password OK
+  // Server: password OK
   if (!client_socket.SendInt(0))
     goto error;
 
-  // 4) Server: client will be master ?
+  // 3) Server: client will be master ?
   if (!client_socket.SendInt(client_will_be_master))
     goto error;
 
-  // 5) Get nickname of the client
+  // 4) Get nickname of the client
   if (!client_socket.ReceiveStr(nickname, 100))
     goto error;
 
   // 5) Send gamename to the client
   if (!client_socket.SendStr(game_name))
+    goto error;
+
+  // 6) Send its player id to the client
+  if (!client_socket.SendInt(client_player_id))
     goto error;
 
   // Server: Handshake done successfully :)

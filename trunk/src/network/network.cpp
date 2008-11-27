@@ -480,6 +480,11 @@ Player& Network::GetPlayer()
   return player;
 }
 
+const Player& Network::GetPlayer() const
+{
+  return player;
+}
+
 void Network::SetGameName(const std::string& _game_name)
 {
   game_name = _game_name;

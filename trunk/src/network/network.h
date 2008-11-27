@@ -144,6 +144,7 @@ public:
   const std::string& GetGameName() const;
   const std::string& GetPassword() const;
   Player& GetPlayer();
+  const Player& GetPlayer() const;
 
   // Action handling
   void SendActionToAll(const Action& action) const;

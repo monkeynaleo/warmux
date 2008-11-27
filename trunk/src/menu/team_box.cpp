@@ -241,7 +241,9 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
 
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
-      Action* a = new Action(Action::ACTION_GAME_UPDATE_TEAM, old_team_id);
+      Action* a = new Action(Action::ACTION_GAME_UPDATE_TEAM);
+      a->Push(int(Network::GetInstance()->GetPlayer().GetId()));
+      a->Push(old_team_id);
       a->Push(associated_team->GetId());
       a->Push(associated_team->GetPlayerName());
       a->Push(int(associated_team->GetNbCharacters()));

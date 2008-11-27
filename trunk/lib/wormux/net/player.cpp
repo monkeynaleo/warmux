@@ -24,7 +24,11 @@
 #include <WORMUX_player.h>
 #include <stdlib.h>
 
-Player::Player() : nickname(_("Unnamed"))
+Player::Player(uint _player_id, const std::string& _nickname) : player_id(_player_id), nickname(_nickname)
+{
+}
+
+Player::Player() : player_id(0), nickname(_("Unnamed"))
 {
 }
 
@@ -37,6 +41,16 @@ void Player::Disconnect()
 {
   // It's up to the program using class Player to define WORMUX_DisconnectPlayer();
   WORMUX_DisconnectPlayer(*this);
+}
+
+void Player::SetId(uint _player_id)
+{
+  player_id = _player_id;
+}
+
+uint Player::GetId() const
+{
+  return player_id;
 }
 
 void Player::SetNickname(const std::string& _nickname)
