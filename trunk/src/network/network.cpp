@@ -424,11 +424,13 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
     singleton = prev;
     delete net;
   } else if (prev != NULL) {
-
-    // that's ok
-    AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION + " - Server mode");
     delete prev;
   }
+
+  if (error == CONNECTED) {
+    AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION + " - Server mode");
+  }
+
   return error;
 }
 
