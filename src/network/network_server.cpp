@@ -161,12 +161,6 @@ void NetworkServer::WaitActionSleep()
       SendInitialGameInfo(client);
       cpu.push_back(client);
 
-      Action *a = new Action(Action::ACTION_INFO_CLIENT_CONNECT);
-      a->Push(client->GetAddress());
-      a->Push(client->GetNicknames());
-
-      ActionHandler::GetInstance()->NewAction(a);
-
       printf("New client connected\n");
       if (GetNbConnectedPlayers() >= max_nb_players)
         RejectIncoming();

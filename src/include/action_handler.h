@@ -63,6 +63,7 @@ void SendActiveCharacterAction(const Action& a);
 void SendGameMode();
 void SyncCharacters();
 
+void WORMUX_ConnectHost(DistantComputer& host);
 void WORMUX_DisconnectHost(DistantComputer& host);
 void WORMUX_DisconnectPlayer(Player& player);
 

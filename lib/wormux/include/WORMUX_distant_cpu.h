@@ -32,9 +32,7 @@ class WSocket;
 
 class DistantComputer
 {
-  friend void WORMUX_DisconnectHost(DistantComputer& cpu);
-
- public:
+public:
   typedef enum {
     STATE_ERROR,
     STATE_NOT_INITIALIZED,
@@ -44,7 +42,7 @@ class DistantComputer
     STATE_NEXT_GAME
   } state_t;
 
- private:
+private:
   /* If you need this, implement it (correctly)*/
   DistantComputer(const DistantComputer&);
   const DistantComputer& operator=(const DistantComputer&);
@@ -68,6 +66,8 @@ public:
   std::string GetNicknames() const;
 
   void AddPlayer(uint player_id);
+  void DelPlayer(uint player_id);
+
   Player* GetPlayer(uint player_id);
   const std::list<Player>& GetPlayers() const;
 
@@ -80,7 +80,8 @@ public:
   const std::string ToString() const;
 };
 
-// It's up to the program using class DistantComputer to define WORMUX_DisconnectHost();
+// It's up to the program using class DistantComputer to define WORMUX_[Dis]connectHost();
+extern void WORMUX_ConnectHost(DistantComputer& cpu);
 extern void WORMUX_DisconnectHost(DistantComputer& cpu);
 
 #endif
