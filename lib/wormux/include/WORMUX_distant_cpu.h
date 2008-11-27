@@ -22,7 +22,7 @@
 #ifndef DISTANT_CPU_H
 #define DISTANT_CPU_H
 //-----------------------------------------------------------------------------
-#include <map>
+#include <list>
 #include <string>
 #include <WORMUX_player.h>
 #include <WORMUX_types.h>
@@ -52,10 +52,12 @@ class DistantComputer
 
   WSocket* sock;
   DistantComputer::state_t state;
-  Player player;
+
+  // a remote computer may act as a relay for several players (this is true when it is a server)
+  std::list<Player> players;
 
 public:
-  DistantComputer(WSocket* new_sock, const std::string& nickname);
+  DistantComputer(WSocket* new_sock, const std::string& nickname, uint initial_player_id);
   ~DistantComputer();
 
   bool SocketReady() const;
@@ -63,8 +65,11 @@ public:
   bool SendData(const void* data, size_t len);
 
   std::string GetAddress() const;
+  std::string GetNicknames() const;
 
-  Player& GetPlayer();
+  void AddPlayer(uint player_id);
+  Player* GetPlayer(uint player_id);
+  const std::list<Player>& GetPlayers() const;
 
   void SetState(DistantComputer::state_t _state);
   DistantComputer::state_t GetState() const;

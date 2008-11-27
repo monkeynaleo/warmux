@@ -22,29 +22,52 @@
 #include <algorithm>  //std::find
 #include <SDL_thread.h>
 #include <WORMUX_distant_cpu.h>
+#include <WORMUX_error.h>
+#include <WORMUX_i18n.h>
 #include <WORMUX_socket.h>
 
 static const int MAX_PACKET_SIZE = 250*1024;
 
-DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname) :
+DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname, uint initial_player_id) :
   sock(new_sock),
   state(DistantComputer::STATE_NOT_INITIALIZED)
 {
-  player.SetNickname(nickname);
+  Player theplayer(initial_player_id, nickname);
+  players.push_back(theplayer);
 }
 
 DistantComputer::~DistantComputer()
 {
   WORMUX_DisconnectHost(*this);
 
-  player.Disconnect();
+  // This will call the needed player->Disconnect() for each player
+  players.clear();
 
   delete sock;
 }
 
-Player& DistantComputer::GetPlayer()
+void DistantComputer::AddPlayer(uint player_id)
 {
+  Player theplayer(player_id, _("Unnamed"));
+  players.push_back(theplayer);
+}
+
+Player* DistantComputer::GetPlayer(uint player_id)
+{
+  Player* player = NULL;
+
+  std::list<Player>::iterator player_it;
+  for (player_it = players.begin(); player_it != players.end(); player_it++) {
+    if (player_it->GetId() == player_id)
+      return &(*player_it);
+  }
+
   return player;
+}
+
+const std::list<Player>& DistantComputer::GetPlayers() const
+{
+  return players;
 }
 
 bool DistantComputer::SocketReady() const
@@ -65,6 +88,24 @@ bool DistantComputer::SendData(const void* data, size_t len)
 std::string DistantComputer::GetAddress() const
 {
   return sock->GetAddress();
+}
+
+std::string DistantComputer::GetNicknames() const
+{
+  std::string nicknames;
+  std::list<Player>::const_iterator player;
+
+  for (player = players.begin(); player != players.end(); player++) {
+    if (nicknames != "")
+      nicknames += ", ";
+
+    nicknames += player->GetNickname();
+  }
+
+  if (nicknames == "")
+    nicknames = _("Unnamed");
+
+  return nicknames;
 }
 
 void DistantComputer::SetState(DistantComputer::state_t _state)
@@ -89,6 +130,6 @@ bool DistantComputer::MustBeDisconnected()
 
 const std::string DistantComputer::ToString() const
 {
-  std::string str = GetAddress() + std::string(" (") + player.GetNickname() + std::string(" )");
+  std::string str = GetAddress() + std::string(" (") + GetNicknames() + std::string(" )");
   return str;
 }

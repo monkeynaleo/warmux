@@ -34,14 +34,19 @@ class Player
   friend void WORMUX_DisconnectPlayer(Player& player);
 
 private:
+  uint player_id;
   std::string nickname;
   std::map<const std::string, ConfigTeam> owned_teams;
   void UpdateNickname();
 
 public:
+  Player(uint player_id, const std::string& nickname);
   Player();
   ~Player();
   void Disconnect();
+
+  void SetId(uint player_id);
+  uint GetId() const;
 
   void SetNickname(const std::string& nickname);
   const std::string& GetNickname() const;

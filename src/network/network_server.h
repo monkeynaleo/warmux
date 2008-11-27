@@ -32,8 +32,9 @@ class NetworkServer : public Network
   WSocket server_socket; // Wait for incoming connections on this socket
   int port; // store listening port
 
-  bool HandShake(WSocket& client_socket, std::string& nickname) const;
-  void SendInitialGameInfo(DistantComputer* client);
+  uint NextPlayerId() const;
+  bool HandShake(WSocket& client_socket, std::string& nickname, uint player_id) const;
+  void SendInitialGameInfo(DistantComputer* client) const;
 
 protected:
   virtual void HandleAction(Action* a, DistantComputer* sender);

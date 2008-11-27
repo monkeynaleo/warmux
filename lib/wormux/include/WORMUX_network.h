@@ -66,6 +66,7 @@ public:
 			       const std::string& game_name,
 			       const std::string& password,
 			       std::string& client_nickname,
+			       uint client_player_id,
 			       bool client_will_be_master);
 };
 

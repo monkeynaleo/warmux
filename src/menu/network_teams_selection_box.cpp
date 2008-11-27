@@ -28,6 +28,7 @@
 #include "gui/spin_button_picture.h"
 #include "gui/text_box.h"
 #include "include/action_handler.h"
+#include "network/network.h"
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/string_tools.h"
@@ -245,8 +246,10 @@ void NetworkTeamsSelectionBox::RemoveLocalTeam(uint i)
 {
   ASSERT(teams_selections.at(i)->GetTeam() != NULL);
 
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_GAME_DEL_TEAM,
-						     teams_selections.at(i)->GetTeam()->GetId()));
+  Action* a = new Action(Action::ACTION_GAME_DEL_TEAM);
+  a->Push(int(Network::GetInstance()->GetPlayer().GetId()));
+  a->Push(teams_selections.at(i)->GetTeam()->GetId());
+  ActionHandler::GetInstance()->NewAction(a);
   ActionHandler::GetInstance()->ExecActions();
 }
 
@@ -259,7 +262,9 @@ void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team)
     teams_selections.at(i)->SetTeam(team, false);
 
   } else {
-    Action* a = new Action(Action::ACTION_GAME_ADD_TEAM, team.GetId());
+    Action* a = new Action(Action::ACTION_GAME_ADD_TEAM);
+    a->Push(int(Network::GetInstance()->GetPlayer().GetId()));
+    a->Push(team.GetId());
     a->Push(team.GetPlayerName());
     a->Push(int(team.GetNbCharacters()));
     ActionHandler::GetInstance()->NewAction(a);

@@ -61,14 +61,25 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
-static inline void add_team_config_to_action(Action& a, std::map<const std::string, ConfigTeam>::const_iterator &team)
+static inline void add_team_config_to_action(Action& a, const ConfigTeam& team)
 {
-  a.Push(team->first);
-  a.Push(team->second.player_name);
-  a.Push(int(team->second.nb_characters));
+  a.Push(team.id);
+  a.Push(team.player_name);
+  a.Push(int(team.nb_characters));
 }
 
-void NetworkServer::SendInitialGameInfo(DistantComputer* client)
+static inline void add_player_info_to_action(Action& a, const Player& player)
+{
+  a.Push(int(player.GetId()));
+  a.Push(int(player.GetNbTeams()));
+
+  std::map<std::string, ConfigTeam>::const_iterator team;
+  for (team = player.GetTeams().begin(); team != player.GetTeams().end(); team++) {
+    add_team_config_to_action(a, team->second);
+  }
+}
+
+void NetworkServer::SendInitialGameInfo(DistantComputer* client) const
 {
   // we have to tell this new computer
   // what teams / maps have already been selected
@@ -80,40 +91,55 @@ void NetworkServer::SendInitialGameInfo(DistantComputer* client)
 
   MSG_DEBUG("network", "Server: Sending teams information");
 
-  // count the number of already selected teams
-  int nb_teams = 0;
+  // count the number of players
+  int nb_players = 1;
 
   std::list<DistantComputer*>::const_iterator it;
+  std::list<Player>::const_iterator player;
+
   for (it = cpu.begin(); it != cpu.end(); it++) {
-    nb_teams += (*it)->GetPlayer().GetNbTeams();
+    nb_players += (*it)->GetPlayers().size();
   }
 
-  nb_teams += GetPlayer().GetNbTeams();
+  a.Push(nb_players);
 
-  a.Push(nb_teams);
-
-  // Teams infos of already connected computers
-  std::map<const std::string, ConfigTeam>::const_iterator team;
+  // Teams infos of each player
+  add_player_info_to_action(a, GetPlayer());
 
   for (it = cpu.begin(); it != cpu.end(); it++) {
-    for (team = (*it)->GetPlayer().GetTeams().begin();
-	 team != (*it)->GetPlayer().GetTeams().end();
-	 team++) {
 
-      add_team_config_to_action(a, team);
+    const std::list<Player>& players = (*it)->GetPlayers();
+
+    for (player = players.begin(); player != players.end(); player++) {
+      add_player_info_to_action(a, (*player));
     }
-  }
-
-  for (team = GetPlayer().GetTeams().begin(); team != GetPlayer().GetTeams().end(); team++) {
-    add_team_config_to_action(a, team);
   }
 
   SendActionToOne(a, client);
 }
 
-bool NetworkServer::HandShake(WSocket& client_socket, std::string& nickname) const
+uint NetworkServer::NextPlayerId() const
 {
-  return WNet::Server_HandShake(client_socket, GetGameName(), GetPassword(), nickname, false);
+  uint player_id = GetPlayer().GetId() + 1;
+
+  std::list<DistantComputer*>::const_iterator it;
+  std::list<Player>::const_iterator player;
+  for (it = cpu.begin(); it != cpu.end(); it++) {
+
+    const std::list<Player>& players = (*it)->GetPlayers();
+
+    for (player = players.begin(); player != players.end(); player++) {
+      if (player_id <= player->GetId()) {
+	player_id = player->GetId() + 1;
+      }
+    }
+  }
+  return player_id;
+}
+
+bool NetworkServer::HandShake(WSocket& client_socket, std::string& nickname, uint player_id) const
+{
+  return WNet::Server_HandShake(client_socket, GetGameName(), GetPassword(), nickname, player_id, false);
 }
 
 void NetworkServer::WaitActionSleep()
@@ -124,19 +150,20 @@ void NetworkServer::WaitActionSleep()
     WSocket* incoming = server_socket.LookForClient();
     if (incoming) {
       std::string nickname;
+      uint player_id = NextPlayerId();
 
-      if (!HandShake(*incoming, nickname))
+      if (!HandShake(*incoming, nickname, player_id))
  	return;
 
       socket_set->AddSocket(incoming);
 
-      DistantComputer* client = new DistantComputer(incoming, nickname);
+      DistantComputer* client = new DistantComputer(incoming, nickname, player_id);
       SendInitialGameInfo(client);
       cpu.push_back(client);
 
       Action *a = new Action(Action::ACTION_INFO_CLIENT_CONNECT);
       a->Push(client->GetAddress());
-      a->Push(client->GetPlayer().GetNickname());
+      a->Push(client->GetNicknames());
 
       ActionHandler::GetInstance()->NewAction(a);
 
