@@ -77,6 +77,7 @@ Menu::Menu(const std::string& bg, t_action _actions) :
 
 Menu::~Menu()
 {
+  AppWormux::GetInstance()->SetCurrentMenu(NULL);
   delete background;
 }
 

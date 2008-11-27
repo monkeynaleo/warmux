@@ -161,7 +161,6 @@ void NetworkServer::WaitActionSleep()
       SendInitialGameInfo(client);
       cpu.push_back(client);
 
-      printf("New client connected\n");
       if (GetNbConnectedPlayers() >= max_nb_players)
         RejectIncoming();
     }
@@ -209,8 +208,6 @@ std::list<DistantComputer*>::iterator
 NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
   std::list<DistantComputer*>::iterator it;
-
-  printf("- client disconnected: %s\n", (*closed)->ToString().c_str());
 
   it = cpu.erase(closed);
   delete *closed;

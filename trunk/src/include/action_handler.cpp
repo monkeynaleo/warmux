@@ -753,10 +753,13 @@ static void Action_Network_Ping(Action */*a*/)
 {
 }
 
+// ########################################################
+
 static void _Info_ConnectHost(const std::string& hostname, const std::string& nicknames)
 {
   // For translators: extended in "<nickname> (<host>) just connected
   std::string msg = Format("%s (%s) just connected", nicknames.c_str(), hostname.c_str());
+  fprintf(stderr, "%s\n", msg.c_str());
 
   ChatLogger::LogMessageIfOpen(msg);
 
@@ -796,6 +799,7 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
 {
   // For translators: extended in "<nickname> (<host>) just disconnected
   std::string msg = Format("%s (%s) just disconnected", nicknames.c_str(), hostname.c_str());
+  fprintf(stderr, "%s\n", msg.c_str());
 
   ChatLogger::LogMessageIfOpen(msg);
 
@@ -838,7 +842,7 @@ void WORMUX_DisconnectHost(DistantComputer& host)
     for (player_it = host.GetPlayers().begin(); player_it != host.GetPlayers().end(); player_it++) {
       a.Push(int(player_it->GetId()));
     }
-    Network::GetInstance()->SendActionToAllExceptOne(a, &host);
+    Network::GetInstance()->SendActionToAll(a); // host is already removed from the list
   }
 }
 

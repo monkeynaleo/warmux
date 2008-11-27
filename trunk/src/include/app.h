@@ -37,13 +37,13 @@ private:
   Menu *menu;
   static AppWormux * singleton;
 
-private:
+  AppWormux();
   void InitWindow();
   void DisplayLoadingPicture();
-  void End() const;
   void DisplayWelcomeMessage() const;
-  AppWormux();
+  void End() const;
 
+  Menu* GetCurrentMenu() const;
 public:
   void SetCurrentMenu(Menu *menu);
   void RefreshDisplay();

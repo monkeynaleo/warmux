@@ -108,7 +108,7 @@ int AppWormux::Main(void)
       if (choice == MainMenu::NONE)
       {
         MainMenu main_menu;
-        menu = &main_menu;
+        SetCurrentMenu(&main_menu);
         choice = main_menu.Run();
       }
 
@@ -119,35 +119,35 @@ int AppWormux::Main(void)
         case MainMenu::PLAY:
         {
           GameMenu game_menu;
-          menu = &game_menu;
+          SetCurrentMenu(&game_menu);
           game_menu.Run(skip_menu);
           break;
         }
         case MainMenu::NETWORK:
         {
           NetworkConnectionMenu network_connection_menu(net_action);
-          menu = &network_connection_menu;
+          SetCurrentMenu(&network_connection_menu);
           network_connection_menu.Run(skip_menu);
           break;
         }
         case MainMenu::HELP:
         {
           HelpMenu help_menu;
-          menu = &help_menu;
+          SetCurrentMenu(&help_menu);
           help_menu.Run();
           break;
         }
         case MainMenu::OPTIONS:
         {
           OptionMenu options_menu;
-          menu = &options_menu;
+          SetCurrentMenu(&options_menu);
           options_menu.Run();
           break;
         }
         case MainMenu::CREDITS:
         {
           CreditsMenu credits_menu;
-          menu = &credits_menu;
+          SetCurrentMenu(&credits_menu);
           credits_menu.Run();
           break;
         }
@@ -157,14 +157,14 @@ int AppWormux::Main(void)
         case MainMenu::SKIN_VIEWER:
         {
           SkinMenu skin_menu(skin);
-          menu = &skin_menu;
+          SetCurrentMenu(&skin_menu);
           skin_menu.Run();
           break;
         }
         default:
           break;
       }
-      menu = NULL;
+      SetCurrentMenu(NULL);
       choice = MainMenu::NONE;
       skip_menu = false;
       net_action = NetworkConnectionMenu::NET_NOTHING;
@@ -227,14 +227,19 @@ void AppWormux::SetCurrentMenu(Menu* _menu)
   menu = _menu;
 }
 
+Menu* AppWormux::GetCurrentMenu() const
+{
+  return menu;
+}
+
 void AppWormux::RefreshDisplay()
 {
   if (Game::GetInstance()->IsGameLaunched()) {
     GetWorld().DrawSky(true);
     GetWorld().Draw(true);
   }
-  else if (menu) {
-    menu->RedrawMenu();
+  else if (GetCurrentMenu()) {
+    GetCurrentMenu()->RedrawMenu();
   }
 }
 
@@ -247,8 +252,8 @@ void AppWormux::DisplayError(const std::string &msg)
 
   if (Game::GetInstance()->IsGameLaunched()) {
     // nothing to do
-  } else if (singleton->menu) {
-      singleton->menu->DisplayError(msg);
+  } else if (singleton->GetCurrentMenu()) {
+    singleton->GetCurrentMenu()->DisplayError(msg);
   }
 }
 
@@ -257,8 +262,8 @@ void AppWormux::ReceiveMsgCallback(const std::string& msg)
   if (Game::GetInstance()->IsGameLaunched()) {
     //Add message to chat session in Game
     Game::GetInstance()->chatsession.NewMessage(msg);
-  } else if (menu) {
-    menu->ReceiveMsgCallback(msg);
+  } else if (GetCurrentMenu()) {
+    GetCurrentMenu()->ReceiveMsgCallback(msg);
   }
 }
 
