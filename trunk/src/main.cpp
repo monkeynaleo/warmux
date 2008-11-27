@@ -100,6 +100,8 @@ int AppWormux::Main(void)
 
     OptionMenu::CheckUpdates();
 
+    Action_Handler_Init();
+
     do
     {
 
