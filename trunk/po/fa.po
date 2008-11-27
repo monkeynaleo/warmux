@@ -412,7 +412,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "سندان"
 
-#: src/main.cpp:284
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "نویسندگان:"
 
@@ -833,7 +833,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "بجنب، خیلی کندی! بابا صد رحمت به لاک‌پشت!!"
 
-#: src/main.cpp:276
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1124,7 +1124,7 @@ msgstr ""
 msgid "Quit"
 msgstr "خروج"
 
-#: src/main.cpp:265
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "خروج از ورموکس"
 
@@ -1431,7 +1431,7 @@ msgstr "(بی‌نهایت)"
 msgid "Unnamed"
 msgstr "بدون نام"
 
-#: src/main.cpp:197
+#: src/main.cpp:199
 msgid "Version"
 msgstr "نسخه"
 
@@ -1460,7 +1460,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "اسلحه‌ها"
 
-#: src/main.cpp:293
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "وب‌سایت: "
 
@@ -1484,11 +1484,11 @@ msgstr "باد؟"
 msgid "Winner"
 msgstr "برنده"
 
-#: src/main.cpp:209
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "ورموکس در حال اجراست..."
 
-#: src/main.cpp:283
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "نسخه‌ی ورموکس"
 

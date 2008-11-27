@@ -876,36 +876,31 @@ void Action_Handler_Init()
 // ########################################################
 // ########################################################
 
-void ActionHandler::Flush()
+
+ActionHandler::ActionHandler(): WActionHandler()
 {
-  std::list<Action*>::iterator it;
-  SDL_LockMutex(mutex);
-  for (it = queue.begin(); it != queue.end() ;)
-  {
-    MSG_DEBUG("action_handler","remove action %s", GetActionName((*it)->GetType()).c_str());
-    delete *it;
-    it = queue.erase(it);
-  }
-  SDL_UnlockMutex(mutex);
+}
+
+ActionHandler::~ActionHandler()
+{
 }
 
 void ActionHandler::ExecActions()
 {
   Action * a;
   std::list<Action*>::iterator it;
-  ASSERT(mutex!=NULL);
   for (it = queue.begin(); it != queue.end() ;)
   {
-    SDL_LockMutex(mutex);
+    Lock();
     a = (*it);
     //Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
     // If action is in the future, wait for next refresh
     if (a->GetTimestamp() > Time::GetInstance()->Read()) {
-      SDL_UnlockMutex(mutex);
+      UnLock();
       it++;
       continue;
     }
-    SDL_UnlockMutex(mutex);
+    UnLock();
     Exec (a);
     delete *it;
     it = queue.erase(it);
@@ -914,13 +909,7 @@ void ActionHandler::ExecActions()
 
 void ActionHandler::NewAction(Action* a, bool repeat_to_network)
 {
-  ASSERT(mutex!=NULL);
-  SDL_LockMutex(mutex);
-  MSG_DEBUG("action_handler","New action : %s", GetActionName(a->GetType()).c_str());
-  //  std::cout << "New action " << a->GetType() << std::endl ;
-  queue.push_back(a);
-  //  std::cout << "  queue_size " << queue.size() << std::endl;
-  SDL_UnlockMutex(mutex);
+  WActionHandler::NewAction(a);
 
   if (repeat_to_network)
     Network::GetInstance()->SendActionToAll(*a);
@@ -935,69 +924,5 @@ void ActionHandler::NewActionActiveCharacter(Action* a)
   NewAction(a);
   Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
   Network::GetInstance()->SendActionToAll(a_end_sync);
-}
-
-// To call when locked
-void ActionHandler::Register (Action::Action_t action,
-                              const std::string &name,
-                              callback_t fct)
-{
-  handler[action] = fct;
-  action_name[action] = name;
-}
-
-void ActionHandler::Exec(Action *a)
-{
-#ifdef WMX_LOG
-  int id=rand();
-#endif
-
-  MSG_DEBUG("action_handler", "-> (%d) Executing action %s", id, GetActionName(a->GetType()).c_str());
-  handler_it it=handler.find(a->GetType());
-  NET_ASSERT(it != handler.end())
-  {
-    if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
-    return;
-  }
-  (*it->second) (a);
-  MSG_DEBUG("action_handler", "<- (%d) Executing action %s", id, GetActionName(a->GetType()).c_str());
-}
-
-const std::string &ActionHandler::GetActionName (Action::Action_t action) const
-{
-  ASSERT(mutex!=NULL);
-  SDL_LockMutex(mutex);
-  name_it it=action_name.find(action);
-  ASSERT(it != action_name.end());
-  SDL_UnlockMutex(mutex);
-  return it->second;
-}
-
-void ActionHandler::Lock()
-{
-  SDL_LockMutex(mutex);
-}
-
-void ActionHandler::UnLock()
-{
-  SDL_UnlockMutex(mutex);
-}
-
-ActionHandler::ActionHandler():
-  handler(),
-  action_name(),
-  queue()
-{
-  mutex = SDL_CreateMutex();
-  SDL_LockMutex(mutex);
-
-
-  SDL_UnlockMutex(mutex);
-}
-
-ActionHandler::~ActionHandler()
-{
-  if (mutex)
-    SDL_DestroyMutex(mutex);
 }
 

@@ -442,7 +442,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "铁砧"
 
-#: src/main.cpp:284
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "作者:"
 
@@ -864,7 +864,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "快点,伙计你也太慢了!"
 
-#: src/main.cpp:276
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1152,7 +1152,7 @@ msgstr "推出战斗"
 msgid "Quit"
 msgstr "退出"
 
-#: src/main.cpp:265
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "退出"
 
@@ -1467,7 +1467,7 @@ msgstr "(无限的)"
 msgid "Unnamed"
 msgstr "未命名"
 
-#: src/main.cpp:197
+#: src/main.cpp:199
 msgid "Version"
 msgstr "版本"
 
@@ -1497,7 +1497,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:293
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "网站Website: "
 
@@ -1522,11 +1522,11 @@ msgstr "风来了?"
 msgid "Winner"
 msgstr "胜者"
 
-#: src/main.cpp:209
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "准备中, Wormux!!!"
 
-#: src/main.cpp:283
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr " Wormux 版本"
 

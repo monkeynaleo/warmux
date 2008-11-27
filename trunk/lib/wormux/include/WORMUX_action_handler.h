@@ -19,50 +19,60 @@
  * Define all Wormux actions.
  *****************************************************************************/
 
-#ifndef ACTION_HANDLER_H
-#define ACTION_HANDLER_H
+#ifndef WORMUX_ACTION_HANDLER_H
+#define WORMUX_ACTION_HANDLER_H
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
-#include <WORMUX_action_handler.h>
-#include "include/action.h"
-#include "include/base.h"
-
+#include <WORMUX_action.h>
+#include <WORMUX_singleton.h>
+#include <WORMUX_types.h>
 //-----------------------------------------------------------------------------
 
 // Forward declarations
 struct SDL_mutex;
 
-class ActionHandler : public WActionHandler, public Singleton<ActionHandler>
+class WActionHandler
 {
 private:
-  friend class Singleton<ActionHandler>;
-  ActionHandler();
-  ~ActionHandler();
+  /* If you need this, you probably made an error in your code... */
+  WActionHandler(const WActionHandler&);
+  const WActionHandler& operator=(const WActionHandler&);
+  /****************************************************************/
+
+  // Mutex needed to be thread safe for the network
+  SDL_mutex* mutex;
+
+  // Handler for each action
+  typedef void (*callback_t) (Action *a);
+  std::map<Action::Action_t, callback_t> handler;
+  typedef std::map<Action::Action_t, callback_t>::const_iterator handler_it;
+
+  // Action strings
+  std::map<Action::Action_t, std::string> action_name;
+  typedef std::map<Action::Action_t, std::string>::const_iterator name_it;
+
+protected:
+  WActionHandler();
+  ~WActionHandler();
+
+  // Action queue
+  std::list<Action*> queue;
+
+  void Exec(Action *a);
+  void NewAction(Action* a);
 
 public:
-  void NewAction(Action* a, bool repeat_to_network=true);
-  void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
-
+  void Flush();
   void ExecActions();
+
+  void Lock();
+  void UnLock();
+
+  // To call when locked
+  void Register(Action::Action_t action, const std::string &name, callback_t fct);
+
+  const std::string &GetActionName(Action::Action_t action) const;
 };
 
-void Action_Handler_Init();
-
-// TODO: Move it in an object !
-
-// Send character information over the network (it's totally stupid to send it locally ;-)
-void SendCharacterInfo(int team_no, int char_no);
-void SendActiveCharacterInfo(bool can_be_dropped = false);
-
-// Send character information + an action over the network
-// WARNING: it does not post the action in local queue!!
-void SendActiveCharacterAction(const Action& a);
-
-void SendGameMode();
-void SyncCharacters();
-
-
-
-//-----------------------------------------------------------------------------
 #endif

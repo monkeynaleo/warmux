@@ -455,7 +455,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:284
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Forfattere :"
 
@@ -873,7 +873,7 @@ msgstr "Hvordan bruke den : venstreklikk på måleten ammo per runde"
 msgid "Hurry up, you are too slow !!"
 msgstr "Kjapp deg, du er for treg !!"
 
-#: src/main.cpp:276
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1158,7 +1158,7 @@ msgstr "Offentlige kamper"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/main.cpp:265
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
@@ -1469,7 +1469,7 @@ msgstr "(uendelig)"
 msgid "Unnamed"
 msgstr "Uten navn"
 
-#: src/main.cpp:197
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Versjon"
 
@@ -1499,7 +1499,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Våpen"
 
-#: src/main.cpp:293
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Webside : "
 
@@ -1523,11 +1523,11 @@ msgstr "Vindpartikler ?"
 msgid "Winner"
 msgstr "Vinner"
 
-#: src/main.cpp:209
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Laster Wormux ..."
 
-#: src/main.cpp:283
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux versjon "
 

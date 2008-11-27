@@ -512,7 +512,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Наковальня"
 
-#: src/main.cpp:284
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Авторы:"
 
@@ -931,7 +931,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Торопитесь, вы слишком медленные!!"
 
-#: src/main.cpp:276
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1215,7 +1215,7 @@ msgstr "Доступные битвы"
 msgid "Quit"
 msgstr "Выйти"
 
-#: src/main.cpp:265
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Выйти из Wormux"
 
@@ -1528,7 +1528,7 @@ msgstr "(бесконечно)"
 msgid "Unnamed"
 msgstr "Без имени"
 
-#: src/main.cpp:197
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Версия"
 
@@ -1561,7 +1561,7 @@ msgstr "Оружие: Огонь/Подарки: падают быстрее"
 msgid "Weapons"
 msgstr "Оружие"
 
-#: src/main.cpp:293
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Веб-сайт: "
 
@@ -1585,11 +1585,11 @@ msgstr "Частицы в воздухе?"
 msgid "Winner"
 msgstr "Победитель"
 
-#: src/main.cpp:209
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Запуск Wormux..."
 
-#: src/main.cpp:283
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux версии "
 

@@ -449,7 +449,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovanj"
 
-#: src/main.cpp:284
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -881,7 +881,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Požuri, previše si spor !!"
 
-#: src/main.cpp:276
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1169,7 +1169,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Odustani"
 
-#: src/main.cpp:265
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Izađi iz Wormux-a"
 
@@ -1488,7 +1488,7 @@ msgstr "(neograničeno)"
 msgid "Unnamed"
 msgstr "Bezimeni"
 
-#: src/main.cpp:197
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Verzija"
 
@@ -1518,7 +1518,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Oružje:"
 
-#: src/main.cpp:293
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Web stranica:"
 
@@ -1543,11 +1543,11 @@ msgstr "Prikazuj trunke vjetra?"
 msgid "Winner"
 msgstr "Mina"
 
-#: src/main.cpp:209
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Wormux se učitava..."
 
-#: src/main.cpp:283
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
