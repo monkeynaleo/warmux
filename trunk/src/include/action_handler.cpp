@@ -67,7 +67,7 @@
 // server, because the server stupidely repeat it to all clients.
 // BUT a server must never receive an Action which concern only clients.
 
-void FAIL_IF_GAMEMASTER(Action *a)
+static void FAIL_IF_GAMEMASTER(Action *a)
 {
   if (!a->GetCreator()) {
     fprintf(stderr, "%s", ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
@@ -89,7 +89,7 @@ void FAIL_IF_GAMEMASTER(Action *a)
 // #############################################################################
 // #############################################################################
 
-void Action_Network_ClientChangeState (Action *a)
+static void Action_Network_ClientChangeState (Action *a)
 {
   if (!Network::GetInstance()->IsGameMaster())
     return;
@@ -132,7 +132,7 @@ void Action_Network_ClientChangeState (Action *a)
   }
 }
 
-void Action_Network_MasterChangeState (Action *a)
+static void Action_Network_MasterChangeState (Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
@@ -158,7 +158,7 @@ void Action_Network_MasterChangeState (Action *a)
   }
 }
 
-void Action_Network_Check_Phase1 (Action *a)
+static void Action_Network_Check_Phase1 (Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
@@ -199,14 +199,14 @@ static std::string NetErrorId_2_String(enum net_error error)
   return s;
 }
 
-void Action_Network_Disconnect_On_Error(Action *a)
+static void Action_Network_Disconnect_On_Error(Action *a)
 {
   enum net_error error = (enum net_error)a->PopInt();
   AppWormux::DisplayError(NetErrorId_2_String(error));
   Network::Disconnect();
 }
 
-void DisconnectOnError(enum net_error error)
+static void DisconnectOnError(enum net_error error)
 {
   Action a(Action::ACTION_NETWORK_DISCONNECT_ON_ERROR);
   a.Push(int(error));
@@ -224,7 +224,7 @@ static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
   AppWormux::DisplayError(str);
 }
 
-void Action_Network_Check_Phase2 (Action *a)
+static void Action_Network_Check_Phase2 (Action *a)
 {
   // Game master receives information from the client
   if (!Network::GetInstance()->IsGameMaster())
@@ -264,13 +264,13 @@ void Action_Network_Check_Phase2 (Action *a)
 
 // ########################################################
 
-void Action_Player_ChangeWeapon (Action *a)
+static void Action_Player_ChangeWeapon (Action *a)
 {
   JukeBox::GetInstance()->Play("share", "change_weapon");
   ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
 }
 
-void Action_Player_ChangeCharacter (Action *a)
+static void Action_Player_ChangeCharacter (Action *a)
 {
   JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
   Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
@@ -278,7 +278,7 @@ void Action_Player_ChangeCharacter (Action *a)
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
-void Action_Game_NextTeam (Action *a)
+static void Action_Game_NextTeam (Action *a)
 {
   std::string team = a->PopString();
   GetTeamsList().SetActive(team);
@@ -294,7 +294,7 @@ void Action_Game_NextTeam (Action *a)
     Network::GetInstance()->SetTurnMaster(false);
 }
 
-void Action_NewBonusBox (Action *a)
+static void Action_NewBonusBox (Action *a)
 {
   ObjBox * box;
   switch(a->PopInt()) {
@@ -309,7 +309,7 @@ void Action_NewBonusBox (Action *a)
   Game::GetInstance()->AddNewBox(box);
 }
 
-void Action_DropBonusBox (Action *a)
+static void Action_DropBonusBox (Action *a)
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
   if (current_box != NULL) {
@@ -318,7 +318,7 @@ void Action_DropBonusBox (Action *a)
   }
 }
 
-void Action_Game_SetState (Action *a)
+static void Action_Game_SetState (Action *a)
 {
   // to re-synchronize random number generator
   uint seed = a->PopInt();
@@ -330,7 +330,7 @@ void Action_Game_SetState (Action *a)
 
 // ########################################################
 
-void Action_Rules_SetGameMode (Action *a)
+static void Action_Rules_SetGameMode (Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
@@ -371,7 +371,7 @@ void SendGameMode()
 
 // ########################################################
 
-void Action_ChatMessage (Action *a)
+static void Action_ChatMessage (Action *a)
 {
   std::string nickname = a->PopString();
   std::string message = a->PopString();
@@ -384,7 +384,7 @@ void Action_ChatMessage (Action *a)
   AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message);
 }
 
-void _Action_SelectMap(Action *a)
+static void _Action_SelectMap(Action *a)
 {
   std::string map_name = a->PopString();
 
@@ -399,7 +399,7 @@ void _Action_SelectMap(Action *a)
   }
 }
 
-void UpdateLocalNickname()
+static void UpdateLocalNickname()
 {
   std::string nickname = GetTeamsList().GetLocalHeadCommanders();
   if (nickname == "")
@@ -408,7 +408,7 @@ void UpdateLocalNickname()
   Network::GetInstance()->GetPlayer().SetNickname(nickname);
 }
 
-void _Action_AddTeam(Action *a)
+static void _Action_AddTeam(Action *a)
 {
   ConfigTeam the_team;
 
@@ -435,7 +435,7 @@ void _Action_AddTeam(Action *a)
   }
 }
 
-void Action_Game_Info(Action *a)
+static void Action_Game_Info(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
@@ -447,19 +447,19 @@ void Action_Game_Info(Action *a)
   }
 }
 
-void Action_Game_SetMap (Action *a)
+static void Action_Game_SetMap (Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
   _Action_SelectMap(a);
 }
 
-void Action_Game_AddTeam (Action *a)
+static void Action_Game_AddTeam (Action *a)
 {
   _Action_AddTeam(a);
 }
 
-void Action_Game_UpdateTeam (Action *a)
+static void Action_Game_UpdateTeam (Action *a)
 {
   std::string old_team_id = a->PopString();
 
@@ -484,7 +484,7 @@ void Action_Game_UpdateTeam (Action *a)
   }
 }
 
-void Action_Game_DelTeam (Action *a)
+static void Action_Game_DelTeam (Action *a)
 {
   std::string team_id = a->PopString();
 
@@ -544,28 +544,28 @@ void SyncCharacters()
   Network::GetInstance()->SendActionToAll(a_sync_end);
 }
 
-void Action_Character_Jump (Action */*a*/)
+static void Action_Character_Jump (Action */*a*/)
 {
   Game::GetInstance()->character_already_chosen = true;
   ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().Jump();
 }
 
-void Action_Character_HighJump (Action */*a*/)
+static void Action_Character_HighJump (Action */*a*/)
 {
   Game::GetInstance()->character_already_chosen = true;
   ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().HighJump();
 }
 
-void Action_Character_BackJump (Action */*a*/)
+static void Action_Character_BackJump (Action */*a*/)
 {
   Game::GetInstance()->character_already_chosen = true;
   ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().BackJump();
 }
 
-void Action_Character_SetPhysics (Action *a)
+static void Action_Character_SetPhysics (Action *a)
 {
   while(!a->IsEmpty())
     Character::RetrieveCharacterFromAction(a);
@@ -605,7 +605,7 @@ void SendActiveCharacterInfo(bool can_be_dropped)
 
 // ########################################################
 
-void Action_Weapon_Shoot (Action *a)
+static void Action_Weapon_Shoot (Action *a)
 {
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return; // hack related to bug 8656
@@ -615,19 +615,19 @@ void Action_Weapon_Shoot (Action *a)
   ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
 }
 
-void Action_Weapon_StopUse(Action */*a*/)
+static void Action_Weapon_StopUse(Action */*a*/)
 {
   ActiveTeam().AccessWeapon().ActionStopUse();
 }
 
-void Action_Weapon_SetTarget (Action *a)
+static void Action_Weapon_SetTarget (Action *a)
 {
   MSG_DEBUG("action_handler", "Set target by clicking");
 
   ActiveTeam().AccessWeapon().ChooseTarget (a->PopPoint2i());
 }
 
-void Action_Weapon_SetTimeout (Action *a)
+static void Action_Weapon_SetTimeout (Action *a)
 {
   WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
   NET_ASSERT(launcher != NULL)
@@ -637,7 +637,7 @@ void Action_Weapon_SetTimeout (Action *a)
   launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
 }
 
-void Action_Weapon_Supertux (Action *a)
+static void Action_Weapon_Supertux (Action *a)
 {
   NET_ASSERT(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX)
   {
@@ -650,7 +650,7 @@ void Action_Weapon_Supertux (Action *a)
   launcher->RefreshFromNetwork(angle, pos);
 }
 
-void Action_Weapon_Construction (Action *a)
+static void Action_Weapon_Construction (Action *a)
 {
   Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
   NET_ASSERT(construct_weapon != NULL)
@@ -661,7 +661,7 @@ void Action_Weapon_Construction (Action *a)
   construct_weapon->SetAngle(a->PopDouble());
 }
 
-void Action_Weapon_Grapple (Action *a)
+static void Action_Weapon_Grapple (Action *a)
 {
   Grapple* grapple = dynamic_cast<Grapple*>(&(ActiveTeam().AccessWeapon()));
   NET_ASSERT(grapple != NULL)
@@ -702,24 +702,24 @@ void Action_Weapon_Grapple (Action *a)
 
 // ########################################################
 
-void Action_Wind (Action *a)
+static void Action_Wind (Action *a)
 {
   Wind::GetRef().SetVal (a->PopInt());
 }
 
-void Action_Network_RandomInit (Action *a)
+static void Action_Network_RandomInit (Action *a)
 {
   MSG_DEBUG("random", "Initialization from network");
   RandomSync().SetRand(a->PopInt());
 }
 
-void Action_Network_SyncBegin (Action */*a*/)
+static void Action_Network_SyncBegin (Action */*a*/)
 {
   ASSERT(!Network::GetInstance()->sync_lock);
   Network::GetInstance()->sync_lock = true;
 }
 
-void Action_Network_SyncEnd (Action */*a*/)
+static void Action_Network_SyncEnd (Action */*a*/)
 {
   ASSERT(Network::GetInstance()->sync_lock);
   Network::GetInstance()->sync_lock = false;
@@ -731,7 +731,7 @@ static void Action_Network_Ping(Action */*a*/)
 }
 
 // Only used to notify clients (and server) that someone connected to the server
-void Action_Info_ClientConnect(Action *a)
+static void Action_Info_ClientConnect(Action *a)
 {
   std::string host = a->PopString();
   std::string nickname = a->PopString();
@@ -754,7 +754,7 @@ void Action_Info_ClientConnect(Action *a)
 }
 
 // Only used to notify clients (and server) that someone disconnected from the server
-void Action_Info_ClientDisconnect(Action *a)
+static void Action_Info_ClientDisconnect(Action *a)
 {
   std::string host = a->PopString();
   std::string nickname = a->PopString();
@@ -771,7 +771,7 @@ void Action_Info_ClientDisconnect(Action *a)
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 }
 
-void Action_Explosion (Action *a)
+static void Action_Explosion (Action *a)
 {
   ExplosiveWeaponConfig config;
   MSG_DEBUG("action_handler","-> Begin");
