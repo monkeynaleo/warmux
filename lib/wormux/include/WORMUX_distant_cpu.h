@@ -22,10 +22,10 @@
 #ifndef DISTANT_CPU_H
 #define DISTANT_CPU_H
 //-----------------------------------------------------------------------------
-#include "include/base.h"
-#include <WORMUX_player.h>
 #include <map>
 #include <string>
+#include <WORMUX_player.h>
+#include <WORMUX_types.h>
 //-----------------------------------------------------------------------------
 
 class WSocket;

@@ -21,12 +21,8 @@
 
 #include <algorithm>  //std::find
 #include <SDL_thread.h>
+#include <WORMUX_distant_cpu.h>
 #include <WORMUX_socket.h>
-#include "network/distant_cpu.h"
-//-----------------------------------------------------------------------------
-#include "include/action.h"
-#include "include/action_handler.h"
-//-----------------------------------------------------------------------------
 
 static const int MAX_PACKET_SIZE = 250*1024;
 
@@ -39,11 +35,12 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname)
 
 DistantComputer::~DistantComputer()
 {
-  Action *a = new Action(Action::ACTION_INFO_CLIENT_DISCONNECT);
-  a->Push(GetAddress());
-  a->Push(GetPlayer().GetNickname());
+  // WARNING: We must add relevant call to send ACTION_INFO_CLIENT_DISCONNECT
+  // Action *a = new Action(Action::ACTION_INFO_CLIENT_DISCONNECT);
+  // a->Push(GetAddress());
+  // a->Push(GetPlayer().GetNickname());
 
-  ActionHandler::GetInstance()->NewAction(a);
+  // ActionHandler::GetInstance()->NewAction(a);
 
   // WARNING: We must add relevant call to send ACTION_GAME_DEL_TEAM
   //player.Disconnect();

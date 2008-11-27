@@ -22,7 +22,7 @@
 #include <string>
 #include "include/app.h"
 #include "network/admin_commands.h"
-#include "network/distant_cpu.h"
+#include <WORMUX_distant_cpu.h>
 #include "network/network.h"
 
 static void PrintHelp()

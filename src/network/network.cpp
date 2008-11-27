@@ -27,7 +27,7 @@
 #include "network/network_local.h"
 #include "network/network_client.h"
 #include "network/network_server.h"
-#include "network/distant_cpu.h"
+#include <WORMUX_distant_cpu.h>
 #include "network/chatlogger.h"
 #include <WORMUX_player.h>
 //-----------------------------------------------------------------------------
