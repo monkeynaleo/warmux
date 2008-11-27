@@ -34,6 +34,8 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname,
 {
   Player theplayer(initial_player_id, nickname);
   players.push_back(theplayer);
+
+  WORMUX_ConnectHost(*this);
 }
 
 DistantComputer::~DistantComputer()
@@ -50,6 +52,18 @@ void DistantComputer::AddPlayer(uint player_id)
 {
   Player theplayer(player_id, _("Unnamed"));
   players.push_back(theplayer);
+}
+
+void DistantComputer::DelPlayer(uint player_id)
+{
+  std::list<Player>::iterator player_it;
+  for (player_it = players.begin(); player_it != players.end(); player_it++) {
+    if (player_it->GetId() == player_id) {
+      players.erase(player_it);
+      return;
+    }
+  }
+  ASSERT(false);
 }
 
 Player* DistantComputer::GetPlayer(uint player_id)

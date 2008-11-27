@@ -467,6 +467,11 @@ static void Action_Game_SetMap (Action *a)
 static void Action_Game_AddTeam (Action *a)
 {
   uint player_id = a->PopInt();
+
+  if (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL) {
+    a->GetCreator()->AddPlayer(player_id);
+  }
+
   _Action_AddTeam(a, player_id);
 }
 
@@ -748,32 +753,48 @@ static void Action_Network_Ping(Action */*a*/)
 {
 }
 
-// Only used to notify clients (and server) that someone connected to the server
-static void Action_Info_ClientConnect(Action *a)
+static void _Info_ConnectHost(const std::string& hostname, const std::string& nicknames)
 {
-  std::string host = a->PopString();
-  std::string nickname = a->PopString();
-
   // For translators: extended in "<nickname> (<host>) just connected
-  std::string msg = Format("%s (%s) just connected", nickname.c_str(), host.c_str());
+  std::string msg = Format("%s (%s) just connected", nicknames.c_str(), hostname.c_str());
 
   ChatLogger::LogMessageIfOpen(msg);
 
-  if (Game::GetInstance()->IsGameLaunched()) {
-    ASSERT(false); // Nobody can connect to a running game!!
+  if (Game::GetInstance()->IsGameLaunched())
     GameMessages::GetInstance()->Add(msg);
-  } else if (Network::GetInstance()->network_menu != NULL) {
-    // Play some sound to warn server player
-    if (Config::GetInstance()->GetWarnOnNewPlayer())
-      JukeBox::GetInstance()->Play("share", "menu/newcomer");
-    // Menu
+  else if (Network::GetInstance()->network_menu != NULL)
+    //Network Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+}
+
+// Only used to notify clients that someone connected to the server
+static void Action_Info_ClientConnect(Action *a)
+{
+  std::string hostname = a->PopString();
+  std::string nicknames = a->PopString();
+
+  _Info_ConnectHost(hostname, nicknames);
+}
+
+void WORMUX_ConnectHost(DistantComputer& host)
+{
+  std::string hostname = host.GetAddress();
+  std::string nicknames = host.GetNicknames();
+
+  _Info_ConnectHost(hostname, nicknames);
+
+  if (Network::GetInstance()->IsServer()) {
+    Action a(Action::ACTION_INFO_CLIENT_CONNECT);
+    a.Push(hostname);
+    a.Push(nicknames);
+
+    Network::GetInstance()->SendActionToAllExceptOne(a, &host);
   }
 }
 
 static void _Info_DisconnectHost(const std::string& hostname, const std::string& nicknames)
 {
-  // For translators: extended in "<nickname> (<host>) just connected
+  // For translators: extended in "<nickname> (<host>) just disconnected
   std::string msg = Format("%s (%s) just disconnected", nicknames.c_str(), hostname.c_str());
 
   ChatLogger::LogMessageIfOpen(msg);
@@ -785,13 +806,19 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 }
 
-// Only used to notify clients (and server) that someone disconnected from the server
+// Used to notify clients that someone disconnected from the server
 static void Action_Info_ClientDisconnect(Action *a)
 {
   std::string hostname = a->PopString();
   std::string nicknames = a->PopString();
 
   _Info_DisconnectHost(hostname, nicknames);
+
+  int nb_players = a->PopInt();
+  for (int i = 0; i < nb_players; i++) {
+    int player_id = a->PopInt();
+    a->GetCreator()->DelPlayer(player_id);
+  }
 }
 
 void WORMUX_DisconnectHost(DistantComputer& host)
@@ -805,6 +832,12 @@ void WORMUX_DisconnectHost(DistantComputer& host)
     Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
     a.Push(hostname);
     a.Push(nicknames);
+    a.Push(int(host.GetPlayers().size()));
+
+    std::list<Player>::const_iterator player_it;
+    for (player_it = host.GetPlayers().begin(); player_it != host.GetPlayers().end(); player_it++) {
+      a.Push(int(player_it->GetId()));
+    }
     Network::GetInstance()->SendActionToAllExceptOne(a, &host);
   }
 }
