@@ -474,7 +474,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Αμόνι"
 
-#: src/main.cpp:284
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Συγγραφείς:"
 
@@ -911,7 +911,7 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Κάνε γρήγορα, είσαι πολύ αργός!!"
 
 # Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Wormux, envoyez un mail (en anglais, svp) :
-#: src/main.cpp:276
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1197,7 +1197,7 @@ msgstr "Δημόσιες μάχες"
 msgid "Quit"
 msgstr "Εγκατάλειψε"
 
-#: src/main.cpp:265
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Εγκατάλειψε το  Wormux"
 
@@ -1526,7 +1526,7 @@ msgstr "Απεριόριστο"
 msgid "Unnamed"
 msgstr "Ανώνυμος"
 
-#: src/main.cpp:197
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Έκδοση"
 
@@ -1557,7 +1557,7 @@ msgstr "Όπλο: Πυρ / Κουτί δώρο: πέφτει γρήγορα"
 msgid "Weapons"
 msgstr "Όπλα"
 
-#: src/main.cpp:293
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Ιστοσελίδα: "
 
@@ -1582,11 +1582,11 @@ msgstr "Σωματίδια στον άνεμο;"
 msgid "Winner"
 msgstr "Νικητής"
 
-#: src/main.cpp:209
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Έναρξη του Wormux..."
 
-#: src/main.cpp:283
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Έκδοση του Wormux"
 

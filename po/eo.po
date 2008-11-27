@@ -452,7 +452,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Amboso"
 
-#: src/main.cpp:284
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Aŭtoroj:"
 
@@ -868,7 +868,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Rapidegu, vi tro malrapidas!"
 
-#: src/main.cpp:276
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1151,7 +1151,7 @@ msgstr "Publikaj bataloj"
 msgid "Quit"
 msgstr "Forlasi"
 
-#: src/main.cpp:265
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Foriri el Wormux"
 
@@ -1461,7 +1461,7 @@ msgstr "(senlimaj)"
 msgid "Unnamed"
 msgstr "Sennoma"
 
-#: src/main.cpp:197
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Versio"
 
@@ -1491,7 +1491,7 @@ msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 msgid "Weapons"
 msgstr "Armiloj"
 
-#: src/main.cpp:293
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "TTT-ejo: "
 
@@ -1515,11 +1515,11 @@ msgstr "Venterojn?"
 msgid "Winner"
 msgstr "Gajnanto"
 
-#: src/main.cpp:209
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Wormux ŝargante..."
 
-#: src/main.cpp:283
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Wormux versio "
 

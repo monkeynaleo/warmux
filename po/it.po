@@ -464,7 +464,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Incudine"
 
-#: src/main.cpp:284
+#: src/main.cpp:286
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -895,7 +895,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Muoviti, sei troppo lento !!"
 
-#: src/main.cpp:276
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1180,7 +1180,7 @@ msgstr "batttaglie pubbliche"
 msgid "Quit"
 msgstr "Esci"
 
-#: src/main.cpp:265
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Esci da Wormux"
 
@@ -1497,7 +1497,7 @@ msgstr "(illimitato)"
 msgid "Unnamed"
 msgstr "Senza nome"
 
-#: src/main.cpp:197
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Versione"
 
@@ -1527,7 +1527,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Armi"
 
-#: src/main.cpp:293
+#: src/main.cpp:295
 msgid "Website: "
 msgstr "Sito web: "
 
@@ -1551,11 +1551,11 @@ msgstr "Particelle di vento?"
 msgid "Winner"
 msgstr "Vincitore"
 
-#: src/main.cpp:209
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Avvio in corso..."
 
-#: src/main.cpp:283
+#: src/main.cpp:285
 msgid "Wormux version "
 msgstr "Versione Wormux"
 
