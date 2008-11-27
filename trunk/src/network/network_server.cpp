@@ -25,7 +25,7 @@
 #include <SDL_thread.h>
 #include "include/action_handler.h"
 #include "map/maps_list.h"
-#include "network/distant_cpu.h"
+#include <WORMUX_distant_cpu.h>
 #include "tool/string_tools.h"
 
 #include <sys/types.h>

@@ -25,7 +25,7 @@
 #include "action_handler.h"
 #include "game/game.h"
 #include "game/time.h"
-#include "network/distant_cpu.h"
+#include <WORMUX_distant_cpu.h>
 #include <WORMUX_debug.h>
 //-----------------------------------------------------------------------------
 

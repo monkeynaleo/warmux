@@ -41,7 +41,7 @@
 #include "map/maps_list.h"
 #include "map/wind.h"
 #include "menu/network_menu.h"
-#include "network/distant_cpu.h"
+#include <WORMUX_distant_cpu.h>
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "network/network_server.h"
