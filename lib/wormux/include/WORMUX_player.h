@@ -36,6 +36,7 @@ class Player
 private:
   std::string nickname;
   std::map<const std::string, ConfigTeam> owned_teams;
+  void UpdateNickname();
 
 public:
   Player();
@@ -51,6 +52,8 @@ public:
 
   uint GetNbTeams() const;
   const std::map<const std::string, ConfigTeam>& GetTeams() const;
+
+  static std::string GetDefaultNickname();
 };
 
 // It's up to the program using class Player to define WORMUX_DisconnectPlayer();

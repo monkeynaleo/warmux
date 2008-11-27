@@ -145,8 +145,6 @@ public:
   const std::string& GetPassword() const;
   Player& GetPlayer();
 
-  std::string GetDefaultNickname() const;
-
   // Action handling
   void SendActionToAll(const Action& action) const;
   void SendActionToOne(const Action& action, DistantComputer* client) const;

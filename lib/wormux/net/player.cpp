@@ -20,9 +20,11 @@
  *****************************************************************************/
 
 #include <WORMUX_error.h>
+#include <WORMUX_i18n.h>
 #include <WORMUX_player.h>
+#include <stdlib.h>
 
-Player::Player() : nickname("unknown")
+Player::Player() : nickname(_("Unnamed"))
 {
 }
 
@@ -47,6 +49,24 @@ const std::string& Player::GetNickname() const
   return nickname;
 }
 
+void Player::UpdateNickname()
+{
+  std::string nick;
+
+  std::map<const std::string, ConfigTeam>::iterator it;
+  for (it = owned_teams.begin(); it != owned_teams.end(); it++) {
+    if (nick != "")
+      nick += "+";
+
+    nick += it->second.player_name;
+  }
+
+  if (nick == "")
+    nick = _("Unnamed");
+
+  nickname = nick;
+}
+
 bool Player::AddTeam(const ConfigTeam& team_conf)
 {
   printf("Player %p :: AddTeam %s\n", this, team_conf.id.c_str());
@@ -57,6 +77,9 @@ bool Player::AddTeam(const ConfigTeam& team_conf)
     ASSERT(false);
     return false;
   }
+
+  UpdateNickname();
+
   return r.second;
 }
 
@@ -72,6 +95,7 @@ bool Player::RemoveTeam(const std::string& team_id)
     ASSERT(false);
     return false;
   }
+  UpdateNickname();
 
   return true;
 }
@@ -88,6 +112,8 @@ bool Player::UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_c
     }
 
     owned_teams[team_conf.id] = team_conf;
+    UpdateNickname();
+
     return true;
   }
 
@@ -108,4 +134,22 @@ uint Player::GetNbTeams() const
 const std::map<const std::string, ConfigTeam>& Player::GetTeams() const
 {
   return owned_teams;
+}
+
+//-----------------------------------------------------------------------------
+// This is a Class method (static)
+std::string Player::GetDefaultNickname()
+{
+  std::string s_nick;
+  const char *nick = NULL;
+#ifdef WIN32
+  char  buffer[32];
+  DWORD size = 32;
+  if (GetUserName(buffer, &size))
+    nick = buffer;
+#else
+  nick = getenv("USER");
+#endif
+  s_nick = (nick) ? nick : _("Unnamed");
+  return s_nick;
 }
