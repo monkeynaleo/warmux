@@ -19,10 +19,14 @@
  * A network player (local or remote)
  *****************************************************************************/
 
+#include <stdlib.h>
+#ifdef WIN32
+# include <windows.h> // DWORD, GetUserName
+#endif
+
 #include <WORMUX_error.h>
 #include <WORMUX_i18n.h>
 #include <WORMUX_player.h>
-#include <stdlib.h>
 
 Player::Player(uint _player_id, const std::string& _nickname) : player_id(_player_id), nickname(_nickname)
 {
