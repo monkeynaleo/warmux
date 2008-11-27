@@ -31,6 +31,8 @@
 
 class Player
 {
+  friend void WORMUX_DisconnectPlayer(Player& player);
+
 private:
   std::string nickname;
   std::map<const std::string, ConfigTeam> owned_teams;
@@ -38,6 +40,7 @@ private:
 public:
   Player();
   ~Player();
+  void Disconnect();
 
   void SetNickname(const std::string& nickname);
   const std::string& GetNickname() const;
@@ -49,6 +52,9 @@ public:
   uint GetNbTeams() const;
   const std::map<const std::string, ConfigTeam>& GetTeams() const;
 };
+
+// It's up to the program using class Player to define WORMUX_DisconnectPlayer();
+extern void WORMUX_DisconnectPlayer(Player& player);
 
 #endif
 

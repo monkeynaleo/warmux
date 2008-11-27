@@ -1395,7 +1395,7 @@ msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Der Ball hat das Schlachtfeld verlassen bevor er explodieren konnte."
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "

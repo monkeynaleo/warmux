@@ -32,6 +32,7 @@
 
 // Forward declarations
 struct SDL_mutex;
+class Player;
 
 class ActionHandler : public WActionHandler, public Singleton<ActionHandler>
 {
@@ -62,7 +63,8 @@ void SendActiveCharacterAction(const Action& a);
 void SendGameMode();
 void SyncCharacters();
 
-
+void WORMUX_DisconnectHost(DistantComputer& host);
+void WORMUX_DisconnectPlayer(Player& player);
 
 //-----------------------------------------------------------------------------
 #endif

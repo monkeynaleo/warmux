@@ -1376,7 +1376,7 @@ msgstr "El cohete automático ha ido a otro mundo..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La pelota ha abandonado el campo de batalla antes de explotar."
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "

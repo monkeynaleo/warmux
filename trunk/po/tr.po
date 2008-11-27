@@ -1310,7 +1310,7 @@ msgstr "Otomatik roket savaş alanını terketti..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Top, patlamadan savaş alanını terketti"
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "

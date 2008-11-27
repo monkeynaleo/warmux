@@ -32,6 +32,8 @@ class WSocket;
 
 class DistantComputer
 {
+  friend void WORMUX_DisconnectHost(DistantComputer& cpu);
+
  public:
   typedef enum {
     STATE_ERROR,
@@ -72,6 +74,9 @@ public:
 
   const std::string ToString() const;
 };
+
+// It's up to the program using class DistantComputer to define WORMUX_DisconnectHost();
+extern void WORMUX_DisconnectHost(DistantComputer& cpu);
 
 #endif
 
