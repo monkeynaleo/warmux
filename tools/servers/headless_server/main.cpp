@@ -62,12 +62,11 @@ int main(int /*argc*/, char* /*argv*/[])
 
   std::string password = "";
   uint max_nb_clients = 4;
-  GameServer server;
-  if (!server.ServerStart(uint(port), max_nb_clients, "dedicated", password)) {
+  if (!GameServer::GetInstance()->ServerStart(uint(port), max_nb_clients, "dedicated", password)) {
     DPRINT(INFO, "ERROR: Server not started");
     exit(EXIT_FAILURE);
   }
 
-  server.RunLoop();
+  GameServer::GetInstance()->RunLoop();
 }
 

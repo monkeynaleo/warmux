@@ -439,6 +439,11 @@ static void Action_Game_Info(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
+  if (Network::GetInstance()->GetState() != Network::NO_NETWORK)
+    return;
+
+  Network::GetInstance()->SetState(Network::NETWORK_MENU_INIT);
+
   _Action_SelectMap(a);
 
   uint nb_players = a->PopInt();
@@ -770,6 +775,67 @@ static void _Info_ConnectHost(const std::string& hostname, const std::string& ni
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 }
 
+static inline void add_team_config_to_action(Action& a, const ConfigTeam& team)
+{
+  a.Push(team.id);
+  a.Push(team.player_name);
+  a.Push(int(team.nb_characters));
+}
+
+static inline void add_player_info_to_action(Action& a, const Player& player)
+{
+  a.Push(int(player.GetId()));
+  a.Push(int(player.GetNbTeams()));
+
+  std::map<const std::string, ConfigTeam>::const_iterator team;
+  for (team = player.GetTeams().begin(); team != player.GetTeams().end(); team++) {
+    add_team_config_to_action(a, team->second);
+  }
+}
+
+void SendInitialGameInfo(DistantComputer* client)
+{
+  // we have to tell this new computer
+  // what teams / maps have already been selected
+
+  MSG_DEBUG("network", "Server: Sending map information");
+
+  Action a(Action::ACTION_GAME_INFO);
+  MapsList::GetInstance()->FillActionMenuSetMap(a);
+
+  MSG_DEBUG("network", "Server: Sending teams information");
+
+  // count the number of players
+  int nb_players = 1;
+
+  std::list<DistantComputer*>::const_iterator it;
+  std::list<Player>::const_iterator player;
+
+  for (it = Network::GetInstance()->cpu.begin();
+       it != Network::GetInstance()->cpu.end();
+       it++) {
+    nb_players += (*it)->GetPlayers().size();
+  }
+
+  a.Push(nb_players);
+
+  // Teams infos of each player
+  add_player_info_to_action(a, Network::GetInstance()->GetPlayer());
+
+  for (it = Network::GetInstance()->cpu.begin();
+       it != Network::GetInstance()->cpu.end();
+       it++) {
+
+    const std::list<Player>& players = (*it)->GetPlayers();
+
+    for (player = players.begin(); player != players.end(); player++) {
+      add_player_info_to_action(a, (*player));
+    }
+  }
+
+  Network::GetInstance()->SendActionToOne(a, client);
+}
+
 // Only used to notify clients that someone connected to the server
 static void Action_Info_ClientConnect(Action *a)
 {
@@ -777,6 +843,10 @@ static void Action_Info_ClientConnect(Action *a)
   std::string nicknames = a->PopString();
 
   _Info_ConnectHost(hostname, nicknames);
+
+  if (Network::GetInstance()->IsGameMaster()) {
+    SendInitialGameInfo(a->GetCreator());
+  }
 }
 
 void WORMUX_ConnectHost(DistantComputer& host)

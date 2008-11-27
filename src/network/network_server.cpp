@@ -24,7 +24,6 @@
 #include <WORMUX_socket.h>
 #include "include/action_handler.h"
 #include "network/network_server.h"
-#include "map/maps_list.h"
 #include "tool/string_tools.h"
 
 #include <sys/types.h>
@@ -59,63 +58,6 @@ void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
   SendActionToAllExceptOne(*a, sender);
 
   ActionHandler::GetInstance()->NewAction(a, false);
-}
-
-static inline void add_team_config_to_action(Action& a, const ConfigTeam& team)
-{
-  a.Push(team.id);
-  a.Push(team.player_name);
-  a.Push(int(team.nb_characters));
-}
-
-static inline void add_player_info_to_action(Action& a, const Player& player)
-{
-  a.Push(int(player.GetId()));
-  a.Push(int(player.GetNbTeams()));
-
-  std::map<const std::string, ConfigTeam>::const_iterator team;
-  for (team = player.GetTeams().begin(); team != player.GetTeams().end(); team++) {
-    add_team_config_to_action(a, team->second);
-  }
-}
-
-void NetworkServer::SendInitialGameInfo(DistantComputer* client) const
-{
-  // we have to tell this new computer
-  // what teams / maps have already been selected
-
-  MSG_DEBUG("network", "Server: Sending map information");
-
-  Action a(Action::ACTION_GAME_INFO);
-  MapsList::GetInstance()->FillActionMenuSetMap(a);
-
-  MSG_DEBUG("network", "Server: Sending teams information");
-
-  // count the number of players
-  int nb_players = 1;
-
-  std::list<DistantComputer*>::const_iterator it;
-  std::list<Player>::const_iterator player;
-
-  for (it = cpu.begin(); it != cpu.end(); it++) {
-    nb_players += (*it)->GetPlayers().size();
-  }
-
-  a.Push(nb_players);
-
-  // Teams infos of each player
-  add_player_info_to_action(a, GetPlayer());
-
-  for (it = cpu.begin(); it != cpu.end(); it++) {
-
-    const std::list<Player>& players = (*it)->GetPlayers();
-
-    for (player = players.begin(); player != players.end(); player++) {
-      add_player_info_to_action(a, (*player));
-    }
-  }
-
-  SendActionToOne(a, client);
 }
 
 uint NetworkServer::NextPlayerId() const

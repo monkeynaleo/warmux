@@ -22,34 +22,50 @@
 
 #include <string>
 
+#include <WORMUX_action.h>
+#include <WORMUX_distant_cpu.h>
 #include <WORMUX_network.h>
 #include <WORMUX_socket.h>
+#include <WORMUX_singleton.h>
 #include <WORMUX_types.h>
 #include <WSERVER_config.h>
 #include <WSERVER_debug.h>
 
-class GameServer
+class GameServer : public Singleton<GameServer>
 {
 private:
+  friend class Singleton<GameServer>;
+  GameServer();
+
   std::string game_name;
   std::string password;
   uint port;
 
   WSocket server_socket;
   WSocketSet* clients_socket_set;
+  std::list<DistantComputer*> cpu; // list of the connected computer
 
-  bool HandShake(WSocket& client_socket, std::string& client_nickname);
+  uint NextPlayerId() const;
+  bool HandShake(WSocket& client_socket, std::string& client_nickname, uint player_id);
   void WaitClients();
   void RejectIncoming();
-  std::list<WSocket*>::iterator CloseConnection(std::list<WSocket*>::iterator closed);
+  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
 
-  void ForwardPacket(void * buffer, size_t len, const WSocket* sender);
-
+  void ForwardPacket(void * buffer, size_t len, const DistantComputer* sender);
+  void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
 public:
-  GameServer();
-
   bool ServerStart(uint port, uint max_nb_clients, const std::string& game_name, std::string& password);
   void RunLoop();
+
+  // Action handling
+  void SendActionToAll(const Action& action) const;
+  void SendActionToOne(const Action& action, DistantComputer* client) const;
+  void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
 };
+
+uint Action_TimeStamp();
+void WORMUX_ConnectHost(DistantComputer& host);
+void WORMUX_DisconnectHost(DistantComputer& host);
+void WORMUX_DisconnectPlayer(Player& player);
 
 #endif
