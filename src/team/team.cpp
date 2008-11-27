@@ -77,6 +77,7 @@ Team::Team (const std::string& teams_dir, const std::string& id)
 
   is_camera_saved = false;
   active_weapon = NULL;
+  attached_custom_team = NULL;
 
   m_player_name = "";
 
