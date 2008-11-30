@@ -76,6 +76,8 @@ NetworkMenu::NetworkMenu() :
   widgets.AddWidget(team_box);
   widgets.Pack();
 
+  team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
+
   // ################################################
   // ##  MAP SELECTION
   // ################################################
@@ -97,45 +99,36 @@ NetworkMenu::NetworkMenu() :
 
   Box* options_box = new VBox(200, true);
 
-  Label* mode = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_BOLD, primary_red_color);
+  mode_label = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_BOLD, primary_red_color);
+  options_box->AddWidget(mode_label);
+
+  player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
+				     GameMode::GetInstance()->max_teams, 1, 2,
+				     GameMode::GetInstance()->max_teams);
+  options_box->AddWidget(player_number);
+
+  connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
+				0, Font::FONT_SMALL, Font::FONT_NORMAL);
+  options_box->AddWidget(connected_players);
+
+  initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
+				  0, Font::FONT_SMALL, Font::FONT_NORMAL);
+  options_box->AddWidget(initialized_players);
 
   if (!Network::GetInstance()->IsGameMaster()) {
     // Client Mode
-    mode->SetText(_("Client mode"));
-    options_box->AddWidget(mode);
-
-    player_number = NULL;
-    connected_players = NULL;
-    initialized_players = NULL;
-  } else {
-
+    mode_label->SetText(_("Client mode"));
+    player_number->SetVisible(false);
+    connected_players->SetVisible(false);
+    initialized_players->SetVisible(false);
+  } else if (Network::GetInstance()->IsServer()) {
     // Server Mode
-    if (Network::GetInstance()->IsServer()) {
-      mode->SetText(_("Server mode"));
-    } else {
-      // The first player to connect to a headless server asumes the game master role
-      mode->SetText(_("Master mode"));
-    }
-    options_box->AddWidget(mode);
+    mode_label->SetText(_("Server mode"));
 
-    if  (Network::GetInstance()->IsServer()) {
-      player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
-				     GameMode::GetInstance()->max_teams, 1, 2,
-				     GameMode::GetInstance()->max_teams);
-      options_box->AddWidget(player_number);
-    } else {
-      player_number = NULL;
-    }
-
-    team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
-
-    connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
-				  0, Font::FONT_SMALL, Font::FONT_NORMAL);
-    options_box->AddWidget(connected_players);
-
-    initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-                                    0, Font::FONT_SMALL, Font::FONT_NORMAL);
-    options_box->AddWidget(initialized_players);
+  } else {
+    // The first player to connect to a headless server asumes the game master role
+    mode_label->SetText(_("Master mode"));
+    player_number->SetVisible(false);
   }
 
   play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);
@@ -320,31 +313,27 @@ bool NetworkMenu::signal_cancel()
 
 void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
 {
-  if(Network::GetInstance()->IsConnected())
+  if (Network::GetInstance()->IsConnected())
   {
-    if (connected_players != NULL) {
-      //Refresh the number of connected players:
-      int nbr = Network::GetInstance()->GetNbConnectedPlayers();
-      std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
-      if (connected_players->GetText() != pl)
-        connected_players->SetText(pl);
-    }
+    //Refresh the number of connected players:
+    int nbr = Network::GetInstance()->GetNbConnectedPlayers();
+    std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
+    if (connected_players->GetText() != pl)
+      connected_players->SetText(pl);
 
-    if (initialized_players != NULL) {
-      //Refresh the number of players ready:
-      int nbr = Network::GetInstance()->GetNbInitializedPlayers();
-      std::string pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
-      if (initialized_players->GetText() != pl) {
-        initialized_players->SetText(pl);
-        msg_box->NewMessage(pl, c_red);
-        if (Network::GetInstance()->GetNbConnectedPlayers() -
-            Network::GetInstance()->GetNbInitializedPlayers() == 1
-            && Network::GetInstance()->GetNbConnectedPlayers() >= 1) {
-          msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
-        }
-        else if (Network::GetInstance()->GetNbConnectedPlayers() == 1) {
-          msg_box->NewMessage(_("You are alone :-/"), c_red);
-        }
+    //Refresh the number of players ready:
+    nbr = Network::GetInstance()->GetNbInitializedPlayers();
+    pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
+    if (initialized_players->GetText() != pl) {
+      initialized_players->SetText(pl);
+      msg_box->NewMessage(pl, c_red);
+      if (Network::GetInstance()->GetNbConnectedPlayers() -
+	  Network::GetInstance()->GetNbInitializedPlayers() == 1
+	  && Network::GetInstance()->GetNbConnectedPlayers() >= 1) {
+	msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
+      }
+      else if (Network::GetInstance()->GetNbConnectedPlayers() == 1) {
+	msg_box->NewMessage(_("You are alone :-/"), c_red);
       }
     }
 
@@ -389,6 +378,17 @@ void NetworkMenu::ChangeMapCallback()
     return;
 
   map_box->ChangeMapCallback();
+}
+
+void NetworkMenu::SetGameMasterCallback()
+{
+  // We are becoming game master, updating the menu...
+  mode_label->SetText(_("Master mode"));
+  player_number->SetVisible(false);
+  connected_players->SetVisible(true);
+  initialized_players->SetVisible(true);
+  map_box->AllowSelection();
+  msg_box->NewMessage(_("You are the new turn master!"), c_red);
 }
 
 void NetworkMenu::ReceiveMsgCallback(const std::string& msg)

@@ -143,6 +143,8 @@ connection_state_t NetworkServer::StartServer(const std::string &net_port, uint 
   }
 
   NetworkThread::Start();
+
+  SetState(Network::NETWORK_MENU_INIT);
   return CONNECTED;
 }
 

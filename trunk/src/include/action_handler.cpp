@@ -97,7 +97,7 @@ static void Action_Network_ClientChangeState (Action *a)
   Network::network_state_t client_state = (Network::network_state_t)a->PopInt();
 
   switch (Network::GetInstance()->GetState()) {
-  case Network::NO_NETWORK:
+  case Network::NETWORK_MENU_INIT:
     a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
     ASSERT(client_state == Network::NETWORK_MENU_OK);
     break;
@@ -260,6 +260,15 @@ static void Action_Network_Check_Phase2 (Action *a)
 
   // this client has been checked, it's ok :-)
   a->GetCreator()->SetState(DistantComputer::STATE_CHECKED);
+}
+
+static void Action_Network_Set_GameMaster(Action */*a*/)
+{
+  Network::GetInstance()->SetGameMaster();
+
+  if (Network::GetInstance()->network_menu != NULL) {
+    Network::GetInstance()->network_menu->SetGameMasterCallback();
+  }
 }
 
 // ########################################################
@@ -951,6 +960,7 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_CHECK_PHASE1, "NETWORK_check1", &Action_Network_Check_Phase1);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check2", &Action_Network_Check_Phase2);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_DISCONNECT_ON_ERROR, "NETWORK_disconnect_on_error", &Action_Network_Disconnect_On_Error);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_SET_GAME_MASTER, "NETWORK_set_game_master", &Action_Network_Set_GameMaster);
 
   // ########################################################
   ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);

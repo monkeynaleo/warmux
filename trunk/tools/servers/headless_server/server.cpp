@@ -161,14 +161,6 @@ void GameServer::WaitClients()
   }
 }
 
-void GameServer::CloseConnectionToAll()
-{
-  std::list<DistantComputer*>::iterator it = cpu.begin();
-  while (it != cpu.end()) {
-    it = CloseConnection(it);
-  }
-}
-
 std::list<DistantComputer*>::iterator
 GameServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
@@ -180,7 +172,8 @@ GameServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
   if (clients_socket_set->NbSockets() + 1 == clients_socket_set->MaxNbSockets()) {
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections
-    DPRINT(INFO, "Allowing new connections");
+    DPRINT(INFO, "Allowing new connections (%d/%d)",
+	   clients_socket_set->NbSockets(), clients_socket_set->MaxNbSockets());
     server_socket.AcceptIncoming(port);
   }
 
@@ -197,6 +190,19 @@ void GameServer::ForwardPacket(void * buffer, size_t len, const DistantComputer*
       (*it)->SendData(buffer, len);
     }
   }
+}
+
+void GameServer::ElectGameMaster()
+{
+  if (cpu.empty())
+    return;
+
+  DistantComputer* host = cpu.front();
+
+  DPRINT(INFO, "New game master: %s", host->GetAddress().c_str());
+
+  Action a(Action::ACTION_NETWORK_SET_GAME_MASTER);
+  GameServer::GetInstance()->SendActionToOne(a, host);
 }
 
 void GameServer::RunLoop()
@@ -224,14 +230,11 @@ void GameServer::RunLoop()
 	if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
 	  // An error occured during the reception
 
-	  DPRINT(INFO, "Game master must be disconnected: ending the game\n");
+	  bool turn_master_lost = (dst_cpu == cpu.begin());
+	  dst_cpu = CloseConnection(dst_cpu);
 
-	  if (dst_cpu == cpu.begin()) {
-	    // we have loose the game master!!
-	    CloseConnectionToAll();
-	    break;
-	  } else {
-	    dst_cpu = CloseConnection(dst_cpu);
+	  if (turn_master_lost) {
+	    ElectGameMaster();
 	  }
 
 	} else {

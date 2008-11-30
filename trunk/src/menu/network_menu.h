@@ -39,6 +39,7 @@ class NetworkMenu : public Menu
   bool waiting_for_server;
 
   /* Options controllers */
+  Label* mode_label;
   SpinButton* player_number;
   Label* connected_players;
   Label* initialized_players;
@@ -72,6 +73,7 @@ public:
   void UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id);
   void DelTeamCallback(const std::string& team_id);
   void ChangeMapCallback();
+  void SetGameMasterCallback();
 
   void ReceiveMsgCallback(const std::string& msg);
 };
