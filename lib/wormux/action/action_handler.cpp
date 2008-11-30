@@ -57,6 +57,8 @@ void WActionHandler::Flush()
 {
   std::list<Action*>::iterator it;
   Lock();
+  MSG_DEBUG("action_handler","remove all actions");
+
   for (it = queue.begin(); it != queue.end() ;)
   {
     MSG_DEBUG("action_handler","remove action %s", GetActionName((*it)->GetType()).c_str());

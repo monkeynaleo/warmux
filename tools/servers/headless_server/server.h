@@ -50,6 +50,7 @@ private:
   void WaitClients();
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
+  void CloseConnectionToAll();
 
   void ForwardPacket(void * buffer, size_t len, const DistantComputer* sender);
   void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;

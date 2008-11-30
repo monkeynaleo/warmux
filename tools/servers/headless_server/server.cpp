@@ -161,6 +161,14 @@ void GameServer::WaitClients()
   }
 }
 
+void GameServer::CloseConnectionToAll()
+{
+  std::list<DistantComputer*>::iterator it = cpu.begin();
+  while (it != cpu.end()) {
+    it = CloseConnection(it);
+  }
+}
+
 std::list<DistantComputer*>::iterator
 GameServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
@@ -214,9 +222,17 @@ void GameServer::RunLoop()
       if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
 
 	if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
-
 	  // An error occured during the reception
-          dst_cpu = CloseConnection(dst_cpu);
+
+	  DPRINT(INFO, "Game master must be disconnected: ending the game\n");
+
+	  if (dst_cpu == cpu.begin()) {
+	    // we have loose the game master!!
+	    CloseConnectionToAll();
+	    break;
+	  } else {
+	    dst_cpu = CloseConnection(dst_cpu);
+	  }
 
 	} else {
 
