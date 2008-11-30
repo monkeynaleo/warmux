@@ -1010,8 +1010,8 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
   ActionHandler::GetInstance()->Register (Action::ACTION_WIND, "wind", &Action_Wind);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
-  ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_disconnect", &Action_Info_ClientDisconnect);
-  ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_CONNECT, "INFO_connect", &Action_Info_ClientConnect);
+  ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_client_disconnect", &Action_Info_ClientDisconnect);
+  ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_CONNECT, "INFO_client_connect", &Action_Info_ClientConnect);
 
   // ########################################################
   ActionHandler::GetInstance()->UnLock();
@@ -1046,7 +1046,12 @@ void ActionHandler::ExecActions()
       continue;
     }
     UnLock();
-    Exec (a);
+
+    // Do not execute actions from Network if we are not connected anymore
+    if (!a->GetCreator()
+	|| Network::IsConnected()) {
+      Exec (a);
+    }
     delete *it;
     it = queue.erase(it);
   }

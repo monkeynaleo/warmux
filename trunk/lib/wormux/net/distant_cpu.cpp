@@ -63,7 +63,6 @@ void DistantComputer::DelPlayer(uint player_id)
       return;
     }
   }
-  ASSERT(false);
 }
 
 Player* DistantComputer::GetPlayer(uint player_id)

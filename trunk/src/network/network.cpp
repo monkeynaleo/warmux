@@ -273,12 +273,18 @@ void Network::Disconnect()
   // restore Windows title
   AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION);
 
+  // Flush all actions
+  ActionHandler::GetInstance()->Flush();
+
   if (singleton != NULL) {
     NetworkThread::Stop();
     singleton->DisconnectNetwork();
     delete singleton;
     ChatLogger::CloseIfOpen();
   }
+
+  // Flush all actions
+  ActionHandler::GetInstance()->Flush();
 }
 
 // Protected method for client and server
