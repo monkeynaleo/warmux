@@ -478,6 +478,11 @@ bool Network::IsTurnMaster() const
   return turn_master_player;
 }
 
+void Network::SetGameMaster()
+{
+  game_master_player = true;
+}
+
 bool Network::IsGameMaster() const
 {
   return game_master_player;
@@ -512,14 +517,11 @@ const std::string& Network::GetPassword() const
 
 uint Network::GetNbConnectedPlayers() const
 {
-  ASSERT(IsGameMaster());
-
   return cpu.size() + 1;
 }
 
 uint Network::GetNbInitializedPlayers() const
 {
-  ASSERT(IsGameMaster());
   uint r = 0;
 
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
@@ -534,7 +536,6 @@ uint Network::GetNbInitializedPlayers() const
 
 uint Network::GetNbReadyPlayers() const
 {
-  ASSERT(IsGameMaster());
   uint r = 0;
 
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
@@ -549,7 +550,6 @@ uint Network::GetNbReadyPlayers() const
 
 uint Network::GetNbCheckedPlayers() const
 {
-  ASSERT(IsGameMaster());
   uint r = 0;
 
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();

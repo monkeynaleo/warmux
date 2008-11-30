@@ -63,6 +63,7 @@ class MapSelectionBox : public VBox
 
   void ValidMapSelection();
   void ChangeMapCallback();
+  void AllowSelection();
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);

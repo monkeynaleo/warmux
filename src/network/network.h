@@ -141,6 +141,7 @@ public:
   virtual bool IsServer() const { return false; }
   virtual bool IsClient() const { return false; }
 
+  void SetGameMaster(); // useful when we re-electing a game master
   bool IsGameMaster() const;
   const std::string& GetGameName() const;
   const std::string& GetPassword() const;
