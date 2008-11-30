@@ -827,7 +827,6 @@
 	<c_member name="arm-left"/>
 	<c_member name="arm2-left"/>
 	<c_member name="arm3-left-R"/>
-	<c_member name="weapon"/>
 	<c_member name="foot-left"/>
 	<c_member name="tail"/>
 	<c_member name="foot-right"/>
@@ -840,6 +839,7 @@
 	<c_member name="pupil-left"/>
 	<c_member name="eyelid"/>
 	<c_member name="foothelmet1"/>
+	<c_member name="weapon"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
 	<c_member name="arm3-right-R"/>
