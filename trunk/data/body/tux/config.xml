@@ -62,6 +62,7 @@
 	<anchor dx="9" dy="16"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
 	<attached member_type="head" frame="*" dx="6" dy="3"/>
+	<attached member_type="baseball_tshirt" frame="*" dx="9" dy="16"/>
 	<attached member_type="back" frame="*" dx="5" dy="13"/>
 	<attached member_type="arm-right" frame="*" dx="4" dy="7"/>
 	<attached member_type="arm-left" frame="*" dx="9" dy="7"/>
@@ -96,6 +97,12 @@
 	<anchor dx="18" dy="15"/>
 </sprite>
 
+<!-- ###### Back ###### -->
+<sprite name="baseball_tshirt" type="baseball_tshirt">
+	<image file="baseball_tshirt.png"/>
+	<anchor dx="9" dy="16"/>
+</sprite>
+
 <!-- ###### Head ###### -->
 <sprite name="head" type="head">
 	<image file="head.png"/>
@@ -104,6 +111,7 @@
 	<attached member_type="hornleft" frame="*" dx="12" dy="16"/>
 	<attached member_type="hair" frame="*" dx="14" dy="15"/>
 	<attached member_type="helmet" frame="*" dx="11" dy="10"/>
+	<attached member_type="baseball_cap" frame="*" dx="15" dy="10"/>
 	<attached member_type="construct" frame="*" dx="14" dy="9"/>
 	<attached member_type="foothelmet1" frame="*" dx="10" dy="12"/>
 	<attached member_type="noze" frame="*" dx="14" dy="13"/>
@@ -233,6 +241,12 @@
 	<anchor dx="15" dy="15"/>
 </sprite>
 
+<!-- ###### baseball_cap ###### -->
+<sprite name="baseball_cap" type="baseball_cap">
+	<image file="baseball_cap.png"/>
+	<anchor dx="13" dy="12"/>
+</sprite>
+
 <!-- ###### Yoyo ###### -->
 <sprite name="yoyo" type="yoyo" go_through_ground="true">
 	<image file="yoyo.png">
@@ -255,6 +269,7 @@
 	<anchor dx="9" dy="16"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="22"/>
 	<attached member_type="head" frame="*" dx="4" dy="2"/>
+	<attached member_type="baseball_tshirt" frame="*" dx="9" dy="16"/>
 	<attached member_type="back" frame="*" dx="5" dy="13"/>
 	<attached member_type="arm-right" frame="*" dx="5" dy="8"/>
 	<attached member_type="arm-left" frame="*" dx="10" dy="7"/>
@@ -286,6 +301,7 @@
 	<attached member_type="hair" frame="*" dx="14" dy="15"/>
 	<attached member_type="helmet" frame="*" dx="11" dy="10"/>
 	<attached member_type="construct" frame="*" dx="13" dy="9"/>
+	<attached member_type="baseball_cap" frame="*" dx="15" dy="10"/>
 	<attached member_type="foothelmet1" frame="*" dx="10" dy="12"/>
 	<attached member_type="noze" frame="*" dx="16" dy="13"/>
 	<attached member_type="eyes" frame="*" dx="15" dy="11"/>
@@ -740,6 +756,30 @@
 	<c_member name="pupil-right"/>
 	<c_member name="pupil-left"/>
 	<c_member name="eyelid"/>
+	<c_member name="weapon"/>
+	<c_member name="arm-right"/>
+	<c_member name="arm2-right"/>
+	<c_member name="arm3-right-R"/>
+</clothe>
+
+<!-- ###### weapon-baseball ###### -->
+<clothe name="weapon-baseball">
+	<c_member name="arm-left"/>
+	<c_member name="arm2-left"/>
+	<c_member name="arm3-left-R"/>
+	<c_member name="foot-left"/>
+	<c_member name="tail"/>
+	<c_member name="foot-right"/>
+	<c_member name="back"/>
+	<c_member name="body"/>
+	<c_member name="baseball_tshirt"/>
+	<c_member name="head"/>
+	<c_member name="noze"/>
+	<c_member name="eyes"/>
+	<c_member name="pupil-right"/>
+	<c_member name="pupil-left"/>
+	<c_member name="eyelid"/>
+	<c_member name="baseball_cap"/>
 	<c_member name="weapon"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
