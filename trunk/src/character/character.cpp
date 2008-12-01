@@ -689,6 +689,11 @@ void Character::Refresh()
     Camera::GetInstance()->FollowObject(this, true);
   }
 
+  if (IsOutsideWorldXY(Point2i(GetX(),GetY()))) {
+       Ghost();
+       SignalOutOfMap();
+  }
+
   if (IsDiseased())
   {
     Point2i bubble_pos = GetPosition();

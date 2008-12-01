@@ -855,7 +855,7 @@ void PhysicalObj::Ghost ()
   bool was_dead = IsDead();
   m_alive = GHOST;
   MSG_DEBUG("physic.state", "%s - Ghost, was_dead = %d", m_name.c_str(), was_dead);
-
+  SignalGhostState(m_energy==0);
   // The object became a gost
   StopMoving();
 }
