@@ -356,6 +356,7 @@ void PhysicalObj::SetSize(const Point2i &newSize)
     b2FilterData filter_data;
     filter_data.categoryBits = 0x0001;
     filter_data.maskBits = 0x0000;
+    filter_data.maskBits = 0;
     if (m_shapes.size() > 0) {
       filter_data = GetCollisionFilter();
     }
