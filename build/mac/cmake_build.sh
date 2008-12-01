@@ -125,15 +125,18 @@ fi
 # Clean temps files, and create Folders
 #
 
-TMP=${MAC}tmpbuild/
-if [ -e ${TMP} ]
+if [ ! "$1" = "continue" ]
 then
-    echo "*****************"
-    echo "Clean tmpbuild"
-    rm -rf ${TMP}
-    echo "*****************"
+    TMP=${MAC}tmpbuild/
+    if [ -e ${TMP} ]
+    then
+        echo "*****************"
+        echo "Clean tmpbuild"
+        rm -rf ${TMP}
+        echo "*****************"
+    fi
+    mkdir ${TMP}
 fi
-mkdir ${TMP}
 
 APP=${MAC}Wormux.app
 if [ -e ${APP} ]
@@ -161,7 +164,7 @@ then
 fi
 
 echo "Create Wormux.app file"
-mkdir -p ${APP}
+#mkdir -p ${APP}
 mkdir -p ${APP}/Contents/MacOS/
 mkdir -p ${APP}/Contents/Frameworks/
 RES=${APP}/Contents/Resources/
