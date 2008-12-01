@@ -1166,7 +1166,7 @@ void Character::SetSize(const Point2i &newSize)
 
   shape->SetMass(GetMass()/2); // There are 2 shapes, divide the mass of body by 2
 
-  b2FilterData filter_data;
+  b2FilterData filter_data = {0,0,0};
   filter_data.categoryBits = 0x0001;
   filter_data.maskBits = 0x0000;
 
