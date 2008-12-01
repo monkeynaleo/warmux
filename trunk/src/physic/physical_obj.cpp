@@ -353,7 +353,7 @@ void PhysicalObj::SetSize(const Point2i &newSize)
     shape->AddPoint(Point2d(0 , phys_height));
     shape->SetMass(GetMass());
 
-    b2FilterData filter_data;
+    b2FilterData filter_data = {0,0,0};
     filter_data.categoryBits = 0x0001;
     filter_data.maskBits = 0x0000;
     filter_data.maskBits = 0;
