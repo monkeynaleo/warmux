@@ -112,12 +112,12 @@ else
     exit
 fi
 
-# Copy the library libBox2D.dylib
-if [ -e libBox2D.dylib ]
+# Copy the library libbox2d.a
+if [ -e libbox2d.a ]
 then
-    cp libBox2D.dylib ${ROOT}
+    cp libbox2d.a ${ROOT}
 else
-    echo "*** ${MAC}libBox2D.dylib Not Found ***"
+    echo "*** ${MAC}libbox2d.a Not Found ***"
     exit
 fi
 
@@ -293,9 +293,9 @@ then
 fi
 
 # Remove copy of libintl.a
-if [ -e ${ROOT}libBox2D.dylib ]
+if [ -e ${ROOT}libbox2d.a ]
 then
-    rm ${ROOT}libBox2D.dylib
+    rm ${ROOT}libbox2d.a
 fi
     
 echo "Build done"
