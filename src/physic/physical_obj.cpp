@@ -1054,7 +1054,7 @@ bool PhysicalObj::IsInWater () const
 
 void PhysicalObj::DirectFall()
 {
-  while (!IsGhost() && !IsInWater() && IsColliding()) {
+  while (!IsGhost() && !IsInWater() && !IsColliding()) {
     MSG_DEBUG("physic.fall", "%s - x=%f, y=%f\n", m_name.c_str(), GetXdouble(), GetYdouble());
     SetY(GetYdouble()+1.0);
   }
