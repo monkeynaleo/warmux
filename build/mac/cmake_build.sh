@@ -24,7 +24,8 @@ SRC=${ROOT}src/
 
 export MACOSX_DEPLOYMENT_TARGET=10.4
 export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include"
-export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
+#export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
+export FAT_LDFLAGS="-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 
 APP_VERSION=0.8.1svn
 BUNDLE_NAME=Wormux
@@ -102,7 +103,7 @@ else
     exit
 fi
 
-# Copy the librarie libintl.a
+# Copy the library libintl.a
 if [ -e libintl.a ]
 then
     cp libintl.a ${ROOT}
@@ -111,6 +112,14 @@ else
     exit
 fi
 
+# Copy the library libBox2D.dylib
+if [ -e libBox2D.dylib ]
+then
+    cp libBox2D.dylib ${ROOT}
+else
+    echo "*** ${MAC}libBox2D.dylib Not Found ***"
+    exit
+fi
 
 #
 # Clean temps files, and create Folders
@@ -280,6 +289,12 @@ then
     rm ${ROOT}libintl.a
 fi
 
+# Remove copy of libintl.a
+if [ -e ${ROOT}libBox2D.dylib ]
+then
+    rm ${ROOT}libBox2D.dylib
+fi
+    
 echo "Build done"
 
 exit 0
