@@ -22,14 +22,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
+#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i igrač konektovan"
 msgstr[1] "%i igrač konektovan"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s je mrtav zato što je smotan!"
 
-#: src/object/medkit.cpp:68
+#: src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -184,7 +184,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "%s tim je dobio %u bazuka!"
 msgstr[1] "%s tim je dobio %u bazuka!"
 
-#: src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -276,7 +276,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "%s tim je dobio %u jetpack! Extraa!"
 msgstr[1] "%s tim je dobio %u jetpack! Extraa!"
 
-#: src/weapon/lowgrav.cpp:79
+#: src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -297,7 +297,7 @@ msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "%s tim je dobio %u padobrana!"
 msgstr[1] "%s tim je dobio %u padobrana!"
 
-#: src/weapon/polecat.cpp:181
+#: src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -449,7 +449,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovanj"
 
-#: src/main.cpp:286
+#: src/main.cpp:291
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -482,7 +482,7 @@ msgstr "Teleport"
 msgid "Blitz"
 msgstr ""
 
-#: src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "Bacač plamena"
 
@@ -494,7 +494,7 @@ msgstr "Bomba odskočica"
 msgid "Bye bye tux..."
 msgstr "Ćao ćao tux ..."
 
-#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:506
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
 #: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
 #: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
@@ -551,7 +551,7 @@ msgstr "Padobran"
 msgid "Check updates online?"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:228
+#: src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "Nasumice izaberi druge mape"
 
@@ -564,7 +564,7 @@ msgid "Click: Center camera on character"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "Klijent mod"
 
@@ -746,7 +746,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:123
+#: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
@@ -840,7 +840,19 @@ msgstr ""
 msgid "Host a game"
 msgstr "Hostaj igru"
 
-#: src/weapon/blowtorch.cpp:63
+#: src/weapon/auto_bazooka.cpp:224
+msgid ""
+"How to use it : left click on target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"Kako ga koristiti : lijevi klik na metu\n"
+"Početni ugao pucanja : Gore/Dole\n"
+"Pucaj : drži space do željene jačine udarca\n"
+"municija po redu"
+
+#: src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -856,18 +868,6 @@ msgid ""
 "an ammo per turn"
 msgstr "Kako korisiti : drži space<br> municija po redu"
 
-#: src/weapon/auto_bazooka.cpp:224
-msgid ""
-"Howto use it : left clic on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"Kako ga koristiti : lijevi klik na metu\n"
-"Početni ugao pucanja : Gore/Dole\n"
-"Pucaj : drži space do željene jačine udarca\n"
-"municija po redu"
-
 #: src/weapon/anvil.cpp:120
 #, fuzzy
 msgid ""
@@ -881,7 +881,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Požuri, previše si spor !!"
 
-#: src/main.cpp:278
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -927,7 +927,7 @@ msgstr "Pa to je poklon!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Dođi na #wormux na irc.freenode.net da pronađeš protivnika"
 
@@ -988,7 +988,8 @@ msgid "Maps"
 msgstr "Mape"
 
 #. The first player to connect to a headless server asumes the game master role
-#: src/menu/network_menu.cpp:117
+#. We are becoming game master, updating the menu...
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Klijent mod"
@@ -998,7 +999,7 @@ msgstr "Klijent mod"
 msgid "Max energy"
 msgstr "Početna energija"
 
-#: src/menu/network_menu.cpp:122
+#: src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "Maximalan broj igrača:"
 
@@ -1131,7 +1132,7 @@ msgstr ""
 msgid "Play"
 msgstr "Igraj"
 
-#: src/menu/network_menu.cpp:141
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr ""
 
@@ -1152,7 +1153,7 @@ msgstr "Prikaži ime igrača?"
 msgid "Player's name?"
 msgstr "Prikaži ime igrača?"
 
-#: src/weapon/polecat.cpp:167
+#: src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "Lansiraj tvora"
 
@@ -1169,7 +1170,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Odustani"
 
-#: src/main.cpp:267
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Izađi iz Wormux-a"
 
@@ -1182,7 +1183,7 @@ msgstr ""
 msgid "Quit game"
 msgstr "Pokreni igru"
 
-#: src/menu/map_selection_box.cpp:227
+#: src/menu/map_selection_box.cpp:222
 #, fuzzy
 msgid "Random map"
 msgstr "Učitaj mape:"
@@ -1230,7 +1231,8 @@ msgstr "Adresa servera"
 msgid "Server available on Internet"
 msgstr "Server dostupan na internetu"
 
-#: src/menu/network_menu.cpp:114
+#. Server Mode
+#: src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "Server mod"
 
@@ -1363,7 +1365,7 @@ msgstr "Kasetna bomba je napustila bojište prije nego je stigla explodirat."
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Kasetna bomba je napustila bojište prije nego je explodirala"
 
-#: src/weapon/polecat.cpp:150
+#: src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Tvor je napustio bojište prije nego je explodirao"
 
@@ -1375,7 +1377,7 @@ msgstr "Automatksa rakete je napustila bojište..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Odskočica je napustila bojište prije nego je explodirala"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1398,7 +1400,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granata napušta bojište prije explozije"
 
-#: src/menu/network_menu.cpp:343
+#: src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Drugi te čekaju! Probudi se :)"
 
@@ -1417,7 +1419,7 @@ msgstr "Server odbio konekciju."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Server odbio konekciju."
 
-#: src/menu/network_menu.cpp:248
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1475,7 +1477,7 @@ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nije u mogućnosti koristit ovaj port!"
 
-#: src/network/admin_commands.cpp:84
+#: src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr ""
 
@@ -1483,10 +1485,6 @@ msgstr ""
 #, fuzzy
 msgid "Unlimited"
 msgstr "(neograničeno)"
-
-#: src/network/network.cpp:176
-msgid "Unnamed"
-msgstr "Bezimeni"
 
 #: src/main.cpp:199
 msgid "Version"
@@ -1497,7 +1495,7 @@ msgstr "Verzija"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:262
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1518,12 +1516,12 @@ msgstr ""
 msgid "Weapons"
 msgstr "Oružje:"
 
-#: src/main.cpp:295
+#: src/main.cpp:300
 msgid "Website: "
 msgstr "Web stranica:"
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:157
+#: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1547,7 +1545,7 @@ msgstr "Mina"
 msgid "Wormux launching..."
 msgstr "Wormux se učitava..."
 
-#: src/main.cpp:285
+#: src/main.cpp:290
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
@@ -1563,14 +1561,18 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:346
+#: src/menu/network_menu.cpp:336
 #, fuzzy
 msgid "You are alone :-/"
 msgstr "Sami ste ..."
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Sami ste ..."
+
+#: src/menu/network_menu.cpp:391
+msgid "You are the new turn master!"
+msgstr ""
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1580,7 +1582,7 @@ msgstr "Trebate barem jednu važeće mapu!"
 msgid "You need at least two valid teams !"
 msgstr "Trebate barem dva važeća tima !"
 
-#: src/menu/network_menu.cpp:236
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nećeš biti u stanju da igraš prije nego izabereš tim!"
 
@@ -1644,6 +1646,9 @@ msgstr "o Učitavam zvučne profile: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
+
+#~ msgid "Unnamed"
+#~ msgstr "Bezimeni"
 
 #, fuzzy
 #~ msgid "Network initialization"
