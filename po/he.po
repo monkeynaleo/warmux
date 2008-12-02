@@ -20,14 +20,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! המפה %s לא נמצאה :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
+#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "שחקן %i מחובר"
 msgstr[1] "%i שחקנים מחוברים"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -90,7 +90,7 @@ msgstr ""
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s מת כי הוא שלומיאל!"
 
-#: src/object/medkit.cpp:68
+#: src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -179,7 +179,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "צוות %s זכה בבזוקה!"
 msgstr[1] "צוות %s זכה ב-%u בזוקות!"
 
-#: src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -267,7 +267,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "צוות %s זכה ברתמת טיסה! מגניב!"
 msgstr[1] "צוות %s זכה ב-%u רתמות טיסה! מגניב!"
 
-#: src/weapon/lowgrav.cpp:79
+#: src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -288,7 +288,7 @@ msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "צוות %s זכה במצנח!"
 msgstr[1] "צוות %s זכה ב-%u מצנחים!"
 
-#: src/weapon/polecat.cpp:181
+#: src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -440,7 +440,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "סדן"
 
-#: src/main.cpp:286
+#: src/main.cpp:291
 msgid "Authors:"
 msgstr "מחברים:"
 
@@ -473,7 +473,7 @@ msgstr "טלפורטציה"
 msgid "Blitz"
 msgstr ""
 
-#: src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "מבער"
 
@@ -485,7 +485,7 @@ msgstr "כדור מקפץ"
 msgid "Bye bye tux..."
 msgstr "היה שלום, טאקס..."
 
-#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:506
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
 #: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
 #: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
@@ -542,7 +542,7 @@ msgstr "מצנח"
 msgid "Check updates online?"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:228
+#: src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "בחר באחת המפות באופן אקראי"
 
@@ -555,7 +555,7 @@ msgid "Click: Center camera on character"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "מצב לקוח"
 
@@ -727,7 +727,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:123
+#: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "שגיאה: לא ניתן למצוא את הגוף \"%s\" עבור צוות \"%s\"."
@@ -821,7 +821,19 @@ msgstr ""
 msgid "Host a game"
 msgstr "ארח משחק"
 
-#: src/weapon/blowtorch.cpp:63
+#: src/weapon/auto_bazooka.cpp:224
+msgid ""
+"How to use it : left click on target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"לשימוש: קליק שמאלי על המטרה\n"
+"זווית ירי ראשונית: מעלה-מטה\n"
+"ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
+"תחמושת לתור"
+
+#: src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -839,18 +851,6 @@ msgstr ""
 "לשימוש: החזק את מקש הרווח לחוץ\n"
 "תחמושת לתור"
 
-#: src/weapon/auto_bazooka.cpp:224
-msgid ""
-"Howto use it : left clic on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"לשימוש: קליק שמאלי על המטרה\n"
-"זווית ירי ראשונית: מעלה-מטה\n"
-"ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
-"תחמושת לתור"
-
 #: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
@@ -863,7 +863,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "קדימה, אתה איטי מדי!!"
 
-#: src/main.cpp:278
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -911,7 +911,7 @@ msgstr "קיבלת מתנה!"
 msgid "Jetpack"
 msgstr "רתמת טיסה"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "הצטרף אל #wormux ב-irc.freenode.net כדי למצוא יריבים."
 
@@ -972,7 +972,8 @@ msgid "Maps"
 msgstr "מפות"
 
 #. The first player to connect to a headless server asumes the game master role
-#: src/menu/network_menu.cpp:117
+#. We are becoming game master, updating the menu...
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "מצב לקוח"
@@ -982,7 +983,7 @@ msgstr "מצב לקוח"
 msgid "Max energy"
 msgstr "אנרגיה ראשונית"
 
-#: src/menu/network_menu.cpp:122
+#: src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "מספר שחקנים מירבי:"
 
@@ -1114,7 +1115,7 @@ msgstr ""
 msgid "Play"
 msgstr "שחק"
 
-#: src/menu/network_menu.cpp:141
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr ""
 
@@ -1135,7 +1136,7 @@ msgstr "שם השחקן?"
 msgid "Player's name?"
 msgstr "שם השחקן?"
 
-#: src/weapon/polecat.cpp:167
+#: src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "משגר חמוסים"
 
@@ -1153,7 +1154,7 @@ msgstr "יציאה מן הקרב"
 msgid "Quit"
 msgstr "יציאה"
 
-#: src/main.cpp:267
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "יציאה מ-Wormux"
 
@@ -1166,7 +1167,7 @@ msgstr "יציאה מן הקרב"
 msgid "Quit game"
 msgstr "הרץ משחק"
 
-#: src/menu/map_selection_box.cpp:227
+#: src/menu/map_selection_box.cpp:222
 msgid "Random map"
 msgstr "מפה אקראית"
 
@@ -1212,7 +1213,8 @@ msgstr "כתובת שרת:"
 msgid "Server available on Internet"
 msgstr "שרת זמין באינטרנט"
 
-#: src/menu/network_menu.cpp:114
+#. Server Mode
+#: src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "מצב שרת"
 
@@ -1346,7 +1348,7 @@ msgstr "פצצת המצרר יצאה משדה הקרב לפני שהתפוצצה
 msgid "The Gnu left the battlefield before exploding"
 msgstr "הגנו יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/weapon/polecat.cpp:150
+#: src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "החמוס יצא משדה הקרב לפני שהתפוצץ."
 
@@ -1358,7 +1360,7 @@ msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 msgid "The ball left the battlefield before exploding"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1381,7 +1383,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr "הרימון יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/menu/network_menu.cpp:343
+#: src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "כולם מחכים רק לך! זמן לקום :-)"
 
@@ -1399,7 +1401,7 @@ msgstr "השרת סירב לבקשת החיבור."
 msgid "The server rejected the connection: wrong password!"
 msgstr "השרת סירב לבקשת החיבור."
 
-#: src/menu/network_menu.cpp:248
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1457,7 +1459,7 @@ msgstr "לא ניתן לפתוח את תיקיית המפות האישית (%s)!
 msgid "Unable to use this port!"
 msgstr "לא ניתן להשתמש בפורט זה!"
 
-#: src/network/admin_commands.cpp:84
+#: src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr ""
 
@@ -1465,10 +1467,6 @@ msgstr ""
 #, fuzzy
 msgid "Unlimited"
 msgstr "(ללא הגבלה)"
-
-#: src/network/network.cpp:176
-msgid "Unnamed"
-msgstr "ללא שם"
 
 #: src/main.cpp:199
 msgid "Version"
@@ -1479,7 +1477,7 @@ msgstr "גירסה"
 msgid "Version verification failed because: %s\n"
 msgstr ""
 
-#: src/menu/network_menu.cpp:262
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1500,12 +1498,12 @@ msgstr ""
 msgid "Weapons"
 msgstr "כלי נשק"
 
-#: src/main.cpp:295
+#: src/main.cpp:300
 msgid "Website: "
 msgstr "אתר: "
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:157
+#: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1528,7 +1526,7 @@ msgstr "מנצח"
 msgid "Wormux launching..."
 msgstr "Wormux נטען..."
 
-#: src/main.cpp:285
+#: src/main.cpp:290
 msgid "Wormux version "
 msgstr "גירסת Wormux "
 
@@ -1544,13 +1542,17 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:346
+#: src/menu/network_menu.cpp:336
 msgid "You are alone :-/"
 msgstr "אתה לבדך :-/"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "אתה לבדך..."
+
+#: src/menu/network_menu.cpp:391
+msgid "You are the new turn master!"
+msgstr ""
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1560,7 +1562,7 @@ msgstr "אתה זקוק למפה תקינה אחת לפחות!"
 msgid "You need at least two valid teams !"
 msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 
-#: src/menu/network_menu.cpp:236
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
@@ -1620,6 +1622,9 @@ msgstr "o טוען פרופיל סאונד: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
+
+#~ msgid "Unnamed"
+#~ msgstr "ללא שם"
 
 #~ msgid "Network initialization"
 #~ msgstr "אתחול רשת"

@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! 地圖 %s未找到 :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
+#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i 玩家已連線"
 msgstr[1] "%i 玩家均已連線"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
 
-#: src/object/medkit.cpp:68
+#: src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -180,7 +180,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "%s 隊得到 %u 火箭炮!"
 msgstr[1] "%s 隊得到 %u 火箭炮!"
 
-#: src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -268,7 +268,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "%s 隊得到 %u 噴射包了! 帥啊!"
 msgstr[1] "%s 隊得到 %u 噴射包了! 帥啊!"
 
-#: src/weapon/lowgrav.cpp:79
+#: src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -289,7 +289,7 @@ msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "%s 隊得到 %u 降落傘!"
 msgstr[1] "%s 隊得到 %u 降落傘!"
 
-#: src/weapon/polecat.cpp:181
+#: src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -442,7 +442,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "鐵砧"
 
-#: src/main.cpp:286
+#: src/main.cpp:291
 msgid "Authors:"
 msgstr "作者:"
 
@@ -475,7 +475,7 @@ msgstr "傳輸"
 msgid "Blitz"
 msgstr ""
 
-#: src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "吹管"
 
@@ -487,7 +487,7 @@ msgstr "彈力球"
 msgid "Bye bye tux..."
 msgstr "Bye bye 企鵝..."
 
-#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:506
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
 #: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
 #: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
@@ -544,7 +544,7 @@ msgstr "降落傘"
 msgid "Check updates online?"
 msgstr "網上檢查升級？"
 
-#: src/menu/map_selection_box.cpp:228
+#: src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "在地圖中隨機選取"
 
@@ -557,7 +557,7 @@ msgid "Click: Center camera on character"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "用戶端型態 "
 
@@ -728,7 +728,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:123
+#: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "錯誤: 找不到 body\"%s\" 隊伍 \"%s\"."
@@ -822,7 +822,19 @@ msgstr ""
 msgid "Host a game"
 msgstr "建立游戲"
 
-#: src/weapon/blowtorch.cpp:63
+#: src/weapon/auto_bazooka.cpp:224
+msgid ""
+"How to use it : left click on target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"如何使用: 滑鼠左鍵點擊目標\n"
+"初始射擊角度: 上/下\n"
+"開火: 按住白字元鍵積攢到需要的力量\n"
+"每回合一個彈夾"
+
+#: src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -840,18 +852,6 @@ msgstr ""
 "如何使用: 按住白字元鍵\n"
 "每回合一個彈夾"
 
-#: src/weapon/auto_bazooka.cpp:224
-msgid ""
-"Howto use it : left clic on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"如何使用: 滑鼠左鍵點擊目標\n"
-"初始射擊角度: 上/下\n"
-"開火: 按住白字元鍵積攢到需要的力量\n"
-"每回合一個彈夾"
-
 #: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
@@ -864,7 +864,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "快點,伙計你也太慢了!"
 
-#: src/main.cpp:278
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -911,7 +911,7 @@ msgid "Jetpack"
 msgstr "噴射包"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "加入#wormux IRC irc.freenode.net 找對手"
 
@@ -972,7 +972,8 @@ msgid "Maps"
 msgstr "地圖"
 
 #. The first player to connect to a headless server asumes the game master role
-#: src/menu/network_menu.cpp:117
+#. We are becoming game master, updating the menu...
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "游戲名:"
@@ -982,7 +983,7 @@ msgstr "游戲名:"
 msgid "Max energy"
 msgstr "初始耐久"
 
-#: src/menu/network_menu.cpp:122
+#: src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "玩家滿員:"
 
@@ -1113,7 +1114,7 @@ msgstr ""
 msgid "Play"
 msgstr "要玩了哦"
 
-#: src/menu/network_menu.cpp:141
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr ""
 
@@ -1134,7 +1135,7 @@ msgstr "請問尊姓大名?"
 msgid "Player's name?"
 msgstr "請問尊姓大名?"
 
-#: src/weapon/polecat.cpp:167
+#: src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "臭鼬發射器"
 
@@ -1152,7 +1153,7 @@ msgstr "推出戰斗"
 msgid "Quit"
 msgstr "結束"
 
-#: src/main.cpp:267
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "結束"
 
@@ -1165,7 +1166,7 @@ msgstr "推出戰斗"
 msgid "Quit game"
 msgstr "執行游戲"
 
-#: src/menu/map_selection_box.cpp:227
+#: src/menu/map_selection_box.cpp:222
 msgid "Random map"
 msgstr "隨機讀取地圖"
 
@@ -1211,7 +1212,8 @@ msgstr "伺服器位址"
 msgid "Server available on Internet"
 msgstr "Internet可用伺服器"
 
-#: src/menu/network_menu.cpp:114
+#. Server Mode
+#: src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "伺服器設定"
 
@@ -1344,7 +1346,7 @@ msgstr "集束炸彈離開戰場---"
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Gnu-野牛離開戰場..."
 
-#: src/weapon/polecat.cpp:150
+#: src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "臭鼬離開了戰場..."
 
@@ -1356,7 +1358,7 @@ msgstr "制導火箭離開戰場..."
 msgid "The ball left the battlefield before exploding"
 msgstr "球膨脹前離開戰場"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1379,7 +1381,7 @@ msgstr "您斷線了."
 msgid "The grenade left the battlefield before exploding"
 msgstr "手榴彈離開戰場前發生爆炸"
 
-#: src/menu/network_menu.cpp:343
+#: src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "別人在等你! 快醒吧:-)"
 
@@ -1396,7 +1398,7 @@ msgstr "伺服器拒絕"
 msgid "The server rejected the connection: wrong password!"
 msgstr "伺服器拒絕: 密碼錯了."
 
-#: src/menu/network_menu.cpp:248
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1454,7 +1456,7 @@ msgstr "無法開啟個人地圖目錄 (%s)!"
 msgid "Unable to use this port!"
 msgstr "通訊埠不可用"
 
-#: src/network/admin_commands.cpp:84
+#: src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr ""
 
@@ -1462,10 +1464,6 @@ msgstr ""
 #, fuzzy
 msgid "Unlimited"
 msgstr "(無限的)"
-
-#: src/network/network.cpp:176
-msgid "Unnamed"
-msgstr "未命名"
 
 #: src/main.cpp:199
 msgid "Version"
@@ -1476,7 +1474,7 @@ msgstr "版本"
 msgid "Version verification failed because: %s\n"
 msgstr "版本改變失敗原因: %s\n"
 
-#: src/menu/network_menu.cpp:262
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1497,12 +1495,12 @@ msgstr ""
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:295
+#: src/main.cpp:300
 msgid "Website: "
 msgstr "網站Website: "
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:157
+#: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1526,7 +1524,7 @@ msgstr "勝者"
 msgid "Wormux launching..."
 msgstr "准備中, Wormux!!!"
 
-#: src/main.cpp:285
+#: src/main.cpp:290
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
@@ -1542,13 +1540,17 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:346
+#: src/menu/network_menu.cpp:336
 msgid "You are alone :-/"
 msgstr "你是孤單的 :-/"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "你是孤單的..."
+
+#: src/menu/network_menu.cpp:391
+msgid "You are the new turn master!"
+msgstr ""
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1558,7 +1560,7 @@ msgstr "你需要可用的地圖!"
 msgid "You need at least two valid teams !"
 msgstr "至少有2組才能開始 !"
 
-#: src/menu/network_menu.cpp:236
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "沒有隊伍，就不會有戰斗!"
 
@@ -1620,6 +1622,9 @@ msgstr "o讀取音樂檔案 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
+
+#~ msgid "Unnamed"
+#~ msgstr "未命名"
 
 #~ msgid "Network initialization"
 #~ msgstr "網路起始化"

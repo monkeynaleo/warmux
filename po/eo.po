@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas:-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
+#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i ludanto konektiĝis"
 msgstr[1] "%i ludantoj konektiĝis"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -91,7 +91,7 @@ msgstr "%s (teamo %s) grundtrafis tro perforte!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (teamo %s) estas mortinta pro lia mallerteco."
 
-#: src/object/medkit.cpp:68
+#: src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -182,7 +182,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "%s teamo gajnis %u bazukon!"
 msgstr[1] "%s teamo gajnis %u bazukojn!"
 
-#: src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -274,7 +274,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "%s teamo gajnis %u jetpakon! Ŭaŭ!"
 msgstr[1] "%s teamo gajnis %u jetpakojn! Ŭaŭ!"
 
-#: src/weapon/lowgrav.cpp:79
+#: src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -295,7 +295,7 @@ msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "%s teamo gajnis %u paraŝuton!"
 msgstr[1] "%s teamo gajnis %u paraŝutojn!"
 
-#: src/weapon/polecat.cpp:181
+#: src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -452,7 +452,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Amboso"
 
-#: src/main.cpp:286
+#: src/main.cpp:291
 msgid "Authors:"
 msgstr "Aŭtoroj:"
 
@@ -484,7 +484,7 @@ msgstr "Antaŭ ago"
 msgid "Blitz"
 msgstr ""
 
-#: src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "Torĉo"
 
@@ -496,7 +496,7 @@ msgstr "Resaltanta pilko"
 msgid "Bye bye tux..."
 msgstr "Adiaŭ, tukso..."
 
-#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:506
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
 #: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
 #: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
@@ -550,7 +550,7 @@ msgstr "Ulŝanĝo"
 msgid "Check updates online?"
 msgstr "Ĉu kontroli la ĝisdatigaĵoj enrete?"
 
-#: src/menu/map_selection_box.cpp:228
+#: src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "Elekti hazarde el la malsamaj mapoj"
 
@@ -563,7 +563,7 @@ msgid "Click: Center camera on character"
 msgstr "Klako: Centrigi la kameraon ĉe la ulo"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "Klientmodo"
 
@@ -737,7 +737,7 @@ msgstr ""
 "vi ne estas senpere konektita al la interreto, kontroli la agordon de via "
 "kursilo: la TCP pordo %s devas trasendiĝi al via komputilo."
 
-#: src/team/team.cpp:123
+#: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eraro: Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
@@ -828,7 +828,18 @@ msgstr "Supersalti"
 msgid "Host a game"
 msgstr "Gastigi ludon"
 
-#: src/weapon/blowtorch.cpp:63
+#: src/weapon/auto_bazooka.cpp:224
+msgid ""
+"How to use it : left click on target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"Kiel uzi ĝin: maldekstrklaku sur celo\n"
+"Komenca pafangulo: Supren/Malsupren\n"
+"Pafo: apogu kontinue spacetosignon ĝis la vola fortoUnu pafo vice"
+
+#: src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -845,17 +856,6 @@ msgstr ""
 "Kiel uzi ĝin: apogu kontinue spacetosignon\n"
 "Unu uzo vice"
 
-#: src/weapon/auto_bazooka.cpp:224
-msgid ""
-"Howto use it : left clic on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"Kiel uzi ĝin: maldekstrklaku sur celo\n"
-"Komenca pafangulo: Supren/Malsupren\n"
-"Pafo: apogu kontinue spacetosignon ĝis la vola fortoUnu pafo vice"
-
 #: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
@@ -868,7 +868,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Rapidegu, vi tro malrapidas!"
 
-#: src/main.cpp:278
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -916,7 +916,7 @@ msgstr "Tio estas donaco!"
 msgid "Jetpack"
 msgstr "Jetpako"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Aliĝu #wormux en irc.freenode.net por trovi oponantojn."
 
@@ -976,7 +976,8 @@ msgid "Maps"
 msgstr "Mapoj"
 
 #. The first player to connect to a headless server asumes the game master role
-#: src/menu/network_menu.cpp:117
+#. We are becoming game master, updating the menu...
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Ludmodo"
@@ -985,7 +986,7 @@ msgstr "Ludmodo"
 msgid "Max energy"
 msgstr "Maks energio"
 
-#: src/menu/network_menu.cpp:122
+#: src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "Maksimuma kvanto da ludantoj:"
 
@@ -1114,7 +1115,7 @@ msgstr "Paŭzi"
 msgid "Play"
 msgstr "Ludi"
 
-#: src/menu/network_menu.cpp:141
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Ludi plurfoje"
 
@@ -1134,7 +1135,7 @@ msgstr "Ludanta nomo"
 msgid "Player's name?"
 msgstr "Nomo de ludanto?"
 
-#: src/weapon/polecat.cpp:167
+#: src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "Putorĵetilo"
 
@@ -1151,7 +1152,7 @@ msgstr "Publikaj bataloj"
 msgid "Quit"
 msgstr "Forlasi"
 
-#: src/main.cpp:267
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Foriri el Wormux"
 
@@ -1163,7 +1164,7 @@ msgstr "Foriri el batalo"
 msgid "Quit game"
 msgstr "Foriri el ludo"
 
-#: src/menu/map_selection_box.cpp:227
+#: src/menu/map_selection_box.cpp:222
 msgid "Random map"
 msgstr "Hazarda mapo"
 
@@ -1208,7 +1209,8 @@ msgstr "Servila adreso:"
 msgid "Server available on Internet"
 msgstr "Interretebla servilo"
 
-#: src/menu/network_menu.cpp:114
+#. Server Mode
+#: src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "Servila modo"
 
@@ -1338,7 +1340,7 @@ msgstr "La futbalbombo foriris de la batalejo antaŭ ol explodi."
 msgid "The Gnu left the battlefield before exploding"
 msgstr "La Gnuo foriris de la batalejo antaŭ ol explodi."
 
-#: src/weapon/polecat.cpp:150
+#: src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "La putoro foriris de la batalejo antaŭ ol explodi."
 
@@ -1350,7 +1352,7 @@ msgstr "La aŭtomatika raketo foriris de la batalejo..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilko foriris de la batalejo antaŭ ol explodi."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1375,7 +1377,7 @@ msgstr "La ludo ĉesis pro ke, vi estis malkonektita."
 msgid "The grenade left the battlefield before exploding"
 msgstr "La grenado foriris de la batalejo antaŭ ol explodi"
 
-#: src/menu/network_menu.cpp:343
+#: src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "La alioj estas atendando vin! Vekiĝu:-)"
 
@@ -1392,7 +1394,7 @@ msgstr "La servilo forĵetis la konekton."
 msgid "The server rejected the connection: wrong password!"
 msgstr "La servilo forĵetis la konekton pro malbona pasvorto!"
 
-#: src/menu/network_menu.cpp:248
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1448,7 +1450,7 @@ msgstr "Ne eblas malfermi la dosierujon de personaj mapoj (%s)!"
 msgid "Unable to use this port!"
 msgstr "Ne eblas uzi ĉi tiun pordon!"
 
-#: src/network/admin_commands.cpp:84
+#: src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr "Nekonata komando"
 
@@ -1456,10 +1458,6 @@ msgstr "Nekonata komando"
 #, fuzzy
 msgid "Unlimited"
 msgstr "(senlimaj)"
-
-#: src/network/network.cpp:176
-msgid "Unnamed"
-msgstr "Sennoma"
 
 #: src/main.cpp:199
 msgid "Version"
@@ -1470,7 +1468,7 @@ msgstr "Versio"
 msgid "Version verification failed because: %s\n"
 msgstr "Versiokontrolo fiaskis pro: %s\n"
 
-#: src/menu/network_menu.cpp:262
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1491,12 +1489,12 @@ msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 msgid "Weapons"
 msgstr "Armiloj"
 
-#: src/main.cpp:295
+#: src/main.cpp:300
 msgid "Website: "
 msgstr "TTT-ejo: "
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:157
+#: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1519,7 +1517,7 @@ msgstr "Gajnanto"
 msgid "Wormux launching..."
 msgstr "Wormux ŝargante..."
 
-#: src/main.cpp:285
+#: src/main.cpp:290
 msgid "Wormux version "
 msgstr "Wormux versio "
 
@@ -1535,13 +1533,17 @@ msgstr "Malbona mapnomo!"
 msgid "Wrong team!"
 msgstr "Malbona teamo!"
 
-#: src/menu/network_menu.cpp:346
+#: src/menu/network_menu.cpp:336
 msgid "You are alone :-/"
 msgstr "Vi estas sola:-/"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Vi estas sola..."
+
+#: src/menu/network_menu.cpp:391
+msgid "You are the new turn master!"
+msgstr ""
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1551,7 +1553,7 @@ msgstr "Vi bezonas almenaŭ unu taŭgan mapon!"
 msgid "You need at least two valid teams !"
 msgstr "Vi bezonas almenaŭ du teamojn!"
 
-#: src/menu/network_menu.cpp:236
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon!"
 
@@ -1611,6 +1613,9 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#~ msgid "Unnamed"
+#~ msgstr "Sennoma"
 
 #~ msgid "Network initialization"
 #~ msgstr "Preparado de reto"

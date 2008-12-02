@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Banen %s blev ikke fundet :-("
 
-#: src/menu/network_menu.cpp:132 src/menu/network_menu.cpp:328
+#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Spiller %i er forbundet"
 msgstr[1] "Spillere %i er forbundet"
 
-#: src/menu/network_menu.cpp:136 src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -91,7 +91,7 @@ msgstr "%s (%s) ramte jorden for hårdt!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s) døde fordi han var klodset!"
 
-#: src/object/medkit.cpp:68
+#: src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -183,7 +183,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "Holdet %s har fået %u bazooka!"
 msgstr[1] "Holdet %s har fået %u bazookaer!"
 
-#: src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -276,7 +276,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "Holdet %s har fået %u jetpack! Svedigt!"
 msgstr[1] "Holdet %s har fået %u jetpacks! Svedigt!"
 
-#: src/weapon/lowgrav.cpp:79
+#: src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -299,7 +299,7 @@ msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "Holdet %s har fået %u faldskærm!"
 msgstr[1] "Holdet %s har fået %u faldskærme!"
 
-#: src/weapon/polecat.cpp:181
+#: src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -454,7 +454,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:286
+#: src/main.cpp:291
 msgid "Authors:"
 msgstr "Forfattere:"
 
@@ -486,7 +486,7 @@ msgstr "Før action"
 msgid "Blitz"
 msgstr "Blitz"
 
-#: src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "Blæselampe"
 
@@ -498,7 +498,7 @@ msgstr "Hoppebold"
 msgid "Bye bye tux..."
 msgstr "Faaarvel Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:234 src/team/teams_list.cpp:506
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
 #: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
 #: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
@@ -552,7 +552,7 @@ msgstr "Skift kriger"
 msgid "Check updates online?"
 msgstr "Check for opdateringer på nettet?"
 
-#: src/menu/map_selection_box.cpp:228
+#: src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "Skift tilfældigt rundt mellem de forskellige baner"
 
@@ -565,7 +565,7 @@ msgid "Click: Center camera on character"
 msgstr "Klik: Centrér kamera på kriger"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "Klientmodus"
 
@@ -743,7 +743,7 @@ msgstr ""
 "er forbundet direkte til internettet, så check din routerkonfiguration i "
 "stedet. I så fald skal du forwarde TCP-port %s til din computer."
 
-#: src/team/team.cpp:123
+#: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fejl: Kan ikke finde kroppen \"%s\" for holdet \"%s\"."
@@ -834,7 +834,19 @@ msgstr "Højt hop"
 msgid "Host a game"
 msgstr "Vær vært for et spil"
 
-#: src/weapon/blowtorch.cpp:63
+#: src/weapon/auto_bazooka.cpp:224
+msgid ""
+"How to use it : left click on target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"Hvordan man bruger det: Venstreklik på målet\n"
+"Affyringsvinkel (udgangspunkt): Op/ned piletaster\n"
+"Affyr: Hold mellemrum nede indtil den ønskede styrke er nået\n"
+"Et stykke ammunition per tur"
+
+#: src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -852,18 +864,6 @@ msgstr ""
 "Hvordan man bruger det: Hold mellemrum nede\n"
 "Et stykke ammunition per tur"
 
-#: src/weapon/auto_bazooka.cpp:224
-msgid ""
-"Howto use it : left clic on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"Hvordan man bruger det: Venstreklik på målet\n"
-"Affyringsvinkel (udgangspunkt): Op/ned piletaster\n"
-"Affyr: Hold mellemrum nede indtil den ønskede styrke er nået\n"
-"Et stykke ammunition per tur"
-
 #: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
@@ -876,7 +876,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynd dig, du er for langsom!"
 
-#: src/main.cpp:278
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -924,7 +924,7 @@ msgstr "Det er en gave!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:154
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
 
@@ -984,7 +984,8 @@ msgid "Maps"
 msgstr "Baner"
 
 #. The first player to connect to a headless server asumes the game master role
-#: src/menu/network_menu.cpp:117
+#. We are becoming game master, updating the menu...
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Spilmodus"
@@ -993,7 +994,7 @@ msgstr "Spilmodus"
 msgid "Max energy"
 msgstr "Maksimum energi"
 
-#: src/menu/network_menu.cpp:122
+#: src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "Maksimum antal spillere:"
 
@@ -1122,7 +1123,7 @@ msgstr "Pause"
 msgid "Play"
 msgstr "Spil"
 
-#: src/menu/network_menu.cpp:141
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Spil flere gange"
 
@@ -1142,7 +1143,7 @@ msgstr "Spillernavn"
 msgid "Player's name?"
 msgstr "Vis krigernes navne?"
 
-#: src/weapon/polecat.cpp:167
+#: src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "Stinkdyrskaster"
 
@@ -1159,7 +1160,7 @@ msgstr "Offentlige kampe"
 msgid "Quit"
 msgstr "Afslut"
 
-#: src/main.cpp:267
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
@@ -1171,7 +1172,7 @@ msgstr "Forlad kampen"
 msgid "Quit game"
 msgstr "Afslut spillet"
 
-#: src/menu/map_selection_box.cpp:227
+#: src/menu/map_selection_box.cpp:222
 msgid "Random map"
 msgstr "Tilfældig bane"
 
@@ -1216,7 +1217,8 @@ msgstr "Serveradresse:"
 msgid "Server available on Internet"
 msgstr "Server tilgængelig på internettet"
 
-#: src/menu/network_menu.cpp:114
+#. Server Mode
+#: src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "Servermodus"
 
@@ -1347,7 +1349,7 @@ msgstr "Fodboldbomben forlod slagmarken før den eksploderede."
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Gnuen forlod slagmarken før den eksploderede"
 
-#: src/weapon/polecat.cpp:150
+#: src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Stinkdyret forlod slagmarken før det eksploderede"
 
@@ -1359,7 +1361,7 @@ msgstr "Den laserstyrede raket forlod slagmarken..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bolden forlod slagmarken før den eksploderede"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1384,7 +1386,7 @@ msgstr "Spillet blev afbrudt fordi din forbindelse blev brudt."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten forlod slagmarken før den eksploderede"
 
-#: src/menu/network_menu.cpp:343
+#: src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De andre venter på dig! Vågn op :-)"
 
@@ -1401,7 +1403,7 @@ msgstr "Serveren afslog forbindelsen."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serveren afslog forbindelsen: forkert kodeord!"
 
-#: src/menu/network_menu.cpp:248
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1459,17 +1461,13 @@ msgstr "Kan ikke åbne det personlige banekatalog (%s)!"
 msgid "Unable to use this port!"
 msgstr "Kan ikke bruge denne port!"
 
-#: src/network/admin_commands.cpp:84
+#: src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr "Ukendt kommando"
 
 #: src/menu/game_mode_editor.cpp:43
 msgid "Unlimited"
 msgstr "Ubegrænset"
-
-#: src/network/network.cpp:176
-msgid "Unnamed"
-msgstr "Unavngivet"
 
 #: src/main.cpp:199
 msgid "Version"
@@ -1480,7 +1478,7 @@ msgstr "Version"
 msgid "Version verification failed because: %s\n"
 msgstr "Version-verifikation fejlede fordi: %s\n"
 
-#: src/menu/network_menu.cpp:262
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1502,12 +1500,12 @@ msgstr "Våben: Affyr / bonusboks: falder hurtigt"
 msgid "Weapons"
 msgstr "Våben"
 
-#: src/main.cpp:295
+#: src/main.cpp:300
 msgid "Website: "
 msgstr "Hjemmeside: "
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:157
+#: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
@@ -1530,7 +1528,7 @@ msgstr "Vinder"
 msgid "Wormux launching..."
 msgstr "Wormux starter..."
 
-#: src/main.cpp:285
+#: src/main.cpp:290
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1546,13 +1544,17 @@ msgstr "Ugyldigt banenavn!"
 msgid "Wrong team!"
 msgstr "Ugyldigt hold!"
 
-#: src/menu/network_menu.cpp:346
+#: src/menu/network_menu.cpp:336
 msgid "You are alone :-/"
 msgstr "Du er alene :-/"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Du er alene..."
+
+#: src/menu/network_menu.cpp:391
+msgid "You are the new turn master!"
+msgstr ""
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1562,7 +1564,7 @@ msgstr "Du skal vælge mindst én gyldig bane!"
 msgid "You need at least two valid teams !"
 msgstr "Du skal vælge mindst to gyldige hold!"
 
-#: src/menu/network_menu.cpp:236
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille før du har valgt et hold!"
 
@@ -1622,6 +1624,9 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
+
+#~ msgid "Unnamed"
+#~ msgstr "Unavngivet"
 
 #~ msgid "Network initialization"
 #~ msgstr "Netværksinitialisation"
