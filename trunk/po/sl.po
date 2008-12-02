@@ -1630,7 +1630,7 @@ msgstr "Sami ste..."
 
 #: src/menu/network_menu.cpp:391
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Postali ste novi vodja igre!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
