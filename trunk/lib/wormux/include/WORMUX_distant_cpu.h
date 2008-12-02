@@ -50,6 +50,7 @@ private:
 
   WSocket* sock;
   DistantComputer::state_t state;
+  uint game_id;
 
   // a remote computer may act as a relay for several players (this is true when it is a server)
   std::list<Player> players;
@@ -73,6 +74,9 @@ public:
 
   void SetState(DistantComputer::state_t _state);
   DistantComputer::state_t GetState() const;
+
+  void SetGameId(uint _game_id);
+  uint GetGameId() const;
 
   void ForceDisconnection();
   bool MustBeDisconnected();
