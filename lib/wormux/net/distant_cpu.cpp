@@ -30,7 +30,8 @@ static const int MAX_PACKET_SIZE = 250*1024;
 
 DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname, uint initial_player_id) :
   sock(new_sock),
-  state(DistantComputer::STATE_NOT_INITIALIZED)
+  state(DistantComputer::STATE_NOT_INITIALIZED),
+  game_id(0)
 {
   Player theplayer(initial_player_id, nickname);
   players.push_back(theplayer);
@@ -129,6 +130,16 @@ void DistantComputer::SetState(DistantComputer::state_t _state)
 DistantComputer::state_t DistantComputer::GetState() const
 {
   return state;
+}
+
+void DistantComputer::SetGameId(uint _game_id)
+{
+  game_id = _game_id;
+}
+
+uint DistantComputer::GetGameId() const
+{
+  return game_id;
 }
 
 void DistantComputer::ForceDisconnection()
