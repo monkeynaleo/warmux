@@ -33,6 +33,37 @@
 #include <WSERVER_config.h>
 #include <WSERVER_debug.h>
 
+class NetworkGame
+{
+private:
+  std::string game_name;
+  std::string password;
+  std::list<DistantComputer*> cpulist;
+
+  void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
+
+public:
+  NetworkGame(const std::string& game_name, const std::string& password);
+
+  const std::string& GetName() const;
+  const std::string& GetPassword() const;
+
+  void AddCpu(DistantComputer* cpu);
+  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
+
+  std::list<DistantComputer*>& GetCpus();
+  const std::list<DistantComputer*>& GetCpus() const;
+
+  bool AcceptNewComputers() const;
+
+  uint NextPlayerId() const;
+  void ElectGameMaster();
+  void ForwardPacket(void * buffer, size_t len, const DistantComputer* sender);
+  void SendActionToAll(const Action& action) const;
+  void SendActionToOne(const Action& action, DistantComputer* client) const;
+  void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
+};
+
 class GameServer : public Singleton<GameServer>
 {
 private:
@@ -45,27 +76,23 @@ private:
 
   WSocket server_socket;
   WSocketSet* clients_socket_set;
-  std::map<uint, std::list<DistantComputer*> > cpu; // list of the connected computer
+  std::map<uint, NetworkGame> cpu; // list of the connected computer
+
+  void CreateGame(uint game_id);
 
   std::list<DistantComputer*>& GetCpus(uint game_id);
   const std::list<DistantComputer*>& GetCpus(uint game_id) const;
-  uint NextPlayerId(uint game_id) const;
-  bool HandShake(WSocket& client_socket, std::string& client_nickname, uint player_id);
+
+  bool HandShake(uint game_id, WSocket& client_socket, std::string& client_nickname, uint player_id);
   void WaitClients();
   void RejectIncoming();
-  std::list<DistantComputer*>::iterator CloseConnection(uint game_id, std::list<DistantComputer*>::iterator closed);
-  void ElectGameMaster(uint game_id);
 
-  void ForwardPacket(uint game_id, void * buffer, size_t len, const DistantComputer* sender);
-  void SendAction(uint game_id, const Action& a, DistantComputer* client, bool clt_as_rcver) const;
 public:
   bool ServerStart(uint port, uint max_nb_clients, const std::string& game_name, std::string& password);
   void RunLoop();
 
-  // Action handling
-  void SendActionToAll(uint game_id, const Action& action) const;
-  void SendActionToOne(uint game_id, const Action& action, DistantComputer* client) const;
-  void SendActionToAllExceptOne(uint game_id, const Action& action, DistantComputer* client) const;
+  NetworkGame& GetGame(uint game_id);
+  const NetworkGame& GetGame(uint game_id) const;
 };
 
 uint Action_TimeStamp();
