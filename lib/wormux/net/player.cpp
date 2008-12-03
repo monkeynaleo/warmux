@@ -87,8 +87,6 @@ void Player::UpdateNickname()
 
 bool Player::AddTeam(const ConfigTeam& team_conf)
 {
-  printf("Player %p :: AddTeam %s\n", this, team_conf.id.c_str());
-
   std::pair<std::map<const std::string, ConfigTeam>::iterator, bool> r;
   r = owned_teams.insert(std::make_pair(team_conf.id, team_conf));
   if (!r.second) {
@@ -103,8 +101,6 @@ bool Player::AddTeam(const ConfigTeam& team_conf)
 
 bool Player::RemoveTeam(const std::string& team_id)
 {
-  printf("Player %p :: RemoveTeam %s\n", this, team_id.c_str());
-
   size_t previous_size;
   previous_size = owned_teams.size();
   owned_teams.erase(team_id);
@@ -120,8 +116,6 @@ bool Player::RemoveTeam(const std::string& team_id)
 
 bool Player::UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_conf)
 {
-  printf("Player %p :: UpdateTeam %s - %s\n", this, old_team_id.c_str(), team_conf.id.c_str());
-
   if (old_team_id == team_conf.id) {
 
     if (owned_teams.find(team_conf.id) == owned_teams.end()) {
