@@ -94,29 +94,29 @@ static void Action_Network_ClientChangeState (Action *a)
   if (!Network::GetInstance()->IsGameMaster())
     return;
 
-  Network::network_state_t client_state = (Network::network_state_t)a->PopInt();
+  WNet::net_game_state_t client_state = (WNet::net_game_state_t)a->PopInt();
 
   switch (Network::GetInstance()->GetState()) {
-  case Network::NO_NETWORK:
-  case Network::NETWORK_MENU_INIT:
+  case WNet::NO_NETWORK:
+  case WNet::NETWORK_MENU_INIT:
     a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
-    ASSERT(client_state == Network::NETWORK_MENU_OK);
+    ASSERT(client_state == WNet::NETWORK_MENU_OK);
     break;
 
-  case Network::NETWORK_LOADING_DATA:
+  case WNet::NETWORK_LOADING_DATA:
     a->GetCreator()->SetState(DistantComputer::STATE_READY);
-    ASSERT(client_state == Network::NETWORK_READY_TO_PLAY);
+    ASSERT(client_state == WNet::NETWORK_READY_TO_PLAY);
     break;
 
-  case Network::NETWORK_PLAYING:
+  case WNet::NETWORK_PLAYING:
     a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
-    ASSERT(client_state == Network::NETWORK_NEXT_GAME);
+    ASSERT(client_state == WNet::NETWORK_NEXT_GAME);
     break;
 
-  case Network::NETWORK_NEXT_GAME:
-    if (client_state == Network::NETWORK_MENU_OK) {
+  case WNet::NETWORK_NEXT_GAME:
+    if (client_state == WNet::NETWORK_MENU_OK) {
       a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
-    } else if (client_state == Network::NETWORK_NEXT_GAME) {
+    } else if (client_state == WNet::NETWORK_NEXT_GAME) {
       a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
     } else {
       ASSERT(false);
@@ -137,17 +137,17 @@ static void Action_Network_MasterChangeState (Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
-  Network::network_state_t server_state = (Network::network_state_t)a->PopInt();
+  WNet::net_game_state_t server_state = (WNet::net_game_state_t)a->PopInt();
 
   switch (Network::GetInstance()->GetState()) {
-  case Network::NETWORK_MENU_OK:
-    Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
-    ASSERT(server_state == Network::NETWORK_LOADING_DATA);
+  case WNet::NETWORK_MENU_OK:
+    Network::GetInstance()->SetState(WNet::NETWORK_LOADING_DATA);
+    ASSERT(server_state == WNet::NETWORK_LOADING_DATA);
     break;
 
-  case Network::NETWORK_READY_TO_PLAY:
-    Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
-    ASSERT(server_state == Network::NETWORK_PLAYING);
+  case WNet::NETWORK_READY_TO_PLAY:
+    Network::GetInstance()->SetState(WNet::NETWORK_PLAYING);
+    ASSERT(server_state == WNet::NETWORK_PLAYING);
     break;
 
   default:
@@ -449,10 +449,10 @@ static void Action_Game_Info(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
-  if (Network::GetInstance()->GetState() != Network::NO_NETWORK)
+  if (Network::GetInstance()->GetState() != WNet::NO_NETWORK)
     return;
 
-  Network::GetInstance()->SetState(Network::NETWORK_MENU_INIT);
+  Network::GetInstance()->SetState(WNet::NETWORK_MENU_INIT);
 
   _Action_SelectMap(a);
 
