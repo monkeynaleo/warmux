@@ -38,6 +38,7 @@ class NetworkGame
 private:
   std::string game_name;
   std::string password;
+  bool game_started;
   std::list<DistantComputer*> cpulist;
 
   void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
@@ -58,7 +59,7 @@ public:
 
   uint NextPlayerId() const;
   void ElectGameMaster();
-  void ForwardPacket(void * buffer, size_t len, const DistantComputer* sender);
+  void ForwardPacket(void * buffer, size_t len, DistantComputer* sender);
   void SendActionToAll(const Action& action) const;
   void SendActionToOne(const Action& action, DistantComputer* client) const;
   void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;

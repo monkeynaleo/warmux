@@ -97,6 +97,7 @@ static void Action_Network_ClientChangeState (Action *a)
   Network::network_state_t client_state = (Network::network_state_t)a->PopInt();
 
   switch (Network::GetInstance()->GetState()) {
+  case Network::NO_NETWORK:
   case Network::NETWORK_MENU_INIT:
     a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
     ASSERT(client_state == Network::NETWORK_MENU_OK);

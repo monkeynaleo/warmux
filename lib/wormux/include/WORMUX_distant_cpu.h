@@ -57,6 +57,7 @@ private:
 
 public:
   DistantComputer(WSocket* new_sock, const std::string& nickname, uint initial_player_id);
+  DistantComputer(WSocket* new_sock, const std::string& nickname, uint game_id, uint initial_player_id);
   ~DistantComputer();
 
   bool SocketReady() const;
@@ -75,7 +76,6 @@ public:
   void SetState(DistantComputer::state_t _state);
   DistantComputer::state_t GetState() const;
 
-  void SetGameId(uint _game_id);
   uint GetGameId() const;
 
   void ForceDisconnection();
