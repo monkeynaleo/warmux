@@ -18,10 +18,11 @@
  ******************************************************************************/
 
 #include <WORMUX_error.h>
+#include <WORMUX_action.h>
 #include <server.h>
 
 NetworkGame::NetworkGame(const std::string& _game_name, const std::string& _password) :
-  game_name(_game_name), password(_password)
+  game_name(_game_name), password(_password), game_started(false)
 {
 }
 
@@ -52,9 +53,7 @@ const std::list<DistantComputer*>& NetworkGame::GetCpus() const
 
 bool NetworkGame::AcceptNewComputers() const
 {
-  // TODO: replace by clever code...
-
-  if (cpulist.size() >= 2)
+  if (game_started || cpulist.size() >= 4)
     return false;
 
   return true;
@@ -148,7 +147,7 @@ void NetworkGame::SendAction(const Action& a, DistantComputer* client, bool clt_
   free(packet);
 }
 
-void NetworkGame::ForwardPacket(void * buffer, size_t len, const DistantComputer* sender)
+void NetworkGame::ForwardPacket(void * buffer, size_t len, DistantComputer* sender)
 {
   std::list<DistantComputer*>::iterator it;
 
@@ -156,6 +155,15 @@ void NetworkGame::ForwardPacket(void * buffer, size_t len, const DistantComputer
 
     if ((*it) != sender) {
       (*it)->SendData(buffer, len);
+    }
+  }
+
+  if (sender == cpulist.front()) {
+    Action a(reinterpret_cast<const char*>(buffer), sender);
+    if (a.GetType() == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
+      int net_state = a.PopInt();
+      if (net_state == 5) // 5 == Network::NETWORK_READY_TO_PLAY
+	game_started = true;
     }
   }
 }
@@ -293,7 +301,7 @@ void GameServer::WaitClients()
 
       clients_socket_set->AddSocket(incoming);
 
-      DistantComputer* client = new DistantComputer(incoming, client_nickname, player_id);
+      DistantComputer* client = new DistantComputer(incoming, client_nickname, game_id, player_id);
       GetGame(game_id).AddCpu(client);
 
       if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
