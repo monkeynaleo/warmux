@@ -46,6 +46,17 @@ class WSocket;
 
 class WNet
 {
+public:
+  typedef enum {
+    NO_NETWORK,
+    NETWORK_MENU_INIT,
+    NETWORK_MENU_OK,
+    NETWORK_LOADING_DATA,
+    NETWORK_READY_TO_PLAY,
+    NETWORK_PLAYING,
+    NETWORK_NEXT_GAME
+  } net_game_state_t;
+
 private:
   static bool sdlnet_initialized;
 

@@ -162,7 +162,7 @@ void NetworkGame::ForwardPacket(void * buffer, size_t len, DistantComputer* send
     Action a(reinterpret_cast<const char*>(buffer), sender);
     if (a.GetType() == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
       int net_state = a.PopInt();
-      if (net_state == 5) // 5 == Network::NETWORK_READY_TO_PLAY
+      if (net_state == WNet::NETWORK_READY_TO_PLAY)
 	game_started = true;
     }
   }

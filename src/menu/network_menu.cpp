@@ -199,7 +199,7 @@ void NetworkMenu::PrepareForNewGame()
   msg_box->Clear();
   b_ok->SetVisible(true);
 
-  Network::GetInstance()->SetState(Network::NETWORK_NEXT_GAME);
+  Network::GetInstance()->SetState(WNet::NETWORK_NEXT_GAME);
 
   if (!Network::GetInstance()->IsGameMaster()) {
     Network::GetInstance()->SendNetworkState();
@@ -398,7 +398,7 @@ void NetworkMenu::ReceiveMsgCallback(const std::string& msg)
 
 void NetworkMenu::WaitingForServer()
 {
-  Network::GetInstance()->SetState(Network::NETWORK_MENU_OK);
+  Network::GetInstance()->SetState(WNet::NETWORK_MENU_OK);
 
   // warn the server that we have validated the menu
   Network::GetInstance()->SendNetworkState();
@@ -451,6 +451,6 @@ void NetworkMenu::WaitingForServer()
 
     Menu::Display(mousePosition);
 
-  } while (Network::GetInstance()->GetState() == Network::NETWORK_MENU_OK &&
+  } while (Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK &&
            Network::GetInstance()->IsConnected());
 }

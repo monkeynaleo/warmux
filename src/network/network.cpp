@@ -129,7 +129,7 @@ Network::Network(const std::string& _game_name, const std::string& passwd) :
   password(passwd),
   turn_master_player(false),
   game_master_player(false),
-  state(NO_NETWORK),// useless value at beginning
+  state(WNet::NO_NETWORK),// useless value at beginning
   socket_set(NULL),
 #ifdef LOG_NETWORK
   fout(0),
@@ -169,7 +169,7 @@ void Network::ReceiveActions()
 
   while (NetworkThread::Continue()) // While the connection is up
   {
-    if (state == NETWORK_PLAYING && cpu.empty())
+    if (state == WNet::NETWORK_PLAYING && cpu.empty())
     {
       // If while playing everybody disconnected, just quit
       break;
@@ -442,12 +442,12 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
 
 //-----------------------------------------------------------------------------
 
-void Network::SetState(Network::network_state_t _state)
+void Network::SetState(WNet::net_game_state_t _state)
 {
   state = _state;
 }
 
-Network::network_state_t Network::GetState() const
+WNet::net_game_state_t Network::GetState() const
 {
   return state;
 }

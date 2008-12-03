@@ -57,7 +57,7 @@ void GameInit::InitGameData_NetGameMaster()
   GameMode::GetInstance()->Load();
   SendGameMode();
 
-  Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
+  Network::GetInstance()->SetState(WNet::NETWORK_LOADING_DATA);
   Network::GetInstance()->SendNetworkState();
 }
 
@@ -83,19 +83,19 @@ void GameInit::EndInitGameData_NetGameMaster()
     }
 
   // Let's play !
-  Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
+  Network::GetInstance()->SetState(WNet::NETWORK_PLAYING);
   Network::GetInstance()->SendNetworkState();
 }
 
 void GameInit::EndInitGameData_NetClient()
 {
   // Tells server that client is ready
-  Network::GetInstance()->SetState(Network::NETWORK_READY_TO_PLAY);
+  Network::GetInstance()->SetState(WNet::NETWORK_READY_TO_PLAY);
   Network::GetInstance()->SendNetworkState();
 
   // Waiting for other clients
   std::cout << Network::GetInstance()->GetState() << " : Waiting for people over the network" << std::endl;
-  while (Network::GetInstance()->GetState() == Network::NETWORK_READY_TO_PLAY
+  while (Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY
          && Network::IsConnected())
   {
     ActionHandler::GetInstance()->ExecActions();

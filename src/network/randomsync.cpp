@@ -56,8 +56,8 @@ uint RandomSyncGen::GetRand()
   MSG_DEBUG("random.get", "Get %04d: %u", nb_get, nbr);
 
   if (Network::IsConnected())
-    ASSERT(Network::GetInstance()->GetState() == Network::NETWORK_LOADING_DATA
-	   || Network::GetInstance()->GetState() == Network::NETWORK_PLAYING);
+    ASSERT(Network::GetInstance()->GetState() == WNet::NETWORK_LOADING_DATA
+	   || Network::GetInstance()->GetState() == WNet::NETWORK_PLAYING);
 #endif
   return nbr;
 }

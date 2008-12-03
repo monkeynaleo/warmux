@@ -69,18 +69,6 @@ public:
 
 class Network : public Singleton<Network>
 {
-public:
-  typedef enum
-    {
-      NO_NETWORK,
-      NETWORK_MENU_INIT,
-      NETWORK_MENU_OK,
-      NETWORK_LOADING_DATA,
-      NETWORK_READY_TO_PLAY,
-      NETWORK_PLAYING,
-      NETWORK_NEXT_GAME
-    } network_state_t;
-
 private:
   /* if you need that, implement it (correctly)*/
   Network(const Network&);
@@ -96,7 +84,7 @@ private:
 
 protected:
   bool game_master_player;
-  network_state_t state;
+  WNet::net_game_state_t state;
 
   Network(const std::string& game_name, const std::string& password); // pattern singleton
 
@@ -158,8 +146,8 @@ public:
   virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
 
   // Manage network state
-  void SetState(Network::network_state_t state);
-  Network::network_state_t GetState() const;
+  void SetState(WNet::net_game_state_t state);
+  WNet::net_game_state_t GetState() const;
   void SendNetworkState();
 
   void SetTurnMaster(bool master);
