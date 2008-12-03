@@ -785,6 +785,7 @@ msgid "Host a game"
 msgstr ""
 
 #: src/weapon/auto_bazooka.cpp:224
+msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
