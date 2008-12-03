@@ -39,7 +39,7 @@ Text::Text(const std::string &new_txt,
   shadowed = _shadowed;
   dummy = _dummy;
 
-  if( shadowed && !dummy ){
+  if (shadowed) {
     int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
     bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
     if (bg_offset < 1) bg_offset = 1;
@@ -295,9 +295,9 @@ int Text::GetHeight() const
 {
   Font* font = Font::GetInstance(font_size, font_style);
   if (txt=="" || dummy) {
-    return font->GetHeight();
+    return font->GetHeight() + bg_offset;
   }
-  return std::max(surf.GetHeight(), font->GetHeight());
+  return std::max(surf.GetHeight(), font->GetHeight()) + bg_offset;
 }
 
 void DrawTmpBoxText(Font& font, Point2i pos,
