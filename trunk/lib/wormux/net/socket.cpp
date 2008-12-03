@@ -26,6 +26,7 @@
 
 #include <iostream>
 #include <sys/types.h>
+#include <errno.h>
 
 //-----------------------------------------------------------------------------
 
@@ -33,8 +34,8 @@ static const int MAX_PACKET_SIZE = 250*1024;
 
 static void print_net_error(const std::string& text)
 {
-  perror(text.c_str());
-  fprintf(stderr, "%s: %s\n", text.c_str(), SDLNet_GetError());
+  int err = errno;
+  fprintf(stderr, "Error in %s: SYS: %s - SDL: %s\n", text.c_str(), strerror(err), SDLNet_GetError());
 }
 
 //-----------------------------------------------------------------------------
