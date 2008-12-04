@@ -25,88 +25,44 @@
 #include "weapon.h"
 #include "include/base.h"
 #include <list>
+#include <Box2D.h>
+#include "physic/physical_obj.h"
 //-----------------------------------------------------------------------------
-
 class GrappleConfig;
 
 class Grapple : public Weapon
 {
   private:
-    struct rope_node_t
-    {
-      Point2i pos;
-      double angle;
-      int sense;
-    };
 
-    uint last_mvt;
-    double last_broken_node_angle;
-    double last_broken_node_sense;
 
     // Rope launching data.
-    bool m_attaching;
-    double m_initial_angle;
-    uint m_launch_time;
-    uint m_hooked_time;
-    Sprite* m_hook_sprite;
+    //double m_initial_angle;
+    //uint m_launch_time;
+    //uint m_hooked_time;
+
     Sprite* m_node_sprite;
 
     SoundSample cable_sound;
 
   protected:
     void Refresh();
-    void p_Deselect() { DetachRope(); };
+    void p_Deselect() {/* DetachRope(); */};
     bool p_Shoot();
 
-    void GoUp();
-    void GoDown();
-    void GoLeft();
-    void GoRight();
-    void StopUp();
-    void StopDown();
-    void StopLeft();
-    void StopRight();
 
-    bool WillBeAttached();
-    bool TryAttachRope();
-    bool TryAddNode(int CurrentSense) ;
-    bool TryRemoveNodes(int CurrentSense) ;
 
   public:
-    enum {
-      ATTACH_ROPE,
-      ATTACH_NODE,
-      DETACH_NODE,
-      SET_ROPE_SIZE,
-      UPDATE_PLAYER_POSITION
-    } grapple_movement_t;
 
-    std::list<rope_node_t> rope_nodes;
-    Point2i m_fixation_point;
-    bool go_left, go_right;
-    double delta_len ;
+    GrappleConfig& cfg();
 
     Grapple();
     ~Grapple();
     void Draw();
-    virtual void NotifyMove(bool collision);
 
-    virtual void ActionStopUse() { DetachRope(); };
+    virtual void ActionStopUse() {/* DetachRope(); */};
     // force detaching rope if time is out
     virtual void SignalTurnEnd() { p_Deselect(); };
 
-    GrappleConfig& cfg();
-
-    // Attaching and dettaching nodes rope
-    // This is public because of network
-    void AttachRope(const Point2i& contact_point);
-    void DetachRope();
-
-    void AttachNode(const Point2i& contact_point,
-		    double angle,
-		    int sense);
-    void DetachNode();
-    void SetRopeSize(double length) const;
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
@@ -135,5 +91,38 @@ class Grapple : public Weapon
     void PrintDebugRope();
 };
 
+
+class Rope : public PhysicalObj
+{
+public:
+
+  void GoUp();
+  void GoDown();
+  void GoLeft();
+  void GoRight();
+  void StopUp();
+  void StopDown();
+  void StopLeft();
+  void StopRight();
+
+  bool IsAttached();
+  void DetachRope();
+
+  //if set to true, rope will attach on collision
+  void SetAttachMode(bool i_attache_mode);
+
+protected:
+  Point2i m_fixation_point;
+  bool go_left, go_right;
+  bool seek_attack_point;
+  bool is_attached;
+
+  Sprite* m_hook_sprite;
+
+  std::list<b2Body *> rope_nodes;
+  bool AttachRope();
+
+
+};
 //-----------------------------------------------------------------------------
 #endif /* GRAPPLE_H */
