@@ -699,8 +699,9 @@ static void Action_Weapon_Construction (Action *a)
   construct_weapon->SetAngle(a->PopDouble());
 }
 
-static void Action_Weapon_Grapple (Action *a)
+static void Action_Weapon_Grapple (Action */*a*/)
 {
+  /*
   Grapple* grapple = dynamic_cast<Grapple*>(&(ActiveTeam().AccessWeapon()));
   NET_ASSERT(grapple != NULL)
   {
@@ -736,6 +737,7 @@ static void Action_Weapon_Grapple (Action *a)
   default:
     ASSERT(false);
   }
+  */
 }
 
 // ########################################################
