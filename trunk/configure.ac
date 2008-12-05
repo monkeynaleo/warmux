@@ -274,7 +274,6 @@ for PNG in png png12 png13 dummypng; do
   fi
 done
 if test "$LIBPNG_LIB" = "dummypng"; then
-  echo "Got $LIBPNG_CFLAGS $LIBPNG_LIB"
   AC_MSG_ERROR([*** libpng not found])
 else
   AC_MSG_RESULT(lib$PNG)
