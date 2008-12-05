@@ -8,8 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-09-21 18:05+0100\n"
-"Last-Translator: pa <p@a.ch>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2008-12-05 14:40+0100\n"
+"Last-Translator: Martin Thoma <info@martin-thoma.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
@@ -359,7 +360,9 @@ msgstr[1] "Mannschaft %s hat %u Maschinenpistolen gewonnen!"
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "Mannschaft %s hat %u Selbstmord gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Selbstmorde gewonnen!"
+msgstr[1] ""
+"Mannschaft %s hat %u Selbstmorde gewonnen! Benutze sie alle für einen extra "
+"Bonus!"
 
 #: src/weapon/syringe.cpp:115
 #, c-format
@@ -405,12 +408,12 @@ msgstr "team %s wurde aufgerieben"
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s nahm ein Kämpfer des teams %s mit ins grab!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(tot)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(System Sprache)"
 
@@ -419,11 +422,11 @@ msgid "(unknown time)"
 msgstr "(unbekannte Zeit)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(unbegrenzt)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -432,7 +435,7 @@ msgstr ""
 "Die neue Version %s ist verfügbar. Die momentan verwendete Version ist %s. "
 "Überprüfe, ob für dein Betriebssystem bereits ein Update bereit steht."
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 #, fuzzy
 msgid "Add custom team"
 msgstr "Füge eigenes (modifiziertes) Team hinzu"
@@ -548,7 +551,6 @@ msgid "Change active character"
 msgstr "Wechsle aktiven Charakter"
 
 #: src/menu/help_menu.cpp:79
-#, fuzzy
 msgid "Change aim angle"
 msgstr "Ändere Zielwinkel"
 
@@ -560,7 +562,7 @@ msgstr "Wechsle Waffenkategorie"
 msgid "Change weapon countdown"
 msgstr "Ändere Waffencountdown"
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Charakter"
 
@@ -568,7 +570,7 @@ msgstr "Charakter"
 msgid "Character switching"
 msgstr "Wechsle Charakter"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Online nach neuen Versionen suchen?"
 
@@ -618,9 +620,8 @@ msgid "Connected !"
 msgstr "Verbunden !"
 
 #: src/network/admin_commands.cpp:64
-#, fuzzy
 msgid "Connected players: "
-msgstr "Verbunden !"
+msgstr "Verbundene Spieler"
 
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
@@ -648,7 +649,7 @@ msgstr "Abspann"
 msgid "Damage per turn during death mode"
 msgstr "Schaden pro Zug im Todes modus"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Lösche eigenes (modifiziertes) Team"
 
@@ -681,7 +682,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "ENDE DES SPIELS"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Lautstärke der Spezialeffekte"
 
@@ -842,7 +843,7 @@ msgid "Head commander"
 msgstr "Hauptkommandant"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Hauptkommandant:"
 
@@ -966,13 +967,13 @@ msgstr ""
 "Schliesst den Spielen mit Namen <nickname> aus dem Spiel aus (Spieler "
 "\"kicken\")"
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Sprache"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Zähle die verbundenen Spieler auf"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1032,7 +1033,7 @@ msgstr "Maximale FPS"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 #, fuzzy
 msgid "Misc"
 msgstr "Weitere Einstellungen"
@@ -1065,11 +1066,11 @@ msgstr "Bewege die Kamera mit Maus oder den Pfeilen"
 msgid "Move character"
 msgstr "Bewege Charakter"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Lautsärke der Musik"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Musik?"
 
@@ -1086,7 +1087,7 @@ msgstr "Nie"
 msgid "New network game at "
 msgstr "Neues Netzwerkspiel um "
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 #, fuzzy
 msgid "New player warning?"
 msgstr "Warnung bei neuem Spieler?"
@@ -1164,7 +1165,7 @@ msgstr "Spieler"
 msgid "Player energy?"
 msgstr "Spielerenergie?"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Spielername?"
 
@@ -1230,9 +1231,8 @@ msgid "Say: "
 msgstr "Sagen: "
 
 #: src/menu/options_menu.cpp:89
-#, fuzzy
 msgid "Scroll border size"
-msgstr "Am Rand scrollen"
+msgstr "Scrollempfindlichkeit"
 
 #: src/menu/options_menu.cpp:86
 msgid "Scroll on border"
@@ -1308,15 +1308,15 @@ msgstr ""
 "unterstützten Versionen sind %s. Sie können eine neue Version auf http://www."
 "wormux.org/wiki/download.php herunterlaten."
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Geräusche"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Soundeffekte?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Tonfrequenz"
 
@@ -1329,7 +1329,7 @@ msgstr "Geräusche"
 msgid "Starting a new game"
 msgstr "Starte ein neues Spiel"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Vorrat:"
 
@@ -1361,7 +1361,7 @@ msgstr "Mannschaftsstatistiken"
 msgid "Teams"
 msgstr "Manschaften"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Team editor"
 
@@ -1513,7 +1513,7 @@ msgstr "unbegrenzt"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Die Überprüfung der Version schlug fehl, da: %s\n"
@@ -1547,7 +1547,7 @@ msgstr "Webseite: "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Willkommen bei %s!"
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1593,7 +1593,7 @@ msgstr "Du bist alleine..."
 
 #: src/menu/network_menu.cpp:391
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Du bist der Sieger dieser Runde!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
