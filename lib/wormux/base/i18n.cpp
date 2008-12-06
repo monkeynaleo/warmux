@@ -29,6 +29,7 @@
 
 #ifdef USE_FRIBIDI
 #include <fribidi/fribidi.h>
+#include <cstring>
 
 #if defined(FRIBIDI_MINOR_VERSION) && FRIBIDI_MINOR_VERSION == 19
 /** Needed because fribidi2 doesn't export those symbols in the 0.19.1 release */
