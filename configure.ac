@@ -248,12 +248,12 @@ AC_ARG_ENABLE(fribidi, AC_HELP_STRING([--enable-fribidi], [enable bi-directional
 if test "${enable_fribidi}" = "yes"; then
    use_fribidi="true"
    AC_CHECK_LIB(fribidi, fribidi_log2vis,
-                [ LIBS="$LIBS `fribidi-config --libs`"
-                  CFLAGS="$CFLAGS `fribidi-config --cflags`"
+                [ LIBS="$LIBS `pkg-config --libs fribidi`"
+                  CFLAGS="$CFLAGS `pkg-config --cflags fribidi`"
                   AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
                 [ AC_MSG_WARN([unable to use FriBidi])
                   use_fribidi="false" ],
-                [ `fribidi-config --libs` ])
+                [ `pkg-config --libs fribidi` ])
    if ! ${use_fribidi}; then
      AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please install fribidi dev package.])
    fi
