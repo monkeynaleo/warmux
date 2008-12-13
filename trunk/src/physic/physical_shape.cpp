@@ -33,7 +33,7 @@ PhysicalShape::PhysicalShape() :
   m_body(NULL),
   m_shape(NULL),
   m_position(0,0),
-  m_mass(-1),
+  m_mass(1),
   m_friction(0.8f),
   m_name("")
 {
@@ -125,11 +125,13 @@ void PhysicalPolygon::Generate()
   m_shape = m_body->CreateShape(&shapeDef);
 
   b2MassData massData;
-  massData.mass = m_mass;
-  massData.center.SetZero();
-  massData.I = 0.0f;
+ // massData.mass = m_mass;
+ // massData.center.SetZero();
+ // massData.I = 1.0f;
+  m_shape->ComputeMass(&massData);
 
-  m_body->SetMass(&massData);
+
+  //m_body->SetMass(&massData);
 }
 
 void PhysicalPolygon::Clear()
@@ -369,7 +371,7 @@ void PhysicalCircle::Generate()
   b2MassData massData;
   massData.mass = m_mass;
   massData.center.SetZero();
-  massData.I = 0.0f;
+  massData.I = 1.0f;
 
   m_body->SetMass(&massData);
 }
