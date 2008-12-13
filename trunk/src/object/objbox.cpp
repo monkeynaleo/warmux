@@ -55,6 +55,7 @@ ObjBox::ObjBox(const std::string &name)
 
   parachute = true;
 
+  SetFixedRotation(false);
   m_energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
