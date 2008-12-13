@@ -201,6 +201,8 @@ public:
   void SetMass(double mass);
   double GetMass() const { return m_mass; }
 
+  void SetFixedRotation(bool i_fixed_rotation);
+
   void SetWindFactor (double wind_factor) { m_wind_factor = wind_factor; };
   double GetWindFactor () const { return m_wind_factor; }
 

@@ -93,10 +93,9 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_body_def->allowSleep = true;
   m_body_def->linearDamping = 0.0f;
   m_body_def->angularDamping = 0.01f;
-
   m_body_def->position.Set(0.0f, 4.0f);
 
-
+  m_body_def->fixedRotation = true;
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
@@ -117,6 +116,7 @@ void PhysicalObj::Activate()
 {
   if(!m_body){
 
+
     m_body = PhysicalEngine::GetInstance()->AddObject(this);
 
     SetSpeedXY(m_initial_speed);
@@ -129,17 +129,24 @@ void PhysicalObj::Generate()
   if(m_body){
     m_body->SetBullet(m_is_bullet);
 
-    b2MassData massData;
-    massData.mass = m_mass;
-    massData.center.SetZero();
-    massData.I = 0.0f;
-    m_body->SetMass(&massData);
 
     std::list<PhysicalShape*>::iterator it;
     for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
       (*it)->SetBody(m_body);
       (*it)->Generate();
     }
+
+    if(m_body_def->fixedRotation){
+        b2MassData massData;
+        massData.mass = m_mass;
+        massData.center.SetZero();
+        m_body->SetMass(&massData);
+
+    }else{
+      m_body->SetMassFromShapes();
+    }
+
+
   }
 }
 
@@ -1397,4 +1404,9 @@ PhysicalShape *PhysicalObj::GetShape(std::string name)
     }
   }
   return NULL;
+}
+
+void PhysicalObj::SetFixedRotation(bool i_fixed_rotation)
+{
+  m_body_def->fixedRotation = i_fixed_rotation;
 }
