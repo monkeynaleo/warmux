@@ -27,6 +27,7 @@
 #include <string>
 
 #include <Box2D.h>
+#include "tool/xml_document.h"
 
 extern const double PIXEL_PER_METER;
 #ifdef DEBUG
@@ -35,6 +36,15 @@ class Color;
 
 class PhysicalShape
 {
+protected:
+  b2FilterData m_filter;
+  b2Body *m_body;
+  b2Shape *m_shape;
+  Point2d m_position;
+  int m_mass;
+  double m_friction;
+  std::string m_name;
+
 public:
   PhysicalShape();
   virtual ~PhysicalShape();
@@ -65,25 +75,19 @@ public:
   virtual double GetInitialWidth() const = 0;
   virtual double GetInitialHeight() const = 0;
 
-
+  static PhysicalShape* LoadFromXml(const xmlNode* root_shape);
 
 #ifdef DEBUG
   virtual void DrawBorder(const Color &color) const = 0;
 #endif
-
-protected:
-  b2FilterData m_filter;
-  b2Body *m_body;
-  b2Shape *m_shape;
-  Point2d m_position;
-  int m_mass;
-  double m_friction;
-  std::string m_name;
 };
 
 
 class PhysicalPolygon : public PhysicalShape
 {
+protected:
+  std::vector<Point2d> m_point_list;
+
 public:
   PhysicalPolygon();
   void AddPoint(Point2d point);
@@ -102,23 +106,25 @@ public:
 #ifdef DEBUG
   void DrawBorder(const Color &color) const;
 #endif
-protected:
-  std::vector<Point2d> m_point_list;
 };
 
 class PhysicalRectangle : public PhysicalPolygon
 {
-public:
-  PhysicalRectangle( double width, double height);
-  virtual void Generate();
 protected:
   double m_width;
   double m_height;
+
+public:
+  PhysicalRectangle(double width, double height);
+  virtual void Generate();
 };
 
 
 class PhysicalCircle : public PhysicalShape
 {
+protected:
+  double m_radius;
+
 public:
   PhysicalCircle();
   void SetRadius(double radius);
@@ -136,8 +142,6 @@ public:
 #ifdef DEBUG
   void DrawBorder(const Color &color) const;
 #endif
-protected:
-  double m_radius;
 };
 
 

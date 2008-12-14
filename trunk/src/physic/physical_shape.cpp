@@ -19,9 +19,11 @@
  * Physical shape
  *****************************************************************************/
 
+#include <sstream>
 #include "include/base.h"
 #include "physic/physical_shape.h"
 #include "tool/math_tools.h"
+#include "tool/xml_document.h"
 
 #ifdef DEBUG
 #include "graphic/color.h"
@@ -89,6 +91,108 @@ const b2Shape *PhysicalShape::GetShape() const
 {
   return m_shape;
 }
+
+// Static method
+PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
+{
+  bool r;
+  const xmlNode* elem = NULL;
+  PhysicalShape * shape = NULL;
+  std::string shape_type;
+  std::string shape_name = "noname";
+
+  r = XmlReader::ReadStringAttr(root_shape, "type", shape_type);
+  if (!r) {
+    fprintf(stderr, "Fails to read shape type from XML file\n");
+    return NULL;
+  }
+
+  if (shape_type != "circle" && shape_type != "polygon") {
+    fprintf(stderr, "Invalid shape type -%s- from XML file\n", shape_type.c_str());
+    return NULL;
+  }
+
+  XmlReader::ReadStringAttr(root_shape, "name", shape_name);
+
+  elem = XmlReader::GetMarker(root_shape, "position");
+  if (!elem) {
+    fprintf(stderr, "Fails to read shape position from XML file\n");
+    return NULL;
+  }
+
+  uint pos_x, pos_y;
+  r = XmlReader::ReadUintAttr(elem, "x", pos_x);
+  if (r)
+    r = XmlReader::ReadUintAttr(elem, "y", pos_y);
+
+  if (!r) {
+    fprintf(stderr, "Fails to read shape position from XML file\n");
+    return NULL;
+  }
+
+  // =============== Circle
+
+  if (shape_type == "circle") {
+
+    uint radius;
+    r = XmlReader::ReadUint(root_shape, "radius", radius);
+    if (!r) {
+      fprintf(stderr, "Fails to read circle radius from XML file\n");
+      return NULL;
+    }
+
+    PhysicalCircle* circle = new PhysicalCircle();
+    circle->SetRadius(radius * PIXEL_PER_METER);
+    shape = circle;
+
+    // =============== Polygon
+  } else if (shape_type == "polygon") {
+
+    PhysicalPolygon* polygon = new PhysicalPolygon();
+
+    const xmlNode* point = XmlReader::GetMarker(elem, "point-0");
+    int i = 0;
+
+    while (point) {
+
+      if (i > 8) {
+	fprintf(stderr, "You cannot set more than 8 points for a polygon!\n");
+	delete polygon;
+	return NULL;
+      }
+      i++;
+
+      uint x, y;
+      r = XmlReader::ReadUintAttr(elem, "x", x);
+      if (r)
+	r = XmlReader::ReadUintAttr(elem, "y", y);
+
+      if (!r) {
+	fprintf(stderr, "Invalid point definition!\n");
+	delete polygon;
+	return NULL;
+      }
+
+
+      polygon->AddPoint(Point2d(x * PIXEL_PER_METER, y * PIXEL_PER_METER));
+
+
+      std::ostringstream point_section;
+      point_section << "point-" << i+1;
+
+      point = XmlReader::GetMarker(elem, point_section.str());
+    }
+
+    shape = polygon;
+  }
+
+  shape->SetName(shape_name);
+  shape->SetPosition(Point2d(pos_x * PIXEL_PER_METER, pos_y * PIXEL_PER_METER));
+
+  return shape;
+}
+
+
 /////////////////////////////////
 // PhysicalPolygon
 
