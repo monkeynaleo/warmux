@@ -71,18 +71,18 @@ class Body
 
   const Clothe* current_clothe;
   Movement* current_mvt;
+  uint current_loop;
+  uint current_frame;
 
   // When a movement/clothe is played once, those variables save the previous state
-  Movement* play_once_mvt_sauv;
-  const Clothe* play_once_clothe_sauv;
-  uint play_once_frame_sauv;
+  const Clothe* previous_clothe;
+  Movement* previous_mvt;
 
   // For weapon position handling
   Member* weapon_member;
   Point2i weapon_pos;
 
   uint last_refresh; // Time elapsed since last refresh
-  uint current_frame;
   int walk_events;
 
   double main_rotation_rad;

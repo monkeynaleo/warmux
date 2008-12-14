@@ -44,13 +44,13 @@ Body::Body(const xmlNode* xml, const Profile* res):
   mvt_lst(),
   current_clothe(NULL),
   current_mvt(NULL),
-  play_once_mvt_sauv(NULL),
-  play_once_clothe_sauv(NULL),
-  play_once_frame_sauv(0),
+  current_loop(0),
+  current_frame(0),
+  previous_clothe(NULL),
+  previous_mvt(NULL),
   weapon_member(new WeaponMember()),
   weapon_pos(0,0),
   last_refresh(0),
-  current_frame(0),
   walk_events(0),
   main_rotation_rad(0),
   skel_lst(),
@@ -145,13 +145,13 @@ Body::Body(const Body& _body):
   mvt_lst(),
   current_clothe(NULL),
   current_mvt(NULL),
-  play_once_mvt_sauv(NULL),
-  play_once_clothe_sauv(NULL),
-  play_once_frame_sauv(0),
+  current_loop(0),
+  current_frame(0),
+  previous_clothe(NULL),
+  previous_mvt(NULL),
   weapon_member(new WeaponMember()),
   weapon_pos(0,0),
   last_refresh(0),
-  current_frame(0),
   walk_events(0),
   main_rotation_rad(0),
   skel_lst(),
@@ -181,7 +181,7 @@ Body::Body(const Body& _body):
 
   // Make a copy of clothes
   std::map<std::string, Clothe*>::const_iterator it2 = _body.clothes_lst.begin();
-  while(it2 != _body.clothes_lst.end())
+  while (it2 != _body.clothes_lst.end())
   {
     std::pair<std::string,Clothe*> p;
     p.first = it2->first;
@@ -190,9 +190,9 @@ Body::Body(const Body& _body):
     it2++;
   }
 
-  // Movement are shared
+  // Movements are shared
   std::map<std::string, Movement*>::const_iterator it3 = _body.mvt_lst.begin();
-  while(it3 != _body.mvt_lst.end())
+  while (it3 != _body.mvt_lst.end())
   {
     std::pair<std::string,Movement*> p;
     p.first = it3->first;
@@ -356,7 +356,7 @@ void Body::ApplySqueleton()
   member->member->SetAngle(0.0);
   member++;
 
-  for(;member != skel_lst.end();
+  for (;member != skel_lst.end();
        member++)
   {
     // Place the other members depending on the parent member:
@@ -368,37 +368,37 @@ void Body::Build()
 {
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
+  unsigned int last_loop = current_loop;
 
-  if (walk_events > 0 || current_mvt->GetType() != "walk")
-    {
-      if(Time::GetInstance()->Read() > last_refresh + current_mvt->GetSpeed())
-	{
-	  // Compute the new frame number
-	  current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed();
-	  last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed()) * current_mvt->GetSpeed();
+  if (walk_events > 0 || current_mvt->GetType() != "walk") {
 
-	  // Depending on playmode loop if we have exceeded the nbr of frames of this movement
-	  if(current_frame >= current_mvt->GetFrames().size())
-	    {
-	      if(current_mvt->play_mode == Movement::LOOP)
-		{
-		  current_frame %= current_mvt->GetFrames().size();
-		}
-	      else if(current_mvt->play_mode == Movement::PLAY_ONCE)
-		{
-		  current_frame = current_mvt->GetFrames().size() - 1;
-		  if (play_once_clothe_sauv)
-		    SetClothe(play_once_clothe_sauv->GetName());
-		  if (play_once_mvt_sauv)
-		    {
-		      SetMovement(play_once_mvt_sauv->GetType());
-		      current_frame = play_once_frame_sauv;
-		    }
-		}
-	    }
+    if (Time::GetInstance()->Read() > last_refresh + current_mvt->GetSpeed()) {
+
+      // Compute the new frame number
+      current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed();
+      last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed()) * current_mvt->GetSpeed();
+
+      // This is the end of the animation
+      if (current_frame >= current_mvt->GetFrames().size()) {
+
+	current_frame = 0;
+	current_loop++;
+
+	// Number of loops
+	if (current_mvt->GetRepeatNb() != -1
+	    && int(current_loop) > current_mvt->GetRepeatNb()) {
+
+	  current_loop = 0;
+	  if (previous_clothe)
+	    SetClothe(previous_clothe->GetName());
+	  if (previous_mvt)
+	    SetMovement(previous_mvt->GetType());
 	}
+      }
     }
+  }
   need_rebuild |= (last_frame != current_frame);
+  need_rebuild |= (last_loop != current_loop);
   need_rebuild |= current_mvt->IsAlwaysMoving();
 
   if (!need_rebuild)
@@ -546,7 +546,7 @@ void Body::SetClothe(const std::string& name)
     BuildSqueleton();
     main_rotation_rad = 0;
     need_rebuild = true;
-    play_once_clothe_sauv = NULL;
+    previous_clothe = NULL;
   }
   else
     MSG_DEBUG("body", "Clothe not found");
@@ -566,10 +566,11 @@ void Body::SetMovement(const std::string& name)
   {
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
+    current_loop = 0;
     last_refresh = Time::GetInstance()->Read();
     main_rotation_rad = 0;
     need_rebuild = true;
-    play_once_mvt_sauv = NULL;
+    previous_mvt = NULL;
   }
   else
     MSG_DEBUG("body", "Movement not found");
@@ -592,8 +593,8 @@ void Body::SetClotheOnce(const std::string& name)
 
   if (clothes_lst.find(name) != clothes_lst.end())
   {
-    if (!play_once_clothe_sauv)
-      play_once_clothe_sauv = current_clothe;
+    if (!previous_clothe)
+      previous_clothe = current_clothe;
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
     main_rotation_rad = 0;
@@ -615,14 +616,14 @@ void Body::SetMovementOnce(const std::string& name)
 
   if (mvt_lst.find(name) != mvt_lst.end())
   {
-    if (!play_once_mvt_sauv)
+    if (!previous_mvt)
     {
-      play_once_mvt_sauv = current_mvt;
-      play_once_frame_sauv = current_frame;
+      previous_mvt = current_mvt;
     }
 
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
+    current_loop = 0;
     last_refresh = Time::GetInstance()->Read();
     main_rotation_rad = 0;
     need_rebuild = true;
@@ -739,8 +740,7 @@ void Body::DebugState() const
   MSG_DEBUG("body.state", "clothe: %s\tmovement: %s\t%i", current_clothe->GetName().c_str(),
 	    current_mvt->GetType().c_str(), current_frame);
   MSG_DEBUG("body.state", "(played once)clothe: %s\tmovement: %s",
-            (play_once_clothe_sauv?play_once_clothe_sauv->GetName().c_str():"(NULL)"),
-            (play_once_mvt_sauv?play_once_mvt_sauv->GetType().c_str():"(NULL)"),
-            play_once_frame_sauv);
+            (previous_clothe?previous_clothe->GetName().c_str():"(NULL)"),
+            (previous_mvt?previous_mvt->GetType().c_str():"(NULL)"));
   MSG_DEBUG("body.state", "need rebuild = %i",need_rebuild);
 }

@@ -75,15 +75,9 @@ private:
   uint speed;
   bool always_moving;
   uint test_left, test_right, test_top, test_bottom;
+  int repeat; // -1 means forever
 
 public:
-  enum
-  {
-    LOOP,
-    PLAY_ONCE
-  } play_mode;
-
-
   Movement(const xmlNode* xml);
   ~Movement();
 
@@ -91,6 +85,7 @@ public:
   const std::string& GetType() const;
 
   uint GetSpeed() const;
+  int GetRepeatNb() const;
 
   bool IsAlwaysMoving() const;
 
