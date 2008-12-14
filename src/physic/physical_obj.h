@@ -34,7 +34,7 @@
 #include <Box2D.h>
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
-#include "object/object_cfg.h"
+#include "physic/object_cfg.h"
 
 // Alive state
 typedef enum

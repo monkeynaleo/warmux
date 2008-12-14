@@ -251,8 +251,6 @@ POTFILES = \
         src/object/medkit.h \
         src/object/objbox.cpp \
         src/object/objbox.h \
-        src/object/object_cfg.cpp \
-        src/object/object_cfg.h \
         src/object/objects_list.cpp \
         src/object/objects_list.h \
         src/particles/body_member.cpp \
@@ -287,6 +285,8 @@ POTFILES = \
         src/particles/water_drop.h \
         src/physic/force.cpp \
         src/physic/force.h \
+        src/physic/object_cfg.cpp \
+        src/physic/object_cfg.h \
         src/physic/physical_engine.cpp \
         src/physic/physical_engine.h \
         src/physic/physical_obj.cpp \

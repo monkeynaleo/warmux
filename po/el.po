@@ -258,7 +258,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Η ομάδα %s κέρδισε %u εκρηκτική μπάλα!"
 msgstr[1] "Η ομάδα %s κέρδισε %u εκρηκτικές μπάλες!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -407,12 +407,12 @@ msgstr "Η ομάδα %s αποδεκατίστηκε."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "Ο %s πήρε ένα μέλος της ομάδας %s μαζί του στον τάφο!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(πεθαμένος)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(γλώσσα συστήματος)"
 
@@ -421,11 +421,11 @@ msgid "(unknown time)"
 msgstr "(άγνωστο χρόνο)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(απεριόριστο)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -434,7 +434,7 @@ msgstr ""
 "Μία νέα έκδοση %s είναι διαθέσιμη, ενώ η δική σας έκδοση είναι %s. Μπορεί να "
 "θέλετε να ελέγξετε εάν είναι διαθέσιμη για το λειτουργικό σας σύστημα! "
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Πρόσθεσε προσωπική ομάδα."
 
@@ -560,7 +560,7 @@ msgstr "Αλλαγή κατηγορίας όπλου"
 msgid "Change weapon countdown"
 msgstr "Αλλαγή αντίστροφης μέτρησης όπλου"
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Χαρακτήρας"
 
@@ -568,7 +568,7 @@ msgstr "Χαρακτήρας"
 msgid "Character switching"
 msgstr "Εναλλαγή χαρακτήρα"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Έλεγχος ενημερώσεων στο διαδίκτυο;"
 
@@ -651,7 +651,7 @@ msgstr "Απόδοση Τιμών"
 msgid "Damage per turn during death mode"
 msgstr "Τραυματισμός ανά γύρο κατά την διάρκεια της κατάστασης θανάτου"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Διάγραψε προσωπική ομάδα."
 
@@ -685,7 +685,7 @@ msgid "END OF GAME"
 msgstr "ΤΕΛΟΣ ΠΑΙΧΝΙΔΙΟΥ"
 
 # Volume effets sonores
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Ένταση ηχητικών εφέ"
 
@@ -693,7 +693,7 @@ msgstr "Ένταση ηχητικών εφέ"
 msgid "Energy"
 msgstr "Ενέργεια"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Λάθος αρχικοποίησης δικτύου: Ο πελάτης %s δεν συμφωνεί μαζί σου!! - %s"
@@ -816,7 +816,7 @@ msgstr "Εκτόξευση Gnu"
 msgid "Graphic"
 msgstr "Γραφικά"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Γάντζος"
 
@@ -850,7 +850,7 @@ msgid "Head commander"
 msgstr "Διοικητής"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Διοικητής: "
 
@@ -976,7 +976,7 @@ msgstr "Άλμα προς τα πίσω"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Διώχνει τους παίκτες με το όνομα <ψευδώνυμο> εκτός παιχνιδιού"
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Γλώσσα"
 
@@ -1042,7 +1042,7 @@ msgstr "Μέγιστο πλήθος εικόνων/δευτ."
 msgid "Mine"
 msgstr "Νάρκη"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Διάφορα"
 
@@ -1074,11 +1074,11 @@ msgstr "Μετακίνησε την κάμερα με το ποντίκι ή μ�
 msgid "Move character"
 msgstr "Μετακίνησε χαρακτήρα"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Ένταση μουσικής"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Μουσική;"
 
@@ -1095,7 +1095,7 @@ msgstr "Ποτέ"
 msgid "New network game at "
 msgstr "Νέο δικτυακό παιχνίδι σε "
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Προειδοποίηση νέου παίκτη;"
 
@@ -1171,7 +1171,7 @@ msgstr "Παίκτης"
 msgid "Player energy?"
 msgstr "Ενέργεια παικτών;"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Όνομα παίκτη"
 
@@ -1318,15 +1318,15 @@ msgstr ""
 "είναι οι %s. Μπορείτε να κατεβάσετε μία ενημερωμένη έκδοση στο  http://www."
 "wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Ήχος"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Ηχητικά εφέ;"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Συχνότητα ήχου"
 
@@ -1339,7 +1339,7 @@ msgstr "Ηχητικές επιλογές"
 msgid "Starting a new game"
 msgstr "Έναρξη νέου παιχνιδιού"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Απόθεμα:"
 
@@ -1371,7 +1371,7 @@ msgstr "Στατιστικά ομάδας"
 msgid "Teams"
 msgstr "Ομάδες"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Επεξεργαστής ομάδων"
 
@@ -1528,7 +1528,7 @@ msgstr "Απεριόριστο"
 msgid "Version"
 msgstr "Έκδοση"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Επαλήθευση έκδοσης απέτυχε διότι: %s\n"
@@ -1588,15 +1588,15 @@ msgstr "Έναρξη του Wormux..."
 msgid "Wormux version "
 msgstr "Έκδοση του Wormux"
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Λάθος χάρτης CRC!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Λάθος όνομα χάρτη!"
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Λάθος ομάδα!"
 

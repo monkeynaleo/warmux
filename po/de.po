@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2008-12-05 14:40+0100\n"
 "Last-Translator: Martin Thoma <info@martin-thoma.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -255,7 +254,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Mannschaft %s hat %u Lärmbombe gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Lärmbomben gewonnen!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -690,7 +689,7 @@ msgstr "Lautstärke der Spezialeffekte"
 msgid "Energy"
 msgstr "Energie"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -808,7 +807,7 @@ msgstr "Gnu-Werfer"
 msgid "Graphic"
 msgstr "Grafik"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Enterhaken"
 
@@ -1571,15 +1570,15 @@ msgstr "Wormux startet..."
 msgid "Wormux version "
 msgstr "Wormux Version "
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Die Karte hat einen fallschen CRC (Prüfsumme)!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Falscher Kartenname!"
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Falsches Team!"
 
