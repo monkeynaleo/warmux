@@ -248,7 +248,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Lag %s har belönats med %u amerikansk fotbollsbomb!"
 msgstr[1] "Lag %s har belönats med %u amerikanska fotbollsbomber!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -393,12 +393,12 @@ msgstr "Lag %s har blivit utplånat."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tog en medlem från lag %s med sig ner i graven!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(död)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(systemets språk)"
 
@@ -407,11 +407,11 @@ msgid "(unknown time)"
 msgstr "(okänd tid)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(obegränsat)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -420,7 +420,7 @@ msgstr ""
 "En ny version %s är tillgänglig, medan din version är %s. Du kanske vill "
 "kolla om det finns en uppdatering tillgänglig för ditt operativsystem!"
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Lägg till eget lag"
 
@@ -544,7 +544,7 @@ msgstr "Ändra vapenkategori"
 msgid "Change weapon countdown"
 msgstr "Ändra nedräkningstid för vapen"
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Lagmedlem"
 
@@ -552,7 +552,7 @@ msgstr "Lagmedlem"
 msgid "Character switching"
 msgstr "Växla mellan lagmedlemmar"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Leta uppdateringar online?"
 
@@ -632,7 +632,7 @@ msgstr "Tack till"
 msgid "Damage per turn during death mode"
 msgstr "Sudden Death rondskada"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Radera eget lag"
 
@@ -665,7 +665,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "SPELET ÄR ÖVER"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Ljudeffektvolym"
 
@@ -673,7 +673,7 @@ msgstr "Ljudeffektvolym"
 msgid "Energy"
 msgstr "Energi"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -789,7 +789,7 @@ msgstr "Gnu"
 msgid "Graphic"
 msgstr "Grafik"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Ninjarep"
 
@@ -823,7 +823,7 @@ msgid "Head commander"
 msgstr "Ledare"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Befälhavare: "
 
@@ -947,7 +947,7 @@ msgstr "Baklängeshopp"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Slänger ut spelaren med namnet <nickname> ur spelet"
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Språk"
 
@@ -1013,7 +1013,7 @@ msgstr "Max bilder/s"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Diverse"
 
@@ -1045,11 +1045,11 @@ msgstr "Flytta bilden med mus eller piltangenterna"
 msgid "Move character"
 msgstr "Flytta lagmedlem"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Musikvolym"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Musik?"
 
@@ -1066,7 +1066,7 @@ msgstr "Aldrig"
 msgid "New network game at "
 msgstr "Nytt nätverksspel "
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Signal vid ny spelare?"
 
@@ -1142,7 +1142,7 @@ msgstr "Spelare"
 msgid "Player energy?"
 msgstr "Spelarens energi?"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Spelarens namn"
 
@@ -1282,15 +1282,15 @@ msgstr ""
 "Din version stöds tyvärr inte längre. Version som stöds är %s. Du kan ladda "
 "hem en uppdaterad version på http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Ljud"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Ljudeffekter?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Ljudfrekvens"
 
@@ -1303,7 +1303,7 @@ msgstr "Ljud"
 msgid "Starting a new game"
 msgstr "Startar ett nytt spel"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Antal:"
 
@@ -1335,7 +1335,7 @@ msgstr "Lagstatistik"
 msgid "Teams"
 msgstr "Lag"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Lageditor"
 
@@ -1483,7 +1483,7 @@ msgstr "Obegränsat"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Versionsverifikationen misslyckades pga: %s\n"
@@ -1541,15 +1541,15 @@ msgstr "Wormux startar..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Felaktig CRC-kontrollsumma för bana!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Fel bannamn!"
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Fel lag!"
 

@@ -126,7 +126,6 @@ wormux_SOURCES = \
         object/bonus_box.cpp object/bonus_box.h \
         object/medkit.cpp  object/medkit.h \
         object/objbox.cpp object/objbox.h \
-        object/object_cfg.cpp object/object_cfg.h \
         object/objects_list.cpp object/objects_list.h \
         particles/body_member.cpp particles/body_member.h \
         particles/bullet.cpp particles/bullet.h \
@@ -144,6 +143,7 @@ wormux_SOURCES = \
         particles/teleport_member.cpp particles/teleport_member.h \
         particles/water_drop.cpp particles/water_drop.h \
         physic/force.cpp physic/force.h \
+        physic/object_cfg.cpp physic/object_cfg.h \
 	physic/physical_engine.cpp physic/physical_engine.h \
         physic/physical_obj.cpp physic/physical_obj.h \
         physic/physical_shape.cpp physic/physical_shape.h \

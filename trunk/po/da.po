@@ -248,7 +248,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Holdet %s har fået %u fodboldbombe!"
 msgstr[1] "Holdet %s har fået %u fodboldbomber!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -389,12 +389,12 @@ msgstr "Holdet %s blev udryddet."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tog et medlem af holdet %s med i graven!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(død)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(systemsprog)"
 
@@ -403,11 +403,11 @@ msgid "(unknown time)"
 msgstr "(ukendt tid)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -416,7 +416,7 @@ msgstr ""
 "En ny version (%s) er tilgængelig. Din nuværende version er %s. Du kan "
 "chekke om der er en ny version tilgængelig for dit operativsystem."
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Tilføj brugerdefineret hold"
 
@@ -540,7 +540,7 @@ msgstr "Ændr våbenkatalog"
 msgid "Change weapon countdown"
 msgstr "Ændr våbennedtælling"
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Kriger"
 
@@ -548,7 +548,7 @@ msgstr "Kriger"
 msgid "Character switching"
 msgstr "Skift kriger"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Check for opdateringer på nettet?"
 
@@ -628,7 +628,7 @@ msgstr "Udviklere"
 msgid "Damage per turn during death mode"
 msgstr "Skade per tur under dødsmodus"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Slet brugerdefineret hold"
 
@@ -661,7 +661,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "SLUT PÅ SPILLET"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Lydeffekt volume"
 
@@ -669,7 +669,7 @@ msgstr "Lydeffekt volume"
 msgid "Energy"
 msgstr "Energi"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -784,7 +784,7 @@ msgstr "Gnukaster"
 msgid "Graphic"
 msgstr "Grafik"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Klo"
 
@@ -818,7 +818,7 @@ msgid "Head commander"
 msgstr "Hovedkommandør"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Hovedkommandør: "
 
@@ -940,7 +940,7 @@ msgstr "Hop baglæns"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Fjerner spilleren under navnet <nickname> fra spillet"
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Sprog"
 
@@ -1006,7 +1006,7 @@ msgstr "Maksimum FPS"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Andet"
 
@@ -1038,11 +1038,11 @@ msgstr "Flyt kameraet med mus eller piletaster"
 msgid "Move character"
 msgstr "Flyt kriger"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Musik volume"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Musik?"
 
@@ -1059,7 +1059,7 @@ msgstr "Aldrig"
 msgid "New network game at "
 msgstr "Nyt netværksspil på"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Ny spiller notifikation?"
 
@@ -1135,7 +1135,7 @@ msgstr "Spiller"
 msgid "Player energy?"
 msgstr "Vis krigernes energi?"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Spillernavn"
 
@@ -1276,15 +1276,15 @@ msgstr ""
 "version er %s. Du kan downloade en opdateret version af Wormux på http://www."
 "wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Lyd"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Lydeffekter?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Lydfrekvens"
 
@@ -1297,7 +1297,7 @@ msgstr "Lyde"
 msgid "Starting a new game"
 msgstr "Starter et nyt spil"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Lager:"
 
@@ -1329,7 +1329,7 @@ msgstr "Hold-statistik"
 msgid "Teams"
 msgstr "Hold"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Holdeditor"
 
@@ -1473,7 +1473,7 @@ msgstr "Ubegrænset"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Version-verifikation fejlede fordi: %s\n"
@@ -1532,15 +1532,15 @@ msgstr "Wormux starter..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Banen har en ugyldig CRC-checksum!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Ugyldigt banenavn!"
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Ugyldigt hold!"
 

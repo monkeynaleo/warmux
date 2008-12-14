@@ -252,7 +252,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "O equipo %s gañou %u bomba de rugbi!"
 msgstr[1] "O equipo %s gañou %u bombas de rugbi!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -400,12 +400,12 @@ msgstr "O equipo %s foi derrotado."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s levouse consigo a un membro do equipo %s á outra vida!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(morto)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(lingua do sistema)"
 
@@ -414,11 +414,11 @@ msgid "(unknown time)"
 msgstr "(tempo descoñecido)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(ilimitada)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -427,7 +427,7 @@ msgstr ""
 "Está dispoñible a versión %s, mentres que a súa é a %s. Ao mellor "
 "interésalle ver se hai dispoñible unha actualización para o seu SO!"
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Engadir equipo personalizado"
 
@@ -551,7 +551,7 @@ msgstr "Cambiar a categoría da arma"
 msgid "Change weapon countdown"
 msgstr "Cambiar a conta atrás da arma"
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Personaxe"
 
@@ -559,7 +559,7 @@ msgstr "Personaxe"
 msgid "Character switching"
 msgstr "Cambio de personaxe"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Buscar actualizacións en liña?"
 
@@ -639,7 +639,7 @@ msgstr "Créditos"
 msgid "Damage per turn during death mode"
 msgstr "Daño por turno durante o modo morte"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Eliminar o equipo actual"
 
@@ -672,7 +672,7 @@ msgstr "Dinamita"
 msgid "END OF GAME"
 msgstr "FIN DA PARTIDA"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Volume dos efectos"
 
@@ -680,7 +680,7 @@ msgstr "Volume dos efectos"
 msgid "Energy"
 msgstr "Enerxía"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -800,7 +800,7 @@ msgstr "GÑU"
 msgid "Graphic"
 msgstr "Gráficos"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Gancho"
 
@@ -834,7 +834,7 @@ msgid "Head commander"
 msgstr "Capitán"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Capitán: "
 
@@ -956,7 +956,7 @@ msgstr "Saltar cara atrás"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Bota fóra da partida aos xogadores nomeados <nickname>"
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Lingua"
 
@@ -1022,7 +1022,7 @@ msgstr "FPS máximos"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Varios"
 
@@ -1054,11 +1054,11 @@ msgstr "Move a cámara co rato ou as frechas"
 msgid "Move character"
 msgstr "Mover a personaxe"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Volume da música"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Música?"
 
@@ -1075,7 +1075,7 @@ msgstr "Nunca"
 msgid "New network game at "
 msgstr "Novo xogo en rede en "
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Nova advertencia do xogador?"
 
@@ -1151,7 +1151,7 @@ msgstr "Xogador"
 msgid "Player energy?"
 msgstr "Enerxía de xogador?"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Nome do xogador"
 
@@ -1293,15 +1293,15 @@ msgstr ""
 "soporte é a %s. Podes baixar unha versión actualizada na sección de "
 "descargas de http://www.wormux.org"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Son"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Efectos de son?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Frecuencia de son?"
 
@@ -1314,7 +1314,7 @@ msgstr "Sons"
 msgid "Starting a new game"
 msgstr "A iniciar unha nova partida"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Munición:"
 
@@ -1346,7 +1346,7 @@ msgstr "Estatísticas do equipo"
 msgid "Teams"
 msgstr "Equipos"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Editor de equipos"
 
@@ -1493,7 +1493,7 @@ msgstr "Ilimitada"
 msgid "Version"
 msgstr "Versión"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "A verificación da versión fallou porque: %s\n"
@@ -1553,15 +1553,15 @@ msgstr "A arrincar o Wormux..."
 msgid "Wormux version "
 msgstr "Versión do Wormux "
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "CRC de mapa incorrecto!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Nome do mapa incorrecto!"
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Equipo incorrecto!"
 

@@ -250,7 +250,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Отборът %s спечели %u Футбол-бомба!"
 msgstr[1] "Отборът %s спечели %u Футбол-бомби!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -392,12 +392,12 @@ msgstr "Всички от отбора %s са убити."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s завлече с него в гроба войник от %s!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(мъртъв)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(системен език)"
 
@@ -406,11 +406,11 @@ msgid "(unknown time)"
 msgstr "(незнайно време)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(безкраен)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -419,7 +419,7 @@ msgstr ""
 "Новата версия %s е достъпна, докато твоята версия %s. Може да провериш дали "
 "има и ъпдейт за твоята ОС!"
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Добави личен отбор"
 
@@ -543,7 +543,7 @@ msgstr "Смени категорията на оъжието"
 msgid "Change weapon countdown"
 msgstr "Смени времето на обратно броене на оръжието"
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Войник"
 
@@ -551,7 +551,7 @@ msgstr "Войник"
 msgid "Character switching"
 msgstr "Избери друг войник"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Да проверявам за нови версии онлайн?"
 
@@ -631,7 +631,7 @@ msgstr "Благодарности на"
 msgid "Damage per turn during death mode"
 msgstr "Вреди на ход до смъртта"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Изтрий личният отбор"
 
@@ -664,7 +664,7 @@ msgstr "Шашка динамит"
 msgid "END OF GAME"
 msgstr "КРАЙ НА ИГРАТА"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Сила на звуковите ефекти"
 
@@ -672,7 +672,7 @@ msgstr "Сила на звуковите ефекти"
 msgid "Energy"
 msgstr "Здраве:"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -787,7 +787,7 @@ msgstr "Антилопохвъргачка"
 msgid "Graphic"
 msgstr "Графика"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Кука"
 
@@ -821,7 +821,7 @@ msgid "Head commander"
 msgstr "Главен Командир"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Главен Командир:"
 
@@ -943,7 +943,7 @@ msgstr "Задно салто"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Kick-ва играчите избрани от <nickname> от играта."
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Език"
 
@@ -1009,7 +1009,7 @@ msgstr "Максимални FPS"
 msgid "Mine"
 msgstr "Противопехотна мина"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Разни"
 
@@ -1041,11 +1041,11 @@ msgstr "Движи камерата с мишката или стрелкичк�
 msgid "Move character"
 msgstr "Премести войник"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Сила на звука"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Музика?"
 
@@ -1062,7 +1062,7 @@ msgstr "Никога"
 msgid "New network game at "
 msgstr "Нова Мрежова игра в"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Предупреждение за нов играч?"
 
@@ -1138,7 +1138,7 @@ msgstr "Играч"
 msgid "Player energy?"
 msgstr "Здраве?"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Име на играча"
 
@@ -1278,15 +1278,15 @@ msgstr ""
 "Съжалявам, но твоята версия не е поддържана. Поддържаните версии са %s. Ти "
 "може да дръпнеш по-нова версия от  http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Звук"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Звукови ефекти?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Честота на семплиране"
 
@@ -1299,7 +1299,7 @@ msgstr "Звуци"
 msgid "Starting a new game"
 msgstr "Стартирам нова игра"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Наличност:"
 
@@ -1331,7 +1331,7 @@ msgstr "Статистика на Отбора"
 msgid "Teams"
 msgstr "Отбори"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Редактор на отборите"
 
@@ -1475,7 +1475,7 @@ msgstr "Безкраен"
 msgid "Version"
 msgstr "версия"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Проверка на версията се провали заради: %s\n"
@@ -1535,15 +1535,15 @@ msgstr "Wormux се зарежда..."
 msgid "Wormux version "
 msgstr "Версия на Wormux"
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Грешка при CRC на картата!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Грешно име на картата."
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Грешен отбор."
 

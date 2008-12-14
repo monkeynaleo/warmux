@@ -223,7 +223,7 @@ msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -342,12 +342,12 @@ msgstr ""
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(ölü)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr ""
 
@@ -356,18 +356,18 @@ msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr ""
 
@@ -491,7 +491,7 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character"
 msgstr "Paraşüt"
@@ -501,7 +501,7 @@ msgstr "Paraşüt"
 msgid "Character switching"
 msgstr "Paraşüt"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr ""
 
@@ -582,7 +582,7 @@ msgstr "Hazırlayanlar"
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr ""
 
@@ -615,7 +615,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr ""
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr ""
 
@@ -623,7 +623,7 @@ msgstr ""
 msgid "Energy"
 msgstr ""
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -734,7 +734,7 @@ msgstr "Gnu Mancınığı"
 msgid "Graphic"
 msgstr ""
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr ""
 
@@ -768,7 +768,7 @@ msgid "Head commander"
 msgstr ""
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr ""
 
@@ -878,7 +878,7 @@ msgstr ""
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr ""
 
@@ -946,7 +946,7 @@ msgstr "En fazla FPS"
 msgid "Mine"
 msgstr "Mayın"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 #, fuzzy
 msgid "Misc"
 msgstr "Müzik?"
@@ -980,11 +980,11 @@ msgstr ""
 msgid "Move character"
 msgstr "Paraşüt"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Müzik?"
 
@@ -1002,7 +1002,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "Ağ Oyunu"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr ""
 
@@ -1079,7 +1079,7 @@ msgstr "Oyna"
 msgid "Player energy?"
 msgstr "Oyuncu enerjisi?"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 #, fuzzy
 msgid "Player name"
 msgstr "Oyuncu isimleri?"
@@ -1223,16 +1223,16 @@ msgid ""
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 #, fuzzy
 msgid "Sound"
 msgstr "Sesler"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Ses efektleri?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Ses frekansı"
 
@@ -1245,7 +1245,7 @@ msgstr "Sesler"
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Stok:"
 
@@ -1279,7 +1279,7 @@ msgstr "Takımlar"
 msgid "Teams"
 msgstr "Takımlar"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr ""
 
@@ -1415,7 +1415,7 @@ msgstr "(sınırsız)"
 msgid "Version"
 msgstr "Sürüm"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1473,15 +1473,15 @@ msgstr "Wormux çalıştırılıyor..."
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr ""
 

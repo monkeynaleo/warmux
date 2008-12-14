@@ -255,7 +255,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "La squadra %s ha vinto %u Bomba Football!"
 msgstr[1] "La squadra %s ha vinto %u Bombe Antisommossa!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -398,12 +398,12 @@ msgstr "La squadra %s vince."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s ha portato un membro della squadra %s nella tomba con lui!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(morto)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(Lingua di sistema)"
 
@@ -412,11 +412,11 @@ msgid "(unknown time)"
 msgstr "(tempo sconosciuto)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(illimitato)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -425,7 +425,7 @@ msgstr ""
 "La nuova versione Wormux %s è disponibile, tu stai usando la %s. Puoi "
 "controllare se l'aggiornamento è disponibile per il tuo OS!"
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Inserisci una squadra personalizzata"
 
@@ -552,7 +552,7 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character"
 msgstr "Paracadute"
@@ -562,7 +562,7 @@ msgstr "Paracadute"
 msgid "Character switching"
 msgstr "Paracadute"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Ricerca aggiornamenti online?"
 
@@ -644,7 +644,7 @@ msgstr "Crediti"
 msgid "Damage per turn during death mode"
 msgstr "Danni per turno durante la death mode"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Cancella una squadra personalizzata"
 
@@ -678,7 +678,7 @@ msgstr "Dinamite"
 msgid "END OF GAME"
 msgstr "FINE DEL GIOCO"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Volume effetti"
 
@@ -686,7 +686,7 @@ msgstr "Volume effetti"
 msgid "Energy"
 msgstr "Energia"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, fuzzy, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -803,7 +803,7 @@ msgstr "Lancia-Gnu"
 msgid "Graphic"
 msgstr "Grafica"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Corda Ninja"
 
@@ -837,7 +837,7 @@ msgid "Head commander"
 msgstr "Comandante"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Comandante:"
 
@@ -959,7 +959,7 @@ msgstr ""
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Caccia i giocatori indicati da <nickname> fuori dal gioco"
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Lingua"
 
@@ -1025,7 +1025,7 @@ msgstr "Numero massimo di FPS:"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Varie"
 
@@ -1058,11 +1058,11 @@ msgstr ""
 msgid "Move character"
 msgstr "Paracadute"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Volume Musica"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Musica ?"
 
@@ -1079,7 +1079,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "Nuovo gioco online in"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Avviso nuovo giocatore?"
 
@@ -1155,7 +1155,7 @@ msgstr "Giocatore"
 msgid "Player energy?"
 msgstr "Energia giocatore:"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 #, fuzzy
 msgid "Player name"
 msgstr "Nome del giocatore?"
@@ -1297,15 +1297,15 @@ msgid ""
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Suono"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Effetti sonori ?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Frequenza del suono"
 
@@ -1318,7 +1318,7 @@ msgstr "Opzioni del suono"
 msgid "Starting a new game"
 msgstr "Avvia una nuova partita"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Munizioni:"
 
@@ -1351,7 +1351,7 @@ msgstr "statistiche squadre"
 msgid "Teams"
 msgstr "Squadre"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Editor squadre"
 
@@ -1499,7 +1499,7 @@ msgstr "(illimitato)"
 msgid "Version"
 msgstr "Versione"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Verifica versione fallita: %s\n"
@@ -1557,15 +1557,15 @@ msgstr "Avvio in corso..."
 msgid "Wormux version "
 msgstr "Versione Wormux"
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "CRC mappa errato!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Nome mappa errato!"
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Squadra errata!"
 

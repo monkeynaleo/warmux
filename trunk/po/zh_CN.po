@@ -240,7 +240,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s 队得到 %u 足球炸弹!"
 msgstr[1] "%s 队得到 %u 足球炸弹!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -377,12 +377,12 @@ msgstr ""
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(死掉的)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(系统语言)"
 
@@ -391,11 +391,11 @@ msgid "(unknown time)"
 msgstr "(未知时间)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(无限的)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -403,7 +403,7 @@ msgid ""
 msgstr ""
 "新版本 %s 可用，您的版本是 %s。也许您想查下，是否有针对您的操作系统的升级。"
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr ""
 
@@ -530,7 +530,7 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character"
 msgstr "降落伞"
@@ -540,7 +540,7 @@ msgstr "降落伞"
 msgid "Character switching"
 msgstr "降落伞"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "网上检查升级？"
 
@@ -621,7 +621,7 @@ msgstr "鸣谢"
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr ""
 
@@ -654,7 +654,7 @@ msgstr "炸药"
 msgid "END OF GAME"
 msgstr "游戏结束"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "音效大小"
 
@@ -662,7 +662,7 @@ msgstr "音效大小"
 msgid "Energy"
 msgstr ""
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -771,7 +771,7 @@ msgstr "Gnu-北美野牛发射器"
 msgid "Graphic"
 msgstr ""
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "飞索"
 
@@ -806,7 +806,7 @@ msgstr "指挥官"
 
 #
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "指挥官: "
 
@@ -927,7 +927,7 @@ msgstr ""
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "语言"
 
@@ -995,7 +995,7 @@ msgstr "最大 FPS"
 msgid "Mine"
 msgstr "地雷"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 #, fuzzy
 msgid "Misc"
 msgstr "音乐?"
@@ -1029,11 +1029,11 @@ msgstr ""
 msgid "Move character"
 msgstr "降落伞"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "音乐音量:"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "音乐?"
 
@@ -1050,7 +1050,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "网上游戏"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr ""
 
@@ -1126,7 +1126,7 @@ msgstr "玩家"
 msgid "Player energy?"
 msgstr "耐久度?"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 #, fuzzy
 msgid "Player name"
 msgstr "请问尊姓大名?"
@@ -1269,16 +1269,16 @@ msgid ""
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 #, fuzzy
 msgid "Sound"
 msgstr "声音"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "音效?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "声频"
 
@@ -1291,7 +1291,7 @@ msgstr "声音"
 msgid "Starting a new game"
 msgstr "重新来游戏"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "箱子:"
 
@@ -1326,7 +1326,7 @@ msgstr "队伍"
 msgid "Teams"
 msgstr "队伍"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr ""
 
@@ -1469,7 +1469,7 @@ msgstr "(无限的)"
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "版本改变失败原因: %s\n"
@@ -1528,15 +1528,15 @@ msgstr "准备中, Wormux!!!"
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr ""
 

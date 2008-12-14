@@ -247,7 +247,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Meeskond %s võitis %u jalgpommi!"
 msgstr[1] "Meeskond %s võitis %u jalgpommi!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -386,12 +386,12 @@ msgstr "Meeskond %s lasti ribadeks."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s võttis %s meeskonna liikme hauda kaasa!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(kutu)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(süsteemi keel)"
 
@@ -400,11 +400,11 @@ msgid "(unknown time)"
 msgstr "(teadmata aeg)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(piiramatu)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -413,7 +413,7 @@ msgstr ""
 "Uus väljalase %s on saadaval. Kasutatav väljalase on %s. Võiksid "
 "kontrollida, kas on olemas uuendus sinu süsteemi jaoks!"
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Lisa kohandet meeskond"
 
@@ -537,7 +537,7 @@ msgstr "Muuda relvatüüpi"
 msgid "Change weapon countdown"
 msgstr "Muuda relva kehtivusaega"
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Tegelaskuju"
 
@@ -545,7 +545,7 @@ msgstr "Tegelaskuju"
 msgid "Character switching"
 msgstr "Vaheta tegelaskuju"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Kas kontrollida uut väljalaset onlainis?"
 
@@ -624,7 +624,7 @@ msgstr "Au ja hiilgus"
 msgid "Damage per turn during death mode"
 msgstr "Kahju käigu kohta surmare¸iimis"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Kustuta kohandet meeskond"
 
@@ -657,7 +657,7 @@ msgstr "Dünamiit"
 msgid "END OF GAME"
 msgstr "MÄNGU LÕPP"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Heliefektide valjus"
 
@@ -665,7 +665,7 @@ msgstr "Heliefektide valjus"
 msgid "Energy"
 msgstr "Elupunktid"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Viga võrguühenduse loomisel: Mängija %s ei nõustu sinuga!! -- %s"
@@ -775,7 +775,7 @@ msgstr "Gnuheitja"
 msgid "Graphic"
 msgstr "Graafika"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Pootshaak"
 
@@ -809,7 +809,7 @@ msgid "Head commander"
 msgstr "Pealik"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Pealik:"
 
@@ -931,7 +931,7 @@ msgstr "Tagasihüpe"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Lööb mängijad nimega <nickname> mängust välja"
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Keel"
 
@@ -996,7 +996,7 @@ msgstr "Kaadrit/sek ülempiir"
 msgid "Mine"
 msgstr "Miin"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Täppisseaded"
 
@@ -1028,11 +1028,11 @@ msgstr "Kaamerat liiguta hiire või nooleklahvidega"
 msgid "Move character"
 msgstr "Liiguta tegelaskuju"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Muusika valjus"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Muusika?"
 
@@ -1049,7 +1049,7 @@ msgstr "Mitte kunagi"
 msgid "New network game at "
 msgstr "Uus võrgumäng asukohas"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Hoiatus uue mängija puhul?"
 
@@ -1124,7 +1124,7 @@ msgstr "Mängija"
 msgid "Player energy?"
 msgstr "Mängija elupunktid?"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Mängija nimi?"
 
@@ -1264,15 +1264,15 @@ msgstr ""
 "Vabandust, aga sinu väljalaset ei toetata enam. Toetatud väljalasked on %s. "
 "Uue väljalaske saate hankida http://www.wormux.org/wiki/download.php."
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Helid"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Heliefektid?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Helisagedus"
 
@@ -1285,7 +1285,7 @@ msgstr "Helid"
 msgid "Starting a new game"
 msgstr "Alusta uut mängu"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Tagavara:"
 
@@ -1317,7 +1317,7 @@ msgstr "Meeskonnastatistika"
 msgid "Teams"
 msgstr "Meeskonnad"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Meeskonnaredaktor"
 
@@ -1461,7 +1461,7 @@ msgstr "Piiramatu"
 msgid "Version"
 msgstr "Väljalase"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Väljalaske kontrollimine kukkus läbi, sest: %s\n"
@@ -1519,15 +1519,15 @@ msgstr "Wormux käivitub..."
 msgid "Wormux version "
 msgstr "Wormuxi väljalase "
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Mänguvälja kontrollsumma ei klapi!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Vale mänguvälja nimi!"
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Vale meeskond!"
 

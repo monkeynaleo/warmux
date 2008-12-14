@@ -241,7 +241,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s csapat %u rögbibombát kapott!"
 msgstr[1] "%s csapat %u rögbibombát kapott!"
 
-#: src/weapon/grapple.cpp:816
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -381,12 +381,12 @@ msgstr "%s csapat elpusztult."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s sírba vitte magával a(z) %s csapat tagját!"
 
-#: src/interface/interface.cpp:183
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(halott)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(rendszernyelv)"
 
@@ -395,11 +395,11 @@ msgid "(unknown time)"
 msgstr "(ismeretlen idõ)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:442
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -408,7 +408,7 @@ msgstr ""
 "Egy új verzió %s elérhetõ, a te verziód: %s. Megnézhetnéd, hogy van-e az "
 "operációs rendszeredhez tartozó frissítés!"
 
-#: src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Egyéni csapat hozzáadása"
 
@@ -532,7 +532,7 @@ msgstr "Fegyverkategória váltása"
 msgid "Change weapon countdown"
 msgstr "Fegyver idõzítésének megváltoztatása"
 
-#: src/menu/options_menu.cpp:164
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Karakter"
 
@@ -540,7 +540,7 @@ msgstr "Karakter"
 msgid "Character switching"
 msgstr "Karakterváltás lehetõsége"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Frissítések keresése?"
 
@@ -620,7 +620,7 @@ msgstr "Szerzõk"
 msgid "Damage per turn during death mode"
 msgstr "Sérülés halál módban"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Egyéni csapat törlése"
 
@@ -653,7 +653,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr "JÁTÉK VÉGE"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Hanghatások hangereje"
 
@@ -661,7 +661,7 @@ msgstr "Hanghatások hangereje"
 msgid "Energy"
 msgstr "Energia"
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Hiba a hálózat inicializálásakor: %s kliens nem ért veled egyet!! - %s"
@@ -777,7 +777,7 @@ msgstr "Gnú-lövõ"
 msgid "Graphic"
 msgstr "Grafika"
 
-#: src/weapon/grapple.cpp:167
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Szigony"
 
@@ -811,7 +811,7 @@ msgid "Head commander"
 msgstr "Parancsnok"
 
 #. Display player's name
-#: src/interface/interface.cpp:174
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Parancsnok: "
 
@@ -933,7 +933,7 @@ msgstr "Hátraugrás"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Kidobja a <nickname> nevû játékost a játékból"
 
-#: src/menu/options_menu.cpp:132
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Nyelv"
 
@@ -999,7 +999,7 @@ msgstr "Maximum FPS"
 msgid "Mine"
 msgstr "Taposóakna"
 
-#: src/menu/options_menu.cpp:202
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Egyéb"
 
@@ -1031,11 +1031,11 @@ msgstr "Kamera mozgatása egérrel vagy nyilakkal"
 msgid "Move character"
 msgstr "Karakter mozgatása"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Zene hangereje"
 
-#: src/menu/options_menu.cpp:208
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Zene"
 
@@ -1052,7 +1052,7 @@ msgstr "Soha"
 msgid "New network game at "
 msgstr "Új hálózati játék"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Figyelmeztetés új játékosnál?"
 
@@ -1128,7 +1128,7 @@ msgstr "Játékos"
 msgid "Player energy?"
 msgstr "Játékos energiája"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Játékos neve"
 
@@ -1269,15 +1269,15 @@ msgstr ""
 "http://www.wormux.org/wiki/download.php címen találod a frissített verziót. "
 "cí"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Hangok"
 
-#: src/menu/options_menu.cpp:218
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Hanghatások?"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Hangfrekvencia"
 
@@ -1290,7 +1290,7 @@ msgstr "Hangok"
 msgid "Starting a new game"
 msgstr "Új játék indítása"
 
-#: src/interface/interface.cpp:214
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Készlet:"
 
@@ -1322,7 +1322,7 @@ msgstr "Csapat statisztikák"
 msgid "Teams"
 msgstr "Csapatok"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Csapatszerkesztõ"
 
@@ -1467,7 +1467,7 @@ msgstr "Korlátlan"
 msgid "Version"
 msgstr "Verzió"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:451
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Verzió-ellenõrzés sikertelen: %s\n"
@@ -1525,15 +1525,15 @@ msgstr "Wormux indítása..."
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
-#: src/include/action_handler.cpp:193
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Hibás pálya ellenõrzõkód (CRC)!"
 
-#: src/include/action_handler.cpp:190
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Hibás pályanév!"
 
-#: src/include/action_handler.cpp:196
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Hibás csapat!"
 
