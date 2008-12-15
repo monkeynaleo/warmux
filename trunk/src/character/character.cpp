@@ -106,7 +106,6 @@ void Character::SetBody(Body* char_body)
 
   SetDirection(RandomLocal().GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
   body->SetFrame(RandomLocal().GetLong(0, body->GetFrameCount() - 1));
-  SetSize(body->GetSize());
 }
 
 Character::Character (Team& my_team, const std::string &name, Body *char_body) :
@@ -1147,59 +1146,6 @@ void Character::SetCustomName(const std::string name)
     name_text->Set(name);
     character_name = name;
   }
-
-
-}
-
-void Character::SetSize(const Point2i &newSize)
-{
-
-  double phys_width = double(newSize.x)/PIXEL_PER_METER;
-  double phys_height = double(newSize.y)/PIXEL_PER_METER;
-
-  // Shape position is relative to body
-  PhysicalPolygon *shape = new PhysicalPolygon();
-
-  shape->AddPoint(Point2d(3*phys_width/10, 0));
-  shape->AddPoint(Point2d(7*phys_width/10, 0));
-
-  shape->AddPoint(Point2d(7*phys_width/10, 6*phys_height/8));
-  //  shape->AddPoint(Point2d(6*phys_width/10, phys_height));
-  //  shape->AddPoint(Point2d(4*phys_width/10, phys_height));
-  shape->AddPoint(Point2d(3*phys_width/10, 6*phys_height/8));
-
-
-  shape->SetMass(GetMass()/2); // There are 2 shapes, divide the mass of body by 2
-
-  b2FilterData filter_data = {0,0,0};
-  filter_data.categoryBits = 0x0001;
-  filter_data.maskBits = 0x0000;
-
-  if (m_shapes.size() > 0) {
-    filter_data = GetCollisionFilter();
-  }
-  shape->SetFilter(filter_data);
-  shape->SetFriction(1.2f);
-  shape->SetName("body");
-
-
-  //Feet shape
-  PhysicalCircle *feet_shape = new PhysicalCircle();
-
-  // Shape position is relative to body
-  feet_shape->SetRadius(phys_width/2);
-  feet_shape->SetMass(GetMass()/2);
-  feet_shape->SetPosition(Point2d(phys_width/2, phys_height - phys_width/2));
-  feet_shape->SetFriction(10.2f);
-  feet_shape->SetFilter(filter_data);
-  feet_shape->SetName("feet");
-
-  ClearShapes();
-
-  m_shapes.push_back(shape);
-  m_shapes.push_back(feet_shape);
-
-  Generate();
 }
 
 // ###################################################################
