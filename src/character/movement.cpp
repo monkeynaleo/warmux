@@ -24,7 +24,7 @@
 #include "tool/xml_document.h"
 #include <WORMUX_debug.h>
 
-Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(false), repeat(-1)
+Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), speed(15), always_moving(false)
 {
   frames.clear();
 
@@ -33,7 +33,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(
   MSG_DEBUG("body.movement", "  Loading movement %s\n", type.c_str());
 
   XmlReader::ReadUintAttr(xml, "speed", speed);
-  XmlReader::ReadIntAttr(xml, "repeat", repeat);
+  XmlReader::ReadUintAttr(xml, "nb_loops", nb_loops);
 
   // Load the test rectangle
   test_left = test_right = test_top = test_bottom = 0;
@@ -54,7 +54,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(
   xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "frame");
   xmlNodeArray::const_iterator it = nodes.begin(), end = nodes.end();
   MSG_DEBUG("body.movement", "  Found %i movement frames\n", nodes.size());
-  MSG_DEBUG("body.movement", "  Repeat %i times\n", repeat);
+  MSG_DEBUG("body.movement", "  Nb loops: %i\n", nb_loops);
 
   /* We know the number of member frame that are being read so we can resize
    * thr array to be able to get all of them. */
@@ -130,9 +130,9 @@ uint Movement::GetSpeed() const
   return speed;
 }
 
-int Movement::GetRepeatNb() const
+uint Movement::GetNbLoops() const
 {
-  return repeat;
+  return nb_loops;
 }
 
 bool Movement::IsAlwaysMoving() const
