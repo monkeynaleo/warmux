@@ -53,4 +53,10 @@ public:
   DirtyWaterParticle();
 };
 
+class ChocolateWaterParticle : public WaterParticle
+{
+public:
+  ChocolateWaterParticle();
+};
+
 #endif /* WATER_DROP_H */

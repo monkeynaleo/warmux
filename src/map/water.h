@@ -41,6 +41,7 @@ public:
     LAVA,
     RADIOACTIVE,
     DIRTY,
+    CHOCOLATE,
     MAX_WATER_TYPE
   } Water_type;
 
