@@ -22,11 +22,12 @@
 #include <map>
 #include <fstream>
 #include <cstdlib>
-#include <curl/curl.h>
+
+#include <WORMUX_debug.h>
+
 #include "game/config.h"
 #include "include/base.h"
 #include "network/download.h"
-#include <WORMUX_debug.h>
 
 Downloader::Downloader():
   curl(curl_easy_init())
