@@ -25,11 +25,14 @@
  *****************************************************************************/
 
 #include <iostream>
+#include <WORMUX_debug.h>
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
+
 #include "character/character.h"
 #include "include/action.h"
 #include "game/config.h"
-
-
+#include "game/game_mode.h"
 #include "game/time.h"
 #include "map/map.h"
 #include "network/randomsync.h"
@@ -42,12 +45,9 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
-#include <WORMUX_point.h>
 #include "tool/random.h"
-#include <WORMUX_rectangle.h>
 #include "weapon/weapon_launcher.h"
 
 #ifdef DEBUG
@@ -99,7 +99,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
-  SetSize(Point2i(1,1));
+  InitShape(xml_config);
 
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
@@ -109,6 +109,48 @@ PhysicalObj::~PhysicalObj ()
   MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());
   //ClearShapes();
   Desactivate();
+}
+
+void PhysicalObj::InitShape(const std::string &xml_config)
+{
+  // Loading shape from file
+  const xmlNode *elem = NULL;
+  XmlReader doc;
+
+  if (xml_config == "") {
+    const XmlReader* ddoc = GameMode::GetInstance()->GetXmlObjects();
+    elem = XmlReader::GetMarker(ddoc->GetRoot(), m_name);
+  } else {
+    ASSERT(doc.Load(xml_config));
+    elem = XmlReader::GetMarker(doc.GetRoot(), m_name);
+  }
+
+  ASSERT(elem != NULL);
+
+  xmlNodeArray shapes = XmlReader::GetNamedChildren(elem, "shape");
+  xmlNodeArray::const_iterator shape_it;
+
+  for (shape_it = shapes.begin(); shape_it != shapes.end(); shape_it++) {
+    PhysicalShape* shape = PhysicalShape::LoadFromXml(*shape_it);
+    ASSERT(shape);
+
+    shape->SetMass(GetMass());
+
+    b2FilterData filter_data = {0,0,0};
+    filter_data.categoryBits = 0x0001;
+    filter_data.maskBits = 0x0000;
+    filter_data.maskBits = 0;
+    shape->SetFilter(filter_data);
+
+    m_shapes.push_back(shape);
+  }
+
+  if (m_shapes.empty()) {
+    SetSize(Point2i(1,1));
+    return;
+  }
+
+  Generate();
 }
 
 //-----------------------------------------------------------------------------
