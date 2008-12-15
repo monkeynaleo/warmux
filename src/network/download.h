@@ -21,8 +21,17 @@
 
 #ifndef DOWNLOAD_H
 #define DOWNLOAD_H
+
 #include <map>
+
+// Load config about curl...
+#ifdef _MSC_VER
+#  include "msvc/config.h"
+#else
+#  include "config.h"
+#endif
 #include <curl/curl.h>
+
 #include <WORMUX_singleton.h>
 
 class Downloader : public Singleton<Downloader>
