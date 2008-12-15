@@ -38,7 +38,6 @@ PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
   m_energy = 25;
 
   SetCollisionModel(true, true, true);
-  SetSize(img->GetSize());
   SetTestRect (1, 1, 2, 2);
 }
 
