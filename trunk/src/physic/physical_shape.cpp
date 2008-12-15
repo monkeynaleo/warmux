@@ -143,7 +143,7 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
     }
 
     PhysicalCircle* circle = new PhysicalCircle();
-    circle->SetRadius(radius * PIXEL_PER_METER);
+    circle->SetRadius(double(radius)/PIXEL_PER_METER);
     shape = circle;
 
     // =============== Polygon
