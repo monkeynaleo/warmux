@@ -134,7 +134,7 @@ void Water::Reset()
   Init();
   water_height = WATER_INITIAL_HEIGHT;
   temps_montee = GO_UP_TIME * 60 * 1000;
-  
+
   Refresh(); // Calculate first height position
 }
 
@@ -317,6 +317,9 @@ void Water::Splash(const Point2i& pos) const
   case DIRTY:
     ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_DIRTYWATER, true, -1, 20);
     break;
+  case CHOCOLATE:
+    ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_CHOCOLATEWATER, true, -1, 20);
+    break;
   case MAX_WATER_TYPE:
     ASSERT(false);
     break;
@@ -342,6 +345,8 @@ Water::Water_type Water::GetWaterType(const std::string & water)
     return RADIOACTIVE;
   } else if (water == "dirtywater") {
     return DIRTY;
+  } else if (water == "chocolate") {
+    return CHOCOLATE;
   } else { // Unsupported water type
     fprintf(stderr, "WARNING: map using invalid water type %s: valid water types are no, water, lava, radioactive\n",
 	    water.c_str());
@@ -366,6 +371,9 @@ const std::string Water::GetWaterName(const Water::Water_type water_type)
     break;
   case DIRTY:
     return "dirtywater";
+    break;
+  case CHOCOLATE:
+    return "chocolate";
     break;
   case MAX_WATER_TYPE:
     ASSERT(false);

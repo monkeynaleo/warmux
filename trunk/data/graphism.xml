@@ -248,6 +248,7 @@
   <color name="lava" r="255" g="148" b="0" a="224" />
   <color name="radioactive" r="255" g="212" b="212" a="224" />
   <color name="dirtywater" r="67" g="107" b="21" a="64" />
+  <color name="chocolate" r="67" g="107" b="21" a="64" />
 </section>
 
 <section name="gfx">
@@ -268,6 +269,9 @@
 
   <surface name="dirtywater" file="gfx/water/dirtywater.png" />
   <surface name="dirtywater_bottom" file="gfx/water/dirtywater_bottom.png" />
+
+  <surface name="chocolate" file="gfx/water/chocolate.png" />
+  <surface name="chocolate_bottom" file="gfx/water/chocolate_bottom.png" />
 
 </section>
 
