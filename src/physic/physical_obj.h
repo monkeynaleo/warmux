@@ -166,7 +166,7 @@ public:
   double GetSpeedAngle() const;
 
   // Set/Get size
-  virtual void SetSize(const Point2i &newSize);
+  void SetSize(const Point2i &newSize);
   int GetWidth() const;
   int GetHeight() const;
   Point2i GetSize() const;
