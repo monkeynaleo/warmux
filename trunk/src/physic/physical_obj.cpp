@@ -156,43 +156,46 @@ void PhysicalObj::InitShape(const std::string &xml_config)
 //-----------------------------------------------------------------------------
 void PhysicalObj::Activate()
 {
-  if (!m_body) {
-    m_body = PhysicalEngine::GetInstance()->AddObject(this);
-    SetSpeedXY(m_initial_speed);
-    Generate();
-  }
+  if (m_body)
+    return;
+
+  m_body = PhysicalEngine::GetInstance()->AddObject(this);
+  SetSpeedXY(m_initial_speed);
+  Generate();
 }
 
 void PhysicalObj::Generate()
 {
-  if (m_body) {
-    m_body->SetBullet(m_is_bullet);
+  if (!m_body)
+    return;
 
-    std::list<PhysicalShape*>::iterator it;
-    for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
-      (*it)->SetBody(m_body);
-      (*it)->Generate();
-    }
+  m_body->SetBullet(m_is_bullet);
 
-    if (m_body_def->fixedRotation) {
-        b2MassData massData;
-        massData.mass = m_mass;
-        massData.center.SetZero();
-        m_body->SetMass(&massData);
+  std::list<PhysicalShape*>::iterator it;
+  for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
+    (*it)->SetBody(m_body);
+    (*it)->Generate();
+  }
 
-    } else {
-      m_body->SetMassFromShapes();
-    }
+  if (m_body_def->fixedRotation) {
+    b2MassData massData;
+    massData.mass = m_mass;
+    massData.center.SetZero();
+    m_body->SetMass(&massData);
+
+  } else {
+    m_body->SetMassFromShapes();
   }
 }
 
 void PhysicalObj::Desactivate()
 {
-  if (m_body) {
-    RemoveAllExternForce();
-    PhysicalEngine::GetInstance()->RemoveObject(this);
-    m_body = NULL;
-  }
+  if (!m_body)
+    return;
+
+  RemoveAllExternForce();
+  PhysicalEngine::GetInstance()->RemoveObject(this);
+  m_body = NULL;
 }
 
 //---------------------------------------------------------------------------//
@@ -298,20 +301,24 @@ void PhysicalObj::SetPhysXY(const Point2d &position)
 
 void PhysicalObj::SetSpeedXY (Point2d vector)
 {
-  if (m_body) {
-    if (EqualsZero(vector.x)) vector.x = 0;
-    if (EqualsZero(vector.y)) vector.y = 0;
-    bool was_moving = IsMoving();
-
-    // setting to FreeFall is done in StartMoving()
-    m_body->SetLinearVelocity(b2Vec2(vector.x,vector.y));
-    if (!was_moving && IsMoving()) {
-      UpdateTimeOfLastMove();
-      StartMoving();
-      m_body->WakeUp();
-    }
-  } else {
+  if (!m_body) {
     m_initial_speed = vector;
+    return;
+  }
+
+  if (EqualsZero(vector.x))
+    vector.x = 0;
+  if (EqualsZero(vector.y))
+    vector.y = 0;
+
+  bool was_moving = IsMoving();
+
+  // setting to FreeFall is done in StartMoving()
+  m_body->SetLinearVelocity(b2Vec2(vector.x,vector.y));
+  if (!was_moving && IsMoving()) {
+    UpdateTimeOfLastMove();
+    StartMoving();
+    m_body->WakeUp();
   }
 }
 
@@ -322,8 +329,11 @@ void PhysicalObj::SetSpeed (double norm, double angle)
 
 void PhysicalObj::AddSpeedXY (Point2d vector)
 {
-  if (EqualsZero(vector.x)) vector.x = 0;
-  if (EqualsZero(vector.y)) vector.y = 0;
+  if (EqualsZero(vector.x))
+    vector.x = 0;
+  if (EqualsZero(vector.y))
+    vector.y = 0;
+
   bool was_moving = IsMoving();
 
   m_body->SetLinearVelocity(m_body->GetLinearVelocity()+b2Vec2(vector.x,vector.y));
@@ -352,15 +362,10 @@ void PhysicalObj::GetSpeed(double &norm, double &angle) const
 
 Point2d PhysicalObj::GetSpeedXY () const
 {
-  if (m_body) {
-    if (!IsMoving()) {
-      return Point2d(0.0, 0.0);
-    }
-
-    return Point2d(m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y);
-  } else {
+  if (!m_body || !IsMoving())
     return Point2d(0.0,0.0);
-  }
+
+  return Point2d(m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y);
 }
 
 Point2d PhysicalObj::GetSpeed() const
@@ -370,11 +375,10 @@ Point2d PhysicalObj::GetSpeed() const
 
 double PhysicalObj::GetAngularSpeed() const
 {
-  if (m_body) {
-    return m_body->GetAngularVelocity();
-  } else {
+  if (!m_body)
     return 0;
-  }
+
+  return m_body->GetAngularVelocity();
 }
 
 double PhysicalObj::GetSpeedAngle() const
@@ -699,8 +703,9 @@ bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
 
 void PhysicalObj::CheckOverlapping()
 {
-  if (m_overlapping_object == NULL)
+  if (!m_overlapping_object)
     return;
+
   if (!m_body)
     return;
 
@@ -727,32 +732,30 @@ uint PhysicalObj::AddExternForce (double norm, double angle)
 
 void PhysicalObj::RemoveExternForce(uint index)
 {
-  if (index != 0) {
+  if (index == 0)
+    return;
 
-    if (m_extern_force_map.count(index)) {
-      PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
-      delete m_extern_force_map[index];
-      m_extern_force_map.erase(index);
-    }
+  if (m_extern_force_map.count(index)) {
+    PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
+    delete m_extern_force_map[index];
+    m_extern_force_map.erase(index);
   }
 }
 
 uint PhysicalObj::AddExternForceXY (const Point2d& vector)
 {
-  if (m_body) {
-    m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
-    PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
-    m_extern_force_index++;
-
-    UpdateTimeOfLastMove();
-    MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
-
-
-    return m_extern_force_index-1;
-
-  } else {
+  if (!m_body)
     return 0;
-  }
+
+  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
+  PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
+  m_extern_force_index++;
+
+  UpdateTimeOfLastMove();
+  MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
+
+
+  return m_extern_force_index-1;
 }
 
 
@@ -1340,10 +1343,10 @@ void PhysicalObj::StartMoving()
 void PhysicalObj::StopMoving()
 {
 
-  if (!IsMoving()) return;
+  if (!IsMoving())
+    return;
 
-  if (IsMoving()) MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
-  // Always called by PhysicalObj::StopMoving
+  MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
 
   SetSpeedXY(Point2d(0.0,0.0));
 
