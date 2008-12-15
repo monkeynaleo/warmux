@@ -72,10 +72,10 @@ private:
 
   std::vector<member_def> frames;
   std::string type;
+  uint nb_loops; // 0 means forever
   uint speed;
   bool always_moving;
   uint test_left, test_right, test_top, test_bottom;
-  int repeat; // -1 means forever
 
 public:
   Movement(const xmlNode* xml);
@@ -85,7 +85,7 @@ public:
   const std::string& GetType() const;
 
   uint GetSpeed() const;
-  int GetRepeatNb() const;
+  uint GetNbLoops() const;
 
   bool IsAlwaysMoving() const;
 
