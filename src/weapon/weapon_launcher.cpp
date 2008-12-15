@@ -138,9 +138,9 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   SetSize(image->GetSize());
 
   // Set rectangle test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect(dx, dx, dy, dy);
+  // int dx = image->GetWidth()/2-1;
+  // int dy = image->GetHeight()/2-1;
+  // SetTestRect(dx, dx, dy, dy);
 
   ResetTimeOut();
 

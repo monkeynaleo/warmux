@@ -60,9 +60,9 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   MSG_DEBUG("wind", "Create wind particle: %s, %f, %f", xml_file.c_str(), mass, wind_factor);
 
   // Fixe test rectangle
-  int dx = 0 ;
-  int dy = 0 ;
-  SetTestRect (dx, dx, dy, dy);
+  // int dx = 0 ;
+  // int dy = 0 ;
+  // SetTestRect (dx, dx, dy, dy);
 
   m_allow_negative_y = true;
 

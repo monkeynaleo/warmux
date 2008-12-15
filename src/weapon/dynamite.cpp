@@ -58,7 +58,7 @@ DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
 
   image->animation.SetLoopMode(false);
   SetSize(image->GetSize());
-  SetTestRect (0, 0, 2, 3);
+  // SetTestRect (0, 0, 2, 3);
 }
 
 void DynamiteStick::Shoot(double strength)
