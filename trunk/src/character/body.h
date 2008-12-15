@@ -129,6 +129,7 @@ public:
 
   const std::string& GetMovement() const;
   const std::string& GetClothe() const;
+  std::string GetFrameLoop() const;
   void GetTestRect(uint &l, uint &r, uint &t, uint &b) const;
   const BodyDirection_t &GetDirection() const { return direction; };
   const Point2i &GetHandPosition() const { return weapon_pos; };
