@@ -156,11 +156,8 @@ void PhysicalObj::InitShape(const std::string &xml_config)
 //-----------------------------------------------------------------------------
 void PhysicalObj::Activate()
 {
-  if(!m_body){
-
-
+  if (!m_body) {
     m_body = PhysicalEngine::GetInstance()->AddObject(this);
-
     SetSpeedXY(m_initial_speed);
     Generate();
   }
@@ -168,9 +165,8 @@ void PhysicalObj::Activate()
 
 void PhysicalObj::Generate()
 {
-  if(m_body){
+  if (m_body) {
     m_body->SetBullet(m_is_bullet);
-
 
     std::list<PhysicalShape*>::iterator it;
     for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
@@ -178,26 +174,24 @@ void PhysicalObj::Generate()
       (*it)->Generate();
     }
 
-    if(m_body_def->fixedRotation){
+    if (m_body_def->fixedRotation) {
         b2MassData massData;
         massData.mass = m_mass;
         massData.center.SetZero();
         m_body->SetMass(&massData);
 
-    }else{
+    } else {
       m_body->SetMassFromShapes();
     }
-
-
   }
 }
 
 void PhysicalObj::Desactivate()
 {
-  if(m_body){
-  RemoveAllExternForce();
-  PhysicalEngine::GetInstance()->RemoveObject(this);
-  m_body = NULL;
+  if (m_body) {
+    RemoveAllExternForce();
+    PhysicalEngine::GetInstance()->RemoveObject(this);
+    m_body = NULL;
   }
 }
 
@@ -212,7 +206,7 @@ void PhysicalObj::SetXY(const Point2i &position)
 
 void PhysicalObj::SetXY(const Point2d &position)
 {
-  if(m_body){
+  if (m_body) {
 
     CheckOverlapping();
 
@@ -229,7 +223,7 @@ void PhysicalObj::SetXY(const Point2d &position)
         StartMoving();
       }
     }
-  }else{
+  } else {
     SetPhysXY( position / PIXEL_PER_METER );
   }
 }
@@ -256,42 +250,42 @@ int PhysicalObj::GetY() const
 
 double PhysicalObj::GetPhysX() const
 {
-  if(m_body){
+  if (m_body) {
     return m_body->GetPosition().x;
-  }else{
-   return m_body_def->position.x;
+  } else {
+    return m_body_def->position.x;
   }
 }
 
 double PhysicalObj::GetPhysY() const
 {
-  if(m_body){
+  if (m_body) {
     return m_body->GetPosition().y;
-  }else{
-   return m_body_def->position.y;
+  } else {
+    return m_body_def->position.y;
   }
 }
 
 Point2d PhysicalObj::GetPhysXY() const
 {
-  if(m_body){
+  if (m_body) {
     return Point2d( m_body->GetPosition().x, m_body->GetPosition().y);
-  }else{
+  } else {
     return Point2d(0.0,0.0);
   }
 }
 
 void PhysicalObj::SetPhysXY(double x, double y)
 {
-  if(m_body){
+  if (m_body) {
   /* if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
      m_pos_x.x0 = x;
      m_pos_y.x0 = y;*/
-  m_body->SetXForm(b2Vec2(x,y),m_body->GetAngle());
-  PhysicalEngine::GetInstance()->StaticStep();
-  /*UpdateTimeOfLastMove();
-    }*/
-  }else{
+    m_body->SetXForm(b2Vec2(x,y),m_body->GetAngle());
+    PhysicalEngine::GetInstance()->StaticStep();
+    /*UpdateTimeOfLastMove();
+      }*/
+  } else {
     m_body_def->position.Set(x,y);
   }
 }
@@ -304,10 +298,10 @@ void PhysicalObj::SetPhysXY(const Point2d &position)
 
 void PhysicalObj::SetSpeedXY (Point2d vector)
 {
-  if(m_body){
-  if (EqualsZero(vector.x)) vector.x = 0;
-  if (EqualsZero(vector.y)) vector.y = 0;
-  bool was_moving = IsMoving();
+  if (m_body) {
+    if (EqualsZero(vector.x)) vector.x = 0;
+    if (EqualsZero(vector.y)) vector.y = 0;
+    bool was_moving = IsMoving();
 
     // setting to FreeFall is done in StartMoving()
     m_body->SetLinearVelocity(b2Vec2(vector.x,vector.y));
@@ -316,7 +310,7 @@ void PhysicalObj::SetSpeedXY (Point2d vector)
       StartMoving();
       m_body->WakeUp();
     }
-  }else{
+  } else {
     m_initial_speed = vector;
   }
 }
@@ -358,13 +352,13 @@ void PhysicalObj::GetSpeed(double &norm, double &angle) const
 
 Point2d PhysicalObj::GetSpeedXY () const
 {
-  if( m_body ) {
+  if (m_body) {
     if (!IsMoving()) {
       return Point2d(0.0, 0.0);
     }
 
     return Point2d(m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y);
-  }else{
+  } else {
     return Point2d(0.0,0.0);
   }
 }
@@ -376,9 +370,9 @@ Point2d PhysicalObj::GetSpeed() const
 
 double PhysicalObj::GetAngularSpeed() const
 {
-  if(m_body){
-  return m_body->GetAngularVelocity();
-  }else{
+  if (m_body) {
+    return m_body->GetAngularVelocity();
+  } else {
     return 0;
   }
 }
@@ -393,29 +387,29 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   double phys_width = double(newSize.x)/PIXEL_PER_METER;
   double phys_height = double(newSize.y)/PIXEL_PER_METER;
 
- // Shape position is relative to body
-    PhysicalPolygon *shape = new PhysicalPolygon();
+  // Shape position is relative to body
+  PhysicalPolygon *shape = new PhysicalPolygon();
 
-    shape->AddPoint(Point2d(0 , 0));
-    shape->AddPoint(Point2d(phys_width, 0));
-    shape->AddPoint(Point2d(phys_width, phys_height));
-    shape->AddPoint(Point2d(0 , phys_height));
-    shape->SetMass(GetMass());
+  shape->AddPoint(Point2d(0 , 0));
+  shape->AddPoint(Point2d(phys_width, 0));
+  shape->AddPoint(Point2d(phys_width, phys_height));
+  shape->AddPoint(Point2d(0 , phys_height));
+  shape->SetMass(GetMass());
 
-    b2FilterData filter_data = {0,0,0};
-    filter_data.categoryBits = 0x0001;
-    filter_data.maskBits = 0x0000;
-    filter_data.maskBits = 0;
-    if (m_shapes.size() > 0) {
-      filter_data = GetCollisionFilter();
-    }
-    shape->SetFilter(filter_data);
+  b2FilterData filter_data = {0,0,0};
+  filter_data.categoryBits = 0x0001;
+  filter_data.maskBits = 0x0000;
+  filter_data.maskBits = 0;
+  if (m_shapes.size() > 0) {
+    filter_data = GetCollisionFilter();
+  }
+  shape->SetFilter(filter_data);
 
-    ClearShapes();
+  ClearShapes();
 
-    m_shapes.push_back(shape);
+  m_shapes.push_back(shape);
 
-    Generate();
+  Generate();
 }
 
 double PhysicalObj::GetWdouble() const
@@ -705,9 +699,9 @@ bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
 
 void PhysicalObj::CheckOverlapping()
 {
-  if ( m_overlapping_object == NULL )
+  if (m_overlapping_object == NULL)
     return;
-  if ( !m_body )
+  if (!m_body)
     return;
 
   // Check if we are still overlapping with this object
@@ -735,29 +729,28 @@ void PhysicalObj::RemoveExternForce(uint index)
 {
   if (index != 0) {
 
-    if(m_extern_force_map.count(index)){
-    PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
-    delete m_extern_force_map[index];
-    m_extern_force_map.erase(index);
+    if (m_extern_force_map.count(index)) {
+      PhysicalEngine::GetInstance()->RemoveForce(m_extern_force_map[index]);
+      delete m_extern_force_map[index];
+      m_extern_force_map.erase(index);
     }
   }
 }
 
 uint PhysicalObj::AddExternForceXY (const Point2d& vector)
 {
+  if (m_body) {
+    m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
+    PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
+    m_extern_force_index++;
 
-  if ( m_body ) {
-  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
-  PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
-  m_extern_force_index++;
-
-  UpdateTimeOfLastMove();
-  MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
+    UpdateTimeOfLastMove();
+    MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
 
 
-  return m_extern_force_index-1;
+    return m_extern_force_index-1;
 
-  }else{
+  } else {
     return 0;
   }
 }
@@ -793,8 +786,8 @@ void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
 
   m_energy += delta;
   if (m_energy <= 0 && !IsGhost()) {
-      Ghost();
-      m_energy = -1;
+    Ghost();
+    m_energy = -1;
   }
 }
 
@@ -996,9 +989,10 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
 
 bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
 {
-  if(!m_body){
+  if (!m_body) {
     return true;
   }
+
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
@@ -1147,7 +1141,7 @@ bool PhysicalObj::Overlapse(const PhysicalObj &b) const
 // Do the point p touch the object ?
 bool PhysicalObj::Contain(const Point2i &p) const
 {
-  return  GetTestRect().Contains( p );
+  return GetTestRect().Contains( p );
 }
 
 bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync)
@@ -1171,14 +1165,14 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 
     if (on_top_of_world) {
       // Give a random position for x
-      if(net_sync)
+      if (net_sync)
         position.x = RandomSync().GetLong(0, GetWorld().GetWidth() - GetWidth());
       else
         position.x = RandomLocal().GetLong(0, GetWorld().GetWidth() - GetWidth());
 
       position.y = -GetHeight()+1;
     } else {
-      if(net_sync)
+      if (net_sync)
         position = RandomSync().GetPoint(GetWorld().GetSize() - GetSize() + 1);
       else
         position = RandomLocal().GetPoint(GetWorld().GetSize() - GetSize() + 1);
@@ -1417,9 +1411,9 @@ double PhysicalObj::GetAngle() const
 
 void PhysicalObj::SetAngle(double angle)
 {
-  if(m_body){
+  if (m_body) {
     m_body->SetXForm(m_body->GetPosition(), -angle/180.0f * b2_pi);
-  }else{
+  } else {
     m_body_def->angle = -angle/180.0f * b2_pi;
   }
 }
@@ -1428,8 +1422,8 @@ PhysicalShape *PhysicalObj::GetShape(b2Shape *shape)
 {
   std::list<PhysicalShape *>::iterator it;
 
-  for(it = m_shapes.begin(); it != m_shapes.end();it++){
-    if((*it)->GetShape() == shape){
+  for (it = m_shapes.begin(); it != m_shapes.end();it++) {
+    if ((*it)->GetShape() == shape) {
       return *it;
     }
   }
@@ -1440,8 +1434,8 @@ PhysicalShape *PhysicalObj::GetShape(std::string name)
 {
   std::list<PhysicalShape *>::iterator it;
 
-  for(it = m_shapes.begin(); it != m_shapes.end();it++){
-    if((*it)->GetName() == name){
+  for (it = m_shapes.begin(); it != m_shapes.end();it++) {
+    if ((*it)->GetName() == name) {
       return *it;
     }
   }
