@@ -92,6 +92,7 @@ const b2Shape *PhysicalShape::GetShape() const
   return m_shape;
 }
 
+// =============================================================================
 // Static method
 PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 {
@@ -150,10 +151,11 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 
     PhysicalPolygon* polygon = new PhysicalPolygon();
 
-    const xmlNode* point = XmlReader::GetMarker(elem, "point-0");
+    xmlNodeArray points = XmlReader::GetNamedChildren(root_shape, "point");
+    xmlNodeArray::const_iterator point;
     int i = 0;
 
-    while (point) {
+    for (point = points.begin(); point != points.end(); point++) {
 
       if (i > 8) {
 	fprintf(stderr, "You cannot set more than 8 points for a polygon!\n");
@@ -163,9 +165,9 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
       i++;
 
       uint x, y;
-      r = XmlReader::ReadUintAttr(elem, "x", x);
+      r = XmlReader::ReadUintAttr(*point, "x", x);
       if (r)
-	r = XmlReader::ReadUintAttr(elem, "y", y);
+	r = XmlReader::ReadUintAttr(*point, "y", y);
 
       if (!r) {
 	fprintf(stderr, "Invalid point definition!\n");
@@ -174,24 +176,18 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
       }
 
 
-      polygon->AddPoint(Point2d(x * PIXEL_PER_METER, y * PIXEL_PER_METER));
-
-
-      std::ostringstream point_section;
-      point_section << "point-" << i+1;
-
-      point = XmlReader::GetMarker(elem, point_section.str());
+      polygon->AddPoint(Point2d(double(x)/PIXEL_PER_METER, double(y)/PIXEL_PER_METER));
     }
 
     shape = polygon;
   }
 
   shape->SetName(shape_name);
-  shape->SetPosition(Point2d(pos_x * PIXEL_PER_METER, pos_y * PIXEL_PER_METER));
+  shape->SetPosition(Point2d(double(pos_x)/PIXEL_PER_METER, double(pos_y)/PIXEL_PER_METER));
 
   return shape;
 }
-
+// =============================================================================
 
 /////////////////////////////////
 // PhysicalPolygon

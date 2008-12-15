@@ -343,6 +343,7 @@ protected:
   const b2FilterData& GetCollisionFilter() const;
 
 private:
+  void InitShape(const std::string &xml_config);
 
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();
