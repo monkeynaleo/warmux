@@ -66,10 +66,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
-  m_test_left(0),
-  m_test_right(0),
-  m_test_top(0),
-  m_test_bottom(0),
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
   m_nbr_contact(0),
@@ -481,23 +477,51 @@ Point2i PhysicalObj::GetSize() const
 
 const Rectanglei PhysicalObj::GetTestRect() const
 {
-  int width = GetWidth() - m_test_right - m_test_left;
-  int height = GetHeight() - m_test_bottom - m_test_top;
+  int width = GetWidth();
+  int height = GetHeight();
   if (width < 1)
     width = 1;
   if (height < 1)
     height = 1;
-  return Rectanglei(GetX() + m_test_left, GetY() + m_test_top, width, height);
+
+
+  std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
+  double shape_pos_x = (*it)->GetCurrentMinX();
+  double shape_pos_y = (*it)->GetCurrentMinY();
+
+  for (it++; it != m_shapes.end(); it++) {
+    if ((*it)->GetCurrentMinX() < shape_pos_x)
+      shape_pos_x = (*it)->GetCurrentMinX();
+
+    if ((*it)->GetCurrentMinY() < shape_pos_y)
+      shape_pos_y = (*it)->GetCurrentMinY();
+  }
+
+  return Rectanglei(int(shape_pos_x * PIXEL_PER_METER), int(shape_pos_y * PIXEL_PER_METER), width, height);
 }
 
-int PhysicalObj::GetTestWidth() const
+int PhysicalObj::GetMinX() const
 {
-  return GetWidth() - m_test_left - m_test_right;
+  std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
+  double shape_pos_x = (*it)->GetCurrentMinX();
+
+  for (it++; it != m_shapes.end(); it++) {
+    if ((*it)->GetCurrentMinX() < shape_pos_x)
+      shape_pos_x = (*it)->GetCurrentMinX();
+  }
+  return int(shape_pos_x * PIXEL_PER_METER);
 }
 
-int PhysicalObj::GetTestHeight() const
+int PhysicalObj::GetMinY() const
 {
-  return GetHeight() - m_test_top - m_test_bottom;
+  std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
+  double shape_pos_y = (*it)->GetCurrentMinY();
+
+  for (it++; it != m_shapes.end(); it++) {
+    if ((*it)->GetCurrentMinY() < shape_pos_y)
+      shape_pos_y = (*it)->GetCurrentMinY();
+  }
+  return int(shape_pos_y * PIXEL_PER_METER);
 }
 
 void PhysicalObj::StoreValue(Action *a)
@@ -520,10 +544,6 @@ void PhysicalObj::StoreValue(Action *a)
   a->Push(m_collides_with_characters);
   a->Push(m_collides_with_objects);
   a->Push((int)m_minimum_overlapse_time);
-  a->Push((int)m_test_left);
-  a->Push((int)m_test_right);
-  a->Push((int)m_test_top);
-  a->Push((int)m_test_bottom);
 
   // other information (mostly about rope)
   //  a->Push((int)m_motion_type);
@@ -573,11 +593,6 @@ void PhysicalObj::GetValueFromAction(Action *a)
   collides_with_objects    = !!a->PopInt();
   SetCollisionModel(collides_with_ground, collides_with_characters, collides_with_objects);
   m_minimum_overlapse_time   = (uint)a->PopInt();
-  m_test_left                = (uint)a->PopInt();
-  m_test_right               = (uint)a->PopInt();
-  m_test_top                 = (uint)a->PopInt();
-  m_test_bottom              = (uint)a->PopInt();
-
 
   // other information (mostly about rope)
 
@@ -771,15 +786,6 @@ void PhysicalObj::RemoveAllExternForce()
 bool PhysicalObj::IsSleeping() const
 {
   return m_body->IsSleeping();
-}
-
-// WARNING: MUST BE REMOVED
-void PhysicalObj::SetTestRect (uint /*left*/, uint /*right*/, uint /*top*/, uint /*bottom*/)
-{
-  // m_test_left = left;
-  // m_test_right = right;
-  // m_test_top = top;
-  // m_test_bottom = bottom;
 }
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
@@ -996,16 +1002,16 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
     return true;
   }
 
-  int x = position.x + m_test_left;
-  int y = position.y + m_test_top;
+  int x = GetMinX() - GetX() + position.x;
+  int y = GetMinY() - GetY() + position.y;
 
-  if (GetWorld().IsOutsideWorldXwidth(x, GetTestWidth()))
+  if (GetWorld().IsOutsideWorldXwidth(x, GetWidth()))
     return true;
 
-  if (GetWorld().IsOutsideWorldYheight(y, GetTestHeight())) {
+  if (GetWorld().IsOutsideWorldYheight(y, GetHeight())) {
     if (m_allow_negative_y &&
 	Y_OBJET_MIN <= y &&
-	y + GetTestHeight() - 1 < 0 )
+	y + GetHeight() - 1 < 0 )
 	return false;
 
     return true;
@@ -1026,8 +1032,8 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   if (check_object && CollidedObjectXY(position))
     return false;
 
-  Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-		  GetTestWidth(), GetTestHeight());
+  Rectanglei rect(GetMinX() - GetX() + position.x, GetMinY() - GetY() + position.y,
+		  GetWidth(), GetHeight());
 
   return GetWorld().RectIsInVacuum(rect);
 }
@@ -1037,8 +1043,6 @@ bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_objects) const
   return IsInVacuumXY(GetPosition() + offset, check_objects);
 }
 
-
-
 // ====================================================
 // WARNING: To rewrite using Box2D shapes and contacts
 // ====================================================
@@ -1047,8 +1051,8 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
   if (IsOutsideWorldXY(position))
     return NULL;
 
-  Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-		  GetTestWidth(), GetTestHeight());
+  Rectanglei rect(GetMinX() - GetX() + position.x, GetMinY() - GetY() + position.y,
+		  GetWidth(), GetHeight());
 
   if (m_collides_with_characters) {
 

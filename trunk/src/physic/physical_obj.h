@@ -59,15 +59,10 @@ private:
   const PhysicalObj& operator=(const PhysicalObj&);
   /*********************************************/
 
-
   // collision management
   bool m_collides_with_ground;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
-
-  // WARNING: MUST BE REMOVED
-  // Rectangle used for collision tests
-  uint m_test_left, m_test_right, m_test_top, m_test_bottom;
 
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
@@ -178,10 +173,7 @@ public:
 
   // WARNING: MUST BE REMOVED
   // Set/Get test rectangles
-  void SetTestRect (uint left, uint right, uint top, uint bottom);
   const Rectanglei GetTestRect() const;
-  int GetTestWidth() const;
-  int GetTestHeight() const;
 
   //----------- Access to datas (read only) ----------
   virtual const std::string &GetName() const { return m_name; }
@@ -189,8 +181,8 @@ public:
   const std::string &GetUniqueId() const { return m_unique_id; }
   void SetUniqueId(const std::string& s) { m_unique_id = s; }
 
-  int GetCenterX() const { return GetX() +m_test_left +GetTestWidth()/2; };
-  int GetCenterY() const { return GetY() +m_test_top +GetTestHeight()/2; };
+  int GetCenterX() const { return GetMinX() + GetWidth()/2; };
+  int GetCenterY() const { return GetMinY() + GetHeight()/2; };
   const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
   const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), 1, 1); };
   bool CollidesWithGround() const { return m_collides_with_ground; }
@@ -344,6 +336,8 @@ protected:
 
 private:
   void InitShape(const std::string &xml_config);
+  int GetMinX() const;
+  int GetMinY() const;
 
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();

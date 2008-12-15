@@ -244,7 +244,7 @@ void Character::SetDirection (BodyDirection_t nv_direction)
   body->SetDirection(nv_direction);
   uint l,r,t,b;
   body->GetTestRect(l,r,t,b);
-  SetTestRect(l,r,t,b);
+  // SetTestRect(l,r,t,b);
   m_team.crosshair.Refresh(GetFiringAngle());
 }
 
@@ -952,7 +952,7 @@ void Character::SetMovement(const std::string& name, bool force)
   body->SetMovement(name);
   uint l,r,t,b;
   body->GetTestRect(l,r,t,b);
-  SetTestRect(l,r,t,b);
+  // SetTestRect(l,r,t,b);
 }
 
 void Character::SetMovementOnce(const std::string& name, bool force)
@@ -962,7 +962,7 @@ void Character::SetMovementOnce(const std::string& name, bool force)
   body->SetMovementOnce(name);
   uint l,r,t,b;
   body->GetTestRect(l,r,t,b);
-  SetTestRect(l,r,t,b);
+  // SetTestRect(l,r,t,b);
 }
 
 void Character::SetClothe(const std::string& name, bool force)
