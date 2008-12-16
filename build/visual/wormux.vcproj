@@ -78,6 +78,7 @@
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="true"
 				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib png.lib xml2.lib curllibd.lib fribidid.lib $(NOINHERIT)"
+				ShowProgress="0"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib;libcmt.lib"
@@ -1098,14 +1099,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\network\distant_cpu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\network\distant_cpu.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\network\download.cpp"
 					>
 				</File>
@@ -1339,14 +1332,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\object\objbox.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\object_cfg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\object\object_cfg.h"
 					>
 				</File>
 				<File
@@ -1913,6 +1898,32 @@
 				</File>
 				<File
 					RelativePath="..\..\src\physic\force.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\object_cfg.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\src\physic\object_cfg.h"
 					>
 				</File>
 				<File
