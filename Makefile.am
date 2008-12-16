@@ -37,8 +37,8 @@ EXTRA_DIST = data/wormux.desktop                   \
              tools/win32_setup/uninstall.ico
 
 if WIN32
-install: all
-	@echo "Building Win32 .exe installer in tools/win32_setup"
+setup: all
+	@echo "Building Win32 .exe installer in build/win32_setup"
 	@(cd build/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
           rm installer.log && echo "Success!") || \
          (echo "Installer compilation failed!"; \
