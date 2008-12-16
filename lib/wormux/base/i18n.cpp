@@ -31,36 +31,18 @@
 #include <fribidi/fribidi.h>
 #include <cstring>
 
-#if defined(FRIBIDI_MINOR_VERSION) && FRIBIDI_MINOR_VERSION == 19
-/** Needed because fribidi2 doesn't export those symbols in the 0.19.1 release */
-#define fribidi_utf8_to_unicode FRIBIDI_NAMESPACE(utf8_to_unicode)
-#define fribidi_unicode_to_utf8 FRIBIDI_NAMESPACE(unicode_to_utf8)
-extern "C" {
-FriBidiStrIndex fribidi_utf8_to_unicode (
-  const char *s,
-  FriBidiStrIndex length,
-  FriBidiChar *us
-);
-FRIBIDI_ENTRY FriBidiStrIndex fribidi_unicode_to_utf8 (
-  const FriBidiChar *us,
-  FriBidiStrIndex length,
-  char *s
-);
-};
-#endif
-
+FriBidiCharSet utf8;
 FriBidiCharType pbase_dir = FRIBIDI_TYPE_ON;
+FriBidiChar unicode_buffer[2048];
+char buffer[2048];
 
-FriBidiChar unicode_buffer[16384];
-char buffer[16384];
+char* localization(const char * message) {
+  char* string = gettext(message);
+  int l        = strlen(string);
+  int l_u      = fribidi_charset_to_unicode(utf8, string, l, unicode_buffer);
 
-char * localization(const char * message) {
-  char * string = gettext(message);
-  int l = strlen(string);
-  int l_u;
-  l_u = fribidi_utf8_to_unicode(string, l, unicode_buffer);
   fribidi_log2vis(unicode_buffer, l_u, &pbase_dir, unicode_buffer, NULL, NULL, NULL);
-  fribidi_unicode_to_utf8(unicode_buffer, l_u, (char *)buffer);
+  fribidi_unicode_to_charset(utf8, unicode_buffer, l_u, (char *)buffer);
   return buffer;
 }
 #endif /* USE_FRIBIDI */
@@ -109,6 +91,14 @@ static void I18N_SetDir(const std::string &dir)
 void InitI18N(const std::string &dir, const std::string &default_language)
 {
   setlocale(LC_ALL, "");
+
+#ifdef USE_FRIBIDI
+  // Load UTF-8 charset
+  utf8 = fribidi_parse_charset ("UTF-8");
+  if (!utf8)
+    Error("Error in fribidi parsing charset UTF-8 !?");
+#endif
+
 #ifdef _WIN32
   std::string variable = "LANGUAGE=";
   variable += default_language;
