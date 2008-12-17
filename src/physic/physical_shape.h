@@ -43,7 +43,9 @@ protected:
   Point2d m_position;
   int m_mass;
   double m_friction;
+  double m_density;
   std::string m_name;
+
 
 public:
   PhysicalShape();
