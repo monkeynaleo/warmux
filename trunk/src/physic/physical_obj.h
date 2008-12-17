@@ -170,6 +170,11 @@ public:
   double GetHdouble() const;
   Point2d GetSizeDouble() const;
 
+  double GetInitialWdouble() const;
+  double GetInitialHdouble() const;
+  int GetInitialWidth() const;
+  int GetInitialHeight() const;
+  Point2i GetInitialSize() const;
 
   // WARNING: MUST BE REMOVED
   // Set/Get test rectangles
