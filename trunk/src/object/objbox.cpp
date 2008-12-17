@@ -62,6 +62,7 @@ ObjBox::ObjBox(const std::string &name)
   SetCollisionModel(true, false, true);
   std::cout<<"super called"<<std::endl;
   JukeBox::GetInstance()->Play("share","box/falling");
+
 }
 
 ObjBox::~ObjBox()
@@ -114,6 +115,8 @@ void ObjBox::DropBox()
 
 void ObjBox::Draw()
 {
+anim->SetRotation_HotSpot(Point2i(0,0));
+  anim->SetRotation_rad(- GetAngle());
   anim->Draw(GetPosition());
 }
 

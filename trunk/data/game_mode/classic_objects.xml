@@ -31,6 +31,13 @@
     <gravity_factor>1.2</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+     <shape name="bonus_box-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="19" y="78" />
+      <point x="47" y="78" />
+      <point x="47" y="100" />
+      <point x="19" y="100" />
+    </shape>
   </bonus_box>
 
   <medkit>
@@ -40,6 +47,13 @@
     <gravity_factor>1.2</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="bonus_box-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="19" y="78" />
+      <point x="47" y="78" />
+      <point x="47" y="100" />
+      <point x="19" y="100" />
+    </shape>
   </medkit>
 
   <barrel>
@@ -236,6 +250,23 @@
     <rebound_factor>0.01</rebound_factor>
   </flamethrower_bullet>
 
+  <rope>
+    <mass>2.0</mass>
+    <wind_factor>0.8</wind_factor>
+    <air_resist_factor>0.0</air_resist_factor>
+    <gravity_factor>0.1</gravity_factor>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
+  </rope>
+  
+  <rope_node>
+    <mass>2.0</mass>
+    <wind_factor>0.8</wind_factor>
+    <air_resist_factor>0.0</air_resist_factor>
+    <gravity_factor>0.1</gravity_factor>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
+  </rope_node>
   <!-- Weapons projectiles -->
   <!-- Bazooka and automatic bazookas rockets -->
   <rocket>
