@@ -475,6 +475,64 @@ Point2i PhysicalObj::GetSize() const
   return Point2i(GetWidth(), GetHeight());
 }
 
+double PhysicalObj::GetInitialWdouble() const
+{
+  ASSERT(m_shapes.size() != 0);
+
+  std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
+  double phys_min_x = (*it)->GetInitialMinX();
+  double phys_max_x = (*it)->GetInitialMaxX();
+
+  for (it++; it != m_shapes.end(); it++) {
+    if ((*it)->GetInitialMinX() < phys_min_x)
+      phys_min_x = (*it)->GetInitialMinX();
+
+    if ((*it)->GetInitialMaxX() > phys_max_x)
+      phys_max_x = (*it)->GetInitialMaxX();
+  }
+  double phys_width = phys_max_x - phys_min_x;
+
+  double pixel_width = phys_width * PIXEL_PER_METER;
+  return pixel_width;
+}
+
+double PhysicalObj::GetInitialHdouble() const
+{
+  ASSERT(m_shapes.size() != 0);
+
+  std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
+  double phys_min_y = (*it)->GetInitialMinY();
+  double phys_max_y = (*it)->GetInitialMaxY();
+
+  for (it++; it != m_shapes.end(); it++) {
+
+    if ((*it)->GetInitialMinY() < phys_min_y)
+      phys_min_y = (*it)->GetInitialMinY();
+
+    if ((*it)->GetInitialMaxY() > phys_max_y)
+      phys_max_y = (*it)->GetInitialMaxY();
+  }
+  double phys_height = phys_max_y - phys_min_y;
+
+  double pixel_height = phys_height * PIXEL_PER_METER;
+  return pixel_height;
+}
+
+int PhysicalObj::GetInitialWidth() const
+{
+  return int(GetInitialWdouble()+0.5f);//Round
+}
+
+int PhysicalObj::GetInitialHeight() const
+{
+  return int(GetInitialHdouble()+0.5f);//Round
+}
+
+Point2i PhysicalObj::GetInitialSize() const
+{
+  return Point2i(GetInitialWidth(), GetInitialHeight());
+}
+
 const Rectanglei PhysicalObj::GetTestRect() const
 {
   int width = GetWidth();

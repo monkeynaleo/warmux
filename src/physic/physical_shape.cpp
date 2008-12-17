@@ -241,6 +241,8 @@ void PhysicalPolygon::Clear()
 
 double PhysicalPolygon::GetCurrentMinX() const
 {
+  ASSERT(m_shape);
+
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
   ASSERT(polygon->GetVertexCount() > 0);
 
@@ -257,6 +259,8 @@ double PhysicalPolygon::GetCurrentMinX() const
 
 double PhysicalPolygon::GetCurrentMaxX() const
 {
+  ASSERT(m_shape);
+
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 0);
@@ -274,6 +278,8 @@ double PhysicalPolygon::GetCurrentMaxX() const
 
 double PhysicalPolygon::GetCurrentMinY() const
 {
+  ASSERT(m_shape);
+
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 0);
@@ -291,6 +297,8 @@ double PhysicalPolygon::GetCurrentMinY() const
 
 double PhysicalPolygon::GetCurrentMaxY() const
 {
+  ASSERT(m_shape);
+
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 0);
@@ -308,6 +316,8 @@ double PhysicalPolygon::GetCurrentMaxY() const
 
 double PhysicalPolygon::GetCurrentWidth() const
 {
+  ASSERT(m_shape);
+
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 0);
@@ -330,6 +340,8 @@ double PhysicalPolygon::GetCurrentWidth() const
 
 double PhysicalPolygon::GetCurrentHeight() const
 {
+  ASSERT(m_shape);
+
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 0);
@@ -350,6 +362,34 @@ double PhysicalPolygon::GetCurrentHeight() const
   return height;
 }
 
+double PhysicalPolygon::GetInitialMinX() const
+{
+  ASSERT(m_point_list.size() > 0);
+  double minx = m_point_list[0].x;
+
+  for (uint i = 1; i<m_point_list.size(); i++) {
+
+    if (m_point_list[i].x < minx)
+      minx = m_point_list[i].x;
+  }
+
+  return minx;
+}
+
+double PhysicalPolygon::GetInitialMaxX() const
+{
+  ASSERT(m_point_list.size() > 0);
+  double maxx = m_point_list[0].x;
+
+  for (uint i = 1; i<m_point_list.size(); i++) {
+
+    if (m_point_list[i].x > maxx)
+      maxx = m_point_list[i].x;
+  }
+
+  return maxx;
+}
+
 double PhysicalPolygon::GetInitialWidth() const
 {
   ASSERT(m_point_list.size() > 0);
@@ -368,6 +408,32 @@ double PhysicalPolygon::GetInitialWidth() const
   }
   width = maxx - minx;
   return width;
+}
+
+double PhysicalPolygon::GetInitialMinY() const
+{
+  ASSERT(m_point_list.size() > 0);
+  double miny = m_point_list[0].y;
+
+  for (uint i = 1; i<m_point_list.size(); i++) {
+    if (m_point_list[i].y < miny)
+      miny = m_point_list[i].y;
+  }
+
+  return miny;
+}
+
+double PhysicalPolygon::GetInitialMaxY() const
+{
+  ASSERT(m_point_list.size() > 0);
+  double maxy = m_point_list[0].y;
+
+  for (uint i = 1; i<m_point_list.size(); i++) {
+    if (m_point_list[i].y > maxy)
+      maxy = m_point_list[i].y;
+  }
+
+  return maxy;
 }
 
 double PhysicalPolygon::GetInitialHeight() const
@@ -478,32 +544,52 @@ void PhysicalCircle::Generate()
 
 double PhysicalCircle::GetCurrentMinX() const
 {
-  return m_body->GetPosition().x + m_position.x - m_radius;
+  return m_body->GetPosition().x + GetInitialMinX();
 }
 
 double PhysicalCircle::GetCurrentMaxX() const
 {
-  return m_body->GetPosition().x + m_position.x + m_radius;
+  return m_body->GetPosition().x + GetInitialMaxX();
 }
 
 double PhysicalCircle::GetCurrentMinY() const
 {
-  return m_body->GetPosition().y + m_position.y - m_radius;
+  return m_body->GetPosition().y + GetInitialMinY();
 }
 
 double PhysicalCircle::GetCurrentMaxY() const
 {
-  return m_body->GetPosition().y + m_position.y + m_radius;
+  return m_body->GetPosition().y + GetInitialMaxY();
+}
+
+double PhysicalCircle::GetInitialMinX() const
+{
+  return m_position.x - m_radius;
+}
+
+double PhysicalCircle::GetInitialMaxX() const
+{
+  return m_position.x + m_radius;
+}
+
+double PhysicalCircle::GetInitialMinY() const
+{
+  return m_position.y - m_radius;
+}
+
+double PhysicalCircle::GetInitialMaxY() const
+{
+  return m_position.y + m_radius;
 }
 
 double PhysicalCircle::GetCurrentWidth() const
 {
-  return m_radius*2;
+  return GetInitialWidth();
 }
 
 double PhysicalCircle::GetCurrentHeight() const
 {
-  return m_radius*2;
+  return GetInitialHeight();
 }
 
 double PhysicalCircle::GetInitialWidth() const

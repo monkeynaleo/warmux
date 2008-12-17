@@ -75,6 +75,11 @@ public:
   virtual double GetInitialWidth() const = 0;
   virtual double GetInitialHeight() const = 0;
 
+  virtual double GetInitialMinX() const = 0;
+  virtual double GetInitialMaxX() const = 0;
+  virtual double GetInitialMinY() const = 0;
+  virtual double GetInitialMaxY() const = 0;
+
   static PhysicalShape* LoadFromXml(const xmlNode* root_shape);
 
 #ifdef DEBUG
@@ -102,6 +107,11 @@ public:
   virtual double GetCurrentMaxX() const;
   virtual double GetCurrentMinY() const;
   virtual double GetCurrentMaxY() const;
+
+  virtual double GetInitialMinX() const;
+  virtual double GetInitialMaxX() const;
+  virtual double GetInitialMinY() const;
+  virtual double GetInitialMaxY() const;
 
 #ifdef DEBUG
   void DrawBorder(const Color &color) const;
@@ -138,6 +148,11 @@ public:
   virtual double GetCurrentMaxX() const;
   virtual double GetCurrentMinY() const;
   virtual double GetCurrentMaxY() const;
+
+  virtual double GetInitialMinX() const;
+  virtual double GetInitialMaxX() const;
+  virtual double GetInitialMinY() const;
+  virtual double GetInitialMaxY() const;
 
 #ifdef DEBUG
   void DrawBorder(const Color &color) const;
