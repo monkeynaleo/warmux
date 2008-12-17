@@ -11,6 +11,17 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.25</rebound_factor>
+    <shape name="body" type="polygon">
+      <position x="0" y="0" />
+      <point x="8" y="0" />
+      <point x="22" y="0" />
+      <point x="22" y="32" />
+      <point x="8" y="32" />
+    </shape>
+    <shape name="feet" type="circle">
+      <position x="15" y="30" />
+      <radius>15</radius>
+    </shape>
   </character>
 
   <bonus_box>
@@ -38,6 +49,15 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+
+    <shape name="barrel-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="2" y="2" />
+      <point x="28" y="2" />
+      <point x="28" y="23" />
+      <point x="15" y="31" />
+      <point x="2" y="23" />
+    </shape>
   </barrel>
 
   <anvil>
