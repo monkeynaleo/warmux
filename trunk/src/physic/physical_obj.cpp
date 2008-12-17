@@ -1483,6 +1483,12 @@ void PhysicalObj::SetAngle(double angle)
   }
 }
 
+const Point2i PhysicalObj::GetRotationCenter()
+{
+  b2Vec2 center = m_body->GetLocalCenter();
+  return Point2i(lround(center.x*PIXEL_PER_METER),lround(center.y*PIXEL_PER_METER));
+}
+
 PhysicalShape *PhysicalObj::GetShape(b2Shape *shape)
 {
   std::list<PhysicalShape *>::iterator it;

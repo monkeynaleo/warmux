@@ -37,6 +37,7 @@ PhysicalShape::PhysicalShape() :
   m_position(0,0),
   m_mass(1),
   m_friction(0.8f),
+  m_density(30),
   m_name("")
 {
 }
@@ -216,7 +217,7 @@ void PhysicalPolygon::Generate()
     shapeDef.vertices[i].Set(m_point_list[i].x, m_point_list[i].y);
   }
 
-  shapeDef.density = 1.0f;
+  shapeDef.density = m_density;
   shapeDef.friction = m_friction;
   shapeDef.restitution = 0.1f;
   shapeDef.filter.categoryBits = m_filter.categoryBits;
@@ -224,11 +225,11 @@ void PhysicalPolygon::Generate()
   shapeDef.filter.groupIndex = m_filter.groupIndex;
   m_shape = m_body->CreateShape(&shapeDef);
 
-  b2MassData massData;
+  //b2MassData massData;
  // massData.mass = m_mass;
  // massData.center.SetZero();
  // massData.I = 1.0f;
-  m_shape->ComputeMass(&massData);
+ // m_shape->ComputeMass(&massData);
 
 
   //m_body->SetMass(&massData);
@@ -462,17 +463,17 @@ void PhysicalPolygon::DrawBorder(const Color& color) const
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 2);
-
-  int init_x = lround((m_body->GetPosition().x + (polygon->GetVertices())[0].x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-  int init_y = lround((m_body->GetPosition().y + (polygon->GetVertices())[0].y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+  b2XForm xf = m_body->GetXForm();
+  int init_x = lround(( b2Mul(xf,polygon->GetVertices()[0]).x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+  int init_y = lround(( b2Mul(xf,polygon->GetVertices()[0]).y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
   int prev_x = init_x;
   int prev_y = init_y;
   int x, y;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    x = lround((m_body->GetPosition().x + (polygon->GetVertices())[i].x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-    y = lround((m_body->GetPosition().y + (polygon->GetVertices())[i].y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+    x = lround(( b2Mul(xf,polygon->GetVertices()[i]).x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+    y = lround(( b2Mul(xf,polygon->GetVertices()[i]).y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
 
     GetMainWindow().LineColor(prev_x, x, prev_y, y, color);
     prev_x = x;
@@ -526,7 +527,7 @@ void PhysicalCircle::Generate()
   b2CircleDef shapeDef;
   shapeDef.radius = m_radius;
   shapeDef.localPosition.Set(m_position.x, m_position.y);
-  shapeDef.density = 1.0f;
+  shapeDef.density = m_density;
   shapeDef.friction = m_friction;
   shapeDef.restitution = 0.1f;
   shapeDef.filter.categoryBits = m_filter.categoryBits;

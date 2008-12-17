@@ -128,6 +128,7 @@ public:
   double GetXdouble() const;
   double GetYdouble() const;
   const Point2d GetPosition() const { return Point2d(GetXdouble(), GetYdouble()) ;};
+  const Point2i GetRotationCenter();
 
   // Set/Get position
   void SetPhysXY(double x, double y);
