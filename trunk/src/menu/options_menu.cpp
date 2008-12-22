@@ -280,6 +280,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "he",    "עברית (Hebrew)",      "he");
   lbox_languages->AddItem(config->GetLanguage() == "hu",    "Magyar",              "hu");
   lbox_languages->AddItem(config->GetLanguage() == "it",    "Italiano",            "it");
+  lbox_languages->AddItem(config->GetLanguage() == "kw",    "Kernewek",            "kw");
   lbox_languages->AddItem(config->GetLanguage() == "lv",    "latviešu valoda",     "lv");
   lbox_languages->AddItem(config->GetLanguage() == "nb",    "Norsk",               "nb");
   lbox_languages->AddItem(config->GetLanguage() == "nl",    "Nederlands",          "nl");
