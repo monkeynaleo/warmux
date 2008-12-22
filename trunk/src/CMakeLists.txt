@@ -42,6 +42,7 @@ TARGET_LINK_LIBRARIES(
 	${CURL_LIBRARIES}
 	${PNG_LIBRARY}
 	${SDL_LIBRARY}
+	${FRIBIDI_LIBRARY}
 	libbox2d.a
 	libwormux.a
 )
