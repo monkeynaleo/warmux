@@ -17,12 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:325
+#: /lgames/wormux/src/map/maps_list.cpp:325
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebyla nalezena :-("
 
-#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
+#: /lgames/wormux/src/menu/network_menu.cpp:110
+#: /lgames/wormux/src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -30,7 +31,8 @@ msgstr[0] "%i hráč připojen"
 msgstr[1] "%i hráči připojeni"
 msgstr[2] "%i hráčů připojeno"
 
-#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
+#: /lgames/wormux/src/menu/network_menu.cpp:114
+#: /lgames/wormux/src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -38,63 +40,63 @@ msgstr[0] "%i hráč připraven"
 msgstr[1] "%i hráči připraveni"
 msgstr[2] "%i hráčů připraveno"
 
-#: src/map/maps_list.cpp:115
+#: /lgames/wormux/src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> jako %s z %s"
 
-#: src/map/maps_list.cpp:122
+#: /lgames/wormux/src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
 
-#: src/menu/team_box.cpp:216
+#: /lgames/wormux/src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "%s Tým"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: /lgames/wormux/src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Tým - Vzdálený"
 
-#: src/graphic/fps.cpp:103
+#: /lgames/wormux/src/graphic/fps.cpp:103
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:723
+#: /lgames/wormux/src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s spáchal sebevraždu !"
 
-#: src/game/game.cpp:756
+#: /lgames/wormux/src/game/game.cpp:756
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) zemřel."
 
-#: src/game/game.cpp:714
+#: /lgames/wormux/src/game/game.cpp:714
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s se utopil."
 
-#: src/game/game.cpp:708
+#: /lgames/wormux/src/game/game.cpp:708
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s zmizel z mapy!"
 
-#: src/game/game.cpp:729
+#: /lgames/wormux/src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:736
+#: /lgames/wormux/src/game/game.cpp:736
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s je mrtvý, protože je trdlo!"
 
-#: src/object/medkit.cpp:70
+#: /lgames/wormux/src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -102,28 +104,28 @@ msgstr[0] "%s získal %u život!"
 msgstr[1] "%s získal %u životy!"
 msgstr[2] "%s získal %u životů!"
 
-#: src/game/game.cpp:748
+#: /lgames/wormux/src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychouš, zabil člena týmu %s!"
 
-#: src/weapon/mine.cpp:123
+#: /lgames/wormux/src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s šlápl na minu!"
 
-#: src/object/bonus_box.cpp:97
+#: /lgames/wormux/src/object/bonus_box.cpp:97
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Tým %s již má nekonečně nábojů pro %s!"
 
 #. Show message
-#: src/weapon/skip_turn.cpp:57
+#: /lgames/wormux/src/weapon/skip_turn.cpp:57
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "Tým %s se vzdal tahu."
 
-#: src/weapon/cluzooka.cpp:396
+#: /lgames/wormux/src/weapon/cluzooka.cpp:396
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -131,7 +133,7 @@ msgstr[0] "Tým %s získal %u tříštivou bazuku!"
 msgstr[1] "Tým %s získal %u tříštivé bazuky!"
 msgstr[2] "Tým %s získal %u bazuk!"
 
-#: src/weapon/gnu.cpp:175
+#: /lgames/wormux/src/weapon/gnu.cpp:175
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -139,7 +141,7 @@ msgstr[0] "Tým %s získal %u Gnu! Rozmeťte je všechny!"
 msgstr[1] "Tým %s získal %u Gnu! Rozmeťte je všechny!"
 msgstr[2] "Tým %s získal %u Gnu! Rozmeťte je všechny!"
 
-#: src/weapon/air_attack.cpp:272
+#: /lgames/wormux/src/weapon/air_attack.cpp:272
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -147,7 +149,7 @@ msgstr[0] "Tým %s získal %u vzdušný útok!"
 msgstr[1] "Tým %s vyhrál %u vzdušné útoky!"
 msgstr[2] "Tým %s vyhrál %u vzdušných útoků!"
 
-#: src/weapon/airhammer.cpp:172
+#: /lgames/wormux/src/weapon/airhammer.cpp:172
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -165,7 +167,7 @@ msgstr[2] ""
 "Tým %s získal %u pneumatických kladiv. Nedělejte s nimi moc hluku! Vaši "
 "sousedé vám poděkují."
 
-#: src/weapon/anvil.cpp:176
+#: /lgames/wormux/src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -173,7 +175,7 @@ msgstr[0] "Tým %s získal %u kovadlinu! Rozplácněte je všechny!"
 msgstr[1] "Tým %s získal %u kovadliny! Rozplácněte je všechny!"
 msgstr[2] "Tým %s získal %u kovadlin! Rozplácněte je všechny!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: /lgames/wormux/src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -181,7 +183,7 @@ msgstr[0] "Tým %s získal %u automatickou bazuku!"
 msgstr[1] "Tým %s získal %u automatické bazuky!"
 msgstr[2] "Tým %s získal %u automatických bazuk!"
 
-#: src/weapon/baseball.cpp:116
+#: /lgames/wormux/src/weapon/baseball.cpp:116
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
@@ -189,7 +191,7 @@ msgstr[0] "Tým %s získal %u baseballovou pálku!"
 msgstr[1] "Tým %s získal %u baseballové pálky!"
 msgstr[2] "Tým %s získal %u baseballových pálek!"
 
-#: src/weapon/bazooka.cpp:130
+#: /lgames/wormux/src/weapon/bazooka.cpp:130
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -197,7 +199,7 @@ msgstr[0] "Tým %s získal %u bazuku!"
 msgstr[1] "Tým %s získal %u bazuky!"
 msgstr[2] "Tým %s získal %u bazuk!"
 
-#: src/weapon/blowtorch.cpp:138
+#: /lgames/wormux/src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -214,7 +216,7 @@ msgstr[2] ""
 "Tým %s získal %u letlamp! Pokud je vám méně než 18, zeptejte se rodičů, "
 "jestli ji můžete použít."
 
-#: src/weapon/bounce_ball.cpp:113
+#: /lgames/wormux/src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -222,7 +224,7 @@ msgstr[0] "Tým %s získal %u skákací kuličku! Ping, ping, bum!"
 msgstr[1] "Tým %s získal %u skákací kuličky! Ping, ping, bum!"
 msgstr[2] "Tým %s získal %u skákacích kuliček! Ping, ping, bum!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: /lgames/wormux/src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -230,7 +232,7 @@ msgstr[0] "Tým %s získal %u tříštivou bombu!"
 msgstr[1] "Tým %s získal %u tříštivé bomby!"
 msgstr[2] "Tým %s získal %u tříštivých bomb!"
 
-#: src/weapon/construct.cpp:82
+#: /lgames/wormux/src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -238,7 +240,7 @@ msgstr[0] "Tým %s získal %u stavitelskou součást! Nezapomeňte svou helmu."
 msgstr[1] "Tým %s získal %u stavitelské součásti! Nezapomeňte svou helmu."
 msgstr[2] "Tým %s získal %u stavitelských součástí! Nezapomeňte svou helmu."
 
-#: src/weapon/disco_grenade.cpp:170
+#: /lgames/wormux/src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -247,7 +249,7 @@ msgstr[0] "Tým %s získal %u disco granát! Rozvlň své tělo až ho budeš h�
 msgstr[1] "Tým %s získal %u disco granáty! Rozvlň své tělo až je budeš házet!"
 msgstr[2] "Tým %s získal %u disco granátů! Rozvlň své tělo až je budeš házet!"
 
-#: src/weapon/dynamite.cpp:145
+#: /lgames/wormux/src/weapon/dynamite.cpp:145
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -255,7 +257,7 @@ msgstr[0] "Tým %s získal %u dynamit!"
 msgstr[1] "Tým %s získal %u dynamity!"
 msgstr[2] "Tým %s získal %u dynamitů!"
 
-#: src/weapon/flamethrower.cpp:180
+#: /lgames/wormux/src/weapon/flamethrower.cpp:180
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -263,7 +265,7 @@ msgstr[0] "Tým %s získal %u plamenomet!"
 msgstr[1] "Tým %s získal %u plamenomety!"
 msgstr[2] "Tým %s získal %u plamenometů!"
 
-#: src/weapon/footbomb.cpp:176
+#: /lgames/wormux/src/weapon/footbomb.cpp:176
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -271,7 +273,7 @@ msgstr[0] "Tým %s získal %u ragbyovou bombu!"
 msgstr[1] "Tým %s získal %u ragbyové bomby!"
 msgstr[2] "Tým %s získal %u baseballových pálek!"
 
-#: src/weapon/grapple.cpp:332
+#: /lgames/wormux/src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -279,7 +281,7 @@ msgstr[0] "Tým %s získal %u lodní hák!"
 msgstr[1] "Tým %s získal %u lodní háky!"
 msgstr[2] "Tým %s získal %u lodních háků!"
 
-#: src/weapon/grenade.cpp:90
+#: /lgames/wormux/src/weapon/grenade.cpp:90
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -287,7 +289,7 @@ msgstr[0] "Tým %s získal %u granát!"
 msgstr[1] "Tým %s získal %u granáty!"
 msgstr[2] "Tým %s získal %u granátů!"
 
-#: src/weapon/gun.cpp:99
+#: /lgames/wormux/src/weapon/gun.cpp:99
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
@@ -295,7 +297,7 @@ msgstr[0] "Tým %s získal %u pistoli!"
 msgstr[1] "Tým %s získal %u pistole!"
 msgstr[2] "Tým %s získal %u pistolí!"
 
-#: src/weapon/jetpack.cpp:252
+#: /lgames/wormux/src/weapon/jetpack.cpp:252
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -303,7 +305,7 @@ msgstr[0] "Tým %s získal %u tryskový batoh! Hop, hop a letím!"
 msgstr[1] "Tým %s získal %u tryskové batohy! Hop, hop a letím!"
 msgstr[2] "Tým %s získal %u tryskových batohů! Hop, hop a letím!"
 
-#: src/weapon/lowgrav.cpp:84
+#: /lgames/wormux/src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -311,7 +313,7 @@ msgstr[0] "Tým %s získal %u nízkou gravitaci! Jsem Neil Armstrong!"
 msgstr[1] "Tým %s získal %u nízké gravitace! Jsem Neil Armstrong!"
 msgstr[2] "Tým %s získal %u nízkých gravitací! Jsem Neil Armstrong!"
 
-#: src/weapon/mine.cpp:249
+#: /lgames/wormux/src/weapon/mine.cpp:249
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -319,7 +321,7 @@ msgstr[0] "Tým %s získal %u minu!"
 msgstr[1] "Tým %s získal %u miny!"
 msgstr[2] "Tým %s získal %u min!"
 
-#: src/weapon/parachute.cpp:167
+#: /lgames/wormux/src/weapon/parachute.cpp:167
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -327,7 +329,7 @@ msgstr[0] "Tým %s získal %u padák!"
 msgstr[1] "Tým %s získal %u padáky!"
 msgstr[2] "Tým %s získal %u padáků!"
 
-#: src/weapon/polecat.cpp:182
+#: /lgames/wormux/src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -335,7 +337,7 @@ msgstr[0] "Tým %s získal %u tchoře! Máte připravené svoje plynové masky?"
 msgstr[1] "Tým %s získal %u tchoře! Máte připravené svoje plynové masky?"
 msgstr[2] "Tým %s získal %u tchořů! Máte připravené svoje plynové masky?"
 
-#: src/weapon/riot_bomb.cpp:133
+#: /lgames/wormux/src/weapon/riot_bomb.cpp:133
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -343,7 +345,7 @@ msgstr[0] "Tým %s získal %u minomet!"
 msgstr[1] "Tým %s získal %u minomety!"
 msgstr[2] "Tým %s získal %u minometů!"
 
-#: src/weapon/shotgun.cpp:135
+#: /lgames/wormux/src/weapon/shotgun.cpp:135
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -351,7 +353,7 @@ msgstr[0] "Tým %s získal %u brokovnici!"
 msgstr[1] "Tým %s získal %u brokovnice!"
 msgstr[2] "Tým %s získal %u brokovnic!"
 
-#: src/weapon/slap.cpp:85
+#: /lgames/wormux/src/weapon/slap.cpp:85
 #, fuzzy, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
@@ -359,7 +361,7 @@ msgstr[0] "Tým %s získal %u lodní hák!"
 msgstr[1] "Tým %s získal %u lodní háky!"
 msgstr[2] "Tým %s získal %u lodních háků!"
 
-#: src/weapon/snipe_rifle.cpp:247
+#: /lgames/wormux/src/weapon/snipe_rifle.cpp:247
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -368,7 +370,7 @@ msgstr[0] "Tým %s získal %u ostřelovací pušku. Střelte je mezi oči!"
 msgstr[1] "Tým %s získal %u ostřelovací pušky. Střelte je mezi oči!"
 msgstr[2] "Tým %s získal %u ostřelovacích pušek. Střelte je mezi oči!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: /lgames/wormux/src/weapon/submachine_gun.cpp:144
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -376,7 +378,7 @@ msgstr[0] "Tým %s získal %u samopal!"
 msgstr[1] "Tým %s získal %u samopaly!"
 msgstr[2] "Tým %s získal %u samopalů!"
 
-#: src/weapon/suicide.cpp:77
+#: /lgames/wormux/src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
@@ -384,7 +386,7 @@ msgstr[0] "Tým %s získal %u sebevraždu!"
 msgstr[1] "Tým %s získal %u sebevraždy!"
 msgstr[2] "Tým %s získal %u sebevražd!"
 
-#: src/weapon/syringe.cpp:115
+#: /lgames/wormux/src/weapon/syringe.cpp:115
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
@@ -392,7 +394,7 @@ msgstr[0] "Tým %s získal %u stříkačku!"
 msgstr[1] "Tým %s získal %u stříkačky!"
 msgstr[2] "Tým %s získal %u stříkaček!"
 
-#: src/weapon/teleportation.cpp:120
+#: /lgames/wormux/src/weapon/teleportation.cpp:120
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -400,7 +402,7 @@ msgstr[0] "Tým %s získal %u teleport!"
 msgstr[1] "Tým %s získal %u teleporty!"
 msgstr[2] "Tým %s získal %u teleportů!"
 
-#: src/weapon/skip_turn.cpp:68
+#: /lgames/wormux/src/weapon/skip_turn.cpp:68
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
@@ -408,7 +410,7 @@ msgstr[0] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete.
 msgstr[1] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete."
 msgstr[2] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete."
 
-#: src/weapon/supertux.cpp:318
+#: /lgames/wormux/src/weapon/supertux.cpp:318
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -419,35 +421,95 @@ msgstr[1] ""
 msgstr[2] ""
 "Tým %s získal %u odpalovačů tučňáků! Nikdo neviděl jak tučňáci létají?"
 
-#: src/game/game_blitz.cpp:70
+#: /lgames/wormux/src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:744
+#: /lgames/wormux/src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
 
-#: src/interface/interface.cpp:185
+#. 1003.2 specifies the format of this message.
+#: /lgames/wormux/src/msvc/getopt.c:794
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:797
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:717
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:687
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:735 /lgames/wormux/src/msvc/getopt.c:908
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:712
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:892
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:874
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: /lgames/wormux/src/msvc/getopt.c:827 /lgames/wormux/src/msvc/getopt.c:957
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr ""
+
+#. +option or -option
+#: /lgames/wormux/src/msvc/getopt.c:768
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr ""
+
+#. --option
+#: /lgames/wormux/src/msvc/getopt.c:764
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr ""
+
+#: /lgames/wormux/src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(mrtvý)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:264
+#: /lgames/wormux/src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(systémový jazyk)"
 
-#: src/network/chatlogger.cpp:29 src/network/chatlogger.cpp:76
+#: /lgames/wormux/src/network/chatlogger.cpp:29
+#: /lgames/wormux/src/network/chatlogger.cpp:76
 msgid "(unknown time)"
 msgstr "(neznámý čas)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:216
+#: /lgames/wormux/src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(neomezeně)"
 
-#: src/menu/options_menu.cpp:442
+#: /lgames/wormux/src/menu/options_menu.cpp:443
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -456,32 +518,33 @@ msgstr ""
 "Je dostupná nová verze %s, pokud je vaše verze %s. Můžete zjistit, zda je "
 "dostupná aktualizace pro Váš operační systém!"
 
-#: src/menu/options_menu.cpp:139
+#: /lgames/wormux/src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr ""
 
-#: src/weapon/air_attack.cpp:219
+#: /lgames/wormux/src/weapon/air_attack.cpp:219
 msgid "Air Attack"
 msgstr "Vzdušný útok"
 
-#: src/weapon/airhammer.cpp:74
+#: /lgames/wormux/src/weapon/airhammer.cpp:74
 msgid "Airhammer"
 msgstr "Pneumatické kladivo"
 
-#: src/menu/results_menu.cpp:421
+#: /lgames/wormux/src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Všechny týmy"
 
-#: src/menu/game_mode_editor.cpp:57
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:57
 #, fuzzy
 msgid "Always"
 msgstr "Hrát"
 
-#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
+#: /lgames/wormux/src/game/game_classic.cpp:56
+#: /lgames/wormux/src/game/game_blitz.cpp:50
 msgid "And the winner is..."
 msgstr ""
 
-#: src/weapon/baseball.cpp:58
+#: /lgames/wormux/src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
 "Fire : space key\n"
@@ -491,261 +554,271 @@ msgstr ""
 "Střelba: mezerník\n"
 "zásah obloukem"
 
-#: src/weapon/anvil.cpp:119
+#: /lgames/wormux/src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/main.cpp:291
+#: /lgames/wormux/src/main.cpp:291
 msgid "Authors:"
 msgstr "Autoři:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: /lgames/wormux/src/weapon/auto_bazooka.cpp:223
 msgid "Automatic Bazooka"
 msgstr "Automatická bazuka"
 
-#: src/menu/pause_menu.cpp:47
+#: /lgames/wormux/src/menu/pause_menu.cpp:47
 msgid "Back to battle"
 msgstr "Zpět do hry"
 
-#: src/network/net_error_msg.cpp:41
+#: /lgames/wormux/src/network/net_error_msg.cpp:41
 msgid "Bad socket ..."
 msgstr "Špatný soket..."
 
-#: src/weapon/baseball.cpp:57
+#: /lgames/wormux/src/weapon/baseball.cpp:57
 msgid "Baseball Bat"
 msgstr "Baseballová pálka"
 
-#: src/weapon/bazooka.cpp:123
+#: /lgames/wormux/src/weapon/bazooka.cpp:123
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/menu/game_mode_editor.cpp:58
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:58
 #, fuzzy
 msgid "Before action"
 msgstr "Teleport"
 
-#: src/menu/game_mode_editor.cpp:44
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:44
 msgid "Blitz"
 msgstr ""
 
-#: src/weapon/blowtorch.cpp:63
+#: /lgames/wormux/src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "Plamenomet"
 
-#: src/weapon/bounce_ball.cpp:89
+#: /lgames/wormux/src/weapon/bounce_ball.cpp:89
 msgid "Bounce Ball"
 msgstr "Skákací kulička"
 
-#: src/weapon/supertux.cpp:179
+#: /lgames/wormux/src/weapon/supertux.cpp:179
 msgid "Bye bye tux..."
 msgstr "Pá pá tuxi..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: /lgames/wormux/src/menu/network_teams_selection_box.cpp:235
+#: /lgames/wormux/src/team/teams_list.cpp:506
+#: /lgames/wormux/src/team/teams_list.cpp:537
+#: /lgames/wormux/src/team/teams_list.cpp:546
+#: /lgames/wormux/src/team/teams_list.cpp:552
+#: /lgames/wormux/src/team/teams_list.cpp:614
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nelze najít tým %s!"
 
-#: src/team/teams_list.cpp:170
+#: /lgames/wormux/src/team/teams_list.cpp:170
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář týmů (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
+#: /lgames/wormux/src/menu/skin_menu.cpp:76
+#: /lgames/wormux/src/team/teams_list.cpp:158
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nepodařilo se otevřít adresář týmů (%s)!"
 
-#: src/team/custom_teams_list.cpp:93
+#: /lgames/wormux/src/team/custom_teams_list.cpp:93
 #, fuzzy, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář týmů (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: /lgames/wormux/src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Center camera to character"
 msgstr "Počet hráčů"
 
-#: src/menu/help_menu.cpp:90
+#: /lgames/wormux/src/menu/help_menu.cpp:90
 msgid "Change active character"
 msgstr ""
 
-#: src/menu/help_menu.cpp:79
+#: /lgames/wormux/src/menu/help_menu.cpp:79
 msgid "Change aim angle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:73
+#: /lgames/wormux/src/menu/help_menu.cpp:73
 msgid "Change weapon category"
 msgstr ""
 
-#: src/menu/help_menu.cpp:78
+#: /lgames/wormux/src/menu/help_menu.cpp:78
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:161
+#: /lgames/wormux/src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character"
 msgstr "Padák"
 
-#: src/menu/game_mode_editor.cpp:61
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
 msgstr "Padák"
 
-#: src/menu/options_menu.cpp:195
+#: /lgames/wormux/src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Zjistit online aktualizace?"
 
-#: src/menu/map_selection_box.cpp:223
+#: /lgames/wormux/src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "Vyber náhodně mezi mapami"
 
-#: src/menu/game_mode_editor.cpp:42
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:42
 msgid "Classic"
 msgstr ""
 
-#: src/menu/help_menu.cpp:77
+#: /lgames/wormux/src/menu/help_menu.cpp:77
 msgid "Click: Center camera on character"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:120
+#: /lgames/wormux/src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "Klientský režim"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: /lgames/wormux/src/menu/results_menu.cpp:168
+#: /lgames/wormux/src/menu/results_menu.cpp:170
 msgid "Clumsiest"
 msgstr "Největší trdlo"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: /lgames/wormux/src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "Tříštivá bomba"
 
-#: src/weapon/cluzooka.cpp:389
+#: /lgames/wormux/src/weapon/cluzooka.cpp:389
 msgid "Cluzooka"
 msgstr "Cluzuka"
 
-#: src/weapon/suicide.cpp:42
+#: /lgames/wormux/src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Spáchat sebevraždu"
 
-#: src/menu/help_menu.cpp:74
+#: /lgames/wormux/src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Configuration menu"
 msgstr "žádný konfigurační soubor!"
 
-#: src/menu/network_connection_menu.cpp:164
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Připojit ke hře"
 
-#: src/network/net_error_msg.cpp:32
+#: /lgames/wormux/src/network/net_error_msg.cpp:32
 msgid "Connected !"
 msgstr "Připojeno !"
 
-#: src/network/admin_commands.cpp:64
+#: /lgames/wormux/src/network/admin_commands.cpp:64
 #, fuzzy
 msgid "Connected players: "
 msgstr "Připojeno !"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
+#: /lgames/wormux/src/weapon/construct.cpp:60
+#: /lgames/wormux/src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Stavba"
 
-#: src/menu/results_menu.cpp:386
+#: /lgames/wormux/src/menu/results_menu.cpp:386
 msgid "Controlled by: "
 msgstr "Řízeno: "
 
-#: src/network/download.cpp:78
+#: /lgames/wormux/src/network/download.cpp:79
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Nepodařilo se získat poslední verzi z %s"
 
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:87
+#: /lgames/wormux/src/network/chatlogger.cpp:55
+#: /lgames/wormux/src/network/download.cpp:88
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Nepodařilo otevřít soubor %s"
 
-#: src/menu/main_menu.cpp:71
+#: /lgames/wormux/src/menu/main_menu.cpp:71
 msgid "Credits"
 msgstr "Zásluhy"
 
-#: src/menu/game_mode_editor.cpp:87
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:87
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: src/menu/options_menu.cpp:142
+#: /lgames/wormux/src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr ""
 
-#: src/weapon/disco_grenade.cpp:157
+#: /lgames/wormux/src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disco granát"
 
-#: src/network/admin_commands.cpp:30
+#: /lgames/wormux/src/network/admin_commands.cpp:30
 msgid "Displays this message"
 msgstr ""
 
-#: src/menu/help_menu.cpp:76
+#: /lgames/wormux/src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move camera"
 msgstr ""
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:81
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:81
 msgid "Duration before death mode"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:50
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:50
 msgid "Duration of a turn"
 msgstr "Délka tahu"
 
-#: src/weapon/dynamite.cpp:116
+#: /lgames/wormux/src/weapon/dynamite.cpp:116
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:270
+#: /lgames/wormux/src/game/game.cpp:270
 msgid "END OF GAME"
 msgstr "KONEC HRY"
 
-#: src/menu/options_menu.cpp:219
+#: /lgames/wormux/src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Hlasitost efektů"
 
-#: src/menu/results_menu.cpp:323
+#: /lgames/wormux/src/menu/results_menu.cpp:323
 msgid "Energy"
 msgstr "Zdraví"
 
-#: src/include/action_handler.cpp:220
+#: /lgames/wormux/src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
+#: /lgames/wormux/src/team/teams_list.cpp:134
+#: /lgames/wormux/src/team/custom_teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Chyba při nahrávání týmu :"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: /lgames/wormux/src/game/config.cpp:513
+#: /lgames/wormux/src/team/custom_team.cpp:165
+#: /lgames/wormux/src/team/custom_team.cpp:175
+#: /lgames/wormux/src/team/custom_team.cpp:187
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Chyba při vytváření adresáře \"%s\": nebylo možné uložit konfigurační soubor."
 
-#: src/team/custom_team.cpp:104
+#: /lgames/wormux/src/team/custom_team.cpp:104
 #, fuzzy, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Chyba při vytváření adresáře \"%s\": nebylo možné uložit konfigurační soubor."
 
-#: src/team/custom_team.cpp:95
+#: /lgames/wormux/src/team/custom_team.cpp:95
 #, fuzzy, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
 "Chyba při vytváření adresáře \"%s\": nebylo možné uložit konfigurační soubor."
 
-#: src/game/game.cpp:143
+#: /lgames/wormux/src/game/game.cpp:143
 #, c-format
 msgid ""
 "Error:\n"
@@ -755,28 +828,28 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:386
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Chyba: Nepodařilo se připojit k %s:%s"
 
-#: src/menu/network_connection_menu.cpp:341
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:341
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Chyba: Nepodařilo se kontaktovat index server k hostování hry"
 
-#: src/menu/network_connection_menu.cpp:281
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:281
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Chyba: Nepodařilo se kontaktovat index server pro vyhledání internetové hry"
 
-#: src/menu/network_connection_menu.cpp:366
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Chyba: Nepodařilo se spustit herní server"
 
-#: src/menu/network_connection_menu.cpp:360
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -785,100 +858,102 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:124
+#: /lgames/wormux/src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba: Nepodařilo se najít tělo \"%s\" pro tým \"%s\"."
 
-#: src/weapon/flamethrower.cpp:136
+#: /lgames/wormux/src/weapon/flamethrower.cpp:136
 msgid "Flame Thrower"
 msgstr "Plamenomet"
 
-#: src/weapon/footbomb.cpp:158
+#: /lgames/wormux/src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "Ragbyová bomba"
 
-#: src/menu/help_menu.cpp:70
+#: /lgames/wormux/src/menu/help_menu.cpp:70
 #, fuzzy
 msgid "Fullscreen / window"
 msgstr "Celá obrazovka?"
 
-#: src/menu/options_menu.cpp:95
+#: /lgames/wormux/src/menu/options_menu.cpp:95
 msgid "Fullscreen?"
 msgstr "Celá obrazovka?"
 
-#: src/menu/game_menu.cpp:85
+#: /lgames/wormux/src/menu/game_menu.cpp:85
 msgid "Game"
 msgstr "Hra"
 
-#: src/menu/game_mode_editor.cpp:46
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:46
 #, fuzzy
 msgid "Game mode"
 msgstr "Jméno hry:"
 
-#: src/menu/network_connection_menu.cpp:187
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Jméno hry:"
 
-#: src/weapon/gnu.cpp:161
+#: /lgames/wormux/src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
 msgstr "Odpalovač GNU"
 
-#: src/menu/options_menu.cpp:125
+#: /lgames/wormux/src/menu/options_menu.cpp:125
 msgid "Graphic"
 msgstr "Grafika"
 
-#: src/weapon/grapple.cpp:85
+#: /lgames/wormux/src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Lodní hák"
 
-#: src/menu/game_mode_editor.cpp:93
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:93
 msgid "Gravity"
 msgstr ""
 
-#: src/weapon/grenade.cpp:76
+#: /lgames/wormux/src/weapon/grenade.cpp:76
 msgid "Grenade"
 msgstr "Granát"
 
-#: src/map/ground.cpp:65
+#: /lgames/wormux/src/map/ground.cpp:65
 msgid "Ground initialization..."
 msgstr "Inicializace teréhu..."
 
-#: src/weapon/gun.cpp:74
+#: /lgames/wormux/src/weapon/gun.cpp:74
 msgid "Gun"
 msgstr "Pistole"
 
-#: src/tool/file_tools.cpp:186
+#: /lgames/wormux/src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nemůžu nalézt domovský adresář (proměnná prostředí $HOME)!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:237
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Přeji dobrou hru!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: /lgames/wormux/src/menu/team_box.cpp:67
+#: /lgames/wormux/src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Velitel"
 
 #. Display player's name
-#: src/interface/interface.cpp:176
+#: /lgames/wormux/src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Velitel: "
 
-#: src/menu/main_menu.cpp:68 src/menu/pause_menu.cpp:55
+#: /lgames/wormux/src/menu/main_menu.cpp:68
+#: /lgames/wormux/src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Nápověda"
 
-#: src/menu/help_menu.cpp:71
+#: /lgames/wormux/src/menu/help_menu.cpp:71
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:211
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Hostovat hru"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: /lgames/wormux/src/weapon/auto_bazooka.cpp:224
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -890,7 +965,7 @@ msgstr ""
 "Odpálení : držet mezerník až na požadovanou sílu\n"
 "munice letí obloukem"
 
-#: src/weapon/blowtorch.cpp:64
+#: /lgames/wormux/src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -900,7 +975,7 @@ msgstr ""
 "Úhel : Nahoru/Dolů\n"
 "munice letí obloukem"
 
-#: src/weapon/airhammer.cpp:75
+#: /lgames/wormux/src/weapon/airhammer.cpp:75
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -908,7 +983,7 @@ msgstr ""
 "Použití : držet stisknutý mezerník\n"
 "munice letí obloukem"
 
-#: src/weapon/anvil.cpp:120
+#: /lgames/wormux/src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -916,11 +991,11 @@ msgstr ""
 "Použití: kliknout levým tlačítkem na cíl\n"
 "munice letí obloukem"
 
-#: src/game/game_classic.cpp:210
+#: /lgames/wormux/src/game/game_classic.cpp:210
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:283
+#: /lgames/wormux/src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -929,12 +1004,13 @@ msgstr ""
 "angličtine):"
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:66
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:66
 msgid "Initial energy"
 msgstr "Počáteční energie"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
-#: src/weapon/riot_bomb.cpp:121
+#: /lgames/wormux/src/weapon/bazooka.cpp:124
+#: /lgames/wormux/src/weapon/cluzooka.cpp:390
+#: /lgames/wormux/src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -944,511 +1020,520 @@ msgstr ""
 "Odpálení : držet mezerník až na požadovanou sílu\n"
 "munice letí obloukem"
 
-#: src/game/game_init.cpp:155
+#: /lgames/wormux/src/game/game_init.cpp:155
 msgid "Initialisation"
 msgstr "Inicializace"
 
-#: src/game/game_init.cpp:108
+#: /lgames/wormux/src/game/game_init.cpp:108
 msgid "Initialise map"
 msgstr "Inicializovat mapu"
 
-#: src/game/game_init.cpp:142
+#: /lgames/wormux/src/game/game_init.cpp:142
 msgid "Initialise sounds"
 msgstr "Inicializovat zvuky"
 
-#: src/game/game_init.cpp:118
+#: /lgames/wormux/src/game/game_init.cpp:118
 msgid "Initialise teams"
 msgstr "Inicializovat týmy"
 
-#: src/game/game.cpp:592
+#: /lgames/wormux/src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "To je dáreček!"
 
-#: src/weapon/jetpack.cpp:62
+#: /lgames/wormux/src/weapon/jetpack.cpp:62
 msgid "Jetpack"
 msgstr "Tryskový batoh"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
+#: /lgames/wormux/src/menu/network_menu.cpp:147
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:235
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Připojte se k #wormux na irc.freenode.net a najděte protihráče."
 
-#: src/menu/help_menu.cpp:75
+#: /lgames/wormux/src/menu/help_menu.cpp:75
 msgid "Jump"
 msgstr ""
 
-#: src/menu/help_menu.cpp:85
+#: /lgames/wormux/src/menu/help_menu.cpp:85
 msgid "Jump backwards"
 msgstr ""
 
-#: src/network/admin_commands.cpp:32
+#: /lgames/wormux/src/network/admin_commands.cpp:32
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:129
+#: /lgames/wormux/src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Jazyk"
 
-#: src/network/admin_commands.cpp:34
+#: /lgames/wormux/src/network/admin_commands.cpp:34
 msgid "List the connected players"
 msgstr ""
 
-#: src/map/maps_list.cpp:227
+#: /lgames/wormux/src/map/maps_list.cpp:227
 msgid "Load maps:"
 msgstr "Nahrát mapy:"
 
-#: src/team/teams_list.cpp:146
+#: /lgames/wormux/src/team/teams_list.cpp:146
 msgid "Load teams:"
 msgstr "Nahrát týmy:"
 
-#: src/menu/teams_selection_box.cpp:43
+#: /lgames/wormux/src/menu/teams_selection_box.cpp:43
 msgid "Local teams:"
 msgstr "Místní týmy:"
 
-#: src/weapon/lowgrav.cpp:49
+#: /lgames/wormux/src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
 msgstr "Nízká gravitace"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:129
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Připojit se ručně"
 
-#: src/menu/game_menu.cpp:77
+#: /lgames/wormux/src/menu/game_menu.cpp:77
 msgid "Map"
 msgstr "Mapa"
 
-#: src/map/map.cpp:299
+#: /lgames/wormux/src/map/map.cpp:299
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapu %s vytvořil: "
 
-#: src/game/game_init.cpp:111
+#: /lgames/wormux/src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Mapy"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
+#: /lgames/wormux/src/menu/network_menu.cpp:130
+#: /lgames/wormux/src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Jméno hry:"
 
-#: src/menu/game_mode_editor.cpp:72
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:72
 #, fuzzy
 msgid "Max energy"
 msgstr "Počáteční energie"
 
-#: src/menu/network_menu.cpp:105
+#: /lgames/wormux/src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "Maximální počet hráčů:"
 
-#: src/menu/options_menu.cpp:99
+#: /lgames/wormux/src/menu/options_menu.cpp:99
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
-#: src/weapon/mine.cpp:215
+#: /lgames/wormux/src/weapon/mine.cpp:215
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:199
+#: /lgames/wormux/src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Ostatní"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: /lgames/wormux/src/menu/results_menu.cpp:176
+#: /lgames/wormux/src/menu/results_menu.cpp:178
 msgid "Most accurate"
 msgstr "Nejpřesnější"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: /lgames/wormux/src/menu/results_menu.cpp:160
+#: /lgames/wormux/src/menu/results_menu.cpp:162
 msgid "Most sold-out"
 msgstr "Největší zrádce"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: /lgames/wormux/src/menu/results_menu.cpp:144
+#: /lgames/wormux/src/menu/results_menu.cpp:146
 msgid "Most useful"
 msgstr "Nejužitečnější"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: /lgames/wormux/src/menu/results_menu.cpp:152
+#: /lgames/wormux/src/menu/results_menu.cpp:154
 msgid "Most useless"
 msgstr "Nejzbytečnější"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: /lgames/wormux/src/menu/results_menu.cpp:136
+#: /lgames/wormux/src/menu/results_menu.cpp:138
 msgid "Most violent"
 msgstr "Nejnásilnější"
 
-#: src/menu/help_menu.cpp:87
+#: /lgames/wormux/src/menu/help_menu.cpp:87
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: src/menu/help_menu.cpp:80
+#: /lgames/wormux/src/menu/help_menu.cpp:80
 #, fuzzy
 msgid "Move character"
 msgstr "Padák"
 
-#: src/menu/options_menu.cpp:209
+#: /lgames/wormux/src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Hlasitost hudby"
 
-#: src/menu/options_menu.cpp:205
+#: /lgames/wormux/src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Hudba?"
 
-#: src/menu/main_menu.cpp:62
+#: /lgames/wormux/src/menu/main_menu.cpp:62
 msgid "Network Game"
 msgstr "Síťová hra"
 
-#: src/menu/game_mode_editor.cpp:59
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr ""
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:49
+#: /lgames/wormux/src/network/chatlogger.cpp:49
 msgid "New network game at "
 msgstr "Nová síťová hra na "
 
-#: src/menu/options_menu.cpp:244
+#: /lgames/wormux/src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr ""
 
-#: src/weapon/weapon.cpp:658
+#: /lgames/wormux/src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "V konfiguračním xml souboru nebyl nalezen žádný element <%s>!"
 
-#: src/network/admin_commands.cpp:60
+#: /lgames/wormux/src/network/admin_commands.cpp:60
 #, fuzzy
 msgid "No player connected"
 msgstr "%i hráč připojen"
 
-#: src/menu/results_menu.cpp:73
+#: /lgames/wormux/src/menu/results_menu.cpp:73
 msgid "Nobody!"
 msgstr "Nikdo!"
 
-#: src/menu/team_box.cpp:86
+#: /lgames/wormux/src/menu/team_box.cpp:86
 msgid "Number of characters"
 msgstr "Počet hráčů"
 
-#: src/menu/teams_selection_box.cpp:49
+#: /lgames/wormux/src/menu/teams_selection_box.cpp:49
 msgid "Number of teams:"
 msgstr "Počet týmů:"
 
-#: src/menu/help_menu.cpp:82
+#: /lgames/wormux/src/menu/help_menu.cpp:82
 msgid "On a character: Changes active one"
 msgstr ""
 
-#: src/menu/help_menu.cpp:81
+#: /lgames/wormux/src/menu/help_menu.cpp:81
 msgid "On map: Select a target"
 msgstr ""
 
-#: src/menu/main_menu.cpp:65
+#: /lgames/wormux/src/menu/main_menu.cpp:65
 msgid "Options"
 msgstr "Volby"
 
-#: src/menu/pause_menu.cpp:51
+#: /lgames/wormux/src/menu/pause_menu.cpp:51
 msgid "Options menu"
 msgstr "Volby menu"
 
-#: src/weapon/parachute.cpp:68
+#: /lgames/wormux/src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Padák"
 
-#: src/weapon/parachute.cpp:101
+#: /lgames/wormux/src/weapon/parachute.cpp:101
 msgid "Parachute is activated automatically."
 msgstr "Padák je aktivován automaticky."
 
-#: src/menu/network_connection_menu.cpp:121
-#: src/menu/network_connection_menu.cpp:159
-#: src/menu/network_connection_menu.cpp:199
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:121
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:159
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Heslo:"
 
-#: src/menu/help_menu.cpp:86
+#: /lgames/wormux/src/menu/help_menu.cpp:86
 msgid "Pause"
 msgstr ""
 
-#: src/menu/main_menu.cpp:59
+#: /lgames/wormux/src/menu/main_menu.cpp:59
 msgid "Play"
 msgstr "Hrát"
 
-#: src/menu/network_menu.cpp:134
+#: /lgames/wormux/src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:64
+#: /lgames/wormux/src/menu/teams_selection_box.cpp:64
 msgid "Player"
 msgstr "Hráč"
 
-#: src/menu/options_menu.cpp:80
+#: /lgames/wormux/src/menu/options_menu.cpp:80
 msgid "Player energy?"
 msgstr "Životy hráče?"
 
-#: src/menu/options_menu.cpp:148
+#: /lgames/wormux/src/menu/options_menu.cpp:148
 #, fuzzy
 msgid "Player name"
 msgstr "Jméno hráče?"
 
-#: src/menu/options_menu.cpp:83
+#: /lgames/wormux/src/menu/options_menu.cpp:83
 msgid "Player's name?"
 msgstr "Jméno hráče?"
 
-#: src/weapon/polecat.cpp:168
+#: /lgames/wormux/src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "Odpalovač tchořů"
 
-#: src/menu/network_connection_menu.cpp:148
-#: src/menu/network_connection_menu.cpp:176
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:148
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Port:"
 
-#: src/menu/network_connection_menu.cpp:108
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Veřejné hry"
 
-#: src/menu/main_menu.cpp:74
+#: /lgames/wormux/src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/main.cpp:272
+#: /lgames/wormux/src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Ukončit Wormux"
 
-#: src/menu/pause_menu.cpp:59
+#: /lgames/wormux/src/menu/pause_menu.cpp:59
 msgid "Quit battle"
 msgstr "Ukončit hru"
 
-#: src/menu/help_menu.cpp:65
+#: /lgames/wormux/src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Quit game"
 msgstr "Spustit hru"
 
-#: src/menu/map_selection_box.cpp:222
+#: /lgames/wormux/src/menu/map_selection_box.cpp:222
 msgid "Random map"
 msgstr "Náhodná mapa"
 
-#: src/game/config.cpp:351
+#: /lgames/wormux/src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Čtu výchozí konfigurační soubor"
 
-#: src/game/config.cpp:400
+#: /lgames/wormux/src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Čtu osobní konfigurační soubor"
 
-#: src/menu/options_menu.cpp:121
+#: /lgames/wormux/src/menu/options_menu.cpp:121
 msgid "Resolution"
 msgstr "Rozlišení"
 
-#: src/weapon/riot_bomb.cpp:120
+#: /lgames/wormux/src/weapon/riot_bomb.cpp:120
 msgid "Riot Bomb"
 msgstr "Minomet"
 
-#: src/main.cpp:81
+#: /lgames/wormux/src/main.cpp:81
 msgid "Run game"
 msgstr "Spustit hru"
 
-#: src/network/chat.cpp:81
+#: /lgames/wormux/src/network/chat.cpp:81
 msgid "Say: "
 msgstr "Řekni: "
 
-#: src/menu/options_menu.cpp:89
+#: /lgames/wormux/src/menu/options_menu.cpp:89
 msgid "Scroll border size"
 msgstr "Velikost posuvníků"
 
-#: src/menu/options_menu.cpp:86
+#: /lgames/wormux/src/menu/options_menu.cpp:86
 msgid "Scroll on border"
 msgstr "Posuvníky na okrajích"
 
-#: src/menu/network_connection_menu.cpp:137
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Adresa serveru:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:207
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Server přístupný z Internetu"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:126
+#: /lgames/wormux/src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "Serverový režim"
 
-#: src/weapon/shotgun.cpp:92
+#: /lgames/wormux/src/weapon/shotgun.cpp:92
 msgid "Shotgun"
 msgstr "Brokovnice"
 
-#: src/menu/help_menu.cpp:83
+#: /lgames/wormux/src/menu/help_menu.cpp:83
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Volby menu"
 
-#: src/menu/help_menu.cpp:69
+#: /lgames/wormux/src/menu/help_menu.cpp:69
 msgid "Show/hide interface"
 msgstr ""
 
-#: src/menu/help_menu.cpp:89
+#: /lgames/wormux/src/menu/help_menu.cpp:89
 msgid "Show/hide minimap"
 msgstr ""
 
-#: src/weapon/skip_turn.cpp:47
+#: /lgames/wormux/src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Přeskočit tah"
 
-#: src/weapon/slap.cpp:73
+#: /lgames/wormux/src/weapon/slap.cpp:73
 msgid "Slap"
 msgstr ""
 
-#: src/weapon/slap.cpp:74
+#: /lgames/wormux/src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: src/menu/help_menu.cpp:84
+#: /lgames/wormux/src/menu/help_menu.cpp:84
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
-#: src/weapon/snipe_rifle.cpp:93
+#: /lgames/wormux/src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Ostřelovací puška"
 
-#: src/object/bonus_box.cpp:86
+#: /lgames/wormux/src/object/bonus_box.cpp:86
 msgid "Someone put a booby trap into the crate!"
 msgstr "Někdo dal dítě do bedny!"
 
-#: src/menu/network_connection_menu.cpp:289
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
-#: src/network/index_server.cpp:252
+#: /lgames/wormux/src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:247
+#: /lgames/wormux/src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Zvuk"
 
-#: src/menu/options_menu.cpp:215
+#: /lgames/wormux/src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Zvukové efekty?"
 
-#: src/menu/options_menu.cpp:240
+#: /lgames/wormux/src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Kvalita zvuku"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:145
+#: /lgames/wormux/src/game/game_init.cpp:145
 msgid "Sounds"
 msgstr "Zvuky"
 
-#: src/game/game.cpp:114
+#: /lgames/wormux/src/game/game.cpp:114
 msgid "Starting a new game"
 msgstr "Spouštím novou hru"
 
-#: src/interface/interface.cpp:216
+#: /lgames/wormux/src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Zásoby:"
 
-#: src/weapon/submachine_gun.cpp:99
+#: /lgames/wormux/src/weapon/submachine_gun.cpp:99
 msgid "Submachine Gun"
 msgstr "Samopal"
 
-#: src/weapon/supertux.cpp:231
+#: /lgames/wormux/src/weapon/supertux.cpp:231
 msgid "SuperTux"
 msgstr "SuperTux"
 
-#: src/weapon/syringe.cpp:70
+#: /lgames/wormux/src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Stříkačka"
 
-#: src/menu/help_menu.cpp:72
+#: /lgames/wormux/src/menu/help_menu.cpp:72
 #, fuzzy
 msgid "Talk in network battle"
 msgstr "Zpět do hry"
 
-#: src/menu/results_menu.cpp:426
+#: /lgames/wormux/src/menu/results_menu.cpp:426
 msgid "Team graphs"
 msgstr "Týmový graf"
 
-#: src/menu/results_menu.cpp:424
+#: /lgames/wormux/src/menu/results_menu.cpp:424
 msgid "Team stats"
 msgstr "Týmová statistika"
 
-#: src/game/game_init.cpp:120 src/menu/game_menu.cpp:65
+#: /lgames/wormux/src/game/game_init.cpp:120
+#: /lgames/wormux/src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Týmy"
 
-#: src/menu/options_menu.cpp:181
+#: /lgames/wormux/src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr ""
 
-#: src/weapon/teleportation.cpp:50
+#: /lgames/wormux/src/weapon/teleportation.cpp:50
 msgid "Teleportation"
 msgstr "Teleport"
 
-#: src/weapon/cluster_bomb.cpp:146
+#: /lgames/wormux/src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Tříštivá bomba opustila bitevní pole předtím, než explodovala."
 
-#: src/weapon/footbomb.cpp:111
+#: /lgames/wormux/src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Gnu opustil bitevní pole předtím, než explodoval."
 
-#: src/weapon/gnu.cpp:144
+#: /lgames/wormux/src/weapon/gnu.cpp:144
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Gnu opustil bitevní pole předtím, než explodoval"
 
-#: src/weapon/polecat.cpp:151
+#: /lgames/wormux/src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Tchoř opustil bitevní pole předtím, než explodoval"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: /lgames/wormux/src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Naváděná raketa opustila bitevní pole..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: /lgames/wormux/src/weapon/bounce_ball.cpp:72
 msgid "The ball left the battlefield before exploding"
 msgstr "Míč opustil bitevní pole předtím, než explodoval"
 
-#: src/network/network_client.cpp:102
+#: /lgames/wormux/src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
 
-#: src/network/net_error_msg.cpp:47
+#: /lgames/wormux/src/network/net_error_msg.cpp:47
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Vypršel limit spojení. Zkontrolujte, zda není v cestě firewall!"
 
-#: src/weapon/disco_grenade.cpp:127
+#: /lgames/wormux/src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disco granát opustil bitevní pole předtím, než explodoval"
 
-#: src/game/game.cpp:482
+#: /lgames/wormux/src/game/game.cpp:482
 msgid "The game was interrupted because you got disconnected."
 msgstr "Hra byla ukončena, protože jste byl odpojen."
 
-#: src/weapon/grenade.cpp:58
+#: /lgames/wormux/src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granát opustil bitevní pole předtím, než explodoval"
 
-#: src/menu/network_menu.cpp:333
+#: /lgames/wormux/src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostatní na vás čekají! Vstávat :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
-#: src/weapon/riot_bomb.cpp:86
+#: /lgames/wormux/src/weapon/bazooka.cpp:83
+#: /lgames/wormux/src/weapon/cluzooka.cpp:336
+#: /lgames/wormux/src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa opustila bitevní pole..."
 
-#: src/network/net_error_msg.cpp:44
+#: /lgames/wormux/src/network/net_error_msg.cpp:44
 msgid "The server rejected the connection."
 msgstr "Server odmítl spojení."
 
-#: src/network/net_error_msg.cpp:50
+#: /lgames/wormux/src/network/net_error_msg.cpp:50
 msgid "The server rejected the connection: wrong password!"
 msgstr "Server odmítl spojení: špatné heslo!"
 
-#: src/menu/network_menu.cpp:241
+#: /lgames/wormux/src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1457,11 +1542,12 @@ msgstr[1] "Zde jsou jen %i týmy."
 msgstr[2] "Zde je jen %i týmů."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:321
+#: /lgames/wormux/src/menu/results_menu.cpp:321
 msgid "Time"
 msgstr "Čas"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: /lgames/wormux/src/weapon/cluster_bomb.cpp:189
+#: /lgames/wormux/src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1473,7 +1559,7 @@ msgstr ""
 "Odpálení : držet mezerník až na požadovanou sílu\n"
 "munice letí obloukem"
 
-#: src/weapon/bounce_ball.cpp:90
+#: /lgames/wormux/src/weapon/bounce_ball.cpp:90
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1485,47 +1571,47 @@ msgstr ""
 "Odpálení : Mezerník\n"
 "munice letí obloukem"
 
-#: src/interface/weapon_menu.cpp:170
+#: /lgames/wormux/src/interface/weapon_menu.cpp:170
 msgid "Tools"
 msgstr "Nástroje"
 
-#: src/network/net_error_msg.cpp:35
+#: /lgames/wormux/src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
 msgstr "Nepodařilo kontaktovat hostitele."
 
-#: src/map/maps_list.cpp:237
+#: /lgames/wormux/src/map/maps_list.cpp:237
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nepodařilo se otevřít adresář s mapami (%s)!"
 
-#: src/map/maps_list.cpp:249
+#: /lgames/wormux/src/map/maps_list.cpp:249
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář s mapami (%s)!"
 
-#: src/network/net_error_msg.cpp:38
+#: /lgames/wormux/src/network/net_error_msg.cpp:38
 msgid "Unable to use this port!"
 msgstr "Tento port nelze použít!"
 
-#: src/network/admin_commands.cpp:85
+#: /lgames/wormux/src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:43
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:43
 #, fuzzy
 msgid "Unlimited"
 msgstr "(neomezeně)"
 
-#: src/main.cpp:199
+#: /lgames/wormux/src/main.cpp:199
 msgid "Version"
 msgstr "Verze"
 
-#: src/menu/options_menu.cpp:451
+#: /lgames/wormux/src/menu/options_menu.cpp:452
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Kontrola verze selhala: %s\n"
 
-#: src/menu/network_menu.cpp:255
+#: /lgames/wormux/src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1533,97 +1619,99 @@ msgstr[0] "Počkejte! %i hráč ještě není připraven!"
 msgstr[1] "Počkejte! %i hráči ještě nejsou připraveni!"
 msgstr[2] "Počkejte! %i hráčů ještě není připraveno!"
 
-#: src/menu/network_menu.cpp:410
+#: /lgames/wormux/src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čeká se na server, jediné co můžete je zrušit to, nebo chatovat!"
 
-#: src/menu/help_menu.cpp:88
+#: /lgames/wormux/src/menu/help_menu.cpp:88
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:168
+#: /lgames/wormux/src/game/game_init.cpp:131
+#: /lgames/wormux/src/interface/weapon_menu.cpp:168
 msgid "Weapons"
 msgstr "Zbraně"
 
-#: src/main.cpp:300
+#: /lgames/wormux/src/main.cpp:300
 msgid "Website: "
 msgstr "Webová stránka: "
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:150
+#: /lgames/wormux/src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:753
+#: /lgames/wormux/src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Jaká hanba pro %s - zabil se tak hloupou zbraní!"
 
 #. Various options
-#: src/menu/options_menu.cpp:77
+#: /lgames/wormux/src/menu/options_menu.cpp:77
 msgid "Wind particles?"
 msgstr "Poletující částice?"
 
-#: src/menu/results_menu.cpp:378
+#: /lgames/wormux/src/menu/results_menu.cpp:378
 msgid "Winner"
 msgstr "Vítěz"
 
-#: src/main.cpp:211
+#: /lgames/wormux/src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Spouští se Wormux..."
 
-#: src/main.cpp:290
+#: /lgames/wormux/src/main.cpp:290
 msgid "Wormux version "
 msgstr "Wormux verze"
 
-#: src/include/action_handler.cpp:194
+#: /lgames/wormux/src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:191
+#: /lgames/wormux/src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:197
+#: /lgames/wormux/src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:336
+#: /lgames/wormux/src/menu/network_menu.cpp:336
 msgid "You are alone :-/"
 msgstr "Jste sám :-/"
 
-#: src/menu/network_menu.cpp:249
+#: /lgames/wormux/src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Jste sám..."
 
-#: src/menu/network_menu.cpp:391
+#: /lgames/wormux/src/menu/network_menu.cpp:391
 msgid "You are the new turn master!"
 msgstr ""
 
-#: src/map/maps_list.cpp:258
+#: /lgames/wormux/src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
 msgstr "Potřebujete nejméně jednu použitelnou mapu!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:178
+#: /lgames/wormux/src/game/game_init.cpp:124
+#: /lgames/wormux/src/team/teams_list.cpp:178
 msgid "You need at least two valid teams !"
 msgstr "Potřebujete nejméně dva použitelné týmy!"
 
-#: src/menu/network_menu.cpp:229
+#: /lgames/wormux/src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nebudete schopen hrát, dokud si nevyberete tým!"
 
-#: src/weapon/weapon_launcher.cpp:493
+#: /lgames/wormux/src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Vaše střela minula!"
 
-#: src/menu/credits_menu.cpp:74
+#: /lgames/wormux/src/menu/credits_menu.cpp:74
 msgid "aka"
 msgstr "jako"
 
-#: src/weapon/air_attack.cpp:220
+#: /lgames/wormux/src/weapon/air_attack.cpp:220
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1633,50 +1721,44 @@ msgstr ""
 "Bombardování : kliknout levým tlačítkem na cíl\n"
 "bombardování letí obloukem"
 
-#: src/map/maps_list.cpp:76
+#: /lgames/wormux/src/map/maps_list.cpp:76
 msgid "couldn't load config"
 msgstr "nepodařilo se načíst konfigurační soubor"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: /lgames/wormux/src/team/custom_team.cpp:136
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:82
+#: /lgames/wormux/src/map/ground.cpp:82
 msgid "done"
 msgstr "hotovo"
 
-#: src/map/maps_list.cpp:83
+#: /lgames/wormux/src/map/maps_list.cpp:83
 msgid "error parsing the config file"
 msgstr "chyba při zpracovávání konfiguračního souboru"
 
-#: src/menu/credits_menu.cpp:78
+#: /lgames/wormux/src/menu/credits_menu.cpp:78
 msgid "from"
 msgstr "z"
 
-#: src/map/maps_list.cpp:72
+#: /lgames/wormux/src/map/maps_list.cpp:72
 msgid "no configuration file!"
 msgstr "žádný konfigurační soubor!"
 
-#: src/sound/jukebox.cpp:167
+#: /lgames/wormux/src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o Nahrávám hudbu"
 
-#: src/sound/jukebox.cpp:343
+#: /lgames/wormux/src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Načítám hudební profil: %s"
 
-#: src/sound/jukebox.cpp:89
+#: /lgames/wormux/src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otevřena hudba o %d Hz %d bitech"
-
-#~ msgid "Unnamed"
-#~ msgstr "Nepojmenovaný"
-
-#~ msgid "Network initialization"
-#~ msgstr "Inicializace sítě"
 
 #, fuzzy
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
@@ -1688,3 +1770,9 @@ msgstr "o Otevřena hudba o %d Hz %d bitech"
 #~ msgstr ""
 #~ "Chyba: Váš server není dostupný z internetu. Zkontrolujte nastavení "
 #~ "vašeho firewallu"
+
+#~ msgid "Network initialization"
+#~ msgstr "Inicializace sítě"
+
+#~ msgid "Unnamed"
+#~ msgstr "Nepojmenovaný"
