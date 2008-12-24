@@ -20,131 +20,133 @@ msgstr ""
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:325
+#: /lgames/wormux/src/map/maps_list.cpp:325
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
+#: /lgames/wormux/src/menu/network_menu.cpp:110
+#: /lgames/wormux/src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i pelaaja liittyneenä"
 msgstr[1] "%i pelaajaa liittyneenä"
 
-#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
+#: /lgames/wormux/src/menu/network_menu.cpp:114
+#: /lgames/wormux/src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "%i pelaaja valmiina"
 msgstr[1] "%i pelaajaa valmiina"
 
-#: src/map/maps_list.cpp:115
+#: /lgames/wormux/src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s < %s > aka %s %s:stä"
 
-#: src/map/maps_list.cpp:122
+#: /lgames/wormux/src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
 
-#: src/menu/team_box.cpp:216
+#: /lgames/wormux/src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "Joukkue %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: /lgames/wormux/src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Joukkue - Etä"
 
-#: src/graphic/fps.cpp:103
+#: /lgames/wormux/src/graphic/fps.cpp:103
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:723
+#: /lgames/wormux/src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s joukkueesta %s suoritti itsemurhan !"
 
-#: src/game/game.cpp:756
+#: /lgames/wormux/src/game/game.cpp:756
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s joukkueesta %s kuoli."
 
-#: src/game/game.cpp:714
+#: /lgames/wormux/src/game/game.cpp:714
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s joukkueesta %s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:708
+#: /lgames/wormux/src/game/game.cpp:708
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s joukkueesta %s tipahti ulos kartalta!"
 
-#: src/game/game.cpp:729
+#: /lgames/wormux/src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s joukkueesta %s osui maahan liian lujaa!"
 
-#: src/game/game.cpp:736
+#: /lgames/wormux/src/game/game.cpp:736
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s joukkueesta %s kuoli kömpelyyteensä!"
 
-#: src/object/medkit.cpp:70
+#: /lgames/wormux/src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game.cpp:748
+#: /lgames/wormux/src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/weapon/mine.cpp:123
+#: /lgames/wormux/src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s on aivan miinan vieressä!"
 
-#: src/object/bonus_box.cpp:97
+#: /lgames/wormux/src/object/bonus_box.cpp:97
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Joukkueella %s on jo loputtomat ammukset aseelle %s!"
 
 #. Show message
-#: src/weapon/skip_turn.cpp:57
+#: /lgames/wormux/src/weapon/skip_turn.cpp:57
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "Joukkue %s luovutti vuoron."
 
-#: src/weapon/cluzooka.cpp:396
+#: /lgames/wormux/src/weapon/cluzooka.cpp:396
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "Joukkue %s voitti %u rypäle singon!"
 msgstr[1] "Joukkue %s voitti %u rypälesinkoa!"
 
-#: src/weapon/gnu.cpp:175
+#: /lgames/wormux/src/weapon/gnu.cpp:175
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "Joukkue %s voitti %u Gnun! Pläjäytä ne palasiksi lehmipoika!"
 msgstr[1] "Joukkue %s voitti %u Gnuta! Pläjäytä ne palasiksi lehmipoika!"
 
-#: src/weapon/air_attack.cpp:272
+#: /lgames/wormux/src/weapon/air_attack.cpp:272
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun!"
 msgstr[1] "Joukkue %s voitti %u ilmaiskua!"
 
-#: src/weapon/airhammer.cpp:172
+#: /lgames/wormux/src/weapon/airhammer.cpp:172
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -159,35 +161,35 @@ msgstr[1] ""
 "Joukkue %s voitti %u katuporaa! Älä metelöi liikaa! Kiitoksia, terveisin "
 "naapurit."
 
-#: src/weapon/anvil.cpp:176
+#: /lgames/wormux/src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Joukkue %s voitti %u alasimen! Liiskaa ne kaikki!"
 msgstr[1] "Joukkue %s voitti %u alasinta! Liiskaa ne kaikki!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: /lgames/wormux/src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "Joukkue %s voitti %u automaattisingon!"
 msgstr[1] "Joukkue %s voitti %u automaattisinkoa!"
 
-#: src/weapon/baseball.cpp:116
+#: /lgames/wormux/src/weapon/baseball.cpp:116
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "Joukkue %s voitti %u pesäpallomailan!"
 msgstr[1] "Joukkue %s voitti %u pesäpallomailaa."
 
-#: src/weapon/bazooka.cpp:130
+#: /lgames/wormux/src/weapon/bazooka.cpp:130
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "Joukkue %s voitti %u singon!"
 msgstr[1] "Joukkue %s voitti %u sinkoa!"
 
-#: src/weapon/blowtorch.cpp:138
+#: /lgames/wormux/src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -201,28 +203,28 @@ msgstr[1] ""
 "Joukku %s voitti %u puhalluslamppua! Jos olet alle 18 vuotias, muista kysyä "
 "lupa vanhemmilta."
 
-#: src/weapon/bounce_ball.cpp:113
+#: /lgames/wormux/src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "Joukkue %s voitti %u pomppupallon! Bojoing!"
 msgstr[1] "Joukkue %s voitti %u pomppupalloa! Bojoing!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: /lgames/wormux/src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Joukkue %s voitti %u rypälepommin!"
 msgstr[1] "Joukkue %s voitti %u rypälepommia!"
 
-#: src/weapon/construct.cpp:82
+#: /lgames/wormux/src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "Joukkue %s voitti %u tee-se-itse-aseen! Älä unohda kypärää."
 msgstr[1] "Joukkue %s voitti %u tee-se-itse-asetta! Älä unohda kypärää."
 
-#: src/weapon/disco_grenade.cpp:170
+#: /lgames/wormux/src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -232,105 +234,105 @@ msgstr[0] ""
 msgstr[1] ""
 "Joukkue %s voitti %u diskokranaattia! Vatkaa lanteita heittohetkellä!"
 
-#: src/weapon/dynamite.cpp:145
+#: /lgames/wormux/src/weapon/dynamite.cpp:145
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Joukkue %s voitti %u dynamiittipötkön!"
 msgstr[1] "Joukkue %s voitti %u dynamiittipötköä."
 
-#: src/weapon/flamethrower.cpp:180
+#: /lgames/wormux/src/weapon/flamethrower.cpp:180
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "Joukkue %s voitti %u liekinheittimen!"
 msgstr[1] "Joukkue %s voitti %u liekinheitintä!"
 
-#: src/weapon/footbomb.cpp:176
+#: /lgames/wormux/src/weapon/footbomb.cpp:176
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Joukkue %s voitti %u jalkapallopommin!"
 msgstr[1] "Joukkue %s voitti %u jalkapallopommia!"
 
-#: src/weapon/grapple.cpp:332
+#: /lgames/wormux/src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "Joukkue %s voitti %u kiipeilykoukun!"
 msgstr[1] "Joukkue %s voitti %u kiipeilykoukkua!"
 
-#: src/weapon/grenade.cpp:90
+#: /lgames/wormux/src/weapon/grenade.cpp:90
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
 msgstr[0] "Joukkue %s voitti %u kranaatin!"
 msgstr[1] "Joukkue %s voitti %u kranaattia!"
 
-#: src/weapon/gun.cpp:99
+#: /lgames/wormux/src/weapon/gun.cpp:99
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
 msgstr[0] "Joukkue %s voitti %u aseen!"
 msgstr[1] "Joukkue %s voitti %u asetta!"
 
-#: src/weapon/jetpack.cpp:252
+#: /lgames/wormux/src/weapon/jetpack.cpp:252
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 msgstr[1] "Joukkue %s voitti %u lentorepun! Siistiä!"
 
-#: src/weapon/lowgrav.cpp:84
+#: /lgames/wormux/src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "Joukkue %s voitti %u painottomuuden! Neil Armstrong täältä tullaan!"
 msgstr[1] "Joukkue %s voitti %u painottomuutta! Neil Armstrong täältä tullaan!"
 
-#: src/weapon/mine.cpp:249
+#: /lgames/wormux/src/weapon/mine.cpp:249
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "Joukkue %s voitti %u miinan!"
 msgstr[1] "Joukkue %s voitti %u miinaa!"
 
-#: src/weapon/parachute.cpp:167
+#: /lgames/wormux/src/weapon/parachute.cpp:167
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "Joukkue %s voitti %u laskuvarjon!"
 msgstr[1] "Joukkue %s voitti %u laskuvarjoa!"
 
-#: src/weapon/polecat.cpp:182
+#: /lgames/wormux/src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] "Joukkue %s voitti %u haisunäädän! Onhan kaasunaamari mukana, onhan?"
 msgstr[1] "Joukkue %s voitti %u haisunäätää! Onhan kaasunaamari mukana, onhan?"
 
-#: src/weapon/riot_bomb.cpp:133
+#: /lgames/wormux/src/weapon/riot_bomb.cpp:133
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Joukkue %s voitti %u mellakkapommin!"
 msgstr[1] "Joukkue %s voitti %u mellakkapommia!"
 
-#: src/weapon/shotgun.cpp:135
+#: /lgames/wormux/src/weapon/shotgun.cpp:135
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "Joukkue %s voitti %u haulikon!"
 msgstr[1] "Joukkue %s voitti %u haulikkoa!"
 
-#: src/weapon/slap.cpp:85
+#: /lgames/wormux/src/weapon/slap.cpp:85
 #, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "Joukkue %s voitti %u läpsäytyksen!"
 msgstr[1] "Joukkue %s voitti %u läpsäytystä!"
 
-#: src/weapon/snipe_rifle.cpp:247
+#: /lgames/wormux/src/weapon/snipe_rifle.cpp:247
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -338,42 +340,42 @@ msgid_plural ""
 msgstr[0] "Joukkue %s voitti %u tarkkuuskiväärin!"
 msgstr[1] "Joukkue %s voitti %u tarkkuuskivääriä!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: /lgames/wormux/src/weapon/submachine_gun.cpp:144
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
 msgstr[0] "Joukkue %s voitti %u puoliautomaattiaseen!"
 msgstr[1] "Joukkue %s voitti %u puoliautomaattiaseen!"
 
-#: src/weapon/suicide.cpp:77
+#: /lgames/wormux/src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "Joukkue %s voitti %u itsarin!"
 msgstr[1] "Joukkue %s voitti %u itsaria!"
 
-#: src/weapon/syringe.cpp:115
+#: /lgames/wormux/src/weapon/syringe.cpp:115
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
 msgstr[0] "Joukkue %s voitti %u ruiskun!"
 msgstr[1] "Joukkue %s voitti %u ruiskua!"
 
-#: src/weapon/teleportation.cpp:120
+#: /lgames/wormux/src/weapon/teleportation.cpp:120
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
 msgstr[0] "Joukkue %s voitti %u teleportaation!"
 msgstr[1] "Joukkue %s voitti %u teleportaatiota."
 
-#: src/weapon/skip_turn.cpp:68
+#: /lgames/wormux/src/weapon/skip_turn.cpp:68
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Joukkue %s voitti %u vuoron skippauksen! Mahtavaa."
 msgstr[1] "Joukkue %s voitti %u vuoron skippausta! Mahtavaa."
 
-#: src/weapon/supertux.cpp:318
+#: /lgames/wormux/src/weapon/supertux.cpp:318
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -382,35 +384,95 @@ msgstr[0] ""
 msgstr[1] ""
 "Joukkue %s voitti %u Tux laukaisijaa! Lentäviä pingviinejä, viimeinkin!"
 
-#: src/game/game_blitz.cpp:70
+#: /lgames/wormux/src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
 msgstr "Joukkue %s tapettiin."
 
-#: src/game/game.cpp:744
+#: /lgames/wormux/src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
 
-#: src/interface/interface.cpp:185
+#. 1003.2 specifies the format of this message.
+#: /lgames/wormux/src/msvc/getopt.c:794
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:797
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:717
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:687
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:735 /lgames/wormux/src/msvc/getopt.c:908
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:712
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:892
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr ""
+
+#: /lgames/wormux/src/msvc/getopt.c:874
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr ""
+
+#. 1003.2 specifies the format of this message.
+#: /lgames/wormux/src/msvc/getopt.c:827 /lgames/wormux/src/msvc/getopt.c:957
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr ""
+
+#. +option or -option
+#: /lgames/wormux/src/msvc/getopt.c:768
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr ""
+
+#. --option
+#: /lgames/wormux/src/msvc/getopt.c:764
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr ""
+
+#: /lgames/wormux/src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(kuollut)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:264
+#: /lgames/wormux/src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(järjestelmän kieli)"
 
-#: src/network/chatlogger.cpp:29 src/network/chatlogger.cpp:76
+#: /lgames/wormux/src/network/chatlogger.cpp:29
+#: /lgames/wormux/src/network/chatlogger.cpp:76
 msgid "(unknown time)"
 msgstr "(tuntematon aika)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:216
+#: /lgames/wormux/src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
-#: src/menu/options_menu.cpp:442
+#: /lgames/wormux/src/menu/options_menu.cpp:443
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -419,31 +481,32 @@ msgstr ""
 "Uusi version %s on saatavilla. Käytössäsi oleva versio on %s. Kannattaa "
 "tarkistaa löytyisikö käyttöjärjestelmällesi päivitystä."
 
-#: src/menu/options_menu.cpp:139
+#: /lgames/wormux/src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Lisää henkilökohtainen joukkue"
 
-#: src/weapon/air_attack.cpp:219
+#: /lgames/wormux/src/weapon/air_attack.cpp:219
 msgid "Air Attack"
 msgstr "Ilmaisku"
 
-#: src/weapon/airhammer.cpp:74
+#: /lgames/wormux/src/weapon/airhammer.cpp:74
 msgid "Airhammer"
 msgstr "Katupora"
 
-#: src/menu/results_menu.cpp:421
+#: /lgames/wormux/src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Kaikki joukkueet"
 
-#: src/menu/game_mode_editor.cpp:57
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:57
 msgid "Always"
 msgstr "Aina"
 
-#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
+#: /lgames/wormux/src/game/game_classic.cpp:56
+#: /lgames/wormux/src/game/game_blitz.cpp:50
 msgid "And the winner is..."
 msgstr "Ja voittaja on..."
 
-#: src/weapon/baseball.cpp:58
+#: /lgames/wormux/src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
 "Fire : space key\n"
@@ -453,242 +516,252 @@ msgstr ""
 "Ammu : välilyönti\n"
 "osuma per vuoro"
 
-#: src/weapon/anvil.cpp:119
+#: /lgames/wormux/src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Alasin"
 
-#: src/main.cpp:291
+#: /lgames/wormux/src/main.cpp:291
 msgid "Authors:"
 msgstr "Tekijät:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: /lgames/wormux/src/weapon/auto_bazooka.cpp:223
 msgid "Automatic Bazooka"
 msgstr "Automaattisinko"
 
-#: src/menu/pause_menu.cpp:47
+#: /lgames/wormux/src/menu/pause_menu.cpp:47
 msgid "Back to battle"
 msgstr "Takaisin taisteluun"
 
-#: src/network/net_error_msg.cpp:41
+#: /lgames/wormux/src/network/net_error_msg.cpp:41
 msgid "Bad socket ..."
 msgstr "Huono pistoke..."
 
-#: src/weapon/baseball.cpp:57
+#: /lgames/wormux/src/weapon/baseball.cpp:57
 msgid "Baseball Bat"
 msgstr "Pesäpallomaila"
 
-#: src/weapon/bazooka.cpp:123
+#: /lgames/wormux/src/weapon/bazooka.cpp:123
 msgid "Bazooka"
 msgstr "Sinko"
 
-#: src/menu/game_mode_editor.cpp:58
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:58
 msgid "Before action"
 msgstr "Ennen toimintoa"
 
-#: src/menu/game_mode_editor.cpp:44
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:44
 msgid "Blitz"
 msgstr "Salamahyökkäys"
 
-#: src/weapon/blowtorch.cpp:63
+#: /lgames/wormux/src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "Puhalluslamppu"
 
-#: src/weapon/bounce_ball.cpp:89
+#: /lgames/wormux/src/weapon/bounce_ball.cpp:89
 msgid "Bounce Ball"
 msgstr "Pomppupallo"
 
-#: src/weapon/supertux.cpp:179
+#: /lgames/wormux/src/weapon/supertux.cpp:179
 msgid "Bye bye tux..."
 msgstr "Hei hei tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: /lgames/wormux/src/menu/network_teams_selection_box.cpp:235
+#: /lgames/wormux/src/team/teams_list.cpp:506
+#: /lgames/wormux/src/team/teams_list.cpp:537
+#: /lgames/wormux/src/team/teams_list.cpp:546
+#: /lgames/wormux/src/team/teams_list.cpp:552
+#: /lgames/wormux/src/team/teams_list.cpp:614
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ei löydy joukkuetta %s!"
 
-#: src/team/teams_list.cpp:170
+#: /lgames/wormux/src/team/teams_list.cpp:170
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ei voida avata henkilökohtaista joukkue hakemistoa (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
+#: /lgames/wormux/src/menu/skin_menu.cpp:76
+#: /lgames/wormux/src/team/teams_list.cpp:158
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
 
-#: src/team/custom_teams_list.cpp:93
+#: /lgames/wormux/src/team/custom_teams_list.cpp:93
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ei voida avata henkilökohtaista joukkuehakemistoa (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: /lgames/wormux/src/menu/help_menu.cpp:91
 msgid "Center camera to character"
 msgstr "Keskitä kamera hahmoon"
 
-#: src/menu/help_menu.cpp:90
+#: /lgames/wormux/src/menu/help_menu.cpp:90
 msgid "Change active character"
 msgstr "Vaihda aktiivista hahmoa"
 
-#: src/menu/help_menu.cpp:79
+#: /lgames/wormux/src/menu/help_menu.cpp:79
 msgid "Change aim angle"
 msgstr "Muuta tähtäyskulmaa"
 
-#: src/menu/help_menu.cpp:73
+#: /lgames/wormux/src/menu/help_menu.cpp:73
 msgid "Change weapon category"
 msgstr "Vaihda aseluokkaa"
 
-#: src/menu/help_menu.cpp:78
+#: /lgames/wormux/src/menu/help_menu.cpp:78
 msgid "Change weapon countdown"
 msgstr "Muunna aseen lähtölaskentaa"
 
-#: src/menu/options_menu.cpp:161
+#: /lgames/wormux/src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Hahmo"
 
-#: src/menu/game_mode_editor.cpp:61
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Hahmon vaihto"
 
-#: src/menu/options_menu.cpp:195
+#: /lgames/wormux/src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Tarkista päivitykset"
 
-#: src/menu/map_selection_box.cpp:223
+#: /lgames/wormux/src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "Valitse sattumanvaraisesti eri karttojen välillä"
 
-#: src/menu/game_mode_editor.cpp:42
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:42
 msgid "Classic"
 msgstr "Klassikko"
 
-#: src/menu/help_menu.cpp:77
+#: /lgames/wormux/src/menu/help_menu.cpp:77
 msgid "Click: Center camera on character"
 msgstr "Klikkaus: Keskitä kamera hahmoon"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:120
+#: /lgames/wormux/src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "Client tila"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: /lgames/wormux/src/menu/results_menu.cpp:168
+#: /lgames/wormux/src/menu/results_menu.cpp:170
 msgid "Clumsiest"
 msgstr "Kömpelöin"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: /lgames/wormux/src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "Rypälepommi"
 
-#: src/weapon/cluzooka.cpp:389
+#: /lgames/wormux/src/weapon/cluzooka.cpp:389
 msgid "Cluzooka"
 msgstr "Sinko"
 
-#: src/weapon/suicide.cpp:42
+#: /lgames/wormux/src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Itsemurhaisku"
 
-#: src/menu/help_menu.cpp:74
+#: /lgames/wormux/src/menu/help_menu.cpp:74
 msgid "Configuration menu"
 msgstr "Asetusvalikko"
 
-#: src/menu/network_connection_menu.cpp:164
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Yhdistä peliin"
 
-#: src/network/net_error_msg.cpp:32
+#: /lgames/wormux/src/network/net_error_msg.cpp:32
 msgid "Connected !"
 msgstr "Yhdistetty!"
 
-#: src/network/admin_commands.cpp:64
+#: /lgames/wormux/src/network/admin_commands.cpp:64
 #, fuzzy
 msgid "Connected players: "
 msgstr "Yhdistetty!"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
+#: /lgames/wormux/src/weapon/construct.cpp:60
+#: /lgames/wormux/src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Rakenna"
 
-#: src/menu/results_menu.cpp:386
+#: /lgames/wormux/src/menu/results_menu.cpp:386
 msgid "Controlled by: "
 msgstr "Hallitsee: "
 
-#: src/network/download.cpp:78
+#: /lgames/wormux/src/network/download.cpp:79
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Ei voitu hakea uusinta versiota osoitteesta %s"
 
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:87
+#: /lgames/wormux/src/network/chatlogger.cpp:55
+#: /lgames/wormux/src/network/download.cpp:88
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Ei voitu avata tiedostoa %s"
 
-#: src/menu/main_menu.cpp:71
+#: /lgames/wormux/src/menu/main_menu.cpp:71
 msgid "Credits"
 msgstr "Kiitokset"
 
-#: src/menu/game_mode_editor.cpp:87
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:87
 msgid "Damage per turn during death mode"
 msgstr "Vahinko per kierros kuolon tilassa"
 
-#: src/menu/options_menu.cpp:142
+#: /lgames/wormux/src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Poista henkilökohtainen joukkue"
 
-#: src/weapon/disco_grenade.cpp:157
+#: /lgames/wormux/src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Diskokranaatti"
 
-#: src/network/admin_commands.cpp:30
+#: /lgames/wormux/src/network/admin_commands.cpp:30
 msgid "Displays this message"
 msgstr "Näyttää tämän viestin"
 
-#: src/menu/help_menu.cpp:76
+#: /lgames/wormux/src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move camera"
 msgstr "Vedä&pudota: Siirrä kameraa"
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:81
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:81
 msgid "Duration before death mode"
 msgstr "Kesto ennen kuolon tilaa"
 
-#: src/menu/game_mode_editor.cpp:50
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:50
 msgid "Duration of a turn"
 msgstr "Vuoron kesto:"
 
-#: src/weapon/dynamite.cpp:116
+#: /lgames/wormux/src/weapon/dynamite.cpp:116
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game.cpp:270
+#: /lgames/wormux/src/game/game.cpp:270
 msgid "END OF GAME"
 msgstr "PELI LOPPUI"
 
-#: src/menu/options_menu.cpp:219
+#: /lgames/wormux/src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Efektien voimakkuus"
 
-#: src/menu/results_menu.cpp:323
+#: /lgames/wormux/src/menu/results_menu.cpp:323
 msgid "Energy"
 msgstr "Energia"
 
-#: src/include/action_handler.cpp:220
+#: /lgames/wormux/src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Virhe alustettaessa verkkoa: Client %s ei hyväksy sinua!! - %s"
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
+#: /lgames/wormux/src/team/teams_list.cpp:134
+#: /lgames/wormux/src/team/custom_teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Virhe ladattessa joukkuetta :"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: /lgames/wormux/src/game/config.cpp:513
+#: /lgames/wormux/src/team/custom_team.cpp:165
+#: /lgames/wormux/src/team/custom_team.cpp:175
+#: /lgames/wormux/src/team/custom_team.cpp:187
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Virhe luodessa hakemistoa \"%s\":  asetustiedostoa ei voida tallentaa."
 
-#: src/team/custom_team.cpp:104
+#: /lgames/wormux/src/team/custom_team.cpp:104
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -696,14 +769,14 @@ msgstr ""
 "Virhe poistettaessa kansiota \"%s\". Ei kyetty poistamaan henkilökohtaista "
 "tiimiä."
 
-#: src/team/custom_team.cpp:95
+#: /lgames/wormux/src/team/custom_team.cpp:95
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
 "Virhe poistettaessa tiedostoa \"%s\". Ei kyetty poistamaan henkilökohtaista "
 "tiimiä."
 
-#: src/game/game.cpp:143
+#: /lgames/wormux/src/game/game.cpp:143
 #, c-format
 msgid ""
 "Error:\n"
@@ -713,25 +786,25 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:386
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Virhe: Ei voitu yhdistää: %s:%s"
 
-#: src/menu/network_connection_menu.cpp:341
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:341
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Virhe: Ei saatu yhteyttä palvelimeen pelin isännöimiseksi"
 
-#: src/menu/network_connection_menu.cpp:281
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:281
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Virhe: Ei saatu yhteyttä palvelimeen pelien etsimiseksi"
 
-#: src/menu/network_connection_menu.cpp:366
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Virhe: Palvelimen käynnistäminen epäonnistui"
 
-#: src/menu/network_connection_menu.cpp:360
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -744,98 +817,100 @@ msgstr ""
 "yhdistetty suoraan internetiin, tarkista reitittimesi asetukset: TCP-portin %"
 "s täytyy olla ohjattu koneellesi."
 
-#: src/team/team.cpp:124
+#: /lgames/wormux/src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 
-#: src/weapon/flamethrower.cpp:136
+#: /lgames/wormux/src/weapon/flamethrower.cpp:136
 msgid "Flame Thrower"
 msgstr "Liekinheitin"
 
-#: src/weapon/footbomb.cpp:158
+#: /lgames/wormux/src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "Jalkapallopommi"
 
-#: src/menu/help_menu.cpp:70
+#: /lgames/wormux/src/menu/help_menu.cpp:70
 msgid "Fullscreen / window"
 msgstr "Kokoruutu / ikkuna"
 
-#: src/menu/options_menu.cpp:95
+#: /lgames/wormux/src/menu/options_menu.cpp:95
 msgid "Fullscreen?"
 msgstr "Kokoruutu"
 
-#: src/menu/game_menu.cpp:85
+#: /lgames/wormux/src/menu/game_menu.cpp:85
 msgid "Game"
 msgstr "Peli"
 
-#: src/menu/game_mode_editor.cpp:46
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:46
 msgid "Game mode"
 msgstr "Pelitila"
 
-#: src/menu/network_connection_menu.cpp:187
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Pelin nimi:"
 
-#: src/weapon/gnu.cpp:161
+#: /lgames/wormux/src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
 msgstr "Gnu"
 
-#: src/menu/options_menu.cpp:125
+#: /lgames/wormux/src/menu/options_menu.cpp:125
 msgid "Graphic"
 msgstr "Grafiikka asetukset"
 
-#: src/weapon/grapple.cpp:85
+#: /lgames/wormux/src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Kiipeilykoukku"
 
-#: src/menu/game_mode_editor.cpp:93
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:93
 msgid "Gravity"
 msgstr "Painovoima"
 
-#: src/weapon/grenade.cpp:76
+#: /lgames/wormux/src/weapon/grenade.cpp:76
 msgid "Grenade"
 msgstr "Kranaatti"
 
-#: src/map/ground.cpp:65
+#: /lgames/wormux/src/map/ground.cpp:65
 msgid "Ground initialization..."
 msgstr "Maaston alustus..."
 
-#: src/weapon/gun.cpp:74
+#: /lgames/wormux/src/weapon/gun.cpp:74
 msgid "Gun"
 msgstr "Pyssy"
 
-#: src/tool/file_tools.cpp:186
+#: /lgames/wormux/src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:237
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Pidähän hauskaa!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: /lgames/wormux/src/menu/team_box.cpp:67
+#: /lgames/wormux/src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Ylikomentaja"
 
 #. Display player's name
-#: src/interface/interface.cpp:176
+#: /lgames/wormux/src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Ylikomentaja: "
 
-#: src/menu/main_menu.cpp:68 src/menu/pause_menu.cpp:55
+#: /lgames/wormux/src/menu/main_menu.cpp:68
+#: /lgames/wormux/src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Ohje"
 
-#: src/menu/help_menu.cpp:71
+#: /lgames/wormux/src/menu/help_menu.cpp:71
 msgid "High jump"
 msgstr "Korkea hyppy"
 
-#: src/menu/network_connection_menu.cpp:211
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Isännöi peli"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: /lgames/wormux/src/weapon/auto_bazooka.cpp:224
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -846,7 +921,7 @@ msgstr ""
 "Lähtökulma: Ylös/Alas Ammu : pidä välilyönti painettuna\n"
 "yksi ammus per vuoro"
 
-#: src/weapon/blowtorch.cpp:64
+#: /lgames/wormux/src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -856,7 +931,7 @@ msgstr ""
 "Kulma : Ylös/Alas\n"
 "yksi ammus per vuoro"
 
-#: src/weapon/airhammer.cpp:75
+#: /lgames/wormux/src/weapon/airhammer.cpp:75
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -864,7 +939,7 @@ msgstr ""
 "Käyttöohje : pidä välilyönti painettuna\n"
 "yksi ammus per vuoro"
 
-#: src/weapon/anvil.cpp:120
+#: /lgames/wormux/src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -872,11 +947,11 @@ msgstr ""
 "Käyttöohje : valitse kohde vasemmalla hiirennapilla\n"
 "yksi ammus per vuoro"
 
-#: src/game/game_classic.cpp:210
+#: /lgames/wormux/src/game/game_classic.cpp:210
 msgid "Hurry up, you are too slow !!"
 msgstr "Vauhtia, olette liian hitaita !!"
 
-#: src/main.cpp:283
+#: /lgames/wormux/src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -885,12 +960,13 @@ msgstr ""
 "(englanniksi): "
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:66
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:66
 msgid "Initial energy"
 msgstr "Aloitus voimat:"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
-#: src/weapon/riot_bomb.cpp:121
+#: /lgames/wormux/src/weapon/bazooka.cpp:124
+#: /lgames/wormux/src/weapon/cluzooka.cpp:390
+#: /lgames/wormux/src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -900,373 +976,380 @@ msgstr ""
 "Ammu : pidä välilyönti painettuna\n"
 "yksi ammus per vuoro"
 
-#: src/game/game_init.cpp:155
+#: /lgames/wormux/src/game/game_init.cpp:155
 msgid "Initialisation"
 msgstr "Alustus"
 
-#: src/game/game_init.cpp:108
+#: /lgames/wormux/src/game/game_init.cpp:108
 msgid "Initialise map"
 msgstr "Alusta kartta"
 
-#: src/game/game_init.cpp:142
+#: /lgames/wormux/src/game/game_init.cpp:142
 msgid "Initialise sounds"
 msgstr "Alusta äänet"
 
-#: src/game/game_init.cpp:118
+#: /lgames/wormux/src/game/game_init.cpp:118
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/game/game.cpp:592
+#: /lgames/wormux/src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "Taivaalta sataa lahjoja!"
 
-#: src/weapon/jetpack.cpp:62
+#: /lgames/wormux/src/weapon/jetpack.cpp:62
 msgid "Jetpack"
 msgstr "Lentoreppu"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
+#: /lgames/wormux/src/menu/network_menu.cpp:147
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:235
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Liity #wormux kanavalle irc.freenode.netissä löytääksesi vastustajia."
 
-#: src/menu/help_menu.cpp:75
+#: /lgames/wormux/src/menu/help_menu.cpp:75
 msgid "Jump"
 msgstr "Hyppää"
 
-#: src/menu/help_menu.cpp:85
+#: /lgames/wormux/src/menu/help_menu.cpp:85
 msgid "Jump backwards"
 msgstr "Hyppää taaksepäin"
 
-#: src/network/admin_commands.cpp:32
+#: /lgames/wormux/src/network/admin_commands.cpp:32
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Potkaisee henkilön <nickname> nimeämät pelaajat ulos pelistä"
 
-#: src/menu/options_menu.cpp:129
+#: /lgames/wormux/src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Kieli"
 
-#: src/network/admin_commands.cpp:34
+#: /lgames/wormux/src/network/admin_commands.cpp:34
 msgid "List the connected players"
 msgstr ""
 
-#: src/map/maps_list.cpp:227
+#: /lgames/wormux/src/map/maps_list.cpp:227
 msgid "Load maps:"
 msgstr "Lataa kartat:"
 
-#: src/team/teams_list.cpp:146
+#: /lgames/wormux/src/team/teams_list.cpp:146
 msgid "Load teams:"
 msgstr "Lataa joukkueet:"
 
-#: src/menu/teams_selection_box.cpp:43
+#: /lgames/wormux/src/menu/teams_selection_box.cpp:43
 msgid "Local teams:"
 msgstr "Paikalliset joukkueet:"
 
-#: src/weapon/lowgrav.cpp:49
+#: /lgames/wormux/src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
 msgstr "Painottomuus"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:129
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Manuaalinen yhteys"
 
-#: src/menu/game_menu.cpp:77
+#: /lgames/wormux/src/menu/game_menu.cpp:77
 msgid "Map"
 msgstr "Kartta"
 
-#: src/map/map.cpp:299
+#: /lgames/wormux/src/map/map.cpp:299
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
 
-#: src/game/game_init.cpp:111
+#: /lgames/wormux/src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Kartat"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
+#: /lgames/wormux/src/menu/network_menu.cpp:130
+#: /lgames/wormux/src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Pelitila"
 
-#: src/menu/game_mode_editor.cpp:72
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
 msgstr "Maksimi energia"
 
-#: src/menu/network_menu.cpp:105
+#: /lgames/wormux/src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/options_menu.cpp:99
+#: /lgames/wormux/src/menu/options_menu.cpp:99
 msgid "Maximum FPS"
 msgstr "Maksimi FPS"
 
-#: src/weapon/mine.cpp:215
+#: /lgames/wormux/src/weapon/mine.cpp:215
 msgid "Mine"
 msgstr "Miina"
 
-#: src/menu/options_menu.cpp:199
+#: /lgames/wormux/src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Sekalaiset"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: /lgames/wormux/src/menu/results_menu.cpp:176
+#: /lgames/wormux/src/menu/results_menu.cpp:178
 msgid "Most accurate"
 msgstr "Tarkin"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: /lgames/wormux/src/menu/results_menu.cpp:160
+#: /lgames/wormux/src/menu/results_menu.cpp:162
 msgid "Most sold-out"
 msgstr "Petetyin"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: /lgames/wormux/src/menu/results_menu.cpp:144
+#: /lgames/wormux/src/menu/results_menu.cpp:146
 msgid "Most useful"
 msgstr "Hyödyllisin"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: /lgames/wormux/src/menu/results_menu.cpp:152
+#: /lgames/wormux/src/menu/results_menu.cpp:154
 msgid "Most useless"
 msgstr "Hyödyttömin"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: /lgames/wormux/src/menu/results_menu.cpp:136
+#: /lgames/wormux/src/menu/results_menu.cpp:138
 msgid "Most violent"
 msgstr "Väkivaltaisin"
 
-#: src/menu/help_menu.cpp:87
+#: /lgames/wormux/src/menu/help_menu.cpp:87
 msgid "Move camera with mouse or arrows"
 msgstr "Siirrä kameraa hiirellä tai nuolilla"
 
-#: src/menu/help_menu.cpp:80
+#: /lgames/wormux/src/menu/help_menu.cpp:80
 msgid "Move character"
 msgstr "Siirrä hahmoa"
 
-#: src/menu/options_menu.cpp:209
+#: /lgames/wormux/src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Musiikin voimakkuus"
 
-#: src/menu/options_menu.cpp:205
+#: /lgames/wormux/src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Musiikki"
 
-#: src/menu/main_menu.cpp:62
+#: /lgames/wormux/src/menu/main_menu.cpp:62
 msgid "Network Game"
 msgstr "Nettipeli"
 
-#: src/menu/game_mode_editor.cpp:59
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr "Ei koskaan"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:49
+#: /lgames/wormux/src/network/chatlogger.cpp:49
 msgid "New network game at "
 msgstr "Uusi verkkopeli paikassa"
 
-#: src/menu/options_menu.cpp:244
+#: /lgames/wormux/src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Varoitus uudesta pelaajasta?"
 
-#: src/weapon/weapon.cpp:658
+#: /lgames/wormux/src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
 
-#: src/network/admin_commands.cpp:60
+#: /lgames/wormux/src/network/admin_commands.cpp:60
 #, fuzzy
 msgid "No player connected"
 msgstr "%i pelaaja liittyneenä"
 
-#: src/menu/results_menu.cpp:73
+#: /lgames/wormux/src/menu/results_menu.cpp:73
 msgid "Nobody!"
 msgstr "Ei kukaan!"
 
-#: src/menu/team_box.cpp:86
+#: /lgames/wormux/src/menu/team_box.cpp:86
 msgid "Number of characters"
 msgstr "Pelaajien määrä"
 
-#: src/menu/teams_selection_box.cpp:49
+#: /lgames/wormux/src/menu/teams_selection_box.cpp:49
 msgid "Number of teams:"
 msgstr "Joukkueita"
 
-#: src/menu/help_menu.cpp:82
+#: /lgames/wormux/src/menu/help_menu.cpp:82
 msgid "On a character: Changes active one"
 msgstr "Hahmolla: Vaihda aktiivista"
 
-#: src/menu/help_menu.cpp:81
+#: /lgames/wormux/src/menu/help_menu.cpp:81
 msgid "On map: Select a target"
 msgstr "Kartalla: Valitse kohde"
 
-#: src/menu/main_menu.cpp:65
+#: /lgames/wormux/src/menu/main_menu.cpp:65
 msgid "Options"
 msgstr "Asetukset"
 
-#: src/menu/pause_menu.cpp:51
+#: /lgames/wormux/src/menu/pause_menu.cpp:51
 msgid "Options menu"
 msgstr "Asetukset"
 
-#: src/weapon/parachute.cpp:68
+#: /lgames/wormux/src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Laskuvarjo"
 
-#: src/weapon/parachute.cpp:101
+#: /lgames/wormux/src/weapon/parachute.cpp:101
 msgid "Parachute is activated automatically."
 msgstr "Laskuvarjo aukeaa automaattisesti."
 
-#: src/menu/network_connection_menu.cpp:121
-#: src/menu/network_connection_menu.cpp:159
-#: src/menu/network_connection_menu.cpp:199
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:121
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:159
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Salasana:"
 
-#: src/menu/help_menu.cpp:86
+#: /lgames/wormux/src/menu/help_menu.cpp:86
 msgid "Pause"
 msgstr "Tauko"
 
-#: src/menu/main_menu.cpp:59
+#: /lgames/wormux/src/menu/main_menu.cpp:59
 msgid "Play"
 msgstr "Pelaa"
 
-#: src/menu/network_menu.cpp:134
+#: /lgames/wormux/src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Pelaa useita kertoja"
 
-#: src/menu/teams_selection_box.cpp:64
+#: /lgames/wormux/src/menu/teams_selection_box.cpp:64
 msgid "Player"
 msgstr "Pelaaja"
 
-#: src/menu/options_menu.cpp:80
+#: /lgames/wormux/src/menu/options_menu.cpp:80
 msgid "Player energy?"
 msgstr "Näytä voimat"
 
-#: src/menu/options_menu.cpp:148
+#: /lgames/wormux/src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Pelaajanimi"
 
-#: src/menu/options_menu.cpp:83
+#: /lgames/wormux/src/menu/options_menu.cpp:83
 msgid "Player's name?"
 msgstr "Näytä nimi"
 
-#: src/weapon/polecat.cpp:168
+#: /lgames/wormux/src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "Haisunäätä"
 
-#: src/menu/network_connection_menu.cpp:148
-#: src/menu/network_connection_menu.cpp:176
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:148
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Portti:"
 
-#: src/menu/network_connection_menu.cpp:108
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Julkiset taistelut"
 
-#: src/menu/main_menu.cpp:74
+#: /lgames/wormux/src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Lopeta"
 
-#: src/main.cpp:272
+#: /lgames/wormux/src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
-#: src/menu/pause_menu.cpp:59
+#: /lgames/wormux/src/menu/pause_menu.cpp:59
 msgid "Quit battle"
 msgstr "Lopeta taistelu"
 
-#: src/menu/help_menu.cpp:65
+#: /lgames/wormux/src/menu/help_menu.cpp:65
 msgid "Quit game"
 msgstr "Lopeta peli"
 
-#: src/menu/map_selection_box.cpp:222
+#: /lgames/wormux/src/menu/map_selection_box.cpp:222
 msgid "Random map"
 msgstr "Satunnainen kartta"
 
-#: src/game/config.cpp:351
+#: /lgames/wormux/src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Luetaan oletus asetuksia"
 
-#: src/game/config.cpp:400
+#: /lgames/wormux/src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Luetaan henkilökohtaisia asetuksia"
 
-#: src/menu/options_menu.cpp:121
+#: /lgames/wormux/src/menu/options_menu.cpp:121
 msgid "Resolution"
 msgstr "Tarkkuus"
 
-#: src/weapon/riot_bomb.cpp:120
+#: /lgames/wormux/src/weapon/riot_bomb.cpp:120
 msgid "Riot Bomb"
 msgstr "Mellakkapommi"
 
-#: src/main.cpp:81
+#: /lgames/wormux/src/main.cpp:81
 msgid "Run game"
 msgstr "Aloita peli"
 
-#: src/network/chat.cpp:81
+#: /lgames/wormux/src/network/chat.cpp:81
 msgid "Say: "
 msgstr "Sano: "
 
-#: src/menu/options_menu.cpp:89
+#: /lgames/wormux/src/menu/options_menu.cpp:89
 msgid "Scroll border size"
 msgstr "Reunuksen koko"
 
-#: src/menu/options_menu.cpp:86
+#: /lgames/wormux/src/menu/options_menu.cpp:86
 msgid "Scroll on border"
 msgstr "Vieritä ruudun reunoista"
 
-#: src/menu/network_connection_menu.cpp:137
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Palvelimen osoite:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:207
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Palvelimelle on pääsy internetistä"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:126
+#: /lgames/wormux/src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "Palvelimen tila"
 
-#: src/weapon/shotgun.cpp:92
+#: /lgames/wormux/src/weapon/shotgun.cpp:92
 msgid "Shotgun"
 msgstr "Haulikko"
 
-#: src/menu/help_menu.cpp:83
+#: /lgames/wormux/src/menu/help_menu.cpp:83
 msgid "Show weapons menu"
 msgstr "Näytä"
 
-#: src/menu/help_menu.cpp:69
+#: /lgames/wormux/src/menu/help_menu.cpp:69
 msgid "Show/hide interface"
 msgstr "Näytä/piilota käyttöliittymä"
 
-#: src/menu/help_menu.cpp:89
+#: /lgames/wormux/src/menu/help_menu.cpp:89
 msgid "Show/hide minimap"
 msgstr "Näytä/piilota minikartta"
 
-#: src/weapon/skip_turn.cpp:47
+#: /lgames/wormux/src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Jätä vuoro väliin"
 
-#: src/weapon/slap.cpp:73
+#: /lgames/wormux/src/weapon/slap.cpp:73
 msgid "Slap"
 msgstr "Läpsäytä"
 
-#: src/weapon/slap.cpp:74
+#: /lgames/wormux/src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Läpsäytä vihollista hypäyttääksesi häntä hieman."
 
-#: src/menu/help_menu.cpp:84
+#: /lgames/wormux/src/menu/help_menu.cpp:84
 msgid "Smaller aim angle and walk step"
 msgstr "Pienempi tähtäyskulma ja kävelyaskeleet"
 
-#: src/weapon/snipe_rifle.cpp:93
+#: /lgames/wormux/src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Tarkkuuskivääri"
 
-#: src/object/bonus_box.cpp:86
+#: /lgames/wormux/src/object/bonus_box.cpp:86
 msgid "Someone put a booby trap into the crate!"
 msgstr "Joku viritti ansan laatikkoon!"
 
-#: src/menu/network_connection_menu.cpp:289
+#: /lgames/wormux/src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Valitettavasti tällähetkellä yksikään peli ei odota pelaajia"
 
-#: src/network/index_server.cpp:252
+#: /lgames/wormux/src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1275,92 +1358,93 @@ msgstr ""
 "Versiotasi ei enää tueta. Tuettu versio on %s. Voit ladata päivitetyn "
 "version osoitteesta http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:247
+#: /lgames/wormux/src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Ääni asetukset"
 
-#: src/menu/options_menu.cpp:215
+#: /lgames/wormux/src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Ääniefektit"
 
-#: src/menu/options_menu.cpp:240
+#: /lgames/wormux/src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Äänitaajuus"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:145
+#: /lgames/wormux/src/game/game_init.cpp:145
 msgid "Sounds"
 msgstr "Ääni asetukset"
 
-#: src/game/game.cpp:114
+#: /lgames/wormux/src/game/game.cpp:114
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
-#: src/interface/interface.cpp:216
+#: /lgames/wormux/src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Varasto:"
 
-#: src/weapon/submachine_gun.cpp:99
+#: /lgames/wormux/src/weapon/submachine_gun.cpp:99
 msgid "Submachine Gun"
 msgstr "Puoliautomaattiase"
 
-#: src/weapon/supertux.cpp:231
+#: /lgames/wormux/src/weapon/supertux.cpp:231
 msgid "SuperTux"
 msgstr "SuperTux"
 
-#: src/weapon/syringe.cpp:70
+#: /lgames/wormux/src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Ruisku"
 
-#: src/menu/help_menu.cpp:72
+#: /lgames/wormux/src/menu/help_menu.cpp:72
 msgid "Talk in network battle"
 msgstr "Puhu verkkotaistelussa"
 
-#: src/menu/results_menu.cpp:426
+#: /lgames/wormux/src/menu/results_menu.cpp:426
 msgid "Team graphs"
 msgstr "Joukkueen grafiikat"
 
-#: src/menu/results_menu.cpp:424
+#: /lgames/wormux/src/menu/results_menu.cpp:424
 msgid "Team stats"
 msgstr "Joukkueen tilastot"
 
-#: src/game/game_init.cpp:120 src/menu/game_menu.cpp:65
+#: /lgames/wormux/src/game/game_init.cpp:120
+#: /lgames/wormux/src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Joukkueet"
 
-#: src/menu/options_menu.cpp:181
+#: /lgames/wormux/src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Joukkue-editori"
 
-#: src/weapon/teleportation.cpp:50
+#: /lgames/wormux/src/weapon/teleportation.cpp:50
 msgid "Teleportation"
 msgstr "Teleportaatio"
 
-#: src/weapon/cluster_bomb.cpp:146
+#: /lgames/wormux/src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Rypälepommi on poistunut taistelukentältä räjähtämättömänä."
 
-#: src/weapon/footbomb.cpp:111
+#: /lgames/wormux/src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Jalkapallopommi poistui kentältä ennen kuin ehti räjähtää."
 
-#: src/weapon/gnu.cpp:144
+#: /lgames/wormux/src/weapon/gnu.cpp:144
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Gnu on poistunut taistelukentältä..."
 
-#: src/weapon/polecat.cpp:151
+#: /lgames/wormux/src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Haisunäätä on poistunut taistelukentältä..."
 
-#: src/weapon/auto_bazooka.cpp:178
+#: /lgames/wormux/src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaattiohjus on poistunut taistelukentältä..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: /lgames/wormux/src/weapon/bounce_ball.cpp:72
 msgid "The ball left the battlefield before exploding"
 msgstr "Pallo on poistunut taistelukentältä..."
 
-#: src/network/network_client.cpp:102
+#: /lgames/wormux/src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1369,40 +1453,41 @@ msgstr ""
 "Client ja palvelin versiot eivät ole yhteensopivia (paikallinen=%s, palvelin="
 "%s). Kokeile toista palvelinta."
 
-#: src/network/net_error_msg.cpp:47
+#: /lgames/wormux/src/network/net_error_msg.cpp:47
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Yhteyden aikakatkaisu. Tarkista ettei palomuuri ole tiellä!"
 
-#: src/weapon/disco_grenade.cpp:127
+#: /lgames/wormux/src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Diskogranaatti on poistunut paremmille tanssilattioille"
 
-#: src/game/game.cpp:482
+#: /lgames/wormux/src/game/game.cpp:482
 msgid "The game was interrupted because you got disconnected."
 msgstr "Peli keskeytyi koska yhteytesi katkesi."
 
-#: src/weapon/grenade.cpp:58
+#: /lgames/wormux/src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
 msgstr "Kranaatti on poistunut taistelukentältä..."
 
-#: src/menu/network_menu.cpp:333
+#: /lgames/wormux/src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Kaikki muut odottavat sinua! Herätys!! :)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
-#: src/weapon/riot_bomb.cpp:86
+#: /lgames/wormux/src/weapon/bazooka.cpp:83
+#: /lgames/wormux/src/weapon/cluzooka.cpp:336
+#: /lgames/wormux/src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Ohjus on poistunut taistelukentältä..."
 
-#: src/network/net_error_msg.cpp:44
+#: /lgames/wormux/src/network/net_error_msg.cpp:44
 msgid "The server rejected the connection."
 msgstr "Palvelimen hylkäsi yhteyden."
 
-#: src/network/net_error_msg.cpp:50
+#: /lgames/wormux/src/network/net_error_msg.cpp:50
 msgid "The server rejected the connection: wrong password!"
 msgstr "Palvelin hylkäsi yhteyden: väärä salasana!"
 
-#: src/menu/network_menu.cpp:241
+#: /lgames/wormux/src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1410,11 +1495,12 @@ msgstr[0] "On olemassa vain %i joukkue."
 msgstr[1] "On olemassa vain %i joukkuetta."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:321
+#: /lgames/wormux/src/menu/results_menu.cpp:321
 msgid "Time"
 msgstr "Aika"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: /lgames/wormux/src/weapon/cluster_bomb.cpp:189
+#: /lgames/wormux/src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1426,7 +1512,7 @@ msgstr ""
 "Ammu: pidä välilyönti painettuna \n"
 "yksi ammus per vuoro"
 
-#: src/weapon/bounce_ball.cpp:90
+#: /lgames/wormux/src/weapon/bounce_ball.cpp:90
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1438,143 +1524,145 @@ msgstr ""
 "Ammu: välilyönti\n"
 "yksi ammus per vuoro"
 
-#: src/interface/weapon_menu.cpp:170
+#: /lgames/wormux/src/interface/weapon_menu.cpp:170
 msgid "Tools"
 msgstr "Työkalut"
 
-#: src/network/net_error_msg.cpp:35
+#: /lgames/wormux/src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
 msgstr "Ei saatu yhteyttä isäntään."
 
-#: src/map/maps_list.cpp:237
+#: /lgames/wormux/src/map/maps_list.cpp:237
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/map/maps_list.cpp:249
+#: /lgames/wormux/src/map/maps_list.cpp:249
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Henkilökohtaisten karttojen avaaminen epäonnistui (%s)!"
 
-#: src/network/net_error_msg.cpp:38
+#: /lgames/wormux/src/network/net_error_msg.cpp:38
 msgid "Unable to use this port!"
 msgstr "Tätä porttia ei voida käyttää!"
 
-#: src/network/admin_commands.cpp:85
+#: /lgames/wormux/src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr "Tuntematon komento"
 
-#: src/menu/game_mode_editor.cpp:43
+#: /lgames/wormux/src/menu/game_mode_editor.cpp:43
 msgid "Unlimited"
 msgstr "Rajaton"
 
-#: src/main.cpp:199
+#: /lgames/wormux/src/main.cpp:199
 msgid "Version"
 msgstr "Versio"
 
-#: src/menu/options_menu.cpp:451
+#: /lgames/wormux/src/menu/options_menu.cpp:452
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Versiontarkistus epäonnistui koska: %s\n"
 
-#: src/menu/network_menu.cpp:255
+#: /lgames/wormux/src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Hetkinen! %i pelaaja ei ole vielä valmis!"
 msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 
-#: src/menu/network_menu.cpp:410
+#: /lgames/wormux/src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta, voit ainoastaan keskeyttää tai jutella!"
 
-#: src/menu/help_menu.cpp:88
+#: /lgames/wormux/src/menu/help_menu.cpp:88
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Ase: Ammu / Bonuslaatikko: putoaa nopeasti"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:168
+#: /lgames/wormux/src/game/game_init.cpp:131
+#: /lgames/wormux/src/interface/weapon_menu.cpp:168
 msgid "Weapons"
 msgstr "Aseet"
 
-#: src/main.cpp:300
+#: /lgames/wormux/src/main.cpp:300
 msgid "Website: "
 msgstr "Verkkosivu:"
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:150
+#: /lgames/wormux/src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:753
+#: /lgames/wormux/src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 
 #. Various options
-#: src/menu/options_menu.cpp:77
+#: /lgames/wormux/src/menu/options_menu.cpp:77
 msgid "Wind particles?"
 msgstr "Näytä tuuli"
 
-#: src/menu/results_menu.cpp:378
+#: /lgames/wormux/src/menu/results_menu.cpp:378
 msgid "Winner"
 msgstr "Voittaja"
 
-#: src/main.cpp:211
+#: /lgames/wormux/src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Wormux käynnistyy..."
 
-#: src/main.cpp:290
+#: /lgames/wormux/src/main.cpp:290
 msgid "Wormux version "
 msgstr "Wormux versio"
 
-#: src/include/action_handler.cpp:194
+#: /lgames/wormux/src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Väärä kartta CRC!"
 
-#: src/include/action_handler.cpp:191
+#: /lgames/wormux/src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Väärä kartan nimi!"
 
-#: src/include/action_handler.cpp:197
+#: /lgames/wormux/src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Väärä joukkue!"
 
-#: src/menu/network_menu.cpp:336
+#: /lgames/wormux/src/menu/network_menu.cpp:336
 msgid "You are alone :-/"
 msgstr "Olet yksin :-/"
 
-#: src/menu/network_menu.cpp:249
+#: /lgames/wormux/src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Olet yksin..."
 
-#: src/menu/network_menu.cpp:391
+#: /lgames/wormux/src/menu/network_menu.cpp:391
 msgid "You are the new turn master!"
 msgstr ""
 
-#: src/map/maps_list.cpp:258
+#: /lgames/wormux/src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:178
+#: /lgames/wormux/src/game/game_init.cpp:124
+#: /lgames/wormux/src/team/teams_list.cpp:178
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
-#: src/menu/network_menu.cpp:229
+#: /lgames/wormux/src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Et voi aloittaa peliä ennenkuin olet olet valinnut joukkueen!"
 
-#: src/weapon/weapon_launcher.cpp:493
+#: /lgames/wormux/src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 
-#: src/menu/credits_menu.cpp:74
+#: /lgames/wormux/src/menu/credits_menu.cpp:74
 msgid "aka"
 msgstr "aka"
 
-#: src/weapon/air_attack.cpp:220
+#: /lgames/wormux/src/weapon/air_attack.cpp:220
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1583,50 +1671,44 @@ msgstr ""
 "hyökkässuunta: Vasen/Oikea\n"
 "Pommitus : valitse kohde vasemmalla hiirennapilla yksi pommitus per vuoro"
 
-#: src/map/maps_list.cpp:76
+#: /lgames/wormux/src/map/maps_list.cpp:76
 msgid "couldn't load config"
 msgstr "ei voitu lukea asetuksia"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: /lgames/wormux/src/team/custom_team.cpp:136
 msgid "custom player"
 msgstr "henkilökohtainen pelaaja"
 
-#: src/map/ground.cpp:82
+#: /lgames/wormux/src/map/ground.cpp:82
 msgid "done"
 msgstr "valmis"
 
-#: src/map/maps_list.cpp:83
+#: /lgames/wormux/src/map/maps_list.cpp:83
 msgid "error parsing the config file"
 msgstr "virhe luettaessa asetustiedostoa"
 
-#: src/menu/credits_menu.cpp:78
+#: /lgames/wormux/src/menu/credits_menu.cpp:78
 msgid "from"
 msgstr ", "
 
-#: src/map/maps_list.cpp:72
+#: /lgames/wormux/src/map/maps_list.cpp:72
 msgid "no configuration file!"
 msgstr "ei asetustiedostoa!"
 
-#: src/sound/jukebox.cpp:167
+#: /lgames/wormux/src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o Ladataan musiikki"
 
-#: src/sound/jukebox.cpp:343
+#: /lgames/wormux/src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Ladataan ääniprofiili: %s"
 
-#: src/sound/jukebox.cpp:89
+#: /lgames/wormux/src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."
-
-#~ msgid "Unnamed"
-#~ msgstr "Nimetön"
-
-#~ msgid "Network initialization"
-#~ msgstr "Verkon alustus..."
 
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Virhe kohdassa %s:%lu (Wormux %s) : %s"
@@ -1636,3 +1718,9 @@ msgstr "o Avataan äänet: %d Hz %d bittiä."
 #~ "firewall configuration"
 #~ msgstr ""
 #~ "Virhe: Palvelimellesi ei pääse internetistä. Tarkista palomuuriasetuksesi."
+
+#~ msgid "Network initialization"
+#~ msgstr "Verkon alustus..."
+
+#~ msgid "Unnamed"
+#~ msgstr "Nimetön"
