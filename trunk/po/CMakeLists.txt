@@ -8,7 +8,7 @@ SET(POT_FILE ${CMAKE_CURRENT_BINARY_DIR}/wormux.pot)
 ADD_CUSTOM_COMMAND(
   OUTPUT ${POT_FILE}
   COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE}
-  ARGS -o ${POT_FILE} -s --directory=${CMAKE_SOURCE_DIR} --omit-header 
+  ARGS -o ${POT_FILE} -s --directory=${CMAKE_SOURCE_DIR}/src --omit-header 
      --msgid-bugs-address=${BUGS_ADDRESS} -c --keyword=_ --keyword=N_ 
      --copyright-holder=${COPYRIGHT_HOLDER} ${WORMUX_SRCS}
   DEPENDS ${WORMUX_SRCS}

@@ -19,133 +19,131 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: /lgames/wormux/src/map/maps_list.cpp:325
+#: src/map/maps_list.cpp:325
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! La mappa %s non è stata trovata :-("
 
-#: /lgames/wormux/src/menu/network_menu.cpp:110
-#: /lgames/wormux/src/menu/network_menu.cpp:320
+#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i giocatore connesso"
 msgstr[1] "%i giocatori conessi"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:114
-#: /lgames/wormux/src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "%i giocatore pronto"
 msgstr[1] "%i giocatori pronti"
 
-#: /lgames/wormux/src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s>  chiamato %s da %s"
 
-#: /lgames/wormux/src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> da %s"
 
-#: /lgames/wormux/src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "Squadra %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: /lgames/wormux/src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Squadra %s - Remoto"
 
-#: /lgames/wormux/src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:103
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: /lgames/wormux/src/game/game.cpp:723
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s della squadra %s si è suicidato!"
 
-#: /lgames/wormux/src/game/game.cpp:756
+#: src/game/game.cpp:756
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s della squadra %s è morto."
 
-#: /lgames/wormux/src/game/game.cpp:714
+#: src/game/game.cpp:714
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s della squadra %s è caduto nell'acqua!"
 
-#: /lgames/wormux/src/game/game.cpp:708
+#: src/game/game.cpp:708
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s della squadra %s è caduto fuori dalla mappa!"
 
-#: /lgames/wormux/src/game/game.cpp:729
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s della squadra %s ha colpito il terreno troppo forte!"
 
-#: /lgames/wormux/src/game/game.cpp:736
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s della squadra %s è morto perché maldestro!"
 
-#: /lgames/wormux/src/object/medkit.cpp:70
+#: src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Il giocatore %s vince %u punto di vita !"
 msgstr[1] "Il giocatore %s vince %u punti di vita !"
 
-#: /lgames/wormux/src/game/game.cpp:748
+#: src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s è uno psicopatico, ha ucciso un membro del suo team: %s !"
 
-#: /lgames/wormux/src/weapon/mine.cpp:123
+#: src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s è vicino a una mina!"
 
-#: /lgames/wormux/src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:97
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "La squadra %s ha già delle munizioni enormi per %s!"
 
 #. Show message
-#: /lgames/wormux/src/weapon/skip_turn.cpp:57
+#: src/weapon/skip_turn.cpp:57
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "La squadra %s ha saltato il suo turno."
 
-#: /lgames/wormux/src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:396
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "La squadra %s ha vinto %u Bazooka Cluster!"
 msgstr[1] "La squadra %s ha vinto %u Bazooka!"
 
-#: /lgames/wormux/src/weapon/gnu.cpp:175
+#: src/weapon/gnu.cpp:175
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "La squadra %s ha vinto %u Gnu! Falli saltare, cowboy!"
 msgstr[1] "La squadra %s ha vinto %u Gnu! Falli saltare, cowboy!"
 
-#: /lgames/wormux/src/weapon/air_attack.cpp:272
+#: src/weapon/air_attack.cpp:272
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
 msgstr[0] "La squadra %s ha vinto %u Attacco Aereo!"
 msgstr[1] "La squadra %s ha vinto %u Attacchi Aerei!"
 
-#: /lgames/wormux/src/weapon/airhammer.cpp:172
+#: src/weapon/airhammer.cpp:172
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -160,35 +158,35 @@ msgstr[1] ""
 "La squadra %s ha vinto %u Martelli Pneumatici! Non fare troppo rumore. "
 "Grazie, i tuoi vicini."
 
-#: /lgames/wormux/src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "La squadra %s ha vinto %u Incudine! A chi la tiriamo?"
 msgstr[1] "La squadra %s ha vinto %u Incudini! A chi le tiriamo?"
 
-#: /lgames/wormux/src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "La squadra %s ha vinto %u Bazooka Automatico !"
 msgstr[1] "La squadra %s ha vinto %u Bazooka Automatici !"
 
-#: /lgames/wormux/src/weapon/baseball.cpp:116
+#: src/weapon/baseball.cpp:116
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "La squadra %s ha vinto %u Mazza da Baseball!"
 msgstr[1] "Il giocatore '%s ha vinto %u Mazze da Baseball"
 
-#: /lgames/wormux/src/weapon/bazooka.cpp:130
+#: src/weapon/bazooka.cpp:130
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "La squadra %s ha vinto %u Bazooka!"
 msgstr[1] "La squadra %s ha vinto %u Bazooka!"
 
-#: /lgames/wormux/src/weapon/blowtorch.cpp:138
+#: src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -202,21 +200,21 @@ msgstr[1] ""
 "La squadra %s ha vinto %u Fiamme Ossidriche! Se hai meno di 18 anni, chiedi "
 "alla mamma prima di usarle!"
 
-#: /lgames/wormux/src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "La squadra %s ha vinto %u Pallina Rimbalzina! Boing!"
 msgstr[1] "La squadra %s ha vinto %u Palline Rimbazine! Boing!"
 
-#: /lgames/wormux/src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "La squadra %s ha vinto %u Bomba Custer!"
 msgstr[1] "La squadra %s ha vinto %u Bombe Custer!"
 
-#: /lgames/wormux/src/weapon/construct.cpp:82
+#: src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -224,7 +222,7 @@ msgstr[0] "La squadra %s ha vinto %u Kit Costruzione! Allacciati il caschetto!"
 msgstr[1] ""
 "La squadra %s ha vinto %u Kit Costrunzione! Allacciati il caschetto!"
 
-#: /lgames/wormux/src/weapon/disco_grenade.cpp:170
+#: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -236,77 +234,77 @@ msgstr[1] ""
 "La squadra %s ha vinto %u Granate Disco! Questa bomba ti farà muovere il "
 "culo, baby!"
 
-#: /lgames/wormux/src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:145
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "La squadra %s ha vinto %u Candelotto di Dinamite!"
 msgstr[1] "La squadra %s ha vinto %u Candelotti di Dinamite !"
 
-#: /lgames/wormux/src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:180
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "La squadra %s ha vinto %u Lanciafiamme!"
 msgstr[1] "La squadra %s ha vinto %u Candelotti di Dinamite !"
 
-#: /lgames/wormux/src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:176
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "La squadra %s ha vinto %u Bomba Football!"
 msgstr[1] "La squadra %s ha vinto %u Bombe Antisommossa!"
 
-#: /lgames/wormux/src/weapon/grapple.cpp:332
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "La squadra %s ha vinto %u Corda Ninja!"
 msgstr[1] "La squadra %s ha vinto %u Corde Ninja"
 
-#: /lgames/wormux/src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:90
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
 msgstr[0] "La squadra %s ha vinto %u Granata!"
 msgstr[1] "La squadra %s ha vinto %u Granate!"
 
-#: /lgames/wormux/src/weapon/gun.cpp:99
+#: src/weapon/gun.cpp:99
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
 msgstr[0] "La squadra %s ha vinto %u Pistola!"
 msgstr[1] "La squadra %s ha vinto %u Pistole!"
 
-#: /lgames/wormux/src/weapon/jetpack.cpp:252
+#: src/weapon/jetpack.cpp:252
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "La squadra %s ha vinto %u Jetpack! Contatto!"
 msgstr[1] "La squadra %s ha vinto %u Jetpack! Contatto!"
 
-#: /lgames/wormux/src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "La squadra %s ha vinto %u Antigravità! Altro che Neil Armstrong!"
 msgstr[1] "La squadra %s ha vinto %u Antigravità! Altro che Neil Armstrong!"
 
-#: /lgames/wormux/src/weapon/mine.cpp:249
+#: src/weapon/mine.cpp:249
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "La squadra %s ha vinto %u Mina!"
 msgstr[1] "La squadra %s ha vinto %u Mine!"
 
-#: /lgames/wormux/src/weapon/parachute.cpp:167
+#: src/weapon/parachute.cpp:167
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "La squadra %s ha vinto %u Paracadute!"
 msgstr[1] "La squadra %s ha vinto %u Paracaduti!"
 
-#: /lgames/wormux/src/weapon/polecat.cpp:182
+#: src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -317,28 +315,28 @@ msgstr[1] ""
 "La squadra %s ha vinto %u Puzzole! Avete a portata di mano una maschera "
 "antigas?"
 
-#: /lgames/wormux/src/weapon/riot_bomb.cpp:133
+#: src/weapon/riot_bomb.cpp:133
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "La squadra %s ha vinto %u Bomba Antisommossa!"
 msgstr[1] "La squadra %s ha vinto %u Bombe Antisommossa!"
 
-#: /lgames/wormux/src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:135
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
 msgstr[0] "La squadra %s ha vinto %u Cannamozza!"
 msgstr[1] "La squadra %s ha vinto %u Cannamozza!"
 
-#: /lgames/wormux/src/weapon/slap.cpp:85
+#: src/weapon/slap.cpp:85
 #, fuzzy, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "La squadra %s ha vinto %u Corda Ninja!"
 msgstr[1] "La squadra %s ha vinto %u Corde Ninja!"
 
-#: /lgames/wormux/src/weapon/snipe_rifle.cpp:247
+#: src/weapon/snipe_rifle.cpp:247
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -348,137 +346,77 @@ msgstr[0] ""
 msgstr[1] ""
 "La squadra %s ha vinto %u Fucili da Cecchino! Sparagli in mezzo agli occhi!"
 
-#: /lgames/wormux/src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:144
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
 msgstr[0] "La squadra %s ha vinto %u Motragliatore!"
 msgstr[1] "La squadra %s ha vinto %u Mitragliatori!"
 
-#: /lgames/wormux/src/weapon/suicide.cpp:77
+#: src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "La squadra %s ha vinto %u Suicidio!"
 msgstr[1] "La squadra %s ha vinto %u Suicidi!"
 
-#: /lgames/wormux/src/weapon/syringe.cpp:115
+#: src/weapon/syringe.cpp:115
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
 msgstr[0] "La squadra %s ha vinto %u Siringa!"
 msgstr[1] "La squadra %s ha vinto %u Siringhe!"
 
-#: /lgames/wormux/src/weapon/teleportation.cpp:120
+#: src/weapon/teleportation.cpp:120
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
 msgstr[0] "La squadra %s ha vinto %u Teletrasporto!"
 msgstr[1] "La squadra %s ha vinto %u Teletrasporti!"
 
-#: /lgames/wormux/src/weapon/skip_turn.cpp:68
+#: src/weapon/skip_turn.cpp:68
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "La squadra %s ha vinto %u Salta Turno! So che ti piacerà."
 msgstr[1] "La squadra %s ha vinto %u Salta Turno! So che ti piacerà."
 
-#: /lgames/wormux/src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:318
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "La squadra %s ha vinto %u Lancia-Tux! Mai visto un pinguino volare?"
 msgstr[1] "La squadra %s ha vinto %u Lancia-Tux! Mai visto un pinguino volare?"
 
-#: /lgames/wormux/src/game/game_blitz.cpp:70
+#: src/game/game_blitz.cpp:70
 #, fuzzy, c-format
 msgid "%s team was fragged down."
 msgstr "La squadra %s vince."
 
-#: /lgames/wormux/src/game/game.cpp:744
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s ha portato un membro della squadra %s nella tomba con lui!"
 
-#. 1003.2 specifies the format of this message.
-#: /lgames/wormux/src/msvc/getopt.c:794
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:797
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:717
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:687
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:735 /lgames/wormux/src/msvc/getopt.c:908
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:712
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:892
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:874
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr ""
-
-#. 1003.2 specifies the format of this message.
-#: /lgames/wormux/src/msvc/getopt.c:827 /lgames/wormux/src/msvc/getopt.c:957
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr ""
-
-#. +option or -option
-#: /lgames/wormux/src/msvc/getopt.c:768
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr ""
-
-#. --option
-#: /lgames/wormux/src/msvc/getopt.c:764
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr ""
-
-#: /lgames/wormux/src/interface/interface.cpp:185
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(morto)"
 
 #. Setting language selection
-#: /lgames/wormux/src/menu/options_menu.cpp:264
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(Lingua di sistema)"
 
-#: /lgames/wormux/src/network/chatlogger.cpp:29
-#: /lgames/wormux/src/network/chatlogger.cpp:76
+#: src/network/chatlogger.cpp:29 src/network/chatlogger.cpp:76
 msgid "(unknown time)"
 msgstr "(tempo sconosciuto)"
 
 #. Display number of ammo
-#: /lgames/wormux/src/interface/interface.cpp:216
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(illimitato)"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:443
+#: src/menu/options_menu.cpp:443
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -487,33 +425,32 @@ msgstr ""
 "La nuova versione Wormux %s è disponibile, tu stai usando la %s. Puoi "
 "controllare se l'aggiornamento è disponibile per il tuo OS!"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:139
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Inserisci una squadra personalizzata"
 
-#: /lgames/wormux/src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:219
 msgid "Air Attack"
 msgstr "Attacco aereo"
 
-#: /lgames/wormux/src/weapon/airhammer.cpp:74
+#: src/weapon/airhammer.cpp:74
 msgid "Airhammer"
 msgstr "Martello Pneumatico"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:421
+#: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Tutte le squadre"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:57
+#: src/menu/game_mode_editor.cpp:57
 #, fuzzy
 msgid "Always"
 msgstr "Gioca"
 
-#: /lgames/wormux/src/game/game_classic.cpp:56
-#: /lgames/wormux/src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "ed il vincitore è..."
 
-#: /lgames/wormux/src/weapon/baseball.cpp:58
+#: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
 "Fire : space key\n"
@@ -523,254 +460,244 @@ msgstr ""
 "Fuoco: Spazio\n"
 "un colpo per turno"
 
-#: /lgames/wormux/src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Incudine"
 
-#: /lgames/wormux/src/main.cpp:291
+#: src/main.cpp:291
 msgid "Authors:"
 msgstr "Autori:"
 
-#: /lgames/wormux/src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:223
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatico"
 
-#: /lgames/wormux/src/menu/pause_menu.cpp:47
+#: src/menu/pause_menu.cpp:47
 msgid "Back to battle"
 msgstr "Torna alla battaglia"
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:41
+#: src/network/net_error_msg.cpp:41
 msgid "Bad socket ..."
 msgstr "Socket errato..."
 
-#: /lgames/wormux/src/weapon/baseball.cpp:57
+#: src/weapon/baseball.cpp:57
 msgid "Baseball Bat"
 msgstr "Mazza da Baseball"
 
-#: /lgames/wormux/src/weapon/bazooka.cpp:123
+#: src/weapon/bazooka.cpp:123
 msgid "Bazooka"
 msgstr "Bazooka"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:58
+#: src/menu/game_mode_editor.cpp:58
 #, fuzzy
 msgid "Before action"
 msgstr "Teletrasporto"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:44
+#: src/menu/game_mode_editor.cpp:44
 msgid "Blitz"
 msgstr ""
 
-#: /lgames/wormux/src/weapon/blowtorch.cpp:63
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "Fiamma Ossidrica"
 
-#: /lgames/wormux/src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:89
 msgid "Bounce Ball"
 msgstr "Pallina Rimbalzina"
 
-#: /lgames/wormux/src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:179
 msgid "Bye bye tux..."
 msgstr "Ciao ciao tux..."
 
-#: /lgames/wormux/src/menu/network_teams_selection_box.cpp:235
-#: /lgames/wormux/src/team/teams_list.cpp:506
-#: /lgames/wormux/src/team/teams_list.cpp:537
-#: /lgames/wormux/src/team/teams_list.cpp:546
-#: /lgames/wormux/src/team/teams_list.cpp:552
-#: /lgames/wormux/src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
+#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
+#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossibile trovare la squadra %s!"
 
-#: /lgames/wormux/src/team/teams_list.cpp:170
+#: src/team/teams_list.cpp:170
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Impossibile aprire la directory personale delle squadre (%s)!"
 
-#: /lgames/wormux/src/menu/skin_menu.cpp:76
-#: /lgames/wormux/src/team/teams_list.cpp:158
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossibile aprire la directory delle squadra (%s)!"
 
-#: /lgames/wormux/src/team/custom_teams_list.cpp:93
+#: src/team/custom_teams_list.cpp:93
 #, fuzzy, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Impossibile aprire la cartella (%s) delle squadre personalizzate!"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Center camera to character"
 msgstr "Numero di caratteri:"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:90
 msgid "Change active character"
 msgstr ""
 
-#: /lgames/wormux/src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:79
 msgid "Change aim angle"
 msgstr ""
 
-#: /lgames/wormux/src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:73
 msgid "Change weapon category"
 msgstr ""
 
-#: /lgames/wormux/src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:78
 msgid "Change weapon countdown"
 msgstr ""
 
-#: /lgames/wormux/src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character"
 msgstr "Paracadute"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:61
+#: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
 msgstr "Paracadute"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:195
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Ricerca aggiornamenti online?"
 
-#: /lgames/wormux/src/menu/map_selection_box.cpp:223
+#: src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "Scegli casualmente tra le mappe disponibili"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:42
+#: src/menu/game_mode_editor.cpp:42
 msgid "Classic"
 msgstr ""
 
-#: /lgames/wormux/src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:77
 msgid "Click: Center camera on character"
 msgstr ""
 
 #. Client Mode
-#: /lgames/wormux/src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "Modalità cliente"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:168
-#: /lgames/wormux/src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
 msgid "Clumsiest"
 msgstr "Il più maldestro"
 
-#: /lgames/wormux/src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "Bomba Cluster"
 
-#: /lgames/wormux/src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:389
 msgid "Cluzooka"
 msgstr "Cluzooka"
 
-#: /lgames/wormux/src/weapon/suicide.cpp:42
+#: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Suicidato"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Configuration menu"
 msgstr "Nessun file di configurazione!"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:164
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Conessione al gioco"
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:32
+#: src/network/net_error_msg.cpp:32
 msgid "Connected !"
 msgstr "Connesso!"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:64
 #, fuzzy
 msgid "Connected players: "
 msgstr "Fine della partita"
 
-#: /lgames/wormux/src/weapon/construct.cpp:60
-#: /lgames/wormux/src/weapon/construct.cpp:68
+#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Kit Costruzione"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:386
+#: src/menu/results_menu.cpp:386
 msgid "Controlled by: "
 msgstr "Controllato da:"
 
-#: /lgames/wormux/src/network/download.cpp:79
+#: src/network/download.cpp:79
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Impossibile reperire l'ultima versione da %s"
 
-#: /lgames/wormux/src/network/chatlogger.cpp:55
-#: /lgames/wormux/src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Impossibile aprire il file %s"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:71
+#: src/menu/main_menu.cpp:71
 msgid "Credits"
 msgstr "Crediti"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:87
+#: src/menu/game_mode_editor.cpp:87
 #, fuzzy
 msgid "Damage per turn during death mode"
 msgstr "Danni per turno durante la death mode"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Cancella una squadra personalizzata"
 
-#: /lgames/wormux/src/weapon/disco_grenade.cpp:157
+#: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Granata Disco"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:30
+#: src/network/admin_commands.cpp:30
 msgid "Displays this message"
 msgstr "Mostra questo messaggio"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move camera"
 msgstr ""
 
 #. some death mode options
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:81
+#: src/menu/game_mode_editor.cpp:81
 #, fuzzy
 msgid "Duration before death mode"
 msgstr "Durata prima della death mode"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:50
+#: src/menu/game_mode_editor.cpp:50
 msgid "Duration of a turn"
 msgstr "Durata del turno:"
 
-#: /lgames/wormux/src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
 msgstr "Dinamite"
 
-#: /lgames/wormux/src/game/game.cpp:270
+#: src/game/game.cpp:270
 msgid "END OF GAME"
 msgstr "FINE DEL GIOCO"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Volume effetti"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:323
+#: src/menu/results_menu.cpp:323
 msgid "Energy"
 msgstr "Energia"
 
-#: /lgames/wormux/src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:220
 #, fuzzy, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Errore inizializzando  la rete: Il client %s non è d'accordo con te!! - %s"
 
-#: /lgames/wormux/src/team/teams_list.cpp:134
-#: /lgames/wormux/src/team/custom_teams_list.cpp:120
+#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Errore nel caricamento della squadra:"
 
-#: /lgames/wormux/src/game/config.cpp:513
-#: /lgames/wormux/src/team/custom_team.cpp:165
-#: /lgames/wormux/src/team/custom_team.cpp:175
-#: /lgames/wormux/src/team/custom_team.cpp:187
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
+#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -778,7 +705,7 @@ msgstr ""
 "Errore nella creazione della directory \"%s\" : impossibile salvare il file "
 "di configurazione."
 
-#: /lgames/wormux/src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:104
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -786,14 +713,14 @@ msgstr ""
 "Errore nell'eliminazione della cartella \"%s\" : Impossibile eliminare la "
 "squadra personalizzata."
 
-#: /lgames/wormux/src/team/custom_team.cpp:95
+#: src/team/custom_team.cpp:95
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
 "Errore nell'eliminazione del file \"%s\" : Impossibile eliminare la squadra "
 "personalizzata."
 
-#: /lgames/wormux/src/game/game.cpp:143
+#: src/game/game.cpp:143
 #, c-format
 msgid ""
 "Error:\n"
@@ -803,29 +730,29 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Errore: connessione impossibile a %s:%s"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:341
+#: src/menu/network_connection_menu.cpp:341
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Errore: impossibile connettersi all'indice del server per ospitare il gioco"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:281
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Errore: impossibile connettersi all'indice del server per cercare un gioco "
 "su internet"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:366
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Errore: impossibile avviare il server"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:360
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -834,101 +761,99 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: /lgames/wormux/src/team/team.cpp:124
+#: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Errore: impossibile trovare l'aspetto \"%s\" per la squadra \"%s\"."
 
-#: /lgames/wormux/src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:136
 msgid "Flame Thrower"
 msgstr "Lanciafiamme"
 
-#: /lgames/wormux/src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "Bomba Football"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:70
 #, fuzzy
 msgid "Fullscreen / window"
 msgstr "Schermo intero ?"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:95
 msgid "Fullscreen?"
 msgstr "Schermo intero ?"
 
-#: /lgames/wormux/src/menu/game_menu.cpp:85
+#: src/menu/game_menu.cpp:85
 msgid "Game"
 msgstr "Partita"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:46
+#: src/menu/game_mode_editor.cpp:46
 msgid "Game mode"
 msgstr "Modalità di gioco"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:187
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Nome partita:"
 
-#: /lgames/wormux/src/weapon/gnu.cpp:161
+#: src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
 msgstr "Lancia-Gnu"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:125
 msgid "Graphic"
 msgstr "Grafica"
 
-#: /lgames/wormux/src/weapon/grapple.cpp:85
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Corda Ninja"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:93
+#: src/menu/game_mode_editor.cpp:93
 msgid "Gravity"
 msgstr "Gravità"
 
-#: /lgames/wormux/src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:76
 msgid "Grenade"
 msgstr "Granata"
 
-#: /lgames/wormux/src/map/ground.cpp:65
+#: src/map/ground.cpp:65
 msgid "Ground initialization..."
 msgstr "Inizializzazione terreno..."
 
-#: /lgames/wormux/src/weapon/gun.cpp:74
+#: src/weapon/gun.cpp:74
 msgid "Gun"
 msgstr "Pistola"
 
-#: /lgames/wormux/src/tool/file_tools.cpp:186
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directory HOME (environment variable $HOME) non esiste!"
 
 #. Skip a line
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Buon gioco!"
 
-#: /lgames/wormux/src/menu/team_box.cpp:67
-#: /lgames/wormux/src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Comandante"
 
 #. Display player's name
-#: /lgames/wormux/src/interface/interface.cpp:176
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Comandante:"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:68
-#: /lgames/wormux/src/menu/pause_menu.cpp:55
+#: src/menu/main_menu.cpp:68 src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Aiuto"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:71
 msgid "High jump"
 msgstr ""
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:211
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Gestione della partita"
 
-#: /lgames/wormux/src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:224
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -940,7 +865,7 @@ msgstr ""
 "Fuoco: tieni premuto Spazio fino alla potenza voluta\n"
 "una munizione al turno"
 
-#: /lgames/wormux/src/weapon/blowtorch.cpp:64
+#: src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -950,7 +875,7 @@ msgstr ""
 "Angolazione: Su/Giù\n"
 "una munizione al turno"
 
-#: /lgames/wormux/src/weapon/airhammer.cpp:75
+#: src/weapon/airhammer.cpp:75
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -958,7 +883,7 @@ msgstr ""
 "Utilizzo: tieni premuto Spazio\n"
 "una munizione al turno"
 
-#: /lgames/wormux/src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -966,11 +891,11 @@ msgstr ""
 "Utilizzo: Click Sinitro sull'obbiettivo\n"
 "una munizione al turno"
 
-#: /lgames/wormux/src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:210
 msgid "Hurry up, you are too slow !!"
 msgstr "Muoviti, sei troppo lento !!"
 
-#: /lgames/wormux/src/main.cpp:283
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -979,13 +904,12 @@ msgstr ""
 "inglese, per favore) a :"
 
 #. Characters energy
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:66
+#: src/menu/game_mode_editor.cpp:66
 msgid "Initial energy"
 msgstr "Energia iniziale"
 
-#: /lgames/wormux/src/weapon/bazooka.cpp:124
-#: /lgames/wormux/src/weapon/cluzooka.cpp:390
-#: /lgames/wormux/src/weapon/riot_bomb.cpp:121
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -995,481 +919,473 @@ msgstr ""
 "Fuoco: tieni premuto Spazio fino alla potenza voluta\n"
 "una munizione al turno"
 
-#: /lgames/wormux/src/game/game_init.cpp:155
+#: src/game/game_init.cpp:155
 msgid "Initialisation"
 msgstr "Inizializzazione"
 
-#: /lgames/wormux/src/game/game_init.cpp:108
+#: src/game/game_init.cpp:108
 msgid "Initialise map"
 msgstr "Inizializzazione mappa"
 
-#: /lgames/wormux/src/game/game_init.cpp:142
+#: src/game/game_init.cpp:142
 msgid "Initialise sounds"
 msgstr "Inizializzazione suoni"
 
-#: /lgames/wormux/src/game/game_init.cpp:118
+#: src/game/game_init.cpp:118
 msgid "Initialise teams"
 msgstr "Inizializzazione squadre"
 
-#: /lgames/wormux/src/game/game.cpp:592
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "E' un regalo!"
 
-#: /lgames/wormux/src/weapon/jetpack.cpp:62
+#: src/weapon/jetpack.cpp:62
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:147
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:235
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Venite su #wormux in irc.freenode.net per trovare nuovi avversari."
 
-#: /lgames/wormux/src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:75
 msgid "Jump"
 msgstr ""
 
-#: /lgames/wormux/src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85
 msgid "Jump backwards"
 msgstr ""
 
-#: /lgames/wormux/src/network/admin_commands.cpp:32
+#: src/network/admin_commands.cpp:32
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Caccia i giocatori indicati da <nickname> fuori dal gioco"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Lingua"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:34
+#: src/network/admin_commands.cpp:34
 msgid "List the connected players"
 msgstr ""
 
-#: /lgames/wormux/src/map/maps_list.cpp:227
+#: src/map/maps_list.cpp:227
 msgid "Load maps:"
 msgstr "Caricamento mappe :"
 
-#: /lgames/wormux/src/team/teams_list.cpp:146
+#: src/team/teams_list.cpp:146
 msgid "Load teams:"
 msgstr "Caricamento squadre :"
 
-#: /lgames/wormux/src/menu/teams_selection_box.cpp:43
+#: src/menu/teams_selection_box.cpp:43
 msgid "Local teams:"
 msgstr "Squadre in locale:"
 
-#: /lgames/wormux/src/weapon/lowgrav.cpp:49
+#: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
 msgstr "Antigravità"
 
 #. #############################
 #. Manual connection
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:129
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "connessione manuale"
 
-#: /lgames/wormux/src/menu/game_menu.cpp:77
+#: src/menu/game_menu.cpp:77
 msgid "Map"
 msgstr "Mappa"
 
-#: /lgames/wormux/src/map/map.cpp:299
+#: src/map/map.cpp:299
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mappa %s, creata da :"
 
-#: /lgames/wormux/src/game/game_init.cpp:111
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Mappa"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: /lgames/wormux/src/menu/network_menu.cpp:130
-#: /lgames/wormux/src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Modalità di gioco"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:72
+#: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
 msgstr "Energia iniziale"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:105
+#: src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "Numero massimo di giocatori:"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:99
 msgid "Maximum FPS"
 msgstr "Numero massimo di FPS:"
 
-#: /lgames/wormux/src/weapon/mine.cpp:215
+#: src/weapon/mine.cpp:215
 msgid "Mine"
 msgstr "Mina"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:199
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Varie"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:176
-#: /lgames/wormux/src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
 msgid "Most accurate"
 msgstr "Il più accurato"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:160
-#: /lgames/wormux/src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most sold-out"
 msgstr "Il più traditore"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:144
-#: /lgames/wormux/src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
 msgid "Most useful"
 msgstr "Il più utile"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:152
-#: /lgames/wormux/src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
 msgid "Most useless"
 msgstr "Il più inutile"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:136
-#: /lgames/wormux/src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
 msgid "Most violent"
 msgstr "Il più violento"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:87
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: /lgames/wormux/src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:80
 #, fuzzy
 msgid "Move character"
 msgstr "Paracadute"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Volume Musica"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Musica ?"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:62
+#: src/menu/main_menu.cpp:62
 msgid "Network Game"
 msgstr "Gioco online"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:59
+#: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr ""
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: /lgames/wormux/src/network/chatlogger.cpp:49
+#: src/network/chatlogger.cpp:49
 msgid "New network game at "
 msgstr "Nuovo gioco online in"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:244
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Avviso nuovo giocatore?"
 
-#: /lgames/wormux/src/weapon/weapon.cpp:658
+#: src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nessun elemento <%s> trovato nel file di conf. xml!"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:60
 #, fuzzy
 msgid "No player connected"
 msgstr "%i giocatore connesso"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:73
+#: src/menu/results_menu.cpp:73
 msgid "Nobody!"
 msgstr "Nessuno!"
 
-#: /lgames/wormux/src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:86
 msgid "Number of characters"
 msgstr "Numero di caratteri:"
 
-#: /lgames/wormux/src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:49
 msgid "Number of teams:"
 msgstr "Numero di squadre:"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:82
 msgid "On a character: Changes active one"
 msgstr ""
 
-#: /lgames/wormux/src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:81
 msgid "On map: Select a target"
 msgstr ""
 
-#: /lgames/wormux/src/menu/main_menu.cpp:65
+#: src/menu/main_menu.cpp:65
 msgid "Options"
 msgstr "Opzioni"
 
-#: /lgames/wormux/src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:51
 msgid "Options menu"
 msgstr "Opzioni"
 
-#: /lgames/wormux/src/weapon/parachute.cpp:68
+#: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Paracadute"
 
-#: /lgames/wormux/src/weapon/parachute.cpp:101
+#: src/weapon/parachute.cpp:101
 msgid "Parachute is activated automatically."
 msgstr "Il paracadute è attivato automaticamente."
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:121
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:159
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:199
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Password:"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:86
 msgid "Pause"
 msgstr "Pausa"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:59
+#: src/menu/main_menu.cpp:59
 msgid "Play"
 msgstr "Gioca"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:134
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr ""
 
-#: /lgames/wormux/src/menu/teams_selection_box.cpp:64
+#: src/menu/teams_selection_box.cpp:64
 msgid "Player"
 msgstr "Giocatore"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:80
 msgid "Player energy?"
 msgstr "Energia giocatore:"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:148
+#: src/menu/options_menu.cpp:148
 #, fuzzy
 msgid "Player name"
 msgstr "Nome del giocatore?"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:83
 msgid "Player's name?"
 msgstr "Nome del giocatore?"
 
-#: /lgames/wormux/src/weapon/polecat.cpp:168
+#: src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "Lanciatore di puzzole"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:148
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Porta:"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:108
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "batttaglie pubbliche"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:74
+#: src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Esci"
 
-#: /lgames/wormux/src/main.cpp:272
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Esci da Wormux"
 
-#: /lgames/wormux/src/menu/pause_menu.cpp:59
+#: src/menu/pause_menu.cpp:59
 msgid "Quit battle"
 msgstr "abbandona battaglia"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:65
+#: src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Quit game"
 msgstr "Avvia il gioco"
 
-#: /lgames/wormux/src/menu/map_selection_box.cpp:222
+#: src/menu/map_selection_box.cpp:222
 msgid "Random map"
 msgstr "mappa casuale"
 
-#: /lgames/wormux/src/game/config.cpp:351
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Lettura del file di configurazione default"
 
-#: /lgames/wormux/src/game/config.cpp:400
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Lettura di un file di configurazione personale"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:121
 msgid "Resolution"
 msgstr "Risoluzione"
 
-#: /lgames/wormux/src/weapon/riot_bomb.cpp:120
+#: src/weapon/riot_bomb.cpp:120
 msgid "Riot Bomb"
 msgstr "Bomba Antisommossa"
 
-#: /lgames/wormux/src/main.cpp:81
+#: src/main.cpp:81
 msgid "Run game"
 msgstr "Avvia il gioco"
 
-#: /lgames/wormux/src/network/chat.cpp:81
+#: src/network/chat.cpp:81
 msgid "Say: "
 msgstr "Dice:"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:89
 msgid "Scroll border size"
 msgstr "Dimensione zona di scorrimento"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:86
 msgid "Scroll on border"
 msgstr "Scorrimento sui bordi"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:137
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Indirizzo server:"
 
 #. Available on internet ?
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Server disponibile su Internet"
 
 #. Server Mode
-#: /lgames/wormux/src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "Modalità server"
 
-#: /lgames/wormux/src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:92
 msgid "Shotgun"
 msgstr "Cannamozza"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:83
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Opzioni"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:69
 msgid "Show/hide interface"
 msgstr ""
 
-#: /lgames/wormux/src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide minimap"
 msgstr ""
 
-#: /lgames/wormux/src/weapon/skip_turn.cpp:47
+#: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Salta Turno"
 
-#: /lgames/wormux/src/weapon/slap.cpp:73
+#: src/weapon/slap.cpp:73
 msgid "Slap"
 msgstr "Schiaffo"
 
-#: /lgames/wormux/src/weapon/slap.cpp:74
+#: src/weapon/slap.cpp:74
 #, fuzzy
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Schiaffeggia il nemico per farlo saltare un po'."
 
-#: /lgames/wormux/src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:84
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
-#: /lgames/wormux/src/weapon/snipe_rifle.cpp:93
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Fucile da Cecchino"
 
-#: /lgames/wormux/src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:86
 msgid "Someone put a booby trap into the crate!"
 msgstr "Qualcuno ha messo una Trappola Esplosiva nella scatola!"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:289
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Siacenti, attualmente non ci sono partite in attesa di giocatori"
 
-#: /lgames/wormux/src/network/index_server.cpp:252
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: /lgames/wormux/src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Suono"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:215
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Effetti sonori ?"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Frequenza del suono"
 
 #. Load teams' sound profiles
-#: /lgames/wormux/src/game/game_init.cpp:145
+#: src/game/game_init.cpp:145
 msgid "Sounds"
 msgstr "Opzioni del suono"
 
-#: /lgames/wormux/src/game/game.cpp:114
+#: src/game/game.cpp:114
 msgid "Starting a new game"
 msgstr "Avvia una nuova partita"
 
-#: /lgames/wormux/src/interface/interface.cpp:216
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Munizioni:"
 
-#: /lgames/wormux/src/weapon/submachine_gun.cpp:99
+#: src/weapon/submachine_gun.cpp:99
 msgid "Submachine Gun"
 msgstr "Mitragliatrice"
 
-#: /lgames/wormux/src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:231
 msgid "SuperTux"
 msgstr "SuperTux"
 
-#: /lgames/wormux/src/weapon/syringe.cpp:70
+#: src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Siringa"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:72
 #, fuzzy
 msgid "Talk in network battle"
 msgstr "Torna alla battaglia"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:426
 msgid "Team graphs"
 msgstr "Grafici squadre"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:424
+#: src/menu/results_menu.cpp:424
 msgid "Team stats"
 msgstr "statistiche squadre"
 
-#: /lgames/wormux/src/game/game_init.cpp:120
-#: /lgames/wormux/src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:120 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Squadre"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Editor squadre"
 
-#: /lgames/wormux/src/weapon/teleportation.cpp:50
+#: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
 msgstr "Teletrasporto"
 
-#: /lgames/wormux/src/weapon/cluster_bomb.cpp:146
+#: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "La bomba cluster ha lasciato il campo di battaglia prima di esplodere"
 
-#: /lgames/wormux/src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr ""
 "La Bomba Football  ha lasciato il campo di battaglia prima di esplodere"
 
-#: /lgames/wormux/src/weapon/gnu.cpp:144
+#: src/weapon/gnu.cpp:144
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Lo Gnu ha lasciato il campo di battaglia prima di esplodere"
 
-#: /lgames/wormux/src/weapon/polecat.cpp:151
+#: src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "La puzzola ha lasciato il campo di battaglia prima di esplodere"
 
-#: /lgames/wormux/src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Il razzo automatico è passato ad un altro mondo..."
 
-#: /lgames/wormux/src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:72
 msgid "The ball left the battlefield before exploding"
 msgstr ""
 "La pallina rimbalzina ha lasciato il campo di battaglia prima di esplodere"
 
-#: /lgames/wormux/src/network/network_client.cpp:102
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1478,42 +1394,41 @@ msgstr ""
 "Le versioni del client e del server sono incompatibili (locale=%s, server=%"
 "s). Prova un altro server."
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:47
+#: src/network/net_error_msg.cpp:47
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr ""
 "La connessione è scaduta. verificate che non ci sia un firewall attivo!"
 
-#: /lgames/wormux/src/weapon/disco_grenade.cpp:127
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "La granata disco ha lasciato la pista daa ballo prima di esplodere"
 
-#: /lgames/wormux/src/game/game.cpp:482
+#: src/game/game.cpp:482
 msgid "The game was interrupted because you got disconnected."
 msgstr "Il gioco è stato interrotto dato che ti sei disconnesso"
 
-#: /lgames/wormux/src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
 msgstr "La granata ha lasciato il campo di battaglia prima di esplodere"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:333
+#: src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Gli altri ti stanno aspettando! Muoviti! :-)"
 
-#: /lgames/wormux/src/weapon/bazooka.cpp:83
-#: /lgames/wormux/src/weapon/cluzooka.cpp:336
-#: /lgames/wormux/src/weapon/riot_bomb.cpp:86
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Il razzo ha lasciato il campo di battaglia..."
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:44
+#: src/network/net_error_msg.cpp:44
 msgid "The server rejected the connection."
 msgstr "Il server rifiuta la connessione."
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:50
+#: src/network/net_error_msg.cpp:50
 msgid "The server rejected the connection: wrong password!"
 msgstr "Il server rifiuta la connessione: password errata!"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:241
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1521,12 +1436,11 @@ msgstr[0] "Questa è solo %i squadra."
 msgstr[1] "Questi sono è solo %i squadre."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: /lgames/wormux/src/menu/results_menu.cpp:321
+#: src/menu/results_menu.cpp:321
 msgid "Time"
 msgstr "Ora"
 
-#: /lgames/wormux/src/weapon/cluster_bomb.cpp:189
-#: /lgames/wormux/src/weapon/footbomb.cpp:159
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1538,7 +1452,7 @@ msgstr ""
 "Fuoco: tieni premuto Spazio fino alla potenza desiderata\n"
 "Una munizione epr turno"
 
-#: /lgames/wormux/src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:90
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1550,146 +1464,144 @@ msgstr ""
 "Fuoco: Spazio\n"
 "Una munizione epr turno"
 
-#: /lgames/wormux/src/interface/weapon_menu.cpp:170
+#: src/interface/weapon_menu.cpp:170
 msgid "Tools"
 msgstr "Attrezzi"
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:35
+#: src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
 msgstr "Impossibile contattare l'host."
 
-#: /lgames/wormux/src/map/maps_list.cpp:237
+#: src/map/maps_list.cpp:237
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossibile aprire la directory delle mappe (%s)!"
 
-#: /lgames/wormux/src/map/maps_list.cpp:249
+#: src/map/maps_list.cpp:249
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Impossibile aprire la directory delle mappe personali (%s)!"
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:38
+#: src/network/net_error_msg.cpp:38
 msgid "Unable to use this port!"
 msgstr "Impossibile usare questa porta!"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr "Comando sconosciuto"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:43
+#: src/menu/game_mode_editor.cpp:43
 #, fuzzy
 msgid "Unlimited"
 msgstr "(illimitato)"
 
-#: /lgames/wormux/src/main.cpp:199
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Versione"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:452
+#: src/menu/options_menu.cpp:452
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Verifica versione fallita: %s\n"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Attendere! %i giocatore non è ancora pronto!"
 msgstr[1] "Attendere! %i giocatori non sono ancora pronti!"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:410
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "In attesa del server, puoi chattare o disconnetterti"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:88
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
 
 #. Initialization of teams' energy
 #. Adding label
-#: /lgames/wormux/src/game/game_init.cpp:131
-#: /lgames/wormux/src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:168
 msgid "Weapons"
 msgstr "Armi"
 
-#: /lgames/wormux/src/main.cpp:300
+#: src/main.cpp:300
 msgid "Website: "
 msgstr "Sito web: "
 
 #. %s will be replaced with the name of the network game
-#: /lgames/wormux/src/menu/network_menu.cpp:150
+#: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
 
-#: /lgames/wormux/src/game/game.cpp:753
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Che vergogna per %s: E' stato ucciso da una semplice pistola!"
 
 #. Various options
-#: /lgames/wormux/src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:77
 msgid "Wind particles?"
 msgstr "Particelle di vento?"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:378
+#: src/menu/results_menu.cpp:378
 msgid "Winner"
 msgstr "Vincitore"
 
-#: /lgames/wormux/src/main.cpp:211
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Avvio in corso..."
 
-#: /lgames/wormux/src/main.cpp:290
+#: src/main.cpp:290
 msgid "Wormux version "
 msgstr "Versione Wormux"
 
-#: /lgames/wormux/src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "CRC mappa errato!"
 
-#: /lgames/wormux/src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Nome mappa errato!"
 
-#: /lgames/wormux/src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Squadra errata!"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:336
 msgid "You are alone :-/"
 msgstr "Sei da solo :-/"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:249
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Sei da solo..."
 
-#: /lgames/wormux/src/menu/network_menu.cpp:391
+#: src/menu/network_menu.cpp:391
 msgid "You are the new turn master!"
 msgstr ""
 
-#: /lgames/wormux/src/map/maps_list.cpp:258
+#: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
 msgstr "Hai bisogno almeno di una mappa valida!"
 
-#: /lgames/wormux/src/game/game_init.cpp:124
-#: /lgames/wormux/src/team/teams_list.cpp:178
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:178
 msgid "You need at least two valid teams !"
 msgstr "Hai bisogno almeno di due squadre valide !"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:229
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Non puoi giocare senza scegliere una squadra!"
 
-#: /lgames/wormux/src/weapon/weapon_launcher.cpp:493
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Bersaglio mancato!"
 
-#: /lgames/wormux/src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:74
 msgid "aka"
 msgstr "alias"
 
-#: /lgames/wormux/src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:220
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1699,41 +1611,41 @@ msgstr ""
 "Bombardamento: Click Sinistro sill'obbiettivo\n"
 "un bombatrdamento per turno"
 
-#: /lgames/wormux/src/map/maps_list.cpp:76
+#: src/map/maps_list.cpp:76
 msgid "couldn't load config"
 msgstr "Impossibile caricare configurazione"
 
 #. the default player name for custom teams
-#: /lgames/wormux/src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:136
 msgid "custom player"
 msgstr ""
 
-#: /lgames/wormux/src/map/ground.cpp:82
+#: src/map/ground.cpp:82
 msgid "done"
 msgstr "completo"
 
-#: /lgames/wormux/src/map/maps_list.cpp:83
+#: src/map/maps_list.cpp:83
 msgid "error parsing the config file"
 msgstr "Errore nel parsing del file di configurazione"
 
-#: /lgames/wormux/src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:78
 msgid "from"
 msgstr "da"
 
-#: /lgames/wormux/src/map/maps_list.cpp:72
+#: src/map/maps_list.cpp:72
 msgid "no configuration file!"
 msgstr "Nessun file di configurazione!"
 
-#: /lgames/wormux/src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o Scaricamento musica"
 
-#: /lgames/wormux/src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Caricamento impostazione suono: %s"
 
-#: /lgames/wormux/src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o File audio aperto a %d Hz %d bit"
