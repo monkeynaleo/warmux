@@ -32,8 +32,7 @@ TARGET_LINK_LIBRARIES( ${EXECUTABLE}
 	${PNG_LIBRARY}
 	${SDL_LIBRARY}
 	${FRIBIDI_LIBRARY}
-	${PROJECT_SOURCE_DIR}/lib/box2d/src/libbox2d.a
-#	libbox2d
+	box2d
 	libwormux
 	wormux-server
 )
