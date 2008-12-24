@@ -20,13 +20,12 @@ msgstr ""
 "n%100==4 ? 2 : 3);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: /lgames/wormux/src/map/maps_list.cpp:325
+#: src/map/maps_list.cpp:325
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karta %s ni bila najdena :-("
 
-#: /lgames/wormux/src/menu/network_menu.cpp:110
-#: /lgames/wormux/src/menu/network_menu.cpp:320
+#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -35,8 +34,7 @@ msgstr[1] "povezana %i igralca"
 msgstr[2] "povezani %i igralci"
 msgstr[3] "povezanih %i igralcev"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:114
-#: /lgames/wormux/src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -45,63 +43,63 @@ msgstr[1] "%i igralca pripravljena"
 msgstr[2] "%i igralci pripravljeni"
 msgstr[3] "%i igralcev pripravljenih"
 
-#: /lgames/wormux/src/map/maps_list.cpp:115
+#: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> znan kot %s iz %s"
 
-#: /lgames/wormux/src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz <%s>"
 
-#: /lgames/wormux/src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "Ekipa %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: /lgames/wormux/src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Ekipa %s - Oddaljena"
 
-#: /lgames/wormux/src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:103
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: /lgames/wormux/src/game/game.cpp:723
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s iz ekipe %s je naredil/a samomor!"
 
-#: /lgames/wormux/src/game/game.cpp:756
+#: src/game/game.cpp:756
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s iz ekipe %s je umrl/a."
 
-#: /lgames/wormux/src/game/game.cpp:714
+#: src/game/game.cpp:714
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s iz ekipe %s je padel/a v vodo."
 
-#: /lgames/wormux/src/game/game.cpp:708
+#: src/game/game.cpp:708
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s iz ekipe %s je padel/a s karte!"
 
-#: /lgames/wormux/src/game/game.cpp:729
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s iz ekipe %s je premočno zadel tla!"
 
-#: /lgames/wormux/src/game/game.cpp:736
+#: src/game/game.cpp:736
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s iz ekipe %s je mrtev, ker je bil neroden!"
 
-#: /lgames/wormux/src/object/medkit.cpp:70
+#: src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -110,28 +108,28 @@ msgstr[1] "%s je dobil %u točki energije!"
 msgstr[2] "%s je dobil %u točke energije!"
 msgstr[3] "%s je dobil %u točk energije!"
 
-#: /lgames/wormux/src/game/game.cpp:748
+#: src/game/game.cpp:748
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopat, saj je ubil člana ekipe %s!"
 
-#: /lgames/wormux/src/weapon/mine.cpp:123
+#: src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s je blizu mine!"
 
-#: /lgames/wormux/src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:97
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Ekipa %s že ima neskončno streliva za %s!"
 
 #. Show message
-#: /lgames/wormux/src/weapon/skip_turn.cpp:57
+#: src/weapon/skip_turn.cpp:57
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "Ekipa %s je preskočila svojo potezo."
 
-#: /lgames/wormux/src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:396
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -140,7 +138,7 @@ msgstr[1] "Ekipa %s je osvojila %u kasetni bazuki!"
 msgstr[2] "Ekipa %s je osvojila %u kasetne bazuke!"
 msgstr[3] "Ekipa %s je osvojila %u kasetnih bazuk!"
 
-#: /lgames/wormux/src/weapon/gnu.cpp:175
+#: src/weapon/gnu.cpp:175
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -149,7 +147,7 @@ msgstr[1] "Ekipa %s je osvojila %u gnuja! Razstreli jih, kavboj!"
 msgstr[2] "Ekipa %s je osvojila %u gnuje! Razstreli jih, kavboj!"
 msgstr[3] "Ekipa %s je osvojila %u gnujev! Razstreli jih, kavboj!"
 
-#: /lgames/wormux/src/weapon/air_attack.cpp:272
+#: src/weapon/air_attack.cpp:272
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -158,7 +156,7 @@ msgstr[1] "Ekipa %s je osvojila %u zračna napada!"
 msgstr[2] "Ekipa %s je osvojila %u zračne napade!"
 msgstr[3] "Ekipa %s je osvojila %u zračnih napadov!"
 
-#: /lgames/wormux/src/weapon/airhammer.cpp:172
+#: src/weapon/airhammer.cpp:172
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -171,7 +169,7 @@ msgstr[1] "Ekipa %s je osvojila %u pnevmatično kladivi!"
 msgstr[2] "Ekipa %s je osvojila %u pnevmatično kladiva!"
 msgstr[3] "Ekipa %s je osvojila %u pnevmatično kladiv!"
 
-#: /lgames/wormux/src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:176
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -180,7 +178,7 @@ msgstr[1] "Ekipa %s je osvojila %u nakovali! Speštajte jih!"
 msgstr[2] "Ekipa %s je osvojila %u nakovala! Speštajte jih!"
 msgstr[3] "Ekipa %s je osvojila %u nakoval! Speštajte jih!"
 
-#: /lgames/wormux/src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -189,7 +187,7 @@ msgstr[1] "Ekipa %s je osvojila %u avtomatski bazuki!"
 msgstr[2] "Ekipa %s je osvojila %u avtomatske bazuke!"
 msgstr[3] "Ekipa %s je osvojila %u avtomatskih bazuk!"
 
-#: /lgames/wormux/src/weapon/baseball.cpp:116
+#: src/weapon/baseball.cpp:116
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
@@ -198,7 +196,7 @@ msgstr[1] "Ekipa %s je osvojila %u kija!"
 msgstr[2] "Ekipa %s je osvojila %u kije!"
 msgstr[3] "Ekipa %s je osvojila %u kijev!"
 
-#: /lgames/wormux/src/weapon/bazooka.cpp:130
+#: src/weapon/bazooka.cpp:130
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -207,7 +205,7 @@ msgstr[1] "Ekipa %s je osvojila %u bazuki!"
 msgstr[2] "Ekipa %s je osvojila %u bazuke!"
 msgstr[3] "Ekipa %s je osvojila %u bazuk!"
 
-#: /lgames/wormux/src/weapon/blowtorch.cpp:138
+#: src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -219,7 +217,7 @@ msgstr[1] "Ekipa %s je osvojila %u varilnika!"
 msgstr[2] "Ekipa %s je osvojila %u varilnike!"
 msgstr[3] "Ekipa %s je osvojila %u varilnikov!"
 
-#: /lgames/wormux/src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -228,7 +226,7 @@ msgstr[1] "Ekipa %s je osvojila %u skokici! Boing!"
 msgstr[2] "Ekipa %s je osvojila %u skokice! Boing!"
 msgstr[3] "Ekipa %s je osvojila %u skokic! Boing!"
 
-#: /lgames/wormux/src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -237,7 +235,7 @@ msgstr[1] "Ekipa %s je osvojila %u kasetni bombi!"
 msgstr[2] "Ekipa %s je osvojila %u kasetne bombe!"
 msgstr[3] "Ekipa %s je osvojila %u kasetnih bomb!"
 
-#: /lgames/wormux/src/weapon/construct.cpp:82
+#: src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -246,7 +244,7 @@ msgstr[1] "Ekipa %s je osvojila %u trama! Ne pozabite na čelado!"
 msgstr[2] "Ekipa %s je osvojila %u trame! Ne pozabite na čelado!"
 msgstr[3] "Ekipa %s je osvojila %u tramov! Ne pozabite na čelado!"
 
-#: /lgames/wormux/src/weapon/disco_grenade.cpp:170
+#: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -256,7 +254,7 @@ msgstr[1] "Ekipa %s je osvojila %u Disko granati! Ples do smrti!"
 msgstr[2] "Ekipa %s je osvojila %u Disko granate! Ples do smrti!"
 msgstr[3] "Ekipa %s je osvojila %u Disko granat! Ples do smrti!"
 
-#: /lgames/wormux/src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:145
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -265,7 +263,7 @@ msgstr[1] "Ekipa %s je osvojila %u dinamita!"
 msgstr[2] "Ekipa %s je osvojila %u dinamite!"
 msgstr[3] "Ekipa %s je osvojila %u dinamitov!"
 
-#: /lgames/wormux/src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:180
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -274,7 +272,7 @@ msgstr[1] "Ekipa %s je osvojila %u metalca plamenov!"
 msgstr[2] "Ekipa %s je osvojila %u metalce plamenov!"
 msgstr[3] "Ekipa %s je osvojila %u metalcev plamenov!"
 
-#: /lgames/wormux/src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:176
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -283,7 +281,7 @@ msgstr[1] "Ekipa %s je osvojila %u nogometni bombi!"
 msgstr[2] "Ekipa %s je osvojila %u nogometne bombe!"
 msgstr[3] "Ekipa %s je osvojila %u nogometnih bomb!"
 
-#: /lgames/wormux/src/weapon/grapple.cpp:332
+#: src/weapon/grapple.cpp:332
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -292,7 +290,7 @@ msgstr[1] "Ekipa %s je osvojila %u kavlja!"
 msgstr[2] "Ekipa %s je osvojila %u kavlje!"
 msgstr[3] "Ekipa %s je osvojila %u kavljev!"
 
-#: /lgames/wormux/src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:90
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -301,7 +299,7 @@ msgstr[1] "Ekipa %s je osvojila %u granati!"
 msgstr[2] "Ekipa %s je osvojila %u granate!"
 msgstr[3] "Ekipa %s je osvojila %u granat!"
 
-#: /lgames/wormux/src/weapon/gun.cpp:99
+#: src/weapon/gun.cpp:99
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
@@ -310,7 +308,7 @@ msgstr[1] "Ekipa %s je osvojila %u pištoli!"
 msgstr[2] "Ekipa %s je osvojila %u pištole!"
 msgstr[3] "Ekipa %s je osvojila %u pištol!"
 
-#: /lgames/wormux/src/weapon/jetpack.cpp:252
+#: src/weapon/jetpack.cpp:252
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -319,7 +317,7 @@ msgstr[1] "Ekipa %s je osvojila %u raketna nahrbtnika! Juuuhu!"
 msgstr[2] "Ekipa %s je osvojila %u raketne nahrbtnike! Juuuhu!"
 msgstr[3] "Ekipa %s je osvojila %u raketnih nahrbtnikov! Juuuhu!"
 
-#: /lgames/wormux/src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:84
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -328,7 +326,7 @@ msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije!"
 msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije!"
 msgstr[3] "Ekipa %s je osvojila %u zmanjševalnikov gravitacije!"
 
-#: /lgames/wormux/src/weapon/mine.cpp:249
+#: src/weapon/mine.cpp:249
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -337,7 +335,7 @@ msgstr[1] "Ekipa %s je osvojila %u mini!"
 msgstr[2] "Ekipa %s je osvojila %u mine!"
 msgstr[3] "Ekipa %s je osvojila %u min!"
 
-#: /lgames/wormux/src/weapon/parachute.cpp:167
+#: src/weapon/parachute.cpp:167
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -346,7 +344,7 @@ msgstr[1] "Ekipa %s je osvojila %u padali!"
 msgstr[2] "Ekipa %s je osvojila %u padala!"
 msgstr[3] "Ekipa %s je osvojila %u padal!"
 
-#: /lgames/wormux/src/weapon/polecat.cpp:182
+#: src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -359,7 +357,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u dihurjemetov! Bolje da imajo s sabo gas maske!"
 
-#: /lgames/wormux/src/weapon/riot_bomb.cpp:133
+#: src/weapon/riot_bomb.cpp:133
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -368,7 +366,7 @@ msgstr[1] "Ekipa %s je osvojila %u kopaški granati!"
 msgstr[2] "Ekipa %s je osvojila %u kopaške granate!"
 msgstr[3] "Ekipa %s je osvojila %u kopaških granat!"
 
-#: /lgames/wormux/src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:135
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -377,7 +375,7 @@ msgstr[1] "Ekipa %s je osvojila %u šibrovki!"
 msgstr[2] "Ekipa %s je osvojila %u šibrovke!"
 msgstr[3] "Ekipa %s je osvojila %u šibrovk!"
 
-#: /lgames/wormux/src/weapon/slap.cpp:85
+#: src/weapon/slap.cpp:85
 #, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
@@ -386,7 +384,7 @@ msgstr[1] "Ekipa %s je osvojila %u klofuto!"
 msgstr[2] "Ekipa %s je osvojila %u klofuti!"
 msgstr[3] "Ekipa %s je osvojila %u klofute!"
 
-#: /lgames/wormux/src/weapon/snipe_rifle.cpp:247
+#: src/weapon/snipe_rifle.cpp:247
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -396,7 +394,7 @@ msgstr[1] "Ekipa %s je osvojila %u ostrostrelski puški! Merite med oči!"
 msgstr[2] "Ekipa %s je osvojila %u ostrostrelske puške! Merite med oči!"
 msgstr[3] "Ekipa %s je osvojila %u ostrostrelskih pušk! Merite med oči!"
 
-#: /lgames/wormux/src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:144
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -405,7 +403,7 @@ msgstr[1] "Ekipa %s je osvojila %u brzostrelki!"
 msgstr[2] "Ekipa %s je osvojila %u brzostrelke!"
 msgstr[3] "Ekipa %s je osvojila %u brzostrelk!"
 
-#: /lgames/wormux/src/weapon/suicide.cpp:77
+#: src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
@@ -414,7 +412,7 @@ msgstr[1] "Ekipa %s je osvojila %u samomora!"
 msgstr[2] "Ekipa %s je osvojila %u samomore!"
 msgstr[3] "Ekipa %s je osvojila %u samomorov!"
 
-#: /lgames/wormux/src/weapon/syringe.cpp:115
+#: src/weapon/syringe.cpp:115
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
@@ -423,7 +421,7 @@ msgstr[1] "Ekipa %s je osvojila %u injekciji!"
 msgstr[2] "Ekipa %s je osvojila %u injekcije!"
 msgstr[3] "Ekipa %s je osvojila %u injekcij!"
 
-#: /lgames/wormux/src/weapon/teleportation.cpp:120
+#: src/weapon/teleportation.cpp:120
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -432,7 +430,7 @@ msgstr[1] "Ekipa %s je osvojila %u teleprenosa!"
 msgstr[2] "Ekipa %s je osvojila %u teleprenose!"
 msgstr[3] "Ekipa %s je osvojila %u teleprenosov!"
 
-#: /lgames/wormux/src/weapon/skip_turn.cpp:68
+#: src/weapon/skip_turn.cpp:68
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
@@ -441,7 +439,7 @@ msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 
-#: /lgames/wormux/src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:318
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -454,95 +452,35 @@ msgstr[2] ""
 msgstr[3] ""
 "Ekipa %s je osvojila %u SuperTux-ov! Še niste videli letečega pingvina?"
 
-#: /lgames/wormux/src/game/game_blitz.cpp:70
+#: src/game/game_blitz.cpp:70
 #, c-format
 msgid "%s team was fragged down."
 msgstr "Ekipa %s je bila uničena."
 
-#: /lgames/wormux/src/game/game.cpp:744
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s je s sabo v grob vzel še člana skupine %s!"
 
-#. 1003.2 specifies the format of this message.
-#: /lgames/wormux/src/msvc/getopt.c:794
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:797
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:717
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:687
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:735 /lgames/wormux/src/msvc/getopt.c:908
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:712
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:892
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr ""
-
-#: /lgames/wormux/src/msvc/getopt.c:874
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr ""
-
-#. 1003.2 specifies the format of this message.
-#: /lgames/wormux/src/msvc/getopt.c:827 /lgames/wormux/src/msvc/getopt.c:957
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr ""
-
-#. +option or -option
-#: /lgames/wormux/src/msvc/getopt.c:768
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr ""
-
-#. --option
-#: /lgames/wormux/src/msvc/getopt.c:764
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr ""
-
-#: /lgames/wormux/src/interface/interface.cpp:185
+#: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(mrtev)"
 
 #. Setting language selection
-#: /lgames/wormux/src/menu/options_menu.cpp:264
+#: src/menu/options_menu.cpp:264
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
-#: /lgames/wormux/src/network/chatlogger.cpp:29
-#: /lgames/wormux/src/network/chatlogger.cpp:76
+#: src/network/chatlogger.cpp:29 src/network/chatlogger.cpp:76
 msgid "(unknown time)"
 msgstr "(čas ni znan)"
 
 #. Display number of ammo
-#: /lgames/wormux/src/interface/interface.cpp:216
+#: src/interface/interface.cpp:216
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:443
+#: src/menu/options_menu.cpp:443
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -551,32 +489,31 @@ msgstr ""
 "Na voljo je nova različica %s, vaša je pa %s. Preverite, če je za vaš "
 "operacijski sistem že na voljo posodobitev!"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:139
+#: src/menu/options_menu.cpp:139
 msgid "Add custom team"
 msgstr "Dodaj ekipo"
 
-#: /lgames/wormux/src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:219
 msgid "Air Attack"
 msgstr "Zračni napad"
 
-#: /lgames/wormux/src/weapon/airhammer.cpp:74
+#: src/weapon/airhammer.cpp:74
 msgid "Airhammer"
 msgstr "Pnevmatsko kladivo"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:421
+#: src/menu/results_menu.cpp:421
 msgid "All teams"
 msgstr "Vse ekipe"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:57
+#: src/menu/game_mode_editor.cpp:57
 msgid "Always"
 msgstr "Vedno"
 
-#: /lgames/wormux/src/game/game_classic.cpp:56
-#: /lgames/wormux/src/game/game_blitz.cpp:50
+#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "In zmagali so ..."
 
-#: /lgames/wormux/src/weapon/baseball.cpp:58
+#: src/weapon/baseball.cpp:58
 msgid ""
 "Angle : Up/Down\n"
 "Fire : space key\n"
@@ -586,246 +523,236 @@ msgstr ""
 "Strel : Preslednica\n"
 "en udarec na potezo"
 
-#: /lgames/wormux/src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:119
 msgid "Anvil"
 msgstr "Nakovalo"
 
-#: /lgames/wormux/src/main.cpp:291
+#: src/main.cpp:291
 msgid "Authors:"
 msgstr "Avtorji:"
 
-#: /lgames/wormux/src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:223
 msgid "Automatic Bazooka"
 msgstr "Avtomatska Bazuka"
 
-#: /lgames/wormux/src/menu/pause_menu.cpp:47
+#: src/menu/pause_menu.cpp:47
 msgid "Back to battle"
 msgstr "Nazaj v bitko"
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:41
+#: src/network/net_error_msg.cpp:41
 msgid "Bad socket ..."
 msgstr "Slab vtičnik..."
 
-#: /lgames/wormux/src/weapon/baseball.cpp:57
+#: src/weapon/baseball.cpp:57
 msgid "Baseball Bat"
 msgstr "Kij"
 
-#: /lgames/wormux/src/weapon/bazooka.cpp:123
+#: src/weapon/bazooka.cpp:123
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:58
+#: src/menu/game_mode_editor.cpp:58
 msgid "Before action"
 msgstr "Pred premikom"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:44
+#: src/menu/game_mode_editor.cpp:44
 msgid "Blitz"
 msgstr "Blitz"
 
-#: /lgames/wormux/src/weapon/blowtorch.cpp:63
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "Varilnik"
 
-#: /lgames/wormux/src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:89
 msgid "Bounce Ball"
 msgstr "Skokica"
 
-#: /lgames/wormux/src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:179
 msgid "Bye bye tux..."
 msgstr "Adijo tux..."
 
-#: /lgames/wormux/src/menu/network_teams_selection_box.cpp:235
-#: /lgames/wormux/src/team/teams_list.cpp:506
-#: /lgames/wormux/src/team/teams_list.cpp:537
-#: /lgames/wormux/src/team/teams_list.cpp:546
-#: /lgames/wormux/src/team/teams_list.cpp:552
-#: /lgames/wormux/src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
+#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
+#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ni mogoče najti ekipe %s!"
 
-#: /lgames/wormux/src/team/teams_list.cpp:170
+#: src/team/teams_list.cpp:170
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 
-#: /lgames/wormux/src/menu/skin_menu.cpp:76
-#: /lgames/wormux/src/team/teams_list.cpp:158
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
-#: /lgames/wormux/src/team/custom_teams_list.cpp:93
+#: src/team/custom_teams_list.cpp:93
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebnega ekipnega imenika (%s)!"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:91
 msgid "Center camera to character"
 msgstr "Osredotoči kamero na člana"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:90
 msgid "Change active character"
 msgstr "Zamenjaj aktivnega člana"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:79
 msgid "Change aim angle"
 msgstr "Spremeni kot merjenja"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:73
 msgid "Change weapon category"
 msgstr "Spremeni skupino orožja"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:78
 msgid "Change weapon countdown"
 msgstr "Spremeni čas orožja"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:161
 msgid "Character"
 msgstr "Član"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:61
+#: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Menjava članov"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:195
+#: src/menu/options_menu.cpp:195
 msgid "Check updates online?"
 msgstr "Preveri možno posodobitev?"
 
-#: /lgames/wormux/src/menu/map_selection_box.cpp:223
+#: src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:42
+#: src/menu/game_mode_editor.cpp:42
 msgid "Classic"
 msgstr "Klasični"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:77
 msgid "Click: Center camera on character"
 msgstr "Klik: osredotoči kamero na člana"
 
 #. Client Mode
-#: /lgames/wormux/src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:120
 msgid "Client mode"
 msgstr "Odjemalski način"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:168
-#: /lgames/wormux/src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
 msgid "Clumsiest"
 msgstr "Najbolj neroden"
 
-#: /lgames/wormux/src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
 msgstr "Kasetna granata"
 
-#: /lgames/wormux/src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:389
 msgid "Cluzooka"
 msgstr "Kasetna bazuka"
 
-#: /lgames/wormux/src/weapon/suicide.cpp:42
+#: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
 msgstr "Samomor"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:74
 msgid "Configuration menu"
 msgstr "Nastavitveni meni!"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:164
+#: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
 msgstr "Povezava do igre"
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:32
+#: src/network/net_error_msg.cpp:32
 msgid "Connected !"
 msgstr "Povezan!"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:64
 msgid "Connected players: "
 msgstr "Povezani igralci: "
 
-#: /lgames/wormux/src/weapon/construct.cpp:60
-#: /lgames/wormux/src/weapon/construct.cpp:68
+#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Tram"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:386
+#: src/menu/results_menu.cpp:386
 msgid "Controlled by: "
 msgstr "Vodja: "
 
-#: /lgames/wormux/src/network/download.cpp:79
+#: src/network/download.cpp:79
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Ni bilo mogoče pridobiti zadnje različice iz %s"
 
-#: /lgames/wormux/src/network/chatlogger.cpp:55
-#: /lgames/wormux/src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Ni bilo mogoče odpreti datoteke %s"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:71
+#: src/menu/main_menu.cpp:71
 msgid "Credits"
 msgstr "Zasluge"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:87
+#: src/menu/game_mode_editor.cpp:87
 msgid "Damage per turn during death mode"
 msgstr "Škoda na potezo v fatalnem načinu"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:142
+#: src/menu/options_menu.cpp:142
 msgid "Delete custom team"
 msgstr "Izbriši ekipo"
 
-#: /lgames/wormux/src/weapon/disco_grenade.cpp:157
+#: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Disko Granata"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:30
+#: src/network/admin_commands.cpp:30
 msgid "Displays this message"
 msgstr "Prikaže to sporočilo"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move camera"
 msgstr "Povleci&spusti: premakne kamero"
 
 #. some death mode options
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:81
+#: src/menu/game_mode_editor.cpp:81
 msgid "Duration before death mode"
 msgstr "Čas do fatalnega načina"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:50
+#: src/menu/game_mode_editor.cpp:50
 msgid "Duration of a turn"
 msgstr "Trajanje poteze"
 
-#: /lgames/wormux/src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: /lgames/wormux/src/game/game.cpp:270
+#: src/game/game.cpp:270
 msgid "END OF GAME"
 msgstr "KONEC IGRE"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:219
 msgid "Effects volume"
 msgstr "Glasnost učinkov"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:323
+#: src/menu/results_menu.cpp:323
 msgid "Energy"
 msgstr "Energija"
 
-#: /lgames/wormux/src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
 
-#: /lgames/wormux/src/team/teams_list.cpp:134
-#: /lgames/wormux/src/team/custom_teams_list.cpp:120
+#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe:"
 
-#: /lgames/wormux/src/game/config.cpp:513
-#: /lgames/wormux/src/team/custom_team.cpp:165
-#: /lgames/wormux/src/team/custom_team.cpp:175
-#: /lgames/wormux/src/team/custom_team.cpp:187
+#: src/game/config.cpp:513 src/team/custom_team.cpp:165
+#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -833,18 +760,18 @@ msgstr ""
 "Napaka pri ustvarjanju imenika \"%s\": ni bilo mogoče shraniti datoteke z "
 "nastavitvami."
 
-#: /lgames/wormux/src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:104
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr "Napaka pri brisanju imenika \"%s\". Ni bilo mogoče izbrisati ekipe."
 
-#: /lgames/wormux/src/team/custom_team.cpp:95
+#: src/team/custom_team.cpp:95
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Napaka pri brisanju datoteke \"%s\". Ni bilo mogoče izbrisati ekipe."
 
-#: /lgames/wormux/src/game/game.cpp:143
+#: src/game/game.cpp:143
 #, c-format
 msgid ""
 "Error:\n"
@@ -854,29 +781,29 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Napaka: Ni se bilo mogoče povezati na %s:%s"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:341
+#: src/menu/network_connection_menu.cpp:341
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko gostili "
 "igro"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:281
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko iskali "
 "internetne igre"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:366
+#: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:360
+#: src/menu/network_connection_menu.cpp:360
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -889,100 +816,98 @@ msgstr ""
 "Če na internet niste povezani neposredno, preverite nastavitve "
 "usmerjevalnika:  vrata TCP %s morajo biti posredovana."
 
-#: /lgames/wormux/src/team/team.cpp:124
+#: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
 
-#: /lgames/wormux/src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:136
 msgid "Flame Thrower"
 msgstr "Metalec plamenov"
 
-#: /lgames/wormux/src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:158
 msgid "Football Bomb"
 msgstr "Nogometna bomba"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:70
 msgid "Fullscreen / window"
 msgstr "Cel zaslon / okno"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:95
 msgid "Fullscreen?"
 msgstr "Celozaslonski način?"
 
-#: /lgames/wormux/src/menu/game_menu.cpp:85
+#: src/menu/game_menu.cpp:85
 msgid "Game"
 msgstr "Igra"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:46
+#: src/menu/game_mode_editor.cpp:46
 msgid "Game mode"
 msgstr "Vrsta igre"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:187
+#: src/menu/network_connection_menu.cpp:187
 msgid "Game name:"
 msgstr "Ime igre:"
 
-#: /lgames/wormux/src/weapon/gnu.cpp:161
+#: src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
 msgstr "Metalec gnuja"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:125
 msgid "Graphic"
 msgstr "Grafika"
 
-#: /lgames/wormux/src/weapon/grapple.cpp:85
+#: src/weapon/grapple.cpp:85
 msgid "Grapple"
 msgstr "Kavelj"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:93
+#: src/menu/game_mode_editor.cpp:93
 msgid "Gravity"
 msgstr "Gravitacija"
 
-#: /lgames/wormux/src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:76
 msgid "Grenade"
 msgstr "Granata"
 
-#: /lgames/wormux/src/map/ground.cpp:65
+#: src/map/ground.cpp:65
 msgid "Ground initialization..."
 msgstr "Inicializacija tal..."
 
-#: /lgames/wormux/src/weapon/gun.cpp:74
+#: src/weapon/gun.cpp:74
 msgid "Gun"
 msgstr "Pištola"
 
-#: /lgames/wormux/src/tool/file_tools.cpp:186
+#: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Imenik HOME (okoljska spremenljivka $HOME) ni bila najden!"
 
 #. Skip a line
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Uživajte v igri!"
 
-#: /lgames/wormux/src/menu/team_box.cpp:67
-#: /lgames/wormux/src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Poveljnik"
 
 #. Display player's name
-#: /lgames/wormux/src/interface/interface.cpp:176
+#: src/interface/interface.cpp:176
 msgid "Head commander: "
 msgstr "Poveljnik: "
 
-#: /lgames/wormux/src/menu/main_menu.cpp:68
-#: /lgames/wormux/src/menu/pause_menu.cpp:55
+#: src/menu/main_menu.cpp:68 src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Pomoč"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:71
 msgid "High jump"
 msgstr "Visoki skok"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:211
+#: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
 msgstr "Gostite igro"
 
-#: /lgames/wormux/src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:224
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -994,7 +919,7 @@ msgstr ""
 "Strel: držite preslednico dokler raketa ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: /lgames/wormux/src/weapon/blowtorch.cpp:64
+#: src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -1004,7 +929,7 @@ msgstr ""
 "Kot: Gor/Dol\n"
 "ena uporaba na potezo"
 
-#: /lgames/wormux/src/weapon/airhammer.cpp:75
+#: src/weapon/airhammer.cpp:75
 msgid ""
 "Howto use it : keep space key pressed\n"
 "an ammo per turn"
@@ -1012,7 +937,7 @@ msgstr ""
 "Uporaba: držite preslednico\n"
 "ena uporaba na potezo"
 
-#: /lgames/wormux/src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:120
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1020,11 +945,11 @@ msgstr ""
 "Uporaba: kliknite na tarčo\n"
 "ena uporaba na potezo"
 
-#: /lgames/wormux/src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:210
 msgid "Hurry up, you are too slow !!"
 msgstr "Pohitite, prepočasni ste!!"
 
-#: /lgames/wormux/src/main.cpp:283
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1033,13 +958,12 @@ msgstr ""
 "elektronsko sporočilo (v angleščini) na:"
 
 #. Characters energy
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:66
+#: src/menu/game_mode_editor.cpp:66
 msgid "Initial energy"
 msgstr "Začetna energija"
 
-#: /lgames/wormux/src/weapon/bazooka.cpp:124
-#: /lgames/wormux/src/weapon/cluzooka.cpp:390
-#: /lgames/wormux/src/weapon/riot_bomb.cpp:121
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep space key pressed until the desired strength\n"
@@ -1049,380 +973,373 @@ msgstr ""
 "Strel: držite preslednico dokler raketa ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: /lgames/wormux/src/game/game_init.cpp:155
+#: src/game/game_init.cpp:155
 msgid "Initialisation"
 msgstr "Inicializacija"
 
-#: /lgames/wormux/src/game/game_init.cpp:108
+#: src/game/game_init.cpp:108
 msgid "Initialise map"
 msgstr "Inicializacija karte"
 
-#: /lgames/wormux/src/game/game_init.cpp:142
+#: src/game/game_init.cpp:142
 msgid "Initialise sounds"
 msgstr "Inicializacija zvokov"
 
-#: /lgames/wormux/src/game/game_init.cpp:118
+#: src/game/game_init.cpp:118
 msgid "Initialise teams"
 msgstr "Inicializacija ekip"
 
-#: /lgames/wormux/src/game/game.cpp:592
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "To je darilo!"
 
-#: /lgames/wormux/src/weapon/jetpack.cpp:62
+#: src/weapon/jetpack.cpp:62
 msgid "Jetpack"
 msgstr "Raketni nahrbtnik"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:147
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:235
+#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pridružite se kanalu #wormux na irc.freenode.net in si poiščite nekaj "
 "nasprotnikov."
 
-#: /lgames/wormux/src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:75
 msgid "Jump"
 msgstr "Skok"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85
 msgid "Jump backwards"
 msgstr "Skok nazaj"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:32
+#: src/network/admin_commands.cpp:32
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Brcne igralca z imenom <nickname> iz igre"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:129
 msgid "Language"
 msgstr "Jezik"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:34
+#: src/network/admin_commands.cpp:34
 msgid "List the connected players"
 msgstr "Izpiši seznam povezanih igralcev"
 
-#: /lgames/wormux/src/map/maps_list.cpp:227
+#: src/map/maps_list.cpp:227
 msgid "Load maps:"
 msgstr "Nalaganje kart:"
 
-#: /lgames/wormux/src/team/teams_list.cpp:146
+#: src/team/teams_list.cpp:146
 msgid "Load teams:"
 msgstr "Nalaganje ekip:"
 
-#: /lgames/wormux/src/menu/teams_selection_box.cpp:43
+#: src/menu/teams_selection_box.cpp:43
 msgid "Local teams:"
 msgstr "Krajevne ekipe:"
 
-#: /lgames/wormux/src/weapon/lowgrav.cpp:49
+#: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
 msgstr "Zmanjševalnik gravitacije"
 
 #. #############################
 #. Manual connection
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:129
+#: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
 msgstr "Ročna povezava"
 
-#: /lgames/wormux/src/menu/game_menu.cpp:77
+#: src/menu/game_menu.cpp:77
 msgid "Map"
 msgstr "Karta"
 
-#: /lgames/wormux/src/map/map.cpp:299
+#: src/map/map.cpp:299
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Karta %s je stvaritev: "
 
-#: /lgames/wormux/src/game/game_init.cpp:111
+#: src/game/game_init.cpp:111
 msgid "Maps"
 msgstr "Karte"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: /lgames/wormux/src/menu/network_menu.cpp:130
-#: /lgames/wormux/src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 msgid "Master mode"
 msgstr "Način vodje igre"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:72
+#: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
 msgstr "Max energije"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:105
+#: src/menu/network_menu.cpp:105
 msgid "Max number of players:"
 msgstr "Največje število igralcev:"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:99
 msgid "Maximum FPS"
 msgstr "Največji FPS"
 
-#: /lgames/wormux/src/weapon/mine.cpp:215
+#: src/weapon/mine.cpp:215
 msgid "Mine"
 msgstr "Mina"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:199
+#: src/menu/options_menu.cpp:199
 msgid "Misc"
 msgstr "Razno"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:176
-#: /lgames/wormux/src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
 msgid "Most accurate"
 msgstr "Najbolj natančen"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:160
-#: /lgames/wormux/src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most sold-out"
 msgstr "Najbolj izdan"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:144
-#: /lgames/wormux/src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
 msgid "Most useful"
 msgstr "Najbolj uporaben"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:152
-#: /lgames/wormux/src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
 msgid "Most useless"
 msgstr "Najbolj neuporaben"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:136
-#: /lgames/wormux/src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
 msgid "Most violent"
 msgstr "Najbolj nasilen"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:87
 msgid "Move camera with mouse or arrows"
 msgstr "Premakni kamero z miško ali puščicami"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:80
 msgid "Move character"
 msgstr "Premakni člana"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:209
 msgid "Music volume"
 msgstr "Glasnost glasbe"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:205
 msgid "Music?"
 msgstr "Glasba?"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:62
+#: src/menu/main_menu.cpp:62
 msgid "Network Game"
 msgstr "Omrežna igra"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:59
+#: src/menu/game_mode_editor.cpp:59
 msgid "Never"
 msgstr "Nikoli"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: /lgames/wormux/src/network/chatlogger.cpp:49
+#: src/network/chatlogger.cpp:49
 msgid "New network game at "
 msgstr "Nova omrežna igra ob "
 
-#: /lgames/wormux/src/menu/options_menu.cpp:244
+#: src/menu/options_menu.cpp:244
 msgid "New player warning?"
 msgstr "Opozori na nove igralce?"
 
-#: /lgames/wormux/src/weapon/weapon.cpp:658
+#: src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "V xml nastavitveni datoteki ni bil najden noben element <%s>!"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:60
 msgid "No player connected"
 msgstr "Povezan ni noben igralec"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:73
+#: src/menu/results_menu.cpp:73
 msgid "Nobody!"
 msgstr "Nihče!"
 
-#: /lgames/wormux/src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:86
 msgid "Number of characters"
 msgstr "Število članov"
 
-#: /lgames/wormux/src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:49
 msgid "Number of teams:"
 msgstr "Število ekip:"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:82
 msgid "On a character: Changes active one"
 msgstr "Na člana: spremeni aktivnega"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:81
 msgid "On map: Select a target"
 msgstr "Na karto: izbere tarčo"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:65
+#: src/menu/main_menu.cpp:65
 msgid "Options"
 msgstr "Nastavitve"
 
-#: /lgames/wormux/src/menu/pause_menu.cpp:51
+#: src/menu/pause_menu.cpp:51
 msgid "Options menu"
 msgstr "Nastavitve"
 
-#: /lgames/wormux/src/weapon/parachute.cpp:68
+#: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Padalo"
 
-#: /lgames/wormux/src/weapon/parachute.cpp:101
+#: src/weapon/parachute.cpp:101
 msgid "Parachute is activated automatically."
 msgstr "Padalo se samodejno odpre."
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:121
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:159
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:199
+#: src/menu/network_connection_menu.cpp:121
+#: src/menu/network_connection_menu.cpp:159
+#: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Geslo:"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:86
 msgid "Pause"
 msgstr "Pavza"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:59
+#: src/menu/main_menu.cpp:59
 msgid "Play"
 msgstr "Igra"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:134
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Več iger zapored"
 
-#: /lgames/wormux/src/menu/teams_selection_box.cpp:64
+#: src/menu/teams_selection_box.cpp:64
 msgid "Player"
 msgstr "Igralec"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:80
 msgid "Player energy?"
 msgstr "Energija igralca?"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:148
+#: src/menu/options_menu.cpp:148
 msgid "Player name"
 msgstr "Ime igralca"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:83
 msgid "Player's name?"
 msgstr "Ime igralca?"
 
-#: /lgames/wormux/src/weapon/polecat.cpp:168
+#: src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "Dihurjemet"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:148
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:148
+#: src/menu/network_connection_menu.cpp:176
 msgid "Port:"
 msgstr "Vrata:"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:108
+#: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
 msgstr "Javne bitke"
 
-#: /lgames/wormux/src/menu/main_menu.cpp:74
+#: src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Končaj"
 
-#: /lgames/wormux/src/main.cpp:272
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
-#: /lgames/wormux/src/menu/pause_menu.cpp:59
+#: src/menu/pause_menu.cpp:59
 msgid "Quit battle"
 msgstr "Končaj bitko"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:65
+#: src/menu/help_menu.cpp:65
 msgid "Quit game"
 msgstr "Končaj igro"
 
-#: /lgames/wormux/src/menu/map_selection_box.cpp:222
+#: src/menu/map_selection_box.cpp:222
 msgid "Random map"
 msgstr "Naključna karta"
 
-#: /lgames/wormux/src/game/config.cpp:351
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Branje privzete nastavitvene datoteke"
 
-#: /lgames/wormux/src/game/config.cpp:400
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:121
 msgid "Resolution"
 msgstr "Ločljivost"
 
-#: /lgames/wormux/src/weapon/riot_bomb.cpp:120
+#: src/weapon/riot_bomb.cpp:120
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: /lgames/wormux/src/main.cpp:81
+#: src/main.cpp:81
 msgid "Run game"
 msgstr "Poženi igro"
 
-#: /lgames/wormux/src/network/chat.cpp:81
+#: src/network/chat.cpp:81
 msgid "Say: "
 msgstr "Reci: "
 
-#: /lgames/wormux/src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:89
 msgid "Scroll border size"
 msgstr "Meja drsenja na robu"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:86
 msgid "Scroll on border"
 msgstr "Drsenje na robu"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:137
+#: src/menu/network_connection_menu.cpp:137
 msgid "Server address:"
 msgstr "Naslov strežnika:"
 
 #. Available on internet ?
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
 msgstr "Strežnik naj bo viden na Internetu"
 
 #. Server Mode
-#: /lgames/wormux/src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:126
 msgid "Server mode"
 msgstr "Strežniški način"
 
-#: /lgames/wormux/src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:92
 msgid "Shotgun"
 msgstr "Šibrovka"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:83
 msgid "Show weapons menu"
 msgstr "Pokaži orožni meni"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:69
 msgid "Show/hide interface"
 msgstr "Pokaži/skrij vmesnik"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide minimap"
 msgstr "Pokaži/skrij minikarto"
 
-#: /lgames/wormux/src/weapon/skip_turn.cpp:47
+#: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
 msgstr "Preskoči potezo"
 
-#: /lgames/wormux/src/weapon/slap.cpp:73
+#: src/weapon/slap.cpp:73
 msgid "Slap"
 msgstr "Klofuta"
 
-#: /lgames/wormux/src/weapon/slap.cpp:74
+#: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Klofni sovražnika, da bo kar poskočil."
 
-#: /lgames/wormux/src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:84
 msgid "Smaller aim angle and walk step"
 msgstr "Natančnejši merilni kot in stopinja"
 
-#: /lgames/wormux/src/weapon/snipe_rifle.cpp:93
+#: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
 msgstr "Ostrostrelska puška"
 
-#: /lgames/wormux/src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:86
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nekdo je v zaboj podtaknil bombo!"
 
-#: /lgames/wormux/src/menu/network_connection_menu.cpp:289
+#: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
-#: /lgames/wormux/src/network/index_server.cpp:252
+#: src/network/index_server.cpp:252
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1432,93 +1349,92 @@ msgstr ""
 "Posodobljeno različico lahko dobite na http://www.wormux.org/wiki/download."
 "php"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:247
 msgid "Sound"
 msgstr "Zvok"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:215
+#: src/menu/options_menu.cpp:215
 msgid "Sound effects?"
 msgstr "Zvočni učinki?"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:240
 msgid "Sound frequency"
 msgstr "Frekvenca zvoka"
 
 #. Load teams' sound profiles
-#: /lgames/wormux/src/game/game_init.cpp:145
+#: src/game/game_init.cpp:145
 msgid "Sounds"
 msgstr "Zvoki"
 
-#: /lgames/wormux/src/game/game.cpp:114
+#: src/game/game.cpp:114
 msgid "Starting a new game"
 msgstr "Zagon nove igre"
 
-#: /lgames/wormux/src/interface/interface.cpp:216
+#: src/interface/interface.cpp:216
 msgid "Stock:"
 msgstr "Zaloga:"
 
-#: /lgames/wormux/src/weapon/submachine_gun.cpp:99
+#: src/weapon/submachine_gun.cpp:99
 msgid "Submachine Gun"
 msgstr "Brzostrelka"
 
-#: /lgames/wormux/src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:231
 msgid "SuperTux"
 msgstr "SuperTux"
 
-#: /lgames/wormux/src/weapon/syringe.cpp:70
+#: src/weapon/syringe.cpp:70
 msgid "Syringe"
 msgstr "Injekcija"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:72
 msgid "Talk in network battle"
 msgstr "Klepet v večigralski igri"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:426
 msgid "Team graphs"
 msgstr "Ekipni grafi"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:424
+#: src/menu/results_menu.cpp:424
 msgid "Team stats"
 msgstr "Ekipna statistika"
 
-#: /lgames/wormux/src/game/game_init.cpp:120
-#: /lgames/wormux/src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:120 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Ekipe"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:181
 msgid "Teams editor"
 msgstr "Urejevalnik ekip"
 
-#: /lgames/wormux/src/weapon/teleportation.cpp:50
+#: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
 msgstr "Teleprenos"
 
-#: /lgames/wormux/src/weapon/cluster_bomb.cpp:146
+#: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Kasetna granata je zapustila bojišče še preden jo je razneslo."
 
-#: /lgames/wormux/src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Nogometna bomba je zapustila bojišče še preden jo je razneslo."
 
-#: /lgames/wormux/src/weapon/gnu.cpp:144
+#: src/weapon/gnu.cpp:144
 msgid "The Gnu left the battlefield before exploding"
 msgstr "Gnu je zapustil bojišče preden ga je razneslo"
 
-#: /lgames/wormux/src/weapon/polecat.cpp:151
+#: src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Dihur je zapustil bojišče preden ga je razneslo"
 
-#: /lgames/wormux/src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Avtomatska raketa je zapustila bojišče..."
 
-#: /lgames/wormux/src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:72
 msgid "The ball left the battlefield before exploding"
 msgstr "Žoga je zapustila bojišče preden je eksplodirala"
 
-#: /lgames/wormux/src/network/network_client.cpp:102
+#: src/network/network_client.cpp:102
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1527,41 +1443,40 @@ msgstr ""
 "Različice odjemalca in strežnika niso združljive (odjemalec=%s, strežnik=%"
 "s)! Prosimo poskusite z drugim strežnikom."
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:47
+#: src/network/net_error_msg.cpp:47
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Povezava se je iztekla. Preverite da ni kriv požarni zid!"
 
-#: /lgames/wormux/src/weapon/disco_grenade.cpp:127
+#: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disko granata je zapustila plesišče preden je eksplodirala"
 
-#: /lgames/wormux/src/game/game.cpp:482
+#: src/game/game.cpp:482
 msgid "The game was interrupted because you got disconnected."
 msgstr "Igra je bila prekinjena zaradi prekinitve povezave."
 
-#: /lgames/wormux/src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:58
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granata je zapustila bojišče preden je eksplodirala"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:333
+#: src/menu/network_menu.cpp:333
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostali te čakajo! Zbudi se! :-)"
 
-#: /lgames/wormux/src/weapon/bazooka.cpp:83
-#: /lgames/wormux/src/weapon/cluzooka.cpp:336
-#: /lgames/wormux/src/weapon/riot_bomb.cpp:86
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je zapustila bojišče..."
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:44
+#: src/network/net_error_msg.cpp:44
 msgid "The server rejected the connection."
 msgstr "Strežnik je zavrnil povezavo."
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:50
+#: src/network/net_error_msg.cpp:50
 msgid "The server rejected the connection: wrong password!"
 msgstr "Strežnik je zavrnil povezavo: napačno geslo!"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:241
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1571,12 +1486,11 @@ msgstr[2] "Tukaj so samo %i ekipe."
 msgstr[3] "Tukaj je samo %i ekip."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: /lgames/wormux/src/menu/results_menu.cpp:321
+#: src/menu/results_menu.cpp:321
 msgid "Time"
 msgstr "Čas"
 
-#: /lgames/wormux/src/weapon/cluster_bomb.cpp:189
-#: /lgames/wormux/src/weapon/footbomb.cpp:159
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1588,7 +1502,7 @@ msgstr ""
 "Strel: držite preslednico dokler bomba ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: /lgames/wormux/src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:90
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1600,46 +1514,46 @@ msgstr ""
 "Strel: pritisnite preslednico\n"
 "ena uporaba na potezo"
 
-#: /lgames/wormux/src/interface/weapon_menu.cpp:170
+#: src/interface/weapon_menu.cpp:170
 msgid "Tools"
 msgstr "Orodja"
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:35
+#: src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
 msgstr "Ni bilo mogoče kontaktirati gostitelja."
 
-#: /lgames/wormux/src/map/maps_list.cpp:237
+#: src/map/maps_list.cpp:237
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti imenika s kartami (%s)!"
 
-#: /lgames/wormux/src/map/maps_list.cpp:249
+#: src/map/maps_list.cpp:249
 #, c-format
 msgid "Unable to open personal maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti zasebnega imenika s kartami (%s)!"
 
-#: /lgames/wormux/src/network/net_error_msg.cpp:38
+#: src/network/net_error_msg.cpp:38
 msgid "Unable to use this port!"
 msgstr "Ni bilo mogoče uporabiti teh vrat!"
 
-#: /lgames/wormux/src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:85
 msgid "Unknown command"
 msgstr "Neznan ukaz"
 
-#: /lgames/wormux/src/menu/game_mode_editor.cpp:43
+#: src/menu/game_mode_editor.cpp:43
 msgid "Unlimited"
 msgstr "Neomejen"
 
-#: /lgames/wormux/src/main.cpp:199
+#: src/main.cpp:199
 msgid "Version"
 msgstr "Različica"
 
-#: /lgames/wormux/src/menu/options_menu.cpp:452
+#: src/menu/options_menu.cpp:452
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Preverjanje različice je spodletelo zaradi: %s\n"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1648,99 +1562,97 @@ msgstr[1] "Počakajte! %i igralca še nista pripravljena!"
 msgstr[2] "Počakajte! %i igralci še niso pripravljeni!"
 msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:410
+#: src/menu/network_menu.cpp:410
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
-#: /lgames/wormux/src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:88
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Orožje: streljaj / Paket: hiter padec"
 
 #. Initialization of teams' energy
 #. Adding label
-#: /lgames/wormux/src/game/game_init.cpp:131
-#: /lgames/wormux/src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:168
 msgid "Weapons"
 msgstr "Orožja"
 
-#: /lgames/wormux/src/main.cpp:300
+#: src/main.cpp:300
 msgid "Website: "
 msgstr "Spletna stran: "
 
 #. %s will be replaced with the name of the network game
-#: /lgames/wormux/src/menu/network_menu.cpp:150
+#: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
 msgstr "Dobrodošli v %s!"
 
-#: /lgames/wormux/src/game/game.cpp:753
+#: src/game/game.cpp:753
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
 
 #. Various options
-#: /lgames/wormux/src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:77
 msgid "Wind particles?"
 msgstr "Vetrni delci?"
 
-#: /lgames/wormux/src/menu/results_menu.cpp:378
+#: src/menu/results_menu.cpp:378
 msgid "Winner"
 msgstr "Zmagovalec"
 
-#: /lgames/wormux/src/main.cpp:211
+#: src/main.cpp:211
 msgid "Wormux launching..."
 msgstr "Wormux se zaganja..."
 
-#: /lgames/wormux/src/main.cpp:290
+#: src/main.cpp:290
 msgid "Wormux version "
 msgstr "Wormux različica "
 
-#: /lgames/wormux/src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:194
 msgid "Wrong map CRC!"
 msgstr "Napačna kartna vsota CRC"
 
-#: /lgames/wormux/src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:191
 msgid "Wrong map name!"
 msgstr "Napačno ime karte!"
 
-#: /lgames/wormux/src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:197
 msgid "Wrong team!"
 msgstr "Napačna ekipa!"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:336
 msgid "You are alone :-/"
 msgstr "Sami ste :-/"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:249
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Sami ste..."
 
-#: /lgames/wormux/src/menu/network_menu.cpp:391
+#: src/menu/network_menu.cpp:391
 msgid "You are the new turn master!"
 msgstr "Postali ste novi vodja igre!"
 
-#: /lgames/wormux/src/map/maps_list.cpp:258
+#: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
 msgstr "Potrebujete vsaj eno veljavno karto!"
 
-#: /lgames/wormux/src/game/game_init.cpp:124
-#: /lgames/wormux/src/team/teams_list.cpp:178
+#: src/game/game_init.cpp:124 src/team/teams_list.cpp:178
 msgid "You need at least two valid teams !"
 msgstr "Potrebujete vsaj dve veljavni ekipi !"
 
-#: /lgames/wormux/src/menu/network_menu.cpp:229
+#: src/menu/network_menu.cpp:229
 msgid "You won't be able to play before selecting a team !"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: /lgames/wormux/src/weapon/weapon_launcher.cpp:493
+#: src/weapon/weapon_launcher.cpp:493
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 
-#: /lgames/wormux/src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:74
 msgid "aka"
 msgstr "kot"
 
-#: /lgames/wormux/src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:220
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1750,41 +1662,41 @@ msgstr ""
 "Bombardiranje: levi klik na tarčo\n"
 "eno bombardiranje na potezo"
 
-#: /lgames/wormux/src/map/maps_list.cpp:76
+#: src/map/maps_list.cpp:76
 msgid "couldn't load config"
 msgstr "nalaganje nastavitev ni bilo mogoče"
 
 #. the default player name for custom teams
-#: /lgames/wormux/src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:136
 msgid "custom player"
 msgstr "igralec po meri"
 
-#: /lgames/wormux/src/map/ground.cpp:82
+#: src/map/ground.cpp:82
 msgid "done"
 msgstr "opravljeno"
 
-#: /lgames/wormux/src/map/maps_list.cpp:83
+#: src/map/maps_list.cpp:83
 msgid "error parsing the config file"
 msgstr "napaka pri razčlenjevanju nastavitvene datoteke"
 
-#: /lgames/wormux/src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:78
 msgid "from"
 msgstr "iz"
 
-#: /lgames/wormux/src/map/maps_list.cpp:72
+#: src/map/maps_list.cpp:72
 msgid "no configuration file!"
 msgstr "ni nastavitvene datoteke!"
 
-#: /lgames/wormux/src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:167
 msgid "o Loading music"
 msgstr "o Nalaganje glasbe"
 
-#: /lgames/wormux/src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:343
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Nalaganje zvočnega profila: %s"
 
-#: /lgames/wormux/src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:89
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
