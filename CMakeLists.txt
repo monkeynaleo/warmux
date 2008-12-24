@@ -103,6 +103,7 @@ ENDIF(APPLE)
 # CMP0005 - ADD_DEFINITION is now properly autoescaped
 IF(COMMAND cmake_policy)
   cmake_policy(SET CMP0005 OLD)
+  cmake_policy(SET CMP0003 NEW)
 ENDIF(COMMAND cmake_policy)
 
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})
