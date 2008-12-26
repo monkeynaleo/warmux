@@ -88,6 +88,8 @@ a:active .poimg, a:hover .poimg {
 
 <?php include ("../entete/index.php");
 
+// =========================================================
+
 $today = date("Y-m-d");
 
 if (array_key_exists("date", $_GET)) {
@@ -101,6 +103,20 @@ $pattern='^20[0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]$';
 if (!ereg($pattern, $date)) {
   $date = $today;
 }
+
+if (array_key_exists("begin", $_GET)) {
+  $begindate = $_GET['begin'];
+ } else {
+  $begindate = "2008-08-10";
+ }
+
+if (array_key_exists("end", $_GET)) {
+  $enddate = $_GET['end'];
+ } else {
+  $enddate = $today;
+ }
+
+// =========================================================
 
 ?>
 
@@ -122,18 +138,25 @@ if (!ereg($pattern, $date)) {
 <h2>Connections per hour done during day <?php print $date ?></h2>
 
 <form action="./network-stats.php" method="get">
-  <script>DateInput('date', true, 'YYYY-MM-DD', '<?php print $date ?>')</script>
+  Date: <script>DateInput('date', true, 'YYYY-MM-DD', '<?php print $date ?>')</script>
+  Max value: <input type="text" name="max" size="4" value="<?php print $max ?>" /><br />
   <input type="submit" value="Update">
 </form>
 
 <p>
-<img src='net_hourly.php?date=<?php print $date ?>' border=1 bordercolor=black/>
+<img src='net_hourly.php?date=<?php print $date ?>&max=<?php print $max ?>' border=1 bordercolor=black/>
 </p>
 
 <h2>Connections done daily</h2>
 
+<form action="./network-stats.php" method="get">
+  Begin date: <script>DateInput('begin', true, 'YYYY-MM-DD', '<?php print $begindate ?>')</script>
+  End date: <script>DateInput('end', true, 'YYYY-MM-DD', '<?php print $enddate ?>')</script>
+  <input type="submit" value="Update">
+</form>
+
 <p>
-<img src='net_daily.php' border=1 bordercolor=black/>
+<img src='net_daily.php?begin=<?php print $begindate ?>&end=<?php print $enddate ?>' border=1 bordercolor=black/>
 </p>
 
 </div>
