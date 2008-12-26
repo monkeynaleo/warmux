@@ -60,7 +60,16 @@ function generate_stats() {
 
 generate_stats();
 
-//print $max_day;
+// =========================================================
+
+if (array_key_exists("max", $_GET)) {
+  $max = $_GET['max'];
+  if ($max > 20)
+    $max_value = $max;
+}
+
+// =========================================================
+
 draw_graph($hours, $players, $servers, $max_value);
 
 ?>
