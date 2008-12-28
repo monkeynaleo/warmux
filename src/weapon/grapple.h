@@ -24,11 +24,13 @@
 //-----------------------------------------------------------------------------
 #include "weapon.h"
 #include "include/base.h"
-#include <list>
+#include <vector>
 #include <Box2D.h>
 #include "physic/physical_obj.h"
 //-----------------------------------------------------------------------------
 class GrappleConfig;
+class Rope;
+class RopeNode;
 
 class Grapple : public Weapon
 {
@@ -36,12 +38,12 @@ class Grapple : public Weapon
 
 
     // Rope launching data.
-    //double m_initial_angle;
+    double m_initial_angle;
     //uint m_launch_time;
     //uint m_hooked_time;
 
     Sprite* m_node_sprite;
-
+     Rope * m_rope;
     SoundSample cable_sound;
 
   protected:
@@ -96,6 +98,9 @@ class Rope : public PhysicalObj
 {
 public:
 
+  Rope();
+  ~Rope();
+
   void GoUp();
   void GoDown();
   void GoLeft();
@@ -108,8 +113,17 @@ public:
   bool IsAttached();
   void DetachRope();
 
+
   //if set to true, rope will attach on collision
   void SetAttachMode(bool i_attache_mode);
+
+  virtual void Draw();
+
+  virtual void Activate();
+  virtual void Generate();
+  virtual void Desactivate();
+
+  virtual void SignalGroundCollision(const Point2d&);
 
 protected:
   Point2i m_fixation_point;
@@ -119,9 +133,23 @@ protected:
 
   Sprite* m_hook_sprite;
 
-  std::list<b2Body *> rope_nodes;
+  std::vector<RopeNode *> m_rope_nodes;
   bool AttachRope();
+  void Refresh() { };
 
+
+};
+
+class RopeNode : public PhysicalObj
+{
+public :
+  RopeNode();
+  virtual void Draw();
+protected:
+  Sprite* m_node_sprite;
+
+
+  void Refresh() { };
 
 };
 //-----------------------------------------------------------------------------
