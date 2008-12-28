@@ -11,11 +11,21 @@
 
 Wormux sourcecode is share in several parts :
 
-/cmake = for cmake users
+/build = files and scripts related to building and installing wormux
+/build/cmake = additional files for cmake users
+/build/m4 = m4 macros for autotools
+/build/mac = scripts for compile under mac OS (with fink or macports libraries)
+/build/visual = project files for visual studio (Microsoft)
+/build/win32_setup = files for the (windows) NSIS installer
+
 /data = pictures, sounds (music), maps, skins,...
 /doc = license, man page, readme, and this file.
-/m4 = autotools
-/mac = scripts for compile under mac OS (with fink or macports libraries)
+
+/lib = a dumping place for internally-reusable code
+/lib/box2d = a slightly modified copy of the box2d collision detection engine
+/lib/libwormux = shared code between wormux and wormux-server
+/lib/wormux-server = a (static) library that enables running of a headless server
+
 /po = translations (all languages)
 
 /src = source code
@@ -38,4 +48,3 @@ Wormux sourcecode is share in several parts :
 /src/weapon = sourcecode for weapons
 
 /tool = a file checker for check xml file integrity (skins), howplay (pdf) from wiki, anything need for compile under Windows and index server sourcecode.
-/visual = project files for visual studio (Microsoft)
