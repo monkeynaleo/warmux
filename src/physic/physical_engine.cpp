@@ -88,6 +88,11 @@ void PhysicalEngine::RemoveObject(PhysicalObj *obj)
   physic_world->DestroyBody(obj->GetBody());
 }
 
+b2Joint* PhysicalEngine::CreateJoint(b2JointDef* i_joint_def)
+{
+ return physic_world->CreateJoint(i_joint_def);
+}
+
 void PhysicalEngine::Step()
 {
   float32 timeStep = 1.0f / frame_rate;
