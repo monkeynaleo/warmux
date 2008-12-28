@@ -88,7 +88,7 @@ protected:
   std::string m_unique_id;
   std::string m_rebound_sound;
   Point2d m_initial_speed;
-
+  bool m_fixed;
   alive_t m_alive;
   int m_energy;
 
@@ -108,9 +108,11 @@ public:
   virtual ~PhysicalObj ();
 
 
-  void Activate();
-  void Generate();
-  void Desactivate();
+  virtual void Activate();
+  virtual void Generate();
+  virtual void Desactivate();
+
+  virtual void GenerateMass();
 
   // Used to sync value across network
   virtual void GetValueFromAction(Action *);
@@ -200,6 +202,7 @@ public:
   double GetMass() const { return m_mass; }
 
   void SetFixedRotation(bool i_fixed_rotation);
+  void SetFixed(bool i_fixed);
 
   void SetWindFactor (double wind_factor) { m_wind_factor = wind_factor; };
   double GetWindFactor () const { return m_wind_factor; }

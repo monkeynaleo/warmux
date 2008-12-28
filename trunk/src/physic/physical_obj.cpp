@@ -80,6 +80,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_name(name),
   m_rebound_sound(""),
   m_initial_speed(0,0),
+  m_fixed(false),
   m_alive(ALIVE),
   m_energy(-1),
   m_allow_negative_y(false)
@@ -172,16 +173,8 @@ void PhysicalObj::Generate()
     (*it)->SetBody(m_body);
     (*it)->Generate();
   }
+  GenerateMass();
 
-  if (m_body_def->fixedRotation) {
-    b2MassData massData;
-    massData.mass = m_mass;
-    massData.center.SetZero();
-    m_body->SetMass(&massData);
-
-  } else {
-    m_body->SetMassFromShapes();
-  }
 }
 
 void PhysicalObj::Desactivate()
@@ -192,6 +185,26 @@ void PhysicalObj::Desactivate()
   RemoveAllExternForce();
   PhysicalEngine::GetInstance()->RemoveObject(this);
   m_body = NULL;
+}
+
+void PhysicalObj::GenerateMass()
+{
+  if(m_fixed){
+     b2MassData massData;
+     m_body->SetMass(&massData);
+
+   }else{
+
+     if (m_body_def->fixedRotation) {
+       b2MassData massData;
+       massData.mass = m_mass;
+       massData.center.SetZero();
+       m_body->SetMass(&massData);
+
+     } else {
+       m_body->SetMassFromShapes();
+     }
+   }
 }
 
 //---------------------------------------------------------------------------//
@@ -1516,4 +1529,14 @@ PhysicalShape *PhysicalObj::GetShape(std::string name)
 void PhysicalObj::SetFixedRotation(bool i_fixed_rotation)
 {
   m_body_def->fixedRotation = i_fixed_rotation;
+}
+
+void PhysicalObj::SetFixed(bool i_fixed){
+  if(i_fixed != m_fixed){
+    m_fixed = i_fixed;
+    GenerateMass();
+
+  }
+
+
 }

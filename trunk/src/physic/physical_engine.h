@@ -46,6 +46,7 @@ public:
   b2Body *GetNewGroundBody() ;
   b2Body *AddObject(PhysicalObj *new_obj);
   void RemoveObject(PhysicalObj *obj);
+  b2Joint* CreateJoint(b2JointDef* i_joint_def);
   void Step();
   void StaticStep();
 
