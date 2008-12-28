@@ -4,13 +4,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2007.
-# Adrián Chaves <adriyetichaves@gmail.com>, 2008. (Proxecto Trasno <proxecto@trasno.net>).
-# Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2008.
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2008. (Proxecto Trasno <proxecto@trasno.net>).
 msgid ""
 msgstr ""
 "Project-Id-Version: Wormux. gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-10-03 16:58+0200\n"
+"PO-Revision-Date: 2008-12-27 12:17+0100\n"
 "Last-Translator: Adrian Chaves Fernandez <adriyetichaves@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -190,8 +189,7 @@ msgstr[1] "O equipo %s gañou %u bazucas!"
 
 #: src/weapon/blowtorch.cpp:138
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -226,8 +224,7 @@ msgstr[1] "O equipo %s gañou %u kits de construción! Non esquezas o casco."
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "O equipo %s gañou %u aleluia! Move o corpo ao tirala!"
 msgstr[1] "O equipo %s gañou %u aleluias! Move o corpo ao tiralas!"
 
@@ -340,10 +337,8 @@ msgstr[1] "O equipo %s gañou %u labazadas! Esquiva isto!"
 #: src/weapon/snipe_rifle.cpp:247
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural ""
-"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
-msgstr[0] ""
-"O equipo %s gañou %u rifle francotirador! Procura acertarlles entre os ollos!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgstr[0] "O equipo %s gañou %u rifle francotirador! Procura acertarlles entre os ollos!"
 msgstr[1] ""
 "O equipo %s gañou %u rifles francotirador! Procura acertarlles entre os "
 "ollos!"
@@ -609,9 +604,8 @@ msgid "Connected !"
 msgstr "Conectado!"
 
 #: src/network/admin_commands.cpp:64
-#, fuzzy
 msgid "Connected players: "
-msgstr "Conectado!"
+msgstr "Xogadores conectados:"
 
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
@@ -683,8 +677,7 @@ msgstr "Enerxía"
 #: src/include/action_handler.cpp:220
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
-msgstr ""
-"Erro ao inicializar a rede: O cliente %s non está dacordo contigo!! - %s"
+msgstr "Erro ao inicializar a rede: O cliente %s non está dacordo contigo!! - %s"
 
 #: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
 msgid "Error loading team :"
@@ -693,16 +686,14 @@ msgstr "Erro ao cargar o equipo :"
 #: src/game/config.cpp:513 src/team/custom_team.cpp:165
 #: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Erro ao crear o directorio \"%s\": imposible almacenar o ficheiro de "
 "configuración."
 
 #: src/team/custom_team.cpp:104
 #, c-format
-msgid ""
-"Error while deleting the directory \"%s\". Unable to delete the custom team."
+msgid "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Erro ao eliminar o directorio \"%s\". Non se puido eliminar o equipo "
 "personalizado."
@@ -731,12 +722,10 @@ msgstr "Erro: Non se pode conectar a %s:%s"
 
 #: src/menu/network_connection_menu.cpp:341
 msgid "Error: Unable to contact the index server to host a game"
-msgstr ""
-"Erro: Non se pode contactar co servidor índice para aloxar unha partida"
+msgstr "Erro: Non se pode contactar co servidor índice para aloxar unha partida"
 
 #: src/menu/network_connection_menu.cpp:281
-msgid ""
-"Error: Unable to contact the index server to search for an internet game"
+msgid "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Erro: Non se pode contactar co servidor índice para buscar unha partida na "
 "rede"
@@ -962,7 +951,7 @@ msgstr "Lingua"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Listar os xogadores conectados"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1002,9 +991,8 @@ msgstr "Mapas"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
-#, fuzzy
 msgid "Master mode"
-msgstr "Modo de xogo"
+msgstr "Modo principal"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1085,9 +1073,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Non se atopou ningún elemento <%s> no ficheiro de configuración XML!"
 
 #: src/network/admin_commands.cpp:60
-#, fuzzy
 msgid "No player connected"
-msgstr "%i xogador conectado"
+msgstr "Non hai ningún xogador conectado"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1264,8 +1251,7 @@ msgstr "Labazada"
 
 #: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
-msgstr ""
-"Darlle unha labazada ao enimigo para separar os seus pés do chan un anaco."
+msgstr "Darlle unha labazada ao enimigo para separar os seus pés do chan un anaco."
 
 #: src/menu/help_menu.cpp:84
 msgid "Smaller aim angle and walk step"
@@ -1356,8 +1342,7 @@ msgstr "Teleportación"
 
 #: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr ""
-"A bomba de fragmentación saiu do campo de batalla antes de poder explotar."
+msgstr "A bomba de fragmentación saiu do campo de batalla antes de poder explotar."
 
 #: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
@@ -1529,7 +1514,7 @@ msgstr "Sitio web:"
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Benvido a %s!"
 
 #: src/game/game.cpp:753
 #, c-format
@@ -1575,7 +1560,7 @@ msgstr "Estás só..."
 
 #: src/menu/network_menu.cpp:391
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Ti es o mestre da nova rolda!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1698,3 +1683,4 @@ msgstr "o Son aberto a %d Hz e %d bit"
 
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "Erro de XML durante a carga do mapa '%s':"
+
