@@ -185,9 +185,9 @@ function show_languages_status($branch, $lang_array) {
   if (is_dir($po_dir)) {
 
     if ($dir = opendir($po_dir)) {
-      if (! file_exists("$dir/translation_stats")) {
+      if (! file_exists("$po_dir/translation_stats")) {
         // create a dummy (unsorted) version of the file
-        if (! $translation_stats = fopen("$dir/translation_stats", "x")) {
+        if (! $translation_stats = fopen("$po_dir/translation_stats", "x")) {
           closedir($dir);
           return 0;
         }
@@ -199,7 +199,7 @@ function show_languages_status($branch, $lang_array) {
         fclose($translation_stats);
       }
 
-      if (! $translation_stats = file("$dir/translation_stats", FILE_IGNORE_NEW_LINES)) {
+      if (! $translation_stats = file("$po_dir/translation_stats", FILE_IGNORE_NEW_LINES)) {
         closedir($dir);
         return 0;
       }
