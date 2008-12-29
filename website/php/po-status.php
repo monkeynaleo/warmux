@@ -216,6 +216,7 @@ function show_languages_status($branch, $lang_array) {
       foreach ($translation_stats as $i => $line) {
         if (preg_match('`^(.*)\.png `', $line, $matches)) {
           $locale = $matches[1];
+	  $file = "$locale.png";
           print "<div class='postatus' >";
           print "<p class='potext' >".$lang_array[$locale]." <span class='short' >(".$locale.")</span></p>";
           print "<a href='".$svn.$locale.".po' ><img class='poimg' src='".$po_dir."/".$file."' alt='Translation for locale ".$locale."' /></a>";
