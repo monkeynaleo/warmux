@@ -185,15 +185,42 @@ function show_languages_status($branch, $lang_array) {
   if (is_dir($po_dir)) {
 
     if ($dir = opendir($po_dir)) {
+      if (! $translation_stats = file("$dir/translation_stats", FILE_IGNORE_NEW_LINES)) {
+        // create a dummy (unsorted) version of the file when it doesn't exist
+        if (! $translation_stats = fopen("$dir/translation_stats", "x")) {
+          closedir($dir);
+          return 0;
+        }
+        while ($file = readdir($dir)) {
+          if (preg_match('`^(.*)\.png$`', $file, $matches)) {
+            fwrite($translation_stats, "$matches[0] 0 0\n");
+          }
+        }
+        fclose($translation_stats);
+      }
 
-      while ($file = readdir($dir)) {
-	if (preg_match('`^(.*)\.png$`', $file, $matches)) {
-	  $locale = $matches[1];
-	  print "<div class='postatus' >";
-	  print "<p class='potext' >".$lang_array[$locale]." <span class='short' >(".$locale.")</span></p>";
-	  print "<a href='".$svn.$locale.".po' ><img class='poimg' src='".$po_dir."/".$file."' alt='Translation for locale ".$locale."' /></a>";
-	  print "</div>";
-	}
+      if (! $translation_stats = file("$dir/translation_stats", FILE_IGNORE_NEW_LINES)) {
+        closedir($dir);
+        return 0;
+      }
+
+      // sort the stats in descending order of translation completeness
+      foreach ($translation_stats as $i => $line) {
+        if (preg_match('`^.*\.png ([0-9]*) ([0-9]*)$`', $line, $matches)) {
+          $translated[$i] = $matches[1];
+          $fuzzy[$i] = $matches[2];
+        }
+      }
+      array_multisort($translated, SORT_DESC, $fuzzy, SORT_ASC, $translation_stats);
+
+      foreach ($translation_stats as $i => $line) {
+        if (preg_match('`^(.*)\.png `', $line, $matches)) {
+          $locale = $matches[1];
+          print "<div class='postatus' >";
+          print "<p class='potext' >".$lang_array[$locale]." <span class='short' >(".$locale.")</span></p>";
+          print "<a href='".$svn.$locale.".po' ><img class='poimg' src='".$po_dir."/".$file."' alt='Translation for locale ".$locale."' /></a>";
+          print "</div>";
+        }
       }
       closedir($dir);
     }
