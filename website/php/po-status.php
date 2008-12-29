@@ -185,7 +185,7 @@ function show_languages_status($branch, $lang_array) {
   if (is_dir($po_dir)) {
 
     if ($dir = opendir($po_dir)) {
-      if (! file_exists("$dir/translation_stats") {
+      if (! file_exists("$dir/translation_stats")) {
         // create a dummy (unsorted) version of the file
         if (! $translation_stats = fopen("$dir/translation_stats", "x")) {
           closedir($dir);
