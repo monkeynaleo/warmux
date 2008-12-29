@@ -197,9 +197,9 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
       {
         int ip;
         int port;
-        std::string server_id;
+        std::string version;
 
-        if (!ReceiveStr(server_id))
+        if (!ReceiveStr(version))
             return false;
 
         if (BytesReceived() < 2*sizeof(uint32_t)) // The message is not completely received
@@ -211,8 +211,8 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
 
         if (port < 0) // means it disconnected
           {
-	    for (std::multimap<std::string, FakeClient>::iterator serv = fake_clients.lower_bound(server_id);
-		 serv != fake_clients.upper_bound(server_id);
+	    for (std::multimap<std::string, FakeClient>::iterator serv = fake_clients.lower_bound(version);
+		 serv != fake_clients.upper_bound(version);
 		 serv++) {
 
 	      if( serv->second.ip == ip
@@ -243,8 +243,8 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
               options.Set(game_name, passwd);
             }
 
-            fake_clients.insert( std::make_pair(server_id, FakeClient(ip, port, options)));
-            stats.NewFakeServer();
+            fake_clients.insert(std::make_pair(version, FakeClient(ip, port, options)));
+            stats.NewFakeServer(version);
           }
       }
       break;

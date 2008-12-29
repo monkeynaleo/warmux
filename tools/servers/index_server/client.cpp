@@ -97,7 +97,7 @@ bool Client::HandShake(const std::string & version)
 
   if (config.IsVersionSupported(version)) {
 
-    stats.NewClient();
+    stats.NewClient(version);
     if (!SendSignature())
       goto error;
 
@@ -170,7 +170,7 @@ bool Client::RegisterWormuxServer()
     goto err_send;
 
   NotifyServers(true);
-  stats.NewServer();
+  stats.NewServer(version);
   return true;
 
  err_send:
@@ -254,7 +254,7 @@ void Client::AddMeToClientsList(const std::string & ver)
   // We are currently registered as an unknown version
   // So, we unregister it:
   for (std::multimap<std::string, Client*>::iterator client = clients.lower_bound("unknown");
-       client != upper_bound("unknown");
+       client != clients.upper_bound("unknown");
        client++) {
 
     if (client->second == this)
@@ -320,7 +320,7 @@ bool Client::SendList()
     return false;
 
   if (nb_s == 0) {
-    stats.NewClientWithoutAnswer();
+    stats.NewClientWoAnswer(version);
     return true;
   }
 
@@ -342,8 +342,9 @@ bool Client::SendList()
 	  return false;
       }
     }
+  }
 
-  for (std::multimap<std::string, FakeClient*>::iterator client = fake_clients.lower_bound(version);
+  for (std::multimap<std::string, FakeClient>::iterator client = fake_clients.lower_bound(version);
        client != fake_clients.upper_bound(version);
        client++) {
 
@@ -351,7 +352,7 @@ bool Client::SendList()
       return false;
     if (!SendInt(client->second.port))
       return false;
-    if (!SendInt(client->second->options.passwd))
+    if (!SendInt(client->second.options.passwd))
       return false;
 
     if (client->second.options.used) {
