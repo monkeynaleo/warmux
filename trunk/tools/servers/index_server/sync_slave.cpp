@@ -211,20 +211,18 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
 
         if (port < 0) // means it disconnected
           {
-            std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( server_id );
-            if( serv != fake_clients.end() )
-              {
-                do
-                  {
-                    if( serv->second.ip == ip
-                        &&  serv->second.port == -port )
-                      {
-                        fake_clients.erase(serv);
-                        DPRINT(MSG, "A fake server disconnected");
-                        break;
-                      }
-                  } while (serv != fake_clients.upper_bound(server_id));
-              }
+	    for (std::multimap<std::string, FakeClient>::iterator serv = fake_clients.lower_bound(server_id);
+		 serv != fake_clients.upper_bound(server_id);
+		 serv++) {
+
+	      if( serv->second.ip == ip
+		  &&  serv->second.port == -port )
+		{
+		  fake_clients.erase(serv);
+		  DPRINT(MSG, "A fake server disconnected");
+		  break;
+		}
+	    }
           }
         else
           {
