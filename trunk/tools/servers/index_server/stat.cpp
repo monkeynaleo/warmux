@@ -26,6 +26,10 @@
 
 Stats stats;
 
+VersionInfo::VersionInfo():
+	      servers(0), fake_servers(0), clients(0), clients_w_empty_list(0)
+{}
+
 ConnectionStats::ConnectionStats(const std::string & fn)
   : fd(NULL)
 {
@@ -75,10 +79,7 @@ void ConnectionStats::CloseFile()
 
 void ConnectionStats::Reset()
 {
-  servers = 0;
-  fake_servers = 0;
-  clients = 0;
-  clients_w_empty_list = 0;
+  version_stats.clear();
 }
 
 void ConnectionStats::Rotate()
@@ -90,16 +91,72 @@ void ConnectionStats::Rotate()
 
 void ConnectionStats::Write()
 {
-  if(!fd)
+  if (!fd)
     return;
+
   struct tm* t;
   time_t now = time(NULL);
   t = localtime(&now);
-  fprintf(fd, "%4i-%02i-%02i %i:%02i:%02i %lu %lu %lu %lu\n", 1900 + t->tm_year,t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec, fake_servers, servers, clients, clients_w_empty_list);
+
+  fprintf(fd, "%4i-%02i-%02i %i:%02i:%02i ", 1900 + t->tm_year,t->tm_mon + 1, t->tm_mday,
+	  t->tm_hour, t->tm_min, t->tm_sec);
+
+  // Global stats
+  unsigned long fake_servers = 0;
+  unsigned long servers = 0;
+  unsigned long clients = 0;
+  unsigned long clients_w_empty_list = 0;
+  for (std::map<const std::string, VersionInfo>::const_iterator
+	 it = version_stats.begin();
+       it != version_stats.end();
+       it++) {
+    fake_servers += it->second.fake_servers;
+    servers += it->second.servers;
+    clients += it->second.clients;
+    clients_w_empty_list += it->second.clients_w_empty_list;
+  }
+  fprintf(fd, "%lu %lu %lu %lu", fake_servers, servers, clients, clients_w_empty_list);
+
+  // Stats per version
+  fprintf(fd, "%d ", version_stats.size());
+
+  for (std::map<const std::string, VersionInfo>::const_iterator
+	 it = version_stats.begin();
+       it != version_stats.end();
+       it++) {
+
+    fprintf(fd, "%s %lu %lu %lu %lu", it->first.c_str(),
+	    it->second.fake_servers,
+	    it->second.servers,
+	    it->second.clients,
+	    it->second.clients_w_empty_list);
+  }
+  fprintf(fd, "\n");
 
   fflush(fd);
   Reset();
 }
+
+void ConnectionStats::NewServer(const std::string& version)
+{
+  version_stats[version].servers++;
+}
+
+void ConnectionStats::NewFakeServer(const std::string& version)
+{
+  version_stats[version].fake_servers++;
+}
+
+void ConnectionStats::NewClient(const std::string& version)
+{
+  version_stats[version].clients++;
+}
+
+void ConnectionStats::NewClientWoAnswer(const std::string& version)
+{
+  version_stats[version].clients_w_empty_list++;
+}
+
 
 Stats::Stats() : hourly("hourly"), daily("daily")
 {
@@ -111,26 +168,26 @@ void Stats::Init()
   hourly.OpenFile();
 }
 
-void Stats::NewServer()
+void Stats::NewServer(const std::string& version)
 {
-  hourly.servers++;
-  daily.servers++;
+  hourly.NewServer(version);
+  daily.NewServer(version);
 }
 
-void Stats::NewFakeServer()
+void Stats::NewFakeServer(const std::string& version)
 {
-  hourly.fake_servers++;
-  daily.fake_servers++;
+  hourly.NewFakeServer(version);
+  daily.NewFakeServer(version);
 }
 
-void Stats::NewClient()
+void Stats::NewClient(const std::string& version)
 {
-  hourly.clients++;
-  daily.clients++;
+  hourly.NewClient(version);
+  daily.NewClient(version);
 }
 
-void Stats::NewClientWithoutAnswer()
+void Stats::NewClientWoAnswer(const std::string& version)
 {
-  hourly.clients_w_empty_list++;
-  daily.clients_w_empty_list++;
+  hourly.NewClientWoAnswer(version);
+  daily.NewClientWoAnswer(version);
 }

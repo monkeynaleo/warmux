@@ -21,25 +21,38 @@
 #define STAT_H
 #include <stdio.h>
 #include <string>
+#include <map>
 
-class ConnectionStats
+class VersionInfo
 {
-  FILE* fd;
-  std::string filename;
-
-  void CloseFile();
- public:
+public:
   unsigned long servers;
   unsigned long fake_servers;
   unsigned long clients;
   unsigned long clients_w_empty_list; // clients for which no game has been proposed
 
+  VersionInfo();
+};
+
+class ConnectionStats
+{
+  FILE* fd;
+  std::string filename;
+  std::map<const std::string, VersionInfo> version_stats;
+
+  void CloseFile();
+ public:
   ConnectionStats(const std::string & fn);
   ~ConnectionStats();
   void OpenFile();
   void Reset();
   void Write();
   void Rotate();
+
+  void NewServer(const std::string& version);
+  void NewFakeServer(const std::string& version);
+  void NewClient(const std::string& version);
+  void NewClientWoAnswer(const std::string& version);
 };
 
 class Stats
@@ -56,10 +69,10 @@ class Stats
 
   Stats();
   void Init();
-  void NewServer();
-  void NewFakeServer();
-  void NewClient();
-  void NewClientWithoutAnswer();
+  void NewServer(const std::string& version);
+  void NewFakeServer(const std::string& version);
+  void NewClient(const std::string& version);
+  void NewClientWoAnswer(const std::string& version);
 };
 
 extern Stats stats;
