@@ -32,6 +32,7 @@ class ConnectionStats
   unsigned long servers;
   unsigned long fake_servers;
   unsigned long clients;
+  unsigned long clients_w_empty_list; // clients for which no game has been proposed
 
   ConnectionStats(const std::string & fn);
   ~ConnectionStats();
@@ -58,6 +59,7 @@ class Stats
   void NewServer();
   void NewFakeServer();
   void NewClient();
+  void NewClientWithoutAnswer();
 };
 
 extern Stats stats;

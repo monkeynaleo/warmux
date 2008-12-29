@@ -334,6 +334,11 @@ bool Client::SendList()
   if (!SendInt(nb_s))
     return false;
 
+  if (nb_s == 0) {
+    stats.NewClientWithoutAnswer();
+    return true;
+  }
+
   std::multimap<std::string, Client*>::iterator client = clients.find(version);
   if (client != clients.end())
     {
