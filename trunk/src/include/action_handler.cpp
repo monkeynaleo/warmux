@@ -22,6 +22,8 @@
 #include <iostream>
 #include <SDL_mutex.h>
 #include <WORMUX_debug.h>
+#include <WORMUX_distant_cpu.h>
+#include <WORMUX_team_config.h>
 
 #include "action_handler.h"
 #include "character/character.h"
@@ -41,7 +43,6 @@
 #include "map/maps_list.h"
 #include "map/wind.h"
 #include "menu/network_menu.h"
-#include <WORMUX_distant_cpu.h>
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "network/network_server.h"
@@ -51,7 +52,6 @@
 #include "object/objbox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WORMUX_team_config.h>
 #include "sound/jukebox.h"
 #include "weapon/construct.h"
 #include "weapon/weapon_launcher.h"
@@ -159,6 +159,30 @@ static void Action_Network_MasterChangeState (Action *a)
   }
 }
 
+static void Action_Network_Set_GameMaster(Action */*a*/)
+{
+  Network::GetInstance()->SetGameMaster();
+
+  if (Network::GetInstance()->network_menu != NULL) {
+    Network::GetInstance()->network_menu->SetGameMasterCallback();
+  }
+
+  // Switching network state
+  switch (Network::GetInstance()->GetState()) {
+  case WNet::NO_NETWORK:
+  case WNet::NETWORK_MENU_INIT:
+    break;
+  case WNet::NETWORK_MENU_OK:
+    Network::GetInstance()->SetState(WNet::NETWORK_MENU_INIT);
+    break;
+  case WNet::NETWORK_LOADING_DATA:
+  case WNet::NETWORK_READY_TO_PLAY:
+  case WNet::NETWORK_PLAYING:
+  case WNet::NETWORK_NEXT_GAME:
+    break;
+  }
+}
+
 static void Action_Network_Check_Phase1 (Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
@@ -261,15 +285,6 @@ static void Action_Network_Check_Phase2 (Action *a)
 
   // this client has been checked, it's ok :-)
   a->GetCreator()->SetState(DistantComputer::STATE_CHECKED);
-}
-
-static void Action_Network_Set_GameMaster(Action */*a*/)
-{
-  Network::GetInstance()->SetGameMaster();
-
-  if (Network::GetInstance()->network_menu != NULL) {
-    Network::GetInstance()->network_menu->SetGameMasterCallback();
-  }
 }
 
 // ########################################################

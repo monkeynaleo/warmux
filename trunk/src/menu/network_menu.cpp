@@ -458,6 +458,5 @@ void NetworkMenu::WaitingForGameMaster()
     Menu::Display(mousePosition);
 
   } while (Network::GetInstance()->IsConnected() &&
-	   !Network::GetInstance()->IsGameMaster() /* you may become game master if the current one disconnects */ &&
 	   Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK);
 }
