@@ -288,6 +288,10 @@ void MapSelectionBox::AllowSelection()
   display_only = false;
   bt_map_minus->SetVisible(true);
   bt_map_plus->SetVisible(true);
+  map_preview_before2->Enable();
+  map_preview_before->Enable();
+  map_preview_after->Enable();
+  map_preview_after2->Enable();
   NeedRedrawing();
 }
 

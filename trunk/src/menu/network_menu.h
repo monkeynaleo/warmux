@@ -59,7 +59,7 @@ class NetworkMenu : public Menu
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
   void Draw(const Point2i &mousePosition);
-  void WaitingForServer();
+  void WaitingForGameMaster();
 
   void key_ok();
   bool signal_ok();
