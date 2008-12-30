@@ -118,7 +118,7 @@ void ConnectionStats::Write()
   fprintf(fd, "%lu %lu %lu %lu", fake_servers, servers, clients, clients_w_empty_list);
 
   // Stats per version
-  fprintf(fd, "%d ", version_stats.size());
+  fprintf(fd, "%zu ", version_stats.size());
 
   for (std::map<const std::string, VersionInfo>::const_iterator
 	 it = version_stats.begin();
