@@ -230,8 +230,12 @@ bool NetworkMenu::signal_ok()
       goto error;
     }
 
-    // Wait for the server, and stay in the menu map / team can still be changed
-    WaitingForServer();
+    // Wait for the game master, and stay in the menu map / team can still be changed
+    WaitingForGameMaster();
+
+    if (Network::GetInstance()->IsGameMaster()) {
+      goto error;
+    }
 
   }
   else
@@ -388,6 +392,8 @@ void NetworkMenu::SetGameMasterCallback()
   connected_players->SetVisible(true);
   initialized_players->SetVisible(true);
   map_box->AllowSelection();
+  b_ok->SetVisible(true); // make sure OK button is available if we had already clicked it
+  waiting_for_server = false;
   msg_box->NewMessage(_("You are the new turn master!"), c_red);
 }
 
@@ -396,7 +402,7 @@ void NetworkMenu::ReceiveMsgCallback(const std::string& msg)
   msg_box->NewMessage(msg);
 }
 
-void NetworkMenu::WaitingForServer()
+void NetworkMenu::WaitingForGameMaster()
 {
   Network::GetInstance()->SetState(WNet::NETWORK_MENU_OK);
 
@@ -451,6 +457,7 @@ void NetworkMenu::WaitingForServer()
 
     Menu::Display(mousePosition);
 
-  } while (Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK &&
-           Network::GetInstance()->IsConnected());
+  } while (Network::GetInstance()->IsConnected() &&
+	   !Network::GetInstance()->IsGameMaster() /* you may become game master if the current one disconnects */ &&
+	   Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK);
 }
