@@ -444,6 +444,7 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
 
 void Network::SetState(WNet::net_game_state_t _state)
 {
+  MSG_DEBUG("network.state", "%d -> %d", state, _state);
   state = _state;
 }
 
@@ -480,6 +481,7 @@ bool Network::IsTurnMaster() const
 
 void Network::SetGameMaster()
 {
+  MSG_DEBUG("network.game_master", "we are the new game master");
   game_master_player = true;
 }
 
@@ -515,12 +517,24 @@ const std::string& Network::GetPassword() const
 
 //-----------------------------------------------------------------------------
 
-uint Network::GetNbConnectedPlayers() const
+uint Network::GetNbPlayersConnected() const
 {
-  return cpu.size() + 1;
+  uint r = 0;
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    r += (*client)->GetPlayers().size();
+  }
+
+  return r;
 }
 
-uint Network::GetNbInitializedPlayers() const
+uint Network::GetNbHostsConnected() const
+{
+  return cpu.size();
+}
+
+uint Network::GetNbHostsInitialized() const
 {
   uint r = 0;
 
@@ -534,7 +548,7 @@ uint Network::GetNbInitializedPlayers() const
   return r;
 }
 
-uint Network::GetNbReadyPlayers() const
+uint Network::GetNbHostsReady() const
 {
   uint r = 0;
 
@@ -548,7 +562,7 @@ uint Network::GetNbReadyPlayers() const
   return r;
 }
 
-uint Network::GetNbCheckedPlayers() const
+uint Network::GetNbHostsChecked() const
 {
   uint r = 0;
 

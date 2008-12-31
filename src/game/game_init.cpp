@@ -64,9 +64,12 @@ void GameInit::InitGameData_NetGameMaster()
 void GameInit::EndInitGameData_NetGameMaster()
 {
   // Wait for all clients to be ready to play
+
+  // If we are connected to a dedicated server, we must check there are still some players connected
   while (Network::IsConnected()
-         && Network::GetInstance()->GetNbReadyPlayers() + 1  != Network::GetInstance()->GetNbConnectedPlayers())
-  {
+         && Network::GetInstance()->GetNbHostsReady() != Network::GetInstance()->GetNbHostsConnected()
+	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
+
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(200);
   }
@@ -75,12 +78,14 @@ void GameInit::EndInitGameData_NetGameMaster()
   Action a(Action::ACTION_NETWORK_CHECK_PHASE1);
   Network::GetInstance()->SendActionToAll(a);
 
+  // If we are connected to a dedicated server, we must check there are still some players connected
   while (Network::IsConnected()
-         && Network::GetInstance()->GetNbCheckedPlayers() + 1  != Network::GetInstance()->GetNbConnectedPlayers())
-    {
-      ActionHandler::GetInstance()->ExecActions();
-      SDL_Delay(200);
-    }
+         && Network::GetInstance()->GetNbHostsChecked() != Network::GetInstance()->GetNbHostsConnected()
+	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
+
+    ActionHandler::GetInstance()->ExecActions();
+    SDL_Delay(200);
+  }
 
   // Let's play !
   Network::GetInstance()->SetState(WNet::NETWORK_PLAYING);
@@ -95,8 +100,10 @@ void GameInit::EndInitGameData_NetClient()
 
   // Waiting for other clients
   std::cout << Network::GetInstance()->GetState() << " : Waiting for people over the network" << std::endl;
-  while (Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY
-         && Network::IsConnected())
+
+  while (Network::IsConnected()
+	 && !Network::GetInstance()->IsGameMaster()
+	 && Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY)
   {
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(100);
@@ -208,8 +215,13 @@ GameInit::GameInit():
   if (!Network::GetInstance()->IsLocal()) {
     if  (Network::GetInstance()->IsGameMaster())
       EndInitGameData_NetGameMaster();
-    else
+    else {
       EndInitGameData_NetClient();
+
+      // We have been elected as game master (the previous one has been disconnected)
+      if (Network::GetInstance()->IsGameMaster())
+	EndInitGameData_NetGameMaster();
+    }
   }
 
   Game::GetInstance()->Init();
