@@ -133,6 +133,7 @@ if (array_key_exists("end", $_GET)) {
 <ul>
 <li>The <font color="blue">blue curve</font> shows the number of game hosted.</li>
 <li>The <font color="red">red curve</font> shows the number of game hosted plus the number of people that (wanted to) join(ed) a game.</li>
+<li>The <font color="green">green curve</font> shows the number of players that get an empty list of public games :(</li>
 </ul>
 
 <h2>Connections per hour done during day <?php print $date ?></h2>
@@ -145,6 +146,7 @@ if (array_key_exists("end", $_GET)) {
 
 <p>
 <img src='net_hourly.php?date=<?php print $date ?>&max=<?php print $max ?>' border=1 bordercolor=black/>
+<img src='net_hourly.php?date=<?php print $date ?>&version=1' border=1 bordercolor=black/>
 </p>
 
 <h2>Connections done daily</h2>
