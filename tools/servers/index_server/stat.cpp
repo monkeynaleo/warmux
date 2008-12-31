@@ -118,14 +118,14 @@ void ConnectionStats::Write()
   fprintf(fd, "%lu %lu %lu %lu", fake_servers, servers, clients, clients_w_empty_list);
 
   // Stats per version
-  fprintf(fd, "%zu ", version_stats.size());
+  fprintf(fd, " %zu ", version_stats.size());
 
   for (std::map<const std::string, VersionInfo>::const_iterator
 	 it = version_stats.begin();
        it != version_stats.end();
        it++) {
 
-    fprintf(fd, "%s %lu %lu %lu %lu", it->first.c_str(),
+    fprintf(fd, "%s %lu %lu %lu %lu ", it->first.c_str(),
 	    it->second.fake_servers,
 	    it->second.servers,
 	    it->second.clients,
