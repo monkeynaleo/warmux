@@ -57,17 +57,23 @@ void ConnectionStats::OpenFile()
 
   full_name = std::string(time_str) + full_name + '_' + filename;
 
-  if(fd)
-    {
-      DPRINT(INFO, "Closing previous logfile");
-      fclose(fd);
-    }
+  if (fd) {
+    DPRINT(INFO, "Closing previous logfile");
+    fclose(fd);
+  }
 
   DPRINT(INFO, "Opening logfile : %s",full_name.c_str());
   fd = fopen(full_name.c_str(), "a+");
 
-  if(fd == NULL)
+  if (fd == NULL)
     TELL_ERROR;
+
+  fprintf(fd, "# YYYY-MM-DD hh-mm-ss "
+	  "fake_servers, servers, clients, clients_w_empty_list "
+	  "nb_version version-1 fake_servers, servers, clients, clients_w_empty_list "
+	  "version-2 fake_servers, servers, clients, clients_w_empty_list "
+	  "... version-N fake_servers, servers, clients, clients_w_empty_list\n");
+  fflush(fd);
 }
 
 void ConnectionStats::CloseFile()
@@ -98,7 +104,7 @@ void ConnectionStats::Write()
   time_t now = time(NULL);
   t = localtime(&now);
 
-  fprintf(fd, "%4i-%02i-%02i %i:%02i:%02i ", 1900 + t->tm_year,t->tm_mon + 1, t->tm_mday,
+  fprintf(fd, "%4i-%02i-%02i %02i:%02i:%02i ", 1900 + t->tm_year,t->tm_mon + 1, t->tm_mday,
 	  t->tm_hour, t->tm_min, t->tm_sec);
 
   // Global stats
