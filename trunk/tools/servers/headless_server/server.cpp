@@ -319,6 +319,7 @@ void GameServer::WaitClients()
 
 void GameServer::RunLoop()
 {
+ loop:
   while (true) {
 
     WaitClients();
@@ -358,9 +359,13 @@ void GameServer::RunLoop()
 	      server_socket.AcceptIncoming(port);
 	    }
 
-
-	    if (turn_master_lost) {
-	      GetGame(cpulst_it->first).ElectGameMaster();
+	    if (cpulst_it->second.GetCpus().size() != 0) {
+	      if (turn_master_lost) {
+		GetGame(cpulst_it->first).ElectGameMaster();
+	      }
+	    } else {
+	      cpu.erase(cpulst_it);
+	      goto loop;
 	    }
 
 	  } else {
