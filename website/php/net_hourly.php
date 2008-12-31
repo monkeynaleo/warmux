@@ -96,6 +96,8 @@ generate_stats();
 // Fill versions array
 $vname = array();
 $nb_players_per_version = array();
+
+ksort($versions);
 $key = key($versions);
 $val = current($versions);
 reset($versions);
