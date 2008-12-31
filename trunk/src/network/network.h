@@ -153,10 +153,11 @@ public:
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
 
-  uint GetNbConnectedPlayers() const;
-  uint GetNbInitializedPlayers() const;
-  uint GetNbReadyPlayers() const;
-  uint GetNbCheckedPlayers() const;
+  uint GetNbPlayersConnected() const;
+  uint GetNbHostsConnected() const;
+  uint GetNbHostsInitialized() const;
+  uint GetNbHostsReady() const;
+  uint GetNbHostsChecked() const;
 };
 
 //-----------------------------------------------------------------------------

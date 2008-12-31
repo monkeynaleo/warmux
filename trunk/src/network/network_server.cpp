@@ -103,7 +103,7 @@ void NetworkServer::WaitActionSleep()
       SendInitialGameInfo(client);
       cpu.push_back(client);
 
-      if (GetNbConnectedPlayers() >= max_nb_players)
+      if (GetNbHostsConnected() >= max_nb_players)
         RejectIncoming();
     }
     SDL_Delay(100);
@@ -156,7 +156,7 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
   it = cpu.erase(closed);
   delete *closed;
 
-  if (GetNbConnectedPlayers() == max_nb_players)
+  if (GetNbHostsConnected() == max_nb_players)
   {
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections

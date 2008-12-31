@@ -248,14 +248,15 @@ bool NetworkMenu::signal_ok()
                                  GetTeamsList().playing_list.size()), c_red);
       goto error;
     }
-    if (Network::GetInstance()->GetNbConnectedPlayers() <= 1)
+    if (Network::GetInstance()->GetNbHostsConnected() == 0
+	|| Network::GetInstance()->GetNbPlayersConnected() == 0)
     {
       msg_box->NewMessage(_("You are alone..."), c_red);
       goto error;
     }
-    if (Network::GetInstance()->GetNbConnectedPlayers() != Network::GetInstance()->GetNbInitializedPlayers()+1)
+    if (Network::GetInstance()->GetNbHostsConnected() != Network::GetInstance()->GetNbHostsInitialized())
     {
-      int nbr = Network::GetInstance()->GetNbConnectedPlayers() - Network::GetInstance()->GetNbInitializedPlayers() - 1;
+      int nbr = Network::GetInstance()->GetNbHostsConnected() - Network::GetInstance()->GetNbHostsInitialized();
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl, c_red);
       goto error;
@@ -320,23 +321,23 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
   if (Network::GetInstance()->IsConnected())
   {
     //Refresh the number of connected players:
-    int nbr = Network::GetInstance()->GetNbConnectedPlayers();
+    int nbr = Network::GetInstance()->GetNbHostsConnected();
     std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
     if (connected_players->GetText() != pl)
       connected_players->SetText(pl);
 
     //Refresh the number of players ready:
-    nbr = Network::GetInstance()->GetNbInitializedPlayers();
+    nbr = Network::GetInstance()->GetNbHostsInitialized();
     pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
     if (initialized_players->GetText() != pl) {
       initialized_players->SetText(pl);
       msg_box->NewMessage(pl, c_red);
-      if (Network::GetInstance()->GetNbConnectedPlayers() -
-	  Network::GetInstance()->GetNbInitializedPlayers() == 1
-	  && Network::GetInstance()->GetNbConnectedPlayers() >= 1) {
+      if (Network::GetInstance()->GetNbHostsConnected() ==
+	  Network::GetInstance()->GetNbHostsInitialized()
+	  && Network::GetInstance()->GetNbHostsInitialized() != 0) {
 	msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
       }
-      else if (Network::GetInstance()->GetNbConnectedPlayers() == 1) {
+      else if (Network::GetInstance()->GetNbHostsConnected() == 0) {
 	msg_box->NewMessage(_("You are alone :-/"), c_red);
       }
     }
