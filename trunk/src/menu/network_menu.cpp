@@ -200,10 +200,7 @@ void NetworkMenu::PrepareForNewGame()
   b_ok->SetVisible(true);
 
   Network::GetInstance()->SetState(WNet::NETWORK_NEXT_GAME);
-
-  if (!Network::GetInstance()->IsGameMaster()) {
-    Network::GetInstance()->SendNetworkState();
-  }
+  Network::GetInstance()->SendNetworkState();
 
   RedrawMenu();
 }
