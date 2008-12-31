@@ -2,7 +2,7 @@
 
 require_once "Artichow/LinePlot.class.php";
 
-function draw_graph($legends, $players_array, $servers_array, $maxy)
+function draw_graph($legends, $players_array, $servers_array, $disappointed_players_array, $maxy)
 {
   $graph = new Graph();
   $graph->setTiming(FALSE);
@@ -41,15 +41,67 @@ function draw_graph($legends, $players_array, $servers_array, $maxy)
   $servers_plot->setColor(new Blue);
   $servers_plot->setThickness(1);
 
+  // Prepare the disappointed graph
+  $disappointed_plot = new LinePlot($disappointed_players_array);
+
+  $disappointed_plot->setColor(new Green);
+  $disappointed_plot->setThickness(1);
+
   // Time's to draw!!
   $group->add($players_plot);
-  $group->legend->add($players_plot, "players");
+  $group->legend->add($players_plot, "players (servers + clients)");
 
   $group->add($servers_plot);
   $group->legend->add($servers_plot, "games (servers)");
 
+  $group->add($disappointed_plot);
+  $group->legend->add($disappointed_plot, "disappointed clients");
+
   $graph->add($group);
   $graph->draw();
+}
+
+
+function print_arrays($players, $servers, $disappointed)
+{
+  print "<table border=\"1\">\n";
+
+  print "<tr>\n";
+  $i = 0;
+  print "<td>".count($GLOBALS['hours'])." hours: </td>\n";
+  while ($i < count($GLOBALS['hours'])) {
+    print "<td>".$GLOBALS['hours'][$i]."</td>\n";
+    $i++;
+  }
+  print "</tr>\n";
+
+  print "<tr>\n";
+  $i = 0;
+  print "<td>".count($players)." players: </td>\n";
+  while ($i < count($players)) {
+    print "<td>".$players[$i]."</td>\n";
+    $i++;
+  }
+  print "</tr>\n";
+
+  print "<tr>\n";
+  $i = 0;
+  print "<td>".count($disappointed)." disappointed clients: </td>\n";
+  while ($i < count($disappointed)) {
+    print "<td>".$disappointed[$i]."</td>\n";
+    $i++;
+  }
+
+  print "<tr>\n";
+  $i = 0;
+  print "<td>".count($servers)." servers: </td>\n";
+  while ($i < count($servers)) {
+    print "<td>".$servers[$i]."</td>\n";
+    $i++;
+  }
+  print "</tr>\n";
+
+  print "</table>\n";
 }
 
 ?>
