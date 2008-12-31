@@ -19,8 +19,8 @@ if [ $r -ne 0 ]; then
 fi
 
 # generate new stats files
-\grep -v "^#.*" wormux_log/*hourly > hourly.csv
-\grep -v "^#.*" wormux_log/*daily > daily.csv
+\grep -h -v "^#.*" wormux_log/*hourly > hourly.csv
+\grep -h -v "^#.*" wormux_log/*daily > daily.csv
 
 # send the new stats files
 lftp -f send_stats_wormux.lftp
